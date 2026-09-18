@@ -3350,6 +3350,62 @@ body.laborans u .lab-term {
     border-top: 1px solid var(--lab-line);
 }
 
+/* Övningsblad-vyn (kortet "Övningsblad" i katalogen): en lista med
+   utskriftsklara blad, ett per rad, med titel, nivå och två länkknappar.
+   På smal skärm staplas knapparna under texten. */
+.lab-ovningsblad {
+    margin: 40px 0 0;
+    padding-top: 28px;
+    border-top: 1px solid var(--lab-line);
+}
+.lab-ovningsblad-intro {
+    max-width: 62ch;
+    color: var(--lab-ink-soft);
+    margin: 0 0 18px;
+}
+.lab-ovningsblad-lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.lab-ovningsblad-rad {
+    display: flex;
+    gap: 18px 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 16px 0;
+    border-top: 1px solid var(--lab-line);
+}
+.lab-ovningsblad-rad:last-child { border-bottom: 1px solid var(--lab-line); }
+.lab-ovningsblad-text { flex: 1 1 320px; min-width: 0; }
+.lab-ovningsblad-titel {
+    font-family: var(--lab-font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+.lab-ovningsblad-meta {
+    font-family: var(--lab-font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--lab-ink-muted);
+    margin: 4px 0 6px;
+}
+.lab-ovningsblad-niva { text-transform: uppercase; }
+.lab-ovningsblad-besk {
+    font-size: 14px;
+    color: var(--lab-ink-soft);
+    max-width: 60ch;
+}
+.lab-ovningsblad-lankar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+}
+
 .lab-ovningar-heading {
     font-family: var(--lab-font-display);
     font-size: 1.6rem;

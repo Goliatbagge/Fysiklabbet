@@ -33,6 +33,7 @@
     <script>document.write('<scr' + 'ipt src="data/teori/bundle.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/ovningar.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/exittickets.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/ovningsblad.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/visualiseringar/index.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="graf.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="handskrift.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
@@ -52,6 +53,7 @@
         const TEORI = window.TEORI || {};
         const OVNINGAR = window.OVNINGAR || {};
         const EXITTICKETS = window.EXITTICKETS || {};
+        const OVNINGSBLAD = window.OVNINGSBLAD || {};
         const VIS_INDEX = window.VISUALISERINGAR_INDEX || {};
 
         // Matematik nivå 1b delar innehåll med 1c (se MA1B_SPEC i
@@ -66,6 +68,7 @@
             if (TEORI[bId] === undefined && TEORI[cId] !== undefined) TEORI[bId] = TEORI[cId];
             if (OVNINGAR[bId] === undefined && OVNINGAR[cId] !== undefined) OVNINGAR[bId] = OVNINGAR[cId];
             if (EXITTICKETS[bId] === undefined && EXITTICKETS[cId] !== undefined) EXITTICKETS[bId] = EXITTICKETS[cId];
+            if (OVNINGSBLAD[bId] === undefined && OVNINGSBLAD[cId] !== undefined) OVNINGSBLAD[bId] = OVNINGSBLAD[cId];
             if (VIS_INDEX[bId] === undefined && VIS_INDEX[cId] !== undefined) VIS_INDEX[bId] = VIS_INDEX[cId];
         }
 
@@ -2345,6 +2348,45 @@
             );
         }
 
+        // ── Övningsblad ──────────────────────────────────────────────
+        // Utskriftsklara blad (data/ovningsblad.js) med mängdträning på
+        // avsnittets innehåll. Listan visar varje blads titel, nivå och
+        // antal uppgifter, med länk till sidan (läsbar i mobilen) och till
+        // PDF:en (A4 för utskrift). Nivåerna skrivs "Grund - Medel" när ett
+        // blad spänner över flera.
+        function Ovningsblad({ id }) {
+            const blad = OVNINGSBLAD[id] || [];
+            return (
+                <div className="lab-ovningsblad">
+                    <h3 className="lab-ovningar-heading">Övningsblad</h3>
+                    <p className="lab-ovningsblad-intro">
+                        Mängdträning att skriva ut eller öppna i mobilen. Varje blad
+                        inleds med ett genomräknat exempel och avslutas med svar och
+                        lösningsförslag till varje uppgift, så att du kan arbeta helt
+                        på egen hand.
+                    </p>
+                    <ul className="lab-ovningsblad-lista">
+                        {blad.map((b, i) => (
+                            <li key={b.pdf || i} className="lab-ovningsblad-rad">
+                                <div className="lab-ovningsblad-text">
+                                    <div className="lab-ovningsblad-titel">{emTitle(b.titel)}</div>
+                                    <div className="lab-ovningsblad-meta">
+                                        <span className="lab-ovningsblad-niva">Nivå: {(b.niva || []).join(' - ')}</span>
+                                        {b.antal ? <span> · {b.antal} uppgifter</span> : null}
+                                    </div>
+                                    {b.beskrivning && <div className="lab-ovningsblad-besk">{emTitle(b.beskrivning)}</div>}
+                                </div>
+                                <div className="lab-ovningsblad-lankar">
+                                    <a className="lab-btn lab-btn-primary" href={b.html} target="_blank" rel="noopener">Öppna bladet</a>
+                                    {b.pdf && <a className="lab-btn" href={b.pdf} target="_blank" rel="noopener">PDF för utskrift</a>}
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            );
+        }
+
         function Ovningar({ id }) {
             const list = OVNINGAR[id];
             const [selectedLevel, setSelectedLevel] = useState(null);
@@ -2625,6 +2667,9 @@
             const hasTeori = tid && TEORI[tid];
             const hasOvningar = tid && OVNINGAR[tid] && OVNINGAR[tid].length > 0;
             const hasExit = tid && EXITTICKETS[tid] && EXITTICKETS[tid].length > 0;
+            // Övningsblad-kortet renderas BARA när avsnittet har minst ett
+            // blad i data/ovningsblad.js (inget "Kommer snart").
+            const hasOvningsblad = tid && OVNINGSBLAD[tid] && OVNINGSBLAD[tid].length > 0;
             // Visualisering-kortet renderas BARA när avsnittet har en
             // visualisering (inget "Kommer snart" — de flesta avsnitt ska
             // inte ha något kort alls).
@@ -3022,6 +3067,17 @@
                                                             <div className="lab-card-meta">Kommer snart</div>
                                                         </div>
                                                     )}
+                                                    {hasOvningsblad && (
+                                                        <button type="button"
+                                                            className={'lab-card ' + (view === 'ovningsblad' ? 'lab-card-active' : 'lab-card-clickable')}
+                                                            onClick={() => setView('ovningsblad')}>
+                                                            <div className="lab-card-tag">Träna</div>
+                                                            <div className="lab-card-title">Övningsblad</div>
+                                                            <div className="lab-card-meta">
+                                                                {OVNINGSBLAD[tid].length === 1 ? '1 blad' : OVNINGSBLAD[tid].length + ' blad'}
+                                                            </div>
+                                                        </button>
+                                                    )}
                                                 </div>
 
                                                 <div className="lab-teori-nav">
@@ -3110,6 +3166,7 @@
                                                         bionic={bionic} dyslexia={dyslexia} />
                                                 )}
                                                 {view === 'ovningar' && <Ovningar id={tid} />}
+                                                {view === 'ovningsblad' && <Ovningsblad id={tid} />}
                                                 {view === 'exitticket' && <ExitTicket id={tid} onStudyAgain={() => setView('teori')} />}
                                                 {view === 'visualisering' && vis && <Visualisering id={tid} />}
 
@@ -3213,7 +3270,7 @@
             // befintliga länkar ändrar beteende.
             const hash = (window.location.hash || '').replace(/^#/, '')
                 || (params.get('id') || '');
-            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2b|ma2c|ma3c|ma4|maspec)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning))?$/);
+            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2b|ma2c|ma3c|ma4|maspec)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning|ovningsblad))?$/);
             if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
                 out.subject = HASH_COURSES[m[1]][0];
             }
@@ -3328,6 +3385,7 @@
 
                 const vyPrefix = {
                     ovningar: 'Övningar: ',
+                    ovningsblad: 'Övningsblad: ',
                     exitticket: 'Exit ticket: ',
                     visualisering: 'Visualisering: ',
                     fordjupning: 'Fördjupning: ',

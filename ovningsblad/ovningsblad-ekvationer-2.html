@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Övningsblad 2: Variabler i båda led — Fysiklabbet</title>
+<meta name="description" content="Övningsblad 2 av 5 i ekvationslösning (Matematik 1, avsnitt 2.6): Variabler i båda led. Många uppgifter på grundnivå, ett genomräknat exempel först och lösningsförslag till varje uppgift sist. Utskriftsklart.">
+<link rel="canonical" href="https://fysiklabbet.se/ovningsblad/ovningsblad-ekvationer-2.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  renderMathInElement(document.body, {
+    delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
+    throwOnError: false, trust: true
+  });
+  document.documentElement.setAttribute('data-katex', 'klar');
+});
+</script>
+<style>
+:root { --ink:#1f2530; --blue:#2563c9; --paper:#f7f2e8; --line:rgba(31,37,48,.22); --accent:#c8324a; }
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin:0; font-family:'Poppins', system-ui, sans-serif; color:var(--ink); background:#fff; font-size:11pt; line-height:1.45; }
+.page { max-width: 186mm; margin: 0 auto; padding: 10mm 6mm 20mm; }
+header { border-bottom: 2px solid var(--ink); padding-bottom: 6px; margin-bottom: 12px; }
+.over { font-size: 9.5pt; text-transform: uppercase; letter-spacing: .06em; color:#5b6472; margin:0; }
+h1 { font-size: 20pt; margin: 2px 0 0; line-height:1.2; }
+.under { margin: 2px 0 0; font-size: 11pt; color:#3b4350; }
+.namn { display:flex; gap: 28px; margin-top: 8px; font-size: 10pt; color:#3b4350; }
+.namn span { flex:1; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.intro { margin: 0 0 10px; }
+.box { background: var(--paper); border: 1px solid rgba(31,37,48,.18); border-radius: 8px; padding: 10px 14px; margin: 0 0 12px; break-inside: avoid; }
+.box p { margin: 4px 0; }
+.box ul, .box ol { margin: 4px 0 4px 18px; padding: 0; }
+.box li { margin: 2px 0; }
+.box .katex-display { margin: 4px 0 6px; }
+.ex-rubrik { font-weight: 600; margin: 0 0 4px !important; }
+.ex-flex { display:flex; gap: 14px; align-items:flex-start; }
+.ex-flex svg { flex: 0 0 auto; margin-top: 4px; }
+.ex-flex > div { flex: 1 1 auto; min-width: 0; }
+.tips { font-size: 9.5pt; color:#3b4350; margin: 0 0 12px; }
+section { break-inside: auto; margin-bottom: 8px; }
+h2 { font-size: 12pt; margin: 12px 0 6px; padding: 3px 0 3px; border-bottom: 1px solid var(--line); break-after: avoid; }
+h2 .sv { font-weight: 400; font-size: 9.5pt; color:#5b6472; margin-left: 8px; }
+.tasks { display: grid; gap: 6px 14px; }
+.c2 { grid-template-columns: repeat(2, 1fr); }
+.c3 { grid-template-columns: repeat(3, 1fr); }
+.c4 { grid-template-columns: repeat(4, 1fr); }
+.task { break-inside: avoid; padding: 4px 4px 0; border-bottom: 1px dotted var(--line); display:flex; gap: 6px; align-items: baseline; }
+.task .nr { font-weight: 600; min-width: 1.7em; text-align:right; font-size: 10pt; }
+.task .eq { flex:1; }
+.kort { min-height: 17mm; }
+.mellan { min-height: 27mm; }
+.hog { min-height: 38mm; }
+.facit { break-before: page; page-break-before: always; }
+.facit h2 { border-bottom: 2px solid var(--ink); font-size: 14pt; }
+.svarlista { display:grid; grid-template-columns: repeat(4, 1fr); gap: 2px 12px; font-size: 10pt; margin-bottom: 14px; }
+.svarlista div { display:flex; gap: 6px; align-items: baseline; }
+.svarlista .nr { font-weight: 600; min-width: 1.7em; text-align:right; }
+.los { columns: 2; column-gap: 12mm; font-size: 10pt; }
+.sol { break-inside: avoid; page-break-inside: avoid; margin: 0 0 10px; padding: 0 0 6px; border-bottom: 1px dotted var(--line); }
+.sol .nr { font-weight: 600; }
+.sol .note { margin: 2px 0; font-size: 9.5pt; color:#3b4350; }
+.sol .katex-display { margin: 2px 0 4px; text-align: left; }
+.sol .katex-display > .katex { text-align: left; }
+.sol .svar { margin: 2px 0 0; }
+footer { margin-top: 18px; font-size: 9pt; color:#5b6472; border-top: 1px solid var(--line); padding-top: 6px; display:flex; justify-content: space-between; }
+@page { size: A4; margin: 13mm 12mm 14mm; }
+@media print {
+  body { font-size: 10.5pt; }
+  .page { max-width: none; padding: 0; }
+  .box { background: var(--paper); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: inherit; text-decoration: none; }
+}
+@media (max-width: 640px) {
+  .c3, .c4 { grid-template-columns: repeat(2, 1fr); }
+  .svarlista { grid-template-columns: repeat(2, 1fr); }
+  .los { columns: 1; }
+  .ex-flex { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+<p class="over">Övningsblad 2 av 5 · Matematik 1, avsnitt 2.6</p>
+<h1>Variabler i båda led</h1>
+
+<div class="namn"><span>Namn:</span><span>Datum:</span></div>
+</header>
+<p class="intro">När $x$ finns på båda sidor om likhetstecknet samlar du först alla $x$ på ena sidan. Sedan löser du ekvationen precis som på blad 1.</p>
+<div class="box">
+<p class="ex-rubrik">Exempel: lös ekvationen $7x + 4 = 3x + 20$</p>
+<p><b>Steg 1.</b> Här finns $x$ i båda led. Ta bort variabeltermen från den sida där talet framför $x$ är <em>minst</em>, så slipper du negativa tal. Talet 3 är mindre än 7, så vi subtraherar $3x$ från båda led:</p>
+$$\begin{aligned} 7x + 4 \textcolor{#2563c9}{\; - \; 3x} &= 3x + 20 \textcolor{#2563c9}{\; - \; 3x} \\ 4x + 4 &= 20 \end{aligned}$$
+<p><b>Steg 2.</b> Nu ser ekvationen ut som på blad 1. Subtrahera 4 från båda led, och dividera sedan båda led med 4:</p>
+$$\begin{aligned} 4x + 4 \textcolor{#2563c9}{\; - \; 4} &= 20 \textcolor{#2563c9}{\; - \; 4} \\ 4x &= 16 \\ \frac{4x}{\textcolor{#2563c9}{4}} &= \frac{16}{\textcolor{#2563c9}{4}} \\ x &= 4 \end{aligned}$$
+<p><b>Kontroll.</b> $\mathrm{VL} = 7 \cdot 4 + 4 = 32$ och $\mathrm{HL} = 3 \cdot 4 + 20 = 32$. Stämmer.</p>
+<p><b>Svar:</b> $x = 4$</p></div>
+<div class="box">
+<p class="ex-rubrik">Arbetsgång</p>
+<ol>
+<li>Utveckla eventuella parenteser, till exempel $2(x + 3) = 2x + 6$.</li>
+<li>Förenkla varje led för sig: slå ihop $x$-termer med $x$-termer och tal med tal.</li>
+<li>Samla alla $x$ i ena ledet. Ta bort från den sida där talet framför $x$ är minst.</li>
+<li>Samla talen i det andra ledet.</li>
+<li>Dividera med talet framför $x$.</li>
+</ol>
+<p>Försvinner $x$ helt och kvar står något <b>falskt</b>, som $5 = 8$, saknar ekvationen lösning. Står något <b>sant</b> kvar, som $8 = 8$, är alla tal lösningar.</p></div>
+<p class="tips">Lös uppgifterna i ordning och skriv alla steg, ett led i taget. Kontrollera dina svar mot listan <b>Svar</b> längst bak. Fastnar du: titta på lösningsförslaget till just den uppgiften, och lös den sedan en gång till utan att titta.</p>
+<section><h2>A. Samla $x$ på ena sidan</h2><div class="tasks c3"><div class="task mellan"><span class="nr">1.</span><span class="eq">$5x + 3 = 2x + 15$</span></div><div class="task mellan"><span class="nr">2.</span><span class="eq">$7x - 4 = 3x + 8$</span></div><div class="task mellan"><span class="nr">3.</span><span class="eq">$4x + 9 = x + 24$</span></div><div class="task mellan"><span class="nr">4.</span><span class="eq">$6x - 1 = 2x + 23$</span></div><div class="task mellan"><span class="nr">5.</span><span class="eq">$8x + 2 = 5x + 23$</span></div><div class="task mellan"><span class="nr">6.</span><span class="eq">$9x - 5 = 4x + 10$</span></div><div class="task mellan"><span class="nr">7.</span><span class="eq">$3x + 14 = 5x + 4$</span></div><div class="task mellan"><span class="nr">8.</span><span class="eq">$2x + 33 = 7x + 3$</span></div><div class="task mellan"><span class="nr">9.</span><span class="eq">$10x - 8 = 6x + 4$</span></div><div class="task mellan"><span class="nr">10.</span><span class="eq">$4x - 6 = x + 12$</span></div></div></section><section><h2>B. Förenkla leden först</h2><div class="tasks c3"><div class="task hog"><span class="nr">11.</span><span class="eq">$3x + 5 + 2x = x + 25$</span></div><div class="task hog"><span class="nr">12.</span><span class="eq">$8x - 3 - 2x = 4x + 9$</span></div><div class="task hog"><span class="nr">13.</span><span class="eq">$2x + 7 + 3x = 3x + 23$</span></div><div class="task hog"><span class="nr">14.</span><span class="eq">$9x - 4x + 6 = 2x + 21$</span></div><div class="task hog"><span class="nr">15.</span><span class="eq">$4x + 10 = 6x + 2 - x$</span></div><div class="task hog"><span class="nr">16.</span><span class="eq">$7x + 1 - 3x = 2x + 15$</span></div><div class="task hog"><span class="nr">17.</span><span class="eq">$x + 3x + 8 = 2x + 24$</span></div><div class="task hog"><span class="nr">18.</span><span class="eq">$6x - 5 + x = 3x + 19$</span></div><div class="task hog"><span class="nr">19.</span><span class="eq">$12 + 5x - 4 = 3x + 20$</span></div></div></section><section><h2>C. Parenteser</h2><div class="tasks c3"><div class="task hog"><span class="nr">20.</span><span class="eq">$2(x + 3) = x + 10$</span></div><div class="task hog"><span class="nr">21.</span><span class="eq">$3(x - 2) = 2x + 1$</span></div><div class="task hog"><span class="nr">22.</span><span class="eq">$4(2x + 1) = 5x + 13$</span></div><div class="task hog"><span class="nr">23.</span><span class="eq">$5(x + 2) = 3x + 18$</span></div><div class="task hog"><span class="nr">24.</span><span class="eq">$2(3x - 4) = 4x + 6$</span></div><div class="task hog"><span class="nr">25.</span><span class="eq">$6x + 9 = 3(x + 5)$</span></div><div class="task hog"><span class="nr">26.</span><span class="eq">$4(x - 1) = 2(x + 3)$</span></div><div class="task hog"><span class="nr">27.</span><span class="eq">$3(2x + 5) = 5(x + 4)$</span></div><div class="task hog"><span class="nr">28.</span><span class="eq">$7x - 2 = 2(2x + 5)$</span></div></div></section><section><h2>D. Saknar lösning eller oändligt många lösningar?</h2><div class="tasks c3"><div class="task mellan"><span class="nr">29.</span><span class="eq">$3x + 5 = 3x + 8$</span></div><div class="task mellan"><span class="nr">30.</span><span class="eq">$2(x + 4) = 2x + 8$</span></div><div class="task mellan"><span class="nr">31.</span><span class="eq">$5x - 2 = 5x + 1$</span></div><div class="task mellan"><span class="nr">32.</span><span class="eq">$4x + 6 = 2(2x + 3)$</span></div><div class="task mellan"><span class="nr">33.</span><span class="eq">$3x + 2 + x = 4x + 2$</span></div><div class="task mellan"><span class="nr">34.</span><span class="eq">$6x - 1 = 3(2x + 1)$</span></div></div></section><section><h2>E. Lite svårare</h2><div class="tasks c3"><div class="task hog"><span class="nr">35.</span><span class="eq">$3(2x - 1) = 4(x + 3)$</span></div><div class="task hog"><span class="nr">36.</span><span class="eq">$7 - 2x = 4x - 11$</span></div><div class="task hog"><span class="nr">37.</span><span class="eq">$5x - 3(x - 4) = 20$</span></div><div class="task hog"><span class="nr">38.</span><span class="eq">$2(x + 5) - 3 = 3(x - 1)$</span></div><div class="task hog"><span class="nr">39.</span><span class="eq">$10 - 3x = 2 - x$</span></div><div class="task hog"><span class="nr">40.</span><span class="eq">$(x + 2)(x + 3) = x(x + 1) + 10$</span></div></div></section>
+<div class="facit">
+<h2>Svar</h2>
+<div class="svarlista"><div><span class="nr">1.</span><span>$x = 4$</span></div><div><span class="nr">2.</span><span>$x = 3$</span></div><div><span class="nr">3.</span><span>$x = 5$</span></div><div><span class="nr">4.</span><span>$x = 6$</span></div><div><span class="nr">5.</span><span>$x = 7$</span></div><div><span class="nr">6.</span><span>$x = 3$</span></div><div><span class="nr">7.</span><span>$x = 5$</span></div><div><span class="nr">8.</span><span>$x = 6$</span></div><div><span class="nr">9.</span><span>$x = 3$</span></div><div><span class="nr">10.</span><span>$x = 6$</span></div><div><span class="nr">11.</span><span>$x = 5$</span></div><div><span class="nr">12.</span><span>$x = 6$</span></div><div><span class="nr">13.</span><span>$x = 8$</span></div><div><span class="nr">14.</span><span>$x = 5$</span></div><div><span class="nr">15.</span><span>$x = 8$</span></div><div><span class="nr">16.</span><span>$x = 7$</span></div><div><span class="nr">17.</span><span>$x = 8$</span></div><div><span class="nr">18.</span><span>$x = 6$</span></div><div><span class="nr">19.</span><span>$x = 6$</span></div><div><span class="nr">20.</span><span>$x = 4$</span></div><div><span class="nr">21.</span><span>$x = 7$</span></div><div><span class="nr">22.</span><span>$x = 3$</span></div><div><span class="nr">23.</span><span>$x = 4$</span></div><div><span class="nr">24.</span><span>$x = 7$</span></div><div><span class="nr">25.</span><span>$x = 2$</span></div><div><span class="nr">26.</span><span>$x = 5$</span></div><div><span class="nr">27.</span><span>$x = 5$</span></div><div><span class="nr">28.</span><span>$x = 4$</span></div><div><span class="nr">29.</span><span>Saknar lösning</span></div><div><span class="nr">30.</span><span>Oändligt många lösningar (alla tal)</span></div><div><span class="nr">31.</span><span>Saknar lösning</span></div><div><span class="nr">32.</span><span>Oändligt många lösningar (alla tal)</span></div><div><span class="nr">33.</span><span>Oändligt många lösningar (alla tal)</span></div><div><span class="nr">34.</span><span>Saknar lösning</span></div><div><span class="nr">35.</span><span>$x = \dfrac{15}{2}$</span></div><div><span class="nr">36.</span><span>$x = 3$</span></div><div><span class="nr">37.</span><span>$x = 4$</span></div><div><span class="nr">38.</span><span>$x = 10$</span></div><div><span class="nr">39.</span><span>$x = 4$</span></div><div><span class="nr">40.</span><span>$x = 1$</span></div></div>
+<h2>Lösningsförslag</h2>
+<div class="los">
+<div class="sol"><span class="nr">1.</span>
+$$\begin{aligned} 5x + 3 &= 2x + 15 \\ 5x + 3\textcolor{#2563c9}{ - 2x} &= 2x + 15\textcolor{#2563c9}{ - 2x} \\ 3x + 3 &= 15 \\ 3x + 3\textcolor{#2563c9}{ - 3} &= 15\textcolor{#2563c9}{ - 3} \\ 3x &= 12 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{12}{\textcolor{#2563c9}{3}} \\ x &= 4 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 4$</p></div>
+<div class="sol"><span class="nr">2.</span>
+$$\begin{aligned} 7x - 4 &= 3x + 8 \\ 7x - 4\textcolor{#2563c9}{ - 3x} &= 3x + 8\textcolor{#2563c9}{ - 3x} \\ 4x - 4 &= 8 \\ 4x - 4\textcolor{#2563c9}{ + 4} &= 8\textcolor{#2563c9}{ + 4} \\ 4x &= 12 \\ \frac{4x}{\textcolor{#2563c9}{4}} &= \frac{12}{\textcolor{#2563c9}{4}} \\ x &= 3 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 3$</p></div>
+<div class="sol"><span class="nr">3.</span>
+$$\begin{aligned} 4x + 9 &= x + 24 \\ 4x + 9\textcolor{#2563c9}{ - x} &= x + 24\textcolor{#2563c9}{ - x} \\ 3x + 9 &= 24 \\ 3x + 9\textcolor{#2563c9}{ - 9} &= 24\textcolor{#2563c9}{ - 9} \\ 3x &= 15 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{15}{\textcolor{#2563c9}{3}} \\ x &= 5 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 5$</p></div>
+<div class="sol"><span class="nr">4.</span>
+$$\begin{aligned} 6x - 1 &= 2x + 23 \\ 6x - 1\textcolor{#2563c9}{ - 2x} &= 2x + 23\textcolor{#2563c9}{ - 2x} \\ 4x - 1 &= 23 \\ 4x - 1\textcolor{#2563c9}{ + 1} &= 23\textcolor{#2563c9}{ + 1} \\ 4x &= 24 \\ \frac{4x}{\textcolor{#2563c9}{4}} &= \frac{24}{\textcolor{#2563c9}{4}} \\ x &= 6 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 6$</p></div>
+<div class="sol"><span class="nr">5.</span>
+$$\begin{aligned} 8x + 2 &= 5x + 23 \\ 8x + 2\textcolor{#2563c9}{ - 5x} &= 5x + 23\textcolor{#2563c9}{ - 5x} \\ 3x + 2 &= 23 \\ 3x + 2\textcolor{#2563c9}{ - 2} &= 23\textcolor{#2563c9}{ - 2} \\ 3x &= 21 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{21}{\textcolor{#2563c9}{3}} \\ x &= 7 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 7$</p></div>
+<div class="sol"><span class="nr">6.</span>
+$$\begin{aligned} 9x - 5 &= 4x + 10 \\ 9x - 5\textcolor{#2563c9}{ - 4x} &= 4x + 10\textcolor{#2563c9}{ - 4x} \\ 5x - 5 &= 10 \\ 5x - 5\textcolor{#2563c9}{ + 5} &= 10\textcolor{#2563c9}{ + 5} \\ 5x &= 15 \\ \frac{5x}{\textcolor{#2563c9}{5}} &= \frac{15}{\textcolor{#2563c9}{5}} \\ x &= 3 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 3$</p></div>
+<div class="sol"><span class="nr">7.</span>
+$$\begin{aligned} 3x + 14 &= 5x + 4 \\ 3x + 14\textcolor{#2563c9}{ - 3x} &= 5x + 4\textcolor{#2563c9}{ - 3x} \\ 14 &= 2x + 4 \\ 14\textcolor{#2563c9}{ - 4} &= 2x + 4\textcolor{#2563c9}{ - 4} \\ 10 &= 2x \\ \frac{10}{\textcolor{#2563c9}{2}} &= \frac{2x}{\textcolor{#2563c9}{2}} \\ 5 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 5$</p></div>
+<div class="sol"><span class="nr">8.</span>
+$$\begin{aligned} 2x + 33 &= 7x + 3 \\ 2x + 33\textcolor{#2563c9}{ - 2x} &= 7x + 3\textcolor{#2563c9}{ - 2x} \\ 33 &= 5x + 3 \\ 33\textcolor{#2563c9}{ - 3} &= 5x + 3\textcolor{#2563c9}{ - 3} \\ 30 &= 5x \\ \frac{30}{\textcolor{#2563c9}{5}} &= \frac{5x}{\textcolor{#2563c9}{5}} \\ 6 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 6$</p></div>
+<div class="sol"><span class="nr">9.</span>
+$$\begin{aligned} 10x - 8 &= 6x + 4 \\ 10x - 8\textcolor{#2563c9}{ - 6x} &= 6x + 4\textcolor{#2563c9}{ - 6x} \\ 4x - 8 &= 4 \\ 4x - 8\textcolor{#2563c9}{ + 8} &= 4\textcolor{#2563c9}{ + 8} \\ 4x &= 12 \\ \frac{4x}{\textcolor{#2563c9}{4}} &= \frac{12}{\textcolor{#2563c9}{4}} \\ x &= 3 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 3$</p></div>
+<div class="sol"><span class="nr">10.</span>
+$$\begin{aligned} 4x - 6 &= x + 12 \\ 4x - 6\textcolor{#2563c9}{ - x} &= x + 12\textcolor{#2563c9}{ - x} \\ 3x - 6 &= 12 \\ 3x - 6\textcolor{#2563c9}{ + 6} &= 12\textcolor{#2563c9}{ + 6} \\ 3x &= 18 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{18}{\textcolor{#2563c9}{3}} \\ x &= 6 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 6$</p></div>
+<div class="sol"><span class="nr">11.</span>
+$$\begin{aligned} 3x + 5 + 2x &= x + 25 \\ 5x + 5 &= x + 25 \\ 5x + 5\textcolor{#2563c9}{ - x} &= x + 25\textcolor{#2563c9}{ - x} \\ 4x + 5 &= 25 \\ 4x + 5\textcolor{#2563c9}{ - 5} &= 25\textcolor{#2563c9}{ - 5} \\ 4x &= 20 \\ \frac{4x}{\textcolor{#2563c9}{4}} &= \frac{20}{\textcolor{#2563c9}{4}} \\ x &= 5 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 5$</p></div>
+<div class="sol"><span class="nr">12.</span>
+$$\begin{aligned} 8x - 3 - 2x &= 4x + 9 \\ 6x - 3 &= 4x + 9 \\ 6x - 3\textcolor{#2563c9}{ - 4x} &= 4x + 9\textcolor{#2563c9}{ - 4x} \\ 2x - 3 &= 9 \\ 2x - 3\textcolor{#2563c9}{ + 3} &= 9\textcolor{#2563c9}{ + 3} \\ 2x &= 12 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{12}{\textcolor{#2563c9}{2}} \\ x &= 6 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 6$</p></div>
+<div class="sol"><span class="nr">13.</span>
+$$\begin{aligned} 2x + 7 + 3x &= 3x + 23 \\ 5x + 7 &= 3x + 23 \\ 5x + 7\textcolor{#2563c9}{ - 3x} &= 3x + 23\textcolor{#2563c9}{ - 3x} \\ 2x + 7 &= 23 \\ 2x + 7\textcolor{#2563c9}{ - 7} &= 23\textcolor{#2563c9}{ - 7} \\ 2x &= 16 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{16}{\textcolor{#2563c9}{2}} \\ x &= 8 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 8$</p></div>
+<div class="sol"><span class="nr">14.</span>
+$$\begin{aligned} 9x - 4x + 6 &= 2x + 21 \\ 5x + 6 &= 2x + 21 \\ 5x + 6\textcolor{#2563c9}{ - 2x} &= 2x + 21\textcolor{#2563c9}{ - 2x} \\ 3x + 6 &= 21 \\ 3x + 6\textcolor{#2563c9}{ - 6} &= 21\textcolor{#2563c9}{ - 6} \\ 3x &= 15 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{15}{\textcolor{#2563c9}{3}} \\ x &= 5 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 5$</p></div>
+<div class="sol"><span class="nr">15.</span>
+$$\begin{aligned} 4x + 10 &= 6x + 2 - x \\ 4x + 10 &= 5x + 2 \\ 4x + 10\textcolor{#2563c9}{ - 4x} &= 5x + 2\textcolor{#2563c9}{ - 4x} \\ 10 &= x + 2 \\ 10\textcolor{#2563c9}{ - 2} &= x + 2\textcolor{#2563c9}{ - 2} \\ 8 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 8$</p></div>
+<div class="sol"><span class="nr">16.</span>
+$$\begin{aligned} 7x + 1 - 3x &= 2x + 15 \\ 4x + 1 &= 2x + 15 \\ 4x + 1\textcolor{#2563c9}{ - 2x} &= 2x + 15\textcolor{#2563c9}{ - 2x} \\ 2x + 1 &= 15 \\ 2x + 1\textcolor{#2563c9}{ - 1} &= 15\textcolor{#2563c9}{ - 1} \\ 2x &= 14 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{14}{\textcolor{#2563c9}{2}} \\ x &= 7 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 7$</p></div>
+<div class="sol"><span class="nr">17.</span>
+$$\begin{aligned} x + 3x + 8 &= 2x + 24 \\ 4x + 8 &= 2x + 24 \\ 4x + 8\textcolor{#2563c9}{ - 2x} &= 2x + 24\textcolor{#2563c9}{ - 2x} \\ 2x + 8 &= 24 \\ 2x + 8\textcolor{#2563c9}{ - 8} &= 24\textcolor{#2563c9}{ - 8} \\ 2x &= 16 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{16}{\textcolor{#2563c9}{2}} \\ x &= 8 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 8$</p></div>
+<div class="sol"><span class="nr">18.</span>
+$$\begin{aligned} 6x - 5 + x &= 3x + 19 \\ 7x - 5 &= 3x + 19 \\ 7x - 5\textcolor{#2563c9}{ - 3x} &= 3x + 19\textcolor{#2563c9}{ - 3x} \\ 4x - 5 &= 19 \\ 4x - 5\textcolor{#2563c9}{ + 5} &= 19\textcolor{#2563c9}{ + 5} \\ 4x &= 24 \\ \frac{4x}{\textcolor{#2563c9}{4}} &= \frac{24}{\textcolor{#2563c9}{4}} \\ x &= 6 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 6$</p></div>
+<div class="sol"><span class="nr">19.</span>
+$$\begin{aligned} 12 + 5x - 4 &= 3x + 20 \\ 5x + 8 &= 3x + 20 \\ 5x + 8\textcolor{#2563c9}{ - 3x} &= 3x + 20\textcolor{#2563c9}{ - 3x} \\ 2x + 8 &= 20 \\ 2x + 8\textcolor{#2563c9}{ - 8} &= 20\textcolor{#2563c9}{ - 8} \\ 2x &= 12 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{12}{\textcolor{#2563c9}{2}} \\ x &= 6 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 6$</p></div>
+<div class="sol"><span class="nr">20.</span>
+$$\begin{aligned} 2(x + 3) &= x + 10 \\ 2x + 6 &= x + 10 \\ 2x + 6\textcolor{#2563c9}{ - x} &= x + 10\textcolor{#2563c9}{ - x} \\ x + 6 &= 10 \\ x + 6\textcolor{#2563c9}{ - 6} &= 10\textcolor{#2563c9}{ - 6} \\ x &= 4 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 4$</p></div>
+<div class="sol"><span class="nr">21.</span>
+$$\begin{aligned} 3(x - 2) &= 2x + 1 \\ 3x - 6 &= 2x + 1 \\ 3x - 6\textcolor{#2563c9}{ - 2x} &= 2x + 1\textcolor{#2563c9}{ - 2x} \\ x - 6 &= 1 \\ x - 6\textcolor{#2563c9}{ + 6} &= 1\textcolor{#2563c9}{ + 6} \\ x &= 7 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 7$</p></div>
+<div class="sol"><span class="nr">22.</span>
+$$\begin{aligned} 4(2x + 1) &= 5x + 13 \\ 8x + 4 &= 5x + 13 \\ 8x + 4\textcolor{#2563c9}{ - 5x} &= 5x + 13\textcolor{#2563c9}{ - 5x} \\ 3x + 4 &= 13 \\ 3x + 4\textcolor{#2563c9}{ - 4} &= 13\textcolor{#2563c9}{ - 4} \\ 3x &= 9 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{9}{\textcolor{#2563c9}{3}} \\ x &= 3 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 3$</p></div>
+<div class="sol"><span class="nr">23.</span>
+$$\begin{aligned} 5(x + 2) &= 3x + 18 \\ 5x + 10 &= 3x + 18 \\ 5x + 10\textcolor{#2563c9}{ - 3x} &= 3x + 18\textcolor{#2563c9}{ - 3x} \\ 2x + 10 &= 18 \\ 2x + 10\textcolor{#2563c9}{ - 10} &= 18\textcolor{#2563c9}{ - 10} \\ 2x &= 8 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{8}{\textcolor{#2563c9}{2}} \\ x &= 4 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 4$</p></div>
+<div class="sol"><span class="nr">24.</span>
+$$\begin{aligned} 2(3x - 4) &= 4x + 6 \\ 6x - 8 &= 4x + 6 \\ 6x - 8\textcolor{#2563c9}{ - 4x} &= 4x + 6\textcolor{#2563c9}{ - 4x} \\ 2x - 8 &= 6 \\ 2x - 8\textcolor{#2563c9}{ + 8} &= 6\textcolor{#2563c9}{ + 8} \\ 2x &= 14 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{14}{\textcolor{#2563c9}{2}} \\ x &= 7 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 7$</p></div>
+<div class="sol"><span class="nr">25.</span>
+$$\begin{aligned} 6x + 9 &= 3(x + 5) \\ 6x + 9 &= 3x + 15 \\ 6x + 9\textcolor{#2563c9}{ - 3x} &= 3x + 15\textcolor{#2563c9}{ - 3x} \\ 3x + 9 &= 15 \\ 3x + 9\textcolor{#2563c9}{ - 9} &= 15\textcolor{#2563c9}{ - 9} \\ 3x &= 6 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{6}{\textcolor{#2563c9}{3}} \\ x &= 2 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 2$</p></div>
+<div class="sol"><span class="nr">26.</span>
+$$\begin{aligned} 4(x - 1) &= 2(x + 3) \\ 4x - 4 &= 2x + 6 \\ 4x - 4\textcolor{#2563c9}{ - 2x} &= 2x + 6\textcolor{#2563c9}{ - 2x} \\ 2x - 4 &= 6 \\ 2x - 4\textcolor{#2563c9}{ + 4} &= 6\textcolor{#2563c9}{ + 4} \\ 2x &= 10 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{10}{\textcolor{#2563c9}{2}} \\ x &= 5 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 5$</p></div>
+<div class="sol"><span class="nr">27.</span>
+$$\begin{aligned} 3(2x + 5) &= 5(x + 4) \\ 6x + 15 &= 5x + 20 \\ 6x + 15\textcolor{#2563c9}{ - 5x} &= 5x + 20\textcolor{#2563c9}{ - 5x} \\ x + 15 &= 20 \\ x + 15\textcolor{#2563c9}{ - 15} &= 20\textcolor{#2563c9}{ - 15} \\ x &= 5 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 5$</p></div>
+<div class="sol"><span class="nr">28.</span>
+$$\begin{aligned} 7x - 2 &= 2(2x + 5) \\ 7x - 2 &= 4x + 10 \\ 7x - 2\textcolor{#2563c9}{ - 4x} &= 4x + 10\textcolor{#2563c9}{ - 4x} \\ 3x - 2 &= 10 \\ 3x - 2\textcolor{#2563c9}{ + 2} &= 10\textcolor{#2563c9}{ + 2} \\ 3x &= 12 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{12}{\textcolor{#2563c9}{3}} \\ x &= 4 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 4$</p></div>
+<div class="sol"><span class="nr">29.</span>
+$$\begin{aligned} 3x + 5 &= 3x + 8 \\ 3x + 5\textcolor{#2563c9}{ - 3x} &= 3x + 8\textcolor{#2563c9}{ - 3x} \\ 5 &= 8 \end{aligned}$$
+<p class="note">Variabeln försvann och kvar står en falsk likhet. Inget värde på $x$ gör att ekvationen stämmer.</p>
+<p class="svar"><b>Svar:</b> Saknar lösning</p></div>
+<div class="sol"><span class="nr">30.</span>
+$$\begin{aligned} 2(x + 4) &= 2x + 8 \\ 2x + 8 &= 2x + 8 \\ 2x + 8\textcolor{#2563c9}{ - 2x} &= 2x + 8\textcolor{#2563c9}{ - 2x} \\ 8 &= 8 \end{aligned}$$
+<p class="note">Variabeln försvann och kvar står en sann likhet. Ekvationen stämmer för alla värden på $x$.</p>
+<p class="svar"><b>Svar:</b> Oändligt många lösningar (alla tal)</p></div>
+<div class="sol"><span class="nr">31.</span>
+$$\begin{aligned} 5x - 2 &= 5x + 1 \\ 5x - 2\textcolor{#2563c9}{ - 5x} &= 5x + 1\textcolor{#2563c9}{ - 5x} \\ -2 &= 1 \end{aligned}$$
+<p class="note">Variabeln försvann och kvar står en falsk likhet. Inget värde på $x$ gör att ekvationen stämmer.</p>
+<p class="svar"><b>Svar:</b> Saknar lösning</p></div>
+<div class="sol"><span class="nr">32.</span>
+$$\begin{aligned} 4x + 6 &= 2(2x + 3) \\ 4x + 6 &= 4x + 6 \\ 4x + 6\textcolor{#2563c9}{ - 4x} &= 4x + 6\textcolor{#2563c9}{ - 4x} \\ 6 &= 6 \end{aligned}$$
+<p class="note">Variabeln försvann och kvar står en sann likhet. Ekvationen stämmer för alla värden på $x$.</p>
+<p class="svar"><b>Svar:</b> Oändligt många lösningar (alla tal)</p></div>
+<div class="sol"><span class="nr">33.</span>
+$$\begin{aligned} 3x + 2 + x &= 4x + 2 \\ 4x + 2 &= 4x + 2 \\ 4x + 2\textcolor{#2563c9}{ - 4x} &= 4x + 2\textcolor{#2563c9}{ - 4x} \\ 2 &= 2 \end{aligned}$$
+<p class="note">Variabeln försvann och kvar står en sann likhet. Ekvationen stämmer för alla värden på $x$.</p>
+<p class="svar"><b>Svar:</b> Oändligt många lösningar (alla tal)</p></div>
+<div class="sol"><span class="nr">34.</span>
+$$\begin{aligned} 6x - 1 &= 3(2x + 1) \\ 6x - 1 &= 6x + 3 \\ 6x - 1\textcolor{#2563c9}{ - 6x} &= 6x + 3\textcolor{#2563c9}{ - 6x} \\ -1 &= 3 \end{aligned}$$
+<p class="note">Variabeln försvann och kvar står en falsk likhet. Inget värde på $x$ gör att ekvationen stämmer.</p>
+<p class="svar"><b>Svar:</b> Saknar lösning</p></div>
+<div class="sol"><span class="nr">35.</span>
+$$\begin{aligned} 3(2x - 1) &= 4(x + 3) \\ 6x - 3 &= 4x + 12 \\ 6x - 3\textcolor{#2563c9}{ - 4x} &= 4x + 12\textcolor{#2563c9}{ - 4x} \\ 2x - 3 &= 12 \\ 2x - 3\textcolor{#2563c9}{ + 3} &= 12\textcolor{#2563c9}{ + 3} \\ 2x &= 15 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{15}{\textcolor{#2563c9}{2}} \\ x &= \frac{15}{2} \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = \dfrac{15}{2}$</p></div>
+<div class="sol"><span class="nr">36.</span>
+$$\begin{aligned} 7 - 2x &= 4x - 11 \\ 7 - 2x\textcolor{#2563c9}{ + 2x} &= 4x - 11\textcolor{#2563c9}{ + 2x} \\ 7 &= 6x - 11 \\ 7\textcolor{#2563c9}{ + 11} &= 6x - 11\textcolor{#2563c9}{ + 11} \\ 18 &= 6x \\ \frac{18}{\textcolor{#2563c9}{6}} &= \frac{6x}{\textcolor{#2563c9}{6}} \\ 3 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 3$</p></div>
+<div class="sol"><span class="nr">37.</span>
+$$\begin{aligned} 5x - 3(x - 4) &= 20 \\ 5x - 3x + 12 &= 20 \\ 2x + 12 &= 20 \\ 2x + 12\textcolor{#2563c9}{ - 12} &= 20\textcolor{#2563c9}{ - 12} \\ 2x &= 8 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{8}{\textcolor{#2563c9}{2}} \\ x &= 4 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 4$</p></div>
+<div class="sol"><span class="nr">38.</span>
+$$\begin{aligned} 2(x + 5) - 3 &= 3(x - 1) \\ 2x + 10 - 3 &= 3x - 3 \\ 2x + 7 &= 3x - 3 \\ 2x + 7\textcolor{#2563c9}{ - 2x} &= 3x - 3\textcolor{#2563c9}{ - 2x} \\ 7 &= x - 3 \\ 7\textcolor{#2563c9}{ + 3} &= x - 3\textcolor{#2563c9}{ + 3} \\ 10 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 10$</p></div>
+<div class="sol"><span class="nr">39.</span>
+$$\begin{aligned} 10 - 3x &= 2 - x \\ 10 - 3x\textcolor{#2563c9}{ + 3x} &= 2 - x\textcolor{#2563c9}{ + 3x} \\ 10 &= 2x + 2 \\ 10\textcolor{#2563c9}{ - 2} &= 2x + 2\textcolor{#2563c9}{ - 2} \\ 8 &= 2x \\ \frac{8}{\textcolor{#2563c9}{2}} &= \frac{2x}{\textcolor{#2563c9}{2}} \\ 4 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 4$</p></div>
+<div class="sol"><span class="nr">40.</span>
+$$\begin{aligned} (x + 2)(x + 3) &= x(x + 1) + 10 \\ x^2 + 3x + 2x + 6 &= x^2 + x + 10 \\ x^2 + 5x + 6 &= x^2 + x + 10 \\ x^2 + 5x + 6 \textcolor{#2563c9}{\; - \; x^2} &= x^2 + x + 10 \textcolor{#2563c9}{\; - \; x^2} \\ 5x + 6 &= x + 10 \\ 5x + 6\textcolor{#2563c9}{ - x} &= x + 10\textcolor{#2563c9}{ - x} \\ 4x + 6 &= 10 \\ 4x + 6\textcolor{#2563c9}{ - 6} &= 10\textcolor{#2563c9}{ - 6} \\ 4x &= 4 \\ \frac{4x}{\textcolor{#2563c9}{4}} &= \frac{4}{\textcolor{#2563c9}{4}} \\ x &= 1 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 1$</p></div>
+</div>
+</div>
+<footer><span>Fysiklabbet · fysiklabbet.se</span><span>Övningsblad 2: Variabler i båda led</span></footer>
+</div>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

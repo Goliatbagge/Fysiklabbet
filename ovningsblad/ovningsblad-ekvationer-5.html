@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Övningsblad 5: Blandade ekvationer — Fysiklabbet</title>
+<meta name="description" content="Övningsblad 5 av 5 i ekvationslösning (Matematik 1, avsnitt 2.5 till 2.7): Blandade ekvationer. Många uppgifter på grundnivå, ett genomräknat exempel först och lösningsförslag till varje uppgift sist. Utskriftsklart.">
+<link rel="canonical" href="https://fysiklabbet.se/ovningsblad/ovningsblad-ekvationer-5.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  renderMathInElement(document.body, {
+    delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
+    throwOnError: false, trust: true
+  });
+  document.documentElement.setAttribute('data-katex', 'klar');
+});
+</script>
+<style>
+:root { --ink:#1f2530; --blue:#2563c9; --paper:#f7f2e8; --line:rgba(31,37,48,.22); --accent:#c8324a; }
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin:0; font-family:'Poppins', system-ui, sans-serif; color:var(--ink); background:#fff; font-size:11pt; line-height:1.45; }
+.page { max-width: 186mm; margin: 0 auto; padding: 10mm 6mm 20mm; }
+header { border-bottom: 2px solid var(--ink); padding-bottom: 6px; margin-bottom: 12px; }
+.over { font-size: 9.5pt; text-transform: uppercase; letter-spacing: .06em; color:#5b6472; margin:0; }
+h1 { font-size: 20pt; margin: 2px 0 0; line-height:1.2; }
+.under { margin: 2px 0 0; font-size: 11pt; color:#3b4350; }
+.namn { display:flex; gap: 28px; margin-top: 8px; font-size: 10pt; color:#3b4350; }
+.namn span { flex:1; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.intro { margin: 0 0 10px; }
+.box { background: var(--paper); border: 1px solid rgba(31,37,48,.18); border-radius: 8px; padding: 10px 14px; margin: 0 0 12px; break-inside: avoid; }
+.box p { margin: 4px 0; }
+.box ul, .box ol { margin: 4px 0 4px 18px; padding: 0; }
+.box li { margin: 2px 0; }
+.box .katex-display { margin: 4px 0 6px; }
+.ex-rubrik { font-weight: 600; margin: 0 0 4px !important; }
+.ex-flex { display:flex; gap: 14px; align-items:flex-start; }
+.ex-flex svg { flex: 0 0 auto; margin-top: 4px; }
+.ex-flex > div { flex: 1 1 auto; min-width: 0; }
+.tips { font-size: 9.5pt; color:#3b4350; margin: 0 0 12px; }
+section { break-inside: auto; margin-bottom: 8px; }
+h2 { font-size: 12pt; margin: 12px 0 6px; padding: 3px 0 3px; border-bottom: 1px solid var(--line); break-after: avoid; }
+h2 .sv { font-weight: 400; font-size: 9.5pt; color:#5b6472; margin-left: 8px; }
+.tasks { display: grid; gap: 6px 14px; }
+.c2 { grid-template-columns: repeat(2, 1fr); }
+.c3 { grid-template-columns: repeat(3, 1fr); }
+.c4 { grid-template-columns: repeat(4, 1fr); }
+.task { break-inside: avoid; padding: 4px 4px 0; border-bottom: 1px dotted var(--line); display:flex; gap: 6px; align-items: baseline; }
+.task .nr { font-weight: 600; min-width: 1.7em; text-align:right; font-size: 10pt; }
+.task .eq { flex:1; }
+.kort { min-height: 17mm; }
+.mellan { min-height: 27mm; }
+.hog { min-height: 38mm; }
+.facit { break-before: page; page-break-before: always; }
+.facit h2 { border-bottom: 2px solid var(--ink); font-size: 14pt; }
+.svarlista { display:grid; grid-template-columns: repeat(4, 1fr); gap: 2px 12px; font-size: 10pt; margin-bottom: 14px; }
+.svarlista div { display:flex; gap: 6px; align-items: baseline; }
+.svarlista .nr { font-weight: 600; min-width: 1.7em; text-align:right; }
+.los { columns: 2; column-gap: 12mm; font-size: 10pt; }
+.sol { break-inside: avoid; page-break-inside: avoid; margin: 0 0 10px; padding: 0 0 6px; border-bottom: 1px dotted var(--line); }
+.sol .nr { font-weight: 600; }
+.sol .note { margin: 2px 0; font-size: 9.5pt; color:#3b4350; }
+.sol .katex-display { margin: 2px 0 4px; text-align: left; }
+.sol .katex-display > .katex { text-align: left; }
+.sol .svar { margin: 2px 0 0; }
+footer { margin-top: 18px; font-size: 9pt; color:#5b6472; border-top: 1px solid var(--line); padding-top: 6px; display:flex; justify-content: space-between; }
+@page { size: A4; margin: 13mm 12mm 14mm; }
+@media print {
+  body { font-size: 10.5pt; }
+  .page { max-width: none; padding: 0; }
+  .box { background: var(--paper); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: inherit; text-decoration: none; }
+}
+@media (max-width: 640px) {
+  .c3, .c4 { grid-template-columns: repeat(2, 1fr); }
+  .svarlista { grid-template-columns: repeat(2, 1fr); }
+  .los { columns: 1; }
+  .ex-flex { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+<p class="over">Övningsblad 5 av 5 · Matematik 1, avsnitt 2.5 till 2.7</p>
+<h1>Blandade ekvationer</h1>
+<p class="under">Alla fyra typerna från blad 1 till 4, huller om buller</p>
+<div class="namn"><span>Namn:</span><span>Datum:</span></div>
+</header>
+<p class="intro">Här är typerna blandade. Titta först på ekvationen och bestäm vilken sorts ekvation det är, och välj sedan metod. Det är precis så det är på ett prov.</p>
+
+<div class="box">
+<p class="ex-rubrik">Vilken sorts ekvation är det?</p>
+<ul>
+<li><b>$x$ bara på ena sidan</b>, till exempel $3x + 7 = 22$: ta bort talet som adderas eller subtraheras, dividera sedan med talet framför $x$ (blad 1).</li>
+<li><b>$x$ på båda sidor</b>, till exempel $5x + 2 = 2x + 14$: utveckla parenteser, förenkla, samla $x$ på ena sidan (blad 2).</li>
+<li><b>Ett bråk på ena sidan och ett tal på den andra</b>, till exempel $\dfrac{18}{x} = 6$: täljaren är lika med kvoten gånger nämnaren (blad 3).</li>
+<li><b>Ett bråk på varje sida</b>, till exempel $\dfrac{x}{3} = \dfrac{8}{12}$: korsvis multiplikation (blad 4).</li>
+<li>Står $x$ i en nämnare: skriv först vilket värde som är förbjudet.</li>
+</ul></div>
+<p class="tips">Lös uppgifterna i ordning och skriv alla steg, ett led i taget. Kontrollera dina svar mot listan <b>Svar</b> längst bak. Fastnar du: titta på lösningsförslaget till just den uppgiften, och lös den sedan en gång till utan att titta.</p>
+<section><h2>A. Blandade ekvationer</h2><div class="tasks c3"><div class="task hog"><span class="nr">1.</span><span class="eq">$3x + 7 = 22$</span></div><div class="task hog"><span class="nr">2.</span><span class="eq">$5x + 2 = 2x + 14$</span></div><div class="task hog"><span class="nr">3.</span><span class="eq">$\dfrac{18}{x} = 6$</span></div><div class="task hog"><span class="nr">4.</span><span class="eq">$\dfrac{x}{3} = \dfrac{8}{12}$</span></div><div class="task hog"><span class="nr">5.</span><span class="eq">$x - 13 = 21$</span></div><div class="task hog"><span class="nr">6.</span><span class="eq">$4x - 5 = 2x + 9$</span></div><div class="task hog"><span class="nr">7.</span><span class="eq">$\dfrac{x}{4} = 7$</span></div><div class="task hog"><span class="nr">8.</span><span class="eq">$\dfrac{15}{x} = \dfrac{5}{3}$</span></div><div class="task hog"><span class="nr">9.</span><span class="eq">$6x = 54$</span></div><div class="task hog"><span class="nr">10.</span><span class="eq">$2(x + 5) = 3x + 4$</span></div><div class="task hog"><span class="nr">11.</span><span class="eq">$\dfrac{35}{5x} = 7$</span></div><div class="task hog"><span class="nr">12.</span><span class="eq">$\dfrac{x}{2} - 3 = 6$</span></div><div class="task hog"><span class="nr">13.</span><span class="eq">$8x + 3 = 6x + 15$</span></div><div class="task hog"><span class="nr">14.</span><span class="eq">$\dfrac{x}{5} = \dfrac{4}{10}$</span></div><div class="task hog"><span class="nr">15.</span><span class="eq">$7x - 10 = 39$</span></div><div class="task hog"><span class="nr">16.</span><span class="eq">$\dfrac{48}{4x} = 3$</span></div><div class="task hog"><span class="nr">17.</span><span class="eq">$3x + 8 + x = 2x + 20$</span></div><div class="task hog"><span class="nr">18.</span><span class="eq">$\dfrac{20}{x} = \dfrac{4}{7}$</span></div><div class="task hog"><span class="nr">19.</span><span class="eq">$x + 19 = 12$</span></div><div class="task hog"><span class="nr">20.</span><span class="eq">$\dfrac{x + 6}{3} = 4$</span></div><div class="task hog"><span class="nr">21.</span><span class="eq">$9x - 2 = 4x + 18$</span></div><div class="task hog"><span class="nr">22.</span><span class="eq">$\dfrac{2x}{3} = \dfrac{8}{6}$</span></div><div class="task hog"><span class="nr">23.</span><span class="eq">$5x + 6 = 1$</span></div><div class="task hog"><span class="nr">24.</span><span class="eq">$3(x - 1) = 2x + 4$</span></div><div class="task hog"><span class="nr">25.</span><span class="eq">$\dfrac{56}{x} = 8$</span></div><div class="task hog"><span class="nr">26.</span><span class="eq">$\dfrac{x}{6} + 2 = 5$</span></div><div class="task hog"><span class="nr">27.</span><span class="eq">$6x + 4 = 6x + 9$</span></div><div class="task hog"><span class="nr">28.</span><span class="eq">$\dfrac{8}{3x} = \dfrac{2}{3}$</span></div><div class="task hog"><span class="nr">29.</span><span class="eq">$10x - 7 = 3x + 14$</span></div><div class="task hog"><span class="nr">30.</span><span class="eq">$4x + 9 = 25$</span></div><div class="task hog"><span class="nr">31.</span><span class="eq">$\dfrac{60}{x + 2} = 6$</span></div><div class="task hog"><span class="nr">32.</span><span class="eq">$4(x + 2) = 2x + 20$</span></div><div class="task hog"><span class="nr">33.</span><span class="eq">$\dfrac{27}{x} = 3$</span></div><div class="task hog"><span class="nr">34.</span><span class="eq">$4x + 1 = x + 22$</span></div><div class="task hog"><span class="nr">35.</span><span class="eq">$\dfrac{x}{8} = \dfrac{3}{12}$</span></div><div class="task hog"><span class="nr">36.</span><span class="eq">$\dfrac{2x}{7} = 4$</span></div></div></section><section><h2>B. Lite svårare</h2><div class="tasks c3"><div class="task hog"><span class="nr">37.</span><span class="eq">$5x - 2(x + 3) = 9$</span></div><div class="task hog"><span class="nr">38.</span><span class="eq">$\dfrac{3}{x - 4} = \dfrac{1}{2}$</span></div><div class="task hog"><span class="nr">39.</span><span class="eq">$9 - 2x = 3x - 6$</span></div><div class="task hog"><span class="nr">40.</span><span class="eq">$\dfrac{3x}{4} + 1 = 7$</span></div><div class="task hog"><span class="nr">41.</span><span class="eq">$2(3x + 1) = 3(x + 5)$</span></div><div class="task hog"><span class="nr">42.</span><span class="eq">$\dfrac{x - 3}{4} = \dfrac{3}{6}$</span></div><div class="task hog"><span class="nr">43.</span><span class="eq">$\dfrac{25}{2x} = 10$</span></div><div class="task hog"><span class="nr">44.</span><span class="eq">$4x + 3 = 4(x + 1) - 1$</span></div></div></section>
+<div class="facit">
+<h2>Svar</h2>
+<div class="svarlista"><div><span class="nr">1.</span><span>$x = 5$</span></div><div><span class="nr">2.</span><span>$x = 4$</span></div><div><span class="nr">3.</span><span>$x = 3$</span></div><div><span class="nr">4.</span><span>$x = 2$</span></div><div><span class="nr">5.</span><span>$x = 34$</span></div><div><span class="nr">6.</span><span>$x = 7$</span></div><div><span class="nr">7.</span><span>$x = 28$</span></div><div><span class="nr">8.</span><span>$x = 9$</span></div><div><span class="nr">9.</span><span>$x = 9$</span></div><div><span class="nr">10.</span><span>$x = 6$</span></div><div><span class="nr">11.</span><span>$x = 1$</span></div><div><span class="nr">12.</span><span>$x = 18$</span></div><div><span class="nr">13.</span><span>$x = 6$</span></div><div><span class="nr">14.</span><span>$x = 2$</span></div><div><span class="nr">15.</span><span>$x = 7$</span></div><div><span class="nr">16.</span><span>$x = 4$</span></div><div><span class="nr">17.</span><span>$x = 6$</span></div><div><span class="nr">18.</span><span>$x = 35$</span></div><div><span class="nr">19.</span><span>$x = -7$</span></div><div><span class="nr">20.</span><span>$x = 6$</span></div><div><span class="nr">21.</span><span>$x = 4$</span></div><div><span class="nr">22.</span><span>$x = 2$</span></div><div><span class="nr">23.</span><span>$x = -1$</span></div><div><span class="nr">24.</span><span>$x = 7$</span></div><div><span class="nr">25.</span><span>$x = 7$</span></div><div><span class="nr">26.</span><span>$x = 18$</span></div><div><span class="nr">27.</span><span>Saknar lösning</span></div><div><span class="nr">28.</span><span>$x = 4$</span></div><div><span class="nr">29.</span><span>$x = 3$</span></div><div><span class="nr">30.</span><span>$x = 4$</span></div><div><span class="nr">31.</span><span>$x = 8$</span></div><div><span class="nr">32.</span><span>$x = 6$</span></div><div><span class="nr">33.</span><span>$x = 9$</span></div><div><span class="nr">34.</span><span>$x = 7$</span></div><div><span class="nr">35.</span><span>$x = 2$</span></div><div><span class="nr">36.</span><span>$x = 14$</span></div><div><span class="nr">37.</span><span>$x = 5$</span></div><div><span class="nr">38.</span><span>$x = 10$</span></div><div><span class="nr">39.</span><span>$x = 3$</span></div><div><span class="nr">40.</span><span>$x = 8$</span></div><div><span class="nr">41.</span><span>$x = \dfrac{13}{3}$</span></div><div><span class="nr">42.</span><span>$x = 5$</span></div><div><span class="nr">43.</span><span>$x = \dfrac{5}{4}$</span></div><div><span class="nr">44.</span><span>Oändligt många lösningar (alla tal)</span></div></div>
+<h2>Lösningsförslag</h2>
+<div class="los">
+<div class="sol"><span class="nr">1.</span>
+$$\begin{aligned} 3x + 7 &= 22 \\ 3x + 7\textcolor{#2563c9}{ - 7} &= 22\textcolor{#2563c9}{ - 7} \\ 3x &= 15 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{15}{\textcolor{#2563c9}{3}} \\ x &= 5 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 5$</p></div>
+<div class="sol"><span class="nr">2.</span>
+$$\begin{aligned} 5x + 2 &= 2x + 14 \\ 5x + 2\textcolor{#2563c9}{ - 2x} &= 2x + 14\textcolor{#2563c9}{ - 2x} \\ 3x + 2 &= 14 \\ 3x + 2\textcolor{#2563c9}{ - 2} &= 14\textcolor{#2563c9}{ - 2} \\ 3x &= 12 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{12}{\textcolor{#2563c9}{3}} \\ x &= 4 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 4$</p></div>
+<div class="sol"><span class="nr">3.</span>
+<p class="note">Nämnaren får inte bli 0, så $x \neq 0$.</p>
+$$\begin{aligned} \frac{18}{x} &= 6 \end{aligned}$$
+<p class="note">Täljaren är lika med kvoten gånger nämnaren:</p>
+$$\begin{aligned} 18 &= 6 \cdot x \\ 18 &= 6x \\ \frac{18}{\textcolor{#2563c9}{6}} &= \frac{6x}{\textcolor{#2563c9}{6}} \\ 3 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 3$</p></div>
+<div class="sol"><span class="nr">4.</span>
+$$\begin{aligned} \frac{x}{3} &= \frac{8}{12} \end{aligned}$$
+<p class="note">Korsvis multiplikation:</p>
+$$\begin{aligned} 8 \cdot 3 &= 12 \cdot x \\ 24 &= 12x \\ \frac{24}{\textcolor{#2563c9}{12}} &= \frac{12x}{\textcolor{#2563c9}{12}} \\ 2 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 2$</p></div>
+<div class="sol"><span class="nr">5.</span>
+$$\begin{aligned} x - 13 &= 21 \\ x - 13\textcolor{#2563c9}{ + 13} &= 21\textcolor{#2563c9}{ + 13} \\ x &= 34 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 34$</p></div>
+<div class="sol"><span class="nr">6.</span>
+$$\begin{aligned} 4x - 5 &= 2x + 9 \\ 4x - 5\textcolor{#2563c9}{ - 2x} &= 2x + 9\textcolor{#2563c9}{ - 2x} \\ 2x - 5 &= 9 \\ 2x - 5\textcolor{#2563c9}{ + 5} &= 9\textcolor{#2563c9}{ + 5} \\ 2x &= 14 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{14}{\textcolor{#2563c9}{2}} \\ x &= 7 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 7$</p></div>
+<div class="sol"><span class="nr">7.</span>
+$$\begin{aligned} \frac{x}{4} &= 7 \\ \frac{x}{4}\textcolor{#2563c9}{ \cdot 4} &= 7\textcolor{#2563c9}{ \cdot 4} \\ x &= 28 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 28$</p></div>
+<div class="sol"><span class="nr">8.</span>
+<p class="note">Nämnaren får inte bli 0, så $x \neq 0$.</p>
+$$\begin{aligned} \frac{15}{x} &= \frac{5}{3} \end{aligned}$$
+<p class="note">Korsvis multiplikation:</p>
+$$\begin{aligned} 5 \cdot x &= 15 \cdot 3 \\ 5x &= 45 \\ \frac{5x}{\textcolor{#2563c9}{5}} &= \frac{45}{\textcolor{#2563c9}{5}} \\ x &= 9 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 9$</p></div>
+<div class="sol"><span class="nr">9.</span>
+$$\begin{aligned} 6x &= 54 \\ \frac{6x}{\textcolor{#2563c9}{6}} &= \frac{54}{\textcolor{#2563c9}{6}} \\ x &= 9 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 9$</p></div>
+<div class="sol"><span class="nr">10.</span>
+$$\begin{aligned} 2(x + 5) &= 3x + 4 \\ 2x + 10 &= 3x + 4 \\ 2x + 10\textcolor{#2563c9}{ - 2x} &= 3x + 4\textcolor{#2563c9}{ - 2x} \\ 10 &= x + 4 \\ 10\textcolor{#2563c9}{ - 4} &= x + 4\textcolor{#2563c9}{ - 4} \\ 6 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 6$</p></div>
+<div class="sol"><span class="nr">11.</span>
+<p class="note">Nämnaren får inte bli 0, så $x \neq 0$.</p>
+$$\begin{aligned} \frac{35}{5x} &= 7 \end{aligned}$$
+<p class="note">Täljaren är lika med kvoten gånger nämnaren:</p>
+$$\begin{aligned} 35 &= 7 \cdot 5x \\ 35 &= 35x \\ \frac{35}{\textcolor{#2563c9}{35}} &= \frac{35x}{\textcolor{#2563c9}{35}} \\ 1 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 1$</p></div>
+<div class="sol"><span class="nr">12.</span>
+$$\begin{aligned} \frac{x}{2} - 3 &= 6 \\ \frac{x}{2} - 3\textcolor{#2563c9}{ + 3} &= 6\textcolor{#2563c9}{ + 3} \\ \frac{x}{2} &= 9 \\ \frac{x}{2}\textcolor{#2563c9}{ \cdot 2} &= 9\textcolor{#2563c9}{ \cdot 2} \\ x &= 18 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 18$</p></div>
+<div class="sol"><span class="nr">13.</span>
+$$\begin{aligned} 8x + 3 &= 6x + 15 \\ 8x + 3\textcolor{#2563c9}{ - 6x} &= 6x + 15\textcolor{#2563c9}{ - 6x} \\ 2x + 3 &= 15 \\ 2x + 3\textcolor{#2563c9}{ - 3} &= 15\textcolor{#2563c9}{ - 3} \\ 2x &= 12 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{12}{\textcolor{#2563c9}{2}} \\ x &= 6 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 6$</p></div>
+<div class="sol"><span class="nr">14.</span>
+$$\begin{aligned} \frac{x}{5} &= \frac{4}{10} \end{aligned}$$
+<p class="note">Korsvis multiplikation:</p>
+$$\begin{aligned} 4 \cdot 5 &= 10 \cdot x \\ 20 &= 10x \\ \frac{20}{\textcolor{#2563c9}{10}} &= \frac{10x}{\textcolor{#2563c9}{10}} \\ 2 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 2$</p></div>
+<div class="sol"><span class="nr">15.</span>
+$$\begin{aligned} 7x - 10 &= 39 \\ 7x - 10\textcolor{#2563c9}{ + 10} &= 39\textcolor{#2563c9}{ + 10} \\ 7x &= 49 \\ \frac{7x}{\textcolor{#2563c9}{7}} &= \frac{49}{\textcolor{#2563c9}{7}} \\ x &= 7 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 7$</p></div>
+<div class="sol"><span class="nr">16.</span>
+<p class="note">Nämnaren får inte bli 0, så $x \neq 0$.</p>
+$$\begin{aligned} \frac{48}{4x} &= 3 \end{aligned}$$
+<p class="note">Täljaren är lika med kvoten gånger nämnaren:</p>
+$$\begin{aligned} 48 &= 3 \cdot 4x \\ 48 &= 12x \\ \frac{48}{\textcolor{#2563c9}{12}} &= \frac{12x}{\textcolor{#2563c9}{12}} \\ 4 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 4$</p></div>
+<div class="sol"><span class="nr">17.</span>
+$$\begin{aligned} 3x + 8 + x &= 2x + 20 \\ 4x + 8 &= 2x + 20 \\ 4x + 8\textcolor{#2563c9}{ - 2x} &= 2x + 20\textcolor{#2563c9}{ - 2x} \\ 2x + 8 &= 20 \\ 2x + 8\textcolor{#2563c9}{ - 8} &= 20\textcolor{#2563c9}{ - 8} \\ 2x &= 12 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{12}{\textcolor{#2563c9}{2}} \\ x &= 6 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 6$</p></div>
+<div class="sol"><span class="nr">18.</span>
+<p class="note">Nämnaren får inte bli 0, så $x \neq 0$.</p>
+$$\begin{aligned} \frac{20}{x} &= \frac{4}{7} \end{aligned}$$
+<p class="note">Korsvis multiplikation:</p>
+$$\begin{aligned} 4 \cdot x &= 20 \cdot 7 \\ 4x &= 140 \\ \frac{4x}{\textcolor{#2563c9}{4}} &= \frac{140}{\textcolor{#2563c9}{4}} \\ x &= 35 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 35$</p></div>
+<div class="sol"><span class="nr">19.</span>
+$$\begin{aligned} x + 19 &= 12 \\ x + 19\textcolor{#2563c9}{ - 19} &= 12\textcolor{#2563c9}{ - 19} \\ x &= -7 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = -7$</p></div>
+<div class="sol"><span class="nr">20.</span>
+$$\begin{aligned} \frac{x + 6}{3} &= 4 \end{aligned}$$
+<p class="note">Täljaren är lika med kvoten gånger nämnaren:</p>
+$$\begin{aligned} x + 6 &= 4 \cdot 3 \\ x + 6 &= 12 \\ x + 6\textcolor{#2563c9}{ - 6} &= 12\textcolor{#2563c9}{ - 6} \\ x &= 6 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 6$</p></div>
+<div class="sol"><span class="nr">21.</span>
+$$\begin{aligned} 9x - 2 &= 4x + 18 \\ 9x - 2\textcolor{#2563c9}{ - 4x} &= 4x + 18\textcolor{#2563c9}{ - 4x} \\ 5x - 2 &= 18 \\ 5x - 2\textcolor{#2563c9}{ + 2} &= 18\textcolor{#2563c9}{ + 2} \\ 5x &= 20 \\ \frac{5x}{\textcolor{#2563c9}{5}} &= \frac{20}{\textcolor{#2563c9}{5}} \\ x &= 4 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 4$</p></div>
+<div class="sol"><span class="nr">22.</span>
+$$\begin{aligned} \frac{2x}{3} &= \frac{8}{6} \end{aligned}$$
+<p class="note">Korsvis multiplikation:</p>
+$$\begin{aligned} 8 \cdot 3 &= 6 \cdot 2x \\ 24 &= 12x \\ \frac{24}{\textcolor{#2563c9}{12}} &= \frac{12x}{\textcolor{#2563c9}{12}} \\ 2 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 2$</p></div>
+<div class="sol"><span class="nr">23.</span>
+$$\begin{aligned} 5x + 6 &= 1 \\ 5x + 6\textcolor{#2563c9}{ - 6} &= 1\textcolor{#2563c9}{ - 6} \\ 5x &= -5 \\ \frac{5x}{\textcolor{#2563c9}{5}} &= \frac{-5}{\textcolor{#2563c9}{5}} \\ x &= -1 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = -1$</p></div>
+<div class="sol"><span class="nr">24.</span>
+$$\begin{aligned} 3(x - 1) &= 2x + 4 \\ 3x - 3 &= 2x + 4 \\ 3x - 3\textcolor{#2563c9}{ - 2x} &= 2x + 4\textcolor{#2563c9}{ - 2x} \\ x - 3 &= 4 \\ x - 3\textcolor{#2563c9}{ + 3} &= 4\textcolor{#2563c9}{ + 3} \\ x &= 7 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 7$</p></div>
+<div class="sol"><span class="nr">25.</span>
+<p class="note">Nämnaren får inte bli 0, så $x \neq 0$.</p>
+$$\begin{aligned} \frac{56}{x} &= 8 \end{aligned}$$
+<p class="note">Täljaren är lika med kvoten gånger nämnaren:</p>
+$$\begin{aligned} 56 &= 8 \cdot x \\ 56 &= 8x \\ \frac{56}{\textcolor{#2563c9}{8}} &= \frac{8x}{\textcolor{#2563c9}{8}} \\ 7 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 7$</p></div>
+<div class="sol"><span class="nr">26.</span>
+$$\begin{aligned} \frac{x}{6} + 2 &= 5 \\ \frac{x}{6} + 2\textcolor{#2563c9}{ - 2} &= 5\textcolor{#2563c9}{ - 2} \\ \frac{x}{6} &= 3 \\ \frac{x}{6}\textcolor{#2563c9}{ \cdot 6} &= 3\textcolor{#2563c9}{ \cdot 6} \\ x &= 18 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 18$</p></div>
+<div class="sol"><span class="nr">27.</span>
+$$\begin{aligned} 6x + 4 &= 6x + 9 \\ 6x + 4\textcolor{#2563c9}{ - 6x} &= 6x + 9\textcolor{#2563c9}{ - 6x} \\ 4 &= 9 \end{aligned}$$
+<p class="note">Variabeln försvann och kvar står en falsk likhet. Inget värde på $x$ gör att ekvationen stämmer.</p>
+<p class="svar"><b>Svar:</b> Saknar lösning</p></div>
+<div class="sol"><span class="nr">28.</span>
+<p class="note">Nämnaren får inte bli 0, så $x \neq 0$.</p>
+$$\begin{aligned} \frac{8}{3x} &= \frac{2}{3} \end{aligned}$$
+<p class="note">Korsvis multiplikation:</p>
+$$\begin{aligned} 2 \cdot 3x &= 8 \cdot 3 \\ 6x &= 24 \\ \frac{6x}{\textcolor{#2563c9}{6}} &= \frac{24}{\textcolor{#2563c9}{6}} \\ x &= 4 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 4$</p></div>
+<div class="sol"><span class="nr">29.</span>
+$$\begin{aligned} 10x - 7 &= 3x + 14 \\ 10x - 7\textcolor{#2563c9}{ - 3x} &= 3x + 14\textcolor{#2563c9}{ - 3x} \\ 7x - 7 &= 14 \\ 7x - 7\textcolor{#2563c9}{ + 7} &= 14\textcolor{#2563c9}{ + 7} \\ 7x &= 21 \\ \frac{7x}{\textcolor{#2563c9}{7}} &= \frac{21}{\textcolor{#2563c9}{7}} \\ x &= 3 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 3$</p></div>
+<div class="sol"><span class="nr">30.</span>
+$$\begin{aligned} 4x + 9 &= 25 \\ 4x + 9\textcolor{#2563c9}{ - 9} &= 25\textcolor{#2563c9}{ - 9} \\ 4x &= 16 \\ \frac{4x}{\textcolor{#2563c9}{4}} &= \frac{16}{\textcolor{#2563c9}{4}} \\ x &= 4 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 4$</p></div>
+<div class="sol"><span class="nr">31.</span>
+<p class="note">Nämnaren får inte bli 0, så $x \neq -2$.</p>
+$$\begin{aligned} \frac{60}{x + 2} &= 6 \end{aligned}$$
+<p class="note">Täljaren är lika med kvoten gånger nämnaren:</p>
+$$\begin{aligned} 60 &= 6(x + 2) \\ 60 &= 6x + 12 \\ 60\textcolor{#2563c9}{ - 12} &= 6x + 12\textcolor{#2563c9}{ - 12} \\ 48 &= 6x \\ \frac{48}{\textcolor{#2563c9}{6}} &= \frac{6x}{\textcolor{#2563c9}{6}} \\ 8 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 8$</p></div>
+<div class="sol"><span class="nr">32.</span>
+$$\begin{aligned} 4(x + 2) &= 2x + 20 \\ 4x + 8 &= 2x + 20 \\ 4x + 8\textcolor{#2563c9}{ - 2x} &= 2x + 20\textcolor{#2563c9}{ - 2x} \\ 2x + 8 &= 20 \\ 2x + 8\textcolor{#2563c9}{ - 8} &= 20\textcolor{#2563c9}{ - 8} \\ 2x &= 12 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{12}{\textcolor{#2563c9}{2}} \\ x &= 6 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 6$</p></div>
+<div class="sol"><span class="nr">33.</span>
+<p class="note">Nämnaren får inte bli 0, så $x \neq 0$.</p>
+$$\begin{aligned} \frac{27}{x} &= 3 \end{aligned}$$
+<p class="note">Täljaren är lika med kvoten gånger nämnaren:</p>
+$$\begin{aligned} 27 &= 3 \cdot x \\ 27 &= 3x \\ \frac{27}{\textcolor{#2563c9}{3}} &= \frac{3x}{\textcolor{#2563c9}{3}} \\ 9 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 9$</p></div>
+<div class="sol"><span class="nr">34.</span>
+$$\begin{aligned} 4x + 1 &= x + 22 \\ 4x + 1\textcolor{#2563c9}{ - x} &= x + 22\textcolor{#2563c9}{ - x} \\ 3x + 1 &= 22 \\ 3x + 1\textcolor{#2563c9}{ - 1} &= 22\textcolor{#2563c9}{ - 1} \\ 3x &= 21 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{21}{\textcolor{#2563c9}{3}} \\ x &= 7 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 7$</p></div>
+<div class="sol"><span class="nr">35.</span>
+$$\begin{aligned} \frac{x}{8} &= \frac{3}{12} \end{aligned}$$
+<p class="note">Korsvis multiplikation:</p>
+$$\begin{aligned} 3 \cdot 8 &= 12 \cdot x \\ 24 &= 12x \\ \frac{24}{\textcolor{#2563c9}{12}} &= \frac{12x}{\textcolor{#2563c9}{12}} \\ 2 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 2$</p></div>
+<div class="sol"><span class="nr">36.</span>
+$$\begin{aligned} \frac{2x}{7} &= 4 \end{aligned}$$
+<p class="note">Täljaren är lika med kvoten gånger nämnaren:</p>
+$$\begin{aligned} 2x &= 4 \cdot 7 \\ 2x &= 28 \\ \frac{2x}{\textcolor{#2563c9}{2}} &= \frac{28}{\textcolor{#2563c9}{2}} \\ x &= 14 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 14$</p></div>
+<div class="sol"><span class="nr">37.</span>
+$$\begin{aligned} 5x - 2(x + 3) &= 9 \\ 5x - 2x - 6 &= 9 \\ 3x - 6 &= 9 \\ 3x - 6\textcolor{#2563c9}{ + 6} &= 9\textcolor{#2563c9}{ + 6} \\ 3x &= 15 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{15}{\textcolor{#2563c9}{3}} \\ x &= 5 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 5$</p></div>
+<div class="sol"><span class="nr">38.</span>
+<p class="note">Nämnaren får inte bli 0, så $x \neq 4$.</p>
+$$\begin{aligned} \frac{3}{x - 4} &= \frac{1}{2} \end{aligned}$$
+<p class="note">Korsvis multiplikation:</p>
+$$\begin{aligned} 1 \cdot (x - 4) &= 3 \cdot 2 \\ x - 4 &= 6 \\ x - 4\textcolor{#2563c9}{ + 4} &= 6\textcolor{#2563c9}{ + 4} \\ x &= 10 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 10$</p></div>
+<div class="sol"><span class="nr">39.</span>
+$$\begin{aligned} 9 - 2x &= 3x - 6 \\ 9 - 2x\textcolor{#2563c9}{ + 2x} &= 3x - 6\textcolor{#2563c9}{ + 2x} \\ 9 &= 5x - 6 \\ 9\textcolor{#2563c9}{ + 6} &= 5x - 6\textcolor{#2563c9}{ + 6} \\ 15 &= 5x \\ \frac{15}{\textcolor{#2563c9}{5}} &= \frac{5x}{\textcolor{#2563c9}{5}} \\ 3 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 3$</p></div>
+<div class="sol"><span class="nr">40.</span>
+$$\begin{aligned} \frac{3x}{4} + 1 &= 7 \\ \frac{3x}{4} + 1\textcolor{#2563c9}{ - 1} &= 7\textcolor{#2563c9}{ - 1} \\ \frac{3x}{4} &= 6 \\ \frac{3x}{4}\textcolor{#2563c9}{ \cdot 4} &= 6\textcolor{#2563c9}{ \cdot 4} \\ 3x &= 24 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{24}{\textcolor{#2563c9}{3}} \\ x &= 8 \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 8$</p></div>
+<div class="sol"><span class="nr">41.</span>
+$$\begin{aligned} 2(3x + 1) &= 3(x + 5) \\ 6x + 2 &= 3x + 15 \\ 6x + 2\textcolor{#2563c9}{ - 3x} &= 3x + 15\textcolor{#2563c9}{ - 3x} \\ 3x + 2 &= 15 \\ 3x + 2\textcolor{#2563c9}{ - 2} &= 15\textcolor{#2563c9}{ - 2} \\ 3x &= 13 \\ \frac{3x}{\textcolor{#2563c9}{3}} &= \frac{13}{\textcolor{#2563c9}{3}} \\ x &= \frac{13}{3} \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = \dfrac{13}{3}$</p></div>
+<div class="sol"><span class="nr">42.</span>
+$$\begin{aligned} \frac{x - 3}{4} &= \frac{3}{6} \end{aligned}$$
+<p class="note">Korsvis multiplikation:</p>
+$$\begin{aligned} 3 \cdot 4 &= 6(x - 3) \\ 12 &= 6x - 18 \\ 12\textcolor{#2563c9}{ + 18} &= 6x - 18\textcolor{#2563c9}{ + 18} \\ 30 &= 6x \\ \frac{30}{\textcolor{#2563c9}{6}} &= \frac{6x}{\textcolor{#2563c9}{6}} \\ 5 &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = 5$</p></div>
+<div class="sol"><span class="nr">43.</span>
+<p class="note">Nämnaren får inte bli 0, så $x \neq 0$.</p>
+$$\begin{aligned} \frac{25}{2x} &= 10 \end{aligned}$$
+<p class="note">Täljaren är lika med kvoten gånger nämnaren:</p>
+$$\begin{aligned} 25 &= 10 \cdot 2x \\ 25 &= 20x \\ \frac{25}{\textcolor{#2563c9}{20}} &= \frac{20x}{\textcolor{#2563c9}{20}} \\ \frac{5}{4} &= x \end{aligned}$$
+<p class="svar"><b>Svar:</b> $x = \dfrac{5}{4}$</p></div>
+<div class="sol"><span class="nr">44.</span>
+$$\begin{aligned} 4x + 3 &= 4(x + 1) - 1 \\ 4x + 3 &= 4x + 4 - 1 \\ 4x + 3 &= 4x + 3 \\ 4x + 3\textcolor{#2563c9}{ - 4x} &= 4x + 3\textcolor{#2563c9}{ - 4x} \\ 3 &= 3 \end{aligned}$$
+<p class="note">Variabeln försvann och kvar står en sann likhet. Ekvationen stämmer för alla värden på $x$.</p>
+<p class="svar"><b>Svar:</b> Oändligt många lösningar (alla tal)</p></div>
+</div>
+</div>
+<footer><span>Fysiklabbet · fysiklabbet.se</span><span>Övningsblad 5: Blandade ekvationer</span></footer>
+</div>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

@@ -2070,3 +2070,17 @@ Format per post:
   Källa (Phys.org 2026-09-18):
   https://phys.org/news/2026-09-bridge-quantum-networks-physicists-microwaves.html
   (tillagd 2026-09-18)
+
+- **Kvantsprång i ljud sett i realtid för första gången** — ett lag vid Stanford följer hur en mekanisk
+  resonator byter energinivå i ett enda hopp, alltså samma trappa av tillstånd som atomer har, fast hos ett
+  föremål man kan se. Ingång: kvantisering, energinivåer, svängningar och fononer. OBS: kvantfysik
+  publicerades 2026-09-18 och 2026-09-15 — låt det gå tid. Källa (Phys.org 2026-09-17):
+  https://phys.org/news/2026-09-real-quantum.html
+  (tillagd 2026-09-19)
+
+- **Positronstrålen som samlas ihop av supraledande magneter** — ett försök visar en väg mot de täta
+  positronstrålar som nästa generations elektron-positron-kollider behöver. Ingång: antimateria, magnetisk
+  fokusering och varför laddade partiklar i en stråle stöter bort varandra. OBS: partikelfysik publicerades
+  2026-09-16 och 2026-09-08. Källa (Physics Magazine 2026-09-18):
+  https://physics.aps.org/articles/v19/127
+  (tillagd 2026-09-19)

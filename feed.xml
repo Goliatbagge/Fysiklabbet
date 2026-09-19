@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Fri, 18 Sep 2026 01:27:36 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 19 Sep 2026 01:26:40 GMT</lastBuildDate>
+    <item>
+      <title>Skummet som minns exakt var det trycktes ihop — och struntar i hur fort det gick</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-19-skummet-som-minns</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-19-skummet-som-minns</guid>
+      <pubDate>Sat, 19 Sep 2026 04:00:00 GMT</pubDate>
+      <category>Materialfysik</category>
+      <description>Pressa ihop en bit vanlig cellplast, håll den nere en stund och släpp: kraften har hunnit sjunka, och materialet hittar inte tillbaka till punkten där det vände. En skog av lodräta kolnanorör gör precis det, gång på gång, lika gärna i ultrarapid som i ett slag. Ett lag vid University of Wisconsin–Madison visar att förlusterna i skummet inte kommer från sega polymerkedjor utan från torr friktion mellan rören, och att materialet därför bär ett minne som inte bleknar.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-19-skummet-som-minns.jpg" length="74206" type="image/jpeg"/>
+    </item>
     <item>
       <title>Om rumtiden darrar ska vanlig materia lysa av sig själv — 1 400 meter under ett italienskt berg lyste ingenting</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-09-18-tystnaden-under-berget</link>
@@ -177,15 +186,6 @@
       <category>Magnetism</category>
       <description>En spinnvåg är en krusning i atomernas magnetiska riktningar, och den skulle kunna bära information genom ett material utan att någon ström flyter. Ett europeiskt forskarlag har byggt en röntgenmetod som avbildar sådana vågor direkt, och såg då en process som ingen hade sett förut.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-31-spinnvagor-i-rorelse.jpg" length="170692" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>500 molekyler kyldes till tjugo miljarddels grad över nollpunkten — sedan höll de ihop som en droppe helt utan kärl</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-30-droppen-utan-karl</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-30-droppen-utan-karl</guid>
-      <pubDate>Sun, 30 Aug 2026 04:00:00 GMT</pubDate>
-      <category>Kvantfysik</category>
-      <description>Ett forskarlag i Hongkong har fått natrium–rubidium-molekyler att bilda ett Bose–Einstein-kondensat, och kan dessutom vrida på hur hårt molekylerna drar i varandra. Vrider man tillräckligt långt slutar gasen att breda ut sig och drar i stället ihop sig till en självbunden droppe.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-30-droppen-utan-karl.jpg" length="218192" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

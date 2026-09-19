@@ -103,6 +103,84 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-19-skummet-som-minns",
+    date: "2026-09-19",
+    title: "Skummet som minns exakt var det trycktes ihop — och struntar i hur fort det gick",
+    deck: "Pressa ihop en bit vanlig cellplast, håll den nere en stund och släpp: kraften har hunnit sjunka, och materialet hittar inte tillbaka till punkten där det vände. En skog av lodräta kolnanorör gör precis det, gång på gång, lika gärna i ultrarapid som i ett slag. Ett lag vid University of Wisconsin–Madison visar att förlusterna i skummet inte kommer från sega polymerkedjor utan från torr friktion mellan rören, och att materialet därför bär ett minne som inte bleknar.",
+    category: "Materialfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-19-skummet-som-minns.jpg",
+    imageAlt: "Fyra kolsvarta, matta cylindrar av kolnanorör står på en rosaskimrande kiselskiva mot vit bakgrund. Ytorna är så mörka att de nästan saknar skuggnyanser.",
+    imageCredit: "Foto: National Institute of Standards and Technology (public domain), via Wikimedia Commons. Bilden visar cylindrar av lodräta kolnanorör odlade på en kiselskiva vid NIST, inte de prov som användes i studien. Beskuren.",
+    tags: ["materialfysik", "kolnanorör", "friktion", "hysteres", "mekanik", "energiabsorption", "stötdämpning", "vågutbredning", "nanoteknik", "viskoelasticitet"],
+    sources: [
+      { name: "Physics Magazine (APS): Nanotube Material Has Perfect Memory (18 september 2026)", url: "https://physics.aps.org/articles/v19/129" },
+      { name: "Physical Review X: Enduring Mechanical Memory from the Constitutive Response of Elastically Recoverable Nanostructured Materials (öppen tillgång)", url: "https://journals.aps.org/prx/abstract/10.1103/n723-s2t6" },
+      { name: "University of Wisconsin–Madison: New carbon nanotube-based foam promises superior protection against concussions (tidigare arbete i samma forskargrupp)", url: "https://news.wisc.edu/new-carbon-nanotube-based-foam-promises-superior-protection-against-concussions/" }
+    ],
+    research: {
+      citation: "Abhishek Gupta, Bhanugoban Maheswaran, Nicholas Jaegersberg, Komal Chawla och Ramathasan Thevamaran, ”Enduring Mechanical Memory from the Constitutive Response of Elastically Recoverable Nanostructured Materials”, Physical Review X, volym 16, artikel 031073, publicerad 18 september 2026 (CC BY 4.0)",
+      url: "https://doi.org/10.1103/n723-s2t6"
+    },
+    simulering: {
+      href: "fysik1-friktion-app.html",
+      name: "Friktion",
+      text: "Dra en kloss över ett underlag och jämför den statiska friktionen med den dynamiska. Friktionskraften växer inte för att du drar fortare, och det är precis den egenskapen som gör kolnanorörsskummets energiförluster oberoende av hur snabbt stöten kommer."
+    },
+    larare: {
+      moment: [
+        { label: "Friktion", href: "katalog.html?id=fy1-3.6" },
+        { label: "Arbete med friktion", href: "katalog.html?id=fy1-4.9" },
+        { label: "Pulser, vågor och utbredningshastighet", href: "katalog.html?id=fy2-2.7" }
+      ],
+      fragor: [
+        "Ritar man kraften mot hoptryckningen bildar upp- och nedvägen en ögla, och ytan innanför öglan är energi som blivit värme. Varför måste det finnas en sådan ögla i ett material som ska skydda mot stötar, och vad skulle hända om den saknades?",
+        "En trögflytande kraft växer med farten, medan en torr friktionskraft inte gör det. Hur kan man utifrån det avgöra vilken av de två som ligger bakom förlusterna i ett material, utan att titta på materialet inuti?",
+        "Forskarna mäter bara skummets beteende som helhet och drar därifrån en slutsats om vad enskilda nanorör gör. Vilka andra förklaringar skulle kunna ge samma mätkurvor, och vad skulle krävas för att skilja dem åt?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Ett hjälmfoder har en enda uppgift: att ta upp rörelseenergi innan huvudet hinner göra det. Skumplast löser den uppgiften genom att ge efter och samtidigt omvandla en del av energin till värme. Men materialet är nyckfullt. Ett långsamt tryck och en hård smäll möts av olika motstånd, och ett skum som nyss blivit hoptryckt svarar inte likadant som ett orört.' },
+      { type: 'p', html: 'I <em>Physical Review X</em> beskriver fem forskare vid University of Wisconsin–Madison ett skum som inte beter sig så. Det består av kolnanorör som står upp bredvid varandra som stråna i en gräsmatta, odlade i en ugn tills de bildar en matta någon millimeter hög. Provbitarna är omkring 5&nbsp;mm breda, drygt 1,5&nbsp;mm tjocka och så lätta att en kubikcentimeter väger mellan 0,13 och 0,26&nbsp;g. Vatten väger 1,0&nbsp;g per kubikcentimeter.' },
+
+      { type: 'h2', text: 'Minnet som rinner ur materialet' },
+      { type: 'p', html: 'Bakgrunden är ett välkänt beteende hos polymerer. Trycker man ihop en bit PVC-skum och håller kvar den i samma läge sjunker kraften långsamt av sig själv, eftersom molekylkedjorna glider isär och lägger sig till rätta. Fenomenet kallas spänningsrelaxation och är kärnan i det som kallas viskoelasticitet: materialet svarar delvis som en fjäder, delvis som en trögflytande vätska.' },
+      { type: 'p', html: 'Följden är ett minne som bleknar. Ritar man kraften mot hoptryckningen bildar vägen ned och vägen upp en ögla, en hysteresögla, vars inneslutna yta är den energi som blivit värme. Vänder man mitt i öglan, väntar en stund och fortsätter, hittar kurvan inte tillbaka till punkten där den vände. Materialet har glömt.' },
+      { type: 'p', html: 'Forskarna gjorde försöket på båda skummen samtidigt: hoptryckning till 30&nbsp;%, en bit tillbaka till 20&nbsp;%, stillastående i drygt en timme, och sedan ned till 30&nbsp;% igen. PVC-skummets spänning sjönk stadigt under väntan och den lilla öglan slöt sig aldrig. I kolnanorörsskummet låg spänningen kvar helt stilla, och när provet trycktes ned på nytt landade kurvan exakt i vändpunkten.' },
+      { type: 'p', html: 'Det senare har ett namn: återvändningspunktsminne. Samma sak finns i magnetiska material, där det är grunden för hur en hårddisk lagrar information, men i ett elastiskt material som återtar sin form har det aldrig visats så renodlat förut.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-09-19-skummet-som-minns-3.jpg', alt: 'Tre diagram. Det vänstra visar spänning mot tid för två skum, där den orange kurvan sjunker under tiden provet hålls hoptryckt medan den gröna ligger stilla. De två högra visar spänning mot hoptryckning, där den orange kurvan inte sluter sin lilla ögla men den gröna gör det.', caption: 'Till vänster ligger spänningen i kolnanorörsskummet (grönt) kvar medan PVC-skummets (orange) sjunker under en dryg timme i samma läge. PVC-kurvan är hundrafaldigt förstorad för att alls synas bredvid. Till höger syns följden: PVC-skummet missar punkten där det vände (i mitten), medan kolnanorörsskummet sluter sin lilla ögla exakt (till höger).', credit: 'Figur: Abhishek Gupta med flera, Physical Review X 2026 (CC BY 4.0). Beskuren.' },
+
+      { type: 'h2', text: 'Torr friktion bryr sig inte om farten' },
+      { type: 'p', html: 'Nyckeln ligger i var energiförlusten uppstår. En trögflytande kraft växer med hastigheten, ungefär som luftmotståndet på en cyklist. En torr friktionskraft gör det inte: $F_f = \\mu \\cdot F_N$ innehåller ingen fart alls, bara friktionstalet och kraften som pressar ytorna samman. Ett material vars förluster kommer från torr friktion ska därför svara likadant vid alla hastigheter, och det var precis vad mätningarna visade. Hysteresöglan såg likadan ut när hoptryckningen gjordes tusen gånger långsammare eller snabbare.' },
+      { type: 'quote', html: 'Oavsett om vi tryckte ihop skummet mycket långsamt eller mycket snabbt spelade det ingen roll. Skummet betedde sig likadant.', cite: 'Ramathasan Thevamaran, University of Wisconsin–Madison, i Physics Magazine' },
+      { type: 'p', html: 'Vad är det då som gnider mot vad? Rören står tätt, och där de kommer varandra tillräckligt nära dras de ihop av van der Waals-krafter, samma svaga attraktion som håller ihop vanliga molekyler. När skummet trycks ihop böjer sig rören, griper tag i varandra, släpper plötsligt och griper tag igen. Varje sådant språng gör ett litet arbete som blir värme, och summan av oräkneliga språng är öglans yta. Forskarna byggde en modell av fjädrar och friktionsklossar som återger mätkurvorna, och den förutsäger dessutom öglans form när man vänder mitt i förloppet.' },
+      { type: 'p', html: 'En detalj i modellen gör materialet användbart: ju hårdare skummet redan är hoptryckt, desto närmare varandra ligger rören och desto starkare blir friktionen. Motståndet är alltså inte en fast egenskap utan något som går att ställa in i efterhand.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-09-19-skummet-som-minns-2.jpg', alt: 'Kraftigt förstorad bild i rött och svart av tusentals fina, nästan lodräta trådar som ligger tätt intill varandra och böjer sig åt olika håll.', caption: 'En skog av kolnanorör sedd i mikroskop, över ett område ungefär 25&nbsp;µm brett. Det är kontakterna mellan enskilda rör som glider mot varandra när ett sådant skum trycks ihop.', credit: 'Mikroskopbild: Aric Sanders, National Institute of Standards and Technology (public domain), via Wikimedia Commons. Bilden visar en glesare nanorörsskog på en laserdetektor, inte studiens prov. Färglagd.' },
+
+      { type: 'h2', text: 'Hårdare hoptryckt ger snabbare våg' },
+      { type: 'p', html: 'För att visa vad inställbarheten är värd byggde forskarna en vågledare: 17 skumbrickor, var och en 5&nbsp;mm i diameter och 2&nbsp;mm tjock, varvade med 17 aluminiumcylindrar inuti ett teflonrör. En skruv i ena änden bestämde hur hårt hela stapeln var förkomprimerad. I andra änden sköt en luftdriven kanon en aluminiumkolv mot ett städ, med en fart mellan 4 och 15&nbsp;m/s, och två trådtöjningsgivare längs röret mätte hur lång tid stötpulsen tog på sig mellan dem.' },
+      { type: 'p', html: 'Hur fort en mekanisk puls går genom ett material styrs av styvheten och densiteten, $v = \\sqrt{\\dfrac{E}{\\rho}}$: ett styvare material leder pulsen snabbare, ett tyngre långsammare. Eftersom skummets styvhet nu gick att ändra med ett skruvvarv gick också hastigheten att ändra. Vid 5&nbsp;% förkompression kröp pulsen fram i omkring 100&nbsp;m/s. Vid 25&nbsp;% nådde den drygt 300&nbsp;m/s, alltså i nivå med ljudets hastighet i luft.' },
+      { type: 'p', html: 'Och så det bakvända: ju hårdare slaget var, desto långsammare gick pulsen. Vid 25&nbsp;% förkompression sjönk farten från drygt 300 till knappt 200&nbsp;m/s när kolvens fart ökades från 6 till 15&nbsp;m/s. Stora svängningar mjukar upp skummet, små lämnar det styvt. Ett vanligt gummiliknande material gör tvärtom.' },
+
+      { type: 'fact', title: 'Skummet i siffror', items: [
+        'Provbitarna: omkring 5&nbsp;mm breda, 1,6&nbsp;mm tjocka, densitet 0,13 till 0,26&nbsp;g/cm³. Vatten har 1,0&nbsp;g/cm³.',
+        'Rören odlas ur toluen och ferrocen i en ugn vid omkring 1&nbsp;100&nbsp;K, drygt 800&nbsp;°C, och skogen blir 1,5 till 3&nbsp;mm hög.',
+        'Hysteresöglan var oförändrad när hoptryckningen gjordes över ett hastighetsområde på tre tiopotenser.',
+        'Efter drygt en timme i samma hoptryckta läge hade spänningen inte sjunkit mätbart.',
+        'Pulshastigheten i vågledaren kunde ställas mellan omkring 90 och 310&nbsp;m/s.'
+      ]},
+
+      { type: 'h2', text: 'Från hjälmar till räkning med vågor' },
+      { type: 'p', html: 'Två tillämpningar pekas ut. Den ena är stötskydd. I Physics Magazine framhåller forskarna att skummet tar upp tjugo gånger mer stötenergi än de bästa hjälmmaterialen, och eftersom svaret varken beror på farten eller på hur många gånger materialet redan blivit hoptryckt blir skyddet förutsägbart i stället för avtagande.' },
+      { type: 'quote', html: 'De verkar skyddade mot nedbrytning: de åldras inte och samlar inte på sig skador.', cite: 'Joseph Paulsen, som inte deltagit i studien, i Physics Magazine' },
+      { type: 'p', html: 'Den andra är mer oväntad. Om varje skikt i en stapel kan ges sin egen våghastighet, och hastigheten dessutom rättar sig efter hur kraftig pulsen är, går det att bygga strukturer som sorterar stötar efter styrka utan ström, elektronik eller styrsystem. Forskarna skisserar ett rutnät av sådana staplar där svaga pulser samlas till en skarp topp medan starka pulser hamnar ur takt och sprids ut. Ett sådant mönster är i praktiken en enkel räkneoperation utförd av materialet självt.' },
+      { type: 'p', html: 'Förbehållen finns. Friktionsmodellen beskriver skummet som helhet och bygger på tidigare mätningar av hur kolytor glider mot varandra; någon direkt observation av enskilda nanorör som släpper taget mitt i ett försök finns inte. Vågledaren var några centimeter lång, inte ett hjälmfoder. Och kolnanorör i mängd är fortfarande dyra att odla.' },
+      { type: 'p', html: 'Men resultatet i sig står stadigt, och det är ovanligt enkelt: ett material behöver varken minnesceller eller rörliga delar för att komma ihåg vad som hänt det. Det räcker att förlusterna kommer från friktion i stället för från seghet.' }
+    ]
+  },
+  {
     id: "2026-09-18-tystnaden-under-berget",
     date: "2026-09-18",
     title: "Om rumtiden darrar ska vanlig materia lysa av sig själv — 1 400 meter under ett italienskt berg lyste ingenting",

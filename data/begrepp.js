@@ -3064,4 +3064,40 @@ window.BEGREPP = [
       { type: 'p', html: 'Begreppet dyker upp överallt där något flyttar sig utan att någon skjuter på: i batteriernas elektroder, i halvledarnas gränsskikt, i cellmembran, i stjärnors inre och i kylskåpet. I fysiken används det också som en sorts ratt att vrida på i teorin: genom att bestämma den kemiska potentialen bestämmer man indirekt hur många partiklar ett system innehåller, vilket ofta är enklare att räkna med än att hålla antalet fast.' }
     ]
   },
+  {
+    id: 'hysteres',
+    term: 'Hysteres',
+    former: ['hysteres', 'hysteresen', 'hysteresögla', 'hysteresöglan', 'hysteresöglor', 'hysteresöglorna', 'hysteresförlust', 'hysteresförluster', 'hysteresförlusterna'],
+    kort: 'Att ett material svarar olika på vägen upp och på vägen ned, så att dess tillstånd beror på vad som hänt tidigare och inte bara på hur hårt man drar just nu.',
+    relaterade: ['viskoelasticitet', 'kolnanoror'],
+    body: [
+      { type: 'p', html: 'Böj en gem fram och tillbaka och känn efter. Den första böjningen möts av ett visst motstånd, men när du för tillbaka gemen kommer den inte hela vägen till sitt gamla läge, och kraften följer inte samma bana tillbaka. Ritar man kraften mot böjningen i ett diagram blir vägen ut och vägen hem två olika kurvor som tillsammans sluter sig till en ögla. Den öglan är hysteres, och den talar om att materialets svar beror på hela förhistorien, inte bara på hur mycket man böjer i det här ögonblicket.' },
+      { type: 'p', html: 'Ytan innanför öglan har en mycket konkret innebörd: den är energi. Kraft gånger sträcka är arbete, så arean under kurvan på vägen ned är det arbete man lägger in, och arean under kurvan på vägen upp är det arbete man får tillbaka. Mellanskillnaden, alltså öglans yta, har försvunnit ur det mekaniska kretsloppet och blivit värme. Ju fetare ögla, desto mer energi sväljs. Det är därför stötdämpare, hjälmfoder och gummiupphängningar ska ha en tydlig ögla, medan en studsboll som ska studsa högt ska ha en smal.' },
+      { type: 'p', html: 'Fenomenet finns långt utanför mekaniken. Ett magnetiskt material behåller en del av sin magnetisering när fältet stängs av, och kurvan mellan fält och magnetisering bildar just en ögla, vilket är hela grunden för magnetisk lagring: materialet minns åt vilket håll det senast magnetiserades. Även fuktupptagning i trä, laddning och urladdning av ett batteri och temperaturen i en termostatstyrd lägenhet uppvisar hysteres. Gemensamt för alla fallen är att systemet har flera möjliga tillstånd vid ett och samma yttre värde, och att vilket det hamnar i avgörs av vägen dit.' }
+    ]
+  },
+  {
+    id: 'viskoelasticitet',
+    term: 'Viskoelasticitet',
+    former: ['viskoelasticitet', 'viskoelasticiteten', 'viskoelastisk', 'viskoelastiskt', 'viskoelastiska', 'spänningsrelaxation', 'spänningsrelaxationen'],
+    kort: 'Att ett material uppför sig som en blandning av en fjäder och en trögflytande vätska, så att svaret beror på hur fort och hur länge man belastar det.',
+    relaterade: ['hysteres'],
+    body: [
+      { type: 'p', html: 'En stålfjäder är elastisk: den ger ifrån sig exakt lika mycket kraft varje gång den trycks ihop lika mycket, oavsett hur fort det sker. Sirap är motsatsen, alltså viskös: motståndet beror bara på hur snabbt man rör sig genom den, inte på hur långt man kommit. Många vardagsmaterial ligger mittemellan. Deg, tuggummi, brosk, gummi och cellplast är alla delvis fjäder och delvis sirap på samma gång, och det är den blandningen som kallas viskoelasticitet.' },
+      { type: 'p', html: 'Den tydligaste följden märks när man håller kvar en belastning. Pressa ihop en skumgummikudde och håll handen still, så sjunker mottrycket sakta av sig självt trots att ingenting rör sig. Det kallas spänningsrelaxation och beror på att de långa molekylkedjorna inne i materialet glider förbi varandra och lägger sig i bekvämare lägen. Släpper man i stället efter lite och trycker ned igen hittar materialet inte tillbaka till samma kraft som förut. Minnet av vad som hände nyss bleknar med tiden, och ju längre man väntar desto mer.' },
+      { type: 'p', html: 'Farten spelar därför alltid roll för ett viskoelastiskt material. En snabb stöt möts av ett stelare material än ett långsamt tryck, vilket är bekant för den som studsat en studsboll av silikonlera: knådar man den långsamt är den mjuk som kitt, men kastas den i golvet studsar den. Egenskapen är användbar när man vill dämpa svängningar i ett bestämt frekvensområde, men besvärlig när ett skydd ska fungera likadant vid alla hastigheter och efter många belastningar.' }
+    ]
+  },
+  {
+    id: 'kolnanoror',
+    term: 'Kolnanorör',
+    former: ['kolnanorör', 'kolnanoröret', 'kolnanorören', 'nanorör', 'nanoröret', 'nanorören', 'kolnanorörsskum', 'kolnanorörsskummet', 'nanorörsskog', 'nanorörsskogen'],
+    kort: 'En ihålig tub av rent kol, ungefär en nanometer i diameter, byggd av samma sexkantsmönster som grafit. Den är styvare än stål i längdled och väger nästan ingenting.',
+    relaterade: ['nanoskala', 'hysteres'],
+    body: [
+      { type: 'p', html: 'Tänk dig ett hönsnät av kolatomer, där varje atom sitter i hörnet av en sexkant. Rullar man ihop ett sådant nät till en sömlös tub får man ett kolnanorör. Tuben kan vara några få nanometer i diameter men många mikrometer lång, alltså tusentals gånger längre än bred, och ibland sitter flera rör inuti varandra som ryska dockor. Materialet är alltså rent kol, precis som grafiten i en blyertspenna, men bindningarna sitter arrangerade på ett sätt som ger helt andra egenskaper.' },
+      { type: 'p', html: 'Bindningen mellan kolatomer i ett sådant nät är en av de starkaste som finns, och eftersom kraften i ett rör verkar längs tubens vägg blir ett kolnanorör extremt styvt och starkt i längdled i förhållande till sin vikt. Rören leder dessutom värme utmärkt, och beroende på exakt hur nätet är hoprullat leder de ström antingen som en metall eller som en halvledare. De tillverkas vanligen genom att en kolhaltig gas får sönderdelas över små metallpartiklar vid närmare tusen grader, varvid rören växer upp ur partiklarna.' },
+      { type: 'p', html: 'Får man dem att växa tätt intill varandra på en yta bildar de en skog av upprättstående rör, ett mycket lätt och poröst material som går att trycka ihop och som sedan reser sig igen. En sådan skog är också bland det svartaste som gjorts: ljus som träffar ytan studsar ned mellan rören och kommer aldrig ut igen. De används i dag bland annat som svarta ytor i optiska instrument, som förstärkning i kompositmaterial och som elektroder, medan drömmen om långa, felfria fibrer i stor skala ännu inte är infriad.' }
+    ]
+  },
 ];

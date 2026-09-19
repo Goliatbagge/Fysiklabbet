@@ -92,6 +92,13 @@ Format:
   Chrome-åtkomst till EmailOctopus), (3) kontrollera att bilderna i
   nyheter/brev/ syns live på fysiklabbet.se innan utskick (pushade till
   main i den här sessionen, men GitHub Pages-deployen tar en liten stund).
+- EmailOctopus: kampanjen "Nyhetsbrev nr 6 - 2026-09-20" upplagd 2026-09-19
+  via /brev-till-octopus (avsändare Fysiklabbet <kontakt@fysiklabbet.se>,
+  ämnesrad + preheader ur utkastet, HTML inklistrad med {{PreviewText}}-div,
+  alla fem bilder verifierade i förhandsvisningen, 23 mottagare). Testmejl
+  skickat 2026-09-19 till användarens adress på användarens uttryckliga
+  begäran. ÅTERSTÅR för användaren: schemaläggning (söndag 06.00 svensk tid,
+  tidszon Stockholm).
 
 ## 2026-09-13 — "En foton som inte borde ha nått fram"
 - **UPPLAGD i EmailOctopus 2026-09-12** (lokal session) som kampanjen

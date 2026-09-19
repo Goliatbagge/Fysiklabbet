@@ -99,6 +99,15 @@ Format:
   skickat 2026-09-19 till användarens adress på användarens uttryckliga
   begäran. ÅTERSTÅR för användaren: schemaläggning (söndag 06.00 svensk tid,
   tidszon Stockholm).
+- **Terminologi: kurserna heter NIVÅER** (påpekat av användaren 2026-09-19
+  efter testmejlet). Pennlösningsstycket skrevs om: "Alla kurser har nu
+  pennlösningar" blev "Alla nivåer ...", "i varenda kurs på sajten" blev "på
+  sajtens alla nivåer", och det gamla kursnamnet "Matematik 2c" blev
+  "Matematik nivå 2c". Även "nivå 1c" i uppräkningen skrevs ut som
+  "fortsättning nivå 1c", annars läses den som Matematik nivå 1c (ma1c) i
+  stället för ma3c. "Kursprovens svårighetsgrad" i veckans tips står kvar,
+  det är det nationella provets namn. Kampanjen uppdaterad i EmailOctopus och
+  ett nytt testmejl skickat samma dag.
 
 ## 2026-09-13 — "En foton som inte borde ha nått fram"
 - **UPPLAGD i EmailOctopus 2026-09-12** (lokal session) som kampanjen

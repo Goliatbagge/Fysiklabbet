@@ -1,0 +1,155 @@
+<!--
+  ÄMNESRAD:  Is som är glödhet, men ändå fast
+  PREHEADER: Plus: tjuvstarten som inte är en, och atomer skjutna genom flytande helium.
+  Utskick:   söndag 2026-09-20 kl 06.00 svensk tid (EmailOctopus)
+  Brevperiod: 2026-09-13 till 2026-09-19 (nyheter, sju artiklar). Sajtuppdateringar
+  sedan 2026-09-13 (git log, ~90 commits på main).
+  OBS: bilderna i nyheter/brev/ måste ligga på main innan brevet skickas.
+
+  Skrivet som schemalagd molnroutine (lördag). Molnets nätverkspolicy blockerar
+  unpkg/cdn.tailwindcss/fonts.googleapis (403 i proxyn), men npm-registret är
+  öppet. Två simuleringsskärmdumpar (brytningslagen, cirkulär rörelse) togs
+  därför genom att installera react/react-dom/@babel-standalone lokalt via npm
+  och fånga upp CDN-anropen med page.route() i Playwright (chromium på
+  /opt/pw-browsers/chromium), samma metod som noterats i loggen 2026-09-13.
+  Tailwind-CSS:et fylldes tomt (bara scenens egna inline-<style>-block behövs
+  för en beskuren scen-skärmdump, resten av sidan syns aldrig i brevet).
+  Brytningslagen: default-läge (luft mot glas, -40°) med "Visa reflekterade
+  strålar" ipåslaget. Cirkulär rörelse: läget "Bilbana med kurvor" klickat
+  fram, väntat in bilen i den snäva kurvan (friktionspilen syns). Beskurna
+  och nedskalade med Pillow till nyheter/brev/2026-09-20-brytning.jpg och
+  -cirkular-bana.jpg. Hero + två miniatyrer är beskurna kopior av befintliga
+  nyhetsbilder i nyheter/bilder/ (Pillow, hero 1200 px bred, miniatyrer 500×500
+  kvadrat).
+-->
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fysiklabbets nyhetsbrev, vecka 38</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f7f2e8;">
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f2e8;">
+<tr><td align="center" style="padding:28px 12px 40px;">
+
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%;">
+
+    <!-- ── Sidhuvud ─────────────────────────────────────────── -->
+    <tr><td align="center" style="padding:8px 8px 26px;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; padding-bottom:10px;">Nyhetsbrev nr 6 &middot; vecka 38 &middot; 2026</div>
+      <div style="font-family:Georgia,'Times New Roman',serif; font-size:34px; font-weight:bold; color:#0f1620;">Fysiklabbet</div>
+    </td></tr>
+
+    <!-- ── Anslag ───────────────────────────────────────────── -->
+    <tr><td style="background-color:#fdfaf3; border-radius:10px; padding:30px 34px 8px;">
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">God morgon! Den här veckan är fysikens under lika mycket kosmiska som vardagliga. Djupt i Neptunus gömmer sig is som är över 2&nbsp;600 kelvin varm och ändå håller sin fasta form, en cyklist rullar i väg innan startskottet utan att det räknas som tjuvstart, och en atom byggd av antimateria skjuts genom flytande helium i 2&nbsp;180 meter i sekunden.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Här är veckans fynd, och det senaste från sajten.</p>
+
+      <!-- ── VECKANS FYSIK ──────────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:26px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Veckans fysik</div>
+      </div>
+
+      <!-- Hjältebild + huvudnyhet -->
+      <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-13-het-is-under-tryck" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-09-20-het-is-hero.jpg" width="532" alt="Neptunus i blått mot rymdens mörker, fotograferad av rymdsonden Voyager 2" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 18px;">Foto: NASA/JPL (Voyager 2, allmän egendom), via Wikimedia Commons</div>
+
+      <h2 style="font-family:Georgia,'Times New Roman',serif; font-size:22px; line-height:1.35; color:#0f1620; margin:0 0 10px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-13-het-is-under-tryck" style="color:#0f1620; text-decoration:none;">Isen som är glödhet, men ändå fast</a></h2>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;">Djupt i Uranus och Neptunus finns vatten i ett tillstånd som varken är vätska eller vanlig is: syreatomerna sitter kvar i ett fast gitter medan vätekärnorna forsar fritt mellan dem. Ett franskt forskarlag klämde is mellan två diamanter, hettade den till över 2&nbsp;600 kelvin, och såg gittret plötsligt hoppa om till ett helt nytt mönster, ett som kan ligga bakom varför Neptunus magnetfält lutar så konstigt mot planetens rotationsaxel.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; margin:0 0 26px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-13-het-is-under-tryck" style="color:#2563a8; text-decoration:underline;">Läs artikeln &rarr;</a></p>
+
+      <!-- Miniatyrrad: två nyheter till -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="48%" valign="top" style="padding-right:10px;">
+            <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-17-starten-som-redan-rullar" style="text-decoration:none;">
+              <img src="https://fysiklabbet.se/nyheter/brev/2026-09-20-cykel-thumb.jpg" width="250" alt="Cyklister i tempolopp startar från startgrindar på en bana" style="display:block; width:100%; height:auto; border-radius:8px; border:0;">
+            </a>
+            <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:7px 0 0;">Foto: Nicola (CC&nbsp;BY-SA&nbsp;3.0), via Wikimedia Commons</div>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.55; color:#0f1620; margin:10px 0 4px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-17-starten-som-redan-rullar" style="color:#0f1620; text-decoration:none;"><strong>Tjuvstarten som inte är en.</strong></a> Ett tempolopp börjar med bakhjulet fastlåst i en startgrind, ändå passerade en åkare startlinjen i 0,4&nbsp;meter i sekunden. Franska forskare visar att farten kommer från kroppen, inte pedalerna.</p>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; margin:0;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-17-starten-som-redan-rullar" style="color:#2563a8; text-decoration:underline;">Läs mer &rarr;</a></p>
+          </td>
+          <td width="48%" valign="top" style="padding-left:10px;">
+            <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-16-atomen-som-skjuts-ur-heliumet" style="text-decoration:none;">
+              <img src="https://fysiklabbet.se/nyheter/brev/2026-09-20-myonium-thumb.jpg" width="250" alt="En experimenthall med rör och magneter vid Paul Scherrer-institutet" style="display:block; width:100%; height:auto; border-radius:8px; border:0;">
+            </a>
+            <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:7px 0 0;">Foto: Sch&ouml;lla Schwarz (CC&nbsp;BY&nbsp;3.0), via Wikimedia Commons</div>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.55; color:#0f1620; margin:10px 0 4px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-16-atomen-som-skjuts-ur-heliumet" style="color:#0f1620; text-decoration:none;"><strong>Antimateria med toppfart.</strong></a> Myonium, en atom byggd kring en antimyon, lever bara miljondels sekunder. Fysiker i Schweiz får nu atomerna att lämna flytande helium samlade i en stråle, med sikte på att testa om tyngdkraften drar lika i antimateria.</p>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; margin:0;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-16-atomen-som-skjuts-ur-heliumet" style="color:#2563a8; text-decoration:underline;">Läs mer &rarr;</a></p>
+          </td>
+        </tr>
+      </table>
+
+      <!-- LÄS ÄVEN: veckans nyheter som inte lyfts ovan -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:26px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Läs även</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; line-height:1.9; color:#0f1620; margin:0;">
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-14-lysdioden-som-slipper-fanga-sitt-ljus" style="color:#2563a8; text-decoration:underline;">Lunds nanoträd släpper ljuset ut ur lysdioden</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-15-kedjan-som-bara-finns-i-en-dimension" style="color:#2563a8; text-decoration:underline;">Bethe-strängar byggda 95 år efter förutsägelsen</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-18-tystnaden-under-berget" style="color:#2563a8; text-decoration:underline;">Sökandet efter rumtidens darrningar gav tystnad</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-19-skummet-som-minns" style="color:#2563a8; text-decoration:underline;">Skummet som minns exakt hur hårt det klämdes</a>
+      </p>
+
+
+      <!-- ── NYTT PÅ FYSIKLABBET ────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Nytt på Fysiklabbet</div>
+      </div>
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;"><strong>Brytningslagen har fått en ny scen.</strong> <a href="https://fysiklabbet.se/fysik2-brytning-app.html" style="color:#2563a8;">Simuleringen om ljusets brytning</a> är omritad i sajtens laborantema: glasblocket ligger på rutat papper med en kall blå ton som blir djupare ju högre brytningsindex du väljer, och laserstrålen har en mörk kärna med ljust mittsken så att både den gröna och röda strålen syns tydligt. Dra i laserpennan, byt material och hitta gränsvinkeln för totalreflektion mellan glas och luft.</p>
+
+      <a href="https://fysiklabbet.se/fysik2-brytning-app.html" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-09-20-brytning.jpg" width="600" alt="En grön laserstråle bryts från luft in i ett glasblock på rutat papper, med svaga reflekterade strålar vid gränsytorna" style="display:block; width:100%; max-width:600px; height:auto; border-radius:8px; border:0; margin:0 0 6px;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:0 0 20px;">Lasern bryts vid varje gränsyta, med de svaga reflekterade strålarna synliga bredvid. Klicka för att prova själv.</div>
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;"><strong>Bilen har fått en riktig väg att köra på.</strong> <a href="https://fysiklabbet.se/katalog.html?id=fy2-1.5" style="color:#2563a8;">Cirkulär rörelse</a> har fått två nya situationer: en bilbana ovanifrån med en vid och en snäv kurva, där friktionskraften växer i den snävare svängen, och en väg med krön och dal där normalkraften minskar på krönet, så att bilen lättar från vägen om farten blir för hög.</p>
+
+      <a href="https://fysiklabbet.se/katalog.html?id=fy2-1.5" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-09-20-cirkular-bana.jpg" width="600" alt="En bil sedd ovanifrån i en snäv kurva på en bilbana, med en orange kraftpil in mot kurvans centrum och texten Snäva kurvan: friktionen ger centripetalkraften" style="display:block; width:100%; max-width:600px; height:auto; border-radius:8px; border:0; margin:0 0 6px;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:0 0 20px;">I den snäva kurvan är det friktionen som håller bilen kvar på banan. Klicka för att öppna simuleringen.</div>
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 20px;"><strong>Alla kurser har nu pennlösningar.</strong> <a href="https://fysiklabbet.se/katalog.html?id=ma4" style="color:#2563a8;">Matematik fortsättning nivå 2</a>, nivå 1c och Matematik 2c fick sina sista handskrivna lösningar under veckan. Därmed löses uppgifterna i varenda kurs på sajten steg för steg med penna på rutat papper, inte bara i text.</p>
+
+      <!-- ── VECKANS TIPS ───────────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Veckans tips</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 8px;">Har du sett att varje avsnitt har <a href="https://fysiklabbet.se/katalog.html?id=ma1c-2.7:ovningar" style="color:#2563a8;">övningar i tre nivåer</a>, N1 till N3, kalibrerade mot kursprovens svårighetsgrad, med fullständig lösning till varje uppgift? Den här veckan fick till exempel ekvationer med nämnare sju helt nya uppgifter på den svåraste nivån, praktiskt inför nästa prov oavsett vilket avsnitt du läser just nu.</p>
+
+      <!-- ── NÄSTA VECKA ────────────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Nästa vecka</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Ur nyhetskön väntar vatten som aldrig hinner bli is. Stängt i nanotunna skikt mellan fettmolekyler kristalliserar det inte, utan glider i stället över i glasform, i ett mycket bredare temperaturspann än väntat. Vi läser på.</p>
+
+      <!-- ── Avslut ─────────────────────────────────────────── -->
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:26px 0 4px;">Tack för att du läste ända hit. Vi hörs om en vecka.</p>
+      <p style="font-family:Georgia,'Times New Roman',serif; font-size:17px; color:#0f1620; margin:0 0 30px;">/ Fysiklabbet</p>
+
+    </td></tr>
+
+    <!-- ── Sidfot ───────────────────────────────────────────── -->
+    <!-- {{UnsubscribeURL}}, {{SenderInfo}} och {{RewardsURL}} krävs av
+         EmailOctopus i egen HTML. Ta inte bort dem. -->
+    <tr><td align="center" style="padding:20px 8px 0;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); padding-bottom:12px;"><a href="https://fysiklabbet.se" style="color:rgba(15,22,32,0.5);">fysiklabbet.se</a> &middot; Interaktiva simuleringar, teori och övningar i fysik och matematik</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.5); padding-bottom:6px;">Du får det här brevet för att du prenumererar på Fysiklabbets nyhetsbrev. <a href="{{UnsubscribeURL}}" style="color:rgba(15,22,32,0.5); text-decoration:underline;">Avsluta prenumerationen</a>.</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.45); padding-bottom:6px;">{{SenderInfo}}</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:11px; color:rgba(15,22,32,0.4);"><a href="{{RewardsURL}}" style="color:rgba(15,22,32,0.4); text-decoration:underline;">Powered by EmailOctopus</a></div>
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>
+
+</body>
+</html>

@@ -36,9 +36,10 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   Fysiklabbet" i brevet 2026-08-30 ("Text i valfri storlek på projektorn"),
   länkad till `https://fysiklabbet.se/katalog.html?id=fy2-1.2`.
 
-- **Brytningslagen i nytt utseende: SKA NÄMNAS i brevet 2026-09-20** under
-  "Nytt på Fysiklabbet" (uttryckligt önskemål från användaren 2026-09-14,
-  ingen teaser utan en riktig punkt med skärmdump av scenen). Simuleringen
+- **Brytningslagen i nytt utseende.** **[AVKLARAT 2026-09-20]** Nämnd under
+  "Nytt på Fysiklabbet" i brevet 2026-09-20, med skärmdump av scenen
+  (reflekterade strålar påslagna), länkad till
+  `https://fysiklabbet.se/fysik2-brytning-app.html`. Simuleringen
   `https://fysiklabbet.se/fysik2-brytning-app.html` har ritats om i sajtens
   laboranstema: scenen ligger på rutat papper, glasblocket har en kall blå
   ton som är tätast vid de polerade ytorna, en sned glasreflex och en tunn

@@ -11,6 +11,88 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-09-20 — "Is som är glödhet, men ändå fast"
+- Status: UTKAST skrivet 2026-09-19 (lördag, inom 08.00-deadline, körd som
+  schemalagd routine). Tänkt utskick söndag 2026-09-20 kl 06.00 svensk tid.
+  Brevperiod (nyheter) 2026-09-13 till 2026-09-19 (sju artiklar, alla sju
+  länkade, ingen utelämnad); sajtuppdateringar sedan förra brevets datum
+  2026-09-13 (git log --since="2026-09-13" origin/main, cirka 90 commits).
+  `node .claude/verify-nyhetsbrev.js 2026-09-20` gav inga fel (bara en
+  längdvarning, ~700 ord mot riktvärdet 250–450, motiverat av en ovanligt
+  innehållsrik vecka).
+- **OBS lokal main-cache var stale vid sessionsstart:** den grunda klonens
+  `main`-ref pekade på 2026-09-12 och `main`/`HEAD` såg ut att sakna
+  gemensam historik (`git merge-base` gav tomt), vilket först såg ut som att
+  en veckas sajtarbete aldrig nått main. `git fetch origin main` visade att
+  origin/main faktiskt var uppdaterad (forced update i fetch-utskriften) och
+  matchade sessionens branch-spets (`8029887`, dagens nyhet) — falskt larm,
+  bara den lokala cachen som var för gammal. Räkna git log mot `origin/main`
+  i molnsessioner, inte den lokala `main`-refen, om historiken ser
+  orimlig ut.
+- **CDN-blockeringen kringgicks igen** (unpkg/cdn.tailwindcss 403 i
+  agentproxyn, npm-registret öppet): react/react-dom/@babel-standalone
+  installerade lokalt via npm, CDN-anropen fångade med `page.route()` i
+  Playwright (chromium på /opt/pw-browsers/chromium, `playwright`-paketet
+  fanns redan globalt under /opt/node22). Tailwind fylldes tomt (scenens
+  egen inline-CSS räcker för en beskuren scen-skärmdump; resten av sidans
+  trasiga layout syns aldrig i brevet). Två sajtbilder togs så:
+  brytningslagens scen (default n1=1,00/n2=1,52, "Visa reflekterade
+  strålar" påslagen) och Cirkulär rörelse (läget "Bilbana med kurvor"
+  klickat fram, väntat in bilen i den snäva kurvan så friktionspilen och
+  rubriken "Snäva kurvan: friktionen ger centripetalkraften" syns).
+  Beskurna/nedskalade med Pillow till nyheter/brev/2026-09-20-brytning.jpg
+  och -cirkular-bana.jpg (1200 px breda).
+- Nyheter: 2026-09-13-het-is-under-tryck (hjälte, bedömd mest
+  häpnadsväckande: is djupt i Neptunus som är över 2 600 kelvin och ändå
+  håller fast form, kopplat till varför Neptunus magnetfält lutar snett),
+  2026-09-17-starten-som-redan-rullar (miniatyr: en tempolopps-tjuvstart som
+  inte räknas som tjuvstart) + 2026-09-16-atomen-som-skjuts-ur-heliumet
+  (miniatyr: myoniumstråle ur superfluid helium, gravitationstest på
+  antimateria). Läs även: 2026-09-14-lysdioden-som-slipper-fanga-sitt-ljus
+  (detta var förra brevets [BREVTEASER], infriat inom fönstret måndag till
+  lördag, nämnt utan att peka tillbaka på att det var teasat),
+  2026-09-15-kedjan-som-bara-finns-i-en-dimension (Bethe-strängar),
+  2026-09-18-tystnaden-under-berget (test av rumtidsdarrningar, nollresultat),
+  2026-09-19-skummet-som-minns (dagens artikel, publicerad 03:15 samma
+  morgon, obligatorisk enligt uppdraget). Samtliga sju artiklar i
+  brevperioden listade, ingen utelämnad.
+- Nytt på sajten: Brytningslagens nya scen i laborantema (uttryckligt
+  önskemål i planerat.md, nu avklarat), Cirkulär rörelses två nya
+  situationer (bilbana med kurvor, krön och dal), milstolpen att ALLA
+  kurser nu har pennlösningar (ma4/ma3c/ma2c färdiga under veckan). Bortvalt
+  för utrymmets skull: de utskriftsklara övningsbladen (nytt kort i
+  katalogen, fem blad i ekvationslösning, Ma 1) och enhetskollarnas
+  laborantema-omdesign, ordlistans interna omstrukturering, adressfältets
+  navigering, samt flera mindre pennlösnings- och sammanfattningsredigeringar.
+- Bilder: nyheter/brev/2026-09-20-het-is-hero.jpg (beskärning av befintlig
+  nyhetsbild, 1200 px), -cykel-thumb.jpg och -myonium-thumb.jpg (kvadratiska
+  500 px-beskärningar av befintliga nyhetsbilder). Sajtbilder:
+  -brytning.jpg och -cirkular-bana.jpg (se ovan). Alla beskurna/nedskalade
+  med Pillow (installerad i sessionen).
+- Veckans tips: Övningar i tre nivåer (N1–N3), aldrig tipsat förut, krok:
+  veckans sju nya N3-uppgifter i ekvationer med nämnare (ma1c-2.7). Daterat
+  2026-09-20 i tips.md.
+- Teaser: nyhetskö-uppslaget om vatten som stängs in i nanotunna skikt
+  mellan fettmolekyler och glider över i glasform i stället för att
+  kristallisera (fasövergångar/glasövergång-ingång), avslutat med "Vi läser
+  på." Uppslaget låg redan överst i ko.md, märkt [BREVTEASER] sedan
+  2026-09-04, ingen flytt behövdes. Kontrollerat att det inte redan
+  publicerats (grep på "glasövergång", "lipidmembran", "aldrig blir is" i
+  data/nyheter.js och publicerat.md, enda träffen är en annan artikel som
+  själv noterar att detta uppslag är fryst till efter brevet 2026-09-20).
+- Förhandsvisning: hela brevet renderat till JPEG (600 px bredd) via
+  headless Chromium (playwright) mot dev-servern, med bildernas URL:er
+  tillfälligt omdirigerade till lokala repo-sökvägar i en kopia under
+  .shots/ (utkastfilen behåller de absoluta fysiklabbet.se-adresserna).
+  Skickad till användaren med SendUserFile.
+- ÅTERSTÅR för användaren: (1) granska utkastet, (2) lägga upp i
+  EmailOctopus och schemalägga till söndag 06.00 svensk tid (tidszonen
+  default:ar till London, 06.00 där blir 07.00 svensk tid;
+  `/brev-till-octopus` måste köras lokalt, molnsessionen saknar
+  Chrome-åtkomst till EmailOctopus), (3) kontrollera att bilderna i
+  nyheter/brev/ syns live på fysiklabbet.se innan utskick (pushade till
+  main i den här sessionen, men GitHub Pages-deployen tar en liten stund).
+
 ## 2026-09-13 — "En foton som inte borde ha nått fram"
 - **UPPLAGD i EmailOctopus 2026-09-12** (lokal session) som kampanjen
   "Nyhetsbrev nr 5 - 2026-09-13": avsändare Fysiklabbet

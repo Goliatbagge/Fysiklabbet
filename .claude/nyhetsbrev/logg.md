@@ -108,6 +108,13 @@ Format:
   stället för ma3c. "Kursprovens svårighetsgrad" i veckans tips står kvar,
   det är det nationella provets namn. Kampanjen uppdaterad i EmailOctopus och
   ett nytt testmejl skickat samma dag.
+- SCHEMALAGD 2026-09-19 till söndag 2026-09-20 kl 06.00, tidszon
+  (UTC+02.00) Stockholm, till alla 23 prenumeranter. Schemaläggningen gjordes
+  av sessionen på användarens uttryckliga begäran (annars är den alltid
+  användarens egen knapp, se /brev-till-octopus). Tidszonen stod redan på
+  Stockholm den här gången, inte London som brukar vara standard, så ingen
+  omräkning behövdes. Går att ångra med "Cancel scheduled send" på kampanjens
+  statussida fram till utskicket.
 
 ## 2026-09-13 — "En foton som inte borde ha nått fram"
 - **UPPLAGD i EmailOctopus 2026-09-12** (lokal session) som kampanjen

@@ -303,7 +303,8 @@ window.NP_PROV['ma2c-vt2022'] = {
                     rubrik: 'Logaritmera båda led',
                     varfor: 'Det obekanta står i exponenten. Tiologaritmen plockar ned exponenten ' +
                         'som en faktor: $\\lg 5^x = x \\cdot \\lg 5$.',
-                    text: '$$5^x = 7 \\quad \\Longleftrightarrow \\quad x \\cdot \\lg 5 = \\lg 7$$',
+                    text: '$$5^x = 7 \\quad \\Longleftrightarrow \\quad \\lg 5^x = \\lg 7 ' +
+                        '\\quad \\Longleftrightarrow \\quad x \\cdot \\lg 5 = \\lg 7$$',
                 },
                 {
                     del: 'a',
@@ -1076,7 +1077,8 @@ window.NP_PROV['ma2c-vt2022'] = {
                     rubrik: 'Logaritmera och lös ut t',
                     varfor: 'Det obekanta står i exponenten, så vi logaritmerar båda led. ' +
                         'Logaritmlagen $\\lg a^t = t \\cdot \\lg a$ plockar ned $t$.',
-                    text: '$$t \\cdot \\lg 1{,}06389\\ldots = \\lg \\dfrac{5000}{1411} \\quad \\Longleftrightarrow \\quad ' +
+                    text: '$$\\lg 1{,}06389\\ldots^{\\,t} = \\lg \\dfrac{5000}{1411} \\quad \\Longleftrightarrow \\quad ' +
+                        't \\cdot \\lg 1{,}06389\\ldots = \\lg \\dfrac{5000}{1411} \\quad \\Longleftrightarrow \\quad ' +
                         't = \\dfrac{\\lg \\frac{5000}{1411}}{\\lg 1{,}06389\\ldots} = 20{,}4\\ldots$$',
                 },
                 {

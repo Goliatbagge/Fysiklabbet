@@ -206,8 +206,8 @@ const FIG = {};
         g.push(line(G.px(0), G.py(3), G.px(1), G.py(3), { c: RED, w: 1.6, dash: '4 3', anim: aFade(BAS) }));
         g.push(line(G.px(1), G.py(3), G.px(1), G.py(5), { c: RED, w: 1.6, dash: '4 3', anim: aFade(BAS + 0.3) }));
         g.push(dot(G.px(1), G.py(5), { c: RED, r: 3.6, anim: aFade(BAS + 0.5) }));
-        g.push(txt(G.px(0.5), G.py(3) + 15, '1', { size: 11.5, fill: RED, anim: aFade(BAS + 0.2) }));
-        g.push(txt(G.px(1) + 8, G.py(4) + 4, '2', { size: 11.5, fill: RED, anchor: 'start', anim: aFade(BAS + 0.45) }));
+        g.push(txt(G.px(0.5) + 6, G.py(3) + 15, `Δ${it('x')} = 1`, { size: 11.5, fill: RED, anim: aFade(BAS + 0.2) }));
+        g.push(txt(G.px(1) + 8, G.py(4) + 4, `Δ${it('y')} = 2`, { size: 11.5, fill: RED, anchor: 'start', anim: aFade(BAS + 0.45) }));
         g.push(txt(G.px(2.2), G.py(5.3), `${it('k')} = 2`, { size: 12, fill: RED, anchor: 'start', anim: aFade(BAS + 0.7) }));
         FIG['u1-s2'] = svg(G.W, G.H, g.join(''));
     }

@@ -104,8 +104,10 @@
     T.acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]),
                   color: dcol || null });
     T.pause(130);
+    /* en egenritad nämnare med upphöjt innehåll sänks (sink, i F) så att
+     * exponenten inte når upp i bråkstrecket, som fracH gör för '^' */
     if (typeof den === 'string') T.str(den, x0 + (w - dw) / 2, ybar + 1.04 * F, dcol || null);
-    else den.draw(x0 + (w - dw) / 2, ybar + 1.04 * F);
+    else den.draw(x0 + (w - dw) / 2, ybar + (1.04 + (den.sink || 0)) * F);
     return x0 + w + 1.5;
   }
   /* CIRKEL ritad för hand och liten ifylld punkt */
@@ -149,6 +151,24 @@
     T.line([p1[0] + ux * h - nx * b, p1[1] + uy * h - ny * b], p1, col);
     T.line([p2[0] - ux * h + nx * b, p2[1] - uy * h + ny * b], p2, col);
     T.line([p2[0] - ux * h - nx * b, p2[1] - uy * h - ny * b], p2, col);
+  }
+  /* REGELNOT (användarkrav 2026-09-20): en regel som bara TILLÄMPAS i en
+   * rad (kvadreringsregeln, konjugatregeln, logaritmlagen) poppar upp som
+   * blå Poppins-text ovanför raden medan raden skrivs, och tonar bort när
+   * raden är klar. Metodrubriker som ska stå kvar (pq-formeln, Pythagoras
+   * sats, Likformiga trianglar) skrivs fortfarande som liten grå rubrik.
+   * Noten är ren text, inget bläck. */
+  function regelNot(T, F, text, x, yb) {
+    var n = { note: 1, x: x, y: yb, fs: 17, text: text, anchor: 'start',
+              color: BLUE, wins: [] };
+    T.acts.push({ kind: 'show', obj: n });
+    T.pause(420);
+    return n;
+  }
+  function regelGom(T, n) {
+    T.pause(320);
+    T.acts.push({ kind: 'hide', obj: n });
+    T.pause(200);
   }
   /* liten etikett i figur: centrerad i x, given baslinje */
   function lblC(T, F, s, xc, yb, col, sc) {
@@ -194,17 +214,19 @@
     /* steg 3: k med trappsteg */
     tanke(y, [
       [['k är hur mycket y ändras när x']],
-      [['ökar med 1. Ett steg åt höger']],
-      [['från (0, 3) ligger linjen i']],
-      [['(1, 5): två steg upp.']]
+      [['ökar med 1. Från (0, 3) går jag']],
+      [['ett steg åt höger, Δx=1, och']],
+      [['upp till linjen: Δy=2.']]
     ]);
-    ax.stair(0, 3, 1, 5, '1', '2');
+    /* måttet Δx=1 är bredare än steget: knuffas till stegets högra ände,
+     * så att det inte skär y-axeln */
+    ax.stair(0, 3, 1, 5, 'Δx=1', 'Δy=2', { dxOff: [24, 0] });
     T.pause(200);
     y += 3.4 * F;
     xx = T.str('k=', padL, y);
     xx = T.fracH('Δy', 'Δx', xx, y);
     xx = T.str('=', xx, y);
-    xx = T.fracH('5-3', '1-0', xx, y);
+    xx = T.fracH('2', '1', xx, y);
     T.str('=2', xx, y);
     T.stepEnd();
 
@@ -267,7 +289,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: nollställen', padL, y);
+    xe = T.str('Svar: Nollställen', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -284,7 +306,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar b: symmetrilinje', padL, y);
+    xe = T.str('Svar: Symmetrilinje', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -301,7 +323,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar c: minimipunkt', padL, y);
+    xe = T.str('Svar: Minimipunkt', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -358,7 +380,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: 9', padL, y);
+    xe = T.str('Svar: 9', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -379,7 +401,7 @@
       [['smalast och högst, minst.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar b: kurva A', padL, y);
+    xe = T.str('Svar: Kurva A', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -395,7 +417,7 @@
    * väggen (cfg.vagg), med samma antal klicksteg. */
   reg(4, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
-    var tanke = mkTanke(T), multIn = mkMultIn(T);
+    var tanke = mkTanke(T), multIn = mkMultIn(T), samla = mkSamla(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
     var xwB = padL + 30 + T.adv('x^2-25=x^2+10x+25') + 0.9 * F;
     var xwC = padL + 30 + T.adv('x^2-1=−5') + 0.9 * F;
@@ -406,9 +428,17 @@
     T.stepEnd();
 
     tanke(y, [
-      [['x står i exponenten. Logaritmerar']],
-      [['jag båda led kommer exponenten']],
-      [['ned som en faktor: lg 8^x=x·lg 8.']]
+      [['x står i exponenten. Jag']],
+      [['logaritmerar båda led.']]
+    ]);
+    y += 2.6 * F;
+    T.str('lg 8^x=lg 15', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Logaritmlagen lg a^x=x·lg a']],
+      [['flyttar ned exponenten som']],
+      [['en faktor.']]
     ]);
     y += 2.6 * F;
     T.str('x·lg 8=lg 15', padL + 30, y);
@@ -425,7 +455,7 @@
     T.stepEnd();
 
     y += 3.4 * F;
-    xe = T.str('Svar a: x=', padL, y);
+    xe = T.str('Svar: x=', padL, y);
     xe = fracLift(T, F, 'lg 15', 'lg 8', xe, y);
     T.underline(xe, y + 0.95 * F);
     T.stepEnd();
@@ -441,9 +471,13 @@
       [['är en kvadrat: a^2+2ab+b^2.']],
       [['Här är a=x och b=5.']]
     ]);
-    y += 3.5 * F;
-    T.str('Konjugatregeln och kvadreringsregeln', padL, y - 1.45 * F, null, 0.62);
-    T.str('x^2-25=x^2+10x+25', padL + 30, y);
+    y += 3.6 * F;
+    var nK = regelNot(T, F, 'Konjugatregeln: (a + b)(a − b) = a² − b²', padL, y - 1.45 * F);
+    xx = T.str('x^2-25', padL + 30, y);
+    regelGom(T, nK);
+    var nQ = regelNot(T, F, 'Kvadreringsregeln: (a + b)² = a² + 2ab + b²', padL, y - 1.45 * F);
+    T.str('=x^2+10x+25', xx, y);
+    regelGom(T, nQ);
     T.stepEnd();
 
     tanke(y, [
@@ -477,7 +511,7 @@
       [['ledet. Stämmer.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar b: x=−5', padL, y);
+    xe = T.str('Svar: x=−5', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -515,73 +549,97 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar c: x=±2i', padL, y);
+    xe = T.str('Svar: x=±2i', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
-    /* ---- d) (x+3^x)² − 3^x(3^x+2x) = 9 ---- */
+    /* ---- d) (x+3^x)² − 3^x(3^x+2x) = 9 ----
+     * Hela ekvationen skrivs om rad för rad (REGEL HELA EKVATIONEN, se
+     * filhuvudet): kvadraten utvecklas med regelnoten uppe, produkten
+     * multipliceras in på samma rad med bågar, parentesen tas bort med
+     * blått teckenbyte, termerna som tar ut varandra ringas, och roten
+     * dras som egen rad. */
     y += 3.0 * F;
-    T.str('d) (x+3^x)^2-3^x(3^x+2x)=9', padL, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Första kvadreringsregeln med']],
-      [['a=x och b=3^x. Dubbla produkten']],
-      [['är 2x·3^x och (3^x)^2=3^2^x.']]
-    ]);
-    y += 3.5 * F;
-    T.str('Kvadreringsregeln: (a+b)^2=a^2+2ab+b^2', padL, y - 1.45 * F, null, 0.62);
-    T.str('(x+3^x)^2=x^2+2x·3^x+3^2^x', padL, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['3^x multipliceras med varje']],
-      [['term i parentesen: 3^x·3^x=3^2^x']],
-      [['och 3^x·2x=2x·3^x.']]
-    ]);
-    y += 2.8 * F;
-    var yK = y;
-    var f0 = padL; xx = T.str('3^x', padL, y); var f1 = xx;
+    var yD = y;
+    xx = T.str('d) (x+3^x)^2-', padL, y);
+    var f0 = xx; xx = T.str('3^x', xx, y); var f1 = xx;
     xx = T.str('(', xx, y);
     var t0 = xx; xx = T.str('3^x', xx, y); var t1 = xx;
     var u0 = xx; xx = T.str('+2x', xx, y); var u1 = xx;
-    xx = T.str(')', xx, y);
-    T.stepEnd();
-
-    y += 2.6 * F;
-    xx = T.str('=', padL + 30, y);
-    multIn(xx, y, yK - 0.95 * F, [
-      { fran: [f0, f1], till: [t0, t1], skriv: '3^2^x', hojd: 26 },
-      { fran: [f0, f1], till: [u0, u1], skriv: '+2x·3^x', hojd: 42, dx: 4 }
-    ]);
+    T.str(')=9', xx, y);
     T.stepEnd();
 
     tanke(y, [
-      [['Nu sätter jag in båda']],
-      [['utvecklingarna i ekvationen:']],
-      [['kvadraten minus produkten.']]
+      [['Första kvadreringsregeln på']],
+      [['(x+3^x)^2, med a=x och b=3^x:']],
+      [['dubbla produkten är 2x·3^x och']],
+      [['(3^x)^2=3^2^x.']]
+    ]);
+    y += 3.6 * F;
+    var nQ = regelNot(T, F, 'Kvadreringsregeln: (a + b)² = a² + 2ab + b²', padL, y - 1.45 * F);
+    xx = T.str('x^2+2x·3^x+3^2^x', padL, y);
+    regelGom(T, nQ);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvar är −3^x(3^x+2x). Jag behåller']],
+      [['minustecknet och parentesen och']],
+      [['multiplicerar in 3^x: 3^x·3^x=3^2^x']],
+      [['och 3^x·2x=2x·3^x.']]
+    ]);
+    xx = T.str('-(', xx, y);
+    xx = multIn(xx, y, yD - 0.95 * F, [
+      { fran: [f0, f1], till: [t0, t1], skriv: '3^2^x', hojd: 26 },
+      { fran: [f0, f1], till: [u0, u1], skriv: '+2x·3^x', hojd: 42, dx: 4 }
+    ]);
+    T.str(')=9', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Minus framför parentesen byter']],
+      [['tecken på varje term inuti:']],
+      [['+3^2^x blir −3^2^x och +2x·3^x']],
+      [['blir −2x·3^x.']]
     ]);
     y += 2.6 * F;
-    T.str('x^2+2x·3^x+3^2^x-3^2^x-2x·3^x=9', padL, y);
+    var yS = y;
+    xx = T.str('x^2', padL, y);
+    var b0 = xx; xx = T.str('+2x·3^x', xx, y); var b1 = xx;
+    var c0 = xx; xx = T.str('+3^2^x', xx, y); var c1 = xx;
+    var d0 = xx; xx = T.str('-', xx, y, BLUE); xx = T.str('3^2^x', xx, y); var d1 = xx;
+    var e0 = xx; xx = T.str('-', xx, y, BLUE); xx = T.str('2x·3^x', xx, y); var e1 = xx;
+    T.str('=9', xx, y);
     T.stepEnd();
 
     tanke(y, [
       [['3^2^x-3^2^x=0 och 2x·3^x-2x·3^x=0:']],
-      [['allt utom x^2 tar ut varandra.']]
+      [['termerna tar ut varandra parvis.']],
+      [['Kvar blir bara x^2.']]
     ]);
-    y += 2.4 * F;
-    T.str('x^2=9', padL + 30, y);
+    y += 2.6 * F;
+    samla(padL + 30, y, [
+      { skriv: 'x^2' },
+      { ringar: [[b0 + T.adv('+'), b1, yS], [e0, e1, yS]], skriv: '' },
+      { ringar: [[c0 + T.adv('+'), c1, yS], [d0, d1, yS]], skriv: '' },
+      { skriv: '=9' }
+    ]);
     T.stepEnd();
 
     tanke(y, [
-      [['Både 3 och −3 har kvadraten 9.']]
+      [['Roten ur båda led. Både 3 och −3']],
+      [['har kvadraten 9, så det blir ±.']]
     ]);
-    y += 2.4 * F;
+    y += 2.6 * F;
+    xx = T.str('x=±', padL + 30, y);
+    T.rot('9', xx + 0.08 * F, y);
+    T.stepEnd();
+
+    y += 2.5 * F;
     T.str('x=±3', padL + 30, y);
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar d: x=±3', padL, y);
+    xe = T.str('Svar: x=±3', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -593,7 +651,7 @@
    * Logaritmlagen lg x^n = n·lg x flyttar ned exponenterna, lg 3 bryts
    * ut och faktorerna framför lg 3 jämförs: a − b = 8. Ett exempel väljs. */
   reg(5, function (cfg, F) {
-    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
 
     y = 118;
@@ -605,9 +663,10 @@
       [['flyttar ned exponenterna som']],
       [['faktorer framför lg 3.']]
     ]);
-    y += 3.5 * F;
-    T.str('Logaritmlagen: lg x^n=n·lg x', padL, y - 1.45 * F, null, 0.62);
+    y += 3.6 * F;
+    var nL = regelNot(T, F, 'Logaritmlagen: lg xⁿ = n · lg x', padL, y - 1.45 * F);
     T.str('a·lg 3-b·lg 3=8·lg 3', padL + 30, y);
+    regelGom(T, nL);
     T.stepEnd();
 
     tanke(y, [
@@ -616,17 +675,25 @@
       [['bryter ut den.']]
     ]);
     y += 2.4 * F;
-    T.str('(a-b)·lg 3=8·lg 3', padL + 30, y);
+    var yJ = y;
+    var g0 = padL + 30; xx = T.str('(a-b)', g0, y); var g1 = xx;
+    xx = T.str('·lg 3=', xx, y);
+    var h0 = xx; xx = T.str('8', xx, y); var h1 = xx;
+    T.str('·lg 3', xx, y);
     T.stepEnd();
 
+    /* jämförelsen: de två faktorerna framför lg 3 ringas in innan
+     * slutsatsen skrivs (REGEL JÄMFÖRELSE MED RINGAR) */
     tanke(y, [
       [['Båda led är ett tal gånger lg 3,']],
       [['och lg 3 är inte noll. Likheten']],
       [['gäller precis när talen framför']],
       [['är lika.']]
     ]);
+    var ringJ = substRings(acts, [[g0, g1, yJ, F], [h0, h1, yJ, F]]);
     y += 2.4 * F;
     T.str('a-b=8', padL + 30, y);
+    fadeRings(acts, ringJ);
     T.stepEnd();
 
     tanke(y, [
@@ -635,7 +702,7 @@
       [['Kontroll: 10·lg 3-2·lg 3=8·lg 3.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: till exempel a=10 och b=2', padL, y);
+    xe = T.str('Svar: Till exempel a=10 och b=2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -731,13 +798,27 @@
     T.fracH('1', '3', xx, y);
     T.stepEnd();
 
+    /* två omskrivningar av potensen, en per rad (REGEL POTENSER SKRIVS OM
+     * ETT STEG I TAGET): först bort med minustecknet i exponenten, sedan
+     * exponenten 1/2 som rottecken */
     tanke(y, [
-      [['Negativ exponent betyder']],
-      [['inverterat tal, och exponenten']],
-      [['1/2 betyder kvadratrot:']],
-      [['x^(−1/2) är 1 delat med √x.']]
+      [['En negativ exponent betyder']],
+      [['inverterat tal: x^(−1/2) är 1']],
+      [['delat med x^(1/2).']]
     ], 1.05);
-    y += 3.6 * F;
+    y += 3.8 * F;
+    var denP = { w: T.adv('x^') + T.fracSupW('1', '2'), sink: 0.34,
+                 draw: function (x, yy) { T.fracSup('1', '2', T.str('x^', x, yy), yy); } };
+    xx = fracCustom(T, F, '1', denP, padL + 30, y);
+    xx = T.str('=', xx, y);
+    T.fracH('1', '3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 1/2 betyder']],
+      [['kvadratrot: x^(1/2) är √x.']]
+    ], 1.2);
+    y += 3.8 * F;
     var den = { w: T.rotW('x'), draw: function (x, yy) { T.rot('x', x, yy); } };
     xx = fracCustom(T, F, '1', den, padL + 30, y);
     xx = T.str('=', xx, y);
@@ -789,27 +870,37 @@
 
     tanke(y, [
       [['Varje månad multipliceras värdet']],
-      [['med 0,95. Efter n månader har']],
-      [['det skett n gånger.']]
+      [['med 0,95: en gång efter en']],
+      [['månad, två gånger efter två.']]
     ]);
     y += 3.5 * F;
-    T.str('Efter n månader', padL, y - 1.45 * F, null, 0.62);
-    T.str('32 997·0,95^n', padL, y);
+    T.str('Efter 1 månad', padL, y - 1.45 * F, null, 0.62);
+    T.str('32 997·0,95', padL, y);
+    T.stepEnd();
+
+    y += 3.5 * F;
+    T.str('Efter 2 månader', padL, y - 1.45 * F, null, 0.62);
+    T.str('32 997·0,95^2', padL, y);
     T.stepEnd();
 
     tanke(y, [
-      [['Funktionen ska ha tiden i år.']],
-      [['Ett år är 12 månader, så t år']],
-      [['är 12t månader.']]
+      [['Ett år är 12 månader, så efter']],
+      [['ett år har värdet multiplicerats']],
+      [['med 0,95 tolv gånger.']]
     ]);
-    y += 2.6 * F;
-    T.str('n=12t', padL + 30, y);
+    y += 3.5 * F;
+    T.str('Efter 12 månader, alltså 1 år', padL, y - 1.45 * F, null, 0.62);
+    T.str('32 997·0,95^1^2', padL, y);
     T.stepEnd();
 
     tanke(y, [
-      [['Jag sätter in 12t i exponenten.']]
+      [['Antalet månader är 12 gånger']],
+      [['antalet år: 2 år är 24 månader,']],
+      [['t år är 12·t månader. Exponenten']],
+      [['är antalet månader.']]
     ]);
-    y += 2.6 * F;
+    y += 3.5 * F;
+    T.str('Efter t år, alltså 12·t månader', padL, y - 1.45 * F, null, 0.62);
     T.str('V(t)=32 997·0,95^1^2^t', padL, y);
     T.stepEnd();
 
@@ -854,7 +945,7 @@
       [['och samma m. Jag löser ut y.']]
     ]);
     y += 3.2 * F;
-    T.str('Första ekvationen', padL, y - 1.45 * F, null, 0.62);
+    T.str('Löser ut y ur första ekvationen', padL, y - 1.45 * F, null, 0.62);
     T.str('3y-2Ax=9', padL + 30, y);
     T.stepEnd();
 
@@ -882,7 +973,7 @@
       [['jag 6 från båda led.']]
     ], 1.05);
     y += 4.4 * F;
-    T.str('Andra ekvationen', padL, y - 1.45 * F, null, 0.62);
+    T.str('Löser ut y ur andra ekvationen', padL, y - 1.45 * F, null, 0.62);
     T.str('6-2y=6Bx', padL + 30, y);
     T.stepEnd();
 
@@ -904,7 +995,7 @@
       [['samma linje om också k är lika.']]
     ]);
     y += 3.6 * F;
-    T.str('Samma k', padL, y - 1.45 * F, null, 0.62);
+    T.str('Samma linje kräver samma k', padL, y - 1.45 * F, null, 0.62);
     xx = T.fracH('2A', '3', padL + 30, y);
     T.str('=−3B', xx, y);
     T.stepEnd();
@@ -1054,7 +1145,7 @@
       [['och z päronens.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar a: kilopriset för röda äpplen', padL, y);
+    xe = T.str('Svar: Kilopriset för röda äpplen', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1195,7 +1286,7 @@
       [['ska säga vad som kostar vad.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar b: röda äpplen 18 kr/kg,', padL, y);
+    xe = T.str('Svar: Röda äpplen 18 kr/kg,', padL, y);
     T.underline(xe, y);
     y += 1.9 * F;
     xe = T.str('gröna äpplen 16 kr/kg och', padL, y);
@@ -1288,10 +1379,9 @@
       [['Första kvadreringsregeln på']],
       [['(x+1)^2, med a=x och b=1.']]
     ]);
-    /* rubriken läggs högt: bågarna i nästa steg når ~50 px över raden */
-    y += 4.8 * F;
+    y += 3.6 * F;
     var yK = y;
-    T.str('Kvadreringsregeln: (a+b)^2=a^2+2ab+b^2', padL, y - 3.3 * F, null, 0.62);
+    var nQ = regelNot(T, F, 'Kvadreringsregeln: (a + b)² = a² + 2ab + b²', padL, y - 1.45 * F);
     xx = T.str('=', padL, y);
     var f0 = xx; xx = T.str('2', xx, y); var f1 = xx;
     xx = T.str('(', xx, y);
@@ -1304,6 +1394,7 @@
     var p0 = xx; xx = T.str('x', xx, y); var p1 = xx;
     var q0 = xx; xx = T.str('+4', xx, y); var q1 = xx;
     T.str(')', xx, y);
+    regelGom(T, nQ);
     T.stepEnd();
 
     tanke(y, [
@@ -1357,7 +1448,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: minsta värdet är 2', padL, y);
+    xe = T.str('Svar: Minsta värdet är 2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1436,7 +1527,7 @@
       [['på linjen y=4x/3+m.']]
     ], 1.05);
     y += 4.4 * F;
-    T.str('Punkten (1, −4) på linjen', padL, y - 1.45 * F, null, 0.62);
+    T.str('Sätter in punkten (1, −4) i y=kx+m', padL, y - 1.45 * F, null, 0.62);
     xx = T.str('−4=', padL + 30, y);
     xx = T.fracH('4', '3', xx, y);
     T.str('·1+m', xx, y);
@@ -1538,7 +1629,7 @@
       [['roten ur.']]
     ], 1.2);
     y += 4.4 * F;
-    T.str('Saknar reella rötter om', padL, y - 1.9 * F, null, 0.62);
+    T.str('Reella rötter saknas om talet under roten är negativt', padL, y - 1.9 * F, null, 0.62);
     xx = T.parenFrac('c', '2', '2', padL + 30, y);
     T.str('-(3-c)<0', xx, y);
     T.stepEnd();
@@ -1582,7 +1673,7 @@
       [['p=4 och q=−12.']]
     ]);
     y += 3.6 * F;
-    T.str('Nollställen', padL, y - 1.45 * F, null, 0.62);
+    T.str('Nollställen till c^2+4c-12', padL, y - 1.45 * F, null, 0.62);
     xx = T.str('c=−2±', padL + 30, y);
     xx = T.rot('4+12', xx + 0.08 * F, y);
     T.str('=−2±4', xx, y);
@@ -1681,7 +1772,7 @@
       [['skärningspunkter för x≤100.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: två gånger', padL, y);
+    xe = T.str('Svar: Två gånger', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1879,7 +1970,7 @@
     T.stepEnd();
 
     y += 2.6 * F;
-    xe = T.str('Svar: cirka 1 760 personer', padL, y);
+    xe = T.str('Svar: Cirka 1 760 personer', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2042,7 +2133,7 @@
       [['OQ^2?']]
     ]);
     y += 3.5 * F;
-    T.str('Pythagoras sats', padL, y - 1.45 * F, null, 0.62);
+    T.str('Prövar Pythagoras sats', padL, y - 1.45 * F, null, 0.62);
     T.str('OP^2+PQ^2=20+80=100=OQ^2', padL, y);
     T.stepEnd();
 
@@ -2117,7 +2208,7 @@
       [['stiger och böjer nedåt.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar a: figur E', padL, y);
+    xe = T.str('Svar: Figur E', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2160,7 +2251,7 @@
       [['y=−(x-5)^2 och y=−(x-5)^2-1.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar b: Nej, två, en eller ingen', padL, y);
+    xe = T.str('Svar: Nej, två, en eller ingen', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2180,7 +2271,7 @@
 
     /* väggen vid första raden når x>420: raden läggs under mobilzonen (y<210) */
     y = 236;
-    T.str('Skärning: samma y', padL, y - 1.45 * F, null, 0.62);
+    T.str('Skärning: kurvorna har samma y', padL, y - 1.45 * F, null, 0.62);
     T.str('−4x(x-2)=x-2', padL, y);
     T.stepEnd();
 
@@ -2274,7 +2365,7 @@
 
     /* raderna är breda: de läggs under mobilzonen (x>420, y<210) */
     y = 246;
-    T.str('60 % av 1990 års utsläpp', padL, y - 1.45 * F, null, 0.62);
+    T.str('Målet: 60 % av 1990 års utsläpp', padL, y - 1.45 * F, null, 0.62);
     T.str('0,60·7,29·10^7=4,374·10^7', padL, y);
     T.stepEnd();
 
@@ -2285,7 +2376,7 @@
       [['utsläppet år 2014.']]
     ]);
     y += 3.6 * F;
-    T.str('x = år efter 2014, faktor 0,98', padL, y - 1.45 * F, null, 0.62);
+    T.str('x = antal år efter 2014, faktorn 0,98 per år', padL, y - 1.45 * F, null, 0.62);
     T.str('5,44·10^7·0,98^x=4,374·10^7', padL, y);
     T.stepEnd();
 
@@ -2309,11 +2400,17 @@
 
     tanke(y, [
       [['x står i exponenten. Jag']],
-      [['logaritmerar båda led, och']],
-      [['lg a^x=x·lg a plockar ned x']],
-      [['som en faktor.']]
+      [['logaritmerar båda led.']]
     ], 1.05);
     y += 3.4 * F;
+    T.str('lg 0,98^x=lg 0,80404...', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Logaritmlagen lg a^x=x·lg a']],
+      [['plockar ned x som en faktor.']]
+    ]);
+    y += 2.6 * F;
     T.str('x·lg 0,98=lg 0,80404...', padL, y);
     T.stepEnd();
 
@@ -2341,7 +2438,7 @@
       [['5,44·0,80≈4,35, nära 4,374.']]
     ], 1.05);
     y += 3.4 * F;
-    xe = T.str('Svar: cirka 10,8 år (knappt 11 år)', padL, y);
+    xe = T.str('Svar: Cirka 10,8 år (knappt 11 år)', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2408,7 +2505,7 @@
       [['genom medelpunkten. Stämmer.']]
     ]);
     y += 2.5 * F;
-    xe = T.str('Svar a: y=−0,24x+41', padL, y);
+    xe = T.str('Svar: y=−0,24x+41', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2455,7 +2552,7 @@
       [['ett begränsat intervall.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar b: Ja, dödstalet kan inte bli', padL, y);
+    xe = T.str('Svar: Ja, dödstalet kan inte bli', padL, y);
     T.underline(xe, y);
     y += 1.9 * F;
     xe = T.str('mindre än 0, så modellen gäller bara', padL, y);
@@ -2669,7 +2766,7 @@
       [['är lika i båda.']]
     ]);
     y += 3.8 * F;
-    T.str('Likformiga trianglar', padL, y - 1.9 * F, null, 0.62);
+    T.str('Likformiga trianglar: bas genom höjd är lika', padL, y - 1.9 * F, null, 0.62);
     xx = T.fracH('b', '7-h', padL + 30, y);
     xx = T.str('=', xx, y);
     T.fracH('9', '7', xx, y);
@@ -2731,7 +2828,7 @@
       [['emellan.']]
     ], 1.05);
     y += 3.8 * F;
-    T.str('Störst på symmetrilinjen', padL, y - 1.9 * F, null, 0.62);
+    T.str('Största arean: h på symmetrilinjen', padL, y - 1.9 * F, null, 0.62);
     xx = T.str('h=', padL + 30, y);
     xx = T.fracH('0+7', '2', xx, y);
     T.str('=3,5', xx, y);

@@ -472,6 +472,11 @@
  * ("Svar: 0,12 kN", inte "Svar b): 0,12 kN") — raden står redan under
  * sin deluppgift (användarönskemål 2026-07-30). I mattescener skrivs
  * svaret som uppgiften kräver.
+ * ⚠️ BOKSTAVSREGELN GÄLLER ALLA SCENER, ÄVEN MATTE (användarkrav
+ * 2026-09-20): svarsraden till en deluppgift skrivs "Svar: nollställen",
+ * aldrig "Svar a: nollställen". Raden står redan under sin deluppgift,
+ * och bokstaven är bara brus. 78 svarsrader i sex NP-filer rättades
+ * 2026-09-20; verify-handskrift.js ger fel på 'Svar a:' … 'Svar f:'.
  * UNDANTAG (användarönskemål 2026-08-02): frågar uppgiften efter FLERA
  * storheter i samma deluppgift skrivs beteckningen ut för varje värde så
  * att svaren går att skilja åt — "Svar: F_C=9,0 N och F_S=7,0 N", inte
@@ -498,6 +503,82 @@
  * "tillrättalagd" vågrätt). En omorienterad figur är fysikaliskt
  * korrekt men förvirrar elever som jämför med uppgiftens bild.
  * Referensimpl: layoutSkiftnyckel (u/n-enhetsvektorer + P()-helper).
+ *
+ * ⚠️ REGEL (HELA EKVATIONEN SKRIVS OM RAD FÖR RAD, användarkrav
+ * 2026-09-20): delar av en ekvation räknas INTE ut i separata uträkningar
+ * som sedan sätts ihop ("(x+3^x)^2 = …" på en rad, "3^x(3^x+2x) = …" på en
+ * annan, och först därefter hela ekvationen). Varje rad är hela
+ * ekvationen, omskriven ett steg: kvadraten utvecklas på plats medan
+ * resten står kvar, produkten multipliceras in på plats med bågar, minus
+ * framför parentesen tas bort med blått teckenbyte, termer som tar ut
+ * varandra ringas in. Undantag kan finnas (en lång deluträkning som
+ * annars inte ryms), men de är undantag. Referens: NP Ma 2c VT 2018 u4 d.
+ * REGELNOT: en regel som bara TILLÄMPAS i en rad (kvadreringsregeln,
+ * konjugatregeln, logaritmlagen) poppar upp som BLÅ Poppins-text ovanför
+ * raden medan den skrivs och tonar bort när raden är klar (note-objekt,
+ * helper regelNot/regelGom i ma2c-vt2018-penna.js). Metodrubriker som
+ * ska stå kvar (pq-formeln, Pythagoras sats, Likformiga trianglar)
+ * skrivs som förut som liten grå rubrik (REGEL INLEDANDE MOTIVERING).
+ *
+ * REGEL (MINUS FÖRE BRÅK, användarkrav 2026-09-20): ett minustecken som
+ * står omedelbart före ett bråk (x = −p/2 i pq-formeln, m = −16/3)
+ * ligger i samma höjd som bråkstrecket och smälter ihop med det, så att
+ * minus försvinner för ögat. mathTools.str() och adv() lägger därför
+ * automatiskt 0,22·F luft efter en sträng som SLUTAR med − eller -.
+ * Skriv alltså 'x=−' som egen sträng och bråket direkt efter, utan egna
+ * knuffar; lägg aldrig minustecknet i täljaren för att komma runt det.
+ *
+ * REGEL (RUBRIKER SÄGER VAD SOM GÖRS OCH VARFÖR, användarkrav
+ * 2026-09-20): en liten grå rubrik över en rad ska formuleras så att en
+ * lärare som rättar kan följa vad eleven gör och varför: "Löser ut y ur
+ * första ekvationen", "Samma linje kräver samma k", "Sätter in punkten
+ * (1, −4) i y=kx+m", "Prövar Pythagoras sats" — inte bara "Första
+ * ekvationen", "Samma k", "Pythagoras sats". Rubriken är redovisning,
+ * inte etikett. Referens: NP Ma 2c VT 2018 u9.
+ *
+ * REGEL (POTENSER SKRIVS OM ETT STEG I TAGET, användarkrav 2026-09-20):
+ * en potens med negativ eller rationell exponent skrivs om i EN
+ * omskrivning per rad, så att de svagaste eleverna hänger med:
+ * x^(−1/2) = 1/3 → 1/x^(1/2) = 1/3 (minustecknet i exponenten blir ett
+ * inverterat tal) → 1/√x = 1/3 (exponenten 1/2 blir ett rottecken) →
+ * √x = 3. Aldrig direkt från x^(−1/2) till 1/√x. Textlösningen skriver
+ * samma mellanled. Referens: NP Ma 2c VT 2018 u7.
+ *
+ * REGEL (ROTEN UR BÅDA LED SOM EGEN RAD, användarkrav 2026-09-20): från
+ * x² = 9 skrivs FÖRST raden x = ±√9 (rottecknet ritat med T.rot), och
+ * först på nästa rad x = ±3. Att hoppa direkt till x = ±3 gömmer just det
+ * steg de svagaste eleverna behöver se. Samma sak med x² = −4 →
+ * x = ±√(−4) → x = ±2i. verify-handskrift.js ger fel på 'x=±3' utan
+ * rotrad före.
+ *
+ * REGEL (JÄMFÖRELSE MED RINGAR, användarkrav 2026-09-20): när en likhet
+ * avläses genom att två delar JÄMFÖRS ("(a−b)·lg 3 = 8·lg 3, alltså
+ * a − b = 8") ringas de två delarna in med blåpennan, en i taget, innan
+ * slutsatsen skrivs, precis som vid en insättning (substRings/fadeRings).
+ * Eleven ska se vilka två saker som sätts lika. Källraden skrivs i
+ * segment så att delarnas x-gränser finns.
+ *
+ * REGEL (SVAR MED STOR BOKSTAV, användarkrav 2026-09-20): svarsraden
+ * inleds med stor bokstav när svaret är ett ord eller en mening — "Svar:
+ * Till exempel a=10 och b=2", "Svar: Nollställen", "Svar: Cirka 1 760
+ * personer". Börjar svaret med en beteckning eller ett tal ("Svar: x=9",
+ * "Svar: 10,7 m") gäller förstås beteckningens eget skiftläge. Gäller
+ * pennscener, provens svar/delsvar och teorins textlösningar; 118
+ * svarsrader rättades 2026-09-20 och verify-handskrift.js ger fel på
+ * 'Svar: ' följt av ett ord med liten bokstav.
+ *
+ * REGEL (LOGARITMERA BÅDA LED I TVÅ RADER, användarkrav 2026-09-20):
+ * när en exponentialekvation löses genom att båda led logaritmeras skrivs
+ * FÖRST raden där logaritmen tas av båda led, "lg 8^x = lg 15", som eget
+ * klicksteg, och FÖRST DÄREFTER raden där logaritmlagen flyttat ned
+ * exponenten, "x·lg 8 = lg 15". Att hoppa direkt från 8^x = 15 till
+ * x·lg 8 = lg 15 gömmer två steg i ett, och det är just mellanledet som
+ * visar VAD som gjordes med båda led. Samma sak med ln: "ln e^k = ln
+ * 1,05" före "k·ln e = ln 1,05". Metoden med basen 10 (10^(x·lg 2) =
+ * 10^(lg 37) → x·lg 2 = lg 37) är ett annat resonemang och berörs inte.
+ * Textlösningen (steg/textlosning) skriver samma mellanled.
+ * verify-handskrift.js ger fel på en rad "x·lg a = lg b" som inte
+ * föregås av en logaritmerad eller basen 10-skriven rad.
  *
  * REGEL (OMSKRIVNING MED EKVIVALENSPIL, användarönskemål 2026-07-30):
  * när en formel bara SKRIVS OM/"möbleras om" (en variabel löses ut, ett
@@ -2706,13 +2787,20 @@
       return prevBase + (dyn == null ? 0.28 : dyn) * F + 33;
     }
     /* skriv en sträng; sc skalar skriften (1 = huvudrad, 0,62 = etikett) */
+    /* MINUS FÖRE BRÅK (användarkrav 2026-09-20): en sträng som SLUTAR med
+     * ett minustecken följs alltid av något som ritas för sig (ett bråk,
+     * ett rottecken, en stor parentes). Minustecknet ligger i samma höjd
+     * som bråkstrecket och smälte ihop med det ("x=−p/2" lästes som
+     * x = p/2). Därför läggs 0,16·F luft efter ett avslutande minus, i
+     * både str och adv, så att raderna mäts lika. */
+    function minusLuft(t, sc) { return /[−-]$/.test(t) ? 0.22 * F * sc : 0; }
     function str(t, x, yb, col, sc) {
       sc = sc == null ? 1 : sc;
-      return placeString(t, x, yb, s * sc, F * sc, acts, col || null);
+      return placeString(t, x, yb, s * sc, F * sc, acts, col || null) + minusLuft(t, sc);
     }
     function adv(t, sc) {
       sc = sc == null ? 1 : sc;
-      return stringAdvance(t, s * sc, F * sc);
+      return stringAdvance(t, s * sc, F * sc) + minusLuft(t, sc);
     }
     /* gångertecken mellan två bråk: '·' är ingen OPS-glyf och får därför
      * ingen automatisk luft — utan den klistrar bråkstrecken ihop sig */
@@ -10206,7 +10294,7 @@
       [['lades till.']]
     ]);
     y += 2.4 * F;
-    xe = T.str('Svar: minskat med 2,25 %', padL, y);
+    xe = T.str('Svar: Minskat med 2,25 %', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -10767,8 +10855,12 @@
         var wx = T.adv(dxTxt, 0.5);
         /* utsidan: under steget när linjen stiger, över när den faller */
         var xlo = Math.min(X(x1), X(x2)), xhi = Math.max(X(x1), X(x2));
-        var cx = Math.max(xlo, Math.min(xhi, (X(x1) + X(x2)) / 2 + dxo[0]));
-        T.str(dxTxt, cx - wx / 2,
+        /* etiketten får knuffas längs steget men måste överlappa det
+         * (minst 60 % av den kortare av etikett och steg) */
+        var ovx = 0.6 * Math.min(wx, xhi - xlo);
+        var lx = (X(x1) + X(x2)) / 2 - wx / 2 + dxo[0];
+        lx = Math.max(xlo - wx + ovx, Math.min(xhi - ovx, lx));
+        T.str(dxTxt, lx,
               Y(y1) + (y2 > y1 ? 0.78 : -0.28) * F + dxo[1], BLUE, 0.5);
       }
       if (dyTxt) {
@@ -10776,9 +10868,11 @@
         /* utsidan: höger om steget när det går åt höger, annars vänster */
         var wy = T.adv(dyTxt, 0.5);
         var ylo = Math.min(Y(y1), Y(y2)), yhi = Math.max(Y(y1), Y(y2));
-        var cy = Math.max(ylo, Math.min(yhi, (Y(y1) + Y(y2)) / 2 + dyo[1]));
+        var hy = 0.5 * F, ovy = 0.6 * Math.min(hy, yhi - ylo);
+        var ty = (Y(y1) + Y(y2)) / 2 - hy / 2 + dyo[1];      /* etikettens överkant */
+        ty = Math.max(ylo - hy + ovy, Math.min(yhi - ovy, ty));
         T.str(dyTxt, (x2 >= x1 ? X(x2) + 8 : X(x2) - 8 - wy) + dyo[0],
-              cy + 0.16 * F, BLUE, 0.5);
+              ty + hy / 2 + 0.16 * F, BLUE, 0.5);
       }
     }
     return { X: X, Y: Y, num: num, line: line, rule: rule, axes: axes,
@@ -10838,7 +10932,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: index 175', padL, y);
+    xe = T.str('Svar: Index 175', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -10857,7 +10951,7 @@
       [['procent över basårets pris.']]
     ]);
     y += 2.4 * F;
-    xe = T.str('Svar: priset har ökat med 75 %', padL, y);
+    xe = T.str('Svar: Priset har ökat med 75 %', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -10915,7 +11009,7 @@
     T.stepEnd();
 
     y += 3.0 * F;
-    xe = T.str('Svar: ca 27 700 kr', padL, y);
+    xe = T.str('Svar: Ca 27 700 kr', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -11026,7 +11120,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: hyran höjdes med ca 8,3 %', padL, y);
+    xe = T.str('Svar: Hyran höjdes med ca 8,3 %', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -11424,7 +11518,7 @@
     T.stepEnd();
 
     y += 530;
-    xe = T.str('Svar: grafen till y=−2x+3', padL, y);
+    xe = T.str('Svar: Grafen till y=−2x+3', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -12156,7 +12250,7 @@
     T.stepEnd();
 
     y += 2.8 * F;
-    xe = T.str('Svar: nej, ingen av dem är', padL, y);
+    xe = T.str('Svar: Nej, ingen av dem är', padL, y);
     T.stepEnd();
     y += 2.2 * F;
     xe = T.str('en funktion', padL + 30, y);
@@ -12639,7 +12733,7 @@
     T.stepEnd();
 
     y += 2.8 * F;
-    xe = T.str('Svar: nypriset 180 000 kr, och', padL, y);
+    xe = T.str('Svar: Nypriset 180 000 kr, och', padL, y);
     T.stepEnd();
     y += 2.2 * F;
     xe = T.str('värdet minskar 15 % per år', padL + 30, y);
@@ -12932,7 +13026,7 @@
       [['svaren inte går att lita på.']]
     ]);
     y += 2.8 * F;
-    xe = T.str('Svar: ja, alternativen är', padL, y);
+    xe = T.str('Svar: Ja, alternativen är', padL, y);
     T.stepEnd();
     y += 2.2 * F;
     xe = T.str('ofullständiga och stämmer', padL + 30, y);
@@ -13036,7 +13130,7 @@
       [['mellan de två ytterlägena.']]
     ], 1.05);
     y += 3.8 * F;
-    xe = T.str('Svar: mellan 42 % och 54 %', padL, y);
+    xe = T.str('Svar: Mellan 42 % och 54 %', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -13121,7 +13215,7 @@
       [['ligger i det intervallet.']]
     ], 0.3);
     y += 2.8 * F;
-    xe = T.str('Svar: mellan 50,4 % och 69,6 %', padL, y);
+    xe = T.str('Svar: Mellan 50,4 % och 69,6 %', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -13151,7 +13245,7 @@
       [['på en verklig minskning.']]
     ]);
     y += 3.0 * F;
-    xe = T.str('Svar: nej, inte statistiskt', padL, y);
+    xe = T.str('Svar: Nej, inte statistiskt', padL, y);
     T.stepEnd();
     y += 2.2 * F;
     xe = T.str('säkerställd', padL + 30, y);
@@ -13225,7 +13319,7 @@
     T.stepEnd();
 
     y += 2.6 * F;
-    xe = T.str('Svar: nej, ingen kausalitet', padL, y);
+    xe = T.str('Svar: Nej, ingen kausalitet', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -13533,7 +13627,7 @@
       [['under hälften.']]
     ]);
     y += 2.8 * F;
-    xe = T.str('Svar: ca 48,6 %', padL, y);
+    xe = T.str('Svar: Ca 48,6 %', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -14030,7 +14124,7 @@
       [['en sexa än att slippa.']]
     ]);
     y += 2.8 * F;
-    xe = T.str('Svar: ca 60 %', padL, y);
+    xe = T.str('Svar: Ca 60 %', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -14090,7 +14184,7 @@
       [['har minst en dotter.']]
     ]);
     y += 2.8 * F;
-    xe = T.str('Svar: ca 94 %', padL, y);
+    xe = T.str('Svar: Ca 94 %', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -15380,7 +15474,7 @@
       [['pekar åt höger.']]
     ]);
     y += 3.6 * F;
-    xe = V.lbl('Svar: längd 5, riktad som v', padL, y, null, 1);
+    xe = V.lbl('Svar: Längd 5, riktad som v', padL, y, null, 1);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -15706,8 +15800,10 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx;
     var tanke = mkTanke(T), V = vekVerktyg(T, F);
 
-    /* raden når förbi x=420, så den läggs under mobilzonen (y<150) */
-    y = 175;
+    /* raden når förbi x=420, så den läggs under mobilzonen (y<150):
+     * vektorpilen över u når ~28 px över baslinjen, så 178 ger marginal
+     * mot jittret (148 flimrade mot gränsen) */
+    y = 180;
     xx = V.lbl('u=(2,-3)', padL, y, null, 1);
     V.lbl('v=(-4,1)', xx + 1.2 * F, y, null, 1);
     T.stepEnd();
@@ -22088,7 +22184,7 @@
       [['igenom varandra utan att ta']],
       [['skada — rimligt!']]
     ]));
-    T.underline(T.str('Svar: se figurerna ovan', padL, y), y);
+    T.underline(T.str('Svar: Se figurerna ovan', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -23620,7 +23716,7 @@
     T.stepEnd();
 
     y += adv + 1.4 * F;
-    T.underline(T.str('Svar: nedåt', padL, y), y);
+    T.underline(T.str('Svar: Nedåt', padL, y), y);
     T.stepEnd();
 
     /* ---- b) fältet nedåt, strömmen ut ur planet ---- */
@@ -23673,7 +23769,7 @@
       [['både strömmen och fältet. Det']],
       [['stämmer i båda fallen.']]
     ]));
-    T.underline(T.str('Svar: åt höger', padL, y), y);
+    T.underline(T.str('Svar: Åt höger', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -24374,7 +24470,7 @@
     T.stepEnd();
 
     y += adv + 1.4 * F;
-    T.underline(T.str('Svar: uppåt i slingans framkant', padL, y), y);
+    T.underline(T.str('Svar: Uppåt i slingans framkant', padL, y), y);
     T.stepEnd();
 
     /* ---- b) magneten avlägsnar sig ---- */
@@ -24439,7 +24535,7 @@
       [['går åt andra hållet. Det är']],
       [['värt att stanna upp vid!']]
     ]));
-    T.underline(T.str('Svar: uppåt i slingans framkant', padL, y), y);
+    T.underline(T.str('Svar: Uppåt i slingans framkant', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -25174,7 +25270,7 @@
     T.stepEnd();
 
     y += adv + 1.2 * F;
-    T.underline(T.str('Svar: rött', padL, y), y);
+    T.underline(T.str('Svar: Rött', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -25383,7 +25479,7 @@
     T.stepEnd();
 
     y += adv + 1.2 * F;
-    T.underline(T.str('Svar: blått/cyan (blågrönt ljus)', padL, y), y);
+    T.underline(T.str('Svar: Blått/cyan (blågrönt ljus)', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -26017,7 +26113,7 @@
       [['finns där, men den går aldrig']],
       [['att mäta på en tennisboll.']]
     ]));
-    T.underline(T.str('Svar: nej, inga vågegenskaper', padL, y), y);
+    T.underline(T.str('Svar: Nej, inga vågegenskaper', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -26082,7 +26178,7 @@
     T.stepEnd();
 
     y += adv + 1.2 * F;
-    T.underline(T.str('Svar: linjen från nivå 3 till nivå 1', padL, y), y);
+    T.underline(T.str('Svar: Linjen från nivå 3 till nivå 1', padL, y), y);
     T.stepEnd();
 
     /* ---- b) de tre våglängderna ---- */
@@ -26249,7 +26345,7 @@
     T.stepEnd();
 
     y += adv + 1.6 * F;
-    T.underline(T.str('Svar: cirka 8,2 ljusår', padL, y), y);
+    T.underline(T.str('Svar: Cirka 8,2 ljusår', padL, y), y);
     T.stepEnd();
 
     /* ---- b) med parallaxformeln ---- */
@@ -26538,7 +26634,7 @@
       [['innanför en händelsehorisont']],
       [['stor som en småstad.']]
     ]));
-    T.underline(T.str('Svar: cirka 3,0 km', padL, y), y);
+    T.underline(T.str('Svar: Cirka 3,0 km', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -27961,7 +28057,7 @@
       [['startade. Förflyttningen är']],
       [['noll — men det har ju rört sig!']]
     ]));
-    T.underline(T.str('Svar: förflyttningen är 0', padL, y), y);
+    T.underline(T.str('Svar: Förflyttningen är 0', padL, y), y);
     T.stepEnd();
 
     /* ---- b) tillryggalagd sträcka ---- */
@@ -29198,7 +29294,7 @@
       [['jorden är så tung att det inte']],
       [['märks.']]
     ]));
-    T.underline(T.str('Svar: äpplets tyngdkraft på jorden',
+    T.underline(T.str('Svar: Äpplets tyngdkraft på jorden',
                       padL, y), y);
     T.stepEnd();
 
@@ -29422,7 +29518,7 @@
       [['mindre än ett dammkorn. Den går']],
       [['inte att känna.']]
     ]));
-    T.underline(T.str('Svar: nej, kraften är inte kännbar', padL, y), y);
+    T.underline(T.str('Svar: Nej, kraften är inte kännbar', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -30103,7 +30199,7 @@
     T.stepEnd();
 
     y += adv + 1.2 * F;
-    T.underline(T.str('Svar: negativ', padL, y), y);
+    T.underline(T.str('Svar: Negativ', padL, y), y);
     T.stepEnd();
 
     /* ---- b) värdet ---- */
@@ -30158,13 +30254,13 @@
 
     var fall = [
       ['a) ökar farten på väg upp', 'v: +2 m/s blir +5 m/s',
-       'hastigheten ÖKAR', 'Svar: positiv'],
+       'hastigheten ÖKAR', 'Svar: Positiv'],
       ['b) bromsar in på väg upp', 'v: +5 m/s blir +2 m/s',
-       'hastigheten MINSKAR', 'Svar: negativ'],
+       'hastigheten MINSKAR', 'Svar: Negativ'],
       ['c) ökar farten på väg ner', 'v: −2 m/s blir −5 m/s',
-       'hastigheten MINSKAR (blir mer negativ)', 'Svar: negativ'],
+       'hastigheten MINSKAR (blir mer negativ)', 'Svar: Negativ'],
       ['d) bromsar in på väg ner', 'v: −5 m/s blir −2 m/s',
-       'hastigheten ÖKAR (blir mindre negativ)', 'Svar: positiv']
+       'hastigheten ÖKAR (blir mindre negativ)', 'Svar: Positiv']
     ];
     var bubblor = [
       [[['Hissen är på väg upp och blir']], [['snabbare. Hastigheten är']],
@@ -30380,7 +30476,7 @@
       [['glömmas bort — det är dit det']],
       [['mesta av energin tar vägen.']]
     ]));
-    T.underline(T.str('Svar: kemisk→rörelse+värme', padL, y), y);
+    T.underline(T.str('Svar: Kemisk→rörelse+värme', padL, y), y);
     T.stepEnd();
 
     /* ---- b) lampan ---- */
@@ -30410,7 +30506,7 @@
       [['bara en liten del ljus. Därför']],
       [['är den utbytt mot LED i dag.']]
     ]));
-    T.underline(T.str('Svar: elektrisk→strålning+värme', padL, y), y);
+    T.underline(T.str('Svar: Elektrisk→strålning+värme', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -32765,7 +32861,7 @@
       [['Det är arean, inte tyngden, som']],
       [['avgör.']]
     ]));
-    T.underline(T.str('Svar: damen, ca 60 ggr högre tryck', padL, y), y);
+    T.underline(T.str('Svar: Damen, ca 60 ggr högre tryck', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -33269,7 +33365,7 @@
       [['hela tyngden bärs av']],
       [['lyftkraften!']]
     ]));
-    T.underline(T.str('Svar: ja, den känns som 8,5 kg', padL, y), y);
+    T.underline(T.str('Svar: Ja, den känns som 8,5 kg', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -33919,7 +34015,7 @@
       [['ungefär så länge man får vänta']],
       [['i verkligheten. Rimligt!']]
     ]));
-    T.underline(T.str('Svar: ca 10 minuter', padL, y), y);
+    T.underline(T.str('Svar: Ca 10 minuter', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -34566,7 +34662,7 @@
       [['tillsammans 8. Avståndet väger']],
       [['tyngst, för det står i kvadrat.']]
     ]));
-    T.underline(T.str('Svar: kraften blir 8 gånger större', padL, y), y);
+    T.underline(T.str('Svar: Kraften blir 8 gånger större', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -35084,7 +35180,7 @@
     T.stepEnd();
 
     y += adv + 1.2 * F;
-    T.underline(T.str('Svar: svagare', padL, y), y);
+    T.underline(T.str('Svar: Svagare', padL, y), y);
     T.stepEnd();
 
     /* ---- b) parallellkoppling ---- */
@@ -35137,7 +35233,7 @@
       [['dubbelt så mycket ström totalt —']],
       [['men lampa 1 märker ingenting.']]
     ]));
-    T.underline(T.str('Svar: oförändrat', padL, y), y);
+    T.underline(T.str('Svar: Oförändrat', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -35200,7 +35296,7 @@
     T.stepEnd();
 
     y += adv + 1.2 * F;
-    T.underline(T.str('Svar: lampa 1', padL, y), y);
+    T.underline(T.str('Svar: Lampa 1', padL, y), y);
     T.stepEnd();
 
     /* ---- b) svagast ---- */
@@ -35229,7 +35325,7 @@
       [['gren, så de får exakt samma']],
       [['ström — och lyser lika svagt.']]
     ]));
-    T.underline(T.str('Svar: lampa 3 och 4', padL, y), y);
+    T.underline(T.str('Svar: Lampa 3 och 4', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -36857,7 +36953,7 @@
       [['kvar. Brandvarnaren slutar inte']],
       [['fungera av den anledningen!']]
     ]));
-    T.underline(T.str('Svar: ca 85 % återstår', padL, y), y);
+    T.underline(T.str('Svar: Ca 85 % återstår', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -37390,7 +37486,7 @@
       [['27+0=28+(−1). Båda balanserna']],
       [['stämmer.']]
     ]));
-    T.underline(T.str('Svar: se formlerna ovan', padL, y), y);
+    T.underline(T.str('Svar: Se formlerna ovan', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -39149,7 +39245,7 @@
       [['upp men långt åt höger.']]
     ], 1.05);
     y += 4.2 * F;
-    xe = T.str('Svar: cos 30°=', padL, y);
+    xe = T.str('Svar: Cos 30°=', padL, y);
     xe = T.fracH('√3', '2', xe, y);
     xe = T.str('≈0,87', xe, y);
     T.underline(xe, y + 0.95 * F);
@@ -40057,7 +40153,7 @@
       [['y-axeln. Alltså negativ.']]
     ]);
     y += 4.6 * F;
-    xe = T.str('Svar: cos v=-0,8', padL, y);
+    xe = T.str('Svar: Cos v=-0,8', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -40194,7 +40290,7 @@
     T.stepEnd();
 
     y += 2.8 * F;
-    xe = T.str('Svar: cos x', padL, y);
+    xe = T.str('Svar: Cos x', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -40875,7 +40971,7 @@
     T.stepEnd();
 
     y += 4.4 * F;
-    xe = T.str('Svar: amplitud 5,', padL, y);
+    xe = T.str('Svar: Amplitud 5,', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -40916,7 +41012,7 @@
     T.stepEnd();
 
     y += 4.4 * F;
-    xe = T.str('Svar: amplitud 25,', padL, y);
+    xe = T.str('Svar: Amplitud 25,', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -40976,7 +41072,7 @@
       [['Perioden blir längre.']]
     ], 1.4);
     y += 5.0 * F;
-    xe = T.str('Svar: amplitud 0,6,', padL, y);
+    xe = T.str('Svar: Amplitud 0,6,', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -42222,7 +42318,7 @@
       [['ring med mycket area.']]
     ]);
     y += 4.8 * F;
-    xe = T.str('Svar: arean ökar med', padL, y);
+    xe = T.str('Svar: Arean ökar med', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -42312,7 +42408,7 @@
       [['någon centimeter.']]
     ]);
     y += 4.8 * F;
-    xe = T.str('Svar: radien ökar med', padL, y);
+    xe = T.str('Svar: Radien ökar med', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -42435,7 +42531,7 @@
     T.stepEnd();
 
     y += 4.4 * F;
-    xe = T.str('Svar: lutningen är 3', padL, y);
+    xe = T.str('Svar: Lutningen är 3', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -42792,7 +42888,7 @@
       [['betyder att nivån sjunker.']]
     ]);
     y += 4.8 * F;
-    xe = T.str('Svar: nivån minskar med', padL, y);
+    xe = T.str('Svar: Nivån minskar med', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -42838,7 +42934,7 @@
       [['negativ, alltså en topp.']]
     ]);
     y += 4.8 * F;
-    xe = T.str('Svar: efter 2,5 månader', padL, y);
+    xe = T.str('Svar: Efter 2,5 månader', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -42965,7 +43061,7 @@
     T.stepEnd();
 
     y += 3.0 * F;
-    xe = T.str('Svar: största arean är', padL, y);
+    xe = T.str('Svar: Största arean är', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -43009,6 +43105,12 @@
     xx = T.str('x^2=4', padL + 20, y);
     T.stepEnd();
 
+    /* roten ur båda led som egen rad (REGEL i filhuvudet) */
+    y += 2.8 * F;
+    xx = T.str('x=±', padL + 20, y);
+    T.rot('4', xx + 0.08 * F, y);
+    T.stepEnd();
+
     y += 2.8 * F;
     xx = T.str('x=±2', padL + 20, y);
     T.stepEnd();
@@ -43046,7 +43148,7 @@
     T.stepEnd();
 
     y += 3.0 * F;
-    xe = T.str('Svar: max (-2, 16) och', padL, y);
+    xe = T.str('Svar: Max (-2, 16) och', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -43101,7 +43203,7 @@
     T.stepEnd();
 
     y += 3.0 * F;
-    xe = T.str('Svar: största värdet 0', padL, y);
+    xe = T.str('Svar: Största värdet 0', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -43193,7 +43295,7 @@
       [['som efterfrågas.']]
     ]);
     y += 4.8 * F;
-    xe = T.str('Svar: högsta', padL, y);
+    xe = T.str('Svar: Högsta', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -43243,7 +43345,7 @@
       [['timme.']]
     ]);
     y += 4.8 * F;
-    xe = T.str('Svar: snabbast efter', padL, y);
+    xe = T.str('Svar: Snabbast efter', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -43360,7 +43462,7 @@
     T.stepEnd();
 
     y += 3.0 * F;
-    xe = T.str('Svar: max (-1; 1,47),', padL, y);
+    xe = T.str('Svar: Max (-1; 1,47),', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -44112,7 +44214,7 @@
       [['fyra sekunderna.']]
     ]);
     y += 4.8 * F;
-    xe = T.str('Svar: höjden är 32,7 m', padL, y);
+    xe = T.str('Svar: Höjden är 32,7 m', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -44717,7 +44819,7 @@
       [['ett bråk. Kvar blir liter.']]
     ], 1.05);
     y += 5.2 * F;
-    xe = T.str('Svar: volym i liter', padL, y);
+    xe = T.str('Svar: Volym i liter', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -46523,7 +46625,7 @@
     T.stepEnd();
 
     y = G.oy + 1.4 * 26 + 3.2 * F;
-    xe = T.str('Svar: en cirkel med', padL, y);
+    xe = T.str('Svar: En cirkel med', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -47938,7 +48040,7 @@
       [['olika svar.']]
     ], 0.6);
     y += 4.2 * F;
-    xe = T.str('Svar: gränsvärde saknas', padL, y);
+    xe = T.str('Svar: Gränsvärde saknas', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -49278,7 +49380,7 @@
     T.stepEnd();
 
     y += 3.0 * F;
-    xe = T.str('Svar: folkmängden minskar', padL, y);
+    xe = T.str('Svar: Folkmängden minskar', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -49377,7 +49479,7 @@
       [['är grader per minut.']]
     ]);
     y += 4.6 * F;
-    xe = T.str('Svar: temperaturen ökar', padL, y);
+    xe = T.str('Svar: Temperaturen ökar', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -49770,7 +49872,7 @@
       [['minus till plus betyder dal.']]
     ], 0.6);
     y += 4.2 * F;
-    xe = T.str('Svar: max (1, 7) och', padL, y);
+    xe = T.str('Svar: Max (1, 7) och', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -49933,7 +50035,7 @@
     T.stepEnd();
 
     y = G.oy + 6 * 8 + 3.0 * F;
-    xe = T.str('Svar: största 18, minsta -2', padL, y, null, 0.9);
+    xe = T.str('Svar: Största 18, minsta -2', padL, y, null, 0.9);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -50124,7 +50226,7 @@
       [['är punkten en topp.']]
     ]);
     y += 4.6 * F;
-    xe = T.str('Svar: max (-3, 18) och', padL, y);
+    xe = T.str('Svar: Max (-3, 18) och', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -50697,7 +50799,7 @@
       [['negativa bidraget väger tyngre.']]
     ]);
     y += 4.4 * F;
-    xe = T.str('Svar: integralen är negativ', padL, y, null, 0.9);
+    xe = T.str('Svar: Integralen är negativ', padL, y, null, 0.9);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -51085,7 +51187,7 @@
       [['avrundas till 240 m.']]
     ]);
     y += 4.6 * F;
-    xe = T.str('Svar: ungefär 240 m', padL, y);
+    xe = T.str('Svar: Ungefär 240 m', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -51121,7 +51223,7 @@
       [['och 12 är det första året.']]
     ], 1.05);
     y += 5.4 * F;
-    xe = T.str('Svar: företaget omsätter', padL, y);
+    xe = T.str('Svar: Företaget omsätter', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -51793,7 +51895,7 @@
       [['långa flaggstången.']]
     ]);
     y += 4.6 * F;
-    xe = T.str('Svar: kullen är ungefär 32 m', padL, y, null, 0.88);
+    xe = T.str('Svar: Kullen är ungefär 32 m', padL, y, null, 0.88);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -52366,7 +52468,7 @@
       [['12-7=5. Stämmer.']]
     ]);
     y += 4.4 * F;
-    xe = T.str('Svar: talen är 12 och 7', padL, y, null, 0.92);
+    xe = T.str('Svar: Talen är 12 och 7', padL, y, null, 0.92);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -53081,7 +53183,7 @@
       [['24·45=1 080. Stämmer.']]
     ]);
     y += 4.4 * F;
-    xe = T.str('Svar: talen är 24 och 45', padL, y, null, 0.92);
+    xe = T.str('Svar: Talen är 24 och 45', padL, y, null, 0.92);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -54435,7 +54537,7 @@
     T.stepEnd();
 
     y += 3.0 * F;
-    xe = T.str('Svar: nej, inte rätvinklig', padL, y, null, 0.9);
+    xe = T.str('Svar: Nej, inte rätvinklig', padL, y, null, 0.9);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -54544,7 +54646,7 @@
       [['likformiga.']]
     ], 1.4);
     y += 5.4 * F;
-    xe = T.str('Svar: ja', padL, y);
+    xe = T.str('Svar: Ja', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -54638,7 +54740,7 @@
       [['stora.']]
     ]);
     y += 4.6 * F;
-    xe = T.str('Svar: ja, likformiga', padL, y);
+    xe = T.str('Svar: Ja, likformiga', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -54683,7 +54785,7 @@
       [['vägen.']]
     ], 1.4);
     y += 5.4 * F;
-    xe = T.str('Svar: ja, likformiga', padL, y);
+    xe = T.str('Svar: Ja, likformiga', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -55643,8 +55745,14 @@
     T.stepEnd();
 
     /* 5/2 och 3/4 skrivs som decimaltal här: ett bråk direkt efter lg
-     * läses annars lätt som (lg 3)/4 i stället för lg(3/4) */
+     * läses annars lätt som (lg 3)/4 i stället för lg(3/4). Först
+     * logaritmeras båda led, sedan flyttas exponenten ned (REGEL
+     * LOGARITMERA BÅDA LED I TVÅ RADER). */
     y += 5.4 * F;
+    xx = T.str('lg 2,5^x=lg 0,75', padL + 20, y);
+    T.stepEnd();
+
+    y += 2.8 * F;
     xx = T.str('x·lg 2,5=lg 0,75', padL + 20, y);
     T.stepEnd();
 
@@ -55759,7 +55867,7 @@
       [['över 12 000 kr.']]
     ], 1.4);
     y += 5.6 * F;
-    xe = T.str('Svar: efter 9 år', padL, y);
+    xe = T.str('Svar: Efter 9 år', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -55938,7 +56046,7 @@
       [['ordning, inte storlek.']]
     ]);
     y += 4.6 * F;
-    xe = T.str('Svar: medianen', padL, y);
+    xe = T.str('Svar: Medianen', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -56151,7 +56259,7 @@
     T.stepEnd();
 
     y += 3.0 * F;
-    xe = T.str('Svar: cirka 1,8 syskon', padL, y, null, 0.92);
+    xe = T.str('Svar: Cirka 1,8 syskon', padL, y, null, 0.92);
     T.underline(xe, y);
     T.stepEnd();
 

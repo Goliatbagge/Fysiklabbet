@@ -190,7 +190,7 @@
       [['av raderna.']]
     ]);
     y += 2.8 * F;
-    xe = T.str('Svar: rad 1 ⇒ och rad 2 ⇐', padL, y);
+    xe = T.str('Svar: Rad 1 ⇒ och rad 2 ⇐', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -359,7 +359,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: f(2)=4', padL, y);
+    xe = T.str('Svar: f(2)=4', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -379,7 +379,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar b: x=6', padL, y);
+    xe = T.str('Svar: x=6', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1093,7 +1093,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar: klockan 01.00', padL, y);
+    xe = T.str('Svar: Klockan 01.00', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1216,7 +1216,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: ungefär 156 miljarder', padL, y);
+    xe = T.str('Svar: Ungefär 156 miljarder', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1236,7 +1236,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar b: årtalen ligger lika', padL, y);
+    xe = T.str('Svar: Årtalen ligger lika', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('tätt fast åren inte gör det', padL + 30, y);
@@ -1251,7 +1251,7 @@
       [['men lika högt.']]
     ]);
     y += 2.9 * F;
-    xe = T.str('Svar c: kurvan blir mindre', padL, y);
+    xe = T.str('Svar: Kurvan blir mindre', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('brant på slutet', padL + 30, y);
@@ -1321,7 +1321,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: ungefär 34°', padL, y);
+    xe = T.str('Svar: Ungefär 34°', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1351,7 +1351,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar b: nej, vinkeln blir 53°', padL, y);
+    xe = T.str('Svar: Nej, vinkeln blir 53°', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1464,7 +1464,7 @@
       [['hundra år.']]
     ]);
     y += 2.5 * F;
-    xe = T.str('Svar: ungefär 0,6 % per år', padL, y);
+    xe = T.str('Svar: Ungefär 0,6 % per år', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1497,7 +1497,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: 3 000 kr', padL, y);
+    xe = T.str('Svar: 3 000 kr', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1517,7 +1517,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar b: V(x)=50x-2 000', padL, y);
+    xe = T.str('Svar: V(x)=50x-2 000', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1542,7 +1542,7 @@
       [['de 8 000 kr.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar c: -2 000≤V(x)≤8 000', padL, y);
+    xe = T.str('Svar: -2 000≤V(x)≤8 000', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1592,7 +1592,7 @@
       [['gång på gång.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: ungefär 8 916 kr', padL, y);
+    xe = T.str('Svar: Ungefär 8 916 kr', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1843,7 +1843,7 @@
       [['intervall.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: ungefär år 1976', padL, y);
+    xe = T.str('Svar: Ungefär år 1976', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

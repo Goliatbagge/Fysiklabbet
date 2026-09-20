@@ -446,6 +446,58 @@ Så här bygger du scenen:
    ("FÖRSTÄRKS" blev "FÖRST RKS"). Lägg då till glyfen som enstreckad
    handstil bland de andra (θ lades till 2026-08-09) — och granska den
    sida vid sida med den bokstav den kan förväxlas med.
+3c. **Hela ekvationen skrivs om rad för rad.** Delar av en ekvation räknas
+   inte ut i separata uträkningar som sedan sätts ihop ("(x+3ˣ)² = …" på
+   en rad och "3ˣ(3ˣ+2x) = …" på en annan). Varje rad är hela ekvationen,
+   omskriven ett steg: kvadraten utvecklas på plats, produkten
+   multipliceras in på plats med bågar, minus framför parentesen tas bort
+   med blått teckenbyte (användarkrav 2026-09-20, referens: NP Ma 2c VT
+   2018 uppgift 4d). En regel som bara tillämpas i raden
+   (kvadreringsregeln, konjugatregeln, logaritmlagen) poppar upp som blå
+   not ovanför raden och försvinner när raden är klar (`regelNot` i
+   `ma2c-vt2018-penna.js`); metodrubriker som ska stå kvar (pq-formeln,
+   Pythagoras sats) skrivs som liten grå rubrik som förut.
+3h. **Rubriker säger vad som görs och varför.** En grå rubrik över en rad
+   skrivs så att en rättande lärare kan följa tankegången: "Löser ut y ur
+   första ekvationen", "Samma linje kräver samma k", "Prövar Pythagoras
+   sats", inte bara "Första ekvationen" eller "Samma k" (användarkrav
+   2026-09-20). Rubriken är redovisning, inte etikett.
+3i. **Minus före bråk.** Ett minustecken direkt före ett bråk smälte ihop med
+   bråkstrecket (x = −p/2 lästes som x = p/2). Pennmotorn lägger nu
+   automatiskt luft efter en sträng som slutar med minus; skriv `'x=−'`
+   som egen sträng och bråket direkt efter (användarkrav 2026-09-20).
+3g. **Potenser skrivs om ett steg i taget.** `x^(−1/2) = 1/3` →
+   `1/x^(1/2) = 1/3` → `1/√x = 1/3` → `√x = 3`: en omskrivning per rad,
+   aldrig direkt från negativ exponent till rottecken (användarkrav
+   2026-09-20, referens: NP Ma 2c VT 2018 uppgift 7). Gäller pennlösning
+   och textlösning.
+3d. **Roten ur båda led som egen rad.** `x² = 9` → `x = ±√9` → `x = ±3`,
+   aldrig direkt till `±3` (användarkrav 2026-09-20). De svagaste eleverna
+   ska kunna följa varje steg. Gäller pennlösning och textlösning;
+   `verify-handskrift.js` ger fel på `'x=±3'` utan rotrad före.
+3e. **Jämförelse med ringar.** När en likhet avläses genom att två delar
+   jämförs (`(a − b)·lg 3 = 8·lg 3` ger `a − b = 8`) ringas de två
+   delarna in med blåpennan innan slutsatsen skrivs, som vid en
+   insättning (`substRings`/`fadeRings`, användarkrav 2026-09-20).
+3f. **Svar inleds med stor bokstav.** `Svar: Till exempel a = 10 och b = 2`,
+   `Svar: Nollställen`, `Svar: Cirka 1 760 personer` (användarkrav
+   2026-09-20). En beteckning eller ett tal först i svaret behåller sitt
+   skiftläge (`Svar: x = 9`). Gäller pennscener, provens `svar`/`delsvar`
+   och teorins `::: textlosning`; `verify-handskrift.js` ger fel på
+   `'Svar: '` följt av ett ord med liten bokstav.
+3a. **Logaritmera båda led i två rader.** När en exponentialekvation
+   löses med logaritmer skrivs först raden där båda led logaritmeras,
+   `lg 8^x = lg 15`, som eget klicksteg, och först därefter raden där
+   logaritmlagen flyttat ned exponenten, `x · lg 8 = lg 15` (användarkrav
+   2026-09-20). Att hoppa direkt från `8^x = 15` till `x · lg 8 = lg 15`
+   gömmer två steg i ett. Gäller pennlösningar OCH textlösningar
+   (`::: textlosning`, provens `steg`); `verify-handskrift.js` ger fel
+   på en pennrad `x·lg a = lg b` utan logaritmerad rad före.
+3b. **Svarsraden till en deluppgift skrivs utan bokstav:** `Svar: nollställen`,
+   aldrig `Svar a: nollställen` (användarkrav 2026-09-20). Raden står
+   redan under sin deluppgift, så bokstaven är bara brus. Gäller alla
+   pennscener, i teorin och i de nationella proven; `verify-handskrift.js`
+   ger fel på `'Svar a:'` … `'Svar f:'`.
 4. **Håll siffrorna identiska** i pennlösningen och `::: textlosning` —
    användaren växlar mellan dem med "Med penna"/"Som text", och olika
    avrundning i de två lägena läses som ett fel. Det är pennlösningens

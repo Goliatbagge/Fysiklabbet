@@ -75,9 +75,9 @@ window.NP_PROV['ma2c-vt2018'] = {
                 {
                     rubrik: 'Läs av lutningen med ett trappsteg',
                     varfor: 'Riktningskoefficienten $k$ är hur mycket $y$ ändras när $x$ ökar ' +
-                        'med $1$. Från $(0,\\ 3)$ ett steg åt höger ligger linjen i $(1,\\ 5)$: ' +
-                        'två steg upp.',
-                    text: '$$k = \\dfrac{\\Delta y}{\\Delta x} = \\dfrac{5 - 3}{1 - 0} = 2$$',
+                        'med $1$. Från $(0,\\ 3)$ går vi ett steg åt höger, $\\Delta x = 1$, och ' +
+                        'upp till linjen: $\\Delta y = 2$.',
+                    text: '$$k = \\dfrac{\\Delta y}{\\Delta x} = \\dfrac{2}{1} = 2$$',
                     figur: 'u1-s2',
                 },
                 {
@@ -113,7 +113,7 @@ window.NP_PROV['ma2c-vt2018'] = {
                         'funktionens nollställen.',
                     text: '$x_1 = -3$ och $x_2 = 1$ är funktionens **nollställen**.',
                     figur: 'u2-s1',
-                    delsvar: { del: 'a', text: 'nollställen' },
+                    delsvar: { del: 'a', text: 'Nollställen' },
                 },
                 {
                     del: 'b',
@@ -123,7 +123,7 @@ window.NP_PROV['ma2c-vt2018'] = {
                         'spegelbild till höger. En sådan linje är parabelns symmetrilinje.',
                     text: 'Linjen $x = -1$ är grafens **symmetrilinje**.',
                     figur: 'u2-s2',
-                    delsvar: { del: 'b', text: 'symmetrilinje' },
+                    delsvar: { del: 'b', text: 'Symmetrilinje' },
                 },
                 {
                     del: 'c',
@@ -134,10 +134,10 @@ window.NP_PROV['ma2c-vt2018'] = {
                         'är korrekta.)',
                     text: 'Punkten $(-1,\\ -4)$ är grafens **minimipunkt**.',
                     figur: 'u2-s3',
-                    delsvar: { del: 'c', text: 'minimipunkt' },
+                    delsvar: { del: 'c', text: 'Minimipunkt' },
                 },
             ],
-            svar: '**a)** nollställen&emsp;&emsp;**b)** symmetrilinje&emsp;&emsp;**c)** minimipunkt',
+            svar: '**a)** Nollställen&emsp;&emsp;**b)** Symmetrilinje&emsp;&emsp;**c)** Minimipunkt',
             bedomning: [
                 ['a) Korrekt svar (nollställen). Endast svaret nollställen ges poäng', '+E'],
                 ['b) Korrekt svar (symmetrilinje). Endast svaret symmetrilinje ges poäng', '+E'],
@@ -205,7 +205,8 @@ window.NP_PROV['ma2c-vt2018'] = {
                     rubrik: 'Logaritmera båda led',
                     varfor: 'Det obekanta står i exponenten. Tiologaritmen av båda led och ' +
                         'logaritmlagen $\\lg a^x = x \\cdot \\lg a$ plockar ned $x$ som en faktor.',
-                    text: '$$8^x = 15 \\quad \\Longleftrightarrow \\quad x \\cdot \\lg 8 = \\lg 15$$',
+                    text: '$$8^x = 15 \\quad \\Longleftrightarrow \\quad \\lg 8^x = \\lg 15 ' +
+                        '\\quad \\Longleftrightarrow \\quad x \\cdot \\lg 8 = \\lg 15$$',
                 },
                 {
                     del: 'a',
@@ -253,25 +254,33 @@ window.NP_PROV['ma2c-vt2018'] = {
                 },
                 {
                     del: 'd',
-                    rubrik: 'Utveckla kvadraten',
+                    rubrik: 'Utveckla kvadraten i vänsterledet',
                     varfor: 'Första kvadreringsregeln med $a = x$ och $b = 3^x$: den dubbla ' +
-                        'produkten är $2 \\cdot x \\cdot 3^x$ och $\\left(3^x\\right)^2 = 3^{2x}$.',
-                    text: '$$\\left(x + 3^x\\right)^2 = x^2 + 2x \\cdot 3^x + 3^{2x}$$',
+                        'produkten är $2 \\cdot x \\cdot 3^x$ och $\\left(3^x\\right)^2 = 3^{2x}$. ' +
+                        'Resten av ekvationen skrivs med oförändrad.',
+                    text: '$$x^2 + 2x \\cdot 3^x + 3^{2x} - 3^x\\left(3^x + 2x\\right) = 9$$',
                 },
                 {
                     del: 'd',
                     rubrik: 'Multiplicera in 3ˣ i parentesen',
-                    varfor: 'Faktorn $3^x$ multipliceras med varje term: $3^x \\cdot 3^x = 3^{2x}$ ' +
-                        'och $3^x \\cdot 2x = 2x \\cdot 3^x$.',
-                    text: '$$3^x\\left(3^x + 2x\\right) = 3^{2x} + 2x \\cdot 3^x$$',
+                    varfor: 'Behåll minustecknet och parentesen. Faktorn $3^x$ multipliceras med ' +
+                        'varje term: $3^x \\cdot 3^x = 3^{2x}$ och $3^x \\cdot 2x = 2x \\cdot 3^x$.',
+                    text: '$$x^2 + 2x \\cdot 3^x + 3^{2x} - \\left(3^{2x} + 2x \\cdot 3^x\\right) = 9$$',
                 },
                 {
                     del: 'd',
-                    rubrik: 'Sätt ihop och förenkla',
-                    varfor: 'Både $3^{2x}$ och $2x \\cdot 3^x$ tar ut varandra, så av hela ' +
-                        'uttrycket återstår bara $x^2$. Ekvationen $x^2 = 9$ har två lösningar.',
+                    rubrik: 'Ta bort parentesen och förenkla',
+                    varfor: 'Minus framför parentesen byter tecken på varje term inuti. Sedan tar ' +
+                        '$3^{2x}$ och $-3^{2x}$ ut varandra, liksom $2x \\cdot 3^x$ och ' +
+                        '$-2x \\cdot 3^x$. Kvar blir bara $x^2$.',
                     text: '$$x^2 + 2x \\cdot 3^x + 3^{2x} - 3^{2x} - 2x \\cdot 3^x = 9 \\quad ' +
-                        '\\Longleftrightarrow \\quad x^2 = 9 \\quad \\Longleftrightarrow \\quad x = \\pm 3$$',
+                        '\\Longleftrightarrow \\quad x^2 = 9$$',
+                },
+                {
+                    del: 'd',
+                    rubrik: 'Dra roten ur båda led',
+                    varfor: 'Både $3$ och $-3$ har kvadraten $9$, så ekvationen har två lösningar.',
+                    text: '$$x = \\pm\\sqrt{9} = \\pm 3$$',
                     delsvar: { del: 'd', text: '$x = \\pm 3$' },
                 },
             ],
@@ -361,7 +370,8 @@ window.NP_PROV['ma2c-vt2018'] = {
                     varfor: 'En negativ exponent betyder inverterat tal, och exponenten ' +
                         '$\\dfrac{1}{2}$ betyder kvadratrot: $x^{-\\frac{1}{2}} = \\dfrac{1}{x^{\\frac{1}{2}}} = ' +
                         '\\dfrac{1}{\\sqrt{x}}$.',
-                    text: '$$\\dfrac{1}{\\sqrt{x}} = \\dfrac{1}{3} \\quad \\Longleftrightarrow \\quad \\sqrt{x} = 3$$',
+                    text: '$$\\dfrac{1}{x^{\\frac{1}{2}}} = \\dfrac{1}{3} \\quad \\Longleftrightarrow \\quad ' +
+                        '\\dfrac{1}{\\sqrt{x}} = \\dfrac{1}{3} \\quad \\Longleftrightarrow \\quad \\sqrt{x} = 3$$',
                 },
                 {
                     rubrik: 'Kvadrera',
@@ -390,20 +400,24 @@ window.NP_PROV['ma2c-vt2018'] = {
                 {
                     rubrik: 'Bestäm förändringsfaktorn per månad',
                     varfor: 'En minskning med $5\\ \\%$ betyder att $95\\ \\%$ finns kvar efter ' +
-                        'varje månad. Förändringsfaktorn är $1 - 0{,}05 = 0{,}95$.',
-                    text: '$$\\text{efter } n \\text{ månader: } 32\\,997 \\cdot 0{,}95^n$$',
+                        'varje månad. Förändringsfaktorn är $1 - 0{,}05 = 0{,}95$, och den ' +
+                        'används en gång per månad.',
+                    text: '$$\\text{efter 1 månad: } 32\\,997 \\cdot 0{,}95 \\qquad ' +
+                        '\\text{efter 2 månader: } 32\\,997 \\cdot 0{,}95^2$$',
                 },
                 {
-                    rubrik: 'Räkna om år till månader',
-                    varfor: 'Funktionen ska ha tiden i år. På $t$ år går det $12t$ månader, så ' +
-                        'faktorn $0{,}95$ ska användas $12t$ gånger.',
-                    text: '$$n = 12t$$',
+                    rubrik: 'Räkna med hela år',
+                    varfor: 'Ett år är $12$ månader, så efter ett år har värdet multiplicerats ' +
+                        'med $0{,}95$ tolv gånger. Antalet månader är alltid $12$ gånger antalet ' +
+                        'år: $2$ år är $24$ månader, och $t$ år är $12 \\cdot t$ månader.',
+                    text: '$$\\text{efter 1 år: } 32\\,997 \\cdot 0{,}95^{12} \\qquad ' +
+                        '\\text{efter } t \\text{ år: } 32\\,997 \\cdot 0{,}95^{12t}$$',
                 },
                 {
                     rubrik: 'Teckna funktionen',
-                    varfor: 'Sätt in $n = 12t$ i exponenten. Kontroll: efter ett år ($t = 1$) ' +
-                        'är värdet $32\\,997 \\cdot 0{,}95^{12} \\approx 17\\,800$ kr, ungefär ' +
-                        'en halvering, vilket är rimligt med $5\\ \\%$ i månaden.',
+                    varfor: 'Exponenten är antalet månader, $12t$. Kontroll: efter ett år ' +
+                        '($t = 1$) är värdet $32\\,997 \\cdot 0{,}95^{12} \\approx 17\\,800$ kr, ' +
+                        'ungefär en halvering, vilket är rimligt med $5\\ \\%$ i månaden.',
                     text: '$$V(t) = 32\\,997 \\cdot 0{,}95^{12t}$$',
                 },
             ],
@@ -1110,7 +1124,8 @@ window.NP_PROV['ma2c-vt2018'] = {
                     varfor: 'Det obekanta står i exponenten. Logaritmlagen $\\lg a^x = x \\cdot \\lg a$ ' +
                         'ger en förstagradsekvation i $x$. Dividera med $\\lg 0{,}98$ (ett ' +
                         'negativt tal, liksom täljaren, så kvoten blir positiv).',
-                    text: '$$x \\cdot \\lg 0{,}98 = \\lg 0{,}80404\\ldots \\quad \\Longleftrightarrow \\quad ' +
+                    text: '$$\\lg 0{,}98^x = \\lg 0{,}80404\\ldots \\quad \\Longleftrightarrow \\quad ' +
+                        'x \\cdot \\lg 0{,}98 = \\lg 0{,}80404\\ldots \\quad \\Longleftrightarrow \\quad ' +
                         'x = \\dfrac{\\lg 0{,}80404\\ldots}{\\lg 0{,}98} = 10{,}79\\ldots \\approx 10{,}8$$',
                 },
                 {

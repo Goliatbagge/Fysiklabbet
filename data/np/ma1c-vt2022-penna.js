@@ -719,7 +719,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar: cos 70°', padL, y);
+    xe = T.str('Svar: Cos 70°', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1253,7 +1253,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar: se skuggningen i figuren', padL, y);
+    xe = T.str('Svar: Se skuggningen i figuren', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1437,7 +1437,7 @@
       [['vara 6, och 8-2=6. Stämmer.']]
     ]);
     y += 2.5 * F;
-    xe = T.str('Svar: figur nummer 8', padL, y);
+    xe = T.str('Svar: Figur nummer 8', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2023,7 +2023,7 @@
       [['också tre.']]
     ], 1.05);
     y += 3.4 * F;
-    xe = T.str('Svar: minst 127 m', padL, y);
+    xe = T.str('Svar: Minst 127 m', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2059,7 +2059,7 @@
       [['125 m stämmer bra.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: minst 22 m', padL, y);
+    xe = T.str('Svar: Minst 22 m', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2302,7 +2302,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar: ungefär 12 % lägre', padL, y);
+    xe = T.str('Svar: Ungefär 12 % lägre', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2386,7 +2386,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar: ungefär 6,2 % per år', padL, y);
+    xe = T.str('Svar: Ungefär 6,2 % per år', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2472,7 +2472,7 @@
       [['chans på tre.']]
     ]);
     y += 2.5 * F;
-    xe = T.str('Svar: ungefär 0,30=30 %', padL, y);
+    xe = T.str('Svar: Ungefär 0,30=30 %', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2554,7 +2554,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar: ungefär 1,7 minuter', padL, y);
+    xe = T.str('Svar: Ungefär 1,7 minuter', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

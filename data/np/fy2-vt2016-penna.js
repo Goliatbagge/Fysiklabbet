@@ -320,7 +320,7 @@
     T.stepEnd();
 
     y += 2.5 * F;
-    xe = T.str('Svar: strömmar induceras och', padL, y);
+    xe = T.str('Svar: Strömmar induceras och', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('resistansen ger värmen', padL + 30, y);
@@ -426,7 +426,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: se planeringen ovan', padL, y);
+    xe = T.str('Svar: Se planeringen ovan', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -854,7 +854,7 @@
       [['och 50/500 ger 23 V (för högt).']]
     ]));
     y += adv + 2.2 * F;
-    xe = T.str('Svar a: 500 och 10 varv, eller', padL, y);
+    xe = T.str('Svar: 500 och 10 varv, eller', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('1 000 och 50 varv', padL + 30, y);
@@ -878,7 +878,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar b: kärnan håller ihop', padL, y);
+    xe = T.str('Svar: Kärnan håller ihop', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('flödet och minskar förlusterna', padL + 30, y);
@@ -988,7 +988,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: se planeringen ovan', padL, y);
+    xe = T.str('Svar: Se planeringen ovan', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1087,7 +1087,7 @@
       [['hårdast.']]
     ]));
     y += 3.6 * F;
-    xe = T.str('Svar: repet borde brista i det', padL, y);
+    xe = T.str('Svar: Repet borde brista i det', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('nedersta läget, inte i B', padL + 30, y);
@@ -1184,7 +1184,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: längs diagonalen genom', padL, y);
+    xe = T.str('Svar: Längs diagonalen genom', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('skärningspunkten (linjen y=x)', padL + 30, y);
@@ -1273,7 +1273,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar a: stråle C', padL, y);
+    xe = T.str('Svar: Stråle C', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1316,7 +1316,7 @@
       [['70 % av c.']]
     ]));
     y += 2.9 * F;
-    xe = T.str('Svar b: 2,1·10^8 m/s', padL, y);
+    xe = T.str('Svar: 2,1·10^8 m/s', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1408,7 +1408,7 @@
       [['knappt 6 000 K — stämmer.']]
     ]));
     y += adv + 2.2 * F;
-    xe = T.str('Svar a: ungefär 5 800 K', padL, y);
+    xe = T.str('Svar: Ungefär 5 800 K', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1435,7 +1435,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar b: absorptionslinjerna', padL, y);
+    xe = T.str('Svar: Absorptionslinjerna', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('visar att det finns väte', padL + 30, y);
@@ -1536,7 +1536,7 @@
       [['gäller på plan mark.']]
     ]));
     y += 2.9 * F;
-    xe = T.str('Svar: nej, det krävs 12 m/s,', padL, y);
+    xe = T.str('Svar: Nej, det krävs 12 m/s,', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('ingen risk att nå kanten', padL + 30, y);
@@ -1597,7 +1597,7 @@
       [['stämmer med att Stina SÅG dem.']]
     ]));
     y += adv + 2.2 * F;
-    xe = T.str('Svar a: 420, 610 och 650 nm', padL, y);
+    xe = T.str('Svar: 420, 610 och 650 nm', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1644,7 +1644,7 @@
       [['infrarött.']]
     ]));
     y += 2.9 * F;
-    xe = T.str('Svar b: de ligger i infrarött', padL, y);
+    xe = T.str('Svar: De ligger i infrarött', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('och syns inte för ögat', padL + 30, y);
@@ -1787,7 +1787,7 @@
       [['och 40 — det här är den mellersta.']]
     ]));
     y += adv + 2.2 * F;
-    xe = T.str('Svar: isotopen argon-38', padL, y);
+    xe = T.str('Svar: Isotopen argon-38', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1907,7 +1907,7 @@
     T.stepEnd();
 
     y += adv + 1.6 * F;
-    xe = T.str('Svar a: 5,7 N/m', padL, y);
+    xe = T.str('Svar: 5,7 N/m', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1948,7 +1948,7 @@
       [['ögat.']]
     ]));
     y += 2.9 * F;
-    xe = T.str('Svar b: 0,12 m', padL, y);
+    xe = T.str('Svar: 0,12 m', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

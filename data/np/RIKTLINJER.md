@@ -165,6 +165,34 @@ finns kvar som alternativ vy och ska hållas i takt med pennlösningen.
 - **Samma siffror och samma avrundning** i pennlösningen och i
   `steg`/`svar`. Eleven växlar mellan vyerna, och olika avrundning läses
   som ett fel.
+- **Hela ekvationen rad för rad:** delar av en ekvation räknas inte ut i
+  separata uträkningar som sedan sätts ihop; varje rad är hela ekvationen
+  omskriven ett steg (användarkrav 2026-09-20, referens: VT 2018 u4 d).
+  En regel som bara tillämpas i raden (kvadreringsregeln, konjugatregeln)
+  poppar upp som blå not medan raden skrivs (`regelNot`/`regelGom`).
+- **Rubriker säger vad som görs och varför:** "Löser ut y ur första
+  ekvationen", inte "Första ekvationen" (användarkrav 2026-09-20). En
+  rättande lärare ska kunna följa varje rad.
+- **Potenser skrivs om ett steg i taget:** `x^(−1/2)` → `1/x^(1/2)` →
+  `1/√x`, en omskrivning per rad (användarkrav 2026-09-20).
+- **Roten ur båda led som egen rad:** `x² = 9` → `x = ±√9` → `x = ±3`,
+  aldrig direkt till `±3` (användarkrav 2026-09-20). Gäller även `steg`.
+- **Jämförelse med ringar:** när en likhet avläses genom att två delar
+  jämförs (`(a − b)·lg 3 = 8·lg 3` ger `a − b = 8`) ringas delarna in i
+  blått innan slutsatsen skrivs, som vid en insättning.
+- **Svar med stor bokstav:** `Svar: Till exempel a = 10 och b = 2`,
+  `Svar: Nollställen`. Gäller pennraden, `svar` och `delsvar`
+  (användarkrav 2026-09-20). En beteckning eller ett tal först i svaret
+  behåller sitt skiftläge (`Svar: x = 9`).
+- **Logaritmera båda led i två rader:** `lg 8^x = lg 15` som eget steg,
+  och först därefter `x · lg 8 = lg 15` (användarkrav 2026-09-20). Gäller
+  både pennlösningen och `steg`-listan; hoppa aldrig direkt från
+  `8^x = 15` till `x · lg 8 = lg 15`.
+- **Svarsraden till en deluppgift skrivs utan bokstav:** `Svar: nollställen`,
+  aldrig `Svar a: nollställen` (användarkrav 2026-09-20). Raden står redan
+  under sin deluppgift. Gäller alla scener; `verify-handskrift.js` ger fel
+  på `'Svar a:'`. (Textlösningens `delsvar` visar deluppgiftens bokstav
+  i sin ruta av sig själv.)
 - **Granskning:** `node .claude/verify-handskrift.js <scennamn>` (utan
   argument granskas alla NP-scener och alla teoriscener) — och därefter
   skärmdump, som vanligt: verifieraren ser inte etiketter som ligger på

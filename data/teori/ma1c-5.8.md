@@ -98,7 +98,7 @@ $$
 P(\text{minst en sexa}) = 1 - 0{,}401\ldots = 0{,}598\ldots \approx 0{,}60 = 60\ \%
 $$
 
-**Svar:** ca 60 %
+**Svar:** Cirka 60 %
 :::
 :::
 

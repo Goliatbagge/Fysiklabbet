@@ -78,7 +78,7 @@
       [['och x^2 till 2x. Precis f.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: alternativ C', padL, y);
+    xe = T.str('Svar: Alternativ C', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -195,7 +195,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: f’(x)=12x^2-12', padL, y);
+    xe = T.str('Svar: f’(x)=12x^2-12', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -225,7 +225,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar b: f’(x)=2ax+4x^-^2', padL, y);
+    xe = T.str('Svar: f’(x)=2ax+4x^-^2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -251,7 +251,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar c: f’(x)=3^2^x·ln 3^2', padL, y);
+    xe = T.str('Svar: f’(x)=3^2^x·ln 3^2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -294,7 +294,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: 5-x^3', padL, y);
+    xe = T.str('Svar: 5-x^3', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -340,7 +340,7 @@
     T.stepEnd();
 
     y += 3.4 * F;
-    xe = T.str('Svar b: ', padL, y);
+    xe = T.str('Svar: ', padL, y);
     xe = T.fracH('x+3', 'x-3', xe, y);
     T.underline(xe, y + 0.95 * F);
     T.stepEnd();
@@ -382,7 +382,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar c: 2e^x', padL, y);
+    xe = T.str('Svar: 2e^x', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -500,7 +500,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: ja, Tilde har rätt', padL, y);
+    xe = T.str('Svar: Ja, Tilde har rätt', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -589,7 +589,7 @@
       [['varken toppar eller dalar.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: nej, Jaana har fel.', padL, y);
+    xe = T.str('Svar: Nej, Jaana har fel.', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('f saknar extrempunkter', padL + 30, y);
@@ -649,7 +649,7 @@
       [['Det stämmer med alternativ E.']]
     ], 1.05);
     y += 3.4 * F;
-    xe = T.str('Svar: alternativ E, f’(2)=-2', padL, y);
+    xe = T.str('Svar: Alternativ E, f’(2)=-2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -698,7 +698,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: 0,77', padL, y);
+    xe = T.str('Svar: 0,77', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -726,7 +726,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar b: -0,64', padL, y);
+    xe = T.str('Svar: -0,64', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -797,7 +797,7 @@
       [['x-axeln en bit, positiv igen.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: alternativ B', padL, y);
+    xe = T.str('Svar: Alternativ B', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -848,7 +848,7 @@
       [['negativ. Ändpunkterna ingår ej.']]
     ]);
     y += 2.8 * F;
-    xe = T.str('Svar a: 0<x<3', padL, y);
+    xe = T.str('Svar: 0<x<3', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -867,7 +867,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar b: x=0 och x=3', padL, y);
+    xe = T.str('Svar: x=0 och x=3', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1033,7 +1033,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: max (0, 7), min (2, 3)', padL, y);
+    xe = T.str('Svar: Max (0, 7), min (2, 3)', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1453,7 +1453,7 @@
       [['spetsig vinkel.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: ungefär 5,2 cm^2', padL, y);
+    xe = T.str('Svar: Ungefär 5,2 cm^2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1523,7 +1523,7 @@
     T.stepEnd();
 
     y += 3.2 * F;
-    xe = T.str('Svar a: ungefär 6,7 år', padL, y);
+    xe = T.str('Svar: Ungefär 6,7 år', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1547,7 +1547,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar b: ungefär 8,3 cm/år', padL, y);
+    xe = T.str('Svar: Ungefär 8,3 cm/år', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1567,7 +1567,7 @@
       [['men det gör inte pojkar.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar c: nej, modellen gäller', padL, y);
+    xe = T.str('Svar: Nej, modellen gäller', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('inte för gymnasiepojkar', padL + 30, y);
@@ -1969,7 +1969,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: samma lutning ⟹', padL, y);
+    xe = T.str('Svar: Samma lutning ⟹', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('tangenterna är parallella', padL + 30, y);
@@ -2024,7 +2024,7 @@
       [['13 mil. Starten drar mer.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: ungefär 11 mil', padL, y);
+    xe = T.str('Svar: Ungefär 11 mil', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2108,7 +2108,7 @@
       [['går snett över den.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: ungefär 23 mm', padL, y);
+    xe = T.str('Svar: Ungefär 23 mm', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

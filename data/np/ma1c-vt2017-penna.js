@@ -621,7 +621,7 @@
       [['över 0 °F.']]
     ]);
     y += 2.5 * F;
-    xe = T.str('Svar: ungefär 32 °F', padL, y);
+    xe = T.str('Svar: Ungefär 32 °F', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -838,7 +838,7 @@
       [['duger.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: se grafen i figuren', padL, y);
+    xe = T.str('Svar: Se grafen i figuren', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -984,7 +984,7 @@
     T.stepEnd();
 
     y += 3.4 * F;
-    xe = T.str('Svar: sin v=', padL, y);
+    xe = T.str('Svar: Sin v=', padL, y);
     xe = T.rot('', xe, y);
     xe = T.fracH('3', '7', xe + 0.46 * F, y);
     T.underline(xe, y + 0.95 * F);
@@ -1446,7 +1446,7 @@
       [['också två.']]
     ]);
     y += 2.5 * F;
-    xe = T.str('Svar: ungefär 13 m', padL, y);
+    xe = T.str('Svar: Ungefär 13 m', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1496,7 +1496,7 @@
       [['lägre.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: ungefär 80,4 °C', padL, y);
+    xe = T.str('Svar: Ungefär 80,4 °C', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1624,7 +1624,7 @@
       [['svaret blir ett intervall.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar a: något år 2019-2022', padL, y);
+    xe = T.str('Svar: Något år 2019-2022', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1663,7 +1663,7 @@
       [['ett rimligt svar.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar b: ungefär 19 %', padL, y);
+    xe = T.str('Svar: Ungefär 19 %', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1713,7 +1713,7 @@
       [['som ett intervall.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar c: något år 2027-2030', padL, y);
+    xe = T.str('Svar: Något år 2027-2030', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1755,7 +1755,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: 6 900 kr och 7 900 kr', padL, y);
+    xe = T.str('Svar: 6 900 kr och 7 900 kr', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1775,7 +1775,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar b: K=345x', padL, y);
+    xe = T.str('Svar: K=345x', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1867,7 +1867,7 @@
       [['395·80-4 000=27 600.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar c: vid 80 m^2', padL, y);
+    xe = T.str('Svar: Vid 80 m^2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1959,7 +1959,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: bara Saras lösning är', padL, y);
+    xe = T.str('Svar: Bara Saras lösning är', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('ett bevis', padL + 30, y);
@@ -2275,7 +2275,7 @@
       [['gäller den för alla cirklar.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: ja, påståendet stämmer', padL, y);
+    xe = T.str('Svar: Ja, påståendet stämmer', padL, y);
     T.stepEnd();
     y += 2.1 * F;
     xe = T.str('alltid', padL + 30, y);
@@ -2332,7 +2332,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: ungefär 65,5 cm', padL, y);
+    xe = T.str('Svar: Ungefär 65,5 cm', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2372,7 +2372,7 @@
       [['tre meter, ungefär takhöjd.']]
     ]);
     y += 2.5 * F;
-    xe = T.str('Svar b: 275 cm=2,75 m', padL, y);
+    xe = T.str('Svar: 275 cm=2,75 m', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2399,7 +2399,7 @@
     T.stepEnd();
 
     y += 3.2 * F;
-    xe = T.str('Svar a: T=', padL, y);
+    xe = T.str('Svar: T=', padL, y);
     xe = T.fracH('70', 'p', xe, y);
     T.underline(xe, y + 0.95 * F);
     T.stepEnd();
@@ -2455,7 +2455,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar b: ungefär 5 % per år', padL, y);
+    xe = T.str('Svar: Ungefär 5 % per år', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2498,7 +2498,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar c: 5,08 % per år', padL, y);
+    xe = T.str('Svar: 5,08 % per år', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

@@ -152,7 +152,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: x^2+25', padL, y);
+    xe = T.str('Svar: x^2+25', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -176,7 +176,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar b: x^2', padL, y);
+    xe = T.str('Svar: x^2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -229,7 +229,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: c=2', padL, y);
+    xe = T.str('Svar: c=2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -262,7 +262,7 @@
     T.stepEnd();
 
     y += 3.4 * F;
-    xe = T.str('Svar b: x=1,5', padL, y);
+    xe = T.str('Svar: x=1,5', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -372,7 +372,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar a: 9', padL, y);
+    xe = T.str('Svar: 9', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -393,7 +393,7 @@
       [['bredast och lägst, störst.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar b: kurva D', padL, y);
+    xe = T.str('Svar: Kurva D', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -446,7 +446,7 @@
       [['3^2+4^2=25.']]
     ]);
     y += 2.7 * F;
-    xe = T.str('Svar a: till exempel P(6, 0)', padL, y);
+    xe = T.str('Svar: Till exempel P(6, 0)', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -535,7 +535,7 @@
       [['ger B. Stämmer.']]
     ], 1.05);
     y += 3.8 * F;
-    xe = T.str('Svar b: B', padL, y);
+    xe = T.str('Svar: B', padL, y);
     xe = bigParen(T, F, xe + 0.05 * F, y, false);
     xe = T.fracH('3', '2', xe, y);
     xe = T.str(', ', xe, y);
@@ -571,9 +571,17 @@
     T.stepEnd();
 
     tanke(y, [
-      [['x står i exponenten. Logaritmerar']],
-      [['jag båda led kommer exponenten']],
-      [['ned som en faktor: lg 5^x=x·lg 5.']]
+      [['x står i exponenten. Jag']],
+      [['logaritmerar båda led.']]
+    ]);
+    y += 2.6 * F;
+    T.str('lg 5^x=lg 7', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Logaritmlagen lg a^x=x·lg a']],
+      [['flyttar ned exponenten som']],
+      [['en faktor.']]
     ]);
     y += 2.6 * F;
     T.str('x·lg 5=lg 7', padL + 30, y);
@@ -590,7 +598,7 @@
     T.stepEnd();
 
     y += 3.4 * F;
-    xe = T.str('Svar a: x=', padL, y);
+    xe = T.str('Svar: x=', padL, y);
     xe = fracLift(T, F, 'lg 7', 'lg 5', xe, y);
     T.underline(xe, y + 0.95 * F);
     T.stepEnd();
@@ -676,7 +684,7 @@
       [['3-3=0. Stämmer.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar b: x=43', padL, y);
+    xe = T.str('Svar: x=43', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -721,7 +729,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar c: x=2', padL, y);
+    xe = T.str('Svar: x=2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -813,7 +821,7 @@
     T.stepEnd();
 
     y += 3.4 * F;
-    xe = T.str('Svar d: x=', padL, y);
+    xe = T.str('Svar: x=', padL, y);
     xe = T.fracH('2', '3', xe, y);
     T.underline(xe, y + 0.95 * F);
     T.stepEnd();
@@ -851,7 +859,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar e: x_1=5987 och x_2=5985', padL, y);
+    xe = T.str('Svar: x_1=5987 och x_2=5985', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1029,7 +1037,7 @@
     T.stepEnd();
 
     y += 3.4 * F;
-    xe = T.str('Svar a: till exempel y=(x-3)^2', padL, y);
+    xe = T.str('Svar: Till exempel y=(x-3)^2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1053,7 +1061,7 @@
       [['har en spegelbild i x-axeln.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar b: till exempel x=y^2', padL, y);
+    xe = T.str('Svar: Till exempel x=y^2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1222,7 +1230,7 @@
       [['y=5,5-2x=−2x+5,5.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar a: Nej, y=x-3,5', padL, y);
+    xe = T.str('Svar: Nej, y=x-3,5', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1271,7 +1279,7 @@
       [['ingen lösning. Sanna har fel.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar b: Nej', padL, y);
+    xe = T.str('Svar: Nej', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2316,7 +2324,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: till exempel (0, 7)', padL, y);
+    xe = T.str('Svar: Till exempel (0, 7)', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2683,7 +2691,7 @@
     T.stepEnd();
 
     y += 2.5 * F;
-    xe = T.str('Svar: bredd 28 m och höjd 27 m', padL, y);
+    xe = T.str('Svar: Bredd 28 m och höjd 27 m', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -2848,8 +2856,15 @@
 
     tanke(y, [
       [['t står i exponenten. Jag']],
-      [['logaritmerar båda led, och']],
-      [['logaritmlagen lg a^t=t·lg a']],
+      [['logaritmerar båda led.']]
+    ], 1.05);
+    y += 3.4 * F;
+    xx = T.str('lg 1,06389...^t=lg', padL + 30, y);
+    T.fracH('5000', '1411', xx + 0.12 * F, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Logaritmlagen lg a^t=t·lg a']],
       [['plockar ned t som en faktor.']]
     ], 1.05);
     y += 3.4 * F;
@@ -2883,7 +2898,7 @@
       [['ungefär 5000.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar: år 2026', padL, y);
+    xe = T.str('Svar: År 2026', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -3035,7 +3050,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar a: x är tiden i timmar', padL, y);
+    xe = T.str('Svar: x är tiden i timmar', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -3149,7 +3164,7 @@
       [['och 81·1,44 är ungefär 117.']]
     ]);
     y += 2.6 * F;
-    xe = T.str('Svar b: 351 km≈350 km', padL, y);
+    xe = T.str('Svar: 351 km≈350 km', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

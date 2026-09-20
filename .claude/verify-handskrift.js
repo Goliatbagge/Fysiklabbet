@@ -377,6 +377,91 @@ for (const typ of valda) {
   }
 }
 
+/* LOGARITMERA BÅDA LED I TVÅ RADER (användarkrav 2026-09-20): en rad
+ * "x·lg 8=lg 15" (eller "k·ln e=ln 1,05") ska föregås av raden där båda
+ * led logaritmerades, "lg 8^x=lg 15", inom de närmaste raderna i källan.
+ * Basen 10-metoden ("10^x·lg 2=10^lg 37") räknas också som förberedelse.
+ * Källkodsgranskning av strängarna som skickas till pennan. */
+{
+  const src = [path.join(ROOT, 'handskrift.js'), ...pennaFiler()]
+    .map(f => fs.readFileSync(f, 'utf8')).join('\n');
+  const rader = src.split('\n');
+  const hopp = [];
+  rader.forEach((rad, i) => {
+    if (/^\s*(\/\*|\*|\/\/)/.test(rad)) return;               /* kommentar */
+    const m = rad.match(/T\.str\('([0-9]*[a-z]·l[gn] [^']*=l[gn][ (][^']*)'/);
+    if (!m) return;
+    let ok = false;
+    for (let k = Math.max(0, i - 14); k < i; k++) {
+      if (/T\.str\('l[gn] [^']*\^[^']*=l[gn][ (]/.test(rader[k])) ok = true;   /* lg 8^x=lg 15 */
+      if (/T\.str\('10\^/.test(rader[k])) ok = true;                      /* basen 10 */
+    }
+    if (!ok) hopp.push((i + 1) + ': ' + m[1].slice(0, 50));
+  });
+  if (hopp.length) {
+    felTot += hopp.length;
+    console.log('\n\x1b[31mFEL\x1b[0m  exponenten flyttad ned utan raden där båda led ' +
+                'logaritmeras (skriv "lg 8^x=lg 15" som eget steg först):');
+    hopp.slice(0, 12).forEach(r => console.log('      - rad ' + r));
+  }
+}
+
+/* ROTEN UR BÅDA LED SOM EGEN RAD (användarkrav 2026-09-20): "x=±3" ska
+ * föregås av raden "x=±√9" (T.rot) inom de närmaste raderna i källan.
+ * SVAR MED STOR BOKSTAV (användarkrav 2026-09-20): 'Svar: ' följt av ett
+ * ord (två bokstäver eller fler) ska börja med stor bokstav. */
+{
+  const src = [path.join(ROOT, 'handskrift.js'), ...pennaFiler()]
+    .map(f => fs.readFileSync(f, 'utf8')).join('\n');
+  const rader = src.split('\n');
+  const rot = [], liten = [];
+  rader.forEach((rad, i) => {
+    if (/^\s*(\/\*|\*|\/\/)/.test(rad)) return;               /* kommentar */
+    /* bara kvadratrotsfallet: en rad "…^2=tal" strax före och ingen rotrad */
+    if (/T\.str\('[a-z](?:_[0-9])?=±[0-9]/.test(rad)) {
+      let ok = false, kvadrat = false;
+      for (let k = Math.max(0, i - 8); k < i; k++) {
+        if (/T\.rot\(/.test(rader[k])) ok = true;
+        if (/T\.str\('[^']*\^2=[-−0-9][^']*'/.test(rader[k])) kvadrat = true;
+      }
+      if (kvadrat && !ok) rot.push((i + 1) + ': ' + rad.trim().slice(0, 60));
+    }
+    if (/'Svar: [a-zåäö][a-zåäö]/.test(rad)) liten.push((i + 1) + ': ' + rad.trim().slice(0, 60));
+  });
+  if (rot.length) {
+    felTot += rot.length;
+    console.log('\n\x1b[31mFEL\x1b[0m  x=±3 utan raden x=±√9 före (dra roten som egen rad):');
+    rot.slice(0, 12).forEach(r => console.log('      - rad ' + r));
+  }
+  if (liten.length) {
+    felTot += liten.length;
+    console.log('\n\x1b[31mFEL\x1b[0m  svarsrad med liten bokstav (skriv "Svar: Till exempel …"):');
+    liten.slice(0, 12).forEach(r => console.log('      - rad ' + r));
+  }
+}
+
+/* SVARSRAD UTAN DELUPPGIFTSBOKSTAV (användarkrav 2026-09-20): svaret till
+ * en deluppgift skrivs "Svar: nollställen", aldrig "Svar a: nollställen".
+ * Raden står redan under sin deluppgift. Källkodsgranskning av strängarna
+ * som skickas till pennan. */
+{
+  const src = [path.join(ROOT, 'handskrift.js'), ...pennaFiler()]
+    .map(f => fs.readFileSync(f, 'utf8')).join('\n');
+  const rader = src.split('\n');
+  const bokstav = [];
+  rader.forEach((rad, i) => {
+    if (/^\s*(\/\*|\*|\/\/)/.test(rad)) return;               /* kommentar */
+    if (/'Svar [a-f][:)]/.test(rad)) bokstav.push((i + 1) + ': ' + rad.trim().slice(0, 60));
+  });
+  if (bokstav.length) {
+    felTot += bokstav.length;
+    console.log('\n\x1b[31mFEL\x1b[0m  svarsrad med deluppgiftsbokstav ' +
+                '(skriv "Svar: …", inte "Svar a: …"):');
+    bokstav.slice(0, 12).forEach(r => console.log('      - rad ' + r));
+    if (bokstav.length > 12) console.log('      … och ' + (bokstav.length - 12) + ' till');
+  }
+}
+
 /* EKVATIONSOPERATIONEN SKRIVS ALLTID UT (se REGEL i handskrift.js
  * filhuvud, 2026-09-07). Två genvägar som bara syns i uppspelningen:
  *   a) ett väggsteg på en rad — `if (vagg) T.vaggOp(…)` följt av

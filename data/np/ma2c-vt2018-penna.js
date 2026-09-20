@@ -467,13 +467,23 @@
 
     tanke(y, [
       [['Vänsterledet är ett konjugatpar:']],
-      [['(a+b)(a-b)=a^2-b^2. Högerledet']],
-      [['är en kvadrat: a^2+2ab+b^2.']],
-      [['Här är a=x och b=5.']]
+      [['(a+b)(a-b)=a^2-b^2, med a=x']],
+      [['och b=5.']]
     ]);
+    /* två regler på samma rad = två klicksteg: konjugatregeln skrivs och
+     * pennan stannar med noten uppe; vid nästa klick tonar den ut, kvadre-
+     * ringsregeln tonar in och kvadraten utvecklas (REGEL EN REGELNOT PER
+     * KLICKSTEG) */
     y += 3.6 * F;
     var nK = regelNot(T, F, 'Konjugatregeln: (a + b)(a − b) = a² − b²', padL, y - 1.45 * F);
     xx = T.str('x^2-25', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Högerledet är en kvadrat:']],
+      [['(a+b)^2=a^2+2ab+b^2 med a=x']],
+      [['och b=5.']]
+    ]);
     regelGom(T, nK);
     var nQ = regelNot(T, F, 'Kvadreringsregeln: (a + b)² = a² + 2ab + b²', padL, y - 1.45 * F);
     T.str('=x^2+10x+25', xx, y);

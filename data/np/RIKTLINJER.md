@@ -175,6 +175,9 @@ finns kvar som alternativ vy och ska hållas i takt med pennlösningen.
   rättande lärare ska kunna följa varje rad.
 - **Potenser skrivs om ett steg i taget:** `x^(−1/2)` → `1/x^(1/2)` →
   `1/√x`, en omskrivning per rad (användarkrav 2026-09-20).
+- **En regelnot per klicksteg:** två regler på samma rad ger två klick,
+  med paus efter det första ledet och notbyte vid klicket (användarkrav
+  2026-09-20).
 - **Roten ur båda led som egen rad:** `x² = 9` → `x = ±√9` → `x = ±3`,
   aldrig direkt till `±3` (användarkrav 2026-09-20). Gäller även `steg`.
 - **Jämförelse med ringar:** när en likhet avläses genom att två delar

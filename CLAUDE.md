@@ -471,6 +471,12 @@ Så här bygger du scenen:
    aldrig direkt från negativ exponent till rottecken (användarkrav
    2026-09-20, referens: NP Ma 2c VT 2018 uppgift 7). Gäller pennlösning
    och textlösning.
+3j. **En regelnot per klicksteg.** Tillämpas två regler på samma rad
+   (konjugatregeln i ena ledet, kvadreringsregeln i det andra) blir det
+   två klick: första regeln poppar upp och dess led skrivs, pennan
+   stannar med noten kvar, och vid nästa klick tonar den ut, nästa regel
+   tonar in och nästa led skrivs (användarkrav 2026-09-20, referens: NP
+   Ma 2c VT 2018 uppgift 4b).
 3d. **Roten ur båda led som egen rad.** `x² = 9` → `x = ±√9` → `x = ±3`,
    aldrig direkt till `±3` (användarkrav 2026-09-20). De svagaste eleverna
    ska kunna följa varje steg. Gäller pennlösning och textlösning;

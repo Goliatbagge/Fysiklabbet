@@ -544,6 +544,15 @@
  * √x = 3. Aldrig direkt från x^(−1/2) till 1/√x. Textlösningen skriver
  * samma mellanled. Referens: NP Ma 2c VT 2018 u7.
  *
+ * REGEL (EN REGELNOT PER KLICKSTEG, användarkrav 2026-09-20): tillämpas
+ * två regler på samma rad (konjugatregeln i vänsterledet, kvadrerings-
+ * regeln i högerledet) blir det TVÅ klicksteg. Den första regeln poppar
+ * upp, dess led skrivs, och pennan STANNAR med noten kvar (T.stepEnd
+ * före regelGom). Vid nästa klick tonar den första noten ut, den andra
+ * tonar in och nästa led skrivs. Två regler och två utvecklingar i ett
+ * svep är för mycket på en gång för eleven. Referens: NP Ma 2c VT 2018
+ * u4 b.
+ *
  * REGEL (ROTEN UR BÅDA LED SOM EGEN RAD, användarkrav 2026-09-20): från
  * x² = 9 skrivs FÖRST raden x = ±√9 (rottecknet ritat med T.rot), och
  * först på nästa rad x = ±3. Att hoppa direkt till x = ±3 gömmer just det

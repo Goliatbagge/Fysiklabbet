@@ -103,6 +103,76 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-20-nar-magnetfaltet-knyts-om",
+    date: "2026-09-20",
+    title: "Solens utbrott börjar med att magnetfältet slits av — och omkopplingen går alltid ungefär lika fort",
+    deck: "Ett enda utbrott på solen kan frigöra mer energi på några minuter än hela mänskligheten gör av med under tiotusen år, och energin kommer inte från kärnreaktioner utan från solens eget magnetfält. Hur snabbt fältlinjerna kan slitas av och knytas ihop på nytt är en av plasmafysikens envisaste gåtor. Ett japanskt lag har nu byggt om förloppet i millimeterskala med en av världens kraftfullaste lasrar, och får samma takt hur de än ändrar förutsättningarna.",
+    category: "Plasmafysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-20-nar-magnetfaltet-knyts-om.jpg",
+    imageAlt: "Närbild av solens yta i ultraviolett ljus, i guld och orange. Ett långt glödande schakt löper snett genom bilden där ett filament av solmateria nyss slitit sig loss, omgivet av ljusa bågar av het gas.",
+    imageCredit: "Foto: NASA/Solar Dynamics Observatory (public domain), via Wikimedia Commons. Bilden visar det glödande schakt som blev kvar på solen efter ett filamentutbrott i september 2013, inte något av de förlopp som studerats i laboratoriet.",
+    tags: ["plasmafysik", "magnetisk rekonnektion", "magnetfält", "solen", "soleruption", "rymdväder", "laser", "plasma", "energiomvandling", "astrofysik"],
+    sources: [
+      { name: "Phys.org: Laser experiments recreate solar flare physics and reveal consistent magnetic reconnection rates (18 september 2026)", url: "https://phys.org/news/2026-09-laser-recreate-solar-flare-physics.html" },
+      { name: "EurekAlert! (Kyushu University): Investigating the underlying mechanisms of magnetic reconnection in space weather events (18 september 2026)", url: "https://www.eurekalert.org/news-releases/1144353" },
+      { name: "Physical Review E: Characterizing the temporal evolution of Biermann-battery-driven magnetic reconnection in laser-ablated plasmas", url: "https://journals.aps.org/pre/abstract/10.1103/2b4s-5m1n" },
+      { name: "arXiv: fri förhandsversion av studien (inskickad 20 augusti 2026)", url: "https://arxiv.org/abs/2608.19591" }
+    ],
+    research: {
+      citation: "T. Morita med flera, ”Characterizing the temporal evolution of Biermann-battery-driven magnetic reconnection in laser-ablated plasmas”, Physical Review E, volym 114, artikel 035206, publicerad 8 september 2026",
+      url: "https://doi.org/10.1103/2b4s-5m1n"
+    },
+    body: [
+      { type: 'p', html: 'Solen lyser med en påfallande jämn effekt. Men ibland blossar ett område i dess atmosfär plötsligt upp, och på några minuter frigörs i storleksordningen 10<sup>25</sup>&nbsp;joule. Det är mer energi än hela mänskligheten gör av med under tiotusen år. Röntgenstrålningen från en sådan soleruption når oss på dryga åtta minuter och kan störa radiotrafik och navigation, och några dygn senare kan ett moln av laddad gas komma efter och rycka i jordens magnetfält.' },
+      { type: 'p', html: 'Energin kommer inte från fusionen i solens kärna. Den kommer från solens <em>magnetfält</em>, som år efter år vrids och tvinnas av de strömmande gasmassorna tills det sitter som en överspänd fjäder ovanför ytan. Frågan är hur fältet bär sig åt när det plötsligt släpper greppet om energin.' },
+
+      { type: 'h2', text: 'Fältlinjer som slits av och knyts ihop på nytt' },
+      { type: 'p', html: 'Solens yttre lager är ett plasma, alltså en gas så het att elektronerna slitits loss från atomkärnorna. Ett plasma leder elektrisk ström nästan perfekt, och det får en egendomlig följd: magnetfältets linjer sitter som infrusna i gasen. Rör sig gasen följer fältet med, och två områden med fält åt olika håll kan inte utan vidare blandas.' },
+      { type: 'p', html: 'Utan vidare, men inte aldrig. Pressas två sådana områden mot varandra kläms plasmat ut ur mellanrummet, och kvar blir ett tunt skikt där en kraftig elektrisk ström flyter: ett <em>strömskikt</em>. Där bryts fältlinjerna sönder och knyts ihop tvärsöver skiktet i stället. De nya, skarpt böjda linjerna beter sig som spända gummisnoddar och rätar ut sig, så att plasmat slungas ut åt sidorna medan den lagrade magnetiska energin blir värme och rörelse. Förloppet kallas magnetisk rekonnektion och anses ligga bakom både soleruptioner och de magnetiska stormar som tänder norrsken.' },
+      { type: 'p', html: 'Problemet är farten. Den första genomräknade modellen, från 1950-talet, ger ett förlopp som skulle ta veckor eller månader för ett område av solens storlek. Verkligheten tar minuter. Värre ändå: när rekonnektion mäts på solen, i jordens magnetfält och i laboratoriets plasman blir svaret ungefär detsamma varje gång, trots att förhållandena skiljer sig åt med många tiopotenser.' },
+
+      { type: 'h2', text: 'Ett tal utan enhet, och det ligger nästan alltid nära 0,1' },
+      { type: 'p', html: 'Takten anges som en <em>rekonnektionshastighet</em>, ett rent tal utan enhet: hur fort plasmat strömmar in mot strömskiktet, delat med den fart som magnetfältets spänning kan slunga ut det med (den så kallade Alfvénfarten). Värdet 0,1 betyder alltså att inflödet är en tiondel av utflödet. Varför naturen gång på gång väljer just den storleksordningen är en öppen fråga, och den har fått ett eget namn i litteraturen: 0,1-problemet.' },
+
+      { type: 'h2', text: 'Två plasmamoln i en laserkammare' },
+      { type: 'p', html: 'Ett lag lett av docent Taichi Morita vid Kyushu University har tillsammans med forskare vid Osaka University angripit frågan experimentellt, med Gekko-XII, en av världens kraftfullaste lasrar. De sände omkring 600&nbsp;J per stråle i pulser på cirka 1,3&nbsp;ns mot två skilda punkter på en tunn kolfolie. Fokuseringen till en fläck på ungefär 100&nbsp;µm ger en intensitet på omkring 5,9&nbsp;·&nbsp;10<sup>15</sup>&nbsp;W/cm<sup>2</sup>. Vid varje fläck blåses ett plasmamoln av, och de två molnen expanderar mot varandra.' },
+      { type: 'p', html: 'Magnetfältet behövde de inte tillföra utifrån, för plasmat skapar det självt. Inuti ett expanderande moln pekar temperaturens och täthetens förändringsriktningar inte åt samma håll, och då växer ett magnetfält fram av sig självt i ringar kring fläcken. Effekten kallas Biermanns batteri och beskrivs av $\\dfrac{\\partial \\mathbf{B}}{\\partial t} = \\dfrac{k_\\mathrm{B}}{e\\,n_e}\\,\\nabla T_e \\times \\nabla n_e$, där $k_\\mathrm{B}$ är Boltzmanns konstant, $e$ elementarladdningen och $n_e$ elektrontätheten. Kryssprodukten är själva poängen: pekar de två förändringsriktningarna åt samma håll blir fältet noll. Där de två molnen möts står ringfälten mot varandra, precis den uppställning rekonnektion kräver.' },
+      { type: 'p', html: 'För att se vad som hände inne i plasmat byggde laget en Thomsonspridningsmätning som lyser in från två håll. En grön sonderingslaser (532&nbsp;nm, cirka 300&nbsp;mJ) skickas genom plasmat, och ur färgfördelningen hos det ljus elektronerna sprider går det att läsa av temperatur, täthet och strömningsfart i en bestämd punkt.' },
+
+      { type: 'h2', text: 'Samma takt, hur de än ändrade förutsättningarna' },
+      { type: 'p', html: 'Genom att flytta isär laserfläckarna, 1&nbsp;mm i ett fall och 2&nbsp;mm i ett annat, kunde forskarna ändra tätheten, fältstyrkan och tidpunkten för när molnen möttes. Förhistorierna blev mycket olika. Ändå landade rekonnektionshastigheten på 0,1 till 0,2 så snart ett strömskikt hade bildats, alltså kring det värde som uppmätts på så många andra håll.' },
+      { type: 'quote', html: 'Vår studie ger experimentellt stöd för att den magnetiska rekonnektionen är robust, genom att visa att snabb rekonnektion kan ske i ungefär samma takt trots väsentligt olika förhållanden i inflödet.', cite: 'Taichi Morita, Kyushu University' },
+      { type: 'p', html: 'Laget kunde också mäta hur den frigjorda magnetiska energin fördelade sig. En betydande del gick till att värma plasmat snarare än till riktad rörelse hos utflödet, en uppdelning som tidigare mest har varit en parameter i datormodeller.' },
+
+      { type: 'h2', text: 'Från millimetrar till hundratusentals kilometer' },
+      { type: 'p', html: 'Mellan laboratoriet och solen går ett hårt streck. I laserkammaren handlar det om millimetrar och miljarddels sekunder, på solen om strömskikt som kan vara tusentals kilometer långa och förlopp som varar i minuter. Resultaten kan alltså inte flyttas över rakt av. Vad de däremot ger är en uppmätt verklighet att pröva teorier och datorsimuleringar mot, där både inflöde och utflöde är kända samtidigt. Nästa steg för laget är att närma sig rymdens villkor, med snedställda magnetfält och osymmetriska inflöden.' },
+      { type: 'p', html: 'Att frågan alls är brådskande beror på att förloppet når oss. Magnetiska stormar drivna av rekonnektion har slagit ut elnät, stört flygets radiotrafik och kortat livet på satelliter.' },
+      { type: 'quote', html: 'Den förbättrade förståelsen av magnetisk rekonnektion hjälper oss att förutsäga händelser i rymdvädret som påverkar satelliter, kommunikationssystem, navigationsteknik och elinfrastruktur.', cite: 'Taichi Morita, Kyushu University' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Magnetisk rekonnektion är inte bara ett rymdfenomen. Samma omkoppling stör plasmat i fusionsanläggningar, där den kan få energi att läcka ut ur den magnetiska inneslutningen.',
+        'Ordet <em>plasma</em> för materiens fjärde tillstånd myntades av Irving Langmuir 1928. Det är sällsynt i vardagen men normen i universum, eftersom alla stjärnor är plasmaklot.',
+        'Gekko-XII vid Osaka University har tolv laserstrålar och byggdes för fusionsforskning. I det här experimentet bar varje stråle omkring 600&nbsp;J under 1,3&nbsp;ns, vilket medan pulsen pågår motsvarar en effekt på närmare 5&nbsp;·&nbsp;10<sup>11</sup>&nbsp;W, alltså tiotals gånger hela Sveriges elförbrukning.'
+      ] },
+
+      { type: 'p', html: 'Gåtan varför talet 0,1 återkommer är inte löst. Men mätningarna flyttar misstanken: svaret verkar sitta i det tunna strömskiktet självt, inte i plasmat som strömmar in mot det.' }
+    ],
+    larare: {
+      moment: [
+        { label: 'Magnetism och magnetfält', href: 'katalog.html?id=fy2-3.1' },
+        { label: 'Laddade partiklar i magnetfält', href: 'katalog.html?id=fy2-3.4' },
+        { label: 'Jordmagnetiska fältet', href: 'katalog.html?id=fy2-3.6' }
+      ],
+      fragor: [
+        'Forskarna fick ungefär samma rekonnektionshastighet trots att de ändrade inflödets täthet och fältstyrka. Varför är ett resultat som inte förändras när man vrider på rattarna ofta mer upplysande än ett som gör det?',
+        'Laboratorieplasmat är några millimeter stort och lever några miljarddels sekunder, medan solens förlopp är miljontals gånger större och långsammare. Vilka krav måste vara uppfyllda för att ett litet experiment ändå ska säga något om ett stort förlopp?',
+        'Rekonnektionshastigheten är ett tal utan enhet, en kvot mellan två farter. Vad vinner man på att beskriva ett förlopp med ett sådant tal i stället för med en fart i meter per sekund?'
+      ]
+    }
+  },
+
+  {
     id: "2026-09-19-skummet-som-minns",
     date: "2026-09-19",
     title: "Skummet som minns exakt var det trycktes ihop — och struntar i hur fort det gick",

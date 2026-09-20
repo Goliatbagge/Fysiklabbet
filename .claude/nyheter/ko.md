@@ -2084,3 +2084,30 @@ Format per post:
   2026-09-16 och 2026-09-08. Källa (Physics Magazine 2026-09-18):
   https://physics.aps.org/articles/v19/127
   (tillagd 2026-09-19)
+
+- **Ljusstrålen som svänger på 74 femtosekunder** — ett Caltech-lag styr om en ljusstråle med en
+  nanostrukturerad kiselmetayta, utan en enda rörlig del, på 74 miljondels miljarddels sekunder. Ingång:
+  brytning, våglängd, interferens och vad en metayta är. OBS: optik behandlades 2026-09-12 och 2026-09-14
+  — låt det gå tid. Källa (ScienceDaily 2026-09-18):
+  https://www.sciencedaily.com/releases/2026/09/260918024823.htm
+  (tillagd 2026-09-20)
+
+- **En partikeldetektor för hundra kronor** — en fickstor detektor som visar den ständiga skuren av
+  kosmisk strålning genom kroppen, byggd av delar för omkring hundra dollar. Ingång: kosmisk strålning,
+  myoner, joniserande strålning och hur en detektor egentligen fungerar. Bra klassrumsvinkel: den går att
+  bygga själv. Kontrollera vad den faktiskt detekterar (myoner, inte neutriner). Källa (ScienceDaily
+  2026-09-17): https://www.sciencedaily.com/releases/2026/09/260917003725.htm
+  (tillagd 2026-09-20)
+
+- **Myonium ska väga in Einsteins gravitation** — en kontrollerad stråle av myonium, en atom byggd av en
+  antimyon och en elektron, ska användas för att testa om exotisk materia faller som vanlig materia.
+  Ingång: fritt fall, ekvivalensprincipen och exotiska atomer. OBS: namnge alltid partikeln (antimyon),
+  se skrivregeln efter påpekandet 2026-09-16. Partikelfysik publicerades 2026-09-16 — låt det gå tid.
+  Källa (ScienceDaily 2026-09-18): https://www.sciencedaily.com/releases/2026/09/260918024808.htm
+  (tillagd 2026-09-20)
+
+- **Jakten på kvantsvarta hål i LHC breddas** — forskare vid UC Santa Barbara utvidgar sökandet efter
+  mikroskopiska svarta hål i partikelkollisionerna. Ingång: gravitation, extra dimensioner och vad ett
+  uteblivet fynd faktiskt visar. Kontrollera noga vad som är förslag och vad som är mätning. Källa
+  (Phys.org 2026-09): https://phys.org/news/2026-09-physicists-quantum-black-holes-lhc.html
+  (tillagd 2026-09-20)

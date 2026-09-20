@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sat, 19 Sep 2026 01:26:40 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 01:30:38 GMT</lastBuildDate>
+    <item>
+      <title>Solens utbrott börjar med att magnetfältet slits av — och omkopplingen går alltid ungefär lika fort</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-20-nar-magnetfaltet-knyts-om</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-20-nar-magnetfaltet-knyts-om</guid>
+      <pubDate>Sun, 20 Sep 2026 04:00:00 GMT</pubDate>
+      <category>Plasmafysik</category>
+      <description>Ett enda utbrott på solen kan frigöra mer energi på några minuter än hela mänskligheten gör av med under tiotusen år, och energin kommer inte från kärnreaktioner utan från solens eget magnetfält. Hur snabbt fältlinjerna kan slitas av och knytas ihop på nytt är en av plasmafysikens envisaste gåtor. Ett japanskt lag har nu byggt om förloppet i millimeterskala med en av världens kraftfullaste lasrar, och får samma takt hur de än ändrar förutsättningarna.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-20-nar-magnetfaltet-knyts-om.jpg" length="235417" type="image/jpeg"/>
+    </item>
     <item>
       <title>Skummet som minns exakt var det trycktes ihop — och struntar i hur fort det gick</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-09-19-skummet-som-minns</link>
@@ -177,15 +186,6 @@
       <category>Astronomi</category>
       <description>NASA:s nya rymdteleskop lämnade Kennedy Space Center i söndags och är på väg mot en punkt 1,5 miljoner kilometer från jorden. Frågan det ska svara på är inte om den mörka materien finns, utan vad den består av — och det avgörs av hur tidigt materien hann klumpa ihop sig.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-01-hundra-ganger-vidare-blick.jpg" length="117606" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Vågen går rakt genom magneten utan att flytta en enda atom — nu har den fångats ner till 67 nanometers våglängd</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-08-31-spinnvagor-i-rorelse</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-08-31-spinnvagor-i-rorelse</guid>
-      <pubDate>Mon, 31 Aug 2026 04:00:00 GMT</pubDate>
-      <category>Magnetism</category>
-      <description>En spinnvåg är en krusning i atomernas magnetiska riktningar, och den skulle kunna bära information genom ett material utan att någon ström flyter. Ett europeiskt forskarlag har byggt en röntgenmetod som avbildar sådana vågor direkt, och såg då en process som ingen hade sett förut.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-08-31-spinnvagor-i-rorelse.jpg" length="170692" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

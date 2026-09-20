@@ -824,7 +824,7 @@ window.BEGREPP = [
   {
     id: 'plasma',
     term: 'Plasma',
-    former: ['plasma', 'plasmat'],
+    former: ['plasma', 'plasmat', 'plasman', 'plasmamoln', 'plasmamolnet', 'plasmamolnen'],
     kort: 'Materiens fjärde tillstånd: en gas så energirik att elektronerna slitits loss från sina atomer. Nästan all synlig materia i universum — stjärnorna — är plasma.',
     body: [
       { type: 'p', html: 'Fast form, vätska, gas — och så plasma. Värmer man en gas tillräckligt, eller utsätter den för starka elektriska fält, slås elektronerna loss från atomerna. Kvar blir en virvlande blandning av fria elektroner och positivt laddade joner. Den blandningen beter sig helt annorlunda än en vanlig gas: den leder elektrisk ström utmärkt, och den både påverkas av och skapar egna magnetfält, vilket ger plasma ett rikt och ofta dramatiskt beteende.' },
@@ -3098,6 +3098,54 @@ window.BEGREPP = [
       { type: 'p', html: 'Tänk dig ett hönsnät av kolatomer, där varje atom sitter i hörnet av en sexkant. Rullar man ihop ett sådant nät till en sömlös tub får man ett kolnanorör. Tuben kan vara några få nanometer i diameter men många mikrometer lång, alltså tusentals gånger längre än bred, och ibland sitter flera rör inuti varandra som ryska dockor. Materialet är alltså rent kol, precis som grafiten i en blyertspenna, men bindningarna sitter arrangerade på ett sätt som ger helt andra egenskaper.' },
       { type: 'p', html: 'Bindningen mellan kolatomer i ett sådant nät är en av de starkaste som finns, och eftersom kraften i ett rör verkar längs tubens vägg blir ett kolnanorör extremt styvt och starkt i längdled i förhållande till sin vikt. Rören leder dessutom värme utmärkt, och beroende på exakt hur nätet är hoprullat leder de ström antingen som en metall eller som en halvledare. De tillverkas vanligen genom att en kolhaltig gas får sönderdelas över små metallpartiklar vid närmare tusen grader, varvid rören växer upp ur partiklarna.' },
       { type: 'p', html: 'Får man dem att växa tätt intill varandra på en yta bildar de en skog av upprättstående rör, ett mycket lätt och poröst material som går att trycka ihop och som sedan reser sig igen. En sådan skog är också bland det svartaste som gjorts: ljus som träffar ytan studsar ned mellan rören och kommer aldrig ut igen. De används i dag bland annat som svarta ytor i optiska instrument, som förstärkning i kompositmaterial och som elektroder, medan drömmen om långa, felfria fibrer i stor skala ännu inte är infriad.' }
+    ]
+  },
+  {
+    id: 'magnetisk-rekonnektion',
+    term: 'Magnetisk rekonnektion',
+    former: ['magnetisk rekonnektion', 'magnetiska rekonnektionen', 'rekonnektion', 'rekonnektionen', 'rekonnektionshastighet', 'rekonnektionshastigheten', 'omkoppling av magnetfältet'],
+    kort: 'Förloppet där magnetfältslinjer i ett elektriskt ledande gasmoln plötsligt bryts sönder och kopplas ihop på nytt åt ett annat håll, varvid en stor del av den lagrade magnetiska energin blir värme och rörelse.',
+    relaterade: ['plasma', 'stromskikt'],
+    body: [
+      { type: 'p', html: 'I en gas så het att elektronerna lämnat sina atomkärnor, ett plasma, sitter magnetfältets linjer som infrusna i gasen. Flyttar sig gasen följer fältet med, ungefär som trådarna i en tygbit följer med när man drar i tyget. Just därför kan två gasmoln vars fält pekar åt olika håll inte helt enkelt blandas: fälten är i vägen för varandra.' },
+      { type: 'p', html: 'Trycks de ändå mot varandra kläms gasen ut ur mellanrummet, och kvar blir ett mycket tunt skikt där en kraftig elektrisk ström flyter. I det skiktet håller inte längre infrysningen. Linjerna bryts sönder och knyts ihop tvärsöver skiktet i stället, så att en linje som förut tillhörde det ena molnet nu sitter ihop med en från det andra. De nya linjerna får en skarp knäck, och en böjd fältlinje beter sig som en spänd gummisnodd: den rätar ut sig och slungar i väg gasen åt sidorna. Energi som fältet burit i åratal kan därmed frigöras på minuter.' },
+      { type: 'p', html: 'Det är denna omkoppling som anses driva solens utbrott och de magnetiska stormar som tänder norrsken, men också en del av de störningar som plågar fusionsforskningens plasman. Den stora olösta frågan är takten. Räknar man naivt går förloppet alldeles för långsamt för att förklara vad som syns på himlen, och mätningar från vitt skilda håll ger ändå påfallande lika svar.' }
+    ]
+  },
+  {
+    id: 'stromskikt',
+    term: 'Strömskikt',
+    former: ['strömskikt', 'strömskiktet', 'strömskikten'],
+    kort: 'Ett tunt lager i ett plasma där en kraftig elektrisk ström flyter, därför att magnetfältet pekar åt motsatt håll på skiktets två sidor.',
+    relaterade: ['plasma', 'magnetisk-rekonnektion'],
+    body: [
+      { type: 'p', html: 'Ett magnetfält kan inte byta riktning hur abrupt som helst utan att något händer. Möts två områden där fältet pekar åt rakt motsatt håll måste omslaget ske inom ett smalt band, och i det bandet uppstår med nödvändighet en elektrisk ström. Bandet kallas ett strömskikt.' },
+      { type: 'p', html: 'Skikten kan vara häpnadsväckande tunna i förhållande till sin omgivning. I rymden kan ett strömskikt tunnas ut till några hundra kilometer strax innan det ger vika, fast de områden det skiljer åt mäter hundratusentals kilometer. Det är den tunnheten som gör dem intressanta: ju tunnare skiktet är, desto mer märks de små effekter som annars drunknar i det stora.' },
+      { type: 'p', html: 'Just i ett strömskikt tappar plasmat sitt grepp om fältlinjerna, så att de kan brytas sönder och knytas ihop åt ett nytt håll. Skiktet är därför platsen där magnetisk energi kan omvandlas till värme och till strömmar av snabb gas. Liknande skikt finns i jordens magnetiska svans på nattsidan, i solens yttre atmosfär och i de plasman som studeras i laboratorier.' }
+    ]
+  },
+  {
+    id: 'rymdvader',
+    term: 'Rymdväder',
+    former: ['rymdväder', 'rymdvädret', 'rymdväderhändelse', 'rymdväderhändelser', 'magnetisk storm', 'magnetiska stormar', 'geomagnetisk storm', 'geomagnetiska stormar'],
+    kort: 'Samlingsnamn för de växlande förhållandena i rymden kring jorden, drivna av solen: strålningsutbrott, partikelskurar och gasmoln som stör satelliter, radio och elnät.',
+    relaterade: ['plasma', 'magnetisk-rekonnektion'],
+    body: [
+      { type: 'p', html: 'Solen skickar hela tiden ut en tunn ström av laddade partiklar, solvinden, och emellanåt slungas väldiga moln av het gas i väg med den. Träffar ett sådant moln jordens magnetfält knuffas fältet in på nattsidan och ut på dagsidan, strömmar sätts i gång högt uppe i atmosfären och partiklar dräneras ned mot polerna. Det är dessa växlande förhållanden som kallas rymdväder.' },
+      { type: 'p', html: 'Den vackra sidan är norrskenet. Den besvärliga är att stora strömmar i jonosfären inducerar spänningar i långa ledare nere på marken: kraftledningar, järnvägsräls och rörledningar. I mars 1989 slog en kraftig storm ut elnätet i Québec och lämnade miljoner människor utan ström i timmar. Satelliter drabbas också, både av strålningen direkt och av att den övre atmosfären sväller och bromsar dem i banan, och radiotrafik och satellitnavigering kan störas i timmar.' },
+      { type: 'p', html: 'Till skillnad från vädret på marken går rymdvädret att varna för med några timmars framförhållning, eftersom rymdsonder mellan solen och jorden hinner mäta ett annalkande gasmoln innan det når oss. Prognoserna är däremot fortfarande grova, och en stor del av osäkerheten sitter i att fysiken bakom solens utbrott inte är fullt förstådd.' }
+    ]
+  },
+  {
+    id: 'thomsonspridning',
+    term: 'Thomsonspridning',
+    former: ['thomsonspridning', 'thomsonspridningen', 'thomsonspridningsmätning', 'thomsonspridningsmätningen'],
+    kort: 'När ljus studsar mot fria elektroner utan att ändra sin energi. Eftersom elektronernas rörelse förskjuter det spridda ljusets färg går metoden att använda som en termometer för plasma.',
+    relaterade: ['plasma'],
+    body: [
+      { type: 'p', html: 'En ljusvåg är ett svängande elektriskt fält, och en fri elektron som träffas av vågen börjar därför svänga i takt med den. En svängande laddning sänder i sin tur ut ljus åt alla håll. Nettoresultatet är att en liten del av ljuset studsar av elektronen och byter riktning, utan att förlora energi. Fenomenet är uppkallat efter J. J. Thomson, som upptäckte elektronen.' },
+      { type: 'p', html: 'Att så lite ljus sprids är samtidigt metodens styrka. Man kan lysa in en kraftig laserpuls i en het gas utan att nämnvärt störa den, och sedan mäta det svaga ljus som kommer ut åt sidan. Eftersom elektronerna rör sig medan de sprider ljuset dopplerförskjuts varje bidrag en aning, åt blått om elektronen rör sig mot mätaren och åt rött om den rör sig bort.' },
+      { type: 'p', html: 'Färgfördelningen hos det spridda ljuset blir därmed en avbildning av hur elektronerna rör sig. Bredden på fördelningen talar om temperaturen, dess tyngdpunkt om gasens strömningsfart och den totala mängden spritt ljus om hur många elektroner som finns i mätvolymen. Metoden är i dag ett standardverktyg i fusionsanläggningar och i laboratorier som studerar astrofysikaliska förlopp i miniatyr.' }
     ]
   },
 ];

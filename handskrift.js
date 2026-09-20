@@ -514,11 +514,18 @@
  * varandra ringas in. Undantag kan finnas (en lång deluträkning som
  * annars inte ryms), men de är undantag. Referens: NP Ma 2c VT 2018 u4 d.
  * REGELNOT: en regel som bara TILLÄMPAS i en rad (kvadreringsregeln,
- * konjugatregeln, logaritmlagen) poppar upp som BLÅ Poppins-text ovanför
- * raden medan den skrivs och tonar bort när raden är klar (note-objekt,
- * helper regelNot/regelGom i ma2c-vt2018-penna.js). Metodrubriker som
- * ska stå kvar (pq-formeln, Pythagoras sats, Likformiga trianglar)
- * skrivs som förut som liten grå rubrik (REGEL INLEDANDE MOTIVERING).
+ * konjugatregeln, logaritmlagen) poppar upp ovanför raden medan den
+ * skrivs och tonar bort när raden är klar. Noten skrivs med PENNANS EGNA
+ * GLYFER i blått (samma handstil som allt annat på arket, 0,7·F), men
+ * TONAR IN PÅ EN GÅNG i stället för att skrivas bokstav för bokstav
+ * (användarkrav 2026-09-20) — den är en tanke som dyker upp, inte något
+ * eleven skriver. Tekniskt är den ett pop-objekt: färdiga streck ur
+ * placeString som visas/döljs med wins som en bubbla (makePop i
+ * motorn, helper regelNot/regelGom i ma2c-vt2018-penna.js). Skriv
+ * exponenter med ^-syntax ('(a+b)^2'), aldrig med Unicode-tecken.
+ * Metodrubriker som ska stå kvar (pq-formeln, Pythagoras sats,
+ * Likformiga trianglar) skrivs som förut som liten grå rubrik (REGEL
+ * INLEDANDE MOTIVERING).
  *
  * REGEL (MINUS FÖRE BRÅK, användarkrav 2026-09-20): ett minustecken som
  * står omedelbart före ett bråk (x = −p/2 i pq-formeln, m = −16/3)
@@ -38522,6 +38529,18 @@
    * Används t.ex. för "närliggande katet"/"hypotenusan" bredvid en
    * trig-kvot, se REGEL (TRIGONOMETRISK UPPSTÄLLNING). Ritas inte av
    * pennan; den "bara finns" som en påminnelse. */
+  /* POP-OBJEKT: en grupp färdiga pennstreck (o.strokes = [{pts, color}])
+   * som visas/döljs med samma fönstermekanik som bubblor och noter (wins),
+   * det vill säga tonar in på 260 ms och ut lika fort. Byggs av
+   * regelNot() i pennscenerna. */
+  function makePop(o) {
+    var g = el('g', { opacity: 0 });
+    o.strokes.forEach(function (s) {
+      el('path', { d: pathFrom(s.pts), stroke: s.color || BLUE }, g);
+    });
+    return g;
+  }
+
   function makeNote(o) {
     var g = el('g', { opacity: 0 });
     var t = el('text', { x: o.x, y: o.y,
@@ -57254,6 +57273,15 @@
     var bubbleG = el('g', null, svg);
     L.acts.forEach(function (a) {
       if (a.kind !== 'show' || a.obj.el) return;
+      if (a.obj.pop) {
+        /* REGELNOT: pennans egna glyfer (blå) som tonar in på en gång i
+         * stället för att skrivas streck för streck — ligger i bläck-
+         * gruppen så att den får pennans linjebredd och filter */
+        a.obj.el = makePop(a.obj);
+        inkG.appendChild(a.obj.el);
+        objs.push(a.obj);
+        return;
+      }
       a.obj.el = a.obj.bubble ? makeBubble(a.obj)
         : a.obj.note ? makeNote(a.obj)
         : a.obj.guide ? makeGuide(a.obj) : makeRuler(a.obj);

@@ -159,10 +159,14 @@
    * sats, Likformiga trianglar) skrivs fortfarande som liten grå rubrik.
    * Noten är ren text, inget bläck. */
   function regelNot(T, F, text, x, yb) {
-    var n = { note: 1, x: x, y: yb, fs: 17, text: text, anchor: 'start',
-              color: BLUE, wins: [] };
+    /* noten skrivs med pennans glyfer (0,7·F, blått) men visas på en gång:
+     * strecken byggs i en egen lista och blir ett pop-objekt */
+    var tmp = [], sc = 0.7;
+    V.placeString(text, x, yb, (F / 100) * sc, F * sc, tmp, BLUE);
+    var n = { pop: 1, wins: [],
+              strokes: tmp.filter(function (a) { return a.kind === 'stroke'; }) };
     T.acts.push({ kind: 'show', obj: n });
-    T.pause(420);
+    T.pause(520);
     return n;
   }
   function regelGom(T, n) {
@@ -475,7 +479,7 @@
      * ringsregeln tonar in och kvadraten utvecklas (REGEL EN REGELNOT PER
      * KLICKSTEG) */
     y += 3.6 * F;
-    var nK = regelNot(T, F, 'Konjugatregeln: (a + b)(a − b) = a² − b²', padL, y - 1.45 * F);
+    var nK = regelNot(T, F, 'Konjugatregeln: (a+b)(a-b)=a^2-b^2', padL, y - 1.45 * F);
     xx = T.str('x^2-25', padL + 30, y);
     T.stepEnd();
 
@@ -485,7 +489,7 @@
       [['och b=5.']]
     ]);
     regelGom(T, nK);
-    var nQ = regelNot(T, F, 'Kvadreringsregeln: (a + b)² = a² + 2ab + b²', padL, y - 1.45 * F);
+    var nQ = regelNot(T, F, 'Kvadreringsregeln: (a+b)^2=a^2+2ab+b^2', padL, y - 1.45 * F);
     T.str('=x^2+10x+25', xx, y);
     regelGom(T, nQ);
     T.stepEnd();
@@ -586,7 +590,7 @@
       [['(3^x)^2=3^2^x.']]
     ]);
     y += 3.6 * F;
-    var nQ = regelNot(T, F, 'Kvadreringsregeln: (a + b)² = a² + 2ab + b²', padL, y - 1.45 * F);
+    var nQ = regelNot(T, F, 'Kvadreringsregeln: (a+b)^2=a^2+2ab+b^2', padL, y - 1.45 * F);
     xx = T.str('x^2+2x·3^x+3^2^x', padL, y);
     regelGom(T, nQ);
     T.stepEnd();
@@ -674,7 +678,7 @@
       [['faktorer framför lg 3.']]
     ]);
     y += 3.6 * F;
-    var nL = regelNot(T, F, 'Logaritmlagen: lg xⁿ = n · lg x', padL, y - 1.45 * F);
+    var nL = regelNot(T, F, 'Logaritmlagen: lg x^n=n·lg x', padL, y - 1.45 * F);
     T.str('a·lg 3-b·lg 3=8·lg 3', padL + 30, y);
     regelGom(T, nL);
     T.stepEnd();
@@ -1391,7 +1395,7 @@
     ]);
     y += 3.6 * F;
     var yK = y;
-    var nQ = regelNot(T, F, 'Kvadreringsregeln: (a + b)² = a² + 2ab + b²', padL, y - 1.45 * F);
+    var nQ = regelNot(T, F, 'Kvadreringsregeln: (a+b)^2=a^2+2ab+b^2', padL, y - 1.45 * F);
     xx = T.str('=', padL, y);
     var f0 = xx; xx = T.str('2', xx, y); var f1 = xx;
     xx = T.str('(', xx, y);

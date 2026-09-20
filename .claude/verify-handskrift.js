@@ -212,6 +212,20 @@ function granska(HK, typ, cfg) {
           break;
         }
       }
+    } else if (a.kind === 'show' && a.obj && a.obj.pop) {
+      /* regelnot i pennglyfer: tillfälligt bläck — ska ligga innanför
+       * arket och utanför mobil- och pilzonerna, men räknas inte som
+       * kvarstående bläck (den tonar bort) */
+      for (const st of a.obj.strokes) {
+        const p = zonPunkt(st.pts, zonX, zonY);
+        if (p) {
+          fel.push('regelnot i inställningsrutans mobilzon: [' +
+                   p[0].toFixed(0) + ',' + p[1].toFixed(0) + ']');
+          break;
+        }
+        const ut = st.pts.find(pt => pt[0] > W - NAVZON + MARGINAL || pt[0] < NAVZON_V - MARGINAL);
+        if (ut) { fel.push('regelnot i pilzonen: x=' + ut[0].toFixed(0)); break; }
+      }
     } else if (a.kind === 'show' && a.obj && a.obj.bubble) {
       const o = a.obj;
       const h = o.lines.length * LINE_H + PAD_H;

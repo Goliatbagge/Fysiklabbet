@@ -169,7 +169,9 @@ finns kvar som alternativ vy och ska hållas i takt med pennlösningen.
   separata uträkningar som sedan sätts ihop; varje rad är hela ekvationen
   omskriven ett steg (användarkrav 2026-09-20, referens: VT 2018 u4 d).
   En regel som bara tillämpas i raden (kvadreringsregeln, konjugatregeln)
-  poppar upp som blå not medan raden skrivs (`regelNot`/`regelGom`).
+  poppar upp som blå not medan raden skrivs (`regelNot`/`regelGom`):
+  pennans egna glyfer, men intonade på en gång, inte skrivna bokstav
+  för bokstav (användarkrav 2026-09-20).
 - **Rubriker säger vad som görs och varför:** "Löser ut y ur första
   ekvationen", inte "Första ekvationen" (användarkrav 2026-09-20). En
   rättande lärare ska kunna följa varje rad.

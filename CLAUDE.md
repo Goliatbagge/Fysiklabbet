@@ -455,8 +455,11 @@ Så här bygger du scenen:
    2018 uppgift 4d). En regel som bara tillämpas i raden
    (kvadreringsregeln, konjugatregeln, logaritmlagen) poppar upp som blå
    not ovanför raden och försvinner när raden är klar (`regelNot` i
-   `ma2c-vt2018-penna.js`); metodrubriker som ska stå kvar (pq-formeln,
-   Pythagoras sats) skrivs som liten grå rubrik som förut.
+   `ma2c-vt2018-penna.js`). Noten skrivs med pennans egna glyfer, samma
+   handstil som allt annat på arket, men tonar in på en gång i stället för
+   att skrivas bokstav för bokstav (användarkrav 2026-09-20); exponenter
+   med `^`-syntax, aldrig Unicode. Metodrubriker som ska stå kvar
+   (pq-formeln, Pythagoras sats) skrivs som liten grå rubrik som förut.
 3h. **Rubriker säger vad som görs och varför.** En grå rubrik över en rad
    skrivs så att en rättande lärare kan följa tankegången: "Löser ut y ur
    första ekvationen", "Samma linje kräver samma k", "Prövar Pythagoras

@@ -111,6 +111,15 @@
  * riktningsmarkör ("negativa tal" ←) behåller förstås sin pil åt det
  * håll den pekar, och en MÅTTLINJE har spets i båda ändar.
  *
+ * REGEL (MÅTTEN PÅ LUTNINGSTRAPPAN, användarkrav 2026-09-20): när ett
+ * trappsteg ritas för att läsa av k skrivs Δx-måttet ("1") mitt på det
+ * VÅGRÄTA steget och Δy-måttet ("2") mitt på det LODRÄTA, båda på
+ * utsidan av trappsteget (bort från linjen). En etta som står bredvid det
+ * lodräta strecket läses som Δy, och då blir lutningen fel (felet fanns i
+ * NP Ma 2c VT 2018 uppgift 1). mkAxes().stair() placerar måtten rätt av
+ * sig själv och låter dxOff/dyOff bara knuffa etiketten längs dess eget
+ * steg — rita aldrig trappsteget för hand med T.line/T.str.
+ *
  * REGEL (TANKEBUBBLOR SKYMMER ALDRIG NÅGOT): en tankebubbla får aldrig
  * ligga över figuren, en skriven rad eller något annat på arket — varken
  * molnet eller dess bulor (radie upp till ~25). Bubblor som hör till en
@@ -10719,10 +10728,23 @@
       rule([X(x0), Y(k * x0 + m)], [X(x1), Y(k * x1 + m)], col);
     }
     /* LUTNINGSTRAPPAN mellan två punkter: vågrätt Δx och lodrätt Δy,
-     * streckade i blått, med måtten skrivna intill i fri yta. */
+     * streckade i blått, med måtten skrivna intill i fri yta.
+     * REGEL (MÅTTEN PÅ TRAPPSTEGET, användarkrav 2026-09-20): Δx-måttet
+     * skrivs mitt på det VÅGRÄTA steget, på utsidan av trappsteget (under
+     * det när steget går uppåt, över det när steget går nedåt: mellan
+     * steget och linjen finns ingen plats). Δy-måttet skrivs mitt på det
+     * LODRÄTA steget, också på utsidan (till höger när steget går åt
+     * höger). Måttet får ALDRIG hamna vid det andra steget: en etta
+     * bredvid det lodräta strecket läses som Δy. Helpern gör detta av sig
+     * själv — dxOff/dyOff får bara knuffa etiketten längs sitt eget steg
+     * (undan y-axeln eller ett skalstreckstal), inte över till det
+     * andra. Se även "Lutningstrappan" under Diagramkonventioner i
+     * CLAUDE.md. */
     /* opt.dxOff / opt.dyOff = [dx, dy] flyttar måttets etikett. Behövs när
      * trappstegets mitt hamnar på y-axeln eller på ett skalstreckstal —
-     * etiketter får aldrig ligga på en linje (CLAUDE.md). */
+     * etiketter får aldrig ligga på en linje (CLAUDE.md). Knuffen i
+     * sidled för Δx (dxOff[0]) och i höjdled för Δy (dyOff[1]) begränsas
+     * så att etiketten stannar kvar på sitt eget steg. */
     function stair(x1, y1, x2, y2, dxTxt, dyTxt, opt) {
       opt = opt || {};
       var dxo = opt.dxOff || [0, 0], dyo = opt.dyOff || [0, 0];
@@ -10743,13 +10765,20 @@
       T.pause(180);
       if (dxTxt) {
         var wx = T.adv(dxTxt, 0.5);
-        T.str(dxTxt, (X(x1) + X(x2)) / 2 - wx / 2 + dxo[0],
-              Y(y1) + (y2 > y1 ? -0.28 : 0.78) * F + dxo[1], BLUE, 0.5);
+        /* utsidan: under steget när linjen stiger, över när den faller */
+        var xlo = Math.min(X(x1), X(x2)), xhi = Math.max(X(x1), X(x2));
+        var cx = Math.max(xlo, Math.min(xhi, (X(x1) + X(x2)) / 2 + dxo[0]));
+        T.str(dxTxt, cx - wx / 2,
+              Y(y1) + (y2 > y1 ? 0.78 : -0.28) * F + dxo[1], BLUE, 0.5);
       }
       if (dyTxt) {
         T.pause(140);
-        T.str(dyTxt, X(x2) + 8 + dyo[0],
-              (Y(y1) + Y(y2)) / 2 + 0.16 * F + dyo[1], BLUE, 0.5);
+        /* utsidan: höger om steget när det går åt höger, annars vänster */
+        var wy = T.adv(dyTxt, 0.5);
+        var ylo = Math.min(Y(y1), Y(y2)), yhi = Math.max(Y(y1), Y(y2));
+        var cy = Math.max(ylo, Math.min(yhi, (Y(y1) + Y(y2)) / 2 + dyo[1]));
+        T.str(dyTxt, (x2 >= x1 ? X(x2) + 8 : X(x2) - 8 - wy) + dyo[0],
+              cy + 0.16 * F, BLUE, 0.5);
       }
     }
     return { X: X, Y: Y, num: num, line: line, rule: rule, axes: axes,
@@ -11506,7 +11535,7 @@
     ], 0);
     /* måttet 5 hamnar mitt på y-axeln och ovanpå tvåans skalstreckstal
      * om det inte flyttas åt vänster */
-    A.stair(-3, 3, 2, 0, '5', '−3', { dxOff: [-74, 12] });
+    A.stair(-3, 3, 2, 0, '5', '−3', { dxOff: [44, 0] });
     T.stepEnd();
 
     /* koordinatsystemets nedersta bläck ligger på y≈355 */

@@ -2671,6 +2671,17 @@ mäter mellanrummen i teorifigurerna och i schemana som
    pekar åt vänster, och en **måttlinje** har spets i båda ändar (se
    "Måttsättning av hävarm och avstånd"). Fråga: är pilen axelns egen? Då
    en pil, åt det positiva hållet.
+2c. **Lutningstrappan: Δx-måttet på det vågräta steget, Δy-måttet på det
+   lodräta, båda på utsidan.** När ett trappsteg ritas för att visa
+   lutningen (1 steg åt höger, *k* steg upp eller ned) skrivs "1" mitt
+   under (eller över) det VÅGRÄTA strecket och "*k*" mitt till höger om det
+   LODRÄTA, på den sida som vänder bort från linjen. Skriv aldrig ettan
+   bredvid det lodräta strecket: då läses den som Δ*y* och lutningen blir
+   fel (felet fanns i NP Ma 2c VT 2018 uppgift 1, påpekat 2026-09-20).
+   Gäller teori-figurer (`::: figur`), figurgeneratorerna under
+   `.claude/np-figs/`, `graf.js` och pennlösningarnas
+   `mkAxes().stair()`, som placerar måtten rätt av sig själv och bara
+   låter `dxOff`/`dyOff` knuffa etiketten längs dess eget steg.
 3. **Symmetrisk skala** om negativa värden visas (-12 till +12, inte
    -12 till +2).
 4. **Axeletiketter måste få plats INOM viewBox/ramen.** Vanlig fälla:

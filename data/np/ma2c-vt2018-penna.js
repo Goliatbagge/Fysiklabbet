@@ -165,9 +165,9 @@
   reg(1, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
-    var ax = mkAxes(T, F, { ox: 190, oy: 226, u: 20,
+    var ax = mkAxes(T, F, { ox: 190, oy: 236, u: 26,
                             xmin: -5, xmax: 5, ymin: -4, ymax: 7 });
-    var FIGB_Y = 350;
+    var FIGB_Y = 392;
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
 
     /* steg 1: axlarna och linjen (dragen med linjal) */
@@ -186,8 +186,8 @@
     ]);
     ax.dot(0, 3, BLUE);
     T.pause(120);
-    ax.tag(0, 3, 'm=3', -86, -8, BLUE);
-    y = 448;
+    ax.tag(0, 3, 'm=3', -88, -8, BLUE);
+    y = 470;
     T.str('m=3', padL, y);
     T.stepEnd();
 
@@ -198,7 +198,7 @@
       [['från (0, 3) ligger linjen i']],
       [['(1, 5): två steg upp.']]
     ]);
-    ax.stair(0, 3, 1, 5, '1', '2', { dxOff: [16, 2] });
+    ax.stair(0, 3, 1, 5, '1', '2');
     T.pause(200);
     y += 3.4 * F;
     xx = T.str('k=', padL, y);
@@ -1903,11 +1903,12 @@
 
     /* steg 1: axlarna och linjen */
     ax.axes();
+    /* skalsiffran 1 på x-axeln utelämnas: trappstegets mått +2 står där */
     ax.ticks([-4, -3, -2, -1, 1, 2, 3, 4], [-4, -3, -2, -1, 1, 2, 3, 4],
-             [1], [1]);
+             [], [1]);
     T.pause(150);
     ax.rule([ax.X(-1), ax.Y(-4)], [ax.X(1.66), ax.Y(3.98)]);
-    T.str('y=3x-1', ax.X(-4.2), ax.Y(2.6), null, 0.5);
+    T.str('y=3x-1', ax.X(-4.7), ax.Y(2.6), null, 0.5);
     T.stepEnd();
 
     /* steg 2: en punkt flyttas */
@@ -1919,7 +1920,8 @@
     ]);
     ax.dot(0, -1, BLUE);
     T.pause(120);
-    ax.stair(0, -1, 2, -4, '+2', '−3', { dxOff: [0, -28], dyOff: [-42, 0] });
+    /* +2 knuffas till stegets högra ände: mitt på steget står skalsiffran 1 */
+    ax.stair(0, -1, 2, -4, '+2', '−3', { dxOff: [20, 0], dyOff: [-44, 0] });
     T.pause(120);
     ax.dot(2, -4, BLUE);
     ax.tag(2, -4, '(2, −4)', 8, 6, BLUE);

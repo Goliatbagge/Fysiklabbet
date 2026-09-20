@@ -136,7 +136,7 @@
     ], 0);
     /* avläsningen är ett VÄRDE ur figuren → blåpennan */
     A.dot(0, 3, BLUE);
-    A.tag(0, 3, '(0, 3)', 10, -12, BLUE);
+    A.tag(0, 3, '(0, 3)', 10, -30, BLUE);   /* ovanför trappstegets etta, som står strax över steget */
     T.pause(240);
     y = 396;
     T.str('m=3', padL, y);

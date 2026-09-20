@@ -640,7 +640,8 @@
                            xlab: 't', ylab: 'y' });
 
     A.axes();
-    A.ticks(V.heltal(-3, 5), V.heltal(-20, 0, 5), [-2, 2, 4], [-5, -10, -15, -20]);
+    /* skalsiffran 2 utelämnas: trappstegets mått "2 min" står just där */
+    A.ticks(V.heltal(-3, 5), V.heltal(-20, 0, 5), [-2, 4], [-5, -10, -15, -20]);
     T.pause(200);
     A.rule([A.X(0), A.Y(-6)], [A.X(4), A.Y(-18)]);
     T.stepEnd();
@@ -650,7 +651,7 @@
       [['startade dykdatorn. Lutningen']],
       [['säger hur fort han sjunker.']]
     ], 0);
-    A.stair(0, -6, 2, -12, '2 min', '6 m', { dxOff: [0, -6], dyOff: [6, 0] });
+    A.stair(0, -6, 2, -12, '2 min', '6 m', { dxOff: [12, 0], dyOff: [6, 0] });
     T.pause(200);
     y = 500;
     xx = T.str('hastighet=', padL, y);

@@ -575,7 +575,7 @@ function buildSheet(S) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Övningsblad ${S.nr}: ${S.title} — Fysiklabbet</title>
-<meta name="description" content="Övningsblad ${S.nr} av 5 i ekvationslösning (${S.avsnitt}): ${S.title}. Många uppgifter på grundnivå, ett genomräknat exempel först och lösningsförslag till varje uppgift sist. Utskriftsklart.">
+<meta name="description" content="Övningsblad i ekvationslösning (${S.avsnitt}): ${S.title}. Många uppgifter på grundnivå, ett genomräknat exempel först och lösningsförslag till varje uppgift sist. Utskriftsklart.">
 <link rel="canonical" href="https://fysiklabbet.se/ovningsblad/${S.file}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -596,7 +596,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <body>
 <div class="page">
 <header>
-<p class="over">Övningsblad ${S.nr} av 5 · ${S.avsnitt}</p>
+<p class="over">Övningsblad · ${S.avsnitt}</p>
 <h1>${S.title}</h1>
 ${S.under ? `<p class="under">${S.under}</p>` : ''}
 <div class="namn"><span>Namn:</span><span>Datum:</span></div>

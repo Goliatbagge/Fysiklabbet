@@ -38,6 +38,14 @@ x = \sqrt[3]{a}
 $$
 :::
 
+::: tips "Så löser du"
+1. **Få variabeltermen ensam** i ena ledet. Addera eller subtrahera bort
+   de tal som står bredvid den.
+2. **Dividera bort koefficienten** framför $x^2$ eller $x^3$.
+3. **Dra roten.** Jämn exponent ger $\pm$, udda ger inte det. Är talet
+   under kvadratroten negativt saknas reella lösningar.
+:::
+
 ::: exempel "Exempel 1 — Enkla andra- och tredjegradsekvationer"
 **Lös<br>a)&nbsp;$x^2 = 64$&emsp;&emsp;b)&nbsp;$x^2 = 10$&emsp;&emsp;c)&nbsp;$x^2 = -9$&emsp;&emsp;d)&nbsp;$x^3 = 343$&emsp;&emsp;e)&nbsp;$x^3 = -27$&emsp;&emsp;f)&nbsp;$3x^2 - 2{,}31 = 17{,}97$**
 

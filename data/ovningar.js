@@ -20239,30 +20239,6 @@ $$ x = 8 $$
 
 **Svar:** $x = 8$`,
         },
-        {
-            level: 2,
-            question: `Lös ekvationen $7x + 2 = 4x + 3x - 5$.`,
-            choices: [
-                `Ekvationen saknar lösning`,
-                `$x = 0$`,
-                `$x = -1$`,
-                `Ekvationen har oändligt många lösningar`,
-            ],
-            correct: 0,
-            solution: `Förenkla först högerledet, där $4x + 3x = 7x$:
-
-$$ 7x + 2 = 7x - 5 $$
-
-Samma variabelterm står i båda led. Subtrahera $7x$ från båda led:
-
-$$ 7x + 2 - 7x = 7x - 5 - 7x $$
-
-$$ 2 = -5 $$
-
-Variabeln försvann, och kvar står en falsk likhet. Inget värde på $x$ gör att ekvationen stämmer.
-
-**Svar:** Ekvationen saknar lösning`,
-        },
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
@@ -20384,6 +20360,30 @@ En falsk likhet — ekvationen saknar lösning.
 De övriga: $4(2x+3) = 8x + 12$ är sann för ALLA $x$ (båda led är identiska), $6x - 9 = 3x$ ger $x = 3$, och $2(x-1) = x+1$ ger $x = 3$.
 
 **Svar:** $5x + 7 = 5x - 2$`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationen $7x + 2 = 4x + 3x + 2$.`,
+            choices: [
+                `$x = 0$`,
+                `Ekvationen saknar lösning`,
+                `$x = 2$`,
+                `Ekvationen har oändligt många lösningar`,
+            ],
+            correct: 3,
+            solution: `Förenkla först högerledet, där $4x + 3x = 7x$:
+
+$$ 7x + 2 = 7x + 2 $$
+
+Båda led är nu exakt samma uttryck. Subtrahera $7x$ från båda led:
+
+$$ 7x + 2 - 7x = 7x + 2 - 7x $$
+
+$$ 2 = 2 $$
+
+Variabeln försvann, och kvar står en sann likhet. Ekvationen stämmer vilket värde $x$ än har.
+
+**Svar:** Ekvationen har oändligt många lösningar. Varje tal $x$ är en lösning.`,
         },
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {

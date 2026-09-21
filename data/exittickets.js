@@ -10585,38 +10585,6 @@ window.EXITTICKETS = {
       'I $3x + 2 = 23$ är den högsta variabelexponenten 1, och lösningen till en ekvation kallas rot. Här är roten $x = 7$.',
     ],
   },
-  {
-    question: 'När Maja löser ekvationen $6x + 5 = 6x - 1$ försvinner $x$ helt, och kvar står $5 = -1$. Vad betyder det?',
-    choices: [
-      'Ekvationen saknar lösning, eftersom likheten är falsk vilket värde $x$ än har',
-      'Maja har räknat fel, variabeln kan aldrig försvinna ur en ekvation',
-      'Lösningen är $x = 0$, eftersom det inte finns någon $x$-term kvar',
-      'Ekvationen har oändligt många lösningar',
-    ],
-    correct: 0,
-    why: [
-      'Subtraheras $6x$ från båda led står bara $5 = -1$ kvar. Det påståendet är falskt oavsett $x$, så inget tal löser ekvationen.',
-      'Att variabeln försvinner är inget räknefel. Det händer när samma variabelterm står i båda led, och det är just så en ekvation utan lösning eller med oändligt många lösningar ser ut.',
-      'Att $x$ inte syns betyder inte att $x = 0$. Prova: $6 \\cdot 0 + 5 = 5$ men $6 \\cdot 0 - 1 = -1$, och leden är inte lika.',
-      'Oändligt många lösningar får ekvationen bara om likheten som blir kvar är sann, som $5 = 5$. Här är den falsk.',
-    ],
-  },
-  {
-    question: 'Vilken av ekvationerna har oändligt många lösningar?',
-    choices: [
-      '$2x + 6 = 2x + 4$',
-      '$2x + 6 = 6$',
-      '$2x + 6 = 3x + 6$',
-      '$2(x + 3) = 2x + 6$',
-    ],
-    correct: 3,
-    why: [
-      'Subtraheras $2x$ från båda led står $6 = 4$ kvar, en falsk likhet. Ekvationen saknar lösning.',
-      'Subtraheras 6 från båda led blir $2x = 0$, alltså exakt en lösning: $x = 0$.',
-      'Subtraheras $2x$ från båda led blir $6 = x + 6$, och sedan $x = 0$. Exakt en lösning.',
-      'Multipliceras 2 in i parentesen står $2x + 6 = 2x + 6$: båda led är samma uttryck, så likheten är sann för varje tal $x$.',
-    ],
-  },
 ],
 
 'ma1c-2.6': [
@@ -10698,6 +10666,38 @@ window.EXITTICKETS = {
       'Termen står redan i båda led med samma koefficient, så den tar ut sig själv i stället för att flyttas.',
       'Att $x^2$ dyker upp betyder ingenting i sig. Det avgörande är att termen finns lika i båda led.',
       'Division med en variabelterm är riskabel (den kan vara 0) och behövs inte här.',
+    ],
+  },
+  {
+    question: 'När Maja löser ekvationen $6x + 5 = 6x - 1$ försvinner $x$ helt, och kvar står $5 = -1$. Vad betyder det?',
+    choices: [
+      'Ekvationen saknar lösning, eftersom likheten är falsk vilket värde $x$ än har',
+      'Maja har räknat fel, variabeln kan aldrig försvinna ur en ekvation',
+      'Lösningen är $x = 0$, eftersom det inte finns någon $x$-term kvar',
+      'Ekvationen har oändligt många lösningar',
+    ],
+    correct: 0,
+    why: [
+      'Subtraheras $6x$ från båda led står bara $5 = -1$ kvar. Det påståendet är falskt oavsett $x$, så inget tal löser ekvationen.',
+      'Att variabeln försvinner är inget räknefel. Det händer när samma variabelterm står i båda led, och det är just så en ekvation utan lösning eller med oändligt många lösningar ser ut.',
+      'Att $x$ inte syns betyder inte att $x = 0$. Prova: $6 \\cdot 0 + 5 = 5$ men $6 \\cdot 0 - 1 = -1$, och leden är inte lika.',
+      'Oändligt många lösningar får ekvationen bara om likheten som blir kvar är sann, som $5 = 5$. Här är den falsk.',
+    ],
+  },
+  {
+    question: 'Vilken av ekvationerna har oändligt många lösningar?',
+    choices: [
+      '$2x + 6 = 2x + 4$',
+      '$2x + 6 = 6$',
+      '$2x + 6 = 3x + 6$',
+      '$2(x + 3) = 2x + 6$',
+    ],
+    correct: 3,
+    why: [
+      'Subtraheras $2x$ från båda led står $6 = 4$ kvar, en falsk likhet. Ekvationen saknar lösning.',
+      'Subtraheras 6 från båda led blir $2x = 0$, alltså exakt en lösning: $x = 0$.',
+      'Subtraheras $2x$ från båda led blir $6 = x + 6$, och sedan $x = 0$. Exakt en lösning.',
+      'Multipliceras 2 in i parentesen står $2x + 6 = 2x + 6$: båda led är samma uttryck, så likheten är sann för varje tal $x$.',
     ],
   },
 ],

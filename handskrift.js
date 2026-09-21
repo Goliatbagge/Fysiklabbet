@@ -7176,7 +7176,7 @@
   }
 
   /* ---------------- scen: ekvationer utan lösning / med oändligt många
-   * lösningar (ma1c-2.5 ex 2) ------------------------------------------
+   * lösningar (ma1c-2.6 ex 2) ------------------------------------------
    * a) 8x+3=5x+3x-4: variabeltermerna tar ut varandra och kvar står den
    * falska likheten 3=-4, så ekvationen saknar lösning. b) 4(x-1)+7=4x+3:
    * leden blir identiska och kvar står 3=3, sant för alla x, så
@@ -7559,7 +7559,7 @@
              ekvval: 1 };
   }
 
-  /* ---------------- scen: ekvation med parenteser (ma1c-2.6 ex 2) -----
+  /* ---------------- scen: ekvation med parenteser (ma1c-2.6 ex 3) -----
    * (1+4x)(3x-2)=x(12x-6). Andragradstermen 12x² finns i BÅDA led och
    * försvinner när den subtraheras bort — kvar blir en förstagrads-
    * ekvation. */

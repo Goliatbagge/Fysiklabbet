@@ -153,40 +153,40 @@ $$
 :::
 
 ::: exempel "Exempel 3 — En parentes i kvadrat"
-**Lös ekvationen $(x+2)^2 = 16$**
+**Lös ekvationen $(x-5)^2 = 36$**
 
 ::: handskrift
 typ: parenteskvadrat
 :::
 
 ::: textlosning
-Parentesen $(x+2)$ är ett enda tal som står i kvadrat. Vilket tal i
-kvadrat blir 16? Både 4 och $-4$. Vi drar därför roten ur båda led och
+Parentesen $(x-5)$ är ett enda tal som står i kvadrat. Vilket tal i
+kvadrat blir 36? Både 6 och $-6$. Vi drar därför roten ur båda led och
 sätter ut $\pm$:
 
 $$
-x + 2 = \pm\sqrt{16}
+x - 5 = \pm\sqrt{36}
 $$
 
 $$
-x + 2 = \pm 4
+x - 5 = \pm 6
 $$
 
 Plus-minus betyder två fall, och vi löser dem var för sig.
 
-Första fallet, parentesen är 4. Subtraherar 2 från båda led:
+Första fallet, parentesen är 6. Adderar 5 till båda led:
 
 $$
-x + 2 = 4 \quad\Longrightarrow\quad x = 2
+x - 5 = 6 \quad\Longrightarrow\quad x = 11
 $$
 
-Andra fallet, parentesen är $-4$. Subtraherar 2 från båda led:
+Andra fallet, parentesen är $-6$. Adderar 5 till båda led:
 
 $$
-x + 2 = -4 \quad\Longrightarrow\quad x = -6
+x - 5 = -6 \quad\Longrightarrow\quad x = -1
 $$
 
-**Svar:** $x = 2$ eller $x = -6$
+**Svar:** $x = 11$ eller $x = -1$
 :::
 :::
 

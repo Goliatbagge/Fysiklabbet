@@ -3011,7 +3011,7 @@
      * av hela indexets bredd. Se REGEL (ROTINDEX FÅR ALDRIG TRÄNGA IN I
      * ROTKILEN) i filhuvudet. */
     function rotIdxAdv(idx) {
-      return adv(String(idx), 0.55) - 0.2 * adv('0', 0.55);
+      return adv(String(idx), 0.55) + 0.18 * F;
     }
     function rotW(innerS, idx) {
       return (idx ? rotIdxAdv(idx) : 0) +
@@ -3020,7 +3020,7 @@
     function rot(innerS, x0, yb, idx) {
       var x = x0;
       if (idx != null) {
-        str(String(idx), x, yb - 0.52 * F, null, 0.55);
+        str(String(idx), x, yb - 0.72 * F, null, 0.55);
         x += rotIdxAdv(idx);
         pause(120);
       }
@@ -8865,7 +8865,7 @@
   }
 
   /* ---------------- scen: en parentes i kvadrat (ma1c-2.9 ex 3) -------
-   * (x+2)^2 = 16. Poängen är att parentesen är ETT tal som står i
+   * (x−5)^2 = 36. Poängen är att parentesen är ETT tal som står i
    * kvadrat: roten dras ur båda led (egen rad, se REGEL ROTEN UR BÅDA
    * LED), och ± delar sedan upp lösningen i två fall som räknas ut var
    * för sig. */
@@ -8874,63 +8874,61 @@
     var tanke = mkTanke(T);
     /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet) */
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = Math.max(padL + 30 + T.adv('x+2=-4'),
-                      padL + 30 + T.adv('x=-6')) + 0.9 * F;
+    var xw = Math.max(padL + 30 + T.adv('x-5=-6'),
+                      padL + 30 + T.adv('x=11')) + 0.9 * F;
 
     y = 74;
-    T.str('(x+2)^2=16', padL, y);
+    T.str('(x-5)^2=36', padL, y);
     T.stepEnd();
 
     tanke(y, [
       [['Parentesen är ett enda']],
       [['tal som står i kvadrat.']],
       [['Vilket tal i kvadrat blir']],
-      [['16? Både 4 och -4.']]
+      [['36? Både 6 och -6.']]
     ]);
     T.str('Drar roten ur båda led', padL, y + 1.0 * F, null, 0.62);
     y += 2.6 * F;
-    xx = T.str('x+2=±', padL + 30, y);
-    T.rot('16', xx, y);
+    xx = T.str('x-5=±', padL + 30, y);
+    T.rot('36', xx, y);
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('x+2=±4', padL + 30, y);
+    T.str('x-5=±6', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
       [['± betyder två fall:']],
-      [['parentesen kan vara 4']],
-      [['eller -4. Jag löser dem']],
+      [['parentesen kan vara 6']],
+      [['eller -6. Jag löser dem']],
       [['var för sig.']]
     ]);
 
-    /* ---- fall 1: x+2 = 4 ---- */
+    /* ---- fall 1: x−5 = 6 ---- */
     y += 3.6 * F;
-    T.str('Första fallet: parentesen är 4', padL, y - 1.6 * F, null, 0.62);
-    T.str('x+2=4', padL + 30, y);
+    T.str('Första fallet: parentesen är 6', padL, y - 1.6 * F, null, 0.62);
+    T.str('x-5=6', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
-      [['Subtraherar 2 från båda']],
-      [['led.']]
+      [['Adderar 5 till båda led.']]
     ]);
-    y = ekvOp(y, '-2', xw, 'x+2=4');
-    T.str('x=2', padL + 30, y);
+    y = ekvOp(y, '+5', xw, 'x-5=6');
+    T.str('x=11', padL + 30, y);
     T.stepEnd();
 
-    /* ---- fall 2: x+2 = −4 ---- */
+    /* ---- fall 2: x−5 = −6 ---- */
     y += 3.4 * F;
-    T.str('Andra fallet: parentesen är -4', padL, y - 1.6 * F, null, 0.62);
-    T.str('x+2=-4', padL + 30, y);
+    T.str('Andra fallet: parentesen är -6', padL, y - 1.6 * F, null, 0.62);
+    T.str('x-5=-6', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
-      [['Samma sak här:']],
-      [['subtraherar 2 från båda']],
-      [['led.']]
+      [['Samma sak här: adderar 5']],
+      [['till båda led.']]
     ]);
-    y = ekvOp(y, '-2', xw, 'x+2=-4');
-    T.str('x=-6', padL + 30, y);
+    y = ekvOp(y, '+5', xw, 'x-5=-6');
+    T.str('x=-1', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -8939,7 +8937,7 @@
       [['ekvation.']]
     ]);
     y += 2.4 * F;
-    xe = T.str('Svar: x=2 eller x=-6', padL, y);
+    xe = T.str('Svar: x=11 eller x=-1', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -9239,7 +9237,18 @@
     T.str('d) x^9^9=-5', padL, y);
     T.stepEnd();
 
-    y += 2.3 * F;
+    y += 2.5 * F;
+    xx = T.str('x=', padL + 30, y);
+    T.rot('-5', xx + 9, y, 99);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    T.str('Udda rot och negativt värde under', padL + 30, y, null, 0.62);
+    y += 1.15 * F;
+    T.str('rottecknet ⟹ en lösning', padL + 30, y, null, 0.62);
+    T.stepEnd();
+
+    y += 2.1 * F;
     xe = T.str('Svar: En lösning', padL, y);
     T.underline(xe, y);
     T.stepEnd();
@@ -25144,7 +25153,7 @@
       /* fast indrag, en femtedels siffra — se REGEL (ROTINDEX FÅR ALDRIG
        * TRÄNGA IN I ROTKILEN) i filhuvudet */
       T.str(String(idx), x, yb - 0.86 * F, null, 0.55);
-      x += T.adv(String(idx), 0.55) - 0.2 * T.adv('0', 0.55);
+      x += T.adv(String(idx), 0.55) + 0.18 * F;
       T.pause(120);
     }
     var fw = T.fracW(numS, denS);

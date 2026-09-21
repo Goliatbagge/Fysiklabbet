@@ -12,16 +12,7 @@ Format per post:
 
 ## Kö
 
-- **Vatten som aldrig blir is — glasövergången fångad i nanotunna skikt** **[BREVTEASER]** — genom att
-  stänga in vatten mellan lipidmembran hindras det från att kristallisera, och då syns
-  övergången från vätska till glas i ett mycket bredare temperaturområde än väntat,
-  ungefär −35 °C till −20 °C. Ingång: fasövergångar, smältpunkt, underkylning och vad
-  ett glas egentligen är. Nature Communications, DOI 10.1038/s41467-026-72955-y, ANSTO
-  och Monash University. Källa (Phys.org 2026-09-03):
-  https://phys.org/news/2026-09-soft-nanoscale-confinement-ice-exposing.html
-  (tillagd 2026-09-04)
-
-- **92 antiprotoner färdades på lastbil — och överlevde en månad i fällan** — BASE-samarbetet vid CERN
+- **92 antiprotoner färdades på lastbil — och överlevde en månad i fällan** **[BREVTEASER]** — BASE-samarbetet vid CERN
   rapporterar världens första transport av antimateria på väg: en flyttbar magnetisk fälla kördes med lastbil
   i mars 2026 och höll kvar antiprotonerna i över en månad. Ingång: antimateria, Penningfällor, magnetisk
   inneslutning och vakuum. OBS: partikelfysik publicerades 2026-09-16 och 2026-09-08 — låt det gå tid.

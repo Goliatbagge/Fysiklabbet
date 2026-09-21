@@ -56,6 +56,46 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'glasovergang',
+    term: 'Glasövergång',
+    former: ['glasövergång', 'glasövergången', 'glasövergångar', 'glasövergångarna', 'glasövergångstemperatur', 'glasövergångstemperaturen', 'glasig', 'glasigt', 'glasiga', 'amorf', 'amorft', 'amorfa'],
+    kort: 'Det förlopp där en vätska stelnar utan att kristallisera: molekylerna behåller vätskans oordning, men rörelsen blir så trög att ämnet beter sig som ett fast material.',
+    relaterade: ['underkylning'],
+    body: [
+      { type: 'p', html: 'De flesta vätskor stelnar genom att kristallisera. Molekylerna hittar varandra, ordnar sig i ett regelbundet mönster och bildar ett fast ämne med en skarp smältpunkt. Kyler man däremot vätskan så fort att molekylerna aldrig hinner ordna sig, eller använder ett ämne där mönstret är svårt att få till, händer något annat: rörelsen blir långsammare och långsammare tills ämnet i praktiken står stilla, fast molekylerna ligger huller om buller precis som i vätskan. Ett sådant material kallas ett glas, och förloppet dit kallas glasövergång.' },
+      { type: 'p', html: 'Fönsterglas är det välkända exemplet, men också karameller, många plaster och den seg-hårda ytan på en torkad sockerlösning är glas i den här meningen. Gemensamt för dem är att det inte finns någon inre ordning att hitta med ett mikroskop. Skillnaden mot en vanlig vätska sitter enbart i tempot: en glasbit rör sig också, bara ofattbart långsamt.' },
+      { type: 'p', html: 'Därför är glasövergången inte en fasövergång i samma mening som smältning. Is smälter vid 0&nbsp;°C oavsett vem som mäter och hur länge. En glasövergång beror i stället på hur länge man tittar. Blir tiden det tar för en molekyl att flytta sig längre än mättiden ser ämnet stelnat ut, och därför flyttar sig den uppmätta temperaturen beroende på metod. Av samma skäl anges en glasövergång ofta som ett intervall i stället för som ett enda tal.' },
+      { type: 'fact', title: 'Kristall eller glas', items: [
+        'Kristall: molekylerna ligger i ett regelbundet mönster, ämnet har en bestämd smältpunkt.',
+        'Glas: molekylerna ligger oordnat som i vätskan, ämnet mjuknar gradvis i stället för att smälta.',
+        'Samma ämne kan ofta bli antingen eller. Vilket det blir avgörs av hur snabbt det kyls.'
+      ] }
+    ]
+  },
+  {
+    id: 'underkylning',
+    term: 'Underkylning',
+    former: ['underkylning', 'underkylningen', 'underkyld', 'underkylt', 'underkylda', 'underkylt vatten'],
+    kort: 'När en vätska hålls kvar i flytande form under sin egen fryspunkt. Tillståndet är ostadigt: minsta störning kan få hela vätskan att frysa på ett ögonblick.',
+    relaterade: ['glasovergang'],
+    body: [
+      { type: 'p', html: 'Att vatten fryser vid 0&nbsp;°C stämmer inte riktigt. Det är den temperatur där is och vatten kan finnas sida vid sida utan att den ena vinner över den andra. Men för att is ska <em>börja</em> bildas krävs en startpunkt, en liten klump molekyler som råkat lägga sig rätt, eller ett dammkorn eller en repa i kärlet att bygga vidare på. Saknas startpunkten kan vattnet fortsätta vara flytande långt under noll. Då är det underkylt.' },
+      { type: 'p', html: 'Det syns i naturen hela tiden. Molnen består till stor del av underkylda vattendroppar, och det är därför flygplan kan få isbeläggning: droppen är flytande ända tills den träffar vingen, och då fryser den omedelbart. Samma sak händer om man tar en oöppnad flaska läsk ur frysen och slår den mot bordet. Slaget ger de första kristallerna en start, och isen växer sedan genom hela flaskan på några sekunder.' },
+      { type: 'p', html: 'Ju kallare det blir, desto mindre hjälp behövs. Vid ungefär −41&nbsp;°C bildas kristallerna spontant inne i vattnet, hur rent och stilla det än är. Under den gränsen går det därför inte att hålla kvar vanligt flytande vatten någon längre stund, vilket länge gjort området omöjligt att studera i detalj.' }
+    ]
+  },
+  {
+    id: 'neutronspridning',
+    term: 'Neutronspridning',
+    former: ['neutronspridning', 'neutronspridningen', 'neutroninstrument', 'neutroninstrumentet', 'neutronstråle', 'neutronstrålen'],
+    kort: 'En metod där en stråle av neutroner skickas genom ett prov och avslöjar både var atomerna sitter och hur de rör sig, utifrån hur neutronerna studsar.',
+    body: [
+      { type: 'p', html: 'Röntgenstrålning är det vanligaste sättet att se hur atomer sitter i ett material, men den har en svaghet. Röntgen sprids mot elektronerna, så ju fler elektroner en atom har, desto tydligare syns den. Väte, som bara har en enda elektron, blir därför nästan osynligt. Det är ett hårt slag för alla som vill studera vatten, plaster eller biologiska material, där väte är den allra vanligaste atomen.' },
+      { type: 'p', html: 'Neutroner fungerar tvärtom. En neutron är oladdad och bryr sig inte om elektronmolnet alls, utan sprids mot atomkärnan. Hur kraftigt den sprids följer inget enkelt mönster längs det periodiska systemet, och råkar bli ovanligt starkt just för väte. Ett vattenprov lyser alltså upp i en neutronmätning.' },
+      { type: 'p', html: 'Det finns ett trick till. Väte har en tyngre variant, deuterium, med en neutron extra i kärnan. Kemiskt beter den sig nästan likadant, men den sprider neutroner på ett helt annat sätt. Byter man ut vätet i en del av provet mot deuterium går det därför att göra just den delen osynlig och se resten för sig. Studerar man vatten instängt i ett annat material kan man på så vis mäta enbart vattnets rörelser. Neutronerna kommer från en forskningsreaktor eller en så kallad spallationskälla, och eftersom sådana anläggningar är stora och få till antalet reser forskare från hela världen dit för att mäta.' }
+    ]
+  },
+  {
     id: 'matproblemet',
     term: 'Mätproblemet',
     former: ['mätproblemet', 'mätproblem', 'mätproblemen'],
@@ -1150,7 +1190,7 @@ window.BEGREPP = [
   {
     id: 'spektroskopi',
     term: 'Spektroskopi',
-    former: ['spektroskopi', 'spektroskopin', 'spektroskopisk', 'spektroskopiskt', 'spektroskopiska', 'laserspektroskopi', 'fotoelektronspektroskopi', 'gammaspektroskopi', 'gammaspektroskopin'],
+    former: ['spektroskopi', 'spektroskopin', 'spektroskopisk', 'spektroskopiskt', 'spektroskopiska', 'laserspektroskopi', 'fotoelektronspektroskopi', 'gammaspektroskopi', 'gammaspektroskopin', 'terahertzspektroskopi', 'terahertzspektroskopin'],
     kort: 'Konsten att dela upp ljus efter våglängd och läsa av mönstret av ljusa och mörka linjer. Eftersom varje grundämne har sitt eget linjemönster går det att bestämma vad något består av utan att röra vid det.',
     relaterade: ['vaglangd', 'gitter', 'exciterat-tillstand', 'diffraktionsgitter', 'spektrum', 'spektrometer'],
     body: [

@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sun, 20 Sep 2026 15:38:54 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2026 01:22:42 GMT</lastBuildDate>
+    <item>
+      <title>Instängt mellan fettskikt vägrar vattnet bli is — det stelnar till glas i stället</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-21-vattnet-som-vagrar-bli-is</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-21-vattnet-som-vagrar-bli-is</guid>
+      <pubDate>Mon, 21 Sep 2026 04:00:00 GMT</pubDate>
+      <category>Termodynamik</category>
+      <description>Kyler man vanligt vatten tillräckligt långsamt blir det alltid is, och just därför har fysiker aldrig kunnat följa det som annars borde hända: att vätskan stelnar till ett glas utan att kristallisera. Genom att klämma in vattnet i ett skikt tre molekyler tjockt mellan fettliknande membran har ett internationellt lag nu stängt vägen till isen och fångat stelnandet i full gång, vid långt högre temperaturer än väntat.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-21-vattnet-som-vagrar-bli-is.jpg" length="207212" type="image/jpeg"/>
+    </item>
     <item>
       <title>Solens utbrott börjar med att magnetfältet slits av — och omkopplingen går alltid ungefär lika fort</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-09-20-nar-magnetfaltet-knyts-om</link>
@@ -177,15 +186,6 @@
       <category>Kvantfysik</category>
       <description>Solljus är rörigt ljus: alla färger på en gång, alla riktningar, ingen ordning i tiden. Ändå har ett lag från Ottawa och Erlangen fått det att klyva fotoner inne i en kristall, och paren som kom ut klarade det test som skiljer kvantfysiken från all vardaglig fysik.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-02-solljuset-som-flatar-samman.jpg" length="53679" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Samma spegel som Hubble men hundra gånger vidare blick — Roman ska mäta hur klumpig den mörka materien är</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-01-hundra-ganger-vidare-blick</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-01-hundra-ganger-vidare-blick</guid>
-      <pubDate>Tue, 01 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Astronomi</category>
-      <description>NASA:s nya rymdteleskop lämnade Kennedy Space Center i söndags och är på väg mot en punkt 1,5 miljoner kilometer från jorden. Frågan det ska svara på är inte om den mörka materien finns, utan vad den består av — och det avgörs av hur tidigt materien hann klumpa ihop sig.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-01-hundra-ganger-vidare-blick.jpg" length="117606" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

@@ -103,6 +103,81 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-21-vattnet-som-vagrar-bli-is",
+    date: "2026-09-21",
+    title: "Instängt mellan fettskikt vägrar vattnet bli is — det stelnar till glas i stället",
+    deck: "Kyler man vanligt vatten tillräckligt långsamt blir det alltid is, och just därför har fysiker aldrig kunnat följa det som annars borde hända: att vätskan stelnar till ett glas utan att kristallisera. Genom att klämma in vattnet i ett skikt tre molekyler tjockt mellan fettliknande membran har ett internationellt lag nu stängt vägen till isen och fångat stelnandet i full gång, vid långt högre temperaturer än väntat.",
+    category: "Termodynamik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-21-vattnet-som-vagrar-bli-is.jpg",
+    imageAlt: "Inifrån en stor, ljus experimenthall. En cirkelformad vit betongmur omsluter acceleratorringen, med räcken och kabelstegar ovanpå. I förgrunden står en gul och grön magnet på en blå transportvagn.",
+    imageCredit: "Foto: jjron, via Wikimedia Commons (CC BY-SA 3.0). Bilden visar experimenthallen vid Australian Synchrotron, anläggningen där röntgenmätningarna ner till −120 °C gjordes.",
+    tags: ["termodynamik", "vatten", "glasövergång", "fasövergång", "underkylning", "is", "neutronspridning", "materialfysik", "kryobevaring", "molekyldynamik"],
+    sources: [
+      { name: "Phys.org: Soft nanoscale confinement prevents ice, exposing water's liquid-to-glass transition (3 september 2026)", url: "https://phys.org/news/2026-09-soft-nanoscale-confinement-ice-exposing.html" },
+      { name: "ANSTO: New insights into fundamental behaviour of water", url: "https://www.ansto.gov.au/news/new-insights-into-fundamental-behaviour-of-water" },
+      { name: "Nature Communications: Resolving liquid-to-glass transitions of water under soft nanoconfinement (fri fulltext)", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC13369869/" }
+    ],
+    research: {
+      citation: "Patrick Züblin med flera, ”Resolving liquid-to-glass transitions of water under soft nanoconfinement”, Nature Communications, volym 17, artikel 6224, publicerad 8 maj 2026",
+      url: "https://doi.org/10.1038/s41467-026-72955-y"
+    },
+    body: [
+      { type: 'p', html: 'Vatten är det mest studerade ämnet på jorden och samtidigt ett av de mest egensinniga. Det är tyngst vid 4&nbsp;°C, det utvidgar sig när det fryser, och det har en lång rad egenskaper som inte uppför sig som hos någon annan vanlig vätska. En av de envisaste gåtorna handlar om vad som egentligen skulle hända om vattnet aldrig fick bli is.' },
+      { type: 'p', html: 'Frågan är inte hypotetisk på skoj. Alla vätskor kan i princip stelna på två sätt. Det ena är att kristallisera: molekylerna ordnar sig i ett regelbundet mönster, och ämnet blir fast med en skarp smältpunkt. Det andra är att bli ett <em>glas</em>: molekylerna behåller vätskans oordnade arrangemang, men rörelsen blir så trög att materialet till slut beter sig som ett fast ämne. Fönsterglas är just det, en vätska som stelnat utan att någonsin ordna sig.' },
+
+      { type: 'h2', text: 'Ingenmanslandet under −41 °C' },
+      { type: 'p', html: 'För vatten är den andra vägen praktiskt taget stängd. Rent vatten går att kyla under 0&nbsp;°C utan att frysa, ett tillstånd som kallas underkylning, men bara till en gräns. Kring −41&nbsp;°C bildas iskristaller spontant inne i vätskan hur ren och stillastående den än är, och förloppet går inte att stoppa. Under den gränsen öppnar sig ett temperaturområde som fysikerna brukar kalla ingenmansland: där kan flytande vatten helt enkelt inte hållas kvar tillräckligt länge för att mätas.' },
+      { type: 'p', html: 'Problemet är att det är precis där den intressanta övergången borde ligga. Glasigt vatten går visserligen att framställa på omvägar, till exempel genom att spruta små droppar mot en iskall yta så snabbt att kristallerna aldrig hinner växa, och kalorimetriska mätningar placerar då glasövergången kring −137&nbsp;°C. Men vägen dit, alltså själva stelnandet, har ingen kunnat följa i en sammanhängande mätning. Isen kommer emellan.' },
+
+      { type: 'h2', text: 'Tre molekyllager mellan fettväggar' },
+      { type: 'p', html: 'Ett lag lett från ETH Zürich, med mätningar vid den australiska forskningsanläggningen ANSTO, synkrotronen Soleil i Frankrike och Sorbonne Université, har angripit problemet från ett oväntat håll: i stället för att kyla snabbare stängde de vägen till isen helt.' },
+      { type: 'p', html: 'Knepet bygger på att en iskristall behöver plats. Vattenmolekylerna ska ordna sig i ett tredimensionellt nät med bestämda vinklar, och det kräver ett visst utrymme. Blir utrymmet mindre än så kan kristallen aldrig komma igång.' },
+      { type: 'p', html: 'Forskarna blandade därför vatten med fytantriol, en fettliknande molekyl som spontant bygger skiktade strukturer i vatten ungefär som cellmembranens lipider gör. Med en vattenhalt på 7,5 till 10&nbsp;viktprocent lägger sig vattnet i tunna skivor mellan fettskikten. Skivorna visade sig vara 8 till 9&nbsp;ångström tjocka, alltså 0,8 till 0,9&nbsp;nm, vilket motsvarar ungefär tre molekyllager vatten.' },
+      { type: 'p', html: 'Röntgenmätningar vid Australian Synchrotron, som specialbyggdes om för att klara temperaturer ner till −120&nbsp;°C, visade att metoden fungerade: de karakteristiska signalerna från vanlig hexagonal is uteblev helt. Vattnet frös aldrig.' },
+      { type: 'quote', html: 'Under sitt besök vid Australian Synchrotron arbetade Patrick Züblin från Monash University nära SAXS/WAXS-laget för att vidareutveckla och finslipa mätningarna vid låg temperatur, ner till −120&nbsp;°C.', cite: 'Ashish Sethi, ANSTO' },
+
+      { type: 'h2', text: 'Att se rörelser genom att mäta väte' },
+      { type: 'p', html: 'Att vattnet inte fryser är en sak. Att se hur dess molekyler rör sig inne i en fettmatris är en annan. Här användes neutronspridning, och skälet är en egenhet hos neutronen: den sprids ovanligt kraftigt mot vätekärnor. Eftersom varje vattenmolekyl har två väteatomer domineras signalen av vattnet, om man dessutom byter ut fettmolekylernas väte mot dess tyngre syskon deuterium.' },
+      { type: 'quote', html: 'Signalen från neutronerna, som vårt instrument mäter, domineras av rörelserna hos väteatomerna i vattnet. Det gör att vi kan mäta vattnets dynamik för sig, även när vattnet sitter inneslutet i en komplicerad mjuk omgivning.', cite: 'Alice Klapproth, ANSTO' },
+      { type: 'p', html: 'Två neutroninstrument användes, ett som fångar rörelser på några nanosekunder och ett som ser ner på pikosekundskalan. Till det lades terahertzspektroskopi, kärnmagnetisk resonans och datorsimuleringar av molekylernas rörelser. Tillsammans täckte metoderna sex tiopotenser i tid, från 10<sup>−12</sup> till 10<sup>−6</sup>&nbsp;s.' },
+
+      { type: 'h2', text: 'En övergång som beror på hur länge man tittar' },
+      { type: 'p', html: 'Resultatet blev att vattnets rörelser bromsade in kraftigt i intervallet −63 till −20&nbsp;°C, och att den tröghet som kvarstår hur länge man än väntar sätter in mellan −74 och −64&nbsp;°C. Det är betydligt högre temperaturer än de kring −137&nbsp;°C som gäller för glasigt bulkvatten, och högre än vad tidigare mätningar på mjukt innestängt vatten antytt.' },
+      { type: 'p', html: 'Att olika metoder ger olika svar är här ingen svaghet utan själva poängen. En glasövergång är inte en skarp fasövergång som smältning, där ämnet byter tillstånd vid en bestämd temperatur. Den är en fråga om jämförelse mellan två tider: hur lång tid molekylerna behöver för att flytta sig en molekylbredd, och hur länge mätningen tittar. Ett instrument som ser på pikosekunder kallar vattnet stelnat redan när det fortfarande kryper framåt på nanosekunder. Just därför flyttar sig den uppmätta övergångstemperaturen när mättiden ändras, och just därför blir den ett intervall snarare än en punkt.' },
+
+      { type: 'h2', text: 'Glas mellan flytande väggar' },
+      { type: 'p', html: 'Den mest överraskande upptäckten gäller ett smalt temperaturområde kring −75&nbsp;°C. Där är vattenskiktet stelnat till glas samtidigt som fettmolekylerna omkring det fortfarande är rörliga och flytande. Ett fast skikt inneslutet mellan väggar som beter sig som vätska är inte vad intuitionen förutsäger, och det betyder att de två komponenternas rörelser har kopplats loss från varandra.' },
+      { type: 'image', src: 'nyheter/bilder/2026-09-21-vattnet-som-vagrar-bli-is-2.jpg', alt: 'Tre ögonblicksbilder ur en molekylsimulering, sida vid sida. I varje bild ligger ett blått skikt av vattenmolekyler klämt mellan bruna, trådlika fettmolekyler. Bilderna är märkta med temperaturerna −135 °C, −75 °C och −20 °C, och pilar anger om skikten är glasiga eller flytande.', caption: 'Ögonblicksbilder ur forskarnas simuleringar. Blått är vatten, brunt är fettmolekyler, och ljusa toner betyder glasigt medan mörka betyder flytande. Vid −135&nbsp;°C är allt stelnat och vid −20&nbsp;°C är allt rörligt, men vid −75&nbsp;°C ligger ett glasigt vattenskikt inneslutet mellan fettmolekyler som fortfarande är flytande.', credit: 'Figur: Züblin med flera, Nature Communications 17, 6224 (2026), CC BY 4.0' },
+      { type: 'p', html: 'Arbetet skickades in i november 2025, godkändes efter granskning i april 2026 och publicerades i Nature Communications i maj. Den australiska forskningsanläggning som stod för neutron- och röntgenmätningarna redogjorde för sin del av arbetet i september.' },
+
+      { type: 'h2', text: 'Varför det spelar roll utanför laboratoriet' },
+      { type: 'p', html: 'Vatten som sitter inklämt på nanometerskala är inte en konstlad situation. Det är normaltillståndet inne i en cell, där vattnet omges av membran, proteiner och andra stora molekyler och sällan har mer än några molekylbredder till närmaste yta.' },
+      { type: 'p', html: 'Det är också själva kärnan i problemet med att frysa ner biologiskt material. Det som förstör en cell vid infrysning är sällan kylan i sig utan iskristallerna: de växer, tar större plats än vattnet gjorde och skär sönder strukturer inifrån. Lyckas man i stället få vattnet att stelna till glas överlever cellen. Samma sak avgör kvaliteten på djupfryst mat, där stora iskristaller förvandlar fast konsistens till mos vid upptining.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Is är ovanlig bland fasta ämnen genom att flyta på sin egen smälta. Vattnets molekyler binds i ett öppet nät med hålrum i, och därför tar iskristallen ungefär 9&nbsp;% större plats än vattnet den bildades ur.',
+        'Glas är inte ett eget aggregationstillstånd utan en vätska vars rörelser i praktiken upphört. Att gamla fönsterrutor skulle vara tjockare nedtill för att glaset sakta runnit är däremot en seglivad myt: rutorna tillverkades ojämna från början.',
+        'Ett vattenskikt tre molekyler tjockt är ungefär 0,9&nbsp;nm. Ett hårstrå är runt 80&nbsp;000&nbsp;nm brett, alltså nära hundratusen gånger tjockare.'
+      ] },
+
+      { type: 'p', html: 'Någon förklaring till vattnets alla egenheter ger studien inte. Men den öppnar en dörr som varit stängd: ett sätt att följa vatten som stelnar utan att bli is, i ett temperaturområde som hittills varit omöjligt att nå.' }
+    ],
+    larare: {
+      moment: [
+        { label: 'Faser och fasövergångar', href: 'katalog.html?id=fy1-6.3' },
+        { label: 'Värme och temperatur', href: 'katalog.html?id=fy1-6.1' },
+        { label: 'Termodynamikens fyra huvudsatser', href: 'katalog.html?id=fy1-6.5' }
+      ],
+      fragor: [
+        'Den uppmätta temperaturen för glasövergången flyttade sig beroende på vilken metod som användes. Vad säger det om skillnaden mellan en storhet som smältpunkt och en storhet som glasövergångstemperatur?',
+        'Forskarna löste problemet genom att göra det omöjligt för vattnet att frysa i stället för att kyla snabbare. Varför kan det ibland vara mer upplysande att stänga av en effekt än att försöka mäta trots den?',
+        'Iskristaller behöver utrymme för att växa. Vilka andra fenomen i naturen känner du till som upphör att fungera när utrymmet blir litet nog?'
+      ]
+    }
+  },
+
+  {
     id: "2026-09-20-nar-magnetfaltet-knyts-om",
     date: "2026-09-20",
     title: "Solens utbrott börjar med att magnetfältet slits av — och omkopplingen går alltid ungefär lika fort",

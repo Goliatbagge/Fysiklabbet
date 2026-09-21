@@ -528,6 +528,19 @@
  * Likformiga trianglar) skrivs som förut som liten grå rubrik (REGEL
  * INLEDANDE MOTIVERING).
  *
+ * REGEL (ROTINDEX FÅR ALDRIG TRÄNGA IN I ROTKILEN, användarkrav
+ * 2026-09-21): rotindexet (3 i tredjeroten, 14 i fjortonderoten) skrivs
+ * litet i kilens vinkel och får skjutas in en aning under rottecknet —
+ * men indraget måste vara ETT FAST MÅTT, aldrig en andel av indexets
+ * bredd. Med en andel växte indraget med antalet siffror, så tvåsiffriga
+ * och tresiffriga index (14, 100, 99) skrevs rakt in i kilens
+ * uppåtgående streck och gick inte att läsa. Helpern rotIdxAdv() drar
+ * därför bort 0,2 SIFFERBREDDER oavsett hur långt indexet är: ett
+ * ensiffrigt index hamnar exakt där det alltid legat, och sista siffran i
+ * ett långt index hamnar på samma avstånd från kilen som den ensamma
+ * siffran gör. Gäller både rot() i mathTools och rotFrac() i
+ * fysikscenerna — rita aldrig ett eget rottecken med egen indexknuff.
+ *
  * REGEL (MINUS FÖRE BRÅK, användarkrav 2026-09-20): ett minustecken som
  * står omedelbart före ett bråk (x = −p/2 i pq-formeln, m = −16/3)
  * ligger i samma höjd som bråkstrecket och smälter ihop med det, så att
@@ -2993,15 +3006,22 @@
      * radikanden, innan radikanden skrivs under strecket. Ett eventuellt
      * rotindex (3 för tredjeroten) skrivs först, litet, i kilens vinkel.
      * Returnerar nästa x. */
+    /* ROTINDEX: indexet får skjutas in en bit under rotkilen, men
+     * indraget är ett FAST mått — en femtedels siffra — aldrig en andel
+     * av hela indexets bredd. Se REGEL (ROTINDEX FÅR ALDRIG TRÄNGA IN I
+     * ROTKILEN) i filhuvudet. */
+    function rotIdxAdv(idx) {
+      return adv(String(idx), 0.55) - 0.2 * adv('0', 0.55);
+    }
     function rotW(innerS, idx) {
-      return (idx ? adv(String(idx), 0.55) * 0.8 : 0) +
+      return (idx ? rotIdxAdv(idx) : 0) +
              0.46 * F + adv(innerS) + 0.16 * F;
     }
     function rot(innerS, x0, yb, idx) {
       var x = x0;
       if (idx != null) {
         str(String(idx), x, yb - 0.52 * F, null, 0.55);
-        x += adv(String(idx), 0.55) * 0.8;
+        x += rotIdxAdv(idx);
         pause(120);
       }
       var iw = adv(innerS);
@@ -8802,12 +8822,13 @@
     T.line([bx + bs + dd, by - dd], [bx + bs + dd, by + bs - dd]);
     T.pause(200);
     /* ALLA TRE KANTERNA MÄRKS x (användarkrav 2026-09-21) — höjden till
-     * höger, bredden under framsidan och DJUPET vid den vänstra sneda
-     * kanten, utanför kuben där ytan är fri. Utan djupmåttet ser kuben
-     * ut att bara ha två kända kanter, och x·x·x blir omotiverat. */
+     * höger, bredden under framsidan och DJUPET vid den NEDRE HÖGRA
+     * sneda kanten, strax utanför kuben där ytan är fri (användarkrav
+     * 2026-09-21). Utan djupmåttet ser kuben ut att bara ha två kända
+     * kanter, och x·x·x blir omotiverat. */
     T.str('x', bx + bs + dd + 14, by + bs / 2 - dd / 2, BLUE, 0.62);
     T.str('x', bx + bs / 2 - wx / 2, by + bs + 0.9 * F, BLUE, 0.62);
-    T.str('x', bx - 4 - wx, by - dd / 2 + 0.25 * F, BLUE, 0.62);
+    T.str('x', bx + bs + dd / 2 + 10, by + bs - dd / 2 + 0.55 * F, BLUE, 0.62);
     T.stepEnd();
 
     y = by + bs + 3.1 * F;
@@ -8953,7 +8974,12 @@
       [['jag båda led till dess']],
       [['invers, 1/14.']]
     ]);
-    y += 2.4 * F;
+    /* INLEDANDE MOTIVERING (se REGEL): metodrubriken och raden under i
+     * SAMMA klicksteg. Uppgiften löses på två sätt, och eleven ska se
+     * vilken metod som är vilken (användarkrav 2026-09-21). */
+    y += 2.0 * F;
+    T.str('Med potenslagar', padL + 30, y, null, 0.62);
+    y += 1.6 * F;
     T.str('(x^1^4)^1^/^1^4=80 000^1^/^1^4', padL + 30, y);
     T.stepEnd();
 
@@ -8973,7 +8999,9 @@
       [['till 1/14 ÄR att dra']],
       [['fjortonderoten.']]
     ]);
-    y += 2.6 * F;
+    y += 2.2 * F;
+    T.str('Med rottecken', padL + 30, y, null, 0.62);
+    y += 1.7 * F;
     xx = T.str('x=±', padL + 30, y);
     /* ROTINDEX EFTER ±: indexsiffran skrivs i kilens vinkel, alltså vid
      * rotens x0 — utan luft växer den ihop med plusminustecknet */
@@ -9180,7 +9208,21 @@
     T.str('c) x^1^0^0=-50', padL, y);
     T.stepEnd();
 
-    y += 2.3 * F;
+    y += 2.5 * F;
+    xx = T.str('x=', padL + 30, y);
+    T.rot('-50', xx + 9, y, 100);
+    T.stepEnd();
+
+    /* MOTIVERINGEN SKRIVS UT (användarkrav 2026-09-21): svaret "saknar
+     * lösning" ska följa av något som står på arket, inte bara av en
+     * tankebubbla som eleven kan ha stängt av. */
+    y += 2.0 * F;
+    T.str('Jämn rot och negativt värde under', padL + 30, y, null, 0.62);
+    y += 1.15 * F;
+    T.str('rottecknet ⟹ saknar lösning', padL + 30, y, null, 0.62);
+    T.stepEnd();
+
+    y += 2.1 * F;
     xe = T.str('Svar: Saknar lösningar', padL, y);
     T.underline(xe, y);
     T.stepEnd();
@@ -25099,8 +25141,10 @@
   function rotFrac(T, F, numS, denS, x0, yb, idx) {
     var x = x0;
     if (idx != null) {
+      /* fast indrag, en femtedels siffra — se REGEL (ROTINDEX FÅR ALDRIG
+       * TRÄNGA IN I ROTKILEN) i filhuvudet */
       T.str(String(idx), x, yb - 0.86 * F, null, 0.55);
-      x += T.adv(String(idx), 0.55) * 0.85;
+      x += T.adv(String(idx), 0.55) - 0.2 * T.adv('0', 0.55);
       T.pause(120);
     }
     var fw = T.fracW(numS, denS);

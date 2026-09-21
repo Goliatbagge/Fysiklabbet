@@ -57,7 +57,7 @@ $$
 **b)** $x = \pm\sqrt{10}$. $\sqrt{10}$ är svår att beräkna med
 huvudräkning. Vi slår det på räknaren: $x = \pm 3{,}162\ldots \approx \pm 3{,}16$
 
-**Svar:** $x = \pm\sqrt{10}$ eller $x \approx \pm 3{,}16$
+**Svar:** $x = \pm\sqrt{10} \approx \pm 3{,}16$
 
 **c)** $x = \pm\sqrt{-9}$. Roten ur negativa tal saknar reella lösningar.
 

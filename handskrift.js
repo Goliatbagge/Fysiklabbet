@@ -8574,8 +8574,16 @@
     T.str('≈±3,16', padL + 30, y);
     T.stepEnd();
 
+    tanke(y, [
+      [['Det exakta svaret är']],
+      [['plus-minus roten ur 10.']],
+      [['Det skriver jag först,']],
+      [['avrundningen efter.']]
+    ]);
     y += 2.2 * F;
-    xe = T.str('Svar: x≈±3,16', padL, y);
+    xe = T.str('Svar: x=±', padL, y);
+    xe = T.rot('10', xe, y);
+    xe = T.str('≈±3,16', xe, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -8590,6 +8598,23 @@
     T.str('c) x^2=-9', padL, y);
     T.stepEnd();
 
+    /* rotraden skrivs ut som vanligt INNAN slutsatsen dras — eleven ska
+     * se VARFÖR det inte går, inte bara få veta det (användarkrav
+     * 2026-09-21) */
+    tanke(y, [
+      [['Jag gör som vanligt och']],
+      [['drar roten ur båda led.']]
+    ]);
+    y += 2.4 * F;
+    xx = T.str('x=±', padL + 30, y);
+    T.rot('−9', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Men roten ur ett negativt']],
+      [['tal finns inte bland de']],
+      [['reella talen.']]
+    ]);
     y += 2.2 * F;
     xe = T.str('Svar: Saknar reella lösningar', padL, y);
     T.underline(xe, y);
@@ -8696,20 +8721,28 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
 
-    /* ---- a) kvadraten ---- */
-    tanke(15, [
+    /* ---- a) kvadraten ----
+     * DELUPPGIFTENS BOKSTAV SKRIVS FÖRE FIGUREN (användarkrav
+     * 2026-09-21): eleven ska veta vilken uppgift som påbörjas innan
+     * pennan börjar rita. Att rita först och berätta efteråt är
+     * ologiskt. */
+    var wx = T.adv('x', 0.62);
+    y = 52;
+    T.str('a)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
       [['Först ritar jag']],
       [['kvadraten och kallar']],
       [['sidan x.']]
-    ], 0);
-    var kx = padL + 40, ky = 56, ks = 132;
+    ]);
+    var kx = padL + 40, ky = y + 0.9 * F, ks = 132;
     T.line([kx, ky], [kx + ks, ky]);
     T.line([kx + ks, ky], [kx + ks, ky + ks]);
     T.line([kx + ks, ky + ks], [kx, ky + ks]);
     T.line([kx, ky + ks], [kx, ky]);
     T.pause(200);
     T.str('x', kx + ks + 14, ky + ks / 2 + 0.2 * F, BLUE, 0.62);
-    var wx = T.adv('x', 0.62);
     T.str('x', kx + ks / 2 - wx / 2, ky + ks + 0.9 * F, BLUE, 0.62);
     T.stepEnd();
 
@@ -8719,7 +8752,7 @@
       [['gånger x.']]
     ], 0.3);
     y = ky + ks + 3.1 * F;
-    T.str('a) A=x·x=x^2', padL, y);
+    T.str('A=x·x=x^2', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -8747,12 +8780,16 @@
     T.stepEnd();
 
     /* ---- b) kuben ---- */
+    y += 3.4 * F;
+    T.str('b)', padL, y);
+    T.stepEnd();
+
     tanke(y, [
       [['Nu en kub. Volymen är']],
       [['sidan gånger sidan gånger']],
       [['sidan.']]
     ]);
-    var bx = padL + 40, by = y + 2.6 * F, bs = 116, dd = 42;
+    var bx = padL + 40, by = y + 2.4 * F, bs = 116, dd = 42;
     T.line([bx, by], [bx + bs, by]);                      /* framsidan */
     T.line([bx + bs, by], [bx + bs, by + bs]);
     T.line([bx + bs, by + bs], [bx, by + bs]);
@@ -8764,12 +8801,17 @@
     T.line([bx + dd, by - dd], [bx + bs + dd, by - dd]);  /* ovansidan bak */
     T.line([bx + bs + dd, by - dd], [bx + bs + dd, by + bs - dd]);
     T.pause(200);
+    /* ALLA TRE KANTERNA MÄRKS x (användarkrav 2026-09-21) — höjden till
+     * höger, bredden under framsidan och DJUPET vid den vänstra sneda
+     * kanten, utanför kuben där ytan är fri. Utan djupmåttet ser kuben
+     * ut att bara ha två kända kanter, och x·x·x blir omotiverat. */
     T.str('x', bx + bs + dd + 14, by + bs / 2 - dd / 2, BLUE, 0.62);
     T.str('x', bx + bs / 2 - wx / 2, by + bs + 0.9 * F, BLUE, 0.62);
+    T.str('x', bx - 4 - wx, by - dd / 2 + 0.25 * F, BLUE, 0.62);
     T.stepEnd();
 
     y = by + bs + 3.1 * F;
-    T.str('b) V=x·x·x=x^3', padL, y);
+    T.str('V=x·x·x=x^3', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [

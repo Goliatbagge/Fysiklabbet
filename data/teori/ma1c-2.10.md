@@ -66,10 +66,14 @@ rottecknet/potensen för att inte missa dubbla lösningar. Om exponenten är
 <u>udda</u> ska däremot $\pm$ inte skrivas ut.
 
 ::: formel "Antal lösningar till en potensekvation"
-En potensekvation $x^n = a$ med
+En potensekvation $x^n = a$ med **jämn** exponent har
 
-- **jämn** exponent har två, en eller noll lösningar
-- **udda** exponent har en lösning.
+- **två** lösningar om värdet under rottecknet är positivt, $a > 0$
+- **en** lösning om värdet under rottecknet är 0, $a = 0$
+- **ingen** lösning om värdet under rottecknet är negativt, $a < 0$.
+
+Med **udda** exponent har ekvationen alltid **en** lösning, oavsett vilket
+tecken $a$ har.
 :::
 
 ::: exempel "Exempel 1 — Lös potensekvationerna"

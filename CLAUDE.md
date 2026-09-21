@@ -1949,6 +1949,32 @@ deluppgifter som är hela meningar får var sin rad.
   upp på raden. Kräver deluppgiften en mening att läsa gäller
   huvudregeln (egen rad).
 
+### ⚠️ Deluppgiftens bokstav får ALDRIG bli ensam kvar i radslutet
+
+**Ett hårt mellanslag räcker INTE för att binda "f)" till sin uppgift när
+uppgiften är en formel.** KaTeX renderar en inline-formel som ett atomärt
+inline-block, och webbläsaren tar sig rätten att bryta raden mellan texten
+och rutan oavsett vad som står i mellanrummet. Så hamnade "f)" ensam i
+radslutet i `ma1c-2.9`, med `$3x^2 - 2{,}31 = 17{,}97$` på nästa rad
+(påpekat 2026-09-21) — trots att källan skrev `f)&nbsp;$…$` precis som
+regeln om korta deluppgifter säger.
+
+Det är samma fälla som den ensamma öppningsparentesen, och lösningen är
+densamma: **`restoreMath()` limmar ihop bokstaven med sin formel i en
+nowrap-span** (`.delupp-bokstav`, CSS i `styles-laborans.css`). Är
+deluppgiften vanlig text i stället för en formel byts mellanslaget mot ett
+hårt mellanslag — där är det två teckenföljder som ska hållas ihop, och då
+räcker NBSP. Reglerna finns i `katalog.html`, `avsnitt.html` och `np.html`;
+**rör dem inte** utan att förstå detta, och kopiera dem till varje ny sida
+som renderar markdown med matte.
+
+- Skriv `a)&nbsp;$…$` i md-källan som förut. Automatiken gör resten, också
+  för de hundratals frågestammar som redan står med vanligt mellanslag.
+- **Granska i skärmdump**, inte i DOM:en: felet syns bara i renderingen,
+  och bara vid vissa bredder. Pröva några bredder mellan 400 och 1100 px —
+  en deluppgift som bryter fel på 820 px kan se perfekt ut på 900.
+- Regeln gäller ALLA fastnålade bokstäver i en uppgiftsrad: teorins
+  `::: exempel`, övningarna, exit tickets och de nationella proven.
 **Mekanisk kontroll:** `node .claude/verify-sprak.js` har regeln
 `korta-deluppgifter-staplade`, som ger fel på ett kort a)-led (ett ensamt
 math-block eller högst ~32 tecken utan frågetecken) som följs av `<br>b)`

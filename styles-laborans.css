@@ -2929,6 +2929,13 @@ details.lab-forklaring > .formel-harledning-body { padding-top: 12px; }
 .math-paren {
     white-space: nowrap;
 }
+/* Deluppgiftens bokstav + dess uppgift ("f) $3x^2 = 17,97$") limmas ihop
+   (sätts i restoreMath) — en inline-formel är ett atomärt inline-block, och
+   webbläsaren får bryta raden mellan bokstaven och rutan trots hårt
+   mellanslag. Bokstaven får ALDRIG bli ensam kvar i radslutet. */
+.delupp-bokstav {
+    white-space: nowrap;
+}
 /* Variabel + bindestreck + efterled ("$x$-termen", "<em>pq</em>-formeln")
    limmas ihop (sätts i restoreMath) — annars kan raden brytas efter
    bindestrecket eller mellan variabeln och bindestrecket. */

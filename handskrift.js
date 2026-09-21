@@ -402,7 +402,8 @@
  * direkt, är FÖRBJUDET: i läget Båda led försvinner då operationen helt
  * och eleven ser bara att termen är borta. 26 sådana genvägar i 12
  * scener rättades 2026-09-07 (parentesekv, variabelbada, trebrak,
- * ejtillaten, delabelopp, enklagrad, potensekvlos, losolikhet,
+ * ejtillaten, delabelopp, enklagrad, parenteskvadrat, potensekvlos,
+ * losolikhet,
  * variabelnamnare, okandsida, triangelarea). Använd ALLTID helpern
  * mkEkvOp(T, vagg) — den ger båda lägena och samma stegantal; skriv
  * inga egna if (vagg)-grenar för term- och divisionsoperationer.
@@ -8798,6 +8799,89 @@
     T.stepEnd();
 
     return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: en parentes i kvadrat (ma1c-2.9 ex 3) -------
+   * (x+2)^2 = 16. Poängen är att parentesen är ETT tal som står i
+   * kvadrat: roten dras ur båda led (egen rad, se REGEL ROTEN UR BÅDA
+   * LED), och ± delar sedan upp lösningen i två fall som räknas ut var
+   * för sig. */
+  function layoutParenteskvadrat(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet) */
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var xw = Math.max(padL + 30 + T.adv('x+2=-4'),
+                      padL + 30 + T.adv('x=-6')) + 0.9 * F;
+
+    y = 74;
+    T.str('(x+2)^2=16', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Parentesen är ett enda']],
+      [['tal som står i kvadrat.']],
+      [['Vilket tal i kvadrat blir']],
+      [['16? Både 4 och -4.']]
+    ]);
+    T.str('Drar roten ur båda led', padL, y + 1.0 * F, null, 0.62);
+    y += 2.6 * F;
+    xx = T.str('x+2=±', padL + 30, y);
+    T.rot('16', xx, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('x+2=±4', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['± betyder två fall:']],
+      [['parentesen kan vara 4']],
+      [['eller -4. Jag löser dem']],
+      [['var för sig.']]
+    ]);
+
+    /* ---- fall 1: x+2 = 4 ---- */
+    y += 3.6 * F;
+    T.str('Första fallet: parentesen är 4', padL, y - 1.6 * F, null, 0.62);
+    T.str('x+2=4', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Subtraherar 2 från båda']],
+      [['led.']]
+    ]);
+    y = ekvOp(y, '-2', xw, 'x+2=4');
+    T.str('x=2', padL + 30, y);
+    T.stepEnd();
+
+    /* ---- fall 2: x+2 = −4 ---- */
+    y += 3.4 * F;
+    T.str('Andra fallet: parentesen är -4', padL, y - 1.6 * F, null, 0.62);
+    T.str('x+2=-4', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma sak här:']],
+      [['subtraherar 2 från båda']],
+      [['led.']]
+    ]);
+    y = ekvOp(y, '-2', xw, 'x+2=-4');
+    T.str('x=-6', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Två lösningar, precis som']],
+      [['väntat av en andragrads-']],
+      [['ekvation.']]
+    ]);
+    y += 2.4 * F;
+    xe = T.str('Svar: x=2 eller x=-6', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
   }
 
   /* ---------------- scen: lös potensekvationer (ma1c-2.10 ex 1) -------
@@ -56631,6 +56715,7 @@
                    framochtillbaka: layoutFramochtillbaka,
                    enklagrad: layoutEnklagrad,
                    kvadratkub: layoutKvadratkub,
+                   parenteskvadrat: layoutParenteskvadrat,
                    potensekvlos: layoutPotensekvlos,
                    antallosningar: layoutAntallosningar,
                    losolikhet: layoutLosolikhet,

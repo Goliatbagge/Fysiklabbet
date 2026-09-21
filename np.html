@@ -834,6 +834,21 @@
         }
         function restoreMath(html, tokens) {
             html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
+            // Håll ihop deluppgiftens bokstav med sin uppgift ("f) $3x^2 = …$").
+            // KaTeX renderar inline-formeln som ett atomärt inline-block, och
+            // webbläsaren får då bryta raden mellan "f)" och formeln — ett hårt
+            // mellanslag i md-källan hjälper INTE mot en inline-ruta (påpekat
+            // 2026-09-21 i ma1c-2.9: "f)" blev ensam kvar i radslutet). Samma
+            // problem som öppningsparentesen nedan, och samma lösning: en
+            // nowrap-span runt bokstaven och formeln.
+            html = html.replace(
+                /(^|[\s>;])([a-h])\)(?:&nbsp;|\u00a0|[ \t])*(\$(?!\$)[^$\n]+?\$)/g,
+                '$1<span class="delupp-bokstav">$2)&nbsp;$3</span>');
+            // Är deluppgiften vanlig text räcker ett hårt mellanslag — då är det
+            // två teckenföljder som ska hållas ihop, inte text + inline-ruta.
+            html = html.replace(
+                /(^|[\s>;])([a-h])\)(?:&nbsp;|\u00a0|[ \t])(?=[0-9A-Za-zÅÄÖåäöÉé])/g,
+                '$1$2)&nbsp;');
             html = html.replace(/\(( *)(\$(?!\$)[^$\n]+?\$)/g, '<span class="math-paren">($1$2</span>');
             return html;
         }

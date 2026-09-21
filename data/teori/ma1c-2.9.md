@@ -152,6 +152,44 @@ $$
 :::
 :::
 
+::: exempel "Exempel 3 — En parentes i kvadrat"
+**Lös ekvationen $(x+2)^2 = 16$**
+
+::: handskrift
+typ: parenteskvadrat
+:::
+
+::: textlosning
+Parentesen $(x+2)$ är ett enda tal som står i kvadrat. Vilket tal i
+kvadrat blir 16? Både 4 och $-4$. Vi drar därför roten ur båda led och
+sätter ut $\pm$:
+
+$$
+x + 2 = \pm\sqrt{16}
+$$
+
+$$
+x + 2 = \pm 4
+$$
+
+Plus-minus betyder två fall, och vi löser dem var för sig.
+
+Första fallet, parentesen är 4. Subtraherar 2 från båda led:
+
+$$
+x + 2 = 4 \quad\Longrightarrow\quad x = 2
+$$
+
+Andra fallet, parentesen är $-4$. Subtraherar 2 från båda led:
+
+$$
+x + 2 = -4 \quad\Longrightarrow\quad x = -6
+$$
+
+**Svar:** $x = 2$ eller $x = -6$
+:::
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Ekvationens grad"

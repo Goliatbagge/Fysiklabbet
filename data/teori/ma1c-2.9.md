@@ -172,21 +172,28 @@ $$
 x - 5 = \pm 6
 $$
 
-Plus-minus betyder två fall, och vi löser dem var för sig.
-
-Första fallet, parentesen är 6. Adderar 5 till båda led:
-
-$$
-x - 5 = 6 \quad\Longrightarrow\quad x = 11
-$$
-
-Andra fallet, parentesen är $-6$. Adderar 5 till båda led:
+Nu löser vi ut $x$ och låter plus-minus stå kvar. Adderar 5 till båda
+led:
 
 $$
-x - 5 = -6 \quad\Longrightarrow\quad x = -1
+x - 5 + 5 = 5 \pm 6
 $$
 
-**Svar:** $x = 11$ eller $x = -1$
+$$
+x = 5 \pm 6
+$$
+
+Plus-minus betyder två lösningar, en med minus och en med plus:
+
+$$
+x_1 = 5 - 6 = -1
+$$
+
+$$
+x_2 = 5 + 6 = 11
+$$
+
+**Svar:** $x_1 = -1$ och $x_2 = 11$
 :::
 :::
 

@@ -8867,15 +8867,15 @@
   /* ---------------- scen: en parentes i kvadrat (ma1c-2.9 ex 3) -------
    * (x−5)^2 = 36. Poängen är att parentesen är ETT tal som står i
    * kvadrat: roten dras ur båda led (egen rad, se REGEL ROTEN UR BÅDA
-   * LED), och ± delar sedan upp lösningen i två fall som räknas ut var
-   * för sig. */
+   * LED), x löses ut med plus-minus kvar i uttrycket, och först på
+   * slutet delas 5±6 upp i sina två lösningar. */
   function layoutParenteskvadrat(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet) */
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = Math.max(padL + 30 + T.adv('x-5=-6'),
-                      padL + 30 + T.adv('x=11')) + 0.9 * F;
+    var xw = Math.max(padL + 30 + T.adv('x-5=±6'),
+                      padL + 30 + T.adv('x=5±6')) + 0.9 * F;
 
     y = 74;
     T.str('(x-5)^2=36', padL, y);
@@ -8897,38 +8897,36 @@
     T.str('x-5=±6', padL + 30, y);
     T.stepEnd();
 
+    /* ± BÄRS MED GENOM HELA UTRÄKNINGEN (användarkrav 2026-09-21): x
+     * löses ut medan plus-minus står kvar, och först på slutet delas
+     * uttrycket upp i sina två lösningar. Den adderade femman skrivs
+     * först i högerledet, 5±6, så att nästa rad kan läsas rakt av. */
     tanke(y, [
-      [['± betyder två fall:']],
-      [['parentesen kan vara 6']],
-      [['eller -6. Jag löser dem']],
-      [['var för sig.']]
-    ]);
-
-    /* ---- fall 1: x−5 = 6 ---- */
-    y += 3.6 * F;
-    T.str('Första fallet: parentesen är 6', padL, y - 1.6 * F, null, 0.62);
-    T.str('x-5=6', padL + 30, y);
-    T.stepEnd();
-
-    tanke(y, [
+      [['Nu löser jag ut x och']],
+      [['låter plus-minus stå kvar.']],
       [['Adderar 5 till båda led.']]
     ]);
-    y = ekvOp(y, '+5', xw, 'x-5=6');
-    T.str('x=11', padL + 30, y);
-    T.stepEnd();
-
-    /* ---- fall 2: x−5 = −6 ---- */
-    y += 3.4 * F;
-    T.str('Andra fallet: parentesen är -6', padL, y - 1.6 * F, null, 0.62);
-    T.str('x-5=-6', padL + 30, y);
+    y = ekvOp(y, '+5', xw, function (yy) {
+      var x = T.str('x-5', padL + 30, yy);
+      x = T.str('+5', x, yy, BLUE);
+      x = T.str('=', x, yy);
+      x = T.str('5', x, yy, BLUE);
+      T.str('±6', x, yy);
+    });
+    T.str('x=5±6', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
-      [['Samma sak här: adderar 5']],
-      [['till båda led.']]
+      [['Plus-minus betyder två']],
+      [['lösningar: en med minus']],
+      [['och en med plus.']]
     ]);
-    y = ekvOp(y, '+5', xw, 'x-5=-6');
-    T.str('x=-1', padL + 30, y);
+    y += 2.4 * F;
+    T.str('x_1=5-6=-1', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('x_2=5+6=11', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -8937,7 +8935,7 @@
       [['ekvation.']]
     ]);
     y += 2.4 * F;
-    xe = T.str('Svar: x=11 eller x=-1', padL, y);
+    xe = T.str('Svar: x_1=-1 och x_2=11', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

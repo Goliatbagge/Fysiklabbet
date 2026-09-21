@@ -21332,27 +21332,311 @@ En sida kan inte vara negativ, så vi bortser från den negativa lösningen.
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En tärningsformad låda (kub) ska rymma exakt $8\\ 000\\ \\mathrm{cm^3}$. Ett snickeri vill såga sidorna med 2 cm marginal och undrar: hur lång blir kubens sida — och varför har ekvationen bara EN rimlig lösning trots att arean i förra uppgiften gav två?`,
-            choices: [
-                `Sidan är 20 cm; $x^3 = a$ har alltid exakt en reell lösning, medan $x^2 = a$ har två`,
-                `Sidan är 20 cm; ekvationen $x^3 = a$ har också två lösningar men den negativa glöms ofta`,
-                `Sidan är 40 cm; $x^3 = 8\\ 000$ ger $x = 8\\ 000/200$`,
-                `Sidan är 89 cm; $x = \\sqrt{8\\ 000}$`,
-            ],
-            correct: 0,
-            solution: `**Insikten:** skillnaden mellan andra- och tredjegradsekvationer är inte en räkneteknisk detalj — den beror på teckenreglerna.
+            question: `Antalet medlemmar i en förening ökade med lika många procent två år i rad. Under tvåårsperioden ökade antalet totalt med 44 %.<br>a) Ställ upp en ekvation för den årliga förändringsfaktorn och bestäm den årliga ökningen i procent.<br>b) Ekvationen i a) har två lösningar. Förklara varför bara den ena duger som svar.<br>c) Antag i stället att den totala ökningen på 44 % skedde under tre år, med lika många procent varje år. Bestäm den årliga ökningen, och förklara varför ekvationen den här gången bara har en lösning.`,
+            answer: { value: 20, unit: '%' },
+            solution: `**a)** Kalla den årliga förändringsfaktorn $x$. Varje år multipliceras antalet medlemmar med $x$, så efter två år har antalet multiplicerats med $x \\cdot x = x^2$. En total ökning med 44 % betyder att antalet multiplicerats med $1{,}44$:
 
-Kubens volym: $x^3 = 8\\ 000$, vilket ger
+$$ x^2 = 1{,}44 $$
 
-$$ x = \\sqrt[3]{8\\ 000} = 20 $$
+$$ x = \\pm\\sqrt{1{,}44} = \\pm 1{,}2 $$
 
-(kontroll: $20 \\cdot 20 \\cdot 20 = 8\\ 000$).
+Förändringsfaktorn är $1{,}2$, vilket betyder en ökning med 20 % per år. Kontroll: $1{,}2 \\cdot 1{,}2 = 1{,}44$.
 
-**Varför bara en lösning?** I $x^2 = a$ ger både $x$ och $-x$ samma kvadrat, eftersom minus gånger minus är plus — därför två lösningar. Men i $x^3$ multipliceras tre lika tecken: $(-20)^3 = -8\\ 000$, inte $+8\\ 000$. Tredjepotensen bevarar tecknet, så $x^3 = a$ har exakt en reell lösning för varje $a$.
+Lägg märke till att svaret inte är $44 / 2 = 22$ %. Det andra årets ökning räknas på ett större antal än det första årets, så två ökningar på 20 % ger tillsammans mer än 40 %.
 
-**Svar:** Sidan blir 20 cm — och $x^3 = a$ har alltid exakt en reell lösning eftersom udda potenser bevarar tecknet.
+**b)** Den andra lösningen är $x = -1{,}2$. En förändringsfaktor talar om vad antalet ska multipliceras med, och multiplicerar man ett antal medlemmar med ett negativt tal får man ett negativt antal medlemmar. Det finns inte. En förändringsfaktor är alltid ett positivt tal, så $x = -1{,}2$ förkastas.
 
-**Generell slutsats:** jämna exponenter ger ±-par (eller inga reella lösningar om $a < 0$); udda exponenter ger alltid exakt en reell lösning.`,
+**c)** Nu multipliceras antalet med $x$ tre gånger:
+
+$$ x^3 = 1{,}44 $$
+
+$$ x = \\sqrt[3]{1{,}44} \\approx 1{,}129 $$
+
+Ökningen är cirka 13 % per år (inte $44 / 3 \\approx 14{,}7$ %, av samma skäl som i a). Kontroll: $1{,}129^3 \\approx 1{,}44$.
+
+Ekvationen har bara en lösning eftersom exponenten är udda. Ett negativt tal upphöjt till 3 är negativt, $(-1{,}129)^3 \\approx -1{,}44$, så inget negativt tal kan ha kuben $1{,}44$. Här behöver vi alltså inte förkasta någon lösning: ekvationen ger själv bara det svar som är rimligt.
+
+**Svar:** a) $x^2 = 1{,}44$ ger 20 % per år. b) Lösningen $x = -1{,}2$ förkastas, eftersom en förändringsfaktor måste vara positiv. c) Cirka 13 % per år. Ekvationen $x^3 = 1{,}44$ har bara en lösning, eftersom en udda potens av ett negativt tal är negativ.
+
+**Generell slutsats:** en upprepad procentuell förändring ger en ekvation av typen $x^n = a$. Jämn exponent ger två lösningar, där den negativa förkastas av rimlighetsskäl. Udda exponent ger exakt en lösning.`,
+        },
+        {
+            level: 3,
+            question: `Ett golv med arean $5{,}4\\ \\mathrm{m^2}$ täcks helt av 120 likadana rektangulära plattor. Varje platta är dubbelt så lång som den är bred.<br>a) Bestäm plattans bredd och längd.<br>b) Skriv en formel för plattans bredd $b$ när $n$ sådana plattor täcker arean $A$.<br>c) Ett annat rum har ett kvadratiskt golv som täcks helt av 32 sådana plattor. Hur lång är golvets sida? Visa också hur plattorna kan läggas.`,
+            answer: { value: 15, unit: 'cm' },
+            solution: `**a)** Plattans mått är två obekanta, men de hänger ihop: är bredden $x$ cm så är längden $2x$ cm. Då räcker en obekant. Plattans area är
+
+$$ x \\cdot 2x = 2x^2 $$
+
+Golvets area i $\\mathrm{cm^2}$ är $5{,}4 \\cdot 10\\,000 = 54\\,000$. De 120 plattorna täcker tillsammans hela golvet:
+
+$$ 120 \\cdot 2x^2 = 54\\,000 $$
+
+$$ 240x^2 = 54\\,000 $$
+
+Dividerar båda led med 240:
+
+$$ x^2 = 225 $$
+
+$$ x = \\pm\\sqrt{225} = \\pm 15 $$
+
+En bredd kan inte vara negativ, så $x = 15$. Plattan är 15 cm bred och $2 \\cdot 15 = 30$ cm lång. Kontroll: en platta har arean $15 \\cdot 30 = 450\\ \\mathrm{cm^2}$, och $120 \\cdot 450 = 54\\,000$.
+
+**b)** Samma uppställning med bokstäver. En platta har arean $2b^2$, och $n$ plattor täcker arean $A$:
+
+$$ n \\cdot 2b^2 = A $$
+
+Dividerar båda led med $2n$:
+
+$$ b^2 = \\frac{A}{2n} $$
+
+$$ b = \\sqrt{\\frac{A}{2n}} $$
+
+Bara den positiva roten är en bredd. Kontroll mot a): $b = \\sqrt{\\dfrac{54\\,000}{240}} = \\sqrt{225} = 15$.
+
+**c)** Golvets area är $32 \\cdot 450 = 14\\,400\\ \\mathrm{cm^2}$. Kalla sidan $s$ cm:
+
+$$ s^2 = 14\\,400 $$
+
+$$ s = \\sqrt{14\\,400} = 120 $$
+
+Sidan är 120 cm. Plattorna går att lägga: $120 = 4 \\cdot 30$, så fyra plattor på längden fyller en rad, och $120 = 8 \\cdot 15$, så åtta sådana rader fyller golvet. Det ger $4 \\cdot 8 = 32$ plattor, precis som det ska.
+
+**Svar:** a) 15 cm bred och 30 cm lång. b) $b = \\sqrt{\\dfrac{A}{2n}}$. c) 120 cm, med 8 rader om 4 plattor.
+
+**Generell slutsats:** när två storheter har ett känt förhållande räcker en obekant. Arean av något med sidorna $x$ och $2x$ blir då $2x^2$, och ekvationen är en enkel andragradsekvation.`,
+        },
+        {
+            level: 3,
+            question: `Ekvationen $(x - 3)^2 = a$ innehåller ett tal $a$.<br>a) Lös ekvationen när $a = 25$.<br>b) För vilka värden på $a$ har ekvationen exakt en lösning, och för vilka värden saknar den lösning? Motivera.<br>c) För ett visst värde på $a$ är $x = 10$ en av lösningarna. Bestäm $a$ och den andra lösningen. Förklara sedan varför de två lösningarna alltid ligger lika långt från talet 3, hur $a$ än väljs.`,
+            answer: { value: 8, unit: '' },
+            solution: `**a)** Parentesen $(x - 3)$ är ett tal som i kvadrat blir 25. Det talet är 5 eller $-5$:
+
+$$ x - 3 = \\pm\\sqrt{25} $$
+
+$$ x - 3 = \\pm 5 $$
+
+$$ x = 3 \\pm 5 $$
+
+$$ x_1 = 3 + 5 = 8 \\qquad x_2 = 3 - 5 = -2 $$
+
+Kontroll: $(8 - 3)^2 = 25$ och $(-2 - 3)^2 = (-5)^2 = 25$.
+
+**b)** Allmänt ger rotdragningen $x - 3 = \\pm\\sqrt{a}$, det vill säga $x = 3 \\pm \\sqrt{a}$.
+
+Är $a > 0$ är $\\sqrt{a}$ ett positivt tal, och $3 + \\sqrt{a}$ och $3 - \\sqrt{a}$ är två olika tal. Två lösningar.
+
+Är $a = 0$ blir båda lösningarna $3 \\pm 0 = 3$. Kvadraten av ett tal är 0 bara när talet självt är 0, så $x - 3 = 0$ är enda möjligheten. Exakt en lösning, $x = 3$.
+
+Är $a < 0$ saknas lösning: en kvadrat kan aldrig vara negativ, så $(x - 3)^2 = a$ kan inte gälla för något $x$.
+
+**c)** Sätter in $x = 10$:
+
+$$ (10 - 3)^2 = a $$
+
+$$ a = 7^2 = 49 $$
+
+Den andra lösningen fås ur $x - 3 = -7$, alltså $x = -4$. Kontroll: $(-4 - 3)^2 = (-7)^2 = 49$.
+
+Lösningarna är $x = 3 + \\sqrt{a}$ och $x = 3 - \\sqrt{a}$. Den ena ligger $\\sqrt{a}$ steg till höger om 3 på tallinjen, den andra $\\sqrt{a}$ steg till vänster. Avståndet till 3 är alltså $\\sqrt{a}$ för båda. Det syns direkt i ekvationen: $(x - 3)^2 = a$ betyder att avståndet från $x$ till 3, i kvadrat, ska vara $a$, och ett avstånd kan tas åt två håll. I c) är avståndet 7, och $10 - 7 = 3$ ligger mitt emellan $-4$ och 10.
+
+**Svar:** a) $x_1 = 8$ och $x_2 = -2$. b) Exakt en lösning för $a = 0$, ingen lösning för $a < 0$ (och två lösningar för $a > 0$). c) $a = 49$, den andra lösningen är $x = -4$. Lösningarna är $3 \\pm \\sqrt{a}$ och ligger därför $\\sqrt{a}$ från 3 åt var sitt håll.
+
+**Generell slutsats:** $(x - p)^2 = a$ har lösningarna $x = p \\pm \\sqrt{a}$, symmetriskt kring $p$. Antalet lösningar avgörs helt av tecknet på $a$: två, en eller ingen.`,
+        },
+        {
+            level: 3,
+            question: `Lös ekvationen $(x + 2)^2 = (x - 4)^2$ på två sätt.<br>a) Utveckla båda kvadraterna och lös den ekvation som uppstår. Vad händer med $x^2$-termerna?<br>b) Dra roten ur båda led och lös ekvationen med hjälp av $\\pm$. Visa att det ena tecknet leder till en motsägelse.<br>c) Tolka lösningen på tallinjen. Använd tolkningen för att skriva ned lösningen till $(x + 7)^2 = (x - 13)^2$ utan att räkna, och kontrollera genom insättning.`,
+            answer: { value: 1, unit: '' },
+            solution: `**a)** Varje term i den första parentesen multipliceras med varje term i den andra:
+
+$$ (x + 2)^2 = (x + 2)(x + 2) $$
+
+$$ = x^2 + 2x + 2x + 4 = x^2 + 4x + 4 $$
+
+$$ (x - 4)^2 = (x - 4)(x - 4) $$
+
+$$ = x^2 - 4x - 4x + 16 = x^2 - 8x + 16 $$
+
+Ekvationen blir
+
+$$ x^2 + 4x + 4 = x^2 - 8x + 16 $$
+
+Subtraherar $x^2$ från båda led:
+
+$$ 4x + 4 = -8x + 16 $$
+
+Adderar $8x$ till båda led och subtraherar 4:
+
+$$ 12x = 12 $$
+
+$$ x = 1 $$
+
+Termerna $x^2$ tar ut varandra. Ekvationen ser ut som en andragradsekvation men är i själva verket en förstagradsekvation, och därför har den bara en lösning.
+
+**b)** Två tal som har samma kvadrat är antingen lika eller varandras motsatta tal. Vi drar roten ur båda led:
+
+$$ x + 2 = \\pm(x - 4) $$
+
+Med plustecknet:
+
+$$ x + 2 = x - 4 $$
+
+Subtraherar $x$ från båda led:
+
+$$ 2 = -4 $$
+
+Det är en motsägelse: $x + 2$ och $x - 4$ skiljer sig alltid med 6 och kan aldrig vara lika. Med minustecknet:
+
+$$ x + 2 = -(x - 4) $$
+
+$$ x + 2 = -x + 4 $$
+
+Adderar $x$ till båda led och subtraherar 2:
+
+$$ 2x = 2 $$
+
+$$ x = 1 $$
+
+Samma svar som i a). Kontroll: $(1 + 2)^2 = 9$ och $(1 - 4)^2 = (-3)^2 = 9$.
+
+**c)** Uttrycket $(x + 2)^2$ kan skrivas $(x - (-2))^2$ och är kvadraten på avståndet från $x$ till $-2$ på tallinjen. På samma sätt är $(x - 4)^2$ kvadraten på avståndet från $x$ till 4. Ekvationen säger att $x$ ligger lika långt från $-2$ som från 4, och det gör bara ett tal: mittpunkten
+
+$$ x = \\frac{-2 + 4}{2} = 1 $$
+
+Det förklarar varför ekvationen har exakt en lösning.
+
+För $(x + 7)^2 = (x - 13)^2$ ska $x$ ligga lika långt från $-7$ som från 13. Mittpunkten är $\\dfrac{-7 + 13}{2} = 3$. Kontroll: $(3 + 7)^2 = 100$ och $(3 - 13)^2 = (-10)^2 = 100$.
+
+**Svar:** a) $x = 1$; $x^2$-termerna tar ut varandra. b) $x = 1$; plustecknet ger $2 = -4$, som är omöjligt. c) Lösningen är mittpunkten mellan $-2$ och 4. Ekvationen $(x + 7)^2 = (x - 13)^2$ har lösningen $x = 3$.
+
+**Generell slutsats:** $(x - p)^2 = (x - q)^2$ med $p \\neq q$ har exakt en lösning, $x = \\dfrac{p + q}{2}$. Roten ur båda led ger alltid två fall att pröva, och ett av dem kan visa sig omöjligt.`,
+        },
+        {
+            level: 3,
+            question: `En kub har volymen $216\\ \\mathrm{cm^3}$.<br>a) Bestäm kubens kantlängd.<br>b) Beräkna kubens begränsningsarea, alltså den sammanlagda arean av de sex sidoytorna. Vad lägger du märke till?<br>c) Visa att kuben i a) är den enda kub där volymens mätetal i $\\mathrm{cm^3}$ är lika med begränsningsareans mätetal i $\\mathrm{cm^2}$.`,
+            answer: { value: 6, unit: 'cm' },
+            solution: `**a)** Kalla kantlängden $x$ cm. Kubens volym är $x \\cdot x \\cdot x = x^3$:
+
+$$ x^3 = 216 $$
+
+$$ x = \\sqrt[3]{216} = 6 $$
+
+Kontroll: $6 \\cdot 6 \\cdot 6 = 216$. Tredjegradsekvationen har bara den här lösningen, och den är positiv som en kantlängd ska vara.
+
+**b)** Varje sidoyta är en kvadrat med arean $6^2 = 36\\ \\mathrm{cm^2}$, och kuben har sex sidoytor:
+
+$$ 6 \\cdot 36 = 216\\ \\mathrm{cm^2} $$
+
+Mätetalet är 216, samma som för volymen.
+
+**c)** Låt kanten vara $x$ cm. Volymen är $x^3$ och begränsningsarean $6x^2$. Mätetalen ska vara lika:
+
+$$ x^3 = 6x^2 $$
+
+Det är ingen enkel tredjegradsekvation, för den har två variabeltermer. Men $x$ är en kantlängd och därför större än 0, så $x^2 \\neq 0$ och vi får dividera båda led med $x^2$:
+
+$$ \\frac{x^3}{x^2} = \\frac{6x^2}{x^2} $$
+
+$$ x = 6 $$
+
+Det finns alltså bara ett värde på $x$, och det är kuben i a). Skulle man vilja veta vad divisionen gömde kan man i stället flytta över och bryta ut: $x^3 - 6x^2 = 0$ ger $x^2(x - 6) = 0$, som är sant bara om $x = 0$ eller $x = 6$. En kub med kanten 0 finns inte, så $x = 6$ är den enda kuben.
+
+**Svar:** a) 6 cm. b) $216\\ \\mathrm{cm^2}$, samma mätetal som volymen. c) Ekvationen $x^3 = 6x^2$ har för $x > 0$ bara lösningen $x = 6$.
+
+**Generell slutsats:** kvoten mellan volym och begränsningsarea är $\\dfrac{x^3}{6x^2} = \\dfrac{x}{6}$ och växer med kanten. En liten kub har därför förhållandevis mycket yta, en stor kub förhållandevis lite. Och en ekvation med $x^2$ i varje term får divideras med $x^2$ så snart man vet att $x \\neq 0$.`,
+        },
+        {
+            level: 3,
+            question: `Bromssträckan $s$ meter för en bil som bromsar på torr asfalt kan uppskattas med modellen $s = 0{,}006v^2$, där $v$ är hastigheten i km/h när bromsningen börjar.<br>a) Vid vilken hastighet blir bromssträckan 24 m?<br>b) Ekvationen i a) har också en negativ lösning. Har den någon betydelse i modellen, till skillnad från den negativa lösningen i en areauppgift? Resonera.<br>c) Vid 80 km/h är bromssträckan 38,4 m. Elin påstår att bromssträckan halveras om hastigheten halveras till 40 km/h. Bestäm den hastighet som faktiskt ger halva bromssträckan, och förklara Elins fel.`,
+            answer: { value: 63.2, unit: 'km/h', tol: 0.02 },
+            solution: `**a)** Sätter in $s = 24$:
+
+$$ 0{,}006v^2 = 24 $$
+
+Dividerar båda led med $0{,}006$:
+
+$$ v^2 = 4\\,000 $$
+
+$$ v = \\pm\\sqrt{4\\,000} \\approx \\pm 63{,}2 $$
+
+Bilen kör framåt, så hastigheten är cirka 63 km/h. Kontroll: $0{,}006 \\cdot 63{,}2^2 \\approx 24$.
+
+**b)** I en areauppgift betyder den negativa lösningen en negativ sida, och det finns inte. Här är det annorlunda. En hastighet med minustecken kan tolkas som att bilen kör åt andra hållet, alltså backar. I modellen ingår $v^2$, och $(-63{,}2)^2$ är lika med $63{,}2^2$, så en bil som backar i 63 km/h får enligt modellen samma bromssträcka, 24 m. Den negativa lösningen har alltså en betydelse: modellen skiljer inte på riktning, bara på fart.
+
+Om en negativ lösning ska förkastas avgörs alltså inte av ekvationen, utan av vad variabeln står för.
+
+**c)** Halva bromssträckan är $38{,}4 / 2 = 19{,}2$ m:
+
+$$ 0{,}006v^2 = 19{,}2 $$
+
+$$ v^2 = 3\\,200 $$
+
+$$ v = \\sqrt{3\\,200} \\approx 56{,}6 $$
+
+Halva bromssträckan nås vid cirka 57 km/h, inte vid 40 km/h. Vid 40 km/h är bromssträckan
+
+$$ 0{,}006 \\cdot 40^2 = 0{,}006 \\cdot 1\\,600 = 9{,}6 $$
+
+meter, alltså en fjärdedel av 38,4 m. Elins fel är att hon tänker sig bromssträckan som proportionell mot hastigheten. Men $s$ är proportionell mot $v^2$: halveras $v$ så delas $v^2$ med 4. För att halvera $s$ ska $v^2$ halveras, och då ska $v$ divideras med $\\sqrt{2} \\approx 1{,}41$. Kontroll: $80 / 1{,}41 \\approx 56{,}6$.
+
+**Svar:** a) Cirka 63 km/h. b) Ja. Modellen innehåller $v^2$, så $v = -63{,}2$ beskriver en bil som backar i 63 km/h och får samma bromssträcka. c) Cirka 57 km/h. Bromssträckan är proportionell mot $v^2$, inte mot $v$, så halva hastigheten ger en fjärdedel av bromssträckan.
+
+**Generell slutsats:** i ett samband av typen $s = k \\cdot v^2$ ger en viss faktor på $v$ faktorn i kvadrat på $s$. Och en negativ rot förkastas bara om variabeln inte kan vara negativ, vilket är en fråga om tolkning, inte om räkning.`,
+        },
+        {
+            level: 3,
+            question: `En kvadrat har arean $50\\ \\mathrm{cm^2}$.<br>a) Kvadratens sida förlängs så att arean fördubblas. Bestäm den nya sidan och med vilken faktor sidan förlängdes.<br>b) Visa att faktorn i a) blir densamma vilken area kvadraten än har från början.<br>c) En kub ska få dubbelt så stor volym. Med vilken faktor ska kanten förlängas? Visa att det inte räcker att förlänga kanten med faktorn från a).`,
+            answer: { value: 10, unit: 'cm' },
+            solution: `**a)** Kalla den ursprungliga sidan $x$ cm:
+
+$$ x^2 = 50 $$
+
+$$ x = \\sqrt{50} \\approx 7{,}07 $$
+
+Den nya arean är $2 \\cdot 50 = 100\\ \\mathrm{cm^2}$. Kalla den nya sidan $y$ cm:
+
+$$ y^2 = 100 $$
+
+$$ y = \\sqrt{100} = 10 $$
+
+Bara de positiva rötterna är sidor. Faktorn är
+
+$$ \\frac{y}{x} = \\frac{10}{\\sqrt{50}} \\approx \\frac{10}{7{,}07} \\approx 1{,}41 $$
+
+Sidan förlängdes alltså med cirka 41 %, inte med 100 %, fast arean fördubblades.
+
+**b)** Låt den ursprungliga sidan vara $s$ och den nya sidan $k \\cdot s$, där $k$ är den faktor vi söker. Den nya arean ska vara dubbelt så stor som den gamla:
+
+$$ (ks)^2 = 2s^2 $$
+
+$$ k^2 s^2 = 2s^2 $$
+
+Sidan $s$ är inte 0, så vi dividerar båda led med $s^2$:
+
+$$ k^2 = 2 $$
+
+$$ k = \\sqrt{2} \\approx 1{,}41 $$
+
+Sidan $s$ försvann ur ekvationen, så faktorn är $\\sqrt{2}$ oavsett hur stor kvadraten är från början. I a) är $\\dfrac{10}{\\sqrt{50}} = \\sqrt{\\dfrac{100}{50}} = \\sqrt{2}$, precis som det ska.
+
+**c)** Samma resonemang för kuben, med kanten $c$ och den nya kanten $k \\cdot c$:
+
+$$ (kc)^3 = 2c^3 $$
+
+$$ k^3 c^3 = 2c^3 $$
+
+Dividerar båda led med $c^3$:
+
+$$ k^3 = 2 $$
+
+$$ k = \\sqrt[3]{2} \\approx 1{,}26 $$
+
+Kanten ska förlängas med cirka 26 %. Förlänger man i stället med faktorn $\\sqrt{2}$ från a) blir volymen $(\\sqrt{2})^3 = \\sqrt{2} \\cdot \\sqrt{2} \\cdot \\sqrt{2} = 2\\sqrt{2} \\approx 2{,}83$ gånger så stor, nästan tredubblad. Att fördubbla en kub med passare och linjal, alltså konstruera $\\sqrt[3]{2}$, är för övrigt ett problem de gamla grekerna arbetade med i århundraden. På 1800-talet bevisades att det är omöjligt.
+
+**Svar:** a) Den nya sidan är 10 cm, och sidan förlängdes med faktorn $\\sqrt{2} \\approx 1{,}41$. b) Ekvationen $(ks)^2 = 2s^2$ ger $k^2 = 2$ oavsett $s$. c) Faktorn $\\sqrt[3]{2} \\approx 1{,}26$; faktorn $\\sqrt{2}$ ger i stället $2\\sqrt{2} \\approx 2{,}83$ gånger volymen.
+
+**Generell slutsats:** arean växer med kvadraten på sidan och volymen med kuben, så en fördubbling av arean kräver faktorn $\\sqrt{2}$ på sidan och en fördubbling av volymen faktorn $\\sqrt[3]{2}$ på kanten. Storleken från början spelar ingen roll, eftersom den stryks ur ekvationen.`,
         },
     ],
 

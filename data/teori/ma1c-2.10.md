@@ -11,7 +11,7 @@ section: '2.10'
 
 En ekvation där variabeln, till exempel $x$, är en potens ("upphöjt till något")
 kallas för **potensekvation**. Dessa kan lösas med två algebraiska metoder:
-med potenslagar eller med rotuttryck.
+med potenslagar eller med rottecken.
 
 ::: formel "Lösa potensekvationer med potenslagar"
 $$
@@ -51,7 +51,7 @@ vsv.
 :::
 :::
 
-::: formel "Lösa potensekvationer med rötter"
+::: formel "Lösa potensekvationer med rottecken"
 $$
 x^n = a \text{ har lösningen}
 $$
@@ -61,10 +61,9 @@ x = \sqrt[n]{a}
 $$
 :::
 
-**OBS!** Om exponenten är **jämn** får ekvationen, i allmänhet, två
-lösningar — en positiv och en negativ. Då ska ± placeras framför
-rottecknet/lösningen. Om exponenten är **udda** får ekvationen en lösning
-och inget ± ska placeras framför rottecknet/lösningen.
+**OBS!** Om exponenten är <u>jämn</u>, så skriv alltid ut $\pm$ framför
+rottecknet/potensen för att inte missa dubbla lösningar. Om exponenten är
+<u>udda</u> ska däremot $\pm$ inte skrivas ut.
 
 ::: formel "Antal lösningar till en potensekvation"
 En potensekvation $x^n = a$ med
@@ -95,7 +94,7 @@ $$
 x = \pm 2{,}239\ldots \approx \pm 2{,}24
 $$
 
-**Med rotuttryck:**
+**Med rottecken:**
 
 $$
 x = \pm\sqrt[14]{80\,000} = \pm 2{,}239\ldots \approx \pm 2{,}24
@@ -119,7 +118,7 @@ $$
 x^5 = 7
 $$
 
-Därefter löser vi ekvationen med potenslagar eller med rotuttryck:
+Därefter löser vi ekvationen med potenslagar eller med rottecken:
 
 $$
 x = 7^{1/5} = \sqrt[5]{7} = 1{,}475\ldots \approx 1{,}48
@@ -196,12 +195,23 @@ $$
 
 **Svar:** En lösning
 
-**c)** Jämn exponent och negativt högerled — $x^{100}$ kan aldrig bli
-negativt:
+**c)** Jämn exponent och negativt högerled:
+
+$$
+x = \sqrt[100]{-50}
+$$
+
+Jämn rot och negativt värde under rottecknet ⟹ saknar lösning.
 
 **Svar:** Saknar lösningar
 
-**d)** Potensekvationer med udda exponent har alltid en lösning.
+**d)** Udda exponent och negativt högerled:
+
+$$
+x = \sqrt[99]{-5}
+$$
+
+Udda rot och negativt värde under rottecknet ⟹ en lösning.
 
 **Svar:** En lösning
 :::
@@ -219,7 +229,7 @@ negativt:
 ::: sampunkt "Två sätt att lösa"
 - **Med potenslagar**: upphöj båda led till $\dfrac{1}{n}$, vilket ger
   $x = a^{1/n}$.
-- **Med rötter**: $x = \sqrt[n]{a}$.
+- **Med rottecken**: $x = \sqrt[n]{a}$.
 - Det är samma sak, eftersom $a^{1/n} = \sqrt[n]{a}$.
 :::
 

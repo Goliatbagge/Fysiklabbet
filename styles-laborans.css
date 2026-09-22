@@ -2079,6 +2079,25 @@ details.lab-forklaring.block-mal,
    RÖR INTE regeln — utan den blir varje formel i en rubrik fel. */
 .katex { text-transform: none; }
 
+/* KaTeX i en versalsatt rubrik (.lab-block-title, härledningarnas och
+   förklaringarnas summary) sätts STÖRRE än rubrikens teckenstorlek.
+   Rubriken är 11 px monospace i vikt 600 med versaler, och KaTeX ärver
+   bara 11,55 px i normal vikt: mot de tunga versalerna blev "v_y = 0" en
+   liten och tunn formel (påpekat 2026-09-22). Vid 1,4 em blir siffrornas
+   och parentesernas höjd densamma som versalernas kaphöjd, så formeln
+   läses som en del av rubriken. Rubrikens letter-spacing ska inte
+   sprida isär formelns tecken. Se "Formler i rubriker" i CLAUDE.md.
+   Selektorn med .lab-article-body finns för specificiteten: regeln
+   .lab-article-body .katex { font-size: 1.05em } längre ned väger lika
+   tungt som .lab-block-title .katex och står senare, så utan den vann
+   1,05 em tyst. */
+.lab-block-title .katex,
+.lab-article-body .lab-block-title .katex,
+.formel-harledning > summary .katex {
+    font-size: 1.4em;
+    letter-spacing: normal;
+}
+
 .lab-block-title {
     font-family: var(--lab-font-mono);
     font-size: 11px;

@@ -1339,6 +1339,27 @@ sammanfattningskortens titlar, etiketter i visualiseringarna) sätts med
 `node .claude/verify-sprak.js` har regeln `funktionsnamn-i-rubrik`, som
 blockerar en `:::`-titel med ett funktionsnamn utanför matte.
 
+### Formler i rubriker: KaTeX sätts större än rubrikens teckenstorlek
+
+**En formel i en `:::`-rubrik ska se lika stor ut som versalerna runt
+omkring.** Rubrikerna är 11 px monospace i vikt 600 med versaler och
+letter-spacing, och KaTeX ärver bara 11,55 px i normal vikt: "Knep: i högsta
+punkten är $v_y = 0$" i `fy2-1.8` fick en formel som såg ut som finstil
+bredvid de tunga versalerna (påpekat 2026-09-22). Det sköts centralt av
+regeln `.lab-block-title .katex, .formel-harledning > summary .katex` i
+`styles-laborans.css`, som sätter formeln i 1,4 em och nollställer
+letter-spacing, så att siffror och parenteser når samma höjd som
+versalernas kaphöjd. Du behöver alltså inte göra något i md-filen, men:
+
+- **Rör inte regeln** utan att mäta om. Riktvärdet togs fram genom att
+  jämföra formelns glyfhöjd med versalerna i en zoomad skärmdump (tips-,
+  formel- och härledningsrubriker), inte på ögonmått i källan.
+- **Gör du en NY sorts versalsatt rubrik** (ny blocktyp, ny summary, en
+  etikett i en visualisering) som kan innehålla KaTeX: lägg till dess
+  selektor i samma regel, annars får den den lilla formeln igen.
+- **Granska i skärmdump**, inte i DOM:en. Felet syns bara i renderingen,
+  och bara där rubriken faktiskt innehåller matte.
+
 ### Variabler och enheter
 - **Fysikaliska variabler**: alltid *kursiv* — *F*, *Q*, *r*, *v*, *a*
 - **Enheter**: alltid rakt — N, C, m/s, kg/m³

@@ -22138,39 +22138,369 @@ Enbart $x < 5$ räcker inte — till exempel är $x = -7 < 5$ men $(-7)^2 = 49 >
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Lös olikheten $\\dfrac{8a}{3} > 4a - 24$. Vilket är svaret?`,
-            choices: [
-                `$a < 18$`,
-                `$a > 18$`,
-                `$a < -18$`,
-                `$a > -6$`,
-            ],
-            correct: 0,
-            solution: `**Insikten:** flera moment kombineras — nämnare, variabler i båda led och en avslutande vändning när svaret skrivs med variabeln till vänster.
+            question: `Olikheter av andra graden.<br>a) Lös olikheten $-3x^2 + 5 \\geq -22$.<br>b) Lös olikheten $2x^2 - 8 > 0$.<br>c) Elin löser $x^2 > 4$ genom att dra roten ur båda led och svarar $x > 2$. Visa med ett exempel att svaret är ofullständigt, och förklara varför man i stället undersöker gränsfallet.`,
+            answer: { value: 3, unit: '' },
+            solution: `**a)** Vi vill få $x^2$ ensamt. Subtraherar 5 från båda led:
 
-Multiplicera båda led med 3:
+$$ -3x^2 + 5 \\mathbin{\\boldsymbol{-}}\\boldsymbol{5} \\geq -22 \\mathbin{\\boldsymbol{-}}\\boldsymbol{5} $$
 
-$$ 8a > 3(4a - 24) $$
+$$ -3x^2 \\geq -27 $$
 
-$$ 8a > 12a - 72 $$
+Dividerar båda led med $-3$. Negativt tal, så olikhetstecknet vänds:
 
-Subtrahera $8a$ från båda led:
+$$ \\frac{-3x^2}{\\boldsymbol{(-3)}} \\leq \\frac{-27}{\\boldsymbol{(-3)}} $$
 
-$$ 0 > 4a - 72 $$
+$$ x^2 \\leq 9 $$
 
-Addera 72:
+Gränsfallet $x^2 = 9$ ger $x = \\pm 3$. Vi prövar $x = 0$ mellan gränserna: $0 \\leq 9$, sant. Utanför, $x = 4$: $16 \\leq 9$, falskt. Lösningen är talen mellan gränserna, och gränserna ingår eftersom tecknet är $\\leq$.
 
-$$ 72 > 4a $$
+Kontroll i den ursprungliga olikheten med $x = 3$: $-27 + 5 = -22 \\geq -22$, sant.
 
-Dividera med 4 (positivt — tecknet behålls):
+**Svar:** $-3 \\leq x \\leq 3$
 
-$$ 18 > a $$
+**b)** Adderar 8 till båda led:
 
-Med variabeln till vänster vänds både ordningen och tecknet: $a < 18$.
+$$ 2x^2 - 8 \\mathbin{\\boldsymbol{+}}\\boldsymbol{8} > 0 \\mathbin{\\boldsymbol{+}}\\boldsymbol{8} $$
 
-**Svar:** $a < 18$
+$$ 2x^2 > 8 $$
 
-**Generell slutsats:** tecknet vänds i TVÅ situationer — vid multiplikation/division med negativt tal, och när hela olikheten läses baklänges för att få variabeln till vänster. Blanda inte ihop dem: här behölls tecknet i alla räknesteg.`,
+Dividerar båda led med 2:
+
+$$ \\frac{2x^2}{\\boldsymbol{2}} > \\frac{8}{\\boldsymbol{2}} $$
+
+$$ x^2 > 4 $$
+
+Gränsfallet $x^2 = 4$ ger $x = \\pm 2$. Mellan gränserna, $x = 0$: $0 > 4$, falskt. Utanför, $x = 3$ och $x = -3$: $9 > 4$, sant. Lösningen är talen utanför gränserna.
+
+**Svar:** $x < -2$ eller $x > 2$
+
+**c)** Talet $x = -5$ uppfyller $x^2 > 4$, eftersom $(-5)^2 = 25 > 4$. Men $-5$ är inte större än 2, så $x > 2$ missar alla negativa lösningar. Elins svar innehåller bara halva lösningsmängden.
+
+Felet är att "dra roten ur" inte är en tillåten operation på en olikhet på samma sätt som addition eller division med ett positivt tal. Två tal kan ha samma kvadrat fast de ligger på var sin sida om 0, och $x^2$ säger ingenting om tecknet på $x$. Därför löser man i stället ekvationen $x^2 = 4$ för att hitta gränserna, $\\pm 2$, och prövar sedan ett tal i varje del av tallinjen.
+
+**Svar:** $x = -5$ ger $25 > 4$ men ingår inte i $x > 2$. Kvadraten säger inget om tecknet, så man löser gränsfallet $x^2 = 4$ och prövar varje del av tallinjen.
+
+**Generell slutsats:** en andragradsolikhet $x^2 < a$ har lösningen mellan $-\\sqrt{a}$ och $\\sqrt{a}$, medan $x^2 > a$ har lösningen utanför, i två strålar. Rotdragning på en olikhet tappar den ena halvan.`,
+        },
+        {
+            level: 3,
+            question: `Talen $x$ och $y$ uppfyller $x \\leq 5$ och $y \\geq -2$.<br>a) Bestäm det största värde som uttrycket $3x - y^2$ kan ha.<br>b) Bestäm det minsta värde som uttrycket $x^2 + 2y$ kan ha.<br>c) Förklara varför uttrycket $3x - y^2$ inte har något minsta värde.`,
+            answer: { value: 15, unit: '' },
+            solution: `**a)** Uttrycket är en differens, $3x - y^2$. Det blir så stort som möjligt när $3x$ är så stort som möjligt och $y^2$ så litet som möjligt.
+
+Eftersom $x \\leq 5$ är $3x \\leq 15$, med största värdet 15 för $x = 5$.
+
+Kvadraten $y^2$ är aldrig negativ, så dess minsta värde är 0. Det nås för $y = 0$, som är tillåtet eftersom $0 \\geq -2$. Här är det lätt att luras av villkoret $y \\geq -2$ och välja $y = -2$, men det ger $y^2 = 4$, vilket drar ner uttrycket.
+
+$$ 3x - y^2 \\leq 3 \\cdot 5 - 0 = 15 $$
+
+Kontroll: $x = 5$ och $y = 0$ ger $15 - 0 = 15$. Med $y = -2$ hade det blivit $15 - 4 = 11$.
+
+**Svar:** Största värdet är 15, för $x = 5$ och $y = 0$.
+
+**b)** Nu är uttrycket en summa, $x^2 + 2y$, och den blir som minst när båda termerna är som minst.
+
+Termen $x^2$ är som minst 0, för $x = 0$. Det är tillåtet eftersom $0 \\leq 5$. Lägg märke till att villkoret $x \\leq 5$ inte hjälper här: det säger hur stort $x$ får vara, inte hur litet.
+
+Termen $2y$ är som minst när $y$ är som minst, alltså $y = -2$, vilket ger $2 \\cdot (-2) = -4$.
+
+$$ x^2 + 2y \\geq 0 + (-4) = -4 $$
+
+Kontroll: $x = 0$ och $y = -2$ ger $0 - 4 = -4$.
+
+**Svar:** Minsta värdet är $-4$, för $x = 0$ och $y = -2$.
+
+**c)** Villkoret $x \\leq 5$ sätter ingen undre gräns för $x$. Välj $x = -100$: då är $3x = -300$. Välj $x = -1\\,000$: då är $3x = -3\\,000$. Hur litet värde vi än föreslår kan vi alltid välja ett ännu mindre $x$ och få ett mindre värde på $3x - y^2$. Dessutom kan $y$ väljas hur stort som helst, så $-y^2$ kan göras hur negativt som helst. Uttrycket saknar därför minsta värde.
+
+**Svar:** Det finns ingen undre gräns för $x$ (och ingen övre för $y$), så $3x - y^2$ kan göras mindre än vilket tal som helst.
+
+**Generell slutsats:** ett största eller minsta värde hittas term för term, men varje term ska undersökas mot sina egna villkor. En kvadrat är som minst 0, oavsett vilka negativa tal villkoret tillåter, och ett villkor som bara ger en övre gräns ger inget minsta värde.`,
+        },
+        {
+            level: 3,
+            question: `En bussresa kan betalas på tre sätt. Enkelbiljett: 20 kr per resa. Rabattkort: 150 kr i månaden och därefter 5 kr per resa. Månadskort: 450 kr för obegränsat resande.<br>a) För hur många resor per månad är rabattkortet billigare än enkelbiljetter?<br>b) För hur många resor per månad är månadskortet billigare än rabattkortet?<br>c) Ange för varje antal resor vilket alternativ som är billigast, och förklara varför enkelbiljetter aldrig kan vara billigast när månadskortet slår rabattkortet.`,
+            answer: { value: 10, unit: 'resor' },
+            solution: `**a)** Låt $x$ vara antalet resor i månaden. Enkelbiljetter kostar $20x$ kr och rabattkortet $150 + 5x$ kr. Rabattkortet är billigare när
+
+$$ 150 + 5x < 20x $$
+
+Subtraherar $5x$ från båda led:
+
+$$ 150 + 5x \\mathbin{\\boldsymbol{-}}\\boldsymbol{5x} < 20x \\mathbin{\\boldsymbol{-}}\\boldsymbol{5x} $$
+
+$$ 150 < 15x $$
+
+Dividerar båda led med 15:
+
+$$ \\frac{150}{\\boldsymbol{15}} < \\frac{15x}{\\boldsymbol{15}} $$
+
+$$ 10 < x $$
+
+Kontroll: 10 resor kostar 200 kr på båda sätten. 11 resor kostar 220 kr med enkelbiljetter och 205 kr med rabattkort.
+
+**Svar:** Vid fler än 10 resor per månad.
+
+**b)** Månadskortet är billigare än rabattkortet när
+
+$$ 450 < 150 + 5x $$
+
+Subtraherar 150 från båda led:
+
+$$ 450 \\mathbin{\\boldsymbol{-}}\\boldsymbol{150} < 150 + 5x \\mathbin{\\boldsymbol{-}}\\boldsymbol{150} $$
+
+$$ 300 < 5x $$
+
+Dividerar båda led med 5:
+
+$$ \\frac{300}{\\boldsymbol{5}} < \\frac{5x}{\\boldsymbol{5}} $$
+
+$$ 60 < x $$
+
+Kontroll: 60 resor kostar 450 kr med rabattkort, lika mycket som månadskortet. 61 resor kostar 455 kr med rabattkort.
+
+**Svar:** Vid fler än 60 resor per månad.
+
+**c)** Vi sätter ihop a) och b). Upp till 10 resor är enkelbiljetter billigast (vid exakt 10 kostar de lika mycket som rabattkortet). Från 11 till 60 resor är rabattkortet billigast (vid exakt 60 kostar det lika mycket som månadskortet). Från 61 resor är månadskortet billigast.
+
+Enkelbiljetter kan inte vara billigast när månadskortet slår rabattkortet, eftersom det kräver $x > 60$, och för alla $x > 10$ är rabattkortet redan billigare än enkelbiljetter. Man kan också se det direkt: vid 61 resor kostar enkelbiljetter $20 \\cdot 61 = 1\\,220$ kr, nästan tre gånger månadskortet.
+
+**Svar:** Enkelbiljetter för $x \\leq 10$, rabattkort för $10 \\leq x \\leq 60$, månadskort för $x \\geq 60$ (vid 10 och 60 resor är två alternativ lika dyra). Vid $x > 60$ gäller redan $x > 10$, så rabattkortet slår enkelbiljetterna där.
+
+**Generell slutsats:** med tre alternativ jämförs de parvis med varsin olikhet, och lösningarna delar tallinjen i intervall. Den fasta avgiften lönar sig när antalet är stort, det låga styckpriset när antalet är litet, och brytpunkterna är där två kostnader är lika.`,
+        },
+        {
+            level: 3,
+            question: `Olikheten $ax + 3 > 9$ innehåller ett tal $a$.<br>a) Lös olikheten när $a = 2$ och när $a = -2$.<br>b) Lös olikheten allmänt, dels för $a > 0$, dels för $a < 0$.<br>c) Vad händer med olikheten om $a = 0$? Har den några lösningar?`,
+            answer: { value: 3, unit: '' },
+            solution: `**a)** Med $a = 2$ blir olikheten $2x + 3 > 9$. Subtraherar 3 från båda led:
+
+$$ 2x + 3 \\mathbin{\\boldsymbol{-}}\\boldsymbol{3} > 9 \\mathbin{\\boldsymbol{-}}\\boldsymbol{3} $$
+
+$$ 2x > 6 $$
+
+Dividerar båda led med 2:
+
+$$ \\frac{2x}{\\boldsymbol{2}} > \\frac{6}{\\boldsymbol{2}} $$
+
+$$ x > 3 $$
+
+Med $a = -2$ blir olikheten $-2x + 3 > 9$. Subtraherar 3 från båda led:
+
+$$ -2x + 3 \\mathbin{\\boldsymbol{-}}\\boldsymbol{3} > 9 \\mathbin{\\boldsymbol{-}}\\boldsymbol{3} $$
+
+$$ -2x > 6 $$
+
+Dividerar båda led med $-2$. Negativt tal, så tecknet vänds:
+
+$$ \\frac{-2x}{\\boldsymbol{(-2)}} < \\frac{6}{\\boldsymbol{(-2)}} $$
+
+$$ x < -3 $$
+
+Kontroll: $x = 0$ ger $0 + 3 = 3$, som inte är större än 9, så 0 ska inte ingå i någon av lösningarna, och det gör det inte heller. $x = -4$ ger $-2 \\cdot (-4) + 3 = 11 > 9$, sant.
+
+**Svar:** För $a = 2$: $x > 3$. För $a = -2$: $x < -3$.
+
+**b)** Subtraherar 3 från båda led, vilket går likadant oavsett $a$:
+
+$$ ax + 3 \\mathbin{\\boldsymbol{-}}\\boldsymbol{3} > 9 \\mathbin{\\boldsymbol{-}}\\boldsymbol{3} $$
+
+$$ ax > 6 $$
+
+Nu ska båda led divideras med $a$, och då spelar tecknet på $a$ roll.
+
+Om $a > 0$ behålls olikhetstecknet:
+
+$$ \\frac{ax}{\\boldsymbol{a}} > \\frac{6}{\\boldsymbol{a}} \\qquad\\text{ger}\\qquad x > \\frac{6}{a} $$
+
+Om $a < 0$ vänds olikhetstecknet:
+
+$$ \\frac{ax}{\\boldsymbol{a}} < \\frac{6}{\\boldsymbol{a}} \\qquad\\text{ger}\\qquad x < \\frac{6}{a} $$
+
+Kontroll mot a): $a = 2$ ger $x > 3$ och $a = -2$ ger $x < \\dfrac{6}{-2} = -3$, precis som förut.
+
+**Svar:** $x > \\dfrac{6}{a}$ om $a > 0$, och $x < \\dfrac{6}{a}$ om $a < 0$.
+
+**c)** Med $a = 0$ försvinner variabeln: $0 \\cdot x + 3 > 9$ blir $3 > 9$. Det är falskt hur $x$ än väljs, så olikheten saknar lösning. Vi kan inte heller dividera med $a$ i b), eftersom division med 0 inte är definierad. Fallet $a = 0$ måste alltså behandlas för sig.
+
+(Hade olikheten i stället varit $ax + 3 > 1$ skulle $a = 0$ ge $3 > 1$, som är sant för alla $x$. Då är alla tal lösningar.)
+
+**Svar:** Olikheten blir $3 > 9$, som är falsk. Den saknar lösning.
+
+**Generell slutsats:** när en olikhet divideras med ett tal vars tecken man inte känner måste man dela upp i fall: positivt tal behåller tecknet, negativt vänder det, och 0 går inte att dividera med alls. Det är samma regel som för $-2$, bara skriven med en bokstav.`,
+        },
+        {
+            level: 3,
+            question: `I en triangel måste varje sida vara kortare än de två andra sidorna tillsammans, annars går sidorna inte ihop till en triangel. En triangel har sidorna 5 cm, 8 cm och $x$ cm.<br>a) Ställ upp de tre olikheter som sidorna måste uppfylla.<br>b) Lös olikheterna och ange alla möjliga värden på $x$.<br>c) Triangeln ska dessutom ha en omkrets som är mindre än 24 cm. Vilka värden på $x$ är då möjliga?`,
+            answer: { value: 3, unit: 'cm' },
+            solution: `**a)** Regeln ska gälla för varje sida. Sidan $x$ ska vara kortare än $5 + 8$, sidan 8 kortare än $5 + x$ och sidan 5 kortare än $8 + x$:
+
+$$ x < 5 + 8 \\qquad 8 < 5 + x \\qquad 5 < 8 + x $$
+
+**Svar:** $x < 13$, $8 < 5 + x$ och $5 < 8 + x$.
+
+**b)** Den första olikheten är redan löst: $x < 13$.
+
+Den andra: subtraherar 5 från båda led.
+
+$$ 8 \\mathbin{\\boldsymbol{-}}\\boldsymbol{5} < 5 + x \\mathbin{\\boldsymbol{-}}\\boldsymbol{5} $$
+
+$$ 3 < x $$
+
+Den tredje: subtraherar 8 från båda led.
+
+$$ 5 \\mathbin{\\boldsymbol{-}}\\boldsymbol{8} < 8 + x \\mathbin{\\boldsymbol{-}}\\boldsymbol{8} $$
+
+$$ -3 < x $$
+
+Alla tre ska gälla samtidigt. Villkoret $x > -3$ är svagare än $x > 3$ (en längd är dessutom alltid positiv), så det är $x > 3$ och $x < 13$ som avgör.
+
+Kontroll: med $x = 3$ skulle sidorna 3 och 5 tillsammans vara exakt 8, och då blir triangeln platt, en sträcka. Med $x = 13$ på samma sätt. Gränserna ingår därför inte.
+
+**Svar:** $3 < x < 13$
+
+**c)** Omkretsen är $5 + 8 + x = 13 + x$, och den ska vara mindre än 24:
+
+$$ 13 + x < 24 $$
+
+Subtraherar 13 från båda led:
+
+$$ 13 + x \\mathbin{\\boldsymbol{-}}\\boldsymbol{13} < 24 \\mathbin{\\boldsymbol{-}}\\boldsymbol{13} $$
+
+$$ x < 11 $$
+
+Tillsammans med b): $x$ ska vara större än 3 och mindre än både 13 och 11, och det strängare villkoret är $x < 11$.
+
+**Svar:** $3 < x < 11$
+
+**Generell slutsats:** flera villkor på samma tal ger flera olikheter, och lösningen är de tal som uppfyller alla. Vid varje gräns avgör det strängaste villkoret. Att sidan $x$ måste ligga mellan skillnaden och summan av de två andra sidorna, $8 - 5 < x < 8 + 5$, kallas triangelolikheten.`,
+        },
+        {
+            level: 3,
+            question: `Kalle löser olikheten $\\dfrac{10}{x} > 2$ genom att multiplicera båda led med $x$. Han får $10 > 2x$ och svarar $x < 5$.<br>a) Visa med ett exempel att Kalles svar innehåller tal som inte löser olikheten.<br>b) Lös olikheten korrekt genom att behandla fallen $x > 0$ och $x < 0$ var för sig.<br>c) Lös på samma sätt olikheten $\\dfrac{10}{x} < 2$.`,
+            answer: { value: 5, unit: '' },
+            solution: `**a)** Talet $x = -1$ uppfyller $x < 5$. Men $\\dfrac{10}{-1} = -10$, och $-10 > 2$ är falskt. Kalles svar innehåller alltså tal som inte är lösningar. Felet är att han multiplicerar båda led med $x$ utan att veta om $x$ är positivt eller negativt. Är $x$ negativt ska olikhetstecknet vändas, och det gjorde han inte. (Dessutom är $x = 0$ förbjudet, eftersom $x$ står i nämnaren.)
+
+**Svar:** $x = -1$ ger $-10 > 2$, som är falskt. Kalle multiplicerade med $x$ utan att veta tecknet på $x$.
+
+**b)** Nämnaren får inte vara 0, så $x \\neq 0$. Vi delar upp i två fall.
+
+**Fall 1: $x > 0$.** Då är $x$ positivt och tecknet behålls när vi multiplicerar båda led med $x$:
+
+$$ \\frac{10}{x} \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{x} > 2 \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{x} $$
+
+$$ 10 > 2x $$
+
+Dividerar båda led med 2:
+
+$$ \\frac{10}{\\boldsymbol{2}} > \\frac{2x}{\\boldsymbol{2}} $$
+
+$$ 5 > x $$
+
+Tillsammans med fallets förutsättning $x > 0$: $0 < x < 5$.
+
+**Fall 2: $x < 0$.** Nu är $x$ negativt och tecknet vänds vid multiplikationen:
+
+$$ \\frac{10}{x} \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{x} < 2 \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{x} $$
+
+$$ 10 < 2x $$
+
+$$ 5 < x $$
+
+Men detta fall förutsatte $x < 0$, och inget tal är både mindre än 0 och större än 5. Fall 2 ger inga lösningar. Det stämmer med sunt förnuft: är $x$ negativt är $\\dfrac{10}{x}$ negativt och kan inte vara större än 2.
+
+Kontroll: $x = 2$ ger $\\dfrac{10}{2} = 5 > 2$, sant. $x = 10$ ger $1 > 2$, falskt.
+
+**Svar:** $0 < x < 5$
+
+**c)** Samma fallindelning.
+
+**Fall 1: $x > 0$.** Multiplicerar båda led med $x$, tecknet behålls:
+
+$$ 10 < 2x $$
+
+$$ 5 < x $$
+
+Tillsammans med $x > 0$: $x > 5$.
+
+**Fall 2: $x < 0$.** Multiplicerar båda led med $x$, tecknet vänds:
+
+$$ 10 > 2x $$
+
+$$ 5 > x $$
+
+Tillsammans med $x < 0$: alla $x < 0$ duger (de är alla mindre än 5). Det stämmer: för negativa $x$ är $\\dfrac{10}{x}$ negativt och därmed mindre än 2.
+
+Lösningen är de två strålarna $x < 0$ och $x > 5$. Kontroll: $x = -3$ ger $-\\dfrac{10}{3} < 2$, sant. $x = 6$ ger $\\dfrac{10}{6} \\approx 1{,}67 < 2$, sant. $x = 3$ ger $\\dfrac{10}{3} \\approx 3{,}33 < 2$, falskt.
+
+**Svar:** $x < 0$ eller $x > 5$
+
+**Generell slutsats:** att multiplicera en olikhet med variabeln är bara tillåtet om man vet tecknet. Därför delar man upp i fallen $x > 0$ och $x < 0$, löser var för sig och slår ihop de lösningar som stämmer med sitt fall. Och $x = 0$ är alltid förbjudet när $x$ står i nämnaren.`,
+        },
+        {
+            level: 3,
+            question: `Sara har skrivit tre prov och fått 62, 71 och 58 poäng av 100 möjliga på varje. Det återstår ett prov.<br>a) Hur många poäng måste Sara minst få på det fjärde provet för att medelvärdet av de fyra proven ska bli minst 65 poäng?<br>b) Kan Sara nå medelvärdet 75 poäng? Motivera med en olikhet.<br>c) Antag att Sara efter $n$ prov har medelvärdet $m$ poäng. Skriv en olikhet för vad hon minst måste få på nästa prov för att medelvärdet ska bli minst $M$, och lös ut poängen.`,
+            answer: { value: 69, unit: 'poäng' },
+            solution: `**a)** Medelvärdet är summan av poängen delad med antalet prov. Kalla poängen på det fjärde provet $x$:
+
+$$ \\frac{62 + 71 + 58 + x}{4} \\geq 65 $$
+
+$$ \\frac{191 + x}{4} \\geq 65 $$
+
+Multiplicerar båda led med 4, ett positivt tal:
+
+$$ \\frac{191 + x}{4} \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{4} \\geq 65 \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{4} $$
+
+$$ 191 + x \\geq 260 $$
+
+Subtraherar 191 från båda led:
+
+$$ 191 + x \\mathbin{\\boldsymbol{-}}\\boldsymbol{191} \\geq 260 \\mathbin{\\boldsymbol{-}}\\boldsymbol{191} $$
+
+$$ x \\geq 69 $$
+
+Kontroll: $\\dfrac{191 + 69}{4} = \\dfrac{260}{4} = 65$. Lägg märke till att 69 är mer än 65: de tre första proven ligger i genomsnitt under 65, så det fjärde måste dra upp snittet.
+
+**Svar:** Minst 69 poäng.
+
+**b)** Samma uppställning med 75:
+
+$$ \\frac{191 + x}{4} \\geq 75 $$
+
+$$ \\frac{191 + x}{4} \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{4} \\geq 75 \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{4} $$
+
+$$ 191 + x \\geq 300 $$
+
+$$ 191 + x \\mathbin{\\boldsymbol{-}}\\boldsymbol{191} \\geq 300 \\mathbin{\\boldsymbol{-}}\\boldsymbol{191} $$
+
+$$ x \\geq 109 $$
+
+Men provet ger högst 100 poäng, så $x \\leq 100$. Inget tal är både minst 109 och högst 100. Olikheten har alltså ingen lösning som är möjlig i verkligheten. Även med 100 poäng blir medelvärdet bara $\\dfrac{291}{4} = 72{,}75$.
+
+**Svar:** Nej. Det skulle kräva minst 109 poäng, och provet ger högst 100.
+
+**c)** Efter $n$ prov med medelvärdet $m$ är den totala poängen $n \\cdot m$. Med nästa prov, $x$ poäng, blir antalet prov $n + 1$ och medelvärdet ska vara minst $M$:
+
+$$ \\frac{nm + x}{n + 1} \\geq M $$
+
+Multiplicerar båda led med $n + 1$, som är positivt:
+
+$$ \\frac{nm + x}{n + 1} \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{(n + 1)} \\geq M \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{(n + 1)} $$
+
+$$ nm + x \\geq M(n + 1) $$
+
+Subtraherar $nm$ från båda led:
+
+$$ nm + x \\mathbin{\\boldsymbol{-}}\\boldsymbol{nm} \\geq M(n + 1) \\mathbin{\\boldsymbol{-}}\\boldsymbol{nm} $$
+
+$$ x \\geq M(n + 1) - nm $$
+
+Kontroll mot a): $n = 3$, $m = \\dfrac{191}{3}$ och $M = 65$ ger $x \\geq 65 \\cdot 4 - 191 = 69$.
+
+Formeln kan skrivas om: $x \\geq M + n(M - m)$. Hon måste alltså nå målet $M$ plus $n$ gånger det som saknats i snitt på varje tidigare prov. Ju fler prov som ligger under målet, desto mer måste det sista provet ta igen.
+
+**Svar:** $\\dfrac{nm + x}{n + 1} \\geq M$, som ger $x \\geq M(n + 1) - nm$.
+
+**Generell slutsats:** ett villkor på ett medelvärde blir en olikhet med ett bråk, som löses genom att båda led multipliceras med det positiva antalet. Svaret ska sedan prövas mot vad som är möjligt i verkligheten, som ett maxpoäng.`,
         },
     ],
 

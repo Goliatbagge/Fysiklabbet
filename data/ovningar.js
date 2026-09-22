@@ -21714,31 +21714,331 @@ $$ x = 125 $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Lös ekvationen $x^{2/3} = 9$. Vilket är svaret?`,
-            choices: [
-                `$x = \\pm 27$`,
-                `$x = 27$`,
-                `$x = \\pm 6$`,
-                `$x = 5{,}2$ (ungefär)`,
-            ],
-            correct: 0,
-            solution: `**Insikten:** när bråkexponenten har en JÄMN täljare uppstår ±-läget efter att nämnaren tagits bort — håll koll på var i lösningen tecknen dyker upp.
+            question: `Ett sparkapital på 20 000 kr växte med samma räntesats varje år, och efter 6 år var det värt 26 000 kr.<br>a) Ställ upp en potensekvation för förändringsfaktorn och bestäm räntesatsen.<br>b) Anta i stället att kapitalet växte till 26 000 kr på bara 3 år. Bestäm räntesatsen, och förklara varför den inte är dubbelt så stor som i a).<br>c) Ett kapital $K$ kr växer på $t$ år till $S$ kr. Härled en formel för räntesatsen $p$ i procent, och kontrollera formeln mot a).`,
+            answer: { value: 4.5, unit: '%', tol: 0.1 },
+            solution: `**a)** Kalla förändringsfaktorn $x$. Varje år multipliceras kapitalet med $x$, så efter 6 år har det multiplicerats med $x^6$:
 
-Upphöj båda led till exponentens nämnare 3:
+$$ 20\\,000 \\cdot x^6 = 26\\,000 $$
 
-$$ \\left(x^{2/3}\\right)^3 = 9^3 $$
+Dividerar båda led med 20 000:
 
-$$ x^2 = 729 $$
+$$ \\frac{20\\,000 \\cdot x^6}{\\boldsymbol{20\\,000}} = \\frac{26\\,000}{\\boldsymbol{20\\,000}} $$
 
-Nu är det en enkel andragradsekvation — jämn exponent ger två lösningar:
+$$ x^6 = 1{,}3 $$
 
-$$ x = \\pm\\sqrt{729} = \\pm 27 $$
+Exponenten är jämn, så ekvationen har två lösningar, men en förändringsfaktor är alltid positiv. Vi upphöjer båda led till $\\dfrac{1}{6}$:
 
-Kontroll: $27^{2/3} = (\\sqrt[3]{27})^2 = 3^2 = 9$ och $(-27)^{2/3} = (\\sqrt[3]{-27})^2 = (-3)^2 = 9$. Båda stämmer!
+$$ \\left(x^6\\right)^{\\boldsymbol{1/6}} = 1{,}3^{\\boldsymbol{1/6}} $$
 
-**Svar:** $x = \\pm 27$
+$$ x = 1{,}3^{1/6} \\approx 1{,}0447 $$
 
-**Generell slutsats:** följ genomgångens ordning — ta bort exponentens nämnare först, och avgör sedan antalet lösningar utifrån den exponent som blir kvar.`,
+Förändringsfaktorn 1,0447 betyder en ökning med cirka 4,5 % per år. Kontroll: $20\\,000 \\cdot 1{,}0447^6 \\approx 26\\,000$.
+
+**Svar:** $x^6 = 1{,}3$ ger räntesatsen cirka 4,5 %.
+
+**b)** Nu multipliceras kapitalet med $x$ tre gånger:
+
+$$ x^3 = 1{,}3 $$
+
+$$ \\left(x^3\\right)^{\\boldsymbol{1/3}} = 1{,}3^{\\boldsymbol{1/3}} $$
+
+$$ x = 1{,}3^{1/3} \\approx 1{,}0914 $$
+
+Räntesatsen är cirka 9,1 %. Det är mer än $2 \\cdot 4{,}47 = 8{,}94$ %. Räntan läggs varje år på ett kapital som redan vuxit, så på 6 år hinner ränta på ränta hjälpa till fler gånger än på 3 år. Ska hela ökningen klaras på halva tiden krävs därför lite mer än dubbla räntesatsen.
+
+**Svar:** Cirka 9,1 %. Ränta på ränta gör att tillväxten inte är proportionell mot tiden.
+
+**c)** Samma uppställning med bokstäver:
+
+$$ K \\cdot x^t = S $$
+
+Dividerar båda led med $K$:
+
+$$ \\frac{K \\cdot x^t}{\\boldsymbol{K}} = \\frac{S}{\\boldsymbol{K}} $$
+
+$$ x^t = \\frac{S}{K} $$
+
+Upphöjer båda led till $\\dfrac{1}{t}$:
+
+$$ \\left(x^t\\right)^{\\boldsymbol{1/t}} = \\left(\\frac{S}{K}\\right)^{\\boldsymbol{1/t}} $$
+
+$$ x = \\left(\\frac{S}{K}\\right)^{1/t} $$
+
+Förändringsfaktorn är $x = 1 + \\dfrac{p}{100}$, så $\\dfrac{p}{100} = x - 1$ och
+
+$$ p = 100 \\cdot \\left( \\left(\\frac{S}{K}\\right)^{1/t} - 1 \\right) $$
+
+Kontroll mot a): $100 \\cdot \\left(1{,}3^{1/6} - 1\\right) = 100 \\cdot 0{,}0447 \\approx 4{,}5$.
+
+**Svar:** $p = 100 \\cdot \\left( \\left(\\dfrac{S}{K}\\right)^{1/t} - 1 \\right)$, som ger 4,5 % för a).
+
+**Generell slutsats:** en upprepad procentuell förändring ger potensekvationen $x^t = \\dfrac{S}{K}$, och räntesatsen fås ur $t$:te roten ur kvoten. Halva tiden kräver mer än dubbla räntan, eftersom ränta på ränta växer snabbare än proportionellt.`,
+        },
+        {
+            level: 3,
+            question: `Keplers tredje lag säger att kvadraten på en planets omloppstid är proportionell mot kuben på dess medelavstånd till solen. Mäts tiden i år och avståndet i astronomiska enheter (1 AE är jordens avstånd) blir sambandet $T^2 = r^3$.<br>a) Mars medelavstånd är 1,52 AE. Bestäm Mars omloppstid.<br>b) En asteroid har omloppstiden 5,0 år. Hur långt från solen är den?<br>c) Visa att $r = T^{2/3}$, och använd formeln för att kontrollera svaret i b).`,
+            answer: { value: 1.87, unit: 'år', tol: 0.02 },
+            solution: `**a)** Sätter in $r = 1{,}52$:
+
+$$ T^2 = 1{,}52^3 $$
+
+$$ T^2 = 3{,}512 $$
+
+Jämn exponent ger två lösningar, men en tid är positiv:
+
+$$ T = \\sqrt{3{,}512} \\approx 1{,}87 $$
+
+Mars går ett varv runt solen på cirka 1,87 år. Rimlighet: Mars ligger längre bort än jorden och ska ha längre år, och det stämmer.
+
+**Svar:** Cirka 1,87 år.
+
+**b)** Nu är $T = 5{,}0$ känt och $r$ sökt:
+
+$$ 5{,}0^2 = r^3 $$
+
+$$ 25 = r^3 $$
+
+Udda exponent, en lösning:
+
+$$ r = \\sqrt[3]{25} \\approx 2{,}92 $$
+
+Asteroiden ligger cirka 2,9 AE från solen, i asteroidbältet mellan Mars och Jupiter.
+
+**Svar:** Cirka 2,9 AE.
+
+**c)** Vi löser ut $r$ ur $T^2 = r^3$ genom att upphöja båda led till $\\dfrac{1}{3}$:
+
+$$ \\left(T^2\\right)^{\\boldsymbol{1/3}} = \\left(r^3\\right)^{\\boldsymbol{1/3}} $$
+
+Potenslagen $(a^m)^n = a^{m \\cdot n}$ ger $\\left(T^2\\right)^{1/3} = T^{2/3}$ och $\\left(r^3\\right)^{1/3} = r^1$:
+
+$$ T^{2/3} = r $$
+
+Kontroll av b): $r = 5{,}0^{2/3} = \\left(\\sqrt[3]{5{,}0}\\right)^2 \\approx 1{,}71^2 \\approx 2{,}92$. På samma sätt fås $T = r^{3/2}$, och a) blir $T = 1{,}52^{3/2} \\approx 1{,}87$.
+
+**Svar:** $r = T^{2/3}$, vilket ger $r = 5{,}0^{2/3} \\approx 2{,}9$ AE.
+
+**Generell slutsats:** en potensekvation kan lösas åt båda hållen. Bråkexponenten $\\dfrac{2}{3}$ betyder "kvadrera och dra kubikroten", och det kvittar i vilken ordning det görs.`,
+        },
+        {
+            level: 3,
+            question: `Ekvationerna $x^{3/2} = 8$ och $x^{2/3} = 4$ ser nästan likadana ut.<br>a) Lös båda ekvationerna.<br>b) Den ena har en lösning och den andra två. Förklara varför.<br>c) Amir löser $x^{3/2} = -8$ genom att kvadrera båda led och får $x = 4$. Kontrollera lösningen och förklara vad som gick fel.`,
+            answer: { value: 4, unit: '' },
+            solution: `**a)** I $x^{3/2} = 8$ upphöjer vi båda led till nämnaren 2, eftersom $\\left(x^{3/2}\\right)^2 = x^3$:
+
+$$ \\left(x^{3/2}\\right)^{\\boldsymbol{2}} = 8^{\\boldsymbol{2}} $$
+
+$$ x^3 = 64 $$
+
+$$ x = \\sqrt[3]{64} = 4 $$
+
+Kontroll: $4^{3/2} = \\left(\\sqrt{4}\\right)^3 = 2^3 = 8$.
+
+I $x^{2/3} = 4$ upphöjer vi båda led till 3, eftersom $\\left(x^{2/3}\\right)^3 = x^2$:
+
+$$ \\left(x^{2/3}\\right)^{\\boldsymbol{3}} = 4^{\\boldsymbol{3}} $$
+
+$$ x^2 = 64 $$
+
+$$ x = \\pm\\sqrt{64} = \\pm 8 $$
+
+Kontroll: $8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$ och $(-8)^{2/3} = \\left(\\sqrt[3]{-8}\\right)^2 = (-2)^2 = 4$.
+
+**Svar:** $x^{3/2} = 8$ har lösningen $x = 4$. $x^{2/3} = 4$ har lösningarna $x = 8$ och $x = -8$.
+
+**b)** Det är exponenten som blir kvar när nämnaren tagits bort som avgör antalet lösningar. I den första ekvationen blir det $x^3$, en udda exponent, alltså en lösning. I den andra blir det $x^2$, en jämn exponent, alltså två lösningar. Man kan säga att täljaren i bråkexponenten bestämmer antalet lösningar: udda täljare ger en, jämn täljare ger två (när högerledet är positivt).
+
+**Svar:** Efter att nämnaren tagits bort står täljaren kvar som exponent. Täljaren 3 är udda och ger en lösning, täljaren 2 är jämn och ger två.
+
+**c)** Amir kvadrerar båda led:
+
+$$ \\left(x^{3/2}\\right)^{\\boldsymbol{2}} = (-8)^{\\boldsymbol{2}} $$
+
+$$ x^3 = 64 $$
+
+$$ x = 4 $$
+
+Räkningen är rätt utförd, men kontrollen misslyckas: $4^{3/2} = 8$, inte $-8$. Felet är att $x^{3/2} = \\left(\\sqrt{x}\\right)^3$ aldrig kan vara negativt: kvadratroten är alltid positiv eller noll, och så är dess kub också. Ekvationen $x^{3/2} = -8$ saknar alltså lösning. Att kvadrera båda led döljer det, eftersom $8^2$ och $(-8)^2$ är samma tal. Kvadrering kan skapa en lösning som inte fanns i den ursprungliga ekvationen.
+
+**Svar:** $x = 4$ är ingen lösning, eftersom $4^{3/2} = 8 \\neq -8$. Ekvationen saknar lösning: $x^{3/2}$ kan aldrig vara negativt. Kvadreringen skapade en falsk rot.
+
+**Generell slutsats:** när båda led upphöjs till ett jämnt tal kan falska rötter uppstå, eftersom tecknet försvinner. Kontrollera alltid lösningen i den ursprungliga ekvationen när du gjort så.`,
+        },
+        {
+            level: 3,
+            question: `Lisa löser ekvationen $x^5 = 9x^3$ genom att dividera båda led med $x^3$. Hon får $x^2 = 9$ och svarar $x = \\pm 3$.<br>a) Kontrollera att $x = 3$ och $x = -3$ är lösningar, och visa att Lisa ändå har missat en lösning.<br>b) Lös ekvationen fullständigt genom att samla allt i ett led och bryta ut den gemensamma faktorn.<br>c) Hur många lösningar har $x^7 = 4x^5$ respektive $x^6 = 4x^5$? Motivera utan att lösa ekvationerna helt.`,
+            answer: { value: 0, unit: '' },
+            solution: `**a)** Insättning av $x = 3$: $3^5 = 243$ och $9 \\cdot 3^3 = 9 \\cdot 27 = 243$. Insättning av $x = -3$: $(-3)^5 = -243$ och $9 \\cdot (-3)^3 = 9 \\cdot (-27) = -243$. Båda stämmer.
+
+Men pröva $x = 0$: $0^5 = 0$ och $9 \\cdot 0^3 = 0$. Det stämmer också. Lisa dividerade båda led med $x^3$, och det är bara tillåtet när $x^3 \\neq 0$, alltså när $x \\neq 0$. Just det värdet försvann ur lösningen.
+
+**Svar:** $x = 3$ och $x = -3$ är lösningar, men Lisa missade $x = 0$.
+
+**b)** Subtraherar $9x^3$ från båda led, så att HL blir 0:
+
+$$ x^5 \\mathbin{\\boldsymbol{-}}\\boldsymbol{9x^3} = 9x^3 \\mathbin{\\boldsymbol{-}}\\boldsymbol{9x^3} $$
+
+$$ x^5 - 9x^3 = 0 $$
+
+Båda termerna innehåller $x^3$, som vi bryter ut:
+
+$$ x^3\\left(x^2 - 9\\right) = 0 $$
+
+En produkt är 0 bara om någon av faktorerna är 0:
+
+$$ x^3 = 0 \\qquad \\text{eller} \\qquad x^2 - 9 = 0 $$
+
+Den första ger $x = 0$. I den andra adderar vi 9 till båda led:
+
+$$ x^2 - 9 \\mathbin{\\boldsymbol{+}}\\boldsymbol{9} = 0 \\mathbin{\\boldsymbol{+}}\\boldsymbol{9} $$
+
+$$ x^2 = 9 $$
+
+$$ x = \\pm\\sqrt{9} = \\pm 3 $$
+
+**Svar:** $x = 0$, $x = 3$ och $x = -3$.
+
+**c)** $x^7 = 4x^5$ blir $x^5\\left(x^2 - 4\\right) = 0$. Faktorn $x^5$ ger $x = 0$, och $x^2 = 4$ ger $x = \\pm 2$. Tre lösningar.
+
+$x^6 = 4x^5$ blir $x^5\\left(x - 4\\right) = 0$. Faktorn $x^5$ ger $x = 0$, och $x - 4 = 0$ ger $x = 4$. Den andra faktorn är nu en förstagradsekvation med bara en lösning. Två lösningar.
+
+**Svar:** $x^7 = 4x^5$ har tre lösningar (0, 2 och $-2$). $x^6 = 4x^5$ har två (0 och 4).
+
+**Generell slutsats:** en ekvation med variabeln i båda led löses genom att allt samlas i ett led och den gemensamma faktorn bryts ut. Dividera aldrig bort en faktor som innehåller variabeln utan att först fråga om faktorn kan vara 0. Antalet lösningar avgörs av den ekvation som blir kvar i parentesen.`,
+        },
+        {
+            level: 3,
+            question: `Ekvationen $x^6 = a - 5$ innehåller ett tal $a$.<br>a) För vilka värden på $a$ har ekvationen två lösningar, en lösning respektive ingen lösning?<br>b) Ekvationen $x^n = -32$ har lösningen $x = -2$. Bestäm exponenten $n$, och förklara varför $n$ måste vara ett udda tal.<br>c) Ekvationen $x^n = 81$ har lösningarna $x = 3$ och $x = -3$. Bestäm $n$, och förklara varför $n$ måste vara ett jämnt tal.`,
+            answer: { value: 5, unit: '' },
+            solution: `**a)** Exponenten 6 är jämn, så antalet lösningar avgörs av tecknet på högerledet $a - 5$.
+
+Två lösningar när $a - 5 > 0$, det vill säga $a > 5$. Då är $x = \\pm\\sqrt[6]{a - 5}$.
+
+En lösning när $a - 5 = 0$, det vill säga $a = 5$. Då är $x^6 = 0$, och det enda tal vars sjätte potens är 0 är $x = 0$.
+
+Ingen lösning när $a - 5 < 0$, det vill säga $a < 5$. En jämn potens är aldrig negativ.
+
+**Svar:** Två lösningar för $a > 5$, en lösning för $a = 5$, ingen lösning för $a < 5$.
+
+**b)** Sätter in $x = -2$:
+
+$$ (-2)^n = -32 $$
+
+Vi prövar potenser av $-2$: $(-2)^1 = -2$, $(-2)^2 = 4$, $(-2)^3 = -8$, $(-2)^4 = 16$, $(-2)^5 = -32$. Alltså är $n = 5$.
+
+Att $n$ måste vara udda syns på tecknet. Ett negativt tal upphöjt till ett jämnt tal blir positivt, eftersom minustecknen tar ut varandra parvis. Högerledet $-32$ är negativt, så antalet faktorer $-2$ måste vara udda.
+
+**Svar:** $n = 5$. Ett jämnt $n$ hade gett ett positivt högerled.
+
+**c)** Sätter in $x = 3$:
+
+$$ 3^n = 81 $$
+
+$3^1 = 3$, $3^2 = 9$, $3^3 = 27$, $3^4 = 81$, så $n = 4$. Kontroll med den andra lösningen: $(-3)^4 = 81$.
+
+Att $n$ måste vara jämnt följer av att $x = -3$ också är en lösning: $(-3)^n$ är negativt för udda $n$ och kan då inte vara 81. Bara en jämn exponent ger samma värde för $3$ och $-3$.
+
+**Svar:** $n = 4$. Bara en jämn exponent ger samma potens för $3$ och $-3$.
+
+**Generell slutsats:** tecknet på högerledet och antalet lösningar säger något om exponenten. Udda exponent bevarar tecknet och ger exakt en lösning; jämn exponent gör potensen positiv och ger lösningarna i par.`,
+        },
+        {
+            level: 3,
+            question: `Belysningsstyrkan $E$ från en lampa avtar med kvadraten på avståndet $r$ enligt $E = \\dfrac{k}{r^2}$, där $k$ är en konstant som beror på lampan. På avståndet 2,0 m från en viss lampa är belysningsstyrkan 50 lux.<br>a) Bestäm konstanten $k$.<br>b) På vilket avstånd är belysningsstyrkan 8,0 lux?<br>c) Med vilken faktor ska avståndet ändras för att belysningsstyrkan ska bli en fjärdedel så stor? Visa att svaret inte beror på $k$.`,
+            answer: { value: 5, unit: 'm' },
+            solution: `**a)** Sätter in $E = 50$ och $r = 2{,}0$:
+
+$$ 50 = \\frac{k}{2{,}0^2} $$
+
+$$ 50 = \\frac{k}{4} $$
+
+Multiplicerar båda led med nämnaren 4:
+
+$$ 50 \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{4} = \\frac{k}{4} \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{4} $$
+
+$$ k = 200 $$
+
+**Svar:** $k = 200$ (i enheten lux · m²).
+
+**b)** Nu är $E = 8{,}0$ och $r$ sökt. Avståndet står i nämnaren, så $r \\neq 0$:
+
+$$ 8{,}0 = \\frac{200}{r^2} $$
+
+Multiplicerar båda led med $r^2$:
+
+$$ 8{,}0 \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{r^2} = \\frac{200}{r^2} \\mathbin{\\boldsymbol{\\cdot}}\\boldsymbol{r^2} $$
+
+$$ 8{,}0 r^2 = 200 $$
+
+Dividerar båda led med 8,0:
+
+$$ \\frac{8{,}0 r^2}{\\boldsymbol{8{,}0}} = \\frac{200}{\\boldsymbol{8{,}0}} $$
+
+$$ r^2 = 25 $$
+
+$$ r = \\pm\\sqrt{25} = \\pm 5 $$
+
+Ett avstånd är positivt, så $r = 5{,}0$ m. Kontroll: $\\dfrac{200}{5{,}0^2} = \\dfrac{200}{25} = 8{,}0$.
+
+**Svar:** 5,0 m.
+
+**c)** Kalla det ursprungliga avståndet $r_1$ och det nya $r_2$. Belysningsstyrkan på det nya avståndet ska vara en fjärdedel av den på det gamla:
+
+$$ \\frac{k}{r_2^2} = \\frac{1}{4} \\cdot \\frac{k}{r_1^2} $$
+
+Dividerar båda led med $k$, så försvinner konstanten:
+
+$$ \\frac{k}{r_2^2 \\boldsymbol{\\cdot k}} = \\frac{k}{4 r_1^2 \\boldsymbol{\\cdot k}} $$
+
+$$ \\frac{1}{r_2^2} = \\frac{1}{4 r_1^2} $$
+
+Två bråk med täljaren 1 är lika precis när nämnarna är lika:
+
+$$ r_2^2 = 4 r_1^2 $$
+
+$$ r_2 = \\sqrt{4 r_1^2} = 2 r_1 $$
+
+Avståndet ska fördubblas. I b) stämmer det: från 2,0 m till 4,0 m sjunker belysningsstyrkan från 50 lux till $\\dfrac{200}{16} = 12{,}5$ lux, en fjärdedel. Konstanten $k$ försvann ur ekvationen, så faktorn 2 gäller för alla lampor.
+
+**Svar:** Avståndet ska fördubblas, oavsett $k$.
+
+**Generell slutsats:** i ett samband av typen $E = \\dfrac{k}{r^2}$ ger en viss faktor på $r$ faktorn i kvadrat, omvänt, på $E$. Dubbelt avstånd ger en fjärdedel, tredubbelt en niondel. Konstanten stryks så snart två lägen jämförs.`,
+        },
+        {
+            level: 3,
+            question: `Lös ekvationerna. Ange först vilka värden på $x$ som över huvud taget är tillåtna.<br>a) $x^{3/2} \\cdot x^{1/2} = 16$<br>b) $\\dfrac{x^5}{x^2} = 27$<br>c) Ekvationen i a) ger efter förenkling en jämn exponent, men har ändå bara en lösning. Ekvationen i b) ger en udda exponent. Förklara varför båda ekvationerna har exakt en lösning, av helt olika skäl.`,
+            answer: { value: 4, unit: '' },
+            solution: `**a)** Potensen $x^{1/2} = \\sqrt{x}$ finns bara för $x \\geq 0$, så bara sådana $x$ är tillåtna. Potenslagen $a^m \\cdot a^n = a^{m+n}$ ger
+
+$$ x^{3/2} \\cdot x^{1/2} = x^{3/2 + 1/2} = x^{4/2} = x^2 $$
+
+$$ x^2 = 16 $$
+
+$$ x = \\pm\\sqrt{16} = \\pm 4 $$
+
+Men $x = -4$ är inte tillåtet, eftersom $\\sqrt{-4}$ inte finns. Kontroll med $x = 4$: $4^{3/2} \\cdot 4^{1/2} = 8 \\cdot 2 = 16$.
+
+**Svar:** Tillåtna värden är $x \\geq 0$. Lösningen är $x = 4$.
+
+**b)** Nämnaren $x^2$ får inte vara 0, så $x \\neq 0$. Potenslagen $\\dfrac{a^m}{a^n} = a^{m-n}$ ger
+
+$$ \\frac{x^5}{x^2} = x^{5-2} = x^3 $$
+
+$$ x^3 = 27 $$
+
+$$ x = \\sqrt[3]{27} = 3 $$
+
+Kontroll: $\\dfrac{3^5}{3^2} = \\dfrac{243}{9} = 27$.
+
+**Svar:** Tillåtna värden är $x \\neq 0$. Lösningen är $x = 3$.
+
+**c)** I a) ger den förenklade ekvationen $x^2 = 16$ två lösningar, $4$ och $-4$. Men den ursprungliga ekvationen innehåller $\\sqrt{x}$, som bara finns för $x \\geq 0$. Den ena lösningen förkastas alltså av ett skäl som inte syns i den förenklade ekvationen: den tillhör inte de tillåtna värdena.
+
+I b) ger den förenklade ekvationen $x^3 = 27$ bara en lösning från början, eftersom exponenten är udda. Här behöver ingen lösning förkastas; villkoret $x \\neq 0$ spelar ingen roll eftersom $x = 3$ inte är 0.
+
+**Svar:** I a) finns två lösningar till den förenklade ekvationen, men en av dem ligger utanför de tillåtna värdena. I b) har den förenklade ekvationen bara en lösning, eftersom exponenten är udda.
+
+**Generell slutsats:** förenkla med potenslagarna, men avgör de tillåtna värdena på den ursprungliga ekvationen. Rotuttryck kräver $x \\geq 0$ och nämnare kräver $x \\neq 0$, och en lösning som bryter mot det ska förkastas även om räkningen ser felfri ut.`,
         },
     ],
 

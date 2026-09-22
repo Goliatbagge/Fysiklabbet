@@ -99,8 +99,8 @@ $$
 2. Den första multipeln som dyker upp i båda kolumnerna är den minsta
    gemensamma nämnaren.
 
-**OBS!** Denna metod kan vara svår med större tal i nämnarna, men då finns
-en annan metod som vi kommer att gå igenom längre fram på nivån.
+**OBS!** Denna metod blir tungrodd när nämnarna är stora. Då finns en
+annan metod, primtalsfaktorisering, som vi går igenom härnäst.
 :::
 
 ::: exempel "Exempel 3 — Minsta gemensamma nämnaren"
@@ -139,6 +139,145 @@ $$
 :::
 :::
 
+## Minsta gemensamma nämnaren med primtalsfaktorisering
+
+Multipeltabellen fungerar fint så länge nämnarna är små. Men vad gör du med
+$\dfrac{5}{72} + \dfrac{7}{108}$? Att skriva upp multiplar av 72 och 108
+tills de möts tar lång tid, och det är lätt att räkna fel på vägen. Då finns
+en metod som alltid går lika fort, oavsett hur stora nämnarna är:
+**primtalsfaktorisering**.
+
+### Primtal och faktorträd
+
+Ett **primtal** är ett heltal större än 1 som bara är delbart med 1 och sig
+självt: 2, 3, 5, 7, 11, 13, 17, 19 och så vidare. Alla andra heltal större
+än 1 kan brytas ner i primtal, ungefär som en molekyl kan brytas ner i
+atomer. Att **primtalsfaktorisera** ett tal betyder att skriva det som en
+produkt av primtal:
+
+$$
+12 = 2 \cdot 2 \cdot 3 \qquad 18 = 2 \cdot 3 \cdot 3
+$$
+
+Enklast gör du det med ett **faktorträd**. Dela upp talet i två faktorer,
+dela sedan upp varje faktor som inte är ett primtal, och fortsätt tills alla
+grenar slutar i primtal. Primtalen i grenändarna är faktorerna, se figuren
+nedan.
+
+::: figur
+<svg viewBox="25 12 284 146" width="385" height="198" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Två faktorträd. 12 delas i 2 och 6, och 6 delas i 2 och 3. 18 delas i 2 och 9, och 9 delas i 3 och 3. Primtalen i grenarnas ändar är inringade. Under träden står 12 = 2 · 2 · 3 och 18 = 2 · 3 · 3."><line x1="64.4" y1="30.5" x2="47.6" y2="53.5" stroke="#1f2530" stroke-width="1.4" stroke-linecap="round"/><line x1="79.6" y1="30.5" x2="96.4" y2="53.5" stroke="#1f2530" stroke-width="1.4" stroke-linecap="round"/><line x1="96.7" y1="74.7" x2="81.3" y2="97.3" stroke="#1f2530" stroke-width="1.4" stroke-linecap="round"/><line x1="111.3" y1="74.7" x2="126.7" y2="97.3" stroke="#1f2530" stroke-width="1.4" stroke-linecap="round"/><text x="72" y="25" font-size="14" text-anchor="middle" fill="#1f2530">12</text><circle cx="40" cy="64" r="11" fill="none" stroke="#2563c9" stroke-width="1.6"/><text x="40" y="69" font-size="14" text-anchor="middle" fill="#2563c9" font-weight="600">2</text><text x="104" y="69" font-size="14" text-anchor="middle" fill="#1f2530">6</text><circle cx="74" cy="108" r="11" fill="none" stroke="#2563c9" stroke-width="1.6"/><text x="74" y="113" font-size="14" text-anchor="middle" fill="#2563c9" font-weight="600">2</text><circle cx="134" cy="108" r="11" fill="none" stroke="#2563c9" stroke-width="1.6"/><text x="134" y="113" font-size="14" text-anchor="middle" fill="#2563c9" font-weight="600">3</text><line x1="224.4" y1="30.5" x2="207.6" y2="53.5" stroke="#1f2530" stroke-width="1.4" stroke-linecap="round"/><line x1="239.6" y1="30.5" x2="256.4" y2="53.5" stroke="#1f2530" stroke-width="1.4" stroke-linecap="round"/><line x1="256.7" y1="74.7" x2="241.3" y2="97.3" stroke="#1f2530" stroke-width="1.4" stroke-linecap="round"/><line x1="271.3" y1="74.7" x2="286.7" y2="97.3" stroke="#1f2530" stroke-width="1.4" stroke-linecap="round"/><text x="232" y="25" font-size="14" text-anchor="middle" fill="#1f2530">18</text><circle cx="200" cy="64" r="11" fill="none" stroke="#2563c9" stroke-width="1.6"/><text x="200" y="69" font-size="14" text-anchor="middle" fill="#2563c9" font-weight="600">2</text><text x="264" y="69" font-size="14" text-anchor="middle" fill="#1f2530">9</text><circle cx="234" cy="108" r="11" fill="none" stroke="#2563c9" stroke-width="1.6"/><text x="234" y="113" font-size="14" text-anchor="middle" fill="#2563c9" font-weight="600">3</text><circle cx="294" cy="108" r="11" fill="none" stroke="#2563c9" stroke-width="1.6"/><text x="294" y="113" font-size="14" text-anchor="middle" fill="#2563c9" font-weight="600">3</text><text x="72" y="154" font-size="14" text-anchor="middle" fill="#1f2530">12 = <tspan fill="#2563c9" font-weight="600">2 · 2 · 3</tspan></text><text x="232" y="154" font-size="14" text-anchor="middle" fill="#1f2530">18 = <tspan fill="#2563c9" font-weight="600">2 · 3 · 3</tspan></text></svg>
+
+Faktorträd för 12 och 18. Grenarna slutar i primtal, som ringas in. Det
+spelar ingen roll hur du börjar dela upp: $12 = 2 \cdot 6$ eller
+$12 = 3 \cdot 4$ ger samma primtal till slut.
+:::
+
+### Bygg nämnaren av primtalsfaktorerna
+
+Nu kommer själva idén. En gemensam nämnare till 12 och 18 måste vara delbar
+med **både** 12 och 18.
+
+- Delbar med $12 = 2 \cdot 2 \cdot 3$: då måste talet innehålla minst
+  **två tvåor** och **en trea**.
+- Delbar med $18 = 2 \cdot 3 \cdot 3$: då måste talet innehålla minst
+  **en tvåa** och **två treor**.
+
+Det minsta tal som klarar båda kraven innehåller två tvåor (så många som 12
+kräver) och två treor (så många som 18 kräver), och inte en enda faktor
+mer. Tabellen visar hur man räknar:
+
+| | Antal tvåor | Antal treor |
+| --- | --- | --- |
+| $12 = 2 \cdot 2 \cdot 3$ | 2 | 1 |
+| $18 = 2 \cdot 3 \cdot 3$ | 1 | 2 |
+| **MGN tar flest av varje** | **2** | **2** |
+
+$$
+\text{MGN} = 2 \cdot 2 \cdot 3 \cdot 3 = 36
+$$
+
+Jämför med metod 2, att bara multiplicera nämnarna: $12 \cdot 18 = 216$.
+Det är också en gemensam nämnare, men sex gånger större än nödvändigt.
+Produkten $216 = 2 \cdot 2 \cdot 2 \cdot 3 \cdot 3 \cdot 3$ tar med de
+faktorer som 12 och 18 har gemensamt två gånger, och då blir täljarna
+onödigt stora och förkortningen i slutet onödigt jobbig.
+
+::: formel "Hitta MGN med primtalsfaktorisering"
+1. Primtalsfaktorisera varje nämnare, till exempel med ett faktorträd.
+2. Ta med varje primtal så många gånger som det förekommer **flest** gånger
+   i någon av nämnarna.
+3. Multiplicera ihop faktorerna. Produkten är den minsta gemensamma
+   nämnaren.
+
+Metoden fungerar för hur många nämnare som helst och hur stora tal som
+helst, och den ger alltid den **minsta** gemensamma nämnaren.
+:::
+
+**Kontroll mot exempel 3.** Där gav multipeltabellen MGN $= 30$ till
+nämnarna 10 och 6. Med primtalsfaktorisering: $10 = 2 \cdot 5$ och
+$6 = 2 \cdot 3$. Tvåan förekommer som flest en gång, trean en gång och
+femman en gång, så MGN $= 2 \cdot 3 \cdot 5 = 30$. Samma svar, som det
+ska vara.
+
+::: härledning "OBS — två vanliga fel"
+- **Att ta med alla faktorer från båda träden.** Då får du
+  $2 \cdot 2 \cdot 3 \cdot 2 \cdot 3 \cdot 3 = 216$, alltså produkten
+  av nämnarna. Det är en gemensam nämnare, men inte den minsta. Ett primtal
+  som finns i båda nämnarna ska bara räknas så många gånger som det
+  förekommer i den nämnare där det finns **flest**.
+- **Att bara ta med de faktorer som är gemensamma.** Då får du
+  $2 \cdot 3 = 6$, och 6 är inte delbart med vare sig 12 eller 18. Det
+  talet är i stället den största gemensamma delaren, som används när man
+  **förkortar** bråk, inte när man ska hitta en gemensam nämnare.
+:::
+
+::: exempel "Exempel 4 — MGN med primtalsfaktorisering"
+**Bestäm den minsta gemensamma nämnaren till 72 och 108 med
+primtalsfaktorisering och beräkna sedan $\dfrac{5}{72} + \dfrac{7}{108}$.**
+
+::: handskrift
+typ: mgnprim
+:::
+
+::: textlosning
+Vi primtalsfaktoriserar nämnarna med varsitt faktorträd. 72 delas i
+$8 \cdot 9$, 8 delas i $2 \cdot 4$ och 4 i $2 \cdot 2$, medan 9 delas i
+$3 \cdot 3$:
+
+$$
+72 = 8 \cdot 9 = 2 \cdot 4 \cdot 3 \cdot 3 = 2 \cdot 2 \cdot 2 \cdot 3 \cdot 3
+$$
+
+108 delas i $4 \cdot 27$, 4 delas i $2 \cdot 2$, 27 i $3 \cdot 9$ och 9 i
+$3 \cdot 3$:
+
+$$
+108 = 4 \cdot 27 = 2 \cdot 2 \cdot 3 \cdot 9 = 2 \cdot 2 \cdot 3 \cdot 3 \cdot 3
+$$
+
+Tvåan förekommer som flest **tre** gånger (i 72) och trean som flest **tre**
+gånger (i 108). MGN får därför tre tvåor och tre treor:
+
+$$
+\text{MGN} = 2 \cdot 2 \cdot 2 \cdot 3 \cdot 3 \cdot 3 = 216
+$$
+
+Nu förlänger vi båda bråken så att nämnarna blir 216. Eftersom
+$72 \cdot 3 = 216$ och $108 \cdot 2 = 216$ förlänger vi med 3 respektive 2
+och räknar sedan som vanligt:
+
+$$
+\frac{5}{72} + \frac{7}{108} = \frac{5 \cdot 3}{72 \cdot 3} + \frac{7 \cdot 2}{108 \cdot 2}
+= \frac{15}{216} + \frac{14}{216} = \frac{15 + 14}{216} = \frac{29}{216}
+$$
+
+29 är ett primtal som inte går jämnt upp i 216, så bråket går inte att
+förkorta.
+
+**Svar:** $\dfrac{29}{216}$
+:::
+:::
+
 ## Bråkform och blandad form
 
 Bråkform och blandad form är två olika skrivsätt för bråk. Blandad form kan
@@ -159,7 +298,7 @@ fjärdedelar). Vi kan även låta de motsvaras i **blandad form** av
 $3\frac{3}{4}$ (3 hela och 3 fjärdedelar). Så $\dfrac{15}{4}$ (bråkform)
 $= 3\frac{3}{4}$ (blandad form).
 
-::: exempel "Exempel 4 — Skriv i bråkform"
+::: exempel "Exempel 5 — Skriv i bråkform"
 **Skriv i bråkform<br>a) $1\dfrac{4}{5}$&emsp;&emsp;b) $3\dfrac{1}{7}$**
 
 ::: handskrift
@@ -204,8 +343,13 @@ $$
 :::
 
 ::: sampunkt "Minsta gemensamma nämnaren"
-1. Skriv upp nämnarnas multiplar i varsin kolumn.
-2. Den **första** multipeln som finns i båda kolumnerna är MGN.
+- **Multipeltabell**: skriv upp nämnarnas multiplar i varsin kolumn. Den
+  **första** multipeln som finns i båda är MGN.
+- **Primtalsfaktorisering**: faktorisera nämnarna. Ta med varje primtal så
+  många gånger som det förekommer **flest** gånger i en nämnare, och
+  multiplicera.
+- $12 = 2 \cdot 2 \cdot 3$ och $18 = 2 \cdot 3 \cdot 3$ ger
+  MGN $= 2 \cdot 2 \cdot 3 \cdot 3 = 36$.
 :::
 
 ::: sampunkt "Bråkform och blandad form"

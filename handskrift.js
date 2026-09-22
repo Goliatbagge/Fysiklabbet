@@ -3393,6 +3393,161 @@
     return { acts: acts, contentW: 620, lastBase: y + 1.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: MGN med primtalsfaktorisering (ma1c-1.3 ex 4)
+   * 72 och 108 primtalsfaktoriseras med varsitt faktorträd: grenarna och
+   * talen i grafit, primtalen i grenändarna ringas in med blåpennan.
+   * Faktorerna skrivs ut på rad, MGN byggs av varje primtal så många
+   * gånger som det förekommer FLEST gånger, och sedan räknas
+   * 5/72 + 7/108 ut med 216 som gemensam nämnare. Bubblorna som hör till
+   * träden läggs UNDER dem (se REGEL), aldrig intryckta bredvid. Trädet
+   * för 108 ligger till höger, så rotens baslinje hålls under y = 150
+   * (inställningsrutans mobilzon). */
+  function layoutMgnPrim(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var SC = 0.8, LV = 62;                 /* nodskala, nivåavstånd */
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 274, rader));
+    }
+    /* ett tal centrerat kring xc; returnerar [x0, x1, yb] för ringen */
+    function nod(t, xc, yb) {
+      var w = T.adv(t, SC), x0 = xc - w / 2;
+      var x1 = T.str(t, x0, yb, null, SC);
+      return [x0, x1, yb];
+    }
+    /* gren från förälderns underkant till barnets överkant */
+    function gren(px, pyb, cx, cyb) {
+      T.line([px, pyb + 0.20 * F], [cx, cyb - 0.80 * F]);
+      T.pause(60);
+    }
+    function ringa(b) {
+      T.ring(b[0], b[1], b[2], { ry: 0.50 * F, cy: b[2] - 0.30 * F });
+      T.pause(200);
+    }
+
+    /* ---- rubrik ---- */
+    y = 92;
+    T.str('Primtalsfaktoriserar nämnarna', padL, y, null, 0.62);
+    T.stepEnd();
+
+    /* ---- faktorträd för 72 ---- */
+    var y0 = 178, y1 = y0 + LV, y2 = y1 + LV, y3 = y2 + LV;
+    nod('72', 170, y0);
+    gren(170, y0, 110, y1); nod('8', 110, y1);
+    gren(170, y0, 230, y1); nod('9', 230, y1);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, T.bubbleTop(y3, 0.5), 274, [
+      [['Jag delar upp 72 i 8·9 och']],
+      [['delar sedan upp varje faktor']],
+      [['som inte är ett primtal.']]
+    ]));
+    gren(110, y1, 70, y2);  var l72a = nod('2', 70, y2);
+    gren(110, y1, 150, y2); nod('4', 150, y2);
+    gren(150, y2, 120, y3); var l72b = nod('2', 120, y3);
+    gren(150, y2, 180, y3); var l72c = nod('2', 180, y3);
+    gren(230, y1, 200, y2); var l72d = nod('3', 200, y2);
+    gren(230, y1, 260, y2); var l72e = nod('3', 260, y2);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, T.bubbleTop(y3, 0.5), 274, [
+      [['Alla grenar slutar i primtal.']],
+      [['Jag ringar in dem.']]
+    ]));
+    [l72a, l72b, l72c, l72d, l72e].forEach(ringa);
+    T.stepEnd();
+
+    /* ---- faktorträd för 108 ---- */
+    nod('108', 470, y0);
+    gren(470, y0, 410, y1); nod('4', 410, y1);
+    gren(470, y0, 530, y1); nod('27', 530, y1);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, T.bubbleTop(y3, 0.5), 274, [
+      [['108 delar jag upp i 4·27.']],
+      [['4 blir 2·2 och 27 blir 3·9,']],
+      [['och 9 blir 3·3.']]
+    ]));
+    gren(410, y1, 370, y2); var l108a = nod('2', 370, y2);
+    gren(410, y1, 450, y2); var l108b = nod('2', 450, y2);
+    gren(530, y1, 500, y2); var l108c = nod('3', 500, y2);
+    gren(530, y1, 560, y2); nod('9', 560, y2);
+    gren(560, y2, 530, y3); var l108d = nod('3', 530, y3);
+    gren(560, y2, 590, y3); var l108e = nod('3', 590, y3);
+    T.stepEnd();
+    [l108a, l108b, l108c, l108d, l108e].forEach(ringa);
+    T.stepEnd();
+
+    /* ---- faktorerna på rad ---- */
+    y = y3 + 2.4 * F;
+    T.str('72=2·2·2·3·3', padL, y);
+    T.stepEnd();
+    y += 1.6 * F;
+    T.str('108=2·2·3·3·3', padL, y);
+    T.stepEnd();
+
+    /* ---- bygg MGN ---- */
+    tanke(y, [
+      [['Tvåan finns flest gånger i 72:']],
+      [['tre gånger. Trean finns flest']],
+      [['gånger i 108: tre gånger. MGN']],
+      [['får tre tvåor och tre treor.']]
+    ]);
+    y += 2.0 * F;
+    xx = T.str('MGN=2·2·2·3·3·3', padL, y);
+    T.stepEnd();
+    T.str('=216', xx, y);
+    T.stepEnd();
+
+    /* ---- förläng båda bråken till nämnaren 216 ---- */
+    y += 3.4 * F;
+    xx = T.fracH('5', '72', padL, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('7', '108', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['72·3=216 och 108·2=216, så']],
+      [['jag förlänger med 3 respektive 2.']]
+    ], 1.05);
+    xx = T.str('=', xx, y);
+    xx = T.fracOp('5', '72', '·3', xx, y);
+    xx = T.str('+', xx, y);
+    T.fracOp('7', '108', '·2', xx, y);
+    T.stepEnd();
+
+    y += 3.3 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('15', '216', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('14', '216', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma nämnare, så täljarna']],
+      [['adderas.']]
+    ], 1.05);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('15+14', '216', xx, y);
+    T.stepEnd();
+
+    xx = T.str('=', xx, y);
+    T.fracH('29', '216', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['29 är ett primtal som inte går']],
+      [['jämnt upp i 216, så bråket']],
+      [['går inte att förkorta.']]
+    ], 1.05);
+    y += 2.8 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('29', '216', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 1.9 * F, padL: padL };
+  }
+
   /* ---------------- scen: blandad form → bråkform (ma1c-1.3 ex 4) ------
    * a) 1 4/5 och b) 3 1/7. Talet framför bråket multipliceras med
    * nämnaren och täljaren adderas — den uträkningen är det man GÖR med
@@ -56760,6 +56915,7 @@
                    forlanga: layoutForlanga, jamfora: layoutJamfora,
                    samnamnare: layoutSamnamnare,
                    olikanamnare: layoutOlikanamnare, mgn: layoutMgn,
+                   mgnprim: layoutMgnPrim,
                    brakform: layoutBrakform, brakmult: layoutBrakmult,
                    faktorisera: layoutFaktorisera, brakdiv: layoutBrakdiv,
                    brakdel: layoutBrakdel, avrundning: layoutAvrundning,

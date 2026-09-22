@@ -18877,6 +18877,22 @@ Den första multipel som dyker upp i båda kolumnerna är 24.
 
 **Svar:** MGN = 24`,
         },
+        {
+            level: 2,
+            question: `Bestäm med primtalsfaktorisering den minsta gemensamma nämnaren (MGN) till 20 och 24.`,
+            answer: { value: 120, unit: '' },
+            solution: `Primtalsfaktorisera nämnarna, till exempel med faktorträd:
+
+$$ 20 = 2 \\cdot 2 \\cdot 5 \\qquad 24 = 2 \\cdot 2 \\cdot 2 \\cdot 3 $$
+
+Ta med varje primtal så många gånger som det förekommer flest gånger i någon av nämnarna: tvåan tre gånger (i 24), trean en gång och femman en gång.
+
+$$ \\text{MGN} = 2 \\cdot 2 \\cdot 2 \\cdot 3 \\cdot 5 = 120 $$
+
+Kontroll: $120 = 20 \\cdot 6 = 24 \\cdot 5$, så 120 är delbart med båda nämnarna. Produkten $20 \\cdot 24 = 480$ är också en gemensam nämnare, men fyra gånger större än nödvändigt.
+
+**Svar:** MGN = 120`,
+        },
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
@@ -18905,6 +18921,32 @@ $$ \\frac{15}{24} = \\frac{15/3}{24/3} = \\frac{5}{8} $$
 **Svar:** $\\dfrac{5}{8}$
 
 **Generell slutsats:** med fler än två bråk lönar det sig alltid att hitta EN gemensam nämnare för alla på en gång — och kom ihåg att förkorta svaret.`,
+        },
+        {
+            level: 3,
+            question: `Beräkna $\\dfrac{7}{36} - \\dfrac{5}{54}$. Bestäm den minsta gemensamma nämnaren med primtalsfaktorisering och svara i enklaste bråkform.`,
+            choices: [
+                `$\\dfrac{2}{18}$`,
+                `$\\dfrac{11}{108}$`,
+                `$\\dfrac{1}{54}$`,
+                `$\\dfrac{198}{1944}$`,
+            ],
+            correct: 1,
+            solution: `**Insikten:** en multipeltabell för 36 och 54 blir lång, men primtalsfaktoriseringen ger MGN direkt.
+
+$$ 36 = 2 \\cdot 2 \\cdot 3 \\cdot 3 \\qquad 54 = 2 \\cdot 3 \\cdot 3 \\cdot 3 $$
+
+Tvåan förekommer flest gånger i 36 (två gånger) och trean flest gånger i 54 (tre gånger):
+
+$$ \\text{MGN} = 2 \\cdot 2 \\cdot 3 \\cdot 3 \\cdot 3 = 108 $$
+
+Eftersom $36 \\cdot 3 = 108$ och $54 \\cdot 2 = 108$ förlängs bråken med 3 respektive 2:
+
+$$ \\frac{7}{36} - \\frac{5}{54} = \\frac{7 \\cdot 3}{36 \\cdot 3} - \\frac{5 \\cdot 2}{54 \\cdot 2} = \\frac{21}{108} - \\frac{10}{108} = \\frac{11}{108} $$
+
+11 är ett primtal som inte går jämnt upp i 108, så bråket går inte att förkorta. Att i stället multiplicera nämnarna ($36 \\cdot 54 = 1944$) ger $\\dfrac{198}{1944}$, som är samma tal men måste förkortas med 18 för att bli enklaste form.
+
+**Svar:** $\\dfrac{11}{108}$`,
         },
     ],
 

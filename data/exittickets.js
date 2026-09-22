@@ -9584,6 +9584,22 @@ window.EXITTICKETS = {
       'Blandad form är bra för att *läsa av* en storlek (till exempel $3\\frac{3}{4}$ tårtor), men i beräkningar ställer den till det.',
     ],
   },
+  {
+    question: 'Nämnarna är primtalsfaktoriserade: $20 = 2 \\cdot 2 \\cdot 5$ och $30 = 2 \\cdot 3 \\cdot 5$. Vilken är den minsta gemensamma nämnaren?',
+    choices: [
+      '$2 \\cdot 5 = 10$',
+      '$2 \\cdot 2 \\cdot 5 \\cdot 2 \\cdot 3 \\cdot 5 = 600$',
+      '$2 \\cdot 2 \\cdot 3 \\cdot 5 = 60$',
+      '$2 \\cdot 3 \\cdot 5 = 30$',
+    ],
+    correct: 2,
+    why: [
+      'Här har bara de gemensamma faktorerna tagits med. 10 är inte delbart med vare sig 20 eller 30, så det är ingen gemensam nämnare alls.',
+      'Här har alla faktorer från båda nämnarna tagits med, alltså produkten $20 \\cdot 30$. Det är en gemensam nämnare, men inte den minsta: tvåan och femman räknas två gånger i onödan.',
+      'Varje primtal tas med så många gånger som det förekommer flest gånger i någon nämnare: tvåan två gånger (från 20), trean en gång och femman en gång. Det ger $60$, som är delbart med både 20 och 30.',
+      '30 är inte delbart med 20. Tvåan förekommer två gånger i 20, så MGN måste innehålla två tvåor.',
+    ],
+  },
 ],
 
 'ma1c-1.4': [

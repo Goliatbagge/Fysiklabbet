@@ -56,6 +56,54 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'attosekund',
+    term: 'Attosekund',
+    former: ['attosekund', 'attosekunden', 'attosekunder', 'attosekunderna', 'attosekundpuls', 'attosekundpulsen', 'attosekundpulser', 'attosekundpulserna', 'attosekundfysik', 'attosekundfysiken'],
+    kort: 'En miljarddels miljarddels sekund. Det är den tidsskala på vilken elektroner rör sig inne i en atom, och den kortaste tid som går att mäta i ett laboratorium i dag.',
+    relaterade: ['hogharmonisk-generering', 'laser', 'foton'],
+    body: [
+      { type: 'p', html: 'En attosekund skrivs 10<sup>−18</sup>&nbsp;sekunder, alltså en etta som ligger arton steg bakom decimaltecknet. Siffran säger ingenting förrän man jämför. Det går lika många attosekunder på en sekund som det går sekunder på drygt trettio miljarder år, mer än dubbelt så lång tid som universum har funnits. På en attosekund hinner ljuset, som annars rör sig sju varv runt jorden på en sekund, förflytta sig ungefär en tredjedels nanometer, alltså knappt så långt som en atom är bred.' },
+      { type: 'p', html: 'Varför bry sig om ett så kort ögonblick? Därför att det är precis där elektronerna håller till. En elektron i en väteatoms innersta bana behöver runt 150&nbsp;attosekunder för att ta sig ett varv. Vill man se vad som händer när en atom tar upp ljus, när en kemisk bindning börjar brytas eller när en elektron slits loss, måste bilden tas snabbare än så. Med kamerapulser på femtosekunder, tusen gånger längre, blir allt sådant en utsmetad suddighet.' },
+      { type: 'p', html: 'Att göra så korta ljusblixtar går inte med vanliga lasrar, eftersom en puls aldrig kan bli mycket kortare än en enda svängning hos sitt eget ljus. Synligt ljus svänger på ungefär två femtosekunder, så pulsen måste ha mycket kortare våglängd än så. Vägen dit går via ultraviolett ljus och mjuk röntgenstrålning, och just den bedriften belönades med nobelpriset i fysik 2023.' }
+    ]
+  },
+  {
+    id: 'absorptionskant',
+    term: 'Absorptionskant',
+    former: ['absorptionskant', 'absorptionskanten', 'absorptionskanter', 'absorptionskanterna'],
+    kort: 'Den energi där ett grundämne plötsligt börjar svälja strålning mycket kraftigare än strax under. Kanten ligger på olika ställen för olika ämnen och fungerar som ett fingeravtryck.',
+    relaterade: ['spektrum', 'foton', 'exciterat-tillstand'],
+    body: [
+      { type: 'p', html: 'Skickar man röntgenstrålning genom en metallfolie och långsamt ökar strålningens energi händer först ingenting dramatiskt: folien släpper igenom ungefär lika mycket hela tiden. Vid en bestämd energi faller genomsläppet plötsligt rakt av. Strax över den punkten sväljer materialet strålningen många gånger kraftigare än strax under. Den branta tröskeln kallas absorptionskant.' },
+      { type: 'p', html: 'Orsaken sitter i atomens elektroner. De sitter bundna i skal med bestämda bindningsenergier, och en foton kan bara slå loss en elektron om den bär minst så mycket energi som krävs för att lyfta den. Ligger fotonen strax under tröskeln räcker den inte till, och den passerar. Ligger den strax över öppnas ett helt nytt sätt att bli uppslukad på, och absorptionen skjuter i höjden. Varje skal ger sin egen kant, och eftersom bindningsenergierna skiljer sig mellan grundämnena ligger kanterna på olika energier för olika ämnen.' },
+      { type: 'p', html: 'Det gör kanten till ett verktyg. Ställer man in strålningen precis på ett visst ämnes kant blir bilden känslig för just det ämnet och nästan blind för de andra i provet. Samma sak utnyttjas i sjukhusets röntgenbilder, där kontrastmedel med kanter i rätt läge används för att lyfta fram blodkärl, och i materialforskningen, där formen på kanten berättar hur atomens grannar sitter placerade omkring den.' }
+    ]
+  },
+  {
+    id: 'frekvenskam',
+    term: 'Frekvenskam',
+    former: ['frekvenskam', 'frekvenskammen', 'frekvenskammar', 'frekvenskammarna'],
+    kort: 'Ljus som inte innehåller alla färger utan bara en rad skarpa, jämnt fördelade frekvenser. Ritar man upp dem ser spektrumet ut som tänderna på en kam.',
+    relaterade: ['spektrum', 'laser', 'vaglangd'],
+    body: [
+      { type: 'p', html: 'Vanligt vitt ljus innehåller en oavbruten blandning av alla våglängder mellan rött och violett. En frekvenskam är motsatsen: den består av tusentals mycket smala toppar som sitter på exakt lika stora avstånd från varandra. Ritar man upp intensiteten mot frekvensen blir bilden en rad lika höga pinnar, och det är den bilden som gett fenomenet sitt namn.' },
+      { type: 'p', html: 'Kammar uppstår när ljuset kommer i en regelbunden följd av korta pulser i stället för som en jämn ström. Ju oftare pulserna kommer, desto glesare sitter kamtänderna. Sambandet är exakt, och det är hela poängen: en kam gör om ett tidsavstånd, som går att mäta mycket noggrant med elektronik, till ett frekvensavstånd i ljuset, som annars är nästan omöjligt att mäta direkt. På så vis går det att jämföra en okänd färg med en klockas tickande.' },
+      { type: 'p', html: 'Därför sitter frekvenskammar i dag i de mest noggranna klockorna som byggts, i instrument som letar efter små färgförskjutningar i ljuset från avlägsna stjärnor och i mätutrustning som spårar enstaka molekyler i luft. Nackdelen är den andra sidan av samma mynt: behöver man en frekvens som råkar hamna mitt emellan två tänder finns den helt enkelt inte att få.' }
+    ]
+  },
+  {
+    id: 'frielektronlaser',
+    term: 'Frielektronlaser',
+    former: ['frielektronlaser', 'frielektronlasern', 'frielektronlasrar', 'frielektronlasrarna'],
+    kort: 'En anläggning som gör laserliknande röntgenstrålning av en stråle fria elektroner i stället för av ett material. Elektronerna tvingas slingra fram genom en rad magneter och strålar då ifrån sig.',
+    relaterade: ['laser', 'partikelaccelerator', 'foton'],
+    body: [
+      { type: 'p', html: 'En vanlig laser bygger på att atomer eller molekyler i ett material lämnar ifrån sig ljus vid de energier just det ämnet råkar ha. Det sätter en gräns: ingen känd kristall eller gas kan lasa fram hård röntgenstrålning. En frielektronlaser går runt problemet genom att göra sig av med materialet helt och hållet.' },
+      { type: 'p', html: 'I stället accelereras elektroner nästan upp till ljusets hastighet i en lång accelerator. Sedan skickas de in i en undulator, en rad magneter med omväxlande riktning som tvingar strålen att slingra sig fram i en flack våglinje. Varje gång banan böjs strålar elektronerna ifrån sig ljus, och eftersom de sedan färdas vidare tillsammans med sitt eget ljus börjar de ordna sig i tunna skivor med exakt en våglängds mellanrum. Då strålar de i takt, och intensiteten växer dramatiskt.' },
+      { type: 'p', html: 'Resultatet är extremt korta och extremt ljusstarka röntgenblixtar, tillräckligt starka för att avbilda ett enskilt virus eller en molekyl mitt under en kemisk reaktion. Priset är storleken: anläggningarna är hundratals meter till någon kilometer långa, kostar miljardbelopp och delas av forskargrupper från hela världen, som får söka mättid i konkurrens med varandra.' }
+    ]
+  },
+  {
     id: 'glasovergang',
     term: 'Glasövergång',
     former: ['glasövergång', 'glasövergången', 'glasövergångar', 'glasövergångarna', 'glasövergångstemperatur', 'glasövergångstemperaturen', 'glasig', 'glasigt', 'glasiga', 'amorf', 'amorft', 'amorfa'],

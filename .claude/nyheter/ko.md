@@ -20,6 +20,21 @@ Format per post:
   https://phys.org/news/2026-09-mobile-antiprotons-road-month-world.html
   (tillagd 2026-09-17)
 
+- **Ljudets kvantsprång fångat medan det sker** — ett lag rapporterar den första realtidsobservationen av ett
+  kvantsprång i en mekanisk svängning, alltså att en resonator byter energinivå steg för steg i stället för
+  kontinuerligt. Ingång: energinivåer, kvantisering, svängningar och fononer. Kontrollera temperatur, vilken
+  resonator det gäller och om övergångarna är direkt observerade eller slutna ur statistik. OBS: kvantfysik är
+  väl representerat, låt det gå tid. Källa (Phys.org 2026-09-17):
+  https://phys.org/news/2026-09-real-quantum.html
+  (tillagd 2026-09-22)
+
+- **Virveln i vattenhinken avgör frågan om kvantturbulens** — ett bordsexperiment med en helt klassisk
+  vattenvirvel stöder en decennier gammal teori för hur turbulens dör ut i kvantvätskor. Ingång: turbulens,
+  virvlar, rörelsemängdsmoment och varför en klassisk modell alls får säga något om superfluid helium.
+  Källa (Physics, APS, 2026-09-21):
+  https://link.aps.org/doi/10.1103/Physics.19.118
+  (tillagd 2026-09-22)
+
 - **Rydbergatomen som håller sig upprätt i elva millisekunder** — ett lag i Stuttgart sätter tre rekord för
   cirkulära Rydbergatomer, där elektronen kretsar i en nästan klassisk cirkelbana långt ut från kärnan.
   Ingång: energinivåer, kvanttal, exciterade tillstånd och varför ett tillstånd har en livslängd alls.

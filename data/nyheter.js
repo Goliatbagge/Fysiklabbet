@@ -103,6 +103,88 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-22-rontgenljus-som-glider",
+    date: "2026-09-22",
+    title: "Röntgenljus går bara att få i hela övertoner — nu har fysiker lärt sig glida mellan dem",
+    deck: "En kraftig laserpuls som fokuseras in i en gas får atomerna att sända ut röntgenljus, men bara vid bestämda frekvenser: hela multipler av laserns egen. Ligger den våglängd ett försök behöver mellan två sådana toner har apparaten hittills varit oanvändbar, och den som velat välja fritt har fått boka tid vid en acceleratoranläggning. Ett lag i Wien och San Diego har nu stämt om själva drivlasern, och kan för första gången fylla hela luckan mellan två grannövertoner.",
+    category: "Optik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-22-rontgenljus-som-glider.jpg",
+    imageAlt: "Ett mörkt laboratorium. En smal violett laserstråle kommer in från höger och träffar en rund optisk komponent i en svart hållare. Från komponenten breder en solfjäder av ljus ut sig åt vänster i rött, orange, gult och grönt.",
+    imageCredit: "Foto: Neath g, via Wikimedia Commons (CC BY-SA 4.0). Bilden visar ett superkontinuum: en femtosekundlaser med en enda våglängd fokuseras in i en kristall och kommer ut som ett helt färgband. Det är samma sorts spektral breddning som den nya metoden bygger på, men bilden är inte tagen i den beskrivna studien.",
+    tags: ["optik", "fotonik", "laser", "högharmonisk generering", "övertoner", "röntgenstrålning", "attosekund", "spektroskopi", "kärnklocka", "resonans"],
+    sources: [
+      { name: "TU Wien, pressmeddelande: X-ray light is like guitar music (21 september 2026)", url: "https://www.tuwien.at/en/tu-wien/news/press-releases/news/roentgenlicht-ist-wie-gitarrenmusik" },
+      { name: "Phys.org: X-ray light is like guitar music, with frequencies sliding continuously between harmonics", url: "https://phys.org/news/2026-09-ray-guitar-music-frequencies-harmonics.html" },
+      { name: "Communications Physics: Narrowband and wavelength-tuneable bright EUV–soft-X-ray harmonics for resonant imaging and spectroscopy (fri fulltext, CC BY 4.0)", url: "https://www.nature.com/articles/s42005-026-02791-5" }
+    ],
+    research: {
+      citation: "Dimitar Popmintchev med flera, ”Narrowband and wavelength-tuneable bright EUV–soft-X-ray harmonics for resonant imaging and spectroscopy”, Communications Physics, publicerad 7 augusti 2026",
+      url: "https://doi.org/10.1038/s42005-026-02791-5"
+    },
+    body: [
+      { type: 'p', html: 'Knäpper man på en gitarrsträng får man inte en enda frekvens. Grundtonen ligger lägst, och ovanpå den ligger en hel serie övertoner med dubbla, tredubbla och fyrdubbla frekvensen. Spelar en violin sitt a vid 440&nbsp;Hz uppstår 880&nbsp;Hz automatiskt, och därefter 1&nbsp;320&nbsp;Hz och uppåt. Däremellan finns ingenting. Strängen kan helt enkelt inte svänga på något annat sätt.' },
+      { type: 'p', html: 'Precis samma sak gäller för en av de mest använda röntgenkällorna i dagens laboratorier. Och precis som på en gitarr med band har det varit omöjligt att träffa tonerna som ligger mitt emellan.' },
+
+      { type: 'h2', text: 'Atomer som svarar i övertoner' },
+      { type: 'p', html: 'Tricket kallas högharmonisk generering och har använts sedan slutet av 1980-talet. En mycket kraftig, mycket kort laserpuls fokuseras in i en tunn stråle ädelgas. Pulsens elektriska fält blir då jämförbart med det fält som håller fast elektronerna i atomerna, och under varje svängning upprepas samma förlopp: fältet sliter loss en elektron, drar i väg den ett stycke, vänder och slungar tillbaka den mot sin egen atomkärna. I krocken lämnas hela den upptagna energin ifrån sig som en enda foton, med tiotals eller hundratals gånger laserns ursprungliga frekvens.' },
+      { type: 'p', html: 'Eftersom förloppet upprepas likadant varje halv svängning, fast spegelvänt, släcker vartannat bidrag ut sig självt. Kvar blir bara de udda multiplerna: tredje, femte, sjunde övertonen och så vidare. Ut ur gasen kommer alltså inte ett jämnt spektrum utan en rad skarpa toppar, jämnt fördelade med två drivfotoner mellan varje.' },
+      { type: 'p', html: 'Storleksordningen är lätt att räkna ut. Energin hos en foton är $E = \\dfrac{h \\cdot c}{\\lambda}$, och för grönt ljus vid 515&nbsp;nm ger det $E \\approx 2{,}4\\ \\mathrm{eV}$. Den tjugofemte övertonen bär då ungefär 60&nbsp;eV, alltså mjuk röntgenstrålning, och avståndet till grannarna på var sida är runt 5&nbsp;eV. I laserfysiken brukar en sådan serie kallas frekvenskam, eftersom topparna sitter lika tätt som tänderna på en kam.' },
+
+      { type: 'h2', text: 'Kammen är också problemet' },
+      { type: 'p', html: 'Fördelen med kammen är att en enda uppställning levererar ett helt knippe frekvenser. Nackdelen märks i samma ögonblick som försöket kräver en bestämd våglängd. Ska en atom eller en atomkärna träffas i en resonans, eller ska ett grundämne avbildas just vid sin absorptionskant, duger ingen annan energi än den rätta. Ligger den mellan två kamtänder är uppställningen värdelös.' },
+      { type: 'p', html: 'De magnetiska grundämnena är ett typexempel. Järn, kobolt och nickel har var sin absorptionskant i området mellan ungefär 50 och 70&nbsp;eV, och det är just där man vill titta för att se hur magnetismen i ett tunt skikt ändrar sig från ögonblick till ögonblick. Att kanterna skulle råka sammanfalla med lasersystemets övertoner finns det ingen anledning att hoppas på. Den som velat välja energi fritt har därför fått vända sig till en synkrotron eller en frielektronlaser, anläggningar stora som kvarter.' },
+      { type: 'quote', html: 'I decennier har det högharmoniska ljuset betett sig ungefär som en gitarr med fasta band. Man får vissa toner, med precis de avstånd fysiken bestämmer. Det vi nu har byggt liknar mer en slidegitarr i röntgenområdet: vi kan röra oss steglöst mellan övertonerna, åt båda hållen, och välja precis den energi vi behöver.', cite: 'Tenio Popmintchev, TU Wien och University of California San Diego' },
+
+      { type: 'h2', text: 'Stäm om lasern, inte röntgenljuset' },
+      { type: 'p', html: 'Lösningen bygger på en enkel iakttagelse. En enskild överton går inte att putta på, men hela serien sitter fast i drivlaserns frekvens. Överton nummer $q$ ligger $q$ gånger högre, så en liten ändring hos lasern förstoras $q$ gånger i röntgenljuset. För att flytta en överton ett helt steg, alltså två drivfotoner, behöver laserfrekvensen bara ändras med en bråkdel $\\dfrac{2}{q}$ av sig själv. Vid den tjugofemte övertonen är det åtta procent.' },
+      { type: 'p', html: 'Att stämma om en högeffektlaser med åtta procent är ändå ingen småsak. Laget utgick från en ytterbiumlaser vid 1&nbsp;030&nbsp;nm som levererar pulser på 200 till 270&nbsp;fs med upp till 14&nbsp;mJ, mellan 500 och 1&nbsp;000 gånger i sekunden. Pulserna skickas genom en sex meter lång ihålig vågledare med en kärna på 750&nbsp;µm, fylld med argon eller kvävgas vid tryck mellan 30 och 1&nbsp;000&nbsp;mbar.' },
+      { type: 'p', html: 'Inne i vågledaren är ljuset så intensivt att gasens brytningsindex ändras av ljuset självt. Pulsens spektrum breddas då kraftigt, och åt vilket håll tyngdpunkten förskjuts beror på gasen: argon breddar åt båda hållen, medan kvävgasens molekyler tar upp en del av energin i sina egna rörelser och skjuter spektrumet mot längre våglängder. Gassort och tryck blir därmed två rattar att vrida på.' },
+      { type: 'quote', html: 'Att bredda spektrumet på det sätt vi gör i vår gasfyllda vågledare betyder normalt att man tappar kontrollen över pulsen. Vi insåg att exakt samma olinjäritet också går att använda för att styra pulsen kontrollerat.', cite: 'Dimitar Popmintchev, TU Wien, studiens förstaförfattare' },
+      { type: 'p', html: 'Därefter trycks pulsen ihop till under 15&nbsp;fs med en uppsättning speglar, och en 300&nbsp;µm tunn kristall av bariumborat halverar våglängden. Ut kommer synligt ljus i färger mellan blått och gulgrönt, 480 till 550&nbsp;nm, i pulser på 9 till 30&nbsp;fs. Det är detta omsorgsfullt tillrättalagda synliga ljus, inte den ursprungliga infraröda lasern, som slutligen fokuseras in i helium vid ungefär 800&nbsp;mbar och en intensitet kring 10<sup>15</sup>&nbsp;W/cm².' },
+
+      { type: 'h2', text: 'Varför synligt ljus är bättre än infrarött' },
+      { type: 'p', html: 'Bytet till synligt ljus är inte en detalj utan själva förutsättningen. Röntgenljuset byggs upp av miljarder atomer längs strålens väg, och deras bidrag måste läggas ihop i takt. Går de ur fas tar vågorna ut varandra i stället för att förstärkas, och utbytet rasar. Villkoret kallas fasmatchning, och med en kortare drivvåglängd är det lättare att uppfylla.' },
+      { type: 'p', html: 'Till det kommer en vinst hos den enskilda atomen. Med synligt ljus hinner den lössläppta elektronen bara vara borta en kortare stund innan den kastas tillbaka, och dess vågpaket hinner därför inte breda ut sig lika mycket. Fler elektroner träffar rätt på vägen tillbaka, och varje atom lämnar ifrån sig mer röntgenljus.' },
+      { type: 'image', src: 'nyheter/bilder/2026-09-22-rontgenljus-som-glider-2.jpg', alt: 'Ett diagram med fotonenergi i elektronvolt på x-axeln från 40 till 75 och intensitet på y-axeln. En rad skarpa toppar i olika färger ligger utspridda över hela området, och pilar visar att topparna förskjuts åt både vänster och höger. Streckade lodräta linjer är märkta Fe, Co, Ni och Al edge.', caption: 'Mätta spektrum från försöket. Varje färg svarar mot ett gastryck i vågledaren, och när trycket ändras vandrar topparna i sidled tills hela luckan mellan två grannövertoner är utfylld. De streckade linjerna markerar absorptionskanterna hos järn, kobolt, nickel och aluminium.', credit: 'Figur: Popmintchev med flera, Communications Physics (2026), CC BY 4.0. Beskuren till figurens översta panel.' },
+
+      { type: 'h2', text: 'Hela tonsteget utfyllt' },
+      { type: 'p', html: 'Mätningarna visar att övertonstopparna går att förskjuta kontinuerligt åt båda hållen, tills varje punkt i mellanrummet mellan två grannar har täckts. Topparna ligger 4,8 till 5,2&nbsp;eV isär och behåller en bredd under 1&nbsp;eV genom hela omfånget, samtidigt som ljusstyrkan hålls i stort sett konstant. Vid gynnsam fasmatchning når strålen upp till omkring 110&nbsp;eV, och varje puls innehåller mellan 5&nbsp;·&nbsp;10<sup>7</sup> och 5&nbsp;·&nbsp;10<sup>8</sup> fotoner.' },
+      { type: 'p', html: 'I tidsdomänen beräknas ljuset komma som ett tåg av pulser kortare än 300&nbsp;attosekunder. En attosekund är en miljarddels miljarddels sekund, och det är den tidsskala på vilken elektroner flyttar sig inne i en atom.' },
+
+      { type: 'h2', text: 'Vad man vill göra med det' },
+      { type: 'p', html: 'Den närmaste tillämpningen är avbildning av magnetiska nanostrukturer. Ljusets magnetfält växelverkar med materialets magnetiska moment, men den växelverkan är svag: den signal man är ute efter dränks lätt i den mycket starkare spridningen mot laddningarna. Ligger energin exakt på grundämnets absorptionskant förstärks däremot det magnetiska bidraget kraftigt, och då krävs ljus som är både smalbandigt och ställbart.' },
+      { type: 'p', html: 'Ett annat mål ligger längre bort men lockar mer. Atomkärnan i torium-229 har ett exciterat tillstånd som ligger ovanligt lågt, inom räckhåll för ultraviolett ljus, och en klocka byggd på den övergången väntas bli åtminstone tio gånger noggrannare än dagens bästa atomur. Att leta rätt på och finkänsligt undersöka en sådan resonans kräver en ljuskälla som går att skjuta steglöst över ett energiområde.' },
+      { type: 'quote', html: 'Naturen placerar inte sina resonanser där våra övertoner råkar hamna. Kan vi svepa kontinuerligt över ett helt energiområde i stället för att hoppa fram och tillbaka mellan fasta frekvenser blir många försök över huvud taget genomförbara, med apparatur i laboratorieformat, långt mindre än stora fotonfabriker som synkrotroner och frielektronlasrar.', cite: 'Tenio Popmintchev' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Bara udda multipler kommer ut ur gasen. Förloppet upprepas spegelvänt varje halv svängning hos drivfältet, och de jämna bidragen tar ut varandra. Därför ligger avståndet mellan två grannar på två drivfotoner, inte en.',
+        'Det går lika många attosekunder på en sekund som det går sekunder på drygt trettio miljarder år, alltså mer än dubbelt så lång tid som universum har funnits.',
+        'Helium används som gas i sista steget av två skäl: det släpper igenom röntgenljuset utan att svälja det, och det håller så hårt i sina elektroner att fältet kan drivas mycket högt innan gasen joniseras helt.'
+      ] },
+
+      { type: 'p', html: 'Arbetet skickades in i december 2025, godkändes efter granskning i juli 2026 och publicerades i Communications Physics i augusti. Visionen bakom det är enkel att formulera och svår att förverkliga: i stället för att anpassa försöket efter den strålning som råkar finnas att tillgå ska strålningen anpassas efter försöket.' }
+    ],
+    simulering: {
+      href: 'fysik2-staende-vag-app.html',
+      name: 'Stående våg i sträng',
+      text: 'Ändra frekvensen på en spänd sträng och se hur den bara vill svänga vid bestämda värden: grundtonen först, sedan övertonerna med dubbla, tredubbla och fyrdubbla frekvensen. Däremellan dör svängningen ut. Det är samma trappa av hela multipler som röntgenljuset sitter fast i.'
+    },
+    larare: {
+      moment: [
+        { label: 'Stående vågor i strängar', href: 'katalog.html?id=fy2-2.9' },
+        { label: 'Elektromagnetiska vågor och ljus', href: 'katalog.html?id=fy2-4.1' },
+        { label: 'Spektrallinjer', href: 'katalog.html?id=fy2-4.7' }
+      ],
+      fragor: [
+        'En sträng svänger bara vid bestämda frekvenser, och en gas sänder bara ut övertoner till drivlasern. Vad är det som är gemensamt i de två fallen, trots att det ena är en mekanisk våg och det andra elektromagnetisk strålning?',
+        'Övertonen av ordning q ändras q gånger så mycket som drivlasern. Varför blir det då lättare, inte svårare, att fylla luckan mellan två grannövertoner ju högre upp i serien man kommer?',
+        'Forskarna löste problemet i ett tidigare steg av kedjan än där det uppträdde. Kan du komma på fler exempel, i fysiken eller i vardagen, där det är enklare att ändra orsaken än verkan?'
+      ]
+    }
+  },
+
+  {
     id: "2026-09-21-vattnet-som-vagrar-bli-is",
     date: "2026-09-21",
     title: "Instängt mellan fettskikt vägrar vattnet bli is — det stelnar till glas i stället",

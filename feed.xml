@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Mon, 21 Sep 2026 01:22:42 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2026 04:41:26 GMT</lastBuildDate>
+    <item>
+      <title>Röntgenljus går bara att få i hela övertoner — nu har fysiker lärt sig glida mellan dem</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-22-rontgenljus-som-glider</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-22-rontgenljus-som-glider</guid>
+      <pubDate>Tue, 22 Sep 2026 04:00:00 GMT</pubDate>
+      <category>Optik</category>
+      <description>En kraftig laserpuls som fokuseras in i en gas får atomerna att sända ut röntgenljus, men bara vid bestämda frekvenser: hela multipler av laserns egen. Ligger den våglängd ett försök behöver mellan två sådana toner har apparaten hittills varit oanvändbar, och den som velat välja fritt har fått boka tid vid en acceleratoranläggning. Ett lag i Wien och San Diego har nu stämt om själva drivlasern, och kan för första gången fylla hela luckan mellan två grannövertoner.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-22-rontgenljus-som-glider.jpg" length="179305" type="image/jpeg"/>
+    </item>
     <item>
       <title>Instängt mellan fettskikt vägrar vattnet bli is — det stelnar till glas i stället</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-09-21-vattnet-som-vagrar-bli-is</link>
@@ -177,15 +186,6 @@
       <category>Relativitetsteori</category>
       <description>Ombord på den kinesiska rymdstationen har ett 37 kilo tungt laboratorium släppt två isotoper om och om igen. Någon skillnad i deras fall går inte att se, precis som Einstein förutsade.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-03-fallet-som-aldrig-tar-slut.jpg" length="341915" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Alla var överens om att det krävdes en laser — nu har vanligt solljus fått fotoner att flätas samman</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-02-solljuset-som-flatar-samman</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-02-solljuset-som-flatar-samman</guid>
-      <pubDate>Wed, 02 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Kvantfysik</category>
-      <description>Solljus är rörigt ljus: alla färger på en gång, alla riktningar, ingen ordning i tiden. Ändå har ett lag från Ottawa och Erlangen fått det att klyva fotoner inne i en kristall, och paren som kom ut klarade det test som skiljer kvantfysiken från all vardaglig fysik.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-02-solljuset-som-flatar-samman.jpg" length="53679" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

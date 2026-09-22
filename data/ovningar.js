@@ -18879,7 +18879,7 @@ Den första multipel som dyker upp i båda kolumnerna är 24.
         },
         {
             level: 2,
-            question: `Bestäm med primtalsfaktorisering den minsta gemensamma nämnaren (MGN) till 20 och 24.`,
+            question: `Bestäm den minsta gemensamma nämnaren (MGN) till 20 och 24 med primtalsfaktorisering.`,
             answer: { value: 120, unit: '' },
             solution: `Primtalsfaktorisera nämnarna, till exempel med faktorträd:
 
@@ -18929,7 +18929,7 @@ $$ \\frac{15}{24} = \\frac{15/3}{24/3} = \\frac{5}{8} $$
                 `$\\dfrac{2}{18}$`,
                 `$\\dfrac{11}{108}$`,
                 `$\\dfrac{1}{54}$`,
-                `$\\dfrac{198}{1944}$`,
+                `$\\dfrac{198}{1\\,944}$`,
             ],
             correct: 1,
             solution: `**Insikten:** en multipeltabell för 36 och 54 blir lång, men primtalsfaktoriseringen ger MGN direkt.
@@ -18944,7 +18944,7 @@ Eftersom $36 \\cdot 3 = 108$ och $54 \\cdot 2 = 108$ förlängs bråken med 3 re
 
 $$ \\frac{7}{36} - \\frac{5}{54} = \\frac{7 \\cdot 3}{36 \\cdot 3} - \\frac{5 \\cdot 2}{54 \\cdot 2} = \\frac{21}{108} - \\frac{10}{108} = \\frac{11}{108} $$
 
-11 är ett primtal som inte går jämnt upp i 108, så bråket går inte att förkorta. Att i stället multiplicera nämnarna ($36 \\cdot 54 = 1944$) ger $\\dfrac{198}{1944}$, som är samma tal men måste förkortas med 18 för att bli enklaste form.
+11 är ett primtal som inte går jämnt upp i 108, så bråket går inte att förkorta. Att i stället multiplicera nämnarna ($36 \\cdot 54 = 1\\,944$) ger $\\dfrac{198}{1\\,944}$, som är samma tal men måste förkortas med 18 för att bli enklaste form.
 
 **Svar:** $\\dfrac{11}{108}$`,
         },

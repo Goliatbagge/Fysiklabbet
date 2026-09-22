@@ -9595,7 +9595,7 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'Här har bara de gemensamma faktorerna tagits med. 10 är inte delbart med vare sig 20 eller 30, så det är ingen gemensam nämnare alls.',
-      'Här har alla faktorer från båda nämnarna tagits med, alltså produkten $20 \\cdot 30$. Det är en gemensam nämnare, men inte den minsta: tvåan och femman räknas två gånger i onödan.',
+      'Här har alla faktorer från båda nämnarna tagits med, alltså produkten $20 \\cdot 30$. Det är en gemensam nämnare, men inte den minsta: de gemensamma faktorerna 2 och 5 har tagits med från båda nämnarna, alltså en gång för mycket vardera.',
       'Varje primtal tas med så många gånger som det förekommer flest gånger i någon nämnare: tvåan två gånger (från 20), trean en gång och femman en gång. Det ger $60$, som är delbart med både 20 och 30.',
       '30 är inte delbart med 20. Tvåan förekommer två gånger i 20, så MGN måste innehålla två tvåor.',
     ],

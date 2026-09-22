@@ -198,9 +198,10 @@ $$
 
 Jämför med metod 2, att bara multiplicera nämnarna: $12 \cdot 18 = 216$.
 Det är också en gemensam nämnare, men sex gånger större än nödvändigt.
-Produkten $216 = 2 \cdot 2 \cdot 2 \cdot 3 \cdot 3 \cdot 3$ tar med de
-faktorer som 12 och 18 har gemensamt två gånger, och då blir täljarna
-onödigt stora och förkortningen i slutet onödigt jobbig.
+I produkten $216 = 2 \cdot 2 \cdot 2 \cdot 3 \cdot 3 \cdot 3$ finns de
+faktorer som 12 och 18 har gemensamt (en tvåa och en trea) med två gånger.
+Då blir täljarna onödigt stora och förkortningen i slutet onödigt
+omständlig.
 
 ::: formel "Hitta MGN med primtalsfaktorisering"
 1. Primtalsfaktorisera varje nämnare, till exempel med ett faktorträd.
@@ -223,8 +224,8 @@ ska vara.
 - **Att ta med alla faktorer från båda träden.** Då får du
   $2 \cdot 2 \cdot 3 \cdot 2 \cdot 3 \cdot 3 = 216$, alltså produkten
   av nämnarna. Det är en gemensam nämnare, men inte den minsta. Ett primtal
-  som finns i båda nämnarna ska bara räknas så många gånger som det
-  förekommer i den nämnare där det finns **flest**.
+  som finns i båda nämnarna räknas bara så många gånger som i den nämnare
+  där det förekommer **flest** gånger.
 - **Att bara ta med de faktorer som är gemensamma.** Då får du
   $2 \cdot 3 = 6$, och 6 är inte delbart med vare sig 12 eller 18. Det
   talet är i stället den största gemensamma delaren, som används när man

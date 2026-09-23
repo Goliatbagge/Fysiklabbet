@@ -21,7 +21,7 @@ olikhetstecken. Det finns flera olikhetstecken.
 | ≤ | mindre än eller lika med |
 | ≥ | större än eller lika med |
 
-Exempel: $3x - 4 = 2$ är en *ekvation*. $3x - 4 < 2$ är en *olikhet*.
+Exempel: $3x - 4 = 2$ är en <u>ekvation</u>. $3x - 4 < 2$ är en <u>olikhet</u>.
 :::
 
 Tolkningen av olikhetstecknen gäller om vi läser från vänster till höger.

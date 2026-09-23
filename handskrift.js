@@ -9739,8 +9739,8 @@
   }
 
   /* ---------------- scen: olikheter av andra graden (ma1c-2.11 ex 2) --
-   * a) x²<9 och b) x²>9. Metoden är en annan än för förstagradsolikheter:
-   * undersök GRÄNSEN (där x²=9) och avgör sedan med en tallinje vilket
+   * a) x²<4 och b) x²>4. Metoden är en annan än för förstagradsolikheter:
+   * undersök GRÄNSEN (där x²=4) och avgör sedan med en tallinje vilket
    * intervall som uppfyller olikheten. Gränserna ritas som ÖPPNA ringar,
    * eftersom likhet inte ingår. */
   function layoutAndragradsolikhet(cfg, F) {
@@ -9758,7 +9758,7 @@
       T.line([xb - 10, ty + 5], [xb, ty]);
       T.pause(120);
       for (var v = vMin; v <= vMax; v++) {
-        var big = (v % 3 === 0);
+        var big = (v % 2 === 0);
         T.line([xAt(v), ty - (big ? 6 : 4)], [xAt(v), ty + (big ? 6 : 4)]);
         if (big) {
           var txt = (v < 0 ? '−' + (-v) : '' + v);
@@ -9782,9 +9782,9 @@
       });
     }
 
-    /* ---- a) x²<9 ---- */
+    /* ---- a) x²<4 ---- */
     y = 74;
-    T.str('a) x^2<9', padL, y);
+    T.str('a) x^2<4', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -9794,72 +9794,72 @@
       [['leden är lika.']]
     ]);
     y += 2.4 * F;
-    T.str('Gränsen: x^2=9', padL + 30, y);
+    T.str('Gränsen: x^2=4', padL + 30, y);
     T.stepEnd();
 
     y += 2.4 * F;
     xx = T.str('x=±', padL + 30, y);
-    xx = T.rot('9', xx, y);
-    T.str('=±3', xx, y);
+    xx = T.rot('4', xx, y);
+    T.str('=±2', xx, y);
     T.stepEnd();
 
     tanke(y, [
       [['Nu ritar jag en tallinje']],
       [['och sätter ut gränserna']],
-      [['-3 och 3 som öppna']],
+      [['-2 och 2 som öppna']],
       [['ringar, för likhet ingår']],
       [['inte.']]
     ]);
     var ty1 = y + 2.9 * F;
     tallinje(ty1);
-    oppenRing(-3, ty1);
-    oppenRing(3, ty1);
+    oppenRing(-2, ty1);
+    oppenRing(2, ty1);
     T.stepEnd();
 
     tanke(ty1 + 25, [
       [['Vilka x gör x i kvadrat']],
-      [['mindre än 9?']],
-      [['Testa x=0: 0<9, stämmer.']],
-      [['Testa x=4: 16<9, stämmer']],
+      [['mindre än 4?']],
+      [['Testa x=0: 0<4, stämmer.']],
+      [['Testa x=3: 9<4, stämmer']],
       [['inte. Alltså talen MELLAN']],
       [['gränserna.']]
     ], 0.4);
     /* Markeringen ritas som tre tätt liggande blå drag CENTRERADE på
      * tallinjen, så att det blå bandet täcker grafitlinjen — ett enda
      * tunt streck ovanpå den syns knappt. */
-    markera(xAt(-3) + 9, xAt(3) - 9, ty1);
+    markera(xAt(-2) + 9, xAt(2) - 9, ty1);
     T.stepEnd();
 
     y = ty1 + 3.0 * F;
-    xe = T.str('Svar: -3<x<3', padL, y);
+    xe = T.str('Svar: -2<x<2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
-    /* ---- b) x²>9 ---- */
+    /* ---- b) x²>4 ---- */
     tanke(y, [
       [['Samma gräns, men nu vänd']],
       [['fråga: vilka x gör']],
-      [['x i kvadrat STÖRRE än 9?']]
+      [['x i kvadrat STÖRRE än 4?']]
     ]);
     y += 3.4 * F;
-    T.str('b) x^2>9', padL, y);
+    T.str('b) x^2>4', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('Gränsen: x=±3', padL + 30, y);
+    T.str('Gränsen: x=±2', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
-      [['Testa x=4: 16>9, stämmer.']],
-      [['Testa x=-4: 16>9, stämmer']],
-      [['också. Testa x=0: 0>9,']],
+      [['Testa x=3: 9>4, stämmer.']],
+      [['Testa x=-3: 9>4, stämmer']],
+      [['också. Testa x=0: 0>4,']],
       [['stämmer inte. Alltså']],
       [['talen UTANFÖR gränserna.']]
     ]);
     var ty2 = y + 2.9 * F;
     tallinje(ty2);
-    oppenRing(-3, ty2);
-    oppenRing(3, ty2);
+    oppenRing(-2, ty2);
+    oppenRing(2, ty2);
     T.stepEnd();
 
     /* strålarna utåt, med pilspets i vardera änden */
@@ -9867,19 +9867,19 @@
      * pilspets — annars hamnar två pilspetsar ovanpå varandra. (Strålarnas
      * pilspetsar är lösningsmängdens, inte axelns, och får därför peka åt
      * BÅDA håll — se REGEL i filhuvudet.) */
-    var xvA = xAt(-3) - 9, xvB = xAt(vMin) + 2;
+    var xvA = xAt(-2) - 9, xvB = xAt(vMin) + 2;
     markera(xvA, xvB, ty2);
     T.line([xvB + 11, ty2 - 6], [xvB, ty2], BLUE);
     T.line([xvB + 11, ty2 + 6], [xvB, ty2], BLUE);
     T.pause(260);
-    var xhA = xAt(3) + 9, xhB = xAt(vMax) - 2;
+    var xhA = xAt(2) + 9, xhB = xAt(vMax) - 2;
     markera(xhA, xhB, ty2);
     T.line([xhB - 11, ty2 - 6], [xhB, ty2], BLUE);
     T.line([xhB - 11, ty2 + 6], [xhB, ty2], BLUE);
     T.stepEnd();
 
     y = ty2 + 3.0 * F;
-    xe = T.str('Svar: x<-3 och x>3', padL, y);
+    xe = T.str('Svar: x<-2 och x>2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

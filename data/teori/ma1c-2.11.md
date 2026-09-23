@@ -14,7 +14,7 @@ likhetstecken, =. När två led är olika har vi en **olikhet** som skrivs med
 olikhetstecken. Det finns flera olikhetstecken.
 
 ::: formel "Olikhetstecken"
-| Tecken | Betydelse |
+| Tecken | Betydelse (läst från vänster till höger) |
 | --- | --- |
 | < | mindre än |
 | > | större än |

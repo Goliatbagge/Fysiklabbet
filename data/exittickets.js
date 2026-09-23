@@ -10979,7 +10979,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Kvadratroten kommer först i ETT senare steg, när ekvationen blivit $x^2 = 100\\ 000$.',
-      'Då försvinner nämnaren i exponenten: $(x^{2/5})^5 = x^2 = 10^5$, och sedan löses ekvationen som vanligt.',
+      'Då försvinner nämnaren i exponenten: $(x^{2/5})^5 = x^2 = 10^5$. Av $x = \\pm\\sqrt{100\\ 000}$ gäller sedan bara den positiva roten, eftersom bråk i exponenten kräver positivt $x$.',
       'Exponenten är ingen koefficient — division ändrar inte potensen.',
       'Multiplikation av leden ändrar bara talen, inte exponenten på $x$.',
     ],

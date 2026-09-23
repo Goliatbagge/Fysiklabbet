@@ -9285,17 +9285,49 @@
     T.underline(xe, y);
     T.stepEnd();
 
-    /* ---- e) x^(2/5)=10 ---- */
+    /* ---- e) x^(2/5)=10 ----
+     * BRÅK I EXPONENTEN KRÄVER POSITIVT x (användarkrav 2026-09-23,
+     * granskat mot läroböckernas konvention): x^(2/5) är bara definierat
+     * för positiva x, så svaret är x ≈ 316,23 utan ±. Först den direkta
+     * lösningen (upphöj till inversen 5/2), sedan den stegvisa via
+     * x² = 100 000, där den negativa roten stryks. */
     tanke(y, [
       [['Bråk i exponenten igen.']],
-      [['Jag upphöjer båda led till']],
-      [['nämnaren 5.']]
+      [['Jag upphöjer båda led']],
+      [['direkt till exponentens']],
+      [['invers, 5/2.']]
     ]);
     y += 3.4 * F;
     T.str('e) x^2^/^5=10', padL, y);
     T.stepEnd();
 
+    y += 2.0 * F;
+    T.str('Upphöjer båda led till inversen 5/2', padL + 30, y, null, 0.62);
+    y += 1.6 * F;
+    T.str('(x^2^/^5)^5^/^2=10^5^/^2', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten blir']],
+      [['2/5·5/2=1. Ett bråk i']],
+      [['exponenten går bara att']],
+      [['beräkna för positiva x,']],
+      [['så inget ± här.']]
+    ]);
     y += 2.4 * F;
+    T.str('x=10^5^/^2=316,227...≈316,23', padL + 30, y);
+    T.stepEnd();
+
+    /* ALTERNATIV LÖSNING: först nämnaren 5, sedan kvadratroten */
+    tanke(y, [
+      [['Det går också att först']],
+      [['upphöja båda led till']],
+      [['nämnaren 5.']]
+    ]);
+    y += 2.2 * F;
+    T.str('Alternativt: upphöjer båda led till nämnaren 5', padL + 30, y,
+          null, 0.62);
+    y += 1.6 * F;
     T.str('(x^2^/^5)^5=10^5', padL + 30, y);
     T.stepEnd();
 
@@ -9310,41 +9342,33 @@
     T.stepEnd();
 
     tanke(y, [
-      [['Exponenten 2 är jämn, så']],
-      [['± ska med.']]
+      [['Den ekvationen har två']],
+      [['lösningar, så ± ska med.']]
     ]);
     y += 2.5 * F;
     xx = T.str('x=±', padL + 30, y);
     xx = T.rot('100 000', xx + 9, y);
-    T.str('≈±316,23', xx, y);
+    T.str('=±316,227...', xx, y);
     T.stepEnd();
 
-    /* ALTERNATIV LÖSNING (användarkrav 2026-09-23): upphöj båda led
-     * direkt till exponentens invers 5/2, i ett steg. */
+    /* MOTIVERINGEN SKRIVS UT: strykningen av den negativa roten ska
+     * följa av något som står på arket, inte bara av en tankebubbla */
     tanke(y, [
-      [['Det går också i ett enda']],
-      [['steg: upphöj båda led']],
-      [['direkt till exponentens']],
-      [['invers, 5/2.']]
+      [['Men i den ursprungliga']],
+      [['ekvationen står x upphöjt']],
+      [['till ett bråk. Då måste x']],
+      [['vara positivt.']]
     ]);
-    y += 2.2 * F;
-    T.str('Alternativt: upphöjer båda led till inversen 5/2', padL + 30, y,
-          null, 0.62);
-    y += 1.6 * F;
-    T.str('(x^2^/^5)^5^/^2=10^5^/^2', padL + 30, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Exponenten blir']],
-      [['2/5·5/2=1. Täljaren 2']],
-      [['är jämn, så ± ska med.']]
-    ]);
-    y += 2.4 * F;
-    T.str('x=±10^5^/^2=±316,227...≈±316,23', padL + 30, y);
+    y += 2.0 * F;
+    T.str('Bråk i exponenten kräver positivt x, så', padL + 30, y, null, 0.62);
+    y += 1.15 * F;
+    T.str('den negativa lösningen stryks', padL + 30, y, null, 0.62);
+    y += 1.9 * F;
+    T.str('x≈316,23', padL + 30, y);
     T.stepEnd();
 
     y += 2.3 * F;
-    xe = T.str('Svar: x≈±316,23', padL, y);
+    xe = T.str('Svar: x≈316,23', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -9421,7 +9445,7 @@
     T.stepEnd();
 
     y += 2.5 * F;
-    xx = T.str('x=', padL + 30, y);
+    xx = T.str('x=±', padL + 30, y);
     T.rot('-50', xx + 9, y, 100);
     T.stepEnd();
 
@@ -9456,10 +9480,12 @@
     T.rot('-5', xx + 9, y, 99);
     T.stepEnd();
 
+    /* tecknet under rottecknet spelar ingen roll vid udda rot
+     * (användarkrav 2026-09-23) */
     y += 2.0 * F;
-    T.str('Udda rot och negativt värde under', padL + 30, y, null, 0.62);
+    T.str('Udda rot ⟹ alltid en lösning, vilket', padL + 30, y, null, 0.62);
     y += 1.15 * F;
-    T.str('rottecknet ⟹ en lösning', padL + 30, y, null, 0.62);
+    T.str('tecken talet under rottecknet än har', padL + 30, y, null, 0.62);
     T.stepEnd();
 
     y += 2.1 * F;

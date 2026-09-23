@@ -65,19 +65,22 @@ Att upphöja något till 2 kallas att **kvadrera**. Kvadrerar man $x$ får
 man alltså $x^2$, och kvadrerar man båda led i en ekvation upphöjer man
 båda leden till 2.
 
-**OBS!** Om exponenten är <u>jämn</u>, så skriv alltid ut $\pm$ framför
-rottecknet/potensen för att inte missa dubbla lösningar. Om exponenten är
-<u>udda</u> ska däremot $\pm$ inte skrivas ut.
+**OBS!** Om exponenten är ett <u>jämnt</u> heltal, så skriv alltid ut
+$\pm$ framför rottecknet/potensen för att inte missa dubbla lösningar. Om
+exponenten är ett <u>udda</u> heltal ska däremot $\pm$ inte skrivas ut.
+Regeln om $\pm$ gäller bara när exponenten är ett heltal. Är exponenten
+ett bråk eller ett decimaltal måste $x$ vara positivt, och då ska $\pm$
+inte skrivas ut.
 
 ::: formel "Antal lösningar till en potensekvation"
-En potensekvation $x^n = a$ med **jämn** exponent har
+En potensekvation $x^n = a$ där exponenten $n$ är ett **jämnt** heltal har
 
 - **två** lösningar om värdet under rottecknet är positivt, $a > 0$
 - **en** lösning om värdet under rottecknet är 0, $a = 0$
 - **ingen** lösning om värdet under rottecknet är negativt, $a < 0$.
 
-Med **udda** exponent har ekvationen alltid **en** lösning, oavsett vilket
-tecken $a$ har.
+Är $n$ ett **udda** heltal har ekvationen alltid **en** lösning, oavsett
+vilket tecken $a$ har.
 :::
 
 ::: exempel "Exempel 1 — Lös potensekvationerna"
@@ -159,8 +162,24 @@ $$
 
 **Svar:** $x = 16$
 
-**e)** Vi har återigen ett bråk i exponenten. Vi upphöjer båda led till
-exponentens nämnare 5:
+**e)** Vi har återigen ett bråk i exponenten. Vi upphöjer båda led
+direkt till exponentens invers $\dfrac{5}{2}$:
+
+$$
+\left(x^{2/5}\right)^{5/2} = 10^{5/2}
+$$
+
+Exponenten i vänsterledet blir $\dfrac{2}{5} \cdot \dfrac{5}{2} = 1$:
+
+$$
+x = 10^{5/2} = 316{,}227\ldots \approx 316{,}23
+$$
+
+(Inget ± eftersom en potens med bråk i exponenten bara går att beräkna
+för positiva $x$.)
+
+**Alternativ lösning:** Vi upphöjer först båda led till exponentens
+nämnare 5:
 
 $$
 \left(x^{2/5}\right)^5 = 10^5
@@ -170,27 +189,20 @@ $$
 x^2 = 100\,000
 $$
 
-Därefter löser vi ekvationen som vanligt:
+Den här ekvationen har två lösningar:
 
 $$
-x = \pm\sqrt{100\,000} = \pm 316{,}227\ldots \approx \pm 316{,}23
+x = \pm\sqrt{100\,000} = \pm 316{,}227\ldots
 $$
 
-**Alternativ lösning:** Vi upphöjer båda led direkt till exponentens
-invers $\dfrac{5}{2}$:
+Men i den ursprungliga ekvationen står $x$ upphöjt till ett bråk, och då
+måste $x$ vara positivt. Den negativa lösningen stryks därför:
 
 $$
-\left(x^{2/5}\right)^{5/2} = 10^{5/2}
+x \approx 316{,}23
 $$
 
-Exponenten i vänsterledet blir $\dfrac{2}{5} \cdot \dfrac{5}{2} = 1$.
-Täljaren 2 i exponenten är jämn, så $\pm$ ska med:
-
-$$
-x = \pm 10^{5/2} = \pm 316{,}227\ldots \approx \pm 316{,}23
-$$
-
-**Svar:** $x \approx \pm 316{,}23$
+**Svar:** $x \approx 316{,}23$
 :::
 :::
 
@@ -223,20 +235,20 @@ $$
 **c)** Jämn exponent och negativt högerled:
 
 $$
-x = \sqrt[100]{-50}
+x = \pm\sqrt[100]{-50}
 $$
 
 Jämn rot och negativt värde under rottecknet ⟹ saknar lösning.
 
 **Svar:** Saknar lösningar
 
-**d)** Udda exponent och negativt högerled:
+**d)** Udda exponent:
 
 $$
 x = \sqrt[99]{-5}
 $$
 
-Udda rot och negativt värde under rottecknet ⟹ en lösning.
+Udda rot ⟹ alltid en lösning, vilket tecken talet under rottecknet än har.
 
 **Svar:** En lösning
 :::
@@ -269,9 +281,9 @@ Udda rot och negativt värde under rottecknet ⟹ en lösning.
 ::: sampunkt "Arbetsgång"
 1. Få potensen **ensam** i ena ledet.
 2. Upphöj båda led till exponentens invers.
-3. Sätt $\pm$ om exponenten är jämn.
-- Bråkexponent: $x^{2/5} = 10$ löses genom att upphöja till
-  $\dfrac{5}{2}$. Nämnaren 5 är udda, men täljaren 2 är jämn, så svaret
-  får $\pm$.
+3. Sätt $\pm$ om exponenten är ett jämnt heltal.
+- Bråkexponent: $x^{2/5} = 10$ löses genom att upphöja båda led till
+  $\dfrac{5}{2}$. Med bråk eller decimaltal i exponenten måste $x$ vara
+  positivt, så svaret får inget $\pm$.
 :::
 :::

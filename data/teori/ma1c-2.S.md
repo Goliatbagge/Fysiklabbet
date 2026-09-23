@@ -89,8 +89,9 @@ $$
 x^n = a \implies x = a^{1/n} = \sqrt[n]{a}
 $$
 
-där jämn exponent $n$ ger $\pm$ framför roten (två, en eller noll
-lösningar) och udda exponent ger en lösning utan $\pm$.
+där ett jämnt heltal $n$ ger $\pm$ framför roten (två, en eller noll
+lösningar) och ett udda heltal ger en lösning utan $\pm$. Med bråk eller
+decimaltal i exponenten måste $x$ vara positivt, och då skrivs inget $\pm$.
 
 **Olikheter**
 

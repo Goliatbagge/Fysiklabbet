@@ -369,7 +369,7 @@ window.BEGREPP = [
   {
     id: 'kavitet',
     term: 'Kavitet',
-    former: ['kavitet', 'kaviteten', 'kaviteter', 'kaviteterna', 'mörk kavitet', 'resonator', 'resonatorn', 'ringresonator', 'ringresonatorn', 'terahertzresonator', 'terahertzresonatorn'],
+    former: ['kavitet', 'kaviteten', 'kaviteter', 'kaviteterna', 'mörk kavitet', 'resonator', 'resonatorn', 'ringresonator', 'ringresonatorn', 'terahertzresonator', 'terahertzresonatorn', 'spegelkavitet', 'spegelkaviteten', 'mekanisk resonator', 'mekaniska resonatorn', 'mekaniska resonatorer'],
     kort: 'Ett litet inneslutet utrymme mellan speglar eller metallytor där bara vissa våglängder passar in. Kaviteten bestämmer därmed vilka elektromagnetiska svängningar som alls kan finnas i den.',
     relaterade: ['vakuumfluktuation', 'laser', 'metamaterial', 'terahertzstralning'],
     body: [
@@ -2598,6 +2598,18 @@ window.BEGREPP = [
       { type: 'p', html: 'Har en atomkärna för många neutroner i förhållande till protoner kan den rätta till obalansen genom att göra om en neutron till en proton. Ut ur kärnan skickas då en elektron och en antineutrino. Kärnan flyttar ett steg uppåt i det periodiska systemet, men antalet kärnpartiklar är oförändrat, så kol-14 blir kväve-14. Med för många protoner går det åt andra hållet: en proton blir en neutron, och ut kommer en positron och en neutrino. De utkastade elektronerna kallades betastrålning långt innan någon visste att de var elektroner.' },
       { type: 'p', html: 'Betasönderfallet gav upphov till en av fysikhistoriens största gåtor. Vid alfasönderfall får partikeln alltid samma energi, som väntat när något delar sig i två delar. Vid betasönderfall varierade elektronens energi i stället slumpmässigt upp till ett tak, och energi tycktes helt enkelt försvinna. Niels Bohr var beredd att offra energiprincipen. Wolfgang Pauli föreslog 1930 den mindre drastiska lösningen: att det följde med en tredje partikel som var oladdad, nästan masslös och därför osynlig för alla detektorer. Neutrinon påvisades experimentellt först ett kvartssekel senare.' },
       { type: 'p', html: 'Sönderfallet drivs av den svaga växelverkan, den enda kraft som kan byta sort på en kvark. Eftersom den kraften verkar så sällan går processen långsamt: en fri neutron lever i genomsnitt en kvart innan den blir en proton, medan reaktioner som styrs av den starka kraften är över på ofattbart mycket kortare tid. Trögheten är avgörande för oss. Det första steget i solens fusionskedja är just ett betasönderfall, och det är därför solen brinner i miljarder år i stället för att explodera. Betapartiklar är dessutom lättare att skärma av än gammastrålning men går längre än alfapartiklar: några millimeter aluminium räcker.' }
+    ]
+  },
+  {
+    id: 'kvantsprang',
+    term: 'Kvantsprång',
+    former: ['kvantsprång', 'kvantsprånget', 'kvantsprången', 'kvanthopp', 'kvanthoppet', 'kvanthoppen', 'kvanthoppande', 'kvanthoppandet'],
+    kort: 'Att ett litet system byter energitillstånd utan att passera något läge däremellan. Skiftet sker på en gång, och tidpunkten går inte att räkna ut i förväg.',
+    relaterade: ['fonon', 'qubit', 'dekoherens', 'foton'],
+    body: [
+      { type: 'p', html: 'Tänk dig en trappa utan lutande plan. Den som ska upp eller ner står antingen på ett steg eller på ett annat, aldrig halvvägs. Så beter sig energin hos små system: en elektron i en atom, en svängande struktur på ett chip, ljuset i ett hålrum mellan två speglar. De kan bara ha vissa bestämda energier, och när energin ändras sker det som ett hopp mellan två av dem. Att hoppet kallas språng är alltså inte en bild för något dramatiskt, utan en beskrivning av att mellanlägena inte finns.' },
+      { type: 'p', html: 'Det mest överraskande är när. Ett system som ligger på ett högre steg har samma chans att falla ner under varje sekund det väntar, oavsett hur länge det redan har legat där. Man kan därför räkna ut en genomsnittlig livslängd över många försök, men aldrig säga i förväg vilken sekund just det här systemet ska hoppa. Radioaktiva atomkärnor beter sig på precis samma sätt, och det är därför halveringstiden gäller för en stor mängd kärnor men inte säger något alls om en enskild kärna.' },
+      { type: 'p', html: 'Niels Bohr lade in sådana språng i sin atommodell redan 1913, och tanken blev genast omstridd: Erwin Schrödinger hoppades in i det sista att de skulle visa sig vara en illusion som följde av att man mätte på miljarder atomer samtidigt. Frågan avgjordes först när tekniken hann ifatt och enstaka system kunde hållas isolerade och avlästa gång på gång. Sprången har därefter setts hos enskilda joner i en fälla, hos ljus i en spegelkavitet och hos mekaniska svängningar i nedkylda kretsar. För den som bygger kvantdatorer är de inte bara en kuriositet: ser man ögonblicket då en energiportion försvinner går felet att upptäcka medan beräkningen pågår.' }
     ]
   },
   {

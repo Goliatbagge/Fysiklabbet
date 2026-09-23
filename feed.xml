@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Tue, 22 Sep 2026 04:41:26 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 23 Sep 2026 01:23:32 GMT</lastBuildDate>
+    <item>
+      <title>Den sista tonen klingar inte av — den slocknar i ett enda hopp</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-23-tonen-som-slocknar-i-ett-hopp</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-23-tonen-som-slocknar-i-ett-hopp</guid>
+      <pubDate>Wed, 23 Sep 2026 04:00:00 GMT</pubDate>
+      <category>Kvantfysik</category>
+      <description>En stämgaffel som slagits an tystnar långsamt, och det verkar självklart att energin rinner ur den droppe för droppe. Längst ner på skalan gör den inte det. Ett lag vid Stanford har byggt en mikroskopisk stämgaffel som ringer i två tusendels sekund, satt en supraledande qubit att lyssna på den hundratals gånger under tiden, och sett den allra sista skakningsportionen försvinna på en gång, vid en tidpunkt som inte gick att förutsäga. Kvantsprång har observerats hos joner och hos ljus. Nu också hos ljud.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-23-tonen-som-slocknar-i-ett-hopp.jpg" length="408481" type="image/jpeg"/>
+    </item>
     <item>
       <title>Röntgenljus går bara att få i hela övertoner — nu har fysiker lärt sig glida mellan dem</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-09-22-rontgenljus-som-glider</link>
@@ -177,15 +186,6 @@
       <category>Vågor</category>
       <description>Två oceanografer i Kalifornien har låtit en dator bryta trettio vågor över olika sjöbottnar. Ur resultatet föll ett enda tal ut som avgör hur stor tunneln blir, hur tjock vattenstrålen från krönet är och hur vågen lutar när den slår igen.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-04-bottnen-formar-vagen.jpg" length="291749" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Två sorters rubidium har fallit sida vid sida i 280 dygn — och ingen av dem kom först</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-03-fallet-som-aldrig-tar-slut</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-03-fallet-som-aldrig-tar-slut</guid>
-      <pubDate>Thu, 03 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Relativitetsteori</category>
-      <description>Ombord på den kinesiska rymdstationen har ett 37 kilo tungt laboratorium släppt två isotoper om och om igen. Någon skillnad i deras fall går inte att se, precis som Einstein förutsade.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-03-fallet-som-aldrig-tar-slut.jpg" length="341915" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

@@ -103,6 +103,76 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-23-tonen-som-slocknar-i-ett-hopp",
+    date: "2026-09-23",
+    title: "Den sista tonen klingar inte av — den slocknar i ett enda hopp",
+    deck: "En stämgaffel som slagits an tystnar långsamt, och det verkar självklart att energin rinner ur den droppe för droppe. Längst ner på skalan gör den inte det. Ett lag vid Stanford har byggt en mikroskopisk stämgaffel som ringer i två tusendels sekund, satt en supraledande qubit att lyssna på den hundratals gånger under tiden, och sett den allra sista skakningsportionen försvinna på en gång, vid en tidpunkt som inte gick att förutsäga. Kvantsprång har observerats hos joner och hos ljus. Nu också hos ljud.",
+    category: "Kvantfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-23-tonen-som-slocknar-i-ett-hopp.jpg",
+    imageAlt: "Tre forskare i heltäckande vita renrumsdräkter och munskydd står lutade över den nedre delen av en kryostat. Ur en ställning av guldfärgade plattor hänger kretskort med färgade kablar, och en av forskarna håller i konstruktionen med handskklädda händer.",
+    imageCredit: "Foto: FMN Laboratory, via Wikimedia Commons (CC BY 4.0). Bilden visar hur ett lag monterar den kalla delen av en kryostat där supraledande kretsar kyls till nära absoluta nollpunkten. Det är samma sorts utrustning som försöket kräver, men bilden är inte tagen i den beskrivna studien.",
+    tags: ["kvantfysik", "fonon", "ljud", "svängningar", "energinivåer", "kvantisering", "qubit", "supraledning", "mekanisk resonator", "kvantsprång", "mätning"],
+    sources: [
+      { name: "Stanford Report: Researchers observe first real-time quantum jump in sound", url: "https://news.stanford.edu/stories/2026/09/first-real-time-quantum-jump-sound" },
+      { name: "Phys.org: Real-time quantum jump in sound observed for first time", url: "https://phys.org/news/2026-09-real-quantum.html" },
+      { name: "ScienceDaily: For the first time, scientists watch sound jump between quantum states (22 september 2026)", url: "https://www.sciencedaily.com/releases/2026/09/260921081054.htm" },
+      { name: "Discover Magazine: Scientists catch sound making a quantum jump with a microscopic tuning fork", url: "https://www.discovermagazine.com/scientists-catch-sound-making-a-quantum-jump-with-a-microscopic-tuning-fork-49708" }
+    ],
+    research: {
+      citation: "Takuma Makihara, Erik Szakiel med flera, Stanford University, publicerad i Science 393 (6817), sidan 1217, 2026",
+      url: "https://doi.org/10.1126/science.aeh7535"
+    },
+    body: [
+      { type: 'p', html: 'Slå an en stämgaffel och håll den mot örat. Tonen är stark till att börja med, blir svagare och svagare, och tonar till sist bort helt. Ingenting i förloppet ser hoppigt ut. Energin verkar rinna ur gaffeln i en jämn ström, lite i taget, tills det inte finns något kvar att höra.' },
+      { type: 'p', html: 'Den bilden håller ända tills man kommer ner till den allra sista portionen. Där försvinner den inte gradvis. Den finns, och så finns den inte, och skiftet sker i ett enda ögonblick som ingen kan säga på förhand när det kommer. Ett lag vid Stanford har nu följt det förloppet medan det pågick, och rapporterar resultatet i tidskriften Science.' },
+
+      { type: 'h2', text: 'Skakning i hela portioner' },
+      { type: 'p', html: 'Att energi kommer i bestämda portioner är kvantfysikens grundtanke. För ljus heter portionen foton, och dess storlek ges av $E = h \\cdot f$, där $h$ är Plancks konstant och $f$ frekvensen. Exakt samma sak gäller för mekanisk svängning i ett fast material. Där kallas portionen fonon, och den är inte en liten partikel som far genom materialet utan en gemensam skakning hos ofantligt många atomer på en gång.' },
+      { type: 'p', html: 'Anledningen till att ingen märker portionerna i vardagen är att de är löjligt små. En kammarton vid 440&nbsp;Hz ger $E = h \\cdot f \\approx 2{,}9 \\cdot 10^{-31}\\ \\mathrm{J}$ per fonon. Slår man an gaffeln så försiktigt att svängningsenergin bara är en miljondels joule sitter det ändå ungefär 3&nbsp;·&nbsp;10<sup>24</sup> fononer i den, alltså fler än det finns sandkorn på jordens alla stränder. Att en enda av dem lämnar gaffeln går inte att höra, och tonen som dör bort är medelvärdet av att ofattbart många gör det.' },
+      { type: 'p', html: 'Vill man se ett enskilt hopp måste man därför komma ner till en svängning som bara innehåller en enda portion. Det kräver två saker samtidigt: en resonator som svänger så snabbt att portionen blir stor, och en omgivning som är så kall att värmen inte hela tiden knuffar in nya portioner. Supraledande kretsar arbetar i mikrovågsområdet, några miljarder svängningar i sekunden, och kyls i en kryostat till hundradels grader över absoluta nollpunkten. Med sådana värden blir portionen $h \\cdot f$ åtskilliga gånger större än den typiska värmeenergin $k \\cdot T$, och då står resonatorn still nästan hela tiden av sig själv.' },
+
+      { type: 'h2', text: 'En stämgaffel som ringer i två millisekunder' },
+      { type: 'p', html: 'Själva resonatorn är tillverkad med samma metoder som datorchip och beskrivs av forskarna som en mikroskopisk stämgaffel. Det avgörande måttet är hur länge den ringer: två tusendels sekund. Det låter kort, men räknat i antal svängningar motsvarar det flera timmars efterklang hos en stämgaffel i vanlig storlek. Just den långa efterklangen är vad som gör försöket möjligt, för den ger tid att göra hundratals avläsningar innan skakningen är borta.' },
+      { type: 'quote', html: 'Kvantversionen liknar mer en extremt liten stämgaffel där den sista enheten av svängning, om man kunde mäta dess energi direkt, ligger kvar en slumpmässig stund och sedan försvinner på en gång.', cite: 'Amir Safavi-Naeini, docent i tillämpad fysik vid Stanford' },
+      { type: 'p', html: 'Bredvid resonatorn sitter en supraledande qubit, en krets som normalt används som minnescell i kvantdatorer. Här får den en annan roll: den fungerar som detektor. Kopplingen mellan kretsen och den svängande strukturen är gjord så att qubiten kan läsa av om skakningen innehåller en portion eller ingen alls, utan att slå ut den i samma veva. Att bygga ihop de två delarna utan att någon av dem försämrades var enligt laget den svåraste biten.' },
+      { type: 'quote', html: 'Vi fick hela tiden utveckla nya tillverkningssteg för att först få fram det här extremt långlivade, svängande föremålet och sedan foga ihop det med qubiten.', cite: 'Takuma Makihara, Stanford, en av studiens två förstaförfattare' },
+
+      { type: 'h2', text: 'Ett hopp, inte en nedförsbacke' },
+      { type: 'p', html: 'När mätningen upprepas hundratals gånger under de två millisekunderna framträder ett mönster som är lätt att beskriva och omöjligt att förklara klassiskt. Svaret är ett, ett, ett, ett — och så plötsligt noll, varefter det förblir noll. Ingen avläsning fångar ett mellanläge. Skakningen halveras aldrig, den byter tillstånd.' },
+      { type: 'p', html: 'När hoppet inträffar går inte att räkna ut i förväg. Däremot är sannolikheten per tidsenhet densamma hela tiden, precis som för en radioaktiv atomkärna: kärnan blir inte mer benägen att sönderfalla för att den väntat länge, och den genomsnittliga livslängden säger ingenting om det enskilda fallet. De två tusendels sekunderna är alltså ett medelvärde över många försök, inte en tid som varje enskild fonon lever.' },
+      { type: 'p', html: 'Att det skulle vara så har varit teorins besked i över hundra år. Niels Bohr byggde 1913 sin atommodell på att elektronen byter energinivå i ett enda språng, utan att passera däremellan, och Erwin Schrödinger ogillade tanken så starkt att han enligt Werner Heisenbergs återgivning ska ha sagt att om detta förbannade kvanthoppande blir kvar ångrar han att han över huvud taget befattade sig med kvantteorin. Hoppen syntes första gången hos enskilda joner i en fälla 1986, och hos ljus i en spegelkavitet 2007. Nu står ljudet på tur.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'En fonon är inte en liten kula som färdas genom materialet. Den är den minsta möjliga ökningen av en gemensam svängning hos miljarder atomer som sitter kvar på sina platser i gittret.',
+        'Ordet kvantsprång betyder i vardagsspråket ett jättekliv framåt. I fysiken är det tvärtom namnet på den minsta förändring som alls är möjlig.',
+        'Mekaniska resonatorer som svänger miljarder gånger i sekunden finns redan i fickan på de flesta: filtren som sorterar ut rätt radiokanal i en mobiltelefon bygger på ljudvågor i ett tunt kristallskikt, inte på elektriska kretsar.'
+      ] },
+
+      { type: 'h2', text: 'Vad hoppen ska användas till' },
+      { type: 'p', html: 'Det närmaste målet är felrättning i kvantdatorer. En beräkning förstörs av att tillstånden tappas bort under tiden, och kan man se i det ögonblick en portion energi försvinner går felet att upptäcka medan det sker i stället för att upptäckas efteråt. Laget pekar också mot mätning: en svängande struktur som reagerar på en enda portion är ett känsligt instrument, och forskarna nämner att kunna identifiera enskilda proteiner inuti en cell som ett långsiktigt mål.' },
+      { type: 'quote', html: 'Vi har sett att svängande föremål kan uppvisa kvantbeteende, vilket är förutsättningen för många av de operationer som kvantberäkning och kvantmätning kräver.', cite: 'Amir Safavi-Naeini' },
+      { type: 'p', html: 'Kvar står ändå det som är mest slående med resultatet. Ljud är det mest handgripliga av alla fysikaliska fenomen, något man känner i bröstkorgen på en konsert, och det består av miljarder atomer som knuffar varandra. Att också den rörelsen räknas i hela portioner, och att den sista portionen försvinner i ett enda hopp, har varit en förutsägelse på papper. Nu finns den som en mätserie.' }
+    ],
+    simulering: {
+      href: 'fysik2-energinivaer.html',
+      name: 'Energinivåer i väteatomen',
+      text: 'Flytta elektronen mellan väteatomens energinivåer och se att den aldrig befinner sig däremellan: den hoppar, och skillnaden i energi lämnar atomen som en foton. Det är samma sorts hopp som nu har fångats hos en svängande struktur, fast med en fonon i stället för en foton.'
+    },
+    larare: {
+      moment: [
+        { label: 'Bohrs atommodell och energinivåer', href: 'katalog.html?id=fy2-4.8' },
+        { label: 'Fotoelektrisk effekt', href: 'katalog.html?id=fy2-4.5' },
+        { label: 'Harmonisk svängning', href: 'katalog.html?id=fy2-2.3' }
+      ],
+      fragor: [
+        'Räkna ut energin hos en fonon i en stämgaffel vid 440 Hz och hos en fonon i en resonator vid 5 GHz. Hur många gånger större är den senare, och varför är det skillnaden som avgör om ett enskilt hopp går att se?',
+        'Varför måste försöket kylas till några tusendels grader över absoluta nollpunkten? Jämför portionen h · f med värmeenergin k · T och resonera om vad som händer om temperaturen höjs.',
+        'Livslängden två millisekunder är ett medelvärde, och det enskilda hoppet kommer slumpmässigt. Vilket annat förlopp i fysiken beter sig på exakt samma sätt, och vad har de två gemensamt?'
+      ]
+    }
+  },
+  {
     id: "2026-09-22-rontgenljus-som-glider",
     date: "2026-09-22",
     title: "Röntgenljus går bara att få i hela övertoner — nu har fysiker lärt sig glida mellan dem",

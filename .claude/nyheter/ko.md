@@ -20,13 +20,19 @@ Format per post:
   https://phys.org/news/2026-09-mobile-antiprotons-road-month-world.html
   (tillagd 2026-09-17)
 
-- **Ljudets kvantsprång fångat medan det sker** — ett lag rapporterar den första realtidsobservationen av ett
-  kvantsprång i en mekanisk svängning, alltså att en resonator byter energinivå steg för steg i stället för
-  kontinuerligt. Ingång: energinivåer, kvantisering, svängningar och fononer. Kontrollera temperatur, vilken
-  resonator det gäller och om övergångarna är direkt observerade eller slutna ur statistik. OBS: kvantfysik är
-  väl representerat, låt det gå tid. Källa (Phys.org 2026-09-17):
-  https://phys.org/news/2026-09-real-quantum.html
-  (tillagd 2026-09-22)
+- **Kärnspinnen som förlänger sammanflätningen 240 gånger, i rumstemperatur** — ett lag vid University of
+  Science and Technology of China rapporterar att ett byte av kärnspinn förlänger livslängden hos ett
+  sammanflätat tillstånd i ett fast material upp till 240 gånger, utan nedkylning. Ingång: spinn,
+  kvantsammanflätning och varför dekoherens annars går så fort. Kontrollera vad ”upp till” avser och i
+  vilket material. OBS: kvantfysik är väl representerat — låt det gå tid. Källa (Phys.org 2026-09-21):
+  https://phys.org/news/2026-09-nuclear-swap-room-temperature-entanglement.html
+  (tillagd 2026-09-23)
+
+- **Spinnkedjan byggd molekyl för molekyl** — forskare har satt ihop en kristall av organiska magnetiska
+  molekyler och därmed förverkligat en klassisk modellmagnet som hittills mest levt på papper. Ingång:
+  magnetism, spinn och vad en fysikalisk modell är. Källa (Physics, APS, 2026-09-22):
+  https://link.aps.org/doi/10.1103/Physics.19.s121
+  (tillagd 2026-09-23)
 
 - **Virveln i vattenhinken avgör frågan om kvantturbulens** — ett bordsexperiment med en helt klassisk
   vattenvirvel stöder en decennier gammal teori för hur turbulens dör ut i kvantvätskor. Ingång: turbulens,

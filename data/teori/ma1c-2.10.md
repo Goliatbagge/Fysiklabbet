@@ -171,6 +171,20 @@ $$
 x = \pm\sqrt{100\,000} = \pm 316{,}227\ldots \approx \pm 316{,}23
 $$
 
+**Alternativ lösning:** Vi upphöjer båda led direkt till exponentens
+invers $\dfrac{5}{2}$:
+
+$$
+\left(x^{2/5}\right)^{5/2} = 10^{5/2}
+$$
+
+Exponenten i vänsterledet blir $\dfrac{2}{5} \cdot \dfrac{5}{2} = 1$.
+Täljaren 2 i exponenten är jämn, så $\pm$ ska med:
+
+$$
+x = \pm 10^{5/2} = \pm 316{,}227\ldots \approx \pm 316{,}23
+$$
+
 **Svar:** $x \approx \pm 316{,}23$
 :::
 :::
@@ -194,8 +208,10 @@ $$
 **b)** Jämn exponent men högerledet är 0:
 
 $$
-x = \sqrt[4]{0} = 0
+x = \pm\sqrt[4]{0} = 0
 $$
+
+(± skrivs ut eftersom exponenten är jämn, men $+0$ och $-0$ är samma tal.)
 
 **Svar:** En lösning
 

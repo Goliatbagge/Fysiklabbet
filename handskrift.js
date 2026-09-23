@@ -9285,8 +9285,32 @@
     ]);
     y += 2.5 * F;
     xx = T.str('x=±', padL + 30, y);
-    xx = T.rot('100 000', xx, y);
+    xx = T.rot('100 000', xx + 9, y);
     T.str('≈±316,23', xx, y);
+    T.stepEnd();
+
+    /* ALTERNATIV LÖSNING (användarkrav 2026-09-23): upphöj båda led
+     * direkt till exponentens invers 5/2, i ett steg. */
+    tanke(y, [
+      [['Det går också i ett enda']],
+      [['steg: upphöj båda led']],
+      [['direkt till exponentens']],
+      [['invers, 5/2.']]
+    ]);
+    y += 2.2 * F;
+    T.str('Alternativt: upphöjer båda led till inversen 5/2', padL + 30, y,
+          null, 0.62);
+    y += 1.6 * F;
+    T.str('(x^2^/^5)^5^/^2=10^5^/^2', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten blir']],
+      [['2/5·5/2=1. Täljaren 2']],
+      [['är jämn, så ± ska med.']]
+    ]);
+    y += 2.4 * F;
+    T.str('x=±10^5^/^2=±316,227...≈±316,23', padL + 30, y);
     T.stepEnd();
 
     y += 2.3 * F;
@@ -9328,17 +9352,24 @@
 
     /* ---- b) x⁴=0 ---- */
     tanke(y, [
-      [['Jämn exponent, men']],
-      [['högerledet är 0. Och 0 har']],
-      [['ingen negativ motsvarighet']],
-      [['bara 0 självt.']]
+      [['Jämn exponent igen, men']],
+      [['nu är högerledet 0.']]
     ]);
     y += 3.4 * F;
     T.str('b) x^4=0', padL, y);
     T.stepEnd();
 
+    /* ± SKRIVS UT ÄVEN HÄR (användarkrav 2026-09-23): jämn exponent ger
+     * alltid ± framför roten, så att arbetsgången är densamma i varje
+     * uppgift. Svaret blir ändå bara 0, utan ±. */
+    tanke(y, [
+      [['Exponenten 4 är jämn, så']],
+      [['jag skriver ± som vanligt.']],
+      [['Men +0 och -0 är samma']],
+      [['tal, så svaret blir bara 0.']]
+    ]);
     y += 2.5 * F;
-    xx = T.str('x=', padL + 30, y);
+    xx = T.str('x=±', padL + 30, y);
     xx = T.rot('0', xx + 9, y, 4);
     T.str('=0', xx, y);
     T.stepEnd();

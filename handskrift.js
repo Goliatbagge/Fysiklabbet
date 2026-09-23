@@ -9230,9 +9230,8 @@
       [['Nu står ett BRÅK i']],
       [['exponenten. Då börjar jag']],
       [['med att bli av med']],
-      [['nämnaren: upphöj båda led']],
-      [['till 2, det vill säga']],
-      [['KVADRERA båda led.']]
+      [['nämnaren 2, så jag']],
+      [['kvadrerar båda led.']]
     ]);
     y += 3.4 * F;
     T.str('d) x^1^/^2=4', padL, y);

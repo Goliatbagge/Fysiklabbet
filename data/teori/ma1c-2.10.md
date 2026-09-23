@@ -61,6 +61,10 @@ x = \sqrt[n]{a}
 $$
 :::
 
+Att upphöja något till 2 kallas att **kvadrera**. Kvadrerar man $x$ får
+man alltså $x^2$, och kvadrerar man båda led i en ekvation upphöjer man
+båda leden till 2.
+
 **OBS!** Om exponenten är <u>jämn</u>, så skriv alltid ut $\pm$ framför
 rottecknet/potensen för att inte missa dubbla lösningar. Om exponenten är
 <u>udda</u> ska däremot $\pm$ inte skrivas ut.
@@ -142,9 +146,8 @@ $$
 **Svar:** $x \approx 3{,}85$
 
 **d)** När vi har bråk i exponenten börjar vi med att få bort *nämnaren* i
-exponenten genom att upphöja båda led till den, i det här fallet med 2.
-Att upphöja något till 2 kallas att **kvadrera**, så här kvadrerar vi
-båda led:
+exponenten genom att upphöja båda led till den. Här är nämnaren 2, så vi
+kvadrerar båda led:
 
 $$
 \left(x^{1/2}\right)^2 = 4^2
@@ -246,6 +249,7 @@ Udda rot och negativt värde under rottecknet ⟹ en lösning.
   som $x^n = a$.
 - Förväxla den inte med en exponentialekvation, där variabeln står i
   exponenten.
+- Att **kvadrera** är att upphöja till 2.
 :::
 
 ::: sampunkt "Två sätt att lösa"

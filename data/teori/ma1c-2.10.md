@@ -142,7 +142,9 @@ $$
 **Svar:** $x \approx 3{,}85$
 
 **d)** När vi har bråk i exponenten börjar vi med att få bort *nämnaren* i
-exponenten genom att upphöja båda led till den, i det här fallet med 2:
+exponenten genom att upphöja båda led till den, i det här fallet med 2.
+Att upphöja något till 2 kallas att **kvadrera**, så här kvadrerar vi
+båda led:
 
 $$
 \left(x^{1/2}\right)^2 = 4^2

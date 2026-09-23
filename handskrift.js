@@ -9231,7 +9231,8 @@
       [['exponenten. Då börjar jag']],
       [['med att bli av med']],
       [['nämnaren: upphöj båda led']],
-      [['till 2.']]
+      [['till 2, det vill säga']],
+      [['KVADRERA båda led.']]
     ]);
     y += 3.4 * F;
     T.str('d) x^1^/^2=4', padL, y);

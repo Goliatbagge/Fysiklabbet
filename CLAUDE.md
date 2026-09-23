@@ -480,6 +480,13 @@ Så här bygger du scenen:
    stannar med noten kvar, och vid nästa klick tonar den ut, nästa regel
    tonar in och nästa led skrivs (användarkrav 2026-09-20, referens: NP
    Ma 2c VT 2018 uppgift 4b).
+3k. **Olikhetstecknet vänds: blå OBS-not.** Varje gång en olikhet
+   multipliceras eller divideras med ett negativt tal poppar den blå
+   regelnoten "OBS! Vänd olikhetstecknet!" upp till höger om raden där
+   det vända tecknet skrivs, i båda redovisningslägena, och tonar ut vid
+   nästa klick (användarkrav 2026-09-23, `regelNotT` +
+   `OLIKHET_VAND_TEXT` i `handskrift.js`, referens: `ma1c-2.11`
+   exempel 1b).
 3d. **Roten ur båda led som egen rad.** `x² = 9` → `x = ±√9` → `x = ±3`,
    aldrig direkt till `±3` (användarkrav 2026-09-20). De svagaste eleverna
    ska kunna följa varje steg. Gäller pennlösning och textlösning;

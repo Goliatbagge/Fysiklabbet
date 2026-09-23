@@ -528,6 +528,15 @@
  * Likformiga trianglar) skrivs som förut som liten grå rubrik (REGEL
  * INLEDANDE MOTIVERING).
  *
+ * REGEL (OLIKHETSTECKNET VÄNDS, användarkrav 2026-09-23): varje gång en
+ * olikhet multipliceras eller divideras med ett NEGATIVT tal poppar en
+ * blå regelnot upp, 'OBS! Vänd olikhetstecknet!' (OLIKHET_VAND_TEXT),
+ * till höger om raden där det vända tecknet skrivs: i "Båda led" bråk-
+ * raden med det blå vända tecknet, vid väggen raden efter väggsteget.
+ * Noten står kvar när pennan stannar och tonar ut vid nästa klick
+ * (regelNotT/regelNotGom). Eleven ska aldrig kunna missa vändningen.
+ * Referens: layoutLosolikhet (ma1c-2.11 ex 1b).
+ *
  * REGEL (ROTINDEX FÅR ALDRIG TRÄNGA IN I ROTKILEN, användarkrav
  * 2026-09-21): rotindexet (3 i tredjeroten, 14 i fjortonderoten) skrivs
  * litet i kilens vinkel och får skjutas in en aning under rottecknet —
@@ -5648,6 +5657,27 @@
     };
   }
 
+  /* REGELNOT i teoriscenerna: blå text i pennans glyfer (0,7·F) som tonar
+   * in på en gång, se REGELNOT i filhuvudet (samma teknik som regelNot i
+   * ma2c-vt2018-penna.js). Returnerar pop-objektet; regelNotGom tonar ut. */
+  function regelNotT(T, F, text, x, yb) {
+    var tmp = [], sc = 0.7;
+    placeString(text, x, yb, (F / 100) * sc, F * sc, tmp, BLUE);
+    var n = { pop: 1, wins: [],
+              strokes: tmp.filter(function (a) { return a.kind === 'stroke'; }) };
+    T.acts.push({ kind: 'show', obj: n });
+    T.pause(520);
+    return n;
+  }
+  function regelNotGom(T, n) {
+    T.pause(320);
+    T.acts.push({ kind: 'hide', obj: n });
+    T.pause(200);
+  }
+  /* OLIKHETSTECKNET VÄNDS: se REGEL i filhuvudet. Noten poppar upp när
+   * raden med det vända tecknet skrivs och står kvar till nästa klick. */
+  var OLIKHET_VAND_TEXT = 'OBS! Vänd olikhetstecknet!';
+
   /* Bågpil mellan två punkter på en rad (distributiva lagen): en båge som
    * buktar uppåt från faktorn till den term den multipliceras med, med
    * pilspets i bågens slutriktning. Med `under` buktar bågen i stället
@@ -9457,7 +9487,8 @@
                        padL + 30 + T.adv('3x<27')) + 0.9 * F;
     var xwB = Math.max(padL + 30 + T.adv('42-7x≤105'),
                        padL + 30 + T.adv('-7x≤63')) + 0.9 * F;
-    var xwC = Math.max(padL + 30 + T.adv('6a>15a-90'),
+    var xwC = Math.max(padL + T.adv('c) 6a>3a-18'),
+                       padL + 30 + T.adv('6a>15a-90'),
                        padL + 30 + T.adv('0>9a-90'),
                        padL + 30 + T.adv('90>9a')) + 0.9 * F;
 
@@ -9554,20 +9585,29 @@
       [['NEGATIVT tal vänds']],
       [['olikhetstecknet!']]
     ]);
+    /* REGEL (OLIKHETSTECKNET VÄNDS): den blå noten poppar upp till höger
+     * om raden där det vända tecknet skrivs och tonar ut vid nästa klick */
+    var nVand;
     if (vagg) {
       T.vaggOp('/(-7)', xwB, y);
       T.stepEnd();
       y += 2.1 * F;
+      xx = T.str('x≥-9', padL + 30, y);
+      nVand = regelNotT(T, F, OLIKHET_VAND_TEXT, xx + 1.2 * F, y);
+      T.stepEnd();
+      regelNotGom(T, nVand);
     } else {
       y += 3.0 * F;
       xx = T.fracH('-7x', '-7', padL + 30, y, null, BLUE);
       xx = T.str('≥', xx, y, BLUE);
-      T.fracH('63', '-7', xx, y, null, BLUE);
+      xx = T.fracH('63', '-7', xx, y, null, BLUE);
+      nVand = regelNotT(T, F, OLIKHET_VAND_TEXT, xx + 1.2 * F, y);
       T.stepEnd();
+      regelNotGom(T, nVand);
       y += 2.9 * F;
+      T.str('x≥-9', padL + 30, y);
+      T.stepEnd();
     }
-    T.str('x≥-9', padL + 30, y);
-    T.stepEnd();
 
     y += 2.2 * F;
     xe = T.str('Svar: x≥-9', padL, y);
@@ -9593,7 +9633,16 @@
       [['multiplicerar jag båda led']],
       [['med 5.']]
     ], 1.05);
-    y += 3.2 * F;
+    /* multiplikationen med 5 skrivs ut i det valda läget (REGEL
+     * EKVATIONSOPERATIONEN SKRIVS ALLTID UT): 5· före vardera ledet i
+     * blått, eller ·5 vid väggen */
+    y = ekvOp(y, '·5', xwC, function (yy) {
+      var xk = T.str('5·', padL + 30, yy, BLUE);
+      xk = T.fracH('6a', '5', xk, yy);
+      xk = T.str('>', xk, yy);
+      xk = T.str('5·', xk, yy, BLUE);
+      T.str('(3a-18)', xk, yy);
+    }, { dy: 3.2, dyRes: 2.9, dyVagg: 3.0 });
     xx = T.str('6a>', padL + 30, y);
     var lg1 = xx; xx = T.str('5', xx, y);    var lg1b = xx;
     xx = T.str('(', xx, y);

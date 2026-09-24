@@ -62,7 +62,7 @@ const TYPES = {
   ammeter:   { name: 'Amperemeter', group: 'mat', len: 28, hl: 14, ho: 14, prefix: '', italic: false, unit: 'A', base: 'A', field: 'Avläsning', ph: 'till exempel 0,50' },
   voltmeter: { name: 'Voltmeter', group: 'mat', len: 28, hl: 14, ho: 14, prefix: '', italic: false, unit: 'V', base: 'V', field: 'Avläsning', ph: 'till exempel 4,5' },
 };
-const DEFAULT_OPTS = { names: true, values: true, arrows: false, arrowNames: true, arrowValues: true, arrowBlue: false, size: 'M', transparent: false };
+const DEFAULT_OPTS = { names: true, values: true, autoCalc: true, arrows: false, arrowNames: true, arrowValues: true, arrowBlue: false, size: 'M', transparent: false };
 
 /* ================= Små hjälpare ================= */
 const clone = o => JSON.parse(JSON.stringify(o));
@@ -201,7 +201,7 @@ function formatValue(raw, unit, base) {
   else if (/^[kMmµnpG]$/.test(rest) && base) rest = rest + base;
   return rest ? num + ' ' + rest : num;
 }
-function compLabel(doc, c, auto) {
+function compLabel(doc, c, auto, calc) {
   if (c.hide) return null;
   const T = TYPES[c.type];
   const runs = [];
@@ -210,7 +210,7 @@ function compLabel(doc, c, auto) {
     if (nm) nameRuns(nm, T.italic, runs);
   }
   if (doc.opts.values) {
-    const v = formatValue(c.value, T.unit, T.base);
+    const v = formatValue(c.value || calc || '', T.unit, T.base);
     // En kursiv beteckning är en storhet (R₁ = 20 Ω). En rak beteckning
     // namnger ett objekt, och en lampa är inte "lika med" 6 V: L₁ (6 V).
     if (v && runs.length && !T.italic) runs.push({ s: ' (' + v + ')' });
@@ -233,6 +233,346 @@ function runsWidth(runs, size, weight) {
   let w = 0;
   for (const r of runs) { mctx.font = runFont(r, size, weight); w += mctx.measureText(r.s).width; }
   return w;
+}
+
+/* ================= Kretsberäkning ================= */
+// Räknar ut de värden som följer entydigt av de givna, så att läraren inte
+// behöver räkna själv: 12 V och 15 Ω ger I = 0,80 A, och omvänt ger 15 Ω och
+// 0,80 A spänningen 12 V.
+//
+// FYSIKMODELL (likström, stationärt tillstånd):
+//   batteri            ideal spänningskälla utan inre resistans; pluspolen
+//                      är det långa strecket
+//   resistor           resistans R (variabel resistor likaså)
+//   lampa              resistans bara om värdet anges i Ω, annars okänd
+//                      (märkningen "6 V" är ingen resistans)
+//   amperemeter        ideal: 0 Ω
+//   voltmeter          ideal: oändlig resistans, leder ingen ström
+//   kondensator        spärrar likström (fulladdad)
+//   strömbrytare       öppen = avbrott, sluten = ledning
+//   diod, lysdiod,
+//   växelspänning      olinjära eller tidsberoende: då räknas inget ut
+//
+// METOD: nodanalys (MNA). Varje ledare får en strömmätare på 0 V i början,
+// så att strömmen i varje gren blir en obekant i ekvationssystemet. Okända
+// batterispänningar och resistanser blir parametrar som anpassas till de
+// givna strömmarna och mätarvärdena (Levenberg-Marquardt, resistanserna på
+// logaritmisk skala så att de förblir positiva). Ett värde fylls i BARA om
+// det är entydigt bestämt: det får inte ändras längs någon riktning i
+// parameterrummet som de givna värdena lämnar fri (nollrummet till
+// jacobianen). Går de givna värdena inte ihop inom sin avrundning fylls
+// ingenting i. Svaret avrundas till lika många värdesiffror som det minst
+// noggranna givna värdet, dock minst två.
+const PREFIX = { k: 1e3, M: 1e6, G: 1e9, m: 1e-3, 'µ': 1e-6, u: 1e-6, n: 1e-9, p: 1e-12 };
+const NUM_RE = /^([−-]?\d[\d\s\u00a0]*(?:[.,]\d+)?)\s*(.*)$/;
+function sigFigs(numStr) {
+  let t = String(numStr).replace(/[−\-\s\u00a0]/g, '');
+  const dec = /[.,]/.test(t);
+  t = t.replace(/[.,]/, '').replace(/^0+/, '');
+  if (!dec) t = t.replace(/0+$/, '');
+  return Math.max(1, t.length);
+}
+// "12" → 12, "2,5 k" → 2500, "500 mA" → 0,5. Fel enhet ger null.
+function parseQty(raw, unit) {
+  let t = String(raw || '').trim();
+  if (!t || t === '?') return null;
+  t = t.replace(/ohm/gi, 'Ω');
+  const m = t.match(NUM_RE);
+  if (!m) return null;
+  const v = parseFloat(m[1].replace(/[\s\u00a0]/g, '').replace(',', '.').replace('−', '-'));
+  if (!isFinite(v)) return null;
+  let rest = m[2].trim(), f = 1;
+  if (rest && PREFIX[rest[0]] !== undefined && (rest.length === 1 || rest.slice(1) === unit)) { f = PREFIX[rest[0]]; rest = rest.slice(1); }
+  if (rest && rest !== unit) return null;
+  const decs = (m[1].split(/[.,]/)[1] || '').length;
+  return { v: v * f, sig: sigFigs(m[1]), tol: Math.max(0.5 * Math.pow(10, -decs) * f, 1e-12 * Math.abs(v * f)) };
+}
+function fmtSig(v, n) {
+  if (!isFinite(v)) return '';
+  if (Math.abs(v) < 1e-12) return '0';
+  v = Number(v.toPrecision(n));   // avrunda först, så att 0,0999… räknas som 0,10
+  const e = Math.floor(Math.log10(Math.abs(v)) + 1e-12);
+  const dec = n - 1 - e;
+  if (dec >= 0) {
+    const t = v.toFixed(dec);
+    return parseFloat(t) === 0 ? '0' : t.replace('.', ',');
+  }
+  const f = Math.pow(10, -dec);
+  return String(Math.round(v / f) * f);
+}
+// Kretsträdet → nät med noder. Sidorna går medurs från övre vänstra hörnet;
+// varje komponent sitter mellan sin ingångsnod och utgångsnod längs u.
+function buildNet(doc) {
+  const par = [];
+  const mk = () => { par.push(par.length); return par.length - 1; };
+  const find = x => { while (par[x] !== x) { par[x] = par[par[x]]; x = par[x]; } return x; };
+  const merge = (a, b) => { a = find(a); b = find(b); if (a !== b) par[a] = b; };
+  const R = [], V = [], meters = [], params = [], sigs = [];
+  let unsupported = null;
+  const blank = c => !String(c.value || '').trim();
+  function comp(c, x, y) {
+    switch (c.type) {
+      case 'resistor': case 'varres': case 'lamp': {
+        const q = (c.type !== 'lamp' || /Ω|ohm/i.test(c.value || '')) ? parseQty(c.value, 'Ω') : null;
+        if (q && q.v === 0) merge(x, y);
+        else if (q && q.v > 0) { R.push({ a: x, b: y, val: q.v }); sigs.push(q.sig); }
+        else { params.push({ cid: c.id, kind: 'R', fill: c.type !== 'lamp' && blank(c) }); R.push({ a: x, b: y, pi: params.length - 1 }); }
+        break;
+      }
+      case 'battery': {
+        const q = parseQty(c.value, 'V');
+        const plus = c.flip ? x : y, minus = c.flip ? y : x;
+        if (q) { V.push({ p: plus, n: minus, val: q.v, kind: 'bat' }); sigs.push(q.sig); }
+        else { params.push({ cid: c.id, kind: 'E', fill: blank(c) }); V.push({ p: plus, n: minus, pi: params.length - 1, kind: 'bat' }); }
+        break;
+      }
+      case 'ammeter': V.push({ p: x, n: y, val: 0, kind: 'amm', cid: c.id }); break;
+      case 'voltmeter': meters.push({ a: x, b: y, cid: c.id }); break;
+      case 'cap': break;
+      case 'switch': if (c.closed) merge(x, y); break;
+      default: unsupported = unsupported || c.type;
+    }
+  }
+  function chain(S, a, b) {
+    const x0 = mk();
+    V.push({ p: a, n: x0, val: 0, kind: 'probe', sid: S.id });
+    if (!S.items.length) { merge(x0, b); return; }
+    let x = x0;
+    S.items.forEach((it, i) => {
+      const y = i === S.items.length - 1 ? b : mk();
+      if (it.kind === 'comp') comp(it, x, y);
+      else it.branches.forEach((br, k) => {
+        if (k === 0 && hasLegs(it)) {
+          const n1 = mk(), n2 = mk();
+          opt(it.legA, x, n1); chain(br, n1, n2); opt(it.legB, n2, y);
+        } else chain(br, x, y);
+      });
+      x = y;
+    });
+  }
+  const opt = (S, a, b) => (S ? chain(S, a, b) : merge(a, b));
+  const TL = mk();
+  let cur = TL;
+  SIDES.forEach((sd, i) => { const y = i === 3 ? TL : mk(); chain(doc.loop[sd], cur, y); cur = y; });
+  // Nodnumrering efter sammanslagningarna. Jord = övre vänstra hörnet.
+  const gnd = find(TL), index = new Map();
+  let nN = 0;
+  const idx = node => { const r = find(node); if (r === gnd) return -1; if (!index.has(r)) index.set(r, nN++); return index.get(r); };
+  for (const e of R) { e.i = idx(e.a); e.j = idx(e.b); }
+  for (const e of V) { e.i = idx(e.p); e.j = idx(e.n); }
+  for (const e of meters) { e.i = idx(e.a); e.j = idx(e.b); }
+  // Ledande sammanhang: en voltmeter mellan två delar som inte hänger ihop
+  // via ledande element visar ett obestämt värde.
+  const cp = new Map();
+  const cf = x => { while (cp.has(x) && cp.get(x) !== x) x = cp.get(x); return x; };
+  const cu = (a, b) => { a = cf(a); b = cf(b); if (a !== b) cp.set(a, b); };
+  for (const e of R) cu(e.i, e.j);
+  for (const e of V) cu(e.i, e.j);
+  for (const e of meters) e.linked = cf(e.i) === cf(e.j);
+  // Delar av nätet som saknar ledande förbindelse med jord (bakom en
+  // voltmeter, kondensator eller öppen brytare) låses vid en av sina noder.
+  // Ingen ström kan gå genom låsningen, eftersom den är delens enda väg ut.
+  const ties = [], seen = new Set([cf(-1)]);
+  for (let i = 0; i < nN; i++) { const r = cf(i); if (!seen.has(r)) { seen.add(r); ties.push(i); } }
+  return { R, V, meters, params, sigs, nN, unsupported, ties };
+}
+function gauss(A, n) {
+  let mx = 0;
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) mx = Math.max(mx, Math.abs(A[i][j]));
+  const eps = 1e-13 * (mx || 1);
+  for (let c = 0; c < n; c++) {
+    let pr = c;
+    for (let r = c + 1; r < n; r++) if (Math.abs(A[r][c]) > Math.abs(A[pr][c])) pr = r;
+    if (Math.abs(A[pr][c]) < eps) return null;
+    if (pr !== c) { const t = A[pr]; A[pr] = A[c]; A[c] = t; }
+    for (let r = c + 1; r < n; r++) {
+      const f = A[r][c] / A[c][c];
+      if (!f) continue;
+      for (let k = c; k <= n; k++) A[r][k] -= f * A[c][k];
+    }
+  }
+  const x = new Float64Array(n);
+  for (let r = n - 1; r >= 0; r--) {
+    let sum = A[r][n];
+    for (let k = r + 1; k < n; k++) sum -= A[r][k] * x[k];
+    x[r] = sum / A[r][r];
+  }
+  return x;
+}
+function simulate(net, pv) {
+  const { nN, R, V } = net, M = V.length, n = nN + M;
+  const A = Array.from({ length: n }, () => new Float64Array(n + 1));
+  for (const e of R) {
+    const val = e.pi != null ? pv[e.pi] : e.val;
+    if (!(val > 0) || !isFinite(val)) return null;
+    const g = 1 / val;
+    if (e.i >= 0) A[e.i][e.i] += g;
+    if (e.j >= 0) A[e.j][e.j] += g;
+    if (e.i >= 0 && e.j >= 0) { A[e.i][e.j] -= g; A[e.j][e.i] -= g; }
+  }
+  for (const i of net.ties) A[i][i] += 1;   // låser isolerade delar (se buildNet)
+  V.forEach((e, k) => {
+    const row = nN + k;
+    if (e.i >= 0) { A[e.i][row] += 1; A[row][e.i] += 1; }
+    if (e.j >= 0) { A[e.j][row] -= 1; A[row][e.j] -= 1; }
+    A[row][n] = e.pi != null ? pv[e.pi] : e.val;
+  });
+  const x = gauss(A, n);
+  if (!x) return null;
+  const pot = i => (i < 0 ? 0 : x[i]);
+  return { pot, cur: k => x[nN + k] };   // cur = ström från p genom källan till n
+}
+function jacobiEig(A, n) {
+  const a = A.map(r => r.slice()), v = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => (i === j ? 1 : 0)));
+  for (let sweep = 0; sweep < 60; sweep++) {
+    let off = 0;
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) off += a[i][j] * a[i][j];
+    if (off < 1e-30) break;
+    for (let p = 0; p < n; p++) for (let q = p + 1; q < n; q++) {
+      if (Math.abs(a[p][q]) < 1e-300) continue;
+      const th = (a[q][q] - a[p][p]) / (2 * a[p][q]);
+      const t = Math.sign(th || 1) / (Math.abs(th) + Math.sqrt(th * th + 1));
+      const c = 1 / Math.sqrt(t * t + 1), sn = t * c;
+      for (let k = 0; k < n; k++) { const x = a[k][p], y = a[k][q]; a[k][p] = c * x - sn * y; a[k][q] = sn * x + c * y; }
+      for (let k = 0; k < n; k++) { const x = a[p][k], y = a[q][k]; a[p][k] = c * x - sn * y; a[q][k] = sn * x + c * y; }
+      for (let k = 0; k < n; k++) { const x = v[k][p], y = v[k][q]; v[k][p] = c * x - sn * y; v[k][q] = sn * x + c * y; }
+    }
+  }
+  return { vals: a.map((r, i) => r[i]), vecs: Array.from({ length: n }, (_, j) => v.map(r => r[j])) };
+}
+function solveSym(A, b, n) {
+  const M = A.map((r, i) => { const row = new Float64Array(n + 1); r.forEach((x, j) => { row[j] = x; }); row[n] = b[i]; return row; });
+  return gauss(M, n);
+}
+const solveCache = new Map();
+function solveCircuit(doc, plan0) {
+  if (!doc.opts.autoCalc) return null;
+  const key = JSON.stringify([doc.loop, Object.keys(plan0).map(k => [k, plan0[k].dir, plan0[k].key === 'main' ? doc.arrowMain.value : (doc.arrowCfg[k] || {}).value])]);
+  if (solveCache.has(key)) return solveCache.get(key);
+  const res = solveCore(doc, plan0);
+  if (solveCache.size > 40) solveCache.delete(solveCache.keys().next().value);
+  solveCache.set(key, res);
+  return res;
+}
+function solveCore(doc, plan0) {
+  const empty = status => ({ status, comp: {}, arrow: {} });
+  const net = buildNet(doc);
+  if (net.unsupported) return empty('unsupported');
+  if (!net.V.some(e => e.kind === 'bat')) return null;
+  const probeK = {};
+  net.V.forEach((e, k) => { if (e.kind === 'probe') probeK[e.sid] = k; });
+  const ammK = {};
+  net.V.forEach((e, k) => { if (e.kind === 'amm') ammK[e.cid] = k; });
+  const comps = {};
+  for (const c of allComps(doc)) comps[c.id] = c;
+
+  // Utdata: strömmen längs varje pils referensriktning, mätarnas utslag
+  // och parametrarna själva.
+  const outs = [];
+  for (const sid in plan0) outs.push({ kind: 'arrow', sid, dir: plan0[sid].dir, raw: plan0[sid].key === 'main' ? doc.arrowMain.value : (doc.arrowCfg[plan0[sid].key] || {}).value });
+  for (const m of net.meters) outs.push({ kind: 'volt', m, cid: m.cid, raw: comps[m.cid].value });
+  for (const cid in ammK) outs.push({ kind: 'amm', k: ammK[cid], cid, raw: comps[cid].value });
+  net.params.forEach((pp, i) => outs.push({ kind: 'param', i, cid: pp.cid, fill: pp.fill }));
+  // Givna mätvärden (strömmar och mätarutslag).
+  const meas = [];
+  outs.forEach((o, oi) => {
+    if (o.kind === 'param') return;
+    const q = parseQty(o.raw, o.kind === 'volt' ? 'V' : 'A');
+    if (q) { meas.push({ oi, v: q.v, tol: q.tol, abs: o.kind !== 'arrow' }); net.sigs.push(q.sig); }
+  });
+  const np = net.params.length;
+  const toPv = q => net.params.map((pp, i) => (pp.kind === 'R' ? Math.exp(q[i]) : q[i]));
+  const evalOuts = q => {
+    const pv = toPv(q), sim = simulate(net, pv);
+    if (!sim) return null;
+    return outs.map(o => {
+      if (o.kind === 'arrow') return o.dir * sim.cur(probeK[o.sid]);
+      if (o.kind === 'amm') return sim.cur(o.k);
+      if (o.kind === 'volt') return sim.pot(o.m.i) - sim.pot(o.m.j);
+      return pv[o.i];
+    });
+  };
+  const resid = y => meas.map(m => ((m.abs ? Math.abs(y[m.oi]) : y[m.oi]) - m.v) / m.tol);
+  let q = net.params.map(pp => (pp.kind === 'R' ? Math.log(10) : 10));
+  let y = evalOuts(q);
+  if (!y) return empty('singular');
+  const dot = (a, b) => a.reduce((s2, x, i) => s2 + x * b[i], 0);
+  const numJac = (f, q0, f0) => {
+    const cols = [];
+    for (let j = 0; j < np; j++) {
+      const h = 1e-6 * (1 + Math.abs(q0[j])), q1 = q0.slice();
+      q1[j] += h;
+      const f1 = f(q1);
+      if (!f1) return null;
+      cols.push(f1.map((v, i) => (v - f0[i]) / h));
+    }
+    return f0.map((_, i) => cols.map(c => c[i]));   // rader = utdata, kolumner = parametrar
+  };
+  // Anpassa de okända parametrarna till de givna värdena.
+  if (np && meas.length) {
+    let r = resid(y), cost = dot(r, r), lam = 1e-3;
+    const fr = qq => { const yy = evalOuts(qq); return yy ? resid(yy) : null; };
+    for (let it = 0; it < 200 && cost > 1e-20; it++) {
+      const J = numJac(fr, q, r);
+      if (!J) break;
+      const A = Array.from({ length: np }, (_, a) => Array.from({ length: np }, (_, b) => J.reduce((s2, row) => s2 + row[a] * row[b], 0)));
+      const g = Array.from({ length: np }, (_, a) => J.reduce((s2, row, i) => s2 + row[a] * r[i], 0));
+      let ok = false;
+      for (let t = 0; t < 12 && !ok; t++) {
+        const Ad = A.map((row, i) => row.map((v, j) => (i === j ? v + lam * (v + 1e-9) + 1e-15 : v)));
+        const d = solveSym(Ad, g.map(v => -v), np);
+        if (d) {
+          const qn = q.map((v, i) => v + d[i]), rn = fr(qn);
+          if (rn && dot(rn, rn) < cost) { q = qn; r = rn; cost = dot(rn, rn); lam = Math.max(lam / 3, 1e-12); ok = true; break; }
+        }
+        lam *= 4;
+      }
+      if (!ok) break;
+    }
+    y = evalOuts(q);
+    if (!y) return empty('singular');
+  }
+  // Stämmer de givna värdena med varandra (inom sin avrundning)?
+  if (meas.length && resid(y).some(v => Math.abs(v) > 1.0001)) return empty('inconsistent');
+  // Vilka utdata är entydigt bestämda? Nollrummet till jacobianen för de
+  // givna värdena är de parameterriktningar som värdena lämnar fria.
+  let nulls = [];
+  let G = null;
+  if (np) {
+    G = numJac(evalOuts, q, y);
+    if (!G) return empty('singular');
+    if (!meas.length) nulls = Array.from({ length: np }, (_, i) => Array.from({ length: np }, (_, j) => (i === j ? 1 : 0)));
+    else {
+      const Jm = meas.map(m => G[m.oi].map(v => v / m.tol));
+      const A = Array.from({ length: np }, (_, a) => Array.from({ length: np }, (_, b) => Jm.reduce((s2, row) => s2 + row[a] * row[b], 0)));
+      const { vals, vecs } = jacobiEig(A, np);
+      const top = Math.max(...vals.map(Math.abs), 1e-300);
+      vals.forEach((v, i) => { if (Math.abs(v) <= 1e-9 * top) nulls.push(vecs[i]); });
+    }
+  }
+  const determined = oi => {
+    const o = outs[oi];
+    if (o.kind === 'volt' && !o.m.linked) return false;
+    if (!nulls.length) return true;
+    const scale = Math.max(Math.abs(y[oi]), 1e-9);
+    return nulls.every(v => Math.abs(dot(G[oi], v)) <= 1e-6 * scale);
+  };
+  // Ett uträknat batteri med negativ spänning betyder att det är ritat åt
+  // fel håll i förhållande till de givna värdena.
+  for (let oi = 0; oi < outs.length; oi++) {
+    const o = outs[oi];
+    if (o.kind === 'param' && net.params[o.i].kind === 'E' && determined(oi) && y[oi] < -1e-9) return empty('inconsistent');
+  }
+  const sig = clamp(net.sigs.length ? Math.min(...net.sigs) : 2, 2, 4);
+  const res = { status: 'ok', comp: {}, arrow: {}, sig };
+  outs.forEach((o, oi) => {
+    if (!determined(oi)) return;
+    const v = y[oi];
+    if (o.kind === 'arrow') { if (!String(o.raw || '').trim()) res.arrow[o.sid] = { text: fmtSig(Math.abs(v), sig), sign: v < -1e-12 ? -1 : 1 }; }
+    else if (o.kind === 'volt' || o.kind === 'amm') { if (!String(o.raw || '').trim()) res.comp[o.cid] = fmtSig(Math.abs(v), sig); }
+    else if (o.fill) res.comp[o.cid] = fmtSig(v, sig);
+  });
+  return res;
 }
 
 /* ================= Strömriktning ================= */
@@ -265,7 +605,7 @@ function defaultMainGap(S, dir) {
   if (i >= 0) return dir > 0 ? i + 1 : i;   // strax efter batteriet, i strömmens riktning
   return Math.floor(S.items.length / 2);
 }
-function planArrows(doc, stretched, arrowIdx) {
+function planArrows(doc, stretched, arrowIdx, sol) {
   const plan = {};
   // Utan spänningskälla går det ingen ström, så då ritas inga pilar alls.
   if (!doc.opts.arrows || !hasSource(doc)) return plan;
@@ -276,7 +616,8 @@ function planArrows(doc, stretched, arrowIdx) {
     const side = allowed.includes(mc.side) ? mc.side : defaultArrowSide(doc, allowed);
     const S = doc.loop[side], n = S.items.length;
     const gap = (mc.side === side && mc.gap != null) ? clamp(mc.gap, 0, n) : defaultMainGap(S, dir);
-    plan[S.id] = { key: 'main', side, gap, dir: dir * (mc.flip ? -1 : 1), lflip: !!mc.lflip, auto: 'I', runs: arrowRuns(doc, mc.name || 'I', mc.value) };
+    const c = !String(mc.value || '').trim() && sol && sol.arrow[S.id];
+    plan[S.id] = { key: 'main', side, gap, dir: dir * (mc.flip ? -1 : 1) * (c ? c.sign : 1), lflip: !!mc.lflip, auto: 'I', runs: arrowRuns(doc, mc.name || 'I', mc.value || (c ? c.text : '')) };
   }
   let idx = 0;
   const visit = (S, rev) => {
@@ -291,7 +632,10 @@ function planArrows(doc, stretched, arrowIdx) {
         if (!soleFullPar(b) && !(cf.hidden != null ? cf.hidden : voltOnly)) {
           idx++;
           const n = b.items.length, nr = (arrowIdx && arrowIdx[b.id]) || idx;
-          plan[b.id] = { key: b.id, gap: cf.gap != null ? clamp(cf.gap, 0, n) : (dir > 0 ? 0 : n), dir: dir * (cf.flip ? -1 : 1), lflip: !!cf.lflip, auto: 'I' + nr, runs: arrowRuns(doc, cf.name || ('I' + nr), cf.value) };
+          // En uträknad ström som går mot pilen vänder pilen, så att den
+          // alltid visar strömmens verkliga riktning.
+          const c = !String(cf.value || '').trim() && sol && sol.arrow[b.id];
+          plan[b.id] = { key: b.id, gap: cf.gap != null ? clamp(cf.gap, 0, n) : (dir > 0 ? 0 : n), dir: dir * (cf.flip ? -1 : 1) * (c ? c.sign : 1), lflip: !!cf.lflip, auto: 'I' + nr, runs: arrowRuns(doc, cf.name || ('I' + nr), cf.value || (c ? c.text : '')) };
         }
         visit(b, rev);
       }
@@ -339,10 +683,6 @@ function layout(doc) {
 function layoutPass(doc, autoIn, arrowIdx) {
   const M = {}, geo = {}, lab = {};
   const auto = autoIn || autoNames(doc);
-  for (const c of allComps(doc)) {
-    const runs = compLabel(doc, c, auto[c.id]);
-    lab[c.id] = runs ? { runs, tw: runsWidth(runs) } : null;
-  }
   // En sida som BARA är en parallellkoppling, med tomma grannsidor, sträcks
   // ut så att förgreningsnoderna ligger i hörnen: grenarna blir stegpinnar
   // mellan sidoledningarna, precis som i läroböckernas parallellkretsar.
@@ -355,7 +695,12 @@ function layoutPass(doc, autoIn, arrowIdx) {
     const it = doc.loop[s].items;
     stretched[s] = it.length === 1 && it[0].kind === 'par' && it[0].side !== 'out' && !ADJ[s].some(a => stretched[a]);
   }
-  const plan = planArrows(doc, stretched, arrowIdx);
+  const sol = solveCircuit(doc, planArrows(doc, stretched, arrowIdx, null));
+  const plan = planArrows(doc, stretched, arrowIdx, sol);
+  for (const c of allComps(doc)) {
+    const runs = compLabel(doc, c, auto[c.id], sol && sol.comp[c.id]);
+    lab[c.id] = runs ? { runs, tw: runsWidth(runs) } : null;
+  }
   const stretchedPar = new Set(SIDES.filter(x => stretched[x]).map(x => doc.loop[x].items[0].id));
   const parInfo = {};
 
@@ -521,7 +866,7 @@ function layoutPass(doc, autoIn, arrowIdx) {
     pSeries(doc.loop[s], F[s], u1, Math.max(u1, u2), 0, 1, { side: s, par: null, k: -1 }, stretched[s]);
   }
 
-  return { geo, M, lab, plan, info, auto, W, H, stretched, parInfo };
+  return { geo, M, lab, plan, info, auto, W, H, stretched, parInfo, sol };
 }
 
 /* ================= Symboler ================= */
@@ -1335,6 +1680,7 @@ function inspComp(f) {
   const c = f.item, T = TYPES[c.type], au = lay.auto[c.id];
   const autoTxt = au ? au.letter + toSub(au.idx) : '';
   const inPar = !!f.ctx.par;
+  const calc = lay.sol && lay.sol.comp[c.id] ? formatValue(lay.sol.comp[c.id], T.unit, T.base) : '';
   const spanCtl = inPar ? spanControls(f.ctx.par) : '';
   const others = Object.keys(TYPES).filter(t => t !== c.type);
   return `
@@ -1347,8 +1693,8 @@ function inspComp(f) {
     <input id="f-name" data-f="name" value="${esc(c.name)}" placeholder="${autoTxt ? esc(autoTxt) + '  (automatisk)' : 'Ingen'}" autocomplete="off" spellcheck="false">
   </div>
   ${T.field ? `<div class="fld"><label for="f-val">${T.field}</label>
-    <div class="unit"><input id="f-val" data-f="value" value="${esc(c.value)}" placeholder="${esc(T.ph || '')}" autocomplete="off" spellcheck="false"><span>${T.unit}</span></div>
-    <p class="help">Skriv <b>?</b> om storheten är okänd.</p></div>` : ''}
+    <div class="unit"><input id="f-val" data-f="value" value="${esc(c.value)}" placeholder="${esc(calc ? calc + '  (uträknat)' : (T.ph || ''))}" autocomplete="off" spellcheck="false"><span>${T.unit}</span></div>
+    <p class="help">${calc ? 'Uträknat ur de övriga värdena. Skriv ett eget värde, eller <b>?</b> om eleverna ska räkna ut det.' : 'Skriv <b>?</b> om storheten är okänd.'}</p></div>` : ''}
   ${c.type === 'switch' ? `<div class="fld"><label>Läge</label>${seg('closed', [['0', 'Öppen'], ['1', 'Sluten']], c.closed ? 1 : 0)}</div>` : ''}
   <div class="acts">
     ${T.polar ? `<button class="wbtn" data-act="flip">${IC.swap}<span>${T.polarText}</span></button>` : ''}
@@ -1406,6 +1752,8 @@ function spanEdit(P, op, dir) {
 }
 function inspArrow(key) {
   const pl = planFor(key), cfg = arrowCfg(key, false);
+  const asid = key === 'main' ? doc.loop[pl.side].id : key;
+  const acalc = lay.sol && lay.sol.arrow[asid] ? formatValue(lay.sol.arrow[asid].text, 'A', 'A') : '';
   const g = lay.geo['arr:' + (key === 'main' ? doc.loop[pl.side].id : key)];
   const horiz = g && Math.abs(Math.cos(g.ang * Math.PI / 180)) > 0.5;
   const sideCur = g ? (horiz ? (g.lsy < 0 ? 'a' : 'b') : (g.lsx < 0 ? 'a' : 'b')) : 'a';
@@ -1418,13 +1766,24 @@ function inspArrow(key) {
   <div class="fld"><label for="f-aname">Beteckning</label>
     <input id="f-aname" data-af="name" value="${esc(cfg.name || '')}" placeholder="${esc(pl.auto.replace(/\d+/, toSub))}  (automatisk)" autocomplete="off" spellcheck="false"></div>
   <div class="fld"><label for="f-aval">Strömstyrka</label>
-    <div class="unit"><input id="f-aval" data-af="value" value="${esc(cfg.value || '')}" placeholder="till exempel 0,40" autocomplete="off"><span>A</span></div>
+    <div class="unit"><input id="f-aval" data-af="value" value="${esc(cfg.value || '')}" placeholder="${esc(acalc ? acalc + '  (uträknat)' : 'till exempel 0,40')}" autocomplete="off"><span>A</span></div>
+    ${acalc ? '<p class="help">Uträknat ur de övriga värdena. Skriv ett eget värde, eller <b>?</b> om eleverna ska räkna ut det.</p>' : ''}
     ${!doc.opts.arrowValues ? '<p class="help">Slå på "Strömstyrka vid pilen" under inställningarna för att visa värdet.</p>' : ''}</div>
   <div class="fld"><label>Texten står</label>${seg('aside', horiz ? [['a', 'Ovanför'], ['b', 'Under']] : [['a', 'Till vänster'], ['b', 'Till höger']], sideCur)}</div>
   <div class="fld"><label>Placering på ledningen</label>
     <div class="row"><button class="ibtn" data-act="aprev" aria-label="Flytta bakåt">${IC.left}</button><button class="ibtn" data-act="anext" aria-label="Flytta framåt">${IC.right}</button><span class="help inline">Flytta pilen till nästa lediga ledningsbit.</span></div></div>
   <div class="acts"><button class="wbtn" data-act="aflip">${IC.swap}<span>Vänd pilens riktning</span></button></div>
   <p class="kbd-hint">Riktningen följer batteriets poler: strömmen går ut från pluspolen, det långa strecket.</p>`;
+}
+// Förklarar varför inga värden räknas ut, när det är så.
+function calcNote() {
+  const st = doc.opts.autoCalc && lay.sol && lay.sol.status;
+  const msg = {
+    inconsistent: 'De givna värdena går inte ihop, så inget räknas ut. Kontrollera spänningar, resistanser och strömmar.',
+    singular: 'Kretsen är kortsluten eller strömmen kan inte bestämmas (till exempel två amperemetrar parallellt), så inget räknas ut.',
+    unsupported: 'Kretsen innehåller en diod, en lysdiod eller växelspänning, så inga värden räknas ut automatiskt.',
+  }[st];
+  return msg ? `<p class="help note calc">${msg}</p>` : (doc.opts.autoCalc ? '<p class="help calc-info">Mätarna räknas som ideala och batterierna saknar inre resistans. Skriv <b>?</b> i ett fält för att dölja svaret.</p>' : '');
 }
 function inspDoc() {
   const o = doc.opts;
@@ -1434,6 +1793,8 @@ function inspDoc() {
   <div class="grp">
     ${tgl('names', 'Beteckningar', '<i>R</i>₁, <i>U</i>, L₁', o.names)}
     ${tgl('values', 'Värden', '20 Ω, 12 V', o.values)}
+    ${tgl('autoCalc', 'Räkna ut okända värden', 'Ström, spänning och resistans som följer av de givna värdena', o.autoCalc, true)}
+    ${calcNote()}
   </div>
   <div class="grp">
     ${tgl('arrows', 'Strömpilar', 'Riktningen följer batteriets poler', o.arrows)}

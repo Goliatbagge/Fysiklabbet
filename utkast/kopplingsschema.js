@@ -917,8 +917,12 @@ function renderZones() {
   zoneG.innerHTML = drag.zones.map(z => {
     const on = z === near;
     if (z.kind === 'series') return `<circle class="zone${on ? ' near' : ''}" cx="${r2(z.x)}" cy="${r2(z.y)}" r="${r2((on ? 6.5 : 4.5) / k * 1.2)}" vector-effect="non-scaling-stroke"/>`;
-    const w = (on ? 30 : 24) / k, h = (on ? 16 : 12) / k;
     const vert = z.vert;
+    if (z.kind === 'span') {
+      const sw = Math.max(18 / k, z.w - 52 / k), sh = (on ? 14 : 10) / k;
+      return `<rect class="zone par span${on ? ' near' : ''}" x="${r2(z.x - (vert ? sh : sw) / 2)}" y="${r2(z.y - (vert ? sw : sh) / 2)}" width="${r2(vert ? sh : sw)}" height="${r2(vert ? sw : sh)}" rx="${r2(5 / k)}" vector-effect="non-scaling-stroke"/>`;
+    }
+    const w = (on ? 30 : 24) / k, h = (on ? 16 : 12) / k;
     return `<rect class="zone par${on ? ' near' : ''}" x="${r2(z.x - (vert ? h : w) / 2)}" y="${r2(z.y - (vert ? w : h) / 2)}" width="${r2(vert ? h : w)}" height="${r2(vert ? w : h)}" rx="${r2(4 / k)}" vector-effect="non-scaling-stroke"/>`;
   }).join('');
 }
@@ -935,6 +939,24 @@ function computeZones(d, L) {
   for (const si of L.info.series) {
     if (!si.gaps.length) continue;
     si.gaps.forEach((gp, i) => Z.push({ kind: 'series', sid: si.S.id, index: i, x: (gp[0][0] + gp[1][0]) / 2, y: (gp[0][1] + gp[1][1]) / 2, vert: si.vert }));
+  }
+  // SPÄNNZONER: under (och över) mellanrummet mellan två grannar i en serie.
+  // Släpps komponenten där parallellkopplas den över BÅDA grannarna, till
+  // exempel en resistor över två seriekopplade. Zonen ritas som en bred
+  // streckad list mellan grannarnas egna zoner, så att skillnaden syns.
+  const center = it => { const g = L.geo[it.id]; return it.kind === 'par' ? [(g.n1x + g.n2x) / 2, (g.n1y + g.n2y) / 2] : [g.x, g.y]; };
+  for (const si of L.info.series) {
+    const its = si.S.items;
+    if (its.length < 2 || !si.gaps.length) continue;
+    if (si.ctx.par && its.length === 2) continue;   // hela grenen: täcks av grenzonen
+    const lsx = si.f.ox * si.L, lsy = si.f.oy * si.L;
+    for (let i = 1; i < its.length; i++) {
+      const a = center(its[i - 1]), b = center(its[i]);
+      const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, w = Math.hypot(b[0] - a[0], b[1] - a[1]);
+      const D = 36;
+      Z.push({ kind: 'span', sid: si.S.id, from: i - 1, side: 'out', x: mx + lsx * D, y: my + lsy * D, w, vert: si.vert });
+      Z.push({ kind: 'span', sid: si.S.id, from: i - 1, side: 'in', x: mx - lsx * D, y: my - lsy * D, w, vert: si.vert });
+    }
   }
   for (const ci of L.info.comps) {
     const g = L.geo[ci.c.id], e = symExt(ci.c);
@@ -959,13 +981,17 @@ function computeZones(d, L) {
   }
   return Z;
 }
-const zoneKey = z => z.kind + ':' + (z.sid || z.target || z.pid) + ':' + (z.index != null ? z.index : z.at != null ? z.at : z.side);
+const zoneKey = z => [z.kind, z.sid || z.target || z.pid, z.index, z.at, z.from, z.side].join(':');
 function applyZone(d0, z, item, ids) {
   const d = clone(d0);
   if (z.kind === 'series') findSeries(d, z.sid).items.splice(z.index, 0, item);
   else if (z.kind === 'par') {
     const f = findItem(d, z.target);
     f.series.items.splice(f.index, 1, { id: ids.p, kind: 'par', side: z.side, branches: [mkSeries([f.item], ids.b1), mkSeries([item], ids.b2)] });
+  } else if (z.kind === 'span') {
+    const S = findSeries(d, z.sid);
+    const pair = S.items.slice(z.from, z.from + 2);
+    S.items.splice(z.from, 2, { id: ids.p, kind: 'par', side: z.side, branches: [mkSeries(pair, ids.b1), mkSeries([item], ids.b2)] });
   } else if (z.kind === 'branch') {
     const f = findItem(d, z.pid);
     f.item.branches.splice(z.at, 0, mkSeries([item], ids.b1));
@@ -1157,6 +1183,7 @@ function inspComp(f) {
   const c = f.item, T = TYPES[c.type], au = lay.auto[c.id];
   const autoTxt = au ? au.letter + toSub(au.idx) : '';
   const inPar = !!f.ctx.par;
+  const spanCtl = inPar ? spanControls(f.ctx.par) : '';
   const others = Object.keys(TYPES).filter(t => t !== c.type);
   return `
   <div class="ins-head">
@@ -1175,11 +1202,55 @@ function inspComp(f) {
     ${T.polar ? `<button class="wbtn" data-act="flip">${IC.swap}<span>${T.polarText}</span></button>` : ''}
     ${inPar ? `<button class="wbtn" data-act="mirror">${IC.mirror}<span>Spegla parallellkopplingen</span></button>` : ''}
   </div>
+  ${spanCtl}
   ${tgl('show', 'Visa text vid komponenten', '', !c.hide)}
   <div class="swap"><div class="eyebrow">Byt till</div>
     <div class="swap-grid">${others.map(t => `<button class="swap-b" data-act="swap" data-type="${t}" title="${TYPES[t].name}" aria-label="Byt till ${TYPES[t].name}">${iconSvg(t, 48, 32)}</button>`).join('')}</div>
   </div>
   <p class="kbd-hint">Tips: klicka på komponenten igen, eller börja skriva, så hamnar du i värdefältet.</p>`;
+}
+// Parallellkopplingen kan spänna över fler seriekopplade komponenter:
+// "Utöka" flyttar grannen på ledningen in i gren 0, "Krymp" flyttar ut den.
+// Knapparna benämns efter skärmens riktning, inte trädets.
+function spanInfo(P) {
+  const f = findItem(doc, P.id);
+  if (!f) return null;
+  const b0 = P.branches[0], g = lay.geo[b0.id];
+  const dx = g ? g.x2 - g.x1 : 1, dy = g ? g.y2 - g.y1 : 0;
+  let before, after;
+  if (Math.abs(dx) >= Math.abs(dy)) { before = dx > 0 ? 'vänster' : 'höger'; after = dx > 0 ? 'höger' : 'vänster'; }
+  else { before = dy > 0 ? 'uppåt' : 'nedåt'; after = dy > 0 ? 'nedåt' : 'uppåt'; }
+  return {
+    f, before, after,
+    growBefore: f.index > 0, growAfter: f.index < f.series.items.length - 1,
+    shrink: b0.items.length > 1,
+  };
+}
+function spanControls(P) {
+  const si = spanInfo(P);
+  if (!si || !(si.growBefore || si.growAfter || si.shrink)) return '';
+  const first = si.before === 'vänster' || si.before === 'uppåt' ? 'before' : 'after';
+  const order = first === 'before' ? ['before', 'after'] : ['after', 'before'];
+  const name = d => d === 'before' ? si.before : si.after;
+  const btn = (op, d, ok) => `<button class="wbtn sm" data-act="span" data-op="${op}" data-dir="${d}"${ok ? '' : ' disabled'}>${op === 'grow' ? 'Utöka' : 'Krymp'} ${op === 'grow' ? 'åt' : 'från'} ${name(d)}</button>`;
+  return `<div class="fld"><label>Parallellkopplingen spänner över</label>
+    <div class="span-grid">
+      ${order.map(d => btn('grow', d, d === 'before' ? si.growBefore : si.growAfter)).join('')}
+      ${order.map(d => btn('shrink', d, si.shrink)).join('')}
+    </div>
+    <p class="help">Utöka tar med nästa komponent på ledningen, så att parallellkopplingen spänner över flera seriekopplade.</p></div>`;
+}
+function spanEdit(P, op, dir) {
+  const si = spanInfo(P);
+  if (!si) return;
+  const S = si.f.series, j = si.f.index, b0 = P.branches[0].items;
+  if (op === 'grow' && dir === 'before' && si.growBefore) { b0.unshift(S.items.splice(j - 1, 1)[0]); }
+  else if (op === 'grow' && dir === 'after' && si.growAfter) { b0.push(S.items.splice(j + 1, 1)[0]); }
+  else if (op === 'shrink' && si.shrink) {
+    if (dir === 'before') S.items.splice(j, 0, b0.shift());
+    else S.items.splice(j + 1, 0, b0.pop());
+  }
+  normalize(doc);
 }
 function inspArrow(key) {
   const pl = planFor(key), cfg = arrowCfg(key, false);
@@ -1228,6 +1299,7 @@ function inspDoc() {
     <ol>
       <li><b>Dra</b> en komponent till en ledning. Den sätts i serie, och allt fördelas jämnt.</li>
       <li><b>Släpp</b> den bredvid en komponent för att parallellkoppla.</li>
+      <li><b>Släpp</b> den under mellanrummet mellan två komponenter för att parallellkoppla över båda.</li>
       <li><b>Klicka</b> på en komponent för att skriva in värden.</li>
       <li><b>Dra bort</b> en komponent till papperskorgen eller tryck Delete.</li>
       <li><b>Kopiera bild</b> och klistra in i Word, PowerPoint eller Google Dokument.</li>
@@ -1299,6 +1371,7 @@ inspEl.addEventListener('click', e => {
   if (sel && sel.kind === 'comp') {
     const f = findItem(doc, sel.id), c = f.item;
     if (act === 'flip') c.flip = !c.flip;
+    if (act === 'span') spanEdit(f.ctx.par, b.dataset.op, b.dataset.dir);
     if (act === 'mirror') f.ctx.par.side = f.ctx.par.side === 'out' ? 'in' : 'out';
     if (act === 'swap') {
       const old = TYPES[c.type], nt = TYPES[b.dataset.type];

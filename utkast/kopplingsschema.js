@@ -232,6 +232,7 @@ function mainDir(doc) {
   }
   return sum > 0 ? 1 : sum < 0 ? -1 : (first || 1);
 }
+function hasSource(doc) { return allComps(doc).some(c => c.type === 'battery' || c.type === 'ac'); }
 function allowedArrowSides(stretched) { return SIDES.filter(s => !stretched[s] && !ADJ[s].some(a => stretched[a])); }
 function defaultArrowSide(doc, allowed) {
   for (const s of ['left', 'right']) if (allowed.includes(s) && doc.loop[s].items.length === 0) return s;
@@ -245,7 +246,8 @@ function defaultMainGap(S, dir) {
 }
 function planArrows(doc, stretched, arrowIdx) {
   const plan = {};
-  if (!doc.opts.arrows) return plan;
+  // Utan spänningskälla går det ingen ström, så då ritas inga pilar alls.
+  if (!doc.opts.arrows || !hasSource(doc)) return plan;
   const dir = mainDir(doc);
   const allowed = allowedArrowSides(stretched);
   const mc = doc.arrowMain || {};
@@ -1285,6 +1287,7 @@ function inspDoc() {
   </div>
   <div class="grp">
     ${tgl('arrows', 'Strömpilar', 'Riktningen följer batteriets poler', o.arrows)}
+    ${o.arrows && !hasSource(doc) ? '<p class="help note">Pilarna visas när kretsen har en spänningskälla. Dra in ett batteri så dyker de upp.</p>' : ''}
     <div class="subgrp${o.arrows ? '' : ' off'}">
       ${tgl('arrowNames', 'Beteckning vid pilen', '<i>I</i>, <i>I</i>₁, <i>I</i>₂', o.arrowNames, true)}
       ${tgl('arrowValues', 'Strömstyrka vid pilen', 'Klicka på en pil för att skriva in den', o.arrowValues, true)}

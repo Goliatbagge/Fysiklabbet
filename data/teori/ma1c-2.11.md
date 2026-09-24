@@ -208,7 +208,7 @@ Dessa intervall beskrivs av $x < -2$ och $x > 2$.
 ::: sampunkt "Olikhetstecknen"
 - $<$ mindre än, $>$ större än.
 - $\leq$ mindre än eller lika med, $\geq$ större än eller lika med.
-- Tecknet **gapar åt det större** värdet, eller peka på det mindre som med
+- Tecknet **gapar åt det större** värdet, eller pekar på det mindre som med
   en pil.
 :::
 

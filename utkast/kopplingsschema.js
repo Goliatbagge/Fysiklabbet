@@ -251,7 +251,7 @@ function mainDir(doc) {
   return sum > 0 ? 1 : sum < 0 ? -1 : (first || 1);
 }
 function hasSource(doc) { return allComps(doc).some(c => c.type === 'battery' || c.type === 'ac'); }
-function allowedArrowSides(stretched) { return SIDES.filter(s => !stretched[s] && !ADJ[s].some(a => stretched[a])); }
+function allowedArrowSides(stretched) { return SIDES.filter(s => !stretched[s]); }
 function defaultArrowSide(doc, allowed) {
   for (const s of ['left', 'right']) if (allowed.includes(s) && doc.loop[s].items.length === 0) return s;
   for (const s of allowed) if (doc.loop[s].items.some(it => it.kind === 'comp' && it.type === 'battery')) return s;
@@ -343,10 +343,14 @@ function layoutPass(doc, autoIn, arrowIdx) {
   // En sida som BARA är en parallellkoppling, med tomma grannsidor, sträcks
   // ut så att förgreningsnoderna ligger i hörnen: grenarna blir stegpinnar
   // mellan sidoledningarna, precis som i läroböckernas parallellkretsar.
+  // Grannsidorna får gärna ha komponenter: de läggs på biten av
+  // sidoledningen nedanför (innanför) den sista stegpinnen, så att bilden
+  // behåller sin form när man släpper något där. Två grannsidor kan inte
+  // båda vara sträckta; överkant och underkant går före.
   const stretched = {};
-  for (const s of SIDES) {
+  for (const s of ['top', 'bottom', 'left', 'right']) {
     const it = doc.loop[s].items;
-    stretched[s] = it.length === 1 && it[0].kind === 'par' && it[0].side !== 'out' && ADJ[s].every(a => doc.loop[a].items.length === 0);
+    stretched[s] = it.length === 1 && it[0].kind === 'par' && it[0].side !== 'out' && !ADJ[s].some(a => stretched[a]);
   }
   const plan = planArrows(doc, stretched, arrowIdx);
   const stretchedPar = new Set(SIDES.filter(x => stretched[x]).map(x => doc.loop[x].items[0].id));
@@ -423,8 +427,16 @@ function layoutPass(doc, autoIn, arrowIdx) {
     sm[s] = mSeries(doc.loop[s], 1, vertOf(s));
     if (stretched[s]) sm[s].len = M[doc.loop[s].items[0].id].len;
   }
-  let W = Math.max(sm.top.len, sm.bottom.len, sm.left.neg + sm.right.neg + INNER_GAP, MIN_W);
-  let H = Math.max(sm.left.len, sm.right.len, sm.top.neg + sm.bottom.neg + INNER_GAP, MIN_H);
+  // Hur långt en sträckt parallellkoppling tar av grannsidornas ledning.
+  const trim = x => {
+    if (!stretched[x]) return 0;
+    const m = M[doc.loop[x].items[0].id];
+    return Math.abs(m.offs[m.offs.length - 1]);
+  };
+  let W = Math.max(sm.top.len, sm.bottom.len, sm.left.neg + sm.right.neg + INNER_GAP, MIN_W,
+    trim('left') + trim('right') + Math.max(stretched.top ? 0 : sm.top.len, stretched.bottom ? 0 : sm.bottom.len));
+  let H = Math.max(sm.left.len, sm.right.len, sm.top.neg + sm.bottom.neg + INNER_GAP, MIN_H,
+    trim('top') + trim('bottom') + Math.max(stretched.left ? 0 : sm.left.len, stretched.right ? 0 : sm.right.len));
   W = Math.max(W, H * 1.15);
   H = Math.max(H, W * 0.5);
   W = Math.round(W); H = Math.round(H);

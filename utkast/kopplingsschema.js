@@ -251,7 +251,10 @@ function mainDir(doc) {
   return sum > 0 ? 1 : sum < 0 ? -1 : (first || 1);
 }
 function hasSource(doc) { return allComps(doc).some(c => c.type === 'battery' || c.type === 'ac'); }
-function allowedArrowSides(stretched) { return SIDES.filter(s => !stretched[s]); }
+// En serie som bara är en parallellkoppling över hela ledaren har ingen
+// egen ledningsbit att sätta en pil på.
+const soleFullPar = S => S.items.length === 1 && S.items[0].kind === 'par' && !!S.items[0].full;
+function allowedArrowSides(stretched, doc) { return SIDES.filter(s => !stretched[s] && !(doc && soleFullPar(doc.loop[s]))); }
 function defaultArrowSide(doc, allowed) {
   for (const s of ['left', 'right']) if (allowed.includes(s) && doc.loop[s].items.length === 0) return s;
   for (const s of allowed) if (doc.loop[s].items.some(it => it.kind === 'comp' && it.type === 'battery')) return s;
@@ -267,7 +270,7 @@ function planArrows(doc, stretched, arrowIdx) {
   // Utan spänningskälla går det ingen ström, så då ritas inga pilar alls.
   if (!doc.opts.arrows || !hasSource(doc)) return plan;
   const dir = mainDir(doc);
-  const allowed = allowedArrowSides(stretched);
+  const allowed = allowedArrowSides(stretched, doc);
   const mc = doc.arrowMain || {};
   if (!mc.hidden && allowed.length) {
     const side = allowed.includes(mc.side) ? mc.side : defaultArrowSide(doc, allowed);
@@ -285,7 +288,7 @@ function planArrows(doc, stretched, arrowIdx) {
         // En gren med bara en voltmeter leder (idealt) ingen ström, så den
         // får ingen pil förrän användaren själv ber om den.
         const voltOnly = b.items.every(x => x.kind === 'comp' && x.type === 'voltmeter');
-        if (!(cf.hidden != null ? cf.hidden : voltOnly)) {
+        if (!soleFullPar(b) && !(cf.hidden != null ? cf.hidden : voltOnly)) {
           idx++;
           const n = b.items.length, nr = (arrowIdx && arrowIdx[b.id]) || idx;
           plan[b.id] = { key: b.id, gap: cf.gap != null ? clamp(cf.gap, 0, n) : (dir > 0 ? 0 : n), dir: dir * (cf.flip ? -1 : 1), lflip: !!cf.lflip, auto: 'I' + nr, runs: arrowRuns(doc, cf.name || ('I' + nr), cf.value) };
@@ -458,6 +461,7 @@ function layoutPass(doc, autoIn, arrowIdx) {
     const si = { S, L, f, v, vert: f.dx === 0, ctx, gaps: [] };
     info.series.push(si);
     if (stretch) { pPar(S.items[0], f, u1, u2, v, L, true); return; }
+    if (soleFullPar(S)) { pPar(S.items[0], f, u1, u2, v, L, false); return; }
     const n = S.items.length;
     const sum = m.ms.reduce((s, x) => s + x.len, 0);
     const g = (u2 - u1 - sum) / (n + 1);
@@ -1123,7 +1127,10 @@ function applyZone(d0, z, item, ids) {
   } else if (z.kind === 'span') {
     const S = findSeries(d, z.sid);
     const n = z.n || 2, run = S.items.slice(z.from, z.from + n);
-    S.items.splice(z.from, n, { id: ids.p, kind: 'par', side: z.side, branches: [mkSeries(run, ids.b1), mkSeries([item], ids.b2)] });
+    // Spänner listen över HELA ledaren ansluter parallellkopplingen i
+    // ledarens ändar (hörnen), inte i egna noder en bit innanför.
+    const full = n === S.items.length;
+    S.items.splice(z.from, n, Object.assign({ id: ids.p, kind: 'par', side: z.side, branches: [mkSeries(run, ids.b1), mkSeries([item], ids.b2)] }, full ? { full: true } : {}));
   } else if (z.kind === 'leg') {
     const P = findItem(d, z.pid).item;
     // Den yttersta grenen blir gren 0, eftersom benen hör till gren 0.
@@ -1532,7 +1539,7 @@ function moveArrow(key, step) {
   const pl = planFor(key);
   if (key === 'main') {
     const cands = [];
-    for (const s of allowedArrowSides(lay.stretched)) for (let i = 0; i <= doc.loop[s].items.length; i++) cands.push([s, i]);
+    for (const s of allowedArrowSides(lay.stretched, doc)) for (let i = 0; i <= doc.loop[s].items.length; i++) cands.push([s, i]);
     let i = cands.findIndex(c => c[0] === pl.side && c[1] === pl.gap);
     i = (i + step + cands.length) % cands.length;
     doc.arrowMain.side = cands[i][0]; doc.arrowMain.gap = cands[i][1];

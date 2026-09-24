@@ -548,7 +548,15 @@ function symbolPrims(c, g, col, op, out) {
   const box = () => poly([M(-21, -7), M(21, -7), M(21, 7), M(-21, 7)], 'none', col);
   switch (c.type) {
     case 'resistor': box(); break;
-    case 'varres': box(); arrowLine(M(-15, 12), M(16, -14)); break;
+    case 'varres': {
+      // Pilen går alltid snett uppåt höger PÅ SKÄRMEN, som i läroböckerna,
+      // oavsett ledningens riktning och vilken sida etiketten hamnar på.
+      box();
+      const horiz = Math.abs(dx) > 0.5;
+      const p = horiz ? [-15, 12, 16, -14] : [-13, 16, 14, -17];
+      arrowLine([g.x + p[0], g.y + p[1]], [g.x + p[2], g.y + p[3]]);
+      break;
+    }
     case 'lamp': {
       circ(12);
       const d = 12 * 0.7071;

@@ -90,10 +90,20 @@ function symExt(c) {
 }
 
 /* ================= Trädet ================= */
+// BEN: en parallellkoppling kan ha komponenter på de lodräta ledningsbitarna
+// (benen) som leder ut till dess yttersta gren. P.legA är benet vid den
+// första noden, P.legB vid den andra. Benen ligger alltid i serie med gren 0,
+// som därför ritas ytterst när benen har komponenter (se branchOrder).
+const LEGS = ['legA', 'legB'];
+const hasLegs = P => !!(P.legA || P.legB);
 function eachSeries(doc, fn) {
   const rec = (S, ctx) => {
     fn(S, ctx);
-    S.items.forEach(it => { if (it.kind === 'par') it.branches.forEach((b, k) => rec(b, { side: ctx.side, par: it, k })); });
+    S.items.forEach(it => {
+      if (it.kind !== 'par') return;
+      it.branches.forEach((b, k) => rec(b, { side: ctx.side, par: it, k }));
+      for (const lk of LEGS) if (it[lk]) rec(it[lk], { side: ctx.side, par: null, k: -1, legOf: it, leg: lk });
+    });
   };
   for (const s of SIDES) rec(doc.loop[s], { side: s, par: null, k: -1 });
 }
@@ -109,9 +119,17 @@ function normSeries(S) {
     const it = S.items[i];
     if (it.kind !== 'par') continue;
     it.branches.forEach(normSeries);
-    it.branches = it.branches.filter(b => b.items.length);
+    for (const lk of LEGS) if (it[lk]) { normSeries(it[lk]); if (!it[lk].items.length) delete it[lk]; }
+    const legged = hasLegs(it);
+    // Flyttades yttersta grenen till gren 0 när benet skapades: flytta tillbaka.
+    if (!legged && it.legMoved) { it.branches.push(it.branches.shift()); delete it.legMoved; }
+    // Gren 0 får vara tom om den har ben: då består grenen av benens komponenter.
+    it.branches = it.branches.filter((b, k) => b.items.length || (k === 0 && legged));
     if (it.branches.length === 0) { S.items.splice(i, 1); i--; }
-    else if (it.branches.length === 1) { S.items.splice(i, 1, ...it.branches[0].items); i--; }
+    else if (it.branches.length === 1) {
+      const flat = [...(it.legA ? it.legA.items : []), ...it.branches[0].items, ...(it.legB ? it.legB.items : [])];
+      S.items.splice(i, 1, ...flat); i--;
+    }
   }
 }
 function normalize(doc) { for (const s of SIDES) normSeries(doc.loop[s]); return doc; }
@@ -129,7 +147,7 @@ function readingOrder(doc) {
     const its = rev ? S.items.slice().reverse() : S.items;
     for (const it of its) {
       if (it.kind === 'comp') out.push(it);
-      else it.branches.forEach(b => visit(b, rev));
+      else { it.branches.forEach(b => visit(b, rev)); for (const lk of LEGS) if (it[lk]) visit(it[lk], rev); }
     }
   };
   visit(doc.loop.top, false); visit(doc.loop.right, false);
@@ -281,6 +299,15 @@ function planArrows(doc, stretched, arrowIdx) {
 }
 
 /* ================= Layout ================= */
+// Grenarnas ordning utåt från ledningen. Har parallellkopplingen ben läggs
+// gren 0 ytterst, eftersom benen ligger i serie med just den grenen. I en
+// sträckt parallellkoppling (stegpinnar) ansluter slingan vid den sista
+// grenen, så där är gren 0 redan ytterst.
+function branchOrder(P, stretched) {
+  const idx = P.branches.map((_, i) => i);
+  if (!hasLegs(P) || stretched || idx.length < 2) return idx;
+  return idx.slice(1).concat(0);
+}
 // Lokalt koordinatsystem per sida: u längs ledningen (i medurs riktning),
 // v vinkelrätt, positivt UTÅT från slingan. L = +1/−1 anger åt vilket håll
 // etiketterna i en serie hamnar.
@@ -322,6 +349,8 @@ function layoutPass(doc, autoIn, arrowIdx) {
     stretched[s] = it.length === 1 && it[0].kind === 'par' && it[0].side !== 'out' && ADJ[s].every(a => doc.loop[a].items.length === 0);
   }
   const plan = planArrows(doc, stretched, arrowIdx);
+  const stretchedPar = new Set(SIDES.filter(x => stretched[x]).map(x => doc.loop[x].items[0].id));
+  const parInfo = {};
 
   function mComp(c, L, vert) {
     const e = symExt(c), lb = lab[c.id];
@@ -331,7 +360,7 @@ function layoutPass(doc, autoIn, arrowIdx) {
       else { ext = GAP_V + lb.tw; oh = Math.max(0, LH / 2 - e.len / 2); }
     }
     const side = e.hl + ext, other = e.ho;
-    return (M[c.id] = { len: e.len, pos: L > 0 ? side : other, neg: L > 0 ? other : side, oh });
+    return (M[c.id] = { len: e.len, pos: L > 0 ? side : other, neg: L > 0 ? other : side, ohS: oh, ohE: oh });
   }
   function mSeries(S, L, vert) {
     const ms = S.items.map(it => it.kind === 'par' ? mPar(it, L, vert) : mComp(it, L, vert));
@@ -342,7 +371,7 @@ function layoutPass(doc, autoIn, arrowIdx) {
     let g = MIN_GAP;
     for (let i = 0; i <= n; i++) {
       const a = ms[i - 1], b = ms[i];
-      const oa = a ? a.oh : 0, ob = b ? b.oh : 0;
+      const oa = a ? a.ohE : 0, ob = b ? b.ohS : 0;
       g = Math.max(g, oa + ob + LABEL_CLEAR);
       if (ar && ar.gap === i) {
         const need = !ar.runs ? ARROW_LEN + 28
@@ -359,22 +388,33 @@ function layoutPass(doc, autoIn, arrowIdx) {
       neg = Math.max(neg, La > 0 ? ARROW_HW : side);
     }
     const len = ms.reduce((s, m) => s + m.len, 0) + (n + 1) * g;
-    return (M[S.id] = { len, pos, neg, oh: 0, g, ms });
+    return (M[S.id] = { len, pos, neg, ohS: 0, ohE: 0, g, ms });
   }
   function mPar(P, L, vert) {
     const s = P.side === 'out' ? L : -L;   // grenarnas staplingsriktning i v
-    const bm = P.branches.map((b, k) => mSeries(b, k === 0 ? -s : s, vert));
+    const str = stretchedPar.has(P.id);
+    const order = branchOrder(P, str);
+    const bm = order.map((bi, j) => mSeries(P.branches[bi], j === 0 ? -s : s, vert));
     const len = Math.max(64, ...bm.map(m => m.len));
+    // Benen mäts som egna serier längs v. Sträckan mellan gren 0 och dess
+    // granne måste rymma dem, och deras etiketter sticker ut utanför noderna.
+    const legged = hasLegs(P);
+    const la = P.legA ? mSeries(P.legA, 1, !vert) : null;
+    const lb = P.legB ? mSeries(P.legB, 1, !vert) : null;
+    const legNeed = Math.max(la ? la.len : 0, lb ? lb.len : 0);
+    const segJ = legged ? (str ? 1 : order.length - 1) : -1;
     const offs = [0];
-    for (let k = 1; k < bm.length; k++) {
-      const prevExt = s > 0 ? bm[k - 1].pos : bm[k - 1].neg;
-      const curExt = s > 0 ? bm[k].neg : bm[k].pos;
-      offs.push(offs[k - 1] + s * Math.max(BRANCH_MIN, prevExt + curExt + BRANCH_GAP));
+    for (let j = 1; j < bm.length; j++) {
+      const prevExt = s > 0 ? bm[j - 1].pos : bm[j - 1].neg;
+      const curExt = s > 0 ? bm[j].neg : bm[j].pos;
+      let d = Math.max(BRANCH_MIN, prevExt + curExt + BRANCH_GAP);
+      if (j === segJ) d = Math.max(d, legNeed);
+      offs.push(offs[j - 1] + s * d);
     }
     const last = bm.length - 1;
     const far = Math.abs(offs[last]) + (s > 0 ? bm[last].pos : bm[last].neg);
     const near = s > 0 ? bm[0].neg : bm[0].pos;
-    return (M[P.id] = { len, pos: s > 0 ? far : near, neg: s > 0 ? near : far, oh: 0, offs, s });
+    return (M[P.id] = { len, pos: s > 0 ? far : near, neg: s > 0 ? near : far, ohS: la ? la.pos : 0, ohE: lb ? lb.pos : 0, offs, s, order });
   }
 
   const vertOf = s => s === 'left' || s === 'right';
@@ -405,7 +445,7 @@ function layoutPass(doc, autoIn, arrowIdx) {
     geo[S.id] = { x1: a[0], y1: a[1], x2: b[0], y2: b[1] };
     const si = { S, L, f, v, vert: f.dx === 0, ctx, gaps: [] };
     info.series.push(si);
-    if (stretch) { pPar(S.items[0], f, u1, u2, v, L); return; }
+    if (stretch) { pPar(S.items[0], f, u1, u2, v, L, true); return; }
     const n = S.items.length;
     const sum = m.ms.reduce((s, x) => s + x.len, 0);
     const g = (u2 - u1 - sum) / (n + 1);
@@ -417,8 +457,8 @@ function layoutPass(doc, autoIn, arrowIdx) {
       if (it.kind === 'comp') {
         const c = P(f, u + len / 2, v);
         geo[it.id] = { x: c[0], y: c[1], ang: angOf(f, 1), lsx: f.ox * L, lsy: f.oy * L, op: 1 };
-        info.comps.push({ c: it, S, i, par: ctx.par, k: ctx.k, L, f });
-      } else pPar(it, f, u, u + len, v, L);
+        info.comps.push({ c: it, S, i, par: ctx.par, k: ctx.k, j: ctx.j, L, f });
+      } else pPar(it, f, u, u + len, v, L, false);
       u += len;
     });
     gapsU.push([u, u2]);
@@ -431,16 +471,41 @@ function layoutPass(doc, autoIn, arrowIdx) {
       geo['arr:' + S.id] = { x: c[0], y: c[1], ang: angOf(f, ar.dir), lsx: f.ox * La, lsy: f.oy * La, op: 1 };
     }
   }
-  function pPar(Pp, f, u1, u2, v, L) {
-    const m = M[Pp.id];
+  function pPar(Pp, f, u1, u2, v, L, str) {
+    const m = M[Pp.id], order = m.order, n = order.length;
     const a = P(f, u1, v), b = P(f, u2, v);
     geo[Pp.id] = { n1x: a[0], n1y: a[1], n2x: b[0], n2y: b[1] };
+    // Benets sträcka: mellan gren 0 (ytterst) och grannen innanför.
+    const far = str ? 0 : n - 1, near = str ? 1 : n - 2;
+    const legged = hasLegs(Pp);
+    parInfo[Pp.id] = { order, legged, stretched: !!str, far, near };
     info.pars.push({ P: Pp, f, s: m.s, L, v });
-    Pp.branches.forEach((br, k) => pSeries(br, f, u1, u2, v + m.offs[k], k === 0 ? -m.s : m.s, { par: Pp, k }, false));
+    order.forEach((bi, j) => pSeries(Pp.branches[bi], f, u1, u2, v + m.offs[j], j === 0 ? -m.s : m.s, { par: Pp, k: bi, j }, false));
+    if (legged && n >= 2) {
+      const vF = v + m.offs[far], vN = v + m.offs[near], sg = Math.sign(vF - vN) || 1, segLen = Math.abs(vF - vN);
+      const ddx = f.ox * sg, ddy = f.oy * sg;
+      const pa = P(f, u1, vN), pb = P(f, u2, vF);
+      const FA = { sx: pa[0], sy: pa[1], dx: ddx, dy: ddy, ox: -f.dx, oy: -f.dy };
+      const FB = { sx: pb[0], sy: pb[1], dx: -ddx, dy: -ddy, ox: f.dx, oy: f.dy };
+      if (Pp.legA) pSeries(Pp.legA, FA, 0, segLen, 0, 1, { side: null, par: null, k: -1, legOf: Pp }, false);
+      if (Pp.legB) pSeries(Pp.legB, FB, 0, segLen, 0, 1, { side: null, par: null, k: -1, legOf: Pp }, false);
+    }
   }
-  for (const s of SIDES) pSeries(doc.loop[s], F[s], 0, F[s].len, 0, 1, { side: s, par: null, k: -1 }, stretched[s]);
+  // Intill en sträckt parallellkoppling ansluter sidoledningen vid den
+  // närmaste stegpinnen, inte i hörnet. Ledningsbiten ovanför hör till
+  // parallellkopplingen, och där kan dess ben ha komponenter.
+  const TOUCH = { left: { bottom: 'start', top: 'end' }, right: { top: 'start', bottom: 'end' }, top: { left: 'start', right: 'end' }, bottom: { right: 'start', left: 'end' } };
+  for (const s of SIDES) {
+    let u1 = 0, u2 = F[s].len;
+    for (const a of ADJ[s]) {
+      if (!stretched[a]) continue;
+      const m = M[doc.loop[a].items[0].id], trim = Math.abs(m.offs[m.offs.length - 1]);
+      if (TOUCH[s][a] === 'start') u1 = trim; else u2 = F[s].len - trim;
+    }
+    pSeries(doc.loop[s], F[s], u1, Math.max(u1, u2), 0, 1, { side: s, par: null, k: -1 }, stretched[s]);
+  }
 
-  return { geo, M, lab, plan, info, auto, W, H, stretched };
+  return { geo, M, lab, plan, info, auto, W, H, stretched, parInfo };
 }
 
 /* ================= Symboler ================= */
@@ -593,12 +658,24 @@ function buildDisplay(doc, geo, lay, o) {
     if (ag && lay.plan[S.id]) dArrow(ag, lay.plan[S.id]);
   }
   function dPar(Pp) {
-    const g = geo[Pp.id];
+    const g = geo[Pp.id], pi = lay.parInfo && lay.parInfo[Pp.id];
     Pp.branches.forEach(dSeries);
-    const lb = geo[Pp.branches[Pp.branches.length - 1].id];
-    if (!lb) return;
-    wires.push([[g.n1x, g.n1y], [lb.x1, lb.y1]]);
-    wires.push([[g.n2x, g.n2y], [lb.x2, lb.y2]]);
+    const order = pi ? pi.order : Pp.branches.map((_, i) => i), n = order.length;
+    const G = j => geo[Pp.branches[order[j]].id];
+    if (!pi || !pi.legged || n < 2) {
+      const lb = G(n - 1);
+      if (!lb) return;
+      wires.push([[g.n1x, g.n1y], [lb.x1, lb.y1]]);
+      wires.push([[g.n2x, g.n2y], [lb.x2, lb.y2]]);
+      return;
+    }
+    // Förbindelser mellan grenarna, utom benets sträcka som ritas för sig.
+    const r0 = pi.stretched ? 1 : 0, r1 = pi.stretched ? n - 1 : n - 2;
+    const A = G(r0), B = G(r1), fa = G(pi.far), ne = G(pi.near);
+    if (!A || !B || !fa || !ne) return;
+    if (r1 > r0) { wires.push([[A.x1, A.y1], [B.x1, B.y1]]); wires.push([[A.x2, A.y2], [B.x2, B.y2]]); }
+    if (Pp.legA && geo[Pp.legA.id]) dSeries(Pp.legA); else wires.push([[ne.x1, ne.y1], [fa.x1, fa.y1]]);
+    if (Pp.legB && geo[Pp.legB.id]) dSeries(Pp.legB); else wires.push([[fa.x2, fa.y2], [ne.x2, ne.y2]]);
   }
   function dComp(c) {
     const g = geo[c.id], col = colOf(c.id);
@@ -918,7 +995,7 @@ function renderZones() {
   const near = drag.near;
   zoneG.innerHTML = drag.zones.map(z => {
     const on = z === near;
-    if (z.kind === 'series') return `<circle class="zone${on ? ' near' : ''}" cx="${r2(z.x)}" cy="${r2(z.y)}" r="${r2((on ? 6.5 : 4.5) / k * 1.2)}" vector-effect="non-scaling-stroke"/>`;
+    if (z.kind === 'series' || z.kind === 'leg') return `<circle class="zone${on ? ' near' : ''}" cx="${r2(z.x)}" cy="${r2(z.y)}" r="${r2((on ? 6.5 : 4.5) / k * 1.2)}" vector-effect="non-scaling-stroke"/>`;
     const vert = z.vert;
     if (z.kind === 'span') {
       const sw = Math.max(18 / k, z.w - 52 / k), sh = (on ? 14 : 10) / k;
@@ -966,16 +1043,29 @@ function computeZones(d, L) {
     const vert = ci.f.dx === 0;
     const sole = ci.par && ci.S.items.length === 1;
     if (sole) {
-      const sg = ci.k === 0 ? -1 : 1;   // grenarnas staplingsriktning
+      const sg = ci.j === 0 ? -1 : 1;   // grenarnas staplingsriktning
       Z.push({ kind: 'branch', pid: ci.par.id, at: ci.k + 1, x: g.x + sg * g.lsx * D, y: g.y + sg * g.lsy * D, vert });
-      if (ci.k === 0) Z.push({ kind: 'par', target: ci.c.id, side: 'out', x: g.x + g.lsx * D, y: g.y + g.lsy * D, vert });
+      if (ci.j === 0) Z.push({ kind: 'par', target: ci.c.id, side: 'out', x: g.x + g.lsx * D, y: g.y + g.lsy * D, vert });
     } else {
       Z.push({ kind: 'par', target: ci.c.id, side: 'out', x: g.x + g.lsx * D, y: g.y + g.lsy * D, vert });
       Z.push({ kind: 'par', target: ci.c.id, side: 'in', x: g.x - g.lsx * D, y: g.y - g.lsy * D, vert });
     }
   }
+  // BENZONER: mitt på den lodräta biten som leder ut till den yttersta
+  // grenen. En komponent där hamnar i serie med den grenen men ritas på
+  // benet, så att samma koppling kan se annorlunda ut.
   for (const pi of L.info.pars) {
-    const last = pi.P.branches[pi.P.branches.length - 1];
+    const P = pi.P, inf = L.parInfo[P.id];
+    if (!inf || P.branches.length < 2) continue;
+    const fa = L.geo[P.branches[inf.order[inf.far]].id], ne = L.geo[P.branches[inf.order[inf.near]].id];
+    const reorder = !inf.legged && !inf.stretched;
+    const vert = pi.f.dx !== 0;
+    if (!P.legA) Z.push({ kind: 'leg', pid: P.id, which: 'legA', reorder, x: (fa.x1 + ne.x1) / 2, y: (fa.y1 + ne.y1) / 2, vert });
+    if (!P.legB) Z.push({ kind: 'leg', pid: P.id, which: 'legB', reorder, x: (fa.x2 + ne.x2) / 2, y: (fa.y2 + ne.y2) / 2, vert });
+  }
+  for (const pi of L.info.pars) {
+    const inf = L.parInfo[pi.P.id];
+    const last = pi.P.branches[inf ? inf.order[inf.order.length - 1] : pi.P.branches.length - 1];
     if (last.items.length === 1) continue;   // täcks av grenzonen vid komponenten
     const gl = L.geo[last.id];
     const sx = pi.f.ox * pi.s, sy = pi.f.oy * pi.s;
@@ -983,7 +1073,7 @@ function computeZones(d, L) {
   }
   return Z;
 }
-const zoneKey = z => [z.kind, z.sid || z.target || z.pid, z.index, z.at, z.from, z.side].join(':');
+const zoneKey = z => [z.kind, z.sid || z.target || z.pid, z.index, z.at, z.from, z.side, z.which].join(':');
 function applyZone(d0, z, item, ids) {
   const d = clone(d0);
   if (z.kind === 'series') findSeries(d, z.sid).items.splice(z.index, 0, item);
@@ -994,6 +1084,11 @@ function applyZone(d0, z, item, ids) {
     const S = findSeries(d, z.sid);
     const pair = S.items.slice(z.from, z.from + 2);
     S.items.splice(z.from, 2, { id: ids.p, kind: 'par', side: z.side, branches: [mkSeries(pair, ids.b1), mkSeries([item], ids.b2)] });
+  } else if (z.kind === 'leg') {
+    const P = findItem(d, z.pid).item;
+    // Den yttersta grenen blir gren 0, eftersom benen hör till gren 0.
+    if (z.reorder) { P.branches.unshift(P.branches.pop()); P.legMoved = true; }
+    P[z.which] = mkSeries([item], ids.b1);
   } else if (z.kind === 'branch') {
     const f = findItem(d, z.pid);
     f.item.branches.splice(z.at, 0, mkSeries([item], ids.b1));
@@ -1303,6 +1398,7 @@ function inspDoc() {
       <li><b>Dra</b> en komponent till en ledning. Den sätts i serie, och allt fördelas jämnt.</li>
       <li><b>Släpp</b> den bredvid en komponent för att parallellkoppla.</li>
       <li><b>Släpp</b> den under mellanrummet mellan två komponenter för att parallellkoppla över båda.</li>
+      <li><b>Släpp</b> den på en lodrät ledningsbit i en parallellkoppling, så hamnar den i serie med den yttersta grenen men ritas på den lodräta biten.</li>
       <li><b>Klicka</b> på en komponent för att skriva in värden.</li>
       <li><b>Dra bort</b> en komponent till papperskorgen eller tryck Delete.</li>
       <li><b>Kopiera bild</b> och klistra in i Word, PowerPoint eller Google Dokument.</li>

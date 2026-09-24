@@ -1,0 +1,33 @@
+# Fångar KaTeX-kommandon som tappat sin backslash i JS-strängarna under data/
+# (\cdot i stället för \\cdot i data/nyheter.js, data/ovningar.js …). JS äter
+# upp enkel backslash, och sidan visar "BcdotAcdotomega" i stället för en
+# formel. Felet syns inte i källan, bara på sajten.
+#
+# Samma kontroll körs lokalt av PostToolUse-kroken i .claude/settings.json
+# efter varje redigering. Det här är skyddsnätet för ändringar som inte går
+# via Claude Code (handredigering, skript, schemalagda jobb utan kroken):
+# rött kryss och mejl till ägaren. Laga med
+#   node .claude/verify-katex-backslash.js --laga
+
+name: Verifiera KaTeX i JS-data
+
+on:
+  push:
+    branches: [main]
+    paths: ['data/**.js', '.claude/verify-katex-backslash.js']
+  pull_request:
+    branches: [main]
+    paths: ['data/**.js', '.claude/verify-katex-backslash.js']
+
+jobs:
+  verifiera:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Leta efter tappade KaTeX-backslash
+        run: node .claude/verify-katex-backslash.js

@@ -129,7 +129,9 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
      uppslag du hittade men inte använde i `ko.md`.
 
 10. **Verifiera:** kör `node .claude/verify-navigation.js` (nyheter.html ska
-    vara intakt) och öppna `nyheter.html` + `nyheter.html?id=<nytt-id>` i en
+    vara intakt) och `node .claude/verify-katex-backslash.js data/nyheter.js`
+    (formler med enkel backslash, `\cdot` i stället för `\\cdot`, visas som
+    "BcdotAcdotomega" på sajten) och öppna `nyheter.html` + `nyheter.html?id=<nytt-id>` i en
     skärmdump för att se att artikeln och bilden renderar snyggt. Kontrollera
     samtidigt att artikelns svåra ord fått en prickad understrykning (ordlistan
     är inkopplad) och att rutan "Ordförklaringar" listar dem.

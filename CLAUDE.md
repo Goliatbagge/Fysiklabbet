@@ -66,6 +66,15 @@ node .claude/verify-sprak.js [fil …]
 # parentes upphöjd till en exponent). Se "Bråk i löptext" nedan.
 node .claude/verify-brak.js
 
+# Verifiera att inga KaTeX-kommandon TAPPAT SIN BACKSLASH i JS-strängarna
+# under data/ (nyheter, övningar, exit tickets, nationella prov). Enkel
+# backslash äts upp av JS: `\cdot` blir "cdot" och sidan visar
+# "E = BcdotAcdotomega". Körs AUTOMATISKT av en PostToolUse-krok
+# (.claude/settings.json) efter varje redigering av data/*.js, och av GitHub
+# Actions (verifiera-katex.yml) vid push. --laga rättar. Se "JS-strängar:
+# dubbla alla backslash" nedan.
+node .claude/verify-katex-backslash.js [--laga] [fil …]
+
 # Verifiera att inga BLOCK-FORMLER klipps av sin egen ruta (KÖR FÖRE COMMIT
 # vid ändringar i teorins formler, i .katex-display-CSS:en eller i
 # nedskalningen av breda formler!) — laddar avsnitten på 390×844, fäller ut
@@ -1854,6 +1863,24 @@ KaTeX får råtext. I `.md`-filer används enkla backslash.
 Gäller alla KaTeX-kommandon: `\\cdot`, `\\frac`, `\\sqrt`, `\\left`,
 `\\right`, `\\sin`, `\\alpha`, `\\mathrm`, `\\,` osv. Titta i grannraderna
 — om de använder `\\cdot` ska din också göra det.
+
+Gäller även `data/nyheter.js`, `data/exittickets.js` och `data/np/*.js`.
+Felet ser aldrig trasigt ut i källan: `\cdot` i en JS-sträng blir "cdot",
+`\omega` blir "omega" och `27\^\circ` blir "27^circ" (upphöjt c + "irc"),
+och KaTeX renderar det utan felmeddelande. Så publicerades nyheten om
+duvornas inneröra 2026-09-24 med "E = BcdotAcdotomega", och vid samma
+svepning hittades 469 sådana backslash (mest `\^\circ` i trigonometri-
+övningarna). Tre skydd finns sedan dess:
+
+1. **`.claude/verify-katex-backslash.js`** läser JS-källan, följer var
+   math-spannen börjar och slutar och ger fel på varje enkel backslash
+   inuti ett (utom `\\`, citattecken, `\uXXXX` och en ren radbrytning).
+   `--laga` dubblar dem, och gör `\^` till `^`.
+2. **PostToolUse-kroken** i `.claude/settings.json` kör verifieraren efter
+   varje Edit/Write på en `data/**/*.js` och stoppar agenten (även
+   subagenter som nyhetsagenten) tills felet är rättat. Ta inte bort den.
+3. **GitHub Actions** (`.github/workflows/verifiera-katex.yml`) ger rött
+   kryss vid push om en ändring ändå slunkit igenom.
 
 ### Värdesiffror: räkna om avrundningen, gissa aldrig
 

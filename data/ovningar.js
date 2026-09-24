@@ -8320,7 +8320,7 @@ $$
 
 **Svar:** Alternativ A — 101 300 Pa och 1,013 bar.
 
-**Generell slutsats:** Lufttrycket vid havsytan brukar avrundas till $1\ \mathrm{atm} = 101\,325\ \mathrm{Pa} \approx 1\ \mathrm{bar} = 100\ \mathrm{kPa}$. Skillnaden mellan atm och bar är bara ca 1 %, så man kan ofta använda dem som likvärdiga i grova uppskattningar.`,
+**Generell slutsats:** Lufttrycket vid havsytan brukar avrundas till $1\\ \\mathrm{atm} = 101\\,325\\ \\mathrm{Pa} \\approx 1\\ \\mathrm{bar} = 100\\ \\mathrm{kPa}$. Skillnaden mellan atm och bar är bara ca 1 %, så man kan ofta använda dem som likvärdiga i grova uppskattningar.`,
         },
         {
             level: 1,
@@ -34836,7 +34836,7 @@ $$
             solution: `Den närliggande kateten och hypotenusan hör ihop via cosinus.
 
 $$
-\\cos 27\^\circ = \\frac{x}{8{,}0} \\quad\\Leftrightarrow\\quad x = 8{,}0 \\cdot \\cos 27\^\circ = 7{,}128\\ldots \\approx 7{,}1\\ \\mathrm{m}
+\\cos 27^\\circ = \\frac{x}{8{,}0} \\quad\\Leftrightarrow\\quad x = 8{,}0 \\cdot \\cos 27^\\circ = 7{,}128\\ldots \\approx 7{,}1\\ \\mathrm{m}
 $$
 
 **Svar:** 7,1 m`,
@@ -34855,13 +34855,13 @@ $$
             solution: `**a)** Flaggstången är motstående katet till höjdvinkeln, skuggan är närliggande katet — vi använder tangens.
 
 $$
-\\tan 52\^\circ = \\frac{6{,}0}{x} \\quad\\Leftrightarrow\\quad x = \\frac{6{,}0}{\\tan 52\^\circ} = 4{,}687\\ldots \\approx 4{,}7\\ \\mathrm{m}
+\\tan 52^\\circ = \\frac{6{,}0}{x} \\quad\\Leftrightarrow\\quad x = \\frac{6{,}0}{\\tan 52^\\circ} = 4{,}687\\ldots \\approx 4{,}7\\ \\mathrm{m}
 $$
 
 **b)** Flaggstången är motstående katet till hypotenusan — vi använder sinus (inte cosinus, som hade gett fel katet).
 
 $$
-\\sin 52\^\circ = \\frac{6{,}0}{h} \\quad\\Leftrightarrow\\quad h = \\frac{6{,}0}{\\sin 52\^\circ} = 7{,}614\\ldots \\approx 7{,}6\\ \\mathrm{m}
+\\sin 52^\\circ = \\frac{6{,}0}{h} \\quad\\Leftrightarrow\\quad h = \\frac{6{,}0}{\\sin 52^\\circ} = 7{,}614\\ldots \\approx 7{,}6\\ \\mathrm{m}
 $$
 
 **Svar:** 4,7 m; 7,6 m`,
@@ -34879,13 +34879,13 @@ $$
             solution: `**a)** Höjden är motstående katet och bottensträckan är närliggande katet till $v$ — vi använder tangens och dess invers.
 
 $$
-\\tan v = \\frac{2{,}1}{3{,}5} = 0{,}60 \\quad\\Rightarrow\\quad v = \\tan^{-1}(0{,}60) = 30{,}964\\ldots\^\circ \\approx 31\^\circ
+\\tan v = \\frac{2{,}1}{3{,}5} = 0{,}60 \\quad\\Rightarrow\\quad v = \\tan^{-1}(0{,}60) = 30{,}964\\ldots^\\circ \\approx 31^\\circ
 $$
 
 **b)** Med vinkeln (ej avrundad) och höjden bestäms hypotenusan med sinus.
 
 $$
-\\sin v = \\frac{2{,}1}{h} \\quad\\Leftrightarrow\\quad h = \\frac{2{,}1}{\\sin 30{,}964\\ldots\^\circ} = 4{,}081\\ldots \\approx 4{,}1\\ \\mathrm{m}
+\\sin v = \\frac{2{,}1}{h} \\quad\\Leftrightarrow\\quad h = \\frac{2{,}1}{\\sin 30{,}964\\ldots^\\circ} = 4{,}081\\ldots \\approx 4{,}1\\ \\mathrm{m}
 $$
 
 Observera att $\\tan^{-1}$ av kvoten mellan de två katetrarna INTE ger hypotenusan (det svarar mot vinkeln, inte en sträcka) — ett vanligt misstag är att blanda ihop de båda inversa/direkta stegen.
@@ -35037,7 +35037,7 @@ $$
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `Bestäm $\\cos 0\^\circ$ med hjälp av enhetscirkeln.`,
+            question: `Bestäm $\\cos 0^\\circ$ med hjälp av enhetscirkeln.`,
             choices: [
                 `1`,
                 `0`,
@@ -35045,17 +35045,17 @@ $$
                 `$\\dfrac{1}{2}$`,
             ],
             correct: 0,
-            solution: `Vid $0\^\circ$ ligger punkten på enhetscirkelns kant i $(1, 0)$. Cosinus motsvarar $x$-koordinaten.
+            solution: `Vid $0^\\circ$ ligger punkten på enhetscirkelns kant i $(1, 0)$. Cosinus motsvarar $x$-koordinaten.
 
 $$
-\\cos 0\^\circ = 1
+\\cos 0^\\circ = 1
 $$
 
 **Svar:** 1`,
         },
         {
             level: 1,
-            question: `Bestäm $\\sin 270\^\circ$ med hjälp av enhetscirkeln.`,
+            question: `Bestäm $\\sin 270^\\circ$ med hjälp av enhetscirkeln.`,
             choices: [
                 `$-1$`,
                 `1`,
@@ -35063,10 +35063,10 @@ $$
                 `$\\dfrac{1}{2}$`,
             ],
             correct: 0,
-            solution: `Vid $270\^\circ$ ligger punkten på enhetscirkelns kant längst ner, i $(0, -1)$. Sinus motsvarar $y$-koordinaten.
+            solution: `Vid $270^\\circ$ ligger punkten på enhetscirkelns kant längst ner, i $(0, -1)$. Sinus motsvarar $y$-koordinaten.
 
 $$
-\\sin 270\^\circ = -1
+\\sin 270^\\circ = -1
 $$
 
 **Svar:** $-1$`,
@@ -35088,12 +35088,12 @@ $$
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Lös ekvationen $3\\sin v = 1{,}5$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$.`,
+            question: `Lös ekvationen $3\\sin v = 1{,}5$ i intervallet $0^\\circ \\leq v \\leq 360^\\circ$.`,
             choices: [
-                `$v_1 = 30\^\circ$ och $v_2 = 150\^\circ$`,
-                `$v_1 = 30\^\circ$ och $v_2 = 330\^\circ$`,
-                `$v_1 = 60\^\circ$ och $v_2 = 120\^\circ$`,
-                `$v = 30\^\circ$ (enda lösningen)`,
+                `$v_1 = 30^\\circ$ och $v_2 = 150^\\circ$`,
+                `$v_1 = 30^\\circ$ och $v_2 = 330^\\circ$`,
+                `$v_1 = 60^\\circ$ och $v_2 = 120^\\circ$`,
+                `$v = 30^\\circ$ (enda lösningen)`,
             ],
             correct: 0,
             solution: `Vi löser först ut $\\sin v$.
@@ -35105,25 +35105,25 @@ $$
 Räknaren ger den minsta lösningen.
 
 $$
-v_1 = \\sin^{-1}(0{,}5) = 30\^\circ
+v_1 = \\sin^{-1}(0{,}5) = 30^\\circ
 $$
 
-Den andra lösningen fås med $v_2 = 180\^\circ - v_1$.
+Den andra lösningen fås med $v_2 = 180^\\circ - v_1$.
 
 $$
-v_2 = 180\^\circ - 30\^\circ = 150\^\circ
+v_2 = 180^\\circ - 30^\\circ = 150^\\circ
 $$
 
-**Svar:** $v_1 = 30\^\circ$ och $v_2 = 150\^\circ$`,
+**Svar:** $v_1 = 30^\\circ$ och $v_2 = 150^\\circ$`,
         },
         {
             level: 2,
-            question: `Lös ekvationen $2\\cos v - 0{,}8 = 0{,}4$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$.`,
+            question: `Lös ekvationen $2\\cos v - 0{,}8 = 0{,}4$ i intervallet $0^\\circ \\leq v \\leq 360^\\circ$.`,
             choices: [
-                `$v_1 \\approx 53{,}1\^\circ$ och $v_2 \\approx 306{,}9\^\circ$`,
-                `$v_1 \\approx 53{,}1\^\circ$ och $v_2 \\approx 126{,}9\^\circ$`,
-                `$v_1 \\approx 36{,}9\^\circ$ och $v_2 \\approx 323{,}1\^\circ$`,
-                `$v \\approx 53{,}1\^\circ$ (enda lösningen)`,
+                `$v_1 \\approx 53{,}1^\\circ$ och $v_2 \\approx 306{,}9^\\circ$`,
+                `$v_1 \\approx 53{,}1^\\circ$ och $v_2 \\approx 126{,}9^\\circ$`,
+                `$v_1 \\approx 36{,}9^\\circ$ och $v_2 \\approx 323{,}1^\\circ$`,
+                `$v \\approx 53{,}1^\\circ$ (enda lösningen)`,
             ],
             correct: 0,
             solution: `Vi löser först ut $\\cos v$.
@@ -35137,45 +35137,45 @@ $$
 Räknaren ger den minsta lösningen.
 
 $$
-v_1 = \\cos^{-1}(0{,}6) = 53{,}130\\ldots\^\circ \\approx 53{,}1\^\circ
+v_1 = \\cos^{-1}(0{,}6) = 53{,}130\\ldots^\\circ \\approx 53{,}1^\\circ
 $$
 
-Den andra lösningen fås med $v_2 = 360\^\circ - v_1$.
+Den andra lösningen fås med $v_2 = 360^\\circ - v_1$.
 
 $$
-v_2 = 360\^\circ - 53{,}130\\ldots\^\circ \\approx 306{,}9\^\circ
+v_2 = 360^\\circ - 53{,}130\\ldots^\\circ \\approx 306{,}9^\\circ
 $$
 
-**Svar:** $v_1 \\approx 53{,}1\^\circ$ och $v_2 \\approx 306{,}9\^\circ$`,
+**Svar:** $v_1 \\approx 53{,}1^\\circ$ och $v_2 \\approx 306{,}9^\\circ$`,
         },
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En vinkel $v$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$ uppfyller $\\sin v = 0{,}6$ och ligger i andra kvadranten (mellan $90\^\circ$ och $180\^\circ$). Bestäm $v$, avrundat till en decimal.`,
+            question: `En vinkel $v$ i intervallet $0^\\circ \\leq v \\leq 360^\\circ$ uppfyller $\\sin v = 0{,}6$ och ligger i andra kvadranten (mellan $90^\\circ$ och $180^\\circ$). Bestäm $v$, avrundat till en decimal.`,
             choices: [
-                `$v \\approx 143{,}1\^\circ$`,
-                `$v \\approx 36{,}9\^\circ$`,
-                `$v \\approx 216{,}9\^\circ$`,
-                `$v \\approx 126{,}9\^\circ$`,
+                `$v \\approx 143{,}1^\\circ$`,
+                `$v \\approx 36{,}9^\\circ$`,
+                `$v \\approx 216{,}9^\\circ$`,
+                `$v \\approx 126{,}9^\\circ$`,
             ],
             correct: 0,
-            solution: `Ekvationen $\\sin v = 0{,}6$ har i intervallet $0\^\circ \\leq v \\leq 360\^\circ$ två lösningar. Räknaren ger den minsta.
+            solution: `Ekvationen $\\sin v = 0{,}6$ har i intervallet $0^\\circ \\leq v \\leq 360^\\circ$ två lösningar. Räknaren ger den minsta.
 
 $$
-v_1 = \\sin^{-1}(0{,}6) = 36{,}870\\ldots\^\circ \\approx 36{,}9\^\circ
+v_1 = \\sin^{-1}(0{,}6) = 36{,}870\\ldots^\\circ \\approx 36{,}9^\\circ
 $$
 
-Den ligger i första kvadranten ($0\^\circ$–$90\^\circ$), inte andra. Den
-andra lösningen fås med $v_2 = 180\^\circ - v_1$.
+Den ligger i första kvadranten ($0^\\circ$–$90^\\circ$), inte andra. Den
+andra lösningen fås med $v_2 = 180^\\circ - v_1$.
 
 $$
-v_2 = 180\^\circ - 36{,}870\\ldots\^\circ \\approx 143{,}1\^\circ
+v_2 = 180^\\circ - 36{,}870\\ldots^\\circ \\approx 143{,}1^\\circ
 $$
 
-Eftersom $v_2$ ligger mellan $90\^\circ$ och $180\^\circ$ är det denna
+Eftersom $v_2$ ligger mellan $90^\\circ$ och $180^\\circ$ är det denna
 lösning som söks — inte $v_1$, trots att det är den räknaren visar direkt.
 
-**Svar:** $v \\approx 143{,}1\^\circ$`,
+**Svar:** $v \\approx 143{,}1^\\circ$`,
         },
     ],
 
@@ -35183,83 +35183,83 @@ lösning som söks — inte $v_1$, trots att det är den räknaren visar direkt.
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `Lös ekvationen $\\tan v = 3$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$. Ange båda lösningarna avrundade till en decimal.`,
+            question: `Lös ekvationen $\\tan v = 3$ i intervallet $0^\\circ \\leq v \\leq 360^\\circ$. Ange båda lösningarna avrundade till en decimal.`,
             choices: [
-                `$v = 71{,}6\^\circ$ eller $v = 251{,}6\^\circ$`,
-                `$v = 71{,}6\^\circ$ eller $v = 108{,}4\^\circ$`,
-                `$v = 71{,}6\^\circ$`,
-                `$v = 71{,}6\^\circ$ eller $v = 431{,}6\^\circ$`,
+                `$v = 71{,}6^\\circ$ eller $v = 251{,}6^\\circ$`,
+                `$v = 71{,}6^\\circ$ eller $v = 108{,}4^\\circ$`,
+                `$v = 71{,}6^\\circ$`,
+                `$v = 71{,}6^\\circ$ eller $v = 431{,}6^\\circ$`,
             ],
             correct: 0,
             solution: `Vi använder den inversa funktionen för tangens.
 
 $$
-v_1 = \\tan^{-1}(3) = 71{,}565\\ldots\^\circ \\approx 71{,}6\^\circ
+v_1 = \\tan^{-1}(3) = 71{,}565\\ldots^\\circ \\approx 71{,}6^\\circ
 $$
 
-Tangensfunktionen har period $180\^\circ$, så vi lägger till en period för att hitta den andra lösningen i intervallet.
+Tangensfunktionen har period $180^\\circ$, så vi lägger till en period för att hitta den andra lösningen i intervallet.
 
 $$
-v_2 \\approx 71{,}6\^\circ + 180\^\circ = 251{,}6\^\circ
+v_2 \\approx 71{,}6^\\circ + 180^\\circ = 251{,}6^\\circ
 $$
 
-**Svar:** $v_1 \\approx 71{,}6\^\circ$ och $v_2 \\approx 251{,}6\^\circ$`,
+**Svar:** $v_1 \\approx 71{,}6^\\circ$ och $v_2 \\approx 251{,}6^\\circ$`,
         },
         {
             level: 1,
-            question: `Lös ekvationen $\\tan v = 0{,}5$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$. Ange den STÖRSTA av de två lösningarna, avrundad till en decimal.`,
+            question: `Lös ekvationen $\\tan v = 0{,}5$ i intervallet $0^\\circ \\leq v \\leq 360^\\circ$. Ange den STÖRSTA av de två lösningarna, avrundad till en decimal.`,
             answer: { value: 206.6, unit: '°', tol: 0.02 },
             solution: `$$
-v_1 = \\tan^{-1}(0{,}5) = 26{,}565\\ldots\^\circ \\approx 26{,}6\^\circ
+v_1 = \\tan^{-1}(0{,}5) = 26{,}565\\ldots^\\circ \\approx 26{,}6^\\circ
 $$
 
-Den andra lösningen fås genom att lägga till en period på $180\^\circ$.
+Den andra lösningen fås genom att lägga till en period på $180^\\circ$.
 
 $$
-v_2 \\approx 26{,}6\^\circ + 180\^\circ = 206{,}6\^\circ
+v_2 \\approx 26{,}6^\\circ + 180^\\circ = 206{,}6^\\circ
 $$
 
 Den STÖRSTA av de två lösningarna är alltså $v_2$.
 
-**Svar:** $206{,}6\^\circ$`,
+**Svar:** $206{,}6^\\circ$`,
         },
         {
             level: 1,
-            question: `Lös ekvationen $\\tan v = -2$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$. Ange båda lösningarna avrundade till en decimal.`,
+            question: `Lös ekvationen $\\tan v = -2$ i intervallet $0^\\circ \\leq v \\leq 360^\\circ$. Ange båda lösningarna avrundade till en decimal.`,
             choices: [
-                `$v = 116{,}6\^\circ$ eller $v = 296{,}6\^\circ$`,
-                `$v = -63{,}4\^\circ$ eller $v = 116{,}6\^\circ$`,
-                `$v = 63{,}4\^\circ$ eller $v = 243{,}4\^\circ$`,
-                `$v = 116{,}6\^\circ$`,
+                `$v = 116{,}6^\\circ$ eller $v = 296{,}6^\\circ$`,
+                `$v = -63{,}4^\\circ$ eller $v = 116{,}6^\\circ$`,
+                `$v = 63{,}4^\\circ$ eller $v = 243{,}4^\\circ$`,
+                `$v = 116{,}6^\\circ$`,
             ],
             correct: 0,
             solution: `Räknaren ger ett negativt värde eftersom $a$ är negativt.
 
 $$
-\\tan^{-1}(-2) = -63{,}434\\ldots\^\circ
+\\tan^{-1}(-2) = -63{,}434\\ldots^\\circ
 $$
 
-Detta ligger inte i intervallet $0\^\circ \\leq v \\leq 360\^\circ$, så vi lägger till perioden $180\^\circ$ tills lösningarna hamnar i intervallet.
+Detta ligger inte i intervallet $0^\\circ \\leq v \\leq 360^\\circ$, så vi lägger till perioden $180^\\circ$ tills lösningarna hamnar i intervallet.
 
 $$
-v_1 \\approx -63{,}4\^\circ + 180\^\circ = 116{,}6\^\circ
+v_1 \\approx -63{,}4^\\circ + 180^\\circ = 116{,}6^\\circ
 $$
 
 $$
-v_2 \\approx 116{,}6\^\circ + 180\^\circ = 296{,}6\^\circ
+v_2 \\approx 116{,}6^\\circ + 180^\\circ = 296{,}6^\\circ
 $$
 
-**Svar:** $v_1 \\approx 116{,}6\^\circ$ och $v_2 \\approx 296{,}6\^\circ$`,
+**Svar:** $v_1 \\approx 116{,}6^\\circ$ och $v_2 \\approx 296{,}6^\\circ$`,
         },
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Lös ekvationen $3\\tan v + 1 = 13$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$. Ange båda lösningarna avrundade till en decimal.`,
+            question: `Lös ekvationen $3\\tan v + 1 = 13$ i intervallet $0^\\circ \\leq v \\leq 360^\\circ$. Ange båda lösningarna avrundade till en decimal.`,
             choices: [
-                `$v = 76{,}0\^\circ$ eller $v = 256{,}0\^\circ$`,
-                `$v = 4\^\circ$ eller $v = 184\^\circ$`,
-                `$v = 76{,}0\^\circ$`,
-                `$v = 14{,}0\^\circ$ eller $v = 194{,}0\^\circ$`,
+                `$v = 76{,}0^\\circ$ eller $v = 256{,}0^\\circ$`,
+                `$v = 4^\\circ$ eller $v = 184^\\circ$`,
+                `$v = 76{,}0^\\circ$`,
+                `$v = 14{,}0^\\circ$ eller $v = 194{,}0^\\circ$`,
             ],
             correct: 0,
             solution: `Vi löser först ut $\\tan v$ ur ekvationen.
@@ -35279,66 +35279,66 @@ $$
 Sedan används den inversa funktionen, och en period läggs till för den andra lösningen.
 
 $$
-v_1 = \\tan^{-1}(4) = 75{,}964\\ldots\^\circ \\approx 76{,}0\^\circ
+v_1 = \\tan^{-1}(4) = 75{,}964\\ldots^\\circ \\approx 76{,}0^\\circ
 $$
 
 $$
-v_2 \\approx 76{,}0\^\circ + 180\^\circ = 256{,}0\^\circ
+v_2 \\approx 76{,}0^\\circ + 180^\\circ = 256{,}0^\\circ
 $$
 
-**Svar:** $v_1 \\approx 76{,}0\^\circ$ och $v_2 \\approx 256{,}0\^\circ$`,
+**Svar:** $v_1 \\approx 76{,}0^\\circ$ och $v_2 \\approx 256{,}0^\\circ$`,
         },
         {
             level: 2,
-            question: `Lös ekvationen $\\tan v = 5$ i intervallet $-180\^\circ \\leq v \\leq 180\^\circ$. Ange båda lösningarna avrundade till en decimal.`,
+            question: `Lös ekvationen $\\tan v = 5$ i intervallet $-180^\\circ \\leq v \\leq 180^\\circ$. Ange båda lösningarna avrundade till en decimal.`,
             choices: [
-                `$v = 78{,}7\^\circ$ eller $v = -101{,}3\^\circ$`,
-                `$v = 78{,}7\^\circ$ eller $v = 258{,}7\^\circ$`,
-                `$v = 78{,}7\^\circ$`,
-                `$v = -78{,}7\^\circ$ eller $v = 101{,}3\^\circ$`,
+                `$v = 78{,}7^\\circ$ eller $v = -101{,}3^\\circ$`,
+                `$v = 78{,}7^\\circ$ eller $v = 258{,}7^\\circ$`,
+                `$v = 78{,}7^\\circ$`,
+                `$v = -78{,}7^\\circ$ eller $v = 101{,}3^\\circ$`,
             ],
             correct: 0,
             solution: `$$
-v_1 = \\tan^{-1}(5) = 78{,}690\\ldots\^\circ \\approx 78{,}7\^\circ
+v_1 = \\tan^{-1}(5) = 78{,}690\\ldots^\\circ \\approx 78{,}7^\\circ
 $$
 
-Denna lösning ligger i intervallet. För den andra lösningen skulle vi normalt lägga till $180\^\circ$, men $78{,}7\^\circ + 180\^\circ = 258{,}7\^\circ$ hamnar UTANFÖR intervallet $-180\^\circ \\leq v \\leq 180\^\circ$. Vi drar i stället bort en period.
+Denna lösning ligger i intervallet. För den andra lösningen skulle vi normalt lägga till $180^\\circ$, men $78{,}7^\\circ + 180^\\circ = 258{,}7^\\circ$ hamnar UTANFÖR intervallet $-180^\\circ \\leq v \\leq 180^\\circ$. Vi drar i stället bort en period.
 
 $$
-v_2 \\approx 78{,}7\^\circ - 180\^\circ = -101{,}3\^\circ
+v_2 \\approx 78{,}7^\\circ - 180^\\circ = -101{,}3^\\circ
 $$
 
-Kontroll: $-101{,}3\^\circ$ ligger i intervallet $[-180\^\circ,\\ 180\^\circ]$.
+Kontroll: $-101{,}3^\\circ$ ligger i intervallet $[-180^\\circ,\\ 180^\\circ]$.
 
-**Svar:** $v_1 \\approx 78{,}7\^\circ$ och $v_2 \\approx -101{,}3\^\circ$`,
+**Svar:** $v_1 \\approx 78{,}7^\\circ$ och $v_2 \\approx -101{,}3^\\circ$`,
         },
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Lös ekvationen $\\tan(2v) = 1$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$.`,
+            question: `Lös ekvationen $\\tan(2v) = 1$ i intervallet $0^\\circ \\leq v \\leq 360^\\circ$.`,
             choices: [
-                `$v = 22{,}5\^\circ$, $112{,}5\^\circ$, $202{,}5\^\circ$ eller $292{,}5\^\circ$`,
-                `$v = 22{,}5\^\circ$ eller $v = 202{,}5\^\circ$`,
-                `$v = 45\^\circ$ eller $v = 225\^\circ$`,
-                `$v = 22{,}5\^\circ$, $112{,}5\^\circ$, $202{,}5\^\circ$, $292{,}5\^\circ$ eller $382{,}5\^\circ$`,
+                `$v = 22{,}5^\\circ$, $112{,}5^\\circ$, $202{,}5^\\circ$ eller $292{,}5^\\circ$`,
+                `$v = 22{,}5^\\circ$ eller $v = 202{,}5^\\circ$`,
+                `$v = 45^\\circ$ eller $v = 225^\\circ$`,
+                `$v = 22{,}5^\\circ$, $112{,}5^\\circ$, $202{,}5^\\circ$, $292{,}5^\\circ$ eller $382{,}5^\\circ$`,
             ],
             correct: 0,
-            solution: `**Insikten:** låt $u = 2v$. Eftersom $v$ ligger i intervallet $0\^\circ \\leq v \\leq 360\^\circ$ ligger $u$ i det DUBBELT så breda intervallet $0\^\circ \\leq u \\leq 720\^\circ$ — vilket rymmer HELA två perioder ($180\^\circ$ vardera) av tangensfunktionen i stället för en. Ekvationen har alltså fyra lösningar i stället för två.
+            solution: `**Insikten:** låt $u = 2v$. Eftersom $v$ ligger i intervallet $0^\\circ \\leq v \\leq 360^\\circ$ ligger $u$ i det DUBBELT så breda intervallet $0^\\circ \\leq u \\leq 720^\\circ$ — vilket rymmer HELA två perioder ($180^\\circ$ vardera) av tangensfunktionen i stället för en. Ekvationen har alltså fyra lösningar i stället för två.
 
 $$
-\\tan u = 1 \\quad\\Rightarrow\\quad u_1 = \\tan^{-1}(1) = 45\^\circ
+\\tan u = 1 \\quad\\Rightarrow\\quad u_1 = \\tan^{-1}(1) = 45^\\circ
 $$
 
-Vi lägger till perioden $180\^\circ$ upprepade gånger tills nästa värde hamnar utanför $u$-intervallet:
-$u_1 = 45\^\circ$, $u_2 = 225\^\circ$, $u_3 = 405\^\circ$, $u_4 = 585\^\circ$ (nästa värde, $765\^\circ$, är större än $720\^\circ$ och faller bort).
+Vi lägger till perioden $180^\\circ$ upprepade gånger tills nästa värde hamnar utanför $u$-intervallet:
+$u_1 = 45^\\circ$, $u_2 = 225^\\circ$, $u_3 = 405^\\circ$, $u_4 = 585^\\circ$ (nästa värde, $765^\\circ$, är större än $720^\\circ$ och faller bort).
 
 Slutligen löser vi ut $v = \\dfrac{u}{2}$ för varje lösning.
 
 $$
-v = \\frac{45\^\circ}{2},\\ \\frac{225\^\circ}{2},\\ \\frac{405\^\circ}{2},\\ \\frac{585\^\circ}{2} = 22{,}5\^\circ,\\ 112{,}5\^\circ,\\ 202{,}5\^\circ,\\ 292{,}5\^\circ
+v = \\frac{45^\\circ}{2},\\ \\frac{225^\\circ}{2},\\ \\frac{405^\\circ}{2},\\ \\frac{585^\\circ}{2} = 22{,}5^\\circ,\\ 112{,}5^\\circ,\\ 202{,}5^\\circ,\\ 292{,}5^\\circ
 $$
 
-**Svar:** $v = 22{,}5\^\circ$, $112{,}5\^\circ$, $202{,}5\^\circ$ eller $292{,}5\^\circ$
+**Svar:** $v = 22{,}5^\\circ$, $112{,}5^\\circ$, $202{,}5^\\circ$ eller $292{,}5^\\circ$
 
 **Vanlig fälla:** att bara hitta två lösningar (genom att glömma att intervallet för $u$ blir dubbelt så brett som för $v$).`,
         },

@@ -103,6 +103,78 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-24-duvans-kompass-i-bruset",
+    date: "2026-09-24",
+    title: "Duvans inre kompass skulle ge tolv miljarddels volt — och dränks av värmebruset i samma vätska",
+    deck: "En av de hetaste förklaringarna till hur brevduvor hittar hem är att båggångarna i innerörat fungerar som en generator: vätskan i dem är salt och leder ström, och när duvan vrider på huvudet i jordens magnetfält induceras en spänning. En fysiker vid University of Exeter har nu räknat på hur stor den spänningen blir. Svaret är ungefär 12 nV, och det termiska bruset i samma vätska är tusentals gånger större.",
+    category: "Elektromagnetism",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-24-duvans-kompass-i-bruset.jpg",
+    imageAlt: "En grå duva fotograferad mitt i flykten med vingarna lyfta högt över ryggen och huvudet vridet nedåt mot kameran. Bakom den syns ett suddigt tak av röda och orange tegelpannor.",
+    imageCredit: "Foto: Arraja77, via Wikimedia Commons (CC BY-SA 4.0). Bilden visar en tamduva i flykt och är inte tagen i den beskrivna studien.",
+    tags: ["elektromagnetism", "induktion", "magnetfält", "jordens magnetfält", "faradays lag", "magnetiskt flöde", "brus", "termiskt brus", "informationsteori", "magnetsinne", "biofysik"],
+    sources: [
+      { name: "Phys.org: Pigeons' proposed inner-ear compass runs into a noise problem (23 september 2026)", url: "https://phys.org/news/2026-09-pigeons-ear-compass-noise-problem.html" },
+      { name: "Journal of the Royal Society Interface: Signals too small to sense (öppet tillgänglig sammanfattning)", url: "https://royalsocietypublishing.org/rsif/article/23/242/20260332/483289/Signals-too-small-to-sense-physical-and" },
+      { name: "arXiv: Signals too small to sense — fri fulltextversion av studien", url: "https://arxiv.org/abs/2602.23485" }
+    ],
+    research: {
+      citation: "Daniel R. Kattnig, University of Exeter, ”Signals too small to sense: physical and information-theoretic limits to induction-based magnetoreception in birds”, Journal of the Royal Society Interface 23 (242), 20260332, 2026",
+      url: "https://doi.org/10.1098/rsif.2026.0332"
+    },
+    body: [
+      { type: 'p', html: 'En brevduva som släpps femtio mil hemifrån hittar tillbaka. Hur den bär sig åt har varit en av biologins segaste frågor i över hundra år, och fysiken har blandat sig i den nästan lika länge. Skälet är enkelt: vilken mekanism man än föreslår måste den till slut klara ett krav som inte går att förhandla om. Signalen måste vara större än bruset.' },
+      { type: 'p', html: 'Hösten 2025 fick en gammal idé nytt liv. Ett lag som kartlade vilka delar av duvans hjärna som tänds av magnetiska stimuli fick utslag i balansorganet, och i innerörats båggångar hittade de hårceller utrustade med just de proteiner som krävs för att känna av elektriska spänningar. Slutsatsen låg nära till hands: kompassen sitter i balansorganet. Nu har en fysiker räknat efter, och talen pekar åt andra hållet.' },
+
+      { type: 'h2', text: 'Innerörat som generator' },
+      { type: 'p', html: 'Båggångarna sitter tre i varje öra, ungefär vinkelrätt mot varandra, och är fyllda av endolymfa, en salt vätska som leder ström. Till vardags sköter de balansen: vrider man på huvudet släpar vätskan efter och böjer ett gelémembran som hårcellerna sitter fast i. Men en ledande vätskeslinga som vrids runt i ett magnetfält är också något annat. Den är en generator.' },
+      { type: 'p', html: 'Faradays induktionslag säger att en spänning uppstår så snart det magnetiska flödet genom en slinga ändras, och flödet ändras när slingan vrids i fältet. För en slinga med arean $A$ som vrids med vinkelhastigheten $\omega$ i ett fält med flödestätheten $B$ hamnar den inducerade spänningen i storleksordningen $E = B \cdot A \cdot \omega$. Och varenda faktor i det uttrycket går att sätta en siffra på för en duva.' },
+
+      { type: 'h2', text: 'Tolv miljarddels volt' },
+      { type: 'p', html: 'Jordens magnetfält är svagt. På europeiska breddgrader är flödestätheten omkring $B = 50\ \mathrm{\mu T}$, alltså ungefär en tusendel av vad man mäter tätt intill en kylskåpsmagnet. En båggång hos en duva är cirka 5&nbsp;mm i diameter, vilket ger arean $A \approx 2{,}0 \cdot 10^{-5}\ \mathrm{m^2}$. En duva kan vrida huvudet anmärkningsvärt snabbt, upp till 700&nbsp;grader i sekunden, alltså $\omega \approx 12\ \mathrm{rad/s}$. Multiplicerar man ihop de tre talen blir resultatet $E \approx 1{,}2 \cdot 10^{-8}\ \mathrm{V}$.' },
+      { type: 'p', html: 'Tolv miljarddels volt. Det är ett överslag på tre faktorer, men Daniel Kattnig vid University of Exeter landar på samma tal i en betydligt mer omsorgsfull modell av geometrin: 12,0&nbsp;nV i det allra gynnsammaste fallet, där gelémembranet antas vara en perfekt isolator. Läcker det ström genom membranet, vilket är det troliga, sjunker spänningen till omkring 1,1&nbsp;nV.' },
+
+      { type: 'h2', text: 'Bruset som inte går att konstruera bort' },
+      { type: 'p', html: 'Problemet är inte att 12&nbsp;nV är en liten spänning. Elektronik mäter rutinmässigt mindre än så. Problemet är vad som redan finns i samma vätska.' },
+      { type: 'p', html: 'I varje ledare rör sig laddningarna slumpmässigt av ren värme, och den rörelsen ger en fladdrande spänning över ledarens ändar även när ingen kopplat in någonting. Fenomenet kallas termiskt brus, eller Johnson–Nyquist-brus efter de två som mätte upp och förklarade det 1928. Storleken ges av $U = \sqrt{4 k T R \Delta f}$, alltså av temperaturen, resistansen och hur brett frekvensband man lyssnar över. Bruset är inte ett konstruktionsfel som en skickligare ingenjör kan slipa bort. Det är en direkt följd av att materien är varm.' },
+      { type: 'p', html: 'För båggången räknar Kattnig fram en resistans på omkring 78&nbsp;kΩ vid fågelns kroppstemperatur. Summerat över hela det frekvensband som strukturen själv svarar inom hamnar bruset någonstans mellan 43 och 670&nbsp;µV, beroende på membranets elektriska egenskaper. Det är mellan tre tusen och femtiotusen gånger större än signalen. Spänningen från jordfältet ligger alltså inte nedgrävd i bruset. Den syns över huvud taget inte.' },
+
+      { type: 'h2', text: 'Att filtrera kostar tid' },
+      { type: 'p', html: 'Det klassiska sättet att gräva fram en svag signal ur brus är att lyssna smalt och länge. Ju smalare frekvensband, desto mindre brus släpps igenom, och ju längre mätningen pågår, desto mer av det slumpmässiga medelvärdesbildas bort. Men båda knepen kostar samma sak, nämligen tid, och en duva i flykt har ont om den varan.' },
+      { type: 'p', html: 'Det är här analysen blir skarp, för Kattnig räknar inte bara på spänningar utan på information. Informationsteorin sätter ett tak för hur många bitar i sekunden en kanal med en given signal och ett givet brus kan bära, oavsett hur påhittig mottagaren är. För båggången blir taket 0,15&nbsp;bitar i sekunden i det gynnsammaste fallet, och 0,022&nbsp;bitar i sekunden med ett läckande membran. För att skilja riktningar åt på fem graders noggrannhet, den storleksordning en användbar kompass kräver, behövs enligt samma räkning över 560&nbsp;bitar i sekunden.' },
+      { type: 'p', html: 'Avståndet mellan de talen är inte några tiotal procent. Det är minst en faktor tusen.' },
+      { type: 'quote', html: 'En målinriktad utvinning av information om magnetfältet, alltså ett funktionsdugligt magnetsinne, ur elektrisk induktion i båggångarna är fysikaliskt omöjlig.', cite: 'Daniel Kattnig, University of Exeter, i Journal of the Royal Society Interface (översatt)' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Termiskt brus upptäcktes av en slump. John B. Johnson försökte 1927 spåra ett störande sus i förstärkare hos Bell Labs och fann att det fanns kvar i varje motstånd, hur väl byggd apparaten än var. Harry Nyquist förklarade året därpå varför: bruset följer direkt ur temperaturen och termodynamikens lagar.',
+        'Att kyla ner en mottagare är därför inte en lyx utan en nödvändighet. Radioteleskopens förstärkare kyls till några tiotal kelvin av precis det skälet: halverar man den absoluta temperaturen sjunker brusspänningen med en faktor roten ur två.',
+        'Båggångarna är samma organ som gör att man blir yr av att snurra runt. Vätskan i dem fortsätter röra sig en stund efter att kroppen stannat, och hjärnan tolkar det som att rotationen pågår fast ögonen säger något annat.'
+      ] },
+
+      { type: 'h2', text: 'En bieffekt som kan lösa en annan gåta' },
+      { type: 'p', html: 'Den intressanta vändningen kommer på slutet. Samma räkning som dömer ut jordfältet pekar ut något annat, och nyckeln ligger i att $\omega$ står i uttrycket $E = B \cdot A \cdot \omega$ på samma villkor som $B$. Det spelar alltså ingen roll att ett radiofrekvent fält är svagt, om det bara växlar tillräckligt snabbt. Ett fält på bara 1&nbsp;nT, femtiotusen gånger svagare än jordens, som svänger tio miljoner gånger i sekunden ger enligt Kattnigs modell omkring 1,6&nbsp;µV i båggången. Det är mer än hundra gånger signalen från jordfältet.' },
+      { type: 'p', html: 'Det kan lösa en helt annan gåta. Sedan länge vet man att mycket svaga radiovågor slår ut fåglarnas kompass, och det är ett av de tyngsta argumenten för att kompassen bygger på kemi, på kortlivade radikalpar i ögat, snarare än på en inbyggd kompassnål av järn. Precis varför störningen biter så hårt har varit oklart. Induktionen i innerörat kan alltså vara högst verklig, fast som störningsväg in, inte som sinne.' },
+      { type: 'p', html: 'Kvar står mätningarna. Magnetiska stimuli tänder faktiskt områden i duvans hjärna som hänger ihop med balansorganet, och det resultatet ifrågasätts inte i den nya studien. Det som faller bort är en av förklaringarna till hur det går till. Ett negativt besked av den sorten är ingen återvändsgränd, utan en avgränsning: listan över mekanismer som är värda att undersöka blev precis en punkt kortare, och den ströks inte med ett nytt experiment utan med tre tal och en formel.' }
+    ],
+    simulering: {
+      href: 'fysik2-vaxelstromsgenerator.html',
+      name: 'Växelströmsgenerator',
+      text: 'Vrid runt en spole i ett magnetfält och se spänningen växa och byta tecken i takt med att flödet genom spolen ändras. Det är exakt den mekanism som föreslagits för duvans inneröra, fast med en vätskefylld kanal i stället för en spole — och du kan själv se hur spänningen följer hur snabbt spolen vrids.'
+    },
+    larare: {
+      moment: [
+        { label: 'Magnetiskt flöde och induktionslagen', href: 'katalog.html?id=fy2-3.9' },
+        { label: 'Induktion och inducerad spänning (ems)', href: 'katalog.html?id=fy2-3.7' },
+        { label: 'Det jordmagnetiska fältet', href: 'katalog.html?id=fy2-3.6' }
+      ],
+      fragor: [
+        'Gör om överslaget själv: en cirkulär slinga med diametern 5 mm vrids ett halvt varv på 0,25 s i ett fält på 50 µT. Hur stor blir den inducerade spänningen i medeltal, och hamnar den i samma storleksordning som talet i artikeln?',
+        'Varför blir ett radiofrekvent fält på 1 nT en mycket starkare signal i samma slinga än jordens fält på 50 µT? Vilken faktor i uttrycket för den inducerade spänningen gör hela skillnaden?',
+        'Studien avfärdar en föreslagen mekanism utan att göra ett enda nytt experiment. Vad krävs för att en sådan räkning ska väga tungt vetenskapligt, och vad skulle kunna få slutsatsen att falla?'
+      ]
+    }
+  },
+  {
     id: "2026-09-23-tonen-som-slocknar-i-ett-hopp",
     date: "2026-09-23",
     title: "Den sista tonen klingar inte av — den slocknar i ett enda hopp",

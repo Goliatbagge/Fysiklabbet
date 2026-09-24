@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Wed, 23 Sep 2026 01:23:32 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 01:22:35 GMT</lastBuildDate>
+    <item>
+      <title>Duvans inre kompass skulle ge tolv miljarddels volt — och dränks av värmebruset i samma vätska</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-24-duvans-kompass-i-bruset</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-24-duvans-kompass-i-bruset</guid>
+      <pubDate>Thu, 24 Sep 2026 04:00:00 GMT</pubDate>
+      <category>Elektromagnetism</category>
+      <description>En av de hetaste förklaringarna till hur brevduvor hittar hem är att båggångarna i innerörat fungerar som en generator: vätskan i dem är salt och leder ström, och när duvan vrider på huvudet i jordens magnetfält induceras en spänning. En fysiker vid University of Exeter har nu räknat på hur stor den spänningen blir. Svaret är ungefär 12 nV, och det termiska bruset i samma vätska är tusentals gånger större.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-24-duvans-kompass-i-bruset.jpg" length="144447" type="image/jpeg"/>
+    </item>
     <item>
       <title>Den sista tonen klingar inte av — den slocknar i ett enda hopp</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-09-23-tonen-som-slocknar-i-ett-hopp</link>
@@ -177,15 +186,6 @@
       <category>Materialfysik</category>
       <description>Ett internationellt lag lade ett avskärmande grafenskikt en tredjedels nanometer ovanför den supraledande delen. När den fylldes med laddning slocknade supraledningen helt, och det talar emot den förklaring som gäller för vanliga supraledare.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-05-supraledningen-som-gick-att-stanga-av.jpg" length="1096559" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Vågen vet inte hur den ska bryta förrän den känner botten — nu går tunnelns storlek att räkna ut i förväg</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-04-bottnen-formar-vagen</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-04-bottnen-formar-vagen</guid>
-      <pubDate>Fri, 04 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Vågor</category>
-      <description>Två oceanografer i Kalifornien har låtit en dator bryta trettio vågor över olika sjöbottnar. Ur resultatet föll ett enda tal ut som avgör hur stor tunneln blir, hur tjock vattenstrålen från krönet är och hur vågen lutar när den slår igen.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-04-bottnen-formar-vagen.jpg" length="291749" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

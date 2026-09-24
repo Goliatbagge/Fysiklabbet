@@ -56,6 +56,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'magnetsinne',
+    term: 'Magnetsinne',
+    former: ['magnetsinne', 'magnetsinnet', 'magnetsinnen', 'magnetoreception', 'magnetoreceptionen'],
+    kort: 'Förmågan hos djur att uppfatta jordens magnetfält och använda det för att orientera sig. Vilket organ som gör jobbet är fortfarande inte fastslaget för något djur.',
+    relaterade: ['radikalparsmekanismen', 'termiskt-brus', 'magnetometer'],
+    body: [
+      { type: 'p', html: 'Brevduvor, rödhakar, havssköldpaddor, laxar och till och med vissa bakterier hittar rätt med hjälp av jordens magnetfält. Att de gör det är väl belagt: flyttar man en fågel till en bur där magnetfältet vridits åt ett annat håll vänder den sig åt motsvarande håll när det är dags att flyga. Att förklara <em>hur</em> de gör det har däremot visat sig vara ovanligt svårt, och frågan har varit öppen i över femtio år.' },
+      { type: 'p', html: 'Svårigheten ligger i att jordfältet är så svagt. Flödestätheten är runt 50 miljondels tesla, ungefär en tusendel av fältet tätt intill en kylskåpsmagnet, och den energi ett sådant fält kan lämna ifrån sig till en molekyl är långt mindre än den energi molekylen ändå skakar omkring med av ren värme. Ett magnetsinne måste alltså plocka fram en signal som i vanlig mening är dränkt. Det utesluter de flesta enkla lösningar, och varje förslag måste räknas igenom innan det tas på allvar.' },
+      { type: 'p', html: 'Tre huvudspår diskuteras. Det första är små korn av magnetiska mineral, till exempel magnetit, som skulle vrida sig i fältet som en kompassnål och dra i en nervcell. Det andra är kemi: ljus skapar kortlivade par av molekyler med oparade elektroner, och magnetfältet styr vilken sorts reaktionsprodukt som bildas. Det tredje är elektrisk induktion, där ledande kroppsvätska som rör sig i fältet alstrar en spänning. Vilket av spåren som gäller, och om olika djur löser det olika, är fortfarande inte avgjort.' }
+    ]
+  },
+  {
+    id: 'termiskt-brus',
+    term: 'Termiskt brus',
+    former: ['termiskt brus', 'termiska bruset', 'termiskt bruset', 'värmebrus', 'värmebruset', 'johnsonbrus', 'johnsonbruset', 'johnson-brus', 'johnson-nyquist-brus', 'johnson–nyquist-brus', 'nyquistbrus'],
+    kort: 'Den slumpmässiga spänning som uppstår över varje ledare enbart för att den är varm. Den sätter en nedre gräns för hur svaga signaler ett instrument alls kan uppfatta.',
+    relaterade: ['skottbrus', 'magnetsinne', 'standardkvantgransen'],
+    body: [
+      { type: 'p', html: 'Koppla en känslig voltmeter till ett vanligt motstånd som inte är inkopplat till någonting annat. Mätaren visar inte noll. Den visar en liten spänning som hoppar hit och dit utan mönster, och hoppen upphör inte hur länge man än väntar. Orsaken är att laddningarna inne i motståndet aldrig står stilla: de knuffas omkring av materialets värmerörelse, och i varje ögonblick råkar det finnas lite fler åt ena hållet än åt det andra.' },
+      { type: 'p', html: 'John B. Johnson vid Bell Labs stötte på detta 1927 när han försökte spåra ett envist sus i förstärkare, och fann att det satt i själva komponenterna. Harry Nyquist förklarade året därpå varför, och gjorde det utan att titta på någon krets alls: han härledde brusets storlek direkt ur termodynamiken. Resultatet blev en av fysikens renaste formler, där brusspänningen växer som roten ur temperaturen, roten ur resistansen och roten ur den bandbredd man lyssnar över.' },
+      { type: 'p', html: 'Den praktiska följden är att bruset inte går att bygga bort. En skickligare konstruktör kan sänka det men aldrig få bort det, och de enda verkliga motmedlen är att kyla instrumentet, sänka resistansen eller lyssna över ett smalare frekvensband. Det sista har ett pris: smalare band betyder att mätningen tar längre tid. Därför kyls radioteleskopens förstärkare till några tiotal grader över absoluta nollpunkten, och därför blir varje resonemang om hur ett djur eller ett instrument kan uppfatta en mycket svag signal till slut en jämförelse mot just det här bruset.' }
+    ]
+  },
+  {
+    id: 'radikalparsmekanismen',
+    term: 'Radikalparsmekanismen',
+    former: ['radikalparsmekanismen', 'radikalparsmekanism', 'radikalpar', 'radikalparet', 'radikalparen', 'kryptokrom', 'kryptokromet', 'kryptokromer'],
+    kort: 'Den ledande kemiska förklaringen till fåglarnas kompass. Ljus skapar ett par molekyler med varsin oparad elektron, och jordens magnetfält styr vilken produkt reaktionen ger.',
+    relaterade: ['magnetsinne', 'spinn', 'termiskt-brus'],
+    body: [
+      { type: 'p', html: 'När ljus träffar vissa molekyler kan en elektron hoppa över till en granne. Kvar står då två molekyler som var och en har en ensam, oparad elektron. Ett sådant par kallas ett radikalpar, och det lever bara någon miljondels sekund innan det antingen faller tillbaka eller reagerar vidare till något annat. Vilket av de två som sker är inte slumpmässigt, utan avgörs av hur de två elektronernas spinn står i förhållande till varandra.' },
+      { type: 'p', html: 'Och där kommer magnetfältet in. Ett spinn är magnetiskt och vrider sig i ett yttre fält, så även ett mycket svagt fält kan ändra takten i hur paret pendlar mellan sina spinntillstånd. Utfallet av reaktionen blir alltså beroende av hur molekylen ligger vänd i förhållande till fältet. Det är ovanligt bland kemiska reaktioner, och det är just det som gör mekanismen intressant: signalen behöver aldrig vara större än värmerörelsen, eftersom fältet inte tillför energi utan bara styr ett val som redan står och väger.' },
+      { type: 'p', html: 'Kandidatmolekylen heter kryptokrom och finns i näthinnan hos flyttfåglar. Stöd för idén kommer bland annat från att fåglarnas kompass slutar fungera i mörker och slås ut av mycket svaga radiovågor, vilket passar ett system som bygger på ljus och på spinn. Bevisen är ändå indirekta: ingen har ännu visat hela kedjan från ett radikalpar i ögat till en riktningsupplevelse i hjärnan hos en levande fågel.' }
+    ]
+  },
+  {
     id: 'attosekund',
     term: 'Attosekund',
     former: ['attosekund', 'attosekunden', 'attosekunder', 'attosekunderna', 'attosekundpuls', 'attosekundpulsen', 'attosekundpulser', 'attosekundpulserna', 'attosekundfysik', 'attosekundfysiken'],

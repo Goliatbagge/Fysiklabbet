@@ -2123,3 +2123,19 @@ Format per post:
   uteblivet fynd faktiskt visar. Kontrollera noga vad som är förslag och vad som är mätning. Källa
   (Phys.org 2026-09): https://phys.org/news/2026-09-physicists-quantum-black-holes-lhc.html
   (tillagd 2026-09-20)
+
+- **Världens noggrannaste atomur står i Singapore** — Centre for Quantum Technologies rapporterar ett
+  optiskt atomur med rekordnoggrannhet. Ingång: vad ett ur egentligen mäter, varför optiska
+  övergångar slår mikrovågor, och vad noggrannhet betyder när sekunden själv definieras av ett ur.
+  Kontrollera vilket slags noggrannhet rekordet avser (systematisk osäkerhet, stabilitet eller
+  reproducerbarhet) — de tre blandas ofta ihop i referaten. OBS: kvant- och atomfysik är väl
+  representerat, låt det gå några dagar. Källa (Phys.org 2026-09-24):
+  https://phys.org/news/2026-09-scientists-world-accurate-atomic-clock.html
+  (tillagd 2026-09-24)
+
+- **Kvantsimulatorn där materia poppar fram ur tomrummet** — ett lag vid Duke Quantum Center har låtit
+  en jonfälla spela upp hur partikel- och antipartikelpar bildas ur ett fält. Ingång: par­bildning,
+  E = m · c², vakuum som något annat än tomhet, och vad en kvantsimulator är för sorts försök.
+  OBS: partikelfysik och kvantfysik ligger tätt i flödet — kolla avståndet först.
+  Källa (Phys.org 2026-09-24): https://phys.org/news/2026-09-quantum-device-simulates.html
+  (tillagd 2026-09-24)

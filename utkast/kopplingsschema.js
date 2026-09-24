@@ -1010,7 +1010,7 @@ function renderZones() {
     if (z.kind === 'series' || z.kind === 'leg') return `<circle class="zone${on ? ' near' : ''}" cx="${r2(z.x)}" cy="${r2(z.y)}" r="${r2((on ? 6.5 : 4.5) / k * 1.2)}" vector-effect="non-scaling-stroke"/>`;
     const vert = z.vert;
     if (z.kind === 'span') {
-      const sw = Math.max(18 / k, z.w - 52 / k), sh = (on ? 14 : 10) / k;
+      const sw = Math.max(18 / k, z.w), sh = (on ? 12 : 8) / k;
       return `<rect class="zone par span${on ? ' near' : ''}" x="${r2(z.x - (vert ? sh : sw) / 2)}" y="${r2(z.y - (vert ? sw : sh) / 2)}" width="${r2(vert ? sh : sw)}" height="${r2(vert ? sw : sh)}" rx="${r2(5 / k)}" vector-effect="non-scaling-stroke"/>`;
     }
     const w = (on ? 30 : 24) / k, h = (on ? 16 : 12) / k;
@@ -1031,36 +1031,64 @@ function computeZones(d, L) {
     if (!si.gaps.length) continue;
     si.gaps.forEach((gp, i) => Z.push({ kind: 'series', sid: si.S.id, index: i, x: (gp[0][0] + gp[1][0]) / 2, y: (gp[0][1] + gp[1][1]) / 2, vert: si.vert }));
   }
-  // SPÄNNZONER: under (och över) mellanrummet mellan två grannar i en serie.
-  // Släpps komponenten där parallellkopplas den över BÅDA grannarna, till
-  // exempel en resistor över två seriekopplade. Zonen ritas som en bred
-  // streckad list mellan grannarnas egna zoner, så att skillnaden syns.
+  // SPÄNNZONER: på varje ledning med flera komponenter i rad (vågrät eller
+  // lodrät, ytterledning, gren eller ben) finns streckade lister på båda
+  // sidor. En list spänner över två eller fler grannar, och släpps
+  // komponenten där parallellkopplas den över ALLA dem. Listerna ligger i
+  // våningar: ju längre ut från ledningen, desto fler komponenter spänner
+  // listen över, och dess bredd visar vilka. Den innersta våningen (en
+  // enskild komponent) är komponentens egen parallellzon.
   const center = it => { const g = L.geo[it.id]; return it.kind === 'par' ? [(g.n1x + g.n2x) / 2, (g.n1y + g.n2y) / 2] : [g.x, g.y]; };
+  const SPAN_D0 = 38, SPAN_STEP = 18, SPAN_MAX = 5;
+  // Fritt avstånd till grannledningen på etikettsidan (ut) och motsatt sida
+  // (in) för en serie på position j i en parallellkoppling. Gren 0 har
+  // etiketten bort från grannen, övriga grenar mot nästa gren.
+  const freeFor = (par, j) => {
+    if (!par || j == null) return [1e9, 1e9];
+    const o = L.M[par.id].offs;
+    const toPrev = j > 0 ? Math.abs(o[j] - o[j - 1]) : 1e9, toNext = j < o.length - 1 ? Math.abs(o[j + 1] - o[j]) : 1e9;
+    return j === 0 ? [1e9, toNext] : [toNext, toPrev];
+  };
   for (const si of L.info.series) {
     const its = si.S.items;
     if (its.length < 2 || !si.gaps.length) continue;
-    if (si.ctx.par && its.length === 2) continue;   // hela grenen: täcks av grenzonen
     const lsx = si.f.ox * si.L, lsy = si.f.oy * si.L;
-    for (let i = 1; i < its.length; i++) {
-      const a = center(its[i - 1]), b = center(its[i]);
-      const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, w = Math.hypot(b[0] - a[0], b[1] - a[1]);
-      const D = 36;
-      Z.push({ kind: 'span', sid: si.S.id, from: i - 1, side: 'out', x: mx + lsx * D, y: my + lsy * D, w, vert: si.vert });
-      Z.push({ kind: 'span', sid: si.S.id, from: i - 1, side: 'in', x: mx - lsx * D, y: my - lsy * D, w, vert: si.vert });
+    // Fritt avstånd till närmaste grannledning på vardera sidan. En gren i
+    // en parallellkoppling har grannar på grenavståndet; annars finns gott
+    // om plats. Listerna trycks ihop så att de aldrig hamnar på en granne.
+    // Utrymmet mellan två grenar delas mitt itu: varje gren får sin halva.
+    const [freeOut, freeIn] = freeFor(si.ctx.par, si.ctx.j);
+    const tiers = Math.min(its.length, SPAN_MAX) - 1;
+    const dist = (n, free) => {
+      const want = SPAN_D0 + SPAN_STEP * (n - 2) + 16, max = free / 2 - 6;
+      return want <= max ? want : 22 + (max - 22) * (n - 1) / tiers;
+    };
+    for (let n = 2; n <= Math.min(its.length, SPAN_MAX); n++) {
+      const Do = dist(n, freeOut), Di = dist(n, freeIn);
+      for (let i = 0; i + n <= its.length; i++) {
+        const a = center(its[i]), b = center(its[i + n - 1]);
+        const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, w = Math.hypot(b[0] - a[0], b[1] - a[1]);
+        if (Do >= 30) Z.push({ kind: 'span', sid: si.S.id, from: i, n, side: 'out', x: mx + lsx * Do, y: my + lsy * Do, w, vert: si.vert });
+        if (Di >= 30) Z.push({ kind: 'span', sid: si.S.id, from: i, n, side: 'in', x: mx - lsx * Di, y: my - lsy * Di, w, vert: si.vert });
+      }
     }
   }
   for (const ci of L.info.comps) {
     const g = L.geo[ci.c.id], e = symExt(ci.c);
-    const D = Math.max(e.hl, e.ho) + 26;
+    // Mellan två grenar får komponentens zon bara den egna halvan av utrymmet.
+    const D0 = Math.max(e.hl, e.ho) + 26;
+    const [fo, fi] = freeFor(ci.par, ci.j);
+    const Do = Math.min(D0, fo / 2 - 10), Di = Math.min(D0, fi / 2 - 10);
     const vert = ci.f.dx === 0;
     const sole = ci.par && ci.S.items.length === 1;
+    const push = (z, d, sg) => { if (d >= 14) Z.push(Object.assign(z, { x: g.x + sg * g.lsx * d, y: g.y + sg * g.lsy * d, vert })); };
     if (sole) {
-      const sg = ci.j === 0 ? -1 : 1;   // grenarnas staplingsriktning
-      Z.push({ kind: 'branch', pid: ci.par.id, at: ci.k + 1, x: g.x + sg * g.lsx * D, y: g.y + sg * g.lsy * D, vert });
-      if (ci.j === 0) Z.push({ kind: 'par', target: ci.c.id, side: 'out', x: g.x + g.lsx * D, y: g.y + g.lsy * D, vert });
+      if (ci.j === 0) push({ kind: 'branch', pid: ci.par.id, at: ci.k + 1 }, Di, -1);   // grenarnas staplingsriktning
+      else push({ kind: 'branch', pid: ci.par.id, at: ci.k + 1 }, Do, 1);
+      if (ci.j === 0) push({ kind: 'par', target: ci.c.id, side: 'out' }, Do, 1);
     } else {
-      Z.push({ kind: 'par', target: ci.c.id, side: 'out', x: g.x + g.lsx * D, y: g.y + g.lsy * D, vert });
-      Z.push({ kind: 'par', target: ci.c.id, side: 'in', x: g.x - g.lsx * D, y: g.y - g.lsy * D, vert });
+      push({ kind: 'par', target: ci.c.id, side: 'out' }, Do, 1);
+      push({ kind: 'par', target: ci.c.id, side: 'in' }, Di, -1);
     }
   }
   // BENZONER: mitt på den lodräta biten som leder ut till den yttersta
@@ -1085,7 +1113,7 @@ function computeZones(d, L) {
   }
   return Z;
 }
-const zoneKey = z => [z.kind, z.sid || z.target || z.pid, z.index, z.at, z.from, z.side, z.which].join(':');
+const zoneKey = z => [z.kind, z.sid || z.target || z.pid, z.index, z.at, z.from, z.n, z.side, z.which].join(':');
 function applyZone(d0, z, item, ids) {
   const d = clone(d0);
   if (z.kind === 'series') findSeries(d, z.sid).items.splice(z.index, 0, item);
@@ -1094,8 +1122,8 @@ function applyZone(d0, z, item, ids) {
     f.series.items.splice(f.index, 1, { id: ids.p, kind: 'par', side: z.side, branches: [mkSeries([f.item], ids.b1), mkSeries([item], ids.b2)] });
   } else if (z.kind === 'span') {
     const S = findSeries(d, z.sid);
-    const pair = S.items.slice(z.from, z.from + 2);
-    S.items.splice(z.from, 2, { id: ids.p, kind: 'par', side: z.side, branches: [mkSeries(pair, ids.b1), mkSeries([item], ids.b2)] });
+    const n = z.n || 2, run = S.items.slice(z.from, z.from + n);
+    S.items.splice(z.from, n, { id: ids.p, kind: 'par', side: z.side, branches: [mkSeries(run, ids.b1), mkSeries([item], ids.b2)] });
   } else if (z.kind === 'leg') {
     const P = findItem(d, z.pid).item;
     // Den yttersta grenen blir gren 0, eftersom benen hör till gren 0.
@@ -1409,7 +1437,7 @@ function inspDoc() {
     <ol>
       <li><b>Dra</b> en komponent till en ledning. Den sätts i serie, och allt fördelas jämnt.</li>
       <li><b>Släpp</b> den bredvid en komponent för att parallellkoppla.</li>
-      <li><b>Släpp</b> den under mellanrummet mellan två komponenter för att parallellkoppla över båda.</li>
+      <li><b>Släpp</b> den på en bred streckad list ovanför eller under flera komponenter för att parallellkoppla över alla dem. Ju längre ut listen sitter, desto fler spänner den över.</li>
       <li><b>Släpp</b> den på en lodrät ledningsbit i en parallellkoppling, så hamnar den i serie med den yttersta grenen men ritas på den lodräta biten.</li>
       <li><b>Klicka</b> på en komponent för att skriva in värden.</li>
       <li><b>Dra bort</b> en komponent till papperskorgen eller tryck Delete.</li>

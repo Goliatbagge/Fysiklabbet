@@ -103,6 +103,78 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-25-klockan-pa-nittonde-decimalen",
+    date: "2026-09-25",
+    title: "Den noggrannaste klockan hittills räknar en enda atom — och fem millimeter i höjd blir en mätbar felkälla",
+    deck: "Ett lag vid Centre for Quantum Technologies i Singapore har byggt två optiska atomur som var för sig mäter tiden med en enda laddad lutetiumatom. Osäkerheten ligger på nittonde decimalen, fem gånger bättre än det tidigare rekordet: ett fel på en hel sekund skulle ta närmare 300 miljarder år att samla ihop. På den nivån räcker fem millimeters höjdskillnad mellan de två klockorna för att tiden ska gå olika fort i dem.",
+    category: "Metrologi",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-25-klockan-pa-nittonde-decimalen.jpg",
+    imageAlt: "Tre forskare står i ett laboratorium intill ett optiskt bord fyllt av speglar, hållare och knippen av gula och blå optiska fibrer. Mannen i mitten pekar in mot uppställningen medan de två andra tittar dit.",
+    imageCredit: "Foto: Centre for Quantum Technologies, National University of Singapore (pressbild). Från vänster: Murray Barrett, Michael Lee och Kyle Arnold i lutetiumklockans laboratorium.",
+    tags: ["metrologi", "atomur", "optisk klocka", "lutetium", "jonfälla", "energinivåer", "laser", "tidsdilatation", "relativitetsteori", "sekunden", "precisionsmätning", "atomfysik"],
+    sources: [
+      { name: "Phys.org: Scientists build world's most accurate atomic clock (23 september 2026)", url: "https://phys.org/news/2026-09-scientists-world-accurate-atomic-clock.html" },
+      { name: "NUS News: Singapore scientists build world's most accurate atomic clock (pressmeddelande, 23 september 2026)", url: "https://news.nus.edu.sg/worlds-most-accurate-atomic-clock/" },
+      { name: "The Quantum Insider: Singapore scientists claim they built the world's most accurate atomic clock (24 september 2026)", url: "https://thequantuminsider.com/2026/09/24/singapore-scientists-claim-they-built-the-worlds-most-accurate-atomic-clock/" },
+      { name: "arXiv: Optical clocks with accuracy validated at the 19th digit — fri fulltextversion av studien", url: "https://arxiv.org/abs/2512.07346" }
+    ],
+    research: {
+      citation: "K. J. Arnold, M. D. K. Lee, Qi Zhao, Qichen Qin, Zhao Zhang, N. Jayjong och M. D. Barrett, Centre for Quantum Technologies, National University of Singapore, ”Lu+ optical frequency references with accuracy verified at the 19th digit”, Nature, publicerad 23 september 2026",
+      url: "https://doi.org/10.1038/s41586-026-11072-8"
+    },
+    simulering: {
+      href: "fysik2-energinivaer.html",
+      name: "Energinivåer i väteatomen",
+      text: "Animera ett elektronhopp mellan två energinivåer och se fotonen sändas ut. Avståndet mellan nivåerna bestämmer ljusets frekvens, och det är precis den kopplingen ett atomur vilar på: en fast energiskillnad ger en fast frekvens att räkna svängningar i."
+    },
+    larare: {
+      moment: [
+        { label: "Bohrs atommodell och energinivåer", href: "katalog.html?id=fy2-4.8" },
+        { label: "Fotonens energi och frekvens" },
+        { label: "Allmän relativitetsteori: tiden i ett gravitationsfält" }
+      ],
+      fragor: [
+        "Varför blir en klocka noggrannare av att den räknar svängningar i synligt ljus i stället för i mikrovågor? Vad är det egentligen som blir bättre?",
+        "Laget byggde två likadana klockor i stället för en. Vad kan man få veta av en jämförelse mellan två identiska instrument som man omöjligt kan få veta av ett ensamt?",
+        "Höjdskillnaden mellan klockorna mättes till under en millimeter innan jämförelsen kunde tolkas. Vad säger det om skillnaden mellan att mäta noggrant och att veta vad man har mätt?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Två klockor står på samma bordsskiva i ett laboratorium i Singapore. De är byggda av samma lag, av samma sorts delar, och var och en mäter tiden med en ensam atom. Ändå går de inte riktigt lika fort — och forskarna vet varför. Den ena sitter några millimeter högre upp än den andra.' },
+      { type: 'p', html: 'Bakom den märkliga meningen ligger ett resultat som publicerades i <em>Nature</em> den 23&nbsp;september. Ett lag vid Centre for Quantum Technologies vid National University of Singapore rapporterar att deras två atomur var för sig har en systematisk osäkerhet på $1{,}1 \\cdot 10^{-19}$ respektive $1{,}4 \\cdot 10^{-19}$. Det är ungefär fem gånger bättre än det tidigare rekordet, en aluminiumjonklocka vid det amerikanska standardinstitutet NIST som sommaren 2025 kom ner till $5{,}5 \\cdot 10^{-19}$.' },
+
+      { type: 'h2', text: 'Klockan som räknar svängningar i ljus' },
+      { type: 'p', html: 'Ett atomur mäter inte tiden med ett pendelslag eller en kvartskristall, utan med en atom. Elektronerna i en atom får bara ha vissa bestämda energier, och avståndet mellan två av dessa energinivåer är en fast egenskap hos grundämnet — lika för varje atom av samma slag, i hela universum och i all framtid. Stämmer man in en laser exakt mot det avståndet svänger ljuset med en frekvens som är lika orubblig, och sedan räcker det att räkna svängningarna.' },
+      { type: 'p', html: 'Sedan 1967 är sekunden definierad just så. Den är den tid det tar för strålningen mot en bestämd övergång i cesium-133 att svänga 9&nbsp;192&nbsp;631&nbsp;770 gånger. Cesiumuren ligger bakom satellitnavigeringen och håller telenäten i takt. Men cesiumövergången sitter i mikrovågsområdet, och mikrovågor svänger långsamt. De senaste decenniernas optiska atomur använder i stället synligt eller nästan synligt ljus, som svänger tiotusentals gånger oftare — och ju tätare streck man har på sin linjal, desto finare går det att mäta.' },
+      { type: 'p', html: 'Klockan i Singapore bygger på en enda laddad lutetiumatom, isotopen $^{176}\\mathrm{Lu}^+$, som hålls svävande i en elektrisk fälla mitt i ett vakuum. Övergången ligger vid våglängden 848&nbsp;nm, strax bortom den röda kanten av det synliga. Den som räknar efter ser att ljuset då svänger ungefär 353&nbsp;biljoner gånger i sekunden, mot cesiumets dryga nio miljarder.' },
+
+      { type: 'h2', text: 'Varför just lutetium' },
+      { type: 'p', html: 'Valet av grundämne är hela poängen. En klockfrekvens går nämligen att rubba. Magnetfält förskjuter den, de elektriska fälten i fällan förskjuter den, och framför allt gör värmestrålningen det: varje rumstempererad vägg badar jonen i osynligt infrarött ljus som drar energinivåerna en aning ur läge. Just den effekten sätter i praktiken taket för de flesta atomur.' },
+      { type: 'p', html: 'I studien beskrivs lutetiumjonens övergång som den minst känsliga för både värmestrålning och magnetfält av alla etablerade klocksystem. Sätter man in laboratoriets 301&nbsp;K i formeln som artikeln ger, hamnar värmestrålningens frekvensförskjutning på ungefär $1{,}4 \\cdot 10^{-18}$. Den är alltså liten redan från början, och då blir också osäkerheten i den liten.' },
+      { type: 'p', html: 'Till det kommer ett grepp som laget själva uppfann och kallar hyperfinmedelvärdering. Lutetiumkärnan har ett eget magnetfält som delar upp energinivån i flera tätt liggande nivåer. I stället för att mäta mot en enda av dem mäter klockan mot tre ($F = 6$, $7$ och $8$) och använder medelvärdet. Störningarna drar åt olika håll i de tre fallen och tar därmed ut varandra, så att frekvensen blir okänslig för magnetfält över ett brett intervall.' },
+      { type: 'quote', html: 'De goda egenskaperna gör att hög noggrannhet går att nå i vitt skilda miljöer. Lutetiumklockan skulle vara stabil även om man flyttade den från den varmaste plats som uppmätts på jorden, i Death Valley, till den kallaste på den antarktiska högplatån.', cite: 'Murray Barrett, Centre for Quantum Technologies' },
+
+      { type: 'h2', text: 'Två klockor, tvåhundra timmar' },
+      { type: 'p', html: 'En klocka som utses till världens noggrannaste har ett bevisproblem: det finns ingenting bättre att jämföra den med. Lagets lösning var att bygga två.' },
+      { type: 'quote', html: 'Det finns ett skämt som säger att den som har en klocka vet vad klockan är, medan den som har två aldrig är säker. Det säger egentligen att det enda sättet att pröva noggrannheten hos en standard är att jämföra klockor och visa att resultatet går att upprepa.', cite: 'Kyle Arnold, Centre for Quantum Technologies' },
+      { type: 'p', html: 'Jämförelsen gjordes med korrelationsspektroskopi. Metoden läser inte av varje klocka för sig utan frågar om de två jonerna hamnat i samma tillstånd eller i olika. Då spelar det mindre roll att lasern som ställer frågan själv darrar en aning, eftersom den darrar likadant för båda, och mätningen kan pågå längre än laserljusets egen koherens. Efter omkring 200&nbsp;timmar stannade skillnaden mellan klockorna på $(-2{,}4 \\pm 5{,}7) \\cdot 10^{-19}$, där felmarginalen är statistisk. Det är den mest precisa klockjämförelse som gjorts.' },
+
+      { type: 'h2', text: 'Fem millimeter blir en felkälla' },
+      { type: 'p', html: 'Och här kliver relativitetsteorin in i ett helt vanligt laboratorium. Enligt den allmänna relativitetsteorin går tiden långsammare längre ner i ett gravitationsfält, en effekt som kallas gravitationell tidsdilatation. Takten skiljer sig mellan två klockor med höjdskillnaden $h$ enligt $\\dfrac{\\Delta f}{f} = \\dfrac{g \\cdot h}{c^2}$, och en kontrollräkning med $h = 5\\ \\mathrm{mm}$ ger $5{,}5 \\cdot 10^{-19}$ — alltså precis den storleksordning som jämförelsen landade på.' },
+      { type: 'p', html: 'Innan forskarna kunde säga något alls om klockorna fick de därför mäta hur högt jonerna satt och fastställa höjdskillnaden till under en millimeter. Samma sak gör det svårt att jämföra klockan med andra toppklockor ute i världen: tyngdkraften varierar från plats till plats på jorden, och den variationen är ännu inte kartlagd noga nog för att kunna räknas bort på nittonde decimalen.' },
+      { type: 'p', html: 'Nästa steg blir därför att flytta ut klockan ur laboratoriet.' },
+      { type: 'quote', html: 'Nästa steg är att ta laboratorieklockan och krympa den till ett transportabelt system.', cite: 'Michael Lee, doktorand vid National University of Singapore' },
+      { type: 'p', html: 'Bakom det ligger en större fråga. Det internationella organ som ansvarar för tidsstandarden väger nu in data från optiska atomur inför en ny definition av sekunden, väntad tidigast 2030. Då flyttas grunden för världens tid från cesiumets mikrovågor till en övergång i ljus. Vilket grundämne som får den äran är ännu inte avgjort.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Atomen i klockan är själv en klocka, fast av ett helt annat slag. Lutetium-176 utgör 2,6&nbsp;% av allt lutetium i naturen och är svagt radioaktivt: det sönderfaller till hafnium-176 med en halveringstid på ungefär 38&nbsp;miljarder år, och just det sönderfallet används för att åldersbestämma bergarter och meteoriter.',
+        'En osäkerhet på nittonde decimalen betyder att klockan skulle behöva gå i närmare 300&nbsp;miljarder år innan felet vuxit till en enda sekund. Universum har hittills funnits i 13,8&nbsp;miljarder år.',
+        'Laget i Singapore är, såvitt de själva vet, det enda i världen som arbetar med lutetium för tidmätning. De började för över tio år sedan, på en aning om att just den atomen hade rätt egenskaper.'
+      ] }
+    ]
+  },
+  {
     id: "2026-09-24-duvans-kompass-i-bruset",
     date: "2026-09-24",
     title: "Duvans inre kompass skulle ge tolv miljarddels volt — och dränks av värmebruset i samma vätska",

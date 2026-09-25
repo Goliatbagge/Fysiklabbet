@@ -3284,4 +3284,45 @@ window.BEGREPP = [
       { type: 'p', html: 'Färgfördelningen hos det spridda ljuset blir därmed en avbildning av hur elektronerna rör sig. Bredden på fördelningen talar om temperaturen, dess tyngdpunkt om gasens strömningsfart och den totala mängden spritt ljus om hur många elektroner som finns i mätvolymen. Metoden är i dag ett standardverktyg i fusionsanläggningar och i laboratorier som studerar astrofysikaliska förlopp i miniatyr.' }
     ]
   },
+  {
+    id: 'atomur',
+    term: 'Atomur',
+    former: ['atomur', 'atomuret', 'atomuren', 'atomklocka', 'atomklockan', 'atomklockor',
+             'atomklockorna', 'cesiumur', 'cesiumuret', 'cesiumuren', 'cesiumklocka',
+             'cesiumklockan', 'cesiumklockor', 'jonklocka', 'jonklockan', 'jonur', 'aluminiumjonklocka', 'aluminiumjonklockan'],
+    kort: 'En klocka som håller tiden med hjälp av en atom i stället för en pendel eller en kvartskristall. Avståndet mellan två av atomens energinivåer är exakt detsamma för varje atom av samma slag, och det avståndet går att räkna svängningar i.',
+    relaterade: ['jonfalla', 'laserkylning', 'frekvenskam', 'tidsdilatation'],
+    body: [
+      { type: 'p', html: 'Alla klockor bygger på samma idé: hitta något som upprepar sig i jämn takt och räkna upprepningarna. En pendel svänger ungefär en gång i sekunden, en kvartskristall i en armbandsklocka drygt trettiotvåtusen gånger. Problemet är att pendeln påverkas av temperatur och kristallen åldras, så två klockor som ställts lika går isär efter en tid.' },
+      { type: 'p', html: 'En atom gör inte det. Elektronerna i en atom får bara ha vissa bestämda energier, och energiskillnaden mellan två av nivåerna är en fast egenskap hos grundämnet — densamma för varje atom av det slaget, överallt och alltid. Belyser man atomen med strålning vars frekvens svarar exakt mot den energiskillnaden hoppar elektronen upp en nivå. Ett atomur letar hela tiden rätt på den frekvensen, håller kvar sin laser eller mikrovågskälla där, och räknar svängningarna i strålningen.' },
+      { type: 'p', html: 'Sedan 1967 är själva sekunden definierad på det viset. En sekund är den tid det tar för strålningen mot en bestämd övergång i cesium-133 att svänga 9&nbsp;192&nbsp;631&nbsp;770 gånger. Cesiumur håller satellitnavigeringen, telenäten och börshandeln i takt. De nyare optiska atomuren använder i stället synligt ljus, som svänger tiotusentals gånger oftare och därför ger en mycket finare indelning av sekunden — ungefär som skillnaden mellan en linjal med centimeterstreck och en med mikrometerstreck.' },
+      { type: 'p', html: 'De allra bästa atomuren är numera så noggranna att de känner av att tiden går långsammare närmare marken. Flyttar man ett sådant ur en enda decimeter uppåt går det mätbart fortare. Det gör dem till mätinstrument snarare än bara klockor: de används för att kartlägga tyngdkraften, för att leta efter långsamma förändringar i naturkonstanterna och för att pröva relativitetsteorin.' }
+    ]
+  },
+  {
+    id: 'svartkroppsstralning',
+    term: 'Svartkroppsstrålning',
+    former: ['svartkroppsstrålning', 'svartkroppsstrålningen', 'värmestrålning',
+             'värmestrålningen', 'temperaturstrålning',
+             'temperaturstrålningen', 'svartkropp', 'svartkroppen', 'svartkroppar'],
+    kort: 'Det ljus som allting sänder ut enbart för att det har en temperatur. Fördelningen av färger beror bara på hur varmt föremålet är, inte på vad det består av.',
+    relaterade: ['foton', 'kelvin-helmholtz-instabilitet', 'fotosfar', 'spektrum'],
+    body: [
+      { type: 'p', html: 'Varje föremål med en temperatur över absoluta nollpunkten sänder ut elektromagnetisk strålning. Atomerna i det skakar, och laddningar som skakar sänder ut ljus. Ett rumstempererat bord lyser därför, fast i infrarött som ögat inte ser. Hettas järnet i en smedja upp flyttas strålningen in i det synliga: först mörkrött, sedan orange, till sist gulvitt.' },
+      { type: 'p', html: 'Det märkliga är att färgfördelningen inte beror på materialet. En bit kol, en klump järn och en het gasmassa som alla håller samma temperatur sänder ut nästan exakt samma blandning av våglängder. Kurvan har en topp som flyttar sig mot kortare våglängder ju varmare kroppen är, och den totala utstrålade effekten växer med temperaturen upphöjt till fyra — dubblar man temperaturen i kelvin strålar kroppen ut sexton gånger mer.' },
+      { type: 'p', html: 'Att förklara just den kurvan visade sig omöjligt med klassisk fysik. År 1900 löste Max Planck problemet genom att anta att energin bara kunde sändas ut i bestämda portioner, och det antagandet blev startpunkten för kvantfysiken. I dag används strålningen för att mäta temperaturer på avstånd: i värmekameror, i ugnar och i stjärnor, vars yttemperatur avläses direkt ur färgen. I precisionslaboratorier är den i stället en störning — den infraröda strålningen från rumstempererade väggar drar en atoms energinivåer en aning ur läge, och det sätter i praktiken taket för hur noggrant många atomur kan gå.' }
+    ]
+  },
+  {
+    id: 'korrelationsspektroskopi',
+    term: 'Korrelationsspektroskopi',
+    former: ['korrelationsspektroskopi', 'korrelationsspektroskopin'],
+    kort: 'En mätmetod där två system undersöks samtidigt och man bara frågar om de svarat lika eller olika. Störningar som drabbar båda på samma sätt faller då bort av sig själva.',
+    relaterade: ['spektroskopi', 'laser', 'koherens'],
+    body: [
+      { type: 'p', html: 'Vill man jämföra två atomer med varandra belyser man dem med en laser och ser efter vilka som hoppat till ett högre energitillstånd. Problemet är att lasern aldrig är helt stabil: dess frekvens vandrar långsamt fram och tillbaka. Mäter man en atom i taget blandas atomens verkliga frekvens ihop med laserns vandring, och efter någon sekund vet man inte längre vad som är vad.' },
+      { type: 'p', html: 'Korrelationsspektroskopi vänder på frågan. I stället för att läsa av varje atom för sig frågar man bara: hamnade de två i samma tillstånd eller i olika? Vandrar lasern iväg påverkar det båda atomerna lika mycket, och svaret på den frågan ändras inte. Kvar blir just det man vill veta, nämligen om de två atomerna har exakt samma frekvens eller inte.' },
+      { type: 'p', html: 'Vinsten är att mätningen kan pågå mycket längre än lasern själv är stabil. Metoden används när två atomur ska jämföras med varandra på en noggrannhetsnivå där ingen laser i världen håller sig stilla tillräckligt länge, och besläktade knep — att mäta skillnader i stället för absoluta värden — återkommer överallt i precisionsfysiken.' }
+    ]
+  },
 ];

@@ -1695,6 +1695,8 @@ const inRect = (el, e) => { const r = el.getBoundingClientRect(); return e.clien
 function beginDrag() {
   drag.moving = true;
   stopCoach();
+  closeInline();   // värdefältet får inte ligga kvar och blinka under dragningen
+  closeUnitMenu();
   document.body.classList.add('is-dragging');
   view.camFrozen = true;
   if (drag.mode === 'new') {

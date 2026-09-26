@@ -55,14 +55,14 @@ const TYPES = {
   resistor:  { name: 'Resistor', group: 'komp', len: 42, hl: 7, ho: 7, prefix: 'R', italic: true, unit: 'Ω', base: 'Ω', field: 'Resistans', ph: 'till exempel 20' },
   varres:    { name: 'Variabel resistor', group: 'komp', len: 42, hl: 14, ho: 14, prefix: 'R', italic: true, unit: 'Ω', base: 'Ω', field: 'Resistans', ph: 'till exempel 50' },
   lamp:      { name: 'Lampa', group: 'komp', len: 24, hl: 12, ho: 12, prefix: 'L', italic: false, noSolo: true, unit: '', base: '', field: 'Märkning', ph: 'till exempel 6 V' },
-  switch:    { name: 'Strömbrytare', group: 'komp', len: 24, hl: 13, ho: 3, prefix: '', italic: false },
+  switch:    { name: 'Strömbrytare', group: 'komp', len: 24, hl: 13, ho: 13, prefix: '', italic: false },
   cap:       { name: 'Kondensator', group: 'komp', len: 8, hl: 13, ho: 13, prefix: 'C', italic: true, unit: 'µF', base: 'F', field: 'Kapacitans', ph: 'till exempel 100' },
   diode:     { name: 'Diod', group: 'komp', len: 16, hl: 9, ho: 9, prefix: '', italic: false, polar: true, polarText: 'Vänd riktning' },
   led:       { name: 'Lysdiod', group: 'komp', len: 16, hl: 20, ho: 9, prefix: '', italic: false, polar: true, polarText: 'Vänd riktning' },
   ammeter:   { name: 'Amperemeter', group: 'mat', len: 28, hl: 14, ho: 14, prefix: '', italic: false, unit: 'A', base: 'A', field: 'Avläsning', ph: 'till exempel 0,50' },
   voltmeter: { name: 'Voltmeter', group: 'mat', len: 28, hl: 14, ho: 14, prefix: '', italic: false, unit: 'V', base: 'V', field: 'Avläsning', ph: 'till exempel 4,5' },
 };
-const DEFAULT_OPTS = { names: true, values: true, autoCalc: true, arrows: false, arrowNames: true, arrowValues: true, arrowBlue: false, size: 'M', transparent: false };
+const DEFAULT_OPTS = { names: true, values: true, autoCalc: true, arrows: false, arrowBlue: false, size: 'M', transparent: false };
 
 /* ================= Små hjälpare ================= */
 const clone = o => JSON.parse(JSON.stringify(o));
@@ -220,8 +220,10 @@ function compLabel(doc, c, auto, calc) {
 }
 function arrowRuns(doc, name, value) {
   const runs = [];
-  if (doc.opts.arrowNames) { const nm = parseName(name); if (nm) nameRuns(nm, true, runs); }
-  if (doc.opts.arrowValues) {
+  // Pilens beteckning och strömstyrka följer samma reglage som komponenternas
+  // beteckningar och värden. En enskild ström döljs med ? i pilens fält.
+  if (doc.opts.names) { const nm = parseName(name); if (nm) nameRuns(nm, true, runs); }
+  if (doc.opts.values) {
     const v = formatValue(value, 'A', 'A');
     if (v) { if (runs.length) runs.push({ s: ' = ' }); runs.push({ s: v }); }
   }
@@ -926,11 +928,18 @@ function symbolPrims(c, g, col, op, out) {
       out.push({ t: 'text', x: g.x, y: g.y + 5.4, anchor: 'middle', runs, tw: runsWidth(runs, 15, 600), size: 15, weight: 600, c: col, op });
       break;
     }
-    case 'switch':
-      dot(M(-12, 0), 2.3); dot(M(12, 0), 2.3);
-      if (c.closed) line(M(-12, 0), M(12, 0), WIRE_W, 'round');
-      else line(M(-12, 0), M(10.5, -12.5), WIRE_W, 'round');
+    case 'switch': {
+      // Armen öppnar alltid uppåt PÅ SKÄRMEN, som i läroböckerna: den fäster
+      // i vänster kontakt och pekar snett uppåt. På en lodrät ledning finns
+      // inget uppåt att öppna mot; där fäster den i nedre kontakten och
+      // pekar snett åt höger.
+      const horiz = Math.abs(dx) > 0.5;
+      const a = horiz ? [g.x - 12, g.y] : [g.x, g.y + 12], b = horiz ? [g.x + 12, g.y] : [g.x, g.y - 12];
+      dot(a, 2.3); dot(b, 2.3);
+      if (c.closed) line(a, b, WIRE_W, 'round');
+      else line(a, horiz ? [g.x + 10.5, g.y - 12.5] : [g.x + 12.5, g.y - 10.5], WIRE_W, 'round');
       break;
+    }
     case 'diode': case 'led':
       poly([M(-8, -8), M(-8, 8), M(8, 0)], col, col, 1.2);
       line(M(8, -8.5), M(8, 8.5), 2.2);
@@ -1768,7 +1777,7 @@ function inspArrow(key) {
   <div class="fld"><label for="f-aval">Strömstyrka</label>
     <div class="unit"><input id="f-aval" data-af="value" value="${esc(cfg.value || '')}" placeholder="${esc(acalc ? acalc + '  (uträknat)' : 'till exempel 0,40')}" autocomplete="off"><span>A</span></div>
     ${acalc ? '<p class="help">Uträknat ur de övriga värdena. Skriv ett eget värde, eller <b>?</b> om eleverna ska räkna ut det.</p>' : ''}
-    ${!doc.opts.arrowValues ? '<p class="help">Slå på "Strömstyrka vid pilen" under inställningarna för att visa värdet.</p>' : ''}</div>
+    ${!doc.opts.values ? '<p class="help">Slå på "Värden" under inställningarna för att visa strömstyrkan.</p>' : ''}</div>
   <div class="fld"><label>Texten står</label>${seg('aside', horiz ? [['a', 'Ovanför'], ['b', 'Under']] : [['a', 'Till vänster'], ['b', 'Till höger']], sideCur)}</div>
   <div class="fld"><label>Placering på ledningen</label>
     <div class="row"><button class="ibtn" data-act="aprev" aria-label="Flytta bakåt">${IC.left}</button><button class="ibtn" data-act="anext" aria-label="Flytta framåt">${IC.right}</button><span class="help inline">Flytta pilen till nästa lediga ledningsbit.</span></div></div>
@@ -1791,8 +1800,8 @@ function inspDoc() {
   return `
   <div class="ins-head plain"><div class="ins-t"><div class="eyebrow">Hela schemat</div><h2>Visa i schemat</h2></div></div>
   <div class="grp">
-    ${tgl('names', 'Beteckningar', '<i>R</i>₁, <i>U</i>, L₁', o.names)}
-    ${tgl('values', 'Värden', '20 Ω, 12 V', o.values)}
+    ${tgl('names', 'Beteckningar', '<i>R</i>₁, <i>U</i>, <i>I</i>, L₁', o.names)}
+    ${tgl('values', 'Värden', '20 Ω, 12 V, 0,80 A', o.values)}
     ${tgl('autoCalc', 'Räkna ut okända värden', 'Ström, spänning och resistans som följer av de givna värdena', o.autoCalc, true)}
     ${calcNote()}
   </div>
@@ -1800,8 +1809,6 @@ function inspDoc() {
     ${tgl('arrows', 'Strömpilar', 'Riktningen följer batteriets poler', o.arrows)}
     ${o.arrows && !hasSource(doc) ? '<p class="help note">Pilarna visas när kretsen har en spänningskälla. Dra in ett batteri så dyker de upp.</p>' : ''}
     <div class="subgrp${o.arrows ? '' : ' off'}">
-      ${tgl('arrowNames', 'Beteckning vid pilen', '<i>I</i>, <i>I</i>₁, <i>I</i>₂', o.arrowNames, true)}
-      ${tgl('arrowValues', 'Strömstyrka vid pilen', 'Klicka på en pil för att skriva in den', o.arrowValues, true)}
       <div class="optrow"><span>Färg på pilarna</span>${seg('arrowBlue', [['0', 'Svart'], ['1', 'Blå']], o.arrowBlue ? 1 : 0)}</div>
       ${hidden ? `<button class="wbtn" data-act="unhide">${IC.check}<span>Visa dolda pilar igen</span></button>` : ''}
     </div>

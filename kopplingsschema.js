@@ -907,9 +907,9 @@ function layoutPass(doc, autoIn, arrowIdx) {
     const m = M[doc.loop[x].items[0].id];
     return Math.abs(m.offs[m.offs.length - 1]);
   };
-  let W = Math.max(sm.top.len, sm.bottom.len, sm.left.neg + sm.right.neg + INNER_GAP, MIN_W,
+  let W = Math.max(sm.top.len, sm.bottom.len, sm.left.neg + sm.right.neg + INNER_GAP,
     trim('left') + trim('right') + Math.max(stretched.top ? 0 : sm.top.len, stretched.bottom ? 0 : sm.bottom.len));
-  let H = Math.max(sm.left.len, sm.right.len, sm.top.neg + sm.bottom.neg + INNER_GAP, MIN_H,
+  let H = Math.max(sm.left.len, sm.right.len, sm.top.neg + sm.bottom.neg + INNER_GAP,
     trim('top') + trim('bottom') + Math.max(stretched.left ? 0 : sm.left.len, stretched.right ? 0 : sm.right.len));
   // JÄMNA STEGPINNAR: är en sida en sträckt parallellkoppling (stegpinnar
   // mellan sidoledningarna) fördelas hela höjden (eller bredden) jämnt:
@@ -942,26 +942,45 @@ function layoutPass(doc, autoIn, arrowIdx) {
   // hamnar batteriet långt under grenarna och symmetrin går förlorad. Med
   // inåtgående grenar är taket ett grenavstånd från den innersta grenen
   // till ledningen mittemot, samma regel som för stegpinnarna.
-  const inward = s => {
-    let depth = 0, sp = 0;
-    if (stretched[s]) return null;
+  // Parallellkopplingarna på en sida: hur djupt grenarna går inåt (inD)
+  // och utåt (outD), och det största grenavståndet (sp).
+  const stack = s => {
+    const r = { inD: 0, outD: 0, sp: 0, any: false };
+    if (stretched[s]) return r;
     for (const it of doc.loop[s].items) {
-      if (it.kind !== 'par' || it.side === 'out') continue;
+      if (it.kind !== 'par') continue;
+      r.any = true;
       const o = [0].concat(M[it.id].offs.map(Math.abs)).sort((a, b) => a - b);
-      depth = Math.max(depth, o[o.length - 1]);
-      for (let j = 1; j < o.length; j++) sp = Math.max(sp, o[j] - o[j - 1]);
+      if (it.side === 'out') r.outD = Math.max(r.outD, o[o.length - 1]);
+      else r.inD = Math.max(r.inD, o[o.length - 1]);
+      for (let j = 1; j < o.length; j++) r.sp = Math.max(r.sp, o[j] - o[j - 1]);
     }
-    return depth > 0 ? { depth, sp } : null;
+    return r;
   };
-  const cap = (a, b) => {
-    const A = inward(a), B = inward(b);
-    if (!A && !B) return Infinity;
-    return (A ? A.depth : 0) + (B ? B.depth : 0) + Math.max(A ? A.sp : 0, B ? B.sp : 0);
+  const st = { top: stack('top'), bottom: stack('bottom'), left: stack('left'), right: stack('right') };
+  const cap = (a, b) => (!st[a].any && !st[b].any) ? Infinity : st[a].inD + st[b].inD + Math.max(st[a].sp, st[b].sp);
+  // Proportionerna gäller hela bilden, även grenar som går UTÅT från slingan.
+  const outV = st.top.outD + st.bottom.outD, outH = st.left.outD + st.right.outD;
+  W = Math.max(W, MIN_W - outH); H = Math.max(H, MIN_H - outV);
+  W = Math.max(W, Math.min((H + outV) * 1.15 - outH, cap('left', 'right')));
+  H = Math.max(H, Math.min((W + outH) * 0.5 - outV, cap('top', 'bottom')));
+  // UTÅTGÅENDE STEGE: en sida som bara är en parallellkoppling utåt över hela
+  // ledaren ser ut som stegpinnar ovanför slingan. Då ska avståndet mellan
+  // grenarna vara lika stort som slingans egen höjd (bredd) ned till
+  // ledningen mittemot, precis som för de inåtgående stegarna.
+  const outLadder = s => {
+    const S = doc.loop[s];
+    if (stretched[s] || !soleFullPar(S) || S.items[0].side !== 'out') return null;
+    const opp = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' }[s];
+    return st[opp].any ? null : M[S.items[0].id];
   };
-  const capW = cap('left', 'right'), capH = cap('top', 'bottom');
-  W = Math.max(W, Math.min(H * 1.15, capW));
-  H = Math.max(H, Math.min(W * 0.5, capH));
+  for (const s of ['top', 'bottom']) { const m = outLadder(s); if (m) H = Math.max(H, st[s].sp); }
+  for (const s of ['left', 'right']) { const m = outLadder(s); if (m) W = Math.max(W, st[s].sp); }
   W = Math.round(W); H = Math.round(H);
+  for (const s of SIDES) {
+    const m = outLadder(s);
+    if (m) { const sp = vertOf(s) ? W : H; m.offs = m.offs.map((v, j) => (Math.sign(v) || 1) * j * sp); }
+  }
   // Lägg grenarna på jämna avstånd i den slutliga höjden (bredden).
   for (const [lad, len] of [[vLad, H], [hLad, W]]) {
     if (!lad) continue;

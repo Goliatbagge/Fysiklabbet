@@ -62,7 +62,7 @@ const TYPES = {
   ammeter:   { name: 'Amperemeter', group: 'mat', len: 28, hl: 14, ho: 14, prefix: '', italic: false, unit: 'A', base: 'A', field: 'Avläsning', ph: 'till exempel 0,50' },
   voltmeter: { name: 'Voltmeter', group: 'mat', len: 28, hl: 14, ho: 14, prefix: '', italic: false, unit: 'V', base: 'V', field: 'Avläsning', ph: 'till exempel 4,5' },
 };
-const DEFAULT_OPTS = { names: true, values: true, autoCalc: true, arrows: false, arrowBlue: false, size: 'M', transparent: false };
+const DEFAULT_OPTS = { names: true, values: true, autoCalc: true, arrows: false, subArrows: true, arrowBlue: false, size: 'M', transparent: false };
 
 /* ================= Små hjälpare ================= */
 const clone = o => JSON.parse(JSON.stringify(o));
@@ -684,7 +684,7 @@ function seriesDrive(S) {
   }
   return sum > 0 ? 1 : sum < 0 ? -1 : first;
 }
-function planArrows(doc, stretched, arrowIdx, sol) {
+function planArrows(doc, stretched, arrowIdx, sol, forSolve) {
   const plan = {};
   // Utan spänningskälla går det ingen ström, så då ritas inga pilar alls.
   if (!doc.opts.arrows || !hasSource(doc)) return plan;
@@ -747,6 +747,9 @@ function planArrows(doc, stretched, arrowIdx, sol) {
     }
   };
   visit(doc.loop.top, false, dir); visit(doc.loop.right, false, dir); visit(doc.loop.bottom, true, dir); visit(doc.loop.left, true, dir);
+  // "Visa delströmmar" av: bara huvudströmmen I ritas. Beräkningen får ändå
+  // med delströmmarna (forSolve), så att givna värden på I₁, I₂ … räknas.
+  if (!forSolve && doc.opts.subArrows === false) for (const k in plan) if (plan[k].numbered) delete plan[k];
   return plan;
 }
 
@@ -800,7 +803,7 @@ function layoutPass(doc, autoIn, arrowIdx) {
     const it = doc.loop[s].items;
     stretched[s] = it.length === 1 && it[0].kind === 'par' && it[0].side !== 'out' && !ADJ[s].some(a => stretched[a]);
   }
-  const sol = solveCircuit(doc, planArrows(doc, stretched, arrowIdx, null));
+  const sol = solveCircuit(doc, planArrows(doc, stretched, arrowIdx, null, true));
   const plan = planArrows(doc, stretched, arrowIdx, sol);
   for (const c of allComps(doc)) {
     const runs = compLabel(doc, c, auto[c.id], sol && sol.comp[c.id]);
@@ -2205,6 +2208,7 @@ function inspDoc() {
     ${tgl('arrows', 'Strömpilar', 'Riktningen följer batteriets poler', o.arrows)}
     ${o.arrows && !hasSource(doc) ? '<p class="help note">Pilarna visas när kretsen har en spänningskälla. Dra in ett batteri så dyker de upp.</p>' : ''}
     <div class="subgrp${o.arrows ? '' : ' off'}">
+      ${tgl('subArrows', 'Visa delströmmar', 'Strömmarna i parallellgrenarna, <i>I</i>₁, <i>I</i>₂ …', o.subArrows !== false, true)}
       <div class="optrow"><span>Färg på pilarna</span>${seg('arrowBlue', [['0', 'Svart'], ['1', 'Blå']], o.arrowBlue ? 1 : 0)}</div>
       ${hidden ? `<button class="wbtn" data-act="unhide">${IC.check}<span>Visa dolda pilar igen</span></button>` : ''}
     </div>

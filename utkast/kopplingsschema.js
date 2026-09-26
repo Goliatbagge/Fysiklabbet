@@ -132,7 +132,36 @@ function normSeries(S) {
     }
   }
 }
-function normalize(doc) { for (const s of SIDES) normSeries(doc.loop[s]); return doc; }
+// En stege (en sidas enda parallellkoppling, stegpinnar mellan sidoledningarna)
+// där en gren i sin tur bara är en parallellkoppling över hela grenen är
+// elektriskt samma sak som en stege med fler grenar. Slå ihop dem, så att
+// alla grenar fördelas jämnt (den jämna fördelningen gäller bara stegens
+// egna grenar). Ordningen väljs så att figuren ser likadan ut som förut.
+function flattenLadder(P) {
+  if (hasLegs(P)) return;
+  const sP = P.side === 'out' ? 1 : -1;   // stegens staplingsriktning (sidans L = +1)
+  for (let changed = true; changed;) {
+    changed = false;
+    for (let k = 0; k < P.branches.length; k++) {
+      const b = P.branches[k], Q = b.items.length === 1 ? b.items[0] : null;
+      if (!Q || Q.kind !== 'par' || !Q.full || hasLegs(Q)) continue;
+      const Lk = k === 0 ? -sP : sP;
+      const qDir = Q.side === 'out' ? Lk : -Lk;
+      const seq = qDir === sP ? Q.branches : Q.branches.slice().reverse();
+      P.branches.splice(k, 1, ...seq);
+      changed = true;
+      break;
+    }
+  }
+}
+function normalize(doc) {
+  for (const s of SIDES) {
+    normSeries(doc.loop[s]);
+    const it = doc.loop[s].items;
+    if (it.length === 1 && it[0].kind === 'par' && it[0].side !== 'out') flattenLadder(it[0]);
+  }
+  return doc;
+}
 function removeById(doc, id) {
   const f = findItem(doc, id);
   if (f) f.series.items.splice(f.index, 1);

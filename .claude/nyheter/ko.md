@@ -63,13 +63,6 @@ Format per post:
   https://link.aps.org/doi/10.1103/Physics.19.s121
   (tillagd 2026-09-23)
 
-- **Virveln i vattenhinken avgör frågan om kvantturbulens** — ett bordsexperiment med en helt klassisk
-  vattenvirvel stöder en decennier gammal teori för hur turbulens dör ut i kvantvätskor. Ingång: turbulens,
-  virvlar, rörelsemängdsmoment och varför en klassisk modell alls får säga något om superfluid helium.
-  Källa (Physics, APS, 2026-09-21):
-  https://link.aps.org/doi/10.1103/Physics.19.118
-  (tillagd 2026-09-22)
-
 - **Rydbergatomen som håller sig upprätt i elva millisekunder** — ett lag i Stuttgart sätter tre rekord för
   cirkulära Rydbergatomer, där elektronen kretsar i en nästan klassisk cirkelbana långt ut från kärnan.
   Ingång: energinivåer, kvanttal, exciterade tillstånd och varför ett tillstånd har en livslängd alls.
@@ -412,6 +405,27 @@ Format per post:
   Källa (ScienceDaily 2026-09-12):
   https://www.sciencedaily.com/releases/2026/09/260911214303.htm
   (tillagd 2026-09-13)
+
+- **Kvartsladdningen som dyker upp i ett sällsynt kvanttillstånd** — mätningar visar kvasipartiklar som bär
+  en fjärdedels elementarladdning, i ett tillstånd som knyter an till frågan om icke-abelska anyoner. Ingång:
+  elementarladdning, kvantiserad laddning och vad en kvasipartikel är. OBS: kvantfysik är väl representerat —
+  kontrollera avståndet till närmaste kvantnyhet. Källa (Phys.org 2026-09-25):
+  https://phys.org/news/2026-09-rare-quantum-state-reveals-particles.html
+  (tillagd 2026-09-26)
+
+- **LHC kopplas ner — och byggs om för tio gånger mer data** — CERN har börjat plocka isär acceleratorn inför
+  uppgraderingen till High-Luminosity LHC, där nyckelmagneter byts mot starkare supraledande versioner.
+  Ingång: magnetfält, supraledning, acceleratorfysik och vad luminositet betyder. OBS: partikelfysik
+  publicerades 2026-09-16 — låt det gå tid. Källa (ScienceDaily 2026-09-25):
+  https://www.sciencedaily.com/releases/2026/09/260925005430.htm
+  (tillagd 2026-09-26)
+
+- **Svarta hål i fler dimensioner ringer med en dold symmetri** — de kvasinormala svängningar ett svart hål
+  avger efter en störning visar sig lyda en exakt symmetri i högre dimensioner, som bryts av strängteoretiskt
+  inspirerade gravitationsteorier. Ingång: svängningar, dämpning, egenfrekvenser och gravitationsvågor.
+  Kontrollera vad som är analytiskt bevisat och vad som är numeriskt. Källa (Phys.org 2026-09-24):
+  https://phys.org/news/2026-09-higher-dimensional-black-holes-exact.html
+  (tillagd 2026-09-26)
 
 ## Fynd som inte användes (2026-08-21) — kan tas upp senare
 

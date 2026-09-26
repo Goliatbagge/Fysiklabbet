@@ -982,7 +982,7 @@ window.BEGREPP = [
   {
     id: 'superfluid',
     term: 'Superfluid',
-    former: ['superfluid', 'superfluida', 'superfluidum', 'superfluider', 'superfluiditet', 'superfluiditeten'],
+    former: ['superfluid', 'superfluida', 'superfluidum', 'superfluider', 'superfluiditet', 'superfluiditeten', 'supraflytande'],
     kort: 'En vätska som flyter helt utan inre friktion. Den kan krypa upp för sitt kärls väggar och rinna genom porer så små att ingen vanlig vätska tar sig igenom.',
     relaterade: ['absoluta-nollpunkten', 'supraledare'],
     body: [
@@ -1558,7 +1558,7 @@ window.BEGREPP = [
   {
     id: 'turbulens',
     term: 'Turbulens',
-    former: ['turbulens', 'turbulensen', 'turbulent', 'turbulenta', 'turbulent flöde', 'laminär', 'laminärt', 'laminära', 'laminärt flöde'],
+    former: ['turbulens', 'turbulensen', 'turbulent', 'turbulenta', 'turbulent flöde', 'laminär', 'laminärt', 'laminära', 'laminärt flöde', 'kvantturbulens', 'kvantturbulensen'],
     kort: 'Det virvlande, kaotiska tillstånd en gas eller vätska hamnar i när flödet blir tillräckligt snabbt. Rörelsen lyder kända lagar men går ändå inte att förutsäga i detalj.',
     relaterade: ['superfluid', 'plasma'],
     body: [
@@ -3323,6 +3323,42 @@ window.BEGREPP = [
       { type: 'p', html: 'Vill man jämföra två atomer med varandra belyser man dem med en laser och ser efter vilka som hoppat till ett högre energitillstånd. Problemet är att lasern aldrig är helt stabil: dess frekvens vandrar långsamt fram och tillbaka. Mäter man en atom i taget blandas atomens verkliga frekvens ihop med laserns vandring, och efter någon sekund vet man inte längre vad som är vad.' },
       { type: 'p', html: 'Korrelationsspektroskopi vänder på frågan. I stället för att läsa av varje atom för sig frågar man bara: hamnade de två i samma tillstånd eller i olika? Vandrar lasern iväg påverkar det båda atomerna lika mycket, och svaret på den frågan ändras inte. Kvar blir just det man vill veta, nämligen om de två atomerna har exakt samma frekvens eller inte.' },
       { type: 'p', html: 'Vinsten är att mätningen kan pågå mycket längre än lasern själv är stabil. Metoden används när två atomur ska jämföras med varandra på en noggrannhetsnivå där ingen laser i världen håller sig stilla tillräckligt länge, och besläktade knep — att mäta skillnader i stället för absoluta värden — återkommer överallt i precisionsfysiken.' }
+    ]
+  },
+  {
+    id: 'kelvinvag',
+    term: 'Kelvinvåg',
+    former: ['kelvinvåg', 'kelvinvågen', 'kelvinvågor', 'kelvinvågorna', 'kelvinvågsturbulens', 'kelvinvågsturbulensen'],
+    kort: 'En spiralformad våg som löper längs mittlinjen i en virvel, ungefär som en våg längs ett spänt rep. Den fick sitt namn efter Lord Kelvin, som föreslog den 1880.',
+    relaterade: ['turbulens', 'superfluid', 'vagturbulens'],
+    body: [
+      { type: 'p', html: 'Ta tag i ena änden av ett långt rep som är spänt mellan två stolpar och ryck till åt sidan. En puckel springer iväg längs repet. Samma sak går att göra med en virvel, fast resultatet blir mer dramatiskt: mitt i en virvel finns en tunn kärna, och rubbar man kärnan åt sidan på ett ställe springer störningen iväg längs kärnan. Skillnaden är att virveln hela tiden roterar, så störningen dras samtidigt runt varvet. Det som vandrar är därför inte en puckel utan en korkskruv, en spiral som skruvar sig framåt längs kärnan. Det är en kelvinvåg.' },
+      { type: 'p', html: 'Den syns bäst i en badkarsvirvel eller i en tromb, där mitten är fylld med luft och alltså blir en tydlig linje att titta på. Men vågen finns lika mycket i en virvel utan synlig kärna — det är rörelsemönstret, inte luften, som är vågen. Och precis som alla vågor bär den energi utan att flytta något material längs vägen: vattnet svänger fram och tillbaka i sidled medan mönstret vandrar.' },
+      { type: 'p', html: 'En egenhet skiljer kelvinvågen från repets våg. På ett rep färdas alla våglängder lika fort, så en puls behåller sin form hela vägen. Längs en virvelkärna går korta vågor betydligt fortare än långa, så ett vågtåg spretar isär i sina beståndsdelar medan det vandrar. Störst betydelse har kelvinvågor i vätskor utan inre friktion, där virvlarna är tunna och långlivade trådar. Där tros vågorna vara det sista steget i kedjan som gör oordnad virvelrörelse till värme och ljud.' }
+    ]
+  },
+  {
+    id: 'vagturbulens',
+    term: 'Vågturbulens',
+    former: ['vågturbulens', 'vågturbulensen', 'vågkaskad', 'vågkaskaden'],
+    kort: 'Ett myller av vågor i olika storlekar som lämnar energi vidare till varandra, från de största ner till de minsta, där energin blir värme.',
+    relaterade: ['turbulens', 'kelvinvag', 'dispersion'],
+    body: [
+      { type: 'p', html: 'Havsytan i storm är inte en enda våg utan tusentals samtidigt: långa dyningar, kortare vågor ovanpå dem och en fin krusning överst. Vinden lämnar sin energi till de största, och sedan vandrar energin nedåt i storlek tills vågorna är så små att vattnets inre friktion tar hand om dem och gör om rörelsen till värme. Den vandringen kallas en kaskad, och hela tillståndet kallas vågturbulens.' },
+      { type: 'p', html: 'Att energin kan byta ägare alls beror på att vågor i verkligheten inte är helt oberoende av varandra. Möts flera vågor kan de tillsammans skapa en ny, men bara om två villkor är uppfyllda samtidigt: antalet vågtoppar per meter måste gå ihop, och frekvenserna likaså. Det är samma sorts bokföring som när rörelsemängd och energi måste stämma i en krock mellan biljardbollar. Villkoren är hårda, och i vissa system krävs det så många som sex vågor samtidigt för att ett utbyte alls ska bli av.' },
+      { type: 'p', html: 'Det fina med vågturbulens är att den, till skillnad från vanlig turbulens, går att räkna på. Är vågorna bara svaga nog finns en teori som förutsäger exakt hur mycket energi som ligger på varje storlek — ofta som en enkel potenslag. Sådana förutsägelser har prövats på havsvågor, på vibrerande metallplattor, på plasma i rymden och på vågor längs virvlar, och de brukar hålla.' }
+    ]
+  },
+  {
+    id: 'dispersion',
+    term: 'Dispersion',
+    former: ['dispersion', 'dispersionen', 'dispersionsrelation', 'dispersionsrelationen', 'dispersiv', 'dispersiva', 'dispersivt'],
+    kort: 'Att vågor med olika våglängd färdas olika fort i samma medium. Det är därför ett prisma delar vitt ljus i en färgskala.',
+    relaterade: ['vagturbulens', 'kelvinvag'],
+    body: [
+      { type: 'p', html: 'Vitt ljus som går in i ett glasprisma kommer ut uppdelat i rött, gult, grönt och blått. Förklaringen är att ljusets hastighet i glaset inte är riktigt densamma för alla våglängder: blått ljus bromsas lite mer än rött och bryts därför i en något större vinkel. Att utbredningshastigheten beror på våglängden kallas dispersion, och regnbågen är samma sak med vattendroppar i stället för glas.' },
+      { type: 'p', html: 'Fenomenet är inte förbehållet ljus. Djupvattenvågor på havet är starkt dispersiva: långa dyningar färdas snabbare än korta vågor, och därför når de första jämna dyningarna från en avlägsen storm kusten långt före det korta, hackiga havet. Ljud i luft är däremot i praktiken fritt från dispersion, och det är tur — annars hade en orkesters bastoner och diskanttoner kommit fram till publiken vid olika tidpunkter.' },
+      { type: 'p', html: 'Sambandet mellan våglängd och frekvens för en viss sorts våg kallas dess dispersionsrelation, och den är ett slags fingeravtryck: den säger hur vågen sprids, hur snabbt ett vågpaket faller isär och vilka vågor som alls kan utbyta energi med varandra. Att mäta upp den är därför oftast det första en fysiker gör när en ny sorts våg har hittats.' }
     ]
   },
 ];

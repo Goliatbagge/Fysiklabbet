@@ -103,6 +103,76 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-26-vagorna-langs-virvelns-karna",
+    date: "2026-09-26",
+    title: "Vattenvirvelns kärna bär vågor som ett spänt rep — och energin vandrar nedåt sex vågor i taget",
+    deck: "Lord Kelvin förutsade 1880 att en virvel kan bära spiralformade vågor längs sin egen mittlinje. Ett lag i Paris har nu filmat en fyra decimeter lång vattenvirvel med 480 bilder i sekunden och sett hur energin vandrar från centimeterstora krusningar ner till bråkdelar av en millimeter. Vägen nedåt kräver att sex vågor möts samtidigt.",
+    category: "Strömningslära",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-26-vagorna-langs-virvelns-karna.jpg",
+    imageAlt: "Närbild av en virvel i ett genomskinligt kärl med vatten. Från den nedsänkta ytan går en tratt ner i vätskan och övergår i en smal, luftfylld pelare. Ljusa strimmor i vattnet visar hur strömmen virvlar runt pelaren.",
+    imageCredit: "Foto: Rhetos (CC0, Wikimedia Commons). Bilden visar en laboratorievirvel av samma slag som den i studien, inte forskarnas egen uppställning.",
+    tags: ["strömningslära", "mekanik", "vågor", "turbulens", "virvel", "kelvinvåg", "vågturbulens", "energikaskad", "superfluid", "kvantturbulens", "resonans", "dispersion"],
+    sources: [
+      { name: "Phys.org: Whirlpool in a water tank reveals long-predicted wave turbulence (24 september 2026)", url: "https://phys.org/news/2026-09-whirlpool-tank-reveals-turbulence.html" },
+      { name: "Physics (APS), Viewpoint av Andrew Baggaley: The Turbulent Life of a Vortex Line (21 september 2026)", url: "https://physics.aps.org/articles/v19/118" },
+      { name: "arXiv: Experimental evidence of Kelvin wave turbulence along a vortex core — fri fulltextversion av studien", url: "https://arxiv.org/abs/2607.07535" }
+    ],
+    research: {
+      citation: "Jason Barckicke, Christophe Gissinger och Eric Falcon, ”Experimental Evidence of Kelvin-Wave Turbulence along a Vortex Core”, Physical Review Letters 137, 134001, publicerad 21 september 2026",
+      url: "https://doi.org/10.1103/t3bt-m431"
+    },
+    larare: {
+      moment: [
+        { label: "Vågor: våglängd, frekvens och utbredningshastighet", href: "katalog.html?id=fy2-2.1" },
+        { label: "Energi och effekt i mekaniska system" },
+        { label: "Resonans och superposition" }
+      ],
+      fragor: [
+        "Vågorna längs virveln bär energi men flyttar inget vatten längs kärnan. Vilka andra vågor känner ni till som gör samma sak, och hur kan man visa att det är ett mönster som rör sig och inte materia?",
+        "Forskarna matade in energi vid 1–3 hertz och mätte den sedan hos vågor som svänger mycket snabbare. Varför är det rimligt att energin går från stora till små skalor och inte tvärtom?",
+        "Att fyra vågor inte kan flytta någon energi mellan sig, men sex vågor kan, följer av två villkor som måste vara uppfyllda samtidigt. Vad säger det om skillnaden mellan att något är tillåtet och att något faktiskt händer?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Alla har sett den. Vattnet rinner ur badkaret, en tratt bildas över avloppet, och mitt i tratten står en smal pelare av luft som darrar och slingrar sig. Det är en virvel, och dess mitt är inte en linje utan något som beter sig påfallande likt ett spänt rep: rycker man i det springer en våg längs det.' },
+      { type: 'p', html: 'Att en virvel kan bära sådana vågor föreslogs redan 1880 av Lord Kelvin, och de bär i dag hans namn. De har sedan dess visat sig vara allt annat än en kuriositet — de tros vara den sista länken i kedjan som gör oordnad virvelrörelse till ljud i supraflytande vätskor. Men ingen har kunnat se dem dela upp och skicka vidare energi, i det kaotiska myller som fysiker kallar vågturbulens. Förrän nu.' },
+      { type: 'p', html: 'Ett forskarlag i Paris — Jason Barckicke, Christophe Gissinger och Eric Falcon, med Eric Falcon vid CNRS och Université Paris Cité — rapporterar nu i <em>Physical Review Letters</em> den första direkta observationen av Kelvinvågsturbulens. Uppställningen är avväpnande enkel: en tank med vatten och ett hål i botten.' },
+
+      { type: 'h2', text: 'Vågor som bara en virvel kan bära' },
+      { type: 'p', html: 'En Kelvinvåg är en spiralformad störning som löper längs en virvels mittlinje. Rubbas kärnan åt sidan på ett ställe drar virvelns egen rotation störningen med sig runt varvet, samtidigt som den vandrar längs kärnan. Resultatet är en korkskruv som skruvar sig framåt.' },
+      { type: 'p', html: 'Det avgörande är att virveln inte är stilla. Hur snabbt vattnet snurrar runt mittlinjen sammanfattas i en enda storhet, cirkulationen $\\Gamma$ (gamma), som i forskarnas tank mättes till $\\Gamma = 1{,}8 \\cdot 10^{-2}\\ \\mathrm{m^2/s}$. Kärnans radie var bara drygt en millimeter, och farten hos vattnet alldeles intill den blir då ungefär $2\\ \\mathrm{m/s}$ — gånghastighet, koncentrerad till en pelare smalare än en blyertspenna.' },
+      { type: 'p', html: 'Den rotationen ger Kelvinvågorna en egenhet som en våg på ett rep saknar: korta vågor svänger mycket snabbare än långa. På ett rep färdas alla vågor lika fort, oavsett våglängd, och en puls behåller därför sin form. Längs en virvelkärna gör den inte det. Ett vågtåg som skickas iväg spretar isär i sina beståndsdelar, eftersom varje våglängd har sin egen fart. Just den kopplingen mellan våglängd och frekvens, dispersionsrelationen, mätte samma forskarlag upp tidigare i år och publicerade i <em>Nature Physics</em>.' },
+
+      { type: 'h2', text: 'Tanken, hålet och den skakande ringen' },
+      { type: 'p', html: 'Den nya uppställningen står i en cylindrisk tank, 21&nbsp;cm i diameter och 45&nbsp;cm hög, nedsänkt i ett större vattenmagasin. Vatten pumpas in genom fyra symmetriskt placerade inlopp och rinner ut genom ett hål på 5&nbsp;mm i botten. Resultatet är en stabil virvel vars luftfyllda kärna sträcker sig omkring 40&nbsp;cm rakt ner genom tanken och därmed blir synlig som en skarp, mörk linje.' },
+      { type: 'p', html: 'Överst sitter en ring som en elektromekanisk skakare rör fram och tillbaka i sidled. Rörelsen är avsiktligt slumpmässig, med frekvenser mellan 1 och 3&nbsp;hertz och utslag på en till två millimeter. Det är den enda energi som tillförs vågorna, och den matas in på den allra grövsta skalan.' },
+      { type: 'p', html: 'Sedan gäller det att se vad som händer. En kamera med tre megapixel filmar ett 20,6&nbsp;cm högt fönster av kärnan med 480 bilder i sekunden. Ur filmen läses kärnans läge av bildruta för bildruta, längs hela den synliga sträckan — och därmed får forskarna vågornas rörelse både i tid och i rum, vilket är precis vad som krävs för att kunna räkna ut både frekvenser och våglängder.' },
+
+      { type: 'h2', text: 'Energin faller nedåt i skala' },
+      { type: 'p', html: 'Bilden som växer fram är en kaskad. Energin som ringen matar in vid någon enstaka hertz stannar inte där, utan lämnas vidare till kortare och snabbare vågor, som i sin tur lämnar vidare till ännu kortare. Energin sprider sig över nästan två tiopotenser i frekvens innan den tar slut.' },
+      { type: 'p', html: 'Samma sak i rummet. Potenslagen i mätningen håller över ungefär en tiopotens i våglängd, från vågor som är cirka tre gånger längre än kärnans radie ner till vågor som är en tredjedel av den — alltså från drygt fyra millimeter ner till ungefär en halv millimeter. Där tar vattnets inre friktion över och gör om rörelsen till värme.' },
+      { type: 'p', html: 'Det är i formen på fördelningen som förutsägelsen prövas. Mäter man hur mycket av kärnans utböjning som ligger på varje frekvens får man en avtagande potenslag, och den följer $S(\\omega) \\propto \\omega^{-7/3}$. Samma sak uttryckt i vågtal, alltså i antal vågtoppar per meter, ger $S(k) \\propto k^{-11/3}$. Båda exponenterna är precis vad teorin för svag vågturbulens har förutsagt för Kelvinvågor.' },
+
+      { type: 'h2', text: 'Varför just sex vågor' },
+      { type: 'p', html: 'Det mest oväntade i resultatet handlar om hur energin faktiskt byter ägare. Vågor kan bara lämna över energi till varandra när de möts på ett sätt som uppfyller två villkor samtidigt: deras vågtal måste ta ut varandra, och deras frekvenser måste göra det också. Villkoren är bokföring, ungefär som att rörelsemängd och energi båda måste stämma i en krock.' },
+      { type: 'p', html: 'För Kelvinvågor stryker den bokföringen nästan alla möjligheter. Möten mellan tre vågor är förbjudna, och detsamma gäller fem. Fyra vågor kan visserligen mötas, men de mötena är verkningslösa: vågorna byter inte en enda joule med varandra, de rubbar bara varandras faser. Forskarna prövade den saken direkt i mätdata, med ett statistiskt mått som letar efter samband mellan fyra vågor i taget, och hittade ingenting.' },
+      { type: 'p', html: 'Kvar står sex. Med ett motsvarande mått för sex vågor samtidigt syns däremot en tydlig signal, och de kombinationer som lyser upp är just de som uppfyller de båda villkoren. Det är alltså sexpartsmöten som bär energin nedåt genom skalorna — en detalj i teorin som funnits på papper i tjugo år utan att någon kunnat se den.' },
+
+      { type: 'h2', text: 'Från vattentanken till neutronstjärnan' },
+      { type: 'p', html: 'Vad ska man med detta till? Svaret ligger i en vätska som inte alls liknar vatten. Kyler man flytande helium under 2,17&nbsp;kelvin blir det supraflytande: det förlorar all inre friktion och flyter utan motstånd. En sådan vätska kan inte virvla hur som helst. Virvlarna blir i stället tunna trådar med exakt bestämd cirkulation, och ett turbulent supraflytande helium är ett trassel av sådana trådar.' },
+      { type: 'p', html: 'Trasslet måste ändå kunna göra sig av med sin energi, och det är där Kelvinvågorna kommer in. När två trådar korsar varandra kopplar de om sig, och omkopplingen slår an vågor längs trådarna. Vågorna lämnar energin vidare nedåt tills våglängderna är så korta att energin kan lämna virveln som ljud. Hela den kedjan har vilat på teori, eftersom en virveltråd i helium nära absoluta nollpunkten är svår att filma i närbild.' },
+      { type: 'p', html: 'Ett vanligt vattenglas har förstås inte kvantmekanikens kvantiserade cirkulation. Men vågorna längs kärnan lyder samma ekvationer, och det är just den bron forskarna slår: en klassisk virvel i rumstemperatur går att mäta i detalj, och det som gäller vågorna där gäller dem också i helium. Samma slags virveltrådar antas dessutom finnas i den supraflytande materien inne i neutronstjärnor, där de kan ha att göra med de plötsliga hopp i rotationstakt som astronomerna ser hos pulsarer.' },
+      { type: 'p', html: 'Forskarna pekar ut fortsättningen själva: uppställningen öppnar för att studera system med flera virvlar samtidigt, och därmed för att se vad som händer i det ögonblick då två kärnor möts och kopplar om sig.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Lord Kelvin trodde en period att atomerna själva var knutar på virveltrådar i etern. Virvelatomen visade sig vara fel, men matematiken han utvecklade för virvlar lever kvar — Kelvinvågorna är en direkt avläggare av den.',
+        'Kärnan i forskarnas virvel är luft, inte vatten. Den snabba rotationen sänker trycket i mitten så mycket att vätskan trängs undan, av samma skäl som ger en tromb dess synliga tratt.',
+        'Att korta vågor går fortare än långa kallas dispersion och är samma fenomen som får ett prisma att dela vitt ljus i färger. Skillnaden är att det där är ljusets hastighet i glas som beror på våglängden.'
+      ] }
+    ]
+  },
+  {
     id: "2026-09-25-klockan-pa-nittonde-decimalen",
     date: "2026-09-25",
     title: "Den noggrannaste klockan hittills räknar en enda atom — och fem millimeter i höjd blir en mätbar felkälla",

@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Fri, 25 Sep 2026 01:24:57 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 01:25:38 GMT</lastBuildDate>
+    <item>
+      <title>Vattenvirvelns kärna bär vågor som ett spänt rep — och energin vandrar nedåt sex vågor i taget</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-26-vagorna-langs-virvelns-karna</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-26-vagorna-langs-virvelns-karna</guid>
+      <pubDate>Sat, 26 Sep 2026 04:00:00 GMT</pubDate>
+      <category>Strömningslära</category>
+      <description>Lord Kelvin förutsade 1880 att en virvel kan bära spiralformade vågor längs sin egen mittlinje. Ett lag i Paris har nu filmat en fyra decimeter lång vattenvirvel med 480 bilder i sekunden och sett hur energin vandrar från centimeterstora krusningar ner till bråkdelar av en millimeter. Vägen nedåt kräver att sex vågor möts samtidigt.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-26-vagorna-langs-virvelns-karna.jpg" length="322278" type="image/jpeg"/>
+    </item>
     <item>
       <title>Den noggrannaste klockan hittills räknar en enda atom — och fem millimeter i höjd blir en mätbar felkälla</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-09-25-klockan-pa-nittonde-decimalen</link>
@@ -177,15 +186,6 @@
       <category>Kvantfysik</category>
       <description>Ett forskarlag vid University of Tokyo har låtit två grannatomer i en kiselkristall, 136 pikometer isär, spela rollen som spalterna i Youngs dubbelspaltförsök. Ränderna som elektronstrålen ritar visar hur nära i takt de två atomerna skakar, och det är just den skakningen som bär värme genom en halvledare.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-07-dubbelspalten-krympt-till-tva-atomer.jpg" length="379246" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Gasen rusar fram i 400 km/h — men tiohörningen vid Saturnus sydpol står nästan stilla</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-06-tiohorningen-vid-saturnus-sydpol</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-06-tiohorningen-vid-saturnus-sydpol</guid>
-      <pubDate>Sun, 06 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Astronomi</category>
-      <description>Hubbleteleskopet har fångat en tiosidig figur runt Saturnus sydpol, ritad av molnen i en stråljet. Gasen i jeten rör sig omkring 46 gånger snabbare än själva mönstret, och det är just den skillnaden som gör figuren till en våg och inte till en storm.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-06-tiohorningen-vid-saturnus-sydpol.jpg" length="35068" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

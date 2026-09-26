@@ -1118,6 +1118,31 @@ skyddat material (uttryckligt önskemål 2026-08-06).
   NSSDC-länkar (nssdc.gsfc.nasa.gov låg nere 2026-08-06 och visade en
   underhållssida i stället för filmen).
 
+## Verktyg för lärare (kopplingsschema.html)
+
+Sajtens första verktyg (2026-09-26) är **kopplingsschema-editorn**:
+`kopplingsschema.html` + `kopplingsschema.js` i roten. Lärare drar in
+komponenter på ledningarna och kopierar bilden till sina dokument. Modellen,
+layoutreglerna och kretsberäkningen beskrivs i filhuvudet och i sektionerna
+i `kopplingsschema.js`; läs dem innan du ändrar något.
+
+- **Menyvalet Verktyg** (rullgardin med Kopplingsschema) ligger efter
+  Nationella prov i huvudmenyn på tio sidor: `avsnitt`, `begrepp`, `index`,
+  `katalog`, `kontakt`, `nyheter`, `nyhetsbrev`, `om`, `simuleringar`, `np`
+  (samt `kopplingsschema.html` själv). Ett nytt verktyg läggs till i alla
+  elva; en ny sida med huvudmenyn ska ha Verktyg med.
+- **Sökrutan** hittar verktygen via listan `VERKTYG` överst i `data/sok.js`.
+- **Öka versionsnumret** i `<script src="kopplingsschema.js?v=…">` när
+  skriptet ändras. GitHub Pages låter webbläsaren spara filerna i tio
+  minuter, och en ny HTML-fil med ett gammalt skript ger konstiga blandfel.
+- **Sökmotoroptimering**: sidan har strukturerad data (JSON-LD med
+  WebApplication, BreadcrumbList och FAQPage) och en läsbar text under
+  verktyget. Frågorna och svaren i FAQPage måste vara ordagrant samma som
+  de synliga under "Vanliga frågor", annars bryter sidan mot Googles regler.
+  Teoriavsnittet `fy1-7.6` länkar till verktyget.
+- `utkast/kopplingsschema.html` är en vidarebefordran från den gamla
+  adressen (behåller `#s=` så att sparade scheman fortsätter fungera).
+
 ## Besöksstatistik
 
 Sajten mäts med **Cloudflare Web Analytics** (uppsatt 2026-08-30). Den är

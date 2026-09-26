@@ -2388,6 +2388,14 @@ $('#redoBtn').addEventListener('click', redo);
 $('#trash').innerHTML = IC.trash + '<span>Släpp här för att ta bort</span>';
 $('#coach .x').addEventListener('click', markUsed);
 
+// Verktyget fyller skärmen under sajtens sidhuvud.
+const siteHdr = document.querySelector('.lab-header');
+const setHdr = () => document.documentElement.style.setProperty('--hdr', (siteHdr ? siteHdr.offsetHeight : 0) + 'px');
+setHdr();
+window.addEventListener('resize', setHdr);
+// Symbolerna i texten om verktyget ritas med samma kod som i schemat.
+document.querySelectorAll('[data-sym]').forEach(el => { el.innerHTML = iconSvg(el.dataset.sym, 66, 44); });
+
 buildPalette();
 commit();
 refresh({ instant: true });

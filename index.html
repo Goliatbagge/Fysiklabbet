@@ -150,6 +150,7 @@
         };
 
         const UPDATES = [
+            { date: '2026-09-26', href: 'kopplingsschema.html', title: 'Nytt verktyg för lärare: rita kopplingsscheman', text: 'Dra in batterier, resistorer, lampor och mätare på ledningarna, så ordnar sig schemat självt med jämna mellanrum och symboler som i läroboken. Skriv in resistanser och spänningar så räknas strömmarna ut, och kopiera bilden direkt till Word, PowerPoint eller Google Dokument. Verktyget finns under Verktyg i menyn.' },
             { date: '2026-09-20', href: 'np.html?id=ma2c-vt2018', title: 'Nationellt prov i Ma 2c: våren 2018', text: 'Ett andra prov för Matematik nivå 2c: nationella provet från våren 2018 med alla 26 uppgifter från delprov B, C och D. Räta linjens ekvation ur en graf, nollställen och symmetrilinje, normalfördelningar, logaritmlagarna, ett ekvationssystem med tre obekanta om äpplen och päron, för vilka värden på en konstant en andragradsekvation saknar reella rötter, trädets höjd med en spegel på marken, Högskoleprovets resultat, koldioxidutsläpp som ska minska med 40 procent, dödstal mot vattenförbrukning i 1800-talets Stockholm, Storsjöodjurets övre kant som andragradsfunktion och den största rektangeln i en triangel. Varje uppgift har en textlösning som klickas fram steg för steg med förklaringar, uppbyggda figurer och bedömning enligt bedömningsanvisningarna, och en pennlösning där lösningen skrivs för hand på rutat papper. Den enda uppgiften på stoff som utgått ur kursen, komplexa tal, är märkt.' },
             { date: '2026-09-18', href: 'katalog.html?id=ma1c-2.7:ovningsblad', title: 'Övningsblad: mängdträning i ekvationslösning med lösningsförslag', text: 'Avsnitten Ekvationslösningens grunder, Variabler i båda led och Ekvationer med nämnare i Matematik nivå 1 har fått ett nytt kort, Övningsblad. Där finns fem utskriftsklara blad på grundnivå med sammanlagt närmare 200 rena räkneuppgifter: ett steg, två steg, x i båda led, täljaren lika med kvoten gånger nämnaren, korsvis multiplikation och till sist ett blad där alla typerna är blandade. Varje blad inleds med ett genomräknat exempel och avslutas med svar och lösningsförslag till varje uppgift, ett led i taget, så att man kan träna helt på egen hand tills det sitter. Bladen går att öppna i mobilen eller skriva ut som PDF.' },
             { date: '2026-09-15', href: 'katalog.html?id=fy2-1.8&block=kanonvagn', title: 'Kanonvagnen: simulering i genomgången Kaströrelse', text: 'Den klassiska demonstrationen kan nu köras direkt i genomgången Kaströrelse. En vagn rullar med konstant fart längs en bana, och när den passerar avfyringsmärket skjuter en fjäderkanon en boll rakt upp. Bollen följer en kastparabel men landar ändå i tratten på vagnen, som hunnit rulla vidare: ingen kraft verkar i sidled, så bollen behåller vagnens hastighet i x-led hela vägen. Ställ in vagnens fart och kanonens utgångsfart, sakta ned med Ultrarapid och slå på hastighetspilarna för att se att bollens hastighet i x-led är lika lång i varje ögonblick och lika med vagnens.' },
@@ -279,6 +280,15 @@
                             </div>
                             <a href="simuleringar.html">Simuleringar</a>
                             <a href="np.html">Nationella prov</a>
+                            <div className="lab-nav-dd">
+                                <button type="button" className="lab-nav-dd-trigger" aria-haspopup="true">
+                                    Verktyg
+                                    <svg className="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                                </button>
+                                <div className="lab-nav-dd-menu">
+                                    <a href="kopplingsschema.html">Kopplingsschema</a>
+                                </div>
+                            </div>
                             <a href="nyheter.html">Fysiknyheter</a>
                             <a href="om.html">Om</a>
                             <a href="kontakt.html">Kontakt</a>

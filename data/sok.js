@@ -68,6 +68,31 @@
   }
 
   const index = [];
+
+  // Verktyg för lärare: egna sidor, inte avsnitt i katalogen. Läggs först, så
+  // att en sökning på "kopplingsschema" visar verktyget överst.
+  const VERKTYG = [
+    { title: 'Kopplingsschema', href: 'kopplingsschema.html',
+      description: 'Rita kopplingsscheman som i läroboken och kopiera bilden till ditt dokument.',
+      kw: ['kopplingsschema', 'kopplingsscheman', 'rita kopplingsschema', 'skapa kopplingsschema',
+           'kretsschema', 'elektrisk krets', 'krets', 'ellära', 'elektricitet', 'resistor', 'lampa',
+           'batteri', 'seriekoppling', 'parallellkoppling', 'kretssymboler', 'symboler', 'verktyg',
+           'lärare', 'ritverktyg'] },
+  ];
+  for (const v of VERKTYG) {
+    index.push({
+      kind: 'verktyg',
+      kindLabel: 'Verktyg',
+      title: v.title,
+      description: v.description,
+      course: 'Verktyg för lärare',
+      num: '',
+      icon: null,
+      resultHref: v.href,
+      hay: normalize([v.title, v.description].concat(v.kw).join(' ')),
+    });
+  }
+
   for (const section of KF) {
     const code = courseCode(section.course) || 'fy1';
     const sectionWords = [section.title, section.description, section.course,

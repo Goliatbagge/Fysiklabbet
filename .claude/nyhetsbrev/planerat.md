@@ -52,3 +52,11 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   material, hitta gränsvinkeln för totalreflektion med glas mot luft.
   Pushat till main 2026-09-14 (commit 8f9cddf); raden finns även i UPDATES i
   index.html. Bocka av här när den nämnts.
+
+- **Lärarverktyg för kopplingsscheman.** Ett verktyg där läraren enkelt
+  bygger snygga kopplingsscheman (till prov, genomgångar, tavlan). Utkastet
+  ligger i `utkast/kopplingsschema.html` (dolt, noindex) och är ännu inte
+  lanserat. **Teasat 2026-09-27** på användarens begäran, med en ledtråd i
+  stället för namnet (ringar med kryss i, batteriets långa och korta streck,
+  räta hörn). Håll teasern öppen utan datumlöfte; när verktyget lanseras
+  hör det hemma under "Nytt på Fysiklabbet".

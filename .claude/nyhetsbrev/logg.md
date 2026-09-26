@@ -84,6 +84,15 @@ Format:
   med ToolSearch) — förhandsvisningen publicerades i stället som en privat
   Artifact (bild inbäddad som data-URI) och länken gavs i överlämningen till
   den anropande agenten/användaren.
+- Revision samma dag efter användarens granskning: "fem gånger skärpare"
+  (ordet finns inte) blev "Osäkerheten är bara en femtedel av det förra
+  rekordets" (ny regel `skarpare` i verify-sprak.js). Sektionerna flyttades
+  till den nya fasta ordningen: Nytt på Fysiklabbet, Veckans tips, Veckans
+  fysik, Nästa vecka (inskrivet i .claude/agents/nyhetsbrev.md). Under
+  Nästa vecka lades en teaser före nyhetsteasern om ett kommande
+  lärarverktyg för kopplingsscheman, med en ledtråd i stället för namnet
+  (ringar med kryss i, batteriets långa och korta streck, räta hörn).
+  Belagd i planerat.md. Ny förhandsvisning skickad med SendUserFile.
 - ÅTERSTÅR för användaren: (1) granska utkastet/förhandsvisningen,
   (2) köra `/brev-till-octopus` LOKALT (kräver Chrome-åtkomst, som
   molnsessionen saknar) för att lägga upp kampanjen i EmailOctopus och

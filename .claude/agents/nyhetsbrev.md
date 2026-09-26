@@ -71,7 +71,7 @@ matnyttigt att man tar med sig något in i klassrummet.
 
 3. **Välj och vinkla innehållet.**
    - **Veckans fysiknyheter:** lyft de TRE mest häpnadsväckande av veckans
-     artiklar (urvalskriterierna står under "Brevets delar" punkt 3 — det är
+     artiklar (urvalskriterierna står under "Brevets delar" punkt 5 — det är
      märkvärdighet som avgör, aldrig publiceringsdatum). Ge var och en
      1–3 meningar egen text — en vinkel, en aha-detalj eller en anledning att
      klicka — inte en kopierad ingress. Länka till artikeln
@@ -88,7 +88,7 @@ matnyttigt att man tar med sig något in i klassrummet.
      om (se "Veckans tips" under Brevets delar).
 
 4. **Bildsätt brevet** (se "Design och bilder" nedan): välj veckans bästa
-   nyhetsbild som hjältebild, ta skärmdumpar av nya simuleringar, och lägg
+   nyhetsbild som hjältebild (överst i sektionen Veckans fysik), ta skärmdumpar av nya simuleringar, och lägg
    allt som inte redan ligger på sajten i `nyheter/brev/`.
 
 5. **Skriv brevet** (se "Brevets delar", "Design och bilder" och
@@ -135,6 +135,13 @@ matnyttigt att man tar med sig något in i klassrummet.
 
 ## Brevets delar
 
+**Sektionsordningen är fast** (uttryckligt önskemål 2026-09-26): anslag,
+**Nytt på Fysiklabbet**, **Veckans tips**, **Veckans fysik** (hjälte,
+miniatyrer, Läs även) och sist **Nästa vecka**. Sajtens eget material
+går alltså före veckans fysiknyheter. Låt anslagets sista mening leda in
+i sajtnyheterna, inte i fysiknyheterna. Hjältebilden ligger överst i
+sektionen Veckans fysik, inte direkt under anslaget.
+
 1. **Ämnesrad + preheader** (skrivs överst i utkastfilen som HTML-kommentar,
    så de följer med till EmailOctopus). Ämnesraden: max ~55 tecken, konkret
    och nyfikenhetsväckande — brevets bästa godbit, inte "Nyhetsbrev v. 32".
@@ -142,7 +149,28 @@ matnyttigt att man tar med sig något in i klassrummet.
    den.
 2. **Hälsning/anslag** — 2–4 meningar som sätter tonen och veckans tema. Här
    bor värmen och glimten. Variera; börja aldrig två veckor i rad likadant.
-3. **Veckans fysiknyheter** — **exakt TRE artiklar lyfts** med egen text +
+3. **Nytt på Fysiklabbet** — veckans sajtuppdateringar med länkar.
+4. **Veckans tips** — en kort påminnelse (2–3 meningar + länk) om en
+   funktion som **redan finns** på sajten. Nya prenumeranter har missat
+   den, gamla har glömt den. Regler:
+   - **Välj ur `.claude/nyhetsbrev/tips.md`** — katalogen över tipsbara
+     funktioner med datum för när varje senast tipsades. Välj i första hand
+     något med **aktuell krok**: nationella prov i maj → NP-träningen,
+     skolstart i augusti → repetitionspaketen, mörka november → något
+     mysigt. Finns ingen krok: ta det som väntat längst.
+   - **Tipsa aldrig om samma funktion oftare än var åttonde vecka** —
+     oftare blir tjatigt. Kolla datumkolumnen innan du väljer.
+   - **Verifiera att funktionen finns och beskriv den rätt** — öppna sidan
+     och kontrollera vad den faktiskt gör innan du skriver. Lova inget
+     funktionen inte kan.
+   - Tonfallet är "du har väl inte glömt att …" / "visste du att …" —
+     varmt och hjälpsamt, aldrig säljigt.
+   - Hoppa över sektionen om något annat i brevet redan lyfter samma
+     funktion (dubblera aldrig), eller om brevet redan är långt.
+   - **Fyll på katalogen**: när något som lanserats i "Nytt på
+     Fysiklabbet" mognat är det en framtida tipskandidat — lägg in det i
+     `tips.md` med beskrivning, länk och lämpliga årstidskrokar.
+5. **Veckans fysiknyheter** — **exakt TRE artiklar lyfts** med egen text +
    länk (en hjälte + två miniatyrer). Fler än så gör brevet tungt; tre är
    lagom att orka läsa. (Uttryckligt önskemål 2026-08-22.)
    - **⚠️ Välj de tre HÄPNADSVÄCKANDE, inte de tre senaste.** Gå igenom
@@ -178,27 +206,6 @@ matnyttigt att man tar med sig något in i klassrummet.
      innehåller tankstreck, som är förbjudna i brevet.
    - Ligger ett uppslag kvar som förra brevet teasade ska det med i Läs
      även om det inte lyfts som en av de tre, så att löftet infrias.
-4. **Nytt på Fysiklabbet** — veckans sajtuppdateringar med länkar.
-5. **Veckans tips** — en kort påminnelse (2–3 meningar + länk) om en
-   funktion som **redan finns** på sajten. Nya prenumeranter har missat
-   den, gamla har glömt den. Regler:
-   - **Välj ur `.claude/nyhetsbrev/tips.md`** — katalogen över tipsbara
-     funktioner med datum för när varje senast tipsades. Välj i första hand
-     något med **aktuell krok**: nationella prov i maj → NP-träningen,
-     skolstart i augusti → repetitionspaketen, mörka november → något
-     mysigt. Finns ingen krok: ta det som väntat längst.
-   - **Tipsa aldrig om samma funktion oftare än var åttonde vecka** —
-     oftare blir tjatigt. Kolla datumkolumnen innan du väljer.
-   - **Verifiera att funktionen finns och beskriv den rätt** — öppna sidan
-     och kontrollera vad den faktiskt gör innan du skriver. Lova inget
-     funktionen inte kan.
-   - Tonfallet är "du har väl inte glömt att …" / "visste du att …" —
-     varmt och hjälpsamt, aldrig säljigt.
-   - Hoppa över sektionen om något annat i brevet redan lyfter samma
-     funktion (dubblera aldrig), eller om brevet redan är långt.
-   - **Fyll på katalogen**: när något som lanserats i "Nytt på
-     Fysiklabbet" mognat är det en framtida tipskandidat — lägg in det i
-     `tips.md` med beskrivning, länk och lämpliga årstidskrokar.
 6. **Nästa vecka** (teaser) — 1–2 meningar om något som är på gång: nästa
    simulering, ett avsnitt som byggs, ett spännande uppslag ur nyhetskön.
    **Teasern måste vara sann och belagd** i `planerat.md` eller `ko.md` —
@@ -298,8 +305,7 @@ läsaren faktiskt prenumererar för (uttryckligt önskemål 2026-08-29:
   i stället för att tyst leverera ett brev utan sajtbilder.
 
 1. **Hjältebild**: veckans bästa nyhetsbild (`nyheter/bilder/…` — den ligger
-   redan på sajten, länka absolut) direkt under anslaget eller överst i
-   nyhetssektionen, full brevbredd (600 px), `border-radius: 8px`.
+   redan på sajten, länka absolut) överst i sektionen Veckans fysik, full brevbredd (600 px), `border-radius: 8px`.
    **Bildkredit alltid** som liten dämpad rad under (`imageCredit` ur
    `data/nyheter.js`), i mono-etikettens stil fast 10–11 px.
 2. **Simuleringsskärmdumpar**: nya simuleringar/minisimuleringar visas som

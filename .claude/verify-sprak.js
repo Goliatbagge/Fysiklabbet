@@ -83,6 +83,16 @@ const REGLER = [
                   'accelerationen), inte "X gånger mindre".',
     },
     {
+        namn: 'skarpare',
+        niva: 'fel',
+        // Komparativ av skarp är skarpare; "skärpare" finns inte (nyhetsbrevet
+        // 2026-09-27, påpekat av användaren).
+        monster: /\bskärpare\b/gi,
+        rattelse: 'Ordet finns inte: komparativen av skarp är "skarpare". Gäller ' +
+                  'det ett mätrekord, skriv hellre om osäkerheten: "osäkerheten ' +
+                  'är en femtedel av det förra rekordets".',
+    },
+    {
         namn: 'tankstreck',
         niva: 'varning',
         // Tankstreck som pausmarkör i löptext (förbjudet i nyskriven text

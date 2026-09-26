@@ -34,6 +34,10 @@ Format:
   ny bild 2026-09-27-kopplingsschema-editor.jpg (verktyg-bilden borttagen).
   Inklistrat via raw.githubusercontent (commit-låst URL), sparat, fjärde
   testmejlet skickat.
+- Användaren godtog att värdena kräver plats men ville ha en kompaktare
+  exempelkrets: nu två parallellkopplade resistorer (20 och 30 Ω) vid
+  6,0 V, bild 2026-09-27-kopplingsschema-parallell.jpg (editor-bilden
+  borttagen), samma krets i og-kopplingsschema.png. Femte testmejlet skickat.
 - Status: UTKAST skrivet 2026-09-26 (lördag, inom 08.00-deadline, körd som
   schemalagd molnroutine). Tänkt utskick söndag 2026-09-27 kl 06.00 svensk tid.
   Brevperiod (nyheter) 2026-09-21 till 2026-09-26 (sex artiklar, alla sex

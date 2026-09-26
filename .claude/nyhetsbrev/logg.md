@@ -90,8 +90,8 @@ Format:
   till den nya fasta ordningen: Nytt på Fysiklabbet, Veckans tips, Veckans
   fysik, Nästa vecka (inskrivet i .claude/agents/nyhetsbrev.md). Under
   Nästa vecka lades en teaser före nyhetsteasern om ett kommande
-  lärarverktyg för kopplingsscheman, med en ledtråd i stället för namnet
-  (ringar med kryss i, batteriets långa och korta streck, räta hörn).
+  lärarverktyg för kopplingsscheman, utan att namnge det (användarens
+  formulering: "en av de pilligaste sakerna i elläran … Håll utkik.").
   Belagd i planerat.md. Ny förhandsvisning skickad med SendUserFile.
 - ÅTERSTÅR för användaren: (1) granska utkastet/förhandsvisningen,
   (2) köra `/brev-till-octopus` LOKALT (kräver Chrome-åtkomst, som

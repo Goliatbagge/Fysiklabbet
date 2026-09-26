@@ -56,7 +56,6 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
 - **Lärarverktyg för kopplingsscheman.** Ett verktyg där läraren enkelt
   bygger snygga kopplingsscheman (till prov, genomgångar, tavlan). Utkastet
   ligger i `utkast/kopplingsschema.html` (dolt, noindex) och är ännu inte
-  lanserat. **Teasat 2026-09-27** på användarens begäran, med en ledtråd i
-  stället för namnet (ringar med kryss i, batteriets långa och korta streck,
-  räta hörn). Håll teasern öppen utan datumlöfte; när verktyget lanseras
+  lanserat. **Teasat 2026-09-27** på användarens begäran, utan att
+  namnge det ("en av de pilligaste sakerna i elläran … Håll utkik."). Håll teasern öppen utan datumlöfte; när verktyget lanseras
   hör det hemma under "Nytt på Fysiklabbet".

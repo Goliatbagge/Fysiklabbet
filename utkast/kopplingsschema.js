@@ -831,9 +831,41 @@ function layoutPass(doc, autoIn, arrowIdx) {
     trim('left') + trim('right') + Math.max(stretched.top ? 0 : sm.top.len, stretched.bottom ? 0 : sm.bottom.len));
   let H = Math.max(sm.left.len, sm.right.len, sm.top.neg + sm.bottom.neg + INNER_GAP, MIN_H,
     trim('top') + trim('bottom') + Math.max(stretched.left ? 0 : sm.left.len, stretched.right ? 0 : sm.right.len));
+  // JÄMNA STEGPINNAR: är en sida en sträckt parallellkoppling (stegpinnar
+  // mellan sidoledningarna) fördelas hela höjden (eller bredden) jämnt:
+  // lika stort avstånd mellan alla grenar OCH från den sista grenen till
+  // ledningen mittemot. Annars hamnar all extra höjd i ett enda stort
+  // mellanrum ovanför batteriet. Samma regel som makeCircuit() och
+  // "Kopplingsscheman: jämn fördelning och centrering" i CLAUDE.md.
+  const ladder = (a, b, cross) => {
+    if (!stretched[a] && !stretched[b]) return null;
+    const info = x => {
+      if (!stretched[x]) return { n: 1, sp: 0, ext: sm[x].neg };
+      const m = M[doc.loop[x].items[0].id], o = m.offs, last = Math.abs(o[o.length - 1]);
+      let sp = 0;
+      for (let j = 1; j < o.length; j++) sp = Math.max(sp, Math.abs(o[j] - o[j - 1]));
+      return { n: o.length, sp, ext: m.neg - last, m };
+    };
+    const A = info(a), B = info(b);
+    const gaps = (A.n - 1) + (B.n - 1) + 1;
+    // Mittemellan ska rymma den sista grenens etiketter, ledningen mittemot
+    // och komponenterna på sidoledningarnas nedre bitar.
+    const mid = Math.max(A.ext + B.ext + INNER_GAP, BRANCH_MIN, ...cross.filter(x => !stretched[x]).map(x => sm[x].len));
+    return { A, B, gaps, need: gaps * Math.max(A.sp, B.sp, mid) };
+  };
+  const vLad = ladder('top', 'bottom', ['left', 'right']);
+  const hLad = ladder('left', 'right', ['top', 'bottom']);
+  if (vLad) H = Math.max(H, vLad.need);
+  if (hLad) W = Math.max(W, hLad.need);
   W = Math.max(W, H * 1.15);
   H = Math.max(H, W * 0.5);
   W = Math.round(W); H = Math.round(H);
+  // Lägg grenarna på jämna avstånd i den slutliga höjden (bredden).
+  for (const [lad, len] of [[vLad, H], [hLad, W]]) {
+    if (!lad) continue;
+    const sp = len / lad.gaps;
+    for (const X of [lad.A, lad.B]) if (X.m) X.m.offs = X.m.offs.map((v, j) => Math.sign(X.m.s || -1) * j * sp);
+  }
 
   const F = {
     top:    { sx: 0, sy: 0, dx: 1,  dy: 0,  ox: 0,  oy: -1, len: W },

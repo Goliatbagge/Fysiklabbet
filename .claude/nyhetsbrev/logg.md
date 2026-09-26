@@ -21,6 +21,14 @@ Format:
   fyra punkter och knapp, ny preheader. Nytt innehåll inklistrat och sparat i
   kampanjen, nytt testmejl skickat till sam.skoglund83@gmail.com. Ämnesraden
   hade visat HTML-entiteter (g&ouml;r) i fältet och skrevs in på nytt.
+- **Ämnesrad och inledning omskrivna 2026-09-26 kväll** på användarens
+  begäran: "Fem millimeter som gör tiden gå olika fort" var dålig svenska
+  och femmillimeterseffekten är inte det nya. Ny ämnesrad "Världens
+  noggrannaste klocka mäter tiden med en enda atom"; inledning och
+  klockstycke lyfter rekordet (närmare 300 miljarder år per sekunds fel;
+  "drygt" rättat till "närmare", 1/1,1e-19 s ≈ 288 miljarder år). Ny bild
+  2026-09-27-kopplingsschema-verktyg.jpg efter symmetrifixen i editorn.
+  Inklistrat, sparat, tredje testmejlet skickat.
 - Status: UTKAST skrivet 2026-09-26 (lördag, inom 08.00-deadline, körd som
   schemalagd molnroutine). Tänkt utskick söndag 2026-09-27 kl 06.00 svensk tid.
   Brevperiod (nyheter) 2026-09-21 till 2026-09-26 (sex artiklar, alla sex

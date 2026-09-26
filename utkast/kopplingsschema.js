@@ -1883,7 +1883,7 @@ function openInline(t, focus) {
   ieUnit.textContent = inf.unit || '';
   ieUnit.classList.toggle('pick', !!UNIT_OPTS[inf.base]);
   ieInput.value = inf.value;
-  ieInput.placeholder = inf.ph || '?';
+  ieInput.placeholder = inf.ph || '';   // uträknat värde som hjälptext, annars tomt
   sizeInline();
   ieEl.classList.add('on');
   positionInline();
@@ -1895,7 +1895,7 @@ function closeInline() {
   ieEl.classList.remove('on');
   if (document.activeElement === ieInput) ieInput.blur();
 }
-function sizeInline() { ieInput.style.width = Math.max(2.4, (ieInput.value || ieInput.placeholder).length * 0.62 + 0.9) + 'em'; }
+function sizeInline() { ieInput.style.width = Math.max(2, (ieInput.value || ieInput.placeholder).length * 0.62 + 0.5) + 'em'; }
 function positionInline() {
   if (!ieTarget || !view.geoNow) return;
   // En nyss tillagd komponent har ännu ingen position i animationen; då

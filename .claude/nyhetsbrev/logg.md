@@ -12,6 +12,11 @@ Format:
 ```
 
 ## 2026-09-27 — "Fem millimeter som gör tiden gå olika fort"
+- Status: **SCHEMALAGT i EmailOctopus 2026-09-26** för söndag 2026-09-27 kl 06.00
+  (UTC+2, Stockholm), 23 mottagare. Dessförinnan två rader i kopplingsschema-
+  stycket förenklade på användarens begäran ("i Word" struket; "fördelas jämnt
+  och centreras, knutpunkterna ritas ut" blev "fördelas jämnt"), inklistrat
+  och sparat i kampanjen.
 - Status: **UPPLAGD i EmailOctopus 2026-09-26** som kampanjen "Nyhetsbrev nr 7 -
   2026-09-27" (All subscribers, 23 mottagare). Testmejl skickat till
   sam.skoglund83@gmail.com samma dag. Schemaläggningen (söndag 06.00, tidszon

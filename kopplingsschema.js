@@ -35,6 +35,7 @@ const LH = 17, ASC = 11;                // etikettrutans höjd, versalhöjd
 const GAP_H = 6, GAP_V = 8;             // symbol → etikett (vågrät / lodrät ledning)
 const MIN_GAP = 28;                     // minsta ledningsbit mellan två symboler
 const LABEL_CLEAR = 16;                 // minsta luft mellan två etiketter
+const END_CLEAR = 8;                    // strömpilens etikett mot en nod eller ett hörn
 const BRANCH_GAP = 16, BRANCH_MIN = 56; // parallellgrenarnas avstånd
 const INNER_GAP = 34;
 const MIN_W = 220, MIN_H = 130;
@@ -828,15 +829,23 @@ function layoutPass(doc, autoIn, arrowIdx) {
     const atw = ar && ar.runs ? runsWidth(ar.runs) : 0;
     // JÄMN FÖRDELNING: alla mellanrum i serien är lika stora, så det största
     // kravet (etiketter som inte får krocka, strömpilens text) bestämmer.
-    let g = MIN_GAP;
+    // Strömpilens etikett behöver bara sin egen bredd plus luft mot det som
+    // står intill: grannkomponentens etikett (LABEL_CLEAR) eller, i seriens
+    // ände, bara en nod eller ett hörn (END_CLEAR). Etiketten läggs sedan mitt
+    // i den fria biten (arrA/arrB), inte mitt i mellanrummet, så att ett
+    // värde som "I₁ = 0,20 A" inte blåser upp alla mellanrum i onödan.
+    let g = MIN_GAP, arrA = 0, arrB = 0;
     for (let i = 0; i <= n; i++) {
       const a = ms[i - 1], b = ms[i];
       const oa = a ? a.ohE : 0, ob = b ? b.ohS : 0;
       g = Math.max(g, oa + ob + LABEL_CLEAR);
       if (ar && ar.gap === i) {
-        const need = !ar.runs ? ARROW_LEN + 28
-          : (vert ? LH : atw) + ARROW_LEN + 2 * LABEL_CLEAR + 2 * Math.max(oa, ob);
-        g = Math.max(g, need);
+        if (!ar.runs) g = Math.max(g, ARROW_LEN + 28);
+        else {
+          arrA = a ? oa + LABEL_CLEAR : END_CLEAR;
+          arrB = b ? ob + LABEL_CLEAR : END_CLEAR;
+          g = Math.max(g, Math.max(vert ? LH : atw, ARROW_LEN + 8) + arrA + arrB);
+        }
       }
     }
     let pos = 0, neg = 0;
@@ -848,7 +857,7 @@ function layoutPass(doc, autoIn, arrowIdx) {
       neg = Math.max(neg, La > 0 ? ARROW_HW : side);
     }
     const len = ms.reduce((s, m) => s + m.len, 0) + (n + 1) * g;
-    return (M[S.id] = { len, pos, neg, ohS: 0, ohE: 0, g, ms });
+    return (M[S.id] = { len, pos, neg, ohS: 0, ohE: 0, g, ms, arrA, arrB });
   }
   function groupDepth(S) {
     if (!soleFullPar(S)) return 0;
@@ -998,7 +1007,9 @@ function layoutPass(doc, autoIn, arrowIdx) {
     const ar = plan[S.id];
     if (ar) {
       const [p, q] = gapsU[ar.gap];
-      const c = P(f, (p + q) / 2, v);
+      // Etikettens mitt (vid pilspetsen) mitt i den fria biten av mellanrummet.
+      const cu = ar.runs ? (p + m.arrA + q - m.arrB) / 2 - ar.dir * ARROW_LEN / 2 : (p + q) / 2;
+      const c = P(f, cu, v);
       const La = ar.lflip ? -L : L;
       geo['arr:' + S.id] = { x: c[0], y: c[1], ang: angOf(f, ar.dir), lsx: f.ox * La, lsy: f.oy * La, op: 1 };
     }

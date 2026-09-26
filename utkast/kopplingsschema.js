@@ -201,6 +201,22 @@ function formatValue(raw, unit, base) {
   else if (/^[kMmµnpG]$/.test(rest) && base) rest = rest + base;
   return rest ? num + ' ' + rest : num;
 }
+/* ================= Enheter ================= */
+// Enheten väljs per komponent (c.unit) och per strömpil (cfg.unit). Utan val
+// gäller typens standardenhet. Ett värde som bara är ett tal tolkas i den
+// valda enheten: "20" med mΩ betyder 0,020 Ω, både i etiketten och i
+// kretsberäkningen.
+const UNIT_OPTS = {
+  'Ω': [['MΩ', 'megaohm'], ['kΩ', 'kiloohm'], ['Ω', 'ohm'], ['mΩ', 'milliohm'], ['µΩ', 'mikroohm']],
+  V: [['kV', 'kilovolt'], ['V', 'volt'], ['mV', 'millivolt'], ['µV', 'mikrovolt']],
+  A: [['A', 'ampere'], ['mA', 'milliampere'], ['µA', 'mikroampere']],
+  F: [['F', 'farad'], ['mF', 'millifarad'], ['µF', 'mikrofarad'], ['nF', 'nanofarad'], ['pF', 'pikofarad']],
+};
+const isBareNumber = v => /^\s*[−-]?\d[\d\s\u00a0]*(?:[.,]\d+)?\s*$/.test(String(v || ''));
+// Värdet med sin enhet, så som beräkningen ska tolka det.
+const withUnit = (value, unit) => (unit && isBareNumber(value) ? String(value).trim() + ' ' + unit : value);
+const compUnit = c => c.unit || TYPES[c.type].unit;
+
 function compLabel(doc, c, auto, calc) {
   if (c.hide) return null;
   const T = TYPES[c.type];
@@ -210,7 +226,7 @@ function compLabel(doc, c, auto, calc) {
     if (nm) nameRuns(nm, T.italic, runs);
   }
   if (doc.opts.values) {
-    const v = formatValue(c.value || calc || '', T.unit, T.base);
+    const v = formatValue(c.value || calc || '', compUnit(c), T.base);
     // En kursiv beteckning är en storhet (R₁ = 20 Ω). En rak beteckning
     // namnger ett objekt, och en lampa är inte "lika med" 6 V: L₁ (6 V).
     if (v && runs.length && !T.italic) runs.push({ s: ' (' + v + ')' });
@@ -218,13 +234,13 @@ function compLabel(doc, c, auto, calc) {
   }
   return runs.length ? runs : null;
 }
-function arrowRuns(doc, name, value) {
+function arrowRuns(doc, name, value, unit) {
   const runs = [];
   // Pilens beteckning och strömstyrka följer samma reglage som komponenternas
   // beteckningar och värden. En enskild ström döljs med ? i pilens fält.
   if (doc.opts.names) { const nm = parseName(name); if (nm) nameRuns(nm, true, runs); }
   if (doc.opts.values) {
-    const v = formatValue(value, 'A', 'A');
+    const v = formatValue(value, unit || 'A', 'A');
     if (v) { if (runs.length) runs.push({ s: ' = ' }); runs.push({ s: v }); }
   }
   return runs.length ? runs : null;
@@ -315,14 +331,14 @@ function buildNet(doc) {
   function comp(c, x, y) {
     switch (c.type) {
       case 'resistor': case 'varres': case 'lamp': {
-        const q = (c.type !== 'lamp' || /Ω|ohm/i.test(c.value || '')) ? parseQty(c.value, 'Ω') : null;
+        const q = (c.type !== 'lamp' || /Ω|ohm/i.test(c.value || '')) ? parseQty(withUnit(c.value, c.unit), 'Ω') : null;
         if (q && q.v === 0) merge(x, y);
         else if (q && q.v > 0) { R.push({ a: x, b: y, val: q.v }); sigs.push(q.sig); }
         else { params.push({ cid: c.id, kind: 'R', fill: c.type !== 'lamp' && blank(c) }); R.push({ a: x, b: y, pi: params.length - 1 }); }
         break;
       }
       case 'battery': {
-        const q = parseQty(c.value, 'V');
+        const q = parseQty(withUnit(c.value, c.unit), 'V');
         const plus = c.flip ? x : y, minus = c.flip ? y : x;
         if (q) { V.push({ p: plus, n: minus, val: q.v, kind: 'bat' }); sigs.push(q.sig); }
         else { params.push({ cid: c.id, kind: 'E', fill: blank(c) }); V.push({ p: plus, n: minus, pi: params.length - 1, kind: 'bat' }); }
@@ -471,10 +487,13 @@ function solveCore(doc, plan0) {
   // Utdata: strömmen längs varje pils referensriktning, mätarnas utslag
   // och parametrarna själva.
   const outs = [];
-  for (const sid in plan0) outs.push({ kind: 'arrow', sid, dir: plan0[sid].dir, raw: plan0[sid].key === 'main' ? doc.arrowMain.value : (doc.arrowCfg[plan0[sid].key] || {}).value });
-  for (const m of net.meters) outs.push({ kind: 'volt', m, cid: m.cid, raw: comps[m.cid].value });
-  for (const cid in ammK) outs.push({ kind: 'amm', k: ammK[cid], cid, raw: comps[cid].value });
-  net.params.forEach((pp, i) => outs.push({ kind: 'param', i, cid: pp.cid, fill: pp.fill }));
+  for (const sid in plan0) {
+    const cf = plan0[sid].key === 'main' ? doc.arrowMain : (doc.arrowCfg[plan0[sid].key] || {});
+    outs.push({ kind: 'arrow', sid, dir: plan0[sid].dir, raw: withUnit(cf.value, cf.unit), unit: cf.unit });
+  }
+  for (const m of net.meters) outs.push({ kind: 'volt', m, cid: m.cid, raw: withUnit(comps[m.cid].value, comps[m.cid].unit), unit: comps[m.cid].unit });
+  for (const cid in ammK) outs.push({ kind: 'amm', k: ammK[cid], cid, raw: withUnit(comps[cid].value, comps[cid].unit), unit: comps[cid].unit });
+  net.params.forEach((pp, i) => outs.push({ kind: 'param', i, cid: pp.cid, fill: pp.fill, unit: comps[pp.cid].unit }));
   // Givna mätvärden (strömmar och mätarutslag).
   const meas = [];
   outs.forEach((o, oi) => {
@@ -570,9 +589,11 @@ function solveCore(doc, plan0) {
   outs.forEach((o, oi) => {
     if (!determined(oi)) return;
     const v = y[oi];
-    if (o.kind === 'arrow') { if (!String(o.raw || '').trim()) res.arrow[o.sid] = { text: fmtSig(Math.abs(v), sig), sign: v < -1e-12 ? -1 : 1 }; }
-    else if (o.kind === 'volt' || o.kind === 'amm') { if (!String(o.raw || '').trim()) res.comp[o.cid] = fmtSig(Math.abs(v), sig); }
-    else if (o.fill) res.comp[o.cid] = fmtSig(v, sig);
+    // I vald enhet: 0,80 A med mA blir "800 mA".
+    const inUnit = x => (o.unit && o.unit.length > 1 && PREFIX[o.unit[0]] ? fmtSig(x / PREFIX[o.unit[0]], sig) + ' ' + o.unit : fmtSig(x, sig));
+    if (o.kind === 'arrow') { if (!String(o.raw || '').trim()) res.arrow[o.sid] = { text: inUnit(Math.abs(v)), sign: v < -1e-12 ? -1 : 1 }; }
+    else if (o.kind === 'volt' || o.kind === 'amm') { if (!String(o.raw || '').trim()) res.comp[o.cid] = inUnit(Math.abs(v)); }
+    else if (o.fill) res.comp[o.cid] = inUnit(v);
   });
   return res;
 }
@@ -619,7 +640,7 @@ function planArrows(doc, stretched, arrowIdx, sol) {
     const S = doc.loop[side], n = S.items.length;
     const gap = (mc.side === side && mc.gap != null) ? clamp(mc.gap, 0, n) : defaultMainGap(S, dir);
     const c = !String(mc.value || '').trim() && sol && sol.arrow[S.id];
-    plan[S.id] = { key: 'main', side, gap, dir: dir * (mc.flip ? -1 : 1) * (c ? c.sign : 1), lflip: !!mc.lflip, auto: 'I', runs: arrowRuns(doc, mc.name || 'I', mc.value || (c ? c.text : '')) };
+    plan[S.id] = { key: 'main', side, gap, dir: dir * (mc.flip ? -1 : 1) * (c ? c.sign : 1), lflip: !!mc.lflip, auto: 'I', runs: arrowRuns(doc, mc.name || 'I', mc.value || (c ? c.text : ''), mc.unit) };
   }
   let idx = 0;
   const visit = (S, rev) => {
@@ -637,7 +658,7 @@ function planArrows(doc, stretched, arrowIdx, sol) {
           // En uträknad ström som går mot pilen vänder pilen, så att den
           // alltid visar strömmens verkliga riktning.
           const c = !String(cf.value || '').trim() && sol && sol.arrow[b.id];
-          plan[b.id] = { key: b.id, gap: cf.gap != null ? clamp(cf.gap, 0, n) : (dir > 0 ? 0 : n), dir: dir * (cf.flip ? -1 : 1) * (c ? c.sign : 1), lflip: !!cf.lflip, auto: 'I' + nr, runs: arrowRuns(doc, cf.name || ('I' + nr), cf.value || (c ? c.text : '')) };
+          plan[b.id] = { key: b.id, gap: cf.gap != null ? clamp(cf.gap, 0, n) : (dir > 0 ? 0 : n), dir: dir * (cf.flip ? -1 : 1) * (c ? c.sign : 1), lflip: !!cf.lflip, auto: 'I' + nr, runs: arrowRuns(doc, cf.name || ('I' + nr), cf.value || (c ? c.text : ''), cf.unit) };
         }
         visit(b, rev);
       }
@@ -1718,14 +1739,15 @@ function ieInfo(t) {
     if (!T.field) return null;
     const nm = c.name ? parseName(c.name) : lay.auto[c.id];
     const calc = lay.sol && lay.sol.comp[c.id];
-    return { c, T, nm, italic: T.italic, value: c.value || '', unit: T.unit, ph: calc || '', geoKey: c.id, hl: symExt(c).hl };
+    return { c, T, nm, italic: T.italic, value: c.value || '', unit: compUnit(c), base: T.base, ph: numPart(calc), geoKey: c.id, hl: symExt(c).hl };
   }
   const pl = planFor(t.id);
   if (!pl) return null;
   const cfg = arrowCfg(t.id, false), sid = t.id === 'main' ? doc.loop[pl.side].id : t.id;
   const calc = lay.sol && lay.sol.arrow[sid];
-  return { nm: parseName(cfg.name || pl.auto), italic: true, value: cfg.value || '', unit: 'A', ph: calc ? calc.text : '', geoKey: 'arr:' + sid, hl: ARROW_HW, arrow: true };
+  return { nm: parseName(cfg.name || pl.auto), italic: true, value: cfg.value || '', unit: cfg.unit || 'A', base: 'A', ph: calc ? numPart(calc.text) : '', geoKey: 'arr:' + sid, hl: ARROW_HW, arrow: true };
 }
+const numPart = t => { const m = String(t || '').match(NUM_RE); return m ? m[1] : ''; };
 function openInline(t, focus) {
   const inf = ieInfo(t);
   if (!inf) { closeInline(); return; }
@@ -1738,6 +1760,7 @@ function openInline(t, focus) {
   }
   iePre.innerHTML = pre.join('');
   ieUnit.textContent = inf.unit || '';
+  ieUnit.classList.toggle('pick', !!UNIT_OPTS[inf.base]);
   ieInput.value = inf.value;
   ieInput.placeholder = inf.ph || '?';
   sizeInline();
@@ -1789,6 +1812,56 @@ ieInput.addEventListener('keydown', e => {
 });
 ieEl.addEventListener('pointerdown', e => e.stopPropagation());
 
+/* ================= Enhetslistan ================= */
+// Klick på enheten (i värdefältet i schemat eller i sidmenyn) öppnar en
+// lista med vanliga enheter för storheten. Valet gäller den markerade
+// komponenten eller strömpilen.
+const unitMenu = document.createElement('div');
+unitMenu.className = 'unit-menu';
+document.body.appendChild(unitMenu);
+function unitTarget() {
+  if (!sel) return null;
+  if (sel.kind === 'comp') {
+    const f = findItem(doc, sel.id);
+    if (!f) return null;
+    const T = TYPES[f.item.type];
+    return UNIT_OPTS[T.base] ? { obj: f.item, base: T.base, cur: compUnit(f.item), def: T.unit } : null;
+  }
+  if (!planFor(sel.id)) return null;
+  const cf = arrowCfg(sel.id, true);
+  return { obj: cf, base: 'A', cur: cf.unit || 'A', def: 'A' };
+}
+function openUnitMenu(anchor, fromInline) {
+  const t = unitTarget();
+  if (!t) return;
+  unitMenu.innerHTML = UNIT_OPTS[t.base].map(([u, name]) =>
+    `<button type="button" data-u="${esc(u)}" class="${u === t.cur ? 'on' : ''}"><b>${esc(u)}</b><span>${name}</span></button>`).join('');
+  const r = anchor.getBoundingClientRect();
+  unitMenu.classList.add('on');
+  const mw = unitMenu.offsetWidth, mh = unitMenu.offsetHeight;
+  let x = r.left + r.width / 2 - mw / 2, y = r.bottom + 6;
+  if (y + mh > window.innerHeight - 8) y = r.top - mh - 6;
+  unitMenu.style.left = clamp(x, 8, window.innerWidth - mw - 8) + 'px';
+  unitMenu.style.top = Math.max(8, y) + 'px';
+  unitMenu.dataset.inline = fromInline ? '1' : '';
+}
+function closeUnitMenu() { unitMenu.classList.remove('on'); }
+unitMenu.addEventListener('pointerdown', e => { e.preventDefault(); e.stopPropagation(); });
+unitMenu.addEventListener('click', e => {
+  const b = e.target.closest('[data-u]');
+  if (!b) return;
+  const t = unitTarget();
+  if (t) { if (b.dataset.u === t.def) delete t.obj.unit; else t.obj.unit = b.dataset.u; }
+  const reopen = unitMenu.dataset.inline && ieTarget ? ieTarget : null;
+  closeUnitMenu();
+  commit(); refresh();
+  if (reopen) openInline(reopen, true);
+});
+document.addEventListener('pointerdown', e => { if (!e.target.closest('.unit-menu')) closeUnitMenu(); });
+window.addEventListener('resize', closeUnitMenu);
+ieUnit.addEventListener('pointerdown', e => { e.preventDefault(); e.stopPropagation(); if (ieUnit.classList.contains('pick')) openUnitMenu(ieUnit, true); });
+inspEl.addEventListener('click', e => { const b = e.target.closest('[data-unitpick]'); if (b) { e.stopPropagation(); openUnitMenu(b, false); } }, true);
+
 /* ================= Markering och inspektör ================= */
 // focus: sätt markören i värdefältet direkt (mus och penna). Vid tryck med
 // fingret visas fältet utan att tangentbordet fälls upp; ett tryck på
@@ -1830,7 +1903,7 @@ function inspComp(f) {
   const c = f.item, T = TYPES[c.type], au = lay.auto[c.id];
   const autoTxt = au ? au.letter + toSub(au.idx) : '';
   const inPar = !!f.ctx.par;
-  const calc = lay.sol && lay.sol.comp[c.id] ? formatValue(lay.sol.comp[c.id], T.unit, T.base) : '';
+  const calc = lay.sol && lay.sol.comp[c.id] ? formatValue(lay.sol.comp[c.id], compUnit(c), T.base) : '';
   const spanCtl = inPar ? spanControls(f.ctx.par) : '';
   const others = Object.keys(TYPES).filter(t => t !== c.type);
   return `
@@ -1843,7 +1916,7 @@ function inspComp(f) {
     <input id="f-name" data-f="name" value="${esc(c.name)}" placeholder="${autoTxt ? esc(autoTxt) + '  (automatisk)' : 'Ingen'}" autocomplete="off" spellcheck="false">
   </div>
   ${T.field ? `<div class="fld"><label for="f-val">${T.field}</label>
-    <div class="unit"><input id="f-val" data-f="value" value="${esc(c.value)}" placeholder="${esc(calc ? calc + '  (uträknat)' : (T.ph || ''))}" autocomplete="off" spellcheck="false"><span>${T.unit}</span></div>
+    <div class="unit"><input id="f-val" data-f="value" value="${esc(c.value)}" placeholder="${esc(calc ? calc + '  (uträknat)' : (T.ph || ''))}" autocomplete="off" spellcheck="false">${UNIT_OPTS[T.base] ? `<button type="button" class="unit-btn" data-unitpick="side" title="Byt enhet">${esc(compUnit(c))}<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>` : `<span>${T.unit}</span>`}</div>
     <p class="help">${calc ? 'Uträknat ur de övriga värdena. Skriv ett eget värde, eller <b>?</b> om eleverna ska räkna ut det.' : 'Skriv <b>?</b> om storheten är okänd.'}</p></div>` : ''}
   ${c.type === 'switch' ? `<div class="fld"><label>Läge</label>${seg('closed', [['0', 'Öppen'], ['1', 'Sluten']], c.closed ? 1 : 0)}</div>` : ''}
   <div class="acts">
@@ -1903,7 +1976,7 @@ function spanEdit(P, op, dir) {
 function inspArrow(key) {
   const pl = planFor(key), cfg = arrowCfg(key, false);
   const asid = key === 'main' ? doc.loop[pl.side].id : key;
-  const acalc = lay.sol && lay.sol.arrow[asid] ? formatValue(lay.sol.arrow[asid].text, 'A', 'A') : '';
+  const acalc = lay.sol && lay.sol.arrow[asid] ? formatValue(lay.sol.arrow[asid].text, cfg.unit || 'A', 'A') : '';
   const g = lay.geo['arr:' + (key === 'main' ? doc.loop[pl.side].id : key)];
   const horiz = g && Math.abs(Math.cos(g.ang * Math.PI / 180)) > 0.5;
   const sideCur = g ? (horiz ? (g.lsy < 0 ? 'a' : 'b') : (g.lsx < 0 ? 'a' : 'b')) : 'a';
@@ -1916,7 +1989,7 @@ function inspArrow(key) {
   <div class="fld"><label for="f-aname">Beteckning</label>
     <input id="f-aname" data-af="name" value="${esc(cfg.name || '')}" placeholder="${esc(pl.auto.replace(/\d+/, toSub))}  (automatisk)" autocomplete="off" spellcheck="false"></div>
   <div class="fld"><label for="f-aval">Strömstyrka</label>
-    <div class="unit"><input id="f-aval" data-af="value" value="${esc(cfg.value || '')}" placeholder="${esc(acalc ? acalc + '  (uträknat)' : 'till exempel 0,40')}" autocomplete="off"><span>A</span></div>
+    <div class="unit"><input id="f-aval" data-af="value" value="${esc(cfg.value || '')}" placeholder="${esc(acalc ? acalc + '  (uträknat)' : 'till exempel 0,40')}" autocomplete="off"><button type="button" class="unit-btn" data-unitpick="side" title="Byt enhet">${esc(cfg.unit || 'A')}<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button></div>
     ${acalc ? '<p class="help">Uträknat ur de övriga värdena. Skriv ett eget värde, eller <b>?</b> om eleverna ska räkna ut det.</p>' : ''}
     ${!doc.opts.values ? '<p class="help">Slå på "Värden" under inställningarna för att visa strömstyrkan.</p>' : ''}</div>
   <div class="fld"><label>Texten står</label>${seg('aside', horiz ? [['a', 'Ovanför'], ['b', 'Under']] : [['a', 'Till vänster'], ['b', 'Till höger']], sideCur)}</div>
@@ -2042,6 +2115,7 @@ inspEl.addEventListener('click', e => {
       const old = TYPES[c.type], nt = TYPES[b.dataset.type];
       c.type = b.dataset.type;
       if (old.unit !== nt.unit || !nt.field) c.value = '';
+      if (old.base !== nt.base) delete c.unit;
       if (old.prefix !== nt.prefix) c.name = '';
     }
     commit(); refresh(); return;

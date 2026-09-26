@@ -765,6 +765,11 @@ function layoutPass(doc, autoIn, arrowIdx) {
     const len = ms.reduce((s, m) => s + m.len, 0) + (n + 1) * g;
     return (M[S.id] = { len, pos, neg, ohS: 0, ohE: 0, g, ms });
   }
+  function groupDepth(S) {
+    if (!soleFullPar(S)) return 0;
+    const q = M[S.items[0].id];
+    return q ? Math.abs(q.offs[q.offs.length - 1]) : 0;
+  }
   function mPar(P, L, vert) {
     const s = P.side === 'out' ? L : -L;   // grenarnas staplingsriktning i v
     const str = stretchedPar.has(P.id);
@@ -776,7 +781,11 @@ function layoutPass(doc, autoIn, arrowIdx) {
     const legged = hasLegs(P);
     const la = P.legA ? mSeries(P.legA, 1, !vert) : null;
     const lb = P.legB ? mSeries(P.legB, 1, !vert) : null;
-    const legNeed = Math.max(la ? la.len : 0, lb ? lb.len : 0);
+    // Är den yttersta grenen en grupp (en parallellkoppling över hela
+    // grenen, se zonen 'mid') börjar benet vid gruppens innersta gren.
+    const farJ = str ? 0 : order.length - 1;
+    const farDepth = groupDepth(P.branches[order[farJ]]);
+    const legNeed = Math.max(la ? la.len : 0, lb ? lb.len : 0) + (legged ? farDepth : 0);
     const segJ = legged ? (str ? 1 : order.length - 1) : -1;
     const offs = [0];
     for (let j = 1; j < bm.length; j++) {
@@ -865,8 +874,17 @@ function layoutPass(doc, autoIn, arrowIdx) {
     parInfo[Pp.id] = { order, legged, stretched: !!str, far, near };
     info.pars.push({ P: Pp, f, s: m.s, L, v });
     order.forEach((bi, j) => pSeries(Pp.branches[bi], f, u1, u2, v + m.offs[j], j === 0 ? -m.s : m.s, { par: Pp, k: bi, j }, false));
+    if (n >= 2) {
+      const sgF = Math.sign(m.offs[near] - m.offs[far]) || 1;
+      const vF = v + m.offs[far] + sgF * groupDepth(Pp.branches[order[far]]);
+      const vN = v + m.offs[near];
+      parInfo[Pp.id].legA = [P(f, u1, vN), P(f, u1, vF)];
+      parInfo[Pp.id].legB = [P(f, u2, vF), P(f, u2, vN)];
+    }
     if (legged && n >= 2) {
-      const vF = v + m.offs[far], vN = v + m.offs[near], sg = Math.sign(vF - vN) || 1, segLen = Math.abs(vF - vN);
+      const sgF = Math.sign(m.offs[near] - m.offs[far]) || 1;
+      const vF = v + m.offs[far] + sgF * groupDepth(Pp.branches[order[far]]);
+      const vN = v + m.offs[near], sg = Math.sign(vF - vN) || 1, segLen = Math.abs(vF - vN);
       const ddx = f.ox * sg, ddy = f.oy * sg;
       const pa = P(f, u1, vN), pb = P(f, u2, vF);
       const FA = { sx: pa[0], sy: pa[1], dx: ddx, dy: ddy, ox: -f.dx, oy: -f.dy };
@@ -1075,6 +1093,7 @@ function buildDisplay(doc, geo, lay, o) {
     if (r1 > r0) { wires.push([[A.x1, A.y1], [B.x1, B.y1]]); wires.push([[A.x2, A.y2], [B.x2, B.y2]]); }
     if (Pp.legA && geo[Pp.legA.id]) dSeries(Pp.legA); else wires.push([[ne.x1, ne.y1], [fa.x1, fa.y1]]);
     if (Pp.legB && geo[Pp.legB.id]) dSeries(Pp.legB); else wires.push([[fa.x2, fa.y2], [ne.x2, ne.y2]]);
+    // Är den yttersta grenen en grupp ritar gruppen själv sina förbindelser.
   }
   function dComp(c) {
     const g = geo[c.id], col = colOf(c.id);
@@ -1400,7 +1419,7 @@ function renderZones() {
       const w = z.vert ? z.h : z.w, h = z.vert ? z.w : z.h;
       return `<rect class="zone onto" x="${r2(z.x - w / 2)}" y="${r2(z.y - h / 2)}" width="${r2(w)}" height="${r2(h)}" rx="${r2(6 / k)}" vector-effect="non-scaling-stroke"/>`;
     }
-    if (z.kind === 'series' || z.kind === 'leg') return `<circle class="zone${on ? ' near' : ''}" cx="${r2(z.x)}" cy="${r2(z.y)}" r="${r2((on ? 6.5 : 4.5) / k * 1.2)}" vector-effect="non-scaling-stroke"/>`;
+    if (z.kind === 'series' || z.kind === 'leg' || z.kind === 'mid') return `<circle class="zone${on ? ' near' : ''}" cx="${r2(z.x)}" cy="${r2(z.y)}" r="${r2((on ? 6.5 : 4.5) / k * 1.2)}" vector-effect="non-scaling-stroke"/>`;
     const vert = z.vert;
     if (z.kind === 'span') {
       const sw = Math.max(18 / k, z.w), sh = (on ? 12 : 8) / k;
@@ -1509,11 +1528,24 @@ function computeZones(d, L) {
   for (const pi of L.info.pars) {
     const P = pi.P, inf = L.parInfo[P.id];
     if (!inf || P.branches.length < 2) continue;
-    const fa = L.geo[P.branches[inf.order[inf.far]].id], ne = L.geo[P.branches[inf.order[inf.near]].id];
     const reorder = !inf.legged && !inf.stretched;
     const vert = pi.f.dx !== 0;
-    if (!P.legA) Z.push({ kind: 'leg', pid: P.id, which: 'legA', reorder, x: (fa.x1 + ne.x1) / 2, y: (fa.y1 + ne.y1) / 2, vert });
-    if (!P.legB) Z.push({ kind: 'leg', pid: P.id, which: 'legB', reorder, x: (fa.x2 + ne.x2) / 2, y: (fa.y2 + ne.y2) / 2, vert });
+    const mid = seg => [(seg[0][0] + seg[1][0]) / 2, (seg[0][1] + seg[1][1]) / 2];
+    if (!P.legA && inf.legA) { const [x, y] = mid(inf.legA); Z.push({ kind: 'leg', pid: P.id, which: 'legA', reorder, x, y, vert }); }
+    if (!P.legB && inf.legB) { const [x, y] = mid(inf.legB); Z.push({ kind: 'leg', pid: P.id, which: 'legB', reorder, x, y, vert }); }
+    // MELLANBITAR: den lodräta biten mellan två inre grenar. Den leds av alla
+    // grenar på den bortre sidan, så en komponent där hamnar i serie med dem
+    // tillsammans. Grenarna bortom biten grupperas då till en egen
+    // parallellkoppling (se applyZone 'mid').
+    const n = inf.order.length;
+    if (inf.legged || n < 3) continue;
+    const G = j => L.geo[P.branches[inf.order[j]].id];
+    const js = inf.stretched ? [...Array(n - 2).keys()].map(i => i + 1) : [...Array(n - 2).keys()];
+    for (const j of js) {
+      const a = G(j), b = G(j + 1);
+      Z.push({ kind: 'mid', pid: P.id, j, which: 'legA', str: inf.stretched, x: (a.x1 + b.x1) / 2, y: (a.y1 + b.y1) / 2, vert });
+      Z.push({ kind: 'mid', pid: P.id, j, which: 'legB', str: inf.stretched, x: (a.x2 + b.x2) / 2, y: (a.y2 + b.y2) / 2, vert });
+    }
   }
   for (const pi of L.info.pars) {
     const inf = L.parInfo[pi.P.id];
@@ -1540,7 +1572,7 @@ function swapComps(d0, aId, bId) {
   fb.series.items[fb.index] = a;
   return normalize(d);
 }
-const zoneKey = z => [z.kind, z.sid || z.target || z.pid, z.index, z.at, z.from, z.n, z.side, z.which].join(':');
+const zoneKey = z => [z.kind, z.sid || z.target || z.pid, z.index, z.at, z.from, z.n, z.side, z.which, z.j].join(':');
 function applyZone(d0, z, item, ids) {
   const d = clone(d0);
   if (z.kind === 'series') findSeries(d, z.sid).items.splice(z.index, 0, item);
@@ -1554,6 +1586,18 @@ function applyZone(d0, z, item, ids) {
     // ledarens ändar (hörnen), inte i egna noder en bit innanför.
     const full = n === S.items.length;
     S.items.splice(z.from, n, Object.assign({ id: ids.p, kind: 'par', side: z.side, branches: [mkSeries(run, ids.b1), mkSeries([item], ids.b2)] }, full ? { full: true } : {}));
+  } else if (z.kind === 'mid') {
+    // Grenarna bortom mellanbiten blir en grupp (parallellkoppling över hela
+    // den nya grenen), och komponenten läggs på benet ut till gruppen.
+    const P = findItem(d, z.pid).item, br = P.branches, n = br.length;
+    let far, rest;
+    if (z.str) { far = br.slice(0, z.j + 1); rest = br.slice(z.j + 1); }
+    else { far = br.slice(z.j + 1).reverse(); rest = br.slice(0, z.j + 1); }
+    const Q = { id: ids.p, kind: 'par', side: 'in', full: true, branches: far };
+    P.branches = [mkSeries([Q], ids.b1), ...rest];
+    if (!z.str) P.legMoved = true;
+    P[z.which] = mkSeries([item], ids.b2);
+    void n;
   } else if (z.kind === 'leg') {
     const P = findItem(d, z.pid).item;
     // Den yttersta grenen blir gren 0, eftersom benen hör till gren 0.

@@ -56,6 +56,10 @@ button { font-family: inherit; }
 .ibtn:active:not(:disabled) { transform: scale(.96); }
 .ibtn:disabled { opacity: .32; cursor: default; }
 .ibtn.danger:hover { border-color: var(--accent); color: var(--accent); }
+.newbtn { height: 38px; padding: 0 13px 0 11px; border-radius: 10px; border: 1px solid var(--line2); background: var(--panel); color: var(--ink); display: inline-flex; align-items: center; gap: 7px; font: 600 13.5px var(--sans); cursor: pointer; transition: border-color .15s, transform .15s; margin-right: 4px; }
+.newbtn:hover { border-color: var(--ink); }
+.newbtn:active { transform: scale(.97); }
+.newbtn svg { color: var(--soft); }
 .split { display: inline-flex; position: relative; margin-left: 6px; }
 .primary { height: 40px; padding: 0 16px 0 14px; border: 0; background: var(--ink); color: #fff; font: 600 14px var(--sans); display: inline-flex; align-items: center; gap: 9px; cursor: pointer; transition: background .15s; }
 .primary:hover { background: #22324a; }
@@ -203,6 +207,8 @@ body.is-dragging, body.is-dragging * { cursor: grabbing !important; }
   .titles h1 { font-size: 28px; }
   .actions { margin-left: auto; }
   .primary .lbl-long { display: none; }
+  .newbtn span { display: none; }
+  .newbtn { padding: 0; width: 38px; justify-content: center; margin-right: 0; }
   .app { grid-template-columns: 1fr; height: auto; padding: 0 12px 24px; gap: 10px; }
   .palette { order: 1; display: flex; gap: 14px; overflow-x: auto; padding: 10px 10px 8px; }
   .pal-g + .pal-g { margin-top: 0; }
@@ -227,6 +233,7 @@ body.is-dragging, body.is-dragging * { cursor: grabbing !important; }
     <p>Dra in komponenter på ledningarna. Schemat ordnar sig självt, precis som i läroboken.</p>
   </div>
   <div class="actions">
+    <button class="newbtn" id="newBtn" title="Börja om med en tom krets" aria-label="Ny krets"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6.5A2.5 2.5 0 0 0 4 5.5v13A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3v6h6"/><path d="M12 12v6M9 15h6"/></svg><span>Ny krets</span></button>
     <button class="ibtn" id="undoBtn" title="Ångra (Ctrl+Z)" aria-label="Ångra"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
     <button class="ibtn" id="redoBtn" title="Gör om (Ctrl+Y)" aria-label="Gör om"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button>
     <div class="split">

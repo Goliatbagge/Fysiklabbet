@@ -2032,6 +2032,15 @@ function updateUndo() {
   $('#undoBtn').disabled = hist.i <= 0;
   $('#redoBtn').disabled = hist.i >= hist.stack.length - 1;
 }
+// Ny krets: tom slinga med ett klick. Inställningarna (beteckningar,
+// strömpilar, exportstorlek) behålls, och Ångra tar tillbaka den gamla.
+$('#newBtn').addEventListener('click', () => {
+  const nd = newDoc({});
+  nd.opts = doc.opts;
+  doc = nd; sel = null; commit(); refresh();
+  markUsed();
+  toast('Ritytan är tömd.', 'Ångra', undo);
+});
 $('#undoBtn').addEventListener('click', undo);
 $('#redoBtn').addEventListener('click', redo);
 $('#trash').innerHTML = IC.trash + '<span>Släpp här för att ta bort</span>';

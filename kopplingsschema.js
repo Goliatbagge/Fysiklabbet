@@ -925,8 +925,30 @@ function layoutPass(doc, autoIn, arrowIdx) {
   const hLad = ladder('left', 'right', ['top', 'bottom']);
   if (vLad) H = Math.max(H, vLad.need);
   if (hLad) W = Math.max(W, hLad.need);
-  W = Math.max(W, H * 1.15);
-  H = Math.max(H, W * 0.5);
+  // Bildens minsta proportioner (inte för platt, inte för smal) får inte
+  // lägga all extra luft innanför en parallellkoppling som går inåt: då
+  // hamnar batteriet långt under grenarna och symmetrin går förlorad. Med
+  // inåtgående grenar är taket ett grenavstånd från den innersta grenen
+  // till ledningen mittemot, samma regel som för stegpinnarna.
+  const inward = s => {
+    let depth = 0, sp = 0;
+    if (stretched[s]) return null;
+    for (const it of doc.loop[s].items) {
+      if (it.kind !== 'par' || it.side === 'out') continue;
+      const o = [0].concat(M[it.id].offs.map(Math.abs)).sort((a, b) => a - b);
+      depth = Math.max(depth, o[o.length - 1]);
+      for (let j = 1; j < o.length; j++) sp = Math.max(sp, o[j] - o[j - 1]);
+    }
+    return depth > 0 ? { depth, sp } : null;
+  };
+  const cap = (a, b) => {
+    const A = inward(a), B = inward(b);
+    if (!A && !B) return Infinity;
+    return (A ? A.depth : 0) + (B ? B.depth : 0) + Math.max(A ? A.sp : 0, B ? B.sp : 0);
+  };
+  const capW = cap('left', 'right'), capH = cap('top', 'bottom');
+  W = Math.max(W, Math.min(H * 1.15, capW));
+  H = Math.max(H, Math.min(W * 0.5, capH));
   W = Math.round(W); H = Math.round(H);
   // Lägg grenarna på jämna avstånd i den slutliga höjden (bredden).
   for (const [lad, len] of [[vLad, H], [hLad, W]]) {

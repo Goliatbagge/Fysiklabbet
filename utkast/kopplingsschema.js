@@ -1366,6 +1366,7 @@ function render() {
   selG.innerHTML = s;
   hitG.innerHTML = moving ? '' : out.hits.map(h => `<rect class="hit" data-kind="${h.kind}" data-id="${h.id}" x="${r2(h.box[0] - 6)}" y="${r2(h.box[1] - 5)}" width="${r2(h.box[2] - h.box[0] + 12)}" height="${r2(h.box[3] - h.box[1] + 10)}" rx="8"/>`).join('');
   renderZones();
+  positionInline();
 }
 function renderZones() {
   if (!drag || !drag.moving || drag.target || !drag.zones) { zoneG.innerHTML = ''; return; }
@@ -1373,6 +1374,11 @@ function renderZones() {
   const near = drag.near;
   zoneG.innerHTML = drag.zones.map(z => {
     const on = z === near;
+    if (z.kind === 'onto') {
+      if (!on) return '';
+      const w = z.vert ? z.h : z.w, h = z.vert ? z.w : z.h;
+      return `<rect class="zone onto" x="${r2(z.x - w / 2)}" y="${r2(z.y - h / 2)}" width="${r2(w)}" height="${r2(h)}" rx="${r2(6 / k)}" vector-effect="non-scaling-stroke"/>`;
+    }
     if (z.kind === 'series' || z.kind === 'leg') return `<circle class="zone${on ? ' near' : ''}" cx="${r2(z.x)}" cy="${r2(z.y)}" r="${r2((on ? 6.5 : 4.5) / k * 1.2)}" vector-effect="non-scaling-stroke"/>`;
     const vert = z.vert;
     if (z.kind === 'span') {
@@ -1439,6 +1445,13 @@ function computeZones(d, L) {
       }
     }
   }
+  // PÅ-ZONER: mitt på varje komponent. En ny komponent från menyn som
+  // släpps här ERSÄTTER komponenten; en komponent från schemat som släpps
+  // här BYTER PLATS med den.
+  for (const ci of L.info.comps) {
+    const g = L.geo[ci.c.id], e = symExt(ci.c);
+    Z.push({ kind: 'onto', target: ci.c.id, x: g.x, y: g.y, w: e.len + 12, h: 2 * Math.max(e.hl, e.ho) + 10, vert: ci.f.dx === 0 });
+  }
   for (const ci of L.info.comps) {
     const g = L.geo[ci.c.id], e = symExt(ci.c);
     // Mellan två grenar får komponentens zon bara den egna halvan av utrymmet.
@@ -1478,6 +1491,21 @@ function computeZones(d, L) {
     Z.push({ kind: 'branch', pid: pi.P.id, at: pi.P.branches.length, x: (gl.x1 + gl.x2) / 2 + sx * 40, y: (gl.y1 + gl.y2) / 2 + sy * 40, vert: pi.f.dx === 0 });
   }
   return Z;
+}
+// Ersätt en komponent med en ny (släppt från menyn på komponenten).
+function replaceComp(d0, targetId, item) {
+  const d = clone(d0), f = findItem(d, targetId);
+  if (f) f.series.items[f.index] = item;
+  return normalize(d);
+}
+// Byt plats på två komponenter i schemat (den ena släppt på den andra).
+function swapComps(d0, aId, bId) {
+  const d = clone(d0), fa = findItem(d, aId), fb = findItem(d, bId);
+  if (!fa || !fb) return d;
+  const a = fa.item, b = fb.item;
+  fa.series.items[fa.index] = b;
+  fb.series.items[fb.index] = a;
+  return normalize(d);
 }
 const zoneKey = z => [z.kind, z.sid || z.target || z.pid, z.index, z.at, z.from, z.n, z.side, z.which].join(':');
 function applyZone(d0, z, item, ids) {
@@ -1557,7 +1585,9 @@ function moveDrag(e) {
   drag.key = key;
   if (target) {
     const ids = drag.ids[key] || (drag.ids[key] = { p: rid('p'), b1: rid('s'), b2: rid('s') });
-    const pd = applyZone(drag.base, target, clone(drag.item), ids);
+    const pd = target.kind === 'onto'
+      ? (drag.mode === 'new' ? replaceComp(drag.base, target.target, clone(drag.item)) : swapComps(doc, drag.id, target.target))
+      : applyZone(drag.base, target, clone(drag.item), ids);
     drag.target = { z: target, doc: pd };
     show(pd, layout(pd), { spawn: { id: drag.item.id, x: pt[0], y: pt[1] }, accent: drag.item.id });
     ghostEl.classList.add('placed');
@@ -1580,6 +1610,7 @@ function endDrag(cancelled) {
     sel = { kind: 'comp', id: d.item.id };
     markUsed();
     refresh();
+    openInline(sel, !d.touch);   // skriv värdet direkt efter att komponenten släppts
   } else if (!cancelled && d.key === 'trash') {
     doc = d.base; commit();
     if (sel && sel.id === d.id) sel = null;
@@ -1588,7 +1619,7 @@ function endDrag(cancelled) {
   } else refresh();
 }
 // Klick på en palettbricka: lägg till komponenten på ett vettigt ställe.
-function smartAdd(type, fromEl) {
+function smartAdd(type, fromEl, touch) {
   stopCoach();
   const item = mkComp(type);
   const d = clone(doc);
@@ -1611,6 +1642,7 @@ function smartAdd(type, fromEl) {
   }
   markUsed();
   refresh({ spawn, dur: 420 });
+  openInline(sel, !touch);
 }
 function deleteSelected() {
   if (!sel) return;
@@ -1624,14 +1656,14 @@ function deleteSelected() {
 paletteEl.addEventListener('pointerdown', e => {
   const t = e.target.closest('.tile');
   if (!t || e.button > 0) return;
-  drag = { mode: 'new', type: t.dataset.type, sx: e.clientX, sy: e.clientY, moving: false, el: t };
+  drag = { mode: 'new', type: t.dataset.type, sx: e.clientX, sy: e.clientY, moving: false, el: t, touch: e.pointerType === 'touch' };
 });
 hitG.addEventListener('pointerdown', e => {
   const t = e.target.closest('.hit');
   if (!t || e.button > 0) return;
   e.stopPropagation();
-  if (t.dataset.kind === 'arrow') { select({ kind: 'arrow', id: t.dataset.id }); return; }
-  drag = { mode: 'move', id: t.dataset.id, sx: e.clientX, sy: e.clientY, moving: false, wasSel: sel && sel.id === t.dataset.id };
+  if (t.dataset.kind === 'arrow') { select({ kind: 'arrow', id: t.dataset.id }, e.pointerType !== 'touch'); return; }
+  drag = { mode: 'move', id: t.dataset.id, sx: e.clientX, sy: e.clientY, moving: false, wasSel: sel && sel.id === t.dataset.id, touch: e.pointerType === 'touch' };
   sheetEl.setPointerCapture && e.pointerId != null && sheetEl.setPointerCapture(e.pointerId);
 });
 svgEl.addEventListener('pointerdown', e => { if (!e.target.closest('.hit')) select(null); });
@@ -1649,18 +1681,112 @@ window.addEventListener('pointerup', () => {
   const d = drag;
   if (!d.moving) {
     drag = null;
-    if (d.mode === 'new') smartAdd(d.type, d.el);
+    if (d.mode === 'new') smartAdd(d.type, d.el, d.touch);
     else if (d.wasSel) focusValue();
-    else select({ kind: 'comp', id: d.id });
+    else select({ kind: 'comp', id: d.id }, !d.touch);
     return;
   }
   endDrag(false);
 });
 window.addEventListener('pointercancel', () => { if (drag && drag.moving) endDrag(true); else drag = null; });
 
+/* ================= Värdefält direkt i schemat ================= */
+// Klickar man på en komponent som kan ha ett värde (eller på en strömpil)
+// dyker ett litet fält upp på etikettens plats, "R₁ = [ 20 ] Ω", så att
+// värdet skrivs in där det ska stå. Fältet följer schemat när det flyttar
+// sig, skalar med zoomen och hålls i takt med fältet i sidmenyn.
+const ieEl = $('#inlineEd'), ieInput = $('#ieInput'), iePre = $('#iePre'), ieUnit = $('#ieUnit');
+let ieTarget = null;   // { kind: 'comp' | 'arrow', id }
+function ieInfo(t) {
+  if (!t) return null;
+  if (t.kind === 'comp') {
+    const f = findItem(doc, t.id);
+    if (!f) return null;
+    const c = f.item, T = TYPES[c.type];
+    if (!T.field) return null;
+    const nm = c.name ? parseName(c.name) : lay.auto[c.id];
+    const calc = lay.sol && lay.sol.comp[c.id];
+    return { c, T, nm, italic: T.italic, value: c.value || '', unit: T.unit, ph: calc || '', geoKey: c.id, hl: symExt(c).hl };
+  }
+  const pl = planFor(t.id);
+  if (!pl) return null;
+  const cfg = arrowCfg(t.id, false), sid = t.id === 'main' ? doc.loop[pl.side].id : t.id;
+  const calc = lay.sol && lay.sol.arrow[sid];
+  return { nm: parseName(cfg.name || pl.auto), italic: true, value: cfg.value || '', unit: 'A', ph: calc ? calc.text : '', geoKey: 'arr:' + sid, hl: ARROW_HW, arrow: true };
+}
+function openInline(t, focus) {
+  const inf = ieInfo(t);
+  if (!inf) { closeInline(); return; }
+  ieTarget = t;
+  const pre = [];
+  if (doc.opts.names && inf.nm) {
+    pre.push(inf.italic && /[A-Za-zα-ωΑ-Ω]/.test(inf.nm.letter) ? `<i>${esc(inf.nm.letter)}</i>` : esc(inf.nm.letter));
+    if (inf.nm.idx) pre.push(`<sub>${esc(inf.nm.idx)}</sub>`);
+    pre.push(inf.italic ? '<span class="ie-eq">=</span>' : '');
+  }
+  iePre.innerHTML = pre.join('');
+  ieUnit.textContent = inf.unit || '';
+  ieInput.value = inf.value;
+  ieInput.placeholder = inf.ph || '?';
+  sizeInline();
+  ieEl.classList.add('on');
+  positionInline();
+  if (focus) { ieInput.focus({ preventScroll: true }); ieInput.select(); }
+}
+function closeInline() {
+  if (!ieTarget) return;
+  ieTarget = null;
+  ieEl.classList.remove('on');
+  if (document.activeElement === ieInput) ieInput.blur();
+}
+function sizeInline() { ieInput.style.width = Math.max(2.4, (ieInput.value || ieInput.placeholder).length * 0.62 + 0.9) + 'em'; }
+function positionInline() {
+  if (!ieTarget || !view.geoNow) return;
+  // En nyss tillagd komponent har ännu ingen position i animationen; då
+  // används slutpositionen, så att fältet syns (och kan få fokus) direkt.
+  const inf = ieInfo(ieTarget), g = inf && (view.geoNow[inf.geoKey] || (view.lay && view.lay.geo[inf.geoKey]));
+  if (!g || (drag && drag.moving)) { ieEl.style.visibility = 'hidden'; return; }
+  ieEl.style.visibility = '';
+  const cam = view.geoNow.cam, k = cam.k;
+  let x = g.x, y = g.y;
+  if (inf.arrow) { const a = g.ang * Math.PI / 180; x += Math.cos(a) * ARROW_LEN / 2; y += Math.sin(a) * ARROW_LEN / 2; }
+  const horiz = Math.abs(Math.cos(g.ang * Math.PI / 180)) > 0.5;
+  ieEl.style.fontSize = clamp(FS * k, 13, 22) + 'px';
+  let tx;
+  if (horiz) { y += (g.lsy < 0 ? -1 : 1) * (inf.hl + GAP_H + LH / 2); tx = 'translate(-50%, -50%)'; }
+  else { x += (g.lsx < 0 ? -1 : 1) * (inf.hl + GAP_V); tx = g.lsx < 0 ? 'translate(-100%, -50%)' : 'translate(0, -50%)'; }
+  ieEl.style.left = (cam.tx + k * x) + 'px';
+  ieEl.style.top = (cam.ty + k * y) + 'px';
+  ieEl.style.transform = tx;
+}
+ieInput.addEventListener('input', () => {
+  if (!ieTarget) return;
+  if (ieTarget.kind === 'comp') { const f = findItem(doc, ieTarget.id); if (f) f.item.value = ieInput.value; }
+  else arrowCfg(ieTarget.id, true).value = ieInput.value;
+  const side = inspEl.querySelector(ieTarget.kind === 'comp' ? '#f-val' : '#f-aval');
+  if (side) side.value = ieInput.value;
+  sizeInline();
+  relayout();
+});
+ieInput.addEventListener('change', () => commit());
+// När man är klar (Enter, Esc eller klick någon annanstans) stängs fältet så
+// att den färdiga etiketten syns. Komponenten förblir markerad.
+ieInput.addEventListener('blur', () => { if (ieTarget) { ieTarget = null; ieEl.classList.remove('on'); } });
+ieInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); ieTarget = null; ieEl.classList.remove('on'); ieInput.blur(); }
+});
+ieEl.addEventListener('pointerdown', e => e.stopPropagation());
+
 /* ================= Markering och inspektör ================= */
-function select(s) { sel = s; renderInspector(); render(); }
+// focus: sätt markören i värdefältet direkt (mus och penna). Vid tryck med
+// fingret visas fältet utan att tangentbordet fälls upp; ett tryck på
+// fältet öppnar det.
+function select(s, focus) {
+  sel = s; renderInspector(); render();
+  if (s) openInline(s, focus); else closeInline();
+}
 function focusValue() {
+  if (sel && ieInfo(sel)) { openInline(sel, true); return; }
   const inp = inspEl.querySelector('#f-val') || inspEl.querySelector('#f-name');
   if (inp) { inp.focus(); inp.select(); }
 }
@@ -1684,6 +1810,9 @@ function renderInspector() {
   if (!h) h = inspDoc();
   inspEl.innerHTML = h;
   inspEl.scrollTop = 0;
+  // Värdefältet i schemat hör till markeringen; försvinner den (Ångra,
+  // borttagning) stängs fältet.
+  if (ieTarget && (!sel || sel.kind !== ieTarget.kind || sel.id !== ieTarget.id)) closeInline();
 }
 function inspComp(f) {
   const c = f.item, T = TYPES[c.type], au = lay.auto[c.id];
@@ -1846,9 +1975,11 @@ inspEl.addEventListener('input', e => {
     if (t.dataset.f === 'name') c.name = t.value;
     else if (t.dataset.f === 'value') c.value = t.value;
     relayout();
+    if (ieTarget) openInline(ieTarget, false);
   } else if (t.dataset.af && sel && sel.kind === 'arrow') {
     arrowCfg(sel.id, true)[t.dataset.af] = t.value;
     relayout();
+    if (ieTarget) openInline(ieTarget, false);
   }
 });
 inspEl.addEventListener('change', e => {
@@ -1935,10 +2066,7 @@ document.addEventListener('keydown', e => {
   if (inField) { if (e.key === 'Escape') e.target.blur(); return; }
   if (e.key === 'Escape') { if (drag && drag.moving) endDrag(true); else select(null); return; }
   if ((e.key === 'Delete' || e.key === 'Backspace') && sel) { e.preventDefault(); deleteSelected(); return; }
-  if (sel && sel.kind === 'comp' && !mod && /^[0-9?,.]$/.test(e.key)) {
-    const inp = inspEl.querySelector('#f-val');
-    if (inp) { inp.focus(); inp.select(); }
-  }
+  if (sel && !mod && /^[0-9?,.]$/.test(e.key)) focusValue();
 });
 
 /* ================= Export och delning ================= */

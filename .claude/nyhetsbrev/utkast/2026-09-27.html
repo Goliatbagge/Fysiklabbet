@@ -1,14 +1,17 @@
 <!--
   ÄMNESRAD:  Fem millimeter som gör tiden gå olika fort
-  PREHEADER: Plus: ljudets första kvantsprång, och duvans kompass som dränks i brus.
+  PREHEADER: Plus: ett nytt verktyg som ritar kopplingsscheman åt dig, och ljudets första kvantsprång.
   Utskick:   söndag 2026-09-27 kl 06.00 svensk tid (EmailOctopus)
   Brevperiod: 2026-09-21 till 2026-09-26 (nyheter, sex artiklar). Sajtuppdateringar
   sedan 2026-09-20 (git log --since="2026-09-20 00:00" origin/main, 49 commits,
-  varav de flesta polish/övningar i ma1c 2.9-2.11 och en dold utkast/-editor för
-  kopplingsscheman samt en dold Rubiks kub-sida, båda noindex och därför INTE
-  medtagna). Enda publika sajtuppdateringen i fönstret: nationella provet
+  varav de flesta polish/övningar i ma1c 2.9-2.11). Publika sajtuppdateringar
+  i fönstret: verktyget Kopplingsschema (lanserat 2026-09-26 under det nya
+  menyvalet Verktyg, kopplingsschema.html; tillagt i brevet lokalt samma dag
+  på användarens begäran, med skärmbilden
+  nyheter/brev/2026-09-27-kopplingsschema.jpg) och nationella provet
   Ma 2c VT 2018 (UPDATES-post daterad 2026-09-20 17:39, efter att förra
-  brevets utkast redan var skrivet 2026-09-19).
+  brevets utkast redan var skrivet 2026-09-19). Den dolda Rubiks kub-sidan
+  (noindex) är INTE medtagen.
 
   Skrivet som schemalagd molnroutine (lördag). Molnets nätverkspolicy
   blockerar unpkg/cdn.jsdelivr/cdn.tailwindcss/cdnjs (403 i agentproxyn),
@@ -56,14 +59,32 @@
     <tr><td style="background-color:#fdfaf3; border-radius:10px; padding:30px 34px 8px;">
 
       <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Den här veckan mäts saker nära gränsen av det möjliga: en höjdskillnad på bara fem millimeter räcker för att tiden ska gå olika fort, en enda ton visar sig sluta med ett hopp i stället för att dö sakta bort, och en duvas möjliga inre kompass visar sig vara för svag för att fungera alls.</p>
-      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Men först: det som är nytt på sajten.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Men först: ett nytt verktyg för dig som undervisar.</p>
 
       <!-- ── NYTT PÅ FYSIKLABBET ────────────────────────────── -->
       <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
         <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Nytt på Fysiklabbet</div>
       </div>
 
-      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;"><strong>Ett nytt nationellt prov med lösningar.</strong> <a href="https://fysiklabbet.se/np.html?id=ma2c-vt2018" style="color:#2563a8;">Matematik nivå 2c</a> har fått sitt andra fullständiga nationella prov: våren 2018, alla 26 uppgifter ur delprov B, C och D. Bland dem: ett träds höjd uppmätt med en spegel på marken, och Storsjöodjurets kurva skriven som en andragradsfunktion. Varje uppgift har både en textlösning som klickas fram steg för steg och en pennlösning där lösningen skrivs för hand på rutat papper.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;"><strong>Nytt verktyg: rita kopplingsscheman på några sekunder.</strong> Den som har försökt rita ett prydligt kopplingsschema i Word vet hur lång tid det tar. Nu finns ett snabbare sätt: dra in batterier, resistorer, lampor och mätare på ledningarna, så ordnar sig schemat självt.</p>
+
+      <a href="https://fysiklabbet.se/kopplingsschema.html" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-09-27-kopplingsschema.jpg" width="600" alt="Verktyget Kopplingsschema: en resistor i serie med två parallellkopplade resistorer, där strömmarna 0,30, 0,20 och 0,10 ampere är uträknade" style="display:block; width:100%; max-width:600px; height:auto; border-radius:8px; border:0; margin:0 0 6px;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:0 0 18px;">Strömmarna är uträknade av verktyget. Klicka för att prova själv.</div>
+
+      <ul style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.6; color:#0f1620; margin:0 0 18px; padding-left:22px;">
+        <li style="margin-bottom:8px;"><strong>Som i läroboken.</strong> Komponenterna fördelas jämnt och centreras, knutpunkterna ritas ut och symbolerna följer svensk standard.</li>
+        <li style="margin-bottom:8px;"><strong>Värdena räknas ut åt dig.</strong> Skriv in spänning och resistanser, så står strömmarna där direkt, med rätt antal värdesiffror och strömpilar som pekar åt rätt håll. Det fungerar också baklänges, och ett frågetecken döljer svaret när eleverna ska räkna själva.</li>
+        <li style="margin-bottom:8px;"><strong>Kopiera och klistra in.</strong> Ett klick, så kan bilden klistras in i Word, PowerPoint eller Google Dokument, skarp och i lagom storlek.</li>
+        <li><strong>Gratis och utan konto.</strong> Allt sker direkt i webbläsaren.</li>
+      </ul>
+
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px;"><tr><td style="background-color:#0f1620; border-radius:10px;">
+        <a href="https://fysiklabbet.se/kopplingsschema.html" style="display:inline-block; padding:12px 22px; font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; font-weight:bold; color:#ffffff; text-decoration:none;">Prova verktyget &rarr;</a>
+      </td></tr></table>
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;"><strong>Ett nytt nationellt prov med lösningar.</strong> <a href="https://fysiklabbet.se/np.html?id=ma2c-vt2018" style="color:#2563a8;">Matematik nivå 2c</a> har fått sitt andra fullständiga nationella prov: våren 2018, alla 26 uppgifter ur delprov B, C och D. Varje uppgift har både en textlösning steg för steg och en pennlösning skriven för hand på rutat papper.</p>
 
       <a href="https://fysiklabbet.se/np.html?id=ma2c-vt2018#ma2c-vt2018:17" style="text-decoration:none;">
         <img src="https://fysiklabbet.se/nyheter/brev/2026-09-27-np-spegel.jpg" width="600" alt="Figur som visar hur ett träds höjd räknas ut med en spegel på marken: två likformiga trianglar, en liten blå vid personen och en stor rosa fram till trädet" style="display:block; width:100%; max-width:600px; height:auto; border-radius:8px; border:0; margin:0 0 6px;">
@@ -127,7 +148,6 @@
       <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
         <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Nästa vecka</div>
       </div>
-      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Vi bygger just nu ett nytt verktyg för dig som undervisar, tänkt att göra en av de pilligaste sakerna i elläran snabbt, enkelt och snyggt. Håll utkik.</p>
       <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Ur nyhetskön väntar en historisk transport: forskare vid CERN har kört antiprotoner på lastbil i en flyttbar magnetisk fälla och lyckats hålla kvar dem i över en månad, världens första vägtransport av antimateria. Vi läser på.</p>
 
       <!-- ── Avslut ─────────────────────────────────────────── -->

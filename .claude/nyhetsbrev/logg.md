@@ -12,6 +12,15 @@ Format:
 ```
 
 ## 2026-09-27 — "Fem millimeter som gör tiden gå olika fort"
+- Status: **UPPLAGD i EmailOctopus 2026-09-26** som kampanjen "Nyhetsbrev nr 7 -
+  2026-09-27" (All subscribers, 23 mottagare). Testmejl skickat till
+  sam.skoglund83@gmail.com samma dag. Schemaläggningen (söndag 06.00, tidszon
+  Stockholm) görs av användaren.
+- **Innehållet uppdaterat 2026-09-26 kväll**: verktyget Kopplingsschema
+  (lanserat samma dag) lyft först under "Nytt på Fysiklabbet" med skärmbild,
+  fyra punkter och knapp, ny preheader. Nytt innehåll inklistrat och sparat i
+  kampanjen, nytt testmejl skickat till sam.skoglund83@gmail.com. Ämnesraden
+  hade visat HTML-entiteter (g&ouml;r) i fältet och skrevs in på nytt.
 - Status: UTKAST skrivet 2026-09-26 (lördag, inom 08.00-deadline, körd som
   schemalagd molnroutine). Tänkt utskick söndag 2026-09-27 kl 06.00 svensk tid.
   Brevperiod (nyheter) 2026-09-21 till 2026-09-26 (sex artiklar, alla sex

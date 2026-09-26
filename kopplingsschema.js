@@ -671,43 +671,82 @@ function defaultMainGap(S, dir) {
   if (i >= 0) return dir > 0 ? i + 1 : i;   // strax efter batteriet, i strömmens riktning
   return Math.floor(S.items.length / 2);
 }
+// Drivriktningen från spänningskällorna som sitter direkt i serien S (inte i
+// dess parallellgrenar), i seriens egen riktning. 0 = ingen källa där.
+function seriesDrive(S) {
+  let sum = 0, first = 0;
+  for (const it of S.items) {
+    if (it.kind !== 'comp' || (it.type !== 'battery' && it.type !== 'ac')) continue;
+    const sg = it.flip ? -1 : 1;
+    if (!first) first = sg;
+    const v = it.type === 'battery' ? parseFloat(String(it.value || '').replace(',', '.').replace('−', '-')) : NaN;
+    if (isFinite(v)) sum += sg * Math.abs(v);
+  }
+  return sum > 0 ? 1 : sum < 0 ? -1 : first;
+}
 function planArrows(doc, stretched, arrowIdx, sol) {
   const plan = {};
   // Utan spänningskälla går det ingen ström, så då ritas inga pilar alls.
   if (!doc.opts.arrows || !hasSource(doc)) return plan;
-  const dir = mainDir(doc);
+  // BATTERIET I EN EGEN GREN: sitter ingen källa direkt på slingan men en
+  // parallellgren på slingan har en, är det den grenen som bär hela
+  // strömmen. Dess pil heter då I och sitter vid pluspolen, och slingans
+  // egen pil blir en grenström bland de andra. Strömmen går framåt genom
+  // källans gren och bakåt genom syskongrenarna, och runt slingan i samma
+  // riktning som genom källan.
+  const loopSrc = SIDES.some(s => seriesDrive(doc.loop[s]) !== 0);
+  let srcBranch = null;
+  if (!loopSrc) {
+    outer: for (const s of SIDES) for (const it of doc.loop[s].items) {
+      if (it.kind !== 'par') continue;
+      for (const b of it.branches) if (seriesDrive(b)) { srcBranch = b; break outer; }
+    }
+  }
+  const dir = srcBranch ? seriesDrive(srcBranch) : mainDir(doc);
   const allowed = allowedArrowSides(stretched, doc);
   const mc = doc.arrowMain || {};
-  if (!mc.hidden && allowed.length) {
-    const side = allowed.includes(mc.side) ? mc.side : defaultArrowSide(doc, allowed);
-    const S = doc.loop[side], n = S.items.length;
-    const gap = (mc.side === side && mc.gap != null) ? clamp(mc.gap, 0, n) : defaultMainGap(S, dir);
-    const c = !String(mc.value || '').trim() && sol && sol.arrow[S.id];
-    plan[S.id] = { key: 'main', side, gap, dir: dir * (mc.flip ? -1 : 1) * (c ? c.sign : 1), lflip: !!mc.lflip, auto: 'I', runs: arrowRuns(doc, mc.name || 'I', mc.value || (c ? c.text : ''), mc.unit) };
-  }
   let idx = 0;
-  const visit = (S, rev) => {
+  if (!mc.hidden && allowed.length) {
+    // Är slingans pil en grenström sätts den helst på en ledning med
+    // komponenter, intill dem, precis som grenarnas pilar.
+    const withComps = srcBranch && allowed.find(s => doc.loop[s].items.some(it => it.kind === 'comp'));
+    const side = allowed.includes(mc.side) ? mc.side : (withComps || defaultArrowSide(doc, allowed));
+    const S = doc.loop[side], n = S.items.length;
+    const gap = (mc.side === side && mc.gap != null) ? clamp(mc.gap, 0, n)
+      : srcBranch ? (dir > 0 ? 0 : n) : defaultMainGap(S, dir);
+    const c = !String(mc.value || '').trim() && sol && sol.arrow[S.id];
+    let name = 'I';
+    if (srcBranch) { idx++; name = 'I' + ((arrowIdx && arrowIdx.main) || idx); }
+    plan[S.id] = { key: 'main', side, gap, dir: dir * (mc.flip ? -1 : 1) * (c ? c.sign : 1), lflip: !!mc.lflip, auto: name, numbered: !!srcBranch, total: !srcBranch, runs: arrowRuns(doc, mc.name || name, mc.value || (c ? c.text : ''), mc.unit) };
+  }
+  const visit = (S, rev, sdir) => {
     const its = rev ? S.items.slice().reverse() : S.items;
     for (const it of its) {
       if (it.kind !== 'par') continue;
+      const hasSrc = srcBranch && it.branches.includes(srcBranch);
       for (const b of it.branches) {
+        const isSrc = b === srcBranch;
+        const bdir = hasSrc ? (isSrc ? dir : -dir) : sdir;
         const cf = doc.arrowCfg[b.id] || {};
         // En gren med bara en voltmeter leder (idealt) ingen ström, så den
         // får ingen pil förrän användaren själv ber om den.
         const voltOnly = b.items.every(x => x.kind === 'comp' && x.type === 'voltmeter');
         if (!soleFullPar(b) && !(cf.hidden != null ? cf.hidden : voltOnly)) {
-          idx++;
-          const n = b.items.length, nr = (arrowIdx && arrowIdx[b.id]) || idx;
+          const n = b.items.length;
+          let name = 'I';
+          if (!isSrc) { idx++; name = 'I' + ((arrowIdx && arrowIdx[b.id]) || idx); }
+          // Källans gren: pilen sitter strax efter källan, vid pluspolen.
+          const gap = cf.gap != null ? clamp(cf.gap, 0, n) : isSrc ? defaultMainGap(b, bdir) : (bdir > 0 ? 0 : n);
           // En uträknad ström som går mot pilen vänder pilen, så att den
           // alltid visar strömmens verkliga riktning.
           const c = !String(cf.value || '').trim() && sol && sol.arrow[b.id];
-          plan[b.id] = { key: b.id, gap: cf.gap != null ? clamp(cf.gap, 0, n) : (dir > 0 ? 0 : n), dir: dir * (cf.flip ? -1 : 1) * (c ? c.sign : 1), lflip: !!cf.lflip, auto: 'I' + nr, runs: arrowRuns(doc, cf.name || ('I' + nr), cf.value || (c ? c.text : ''), cf.unit) };
+          plan[b.id] = { key: b.id, gap, dir: bdir * (cf.flip ? -1 : 1) * (c ? c.sign : 1), lflip: !!cf.lflip, auto: name, numbered: !isSrc, total: isSrc, runs: arrowRuns(doc, cf.name || name, cf.value || (c ? c.text : ''), cf.unit) };
         }
-        visit(b, rev);
+        visit(b, rev, bdir);
       }
     }
   };
-  visit(doc.loop.top, false); visit(doc.loop.right, false); visit(doc.loop.bottom, true); visit(doc.loop.left, true);
+  visit(doc.loop.top, false, dir); visit(doc.loop.right, false, dir); visit(doc.loop.bottom, true, dir); visit(doc.loop.left, true, dir);
   return plan;
 }
 
@@ -740,10 +779,10 @@ function layout(doc) {
   }
   const auto = {};
   for (const p in groups) groups[p].sort(byPos).forEach((c, i, arr) => { if (arr.length > 1 || !sololess(p)) auto[c.id] = { letter: p, idx: arr.length > 1 ? String(i + 1) : '' }; });
-  const arrs = Object.values(first.plan).filter(pl => pl.key !== 'main').map(pl => ({ id: pl.key, x: g['arr:' + pl.key].x, y: g['arr:' + pl.key].y }));
+  const arrs = Object.entries(first.plan).filter(([, pl]) => pl.numbered).map(([sid, pl]) => ({ id: pl.key, sid, x: g['arr:' + sid].x, y: g['arr:' + sid].y }));
   const arrowIdx = {};
   arrs.sort(byPos).forEach((a, i) => { arrowIdx[a.id] = i + 1; });
-  const same = JSON.stringify(auto) === JSON.stringify(first.auto) && arrs.every(a => first.plan[a.id].auto === 'I' + arrowIdx[a.id]);
+  const same = JSON.stringify(auto) === JSON.stringify(first.auto) && arrs.every(a => first.plan[a.sid].auto === 'I' + arrowIdx[a.id]);
   return same ? first : layoutPass(doc, auto, arrowIdx);
 }
 function layoutPass(doc, autoIn, arrowIdx) {
@@ -2104,7 +2143,7 @@ function inspArrow(key) {
   return `
   <div class="ins-head">
     <div class="ins-ico arrow-ico"><svg viewBox="-36 -24 72 48" width="66" height="44"><line x1="-34" y1="4" x2="34" y2="4" stroke="currentColor" stroke-width="1.8"/><polygon points="5,4 -5,-0.6 -5,8.6" fill="currentColor"/><text x="0" y="-8" font-size="14" text-anchor="middle" fill="currentColor" font-family="Poppins" font-style="italic">I</text></svg></div>
-    <div class="ins-t"><div class="eyebrow">Vald strömpil</div><h2>${key === 'main' ? 'Strömmen i kretsen' : 'Strömmen i grenen'}</h2></div>
+    <div class="ins-t"><div class="eyebrow">Vald strömpil</div><h2>${pl && pl.total ? 'Strömmen i kretsen' : 'Strömmen i grenen'}</h2></div>
     <button class="ibtn" data-act="ahide" title="Dölj pilen" aria-label="Dölj pilen">${IC.hide}</button>
   </div>
   <div class="fld"><label for="f-aname">Beteckning</label>

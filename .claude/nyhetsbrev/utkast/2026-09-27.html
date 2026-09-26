@@ -1,0 +1,154 @@
+<!--
+  ÄMNESRAD:  Fem millimeter som gör tiden gå olika fort
+  PREHEADER: Plus: ljudets första kvantsprång, och duvans kompass som dränks i brus.
+  Utskick:   söndag 2026-09-27 kl 06.00 svensk tid (EmailOctopus)
+  Brevperiod: 2026-09-21 till 2026-09-26 (nyheter, sex artiklar). Sajtuppdateringar
+  sedan 2026-09-20 (git log --since="2026-09-20 00:00" origin/main, 49 commits,
+  varav de flesta polish/övningar i ma1c 2.9-2.11 och en dold utkast/-editor för
+  kopplingsscheman samt en dold Rubiks kub-sida, båda noindex och därför INTE
+  medtagna). Enda publika sajtuppdateringen i fönstret: nationella provet
+  Ma 2c VT 2018 (UPDATES-post daterad 2026-09-20 17:39, efter att förra
+  brevets utkast redan var skrivet 2026-09-19).
+
+  Skrivet som schemalagd molnroutine (lördag). Molnets nätverkspolicy
+  blockerar unpkg/cdn.jsdelivr/cdn.tailwindcss/cdnjs (403 i agentproxyn),
+  men npm-registret är öppet. np.html laddar React+Babel (unpkg) och
+  marked+KaTeX (jsdelivr), så samma knep som tidigare veckor användes:
+  react/react-dom/@babel-standalone/marked/katex installerades lokalt via
+  npm och CDN-anropen fångades med page.route() i Playwright (chromium på
+  /opt/pw-browsers/chromium-1194, körd via /opt/node22:s globala
+  playwright-paket). Tailwind fylldes tomt (behövs inte för en beskuren
+  figur-skärmdump). Screenshot: np.html?los#ma2c-vt2018:17 (uppgift 17,
+  trädets höjd med en spegel), "Som text"-läget förvalt via localStorage
+  så hela lösningen visades direkt utan att klicka sig genom stegen;
+  SVG-figuren med de färgade likformiga trianglarna klipptes ut med
+  Playwrights clip-screenshot (ingen manuell pixel-beskärning behövdes).
+  Sparad som nyheter/brev/2026-09-27-np-spegel.jpg (Pillow, 972 px bred,
+  vitt bakgrundslager). Hero + två miniatyrer är beskurna kopior av
+  befintliga nyhetsbilder (Pillow: hero 1200×675, miniatyrer 500×500
+  kvadrat).
+
+  Ingen simulering/minisimulering lanserades denna vecka (mager
+  sajtvecka). Bildkravet "minst en sajtbild" uppfylls i stället av
+  NP-skärmdumpen ovan.
+-->
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fysiklabbets nyhetsbrev, vecka 39</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f7f2e8;">
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f2e8;">
+<tr><td align="center" style="padding:28px 12px 40px;">
+
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%;">
+
+    <!-- ── Sidhuvud ─────────────────────────────────────────── -->
+    <tr><td align="center" style="padding:8px 8px 26px;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; padding-bottom:10px;">Nyhetsbrev nr 7 &middot; vecka 39 &middot; 2026</div>
+      <div style="font-family:Georgia,'Times New Roman',serif; font-size:34px; font-weight:bold; color:#0f1620;">Fysiklabbet</div>
+    </td></tr>
+
+    <!-- ── Anslag ───────────────────────────────────────────── -->
+    <tr><td style="background-color:#fdfaf3; border-radius:10px; padding:30px 34px 8px;">
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Den här veckan mäts saker nära gränsen av det möjliga: en höjdskillnad på bara fem millimeter räcker för att tiden ska gå olika fort, en enda ton visar sig sluta med ett hopp i stället för att dö sakta bort, och en duvas möjliga inre kompass visar sig vara för svag för att fungera alls.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Här kommer veckans fynd, och det senaste som hänt på sajten.</p>
+
+      <!-- ── VECKANS FYSIK ──────────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:26px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Veckans fysik</div>
+      </div>
+
+      <!-- Hjältebild + huvudnyhet -->
+      <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-25-klockan-pa-nittonde-decimalen" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-09-27-klockan-hero.jpg" width="532" alt="Tre forskare böjda över ett optiskt bord fyllt av speglar och fiberkablar i klockans laboratorium" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 18px;">Foto: Centre for Quantum Technologies, National University of Singapore (pressbild)</div>
+
+      <h2 style="font-family:Georgia,'Times New Roman',serif; font-size:22px; line-height:1.35; color:#0f1620; margin:0 0 10px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-25-klockan-pa-nittonde-decimalen" style="color:#0f1620; text-decoration:none;">En klocka så exakt att fem millimeter märks</a></h2>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;">Ett lag i Singapore har byggt två atomur som var för sig mäter tiden med en enda laddad lutetiumatom, och kommit ner till en osäkerhet på nittonde decimalen: ett fel på en hel sekund skulle ta drygt 300 miljarder år att samla ihop. Rekordet är fem gånger skärpare än det förra, och precisionen är så hög att bara höjdskillnaden mellan de två klockorna, fem millimeter, får tiden att gå olika fort i dem, precis som den allmänna relativitetsteorin förutsäger.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; margin:0 0 26px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-25-klockan-pa-nittonde-decimalen" style="color:#2563a8; text-decoration:underline;">Läs artikeln &rarr;</a></p>
+
+      <!-- Miniatyrrad: två nyheter till -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="48%" valign="top" style="padding-right:10px;">
+            <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-23-tonen-som-slocknar-i-ett-hopp" style="text-decoration:none;">
+              <img src="https://fysiklabbet.se/nyheter/brev/2026-09-27-tonen-thumb.jpg" width="250" alt="Forskare i vita renrumsdräkter böjda över den kalla delen av en kryostat" style="display:block; width:100%; height:auto; border-radius:8px; border:0;">
+            </a>
+            <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:7px 0 0;">Foto: FMN Laboratory (CC&nbsp;BY&nbsp;4.0), via Wikimedia Commons</div>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.55; color:#0f1620; margin:10px 0 4px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-23-tonen-som-slocknar-i-ett-hopp" style="color:#0f1620; text-decoration:none;"><strong>Ljudets sista skakning försvinner i ett hopp.</strong></a> En mikroskopisk stämgaffel vid Stanford ringer i två tusendels sekund, avlyssnad hundratals gånger av en supraledande krets. Den allra sista portionen försvinner inte gradvis, den finns, och sedan gör den inte det. Kvantsprång har setts hos joner och hos ljus, nu också hos ljud.</p>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; margin:0;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-23-tonen-som-slocknar-i-ett-hopp" style="color:#2563a8; text-decoration:underline;">Läs mer &rarr;</a></p>
+          </td>
+          <td width="48%" valign="top" style="padding-left:10px;">
+            <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-24-duvans-kompass-i-bruset" style="text-decoration:none;">
+              <img src="https://fysiklabbet.se/nyheter/brev/2026-09-27-duvan-thumb.jpg" width="250" alt="En grå duva i flykt, sedd underifrån mot ett rött tegeltak" style="display:block; width:100%; height:auto; border-radius:8px; border:0;">
+            </a>
+            <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:7px 0 0;">Foto: Arraja77 (CC&nbsp;BY-SA&nbsp;4.0), via Wikimedia Commons</div>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.55; color:#0f1620; margin:10px 0 4px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-24-duvans-kompass-i-bruset" style="color:#0f1620; text-decoration:none;"><strong>Duvans inre kompass dränks i eget brus.</strong></a> Innerörats båggångar skulle kunna fungera som en liten generator i jordens magnetfält. En fysiker har räknat ut spänningen: tolv miljarddels volt, bara en bråkdel av det termiska bruset i samma vätska.</p>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; margin:0;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-24-duvans-kompass-i-bruset" style="color:#2563a8; text-decoration:underline;">Läs mer &rarr;</a></p>
+          </td>
+        </tr>
+      </table>
+
+      <!-- LÄS ÄVEN: veckans nyheter som inte lyfts ovan -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:26px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Läs även</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; line-height:1.9; color:#0f1620; margin:0;">
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-21-vattnet-som-vagrar-bli-is" style="color:#2563a8; text-decoration:underline;">Vatten instängt i fett stelnar till glas</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-22-rontgenljus-som-glider" style="color:#2563a8; text-decoration:underline;">Röntgenljuset lär sig glida mellan sina toner</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-26-vagorna-langs-virvelns-karna" style="color:#2563a8; text-decoration:underline;">Vattenvirvelns kärna bär vågor som ett rep</a>
+      </p>
+
+      <!-- ── NYTT PÅ FYSIKLABBET ────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Nytt på Fysiklabbet</div>
+      </div>
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;"><strong>Ett nytt nationellt prov med lösningar.</strong> <a href="https://fysiklabbet.se/np.html?id=ma2c-vt2018" style="color:#2563a8;">Matematik nivå 2c</a> har fått sitt andra fullständiga nationella prov: våren 2018, alla 26 uppgifter ur delprov B, C och D. Bland dem: ett träds höjd uppmätt med en spegel på marken, och Storsjöodjurets kurva skriven som en andragradsfunktion. Varje uppgift har både en textlösning som klickas fram steg för steg och en pennlösning där lösningen skrivs för hand på rutat papper.</p>
+
+      <a href="https://fysiklabbet.se/np.html?id=ma2c-vt2018#ma2c-vt2018:17" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-09-27-np-spegel.jpg" width="600" alt="Figur som visar hur ett träds höjd räknas ut med en spegel på marken: två likformiga trianglar, en liten blå vid personen och en stor rosa fram till trädet" style="display:block; width:100%; max-width:600px; height:auto; border-radius:8px; border:0; margin:0 0 6px;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:0 0 20px;">Trädets höjd räknas ut med en spegel och två likformiga trianglar. Klicka för att se hela lösningen.</div>
+
+      <!-- ── VECKANS TIPS ───────────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Veckans tips</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 8px;">Visste du att flera genomgångar har en interaktiv graf inbäddad direkt i texten? I <a href="https://fysiklabbet.se/katalog.html?id=ma1c-4.2" style="color:#2563a8;">Proportionalitet</a> drar du själv i k-värdet och ser den räta linjen ändra lutning direkt, med ekvationen uppdaterad under grafen i realtid. Bra att pröva själv innan man förklarar för klassen, eller att skicka som repetition.</p>
+
+      <!-- ── NÄSTA VECKA ────────────────────────────────────── -->
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Nästa vecka</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Ur nyhetskön väntar en historisk transport: forskare vid CERN har kört antiprotoner på lastbil i en flyttbar magnetisk fälla och lyckats hålla kvar dem i över en månad, världens första vägtransport av antimateria. Vi läser på.</p>
+
+      <!-- ── Avslut ─────────────────────────────────────────── -->
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:26px 0 4px;">Tack för att du tar dig tid att läsa. Vi hörs nästa söndag.</p>
+      <p style="font-family:Georgia,'Times New Roman',serif; font-size:17px; color:#0f1620; margin:0 0 30px;">/ Fysiklabbet</p>
+
+    </td></tr>
+
+    <!-- ── Sidfot ───────────────────────────────────────────── -->
+    <!-- {{UnsubscribeURL}}, {{SenderInfo}} och {{RewardsURL}} krävs av
+         EmailOctopus i egen HTML. Ta inte bort dem. -->
+    <tr><td align="center" style="padding:20px 8px 0;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); padding-bottom:12px;"><a href="https://fysiklabbet.se" style="color:rgba(15,22,32,0.5);">fysiklabbet.se</a> &middot; Interaktiva simuleringar, teori och övningar i fysik och matematik</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.5); padding-bottom:6px;">Du får det här brevet för att du prenumererar på Fysiklabbets nyhetsbrev. <a href="{{UnsubscribeURL}}" style="color:rgba(15,22,32,0.5); text-decoration:underline;">Avsluta prenumerationen</a>.</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.45); padding-bottom:6px;">{{SenderInfo}}</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:11px; color:rgba(15,22,32,0.4);"><a href="{{RewardsURL}}" style="color:rgba(15,22,32,0.4); text-decoration:underline;">Powered by EmailOctopus</a></div>
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>
+
+</body>
+</html>

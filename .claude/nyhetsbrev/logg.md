@@ -11,6 +11,88 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-09-27 — "Fem millimeter som gör tiden gå olika fort"
+- Status: UTKAST skrivet 2026-09-26 (lördag, inom 08.00-deadline, körd som
+  schemalagd molnroutine). Tänkt utskick söndag 2026-09-27 kl 06.00 svensk tid.
+  Brevperiod (nyheter) 2026-09-21 till 2026-09-26 (sex artiklar, alla sex
+  länkade, ingen utelämnad); sajtuppdateringar sedan förra brevets datum
+  2026-09-20 (`git log --since="2026-09-20 00:00" origin/main`, 49 commits).
+  `node .claude/verify-nyhetsbrev.js 2026-09-27` gav inga fel (6 artiklar
+  länkade, 1 sajtbild, ~534 ord). `node .claude/verify-sprak.js` gav en
+  varning (ganger-mindre) som rättades i utkastet innan leverans.
+- **Molnsessionens nätverkspolicy blockerade unpkg/cdn.jsdelivr/
+  cdn.tailwindcss/cdnjs** (403 i agentproxyn), samma som tidigare veckor.
+  np.html laddar React+Babel (unpkg) och marked+KaTeX (jsdelivr), så
+  react/react-dom/@babel-standalone/marked/katex installerades lokalt via
+  npm (npm-registret var öppet) och CDN-anropen fångades med page.route()
+  i Playwright (chromium på /opt/pw-browsers/chromium-1194, körd via
+  /opt/node22:s globala playwright-paket). Tailwind fylldes tomt.
+- **Ingen simulering/minisimulering lanserades denna vecka** (mager
+  sajtvecka på simuleringssidan) — bildkravet "minst en sajtbild" uppfylldes
+  i stället med en skärmdump av det nya nationella provet: np.html?los#
+  ma2c-vt2018:17 (uppgift 17, trädets höjd med en spegel), "Som text"-läget
+  förvalt via localStorage så hela lösningen visades utan klick, och
+  SVG-figuren med de färgade likformiga trianglarna klipptes ut med
+  Playwrights clip-screenshot (ingen manuell pixel-beskärning). Sparad som
+  nyheter/brev/2026-09-27-np-spegel.jpg (Pillow, installerat via pip i
+  sessionen, 972 px bred).
+- Nyheter: 2026-09-25-klockan-pa-nittonde-decimalen (hjälte, bedömd mest
+  häpnadsväckande: världens noggrannaste atomur, byggt kring en enda
+  lutetiumjon, så exakt att fem millimeters höjdskillnad mäts som
+  tidsdilatation), 2026-09-23-tonen-som-slocknar-i-ett-hopp (miniatyr:
+  första realtidsobservationen av ett kvantsprång hos ljud/fononer) +
+  2026-09-24-duvans-kompass-i-bruset (miniatyr: duvans föreslagna
+  inneröre-kompass dränks i termiskt brus). Läs även:
+  2026-09-21-vattnet-som-vagrar-bli-is (detta var förra brevets
+  [BREVTEASER], infriat första dagen i fönstret, nämnt utan att peka
+  tillbaka på att det var teasat), 2026-09-22-rontgenljus-som-glider,
+  2026-09-26-vagorna-langs-virvelns-karna (dagens artikel, publicerad
+  03:28 samma morgon, obligatorisk enligt uppdraget). Samtliga sex
+  artiklar i brevperioden listade, ingen utelämnad.
+- Nytt på sajten: nationella provet Ma 2c VT 2018 (alla 26 uppgifter,
+  textlösningar + pennlösningar) — UPDATES-posten är daterad 2026-09-20
+  17:39, efter att förra veckans brevutkast redan var skrivet (2026-09-19),
+  så den räknas till DENNA vecka. Bortvalt: ~45 övriga commits i fönstret
+  var polish/nya övningar i ma1c-2.9/2.10/2.11 (potensekvationer, enkla
+  andra-/tredjegradsekvationer, olikheter) som inte är nya avsnitt denna
+  vecka, samt två DOLDA utkast/-sidor (kopplingsschema-editor för lärare,
+  Rubiks kub-lösare) som är noindex/olänkade och alltså inte publika.
+- Bilder: 2026-09-27-klockan-hero.jpg (beskärning 1200×675 av befintlig
+  nyhetsbild), 2026-09-27-tonen-thumb.jpg och 2026-09-27-duvan-thumb.jpg
+  (kvadratiska 500×500-beskärningar av befintliga nyhetsbilder),
+  2026-09-27-np-spegel.jpg (ny sajtskärmdump, se ovan). Alla i
+  nyheter/brev/, beskurna/konverterade med Pillow.
+- Veckans tips: Interaktiva grafer i teorin (aldrig tipsat förut; NP-
+  lösningarna uteslöts som tips eftersom "Nytt på Fysiklabbet" redan
+  lyfte ett nytt NP-prov denna vecka, och Poddspelaren uteslöts eftersom
+  ingen nyhet i brevperioden faktiskt har ett poddavsnitt). Exempel:
+  Proportionalitet (`katalog.html?id=ma1c-4.2`). Daterat 2026-09-27 i
+  tips.md.
+- Teaser: nyhetskö-uppslaget om antiprotoner transporterade på lastbil i
+  en flyttbar magnetisk fälla (BASE-samarbetet vid CERN), avslutat med
+  "Vi läser på." Uppslaget låg redan överst i ko.md, märkt [BREVTEASER]
+  sedan 2026-09-17, ingen flytt behövdes. Kontrollerat att det inte redan
+  publicerats (grep på "antiproton" och "lastbil" i data/nyheter.js och
+  publicerat.md, enda träffen är en obesläktad mening om antilambda-
+  sönderfall i en annan artikel).
+- Förhandsvisning: hela brevet renderat till JPEG (680 px fönster,
+  motsvarande cirka 600 px i ett e-postklient-fönster) via headless
+  Chromium (Playwright) mot dev-servern, med bildernas URL:er tillfälligt
+  omdirigerade till localhost i en kopia under scratchpad (utkastfilen
+  behåller de absoluta fysiklabbet.se-adresserna). **SendUserFile-verktyget
+  var INTE tillgängligt i den här molnsessionens verktygslista** (bekräftat
+  med ToolSearch) — förhandsvisningen publicerades i stället som en privat
+  Artifact (bild inbäddad som data-URI) och länken gavs i överlämningen till
+  den anropande agenten/användaren.
+- ÅTERSTÅR för användaren: (1) granska utkastet/förhandsvisningen,
+  (2) köra `/brev-till-octopus` LOKALT (kräver Chrome-åtkomst, som
+  molnsessionen saknar) för att lägga upp kampanjen i EmailOctopus och
+  schemalägga den till söndag 06.00 svensk tid (tidszonen default:ar till
+  London, 06.00 där blir 07.00 svensk tid), (3) kontrollera att de fyra
+  nya bilderna i nyheter/brev/ syns live på fysiklabbet.se innan utskick
+  (pushade till main i den här sessionen, men GitHub Pages-deployen tar en
+  liten stund).
+
 ## 2026-09-20 — "Is som är glödhet, men ändå fast"
 - Status: UTKAST skrivet 2026-09-19 (lördag, inom 08.00-deadline, körd som
   schemalagd routine). Tänkt utskick söndag 2026-09-20 kl 06.00 svensk tid.

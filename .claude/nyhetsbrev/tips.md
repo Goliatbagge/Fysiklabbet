@@ -16,7 +16,7 @@ för någon månad sedan är en perfekt tipskandidat nu).
 | Exit tickets | katalog.html | Snabbförhör efter varje teoriavsnitt — några klick, direkt facit med förklaringar | Hela läsåret; "kolla att genomgången satt" | 2026-08-23 |
 | Övningar i tre nivåer | katalog.html | Varje avsnitt har övningsuppgifter N1–N3 med lösningar, kalibrerade mot kursprovsnivå | Inför prov | 2026-09-20 |
 | Handskrivna lösningar (växling penna/text) | katalog.html?id=fy2-1.4 | Lösningar som skrivs för hand steg för steg — och knappen som växlar till vanlig text | Alltid; bra på projektor | 2026-08-16 (nämnd i brevet) |
-| Interaktiva grafer i teorin | katalog.html | Dra i glidare och se grafen ändras live, med ekvationen uppdaterad under | När ett graf-tungt avsnitt är i säsong | – |
+| Interaktiva grafer i teorin | katalog.html | Dra i glidare och se grafen ändras live, med ekvationen uppdaterad under | När ett graf-tungt avsnitt är i säsong | 2026-09-27 |
 | Minisimuleringar i genomgångarna | katalog.html?id=fy2-1.5 | Klassrumsdemonstrationer körbara direkt i teoritexten (tomtebloss, centrifug) | Alltid; mörka årstider för tomteblosset | 2026-08-02 (teaser) |
 | Begreppsordlistan | begrepp.html | Svåra ord i nyheterna är klickbara; hela ordlistan A–Ö med enkla förklaringar | Alltid | 2026-08-02 |
 | Sökrutan | index.html | Sök över genomgångar, simuleringar, enhetskollar och begrepp — normaliserar å/ä/ö ("rorelsemangd" ger träff). Prov och minisimuleringar ingår INTE i indexet | Alltid | 2026-08-16 |

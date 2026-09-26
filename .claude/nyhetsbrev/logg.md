@@ -29,6 +29,11 @@ Format:
   "drygt" rättat till "närmare", 1/1,1e-19 s ≈ 288 miljarder år). Ny bild
   2026-09-27-kopplingsschema-verktyg.jpg efter symmetrifixen i editorn.
   Inklistrat, sparat, tredje testmejlet skickat.
+- Samma kväll: parallelldelen var onödigt bred med värden utskrivna
+  (strömpilens etikett krävde dubbel luft). Rättat i kopplingsschema.js,
+  ny bild 2026-09-27-kopplingsschema-editor.jpg (verktyg-bilden borttagen).
+  Inklistrat via raw.githubusercontent (commit-låst URL), sparat, fjärde
+  testmejlet skickat.
 - Status: UTKAST skrivet 2026-09-26 (lördag, inom 08.00-deadline, körd som
   schemalagd molnroutine). Tänkt utskick söndag 2026-09-27 kl 06.00 svensk tid.
   Brevperiod (nyheter) 2026-09-21 till 2026-09-26 (sex artiklar, alla sex

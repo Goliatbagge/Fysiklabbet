@@ -1731,7 +1731,7 @@ function moveDrag(e) {
   }
   drag.near = best && bd < 140 ? best : null;
   trashEl.classList.toggle('hot', overTrash);
-  ghostEl.classList.toggle('trash', overTrash);
+  ghostEl.classList.toggle('binned', overTrash);   // inte 'trash': den klassen är papperskorgens egen stil
   const key = target ? zoneKey(target) : (overTrash ? 'trash' : '');
   if (key === drag.key) { renderZones(); return; }
   drag.key = key;
@@ -1752,7 +1752,7 @@ function moveDrag(e) {
 function endDrag(cancelled) {
   const d = drag;
   drag = null;
-  ghostEl.classList.remove('on', 'placed', 'trash');
+  ghostEl.classList.remove('on', 'placed', 'binned');
   document.body.classList.remove('is-dragging');
   sheetEl.classList.remove('can-trash');
   trashEl.classList.remove('hot');

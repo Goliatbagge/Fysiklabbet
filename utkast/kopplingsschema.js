@@ -187,11 +187,25 @@ function groupThousands(num) {
   return (neg ? '−' : '') + g + (fp !== undefined ? ',' + fp : '');
 }
 // "20" → "20 Ω", "2.5" → "2,5 Ω", "20ohm" → "20 Ω", "1 k" → "1 kΩ", "?" → "?"
+// Enheter skrivs alltid med prefix- och enhetstecken: "20 milliohm",
+// "20 m ohm" och "20 mohm" blir 20 mΩ, "3 mikroampere" och "3 uA" blir
+// 3 µA. Grekiskt μ görs om till mikrotecknet µ, som resten av sidan använder.
+const PREFIX_WORDS = { mega: 'M', kilo: 'k', milli: 'm', mikro: 'µ', micro: 'µ', nano: 'n', piko: 'p', pico: 'p' };
+const UNIT_WORDS = { ohm: 'Ω', volt: 'V', ampere: 'A', amp: 'A', farad: 'F' };
+function normUnits(s) {
+  return String(s)
+    .replace(/μ/g, 'µ')
+    .replace(/(mega|kilo|milli|mikro|micro|nano|piko|pico)?\s*(ohm|volt|ampere|amp|farad)\b/gi,
+      (m0, p, u) => (p ? PREFIX_WORDS[p.toLowerCase()] : '') + UNIT_WORDS[u.toLowerCase()])
+    .replace(/\b(mega|kilo|milli|mikro|micro|nano|piko|pico)\b/gi, (m0, p) => PREFIX_WORDS[p.toLowerCase()])
+    .replace(/(\d)\s*u(?=[A-Za-zΩ]|$)/g, '$1µ')
+    .replace(/(\d\s*)([kMmµnp])\s+([ΩVAF])$/, '$1$2$3');
+}
 function formatValue(raw, unit, base) {
   let s = String(raw || '').trim();
   if (!s) return '';
   if (s === '?') return '?';
-  s = s.replace(/\s*(k|M|m)?ohm\b/gi, (m0, p) => (p || '') + 'Ω').replace(/(\d)\s*u(?=[A-Za-zΩ]|$)/g, '$1µ');
+  s = normUnits(s);
   const m = s.match(/^([−-]?\d[\d\s ]*(?:[.,]\d+)?)\s*(.*)$/);
   if (!m) return s;
   let num = m[1].replace(/[\s ]/g, '').replace('.', ',').replace('-', '−');
@@ -294,7 +308,7 @@ function sigFigs(numStr) {
 function parseQty(raw, unit) {
   let t = String(raw || '').trim();
   if (!t || t === '?') return null;
-  t = t.replace(/ohm/gi, 'Ω');
+  t = normUnits(t);
   const m = t.match(NUM_RE);
   if (!m) return null;
   const v = parseFloat(m[1].replace(/[\s\u00a0]/g, '').replace(',', '.').replace('−', '-'));

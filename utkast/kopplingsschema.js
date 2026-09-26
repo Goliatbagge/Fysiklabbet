@@ -1423,23 +1423,35 @@ function computeZones(d, L) {
   };
   for (const si of L.info.series) {
     const its = si.S.items;
-    if (its.length < 2 || !si.gaps.length) continue;
+    if (!its.length || !si.gaps.length) continue;
     const lsx = si.f.ox * si.L, lsy = si.f.oy * si.L;
+    // Hela ledarens längd (hörn till hörn). Den yttersta listen spänner över
+    // hela ledaren och ansluter i dess hörn, och ritas därför lika bred som
+    // ledaren; de inre listerna spänner bara över sina komponenter.
+    const g0 = si.gaps[0][0], g1 = si.gaps[si.gaps.length - 1][1];
+    const wireW = Math.hypot(g1[0] - g0[0], g1[1] - g0[1]);
+    const wmx = (g0[0] + g1[0]) / 2, wmy = (g0[1] + g1[1]) / 2;
     // Fritt avstånd till närmaste grannledning på vardera sidan. En gren i
     // en parallellkoppling har grannar på grenavståndet; annars finns gott
     // om plats. Listerna trycks ihop så att de aldrig hamnar på en granne.
     // Utrymmet mellan två grenar delas mitt itu: varje gren får sin halva.
     const [freeOut, freeIn] = freeFor(si.ctx.par, si.ctx.j);
-    const tiers = Math.min(its.length, SPAN_MAX) - 1;
+    // En ensam komponent får också en list över hela ledaren, en våning
+    // längre ut än komponentens egen parallellzon.
+    const nMin = its.length === 1 && its[0].kind === 'comp' ? 1 : 2;
+    const tiers = Math.max(1, Math.min(its.length, SPAN_MAX) - 1);
     const dist = (n, free) => {
-      const want = SPAN_D0 + SPAN_STEP * (n - 2) + 16, max = free / 2 - 6;
-      return want <= max ? want : 22 + (max - 22) * (n - 1) / tiers;
+      const t = Math.max(n, 2);
+      const want = SPAN_D0 + SPAN_STEP * (t - 2) + 16, max = free / 2 - 6;
+      return want <= max ? want : 22 + (max - 22) * (t - 1) / tiers;
     };
-    for (let n = 2; n <= Math.min(its.length, SPAN_MAX); n++) {
+    for (let n = nMin; n <= Math.min(its.length, SPAN_MAX); n++) {
       const Do = dist(n, freeOut), Di = dist(n, freeIn);
       for (let i = 0; i + n <= its.length; i++) {
+        const whole = n === its.length;
         const a = center(its[i]), b = center(its[i + n - 1]);
-        const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, w = Math.hypot(b[0] - a[0], b[1] - a[1]);
+        const mx = whole ? wmx : (a[0] + b[0]) / 2, my = whole ? wmy : (a[1] + b[1]) / 2;
+        const w = whole ? Math.max(24, wireW - 24) : Math.hypot(b[0] - a[0], b[1] - a[1]);
         if (Do >= 30) Z.push({ kind: 'span', sid: si.S.id, from: i, n, side: 'out', x: mx + lsx * Do, y: my + lsy * Do, w, vert: si.vert });
         if (Di >= 30) Z.push({ kind: 'span', sid: si.S.id, from: i, n, side: 'in', x: mx - lsx * Di, y: my - lsy * Di, w, vert: si.vert });
       }

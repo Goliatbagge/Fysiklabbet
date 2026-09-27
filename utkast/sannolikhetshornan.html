@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Sannolikhetshörnan: slå tärning, dra kort och snurra lyckohjul — Fysiklabbet</title>
+<meta name="description" content="Undersök sannolikheter med riktiga slumpförsök i 3D: kasta tärningar, dra kort ur en kortlek, dra kulor ur en urna och snurra ett lyckohjul. Gratis verktyg för matematikundervisningen.">
+<link rel="canonical" href="https://fysiklabbet.se/utkast/sannolikhetshornan.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fysiklabbet">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:title" content="Sannolikhetshörnan: tärningar, kortlek, urna och lyckohjul">
+<meta property="og:description" content="Undersök sannolikheter med riktiga slumpförsök i 3D: kasta tärningar, dra kort ur en kortlek, dra kulor ur en urna och snurra ett lyckohjul. Gratis verktyg för matematikundervisningen.">
+<meta property="og:url" content="https://fysiklabbet.se/utkast/sannolikhetshornan.html">
+<meta property="og:image" content="https://fysiklabbet.se/utkast/og-sannolikhetshornan.jpg">
+<meta property="og:image:alt" content="Tre tärningar på en filtklädd tärningsbricka i 3D, med kastets summa överst">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sannolikhetshörnan: tärningar, kortlek, urna och lyckohjul">
+<meta name="twitter:description" content="Undersök sannolikheter med riktiga slumpförsök i 3D: kasta tärningar, dra kort ur en kortlek, dra kulor ur en urna och snurra ett lyckohjul. Gratis verktyg för matematikundervisningen.">
+<meta name="twitter:image" content="https://fysiklabbet.se/utkast/og-sannolikhetshornan.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Sannolikhetshörnan",
+   "alternateName": [
+    "Slå tärning online",
+    "Dra kort ur en kortlek online",
+    "Lyckohjul online"
+   ],
+   "url": "https://fysiklabbet.se/utkast/sannolikhetshornan.html",
+   "description": "Undersök sannolikheter med riktiga slumpförsök i 3D: kasta tärningar, dra kort ur en kortlek, dra kulor ur en urna och snurra ett lyckohjul. Gratis verktyg för matematikundervisningen.",
+   "applicationCategory": "EducationalApplication",
+   "operatingSystem": "Webbläsare",
+   "inLanguage": "sv",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "SEK"
+   },
+   "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "teacher"
+   },
+   "featureList": [
+    "Tärningar med 4, 6, 8, 10, 12 eller 20 sidor samt mynt",
+    "Egna specialtärningar där varje sida kan redigeras",
+    "Kortlek där färger, valörer och jokrar väljs fritt",
+    "Urna med färgade kulor i valfritt antal",
+    "Lyckohjul med sektorer av valfri storlek",
+    "Dragning med och utan återläggning",
+    "Stapeldiagram som jämför relativ frekvens med sannolikhet",
+    "Snabbsimulering av 10, 100 eller 1 000 försök"
+   ],
+   "publisher": {
+    "@type": "Organization",
+    "name": "Fysiklabbet",
+    "url": "https://fysiklabbet.se/"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://fysiklabbet.se/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Sannolikhetshörnan",
+     "item": "https://fysiklabbet.se/utkast/sannolikhetshornan.html"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Är tärningarna i verktyget rättvisa?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ja. Tärningarna kastas med en fysiksimulering där de studsar mot varandra och mot brickans kanter, och alla sidor har samma form. Därför är alla sidor lika sannolika, precis som hos en riktig tärning. När du simulerar snabbt dras utfallen i stället direkt med en slumptalsgenerator."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Hur stor är sannolikheten att få summan 7 med två tärningar?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Två sexsidiga tärningar kan landa på 36 lika sannolika sätt, och sex av dem ger summan 7: 1 och 6, 2 och 5, 3 och 4, 4 och 3, 5 och 2 samt 6 och 1. Sannolikheten är alltså 6 av 36, det vill säga en sjättedel. Summan 7 är den vanligaste summan med två tärningar."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Vad är skillnaden mellan dragning med och utan återläggning?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Med återläggning läggs kortet eller kulan tillbaka efter varje dragning, så sannolikheterna är desamma inför varje ny dragning. Utan återläggning blir det färre kvar att dra bland, och sannolikheten för nästa dragning beror på vad som redan dragits. Verktyget visar sannolikheten inför nästa dragning hela tiden."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Varför stämmer inte den relativa frekvensen med sannolikheten?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Vid få försök slumpar det sig ofta så att vissa utfall blir vanligare än andra. Ju fler försök du gör, desto närmare hamnar den relativa frekvensen den teoretiska sannolikheten. Det kallas de stora talens lag. Prova att simulera 1 000 försök och jämför staplarna med de röda strecken."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Kostar verktyget något?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nej. Sannolikhetshörnan är gratis och kräver inget konto. Dina inställningar sparas i webbläsaren."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<link rel="stylesheet" href="../styles-laborans.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&family=Poppins:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+    "cannon-es": "https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"
+  }
+}
+</script>
+<style>
+:root {
+  --bg: #f3eee4;
+  --bg2: #ebe4d4;
+  --panel: #fffdf9;
+  --ink: #0f1620;
+  --soft: #3f4a5c;
+  --muted: #69655c;
+  --line: rgba(15, 22, 32, 0.10);
+  --line2: rgba(15, 22, 32, 0.20);
+  --accent: #c8324a;
+  --accent-soft: rgba(200, 50, 74, 0.08);
+  --blue: #1c3d6b;
+  --felt: #1d5a43;
+  --shadow: 0 1px 2px rgba(15, 22, 32, 0.05), 0 12px 32px -18px rgba(15, 22, 32, 0.28);
+  --sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --serif: "Instrument Serif", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background:
+    radial-gradient(900px 500px at 12% -10%, rgba(200, 50, 74, 0.06), transparent 60%),
+    radial-gradient(900px 600px at 100% 0%, rgba(28, 61, 107, 0.06), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select { font-family: inherit; }
+.lab-header { background: var(--bg); }
+.lab-nav-dd-trigger.aktiv { border-bottom-color: var(--lab-accent); }
+
+/* ---------- Sidhuvud för verktyget ---------- */
+.top { display: flex; align-items: center; gap: 22px; padding: 14px 22px 12px; flex-wrap: wrap; }
+.titles { flex: 1; min-width: 240px; }
+.titles h1 { font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1; margin: 0; letter-spacing: -.01em; }
+.titles h1 em { color: var(--accent); }
+.titles p { margin: 5px 0 0; color: var(--soft); font-size: 13.5px; }
+.modes { display: inline-flex; padding: 4px; gap: 3px; border-radius: 14px; background: var(--bg2); border: 1px solid var(--line); }
+.mode { display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px 0 11px; border: 0; border-radius: 10px; background: transparent; color: var(--soft); font: 600 13.5px var(--sans); cursor: pointer; transition: background .15s, color .15s, box-shadow .15s; white-space: nowrap; }
+.mode:hover { color: var(--ink); }
+.mode svg { flex: none; }
+.mode[aria-pressed="true"] { background: var(--panel); color: var(--ink); box-shadow: 0 1px 2px rgba(15,22,32,.08), 0 6px 14px -8px rgba(15,22,32,.35); }
+.mode[aria-pressed="true"] svg { color: var(--accent); }
+.ibtn { width: 38px; height: 38px; flex: none; border-radius: 10px; border: 1px solid var(--line2); background: var(--panel); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: border-color .15s, transform .15s; }
+.ibtn:hover { border-color: var(--ink); }
+.ibtn:active { transform: scale(.96); }
+.ibtn .av { display: none; }
+.ibtn.tyst .pa { display: none; }
+.ibtn.tyst .av { display: block; }
+.topright { display: flex; gap: 8px; align-items: center; }
+
+/* ---------- Arbetsytan ---------- */
+.tool { height: calc(100vh - var(--hdr, 80px)); min-height: 640px; display: flex; flex-direction: column; }
+.tool:fullscreen { height: 100vh; background: var(--bg); }
+.app { flex: 1; min-height: 0; display: grid; grid-template-columns: 286px minmax(0, 1fr) 308px; gap: 14px; padding: 0 22px 20px; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); overflow: auto; scrollbar-width: thin; padding: 16px 16px 18px; }
+.eyebrow { font: 500 10px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.grp + .grp { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+.grp-h { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 9px; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 7px 0; font-size: 13.5px; color: var(--soft); }
+.row b { color: var(--ink); font-weight: 600; }
+.stepper { display: inline-flex; align-items: center; border: 1px solid var(--line2); border-radius: 10px; background: #fff; overflow: hidden; flex: none; }
+.stepper button { width: 30px; height: 30px; border: 0; background: none; color: var(--ink); font-size: 17px; line-height: 1; cursor: pointer; }
+.stepper button:hover { background: var(--bg); }
+.stepper button:disabled { opacity: .3; cursor: default; background: none; }
+.stepper output { min-width: 30px; text-align: center; font: 600 14px var(--sans); color: var(--ink); font-variant-numeric: tabular-nums; }
+.seg { display: flex; flex-wrap: wrap; gap: 5px; }
+.seg button { min-width: 38px; height: 32px; padding: 0 9px; border-radius: 9px; border: 1px solid var(--line2); background: #fff; color: var(--soft); font: 600 13px var(--sans); cursor: pointer; transition: border-color .15s, color .15s, background .15s; }
+.seg button:hover { border-color: var(--ink); color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.seg.suits button { font-size: 18px; min-width: 44px; }
+.seg.suits button.rod { color: #c0283a; }
+.seg.suits button.rod[aria-pressed="true"] { background: #c0283a; border-color: #c0283a; color: #fff; }
+.seg.ranks button { min-width: 34px; padding: 0 6px; }
+.btn { height: 34px; padding: 0 13px; border-radius: 10px; border: 1px solid var(--line2); background: #fff; color: var(--ink); font: 600 13px var(--sans); cursor: pointer; display: inline-flex; align-items: center; gap: 7px; transition: border-color .15s, transform .15s; }
+.btn:hover { border-color: var(--ink); }
+.btn:active { transform: scale(.97); }
+.btn:disabled { opacity: .35; cursor: default; transform: none; }
+.btn.liten { height: 28px; padding: 0 10px; font-size: 12px; border-radius: 8px; }
+.btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.tgl { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 10px 0 2px; font-size: 13.5px; color: var(--soft); cursor: pointer; user-select: none; }
+.tgl input { position: absolute; opacity: 0; pointer-events: none; }
+.tgl .sw { width: 38px; height: 22px; flex: none; border-radius: 99px; background: rgba(15,22,32,.18); position: relative; transition: background .18s; }
+.tgl .sw::after { content: ''; position: absolute; left: 3px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform .18s; }
+.tgl input:checked + .sw { background: var(--accent); }
+.tgl input:checked + .sw::after { transform: translateX(16px); }
+.tgl input:focus-visible + .sw { outline: 2px solid var(--blue); outline-offset: 2px; }
+.note { font-size: 12.5px; line-height: 1.5; color: var(--muted); margin: 8px 0 0; }
+
+/* Tärningslistan */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 10px 0 6px; border-radius: 9px; border: 1px solid var(--line2); background: #fff; font: 600 12.5px var(--sans); color: var(--ink); cursor: pointer; }
+.chip:hover { border-color: var(--ink); }
+.chip[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.chip i { width: 18px; height: 18px; border-radius: 5px; display: grid; place-items: center; font: 700 9px var(--sans); font-style: normal; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
+.editor { margin-top: 12px; padding: 12px; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); }
+.editor h3 { margin: 0 0 8px; font: 600 13.5px var(--sans); }
+.swatches { display: flex; flex-wrap: wrap; gap: 6px; }
+.swatch { width: 26px; height: 26px; border-radius: 8px; border: 2px solid transparent; box-shadow: inset 0 0 0 1px rgba(0,0,0,.18); cursor: pointer; padding: 0; }
+.swatch[aria-pressed="true"] { border-color: var(--ink); }
+.faces { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 6px; margin-top: 10px; }
+.face { display: flex; align-items: center; gap: 4px; background: #fff; border: 1px solid var(--line2); border-radius: 9px; padding: 3px 4px 3px 7px; }
+.face small { font: 500 9.5px var(--mono); color: var(--muted); width: 14px; flex: none; }
+.face input { width: 100%; min-width: 0; border: 0; outline: 0; font: 600 14px var(--sans); color: var(--ink); background: none; padding: 3px 0; }
+.face button { width: 18px; height: 18px; flex: none; border-radius: 5px; border: 0; cursor: pointer; box-shadow: inset 0 0 0 1px rgba(0,0,0,.2); padding: 0; }
+.face:focus-within { border-color: var(--accent); }
+
+/* Urna och lyckohjul: listrader */
+.lista { display: flex; flex-direction: column; gap: 6px; }
+.lrad { display: flex; align-items: center; gap: 8px; padding: 5px 6px 5px 8px; border-radius: 11px; border: 1px solid var(--line); background: #fff; }
+.lrad .dot { width: 20px; height: 20px; border-radius: 50%; flex: none; box-shadow: inset -3px -4px 6px rgba(0,0,0,.22), inset 0 0 0 1px rgba(0,0,0,.12); }
+.lrad .namn { flex: 1; min-width: 0; font-size: 13.5px; font-weight: 600; }
+.lrad input[type="text"] { flex: 1; min-width: 0; border: 0; outline: 0; font: 600 13.5px var(--sans); background: none; color: var(--ink); padding: 4px 0; }
+.lrad .farg { width: 24px; height: 24px; flex: none; border: 0; padding: 0; border-radius: 7px; cursor: pointer; background: none; }
+.lrad .farg::-webkit-color-swatch-wrapper { padding: 0; }
+.lrad .farg::-webkit-color-swatch { border: 0; border-radius: 7px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.2); }
+.lrad .farg::-moz-color-swatch { border: 0; border-radius: 7px; }
+.lrad .x { width: 24px; height: 24px; border: 0; background: none; color: var(--muted); cursor: pointer; border-radius: 7px; display: grid; place-items: center; flex: none; }
+.lrad .x:hover { color: var(--accent); background: var(--accent-soft); }
+.lrad .stepper button { width: 26px; height: 26px; font-size: 15px; }
+.lrad .stepper output { min-width: 24px; font-size: 13px; }
+.addcol { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.addcol button { width: 24px; height: 24px; border-radius: 50%; border: 0; cursor: pointer; box-shadow: inset -3px -4px 6px rgba(0,0,0,.22), inset 0 0 0 1px rgba(0,0,0,.12); transition: transform .12s; }
+.addcol button:hover { transform: scale(1.12); }
+
+/* ---------- Scenen ---------- */
+.stage { position: relative; min-width: 0; border-radius: 18px; overflow: hidden; background: radial-gradient(120% 90% at 50% 30%, #2a211a 0%, #16120e 60%, #0e0b09 100%); box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,.04); touch-action: none; user-select: none; -webkit-user-select: none; }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; outline: none; }
+.stage.pek canvas { cursor: pointer; }
+.stage.greppa canvas { cursor: grabbing; }
+.stage-top { position: absolute; left: 0; right: 0; top: 14px; display: flex; justify-content: center; pointer-events: none; padding: 0 64px; }
+.utfall { display: inline-flex; align-items: center; gap: 12px; max-width: 100%; padding: 9px 20px 10px; border-radius: 16px; background: rgba(18, 14, 11, .72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 240, 220, .12); color: #fbf3e6; box-shadow: 0 18px 40px -18px rgba(0,0,0,.8); opacity: 0; transform: translateY(-10px) scale(.97); transition: opacity .28s, transform .28s; flex-wrap: wrap; justify-content: center; }
+.utfall.on { opacity: 1; transform: none; }
+.utfall .u-lbl { font: 500 10px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: rgba(251, 243, 230, .6); }
+.utfall .u-val { font-family: var(--serif); font-size: 34px; line-height: 1; }
+.utfall .u-list { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.utfall .u-chip { font: 600 15px Poppins, var(--sans); padding: 3px 9px; border-radius: 8px; background: rgba(255, 240, 220, .1); display: inline-flex; align-items: center; gap: 6px; }
+.utfall .u-chip i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.utfall .u-sum { font-family: var(--serif); font-size: 30px; line-height: 1; }
+.utfall .u-sum small { font: 500 10px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: rgba(251,243,230,.6); margin-right: 8px; vertical-align: 6px; }
+.utfall .rod { color: #ff8f9b; }
+.stage-bottom { position: absolute; left: 0; right: 0; bottom: 16px; display: flex; justify-content: center; align-items: center; gap: 10px; pointer-events: none; padding: 0 12px; }
+.go { pointer-events: auto; height: 52px; padding: 0 26px 0 20px; border-radius: 99px; border: 0; background: linear-gradient(180deg, #d63d56, #b52740); color: #fff; font: 700 16px var(--sans); letter-spacing: .01em; display: inline-flex; align-items: center; gap: 11px; cursor: pointer; box-shadow: 0 16px 34px -14px rgba(200, 50, 74, .9), inset 0 1px 0 rgba(255,255,255,.25); transition: transform .15s, filter .15s, opacity .2s; }
+.go:hover { filter: brightness(1.07); }
+.go:active { transform: scale(.97); }
+.go:disabled { opacity: .45; cursor: default; transform: none; filter: grayscale(.4); }
+.go kbd { font: 500 10px var(--mono); letter-spacing: .08em; padding: 3px 6px; border-radius: 6px; background: rgba(255,255,255,.18); margin-left: 4px; }
+.sub-go { pointer-events: auto; height: 40px; padding: 0 15px; border-radius: 99px; border: 1px solid rgba(255, 240, 220, .18); background: rgba(18, 14, 11, .62); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #f3e9da; font: 600 13px var(--sans); cursor: pointer; display: inline-flex; align-items: center; gap: 7px; transition: background .15s, opacity .2s; }
+.sub-go[hidden], .stage-btn[hidden] { display: none; }
+.sub-go:hover { background: rgba(40, 32, 25, .8); }
+.sub-go:disabled { opacity: .4; cursor: default; }
+.stage-btn { position: absolute; top: 14px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255, 240, 220, .16); background: rgba(18, 14, 11, .6); color: #f3e9da; display: grid; place-items: center; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: background .15s; }
+.stage-btn:hover { background: rgba(40, 32, 25, .85); }
+.stage-btn.fs { left: 14px; }
+.stage-btn.vy { right: 14px; }
+.stage-hint { position: absolute; left: 16px; bottom: 22px; font: 500 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: rgba(243, 233, 218, .42); pointer-events: none; }
+.stage-msg { position: absolute; inset: 0; display: none; place-items: center; text-align: center; padding: 30px; color: #f3e9da; font-size: 15px; line-height: 1.6; }
+.stage.fel .stage-msg { display: grid; }
+.laddar { position: absolute; inset: 0; display: grid; place-items: center; color: rgba(243,233,218,.6); font: 500 11px var(--mono); letter-spacing: .16em; text-transform: uppercase; transition: opacity .4s; pointer-events: none; }
+.stage.klar .laddar { opacity: 0; }
+
+/* ---------- Resultatpanelen ---------- */
+.res-last { display: flex; flex-wrap: wrap; gap: 5px; min-height: 30px; margin-top: 4px; }
+.res-last span { font: 600 12.5px Poppins, var(--sans); height: 26px; min-width: 26px; padding: 0 7px; border-radius: 7px; border: 1px solid var(--line); background: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 5px; color: var(--ink); animation: in .3s ease-out; }
+.res-last span:first-child { border-color: var(--accent); background: var(--accent-soft); }
+.res-last span i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
+.res-last .tom { font-size: 12.5px; color: var(--muted); border: 0; background: none; padding: 0; font-family: var(--sans); font-weight: 400; animation: none; }
+@keyframes in { from { opacity: 0; transform: scale(.8); } }
+.antal { display: flex; align-items: baseline; gap: 8px; margin: 14px 0 6px; }
+.antal b { font-family: var(--serif); font-weight: 400; font-size: 30px; line-height: 1; font-variant-numeric: tabular-nums; }
+.antal span { font-size: 13px; color: var(--soft); }
+.chartwrap { position: relative; margin-top: 6px; }
+#chart { display: block; width: 100%; height: 190px; overflow: visible; font-family: Poppins, var(--sans); }
+#chart .bar { fill: #2b4f86; }
+#chart .bar.hl { fill: #1c3d6b; }
+#chart .teori { stroke: var(--accent); stroke-width: 2.4; stroke-linecap: butt; }
+#chart .axel { stroke: rgba(15,22,32,.35); stroke-width: 1; }
+#chart .grid { stroke: rgba(15,22,32,.08); stroke-width: 1; }
+#chart text { font-size: 10.5px; fill: var(--soft); }
+#chart .ytxt { font-size: 9.5px; fill: var(--muted); font-family: var(--mono); }
+#chart .hit { fill: transparent; cursor: pointer; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--soft); margin-top: 6px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend .lb { width: 12px; height: 10px; background: #2b4f86; border-radius: 2px; }
+.legend .lt { width: 14px; height: 0; border-top: 2.4px solid var(--accent); }
+.info { min-height: 58px; margin-top: 10px; padding: 9px 11px; border-radius: 11px; background: var(--bg); font-size: 13px; line-height: 1.5; color: var(--soft); }
+.info b { color: var(--ink); }
+.info .tom { color: var(--muted); }
+.frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; line-height: 1.05; font-size: .92em; margin: 0 2px; font-variant-numeric: tabular-nums; }
+.frac > span:first-child { border-bottom: 1.4px solid currentColor; padding: 0 3px 1px; }
+.frac > span:last-child { padding: 1px 3px 0; }
+.nasta { margin-top: 4px; }
+.nasta table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.nasta td { padding: 5px 0; border-bottom: 1px solid var(--line); color: var(--soft); vertical-align: middle; }
+.nasta td:last-child { text-align: right; color: var(--ink); white-space: nowrap; }
+.nasta td i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; margin-right: 7px; vertical-align: -1px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
+.nasta .dec { color: var(--muted); font-size: 12px; margin-left: 4px; }
+.quick { display: flex; gap: 6px; margin-top: 9px; }
+.quick button { flex: 1; }
+
+/* ---------- Mindre skärmar ---------- */
+@media (max-width: 1240px) {
+  .app { grid-template-columns: 262px minmax(0, 1fr) 282px; }
+  .mode { padding: 0 11px 0 9px; }
+}
+@media (max-width: 1040px) {
+  .tool { height: auto; min-height: 0; }
+  .app { grid-template-columns: 1fr 1fr; grid-template-areas: "stage stage" "set res"; }
+  .stage { grid-area: stage; height: 62vh; min-height: 380px; }
+  #settings { grid-area: set; }
+  #results { grid-area: res; }
+  .panel { overflow: visible; }
+}
+@media (max-width: 700px) {
+  .top { padding: 12px 14px 10px; gap: 12px; }
+  .titles h1 { font-size: 28px; }
+  .modes { width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .mode { flex: 1 1 auto; justify-content: center; padding: 0 6px; gap: 5px; font-size: 12.5px; height: 36px; }
+  .mode svg { width: 16px; height: 16px; }
+  .mode .lang { display: none; }
+  .app { grid-template-columns: 1fr; grid-template-areas: "stage" "set" "res"; padding: 0 12px 16px; }
+  .stage { height: 58vh; min-height: 330px; border-radius: 14px; }
+  .go { height: 48px; padding: 0 20px 0 16px; font-size: 15px; }
+  .go kbd, .stage-hint { display: none; }
+  .utfall .u-val { font-size: 28px; }
+}
+
+/* ---------- Texten om verktyget ---------- */
+.seo { border-top: 1px solid var(--line2); background: var(--panel); }
+.seo-inner { max-width: 860px; margin: 0 auto; padding: 56px 24px 72px; color: var(--soft); font-size: 16.5px; line-height: 1.7; }
+.seo h2 { font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.15; color: var(--ink); margin: 52px 0 14px; letter-spacing: -.01em; }
+.seo h2:first-of-type { margin-top: 10px; }
+.seo h3 { font: 600 17px var(--sans); color: var(--ink); margin: 26px 0 6px; }
+.seo p { margin: 0 0 14px; }
+.seo b { color: var(--ink); font-weight: 600; }
+.seo-lede { font-size: 18px; color: var(--ink); }
+.seo-steps { margin: 0; padding-left: 22px; }
+.seo-steps li { margin-bottom: 10px; padding-left: 4px; }
+.faq details { border-bottom: 1px solid var(--line); padding: 4px 0; }
+.faq summary { cursor: pointer; list-style: none; padding: 12px 30px 12px 0; position: relative; font-weight: 600; color: var(--ink); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; position: absolute; right: 4px; top: 8px; font-size: 22px; font-weight: 400; color: var(--accent); }
+.faq details[open] summary::after { content: '−'; }
+.faq details p { margin: 0 0 14px; }
+.seo-links { margin: 0; padding-left: 20px; }
+.seo-links a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.seo-links a:hover { color: var(--accent); }
+.seo-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; padding: 10px 16px; border-radius: 11px; background: var(--ink); color: #fff; text-decoration: none; font: 600 14px var(--sans); }
+.seo-cta:hover { background: #22324a; }
+.sidfot { text-align: center; padding: 26px 16px 40px; font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.sidfot a { color: inherit; text-decoration: none; margin: 0 8px; }
+.sidfot a:hover { color: var(--ink); }
+@media (max-width: 600px) {
+  .seo-inner { padding: 40px 18px 56px; font-size: 16px; }
+  .seo h2 { font-size: 27px; }
+}
+</style>
+</head>
+<body>
+<div class="lab-header">
+  <div class="lab-header-inner">
+    <a class="lab-logo" href="../index.html">
+      <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+        <g transform="rotate(-24 18 18)">
+          <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+          <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+        </g>
+        <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+      </svg>
+      <span class="lab-logo-text">Fysiklabbet</span>
+    </a>
+    <nav class="lab-nav" aria-label="Huvudnavigation">
+      <a href="../index.html">Start</a>
+      <div class="lab-nav-dd">
+        <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">Ämne <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+        <div class="lab-nav-dd-menu">
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Fysik <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="../katalog.html#fy1">Nivå 1</a>
+              <a href="../katalog.html#fy2">Nivå 2</a>
+            </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Matematik <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="../katalog.html#ma1b">Nivå 1b</a>
+              <a href="../katalog.html#ma1c">Nivå 1c</a>
+              <a href="../katalog.html#ma2b">Nivå 2b</a>
+              <a href="../katalog.html#ma2c">Nivå 2c</a>
+            </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Matematik – fortsättning <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="../katalog.html#ma3c">Nivå 1c</a>
+              <a href="../katalog.html#ma4">Nivå 2</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="../simuleringar.html">Simuleringar</a>
+      <a href="../np.html">Nationella prov</a>
+      <div class="lab-nav-dd">
+        <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">Verktyg <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+        <div class="lab-nav-dd-menu">
+          <a href="../kopplingsschema.html">Kopplingsschema</a>
+        </div>
+      </div>
+      <a href="../nyheter.html">Fysiknyheter</a>
+      <a href="../om.html">Om</a>
+      <a href="../kontakt.html">Kontakt</a>
+    </nav>
+  </div>
+</div>
+
+<section class="tool" id="verktyget" aria-label="Sannolikhetshörnan">
+<header class="top">
+  <div class="titles">
+    <h1>Sannolikhets<em>hörnan</em></h1>
+    <p>Kasta tärningar, dra kort och kulor, snurra lyckohjulet. Varje försök räknas och jämförs med sannolikheten.</p>
+  </div>
+  <div class="modes" role="group" aria-label="Slumpförsök">
+    <button class="mode" data-mode="tarningar" aria-pressed="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="8.5" cy="8.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg><span>Tärningar</span></button>
+    <button class="mode" data-mode="kort" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="7" y="3" width="13" height="17" rx="2.5" transform="rotate(8 13.5 11.5)"/><path d="M4.6 6.4 3.6 17.2a2.4 2.4 0 0 0 2.1 2.6l5 .5"/></svg><span>Kortlek</span></button>
+    <button class="mode" data-mode="urna" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M6 4h12M7 4v2.5c-1.9 1.4-3 3.6-3 6.2C4 17 7.5 20.5 12 20.5S20 17 20 12.7c0-2.6-1.1-4.8-3-6.2V4"/><circle cx="10" cy="15" r="1.6" fill="currentColor" stroke="none"/><circle cx="14.2" cy="15.6" r="1.6" fill="currentColor" stroke="none"/><circle cx="12.3" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg><span>Urna</span></button>
+    <button class="mode" data-mode="hjul" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><circle cx="12" cy="13" r="8.5"/><path d="M12 13V4.5M12 13l7.4 4.2M12 13l-7.4 4.2"/><path d="M10 2h4l-2 3z" fill="currentColor"/></svg><span>Lycko<span class="lang">hjul</span></span></button>
+  </div>
+  <div class="topright">
+    <button class="ibtn" id="ljudBtn" title="Ljud av eller på" aria-label="Ljud av eller på"><svg class="pa" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg><svg class="av" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6M21 9l-5 6"/></svg></button>
+  </div>
+</header>
+
+<main class="app">
+  <aside class="panel" id="settings" aria-label="Inställningar"></aside>
+  <section class="stage" id="stage" aria-label="Scenen">
+    <canvas id="c3d" tabindex="0" aria-label="Tredimensionell scen med slumpförsöket"></canvas>
+    <div class="laddar">Dukar bordet</div>
+    <div class="stage-top"><div class="utfall" id="utfall" role="status" aria-live="polite"></div></div>
+    <button class="stage-btn fs" id="fsBtn" title="Helskärm" aria-label="Helskärm"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg></button>
+    <button class="stage-btn vy" id="vyBtn" title="Återställ vyn" aria-label="Återställ vyn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+    <div class="stage-bottom">
+      <button class="sub-go" id="subGo" hidden></button>
+      <button class="go" id="goBtn"><span id="goTxt">Kasta tärningarna</span><kbd>Mellanslag</kbd></button>
+    </div>
+    <div class="stage-hint">Dra för att se dig omkring</div>
+    <div class="stage-msg" id="stageMsg">Scenen kunde inte visas, eftersom webbläsaren inte stöder 3D-grafik (WebGL).<br>Statistiken och snabbsimuleringen fungerar ändå.</div>
+  </section>
+  <aside class="panel" id="results" aria-label="Resultat"></aside>
+</main>
+</section>
+
+<article class="seo" id="om-verktyget">
+  <div class="seo-inner">
+    <h2>Slå tärning, dra kort och snurra lyckohjul online</h2>
+    <p class="seo-lede">Sannolikhetshörnan är ett gratis verktyg för att undersöka sannolikheter med riktiga slumpförsök i 3D. Kasta tärningar på en filtklädd bricka, dra kort ur en kortlek, dra färgade kulor ur en urna och snurra ett lyckohjul som på tivoli. Varje utfall räknas, och stapeldiagrammet visar hur den relativa frekvensen närmar sig sannolikheten ju fler försök du gör.</p>
+    <a class="seo-cta" href="#verktyget">Gör ett slumpförsök</a>
+
+    <h2>Så använder du Sannolikhetshörnan</h2>
+    <ol class="seo-steps">
+      <li><b>Välj slumpförsök</b> överst: tärningar, kortlek, urna eller lyckohjul.</li>
+      <li><b>Ställ in försöket</b> i panelen till vänster, till exempel hur många tärningar som kastas, vilka kort som ingår i leken eller hur många kulor av varje färg urnan innehåller.</li>
+      <li><b>Gör ett försök</b> med den röda knappen eller mellanslag. Du kan också klicka direkt på tärningsbrickan, kortleken, urnan eller hjulet, och hjulet går att snurra genom att dra i det.</li>
+      <li><b>Jämför staplarna med de röda strecken</b> till höger. Staplarna är den relativa frekvensen och strecken sannolikheten. Klicka på en stapel för att se värdena som bråk och decimaltal.</li>
+      <li><b>Simulera snabbt</b> 10, 100 eller 1 000 försök för att se de stora talens lag i arbete.</li>
+    </ol>
+
+    <h2>Fyra slumpförsök</h2>
+    <h3>Tärningar och mynt</h3>
+    <p>Kasta upp till tolv tärningar på en gång, med 4, 6, 8, 10, 12 eller 20 sidor, eller singla slant med ett mynt. Med flera tärningar kan diagrammet visa summan, och då syns det tydligt att summan 7 är vanligast med två sexsidiga tärningar. Klicka på en tärning i listan för att göra en specialtärning: skriv vad som ska stå på varje sida och ge sidorna egna färger.</p>
+    <h3>Kortlek</h3>
+    <p>Välj vilka färger och valörer som ska ingå i leken och om den ska ha jokrar. Dra ett eller flera kort åt gången, med eller utan återläggning. Utan återläggning blir leken mindre för varje kort, och tabellen visar hur sannolikheterna inför nästa dragning ändras.</p>
+    <h3>Urna med kulor</h3>
+    <p>Fyll urnan med så många kulor av varje färg som du vill och dra en eller flera kulor. Klassiska uppgifter om röda och blå kulor blir på så sätt ett försök som eleverna kan upprepa hur många gånger som helst.</p>
+    <h3>Lyckohjul</h3>
+    <p>Bestäm hur många sektorer hjulet har, vad som står i dem och hur stora de är. Sannolikheten att hjulet stannar i en sektor är lika stor som sektorns andel av hela varvet, så ett hjul med olika stora sektorer visar att utfallen inte behöver vara lika sannolika.</p>
+
+    <h2>Relativ frekvens och sannolikhet</h2>
+    <p>Den relativa frekvensen är antalet gånger ett utfall inträffat delat med antalet försök. Sannolikheten är det värde den relativa frekvensen närmar sig när försöken blir många. Vid tio kast med en tärning kan en sexa mycket väl komma fyra gånger, men vid tusen kast hamnar andelen sexor nära en sjättedel. Därför kan en sannolikhet både räknas ut teoretiskt, med gynnsamma utfall delat med möjliga utfall, och uppskattas experimentellt.</p>
+
+    <h2>Vanliga frågor</h2>
+    <div class="faq">
+      <details><summary>Är tärningarna i verktyget rättvisa?</summary><p>Ja. Tärningarna kastas med en fysiksimulering där de studsar mot varandra och mot brickans kanter, och alla sidor har samma form. Därför är alla sidor lika sannolika, precis som hos en riktig tärning. När du simulerar snabbt dras utfallen i stället direkt med en slumptalsgenerator.</p></details>
+      <details><summary>Hur stor är sannolikheten att få summan 7 med två tärningar?</summary><p>Två sexsidiga tärningar kan landa på 36 lika sannolika sätt, och sex av dem ger summan 7: 1 och 6, 2 och 5, 3 och 4, 4 och 3, 5 och 2 samt 6 och 1. Sannolikheten är alltså 6 av 36, det vill säga en sjättedel. Summan 7 är den vanligaste summan med två tärningar.</p></details>
+      <details><summary>Vad är skillnaden mellan dragning med och utan återläggning?</summary><p>Med återläggning läggs kortet eller kulan tillbaka efter varje dragning, så sannolikheterna är desamma inför varje ny dragning. Utan återläggning blir det färre kvar att dra bland, och sannolikheten för nästa dragning beror på vad som redan dragits. Verktyget visar sannolikheten inför nästa dragning hela tiden.</p></details>
+      <details><summary>Varför stämmer inte den relativa frekvensen med sannolikheten?</summary><p>Vid få försök slumpar det sig ofta så att vissa utfall blir vanligare än andra. Ju fler försök du gör, desto närmare hamnar den relativa frekvensen den teoretiska sannolikheten. Det kallas de stora talens lag. Prova att simulera 1 000 försök och jämför staplarna med de röda strecken.</p></details>
+      <details><summary>Kostar verktyget något?</summary><p>Nej. Sannolikhetshörnan är gratis och kräver inget konto. Dina inställningar sparas i webbläsaren.</p></details>
+    </div>
+
+    <h2>Läs mer om sannolikhet</h2>
+    <ul class="seo-links">
+      <li><a href="../katalog.html?id=ma1c-5.4">Den klassiska sannolikhetsdefinitionen</a></li>
+      <li><a href="../katalog.html?id=ma1c-5.5">Experimentella sannolikheter</a></li>
+      <li><a href="../katalog.html?id=ma1c-5.6">Produktregeln, med och utan återläggning</a></li>
+      <li><a href="../katalog.html?id=ma1c-5.7">Träddiagram</a></li>
+      <li><a href="../katalog.html?id=ma1c-5.8">Komplementhändelse</a></li>
+    </ul>
+  </div>
+</article>
+<footer class="sidfot"><a href="../index.html">Fysiklabbet</a>·<a href="../om.html">Om</a>·<a href="../kontakt.html">Kontakt</a></footer>
+
+<!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
+     webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
+<script type="module" src="sannolikhetshornan.js?v=202609271200"></script>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

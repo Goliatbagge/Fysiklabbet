@@ -354,7 +354,7 @@ input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border: 0; bord
 .kort .k-bild { flex: 1; display: grid; place-items: center; padding: 14px 0 8px; min-height: 200px; }
 .kort .k-bild .klot { width: 62%; aspect-ratio: 1; transition: transform 1.2s var(--ease); }
 .kort:hover .k-bild .klot { transform: scale(1.07) rotate(-5deg); }
-@media (min-width: 981px) {
+@media (min-width: 561px) {
   .kort.bred { grid-column: span 2; }
   .kort.bred .k-bild .klot { width: 34%; }
 }
@@ -557,7 +557,7 @@ footer a { color: var(--muted); }
 </main>
 
 <footer>
-  <div>Planettexturer: <a href="https://www.solarsystemscope.com/textures/" rel="noopener">Solar System Scope</a>, CC BY 4.0, baserade på bilder och data från NASA. Venus yta är kartlagd med radar av rymdsonden Magellan.</div>
+  <div>Planettexturer: <a href="https://www.solarsystemscope.com/textures/" rel="noopener">Solar System Scope</a>, CC BY 4.0, baserade på bilder och data från NASA. Venus yta är kartlagd med radar av rymdsonden Magellan. Plutos karta: NASA/JHUAPL/SwRI (New Horizons), fri att använda; den södra delen som aldrig fotograferats är ifylld med en neutral färg.</div>
   <div>Faktauppgifter: NASA Planetary Fact Sheet. Banorna är förenklade till cirklar.</div>
 </footer>
 
@@ -780,6 +780,27 @@ const PLANETER = [
       'Neptunus hittades 1846 med hjälp av matematik: astronomer räknade ut var planeten måste finnas utifrån hur den störde Uranus bana.',
       'Sedan upptäckten har Neptunus hunnit gå ett enda varv runt solen. Varvet blev klart 2011.',
       'Den största månen, Triton, kretsar baklänges och är troligen ett infångat objekt från Kuiperbältet.',
+    ],
+  },
+  {
+    id: 'pluto', namn: 'Pluto', kicker: 'Dvärgplanet i Kuiperbältet', kortTop: 'Dvärgplanet', dverg: true,
+    ingress: 'Räknades som solsystemets nionde planet fram till 2006. En iskall värld långt ute i Kuiperbältet, med ett jättelikt hjärta av kväveis.',
+    kort: 'Dvärgplaneten med ett hjärta av is.',
+    acc: '#e3b89a', farg: '#b89a86',
+    tex: { karta: 'pluto.jpg' }, tilt: 16, spin: -0.016, bump: 0.004, hero: -1.2, sat: 1.1,
+    atmo: { farg: '#86aaff', sol: '#9fbcff', tjock: 0.05, str: 0.6, inre: 0.18 },
+    diameter: 2377, radie: 1188.3, massa: 1.303e22, g: 0.62, a: 39.48, period: 90560, L0: 238.93,
+    bana: { e: 0.2488, i: 17.14, nod: 110.30, peri: 224.07 },
+    fakta: [
+      ['Diameter', '2 377 km'], ['Massa', '1,30 · 10<sup>22</sup> kg'], ['Tyngdfaktor', '0,62 N/kg'],
+      ['Ett dygn', '6,4 jorddygn'], ['Ett år', '248 jordår'], ['Avstånd till solen', '4,4 till 7,4 miljarder km'],
+      ['Temperatur', 'cirka −230 °C'], ['Månar', '5'], ['Flykthastighet', 'FLYKT'], ['Ljuset från solen tar', 'LJUS'],
+    ],
+    visste: [
+      'Pluto upptäcktes 1930 av Clyde Tombaugh. Namnet föreslogs av den elvaåriga skolflickan Venetia Burney i Oxford.',
+      'År 2006 bestämde Internationella astronomiska unionen att en planet måste ha rensat sin omgivning från andra himlakroppar. Det har inte Pluto gjort, så den blev en dvärgplanet.',
+      'Pluto är mindre än jordens måne. Diametern är ungefär två tredjedelar av månens.',
+      'Banan är så avlång att Pluto ibland är närmare solen än Neptunus. Senast var det mellan 1979 och 1999.',
     ],
   },
 ];
@@ -1053,8 +1074,35 @@ const BESTAR = {
     ],
   },
 };
+FORDJUPNING.pluto = {
+  avsnitt: [
+    ['Från planet till dvärgplanet', 'Pluto hittades 1930, när astronomer letade efter en planet bortom Neptunus. Under 1990- och 2000-talen upptäcktes allt fler liknande isvärldar i Kuiperbältet, och 2005 hittades Eris, som är nästan lika stor som Pluto och har större massa. Då behövdes en tydlig definition av vad en planet är, och år 2006 blev Pluto en dvärgplanet.'],
+    ['Hjärtat', 'Det ljusa hjärtat heter Tombaugh Regio. Dess västra halva, Sputnik Planitia, är en över 1&nbsp;000&nbsp;km bred slätt av kväveis som långsamt vänder sig om i stora celler, ungefär som i en lavalampa. Där finns inga kratrar alls, så ytan är geologiskt ung, högst omkring tio miljoner år. Runt slätten reser sig berg av vattenis som är flera kilometer höga.'],
+    ['Ett enda besök', 'Rymdsonden New Horizons sköts upp 2006 och flög förbi Pluto den 14 juli 2015, efter en resa på nio och ett halvt år. Ombord fanns en liten del av Clyde Tombaughs aska. Eftersom sändaren var svag och avståndet enormt tog det över ett år att skicka hem alla mätdata.'],
+  ],
+  udda: [
+    'Plutos och Neptunus banor korsar varandra, men de kan aldrig krocka. Pluto går två varv runt solen på samma tid som Neptunus går tre, och den takten håller dem alltid långt ifrån varandra.',
+    'Månen Charon är ungefär halva Plutos diameter. De kretsar kring en punkt mellan sig, och båda vänder alltid samma sida mot varandra.',
+    'Himlen på Pluto har blått dis. Atmosfären innehåller lager av små partiklar som sprider blått ljus, precis som luften på jorden.',
+    'Pluto har snötäckta berg, men snön består av metanis i stället för vattenis.',
+    'Sedan upptäckten har Pluto ännu inte hunnit ett enda varv runt solen. Det första varvet blir klart år 2178.',
+    'Södra delen av Pluto låg i mörker när New Horizons flög förbi och har aldrig fotograferats. På kartan här är den fylld med en neutral färg.',
+  ],
+};
+BESTAR.pluto = {
+  svar: 'Pluto består av sten och is. Ungefär två tredjedelar av massan är sten och resten mest vattenis. Ytan är täckt av is av kväve, metan och kolmonoxid, och den rödbruna färgen kommer från toliner, organiska ämnen som bildas när ultraviolett ljus bryter sönder metan.',
+  lager: [
+    ['Skal av is', 1, '#dccfbf', 'Vattenis, täckt av is av kväve, metan och kolmonoxid.'],
+    ['Hav under isen?', 0.83, '#4d7fa8', 'Troligen ett lager flytande vatten, omkring hundra kilometer djupt.'],
+    ['Kärna', 0.72, '#7a6656', 'Sten, med en radie på omkring 850 km.'],
+  ],
+  lagerNot: 'Havet är inte bekräftat, men flera ledtrådar från New Horizons pekar ditåt.',
+  staplar: [
+    { rubrik: 'Atmosfären, räknat i volym', delar: [['kväve', 99.2], ['metan', 0.7], ['övrigt', 0.1, 'mest kolmonoxid']], not: 'Mätt av New Horizons 2015. Atmosfären är mycket tunn: trycket vid ytan är omkring en hundratusendel av jordens.' },
+  ],
+};
 PLANETER.forEach((p) => Object.assign(p, FORDJUPNING[p.id], { bestar: BESTAR[p.id] }));
-PLANETER.filter((p) => !p.sol && !p.mane).forEach((p, k) => { p.nr = k + 1; });
+PLANETER.filter((p) => !p.sol && !p.mane && !p.dverg).forEach((p, k) => { p.nr = k + 1; });
 const N = PLANETER.length;
 
 /* =====================================================================
@@ -1073,7 +1121,8 @@ function sig(n, k = 3) {
   const d = Math.max(0, k - 1 - Math.floor(Math.log10(Math.abs(n))));
   return fmt(n, d);
 }
-function nb(s) { return s.replace(/ /g, NB); }
+// Hårt mellanslag bara där radbrytning vore fel: efter ett tal och runt multiplikationspunkten
+function nb(s) { return s.replace(/(\d) /g, '$1' + NB).replace(/ · /g, NB + '·' + NB); }
 function tidText(sek) {
   if (sek < 3600) { const m = Math.floor(sek / 60), s = Math.round(sek % 60); return `${m}${NB}min ${s}${NB}s`; }
   const h = Math.floor(sek / 3600), m = Math.round((sek % 3600) / 60);
@@ -1551,7 +1600,7 @@ hjalte.add(stjarnor);
 
 const AX_X0 = new THREE.Vector3(1, 0, 0);
 const qBas = new THREE.Quaternion();
-const START_SPIN = { manen: 3.95, jorden: 4.3, mars: 2.4, jupiter: 0.5, merkurius: 0.6, saturnus: 0.2 };
+const START_SPIN = { pluto: 4.45, manen: 3.95, jorden: 4.3, mars: 2.4, jupiter: 0.5, merkurius: 0.6, saturnus: 0.2 };
 const planeter = PLANETER.map((p) => {
   const o = byggPlanet(p, { startSpin: START_SPIN[p.id] || 0 });
   o.anv = new THREE.Quaternion();
@@ -1671,7 +1720,7 @@ function placeraGrannEtiketter() {
 const bana = {
   scen: new THREE.Scene(), kam: new THREE.PerspectiveCamera(38, 1, 0.1, 6000),
   dagar: (Date.now() - J2000) / 86400000, fart: 7, spelar: !REDUCERA,
-  m: 0, mMal: 0, az: -0.5, el: 0.52, vaz: 0, vel: 0, dist: 60, drar: false, hover: -1,
+  m: 0, mMal: 0, az: 1.25, el: 0.52, vaz: 0, vel: 0, dist: 60, drar: false, hover: -1,
   obj: [], linjer: [], etiketter: [],
 };
 bana.scen.add(byggVintergatan(3000, 0.22));
@@ -1683,13 +1732,33 @@ PLANETER.forEach((p, i) => {
   bana.obj.push(o);
   if (!p.sol && !p.mane) {
     const pts = [];
-    for (let k = 0; k <= 256; k++) { const v = k / 256 * Math.PI * 2; pts.push(new THREE.Vector3(Math.cos(v), 0, -Math.sin(v))); }
+    // Plutos elliptiska, lutande bana ritas punkt för punkt (uppdateras när skalan ändras)
+    const n = p.bana ? 512 : 256;
+    for (let k = 0; k <= n; k++) { const v = k / n * Math.PI * 2; pts.push(new THREE.Vector3(Math.cos(v), 0, -Math.sin(v))); }
     const lin = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
       new THREE.LineBasicMaterial({ color: new THREE.Color(p.acc), transparent: true, opacity: 0.16, depthWrite: false }));
     bana.scen.add(lin);
     bana.linjer[i] = lin;
   }
 });
+// Läge i en elliptisk bana (Keplers ekvation), i ekliptikans koordinater, med avstånden omskalade som övriga banor.
+function ellipsLage(p, E, m, ut) {
+  const b = p.bana, rad = THREE.MathUtils.degToRad;
+  const e = b.e, i = rad(b.i), nod = rad(b.nod), w = rad(b.peri - b.nod);
+  const nu = 2 * Math.atan2(Math.sqrt(1 + e) * Math.sin(E / 2), Math.sqrt(1 - e) * Math.cos(E / 2));
+  const r = p.a * (1 - e * Math.cos(E));
+  const u = nu + w;
+  const X = r * (Math.cos(nod) * Math.cos(u) - Math.sin(nod) * Math.sin(u) * Math.cos(i));
+  const Y = r * (Math.sin(nod) * Math.cos(u) + Math.cos(nod) * Math.sin(u) * Math.cos(i));
+  const Z = r * Math.sin(u) * Math.sin(i);
+  return ut.set(X, Z, -Y).multiplyScalar(banRadie(r, m) / r);
+}
+function ellipsE(p, dagar) {
+  const M = THREE.MathUtils.degToRad(p.L0 + 360 * dagar / p.period - p.bana.peri);
+  let E = M;
+  for (let k = 0; k < 8; k++) E -= (E - p.bana.e * Math.sin(E) - M) / (1 - p.bana.e * Math.cos(E));
+  return E;
+}
 function banRadie(a, m) { const komp = 3.0 + 4.6 * Math.log2(1 + 2.8 * a); const verk = a * 2.1; return komp + (verk - komp) * m; }
 function banStorlek(p, m) {
   if (p.sol) return 2.0 + (0.5 - 2.0) * m;
@@ -1738,7 +1807,7 @@ function uppdateraGrannar() {
   }, 900);
   $('mobV').disabled = !v; $('mobH').disabled = !h;
   const pi = PLANETER[i];
-  $('nr').innerHTML = pi.sol ? '<b>Solen</b>' : pi.mane ? '<b>Jordens måne</b>' : `<b>${String(pi.nr).padStart(2, '0')}</b> / 08`;
+  $('nr').innerHTML = pi.sol ? '<b>Solen</b>' : pi.mane ? '<b>Jordens måne</b>' : pi.dverg ? '<b>Dvärgplanet</b>' : `<b>${String(pi.nr).padStart(2, '0')}</b> / 08`;
   document.querySelectorAll('.tick').forEach((t, k) => t.classList.toggle('aktiv', k === i));
 }
 
@@ -1772,7 +1841,10 @@ function gaTill(i, direkt) {
 
 /* ---------- Panelen ---------- */
 let panelMassa = 60, panelAlder = 17;
-function procent(v) { return `${fmt(v, v < 1 ? 2 : v % 1 ? 1 : 0)}${NB}%`; }
+function procent(v) {
+  const d = Number.isInteger(v) ? 0 : Number.isInteger(Math.round(v * 1000) / 100) ? 1 : 2;
+  return `${fmt(v, d)}${NB}%`;
+}
 function bestarHTML(p) {
   const b = p.bestar;
   // Genomskärning: tunna skikt förstoras så att de syns
@@ -1815,7 +1887,7 @@ function fyllPanel(p, anim) {
     }).join('');
     const r = p.radie * 1000;
     const gBer = G_KONST * p.massa / (r * r);
-    const vems = p.sol ? 'solens' : p.mane ? 'månens' : 'planetens';
+    const vems = p.sol ? 'solens' : p.mane ? 'månens' : p.dverg ? 'dvärgplanetens' : 'planetens';
     const gasNot = p.gas ? '<p class="not">Gasplaneterna saknar fast yta. Värdena gäller vid molntopparna, där trycket är lika stort som vid jordytan.</p>' : '';
     const jordNot = p.id === 'jorden' ? `<p class="not">I Sverige mäter vi 9,82${NB}N/kg. Vi ligger närmare jordens medelpunkt än ekvatorn gör och påverkas mindre av jordens rotation.</p>` : '';
     panelInre.innerHTML = `
@@ -1858,7 +1930,7 @@ function fyllPanel(p, anim) {
           <li><i>r</i> = ${vems} radie vid ekvatorn (m)</li>
         </ul>
         ${jordNot}
-        <p class="not">Flykthastigheten, den fart som krävs för att lämna ${p.sol ? 'solen' : p.mane ? 'månen' : 'planeten'} för gott, är ${sig(flykt(p), 3)}${NB}km/s.</p>
+        <p class="not">Flykthastigheten, den fart som krävs för att lämna ${p.sol ? 'solen' : p.mane ? 'månen' : p.dverg ? 'dvärgplaneten' : 'planeten'} för gott, är ${sig(flykt(p), 3)}${NB}km/s.</p>
       </div>
       <div class="p-rubrik">Visste du att</div>
       <ol class="visste">${p.visste.map((t) => `<li>${t}</li>`).join('')}</ol>
@@ -1974,7 +2046,7 @@ PLANETER.forEach((p, i) => {
   k.className = 'kort';
   k.style.setProperty('--c', p.acc);
   const ljus = p.a ? faktaVarde(p, 'LJUS') : '';
-  if (p.sol || p.id === 'jupiter') k.classList.add('bred');
+  if (p.sol) k.classList.add('bred');
   const hoger = p.a ? fmt(p.a, p.a < 10 ? 2 : 1) + NB + 'AE' : p.mane ? fmt(p.avstandJorden) + NB + 'km bort' : 'Centrum';
   const fot = p.a ? 'Ljuset når hit på ' + ljus : p.mane ? 'Ljuset från jorden tar ' + faktaVarde(p, 'LJUSMANE') : '99,8' + NB + '% av solsystemets massa';
   k.innerHTML = `<div class="k-top"><span>${p.kortTop}</span><span>${hoger}</span></div>
@@ -2062,7 +2134,7 @@ function renderaTumnaglar() {
   const ut = document.createElement('canvas'); ut.width = ut.height = px;
   const ctx = ut.getContext('2d');
   const resultat = [];
-  const vinklar = { manen: 1.85, jorden: 2.2, mars: 3.2, jupiter: 1.2, saturnus: 0.2 };
+  const vinklar = { pluto: 2.75, manen: 1.85, jorden: 2.2, mars: 3.2, jupiter: 1.2, saturnus: 0.2 };
   renderer.setScissorTest(true);
   PLANETER.forEach((p, i) => {
     const o = byggPlanet(p, { seg: [96, 72], startSpin: vinklar[p.id] || 0.8, glod: 3.4 });
@@ -2389,7 +2461,7 @@ function uppdateraBanor(dt, br) {
     bana.vaz *= Math.exp(-dt * 2);
   }
   const m = bana.m;
-  const dist = 74 + (140 - 74) * m;
+  const dist = 92 + (215 - 92) * m;
   const k = bana.kam;
   k.aspect = br.width / br.height;
   const smal = k.aspect < 0.9;
@@ -2413,6 +2485,18 @@ function uppdateraBanor(dt, br) {
       const r = 1.15 + (0.45 - 1.15) * m;
       const v = THREE.MathUtils.degToRad(p.L0 + 360 * bana.dagar / p.period);
       o.root.position.set(jord.x + r * Math.cos(v), 0, jord.z - r * Math.sin(v));
+    } else if (p.bana) {
+      ellipsLage(p, ellipsE(p, bana.dagar), m, o.root.position);
+      const lin = bana.linjer[i];
+      if (lin.userData.m !== m) {
+        lin.userData.m = m;
+        const pos = lin.geometry.attributes.position, n = pos.count - 1;
+        for (let k = 0; k <= n; k++) { ellipsLage(p, k / n * Math.PI * 2, m, vy); pos.setXYZ(k, vy.x, vy.y, vy.z); }
+        pos.needsUpdate = true;
+        lin.geometry.computeBoundingSphere();
+      }
+      const mal = hoverIdx === i ? 0.7 : 0.16;
+      lin.material.opacity += (mal - lin.material.opacity) * (1 - Math.exp(-dt * 8));
     } else {
       const r = banRadie(p.a, m);
       const v = THREE.MathUtils.degToRad(p.L0 + 360 * bana.dagar / p.period);
@@ -2441,7 +2525,7 @@ function uppdateraBanor(dt, br) {
   });
   // Etiketter som skulle krocka döljs; den man pekar på och de mest kända går först
   const placerade = [];
-  const ordning = [hoverIdx, ...['solen', 'jorden', 'jupiter', 'saturnus', 'uranus', 'neptunus', 'mars', 'venus', 'merkurius', 'manen'].map((id) => PLANETER.findIndex((q) => q.id === id))].filter((v, k, a) => v >= 0 && a.indexOf(v) === k);
+  const ordning = [hoverIdx, ...['solen', 'jorden', 'jupiter', 'saturnus', 'uranus', 'neptunus', 'pluto', 'mars', 'venus', 'merkurius', 'manen'].map((id) => PLANETER.findIndex((q) => q.id === id))].filter((v, k, a) => v >= 0 && a.indexOf(v) === k);
   ordning.forEach((i) => {
     const r = etRutor[i];
     const ruta = { x0: r.x - r.b / 2, x1: r.x + r.b / 2, y0: r.y - 20, y1: r.y };

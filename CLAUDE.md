@@ -1140,6 +1140,11 @@ i `kopplingsschema.js`; läs dem innan du ändrar något.
   verktyget. Frågorna och svaren i FAQPage måste vara ordagrant samma som
   de synliga under "Vanliga frågor", annars bryter sidan mot Googles regler.
   Teoriavsnittet `fy1-7.6` länkar till verktyget.
+- **Formathandtaget** (runda knappen vid schemats nedre högra hörn) sparar
+  slingans bredd och höjd i `doc.frame`. Då gäller det formatet i stället för
+  de automatiska proportionerna, men aldrig mindre än `lay.minW`/`lay.minH`,
+  som räknas med de tätare måtten `TIGHT_*` så att alla etiketter ryms.
+  Dubbeltryck eller "Automatiskt format" tar bort `doc.frame`.
 - `utkast/kopplingsschema.html` är en vidarebefordran från den gamla
   adressen (behåller `#s=` så att sparade scheman fortsätter fungera).
 

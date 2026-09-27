@@ -38,6 +38,9 @@ const LABEL_CLEAR = 16;                 // minsta luft mellan två etiketter
 const END_CLEAR = 8;                    // strömpilens etikett mot en nod eller ett hörn
 const BRANCH_GAP = 16, BRANCH_MIN = 56; // parallellgrenarnas avstånd
 const INNER_GAP = 34;
+// Med formathandtaget får bilden tryckas ihop till dessa tätare mått, där
+// etiketterna fortfarande håller fritt avstånd till varandra.
+const TIGHT_GAP = 20, TIGHT_BRANCH = 42, TIGHT_W = 150, TIGHT_H = 64;
 const MIN_W = 220, MIN_H = 130;
 const ARROW_LEN = 10, ARROW_HW = 4.6;
 const DOT_R = 2.8;
@@ -882,17 +885,20 @@ function layoutPass(doc, autoIn, arrowIdx) {
     const legNeed = Math.max(la ? la.len : 0, lb ? lb.len : 0) + (legged ? farDepth : 0);
     const segJ = legged ? (str ? 1 : order.length - 1) : -1;
     const offs = [0];
+    let spT = 0;   // tätaste grenavstånd där etiketterna ändå får plats
     for (let j = 1; j < bm.length; j++) {
       const prevExt = s > 0 ? bm[j - 1].pos : bm[j - 1].neg;
       const curExt = s > 0 ? bm[j].neg : bm[j].pos;
       let d = Math.max(BRANCH_MIN, prevExt + curExt + BRANCH_GAP);
-      if (j === segJ) d = Math.max(d, legNeed);
+      let dT = Math.max(TIGHT_BRANCH, prevExt + curExt + BRANCH_GAP);
+      if (j === segJ) { d = Math.max(d, legNeed); dT = Math.max(dT, legNeed); }
+      spT = Math.max(spT, dT);
       offs.push(offs[j - 1] + s * d);
     }
     const last = bm.length - 1;
     const far = Math.abs(offs[last]) + (s > 0 ? bm[last].pos : bm[last].neg);
     const near = s > 0 ? bm[0].neg : bm[0].pos;
-    return (M[P.id] = { len, pos: s > 0 ? far : near, neg: s > 0 ? near : far, ohS: la ? la.pos : 0, ohE: lb ? lb.pos : 0, offs, s, order });
+    return (M[P.id] = { len, pos: s > 0 ? far : near, neg: s > 0 ? near : far, ohS: la ? la.pos : 0, ohE: lb ? lb.pos : 0, offs, s, order, spT });
   }
 
   const vertOf = s => s === 'left' || s === 'right';
@@ -907,10 +913,15 @@ function layoutPass(doc, autoIn, arrowIdx) {
     const m = M[doc.loop[x].items[0].id];
     return Math.abs(m.offs[m.offs.length - 1]);
   };
-  let W = Math.max(sm.top.len, sm.bottom.len, sm.left.neg + sm.right.neg + INNER_GAP,
+  // ig = luften mellan de inre etiketterna på motstående sidor. Normalt
+  // INNER_GAP; det tätare TIGHT_GAP ger den minsta storlek som
+  // formathandtaget får trycka ihop bilden till.
+  const baseW = ig => Math.max(sm.top.len, sm.bottom.len, sm.left.neg + sm.right.neg + ig,
     trim('left') + trim('right') + Math.max(stretched.top ? 0 : sm.top.len, stretched.bottom ? 0 : sm.bottom.len));
-  let H = Math.max(sm.left.len, sm.right.len, sm.top.neg + sm.bottom.neg + INNER_GAP,
+  const baseH = ig => Math.max(sm.left.len, sm.right.len, sm.top.neg + sm.bottom.neg + ig,
     trim('top') + trim('bottom') + Math.max(stretched.left ? 0 : sm.left.len, stretched.right ? 0 : sm.right.len));
+  let W = baseW(INNER_GAP), H = baseH(INNER_GAP);
+  let Wt = baseW(TIGHT_GAP), Ht = baseH(TIGHT_GAP);
   // JÄMNA STEGPINNAR: är en sida en sträckt parallellkoppling (stegpinnar
   // mellan sidoledningarna) fördelas hela höjden (eller bredden) jämnt:
   // lika stort avstånd mellan alla grenar OCH från den sista grenen till
@@ -920,23 +931,25 @@ function layoutPass(doc, autoIn, arrowIdx) {
   const ladder = (a, b, cross) => {
     if (!stretched[a] && !stretched[b]) return null;
     const info = x => {
-      if (!stretched[x]) return { n: 1, sp: 0, ext: sm[x].neg };
+      if (!stretched[x]) return { n: 1, sp: 0, spT: 0, ext: sm[x].neg };
       const m = M[doc.loop[x].items[0].id], o = m.offs, last = Math.abs(o[o.length - 1]);
       let sp = 0;
       for (let j = 1; j < o.length; j++) sp = Math.max(sp, Math.abs(o[j] - o[j - 1]));
-      return { n: o.length, sp, ext: m.neg - last, m };
+      return { n: o.length, sp, spT: m.spT || sp, ext: m.neg - last, m };
     };
     const A = info(a), B = info(b);
     const gaps = (A.n - 1) + (B.n - 1) + 1;
     // Mittemellan ska rymma den sista grenens etiketter, ledningen mittemot
     // och komponenterna på sidoledningarnas nedre bitar.
-    const mid = Math.max(A.ext + B.ext + INNER_GAP, BRANCH_MIN, ...cross.filter(x => !stretched[x]).map(x => sm[x].len));
-    return { A, B, gaps, need: gaps * Math.max(A.sp, B.sp, mid) };
+    const crossLen = cross.filter(x => !stretched[x]).map(x => sm[x].len);
+    const mid = Math.max(A.ext + B.ext + INNER_GAP, BRANCH_MIN, ...crossLen);
+    const midT = Math.max(A.ext + B.ext + TIGHT_GAP, TIGHT_BRANCH, ...crossLen);
+    return { A, B, gaps, need: gaps * Math.max(A.sp, B.sp, mid), needT: gaps * Math.max(A.spT, B.spT, midT) };
   };
   const vLad = ladder('top', 'bottom', ['left', 'right']);
   const hLad = ladder('left', 'right', ['top', 'bottom']);
-  if (vLad) H = Math.max(H, vLad.need);
-  if (hLad) W = Math.max(W, hLad.need);
+  if (vLad) { H = Math.max(H, vLad.need); Ht = Math.max(Ht, vLad.needT); }
+  if (hLad) { W = Math.max(W, hLad.need); Wt = Math.max(Wt, hLad.needT); }
   // Bildens minsta proportioner (inte för platt, inte för smal) får inte
   // lägga all extra luft innanför en parallellkoppling som går inåt: då
   // hamnar batteriet långt under grenarna och symmetrin går förlorad. Med
@@ -954,6 +967,7 @@ function layoutPass(doc, autoIn, arrowIdx) {
       if (it.side === 'out') r.outD = Math.max(r.outD, o[o.length - 1]);
       else r.inD = Math.max(r.inD, o[o.length - 1]);
       for (let j = 1; j < o.length; j++) r.sp = Math.max(r.sp, o[j] - o[j - 1]);
+      r.spT = Math.max(r.spT || 0, M[it.id].spT || 0);
     }
     return r;
   };
@@ -961,9 +975,6 @@ function layoutPass(doc, autoIn, arrowIdx) {
   const cap = (a, b) => (!st[a].any && !st[b].any) ? Infinity : st[a].inD + st[b].inD + Math.max(st[a].sp, st[b].sp);
   // Proportionerna gäller hela bilden, även grenar som går UTÅT från slingan.
   const outV = st.top.outD + st.bottom.outD, outH = st.left.outD + st.right.outD;
-  W = Math.max(W, MIN_W - outH); H = Math.max(H, MIN_H - outV);
-  W = Math.max(W, Math.min((H + outV) * 1.15 - outH, cap('left', 'right')));
-  H = Math.max(H, Math.min((W + outH) * 0.5 - outV, cap('top', 'bottom')));
   // UTÅTGÅENDE STEGE: en sida som bara är en parallellkoppling utåt över hela
   // ledaren ser ut som stegpinnar ovanför slingan. Då ska avståndet mellan
   // grenarna vara lika stort som slingans egen höjd (bredd) ned till
@@ -974,8 +985,22 @@ function layoutPass(doc, autoIn, arrowIdx) {
     const opp = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' }[s];
     return st[opp].any ? null : M[S.items[0].id];
   };
-  for (const s of ['top', 'bottom']) { const m = outLadder(s); if (m) H = Math.max(H, st[s].sp); }
-  for (const s of ['left', 'right']) { const m = outLadder(s); if (m) W = Math.max(W, st[s].sp); }
+  for (const s of ['top', 'bottom']) { const m = outLadder(s); if (m) { H = Math.max(H, st[s].sp); Ht = Math.max(Ht, st[s].spT); } }
+  for (const s of ['left', 'right']) { const m = outLadder(s); if (m) { W = Math.max(W, st[s].sp); Wt = Math.max(Wt, st[s].spT); } }
+  // Det innehållet kräver med tätaste luft. Mindre än så kan bilden aldrig
+  // bli, inte ens med formathandtaget.
+  const minW = Math.ceil(Math.max(Wt, TIGHT_W - outH)), minH = Math.ceil(Math.max(Ht, TIGHT_H - outV));
+  // EGET FORMAT: har användaren dragit i formathandtaget (doc.frame) gäller
+  // det formatet i stället för de automatiska proportionerna, men aldrig
+  // mindre än innehållet kräver. Grenarna fördelas jämnt i det valda
+  // formatet precis som annars.
+  const fr = doc.frame;
+  if (fr && fr.w > 0 && fr.h > 0) { W = Math.max(minW, fr.w); H = Math.max(minH, fr.h); }
+  else {
+    W = Math.max(W, MIN_W - outH); H = Math.max(H, MIN_H - outV);
+    W = Math.max(W, Math.min((H + outV) * 1.15 - outH, cap('left', 'right')));
+    H = Math.max(H, Math.min((W + outH) * 0.5 - outV, cap('top', 'bottom')));
+  }
   W = Math.round(W); H = Math.round(H);
   for (const s of SIDES) {
     const m = outLadder(s);
@@ -1076,7 +1101,8 @@ function layoutPass(doc, autoIn, arrowIdx) {
     pSeries(doc.loop[s], F[s], u1, Math.max(u1, u2), 0, 1, { side: s, par: null, k: -1 }, stretched[s]);
   }
 
-  return { geo, M, lab, plan, info, auto, W, H, stretched, parInfo, sol };
+  geo.__frame = { x: W, y: H };
+  return { geo, M, lab, plan, info, auto, W, H, minW, minH, stretched, parInfo, sol };
 }
 
 /* ================= Symboler ================= */
@@ -1487,6 +1513,7 @@ function loadInitial() {
 function fixDoc(d) {
   d.opts = Object.assign({}, DEFAULT_OPTS, d.opts || {});
   d.arrowMain = d.arrowMain || {}; d.arrowCfg = d.arrowCfg || {};
+  if (d.frame && !(d.frame.w > 0 && d.frame.h > 0)) delete d.frame;
   return normalize(d);
 }
 function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(doc)); } catch (e) { /* privat läge */ } }
@@ -1511,6 +1538,7 @@ function afterHistory() {
 
 /* ================= Vyn: animation och kamera ================= */
 const sheetEl = $('#sheet'), svgEl = $('#svg'), camG = $('#cam'), inkG = $('#ink'), selG = $('#selg'), zoneG = $('#zones'), hitG = $('#hits');
+const shapeEl = $('#shapeHandle');
 const inspEl = $('#insp'), ghostEl = $('#ghost'), trashEl = $('#trash'), paletteEl = $('#palette');
 const view = { doc, lay, geoNow: null, anim: null, camFrozen: false, accent: null, raf: 0, hits: [] };
 const TWEEN = ['x', 'y', 'x1', 'y1', 'x2', 'y2', 'n1x', 'n1y', 'n2x', 'n2y', 'op', 'k', 'tx', 'ty'];
@@ -1576,6 +1604,15 @@ function render() {
   hitG.innerHTML = moving ? '' : out.hits.map(h => `<rect class="hit" data-kind="${h.kind}" data-id="${h.id}" x="${r2(h.box[0] - 6)}" y="${r2(h.box[1] - 5)}" width="${r2(h.box[2] - h.box[0] + 12)}" height="${r2(h.box[3] - h.box[1] + 10)}" rx="8"/>`).join('');
   renderZones();
   positionInline();
+  positionHandle(out.prims);
+}
+// Formathandtaget följer schemats nedre högra hörn (hela bildens, även
+// etiketter), men stannar innanför ritytan.
+function positionHandle(prims) {
+  const c = view.geoNow.cam, bb = bboxOf(prims);
+  const sr = sheetEl.getBoundingClientRect(), vr = svgEl.getBoundingClientRect();
+  const x = vr.left - sr.left + c.tx + c.k * bb[2] + 16, y = vr.top - sr.top + c.ty + c.k * bb[3] + 16;
+  shapeEl.style.transform = `translate(${Math.round(Math.min(x, sr.width - 20))}px, ${Math.round(Math.min(y, sr.height - 20))}px)`;
 }
 function renderZones() {
   if (!drag || !drag.moving || drag.target || !drag.zones) { zoneG.innerHTML = ''; return; }
@@ -1938,6 +1975,51 @@ window.addEventListener('pointerup', () => {
 });
 window.addEventListener('pointercancel', () => { if (drag && drag.moving) endDrag(true); else drag = null; });
 
+/* ================= Formathandtaget ================= */
+// Dra i handtaget: slingans bredd och höjd följer pekaren (kameran står
+// still under tiden, så att schemat växer under fingret). Innehållet sätter
+// en nedre gräns (lay.minW/minH). Släpp: ett steg i historiken, och kameran
+// passar in bilden igen. Dubbelklick: tillbaka till de automatiska måtten.
+let resize = null, lastTap = 0;
+shapeEl.addEventListener('pointerdown', e => {
+  if (e.button > 0) return;
+  e.preventDefault(); e.stopPropagation();
+  closeInline(); closeUnitMenu(); stopCoach();
+  // Dubbeltryck (mus eller finger) återställer. Webbläsarens egen dblclick
+  // uteblir när pointerdown förhindras, så den räknas här.
+  const now = performance.now();
+  if (now - lastTap < 400) { lastTap = 0; if (doc.frame) { delete doc.frame; commit(); refresh(); } return; }
+  lastTap = now;
+  resize = { sx: e.clientX, sy: e.clientY, w0: lay.W, h0: lay.H, k: view.geoNow.cam.k, moved: false };
+  view.camFrozen = true;
+  document.body.classList.add('is-resizing');
+  shapeEl.setPointerCapture && e.pointerId != null && shapeEl.setPointerCapture(e.pointerId);
+});
+shapeEl.addEventListener('pointermove', e => {
+  if (!resize) return;
+  e.preventDefault();
+  const w = Math.round(resize.w0 + (e.clientX - resize.sx) / resize.k);
+  const h = Math.round(resize.h0 + (e.clientY - resize.sy) / resize.k);
+  const fw = Math.max(lay.minW, w), fh = Math.max(lay.minH, h);
+  if (doc.frame && doc.frame.w === fw && doc.frame.h === fh) return;
+  resize.moved = true;
+  doc.frame = { w: fw, h: fh };
+  lay = layout(doc);
+  show(doc, lay, { instant: true });
+});
+function endResize() {
+  if (!resize) return;
+  const r = resize;
+  resize = null;
+  document.body.classList.remove('is-resizing');
+  view.camFrozen = false;
+  if (r.moved) { commit(); markUsed(); lastTap = 0; }
+  refresh();
+}
+shapeEl.addEventListener('pointerup', endResize);
+shapeEl.addEventListener('pointercancel', endResize);
+
+
 /* ================= Värdefält direkt i schemat ================= */
 // Klickar man på en komponent som kan ha ett värde (eller på en strömpil)
 // dyker ett litet fält upp på etikettens plats, "R₁ = [ 20 ] Ω", så att
@@ -2243,6 +2325,10 @@ function inspDoc() {
       ${hidden ? `<button class="wbtn" data-act="unhide">${IC.check}<span>Visa dolda pilar igen</span></button>` : ''}
     </div>
   </div>
+  <div class="grp"><div class="eyebrow">Format</div>
+    <p class="help">Dra i den runda knappen vid schemats nedre högra hörn för att göra bilden bredare, smalare, högre eller lägre.</p>
+    ${doc.frame ? `<button class="wbtn" data-act="unframe">${IC.undo}<span>Automatiskt format</span></button>` : ''}
+  </div>
   <div class="grp"><div class="eyebrow">Börja från</div>
     <div class="tpl-grid">${TEMPLATES.map(t => `<button class="tpl" data-act="tpl" data-id="${t.id}">${tplThumb(t)}<span>${t.name}</span></button>`).join('')}</div>
   </div>
@@ -2321,6 +2407,7 @@ inspEl.addEventListener('click', e => {
     toast(`${t.name} är inlagd.`, 'Ångra', undo);
     return;
   }
+  if (act === 'unframe') { delete doc.frame; commit(); refresh(); return; }
   if (act === 'unhide') { doc.arrowMain.hidden = false; for (const k in doc.arrowCfg) doc.arrowCfg[k].hidden = false; commit(); refresh(); return; }
   if (sel && sel.kind === 'comp') {
     const f = findItem(doc, sel.id), c = f.item;

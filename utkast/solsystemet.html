@@ -100,7 +100,7 @@ main { position: relative; z-index: 1; }
 .titel {
   font-family: var(--serif); font-weight: 400; margin: 0;
   font-size: clamp(50px, 9.4vw, 136px); line-height: .98; letter-spacing: .035em;
-  text-transform: uppercase; white-space: nowrap;
+  text-transform: uppercase; white-space: nowrap; padding-top: .14em;
   text-shadow: 0 2px 40px rgba(0, 0, 0, .35);
 }
 .titel .b { display: inline-block; animation: inBokstav 1s var(--ease) both; }
@@ -258,6 +258,27 @@ input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border: 0; bord
   content: counter(v, decimal-leading-zero); position: absolute; left: 0; top: 1px;
   font-family: var(--serif); font-size: 15px; color: var(--acc);
 }
+.svar { font-family: var(--serif); font-size: 19px; line-height: 1.55; color: var(--ink); margin: 0 0 18px; }
+.bestar .st-rubrik, .stapel .st-rubrik { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); margin-bottom: 12px; }
+.snitt-rad { display: grid; grid-template-columns: 200px 1fr; gap: 18px; align-items: start; }
+.snitt { width: 100%; height: auto; display: block; margin-top: 6px; }
+.lagerlista { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.lagerlista li { display: flex; gap: 10px; align-items: flex-start; }
+.lagerlista i { flex: 0 0 11px; height: 11px; border-radius: 3px; margin-top: 4px; }
+.lagerlista b { display: block; font-weight: 500; font-size: 13.5px; color: var(--ink); }
+.lagerlista span { display: block; font-size: 12.5px; line-height: 1.55; color: var(--muted); }
+.panel-inre { container-type: inline-size; }
+@container (max-width: 430px) { .snitt-rad { grid-template-columns: 1fr; } .snitt { max-width: 280px; margin: 0 auto 4px; } }
+.atmo-not { margin: 14px 0 0; padding: 14px 16px; border: 1px dashed var(--line); border-radius: 12px; }
+.stapel { margin-top: 16px; border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px 16px; background: rgba(255,255,255,.015); }
+.st-bar { display: flex; height: 14px; border-radius: 999px; overflow: hidden; gap: 2px; }
+.st-bar span { min-width: 3px; }
+.st-lista { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 7px; }
+.st-lista li { display: flex; align-items: baseline; gap: 10px; font-size: 13.5px; color: #d3d8e4; }
+.st-lista i { flex: 0 0 10px; height: 10px; border-radius: 50%; transform: translateY(1px); }
+.st-lista span { flex: 1; }
+.st-lista small { display: block; font-size: 12px; color: var(--faint); }
+.st-lista b { font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .hopp { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 26px; }
 .hopp button {
   background: none; border: 0; padding: 2px 0; cursor: pointer; font-size: 12px; color: var(--faint);
@@ -333,6 +354,10 @@ input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border: 0; bord
 .kort .k-bild { flex: 1; display: grid; place-items: center; padding: 14px 0 8px; min-height: 200px; }
 .kort .k-bild .klot { width: 62%; aspect-ratio: 1; transition: transform 1.2s var(--ease); }
 .kort:hover .k-bild .klot { transform: scale(1.07) rotate(-5deg); }
+@media (min-width: 981px) {
+  .kort.bred { grid-column: span 2; }
+  .kort.bred .k-bild .klot { width: 34%; }
+}
 .kort .k-namn { font-family: var(--serif); font-size: 34px; line-height: 1.05; }
 .kort .k-rad { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.6; }
 .kort .k-fot { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--faint); }
@@ -341,7 +366,7 @@ input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border: 0; bord
 
 /* Klot: tumnagel eller platshållare */
 .klot { position: relative; border-radius: 50%; }
-.klot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; mix-blend-mode: screen; opacity: 0; transition: opacity 1s; }
+.klot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 1s; }
 .klot img.syns { opacity: 1; }
 .klot .plats { position: absolute; inset: 12%; border-radius: 50%; transition: opacity 1s; }
 .klot.klar .plats { opacity: 0; }
@@ -639,6 +664,25 @@ const PLANETER = [
     lager: [{ id: 'moln', text: 'Moln', pa: true }, { id: 'natt', text: 'Städernas ljus', pa: true }],
   },
   {
+    id: 'manen', namn: 'Månen', kicker: 'Jordens måne', kortTop: 'Måne', mane: true,
+    ingress: 'Jordens enda naturliga följeslagare och den enda himlakropp utanför jorden där människor har gått. Den vänder alltid samma sida mot oss.',
+    kort: 'Den enda andra värld där människor har gått.',
+    acc: '#c9ced8', farg: '#8d8b86',
+    tex: { karta: 'manen.jpg' }, tilt: 6.68, spin: 0.012, bump: 0.011, hero: -1.05, sat: 1.0,
+    diameter: 3475, radie: 1737.4, massa: 7.342e22, g: 1.62, period: 27.3217, L0: 218.32, avstandJorden: 384400,
+    fakta: [
+      ['Diameter', '3 475 km'], ['Massa', '7,34 · 10<sup>22</sup> kg'], ['Tyngdfaktor', '1,62 N/kg'],
+      ['Ett dygn', '29,5 jorddygn'], ['Ett varv runt jorden', '27,3 dygn'], ['Avstånd till jorden', '384 400 km'],
+      ['Temperatur', '−173 till 127 °C'], ['Atmosfär', 'i praktiken ingen'], ['Flykthastighet', 'FLYKT'], ['Ljuset från jorden tar', 'LJUSMANE'],
+    ],
+    visste: [
+      'Månen roterar ett varv på samma tid som den går ett varv runt jorden. Därför ser vi alltid samma sida.',
+      'Tack vare små vickningar i banan kan vi ändå med tiden se ungefär 59 procent av ytan.',
+      'Ett dygn på månen, från soluppgång till soluppgång, är 29,5 jorddygn. Dagen varar alltså i ungefär två veckor.',
+      'Månens dragning ger tidvattnet. Solen bidrar också, men bara med knappt hälften så mycket.',
+    ],
+  },
+  {
     id: 'mars', namn: 'Mars', kicker: 'Planet 4 från solen', kortTop: 'Planet 4',
     ingress: 'Den röda ökenplaneten, med solsystemets högsta vulkan och en kanjon som är nästan lika lång som vägen från Lissabon till Moskva.',
     kort: 'Rost, stoft och jättevulkaner.',
@@ -799,6 +843,21 @@ const FORDJUPNING = {
       'Står du i Stockholm följer du med i jordens rotation med drygt 850&nbsp;km/h. Vid ekvatorn går det nästan dubbelt så fort.',
     ],
   },
+  manen: {
+    avsnitt: [
+      ['Född ur en krock', 'Månen bildades troligen för cirka 4,5 miljarder år sedan, när en himlakropp ungefär lika stor som Mars kolliderade med den unga jorden. Material som slungades ut samlades i en ring runt jorden och klumpade ihop sig till månen. Stenproverna från Apolloresorna liknar jordens mantel på många sätt, vilket stöder idén.'],
+      ['Två ansikten', 'Sidan som vänder sig mot oss har stora mörka slätter, så kallade maria (hav på latin), av lava som stelnade för mer än tre miljarder år sedan. Baksidan är nästan helt täckt av kratrar och har bara ett fåtal sådana slätter. Den kallas ibland den mörka sidan, men får precis lika mycket solljus som framsidan och är bara vänd bort från oss.'],
+      ['Människor på månen', 'Mellan 1969 och 1972 landade sex Apollofarkoster, och tolv astronauter gick på ytan. De tog med sig 382&nbsp;kg sten och stoft hem. NASA:s Artemisprogram siktar på att åter landa människor på månen, den här gången nära sydpolen, där det finns is i kratrar som aldrig nås av solljus.'],
+    ],
+    udda: [
+      'Fotspåren från Apolloastronauterna finns troligen kvar. På månen finns varken vind eller regn som kan sudda ut dem.',
+      'Månen är mörkare än den ser ut. Den reflekterar bara omkring en åttondel av solljuset, ungefär som gammal asfalt. Att den ändå lyser starkt beror på att vi ser den mot en svart himmel.',
+      'Det förekommer månbävningar. Seismometrar som astronauterna lämnade kvar registrerade skalv som pågick i över tio minuter, eftersom den torra, kalla månen fortsätter att dallra, som en klocka som slagits an.',
+      'Vid en total solförmörkelse täcker månen solen nästan precis. Solen är cirka 400 gånger så bred som månen, men också cirka 400 gånger så långt bort.',
+      'Månstoft är vasst som krossat glas, eftersom inget väder har nött ned kornen. Det slet på astronauternas dräkter, och enligt dem luktade det som krut.',
+      'Månen ser större ut nära horisonten, men det är en synvilla. Håll upp tummen på armlängds avstånd så ser du att den är lika stor.',
+    ],
+  },
   mars: {
     avsnitt: [
       ['En frusen öken', 'Mars har ungefär halva jordens diameter och är en kall, torr värld. Den tunna atmosfären består till 95 procent av koldioxid. Vid polerna finns istäcken av vattenis, som på vintern får ett lager av frusen koldioxid, alltså torris. Ett år på Mars är nästan två jordår, så årstiderna varar ungefär dubbelt så länge som hos oss.'],
@@ -870,7 +929,132 @@ const FORDJUPNING = {
     ],
   },
 };
-PLANETER.forEach((p) => Object.assign(p, FORDJUPNING[p.id]));
+/* ---------- Vad består himlakroppen av? ----------
+   lager: [namn, yttre radie som andel av hela radien, färg, beskrivning], utifrån och in.
+   staplar: andelar i procent. Ämnena har samma färg överallt (AMNE). */
+const AMNE = {
+  väte: '#8fb8ff', helium: '#f2c46b', koldioxid: '#aab2c0', kväve: '#6fd3c1', syre: '#ff8a7a', argon: '#b58cff',
+  metan: '#4fa3d9', järn: '#c9884a', kisel: '#9aa3b4', magnesium: '#7ad29a', aluminium: '#dfe2e8', kalcium: '#f0e2b0', övrigt: '#5b6378',
+};
+const BESTAR = {
+  solen: {
+    svar: 'Solen består av het, elektriskt laddad gas, så kallad plasma. Räknat i massa är ungefär tre fjärdedelar väte och en fjärdedel helium. I kärnan har fusionen under miljarder år hunnit göra om en stor del av vätet till helium.',
+    lager: [
+      ['Konvektionszonen', 1, '#ffb14a', 'Het gas stiger, svalnar och sjunker igen och bär ut energin till ytan.'],
+      ['Strålningszonen', 0.7, '#ff7f2a', 'Energin letar sig utåt som strålning, så långsamt att resan tar tiotusentals år.'],
+      ['Kärnan', 0.25, '#fff0b0', 'Cirka 15 miljoner °C. Här slås vätekärnor ihop till helium.'],
+    ],
+    lagerNot: 'Ytan vi ser, fotosfären, är bara omkring 500 km tjock. Utanför den ligger kromosfären och koronan.',
+    staplar: [
+      { rubrik: 'Solens yttre delar, räknat i massa', delar: [['väte', 73.5], ['helium', 24.9], ['övrigt', 1.6, 'mest syre, kol, neon och järn']] },
+    ],
+  },
+  merkurius: {
+    svar: 'Merkurius består av metall och sten. En enorm kärna av järn tar upp det mesta av planeten, och runt den ligger en tunn mantel och skorpa av silikatsten, samma sorts bergarter som i jordens mantel.',
+    lager: [
+      ['Skorpa', 1, '#aaa39a', 'Silikatsten, några tiotals kilometer tjock.'],
+      ['Mantel', 0.985, '#7d7468', 'Silikatsten, bara omkring 400 km tjock.'],
+      ['Kärna', 0.83, '#c9884a', 'Järn och nickel, delvis flytande. Den når ut till 83 procent av radien.'],
+    ],
+    atmoNot: 'Merkurius saknar en riktig atmosfär. Det finns bara en extremt tunn exosfär av syre, natrium, väte, helium och kalium: atomer som slås loss från ytan eller följer med solvinden.',
+    staplar: [],
+  },
+  venus: {
+    svar: 'Venus är en stenplanet, uppbyggd ungefär som jorden med en kärna av järn, en mantel av sten och en skorpa av basalt. Atmosfären består nästan bara av koldioxid, och molnen är droppar av svavelsyra.',
+    lager: [
+      ['Skorpa', 1, '#d6b27a', 'Basalt från lavaflöden, några tiotals kilometer tjock.'],
+      ['Mantel', 0.995, '#a0603a', 'Het silikatsten, omkring 3 000 km tjock.'],
+      ['Kärna', 0.5, '#e0a050', 'Järn och nickel. Storleken är osäker, eftersom ingen har kunnat mäta skalv på Venus.'],
+    ],
+    staplar: [
+      { rubrik: 'Atmosfären, räknat i volym', delar: [['koldioxid', 96.5], ['kväve', 3.5]], not: 'Därtill spår av svaveldioxid, argon och vattenånga.' },
+    ],
+  },
+  jorden: {
+    svar: 'Jorden består mest av järn, syre, kisel och magnesium. Järnet har sjunkit in mot mitten och bildat kärnan, medan syret och kislet är bundna i sten i manteln och skorpan. Luften är mest kväve och syre.',
+    lager: [
+      ['Skorpa', 1, '#8a9a5b', 'Mellan 5 och 70 km tjock, tunnast under haven.'],
+      ['Mantel', 0.995, '#c0582e', 'Het silikatsten som flyter långsamt, cirka 2 900 km tjock.'],
+      ['Yttre kärna', 0.546, '#e89a3a', 'Flytande järn och nickel. Strömmarna här skapar magnetfältet.'],
+      ['Inre kärna', 0.192, '#ffe08a', 'Fast järn och nickel, ungefär lika varm som solens yta.'],
+    ],
+    staplar: [
+      { rubrik: 'Luften, räknat i volym', delar: [['kväve', 78.1], ['syre', 20.9], ['argon', 0.93], ['koldioxid', 0.04]], not: 'Därtill vattenånga, som varierar från nästan ingenting till några procent.' },
+      { rubrik: 'Hela jorden, räknat i massa', delar: [['järn', 32], ['syre', 30], ['kisel', 15], ['magnesium', 14], ['övrigt', 9, 'mest svavel, nickel, kalcium och aluminium']] },
+    ],
+  },
+  manen: {
+    svar: 'Månen är ett klot av sten med en liten järnkärna. Ytan täcks av regolit, ett lager krossad sten och stoft. De ljusa högländerna består av en bergart rik på aluminium och kalcium, de mörka slätterna av stelnad basaltlava.',
+    lager: [
+      ['Skorpa', 1, '#bdbab2', 'Ljusa bergarter rika på aluminium och kalcium, i genomsnitt omkring 40 km tjock.'],
+      ['Mantel', 0.977, '#8a8276', 'Silikatsten rik på magnesium och järn.'],
+      ['Kärna', 0.2, '#c98a4a', 'Järn, med en radie på omkring 350 km och troligen delvis smält.'],
+    ],
+    atmoNot: 'Månen saknar i praktiken atmosfär. Den extremt tunna exosfären innehåller bland annat helium, argon och neon.',
+    staplar: [
+      { rubrik: 'Stoftet på de ljusa högländerna, räknat i massa', delar: [['syre', 45], ['kisel', 21], ['aluminium', 14], ['kalcium', 11], ['övrigt', 9, 'mest järn och magnesium']], not: 'Värden från prover som Apollo 16 hämtade hem. Syret är bundet i mineraler.' },
+    ],
+  },
+  mars: {
+    svar: 'Mars är en stenplanet med en kärna av järn, nickel och svavel, en mantel av sten och en skorpa av basalt. Stoftet på ytan är färgat rött av järnoxid. Atmosfären är tunn och består nästan bara av koldioxid.',
+    lager: [
+      ['Skorpa', 1, '#c1653a', 'Basalt, mellan 25 och 70 km tjock, täckt av rött stoft.'],
+      ['Mantel', 0.985, '#8e4a2c', 'Silikatsten rik på järn.'],
+      ['Kärna', 0.53, '#e0a050', 'Flytande järn med mycket svavel. Storleken har mätts med landaren InSight.'],
+    ],
+    staplar: [
+      { rubrik: 'Atmosfären, räknat i volym', delar: [['koldioxid', 95], ['kväve', 2.6], ['argon', 1.9], ['övrigt', 0.5, 'mest syre och kolmonoxid']] },
+    ],
+  },
+  jupiter: {
+    svar: 'Jupiter består nästan bara av väte och helium, samma ämnen som solen. Det finns ingen fast yta: gasen blir tätare och tätare inåt tills trycket gör vätet till en flytande metall. Längst in finns en suddig kärna av tyngre ämnen.',
+    lager: [
+      ['Atmosfär med moln', 1, '#ead6b4', 'Väte och helium med moln av ammoniak och vatten.'],
+      ['Flytande väte', 0.97, '#c9a67c', 'Gasen övergår gradvis i vätska, utan någon skarp gräns.'],
+      ['Flytande metalliskt väte', 0.8, '#8a6a8e', 'Trycket gör vätet till en metall som leder ström. Här skapas magnetfältet.'],
+      ['Utspädd kärna', 0.35, '#5a4a5a', 'Sten och is blandat med väte. Mätningar från rymdsonden Juno tyder på att den saknar skarp gräns.'],
+    ],
+    staplar: [
+      { rubrik: 'Atmosfären, räknat i volym', delar: [['väte', 89.8], ['helium', 10.2]], not: 'Därtill små mängder metan, ammoniak och vattenånga. Det är de som bildar molnen och ger färgerna.' },
+    ],
+  },
+  saturnus: {
+    svar: 'Saturnus består, precis som Jupiter, mest av väte och helium och saknar fast yta. Längst in finns en kärna av is och sten som troligen är utspädd och suddig. Ringarna består nästan bara av vattenis.',
+    lager: [
+      ['Atmosfär med moln', 1, '#efdcae', 'Väte och helium med moln av ammoniak.'],
+      ['Flytande väte', 0.97, '#cdb27c', 'Gasen övergår gradvis i vätska.'],
+      ['Flytande metalliskt väte', 0.6, '#8a7a5e', 'Börjar djupare än i Jupiter, eftersom trycket inne i Saturnus är lägre.'],
+      ['Utspädd kärna', 0.4, '#5e5040', 'Is och sten blandat med väte. Vågor i ringarna tyder på att kärnan är utdragen och suddig.'],
+    ],
+    staplar: [
+      { rubrik: 'Atmosfären, räknat i volym', delar: [['väte', 96.3], ['helium', 3.3], ['övrigt', 0.4, 'mest metan och ammoniak']], not: 'Värdena kommer från NASA. Nyare analyser tyder på att andelen helium kan vara något större.' },
+    ],
+  },
+  uranus: {
+    svar: 'Uranus består mest av så kallad is: vatten, ammoniak och metan, som djupt inne i planeten är en het, tät vätska. Ytterst ligger en atmosfär av väte och helium med lite metan, och längst in en kärna av sten och metall.',
+    lager: [
+      ['Atmosfär', 1, '#a8e6ee', 'Väte och helium med lite metan, som ger den blågröna färgen.'],
+      ['Mantel av ”is”', 0.8, '#3f8fa8', 'Vatten, ammoniak och metan i form av en het, tät vätska.'],
+      ['Kärna', 0.2, '#6a5a4a', 'Sten och metall, troligen något mindre än jorden.'],
+    ],
+    staplar: [
+      { rubrik: 'Atmosfären, räknat i volym', delar: [['väte', 82.5], ['helium', 15.2], ['metan', 2.3]] },
+    ],
+  },
+  neptunus: {
+    svar: 'Neptunus består mest av så kallad is: vatten, ammoniak och metan, som djupt inne i planeten är en het och tät vätska. Längst in finns en kärna av sten och metall. Ytterst ligger en atmosfär av väte (cirka 80 procent), helium (cirka 19 procent) och lite metan. Det är metanet som ger den blå färgen.',
+    lager: [
+      ['Atmosfär', 1, '#7aa6ff', 'Väte och helium med lite metan.'],
+      ['Mantel av ”is”', 0.85, '#2f5fb0', 'Vatten, ammoniak och metan i form av en het, tät vätska.'],
+      ['Kärna', 0.25, '#6a5a4a', 'Sten och metall, ungefär lika stor som jorden.'],
+    ],
+    staplar: [
+      { rubrik: 'Atmosfären, räknat i volym', delar: [['väte', 80], ['helium', 19], ['metan', 1.5]], not: 'Andelarna är mätta med viss osäkerhet och blir därför inte exakt 100 procent tillsammans.' },
+    ],
+  },
+};
+PLANETER.forEach((p) => Object.assign(p, FORDJUPNING[p.id], { bestar: BESTAR[p.id] }));
+PLANETER.filter((p) => !p.sol && !p.mane).forEach((p, k) => { p.nr = k + 1; });
 const N = PLANETER.length;
 
 /* =====================================================================
@@ -906,6 +1090,7 @@ function faktaVarde(p, v) {
   if (v === 'AVST') return `${fmt(p.a * AE_KM / 1e6, p.a * AE_KM / 1e6 >= 1000 ? 0 : 1)}${NB}miljoner km (${fmt(p.a, p.a < 10 ? 2 : 1)}${NB}AE)`;
   if (v === 'LJUS') return tidText(p.a * AE_KM / C_KM);
   if (v === 'LJUSJORD') return tidText(AE_KM / C_KM);
+  if (v === 'LJUSMANE') return `${sig(p.avstandJorden / C_KM, 2)}${NB}s`;
   return nb(v);
 }
 
@@ -1366,7 +1551,7 @@ hjalte.add(stjarnor);
 
 const AX_X0 = new THREE.Vector3(1, 0, 0);
 const qBas = new THREE.Quaternion();
-const START_SPIN = { jorden: 4.3, mars: 2.4, jupiter: 0.5, merkurius: 0.6, saturnus: 0.2 };
+const START_SPIN = { manen: 3.95, jorden: 4.3, mars: 2.4, jupiter: 0.5, merkurius: 0.6, saturnus: 0.2 };
 const planeter = PLANETER.map((p) => {
   const o = byggPlanet(p, { startSpin: START_SPIN[p.id] || 0 });
   o.anv = new THREE.Quaternion();
@@ -1496,7 +1681,7 @@ PLANETER.forEach((p, i) => {
   const o = byggPlanet(p, { seg: [64, 48], glod: 5.2 });
   bana.scen.add(o.root);
   bana.obj.push(o);
-  if (!p.sol) {
+  if (!p.sol && !p.mane) {
     const pts = [];
     for (let k = 0; k <= 256; k++) { const v = k / 256 * Math.PI * 2; pts.push(new THREE.Vector3(Math.cos(v), 0, -Math.sin(v))); }
     const lin = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
@@ -1508,6 +1693,7 @@ PLANETER.forEach((p, i) => {
 function banRadie(a, m) { const komp = 3.0 + 4.6 * Math.log2(1 + 2.8 * a); const verk = a * 2.1; return komp + (verk - komp) * m; }
 function banStorlek(p, m) {
   if (p.sol) return 2.0 + (0.5 - 2.0) * m;
+  if (p.mane) return 0.15 * (1 - 0.5 * m);
   const s = 0.2 + 0.085 * Math.sqrt(p.diameter / 1000);
   return s * (1 - 0.55 * m);
 }
@@ -1551,7 +1737,8 @@ function uppdateraGrannar() {
     if (h) { grannH.textContent = h.namn; grannH.classList.remove('dold'); grannH.setAttribute('aria-label', 'Till ' + h.namn); }
   }, 900);
   $('mobV').disabled = !v; $('mobH').disabled = !h;
-  $('nr').innerHTML = i === 0 ? '<b>Solen</b>' : `<b>${String(i).padStart(2, '0')}</b> / 08`;
+  const pi = PLANETER[i];
+  $('nr').innerHTML = pi.sol ? '<b>Solen</b>' : pi.mane ? '<b>Jordens måne</b>' : `<b>${String(pi.nr).padStart(2, '0')}</b> / 08`;
   document.querySelectorAll('.tick').forEach((t, k) => t.classList.toggle('aktiv', k === i));
 }
 
@@ -1585,6 +1772,38 @@ function gaTill(i, direkt) {
 
 /* ---------- Panelen ---------- */
 let panelMassa = 60, panelAlder = 17;
+function procent(v) { return `${fmt(v, v < 1 ? 2 : v % 1 ? 1 : 0)}${NB}%`; }
+function bestarHTML(p) {
+  const b = p.bestar;
+  // Genomskärning: tunna skikt förstoras så att de syns
+  const visa = [];
+  b.lager.forEach(([, y], i) => { visa.push(i === 0 ? 1 : Math.max(0.1, Math.min(y, visa[i - 1] - 0.07))); });
+  const cx = 110, cy = 104, R = 100;
+  const skikt = b.lager.map(([namn, , farg], i) => {
+    const r = R * visa[i];
+    return `<path d="M${cx - r} ${cy} A${r} ${r} 0 0 1 ${cx + r} ${cy} Z" fill="${farg}" stroke="rgba(4,6,12,.55)" stroke-width="0.8"><title>${namn}</title></path>`;
+  }).join('');
+  const svg = `<svg class="snitt" viewBox="0 0 220 106" role="img" aria-label="Genomskärning av ${p.namn}">
+    <defs><radialGradient id="snittSken" cx="50%" cy="100%" r="100%"><stop offset="0.55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.28"/></radialGradient></defs>
+    ${skikt}<path d="M${cx - R} ${cy} A${R} ${R} 0 0 1 ${cx + R} ${cy} Z" fill="url(#snittSken)"/>
+    <line x1="4" y1="${cy + 0.5}" x2="216" y2="${cy + 0.5}" stroke="rgba(255,255,255,.28)" stroke-width="0.8"/></svg>`;
+  const lista = b.lager.map(([namn, , farg, text]) => `<li><i style="background:${farg}"></i><div><b>${namn}</b><span>${text}</span></div></li>`).join('');
+  const staplar = b.staplar.map((st) => `
+    <div class="stapel">
+      <div class="st-rubrik">${st.rubrik}</div>
+      <div class="st-bar">${st.delar.map(([n, v]) => `<span style="flex:${Math.max(v, 1.4)} 0 0;background:${AMNE[n]}" title="${n} ${procent(v)}"></span>`).join('')}</div>
+      <ul class="st-lista">${st.delar.map(([n, v, detalj]) => `<li><i style="background:${AMNE[n]}"></i><span>${n[0].toUpperCase() + n.slice(1)}${detalj ? `<small>${detalj}</small>` : ''}</span><b>${procent(v)}</b></li>`).join('')}</ul>
+      ${st.not ? `<p class="not">${st.not}</p>` : ''}
+    </div>`).join('');
+  return `<p class="svar">${b.svar}</p>
+    <div class="ruta bestar">
+      <div class="st-rubrik">Inifrån och ut</div>
+      <div class="snitt-rad">${svg}<ul class="lagerlista">${lista}</ul></div>
+      <p class="not">Skikten är ritade ungefär i rätt proportioner, men de allra tunnaste är förstorade så att de syns.${b.lagerNot ? ' ' + b.lagerNot : ''}</p>
+    </div>
+    ${b.atmoNot ? `<p class="not atmo-not">${b.atmoNot}</p>` : ''}
+    ${staplar}`;
+}
 function fyllPanel(p, anim) {
   const gor = () => {
     const i = PLANETER.indexOf(p);
@@ -1596,6 +1815,7 @@ function fyllPanel(p, anim) {
     }).join('');
     const r = p.radie * 1000;
     const gBer = G_KONST * p.massa / (r * r);
+    const vems = p.sol ? 'solens' : p.mane ? 'månens' : 'planetens';
     const gasNot = p.gas ? '<p class="not">Gasplaneterna saknar fast yta. Värdena gäller vid molntopparna, där trycket är lika stort som vid jordytan.</p>' : '';
     const jordNot = p.id === 'jorden' ? `<p class="not">I Sverige mäter vi 9,82${NB}N/kg. Vi ligger närmare jordens medelpunkt än ekvatorn gör och påverkas mindre av jordens rotation.</p>` : '';
     panelInre.innerHTML = `
@@ -1605,10 +1825,12 @@ function fyllPanel(p, anim) {
       <p class="p-ingress">${p.ingress}</p>
       ${lager ? `<div class="lager">${lager}</div>` : ''}
       <nav class="hopp" aria-label="Innehåll">
-        <button data-hopp="pFakta">Fakta</button><button data-hopp="pFordj">Fördjupning</button><button data-hopp="pUdda">Udda och oväntat</button><button data-hopp="pDu">Du på ${p.namn}</button><button data-hopp="pFysik">Fysiken</button>
+        <button data-hopp="pFakta">Fakta</button><button data-hopp="pBestar">Består av</button><button data-hopp="pFordj">Fördjupning</button><button data-hopp="pUdda">Udda och oväntat</button><button data-hopp="pDu">Du på ${p.namn}</button><button data-hopp="pFysik">Fysiken</button>
       </nav>
       <div class="p-rubrik" id="pFakta">Fakta</div>
       <dl class="fakta">${fakta}</dl>
+      <div class="p-rubrik" id="pBestar">Vad består ${p.namn} av?</div>
+      ${bestarHTML(p)}
       <div class="p-rubrik" id="pFordj">Fördjupning</div>
       <div class="fordj">${p.avsnitt.map(([rub, txt]) => `<h3>${rub}</h3><p>${txt}</p>`).join('')}</div>
       <div class="p-rubrik" id="pUdda">Udda och oväntat</div>
@@ -1632,11 +1854,11 @@ function fyllPanel(p, anim) {
         <ul class="dar">
           <li><i>g</i> = tyngdfaktor (N/kg)</li>
           <li><i>G</i> = gravitationskonstanten, ${sci(G_KONST, 3)}${NB}N·m²/kg²</li>
-          <li><i>M</i> = ${p.sol ? 'solens' : 'planetens'} massa (kg)</li>
-          <li><i>r</i> = ${p.sol ? 'solens' : 'planetens'} radie vid ekvatorn (m)</li>
+          <li><i>M</i> = ${vems} massa (kg)</li>
+          <li><i>r</i> = ${vems} radie vid ekvatorn (m)</li>
         </ul>
         ${jordNot}
-        <p class="not">Flykthastigheten, den fart som krävs för att lämna ${p.sol ? 'solen' : 'planeten'} för gott, är ${sig(flykt(p), 3)}${NB}km/s.</p>
+        <p class="not">Flykthastigheten, den fart som krävs för att lämna ${p.sol ? 'solen' : p.mane ? 'månen' : 'planeten'} för gott, är ${sig(flykt(p), 3)}${NB}km/s.</p>
       </div>
       <div class="p-rubrik">Visste du att</div>
       <ol class="visste">${p.visste.map((t) => `<li>${t}</li>`).join('')}</ol>
@@ -1672,7 +1894,8 @@ function fyllPanel(p, anim) {
       ];
       if (rA && p.period) {
         const ar = panelAlder * 365.256 / p.period;
-        rader.push([`Din ålder i ${p.namn.toLowerCase() === 'jorden' ? 'jordår' : p.namn + 'år'}`, `${sig(ar, ar < 10 ? 2 : 3)}${NB}år`]);
+        if (p.mane) rader.push(['Så många varv har månen gått runt jorden sedan du föddes', `${fmt(ar)}${NB}varv`]);
+        else rader.push([`Din ålder i ${p.namn.toLowerCase() === 'jorden' ? 'jordår' : p.namn + 'år'}`, `${sig(ar, ar < 10 ? 2 : 3)}${NB}år`]);
       }
       $('utfall').innerHTML = rader.map(([a, b]) => `<div><span>${a}</span><b>${b}</b></div>`).join('')
         + (p.gas ? '' : '<div style="border:0;padding-bottom:0"><span style="font-size:12px;color:var(--faint)">Fallet räknas utan luftmotstånd.</span></div>');
@@ -1751,11 +1974,14 @@ PLANETER.forEach((p, i) => {
   k.className = 'kort';
   k.style.setProperty('--c', p.acc);
   const ljus = p.a ? faktaVarde(p, 'LJUS') : '';
-  k.innerHTML = `<div class="k-top"><span>${p.kortTop}</span><span>${p.a ? fmt(p.a, p.a < 10 ? 2 : 1) + NB + 'AE' : 'Centrum'}</span></div>
+  if (p.sol || p.id === 'jupiter') k.classList.add('bred');
+  const hoger = p.a ? fmt(p.a, p.a < 10 ? 2 : 1) + NB + 'AE' : p.mane ? fmt(p.avstandJorden) + NB + 'km bort' : 'Centrum';
+  const fot = p.a ? 'Ljuset når hit på ' + ljus : p.mane ? 'Ljuset från jorden tar ' + faktaVarde(p, 'LJUSMANE') : '99,8' + NB + '% av solsystemets massa';
+  k.innerHTML = `<div class="k-top"><span>${p.kortTop}</span><span>${hoger}</span></div>
     <div class="k-bild"></div>
     <div class="k-namn">${p.namn}</div>
     <div class="k-rad">${p.kort}</div>
-    <div class="k-fot"><span>${p.a ? 'Ljuset når hit på ' + ljus : '99,8' + NB + '% av solsystemets massa'}</span><span class="k-pil"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>`;
+    <div class="k-fot"><span>${fot}</span><span class="k-pil"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>`;
   k.querySelector('.k-bild').appendChild(nyttKlot(i));
   k.addEventListener('click', () => flygTill(i));
   kortRutnat.appendChild(k);
@@ -1836,7 +2062,7 @@ function renderaTumnaglar() {
   const ut = document.createElement('canvas'); ut.width = ut.height = px;
   const ctx = ut.getContext('2d');
   const resultat = [];
-  const vinklar = { jorden: 2.2, mars: 3.2, jupiter: 1.2, saturnus: 0.2 };
+  const vinklar = { manen: 1.85, jorden: 2.2, mars: 3.2, jupiter: 1.2, saturnus: 0.2 };
   renderer.setScissorTest(true);
   PLANETER.forEach((p, i) => {
     const o = byggPlanet(p, { seg: [96, 72], startSpin: vinklar[p.id] || 0.8, glod: 3.4 });
@@ -1862,6 +2088,15 @@ function renderaTumnaglar() {
     renderer.render(scen, kam);
     ctx.clearRect(0, 0, px, px);
     ctx.drawImage(renderer.domElement, 0, renderer.domElement.height - px, px, px, 0, 0, px, px);
+    // Svart bakgrund blir genomskinlig: alfa = ljusaste kanalen, färgen räknas upp igen
+    const bild = ctx.getImageData(0, 0, px, px), d = bild.data;
+    for (let k = 0; k < d.length; k += 4) {
+      const a = Math.max(d[k], d[k + 1], d[k + 2]);
+      if (a === 0) { d[k + 3] = 0; continue; }
+      const f = 255 / a;
+      d[k] *= f; d[k + 1] *= f; d[k + 2] *= f; d[k + 3] = a;
+    }
+    ctx.putImageData(bild, 0, 0);
     resultat.push(ut.toDataURL('image/png'));
     scen.remove(o.root);
   });
@@ -1959,7 +2194,7 @@ const etikettBox = $('etiketter');
 PLANETER.forEach((p, i) => {
   const e = document.createElement('div');
   e.className = 'et';
-  e.innerHTML = `${p.namn}<small>${p.period ? (p.period < 1000 ? fmt(p.period) + NB + 'dygn per varv' : sig(p.period / 365.256, 3) + NB + 'år per varv') : 'Centrum'}</small>`;
+  e.innerHTML = `${p.namn}<small>${p.mane ? fmt(p.period, 1) + NB + 'dygn per varv runt jorden' : p.period ? (p.period < 1000 ? fmt(p.period) + NB + 'dygn per varv' : sig(p.period / 365.256, 3) + NB + 'år per varv') : 'Centrum'}</small>`;
   etikettBox.appendChild(e);
   bana.etiketter.push(e);
 });
@@ -2172,6 +2407,12 @@ function uppdateraBanor(dt, br) {
     const R = banStorlek(p, m);
     if (p.sol) {
       o.root.position.set(0, 0, 0);
+    } else if (p.mane) {
+      // Månen följer jorden, som alltid uppdateras före den
+      const jord = bana.obj[i - 1].root.position;
+      const r = 1.15 + (0.45 - 1.15) * m;
+      const v = THREE.MathUtils.degToRad(p.L0 + 360 * bana.dagar / p.period);
+      o.root.position.set(jord.x + r * Math.cos(v), 0, jord.z - r * Math.sin(v));
     } else {
       const r = banRadie(p.a, m);
       const v = THREE.MathUtils.degToRad(p.L0 + 360 * bana.dagar / p.period);
@@ -2200,7 +2441,7 @@ function uppdateraBanor(dt, br) {
   });
   // Etiketter som skulle krocka döljs; den man pekar på och de mest kända går först
   const placerade = [];
-  const ordning = [hoverIdx, 0, 3, 5, 6, 7, 8, 4, 2, 1].filter((v, k, a) => v >= 0 && a.indexOf(v) === k);
+  const ordning = [hoverIdx, ...['solen', 'jorden', 'jupiter', 'saturnus', 'uranus', 'neptunus', 'mars', 'venus', 'merkurius', 'manen'].map((id) => PLANETER.findIndex((q) => q.id === id))].filter((v, k, a) => v >= 0 && a.indexOf(v) === k);
   ordning.forEach((i) => {
     const r = etRutor[i];
     const ruta = { x0: r.x - r.b / 2, x1: r.x + r.b / 2, y0: r.y - 20, y1: r.y };

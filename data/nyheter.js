@@ -103,6 +103,79 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-27-neutrinernas-smak-avgor-stjarnans-ode",
+    date: "2026-09-27",
+    title: "Neutrinernas byte av sort kan avgöra om stjärnan exploderar eller blir ett svart hål",
+    deck: "När en tung stjärnas kärna faller ihop bärs nästan all energi bort av neutriner. Två forskare vid Niels Bohr-institutet har låtit 195 stjärnor kollapsa i datorn och sett vad som händer om neutrinerna hinner byta sort på vägen ut: stjärnor som annars hade exploderat slutar i stället som svarta hål. Känsligast är stjärnor mellan 16 och 30 solmassor.",
+    category: "Astrofysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-27-neutrinernas-smak-avgor-stjarnans-ode.jpg",
+    imageAlt: "Supernovaresten Cassiopeia A fotograferad i nära infrarött ljus. Ett stort, nästan runt skal av trådiga rosa och orange gasslingor breder ut sig mot ett svart stjärnfält, omgivet av mjuka gråvita dammoln.",
+    imageCredit: "Foto: NASA, ESA, CSA, STScI, Danny Milisavljevic (Purdue University), Ilse De Looze (UGent), Tea Temim (Princeton University). Bilden visar supernovaresten Cassiopeia A, alltså en stjärna som verkligen exploderade, och illustrerar utgången som studien handlar om.",
+    tags: ["astrofysik", "astronomi", "partikelfysik", "neutrino", "supernova", "svart hål", "neutronstjärna", "stjärnutveckling", "gravitation", "kärnfysik", "simulering"],
+    sources: [
+      { name: "Phys.org: Supernova or black hole: Neutrino flavor may determine the fate of dying stars (24 september 2026)", url: "https://phys.org/news/2026-09-supernova-black-hole-neutrino-flavor.html" },
+      { name: "Københavns Universitet, Niels Bohr-institutet: Supernova or black hole? Ghost particles flavor may determine the fate of dying stars (24 september 2026)", url: "https://news.ku.dk/all_news/2026/09/supernova-or-black-hole-ghost-particles-flavor-may-determine-the-fate-of-dying-stars" },
+      { name: "arXiv: Neutrino Flavor Conversion Shapes the Rate of Failed Core-collapse Supernovae — fri fulltextversion av studien", url: "https://arxiv.org/abs/2605.16504" }
+    ],
+    research: {
+      citation: "Mariam Gogilashvili och Irene Tamborra, ”Neutrino flavor conversion shapes the rate of failed core-collapse supernovae”, Physical Review D 114, L061304 (2026)",
+      url: "https://doi.org/10.1103/pz3y-3lv5"
+    },
+    larare: {
+      moment: [
+        { label: "Stjärnbildning: hur massan avgör en stjärnas liv", href: "katalog.html?id=fy2-5.6" },
+        { label: "Universums struktur", href: "katalog.html?id=fy2-5.1" },
+        { label: "Massdefekt och bindningsenergi", href: "katalog.html?id=fy1-9.2" }
+      ],
+      fragor: [
+        "Nästan all energi från en stjärnkollaps lämnar stjärnan som neutriner, medan bara omkring en procent går åt till att kasta ut höljet. Varför är det ändå den lilla andelen vi ser något av, och vad krävs för att mäta den stora?",
+        "Forskarna lät smakomvandlingen ske ögonblickligen och fullständigt, fast de vet att verkligheten är mer gradvis. Vad vinner man på en sådan avsiktligt grov förenkling, och vilka slutsatser får man då inte dra?",
+        "En simulering som räknar stjärnan som klotrund saknar rörelser i sidled. Hur kan en sådan förenkling systematiskt förskjuta svaret åt ett bestämt håll, och hur skulle ni pröva om den gör det?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Varje stjärna som väger mer än ungefär åtta solmassor slutar på samma sätt: mitten faller ihop. Vad som händer under sekunderna därefter är däremot inte givet. Antingen kastas stjärnans hölje ut i en supernova som under några veckor kan lysa ikapp en hel galax, eller så fortsätter materien bara inåt, utan smäll, tills ett svart hål slutit sig om alltihop.' },
+      { type: 'p', html: 'Vilken av de två utgångarna en enskild stjärna får har visat sig märkvärdigt svårt att räkna ut, och gränsen mellan dem har flyttat sig fram och tillbaka i takt med att simuleringarna blivit bättre. Nu pekar Mariam Gogilashvili och Irene Tamborra vid Niels Bohr-institutet i Köpenhamn ut en ingrediens som verkar ha fattats i kalkylen: neutrinerna som strömmar ut ur den kollapsande kärnan byter sort på vägen, och det ändrar utgången.' },
+      { type: 'p', html: 'Slutsatsen vilar på 195 simulerade stjärnkollapser, från 9 till 120 solmassor, körda både med och utan det sortbytet. Arbetet är publicerat i <em>Physical Review D</em>.' },
+
+      { type: 'h2', text: 'Chockvågen som stannar på vägen ut' },
+      { type: 'p', html: 'Inne i en tung stjärna byggs allt tyngre grundämnen upp genom fusion, men vid järn tar det stopp: att fusionera järn kostar energi i stället för att ge. När järnkärnan i mitten vuxit till drygt 1,4&nbsp;solmassor kan den inte längre bära sin egen tyngd, och på mindre än en sekund faller den ihop från något jordklotsstort till en kula på några tiotals kilometer.' },
+      { type: 'p', html: 'Där stannar kollapsen tvärt. Materien i mitten når atomkärnornas egen täthet, blir styv som en vägg och studsar. Studsen skickar ut en chockvåg, men den når inte fram. Chockvågen gör av med sin energi på att slita sönder de järnkärnor den möter, och efter några hundradels sekunder har den stannat ungefär 150&nbsp;km ut, medan resten av stjärnan fortsätter regna ner på den.' },
+      { type: 'p', html: 'Något måste alltså blåsa liv i chockvågen igen, och den enda energikälla som är stor nog är neutrinerna. Kollapsen frigör omkring $3 \\cdot 10^{46}\\ \\mathrm{J}$, och nästan allt, kring 99&nbsp;procent, lämnar stjärnan som neutriner under ett tiotal sekunder. Det är ett par hundra gånger så mycket energi som solen hinner stråla ut under hela sitt liv. Själva explosionen kräver bara omkring en procent av detta, och ljuset vi ser en tiotusendel.' },
+      { type: 'p', html: 'Fastnar tillräckligt många neutriner i gasen bakom den stannade chockvågen värms gasen upp, trycket stiger och chockvågen far vidare: supernova. Räcker det inte fortsätter materien inåt och kärnan blir ett svart hål. Astronomerna kallar det senare en misslyckad supernova, en stjärna som helt enkelt slocknar och försvinner.' },
+
+      { type: 'h2', text: 'Tre sorters neutriner, men bara en värmer' },
+      { type: 'p', html: 'Här kommer partikelfysiken in. Neutriner finns i tre sorter, som fysikerna kallar smaker: elektronneutrino, myonneutrino och tauneutrino, var och en med sin antipartikel. Sorterna är inte utbytbara när det gäller uppvärmning. Bara elektronneutriner och elektronantineutriner fastnar lätt i gasen bakom chockvågen, genom att göra om en neutron till en proton eller tvärtom. Myon- och tauneutriner passerar i praktiken rakt igenom utan att lämna något efter sig.' },
+      { type: 'p', html: 'Samtidigt är neutriner ökända för att byta smak under färden. Att de gör det på vägen från solen till jorden gav Nobelpriset i fysik 2015. Men inne i en kollapsande stjärnkärna är neutrinerna så tätt packade att de också påverkar varandra, och då kan omvandlingen gå oerhört fort: på nanosekunder och över sträckor på centimetrar kan de tre smakerna jämnas ut mot varandra.' },
+      { type: 'p', html: 'Följden är att energibokföringen bakom chockvågen ritas om. Blandas sorterna om byts en del av de elektronneutriner som kunde ha värmt gasen mot sorter som bara flyger förbi, samtidigt som också avkylningen längre in ändras. Att detta borde spela roll har varit känt länge. Problemet har varit att räkna på det: omvandlingen sker på skalor många miljoner gånger mindre än det område simuleringen följer, och ingen dator klarar båda samtidigt.' },
+
+      { type: 'h2', text: '195 stjärnor, två gånger var' },
+      { type: 'p', html: 'Gogilashvili och Tamborra löste det med en avsiktligt grov genväg. I stället för att följa omvandlingen i detalj lät de den ske ögonblickligen och fullständigt så snart tätheten översteg ett valt gränsvärde: de tre smakerna delar då lika, medan antalet partiklar, deras rörelsemängd och leptontalet bevaras. Det ger inte ett realistiskt förlopp, men det ger en övre gräns för hur mycket smakomvandlingen alls kan betyda.' },
+      { type: 'p', html: 'Eftersom ingen vet hur långt ut i den kollapsande kärnan omvandlingen når fick gränstätheten $\\rho_c$ variera över fyra tiopotenser, från $10^{9}$ till $10^{13}\\ \\mathrm{g/cm^3}$. Själva kollapsen räknades i den öppna koden GR1D, som beskriver rörelsen med allmän relativitetsteori och följer tre sorters neutriner i 18 energiintervall. Eftersom koden behandlar stjärnan som klotrund lades turbulensen bakom chockvågen till med en separat modell, STIR.' },
+      { type: 'p', html: 'Utfallet är entydigt. Utan smakomvandling misslyckas 25,6&nbsp;procent av de 195 stjärnorna med att explodera. Med omvandling stiger andelen till 50,8&nbsp;procent redan vid den grundaste gränstätheten, och till 96,4&nbsp;procent vid den djupaste. Vägs stjärnorna samman efter hur vanliga de är i naturen, där lätta stjärnor är långt fler än tunga, går andelen från 27&nbsp;procent utan omvandling till mellan 47,6 och 88,3&nbsp;procent med.' },
+      { type: 'p', html: 'Känsligast är ett smalt band: stjärnor mellan 16 och 30&nbsp;solmassor. Där vänder ovanligt många modeller från explosion till tyst kollaps.' },
+      { type: 'quote', html: 'Att se ett så tydligt mönster över så många stjärnor sa oss att neutrinernas smakomvandling är något vi helt enkelt inte kan utelämna när vi försöker förstå hur tunga stjärnor slutar sina liv.', cite: 'Mariam Gogilashvili, Niels Bohr-institutet' },
+
+      { type: 'h2', text: 'Två gamla gåtor krymper' },
+      { type: 'p', html: 'Att just det massintervallet reagerar starkast är mer än en detalj, för det pekar rakt på två luckor som astronomerna brottats med i tjugo år.' },
+      { type: 'p', html: 'Den första kallas problemet med de röda superjättarna. Letar man upp bilder tagna innan en supernova syntes och identifierar stjärnan som sprängdes, hittar man aldrig någon tyngre än ungefär 17&nbsp;solmassor, trots att betydligt tyngre röda superjättar finns och borde explodera. Om stjärnorna över det gränsvärdet i stället tenderar att kollapsa tyst, utan att synas, försvinner motsägelsen.' },
+      { type: 'p', html: 'Den andra gäller takten: räknar man hur många tunga stjärnor som föds i universum borde det bli fler supernovor än vi faktiskt ser. Även där hjälper misslyckade supernovor till att få siffrorna att gå ihop.' },
+      { type: 'p', html: 'Ett tredje samband gäller det som blir kvar. I modellerna med smakomvandling hamnar de neutronstjärnor som ändå bildas på massor kring 1,2 till 1,4&nbsp;solmassor, vilket ligger närmare de neutronstjärnor astronomerna faktiskt väger än vad simuleringarna annars ger.' },
+
+      { type: 'h2', text: 'Vad siffrorna inte säger' },
+      { type: 'p', html: 'De högsta talen ska inte läsas som en förutsägelse. Att nio av tio tunga stjärnor skulle sluta som svarta hål stämmer uppenbart inte med att vi ser supernovor, och forskarna gör heller inte det anspråket. Gränstätheten är en fri parameter just därför att ingen ännu vet var omvandlingen sätter in, och den ögonblickliga utjämningen är en ytterlighet, inte en beskrivning av verkligheten.' },
+      { type: 'p', html: 'Till det kommer att simuleringarna behandlar stjärnan som klotrund. Verkliga kollapser är allt annat än det, och forskarna påpekar själva att de därmed missar de storskaliga svallningar hos chockvågen som i tre dimensioner kan hjälpa en explosion på traven. Den bristen drar resultaten åt fler misslyckanden, inte färre. Nästa steg, skriver de, är att låta smakomvandlingen utvecklas i takt med kollapsen i stället för att slås på vid en vald täthet.' },
+      { type: 'p', html: 'Poängen kvarstår ändå: en egenskap hos universums skyggaste partikel, uppmätt i detektorer djupt under jord, flyttar gränsen för vilka stjärnor som exploderar och vilka som bara försvinner.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'När SN&nbsp;1987A exploderade i Stora magellanska molnet fångade tre detektorer upp ett par dussin neutriner under ungefär tretton sekunder, ett par timmar innan ljuset kom fram. Neutrinerna lämnar kärnan direkt, medan ljuset måste arbeta sig ut genom hela stjärnan.',
+        'En misslyckad supernova syns som ingenting alls. Den mest omtalade kandidaten är en röd superjätte på omkring 25&nbsp;solmassor i galaxen NGC&nbsp;6946, som blossade upp svagt 2009 och därefter aldrig gick att återfinna.',
+        'Av energin i en stjärnkollaps går kring 99&nbsp;procent till neutriner och ungefär en procent till att kasta ut stjärnans hölje. Ljuset, det enda vi ser med blotta ögat, är en försvinnande liten rest.'
+      ] }
+    ]
+  },
+  {
     id: "2026-09-26-vagorna-langs-virvelns-karna",
     date: "2026-09-26",
     title: "Vattenvirvelns kärna bär vågor som ett spänt rep — och energin vandrar nedåt sex vågor i taget",

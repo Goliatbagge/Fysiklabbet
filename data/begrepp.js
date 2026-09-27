@@ -3361,4 +3361,29 @@ window.BEGREPP = [
       { type: 'p', html: 'Sambandet mellan våglängd och frekvens för en viss sorts våg kallas dess dispersionsrelation, och den är ett slags fingeravtryck: den säger hur vågen sprids, hur snabbt ett vågpaket faller isär och vilka vågor som alls kan utbyta energi med varandra. Att mäta upp den är därför oftast det första en fysiker gör när en ny sorts våg har hittats.' }
     ]
   },
+  {
+    id: 'neutrinooscillation',
+    term: 'Neutrinooscillation',
+    former: ['neutrinooscillation', 'neutrinooscillationen', 'neutrinooscillationer', 'neutrinooscillationerna', 'smakomvandling', 'smakomvandlingen', 'smakomvandlingar', 'smakomvandlingarna', 'neutrinosmak', 'neutrinosmaken', 'neutrinosmaker', 'sortbyte', 'sortbytet'],
+    kort: 'Neutriner finns i tre sorter, och en neutrino som skickas iväg som den ena sorten kan anlända som en annan. Bytet är bara möjligt om neutriner har massa, vilket länge antogs att de inte hade.',
+    relaterade: ['neutrino', 'lepton', 'svag-vaxelverkan', 'standardmodellen'],
+    body: [
+      { type: 'p', html: 'Det finns tre sorters neutriner, eller <em>smaker</em> som fysikerna säger: elektronneutrino, myonneutrino och tauneutrino. Namnet talar om vilken partikel neutrinon hör ihop med när den föds eller fångas in. Det märkliga är att sorten inte ligger fast. En neutrino som lämnar solens inre som elektronneutrino kan mycket väl träffa en detektor på jorden som myonneutrino. Sannolikheten för att hitta den i en viss sort svänger fram och tillbaka längs färdvägen, ungefär som en ton som långsamt glider mellan två instrument, och det är den svängningen som gett fenomenet namnet oscillation.' },
+      { type: 'p', html: 'Att det alls kan ske beror på att de tre sorterna inte är samma sak som tre bestämda massor. Varje sort är en blandning av tre massvarianter, och de tre massvarianterna rör sig inte riktigt lika fort. Under resan glider de därför ur takt med varandra, och blandningen som kommer fram är en annan än den som skickades i väg. Skulle alla neutriner väga exakt lika mycket, eller ingenting alls, kunde de aldrig glida ur takt och sorten skulle vara oföränderlig.' },
+      { type: 'p', html: 'Upptäckten löste en gåta som plågat fysikerna i trettio år. Detektorer på jorden fann bara ungefär en tredjedel av de elektronneutriner som solens energiproduktion borde ge. Neutrinerna hade inte försvunnit, de hade bytt sort på vägen och gled därför förbi mätningen. Slutgiltiga bevis kom kring millennieskiftet och belönades med Nobelpriset i fysik 2015. I extremt täta miljöer, som mitten av en kollapsande stjärna, är neutrinerna dessutom så många att de påverkar varandras omvandling, och då kan sortbytet gå på nanosekunder i stället för på ljusminuter.' }
+    ]
+  },
+  {
+    id: 'misslyckad-supernova',
+    term: 'Misslyckad supernova',
+    former: ['misslyckad supernova', 'misslyckade supernovor', 'misslyckad supernovaexplosion'],
+    kort: 'En tung stjärna vars kärna faller ihop utan att höljet kastas ut. I stället för en lysande explosion blir resultatet ett svart hål, och på himlen syns en stjärna som bara slocknar.',
+    relaterade: ['supernova', 'svart-hal', 'neutronstjarna', 'neutrino'],
+    body: [
+      { type: 'p', html: 'När en stjärna på mer än ungefär åtta solmassor har byggt upp en kärna av järn kan kärnan inte längre bära sin egen tyngd, och den faller ihop på bråkdelen av en sekund. Studsen när mitten blir stenhård skickar ut en chockvåg, men chockvågen har inte kraft nog att ta sig hela vägen ut genom stjärnan av egen kraft. Den stannar på vägen, och sedan står allt och väger.' },
+      { type: 'p', html: 'Vinner uppvärmningen från neutrinerna som strömmar ur den heta mitten kommer chockvågen i gång igen och stjärnans yttre lager slungas ut: en supernova. Förlorar den fortsätter materien i stället bara inåt. Ingen explosion sker, resten av stjärnan faller ner på mitten, och kvar blir ett svart hål. Det är den utgången som kallas en misslyckad supernova, ibland också en tyst kollaps.' },
+      { type: 'p', html: 'Att leta efter dem är svårt, för man letar efter något som inte händer. Metoden är att fotografera samma galaxer år efter år och se om någon ljusstark stjärna har försvunnit utan att först ha exploderat. Några enstaka kandidater finns, och de är intressanta av två skäl: de skulle förklara varför astronomerna ser färre supernovor än antalet nyfödda tunga stjärnor tycks kräva, och varför de tyngsta röda superjättarna aldrig verkar hinna explodera.' }
+    ]
+  },
 ];
+

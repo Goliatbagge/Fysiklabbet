@@ -63,6 +63,18 @@ const REGLER = [
         rattelse: 'Adverbet skrivs i ett ord: överända (falla överända, vrida överända).',
     },
     {
+        namn: 'djupt-ned-i',
+        niva: 'fel',
+        monster: /\bdjupt ned i\b/gi,
+        rattelse: 'Läge, inte riktning: djupt nere i. ("ned" anger rörelse: gräva ned i marken.)',
+    },
+    {
+        namn: 'vattnet-frusen',
+        niva: 'fel',
+        monster: /\bvattnet (är |var |finns |ligger )?frusen\b/gi,
+        rattelse: 'Fel genus: vattnet är ett neutrum, alltså fruset.',
+    },
+    {
         namn: 'varken-inte-vare-sig',
         niva: 'fel',
         // "vare sig … eller" kräver en negation före sig ("kan inte vare sig …").

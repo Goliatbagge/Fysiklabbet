@@ -258,6 +258,29 @@ input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border: 0; bord
   content: counter(v, decimal-leading-zero); position: absolute; left: 0; top: 1px;
   font-family: var(--serif); font-size: 15px; color: var(--acc);
 }
+.hopp { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 26px; }
+.hopp button {
+  background: none; border: 0; padding: 2px 0; cursor: pointer; font-size: 12px; color: var(--faint);
+  border-bottom: 1px solid transparent; transition: color .25s, border-color .25s;
+}
+.hopp button:hover { color: var(--ink); border-color: var(--acc); }
+.fordj h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; line-height: 1.2; margin: 26px 0 8px; color: var(--ink); }
+.fordj h3:first-child { margin-top: 4px; }
+.fordj p { font-size: 14.5px; line-height: 1.85; color: #c6ccda; margin: 0; }
+.udda { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.udda li {
+  position: relative; padding: 16px 18px 16px 50px; border-radius: 14px; font-size: 14px; line-height: 1.7; color: #d3d8e4;
+  border: 1px solid color-mix(in srgb, var(--acc) 22%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--acc) 10%, transparent), rgba(255,255,255,.012) 60%);
+}
+.udda li::before {
+  content: ''; position: absolute; left: 20px; top: 22px; width: 12px; height: 12px; border-radius: 50%;
+  border: 1.5px solid var(--acc); box-shadow: 0 0 12px color-mix(in srgb, var(--acc) 60%, transparent);
+}
+.udda li::after {
+  content: ''; position: absolute; left: 14px; top: 26.5px; width: 24px; height: 3px; border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--acc) 70%, transparent); transform: rotate(-22deg);
+}
 .p-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; }
 .p-nav button {
   flex: 1; border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 14px; padding: 14px 16px;
@@ -716,6 +739,138 @@ const PLANETER = [
     ],
   },
 ];
+/* ---------- Fördjupning och udda fakta ----------
+   Visas i faktapanelen. HTML tillåts (&nbsp; mellan tal och enhet). */
+const FORDJUPNING = {
+  solen: {
+    avsnitt: [
+      ['En helt vanlig stjärna', 'Solen är en gul dvärg, en av hundratals miljarder stjärnor i Vintergatan och inte på något sätt ovanlig. Den bildades för cirka 4,6 miljarder år sedan, när ett moln av gas och stoft drogs ihop av sin egen gravitation. Räknat i massa består den till ungefär 73 procent av väte och 25 procent av helium. Resten, knappt två procent, är tyngre ämnen som syre, kol och järn.'],
+      ['Inifrån och ut', 'I kärnan är trycket och temperaturen så höga att vätekärnor smälter samman till helium. Energin tar sig först ut som strålning genom strålningszonen. Längre ut tar konvektionen över: het gas stiger, svalnar och sjunker igen, ungefär som i en kastrull med kokande gröt. Det vi ser som solens yta är fotosfären, som håller cirka 5&nbsp;500&nbsp;°C. Utanför den ligger kromosfären och sedan koronan, den tunna yttre atmosfären som syns som en vit krans vid en total solförmörkelse.'],
+      ['Solens rytm', 'Solen roterar snabbare vid ekvatorn än vid polerna, och det tvinnar ihop magnetfältet. Med ungefär elva års mellanrum byter fältet riktning. Vid solmaximum blir solfläckar, utbrott och stora gasmoln som slungas ut vanligare. När partiklar från sådana utbrott når jorden och leds in mot polerna av jordens magnetfält lyser himlen upp i norrsken.'],
+    ],
+    udda: [
+      'Koronan är över en miljon grader varm, alltså hundratals gånger varmare än ytan under den. Hur den värms upp är en av de stora olösta frågorna inom solfysiken.',
+      'Trots att solen omvandlar drygt fyra miljoner ton massa till energi varje sekund har den bara blivit ungefär 0,03 procent lättare sedan den bildades.',
+      'Ytan är täckt av granuler, celler av uppvällande het gas. Varje granul är ungefär lika stor som Frankrike och ersätts av en ny inom tio till tjugo minuter.',
+      'Solen är egentligen inte gul. Dess ljus är i praktiken vitt. Den ser gulaktig ut från marken eftersom atmosfären sprider bort en del av det blå ljuset.',
+      'Solvinden blåser upp en jättelik bubbla, heliosfären, som når långt förbi Neptunus. Rymdsonden Voyager 1 passerade gränsen år 2012 och blev den första farkosten i det interstellära rummet.',
+      'Solen, och vi med den, rusar runt Vintergatans centrum med drygt 800&nbsp;000&nbsp;km/h. Ett varv tar ändå mer än 200 miljoner år.',
+    ],
+  },
+  merkurius: {
+    avsnitt: [
+      ['En järnklump med tunt skal', 'Merkurius är den minsta planeten, något större än jordens måne. Ändå är den tät: bara jorden har högre medeldensitet. Det beror på att en ovanligt stor del av planeten är en järnkärna. En förklaring som många forskare tror på är att en jättekollision tidigt i solsystemets historia slet bort en stor del av den steniga manteln.'],
+      ['Ett landskap av ärr', 'Ytan påminner om månens, full av kratrar från nedslag som pågått i miljarder år. Den största, Calorisbassängen, är cirka 1&nbsp;550&nbsp;km bred. Nedslaget var så kraftigt att marken på andra sidan planeten tycks ha skakats sönder. Ytan är dessutom full av långa branter, eftersom hela planeten har krympt när kärnan svalnat, ungefär som skalet på ett äpple som torkar.'],
+      ['Svår att nå', 'Merkurius ligger närmast solen men är ändå en av de svåraste planeterna att besöka. En rymdsond som faller inåt mot solen får hela tiden högre fart och måste bromsa för att kunna gå in i bana runt planeten. Mariner 10 flög förbi tre gånger på 1970-talet, och MESSENGER kretsade runt Merkurius mellan 2011 och 2015. Den europeisk-japanska rymdsonden BepiColombo ska gå in i bana runt planeten i slutet av 2026.'],
+    ],
+    udda: [
+      'Merkurius bana vrider sig långsamt runt solen, lite mer än Newtons fysik kan förklara. Den lilla skillnaden blev ett av de första beläggen för Einsteins allmänna relativitetsteori.',
+      'På vissa platser på Merkurius kan man se solen gå upp, stanna, gå tillbaka ned en bit och sedan gå upp igen samma morgon.',
+      'Planeten har en svans. Solljus och solvind slår loss natriumatomer från ytan, och de bildar en svagt lysande svans som är miljontals kilometer lång.',
+      'Räknat i genomsnitt över tid är det Merkurius, inte Venus, som ligger närmast jorden. Merkurius är faktiskt den närmaste grannen till varenda planet i solsystemet.',
+      'Merkurius har ett svagt magnetfält. Det förvånade forskarna, som trodde att en så liten planet borde ha svalnat för länge sedan och förlorat sin flytande kärna.',
+    ],
+  },
+  venus: {
+    avsnitt: [
+      ['Tvillingen som gick åt ett annat håll', 'Venus och jorden är nästan lika stora, har nästan samma densitet och bildades troligen av liknande material. Ändå blev de helt olika världar. Venus kan ha haft grunda hav tidigt i sin historia. När solen blev starkare avdunstade vattnet, vattenångan förstärkte växthuseffekten ännu mer och till slut försvann vattnet ut i rymden.'],
+      ['Under molnen', 'Atmosfären består till 96 procent av koldioxid och är så tjock att trycket vid ytan är 92 gånger högre än på jorden. Under molnen finns en het stenöken med lavaslätter och tusentals vulkaner. Radarbilder tagna med några månaders mellanrum visar förändringar som tyder på att vissa vulkaner fortfarande är aktiva. Ljuset som når ned till marken är dämpat och orangefärgat.'],
+      ['Korta besök', 'De sovjetiska Venera-landarna var de första farkosterna som skickade bilder från ytan på en annan planet, år 1975. Den som höll längst, Venera 13, klarade sig i drygt två timmar innan hettan och trycket förstörde den. Flera nya rymdsonder till Venus planeras till 2030-talet.'],
+    ],
+    udda: [
+      'Molnen på Venus färdas runt hela planeten på ungefär fyra jorddygn, alltså omkring sextio gånger snabbare än planeten själv roterar. Fenomenet kallas superrotation.',
+      'Cirka 50&nbsp;km upp i atmosfären är trycket och temperaturen nästan som vid jordytan. Det är den mest jordlika miljön i solsystemet utanför jorden, och NASA har skissat på luftskepp som skulle kunna sväva där.',
+      'År 2020 rapporterade forskare att de hittat fosfin högt upp i molnen, en gas som på jorden främst bildas av levande organismer. Fyndet är fortfarande omstritt.',
+      'Axeln lutar bara cirka tre grader, så Venus har i praktiken inga årstider.',
+      'Efter månen är Venus det ljusaste objektet på natthimlen. Den syns ibland till och med mitt på dagen, om man vet var man ska titta.',
+    ],
+  },
+  jorden: {
+    avsnitt: [
+      ['En planet i lager', 'Innerst finns en fast kärna av järn och nickel, omgiven av en flytande yttre kärna. Utanför den ligger manteln av het, långsamt flytande sten, och ytterst en tunn skorpa. Skorpan är uppdelad i plattor som rör sig några centimeter om året, ungefär lika fort som naglarna växer. Där plattorna möts veckas bergskedjor upp och jorden skakar.'],
+      ['Månen håller oss stadiga', 'Månen bildades troligen när en himlakropp ungefär lika stor som Mars kolliderade med den unga jorden. Månens dragning ger tidvatten och håller jordaxelns lutning stabil, vilket ger jämnare klimat över långa tider. Tidvattnet bromsar samtidigt jordens rotation: dygnet blir ungefär två millisekunder längre per sekel, och månen glider bort från oss med 3,8&nbsp;cm om året.'],
+      ['Luften vi andas', 'Atmosfären består till 78 procent av kväve och 21 procent av syre. Syret finns där för att cyanobakterier och växter har producerat det i miljarder år. Utan liv hade luften sett helt annorlunda ut. Högt upp, i ozonskiktet, stoppas det mesta av solens ultravioletta strålning.'],
+    ],
+    udda: [
+      'Jorden är den tätaste planeten i solsystemet, med medeldensiteten 5&nbsp;514&nbsp;kg/m³.',
+      'Vi är närmast solen i början av januari, mitt i den nordiska vintern. Årstiderna beror på axelns lutning, inte på avståndet till solen.',
+      'Den punkt på jordytan som ligger längst från jordens medelpunkt är inte toppen på Mount Everest utan vulkanen Chimborazo i Ecuador. Det beror på att jorden buktar ut vid ekvatorn.',
+      'Varje år landar tiotusentals ton rymdstoft och små meteoriter på jorden, de flesta som mikroskopiska korn.',
+      'Står du i Stockholm följer du med i jordens rotation med drygt 850&nbsp;km/h. Vid ekvatorn går det nästan dubbelt så fort.',
+    ],
+  },
+  mars: {
+    avsnitt: [
+      ['En frusen öken', 'Mars har ungefär halva jordens diameter och är en kall, torr värld. Den tunna atmosfären består till 95 procent av koldioxid. Vid polerna finns istäcken av vattenis, som på vintern får ett lager av frusen koldioxid, alltså torris. Ett år på Mars är nästan två jordår, så årstiderna varar ungefär dubbelt så länge som hos oss.'],
+      ['Spår av vatten', 'Uttorkade floddalar, sjöbäddar och deltan visar att det en gång rann flytande vatten på ytan. I dag finns vattnet fruset under marken och i polarisarna. Rovern Perseverance kör sedan 2021 runt i Jezerokratern, en gammal sjöbädd, och samlar in stenprover som kan bära spår av forntida liv.'],
+      ['Den mest besökta planeten', 'Fler än ett dussin farkoster har landat på Mars eller gått i bana runt den. Den lilla helikoptern Ingenuity blev år 2021 den första farkosten som flög med egen motor på en annan planet. Den var tänkt att flyga fem gånger men klarade 72 flygningar.'],
+    ],
+    udda: [
+      'Mars har två små, potatisformade månar, Phobos och Deimos. Phobos närmar sig planeten med knappt två meter per sekel och kommer om några tiotals miljoner år antingen att störta eller slitas sönder till en ring.',
+      'Vulkanerna kunde bli så enorma för att Mars saknar plattektonik. En vulkan blir stående över samma heta punkt i hundratals miljoner år och fortsätter växa.',
+      'Dammstormar kan växa tills de täcker hela planeten och pågå i månader. En sådan storm år 2018 skymde solen så mycket att den solcellsdrivna rovern Opportunity tystnade för gott.',
+      'Flera hundra meteoriter som hittats på jorden kommer från Mars. De slogs loss vid stora nedslag och har färdats genom rymden i miljontals år.',
+      'Ett dygn på Mars kallas sol och är knappt 40 minuter längre än ett jorddygn. De som styr rovrarna har ibland levt efter Marstid och flyttat sina arbetspass 40 minuter framåt varje dag.',
+    ],
+  },
+  jupiter: {
+    avsnitt: [
+      ['Nästan en stjärna?', 'Jupiter består mest av väte och helium, precis som solen. Men den skulle behöva ungefär 80 gånger så stor massa för att fusion ska kunna starta i kärnan. Jupiter strålar ändå ut mer värme än den får från solen, eftersom planeten fortfarande långsamt drar ihop sig och frigör energi.'],
+      ['Metalliskt väte', 'Djupt nere i planeten blir trycket så högt att vätet börjar uppföra sig som en metall och leder elektrisk ström. Strömmarna där ger Jupiter solsystemets kraftigaste planetära magnetfält, ungefär 20&nbsp;000 gånger kraftfullare än jordens. Strålningen i fältet är så intensiv att rymdsonder måste skyddas med tjocka väggar av titan.'],
+      ['Band och stormar', 'De ljusa zonerna och de mörka bältena är molnband där vindarna blåser åt olika håll, med hastigheter på över 500&nbsp;km/h. Den stora röda fläcken är ett gigantiskt högtryck. Den har krympt under de senaste hundra åren men är fortfarande ungefär 1,3 gånger så bred som jorden.'],
+    ],
+    udda: [
+      'Jupiter har så stor massa att den och solen kretsar kring en gemensam punkt som ligger strax utanför solens yta.',
+      'År 1994 bröts kometen Shoemaker-Levy 9 i ett tjugotal bitar som störtade in i Jupiter en efter en. De största märkena i molnen var ungefär lika stora som jorden och syntes i månader.',
+      'Månen Io är den mest vulkaniska platsen i solsystemet, med hundratals aktiva vulkaner. Det är Jupiters tidvattenkrafter som knådar Io och värmer upp dess inre.',
+      'Månen Ganymedes är större än planeten Merkurius och är den enda månen man känner till som har ett eget magnetfält.',
+      'Jupiter har ringar, men de är tunna och mörka. De upptäcktes först 1979, när Voyager 1 flög förbi.',
+    ],
+  },
+  saturnus: {
+    avsnitt: [
+      ['En lätt jätte', 'Saturnus är den näst största planeten och består, precis som Jupiter, mest av väte och helium. Planeten är så lätt i förhållande till sin storlek att den har lägst densitet av alla planeter. Den snabba rotationen, ett varv på drygt tio timmar, plattar till den tydligt vid polerna.'],
+      ['Ringarna', 'Ringarna består av miljarder bitar vattenis med lite sten och damm. Trots att de är så breda är den totala massan liten, mindre än hälften av månen Mimas massa. Mätningar från rymdsonden Cassini tyder på att ringarna kan vara unga, kanske bara några hundra miljoner år, men frågan är fortfarande omstridd. Material från ringarna regnar hela tiden in i planeten, så de kommer inte att finnas för evigt.'],
+      ['Månar med hav och sjöar', 'Titan, den största månen, är större än Merkurius och den enda månen med en tjock atmosfär. Sonden Huygens landade där 2005, den mest avlägsna landning som gjorts. Den lilla månen Enceladus sprutar ut vatten ur sprickor vid sydpolen, från ett hav under isen. NASA planerar att skicka drönaren Dragonfly till Titan.'],
+    ],
+    udda: [
+      'Saturnus är den mest tillplattade planeten. Diametern är ungefär tio procent större vid ekvatorn än mellan polerna.',
+      'Ungefär vart femtonde år ser vi ringarna precis från kanten, och då försvinner de nästan helt i ett teleskop. Senast hände det i mars 2025.',
+      'Galileo Galilei såg ringarna 1610 men förstod inte vad de var. Han trodde att Saturnus hade två stora följeslagare och beskrev dem senare som ”öron”.',
+      'Månen Iapetus är ljus på ena sidan och mörk som asfalt på den andra.',
+      'Små herdemånar kretsar vid kanten av vissa ringar och håller ringpartiklarna på plats med sin gravitation.',
+    ],
+  },
+  uranus: {
+    avsnitt: [
+      ['En isjätte', 'Uranus och Neptunus kallas isjättar. Under en atmosfär av väte, helium och metan består en stor del av planeten av så kallad is: vatten, metan och ammoniak som på grund av trycket och värmen bildar en het, tät vätska kring en stenig kärna.'],
+      ['Den vältade planeten', 'Axeln lutar 98 grader, så Uranus rullar i praktiken fram längs sin bana. Den vanligaste förklaringen är att en jättekollision tidigt i historien knuffade omkull planeten. Ringarna och månarna kretsar kring den lutande ekvatorn, så hela systemet ser ut som en måltavla när vi tittar rakt på en av polerna.'],
+      ['Bara ett besök', 'Voyager 2 flög förbi 1986, och det är fortfarande det enda besöket. Då såg planeten nästan helt slät ut. Senare bilder från rymdteleskop har visat stormar och ljusa molnband som dyker upp när årstiderna skiftar. En rymdsond som ska gå i bana runt Uranus står högst på forskarnas önskelista i USA.'],
+    ],
+    udda: [
+      'Uranus har den kallaste uppmätta atmosfären av alla planeter, ned till cirka −224&nbsp;°C, trots att Neptunus ligger längre bort från solen.',
+      'Herschel ville kalla planeten Georgium Sidus, Georges stjärna, efter kung Georg III av Storbritannien.',
+      'Ringarna upptäcktes 1977, när Uranus passerade framför en stjärna och stjärnans ljus blinkade till flera gånger strax före och strax efter planeten.',
+      'Laboratorieförsök tyder på att det kan regna diamanter djupt inne i isjättarna, där tryck och värme pressar ihop kolet i metanet.',
+      'Voyager 2 råkade passera under en ovanligt kraftig stöt i solvinden. Därför gav mätningarna en missvisande bild av Uranus magnetfält i nästan 40 år, tills misstaget upptäcktes 2024.',
+    ],
+  },
+  neptunus: {
+    avsnitt: [
+      ['Väder i mörkret', 'Neptunus får bara ungefär en niohundradel så mycket solljus som jorden. Ändå har den solsystemets snabbaste vindar. Planeten strålar ut mer än dubbelt så mycket energi som den får från solen, och det är den inre värmen som driver vädret. När Voyager 2 flög förbi 1989 syntes en stor mörk storm, men när rymdteleskopet Hubble tittade några år senare var den borta.'],
+      ['Hittad med papper och penna', 'Uranus rörde sig inte riktigt som den borde. Den franske astronomen Urbain Le Verrier räknade ut var en okänd planet måste finnas för att förklara störningarna. År 1846 riktade Johann Galle i Berlin sitt teleskop dit och hittade samma kväll Neptunus mindre än en grad från den förutsagda platsen.'],
+      ['Triton', 'Den största månen, Triton, kretsar åt fel håll, motsatt planetens rotation. Det tyder på att den inte bildades vid Neptunus utan fångades in från Kuiperbältet, det område bortom Neptunus där också Pluto finns.'],
+    ],
+    udda: [
+      'De djupblå bilderna från Voyager 2 var färgförstärkta. Nya analyser från 2024 visar att Neptunus i verkligheten har nästan samma ljust grönblå färg som Uranus.',
+      'Galileo Galilei ritade av Neptunus redan 1612 men trodde att den var en stjärna.',
+      'Triton har gejsrar som sprutar kvävgas flera kilometer upp, trots att ytan håller cirka −235&nbsp;°C och är en av de kallaste som mätts i solsystemet.',
+      'Triton närmar sig långsamt planeten och kommer om miljarder år att slitas sönder, kanske till ett ringsystem som kan mäta sig med Saturnus ringar.',
+      'Den yttersta ringen är samlad i klumpar, så kallade bågar. Vanliga ringar jämnar ut sig, och det tog lång tid att förstå hur bågarna kunde hålla ihop.',
+    ],
+  },
+};
+PLANETER.forEach((p) => Object.assign(p, FORDJUPNING[p.id]));
 const N = PLANETER.length;
 
 /* =====================================================================
@@ -1449,16 +1604,23 @@ function fyllPanel(p, anim) {
       <div class="p-streck"></div>
       <p class="p-ingress">${p.ingress}</p>
       ${lager ? `<div class="lager">${lager}</div>` : ''}
-      <div class="p-rubrik">Fakta</div>
+      <nav class="hopp" aria-label="Innehåll">
+        <button data-hopp="pFakta">Fakta</button><button data-hopp="pFordj">Fördjupning</button><button data-hopp="pUdda">Udda och oväntat</button><button data-hopp="pDu">Du på ${p.namn}</button><button data-hopp="pFysik">Fysiken</button>
+      </nav>
+      <div class="p-rubrik" id="pFakta">Fakta</div>
       <dl class="fakta">${fakta}</dl>
-      <div class="p-rubrik">Du på ${p.namn}</div>
+      <div class="p-rubrik" id="pFordj">Fördjupning</div>
+      <div class="fordj">${p.avsnitt.map(([rub, txt]) => `<h3>${rub}</h3><p>${txt}</p>`).join('')}</div>
+      <div class="p-rubrik" id="pUdda">Udda och oväntat</div>
+      <ul class="udda">${p.udda.map((t) => `<li>${t}</li>`).join('')}</ul>
+      <div class="p-rubrik" id="pDu">Du på ${p.namn}</div>
       <div class="ruta">
         <div class="reglage"><label for="rMassa">Din massa <b id="vMassa"></b></label><input type="range" id="rMassa" min="20" max="150" value="${panelMassa}"></div>
         ${p.sol ? '' : `<div class="reglage"><label for="rAlder">Din ålder <b id="vAlder"></b></label><input type="range" id="rAlder" min="1" max="100" value="${panelAlder}"></div>`}
         <div class="utfall" id="utfall"></div>
         ${gasNot}
       </div>
-      <div class="p-rubrik">Fysiken bakom</div>
+      <div class="p-rubrik" id="pFysik">Fysiken bakom</div>
       <div class="ruta">
         <div class="formel">
           <span><i>g</i> =</span>
@@ -1488,6 +1650,10 @@ function fyllPanel(p, anim) {
       obj.lagerMal[id] = obj.lagerMal[id] > 0.5 ? 0 : 1;
       b.setAttribute('aria-pressed', obj.lagerMal[id] > 0.5);
     }));
+    panelInre.querySelectorAll('[data-hopp]').forEach((b) => b.addEventListener('click', () => {
+      const mal = $(b.dataset.hopp);
+      panel.scrollTo({ top: mal.offsetTop - 24, behavior: 'smooth' });
+    }));
     panelInre.querySelectorAll('[data-ga]').forEach((b) => b.addEventListener('click', () => gaTill(+b.dataset.ga)));
     const rM = $('rMassa'), rA = $('rAlder');
     const rakna = () => {
@@ -1515,6 +1681,7 @@ function fyllPanel(p, anim) {
     if (rA) rA.addEventListener('input', rakna);
     rakna();
     panelInre.classList.remove('ut');
+    if (anim) panel.scrollTo({ top: 0 });
   };
   if (anim) { panelInre.classList.add('ut'); setTimeout(gor, 320); } else gor();
 }
@@ -1867,12 +2034,13 @@ let datumSenast = '';
 /* =====================================================================
    HUVUDLOOP
    ===================================================================== */
-let senast = performance.now(), tid = 0, storlek = { w: 0, h: 0 }, vantaTumnaglar = false;
+let senast = performance.now(), tid = 0, storlek = { w: -1, h: -1 }, vantaTumnaglar = false;
 const vy = new THREE.Vector3();
 const vec = new THREE.Vector3();
 function anpassaStorlek() {
   const w = window.innerWidth, h = window.innerHeight;
-  if (w === storlek.w && h === storlek.h) return;
+  // En flik som ännu inte har fått någon storlek (0 × 0) väntar med layouten
+  if (!w || !h || (w === storlek.w && h === storlek.h)) return;
   const baraHojd = w === storlek.w && Math.abs(h - storlek.h) < 140 && MOBIL;
   storlek = { w, h };
   renderer.setSize(w, h, false);
@@ -1910,7 +2078,7 @@ function frame(nu) {
   tillstand.g += (tillstand.gMal - tillstand.g) * (1 - Math.exp(-dt * 2.6));
 
   const heroRect = hero.getBoundingClientRect();
-  const heroSyns = heroRect.bottom > 0;
+  const heroSyns = heroRect.bottom > 0 && lay.hero !== null;
   tillstand.scrollP = Math.min(1, Math.max(0, -heroRect.top / window.innerHeight));
   const ht = $('heroText');
   if (!panel.classList.contains('oppen')) {
@@ -2071,7 +2239,7 @@ const forsta = [planeter[tillstand.idx].ladda(), tex('vintergatan.jpg')];
 let klara = 0;
 forsta.forEach((pr) => pr.then(() => { klara++; $('lBar').style.width = (klara / forsta.length * 100) + '%'; }));
 
-document.fonts.ready.then(() => { storlek = { w: 0, h: 0 }; });
+document.fonts.ready.then(() => { storlek = { w: -1, h: -1 }; });
 requestAnimationFrame((t) => { senast = t; loop(t); });
 
 Promise.all(forsta).then(() => {
@@ -2079,7 +2247,7 @@ Promise.all(forsta).then(() => {
   setTimeout(() => {
     $('laddare').classList.add('klar');
     document.body.classList.remove('last');
-    storlek = { w: 0, h: 0 };
+    storlek = { w: -1, h: -1 };
   }, 350);
   // grannarna först, sedan resten i bakgrunden; därefter renderas tumnaglarna
   const nara = [];

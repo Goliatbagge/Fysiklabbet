@@ -517,7 +517,7 @@ function polyPunkter(sides) {
   } else if (sides === 20) {
     for (const s of [-1, 1]) for (const t of [-1, 1]) { p.push([0, s, t * PHI]); p.push([s, t * PHI, 0]); p.push([s * PHI, 0, t]); }
   } else if (sides === 2) {
-    for (let i = 0; i < 20; i++) { const v = i * TAU / 20; p.push([Math.cos(v), 0.08, Math.sin(v)]); p.push([Math.cos(v), -0.08, Math.sin(v)]); }
+    for (let i = 0; i < 14; i++) { const v = i * TAU / 14; p.push([Math.cos(v), 0.08, Math.sin(v)]); p.push([Math.cos(v), -0.08, Math.sin(v)]); }
   }
   const pts = p.map(q => new V3(q[0], q[1], q[2]));
   const R = TS * { 2: 1.12, 4: 1.3, 6: 0.93, 8: 1.05, 10: 1.02, 12: 1.0, 20: 1.04 }[sides];
@@ -840,6 +840,16 @@ const Tarningar = (() => {
   world.addContactMaterial(new CANNON.ContactMaterial(mGolv, mT, { friction: 0.24, restitution: 0.36 }));
   world.addContactMaterial(new CANNON.ContactMaterial(mT, mT, { friction: 0.1, restitution: 0.5 }));
   world.addContactMaterial(new CANNON.ContactMaterial(mVagg, mT, { friction: 0.06, restitution: 0.62 }));
+  // Mynten får ett eget material. Två tunna mynt som ligger på varandra ger
+  // en stel kontakt med många punkter, och med standardvärdena dallrade de i
+  // flera sekunder. Mjukare kontaktekvationer (högre relaxation), mer
+  // friktion och nästan ingen studs lägger dem till ro direkt.
+  const mMynt = new CANNON.Material();
+  const mjuk = { contactEquationRelaxation: 6, frictionEquationRelaxation: 6 };
+  world.addContactMaterial(new CANNON.ContactMaterial(mMynt, mMynt, { friction: 0.5, restitution: 0.12, ...mjuk }));
+  world.addContactMaterial(new CANNON.ContactMaterial(mMynt, mT, { friction: 0.35, restitution: 0.25, ...mjuk }));
+  world.addContactMaterial(new CANNON.ContactMaterial(mMynt, mGolv, { friction: 0.35, restitution: 0.28, contactEquationRelaxation: 4 }));
+  world.addContactMaterial(new CANNON.ContactMaterial(mMynt, mVagg, { friction: 0.1, restitution: 0.5 }));
   const golv = new CANNON.Body({ mass: 0, material: mGolv, shape: new CANNON.Plane() });
   golv.quaternion.setFromEuler(-Math.PI / 2, 0, 0); golv.position.set(0, FLOOR, 0);
   world.addBody(golv);
@@ -879,7 +889,7 @@ const Tarningar = (() => {
     let mesh;
     if (def.sides === 2) mesh = myntMesh(def);
     else { mesh = new THREE.Mesh(P.geo, tarningMaterial(def)); mesh.castShadow = true; mesh.receiveShadow = true; }
-    const body = new CANNON.Body({ mass: 1, material: mT, shape: P.shape, linearDamping: 0.05, angularDamping: 0.09, allowSleep: true, sleepSpeedLimit: 0.4, sleepTimeLimit: 0.25 });
+    const body = new CANNON.Body({ mass: 1, material: def.sides === 2 ? mMynt : mT, shape: P.shape, linearDamping: 0.05, angularDamping: 0.09, allowSleep: true, sleepSpeedLimit: 0.4, sleepTimeLimit: 0.25 });
     body.isDie = true; body.isMynt = def.sides === 2;
     body.addEventListener('collide', e => {
       const o = e.body; if (!o || (o.isDie && o.id < body.id)) return;
@@ -935,7 +945,7 @@ const Tarningar = (() => {
       b.wakeUp();
     });
     Ljud.sus(0, 0.35);
-    busy = true; aktiv = true; tRoll = 0; still = 0; knuffar = 0; bild = null; fonster = 0;
+    busy = true; aktiv = true; tRoll = 0; still = 0; knuffar = 0; bild = null; forraSida = null; fonster = 0;
     wake();
     return true;
   }
@@ -954,15 +964,37 @@ const Tarningar = (() => {
   }
   function avlas() {
     const res = dice.map(uppIndex);
-    const sned = res.findIndex(r => r.dot < .93);
+    // Ett mynt som lutar mot kanten eller ett annat mynt har ändå en sida som
+    // tydligt vetter uppåt; bara ett mynt som står nästan lodrätt är oavgjort.
+    const sned = res.findIndex((r, i) => dice[i].P.sides === 2 ? (r.dot < .15 && knuffar < 2) : r.dot < .93);
     if (sned >= 0 && knuffar < 4) {
       // Tärningen lutar mot en kant eller en annan tärning: ge den en knuff.
       const b = dice[sned].body;
-      b.wakeUp(); b.velocity.set((rnd() - .5) * 3, 7, (rnd() - .5) * 3);
-      b.angularVelocity.set((rnd() - .5) * 14, (rnd() - .5) * 6, (rnd() - .5) * 14);
-      knuffar++; still = 0; bild = null; return;
+      b.wakeUp();
+      // Knuffa bort från det den lutar mot: närmaste tärning, annars brickans
+      // kant (då in mot mitten). En knuff rakt upp lät den ofta landa lutad
+      // igen, och varje ny knuff förlängde kastet.
+      let mot = new CANNON.Vec3(-b.position.x, 0, -b.position.z), nara = 2.6 * TS;
+      for (const o of dice) {
+        if (o.body === b) continue;
+        const d = new CANNON.Vec3(b.position.x - o.body.position.x, 0, b.position.z - o.body.position.z);
+        if (d.length() < nara) { nara = d.length(); mot = d; }
+      }
+      if (mot.length() < .05) mot.set(rnd() - .5, 0, rnd() - .5);
+      mot.normalize();
+      // vridning kring den vågräta axel som tippar den åt samma håll
+      const vrid = new CANNON.Vec3(mot.z, 0, -mot.x);
+      if (b.isMynt) {
+        b.velocity.set(mot.x * 2.5, 3.5, mot.z * 2.5);
+        b.angularVelocity.set(vrid.x * 9, 0, vrid.z * 9);
+      } else {
+        b.velocity.set(mot.x * 3.5, 5, mot.z * 3.5);
+        b.angularVelocity.set(vrid.x * 8 + (rnd() - .5) * 4, (rnd() - .5) * 4, vrid.z * 8 + (rnd() - .5) * 4);
+      }
+      knuffar++; still = 0; bild = null; forraSida = null; return;
     }
     busy = false; vila = 0;
+    dice.forEach(d => { if (d.body.isMynt) d.body.sleep(); });
     const utfall = dice.map((d, i) => utfallAv(d.def, res[i].li));
     dice.forEach((d, i) => {
       const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: etikettTextur(utfall[i].text), depthTest: false, transparent: true }));
@@ -978,27 +1010,37 @@ const Tarningar = (() => {
   // ögonblicklig hastighet: kontaktlösaren låter en tärning i vila darra
   // lite, och en enda darrning fick annars räkningen att börja om.
   let fonster = 0, bild = null, vila = 0;
-  function rorelse() {
+  // Mynt får ett eget villkor. Ett mynt som ligger på ett annat mynt kan
+  // vagga i flera sekunder utan att någonsin byta sida, så för mynt räcker
+  // det att samma sida legat uppåt hela fönstret och att myntet inte längre
+  // flyger eller rullar. Sidan är då avgjord av fysiken, och myntet söves
+  // vid avläsningen så att det ligger kvar som det lästes av.
+  let forraSida = null;
+  function stilla() {
     const nu = dice.map(d => [d.body.position.clone(), d.body.quaternion.clone()]);
-    let max = Infinity;
-    if (bild && bild.length === nu.length) {
-      max = 0;
-      nu.forEach(([p, q], i) => {
-        const [p0, q0] = bild[i];
-        const dq = Math.abs(q.x * q0.x + q.y * q0.y + q.z * q0.z + q.w * q0.w);
-        max = Math.max(max, p.distanceTo(p0), 2 * Math.acos(Math.min(1, dq)));
-      });
-    }
-    bild = nu; return max;
+    const sida = dice.map(d => { const u = uppIndex(d); return u.dot < .15 ? -1 : u.li; });
+    let ok = !!(bild && bild.length === nu.length && forraSida);
+    if (ok) nu.forEach(([p, q], i) => {
+      const b = dice[i].body;
+      if (b.isMynt && sida[i] >= 0) {
+        ok = ok && sida[i] === forraSida[i] && b.velocity.lengthSquared() < 4 && b.angularVelocity.lengthSquared() < 25;
+        return;
+      }
+      const [p0, q0] = bild[i];
+      const dq = Math.abs(q.x * q0.x + q.y * q0.y + q.z * q0.z + q.w * q0.w);
+      ok = ok && Math.max(p.distanceTo(p0), 2 * Math.acos(Math.min(1, dq))) < 0.012;
+    });
+    bild = nu; forraSida = sida; return ok;
   }
   function step(dt) {
     if (!aktiv) return false;
-    world.step(1 / 120, dt, 8);
+    // Tunna mynt behöver kortare tidssteg än tärningar för att inte dallra.
+    if (dice.some(d => d.body.isMynt)) world.step(1 / 240, dt, 16); else world.step(1 / 120, dt, 8);
     for (const d of dice) { d.mesh.position.copy(d.body.position); d.mesh.quaternion.copy(d.body.quaternion); }
     fonster += dt;
     if (busy) {
       tRoll += dt;
-      if (fonster >= 0.15) { fonster = 0; still = rorelse() < 0.012 ? still + 1 : 0; }
+      if (fonster >= 0.15) { fonster = 0; still = stilla() ? still + 1 : 0; }
       if (still >= 3 || tRoll > 9) avlas();
       return true;
     }

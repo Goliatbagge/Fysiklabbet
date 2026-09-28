@@ -1542,7 +1542,7 @@ function afterHistory() {
 
 /* ================= Vyn: animation och kamera ================= */
 const sheetEl = $('#sheet'), svgEl = $('#svg'), camG = $('#cam'), inkG = $('#ink'), selG = $('#selg'), zoneG = $('#zones'), hitG = $('#hits');
-const shapeEl = $('#shapeHandle');
+const shapeEl = $('#shapeHandle'), flipEl = $('#flipBtn');
 const inspEl = $('#insp'), ghostEl = $('#ghost'), trashEl = $('#trash'), paletteEl = $('#palette');
 const view = { doc, lay, geoNow: null, anim: null, camFrozen: false, accent: null, raf: 0, hits: [] };
 const TWEEN = ['x', 'y', 'x1', 'y1', 'x2', 'y2', 'n1x', 'n1y', 'n2x', 'n2y', 'op', 'k', 'tx', 'ty'];
@@ -1609,7 +1609,38 @@ function render() {
   renderZones();
   positionInline();
   positionHandle(out.prims);
+  positionFlip();
 }
+// VÄNDKNAPPEN: är en polär komponent (batteri, diod, lysdiod) markerad dyker
+// en rund knapp upp intill symbolen, på motsatt sida mot etiketten (där
+// värdefältet hamnar). Ett tryck vänder polerna eller riktningen.
+function flipTarget() {
+  if (!sel || sel.kind !== 'comp' || (drag && drag.moving) || resize) return null;
+  const f = findItem(view.doc, sel.id);
+  return f && TYPES[f.item.type].polar ? f.item : null;
+}
+function positionFlip() {
+  const c = flipTarget(), g = c && view.geoNow[c.id];
+  if (!g) { flipEl.classList.remove('on'); return; }
+  const cam = view.geoNow.cam, k = cam.k, e = symExt(c);
+  const horiz = Math.abs(Math.cos(g.ang * Math.PI / 180)) > 0.5;
+  let x = cam.tx + k * g.x, y = cam.ty + k * g.y;
+  const off = k * (e.ho + 6) + 22;   // utanför markeringsramen
+  if (horiz) y -= Math.sign(g.lsy || 1) * off; else x -= Math.sign(g.lsx || 1) * off;
+  flipEl.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+  const txt = TYPES[c.type].polarText;
+  flipEl.title = txt; flipEl.setAttribute('aria-label', txt);
+  flipEl.classList.add('on');
+}
+flipEl.addEventListener('pointerdown', e => { e.preventDefault(); e.stopPropagation(); });
+flipEl.addEventListener('click', e => {
+  e.stopPropagation();
+  const f = sel && findItem(doc, sel.id);
+  if (!f || !TYPES[f.item.type].polar) return;
+  f.item.flip = !f.item.flip;
+  closeInline();
+  commit(); refresh(); markUsed();
+});
 // Formathandtaget följer schemats nedre högra hörn (hela bildens, även
 // etiketter), men stannar innanför ritytan.
 function positionHandle(prims) {

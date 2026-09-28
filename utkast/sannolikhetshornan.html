@@ -51,7 +51,8 @@
     "educationalRole": "teacher"
    },
    "featureList": [
-    "Tärningar med 4, 6, 8, 10, 12 eller 20 sidor samt mynt",
+    "Tärningar med 4, 6, 8, 10, 12 eller 20 sidor",
+    "Mynt för krona och klave, med fördelningen av antalet krona",
     "Egna specialtärningar där varje sida kan redigeras",
     "Kortlek där färger, valörer och jokrar väljs fritt",
     "Urna med färgade kulor i valfritt antal",
@@ -367,6 +368,11 @@ button, input, select { font-family: inherit; }
   .mode { flex: 1 1 auto; justify-content: center; padding: 0 6px; gap: 5px; font-size: 12.5px; height: 36px; }
   .mode svg { width: 16px; height: 16px; }
   .mode .lang { display: none; }
+}
+@media (max-width: 520px) {
+  /* fem flikar: bara ikonen, utom på den valda */
+  .mode:not([aria-pressed="true"]) span { display: none; }
+  .mode { flex: 1 1 auto; padding: 0 10px; }
   .app { grid-template-columns: 1fr; grid-template-areas: "stage" "set" "res"; padding: 0 12px 16px; }
   .stage { height: 58vh; min-height: 330px; border-radius: 14px; }
   .go { height: 48px; padding: 0 20px 0 16px; font-size: 15px; }
@@ -471,6 +477,7 @@ button, input, select { font-family: inherit; }
   </div>
   <div class="modes" role="group" aria-label="Slumpförsök">
     <button class="mode" data-mode="tarningar" aria-pressed="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="8.5" cy="8.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg><span>Tärningar</span></button>
+    <button class="mode" data-mode="mynt" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><ellipse cx="12" cy="9" rx="8" ry="4.2"/><path d="M4 9v5c0 2.3 3.6 4.2 8 4.2s8-1.9 8-4.2V9"/><path d="M4 11.6c0 2.3 3.6 4.2 8 4.2s8-1.9 8-4.2"/></svg><span>Mynt</span></button>
     <button class="mode" data-mode="kort" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="7" y="3" width="13" height="17" rx="2.5" transform="rotate(8 13.5 11.5)"/><path d="M4.6 6.4 3.6 17.2a2.4 2.4 0 0 0 2.1 2.6l5 .5"/></svg><span>Kortlek</span></button>
     <button class="mode" data-mode="urna" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M6 4h12M7 4v2.5c-1.9 1.4-3 3.6-3 6.2C4 17 7.5 20.5 12 20.5S20 17 20 12.7c0-2.6-1.1-4.8-3-6.2V4"/><circle cx="10" cy="15" r="1.6" fill="currentColor" stroke="none"/><circle cx="14.2" cy="15.6" r="1.6" fill="currentColor" stroke="none"/><circle cx="12.3" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg><span>Urna</span></button>
     <button class="mode" data-mode="hjul" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><circle cx="12" cy="13" r="8.5"/><path d="M12 13V4.5M12 13l7.4 4.2M12 13l-7.4 4.2"/><path d="M10 2h4l-2 3z" fill="currentColor"/></svg><span>Lycko<span class="lang">hjul</span></span></button>
@@ -507,16 +514,18 @@ button, input, select { font-family: inherit; }
 
     <h2>Så använder du Sannolikhetshörnan</h2>
     <ol class="seo-steps">
-      <li><b>Välj slumpförsök</b> överst: tärningar, kortlek, urna eller lyckohjul.</li>
+      <li><b>Välj slumpförsök</b> överst: tärningar, mynt, kortlek, urna eller lyckohjul.</li>
       <li><b>Ställ in försöket</b> i panelen till vänster, till exempel hur många tärningar som kastas, vilka kort som ingår i leken eller hur många kulor av varje färg urnan innehåller.</li>
       <li><b>Gör ett försök</b> med den röda knappen eller mellanslag. Du kan också klicka direkt på tärningsbrickan, kortleken, urnan eller hjulet, och hjulet går att snurra genom att dra i det.</li>
       <li><b>Jämför staplarna med de röda strecken</b> till höger. Staplarna är den relativa frekvensen och strecken sannolikheten. Klicka på en stapel för att se värdena som bråk och decimaltal.</li>
       <li><b>Simulera snabbt</b> 10, 100 eller 1 000 försök för att se de stora talens lag i arbete.</li>
     </ol>
 
-    <h2>Fyra slumpförsök</h2>
-    <h3>Tärningar och mynt</h3>
-    <p>Kasta upp till tolv tärningar på en gång, med 4, 6, 8, 10, 12 eller 20 sidor, eller singla slant med ett mynt. Med flera tärningar kan diagrammet visa summan, och då syns det tydligt att summan 7 är vanligast med två sexsidiga tärningar. Klicka på en tärning i listan för att göra en specialtärning: skriv vad som ska stå på varje sida och ge sidorna egna färger.</p>
+    <h2>Fem slumpförsök</h2>
+    <h3>Tärningar</h3>
+    <p>Kasta upp till tolv tärningar på en gång, med 4, 6, 8, 10, 12 eller 20 sidor. Med flera tärningar kan diagrammet visa summan, och då syns det tydligt att summan 7 är vanligast med två sexsidiga tärningar. Klicka på en tärning i listan för att göra en specialtärning: skriv vad som ska stå på varje sida och ge sidorna egna färger.</p>
+    <h3>Mynt</h3>
+    <p>Singla slant med upp till tolv mynt på en egen bricka. Utfallet sammanfattas, till exempel 5 krona och 3 klave, och diagrammet kan visa hur många av mynten som landade med krona uppåt. Med två mynt är en krona och en klave vanligare än två krona, eftersom det kan hända på två sätt.</p>
     <h3>Kortlek</h3>
     <p>Välj vilka färger och valörer som ska ingå i leken och om den ska ha jokrar. Dra ett eller flera kort åt gången, med eller utan återläggning. Utan återläggning blir leken mindre för varje kort, och tabellen visar hur sannolikheterna inför nästa dragning ändras.</p>
     <h3>Urna med kulor</h3>
@@ -550,7 +559,7 @@ button, input, select { font-family: inherit; }
 
 <!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
      webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
-<script type="module" src="sannolikhetshornan.js?v=202609272230"></script>
+<script type="module" src="sannolikhetshornan.js?v=202609281000"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

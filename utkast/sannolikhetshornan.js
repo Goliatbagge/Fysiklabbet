@@ -404,8 +404,8 @@ const filtFarg = '#174a37';
   fond.position.set(0, 28, -62);
   scene.add(fond);
 }
-const filtMat = (rep) => {
-  const t = texOf(filtTextur(filtFarg), { repeat: rep });
+const filtMat = (rep, farg = filtFarg) => {
+  const t = texOf(filtTextur(farg), { repeat: rep });
   return new THREE.MeshStandardMaterial({ map: t, roughness: 1, metalness: 0, envMapIntensity: 0.35 });
 };
 const traMorkMat = new THREE.MeshPhysicalMaterial({ color: 0x5b3218, map: traTex, roughness: 0.42, clearcoat: 0.6, clearcoatRoughness: 0.25, envMapIntensity: 0.8 });
@@ -425,6 +425,7 @@ function rundRekt(w, h, r) {
 // ============================================================================
 const STATION = {
   tarningar: { target: new V3(0, 0.3, 0.5), dir: new V3(0, 1.2, 0.95), w: 19, h: 12.8 },
+  mynt: { target: new V3(-30, 0.3, -26.5), dir: new V3(0, 1.2, 0.95), w: 19, h: 12.8 },
   kort: { target: new V3(-34.2, 0, 0.5), dir: new V3(0, 1.75, 0.85), w: 30.5, h: 20.8 },
   urna: { target: new V3(31, 3.7, 1.6), dir: new V3(0, 0.55, 1), w: 20, h: 13.5 },
   hjul: { target: new V3(0, 8.6, -24), dir: new V3(0, 0.12, 1), w: 21, h: 21 },
@@ -710,7 +711,7 @@ const parseTal = s => { const t = String(s).trim().replace(',', '.').replace('�
 /** Utfallet när sidan med etikettindex li hamnar uppåt. */
 function utfallAv(def, li) {
   const text = (def.labels[li] || '').trim(), sf = def.sidfarg[li];
-  return { key: text || (sf ? sidfargNamn(sf) : '(tom)'), text: text || (sf ? sidfargNamn(sf) : '–'), num: parseTal(text), farg: sf };
+  return { li, key: text || (sf ? sidfargNamn(sf) : '(tom)'), text: text || (sf ? sidfargNamn(sf) : '–'), num: parseTal(text), farg: sf };
 }
 function arStandard(def) { const s = standardEtiketter(def.sides); return def.labels.every((l, i) => l === s[i]) && def.sidfarg.every(x => !x); }
 
@@ -829,9 +830,11 @@ function myntMesh(def) {
 }
 
 // ============================================================================
-// Station 1: Tärningar
+// Station 1 och 2: tärningsbrickan och myntbrickan
+// Samma bricka och samma fysik, men var sin fysikvärld och var sin plats på
+// bordet. Allt inne i brickan räknas i brickans egna koordinater.
 // ============================================================================
-const Tarningar = (() => {
+function skapaBricka({ center, filt: filtHex }) {
   const G = 230, FLOOR = 0.42, IW = 15.4, ID = 10;
   const world = new CANNON.World({ gravity: new CANNON.Vec3(0, -G, 0) });
   world.allowSleep = true;
@@ -859,10 +862,10 @@ const Tarningar = (() => {
     b.position.set(x, FLOOR + 14, z); b.isVagg = true; world.addBody(b); vaggar.push(b);
   }
   // Brickan: trälåda med filtbotten.
-  const grp = new THREE.Group(); scene.add(grp);
+  const grp = new THREE.Group(); grp.position.copy(center); scene.add(grp);
   const bas = new THREE.Mesh(new RoundedBoxGeometry(IW + 2.8, FLOOR, ID + 2.8, 3, .16), traMorkMat);
   bas.position.y = FLOOR / 2; bas.receiveShadow = true; bas.castShadow = true; grp.add(bas);
-  const filt = new THREE.Mesh(new THREE.PlaneGeometry(IW, ID), filtMat([2.9, 1.9]));
+  const filt = new THREE.Mesh(new THREE.PlaneGeometry(IW, ID), filtMat([2.9, 1.9], filtHex));
   filt.rotation.x = -Math.PI / 2; filt.position.y = FLOOR + 0.004; filt.receiveShadow = true; grp.add(filt);
   // Ramen i ett stycke: rundad ytterkontur med ett hål, extruderad med
   // avfasade kanter. Egen träkopia eftersom extruderingens uv är i enheter.
@@ -1058,10 +1061,11 @@ const Tarningar = (() => {
     get busy() { return busy; },
     set onResult(f) { onResult = f; },
     tarningar: () => dice,
-    trafar: obj => grp === obj || grp.children.includes(obj) || dice.some(d => d.mesh === obj || d.mesh.children.includes(obj)),
     grp,
   };
-})();
+}
+const Tarningar = skapaBricka({ center: new V3(0, 0, 0), filt: filtFarg });
+const Mynt = skapaBricka({ center: new V3(-30, 0, -27), filt: '#1b3b5c' });
 
 // ============================================================================
 // Station 2: Kortlek
@@ -1891,6 +1895,7 @@ function standardLage() {
     kort: { farger: ['S', 'H', 'D', 'C'], valorer: ALLA_VALORER.slice(), jokrar: 0, antal: 1, ater: false, vy: 'farg' },
     urna: { innehall: [{ key: 'rod', n: 5 }, { key: 'bla', n: 3 }, { key: 'gul', n: 2 }], antal: 1, ater: true },
     hjul: { sektorer: HJULMALLAR.lika() },
+    mynt: { antal: 5, labels: ['Krona', 'Klave'], vy: 'antal' },
   };
 }
 function lasLage() {
@@ -1899,7 +1904,7 @@ function lasLage() {
     const t = LS.get('tarningar', null);
     if (t && Array.isArray(t.lista) && t.lista.length >= 1 && t.lista.length <= 12 &&
         t.lista.every(d => [2, 4, 6, 8, 10, 12, 20].includes(d.sides) && Array.isArray(d.labels) && d.labels.length === d.sides && Array.isArray(d.sidfarg) && d.sidfarg.length === d.sides)) {
-      s.tarningar = { lista: t.lista.map(d => ({ sides: d.sides, farg: tfarg(d.farg).key, labels: d.labels.map(l => String(l).slice(0, 6)), sidfarg: d.sidfarg.map(x => (typeof x === 'string' && /^#[0-9a-f]{6}$/i.test(x)) ? x : null) })), vy: t.vy === 'varje' ? 'varje' : 'summa' };
+      s.tarningar = { lista: t.lista.map(d => d.sides === 2 ? nyTarning(6, tfarg(d.farg).key) : ({ sides: d.sides, farg: tfarg(d.farg).key, labels: d.labels.map(l => String(l).slice(0, 6)), sidfarg: d.sidfarg.map(x => (typeof x === 'string' && /^#[0-9a-f]{6}$/i.test(x)) ? x : null) })), vy: t.vy === 'varje' ? 'varje' : 'summa' };
     }
     const k = LS.get('kort', null);
     if (k && Array.isArray(k.farger) && Array.isArray(k.valorer)) {
@@ -1914,6 +1919,8 @@ function lasLage() {
       const inn = u.innehall.filter(x => KULFARGER.some(f => f.key === x.key)).map(x => ({ key: x.key, n: clamp(x.n | 0, 0, 30) }));
       if (inn.length && inn.reduce((a, x) => a + x.n, 0) > 0) s.urna = { innehall: inn, antal: clamp(u.antal | 0, 1, 10), ater: u.ater !== false };
     }
+    const my = LS.get('mynt', null);
+    if (my && Array.isArray(my.labels) && my.labels.length === 2) s.mynt = { antal: clamp(my.antal | 0, 1, 12), labels: my.labels.map(l => String(l).slice(0, 10)), vy: my.vy === 'sida' ? 'sida' : 'antal' };
     const h = LS.get('hjul', null);
     if (h && Array.isArray(h.sektorer) && h.sektorer.length >= 1 && h.sektorer.length <= 24) {
       s.hjul = { sektorer: h.sektorer.map((x, i) => ({ text: String(x.text ?? '').slice(0, 14), farg: /^#[0-9a-f]{6}$/i.test(x.farg) ? x.farg : HJULFARGER[i % 8], w: clamp(x.w | 0, 1, 12) })) };
@@ -1925,7 +1932,7 @@ const ST = lasLage();
 let spTimer = 0;
 function spara() {
   clearTimeout(spTimer);
-  spTimer = setTimeout(() => { LS.set('mode', mode); LS.set('tarningar', ST.tarningar); LS.set('kort', ST.kort); LS.set('urna', ST.urna); LS.set('hjul', ST.hjul); }, 300);
+  spTimer = setTimeout(() => { LS.set('mode', mode); LS.set('tarningar', ST.tarningar); LS.set('kort', ST.kort); LS.set('urna', ST.urna); LS.set('hjul', ST.hjul); LS.set('mynt', ST.mynt); }, 300);
 }
 
 // ============================================================================
@@ -1933,9 +1940,18 @@ function spara() {
 // ============================================================================
 const STAT = {};
 function nollstall(m) {
-  STAT[m] = { n: 0, obs: 0, c: { summa: new Map(), varje: new Map(), farg: new Map(), valor: new Map(), rodsvart: new Map(), kula: new Map(), sektor: new Map() }, nVarje: 0, senaste: [] };
+  STAT[m] = { n: 0, obs: 0, c: { antal: new Map(), sida: new Map(), summa: new Map(), varje: new Map(), farg: new Map(), valor: new Map(), rodsvart: new Map(), kula: new Map(), sektor: new Map() }, nVarje: 0, senaste: [] };
 }
-['tarningar', 'kort', 'urna', 'hjul'].forEach(nollstall);
+['tarningar', 'mynt', 'kort', 'urna', 'hjul'].forEach(nollstall);
+const myntNamn = () => ST.mynt.labels.map((l, i) => l.trim() || ['Krona', 'Klave'][i]);
+const myntVy = () => ST.mynt.antal > 1 && ST.mynt.vy === 'antal' ? 'antal' : 'sida';
+const myntDefs = () => Array.from({ length: ST.mynt.antal }, () => ({ sides: 2, farg: 'elfenben', labels: ST.mynt.labels.slice(), sidfarg: [null, null] }));
+function binom(n, k) { let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k + i) / i; return Math.round(r); }
+/** "5 krona, 3 klave" */
+function myntSammanfattning(utf) {
+  const [a, b] = myntNamn(), k = utf.filter(u => u.li === 0).length;
+  return `${k} ${a.toLowerCase()}, ${utf.length - k} ${b.toLowerCase()}`;
+}
 const inc = (m, k) => m.set(k, (m.get(k) || 0) + 1);
 const talNyckel = v => { const r = Math.round(v * 1e6) / 1e6; return String(r).replace('.', ',').replace('-', '−'); };
 const allaNumeriska = () => ST.tarningar.lista.every(d => d.labels.every(l => !isNaN(parseTal(l))));
@@ -1944,6 +1960,11 @@ const HJUL_NYCKEL = (s, i) => s.text.trim() || 'Sektor ' + (i + 1);
 
 /** Kategorierna i diagrammet: { key, label, num, den, farg? } i visningsordning. */
 function kategorier() {
+  if (mode === 'mynt') {
+    const n = ST.mynt.antal, [a, b] = myntNamn();
+    if (myntVy() === 'antal') return Array.from({ length: n + 1 }, (_, k) => ({ key: String(k), label: String(k), num: binom(n, k), den: 2 ** n }));
+    return [{ key: a, label: a, num: 1, den: 2 }, { key: b, label: b, num: 1, den: 2 }];
+  }
   if (mode === 'tarningar') {
     const lista = ST.tarningar.lista;
     if (tarningVy() === 'summa') {
@@ -1981,6 +2002,7 @@ function kategorier() {
 function aktuellaRakningar() {
   const S = STAT[mode];
   if (mode === 'tarningar') return tarningVy() === 'summa' ? { c: S.c.summa, obs: S.n } : { c: S.c.varje, obs: S.nVarje };
+  if (mode === 'mynt') return myntVy() === 'antal' ? { c: S.c.antal, obs: S.n } : { c: S.c.sida, obs: S.nVarje };
   if (mode === 'kort') return { c: S.c[ST.kort.vy], obs: S.n };
   if (mode === 'urna') return { c: S.c.kula, obs: S.n };
   return { c: S.c.sektor, obs: S.n };
@@ -1994,6 +2016,12 @@ function registrera(m, data, tyst = false) {
     if (data.every(u => !isNaN(u.num))) { const sum = data.reduce((a, u) => a + u.num, 0); inc(S.c.summa, talNyckel(sum)); if (tarningVy() === 'summa') key = talNyckel(sum); }
     if (!key && data.length === 1) key = data[0].key;
     chip = tarningVy() === 'summa' ? esc(talNyckel(data.reduce((a, u) => a + u.num, 0))) : data.map(u => (u.farg ? `<i style="background:${u.farg}"></i>` : '') + esc(u.text)).join(' · ');
+  } else if (m === 'mynt') {
+    S.n++;
+    const [a, b] = myntNamn(), k = data.filter(u => u.li === 0).length;
+    inc(S.c.antal, String(k)); data.forEach(u => inc(S.c.sida, u.li === 0 ? a : b)); S.nVarje += data.length;
+    key = myntVy() === 'antal' ? String(k) : data.length === 1 ? (k ? a : b) : null;
+    chip = data.length === 1 ? esc(k ? a : b) : `${k} ${esc(a.toLowerCase())}`;
   } else if (m === 'kort') {
     S.n++;
     const id = data, f = kortFarg(id) || 'J';
@@ -2018,6 +2046,7 @@ function snabb(n) {
   const m = mode;
   for (let i = 0; i < n; i++) {
     if (m === 'tarningar') registrera(m, ST.tarningar.lista.map(d => utfallAv(d, rint(d.sides))), true);
+    else if (m === 'mynt') registrera(m, Array.from({ length: ST.mynt.antal }, () => ({ li: rint(2) })), true);
     else if (m === 'kort') { const f = Kortlek.full; registrera(m, f[rint(f.length)], true); }
     else if (m === 'urna') {
       const inn = ST.urna.innehall.filter(x => x.n > 0), N = inn.reduce((a, x) => a + x.n, 0);
@@ -2051,13 +2080,13 @@ function renderSettings() {
     h += `<div class="grp"><div class="grp-h"><span class="eyebrow">Tärningar</span></div>
       <div class="row"><b>Antal</b>${stepper('t-antal', L.length, 1, 12)}</div>
       <div class="row" style="margin-top:12px"><b>Sort för alla</b></div>
-      <div class="seg">${[2, 4, 6, 8, 10, 12, 20].map(s => `<button type="button" data-act="t-typ" data-v="${s}" aria-pressed="${alla === s}">${s === 2 ? 'Mynt' : s}</button>`).join('')}</div>
+      <div class="seg">${[4, 6, 8, 10, 12, 20].map(s => `<button type="button" data-act="t-typ" data-v="${s}" aria-pressed="${alla === s}">${s === 2 ? 'Mynt' : s}</button>`).join('')}</div>
       <p class="note">Siffrorna är antalet sidor. Klicka på en tärning nedan för att göra en specialtärning.</p>
       <div class="chips" style="margin-top:10px">${L.map((d, i) => { const F = tfarg(d.farg); return `<button type="button" class="chip" data-act="t-chip" data-i="${i}" aria-pressed="${UI.sel === i}"><i style="background:${d.sides === 2 ? '#c4c8cd' : F.bas};color:${d.sides === 2 ? '#222' : F.blakk}">${d.sides === 2 ? 'M' : d.sides}</i>${d.sides === 2 ? 'Mynt' : 'Tärning'} ${i + 1}${arStandard(d) ? '' : '*'}</button>`; }).join('')}</div>`;
     if (UI.sel >= 0 && UI.sel < L.length) {
       const d = L[UI.sel], farger = d.sides !== 2 && d.sides !== 4;
       h += `<div class="editor"><h3>${d.sides === 2 ? 'Mynt' : 'Tärning'} ${UI.sel + 1}</h3>
-        <div class="seg">${[2, 4, 6, 8, 10, 12, 20].map(s => `<button type="button" data-act="t-sidor" data-v="${s}" aria-pressed="${d.sides === s}">${s === 2 ? 'Mynt' : s}</button>`).join('')}</div>
+        <div class="seg">${[4, 6, 8, 10, 12, 20].map(s => `<button type="button" data-act="t-sidor" data-v="${s}" aria-pressed="${d.sides === s}">${s === 2 ? 'Mynt' : s}</button>`).join('')}</div>
         ${d.sides === 2 ? '' : `<div class="row" style="margin-top:10px"><b>Färg</b></div><div class="swatches">${TFARGER.map(F => `<button type="button" class="swatch" data-act="t-farg" data-v="${F.key}" style="background:${F.bas}" title="${F.namn}" aria-label="${F.namn}" aria-pressed="${d.farg === F.key}"></button>`).join('')}</div>`}
         <div class="row" style="margin-top:10px"><b>${d.sides === 4 ? 'Hörnen' : 'Sidorna'}</b></div>
         <div class="faces">${d.labels.map((l, i) => `<label class="face"><small>${i + 1}</small><input type="text" maxlength="6" value="${esc(l)}" data-inp="t-lbl" data-i="${i}" aria-label="Sida ${i + 1}">${farger ? `<button type="button" data-act="t-sidfarg" data-i="${i}" title="Byt färg på sidan" aria-label="Byt färg på sida ${i + 1}" style="background:${d.sidfarg[i] || tfarg(d.farg).bas}"></button>` : ''}</label>`).join('')}</div>
@@ -2065,6 +2094,14 @@ function renderSettings() {
         <p class="note">${d.sides === 4 ? 'På en tetraeder läses talet i hörnet som pekar uppåt.' : farger ? 'Lämna en sida tom och ge den en färg för att göra en färgtärning.' : 'Skriv vad som ska stå på myntets två sidor.'}</p></div>`;
     }
     h += `</div>`;
+  } else if (mode === 'mynt') {
+    const M = ST.mynt;
+    h += `<div class="grp"><div class="grp-h"><span class="eyebrow">Mynt</span></div>
+      <div class="row"><b>Antal mynt</b>${stepper('m-antal', M.antal, 1, 12)}</div>
+      <div class="row" style="margin-top:12px"><b>Sidornas namn</b></div>
+      <div class="faces" style="grid-template-columns:1fr 1fr">${M.labels.map((l, i) => `<label class="face"><small>${i + 1}</small><input type="text" maxlength="10" value="${esc(l)}" data-inp="m-lbl" data-i="${i}" aria-label="Sida ${i + 1}"></label>`).join('')}</div>
+      <div class="btns"><button type="button" class="btn liten" data-act="m-std">Krona och klave</button></div>
+      <p class="note">Med flera mynt kan diagrammet visa hur många av mynten som landade med ${esc(myntNamn()[0].toLowerCase())} uppåt. Med två mynt är en av varje vanligare än två av samma, eftersom det kan hända på två sätt.</p></div>`;
   } else if (mode === 'kort') {
     const K = ST.kort;
     h += `<div class="grp"><div class="grp-h"><span class="eyebrow">Kortleken</span></div>
@@ -2104,13 +2141,14 @@ function renderSettings() {
   settingsEl.innerHTML = h;
 }
 
-const ENHET = { tarningar: ['kast', 'kast'], kort: ['draget kort', 'dragna kort'], urna: ['dragen kula', 'dragna kulor'], hjul: ['snurr', 'snurr'] };
+const ENHET = { tarningar: ['kast', 'kast'], mynt: ['kast', 'kast'], kort: ['draget kort', 'dragna kort'], urna: ['dragen kula', 'dragna kulor'], hjul: ['snurr', 'snurr'] };
 function renderResultat() {
   const S = STAT[mode];
   const vyer = mode === 'tarningar' && ST.tarningar.lista.length > 1 && allaNumeriska()
     ? [['summa', 'Summa'], ['varje', 'Varje tärning']]
+    : mode === 'mynt' && ST.mynt.antal > 1 ? [['antal', 'Antal ' + myntNamn()[0].toLowerCase()], ['sida', 'Varje mynt']]
     : mode === 'kort' ? [['farg', 'Färg'], ['valor', 'Valör'], ['rodsvart', 'Röd eller svart']] : null;
-  const aktivVy = mode === 'tarningar' ? tarningVy() : mode === 'kort' ? ST.kort.vy : null;
+  const aktivVy = mode === 'tarningar' ? tarningVy() : mode === 'mynt' ? myntVy() : mode === 'kort' ? ST.kort.vy : null;
   resultsEl.innerHTML = `
     <div class="grp-h"><span class="eyebrow">Senaste utfall</span><button type="button" class="btn liten" data-act="noll" ${S.n ? '' : 'disabled'}>Nollställ</button></div>
     <div class="res-last">${S.senaste.length ? S.senaste.map(c => `<span>${c}</span>`).join('') : '<span class="tom">Inga försök ännu.</span>'}</div>
@@ -2176,7 +2214,8 @@ function renderInfo() {
   const k = kat.find(x => x.key === UI.valdKey);
   if (!k) { el.innerHTML = '<span class="tom">Klicka på en stapel för att se den relativa frekvensen och sannolikheten som bråk och decimaltal.</span>'; return; }
   const f = c.get(k.key) || 0, p = k.num / k.den;
-  const namn = mode === 'tarningar' ? (tarningVy() === 'summa' ? 'Summan ' + esc(k.label) : 'Utfallet ' + esc(k.label))
+  const namn = mode === 'mynt' ? (myntVy() === 'antal' ? `${esc(k.label)} ${esc(myntNamn()[0].toLowerCase())} av ${ST.mynt.antal}` : esc(k.label))
+    : mode === 'tarningar' ? (tarningVy() === 'summa' ? 'Summan ' + esc(k.label) : 'Utfallet ' + esc(k.label))
     : mode === 'kort' ? (k.key === 'J' ? 'Joker' : ST.kort.vy === 'farg' ? FARGNAMN[k.key][0].toUpperCase() + FARGNAMN[k.key].slice(1) : ST.kort.vy === 'valor' ? (VALORNAMN[k.key] ? VALORNAMN[k.key][0].toUpperCase() + VALORNAMN[k.key].slice(1) : 'Valören ' + k.key) : (k.key === 'rod' ? 'Rött kort' : 'Svart kort'))
     : mode === 'urna' ? esc(k.label) + ' kula' : esc(k.label);
   el.innerHTML = `<b>${namn}</b><br>Relativ frekvens: ${obs ? `${fracHtml(f, obs)}${f === 0 || f === obs ? '' : ' ≈ ' + fmt(f / obs, 3)}` : 'inga försök ännu'}<br>Sannolikhet: ${fracHtml(k.num, k.den)}${Number.isInteger(k.num / k.den) ? '' : ' ≈ ' + fmt(p, 3)}`;
@@ -2209,6 +2248,8 @@ function uppdateraKnapp() {
     const L = ST.tarningar.lista, mynt = L.every(d => d.sides === 2);
     t = mynt ? 'Singla slant' : L.length === 1 ? 'Kasta tärningen' : L.some(d => d.sides === 2) ? 'Kasta' : 'Kasta tärningarna';
     av = Tarningar.busy;
+  } else if (mode === 'mynt') {
+    t = ST.mynt.antal === 1 ? 'Singla slant' : 'Kasta mynten'; av = Mynt.busy;
   } else if (mode === 'kort') {
     const n = ST.kort.antal;
     const kvar = ST.kort.ater ? Kortlek.full.length : Kortlek.lek.length;
@@ -2233,13 +2274,26 @@ function doljUtfall() { utfallEl.classList.remove('on'); }
 // ---- Utfall från scenen ----
 Tarningar.onResult = utf => {
   registrera('tarningar', utf);
-  if (utf.length === 1) visaUtfall(`<span class="u-lbl">${ST.tarningar.lista[0].sides === 2 ? 'Myntet visar' : 'Utfall'}</span><span class="u-val">${esc(utf[0].text)}</span>`);
+  if (utf.length === 1) visaUtfall(`<span class="u-lbl">Utfall</span><span class="u-val">${esc(utf[0].text)}</span>`);
   else {
     const chips = utf.map(u => `<span class="u-chip">${u.farg ? `<i style="background:${u.farg}"></i>` : ''}${esc(u.text)}</span>`).join('');
-    const sum = utf.every(u => !isNaN(u.num)) ? `<span class="u-sum"><small>Summa</small>${esc(talNyckel(utf.reduce((a, u) => a + u.num, 0)))}</span>` : '';
+    let sum = '';
+    if (utf.every(u => !isNaN(u.num))) sum = `<span class="u-sum"><small>Summa</small>${esc(talNyckel(utf.reduce((a, u) => a + u.num, 0)))}</span>`;
+    else {
+      // specialtärningar med ord eller färger: räkna ihop, "2 röd, 1 blå"
+      const antal = new Map(); utf.forEach(u => antal.set(u.text, (antal.get(u.text) || 0) + 1));
+      sum = `<span class="u-sum" style="font-size:24px">${[...antal].map(([t, n]) => `${n} ${esc(t.toLowerCase())}`).join(', ')}</span>`;
+    }
     visaUtfall(`<span class="u-list">${chips}</span>${sum}`);
   }
   if (mode === 'tarningar') { renderResultat(); uppdateraKnapp(); }
+};
+Mynt.onResult = utf => {
+  registrera('mynt', utf);
+  const [a, b] = myntNamn();
+  if (utf.length === 1) visaUtfall(`<span class="u-lbl">Myntet visar</span><span class="u-val">${esc(utf[0].li === 0 ? a : b)}</span>`);
+  else visaUtfall(`<span class="u-lbl">Utfall</span><span class="u-val">${esc(myntSammanfattning(utf))}</span>`);
+  if (mode === 'mynt') { renderResultat(); uppdateraKnapp(); }
 };
 let kortOmgang = [];
 Kortlek.onKort = id => {
@@ -2269,6 +2323,7 @@ async function forsok() {
   Ljud.init();
   if (!renderer) { snabb(1); return; }
   if (mode === 'tarningar') { if (Tarningar.kasta()) { doljUtfall(); uppdateraKnapp(); } }
+  else if (mode === 'mynt') { if (Mynt.kasta()) { doljUtfall(); uppdateraKnapp(); } }
   else if (mode === 'kort') {
     if (Kortlek.busy) return;
     doljUtfall(); kortOmgang = [];
@@ -2290,6 +2345,14 @@ function tarningarAndrade(direkt = true) {
   clearTimeout(tTimer);
   const gor = () => { Tarningar.setDefs(ST.tarningar.lista); doljUtfall(); uppdateraKnapp(); };
   if (direkt) gor(); else tTimer = setTimeout(gor, 350);
+  renderResultat();
+}
+let mTimer = 0;
+function myntAndrade(direkt = true) {
+  nollstall('mynt'); spara(); UI.valdKey = null; visade = new Map();
+  clearTimeout(mTimer);
+  const gor = () => { Mynt.setDefs(myntDefs()); doljUtfall(); uppdateraKnapp(); };
+  if (direkt) gor(); else mTimer = setTimeout(gor, 350);
   renderResultat();
 }
 function kortAndrade() { nollstall('kort'); Kortlek.setCfg(ST.kort); kortOmgang = []; doljUtfall(); spara(); renderSettings(); renderResultat(); uppdateraKnapp(); }
@@ -2329,6 +2392,8 @@ function handling(act, el) {
     }
     case 't-std': { const t = L[UI.sel]; L[UI.sel] = nyTarning(t.sides, t.farg); tarningarAndrade(); renderSettings(); break; }
     case 't-fargtarning': { const t = L[UI.sel]; t.labels = t.labels.map(() => ''); t.sidfarg = t.labels.map((_, j) => SIDFARGER[j % SIDFARGER.length].hex); tarningarAndrade(); renderSettings(); break; }
+    case 'm-antal': if (Mynt.busy) return; ST.mynt.antal = clamp(ST.mynt.antal + d, 1, 12); myntAndrade(); renderSettings(); break;
+    case 'm-std': if (Mynt.busy) return; ST.mynt.labels = ['Krona', 'Klave']; myntAndrade(); renderSettings(); break;
     case 'k-farg': { const F = ST.kort.farger; if (F.includes(v)) { if (F.length > 1) F.splice(F.indexOf(v), 1); } else F.push(v); F.sort((a, b) => 'SHDC'.indexOf(a) - 'SHDC'.indexOf(b)); kortAndrade(); break; }
     case 'k-valor': { const V = ST.kort.valorer, n = +v; if (V.includes(n)) { if (V.length > 1) V.splice(V.indexOf(n), 1); } else V.push(n); V.sort((a, b) => a - b); kortAndrade(); break; }
     case 'k-valorer': ST.kort.valorer = v === 'alla' ? ALLA_VALORER.slice() : v === 'kladda' ? [11, 12, 13] : [2, 3, 4, 5, 6, 7, 8, 9, 10]; kortAndrade(); break;
@@ -2353,7 +2418,7 @@ function handling(act, el) {
     case 'h-bort': ST.hjul.sektorer.splice(i, 1); hjulAndrat(); break;
     case 'h-ny': { const S = ST.hjul.sektorer; S.push({ text: String(S.length + 1), farg: HJULFARGER[S.length % HJULFARGER.length], w: 1 }); hjulAndrat(); break; }
     case 'h-mall': ST.hjul.sektorer = HJULMALLAR[v](); hjulAndrat(); break;
-    case 'vy': if (mode === 'tarningar') ST.tarningar.vy = v; else ST.kort.vy = v; UI.valdKey = null; visade = new Map(); spara(); renderResultat(); break;
+    case 'vy': if (mode === 'tarningar') ST.tarningar.vy = v; else if (mode === 'mynt') ST.mynt.vy = v; else ST.kort.vy = v; UI.valdKey = null; visade = new Map(); spara(); renderResultat(); break;
     case 'snabb': snabb(+v); break;
     case 'noll': nollstall(mode); UI.valdKey = null; renderResultat(); break;
   }
@@ -2365,6 +2430,7 @@ for (const el of [settingsEl, resultsEl]) {
 settingsEl.addEventListener('input', e => {
   const t = e.target, i = +t.dataset.i;
   if (t.dataset.inp === 't-lbl') { ST.tarningar.lista[UI.sel].labels[i] = t.value; tarningarAndrade(false); }
+  else if (t.dataset.inp === 'm-lbl') { ST.mynt.labels[i] = t.value; myntAndrade(false); }
   else if (t.dataset.inp === 'h-text') { ST.hjul.sektorer[i].text = t.value; hjulAndrat(false, false); }
   else if (t.dataset.inp === 'h-farg') { ST.hjul.sektorer[i].farg = t.value; hjulAndrat(false, false); }
 });
@@ -2378,7 +2444,7 @@ function setMode(m, direkt = false) {
   document.querySelectorAll('.mode').forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === m));
   UI.valdKey = null; visade = new Map();
   doljUtfall();
-  Tarningar.visaEtiketter(m === 'tarningar');
+  Tarningar.visaEtiketter(m === 'tarningar'); Mynt.visaEtiketter(m === 'mynt');
   renderSettings(); renderResultat(); uppdateraKnapp();
   flygTill(m, direkt);
 }
@@ -2392,7 +2458,7 @@ function traff(ev, lista) {
   ray.setFromCamera(pek, camera);
   return ray.intersectObjects(lista, true).length > 0;
 }
-const klickMal = () => mode === 'tarningar' ? [Tarningar.grp] : mode === 'kort' ? Kortlek.klickbar : mode === 'urna' ? Urna.klickbar : Hjul.klickbar;
+const klickMal = () => mode === 'tarningar' ? [Tarningar.grp] : mode === 'mynt' ? [Mynt.grp] : mode === 'kort' ? Kortlek.klickbar : mode === 'urna' ? Urna.klickbar : Hjul.klickbar;
 let ned = null;
 canvas.addEventListener('pointerdown', ev => {
   if (!renderer) return;
@@ -2465,14 +2531,15 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) wake
     ]);
   } catch (e) { /* teckensnitten får laddas senare */ }
   Tarningar.setDefs(ST.tarningar.lista);
+  Mynt.setDefs(myntDefs());
   Kortlek.setCfg(ST.kort);
   Urna.setInnehall(ST.urna.innehall);
   Hjul.setSektorer(ST.hjul.sektorer);
   const m0 = LS.get('mode', 'tarningar');
-  setMode(['tarningar', 'kort', 'urna', 'hjul'].includes(m0) ? m0 : 'tarningar', true);
+  setMode(['tarningar', 'mynt', 'kort', 'urna', 'hjul'].includes(m0) ? m0 : 'tarningar', true);
   requestAnimationFrame(() => stage.classList.add('klar'));
   wake(3000);
 })();
 
 // För felsökning och automatiska tester (.shots/).
-window.SANNOLIKHET = { ST, STAT, Tarningar, Kortlek, Urna, Hjul, setMode, forsok, snabb, kategorier, camera, controls, wake, get mode() { return mode; }, dbg: () => ({ rafOn, awakeUntil: Math.round(awakeUntil - performance.now()), tweens: tweens.size, ...Tarningar.dbg() }) };
+window.SANNOLIKHET = { ST, STAT, Tarningar, Mynt, Kortlek, Urna, Hjul, setMode, forsok, snabb, kategorier, camera, controls, wake, get mode() { return mode; }, dbg: () => ({ rafOn, awakeUntil: Math.round(awakeUntil - performance.now()), tweens: tweens.size, ...(mode === 'mynt' ? Mynt : Tarningar).dbg() }) };

@@ -661,6 +661,10 @@ function mainDir(doc) {
   return sum > 0 ? 1 : sum < 0 ? -1 : (first || 1);
 }
 function hasSource(doc) { return allComps(doc).some(c => c.type === 'battery' || c.type === 'ac'); }
+// Växelström byter riktning varje halvperiod, så en fast strömpil vore fel.
+// Läroböckerna ritar inga strömpilar i växelströmskretsar, och det gäller
+// även om kretsen dessutom har ett batteri.
+function hasAC(doc) { return allComps(doc).some(c => c.type === 'ac'); }
 // En serie som bara är en parallellkoppling över hela ledaren har ingen
 // egen ledningsbit att sätta en pil på.
 const soleFullPar = S => S.items.length === 1 && S.items[0].kind === 'par' && !!S.items[0].full;
@@ -691,7 +695,7 @@ function seriesDrive(S) {
 function planArrows(doc, stretched, arrowIdx, sol, forSolve) {
   const plan = {};
   // Utan spänningskälla går det ingen ström, så då ritas inga pilar alls.
-  if (!doc.opts.arrows || !hasSource(doc)) return plan;
+  if (!doc.opts.arrows || !hasSource(doc) || hasAC(doc)) return plan;
   // BATTERIET I EN EGEN GREN: sitter ingen källa direkt på slingan men en
   // parallellgren på slingan har en, är det den grenen som bär hela
   // strömmen. Dess pil heter då I och sitter vid pluspolen, och slingans
@@ -2319,6 +2323,7 @@ function inspDoc() {
   <div class="grp">
     ${tgl('arrows', 'Strömpilar', 'Riktningen följer batteriets poler', o.arrows)}
     ${o.arrows && !hasSource(doc) ? '<p class="help note">Pilarna visas när kretsen har en spänningskälla. Dra in ett batteri så dyker de upp.</p>' : ''}
+    ${o.arrows && hasAC(doc) ? '<p class="help note">Vid växelspänning ritas inga strömpilar, eftersom strömmen byter riktning hela tiden.</p>' : ''}
     <div class="subgrp${o.arrows ? '' : ' off'}">
       ${tgl('subArrows', 'Visa delströmmar', 'Strömmarna i parallellgrenarna, <i>I</i>₁, <i>I</i>₂ …', o.subArrows !== false, true)}
       <div class="optrow"><span>Färg på pilarna</span>${seg('arrowBlue', [['0', 'Svart'], ['1', 'Blå']], o.arrowBlue ? 1 : 0)}</div>

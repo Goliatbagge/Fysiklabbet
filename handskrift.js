@@ -5298,8 +5298,8 @@
       [['exponenten 5. Närmaste har']],
       [['exponenten 6, och gör jag']],
       [['tiopotensen 10 gånger större']],
-      [['måste talet framför bli 10']],
-      [['gånger mindre.']]
+      [['måste talet framför delas']],
+      [['med 10.']]
     ]);
     y += 2.1 * F;
     xx = T.str('=0,27·10^6 N', padL + 30, y);
@@ -5331,8 +5331,8 @@
 
     tanke(y, [
       [['Inget prefix för exponenten']],
-      [['−5. Går jag till −6 blir']],
-      [['tiopotensen 10 gånger mindre,']],
+      [['−5. Går jag till −6 delas']],
+      [['tiopotensen med 10,']],
       [['så talet framför blir 10']],
       [['gånger större.']]
     ]);
@@ -26557,7 +26557,7 @@
     T.str('d=6,7 cm=6,7·10^−^2 m', padL + 20, y);
     T.stepEnd();
     y += 1.9 * F;
-    T.str('λ är 10^3^2 gånger mindre än bollen', padL + 20, y);
+    T.str('d är 10^3^2 gånger större än λ', padL + 20, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;

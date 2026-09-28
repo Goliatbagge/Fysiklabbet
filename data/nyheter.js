@@ -106,7 +106,7 @@ const NYHETER_ALL = [
     id: "2026-09-28-antiprotoner-pa-lastbil",
     date: "2026-09-28",
     title: "92 antiprotoner åkte lastbil och överlevde en månad i fällan",
-    deck: "Antimateria har aldrig tidigare transporterats på väg. I mars körde ett forskarlag vid CERN 92 antiprotoner åtta kilometer runt området i en flyttbar magnetfälla, utan att tappa en enda. Fällan höll dem sedan kvar i över en månad, i ett vakuum som är ungefär femhundra miljarder miljarder gånger tunnare än luften i ett rum.",
+    deck: "Antimateria har aldrig tidigare transporterats på väg. I mars körde ett forskarlag vid CERN 92 antiprotoner åtta kilometer runt området i en flyttbar magnetfälla, utan att tappa en enda. Fällan höll dem sedan kvar i över en månad, i ett vakuum så tomt att luften i ett rum innehåller ungefär femhundra miljarder miljarder gånger fler molekyler.",
     category: "Partikelfysik",
     readingTime: "6 min",
     image: "nyheter/bilder/2026-09-28-antiprotoner-pa-lastbil.jpg",
@@ -234,7 +234,7 @@ const NYHETER_ALL = [
       { type: 'h2', text: 'Tre sorters neutriner, men bara en värmer' },
       { type: 'p', html: 'Här kommer partikelfysiken in. Neutriner finns i tre sorter, som fysikerna kallar smaker: elektronneutrino, myonneutrino och tauneutrino, var och en med sin antipartikel. Sorterna är inte utbytbara när det gäller uppvärmning. Bara elektronneutriner och elektronantineutriner fastnar lätt i gasen bakom chockvågen, genom att göra om en neutron till en proton eller tvärtom. Myon- och tauneutriner passerar i praktiken rakt igenom utan att lämna något efter sig.' },
       { type: 'p', html: 'Samtidigt är neutriner ökända för att byta smak under färden. Att de gör det på vägen från solen till jorden gav Nobelpriset i fysik 2015. Men inne i en kollapsande stjärnkärna är neutrinerna så tätt packade att de också påverkar varandra, och då kan omvandlingen gå oerhört fort: på nanosekunder och över sträckor på centimetrar kan de tre smakerna jämnas ut mot varandra.' },
-      { type: 'p', html: 'Följden är att energibokföringen bakom chockvågen ritas om. Blandas sorterna om byts en del av de elektronneutriner som kunde ha värmt gasen mot sorter som bara flyger förbi, samtidigt som också avkylningen längre in ändras. Att detta borde spela roll har varit känt länge. Problemet har varit att räkna på det: omvandlingen sker på skalor många miljoner gånger mindre än det område simuleringen följer, och ingen dator klarar båda samtidigt.' },
+      { type: 'p', html: 'Följden är att energibokföringen bakom chockvågen ritas om. Blandas sorterna om byts en del av de elektronneutriner som kunde ha värmt gasen mot sorter som bara flyger förbi, samtidigt som också avkylningen längre in ändras. Att detta borde spela roll har varit känt länge. Problemet har varit att räkna på det: området som simuleringen följer är många miljoner gånger större än de skalor där omvandlingen sker, och ingen dator klarar båda samtidigt.' },
 
       { type: 'h2', text: '195 stjärnor, två gånger var' },
       { type: 'p', html: 'Gogilashvili och Tamborra löste det med en avsiktligt grov genväg. I stället för att följa omvandlingen i detalj lät de den ske ögonblickligen och fullständigt så snart tätheten översteg ett valt gränsvärde: de tre smakerna delar då lika, medan antalet partiklar, deras rörelsemängd och leptontalet bevaras. Det ger inte ett realistiskt förlopp, men det ger en övre gräns för hur mycket smakomvandlingen alls kan betyda.' },
@@ -453,7 +453,7 @@ const NYHETER_ALL = [
       ] },
 
       { type: 'h2', text: 'En bieffekt som kan lösa en annan gåta' },
-      { type: 'p', html: 'Den intressanta vändningen kommer på slutet. Samma räkning som dömer ut jordfältet pekar ut något annat, och nyckeln ligger i att $\omega$ står i uttrycket $E = B \cdot A \cdot \omega$ på samma villkor som $B$. Det spelar alltså ingen roll att ett radiofrekvent fält är svagt, om det bara växlar tillräckligt snabbt. Ett fält på bara 1&nbsp;nT, femtiotusen gånger svagare än jordens, som svänger tio miljoner gånger i sekunden ger enligt Kattnigs modell omkring 1,6&nbsp;µV i båggången. Det är mer än hundra gånger signalen från jordfältet.' },
+      { type: 'p', html: 'Den intressanta vändningen kommer på slutet. Samma räkning som dömer ut jordfältet pekar ut något annat, och nyckeln ligger i att $\omega$ står i uttrycket $E = B \cdot A \cdot \omega$ på samma villkor som $B$. Det spelar alltså ingen roll att ett radiofrekvent fält är svagt, om det bara växlar tillräckligt snabbt. Ett fält på bara 1&nbsp;nT, en femtiotusendel av jordens, som svänger tio miljoner gånger i sekunden ger enligt Kattnigs modell omkring 1,6&nbsp;µV i båggången. Det är mer än hundra gånger signalen från jordfältet.' },
       { type: 'p', html: 'Det kan lösa en helt annan gåta. Sedan länge vet man att mycket svaga radiovågor slår ut fåglarnas kompass, och det är ett av de tyngsta argumenten för att kompassen bygger på kemi, på kortlivade radikalpar i ögat, snarare än på en inbyggd kompassnål av järn. Precis varför störningen biter så hårt har varit oklart. Induktionen i innerörat kan alltså vara högst verklig, fast som störningsväg in, inte som sinne.' },
       { type: 'p', html: 'Kvar står mätningarna. Magnetiska stimuli tänder faktiskt områden i duvans hjärna som hänger ihop med balansorganet, och det resultatet ifrågasätts inte i den nya studien. Det som faller bort är en av förklaringarna till hur det går till. Ett negativt besked av den sorten är ingen återvändsgränd, utan en avgränsning: listan över mekanismer som är värda att undersöka blev precis en punkt kortare, och den ströks inte med ett nytt experiment utan med tre tal och en formel.' }
     ],
@@ -822,7 +822,7 @@ const NYHETER_ALL = [
       { type: 'image', src: 'nyheter/bilder/2026-09-19-skummet-som-minns-3.jpg', alt: 'Tre diagram. Det vänstra visar spänning mot tid för två skum, där den orange kurvan sjunker under tiden provet hålls hoptryckt medan den gröna ligger stilla. De två högra visar spänning mot hoptryckning, där den orange kurvan inte sluter sin lilla ögla men den gröna gör det.', caption: 'Till vänster ligger spänningen i kolnanorörsskummet (grönt) kvar medan PVC-skummets (orange) sjunker under en dryg timme i samma läge. PVC-kurvan är hundrafaldigt förstorad för att alls synas bredvid. Till höger syns följden: PVC-skummet missar punkten där det vände (i mitten), medan kolnanorörsskummet sluter sin lilla ögla exakt (till höger).', credit: 'Figur: Abhishek Gupta med flera, Physical Review X 2026 (CC BY 4.0). Beskuren.' },
 
       { type: 'h2', text: 'Torr friktion bryr sig inte om farten' },
-      { type: 'p', html: 'Nyckeln ligger i var energiförlusten uppstår. En trögflytande kraft växer med hastigheten, ungefär som luftmotståndet på en cyklist. En torr friktionskraft gör det inte: $F_f = \\mu \\cdot F_N$ innehåller ingen fart alls, bara friktionstalet och kraften som pressar ytorna samman. Ett material vars förluster kommer från torr friktion ska därför svara likadant vid alla hastigheter, och det var precis vad mätningarna visade. Hysteresöglan såg likadan ut när hoptryckningen gjordes tusen gånger långsammare eller snabbare.' },
+      { type: 'p', html: 'Nyckeln ligger i var energiförlusten uppstår. En trögflytande kraft växer med hastigheten, ungefär som luftmotståndet på en cyklist. En torr friktionskraft gör det inte: $F_f = \\mu \\cdot F_N$ innehåller ingen fart alls, bara friktionstalet och kraften som pressar ytorna samman. Ett material vars förluster kommer från torr friktion ska därför svara likadant vid alla hastigheter, och det var precis vad mätningarna visade. Hysteresöglan såg likadan ut oavsett om hoptryckningen gick tusen gånger snabbare eller tog tusen gånger längre tid.' },
       { type: 'quote', html: 'Oavsett om vi tryckte ihop skummet mycket långsamt eller mycket snabbt spelade det ingen roll. Skummet betedde sig likadant.', cite: 'Ramathasan Thevamaran, University of Wisconsin–Madison, i Physics Magazine' },
       { type: 'p', html: 'Vad är det då som gnider mot vad? Rören står tätt, och där de kommer varandra tillräckligt nära dras de ihop av van der Waals-krafter, samma svaga attraktion som håller ihop vanliga molekyler. När skummet trycks ihop böjer sig rören, griper tag i varandra, släpper plötsligt och griper tag igen. Varje sådant språng gör ett litet arbete som blir värme, och summan av oräkneliga språng är öglans yta. Forskarna byggde en modell av fjädrar och friktionsklossar som återger mätkurvorna, och den förutsäger dessutom öglans form när man vänder mitt i förloppet.' },
       { type: 'p', html: 'En detalj i modellen gör materialet användbart: ju hårdare skummet redan är hoptryckt, desto närmare varandra ligger rören och desto starkare blir friktionen. Motståndet är alltså inte en fast egenskap utan något som går att ställa in i efterhand.' },
@@ -1119,7 +1119,7 @@ const NYHETER_ALL = [
 
       { type: 'fact', title: 'Visste du?', items: [
         'Bethes räkning från 1931 gällde en rad av kvantmagneter, inte en gas. Att samma lösningar dyker upp i ett moln av atomer visar hur allmän matematiken bakom är.',
-        'Vid 10&nbsp;nanokelvin är gasen omkring 270&nbsp;miljoner gånger kallare än den kosmiska bakgrundsstrålningens 2,7&nbsp;K. Kallare platser än den här sortens apparater finns veterligen ingenstans i universum.',
+        'Vid 10&nbsp;nanokelvin är gasen så kall att den kosmiska bakgrundsstrålningens 2,7&nbsp;K är omkring 270&nbsp;miljoner gånger varmare. Kallare platser än den här sortens apparater finns veterligen ingenstans i universum.',
         'Ungefär 20&nbsp;% av atomerna gick förlorade under det långsamma svepet till starkast attraktion. Kedjorna är alltså inte bara svagt bundna, de är också kortlivade.',
         'Namnet ”sträng” har ingenting med strängteori att göra. Det syftar på hur lösningarna ligger uppradade som pärlor på ett snöre när man ritar upp dem i ett diagram.',
       ] },
@@ -1432,7 +1432,7 @@ const NYHETER_ALL = [
 
       { type: 'h2', text: 'Ultrarapid i gelé' },
       { type: 'p', html: 'Att förloppet över huvud taget gick att följa beror på ett knep som forskargruppen har byggt sin verksamhet kring. I stället för glas eller plexiglas använder de spröda geler av polyakrylamid. De går sönder på samma sätt som vanliga spröda material, men de är oerhört mycket mjukare, och det ändrar tempot fullständigt.' },
-      { type: 'p', html: 'En spricka kan nämligen aldrig gå fortare än ytvågen i materialet, Rayleighvågen. I glas motsvarar det flera kilometer i sekunden, alltså snabbare än en gevärskula. I den här sortens geler är samma gräns nere på några meter i sekunden. Hela förloppet spelas därmed upp hundratals gånger långsammare, och en snabbkamera hinner se varje skede.' },
+      { type: 'p', html: 'En spricka kan nämligen aldrig gå fortare än ytvågen i materialet, Rayleighvågen. I glas motsvarar det flera kilometer i sekunden, alltså snabbare än en gevärskula. I den här sortens geler är samma gräns nere på några meter i sekunden. Hela förloppet tar därmed hundratals gånger längre tid, och en snabbkamera hinner se varje skede.' },
       { type: 'p', html: 'Det forskarna såg var att skadan börjar som en platt fläck inne i materialet: en tvådimensionell yta som breder ut sig i det plan där skivan senare ska dela sig. Fläcken kryper fram med hastigheter från mikrometer till millimeter i sekunden. Det är långsamt även med vardagsmått — i den nedre änden hinner sprickfronten inte ens ett hårstrås bredd på en sekund. Och den fasen upptar minst tre fjärdedelar av hela brottförloppet, mätt i tid. Själva brottet på slutet tar mikrosekunder till millisekunder.' },
 
       { type: 'h2', text: 'Ögonblicket då geometrin byter form' },
@@ -1445,7 +1445,7 @@ const NYHETER_ALL = [
       { type: 'p', html: 'Där ligger också den lockande tanken. Är merparten av förloppet långsamt, och startar det dessutom under den gräns där man hittills har letat, då finns det i princip ett tidsfönster att upptäcka det i. Haken syns i samma mening: fläcken är en tiondels millimeter stor och ligger inuti materialet. Det ska mycket till innan ett spruckit fönsterglas varnar i förväg. Men det är en annan sorts problem än att inte veta vad man letar efter.' },
 
       { type: 'fact', title: 'Visste du?', items: [
-        'Griffithlängden är omvänt proportionell mot spänningen i kvadrat. Fördubblar man dragningen räcker det alltså med en fyra gånger mindre defekt för att sätta i gång ett brott.',
+        'Griffithlängden är omvänt proportionell mot spänningen i kvadrat. Fördubblar man dragningen räcker det alltså med en defekt som är en fjärdedel så stor för att sätta i gång ett brott.',
         'Griffith kom på sin teori för att förklara en gåta: tunna glasfibrer visade sig vara långt starkare än tjocka stavar av exakt samma glas. Förklaringen är att hållfastheten sitter i defekterna, inte i materialet — och i en tunn fiber finns det helt enkelt färre och mindre repor att starta ett brott ifrån.',
         'Sprickans övre hastighetsgräns är farten hos materialets ytvåg. I fönsterglas ligger den kring 3&nbsp;000&nbsp;m/s, i en mjuk gel kring några meter i sekunden. Det är hela skälet till att fysiker som vill studera brott arbetar med gelé i stället för glas.',
         'Den 9 november 1961 flög Robert White raketplanet X-15 i mach 6,04, som förste människa förbi sex gånger ljudhastigheten. På vägen ner, medan farten bromsades genom mach 2,7, sprack den yttre rutan i förarkabinens högra fönster av större värmespänningar än någon hade räknat med. Han landade med hjälp av den vänstra.'
@@ -1553,7 +1553,7 @@ const NYHETER_ALL = [
       { type: 'h2', text: 'Partnern som visar hur partikeln var vänd' },
       { type: 'p', html: 'BESIII-samarbetet i Peking har nu gjort om mätningen på ett annat sätt. I lagringsringen BEPCII möts elektroner och positroner med precis så mycket energi att partikeln $\\mathrm{J}/\\psi$ bildas, och laget har samlat på sig 10,087&nbsp;miljarder sådana händelser. Knappt två gånger på tusen sönderfaller $\\mathrm{J}/\\psi$ till en lambdapartikel och en antilambda, alltså i runda tal nitton miljoner par. De två föds i samma ögonblick ur ett och samma tillstånd, och deras spinn är därför sammanflätade.' },
       { type: 'p', html: 'Där sitter knepet. Antilambdan faller sönder till en antiproton och en pion, två spår som detektorn ser tydligt, och riktningen på det sönderfallet hänger ihop med åt vilket håll antilambdans spinn pekade. Eftersom paret är sammanflätat följer därmed också hur lambdan var vänd. Och hur lambdans egna sönderfallsprodukter fördelar sig beror i sin tur på vinkeln mellan dess spinn och den utsända protonen. Sammanlagt beskrivs förloppet av sju storheter: sex vinklar och hur mycket rörelsemängd och energi som förs över till elektronen och antineutrinon.' },
-      { type: 'p', html: 'Varje enskild händelse bär alltså mer information än om partikeln hade kommit ensam och oriktad. Ur de tio miljarderna kollisioner blev det till slut 1&nbsp;854 användbara sönderfall, alltså en tjugondel av materialet i Fermilabmätningen. Ändå landade den viktigaste storheten, den axialvektoriella kopplingen, på $0{,}729$ med en osäkerhet på omkring $0{,}048$. Det är samma värde som förr och bara ungefär två och en halv gånger så trubbigt, trots tjugo gånger färre sönderfall.' },
+      { type: 'p', html: 'Varje enskild händelse bär alltså mer information än om partikeln hade kommit ensam och oriktad. Ur de tio miljarderna kollisioner blev det till slut 1&nbsp;854 användbara sönderfall, alltså en tjugondel av materialet i Fermilabmätningen. Ändå landade den viktigaste storheten, den axialvektoriella kopplingen, på $0{,}729$ med en osäkerhet på omkring $0{,}048$. Det är samma värde som förr och bara ungefär två och en halv gånger så trubbigt, trots det mycket mindre underlaget.' },
 
       { type: 'image', src: 'nyheter/bilder/2026-09-08-summan-ska-bli-exakt-ett-2.jpg', alt: 'Gröna magneter med tjocka kopparlindningar och orange kylslangar står tätt intill varandra längs ett strålrör i en acceleratortunnel.', caption: 'Magneterna längs ringen håller de laddade partiklarna i bana och fokuserar dem, så att elektroner och positroner möts i samma punkt varv efter varv.', credit: 'Foto: Shizhao / Wikimedia Commons (CC BY-SA 3.0), beskuren. Bilden visar acceleratorhallen vid Pekings elektron–positronkollider.' },
 
@@ -2367,7 +2367,7 @@ const NYHETER_ALL = [
       url: "https://doi.org/10.1103/w6t7-9txs"
     },
     body: [
-      { type: 'p', html: 'Vill man se en enskild proteinmolekyl duger inte synligt ljus. Våglängden ligger kring 500&nbsp;nm, tusen gånger grövre än det man vill titta på, och vågen böjer sig helt enkelt runt föremålet. Därför byter man ut ljuset mot elektroner. En elektron som accelererats genom 100&nbsp;000&nbsp;volt uppträder som en våg med en våglängd på ungefär 3,7&nbsp;pm — nästan tusen gånger kortare än avståndet mellan atomerna i ett fast material.' },
+      { type: 'p', html: 'Vill man se en enskild proteinmolekyl duger inte synligt ljus. Våglängden ligger kring 500&nbsp;nm, tusen gånger grövre än det man vill titta på, och vågen böjer sig helt enkelt runt föremålet. Därför byter man ut ljuset mot elektroner. En elektron som accelererats genom 100&nbsp;000&nbsp;volt uppträder som en våg med en våglängd på ungefär 3,7&nbsp;pm. Det är bara någon procent av avståndet mellan atomerna i ett fast material.' },
       { type: 'p', html: 'Priset är att elektronerna inte bara tittar. Varje elektron som passerar provet kan slå loss en annan elektron ur en molekyl, bryta en bindning eller flytta en atom. Ett biologiskt prov — en cell, ett virus, en frusen proteinlösning — tål bara en viss stråldos innan det man ville avbilda har slutat se ut som sig självt. Och eftersom bildens skärpa i grunden är en statistikfråga hamnar man i en rävsax: fler elektroner ger en tydligare bild av ett alltmer förstört prov.' },
       { type: 'p', html: 'Ett forskarlag från TU Wien, Wiens universitet, Johannes Kepler-universitetet i Linz och Innsbrucks universitet föreslår nu en väg runt rävsaxen. I stället för att skicka fler elektroner vill de få ut mer information ur varje enskild elektron — genom att låta den tala med en kvantdator på vägen.' },
       { type: 'h2', text: 'En jonfälla mitt i strålgången' },
@@ -2702,7 +2702,7 @@ const NYHETER_ALL = [
 
       { type: 'h2', text: 'En kulle mitt i elektronhavet' },
       { type: 'p', html: 'Att mäta en sådan laddning har hittills krävt känsliga instrument och gott om tålamod — antingen genom att lyssna på det svaga bruset i strömmen, eftersom bruset avslöjar hur stora paket laddningen kommer i, eller genom att bygga en interferometer där kvasipartiklarna får gå två vägar och störa varandra. Bägge metoderna fungerar, och bägge är svåra.' },
-      { type: 'p', html: 'Laget kring Mitali Banerjee vid Laboratoriet för kvantfysik, topologi och korrelationer på EPFL valde en annan väg. De byggde sitt elektronhav i tvålagersgrafen — två atomtunna skikt av kolatomer — inbäddat mellan skivor av bornitrid och omgivet av elektroder av grafit. Med elektroderna reste de sedan en liten elektrisk kulle mitt i havet: ett område dit kvasipartiklarna inte kommer in. En sådan kulle kallas en antidot, ungefär som en kvantprick vänd ut och in. Den var omkring 190&nbsp;nanometer i diameter — några hundra gånger tunnare än ett hårstrå. Hela chipet kyldes till ungefär 0,01&nbsp;K och sattes i magnetfält på mellan 5&nbsp;T och 13,5&nbsp;T.' },
+      { type: 'p', html: 'Laget kring Mitali Banerjee vid Laboratoriet för kvantfysik, topologi och korrelationer på EPFL valde en annan väg. De byggde sitt elektronhav i tvålagersgrafen — två atomtunna skikt av kolatomer — inbäddat mellan skivor av bornitrid och omgivet av elektroder av grafit. Med elektroderna reste de sedan en liten elektrisk kulle mitt i havet: ett område dit kvasipartiklarna inte kommer in. En sådan kulle kallas en antidot, ungefär som en kvantprick vänd ut och in. Den var omkring 190&nbsp;nanometer i diameter, och ett hårstrå är några hundra gånger tjockare. Hela chipet kyldes till ungefär 0,01&nbsp;K och sattes i magnetfält på mellan 5&nbsp;T och 13,5&nbsp;T.' },
       { type: 'p', html: 'Runt kullen springer kvasipartiklarna i slutna banor, och där kommer kvantmekaniken in. En laddad partikel som går ett varv runt ett inneslutet magnetfält får sin våg fasförskjuten — Aharonov–Bohm-effekten. Skruvar man långsamt upp magnetfältet eller spänningen på elektroderna passerar banan därför omväxlande genom lägen där det är lätt respektive svårt för en kvasipartikel att tunnla tvärs över kullen. Resultatet är en elektrisk signal som svänger fram och tillbaka, fullständigt regelbundet, med en tick för varje kvasipartikel som tar sig över.' },
       { type: 'p', html: 'Och det är i takten svaret sitter. Hur mycket magnetfält eller spänning som krävs mellan två tick beror direkt på hur stor laddning den tunnlande krusningen bär. En bärare med liten laddning ger tätare tick. Antidoten blir därmed en laddningsmätare som avläses med en helt vanlig ledningsförmågemätning — en fraktionell coulombmeter, som forskarna kallar den i artikelns titel.' },
 
@@ -3064,7 +3064,7 @@ const NYHETER_ALL = [
       ]
     },
     body: [
-      { type: 'p', html: 'Det finns en gräns för hur långt in i det lilla man kan titta. En atom är omkring 10<sup>−10</sup>&nbsp;m tvärs över, vilket redan är långt bortom vad något ljusmikroskop klarar. Kärnan inne i atomen är ytterligare tiotusen gånger mindre. Att fotografera den är uteslutet. Ändå har en internationell forskargrupp nu kunnat slå fast att kärnan i fermium-255 inte är rund. Den är utdragen — formad som en rugbyboll.' },
+      { type: 'p', html: 'Det finns en gräns för hur långt in i det lilla man kan titta. En atom är omkring 10<sup>−10</sup>&nbsp;m tvärs över, vilket redan är långt bortom vad något ljusmikroskop klarar. Kärnan inne i atomen är i sin tur bara en tiotusendel så stor. Att fotografera den är uteslutet. Ändå har en internationell forskargrupp nu kunnat slå fast att kärnan i fermium-255 inte är rund. Den är utdragen — formad som en rugbyboll.' },
 
       { type: 'h2', text: 'Grundämnet som tar slut i vågskålen' },
       { type: 'p', html: 'Fermium är grundämne nummer 100, uppkallat efter Enrico Fermi, och det tyngsta ämne som över huvud taget går att framställa i vägbara mängder. Även då rör det sig om pikogram. Allt tyngre än så tillverkas atom för atom, i antal som räknas på fingrarna.' },
@@ -3274,7 +3274,7 @@ const NYHETER_ALL = [
       ],
       fragor: [
         "Samma förmörkelse beskrivs på olika håll som 81 procent och som 86 procent. Båda talen är riktigt uträknade. Vad säger det om hur man bör läsa en procentuppgift i en nyhetstext, och vilken av de två är mest relevant för hur ljust det blir ute?",
-        "Månen är ungefär 400 gånger mindre än solen och råkar samtidigt stå ungefär 400 gånger närmare. Vore det ett problem för vetenskapen om den slumpen inte fanns — alltså skulle vi veta mindre om solen då, eller bara se mindre?",
+        "Solen är ungefär 400 gånger större än månen och råkar samtidigt stå ungefär 400 gånger längre bort. Vore det ett problem för vetenskapen om den slumpen inte fanns — alltså skulle vi veta mindre om solen då, eller bara se mindre?",
         "Ögat klarar inte av att avgöra när solen är farlig att titta på, eftersom både obehaget och pupillreflexen styrs av hur ljust det känns. Vilka andra situationer känner ni till där en kroppslig varningssignal saknas just när risken är som störst — och hur hanterar man det?"
       ]
     },
@@ -3402,7 +3402,7 @@ const NYHETER_ALL = [
   {
     id: "2026-08-08-svavande-magnet",
     date: "2026-08-08",
-    title: "En magnet mindre än ett knappnålshuvud svävar fritt i vakuum — och känner av fält en och en halv miljard gånger svagare än jordens",
+    title: "En magnet mindre än ett knappnålshuvud svävar fritt i vakuum — och känner av fält under en miljarddel av jordens",
     deck: "De känsligaste magnetfältsmätarna kräver flytande helium eller ett magnetiskt avskärmat rum. Ett lag från Peking och Mainz har i stället låtit en pytteliten permanentmagnet hänga fritt i luften och läst av hur den vrider sig — med en laserstråle, vid rumstemperatur, mitt i jordens eget magnetfält.",
     category: "Magnetism",
     readingTime: "6 min",
@@ -3433,7 +3433,7 @@ const NYHETER_ALL = [
     },
     body: [
       { type: "p", html: "I en vakuumkammare hänger en liten skiva av magnetiskt material fritt i luften. Den är 0,82&nbsp;millimeter i diameter och 0,38&nbsp;millimeter tjock — mindre än ett knappnålshuvud. Ingenting rör vid den: ingen tråd, ingen fjäder, ingen spets att balansera på. En laserstråle träffar skivans blanka ovansida och studsar vidare mot en detektor några meter bort." },
-      { type: "p", html: "Skivan är en magnetometer, alltså en mätare av magnetfält, och enligt en studie i tidskriften <em>Science</em> hör den till de känsligaste som byggts. Den reagerar på fältändringar ner mot 32&nbsp;femtotesla, $3{,}2 \\cdot 10^{-14}\\ \\mathrm{T}$. Jordens magnetfält är omkring $50\\ \\mathrm{\\mu T}$. Sensorn känner alltså av fält som är ungefär en och en halv miljard gånger svagare än det som får en kompassnål att peka norrut." },
+      { type: "p", html: "Skivan är en magnetometer, alltså en mätare av magnetfält, och enligt en studie i tidskriften <em>Science</em> hör den till de känsligaste som byggts. Den reagerar på fältändringar ner mot 32&nbsp;femtotesla, $3{,}2 \\cdot 10^{-14}\\ \\mathrm{T}$. Jordens magnetfält är omkring $50\\ \\mathrm{\\mu T}$. Det fält som får en kompassnål att peka norrut är alltså ungefär en och en halv miljard gånger starkare än de fält sensorn känner av." },
       { type: "p", html: "Fackuttrycket för känsligheten är $32\\ \\mathrm{fT}/\\sqrt{\\mathrm{Hz}}$ — ”32&nbsp;femtotesla per kvadratrot-hertz”. Det är ett mått på hur mycket brus mätaren själv bidrar med: mäter man i en sekund syns signaler ner till omkring 32&nbsp;femtotesla, och mäter man i hundra sekunder sjunker gränsen till en tiondel av det. Slumpmässigt brus medelvärdesbildas nämligen bort med tiden, medan en verklig signal ligger kvar." },
 
       { type: "h2", text: "Varför en magnet inte kan sväva av sig själv" },
@@ -3966,7 +3966,7 @@ const NYHETER_ALL = [
       { type: "p", html: "Att IC 1101 är enorm har varit känt länge. Redan 1991 följde astronomer dess ljus ut till drygt 600&nbsp;kiloparsec, men ingen kunde avgöra hur mycket av det svaga skenet som var galaxen själv och hur mycket som var det diffusa ljushav av stjärnor som slitits loss ur andra galaxer och driver fritt mellan hopens medlemmar. För att komma vidare använde forskarna ett kantbegrepp som utvecklats under de senaste åren: en galax kant är inte ett tvärt slut, utan ett tydligt brott i hur snabbt ljuset avtar utåt — ett brott som dessutom brukar sammanfalla med att färgen och formen ändrar sig på samma ställe. Gränsen markerar var galaxens egen stjärnkropp övergår i den yttre kappa som byggts upp av material den ätit upp." },
 
       { type: "h2", text: "Drygt åtta timmar — och 250 stjärnor som måste bort" },
-      { type: "p", html: "Bilderna togs med Wide Field Camera på det 2,5&nbsp;m stora Isaac Newton-teleskopet på La Palma, i två färgfilter och med sammanlagt drygt åtta timmars exponering. Slutresultatet når ner till omkring 30&nbsp;magnituder per kvadratbågsekund — ett mått på ytljusstyrka som innebär att de svagaste partierna lyser flera tusen gånger svagare än den mörka natthimlen själv." },
+      { type: "p", html: "Bilderna togs med Wide Field Camera på det 2,5&nbsp;m stora Isaac Newton-teleskopet på La Palma, i två färgfilter och med sammanlagt drygt åtta timmars exponering. Slutresultatet når ner till omkring 30&nbsp;magnituder per kvadratbågsekund — ett mått på ytljusstyrka som innebär att den mörka natthimlen själv lyser flera tusen gånger starkare än de svagaste partierna." },
       { type: "p", html: "Den stora svårigheten på den nivån är inte att samla ihop tillräckligt med ljus, utan att bli av med fel ljus. Varje ljusstark stjärna i förgrunden smetar ut ett svagt sken över hela bildfältet, och det skenet är lätt att förväxla med en galax yttersta utkanter. Forskarna byggde därför en noggrann modell av precis hur teleskopet sprider ljuset från en enda punktkälla — kalibrerad på allt från svaga stjärnor till en riktigt ljusstark referensstjärna — och räknade sedan bort bidraget från över 250 förgrundsstjärnor innan de vågade tro på det som blev kvar." },
 
       { type: "h2", text: "Åtta svaga skuggor avslöjar en pågående måltid" },
@@ -3985,7 +3985,7 @@ const NYHETER_ALL = [
         "En parsec är ungefär 3,26&nbsp;ljusår och en kiloparsec 1&nbsp;000 parsec, alltså drygt 3&nbsp;260&nbsp;ljusår. IC 1101:s 520&nbsp;kiloparsec motsvarar därmed cirka 1,7&nbsp;miljoner ljusår.",
         "Ljuset behöver 1,7&nbsp;miljoner år på sig för att ta sig tvärs över IC 1101. Samma resa rakt genom Vintergatan klaras av på omkring 100&nbsp;000 år.",
         "Vissa radiogalaxer sprutar ut jetstrålar och lober som sträcker sig över mer än tio miljoner ljusår och är alltså vidare än IC 1101 — men de består av utströmmande plasma, inte av stjärnor. Bland galaxernas stjärnkroppar är IC 1101 rekordhållaren.",
-        "Ytljusstyrka mäts i magnituder per kvadratbågsekund. Skalan är omvänd: ju högre tal, desto svagare ljus — och fem steg uppåt motsvarar hundra gånger svagare sken."
+        "Ytljusstyrka mäts i magnituder per kvadratbågsekund. Skalan är omvänd: ju högre tal, desto svagare ljus — och fem steg uppåt motsvarar en hundradel så starkt sken."
       ]}
     ]
   },
@@ -4089,7 +4089,7 @@ const NYHETER_ALL = [
       { type: "quote", html: "”Det som är särskilt fascinerande med hattformen är att mönstret ser oregelbundet ut vid första anblicken, men i själva verket är uppbyggt utifrån ett bikakegitter.”", cite: "Yuto Moritake, docent och försteförfattare till studien, Institute of Industrial Science, Tokyos universitet" },
 
       { type: "h2", text: "Laser genom en nanostor hatt" },
-      { type: "p", html: "Forskarlaget, lett av Moritake och professor Masaya Notomi vid Institute of Industrial Science, ville se om formens ovanliga geometri också kunde ge upphov till ny fysik. De tillverkade nanostora mönster av hattformen i kiselnitridfilmer med elektronstrålelitografi — en teknik som ritar mönster med en styrd stråle av elektroner i stället för ljus, för att nå ner till skalor tusen gånger tunnare än ett hårstrå. När forskarna sedan sköt laserljus genom strukturerna böjdes ljuset av (diffrakterade) i tydliga, virvlande ”pinwheel”-mönster — ett beteende som aldrig setts i vanliga kvasikristaller." },
+      { type: "p", html: "Forskarlaget, lett av Moritake och professor Masaya Notomi vid Institute of Industrial Science, ville se om formens ovanliga geometri också kunde ge upphov till ny fysik. De tillverkade nanostora mönster av hattformen i kiselnitridfilmer med elektronstrålelitografi — en teknik som ritar mönster med en styrd stråle av elektroner i stället för ljus, för att nå ner till skalor på en tusendel av ett hårstrås tjocklek. När forskarna sedan sköt laserljus genom strukturerna böjdes ljuset av (diffrakterade) i tydliga, virvlande ”pinwheel”-mönster — ett beteende som aldrig setts i vanliga kvasikristaller." },
       { type: "quote", html: "”Vi fann att diffraktionsmönstren själva blir kirala, eftersom strukturen saknar spegelsymmetri. Den här typen av optiskt svar skiljer sig fundamentalt från det man ser i vanliga kvasikristallina material.”", cite: "Masaya Notomi, professor, Institute of Industrial Science, Tokyos universitet" },
 
       { type: "h2", text: "En händighet du kan se i ljuset" },
@@ -4424,7 +4424,7 @@ const NYHETER_ALL = [
       { type: "quote", html: "”Genom att frysa vätskekärnan har vi skapat en helt ny fysikalisk plattform som ger extrema olinjäriteter samtidigt som den är enkel att hantera.”", cite: "Birgit Stiller, forskningsgruppledare, Max Planck-institutet för ljusets fysik" },
 
       { type: "h2", text: "Ett minne byggt av ljudvågor" },
-      { type: "p", html: "Som ett praktiskt test byggde forskarna ett så kallat optoakustiskt minne: en komponent som lagrar en ljussignal genom att tillfälligt omvandla den till en ljudvåg i fibern och sedan läsa av den igen. Tack vare den starka kopplingen kunde minnet drivas med omkring hundra gånger lägre effekt än jämförbara komponenter — ett steg mot fotonik som slösar betydligt mindre energi." },
+      { type: "p", html: "Som ett praktiskt test byggde forskarna ett så kallat optoakustiskt minne: en komponent som lagrar en ljussignal genom att tillfälligt omvandla den till en ljudvåg i fibern och sedan läsa av den igen. Tack vare den starka kopplingen kunde minnet drivas med omkring en hundradel av den effekt som jämförbara komponenter kräver — ett steg mot fotonik som slösar betydligt mindre energi." },
       { type: "quote", html: "”Att demonstrera ett väldigt effektivt optoakustiskt minne är ett fantastiskt första steg. Men den här nivån av koppling mellan ljus och ljud öppnar inte bara nya möjligheter för neuromorf databehandling, utan också för kvantinformationsbehandling, mikrovågsfotonik och högprecisionssensorer.”", cite: "Birgit Stiller, Max Planck-institutet för ljusets fysik" },
 
       { type: "h2", text: "Vad kan tekniken användas till?" },
@@ -4577,7 +4577,7 @@ const NYHETER_ALL = [
       { type: "p", html: "Forskargruppen pekar också på tillämpningar bortom kläder: samma princip skulle kunna fånga upp spillvärme från industriprocesser eller driva sensorer i uppkopplade prylar (sakernas internet) — situationer där en liten, konstant temperaturskillnad annars bara går förlorad som outnyttjad värme." },
 
       { type: "fact", title: "Visste du?", items: [
-        "Ett enskilt kolnanorör kan vara bara någon enstaka nanometer i diameter — omkring 50&nbsp;000 gånger smalare än ett människohår — men leder ändå ström anmärkningsvärt bra för sin vikt.",
+        "Ett enskilt kolnanorör kan vara bara någon enstaka nanometer i diameter — omkring en femtiotusendel av ett människohårs tjocklek — men leder ändå ström anmärkningsvärt bra för sin vikt.",
         "Seebeck-effekten upptäcktes 1821 när Thomas Johann Seebeck kopplade ihop två olika metaller i en sluten slinga och märkte att en kompassnål i närheten böjde av så fort skarvarna hade olika temperatur — han trodde först att han upptäckt en form av magnetism, inte elektricitet.",
         "Människohudens yttemperatur ligger normalt runt 33&nbsp;°C, några grader varmare än rumstemperaturen omkring den — precis den lilla temperaturskillnaden en kroppsvärmedriven generator är tänkt att utnyttja."
       ]}
@@ -4797,7 +4797,7 @@ const NYHETER_ALL = [
       { type: "fact", title: "Visste du?", items: [
         "Neutronavbildning fungerar som röntgen, fast tvärtom: neutroner interagerar med atomkärnor i stället för elektronmoln, så de ser rakt igenom tunga metaller men fastnar i lätta grundämnen som väte och litium — perfekt för att studera batterier inifrån.",
         "Samma forskargrupp vid PSI byggde redan 2022 världens första akromatiska röntgenlins — neutronlinsen bygger på samma grundidé, fast överförd till en helt annan typ av strålning.",
-        "En mikrometer är en tusendels millimeter. Linsens finaste nickelringar är bara några hundra nanometer breda — omkring tusen gånger tunnare än ett människohår."
+        "En mikrometer är en tusendels millimeter. Linsens finaste nickelringar är bara några hundra nanometer breda — omkring en tusendel av ett människohårs tjocklek."
       ]}
     ]
   },
@@ -4849,7 +4849,7 @@ const NYHETER_ALL = [
     id: "2026-07-14-baklanges-sprinkler",
     date: "2026-07-14",
     title: "Så snurrar en sprinkler som suger i sig vatten — gåtan från 1883 är äntligen löst",
-    deck: "Vad händer om man kör en trädgårdssprinkler baklänges, så att vatten sugs in i stället för sprutas ut? Frågan ställdes redan 1883 och gjorde till och med Richard Feynman så nyfiken att han sprängde en glasbehållare i ett misslyckat labbförsök på 1940-talet. Nu har matematiker vid New York University, ledda av Leif Ristroph, byggt en rad olika ”sprinklerleksaker” i böjda rörformer och löst gåtan i tidskriften PNAS: en baklängeskörd sprinkler snurrar visserligen, men av ett helt annat skäl än den vanliga — och omkring 50 gånger långsammare.",
+    deck: "Vad händer om man kör en trädgårdssprinkler baklänges, så att vatten sugs in i stället för sprutas ut? Frågan ställdes redan 1883 och gjorde till och med Richard Feynman så nyfiken att han sprängde en glasbehållare i ett misslyckat labbförsök på 1940-talet. Nu har matematiker vid New York University, ledda av Leif Ristroph, byggt en rad olika ”sprinklerleksaker” i böjda rörformer och löst gåtan i tidskriften PNAS: en baklängeskörd sprinkler snurrar visserligen, men av ett helt annat skäl än den vanliga, och bara med omkring en femtiondel av farten.",
     category: "Mekanik",
     readingTime: "5 min",
     image: "nyheter/bilder/2026-07-14-baklanges-sprinkler.jpg",
@@ -4873,7 +4873,7 @@ const NYHETER_ALL = [
       { type: "quote", html: "”Det här arbetet ger det experimentella svaret på Feynmans sprinklerproblem, genom att visa — för flera olika sprinklerformer — hur vattenflödenas rörelsemängdsmoment driver sprinklerns rotation.”", cite: "Leif Ristroph, New York University" },
 
       { type: "h2", text: "Framlänges en raket, baklänges nästan ingenting" },
-      { type: "p", html: "Framlänges fungerar sprinklern precis som en roterande raket: vattenstrålarna som sprutar ut ur armarnas mynningar trycker tillbaka på sprinklern enligt Newtons tredje lag och får den att snurra. Baklänges finns det inga strålar som sprutar ut någonstans — men djupt inne, där armarna möts i ett litet nav, bildas det ändå strålar av det inströmmande vattnet. Dessa inre strålar krockar med varandra, men inte exakt mitt i prick — och just den lilla sneda träffen ger en nettokraft som får sprinklern att rotera, fast åt motsatt håll jämfört med framlänges-fallet. Eftersom mekanismen är så mycket mer indirekt snurrar en baklängeskörd sprinkler omkring 50&nbsp;gånger långsammare än en vanlig, vid jämförbara vattenflöden." },
+      { type: "p", html: "Framlänges fungerar sprinklern precis som en roterande raket: vattenstrålarna som sprutar ut ur armarnas mynningar trycker tillbaka på sprinklern enligt Newtons tredje lag och får den att snurra. Baklänges finns det inga strålar som sprutar ut någonstans — men djupt inne, där armarna möts i ett litet nav, bildas det ändå strålar av det inströmmande vattnet. Dessa inre strålar krockar med varandra, men inte exakt mitt i prick — och just den lilla sneda träffen ger en nettokraft som får sprinklern att rotera, fast åt motsatt håll jämfört med framlänges-fallet. Eftersom mekanismen är så mycket mer indirekt snurrar en baklängeskörd sprinkler bara med omkring en femtiondel av en vanlig sprinklers fart, vid jämförbara vattenflöden." },
 
       { type: "h2", text: "Två gamla teorier föll — en tredje höll hela vägen" },
       { type: "p", html: "De olika sprinklerformerna gjorde det möjligt att skilja mellan konkurrerande förklaringar som cirkulerat sedan Machs dagar. Mach själv trodde att vattnet utanför sprinklern virvlar åt ett håll och sprinklern åt det andra — en teori som de nya mätningarna motbevisar. Feynmans egen idé, som fokuserade på flödet längst ut på armarna, höll inte heller: den yttre delen av flödet visade sig knappt påverka rotationen. Det som till slut förklarade alla sprinklerformernas beteende — i både framlänges- och baklängesläge — var i stället rörelsemängden hos de inre vattenstrålarna, vad forskarna kallar momentum flux-teorin." },
@@ -5360,7 +5360,7 @@ const NYHETER_ALL = [
 
       { type: "fact", title: "Visste du?", items: [
         "GRB 221009A, ”the BOAT”, var så kraftfull att den mättade instrument på flera rymdteleskop. Den kom från en döende stjärna i en galax cirka 2,4 miljarder ljusår bort — men dess röntgeneko syntes ändå tydligt genom vår egen galaxs stoftmoln, bara några tusen ljusår från solen.",
-        "Röntgenstrålning har våglängder på ungefär 0,01–10 nanometer, hundratusentals gånger kortare än synligt ljus — därför krävs särskilda rymdteleskop som XMM-Newton och Chandra för att fånga den.",
+        "Röntgenstrålning har våglängder på ungefär 0,01–10 nanometer, medan synligt ljus ligger kring 400–700 nanometer. Därför krävs särskilda rymdteleskop som XMM-Newton och Chandra för att fånga den.",
         "Solen sitter inte i någon av Vintergatans stora spiralarmar utan i en mindre ”sporre” kallad Orionarmen, mellan de större Sagittarius- och Perseusarmarna."
       ]}
     ]

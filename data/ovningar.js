@@ -8679,7 +8679,7 @@ $$
 
 **Svar:** Ca 26 mN.
 
-**Generell slutsats:** Heliumets densitet är ungefär 7 gånger lägre än luftens (0,178 vs 1,293 kg/m³), så heliumet bidrar nästan inget till ballongens totala tyngd — det är därför ballongen kan flyga.`,
+**Generell slutsats:** Heliumets densitet är ungefär en sjundedel av luftens (0,178 vs 1,293 kg/m³), så heliumet bidrar nästan inget till ballongens totala tyngd — det är därför ballongen kan flyga.`,
         },
         {
             level: 1,
@@ -17430,7 +17430,7 @@ $$ \\frac{N_1}{N_2} = \\frac{I_2}{I_1} \\quad\\Leftrightarrow\\quad I_2 = I_1\\c
 
 **Svar:** Sekundärströmmen är $50\\ \\mathrm{mA}$.
 
-**Generell slutsats:** När spänningen *upptransformeras* (faktor $10$) blir strömmen samtidigt $10$ gånger mindre — eftersom effekten $P = UI$ bevaras enligt energiprincipen.`,
+**Generell slutsats:** När spänningen *upptransformeras* (faktor $10$) blir strömmen samtidigt en tiondel så stor — eftersom effekten $P = UI$ bevaras enligt energiprincipen.`,
         },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
@@ -17800,7 +17800,7 @@ $$ vB = \\frac{U}{d} \\quad\\Leftrightarrow\\quad U = v\\cdot d\\cdot B $$
 
 $$ U = v\\cdot d\\cdot B \\quad\\Leftrightarrow\\quad v = \\frac{U}{d\\cdot B} = \\frac{8{,}0\\cdot 10^{-6}}{0{,}010 \\cdot 0{,}80} = \\frac{8{,}0\\cdot 10^{-6}}{8{,}0\\cdot 10^{-3}} = 1{,}0\\cdot 10^{-3}\\ \\mathrm{m/s} = 1{,}0\\ \\mathrm{mm/s} $$
 
-**Steg 2 — jämför med termisk hastighet.** Termisk hastighet vid rumstemperatur är ungefär $10^5\\ \\mathrm{m/s}$. Driftshastigheten ($10^{-3}\\ \\mathrm{m/s}$) är **$10^8$ gånger lägre** än den termiska hastigheten!
+**Steg 2 — jämför med termisk hastighet.** Termisk hastighet vid rumstemperatur är ungefär $10^5\\ \\mathrm{m/s}$. Driftshastigheten ($10^{-3}\\ \\mathrm{m/s}$) är bara **en hundramiljondel** av den termiska hastigheten!
 
 **Svar:** Driftshastigheten är ungefär $1\\ \\mathrm{mm/s}$ — extremt långsam.
 
@@ -17869,7 +17869,7 @@ $$ I_2 = \\frac{P}{4\\pi r_2^2} = \\frac{302}{4\\pi \\cdot (12)^2} = 0{,}167\\ \
 
 **Svar:** Ljusintensiteten är $0{,}17\\ \\mathrm{W/m^2}$.
 
-**Generell slutsats:** Avståndet tredubblades $(4 \\to 12\\ \\mathrm{m})$ och intensiteten blev $3^2 = 9$ gånger mindre. Intensiteten avtar med **kvadraten** på avståndet — det är hela innebörden av att energin sprids över en sfär vars area växer som $r^2$.`,
+**Generell slutsats:** Avståndet tredubblades $(4 \\to 12\\ \\mathrm{m})$ och intensiteten blev en niondel så stor ($3^2 = 9$). Intensiteten avtar med **kvadraten** på avståndet — det är hela innebörden av att energin sprids över en sfär vars area växer som $r^2$.`,
         },
         {
             level: 2,
@@ -19569,7 +19569,7 @@ $$ 3{,}9 \\cdot 10^{-6}\\ \\mathrm{s} = 3{,}9\\ \\mathrm{µs} $$
             correct: 2,
             solution: `Grundpotensform: $45\\ 000\\ 000\\ \\mathrm{W} = 4{,}5 \\cdot 10^7\\ \\mathrm{W}$.
 
-Vi har inget prefix för $10^7$, så vi skriver om med en tiopotens som har prefix, till exempel $10^6$ (mega). När tiopotensen blir 10 gånger mindre måste talet framför bli 10 gånger större:
+Vi har inget prefix för $10^7$, så vi skriver om med en tiopotens som har prefix, till exempel $10^6$ (mega). När tiopotensen delas med 10 måste talet framför bli 10 gånger större:
 
 $$ 4{,}5 \\cdot 10^7\\ \\mathrm{W} = 45 \\cdot 10^6\\ \\mathrm{W} = 45\\ \\mathrm{MW} $$
 

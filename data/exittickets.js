@@ -1437,7 +1437,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Kraften beror på $1/r^{2}$, inte på $1/r$ — en fördubbling av avståndet ger alltså en fjärdedel av kraften, inte hälften.',
-      'Eftersom $F_\\mathrm{G} \\propto 1/r^{2}$ blir kraften $(1/2)^{2} = 1/4$ så stor när avståndet fördubblas, det vill säga fyra gånger mindre.',
+      'Eftersom $F_\\mathrm{G} \\propto 1/r^{2}$ blir kraften $(1/2)^{2} = 1/4$ så stor när avståndet fördubblas, det vill säga en fjärdedel så stor.',
       'Kraften minskar med ökat avstånd, den ökar inte — och sambandet är dessutom kvadratiskt, inte linjärt.',
       'Avståndet *r* står i nämnaren i kvadrat i formeln, så en förändring av avståndet påverkar visst kraften.',
     ],

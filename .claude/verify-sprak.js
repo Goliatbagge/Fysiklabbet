@@ -88,11 +88,20 @@ const REGLER = [
     },
     {
         namn: 'ganger-mindre',
-        niva: 'varning',
-        // Något kan inte bli mer än en gång mindre; språkvården avråder.
-        monster: /\bgånger\s+mindre\b/gi,
-        rattelse: 'Skriv delformen i stället: "en X-del av" (en 3 600-del av ' +
-                  'accelerationen), inte "X gånger mindre".',
+        niva: 'fel',
+        // "Gånger" multiplicerar: tre gånger större är 3·x, men "tre gånger
+        // mindre" går inte att räkna ut, och läsaren får gissa att det
+        // betyder en tredjedel. Samma sak med varje komparativ som pekar
+        // nedåt (tunnare, svagare, kortare, närmare …). Språkvården avråder.
+        // Hela sajten sveptes 2026-09-28 (drygt 40 ställen, påpekat i
+        // dagens nyhet: "femhundra miljarder miljarder gånger tunnare än
+        // luften"), så en ny träff är ett nytt fel. Komparativ som pekar
+        // uppåt (större, starkare, tätare, trögare, varmare) är rätt.
+        monster: /\bgånger\s+(?:mindre|färre|lägre|kortare|svagare|ljussvagare|långsammare|tunnare|glesare|smalare|lättare|kallare|närmare|sämre|billigare|mörkare|grundare|yngre|snävare|mjukare|ovanligare|sällsyntare|kortlivade?)\b/gi,
+        rattelse: 'Ologisk jämförelse: "X gånger mindre/tunnare/svagare" går inte ' +
+                  'att räkna ut. Vänd på den ("luften är X gånger tätare", ' +
+                  '"solen står 400 gånger längre bort") eller skriv delen ' +
+                  '("en tusendel av ett hårstrås tjocklek", "en fjärdedel så stor").',
     },
     {
         namn: 'skarpare',
@@ -222,8 +231,9 @@ function standardfiler() {
     lagg(path.join(ROT, 'data', 'teori'), f => f.endsWith('.md'));
     lagg(path.join(ROT, 'data'), f => ['nyheter.js', 'begrepp.js', 'ovningar.js',
         'exittickets.js', 'katalog.js', 'simuleringar.js'].includes(f));
+    lagg(path.join(ROT, 'data', 'np'), f => f.endsWith('.js'));
     lagg(path.join(ROT, '.claude', 'nyhetsbrev', 'utkast'), f => f.endsWith('.html'));
-    lagg(ROT, f => f.endsWith('.html'));
+    lagg(ROT, f => f.endsWith('.html') || f === 'handskrift.js');
     return ut;
 }
 

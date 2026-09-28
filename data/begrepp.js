@@ -56,6 +56,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'cpt-symmetri',
+    term: 'CPT-symmetri',
+    former: ['cpt-symmetri', 'cpt-symmetrin', 'cpt-symmetrier', 'cpt-teoremet', 'cpt-brott', 'cpt-invarians', 'cpt-invariansen'],
+    kort: 'Den djupaste kända symmetrin i fysiken: byter man samtidigt ut alla laddningar mot sina motsatser, speglar rummet och låter tiden gå baklänges, ska naturlagarna se exakt likadana ut. Följden är att en partikel och dess antipartikel måste väga precis lika mycket.',
+    relaterade: ['antimateria', 'standardmodellen', 'annihilation', 'penningfalla'],
+    body: [
+      { type: 'p', html: 'Bokstäverna står för tre olika sätt att vända på verkligheten. <em>C</em> betyder laddningskonjugation: varje partikel byts mot sin antipartikel, så att alla laddningar byter tecken. <em>P</em> betyder paritet, alltså en spegling av rummet, som om man tittade på skeendet i en spegel och höger och vänster bytte plats. <em>T</em> betyder tidsomvändning: filmen spelas baklänges.' },
+      { type: 'p', html: 'Var och en av dessa tre kan naturen faktiskt skilja på. Den svaga kraften, den som ligger bakom radioaktivt betasönderfall, uppför sig bevisligen olika i en spegel, och i vissa sönderfall av tunga partiklar behandlas materia och antimateria en aning olika. Men görs alla tre samtidigt tar avvikelserna ut varandra. Att så måste vara fallet följer av ett par mycket allmänna antaganden om rum, tid och orsakssamband, och resultatet kallas CPT-teoremet.' },
+      { type: 'p', html: 'Konsekvenserna är konkreta och går att mäta. En antiproton måste ha exakt samma massa som en proton och ett magnetiskt moment som är lika stort men med omvänt tecken, och en antiatom måste sända ut ljus med precis samma våglängder som en vanlig atom. Just därför är sådana jämförelser så eftertraktade: en enda pålitlig avvikelse, hur liten som helst, skulle betyda att någon av grundstenarna under hela den moderna fysiken inte håller. Hittills har varje mätning stämt, vilket samtidigt är frustrerande, eftersom obalansen mellan materia och antimateria i universum fortfarande saknar förklaring.' }
+    ]
+  },
+  {
+    id: 'magnetiskt-moment',
+    term: 'Magnetiskt moment',
+    former: ['magnetiskt moment', 'magnetiska momentet', 'magnetiska moment', 'magnetiska momenten', 'magnetisk moment'],
+    kort: 'Ett mått på hur kraftig magnet ett föremål eller en partikel är, och åt vilket håll den pekar. Även enskilda elektroner och protoner har ett magnetiskt moment, och att mäta det hör till det mest exakta människan kan göra.',
+    relaterade: ['spinn', 'cpt-symmetri', 'penningfalla', 'antimateria'],
+    body: [
+      { type: 'p', html: 'Håll en kompassnål i ett magnetfält, så vrider den sig tills den pekar längs fältet. Hur hårt den vrids beror på två saker: hur starkt fältet är och hur kraftig magnet nålen själv är. Det senare är nålens magnetiska moment. Det är en vektor, alltså ett tal med en riktning, och riktningen går från sydändan till nordändan genom magneten.' },
+      { type: 'p', html: 'Det oväntade är att också enskilda partiklar har ett magnetiskt moment. En elektron eller en proton beter sig som en försvinnande liten stavmagnet, kopplad till partikelns spinn. Någon roterande laddad kula är det inte fråga om, hur gärna bilden än vill infinna sig: spinnet är en egenskap hos partikeln på samma sätt som dess massa och laddning, och den går inte att öka eller stoppa.' },
+      { type: 'p', html: 'Att mäta ett magnetiskt moment går till så att partikeln läggs i ett känt magnetfält. Då kostar det olika mycket energi att ha den lilla magneten riktad medhålls eller mothålls, och partikeln kan vippa mellan lägena om den träffas av en radiovåg med precis rätt frekvens. Den frekvensen, jämförd med hur snabbt partikeln varvar runt i samma fält, ger momentet. Metoden är så känslig att elektronens magnetiska moment i dag är känt med ett dussin korrekta decimaler, vilket gör det till en av de noggrannast bestämda storheterna i naturvetenskapen.' }
+    ]
+  },
+  {
+    id: 'ultrahogvakuum',
+    term: 'Ultrahögvakuum',
+    former: ['ultrahögvakuum', 'ultrahögvakuumet', 'ultrahögt vakuum', 'extremt högvakuum', 'högvakuum', 'högvakuumet'],
+    kort: 'Ett vakuum så tomt att bara en försvinnande liten rest av gas är kvar, ungefär tusen biljoner gånger tunnare än luften omkring oss, eller mer. Det krävs så snart enstaka atomer eller partiklar ska hållas ifred, eftersom en enda krock kan förstöra försöket.',
+    relaterade: ['penningfalla', 'antimateria', 'partikelaccelerator', 'supraledare'],
+    body: [
+      { type: 'p', html: 'Ett vakuum är aldrig alldeles tomt, bara tommare än luft. Trycket i rummet omkring dig är drygt 1000&nbsp;millibar, och varje kubikcentimeter luft rymmer omkring tjugofem triljoner molekyler. En vanlig vakuumpump i ett skollaboratorium tar bort de allra flesta av dem, men de sista procentens procent är svårast, och i ultrahögvakuum talar man om tryck kring 10<sup>−12</sup>&nbsp;millibar och lägre. Då finns bara några tiotusental molekyler kvar per kubikcentimeter.' },
+      { type: 'p', html: 'Svårigheten är att gasen inte bara ska sugas ut, den läcker också in inifrån. Metallytor har gas löst i sig och vattenmolekyler fastklibbade på utsidan, och de avger sakta sitt innehåll till kammaren. Därför bakas ultrahögvakuumsystem ofta i flera dygn vid ett par hundra grader, så att ytorna töms medan pumparna går, och därför byggs de av material som avger så lite som möjligt.' },
+      { type: 'p', html: 'Ett annat och kraftfullare knep är kyla. Sänks kammarens väggar till några grader över absoluta nollpunkten fryser i praktiken varje gasmolekyl som rör vid dem fast på ytan i stället för att studsa vidare, och väggen blir därmed sin egen pump. Med den metoden nås de allra lägsta trycken som över huvud taget har uppmätts, långt under vad som råder i rymden mellan planeterna. Sådana förhållanden krävs bland annat för att förvara antimateria, som förintas vid minsta kontakt med vanlig materia.' }
+    ]
+  },
+  {
     id: 'magnetsinne',
     term: 'Magnetsinne',
     former: ['magnetsinne', 'magnetsinnet', 'magnetsinnen', 'magnetoreception', 'magnetoreceptionen'],

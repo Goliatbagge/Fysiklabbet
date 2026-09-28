@@ -12,15 +12,7 @@ Format per post:
 
 ## Kö
 
-- **92 antiprotoner färdades på lastbil — och överlevde en månad i fällan** **[BREVTEASER — teasad i brevet 2026-09-27, publiceras TIDIGAST måndag 2026-09-28, senast lördag 2026-10-03]** — BASE-samarbetet vid CERN
-  rapporterar världens första transport av antimateria på väg: en flyttbar magnetisk fälla kördes med lastbil
-  i mars 2026 och höll kvar antiprotonerna i över en månad. Ingång: antimateria, Penningfällor, magnetisk
-  inneslutning och vakuum. OBS: partikelfysik publicerades 2026-09-16 och 2026-09-08 — låt det gå tid.
-  Källa (Phys.org 2026-09-16):
-  https://phys.org/news/2026-09-mobile-antiprotons-road-month-world.html
-  (tillagd 2026-09-17)
-
-- **Laddningen en fjärdedels elektron** — ett sällsynt kvanttillstånd i ett tvådimensionellt material ger
+- **Laddningen en fjärdedels elektron** **[BREVTEASER]** — ett sällsynt kvanttillstånd i ett tvådimensionellt material ger
   kvasipartiklar som bär en fjärdedel av elementarladdningen. Ingång: att laddning normalt kommer i hela
   steg, och vad det betyder att en kollektiv rörelse hos många elektroner kan bete sig som en partikel med
   en bråkdels laddning. OBS: kvantfysik och materialfysik är väl representerade — låt det gå tid.

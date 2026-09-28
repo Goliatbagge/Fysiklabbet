@@ -103,6 +103,92 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-28-antiprotoner-pa-lastbil",
+    date: "2026-09-28",
+    title: "92 antiprotoner åkte lastbil och överlevde en månad i fällan",
+    deck: "Antimateria har aldrig tidigare transporterats på väg. I mars körde ett forskarlag vid CERN 92 antiprotoner åtta kilometer runt området i en flyttbar magnetfälla, utan att tappa en enda. Fällan höll dem sedan kvar i över en månad, i ett vakuum som är ungefär femhundra miljarder miljarder gånger tunnare än luften i ett rum.",
+    category: "Partikelfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-28-antiprotoner-pa-lastbil.jpg",
+    imageAlt: "Vy uppifrån över en stor experimenthall vid CERN. Mitt i bilden ligger en sjuhörnig acceleratorring märkt ELENA, byggd av blå och orange magneter förbundna med blanka vakuumrör. Runt ringen står mätutrustning, blå räcken och kabelstråk, och till vänster skymtar en skylt med texten BASE.",
+    imageCredit: "Foto: Unnerving duck, Wikimedia Commons (CC BY-SA 4.0). Bilden visar decelerationsringen ELENA i antimateriefabriken vid CERN, som levererar de långsamma antiprotonerna till försöken runt omkring, bland dem BASE.",
+    tags: ["partikelfysik", "antimateria", "antiproton", "cern", "penningfälla", "magnetfält", "vakuum", "supraledning", "kryoteknik", "cpt-symmetri"],
+    sources: [
+      { name: "Phys.org: Mobile trap transports 92 antiprotons by road and stores them for over a month in world first (16 september 2026)", url: "https://phys.org/news/2026-09-mobile-antiprotons-road-month-world.html" },
+      { name: "Physics World: Researchers at CERN transport antiprotons by truck in world-first experiment", url: "https://physicsworld.com/a/researchers-at-cern-transport-antiprotons-by-truck-in-world-first-experiment/" },
+      { name: "EurekAlert! (Heinrich-Heine-Universität Düsseldorf): Antiproton storage and transport records achieved (16 september 2026)", url: "https://www.eurekalert.org/news-releases/1144264" },
+      { name: "Heinrich-Heine-Universität Düsseldorf: BASE-STEP, om den flyttbara fällan och transporten i mars 2026", url: "https://www.antimatter.hhu.de/en/about-us/base-step" },
+      { name: "CERN: Antimatter transportation media kit", url: "https://home.cern/press/media-kits/antimatter-transportation-media-kit/" }
+    ],
+    research: {
+      citation: "M. Leonhardt med flera (BASE-samarbetet), ”Road transport of trapped antiprotons”, Nature (2026)",
+      url: "https://doi.org/10.1038/s41586-026-11019-z"
+    },
+    simulering: {
+      href: "fysik2-laddade-partiklar-app.html",
+      name: "Laddade partiklar i magnetfält",
+      text: "Se varför ett magnetfält kan hålla kvar en laddad partikel utan att röra vid den. Kraften står alltid vinkelrätt mot rörelsen, så partikeln böjs in i en cirkelbana i stället för att fara rakt fram. Byt tecken på laddningen och vänd fältet, så vänder också omloppsriktningen."
+    },
+    larare: {
+      moment: [
+        { label: "Laddade partiklar i magnetfält", href: "katalog.html?id=fy2-3.4" },
+        { label: "Hastighetsväljare och masspektrometer", href: "katalog.html?id=fy2-3.12" },
+        { label: "Massdefekt och bindningsenergi", href: "katalog.html?id=fy1-9.2" }
+      ],
+      fragor: [
+        "Fällan håller antiprotonerna på plats med ett magnetfält i två riktningar och ett elektriskt fält i den tredje. Varför räcker inte magnetfältet hela vägen, och vad är det i den magnetiska kraftens riktning som gör den oduglig längs fältlinjen?",
+        "En enda kvarvarande gasmolekyl kan förinta en antiproton. Uppskatta hur mycket energi som frigörs om alla 92 antiprotonerna förintas, och jämför med en vardaglig energimängd. Varför är transporten ändå ofarlig, till skillnad från vad ordet antimateria kan få en att tro?",
+        "Forskarna vill flytta mätningen bort från CERN för att slippa magnetfältsvariationer. Vilka nya felkällor uppstår i stället av att partiklarna färdas sjuttio mil på en lastbil, och hur skulle ni pröva om de spelar roll?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Den 24 mars 2026 rullade en lastbil ut på vägarna inne på CERN:s område utanför Genève. På flaket satt ett aggregat av stål och aluminium som väger nästan ett ton, och inne i det, instängda i ett magnetfält, låg 92&nbsp;antiprotoner. Färden tog en halvtimme, gick omkring åtta kilometer i högst 42&nbsp;km/h och slutade där den började. Inte en enda antiproton gick förlorad.' },
+      { type: 'p', html: 'Det låter som en kort biltur, men det är första gången antimateria har transporterats på väg. Resultatet, tillsammans med det som hände efteråt, publicerades den 16&nbsp;september i <em>Nature</em> av BASE-samarbetet, lett av Stefan Ulmer och Christian Smorra vid Heinrich-Heine-universitetet i Düsseldorf.' },
+      { type: 'p', html: 'Det som hände efteråt är minst lika anmärkningsvärt. Antiprotonerna blev kvar i fällan i mer än en månad, och under hela tiden gick det att styra och mäta dem. Ett enda exemplar förintades, på dag 27, under ett försök att plocka ut partiklar ur fällan.' },
+
+      { type: 'h2', text: 'Fabriken som bara finns på ett ställe' },
+      { type: 'p', html: 'Antiprotoner finns inte att hämta någonstans i naturen, i varje fall inte i användbara mängder. De tillverkas genom att skjuta en protonstråle mot ett metallmål: en liten del av kollisionsenergin blir nya partikelpar, och bland dem enstaka antiprotoner. De föds med enorm fart och måste bromsas ner innan de går att fånga.' },
+      { type: 'p', html: 'Den enda anläggning i världen som kan göra hela kedjan, tillverka långsamma antiprotoner och sedan lagra och studera dem, är antimateriefabriken vid CERN. Där bromsas partiklarna först i en ring som heter antiprotondeceleratorn (AD) och därefter i en mindre ring, ELENA, innan de fördelas till experimenten runt omkring.' },
+      { type: 'p', html: 'Det är ur den anläggningen de 92&nbsp;antiprotonerna hämtades. Antalet låter försvinnande litet, och det är det: 92&nbsp;antiprotoner väger tillsammans omkring $1{,}5 \\cdot 10^{-25}\\ \\mathrm{kg}$. Skulle allihop förintas mot vanlig materia frigörs knappt $3 \\cdot 10^{-8}\\ \\mathrm{J}$, alltså ungefär lika mycket energi som ett sandkorn på ett milligram får när det faller tre millimeter. Antimateria är dramatiskt i filmer, men i en fälla är det framför allt sällsynt.' },
+
+      { type: 'h2', text: 'En fälla byggd av fält, inte av väggar' },
+      { type: 'p', html: 'Problemet med att förvara antimateria är uppenbart: allt den rör vid utplånar den. En behållare kan alltså inte ha väggar i vanlig mening. Lösningen kallas penningfälla, och den bygger på två fält i stället för fyra sidor och ett lock.' },
+      { type: 'p', html: 'Det ena är ett starkt, likriktat magnetfält längs fällans axel. En laddad partikel som rör sig i ett magnetfält känner en kraft $F = q \\cdot v \\cdot B$ som alltid står vinkelrätt mot farten, och en kraft vinkelrätt mot rörelsen kan bara böja banan, aldrig ändra farten. Följden är att partikeln går i en cirkel kring fältlinjen och därmed inte kan ta sig ut åt sidorna. I BASE-STEP är flödestätheten $B = 1\\ \\mathrm{T}$, och en antiproton varvar då kring en fältlinje ungefär femton miljoner gånger i sekunden.' },
+      { type: 'p', html: 'Men samma egenskap som gör magnetfältet användbart gör det också otillräckligt: en partikel som glider längs fältlinjen känner ingen kraft alls och skulle helt enkelt spiralera ut genom änden. Därför sitter det elektroder i båda ändarna, laddade så att de stöter tillbaka antiprotonen mot mitten. Magnetfältet håller den på plats i två riktningar, det elektriska fältet i den tredje.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-09-28-antiprotoner-pa-lastbil-2.jpg', alt: 'En trång betongtunnel med en cylindrisk maskin klädd i blank aluminiumfolie och kablar. Framför den står en rad mörkröda magnetblock med kopparledningar, och i taket löper rör och lysrör.', caption: 'Antiprotondeceleratorn i antimateriefabriken vid CERN. Här bromsas nyfödda antiprotoner ner innan de skickas vidare till ELENA och sedan till försöken.', credit: 'Foto: Suaudeau, Wikimedia Commons (CC BY-SA 4.0)' },
+
+      { type: 'h2', text: 'Det svåra är vakuumet' },
+      { type: 'p', html: 'Fält kan hålla en antiproton borta från väggarna, men inte från de gasmolekyler som ändå finns kvar i kammaren. Varje krock är slutgiltig. Livslängden hos ett förråd av antiprotoner sätts därför nästan helt av hur få molekyler som är kvar.' },
+      { type: 'p', html: 'Fällan arbetar därför i ultrahögvakuum, och BASE-STEP konstruerades för att klara ett tryck under $10^{-16}\\ \\mathrm{mbar}$. Under den månad antiprotonerna låg lagrade uppmättes i stället ett tryck bättre än $2{,}2 \\cdot 10^{-18}\\ \\mathrm{mbar}$, alltså ungefär fyrtiofem gånger bättre än kravet, och enligt laget är det första gången en så låg nivå har nåtts i en öppen fälla, en fälla som partiklar går att både mata in i och plocka ut ur. Jämförelsen med lufttrycket omkring oss, drygt $1000\\ \\mathrm{mbar}$, ger en faktor på ungefär $5 \\cdot 10^{20}$.' },
+      { type: 'quote', html: 'Det är särskilt viktigt att få ett extremt bra vakuum i en flyttbar fälla vid långtidsförvaring, så att antiprotonerna inte går förlorade genom kollisioner med andra partiklar.', cite: 'Marcel Leonhardt, Heinrich-Heine-universitetet, studiens förstaförfattare' },
+      { type: 'p', html: 'Knepet är kylan. Kammarens väggar hålls vid flytande heliums temperatur, omkring 4&nbsp;kelvin, och då fryser i praktiken varje gasmolekyl fast i väggen i stället för att flyga omkring. Kylan behövs ändå, eftersom fällans magnet är supraledande: strömmen som skapar magnetfältet flyter utan motstånd så länge magneten är tillräckligt kall, men värms den över sin gräns slocknar fältet och fällan öppnar sig.' },
+
+      { type: 'h2', text: 'Ett helt laboratorium på en lastpall' },
+      { type: 'p', html: 'Att bygga allt detta som en flyttbar enhet är den egentliga bedriften. BASE-STEP mäter ungefär 1,9&nbsp;gånger 1,6&nbsp;gånger 0,8&nbsp;meter och väger under 1000&nbsp;kg, varav den supraledande magneten ensam står för omkring 600&nbsp;kg. Ramen är gjord så att en vanlig gaffeltruck eller en travers kan lyfta hela paketet, och en yttre kammare av kolstål skärmar av magnetfält utifrån.' },
+      { type: 'p', html: 'Under själva färden är apparaten helt frånkopplad. Egna batterier och en egen kylmaskin håller igång kyla, elektroder och mätelektronik i upp till fyra timmar utan någon anslutning alls, medan ett mobilt kontrollbord visar att partiklarna fortfarande är kvar.' },
+      { type: 'p', html: 'Laget hade redan gjort samma sak med vanliga protoner i oktober 2024. Protoner är ofarliga att tappa bort, och den turen var generalrepetitionen. Det nya är att samma fälla nu har klarat partiklar som inte tål minsta misstag.' },
+
+      { type: 'h2', text: 'Därför måste de bort från CERN' },
+      { type: 'p', html: 'Varför köra runt med antimateria över huvud taget? Svaret handlar om en av fysikens djupaste symmetrier. Standardmodellen förutsäger att en antiproton ska ha exakt samma massa som en proton och ett magnetiskt moment som är precis lika stort fast med omvänt tecken. Skulle någon skillnad dyka upp vore det ett brott mot det som kallas CPT-symmetrin, och det skulle vara en av de största upptäckterna på hundra år.' },
+      { type: 'p', html: 'Det finns också ett skäl att leta. Universum omkring oss består av materia, trots att materia och antimateria borde ha bildats i lika delar och sedan utplånat varandra fullständigt. Någonstans måste naturen ha behandlat de två sidorna en aning olika.' },
+      { type: 'p', html: 'BASE har hittills mätt det magnetiska momentet med en noggrannhet på 0,3&nbsp;miljarddelar för protonen och 1,6&nbsp;miljarddelar för antiprotonen. Ingen skillnad har synts. För att komma längre krävs stabilare förhållanden än vad platsen medger.' },
+      { type: 'quote', html: 'Vi kan inte förbättra mätnoggrannheten ytterligare vid antimateriefabriken, eftersom driften av anläggningen ger variationer i magnetfältet som stör vår mätutrustning. Bättre förhållanden går bara att hitta utanför CERN.', cite: 'Christian Smorra, huvudansvarig för BASE-STEP' },
+      { type: 'p', html: 'En precisionsmätning av det här slaget läser av hur snabbt partikeln varvar i magnetfältet och hur dess spinn vänder sig i samma fält. Båda beror direkt på fältets styrka, så varje ryck i fältet från acceleratorerna intill blir brus i mätningen. Flyttas fällan till en tyst källare långt från maskinerna räknar laget med minst hundra gånger högre precision.' },
+
+      { type: 'h2', text: 'Nästa anhalt: Düsseldorf' },
+      { type: 'p', html: 'Målet är ett nytt precisionslaboratorium i Düsseldorf, dit Ulmers grupp vill flytta både protoner och antiprotoner för att jämföra dem sida vid sida. Sträckan från Genève tar omkring tio timmar med lastbil, och det är där nästa tekniska tröskel ligger: magneten måste hållas under 8,2&nbsp;kelvin hela vägen. Fyra timmars egen kraft räcker inte, så nästa version behöver flytande helium ombord och ett elverk som driver kylmaskinen under färden.' },
+      { type: 'p', html: 'Blir det av öppnas något som hittills varit otänkbart. Antimateria har alltid varit bunden till den enda plats som kan tillverka den, och därmed till den platsens förutsättningar. En fälla som går att köra iväg gör antiprotoner till något ett laboratorium kan beställa hem, ungefär som vilket prov som helst, om än ett prov som väger en bråkdel av en miljarddels miljarddels gram och kräver ett tommare utrymme än rymden mellan planeterna.' },
+      { type: 'quote', html: 'Vårt mål är att besvara en av fysikens mest grundläggande frågor: varför finns det ett universum fyllt av materia?', cite: 'Stefan Ulmer, grundare och talesperson för BASE' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'All antimateria som mänskligheten har framställt väger tillsammans mindre än ett miljondels gram. Som energikälla är den värdelös, eftersom det kostar långt mer energi att tillverka den än man någonsin får tillbaka.',
+        'Antiprotonerna i fällan förintades inte spontant under månaden. Den enda förlusten skedde på dag 27, när laget själva försökte plocka ut partiklar ur fällan och en antiproton kom i vägen för något materiellt.',
+        'Samma fällteknik gav Hans Dehmelt en del av Nobelpriset i fysik 1989. Han höll en ensam elektron fångad i månader i en penningfälla och kunde därigenom mäta dess magnetiska egenskaper med ett dussin korrekta decimaler.'
+      ] }
+    ]
+  },
+  {
     id: "2026-09-27-neutrinernas-smak-avgor-stjarnans-ode",
     date: "2026-09-27",
     title: "Neutrinernas byte av sort kan avgöra om stjärnan exploderar eller blir ett svart hål",

@@ -4,567 +4,434 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Solsystemet — Fysiklabbet</title>
-<meta name="description" content="Sväva ovanför planeternas atmosfär, snurra dem med fingret och läs om varje värld i solsystemet.">
-<meta name="theme-color" content="#04060c">
+<title>Ljusresan — Fysiklabbet</title>
+<meta name="description" content="Följ en ljusstråle från solen till Pluto. Flyg lågt över varje värld, läs fältanteckningarna och se med spektrometern vad atmosfärerna består av.">
+<meta name="theme-color" content="#020307">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }</script>
 <style>
 :root {
-  --bg: #04060c;
-  --bg2: #070a14;
-  --ink: #eef1f7;
-  --muted: #a3abbf;
-  --faint: #6b7389;
-  --line: rgba(255, 255, 255, 0.08);
-  --acc: #5fd4c4;
-  --serif: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
-  --sans: 'Poppins', system-ui, sans-serif;
+  --bg: #020307;
+  --ink: #edf1f8;
+  --dim: #a2abc0;
+  --faint: #626a82;
+  --hud: rgba(205, 220, 255, 0.16);
+  --hud2: rgba(205, 220, 255, 0.07);
+  --foton: #ffd27a;
+  --acc: #ffd27a;
+  --disp: 'Unbounded', 'Arial Black', sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  --hand: 'Caveat', 'Segoe Print', cursive;
+  --sans: 'Manrope', system-ui, sans-serif;
   --ease: cubic-bezier(.2, .7, .1, 1);
+  --vanster: clamp(112px, 11vw, 176px);
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-html, body { margin: 0; background: var(--bg); color: var(--ink); }
-body { font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+html { scroll-snap-type: y proximity; background: var(--bg); }
+html, body { margin: 0; color: var(--ink); }
+body { font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; background: var(--bg); }
 body.last { overflow: hidden; }
 button { font: inherit; color: inherit; }
 a { color: inherit; }
 sup { font-size: .68em; line-height: 0; }
 
 #scen { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
-main { position: relative; z-index: 1; }
+#varp {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0;
+  background: radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(120, 165, 255, .14) 78%, rgba(160, 200, 255, .26) 100%);
+}
+#noter { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; overflow: visible; }
+main#resa { position: relative; z-index: 2; }
+.stopp { scroll-snap-align: start; }
 
 /* ---------- Laddning ---------- */
 #laddare {
-  position: fixed; inset: 0; z-index: 100; display: grid; place-items: center;
-  background: radial-gradient(900px 600px at 50% 120%, rgba(60, 120, 255, .12), transparent 70%), var(--bg);
+  position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: var(--bg);
   transition: opacity 1.2s ease, visibility 1.2s;
 }
 #laddare.klar { opacity: 0; visibility: hidden; }
 .l-inre { text-align: center; }
-.l-kicker { font-size: 11px; letter-spacing: .5em; text-transform: uppercase; color: var(--muted); padding-left: .5em; }
-.l-titel { font-family: var(--serif); font-size: clamp(40px, 7vw, 76px); letter-spacing: .06em; text-transform: uppercase; margin: 14px 0 26px; }
-.l-bar { width: 180px; height: 1px; background: rgba(255,255,255,.12); margin: 0 auto; overflow: hidden; }
-.l-bar i { display: block; height: 100%; width: 0; background: var(--acc); transition: width .4s ease; }
-.l-text { margin-top: 16px; font-size: 12px; color: var(--faint); letter-spacing: .08em; }
+.l-titel { font-family: var(--disp); font-weight: 300; font-size: clamp(34px, 6vw, 64px); letter-spacing: .12em; text-transform: uppercase; }
+.l-stråle { width: 220px; height: 1px; margin: 26px auto 16px; background: rgba(255,255,255,.1); position: relative; overflow: hidden; }
+.l-stråle i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--foton); box-shadow: 0 0 12px var(--foton); transition: width .4s ease; }
+.l-text { font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
 
-/* ---------- Sidhuvud ---------- */
+/* ---------- Instrumentpanelen ---------- */
+.hud { position: fixed; z-index: 10; }
 .topp {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 30;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px clamp(16px, 4vw, 44px);
-  transition: background .5s, backdrop-filter .5s;
+  top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center;
+  padding: 18px clamp(16px, 2.4vw, 32px); pointer-events: none;
 }
-.topp::after {
-  content: ''; position: absolute; left: clamp(16px, 4vw, 44px); right: clamp(16px, 4vw, 44px); bottom: 0;
-  height: 1px; background: var(--line);
+.topp > * { pointer-events: auto; }
+.marke { font-family: var(--mono); font-size: 11.5px; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; color: var(--dim); display: flex; gap: 10px; align-items: center; }
+.marke b { color: var(--ink); font-weight: 500; }
+.marke svg { color: var(--foton); }
+.topp-knappar { display: flex; gap: 8px; }
+.hudknapp {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  background: rgba(6, 9, 18, .45); border: 1px solid var(--hud); color: var(--dim); border-radius: 999px;
+  padding: 9px 14px; cursor: pointer; display: inline-flex; gap: 8px; align-items: center;
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: color .3s, border-color .3s, background .3s;
 }
-.topp.panelvy .nav { opacity: 0; pointer-events: none; }
-.nav { transition: opacity .5s; }
-.topp.fast { background: rgba(4, 6, 12, .62); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-.logo { font-weight: 600; font-size: 15px; letter-spacing: .01em; text-decoration: none; display: flex; align-items: center; gap: 9px; }
-.logo svg { color: var(--acc); transition: color .8s; }
-.logo small { font-weight: 400; color: var(--faint); font-size: 12px; margin-left: 4px; }
-.nav { display: flex; align-items: center; gap: 2px; }
-.nav a { font-size: 13px; color: var(--muted); text-decoration: none; padding: 9px 14px; position: relative; transition: color .3s; }
-.nav a:hover { color: var(--ink); }
-.nav a.aktiv { color: var(--ink); }
-.nav a.aktiv::after { content: ''; position: absolute; left: 14px; right: 14px; bottom: -17px; height: 2px; background: var(--acc); transition: background .8s; }
-.nav .pill-sm {
-  margin-left: 10px; background: #f3f5fa; color: #0a0d16; border: 0; border-radius: 999px;
-  font-size: 12px; font-weight: 500; padding: 9px 16px; cursor: pointer; transition: transform .3s var(--ease), box-shadow .3s;
-}
-.nav .pill-sm:hover { transform: translateY(-1px); box-shadow: 0 6px 24px -6px rgba(180, 210, 255, .5); }
-@media (max-width: 760px) {
-  .nav a:not(.pill-sm) { display: none; }
-  .logo small { display: none; }
-}
+.hudknapp:hover { color: var(--ink); border-color: rgba(255,255,255,.35); }
+.hudknapp[aria-pressed="true"] { color: var(--ink); border-color: color-mix(in srgb, var(--foton) 55%, transparent); }
+.hudknapp[aria-pressed="true"] .lampa { background: var(--foton); box-shadow: 0 0 8px var(--foton); }
+.lampa { width: 6px; height: 6px; border-radius: 50%; background: var(--faint); }
 
-/* ---------- Hjältevyn ---------- */
-#hero {
-  position: relative; height: 100vh; height: 100svh; min-height: 540px; overflow: hidden;
-  touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: grab;
+/* Rutten längs vänsterkanten */
+.rutt { left: clamp(18px, 2.4vw, 32px); top: 50%; transform: translateY(-50%); height: min(64vh, 560px); width: 90px; }
+.rutt-linje { position: absolute; left: 5px; top: 0; bottom: 0; width: 1px; background: var(--hud); }
+.rutt-linje i { position: absolute; left: 0; top: 0; width: 1px; height: 0; background: linear-gradient(var(--foton), color-mix(in srgb, var(--foton) 40%, transparent)); box-shadow: 0 0 8px var(--foton); }
+.rutt ol { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
+.rutt li { position: absolute; left: 0; transform: translateY(-50%); }
+.rutt button {
+  background: none; border: 0; padding: 4px 0; cursor: pointer; display: flex; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--faint); white-space: nowrap;
+  transition: color .3s;
 }
-#hero.drar { cursor: grabbing; }
-.hero-text {
-  position: absolute; left: 50%; top: clamp(84px, 13.5vh, 150px); transform: translateX(-50%);
-  width: min(700px, 92vw); text-align: center; pointer-events: none;
-  will-change: transform, opacity;
-}
-.kicker {
-  font-size: 12px; letter-spacing: .42em; text-transform: uppercase; color: #dde2ec;
-  padding-left: .42em; margin-bottom: 14px; transition: opacity .4s;
-}
-.titel {
-  font-family: var(--serif); font-weight: 400; margin: 0;
-  font-size: clamp(50px, 9.4vw, 136px); line-height: .98; letter-spacing: .035em;
-  text-transform: uppercase; white-space: nowrap; padding-top: .14em;
-  text-shadow: 0 2px 40px rgba(0, 0, 0, .35);
-}
-.titel .b { display: inline-block; animation: inBokstav 1s var(--ease) both; }
-.titel.ut .b { animation: utBokstav .38s ease-in both; }
-@keyframes inBokstav { from { opacity: 0; transform: translateY(.3em); filter: blur(14px); } to { opacity: 1; transform: none; filter: blur(0); } }
-@keyframes utBokstav { to { opacity: 0; transform: translateY(-.18em); filter: blur(10px); } }
-.streck { width: 56px; height: 2px; background: var(--acc); margin: 22px auto 20px; transition: background .8s; }
-.ingress {
-  font-size: clamp(13px, 1.05vw, 15px); line-height: 1.75; color: #c7cddb;
-  max-width: 560px; margin: 0 auto; transition: opacity .45s, transform .45s;
-}
-.ingress.ut { opacity: 0; transform: translateY(-6px); }
-.pill {
-  pointer-events: auto; display: inline-block; margin-top: 30px;
-  background: #f3f5fa; color: #0a0d16; border: 0; border-radius: 999px;
-  padding: 14px 28px; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
-  cursor: pointer; position: relative; z-index: 2;
-  box-shadow: 0 10px 44px -10px rgba(170, 205, 255, .55), 0 0 0 6px rgba(255,255,255,.06);
-  transition: transform .35s var(--ease), box-shadow .35s;
-}
-.pill:hover { transform: translateY(-2px); box-shadow: 0 16px 50px -10px rgba(170, 205, 255, .7), 0 0 0 8px rgba(255,255,255,.08); }
-.pill:focus-visible, .granne:focus-visible, .ner:focus-visible, .tick:focus-visible { outline: 2px solid var(--acc); outline-offset: 4px; }
+.rutt button .prick { width: 11px; height: 11px; border-radius: 50%; border: 1px solid currentColor; background: var(--bg); flex: 0 0 auto; transition: all .3s; }
+.rutt button .t { display: block; font-size: 9.5px; letter-spacing: .08em; color: var(--faint); opacity: 0; transition: opacity .3s; }
+.rutt button:hover, .rutt li.aktiv button { color: var(--ink); }
+.rutt button:hover .t, .rutt li.aktiv button .t { opacity: 1; }
+.rutt li.aktiv .prick { background: var(--acc); border-color: var(--acc); box-shadow: 0 0 10px var(--acc); }
+.rutt li.passerad .prick { border-color: color-mix(in srgb, var(--foton) 60%, transparent); }
+.foton { position: absolute; left: 0; width: 11px; height: 11px; margin-top: -5.5px; border-radius: 50%; background: #fff7df; box-shadow: 0 0 6px 2px var(--foton), 0 0 22px 6px color-mix(in srgb, var(--foton) 45%, transparent); pointer-events: none; }
 
-.granne {
-  position: absolute; z-index: 3; background: none; border: 0; padding: 8px 4px; cursor: pointer;
-  font-family: var(--serif); font-size: 13px; letter-spacing: .32em; text-transform: uppercase; color: #cfd5e2;
-  transform: translateY(-50%); transition: opacity .5s, color .3s, letter-spacing .4s var(--ease);
+/* Stopptexten */
+.stopptext {
+  left: var(--vanster); top: clamp(88px, 14vh, 150px); width: min(540px, 44vw);
+  will-change: opacity, transform; pointer-events: none;
 }
-.granne:hover { color: #fff; letter-spacing: .4em; }
-.granne.dold { opacity: 0; pointer-events: none; }
+.stopptext.klickbar > * { pointer-events: auto; }
+.s-rad { display: flex; align-items: flex-end; gap: 18px; }
+.s-nr { font-family: var(--disp); font-weight: 300; font-size: clamp(56px, 7vw, 104px); line-height: .8; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, .34); letter-spacing: -.02em; }
+.s-kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--dim); padding-bottom: 6px; }
+.s-kicker b { color: var(--acc); font-weight: 500; }
+.s-namn { font-family: var(--disp); font-weight: 600; font-size: clamp(40px, 5.6vw, 88px); line-height: .98; letter-spacing: -.01em; margin: 16px 0 0; text-transform: uppercase; text-shadow: 0 4px 40px rgba(0,0,0,.5); }
+.s-namn.lang { font-size: clamp(34px, 4.6vw, 72px); }
+.s-stråle { height: 2px; width: 100%; max-width: 420px; margin: 20px 0 18px; background: linear-gradient(90deg, var(--acc), transparent); transform-origin: left; }
+.s-ingress { font-size: clamp(14px, 1.05vw, 16px); line-height: 1.7; color: #d4d9e5; margin: 0; max-width: 470px; text-shadow: 0 1px 18px rgba(0,0,0,.8); }
+.s-data { display: grid; grid-template-columns: repeat(4, auto); gap: 0; margin-top: 22px; border-top: 1px solid var(--hud); border-bottom: 1px solid var(--hud); max-width: 520px; }
+.s-data div { padding: 10px 14px 10px 0; }
+.s-data div + div { padding-left: 14px; border-left: 1px solid var(--hud2); }
+.s-data dt { font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); margin-bottom: 4px; }
+.s-data dd { margin: 0; font-family: var(--mono); font-size: 13.5px; color: var(--ink); white-space: nowrap; }
+.s-knappar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.knapp {
+  font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; cursor: pointer;
+  border-radius: 999px; padding: 13px 20px; display: inline-flex; align-items: center; gap: 10px; border: 1px solid transparent;
+  transition: transform .3s var(--ease), box-shadow .3s, background .3s, border-color .3s;
+}
+.knapp.prim { background: var(--foton); color: #120d02; box-shadow: 0 0 0 0 rgba(255, 210, 122, .0), 0 10px 40px -12px rgba(255, 210, 122, .7); }
+.knapp.prim:hover { transform: translateY(-2px); box-shadow: 0 0 0 6px rgba(255, 210, 122, .12), 0 16px 44px -12px rgba(255, 210, 122, .8); }
+.knapp.sek { background: rgba(6, 9, 18, .4); border-color: var(--hud); color: var(--ink); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.knapp.sek:hover { border-color: rgba(255,255,255,.4); }
+.intro-namn { font-weight: 700; font-size: clamp(48px, 8.4vw, 136px); letter-spacing: .01em; }
+.slut-not { font-size: 11.5px; color: var(--faint); line-height: 1.7; margin-top: 26px; max-width: 470px; }
+.slut-not a { color: var(--dim); }
 
-.hero-fot {
-  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
-  display: flex; align-items: flex-end; justify-content: space-between;
-  padding: 0 clamp(16px, 4vw, 44px) 26px; pointer-events: none;
+/* Klockan, farten och statusraden */
+.klocka { left: var(--vanster); bottom: clamp(18px, 3.4vh, 34px); transition: opacity .4s; }
+.k-rubrik { font-family: var(--mono); font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--faint); }
+.k-tid { font-family: var(--mono); font-weight: 400; font-size: clamp(30px, 3.2vw, 46px); letter-spacing: .02em; font-variant-numeric: tabular-nums; color: #fff4d8; text-shadow: 0 0 24px rgba(255, 210, 122, .35); margin: 4px 0 2px; }
+.k-avst { font-family: var(--mono); font-size: 11.5px; color: var(--dim); font-variant-numeric: tabular-nums; }
+.fart { right: clamp(18px, 2.4vw, 32px); bottom: clamp(18px, 3.4vh, 34px); text-align: right; }
+.f-varde { font-family: var(--mono); font-size: 18px; margin: 5px 0 2px; font-variant-numeric: tabular-nums; }
+.f-not { font-family: var(--mono); font-size: 10.5px; color: var(--faint); }
+.status {
+  left: 50%; bottom: clamp(20px, 3.6vh, 36px); transform: translateX(-50%); text-align: center;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--dim);
+  pointer-events: none; transition: opacity .4s; white-space: nowrap;
 }
-.hero-fot > * { pointer-events: auto; }
-.ner {
-  position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%);
-  width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
-  background: rgba(8, 11, 20, .35); border: 1px solid rgba(255,255,255,.16);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: background .3s, transform .3s var(--ease);
-}
-.ner:hover { background: rgba(255,255,255,.12); transform: translateX(-50%) translateY(2px); }
-.raknare { display: flex; flex-direction: column; gap: 10px; }
-.raknare .nr { font-size: 12px; letter-spacing: .24em; color: var(--muted); font-variant-numeric: tabular-nums; }
-.raknare .nr b { color: var(--ink); font-weight: 500; }
-.ticks { display: flex; gap: 6px; align-items: center; }
-.tick {
-  width: 16px; height: 16px; border: 0; background: none; padding: 0; cursor: pointer; position: relative;
-}
-.tick::before {
-  content: ''; position: absolute; left: 0; right: 0; top: 7px; height: 2px; border-radius: 2px;
-  background: rgba(255,255,255,.22); transition: background .4s;
-}
-.tick.aktiv { width: 34px; }
-.tick.aktiv::before { background: var(--acc); }
-.tick:hover::before { background: rgba(255,255,255,.6); }
-.tick span {
-  position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(4px);
-  font-size: 11px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; color: var(--ink);
-  opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s;
-}
-.tick:hover span, .tick:focus-visible span { opacity: 1; transform: translateX(-50%); }
-.tips { font-size: 12px; color: rgba(225, 230, 240, .72); text-align: right; line-height: 1.7; letter-spacing: .02em; text-shadow: 0 1px 12px rgba(0,0,0,.9), 0 0 3px rgba(0,0,0,.8); }
-.raknare { text-shadow: 0 1px 12px rgba(0,0,0,.9), 0 0 3px rgba(0,0,0,.8); }
-.tips kbd {
-  font-family: var(--sans); font-size: 11px; border: 1px solid rgba(255,255,255,.18); border-radius: 5px;
-  padding: 1px 6px; color: var(--muted);
-}
-.mobilpilar { display: none; }
-@media (max-width: 760px) {
-  .granne { display: none; }
-  .tips { display: none; }
-  .hero-fot { padding-bottom: 22px; }
-  .ner { bottom: 20px; width: 44px; height: 44px; }
-  .mobilpilar { display: flex; gap: 8px; }
-  .mobilpilar button {
-    width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
-    background: rgba(8, 11, 20, .35); border: 1px solid rgba(255,255,255,.16);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  }
-  .mobilpilar button:disabled { opacity: .3; }
-  .ticks { display: none; }
-}
+.status b { color: var(--ink); font-weight: 500; }
+.status .pil { display: block; margin: 8px auto 0; width: 1px; height: 26px; background: linear-gradient(var(--dim), transparent); animation: pil 2.2s ease-in-out infinite; }
+@keyframes pil { 0%, 100% { transform: scaleY(.4); transform-origin: top; opacity: .3; } 50% { transform: scaleY(1); opacity: 1; } }
+.mobilrutt { display: none; }
 
-/* ---------- Faktapanelen ---------- */
-.panel {
-  position: fixed; top: 0; right: 0; bottom: 0; z-index: 40; width: min(520px, 46vw);
-  background: linear-gradient(180deg, rgba(8, 11, 21, .7), rgba(5, 7, 14, .88));
-  backdrop-filter: blur(20px) saturate(1.2); -webkit-backdrop-filter: blur(20px) saturate(1.2);
-  border-left: 1px solid var(--line);
-  transform: translateX(104%); transition: transform 1s var(--ease);
-  overflow-y: auto; overscroll-behavior: contain; padding: 92px 42px 56px;
+/* Fältanteckningar */
+.fn { opacity: 0; transition: opacity .45s; }
+.fn.syns { opacity: 1; }
+.fn circle { fill: none; stroke: #fff2d2; stroke-width: 1.4; }
+.fn circle.karna { fill: #fff2d2; stroke: none; }
+.fn polyline { fill: none; stroke: #fff2d2; stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .8s var(--ease) .1s; }
+.fn.syns polyline { stroke-dashoffset: 0; }
+.fn text { opacity: 0; transition: opacity .5s ease .55s; }
+.fn.syns text { opacity: 1; }
+.fn .hand { font-family: var(--hand); font-size: 27px; font-weight: 600; fill: #fff4d6; paint-order: stroke; stroke: rgba(2, 3, 7, .55); stroke-width: 4px; }
+.fn .sub { font-family: var(--mono); font-size: 11px; fill: rgba(255, 244, 214, .78); letter-spacing: .03em; paint-order: stroke; stroke: rgba(2, 3, 7, .6); stroke-width: 3px; }
+
+/* ---------- Dossiern ---------- */
+.dossier {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 40; width: min(580px, 48vw);
+  background: linear-gradient(180deg, rgba(5, 8, 17, .78), rgba(3, 5, 11, .92));
+  backdrop-filter: blur(22px) saturate(1.2); -webkit-backdrop-filter: blur(22px) saturate(1.2);
+  border-left: 1px solid var(--hud); transform: translateX(104%); transition: transform 1s var(--ease);
+  display: flex; flex-direction: column;
 }
-.panel.oppen { transform: none; }
-.panel-inre { transition: opacity .35s, transform .35s; }
-.panel-inre.ut { opacity: 0; transform: translateY(8px); }
-.stang {
-  position: absolute; top: 80px; right: 26px; width: 40px; height: 40px; border-radius: 50%;
-  display: grid; place-items: center; cursor: pointer; background: rgba(255,255,255,.05); border: 1px solid var(--line);
-  transition: background .3s, transform .4s var(--ease);
+.dossier.oppen { transform: none; }
+.d-topp { padding: 26px 34px 0; }
+.d-stang { position: absolute; top: 22px; right: 26px; }
+.d-huvud { display: flex; align-items: flex-end; gap: 16px; margin-top: 30px; }
+.d-nr { font-family: var(--disp); font-weight: 300; font-size: 64px; line-height: .8; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.34); }
+.d-kicker { font-family: var(--mono); font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--dim); }
+.d-namn { font-family: var(--disp); font-weight: 600; font-size: 40px; margin: 8px 0 0; text-transform: uppercase; line-height: 1; }
+.d-flikar { display: flex; gap: 2px; margin-top: 24px; border-bottom: 1px solid var(--hud); overflow-x: auto; scrollbar-width: none; }
+.d-flikar::-webkit-scrollbar { display: none; }
+.d-flikar button {
+  background: none; border: 0; cursor: pointer; padding: 12px 12px 13px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--faint); border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; transition: color .25s, border-color .25s;
 }
-.stang:hover { background: rgba(255,255,255,.12); transform: rotate(90deg); }
-.p-kicker { font-size: 11px; letter-spacing: .38em; text-transform: uppercase; color: var(--muted); }
-.p-titel { font-family: var(--serif); font-weight: 400; font-size: 58px; line-height: 1; letter-spacing: .02em; margin: 12px 0 6px; }
-.p-streck { width: 44px; height: 2px; background: var(--acc); margin: 18px 0 20px; }
-.p-ingress { font-size: 15px; line-height: 1.75; color: #cdd3e0; margin: 0; }
-.lager { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.d-flikar button:hover { color: var(--ink); }
+.d-flikar button[aria-selected="true"] { color: var(--ink); border-color: var(--acc); }
+.d-innehall { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 26px 34px 60px; container-type: inline-size; }
+.d-innehall > * { animation: fliktona .45s var(--ease) both; }
+@keyframes fliktona { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.d-ingress { font-size: 15.5px; line-height: 1.75; color: #d4d9e5; margin: 0 0 20px; }
+.rubrik { font-family: var(--mono); font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase; color: var(--faint); margin: 32px 0 14px; display: flex; gap: 12px; align-items: center; }
+.rubrik::after { content: ''; flex: 1; height: 1px; background: var(--hud2); }
+.lager { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 8px; }
 .vaxel {
-  border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.03); color: var(--muted);
-  border-radius: 999px; padding: 8px 14px 8px 12px; font-size: 12px; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 8px; transition: all .3s;
+  border: 1px solid var(--hud); background: rgba(255,255,255,.02); color: var(--dim); border-radius: 999px; padding: 8px 14px 8px 12px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .06em; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
 }
-.vaxel::before {
-  content: ''; width: 8px; height: 8px; border-radius: 50%; border: 1px solid currentColor; transition: all .3s;
+.vaxel::before { content: ''; width: 7px; height: 7px; border-radius: 50%; border: 1px solid currentColor; }
+.vaxel[aria-pressed="true"] { color: var(--ink); border-color: color-mix(in srgb, var(--acc) 55%, transparent); }
+.vaxel[aria-pressed="true"]::before { background: var(--acc); border-color: var(--acc); box-shadow: 0 0 8px var(--acc); }
+.fakta { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--hud2); margin: 0; }
+.fakta div { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--hud2); }
+.fakta div:nth-child(even) { padding-left: 14px; border-left: 1px solid var(--hud2); }
+.fakta dt { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); margin-bottom: 5px; }
+.fakta dd { margin: 0; font-size: 15px; font-variant-numeric: tabular-nums; }
+.storlek { display: flex; align-items: flex-end; gap: 26px; padding: 6px 0; }
+.storlek figure { margin: 0; text-align: center; }
+.storlek figcaption { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-top: 8px; }
+.storlek p { margin: 0 0 6px; font-size: 13.5px; color: var(--dim); line-height: 1.6; }
+.visste { list-style: none; padding: 0; margin: 0; counter-reset: v; }
+.visste li { counter-increment: v; position: relative; padding: 0 0 16px 38px; font-size: 14px; line-height: 1.7; color: #d0d5e2; }
+.visste li::before { content: counter(v, decimal-leading-zero); position: absolute; left: 0; top: 2px; font-family: var(--mono); font-size: 11px; color: var(--acc); }
+.fordj h3 { font-family: var(--disp); font-weight: 500; font-size: 17px; letter-spacing: .01em; margin: 26px 0 8px; }
+.fordj h3:first-child { margin-top: 0; }
+.fordj p { font-size: 14.5px; line-height: 1.85; color: #c8cedb; margin: 0; }
+.udda { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.udda li {
+  position: relative; padding: 14px 16px 14px 52px; font-size: 14px; line-height: 1.7; color: #d5dae6;
+  border: 1px solid var(--hud2); border-radius: 4px; background: linear-gradient(90deg, color-mix(in srgb, var(--acc) 8%, transparent), transparent 70%);
 }
-.vaxel[aria-pressed="true"] { color: var(--ink); border-color: color-mix(in srgb, var(--acc) 60%, transparent); background: color-mix(in srgb, var(--acc) 12%, transparent); }
-.vaxel[aria-pressed="true"]::before { background: var(--acc); border-color: var(--acc); box-shadow: 0 0 10px var(--acc); }
-.vaxel:hover { color: var(--ink); }
+.udda li::before { content: 'obs!'; position: absolute; left: 12px; top: 13px; font-family: var(--hand); font-size: 19px; color: var(--acc); transform: rotate(-8deg); }
 
-.p-rubrik { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--faint); margin: 38px 0 14px; display: flex; align-items: center; gap: 12px; }
-.p-rubrik::after { content: ''; flex: 1; height: 1px; background: var(--line); }
-.fakta { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
-.fakta div { background: rgba(7, 10, 19, .92); padding: 14px 16px; }
-.fakta dt { font-size: 11px; color: var(--faint); letter-spacing: .06em; margin-bottom: 5px; }
-.fakta dd { margin: 0; font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; }
-
-.ruta {
-  border: 1px solid var(--line); border-radius: 16px; padding: 20px 20px 18px;
-  background: linear-gradient(160deg, color-mix(in srgb, var(--acc) 7%, transparent), rgba(255,255,255,.015));
-}
-.reglage { margin-bottom: 16px; }
-.reglage label { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
-.reglage label b { color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
+.ruta { border: 1px solid var(--hud2); border-radius: 4px; padding: 18px 18px 16px; background: rgba(255,255,255,.015); }
+.reglage { margin-bottom: 14px; }
+.reglage label { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; }
+.reglage label b { color: var(--ink); font-weight: 500; }
 input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: none; cursor: pointer; }
-input[type=range]::-webkit-slider-runnable-track { height: 2px; background: rgba(255,255,255,.16); border-radius: 2px; }
-input[type=range]::-moz-range-track { height: 2px; background: rgba(255,255,255,.16); border-radius: 2px; }
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #fff; margin-top: -7px; box-shadow: 0 0 0 5px color-mix(in srgb, var(--acc) 30%, transparent); }
-input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 5px color-mix(in srgb, var(--acc) 30%, transparent); }
-.utfall { display: grid; gap: 0; }
-.utfall > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
-.utfall > div b { color: var(--ink); font-weight: 500; font-size: 16px; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.utfall i, .formel i, .dar i { font-family: 'Times New Roman', Georgia, serif; font-size: 1.12em; }
-.not { font-size: 12px; color: var(--faint); line-height: 1.6; margin: 12px 0 0; }
-
-.formel { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-size: 15px; line-height: 1.3; }
+input[type=range]::-webkit-slider-runnable-track { height: 1px; background: rgba(255,255,255,.25); }
+input[type=range]::-moz-range-track { height: 1px; background: rgba(255,255,255,.25); }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--foton); margin-top: -6.5px; box-shadow: 0 0 10px var(--foton); }
+input[type=range]::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 50%; background: var(--foton); box-shadow: 0 0 10px var(--foton); }
+.utfall > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-top: 1px solid var(--hud2); font-size: 13.5px; color: var(--dim); }
+.utfall > div b { color: var(--ink); font-weight: 500; font-family: var(--mono); font-size: 15px; white-space: nowrap; }
+.utfall i, .formel i, .dar i { font-family: 'Times New Roman', Georgia, serif; font-size: 1.14em; }
+.not-text { font-size: 12.5px; color: var(--faint); line-height: 1.65; margin: 12px 0 0; }
+.formel { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-size: 15px; }
 .brak { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; }
 .brak > span { padding: 2px 4px; white-space: nowrap; }
 .brak > span + span { border-top: 1.5px solid currentColor; }
-.dar { list-style: none; padding: 0; margin: 14px 0 0; font-size: 12.5px; color: var(--muted); line-height: 1.8; }
-.visste { list-style: none; padding: 0; margin: 0; counter-reset: v; }
-.visste li { counter-increment: v; position: relative; padding: 0 0 18px 42px; font-size: 14px; line-height: 1.7; color: #cdd3e0; }
-.visste li::before {
-  content: counter(v, decimal-leading-zero); position: absolute; left: 0; top: 1px;
-  font-family: var(--serif); font-size: 15px; color: var(--acc);
-}
-.svar { font-family: var(--serif); font-size: 19px; line-height: 1.55; color: var(--ink); margin: 0 0 18px; }
-.bestar .st-rubrik, .stapel .st-rubrik { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); margin-bottom: 12px; }
+.dar { list-style: none; padding: 0; margin: 14px 0 0; font-size: 12.5px; color: var(--dim); line-height: 1.8; }
+
+/* Sammansättning (samma byggstenar som förut) */
+.svar { font-family: var(--sans); font-weight: 500; font-size: 17px; line-height: 1.65; color: var(--ink); margin: 0 0 18px; }
+.bestar .st-rubrik, .stapel .st-rubrik { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); margin-bottom: 12px; }
+.bestar { border: 1px solid var(--hud2); border-radius: 4px; padding: 18px; }
 .snitt-rad { display: grid; grid-template-columns: 200px 1fr; gap: 18px; align-items: start; }
 .snitt { width: 100%; height: auto; display: block; margin-top: 6px; }
 .lagerlista { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .lagerlista li { display: flex; gap: 10px; align-items: flex-start; }
-.lagerlista i { flex: 0 0 11px; height: 11px; border-radius: 3px; margin-top: 4px; }
-.lagerlista b { display: block; font-weight: 500; font-size: 13.5px; color: var(--ink); }
-.lagerlista span { display: block; font-size: 12.5px; line-height: 1.55; color: var(--muted); }
-.panel-inre { container-type: inline-size; }
+.lagerlista i { flex: 0 0 11px; height: 11px; border-radius: 2px; margin-top: 4px; }
+.lagerlista b { display: block; font-weight: 600; font-size: 13.5px; }
+.lagerlista span { display: block; font-size: 12.5px; line-height: 1.55; color: var(--dim); }
 @container (max-width: 430px) { .snitt-rad { grid-template-columns: 1fr; } .snitt { max-width: 280px; margin: 0 auto 4px; } }
-.atmo-not { margin: 14px 0 0; padding: 14px 16px; border: 1px dashed var(--line); border-radius: 12px; }
-.stapel { margin-top: 16px; border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px 16px; background: rgba(255,255,255,.015); }
-.st-bar { display: flex; height: 14px; border-radius: 999px; overflow: hidden; gap: 2px; }
+.bestar .not, .stapel .not, .atmo-not { font-size: 12.5px; color: var(--faint); line-height: 1.65; margin: 12px 0 0; }
+.atmo-not { padding: 14px 16px; border: 1px dashed var(--hud); border-radius: 4px; }
+.stapel { margin-top: 14px; border: 1px solid var(--hud2); border-radius: 4px; padding: 16px 18px 14px; }
+.st-bar { display: flex; height: 12px; overflow: hidden; gap: 2px; }
 .st-bar span { min-width: 3px; }
 .st-lista { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 7px; }
 .st-lista li { display: flex; align-items: baseline; gap: 10px; font-size: 13.5px; color: #d3d8e4; }
-.st-lista i { flex: 0 0 10px; height: 10px; border-radius: 50%; transform: translateY(1px); }
+.st-lista i { flex: 0 0 9px; height: 9px; border-radius: 50%; transform: translateY(1px); }
 .st-lista span { flex: 1; }
 .st-lista small { display: block; font-size: 12px; color: var(--faint); }
-.st-lista b { font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.hopp { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 26px; }
-.hopp button {
-  background: none; border: 0; padding: 2px 0; cursor: pointer; font-size: 12px; color: var(--faint);
-  border-bottom: 1px solid transparent; transition: color .25s, border-color .25s;
-}
-.hopp button:hover { color: var(--ink); border-color: var(--acc); }
-.fordj h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; line-height: 1.2; margin: 26px 0 8px; color: var(--ink); }
-.fordj h3:first-child { margin-top: 4px; }
-.fordj p { font-size: 14.5px; line-height: 1.85; color: #c6ccda; margin: 0; }
-.udda { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-.udda li {
-  position: relative; padding: 16px 18px 16px 50px; border-radius: 14px; font-size: 14px; line-height: 1.7; color: #d3d8e4;
-  border: 1px solid color-mix(in srgb, var(--acc) 22%, transparent);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--acc) 10%, transparent), rgba(255,255,255,.012) 60%);
-}
-.udda li::before {
-  content: ''; position: absolute; left: 20px; top: 22px; width: 12px; height: 12px; border-radius: 50%;
-  border: 1.5px solid var(--acc); box-shadow: 0 0 12px color-mix(in srgb, var(--acc) 60%, transparent);
-}
-.udda li::after {
-  content: ''; position: absolute; left: 14px; top: 26.5px; width: 24px; height: 3px; border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--acc) 70%, transparent); transform: rotate(-22deg);
-}
-.p-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; }
-.p-nav button {
-  flex: 1; border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 14px; padding: 14px 16px;
-  cursor: pointer; text-align: left; transition: background .3s, border-color .3s;
-}
-.p-nav button:last-child { text-align: right; }
-.p-nav button:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18); }
-.p-nav button small { display: block; font-size: 11px; color: var(--faint); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3px; }
-.p-nav button span { font-family: var(--serif); font-size: 20px; }
-.p-nav button:disabled { visibility: hidden; }
-@media (max-width: 760px) {
-  .panel {
-    top: auto; left: 0; width: auto; height: 58vh; height: 58svh; border-left: 0; border-top: 1px solid var(--line);
-    border-radius: 24px 24px 0 0; transform: translateY(104%); padding: 30px 20px 44px;
-  }
-  .stang { top: 18px; right: 16px; }
-  .p-titel { font-size: 44px; }
-  .fakta dd { font-size: 14px; }
-}
+.st-lista b { font-family: var(--mono); font-weight: 500; white-space: nowrap; }
 
-/* ---------- Sektioner ---------- */
-.sektion { position: relative; background: var(--bg); padding: clamp(80px, 12vh, 140px) clamp(16px, 5vw, 64px); }
-.sektion.grad { background: radial-gradient(1200px 500px at 70% 0%, rgba(70, 110, 220, .09), transparent 70%), radial-gradient(900px 500px at 0% 100%, rgba(95, 212, 196, .05), transparent 70%), var(--bg); }
-.inre { max-width: 1240px; margin: 0 auto; }
-.eyebrow { font-size: 11px; letter-spacing: .34em; text-transform: uppercase; color: var(--faint); display: flex; gap: 14px; align-items: center; }
-.eyebrow b { color: var(--acc); font-weight: 500; transition: color .8s; }
-.sek-huvud { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: end; margin-bottom: 56px; }
-.sek-huvud h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(38px, 5.2vw, 72px); line-height: 1.04; margin: 18px 0 0; letter-spacing: .005em; }
-.sek-huvud h2 em { font-style: italic; color: var(--acc); transition: color .8s; }
-.sek-huvud p { color: var(--muted); font-size: 15px; line-height: 1.8; margin: 0; max-width: 420px; justify-self: end; }
-@media (max-width: 860px) { .sek-huvud { grid-template-columns: 1fr; gap: 20px; } .sek-huvud p { justify-self: start; } }
-
-/* Kort */
-.kort-rutnat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-@media (max-width: 980px) { .kort-rutnat { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .kort-rutnat { grid-template-columns: 1fr; } }
-.kort {
-  --c: #fff; position: relative; display: flex; flex-direction: column; text-align: left; cursor: pointer;
-  border: 1px solid var(--line); border-radius: 20px; padding: 22px 22px 22px; min-height: 380px; overflow: hidden;
-  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.008)), #060912;
-  transition: border-color .5s, transform .6s var(--ease), box-shadow .6s;
+/* Spektrometern */
+.spektrometer { border: 1px solid var(--hud2); border-radius: 4px; padding: 16px 16px 12px; background: #03050b; position: relative; }
+.spektrometer canvas { display: block; width: 100%; height: 190px; cursor: crosshair; }
+.sp-tips {
+  position: absolute; pointer-events: none; transform: translate(-50%, -100%); padding: 6px 10px; border-radius: 3px;
+  background: rgba(10, 14, 26, .95); border: 1px solid var(--hud); font-family: var(--mono); font-size: 11px; white-space: nowrap; opacity: 0; transition: opacity .15s;
 }
-.kort::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .6s;
-  background: radial-gradient(420px 260px at 50% 38%, color-mix(in srgb, var(--c) 16%, transparent), transparent 70%);
-}
-.kort:hover { border-color: color-mix(in srgb, var(--c) 40%, transparent); transform: translateY(-4px); box-shadow: 0 30px 60px -30px color-mix(in srgb, var(--c) 30%, transparent); }
-.kort:hover::before { opacity: 1; }
-.kort .k-top { display: flex; justify-content: space-between; font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--faint); }
-.kort .k-bild { flex: 1; display: grid; place-items: center; padding: 14px 0 8px; min-height: 200px; }
-.kort .k-bild .klot { width: 62%; aspect-ratio: 1; transition: transform 1.2s var(--ease); }
-.kort:hover .k-bild .klot { transform: scale(1.07) rotate(-5deg); }
-@media (min-width: 561px) {
-  .kort.bred { grid-column: span 2; }
-  .kort.bred .k-bild .klot { width: 34%; }
-}
-.kort .k-namn { font-family: var(--serif); font-size: 34px; line-height: 1.05; }
-.kort .k-rad { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.6; }
-.kort .k-fot { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--faint); }
-.kort .k-pil { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; transition: background .4s, border-color .4s, transform .5s var(--ease); }
-.kort:hover .k-pil { background: var(--c); border-color: var(--c); color: #080a12; transform: rotate(-45deg); }
+.sp-tolkning { font-size: 14.5px; line-height: 1.75; color: #d4d9e5; margin: 16px 0 0; }
+.sp-lista { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 10px; }
+.sp-lista li { display: grid; grid-template-columns: 12px 1fr; gap: 10px; font-size: 13px; line-height: 1.6; color: var(--dim); }
+.sp-lista i { width: 10px; height: 10px; border-radius: 2px; margin-top: 5px; }
+.sp-lista b { color: var(--ink); font-weight: 600; display: block; font-size: 13.5px; }
 
-/* Klot: tumnagel eller platshållare */
-.klot { position: relative; border-radius: 50%; }
-.klot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 1s; }
-.klot img.syns { opacity: 1; }
-.klot .plats { position: absolute; inset: 12%; border-radius: 50%; transition: opacity 1s; }
-.klot.klar .plats { opacity: 0; }
-
-/* Storleksskalan */
-.skala { position: relative; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; margin: 0 calc(-1 * clamp(16px, 5vw, 64px)); padding: 0 clamp(16px, 5vw, 64px); }
-.skala::-webkit-scrollbar { height: 6px; }
-.skala::-webkit-scrollbar-thumb { background: rgba(255,255,255,.14); border-radius: 6px; }
-.skala { scrollbar-color: rgba(255,255,255,.14) transparent; }
-.skala-rad { position: relative; height: 380px; display: flex; align-items: center; }
-.sol-kant { position: absolute; top: 50%; border-radius: 50%; transform: translateY(-50%); pointer-events: none;
-  background: radial-gradient(circle, #fff4cf 0%, #ffd77e 72%, #ffb04a 90%, #ff8a2a 97%, #f06a1c 100%);
-  box-shadow: 0 0 34px 4px rgba(255, 176, 80, .55), 0 0 110px 26px rgba(255, 130, 40, .13);
-}
-.sol-etikett { position: absolute; left: 18px; bottom: 16px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #3a1a06; font-weight: 600; }
-.skala-planet { position: relative; flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; background: none; border: 0; padding: 0; }
-.skala-planet .klot { flex: 0 0 auto; transition: transform .6s var(--ease); }
-.skala-planet:hover .klot { transform: scale(1.06); }
-.skala-planet .s-text { position: absolute; top: calc(50% + var(--h) / 2 + 18px); left: 50%; transform: translateX(-50%); text-align: center; white-space: nowrap; }
-.skala-planet .s-namn { font-family: var(--serif); font-size: 17px; }
-.skala-planet .s-mat { font-size: 11px; color: var(--faint); margin-top: 3px; letter-spacing: .05em; }
-.skala-planet:hover .s-namn { color: var(--acc); }
-.skala-not { color: var(--faint); font-size: 13px; margin-top: 18px; }
-
-/* Banorna */
-#banor { position: relative; height: 100vh; height: 100svh; min-height: 640px; touch-action: pan-y; user-select: none; -webkit-user-select: none; overflow: hidden; cursor: grab; }
-#banor.drar { cursor: grabbing; }
-#banor.hovrar { cursor: pointer; }
-.banor-info { position: absolute; top: clamp(90px, 13vh, 130px); left: clamp(16px, 5vw, 64px); max-width: 430px; pointer-events: none; z-index: 2; }
-.banor-info h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(36px, 4.6vw, 62px); line-height: 1.05; margin: 16px 0 16px; }
-.banor-info p { color: var(--muted); font-size: 14px; line-height: 1.8; margin: 0; }
-.kepler { margin-top: 18px; font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 12px; }
-.kepler span.f { font-family: 'Times New Roman', Georgia, serif; font-size: 18px; color: var(--ink); white-space: nowrap; }
-.etiketter { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-.et { position: absolute; left: 0; top: 0; transform: translate(-50%, -100%); font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase; color: rgba(230, 235, 245, .7); white-space: nowrap; transition: color .3s, opacity .35s; padding-bottom: 6px; will-change: transform; }
+/* ---------- Kartan ---------- */
+.karta { position: fixed; inset: 0; z-index: 50; display: none; }
+body.kartalage .karta { display: block; }
+body.kartalage .hud, body.kartalage #noter, body.kartalage #varp { display: none; }
+.karta-info { position: absolute; top: 76px; left: clamp(18px, 4vw, 48px); max-width: 420px; pointer-events: none; }
+.karta-info h2 { font-family: var(--disp); font-weight: 500; font-size: clamp(28px, 3.4vw, 46px); margin: 12px 0 14px; text-transform: uppercase; }
+.karta-info p { font-size: 14px; line-height: 1.75; color: var(--dim); margin: 0; }
+.karta-stang { position: absolute; top: 18px; right: clamp(16px, 2.4vw, 32px); }
+.etiketter { position: absolute; inset: 0; pointer-events: none; }
+.et { position: absolute; left: 0; top: 0; font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(230,235,245,.72); white-space: nowrap; padding-bottom: 6px; transition: color .3s, opacity .35s; will-change: transform; }
 .et.hov { color: #fff; }
-.et small { display: block; letter-spacing: .06em; text-transform: none; color: var(--acc); font-size: 11px; opacity: 0; transition: opacity .3s; margin-top: 2px; text-align: center; }
+.et small { display: block; letter-spacing: .04em; text-transform: none; color: var(--foton); font-size: 11px; opacity: 0; transition: opacity .3s; margin-top: 2px; text-align: center; }
 .et.hov small { opacity: 1; }
-.banor-kontroller {
-  position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 3;
-  display: flex; align-items: center; gap: 18px; padding: 12px 16px 12px 12px; border-radius: 999px;
-  background: rgba(8, 11, 20, .55); border: 1px solid var(--line); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  width: max-content; max-width: calc(100% - 28px);
+.karta-kontroller {
+  position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); display: flex; align-items: center; gap: 18px;
+  padding: 10px 14px 10px 10px; border-radius: 999px; background: rgba(6, 9, 18, .6); border: 1px solid var(--hud);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); width: max-content; max-width: calc(100% - 24px);
 }
-.ikonknapp { width: 42px; height: 42px; border-radius: 50%; border: 0; background: #f3f5fa; color: #0a0d16; display: grid; place-items: center; cursor: pointer; flex: 0 0 auto; }
-.fart { display: flex; flex-direction: column; min-width: 190px; }
-.fart label { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--faint); }
-.fart .fv { font-size: 12px; color: var(--ink); margin-top: 1px; }
-.fart input { margin-top: 2px; }
-.datum { font-family: var(--serif); font-size: 20px; min-width: 190px; text-align: center; font-variant-numeric: tabular-nums; }
-@media (max-width: 860px) {
-  .banor-kontroller { flex-wrap: wrap; justify-content: center; border-radius: 22px; gap: 10px 14px; bottom: 16px; padding: 12px; }
-  .datum { order: -1; width: 100%; font-size: 18px; }
-  .fart { min-width: 150px; flex: 1; }
-  .banor-info { right: 16px; }
-  .banor-info p { font-size: 13px; }
-  .kepler { display: none; }
+.ikonknapp { width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--foton); color: #120d02; display: grid; place-items: center; cursor: pointer; flex: 0 0 auto; }
+.kfart { display: flex; flex-direction: column; min-width: 180px; }
+.kfart label { font-family: var(--mono); font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
+.kfart span { font-family: var(--mono); font-size: 11.5px; }
+.kdatum { font-family: var(--mono); font-size: 16px; min-width: 170px; text-align: center; font-variant-numeric: tabular-nums; }
+.karta-kredit { position: absolute; right: clamp(16px, 2.4vw, 32px); bottom: 90px; max-width: 380px; text-align: right; font-size: 11px; line-height: 1.6; color: var(--faint); }
+.karta-kredit a { color: var(--dim); }
+.karta.drar { cursor: grabbing; }
+.karta.hovrar { cursor: pointer; }
+
+.fel { position: fixed; inset: 0; z-index: 200; display: none; place-items: center; text-align: center; padding: 30px; background: var(--bg); color: var(--dim); }
+
+/* Omloppsläget */
+body.omlopp .stopptext, body.omlopp .status, body.omlopp .rutt, body.omlopp .fart { opacity: 0 !important; pointer-events: none; }
+body.omlopp main#resa { touch-action: none; }
+.hud, .rutt, .fart { transition: opacity .6s; }
+
+@media (max-width: 760px) {
+  :root { --vanster: 18px; }
+  .rutt { display: none; }
+  .fart { display: none; }
+  .mobilrutt { display: block; top: 58px; left: 18px; right: 18px; height: 2px; background: var(--hud); }
+  .mobilrutt i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--foton); box-shadow: 0 0 8px var(--foton); }
+  .stopptext { top: 78px; width: auto; right: 18px; }
+  .s-nr { font-size: 44px; }
+  .s-namn { font-size: clamp(30px, 9.4vw, 44px); margin-top: 10px; }
+  .s-namn.lang { font-size: clamp(26px, 8vw, 38px); }
+  .intro-namn { font-size: clamp(34px, 10.2vw, 56px); }
+  .s-stråle { margin: 14px 0 12px; }
+  .s-ingress { font-size: 13.5px; line-height: 1.6; }
+  .s-data { grid-template-columns: repeat(2, 1fr); margin-top: 14px; }
+  .s-data div:nth-child(3) { border-left: 0; padding-left: 0; }
+  .s-data div:nth-child(n+3) { border-top: 1px solid var(--hud2); }
+  .s-knappar { margin-top: 16px; }
+  .knapp { padding: 11px 16px; font-size: 10.5px; }
+  .klocka { bottom: 16px; }
+  .k-tid { font-size: 26px; }
+  .status { display: none; }
+  .marke span.lang { display: none; }
+  .hudknapp .text { display: none; }
+  .dossier { top: auto; left: 0; width: auto; height: 72vh; height: 72svh; border-left: 0; border-top: 1px solid var(--hud); transform: translateY(104%); border-radius: 18px 18px 0 0; }
+  .d-topp { padding: 18px 20px 0; }
+  .d-stang { top: 14px; right: 14px; }
+  .d-huvud { margin-top: 44px; }
+  .d-nr { font-size: 44px; }
+  .d-namn { font-size: 28px; }
+  .d-innehall { padding: 20px 20px 50px; }
+  .karta-info { top: 64px; right: 18px; }
+  .karta-info p { font-size: 13px; }
+  .karta-kontroller { flex-wrap: wrap; justify-content: center; border-radius: 18px; gap: 10px 14px; }
+  .kdatum { order: -1; width: 100%; }
+  .karta-kredit { display: none; }
 }
-
-/* Avslutning */
-.avslut { text-align: center; padding: clamp(110px, 18vh, 200px) 20px; background: radial-gradient(700px 360px at 50% 100%, color-mix(in srgb, var(--acc) 12%, transparent), transparent 70%), var(--bg); }
-.avslut .rad { display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--muted); font-size: 14px; margin-bottom: 26px; }
-.avslut .rad svg { color: var(--acc); }
-.avslut h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 6.4vw, 92px); line-height: 1.04; margin: 0; }
-.avslut h2 em { color: var(--acc); }
-.avslut .knappar { display: flex; gap: 12px; justify-content: center; margin-top: 44px; flex-wrap: wrap; }
-.knapp-kant { display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; padding: 13px 24px; font-size: 13px; text-decoration: none; cursor: pointer; background: none; transition: background .3s, border-color .3s; }
-.knapp-kant:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.35); }
-footer { position: relative; z-index: 1; background: var(--bg); border-top: 1px solid var(--line); padding: 28px clamp(16px, 5vw, 64px) 40px; font-size: 12px; color: var(--faint); line-height: 1.8; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-footer a { color: var(--muted); }
-
-.fel { position: fixed; inset: 0; z-index: 200; display: none; place-items: center; text-align: center; padding: 30px; background: var(--bg); color: var(--muted); }
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .titel .b { animation-duration: .01s; }
+  .status .pil { animation: none; }
 }
 </style>
 </head>
 <body class="last">
 
 <canvas id="scen" aria-hidden="true"></canvas>
+<div id="varp" aria-hidden="true"></div>
+<svg id="noter" aria-hidden="true"></svg>
 
 <div id="laddare">
   <div class="l-inre">
-    <div class="l-kicker">Fysiklabbet</div>
-    <div class="l-titel">Solsystemet</div>
-    <div class="l-bar"><i id="lBar"></i></div>
-    <div class="l-text" id="lText">Laddar planeterna</div>
+    <div class="l-titel">Ljusresan</div>
+    <div class="l-stråle"><i id="lBar"></i></div>
+    <div class="l-text" id="lText">Laddar solsystemet</div>
   </div>
 </div>
 <div class="fel" id="fel"><div>Din webbläsare kunde inte starta 3D-grafiken (WebGL). Pröva en annan webbläsare eller en nyare enhet.</div></div>
 
-<header class="topp" id="topp">
-  <a class="logo" href="../index.html">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.2"/><ellipse cx="12" cy="12" rx="10.5" ry="4" transform="rotate(-24 12 12)"/></svg>
-    Fysiklabbet <small>Solsystemet</small>
+<header class="hud topp">
+  <a class="marke" href="../index.html">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.8 2.8M16.2 16.2L19 19M19 5l-2.8 2.8M7.8 16.2L5 19"/></svg>
+    <b>Fysiklabbet</b> <span class="lang">/ Ljusresan</span>
   </a>
-  <nav class="nav">
-    <a href="#hero" class="aktiv" data-sek="hero">Planeterna</a>
-    <a href="#varldar" data-sek="varldar">Alla världar</a>
-    <a href="#storlekar" data-sek="storlekar">Storlekar</a>
-    <a href="#banor" data-sek="banor">Banorna</a>
-    <button class="pill-sm" id="toppUtforska">Utforska</button>
-  </nav>
+  <div class="topp-knappar">
+    <button class="hudknapp" id="noterKnapp" aria-pressed="true" title="Visa eller dölj fältanteckningarna"><span class="lampa"></span><span class="text">Anteckningar</span></button>
+    <button class="hudknapp" id="kartaKnapp" title="Solsystemet som det ser ut i dag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4.5"/><ellipse cx="12" cy="12" rx="6" ry="2.6"/></svg><span class="text">Solsystemet i dag</span></button>
+  </div>
 </header>
 
-<main>
-  <section id="hero" aria-label="Planetvisning">
-    <div class="hero-text" id="heroText">
-      <div class="kicker" id="kicker">Planet 3 från solen</div>
-      <h1 class="titel" id="titel">Jorden</h1>
-      <div class="streck"></div>
-      <p class="ingress" id="ingress"></p>
-      <button class="pill" id="utforska">Utforska Jorden</button>
-    </div>
-    <button class="granne" id="grannV" aria-label="Föregående planet"></button>
-    <button class="granne" id="grannH" aria-label="Nästa planet"></button>
-    <div class="hero-fot">
-      <div class="raknare">
-        <div class="ticks" id="ticks"></div>
-        <div class="nr" id="nr"><b>04</b> / 09</div>
-      </div>
-      <div class="mobilpilar">
-        <button id="mobV" aria-label="Föregående planet"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <button id="mobH" aria-label="Nästa planet"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
-      </div>
-      <div class="tips">Dra i planeten för att snurra den<br>Byt värld med <kbd>&larr;</kbd> <kbd>&rarr;</kbd> eller klicka på grannarna</div>
-    </div>
-    <button class="ner" id="ner" aria-label="Skrolla ner"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
-  </section>
+<nav class="hud rutt" id="rutt" aria-label="Resans stopp">
+  <div class="rutt-linje"><i id="ruttFyll"></i></div>
+  <ol id="ruttLista"></ol>
+  <div class="foton" id="foton"></div>
+</nav>
+<div class="hud mobilrutt" aria-hidden="true"><i id="mobilFyll"></i></div>
 
-  <section class="sektion grad" id="varldar">
-    <div class="inre">
-      <div class="sek-huvud">
-        <div>
-          <div class="eyebrow"><b>01</b> Grannskapet</div>
-          <h2>En stjärna.<br><em>Åtta</em> världar.</h2>
-        </div>
-        <p>Börja med platsen vi kallar hem och ta dig sedan utåt, planet för planet. Klicka på en värld för att flyga dit och sväva ovanför dess atmosfär.</p>
-      </div>
-      <div class="kort-rutnat" id="kortRutnat"></div>
-    </div>
-  </section>
+<section class="hud stopptext" id="stopptext" aria-live="polite"></section>
 
-  <section class="sektion" id="storlekar">
-    <div class="inre">
-      <div class="sek-huvud">
-        <div>
-          <div class="eyebrow"><b>02</b> Skala</div>
-          <h2>Hur stora är de<br><em>egentligen?</em></h2>
-        </div>
-        <p>Här står planeterna i rätt storlek i förhållande till varandra. Solen får inte ens plats: bara en bit av kanten syns till vänster. Jupiter rymmer drygt 1&nbsp;300 jordklot.</p>
-      </div>
-      <div class="skala" id="skala"><div class="skala-rad" id="skalaRad"></div></div>
-      <p class="skala-not" id="skalaNot">Avstånden mellan planeterna är däremot inte skalenliga.</p>
-    </div>
-  </section>
+<div class="hud klocka">
+  <div class="k-rubrik">Ljuset har färdats i</div>
+  <div class="k-tid" id="kTid">00:00:00</div>
+  <div class="k-avst" id="kAvst">vid solens yta</div>
+</div>
+<div class="hud fart">
+  <div class="k-rubrik">Fart</div>
+  <div class="f-varde">299 792 km/s</div>
+  <div class="f-not">ljusets fart i vakuum</div>
+</div>
+<div class="hud status" id="status"></div>
 
-  <section id="banor" aria-label="Solsystemet ovanifrån">
-    <div class="banor-info">
-      <div class="eyebrow"><b>03</b> Banorna</div>
-      <h2>Solsystemet<br>just nu</h2>
-      <p>Planeternas ungefärliga lägen i dag. Dra för att vrida vyn, och skruva upp tiden för att se hur mycket snabbare de inre planeterna hinner runt solen.</p>
-      <div class="kepler"><span class="f"><i>T</i><sup>2</sup> &prop; <i>a</i><sup>3</sup></span> Keplers tredje lag: ju längre ut, desto längre år.</div>
-    </div>
-    <div class="etiketter" id="etiketter"></div>
-    <div class="banor-kontroller">
-      <button class="ikonknapp" id="spela" aria-label="Pausa">
-        <svg id="ikonPaus" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-        <svg id="ikonSpela" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M8 5v14l11-7z"/></svg>
-      </button>
-      <div class="fart"><label for="fart">Tidens fart</label><span class="fv" id="fartText"></span><input type="range" id="fart" min="0" max="100" value="42"></div>
-      <div class="datum" id="datum"></div>
-      <button class="vaxel" id="verklig" aria-pressed="false">Verkliga avstånd</button>
-      <button class="vaxel" id="idag" aria-pressed="false">I dag</button>
-    </div>
-  </section>
+<main id="resa"></main>
 
-  <section class="avslut" id="avslut">
-    <div class="rad"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="2.5"/></svg> Utforska vidare</div>
-    <h2>Inget teleskop behövs.<br><em>Bara lite nyfikenhet.</em></h2>
-    <div class="knappar">
-      <button class="knapp-kant" id="tillbaka"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg> Tillbaka till planeterna</button>
-      <a class="knapp-kant" href="../index.html">Till Fysiklabbet</a>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div>Planettexturer: <a href="https://www.solarsystemscope.com/textures/" rel="noopener">Solar System Scope</a>, CC BY 4.0, baserade på bilder och data från NASA. Venus yta är kartlagd med radar av rymdsonden Magellan. Plutos karta: NASA/JHUAPL/SwRI (New Horizons), fri att använda; den södra delen som aldrig fotograferats är ifylld med en neutral färg.</div>
-  <div>Faktauppgifter: NASA Planetary Fact Sheet. Banorna är förenklade till cirklar.</div>
-</footer>
-
-<aside class="panel" id="panel" aria-label="Fakta om planeten" aria-hidden="true">
-  <button class="stang" id="stang" aria-label="Stäng"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  <div class="panel-inre" id="panelInre"></div>
+<aside class="dossier" id="dossier" aria-hidden="true" aria-label="Dossier">
+  <div class="d-topp">
+    <button class="hudknapp d-stang" id="dStang">Fortsätt resan <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
+    <div class="d-huvud"><div class="d-nr" id="dNr"></div><div><div class="d-kicker" id="dKicker"></div><h2 class="d-namn" id="dNamn"></h2></div></div>
+    <div class="d-flikar" role="tablist" id="dFlikar"></div>
+  </div>
+  <div class="d-innehall" id="dInnehall"></div>
 </aside>
+
+<div class="karta" id="karta" aria-label="Solsystemet i dag">
+  <div class="etiketter" id="kartaEtiketter"></div>
+  <div class="karta-info">
+    <div class="k-rubrik">Karta</div>
+    <h2>Solsystemet i dag</h2>
+    <p>Under resan står världarna på rad, men i verkligheten ligger de utspridda runt solen. Här är deras ungefärliga lägen i dag. Dra för att vrida vyn, snabba på tiden och klicka på en värld för att resa dit.</p>
+  </div>
+  <button class="hudknapp karta-stang" id="kartaStang">Tillbaka till resan</button>
+  <div class="karta-kredit">Planettexturer: <a href="https://www.solarsystemscope.com/textures/" rel="noopener">Solar System Scope</a>, CC BY 4.0, baserade på data från NASA. Plutos karta: NASA/JHUAPL/SwRI (New Horizons); den södra delen som aldrig fotograferats är ifylld. Fakta: NASA Planetary Fact Sheet. Banorna är förenklade till cirklar, utom Plutos.</div>
+  <div class="karta-kontroller">
+    <button class="ikonknapp" id="kSpela" aria-label="Pausa">
+      <svg id="kIkonPaus" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+      <svg id="kIkonSpela" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <div class="kfart"><label for="kFart">Tidens fart</label><span id="kFartText"></span><input type="range" id="kFart" min="0" max="100" value="42"></div>
+    <div class="kdatum" id="kDatum"></div>
+    <button class="vaxel" id="kVerklig" aria-pressed="false">Verkliga avstånd</button>
+    <button class="vaxel" id="kIdag" aria-pressed="false">I dag</button>
+  </div>
+</div>
 
 <script type="module">
 import * as THREE from 'three';
@@ -1105,6 +972,7 @@ PLANETER.forEach((p) => Object.assign(p, FORDJUPNING[p.id], { bestar: BESTAR[p.i
 PLANETER.filter((p) => !p.sol && !p.mane && !p.dverg).forEach((p, k) => { p.nr = k + 1; });
 const N = PLANETER.length;
 
+
 /* =====================================================================
    FORMATERING
    ===================================================================== */
@@ -1142,6 +1010,7 @@ function faktaVarde(p, v) {
   if (v === 'LJUSMANE') return `${sig(p.avstandJorden / C_KM, 2)}${NB}s`;
   return nb(v);
 }
+
 
 /* =====================================================================
    RENDERARE
@@ -1587,160 +1456,7 @@ function byggVintergatan(radie, styrka) {
   return mesh;
 }
 
-/* =====================================================================
-   HJÄLTESCENEN
-   ===================================================================== */
-const hjalte = new THREE.Scene();
-const kamera = new THREE.PerspectiveCamera(32, 1, 0.1, 5000);
-const LJUS = new THREE.Vector3(-0.58, 0.5, 0.64).normalize();
-const himmel = byggVintergatan(1800, 0.3);
-hjalte.add(himmel);
-const stjarnor = byggStjarnor(MOBIL ? 2200 : 3800, 1500);
-hjalte.add(stjarnor);
 
-const AX_X0 = new THREE.Vector3(1, 0, 0);
-const qBas = new THREE.Quaternion();
-const START_SPIN = { pluto: 4.45, manen: 3.95, jorden: 4.3, mars: 2.4, jupiter: 0.5, merkurius: 0.6, saturnus: 0.2 };
-const planeter = PLANETER.map((p) => {
-  const o = byggPlanet(p, { startSpin: START_SPIN[p.id] || 0 });
-  o.anv = new THREE.Quaternion();
-  // Upprätt läge (grannar och helt klot): lätt lutad mot betraktaren, Saturnus mer så att ringarna öppnar sig.
-  // Närvyn: nordpolen fälls bakåt så att man svävar över ekvatortrakterna i stället för över polen.
-  o.qUpp = new THREE.Quaternion().setFromAxisAngle(AX_X0, p.ring ? 0.36 : 0.12);
-  o.qHero = new THREE.Quaternion().setFromAxisAngle(AX_X0, p.hero || -1);
-  o.vel = new THREE.Vector2();
-  hjalte.add(o.root);
-  return o;
-});
-
-const tillstand = {
-  idx: 3, cur: 3, tween: null,
-  g: 0, gMal: 0,
-  scrollP: 0,
-  drar: false, dragObj: null,
-};
-
-/* ---------- Layout i skärmplanet ---------- */
-const D = 22;
-const lay = { W: 1, H: 1, aspekt: 1, hero: null, granne: null, bort: null, glob: null, globSida: null, globBort: null };
-
-function slot(X, Y, rs) { return { X, Y, rs }; }
-function beraknaLayout() {
-  const w = window.innerWidth, h = window.innerHeight;
-  lay.aspekt = w / h;
-  lay.H = D * Math.tan(THREE.MathUtils.degToRad(kamera.fov / 2));
-  lay.W = lay.H * lay.aspekt;
-  const { W, H } = lay;
-  const smal = lay.aspekt < 0.9;
-
-  // Planetens topp ska ligga där knappen sitter, precis som att knappen vilar på horisonten.
-  const pill = document.getElementById('utforska').getBoundingClientRect();
-  let toppPx = pill.top + pill.height * 0.58;
-  if (!pill.height) toppPx = h * 0.58;
-  toppPx = Math.min(Math.max(toppPx, h * 0.42), h * 0.78);
-  const Ytop = H * (1 - 2 * toppPx / h);
-  const rs0 = smal ? W * 1.38 : Math.max(W * 1.0, H * 1.5);
-  const alfa = Math.atan(rs0 / D);
-  const thc = Math.atan(Ytop / D) - alfa;
-  lay.hero = slot(0, D * Math.tan(thc), rs0);
-
-  const rsN = Math.min(W, H) * (smal ? 0.2 : 0.12);
-  lay.granne = slot(W - rsN * 0.28, Ytop + H * 0.02, rsN);
-  lay.bort = slot(W + rsN * 4, Ytop + H * 0.02, rsN * 0.8);
-
-  if (!smal && lay.aspekt > 1.05) {
-    const rsG = Math.min(H * 0.62, W * 0.36);
-    const panelB = Math.min(520, w * 0.46);
-    const fri = (w - panelB) / w;
-    lay.glob = slot(W * (fri - 1), 0, rsG);
-    lay.globSida = slot(W * 2.2, 0, rsG);
-    lay.globBort = slot(W * 3.4, 0, rsG);
-  } else {
-    const rsG = Math.min(W * 0.72, H * 0.27);
-    lay.glob = slot(0, H * 0.5, rsG);
-    lay.globSida = slot(W * 2.4, H * 0.52, rsG);
-    lay.globBort = slot(W * 3.8, H * 0.52, rsG);
-  }
-  placeraGrannEtiketter();
-}
-
-function lerpSlot(A, B, t) {
-  return { X: A.X + (B.X - A.X) * t, Y: A.Y + (B.Y - A.Y) * t, rs: Math.exp(Math.log(A.rs) + (Math.log(B.rs) - Math.log(A.rs)) * t) };
-}
-function slotFor(s, mitt, sida, bort, skalaSida) {
-  const a = Math.abs(s), sg = s < 0 ? -1 : 1;
-  const S = { X: sg * sida.X, Y: sida.Y, rs: sida.rs * skalaSida };
-  const B = { X: sg * bort.X, Y: bort.Y, rs: bort.rs * skalaSida };
-  if (a <= 1) return lerpSlot(mitt, S, a);
-  if (a <= 2) return lerpSlot(S, B, a - 1);
-  return B;
-}
-function tillVarld(sl) {
-  const s = Math.sin(Math.atan(sl.rs / D));
-  const R = D * s / (1 - s);
-  const Dc = D + R;
-  const dir = new THREE.Vector3(sl.X / D, sl.Y / D, -1).normalize();
-  return { pos: dir.multiplyScalar(Dc), R };
-}
-
-function layoutPlanet(i) {
-  const o = planeter[i], p = o.p;
-  const s = i - tillstand.cur;
-  const ring = p.ring ? 0.52 : 1, solSkala = p.sol ? 0.85 : 1;
-  const heroMitt = lay.hero;
-  const hero = slotFor(s, heroMitt, lay.granne, lay.bort, ring * solSkala);
-  const globMitt = { ...lay.glob, rs: lay.glob.rs * ring * (p.sol ? 0.72 : 1) };
-  const glob = slotFor(s, globMitt, lay.globSida, lay.globBort, ring);
-  const g = tillstand.g;
-  let sl = lerpSlot(hero, glob, g);
-  // skrollparallax: planeten sjunker när man skrollar vidare
-  sl.Y -= tillstand.scrollP * lay.H * 1.1 * (1 - g);
-  const { pos, R } = tillVarld(sl);
-  o.root.position.copy(pos);
-  o.root.scale.setScalar(R);
-  o.root.visible = Math.abs(s) < 2.3;
-  return Math.abs(s);
-}
-
-/* ---------- Grannarnas etiketter ---------- */
-const grannV = document.getElementById('grannV'), grannH = document.getElementById('grannH');
-function placeraGrannEtiketter() {
-  const w = window.innerWidth, h = window.innerHeight;
-  const n = lay.granne;
-  const kantX = ((n.X - n.rs) / lay.W + 1) / 2 * w;
-  const y = (1 - n.Y / lay.H) / 2 * h;
-  const avst = Math.max(18, w - kantX + 16);
-  grannV.style.left = avst + 'px'; grannV.style.top = y + 'px';
-  grannH.style.right = avst + 'px'; grannH.style.top = y + 'px';
-}
-
-/* =====================================================================
-   BANORNA (SOLSYSTEMET OVANIFRÅN)
-   ===================================================================== */
-const bana = {
-  scen: new THREE.Scene(), kam: new THREE.PerspectiveCamera(38, 1, 0.1, 6000),
-  dagar: (Date.now() - J2000) / 86400000, fart: 7, spelar: !REDUCERA,
-  m: 0, mMal: 0, az: 1.25, el: 0.52, vaz: 0, vel: 0, dist: 60, drar: false, hover: -1,
-  obj: [], linjer: [], etiketter: [],
-};
-bana.scen.add(byggVintergatan(3000, 0.22));
-const banStjarnor = byggStjarnor(MOBIL ? 1800 : 3000, 2600);
-bana.scen.add(banStjarnor);
-PLANETER.forEach((p, i) => {
-  const o = byggPlanet(p, { seg: [64, 48], glod: 5.2 });
-  bana.scen.add(o.root);
-  bana.obj.push(o);
-  if (!p.sol && !p.mane) {
-    const pts = [];
-    // Plutos elliptiska, lutande bana ritas punkt för punkt (uppdateras när skalan ändras)
-    const n = p.bana ? 512 : 256;
-    for (let k = 0; k <= n; k++) { const v = k / n * Math.PI * 2; pts.push(new THREE.Vector3(Math.cos(v), 0, -Math.sin(v))); }
-    const lin = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
-      new THREE.LineBasicMaterial({ color: new THREE.Color(p.acc), transparent: true, opacity: 0.16, depthWrite: false }));
-    bana.scen.add(lin);
-    bana.linjer[i] = lin;
-  }
-});
 // Läge i en elliptisk bana (Keplers ekvation), i ekliptikans koordinater, med avstånden omskalade som övriga banor.
 function ellipsLage(p, E, m, ut) {
   const b = p.bana, rad = THREE.MathUtils.degToRad;
@@ -1767,80 +1483,7 @@ function banStorlek(p, m) {
   return s * (1 - 0.55 * m);
 }
 
-/* =====================================================================
-   DOM: HJÄLTETEXT, PANEL, KORT, SKALA
-   ===================================================================== */
-const $ = (id) => document.getElementById(id);
-const titel = $('titel'), kicker = $('kicker'), ingress = $('ingress'), utforska = $('utforska');
-const panel = $('panel'), panelInre = $('panelInre');
 
-function satFarg(p) {
-  document.documentElement.style.setProperty('--acc', p.acc);
-}
-function titelHTML(namn) {
-  return [...namn].map((c, i) => `<span class="b" style="animation-delay:${i * 42}ms">${c}</span>`).join('');
-}
-let textTimer = null;
-function visaText(p, direkt) {
-  clearTimeout(textTimer);
-  const byt = () => {
-    kicker.textContent = p.kicker;
-    titel.innerHTML = titelHTML(p.namn);
-    titel.classList.remove('ut');
-    ingress.textContent = p.ingress;
-    ingress.classList.remove('ut');
-    utforska.textContent = 'Utforska ' + p.namn;
-    satFarg(p);
-  };
-  if (direkt) { byt(); return; }
-  titel.classList.add('ut');
-  ingress.classList.add('ut');
-  textTimer = setTimeout(byt, 420);
-}
-function uppdateraGrannar() {
-  const i = tillstand.idx;
-  const v = PLANETER[i - 1], h = PLANETER[i + 1];
-  [grannV, grannH].forEach((el) => el.classList.add('dold'));
-  setTimeout(() => {
-    if (v) { grannV.textContent = v.namn; grannV.classList.remove('dold'); grannV.setAttribute('aria-label', 'Till ' + v.namn); }
-    if (h) { grannH.textContent = h.namn; grannH.classList.remove('dold'); grannH.setAttribute('aria-label', 'Till ' + h.namn); }
-  }, 900);
-  $('mobV').disabled = !v; $('mobH').disabled = !h;
-  const pi = PLANETER[i];
-  $('nr').innerHTML = pi.sol ? '<b>Solen</b>' : pi.mane ? '<b>Jordens måne</b>' : pi.dverg ? '<b>Dvärgplanet</b>' : `<b>${String(pi.nr).padStart(2, '0')}</b> / 08`;
-  document.querySelectorAll('.tick').forEach((t, k) => t.classList.toggle('aktiv', k === i));
-}
-
-// Ticks
-const ticks = $('ticks');
-PLANETER.forEach((p, i) => {
-  const b = document.createElement('button');
-  b.className = 'tick'; b.setAttribute('aria-label', p.namn);
-  b.innerHTML = `<span>${p.namn}</span>`;
-  b.addEventListener('click', () => gaTill(i));
-  ticks.appendChild(b);
-});
-
-/* ---------- Byta planet ---------- */
-const easeInOut = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-function gaTill(i, direkt) {
-  i = Math.max(0, Math.min(N - 1, i));
-  if (i === tillstand.idx && !direkt) return;
-  tillstand.idx = i;
-  for (let k = i - 2; k <= i + 2; k++) if (planeter[k]) planeter[k].ladda();
-  if (direkt) { tillstand.cur = i; tillstand.tween = null; }
-  else {
-    const avst = Math.abs(i - tillstand.cur);
-    tillstand.tween = { fran: tillstand.cur, till: i, t0: performance.now(), dur: REDUCERA ? 300 : Math.min(2600, 1400 + (avst - 1) * 380) };
-  }
-  visaText(PLANETER[i], direkt);
-  uppdateraGrannar();
-  if (panel.classList.contains('oppen')) fyllPanel(PLANETER[i], true);
-  history.replaceState(null, '', '#' + PLANETER[i].id);
-}
-
-/* ---------- Panelen ---------- */
-let panelMassa = 60, panelAlder = 17;
 function procent(v) {
   const d = Number.isInteger(v) ? 0 : Number.isInteger(Math.round(v * 1000) / 100) ? 1 : 2;
   return `${fmt(v, d)}${NB}%`;
@@ -1876,45 +1519,621 @@ function bestarHTML(p) {
     ${b.atmoNot ? `<p class="not atmo-not">${b.atmoNot}</p>` : ''}
     ${staplar}`;
 }
-function fyllPanel(p, anim) {
-  const gor = () => {
-    const i = PLANETER.indexOf(p);
-    const v = PLANETER[i - 1], h = PLANETER[i + 1];
-    const fakta = p.fakta.map(([k, val]) => `<div><dt>${k}</dt><dd>${faktaVarde(p, val)}</dd></div>`).join('');
-    const lager = (p.lager || []).map((l) => {
-      const pa = planeter[i].lagerMal[l.id] > 0.5;
-      return `<button class="vaxel" data-lager="${l.id}" aria-pressed="${pa}">${l.text}</button>`;
-    }).join('');
+
+/* =====================================================================
+   RESANS VÄRLD
+   Solen ligger i origo och resan går utåt längs negativa z-axeln.
+   Avstånd och storlekar är komprimerade; ljusklockan visar de verkliga.
+   ===================================================================== */
+const V3 = THREE.Vector3, Q4 = THREE.Quaternion;
+const UPP = new V3(0, 1, 0);
+const rad = THREE.MathUtils.degToRad;
+const klamp = THREE.MathUtils.clamp;
+const mjuk = (a, b, x) => { const t = klamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+const easeInOut = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const $ = (id) => document.getElementById(id);
+
+const LAYOUT = {
+  solen: { Z: 0, X: 0, Y: 0, R: 26 },
+  merkurius: { Z: 110, X: 16, Y: 2, R: 1.9 },
+  venus: { Z: 190, X: -17, Y: -2, R: 3.1 },
+  jorden: { Z: 275, X: 16, Y: 1, R: 3.3 },
+  manen: { Z: 296, X: 28, Y: 5, R: 1.15 },
+  mars: { Z: 380, X: -14, Y: -1, R: 2.3 },
+  jupiter: { Z: 540, X: 36, Y: 3, R: 11.5 },
+  saturnus: { Z: 720, X: -36, Y: -3, R: 10 },
+  uranus: { Z: 870, X: 26, Y: 2, R: 6.3 },
+  neptunus: { Z: 1000, X: -24, Y: -2, R: 6.1 },
+  pluto: { Z: 1110, X: 11, Y: 3, R: 1.25 },
+};
+// Verkliga avstånd från solen i AE (månen: jordens avstånd plus avståndet jorden–månen)
+const AE_AVST = { solen: 0, merkurius: 0.387, venus: 0.723, jorden: 1, manen: 1.00257, mars: 1.524, jupiter: 5.203, saturnus: 9.537, uranus: 19.19, neptunus: 30.07, pluto: 39.48, slut: 170 };
+const SKOTT_STD = { alt: 0.3, upp: 36, dip: 0.97, bank: 19 };
+const SKOTT = {
+  solen: { alt: 0.16, dip: 0.9, bank: 0 },
+  jorden: { upp: 46 },
+  manen: { alt: 0.36 },
+  jupiter: { alt: 0.26, upp: 12 },
+  saturnus: { alt: 0.46, upp: 50, dip: 0.85 },
+  pluto: { alt: 0.38 },
+};
+const START_SPIN = { solen: 0, merkurius: 1.2, venus: 0, jorden: 4.9, manen: 4.2, mars: 3.2, jupiter: 1.0, saturnus: 0.4, uranus: 0, neptunus: 0, pluto: 4.3 };
+const STOPP = [...PLANETER.map((p) => p.id), 'slut'];
+const NS = STOPP.length;
+const SLUT_W = new V3(-620, 190, -1380);
+
+const scen = new THREE.Scene();
+const kamera = new THREE.PerspectiveCamera(48, 1, 0.05, 20000);
+kamera.position.set(0, 40, 30);
+const himmel = byggVintergatan(9000, 0.3);
+scen.add(himmel);
+
+/* ---------- Stjärnor som sträcks ut i fart ---------- */
+const STRIM_VS = /* glsl */`
+attribute float aEnd; attribute vec3 aColor;
+uniform vec3 uCam, uVel; uniform float uBox;
+varying vec3 vC; varying float vA;
+void main(){
+  vec3 h = vec3(uBox * 0.5);
+  vec3 p = mod(position - uCam + h, vec3(uBox)) - h + uCam;
+  p -= uVel * aEnd;
+  float d = length(p - uCam);
+  vA = (1.0 - aEnd) * (1.0 - smoothstep(uBox * 0.3, uBox * 0.5, d)) * smoothstep(2.0, 10.0, d);
+  vC = aColor;
+  gl_Position = projectionMatrix * viewMatrix * vec4(p, 1.0);
+}`;
+const STRIM_FS = /* glsl */`
+uniform float uStyrka; varying vec3 vC; varying float vA;
+void main(){ gl_FragColor = vec4(vC * vA * uStyrka * 1.8, 1.0); }`;
+const PUNKT_VS = /* glsl */`
+attribute float aSize; attribute vec3 aColor;
+uniform vec3 uCam; uniform float uBox, uPR, uTime;
+varying vec3 vC; varying float vA;
+void main(){
+  vec3 h = vec3(uBox * 0.5);
+  vec3 p = mod(position - uCam + h, vec3(uBox)) - h + uCam;
+  float d = length(p - uCam);
+  vA = (1.0 - smoothstep(uBox * 0.3, uBox * 0.5, d)) * smoothstep(2.0, 8.0, d) * (0.75 + 0.25 * sin(uTime * 1.3 + position.x));
+  vC = aColor;
+  vec4 mv = viewMatrix * vec4(p, 1.0);
+  gl_Position = projectionMatrix * mv;
+  gl_PointSize = aSize * uPR * clamp(60.0 / d, 0.7, 2.6);
+}`;
+const PUNKT_FS = /* glsl */`
+varying vec3 vC; varying float vA;
+void main(){ float d = length(gl_PointCoord - 0.5); float a = smoothstep(0.5, 0.0, d); gl_FragColor = vec4(vC * vA * a * a, 1.0); }`;
+function byggStrimmor(antal, box) {
+  const pos = new Float32Array(antal * 6), end = new Float32Array(antal * 2), fl = new Float32Array(antal * 6);
+  const ppos = new Float32Array(antal * 3), pstor = new Float32Array(antal), pfarg = new Float32Array(antal * 3);
+  const c = new THREE.Color();
+  for (let i = 0; i < antal; i++) {
+    const x = (Math.random() - 0.5) * box, y = (Math.random() - 0.5) * box, z = (Math.random() - 0.5) * box;
+    const t = Math.random();
+    c.setHSL(t < 0.2 ? 0.09 : 0.6, t < 0.2 ? 0.55 : 0.4, 0.7 + Math.random() * 0.25);
+    const l = 0.4 + Math.random() * 0.6;
+    for (let k = 0; k < 2; k++) {
+      pos.set([x, y, z], (i * 2 + k) * 3);
+      end[i * 2 + k] = k;
+      fl.set([c.r * l, c.g * l, c.b * l], (i * 2 + k) * 3);
+    }
+    ppos.set([x, y, z], i * 3);
+    pstor[i] = Math.random() < 0.95 ? 1 + Math.random() * 1.4 : 2.6 + Math.random() * 1.6;
+    pfarg.set([c.r * l, c.g * l, c.b * l], i * 3);
+  }
+  const gl = new THREE.BufferGeometry();
+  gl.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  gl.setAttribute('aEnd', new THREE.BufferAttribute(end, 1));
+  gl.setAttribute('aColor', new THREE.BufferAttribute(fl, 3));
+  const uni = { uCam: { value: new V3() }, uVel: { value: new V3() }, uBox: { value: box }, uStyrka: { value: 0 } };
+  const linjer = new THREE.LineSegments(gl, new THREE.ShaderMaterial({ uniforms: uni, vertexShader: STRIM_VS, fragmentShader: STRIM_FS, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+  linjer.frustumCulled = false;
+  const gp = new THREE.BufferGeometry();
+  gp.setAttribute('position', new THREE.BufferAttribute(ppos, 3));
+  gp.setAttribute('aSize', new THREE.BufferAttribute(pstor, 1));
+  gp.setAttribute('aColor', new THREE.BufferAttribute(pfarg, 3));
+  const puni = { uCam: uni.uCam, uBox: uni.uBox, uPR: { value: PR }, uTime: { value: 0 } };
+  const punkter = new THREE.Points(gp, new THREE.ShaderMaterial({ uniforms: puni, vertexShader: PUNKT_VS, fragmentShader: PUNKT_FS, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+  punkter.frustumCulled = false;
+  return { linjer, punkter, uni, puni };
+}
+const strimmor = byggStrimmor(MOBIL ? 1500 : 2800, 700);
+scen.add(strimmor.linjer, strimmor.punkter);
+
+const kroppar = PLANETER.map((p) => {
+  const L = LAYOUT[p.id];
+  const o = byggPlanet(p, { glod: p.sol ? 3.2 : 4.6, startSpin: START_SPIN[p.id] || 0 });
+  o.root.position.set(L.X, L.Y, -L.Z);
+  o.root.scale.setScalar(L.R);
+  scen.add(o.root);
+  return o;
+});
+
+/* ---------- Kamerans vyer ---------- */
+const _A = new V3(), _B = new V3(), _D = new V3(), _U = new V3(), _L = new V3(), _Ad = new V3(), _Bd = new V3();
+const _x = new V3(), _y = new V3(), _z = new V3(), _m = new THREE.Matrix4();
+const _f = new V3(), _p1 = new V3(), _p2 = new V3(), _qt = new Q4();
+function quatFran(D, U, ut) {
+  _z.copy(D).negate();
+  _x.crossVectors(U, _z);
+  if (_x.lengthSq() < 1e-8) _x.set(1, 0, 0);
+  _x.normalize();
+  _y.crossVectors(_z, _x);
+  _m.makeBasis(_x, _y, _z);
+  return ut.setFromRotationMatrix(_m);
+}
+const nyPose = () => ({ pos: new V3(), quat: new Q4(), W: new V3(), R: 1 });
+// Flygvyn vid stopp i: kameran ligger i låg bana, tittar framåt längs horisonten, med solen från sidan
+function pose(i, tid, ut) {
+  if (i >= PLANETER.length) {
+    // långt ut åt sidan: planeterna syns halvbelysta i en diagonal rad, solen som en stark stjärna
+    ut.pos.set(-620, 230, -1380);
+    _D.set(257, -20, -734).sub(ut.pos).normalize();
+    quatFran(_D, UPP, ut.quat);
+    ut.W.copy(SLUT_W); ut.R = 30;
+    return ut;
+  }
+  const p = PLANETER[i], o = kroppar[i], W = o.root.position, R = o.root.scale.x;
+  const sk = Object.assign({}, SKOTT_STD, SKOTT[p.id]);
+  let sida = 1;
+  if (p.sol) { _A.set(0, 1, 0.5).normalize(); _B.set(0, 0, -1); }
+  else {
+    _L.copy(W).negate().normalize();
+    const u = rad(sk.upp);
+    _A.copy(_L).multiplyScalar(Math.cos(u)).addScaledVector(UPP, Math.sin(u)).normalize();
+    sida = sk.sida || (W.x > 0 ? -1 : 1);
+    _B.crossVectors(UPP, _L).multiplyScalar(sida);
+  }
+  _B.addScaledVector(_A, -_B.dot(_A)).normalize();
+  const drift = REDUCERA ? 0 : Math.sin(tid * 0.05 + i * 1.7) * 0.05;
+  const cd = Math.cos(drift), sd = Math.sin(drift);
+  _Ad.copy(_A).multiplyScalar(cd).addScaledVector(_B, sd);
+  _Bd.copy(_B).multiplyScalar(cd).addScaledVector(_A, -sd);
+  ut.pos.copy(W).addScaledVector(_Ad, R * (1 + sk.alt));
+  const dipFak = kamera.aspect < 0.9 ? sk.dip * 0.5 : sk.dip;
+  const dip = Math.acos(1 / (1 + sk.alt)) * dipFak;
+  _D.copy(_Bd).multiplyScalar(Math.cos(dip)).addScaledVector(_Ad, -Math.sin(dip)).normalize();
+  _U.copy(_Ad).multiplyScalar(Math.cos(dip)).addScaledVector(_Bd, Math.sin(dip)).normalize();
+  // rollen har samma riktning på skärmen oavsett blickriktning: horisonten stiger åt höger, himlen blir fri bakom texten
+  _U.applyAxisAngle(_D, rad(sk.bank));
+  quatFran(_D, _U, ut.quat);
+  ut.W.copy(W); ut.R = R;
+  return ut;
+}
+function bezier(a, b, c, d, t, ut) {
+  const u = 1 - t;
+  return ut.copy(a).multiplyScalar(u * u * u).addScaledVector(b, 3 * u * u * t).addScaledVector(c, 3 * u * t * t).addScaledVector(d, t * t * t);
+}
+const poseA = nyPose(), poseB = nyPose(), malPose = nyPose(), omlPose = nyPose();
+const resaInfo = { i: 0, t: 0, e: 0 };
+function resPose(s, tid) {
+  const i = Math.min(Math.floor(s), NS - 1), u = s - i;
+  pose(i, tid, poseA);
+  resaInfo.i = i; resaInfo.t = 0; resaInfo.e = 0;
+  const t = i >= NS - 1 ? 0 : mjuk(0.16, 0.92, u);
+  if (t <= 0) { malPose.pos.copy(poseA.pos); malPose.quat.copy(poseA.quat); return resaInfo; }
+  pose(i + 1, tid, poseB);
+  const e = easeInOut(t);
+  _f.copy(poseB.pos).sub(poseA.pos);
+  const gap = _f.length();
+  _f.divideScalar(gap);
+  _p1.copy(poseA.pos).sub(poseA.W).normalize().multiplyScalar(poseA.R * 1.6).add(poseA.pos).addScaledVector(_f, gap * 0.28);
+  _p2.copy(poseB.pos).sub(poseB.W).normalize().multiplyScalar(poseB.R * 1.6).add(poseB.pos).addScaledVector(_f, -gap * 0.28);
+  bezier(poseA.pos, _p1, _p2, poseB.pos, e, malPose.pos);
+  _D.copy(poseB.W).sub(malPose.pos).normalize();
+  quatFran(_D, UPP, _qt);
+  malPose.quat.copy(poseA.quat).slerp(_qt, mjuk(0, 0.35, t)).slerp(poseB.quat, mjuk(0.62, 1, t));
+  resaInfo.t = t; resaInfo.e = e;
+  return resaInfo;
+}
+
+/* ---------- Omloppsläget ---------- */
+const omlopp = { aktiv: false, k: 0, az: 0, el: 0, dist: 10, distMal: 10, g: 0, vaz: 0, vel: 0 };
+function omloppPose(tid, dt) {
+  const o = kroppar[omlopp.k], W = o.root.position;
+  if (!drag || !drag.drog) { omlopp.az += omlopp.vaz * dt + (REDUCERA ? 0 : 0.035 * dt); omlopp.el += omlopp.vel * dt; omlopp.vaz *= Math.exp(-dt * 2.4); omlopp.vel *= Math.exp(-dt * 2.4); }
+  omlopp.el = klamp(omlopp.el, -1.35, 1.35);
+  omlopp.dist += (omlopp.distMal - omlopp.dist) * (1 - Math.exp(-dt * 4));
+  const d = omlopp.dist;
+  omlPose.pos.set(W.x + d * Math.cos(omlopp.el) * Math.sin(omlopp.az), W.y + d * Math.sin(omlopp.el), W.z + d * Math.cos(omlopp.el) * Math.cos(omlopp.az));
+  _D.copy(W).sub(omlPose.pos).normalize();
+  quatFran(_D, UPP, omlPose.quat);
+  return omlPose;
+}
+
+/* =====================================================================
+   FÄLTANTECKNINGAR
+   lat/lon i grader (östlig longitud). framfor: longituden som vetter mot kameran, plus en förskjutning.
+   ring: punkt i Saturnus ringplan, i planetradier.
+   ===================================================================== */
+const LON0 = { pluto: 0 };
+const NOTER = {
+  solen: [
+    { skarm: [0.62, 0.84], text: 'Fotosfären', sub: 'ytan vi ser, cirka 5 500 °C' },
+  ],
+  merkurius: [
+    { skarm: [0.62, 0.8], text: 'Kratrar överallt', sub: 'ingen luft som bromsar meteoriterna' },
+  ],
+  venus: [
+    { skarm: [0.62, 0.78], text: 'Svavelsyramoln', sub: 'färdas runt planeten på fyra dygn', villkor: (o) => o.lagerMal.yta < 0.5 },
+    { lat: 65.2, lon: 3.3, text: 'Maxwell Montes', sub: 'Venus högsta berg, cirka 11 km', villkor: (o) => o.lagerMal.yta > 0.5, prim: true },
+    { lat: -5.8, lon: 104.8, text: 'Aphrodite Terra', sub: 'högland ungefär lika stort som Sydamerika', villkor: (o) => o.lagerMal.yta > 0.5 },
+  ],
+  jorden: [
+    { lat: 62, lon: 15, text: 'Du är här', sub: 'ungefär', prim: true },
+    { lat: 23, lon: 12, text: 'Sahara', sub: 'största heta öknen' },
+    { lat: 28.6, lon: 86.9, text: 'Himalaya', sub: 'Mount Everest, 8 849 m' },
+    { lat: -3.5, lon: -62, text: 'Amazonas', sub: 'största regnskogen' },
+    { lat: 0, lon: -160, text: 'Stilla havet', sub: 'täcker en tredjedel av jordytan' },
+  ],
+  manen: [
+    { lat: 0.67, lon: 23.47, text: 'Apollo 11', sub: 'första människorna, 20 juli 1969', prim: true },
+    { lat: 32.8, lon: -15.6, text: 'Mare Imbrium', sub: 'stelnad lava' },
+    { lat: -43.3, lon: -11.2, text: 'Tycho', sub: 'krater, 85 km bred' },
+    { lat: 18.4, lon: -57.4, text: 'Oceanus Procellarum', sub: 'det största av månens hav' },
+  ],
+  mars: [
+    { lat: 18.65, lon: -133.8, text: 'Olympus Mons', sub: 'högsta vulkanen, cirka 22 km', prim: true },
+    { lat: -13.9, lon: -59.2, text: 'Valles Marineris', sub: 'kanjon, cirka 4 000 km lång' },
+    { lat: -42.4, lon: 70.5, text: 'Hellas Planitia', sub: 'nedslagsbassäng, cirka 7 km djup' },
+    { lat: 18.4, lon: 77.5, text: 'Jezerokratern', sub: 'här kör rovern Perseverance' },
+  ],
+  jupiter: [
+    { lat: -22, lon: 0, text: 'Stora röda fläcken', sub: 'en storm större än jorden', grs: true, prim: true },
+    { skarm: [0.64, 0.86], text: 'Molnband', sub: 'vindar över 500 km/h' },
+  ],
+  saturnus: [
+    { ring: 1.96, mal: [0.6, 0.22], text: 'Cassinidelningen', sub: 'ett 4 800 km brett glapp i ringarna' },
+    { skarm: [0.64, 0.88], text: 'Moln av ammoniak', sub: 'densiteten är lägre än vattnets' },
+  ],
+  uranus: [
+    { lat: 88, lon: 0, text: 'Nordpolen', sub: 'axeln lutar 98 grader' },
+  ],
+  neptunus: [
+    { skarm: [0.62, 0.8], text: 'Snabbaste vindarna', sub: 'över 2 000 km/h' },
+  ],
+  pluto: [
+    { lat: 20, lon: 175, text: 'Sputnik Planitia', sub: 'slätt av kväveis, över 1 000 km', prim: true },
+    { lat: -21.9, lon: 173.1, text: 'Wright Mons', sub: 'kanske en isvulkan' },
+    { lat: -5, lon: 105, text: 'Cthulhu', sub: 'mörk region av toliner' },
+  ],
+};
+const noterSvg = $('noter');
+const SVGNS = 'http://www.w3.org/2000/svg';
+const notEl = new Map();
+let noterPa = true;
+const _np = new V3(), _nn = new V3(), _nc = new V3(), _nv = new V3();
+function skapaNot(nyckel, n) {
+  const g = document.createElementNS(SVGNS, 'g');
+  g.setAttribute('class', 'fn');
+  g.innerHTML = `<circle r="6"/><circle class="karna" r="1.8"/><polyline pathLength="1" points="0,0 0,0"/><text class="hand"></text><text class="sub"></text>`;
+  g.querySelector('.hand').textContent = n.text;
+  g.querySelector('.sub').textContent = nb(n.sub);
+  noterSvg.appendChild(g);
+  const post = { g, riktning: 0, syns: false };
+  notEl.set(nyckel, post);
+  return post;
+}
+function lonTillLokal(p, lat, lon, ut) {
+  const l0 = LON0[p.id] ?? -180;
+  const u = ((((lon - l0) / 360) % 1) + 1) % 1;
+  const phi = u * 2 * Math.PI, th = rad(90 - lat);
+  return ut.set(-Math.cos(phi) * Math.sin(th), Math.cos(th), Math.sin(phi) * Math.sin(th));
+}
+function skarmTraff(o, fx, fy, ut) {
+  _mus.set(fx * 2 - 1, -(fy * 2 - 1));
+  _ray.setFromCamera(_mus, kamera);
+  const ray = _ray.ray, R = o.root.scale.x;
+  _rv.copy(o.root.position).sub(ray.origin);
+  const tca = _rv.dot(ray.direction), d2 = _rv.lengthSq() - tca * tca;
+  if (tca < 0 || d2 > R * R) return null;
+  return ut.copy(ray.direction).multiplyScalar(tca - Math.sqrt(R * R - d2)).add(ray.origin);
+}
+const _rp = new V3();
+function notPunkt(p, o, n, ut) {
+  if (n.skarm) return skarmTraff(o, n.skarm[0], n.skarm[1], ut);
+  if (n.ring) {
+    // punkten på ringen som hamnar närmast önskad plats i bilden och inte skyms av planeten
+    const W = o.root.position, R = o.root.scale.x;
+    let bast = null, bd = 1e9;
+    for (let a = 0; a < 360; a += 4) {
+      _rp.set(n.ring * Math.cos(rad(a)), 0, n.ring * Math.sin(rad(a)));
+      o.tilt.localToWorld(_rp);
+      _nc.copy(_rp).sub(kamera.position);
+      const L = _nc.length(); _nc.divideScalar(L);
+      _nv.copy(W).sub(kamera.position);
+      const tca = _nv.dot(_nc);
+      if (tca > 0 && tca < L && _nv.lengthSq() - tca * tca < R * R) continue;
+      _nv.copy(_rp).project(kamera);
+      if (_nv.z > 1 || Math.abs(_nv.x) > 1 || Math.abs(_nv.y) > 1) continue;
+      const d = Math.hypot((_nv.x + 1) / 2 - n.mal[0], (1 - _nv.y) / 2 - n.mal[1]);
+      if (d < bd) { bd = d; bast = a; }
+    }
+    if (bast === null) return null;
+    ut.set(n.ring * Math.cos(rad(bast)), 0, n.ring * Math.sin(rad(bast)));
+    return o.tilt.localToWorld(ut);
+  }
+  let lon = n.lon;
+  if (n.grs) lon = GRS_LON;
+  if (n.framfor != null) {
+    _nv.copy(kamera.position); o.mesh.worldToLocal(_nv);
+    const phi = Math.atan2(_nv.z, -_nv.x);
+    lon = (phi / (2 * Math.PI)) * 360 + (LON0[p.id] ?? -180) + n.framfor;
+  }
+  lonTillLokal(p, n.lat, lon, ut);
+  return o.mesh.localToWorld(ut);
+}
+// Stora röda fläckens longitud i Jupiterkartan (uppmätt i texturen)
+const GRS_LON = -47.5;
+let hindret = null;
+// Vid ankomst vrids världen så att dess kändaste plats glider in i bild (positionen är den verkliga)
+let presenterat = -1;
+const _ps = new V3();
+function presentera(k) {
+  const p = PLANETER[k], o = kroppar[k];
+  if (!p || !o.laddad) return false;
+  const noter = (NOTER[p.id] || []).filter((n) => n.lat != null && !n.skarm && !n.ring && !(n.villkor && !n.villkor(o)));
+  if (!noter.length) return true;
+  noter.sort((a, b) => (b.prim ? 1 : 0) - (a.prim ? 1 : 0));
+  // sök en punkt i bildens högra del vars latitud stämmer med platsen, och som vetter mot kameran
+  const W = o.root.position;
+  for (const n of noter) {
+    let bast = null, bd = 1e9;
+    for (const fx of [0.7, 0.78, 0.64]) {
+      for (let fy = 0.42; fy <= 0.95; fy += 0.02) {
+        if (!skarmTraff(o, fx, fy, _ps)) continue;
+        _nn.copy(_ps).sub(W).normalize();
+        _nc.copy(kamera.position).sub(_ps).normalize();
+        if (_nn.dot(_nc) < 0.08) continue;
+        o.tilt.worldToLocal(_ps);
+        const lat = Math.asin(_ps.y / _ps.length()) * 180 / Math.PI;
+        const d = Math.abs(lat - n.lat);
+        if (d < bd) { bd = d; bast = Math.atan2(_ps.z, -_ps.x); }
+      }
+    }
+    if (bast === null || bd > 7) continue;
+    const l0 = LON0[p.id] ?? -180;
+    const lon = n.grs ? GRS_LON : n.lon;
+    const phiN = ((((lon - l0) / 360) % 1) + 1) % 1 * 2 * Math.PI;
+    let mal = bast - phiN;
+    const nu = o.snurr.rotation.y;
+    while (mal - nu > Math.PI) mal -= 2 * Math.PI;
+    while (mal - nu < -Math.PI) mal += 2 * Math.PI;
+    o.malSpin = mal;
+    return true;
+  }
+  return true;
+}
+function uppdateraNoter(aktiv, synlighet) {
+  const w = window.innerWidth, h = window.innerHeight;
+  const kandidater = [];
+  if (noterPa && aktiv >= 0 && aktiv < PLANETER.length && synlighet > 0.5) {
+    const p = PLANETER[aktiv], o = kroppar[aktiv];
+    (NOTER[p.id] || []).forEach((n, j) => {
+      if (n.villkor && !n.villkor(o)) return;
+      if (!notPunkt(p, o, n, _np)) return;
+      const W = o.root.position, R = o.root.scale.x;
+      _nc.copy(kamera.position).sub(_np);
+      const avst = _nc.length();
+      _nc.divideScalar(avst);
+      if (!n.ring && !n.skarm) {
+        _nn.copy(_np).sub(W).normalize();
+        if (_nn.dot(_nc) < 0.005) return;
+      }
+      _nv.copy(_np).project(kamera);
+      if (_nv.z > 1) return;
+      const x = (_nv.x + 1) / 2 * w, y = (1 - _nv.y) / 2 * h;
+      if (x < 30 || x > w - 30 || y < 90 || y > h - 70) return;
+      kandidater.push({ nyckel: p.id + j, n, x, y });
+    });
+  }
+  // lägg ut etiketterna utan krockar, och aldrig över stopptexten
+  const placerade = [];
+  if (hindret) placerade.push(hindret);
+  const visas = new Set();
+  kandidater.forEach((k) => {
+    const bredd = Math.max(k.n.text.length * 11.5, k.n.sub.length * 6.7) + 12;
+    // etiketten pekar helst åt höger, bort från textblocket, och vänder bara vid högerkanten
+    const dir = k.x + 76 + bredd < w - 12 ? 1 : -1;
+    const x0 = dir > 0 ? k.x : k.x - 76 - bredd, x1 = dir > 0 ? k.x + 76 + bredd : k.x;
+    const ruta = { x0, x1, y0: k.y - 72, y1: k.y + 8 };
+    if (ruta.x0 < 8 || ruta.x1 > w - 8) return;
+    if (placerade.some((q) => ruta.x0 < q.x1 && ruta.x1 > q.x0 && ruta.y0 < q.y1 && ruta.y1 > q.y0)) return;
+    if (visas.size >= 3) return;
+    placerade.push(ruta);
+    visas.add(k.nyckel);
+    const post = notEl.get(k.nyckel) || skapaNot(k.nyckel, k.n);
+    if (post.riktning !== dir) {
+      post.riktning = dir;
+      post.g.querySelector('polyline').setAttribute('points', `${dir * 5},-5 ${dir * 32},-40 ${dir * 68},-40`);
+      const t1 = post.g.querySelector('.hand'), t2 = post.g.querySelector('.sub');
+      t1.setAttribute('x', dir * 76); t1.setAttribute('y', -34);
+      t2.setAttribute('x', dir * 77); t2.setAttribute('y', -16);
+      t1.setAttribute('text-anchor', dir > 0 ? 'start' : 'end');
+      t2.setAttribute('text-anchor', dir > 0 ? 'start' : 'end');
+    }
+    post.g.setAttribute('transform', `translate(${k.x.toFixed(1)},${k.y.toFixed(1)})`);
+    if (!post.syns) { post.syns = true; requestAnimationFrame(() => { if (post.syns) post.g.classList.add('syns'); }); }
+  });
+  notEl.forEach((post, nyckel) => {
+    if (!visas.has(nyckel) && post.syns) { post.syns = false; post.g.classList.remove('syns'); }
+  });
+}
+
+/* =====================================================================
+   INSTRUMENTPANELEN
+   ===================================================================== */
+const stopptext = $('stopptext');
+const klockaEl = document.querySelector('.klocka');
+const statusEl = $('status');
+const resaEl = $('resa');
+let stoppH = window.innerHeight * 1.5;
+STOPP.forEach((id, i) => {
+  const sek = document.createElement('section');
+  sek.className = 'stopp';
+  sek.setAttribute('aria-label', id === 'slut' ? 'Bortom Pluto' : PLANETER[i].namn);
+  resaEl.appendChild(sek);
+});
+function satSektionshojd() {
+  stoppH = Math.round(window.innerHeight * 1.5);
+  [...resaEl.children].forEach((s, i) => { s.style.height = (i === NS - 1 ? window.innerHeight : stoppH) + 'px'; });
+}
+satSektionshojd();
+function scrollS() { return klamp(window.scrollY / stoppH, 0, NS - 1); }
+function gaTillStopp(i, snabbt) {
+  window.scrollTo({ top: klamp(i, 0, NS - 1) * stoppH, behavior: snabbt || REDUCERA ? 'auto' : 'smooth' });
+}
+
+function ljusTid(ae) { return ae * AE_KM / C_KM; }
+function klockText(sek) {
+  const h = Math.floor(sek / 3600), m = Math.floor((sek % 3600) / 60), s = Math.floor(sek % 60);
+  const p = (x) => String(x).padStart(2, '0');
+  return `${p(h)}:${p(m)}:${p(s)}`;
+}
+
+// Rutten
+const ruttLista = $('ruttLista');
+STOPP.forEach((id, i) => {
+  const li = document.createElement('li');
+  li.style.top = (i / (NS - 1) * 100) + '%';
+  const namn = id === 'slut' ? 'Voyager 1' : PLANETER[i].namn;
+  const tid = id === 'slut' ? 'cirka 23 h 34 min' : (i === 0 ? 'start' : tidText(ljusTid(AE_AVST[id])));
+  li.innerHTML = `<button data-stopp="${i}"><span class="prick" style="color:${id === 'slut' ? '#9aa3b8' : PLANETER[i].acc}"></span><span>${namn}<span class="t">${nb(tid)}</span></span></button>`;
+  li.querySelector('button').addEventListener('click', () => gaTillStopp(i));
+  ruttLista.appendChild(li);
+});
+
+function dataRad(p) {
+  const hamta = (etiketter) => p.fakta.find(([k]) => etiketter.includes(k));
+  const val = [hamta(['Diameter']), hamta(['Tyngdfaktor']), hamta(['Ett dygn', 'Rotationstid']), hamta(['Temperatur', 'Medeltemperatur', 'Yttemperatur'])].filter(Boolean);
+  return `<dl class="s-data">${val.map(([k, v]) => `<div><dt>${k}</dt><dd>${faktaVarde(p, v)}</dd></div>`).join('')}</dl>`;
+}
+let visatStopp = -1;
+function fyllStopptext(i) {
+  visatStopp = i;
+  if (i === 0) {
+    stopptext.innerHTML = `
+      <div class="s-kicker">En resa i ljusets fart</div>
+      <h1 class="s-namn intro-namn">Ljusresan</h1>
+      <div class="s-stråle"></div>
+      <p class="s-ingress">Följ en ljusstråle från solens yta ut till Pluto och vidare. I verkligheten tar resan till Pluto fem och en halv timme. Här tar den så lång tid som du vill: skrolla för att resa, stanna vid varje värld och gå in i omloppsbana.</p>
+      <div class="s-knappar"><button class="knapp prim" data-till="1">Starta resan</button><button class="knapp sek" data-omlopp="0">Om solen</button></div>`;
+  } else if (i === NS - 1) {
+    stopptext.innerHTML = `
+      <div class="s-rad"><div class="s-nr">∞</div><div class="s-kicker">Stopp <b>12</b> av 12</div></div>
+      <h2 class="s-namn lang">Bortom Pluto</h2>
+      <div class="s-stråle"></div>
+      <p class="s-ingress">Ungefär här, 170 gånger så långt från solen som jorden, finns Voyager 1: det föremål som människor har skickat längst bort. Den sköts upp 1977, och ljuset behöver nästan ett helt dygn för att nå den. Härifrån är solen bara en ljusstark stjärna. Under resan stod världarna på rad och avstånden var hoptryckta, men ljusklockan visade de verkliga tiderna.</p>
+      <dl class="s-data">
+        <div><dt>Voyager 1</dt><dd>${nb('cirka 170 AE')}</dd></div>
+        <div><dt>Ljuset</dt><dd>${nb('nästan 24 h')}</dd></div>
+        <div><dt>Närmaste stjärnan</dt><dd>${nb('4,2 ljusår')}</dd></div>
+        <div><dt>Resan dit</dt><dd>${nb('drygt 4 år')}</dd></div>
+      </dl>
+      <div class="s-knappar"><button class="knapp prim" data-karta>Solsystemet i dag</button><button class="knapp sek" data-till="0">Tillbaka till solen</button></div>
+      `;
+  } else {
+    const p = PLANETER[i];
+    stopptext.innerHTML = `
+      <div class="s-rad"><div class="s-nr">${String(i + 1).padStart(2, '0')}</div><div class="s-kicker">${p.kicker}<br>Stopp <b>${i + 1}</b> av ${NS}</div></div>
+      <h2 class="s-namn${p.namn.length > 7 ? ' lang' : ''}">${p.namn}</h2>
+      <div class="s-stråle"></div>
+      <p class="s-ingress">${p.ingress}</p>
+      ${dataRad(p)}
+      <div class="s-knappar"><button class="knapp prim" data-omlopp="${i}">Gå in i omloppsbana <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(-20 12 12)"/></svg></button><button class="knapp sek" data-omlopp="${i}" data-flik="spektrum">Spektrum</button></div>`;
+  }
+  const acc = i < PLANETER.length ? PLANETER[i].acc : '#ffd27a';
+  document.documentElement.style.setProperty('--acc', acc);
+  stopptext.querySelectorAll('[data-till]').forEach((b) => b.addEventListener('click', () => gaTillStopp(+b.dataset.till)));
+  stopptext.querySelectorAll('[data-omlopp]').forEach((b) => b.addEventListener('click', () => oppnaDossier(+b.dataset.omlopp, b.dataset.flik)));
+  stopptext.querySelectorAll('[data-karta]').forEach((b) => b.addEventListener('click', oppnaKarta));
+  ruttLista.querySelectorAll('li').forEach((li, k) => { li.classList.toggle('aktiv', k === i); });
+}
+
+/* =====================================================================
+   DOSSIERN
+   ===================================================================== */
+const dossier = $('dossier'), dInnehall = $('dInnehall');
+const FLIKAR = [['oversikt', 'Översikt'], ['bestar', 'Består av'], ['spektrum', 'Spektrum'], ['du', 'Du där'], ['fordj', 'Fördjupning']];
+let dFlik = 'oversikt';
+let panelMassa = 60, panelAlder = 17;
+function oppnaDossier(i, flik) {
+  if (i < 0 || i >= PLANETER.length) return;
+  const p = PLANETER[i], o = kroppar[i];
+  omlopp.k = i;
+  omlopp.aktiv = true;
+  const W = o.root.position, R = o.root.scale.x;
+  _f.copy(kamera.position).sub(W);
+  const d = _f.length();
+  omlopp.dist = d;
+  omlopp.az = Math.atan2(_f.x, _f.z);
+  omlopp.el = Math.asin(klamp(_f.y / d, -1, 1));
+  omlopp.distMal = R * (kamera.aspect < 0.9 ? 3.6 : (p.ring ? 4.2 : 3.1));
+  omlopp.vaz = 0; omlopp.vel = 0;
+  $('dNr').textContent = String(i + 1).padStart(2, '0');
+  $('dKicker').textContent = p.kicker;
+  $('dNamn').textContent = p.namn;
+  $('dFlikar').innerHTML = FLIKAR.map(([id, t]) => `<button role="tab" data-flik="${id}" aria-selected="false">${t === 'Du där' ? 'Du på ' + p.namn : t}</button>`).join('');
+  $('dFlikar').querySelectorAll('button').forEach((b) => b.addEventListener('click', () => visaFlik(b.dataset.flik)));
+  document.documentElement.style.setProperty('--acc', p.acc);
+  visaFlik(flik || 'oversikt');
+  dossier.classList.add('oppen');
+  dossier.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('last', 'omlopp');
+}
+function stangDossier() {
+  omlopp.aktiv = false;
+  dossier.classList.remove('oppen');
+  dossier.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('last', 'omlopp');
+  if (visatStopp >= 0) fyllStopptext(visatStopp);
+}
+$('dStang').addEventListener('click', stangDossier);
+
+function storlekSVG(p) {
+  const jord = PLANETER.find((q) => q.id === 'jorden');
+  const max = 64;
+  const kvot = p.diameter / jord.diameter;
+  const rP = kvot >= 1 ? max : max * kvot, rJ = kvot >= 1 ? max / kvot : max;
+  const cirkel = (r, farg) => `<svg width="${Math.max(2 * r, 4) + 4}" height="${2 * max + 4}" viewBox="0 0 ${Math.max(2 * r, 4) + 4} ${2 * max + 4}"><circle cx="${Math.max(r, 2) + 2}" cy="${2 * max + 2 - Math.max(r, 1.4)}" r="${Math.max(r, 1.4)}" fill="${farg}"/></svg>`;
+  const text = p.id === 'jorden' ? 'Alla andra världar jämförs med jorden.'
+    : kvot >= 1 ? `Diametern är ${sig(kvot, kvot < 10 ? 2 : 3)} gånger jordens.` : `Diametern är ${sig(kvot * 100, 2)} procent av jordens.`;
+  return `<div class="storlek">
+    <figure>${cirkel(rP, p.acc)}<figcaption>${p.namn}</figcaption></figure>
+    ${p.id === 'jorden' ? '' : `<figure>${cirkel(rJ, '#4d8fe0')}<figcaption>Jorden</figcaption></figure>`}
+    <div><p>${text}</p></div>
+  </div>`;
+}
+
+function visaFlik(flik) {
+  dFlik = flik;
+  const i = omlopp.k, p = PLANETER[i], o = kroppar[i];
+  $('dFlikar').querySelectorAll('button').forEach((b) => b.setAttribute('aria-selected', b.dataset.flik === flik));
+  let html = '';
+  if (flik === 'oversikt') {
+    const lager = (p.lager || []).map((l) => `<button class="vaxel" data-lager="${l.id}" aria-pressed="${o.lagerMal[l.id] > 0.5}">${l.text}</button>`).join('');
+    html = `<p class="d-ingress">${p.ingress}</p>
+      ${lager ? `<div class="lager">${lager}</div>` : ''}
+      <div class="rubrik">Fakta</div>
+      <dl class="fakta">${p.fakta.map(([k, v]) => `<div><dt>${k}</dt><dd>${faktaVarde(p, v)}</dd></div>`).join('')}</dl>
+      <div class="rubrik">Storlek jämfört med jorden</div>
+      ${storlekSVG(p)}
+      <div class="rubrik">Visste du att</div>
+      <ol class="visste">${p.visste.map((t) => `<li>${t}</li>`).join('')}</ol>`;
+  } else if (flik === 'bestar') {
+    html = `<div>${bestarHTML(p)}</div>`;
+  } else if (flik === 'spektrum') {
+    html = spektrumHTML(p);
+  } else if (flik === 'du') {
     const r = p.radie * 1000;
     const gBer = G_KONST * p.massa / (r * r);
     const vems = p.sol ? 'solens' : p.mane ? 'månens' : p.dverg ? 'dvärgplanetens' : 'planetens';
-    const gasNot = p.gas ? '<p class="not">Gasplaneterna saknar fast yta. Värdena gäller vid molntopparna, där trycket är lika stort som vid jordytan.</p>' : '';
-    const jordNot = p.id === 'jorden' ? `<p class="not">I Sverige mäter vi 9,82${NB}N/kg. Vi ligger närmare jordens medelpunkt än ekvatorn gör och påverkas mindre av jordens rotation.</p>` : '';
-    panelInre.innerHTML = `
-      <div class="p-kicker">${p.kicker}</div>
-      <h2 class="p-titel">${p.namn}</h2>
-      <div class="p-streck"></div>
-      <p class="p-ingress">${p.ingress}</p>
-      ${lager ? `<div class="lager">${lager}</div>` : ''}
-      <nav class="hopp" aria-label="Innehåll">
-        <button data-hopp="pFakta">Fakta</button><button data-hopp="pBestar">Består av</button><button data-hopp="pFordj">Fördjupning</button><button data-hopp="pUdda">Udda och oväntat</button><button data-hopp="pDu">Du på ${p.namn}</button><button data-hopp="pFysik">Fysiken</button>
-      </nav>
-      <div class="p-rubrik" id="pFakta">Fakta</div>
-      <dl class="fakta">${fakta}</dl>
-      <div class="p-rubrik" id="pBestar">Vad består ${p.namn} av?</div>
-      ${bestarHTML(p)}
-      <div class="p-rubrik" id="pFordj">Fördjupning</div>
-      <div class="fordj">${p.avsnitt.map(([rub, txt]) => `<h3>${rub}</h3><p>${txt}</p>`).join('')}</div>
-      <div class="p-rubrik" id="pUdda">Udda och oväntat</div>
-      <ul class="udda">${p.udda.map((t) => `<li>${t}</li>`).join('')}</ul>
-      <div class="p-rubrik" id="pDu">Du på ${p.namn}</div>
-      <div class="ruta">
+    html = `<div class="ruta">
         <div class="reglage"><label for="rMassa">Din massa <b id="vMassa"></b></label><input type="range" id="rMassa" min="20" max="150" value="${panelMassa}"></div>
         ${p.sol ? '' : `<div class="reglage"><label for="rAlder">Din ålder <b id="vAlder"></b></label><input type="range" id="rAlder" min="1" max="100" value="${panelAlder}"></div>`}
         <div class="utfall" id="utfall"></div>
-        ${gasNot}
+        ${p.gas ? '<p class="not-text">Gasplaneterna saknar fast yta. Värdena gäller vid molntopparna, där trycket är lika stort som vid jordytan.</p>' : ''}
       </div>
-      <div class="p-rubrik" id="pFysik">Fysiken bakom</div>
+      <div class="rubrik">Fysiken bakom</div>
       <div class="ruta">
         <div class="formel">
           <span><i>g</i> =</span>
@@ -1929,561 +2148,317 @@ function fyllPanel(p, anim) {
           <li><i>M</i> = ${vems} massa (kg)</li>
           <li><i>r</i> = ${vems} radie vid ekvatorn (m)</li>
         </ul>
-        ${jordNot}
-        <p class="not">Flykthastigheten, den fart som krävs för att lämna ${p.sol ? 'solen' : p.mane ? 'månen' : p.dverg ? 'dvärgplaneten' : 'planeten'} för gott, är ${sig(flykt(p), 3)}${NB}km/s.</p>
-      </div>
-      <div class="p-rubrik">Visste du att</div>
-      <ol class="visste">${p.visste.map((t) => `<li>${t}</li>`).join('')}</ol>
-      <div class="p-nav">
-        <button data-ga="${i - 1}" ${v ? '' : 'disabled'}><small>Föregående</small><span>${v ? v.namn : ''}</span></button>
-        <button data-ga="${i + 1}" ${h ? '' : 'disabled'}><small>Nästa</small><span>${h ? h.namn : ''}</span></button>
+        ${p.id === 'jorden' ? `<p class="not-text">I Sverige mäter vi 9,82${NB}N/kg. Vi ligger närmare jordens medelpunkt än ekvatorn gör och påverkas mindre av jordens rotation.</p>` : ''}
+        <p class="not-text">Flykthastigheten, den fart som krävs för att lämna ${p.sol ? 'solen' : p.mane ? 'månen' : p.dverg ? 'dvärgplaneten' : 'planeten'} för gott, är ${sig(flykt(p), 3)}${NB}km/s.</p>
       </div>`;
-    panelInre.querySelectorAll('[data-lager]').forEach((b) => b.addEventListener('click', () => {
-      const id = b.dataset.lager;
-      const obj = planeter[i];
-      obj.lagerMal[id] = obj.lagerMal[id] > 0.5 ? 0 : 1;
-      b.setAttribute('aria-pressed', obj.lagerMal[id] > 0.5);
-    }));
-    panelInre.querySelectorAll('[data-hopp]').forEach((b) => b.addEventListener('click', () => {
-      const mal = $(b.dataset.hopp);
-      panel.scrollTo({ top: mal.offsetTop - 24, behavior: 'smooth' });
-    }));
-    panelInre.querySelectorAll('[data-ga]').forEach((b) => b.addEventListener('click', () => gaTill(+b.dataset.ga)));
-    const rM = $('rMassa'), rA = $('rAlder');
-    const rakna = () => {
-      panelMassa = +rM.value;
-      if (rA) panelAlder = +rA.value;
-      $('vMassa').textContent = `${panelMassa}${NB}kg`;
-      if (rA) $('vAlder').textContent = `${panelAlder}${NB}år`;
-      const tyngd = panelMassa * p.g;
-      const hopp = 0.5 * 9.82 / p.g;
-      const fall = Math.sqrt(2 * 10 / p.g);
-      const rader = [
-        [`Din tyngd, <i>F</i><sub>G</sub> = <i>m</i> · <i>g</i>`, `${sig(tyngd, 3)}${NB}N`],
-        ['Tyngden jämfört med på jorden', `${sig(p.g / 9.82, 2)} gånger så stor`],
-        ['Ett hopp på 50 cm på jorden blir här', hopp >= 1 ? `${sig(hopp, 2)}${NB}m` : `${sig(hopp * 100, 2)}${NB}cm`],
-        ['Ett fall från 10 m höjd tar', `${sig(fall, 2)}${NB}s`],
-      ];
-      if (rA && p.period) {
-        const ar = panelAlder * 365.256 / p.period;
-        if (p.mane) rader.push(['Så många varv har månen gått runt jorden sedan du föddes', `${fmt(ar)}${NB}varv`]);
-        else rader.push([`Din ålder i ${p.namn.toLowerCase() === 'jorden' ? 'jordår' : p.namn + 'år'}`, `${sig(ar, ar < 10 ? 2 : 3)}${NB}år`]);
-      }
-      $('utfall').innerHTML = rader.map(([a, b]) => `<div><span>${a}</span><b>${b}</b></div>`).join('')
-        + (p.gas ? '' : '<div style="border:0;padding-bottom:0"><span style="font-size:12px;color:var(--faint)">Fallet räknas utan luftmotstånd.</span></div>');
-    };
-    rM.addEventListener('input', rakna);
-    if (rA) rA.addEventListener('input', rakna);
-    rakna();
-    panelInre.classList.remove('ut');
-    if (anim) panel.scrollTo({ top: 0 });
-  };
-  if (anim) { panelInre.classList.add('ut'); setTimeout(gor, 320); } else gor();
+  } else if (flik === 'fordj') {
+    html = `<div class="fordj">${p.avsnitt.map(([rub, txt]) => `<h3>${rub}</h3><p>${txt}</p>`).join('')}</div>
+      <div class="rubrik">Udda och oväntat</div>
+      <ul class="udda">${p.udda.map((t) => `<li>${t}</li>`).join('')}</ul>`;
+  }
+  dInnehall.innerHTML = html;
+  dInnehall.scrollTop = 0;
+  dInnehall.querySelectorAll('[data-lager]').forEach((b) => b.addEventListener('click', () => {
+    const id = b.dataset.lager;
+    o.lagerMal[id] = o.lagerMal[id] > 0.5 ? 0 : 1;
+    b.setAttribute('aria-pressed', o.lagerMal[id] > 0.5);
+  }));
+  if (flik === 'spektrum') ritaSpektrum(p);
+  if (flik === 'du') kopplaRaknare(p);
 }
-function oppnaPanel() {
-  if (window.scrollY > 10) { window.scrollTo({ top: 0, behavior: 'smooth' }); setTimeout(oppnaPanel, 650); return; }
-  fyllPanel(PLANETER[tillstand.idx]);
-  panel.classList.add('oppen');
-  $('topp').classList.add('panelvy');
-  panel.setAttribute('aria-hidden', 'false');
-  tillstand.gMal = 1;
-  document.body.classList.add('last');
-  $('hero').style.touchAction = 'none';
-  $('heroText').style.opacity = 0;
-  $('heroText').style.transition = 'opacity .5s';
-  [grannV, grannH].forEach((e) => { e.style.opacity = 0; e.style.pointerEvents = 'none'; });
-  document.querySelector('.hero-fot').style.opacity = 0;
-  $('ner').style.opacity = 0;
-}
-function stangPanel() {
-  panel.classList.remove('oppen');
-  $('topp').classList.remove('panelvy');
-  panel.setAttribute('aria-hidden', 'true');
-  tillstand.gMal = 0;
-  document.body.classList.remove('last');
-  $('hero').style.touchAction = '';
-  $('heroText').style.opacity = '';
-  [grannV, grannH].forEach((e) => { e.style.opacity = ''; e.style.pointerEvents = ''; });
-  document.querySelector('.hero-fot').style.opacity = '';
-  $('ner').style.opacity = '';
-}
-$('stang').addEventListener('click', stangPanel);
-utforska.addEventListener('click', (e) => { e.stopPropagation(); oppnaPanel(); });
-$('toppUtforska').addEventListener('click', oppnaPanel);
-grannV.addEventListener('click', (e) => { e.currentTarget.blur(); gaTill(tillstand.idx - 1); });
-grannH.addEventListener('click', (e) => { e.currentTarget.blur(); gaTill(tillstand.idx + 1); });
-$('mobV').addEventListener('click', () => gaTill(tillstand.idx - 1));
-$('mobH').addEventListener('click', () => gaTill(tillstand.idx + 1));
-$('ner').addEventListener('click', () => $('varldar').scrollIntoView({ behavior: 'smooth' }));
-$('tillbaka').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-document.addEventListener('keydown', (e) => {
-  if (e.target.closest && e.target.closest('input')) return;
-  const heroSyns = $('hero').getBoundingClientRect().bottom > window.innerHeight * 0.4;
-  if (e.key === 'Escape' && panel.classList.contains('oppen')) stangPanel();
-  if (!heroSyns) return;
-  if (e.key === 'ArrowRight') { gaTill(tillstand.idx + 1); e.preventDefault(); }
-  if (e.key === 'ArrowLeft') { gaTill(tillstand.idx - 1); e.preventDefault(); }
-});
-
-/* ---------- Kort och skala ---------- */
-const klotEl = PLANETER.map(() => []);
-function nyttKlot(i) {
-  const p = PLANETER[i];
-  const d = document.createElement('div');
-  d.className = 'klot';
-  d.innerHTML = `<div class="plats" style="background:radial-gradient(circle at 35% 32%, ${p.acc}, ${p.farg} 45%, #05070d 78%);box-shadow:0 0 40px -10px ${p.acc}"></div><img alt="">`;
-  klotEl[i].push(d);
-  return d;
-}
-let vantaHero = null;
-function flygTill(i) {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  vantaHero = i;
-}
-const kortRutnat = $('kortRutnat');
-PLANETER.forEach((p, i) => {
-  const k = document.createElement('button');
-  k.className = 'kort';
-  k.style.setProperty('--c', p.acc);
-  const ljus = p.a ? faktaVarde(p, 'LJUS') : '';
-  if (p.sol) k.classList.add('bred');
-  const hoger = p.a ? fmt(p.a, p.a < 10 ? 2 : 1) + NB + 'AE' : p.mane ? fmt(p.avstandJorden) + NB + 'km bort' : 'Centrum';
-  const fot = p.a ? 'Ljuset når hit på ' + ljus : p.mane ? 'Ljuset från jorden tar ' + faktaVarde(p, 'LJUSMANE') : '99,8' + NB + '% av solsystemets massa';
-  k.innerHTML = `<div class="k-top"><span>${p.kortTop}</span><span>${hoger}</span></div>
-    <div class="k-bild"></div>
-    <div class="k-namn">${p.namn}</div>
-    <div class="k-rad">${p.kort}</div>
-    <div class="k-fot"><span>${fot}</span><span class="k-pil"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>`;
-  k.querySelector('.k-bild').appendChild(nyttKlot(i));
-  k.addEventListener('click', () => flygTill(i));
-  kortRutnat.appendChild(k);
-});
-
-const skalaRad = $('skalaRad');
-let skalaKlot = [];
-function byggSkala() {
-  PLANETER.forEach((_, i) => { klotEl[i] = klotEl[i].filter((e) => !e.dataset.skala); });
-  skalaRad.innerHTML = '';
-  skalaKlot = [];
-  const smal = window.innerWidth < 700;
-  const synligt = smal ? 70 : 120;
-  const gap = smal ? 18 : 30;
-  // Skalan väljs så att raden ryms på skärmen om det går, men Jupiter blir aldrig mindre än 150 px
-  const tillg = skalaRad.parentElement.clientWidth - synligt - (smal ? 24 : 40) - 8 * gap - 40;
-  const summa = PLANETER.reduce((a, p) => a + (p.sol ? 0 : p.diameter * (p.ring ? 2.4 : 1)), 0);
-  let k = Math.min((smal ? 170 : 260) / 142984, tillg / summa);
-  k = Math.max(k, 150 / 142984);
-  const solD = 1392700 * k;
-  let smaIdx = 0;
-  // En CSS-bildpunkt är 0,2646 mm; så långt bort skulle Neptunus ligga med samma skala
-  const neptunusKm = 30.07 * AE_KM * k * 0.2646e-6;
-  $('skalaNot').textContent = `Avstånden mellan planeterna är däremot inte skalenliga. Med samma skala skulle Neptunus hamna ungefär ${sig(neptunusKm, 2)} kilometer bort från solen, räknat på skärmens bildpunkter.`;
-  const sol = document.createElement('div');
-  sol.className = 'sol-kant';
-  sol.style.width = sol.style.height = solD + 'px';
-  sol.style.left = (synligt - solD) + 'px';
-  sol.innerHTML = `<span class="sol-etikett" style="left:${solD - synligt + 14}px;bottom:${solD / 2 - 150}px">Solen</span>`;
-  sol.style.pointerEvents = 'auto'; sol.style.cursor = 'pointer';
-  sol.addEventListener('click', () => flygTill(0));
-  skalaRad.appendChild(sol);
-  const luft = document.createElement('div'); luft.style.flex = `0 0 ${synligt + (smal ? 24 : 40)}px`;
-  skalaRad.appendChild(luft);
-  PLANETER.forEach((p, i) => {
-    if (p.sol) return;
-    const d = p.diameter * k;
-    const b = document.createElement('button');
-    b.className = 'skala-planet';
-    const ringSkala = p.ring ? 2.4 : 1;
-    const bred = Math.max(d * ringSkala, 46);
-    b.style.width = bred + gap + 'px';
-    b.style.setProperty('--h', Math.max(d, 10) + 'px');
-    const klot = nyttKlot(i);
-    klot.dataset.skala = '1';
-    const fr = p.ring ? 0.4 : 0.8;
-    klot.style.width = klot.style.height = (d / fr) + 'px';
-    klot.dataset.fr = fr;
-    b.appendChild(klot);
-    const t = document.createElement('div');
-    t.className = 's-text';
-    if (smal && d < 40) { smaIdx = (smaIdx || 0) + 1; if (smaIdx % 2 === 0) t.style.marginTop = '34px'; }
-    t.innerHTML = `<div class="s-namn">${p.namn}</div><div class="s-mat">${fmt(p.diameter)}${NB}km</div>`;
-    b.appendChild(t);
-    b.addEventListener('click', () => flygTill(i));
-    skalaRad.appendChild(b);
-    skalaKlot.push(klot);
-  });
-  if (tumnaglar) PLANETER.forEach((_, i) => satTumnagel(i));
-}
-
-/* ---------- Tumnaglar renderade med samma shaders ---------- */
-let tumnaglar = null;
-function satTumnagel(i) {
-  if (!tumnaglar) return;
-  klotEl[i].forEach((el) => {
-    const img = el.querySelector('img');
-    if (img.src !== tumnaglar[i]) { img.src = tumnaglar[i]; img.onload = () => { img.classList.add('syns'); el.classList.add('klar'); }; }
-  });
-}
-function renderaTumnaglar() {
-  const TS = 256;
-  const px = Math.round(TS * PR);
-  const scen = new THREE.Scene();
-  const kam = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
-  const tan15 = Math.tan(THREE.MathUtils.degToRad(15));
-  const ljus = new THREE.Vector3(-0.62, 0.42, 0.66).normalize();
-  const ut = document.createElement('canvas'); ut.width = ut.height = px;
-  const ctx = ut.getContext('2d');
-  const resultat = [];
-  const vinklar = { pluto: 2.75, manen: 1.85, jorden: 2.2, mars: 3.2, jupiter: 1.2, saturnus: 0.2 };
-  renderer.setScissorTest(true);
-  PLANETER.forEach((p, i) => {
-    const o = byggPlanet(p, { seg: [96, 72], startSpin: vinklar[p.id] || 0.8, glod: 3.4 });
-    o.root.position.set(0, 0, 0);
-    o.root.scale.setScalar(1);
-    if (p.ring) o.root.quaternion.setFromAxisAngle(new THREE.Vector3(1, 0, 0), 0.32);
-    o.U.uMap.value = planeter[i].U.uMap.value; o.U.uMap2.value = planeter[i].U.uMap2.value;
-    o.U.uNight.value = planeter[i].U.uNight.value; o.U.uSpec.value = planeter[i].U.uSpec.value;
-    o.U.uClouds.value = planeter[i].U.uClouds.value; o.U.uRing.value = planeter[i].U.uRing.value;
-    if (o.cU) o.cU.uClouds.value = planeter[i].U.uClouds.value;
-    if (o.rU) o.rU.uRing.value = planeter[i].U.uRing.value;
-    o.laddad = true; o.U.uReady.value = 1; if (o.cU) o.cU.uReady.value = 1; if (o.rU) o.rU.uReady.value = 1;
-    o.uppdatera(0, 0, ljus, 1, 0);
-    const fr = p.ring ? 0.4 : p.sol ? 0.62 : 0.8;
-    const dist = 1 / Math.sin(Math.atan(fr * tan15));
-    kam.position.set(0, 0, dist);
-    kam.lookAt(0, 0, 0);
-    scen.add(o.root);
-    renderer.setViewport(0, 0, TS, TS);
-    renderer.setScissor(0, 0, TS, TS);
-    renderer.setClearColor(0x000000, 1);
-    renderer.clear();
-    renderer.render(scen, kam);
-    ctx.clearRect(0, 0, px, px);
-    ctx.drawImage(renderer.domElement, 0, renderer.domElement.height - px, px, px, 0, 0, px, px);
-    // Svart bakgrund blir genomskinlig: alfa = ljusaste kanalen, färgen räknas upp igen
-    const bild = ctx.getImageData(0, 0, px, px), d = bild.data;
-    for (let k = 0; k < d.length; k += 4) {
-      const a = Math.max(d[k], d[k + 1], d[k + 2]);
-      if (a === 0) { d[k + 3] = 0; continue; }
-      const f = 255 / a;
-      d[k] *= f; d[k + 1] *= f; d[k + 2] *= f; d[k + 3] = a;
+function kopplaRaknare(p) {
+  const rM = $('rMassa'), rA = $('rAlder');
+  const rakna = () => {
+    panelMassa = +rM.value;
+    if (rA) panelAlder = +rA.value;
+    $('vMassa').textContent = `${panelMassa}${NB}kg`;
+    if (rA) $('vAlder').textContent = `${panelAlder}${NB}år`;
+    const tyngd = panelMassa * p.g;
+    const hopp = 0.5 * 9.82 / p.g;
+    const fall = Math.sqrt(2 * 10 / p.g);
+    const rader = [
+      [`Din tyngd, <i>F</i><sub>G</sub> = <i>m</i> · <i>g</i>`, `${sig(tyngd, 3)}${NB}N`],
+      ['Tyngden jämfört med på jorden', `${sig(p.g / 9.82, 2)} gånger så stor`],
+      ['Ett hopp på 50 cm på jorden blir här', hopp >= 1 ? `${sig(hopp, 2)}${NB}m` : `${sig(hopp * 100, 2)}${NB}cm`],
+      ['Ett fall från 10 m höjd tar', `${sig(fall, 2)}${NB}s`],
+    ];
+    if (rA && p.period) {
+      const ar = panelAlder * 365.256 / p.period;
+      if (p.mane) rader.push(['Så många varv har månen gått runt jorden sedan du föddes', `${fmt(ar)}${NB}varv`]);
+      else rader.push([`Din ålder i ${p.namn.toLowerCase() === 'jorden' ? 'jordår' : p.namn + 'år'}`, `${sig(ar, ar < 10 ? 2 : 3)}${NB}år`]);
     }
-    ctx.putImageData(bild, 0, 0);
-    resultat.push(ut.toDataURL('image/png'));
-    scen.remove(o.root);
-  });
-  renderer.setScissorTest(false);
-  tumnaglar = resultat;
-  PLANETER.forEach((_, i) => satTumnagel(i));
+    $('utfall').innerHTML = rader.map(([a, b]) => `<div><span>${a}</span><b>${b}</b></div>`).join('')
+      + (p.gas ? '' : '<div style="border:0;padding-bottom:0"><span style="font-size:12px;color:var(--faint)">Fallet räknas utan luftmotstånd.</span></div>');
+  };
+  rM.addEventListener('input', rakna);
+  if (rA) rA.addEventListener('input', rakna);
+  rakna();
 }
 
 /* =====================================================================
-   INTERAKTION I HJÄLTEVYN
+   SPEKTROMETERN
+   Förenklat spektrum av solljus som reflekterats mot ytan eller molnen.
+   Band: [mittvåglängd i nm, bredd (FWHM) i nm, djup 0–1].
    ===================================================================== */
-const hero = $('hero');
-const raycaster = new THREE.Raycaster();
-const mus = new THREE.Vector2();
-let tryck = null;
-const trV = new THREE.Vector3();
-function traff(e) {
-  mus.set(e.clientX / window.innerWidth * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
-  raycaster.setFromCamera(mus, kamera);
-  const ray = raycaster.ray;
-  let bast = -1, bt = Infinity;
-  planeter.forEach((o, i) => {
-    if (!o.root.visible) return;
-    // analytisk träff mot klotet; grannarna får en generösare träffyta
-    const R = o.root.scale.x * (i === tillstand.idx ? 1.01 : 1.45);
-    trV.copy(o.root.position).sub(ray.origin);
-    const tca = trV.dot(ray.direction);
-    const d2 = trV.lengthSq() - tca * tca;
-    if (d2 > R * R) return;
-    const t = tca - Math.sqrt(R * R - d2);
-    if (t > 0 && t < bt) { bt = t; bast = i; }
+const ABS = {
+  sol: { namn: 'Solens egna linjer', farg: '#ffd27a', text: 'Fraunhoferlinjer från väte, natrium, kalcium, magnesium och järn i solens yttre lager. De följer med i allt ljus som planeterna reflekterar.',
+    band: [[393.4, 1.6, 0.85, 'Kalcium (K)'], [396.8, 1.6, 0.85, 'Kalcium (H)'], [410.2, 1, 0.35, 'Väte (Hδ)'], [434, 1.2, 0.45, 'Väte (Hγ)'], [486.1, 1.2, 0.55, 'Väte (Hβ)'], [517.3, 1.5, 0.45, 'Magnesium'], [527, 1, 0.3, 'Järn'], [589.3, 1.4, 0.7, 'Natrium (D)'], [656.3, 1.4, 0.7, 'Väte (Hα)'], [849.8, 1.2, 0.3, 'Kalcium'], [854.2, 1.2, 0.4, 'Kalcium'], [866.2, 1.2, 0.35, 'Kalcium']] },
+  o2: { namn: 'Syre (O₂)', farg: '#ff8a7a', text: 'Två skarpa band vid 687 och 760 nm, och ett svagare i infrarött.', band: [[687, 5, 0.45], [760.5, 7, 0.9], [1268, 12, 0.35]] },
+  h2o: { namn: 'Vattenånga (H₂O)', farg: '#6fb8ff', text: 'Flera band i rött och infrarött. De djupaste ligger vid 1 380 och 1 870 nm.', band: [[720, 14, 0.25], [820, 18, 0.3], [940, 40, 0.55], [1135, 60, 0.55], [1380, 90, 0.85], [1870, 110, 0.85]] },
+  o3: { namn: 'Ozon (O₃)', farg: '#b58cff', text: 'Ett brett, svagt band mitt i det synliga ljuset.', band: [[600, 150, 0.12]] },
+  co2: { namn: 'Koldioxid (CO₂)', farg: '#aab2c0', text: 'Syns bara i infrarött, med de starkaste banden runt 2 000 nm.', band: [[1430, 40, 0.35], [1600, 45, 0.45], [2010, 50, 0.8], [2060, 40, 0.65]] },
+  ch4: { namn: 'Metan (CH₄)', farg: '#4fa3d9', text: 'En lång rad band som blir starkare mot rött och infrarött.', band: [[543, 6, 0.2], [619, 10, 0.45], [727, 12, 0.65], [790, 10, 0.35], [862, 10, 0.45], [890, 20, 0.9], [1000, 30, 0.65], [1150, 60, 0.8], [1400, 80, 0.9], [1700, 100, 0.9], [2300, 150, 0.9]] },
+  nh3: { namn: 'Ammoniak (NH₃)', farg: '#7ad29a', text: 'Svaga band i rött och ett tydligare i infrarött.', band: [[645, 8, 0.3], [790, 10, 0.25], [1500, 60, 0.4]] },
+  h2: { namn: 'Väte (H₂)', farg: '#8fb8ff', text: 'Vätemolekyler som krockar med varandra tar upp ljus vid 825 och cirka 2 100 nm.', band: [[825, 25, 0.3], [2100, 150, 0.55]] },
+  ch4is: { namn: 'Metanis', farg: '#4fa3d9', text: 'Frusen metan på ytan ger breda band i infrarött.', band: [[1720, 60, 0.75], [2200, 40, 0.55], [2320, 60, 0.9]] },
+  n2is: { namn: 'Kväveis', farg: '#6fd3c1', text: 'Ett svagt men avslöjande band vid 2 150 nm.', band: [[2150, 15, 0.35]] },
+  cois: { namn: 'Kolmonoxidis', farg: '#dfe2e8', text: 'Smala band vid 1 579 och 2 352 nm.', band: [[1579, 6, 0.35], [2352, 8, 0.5]] },
+  pyroxen: { namn: 'Pyroxen', farg: '#c98a4a', text: 'Ett järnhaltigt mineral i berggrunden. Det ger breda sänkor runt 1 000 och 2 000 nm.', band: [[950, 200, 0.3], [2000, 400, 0.25]] },
+  jarnoxid: { namn: 'Järnoxid (rost)', farg: '#e0703a', text: 'Tar bort blått och grönt ljus. Kvar blir det röda.', band: [[480, 160, 0.55], [860, 100, 0.22]] },
+  uv: { namn: 'Okänt ämne i molnen', farg: '#9a7fe0', text: 'Något i Venus moln tar bort violett och ultraviolett ljus. Vad det är vet ingen säkert.', band: [[400, 90, 0.4]] },
+  farg: { namn: 'Färgämnen i molnen', farg: '#d98a5a', text: 'Okända ämnen som tar bort blått ljus och ger molnbanden deras rödbruna toner.', band: [[430, 150, 0.35]] },
+  toliner: { namn: 'Toliner', farg: '#b86a4a', text: 'Organiska ämnen som tar bort blått ljus och gör ytan rödbrun.', band: [[440, 160, 0.5]] },
+};
+const SPEKTRUM = {
+  solen: { mix: { sol: 1 }, text: 'Solens spektrum är fullt av mörka Fraunhoferlinjer. Varje linje hör till ett grundämne i solens yttre lager. Grundämnet helium upptäcktes 1868 i solens spektrum, innan någon hade hittat det på jorden.' },
+  merkurius: { mix: { sol: 0.3 }, text: 'Merkurius spektrum är nästan utan tydliga band. Mineralerna på ytan innehåller mycket lite järn, och någon atmosfär att tala om finns inte.' },
+  venus: { mix: { sol: 0.3, uv: 1, co2: 1 }, text: 'Koldioxidens band syns i infrarött. I violett och ultraviolett tar ett okänt ämne i molnen bort ljus.' },
+  jorden: { mix: { sol: 0.3, o3: 1, o2: 1, h2o: 1 }, text: 'Syrets skarpa band vid 760 nm är ett av de tydligaste tecknen på liv som går att se på avstånd. Samma band letar forskare efter hos planeter runt andra stjärnor.' },
+  manen: { mix: { sol: 0.3, pyroxen: 1 }, text: 'Utan atmosfär syns bara mineralerna. Den breda sänkan runt 1 000 nm kommer från pyroxen, ett järnhaltigt mineral i månens berggrund.' },
+  mars: { mix: { sol: 0.3, jarnoxid: 1, co2: 0.8 }, text: 'Järnoxid i stoftet tar bort blått och grönt ljus, så det som återstår ser rött ut. Koldioxidens band syns i infrarött.' },
+  jupiter: { mix: { sol: 0.3, farg: 1, ch4: 0.9, nh3: 1 }, text: 'Metan och ammoniak ger band i rött och infrarött. Okända färgämnen i molnen tar bort blått och ger molnbanden deras rödbruna färg.' },
+  saturnus: { mix: { sol: 0.3, farg: 0.5, ch4: 0.9, nh3: 0.6 }, text: 'Som hos Jupiter dominerar metanets band. Det finns mindre av färgämnena, och därför är Saturnus blekare i färgen.' },
+  uranus: { mix: { sol: 0.3, ch4: 1.25, h2: 1 }, text: 'Metanet tar bort rött ljus mycket effektivt. Kvar blir det blågröna ljuset, och därför har Uranus sin färg.' },
+  neptunus: { mix: { sol: 0.3, ch4: 1.3, h2: 1 }, text: 'Samma sak som hos Uranus: metanet äter upp det röda ljuset, och det blå blir kvar.' },
+  pluto: { mix: { sol: 0.3, toliner: 1, ch4is: 1, n2is: 1, cois: 1 }, text: 'Isarna på ytan syns i infrarött: metanis, kväveis och kolmonoxidis har alla egna band. Toliner tar bort blått ljus och gör ytan rödbrun.' },
+};
+const SP_MIN = 380, SP_SYN = 750, SP_MAX = 2500, SP_DEL = 0.56;
+function spX(lam, w) { return lam <= SP_SYN ? (lam - SP_MIN) / (SP_SYN - SP_MIN) * SP_DEL * w : (SP_DEL + (lam - SP_SYN) / (SP_MAX - SP_SYN) * (1 - SP_DEL)) * w; }
+function spLam(x, w) { const f = x / w; return f <= SP_DEL ? SP_MIN + f / SP_DEL * (SP_SYN - SP_MIN) : SP_SYN + (f - SP_DEL) / (1 - SP_DEL) * (SP_MAX - SP_SYN); }
+function vaglangdRGB(l) {
+  let r = 0, g = 0, b = 0;
+  if (l < 440) { r = -(l - 440) / 60; b = 1; } else if (l < 490) { g = (l - 440) / 50; b = 1; } else if (l < 510) { g = 1; b = -(l - 510) / 20; }
+  else if (l < 580) { r = (l - 510) / 70; g = 1; } else if (l < 645) { r = 1; g = -(l - 645) / 65; } else { r = 1; }
+  let f = 1;
+  if (l < 420) f = 0.3 + 0.7 * (l - 380) / 40; else if (l > 700) f = 0.3 + 0.7 * (750 - l) / 50;
+  return [r * f, g * f, b * f];
+}
+function spektrumBand(p) {
+  const sp = SPEKTRUM[p.id], ut = [];
+  Object.entries(sp.mix).forEach(([nyckel, styrka]) => {
+    ABS[nyckel].band.forEach(([c, w, d, namn]) => ut.push({ c, w, d: Math.min(0.97, d * styrka), nyckel, namn: namn || ABS[nyckel].namn }));
   });
-  return bast;
+  return ut;
 }
-hero.addEventListener('pointerdown', (e) => {
-  if (e.target.closest('button')) return;
-  if (e.button !== 0) return;
-  tryck = { x: e.clientX, y: e.clientY, lx: e.clientX, ly: e.clientY, t: performance.now(), lt: performance.now(), id: e.pointerId, drog: false };
-});
-window.addEventListener('pointermove', (e) => {
-  const heroRect = hero.getBoundingClientRect();
-  const iHero = e.clientY >= heroRect.top && e.clientY <= heroRect.bottom;
-  if (!tryck) {
-    if (iHero && !e.target.closest('button') && e.pointerType === 'mouse') {
-      const i = traff(e);
-      hero.style.cursor = i === -1 ? 'default' : i === tillstand.idx ? 'grab' : 'pointer';
+function transmission(band, lam) {
+  let t = 1;
+  for (const b of band) { const s = b.w / 2.355; t *= 1 - b.d * Math.exp(-0.5 * ((lam - b.c) / s) ** 2); }
+  return t;
+}
+function spektrumHTML(p) {
+  const sp = SPEKTRUM[p.id];
+  const nycklar = Object.keys(sp.mix).filter((k) => k !== 'sol' || p.sol).concat(p.sol ? [] : ['sol']);
+  return `<p class="d-ingress">Ljus med vissa våglängder tas upp av ämnena det passerar. Då blir det mörka band i spektrumet, och bandens lägen avslöjar vilka ämnen det är. Så vet vi vad himlakropparna består av, utan att någonsin ha varit där.</p>
+    <div class="spektrometer"><canvas id="spCanvas"></canvas><div class="sp-tips" id="spTips"></div></div>
+    <p class="not-text">Förenklad bild av solljus som reflekterats mot ytan eller molnen. Bandens lägen stämmer, men deras djup och bredd är ungefärliga. Skalan är hoptryckt i infrarött.</p>
+    <p class="sp-tolkning">${sp.text}</p>
+    <div class="rubrik">Vad som tar bort ljuset</div>
+    <ul class="sp-lista">${nycklar.map((k) => `<li><i style="background:${ABS[k].farg}"></i><div><b>${ABS[k].namn}</b>${ABS[k].text}</div></li>`).join('')}</ul>`;
+}
+function ritaSpektrum(p) {
+  const cv = $('spCanvas');
+  if (!cv) return;
+  const band = spektrumBand(p);
+  const rita = () => {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = cv.clientWidth, h = cv.clientHeight;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    const x = cv.getContext('2d');
+    x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    x.clearRect(0, 0, w, h);
+    const graf0 = 8, grafH = 92, rem0 = graf0 + grafH + 12, remH = 34, axel = rem0 + remH + 14;
+    // rutnät
+    x.strokeStyle = 'rgba(205,220,255,0.08)'; x.lineWidth = 1;
+    [0.25, 0.5, 0.75, 1].forEach((f) => { const y = graf0 + grafH * (1 - f) + 0.5; x.beginPath(); x.moveTo(0, y); x.lineTo(w, y); x.stroke(); });
+    // spektralremsan
+    for (let px = 0; px < w; px++) {
+      const lam = spLam(px + 0.5, w), t = transmission(band, lam);
+      let r, g, b;
+      if (lam <= SP_SYN) { [r, g, b] = vaglangdRGB(lam); }
+      else { const f = (lam - SP_SYN) / (SP_MAX - SP_SYN); r = 0.32 - 0.16 * f; g = 0.08 + 0.05 * f; b = 0.1 + 0.1 * f; }
+      x.fillStyle = `rgb(${Math.round(255 * r * t)},${Math.round(255 * g * t)},${Math.round(255 * b * t)})`;
+      x.fillRect(px, rem0, 1, remH);
     }
-    // lätt parallax från muspekaren
-    if (e.pointerType === 'mouse') { parallax.mx = e.clientX / window.innerWidth - 0.5; parallax.my = e.clientY / window.innerHeight - 0.5; }
-    return;
-  }
-  if (e.pointerId !== tryck.id) return;
-  const dx = e.clientX - tryck.lx, dy = e.clientY - tryck.ly;
-  if (!tryck.drog && Math.hypot(e.clientX - tryck.x, e.clientY - tryck.y) > 6) {
-    tryck.drog = true;
-    hero.classList.add('drar');
-    hero.style.cursor = '';
-    try { hero.setPointerCapture(e.pointerId); } catch (_) {}
-  }
-  if (!tryck.drog) return;
-  const now = performance.now();
-  const o = planeter[tillstand.idx];
-  const Rpx = Math.max(160, (tillstand.g > 0.5 ? lay.glob.rs : lay.hero.rs) / lay.W * window.innerWidth / 2);
-  const k = 1 / Rpx;
-  roteraAnv(o, dx * k, e.pointerType === 'touch' && tillstand.g < 0.5 ? 0 : dy * k);
-  const dt = Math.max(1, now - tryck.lt) / 1000;
-  o.vel.set(dx * k / dt, (e.pointerType === 'touch' && tillstand.g < 0.5 ? 0 : dy * k) / dt);
-  tryck.lx = e.clientX; tryck.ly = e.clientY; tryck.lt = now;
-});
-window.addEventListener('pointerup', (e) => {
-  if (!tryck || e.pointerId !== tryck.id) return;
-  const o = planeter[tillstand.idx];
-  if (!tryck.drog) {
-    const i = traff(e);
-    if (i === tillstand.idx) { if (!panel.classList.contains('oppen')) oppnaPanel(); }
-    else if (i !== -1) gaTill(i);
-    else if (panel.classList.contains('oppen')) stangPanel();
-    o.vel.set(0, 0);
-  } else if (performance.now() - tryck.lt > 90) o.vel.set(0, 0);
-  hero.classList.remove('drar');
-  tryck = null;
-});
-window.addEventListener('pointercancel', () => { tryck = null; hero.classList.remove('drar'); });
-const AX_Y = new THREE.Vector3(0, 1, 0), AX_X = new THREE.Vector3(1, 0, 0), tmpQ1 = new THREE.Quaternion(), tmpQ2 = new THREE.Quaternion();
-function roteraAnv(o, ay, ax) {
-  tmpQ1.setFromAxisAngle(AX_Y, ay);
-  tmpQ2.setFromAxisAngle(AX_X, ax);
-  o.anv.premultiply(tmpQ1).premultiply(tmpQ2);
+    // kurvan
+    x.beginPath();
+    for (let px = 0; px <= w; px++) { const t = transmission(band, spLam(px, w)); const y = graf0 + grafH * (1 - t); if (px === 0) x.moveTo(px, y); else x.lineTo(px, y); }
+    x.strokeStyle = '#fff2d2'; x.lineWidth = 1.4; x.stroke();
+    x.lineTo(w, graf0 + grafH); x.lineTo(0, graf0 + grafH); x.closePath();
+    const gr = x.createLinearGradient(0, graf0, 0, graf0 + grafH);
+    gr.addColorStop(0, 'rgba(255,210,122,0.16)'); gr.addColorStop(1, 'rgba(255,210,122,0)');
+    x.fillStyle = gr; x.fill();
+    // gränsen mellan synligt och infrarött
+    const xs = spX(SP_SYN, w);
+    x.setLineDash([3, 4]); x.strokeStyle = 'rgba(205,220,255,0.3)';
+    x.beginPath(); x.moveTo(xs + 0.5, graf0); x.lineTo(xs + 0.5, rem0 + remH); x.stroke(); x.setLineDash([]);
+    // axel
+    x.fillStyle = 'rgba(205,220,255,0.55)'; x.font = '10px "IBM Plex Mono", monospace'; x.textAlign = 'center';
+    [400, 500, 600, 700, 1000, 1500, 2000, 2500].forEach((l) => {
+      const px = spX(l, w);
+      x.fillRect(Math.round(px), rem0 + remH + 2, 1, 4);
+      const t = l >= 1000 ? fmt(l / 1000, 1) + ' µm' : l + ' nm';
+      x.textAlign = l === 2500 ? 'right' : l === 400 ? 'left' : 'center';
+      x.fillText(t.replace(' ', NB), l === 400 ? Math.max(0, px - 4) : px, axel + 8);
+    });
+    x.textAlign = 'left'; x.fillStyle = 'rgba(205,220,255,0.45)';
+    x.fillText('SYNLIGT LJUS', 4, graf0 + 10);
+    x.fillText('INFRARÖTT', xs + 6, graf0 + 10);
+  };
+  rita();
+  cv._rita = rita;
+  const tips = $('spTips');
+  const visaTips = (e) => {
+    const r = cv.getBoundingClientRect();
+    const px = e.clientX - r.left;
+    const lam = spLam(px, r.width);
+    let bast = null, bd = 1e9;
+    band.forEach((b) => { const d = Math.abs(spX(b.c, r.width) - px); if (d < Math.max(7, (spX(b.c + b.w / 2, r.width) - spX(b.c - b.w / 2, r.width)) / 2) && d < bd) { bd = d; bast = b; } });
+    if (!bast) { tips.style.opacity = 0; return; }
+    tips.textContent = `${bast.namn} · ${bast.c >= 1000 ? fmt(bast.c / 1000, 2) + NB + 'µm' : fmt(bast.c, bast.c % 1 ? 1 : 0) + NB + 'nm'}`;
+    tips.style.left = (spX(bast.c, r.width) + 16) + 'px';
+    tips.style.top = (e.clientY - r.top + 10) + 'px';
+    tips.style.opacity = 1;
+  };
+  cv.addEventListener('pointermove', visaTips);
+  cv.addEventListener('pointerdown', visaTips);
+  cv.addEventListener('pointerleave', () => { tips.style.opacity = 0; });
 }
-const parallax = { mx: 0, my: 0, x: 0, y: 0 };
 
-/* ---------- Banornas interaktion ---------- */
-const banEl = $('banor');
-const etikettBox = $('etiketter');
-PLANETER.forEach((p, i) => {
-  const e = document.createElement('div');
-  e.className = 'et';
-  e.innerHTML = `${p.namn}<small>${p.mane ? fmt(p.period, 1) + NB + 'dygn per varv runt jorden' : p.period ? (p.period < 1000 ? fmt(p.period) + NB + 'dygn per varv' : sig(p.period / 365.256, 3) + NB + 'år per varv') : 'Centrum'}</small>`;
-  etikettBox.appendChild(e);
-  bana.etiketter.push(e);
-});
+/* =====================================================================
+   KARTAN (SOLSYSTEMET I DAG)
+   ===================================================================== */
+const karta = { oppen: false };
+const bana = {
+  scen: new THREE.Scene(), kam: new THREE.PerspectiveCamera(38, 1, 0.1, 6000),
+  dagar: (Date.now() - J2000) / 86400000, fart: 7, spelar: !REDUCERA,
+  m: 0, mMal: 0, az: 1.25, el: 0.52, vaz: 0, hover: -1,
+  obj: [], linjer: [], etiketter: [],
+};
+bana.scen.add(byggVintergatan(3000, 0.22));
+const banStjarnor = byggStjarnor(MOBIL ? 1800 : 3000, 2600);
+bana.scen.add(banStjarnor);
+let banaByggd = false;
+function byggBana() {
+  if (banaByggd) return;
+  banaByggd = true;
+  PLANETER.forEach((p, i) => {
+    const o = byggPlanet(p, { seg: [64, 48], glod: 5.2 });
+    o.ladda();
+    bana.scen.add(o.root);
+    bana.obj.push(o);
+    if (!p.sol && !p.mane) {
+      const pts = [];
+      const n = p.bana ? 512 : 256;
+      for (let k = 0; k <= n; k++) { const v = k / n * Math.PI * 2; pts.push(new V3(Math.cos(v), 0, -Math.sin(v))); }
+      const lin = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
+        new THREE.LineBasicMaterial({ color: new THREE.Color(p.acc), transparent: true, opacity: 0.16, depthWrite: false }));
+      bana.scen.add(lin);
+      bana.linjer[i] = lin;
+    }
+    const e = document.createElement('div');
+    e.className = 'et';
+    e.innerHTML = `${p.namn}<small>${p.mane ? fmt(p.period, 1) + NB + 'dygn per varv runt jorden' : p.period ? (p.period < 1000 ? fmt(p.period) + NB + 'dygn per varv' : sig(p.period / 365.256, 3) + NB + 'år per varv') : 'Centrum'}</small>`;
+    $('kartaEtiketter').appendChild(e);
+    bana.etiketter.push(e);
+  });
+}
+const kartaEl = $('karta');
+function oppnaKarta() {
+  byggBana();
+  karta.oppen = true;
+  document.body.classList.add('kartalage', 'last');
+}
+function stangKarta() {
+  karta.oppen = false;
+  document.body.classList.remove('kartalage');
+  if (!omlopp.aktiv) document.body.classList.remove('last');
+}
+$('kartaKnapp').addEventListener('click', oppnaKarta);
+$('kartaStang').addEventListener('click', stangKarta);
+const kvy = new V3(), kvec = new V3();
+const banProj = [], etRutor = [];
 let banTryck = null;
-const banProj = [];
-const etRutor = [];
-banEl.addEventListener('pointerdown', (e) => {
-  if (e.target.closest('.banor-kontroller')) return;
-  banTryck = { x: e.clientX, y: e.clientY, lx: e.clientX, ly: e.clientY, lt: performance.now(), id: e.pointerId, drog: false, typ: e.pointerType };
+kartaEl.addEventListener('pointerdown', (e) => {
+  if (e.target.closest('.karta-kontroller, .karta-stang, a')) return;
+  banTryck = { x: e.clientX, y: e.clientY, lx: e.clientX, ly: e.clientY, lt: performance.now(), id: e.pointerId, drog: false };
 });
-banEl.addEventListener('pointermove', (e) => {
-  if (!banTryck) {
-    const i = narmastBan(e);
-    if (i !== bana.hover) { bana.hover = i; }
-    banEl.classList.toggle('hovrar', i !== -1);
-    return;
-  }
+kartaEl.addEventListener('pointermove', (e) => {
+  if (!banTryck) { bana.hover = narmastBan(e); kartaEl.classList.toggle('hovrar', bana.hover !== -1); return; }
   if (e.pointerId !== banTryck.id) return;
   const dx = e.clientX - banTryck.lx, dy = e.clientY - banTryck.ly;
-  if (!banTryck.drog && Math.hypot(e.clientX - banTryck.x, e.clientY - banTryck.y) > 6) {
-    banTryck.drog = true; banEl.classList.add('drar');
-    try { banEl.setPointerCapture(e.pointerId); } catch (_) {}
-  }
+  if (!banTryck.drog && Math.hypot(e.clientX - banTryck.x, e.clientY - banTryck.y) > 6) { banTryck.drog = true; kartaEl.classList.add('drar'); try { kartaEl.setPointerCapture(e.pointerId); } catch (_) {} }
   if (!banTryck.drog) return;
   const now = performance.now(), dt = Math.max(1, now - banTryck.lt) / 1000;
   bana.az -= dx * 0.006;
-  if (banTryck.typ !== 'touch') bana.el = Math.min(1.45, Math.max(0.08, bana.el + dy * 0.004));
+  bana.el = Math.min(1.45, Math.max(0.08, bana.el + dy * 0.004));
   bana.vaz = -dx * 0.006 / dt;
   banTryck.lx = e.clientX; banTryck.ly = e.clientY; banTryck.lt = now;
 });
-banEl.addEventListener('pointerup', (e) => {
+kartaEl.addEventListener('pointerup', (e) => {
   if (!banTryck) return;
-  if (!banTryck.drog) { const i = narmastBan(e); if (i !== -1) flygTill(i); }
+  if (!banTryck.drog) { const i = narmastBan(e); if (i !== -1) { stangKarta(); gaTillStopp(i); } }
   else if (performance.now() - banTryck.lt > 90) bana.vaz = 0;
-  banTryck = null; banEl.classList.remove('drar');
+  banTryck = null; kartaEl.classList.remove('drar');
 });
-banEl.addEventListener('pointerleave', () => { if (!banTryck) bana.hover = -1; });
-banEl.addEventListener('pointercancel', () => { banTryck = null; banEl.classList.remove('drar'); });
+kartaEl.addEventListener('pointercancel', () => { banTryck = null; kartaEl.classList.remove('drar'); });
 function narmastBan(e) {
-  const r = banEl.getBoundingClientRect();
-  const x = e.clientX - r.left, y = e.clientY - r.top;
   let bast = -1, bd = 1e9;
-  banProj.forEach((pr, i) => { if (!pr) return; const d = Math.hypot(pr.x - x, pr.y - y); if (d < Math.max(22, pr.r + 10) && d < bd) { bd = d; bast = i; } });
+  banProj.forEach((pr, i) => { if (!pr) return; const d = Math.hypot(pr.x - e.clientX, pr.y - e.clientY); if (d < Math.max(22, pr.r + 10) && d < bd) { bd = d; bast = i; } });
   return bast;
 }
-const fartEl = $('fart'), fartText = $('fartText');
+const kFart = $('kFart'), kFartText = $('kFartText');
 function fartFranReglage() {
-  const x = +fartEl.value / 100;
+  const x = +kFart.value / 100;
   bana.fart = Math.pow(10, -0.7 + x * 4.2);
   const v = bana.fart;
   const enh = (n, en, fler) => { const s = sig(n, 2); return `${s} ${s === '1' ? en : fler} per sekund`; };
-  fartText.textContent = v < 1 ? enh(v * 24, 'timme', 'timmar') : v < 30.44 ? enh(v, 'dygn', 'dygn') : v < 365.25 ? enh(v / 30.44, 'månad', 'månader') : enh(v / 365.25, 'år', 'år');
+  kFartText.textContent = v < 1 ? enh(v * 24, 'timme', 'timmar') : v < 30.44 ? enh(v, 'dygn', 'dygn') : v < 365.25 ? enh(v / 30.44, 'månad', 'månader') : enh(v / 365.25, 'år', 'år');
 }
-fartEl.addEventListener('input', fartFranReglage);
+kFart.addEventListener('input', fartFranReglage);
 fartFranReglage();
-$('spela').addEventListener('click', () => {
+$('kSpela').addEventListener('click', () => {
   bana.spelar = !bana.spelar;
-  $('ikonPaus').style.display = bana.spelar ? '' : 'none';
-  $('ikonSpela').style.display = bana.spelar ? 'none' : '';
-  $('spela').setAttribute('aria-label', bana.spelar ? 'Pausa' : 'Spela');
+  $('kIkonPaus').style.display = bana.spelar ? '' : 'none';
+  $('kIkonSpela').style.display = bana.spelar ? 'none' : '';
+  $('kSpela').setAttribute('aria-label', bana.spelar ? 'Pausa' : 'Spela');
 });
-if (!bana.spelar) { $('ikonPaus').style.display = 'none'; $('ikonSpela').style.display = ''; }
-$('verklig').addEventListener('click', (e) => {
-  bana.mMal = bana.mMal > 0.5 ? 0 : 1;
-  e.currentTarget.setAttribute('aria-pressed', bana.mMal > 0.5);
-  e.currentTarget.textContent = bana.mMal > 0.5 ? 'Verkliga avstånd' : 'Verkliga avstånd';
-});
-$('idag').addEventListener('click', () => { bana.dagar = (Date.now() - J2000) / 86400000; });
-const datumEl = $('datum');
+if (!bana.spelar) { $('kIkonPaus').style.display = 'none'; $('kIkonSpela').style.display = ''; }
+$('kVerklig').addEventListener('click', (e) => { bana.mMal = bana.mMal > 0.5 ? 0 : 1; e.currentTarget.setAttribute('aria-pressed', bana.mMal > 0.5); });
+$('kIdag').addEventListener('click', () => { bana.dagar = (Date.now() - J2000) / 86400000; });
 let datumSenast = '';
-
-/* =====================================================================
-   HUVUDLOOP
-   ===================================================================== */
-let senast = performance.now(), tid = 0, storlek = { w: -1, h: -1 }, vantaTumnaglar = false;
-const vy = new THREE.Vector3();
-const vec = new THREE.Vector3();
-function anpassaStorlek() {
-  const w = window.innerWidth, h = window.innerHeight;
-  // En flik som ännu inte har fått någon storlek (0 × 0) väntar med layouten
-  if (!w || !h || (w === storlek.w && h === storlek.h)) return;
-  const baraHojd = w === storlek.w && Math.abs(h - storlek.h) < 140 && MOBIL;
-  storlek = { w, h };
-  renderer.setSize(w, h, false);
-  kamera.aspect = w / h;
-  kamera.updateProjectionMatrix();
-  if (!baraHojd) { beraknaLayout(); byggSkalaOmBehov(); }
-  else beraknaLayout();
-}
-let skalaBredd = 0;
-function byggSkalaOmBehov() {
-  const smal = window.innerWidth < 700;
-  if (skalaBredd !== (smal ? 1 : 2)) { skalaBredd = smal ? 1 : 2; byggSkala(); }
-}
-
-function frame(nu) {
-  const dt = Math.min(0.05, (nu - senast) / 1000);
-  senast = nu; tid += dt;
-  anpassaStorlek();
-  // Tumnaglarna ritas i samma bildruta som scenen, som sedan skriver över dem
-  if (vantaTumnaglar) {
-    vantaTumnaglar = false;
-    renderaTumnaglar();
-    renderer.setScissorTest(false);
-    renderer.setViewport(0, 0, window.innerWidth, window.innerHeight);
-    renderer.clear();
-  }
-
-  // byte mellan planeter
-  if (tillstand.tween) {
-    const tw = tillstand.tween;
-    const t = Math.min(1, (nu - tw.t0) / tw.dur);
-    tillstand.cur = tw.fran + (tw.till - tw.fran) * easeInOut(t);
-    if (t >= 1) { tillstand.cur = tw.till; tillstand.tween = null; }
-  }
-  tillstand.g += (tillstand.gMal - tillstand.g) * (1 - Math.exp(-dt * 2.6));
-
-  const heroRect = hero.getBoundingClientRect();
-  const heroSyns = heroRect.bottom > 0 && lay.hero !== null;
-  tillstand.scrollP = Math.min(1, Math.max(0, -heroRect.top / window.innerHeight));
-  const ht = $('heroText');
-  if (!panel.classList.contains('oppen')) {
-    ht.style.transform = `translateX(-50%) translateY(${-tillstand.scrollP * 90}px)`;
-    ht.style.opacity = Math.max(0, 1 - tillstand.scrollP * 1.8);
-  }
-  if (vantaHero != null && heroRect.top > -window.innerHeight * 0.35) { gaTill(vantaHero); vantaHero = null; }
-
-  renderer.setScissorTest(false);
-  if (heroSyns) {
-    renderer.setViewport(0, 0, window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000, 1);
-    renderer.clear();
-    parallax.x += (parallax.mx - parallax.x) * (1 - Math.exp(-dt * 2));
-    parallax.y += (parallax.my - parallax.y) * (1 - Math.exp(-dt * 2));
-    kamera.position.set(parallax.x * 0.5, -parallax.y * 0.35, 0);
-    kamera.lookAt(parallax.x * 0.15, -parallax.y * 0.1, -D);
-    himmel.rotation.y = tid * 0.004;
-    stjarnor.rotation.y = tid * 0.003;
-    stjarnor.material.uniforms.uTime.value = tid;
-    const dimScroll = 1 - tillstand.scrollP * 0.5;
-    planeter.forEach((o, i) => {
-      const s = layoutPlanet(i);
-      if (!o.root.visible) return;
-      // tröghet efter dragning, och mjuk avmattning
-      if (!tryck || i !== tillstand.idx) {
-        if (o.vel.lengthSq() > 1e-6) {
-          roteraAnv(o, o.vel.x * dt, o.vel.y * dt);
-          o.vel.multiplyScalar(Math.exp(-dt * 2.2));
-        }
-      }
-      const vikt = (1 - Math.min(1, s)) * (1 - tillstand.g);
-      qBas.copy(o.qUpp).slerp(o.qHero, vikt * vikt * (3 - 2 * vikt));
-      o.root.quaternion.copy(o.anv).multiply(qBas);
-      const dim = (s < 0.5 ? 1 : 0.82) * dimScroll;
-      if (o.glod) {
-        const nar = (1 - Math.min(1, s)) * (1 - tillstand.g);
-        const gs = 4.6 + (1.5 - 4.6) * nar;
-        o.glod.scale.setScalar(gs); o.stralar.scale.setScalar(gs * (1.35 - 0.2 * nar));
-      }
-      o.uppdatera(tid, dt, LJUS, dim, REDUCERA ? 0.2 : 1);
-    });
-    renderer.render(hjalte, kamera);
-  }
-
-  // Banorna
-  const br = banEl.getBoundingClientRect();
-  if (br.top < window.innerHeight && br.bottom > 0) {
-    if (!bana.ladda) { bana.ladda = true; bana.obj.forEach((o) => o.ladda()); }
-    const vpY = window.innerHeight - br.bottom;
-    renderer.setScissorTest(true);
-    renderer.setViewport(br.left, vpY, br.width, br.height);
-    renderer.setScissor(br.left, vpY, br.width, br.height);
-    renderer.setClearColor(0x000000, 1);
-    renderer.clear();
-    uppdateraBanor(dt, br);
-    renderer.render(bana.scen, bana.kam);
-    renderer.setScissorTest(false);
-  }
-}
-// Ett fel i en enskild bildruta får inte stoppa animationen
-function loop(nu) {
-  requestAnimationFrame(loop);
-  try { frame(nu); } catch (e) { console.error(e); }
-}
-
-function uppdateraBanor(dt, br) {
+function uppdateraBanor(dt, w, h) {
   if (bana.spelar) bana.dagar += bana.fart * dt;
-  if (bana.forsta !== false) { bana.forsta = false; if (br.width / br.height < 0.9) bana.el = 0.95; }
   bana.m += (bana.mMal - bana.m) * (1 - Math.exp(-dt * 2.2));
-  if (!banTryck || !banTryck.drog) {
-    bana.az += bana.vaz * dt + (REDUCERA ? 0 : 0.012 * dt);
-    bana.vaz *= Math.exp(-dt * 2);
-  }
+  if (!banTryck || !banTryck.drog) { bana.az += bana.vaz * dt + (REDUCERA ? 0 : 0.012 * dt); bana.vaz *= Math.exp(-dt * 2); }
   const m = bana.m;
-  const dist = 92 + (215 - 92) * m;
   const k = bana.kam;
-  k.aspect = br.width / br.height;
+  k.aspect = w / h;
   const smal = k.aspect < 0.9;
-  const d = dist * (smal ? 2.25 : 1);
+  const d = (92 + (215 - 92) * m) * (smal ? 2.25 : 1);
   k.position.set(d * Math.cos(bana.el) * Math.sin(bana.az), d * Math.sin(bana.el), d * Math.cos(bana.el) * Math.cos(bana.az));
-  k.lookAt(0, smal ? 0 : -2, 0);
-  if (!smal) k.setViewOffset(br.width, br.height, -br.width * 0.12, 0, br.width, br.height);
-  else k.setViewOffset(br.width, br.height, 0, -br.height * 0.07, br.width, br.height);
+  k.lookAt(0, 0, 0);
+  if (!smal) k.setViewOffset(w, h, -w * 0.12, 0, w, h); else k.setViewOffset(w, h, 0, -h * 0.07, w, h);
   k.updateProjectionMatrix();
   banStjarnor.material.uniforms.uTime.value = tid;
-
   const hoverIdx = bana.hover;
   bana.obj.forEach((o, i) => {
     const p = o.p;
     const R = banStorlek(p, m);
-    if (p.sol) {
-      o.root.position.set(0, 0, 0);
-    } else if (p.mane) {
-      // Månen följer jorden, som alltid uppdateras före den
+    if (p.sol) o.root.position.set(0, 0, 0);
+    else if (p.mane) {
       const jord = bana.obj[i - 1].root.position;
       const r = 1.15 + (0.45 - 1.15) * m;
-      const v = THREE.MathUtils.degToRad(p.L0 + 360 * bana.dagar / p.period);
+      const v = rad(p.L0 + 360 * bana.dagar / p.period);
       o.root.position.set(jord.x + r * Math.cos(v), 0, jord.z - r * Math.sin(v));
     } else if (p.bana) {
       ellipsLage(p, ellipsE(p, bana.dagar), m, o.root.position);
@@ -2491,43 +2466,40 @@ function uppdateraBanor(dt, br) {
       if (lin.userData.m !== m) {
         lin.userData.m = m;
         const pos = lin.geometry.attributes.position, n = pos.count - 1;
-        for (let k = 0; k <= n; k++) { ellipsLage(p, k / n * Math.PI * 2, m, vy); pos.setXYZ(k, vy.x, vy.y, vy.z); }
+        for (let q = 0; q <= n; q++) { ellipsLage(p, q / n * Math.PI * 2, m, kvy); pos.setXYZ(q, kvy.x, kvy.y, kvy.z); }
         pos.needsUpdate = true;
         lin.geometry.computeBoundingSphere();
       }
-      const mal = hoverIdx === i ? 0.7 : 0.16;
-      lin.material.opacity += (mal - lin.material.opacity) * (1 - Math.exp(-dt * 8));
+      lin.material.opacity += ((hoverIdx === i ? 0.7 : 0.16) - lin.material.opacity) * (1 - Math.exp(-dt * 8));
     } else {
       const r = banRadie(p.a, m);
-      const v = THREE.MathUtils.degToRad(p.L0 + 360 * bana.dagar / p.period);
+      const v = rad(p.L0 + 360 * bana.dagar / p.period);
       o.root.position.set(r * Math.cos(v), 0, -r * Math.sin(v));
       const lin = bana.linjer[i];
       lin.scale.setScalar(r);
-      const mal = hoverIdx === i ? 0.7 : 0.16;
-      lin.material.opacity += (mal - lin.material.opacity) * (1 - Math.exp(-dt * 8));
+      lin.material.opacity += ((hoverIdx === i ? 0.7 : 0.16) - lin.material.opacity) * (1 - Math.exp(-dt * 8));
     }
     o.root.scale.setScalar(R);
-    vec.copy(o.root.position).multiplyScalar(-1);
-    if (vec.lengthSq() < 1e-6) vec.set(0, 1, 0);
-    vec.normalize();
-    o.uppdatera(tid, dt, vec, 1, 2.5);
-    // etikett
-    vy.copy(o.root.position); vy.y += R * (p.ring ? 1.3 : 1.15) + (p.sol ? 0.8 : 0.1);
-    vy.project(k);
-    const x = (vy.x + 1) / 2 * br.width, y = (1 - vy.y) / 2 * br.height;
-    vec.copy(o.root.position).project(k);
-    const cx = (vec.x + 1) / 2 * br.width, cy = (1 - vec.y) / 2 * br.height;
+    kvec.copy(o.root.position).multiplyScalar(-1);
+    if (kvec.lengthSq() < 1e-6) kvec.set(0, 1, 0);
+    kvec.normalize();
+    o.uppdatera(tid, dt, kvec, 1, 2.5);
+    kvy.copy(o.root.position); kvy.y += R * (p.ring ? 1.3 : 1.15) + (p.sol ? 0.8 : 0.1);
+    kvy.project(k);
+    const x = (kvy.x + 1) / 2 * w, y = (1 - kvy.y) / 2 * h;
+    kvec.copy(o.root.position).project(k);
+    const cx = (kvec.x + 1) / 2 * w, cy = (1 - kvec.y) / 2 * h;
     banProj[i] = { x: cx, y: cy, r: Math.abs(y - cy) };
     const et = bana.etiketter[i];
     et.style.transform = `translate(${x}px, ${y}px) translate(-50%, -100%)`;
     et.classList.toggle('hov', hoverIdx === i);
-    etRutor[i] = { x, y, b: p.namn.length * 8.2 + 14, syns: vy.z < 1 };
+    etRutor[i] = { x, y, b: p.namn.length * 8.2 + 14, syns: kvy.z < 1 };
   });
-  // Etiketter som skulle krocka döljs; den man pekar på och de mest kända går först
   const placerade = [];
-  const ordning = [hoverIdx, ...['solen', 'jorden', 'jupiter', 'saturnus', 'uranus', 'neptunus', 'pluto', 'mars', 'venus', 'merkurius', 'manen'].map((id) => PLANETER.findIndex((q) => q.id === id))].filter((v, k, a) => v >= 0 && a.indexOf(v) === k);
+  const ordning = [hoverIdx, ...['solen', 'jorden', 'jupiter', 'saturnus', 'uranus', 'neptunus', 'pluto', 'mars', 'venus', 'merkurius', 'manen'].map((id) => PLANETER.findIndex((q) => q.id === id))].filter((v, q, a) => v >= 0 && a.indexOf(v) === q);
   ordning.forEach((i) => {
     const r = etRutor[i];
+    if (!r) return;
     const ruta = { x0: r.x - r.b / 2, x1: r.x + r.b / 2, y0: r.y - 20, y1: r.y };
     const krock = placerade.some((q) => ruta.x0 < q.x1 + 6 && ruta.x1 > q.x0 - 6 && ruta.y0 < q.y1 + 2 && ruta.y1 > q.y0 - 2);
     const syns = r.syns && !krock;
@@ -2535,55 +2507,242 @@ function uppdateraBanor(dt, br) {
     bana.etiketter[i].style.opacity = syns ? 1 : 0;
   });
   const datum = new Date(J2000 + bana.dagar * 86400000).toLocaleDateString('sv-SE', { day: 'numeric', month: 'long', year: 'numeric' });
-  if (datum !== datumSenast) { datumEl.textContent = datum; datumSenast = datum; }
+  if (datum !== datumSenast) { $('kDatum').textContent = datum; datumSenast = datum; }
 }
 
-/* ---------- Sidhuvudets tillstånd ---------- */
-const topp = $('topp');
-const navLankar = [...document.querySelectorAll('.nav a[data-sek]')];
-function scrollLage() {
-  topp.classList.toggle('fast', window.scrollY > window.innerHeight * 0.7);
-  let aktiv = 'hero';
-  navLankar.forEach((a) => { const r = $(a.dataset.sek).getBoundingClientRect(); if (r.top < window.innerHeight * 0.45) aktiv = a.dataset.sek; });
-  navLankar.forEach((a) => a.classList.toggle('aktiv', a.dataset.sek === aktiv));
+/* =====================================================================
+   INTERAKTION
+   ===================================================================== */
+let drag = null;
+const _ray = new THREE.Raycaster(), _mus = new THREE.Vector2(), _rv = new V3();
+function traffKropp(e) {
+  _mus.set(e.clientX / window.innerWidth * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
+  _ray.setFromCamera(_mus, kamera);
+  const ray = _ray.ray;
+  let bast = -1, bt = Infinity;
+  kroppar.forEach((o, i) => {
+    const R = o.root.scale.x * 1.02;
+    _rv.copy(o.root.position).sub(ray.origin);
+    const tca = _rv.dot(ray.direction);
+    const d2 = _rv.lengthSq() - tca * tca;
+    if (tca < 0 || d2 > R * R) return;
+    const t = tca - Math.sqrt(R * R - d2);
+    if (t < bt) { bt = t; bast = i; }
+  });
+  return bast;
 }
-window.addEventListener('scroll', scrollLage, { passive: true });
+window.addEventListener('pointerdown', (e) => {
+  if (karta.oppen || e.button !== 0) return;
+  if (e.target.closest('button, a, input, .dossier, canvas#spCanvas')) return;
+  drag = { x: e.clientX, y: e.clientY, lx: e.clientX, ly: e.clientY, lt: performance.now(), id: e.pointerId, drog: false };
+});
+window.addEventListener('pointermove', (e) => {
+  if (!drag || e.pointerId !== drag.id) return;
+  const dx = e.clientX - drag.lx, dy = e.clientY - drag.ly;
+  if (!drag.drog && Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 6) drag.drog = true;
+  if (drag.drog && omlopp.aktiv) {
+    const now = performance.now(), dt = Math.max(1, now - drag.lt) / 1000;
+    omlopp.az -= dx * 0.006;
+    omlopp.el += dy * 0.005;
+    omlopp.vaz = -dx * 0.006 / dt;
+    omlopp.vel = dy * 0.005 / dt;
+    drag.lt = now;
+  }
+  drag.lx = e.clientX; drag.ly = e.clientY;
+});
+window.addEventListener('pointerup', (e) => {
+  if (!drag || e.pointerId !== drag.id) return;
+  if (!drag.drog) {
+    const i = traffKropp(e);
+    if (i >= 0 && !omlopp.aktiv) oppnaDossier(i);
+  } else if (omlopp.aktiv && performance.now() - drag.lt > 90) { omlopp.vaz = 0; omlopp.vel = 0; }
+  drag = null;
+});
+window.addEventListener('pointercancel', () => { drag = null; });
+window.addEventListener('wheel', (e) => {
+  if (!omlopp.aktiv || karta.oppen || e.target.closest('.dossier')) return;
+  e.preventDefault();
+  const R = kroppar[omlopp.k].root.scale.x;
+  omlopp.distMal = klamp(omlopp.distMal * (1 + e.deltaY * 0.0012), R * 1.5, R * 9);
+}, { passive: false });
+document.addEventListener('keydown', (e) => {
+  if (e.target.closest && e.target.closest('input')) return;
+  if (e.key === 'Escape') { if (karta.oppen) stangKarta(); else if (omlopp.aktiv) stangDossier(); return; }
+  if (omlopp.aktiv || karta.oppen) return;
+  const s = scrollS();
+  if (e.key === 'ArrowRight') { gaTillStopp(Math.floor(s + 0.5) + 1); e.preventDefault(); }
+  if (e.key === 'ArrowLeft') { gaTillStopp(Math.ceil(s - 0.5) - 1); e.preventDefault(); }
+});
+$('noterKnapp').addEventListener('click', (e) => { noterPa = !noterPa; e.currentTarget.setAttribute('aria-pressed', noterPa); });
+
+/* =====================================================================
+   HUVUDLOOP
+   ===================================================================== */
+let senast = performance.now(), tid = 0, storlek = { w: -1, h: -1 };
+const forraKam = new V3(), fartVek = new V3(), _ljus = new V3();
+let fartJamn = 0;
+function anpassaStorlek() {
+  const w = window.innerWidth, h = window.innerHeight;
+  if (!w || !h || (w === storlek.w && h === storlek.h)) return;
+  const baraHojd = w === storlek.w && MOBIL;
+  storlek = { w, h };
+  renderer.setSize(w, h, false);
+  kamera.aspect = w / h;
+  kamera.fov = kamera.aspect < 0.9 ? 64 : 48;
+  kamera.updateProjectionMatrix();
+  if (!baraHojd) {
+    const s = scrollS();
+    satSektionshojd();
+    window.scrollTo(0, s * stoppH);
+  }
+}
+function satVyforskjutning(g) {
+  const w = storlek.w, h = storlek.h;
+  if (g < 0.002) { kamera.clearViewOffset(); return; }
+  if (kamera.aspect >= 0.9) kamera.setViewOffset(w, h, Math.min(580, w * 0.48) * 0.5 * g, 0, w, h);
+  else kamera.setViewOffset(w, h, 0, h * 0.25 * g, w, h);
+}
+
+function frame(nu) {
+  const dtVerklig = Math.min(0.4, Math.max(0, (nu - senast) / 1000));
+  const dt = Math.min(0.05, dtVerklig);
+  senast = nu; tid += dt;
+  anpassaStorlek();
+  if (storlek.w < 0) return;
+  renderer.setScissorTest(false);
+  renderer.setViewport(0, 0, storlek.w, storlek.h);
+
+  if (karta.oppen) {
+    renderer.clear();
+    uppdateraBanor(dt, storlek.w, storlek.h);
+    renderer.render(bana.scen, bana.kam);
+    return;
+  }
+
+  const s = scrollS();
+  const info = resPose(s, tid);
+  // texturer för närliggande stopp
+  for (let k = info.i - 1; k <= info.i + 2; k++) if (kroppar[k]) kroppar[k].ladda();
+
+  let mal = malPose;
+  if (omlopp.aktiv) mal = omloppPose(tid, dt);
+  // utjämningen räknar med verklig tid, så att kameran hinner fram även när bildfrekvensen är låg
+  omlopp.g += ((omlopp.aktiv ? 1 : 0) - omlopp.g) * (1 - Math.exp(-dtVerklig * 2.6));
+  const lambda = omlopp.aktiv ? 5 : (omlopp.g > 0.05 ? 3 : 6);
+  const kk = 1 - Math.exp(-dtVerklig * lambda);
+  forraKam.copy(kamera.position);
+  kamera.position.lerp(mal.pos, kk);
+  kamera.quaternion.slerp(mal.quat, kk);
+
+  // närplanet efter avståndet till närmaste yta
+  let narmast = 1e9;
+  kroppar.forEach((o) => { narmast = Math.min(narmast, kamera.position.distanceTo(o.root.position) - o.root.scale.x * 1.03); });
+  kamera.near = klamp(narmast * 0.3, 0.02, 4);
+  satVyforskjutning(omlopp.g);
+  kamera.updateProjectionMatrix();
+
+  // fart och stjärnstrimmor
+  fartVek.copy(kamera.position).sub(forraKam).divideScalar(Math.max(dtVerklig, 1e-3));
+  const fart = fartVek.length();
+  fartJamn += (fart - fartJamn) * (1 - Math.exp(-dtVerklig * 6));
+  strimmor.uni.uCam.value.copy(kamera.position);
+  strimmor.uni.uVel.value.copy(fartVek).multiplyScalar(0.22);
+  if (strimmor.uni.uVel.value.length() > 110) strimmor.uni.uVel.value.setLength(110);
+  strimmor.uni.uStyrka.value = mjuk(2, 30, fartJamn);
+  strimmor.puni.uTime.value = tid;
+  himmel.position.copy(kamera.position);
+  $('varp').style.opacity = (mjuk(20, 160, fartJamn) * 0.9).toFixed(3);
+
+  const stannar = Math.round(s);
+  kroppar.forEach((o, i) => {
+    if (o.p.sol) _ljus.set(0, 1, 0); else _ljus.copy(o.root.position).negate().normalize();
+    // medan man stannar vid en värld snurrar den långsamt, så att anteckningarna hinner läsas
+    let spinMul = i === stannar && !omlopp.aktiv ? 0.25 : 1;
+    if (o.malSpin != null) {
+      const diff = o.malSpin - o.snurr.rotation.y;
+      o.snurr.rotation.y += diff * (1 - Math.exp(-dtVerklig * 1.3));
+      spinMul = 0;
+      if (Math.abs(diff) < 0.003) o.malSpin = null;
+    }
+    o.uppdatera(tid, dt, _ljus, 1, spinMul);
+  });
+  scen.updateMatrixWorld();
+
+  uppdateraHUD(s, info);
+
+  renderer.setClearColor(0x000000, 1);
+  renderer.clear();
+  renderer.render(scen, kamera);
+}
+function loop(nu) {
+  requestAnimationFrame(loop);
+  try { frame(nu); } catch (e) { console.error(e); }
+}
+
+function uppdateraHUD(s, info) {
+  const k = Math.round(s);
+  const nara = s - k;
+  const synlig = omlopp.aktiv ? 0 : mjuk(-0.15, -0.06, nara) * (1 - mjuk(0.14, 0.24, nara));
+  if (k !== visatStopp && !omlopp.aktiv) fyllStopptext(k);
+  // presentera först när kameran är framme, annars är världen fortfarande liten i bild
+  const framme = k < PLANETER.length && kamera.position.distanceTo(malPose.pos) < kroppar[k].root.scale.x * 0.06;
+  if (synlig > 0.85 && framme && presenterat !== k && !omlopp.aktiv) { if (presentera(k)) presenterat = k; }
+  if (synlig < 0.1 && presenterat === k) presenterat = -1;
+  stopptext.style.opacity = (synlig * (1 - omlopp.g)).toFixed(3);
+  stopptext.style.transform = `translateY(${((1 - synlig) * 16).toFixed(1)}px)`;
+  stopptext.classList.toggle('klickbar', synlig > 0.5);
+  const r = stopptext.getBoundingClientRect();
+  hindret = synlig > 0.2 ? { x0: r.left - 10, x1: r.right + 10, y0: r.top - 10, y1: r.bottom + 10 } : null;
+  const kr = klockaEl.getBoundingClientRect();
+  const krock = synlig > 0.2 && r.bottom > kr.top - 6;
+  klockaEl.style.opacity = krock ? 0 : 1;
+
+  // ljusklockan
+  const i = info.i;
+  const a = AE_AVST[STOPP[i]], b = i + 1 < NS ? AE_AVST[STOPP[i + 1]] : a;
+  const ae = a + (b - a) * info.e;
+  $('kTid').textContent = klockText(ljusTid(ae));
+  $('kAvst').textContent = ae < 1e-6 ? 'vid solens yta' : `${fmt(ae * AE_KM / 1e6, ae * AE_KM / 1e6 >= 100 ? 0 : 1)}${NB}miljoner km · ${fmt(ae, ae < 10 ? 2 : 1)}${NB}AE`;
+
+  // rutten
+  const andel = s / (NS - 1) * 100;
+  $('foton').style.top = andel + '%';
+  $('ruttFyll').style.height = andel + '%';
+  $('mobilFyll').style.width = andel + '%';
+  ruttLista.querySelectorAll('li').forEach((li, q) => li.classList.toggle('passerad', q < s - 0.3));
+
+  // statusraden
+  let st = '';
+  if (omlopp.aktiv) st = '';
+  else if (info.t > 0.02 && info.t < 0.98 && i + 1 < NS) {
+    const namn = STOPP[i + 1] === 'slut' ? 'Voyager 1' : PLANETER[i + 1].namn;
+    st = `På väg mot <b>${namn}</b> · framme om ${nb(tidText(Math.max(0, ljusTid(b - ae))))}`;
+  } else if (k < NS - 1) {
+    st = `Skrolla vidare mot <b>${STOPP[k + 1] === 'slut' ? 'Voyager 1' : PLANETER[k + 1].namn}</b><span class="pil"></span>`;
+  }
+  if (statusEl._st !== st) { statusEl.innerHTML = st; statusEl._st = st; }
+
+  uppdateraNoter(omlopp.aktiv ? omlopp.k : k, omlopp.aktiv ? 1 : synlig);
+}
 
 /* =====================================================================
    START
    ===================================================================== */
-const startId = (location.hash || '').slice(1);
-const startIdx = PLANETER.findIndex((p) => p.id === startId);
-tillstand.idx = startIdx >= 0 ? startIdx : 3;
-tillstand.cur = tillstand.idx;
-visaText(PLANETER[tillstand.idx], true);
-uppdateraGrannar();
-
-// Laddskärmen väntar bara på planeten som visas först; grannarna tonar in när de är klara
-const forsta = [planeter[tillstand.idx].ladda(), tex('vintergatan.jpg')];
+const forsta = [kroppar[0].ladda(), kroppar[1].ladda(), tex('vintergatan.jpg')];
 let klara = 0;
 forsta.forEach((pr) => pr.then(() => { klara++; $('lBar').style.width = (klara / forsta.length * 100) + '%'; }));
-
 document.fonts.ready.then(() => { storlek = { w: -1, h: -1 }; });
 requestAnimationFrame((t) => { senast = t; loop(t); });
-
 Promise.all(forsta).then(() => {
   $('lText').textContent = 'Klart';
   setTimeout(() => {
     $('laddare').classList.add('klar');
     document.body.classList.remove('last');
-    storlek = { w: -1, h: -1 };
-  }, 350);
-  // grannarna först, sedan resten i bakgrunden; därefter renderas tumnaglarna
-  const nara = [];
-  for (let k = tillstand.idx - 2; k <= tillstand.idx + 2; k++) if (planeter[k]) nara.push(planeter[k].ladda());
-  Promise.all(nara).then(() => Promise.all(planeter.map((o) => o.ladda()))).then(() => { vantaTumnaglar = true; });
+  }, 400);
+  // resten laddas i bakgrunden, i resans ordning
+  kroppar.reduce((kedja, o) => kedja.then(() => o.ladda()), Promise.resolve());
 });
-scrollLage();
-window.addEventListener('hashchange', () => {
-  const i = PLANETER.findIndex((p) => p.id === location.hash.slice(1));
-  if (i >= 0 && i !== tillstand.idx) gaTill(i);
-});
+window.addEventListener('resize', () => { const cv = $('spCanvas'); if (cv && cv._rita) cv._rita(); });
 </script>
 </body>
 </html>

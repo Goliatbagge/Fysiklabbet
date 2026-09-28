@@ -1,0 +1,2589 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Solsystemet, klassisk version — Fysiklabbet</title>
+<meta name="description" content="Sväva ovanför planeternas atmosfär, snurra dem med fingret och läs om varje värld i solsystemet.">
+<meta name="theme-color" content="#04060c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }</script>
+<style>
+:root {
+  --bg: #04060c;
+  --bg2: #070a14;
+  --ink: #eef1f7;
+  --muted: #a3abbf;
+  --faint: #6b7389;
+  --line: rgba(255, 255, 255, 0.08);
+  --acc: #5fd4c4;
+  --serif: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
+  --sans: 'Poppins', system-ui, sans-serif;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); }
+body { font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body.last { overflow: hidden; }
+button { font: inherit; color: inherit; }
+a { color: inherit; }
+sup { font-size: .68em; line-height: 0; }
+
+#scen { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+main { position: relative; z-index: 1; }
+
+/* ---------- Laddning ---------- */
+#laddare {
+  position: fixed; inset: 0; z-index: 100; display: grid; place-items: center;
+  background: radial-gradient(900px 600px at 50% 120%, rgba(60, 120, 255, .12), transparent 70%), var(--bg);
+  transition: opacity 1.2s ease, visibility 1.2s;
+}
+#laddare.klar { opacity: 0; visibility: hidden; }
+.l-inre { text-align: center; }
+.l-kicker { font-size: 11px; letter-spacing: .5em; text-transform: uppercase; color: var(--muted); padding-left: .5em; }
+.l-titel { font-family: var(--serif); font-size: clamp(40px, 7vw, 76px); letter-spacing: .06em; text-transform: uppercase; margin: 14px 0 26px; }
+.l-bar { width: 180px; height: 1px; background: rgba(255,255,255,.12); margin: 0 auto; overflow: hidden; }
+.l-bar i { display: block; height: 100%; width: 0; background: var(--acc); transition: width .4s ease; }
+.l-text { margin-top: 16px; font-size: 12px; color: var(--faint); letter-spacing: .08em; }
+
+/* ---------- Sidhuvud ---------- */
+.topp {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px clamp(16px, 4vw, 44px);
+  transition: background .5s, backdrop-filter .5s;
+}
+.topp::after {
+  content: ''; position: absolute; left: clamp(16px, 4vw, 44px); right: clamp(16px, 4vw, 44px); bottom: 0;
+  height: 1px; background: var(--line);
+}
+.topp.panelvy .nav { opacity: 0; pointer-events: none; }
+.nav { transition: opacity .5s; }
+.topp.fast { background: rgba(4, 6, 12, .62); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.logo { font-weight: 600; font-size: 15px; letter-spacing: .01em; text-decoration: none; display: flex; align-items: center; gap: 9px; }
+.logo svg { color: var(--acc); transition: color .8s; }
+.logo small { font-weight: 400; color: var(--faint); font-size: 12px; margin-left: 4px; }
+.nav { display: flex; align-items: center; gap: 2px; }
+.nav a { font-size: 13px; color: var(--muted); text-decoration: none; padding: 9px 14px; position: relative; transition: color .3s; }
+.nav a:hover { color: var(--ink); }
+.nav a.aktiv { color: var(--ink); }
+.nav a.aktiv::after { content: ''; position: absolute; left: 14px; right: 14px; bottom: -17px; height: 2px; background: var(--acc); transition: background .8s; }
+.nav .pill-sm {
+  margin-left: 10px; background: #f3f5fa; color: #0a0d16; border: 0; border-radius: 999px;
+  font-size: 12px; font-weight: 500; padding: 9px 16px; cursor: pointer; transition: transform .3s var(--ease), box-shadow .3s;
+}
+.nav .pill-sm:hover { transform: translateY(-1px); box-shadow: 0 6px 24px -6px rgba(180, 210, 255, .5); }
+@media (max-width: 760px) {
+  .nav a:not(.pill-sm) { display: none; }
+  .logo small { display: none; }
+}
+
+/* ---------- Hjältevyn ---------- */
+#hero {
+  position: relative; height: 100vh; height: 100svh; min-height: 540px; overflow: hidden;
+  touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: grab;
+}
+#hero.drar { cursor: grabbing; }
+.hero-text {
+  position: absolute; left: 50%; top: clamp(84px, 13.5vh, 150px); transform: translateX(-50%);
+  width: min(700px, 92vw); text-align: center; pointer-events: none;
+  will-change: transform, opacity;
+}
+.kicker {
+  font-size: 12px; letter-spacing: .42em; text-transform: uppercase; color: #dde2ec;
+  padding-left: .42em; margin-bottom: 14px; transition: opacity .4s;
+}
+.titel {
+  font-family: var(--serif); font-weight: 400; margin: 0;
+  font-size: clamp(50px, 9.4vw, 136px); line-height: .98; letter-spacing: .035em;
+  text-transform: uppercase; white-space: nowrap; padding-top: .14em;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, .35);
+}
+.titel .b { display: inline-block; animation: inBokstav 1s var(--ease) both; }
+.titel.ut .b { animation: utBokstav .38s ease-in both; }
+@keyframes inBokstav { from { opacity: 0; transform: translateY(.3em); filter: blur(14px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@keyframes utBokstav { to { opacity: 0; transform: translateY(-.18em); filter: blur(10px); } }
+.streck { width: 56px; height: 2px; background: var(--acc); margin: 22px auto 20px; transition: background .8s; }
+.ingress {
+  font-size: clamp(13px, 1.05vw, 15px); line-height: 1.75; color: #c7cddb;
+  max-width: 560px; margin: 0 auto; transition: opacity .45s, transform .45s;
+}
+.ingress.ut { opacity: 0; transform: translateY(-6px); }
+.pill {
+  pointer-events: auto; display: inline-block; margin-top: 30px;
+  background: #f3f5fa; color: #0a0d16; border: 0; border-radius: 999px;
+  padding: 14px 28px; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  cursor: pointer; position: relative; z-index: 2;
+  box-shadow: 0 10px 44px -10px rgba(170, 205, 255, .55), 0 0 0 6px rgba(255,255,255,.06);
+  transition: transform .35s var(--ease), box-shadow .35s;
+}
+.pill:hover { transform: translateY(-2px); box-shadow: 0 16px 50px -10px rgba(170, 205, 255, .7), 0 0 0 8px rgba(255,255,255,.08); }
+.pill:focus-visible, .granne:focus-visible, .ner:focus-visible, .tick:focus-visible { outline: 2px solid var(--acc); outline-offset: 4px; }
+
+.granne {
+  position: absolute; z-index: 3; background: none; border: 0; padding: 8px 4px; cursor: pointer;
+  font-family: var(--serif); font-size: 13px; letter-spacing: .32em; text-transform: uppercase; color: #cfd5e2;
+  transform: translateY(-50%); transition: opacity .5s, color .3s, letter-spacing .4s var(--ease);
+}
+.granne:hover { color: #fff; letter-spacing: .4em; }
+.granne.dold { opacity: 0; pointer-events: none; }
+
+.hero-fot {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 0 clamp(16px, 4vw, 44px) 26px; pointer-events: none;
+}
+.hero-fot > * { pointer-events: auto; }
+.ner {
+  position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%);
+  width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+  background: rgba(8, 11, 20, .35); border: 1px solid rgba(255,255,255,.16);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: background .3s, transform .3s var(--ease);
+}
+.ner:hover { background: rgba(255,255,255,.12); transform: translateX(-50%) translateY(2px); }
+.raknare { display: flex; flex-direction: column; gap: 10px; }
+.raknare .nr { font-size: 12px; letter-spacing: .24em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.raknare .nr b { color: var(--ink); font-weight: 500; }
+.ticks { display: flex; gap: 6px; align-items: center; }
+.tick {
+  width: 16px; height: 16px; border: 0; background: none; padding: 0; cursor: pointer; position: relative;
+}
+.tick::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 7px; height: 2px; border-radius: 2px;
+  background: rgba(255,255,255,.22); transition: background .4s;
+}
+.tick.aktiv { width: 34px; }
+.tick.aktiv::before { background: var(--acc); }
+.tick:hover::before { background: rgba(255,255,255,.6); }
+.tick span {
+  position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(4px);
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; color: var(--ink);
+  opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s;
+}
+.tick:hover span, .tick:focus-visible span { opacity: 1; transform: translateX(-50%); }
+.tips { font-size: 12px; color: rgba(225, 230, 240, .72); text-align: right; line-height: 1.7; letter-spacing: .02em; text-shadow: 0 1px 12px rgba(0,0,0,.9), 0 0 3px rgba(0,0,0,.8); }
+.raknare { text-shadow: 0 1px 12px rgba(0,0,0,.9), 0 0 3px rgba(0,0,0,.8); }
+.tips kbd {
+  font-family: var(--sans); font-size: 11px; border: 1px solid rgba(255,255,255,.18); border-radius: 5px;
+  padding: 1px 6px; color: var(--muted);
+}
+.mobilpilar { display: none; }
+@media (max-width: 760px) {
+  .granne { display: none; }
+  .tips { display: none; }
+  .hero-fot { padding-bottom: 22px; }
+  .ner { bottom: 20px; width: 44px; height: 44px; }
+  .mobilpilar { display: flex; gap: 8px; }
+  .mobilpilar button {
+    width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+    background: rgba(8, 11, 20, .35); border: 1px solid rgba(255,255,255,.16);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .mobilpilar button:disabled { opacity: .3; }
+  .ticks { display: none; }
+}
+
+/* ---------- Faktapanelen ---------- */
+.panel {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 40; width: min(520px, 46vw);
+  background: linear-gradient(180deg, rgba(8, 11, 21, .7), rgba(5, 7, 14, .88));
+  backdrop-filter: blur(20px) saturate(1.2); -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border-left: 1px solid var(--line);
+  transform: translateX(104%); transition: transform 1s var(--ease);
+  overflow-y: auto; overscroll-behavior: contain; padding: 92px 42px 56px;
+}
+.panel.oppen { transform: none; }
+.panel-inre { transition: opacity .35s, transform .35s; }
+.panel-inre.ut { opacity: 0; transform: translateY(8px); }
+.stang {
+  position: absolute; top: 80px; right: 26px; width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer; background: rgba(255,255,255,.05); border: 1px solid var(--line);
+  transition: background .3s, transform .4s var(--ease);
+}
+.stang:hover { background: rgba(255,255,255,.12); transform: rotate(90deg); }
+.p-kicker { font-size: 11px; letter-spacing: .38em; text-transform: uppercase; color: var(--muted); }
+.p-titel { font-family: var(--serif); font-weight: 400; font-size: 58px; line-height: 1; letter-spacing: .02em; margin: 12px 0 6px; }
+.p-streck { width: 44px; height: 2px; background: var(--acc); margin: 18px 0 20px; }
+.p-ingress { font-size: 15px; line-height: 1.75; color: #cdd3e0; margin: 0; }
+.lager { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.vaxel {
+  border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.03); color: var(--muted);
+  border-radius: 999px; padding: 8px 14px 8px 12px; font-size: 12px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px; transition: all .3s;
+}
+.vaxel::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%; border: 1px solid currentColor; transition: all .3s;
+}
+.vaxel[aria-pressed="true"] { color: var(--ink); border-color: color-mix(in srgb, var(--acc) 60%, transparent); background: color-mix(in srgb, var(--acc) 12%, transparent); }
+.vaxel[aria-pressed="true"]::before { background: var(--acc); border-color: var(--acc); box-shadow: 0 0 10px var(--acc); }
+.vaxel:hover { color: var(--ink); }
+
+.p-rubrik { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--faint); margin: 38px 0 14px; display: flex; align-items: center; gap: 12px; }
+.p-rubrik::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.fakta { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.fakta div { background: rgba(7, 10, 19, .92); padding: 14px 16px; }
+.fakta dt { font-size: 11px; color: var(--faint); letter-spacing: .06em; margin-bottom: 5px; }
+.fakta dd { margin: 0; font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.ruta {
+  border: 1px solid var(--line); border-radius: 16px; padding: 20px 20px 18px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--acc) 7%, transparent), rgba(255,255,255,.015));
+}
+.reglage { margin-bottom: 16px; }
+.reglage label { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+.reglage label b { color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
+input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: none; cursor: pointer; }
+input[type=range]::-webkit-slider-runnable-track { height: 2px; background: rgba(255,255,255,.16); border-radius: 2px; }
+input[type=range]::-moz-range-track { height: 2px; background: rgba(255,255,255,.16); border-radius: 2px; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #fff; margin-top: -7px; box-shadow: 0 0 0 5px color-mix(in srgb, var(--acc) 30%, transparent); }
+input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 5px color-mix(in srgb, var(--acc) 30%, transparent); }
+.utfall { display: grid; gap: 0; }
+.utfall > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.utfall > div b { color: var(--ink); font-weight: 500; font-size: 16px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.utfall i, .formel i, .dar i { font-family: 'Times New Roman', Georgia, serif; font-size: 1.12em; }
+.not { font-size: 12px; color: var(--faint); line-height: 1.6; margin: 12px 0 0; }
+
+.formel { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-size: 15px; line-height: 1.3; }
+.brak { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; }
+.brak > span { padding: 2px 4px; white-space: nowrap; }
+.brak > span + span { border-top: 1.5px solid currentColor; }
+.dar { list-style: none; padding: 0; margin: 14px 0 0; font-size: 12.5px; color: var(--muted); line-height: 1.8; }
+.visste { list-style: none; padding: 0; margin: 0; counter-reset: v; }
+.visste li { counter-increment: v; position: relative; padding: 0 0 18px 42px; font-size: 14px; line-height: 1.7; color: #cdd3e0; }
+.visste li::before {
+  content: counter(v, decimal-leading-zero); position: absolute; left: 0; top: 1px;
+  font-family: var(--serif); font-size: 15px; color: var(--acc);
+}
+.svar { font-family: var(--serif); font-size: 19px; line-height: 1.55; color: var(--ink); margin: 0 0 18px; }
+.bestar .st-rubrik, .stapel .st-rubrik { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); margin-bottom: 12px; }
+.snitt-rad { display: grid; grid-template-columns: 200px 1fr; gap: 18px; align-items: start; }
+.snitt { width: 100%; height: auto; display: block; margin-top: 6px; }
+.lagerlista { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.lagerlista li { display: flex; gap: 10px; align-items: flex-start; }
+.lagerlista i { flex: 0 0 11px; height: 11px; border-radius: 3px; margin-top: 4px; }
+.lagerlista b { display: block; font-weight: 500; font-size: 13.5px; color: var(--ink); }
+.lagerlista span { display: block; font-size: 12.5px; line-height: 1.55; color: var(--muted); }
+.panel-inre { container-type: inline-size; }
+@container (max-width: 430px) { .snitt-rad { grid-template-columns: 1fr; } .snitt { max-width: 280px; margin: 0 auto 4px; } }
+.atmo-not { margin: 14px 0 0; padding: 14px 16px; border: 1px dashed var(--line); border-radius: 12px; }
+.stapel { margin-top: 16px; border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px 16px; background: rgba(255,255,255,.015); }
+.st-bar { display: flex; height: 14px; border-radius: 999px; overflow: hidden; gap: 2px; }
+.st-bar span { min-width: 3px; }
+.st-lista { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 7px; }
+.st-lista li { display: flex; align-items: baseline; gap: 10px; font-size: 13.5px; color: #d3d8e4; }
+.st-lista i { flex: 0 0 10px; height: 10px; border-radius: 50%; transform: translateY(1px); }
+.st-lista span { flex: 1; }
+.st-lista small { display: block; font-size: 12px; color: var(--faint); }
+.st-lista b { font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.hopp { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 26px; }
+.hopp button {
+  background: none; border: 0; padding: 2px 0; cursor: pointer; font-size: 12px; color: var(--faint);
+  border-bottom: 1px solid transparent; transition: color .25s, border-color .25s;
+}
+.hopp button:hover { color: var(--ink); border-color: var(--acc); }
+.fordj h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; line-height: 1.2; margin: 26px 0 8px; color: var(--ink); }
+.fordj h3:first-child { margin-top: 4px; }
+.fordj p { font-size: 14.5px; line-height: 1.85; color: #c6ccda; margin: 0; }
+.udda { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.udda li {
+  position: relative; padding: 16px 18px 16px 50px; border-radius: 14px; font-size: 14px; line-height: 1.7; color: #d3d8e4;
+  border: 1px solid color-mix(in srgb, var(--acc) 22%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--acc) 10%, transparent), rgba(255,255,255,.012) 60%);
+}
+.udda li::before {
+  content: ''; position: absolute; left: 20px; top: 22px; width: 12px; height: 12px; border-radius: 50%;
+  border: 1.5px solid var(--acc); box-shadow: 0 0 12px color-mix(in srgb, var(--acc) 60%, transparent);
+}
+.udda li::after {
+  content: ''; position: absolute; left: 14px; top: 26.5px; width: 24px; height: 3px; border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--acc) 70%, transparent); transform: rotate(-22deg);
+}
+.p-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 30px; }
+.p-nav button {
+  flex: 1; border: 1px solid var(--line); background: rgba(255,255,255,.03); border-radius: 14px; padding: 14px 16px;
+  cursor: pointer; text-align: left; transition: background .3s, border-color .3s;
+}
+.p-nav button:last-child { text-align: right; }
+.p-nav button:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18); }
+.p-nav button small { display: block; font-size: 11px; color: var(--faint); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3px; }
+.p-nav button span { font-family: var(--serif); font-size: 20px; }
+.p-nav button:disabled { visibility: hidden; }
+@media (max-width: 760px) {
+  .panel {
+    top: auto; left: 0; width: auto; height: 58vh; height: 58svh; border-left: 0; border-top: 1px solid var(--line);
+    border-radius: 24px 24px 0 0; transform: translateY(104%); padding: 30px 20px 44px;
+  }
+  .stang { top: 18px; right: 16px; }
+  .p-titel { font-size: 44px; }
+  .fakta dd { font-size: 14px; }
+}
+
+/* ---------- Sektioner ---------- */
+.sektion { position: relative; background: var(--bg); padding: clamp(80px, 12vh, 140px) clamp(16px, 5vw, 64px); }
+.sektion.grad { background: radial-gradient(1200px 500px at 70% 0%, rgba(70, 110, 220, .09), transparent 70%), radial-gradient(900px 500px at 0% 100%, rgba(95, 212, 196, .05), transparent 70%), var(--bg); }
+.inre { max-width: 1240px; margin: 0 auto; }
+.eyebrow { font-size: 11px; letter-spacing: .34em; text-transform: uppercase; color: var(--faint); display: flex; gap: 14px; align-items: center; }
+.eyebrow b { color: var(--acc); font-weight: 500; transition: color .8s; }
+.sek-huvud { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: end; margin-bottom: 56px; }
+.sek-huvud h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(38px, 5.2vw, 72px); line-height: 1.04; margin: 18px 0 0; letter-spacing: .005em; }
+.sek-huvud h2 em { font-style: italic; color: var(--acc); transition: color .8s; }
+.sek-huvud p { color: var(--muted); font-size: 15px; line-height: 1.8; margin: 0; max-width: 420px; justify-self: end; }
+@media (max-width: 860px) { .sek-huvud { grid-template-columns: 1fr; gap: 20px; } .sek-huvud p { justify-self: start; } }
+
+/* Kort */
+.kort-rutnat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 980px) { .kort-rutnat { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .kort-rutnat { grid-template-columns: 1fr; } }
+.kort {
+  --c: #fff; position: relative; display: flex; flex-direction: column; text-align: left; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 20px; padding: 22px 22px 22px; min-height: 380px; overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.008)), #060912;
+  transition: border-color .5s, transform .6s var(--ease), box-shadow .6s;
+}
+.kort::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .6s;
+  background: radial-gradient(420px 260px at 50% 38%, color-mix(in srgb, var(--c) 16%, transparent), transparent 70%);
+}
+.kort:hover { border-color: color-mix(in srgb, var(--c) 40%, transparent); transform: translateY(-4px); box-shadow: 0 30px 60px -30px color-mix(in srgb, var(--c) 30%, transparent); }
+.kort:hover::before { opacity: 1; }
+.kort .k-top { display: flex; justify-content: space-between; font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--faint); }
+.kort .k-bild { flex: 1; display: grid; place-items: center; padding: 14px 0 8px; min-height: 200px; }
+.kort .k-bild .klot { width: 62%; aspect-ratio: 1; transition: transform 1.2s var(--ease); }
+.kort:hover .k-bild .klot { transform: scale(1.07) rotate(-5deg); }
+@media (min-width: 561px) {
+  .kort.bred { grid-column: span 2; }
+  .kort.bred .k-bild .klot { width: 34%; }
+}
+.kort .k-namn { font-family: var(--serif); font-size: 34px; line-height: 1.05; }
+.kort .k-rad { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.6; }
+.kort .k-fot { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--faint); }
+.kort .k-pil { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; transition: background .4s, border-color .4s, transform .5s var(--ease); }
+.kort:hover .k-pil { background: var(--c); border-color: var(--c); color: #080a12; transform: rotate(-45deg); }
+
+/* Klot: tumnagel eller platshållare */
+.klot { position: relative; border-radius: 50%; }
+.klot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 1s; }
+.klot img.syns { opacity: 1; }
+.klot .plats { position: absolute; inset: 12%; border-radius: 50%; transition: opacity 1s; }
+.klot.klar .plats { opacity: 0; }
+
+/* Storleksskalan */
+.skala { position: relative; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; margin: 0 calc(-1 * clamp(16px, 5vw, 64px)); padding: 0 clamp(16px, 5vw, 64px); }
+.skala::-webkit-scrollbar { height: 6px; }
+.skala::-webkit-scrollbar-thumb { background: rgba(255,255,255,.14); border-radius: 6px; }
+.skala { scrollbar-color: rgba(255,255,255,.14) transparent; }
+.skala-rad { position: relative; height: 380px; display: flex; align-items: center; }
+.sol-kant { position: absolute; top: 50%; border-radius: 50%; transform: translateY(-50%); pointer-events: none;
+  background: radial-gradient(circle, #fff4cf 0%, #ffd77e 72%, #ffb04a 90%, #ff8a2a 97%, #f06a1c 100%);
+  box-shadow: 0 0 34px 4px rgba(255, 176, 80, .55), 0 0 110px 26px rgba(255, 130, 40, .13);
+}
+.sol-etikett { position: absolute; left: 18px; bottom: 16px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #3a1a06; font-weight: 600; }
+.skala-planet { position: relative; flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; background: none; border: 0; padding: 0; }
+.skala-planet .klot { flex: 0 0 auto; transition: transform .6s var(--ease); }
+.skala-planet:hover .klot { transform: scale(1.06); }
+.skala-planet .s-text { position: absolute; top: calc(50% + var(--h) / 2 + 18px); left: 50%; transform: translateX(-50%); text-align: center; white-space: nowrap; }
+.skala-planet .s-namn { font-family: var(--serif); font-size: 17px; }
+.skala-planet .s-mat { font-size: 11px; color: var(--faint); margin-top: 3px; letter-spacing: .05em; }
+.skala-planet:hover .s-namn { color: var(--acc); }
+.skala-not { color: var(--faint); font-size: 13px; margin-top: 18px; }
+
+/* Banorna */
+#banor { position: relative; height: 100vh; height: 100svh; min-height: 640px; touch-action: pan-y; user-select: none; -webkit-user-select: none; overflow: hidden; cursor: grab; }
+#banor.drar { cursor: grabbing; }
+#banor.hovrar { cursor: pointer; }
+.banor-info { position: absolute; top: clamp(90px, 13vh, 130px); left: clamp(16px, 5vw, 64px); max-width: 430px; pointer-events: none; z-index: 2; }
+.banor-info h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(36px, 4.6vw, 62px); line-height: 1.05; margin: 16px 0 16px; }
+.banor-info p { color: var(--muted); font-size: 14px; line-height: 1.8; margin: 0; }
+.kepler { margin-top: 18px; font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 12px; }
+.kepler span.f { font-family: 'Times New Roman', Georgia, serif; font-size: 18px; color: var(--ink); white-space: nowrap; }
+.etiketter { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.et { position: absolute; left: 0; top: 0; transform: translate(-50%, -100%); font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase; color: rgba(230, 235, 245, .7); white-space: nowrap; transition: color .3s, opacity .35s; padding-bottom: 6px; will-change: transform; }
+.et.hov { color: #fff; }
+.et small { display: block; letter-spacing: .06em; text-transform: none; color: var(--acc); font-size: 11px; opacity: 0; transition: opacity .3s; margin-top: 2px; text-align: center; }
+.et.hov small { opacity: 1; }
+.banor-kontroller {
+  position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 3;
+  display: flex; align-items: center; gap: 18px; padding: 12px 16px 12px 12px; border-radius: 999px;
+  background: rgba(8, 11, 20, .55); border: 1px solid var(--line); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  width: max-content; max-width: calc(100% - 28px);
+}
+.ikonknapp { width: 42px; height: 42px; border-radius: 50%; border: 0; background: #f3f5fa; color: #0a0d16; display: grid; place-items: center; cursor: pointer; flex: 0 0 auto; }
+.fart { display: flex; flex-direction: column; min-width: 190px; }
+.fart label { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--faint); }
+.fart .fv { font-size: 12px; color: var(--ink); margin-top: 1px; }
+.fart input { margin-top: 2px; }
+.datum { font-family: var(--serif); font-size: 20px; min-width: 190px; text-align: center; font-variant-numeric: tabular-nums; }
+@media (max-width: 860px) {
+  .banor-kontroller { flex-wrap: wrap; justify-content: center; border-radius: 22px; gap: 10px 14px; bottom: 16px; padding: 12px; }
+  .datum { order: -1; width: 100%; font-size: 18px; }
+  .fart { min-width: 150px; flex: 1; }
+  .banor-info { right: 16px; }
+  .banor-info p { font-size: 13px; }
+  .kepler { display: none; }
+}
+
+/* Avslutning */
+.avslut { text-align: center; padding: clamp(110px, 18vh, 200px) 20px; background: radial-gradient(700px 360px at 50% 100%, color-mix(in srgb, var(--acc) 12%, transparent), transparent 70%), var(--bg); }
+.avslut .rad { display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--muted); font-size: 14px; margin-bottom: 26px; }
+.avslut .rad svg { color: var(--acc); }
+.avslut h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 6.4vw, 92px); line-height: 1.04; margin: 0; }
+.avslut h2 em { color: var(--acc); }
+.avslut .knappar { display: flex; gap: 12px; justify-content: center; margin-top: 44px; flex-wrap: wrap; }
+.knapp-kant { display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; padding: 13px 24px; font-size: 13px; text-decoration: none; cursor: pointer; background: none; transition: background .3s, border-color .3s; }
+.knapp-kant:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.35); }
+footer { position: relative; z-index: 1; background: var(--bg); border-top: 1px solid var(--line); padding: 28px clamp(16px, 5vw, 64px) 40px; font-size: 12px; color: var(--faint); line-height: 1.8; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+footer a { color: var(--muted); }
+
+.fel { position: fixed; inset: 0; z-index: 200; display: none; place-items: center; text-align: center; padding: 30px; background: var(--bg); color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .titel .b { animation-duration: .01s; }
+}
+</style>
+</head>
+<body class="last">
+
+<canvas id="scen" aria-hidden="true"></canvas>
+
+<div id="laddare">
+  <div class="l-inre">
+    <div class="l-kicker">Fysiklabbet</div>
+    <div class="l-titel">Solsystemet</div>
+    <div class="l-bar"><i id="lBar"></i></div>
+    <div class="l-text" id="lText">Laddar planeterna</div>
+  </div>
+</div>
+<div class="fel" id="fel"><div>Din webbläsare kunde inte starta 3D-grafiken (WebGL). Pröva en annan webbläsare eller en nyare enhet.</div></div>
+
+<header class="topp" id="topp">
+  <a class="logo" href="../index.html">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.2"/><ellipse cx="12" cy="12" rx="10.5" ry="4" transform="rotate(-24 12 12)"/></svg>
+    Fysiklabbet <small>Solsystemet</small>
+  </a>
+  <nav class="nav">
+    <a href="#hero" class="aktiv" data-sek="hero">Planeterna</a>
+    <a href="#varldar" data-sek="varldar">Alla världar</a>
+    <a href="#storlekar" data-sek="storlekar">Storlekar</a>
+    <a href="#banor" data-sek="banor">Banorna</a>
+    <button class="pill-sm" id="toppUtforska">Utforska</button>
+  </nav>
+</header>
+
+<main>
+  <section id="hero" aria-label="Planetvisning">
+    <div class="hero-text" id="heroText">
+      <div class="kicker" id="kicker">Planet 3 från solen</div>
+      <h1 class="titel" id="titel">Jorden</h1>
+      <div class="streck"></div>
+      <p class="ingress" id="ingress"></p>
+      <button class="pill" id="utforska">Utforska Jorden</button>
+    </div>
+    <button class="granne" id="grannV" aria-label="Föregående planet"></button>
+    <button class="granne" id="grannH" aria-label="Nästa planet"></button>
+    <div class="hero-fot">
+      <div class="raknare">
+        <div class="ticks" id="ticks"></div>
+        <div class="nr" id="nr"><b>04</b> / 09</div>
+      </div>
+      <div class="mobilpilar">
+        <button id="mobV" aria-label="Föregående planet"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button id="mobH" aria-label="Nästa planet"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+      <div class="tips">Dra i planeten för att snurra den<br>Byt värld med <kbd>&larr;</kbd> <kbd>&rarr;</kbd> eller klicka på grannarna</div>
+    </div>
+    <button class="ner" id="ner" aria-label="Skrolla ner"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
+  </section>
+
+  <section class="sektion grad" id="varldar">
+    <div class="inre">
+      <div class="sek-huvud">
+        <div>
+          <div class="eyebrow"><b>01</b> Grannskapet</div>
+          <h2>En stjärna.<br><em>Åtta</em> världar.</h2>
+        </div>
+        <p>Börja med platsen vi kallar hem och ta dig sedan utåt, planet för planet. Klicka på en värld för att flyga dit och sväva ovanför dess atmosfär.</p>
+      </div>
+      <div class="kort-rutnat" id="kortRutnat"></div>
+    </div>
+  </section>
+
+  <section class="sektion" id="storlekar">
+    <div class="inre">
+      <div class="sek-huvud">
+        <div>
+          <div class="eyebrow"><b>02</b> Skala</div>
+          <h2>Hur stora är de<br><em>egentligen?</em></h2>
+        </div>
+        <p>Här står planeterna i rätt storlek i förhållande till varandra. Solen får inte ens plats: bara en bit av kanten syns till vänster. Jupiter rymmer drygt 1&nbsp;300 jordklot.</p>
+      </div>
+      <div class="skala" id="skala"><div class="skala-rad" id="skalaRad"></div></div>
+      <p class="skala-not" id="skalaNot">Avstånden mellan planeterna är däremot inte skalenliga.</p>
+    </div>
+  </section>
+
+  <section id="banor" aria-label="Solsystemet ovanifrån">
+    <div class="banor-info">
+      <div class="eyebrow"><b>03</b> Banorna</div>
+      <h2>Solsystemet<br>just nu</h2>
+      <p>Planeternas ungefärliga lägen i dag. Dra för att vrida vyn, och skruva upp tiden för att se hur mycket snabbare de inre planeterna hinner runt solen.</p>
+      <div class="kepler"><span class="f"><i>T</i><sup>2</sup> &prop; <i>a</i><sup>3</sup></span> Keplers tredje lag: ju längre ut, desto längre år.</div>
+    </div>
+    <div class="etiketter" id="etiketter"></div>
+    <div class="banor-kontroller">
+      <button class="ikonknapp" id="spela" aria-label="Pausa">
+        <svg id="ikonPaus" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+        <svg id="ikonSpela" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div class="fart"><label for="fart">Tidens fart</label><span class="fv" id="fartText"></span><input type="range" id="fart" min="0" max="100" value="42"></div>
+      <div class="datum" id="datum"></div>
+      <button class="vaxel" id="verklig" aria-pressed="false">Verkliga avstånd</button>
+      <button class="vaxel" id="idag" aria-pressed="false">I dag</button>
+    </div>
+  </section>
+
+  <section class="avslut" id="avslut">
+    <div class="rad"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="2.5"/></svg> Utforska vidare</div>
+    <h2>Inget teleskop behövs.<br><em>Bara lite nyfikenhet.</em></h2>
+    <div class="knappar">
+      <button class="knapp-kant" id="tillbaka"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg> Tillbaka till planeterna</button>
+      <a class="knapp-kant" href="../index.html">Till Fysiklabbet</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div>Planettexturer: <a href="https://www.solarsystemscope.com/textures/" rel="noopener">Solar System Scope</a>, CC BY 4.0, baserade på bilder och data från NASA. Venus yta är kartlagd med radar av rymdsonden Magellan. Plutos karta: NASA/JHUAPL/SwRI (New Horizons), fri att använda; den södra delen som aldrig fotograferats är ifylld med en neutral färg.</div>
+  <div>Faktauppgifter: NASA Planetary Fact Sheet. Banorna är förenklade till cirklar.</div>
+</footer>
+
+<aside class="panel" id="panel" aria-label="Fakta om planeten" aria-hidden="true">
+  <button class="stang" id="stang" aria-label="Stäng"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="panel-inre" id="panelInre"></div>
+</aside>
+
+<script type="module">
+import * as THREE from 'three';
+
+/* =====================================================================
+   DATA
+   ===================================================================== */
+const TEX = '../media/solsystemet/';
+const G_KONST = 6.674e-11;
+const AE_KM = 149.6e6;
+const C_KM = 299792.458;
+const J2000 = Date.UTC(2000, 0, 1, 12);
+
+const PLANETER = [
+  {
+    id: 'solen', namn: 'Solen', kicker: 'Stjärnan i centrum', kortTop: 'Stjärnan',
+    ingress: 'Ett glödande klot av väte och helium som rymmer 99,8 procent av all massa i solsystemet. Allt annat kretsar kring den.',
+    kort: 'Stjärnan som håller ihop allt.',
+    acc: '#ffb454', farg: '#ff9a3c', sol: true,
+    atmo: { farg: '#ffd27a', sol: '#ff5a10', tjock: 0.09, str: 1.3, inre: 0 },
+    tex: { karta: 'solen.jpg' }, tilt: 7.25, spin: 0.012, hero: -1.1,
+    diameter: 1392700, radie: 696000, massa: 1.989e30, g: 274,
+    fakta: [
+      ['Diameter', '1 392 700 km'], ['Massa', '1,99 · 10<sup>30</sup> kg'],
+      ['Tyngdfaktor', '274 N/kg'], ['Rotationstid', 'cirka 25 dygn vid ekvatorn'],
+      ['Yttemperatur', 'cirka 5 500 °C'], ['Temperatur i kärnan', 'cirka 15 miljoner °C'],
+      ['Ålder', 'cirka 4,6 miljarder år'], ['Planeter', '8'],
+      ['Flykthastighet', 'FLYKT'], ['Ljuset till jorden tar', 'LJUSJORD'],
+    ],
+    visste: [
+      'I kärnan slås vätekärnor ihop till helium. Varje sekund omvandlas drygt fyra miljoner ton massa till energi, enligt <i>E</i> = <i>mc</i><sup>2</sup>.',
+      'Energin som lämnar solens yta i dag frigjordes i kärnan för tiotusentals år sedan. Så lång tid tar det för den att ta sig ut genom solens täta inre.',
+      'Solen är ingen fast kropp. Den roterar på cirka 25 dygn vid ekvatorn men på cirka 35 dygn nära polerna.',
+      'Om ungefär fem miljarder år har vätet i kärnan tagit slut. Då sväller solen upp till en röd jätte.',
+    ],
+  },
+  {
+    id: 'merkurius', namn: 'Merkurius', kicker: 'Planet 1 från solen', kortTop: 'Planet 1',
+    ingress: 'Den minsta planeten och den som ligger närmast solen. En kraterfylld värld utan atmosfär, där dagen är brännhet och natten iskall.',
+    kort: 'Brännhet dag, iskall natt.',
+    acc: '#c9c1b4', farg: '#8c8680',
+    tex: { karta: 'merkurius.jpg' }, tilt: 0.03, spin: 0.014, bump: 0.010, hero: -1.15, sat: 1.1,
+    diameter: 4879, radie: 2439.7, massa: 3.301e23, g: 3.70, a: 0.387, period: 87.969, L0: 252.25,
+    fakta: [
+      ['Diameter', '4 879 km'], ['Massa', '3,30 · 10<sup>23</sup> kg'], ['Tyngdfaktor', '3,7 N/kg'],
+      ['Ett dygn', '176 jorddygn'], ['Ett år', '88 jorddygn'], ['Avstånd till solen', 'AVST'],
+      ['Temperatur', '−173 till 427 °C'], ['Månar', '0'], ['Flykthastighet', 'FLYKT'], ['Ljuset från solen tar', 'LJUS'],
+    ],
+    visste: [
+      'Ett dygn på Merkurius, från soluppgång till soluppgång, är dubbelt så långt som dess år.',
+      'Utan en atmosfär som håller kvar värmen skiljer det nästan 600 grader mellan dag och natt.',
+      'I kratrar vid polerna, dit solljuset aldrig når, finns troligen is.',
+      'Planeten har en enorm järnkärna som sträcker sig cirka 85 procent av vägen ut mot ytan.',
+    ],
+  },
+  {
+    id: 'venus', namn: 'Venus', kicker: 'Planet 2 från solen', kortTop: 'Planet 2',
+    ingress: 'Nästan lika stor som jorden, men med en växthuseffekt som har skenat iväg. Under de gula molnen är det varmare än på Merkurius.',
+    kort: 'Ett växthus som har skenat iväg.',
+    acc: '#e8c27a', farg: '#d9b77e',
+    tex: { karta: 'venus-moln.jpg', karta2: 'venus-yta.jpg' }, tilt: 2.64, spin: -0.009, bump: 0.004, flow: 0.012, hero: -1.2, sat: 1.15,
+    atmo: { farg: '#f4dca6', sol: '#d58a3c', tjock: 0.06, str: 1.15, inre: 0.55 },
+    diameter: 12104, radie: 6051.8, massa: 4.867e24, g: 8.87, a: 0.723, period: 224.701, L0: 181.98,
+    fakta: [
+      ['Diameter', '12 104 km'], ['Massa', '4,87 · 10<sup>24</sup> kg'], ['Tyngdfaktor', '8,9 N/kg'],
+      ['Ett dygn', '117 jorddygn'], ['Ett år', '225 jorddygn'], ['Avstånd till solen', 'AVST'],
+      ['Temperatur', '464 °C'], ['Månar', '0'], ['Flykthastighet', 'FLYKT'], ['Ljuset från solen tar', 'LJUS'],
+    ],
+    visste: [
+      'Venus roterar baklänges. Där går solen upp i väster och ner i öster.',
+      'En rotation tar 243 jorddygn, längre än ett varv runt solen (225 jorddygn).',
+      'Trycket vid ytan är 92 gånger större än på jorden, lika stort som 900 meter ner i havet.',
+      'Molnen består av svavelsyra, och koldioxiden håller kvar så mycket värme att ytan blir varmare än på Merkurius.',
+    ],
+    lager: [{ id: 'yta', text: 'Titta under molnen', pa: false }],
+  },
+  {
+    id: 'jorden', namn: 'Jorden', kicker: 'Planet 3 från solen', kortTop: 'Planet 3',
+    ingress: 'Den enda plats vi känner till där det finns liv. Hav täcker 71 procent av ytan, och atmosfären skyddar mot farlig strålning från rymden.',
+    kort: 'Den enda plats där vi vet att det finns liv.',
+    acc: '#5fd4c4', farg: '#2d5f9a',
+    tex: { karta: 'jorden-dag.jpg', natt: 'jorden-natt.jpg', moln: 'jorden-moln.jpg', hav: 'jorden-hav.jpg' },
+    tilt: 23.44, spin: 0.022, bump: 0.0035, hero: -0.8, sat: 1.05,
+    atmo: { farg: '#5aa2ff', sol: '#ff8a4a', tjock: 0.03, str: 1.55, inre: 0.7 },
+    diameter: 12756, radie: 6378.1, massa: 5.972e24, g: 9.82, a: 1.0, period: 365.256, L0: 100.46,
+    fakta: [
+      ['Diameter', '12 756 km'], ['Massa', '5,97 · 10<sup>24</sup> kg'], ['Tyngdfaktor', '9,82 N/kg'],
+      ['Ett dygn', '24 h'], ['Ett år', '365,25 dygn'], ['Avstånd till solen', 'AVST'],
+      ['Medeltemperatur', '15 °C'], ['Månar', '1'], ['Flykthastighet', 'FLYKT'], ['Ljuset från solen tar', 'LJUS'],
+    ],
+    visste: [
+      'Jorden är inte helt klotrund. Rotationen gör att diametern vid ekvatorn är 43 km större än mellan polerna.',
+      'Jorden rör sig runt solen med cirka 30 km/s, alltså över 100 000 km/h.',
+      'Magnetfältet, som skapas av strömmar i den flytande yttre kärnan, leder bort solvinden. Där partiklarna ändå tar sig in bildas norrsken.',
+      'Tyngdfaktorn varierar: cirka 9,83 N/kg vid polerna och 9,78 N/kg vid ekvatorn.',
+    ],
+    lager: [{ id: 'moln', text: 'Moln', pa: true }, { id: 'natt', text: 'Städernas ljus', pa: true }],
+  },
+  {
+    id: 'manen', namn: 'Månen', kicker: 'Jordens måne', kortTop: 'Måne', mane: true,
+    ingress: 'Jordens enda naturliga följeslagare och den enda himlakropp utanför jorden där människor har gått. Den vänder alltid samma sida mot oss.',
+    kort: 'Den enda andra värld där människor har gått.',
+    acc: '#c9ced8', farg: '#8d8b86',
+    tex: { karta: 'manen.jpg' }, tilt: 6.68, spin: 0.012, bump: 0.011, hero: -1.05, sat: 1.0,
+    diameter: 3475, radie: 1737.4, massa: 7.342e22, g: 1.62, period: 27.3217, L0: 218.32, avstandJorden: 384400,
+    fakta: [
+      ['Diameter', '3 475 km'], ['Massa', '7,34 · 10<sup>22</sup> kg'], ['Tyngdfaktor', '1,62 N/kg'],
+      ['Ett dygn', '29,5 jorddygn'], ['Ett varv runt jorden', '27,3 dygn'], ['Avstånd till jorden', '384 400 km'],
+      ['Temperatur', '−173 till 127 °C'], ['Atmosfär', 'i praktiken ingen'], ['Flykthastighet', 'FLYKT'], ['Ljuset från jorden tar', 'LJUSMANE'],
+    ],
+    visste: [
+      'Månen roterar ett varv på samma tid som den går ett varv runt jorden. Därför ser vi alltid samma sida.',
+      'Tack vare små vickningar i banan kan vi ändå med tiden se ungefär 59 procent av ytan.',
+      'Ett dygn på månen, från soluppgång till soluppgång, är 29,5 jorddygn. Dagen varar alltså i ungefär två veckor.',
+      'Månens dragning ger tidvattnet. Solen bidrar också, men bara med knappt hälften så mycket.',
+    ],
+  },
+  {
+    id: 'mars', namn: 'Mars', kicker: 'Planet 4 från solen', kortTop: 'Planet 4',
+    ingress: 'Den röda ökenplaneten, med solsystemets högsta vulkan och en kanjon som är nästan lika lång som vägen från Lissabon till Moskva.',
+    kort: 'Rost, stoft och jättevulkaner.',
+    acc: '#ee7a4d', farg: '#b5552e',
+    tex: { karta: 'mars.jpg' }, tilt: 25.19, spin: 0.021, bump: 0.008, hero: -1.1, sat: 1.12,
+    atmo: { farg: '#e0a07a', sol: '#7fa8d8', tjock: 0.016, str: 0.75, inre: 0.4 },
+    diameter: 6792, radie: 3396.2, massa: 6.417e23, g: 3.71, a: 1.524, period: 686.98, L0: 355.45,
+    fakta: [
+      ['Diameter', '6 792 km'], ['Massa', '6,42 · 10<sup>23</sup> kg'], ['Tyngdfaktor', '3,7 N/kg'],
+      ['Ett dygn', '24 h 40 min'], ['Ett år', '687 jorddygn'], ['Avstånd till solen', 'AVST'],
+      ['Medeltemperatur', '−65 °C'], ['Månar', '2'], ['Flykthastighet', 'FLYKT'], ['Ljuset från solen tar', 'LJUS'],
+    ],
+    visste: [
+      'Vulkanen Olympus Mons är cirka 22 km hög, ungefär två och en halv gånger så hög som Mount Everest.',
+      'Den röda färgen kommer från järnoxid, alltså rost, i stoftet.',
+      'Atmosfären är tunn: trycket vid ytan är mindre än en procent av jordens, och luften är nästan bara koldioxid.',
+      'Solnedgångarna på Mars är blå, eftersom det fina stoftet sprider det blå ljuset framåt.',
+    ],
+  },
+  {
+    id: 'jupiter', namn: 'Jupiter', kicker: 'Planet 5 från solen', kortTop: 'Planet 5',
+    ingress: 'Solsystemets jätte. En gasplanet med mer än dubbelt så stor massa som alla andra planeter tillsammans, och en storm som är större än jorden.',
+    kort: 'En storm större än jorden.',
+    acc: '#dcae7c', farg: '#c9a27a', gas: true,
+    tex: { karta: 'jupiter.jpg' }, tilt: 3.13, spin: 0.034, flow: 0.012, hero: -1.62, sat: 1.45, gain: 0.92,
+    atmo: { farg: '#ecd6b2', sol: '#c98a50', tjock: 0.02, str: 0.6, inre: 0.35 },
+    diameter: 142984, radie: 71492, massa: 1.898e27, g: 24.8, a: 5.203, period: 4332.59, L0: 34.40,
+    fakta: [
+      ['Diameter', '142 984 km'], ['Massa', '1,90 · 10<sup>27</sup> kg'], ['Tyngdfaktor', '24,8 N/kg'],
+      ['Ett dygn', '9 h 56 min'], ['Ett år', '11,9 jordår'], ['Avstånd till solen', 'AVST'],
+      ['Temperatur', '−110 °C'], ['Månar', 'över 90'], ['Flykthastighet', 'FLYKT'], ['Ljuset från solen tar', 'LJUS'],
+    ],
+    visste: [
+      'Jupiter har mer än dubbelt så stor massa som alla andra planeter tillsammans.',
+      'Ett dygn är kortare än tio timmar. Den snabba rotationen plattar till planeten så att den är nästan 7 procent bredare vid ekvatorn än mellan polerna.',
+      'Den stora röda fläcken är en storm som har iakttagits i över 150 år, och den är större än jorden.',
+      'Under isskorpan på månen Europa finns troligen ett hav av flytande vatten.',
+    ],
+  },
+  {
+    id: 'saturnus', namn: 'Saturnus', kicker: 'Planet 6 från solen', kortTop: 'Planet 6',
+    ingress: 'Ringarnas planet. Ringarna är 270 000 km breda från kant till kant, men ofta bara omkring tio meter tjocka.',
+    kort: 'Lättare än vatten, med ringar av is.',
+    acc: '#e6cb8f', farg: '#d8c08c', gas: true, ring: true,
+    tex: { karta: 'saturnus.jpg', ring: 'saturnus-ringar.png' }, tilt: 26.73, spin: 0.03, flow: 0.006, hero: -1.25, sat: 1.4, gain: 0.9,
+    atmo: { farg: '#f2ddb0', sol: '#d09a5c', tjock: 0.02, str: 0.55, inre: 0.3 },
+    diameter: 120536, radie: 60268, massa: 5.683e26, g: 10.4, a: 9.537, period: 10759.22, L0: 49.94,
+    fakta: [
+      ['Diameter', '120 536 km'], ['Massa', '5,68 · 10<sup>26</sup> kg'], ['Tyngdfaktor', '10,4 N/kg'],
+      ['Ett dygn', '10 h 33 min'], ['Ett år', '29,4 jordår'], ['Avstånd till solen', 'AVST'],
+      ['Temperatur', '−140 °C'], ['Månar', 'över 270'], ['Flykthastighet', 'FLYKT'], ['Ljuset från solen tar', 'LJUS'],
+    ],
+    visste: [
+      'Medeldensiteten är 687 kg/m³, lägre än vattnets. Saturnus skulle flyta i ett tillräckligt stort badkar.',
+      'Ringarna består av miljarder bitar av is och sten, från dammkorn till block stora som hus.',
+      'Vid nordpolen finns ett sexkantigt molnmönster där varje sida är längre än jordens diameter.',
+      'Månen Titan har en tjock atmosfär och sjöar av flytande metan.',
+    ],
+  },
+  {
+    id: 'uranus', namn: 'Uranus', kicker: 'Planet 7 från solen', kortTop: 'Planet 7',
+    ingress: 'En isjätte som ligger på sidan. Axeln lutar 98 grader, så varje pol har sommar i 42 år och sedan vinter lika länge.',
+    kort: 'Isjätten som ligger på sidan.',
+    acc: '#8fe0e6', farg: '#9fd8df', gas: true,
+    tex: { karta: 'uranus.jpg' }, tilt: 97.77, spin: -0.026, hero: -0.9, sat: 1.1,
+    atmo: { farg: '#a6ecf3', sol: '#7fc8d8', tjock: 0.03, str: 0.9, inre: 0.5 },
+    diameter: 51118, radie: 25559, massa: 8.681e25, g: 8.87, a: 19.19, period: 30688.5, L0: 313.23,
+    fakta: [
+      ['Diameter', '51 118 km'], ['Massa', '8,68 · 10<sup>25</sup> kg'], ['Tyngdfaktor', '8,9 N/kg'],
+      ['Ett dygn', '17 h 14 min'], ['Ett år', '84 jordår'], ['Avstånd till solen', 'AVST'],
+      ['Temperatur', '−195 °C'], ['Månar', '29'], ['Flykthastighet', 'FLYKT'], ['Ljuset från solen tar', 'LJUS'],
+    ],
+    visste: [
+      'Metan i atmosfären absorberar rött ljus. Därför ser planeten blågrön ut.',
+      'Uranus var den första planeten som upptäcktes med teleskop, av William Herschel år 1781.',
+      'Den lutande axeln ger extrema årstider: vid polerna varar dagen i 42 år.',
+      'Månarna har fått namn efter figurer i verk av William Shakespeare och Alexander Pope.',
+    ],
+  },
+  {
+    id: 'neptunus', namn: 'Neptunus', kicker: 'Planet 8 från solen', kortTop: 'Planet 8',
+    ingress: 'Den yttersta planeten. En mörkblå värld med solsystemets snabbaste vindar, dit ljuset från solen behöver drygt fyra timmar.',
+    kort: 'Planeten som hittades med matematik.',
+    acc: '#7d9dff', farg: '#4a6fd0', gas: true,
+    tex: { karta: 'neptunus.jpg' }, tilt: 28.32, spin: 0.028, flow: 0.004, hero: -1.3, sat: 1.15,
+    atmo: { farg: '#7aa6ff', sol: '#6f86d8', tjock: 0.03, str: 1.0, inre: 0.55 },
+    diameter: 49528, radie: 24764, massa: 1.024e26, g: 11.2, a: 30.07, period: 60182, L0: 304.88,
+    fakta: [
+      ['Diameter', '49 528 km'], ['Massa', '1,02 · 10<sup>26</sup> kg'], ['Tyngdfaktor', '11,2 N/kg'],
+      ['Ett dygn', '16 h 6 min'], ['Ett år', '164,8 jordår'], ['Avstånd till solen', 'AVST'],
+      ['Temperatur', '−200 °C'], ['Månar', '16'], ['Flykthastighet', 'FLYKT'], ['Ljuset från solen tar', 'LJUS'],
+    ],
+    visste: [
+      'Vindarna kan nå över 2 000 km/h, de snabbaste i solsystemet.',
+      'Neptunus hittades 1846 med hjälp av matematik: astronomer räknade ut var planeten måste finnas utifrån hur den störde Uranus bana.',
+      'Sedan upptäckten har Neptunus hunnit gå ett enda varv runt solen. Varvet blev klart 2011.',
+      'Den största månen, Triton, kretsar baklänges och är troligen ett infångat objekt från Kuiperbältet.',
+    ],
+  },
+  {
+    id: 'pluto', namn: 'Pluto', kicker: 'Dvärgplanet i Kuiperbältet', kortTop: 'Dvärgplanet', dverg: true,
+    ingress: 'Räknades som solsystemets nionde planet fram till 2006. En iskall värld långt ute i Kuiperbältet, med ett jättelikt hjärta av kväveis.',
+    kort: 'Dvärgplaneten med ett hjärta av is.',
+    acc: '#e3b89a', farg: '#b89a86',
+    tex: { karta: 'pluto.jpg' }, tilt: 16, spin: -0.016, bump: 0.004, hero: -1.2, sat: 1.1,
+    atmo: { farg: '#86aaff', sol: '#9fbcff', tjock: 0.05, str: 0.6, inre: 0.18 },
+    diameter: 2377, radie: 1188.3, massa: 1.303e22, g: 0.62, a: 39.48, period: 90560, L0: 238.93,
+    bana: { e: 0.2488, i: 17.14, nod: 110.30, peri: 224.07 },
+    fakta: [
+      ['Diameter', '2 377 km'], ['Massa', '1,30 · 10<sup>22</sup> kg'], ['Tyngdfaktor', '0,62 N/kg'],
+      ['Ett dygn', '6,4 jorddygn'], ['Ett år', '248 jordår'], ['Avstånd till solen', '4,4 till 7,4 miljarder km'],
+      ['Temperatur', 'cirka −230 °C'], ['Månar', '5'], ['Flykthastighet', 'FLYKT'], ['Ljuset från solen tar', 'LJUS'],
+    ],
+    visste: [
+      'Pluto upptäcktes 1930 av Clyde Tombaugh. Namnet föreslogs av den elvaåriga skolflickan Venetia Burney i Oxford.',
+      'År 2006 bestämde Internationella astronomiska unionen att en planet måste ha rensat sin omgivning från andra himlakroppar. Det har inte Pluto gjort, så den blev en dvärgplanet.',
+      'Pluto är mindre än jordens måne. Diametern är ungefär två tredjedelar av månens.',
+      'Banan är så avlång att Pluto ibland är närmare solen än Neptunus. Senast var det mellan 1979 och 1999.',
+    ],
+  },
+];
+/* ---------- Fördjupning och udda fakta ----------
+   Visas i faktapanelen. HTML tillåts (&nbsp; mellan tal och enhet). */
+const FORDJUPNING = {
+  solen: {
+    avsnitt: [
+      ['En helt vanlig stjärna', 'Solen är en gul dvärg, en av hundratals miljarder stjärnor i Vintergatan och inte på något sätt ovanlig. Den bildades för cirka 4,6 miljarder år sedan, när ett moln av gas och stoft drogs ihop av sin egen gravitation. Räknat i massa består den till ungefär 73 procent av väte och 25 procent av helium. Resten, knappt två procent, är tyngre ämnen som syre, kol och järn.'],
+      ['Inifrån och ut', 'I kärnan är trycket och temperaturen så höga att vätekärnor smälter samman till helium. Energin tar sig först ut som strålning genom strålningszonen. Längre ut tar konvektionen över: het gas stiger, svalnar och sjunker igen, ungefär som i en kastrull med kokande gröt. Det vi ser som solens yta är fotosfären, som håller cirka 5&nbsp;500&nbsp;°C. Utanför den ligger kromosfären och sedan koronan, den tunna yttre atmosfären som syns som en vit krans vid en total solförmörkelse.'],
+      ['Solens rytm', 'Solen roterar snabbare vid ekvatorn än vid polerna, och det tvinnar ihop magnetfältet. Med ungefär elva års mellanrum byter fältet riktning. Vid solmaximum blir solfläckar, utbrott och stora gasmoln som slungas ut vanligare. När partiklar från sådana utbrott når jorden och leds in mot polerna av jordens magnetfält lyser himlen upp i norrsken.'],
+    ],
+    udda: [
+      'Koronan är över en miljon grader varm, alltså hundratals gånger varmare än ytan under den. Hur den värms upp är en av de stora olösta frågorna inom solfysiken.',
+      'Trots att solen omvandlar drygt fyra miljoner ton massa till energi varje sekund har den bara blivit ungefär 0,03 procent lättare sedan den bildades.',
+      'Ytan är täckt av granuler, celler av uppvällande het gas. Varje granul är ungefär lika stor som Frankrike och ersätts av en ny inom tio till tjugo minuter.',
+      'Solen är egentligen inte gul. Dess ljus är i praktiken vitt. Den ser gulaktig ut från marken eftersom atmosfären sprider bort en del av det blå ljuset.',
+      'Solvinden blåser upp en jättelik bubbla, heliosfären, som når långt förbi Neptunus. Rymdsonden Voyager 1 passerade gränsen år 2012 och blev den första farkosten i det interstellära rummet.',
+      'Solen, och vi med den, rusar runt Vintergatans centrum med drygt 800&nbsp;000&nbsp;km/h. Ett varv tar ändå mer än 200 miljoner år.',
+    ],
+  },
+  merkurius: {
+    avsnitt: [
+      ['En järnklump med tunt skal', 'Merkurius är den minsta planeten, något större än jordens måne. Ändå är den tät: bara jorden har högre medeldensitet. Det beror på att en ovanligt stor del av planeten är en järnkärna. En förklaring som många forskare tror på är att en jättekollision tidigt i solsystemets historia slet bort en stor del av den steniga manteln.'],
+      ['Ett landskap av ärr', 'Ytan påminner om månens, full av kratrar från nedslag som pågått i miljarder år. Den största, Calorisbassängen, är cirka 1&nbsp;550&nbsp;km bred. Nedslaget var så kraftigt att marken på andra sidan planeten tycks ha skakats sönder. Ytan är dessutom full av långa branter, eftersom hela planeten har krympt när kärnan svalnat, ungefär som skalet på ett äpple som torkar.'],
+      ['Svår att nå', 'Merkurius ligger närmast solen men är ändå en av de svåraste planeterna att besöka. En rymdsond som faller inåt mot solen får hela tiden högre fart och måste bromsa för att kunna gå in i bana runt planeten. Mariner 10 flög förbi tre gånger på 1970-talet, och MESSENGER kretsade runt Merkurius mellan 2011 och 2015. Den europeisk-japanska rymdsonden BepiColombo ska gå in i bana runt planeten i slutet av 2026.'],
+    ],
+    udda: [
+      'Merkurius bana vrider sig långsamt runt solen, lite mer än Newtons fysik kan förklara. Den lilla skillnaden blev ett av de första beläggen för Einsteins allmänna relativitetsteori.',
+      'På vissa platser på Merkurius kan man se solen gå upp, stanna, gå tillbaka ned en bit och sedan gå upp igen samma morgon.',
+      'Planeten har en svans. Solljus och solvind slår loss natriumatomer från ytan, och de bildar en svagt lysande svans som är miljontals kilometer lång.',
+      'Räknat i genomsnitt över tid är det Merkurius, inte Venus, som ligger närmast jorden. Merkurius är faktiskt den närmaste grannen till varenda planet i solsystemet.',
+      'Merkurius har ett svagt magnetfält. Det förvånade forskarna, som trodde att en så liten planet borde ha svalnat för länge sedan och förlorat sin flytande kärna.',
+    ],
+  },
+  venus: {
+    avsnitt: [
+      ['Tvillingen som gick åt ett annat håll', 'Venus och jorden är nästan lika stora, har nästan samma densitet och bildades troligen av liknande material. Ändå blev de helt olika världar. Venus kan ha haft grunda hav tidigt i sin historia. När solen blev starkare avdunstade vattnet, vattenångan förstärkte växthuseffekten ännu mer och till slut försvann vattnet ut i rymden.'],
+      ['Under molnen', 'Atmosfären består till 96 procent av koldioxid och är så tjock att trycket vid ytan är 92 gånger högre än på jorden. Under molnen finns en het stenöken med lavaslätter och tusentals vulkaner. Radarbilder tagna med några månaders mellanrum visar förändringar som tyder på att vissa vulkaner fortfarande är aktiva. Ljuset som når ned till marken är dämpat och orangefärgat.'],
+      ['Korta besök', 'De sovjetiska Venera-landarna var de första farkosterna som skickade bilder från ytan på en annan planet, år 1975. Den som höll längst, Venera 13, klarade sig i drygt två timmar innan hettan och trycket förstörde den. Flera nya rymdsonder till Venus planeras till 2030-talet.'],
+    ],
+    udda: [
+      'Molnen på Venus färdas runt hela planeten på ungefär fyra jorddygn, alltså omkring sextio gånger snabbare än planeten själv roterar. Fenomenet kallas superrotation.',
+      'Cirka 50&nbsp;km upp i atmosfären är trycket och temperaturen nästan som vid jordytan. Det är den mest jordlika miljön i solsystemet utanför jorden, och NASA har skissat på luftskepp som skulle kunna sväva där.',
+      'År 2020 rapporterade forskare att de hittat fosfin högt upp i molnen, en gas som på jorden främst bildas av levande organismer. Fyndet är fortfarande omstritt.',
+      'Axeln lutar bara cirka tre grader, så Venus har i praktiken inga årstider.',
+      'Efter månen är Venus det ljusaste objektet på natthimlen. Den syns ibland till och med mitt på dagen, om man vet var man ska titta.',
+    ],
+  },
+  jorden: {
+    avsnitt: [
+      ['En planet i lager', 'Innerst finns en fast kärna av järn och nickel, omgiven av en flytande yttre kärna. Utanför den ligger manteln av het, långsamt flytande sten, och ytterst en tunn skorpa. Skorpan är uppdelad i plattor som rör sig några centimeter om året, ungefär lika fort som naglarna växer. Där plattorna möts veckas bergskedjor upp och jorden skakar.'],
+      ['Månen håller oss stadiga', 'Månen bildades troligen när en himlakropp ungefär lika stor som Mars kolliderade med den unga jorden. Månens dragning ger tidvatten och håller jordaxelns lutning stabil, vilket ger jämnare klimat över långa tider. Tidvattnet bromsar samtidigt jordens rotation: dygnet blir ungefär två millisekunder längre per sekel, och månen glider bort från oss med 3,8&nbsp;cm om året.'],
+      ['Luften vi andas', 'Atmosfären består till 78 procent av kväve och 21 procent av syre. Syret finns där för att cyanobakterier och växter har producerat det i miljarder år. Utan liv hade luften sett helt annorlunda ut. Högt upp, i ozonskiktet, stoppas det mesta av solens ultravioletta strålning.'],
+    ],
+    udda: [
+      'Jorden är den tätaste planeten i solsystemet, med medeldensiteten 5&nbsp;514&nbsp;kg/m³.',
+      'Vi är närmast solen i början av januari, mitt i den nordiska vintern. Årstiderna beror på axelns lutning, inte på avståndet till solen.',
+      'Den punkt på jordytan som ligger längst från jordens medelpunkt är inte toppen på Mount Everest utan vulkanen Chimborazo i Ecuador. Det beror på att jorden buktar ut vid ekvatorn.',
+      'Varje år landar tiotusentals ton rymdstoft och små meteoriter på jorden, de flesta som mikroskopiska korn.',
+      'Står du i Stockholm följer du med i jordens rotation med drygt 850&nbsp;km/h. Vid ekvatorn går det nästan dubbelt så fort.',
+    ],
+  },
+  manen: {
+    avsnitt: [
+      ['Född ur en krock', 'Månen bildades troligen för cirka 4,5 miljarder år sedan, när en himlakropp ungefär lika stor som Mars kolliderade med den unga jorden. Material som slungades ut samlades i en ring runt jorden och klumpade ihop sig till månen. Stenproverna från Apolloresorna liknar jordens mantel på många sätt, vilket stöder idén.'],
+      ['Två ansikten', 'Sidan som vänder sig mot oss har stora mörka slätter, så kallade maria (hav på latin), av lava som stelnade för mer än tre miljarder år sedan. Baksidan är nästan helt täckt av kratrar och har bara ett fåtal sådana slätter. Den kallas ibland den mörka sidan, men får precis lika mycket solljus som framsidan och är bara vänd bort från oss.'],
+      ['Människor på månen', 'Mellan 1969 och 1972 landade sex Apollofarkoster, och tolv astronauter gick på ytan. De tog med sig 382&nbsp;kg sten och stoft hem. NASA:s Artemisprogram siktar på att åter landa människor på månen, den här gången nära sydpolen, där det finns is i kratrar som aldrig nås av solljus.'],
+    ],
+    udda: [
+      'Fotspåren från Apolloastronauterna finns troligen kvar. På månen finns varken vind eller regn som kan sudda ut dem.',
+      'Månen är mörkare än den ser ut. Den reflekterar bara omkring en åttondel av solljuset, ungefär som gammal asfalt. Att den ändå lyser starkt beror på att vi ser den mot en svart himmel.',
+      'Det förekommer månbävningar. Seismometrar som astronauterna lämnade kvar registrerade skalv som pågick i över tio minuter, eftersom den torra, kalla månen fortsätter att dallra, som en klocka som slagits an.',
+      'Vid en total solförmörkelse täcker månen solen nästan precis. Solen är cirka 400 gånger så bred som månen, men också cirka 400 gånger så långt bort.',
+      'Månstoft är vasst som krossat glas, eftersom inget väder har nött ned kornen. Det slet på astronauternas dräkter, och enligt dem luktade det som krut.',
+      'Månen ser större ut nära horisonten, men det är en synvilla. Håll upp tummen på armlängds avstånd så ser du att den är lika stor.',
+    ],
+  },
+  mars: {
+    avsnitt: [
+      ['En frusen öken', 'Mars har ungefär halva jordens diameter och är en kall, torr värld. Den tunna atmosfären består till 95 procent av koldioxid. Vid polerna finns istäcken av vattenis, som på vintern får ett lager av frusen koldioxid, alltså torris. Ett år på Mars är nästan två jordår, så årstiderna varar ungefär dubbelt så länge som hos oss.'],
+      ['Spår av vatten', 'Uttorkade floddalar, sjöbäddar och deltan visar att det en gång rann flytande vatten på ytan. I dag finns vattnet fruset under marken och i polarisarna. Rovern Perseverance kör sedan 2021 runt i Jezerokratern, en gammal sjöbädd, och samlar in stenprover som kan bära spår av forntida liv.'],
+      ['Den mest besökta planeten', 'Fler än ett dussin farkoster har landat på Mars eller gått i bana runt den. Den lilla helikoptern Ingenuity blev år 2021 den första farkosten som flög med egen motor på en annan planet. Den var tänkt att flyga fem gånger men klarade 72 flygningar.'],
+    ],
+    udda: [
+      'Mars har två små, potatisformade månar, Phobos och Deimos. Phobos närmar sig planeten med knappt två meter per sekel och kommer om några tiotals miljoner år antingen att störta eller slitas sönder till en ring.',
+      'Vulkanerna kunde bli så enorma för att Mars saknar plattektonik. En vulkan blir stående över samma heta punkt i hundratals miljoner år och fortsätter växa.',
+      'Dammstormar kan växa tills de täcker hela planeten och pågå i månader. En sådan storm år 2018 skymde solen så mycket att den solcellsdrivna rovern Opportunity tystnade för gott.',
+      'Flera hundra meteoriter som hittats på jorden kommer från Mars. De slogs loss vid stora nedslag och har färdats genom rymden i miljontals år.',
+      'Ett dygn på Mars kallas sol och är knappt 40 minuter längre än ett jorddygn. De som styr rovrarna har ibland levt efter Marstid och flyttat sina arbetspass 40 minuter framåt varje dag.',
+    ],
+  },
+  jupiter: {
+    avsnitt: [
+      ['Nästan en stjärna?', 'Jupiter består mest av väte och helium, precis som solen. Men den skulle behöva ungefär 80 gånger så stor massa för att fusion ska kunna starta i kärnan. Jupiter strålar ändå ut mer värme än den får från solen, eftersom planeten fortfarande långsamt drar ihop sig och frigör energi.'],
+      ['Metalliskt väte', 'Djupt nere i planeten blir trycket så högt att vätet börjar uppföra sig som en metall och leder elektrisk ström. Strömmarna där ger Jupiter solsystemets kraftigaste planetära magnetfält, ungefär 20&nbsp;000 gånger kraftfullare än jordens. Strålningen i fältet är så intensiv att rymdsonder måste skyddas med tjocka väggar av titan.'],
+      ['Band och stormar', 'De ljusa zonerna och de mörka bältena är molnband där vindarna blåser åt olika håll, med hastigheter på över 500&nbsp;km/h. Den stora röda fläcken är ett gigantiskt högtryck. Den har krympt under de senaste hundra åren men är fortfarande ungefär 1,3 gånger så bred som jorden.'],
+    ],
+    udda: [
+      'Jupiter har så stor massa att den och solen kretsar kring en gemensam punkt som ligger strax utanför solens yta.',
+      'År 1994 bröts kometen Shoemaker-Levy 9 i ett tjugotal bitar som störtade in i Jupiter en efter en. De största märkena i molnen var ungefär lika stora som jorden och syntes i månader.',
+      'Månen Io är den mest vulkaniska platsen i solsystemet, med hundratals aktiva vulkaner. Det är Jupiters tidvattenkrafter som knådar Io och värmer upp dess inre.',
+      'Månen Ganymedes är större än planeten Merkurius och är den enda månen man känner till som har ett eget magnetfält.',
+      'Jupiter har ringar, men de är tunna och mörka. De upptäcktes först 1979, när Voyager 1 flög förbi.',
+    ],
+  },
+  saturnus: {
+    avsnitt: [
+      ['En lätt jätte', 'Saturnus är den näst största planeten och består, precis som Jupiter, mest av väte och helium. Planeten är så lätt i förhållande till sin storlek att den har lägst densitet av alla planeter. Den snabba rotationen, ett varv på drygt tio timmar, plattar till den tydligt vid polerna.'],
+      ['Ringarna', 'Ringarna består av miljarder bitar vattenis med lite sten och damm. Trots att de är så breda är den totala massan liten, mindre än hälften av månen Mimas massa. Mätningar från rymdsonden Cassini tyder på att ringarna kan vara unga, kanske bara några hundra miljoner år, men frågan är fortfarande omstridd. Material från ringarna regnar hela tiden in i planeten, så de kommer inte att finnas för evigt.'],
+      ['Månar med hav och sjöar', 'Titan, den största månen, är större än Merkurius och den enda månen med en tjock atmosfär. Sonden Huygens landade där 2005, den mest avlägsna landning som gjorts. Den lilla månen Enceladus sprutar ut vatten ur sprickor vid sydpolen, från ett hav under isen. NASA planerar att skicka drönaren Dragonfly till Titan.'],
+    ],
+    udda: [
+      'Saturnus är den mest tillplattade planeten. Diametern är ungefär tio procent större vid ekvatorn än mellan polerna.',
+      'Ungefär vart femtonde år ser vi ringarna precis från kanten, och då försvinner de nästan helt i ett teleskop. Senast hände det i mars 2025.',
+      'Galileo Galilei såg ringarna 1610 men förstod inte vad de var. Han trodde att Saturnus hade två stora följeslagare och beskrev dem senare som ”öron”.',
+      'Månen Iapetus är ljus på ena sidan och mörk som asfalt på den andra.',
+      'Små herdemånar kretsar vid kanten av vissa ringar och håller ringpartiklarna på plats med sin gravitation.',
+    ],
+  },
+  uranus: {
+    avsnitt: [
+      ['En isjätte', 'Uranus och Neptunus kallas isjättar. Under en atmosfär av väte, helium och metan består en stor del av planeten av så kallad is: vatten, metan och ammoniak som på grund av trycket och värmen bildar en het, tät vätska kring en stenig kärna.'],
+      ['Den vältade planeten', 'Axeln lutar 98 grader, så Uranus rullar i praktiken fram längs sin bana. Den vanligaste förklaringen är att en jättekollision tidigt i historien knuffade omkull planeten. Ringarna och månarna kretsar kring den lutande ekvatorn, så hela systemet ser ut som en måltavla när vi tittar rakt på en av polerna.'],
+      ['Bara ett besök', 'Voyager 2 flög förbi 1986, och det är fortfarande det enda besöket. Då såg planeten nästan helt slät ut. Senare bilder från rymdteleskop har visat stormar och ljusa molnband som dyker upp när årstiderna skiftar. En rymdsond som ska gå i bana runt Uranus står högst på forskarnas önskelista i USA.'],
+    ],
+    udda: [
+      'Uranus har den kallaste uppmätta atmosfären av alla planeter, ned till cirka −224&nbsp;°C, trots att Neptunus ligger längre bort från solen.',
+      'Herschel ville kalla planeten Georgium Sidus, Georges stjärna, efter kung Georg III av Storbritannien.',
+      'Ringarna upptäcktes 1977, när Uranus passerade framför en stjärna och stjärnans ljus blinkade till flera gånger strax före och strax efter planeten.',
+      'Laboratorieförsök tyder på att det kan regna diamanter djupt inne i isjättarna, där tryck och värme pressar ihop kolet i metanet.',
+      'Voyager 2 råkade passera under en ovanligt kraftig stöt i solvinden. Därför gav mätningarna en missvisande bild av Uranus magnetfält i nästan 40 år, tills misstaget upptäcktes 2024.',
+    ],
+  },
+  neptunus: {
+    avsnitt: [
+      ['Väder i mörkret', 'Neptunus får bara ungefär en niohundradel så mycket solljus som jorden. Ändå har den solsystemets snabbaste vindar. Planeten strålar ut mer än dubbelt så mycket energi som den får från solen, och det är den inre värmen som driver vädret. När Voyager 2 flög förbi 1989 syntes en stor mörk storm, men när rymdteleskopet Hubble tittade några år senare var den borta.'],
+      ['Hittad med papper och penna', 'Uranus rörde sig inte riktigt som den borde. Den franske astronomen Urbain Le Verrier räknade ut var en okänd planet måste finnas för att förklara störningarna. År 1846 riktade Johann Galle i Berlin sitt teleskop dit och hittade samma kväll Neptunus mindre än en grad från den förutsagda platsen.'],
+      ['Triton', 'Den största månen, Triton, kretsar åt fel håll, motsatt planetens rotation. Det tyder på att den inte bildades vid Neptunus utan fångades in från Kuiperbältet, det område bortom Neptunus där också Pluto finns.'],
+    ],
+    udda: [
+      'De djupblå bilderna från Voyager 2 var färgförstärkta. Nya analyser från 2024 visar att Neptunus i verkligheten har nästan samma ljust grönblå färg som Uranus.',
+      'Galileo Galilei ritade av Neptunus redan 1612 men trodde att den var en stjärna.',
+      'Triton har gejsrar som sprutar kvävgas flera kilometer upp, trots att ytan håller cirka −235&nbsp;°C och är en av de kallaste som mätts i solsystemet.',
+      'Triton närmar sig långsamt planeten och kommer om miljarder år att slitas sönder, kanske till ett ringsystem som kan mäta sig med Saturnus ringar.',
+      'Den yttersta ringen är samlad i klumpar, så kallade bågar. Vanliga ringar jämnar ut sig, och det tog lång tid att förstå hur bågarna kunde hålla ihop.',
+    ],
+  },
+};
+/* ---------- Vad består himlakroppen av? ----------
+   lager: [namn, yttre radie som andel av hela radien, färg, beskrivning], utifrån och in.
+   staplar: andelar i procent. Ämnena har samma färg överallt (AMNE). */
+const AMNE = {
+  väte: '#8fb8ff', helium: '#f2c46b', koldioxid: '#aab2c0', kväve: '#6fd3c1', syre: '#ff8a7a', argon: '#b58cff',
+  metan: '#4fa3d9', järn: '#c9884a', kisel: '#9aa3b4', magnesium: '#7ad29a', aluminium: '#dfe2e8', kalcium: '#f0e2b0', övrigt: '#5b6378',
+};
+const BESTAR = {
+  solen: {
+    svar: 'Solen består av het, elektriskt laddad gas, så kallad plasma. Räknat i massa är ungefär tre fjärdedelar väte och en fjärdedel helium. I kärnan har fusionen under miljarder år hunnit göra om en stor del av vätet till helium.',
+    lager: [
+      ['Konvektionszonen', 1, '#ffb14a', 'Het gas stiger, svalnar och sjunker igen och bär ut energin till ytan.'],
+      ['Strålningszonen', 0.7, '#ff7f2a', 'Energin letar sig utåt som strålning, så långsamt att resan tar tiotusentals år.'],
+      ['Kärnan', 0.25, '#fff0b0', 'Cirka 15 miljoner °C. Här slås vätekärnor ihop till helium.'],
+    ],
+    lagerNot: 'Ytan vi ser, fotosfären, är bara omkring 500 km tjock. Utanför den ligger kromosfären och koronan.',
+    staplar: [
+      { rubrik: 'Solens yttre delar, räknat i massa', delar: [['väte', 73.5], ['helium', 24.9], ['övrigt', 1.6, 'mest syre, kol, neon och järn']] },
+    ],
+  },
+  merkurius: {
+    svar: 'Merkurius består av metall och sten. En enorm kärna av järn tar upp det mesta av planeten, och runt den ligger en tunn mantel och skorpa av silikatsten, samma sorts bergarter som i jordens mantel.',
+    lager: [
+      ['Skorpa', 1, '#aaa39a', 'Silikatsten, några tiotals kilometer tjock.'],
+      ['Mantel', 0.985, '#7d7468', 'Silikatsten, bara omkring 400 km tjock.'],
+      ['Kärna', 0.83, '#c9884a', 'Järn och nickel, delvis flytande. Den når ut till 83 procent av radien.'],
+    ],
+    atmoNot: 'Merkurius saknar en riktig atmosfär. Det finns bara en extremt tunn exosfär av syre, natrium, väte, helium och kalium: atomer som slås loss från ytan eller följer med solvinden.',
+    staplar: [],
+  },
+  venus: {
+    svar: 'Venus är en stenplanet, uppbyggd ungefär som jorden med en kärna av järn, en mantel av sten och en skorpa av basalt. Atmosfären består nästan bara av koldioxid, och molnen är droppar av svavelsyra.',
+    lager: [
+      ['Skorpa', 1, '#d6b27a', 'Basalt från lavaflöden, några tiotals kilometer tjock.'],
+      ['Mantel', 0.995, '#a0603a', 'Het silikatsten, omkring 3 000 km tjock.'],
+      ['Kärna', 0.5, '#e0a050', 'Järn och nickel. Storleken är osäker, eftersom ingen har kunnat mäta skalv på Venus.'],
+    ],
+    staplar: [
+      { rubrik: 'Atmosfären, räknat i volym', delar: [['koldioxid', 96.5], ['kväve', 3.5]], not: 'Därtill spår av svaveldioxid, argon och vattenånga.' },
+    ],
+  },
+  jorden: {
+    svar: 'Jorden består mest av järn, syre, kisel och magnesium. Järnet har sjunkit in mot mitten och bildat kärnan, medan syret och kislet är bundna i sten i manteln och skorpan. Luften är mest kväve och syre.',
+    lager: [
+      ['Skorpa', 1, '#8a9a5b', 'Mellan 5 och 70 km tjock, tunnast under haven.'],
+      ['Mantel', 0.995, '#c0582e', 'Het silikatsten som flyter långsamt, cirka 2 900 km tjock.'],
+      ['Yttre kärna', 0.546, '#e89a3a', 'Flytande järn och nickel. Strömmarna här skapar magnetfältet.'],
+      ['Inre kärna', 0.192, '#ffe08a', 'Fast järn och nickel, ungefär lika varm som solens yta.'],
+    ],
+    staplar: [
+      { rubrik: 'Luften, räknat i volym', delar: [['kväve', 78.1], ['syre', 20.9], ['argon', 0.93], ['koldioxid', 0.04]], not: 'Därtill vattenånga, som varierar från nästan ingenting till några procent.' },
+      { rubrik: 'Hela jorden, räknat i massa', delar: [['järn', 32], ['syre', 30], ['kisel', 15], ['magnesium', 14], ['övrigt', 9, 'mest svavel, nickel, kalcium och aluminium']] },
+    ],
+  },
+  manen: {
+    svar: 'Månen är ett klot av sten med en liten järnkärna. Ytan täcks av regolit, ett lager krossad sten och stoft. De ljusa högländerna består av en bergart rik på aluminium och kalcium, de mörka slätterna av stelnad basaltlava.',
+    lager: [
+      ['Skorpa', 1, '#bdbab2', 'Ljusa bergarter rika på aluminium och kalcium, i genomsnitt omkring 40 km tjock.'],
+      ['Mantel', 0.977, '#8a8276', 'Silikatsten rik på magnesium och järn.'],
+      ['Kärna', 0.2, '#c98a4a', 'Järn, med en radie på omkring 350 km och troligen delvis smält.'],
+    ],
+    atmoNot: 'Månen saknar i praktiken atmosfär. Den extremt tunna exosfären innehåller bland annat helium, argon och neon.',
+    staplar: [
+      { rubrik: 'Stoftet på de ljusa högländerna, räknat i massa', delar: [['syre', 45], ['kisel', 21], ['aluminium', 14], ['kalcium', 11], ['övrigt', 9, 'mest järn och magnesium']], not: 'Värden från prover som Apollo 16 hämtade hem. Syret är bundet i mineraler.' },
+    ],
+  },
+  mars: {
+    svar: 'Mars är en stenplanet med en kärna av järn, nickel och svavel, en mantel av sten och en skorpa av basalt. Stoftet på ytan är färgat rött av järnoxid. Atmosfären är tunn och består nästan bara av koldioxid.',
+    lager: [
+      ['Skorpa', 1, '#c1653a', 'Basalt, mellan 25 och 70 km tjock, täckt av rött stoft.'],
+      ['Mantel', 0.985, '#8e4a2c', 'Silikatsten rik på järn.'],
+      ['Kärna', 0.53, '#e0a050', 'Flytande järn med mycket svavel. Storleken har mätts med landaren InSight.'],
+    ],
+    staplar: [
+      { rubrik: 'Atmosfären, räknat i volym', delar: [['koldioxid', 95], ['kväve', 2.6], ['argon', 1.9], ['övrigt', 0.5, 'mest syre och kolmonoxid']] },
+    ],
+  },
+  jupiter: {
+    svar: 'Jupiter består nästan bara av väte och helium, samma ämnen som solen. Det finns ingen fast yta: gasen blir tätare och tätare inåt tills trycket gör vätet till en flytande metall. Längst in finns en suddig kärna av tyngre ämnen.',
+    lager: [
+      ['Atmosfär med moln', 1, '#ead6b4', 'Väte och helium med moln av ammoniak och vatten.'],
+      ['Flytande väte', 0.97, '#c9a67c', 'Gasen övergår gradvis i vätska, utan någon skarp gräns.'],
+      ['Flytande metalliskt väte', 0.8, '#8a6a8e', 'Trycket gör vätet till en metall som leder ström. Här skapas magnetfältet.'],
+      ['Utspädd kärna', 0.35, '#5a4a5a', 'Sten och is blandat med väte. Mätningar från rymdsonden Juno tyder på att den saknar skarp gräns.'],
+    ],
+    staplar: [
+      { rubrik: 'Atmosfären, räknat i volym', delar: [['väte', 89.8], ['helium', 10.2]], not: 'Därtill små mängder metan, ammoniak och vattenånga. Det är de som bildar molnen och ger färgerna.' },
+    ],
+  },
+  saturnus: {
+    svar: 'Saturnus består, precis som Jupiter, mest av väte och helium och saknar fast yta. Längst in finns en kärna av is och sten som troligen är utspädd och suddig. Ringarna består nästan bara av vattenis.',
+    lager: [
+      ['Atmosfär med moln', 1, '#efdcae', 'Väte och helium med moln av ammoniak.'],
+      ['Flytande väte', 0.97, '#cdb27c', 'Gasen övergår gradvis i vätska.'],
+      ['Flytande metalliskt väte', 0.6, '#8a7a5e', 'Börjar djupare än i Jupiter, eftersom trycket inne i Saturnus är lägre.'],
+      ['Utspädd kärna', 0.4, '#5e5040', 'Is och sten blandat med väte. Vågor i ringarna tyder på att kärnan är utdragen och suddig.'],
+    ],
+    staplar: [
+      { rubrik: 'Atmosfären, räknat i volym', delar: [['väte', 96.3], ['helium', 3.3], ['övrigt', 0.4, 'mest metan och ammoniak']], not: 'Värdena kommer från NASA. Nyare analyser tyder på att andelen helium kan vara något större.' },
+    ],
+  },
+  uranus: {
+    svar: 'Uranus består mest av så kallad is: vatten, ammoniak och metan, som djupt inne i planeten är en het, tät vätska. Ytterst ligger en atmosfär av väte och helium med lite metan, och längst in en kärna av sten och metall.',
+    lager: [
+      ['Atmosfär', 1, '#a8e6ee', 'Väte och helium med lite metan, som ger den blågröna färgen.'],
+      ['Mantel av ”is”', 0.8, '#3f8fa8', 'Vatten, ammoniak och metan i form av en het, tät vätska.'],
+      ['Kärna', 0.2, '#6a5a4a', 'Sten och metall, troligen något mindre än jorden.'],
+    ],
+    staplar: [
+      { rubrik: 'Atmosfären, räknat i volym', delar: [['väte', 82.5], ['helium', 15.2], ['metan', 2.3]] },
+    ],
+  },
+  neptunus: {
+    svar: 'Neptunus består mest av så kallad is: vatten, ammoniak och metan, som djupt inne i planeten är en het och tät vätska. Längst in finns en kärna av sten och metall. Ytterst ligger en atmosfär av väte (cirka 80 procent), helium (cirka 19 procent) och lite metan. Det är metanet som ger den blå färgen.',
+    lager: [
+      ['Atmosfär', 1, '#7aa6ff', 'Väte och helium med lite metan.'],
+      ['Mantel av ”is”', 0.85, '#2f5fb0', 'Vatten, ammoniak och metan i form av en het, tät vätska.'],
+      ['Kärna', 0.25, '#6a5a4a', 'Sten och metall, ungefär lika stor som jorden.'],
+    ],
+    staplar: [
+      { rubrik: 'Atmosfären, räknat i volym', delar: [['väte', 80], ['helium', 19], ['metan', 1.5]], not: 'Andelarna är mätta med viss osäkerhet och blir därför inte exakt 100 procent tillsammans.' },
+    ],
+  },
+};
+FORDJUPNING.pluto = {
+  avsnitt: [
+    ['Från planet till dvärgplanet', 'Pluto hittades 1930, när astronomer letade efter en planet bortom Neptunus. Under 1990- och 2000-talen upptäcktes allt fler liknande isvärldar i Kuiperbältet, och 2005 hittades Eris, som är nästan lika stor som Pluto och har större massa. Då behövdes en tydlig definition av vad en planet är, och år 2006 blev Pluto en dvärgplanet.'],
+    ['Hjärtat', 'Det ljusa hjärtat heter Tombaugh Regio. Dess västra halva, Sputnik Planitia, är en över 1&nbsp;000&nbsp;km bred slätt av kväveis som långsamt vänder sig om i stora celler, ungefär som i en lavalampa. Där finns inga kratrar alls, så ytan är geologiskt ung, högst omkring tio miljoner år. Runt slätten reser sig berg av vattenis som är flera kilometer höga.'],
+    ['Ett enda besök', 'Rymdsonden New Horizons sköts upp 2006 och flög förbi Pluto den 14 juli 2015, efter en resa på nio och ett halvt år. Ombord fanns en liten del av Clyde Tombaughs aska. Eftersom sändaren var svag och avståndet enormt tog det över ett år att skicka hem alla mätdata.'],
+  ],
+  udda: [
+    'Plutos och Neptunus banor korsar varandra, men de kan aldrig krocka. Pluto går två varv runt solen på samma tid som Neptunus går tre, och den takten håller dem alltid långt ifrån varandra.',
+    'Månen Charon är ungefär halva Plutos diameter. De kretsar kring en punkt mellan sig, och båda vänder alltid samma sida mot varandra.',
+    'Himlen på Pluto har blått dis. Atmosfären innehåller lager av små partiklar som sprider blått ljus, precis som luften på jorden.',
+    'Pluto har snötäckta berg, men snön består av metanis i stället för vattenis.',
+    'Sedan upptäckten har Pluto ännu inte hunnit ett enda varv runt solen. Det första varvet blir klart år 2178.',
+    'Södra delen av Pluto låg i mörker när New Horizons flög förbi och har aldrig fotograferats. På kartan här är den fylld med en neutral färg.',
+  ],
+};
+BESTAR.pluto = {
+  svar: 'Pluto består av sten och is. Ungefär två tredjedelar av massan är sten och resten mest vattenis. Ytan är täckt av is av kväve, metan och kolmonoxid, och den rödbruna färgen kommer från toliner, organiska ämnen som bildas när ultraviolett ljus bryter sönder metan.',
+  lager: [
+    ['Skal av is', 1, '#dccfbf', 'Vattenis, täckt av is av kväve, metan och kolmonoxid.'],
+    ['Hav under isen?', 0.83, '#4d7fa8', 'Troligen ett lager flytande vatten, omkring hundra kilometer djupt.'],
+    ['Kärna', 0.72, '#7a6656', 'Sten, med en radie på omkring 850 km.'],
+  ],
+  lagerNot: 'Havet är inte bekräftat, men flera ledtrådar från New Horizons pekar ditåt.',
+  staplar: [
+    { rubrik: 'Atmosfären, räknat i volym', delar: [['kväve', 99.2], ['metan', 0.7], ['övrigt', 0.1, 'mest kolmonoxid']], not: 'Mätt av New Horizons 2015. Atmosfären är mycket tunn: trycket vid ytan är omkring en hundratusendel av jordens.' },
+  ],
+};
+PLANETER.forEach((p) => Object.assign(p, FORDJUPNING[p.id], { bestar: BESTAR[p.id] }));
+PLANETER.filter((p) => !p.sol && !p.mane && !p.dverg).forEach((p, k) => { p.nr = k + 1; });
+const N = PLANETER.length;
+
+/* =====================================================================
+   FORMATERING
+   ===================================================================== */
+const NB = ' ';
+function fmt(n, d = 0) {
+  const s = Math.abs(n).toFixed(d);
+  if (parseFloat(s) === 0) return '0';
+  let [i, f] = s.split('.');
+  i = i.replace(/\B(?=(\d{3})+(?!\d))/g, NB);
+  return (n < 0 ? '−' : '') + i + (f ? ',' + f : '');
+}
+function sig(n, k = 3) {
+  if (n === 0) return '0';
+  const d = Math.max(0, k - 1 - Math.floor(Math.log10(Math.abs(n))));
+  return fmt(n, d);
+}
+// Hårt mellanslag bara där radbrytning vore fel: efter ett tal och runt multiplikationspunkten
+function nb(s) { return s.replace(/(\d) /g, '$1' + NB).replace(/ · /g, NB + '·' + NB); }
+function tidText(sek) {
+  if (sek < 3600) { const m = Math.floor(sek / 60), s = Math.round(sek % 60); return `${m}${NB}min ${s}${NB}s`; }
+  const h = Math.floor(sek / 3600), m = Math.round((sek % 3600) / 60);
+  return `${h}${NB}h ${m}${NB}min`;
+}
+function sci(n, k = 3) {
+  const e = Math.floor(Math.log10(Math.abs(n)));
+  const m = n / Math.pow(10, e);
+  return `${sig(m, k)}${NB}·${NB}10<sup>${e < 0 ? '−' + (-e) : e}</sup>`;
+}
+function flykt(p) { return Math.sqrt(2 * G_KONST * p.massa / (p.radie * 1000)) / 1000; }
+function faktaVarde(p, v) {
+  if (v === 'FLYKT') { const f = flykt(p); return `${sig(f, f > 100 ? 3 : 3)}${NB}km/s`; }
+  if (v === 'AVST') return `${fmt(p.a * AE_KM / 1e6, p.a * AE_KM / 1e6 >= 1000 ? 0 : 1)}${NB}miljoner km (${fmt(p.a, p.a < 10 ? 2 : 1)}${NB}AE)`;
+  if (v === 'LJUS') return tidText(p.a * AE_KM / C_KM);
+  if (v === 'LJUSJORD') return tidText(AE_KM / C_KM);
+  if (v === 'LJUSMANE') return `${sig(p.avstandJorden / C_KM, 2)}${NB}s`;
+  return nb(v);
+}
+
+/* =====================================================================
+   RENDERARE
+   ===================================================================== */
+const canvas = document.getElementById('scen');
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+} catch (e) {
+  document.getElementById('fel').style.display = 'grid';
+  throw e;
+}
+const MOBIL = matchMedia('(pointer: coarse)').matches;
+const PR = Math.min(window.devicePixelRatio || 1, MOBIL ? 1.75 : 2);
+renderer.setPixelRatio(PR);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.08;
+renderer.autoClear = false;
+renderer.setClearColor(0x000000, 1);
+const ANISO = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+const REDUCERA = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Texturer ---------- */
+const laddare = new THREE.TextureLoader();
+const texCache = {};
+function tex(namn, farg = true) {
+  if (!texCache[namn]) {
+    texCache[namn] = new Promise((res) => {
+      laddare.load(TEX + namn, (t) => {
+        t.colorSpace = farg ? THREE.SRGBColorSpace : THREE.NoColorSpace;
+        t.anisotropy = ANISO;
+        t.wrapS = THREE.RepeatWrapping;
+        res(t);
+      }, undefined, () => res(null));
+    });
+  }
+  return texCache[namn];
+}
+const VIT = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1);
+VIT.needsUpdate = true;
+
+function glodTextur(inre, mitt, kant) {
+  const c = document.createElement('canvas'); c.width = c.height = 256;
+  const x = c.getContext('2d');
+  const g = x.createRadialGradient(128, 128, 0, 128, 128, 128);
+  g.addColorStop(0, inre); g.addColorStop(0.18, inre); g.addColorStop(0.32, mitt); g.addColorStop(1, kant);
+  x.fillStyle = g; x.fillRect(0, 0, 256, 256);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+function stralTextur() {
+  const c = document.createElement('canvas'); c.width = c.height = 512;
+  const x = c.getContext('2d');
+  x.translate(256, 256);
+  for (let i = 0; i < 90; i++) {
+    const v = Math.random() * Math.PI * 2, l = 150 + Math.random() * 100, b = 0.004 + Math.random() * 0.012;
+    const g = x.createLinearGradient(0, 0, Math.cos(v) * l, Math.sin(v) * l);
+    g.addColorStop(0, 'rgba(255,190,110,0.0)'); g.addColorStop(0.35, `rgba(255,180,100,${0.05 + Math.random() * 0.08})`); g.addColorStop(1, 'rgba(255,150,60,0)');
+    x.fillStyle = g; x.beginPath(); x.moveTo(0, 0); x.arc(0, 0, l, v - b, v + b); x.closePath(); x.fill();
+  }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const SOLGLOD = glodTextur('rgba(255,236,190,1)', 'rgba(255,160,60,0.42)', 'rgba(255,90,20,0)');
+const SOLSTRALAR = stralTextur();
+
+/* =====================================================================
+   SHADERS
+   ===================================================================== */
+const BRUS = /* glsl */`
+float hash3(vec3 p){ p = fract(p * 0.3183099 + 0.1); p *= 17.0; return fract(p.x * p.y * p.z * (p.x + p.y + p.z)); }
+float brus(vec3 x){
+  vec3 i = floor(x); vec3 f = fract(x); f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(mix(hash3(i), hash3(i + vec3(1,0,0)), f.x), mix(hash3(i + vec3(0,1,0)), hash3(i + vec3(1,1,0)), f.x), f.y),
+             mix(mix(hash3(i + vec3(0,0,1)), hash3(i + vec3(1,0,1)), f.x), mix(hash3(i + vec3(0,1,1)), hash3(i + vec3(1,1,1)), f.x), f.y), f.z);
+}
+float fbm(vec3 p){ float v = 0.0, a = 0.5; for (int i = 0; i < 5; i++) { v += a * brus(p); p *= 2.03; a *= 0.5; } return v; }
+`;
+
+const PLANET_VS = /* glsl */`
+varying vec2 vUv; varying vec3 vN; varying vec3 vW; varying vec3 vL;
+void main(){
+  vUv = uv; vL = normal;
+  vec4 w = modelMatrix * vec4(position, 1.0);
+  vW = w.xyz; vN = normalize(mat3(modelMatrix) * normal);
+  gl_Position = projectionMatrix * viewMatrix * w;
+}`;
+
+const PLANET_FS = /* glsl */`
+uniform sampler2D uMap, uMap2, uNight, uClouds, uSpec, uRing;
+uniform float uMix2, uReady, uHasNight, uNightStr, uHasClouds, uCloudAmt, uCloudOff, uHasSpec, uBump, uFlow, uTime;
+uniform float uEmissive, uHasRing, uRingIn, uRingOut, uAtmoStr, uRadius, uDim, uSat, uGain;
+uniform vec3 uBase, uLight, uAtmo, uCenter, uRingN;
+varying vec2 vUv; varying vec3 vN; varying vec3 vW; varying vec3 vL;
+${BRUS}
+vec3 perturb(vec3 p, vec3 n, float h){
+  vec3 sx = dFdx(p), sy = dFdy(p);
+  vec3 r1 = cross(sy, n), r2 = cross(n, sx);
+  float det = dot(sx, r1);
+  vec3 grad = sign(det) * (dFdx(h) * r1 + dFdy(h) * r2);
+  return normalize(abs(det) * n - grad);
+}
+vec3 karta(vec2 uv){
+  if (uFlow > 0.0) {
+    float lat = (uv.y - 0.5) * 3.14159;
+    float fart = sin(lat * 9.0) * 0.6 + sin(lat * 23.0 + 1.3) * 0.4;
+    float fas = uTime / 18.0;
+    float f1 = fract(fas), f2 = fract(fas + 0.5);
+    vec3 a = texture2D(uMap, uv + vec2(fart * uFlow * f1, 0.0)).rgb;
+    vec3 b = texture2D(uMap, uv + vec2(fart * uFlow * f2, 0.0)).rgb;
+    return mix(a, b, abs(2.0 * f1 - 1.0));
+  }
+  return texture2D(uMap, uv).rgb;
+}
+void main(){
+  vec3 Ng = normalize(vN);
+  vec3 V = normalize(cameraPosition - vW);
+  vec3 L = normalize(uLight);
+  float mu = max(dot(Ng, V), 0.0);
+
+  if (uEmissive > 0.5) {
+    float t = uTime * 0.035;
+    vec3 p = vL * 3.0;
+    float n1 = fbm(p * 2.5 + vec3(t, -t * 0.7, t * 0.5));
+    float n2 = fbm(p * 9.0 - vec3(t * 1.4, t * 0.3, -t));
+    vec2 duv = vUv + (vec2(n1, n2) - 0.5) * 0.008;
+    vec3 c = mix(uBase, texture2D(uMap, duv).rgb, uReady);
+    float gran = 0.6 + 0.8 * n2;
+    float n3 = brus(p * 46.0 + vec3(t * 3.0, 0.0, -t * 2.0));
+    float l = dot(c, vec3(0.3, 0.55, 0.15));
+    vec3 hett = mix(vec3(0.85, 0.17, 0.02), vec3(1.12, 0.52, 0.12), smoothstep(0.2, 0.9, l * gran));
+    vec3 s = hett * (0.55 + 0.85 * l * gran) * (0.4 + 0.6 * pow(mu, 0.5)) * (0.82 + 0.36 * n3) * 1.3;
+    s += vec3(1.0, 0.35, 0.05) * pow(1.0 - mu, 2.0) * 0.55;
+    s += vec3(1.0, 0.85, 0.55) * smoothstep(0.6, 0.95, n1) * 0.4 * mu;
+    gl_FragColor = vec4(s * uDim, 1.0);
+    #include <tonemapping_fragment>
+    #include <colorspace_fragment>
+    return;
+  }
+
+  vec3 col = karta(vUv);
+  if (uMix2 > 0.0) col = mix(col, texture2D(uMap2, vUv).rgb, uMix2);
+  col = mix(uBase, col, uReady);
+  float lum = dot(col, vec3(0.2126, 0.7152, 0.0722));
+  col = max(mix(vec3(lum), col, uSat), 0.0) * uGain;
+
+  float hav = uHasSpec > 0.5 ? texture2D(uSpec, vUv).r : 0.0;
+  vec3 Nn = Ng;
+  float bump = uBump * (uFlow > 0.0 ? uMix2 : 1.0);
+  if (bump > 0.0) {
+    float h = dot(col, vec3(0.299, 0.587, 0.114));
+    Nn = perturb(vW, Ng, h * bump * uRadius * (1.0 - hav));
+  }
+  float ndlG = dot(Ng, L);
+  float ndl = dot(Nn, L);
+  float term = smoothstep(-0.14, 0.3, ndlG);
+  float diff = max(ndl, 0.0) * 0.85 + max(ndlG, 0.0) * 0.15;
+  vec3 lit = col * diff * term * 1.3 + col * 0.01;
+
+  float moln = 0.0;
+  if (uHasClouds > 0.5) {
+    moln = texture2D(uClouds, vUv + vec2(uCloudOff + 0.0012, -0.0006)).r * uCloudAmt;
+    lit *= 1.0 - 0.55 * smoothstep(0.1, 0.9, moln) * term;
+  }
+  if (uHasSpec > 0.5) {
+    vec3 H = normalize(L + V);
+    float nh = max(dot(Ng, H), 0.0);
+    float sp = pow(nh, 260.0) * 0.38 + pow(nh, 30.0) * 0.016;
+    lit += vec3(1.0, 0.88, 0.72) * sp * hav * term * (1.0 - moln);
+    lit += hav * vec3(0.02, 0.05, 0.11) * pow(1.0 - mu, 2.0) * term;
+  }
+  if (uHasNight > 0.5) {
+    vec3 nl = texture2D(uNight, vUv).rgb;
+    float mork = smoothstep(0.06, -0.22, ndlG);
+    lit += nl * vec3(1.5, 1.1, 0.7) * 1.6 * mork * uNightStr * (1.0 - moln * 0.85);
+  }
+  if (uHasRing > 0.5) {
+    float dn = dot(L, uRingN);
+    if (abs(dn) > 0.001) {
+      float t = dot(uCenter - vW, uRingN) / dn;
+      if (t > 0.0) {
+        vec3 p = vW + L * t;
+        float r = length(p - uCenter) / uRadius;
+        if (r > uRingIn && r < uRingOut) {
+          float a = texture2D(uRing, vec2((r - uRingIn) / (uRingOut - uRingIn), 0.5)).a;
+          lit *= 1.0 - a * 0.78;
+        }
+      }
+    }
+  }
+  float fres = pow(1.0 - mu, 4.2);
+  float atmLjus = smoothstep(-0.25, 0.55, ndlG);
+  lit += uAtmo * (fres * 1.5 + 0.05) * atmLjus * uAtmoStr;
+  gl_FragColor = vec4(lit * uDim, 1.0);
+  #include <tonemapping_fragment>
+  #include <colorspace_fragment>
+}`;
+
+const MOLN_FS = /* glsl */`
+uniform sampler2D uClouds; uniform float uOff, uAmt, uReady, uDim; uniform vec3 uLight;
+varying vec2 vUv; varying vec3 vN; varying vec3 vW;
+void main(){
+  float c = texture2D(uClouds, vUv + vec2(uOff, 0.0)).r;
+  c = smoothstep(0.1, 0.95, c);
+  vec3 Ng = normalize(vN);
+  float ndl = dot(Ng, normalize(uLight));
+  float term = smoothstep(-0.16, 0.3, ndl);
+  vec3 V = normalize(cameraPosition - vW);
+  float mu = max(dot(Ng, V), 0.0);
+  vec3 col = vec3(1.0) * (max(ndl, 0.0) * 1.15 + 0.015) * term;
+  col = mix(col, col * vec3(1.0, 0.72, 0.52), smoothstep(0.32, 0.0, ndl) * term);
+  float a = c * uAmt * uReady * mix(0.55, 1.0, smoothstep(0.0, 0.25, mu));
+  gl_FragColor = vec4(col * uDim, a);
+  #include <tonemapping_fragment>
+  #include <colorspace_fragment>
+}`;
+
+const ATMO_VS = /* glsl */`
+varying vec3 vW;
+void main(){ vec4 w = modelMatrix * vec4(position, 1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`;
+const ATMO_FS = /* glsl */`
+uniform vec3 uAtmo, uSun, uLight, uCenter; uniform float uRadius, uThick, uStr, uDim, uJamn;
+varying vec3 vW;
+void main(){
+  vec3 rd = normalize(vW - cameraPosition);
+  vec3 oc = uCenter - cameraPosition;
+  float tca = dot(oc, rd);
+  vec3 cp = cameraPosition + rd * tca;
+  float d = length(cp - uCenter);
+  float h = max((d - uRadius) / (uRadius * uThick), 0.0);
+  float tathet = exp(-h * 3.6) * (1.0 - smoothstep(0.8, 1.0, h));
+  vec3 n = normalize(cp - uCenter);
+  float ndl = dot(n, normalize(uLight));
+  float ljus = mix(smoothstep(-0.4, 0.55, ndl), 1.0, uJamn);
+  vec3 col = mix(mix(uSun, uAtmo, smoothstep(-0.12, 0.42, ndl)), mix(uSun, uAtmo, exp(-h * 2.5)), uJamn);
+  float a = tathet * ljus * uStr;
+  gl_FragColor = vec4(col * uDim, a);
+  #include <tonemapping_fragment>
+  #include <colorspace_fragment>
+}`;
+
+const RING_VS = /* glsl */`
+varying vec3 vW; varying float vR;
+void main(){ vR = length(position.xy); vec4 w = modelMatrix * vec4(position, 1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`;
+const RING_FS = /* glsl */`
+uniform sampler2D uRing; uniform float uIn, uOut, uPR, uReady, uDim; uniform vec3 uLight, uCenter, uN;
+varying vec3 vW; varying float vR;
+void main(){
+  float t = (vR - uIn) / (uOut - uIn);
+  vec4 tx = texture2D(uRing, vec2(t, 0.5));
+  vec3 L = normalize(uLight);
+  vec3 oc = uCenter - vW;
+  float tca = dot(oc, L);
+  float d = sqrt(max(dot(oc, oc) - tca * tca, 0.0));
+  float skugga = tca > 0.0 ? mix(0.05, 1.0, smoothstep(uPR * 0.985, uPR * 1.02, d)) : 1.0;
+  vec3 V = normalize(cameraPosition - vW);
+  float fram = pow(max(dot(-V, L), 0.0), 6.0) * 0.5;
+  float ljus = 0.5 + 0.5 * abs(dot(normalize(uN), L));
+  vec3 col = tx.rgb * (ljus + fram) * skugga * 1.25;
+  gl_FragColor = vec4(col * uDim, tx.a * uReady * 0.96);
+  #include <tonemapping_fragment>
+  #include <colorspace_fragment>
+}`;
+
+const STJARN_VS = /* glsl */`
+attribute float aSize; attribute vec3 aColor; attribute float aPhase;
+uniform float uTime, uPR; varying vec3 vC; varying float vA;
+void main(){
+  vec4 mv = modelViewMatrix * vec4(position, 1.0);
+  gl_Position = projectionMatrix * mv;
+  vA = 0.7 + 0.3 * sin(uTime * (0.5 + aPhase * 1.7) + aPhase * 40.0);
+  gl_PointSize = aSize * uPR;
+  vC = aColor;
+}`;
+const STJARN_FS = /* glsl */`
+varying vec3 vC; varying float vA;
+void main(){
+  float d = length(gl_PointCoord - 0.5);
+  float a = smoothstep(0.5, 0.0, d); a *= a;
+  gl_FragColor = vec4(vC * vA * a, 1.0);
+}`;
+
+/* =====================================================================
+   BYGGSTENAR
+   ===================================================================== */
+const geoCache = {};
+function klotGeo(a, b) { const k = a + 'x' + b; return geoCache[k] || (geoCache[k] = new THREE.SphereGeometry(1, a, b)); }
+const RING_IN = 1.24, RING_UT = 2.27;
+const ringGeo = new THREE.RingGeometry(RING_IN, RING_UT, 256, 1);
+
+function byggPlanet(p, o = {}) {
+  const seg = o.seg || [176, 120];
+  const root = new THREE.Group();
+  const tilt = new THREE.Group(); tilt.rotation.z = THREE.MathUtils.degToRad(p.tilt); root.add(tilt);
+  const snurr = new THREE.Group(); tilt.add(snurr);
+  snurr.rotation.y = o.startSpin != null ? o.startSpin : (p.startSpin || 0);
+
+  const U = {
+    uMap: { value: VIT }, uMap2: { value: VIT }, uNight: { value: VIT }, uClouds: { value: VIT }, uSpec: { value: VIT }, uRing: { value: VIT },
+    uMix2: { value: 0 }, uReady: { value: 0 }, uHasNight: { value: p.tex.natt ? 1 : 0 }, uNightStr: { value: 1 },
+    uHasClouds: { value: p.tex.moln ? 1 : 0 }, uCloudAmt: { value: 1 }, uCloudOff: { value: 0 }, uHasSpec: { value: p.tex.hav ? 1 : 0 },
+    uBump: { value: p.bump || 0 }, uFlow: { value: p.flow || 0 }, uTime: { value: 0 }, uEmissive: { value: p.sol ? 1 : 0 },
+    uHasRing: { value: p.ring ? 1 : 0 }, uRingIn: { value: RING_IN }, uRingOut: { value: RING_UT },
+    uAtmoStr: { value: p.atmo ? p.atmo.inre : 0 }, uRadius: { value: 1 }, uDim: { value: 1 },
+    uSat: { value: p.sat || 1 }, uGain: { value: p.gain || 1 },
+    uBase: { value: new THREE.Color(p.farg) }, uLight: { value: new THREE.Vector3(0, 0, 1) },
+    uAtmo: { value: new THREE.Color(p.atmo ? p.atmo.farg : '#000000') }, uCenter: { value: new THREE.Vector3() }, uRingN: { value: new THREE.Vector3(0, 1, 0) },
+  };
+  // Venus: jämna molnband flyter bara när molnen visas (uFlow används också som flagga i shadern)
+  const mat = new THREE.ShaderMaterial({ uniforms: U, vertexShader: PLANET_VS, fragmentShader: PLANET_FS });
+  const mesh = new THREE.Mesh(klotGeo(seg[0], seg[1]), mat);
+  mesh.userData.index = PLANETER.indexOf(p);
+  snurr.add(mesh);
+
+  const obj = { p, root, tilt, snurr, mesh, U, laddad: false, lagerMal: { moln: 1, natt: 1, yta: 0 } };
+
+  if (p.tex.moln) {
+    const cU = { uClouds: { value: VIT }, uOff: { value: 0 }, uAmt: { value: 1 }, uReady: { value: 0 }, uDim: { value: 1 }, uLight: U.uLight };
+    const cm = new THREE.Mesh(klotGeo(seg[0], seg[1]), new THREE.ShaderMaterial({
+      uniforms: cU, vertexShader: PLANET_VS, fragmentShader: MOLN_FS, transparent: true, depthWrite: false,
+    }));
+    cm.scale.setScalar(1.008);
+    snurr.add(cm);
+    obj.cU = cU;
+  }
+  if (p.ring) {
+    const rU = { uRing: { value: VIT }, uIn: { value: RING_IN }, uOut: { value: RING_UT }, uPR: { value: 1 }, uReady: { value: 0 }, uDim: { value: 1 },
+      uLight: U.uLight, uCenter: U.uCenter, uN: U.uRingN };
+    const rm = new THREE.Mesh(ringGeo, new THREE.ShaderMaterial({
+      uniforms: rU, vertexShader: RING_VS, fragmentShader: RING_FS, transparent: true, depthWrite: false, side: THREE.DoubleSide,
+    }));
+    rm.rotation.x = -Math.PI / 2;
+    rm.renderOrder = 2;
+    tilt.add(rm);
+    obj.rU = rU;
+  }
+  if (p.atmo) {
+    const aU = { uAtmo: { value: new THREE.Color(p.atmo.farg) }, uSun: { value: new THREE.Color(p.atmo.sol) }, uLight: U.uLight,
+      uCenter: U.uCenter, uRadius: U.uRadius, uThick: { value: p.atmo.tjock }, uStr: { value: p.atmo.str }, uDim: U.uDim, uJamn: { value: p.sol ? 1 : 0 } };
+    const am = new THREE.Mesh(klotGeo(96, 64), new THREE.ShaderMaterial({
+      uniforms: aU, vertexShader: ATMO_VS, fragmentShader: ATMO_FS, transparent: true, depthWrite: false,
+      side: THREE.BackSide, blending: THREE.AdditiveBlending,
+    }));
+    am.scale.setScalar(1 + p.atmo.tjock);
+    am.renderOrder = 1;
+    root.add(am);
+    obj.aU = aU;
+  }
+  if (p.sol) {
+    const glod = new THREE.Sprite(new THREE.SpriteMaterial({ map: SOLGLOD, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: 0.95 }));
+    glod.scale.setScalar(o.glod || 4.6);
+    root.add(glod);
+    const stralar = new THREE.Sprite(new THREE.SpriteMaterial({ map: SOLSTRALAR, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: 0.8 }));
+    stralar.scale.setScalar((o.glod || 4.6) * 1.35);
+    root.add(stralar);
+    obj.glod = glod; obj.stralar = stralar;
+  }
+
+  obj.ladda = () => {
+    if (obj.laddning) return obj.laddning;
+    const krav = [tex(p.tex.karta).then((t) => { if (t) U.uMap.value = t; })];
+    if (p.tex.karta2) krav.push(tex(p.tex.karta2).then((t) => { if (t) U.uMap2.value = t; }));
+    if (p.tex.natt) krav.push(tex(p.tex.natt).then((t) => { if (t) U.uNight.value = t; }));
+    if (p.tex.hav) krav.push(tex(p.tex.hav, false).then((t) => { if (t) U.uSpec.value = t; }));
+    if (p.tex.moln) krav.push(tex(p.tex.moln, false).then((t) => { if (t) { U.uClouds.value = t; obj.cU.uClouds.value = t; } }));
+    if (p.tex.ring) krav.push(tex(p.tex.ring).then((t) => { if (t) { t.wrapS = THREE.ClampToEdgeWrapping; U.uRing.value = t; obj.rU.uRing.value = t; } }));
+    obj.laddning = Promise.all(krav).then(() => { obj.laddad = true; });
+    return obj.laddning;
+  };
+
+  const tmpQ = new THREE.Quaternion();
+  obj.uppdatera = (tid, dt, ljus, dim, spinMul = 1) => {
+    U.uTime.value = tid;
+    U.uLight.value.copy(ljus);
+    U.uDim.value = dim;
+    U.uCenter.value.copy(root.position);
+    U.uRadius.value = root.scale.x;
+    if (obj.laddad && U.uReady.value < 1) {
+      U.uReady.value = Math.min(1, U.uReady.value + dt * 1.6);
+      if (obj.cU) obj.cU.uReady.value = U.uReady.value;
+      if (obj.rU) obj.rU.uReady.value = U.uReady.value;
+    }
+    snurr.rotation.y += p.spin * dt * spinMul;
+    // mjuka övergångar för lagren
+    const k = 1 - Math.exp(-dt * 3);
+    if (obj.cU) {
+      obj.cU.uOff.value += dt * 0.0011 * spinMul;
+      obj.cU.uAmt.value += (obj.lagerMal.moln - obj.cU.uAmt.value) * k;
+      obj.cU.uDim.value = dim;
+      U.uCloudAmt.value = obj.cU.uAmt.value;
+      U.uCloudOff.value = obj.cU.uOff.value;
+    }
+    if (p.tex.natt) U.uNightStr.value += (obj.lagerMal.natt - U.uNightStr.value) * k;
+    if (p.tex.karta2) {
+      U.uMix2.value += (obj.lagerMal.yta - U.uMix2.value) * k;
+      if (obj.aU) obj.aU.uStr.value = p.atmo.str * (1 - 0.75 * U.uMix2.value);
+      U.uAtmoStr.value = p.atmo.inre * (1 - 0.85 * U.uMix2.value);
+    }
+    if (p.ring) {
+      tmpQ.copy(root.quaternion).multiply(tilt.quaternion);
+      U.uRingN.value.set(0, 1, 0).applyQuaternion(tmpQ);
+      obj.rU.uPR.value = root.scale.x;
+      obj.rU.uDim.value = dim;
+    }
+    if (obj.stralar) obj.stralar.material.rotation = tid * 0.01;
+    if (obj.glod) { obj.glod.material.opacity = 0.95 * dim; obj.stralar.material.opacity = 0.8 * dim; }
+  };
+  return obj;
+}
+
+function byggStjarnor(antal, radie) {
+  const pos = new Float32Array(antal * 3), storlek = new Float32Array(antal), farg = new Float32Array(antal * 3), fas = new Float32Array(antal);
+  const c = new THREE.Color();
+  for (let i = 0; i < antal; i++) {
+    const u = Math.random() * 2 - 1, v = Math.random() * Math.PI * 2, s = Math.sqrt(1 - u * u);
+    pos.set([radie * s * Math.cos(v), radie * u, radie * s * Math.sin(v)], i * 3);
+    const r = Math.random();
+    storlek[i] = r < 0.965 ? 0.8 + Math.random() * 1.4 : 2.2 + Math.random() * 2.2;
+    const t = Math.random();
+    c.setHSL(t < 0.2 ? 0.08 : t < 0.55 ? 0.6 : 0.62, t < 0.2 ? 0.6 : 0.35, 0.72 + Math.random() * 0.25);
+    const ljus = 0.35 + Math.random() * 0.65;
+    farg.set([c.r * ljus, c.g * ljus, c.b * ljus], i * 3);
+    fas[i] = Math.random();
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  g.setAttribute('aSize', new THREE.BufferAttribute(storlek, 1));
+  g.setAttribute('aColor', new THREE.BufferAttribute(farg, 3));
+  g.setAttribute('aPhase', new THREE.BufferAttribute(fas, 1));
+  const m = new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 }, uPR: { value: PR } }, vertexShader: STJARN_VS, fragmentShader: STJARN_FS,
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  });
+  const pts = new THREE.Points(g, m);
+  pts.frustumCulled = false;
+  return pts;
+}
+function byggVintergatan(radie, styrka) {
+  const m = new THREE.MeshBasicMaterial({ color: new THREE.Color(styrka, styrka, styrka * 1.08), side: THREE.BackSide, depthWrite: false, toneMapped: false });
+  tex('vintergatan.jpg').then((t) => { if (t) { m.map = t; m.needsUpdate = true; } });
+  const mesh = new THREE.Mesh(klotGeo(64, 32), m);
+  mesh.scale.setScalar(radie);
+  mesh.rotation.set(0.9, 0.4, -0.5);
+  return mesh;
+}
+
+/* =====================================================================
+   HJÄLTESCENEN
+   ===================================================================== */
+const hjalte = new THREE.Scene();
+const kamera = new THREE.PerspectiveCamera(32, 1, 0.1, 5000);
+const LJUS = new THREE.Vector3(-0.58, 0.5, 0.64).normalize();
+const himmel = byggVintergatan(1800, 0.3);
+hjalte.add(himmel);
+const stjarnor = byggStjarnor(MOBIL ? 2200 : 3800, 1500);
+hjalte.add(stjarnor);
+
+const AX_X0 = new THREE.Vector3(1, 0, 0);
+const qBas = new THREE.Quaternion();
+const START_SPIN = { pluto: 4.45, manen: 3.95, jorden: 4.3, mars: 2.4, jupiter: 0.5, merkurius: 0.6, saturnus: 0.2 };
+const planeter = PLANETER.map((p) => {
+  const o = byggPlanet(p, { startSpin: START_SPIN[p.id] || 0 });
+  o.anv = new THREE.Quaternion();
+  // Upprätt läge (grannar och helt klot): lätt lutad mot betraktaren, Saturnus mer så att ringarna öppnar sig.
+  // Närvyn: nordpolen fälls bakåt så att man svävar över ekvatortrakterna i stället för över polen.
+  o.qUpp = new THREE.Quaternion().setFromAxisAngle(AX_X0, p.ring ? 0.36 : 0.12);
+  o.qHero = new THREE.Quaternion().setFromAxisAngle(AX_X0, p.hero || -1);
+  o.vel = new THREE.Vector2();
+  hjalte.add(o.root);
+  return o;
+});
+
+const tillstand = {
+  idx: 3, cur: 3, tween: null,
+  g: 0, gMal: 0,
+  scrollP: 0,
+  drar: false, dragObj: null,
+};
+
+/* ---------- Layout i skärmplanet ---------- */
+const D = 22;
+const lay = { W: 1, H: 1, aspekt: 1, hero: null, granne: null, bort: null, glob: null, globSida: null, globBort: null };
+
+function slot(X, Y, rs) { return { X, Y, rs }; }
+function beraknaLayout() {
+  const w = window.innerWidth, h = window.innerHeight;
+  lay.aspekt = w / h;
+  lay.H = D * Math.tan(THREE.MathUtils.degToRad(kamera.fov / 2));
+  lay.W = lay.H * lay.aspekt;
+  const { W, H } = lay;
+  const smal = lay.aspekt < 0.9;
+
+  // Planetens topp ska ligga där knappen sitter, precis som att knappen vilar på horisonten.
+  const pill = document.getElementById('utforska').getBoundingClientRect();
+  let toppPx = pill.top + pill.height * 0.58;
+  if (!pill.height) toppPx = h * 0.58;
+  toppPx = Math.min(Math.max(toppPx, h * 0.42), h * 0.78);
+  const Ytop = H * (1 - 2 * toppPx / h);
+  const rs0 = smal ? W * 1.38 : Math.max(W * 1.0, H * 1.5);
+  const alfa = Math.atan(rs0 / D);
+  const thc = Math.atan(Ytop / D) - alfa;
+  lay.hero = slot(0, D * Math.tan(thc), rs0);
+
+  const rsN = Math.min(W, H) * (smal ? 0.2 : 0.12);
+  lay.granne = slot(W - rsN * 0.28, Ytop + H * 0.02, rsN);
+  lay.bort = slot(W + rsN * 4, Ytop + H * 0.02, rsN * 0.8);
+
+  if (!smal && lay.aspekt > 1.05) {
+    const rsG = Math.min(H * 0.62, W * 0.36);
+    const panelB = Math.min(520, w * 0.46);
+    const fri = (w - panelB) / w;
+    lay.glob = slot(W * (fri - 1), 0, rsG);
+    lay.globSida = slot(W * 2.2, 0, rsG);
+    lay.globBort = slot(W * 3.4, 0, rsG);
+  } else {
+    const rsG = Math.min(W * 0.72, H * 0.27);
+    lay.glob = slot(0, H * 0.5, rsG);
+    lay.globSida = slot(W * 2.4, H * 0.52, rsG);
+    lay.globBort = slot(W * 3.8, H * 0.52, rsG);
+  }
+  placeraGrannEtiketter();
+}
+
+function lerpSlot(A, B, t) {
+  return { X: A.X + (B.X - A.X) * t, Y: A.Y + (B.Y - A.Y) * t, rs: Math.exp(Math.log(A.rs) + (Math.log(B.rs) - Math.log(A.rs)) * t) };
+}
+function slotFor(s, mitt, sida, bort, skalaSida) {
+  const a = Math.abs(s), sg = s < 0 ? -1 : 1;
+  const S = { X: sg * sida.X, Y: sida.Y, rs: sida.rs * skalaSida };
+  const B = { X: sg * bort.X, Y: bort.Y, rs: bort.rs * skalaSida };
+  if (a <= 1) return lerpSlot(mitt, S, a);
+  if (a <= 2) return lerpSlot(S, B, a - 1);
+  return B;
+}
+function tillVarld(sl) {
+  const s = Math.sin(Math.atan(sl.rs / D));
+  const R = D * s / (1 - s);
+  const Dc = D + R;
+  const dir = new THREE.Vector3(sl.X / D, sl.Y / D, -1).normalize();
+  return { pos: dir.multiplyScalar(Dc), R };
+}
+
+function layoutPlanet(i) {
+  const o = planeter[i], p = o.p;
+  const s = i - tillstand.cur;
+  const ring = p.ring ? 0.52 : 1, solSkala = p.sol ? 0.85 : 1;
+  const heroMitt = lay.hero;
+  const hero = slotFor(s, heroMitt, lay.granne, lay.bort, ring * solSkala);
+  const globMitt = { ...lay.glob, rs: lay.glob.rs * ring * (p.sol ? 0.72 : 1) };
+  const glob = slotFor(s, globMitt, lay.globSida, lay.globBort, ring);
+  const g = tillstand.g;
+  let sl = lerpSlot(hero, glob, g);
+  // skrollparallax: planeten sjunker när man skrollar vidare
+  sl.Y -= tillstand.scrollP * lay.H * 1.1 * (1 - g);
+  const { pos, R } = tillVarld(sl);
+  o.root.position.copy(pos);
+  o.root.scale.setScalar(R);
+  o.root.visible = Math.abs(s) < 2.3;
+  return Math.abs(s);
+}
+
+/* ---------- Grannarnas etiketter ---------- */
+const grannV = document.getElementById('grannV'), grannH = document.getElementById('grannH');
+function placeraGrannEtiketter() {
+  const w = window.innerWidth, h = window.innerHeight;
+  const n = lay.granne;
+  const kantX = ((n.X - n.rs) / lay.W + 1) / 2 * w;
+  const y = (1 - n.Y / lay.H) / 2 * h;
+  const avst = Math.max(18, w - kantX + 16);
+  grannV.style.left = avst + 'px'; grannV.style.top = y + 'px';
+  grannH.style.right = avst + 'px'; grannH.style.top = y + 'px';
+}
+
+/* =====================================================================
+   BANORNA (SOLSYSTEMET OVANIFRÅN)
+   ===================================================================== */
+const bana = {
+  scen: new THREE.Scene(), kam: new THREE.PerspectiveCamera(38, 1, 0.1, 6000),
+  dagar: (Date.now() - J2000) / 86400000, fart: 7, spelar: !REDUCERA,
+  m: 0, mMal: 0, az: 1.25, el: 0.52, vaz: 0, vel: 0, dist: 60, drar: false, hover: -1,
+  obj: [], linjer: [], etiketter: [],
+};
+bana.scen.add(byggVintergatan(3000, 0.22));
+const banStjarnor = byggStjarnor(MOBIL ? 1800 : 3000, 2600);
+bana.scen.add(banStjarnor);
+PLANETER.forEach((p, i) => {
+  const o = byggPlanet(p, { seg: [64, 48], glod: 5.2 });
+  bana.scen.add(o.root);
+  bana.obj.push(o);
+  if (!p.sol && !p.mane) {
+    const pts = [];
+    // Plutos elliptiska, lutande bana ritas punkt för punkt (uppdateras när skalan ändras)
+    const n = p.bana ? 512 : 256;
+    for (let k = 0; k <= n; k++) { const v = k / n * Math.PI * 2; pts.push(new THREE.Vector3(Math.cos(v), 0, -Math.sin(v))); }
+    const lin = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
+      new THREE.LineBasicMaterial({ color: new THREE.Color(p.acc), transparent: true, opacity: 0.16, depthWrite: false }));
+    bana.scen.add(lin);
+    bana.linjer[i] = lin;
+  }
+});
+// Läge i en elliptisk bana (Keplers ekvation), i ekliptikans koordinater, med avstånden omskalade som övriga banor.
+function ellipsLage(p, E, m, ut) {
+  const b = p.bana, rad = THREE.MathUtils.degToRad;
+  const e = b.e, i = rad(b.i), nod = rad(b.nod), w = rad(b.peri - b.nod);
+  const nu = 2 * Math.atan2(Math.sqrt(1 + e) * Math.sin(E / 2), Math.sqrt(1 - e) * Math.cos(E / 2));
+  const r = p.a * (1 - e * Math.cos(E));
+  const u = nu + w;
+  const X = r * (Math.cos(nod) * Math.cos(u) - Math.sin(nod) * Math.sin(u) * Math.cos(i));
+  const Y = r * (Math.sin(nod) * Math.cos(u) + Math.cos(nod) * Math.sin(u) * Math.cos(i));
+  const Z = r * Math.sin(u) * Math.sin(i);
+  return ut.set(X, Z, -Y).multiplyScalar(banRadie(r, m) / r);
+}
+function ellipsE(p, dagar) {
+  const M = THREE.MathUtils.degToRad(p.L0 + 360 * dagar / p.period - p.bana.peri);
+  let E = M;
+  for (let k = 0; k < 8; k++) E -= (E - p.bana.e * Math.sin(E) - M) / (1 - p.bana.e * Math.cos(E));
+  return E;
+}
+function banRadie(a, m) { const komp = 3.0 + 4.6 * Math.log2(1 + 2.8 * a); const verk = a * 2.1; return komp + (verk - komp) * m; }
+function banStorlek(p, m) {
+  if (p.sol) return 2.0 + (0.5 - 2.0) * m;
+  if (p.mane) return 0.15 * (1 - 0.5 * m);
+  const s = 0.2 + 0.085 * Math.sqrt(p.diameter / 1000);
+  return s * (1 - 0.55 * m);
+}
+
+/* =====================================================================
+   DOM: HJÄLTETEXT, PANEL, KORT, SKALA
+   ===================================================================== */
+const $ = (id) => document.getElementById(id);
+const titel = $('titel'), kicker = $('kicker'), ingress = $('ingress'), utforska = $('utforska');
+const panel = $('panel'), panelInre = $('panelInre');
+
+function satFarg(p) {
+  document.documentElement.style.setProperty('--acc', p.acc);
+}
+function titelHTML(namn) {
+  return [...namn].map((c, i) => `<span class="b" style="animation-delay:${i * 42}ms">${c}</span>`).join('');
+}
+let textTimer = null;
+function visaText(p, direkt) {
+  clearTimeout(textTimer);
+  const byt = () => {
+    kicker.textContent = p.kicker;
+    titel.innerHTML = titelHTML(p.namn);
+    titel.classList.remove('ut');
+    ingress.textContent = p.ingress;
+    ingress.classList.remove('ut');
+    utforska.textContent = 'Utforska ' + p.namn;
+    satFarg(p);
+  };
+  if (direkt) { byt(); return; }
+  titel.classList.add('ut');
+  ingress.classList.add('ut');
+  textTimer = setTimeout(byt, 420);
+}
+function uppdateraGrannar() {
+  const i = tillstand.idx;
+  const v = PLANETER[i - 1], h = PLANETER[i + 1];
+  [grannV, grannH].forEach((el) => el.classList.add('dold'));
+  setTimeout(() => {
+    if (v) { grannV.textContent = v.namn; grannV.classList.remove('dold'); grannV.setAttribute('aria-label', 'Till ' + v.namn); }
+    if (h) { grannH.textContent = h.namn; grannH.classList.remove('dold'); grannH.setAttribute('aria-label', 'Till ' + h.namn); }
+  }, 900);
+  $('mobV').disabled = !v; $('mobH').disabled = !h;
+  const pi = PLANETER[i];
+  $('nr').innerHTML = pi.sol ? '<b>Solen</b>' : pi.mane ? '<b>Jordens måne</b>' : pi.dverg ? '<b>Dvärgplanet</b>' : `<b>${String(pi.nr).padStart(2, '0')}</b> / 08`;
+  document.querySelectorAll('.tick').forEach((t, k) => t.classList.toggle('aktiv', k === i));
+}
+
+// Ticks
+const ticks = $('ticks');
+PLANETER.forEach((p, i) => {
+  const b = document.createElement('button');
+  b.className = 'tick'; b.setAttribute('aria-label', p.namn);
+  b.innerHTML = `<span>${p.namn}</span>`;
+  b.addEventListener('click', () => gaTill(i));
+  ticks.appendChild(b);
+});
+
+/* ---------- Byta planet ---------- */
+const easeInOut = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+function gaTill(i, direkt) {
+  i = Math.max(0, Math.min(N - 1, i));
+  if (i === tillstand.idx && !direkt) return;
+  tillstand.idx = i;
+  for (let k = i - 2; k <= i + 2; k++) if (planeter[k]) planeter[k].ladda();
+  if (direkt) { tillstand.cur = i; tillstand.tween = null; }
+  else {
+    const avst = Math.abs(i - tillstand.cur);
+    tillstand.tween = { fran: tillstand.cur, till: i, t0: performance.now(), dur: REDUCERA ? 300 : Math.min(2600, 1400 + (avst - 1) * 380) };
+  }
+  visaText(PLANETER[i], direkt);
+  uppdateraGrannar();
+  if (panel.classList.contains('oppen')) fyllPanel(PLANETER[i], true);
+  history.replaceState(null, '', '#' + PLANETER[i].id);
+}
+
+/* ---------- Panelen ---------- */
+let panelMassa = 60, panelAlder = 17;
+function procent(v) {
+  const d = Number.isInteger(v) ? 0 : Number.isInteger(Math.round(v * 1000) / 100) ? 1 : 2;
+  return `${fmt(v, d)}${NB}%`;
+}
+function bestarHTML(p) {
+  const b = p.bestar;
+  // Genomskärning: tunna skikt förstoras så att de syns
+  const visa = [];
+  b.lager.forEach(([, y], i) => { visa.push(i === 0 ? 1 : Math.max(0.1, Math.min(y, visa[i - 1] - 0.07))); });
+  const cx = 110, cy = 104, R = 100;
+  const skikt = b.lager.map(([namn, , farg], i) => {
+    const r = R * visa[i];
+    return `<path d="M${cx - r} ${cy} A${r} ${r} 0 0 1 ${cx + r} ${cy} Z" fill="${farg}" stroke="rgba(4,6,12,.55)" stroke-width="0.8"><title>${namn}</title></path>`;
+  }).join('');
+  const svg = `<svg class="snitt" viewBox="0 0 220 106" role="img" aria-label="Genomskärning av ${p.namn}">
+    <defs><radialGradient id="snittSken" cx="50%" cy="100%" r="100%"><stop offset="0.55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.28"/></radialGradient></defs>
+    ${skikt}<path d="M${cx - R} ${cy} A${R} ${R} 0 0 1 ${cx + R} ${cy} Z" fill="url(#snittSken)"/>
+    <line x1="4" y1="${cy + 0.5}" x2="216" y2="${cy + 0.5}" stroke="rgba(255,255,255,.28)" stroke-width="0.8"/></svg>`;
+  const lista = b.lager.map(([namn, , farg, text]) => `<li><i style="background:${farg}"></i><div><b>${namn}</b><span>${text}</span></div></li>`).join('');
+  const staplar = b.staplar.map((st) => `
+    <div class="stapel">
+      <div class="st-rubrik">${st.rubrik}</div>
+      <div class="st-bar">${st.delar.map(([n, v]) => `<span style="flex:${Math.max(v, 1.4)} 0 0;background:${AMNE[n]}" title="${n} ${procent(v)}"></span>`).join('')}</div>
+      <ul class="st-lista">${st.delar.map(([n, v, detalj]) => `<li><i style="background:${AMNE[n]}"></i><span>${n[0].toUpperCase() + n.slice(1)}${detalj ? `<small>${detalj}</small>` : ''}</span><b>${procent(v)}</b></li>`).join('')}</ul>
+      ${st.not ? `<p class="not">${st.not}</p>` : ''}
+    </div>`).join('');
+  return `<p class="svar">${b.svar}</p>
+    <div class="ruta bestar">
+      <div class="st-rubrik">Inifrån och ut</div>
+      <div class="snitt-rad">${svg}<ul class="lagerlista">${lista}</ul></div>
+      <p class="not">Skikten är ritade ungefär i rätt proportioner, men de allra tunnaste är förstorade så att de syns.${b.lagerNot ? ' ' + b.lagerNot : ''}</p>
+    </div>
+    ${b.atmoNot ? `<p class="not atmo-not">${b.atmoNot}</p>` : ''}
+    ${staplar}`;
+}
+function fyllPanel(p, anim) {
+  const gor = () => {
+    const i = PLANETER.indexOf(p);
+    const v = PLANETER[i - 1], h = PLANETER[i + 1];
+    const fakta = p.fakta.map(([k, val]) => `<div><dt>${k}</dt><dd>${faktaVarde(p, val)}</dd></div>`).join('');
+    const lager = (p.lager || []).map((l) => {
+      const pa = planeter[i].lagerMal[l.id] > 0.5;
+      return `<button class="vaxel" data-lager="${l.id}" aria-pressed="${pa}">${l.text}</button>`;
+    }).join('');
+    const r = p.radie * 1000;
+    const gBer = G_KONST * p.massa / (r * r);
+    const vems = p.sol ? 'solens' : p.mane ? 'månens' : p.dverg ? 'dvärgplanetens' : 'planetens';
+    const gasNot = p.gas ? '<p class="not">Gasplaneterna saknar fast yta. Värdena gäller vid molntopparna, där trycket är lika stort som vid jordytan.</p>' : '';
+    const jordNot = p.id === 'jorden' ? `<p class="not">I Sverige mäter vi 9,82${NB}N/kg. Vi ligger närmare jordens medelpunkt än ekvatorn gör och påverkas mindre av jordens rotation.</p>` : '';
+    panelInre.innerHTML = `
+      <div class="p-kicker">${p.kicker}</div>
+      <h2 class="p-titel">${p.namn}</h2>
+      <div class="p-streck"></div>
+      <p class="p-ingress">${p.ingress}</p>
+      ${lager ? `<div class="lager">${lager}</div>` : ''}
+      <nav class="hopp" aria-label="Innehåll">
+        <button data-hopp="pFakta">Fakta</button><button data-hopp="pBestar">Består av</button><button data-hopp="pFordj">Fördjupning</button><button data-hopp="pUdda">Udda och oväntat</button><button data-hopp="pDu">Du på ${p.namn}</button><button data-hopp="pFysik">Fysiken</button>
+      </nav>
+      <div class="p-rubrik" id="pFakta">Fakta</div>
+      <dl class="fakta">${fakta}</dl>
+      <div class="p-rubrik" id="pBestar">Vad består ${p.namn} av?</div>
+      ${bestarHTML(p)}
+      <div class="p-rubrik" id="pFordj">Fördjupning</div>
+      <div class="fordj">${p.avsnitt.map(([rub, txt]) => `<h3>${rub}</h3><p>${txt}</p>`).join('')}</div>
+      <div class="p-rubrik" id="pUdda">Udda och oväntat</div>
+      <ul class="udda">${p.udda.map((t) => `<li>${t}</li>`).join('')}</ul>
+      <div class="p-rubrik" id="pDu">Du på ${p.namn}</div>
+      <div class="ruta">
+        <div class="reglage"><label for="rMassa">Din massa <b id="vMassa"></b></label><input type="range" id="rMassa" min="20" max="150" value="${panelMassa}"></div>
+        ${p.sol ? '' : `<div class="reglage"><label for="rAlder">Din ålder <b id="vAlder"></b></label><input type="range" id="rAlder" min="1" max="100" value="${panelAlder}"></div>`}
+        <div class="utfall" id="utfall"></div>
+        ${gasNot}
+      </div>
+      <div class="p-rubrik" id="pFysik">Fysiken bakom</div>
+      <div class="ruta">
+        <div class="formel">
+          <span><i>g</i> =</span>
+          <span class="brak"><span><i>G</i> · <i>M</i></span><span><i>r</i><sup>2</sup></span></span>
+          <span>=</span>
+          <span class="brak"><span>${sci(G_KONST, 3)} · ${sci(p.massa, 3)}</span><span>(${sci(r, 3)})<sup>2</sup></span></span>
+          <span>≈ ${sig(gBer, 3)}${NB}N/kg</span>
+        </div>
+        <ul class="dar">
+          <li><i>g</i> = tyngdfaktor (N/kg)</li>
+          <li><i>G</i> = gravitationskonstanten, ${sci(G_KONST, 3)}${NB}N·m²/kg²</li>
+          <li><i>M</i> = ${vems} massa (kg)</li>
+          <li><i>r</i> = ${vems} radie vid ekvatorn (m)</li>
+        </ul>
+        ${jordNot}
+        <p class="not">Flykthastigheten, den fart som krävs för att lämna ${p.sol ? 'solen' : p.mane ? 'månen' : p.dverg ? 'dvärgplaneten' : 'planeten'} för gott, är ${sig(flykt(p), 3)}${NB}km/s.</p>
+      </div>
+      <div class="p-rubrik">Visste du att</div>
+      <ol class="visste">${p.visste.map((t) => `<li>${t}</li>`).join('')}</ol>
+      <div class="p-nav">
+        <button data-ga="${i - 1}" ${v ? '' : 'disabled'}><small>Föregående</small><span>${v ? v.namn : ''}</span></button>
+        <button data-ga="${i + 1}" ${h ? '' : 'disabled'}><small>Nästa</small><span>${h ? h.namn : ''}</span></button>
+      </div>`;
+    panelInre.querySelectorAll('[data-lager]').forEach((b) => b.addEventListener('click', () => {
+      const id = b.dataset.lager;
+      const obj = planeter[i];
+      obj.lagerMal[id] = obj.lagerMal[id] > 0.5 ? 0 : 1;
+      b.setAttribute('aria-pressed', obj.lagerMal[id] > 0.5);
+    }));
+    panelInre.querySelectorAll('[data-hopp]').forEach((b) => b.addEventListener('click', () => {
+      const mal = $(b.dataset.hopp);
+      panel.scrollTo({ top: mal.offsetTop - 24, behavior: 'smooth' });
+    }));
+    panelInre.querySelectorAll('[data-ga]').forEach((b) => b.addEventListener('click', () => gaTill(+b.dataset.ga)));
+    const rM = $('rMassa'), rA = $('rAlder');
+    const rakna = () => {
+      panelMassa = +rM.value;
+      if (rA) panelAlder = +rA.value;
+      $('vMassa').textContent = `${panelMassa}${NB}kg`;
+      if (rA) $('vAlder').textContent = `${panelAlder}${NB}år`;
+      const tyngd = panelMassa * p.g;
+      const hopp = 0.5 * 9.82 / p.g;
+      const fall = Math.sqrt(2 * 10 / p.g);
+      const rader = [
+        [`Din tyngd, <i>F</i><sub>G</sub> = <i>m</i> · <i>g</i>`, `${sig(tyngd, 3)}${NB}N`],
+        ['Tyngden jämfört med på jorden', `${sig(p.g / 9.82, 2)} gånger så stor`],
+        ['Ett hopp på 50 cm på jorden blir här', hopp >= 1 ? `${sig(hopp, 2)}${NB}m` : `${sig(hopp * 100, 2)}${NB}cm`],
+        ['Ett fall från 10 m höjd tar', `${sig(fall, 2)}${NB}s`],
+      ];
+      if (rA && p.period) {
+        const ar = panelAlder * 365.256 / p.period;
+        if (p.mane) rader.push(['Så många varv har månen gått runt jorden sedan du föddes', `${fmt(ar)}${NB}varv`]);
+        else rader.push([`Din ålder i ${p.namn.toLowerCase() === 'jorden' ? 'jordår' : p.namn + 'år'}`, `${sig(ar, ar < 10 ? 2 : 3)}${NB}år`]);
+      }
+      $('utfall').innerHTML = rader.map(([a, b]) => `<div><span>${a}</span><b>${b}</b></div>`).join('')
+        + (p.gas ? '' : '<div style="border:0;padding-bottom:0"><span style="font-size:12px;color:var(--faint)">Fallet räknas utan luftmotstånd.</span></div>');
+    };
+    rM.addEventListener('input', rakna);
+    if (rA) rA.addEventListener('input', rakna);
+    rakna();
+    panelInre.classList.remove('ut');
+    if (anim) panel.scrollTo({ top: 0 });
+  };
+  if (anim) { panelInre.classList.add('ut'); setTimeout(gor, 320); } else gor();
+}
+function oppnaPanel() {
+  if (window.scrollY > 10) { window.scrollTo({ top: 0, behavior: 'smooth' }); setTimeout(oppnaPanel, 650); return; }
+  fyllPanel(PLANETER[tillstand.idx]);
+  panel.classList.add('oppen');
+  $('topp').classList.add('panelvy');
+  panel.setAttribute('aria-hidden', 'false');
+  tillstand.gMal = 1;
+  document.body.classList.add('last');
+  $('hero').style.touchAction = 'none';
+  $('heroText').style.opacity = 0;
+  $('heroText').style.transition = 'opacity .5s';
+  [grannV, grannH].forEach((e) => { e.style.opacity = 0; e.style.pointerEvents = 'none'; });
+  document.querySelector('.hero-fot').style.opacity = 0;
+  $('ner').style.opacity = 0;
+}
+function stangPanel() {
+  panel.classList.remove('oppen');
+  $('topp').classList.remove('panelvy');
+  panel.setAttribute('aria-hidden', 'true');
+  tillstand.gMal = 0;
+  document.body.classList.remove('last');
+  $('hero').style.touchAction = '';
+  $('heroText').style.opacity = '';
+  [grannV, grannH].forEach((e) => { e.style.opacity = ''; e.style.pointerEvents = ''; });
+  document.querySelector('.hero-fot').style.opacity = '';
+  $('ner').style.opacity = '';
+}
+$('stang').addEventListener('click', stangPanel);
+utforska.addEventListener('click', (e) => { e.stopPropagation(); oppnaPanel(); });
+$('toppUtforska').addEventListener('click', oppnaPanel);
+grannV.addEventListener('click', (e) => { e.currentTarget.blur(); gaTill(tillstand.idx - 1); });
+grannH.addEventListener('click', (e) => { e.currentTarget.blur(); gaTill(tillstand.idx + 1); });
+$('mobV').addEventListener('click', () => gaTill(tillstand.idx - 1));
+$('mobH').addEventListener('click', () => gaTill(tillstand.idx + 1));
+$('ner').addEventListener('click', () => $('varldar').scrollIntoView({ behavior: 'smooth' }));
+$('tillbaka').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+document.addEventListener('keydown', (e) => {
+  if (e.target.closest && e.target.closest('input')) return;
+  const heroSyns = $('hero').getBoundingClientRect().bottom > window.innerHeight * 0.4;
+  if (e.key === 'Escape' && panel.classList.contains('oppen')) stangPanel();
+  if (!heroSyns) return;
+  if (e.key === 'ArrowRight') { gaTill(tillstand.idx + 1); e.preventDefault(); }
+  if (e.key === 'ArrowLeft') { gaTill(tillstand.idx - 1); e.preventDefault(); }
+});
+
+/* ---------- Kort och skala ---------- */
+const klotEl = PLANETER.map(() => []);
+function nyttKlot(i) {
+  const p = PLANETER[i];
+  const d = document.createElement('div');
+  d.className = 'klot';
+  d.innerHTML = `<div class="plats" style="background:radial-gradient(circle at 35% 32%, ${p.acc}, ${p.farg} 45%, #05070d 78%);box-shadow:0 0 40px -10px ${p.acc}"></div><img alt="">`;
+  klotEl[i].push(d);
+  return d;
+}
+let vantaHero = null;
+function flygTill(i) {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  vantaHero = i;
+}
+const kortRutnat = $('kortRutnat');
+PLANETER.forEach((p, i) => {
+  const k = document.createElement('button');
+  k.className = 'kort';
+  k.style.setProperty('--c', p.acc);
+  const ljus = p.a ? faktaVarde(p, 'LJUS') : '';
+  if (p.sol) k.classList.add('bred');
+  const hoger = p.a ? fmt(p.a, p.a < 10 ? 2 : 1) + NB + 'AE' : p.mane ? fmt(p.avstandJorden) + NB + 'km bort' : 'Centrum';
+  const fot = p.a ? 'Ljuset når hit på ' + ljus : p.mane ? 'Ljuset från jorden tar ' + faktaVarde(p, 'LJUSMANE') : '99,8' + NB + '% av solsystemets massa';
+  k.innerHTML = `<div class="k-top"><span>${p.kortTop}</span><span>${hoger}</span></div>
+    <div class="k-bild"></div>
+    <div class="k-namn">${p.namn}</div>
+    <div class="k-rad">${p.kort}</div>
+    <div class="k-fot"><span>${fot}</span><span class="k-pil"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>`;
+  k.querySelector('.k-bild').appendChild(nyttKlot(i));
+  k.addEventListener('click', () => flygTill(i));
+  kortRutnat.appendChild(k);
+});
+
+const skalaRad = $('skalaRad');
+let skalaKlot = [];
+function byggSkala() {
+  PLANETER.forEach((_, i) => { klotEl[i] = klotEl[i].filter((e) => !e.dataset.skala); });
+  skalaRad.innerHTML = '';
+  skalaKlot = [];
+  const smal = window.innerWidth < 700;
+  const synligt = smal ? 70 : 120;
+  const gap = smal ? 18 : 30;
+  // Skalan väljs så att raden ryms på skärmen om det går, men Jupiter blir aldrig mindre än 150 px
+  const tillg = skalaRad.parentElement.clientWidth - synligt - (smal ? 24 : 40) - 8 * gap - 40;
+  const summa = PLANETER.reduce((a, p) => a + (p.sol ? 0 : p.diameter * (p.ring ? 2.4 : 1)), 0);
+  let k = Math.min((smal ? 170 : 260) / 142984, tillg / summa);
+  k = Math.max(k, 150 / 142984);
+  const solD = 1392700 * k;
+  let smaIdx = 0;
+  // En CSS-bildpunkt är 0,2646 mm; så långt bort skulle Neptunus ligga med samma skala
+  const neptunusKm = 30.07 * AE_KM * k * 0.2646e-6;
+  $('skalaNot').textContent = `Avstånden mellan planeterna är däremot inte skalenliga. Med samma skala skulle Neptunus hamna ungefär ${sig(neptunusKm, 2)} kilometer bort från solen, räknat på skärmens bildpunkter.`;
+  const sol = document.createElement('div');
+  sol.className = 'sol-kant';
+  sol.style.width = sol.style.height = solD + 'px';
+  sol.style.left = (synligt - solD) + 'px';
+  sol.innerHTML = `<span class="sol-etikett" style="left:${solD - synligt + 14}px;bottom:${solD / 2 - 150}px">Solen</span>`;
+  sol.style.pointerEvents = 'auto'; sol.style.cursor = 'pointer';
+  sol.addEventListener('click', () => flygTill(0));
+  skalaRad.appendChild(sol);
+  const luft = document.createElement('div'); luft.style.flex = `0 0 ${synligt + (smal ? 24 : 40)}px`;
+  skalaRad.appendChild(luft);
+  PLANETER.forEach((p, i) => {
+    if (p.sol) return;
+    const d = p.diameter * k;
+    const b = document.createElement('button');
+    b.className = 'skala-planet';
+    const ringSkala = p.ring ? 2.4 : 1;
+    const bred = Math.max(d * ringSkala, 46);
+    b.style.width = bred + gap + 'px';
+    b.style.setProperty('--h', Math.max(d, 10) + 'px');
+    const klot = nyttKlot(i);
+    klot.dataset.skala = '1';
+    const fr = p.ring ? 0.4 : 0.8;
+    klot.style.width = klot.style.height = (d / fr) + 'px';
+    klot.dataset.fr = fr;
+    b.appendChild(klot);
+    const t = document.createElement('div');
+    t.className = 's-text';
+    if (smal && d < 40) { smaIdx = (smaIdx || 0) + 1; if (smaIdx % 2 === 0) t.style.marginTop = '34px'; }
+    t.innerHTML = `<div class="s-namn">${p.namn}</div><div class="s-mat">${fmt(p.diameter)}${NB}km</div>`;
+    b.appendChild(t);
+    b.addEventListener('click', () => flygTill(i));
+    skalaRad.appendChild(b);
+    skalaKlot.push(klot);
+  });
+  if (tumnaglar) PLANETER.forEach((_, i) => satTumnagel(i));
+}
+
+/* ---------- Tumnaglar renderade med samma shaders ---------- */
+let tumnaglar = null;
+function satTumnagel(i) {
+  if (!tumnaglar) return;
+  klotEl[i].forEach((el) => {
+    const img = el.querySelector('img');
+    if (img.src !== tumnaglar[i]) { img.src = tumnaglar[i]; img.onload = () => { img.classList.add('syns'); el.classList.add('klar'); }; }
+  });
+}
+function renderaTumnaglar() {
+  const TS = 256;
+  const px = Math.round(TS * PR);
+  const scen = new THREE.Scene();
+  const kam = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+  const tan15 = Math.tan(THREE.MathUtils.degToRad(15));
+  const ljus = new THREE.Vector3(-0.62, 0.42, 0.66).normalize();
+  const ut = document.createElement('canvas'); ut.width = ut.height = px;
+  const ctx = ut.getContext('2d');
+  const resultat = [];
+  const vinklar = { pluto: 2.75, manen: 1.85, jorden: 2.2, mars: 3.2, jupiter: 1.2, saturnus: 0.2 };
+  renderer.setScissorTest(true);
+  PLANETER.forEach((p, i) => {
+    const o = byggPlanet(p, { seg: [96, 72], startSpin: vinklar[p.id] || 0.8, glod: 3.4 });
+    o.root.position.set(0, 0, 0);
+    o.root.scale.setScalar(1);
+    if (p.ring) o.root.quaternion.setFromAxisAngle(new THREE.Vector3(1, 0, 0), 0.32);
+    o.U.uMap.value = planeter[i].U.uMap.value; o.U.uMap2.value = planeter[i].U.uMap2.value;
+    o.U.uNight.value = planeter[i].U.uNight.value; o.U.uSpec.value = planeter[i].U.uSpec.value;
+    o.U.uClouds.value = planeter[i].U.uClouds.value; o.U.uRing.value = planeter[i].U.uRing.value;
+    if (o.cU) o.cU.uClouds.value = planeter[i].U.uClouds.value;
+    if (o.rU) o.rU.uRing.value = planeter[i].U.uRing.value;
+    o.laddad = true; o.U.uReady.value = 1; if (o.cU) o.cU.uReady.value = 1; if (o.rU) o.rU.uReady.value = 1;
+    o.uppdatera(0, 0, ljus, 1, 0);
+    const fr = p.ring ? 0.4 : p.sol ? 0.62 : 0.8;
+    const dist = 1 / Math.sin(Math.atan(fr * tan15));
+    kam.position.set(0, 0, dist);
+    kam.lookAt(0, 0, 0);
+    scen.add(o.root);
+    renderer.setViewport(0, 0, TS, TS);
+    renderer.setScissor(0, 0, TS, TS);
+    renderer.setClearColor(0x000000, 1);
+    renderer.clear();
+    renderer.render(scen, kam);
+    ctx.clearRect(0, 0, px, px);
+    ctx.drawImage(renderer.domElement, 0, renderer.domElement.height - px, px, px, 0, 0, px, px);
+    // Svart bakgrund blir genomskinlig: alfa = ljusaste kanalen, färgen räknas upp igen
+    const bild = ctx.getImageData(0, 0, px, px), d = bild.data;
+    for (let k = 0; k < d.length; k += 4) {
+      const a = Math.max(d[k], d[k + 1], d[k + 2]);
+      if (a === 0) { d[k + 3] = 0; continue; }
+      const f = 255 / a;
+      d[k] *= f; d[k + 1] *= f; d[k + 2] *= f; d[k + 3] = a;
+    }
+    ctx.putImageData(bild, 0, 0);
+    resultat.push(ut.toDataURL('image/png'));
+    scen.remove(o.root);
+  });
+  renderer.setScissorTest(false);
+  tumnaglar = resultat;
+  PLANETER.forEach((_, i) => satTumnagel(i));
+}
+
+/* =====================================================================
+   INTERAKTION I HJÄLTEVYN
+   ===================================================================== */
+const hero = $('hero');
+const raycaster = new THREE.Raycaster();
+const mus = new THREE.Vector2();
+let tryck = null;
+const trV = new THREE.Vector3();
+function traff(e) {
+  mus.set(e.clientX / window.innerWidth * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
+  raycaster.setFromCamera(mus, kamera);
+  const ray = raycaster.ray;
+  let bast = -1, bt = Infinity;
+  planeter.forEach((o, i) => {
+    if (!o.root.visible) return;
+    // analytisk träff mot klotet; grannarna får en generösare träffyta
+    const R = o.root.scale.x * (i === tillstand.idx ? 1.01 : 1.45);
+    trV.copy(o.root.position).sub(ray.origin);
+    const tca = trV.dot(ray.direction);
+    const d2 = trV.lengthSq() - tca * tca;
+    if (d2 > R * R) return;
+    const t = tca - Math.sqrt(R * R - d2);
+    if (t > 0 && t < bt) { bt = t; bast = i; }
+  });
+  return bast;
+}
+hero.addEventListener('pointerdown', (e) => {
+  if (e.target.closest('button')) return;
+  if (e.button !== 0) return;
+  tryck = { x: e.clientX, y: e.clientY, lx: e.clientX, ly: e.clientY, t: performance.now(), lt: performance.now(), id: e.pointerId, drog: false };
+});
+window.addEventListener('pointermove', (e) => {
+  const heroRect = hero.getBoundingClientRect();
+  const iHero = e.clientY >= heroRect.top && e.clientY <= heroRect.bottom;
+  if (!tryck) {
+    if (iHero && !e.target.closest('button') && e.pointerType === 'mouse') {
+      const i = traff(e);
+      hero.style.cursor = i === -1 ? 'default' : i === tillstand.idx ? 'grab' : 'pointer';
+    }
+    // lätt parallax från muspekaren
+    if (e.pointerType === 'mouse') { parallax.mx = e.clientX / window.innerWidth - 0.5; parallax.my = e.clientY / window.innerHeight - 0.5; }
+    return;
+  }
+  if (e.pointerId !== tryck.id) return;
+  const dx = e.clientX - tryck.lx, dy = e.clientY - tryck.ly;
+  if (!tryck.drog && Math.hypot(e.clientX - tryck.x, e.clientY - tryck.y) > 6) {
+    tryck.drog = true;
+    hero.classList.add('drar');
+    hero.style.cursor = '';
+    try { hero.setPointerCapture(e.pointerId); } catch (_) {}
+  }
+  if (!tryck.drog) return;
+  const now = performance.now();
+  const o = planeter[tillstand.idx];
+  const Rpx = Math.max(160, (tillstand.g > 0.5 ? lay.glob.rs : lay.hero.rs) / lay.W * window.innerWidth / 2);
+  const k = 1 / Rpx;
+  roteraAnv(o, dx * k, e.pointerType === 'touch' && tillstand.g < 0.5 ? 0 : dy * k);
+  const dt = Math.max(1, now - tryck.lt) / 1000;
+  o.vel.set(dx * k / dt, (e.pointerType === 'touch' && tillstand.g < 0.5 ? 0 : dy * k) / dt);
+  tryck.lx = e.clientX; tryck.ly = e.clientY; tryck.lt = now;
+});
+window.addEventListener('pointerup', (e) => {
+  if (!tryck || e.pointerId !== tryck.id) return;
+  const o = planeter[tillstand.idx];
+  if (!tryck.drog) {
+    const i = traff(e);
+    if (i === tillstand.idx) { if (!panel.classList.contains('oppen')) oppnaPanel(); }
+    else if (i !== -1) gaTill(i);
+    else if (panel.classList.contains('oppen')) stangPanel();
+    o.vel.set(0, 0);
+  } else if (performance.now() - tryck.lt > 90) o.vel.set(0, 0);
+  hero.classList.remove('drar');
+  tryck = null;
+});
+window.addEventListener('pointercancel', () => { tryck = null; hero.classList.remove('drar'); });
+const AX_Y = new THREE.Vector3(0, 1, 0), AX_X = new THREE.Vector3(1, 0, 0), tmpQ1 = new THREE.Quaternion(), tmpQ2 = new THREE.Quaternion();
+function roteraAnv(o, ay, ax) {
+  tmpQ1.setFromAxisAngle(AX_Y, ay);
+  tmpQ2.setFromAxisAngle(AX_X, ax);
+  o.anv.premultiply(tmpQ1).premultiply(tmpQ2);
+}
+const parallax = { mx: 0, my: 0, x: 0, y: 0 };
+
+/* ---------- Banornas interaktion ---------- */
+const banEl = $('banor');
+const etikettBox = $('etiketter');
+PLANETER.forEach((p, i) => {
+  const e = document.createElement('div');
+  e.className = 'et';
+  e.innerHTML = `${p.namn}<small>${p.mane ? fmt(p.period, 1) + NB + 'dygn per varv runt jorden' : p.period ? (p.period < 1000 ? fmt(p.period) + NB + 'dygn per varv' : sig(p.period / 365.256, 3) + NB + 'år per varv') : 'Centrum'}</small>`;
+  etikettBox.appendChild(e);
+  bana.etiketter.push(e);
+});
+let banTryck = null;
+const banProj = [];
+const etRutor = [];
+banEl.addEventListener('pointerdown', (e) => {
+  if (e.target.closest('.banor-kontroller')) return;
+  banTryck = { x: e.clientX, y: e.clientY, lx: e.clientX, ly: e.clientY, lt: performance.now(), id: e.pointerId, drog: false, typ: e.pointerType };
+});
+banEl.addEventListener('pointermove', (e) => {
+  if (!banTryck) {
+    const i = narmastBan(e);
+    if (i !== bana.hover) { bana.hover = i; }
+    banEl.classList.toggle('hovrar', i !== -1);
+    return;
+  }
+  if (e.pointerId !== banTryck.id) return;
+  const dx = e.clientX - banTryck.lx, dy = e.clientY - banTryck.ly;
+  if (!banTryck.drog && Math.hypot(e.clientX - banTryck.x, e.clientY - banTryck.y) > 6) {
+    banTryck.drog = true; banEl.classList.add('drar');
+    try { banEl.setPointerCapture(e.pointerId); } catch (_) {}
+  }
+  if (!banTryck.drog) return;
+  const now = performance.now(), dt = Math.max(1, now - banTryck.lt) / 1000;
+  bana.az -= dx * 0.006;
+  if (banTryck.typ !== 'touch') bana.el = Math.min(1.45, Math.max(0.08, bana.el + dy * 0.004));
+  bana.vaz = -dx * 0.006 / dt;
+  banTryck.lx = e.clientX; banTryck.ly = e.clientY; banTryck.lt = now;
+});
+banEl.addEventListener('pointerup', (e) => {
+  if (!banTryck) return;
+  if (!banTryck.drog) { const i = narmastBan(e); if (i !== -1) flygTill(i); }
+  else if (performance.now() - banTryck.lt > 90) bana.vaz = 0;
+  banTryck = null; banEl.classList.remove('drar');
+});
+banEl.addEventListener('pointerleave', () => { if (!banTryck) bana.hover = -1; });
+banEl.addEventListener('pointercancel', () => { banTryck = null; banEl.classList.remove('drar'); });
+function narmastBan(e) {
+  const r = banEl.getBoundingClientRect();
+  const x = e.clientX - r.left, y = e.clientY - r.top;
+  let bast = -1, bd = 1e9;
+  banProj.forEach((pr, i) => { if (!pr) return; const d = Math.hypot(pr.x - x, pr.y - y); if (d < Math.max(22, pr.r + 10) && d < bd) { bd = d; bast = i; } });
+  return bast;
+}
+const fartEl = $('fart'), fartText = $('fartText');
+function fartFranReglage() {
+  const x = +fartEl.value / 100;
+  bana.fart = Math.pow(10, -0.7 + x * 4.2);
+  const v = bana.fart;
+  const enh = (n, en, fler) => { const s = sig(n, 2); return `${s} ${s === '1' ? en : fler} per sekund`; };
+  fartText.textContent = v < 1 ? enh(v * 24, 'timme', 'timmar') : v < 30.44 ? enh(v, 'dygn', 'dygn') : v < 365.25 ? enh(v / 30.44, 'månad', 'månader') : enh(v / 365.25, 'år', 'år');
+}
+fartEl.addEventListener('input', fartFranReglage);
+fartFranReglage();
+$('spela').addEventListener('click', () => {
+  bana.spelar = !bana.spelar;
+  $('ikonPaus').style.display = bana.spelar ? '' : 'none';
+  $('ikonSpela').style.display = bana.spelar ? 'none' : '';
+  $('spela').setAttribute('aria-label', bana.spelar ? 'Pausa' : 'Spela');
+});
+if (!bana.spelar) { $('ikonPaus').style.display = 'none'; $('ikonSpela').style.display = ''; }
+$('verklig').addEventListener('click', (e) => {
+  bana.mMal = bana.mMal > 0.5 ? 0 : 1;
+  e.currentTarget.setAttribute('aria-pressed', bana.mMal > 0.5);
+  e.currentTarget.textContent = bana.mMal > 0.5 ? 'Verkliga avstånd' : 'Verkliga avstånd';
+});
+$('idag').addEventListener('click', () => { bana.dagar = (Date.now() - J2000) / 86400000; });
+const datumEl = $('datum');
+let datumSenast = '';
+
+/* =====================================================================
+   HUVUDLOOP
+   ===================================================================== */
+let senast = performance.now(), tid = 0, storlek = { w: -1, h: -1 }, vantaTumnaglar = false;
+const vy = new THREE.Vector3();
+const vec = new THREE.Vector3();
+function anpassaStorlek() {
+  const w = window.innerWidth, h = window.innerHeight;
+  // En flik som ännu inte har fått någon storlek (0 × 0) väntar med layouten
+  if (!w || !h || (w === storlek.w && h === storlek.h)) return;
+  const baraHojd = w === storlek.w && Math.abs(h - storlek.h) < 140 && MOBIL;
+  storlek = { w, h };
+  renderer.setSize(w, h, false);
+  kamera.aspect = w / h;
+  kamera.updateProjectionMatrix();
+  if (!baraHojd) { beraknaLayout(); byggSkalaOmBehov(); }
+  else beraknaLayout();
+}
+let skalaBredd = 0;
+function byggSkalaOmBehov() {
+  const smal = window.innerWidth < 700;
+  if (skalaBredd !== (smal ? 1 : 2)) { skalaBredd = smal ? 1 : 2; byggSkala(); }
+}
+
+function frame(nu) {
+  const dt = Math.min(0.05, (nu - senast) / 1000);
+  senast = nu; tid += dt;
+  anpassaStorlek();
+  // Tumnaglarna ritas i samma bildruta som scenen, som sedan skriver över dem
+  if (vantaTumnaglar) {
+    vantaTumnaglar = false;
+    renderaTumnaglar();
+    renderer.setScissorTest(false);
+    renderer.setViewport(0, 0, window.innerWidth, window.innerHeight);
+    renderer.clear();
+  }
+
+  // byte mellan planeter
+  if (tillstand.tween) {
+    const tw = tillstand.tween;
+    const t = Math.min(1, (nu - tw.t0) / tw.dur);
+    tillstand.cur = tw.fran + (tw.till - tw.fran) * easeInOut(t);
+    if (t >= 1) { tillstand.cur = tw.till; tillstand.tween = null; }
+  }
+  tillstand.g += (tillstand.gMal - tillstand.g) * (1 - Math.exp(-dt * 2.6));
+
+  const heroRect = hero.getBoundingClientRect();
+  const heroSyns = heroRect.bottom > 0 && lay.hero !== null;
+  tillstand.scrollP = Math.min(1, Math.max(0, -heroRect.top / window.innerHeight));
+  const ht = $('heroText');
+  if (!panel.classList.contains('oppen')) {
+    ht.style.transform = `translateX(-50%) translateY(${-tillstand.scrollP * 90}px)`;
+    ht.style.opacity = Math.max(0, 1 - tillstand.scrollP * 1.8);
+  }
+  if (vantaHero != null && heroRect.top > -window.innerHeight * 0.35) { gaTill(vantaHero); vantaHero = null; }
+
+  renderer.setScissorTest(false);
+  if (heroSyns) {
+    renderer.setViewport(0, 0, window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 1);
+    renderer.clear();
+    parallax.x += (parallax.mx - parallax.x) * (1 - Math.exp(-dt * 2));
+    parallax.y += (parallax.my - parallax.y) * (1 - Math.exp(-dt * 2));
+    kamera.position.set(parallax.x * 0.5, -parallax.y * 0.35, 0);
+    kamera.lookAt(parallax.x * 0.15, -parallax.y * 0.1, -D);
+    himmel.rotation.y = tid * 0.004;
+    stjarnor.rotation.y = tid * 0.003;
+    stjarnor.material.uniforms.uTime.value = tid;
+    const dimScroll = 1 - tillstand.scrollP * 0.5;
+    planeter.forEach((o, i) => {
+      const s = layoutPlanet(i);
+      if (!o.root.visible) return;
+      // tröghet efter dragning, och mjuk avmattning
+      if (!tryck || i !== tillstand.idx) {
+        if (o.vel.lengthSq() > 1e-6) {
+          roteraAnv(o, o.vel.x * dt, o.vel.y * dt);
+          o.vel.multiplyScalar(Math.exp(-dt * 2.2));
+        }
+      }
+      const vikt = (1 - Math.min(1, s)) * (1 - tillstand.g);
+      qBas.copy(o.qUpp).slerp(o.qHero, vikt * vikt * (3 - 2 * vikt));
+      o.root.quaternion.copy(o.anv).multiply(qBas);
+      const dim = (s < 0.5 ? 1 : 0.82) * dimScroll;
+      if (o.glod) {
+        const nar = (1 - Math.min(1, s)) * (1 - tillstand.g);
+        const gs = 4.6 + (1.5 - 4.6) * nar;
+        o.glod.scale.setScalar(gs); o.stralar.scale.setScalar(gs * (1.35 - 0.2 * nar));
+      }
+      o.uppdatera(tid, dt, LJUS, dim, REDUCERA ? 0.2 : 1);
+    });
+    renderer.render(hjalte, kamera);
+  }
+
+  // Banorna
+  const br = banEl.getBoundingClientRect();
+  if (br.top < window.innerHeight && br.bottom > 0) {
+    if (!bana.ladda) { bana.ladda = true; bana.obj.forEach((o) => o.ladda()); }
+    const vpY = window.innerHeight - br.bottom;
+    renderer.setScissorTest(true);
+    renderer.setViewport(br.left, vpY, br.width, br.height);
+    renderer.setScissor(br.left, vpY, br.width, br.height);
+    renderer.setClearColor(0x000000, 1);
+    renderer.clear();
+    uppdateraBanor(dt, br);
+    renderer.render(bana.scen, bana.kam);
+    renderer.setScissorTest(false);
+  }
+}
+// Ett fel i en enskild bildruta får inte stoppa animationen
+function loop(nu) {
+  requestAnimationFrame(loop);
+  try { frame(nu); } catch (e) { console.error(e); }
+}
+
+function uppdateraBanor(dt, br) {
+  if (bana.spelar) bana.dagar += bana.fart * dt;
+  if (bana.forsta !== false) { bana.forsta = false; if (br.width / br.height < 0.9) bana.el = 0.95; }
+  bana.m += (bana.mMal - bana.m) * (1 - Math.exp(-dt * 2.2));
+  if (!banTryck || !banTryck.drog) {
+    bana.az += bana.vaz * dt + (REDUCERA ? 0 : 0.012 * dt);
+    bana.vaz *= Math.exp(-dt * 2);
+  }
+  const m = bana.m;
+  const dist = 92 + (215 - 92) * m;
+  const k = bana.kam;
+  k.aspect = br.width / br.height;
+  const smal = k.aspect < 0.9;
+  const d = dist * (smal ? 2.25 : 1);
+  k.position.set(d * Math.cos(bana.el) * Math.sin(bana.az), d * Math.sin(bana.el), d * Math.cos(bana.el) * Math.cos(bana.az));
+  k.lookAt(0, smal ? 0 : -2, 0);
+  if (!smal) k.setViewOffset(br.width, br.height, -br.width * 0.12, 0, br.width, br.height);
+  else k.setViewOffset(br.width, br.height, 0, -br.height * 0.07, br.width, br.height);
+  k.updateProjectionMatrix();
+  banStjarnor.material.uniforms.uTime.value = tid;
+
+  const hoverIdx = bana.hover;
+  bana.obj.forEach((o, i) => {
+    const p = o.p;
+    const R = banStorlek(p, m);
+    if (p.sol) {
+      o.root.position.set(0, 0, 0);
+    } else if (p.mane) {
+      // Månen följer jorden, som alltid uppdateras före den
+      const jord = bana.obj[i - 1].root.position;
+      const r = 1.15 + (0.45 - 1.15) * m;
+      const v = THREE.MathUtils.degToRad(p.L0 + 360 * bana.dagar / p.period);
+      o.root.position.set(jord.x + r * Math.cos(v), 0, jord.z - r * Math.sin(v));
+    } else if (p.bana) {
+      ellipsLage(p, ellipsE(p, bana.dagar), m, o.root.position);
+      const lin = bana.linjer[i];
+      if (lin.userData.m !== m) {
+        lin.userData.m = m;
+        const pos = lin.geometry.attributes.position, n = pos.count - 1;
+        for (let k = 0; k <= n; k++) { ellipsLage(p, k / n * Math.PI * 2, m, vy); pos.setXYZ(k, vy.x, vy.y, vy.z); }
+        pos.needsUpdate = true;
+        lin.geometry.computeBoundingSphere();
+      }
+      const mal = hoverIdx === i ? 0.7 : 0.16;
+      lin.material.opacity += (mal - lin.material.opacity) * (1 - Math.exp(-dt * 8));
+    } else {
+      const r = banRadie(p.a, m);
+      const v = THREE.MathUtils.degToRad(p.L0 + 360 * bana.dagar / p.period);
+      o.root.position.set(r * Math.cos(v), 0, -r * Math.sin(v));
+      const lin = bana.linjer[i];
+      lin.scale.setScalar(r);
+      const mal = hoverIdx === i ? 0.7 : 0.16;
+      lin.material.opacity += (mal - lin.material.opacity) * (1 - Math.exp(-dt * 8));
+    }
+    o.root.scale.setScalar(R);
+    vec.copy(o.root.position).multiplyScalar(-1);
+    if (vec.lengthSq() < 1e-6) vec.set(0, 1, 0);
+    vec.normalize();
+    o.uppdatera(tid, dt, vec, 1, 2.5);
+    // etikett
+    vy.copy(o.root.position); vy.y += R * (p.ring ? 1.3 : 1.15) + (p.sol ? 0.8 : 0.1);
+    vy.project(k);
+    const x = (vy.x + 1) / 2 * br.width, y = (1 - vy.y) / 2 * br.height;
+    vec.copy(o.root.position).project(k);
+    const cx = (vec.x + 1) / 2 * br.width, cy = (1 - vec.y) / 2 * br.height;
+    banProj[i] = { x: cx, y: cy, r: Math.abs(y - cy) };
+    const et = bana.etiketter[i];
+    et.style.transform = `translate(${x}px, ${y}px) translate(-50%, -100%)`;
+    et.classList.toggle('hov', hoverIdx === i);
+    etRutor[i] = { x, y, b: p.namn.length * 8.2 + 14, syns: vy.z < 1 };
+  });
+  // Etiketter som skulle krocka döljs; den man pekar på och de mest kända går först
+  const placerade = [];
+  const ordning = [hoverIdx, ...['solen', 'jorden', 'jupiter', 'saturnus', 'uranus', 'neptunus', 'pluto', 'mars', 'venus', 'merkurius', 'manen'].map((id) => PLANETER.findIndex((q) => q.id === id))].filter((v, k, a) => v >= 0 && a.indexOf(v) === k);
+  ordning.forEach((i) => {
+    const r = etRutor[i];
+    const ruta = { x0: r.x - r.b / 2, x1: r.x + r.b / 2, y0: r.y - 20, y1: r.y };
+    const krock = placerade.some((q) => ruta.x0 < q.x1 + 6 && ruta.x1 > q.x0 - 6 && ruta.y0 < q.y1 + 2 && ruta.y1 > q.y0 - 2);
+    const syns = r.syns && !krock;
+    if (syns) placerade.push(ruta);
+    bana.etiketter[i].style.opacity = syns ? 1 : 0;
+  });
+  const datum = new Date(J2000 + bana.dagar * 86400000).toLocaleDateString('sv-SE', { day: 'numeric', month: 'long', year: 'numeric' });
+  if (datum !== datumSenast) { datumEl.textContent = datum; datumSenast = datum; }
+}
+
+/* ---------- Sidhuvudets tillstånd ---------- */
+const topp = $('topp');
+const navLankar = [...document.querySelectorAll('.nav a[data-sek]')];
+function scrollLage() {
+  topp.classList.toggle('fast', window.scrollY > window.innerHeight * 0.7);
+  let aktiv = 'hero';
+  navLankar.forEach((a) => { const r = $(a.dataset.sek).getBoundingClientRect(); if (r.top < window.innerHeight * 0.45) aktiv = a.dataset.sek; });
+  navLankar.forEach((a) => a.classList.toggle('aktiv', a.dataset.sek === aktiv));
+}
+window.addEventListener('scroll', scrollLage, { passive: true });
+
+/* =====================================================================
+   START
+   ===================================================================== */
+const startId = (location.hash || '').slice(1);
+const startIdx = PLANETER.findIndex((p) => p.id === startId);
+tillstand.idx = startIdx >= 0 ? startIdx : 3;
+tillstand.cur = tillstand.idx;
+visaText(PLANETER[tillstand.idx], true);
+uppdateraGrannar();
+
+// Laddskärmen väntar bara på planeten som visas först; grannarna tonar in när de är klara
+const forsta = [planeter[tillstand.idx].ladda(), tex('vintergatan.jpg')];
+let klara = 0;
+forsta.forEach((pr) => pr.then(() => { klara++; $('lBar').style.width = (klara / forsta.length * 100) + '%'; }));
+
+document.fonts.ready.then(() => { storlek = { w: -1, h: -1 }; });
+requestAnimationFrame((t) => { senast = t; loop(t); });
+
+Promise.all(forsta).then(() => {
+  $('lText').textContent = 'Klart';
+  setTimeout(() => {
+    $('laddare').classList.add('klar');
+    document.body.classList.remove('last');
+    storlek = { w: -1, h: -1 };
+  }, 350);
+  // grannarna först, sedan resten i bakgrunden; därefter renderas tumnaglarna
+  const nara = [];
+  for (let k = tillstand.idx - 2; k <= tillstand.idx + 2; k++) if (planeter[k]) nara.push(planeter[k].ladda());
+  Promise.all(nara).then(() => Promise.all(planeter.map((o) => o.ladda()))).then(() => { vantaTumnaglar = true; });
+});
+scrollLage();
+window.addEventListener('hashchange', () => {
+  const i = PLANETER.findIndex((p) => p.id === location.hash.slice(1));
+  if (i >= 0 && i !== tillstand.idx) gaTill(i);
+});
+</script>
+</body>
+</html>

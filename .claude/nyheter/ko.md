@@ -19,6 +19,29 @@ Format per post:
   Källa (Phys.org 2026-09-25): https://phys.org/news/2026-09-rare-quantum-state-reveals-particles.html
   (tillagd 2026-09-27)
 
+- **Vågorna som hittar ordning i en skev hålighet** — i ett mekaniskt metamaterial med hyperboliska egenskaper
+  samlar sig vågorna i en oregelbundet formad hålighet på bestämda, upprepade banor i stället för att spridas
+  kaotiskt. Samma sak är känt för inre vågor i havet. Ingång: reflexion, stående vågor och vad det betyder att ett
+  system är kaotiskt. OBS: vågfysik kördes 2026-09-26 (virvelns vågor) — låt det gå tid. Nature Physics,
+  DOI 10.1038/s41567-026-03453-7, kollegialt granskad. Källa (Phys.org 2026-09-24):
+  https://phys.org/news/2026-09-chaos-oddly-cavity.html
+  (tillagd 2026-09-29)
+
+- **Altermagnetismen uppmätt i ett skiktat material** — experimentellt belägg för den tredje sortens magnetism i ett
+  material som går att bygga elektronik av, vilket pekar mot spinntronik. Ingång: spinn, magnetisk ordning och varför
+  altermagneter har ferromagnetens snabbhet utan dess yttre fält. OBS: altermagnetismen som sådan beskrevs
+  2026-07-26 — den här artikeln måste alltså lägga tyngden vid mätningen, inte vid begreppet.
+  Källa (Phys.org 2026-09-29):
+  https://phys.org/news/2026-09-experimental-evidence-altermagnetism-layered-material.html
+  (tillagd 2026-09-29)
+
+- **Varför glas slutar släppa igenom terahertzljus** — en ny modell förklarar vad i glasets oordnade struktur som
+  sväljer strålningen mellan mikrovågor och infrarött. Ingång: absorption, våglängd och varför ett material kan vara
+  genomskinligt för en sorts ljus och ogenomträngligt för en annan. Vardagsnära: glas är genomskinligt för ögat men
+  inte för allt. Källa (Phys.org 2026-09-29):
+  https://phys.org/news/2026-09-glass-transparent-terahertz.html
+  (tillagd 2026-09-29)
+
 - **LHC kopplas ned för att byta magneter** — CERN har börjat plocka isär acceleratorn inför uppgraderingen
   till High-Luminosity LHC: 28 supraledande magneter byts, de nya ger 11,3 tesla, ungefär 40 procent starkare
   fält än dagens, och används för att pressa ihop strålen hårdare precis före ATLAS och CMS. Första nya

@@ -56,6 +56,34 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'hong-ou-mandel-effekten',
+    term: 'Hong-Ou-Mandel-effekten',
+    former: ['hong-ou-mandel-effekten', 'hong-ou-mandel-effekt', 'hong-ou-mandel-interferens', 'hong-ou-mandel-interferensen', 'tvåfotoninterferens', 'tvåfotoninterferensen'],
+    kort: 'Två likadana ljuspartiklar som möts i en halvgenomskinlig spegel lämnar den alltid åt samma håll, aldrig åt var sitt. Effekten används som prov på att två fotoner verkligen är oskiljaktiga.',
+    relaterade: ['foton', 'interferens', 'boson', 'parametrisk-nedkonvertering'],
+    body: [
+      { type: 'p', html: 'Tänk dig en halvgenomskinlig spegel, en stråldelare, som släpper igenom hälften av ljuset och reflekterar resten. Skickar du in en ljuspartikel från vänster och en från höger, samtidigt, borde det gå som med två biljardbollar: ibland tar båda till höger, ibland båda till vänster, och i hälften av fallen åker de åt var sitt håll. Så blir det också om de två ljuspartiklarna går att skilja åt på något sätt.' },
+      { type: 'p', html: 'Men är de fullkomligt likadana, i färg, i polarisation och i när de kommer fram, händer något annat. Det finns då två olika vägar som båda slutar med en partikel åt vardera hållet: antingen gick båda rakt igenom, eller också studsade båda. Eftersom ingenting skiljer de två möjligheterna åt läggs de ihop som vågor, och de råkar vara precis motriktade. De tar ut varandra, och det utfallet uteblir helt. Kvar blir bara att partiklarna följs åt, åt ett håll eller åt det andra.' },
+      { type: 'p', html: 'Effekten upptäcktes 1987 av C.&nbsp;K.&nbsp;Hong, Z.&nbsp;Y.&nbsp;Ou och Leonard Mandel. I laboratoriet syns den som en tydlig svacka: man flyttar den ena partikelns ankomsttid en aning fram och tillbaka, och räknar hur ofta de båda detektorerna klickar samtidigt. När ankomsttiderna sammanfaller faller antalet samtidiga klick mot noll. Svackans djup är ett direkt mått på hur lika de två ljuspartiklarna är, och därför används den som standardprov på en bra ljuskälla i kvantoptiken.' },
+      { type: 'fact', title: 'Varför följs de åt?', items: [
+        'Ljuspartiklar tillhör den partikelfamilj som gärna samsas i samma tillstånd. Det är samma benägenhet som får en laser att fungera.',
+        'Elektroner tillhör den motsatta familjen och får aldrig dela tillstånd. I samma försök skulle de i stället alltid gå åt var sitt håll.',
+        'Svackan går inte att förklara med ljus som enbart vågrörelse. Klassiskt ljus kan som mest nå halvvägs ner, och allt därunder kräver att ljuset består av enskilda partiklar.'
+      ] }
+    ],
+  },
+  {
+    id: 'solsynkron-bana',
+    term: 'Solsynkron bana',
+    former: ['solsynkron bana', 'solsynkrona banan', 'solsynkrona banor', 'solsynkron omloppsbana', 'solsynkrona omloppsbanan'],
+    kort: 'En satellitbana som är lagd så att satelliten passerar varje plats på jorden vid samma lokala klockslag varje dag. Skuggorna i bilderna blir då likadana från gång till gång.',
+    body: [
+      { type: 'p', html: 'Jorden är inte ett perfekt klot: den buktar ut en aning vid ekvatorn. Utbuktningen drar snett i en satellit som går i en lutande bana, och följden är att hela banplanet långsamt vrider sig runt jordaxeln, ungefär som en snurra som börjar vagga. Oftast är det bara till besvär. I en solsynkron bana utnyttjas det i stället.' },
+      { type: 'p', html: 'Genom att välja höjd och lutning rätt kan vridningen göras exakt lika stor som ett varv per år, alltså lika snabb som jordens gång runt solen. Banplanet behåller då samma vinkel mot solen året om, och satelliten passerar en och samma plats på marken vid samma lokala klockslag varje dag, med solen lika högt på himlen varje gång.' },
+      { type: 'p', html: 'Det är därför nästan alla satelliter som fotograferar jorden ligger så. Ska två bilder av samma skogsområde jämföras med ett års mellanrum får ljuset inte komma från olika håll, för då blir skillnaden i skuggor större än skillnaden i skog. Banorna ligger ett par hundra till drygt tusen kilometer upp och lutar en aning mer än rät vinkel mot ekvatorn, så att satelliten går nästan rakt över polerna. Ett varv tar omkring en och en halv timme, och en del av varje varv tillbringas i jordens skugga.' }
+    ],
+  },
+  {
     id: 'cpt-symmetri',
     term: 'CPT-symmetri',
     former: ['cpt-symmetri', 'cpt-symmetrin', 'cpt-symmetrier', 'cpt-teoremet', 'cpt-brott', 'cpt-invarians', 'cpt-invariansen'],
@@ -868,7 +896,7 @@ window.BEGREPP = [
   {
     id: 'gitter',
     term: 'Gitter',
-    former: ['gitter', 'gittret', 'kristallgitter', 'kristallgittret', 'atomgitter', 'atomgittret', 'metallgitter', 'metallgittret', 'gitterstruktur', 'gitterstrukturen', 'bikakegitter', 'bikakegittret'],
+    former: ['gitter', 'gittret', 'kristallgitter', 'kristallgittret', 'atomgitter', 'atomgittret', 'metallgitter', 'metallgittret', 'gitterstruktur', 'gitterstrukturen', 'bikakegitter', 'bikakegittret', 'kiselgitter', 'kiselgittret'],
     kort: 'Det regelbundna, upprepade mönster som atomerna bildar i en kristall. Ordet används också om optiska gitter — täta mönster av spalter eller spår som delar upp ljus i sina färger.',
     relaterade: ['fotonisk-kristall', 'interferens', 'tidskristall', 'diffraktionsgitter'],
     body: [

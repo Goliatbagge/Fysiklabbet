@@ -103,6 +103,88 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-29-kvantdatorn-i-omloppsbana",
+    date: "2026-09-29",
+    title: "Första kvantdatorn i omloppsbana klarade sig på halva detektorerna",
+    deck: "En aluminiumlåda på 9,8 kilo har blivit den första kvantprocessor som arbetat ute i rymden. Hälften av ljusdetektorerna gick sönder redan under uppskjutningen, men under åtta månader 510 kilometer över jordytan lyckades den ändå få två enskilda fotoner att interferera med varandra.",
+    category: "Kvantfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-09-29-kvantdatorn-i-omloppsbana.jpg",
+    imageAlt: "Sex forskare i vita renrumsrockar, hårnät och blå handskar står tätt ihop och ler mot kameran. Framför dem, på ett optiskt bord med hålmönster, står en avlång aluminiumlåda rest på högkant, och runt omkring ligger verktyg, kablar och kretskort.",
+    imageCredit: "Foto: Walther Group / med tillstånd av DLR RSC3 (Trauen, Tyskland), pressbild från universitetet i Wien. Laget bakom nyttolasten tillsammans med den färdiga enheten före uppskjutningen.",
+    tags: ["kvantfysik", "kvantdator", "fotonik", "foton", "interferens", "satellit", "rymdteknik", "optik", "strålningsskador", "halvledare"],
+    sources: [
+      { name: "Phys.org: Quantum computer boldly goes where no quantum computer has gone before: Space (28 september 2026)", url: "https://phys.org/news/2026-09-quantum-boldly-space.html" },
+      { name: "Universität Wien: Successful launch of the first space-proof quantum computer (pressmeddelande om uppskjutningen)", url: "https://www.univie.ac.at/en/news/detail/successful-launch-of-the-first-space-proof-quantum-computer" },
+      { name: "Fakultät für Physik, Universität Wien: Successful launch of the first space-proof quantum computer", url: "https://physik.univie.ac.at/en/news/news-detail/news/successful-launch-of-the-first-space-proof-quantum-computer/" },
+      { name: "arXiv: In-orbit operation of a programmable quantum photonic processor (förtryck, inskickat 21 september 2026)", url: "https://arxiv.org/abs/2609.25248" }
+    ],
+    research: {
+      citation: "Simon Steiner med flera, ”In-orbit operation of a programmable quantum photonic processor”, arXiv:2609.25248 (2026). Förtryck, ännu inte kollegialt granskat.",
+      url: "https://arxiv.org/abs/2609.25248"
+    },
+    simulering: {
+      href: "fysik2-dubbelspalt.html",
+      name: "Dubbelspaltexperimentet",
+      text: "Skicka ljuset en ljuspartikel i taget och se hur mönstret växer fram prick för prick. Varje enskild träff hamnar på ett slumpmässigt ställe, men tillsammans ritar de upp samma ljusa och mörka band som en kraftig ljusstråle ger. Det är samma sorts interferens som den orbiterande processorn letade efter, fast med en foton i stället för två."
+    },
+    larare: {
+      moment: [
+        { label: "Ljus, diffraktion och interferens", href: "katalog.html?id=fy2-4.2" },
+        { label: "Fotoelektrisk effekt", href: "katalog.html?id=fy2-4.5" }
+      ],
+      fragor: [
+        "Laserns fotoner har våglängden 405 nm och delas i par med våglängden 810 nm. Visa med hjälp av sambandet mellan en fotons energi och dess våglängd att energin bevaras i delningen, och förklara varför den ena fotonen inte kan bli kortvågigare än den andra utan att den andra blir längre.",
+        "Mätningen kunde bara göras under de ungefär trettio minuter per varv då satelliten befann sig i jordens skugga. Vad är det solljuset gör med en detektor som räknar enstaka ljuspartiklar, och varför hjälper det inte att bara räkna bort ett medelvärde av bakgrunden?",
+        "Av sex detektorer fungerade tre. Laget valde då att mäta på en mindre del av kretsen i stället för att ge upp. Vilka slutsatser går fortfarande att dra ur ett halverat mätsystem, och vilka går inte att dra?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Den 23&nbsp;juni 2025 lyfte en Falcon&nbsp;9 från Vandenberg i Kalifornien med ett stort antal småsatelliter ombord. En av lasterna var en avlång aluminiumlåda på 9,8&nbsp;kilo, knappt en halvmeter lång. Den sitter sedan dess fast på den italienska rymdfarkosten ION, som kretsar 510&nbsp;kilometer över jordytan, och inuti den finns det som nu beskrivs som den första kvantprocessor som har arbetat ute i rymden.' },
+      { type: 'p', html: 'Resultaten från de första åtta månaderna i bana lades ut den 21&nbsp;september i år av ett lag lett av Philip Walther vid universitetet i Wien, tillsammans med det tyska rymdcentret DLR, forskningsrådet CNR i Milano och företaget Qubo Technology. Lådan mäter 15&nbsp;×&nbsp;15&nbsp;×&nbsp;45,3&nbsp;cm och drar i genomsnitt 10&nbsp;W, ungefär så mycket som en lågenergilampa.' },
+      { type: 'p', html: 'En sak bör sägas direkt: arbetet ligger tills vidare som ett manuskript på förtryckservern arXiv. Det har alltså ännu inte granskats av oberoende kollegor på det sätt som krävs för publicering i en vetenskaplig tidskrift.' },
+
+      { type: 'h2', text: 'Problemet är inte att räkna, utan att skicka hem' },
+      { type: 'p', html: 'Varför vill någon ha en kvantdator i omloppsbana? Skälet är prosaiskt. En jordobservationssatellit samlar in långt mer rådata än den hinner skicka ner. Radiolänken är smal, och kontakten med en markstation varar bara några minuter åt gången. Mycket av det som mäts hinner aldrig fram.' },
+      { type: 'p', html: 'Ett sätt att komma runt det är att låta satelliten sålla själv och bara skicka ner slutsatserna. Då behövs beräkningskraft ombord, och den får inte väga något, inte dra ström och inte gå sönder. Den fotoniska kvantprocessorn är ett försök att svara på just det: den räknar med ljus i stället för med elektronik, och ljus behöver varken kylskåp eller kraftaggregat för att bära information.' },
+
+      { type: 'h2', text: 'Två fotoner ur en' },
+      { type: 'p', html: 'Allt börjar med en liten laser som lyser blåviolett, med våglängden 405&nbsp;nm. Strålen går in i en centimeterlång kristall av kaliumtitanylfosfat, och där sker då och då något ovanligt: en foton försvinner och två nya kommer ut. Det kallas spontan parametrisk nedkonvertering och är standardsättet att göra fotonpar i ett laboratorium.' },
+      { type: 'p', html: 'Energin måste bevaras, och en fotons energi bestäms av våglängden genom $E = \\dfrac{h \\cdot c}{\\lambda}$. Delar sig energin jämnt får de två nya fotonerna alltså var sin halva, vilket innebär dubbelt så lång våglängd: 810&nbsp;nm, strax bortom det synliga röda. Det är precis de fotonerna processorn arbetar med.' },
+
+      { type: 'h2', text: 'Ett chip med sina egna värmeslingor' },
+      { type: 'p', html: 'Fotonerna leds in i en glasbit på ungefär sex centimeters längd. Inuti glaset har en ultrakort laserpuls ritat ljusledare, ungefär som optiska fibrer fast inbrända i ett fast block, och de är kopplade till varandra i sex parallella banor via femton små interferometrar.' },
+      { type: 'p', html: 'Det programmerbara ligger i temperaturen. Ovanpå chipet sitter 27&nbsp;mikroskopiska värmeelement, och när ett av dem värmer sin bit av glaset ändras glasets brytningsindex en aning. Ljuset i den ledaren får då lite längre optisk väg än i grannledaren, och fotonens fasläge förskjuts. Genom att välja hur mycket varje element ska värma bestämmer laget hur ljuset delas och slås ihop i hela kretsen. Ett litet program för den här maskinen är alltså en uppsättning temperaturer.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-09-29-kvantdatorn-i-omloppsbana-2.jpg', alt: 'En öppnad avlång aluminiumkassett ligger i två halvor på ett optiskt bord. Den övre halvan rymmer gula tejpade fiberslingor, gröna kretskort och en vit cylinder inramad i rött; den nedre halvan har sex metallcylindrar i rad, ett svart kretskort och bruna kablar.', caption: 'Nyttolasten öppnad före uppskjutningen. I den nedre halvan syns de sex ljusdetektorerna i rad, och den röda ramen i den övre halvan markerar fotonkällan, som är inlindad i vit plast.', credit: 'Foto: S. Steiner med flera, arXiv:2609.25248 (CC BY 4.0), beskuren' },
+
+      { type: 'h2', text: 'Tre detektorer i stället för sex' },
+      { type: 'p', html: 'I andra änden av kretsen sitter sex kiseldetektorer som är så känsliga att de klickar till för en enda foton. Efter uppskjutningen fungerade tre av dem. En hade en defekt redan på marken, och de två andra slutade ge signal på ett sätt som laget misstänker beror på att den optiska fibern brast under vibrationerna vid start.' },
+      { type: 'p', html: 'Laget valde att fortsätta ändå. I stället för att använda hela kretsens sex banor styrde de om ljuset så att mätningarna kunde göras på tre banor i taget, och lade upp beräkningarna efter det. Under tolv mätdagar, den första 23&nbsp;dygn efter uppskjutningen och den sista efter 239&nbsp;dygn, programmerades nio olika operationer in i kretsen. Utfallen stämde med teorin till i genomsnitt 88,8&nbsp;%, och 94,9&nbsp;% om två avvikande mätningar räknas bort.' },
+
+      { type: 'h2', text: 'Doppen som avslöjar att fotonerna är kvantpartiklar' },
+      { type: 'p', html: 'Den mest talande mätningen är en annan. Två fotoner skickades in i samma interferometer, inställd så att den fungerar som en rakt delande stråldelare: varje foton har lika stor chans att gå ut åt vänster som åt höger.' },
+      { type: 'p', html: 'Vore fotonerna vanliga småkulor skulle de i hälften av fallen landa åt var sitt håll. Men är de två fotonerna verkligt oskiljaktiga, alltså likadana i våglängd, polarisation och ankomsttid, händer något annat. De två sätten att hamna åt var sitt håll tar ut varandra, och fotonerna lämnar alltid stråldelaren tillsammans, åt samma håll. I mätningen syns det som att sammanfallande klick i de två detektorerna nästan upphör.' },
+      { type: 'p', html: 'Hur lika fotonerna är styrs av kristallens temperatur. Laget svepte därför temperaturen mellan 20&nbsp;°C och 40&nbsp;°C och såg en tydlig dopp i antalet sammanfallande klick kring 32,5&nbsp;°C, samma temperatur som på marken. Djupet på doppen, mätt som en synlighet, blev $0{,}91 \\pm 0{,}19$. Gränsen för vad klassiskt ljus kan åstadkomma ligger vid 0,5, och mätningen ligger 2,1&nbsp;standardavvikelser över den. Det är ett resultat som pekar åt rätt håll snarare än ett som är hugget i sten, och det säger en hel del om hur svårt det är att mäta där uppe.' },
+
+      { type: 'h2', text: 'Bara i jordens skugga' },
+      { type: 'p', html: 'Svårigheterna är av två slag. Det ena är solen. En detektor som räknar enstaka fotoner skiljer inte en foton från kristallen från en foton som läckt in utifrån, och i solbelysning dränktes signalen i brus. Satelliten går i en solsynkron bana med en omloppstid på ungefär 92&nbsp;minuter, varav omkring 30&nbsp;minuter i jordens skugga. Det är alltså bara under den tredjedelen av varje varv som mätningarna gick att göra, en minut i taget.' },
+      { type: 'p', html: 'Det andra är strålningen. Trots ett en centimeter tjockt aluminiumhölje träffas detektorerna av elektroner och protoner från strålningsbältena, och varje träff kan slå sönder kiselgittret på ett sätt som inte läker. Följden är att detektorerna börjar klicka av sig själva allt oftare. Redan efter 52&nbsp;dygn i bana syntes en märkbar ökning av sådana falska klick. Laget svarade med att höja detektorernas spänning från 7&nbsp;V till 12&nbsp;V, och lyckades på så vis få upp takten på de äkta fotonparen från ungefär 1,5 till 6 par i sekunden, trots att bakgrunden samtidigt blev värre.' },
+
+      { type: 'h2', text: 'Nästa steg är att koppla ihop kamera och processor' },
+      { type: 'p', html: 'Sex fotonpar i sekunden är långt från något som kan sortera satellitbilder. Det laget har visat är inte en användbar dator, utan att de tre byggstenarna går att driva samtidigt i rymden: att tillverka enskilda fotoner, att styra dem genom en programmerbar krets och att fånga dem i andra änden, med kvantegenskaperna i behåll efter en raketuppskjutning, ständiga temperaturkast och månader av strålning.' },
+      { type: 'p', html: 'I nyttolasten sitter redan en kamera från DLR, och det är där fortsättningen ligger.' },
+      { type: 'quote', html: 'Nästa steg är att sluta cirkeln mellan sensor och processor, genom att koda in jordobservationsdata direkt i den operation som programmeras in i kretsen.', cite: 'Ur studien, Simon Steiner med flera' },
+      { type: 'p', html: 'Innan dess måste något annat lösas: apparaten behöver hålla sig stabil under de långa mättider en riktig analys kräver, och komponenterna bryts långsamt ner av strålningen. Åldrandet är inbyggt i uppdraget. En kvantdator i omloppsbana går inte att skruva på.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Interferensen mellan två fotoner i en stråldelare upptäcktes 1987 av C.&nbsp;K.&nbsp;Hong, Z.&nbsp;Y.&nbsp;Ou och Leonard Mandel, och kallas sedan dess Hong-Ou-Mandel-effekten. Den används i dag som standardprov på att en ljuskälla verkligen ger oskiljaktiga fotoner.',
+        'Att fotonerna alltid lämnar stråldelaren tillsammans har ingen motsvarighet i vardagen. Det beror på att fotoner är bosoner, en partikelsort som gärna samsas i samma tillstånd. Elektroner är tvärtom fermioner och skulle i samma försök alltid gå åt var sitt håll.',
+        'Kvantsammanflätade fotoner har skickats genom rymden förut. Den kinesiska satelliten Micius fördelade sådana par till markstationer redan 2017. Det nya är att fotonerna denna gång både skapas och bearbetas ombord, i stället för att bara skickas vidare.'
+      ] }
+    ]
+  },
+  {
     id: "2026-09-28-antiprotoner-pa-lastbil",
     date: "2026-09-28",
     title: "92 antiprotoner åkte lastbil och överlevde en månad i fällan",

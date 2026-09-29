@@ -20,6 +20,8 @@
 //
 // Bladen i ovningsblad/ byggs av .claude/bygg-ovningsblad.js, som räknar
 // fram lösningsförslagen maskinellt och kontrollerar dem genom insättning.
+// Hävarmsbladet (fy2-1.1) byggs av .claude/bygg-ovningsblad-havarm.js, som
+// räknar ut fotpunkterna och hävarmarna i facit ur figurernas koordinater.
 // Matematik nivå 1b och 2b speglas via aliaskartorna i katalog.html, så
 // ett blad på ett ma1c-id syns automatiskt även i 1b.
 window.OVNINGSBLAD = {
@@ -67,6 +69,16 @@ window.OVNINGSBLAD = {
       antal: 44,
       html: 'ovningsblad/ovningsblad-ekvationer-5.html',
       pdf: 'ovningsblad/ovningsblad-ekvationer-5.pdf',
+    },
+  ],
+  'fy2-1.1': [
+    {
+      titel: 'Rita hävarmen',
+      beskrivning: 'Förläng kraftens riktningslinje och rita hävarmen som det kortaste avståndet från vridningspunkten, i rät vinkel mot linjen. Tolv figurer, från en ensam punkt och kraft till nyckel, gungbräda, kranbom och cykelvev.',
+      niva: ['Grund'],
+      antal: 12,
+      html: 'ovningsblad/ovningsblad-havarm.html',
+      pdf: 'ovningsblad/ovningsblad-havarm.pdf',
     },
   ],
 };

@@ -106,7 +106,7 @@ const NYHETER_ALL = [
     id: "2026-09-29-kvantdatorn-i-omloppsbana",
     date: "2026-09-29",
     title: "Första kvantdatorn i omloppsbana klarade sig på halva detektorerna",
-    deck: "En aluminiumlåda på 9,8 kilo har blivit den första kvantprocessor som arbetat ute i rymden. Hälften av ljusdetektorerna gick sönder redan under uppskjutningen, men under åtta månader 510 kilometer över jordytan lyckades den ändå få två enskilda fotoner att interferera med varandra.",
+    deck: "En aluminiumlåda på 9,8 kilogram har blivit den första kvantprocessor som arbetat ute i rymden. Hälften av ljusdetektorerna gick sönder redan under uppskjutningen, men under åtta månader 510 kilometer över jordytan lyckades den ändå få två enskilda fotoner att interferera med varandra.",
     category: "Kvantfysik",
     readingTime: "6 min",
     image: "nyheter/bilder/2026-09-29-kvantdatorn-i-omloppsbana.jpg",
@@ -140,7 +140,7 @@ const NYHETER_ALL = [
       ]
     },
     body: [
-      { type: 'p', html: 'Den 23&nbsp;juni 2025 lyfte en Falcon&nbsp;9 från Vandenberg i Kalifornien med ett stort antal småsatelliter ombord. En av lasterna var en avlång aluminiumlåda på 9,8&nbsp;kilo, knappt en halvmeter lång. Den sitter sedan dess fast på den italienska rymdfarkosten ION, som kretsar 510&nbsp;kilometer över jordytan, och inuti den finns det som nu beskrivs som den första kvantprocessor som har arbetat ute i rymden.' },
+      { type: 'p', html: 'Den 23&nbsp;juni 2025 lyfte en Falcon&nbsp;9 från Vandenberg i Kalifornien med ett stort antal småsatelliter ombord. En av lasterna var en avlång aluminiumlåda på 9,8&nbsp;kilogram, knappt en halvmeter lång. Den sitter sedan dess fast på den italienska rymdfarkosten ION, som kretsar 510&nbsp;kilometer över jordytan, och inuti den finns det som nu beskrivs som den första kvantprocessor som har arbetat ute i rymden.' },
       { type: 'p', html: 'Resultaten från de första åtta månaderna i bana lades ut den 21&nbsp;september i år av ett lag lett av Philip Walther vid universitetet i Wien, tillsammans med det tyska rymdcentret DLR, forskningsrådet CNR i Milano och företaget Qubo Technology. Lådan mäter 15&nbsp;×&nbsp;15&nbsp;×&nbsp;45,3&nbsp;cm och drar i genomsnitt 10&nbsp;W, ungefär så mycket som en lågenergilampa.' },
       { type: 'p', html: 'En sak bör sägas direkt: arbetet ligger tills vidare som ett manuskript på förtryckservern arXiv. Det har alltså ännu inte granskats av oberoende kollegor på det sätt som krävs för publicering i en vetenskaplig tidskrift.' },
 
@@ -162,10 +162,10 @@ const NYHETER_ALL = [
       { type: 'p', html: 'I andra änden av kretsen sitter sex kiseldetektorer som är så känsliga att de klickar till för en enda foton. Efter uppskjutningen fungerade tre av dem. En hade en defekt redan på marken, och de två andra slutade ge signal på ett sätt som laget misstänker beror på att den optiska fibern brast under vibrationerna vid start.' },
       { type: 'p', html: 'Laget valde att fortsätta ändå. I stället för att använda hela kretsens sex banor styrde de om ljuset så att mätningarna kunde göras på tre banor i taget, och lade upp beräkningarna efter det. Under tolv mätdagar, den första 23&nbsp;dygn efter uppskjutningen och den sista efter 239&nbsp;dygn, programmerades nio olika operationer in i kretsen. Utfallen stämde med teorin till i genomsnitt 88,8&nbsp;%, och 94,9&nbsp;% om två avvikande mätningar räknas bort.' },
 
-      { type: 'h2', text: 'Doppen som avslöjar att fotonerna är kvantpartiklar' },
+      { type: 'h2', text: 'Dippen som avslöjar att fotonerna är kvantpartiklar' },
       { type: 'p', html: 'Den mest talande mätningen är en annan. Två fotoner skickades in i samma interferometer, inställd så att den fungerar som en rakt delande stråldelare: varje foton har lika stor chans att gå ut åt vänster som åt höger.' },
       { type: 'p', html: 'Vore fotonerna vanliga småkulor skulle de i hälften av fallen landa åt var sitt håll. Men är de två fotonerna verkligt oskiljaktiga, alltså likadana i våglängd, polarisation och ankomsttid, händer något annat. De två sätten att hamna åt var sitt håll tar ut varandra, och fotonerna lämnar alltid stråldelaren tillsammans, åt samma håll. I mätningen syns det som att sammanfallande klick i de två detektorerna nästan upphör.' },
-      { type: 'p', html: 'Hur lika fotonerna är styrs av kristallens temperatur. Laget svepte därför temperaturen mellan 20&nbsp;°C och 40&nbsp;°C och såg en tydlig dopp i antalet sammanfallande klick kring 32,5&nbsp;°C, samma temperatur som på marken. Djupet på doppen, mätt som en synlighet, blev $0{,}91 \\pm 0{,}19$. Gränsen för vad klassiskt ljus kan åstadkomma ligger vid 0,5, och mätningen ligger 2,1&nbsp;standardavvikelser över den. Det är ett resultat som pekar åt rätt håll snarare än ett som är hugget i sten, och det säger en hel del om hur svårt det är att mäta där uppe.' },
+      { type: 'p', html: 'Hur lika fotonerna är styrs av kristallens temperatur. Laget svepte därför temperaturen mellan 20&nbsp;°C och 40&nbsp;°C och såg en tydlig dipp i antalet sammanfallande klick kring 32,5&nbsp;°C, samma temperatur som på marken. Djupet på dippen, mätt som en synlighet, blev $0{,}91 \\pm 0{,}19$. Gränsen för vad klassiskt ljus kan åstadkomma ligger vid 0,5, och mätningen ligger 2,1&nbsp;standardavvikelser över den. Det är ett resultat som pekar åt rätt håll snarare än ett som är hugget i sten, och det säger en hel del om hur svårt det är att mäta där uppe.' },
 
       { type: 'h2', text: 'Bara i jordens skugga' },
       { type: 'p', html: 'Svårigheterna är av två slag. Det ena är solen. En detektor som räknar enstaka fotoner skiljer inte en foton från kristallen från en foton som läckt in utifrån, och i solbelysning dränktes signalen i brus. Satelliten går i en solsynkron bana med en omloppstid på ungefär 92&nbsp;minuter, varav omkring 30&nbsp;minuter i jordens skugga. Det är alltså bara under den tredjedelen av varje varv som mätningarna gick att göra, en minut i taget.' },

@@ -776,6 +776,26 @@ Riktlinjer för distraktorer:
   "medelvärdet av farterna = medelfarten")
 - Skriv inte "Inget av ovanstående" eller "Alla ovan"
 
+### ⚠️ Rätt svar får ALDRIG systematiskt ligga på samma plats
+
+**Blanda alternativen så att rätt svar hamnar på A, B, C och D ungefär lika
+ofta, både inom kursen och inom varje avsnitt.** Den som skriver en uppgift
+lägger lätt det rätta svaret först av vana, och då räcker det att eleven
+klickar A. Felet har hänt två gånger: i exit tickets (rättat 2026-08-18) och
+i övningarna, där 648 av 771 flervalsuppgifter hade rätt svar på A och
+fysikkurserna i stället nästan alltid B (påpekat av en lärare 2026-09-30).
+
+- **Sätt `correct` till en annan plats än förra uppgiftens**, och kontrollera
+  att avsnittet inte får samma bokstav på alla sina flervalsuppgifter.
+- **Hänvisa till alternativens innehåll, inte deras plats.** Skriv
+  "alternativet med $h(5) = 15$ m", inte "det sista alternativet". En
+  bokstavshänvisning (`**Svar:** Alternativ C`) är tillåten men måste
+  stämma med `correct`, och flyttas med om alternativen blandas om.
+- **Kör `node .claude/verify-ovningar-flerval.js` före commit.** Den ger fel
+  om ett index har över 45 % av rätt svar i en kurs, om alla flervalsuppgifter
+  i ett avsnitt har samma bokstav, om "Svar: Alternativ X" inte stämmer med
+  `correct` och om lösningen hänvisar till ett alternativ via dess plats.
+
 ## Lösningsformat
 
 Lösningsförslagen följer samma stil som exempeluppgifterna i teori-texten:

@@ -23,6 +23,9 @@
 //      choices: ['Alternativ A', 'Alternativ B', ...],
 //      correct: 1   // 0-indexerat index av rätt alternativ
 //    Inget answer-fält. Alternativen renderas som markdown.
+//    Blanda alternativen: rätt svar får ALDRIG systematiskt ligga på samma
+//    plats (648 av 771 uppgifter hade rätt svar på A, påpekat 2026-09-30).
+//    Kör node .claude/verify-ovningar-flerval.js före commit.
 //
 // Om varken answer eller choices finns visas uppgiften som öppen fråga
 // utan auto-rättning — eleven kan ändå klicka "Visa lösningsförslag".
@@ -2895,12 +2898,12 @@ Det är *alltid lägre* än det aritmetiska medelvärdet $(v_1 + v_2)/2$ — den
             level: 1,
             question: `Vad menas med en **hypotes** inom den naturvetenskapliga metoden?`,
             choices: [
+                `En sammanställning av flera teorier inom samma område.`,
                 `Ett fenomen som observerats men inte kunnat förklaras.`,
                 `En gissning om hur något fungerar, som ska testas med experiment.`,
                 `En lag som upprepade gånger har bekräftats och aldrig motbevisats.`,
-                `En sammanställning av flera teorier inom samma område.`,
             ],
-            correct: 1,
+            correct: 2,
             solution: `En hypotes är ett *förslag* på en förklaring — en gissning som man sedan testar genom experiment. Om hypotesen inte motbevisas av experimenten kan den så småningom övergå till att kallas en **lag**, och flera lagar tillsammans kan bilda en **teori**.
 
 **Svar:** En hypotes är en gissning som ska prövas i experiment.`,
@@ -2909,12 +2912,12 @@ Det är *alltid lägre* än det aritmetiska medelvärdet $(v_1 + v_2)/2$ — den
             level: 1,
             question: `Vilken är den korrekta ordningen i den naturvetenskapliga metoden?`,
             choices: [
-                `Hypotes → observation → experiment → teori`,
-                `Observation → hypotes → hypotesprövning → lagar och teorier`,
                 `Experiment → observation → hypotes → lagar`,
                 `Teori → hypotes → experiment → observation`,
+                `Hypotes → observation → experiment → teori`,
+                `Observation → hypotes → hypotesprövning → lagar och teorier`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `Den naturvetenskapliga metoden börjar med en **observation** — vi ser något hända. Utifrån det formulerar vi en **hypotes** om varför det händer, **prövar** hypotesen genom att göra experiment, och om hypotesen håller blir den till slut en del av etablerade **lagar och teorier**.
 
 **Svar:** Observation → hypotes → hypotesprövning → lagar och teorier.`,
@@ -2967,12 +2970,12 @@ Det är just därför fysik fungerar: vi kan förutsäga vad som händer utan at
             level: 1,
             question: `I meningen *"sträckan är 2 500 meter"* — vad är **mätetalet**?`,
             choices: [
-                `sträckan`,
-                `2 500`,
-                `meter`,
                 `m (symbolen för meter)`,
+                `sträckan`,
+                `meter`,
+                `2 500`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `En storhet anges som *mätetal* gånger *enhet*:
 
 - **Storhet** — egenskapen som mäts. Här: *sträcka*.
@@ -3588,11 +3591,11 @@ $$
             question: `Vad anger **sekantens lutning** i ett *s-t*-diagram?`,
             choices: [
                 `Föremålets momentanhastighet i en viss punkt.`,
-                `Föremålets medelhastighet under ett tidsintervall.`,
                 `Föremålets totala sträcka.`,
                 `Föremålets acceleration.`,
+                `Föremålets medelhastighet under ett tidsintervall.`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `En **sekant** är en rät linje som skär grafen i två punkter. Lutningen mellan dessa två punkter motsvarar förflyttningen dividerat med tidsintervallet — alltså **medelhastigheten** under intervallet.
 
 En **tangent** däremot snuddar grafen i *en* punkt, och dess lutning är **momentanhastigheten** i just den punkten.
@@ -4039,12 +4042,12 @@ $$
             level: 1,
             question: `Vad motsvarar **arean** mellan grafen och *x*-axeln i ett *v-t*-diagram?`,
             choices: [
+                `Den genomsnittliga accelerationen`,
+                `Den maximala hastigheten`,
                 `Accelerationen`,
                 `Förflyttningen`,
-                `Den maximala hastigheten`,
-                `Den genomsnittliga accelerationen`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `Arean i ett *v-t*-diagram bildas av hastighet ($\\mathrm{m/s}$) gånger tid ($\\mathrm{s}$) — vilket har enheten meter ($\\mathrm{m}$). Det stämmer alltså inte med acceleration eller hastighet, utan med en sträcka/förflyttning.
 
 Mer formellt: vi vet att $\\Delta s = v \\cdot \\Delta t$ vid konstant hastighet, vilket är basen gånger höjden på en rektangel under grafen. För variabel hastighet generaliseras det till hela arean under kurvan.
@@ -4644,12 +4647,12 @@ Det är 180 km/h.
             level: 1,
             question: `När behöver man typiskt ställa upp ett **ekvationssystem** med två ekvationer i rörelseuppgifter med konstant acceleration?`,
             choices: [
+                `När man räknar med SI-enheter.`,
+                `När hastigheten är negativ.`,
                 `När problemet handlar om fritt fall.`,
                 `När man har **två obekanta storheter** (till exempel acceleration *a* och tid *t*) som båda måste bestämmas från given information.`,
-                `När hastigheten är negativ.`,
-                `När man räknar med SI-enheter.`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `En ekvation kan lösa **en** obekant variabel. Om problemet ger oss tillräckligt med information för att räkna ut två obekanta (till exempel både *a* och *t*) — men där vi inte direkt kan isolera någondera — måste vi ställa upp **två** ekvationer som båda innehåller de obekanta. Då bildar ekvationerna ett ekvationssystem som kan lösas algebraiskt eller med GeoGebra.
 
 **Svar:** När man har två obekanta som båda måste bestämmas.
@@ -4992,20 +4995,20 @@ $$
             question: `En buss bromsar hastigt in och passagerarna "kastas" framåt i sätena. Hur förklaras detta bäst med Newtons första lag?`,
             choices: [
                 `En framåtriktad kraft slungar passagerarna framåt när bussen bromsar.`,
-                `Passagerarna fortsätter i sin likformiga rörelse framåt när bussen saktar in — det krävs en kraft för att bromsa in även dem.`,
-                `Tyngdkraften på passagerarna byter riktning när bussen bromsar.`,
                 `Bromskraftens motkraft enligt Newtons tredje lag verkar på passagerarna.`,
+                `Tyngdkraften på passagerarna byter riktning när bussen bromsar.`,
+                `Passagerarna fortsätter i sin likformiga rörelse framåt när bussen saktar in — det krävs en kraft för att bromsa in även dem.`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `Det finns ingen kraft som "kastar" passagerarna framåt — tvärtom är det **frånvaron** av en tillräcklig bromsande kraft som är förklaringen. Enligt Newtons första lag fortsätter passagerarna i sin likformiga rörelse (samma fart, samma riktning) tills en kraft ändrar den.
 
 När bussen bromsar verkar bromskraften på **bussen**, inte direkt på passagerarna. Passagerarna fortsätter därför framåt med sin gamla fart tills säkerhetsbältet eller sätet framför utövar den kraft som bromsar in dem.
 
 - Alternativ A beskriver en kraft som inte existerar — klassisk missuppfattning.
+- Alternativ B blandar ihop Newtons tredje lag: motkraften till bromskraften verkar på vägbanan, inte på passagerarna.
 - Alternativ C är fel — tyngdkraften pekar alltid mot jordens centrum.
-- Alternativ D blandar ihop Newtons tredje lag: motkraften till bromskraften verkar på vägbanan, inte på passagerarna.
 
-**Svar:** Alternativ B.`,
+**Svar:** Alternativ D.`,
         },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
@@ -5483,19 +5486,19 @@ $$
             level: 1,
             question: `Vad innebär **Newtons tredje lag** (lagen om verkan och återverkan)?`,
             choices: [
+                `En kraft är massa gånger acceleration.`,
                 `Två krafter som verkar på samma föremål och håller det i jämvikt är lika stora och motriktade.`,
                 `Till varje kraft som föremål A utövar på föremål B finns en lika stor och motriktad kraft som B utövar på A.`,
                 `Ett föremål förblir i vila om kraftresultanten är noll.`,
-                `En kraft är massa gånger acceleration.`,
             ],
-            correct: 1,
+            correct: 2,
             solution: `Newtons tredje lag säger att krafter alltid uppträder i **par** mellan *två olika föremål*. Om A trycker på B med kraften $F$, så trycker B tillbaka på A med kraften $-F$ (lika stor, motsatt riktning, samma typ av kraft).
 
 Det är viktigt att inte blanda ihop motkrafter med jämviktskrafter:
 - **Motkrafter**: verkar på *två olika* föremål (Newton 3).
 - **Jämviktskrafter**: verkar på *samma* föremål och håller det stilla (Newton 1).
 
-**Svar:** Alternativ B.`,
+**Svar:** Alternativ C.`,
         },
         {
             level: 1,
@@ -5519,19 +5522,19 @@ Det är viktigt att inte blanda ihop motkrafter med jämviktskrafter:
             level: 1,
             question: `En simmare tar ett simtag och för handen bakåt genom vattnet. Vilken kraft är det som driver simmaren framåt?`,
             choices: [
+                `Handens kraft på vattnet.`,
+                `Lyftkraften från vattnet.`,
                 `Simmarens muskelkraft, som verkar direkt framåt på kroppen.`,
                 `Vattnets motkraft på handen — när handen trycker vattnet bakåt trycker vattnet handen framåt.`,
-                `Lyftkraften från vattnet.`,
-                `Handens kraft på vattnet.`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `Muskelkraften är en **inre** kraft — den kan inte accelerera kroppen som helhet (lika lite som man kan lyfta sig själv i håret). Det som behövs är en **yttre** kraft, och den kommer från vattnet.
 
 Handen trycker vattnet **bakåt** med en kraft. Enligt Newtons tredje lag trycker vattnet då handen (och därmed simmaren) **framåt** med en lika stor kraft. Det är denna motkraft som driver simmaren.
 
-Alternativ D är lömskt: handens kraft på vattnet är visserligen halva kraftparet, men den verkar på **vattnet** — inte på simmaren. En kraft kan bara accelerera det föremål den verkar på.
+Alternativ A är lömskt: handens kraft på vattnet är visserligen halva kraftparet, men den verkar på **vattnet** — inte på simmaren. En kraft kan bara accelerera det föremål den verkar på.
 
-**Svar:** Alternativ B.
+**Svar:** Alternativ D.
 
 **Generell slutsats:** All framdrivning fungerar så här — gång (foten trycker marken bakåt), bilhjul (däcket trycker vägen bakåt), raket (motorn trycker avgaserna bakåt). Man rör sig framåt genom att trycka något annat bakåt.`,
         },
@@ -5540,16 +5543,16 @@ Alternativ D är lömskt: handens kraft på vattnet är visserligen halva kraftp
             question: `En mygga kolliderar med vindrutan på en lastbil i full fart. Hur förhåller sig kraften från lastbilen på myggan till kraften från myggan på lastbilen under kollisionen?`,
             choices: [
                 `Lastbilen påverkar myggan med en mycket större kraft än tvärtom.`,
-                `Krafterna är exakt lika stora men motriktade.`,
                 `Myggan påverkar inte lastbilen med någon kraft alls.`,
                 `Det beror på hur fort lastbilen kör.`,
+                `Krafterna är exakt lika stora men motriktade.`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `Newtons tredje lag gäller **alltid** och **utan undantag** — även när föremålen är extremt olika stora. Kraften från lastbilen på myggan och kraften från myggan på lastbilen är exakt lika stora och motriktade, i varje ögonblick av kollisionen.
 
 Det som skiljer sig dramatiskt är **effekten** av samma kraft: myggan har en massa på kanske $10^{-6}$ kg och får därför en enorm acceleration ($a = F/m$), medan lastbilens acceleration av samma kraft är fullständigt omätbar. Det är accelerationerna som är olika — inte krafterna.
 
-**Svar:** Alternativ B.`,
+**Svar:** Alternativ D.`,
         },
         {
             level: 2,
@@ -6597,21 +6600,21 @@ $$
             level: 1,
             question: `Ett lutande plan görs allt **brantare**. Vad händer med tyngdkraftens komposanter $F_1$ (längs planet) och $F_2$ (vinkelrätt mot planet)?`,
             choices: [
+                `Båda är oförändrade — tyngdkraften ändras ju inte.`,
+                `$F_1$ minskar och $F_2$ ökar.`,
                 `Båda komposanterna ökar.`,
                 `$F_1$ ökar och $F_2$ minskar.`,
-                `$F_1$ minskar och $F_2$ ökar.`,
-                `Båda är oförändrade — tyngdkraften ändras ju inte.`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `Komposanterna är $F_1 = m g \\sin\\alpha$ och $F_2 = m g \\cos\\alpha$. När vinkeln $\\alpha$ växer ökar $\\sin\\alpha$ medan $\\cos\\alpha$ minskar — alltså växer $F_1$ och krymper $F_2$.
 
 Kontrollera gärna med ytterlighetsfallen:
 - **Plant golv** ($\\alpha = 0^{\\circ}$): $F_1 = 0$ (inget glider på plant golv) och $F_2 = m g$ (hela tyngden bärs av underlaget).
 - **Lodrät vägg** ($\\alpha = 90^{\\circ}$): $F_1 = m g$ (fritt fall längs väggen) och $F_2 = 0$ (inget tryck mot väggen).
 
-Alternativ D blandar ihop tyngdkraften (som mycket riktigt är oförändrad) med dess **komposanter** (som beror på hur vi delar upp den).
+Alternativ A blandar ihop tyngdkraften (som mycket riktigt är oförändrad) med dess **komposanter** (som beror på hur vi delar upp den).
 
-**Svar:** Alternativ B.`,
+**Svar:** Alternativ D.`,
         },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
@@ -6859,15 +6862,15 @@ $$
             level: 1,
             question: `Martin bär en låda med massan 8,0 kg horisontellt 20 m längs en korridor med **konstant hastighet**. Hur stort arbete uträttar tyngdkraften (eller den uppåtriktade kraften från Martins händer) på lådan?`,
             choices: [
-                `Arbetet är $W = m g s = 8{,}0 \\cdot 9{,}82 \\cdot 20 \\approx 1\\,570$ J.`,
-                `Arbetet är 0 J — rörelsen sker vinkelrätt mot kraften.`,
-                `Arbetet är $\\dfrac{1}{2} m g s$.`,
                 `Arbetet är negativt eftersom han bär lådan.`,
+                `Arbetet är $W = m g s = 8{,}0 \\cdot 9{,}82 \\cdot 20 \\approx 1\\,570$ J.`,
+                `Arbetet är $\\dfrac{1}{2} m g s$.`,
+                `Arbetet är 0 J — rörelsen sker vinkelrätt mot kraften.`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `Arbete kräver att kraften har en komponent **i rörelsens riktning**. Här är rörelsen horisontell (åt höger), men både tyngdkraften och Martins lyftande kraft är vertikala (uppåt/nedåt). Kraften i rörelsens riktning $F_s = 0$, så arbetet blir noll oavsett hur lång sträckan är.
 
-**Svar:** Alternativ B.
+**Svar:** Alternativ D.
 
 **Generell slutsats:** I vardagsspråk säger man "det är jobbigt att bära lådan", men *fysikaliskt* är det inget arbete. Den ansträngning man känner kommer från muskelarbete för att hålla emot lådans tyngd statiskt — inte från arbete på själva lådan.`,
         },
@@ -7217,19 +7220,19 @@ $$
             level: 1,
             question: `En boll med massan 0,50 kg har lägesenergin 30 J ovanför marken. Hur stor blir bollens **rörelseenergi** precis innan den slår i marken, om luftmotståndet kan försummas?`,
             choices: [
-                `15 J — hälften av lägesenergin går förlorad.`,
-                `30 J — all lägesenergi omvandlas till rörelseenergi.`,
-                `60 J — rörelseenergin är dubbelt så stor.`,
                 `Kan inte beräknas utan att veta bollens fart.`,
+                `60 J — rörelseenergin är dubbelt så stor.`,
+                `30 J — all lägesenergi omvandlas till rörelseenergi.`,
+                `15 J — hälften av lägesenergin går förlorad.`,
             ],
-            correct: 1,
+            correct: 2,
             solution: `Enligt energiprincipen kan energi varken skapas eller förstöras. Utan luftmotstånd omvandlas **all** lägesenergi till rörelseenergi när bollen faller:
 
 $$
 E_k = E_p = 30\\ \\mathrm{J}
 $$
 
-**Svar:** Alternativ B.`,
+**Svar:** Alternativ C.`,
         },
         {
             level: 2,
@@ -9744,15 +9747,15 @@ $$ E = 100 \\cdot 28\\,800 = 2\\,880\\,000\\ \\mathrm{J} = 2{,}88\\ \\mathrm{MJ}
             level: 2,
             question: `I en bastu är lufttemperaturen 80 °C. När du blåser kraftigt på din arm där upplever du det **inte** som svalt, utan som extremt **varmt**. Varför?`,
             choices: [
-                `Bastuluft är torrare och leder värme bättre än vanlig luft.`,
-                `Den varma luften river bort den 33-gradiga luften nära huden och ersätter den med 80-gradig luft, så värme strömmar **till** huden istället för från den.`,
-                `Hög temperatur stänger av nervändarna som annars skulle uppfatta värme — så endast tryckkänslan kvarstår.`,
                 `Vid hög lufttemperatur slutar svett att avdunsta, vilket gör att kylningen försvinner.`,
+                `Bastuluft är torrare och leder värme bättre än vanlig luft.`,
+                `Hög temperatur stänger av nervändarna som annars skulle uppfatta värme — så endast tryckkänslan kvarstår.`,
+                `Den varma luften river bort den 33-gradiga luften nära huden och ersätter den med 80-gradig luft, så värme strömmar **till** huden istället för från den.`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `Värme flödar alltid från varmt till kallt. När du blåser hårt på armen ute (med 20 °C luft) river du bort den varma luften nära huden och ersätter den med kall — då flödar värme **från** armen, och du upplever det som kallt. I bastun gör du tvärtom: du river bort den 33-gradiga luften nära huden och ersätter den med 80-gradig — då flödar värme **till** armen och du upplever det som varmt.
 
-**Svar:** Alternativ B.
+**Svar:** Alternativ D.
 
 **Generell slutsats:** Det är inte luftrörelsen i sig som avgör om man känner varmt eller kallt — det är **temperaturskillnaden** mellan din hud och den nya luften. Samma fenomen förklarar varför fläktar inte hjälper i extrem hetta (och ibland gör det värre om luften är varmare än huden).`,
         },
@@ -9827,15 +9830,15 @@ $$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
             level: 1,
             question: `Vid vilken temperatur upphör enligt **tredje huvudsatsen** alla processer i ett system?`,
             choices: [
+                `Vid −100 °C — där alla vanliga gaser kondenserar.`,
                 `Vid 0 °C — vattnets fryspunkt.`,
                 `Vid 0 K — den absoluta nollpunkten.`,
-                `Vid −100 °C — där alla vanliga gaser kondenserar.`,
                 `Vid kosmiska bakgrundsstrålningens temperatur (2,7 K).`,
             ],
-            correct: 1,
+            correct: 2,
             solution: `**Tredje huvudsatsen** säger att alla processer upphör vid **absoluta nollpunkten** (0 K = −273,15 °C). Där har atomerna teoretiskt sett ingen rörelse alls. I praktiken kan man komma godtyckligt nära 0 K, men aldrig riktigt nå dit.
 
-**Svar:** Alternativ B — vid 0 K.
+**Svar:** Alternativ C — vid 0 K.
 
 **Generell slutsats:** I moderna laboratorier har man nått temperaturer på under en miljarddels kelvin (10⁻⁹ K) — kallare än något annat någonstans i det observerbara universum. Det är en konsekvens av tredje huvudsatsen att 0 K inte kan nås i ett ändligt antal steg, men man kan komma så nära man vill.`,
         },
@@ -10024,16 +10027,16 @@ ${makeCircuit({
 })}`,
             choices: [
                 `De slocknar också, eftersom hela kretsen bryts.`,
-                `De lyser oförändrat, eftersom de fortfarande är direkt anslutna till batteriet.`,
                 `De lyser svagare, eftersom strömmen från batteriet minskar.`,
                 `De lyser starkare, eftersom strömmen som gick genom lampa 3 omfördelas.`,
+                `De lyser oförändrat, eftersom de fortfarande är direkt anslutna till batteriet.`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `Varje gren i en parallellkoppling är **direkt ansluten** mellan batteriets poler. Spänningen över varje lampa är därför densamma som batterispänningen *U*, oavsett vad som händer i de andra grenarna.
 
 När lampa 3 går sönder bryts enbart den grenens ledning. Lampornas 1 och 2 spänning och resistans är oförändrade, så enligt Ohms lag är även strömmen genom dem oförändrad — de **lyser exakt som förut**.
 
-**Svar:** Alternativ B — de lyser oförändrat.
+**Svar:** Alternativ D — de lyser oförändrat.
 
 **Generell slutsats:** Detta är den fundamentala skillnaden mot seriekoppling, där en trasig lampa släcker hela kretsen. Eluttagen i ett hem är parallellkopplade just därför — om en lampa går sönder ska inte hela rummets belysning slockna. Den totala strömmen från batteriet minskar dock, eftersom en gren har försvunnit.`,
         },
@@ -10299,16 +10302,16 @@ $$ r = \\sqrt{\\frac{8{,}99 \\cdot 10^9 \\cdot 2{,}0 \\cdot 10^{-9} \\cdot 5{,}0
             question: `Laddningen $Q_1 = 2\\ \\mathrm{nC}$ och laddningen $Q_2 = 8\\ \\mathrm{nC}$ påverkar varandra elektriskt. Vad gäller för krafterna på de två laddningarna?`,
             choices: [
                 `Kraften är fyra gånger så stor på $Q_2$, eftersom den laddningen är fyra gånger så stor.`,
-                `Kraften är lika stor på båda laddningarna, men riktad åt motsatt håll.`,
-                `Kraften är större på $Q_1$, eftersom den är mindre och därför lättare att påverka.`,
                 `Det går inte att avgöra utan att veta avståndet mellan dem.`,
+                `Kraften är större på $Q_1$, eftersom den är mindre och därför lättare att påverka.`,
+                `Kraften är lika stor på båda laddningarna, men riktad åt motsatt håll.`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `Enligt **Newtons tredje lag** är kraften som $Q_1$ utövar på $Q_2$ exakt lika stor som kraften $Q_2$ utövar på $Q_1$ — fast åt motsatt håll. Det spelar ingen roll att den ena laddningen är större.
 
 Det syns också direkt i Coulombs lag: i uttrycket $F = k \\cdot Q_1 \\cdot Q_2 / r^2$ ingår *båda* laddningarna i samma produkt, så det blir ett och samma kraftvärde för paret.
 
-**Svar:** Alternativ B — lika stor kraft på båda, motsatt riktad.
+**Svar:** Alternativ D — lika stor kraft på båda, motsatt riktad.
 
 **Generell slutsats:** Samma princip som i gravitationen: jorden drar i dig med samma kraft som du drar i jorden, trots den enorma masskillnaden. En större laddning ger inte en större kraft på "den andra parten".`,
         },
@@ -11946,14 +11949,14 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
             question: `En Faradays bur (ett slutet metallhölje) placeras i ett yttre elektriskt fält. Vad gäller för det resulterande elektriska fältet **inuti** buren?`,
             choices: [
                 `Fältet inuti blir starkare än det yttre fältet.`,
-                `Fältet inuti är noll — det resulterande fältet släcks ut.`,
-                `Fältet inuti är ungefär hälften av det yttre fältet.`,
                 `Fältet inuti är lika starkt som det yttre och kvarstår.`,
+                `Fältet inuti är ungefär hälften av det yttre fältet.`,
+                `Fältet inuti är noll — det resulterande fältet släcks ut.`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `Inuti en Faradays bur är det resulterande elektriska fältet **noll**. Ledningselektronerna i metallen omfördelas och skapar ett eget fält som exakt tar ut det yttre fältet inne i buren.
 
-**Svar:** Alternativ B — fältet inuti är noll.
+**Svar:** Alternativ D — fältet inuti är noll.
 
 **Generell slutsats:** Det är därför känslig elektronik kan skärmas av med ett metallhölje, och varför du inte får mobiltäckning i en hiss eller ett tjockt metallrum.`,
         },
@@ -12030,14 +12033,14 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
             question: `Hur kommer det sig, rent fysikaliskt, att det resulterande elektriska fältet inuti en Faradays bur blir noll?`,
             choices: [
                 `Metallen absorberar det yttre fältet och omvandlar det till värme.`,
-                `Ledningselektronerna omfördelas så att burens ena sida blir negativ och den andra positiv, vilket skapar ett lika stort men motriktat fält inuti som tar ut det yttre fältet.`,
                 `Det yttre fältet kan av princip aldrig nå fram till en metallyta.`,
                 `Metallen reflekterar fältet rakt tillbaka utåt, ungefär som en spegel reflekterar ljus.`,
+                `Ledningselektronerna omfördelas så att burens ena sida blir negativ och den andra positiv, vilket skapar ett lika stort men motriktat fält inuti som tar ut det yttre fältet.`,
             ],
-            correct: 1,
+            correct: 3,
             solution: `När det yttre fältet läggs på rör sig de fria ledningselektronerna **mot** fältet. Den ena sidan av buren får då ett elektronöverskott (blir negativ) och den andra ett underskott (blir positiv). Dessa omfördelade laddningar bygger upp ett **eget, motriktat fält** inuti buren. Omfördelningen fortsätter tills det inre fältet är *exakt lika stort* som det yttre — då tar de ut varandra och det resulterande fältet blir noll.
 
-**Svar:** Alternativ B.
+**Svar:** Alternativ D.
 
 **Generell slutsats:** Detta sker nästan ögonblickligen (med ljusets hastighet) och kallas **influens**. Poängen är att utsläckningen inte är passiv "absorption" utan ett aktivt, självreglerande svar: ju starkare yttre fält, desto mer omfördelas laddningarna — alltid precis lagom för att nolla fältet inuti.`,
         },
@@ -12217,14 +12220,14 @@ $$ r = \\sqrt[3]{\\frac{3 \\cdot 4{,}08 \\cdot 10^{-14}}{4\\pi \\cdot 900}} = \\
             question: `Två rymdskepp närmar sig varandra, vardera med farten $0{,}60c$. Det ena skeppet skickar en ljuspuls mot det andra. Med vilken hastighet uppmäter det mottagande skeppet ljuspulsen?`,
             choices: [
                 `$1{,}2c$ — skeppens farter ($0{,}60c + 0{,}60c$) adderas till ljusets.`,
-                `$c$ — ljusets hastighet är densamma oavsett hur källa och observatör rör sig.`,
                 `$1{,}6c$ — det egna skeppets fart ($0{,}60c$) adderas till ljusets ($c$).`,
+                `$c$ — ljusets hastighet är densamma oavsett hur källa och observatör rör sig.`,
                 `$0{,}60c$ — ljuset bromsas till skeppens fart.`,
             ],
-            correct: 1,
+            correct: 2,
             solution: `Ljusets hastighet i vakuum är **alltid** $c \\approx 2{,}998 \\cdot 10^8\\ \\mathrm{m/s}$, oavsett hur ljuskällan eller observatören rör sig. Det mottagande skeppet mäter alltså ljuspulsen till $c$ — varken mer eller mindre.
 
-**Svar:** Alternativ B — $c$.
+**Svar:** Alternativ C — $c$.
 
 **Generell slutsats:** Det här är relativitetsteorins grundpostulat och bekräftades av Michelson–Morleys experiment. Hastigheter "adderas" inte på vanligt vis när ljus är inblandat — annars hade svaret blivit $1{,}2c$, vilket är fel. Just att $c$ är konstant tvingar fram tidsdilatation och längdkontraktion.`,
         },
@@ -14910,12 +14913,12 @@ $$ T = \\frac{1}{440} = 0{,}002273\\ldots\\ \\mathrm{s} \\approx 2{,}3\\ \\mathr
             level: 1,
             question: `När uppstår **resonans** i ett mekaniskt system?`,
             choices: [
-                'När en yttre periodisk kraft har högre frekvens än systemets egenfrekvens.',
-                'När en yttre periodisk kraft har samma frekvens som systemets egenfrekvens.',
                 'När en yttre periodisk kraft har lägre frekvens än systemets egenfrekvens.',
                 'När det inte verkar någon yttre kraft alls på systemet.',
+                'När en yttre periodisk kraft har högre frekvens än systemets egenfrekvens.',
+                'När en yttre periodisk kraft har samma frekvens som systemets egenfrekvens.',
             ],
-            correct: 1,
+            correct: 3,
             solution: `Resonans uppstår när en yttre periodisk kraft har **samma frekvens** som systemets egenfrekvens. Då tillförs energi i takt med svängningen och amplituden växer för varje cykel.
 
 - Vid *högre* eller *lägre* frekvens hamnar den yttre kraften ibland i otakt och bromsar svängningen lika ofta som den driver den — amplituden växer inte.
@@ -15235,12 +15238,12 @@ $$ d = \\frac{12 \\cdot 3\\,400 \\cdot 5\\,800}{5\\,800 - 3\\,400} = \\frac{2{,}
             level: 2,
             question: `Två triangulära pulser möts på en sträng. Båda har formen av en likbent triangel med höjden $5{,}0\\ \\mathrm{cm}$ och samma bredd. Den ena är ett **vågberg**, den andra en **vågdal**. Vad är strängens läge när pulserna **exakt överlappar** varandra?`,
             choices: [
-                'Ett vågberg med dubbel höjd ($10\\ \\mathrm{cm}$).',
-                'En vågdal med dubbelt djup ($-10\\ \\mathrm{cm}$).',
-                'Helt platt (strängens läge är $0$ överallt) — pulserna tar ut varandra fullständigt.',
                 'En triangelformad puls som är hälften så hög.',
+                'En vågdal med dubbelt djup ($-10\\ \\mathrm{cm}$).',
+                'Ett vågberg med dubbel höjd ($10\\ \\mathrm{cm}$).',
+                'Helt platt (strängens läge är $0$ överallt) — pulserna tar ut varandra fullständigt.',
             ],
-            correct: 2,
+            correct: 3,
             solution: `Enligt superpositionsprincipen är strängens läge **summan** av elongationerna i varje punkt. När vågberget ($+5{,}0\\ \\mathrm{cm}$) och vågdalen ($-5{,}0\\ \\mathrm{cm}$) är exakt på samma plats blir summan $0$ — strängen är helt platt i det ögonblicket.
 
 Detta är **destruktiv interferens** i sin renaste form. Efter ögonblicket fortsätter dock båda pulser oförändrade — strängen "kommer ihåg" att det fanns två motverkande pulser.
@@ -16020,12 +16023,12 @@ $$ i_\\text{kritisk} = \\sin^{-1}(0{,}375) \\approx 22{,}0^\\circ $$
             level: 1,
             question: `En punkt i ett interferensmönster har vägskillnaden $\\Delta s = 2\\lambda$ till två koherenta vågkällor. På vilken linje ligger punkten?`,
             choices: [
-                '0:e nodlinjen (första tysta punkten från centrum).',
-                '1:a maxlinjen.',
-                '2:a maxlinjen.',
                 '1:a nodlinjen.',
+                '1:a maxlinjen.',
+                '0:e nodlinjen (första tysta punkten från centrum).',
+                '2:a maxlinjen.',
             ],
-            correct: 2,
+            correct: 3,
             solution: `För **konstruktiv interferens** (maxlinjer) gäller $\\Delta s = n\\cdot\\lambda$. Punkten har $\\Delta s = 2\\lambda$, så $n = 2$ — det är **2:a maxlinjen**.
 
 För nodlinjerna (destruktiv interferens) skulle $\\Delta s$ vara ett halvt antal våglängder: $\\lambda/2, 3\\lambda/2, 5\\lambda/2, \\ldots$.
@@ -16052,12 +16055,12 @@ $$ \\lambda = 2 \\cdot 0{,}30 = 0{,}60\\ \\mathrm{m} $$
             level: 1,
             question: `Vad är skillnaden mellan **diffraktion** och **interferens**?`,
             choices: [
-                'De är samma fenomen — bara olika ord för det.',
-                'Diffraktion är hur vågor böjs av vid kanter eller spalter; interferens är hur vågor förstärker eller släcker ut varandra när de möts.',
-                'Diffraktion sker bara i ljud; interferens bara i ljus.',
                 'Diffraktion är samma sak som reflexion; interferens samma sak som brytning.',
+                'De är samma fenomen — bara olika ord för det.',
+                'Diffraktion sker bara i ljud; interferens bara i ljus.',
+                'Diffraktion är hur vågor böjs av vid kanter eller spalter; interferens är hur vågor förstärker eller släcker ut varandra när de möts.',
             ],
-            correct: 1,
+            correct: 3,
             solution: `**Diffraktion** är vågors avböjning vid kanter eller smala öppningar — fenomenet att en våg "böjs runt hörn" eller sprids ut efter en spalt. **Interferens** är överlagring av vågor: när vågor från olika källor (eller olika delar av samma våg som spridits) möts kan de förstärka varandra (maxlinjer) eller släcka ut varandra (nodlinjer).
 
 I dubbelspaltsförsöket samverkar båda — först diffrakterar vågen genom varje spalt, och sedan interfererar de två diffrakterade vågorna med varandra.
@@ -16180,12 +16183,12 @@ Magneter som bara fungerar med tillförd ström kallas **elektromagneter** (se 3
             level: 1,
             question: `Två stavmagneter förs mot varandra med sina **nordändar vända mot varandra**. Vad händer?`,
             choices: [
-                'De attraherar varandra (dras ihop).',
-                'De repellerar varandra (puttas isär).',
-                'Inget händer — nordändar påverkar inte varandra.',
                 'Den ena magnetens nordända förvandlas till en sydända.',
+                'De attraherar varandra (dras ihop).',
+                'Inget händer — nordändar påverkar inte varandra.',
+                'De repellerar varandra (puttas isär).',
             ],
-            correct: 1,
+            correct: 3,
             solution: `**Lika poler repellerar varandra** och **olika poler attraherar varandra**. Eftersom båda magneterna har sina nordändar mot varandra, repellerar de.
 
 **Generell slutsats:** Detta är analogt med elektriska laddningar — lika laddningar repellerar, olika attraherar.`,
@@ -16194,12 +16197,12 @@ Magneter som bara fungerar med tillförd ström kallas **elektromagneter** (se 3
             level: 1,
             question: `En stavmagnet **delas på mitten**. Vad händer?`,
             choices: [
-                'Den ena delen blir en ensam nordända, den andra en ensam sydända.',
                 'Magnetiseringen försvinner helt — båda halvorna blir omagnetiska.',
-                'Båda halvorna blir nya, mindre stavmagneter med varsin nordända och sydända.',
+                'Den ena delen blir en ensam nordända, den andra en ensam sydända.',
                 'Den ena halvan får dubbel styrka, den andra ingen.',
+                'Båda halvorna blir nya, mindre stavmagneter med varsin nordända och sydända.',
             ],
-            correct: 2,
+            correct: 3,
             solution: `**Magnetpoler uppträder alltid parvis.** När en magnet delas bildas två nya, kortare magneter — vardera med en nordända och en sydända. Man kan **aldrig** skapa en magnet med endast en pol (en så kallad *magnetisk monopol*) — det är en grundläggande egenskap hos magnetism.`,
         },
 
@@ -16842,12 +16845,12 @@ De magnetiska polerna **rör sig över tid** — ungefär $0{,}5^\\circ$ väster
             level: 1,
             question: `Vad menas med **deklination**?`,
             choices: [
-                'Vinkeln mellan magnetfältets riktning och horisontalplanet.',
-                'Vinkeln mellan jordens geografiska nordpol och den norra magnetiska polen (mätt från en plats på jorden).',
                 'Variation av magnetfältets styrka beroende på årstid.',
                 'Den årliga ändringen av jordens rotationsaxel.',
+                'Vinkeln mellan magnetfältets riktning och horisontalplanet.',
+                'Vinkeln mellan jordens geografiska nordpol och den norra magnetiska polen (mätt från en plats på jorden).',
             ],
-            correct: 1,
+            correct: 3,
             solution: `**Deklination** är den horisontella vinkeln mellan riktningen mot den **geografiska** nordpolen och riktningen mot den **norra magnetiska** polen — sett från en plats på jorden. Navigatörer behöver justera sina kompasser efter denna avvikelse för att hitta rätt riktning.
 
 **Inte att förväxla med inklination** (se nästa fråga), som är vinkeln mellan magnetfältet och horisontalplanet.`,
@@ -17131,12 +17134,12 @@ $$ F = B\\cdot I\\cdot l = 0{,}80 \\cdot 0{,}40 \\cdot 0{,}15 = 0{,}048\\ \\math
             level: 2,
             question: `En magnet med nordändan framåt förs **mot** en cirkulär ledarslinga. Vilken är den inducerade strömmens riktning i slingan, sett från magnetens sida?`,
             choices: [
-                'Medurs, så att slingan får en nordända mot magneten (för att repellera).',
-                'Moturs, så att slingan får en nordända mot magneten (för att repellera).',
-                'Medurs, så att slingan får en sydända mot magneten (för att attrahera).',
                 'Det induceras ingen ström — magneter ger inte strömmar i ledare.',
+                'Medurs, så att slingan får en nordända mot magneten (för att repellera).',
+                'Medurs, så att slingan får en sydända mot magneten (för att attrahera).',
+                'Moturs, så att slingan får en nordända mot magneten (för att repellera).',
             ],
-            correct: 1,
+            correct: 3,
             solution: `Enligt **Lenz lag** ska den inducerade strömmen *motverka* orsaken till sin uppkomst. Eftersom magneten närmar sig med sin nordända måste slingan reagera så att den **repellerar** magneten — alltså bilda en nordända mot magneten.
 
 Med tumregeln för spole (fingrar = strömriktning, tumme = magnetfältets riktning): för att ge slingan en nordända *mot magneten* (utåt mot betraktaren från slingans sida) ska tummen peka utåt, vilket innebär att strömmen går **moturs** sett från magnetens sida.
@@ -17613,12 +17616,12 @@ Faktiskt korrigerar jag: $0{,}050^2 = 0{,}0025$, $0{,}064^2 = 0{,}004096$, produ
             level: 1,
             question: `Vad är en **virvelström**?`,
             choices: [
+                'En speciell typ av växelström som finns i elnätet.',
+                'En ström som virvlar runt en magnet utan extern energikälla.',
                 'En likström som går igenom en spole.',
                 'En cirkulerande inducerad ström i en metallplatta, som motverkar orsaken till sin uppkomst (enligt Lenz lag).',
-                'En ström som virvlar runt en magnet utan extern energikälla.',
-                'En speciell typ av växelström som finns i elnätet.',
             ],
-            correct: 1,
+            correct: 3,
             solution: `**Virvelströmmar** är cirkulerande strömmar som induceras i en metallplatta eller liknande när den befinner sig i ett varierande magnetfält (eller rör sig genom ett magnetfält). De får sin riktning enligt **Lenz lag** — de motverkar orsaken till sin egen uppkomst.
 
 **Exempel:**
@@ -17722,12 +17725,12 @@ $$ F = B\\cdot I\\cdot l = 0{,}80 \\cdot 1{,}51\\cdot 10^4 \\cdot 0{,}20 \\appro
             level: 1,
             question: `Vad är **Halleffekten**?`,
             choices: [
-                'Den värme som genereras när ström går genom en ledare.',
                 'Att en strömförande ledare i ett magnetfält får en spänning vinkelrätt mot strömriktningen.',
-                'Att en magnet attraherar en ledare när ström går igenom den.',
                 'Att resistansen i en ledare ökar när den värms upp.',
+                'Den värme som genereras när ström går genom en ledare.',
+                'Att en magnet attraherar en ledare när ström går igenom den.',
             ],
-            correct: 1,
+            correct: 0,
             solution: `**Halleffekten:** När en strömförande ledare placeras i ett magnetfält (vinkelrätt mot strömmen) uppstår en spänning **vinkelrätt** mot strömriktningen. Detta beror på att den magnetiska kraften pressar laddningarna åt ena sidan av ledaren, och en motverkande elektrisk kraft uppstår tills jämvikt uppnås. Den resulterande spänningen kallas **Hallspänningen**.
 
 Halleffekten används praktiskt i **magnetfältsmätare** för att bestämma okända magnetfält från Hallspänningen.`,
@@ -18660,12 +18663,12 @@ $$ 9 + (-15) = 9 - 15 = -6 $$
             level: 3,
             question: `Talen $a$ och $b$ är båda **negativa** heltal och $a < b$. Vilka av följande uttryck är då **säkert positiva**?<br>a)&nbsp;$a \\cdot b$&emsp;&emsp;b)&nbsp;$a + b$&emsp;&emsp;c)&nbsp;$a - b$&emsp;&emsp;d)&nbsp;$b - a$`,
             choices: [
-                `a och d`,
                 `a och c`,
+                `a och d`,
                 `a, b och d`,
                 `endast a`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** testa med konkreta tal och motivera sedan generellt. Ta till exempel $a = -5$ och $b = -2$ (då gäller $a < b$ eftersom −5 ligger till vänster om −2 på tallinjen).
 
 **a)** $a \\cdot b$: minus gånger minus ger plus, t.ex. $(-5) \\cdot (-2) = 10$. Produkten av två negativa tal är **alltid positiv**.
@@ -18956,12 +18959,12 @@ $$ \\frac{7}{36} - \\frac{5}{54} = \\frac{7 \\cdot 3}{36 \\cdot 3} - \\frac{5 \\
             level: 1,
             question: `Beräkna $\\dfrac{2}{3} \\cdot \\dfrac{5}{7}$.`,
             choices: [
-                `$\\dfrac{10}{21}$`,
-                `$\\dfrac{7}{10}$`,
                 `$\\dfrac{14}{15}$`,
                 `$\\dfrac{10}{7}$`,
+                `$\\dfrac{7}{10}$`,
+                `$\\dfrac{10}{21}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vid multiplikation av två bråk multipliceras täljarna med varandra och nämnarna med varandra:
 
 $$ \\frac{2}{3} \\cdot \\frac{5}{7} = \\frac{2 \\cdot 5}{3 \\cdot 7} = \\frac{10}{21} $$
@@ -19044,12 +19047,12 @@ $\\dfrac{40}{360}$ är samma värde men inte förkortat — och betydligt lätta
             level: 3,
             question: `Emma äter $\\dfrac{1}{4}$ av en tårta. Sedan äter Noah $\\dfrac{2}{3}$ av det som är **kvar**. Hur stor del av hela tårtan är kvar därefter?`,
             choices: [
+                `$\\dfrac{5}{12}$`,
                 `$\\dfrac{1}{4}$`,
                 `$\\dfrac{1}{12}$`,
                 `$\\dfrac{1}{2}$`,
-                `$\\dfrac{5}{12}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** Noahs bråkdel räknas på *resten*, inte på hela tårtan — bråkdel av något betyder multiplikation med just det.
 
 Efter Emma är $1 - \\dfrac{1}{4} = \\dfrac{3}{4}$ av tårtan kvar.
@@ -19184,12 +19187,12 @@ $$ 2^5 = 2 \\cdot 2 \\cdot 2 \\cdot 2 \\cdot 2 = 32 $$
             level: 1,
             question: `Skriv $5 \\cdot 5 \\cdot 5 \\cdot 5$ i potensform.`,
             choices: [
+                `$5^5$`,
                 `$5^4$`,
                 `$4^5$`,
                 `$5 \\cdot 4$`,
-                `$5^5$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Fyra stycken femmor multipliceras — basen är 5 (det som upphöjs) och exponenten är 4 (antalet faktorer):
 
 $$ 5 \\cdot 5 \\cdot 5 \\cdot 5 = 5^4 $$
@@ -19258,12 +19261,12 @@ $$ n = 6 $$
             level: 3,
             question: `Förenkla $\\dfrac{4^{3x}}{2^x + 2^x}$ så långt som möjligt. Svara som EN potens med basen 2.`,
             choices: [
+                `$2^{6x}$`,
+                `$2^{2x}$`,
                 `$2^{5x-1}$`,
                 `$2^{6x-1}$`,
-                `$2^{2x}$`,
-                `$2^{6x}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** gör om både täljare och nämnare till EN potens med samma bas — precis som i genomgångens sista exempel.
 
 Nämnaren är en summa av två lika termer, alltså en multiplikation:
@@ -19320,12 +19323,12 @@ Observera att svaret är **positivt** — minustecknet i exponenten gör inte ta
             level: 1,
             question: `Skriv $\\dfrac{1}{7^4}$ i potensform.`,
             choices: [
-                `$7^{-4}$`,
-                `$7^4$`,
                 `$4^{-7}$`,
                 `$-7^4$`,
+                `$7^4$`,
+                `$7^{-4}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Eftersom $7^{-4} = \\dfrac{1}{7^4}$ gäller det omvända också:
 
 $$ \\frac{1}{7^4} = 7^{-4} $$
@@ -19370,12 +19373,12 @@ $$ 1 + 0{,}5 + 0{,}25 = 1{,}75 $$
             level: 3,
             question: `Ella påstår: "$4^{-3}$ är ett negativt tal, eftersom exponenten är negativ." Vilket påstående är korrekt?`,
             choices: [
-                `Ella har fel — $4^{-3} = \\dfrac{1}{64}$, och en potens med positiv bas är alltid positiv`,
-                `Ella har rätt — $4^{-3} = -64$`,
-                `Ella har rätt — $4^{-3} = -\\dfrac{1}{64}$`,
                 `Ella har fel — $4^{-3} = 0$, eftersom exponenten är mindre än noll`,
+                `Ella har rätt — $4^{-3} = -\\dfrac{1}{64}$`,
+                `Ella har rätt — $4^{-3} = -64$`,
+                `Ella har fel — $4^{-3} = \\dfrac{1}{64}$, och en potens med positiv bas är alltid positiv`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** minustecknet i exponenten handlar om *division*, inte om tecken.
 
 Definitionen av negativ exponent ger
@@ -19418,12 +19421,12 @@ $$ 5 \\cdot 5 \\cdot 5 = 125 \\quad \\Rightarrow \\quad 125^{1/3} = \\sqrt[3]{12
             level: 1,
             question: `Skriv $\\sqrt[4]{13}$ i potensform.`,
             choices: [
-                `$13^{1/4}$`,
-                `$13^4$`,
                 `$4^{1/13}$`,
                 `$13^{-4}$`,
+                `$13^4$`,
+                `$13^{1/4}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Regeln $a^{1/n} = \\sqrt[n]{a}$ gäller åt båda hållen — fjärderoten ur 13 är alltså 13 upphöjt till $\\dfrac{1}{4}$:
 
 $$ \\sqrt[4]{13} = 13^{1/4} $$
@@ -19662,12 +19665,12 @@ $$ \\frac{24}{10 - 2 \\cdot 3} = \\frac{24}{10 - 6} = \\frac{24}{4} = 6 $$
             level: 3,
             question: `Sätt ut EN parentes i uttrycket $12 - 4 \\cdot 2 + 6$ så att uttryckets värde blir 22. Vilken placering är rätt?`,
             choices: [
+                `$(12 - 4 \\cdot 2) + 6$`,
                 `$(12 - 4) \\cdot 2 + 6$`,
                 `$12 - 4 \\cdot (2 + 6)$`,
                 `$12 - (4 \\cdot 2) + 6$`,
-                `$(12 - 4 \\cdot 2) + 6$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** en parentes ändrar beräkningsordningen — testa systematiskt vad varje placering ger.
 
 Utan parentes: $12 - 4 \\cdot 2 + 6 = 12 - 8 + 6 = 10$.
@@ -19705,12 +19708,12 @@ Kontroll: $4{,}4^3 = 85{,}18 \\approx 85$.
             level: 1,
             question: `Räknaren visar \`6,1E9\`. Vilket tal är det?`,
             choices: [
-                `$6\\ 100\\ 000\\ 000$`,
-                `$6{,}19$`,
                 `$0{,}000\\ 000\\ 006\\ 1$`,
                 `$61^9$`,
+                `$6\\ 100\\ 000\\ 000$`,
+                `$6{,}19$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `E-notationen betyder "gånger 10 upphöjt till", så
 
 $$ 6{,}1\\mathrm{E}9 = 6{,}1 \\cdot 10^9 = 6\\ 100\\ 000\\ 000 $$
@@ -19722,12 +19725,12 @@ $$ 6{,}1\\mathrm{E}9 = 6{,}1 \\cdot 10^9 = 6\\ 100\\ 000\\ 000 $$
             level: 2,
             question: `Nadia ska beräkna $\\dfrac{480}{4 \\cdot 6}$ och skriver \`480/4*6\` på räknaren, som svarar 720. Det korrekta svaret är 20. Vad blev fel?`,
             choices: [
+                `Hon skulle ha använt decimalkomma i stället för punkt`,
                 `Nämnaren måste skrivas inom parentes: \`480/(4*6)\``,
                 `Räknaren är trasig — uttrycket är rätt inslaget`,
                 `Divisionstecknet ska slås före täljaren`,
-                `Hon skulle ha använt decimalkomma i stället för punkt`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Bråkstrecket har en "osynlig" parentes kring hela nämnaren, men räknaren ser bara tecknen i tur och ordning. \`480/4*6\` tolkas som
 
 $$ \\frac{480}{4} \\cdot 6 = 120 \\cdot 6 = 720 $$
@@ -19852,12 +19855,12 @@ $$ 4(x - 3) + 2 = 4x - 12 + 2 = 4x - 10 $$
             level: 1,
             question: `Förenkla $7x + 4y - 3x + 2y$.`,
             choices: [
-                `$4x + 6y$`,
-                `$10x + 6y$`,
-                `$4x + 2y$`,
                 `$10xy$`,
+                `$10x + 6y$`,
+                `$4x + 6y$`,
+                `$4x + 2y$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Samla likadana termer — $x$-termer för sig och $y$-termer för sig, med tecknen framför varje term:
 
 $$ 7x - 3x = 4x \\qquad 4y + 2y = 6y $$
@@ -19872,12 +19875,12 @@ $x$- och $y$-termer kan aldrig slås ihop till $xy$-termer.
             level: 1,
             question: `Förenkla $9a + (2 - 4a)$.`,
             choices: [
-                `$5a + 2$`,
+                `$7a$`,
                 `$13a + 2$`,
                 `$5a - 2$`,
-                `$7a$`,
+                `$5a + 2$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Plustecken framför parentesen — parentesen tas bort utan att något ändras inuti:
 
 $$ 9a + (2 - 4a) = 9a + 2 - 4a = 5a + 2 $$
@@ -19907,12 +19910,12 @@ $$ 6x^2 + 2x - 4x^2 = 2x^2 + 2x $$
             level: 2,
             question: `Förenkla $15a - (4 + 6a - 9b)$.`,
             choices: [
-                `$9a - 4 + 9b$`,
-                `$9a - 4 - 9b$`,
                 `$21a - 4 - 9b$`,
                 `$9a + 4 - 9b$`,
+                `$9a - 4 + 9b$`,
+                `$9a - 4 - 9b$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Minustecknet framför parentesen byter tecken på ALLA termer inuti när parentesen tas bort:
 
 $$ 15a - (4 + 6a - 9b) = 15a - 4 - 6a + 9b $$
@@ -19929,12 +19932,12 @@ Vanligaste felet är att bara byta tecken på den första termen i parentesen.
             level: 2,
             question: `En rektangel har höjden $2x$ och basen $5x - 4$. Vilket förenklat uttryck beskriver rektangelns omkrets?`,
             choices: [
-                `$14x - 8$`,
-                `$7x - 4$`,
                 `$14x - 4$`,
+                `$14x - 8$`,
                 `$10x^2 - 8x$`,
+                `$7x - 4$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Omkretsen är summan av alla fyra sidor — två höjder och två baser:
 
 $$ 2 \\cdot 2x + 2 \\cdot (5x - 4) = 4x + 10x - 8 = 14x - 8 $$
@@ -20029,12 +20032,12 @@ $$ 4(3x - 2) + 5 = 12x - 8 + 5 = 12x - 3 $$
             level: 2,
             question: `Utveckla och förenkla $(2x - 3)(4x + 1)$.`,
             choices: [
+                `$8x^2 - 14x - 3$`,
                 `$8x^2 - 10x - 3$`,
                 `$8x^2 + 10x - 3$`,
                 `$8x^2 - 3$`,
-                `$8x^2 - 14x - 3$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Multiplicera varje term i första parentesen med varje term i den andra — håll ordning på tecknen:
 
 $$ (2x - 3)(4x + 1) = 8x^2 + 2x - 12x - 3 = 8x^2 - 10x - 3 $$
@@ -20096,12 +20099,12 @@ Det förenklade uttrycket ger $4 \\cdot 10 + 7 = 47$. Stämmer.
             level: 1,
             question: `Faktorisera $6x + 9$ så långt som möjligt.`,
             choices: [
-                `$3(2x + 3)$`,
                 `$6(x + 9)$`,
-                `$3(2x + 9)$`,
+                `$3(2x + 3)$`,
                 `$x(6 + 9)$`,
+                `$3(2x + 9)$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Den största gemensamma delaren till 6 och 9 är 3. Bryt ut 3 och tänk "distributiva lagen baklänges":
 
 $$ 6x + 9 = 3(2x + 3) $$
@@ -20114,12 +20117,12 @@ Kontroll: $3 \\cdot 2x + 3 \\cdot 3 = 6x + 9$ — stämmer.
             level: 1,
             question: `Faktorisera $x^2 + 7x$ så långt som möjligt.`,
             choices: [
-                `$x(x + 7)$`,
                 `$x^2(1 + 7x)$`,
                 `$7(x^2 + x)$`,
+                `$x(x + 7)$`,
                 `$x(x + 7x)$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Båda termerna innehåller $x$ — bryt ut den minsta potensen av $x$, alltså $x$:
 
 $$ x^2 + 7x = x(x + 7) $$
@@ -20169,12 +20172,12 @@ $4x(x - 1)$ är fel: termerna adderas, de multipliceras inte. $(x - 1)(4 - x)$ h
             level: 2,
             question: `Faktorisera $10a^2b + 15ab^2$ så långt som möjligt.`,
             choices: [
-                `$5ab(2a + 3b)$`,
+                `$5a^2b^2(2 + 3)$`,
                 `$5(2a^2b + 3ab^2)$`,
                 `$ab(10a + 15b)$`,
-                `$5a^2b^2(2 + 3)$`,
+                `$5ab(2a + 3b)$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Titta på varje del för sig: 10 och 15 har gemensamma faktorn 5, båda termerna innehåller $a$ (minsta potens $a$) och $b$ (minsta potens $b$). Bryt ut $5ab$:
 
 $$ 10a^2b + 15ab^2 = 5ab(2a + 3b) $$
@@ -20286,12 +20289,12 @@ $$ x = 8 $$
             level: 3,
             question: `Ekvationen $\\dfrac{2x}{5} - 7 = -4$ har lösningen $x = \\dfrac{15}{2}$. Simon löste den så här:<br>Steg 1: $\\dfrac{2x}{5} = 3$&emsp;&emsp;Steg 2: $2x = \\dfrac{3}{5}$&emsp;&emsp;Steg 3: $x = \\dfrac{3}{10}$<br>I vilket steg gjorde Simon fel, och varför?`,
             choices: [
-                `Steg 2 — nämnaren 5 ska bort genom multiplikation med 5 i båda led, inte genom att flyttas till högerledet`,
-                `Steg 1 — han skulle ha subtraherat 4 i stället för att addera 7`,
                 `Steg 3 — divisionen med 2 är felräknad`,
+                `Steg 1 — han skulle ha subtraherat 4 i stället för att addera 7`,
                 `Inget steg är fel — facit har fel`,
+                `Steg 2 — nämnaren 5 ska bort genom multiplikation med 5 i båda led, inte genom att flyttas till högerledet`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** varje steg i en ekvationslösning måste vara samma operation på BÅDA led — "flytta över" är bara en förkortning av det, och den kan bli fel.
 
 **Steg 1** är korrekt: addera 7 till båda led ger $\\dfrac{2x}{5} = -4 + 7 = 3$.
@@ -20522,12 +20525,12 @@ $$ x = 6 $$
             level: 1,
             question: `Varför skriver man $x \\neq 0$ innan man löser ekvationen $\\dfrac{130}{3x} = 5$?`,
             choices: [
-                `Division med 0 är inte definierat — nämnaren får aldrig bli 0`,
-                `Ekvationer får aldrig ha lösningen 0`,
                 `Talet 130 är inte delbart med 0`,
                 `Det är bara en tradition utan matematisk betydelse`,
+                `Ekvationer får aldrig ha lösningen 0`,
+                `Division med 0 är inte definierat — nämnaren får aldrig bli 0`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Om $x = 0$ blir nämnaren $3x = 0$, och division med 0 är inte definierat. Därför måste vi utesluta det värdet INNAN vi löser ekvationen — och kontrollera att lösningen vi får inte är ett förbjudet värde.
 
 **Svar:** Division med 0 är inte definierat — nämnaren får aldrig bli 0.`,
@@ -20964,12 +20967,12 @@ Elias har rätt i att $2x < 2(x + 3)$ för alla $x$. Men slutsatsen "då är br�
             level: 1,
             question: `Vad är FÖRSTA steget i metoden för problemlösning med ekvationer?`,
             choices: [
-                `Definiera en beteckning på det som söks och ställ upp en ekvation`,
                 `Lösa ekvationen`,
-                `Gissa ett rimligt svar`,
                 `Svara med enhet`,
+                `Definiera en beteckning på det som söks och ställ upp en ekvation`,
+                `Gissa ett rimligt svar`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Metoden har tre steg: **1. Översätt** (inför en beteckning, till exempel $x$, på det som söks och ställ upp ekvationen), **2. Lös ekvationen**, **3. Tolka och svara** med enhet.
 
 **Svar:** Definiera en beteckning på det som söks och ställ upp en ekvation.`,
@@ -21700,12 +21703,12 @@ Inget ± — exponenten 7 är udda.
             level: 1,
             question: `Hur många lösningar har ekvationen $x^{8} = 200$?`,
             choices: [
-                `Två — en positiv och en negativ`,
-                `En`,
                 `Ingen`,
                 `Åtta`,
+                `Två — en positiv och en negativ`,
+                `En`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Exponenten 8 är jämn och högerledet är positivt — då finns två lösningar:
 
 $$ x = \\pm\\sqrt[8]{200} $$
@@ -22090,12 +22093,12 @@ I b) ger den förenklade ekvationen $x^3 = 27$ bara en lösning från början, e
             level: 1,
             question: `Lös olikheten $4x + 3 < 19$.`,
             choices: [
-                `$x < 4$`,
-                `$x > 4$`,
                 `$x < 5{,}5$`,
                 `$x = 4$`,
+                `$x < 4$`,
+                `$x > 4$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Lös som en ekvation — subtrahera 3 och dividera med 4 (positivt tal, tecknet behålls):
 
 $$ 4x < 16 $$
@@ -22122,12 +22125,12 @@ $$ x < 4 $$
             level: 1,
             question: `När måste olikhetstecknet vändas?`,
             choices: [
-                `Vid multiplikation eller division med ett negativt tal`,
+                `Aldrig — olikheter löses precis som ekvationer`,
                 `Vid addition av ett negativt tal`,
                 `Varje gång man byter räknesätt`,
-                `Aldrig — olikheter löses precis som ekvationer`,
+                `Vid multiplikation eller division med ett negativt tal`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Olikheter löses som ekvationer, MEN tecknet vänds vid multiplikation eller division med negativa tal. Kontroll: $5 > 3$, men $5 \\cdot (-1) = -5$ är MINDRE än $3 \\cdot (-1) = -3$.
 
 Addition och subtraktion (även av negativa tal) påverkar inte tecknet.
@@ -22139,12 +22142,12 @@ Addition och subtraktion (även av negativa tal) påverkar inte tecknet.
             level: 2,
             question: `Lös olikheten $5(4 - x) \\leq 45$. Vilket är svaret?`,
             choices: [
-                `$x \\geq -5$`,
                 `$x \\leq -5$`,
-                `$x \\geq 5$`,
                 `$x \\leq 5$`,
+                `$x \\geq 5$`,
+                `$x \\geq -5$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Utveckla parentesen:
 
 $$ 20 - 5x \\leq 45 $$
@@ -22562,12 +22565,12 @@ $$ v = \\frac{s}{t} = \\frac{240}{3} = 80\\ \\mathrm{km/h} $$
             level: 1,
             question: `Lös ut $s$ ur formeln $v = \\dfrac{s}{t}$.`,
             choices: [
-                `$s = v \\cdot t$`,
-                `$s = \\dfrac{v}{t}$`,
-                `$s = \\dfrac{t}{v}$`,
                 `$s = v + t$`,
+                `$s = \\dfrac{t}{v}$`,
+                `$s = \\dfrac{v}{t}$`,
+                `$s = v \\cdot t$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Multiplicera båda led med $t$ så att nämnaren försvinner:
 
 $$ v \\cdot t = \\frac{s}{t} \\cdot t \\qquad\\Rightarrow\\qquad s = v \\cdot t $$
@@ -22664,12 +22667,12 @@ $$ a_5 = 3 \\cdot 5 + 2 = 15 + 2 = 17 $$
             level: 1,
             question: `Vad kallas en formel som direkt kan beräkna ett element i en talföljd?`,
             choices: [
-                `Sluten formel`,
                 `Öppen formel`,
-                `Rekursiv formel`,
                 `Ordningsnummer`,
+                `Sluten formel`,
+                `Rekursiv formel`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `En **sluten formel**, till exempel $a_n = 4n - 1$, ger elementet direkt ur ordningsnumret $n$ — utan att man behöver räkna sig fram genom alla tidigare element.
 
 **Svar:** Sluten formel`,
@@ -22678,12 +22681,12 @@ $$ a_5 = 3 \\cdot 5 + 2 = 15 + 2 = 17 $$
             level: 1,
             question: `I talföljden 6, 10, 14, 18, … ökar varje element med 4. Vilken term måste då finnas med i den slutna formeln?`,
             choices: [
-                `$4n$`,
-                `$n + 4$`,
-                `$4^n$`,
                 `$6n$`,
+                `$4n$`,
+                `$4^n$`,
+                `$n + 4$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `När ökningen mellan elementen är konstant lika med 4 måste termen $4n$ finnas med i formeln. Därefter justeras med en konstant: $a_1 = 6$ men $4 \\cdot 1 = 4$, som är 2 för lite — formeln blir $a_n = 4n + 2$.
 
 **Svar:** $4n$`,
@@ -22693,12 +22696,12 @@ $$ a_5 = 3 \\cdot 5 + 2 = 15 + 2 = 17 $$
             level: 2,
             question: `Ange en sluten formel för talföljden 2, 9, 16, 23, …`,
             choices: [
+                `$a_n = 7n - 2$`,
+                `$a_n = 2n + 7$`,
                 `$a_n = 7n - 5$`,
                 `$a_n = 7n + 2$`,
-                `$a_n = 2n + 7$`,
-                `$a_n = 7n - 2$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Varje element ökar med 7, så termen $7n$ ska med:
 
 $$ a_n = 7n $$
@@ -22856,12 +22859,12 @@ $$ \\text{hela} = \\frac{\\text{delen}}{\\text{andelen}} = \\frac{40}{0{,}75} = 
             level: 1,
             question: `Vilken förändringsfaktor motsvarar en ökning med 35 %?`,
             choices: [
-                `1,35`,
-                `0,35`,
                 `1,035`,
+                `0,35`,
                 `0,65`,
+                `1,35`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Lägg ändringen till 100 % och gör om till decimalform:
 
 $$ 100\\ \\% + 35\\ \\% = 135\\ \\% = 1{,}35 $$
@@ -22874,12 +22877,12 @@ $$ 100\\ \\% + 35\\ \\% = 135\\ \\% = 1{,}35 $$
             level: 1,
             question: `Vilken förändringsfaktor motsvarar en minskning med 12 %?`,
             choices: [
-                `0,88`,
                 `1,12`,
-                `0,12`,
                 `0,98`,
+                `0,12`,
+                `0,88`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Dra ändringen från 100 %:
 
 $$ 100\\ \\% - 12\\ \\% = 88\\ \\% = 0{,}88 $$
@@ -22950,12 +22953,12 @@ Priset sänktes alltså med $100\\ \\% - 71{,}4\\ \\% = 28{,}6\\ \\%$.
             level: 1,
             question: `Ett pris höjs först med 10 % och sedan med 20 %. Vilken är den totala förändringsfaktorn?`,
             choices: [
-                `$1{,}10 \\cdot 1{,}20 = 1{,}32$`,
-                `$1{,}30$`,
-                `$1{,}10 + 1{,}20 = 2{,}30$`,
                 `$0{,}88$`,
+                `$1{,}10 + 1{,}20 = 2{,}30$`,
+                `$1{,}30$`,
+                `$1{,}10 \\cdot 1{,}20 = 1{,}32$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vid upprepade förändringar MULTIPLICERAS förändringsfaktorerna:
 
 $$ 1{,}10 \\cdot 1{,}20 = 1{,}32 $$
@@ -23050,12 +23053,12 @@ Efter 6 år är ytan inte riktigt fördubblad (faktor 1,97), men efter 7 år är
             level: 1,
             question: `Vad kallas beloppet som finns på ett sparkonto?`,
             choices: [
-                `Behållning`,
-                `Ränta`,
                 `Amortering`,
                 `Insättning`,
+                `Ränta`,
+                `Behållning`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Beloppet på kontot kallas **behållning**. Räntan är procentsatsen som behållningen växer med varje år, och insättningen är det man sätter in.
 
 **Svar:** Behållning`,
@@ -23074,12 +23077,12 @@ $$ 12\\ 000 \\cdot 1{,}035 = 12\\ 420\\ \\mathrm{kr} $$
             level: 1,
             question: `Vad måste en formel i en kalkylbladscell alltid inledas med?`,
             choices: [
-                `Ett likhetstecken, =`,
                 `Ett dollartecken, $`,
-                `Cellens namn`,
                 `Ordet "formel"`,
+                `Ett likhetstecken, =`,
+                `Cellens namn`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Formler i kalkylblad inleds alltid med =, till exempel \`=B2*B12\`. Utan likhetstecknet tolkas innehållet som vanlig text.
 
 Dollartecknet används för något annat: att "låsa" en cellreferens (till exempel \`$B$12\`) när formeln kopieras.
@@ -23091,12 +23094,12 @@ Dollartecknet används för något annat: att "låsa" en cellreferens (till exem
             level: 2,
             question: `I ett kalkylblad står startbeloppet i B2 och förändringsfaktorn i B12. Cell B3 innehåller \`=B2*B12\` och ska kopieras nedåt med fyllnadshandtaget. Hur ska formeln skrivas för att fungera korrekt?`,
             choices: [
-                `\`=B2*$B$12\` — faktorcellen låses med dollartecken`,
-                `\`=B2*B12\` — precis som den är`,
-                `\`=$B$2*B12\` — startbeloppet låses`,
                 `\`=B3*B12\` — formeln ska peka på sin egen cell`,
+                `\`=$B$2*B12\` — startbeloppet låses`,
+                `\`=B2*B12\` — precis som den är`,
+                `\`=B2*$B$12\` — faktorcellen låses med dollartecken`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `När formeln kopieras nedåt flyttas referenserna med: \`=B2*B12\` blir \`=B3*B13\`, \`=B4*B14\` och så vidare — men förändringsfaktorn ligger BARA i B12. Den referensen måste därför låsas med dollartecken:
 
 \`=B2*$B$12\`
@@ -23144,12 +23147,12 @@ Efter insättning 4: $24\\ 727{,}20 \\cdot 1{,}03 + 8\\ 000 = 33\\ 469{,}02 \\ap
             level: 1,
             question: `Vad kallas det att betala tillbaka själva lånebeloppet?`,
             choices: [
-                `Amortera`,
-                `Betala ränta`,
                 `Sätta in`,
+                `Betala ränta`,
                 `Låna om`,
+                `Amortera`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Att betala tillbaka lånet kallas att **amortera**. Räntan är det man betalar extra — priset för lånet. Varje inbetalning består av amortering + ränta.
 
 **Svar:** Amortera`,
@@ -23201,12 +23204,12 @@ $$ 2\\ 500 + 540 = 3\\ 040\\ \\mathrm{kr} $$
             level: 2,
             question: `I kalkylarket för ett lån står aktuell skuld i B2 och årsräntan är 4,8 %. Vilken formel ger räntan per månad?`,
             choices: [
-                `\`=(B2*0,048)/12\``,
-                `\`=B2*0,048\``,
                 `\`=B2*1,048/12\``,
                 `\`=B2/12\``,
+                `\`=B2*0,048\``,
+                `\`=(B2*0,048)/12\``,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Räntan per månad är årsräntan (4,8 % av aktuell skuld) delad med 12:
 
 \`=(B2*0,048)/12\`
@@ -23220,12 +23223,12 @@ $$ 2\\ 500 + 540 = 3\\ 040\\ \\mathrm{kr} $$
             level: 3,
             question: `Ellens billån: 150 000 kr, rak amortering 2 500 kr/månad i 60 månader, årsränta 4,8 %. Totalt betalar hon 168 300 kr. Hur stor är den TOTALA räntekostnaden — och varför är den mindre än $60 \\cdot 600 = 36\\ 000$ kr (första månadens ränta gånger 60)?`,
             choices: [
-                `18 300 kr — skulden minskar för varje månad, så räntan sjunker från 600 kr mot 10 kr`,
-                `36 000 kr — räntan är 600 kr varje månad`,
-                `18 300 kr — banken ger rabatt vid rak amortering`,
                 `7 200 kr — en årsränta`,
+                `36 000 kr — räntan är 600 kr varje månad`,
+                `18 300 kr — skulden minskar för varje månad, så räntan sjunker från 600 kr mot 10 kr`,
+                `18 300 kr — banken ger rabatt vid rak amortering`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** vid rak amortering räknas räntan varje månad på den AKTUELLA skulden, som hela tiden krymper.
 
 Total räntekostnad = totalt betalt − lånebelopp:
@@ -23277,12 +23280,12 @@ $$ \\text{index} = \\frac{715}{550} \\cdot 100 = 1{,}30 \\cdot 100 = 130 $$
             level: 1,
             question: `KPI var 337,0 år 2020, med 1980 som basår. Vad säger det om prisnivån?`,
             choices: [
-                `Prisnivån år 2020 var 237 % högre än år 1980`,
-                `Prisnivån år 2020 var 337 % högre än år 1980`,
-                `Prisnivån år 2020 var 37 % högre än år 1980`,
                 `Priserna ökade med 337 kr mellan 1980 och 2020`,
+                `Prisnivån år 2020 var 237 % högre än år 1980`,
+                `Prisnivån år 2020 var 37 % högre än år 1980`,
+                `Prisnivån år 2020 var 337 % högre än år 1980`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Basåret 1980 har index 100. Indextalet 337,0 ligger $337 - 100 = 237$ enheter över basåret, så prisnivån var 237 % högre — det som kostade 100 kr år 1980 kostade i genomsnitt 337 kr år 2020.
 
 Den vanligaste felläsningen är att ta hela indextalet som procentuell ökning — men de första 100 enheterna är basårets egen nivå.
@@ -23345,12 +23348,12 @@ Faktorn 0,923 ligger under 1 — köpkraften minskade med $1 - 0{,}9227\\ldots =
             level: 1,
             question: `Vilken diagramtyp passar bäst för att visa hur en aktiekurs har ändrats dag för dag under ett år?`,
             choices: [
-                `Linjediagram`,
-                `Cirkeldiagram`,
                 `Stapeldiagram`,
                 `Frekvenstabell`,
+                `Linjediagram`,
+                `Cirkeldiagram`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Aktiekursen är ett värde som följs **över tid** — då binds mätpunkterna samman med linjer så att utvecklingen syns som en kurva. Cirkeldiagram visar andelar av en helhet och stapeldiagram jämför kategorier; ingen av dem visar ett förlopp i tiden. En frekvenstabell är ingen bild alls.
 
 **Svar:** Linjediagram`,
@@ -23397,12 +23400,12 @@ $$ \\frac{81}{450} = 0{,}18 = 18\\ \\% $$
             level: 2,
             question: `En tidning visar två staplar: 490 och 520 enheter. Diagrammets *y*-axel är avhuggen och börjar vid 480. Vilket påstående stämmer?`,
             choices: [
-                `Den verkliga ökningen är cirka 6 %, men staplarnas höjder får den att se ut som en fyrdubbling`,
                 `Den verkliga ökningen är 300 %, precis som staplarna visar`,
                 `Diagrammet är fel ritat — staplar får aldrig börja vid 480`,
                 `Den verkliga ökningen är 30 %`,
+                `Den verkliga ökningen är cirka 6 %, men staplarnas höjder får den att se ut som en fyrdubbling`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Ovanför brytpunkten 480 blir staplarna $490 - 480 = 10$ respektive $520 - 480 = 40$ enheter höga — den andra ser $\\dfrac{40}{10} = 4$ gånger så hög ut. Den verkliga förändringsfaktorn är
 
 $$ \\frac{520}{490} = 1{,}061\\ldots $$
@@ -23442,12 +23445,12 @@ $$ \\frac{460}{1\\ 000} = 0{,}46 = 46\\ \\% $$
             level: 1,
             question: `Vad kallas skärningspunkten mellan *x*-axeln och *y*-axeln?`,
             choices: [
-                `Origo`,
                 `Koordinat`,
-                `Kvadrant`,
                 `Nollpunkt`,
+                `Kvadrant`,
+                `Origo`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Skärningen mellan axlarna kallas **origo** och har koordinaten (0, 0).
 
 **Svar:** Origo`,
@@ -23470,12 +23473,12 @@ $$ \\frac{460}{1\\ 000} = 0{,}46 = 46\\ \\% $$
             level: 1,
             question: `En laddstation tar 30 kr i startavgift och 5 kr per kWh. Vilken formel beskriver kostnaden $y$ kr för $x$ kWh?`,
             choices: [
+                `$y = 35x$`,
                 `$y = 30 + 5x$`,
                 `$y = 5 + 30x$`,
-                `$y = 35x$`,
                 `$y = 30 \\cdot 5x$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Den fasta avgiften 30 kr är konstanttermen och 5 kr multipliceras med varje kWh:
 
 $$ y = 30 + 5x $$
@@ -23487,12 +23490,12 @@ $$ y = 30 + 5x $$
             level: 2,
             question: `Den linjära modellen $y = 500 + 400x$ beskriver kostnaden hos en bilverkstad. Vad betyder talet 400 i modellen?`,
             choices: [
-                `Kostnaden ökar med 400 kr för varje arbetad timme`,
-                `Den fasta avgiften är 400 kr`,
                 `Reparationen tar högst 400 minuter`,
+                `Den fasta avgiften är 400 kr`,
                 `Kostnaden är alltid minst 400 kr`,
+                `Kostnaden ökar med 400 kr för varje arbetad timme`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Talet 400 är koefficienten framför $x$ — det anger hur mycket $y$ ökar när $x$ ökar med 1, alltså kostnaden per timme. Den fasta avgiften är konstanttermen 500 kr.
 
 **Svar:** Kostnaden ökar med 400 kr per arbetad timme.`,
@@ -23512,12 +23515,12 @@ $$ y = 200 + 150 \\cdot 6 = 200 + 900 = 1\\ 100 $$
             level: 3,
             question: `Punkterna (1, 700), (2, 950) och (3, 1 200) ligger på grafen till en linjär modell $y = a + bx$. Vilken är modellen?`,
             choices: [
-                `$y = 450 + 250x$`,
-                `$y = 700 + 250x$`,
                 `$y = 250 + 450x$`,
                 `$y = 700 + 500x$`,
+                `$y = 450 + 250x$`,
+                `$y = 700 + 250x$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** i en linjär modell är ökningen per steg konstant — den syns direkt i tabellen, och konstanttermen fås genom att "backa" till $x = 0$.
 
 Från $x = 1$ till $x = 2$ ökar $y$ med $950 - 700 = 250$, och från 2 till 3 med $1\\ 200 - 950 = 250$. Ökningen per steg är alltså $b = 250$.
@@ -23554,12 +23557,12 @@ Kontroll: $x = 3$ ger $450 + 750 = 1\\ 200$ — stämmer!
             level: 1,
             question: `Bananer kostar 24 kr/kg. Vilken formel beskriver kostnaden $y$ kr för $x$ kg bananer?`,
             choices: [
-                `$y = 24x$`,
-                `$y = 24 + x$`,
-                `$y = \\dfrac{24}{x}$`,
                 `$y = x + 24x$`,
+                `$y = \\dfrac{24}{x}$`,
+                `$y = 24 + x$`,
+                `$y = 24x$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Priset är proportionellt mot vikten — ingen startavgift finns:
 
 $$ y = 24x $$
@@ -23583,12 +23586,12 @@ $$ k = \\frac{y}{x} = \\frac{84}{12} = 7 $$
             level: 2,
             question: `Vilken av följande värdetabeller visar en proportionalitet?`,
             choices: [
-                `$x$: 2, 4, 6 — $y$: 5, 10, 15`,
                 `$x$: 2, 4, 6 — $y$: 7, 9, 11`,
-                `$x$: 2, 4, 6 — $y$: 4, 16, 36`,
                 `$x$: 2, 4, 6 — $y$: 10, 10, 10`,
+                `$x$: 2, 4, 6 — $y$: 4, 16, 36`,
+                `$x$: 2, 4, 6 — $y$: 5, 10, 15`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `I en proportionalitet är förhållandet $\\dfrac{y}{x}$ konstant:
 
 $$ \\frac{5}{2} = 2{,}5 \\qquad \\frac{10}{4} = 2{,}5 \\qquad \\frac{15}{6} = 2{,}5 $$
@@ -23652,12 +23655,12 @@ Raden ger koordinaten (−2, 7).
             level: 1,
             question: `Raden $x = 4$, $y = -5$ i en värdetabell motsvarar en punkt i koordinatsystemet. Vilken?`,
             choices: [
+                `$(-4, -5)$`,
                 `$(4, -5)$`,
                 `$(-5, 4)$`,
                 `$(4, 5)$`,
-                `$(-4, -5)$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Varje rad i värdetabellen är en koordinat med *x*-värdet först och *y*-värdet sist: (4, −5).
 
 **Svar:** $(4, -5)$`,
@@ -23734,12 +23737,12 @@ Kontroll mot linjen: linjen genom (1, 1) och (2, −1) har lutningen −2 och pa
             level: 1,
             question: `Vad motsvarar $m$-värdet i räta linjens ekvation $y = kx + m$?`,
             choices: [
-                `Linjens skärning med *y*-axeln`,
-                `Linjens lutning`,
-                `Linjens skärning med *x*-axeln`,
                 `Linjens längd`,
+                `Linjens lutning`,
+                `Linjens skärning med *y*-axeln`,
+                `Linjens skärning med *x*-axeln`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `$m$-värdet är linjens skärning med *y*-axeln (*y*-intercept) — i linjära modeller "startvärdet". Lutningen är $k$-värdet.
 
 **Svar:** Linjens skärning med *y*-axeln.`,
@@ -23748,12 +23751,12 @@ Kontroll mot linjen: linjen genom (1, 1) och (2, −1) har lutningen −2 och pa
             level: 1,
             question: `En linje har lutningen 4 och skär *y*-axeln i (0, −2). Vilken är linjens ekvation?`,
             choices: [
-                `$y = 4x - 2$`,
                 `$y = -2x + 4$`,
                 `$y = 4x + 2$`,
                 `$y = 2x - 4$`,
+                `$y = 4x - 2$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Sätt in $k = 4$ och $m = -2$ i räta linjens ekvation $y = kx + m$:
 
 $$ y = 4x - 2 $$
@@ -23804,12 +23807,12 @@ $$ y = -\\frac{1}{2} \\cdot 8 + 7 = -4 + 7 = 3 $$
             level: 3,
             question: `En linje går genom punkterna (3, 5) och (7, 13). Bestäm linjens ekvation. Vilken är den?`,
             choices: [
+                `$y = \\dfrac{1}{2}x + 3{,}5$`,
                 `$y = 2x - 1$`,
                 `$y = 2x + 5$`,
-                `$y = \\dfrac{1}{2}x + 3{,}5$`,
                 `$y = 2x + 1$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** när ingen av punkterna ligger på *y*-axeln fås $m$ inte direkt ur grafen — det måste räknas fram ur $k$ och en känd punkt.
 
 **Steg 1 — bestäm $k$** med trappstegsmetoden:
@@ -23860,12 +23863,12 @@ $$ k = 5 $$
             level: 1,
             question: `Vilken formel ger riktningskoefficienten ur två punkter $(x_1, y_1)$ och $(x_2, y_2)$?`,
             choices: [
-                `$k = \\dfrac{y_2 - y_1}{x_2 - x_1}$`,
-                `$k = \\dfrac{x_2 - x_1}{y_2 - y_1}$`,
                 `$k = \\dfrac{y_2 + y_1}{x_2 + x_1}$`,
+                `$k = \\dfrac{x_2 - x_1}{y_2 - y_1}$`,
+                `$k = \\dfrac{y_2 - y_1}{x_2 - x_1}$`,
                 `$k = (y_2 - y_1)(x_2 - x_1)$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Riktningskoefficienten är förändringen i *y*-led delat med förändringen i *x*-led:
 
 $$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{y_2 - y_1}{x_2 - x_1} $$
@@ -23904,12 +23907,12 @@ $$ m = 11 $$
             level: 3,
             question: `Bestäm ekvationen för linjen genom punkterna (−2, 9) och (4, −9). Vilken är den?`,
             choices: [
-                `$y = -3x + 3$`,
-                `$y = -3x + 9$`,
                 `$y = 3x + 15$`,
                 `$y = -\\dfrac{1}{3}x + 3$`,
+                `$y = -3x + 9$`,
+                `$y = -3x + 3$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** hela kedjan i ett svep — $k$ ur tvåpunktsformeln, $m$ ur insättning av en punkt.
 
 **Steg 1 — riktningskoefficienten:**
@@ -23938,12 +23941,12 @@ Kontroll med andra punkten: $y = -3 \\cdot 4 + 3 = -9$ — stämmer!
             level: 1,
             question: `Vilken av följande linjer är parallell med $y = 4x + 2$?`,
             choices: [
-                `$y = 4x - 7$`,
-                `$y = -4x + 2$`,
                 `$y = 2x + 4$`,
+                `$y = 4x - 7$`,
                 `$y = \\dfrac{1}{4}x + 2$`,
+                `$y = -4x + 2$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Parallella linjer har samma $k$-värde. Bara $y = 4x - 7$ har $k = 4$ — $m$-värdet får vara olika.
 
 **Svar:** $y = 4x - 7$`,
@@ -23970,12 +23973,12 @@ $$ x = 5 $$
             level: 1,
             question: `Skriv $y = 2x + 7$ i allmän form.`,
             choices: [
-                `$2x - y + 7 = 0$`,
-                `$2x + y + 7 = 0$`,
                 `$y - 2x = 7$`,
+                `$2x - y + 7 = 0$`,
                 `$2x - y = -7$`,
+                `$2x + y + 7 = 0$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Samla alla termer i ena ledet. Subtrahera $y$ från båda led:
 
 $$ 0 = 2x - y + 7 $$
@@ -24091,12 +24094,12 @@ $$ g(-3) = 10 - 2 \\cdot (-3) = 10 + 6 = 16 $$
             level: 2,
             question: `Låt $f(x) = 5x - 3$. Vilket uttryck är $f(2a)$?`,
             choices: [
-                `$10a - 3$`,
-                `$5a - 3$`,
                 `$10a - 6$`,
                 `$2a \\cdot 5x - 3$`,
+                `$5a - 3$`,
+                `$10a - 3$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Byt ut alla $x$ mot $2a$ och förenkla:
 
 $$ f(2a) = 5 \\cdot 2a - 3 = 10a - 3 $$
@@ -24148,12 +24151,12 @@ Ali har i och för sig rätt i att varje y ger exakt ett x — så $x$ ÄR en fu
             level: 1,
             question: `Vid grafisk lösning av ekvationen $2x - 1 = x + 4$ ritas två linjer. Vad ger lösningen?`,
             choices: [
-                `Skärningspunktens *x*-koordinat`,
+                `Avståndet mellan linjerna`,
                 `Skärningspunktens *y*-koordinat`,
                 `Linjernas *k*-värden`,
-                `Avståndet mellan linjerna`,
+                `Skärningspunktens *x*-koordinat`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Rita $y = 2x - 1$ och $y = x + 4$; där graferna skär varandra är VL = HL. Lösningen är skärningspunktens ***x*-koordinat** (här $x = 5$; *y*-koordinaten 9 är bara ledens gemensamma värde).
 
 **Svar:** Skärningspunktens *x*-koordinat`,
@@ -24174,12 +24177,12 @@ Kontroll: $3 \\cdot 2 - 5 = 1$ och $-2 + 3 = 1$ — båda led lika.
             level: 1,
             question: `Hur skrivs talet 7,5 när det matas in i GeoGebra?`,
             choices: [
-                `7.5`,
+                `75/10 måste alltid användas`,
                 `7,5`,
                 `7:5`,
-                `75/10 måste alltid användas`,
+                `7.5`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `GeoGebra använder decimalpunkt i stället för decimalkomma: 7,5 skrivs \`7.5\`.
 
 **Svar:** 7.5`,
@@ -24189,12 +24192,12 @@ Kontroll: $3 \\cdot 2 - 5 = 1$ och $-2 + 3 = 1$ — båda led lika.
             level: 2,
             question: `Du ska lösa $s = 90t - 30$ och $s = 60t + 45$ grafiskt i GeoGebra. Vad måste du göra med ekvationerna först?`,
             choices: [
-                `Byta variablerna till x och y: \`y = 90x - 30\` och \`y = 60x + 45\``,
-                `Ingenting — GeoGebra förstår alla variabelnamn i grafiska lösningar`,
                 `Multiplicera båda ekvationerna med 10`,
+                `Ingenting — GeoGebra förstår alla variabelnamn i grafiska lösningar`,
                 `Skriva om dem i allmän form`,
+                `Byta variablerna till x och y: \`y = 90x - 30\` och \`y = 60x + 45\``,
             ],
-            correct: 0,
+            correct: 3,
             solution: `I grafiska lösningar förstår GeoGebra bara variablerna $x$ och $y$. Ekvationerna skrivs därför om: $t \\to x$ och $s \\to y$.
 
 (Lösningen blir sedan skärningspunktens *x*-koordinat: $90x - 30 = 60x + 45$ ger $x = 2{,}5$.)
@@ -24276,12 +24279,12 @@ Kontroll av rätt svar: $x = 3$ ger $4 \\cdot 3 - 2 = 10 = 3 + 7$ — stämmer. 
             level: 1,
             question: `En parkering kostar 20 kr per påbörjad timme, i högst 8 timmar. Kostnaden är $y = 20x$. Vilken är definitionsmängden?`,
             choices: [
-                `$0 \\leq x \\leq 8$`,
                 `$0 \\leq y \\leq 160$`,
+                `$0 \\leq x \\leq 8$`,
                 `$x \\geq 0$`,
                 `$0 < x < 20$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Definitionsmängden är de tillåtna *x*-värdena (antalet timmar): minst 0 och högst 8:
 
 $$ 0 \\leq x \\leq 8 $$
@@ -24295,12 +24298,12 @@ $$ 0 \\leq x \\leq 8 $$
             level: 2,
             question: `Funktionen $y = 50x$ har definitionsmängden $0 \\leq x \\leq 12$. Vilken är värdemängden?`,
             choices: [
-                `$0 \\leq y \\leq 600$`,
                 `$0 \\leq y \\leq 12$`,
-                `$50 \\leq y \\leq 600$`,
+                `$0 \\leq y \\leq 600$`,
                 `$y \\geq 0$`,
+                `$50 \\leq y \\leq 600$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Minsta *y*-värdet fås vid $x = 0$: $y = 50 \\cdot 0 = 0$. Största vid $x = 12$: $y = 50 \\cdot 12 = 600$:
 
 $$ 0 \\leq y \\leq 600 $$
@@ -24311,12 +24314,12 @@ $$ 0 \\leq y \\leq 600 $$
             level: 2,
             question: `En graf börjar med en tom ring i (−3, 1) och slutar med en ifylld punkt i (5, 7), och däremellan stiger den hela tiden. Vilken är definitionsmängden?`,
             choices: [
-                `$-3 < x \\leq 5$`,
-                `$-3 \\leq x \\leq 5$`,
                 `$-3 < x < 5$`,
+                `$-3 \\leq x \\leq 5$`,
                 `$1 < y \\leq 7$`,
+                `$-3 < x \\leq 5$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Tom ring vid $x = -3$ ger strikt olikhet ($x > -3$); ifylld punkt vid $x = 5$ ger $x \\leq 5$:
 
 $$ -3 < x \\leq 5 $$
@@ -24330,12 +24333,12 @@ $$ -3 < x \\leq 5 $$
             level: 3,
             question: `Funktionen $f(x) = 4 - x^2$ har definitionsmängden $-1 < x \\leq 2$. Malte resonerar: "Värdemängden får jag genom att sätta in ändpunkterna: $f(-1) = 3$ och $f(2) = 0$, alltså $0 \\leq y < 3$." Vad missar Malte?`,
             choices: [
-                `Funktionens topp ligger INUTI intervallet: $f(0) = 4$, så värdemängden är $0 \\leq y \\leq 4$`,
                 `Ingenting — värdemängden är $0 \\leq y < 3$`,
                 `Att båda ändpunkterna alltid ingår i värdemängden`,
                 `Att värdemängden alltid är samma som definitionsmängden`,
+                `Funktionens topp ligger INUTI intervallet: $f(0) = 4$, så värdemängden är $0 \\leq y \\leq 4$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** ändpunkterna räcker bara när funktionen är växande eller avtagande i HELA intervallet — en topp eller dal inuti kan ge större eller mindre värden.
 
 $f(x) = 4 - x^2$ har sitt största värde i $x = 0$ (mitt i intervallet):
@@ -24390,12 +24393,12 @@ $$ K(x) = 8\\ 000 \\cdot 1{,}03^x $$
             level: 1,
             question: `I funktionen $y = Ca^x$ — vad står $C$ för?`,
             choices: [
-                `Det ursprungliga värdet`,
                 `Förändringsfaktorn`,
                 `Tiden`,
+                `Det ursprungliga värdet`,
                 `Värdet efter en viss tid`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `$C$ är det ursprungliga värdet (startvärdet), $a$ är förändringsfaktorn, $x$ är tiden och $y$ är värdet efter en viss tid.
 
 **Svar:** Det ursprungliga värdet`,
@@ -24405,12 +24408,12 @@ $$ K(x) = 8\\ 000 \\cdot 1{,}03^x $$
             level: 2,
             question: `Antalet bakterier i en odling ges av $N(t) = 500 \\cdot 1{,}12^t$ där $t$ är tiden i timmar. Vad beskriver funktionen?`,
             choices: [
+                `112 bakterier från början som ökar med 500 % per timme`,
                 `500 bakterier från början som ökar med 12 % per timme`,
                 `500 bakterier från början som ökar med 1,12 % per timme`,
-                `112 bakterier från början som ökar med 500 % per timme`,
                 `500 bakterier som minskar med 12 % per timme`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Jämför med $y = Ca^x$: $C = 500$ (ursprungligt antal) och $a = 1{,}12$, som motsvarar $100\\ \\% + 12\\ \\% $ — en ökning med 12 % per timme.
 
 **Svar:** 500 bakterier från början, ökning 12 % per timme.`,
@@ -24438,7 +24441,7 @@ $$ V(5) = 240\\ 000 \\cdot 0{,}80^5 = 240\\ 000 \\cdot 0{,}32768 = 78\\ 643{,}2 
             correct: 0,
             solution: `**Insikten:** punkten vid $x = 0$ avslöjar $C$ direkt (eftersom $a^0 = 1$), och en andra punkt bestämmer $a$.
 
-Vid $x = 0$: $y = C \\cdot a^0 = C = 4$. Alltså är $C = 4$ — de två sista alternativen faller direkt.
+Vid $x = 0$: $y = C \\cdot a^0 = C = 4$. Alltså är $C = 4$, och alternativen som börjar med 25 och 2,5 faller direkt.
 
 Testa (2, 25) i $y = 4 \\cdot a^2$:
 
@@ -24458,12 +24461,12 @@ Kontroll: $4 \\cdot 2{,}5^2 = 4 \\cdot 6{,}25 = 25$ — stämmer! ($4 \\cdot 1{,
             level: 1,
             question: `Vilken av följande är en potensfunktion?`,
             choices: [
-                `$f(x) = 5x^3$`,
                 `$f(x) = 5 \\cdot 3^x$`,
-                `$f(x) = 3x + 5$`,
+                `$f(x) = 5x^3$`,
                 `$f(x) = 5$`,
+                `$f(x) = 3x + 5$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `I en potensfunktion $f(x) = Cx^a$ är variabeln i **basen**: $5x^3$ passar med $C = 5$ och $a = 3$.
 
 $5 \\cdot 3^x$ har variabeln i exponenten — en exponentialfunktion.
@@ -24513,12 +24516,12 @@ $$ x = \\pm\\sqrt[6]{40} = \\pm 40^{1/6} = \\pm 1{,}849\\ldots \\approx \\pm 1{,
             level: 2,
             question: `Vilken graf hör till $y = \\dfrac{1}{x}$?`,
             choices: [
-                `En hyperbel med två grenar som närmar sig axlarna utan att röra dem`,
+                `En kurva som startar i origo och stiger allt flackare`,
                 `En parabel med botten i origo`,
                 `En rät linje genom origo`,
-                `En kurva som startar i origo och stiger allt flackare`,
+                `En hyperbel med två grenar som närmar sig axlarna utan att röra dem`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `$y = x^{-1} = \\dfrac{1}{x}$ ger en hyperbel: en gren i första kvadranten och en i tredje. Kurvan är odefinierad för $x = 0$ och närmar sig axlarna utan att nå dem.
 
 (Parabeln är $y = x^2$, och kurvan från origo är $y = \\sqrt{x}$.)
@@ -24556,12 +24559,12 @@ $$ f(g(4)) = f(144) = 144^{1/2} = \\sqrt{144} = 12 $$
             level: 1,
             question: `Vad kallas det när man samlar in data från en HEL population?`,
             choices: [
+                `Bortfall`,
+                `Systematiskt urval`,
                 `Totalundersökning`,
                 `Stickprovsundersökning`,
-                `Systematiskt urval`,
-                `Bortfall`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Undersöks hela populationen är det en **totalundersökning** — exakt men tidskrävande. Undersöks bara en del är det en **stickprovsundersökning**.
 
 **Svar:** Totalundersökning`,
@@ -24570,12 +24573,12 @@ $$ f(g(4)) = f(144) = 144^{1/2} = \\sqrt{144} = 12 $$
             level: 1,
             question: `Elin väljer var femte namn från en klasslista till sin undersökning. Vilken urvalsmetod använder hon?`,
             choices: [
-                `Systematiskt urval`,
-                `Obundet slumpmässigt urval`,
                 `Stratifierat urval`,
+                `Obundet slumpmässigt urval`,
+                `Systematiskt urval`,
                 `Totalundersökning`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Ett fast system ("var femte") är ett **systematiskt urval**. Observera att det INTE är slumpmässigt, om inte listans ordning slumpats i förväg.
 
 **Svar:** Systematiskt urval`,
@@ -24644,12 +24647,12 @@ $$ \\frac{360 + 160}{800} = \\frac{520}{800} = 0{,}65 = 65\\ \\% $$
             level: 1,
             question: `Vad kallas intervallet som fås när resultatet av en undersökning anges tillsammans med sin felmarginal?`,
             choices: [
-                `Konfidensintervall`,
-                `Definitionsmängd`,
                 `Signifikansnivå`,
+                `Definitionsmängd`,
+                `Konfidensintervall`,
                 `Stickprov`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Resultatet ± felmarginalen ger **konfidensintervallet** — det intervall som det verkliga värdet med 95 % säkerhet ligger i.
 
 **Svar:** Konfidensintervall`,
@@ -24658,12 +24661,12 @@ $$ \\frac{360 + 160}{800} = \\frac{520}{800} = 0{,}65 = 65\\ \\% $$
             level: 1,
             question: `En undersökning ger resultatet 40 % med felmarginalen 5 %. Vilket är konfidensintervallet?`,
             choices: [
-                `Mellan 35 % och 45 %`,
                 `Mellan 40 % och 45 %`,
+                `Mellan 35 % och 45 %`,
                 `Mellan 30 % och 50 %`,
                 `Exakt 40 %`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Konfidensintervallet är resultatet ± felmarginalen:
 
 $$ 40\\ \\% - 5\\ \\% = 35\\ \\% \\qquad 40\\ \\% + 5\\ \\% = 45\\ \\% $$
@@ -24697,12 +24700,12 @@ Jämför med genomgångens exempel ($n = 100$ gav 9,6 %) — fyra gånger fler t
             level: 2,
             question: `Ett parti fick 8,2 % i en väljarundersökning med felmarginalen 1,1 procentenheter. I nästa mätning fick partiet 9,0 %. Är ökningen statistiskt säkerställd?`,
             choices: [
-                `Nej — 9,0 % ligger inom konfidensintervallet 7,1–9,3 %`,
-                `Ja — 9,0 % är större än 8,2 %`,
-                `Ja — alla förändringar över 0,5 procentenheter är signifikanta`,
                 `Nej — opinionsmätningar kan aldrig säkerställas`,
+                `Ja — 9,0 % är större än 8,2 %`,
+                `Nej — 9,0 % ligger inom konfidensintervallet 7,1–9,3 %`,
+                `Ja — alla förändringar över 0,5 procentenheter är signifikanta`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Konfidensintervallet kring första mätningen är $8{,}2\\ \\% \\pm 1{,}1\\ \\%$, det vill säga 7,1 % till 9,3 %. Det nya värdet 9,0 % ligger INOM intervallet — förändringen kan bero på slumpen.
 
 **Svar:** Nej — förändringen är inte statistiskt säkerställd.`,
@@ -24738,12 +24741,12 @@ Rimlighetskoll med skalningen: $\\dfrac{9{,}6}{2{,}4} = 4$, och $4^2 = 16$ gång
             level: 1,
             question: `Vilket diagram används för att undersöka om det finns en korrelation mellan två variabler?`,
             choices: [
-                `Spridningsdiagram`,
                 `Cirkeldiagram`,
-                `Stapeldiagram`,
                 `Träddiagram`,
+                `Stapeldiagram`,
+                `Spridningsdiagram`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `I ett **spridningsdiagram** prickas värdeparen in som punkter — mönstret avslöjar om (och hur starkt) variablerna samvarierar.
 
 **Svar:** Spridningsdiagram`,
@@ -24752,12 +24755,12 @@ Rimlighetskoll med skalningen: $\\dfrac{9{,}6}{2{,}4} = 4$, och $4^2 = 16$ gång
             level: 1,
             question: `Punkterna i ett spridningsdiagram ligger tydligt samlade på en linje med negativ lutning. Vilken korrelation råder?`,
             choices: [
-                `Stark negativ korrelation`,
-                `Svag negativ korrelation`,
                 `Stark positiv korrelation`,
+                `Svag negativ korrelation`,
+                `Stark negativ korrelation`,
                 `Ingen korrelation`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Tydligt på en linje = **stark**; negativ lutning = **negativ**. Alltså stark negativ korrelation.
 
 **Svar:** Stark negativ korrelation`,
@@ -24766,12 +24769,12 @@ Rimlighetskoll med skalningen: $\\dfrac{9{,}6}{2{,}4} = 4$, och $4^2 = 16$ gång
             level: 1,
             question: `Vad betyder **kausalitet**?`,
             choices: [
-                `Ett orsakssamband mellan två variabler`,
-                `Att punkterna ligger på en rät linje`,
                 `Att två variabler är oberoende`,
                 `Att korrelationen är svag`,
+                `Att punkterna ligger på en rät linje`,
+                `Ett orsakssamband mellan två variabler`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Kausalitet betyder att den ena variabeln ORSAKAR förändringen i den andra — som att mammans gener (delvis) avgör dotterns längd.
 
 **Svar:** Ett orsakssamband mellan två variabler.`,
@@ -24781,12 +24784,12 @@ Rimlighetskoll med skalningen: $\\dfrac{9{,}6}{2{,}4} = 4$, och $4^2 = 16$ gång
             level: 2,
             question: `Antalet sålda glassar och antalet drunkningsolyckor samvarierar starkt över året. Vad är den bästa tolkningen?`,
             choices: [
-                `Ett skensamband — båda orsakas av en tredje variabel (varmt väder)`,
-                `Glassätande orsakar drunkningsolyckor`,
                 `Drunkningsolyckor orsakar glassförsäljning`,
+                `Glassätande orsakar drunkningsolyckor`,
                 `Korrelationen bevisar kausalitet`,
+                `Ett skensamband — båda orsakas av en tredje variabel (varmt väder)`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Korrelationen är verklig men kausaliteten saknas — varmt väder får BÅDE glassförsäljningen och badandet (och därmed olyckorna) att öka. Ett klassiskt **skensamband** med en bakomliggande tredje variabel.
 
 **Svar:** Ett skensamband — båda orsakas av varmt väder.`,
@@ -24812,12 +24815,12 @@ Skostorlek/ordförråd hos barn samvarierar (båda växer med åldern) men är e
             level: 3,
             question: `En studie visar stark positiv korrelation mellan antal brandbilar på plats och skadekostnaden vid bränder. Kalle drar slutsatsen: "Skicka färre brandbilar, så minskar skadorna!" Vad är felet i resonemanget?`,
             choices: [
-                `Korrelationen beror på en tredje variabel — brandens storlek styr både antalet brandbilar och skadorna`,
-                `Inget fel — färre brandbilar ger mindre skador`,
-                `Studien borde ha använt cirkeldiagram`,
                 `Korrelationen är negativ, inte positiv`,
+                `Korrelationen beror på en tredje variabel — brandens storlek styr både antalet brandbilar och skadorna`,
+                `Studien borde ha använt cirkeldiagram`,
+                `Inget fel — färre brandbilar ger mindre skador`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** korrelation säger inget om RIKTNINGEN på ett orsakssamband — eller om det ens finns ett.
 
 Den bakomliggande variabeln är brandens storlek: stora bränder får både fler brandbilar OCH större skador. Brandbilarna orsakar inte skadorna — de och skadorna har en gemensam orsak.
@@ -24836,12 +24839,12 @@ Kalles åtgärd skulle testa kausaliteten åt fel håll: att minska antalet bran
             level: 1,
             question: `Vad är sannolikheten att slå en sexa med en vanlig tärning? Svara i bråkform.`,
             choices: [
-                `$\\dfrac{1}{6}$`,
-                `$\\dfrac{1}{2}$`,
                 `$\\dfrac{5}{6}$`,
+                `$\\dfrac{1}{2}$`,
+                `$\\dfrac{1}{6}$`,
                 `$6$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Ett gynnsamt utfall (sexan) av sex möjliga:
 
 $$ P(\\text{sexa}) = \\frac{1}{6} $$
@@ -24866,12 +24869,12 @@ $$ P(\\text{sexa}) = \\frac{1}{6} $$
             level: 1,
             question: `Vad är sannolikheten att dra ett ess ur en kortlek med 52 kort? Svara i bråkform.`,
             choices: [
-                `$\\dfrac{1}{13}$`,
                 `$\\dfrac{1}{52}$`,
                 `$\\dfrac{4}{13}$`,
                 `$\\dfrac{1}{4}$`,
+                `$\\dfrac{1}{13}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Fyra gynnsamma utfall (esset i varje färg) av 52 möjliga:
 
 $$ P(\\text{ess}) = \\frac{4}{52} = \\frac{1}{13} $$
@@ -24912,12 +24915,12 @@ $$ P(\\text{inte gul}) = \\frac{12}{20} = 0{,}6 = 60\\ \\% $$
             level: 3,
             question: `Du singlar två mynt. Leia säger: "Det finns tre utfall — två kronor, två klavar eller en av varje — så sannolikheten för en av varje är $\\dfrac{1}{3}$." Vad är rätt sannolikhet för en krona och en klave?`,
             choices: [
-                `$\\dfrac{1}{2}$ — utfallsrummet har fyra lika sannolika utfall, varav två ger en av varje`,
                 `$\\dfrac{1}{3}$ — Leia har rätt`,
+                `$\\dfrac{1}{2}$ — utfallsrummet har fyra lika sannolika utfall, varav två ger en av varje`,
                 `$\\dfrac{1}{4}$`,
                 `$\\dfrac{2}{3}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** den klassiska definitionen kräver att utfallen är LIKA SANNOLIKA — Leias tre "utfall" är det inte.
 
 Rita utfallsrummet med mynten åtskilda (mynt 1, mynt 2):
@@ -25002,12 +25005,12 @@ $$ P(\\text{pojke}) = \\frac{2\\ 489}{4\\ 850} = 0{,}5132\\ldots \\approx 51{,}3
             level: 3,
             question: `Elvin kastar ett mynt 10 gånger och får 7 kronor. Han säger: "Myntet är skevt — sannolikheten för krona är 70 %!" Vad är den viktigaste invändningen?`,
             choices: [
-                `10 kast är alldeles för få — den relativa frekvensen varierar kraftigt vid små försöksantal`,
                 `Han har rätt — relativ frekvens är alltid sannolikheten`,
                 `Mynt kan aldrig vara skeva`,
+                `10 kast är alldeles för få — den relativa frekvensen varierar kraftigt vid små försöksantal`,
                 `Sannolikheten för krona kan aldrig vara något annat än exakt 50 %`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** relativ frekvens närmar sig sannolikheten först vid MÅNGA försök — små stickprov svänger vilt.
 
 Jämför med straffexemplet i genomgången: efter 1 straff var frekvensen 100 %, efter 5 straffar 40 %, och först efter många försök stabiliserades den kring 70 %. Med bara 10 myntkast är 7 kronor inget konstigt alls — det inträffar för ett ärligt mynt i drygt 11 % av serierna.
@@ -25026,12 +25029,12 @@ Vill Elvin påstå att myntet är skevt behöver han många fler kast (hundratal
             level: 1,
             question: `Vad är sannolikheten att få krona två gånger i rad vid slantsingling? Svara i bråkform.`,
             choices: [
-                `$\\dfrac{1}{4}$`,
-                `$\\dfrac{1}{2}$`,
-                `$\\dfrac{1}{8}$`,
                 `$1$`,
+                `$\\dfrac{1}{8}$`,
+                `$\\dfrac{1}{2}$`,
+                `$\\dfrac{1}{4}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Singlingarna är oberoende — produktregeln ger
 
 $$ P(\\text{två kronor}) = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4} $$
@@ -25042,12 +25045,12 @@ $$ P(\\text{två kronor}) = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4} $$
             level: 1,
             question: `Vilket av följande är ett exempel på OBEROENDE händelser?`,
             choices: [
-                `Två tärningskast efter varandra`,
                 `Att dra två kort ur en kortlek utan återläggning`,
-                `Att dra två kulor ur en skål utan återläggning`,
+                `Två tärningskast efter varandra`,
                 `Att välja två elever ur en klass till samma grupp`,
+                `Att dra två kulor ur en skål utan återläggning`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Tärningen har "inget minne" — sannolikheten $\\dfrac{1}{6}$ för en sexa är densamma i varje kast. Dragningar UTAN återläggning är däremot beroende: det som dras först ändrar förutsättningarna.
 
 **Svar:** Två tärningskast efter varandra.`,
@@ -25077,12 +25080,12 @@ $$ P(\\text{två gröna}) = \\frac{5}{8} \\cdot \\frac{4}{7} = \\frac{20}{56} = 
             level: 2,
             question: `Vad är sannolikheten att slå tre sexor i rad med en tärning? Svara i bråkform.`,
             choices: [
-                `$\\dfrac{1}{216}$`,
-                `$\\dfrac{1}{18}$`,
                 `$\\dfrac{3}{6}$`,
+                `$\\dfrac{1}{18}$`,
+                `$\\dfrac{1}{216}$`,
                 `$\\dfrac{1}{36}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Tre oberoende kast:
 
 $$ \\left(\\frac{1}{6}\\right)^3 = \\frac{1}{216} $$
@@ -25096,12 +25099,12 @@ $\\dfrac{1}{18}$ vore $3 \\cdot \\dfrac{1}{6} \\cdot \\dfrac{1}{6}$... sannolikh
             level: 3,
             question: `Ur en kortlek (52 kort, 4 ess) drar du två kort utan återläggning. Vad är sannolikheten att BÅDA är ess? Svara i bråkform.`,
             choices: [
-                `$\\dfrac{1}{221}$`,
-                `$\\dfrac{1}{169}$`,
                 `$\\dfrac{2}{52}$`,
                 `$\\dfrac{1}{2\\ 652}$`,
+                `$\\dfrac{1}{221}$`,
+                `$\\dfrac{1}{169}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** utan återläggning ändras BÅDE täljare och nämnare till andra dragningen.
 
 Första kortet: $P(\\text{ess}) = \\dfrac{4}{52}$.
@@ -25126,12 +25129,12 @@ $$ \\frac{4}{52} \\cdot \\frac{3}{51} = \\frac{12}{2\\ 652} = \\frac{1}{221} $$
             level: 1,
             question: `Hur beräknas sannolikheten för EN kombination (en gren) i ett träddiagram?`,
             choices: [
-                `Multiplicera sannolikheterna längs grenen`,
                 `Addera sannolikheterna längs grenen`,
                 `Ta den största sannolikheten på grenen`,
+                `Multiplicera sannolikheterna längs grenen`,
                 `Dividera sannolikheterna med varandra`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Sannolikheten för en kombination fås genom att **multiplicera** sannolikheterna längs med den grenen — till exempel $\\dfrac{7}{10} \\cdot \\dfrac{7}{10} = \\dfrac{49}{100}$ för svart–svart med återläggning.
 
 **Svar:** Multiplicera sannolikheterna längs grenen.`,
@@ -25140,12 +25143,12 @@ $$ \\frac{4}{52} \\cdot \\frac{3}{51} = \\frac{12}{2\\ 652} = \\frac{1}{221} $$
             level: 1,
             question: `I en låda ligger 7 svarta och 3 vita strumpor. Du drar en svart strumpa och lägger INTE tillbaka den. Vilken sannolikhet gäller för att nästa strumpa också är svart?`,
             choices: [
-                `$\\dfrac{6}{9}$`,
-                `$\\dfrac{7}{10}$`,
                 `$\\dfrac{7}{9}$`,
+                `$\\dfrac{7}{10}$`,
+                `$\\dfrac{6}{9}$`,
                 `$\\dfrac{6}{10}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Utan återläggning finns 6 svarta kvar av 9 strumpor totalt:
 
 $$ P(\\text{svart efter svart}) = \\frac{6}{9} $$
@@ -25156,12 +25159,12 @@ $$ P(\\text{svart efter svart}) = \\frac{6}{9} $$
             level: 1,
             question: `Vad gör man när FLERA grenar i träddiagrammet ger den sökta händelsen?`,
             choices: [
-                `Multiplicerar längs varje gren och adderar grenarnas sannolikheter`,
                 `Multiplicerar alla grenar med varandra`,
                 `Väljer bara den första grenen`,
                 `Adderar alla sannolikheter i hela trädet`,
+                `Multiplicerar längs varje gren och adderar grenarnas sannolikheter`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Varje gren ger sin sannolikhet (multiplikation längs grenen); när flera grenar är gynnsamma **adderas** de — som svart–vit och vit–svart i genomgången: $\\dfrac{21}{90} + \\dfrac{21}{90} = \\dfrac{42}{90}$.
 
 **Svar:** Multiplicera längs varje gren och addera grenarna.`,
@@ -25171,12 +25174,12 @@ $$ P(\\text{svart efter svart}) = \\frac{6}{9} $$
             level: 2,
             question: `I en påse finns 4 röda och 6 blå kulor. Du drar två kulor utan återläggning. Använd ett träddiagram och beräkna sannolikheten för två röda. Svara i bråkform.`,
             choices: [
-                `$\\dfrac{2}{15}$`,
                 `$\\dfrac{4}{25}$`,
                 `$\\dfrac{1}{6}$`,
+                `$\\dfrac{2}{15}$`,
                 `$\\dfrac{7}{15}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Grenen röd–röd utan återläggning:
 
 $$ \\frac{4}{10} \\cdot \\frac{3}{9} = \\frac{12}{90} = \\frac{2}{15} $$
@@ -25258,12 +25261,12 @@ $$ P(\\text{inte i tid}) = 1 - 0{,}85 = 0{,}15 $$
             level: 1,
             question: `I vilken typ av uppgifter är komplementhändelsen särskilt användbar?`,
             choices: [
-                `Uppgifter med "minst en" eller "åtminstone en"`,
                 `Uppgifter med exakt ett utfall`,
                 `Uppgifter utan sannolikheter`,
                 `Uppgifter om medelvärden`,
+                `Uppgifter med "minst en" eller "åtminstone en"`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `"Minst en" täcker många kombinationer — men komplementet "ingen alls" är EN enkel kombination. Därför räknas $P(\\text{minst en}) = 1 - P(\\text{ingen})$.
 
 **Svar:** Uppgifter med "minst en" eller "åtminstone en".`,
@@ -25350,12 +25353,12 @@ Efter 3 kast är chansen fortfarande under 50 %, efter 4 kast över.
             level: 1,
             question: `Hur definieras tan $v$ i en rätvinklig triangel?`,
             choices: [
+                `$\\tan v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
                 `$\\tan v = \\dfrac{\\text{motstående katet}}{\\text{närliggande katet}}$`,
                 `$\\tan v = \\dfrac{\\text{motstående katet}}{\\text{hypotenusa}}$`,
-                `$\\tan v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
                 `$\\tan v = \\dfrac{\\text{hypotenusa}}{\\text{motstående katet}}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Tangens är förhållandet mellan motstående och närliggande katet. (Motstående/hypotenusa är sinus och närliggande/hypotenusa är cosinus.)
 
 **Svar:** $\\tan v = \\dfrac{\\text{motstående katet}}{\\text{närliggande katet}}$`,
@@ -25432,12 +25435,12 @@ $$ v_1 - v_2 \\approx 35{,}0° - 23{,}9° = 11{,}1° \\approx 11° $$
             level: 1,
             question: `Hur definieras cos $v$?`,
             choices: [
-                `$\\cos v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
-                `$\\cos v = \\dfrac{\\text{motstående katet}}{\\text{hypotenusa}}$`,
                 `$\\cos v = \\dfrac{\\text{motstående katet}}{\\text{närliggande katet}}$`,
+                `$\\cos v = \\dfrac{\\text{motstående katet}}{\\text{hypotenusa}}$`,
                 `$\\cos v = \\dfrac{\\text{hypotenusa}}{\\text{närliggande katet}}$`,
+                `$\\cos v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Cosinus är närliggande katet genom hypotenusan. (Motstående/hypotenusa är sinus, motstående/närliggande är tangens.)
 
 **Svar:** $\\cos v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
@@ -25522,12 +25525,12 @@ $$ v = \\tan^{-1}(1) = 45° $$
             level: 1,
             question: `Vad är ett annat skrivsätt för $\\tan^{-1}$?`,
             choices: [
-                `arctan`,
                 `$\\dfrac{1}{\\tan}$`,
                 `cotan`,
+                `arctan`,
                 `tanh`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `$\\tan^{-1}$ ("tangens invers") och arctan ("arcus tangens") är samma funktion — bara olika skrivsätt. Båda förekommer på räknare och i litteratur.
 
 (Observera att $\\tan^{-1} v$ INTE betyder $\\dfrac{1}{\\tan v}$ i det här sammanhanget.)
@@ -25594,12 +25597,12 @@ Kontroll: den andra spetsiga vinkeln är $\\tan^{-1}(12/5{,}0) \\approx 67°$, o
             level: 1,
             question: `Vad säger Pythagoras sats för en rätvinklig triangel med katetrarna $a$ och $b$ och hypotenusan $c$?`,
             choices: [
-                `$a^2 + b^2 = c^2$`,
-                `$a + b = c$`,
-                `$a^2 - b^2 = c^2$`,
                 `$a^2 + c^2 = b^2$`,
+                `$a^2 - b^2 = c^2$`,
+                `$a + b = c$`,
+                `$a^2 + b^2 = c^2$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Katet² + katet² = hypotenusa², det vill säga $a^2 + b^2 = c^2$. Satsen gäller endast rätvinkliga trianglar.
 
 **Svar:** $a^2 + b^2 = c^2$`,
@@ -25622,12 +25625,12 @@ $$ c = \\sqrt{100} = 10 $$
             level: 1,
             question: `En sträcka dras mellan två punkter i ett koordinatsystem. Vad motsvarar sträckan i den rätvinkliga triangel man bildar?`,
             choices: [
-                `Hypotenusan`,
-                `Den vågräta kateten`,
-                `Den lodräta kateten`,
                 `Höjden`,
+                `Den vågräta kateten`,
+                `Hypotenusan`,
+                `Den lodräta kateten`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Katetrarna läggs längs rutnätet (vågrätt och lodrätt) och sträckan mellan punkterna blir triangelns **hypotenusa** — som beräknas med Pythagoras sats.
 
 **Svar:** Hypotenusan`,
@@ -25686,12 +25689,12 @@ Kontroll: hypotenusan $AC = \\sqrt{8^2 + 6^2} = 10$ och vinkeln vid C blir $\\ta
             level: 1,
             question: `Vad skiljer en vektor från en skalär?`,
             choices: [
-                `En vektor har både storlek och riktning; en skalär har bara storlek`,
+                `Ingen skillnad — orden betyder samma sak`,
                 `En vektor är alltid större än en skalär`,
                 `En skalär har riktning men ingen storlek`,
-                `Ingen skillnad — orden betyder samma sak`,
+                `En vektor har både storlek och riktning; en skalär har bara storlek`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vektorer (till exempel hastighet, kraft, acceleration) anges med storlek OCH riktning; skalärer (till exempel vikt, tid, temperatur) med enbart storlek.
 
 **Svar:** En vektor har både storlek och riktning.`,
@@ -25700,12 +25703,12 @@ Kontroll: hypotenusan $AC = \\sqrt{8^2 + 6^2} = 10$ och vinkeln vid C blir $\\ta
             level: 1,
             question: `Vilken av följande storheter är en VEKTOR?`,
             choices: [
-                `Kraft`,
                 `Temperatur`,
-                `Tid`,
                 `Vikt`,
+                `Kraft`,
+                `Tid`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Kraft har både storlek och riktning — en vektor. Temperatur, tid och vikt är skalärer (enbart storlek).
 
 **Svar:** Kraft`,
@@ -25714,12 +25717,12 @@ Kontroll: hypotenusan $AC = \\sqrt{8^2 + 6^2} = 10$ och vinkeln vid C blir $\\ta
             level: 1,
             question: `Vad krävs för att två vektorer ska vara SAMMA vektor?`,
             choices: [
-                `Samma storlek och samma riktning`,
+                `Att de ligger på samma linje`,
                 `Samma startpunkt`,
                 `Samma storlek, oavsett riktning`,
-                `Att de ligger på samma linje`,
+                `Samma storlek och samma riktning`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vektorer kan parallellförflyttas — startpunkten spelar ingen roll. Så länge storlek och riktning är oförändrade är det samma vektor.
 
 **Svar:** Samma storlek och samma riktning.`,
@@ -25741,12 +25744,12 @@ $$ |\\vec{u}| = \\sqrt{100} = 10 $$
             level: 2,
             question: `Vektorn $\\vec{a}$ pekar 3 rutor åt höger och 1 ruta uppåt. Vilken av följande är MOTSATT vektor till $\\vec{a}$?`,
             choices: [
+                `6 rutor åt höger och 2 rutor uppåt`,
+                `1 ruta åt höger och 3 rutor uppåt`,
                 `3 rutor åt vänster och 1 ruta nedåt`,
                 `3 rutor åt höger och 1 ruta nedåt`,
-                `1 ruta åt höger och 3 rutor uppåt`,
-                `6 rutor åt höger och 2 rutor uppåt`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Motsatt vektor $-\\vec{a}$ har samma storlek men exakt motsatt riktning — båda komposanterna byter tecken: (3, 1) → (−3, −1).
 
 (6 höger, 2 upp är $2\\vec{a}$ — parallell men inte motsatt.)
@@ -25784,12 +25787,12 @@ $\\vec{d}$: lutning $\\dfrac{2}{4} = \\dfrac{1}{2} \\neq \\dfrac{1}{4}$ — INTE
             level: 1,
             question: `Vad händer när vektorn $\\vec{w}$ multipliceras med 3?`,
             choices: [
-                `Den nya vektorn blir tre gånger så lång med samma riktning`,
                 `Den nya vektorn blir tre gånger så lång med motsatt riktning`,
+                `Den nya vektorn blir tre gånger så lång med samma riktning`,
                 `Riktningen vrids 3 grader`,
                 `Ingenting — skalärer påverkar inte vektorer`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Multiplikation med en positiv skalär skalar längden och behåller riktningen: $3\\vec{w}$ är tre gånger så lång som $\\vec{w}$.
 
 (Negativ faktor hade dessutom vänt riktningen.)
@@ -25814,12 +25817,12 @@ $\\vec{d}$: lutning $\\dfrac{2}{4} = \\dfrac{1}{2} \\neq \\dfrac{1}{4}$ — INTE
             level: 1,
             question: `Vad kallas den vektor som fås när två vektorer adderas?`,
             choices: [
-                `Resultant`,
+                `Differens`,
                 `Komposant`,
                 `Skalär`,
-                `Differens`,
+                `Resultant`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Summan av vektorer kallas **resultant** — den dras från startpunkten till slutpunkten när vektorerna lagts efter varandra (polygonmetoden).
 
 **Svar:** Resultant`,
@@ -25878,12 +25881,12 @@ Observera att $|\\vec{w}| \\neq |\\vec{u}| + |\\vec{v}| = 14$ — längder adder
             level: 1,
             question: `Hur skrivs subtraktionen $\\vec{u} - \\vec{v}$ om som en addition?`,
             choices: [
+                `$\\vec{u} \\cdot (-\\vec{v})$`,
+                `$-(\\vec{u} + \\vec{v})$`,
                 `$\\vec{u} + (-\\vec{v})$`,
                 `$\\vec{v} + (-\\vec{u})$`,
-                `$-(\\vec{u} + \\vec{v})$`,
-                `$\\vec{u} \\cdot (-\\vec{v})$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Att subtrahera $\\vec{v}$ är samma sak som att addera den motsatta vektorn:
 
 $$ \\vec{u} - \\vec{v} = \\vec{u} + (-\\vec{v}) $$
@@ -25896,12 +25899,12 @@ Sedan används polygonmetoden som vanligt.
             level: 1,
             question: `Hur ser $-\\vec{v}$ ut jämfört med $\\vec{v}$?`,
             choices: [
-                `Lika lång men motriktad`,
                 `Dubbelt så lång och motriktad`,
                 `Lika lång och samma riktning`,
                 `Kortare och vriden 90°`,
+                `Lika lång men motriktad`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Den motsatta vektorn har exakt samma längd men pekar åt rakt motsatt håll.
 
 **Svar:** Lika lång men motriktad.`,
@@ -25925,12 +25928,12 @@ Sedan används polygonmetoden som vanligt.
             level: 2,
             question: `$\\vec{u}$ pekar 7 rutor åt höger och $\\vec{v}$ pekar 3 rutor åt höger. Hur lång blir $\\vec{w} = \\vec{u} - \\vec{v}$ och åt vilket håll pekar den?`,
             choices: [
-                `4 rutor åt höger`,
-                `10 rutor åt höger`,
                 `4 rutor åt vänster`,
                 `10 rutor åt vänster`,
+                `4 rutor åt höger`,
+                `10 rutor åt höger`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `$-\\vec{v}$ pekar 3 rutor åt vänster. Kedja: 7 åt höger följt av 3 åt vänster ger netto
 
 $$ 7 - 3 = 4\\ \\text{rutor åt höger} $$
@@ -25956,12 +25959,12 @@ $$ |\\vec{w}|^2 = 4^2 + 3^2 = 25 \\qquad |\\vec{w}| = 5\\ \\text{rutor} $$
             level: 3,
             question: `Två vektorer är lika långa: $|\\vec{u}| = |\\vec{v}| = 6$. Vad gäller för $\\vec{w} = \\vec{u} - \\vec{v}$ om $\\vec{u}$ och $\\vec{v}$ har SAMMA riktning?`,
             choices: [
-                `$\\vec{w}$ blir nollvektorn — längden är 0`,
                 `$|\\vec{w}| = 12$`,
                 `$|\\vec{w}| = 6$`,
+                `$\\vec{w}$ blir nollvektorn — längden är 0`,
                 `Subtraktionen är inte definierad`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** subtraktion av två identiska vektorer tar ut allt — precis som $a - a = 0$ för tal.
 
 $\\vec{u}$ och $\\vec{v}$ har samma längd OCH samma riktning, det vill säga $\\vec{u} = \\vec{v}$. Kedjan blir: gå 6 steg åt ett håll ($\\vec{u}$), sedan 6 steg rakt tillbaka ($-\\vec{v}$). Start- och slutpunkt sammanfaller:
@@ -25992,12 +25995,12 @@ $$ |\\vec{u}| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5 $$
             level: 1,
             question: `Vilken formel ger längden av vektorn $\\vec{u} = (a,\\ b)$?`,
             choices: [
-                `$|\\vec{u}| = \\sqrt{a^2 + b^2}$`,
-                `$|\\vec{u}| = a + b$`,
                 `$|\\vec{u}| = \\sqrt{a + b}$`,
                 `$|\\vec{u}| = a^2 + b^2$`,
+                `$|\\vec{u}| = \\sqrt{a^2 + b^2}$`,
+                `$|\\vec{u}| = a + b$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Koordinaterna är katetlängderna i den rätvinkliga triangeln — Pythagoras sats ger
 
 $$ |\\vec{u}| = \\sqrt{a^2 + b^2} $$
@@ -26008,12 +26011,12 @@ $$ |\\vec{u}| = \\sqrt{a^2 + b^2} $$
             level: 1,
             question: `Vektorn $\\overrightarrow{AB}$ går 8 rutor i *x*-led och 4 rutor i *y*-led. Hur skrivs den i koordinatform?`,
             choices: [
-                `$\\overrightarrow{AB} = (8,\\ 4)$`,
                 `$\\overrightarrow{AB} = (4,\\ 8)$`,
                 `$\\overrightarrow{AB} = \\sqrt{80}$`,
+                `$\\overrightarrow{AB} = (8,\\ 4)$`,
                 `$\\overrightarrow{AB} = 8 + 4$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Koordinatformen anger förflyttningen i *x*-led först och *y*-led sist: $(8,\\ 4)$.
 
 ($\\sqrt{80}$ är vektorns LÄNGD, inte dess koordinatform.)
@@ -26035,12 +26038,12 @@ $$ |\\vec{v}| = \\sqrt{11^2 + (-5)^2} = \\sqrt{121 + 25} = \\sqrt{146} \\approx 
             level: 2,
             question: `Vilken av följande vektorer är LÄNGST?`,
             choices: [
-                `$(6,\\ 7)$`,
                 `$(9,\\ 0)$`,
+                `$(6,\\ 7)$`,
                 `$(-8,\\ 4)$`,
                 `$(5,\\ -7)$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Jämför kvadratsummorna (roten behöver inte ens dras):
 
 $$ 6^2 + 7^2 = 85 \\qquad 9^2 + 0^2 = 81 \\qquad (-8)^2 + 4^2 = 80 \\qquad 5^2 + (-7)^2 = 74 $$
@@ -26101,12 +26104,12 @@ ${makeDiagram({
     ],
 })}`,
             choices: [
-                `$x = 2$ och $y = 3$`,
-                `$x = 3$ och $y = 2$`,
                 `$x = 0$ och $y = 1$`,
+                `$x = 2$ och $y = 3$`,
                 `$x = 0$ och $y = 5$`,
+                `$x = 3$ och $y = 2$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Lösningen till ekvationssystemet är skärningspunktens koordinater. Linjerna skär varandra i punkten (2, 3), så $x$-koordinaten är lösningen till $x$ och $y$-koordinaten är lösningen till $y$.
 
 **Svar:** $x = 2$ och $y = 3$`,
@@ -26441,12 +26444,12 @@ $$
 $$
 adderas ledvis?`,
             choices: [
-                `$y$-termerna elimineras — kvar blir $8x = 16$`,
-                `$x$-termerna elimineras — kvar blir $4y = 16$`,
-                `Ingen variabel elimineras — man måste multiplicera först`,
                 `Båda variablerna elimineras — kvar blir $0 = 16$`,
+                `$x$-termerna elimineras — kvar blir $4y = 16$`,
+                `$y$-termerna elimineras — kvar blir $8x = 16$`,
+                `Ingen variabel elimineras — man måste multiplicera först`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Termerna $-2y$ och $+2y$ är samma variabelterm med olika tecken — de tar ut varandra vid ledvis addition:
 
 $$ (5x - 2y) + (3x + 2y) = 4 + 12 $$
@@ -26710,12 +26713,12 @@ Rimlighet: 95 kr/kg ligger närmare 80 än 120, så det ska vara mindre än häl
             level: 1,
             question: `Utveckla $(x + 5)^2$.`,
             choices: [
-                `$x^2 + 10x + 25$`,
-                `$x^2 + 25$`,
                 `$x^2 + 5x + 25$`,
+                `$x^2 + 10x + 25$`,
                 `$x^2 + 10x + 10$`,
+                `$x^2 + 25$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Första kvadreringsregeln $(a + b)^2 = a^2 + 2ab + b^2$ med $a = x$ och $b = 5$:
 
 $$ (x + 5)^2 = x^2 + 2 \\cdot x \\cdot 5 + 5^2 = x^2 + 10x + 25 $$
@@ -26728,12 +26731,12 @@ Vanligaste felet är att glömma den dubbla produkten $10x$.
             level: 1,
             question: `Utveckla $(x + 6)(x - 6)$.`,
             choices: [
-                `$x^2 - 36$`,
                 `$x^2 + 36$`,
                 `$x^2 - 12x - 36$`,
                 `$x^2 - 12x + 36$`,
+                `$x^2 - 36$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Parenteserna är lika sånär som på tecknet — konjugatregeln $(a + b)(a - b) = a^2 - b^2$:
 
 $$ (x + 6)(x - 6) = x^2 - 6^2 = x^2 - 36 $$
@@ -26746,12 +26749,12 @@ Ingen mittenterm uppstår — de dubbla produkterna tar ut varandra.
             level: 1,
             question: `Utveckla $(x - 3)^2$.`,
             choices: [
-                `$x^2 - 6x + 9$`,
-                `$x^2 - 9$`,
-                `$x^2 + 6x + 9$`,
                 `$x^2 - 6x - 9$`,
+                `$x^2 - 6x + 9$`,
+                `$x^2 + 6x + 9$`,
+                `$x^2 - 9$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Andra kvadreringsregeln $(a - b)^2 = a^2 - 2ab + b^2$:
 
 $$ (x - 3)^2 = x^2 - 2 \\cdot x \\cdot 3 + 3^2 = x^2 - 6x + 9 $$
@@ -26765,12 +26768,12 @@ Observera att sista termen är **plus** 9 — $(-3)^2$ är positivt.
             level: 2,
             question: `Utveckla $(2x + 3)^2$.`,
             choices: [
-                `$4x^2 + 12x + 9$`,
-                `$2x^2 + 12x + 9$`,
                 `$4x^2 + 6x + 9$`,
                 `$4x^2 + 9$`,
+                `$2x^2 + 12x + 9$`,
+                `$4x^2 + 12x + 9$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Hela termen $2x$ ska upphöjas till 2:
 
 $$ (2x + 3)^2 = (2x)^2 + 2 \\cdot 2x \\cdot 3 + 3^2 = 4x^2 + 12x + 9 $$
@@ -26820,12 +26823,12 @@ Det som ser ut som ett tungt räknestycke blir en enkel huvudräkning.
             level: 1,
             question: `Faktorisera $x^2 - 25$.`,
             choices: [
-                `$(x + 5)(x - 5)$`,
-                `$(x - 5)^2$`,
                 `$(x + 5)^2$`,
+                `$(x + 5)(x - 5)$`,
                 `$x(x - 25)$`,
+                `$(x - 5)^2$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `"Kvadrat minus kvadrat är konjugat!" Både $x^2$ och 25 är kvadrater med ett minus emellan:
 
 $$ x^2 - 25 = (x + 5)(x - 5) $$
@@ -26836,12 +26839,12 @@ $$ x^2 - 25 = (x + 5)(x - 5) $$
             level: 1,
             question: `Faktorisera $x^2 + 8x + 16$.`,
             choices: [
-                `$(x + 4)^2$`,
-                `$(x - 4)^2$`,
-                `$(x + 4)(x - 4)$`,
                 `$(x + 8)^2$`,
+                `$(x + 4)^2$`,
+                `$(x + 4)(x - 4)$`,
+                `$(x - 4)^2$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Tre termer där första ($x^2$) och sista ($16 = 4^2$) är kvadrater, plus framför mittentermen — första kvadreringsregeln baklänges:
 
 $$ x^2 + 8x + 16 = (x + 4)^2 $$
@@ -26854,12 +26857,12 @@ Kontroll av dubbla produkten: $2 \\cdot x \\cdot 4 = 8x$. Stämmer!
             level: 1,
             question: `Faktorisera $6x^2 + 9x$ så långt som möjligt.`,
             choices: [
-                `$3x(2x + 3)$`,
                 `$3(2x^2 + 3x)$`,
                 `$x(6x + 9)$`,
                 `$6x(x + 9)$`,
+                `$3x(2x + 3)$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Bryt ut största möjliga faktor: koefficienterna 6 och 9 har största delaren 3, och båda termerna innehåller $x$ — bryt ut $3x$:
 
 $$ 6x^2 + 9x = 3x(2x + 3) $$
@@ -26873,12 +26876,12 @@ Alternativen $3(2x^2 + 3x)$ och $x(6x + 9)$ är inte färdigfaktoriserade — pa
             level: 2,
             question: `Faktorisera $2x^2 - 18$ så långt som möjligt.`,
             choices: [
+                `$(2x + 6)(x - 3)$`,
                 `$2(x + 3)(x - 3)$`,
                 `$2(x^2 - 9)$`,
-                `$(2x + 6)(x - 3)$`,
                 `$2(x - 3)^2$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Först bryter vi ut 2:
 
 $$ 2x^2 - 18 = 2(x^2 - 9) $$
@@ -26914,12 +26917,12 @@ $$ \\frac{(x + 4)(x - 4)}{3(x + 4)} = \\frac{x - 4}{3} $$
             level: 3,
             question: `Förkorta $\\dfrac{x^2 - 6x + 9}{x^2 - 9}$ så långt som möjligt.`,
             choices: [
-                `$\\dfrac{x - 3}{x + 3}$`,
-                `$\\dfrac{-6x + 9}{-9}$`,
                 `$\\dfrac{x - 3}{x - 3} = 1$`,
+                `$\\dfrac{-6x + 9}{-9}$`,
                 `$\\dfrac{x + 3}{x - 3}$`,
+                `$\\dfrac{x - 3}{x + 3}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Nyckelinsikten: täljare och nämnare kräver **olika** faktoriseringsregler.
 
 Täljaren har tre termer med minus framför mittentermen — andra kvadreringsregeln baklänges (kontroll: dubbla produkten $2 \\cdot x \\cdot 3 = 6x$ stämmer):
@@ -26966,12 +26969,12 @@ Den andra ekvationen ger $x = 7$.
             level: 1,
             question: `Vilka lösningar har ekvationen $(x + 2)(x - 9) = 0$?`,
             choices: [
-                `$x_1 = -2$ och $x_2 = 9$`,
-                `$x_1 = 2$ och $x_2 = -9$`,
-                `$x_1 = 2$ och $x_2 = 9$`,
                 `Endast $x = -2$`,
+                `$x_1 = 2$ och $x_2 = -9$`,
+                `$x_1 = -2$ och $x_2 = 9$`,
+                `$x_1 = 2$ och $x_2 = 9$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vänstra ledet är redan faktoriserat och lika med 0. Sätt varje faktor lika med 0:
 
 $$ x + 2 = 0 \\iff x = -2 $$
@@ -26986,12 +26989,12 @@ Observera teckenbytet — faktorn $(x + 2)$ blir 0 när $x = -2$, inte $+2$.
             level: 1,
             question: `Vad säger nollproduktmetodens princip om en produkt som är lika med 0?`,
             choices: [
-                `Minst en av faktorerna måste vara lika med 0`,
                 `Båda faktorerna måste vara lika med 0`,
-                `Ingen av faktorerna får vara lika med 0`,
                 `Summan av faktorerna är lika med 0`,
+                `Minst en av faktorerna måste vara lika med 0`,
+                `Ingen av faktorerna får vara lika med 0`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Det går inte att multiplicera två tal så att produkten blir 0 om inte något av talen är 0. Därför: om $A \\cdot B = 0$ så är $A = 0$ eller $B = 0$ (minst en av dem).
 
 **Svar:** Minst en av faktorerna måste vara lika med 0.`,
@@ -27019,12 +27022,12 @@ Nollproduktmetoden ger $5x = 0$ (det vill säga $x = 0$) eller $x - 6 = 0$ (det 
             level: 2,
             question: `Vilken ekvation har rötterna $x_1 = 4$ och $x_2 = -6$?`,
             choices: [
-                `$(x - 4)(x + 6) = 0$`,
                 `$(x + 4)(x - 6) = 0$`,
-                `$(x - 4)(x - 6) = 0$`,
+                `$(x - 4)(x + 6) = 0$`,
                 `$(x + 4)(x + 6) = 0$`,
+                `$(x - 4)(x - 6) = 0$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Nollproduktmetoden baklänges: sätt in rötterna med **ombytt tecken** i parenteserna.
 
 Roten $x = 4$ kräver faktorn $(x - 4)$ och roten $x = -6$ kräver faktorn $(x + 6)$:
@@ -27084,12 +27087,12 @@ $$ x_1 = -1 - 3 = -4 \\qquad x_2 = -1 + 3 = 2 $$
             level: 1,
             question: `Vilka värden har $p$ och $q$ i ekvationen $x^2 - 6x + 8 = 0$?`,
             choices: [
-                `$p = -6$ och $q = 8$`,
-                `$p = 6$ och $q = 8$`,
                 `$p = -6$ och $q = -8$`,
+                `$p = 6$ och $q = 8$`,
+                `$p = -6$ och $q = 8$`,
                 `$p = 3$ och $q = 8$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Jämför med mallen $x^2 + px + q = 0$: koefficienten framför $x$-termen är $p$ och konstanttermen är $q$ — **med tecken**:
 
 $$ p = -6 \\qquad q = 8 $$
@@ -27308,12 +27311,12 @@ Diskriminanten är **positiv** (9), så ekvationen har två lösningar ($x = -1$
             level: 1,
             question: `Diskriminanten till en andragradsekvation är exakt 0. Vad gäller för ekvationens lösningar?`,
             choices: [
-                `Ekvationen har exakt en lösning (dubbelrot)`,
                 `Ekvationen saknar lösningar`,
-                `Ekvationen har två lösningar`,
+                `Ekvationen har exakt en lösning (dubbelrot)`,
                 `Ekvationen har lösningen $x = 0$`,
+                `Ekvationen har två lösningar`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Med diskriminanten 0 blir *pq*-formeln $x = -\\dfrac{p}{2} \\pm \\sqrt{0}$ — plus och minus ger samma värde, så det finns exakt en lösning (en dubbelrot).
 
 Att diskriminanten är 0 betyder inte att lösningen är 0 — lösningen är $-\\dfrac{p}{2}$.
@@ -27424,12 +27427,12 @@ En sträcka kan inte vara negativ, så $h = 7$ cm (basen är 12 cm; kontroll $7 
             level: 1,
             question: `Sidan i en kvadrat förlängs med 3 cm. Den nya arean är $49$ cm². Vilken ekvation beskriver situationen, om $x$ är den ursprungliga sidan?`,
             choices: [
-                `$(x + 3)^2 = 49$`,
                 `$x^2 + 3 = 49$`,
-                `$x^2 + 3^2 = 49$`,
                 `$4(x + 3) = 49$`,
+                `$x^2 + 3^2 = 49$`,
+                `$(x + 3)^2 = 49$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Den nya sidan är $(x + 3)$ cm, och kvadratens area är sidan i kvadrat:
 
 $$ (x + 3)^2 = 49 $$
@@ -27557,12 +27560,12 @@ Kontroll: $\\sqrt{39 - 3} = \\sqrt{36} = 6$. Stämmer!
             level: 1,
             question: `Varför måste lösningarna till en rotekvation alltid kontrolleras?`,
             choices: [
-                `Kvadreringen kan skapa falska rötter som inte uppfyller den ursprungliga ekvationen`,
-                `Rotekvationer saknar alltid lösningar`,
                 `Räknaren avrundar alltid fel vid rotdragning`,
+                `Kvadreringen kan skapa falska rötter som inte uppfyller den ursprungliga ekvationen`,
                 `*pq*-formeln fungerar inte för rotekvationer`,
+                `Rotekvationer saknar alltid lösningar`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `När båda led kvadreras kan extra rötter uppstå: ur $A = B$ följer $A^2 = B^2$, men $A^2 = B^2$ har även lösningen $A = -B$ — en falsk rot som inte uppfyller den ursprungliga ekvationen. Därför måste varje lösning sättas in i den ursprungliga ekvationen och kontrolleras.
 
 **Svar:** Kvadreringen kan skapa falska rötter som inte uppfyller den ursprungliga ekvationen.`,
@@ -27647,12 +27650,12 @@ Kontroll $x = 9$: $\\mathrm{VL} = \\sqrt{16} + 9 = 13 \\neq 5$. Falsk rot!
             level: 1,
             question: `Funktionen $f(x) = 3x^2 - 5x + 1$ har en **positiv** $x^2$-term. Vad gäller för grafen?`,
             choices: [
-                `Grafen har en minimipunkt ("glad mun")`,
                 `Grafen har en maximipunkt ("sur mun")`,
                 `Grafen är en rät linje`,
                 `Grafen saknar extrempunkt`,
+                `Grafen har en minimipunkt ("glad mun")`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Minnesregeln: positiv $x^2$-term ger "glad mun" — parabeln öppnar sig uppåt och har en "dal" med en minimipunkt.
 
 **Svar:** Grafen har en minimipunkt.`,
@@ -27694,12 +27697,12 @@ $$ x_s = \\frac{-2 + 6}{2} = \\frac{4}{2} = 2 $$
             level: 2,
             question: `Vilket påstående om funktionen $f(x) = -2x^2 + 8x - 3$ är **sant**?`,
             choices: [
+                `Grafen har alltid två nollställen eftersom det finns en *x*-term`,
+                `Grafen saknar symmetrilinje`,
                 `Grafen har en maximipunkt, och funktionen har därmed ett största värde`,
                 `Grafen har en minimipunkt, eftersom konstanttermen är negativ`,
-                `Grafen saknar symmetrilinje`,
-                `Grafen har alltid två nollställen eftersom det finns en *x*-term`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Karaktären avgörs av tecknet framför $x^2$-termen: $-2x^2$ är negativ, vilket ger "sur mun" — en maximipunkt och därmed ett största värde.
 
 Konstanttermens tecken påverkar inte karaktären, alla parabler har en symmetrilinje, och antalet nollställen avgörs av diskriminanten — inte av att en $x$-term finns.
@@ -27759,12 +27762,12 @@ $$ x_s = \\frac{2 + 4}{2} = 3 $$
             level: 1,
             question: `Hur bestäms extrempunktens $y$-koordinat algebraiskt?`,
             choices: [
-                `Sätt in symmetrilinjens $x$-koordinat i funktionsuttrycket`,
-                `Läs av konstanttermen i funktionsuttrycket`,
-                `Ta medelvärdet av nollställena`,
                 `Sätt funktionen lika med 0 och lös ekvationen`,
+                `Läs av konstanttermen i funktionsuttrycket`,
+                `Sätt in symmetrilinjens $x$-koordinat i funktionsuttrycket`,
+                `Ta medelvärdet av nollställena`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Extrempunkten ligger på symmetrilinjen. Symmetrilinjen ger extrempunktens $x$-koordinat, och funktionsuttryckets värde där ger $y$-koordinaten: $y = f(x_s)$.
 
 Konstanttermen är grafens skärning med *y*-axeln, medelvärdet av nollställena ger $x_s$ (inte $y$) och $f(x) = 0$ ger nollställena.
@@ -27835,12 +27838,12 @@ Kontroll: $f(x) = x^2 + 6x + 11$ har $x_s = -3$ och $f(-3) = 9 - 18 + 11 = 2$. S
             level: 1,
             question: `En andragradsfunktion har nollställena $x = 2$ och $x = 5$. Hur skrivs funktionen i faktorform?`,
             choices: [
-                `$f(x) = k(x - 2)(x - 5)$`,
-                `$f(x) = k(x + 2)(x + 5)$`,
-                `$f(x) = (x - 2)(x - 5) + k$`,
                 `$f(x) = kx^2 - 2x - 5$`,
+                `$f(x) = k(x + 2)(x + 5)$`,
+                `$f(x) = k(x - 2)(x - 5)$`,
+                `$f(x) = (x - 2)(x - 5) + k$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Faktorformen är $f(x) = k(x - x_1)(x - x_2)$ där nollställena sätts in med ombytt tecken i parenteserna:
 
 $$ f(x) = k(x - 2)(x - 5) $$
@@ -27867,12 +27870,12 @@ $$ k = -2 $$
             level: 1,
             question: `När behöver man använda metoden med **tre punkter** (utvecklad form) i stället för faktorform?`,
             choices: [
-                `När nollställena är okända eller saknas`,
                 `När funktionen har en maximipunkt`,
                 `Alltid — faktorform fungerar bara för positiva nollställen`,
                 `När grafen går genom origo`,
+                `När nollställena är okända eller saknas`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Faktorformen kräver att nollställena kan avläsas. Om de är okända eller om funktionen saknar nollställen, sätts i stället tre valfria punkter in i $f(x) = ax^2 + bx + c$, vilket ger ett ekvationssystem för $a$, $b$ och $c$.
 
 **Svar:** När nollställena är okända eller saknas.`,
@@ -27947,12 +27950,12 @@ Rimlighet: $k$ är negativ — banan är en "sur mun" med maximipunkt. Stämmer 
             level: 1,
             question: `Ekvationen VL = HL ska lösas grafiskt. Man ritar $y = \\mathrm{VL}$ och $y = \\mathrm{HL}$. Var hittar man lösningarna?`,
             choices: [
-                `I skärningspunkternas *x*-koordinater`,
-                `I skärningspunkternas *y*-koordinater`,
                 `Där graferna skär *y*-axeln`,
                 `I grafernas extrempunkter`,
+                `I skärningspunkternas *y*-koordinater`,
+                `I skärningspunkternas *x*-koordinater`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `I en skärningspunkt har båda leden samma värde — likheten är uppfylld. Lösningen är det $x$-värde där det sker, alltså skärningens $x$-koordinat.
 
 **Svar:** I skärningspunkternas *x*-koordinater.`,
@@ -27984,12 +27987,12 @@ Rimlighet: $k$ är negativ — banan är en "sur mun" med maximipunkt. Stämmer 
             level: 2,
             question: `Olikheten $f(x) < g(x)$ löses grafiskt. Graferna skär varandra vid $x = -2$ och $x = 3$, och grafen till $f$ ligger **under** grafen till $g$ mellan skärningarna. Vilken är lösningen?`,
             choices: [
+                `$x = -2$ och $x = 3$`,
                 `$-2 < x < 3$`,
                 `$x < -2$ och $x > 3$`,
-                `$x = -2$ och $x = 3$`,
                 `$f(x) < g(x)$ saknar lösning`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `$f(x) < g(x)$ gäller där grafen till $f$ ligger under grafen till $g$ — enligt uppgiften mellan skärningarna. Skärningarnas $x$-koordinater ger intervallets gränser:
 
 $$ -2 < x < 3 $$
@@ -28071,12 +28074,12 @@ Grafiskt: verktyget *Extrempunkt* i Geogebra.
             level: 1,
             question: `Vilket Geogebra-verktyg används för att ta fram en funktions **största värde**?`,
             choices: [
-                `Extrempunkt`,
-                `Nollställen`,
                 `Skärning mellan två objekt`,
                 `Punkt på objekt`,
+                `Extrempunkt`,
+                `Nollställen`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Största (eller minsta) värdet ligger i grafens extrempunkt — verktyget *Extrempunkt* markerar den och visar koordinaterna. *Nollställen* ger skärningar med *x*-axeln och *Skärning mellan två objekt* används när två grafer jämförs.
 
 **Svar:** Extrempunkt`,
@@ -28145,12 +28148,12 @@ Den största produkten fås alltså när talen är lika ($10 + 10 = 20$).
             level: 1,
             question: `En vinkel är 137°. Vad kallas en sådan vinkel?`,
             choices: [
-                `Trubbig vinkel`,
-                `Spetsig vinkel`,
-                `Rät vinkel`,
                 `Rak vinkel`,
+                `Spetsig vinkel`,
+                `Trubbig vinkel`,
+                `Rät vinkel`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vinklar namnges efter storleken: spetsig ($v < 90°$), rät ($v = 90°$), trubbig ($90° < v < 180°$) och rak ($v = 180°$). Eftersom $90° < 137° < 180°$ är vinkeln trubbig.
 
 **Svar:** Trubbig vinkel`,
@@ -28243,12 +28246,12 @@ $$ v = 180° - 63° - 48° = 69° \\quad \\text{(vinkelsumma i triangel)} $$
             level: 1,
             question: `Vad kännetecknar en **likbent** triangel?`,
             choices: [
-                `Minst två sidor är lika långa, och basvinklarna är lika stora`,
-                `Alla sidor är lika långa och alla vinklar är 60°`,
                 `En vinkel är rät`,
+                `Minst två sidor är lika långa, och basvinklarna är lika stora`,
                 `Alla vinklar är trubbiga`,
+                `Alla sidor är lika långa och alla vinklar är 60°`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `En likbent triangel har minst två lika långa sidor, och vinklarna mot basen (basvinklarna) är lika stora.
 
 (Alla sidor lika = liksidig; en rät vinkel = rätvinklig. En triangel kan aldrig ha mer än en trubbig vinkel.)
@@ -28333,12 +28336,12 @@ Kontroll: $35 + 65 + 80 = 180$. Stämmer!
             level: 1,
             question: `Hur bevisar man att en implikation är **falsk**?`,
             choices: [
-                `Genom att ge ett motexempel — ett enda räcker`,
-                `Genom att testa många exempel som stämmer`,
                 `Genom att vända på implikationen`,
+                `Genom att testa många exempel som stämmer`,
                 `Det går inte att bevisa att en implikation är falsk`,
+                `Genom att ge ett motexempel — ett enda räcker`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Ett enda motexempel räcker för att fälla en implikation. Exempel: "Det är en hund ⟹ det är en tax" faller på motexemplet "det kan vara en pudel".
 
 (Många stämmande exempel bevisar däremot ingenting — det kan finnas ett motexempel man inte provat.)
@@ -28349,12 +28352,12 @@ Kontroll: $35 + 65 + 80 = 180$. Stämmer!
             level: 1,
             question: `Gäller implikationen $x = 4 \\implies x^2 = 16$? Och gäller omvändningen?`,
             choices: [
-                `Implikationen gäller, men inte omvändningen (motexempel: $x = -4$)`,
-                `Både implikationen och omvändningen gäller — det är en ekvivalens`,
-                `Varken implikationen eller omvändningen gäller`,
                 `Omvändningen gäller, men inte implikationen`,
+                `Varken implikationen eller omvändningen gäller`,
+                `Både implikationen och omvändningen gäller — det är en ekvivalens`,
+                `Implikationen gäller, men inte omvändningen (motexempel: $x = -4$)`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Om $x = 4$ så är $x^2 = 16$ — implikationen gäller.
 
 Omvändningen $x^2 = 16 \\implies x = 4$ gäller **inte**: ekvationen $x^2 = 16$ har även lösningen $x = -4$ (motexempel).
@@ -28366,12 +28369,12 @@ Omvändningen $x^2 = 16 \\implies x = 4$ gäller **inte**: ekvationen $x^2 = 16$
             level: 2,
             question: `Vilket logiskt tecken ska stå mellan påståendena?<br>*Triangeln är liksidig* ____ *Triangelns alla vinklar är 60°*`,
             choices: [
-                `⟺ — implikationen gäller åt båda håll`,
-                `⟹ — implikationen gäller bara åt höger`,
                 `⟸ — implikationen gäller bara åt vänster`,
                 `Inget tecken — påståendena saknar samband`,
+                `⟺ — implikationen gäller åt båda håll`,
+                `⟹ — implikationen gäller bara åt höger`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `En liksidig triangel har alltid alla vinklar 60° — och en triangel med alla vinklar 60° är alltid liksidig. Implikationen gäller åt båda håll, alltså en ekvivalens:
 
 $$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
@@ -28382,12 +28385,12 @@ $$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
             level: 2,
             question: `Betrakta implikationen "Det regnar ⟹ marken blir blöt". Vad gäller för **omvändningen**?`,
             choices: [
-                `Omvändningen gäller inte — marken kan bli blöt av annat (motexempel: en vattenspridare)`,
-                `Omvändningen gäller alltid — blöt mark betyder regn`,
                 `Omvändningen gäller, så det är en ekvivalens`,
                 `Implikationer kan inte vändas om`,
+                `Omvändningen gäller alltid — blöt mark betyder regn`,
+                `Omvändningen gäller inte — marken kan bli blöt av annat (motexempel: en vattenspridare)`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Omvändningen är "marken är blöt ⟹ det regnar". Den faller på ett motexempel: marken kan vara blöt av en vattenspridare (eller smält snö). Implikationen gäller alltså bara åt ett håll — ingen ekvivalens.
 
 **Svar:** Omvändningen gäller inte (motexempel: vattenspridare).`,
@@ -28397,12 +28400,12 @@ $$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
             level: 3,
             question: `Avgör vilka av implikationerna som gäller:<br>(1) $x^3 = 8 \\implies x = 2$&emsp;&emsp;(2) $x^2 = 9 \\implies x = 3$`,
             choices: [
+                `Ingen av dem gäller`,
+                `(2) gäller men inte (1)`,
                 `(1) gäller men inte (2)`,
                 `Båda gäller`,
-                `(2) gäller men inte (1)`,
-                `Ingen av dem gäller`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Nyckelinsikten: en implikation av typen "ekvation ⟹ lösning" gäller bara om lösningen är **entydig**.
 
 (1) $x^3 = 8$ har den enda (reella) lösningen $x = \\sqrt[3]{8} = 2$ — udda exponenter ger en lösning. Implikationen gäller.
@@ -28423,12 +28426,12 @@ $$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
             level: 1,
             question: `Vad kallas ett påstående som är **bevisat**?`,
             choices: [
-                `Sats`,
-                `Axiom`,
-                `Definition`,
                 `Hypotes`,
+                `Definition`,
+                `Axiom`,
+                `Sats`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Ett bevisat påstående kallas sats. Ett axiom är en grundsats som gäller utan bevis, och en definition är en överenskommelse om vad ett begrepp betyder.
 
 **Svar:** Sats`,
@@ -28437,12 +28440,12 @@ $$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
             level: 1,
             question: `Hur skrivs ett godtyckligt **jämnt** tal i ett bevis, om $k$ är ett heltal?`,
             choices: [
+                `$k + 2$`,
                 `$2k$`,
                 `$2k + 1$`,
                 `$k^2$`,
-                `$k + 2$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Ett jämnt tal är delbart med 2 och kan alltid skrivas $2k$ där $k$ är ett heltal. Ett udda tal skrivs $2k + 1$.
 
 ($k^2$ kan vara både jämnt och udda, och $k + 2$ har samma paritet som $k$.)
@@ -28453,12 +28456,12 @@ $$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
             level: 1,
             question: `Vad är ett **axiom**?`,
             choices: [
-                `En grundsats som gäller utan att den kräver ett bevis`,
                 `Ett påstående som är bevisat`,
                 `En överenskommelse om vad ett begrepp betyder`,
+                `En grundsats som gäller utan att den kräver ett bevis`,
                 `Ett motexempel`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Ett axiom är en grundsats man kommit överens om att utgå ifrån, utan bevis — till exempel "varje heltal $n$ följs av heltalet $(n + 1)$". Bevisade påståenden kallas satser; begreppsöverenskommelser kallas definitioner.
 
 **Svar:** En grundsats som gäller utan bevis.`,
@@ -28468,12 +28471,12 @@ $$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
             level: 2,
             question: `Hur tecknas tre på varandra följande heltal i ett bevis?`,
             choices: [
-                `$n$, $n + 1$, $n + 2$`,
                 `$n$, $2n$, $3n$`,
-                `$n$, $n + 2$, $n + 4$`,
+                `$n$, $n + 1$, $n + 2$`,
                 `$3n$`,
+                `$n$, $n + 2$, $n + 4$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Tal som följer på varandra ökar med 1 i taget: $n$, $n + 1$, $n + 2$.
 
 ($n$, $2n$, $3n$ är multiplar av n, och $n$, $n+2$, $n+4$ är vartannat tal — till exempel tre jämna eller tre udda i rad.)
@@ -28484,12 +28487,12 @@ $$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
             level: 2,
             question: `Du ska visa att summan av två udda tal alltid är jämn. Vilken uppställning genomför beviset korrekt?`,
             choices: [
+                `Udda plus udda är jämnt enligt tabellen i boken`,
+                `$(2k + 1) + (2k + 1) = 4k + 2$, som är delbart med 2`,
                 `$(2k + 1) + (2m + 1) = 2k + 2m + 2 = 2(k + m + 1)$, som är delbart med 2`,
                 `$3 + 5 = 8$, som är jämnt`,
-                `$(2k + 1) + (2k + 1) = 4k + 2$, som är delbart med 2`,
-                `Udda plus udda är jämnt enligt tabellen i boken`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Två **godtyckliga** udda tal kräver två oberoende variabler: $2k + 1$ och $2m + 1$. Summan blir $2(k + m + 1)$ — en faktor 2, alltså jämn. v.s.v.
 
 Fällan i alternativet med $2k + 1$ två gånger: det visar bara fallet där talen är **lika**. Ett enskilt exempel (3 + 5) bevisar ingenting generellt.
@@ -28555,12 +28558,12 @@ $$ b = \\sqrt{144} = 12 $$
             level: 1,
             question: `Vilken sida i en rätvinklig triangel är hypotenusan?`,
             choices: [
-                `Den längsta sidan — den som ligger mitt emot den räta vinkeln`,
-                `Den kortaste sidan`,
-                `Någon av de två sidor som bildar den räta vinkeln`,
                 `Sidan som är vågrät i figuren`,
+                `Den längsta sidan — den som ligger mitt emot den räta vinkeln`,
+                `Någon av de två sidor som bildar den räta vinkeln`,
+                `Den kortaste sidan`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Hypotenusan är triangelns längsta sida och ligger alltid mitt emot den räta vinkeln. De två sidor som bildar den räta vinkeln kallas kateter.
 
 **Svar:** Den längsta sidan, mitt emot den räta vinkeln.`,
@@ -28570,12 +28573,12 @@ $$ b = \\sqrt{144} = 12 $$
             level: 2,
             question: `Sidorna i en triangel är 7 cm, 24 cm och 25 cm. Är triangeln rätvinklig?`,
             choices: [
-                `Ja — $7^2 + 24^2 = 625 = 25^2$, så $a^2 + b^2 = c^2$ gäller`,
-                `Nej — $7 + 24 \\neq 25$`,
                 `Nej — en triangel med så olika sidor kan inte vara rätvinklig`,
+                `Ja — $7^2 + 24^2 = 625 = 25^2$, så $a^2 + b^2 = c^2$ gäller`,
                 `Det går inte att avgöra utan att mäta vinklarna`,
+                `Nej — $7 + 24 \\neq 25$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Omvändningen av Pythagoras sats: om $a^2 + b^2 = c^2$ så är triangeln rätvinklig (satsen är en ekvivalens). Kontrollera med de korta sidorna mot den längsta:
 
 $$ 7^2 + 24^2 = 49 + 576 = 625 $$
@@ -28633,12 +28636,12 @@ $$ d = \\sqrt{(4 - 1)^2 + (6 - 2)^2} = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5 $$
             level: 1,
             question: `Bestäm mittpunkten mellan punkterna (2, 3) och (8, 7).`,
             choices: [
-                `(5, 5)`,
                 `(6, 4)`,
-                `(10, 10)`,
                 `(3, 2)`,
+                `(10, 10)`,
+                `(5, 5)`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Mittpunktsformeln — medelvärdet av koordinaterna:
 
 $$ (x_m, y_m) = \\left( \\frac{2 + 8}{2},\\ \\frac{3 + 7}{2} \\right) = (5, 5) $$
@@ -28649,12 +28652,12 @@ $$ (x_m, y_m) = \\left( \\frac{2 + 8}{2},\\ \\frac{3 + 7}{2} \\right) = (5, 5) $
             level: 1,
             question: `Vilken sats bygger avståndsformeln på?`,
             choices: [
-                `Pythagoras sats`,
-                `Randvinkelsatsen`,
                 `Topptriangelsatsen`,
                 `Bisektrissatsen`,
+                `Randvinkelsatsen`,
+                `Pythagoras sats`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Mellan två punkter bildas en rätvinklig triangel med en vågrät katet $(x_2 - x_1)$ och en lodrät katet $(y_2 - y_1)$. Avståndet är hypotenusan, och Pythagoras sats ger
 
 $$ d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} $$
@@ -28676,12 +28679,12 @@ $$ d = \\sqrt{(4 - (-2))^2 + ((-3) - 5)^2} = \\sqrt{6^2 + (-8)^2} = \\sqrt{36 + 
             level: 2,
             question: `Bestäm mittpunkten mellan punkterna (−3, −5) och (7, −1).`,
             choices: [
-                `(2, −3)`,
-                `(5, −2)`,
-                `(2, 3)`,
                 `(4, −6)`,
+                `(2, 3)`,
+                `(5, −2)`,
+                `(2, −3)`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Mittpunktsformeln:
 
 $$ (x_m, y_m) = \\left( \\frac{-3 + 7}{2},\\ \\frac{-5 + (-1)}{2} \\right) = \\left( \\frac{4}{2},\\ \\frac{-6}{2} \\right) = (2, -3) $$
@@ -28762,12 +28765,12 @@ $$ x = \\frac{10}{4} \\cdot 6 = 15 $$
             level: 2,
             question: `En rektangel har sidorna 4 cm och 6 cm, en annan har sidorna 6 cm och 9 cm. Är rektanglarna likformiga?`,
             choices: [
-                `Ja — alla vinklar är 90° och sidförhållandena är lika ($\\dfrac{4}{6} = \\dfrac{6}{9} = \\dfrac{2}{3}$)`,
                 `Nej — sidorna är olika långa`,
-                `Nej — sidförhållandena är olika`,
                 `Det går inte att avgöra`,
+                `Ja — alla vinklar är 90° och sidförhållandena är lika ($\\dfrac{4}{6} = \\dfrac{6}{9} = \\dfrac{2}{3}$)`,
+                `Nej — sidförhållandena är olika`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vinklarna är lika (alla 90° i rektanglar). Sidförhållandena:
 
 $$ \\frac{4}{6} = \\frac{2}{3} \\qquad \\frac{6}{9} = \\frac{2}{3} $$
@@ -28791,12 +28794,12 @@ $$ O = 12 \\cdot 2{,}5 = 30 $$
             level: 3,
             question: `Två rektanglar har alla vinklar lika stora (90°). Är de därmed **säkert** likformiga?`,
             choices: [
-                `Nej — sidförhållandena måste också stämma (motexempel: en kvadrat och en avlång rektangel)`,
-                `Ja — lika vinklar räcker alltid för likformighet`,
                 `Ja — alla rektanglar är likformiga med varandra`,
                 `Nej — rektanglar kan aldrig vara likformiga`,
+                `Nej — sidförhållandena måste också stämma (motexempel: en kvadrat och en avlång rektangel)`,
+                `Ja — lika vinklar räcker alltid för likformighet`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Nyckelinsikten: regeln "ett villkor räcker" gäller **bara trianglar**. För fyrhörningar måste båda villkoren kontrolleras.
 
 Motexempel: en kvadrat ($1 \\times 1$) och en avlång rektangel ($1 \\times 5$) har båda fyra räta vinklar, men sidförhållandena $\\dfrac{1}{1}$ och $\\dfrac{1}{5}$ är olika — de är inte likformiga.
@@ -29042,12 +29045,12 @@ $$ v = 180° - 48° - 102° = 30° $$
             level: 2,
             question: `Vad kräver kongruensvillkoret **SVS**?`,
             choices: [
-                `Två sidor och vinkeln MELLAN dem överensstämmer`,
-                `Två sidor och någon vinkel överensstämmer`,
-                `En sida och två vinklar överensstämmer`,
                 `Två vinklar och sidan mellan dem överensstämmer`,
+                `Två sidor och vinkeln MELLAN dem överensstämmer`,
+                `En sida och två vinklar överensstämmer`,
+                `Två sidor och någon vinkel överensstämmer`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `SVS = sida-vinkel-sida: vinkeln måste vara den **mellanliggande** — alltså vinkeln mellan de två sidorna. Med en annan vinkel (SSV) är kongruensen inte säkerställd.
 
 (En sida + två vinklar liknar VSV; två vinklar och mellanliggande sida är just VSV.)
@@ -29058,12 +29061,12 @@ $$ v = 180° - 48° - 102° = 30° $$
             level: 2,
             question: `Två trianglar har alla tre vinklar lika stora. Är de säkert kongruenta?`,
             choices: [
-                `Nej — de är likformiga, men storleken kan skilja`,
                 `Ja — lika vinklar betyder kongruens`,
                 `Ja — enligt villkoret VVV`,
+                `Nej — de är likformiga, men storleken kan skilja`,
                 `Nej — de är varken likformiga eller kongruenta`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Lika vinklar ger likformighet — samma form. Men kongruens kräver också samma **storlek**: en liten och en stor liksidig triangel har samma vinklar utan att vara kongruenta. Därför finns inget kongruensvillkor "VVV".
 
 **Svar:** Nej — bara likformiga.`,
@@ -29073,12 +29076,12 @@ $$ v = 180° - 48° - 102° = 30° $$
             level: 3,
             question: `Trianglarna $ABC$ och $DEF$ har $AB = DE$, $BC = EF$ och $\\angle A = \\angle D$. Är trianglarna **säkert** kongruenta?`,
             choices: [
-                `Nej — vinkeln ligger inte MELLAN de två kända sidorna, och "SSV" är inget kongruensvillkor`,
-                `Ja — två sidor och en vinkel räcker alltid (SVS)`,
                 `Ja — enligt villkoret SSS`,
+                `Ja — två sidor och en vinkel räcker alltid (SVS)`,
                 `Nej — det krävs alltid att alla tre sidorna är kända`,
+                `Nej — vinkeln ligger inte MELLAN de två kända sidorna, och "SSV" är inget kongruensvillkor`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Nyckelinsikten: i SVS måste vinkeln vara **mellanliggande**. Här är $\\angle A$ vinkeln vid hörnet A, men de kända sidorna är $AB$ och $BC$ — vinkeln mellan dem är $\\angle B$, inte $\\angle A$.
 
 Kombinationen sida-sida-vinkel (SSV) är inte ett kongruensvillkor: det kan finnas två olika trianglar med samma två sidor och samma icke-mellanliggande vinkel (den tredje sidan kan "fällas" åt två håll).
@@ -29117,12 +29120,12 @@ $$ y = 2 \\cdot 28° = 56° \\quad \\text{(randvinkelsatsen)} $$
             level: 1,
             question: `Hur stor är en randvinkel som står på en **halvcirkelbåge**?`,
             choices: [
+                `Det beror på var på randen spetsen ligger`,
+                `45°`,
                 `90°`,
                 `180°`,
-                `45°`,
-                `Det beror på var på randen spetsen ligger`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Medelpunktsvinkeln på en halvcirkelbåge är 180° (en rak vinkel genom medelpunkten). Randvinkelsatsen ger randvinkeln $180°/2 = 90°$ — oavsett var på den andra halvcirkeln spetsen ligger.
 
 **Svar:** 90°`,
@@ -29201,12 +29204,12 @@ $$ v = 180° - 98° = 82° \\quad \\text{(motstående vinklar i inskriven fyrhö
             level: 1,
             question: `Vad säger kordasatsen om två kordor som skär varandra?`,
             choices: [
-                `Produkten av den ena kordans delsträckor är lika med produkten av den andras`,
-                `Summan av den ena kordans delsträckor är lika med summan av den andras`,
-                `Kordorna delar alltid varandra mitt itu`,
                 `Kordorna är alltid lika långa`,
+                `Produkten av den ena kordans delsträckor är lika med produkten av den andras`,
+                `Kordorna delar alltid varandra mitt itu`,
+                `Summan av den ena kordans delsträckor är lika med summan av den andras`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Kordasatsen: $a \\cdot b = c \\cdot d$, där $a, b$ är den ena kordans delar och $c, d$ den andras. Satsen bevisas med likformiga trianglar (randvinklar på samma båge + vertikalvinklar).
 
 **Svar:** Produkterna av delsträckorna är lika.`,
@@ -29277,12 +29280,12 @@ $$ x = 100^{1/5} = \\sqrt[5]{100} = 2{,}511\\ldots \\approx 2{,}51 $$
             level: 1,
             question: `Vilken av följande är en **exponentialekvation**?`,
             choices: [
-                `$3^x = 20$`,
                 `$x^3 = 20$`,
                 `$x^2 + 3 = 20$`,
+                `$3^x = 20$`,
                 `$3x = 20$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `I en exponentialekvation är variabeln i **exponenten**: $3^x = 20$.
 
 ($x^3 = 20$ är en potensekvation — variabeln i basen; $x^2 + 3 = 20$ är en andragradsekvation och $3x = 20$ en linjär ekvation.)
@@ -29324,12 +29327,12 @@ Förändringsfaktorn 1,107 motsvarar en ökning med cirka 10,7 %.
             level: 2,
             question: `Varför skrivs $\\pm$ framför lösningen när potensekvationen har en **jämn** exponent?`,
             choices: [
+                `Det är bara en skrivkonvention utan betydelse`,
                 `Både ett positivt och ett negativt tal ger positivt resultat vid jämn upphöjning — det finns två lösningar`,
                 `Jämna exponenter gör alla lösningar negativa`,
                 `Räknaren kan inte hantera jämna exponenter`,
-                `Det är bara en skrivkonvention utan betydelse`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vid jämn exponent försvinner tecknet: till exempel $2^4 = 16$ och $(-2)^4 = 16$. Ekvationen $x^4 = 16$ har därför två lösningar, $x = \\pm 2$. Vid udda exponent bevaras tecknet och det finns bara en lösning.
 
 **Svar:** Både positivt och negativt tal ger positivt resultat vid jämn upphöjning.`,
@@ -29383,12 +29386,12 @@ $$ \\lg 0{,}001 = -3 $$
             level: 1,
             question: `Mellan vilka två heltal ligger $\\lg 500$?`,
             choices: [
-                `Mellan 2 och 3`,
                 `Mellan 1 och 2`,
-                `Mellan 3 och 4`,
+                `Mellan 2 och 3`,
                 `Mellan 4 och 5`,
+                `Mellan 3 och 4`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `$10^2 = 100$ är för litet och $10^3 = 1\\,000$ är för stort — exponenten måste ligga mellan 2 och 3. (Räknaren ger $\\lg 500 \\approx 2{,}70$.)
 
 **Svar:** Mellan 2 och 3.`,
@@ -29555,12 +29558,12 @@ $$ \\lg 40 - \\lg 4 = \\lg \\frac{40}{4} = \\lg 10 = 1 $$
             level: 1,
             question: `Vad kan $\\lg x^3$ skrivas om till enligt tredje logaritmlagen?`,
             choices: [
+                `$\\lg x + 3$`,
+                `$(\\lg x)^3$`,
                 `$3 \\cdot \\lg x$`,
                 `$\\lg 3x$`,
-                `$(\\lg x)^3$`,
-                `$\\lg x + 3$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Tredje logaritmlagen: exponenten kan multipliceras ner framför logaritmen,
 
 $$ \\lg x^p = p \\cdot \\lg x $$
@@ -29631,12 +29634,12 @@ $$ 40 = 4x \\iff x = 10 $$
             level: 1,
             question: `I modellen $y = C \\cdot a^x$ — vad står $a$ för?`,
             choices: [
-                `Förändringsfaktorn`,
-                `Startvärdet`,
                 `Nya värdet`,
+                `Startvärdet`,
+                `Förändringsfaktorn`,
                 `Tiden`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `$a$ är förändringsfaktorn (till exempel 1,023 vid en ökning med 2,3 %). $C$ är startvärdet, $y$ nya värdet och $x$ antalet förändringar (ofta tid).
 
 **Svar:** Förändringsfaktorn`,
@@ -29753,12 +29756,12 @@ $$ x = \\frac{\\lg 1{,}5}{\\lg 1{,}08} = 5{,}268\\ldots \\approx 5{,}3 $$
             level: 1,
             question: `Vilken är lösningen till ekvationen $a^x = b$?`,
             choices: [
-                `$x = \\log_a b$`,
-                `$x = \\log_b a$`,
-                `$x = \\lg(a \\cdot b)$`,
                 `$x = \\dfrac{b}{a}$`,
+                `$x = \\log_a b$`,
+                `$x = \\lg(a \\cdot b)$`,
+                `$x = \\log_b a$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Definitionen av generella logaritmer: ekvationen $a^x = b$ har lösningen $x = \\log_a b$ — "a-logaritmen för b".
 
 **Svar:** $x = \\log_a b$`,
@@ -29837,12 +29840,12 @@ $$ 3,\\ 5,\\ \\mathbf{7},\\ 9,\\ 12 $$
             level: 1,
             question: `Vad är **typvärdet** i en datamängd?`,
             choices: [
-                `Det värde som förekommer flest gånger`,
-                `Värdet i mitten när talen sorterats`,
                 `Summan dividerad med antalet`,
                 `Skillnaden mellan största och minsta värdet`,
+                `Värdet i mitten när talen sorterats`,
+                `Det värde som förekommer flest gånger`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Typvärdet är det vanligast förekommande värdet — det med högst frekvens. Det kan användas även när datamängden inte är tal, till exempel färger eller bilmärken.
 
 (Mitten = medianen; summan/antalet = medelvärdet; största − minsta = variationsbredden.)
@@ -29866,12 +29869,12 @@ $$ \\text{medianen} = \\frac{6 + 10}{2} = 8 $$
             level: 2,
             question: `När är **medianen** ett lämpligare lägesmått än medelvärdet?`,
             choices: [
+                `Medelvärdet är alltid lämpligast`,
                 `Vid sned fördelning — när enstaka utstickande värden drar iväg medelvärdet`,
                 `När alla värden är lika stora`,
                 `När datamängden består av färger eller märken`,
-                `Medelvärdet är alltid lämpligast`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Ett utstickande värde (som 61-åringen i klassrummet med tonåringar) drar upp medelvärdet så att det inte representerar gruppen. Medianen påverkas inte av hur extrema ytterlighetsvärdena är.
 
 (För icke-numeriska data som färger är det typvärdet som gäller.)
@@ -29934,12 +29937,12 @@ $$ \\text{medelvärdet} = \\frac{3 \\cdot 5 + 5 \\cdot 15 + 2 \\cdot 25}{3 + 5 +
             level: 2,
             question: `Hur stor andel av värdena innehåller varje del av ett lådagram ("vänster pinne", vänstra lådan, högra lådan och "höger pinne")?`,
             choices: [
-                `25 % vardera`,
+                `10 % i pinnarna och 40 % i lådhalvorna`,
                 `Det beror på delens storlek — större del innehåller fler värden`,
                 `50 % i lådan och 50 % i pinnarna tillsammans, ojämnt fördelat`,
-                `10 % i pinnarna och 40 % i lådhalvorna`,
+                `25 % vardera`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Kvartilerna delar materialet i fyra lika stora delar — varje del innehåller exakt 25 % av värdena. Därför gäller: ju STÖRRE en del ser ut, desto mer utspridda ligger dess 25 % av värdena.
 
 **Svar:** 25 % vardera.`,
@@ -29959,12 +29962,12 @@ $$ 100\\ \\% - 90\\ \\% = 10\\ \\% $$
             level: 3,
             question: `I ett lådagram är "höger pinne" mycket lång medan vänstra delen av lådan är mycket kort. Vad säger det om datamängden?`,
             choices: [
-                `De översta 25 % av värdena är mycket utspridda, medan värdena strax under medianen ligger tätt samlade`,
                 `Det finns fler värden i höger pinne än i vänstra lådan`,
                 `Medelvärdet är större än det största värdet`,
                 `Datamängden innehåller ett fel`,
+                `De översta 25 % av värdena är mycket utspridda, medan värdena strax under medianen ligger tätt samlade`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Nyckelinsikten: varje del innehåller ALLTID 25 % av värdena — delarnas storlek visar SPRIDNINGEN, inte antalet.
 
 En lång höger pinne betyder att den översta fjärdedelen är utspridd över ett stort intervall. En kort lådhalva betyder att den fjärdedelen ligger tätt packad.
@@ -29983,12 +29986,12 @@ En lång höger pinne betyder att den översta fjärdedelen är utspridd över e
             level: 1,
             question: `Vad betyder **Q1** i Geogebras statistiktabell?`,
             choices: [
-                `Nedre kvartilen`,
-                `Övre kvartilen`,
                 `Medelvärdet`,
+                `Övre kvartilen`,
                 `Antalet värden`,
+                `Nedre kvartilen`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `I statistiktabellen står Q1 för nedre kvartilen och Q3 för övre kvartilen. Medelvärdet står vid "Medel" och antalet värden vid "n".
 
 **Svar:** Nedre kvartilen`,
@@ -30013,12 +30016,12 @@ En lång höger pinne betyder att den översta fjärdedelen är utspridd över e
             level: 1,
             question: `Vad beräknar kommandot Percentil(l1, 90%) i Geogebra?`,
             choices: [
-                `Det värde i listan som 90 % av värdena är mindre än`,
                 `De 90 största värdena i listan`,
-                `90 % av medelvärdet`,
                 `Hur många värden som är exakt 90`,
+                `90 % av medelvärdet`,
+                `Det värde i listan som 90 % av värdena är mindre än`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Percentilen $p_{90}$ är gränsvärdet där 90 % av materialet ligger under — till exempel åldern man måste överstiga för att tillhöra de 10 % äldsta.
 
 **Svar:** Värdet som 90 % av värdena är mindre än.`,
@@ -30073,12 +30076,12 @@ $$ \\text{medelvärdet} = \\frac{0 \\cdot 2 + 1 \\cdot 5 + 2 \\cdot 2 + 3 \\cdot
             level: 1,
             question: `Vad beskriver **standardavvikelsen**?`,
             choices: [
-                `Hur mycket mätvärdena i genomsnitt avviker från medelvärdet`,
                 `Skillnaden mellan största och minsta värdet`,
-                `Värdet i mitten av datamängden`,
                 `Det vanligast förekommande värdet`,
+                `Hur mycket mätvärdena i genomsnitt avviker från medelvärdet`,
+                `Värdet i mitten av datamängden`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Standardavvikelsen är ett spridningsmått: den anger med ett tal hur mycket värdena i genomsnitt avviker från datamängdens medelvärde. Stor standardavvikelse = stor spridning.
 
 (Största − minsta = variationsbredd; mitten = median; vanligast = typvärde.)
@@ -30089,12 +30092,12 @@ $$ \\text{medelvärdet} = \\frac{0 \\cdot 2 + 1 \\cdot 5 + 2 \\cdot 2 + 3 \\cdot
             level: 1,
             question: `Vad är skillnaden mellan beteckningarna $\\sigma$ och $s$ för standardavvikelse?`,
             choices: [
-                `$\\sigma$ används vid totalundersökning och $s$ vid stickprovsundersökning`,
                 `$s$ används vid totalundersökning och $\\sigma$ vid stickprov`,
-                `$\\sigma$ är alltid större än $s$`,
+                `$\\sigma$ används vid totalundersökning och $s$ vid stickprovsundersökning`,
                 `De är exakt samma tal`,
+                `$\\sigma$ är alltid större än $s$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vid en totalundersökning (alla i populationen) betecknas standardavvikelsen $\\sigma$ (lilla sigma). Vid en stickprovsundersökning (en del av populationen) betecknas den $s$ — och beräknas med en något annorlunda formel.
 
 **Svar:** $\\sigma$ för totalundersökning, $s$ för stickprov.`,
@@ -30112,12 +30115,12 @@ $$ \\text{medelvärdet} = \\frac{0 \\cdot 2 + 1 \\cdot 5 + 2 \\cdot 2 + 3 \\cdot
             level: 2,
             question: `Datamängderna A: 16, 17, 17, 17, 18 och B: 2, 4, 12, 24, 43 har båda medelvärdet 17. Vilken har störst standardavvikelse, och varför?`,
             choices: [
+                `Det går inte att avgöra utan räknare`,
+                `De har samma standardavvikelse eftersom medelvärdena är lika`,
                 `B — värdena avviker mycket mer från medelvärdet (som mest 26 mot som mest 1)`,
                 `A — värdena ligger tätt, vilket ger stor standardavvikelse`,
-                `De har samma standardavvikelse eftersom medelvärdena är lika`,
-                `Det går inte att avgöra utan räknare`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Standardavvikelsen mäter spridningen kring medelvärdet. I A avviker värdena som mest 1 enhet; i B som mest 26 enheter. B har alltså mycket större standardavvikelse.
 
 (Samma medelvärde säger ingenting om spridningen — det är hela poängen med spridningsmått.)
@@ -30141,12 +30144,12 @@ $$ \\sigma = 15{,}13 \\approx 15{,}1 $$
             level: 3,
             question: `Alla värden i en datamängd ökas med 10. Vad händer med medelvärdet och standardavvikelsen?`,
             choices: [
-                `Medelvärdet ökar med 10, men standardavvikelsen är oförändrad`,
-                `Både medelvärdet och standardavvikelsen ökar med 10`,
                 `Medelvärdet är oförändrat, men standardavvikelsen ökar med 10`,
+                `Både medelvärdet och standardavvikelsen ökar med 10`,
+                `Medelvärdet ökar med 10, men standardavvikelsen är oförändrad`,
                 `Båda är oförändrade`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Nyckelinsikten: standardavvikelsen mäter AVSTÅNDEN till medelvärdet — inte var värdena ligger.
 
 När alla värden flyttas 10 steg åt samma håll flyttas medelvärdet med — men varje värdes avvikelse från medelvärdet är exakt densamma som förut. Spridningen (och därmed standardavvikelsen) ändras inte.
@@ -30187,12 +30190,12 @@ $$ 13{,}6\\ \\% + 2{,}3\\ \\% = 15{,}9\\ \\% $$
             level: 1,
             question: `Vad står $\\mu$ och $\\sigma$ för i en normalfördelning?`,
             choices: [
+                `$\\mu$ = antal värden och $\\sigma$ = spridning i procent`,
                 `$\\mu$ = medelvärde och $\\sigma$ = standardavvikelse`,
                 `$\\mu$ = median och $\\sigma$ = summa`,
                 `$\\mu$ = minsta värdet och $\\sigma$ = största värdet`,
-                `$\\mu$ = antal värden och $\\sigma$ = spridning i procent`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Normalfördelningen beskrivs helt av medelvärdet $\\mu$ (kurvans mitt) och standardavvikelsen $\\sigma$ (kurvans bredd).
 
 **Svar:** Medelvärde respektive standardavvikelse.`,
@@ -30249,12 +30252,12 @@ $$ 130 = 100 + 2 \\cdot 15 = \\mu + 2\\sigma $$
             level: 1,
             question: `Vad betyder det att korrelationskoefficienten $r = -1$?`,
             choices: [
-                `Punkterna ligger perfekt på en linje med negativ lutning`,
                 `Det finns ingen korrelation alls`,
                 `Punkterna ligger perfekt på en linje med positiv lutning`,
+                `Punkterna ligger perfekt på en linje med negativ lutning`,
                 `Regressionen har misslyckats`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `$r$ ligger alltid mellan −1 och 1: $r = 1$ är perfekt positiv korrelation, $r = -1$ perfekt negativ och $r = 0$ ingen korrelation.
 
 **Svar:** Perfekt negativ korrelation.`,
@@ -30263,12 +30266,12 @@ $$ 130 = 100 + 2 \\cdot 15 = \\mu + 2\\sigma $$
             level: 1,
             question: `Vad är en **regressionslinje**?`,
             choices: [
-                `Linjen som värdena i ett spridningsdiagram ligger samlade kring`,
-                `Linjen mellan det största och minsta värdet`,
-                `En lodrät linje genom medelvärdet`,
                 `Diagrammets x-axel`,
+                `En lodrät linje genom medelvärdet`,
+                `Linjen mellan det största och minsta värdet`,
+                `Linjen som värdena i ett spridningsdiagram ligger samlade kring`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Regressionslinjen är den räta linje som bäst ansluter till punkterna i spridningsdiagrammet. Att ta fram dess ekvation kallas linjär regression.
 
 **Svar:** Linjen som punkterna ligger samlade kring.`,
@@ -30288,12 +30291,12 @@ $$ y = 270 \\cdot 25 + 2\\,500 = 6\\,750 + 2\\,500 = 9\\,250 $$
             level: 2,
             question: `En regressionsanalys ger $r = 0{,}97$. Hur beskrivs korrelationen?`,
             choices: [
-                `Stark positiv korrelation`,
-                `Svag positiv korrelation`,
                 `Stark negativ korrelation`,
+                `Svag positiv korrelation`,
                 `Ingen korrelation`,
+                `Stark positiv korrelation`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Tecknet anger riktningen (positivt = stigande) och närheten till ±1 anger styrkan. 0,97 ligger mycket nära 1 — stark positiv korrelation.
 
 **Svar:** Stark positiv korrelation.`,
@@ -30317,12 +30320,12 @@ $$ x = \\frac{6\\,600}{270} = 24{,}4\\ldots $$
             level: 3,
             question: `Glassmodellen $y = 270x + 2\\,500$ ger en **negativ** försäljning för temperaturer under cirka −9 °C. Vad illustrerar detta?`,
             choices: [
-                `Modellen gäller bara inom det intervall där data samlades in — extrapolering långt utanför kan ge orimliga resultat`,
-                `Regressionslinjen är felräknad`,
                 `Korrelationskoefficienten måste vara negativ`,
                 `Glassförsäljning kan inte modelleras matematiskt`,
+                `Regressionslinjen är felräknad`,
+                `Modellen gäller bara inom det intervall där data samlades in — extrapolering långt utanför kan ge orimliga resultat`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Nyckelinsikten: en regressionsmodell är byggd på data i ett visst intervall (här cirka 18–28 °C). Inom intervallet ger den bra uppskattningar — men långt utanför (extrapolering) kan den ge orimliga svar, som negativ försäljning.
 
 Modellen är alltså inte "fel", men dess giltighetsområde är begränsat, och prognoser utanför datat ska tolkas med försiktighet.
@@ -30341,12 +30344,12 @@ Modellen är alltså inte "fel", men dess giltighetsområde är begränsat, och 
             level: 1,
             question: `Vilket är kännetecknet för en **exponentiell** modell $y = Ca^x$ (med $a > 1$)?`,
             choices: [
+                `Kurvan har en maximipunkt`,
+                `Kurvan vänder och går genom origo`,
                 `Liten ökning i början och stor ökning i slutet`,
                 `Lika stor ökning överallt`,
-                `Kurvan vänder och går genom origo`,
-                `Kurvan har en maximipunkt`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Exponentiell tillväxt accelererar: långsam start, allt brantare mot slutet (eller tvärtom vid minskning: stor minskning i början, liten i slutet).
 
 (Lika stor ökning överallt = linjär; genom origo med vändning = potens; maximipunkt = polynom av grad 2.)
@@ -30357,12 +30360,12 @@ Modellen är alltså inte "fel", men dess giltighetsområde är begränsat, och 
             level: 1,
             question: `Vad kännetecknar grafen till en **potensfunktion** $y = Cx^a$?`,
             choices: [
-                `En kurva som vänder och går genom origo`,
                 `En rät linje genom origo`,
-                `En kurva som aldrig rör origo`,
                 `En vågrät linje`,
+                `En kurva som aldrig rör origo`,
+                `En kurva som vänder och går genom origo`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Potensfunktionen $y = Cx^a$ ger $y = 0$ när $x = 0$ — kurvan går genom origo, till skillnad från polynomet $y = ax^2 + bx + c$ som vänder var som helst.
 
 **Svar:** Kurva som vänder och går genom origo.`,
@@ -30371,12 +30374,12 @@ Modellen är alltså inte "fel", men dess giltighetsområde är begränsat, och 
             level: 1,
             question: `Mellan vilka värden ligger $r^2$?`,
             choices: [
-                `Mellan 0 och 1`,
-                `Mellan −1 och 1`,
-                `Mellan −1 och 0`,
                 `Mellan 0 och 100`,
+                `Mellan 0 och 1`,
+                `Mellan −1 och 0`,
+                `Mellan −1 och 1`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Korrelationskoefficienten $r$ ligger mellan −1 och 1, men dess kvadrat $r^2$ ligger mellan 0 (ingen korrelation) och 1 (perfekt korrelation) — kvadreringen tar bort tecknet.
 
 **Svar:** Mellan 0 och 1.`,
@@ -30386,12 +30389,12 @@ Modellen är alltså inte "fel", men dess giltighetsområde är begränsat, och 
             level: 2,
             question: `Två regressionsmodeller för samma data ger $r^2 = 0{,}954$ (linjär) och $r^2 = 0{,}9933$ (exponentiell). Vilken modell är bäst anpassad?`,
             choices: [
-                `Den exponentiella — dess $r^2$-värde ligger närmast 1`,
-                `Den linjära — dess $r^2$-värde är minst`,
-                `De är lika bra eftersom båda ligger nära 1`,
                 `Det kan inte avgöras med $r^2$`,
+                `De är lika bra eftersom båda ligger nära 1`,
+                `Den linjära — dess $r^2$-värde är minst`,
+                `Den exponentiella — dess $r^2$-värde ligger närmast 1`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Ju närmare 1 som $r^2$ ligger, desto bättre är kurvanpassningen. $0{,}9933 > 0{,}954$, så den exponentiella modellen beskriver sambandet bäst — precis som för världens befolkning i genomgången.
 
 **Svar:** Den exponentiella.`,
@@ -30400,12 +30403,12 @@ Modellen är alltså inte "fel", men dess giltighetsområde är begränsat, och 
             level: 2,
             question: `En bakteriekulturs storlek fördubblas varje dygn. Vilken regressionsmodell passar bäst för datat?`,
             choices: [
+                `Polynom av grad 2`,
                 `Exponentiell — $y = Ca^x$ med $a = 2$`,
                 `Linjär — $y = kx + m$`,
                 `Potens — $y = Cx^2$`,
-                `Polynom av grad 2`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `"Fördubblas varje dygn" är multiplikativ förändring med konstant faktor — det är exakt vad en exponentialfunktion beskriver: $y = C \\cdot 2^x$.
 
 (Linjär modell skulle betyda att samma ANTAL läggs till varje dygn.)
@@ -30443,12 +30446,12 @@ $$
 \\frac{12x^4}{8x^2}
 $$`,
             choices: [
+                `$\\dfrac{3x^2}{4}$`,
                 `$\\dfrac{3x^2}{2}$`,
                 `$\\dfrac{3x^6}{2}$`,
                 `$\\dfrac{4x^2}{3}$`,
-                `$\\dfrac{3x^2}{4}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi skriver ut faktorerna och förkortar med gemensamma faktorer. Största gemensamma talfaktorn till 12 och 8 är 4, och $x^2$ finns i både täljare och nämnare.
 
 $$
@@ -30461,12 +30464,12 @@ $$
             level: 1,
             question: `Förläng $\\dfrac{x + 2}{5}$ med 3.`,
             choices: [
-                `$\\dfrac{3x + 6}{15}$`,
                 `$\\dfrac{x + 6}{15}$`,
-                `$\\dfrac{3x + 2}{15}$`,
                 `$\\dfrac{3x + 6}{5}$`,
+                `$\\dfrac{3x + 6}{15}$`,
+                `$\\dfrac{3x + 2}{15}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Att förlänga innebär att multiplicera **både** täljare och nämnare med samma tal, här 3.
 
 $$
@@ -30520,12 +30523,12 @@ Faktorn $(x - 2)$ förkortas bort och $\\dfrac{4x}{2} = 2x$.
             level: 2,
             question: `Förkorta $\\dfrac{x^2 - 9}{x + 3}$.`,
             choices: [
-                `$x - 3$`,
                 `$x + 3$`,
-                `$x^2 - 3$`,
                 `$x - 9$`,
+                `$x - 3$`,
+                `$x^2 - 3$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Täljaren är en konjugat: $x^2 - 9 = x^2 - 3^2 = (x + 3)(x - 3)$. Vi använder alltså konjugatregeln baklänges.
 
 $$
@@ -30539,12 +30542,12 @@ $$
             level: 3,
             question: `Förkorta $\\dfrac{x^2 - x - 6}{x^2 - 4}$ så långt som möjligt.`,
             choices: [
+                `$\\dfrac{x - 6}{x - 4}$`,
+                `$\\dfrac{x + 2}{x - 2}$`,
                 `$\\dfrac{x - 3}{x - 2}$`,
                 `$\\dfrac{x - 3}{x + 2}$`,
-                `$\\dfrac{x + 2}{x - 2}$`,
-                `$\\dfrac{x - 6}{x - 4}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Här måste **både** täljare och nämnare faktoriseras, med olika metoder.
 
 Täljaren $x^2 - x - 6$ faktoriseras med nollställen. $pq$-formeln ger
@@ -30573,12 +30576,12 @@ Den gemensamma faktorn $(x + 2)$ förkortas bort. Observera att man **inte** få
             level: 1,
             question: `Förenkla $\\dfrac{4x}{x + 5} + \\dfrac{9}{x + 5}$.`,
             choices: [
-                `$\\dfrac{4x + 9}{x + 5}$`,
-                `$\\dfrac{13x}{x + 5}$`,
                 `$\\dfrac{4x + 9}{2(x + 5)}$`,
                 `$\\dfrac{4x + 9}{x^2 + 5}$`,
+                `$\\dfrac{4x + 9}{x + 5}$`,
+                `$\\dfrac{13x}{x + 5}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Båda termerna har samma nämnare, $(x + 5)$, så vi adderar bara täljarna.
 
 $$
@@ -30632,12 +30635,12 @@ $$
             level: 2,
             question: `Skriv $\\dfrac{3}{x} + \\dfrac{2}{x + 1}$ som ett enda bråk.`,
             choices: [
-                `$\\dfrac{5x + 3}{x(x + 1)}$`,
-                `$\\dfrac{5x + 3}{x + 1}$`,
-                `$\\dfrac{5x - 3}{x(x + 1)}$`,
                 `$\\dfrac{2x + 3}{x(x + 1)}$`,
+                `$\\dfrac{5x - 3}{x(x + 1)}$`,
+                `$\\dfrac{5x + 3}{x + 1}$`,
+                `$\\dfrac{5x + 3}{x(x + 1)}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Nämnarna är olika, $x$ respektive $(x + 1)$, så vi förlänger första
 termen med $(x + 1)$ och andra termen med $x$.
 
@@ -30712,12 +30715,12 @@ $(x - 3)$.
             level: 1,
             question: `Förenkla $\\dfrac{2}{x} \\cdot \\dfrac{x^2}{6}$.`,
             choices: [
-                `$\\dfrac{x}{3}$`,
-                `$\\dfrac{2x}{3}$`,
                 `$\\dfrac{x^2}{3}$`,
+                `$\\dfrac{2x}{3}$`,
+                `$\\dfrac{x}{3}$`,
                 `$\\dfrac{x}{2}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi multiplicerar täljare med täljare och nämnare med nämnare, och förkortar sedan.
 
 $$
@@ -30736,12 +30739,12 @@ $$
             level: 1,
             question: `Förenkla $\\dfrac{4}{x-3}\\cdot\\dfrac{x+2}{5}$.`,
             choices: [
-                `$\\dfrac{4x+8}{5x-15}$`,
-                `$\\dfrac{4x+8}{5x-3}$`,
                 `$\\dfrac{4x+2}{5x-15}$`,
+                `$\\dfrac{4x+8}{5x-15}$`,
                 `$\\dfrac{4(x-3)}{5(x+2)}$`,
+                `$\\dfrac{4x+8}{5x-3}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi multiplicerar täljare med täljare och nämnare med nämnare. Ingen gemensam faktor finns att förkorta med.
 
 $$
@@ -30754,12 +30757,12 @@ $$
             level: 1,
             question: `Förenkla $\\dfrac{2x}{3}\\Big/\\dfrac{4x}{9}$.`,
             choices: [
-                `$\\dfrac{3}{2}$`,
-                `$\\dfrac{2}{3}$`,
                 `$\\dfrac{8x^2}{27}$`,
+                `$\\dfrac{2}{3}$`,
                 `$\\dfrac{3}{4}$`,
+                `$\\dfrac{3}{2}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi byter ut divisionstecknet mot multiplikation och inverterar uttrycket i nämnaren.
 
 $$
@@ -30779,12 +30782,12 @@ $$
             level: 2,
             question: `Förenkla $\\dfrac{x^2-4}{5}\\cdot\\dfrac{10}{x+2}$ så långt som möjligt.`,
             choices: [
-                `$2x - 4$`,
                 `$2x + 4$`,
                 `$10x - 20$`,
+                `$2x - 4$`,
                 `$x - 2$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi faktoriserar täljaren $x^2-4$ med konjugatregeln: $x^2-4=(x-2)(x+2)$. Sedan multiplicerar vi och förkortar med $(x+2)$ och därefter med 5.
 
 $$
@@ -30826,12 +30829,12 @@ $$
             level: 3,
             question: `Förenkla $\\dfrac{x^2+2x-3}{x^2-9} \\Big/ \\dfrac{x-1}{x+5}$ så långt som möjligt.`,
             choices: [
-                `$\\dfrac{x+5}{x-3}$`,
                 `$\\dfrac{x-5}{x-3}$`,
-                `$\\dfrac{x+5}{x+3}$`,
                 `$\\dfrac{x-3}{x+5}$`,
+                `$\\dfrac{x+5}{x-3}$`,
+                `$\\dfrac{x+5}{x+3}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Här måste **båda** polynomen i första bråket faktoriseras, med olika metoder, innan divisionen kan utföras.
 
 Täljaren $x^2+2x-3$ faktoriseras med nollställen. $pq$-formeln ger
@@ -30884,12 +30887,12 @@ $$
             level: 1,
             question: `Bestäm $\\displaystyle\\lim_{x \\to \\infty} \\frac{9}{x}$.`,
             choices: [
-                `$0$`,
-                `$9$`,
-                `Oändlighet`,
                 `Gränsvärde saknas`,
+                `Oändlighet`,
+                `$9$`,
+                `$0$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi har ett gränsvärde med en oändlighet enbart i nämnaren. Nämnaren blir då oändligt mycket större än täljaren, så kvoten går mot 0.
 
 **Svar:** $0$`,
@@ -30898,12 +30901,12 @@ $$
             level: 1,
             question: `Bestäm $\\displaystyle\\lim_{x \\to -1} (x^2 - 3x)$.`,
             choices: [
-                `$4$`,
-                `$-4$`,
                 `$1$`,
+                `$4$`,
                 `$-2$`,
+                `$-4$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Uttrycket $x^2 - 3x$ är definierat för alla $x$, så vi sätter in $x = -1$ direkt och beräknar.
 
 $$
@@ -30917,12 +30920,12 @@ $$
             level: 2,
             question: `Bestäm $\\displaystyle\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$.`,
             choices: [
-                `$4$`,
                 `$2$`,
-                `$0$`,
                 `Gränsvärde saknas`,
+                `$4$`,
+                `$0$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Sätter vi in $x = 2$ direkt får vi $\\dfrac{0}{0}$, så metod 1 fungerar inte. Vi faktoriserar täljaren med konjugatregeln och förkortar bort den gemensamma faktorn $(x - 2)$.
 
 $$
@@ -30988,12 +30991,12 @@ $$
             level: 1,
             question: `Vilket kommando i Geogebra faktoriserar ett polynom?`,
             choices: [
-                `Faktorisera( Polynom )`,
-                `Förenkla( Funktion )`,
                 `NLös( Ekvation )`,
+                `Förenkla( Funktion )`,
                 `Gränsvärde( Funktion, Värde )`,
+                `Faktorisera( Polynom )`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Kommandot *Faktorisera( Polynom )* skriver om ett polynom som en produkt av faktorer. *Förenkla* förenklar ett uttryck utan att nödvändigtvis skriva om det som en produkt, *NLös* löser ekvationer numeriskt och *Gränsvärde* beräknar gränsvärden.
 
 **Svar:** Faktorisera( Polynom )`,
@@ -31002,12 +31005,12 @@ $$
             level: 1,
             question: `Vad är skillnaden mellan kommandona **NLös** och **Lös** när man löser en ekvation i Geogebra?`,
             choices: [
-                `NLös ger lösningen i decimalform, Lös ger den exakt med symboler`,
+                `NLös kan bara lösa andragradsekvationer`,
                 `NLös ger lösningen exakt med symboler, Lös ger decimalform`,
                 `De gör exakt samma sak`,
-                `NLös kan bara lösa andragradsekvationer`,
+                `NLös ger lösningen i decimalform, Lös ger den exakt med symboler`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `*NLös* (numeriskt lös) svarar med decimaltal, till exempel $x \\approx 1{,}73$. *Lös* svarar exakt, med symboler som $x = \\sqrt{3}$ när lösningen inte är ett "snyggt" heltal.
 
 **Svar:** NLös ger decimalform, Lös ger exakt form.`,
@@ -31031,12 +31034,12 @@ $$
             level: 2,
             question: `Lös ekvationen $x^3 - 6x^2 + 11x - 6 = 0$ exakt med symbolhanterande hjälpmedel. Ange lösningarna i storleksordning.`,
             choices: [
+                `$x = 0$, $x = 1$ och $x = 6$`,
                 `$x = 1$, $x = 2$ och $x = 3$`,
                 `$x = -1$, $x = -2$ och $x = -3$`,
                 `$x = 1$, $x = 2$ och $x = 6$`,
-                `$x = 0$, $x = 1$ och $x = 6$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `I Geogebras inmatningsfält skriver vi kommandot *Lös( Ekvation )* och matar in ekvationen.
 
 $$
@@ -31143,12 +31146,12 @@ $$
             level: 2,
             question: `En bils sträcka $s$ meter efter $t$ sekunder ges av $s(t) = t^2 + 2t$. Beräkna medelhastigheten (sekantens lutning) mellan $t = 2$ och $t = 5$, och ange enheten.`,
             choices: [
-                `$9\\ \\mathrm{m/s}$`,
                 `$27\\ \\mathrm{m/s}$`,
                 `$13{,}5\\ \\mathrm{m/s}$`,
+                `$9\\ \\mathrm{m/s}$`,
                 `$3\\ \\mathrm{m/s}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi beräknar först funktionsvärdena. $s(2) = 2^2 + 2 \\cdot 2 = 4 + 4 = 8$ och $s(5) = 5^2 + 2 \\cdot 5 = 25 + 10 = 35$.
 
 $$
@@ -31163,12 +31166,12 @@ Enheten på $k$-värdet blir "enheten på $s$-axeln" per "enheten på $t$-axeln"
             level: 2,
             question: `Sekantens lutning genom punkterna $(2, a)$ och $(5, 11)$ är $3$. Bestäm $a$.`,
             choices: [
-                `$a = 2$`,
                 `$a = 8$`,
-                `$a = 20$`,
                 `$a = -2$`,
+                `$a = 20$`,
+                `$a = 2$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi sätter in punkterna i formeln för riktningskoefficienten och löser ut $a$.
 
 $$
@@ -31214,12 +31217,12 @@ $$
             level: 1,
             question: `En tangent till en kurva i punkten $(2, 5)$ går även genom punkten $(6, 13)$. Beräkna tangentens lutning $k$.`,
             choices: [
-                `$k = 2$`,
                 `$k = 4$`,
+                `$k = 2$`,
                 `$k = 8$`,
                 `$k = 0{,}5$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi sätter in de två punkterna i formeln för riktningskoefficienten.
 
 $$
@@ -31232,12 +31235,12 @@ $$
             level: 1,
             question: `Vad kallas en rät linje som snuddar en kurva i exakt en punkt, och vad gäller om linjens lutning där?`,
             choices: [
-                `En tangent — dess lutning är densamma som kurvans lutning i den punkten`,
-                `En sekant — dess lutning är alltid noll`,
                 `En asymptot — kurvan kan aldrig nå linjen`,
+                `En sekant — dess lutning är alltid noll`,
                 `En normal — linjen står vinkelrät mot kurvan`,
+                `En tangent — dess lutning är densamma som kurvans lutning i den punkten`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `En linje som snuddar (tangerar) en kurva i en enda punkt kallas **tangent**. Eftersom tangenten följer kurvans riktning precis i den punkten är tangentens lutning densamma som kurvans lutning där.
 
 **Svar:** En tangent — dess lutning är densamma som kurvans lutning i den punkten.`,
@@ -31285,12 +31288,12 @@ Eftersom $k > 0$ är tangentens lutning positiv, vilket betyder att funktionen *
             level: 2,
             question: `En bils sträcka ges av grafen $s(t)$ (m, s). En tangent i punkten där $t = 5{,}0$ s går genom punkterna $(2{,}0;\\ 30)$ och $(5{,}0;\\ 54)$. Bestäm bilens momentana hastighet vid $t = 5{,}0$ s.`,
             choices: [
-                `8,0 m/s`,
                 `24 m/s`,
-                `2,7 m/s`,
+                `8,0 m/s`,
                 `0,125 m/s`,
+                `2,7 m/s`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Momentanhastigheten vid en tidpunkt motsvarar tangentens lutning i den punkten på $s(t)$-grafen. Vi läser av de två punkterna på tangenten och sätter in dem i formeln för $k$.
 
 $$
@@ -31306,12 +31309,12 @@ Enheten blir "enheten på $y$-axeln" per "enheten på $x$-axeln", det vill säga
             level: 3,
             question: `Tangenten till en kurva i punkten där $x = 1$ går genom punkterna $(0, 2)$ och $(1, 5)$. Tangenten i punkten där $x = 4$ är parallell med den förstnämnda tangenten och går genom punkterna $(4, 10)$ och $(a, 22)$. Bestäm $a$.`,
             choices: [
-                `$a = 8$`,
-                `$a = 6$`,
-                `$a = 12$`,
                 `$a = 4$`,
+                `$a = 6$`,
+                `$a = 8$`,
+                `$a = 12$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Parallella linjer har samma lutning, så de båda tangenterna har samma $k$-värde. Vi beräknar först lutningen för tangenten vid $x = 1$.
 
 $$
@@ -31338,12 +31341,12 @@ $$
             level: 1,
             question: `Använd derivatans definition för att bestämma $f'(3)$ om $f(x) = x^2$.`,
             choices: [
+                `$3$`,
                 `$6$`,
                 `$9$`,
-                `$3$`,
                 `$2$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi ställer upp derivatans definition, sätter $a = 3$ och förenklar.
 
 $$
@@ -31362,12 +31365,12 @@ $$
             level: 1,
             question: `Använd derivatans definition för att bestämma $f'(x)$ om $f(x) = 2x + 5$.`,
             choices: [
-                `$2$`,
                 `$5$`,
                 `$2x$`,
                 `$2x + 5$`,
+                `$2$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi ställer upp derivatans definition för en godtycklig punkt $x$.
 
 $$
@@ -31388,12 +31391,12 @@ Derivatan är alltså konstant och lika med räta linjens lutning $k = 2$ — pr
             level: 1,
             question: `Använd derivatans definition för att bestämma $f'(1)$ om $f(x) = x^2 + 4x$.`,
             choices: [
-                `$6$`,
                 `$5$`,
-                `$4$`,
                 `$10$`,
+                `$6$`,
+                `$4$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi ställer upp derivatans definition, sätter $a = 1$ och förenklar.
 
 $$
@@ -31452,12 +31455,12 @@ $$
             level: 2,
             question: `Använd derivatans definition för att bestämma $f'(2)$ om $f(x) = \\dfrac{1}{x}$.`,
             choices: [
-                `$-\\dfrac{1}{4}$`,
-                `$\\dfrac{1}{4}$`,
-                `$-\\dfrac{1}{2}$`,
                 `$-4$`,
+                `$-\\dfrac{1}{4}$`,
+                `$-\\dfrac{1}{2}$`,
+                `$\\dfrac{1}{4}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi ställer upp derivatans definition, sätter $a = 2$ och skriver täljaren som ett enda bråk med gemensam nämnare.
 
 $$
@@ -31483,12 +31486,12 @@ $$
             level: 3,
             question: `Använd derivatans definition för att bestämma en generell formel för $f'(x)$ om $f(x) = x^3$.`,
             choices: [
-                `$3x^2$`,
-                `$x^3$`,
-                `$3x$`,
                 `$x^2$`,
+                `$x^3$`,
+                `$3x^2$`,
+                `$3x$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi ställer upp derivatans definition för en godtycklig punkt $x$ och utvecklar kubiken $(x+h)^3$.
 
 $$
@@ -31523,12 +31526,12 @@ $$
             level: 1,
             question: `En bakteriekultur beskrivs av funktionen $N(t)$, där $N$ är antal individer och $t$ är tiden i timmar. Vad betyder $N'(3) = 240$?`,
             choices: [
-                `Efter 3 timmar ökar antalet bakterier med cirka 240 individer per timme`,
-                `Efter 3 timmar finns det 240 bakterier`,
-                `Efter 240 timmar finns det 3 bakterier`,
                 `Antalet bakterier ökar med exakt 240 individer per timme under hela förloppet`,
+                `Efter 3 timmar finns det 240 bakterier`,
+                `Efter 3 timmar ökar antalet bakterier med cirka 240 individer per timme`,
+                `Efter 240 timmar finns det 3 bakterier`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Enheten för derivatan fås genom att ta "enheten för funktionen" per "enheten för variabeln". Här är enheten för $N$ individer och enheten för $t$ timmar, så $N'$ har enheten individer per timme.
 
 $N'(3) = 240$ är värdet av derivatan just vid tidpunkten $t = 3$ h, det vill säga den momentana förändringshastigheten där — inte ett värde som gäller under hela förloppet.
@@ -31559,12 +31562,12 @@ Enheten för derivatan är "enheten för funktionen" ($\\text{°C}$) per "enhete
             level: 1,
             question: `En vätska värms upp och temperaturen ges av $T(t)$ °C, där $t$ är tiden i minuter. Vilken enhet har $T'(t)$?`,
             choices: [
-                `°C/min`,
+                `min`,
                 `min/°C`,
                 `°C`,
-                `min`,
+                `°C/min`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Enheten för en derivata är alltid "enheten för funktionen" per "enheten för variabeln". Funktionen $T$ har enheten °C och variabeln $t$ har enheten min, så $T'$ har enheten °C/min.
 
 **Svar:** °C/min`,
@@ -31574,12 +31577,12 @@ Enheten för derivatan är "enheten för funktionen" ($\\text{°C}$) per "enhete
             level: 2,
             question: `Ett företags intäkt ges av $I(x) = 5x^2 - 3x$ (kr), där $x$ är antal sålda produkter. Bestäm $I'(10)$ med digitala hjälpmedel och tolka svaret.`,
             choices: [
-                `$I'(10) = 97$ kr/styck — vid 10 sålda produkter ökar intäkten med cirka 97 kr per ytterligare produkt`,
-                `$I'(10) = 470$ kr — det är den totala intäkten vid 10 sålda produkter`,
                 `$I'(10) = 47$ kr/styck — vid 10 sålda produkter ökar intäkten med cirka 47 kr per ytterligare produkt`,
+                `$I'(10) = 470$ kr — det är den totala intäkten vid 10 sålda produkter`,
                 `$I'(10) = 97$ styck — det säljs 97 produkter till`,
+                `$I'(10) = 97$ kr/styck — vid 10 sålda produkter ökar intäkten med cirka 97 kr per ytterligare produkt`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi deriverar och sätter in $x = 10$.
 
 $$
@@ -31606,7 +31609,7 @@ $$
 h'(t) = -2t + 8 \\quad \\Rightarrow \\quad h'(5) = -2 \\cdot 5 + 8 = -2
 $$
 
-Enheten på derivatan är m/min. Eftersom $h'(5)$ är **negativ** minskar höjden vid $t = 5$ min, det vill säga draken sjunker. (Det sista alternativet blandar ihop $h(5) = 15$ m, som är höjden, med $h'(5)$, som är förändringshastigheten.)
+Enheten på derivatan är m/min. Eftersom $h'(5)$ är **negativ** minskar höjden vid $t = 5$ min, det vill säga draken sjunker. (Alternativet med $h(5) = 15$ m blandar ihop $h(5) = 15$ m, som är höjden, med $h'(5)$, som är förändringshastigheten.)
 
 **Svar:** $h'(5) = -2$ m/min — draken sjunker`,
         },
@@ -31615,12 +31618,12 @@ Enheten på derivatan är m/min. Eftersom $h'(5)$ är **negativ** minskar höjde
             level: 3,
             question: `En funktion har formen $f(x) = ax^2 + bx$. Grafen visar att $f(2) = 10$ och att tangenten till grafen i punkten $x = 2$ har lutningen 7. Bestäm $a$ och $b$.`,
             choices: [
+                `$a = 2$ och $b = 1$`,
                 `$a = 1$ och $b = 3$`,
                 `$a = 3$ och $b = 1$`,
-                `$a = 2$ och $b = 1$`,
                 `$a = 1$ och $b = 5$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Villkoret $f(2) = 10$ ger en ekvation, och villkoret att tangentens lutning i $x = 2$ är 7 innebär $f'(2) = 7$, vilket ger en till. Tillsammans bildar de ett ekvationssystem.
 
 $$
@@ -31649,12 +31652,12 @@ Insatt i $2a + b = 5$ ger $b = 5 - 2 = 3$. Kontroll: $f(x) = x^2 + 3x$ ger $f(2)
             level: 1,
             question: `Beräkna $|x^2 - 20|$ för $x = 3$.`,
             choices: [
+                `9`,
                 `11`,
                 `-11`,
                 `29`,
-                `9`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi sätter in $x = 3$ i uttrycket och beräknar innanför absolutbeloppet först.
 
 $$
@@ -31667,12 +31670,12 @@ $$
             level: 1,
             question: `Lös ekvationen $|x + 5| = 12$.`,
             choices: [
-                `$x_1 = 7$ och $x_2 = -17$`,
-                `$x_1 = 17$ och $x_2 = -7$`,
                 `$x_1 = 7$`,
                 `$x_1 = -7$ och $x_2 = -17$`,
+                `$x_1 = 7$ och $x_2 = -17$`,
+                `$x_1 = 17$ och $x_2 = -7$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Om $|x + 5| = 12$ gäller antingen $x + 5 = 12$ eller $x + 5 = -12$, som vi löser separat.
 
 $$
@@ -31702,12 +31705,12 @@ vilket ger $x_1 = 7$ respektive $x_2 = -17$.
             level: 2,
             question: `Lös ekvationen $|2x - 3| = 9$.`,
             choices: [
-                `$x_1 = 6$ och $x_2 = -3$`,
-                `$x_1 = 3$ och $x_2 = -6$`,
                 `$x_1 = 6$ och $x_2 = 3$`,
                 `$x_1 = -6$ och $x_2 = 3$`,
+                `$x_1 = 3$ och $x_2 = -6$`,
+                `$x_1 = 6$ och $x_2 = -3$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Om $|2x - 3| = 9$ gäller antingen $2x - 3 = 9$ eller $2x - 3 = -9$.
 
 $$
@@ -31791,12 +31794,12 @@ $$
             level: 1,
             question: `Derivera $f(x) = x^6$.`,
             choices: [
-                `$f'(x) = 6x^5$`,
                 `$f'(x) = 6x^6$`,
-                `$f'(x) = 5x^6$`,
                 `$f'(x) = x^5$`,
+                `$f'(x) = 5x^6$`,
+                `$f'(x) = 6x^5$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi använder regeln $f(x) = x^n \\Rightarrow f'(x) = nx^{n-1}$ med $n = 6$.
 
 $$
@@ -31809,12 +31812,12 @@ $$
             level: 1,
             question: `Derivera $f(x) = 7x^3$.`,
             choices: [
-                `$f'(x) = 21x^2$`,
-                `$f'(x) = 21x^3$`,
                 `$f'(x) = 7x^2$`,
                 `$f'(x) = 3x^2$`,
+                `$f'(x) = 21x^2$`,
+                `$f'(x) = 21x^3$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi använder regeln $f(x) = kx^n \\Rightarrow f'(x) = nkx^{n-1}$ med $k = 7$ och $n = 3$.
 
 $$
@@ -31827,12 +31830,12 @@ $$
             level: 1,
             question: `Bestäm $f'(x)$ om $f(x) = 42$.`,
             choices: [
-                `$f'(x) = 0$`,
                 `$f'(x) = 42$`,
                 `$f'(x) = 1$`,
                 `$f'(x) = 42x$`,
+                `$f'(x) = 0$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `$f(x) = 42$ är en konstant funktion — grafen är en horisontell linje med lutningen 0, oavsett vilket tal som står där. Derivatan av en konstant funktion är alltid 0.
 
 **Svar:** $f'(x) = 0$`,
@@ -31860,12 +31863,12 @@ $$
             level: 2,
             question: `Bestäm $f'(-2)$ om $f(x) = 3x^2$.`,
             choices: [
+                `$-4$`,
                 `$-12$`,
                 `$12$`,
-                `$-4$`,
                 `$24$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi bestämmer först $f'(x)$ med deriveringsreglerna och sätter sedan in $x = -2$.
 
 $$
@@ -31914,12 +31917,12 @@ $$
 f(x) = 5x^3 - 4x^2 + 6
 $$`,
             choices: [
+                `$f'(x) = 5x^2 - 8x$`,
                 `$f'(x) = 15x^2 - 8x$`,
                 `$f'(x) = 15x^2 - 4x$`,
-                `$f'(x) = 5x^2 - 8x$`,
                 `$f'(x) = 15x^2 - 8x + 6$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi deriverar term för term. Exponenten multipliceras ner och minskas med 1, och konstanttermen $6$ försvinner.
 
 $$
@@ -31935,12 +31938,12 @@ $$
 f(x) = \\frac{2x^4}{3} - 5x
 $$`,
             choices: [
-                `$f'(x) = \\dfrac{8x^3}{3} - 5$`,
-                `$f'(x) = \\dfrac{8x^3}{3} - 5x$`,
                 `$f'(x) = \\dfrac{2x^3}{3} - 5$`,
                 `$f'(x) = \\dfrac{8x^4}{3} - 5$`,
+                `$f'(x) = \\dfrac{8x^3}{3} - 5x$`,
+                `$f'(x) = \\dfrac{8x^3}{3} - 5$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi deriverar täljaren i den första termen med de vanliga deriveringsreglerna och behåller nämnaren. Andra termen deriveras som vanligt.
 
 $$
@@ -31978,12 +31981,12 @@ $$
 f(x) = (x - 4)^2
 $$`,
             choices: [
-                `$f'(x) = 2x - 8$`,
-                `$f'(x) = 2x - 4$`,
-                `$f'(x) = 2x - 16$`,
                 `$f'(x) = x - 8$`,
+                `$f'(x) = 2x - 16$`,
+                `$f'(x) = 2x - 4$`,
+                `$f'(x) = 2x - 8$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Funktionen har ett parentesuttryck, så vi måste först utveckla parentesen med kvadreringsregeln och därefter derivera term för term.
 
 $$
@@ -32000,12 +32003,12 @@ $$
             level: 2,
             question: `Låt $f(x) = 2x^3 - 3x^2 + 5$. Bestäm $f'(2)$.`,
             choices: [
+                `$18$`,
                 `$12$`,
                 `$24$`,
                 `$0$`,
-                `$18$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi deriverar funktionen först.
 
 $$
@@ -32025,12 +32028,12 @@ $$
             level: 3,
             question: `Funktionen $f(x) = ax^2 + bx + 1$ har $f'(2) = 9$ och $f'(-1) = -3$. Bestäm konstanterna $a$ och $b$.`,
             choices: [
-                `$a = 2$ och $b = 1$`,
                 `$a = 1$ och $b = 2$`,
-                `$a = 2$ och $b = 5$`,
+                `$a = 2$ och $b = 1$`,
                 `$a = 4$ och $b = 1$`,
+                `$a = 2$ och $b = 5$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi deriverar funktionen och får derivatan uttryckt i $a$ och $b$.
 
 $$
@@ -32068,12 +32071,12 @@ $$
             level: 1,
             question: `Derivera $f(x) = \\dfrac{4}{x}$.`,
             choices: [
-                `$f'(x) = -\\dfrac{4}{x^2}$`,
-                `$f'(x) = \\dfrac{4}{x^2}$`,
                 `$f'(x) = -4x^{-1}$`,
                 `$f'(x) = -\\dfrac{1}{x^2}$`,
+                `$f'(x) = \\dfrac{4}{x^2}$`,
+                `$f'(x) = -\\dfrac{4}{x^2}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi skriver om funktionsuttrycket som en potens och deriverar sedan som vanligt.
 
 $$
@@ -32090,12 +32093,12 @@ $$
             level: 1,
             question: `Derivera $f(x) = \\sqrt{x}$.`,
             choices: [
-                `$f'(x) = \\dfrac{1}{2\\sqrt{x}}$`,
                 `$f'(x) = \\dfrac{\\sqrt{x}}{2}$`,
                 `$f'(x) = \\dfrac{2}{\\sqrt{x}}$`,
+                `$f'(x) = \\dfrac{1}{2\\sqrt{x}}$`,
                 `$f'(x) = \\dfrac{1}{2x}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi skriver om roten som en potens, $x^{1/2}$, och deriverar med potensregeln.
 
 $$
@@ -32112,12 +32115,12 @@ $$
             level: 1,
             question: `Derivera $f(x) = \\dfrac{1}{x^3}$.`,
             choices: [
-                `$f'(x) = -\\dfrac{3}{x^4}$`,
                 `$f'(x) = \\dfrac{3}{x^4}$`,
+                `$f'(x) = -\\dfrac{3}{x^4}$`,
                 `$f'(x) = -\\dfrac{3}{x^3}$`,
                 `$f'(x) = -\\dfrac{1}{3x^2}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi flyttar upp $x^3$ till täljaren samtidigt som vi byter tecken på exponenten, och deriverar sedan som vanligt.
 
 $$
@@ -32135,12 +32138,12 @@ $$
             level: 2,
             question: `Derivera $f(x) = \\dfrac{6x - 8}{x}$.`,
             choices: [
+                `$f'(x) = \\dfrac{8}{x}$`,
                 `$f'(x) = \\dfrac{8}{x^2}$`,
                 `$f'(x) = -\\dfrac{8}{x^2}$`,
                 `$f'(x) = \\dfrac{6}{x^2}$`,
-                `$f'(x) = \\dfrac{8}{x}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi har $x$ i både täljare och nämnare, så vi delar upp bråket i två termer innan vi deriverar.
 
 $$
@@ -32159,12 +32162,12 @@ $$
             level: 2,
             question: `Derivera $f(x) = x^2\\sqrt{x}$.`,
             choices: [
-                `$f'(x) = \\dfrac{5x\\sqrt{x}}{2}$`,
                 `$f'(x) = \\dfrac{5\\sqrt{x}}{2}$`,
-                `$f'(x) = \\dfrac{3x\\sqrt{x}}{2}$`,
                 `$f'(x) = 2x\\sqrt{x}$`,
+                `$f'(x) = \\dfrac{3x\\sqrt{x}}{2}$`,
+                `$f'(x) = \\dfrac{5x\\sqrt{x}}{2}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi skriver om roten som en potens och förenklar med potenslagarna innan vi deriverar.
 
 $$
@@ -32185,12 +32188,12 @@ $$
 f(x) = x + \\frac{4}{x}
 $$`,
             choices: [
-                `$x = 2$ och $x = -2$`,
                 `$x = 2$ (enda lösningen)`,
-                `$x = 4$ och $x = -4$`,
                 `$x = 0$`,
+                `$x = 4$ och $x = -4$`,
+                `$x = 2$ och $x = -2$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi skriver om den andra termen som en potens och deriverar termvis.
 
 $$
@@ -32215,12 +32218,12 @@ Detta ger två lösningar, eftersom både $2^2 = 4$ och $(-2)^2 = 4$.
             level: 1,
             question: `Derivera $f(x) = 4e^x$.`,
             choices: [
-                `$f'(x) = 4e^x$`,
                 `$f'(x) = 4xe^{x-1}$`,
                 `$f'(x) = e^x$`,
+                `$f'(x) = 4e^x$`,
                 `$f'(x) = 4e^{x-1}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Funktionen $e^x$ är sin egen derivata, och en koefficient framför behålls oförändrad vid derivering.
 
 $$
@@ -32233,12 +32236,12 @@ $$
             level: 1,
             question: `Derivera $f(x) = e^x - 7$.`,
             choices: [
-                `$f'(x) = e^x$`,
-                `$f'(x) = e^x - 7$`,
                 `$f'(x) = e^{x-7}$`,
+                `$f'(x) = e^x - 7$`,
                 `$f'(x) = -7e^x$`,
+                `$f'(x) = e^x$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi deriverar term för term. Termen $e^x$ är sin egen derivata, och konstanten $-7$ försvinner eftersom derivatan av en konstant är 0.
 
 $$
@@ -32307,12 +32310,12 @@ $$
             level: 3,
             question: `En funktion har formen $f(x) = ae^x + b$. Grafen visar att kurvan skär $y$-axeln i punkten $(0,\\ 10)$, och att tangenten till kurvan i punkten $x = 0$ har lutningen 6. Bestäm $a$ och $b$.`,
             choices: [
-                `$a = 6$ och $b = 4$`,
-                `$a = 10$ och $b = 6$`,
                 `$a = 6$ och $b = 10$`,
                 `$a = 4$ och $b = 6$`,
+                `$a = 10$ och $b = 6$`,
+                `$a = 6$ och $b = 4$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi har två villkor att utnyttja, men de måste användas i rätt ordning. Vi deriverar först funktionen.
 
 $$
@@ -32343,12 +32346,12 @@ Med $a = 6$ ger detta $b = 10 - 6 = 4$.
             level: 1,
             question: `Derivera $f(x) = e^{6x}$.`,
             choices: [
+                `$f'(x) = 6e^{x}$`,
                 `$f'(x) = 6e^{6x}$`,
                 `$f'(x) = e^{6x}$`,
-                `$f'(x) = 6e^{x}$`,
                 `$f'(x) = e^{6}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Funktionen har basen $e$ med koefficienten $k = 6$ i exponenten. Enligt deriveringsregeln $f'(x) = ke^{kx}$ skriver vi av funktionen och multiplicerar med koefficienten i exponenten.
 
 $$
@@ -32361,12 +32364,12 @@ $$
             level: 1,
             question: `Derivera $f(x) = 6^x$.`,
             choices: [
-                `$f'(x) = 6^x \\cdot \\ln 6$`,
-                `$f'(x) = 6^x$`,
-                `$f'(x) = x \\cdot 6^{x-1}$`,
                 `$f'(x) = \\ln 6$`,
+                `$f'(x) = x \\cdot 6^{x-1}$`,
+                `$f'(x) = 6^x$`,
+                `$f'(x) = 6^x \\cdot \\ln 6$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Basen är 6, det vill säga en annan bas än $e$. Enligt deriveringsregeln $f'(x) = a^x \\ln a$ skriver vi av funktionen och multiplicerar med $\\ln$ för basen.
 
 $$
@@ -32379,12 +32382,12 @@ $$
             level: 1,
             question: `Derivera $f(x) = 4e^x$.`,
             choices: [
-                `$f'(x) = 4e^x$`,
-                `$f'(x) = 4xe^{x-1}$`,
                 `$f'(x) = e^x$`,
+                `$f'(x) = 4xe^{x-1}$`,
                 `$f'(x) = 4e^{4x}$`,
+                `$f'(x) = 4e^x$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Exponenten saknar koefficient ($k = 1$), så derivatan av $e^x$ blir densamma. Koefficienten framför (4) behålls.
 
 $$
@@ -32398,12 +32401,12 @@ $$
             level: 2,
             question: `Derivera $f(x) = 3 \\cdot 8^{2x}$.`,
             choices: [
-                `$f'(x) = 6 \\cdot 8^{2x} \\cdot \\ln 8$`,
                 `$f'(x) = 3 \\cdot 8^{2x} \\cdot \\ln 8$`,
                 `$f'(x) = 6 \\cdot 8^{2x}$`,
+                `$f'(x) = 6 \\cdot 8^{2x} \\cdot \\ln 8$`,
                 `$f'(x) = 3 \\cdot 2x \\cdot 8^{2x-1}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi skriver av funktionen. Eftersom exponenten har koefficienten 2 multiplicerar vi med den, och eftersom basen 8 inte är $e$ multiplicerar vi även med $\\ln 8$. Koefficienten framför (3) behålls.
 
 $$
@@ -32416,12 +32419,12 @@ $$
             level: 2,
             question: `Derivera $f(x) = 20e^{x/4}$.`,
             choices: [
-                `$f'(x) = 5e^{x/4}$`,
-                `$f'(x) = 20e^{x/4}$`,
-                `$f'(x) = 80e^{x/4}$`,
                 `$f'(x) = 5e^{4x}$`,
+                `$f'(x) = 5e^{x/4}$`,
+                `$f'(x) = 80e^{x/4}$`,
+                `$f'(x) = 20e^{x/4}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Exponenten $x/4$ innebär en division, så vi dividerar koefficienten framför (20) med samma nämnare (4).
 
 $$
@@ -32435,12 +32438,12 @@ $$
             level: 3,
             question: `Funktionen $f(x) = 5^x$ har i en viss punkt derivatan $f'(x) = 25\\ln 5$. Bestäm $x$-koordinaten för den punkten.`,
             choices: [
-                `$x = 2$`,
-                `$x = 25$`,
-                `$x = 5$`,
                 `$x = \\ln 25$`,
+                `$x = 25$`,
+                `$x = 2$`,
+                `$x = 5$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi deriverar $f(x) = 5^x$ enligt regeln för en annan bas än $e$ och sätter derivatan lika med det givna värdet.
 
 $$
@@ -32463,12 +32466,12 @@ $$
             level: 1,
             question: `Bestäm ekvationen för tangenten i punkten där $x = 2$ på kurvan $y = x^2 - 3x + 1$.`,
             choices: [
-                `$y = x - 3$`,
+                `$y = -x - 3$`,
                 `$y = x + 3$`,
                 `$y = 4x - 9$`,
-                `$y = -x - 3$`,
+                `$y = x - 3$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi deriverar och bestämmer $k$ som $y'(2)$.
 
 $$
@@ -32583,12 +32586,12 @@ $$
             level: 2,
             question: `Bestäm ekvationen för tangenten i punkten där $x = 0$ på kurvan $y = 3e^{2x}$.`,
             choices: [
-                `$y = 6x + 3$`,
                 `$y = 3x + 3$`,
-                `$y = 2x + 3$`,
+                `$y = 6x + 3$`,
                 `$y = 6x - 3$`,
+                `$y = 2x + 3$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi deriverar med kedjeregeln och bestämmer $k = y'(0)$.
 
 $$
@@ -32671,12 +32674,12 @@ tangeringspunkten ligger på kurvan hade $c$ förblivit obestämd.
             level: 1,
             question: `Vilket Geogebra-kommando använder du om du vill lösa en ekvation **exakt**, det vill säga få svaret i symboler i stället för decimaltal?`,
             choices: [
-                `Lös(Ekvation)`,
-                `NLös(Ekvation)`,
                 `f'(x)`,
+                `Lös(Ekvation)`,
                 `f(3)`,
+                `NLös(Ekvation)`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Kommandot Lös(Ekvation) ger den exakta lösningen i symbolisk form. NLös(Ekvation) ger i stället lösningen numeriskt som decimaltal. f'(x) definierar derivatan, och f(3) ger ett funktionsvärde — ingetdera löser en ekvation.
 
 **Svar:** Lös(Ekvation)`,
@@ -32705,12 +32708,12 @@ $$
             level: 1,
             question: `En modell ges av $f(t) = 40e^{0{,}05t}$. Vilket uttryck ger Geogebra om du skriver in f'(t)?`,
             choices: [
-                `$f'(t) = 2e^{0{,}05t}$`,
                 `$f'(t) = 40e^{0{,}05t}$`,
+                `$f'(t) = 2e^{0{,}05t}$`,
                 `$f'(t) = 0{,}05e^{0{,}05t}$`,
                 `$f'(t) = 2te^{0{,}05t}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `En funktion på formen $Ce^{kt}$ deriveras enligt $\\left(Ce^{kt}\\right)' = Ck \\cdot e^{kt}$. Här är $C = 40$ och $k = 0{,}05$, så
 
 $$
@@ -32829,12 +32832,12 @@ Vi ska bara ange en primitiv funktion, så konstanten $C$ behövs inte.
             level: 1,
             question: `Ange en primitiv funktion till $f(x) = 7$.`,
             choices: [
-                `$F(x) = 7x$`,
-                `$F(x) = 7$`,
                 `$F(x) = \\dfrac{x}{7}$`,
+                `$F(x) = 7x$`,
                 `$F(x) = 7x^2$`,
+                `$F(x) = 7$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Detta är en konstant funktion. Vi multiplicerar konstanten med $x$.
 
 $$
@@ -32847,12 +32850,12 @@ $$
             level: 1,
             question: `Ange en primitiv funktion till $f(x) = e^{5x}$.`,
             choices: [
-                `$F(x) = \\dfrac{e^{5x}}{5}$`,
-                `$F(x) = 5e^{5x}$`,
-                `$F(x) = e^{5x}$`,
                 `$F(x) = \\dfrac{e^{5x}}{25}$`,
+                `$F(x) = 5e^{5x}$`,
+                `$F(x) = \\dfrac{e^{5x}}{5}$`,
+                `$F(x) = e^{5x}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Detta är en exponentialfunktion ($x$ i exponenten) med basen $e$. Vi skriver av funktionen och dividerar med koefficienten framför $x$ i exponenten, som här är 5.
 
 $$
@@ -32866,12 +32869,12 @@ $$
             level: 2,
             question: `Bestäm samtliga primitiva funktioner till $f(x) = 6x^2 - 4x$.`,
             choices: [
-                `$F(x) = 2x^3 - 2x^2 + C$`,
                 `$F(x) = 2x^3 - 4x^2 + C$`,
+                `$F(x) = 2x^3 - 2x^2 + C$`,
                 `$F(x) = 18x^3 - 4x^2 + C$`,
                 `$F(x) = 2x^3 - 2x^2$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi tar fram en primitiv funktion till varje term för sig, båda är potenstermer.
 
 $$
@@ -32890,12 +32893,12 @@ $$
             level: 2,
             question: `Bestäm en primitiv funktion till $f(x) = 9e^{3x} + 5$.`,
             choices: [
+                `$F(x) = 3e^{3x} + 5x + C$`,
+                `$F(x) = 27e^{3x} + 5x$`,
                 `$F(x) = 3e^{3x} + 5x$`,
                 `$F(x) = 3e^{3x} + 5$`,
-                `$F(x) = 27e^{3x} + 5x$`,
-                `$F(x) = 3e^{3x} + 5x + C$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi tar fram en primitiv funktion till varje term för sig. Termen $9e^{3x}$ är en exponentialfunktion, så vi skriver av den och dividerar med koefficienten 3 framför $x$ i exponenten. Termen 5 är en konstant funktion, så vi multiplicerar den med $x$.
 
 $$
@@ -32915,12 +32918,12 @@ $$
             level: 3,
             question: `En primitiv funktion $F(x)$ till $f(x) = 6x - 4$ uppfyller $F(0) = 7$. Bestäm $F(x)$.`,
             choices: [
-                `$F(x) = 3x^2 - 4x + 7$`,
                 `$F(x) = 3x^2 - 4x$`,
-                `$F(x) = 3x^2 - 4x + C$`,
+                `$F(x) = 3x^2 - 4x + 7$`,
                 `$F(x) = 6x^2 - 4x + 7$`,
+                `$F(x) = 3x^2 - 4x + C$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Villkoret $F(0) = 7$ säger att grafen till $F$ ska gå genom en bestämd punkt — det räcker alltså inte att ange samtliga primitiva funktioner, vi måste också bestämma vilket värde $C$ har.
 
 Vi tar först fram samtliga primitiva funktioner till $f(x) = 6x - 4$.
@@ -32949,12 +32952,12 @@ $$
             level: 1,
             question: `Bestäm den primitiva funktionen $F(x)$ till $f(x) = 4x^3$ som uppfyller villkoret $F(1) = 2$.`,
             choices: [
-                `$F(x) = x^4 + 1$`,
-                `$F(x) = x^4 - 1$`,
                 `$F(x) = 4x^4 + 1$`,
                 `$F(x) = x^4 + 2$`,
+                `$F(x) = x^4 + 1$`,
+                `$F(x) = x^4 - 1$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi tar först fram samtliga primitiva funktioner till $f(x)$.
 
 $$
@@ -32973,12 +32976,12 @@ $$
             level: 1,
             question: `Hastigheten $v(t)$ för ett föremål är $v(t) = 3t^2$. Sträckan uppfyller villkoret $s(0) = 4$. Bestäm $s(t)$.`,
             choices: [
-                `$s(t) = t^3 + 4$`,
-                `$s(t) = t^3 + 3$`,
-                `$s(t) = 3t^3 + 4$`,
                 `$s(t) = t^3 - 4$`,
+                `$s(t) = t^3 + 4$`,
+                `$s(t) = 3t^3 + 4$`,
+                `$s(t) = t^3 + 3$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi integrerar $v(t)$ för att få $s(t)$.
 
 $$
@@ -32997,12 +33000,12 @@ $$
             level: 1,
             question: `Bestäm den primitiva funktionen $F(x)$ till $f(x) = 6x - 2$ som uppfyller villkoret $F(2) = 10$.`,
             choices: [
-                `$F(x) = 3x^2 - 2x + 2$`,
                 `$F(x) = 3x^2 - 2x + 10$`,
+                `$F(x) = 3x^2 - 2x + 2$`,
                 `$F(x) = 3x^2 - 2x - 2$`,
                 `$F(x) = 6x^2 - 2x + 2$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi tar fram samtliga primitiva funktioner till $f(x)$.
 
 $$
@@ -33131,12 +33134,12 @@ $$
             level: 1,
             question: `Grafen till $f(x) = x^2 + 2$ är ritad i ett koordinatsystem. Det skuggade området begränsas av grafen, $x$-axeln, linjen $x = 0$ och linjen $x = 3$. Vilken integral beskriver det skuggade områdets area?`,
             choices: [
+                `$\\displaystyle\\int_0^2 (x^2 + 2)\\, dx$`,
+                `$\\displaystyle\\int_2^3 (x^2 + 2)\\, dx$`,
                 `$\\displaystyle\\int_0^3 (x^2 + 2)\\, dx$`,
                 `$\\displaystyle\\int_0^3 x^2\\, dx$`,
-                `$\\displaystyle\\int_2^3 (x^2 + 2)\\, dx$`,
-                `$\\displaystyle\\int_0^2 (x^2 + 2)\\, dx$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Den undre integrationsgränsen är det $x$-värde där arean börjar, $x = 0$, och den övre är det $x$-värde där arean slutar, $x = 3$. Integranden är grafens funktion, $f(x) = x^2 + 2$. Arean ges alltså av
 
 $$
@@ -33149,12 +33152,12 @@ $$
             level: 1,
             question: `Grafen till en funktion $f(x)$ ligger helt under $x$-axeln mellan $x = a$ och $x = b$. Vilket tecken har $\\displaystyle\\int_a^b f(x)\\, dx$?`,
             choices: [
-                `Negativt`,
+                `Går inte att avgöra utan mer information`,
                 `Positivt`,
                 `Alltid noll`,
-                `Går inte att avgöra utan mer information`,
+                `Negativt`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `En bestämd integral får ett negativt värde om arean under grafen ligger under $x$-axeln. Arean i sig kan aldrig vara negativ, men eftersom hela området ligger under $x$-axeln blir integralens värde arean med motsatt tecken, det vill säga negativt.
 
 **Svar:** Negativt`,
@@ -33295,12 +33298,12 @@ $$
             level: 3,
             question: `Bestäm det tal $k > 1$ som uppfyller $\\displaystyle\\int_1^k (2x - 1)\\, dx = 20$.`,
             choices: [
-                `$k = 5$`,
                 `$k = -4$`,
                 `$k = 4$`,
+                `$k = 5$`,
                 `$k = 6$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Den primitiva funktionen till $f(x) = 2x - 1$ är $F(x) = x^2 - x$. Vi ställer upp fundamentalsatsen med den okända övre gränsen $k$.
 
 $$
@@ -33424,12 +33427,12 @@ $$
 
 för ett visst positivt tal $a$. Bestäm $a$.`,
             choices: [
+                `$a = 2$`,
                 `$a = 4$`,
                 `$a = 8$`,
                 `$a = 16$`,
-                `$a = 2$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi bestämmer först integralen som ett uttryck i $a$ (en primitiv funktion till $2x$ är $x^2$).
 
 $$
@@ -33633,12 +33636,12 @@ så integralen ger ett antal liter — nämligen den mängd vatten som runnit in
             level: 1,
             question: `Ett företags kostnad förändras med hastigheten $K'(t)$ kr/dag, där $t$ är tiden i dagar. Vilken enhet får $\\displaystyle\\int_0^{10} K'(t)\\, dt$?`,
             choices: [
-                `kr`,
-                `kr/dag`,
                 `dag`,
                 `$\\text{kr} \\cdot \\text{dag}^2$`,
+                `kr/dag`,
+                `kr`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Integralen ger produkten av "enheten för den beroende variabeln" ($K'(t)$, som har enheten kr/dag) och "enheten för den oberoende variabeln" ($t$, som har enheten dag).
 
 $$
@@ -33731,12 +33734,12 @@ $$
             level: 1,
             question: `En funktion $f(x)$ har $f'(2) = 5$. Är $f(x)$ växande eller avtagande vid $x = 2$?`,
             choices: [
-                `Växande`,
                 `Avtagande`,
-                `Konstant`,
+                `Växande`,
                 `Går inte att avgöra utan mer information`,
+                `Konstant`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Om derivatan är positiv i en punkt är funktionens lutning positiv där, vilket betyder att funktionen växer.
 
 $$
@@ -33771,12 +33774,12 @@ ${makeDiagram({
             level: 1,
             question: `Vad betyder det att en funktion $f(x)$ är **strängt avtagande** i ett intervall?`,
             choices: [
-                `Funktionen avtar i hela intervallet, utan några delar där den växer eller är konstant`,
                 `Funktionen avtar i en del av intervallet men växer i en annan del`,
-                `Funktionens värde är alltid negativt i intervallet`,
                 `Funktionen har en minimipunkt mitt i intervallet`,
+                `Funktionens värde är alltid negativt i intervallet`,
+                `Funktionen avtar i hela intervallet, utan några delar där den växer eller är konstant`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Strängt avtagande betyder att funktionen avtar under **hela** intervallet — det finns ingen del av intervallet där funktionen i stället växer eller är konstant.
 
 **Svar:** Funktionen avtar i hela intervallet, utan några delar där den växer eller är konstant.`,
@@ -33794,12 +33797,12 @@ ${makeDiagram({
     paths: [{ points: [[-3, -4], [-2.75, -2.81], [-2.5, -1.75], [-2.25, -0.81], [-2, 0], [-1.75, 0.69], [-1.5, 1.25], [-1.25, 1.69], [-1, 2], [-0.75, 2.19], [-0.5, 2.25], [-0.25, 2.19], [0, 2], [0.25, 1.69], [0.5, 1.25], [0.75, 0.69], [1, 0], [1.25, -0.81], [1.5, -1.75], [1.75, -2.81], [2, -4]] }],
 })}`,
             choices: [
-                `$x < -2$ och $x > 1$`,
                 `$-2 < x < 1$`,
-                `$x < -2$`,
                 `$x > 1$`,
+                `$x < -2$`,
+                `$x < -2$ och $x > 1$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `$f(x)$ är avtagande där $f'(x) < 0$, det vill säga där grafen till $f'(x)$ ligger under $x$-axeln. Grafen skär $x$-axeln vid $x = -2$ och $x = 1$, och ligger under axeln både till vänster om $x = -2$ och till höger om $x = 1$.
 
 | Intervall | Tecken på $f'(x)$ | $f(x)$ |
@@ -33814,12 +33817,12 @@ ${makeDiagram({
             level: 2,
             question: `En funktion $f(x)$ har derivatan $f'(x) = (x - 2)(x + 3)$. I vilket intervall är $f(x)$ avtagande?`,
             choices: [
+                `$x < -3$`,
                 `$-3 < x < 2$`,
                 `$x < -3$ och $x > 2$`,
-                `$x < -3$`,
                 `$x > 2$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi bestämmer först nollställena till $f'(x)$ genom att sätta varje faktor lika med noll.
 
 $$
@@ -33845,12 +33848,12 @@ $$
             level: 3,
             question: `En funktion $f(x)$ har en derivata $f'(x)$ som endast är noll vid $x = -1$ och $x = 4$ — och som byter tecken vid vart och ett av dessa nollställen (den passerar rakt igenom $x$-axeln, den planar inte ut). Det är känt att $f(x)$ är strängt avtagande för $x < -1$. I vilket intervall är $f(x)$ strängt växande?`,
             choices: [
+                `$-1 < x < 4$ och $x > 4$`,
                 `$-1 < x < 4$`,
                 `$x < -1$`,
                 `$x > 4$`,
-                `$-1 < x < 4$ och $x > 4$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Eftersom $f'(x)$ bara är noll vid $x = -1$ och $x = 4$, och byter tecken vid varje nollställe, måste tecknet på $f'(x)$ växla mellan de tre intervallen $x < -1$, $-1 < x < 4$ och $x > 4$ — annars skulle $f'(x)$ ha behövt ännu ett nollställe för att byta tecken tillbaka.
 
 Vi vet att $f(x)$ är strängt avtagande för $x < -1$, det vill säga att $f'(x) < 0$ där. Eftersom tecknet växlar vid varje nollställe blir
@@ -33887,12 +33890,12 @@ $$
             level: 1,
             question: `Funktionen $f(x) = 2x^3 - 3x^2$ har derivatan $f'(x) = 6x^2 - 6x$. Vilka $x$-värden ger $f'(x) = 0$?`,
             choices: [
-                `$x = 0$ och $x = 1$`,
-                `$x = 0$ och $x = -1$`,
-                `$x = 1$ och $x = -1$`,
                 `$x = 0$ och $x = 6$`,
+                `$x = 0$ och $x = -1$`,
+                `$x = 0$ och $x = 1$`,
+                `$x = 1$ och $x = -1$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi bryter ut den gemensamma faktorn $6x$ ur derivatan och använder nollproduktmetoden.
 
 $$
@@ -33915,12 +33918,12 @@ vilket ger $x = 0$ eller $x = 1$.
             level: 1,
             question: `En andragradsfunktion har en extrempunkt, och koefficienten framför $x^2$-termen är negativ. Är extrempunkten en maximipunkt eller en minimipunkt?`,
             choices: [
+                `Terrasspunkt`,
                 `Maximipunkt`,
                 `Minimipunkt`,
-                `Terrasspunkt`,
                 `Det går inte att avgöra utan att derivera`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `En negativ $x^2$-term ger en "sur" kurva (kurvan öppnar sig nedåt), vilket alltid medför att andragradsfunktionens enda extrempunkt är en maximipunkt. En positiv $x^2$-term hade i stället gett en "glad" kurva och en minimipunkt.
 
 **Svar:** Maximipunkt`,
@@ -33989,12 +33992,12 @@ Koefficienten framför $x^2$-termen är $-1$, alltså negativ, vilket ger en max
             level: 3,
             question: `Funktionen $f(x) = x^3 + ax^2 + b$ har en lokal extrempunkt i punkten $(2, 6)$. Bestäm konstanterna $a$ och $b$.`,
             choices: [
-                `$a = -3$ och $b = 10$`,
-                `$a = 3$ och $b = 10$`,
                 `$a = -3$ och $b = -10$`,
                 `$a = -6$ och $b = 10$`,
+                `$a = 3$ och $b = 10$`,
+                `$a = -3$ och $b = 10$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Att $(2, 6)$ är en extrempunkt ger oss **två** villkor att utnyttja: dels att derivatan är 0 vid $x = 2$, dels att funktionsvärdet vid $x = 2$ är 6.
 
 Vi deriverar funktionen.
@@ -34035,12 +34038,12 @@ Observera att $b$ inte kan bestämmas ur derivatan (konstanttermen försvinner v
             level: 1,
             question: `Funktionen $f(x) = x^2 - 6x + 5$ är definierad på intervallet $0 \\leq x \\leq 5$. Beräkna funktionens värde i intervallets båda ändpunkter.`,
             choices: [
-                `$(0, 5)$ och $(5, 0)$`,
-                `$(0, -5)$ och $(5, 0)$`,
                 `$(0, 5)$ och $(5, 5)$`,
                 `$(0, 0)$ och $(5, 5)$`,
+                `$(0, 5)$ och $(5, 0)$`,
+                `$(0, -5)$ och $(5, 0)$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi sätter in $x = 0$ respektive $x = 5$ i funktionsuttrycket.
 
 $$
@@ -34079,12 +34082,12 @@ $$
             level: 1,
             question: `En funktions teckentabell visar att $f'(x)$ är positiv för $x < 3$, lika med $0$ vid $x = 3$, och negativ för $x > 3$. Vilken typ av extrempunkt har funktionen vid $x = 3$?`,
             choices: [
-                `Maximipunkt`,
                 `Minimipunkt`,
-                `Terrasspunkt`,
                 `Ingen extrempunkt`,
+                `Maximipunkt`,
+                `Terrasspunkt`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Derivatans tecken går från $+$ (växande) till $-$ (avtagande) vid $x = 3$. Funktionen växer fram till punkten och avtar efter den, vilket är precis kännetecknet för en maximipunkt.
 
 **Svar:** Maximipunkt`,
@@ -34120,12 +34123,12 @@ Vi jämför värdena $0$, $-5$ och $4$. Det största värdet, $4$, finns i extre
             level: 2,
             question: `Funktionen $f(x) = x^3 - 3x^2 - 9x + 5$ har derivatan $f'(x) = 3x^2 - 6x - 9$, som är $0$ vid $x = -1$ och $x = 3$. Är punkten vid $x = -1$ en maximipunkt eller en minimipunkt?`,
             choices: [
-                `Maximipunkt`,
                 `Minimipunkt`,
                 `Terrasspunkt`,
+                `Maximipunkt`,
                 `Går inte att avgöra`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi testar tecknet på $f'(x)$ strax före och strax efter $x = -1$, till exempel vid $x = -2$ och $x = 0$.
 
 $$
@@ -34145,12 +34148,12 @@ Derivatan går från $+$ till $-$ vid $x = -1$, det vill säga funktionen växer
             level: 3,
             question: `Funktionen $f(x) = x^3 + ax + b$ har en minimipunkt vid $x = 2$, och funktionens värde där är $-20$. Bestäm konstanterna $a$ och $b$.`,
             choices: [
-                `$a = -12$ och $b = -4$`,
-                `$a = -12$ och $b = -20$`,
                 `$a = 12$ och $b = -4$`,
+                `$a = -12$ och $b = -20$`,
+                `$a = -12$ och $b = -4$`,
                 `$a = -4$ och $b = -12$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi har två villkor att utnyttja: dels att $x = 2$ är en extrempunkt (derivatan är $0$ där), dels att funktionsvärdet där är $-20$. Detta ger oss ett ekvationssystem med de två obekanta $a$ och $b$.
 
 Vi deriverar och utnyttjar att $f'(2) = 0$.
@@ -34183,12 +34186,12 @@ $$
             level: 1,
             question: `Bestäm andraderivatan $f''(x)$ till funktionen $f(x) = x^3 - 3x^2 + 2$.`,
             choices: [
-                `$6x - 6$`,
-                `$6x - 3$`,
-                `$3x - 6$`,
                 `$6x + 6$`,
+                `$3x - 6$`,
+                `$6x - 3$`,
+                `$6x - 6$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi deriverar funktionen två gånger. Först förstaderivatan.
 
 $$
@@ -34207,12 +34210,12 @@ $$
             level: 1,
             question: `Bestäm andraderivatan $f''(x)$ till funktionen $f(x) = 2x^3 + x^2 - 5x$.`,
             choices: [
-                `$12x + 2$`,
                 `$12x - 2$`,
-                `$6x + 2$`,
                 `$12x^2 + 2$`,
+                `$6x + 2$`,
+                `$12x + 2$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi deriverar funktionen två gånger.
 
 $$
@@ -34229,12 +34232,12 @@ $$
             level: 1,
             question: `Bestäm andraderivatan $f''(x)$ till funktionen $f(x) = x^4 - 4x^3$.`,
             choices: [
-                `$12x^2 - 24x$`,
                 `$12x^2 - 12x$`,
-                `$4x^2 - 24x$`,
                 `$12x^3 - 24x$`,
+                `$4x^2 - 24x$`,
+                `$12x^2 - 24x$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi deriverar funktionen två gånger.
 
 $$
@@ -34252,12 +34255,12 @@ $$
             level: 2,
             question: `Andraderivatan till en funktion $f(x)$ är $f''(x) = 6x - 6$. För vilka $x$ är funktionen konkav?`,
             choices: [
-                `$x < 1$`,
                 `$x > 1$`,
+                `$x < 1$`,
                 `$x < 6$`,
                 `$x > -1$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Funktionen är konkav när andraderivatan är negativ, det vill säga när $f''(x) < 0$.
 
 $$
@@ -34278,12 +34281,12 @@ $$
             level: 2,
             question: `Bestäm $x$-koordinaten för inflexionspunkten till funktionen $f(x) = x^3 - 6x^2 + 9x - 1$.`,
             choices: [
-                `$x = 2$`,
-                `$x = 1$`,
-                `$x = 3$`,
                 `$x = 4$`,
+                `$x = 1$`,
+                `$x = 2$`,
+                `$x = 3$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `I inflexionspunkten är andraderivatan lika med noll. Vi deriverar funktionen två gånger.
 
 $$
@@ -34311,12 +34314,12 @@ $$
             level: 3,
             question: `En tredjegradsfunktion $f(x) = x^3 + ax^2 + bx + c$ har en inflexionspunkt i $(1, 2)$, och grafen går genom origo. Bestäm $a$ och $b$.`,
             choices: [
-                `$a = -3$ och $b = 4$`,
-                `$a = 3$ och $b = 4$`,
                 `$a = -3$ och $b = -4$`,
+                `$a = -3$ och $b = 4$`,
                 `$a = -2$ och $b = 1$`,
+                `$a = 3$ och $b = 4$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Här måste vi använda **tre** olika villkor för att bestämma konstanterna: att grafen går genom origo, att $(1, 2)$ är en inflexionspunkt (andraderivatan noll där), och att $f(1) = 2$.
 
 Att grafen går genom origo ger $f(0) = 0$, vilket ger $c = 0$.
@@ -34359,12 +34362,12 @@ $$
             level: 1,
             question: `Funktionen $f(x) = x^3 - 12x$ har $f'(x) = 3x^2 - 12$, med $f'(2) = 0$. Avgör extrempunktens karaktär vid $x = 2$ med andraderivatan.`,
             choices: [
-                `Minimipunkt, eftersom $f''(2) = 12 > 0$`,
-                `Maximipunkt, eftersom $f''(2) = 12 > 0$`,
                 `Minimipunkt, eftersom $f''(2) = 12 < 0$`,
                 `Terrasspunkt, eftersom $f''(2) = 0$`,
+                `Maximipunkt, eftersom $f''(2) = 12 > 0$`,
+                `Minimipunkt, eftersom $f''(2) = 12 > 0$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi deriverar $f'(x) = 3x^2 - 12$ en gång till.
 
 $$
@@ -34403,12 +34406,12 @@ $$
             level: 1,
             question: `Funktionen $f(x) = -x^3 + 3x^2$ har $f'(x) = -3x^2 + 6x$, med $f'(2) = 0$. Avgör extrempunktens karaktär vid $x = 2$ med andraderivatan.`,
             choices: [
-                `Maximipunkt, eftersom $f''(2) = -6 < 0$`,
-                `Minimipunkt, eftersom $f''(2) = -6 < 0$`,
                 `Maximipunkt, eftersom $f''(2) = 6 > 0$`,
+                `Maximipunkt, eftersom $f''(2) = -6 < 0$`,
                 `Terrasspunkt, eftersom $f''(2) = 0$`,
+                `Minimipunkt, eftersom $f''(2) = -6 < 0$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi deriverar $f'(x) = -3x^2 + 6x$ en gång till.
 
 $$
@@ -34430,12 +34433,12 @@ Andraderivatan är negativ, vilket ger en lokal **maximipunkt**.
             level: 2,
             question: `Funktionen $f(x) = x^3 - 3x^2 - 9x + 5$ har extrempunkter vid $x = -1$ och $x = 3$. Bestäm den lokala extrempunktens koordinater och karaktär vid $x = 3$.`,
             choices: [
-                `$(3, -22)$, minimipunkt`,
-                `$(3, -22)$, maximipunkt`,
                 `$(3, 22)$, minimipunkt`,
+                `$(3, -22)$, maximipunkt`,
                 `$(-1, 10)$, minimipunkt`,
+                `$(3, -22)$, minimipunkt`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi sätter in $x = 3$ i den ursprungliga funktionen för att få $y$-koordinaten.
 
 $$
@@ -34464,12 +34467,12 @@ Andraderivatan är positiv, så $(3, -22)$ är en **minimipunkt**.
             level: 2,
             question: `En funktion $g$ uppfyller $g'(4) = 0$ och $g''(4) = 0$. Vad kan du dra för slutsats om punkten där $x = 4$?`,
             choices: [
-                `Punkten kan vara en terrasspunkt eller en lokal extrempunkt — ett teckenstudium (teckentabell) krävs för att avgöra`,
                 `Punkten är alltid en minimipunkt eftersom $g''(4) = 0$`,
                 `Punkten är alltid en maximipunkt eftersom $g''(4) = 0$`,
+                `Punkten kan vara en terrasspunkt eller en lokal extrempunkt — ett teckenstudium (teckentabell) krävs för att avgöra`,
                 `Punkten kan inte vara en extrempunkt eftersom $g''(4) = 0$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Andraderivatametoden fungerar bara när $g''(a) \\neq 0$ — då avgör tecknet direkt om det är en maximi- eller minimipunkt.
 
 När $g''(4) = 0$ ger andraderivatan **ingen** information om karaktären: punkten kan vara en terrasspunkt (som $x = 0$ för $f(x) = x^3$) eller en vanlig lokal extrempunkt. Då måste vi falla tillbaka på ett teckenstudium av $g'(x)$ i en teckentabell för att avgöra saken.
@@ -34525,12 +34528,12 @@ A(x) = 30x - x^2
 $$
 där $x$ är sidans längd i meter. Vilket värde på $x$ ger maximal area?`,
             choices: [
+                `$x = 60$`,
+                `$x = 7{,}5$`,
                 `$x = 15$`,
                 `$x = 30$`,
-                `$x = 7{,}5$`,
-                `$x = 60$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi deriverar funktionen, sätter derivatan lika med 0 och löser ekvationen.
 
 $$
@@ -34571,12 +34574,12 @@ V(x) = 80x - 2x^2
 $$
 där $x$ är antalet sålda enheter (i hundratal). Vilket värde på $x$ ger maximal vinst?`,
             choices: [
-                `$x = 20$`,
-                `$x = 40$`,
                 `$x = 10$`,
                 `$x = 80$`,
+                `$x = 40$`,
+                `$x = 20$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi deriverar funktionen, sätter derivatan lika med 0 och löser ekvationen.
 
 $$
@@ -34594,12 +34597,12 @@ $$
             level: 2,
             question: `En rektangulär rabatt ska anläggas utmed en husvägg (den sidan behöver inget kantstöd). Det finns totalt 48 meter kantstöd till de tre övriga sidorna, där de två lika långa sidorna är $x$ meter. Vilken är den maximala area rabatten kan få?`,
             choices: [
-                `$288\\ \\mathrm{m}^2$`,
                 `$576\\ \\mathrm{m}^2$`,
                 `$144\\ \\mathrm{m}^2$`,
+                `$288\\ \\mathrm{m}^2$`,
                 `$24\\ \\mathrm{m}^2$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Den tredje sidan (parallell med väggen) har längden $(48 - 2x)$ meter, eftersom de två sidorna $x$ tillsammans tar $2x$ meter av kantstödet.
 
 Arean ges av basen gånger höjden:
@@ -34701,12 +34704,12 @@ Observera att grindens 8 meter **inte** ska räknas som stängsel — det är de
             level: 1,
             question: `En rektangel ska ha omkretsen 60 cm. Om ena sidan är $x$ cm, vilket uttryck ger rektangelns area $A$ som funktion av $x$?`,
             choices: [
-                `$A(x) = x(30 - x)$`,
-                `$A(x) = x(60 - x)$`,
                 `$A(x) = 2x(30 - x)$`,
                 `$A(x) = x^2 - 30$`,
+                `$A(x) = x(60 - x)$`,
+                `$A(x) = x(30 - x)$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Omkretsen är summan av alla fyra sidor: $2x + 2y = 60$, där $y$ är den andra sidan. Vi löser ut $y$:
 
 $$
@@ -34807,12 +34810,12 @@ Både $(24 - 2x) > 0$ och $(15 - 2x) > 0$ måste gälla (annars går det inte at
             level: 1,
             question: `Hur definieras $\\sin v$ i en rätvinklig triangel?`,
             choices: [
-                `$\\sin v = \\dfrac{\\text{motstående katet}}{\\text{hypotenusa}}$`,
                 `$\\sin v = \\dfrac{\\text{motstående katet}}{\\text{närliggande katet}}$`,
-                `$\\sin v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
                 `$\\sin v = \\dfrac{\\text{hypotenusa}}{\\text{motstående katet}}$`,
+                `$\\sin v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
+                `$\\sin v = \\dfrac{\\text{motstående katet}}{\\text{hypotenusa}}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Sinus är förhållandet mellan den motstående kateten och hypotenusan. (Motstående/närliggande är tangens och närliggande/hypotenusa är cosinus.)
 
 **Svar:** $\\sin v = \\dfrac{\\text{motstående katet}}{\\text{hypotenusa}}$`,
@@ -34846,12 +34849,12 @@ $$
             level: 2,
             question: `En flaggstång är 6,0 m hög och solens höjdvinkel är 52°.<br>a) Bestäm skuggans längd.<br>b) Bestäm avståndet mellan flaggstångens topp och skuggans yttersta punkt (hypotenusan). Avrunda båda svaren till en decimal.`,
             choices: [
-                `4,7 m; 7,6 m`,
-                `7,6 m; 4,7 m`,
                 `4,7 m; 9,7 m`,
                 `7,7 m; 7,6 m`,
+                `4,7 m; 7,6 m`,
+                `7,6 m; 4,7 m`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**a)** Flaggstången är motstående katet till höjdvinkeln, skuggan är närliggande katet — vi använder tangens.
 
 $$
@@ -34870,12 +34873,12 @@ $$
             level: 2,
             question: `En rutschkana har en vågrät bottensträcka på 3,5 m och en lodrät höjd på 2,1 m.<br>a) Bestäm lutningsvinkeln $v$ mot marken (avrunda till heltal).<br>b) Bestäm rutschkanans egen längd, det vill säga hypotenusan (avrunda till en decimal).`,
             choices: [
-                `31°; 4,1 m`,
+                `59°; 3,5 m`,
                 `31°; 3,5 m`,
                 `59°; 4,1 m`,
-                `59°; 3,5 m`,
+                `31°; 4,1 m`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**a)** Höjden är motstående katet och bottensträckan är närliggande katet till $v$ — vi använder tangens och dess invers.
 
 $$
@@ -34897,12 +34900,12 @@ Observera att $\\tan^{-1}$ av kvoten mellan de två katetrarna INTE ger hypotenu
             level: 3,
             question: `En rätvinklig triangel har hypotenusan $c$ och en av de spetsiga vinklarna $v$. Vilket uttryck, skrivet enbart med $c$ och $v$, ger triangelns area?`,
             choices: [
-                `$\\dfrac{c^2 \\sin v \\cos v}{2}$`,
                 `$c^2 \\sin v \\cos v$`,
-                `$\\dfrac{c \\sin v \\cos v}{2}$`,
+                `$\\dfrac{c^2 \\sin v \\cos v}{2}$`,
                 `$\\dfrac{c^2 \\sin v}{2}$`,
+                `$\\dfrac{c \\sin v \\cos v}{2}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** ingen sida är given som tal — båda katetrarna måste först uttryckas i $c$ och $v$ innan de kan multipliceras ihop till en area.
 
 Motstående katet till $v$ ges av sinus, och närliggande katet ges av cosinus:
@@ -34931,12 +34934,12 @@ De felaktiga alternativen har antingen glömt att kvadrera $c$ (bara EN faktor $
             level: 1,
             question: `Punkten $(0{,}6;\\ 0{,}8)$ på enhetscirkeln motsvarar vinkeln $v$. Vad är $\\cos v$?`,
             choices: [
-                `$0{,}6$`,
-                `$0{,}8$`,
-                `$1$`,
                 `$1{,}33$`,
+                `$0{,}8$`,
+                `$0{,}6$`,
+                `$1$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `På enhetscirkeln motsvarar $\\cos v$ punktens $x$-koordinat.
 
 $$
@@ -34949,12 +34952,12 @@ $$
             level: 1,
             question: `Punkten $(-0{,}28;\\ 0{,}96)$ på enhetscirkeln motsvarar vinkeln $v$. Vad är $\\sin v$?`,
             choices: [
-                `$0{,}96$`,
-                `$-0{,}28$`,
                 `$-0{,}96$`,
+                `$0{,}96$`,
                 `$0{,}28$`,
+                `$-0{,}28$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `På enhetscirkeln motsvarar $\\sin v$ punktens $y$-koordinat.
 
 $$
@@ -34992,12 +34995,12 @@ $$
             level: 2,
             question: `För en vinkel $v$ gäller $\\sin v = 0{,}4$. Vad är $\\sin(-v)$?`,
             choices: [
-                `$-0{,}4$`,
-                `$0{,}4$`,
                 `$0{,}6$`,
                 `$-0{,}6$`,
+                `$0{,}4$`,
+                `$-0{,}4$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vinkeln $-v$ ger en punkt som är en spegelbild i $x$-axeln av punkten för $v$. Cosinusvärdet ($x$-koordinaten) är oförändrat, medan sinusvärdet ($y$-koordinaten) byter tecken.
 
 $$
@@ -35011,12 +35014,12 @@ $$
             level: 3,
             question: `Bestäm $\\sin(-390^\\circ)$ exakt, givet att $\\sin 30^\\circ = 0{,}5$.`,
             choices: [
-                `$-0{,}5$`,
                 `$0{,}5$`,
+                `$-0{,}5$`,
                 `$-0{,}87$`,
                 `$0{,}87$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vinkeln $-390^\\circ$ ligger utanför intervallet $0^\\circ$ till $360^\\circ$. Vi lägger till ett helt varv ($360^\\circ$) för att hitta en likvärdig vinkel.
 
 $$
@@ -35039,12 +35042,12 @@ $$
             level: 1,
             question: `Bestäm $\\cos 0\^\circ$ med hjälp av enhetscirkeln.`,
             choices: [
-                `1`,
-                `0`,
-                `$-1$`,
                 `$\\dfrac{1}{2}$`,
+                `0`,
+                `1`,
+                `$-1$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vid $0\^\circ$ ligger punkten på enhetscirkelns kant i $(1, 0)$. Cosinus motsvarar $x$-koordinaten.
 
 $$
@@ -35057,12 +35060,12 @@ $$
             level: 1,
             question: `Bestäm $\\sin 270\^\circ$ med hjälp av enhetscirkeln.`,
             choices: [
-                `$-1$`,
                 `1`,
+                `$-1$`,
                 `0`,
                 `$\\dfrac{1}{2}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vid $270\^\circ$ ligger punkten på enhetscirkelns kant längst ner, i $(0, -1)$. Sinus motsvarar $y$-koordinaten.
 
 $$
@@ -35075,12 +35078,12 @@ $$
             level: 1,
             question: `Vilken av ekvationerna nedan saknar lösning?`,
             choices: [
-                `$\\cos v = -2$`,
-                `$\\sin v = 0{,}5$`,
-                `$\\cos v = 1$`,
                 `$\\sin v = -0{,}9$`,
+                `$\\sin v = 0{,}5$`,
+                `$\\cos v = -2$`,
+                `$\\cos v = 1$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Enhetscirkelns radie är 1, så både $\\sin v$ och $\\cos v$ måste ligga i intervallet $[-1, 1]$. Linjen $x = -2$ hamnar helt utanför cirkeln, så ekvationen $\\cos v = -2$ saknar lösning. De övriga tre ekvationerna har alla ett $a$-värde inom $[-1, 1]$ och går därför att lösa.
 
 **Svar:** $\\cos v = -2$`,
@@ -35090,12 +35093,12 @@ $$
             level: 2,
             question: `Lös ekvationen $3\\sin v = 1{,}5$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$.`,
             choices: [
+                `$v = 30\^\circ$ (enda lösningen)`,
                 `$v_1 = 30\^\circ$ och $v_2 = 150\^\circ$`,
                 `$v_1 = 30\^\circ$ och $v_2 = 330\^\circ$`,
                 `$v_1 = 60\^\circ$ och $v_2 = 120\^\circ$`,
-                `$v = 30\^\circ$ (enda lösningen)`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi löser först ut $\\sin v$.
 
 $$
@@ -35153,12 +35156,12 @@ $$
             level: 3,
             question: `En vinkel $v$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$ uppfyller $\\sin v = 0{,}6$ och ligger i andra kvadranten (mellan $90\^\circ$ och $180\^\circ$). Bestäm $v$, avrundat till en decimal.`,
             choices: [
-                `$v \\approx 143{,}1\^\circ$`,
-                `$v \\approx 36{,}9\^\circ$`,
-                `$v \\approx 216{,}9\^\circ$`,
                 `$v \\approx 126{,}9\^\circ$`,
+                `$v \\approx 216{,}9\^\circ$`,
+                `$v \\approx 36{,}9\^\circ$`,
+                `$v \\approx 143{,}1\^\circ$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Ekvationen $\\sin v = 0{,}6$ har i intervallet $0\^\circ \\leq v \\leq 360\^\circ$ två lösningar. Räknaren ger den minsta.
 
 $$
@@ -35185,12 +35188,12 @@ lösning som söks — inte $v_1$, trots att det är den räknaren visar direkt.
             level: 1,
             question: `Lös ekvationen $\\tan v = 3$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$. Ange båda lösningarna avrundade till en decimal.`,
             choices: [
-                `$v = 71{,}6\^\circ$ eller $v = 251{,}6\^\circ$`,
-                `$v = 71{,}6\^\circ$ eller $v = 108{,}4\^\circ$`,
                 `$v = 71{,}6\^\circ$`,
                 `$v = 71{,}6\^\circ$ eller $v = 431{,}6\^\circ$`,
+                `$v = 71{,}6\^\circ$ eller $v = 251{,}6\^\circ$`,
+                `$v = 71{,}6\^\circ$ eller $v = 108{,}4\^\circ$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi använder den inversa funktionen för tangens.
 
 $$
@@ -35227,12 +35230,12 @@ Den STÖRSTA av de två lösningarna är alltså $v_2$.
             level: 1,
             question: `Lös ekvationen $\\tan v = -2$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$. Ange båda lösningarna avrundade till en decimal.`,
             choices: [
-                `$v = 116{,}6\^\circ$ eller $v = 296{,}6\^\circ$`,
-                `$v = -63{,}4\^\circ$ eller $v = 116{,}6\^\circ$`,
                 `$v = 63{,}4\^\circ$ eller $v = 243{,}4\^\circ$`,
                 `$v = 116{,}6\^\circ$`,
+                `$v = -63{,}4\^\circ$ eller $v = 116{,}6\^\circ$`,
+                `$v = 116{,}6\^\circ$ eller $v = 296{,}6\^\circ$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Räknaren ger ett negativt värde eftersom $a$ är negativt.
 
 $$
@@ -35292,12 +35295,12 @@ $$
             level: 2,
             question: `Lös ekvationen $\\tan v = 5$ i intervallet $-180\^\circ \\leq v \\leq 180\^\circ$. Ange båda lösningarna avrundade till en decimal.`,
             choices: [
-                `$v = 78{,}7\^\circ$ eller $v = -101{,}3\^\circ$`,
-                `$v = 78{,}7\^\circ$ eller $v = 258{,}7\^\circ$`,
                 `$v = 78{,}7\^\circ$`,
+                `$v = 78{,}7\^\circ$ eller $v = 258{,}7\^\circ$`,
+                `$v = 78{,}7\^\circ$ eller $v = -101{,}3\^\circ$`,
                 `$v = -78{,}7\^\circ$ eller $v = 101{,}3\^\circ$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `$$
 v_1 = \\tan^{-1}(5) = 78{,}690\\ldots\^\circ \\approx 78{,}7\^\circ
 $$
@@ -35466,12 +35469,12 @@ $$
             level: 1,
             question: `I en triangel $ABC$ vill du beräkna arean med hjälp av sidorna $a$ och $c$. Vilken vinkel ska då användas i areasatsen?`,
             choices: [
+                `Vilken vinkel som helst — det spelar ingen roll`,
+                `Vinkeln $C$`,
                 `Vinkeln $B$`,
                 `Vinkeln $A$`,
-                `Vinkeln $C$`,
-                `Vilken vinkel som helst — det spelar ingen roll`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Sidorna $a$ och $c$ möts i hörn $B$, så $B$ är den mellanliggande vinkeln till dem. Areasatsen blir därför
 
 $$
@@ -35544,12 +35547,12 @@ $$
             level: 1,
             question: `I en triangel $ABC$ är sidorna $a$ och $b$ kända, samt den mellanliggande vinkeln $C$. Vilken sats är lämpligast för att bestämma sidan $c$?`,
             choices: [
-                `Cosinussatsen`,
                 `Sinussatsen`,
                 `Areasatsen`,
+                `Cosinussatsen`,
                 `Vinkelsumman i en triangel`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `När två sidor och den mellanliggande vinkeln är kända — men ingen av de andra vinklarna — är det cosinussatsen som passar, eftersom den kopplar samman tre sidor och en vinkel utan att kräva någon ytterligare vinkel.
 
 **Svar:** Cosinussatsen`,
@@ -35696,12 +35699,12 @@ $$
             level: 1,
             question: `Vilken situation kräver cosinussatsen (i stället för sinussatsen) för att lösa en triangel?`,
             choices: [
-                `Alla tre sidor är kända, men ingen vinkel`,
                 `En sida och två vinklar är kända`,
                 `Två vinklar är kända, men ingen sida`,
                 `Triangeln är rätvinklig och en katet är känd`,
+                `Alla tre sidor är kända, men ingen vinkel`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Sinussatsen kräver att man känner minst en vinkel tillsammans med dess motstående sida. Känner man i stället alla tre sidorna (och ingen vinkel), eller två sidor och den mellanliggande vinkeln, saknas ett sådant vinkel–sida-par och cosinussatsen behövs i stället.
 
 **Svar:** Alla tre sidor är kända, men ingen vinkel.`,
@@ -35798,12 +35801,12 @@ vilket ger $x_1 = 8$ och $x_2 = -15$. Eftersom en sidlängd inte kan vara negati
             level: 1,
             question: `Hur definieras $\\cos v$ i en rätvinklig triangel?`,
             choices: [
-                `$\\cos v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
-                `$\\cos v = \\dfrac{\\text{motstående katet}}{\\text{hypotenusa}}$`,
                 `$\\cos v = \\dfrac{\\text{motstående katet}}{\\text{närliggande katet}}$`,
+                `$\\cos v = \\dfrac{\\text{motstående katet}}{\\text{hypotenusa}}$`,
                 `$\\cos v = \\dfrac{\\text{hypotenusa}}{\\text{närliggande katet}}$`,
+                `$\\cos v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Cosinus är förhållandet mellan den närliggande kateten och hypotenusan. (Motstående/hypotenusa är sinus och motstående/närliggande är tangens.)
 
 **Svar:** $\\cos v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
@@ -35837,12 +35840,12 @@ $$
             level: 2,
             question: `En stege lutar mot en vägg. Stegen är 5,0 m lång och når 4,3 m upp på väggen.<br>a) Bestäm stegens lutningsvinkel $v$ mot marken (avrunda till heltal).<br>b) Bestäm avståndet från väggen till stegens fot (avrunda till en decimal).`,
             choices: [
+                `59°; 3,3 m`,
                 `59°; 2,6 m`,
                 `31°; 2,6 m`,
-                `59°; 3,3 m`,
                 `41°; 2,6 m`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**a)** Väggens höjd (4,3 m) är motstående katet till $v$ och stegen (5,0 m) är hypotenusan — vi använder sinus och dess invers.
 
 $$
@@ -35917,12 +35920,12 @@ De felaktiga alternativen förväxlar $\\sin v$ med $\\cos v$ (som är $\\dfrac{
             level: 1,
             question: `På enhetscirkeln (radie 1, medelpunkt i origo) svarar en vinkel $v$ mot en punkt $(x, y)$ på randen. Vad motsvarar $\\sin v$?`,
             choices: [
-                `Punktens $y$-koordinat`,
                 `Punktens $x$-koordinat`,
                 `Kvoten $\\dfrac{x}{y}$`,
+                `Punktens $y$-koordinat`,
                 `Cirkelns radie, det vill säga 1`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Eftersom hypotenusan (radien) är 1 gäller $\\sin v = \\dfrac{y}{1} = y$. Sinus är alltså punktens $y$-koordinat. (Cosinus är $x$-koordinaten och $\\tan v = \\dfrac{y}{x}$.)
 
 **Svar:** punktens $y$-koordinat`,
@@ -35931,12 +35934,12 @@ De felaktiga alternativen förväxlar $\\sin v$ med $\\cos v$ (som är $\\dfrac{
             level: 1,
             question: `Vilket är det exakta värdet av $\\sin 30^\\circ$?`,
             choices: [
-                `$\\dfrac{1}{2}$`,
-                `$\\dfrac{\\sqrt{2}}{2}$`,
-                `$\\dfrac{\\sqrt{3}}{2}$`,
                 `$\\dfrac{\\sqrt{3}}{3}$`,
+                `$\\dfrac{\\sqrt{3}}{2}$`,
+                `$\\dfrac{\\sqrt{2}}{2}$`,
+                `$\\dfrac{1}{2}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Standardvinkeln $30^\\circ$ har det exakta sinusvärdet $\\dfrac{1}{2}$. (Minnesknep: sinusraden är $\\dfrac{\\sqrt{0}}{2}, \\dfrac{\\sqrt{1}}{2}, \\dfrac{\\sqrt{2}}{2}, \\dfrac{\\sqrt{3}}{2}, \\dfrac{\\sqrt{4}}{2}$ för $0^\\circ, 30^\\circ, 45^\\circ, 60^\\circ, 90^\\circ$, och $\\dfrac{\\sqrt{1}}{2} = \\dfrac{1}{2}$.) De övriga är $\\sin 45^\\circ$, $\\sin 60^\\circ$ och $\\tan 30^\\circ$.
 
 **Svar:** $\\dfrac{1}{2}$`,
@@ -35993,12 +35996,12 @@ $$
             level: 3,
             question: `En punkt på enhetscirkeln ligger i första kvadranten och har lika stora $x$- och $y$-koordinater. Bestäm punktens exakta koordinat och vinkeln $v$.`,
             choices: [
-                `$\\left(\\dfrac{\\sqrt{2}}{2},\\ \\dfrac{\\sqrt{2}}{2}\\right)$, $v = 45^\\circ$`,
                 `$\\left(\\dfrac{1}{2},\\ \\dfrac{1}{2}\\right)$, $v = 45^\\circ$`,
-                `$\\left(\\dfrac{\\sqrt{2}}{2},\\ \\dfrac{\\sqrt{2}}{2}\\right)$, $v = 60^\\circ$`,
                 `$\\left(\\dfrac{\\sqrt{3}}{2},\\ \\dfrac{\\sqrt{3}}{2}\\right)$, $v = 30^\\circ$`,
+                `$\\left(\\dfrac{\\sqrt{2}}{2},\\ \\dfrac{\\sqrt{2}}{2}\\right)$, $v = 60^\\circ$`,
+                `$\\left(\\dfrac{\\sqrt{2}}{2},\\ \\dfrac{\\sqrt{2}}{2}\\right)$, $v = 45^\\circ$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** villkoret $x = y$ räcker tillsammans med enhetscirkelns ekvation för att låsa både koordinaten och vinkeln — inget mätvärde behövs.
 
 Punkten ligger på enhetscirkeln, så $x^2 + y^2 = 1$. Sätt in $x = y$:
@@ -36020,12 +36023,12 @@ Alternativet $\\left(\\dfrac{1}{2}, \\dfrac{1}{2}\\right)$ ligger inte på cirke
             level: 1,
             question: `Om $v$ är en lösning till $\\tan x = a$, vilket uttryck ger samtliga lösningar?`,
             choices: [
-                `$x = v + n \\cdot 180^\\circ$`,
                 `$x = v + n \\cdot 360^\\circ$`,
-                `$x = \\pm v + n \\cdot 360^\\circ$`,
                 `$x = 180^\\circ - v + n \\cdot 180^\\circ$`,
+                `$x = \\pm v + n \\cdot 360^\\circ$`,
+                `$x = v + n \\cdot 180^\\circ$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Tangens har perioden $180^\\circ$, så till en lösning $v$ kan vi lägga eller dra ifrån ett helt antal $180^\\circ$. (Termen $n \\cdot 360^\\circ$ hör till sinus och cosinus, och $\\pm v$ hör till cosinus.)
 
 **Svar:** $x = v + n \\cdot 180^\\circ$`,
@@ -36046,12 +36049,12 @@ $$
             level: 1,
             question: `Ange samtliga lösningar till $\\cos x = 0{,}5$. (Grundlösningen är $\\cos^{-1}(0{,}5) = 60^\\circ$.)`,
             choices: [
-                `$x = \\pm 60^\\circ + n \\cdot 360^\\circ$`,
-                `$x = 60^\\circ + n \\cdot 360^\\circ$ och $x = 120^\\circ + n \\cdot 360^\\circ$`,
                 `$x = \\pm 60^\\circ + n \\cdot 180^\\circ$`,
+                `$x = 60^\\circ + n \\cdot 360^\\circ$ och $x = 120^\\circ + n \\cdot 360^\\circ$`,
                 `$x = 60^\\circ + n \\cdot 180^\\circ$`,
+                `$x = \\pm 60^\\circ + n \\cdot 360^\\circ$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `För cosinus tar vi $\\pm$ grundlösningen och lägger till termen $n \\cdot 360^\\circ$.
 
 $$
@@ -36065,12 +36068,12 @@ $$
             level: 2,
             question: `Lös ekvationen $\\sin x = 0{,}6$ och ange samtliga lösningar. Svara med en decimal.`,
             choices: [
-                `$x \\approx 36{,}9^\\circ + n \\cdot 360^\\circ$ och $x \\approx 143{,}1^\\circ + n \\cdot 360^\\circ$`,
                 `$x \\approx \\pm 36{,}9^\\circ + n \\cdot 360^\\circ$`,
                 `$x \\approx 36{,}9^\\circ + n \\cdot 360^\\circ$ och $x \\approx 216{,}9^\\circ + n \\cdot 360^\\circ$`,
+                `$x \\approx 36{,}9^\\circ + n \\cdot 360^\\circ$ och $x \\approx 143{,}1^\\circ + n \\cdot 360^\\circ$`,
                 `$x \\approx 36{,}9^\\circ + n \\cdot 180^\\circ$ och $x \\approx 143{,}1^\\circ + n \\cdot 180^\\circ$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Ekvationen har sinus, så vi tar räknarens lösning och lägger till $n \\cdot 360^\\circ$, och därefter $180^\\circ$ minus räknarens lösning.
 
 $$
@@ -36091,12 +36094,12 @@ $$
             level: 2,
             question: `Lös ekvationen $\\cos 2x = 0{,}4$ och ange samtliga lösningar. Svara med en decimal.`,
             choices: [
+                `$x \\approx \\pm 66{,}4^\\circ + n \\cdot 180^\\circ$`,
                 `$x \\approx \\pm 33{,}2^\\circ + n \\cdot 180^\\circ$`,
                 `$x \\approx \\pm 66{,}4^\\circ + n \\cdot 360^\\circ$`,
                 `$x \\approx \\pm 33{,}2^\\circ + n \\cdot 360^\\circ$`,
-                `$x \\approx \\pm 66{,}4^\\circ + n \\cdot 180^\\circ$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Ekvationen har cosinus, så vi tar $\\pm$ räknarens lösning och lägger till $n \\cdot 360^\\circ$ — men först för argumentet $2x$.
 
 $$
@@ -36118,12 +36121,12 @@ Notera att $n \\cdot 360^\\circ$ blir $n \\cdot 180^\\circ$ efter divisionen —
             level: 3,
             question: `Hur många lösningar har ekvationen $\\cos 3x = 0{,}6$ i intervallet $0^\\circ \\leq x \\leq 360^\\circ$?`,
             choices: [
-                `6`,
-                `2`,
-                `3`,
                 `12`,
+                `6`,
+                `3`,
+                `2`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** man behöver inte lista alla lösningar — det räcker att se hur många perioder som ryms i intervallet. Cosinus ger 2 lösningar per varv, och koefficienten 3 pressar ihop perioden.
 
 Grundlösningen är $\\cos^{-1}(0{,}6) = 53{,}130\\ldots^\\circ$, så
@@ -36143,12 +36146,12 @@ Perioden för $x$ är alltså $\\dfrac{360^\\circ}{3} = 120^\\circ$. När $x$ l�
             level: 1,
             question: `Ekvationen $\\cos x \\cdot \\sin x = 0$ ska lösas. Vad säger nollproduktmetoden?`,
             choices: [
-                `Produkten är noll om $\\cos x = 0$ eller $\\sin x = 0$ — lös var för sig`,
                 `Man kräver att $\\cos x = 0$ och $\\sin x = 0$ samtidigt`,
                 `Ekvationen saknar lösningar eftersom en produkt aldrig blir noll`,
+                `Produkten är noll om $\\cos x = 0$ eller $\\sin x = 0$ — lös var för sig`,
                 `Man dividerar båda led med $\\cos x$ och löser $\\tan x = 0$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `En produkt är noll precis när minst en av faktorerna är noll. Vi löser därför $\\cos x = 0$ och $\\sin x = 0$ var för sig och tar med alla lösningar.
 
 **Svar:** Produkten är noll om $\\cos x = 0$ eller $\\sin x = 0$`,
@@ -36171,12 +36174,12 @@ Tillsammans blir det $x = n \\cdot 90^\\circ$. Den minsta positiva lösningen f�
             level: 1,
             question: `Ekvationen $3\\sin x - \\cos x = 0$ skrivs om till en ekvation i $\\tan x$ genom division med $\\cos x$. Vad blir resultatet?`,
             choices: [
-                `$\\tan x = \\dfrac{1}{3}$`,
                 `$\\tan x = 3$`,
-                `$\\tan x = -\\dfrac{1}{3}$`,
                 `$\\tan x = -3$`,
+                `$\\tan x = \\dfrac{1}{3}$`,
+                `$\\tan x = -\\dfrac{1}{3}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Flytta över och dividera båda led med $\\cos x$:
 
 $$
@@ -36194,12 +36197,12 @@ $$
             level: 2,
             question: `Lös ekvationen $\\cos x \\cdot (2\\sin x - 1) = 0$ i intervallet $0^\\circ \\le x < 360^\\circ$.`,
             choices: [
-                `30°, 90°, 150° och 270°`,
                 `90° och 270°`,
                 `30° och 150°`,
                 `30°, 90°, 150°, 210°, 270° och 330°`,
+                `30°, 90°, 150° och 270°`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Nollproduktmetoden ger två ekvationer.
 
 $\\cos x = 0$ i intervallet: $x = 90^\\circ$ och $x = 270^\\circ$.
@@ -36229,12 +36232,12 @@ I intervallet $0^\\circ \\le x < 360^\\circ$ ger $n = 0, 1, 2, 3$ lösningarna $
             level: 3,
             question: `Lös ekvationen $\\sin(2x) = \\cos(2x)$ och ange samtliga lösningar.`,
             choices: [
-                `$x = 22{,}5^\\circ + n \\cdot 90^\\circ$`,
-                `$x = 45^\\circ + n \\cdot 180^\\circ$`,
                 `$x = 22{,}5^\\circ + n \\cdot 180^\\circ$`,
                 `$x = 45^\\circ + n \\cdot 90^\\circ$`,
+                `$x = 45^\\circ + n \\cdot 180^\\circ$`,
+                `$x = 22{,}5^\\circ + n \\cdot 90^\\circ$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** eftersom både $\\sin$ och $\\cos$ har samma argument kan vi dividera båda led med $\\cos(2x)$ och få en ekvation i tangens — och sedan måste *både* det partikulära värdet och periodtermen delas med argumentets koefficient 2.
 
 $$
@@ -36290,12 +36293,12 @@ $$
             level: 1,
             question: `Omvandla $30^\\circ$ till radianer. Svara exakt.`,
             choices: [
-                `$\\dfrac{\\pi}{6}$ rad`,
                 `$\\dfrac{\\pi}{3}$ rad`,
-                `$\\dfrac{\\pi}{4}$ rad`,
                 `$\\dfrac{\\pi}{2}$ rad`,
+                `$\\dfrac{\\pi}{4}$ rad`,
+                `$\\dfrac{\\pi}{6}$ rad`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi utnyttjar att $1^\\circ = \\dfrac{\\pi}{180}$ rad.
 
 $$
@@ -36340,12 +36343,12 @@ $$
             level: 3,
             question: `Lös ekvationen $2\\cos x + \\sqrt{3} = 0$. Svara exakt i radianer (alla lösningar).`,
             choices: [
-                `$x = \\dfrac{5\\pi}{6} + n \\cdot 2\\pi$ och $x = \\dfrac{7\\pi}{6} + n \\cdot 2\\pi$`,
-                `$x = \\dfrac{\\pi}{6} + n \\cdot 2\\pi$ och $x = -\\dfrac{\\pi}{6} + n \\cdot 2\\pi$`,
                 `$x = \\dfrac{5\\pi}{6} + n \\cdot \\pi$`,
                 `$x = \\dfrac{\\pi}{3} + n \\cdot 2\\pi$ och $x = \\dfrac{2\\pi}{3} + n \\cdot 2\\pi$`,
+                `$x = \\dfrac{\\pi}{6} + n \\cdot 2\\pi$ och $x = -\\dfrac{\\pi}{6} + n \\cdot 2\\pi$`,
+                `$x = \\dfrac{5\\pi}{6} + n \\cdot 2\\pi$ och $x = \\dfrac{7\\pi}{6} + n \\cdot 2\\pi$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** ekvationen måste först lösas ut till formen $\\cos x = \\text{tal}$, och eftersom talet blir *negativt* hamnar de två lösningarna i andra och tredje kvadranten — inte kring $\\dfrac{\\pi}{6}$.
 
 Isolera cosinus:
@@ -36371,12 +36374,12 @@ Perioden är $2\\pi$. De felaktiga alternativen glömmer minustecknet, använder
             level: 1,
             question: `Använd komplementvinklar. Vad är $\\sin 70^\\circ$ lika med?`,
             choices: [
-                `$\\cos 20^\\circ$`,
                 `$\\sin 20^\\circ$`,
                 `$\\cos 70^\\circ$`,
                 `$\\cos 110^\\circ$`,
+                `$\\cos 20^\\circ$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Sinus för en vinkel är lika med cosinus för dess komplementvinkel, alltså $\\sin v = \\cos(90^\\circ - v)$.
 
 $$
@@ -36389,12 +36392,12 @@ $$
             level: 1,
             question: `Vad är $\\cos(v + 180^\\circ)$ lika med?`,
             choices: [
-                `$-\\cos v$`,
-                `$\\cos v$`,
                 `$-\\sin v$`,
+                `$\\cos v$`,
                 `$\\sin v$`,
+                `$-\\cos v$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Att lägga till $180^\\circ$ är ett halvt varv i enhetscirkeln — punkten hamnar rakt mitt emot och båda koordinaterna byter tecken. Cosinus (*x*-koordinaten) byter alltså tecken.
 
 $$
@@ -36420,12 +36423,12 @@ $$
             level: 2,
             question: `Det är känt att $\\sin 50^\\circ \\approx 0{,}77$. Bestäm<br>a)&nbsp;$\\sin(-50^\\circ)$&emsp;&emsp;b)&nbsp;$\\sin 130^\\circ$`,
             choices: [
-                `a) $-0{,}77$<br>b) $0{,}77$`,
-                `a) $0{,}77$<br>b) $0{,}77$`,
                 `a) $-0{,}77$<br>b) $-0{,}77$`,
+                `a) $0{,}77$<br>b) $0{,}77$`,
+                `a) $-0{,}77$<br>b) $0{,}77$`,
                 `a) $0{,}77$<br>b) $-0{,}77$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**a)** En negativ vinkel speglar punkten i $x$-axeln, så sinus byter tecken:
 
 $$
@@ -36444,12 +36447,12 @@ $$
             level: 2,
             question: `Det är känt att $\\cos \\dfrac{\\pi}{3} = \\dfrac{1}{2}$. Bestäm det exakta värdet av $\\cos \\dfrac{2\\pi}{3}$.`,
             choices: [
-                `$-\\dfrac{1}{2}$`,
-                `$\\dfrac{1}{2}$`,
                 `$-\\dfrac{\\sqrt{3}}{2}$`,
+                `$-\\dfrac{1}{2}$`,
                 `$\\dfrac{\\sqrt{3}}{2}$`,
+                `$\\dfrac{1}{2}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi gör om vinklarna till grader för att lättare tolka dem i enhetscirkeln:
 
 $$
@@ -36469,12 +36472,12 @@ $$
             level: 3,
             question: `Förenkla uttrycket $\\dfrac{\\sin(v + 90^\\circ)}{\\cos(v + 180^\\circ)}$ så långt som möjligt.`,
             choices: [
-                `$-1$`,
-                `$1$`,
                 `$-\\tan v$`,
                 `$\\tan v$`,
+                `$1$`,
+                `$-1$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** täljaren och nämnaren kan var för sig skrivas om med sambanden mellan vinklar, och då visar det sig att hela uttrycket förenklas till en konstant — $v$ försvinner.
 
 Täljaren: att vrida $90^\\circ$ ger $\\sin(v + 90^\\circ) = \\cos v$.
@@ -36496,12 +36499,12 @@ Faktorn $\\cos v$ förkortas bort och kvar blir $-1$, oberoende av $v$. De felak
             level: 1,
             question: `Vad säger trigonometriska ettan för en godtycklig vinkel $v$?`,
             choices: [
+                `$\\sin^2 v \\cdot \\cos^2 v = 1$`,
                 `$\\sin^2 v + \\cos^2 v = 1$`,
                 `$\\sin v + \\cos v = 1$`,
                 `$\\sin^2 v - \\cos^2 v = 1$`,
-                `$\\sin^2 v \\cdot \\cos^2 v = 1$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Trigonometriska ettan säger att summan av sinus i kvadrat och cosinus i kvadrat för samma vinkel alltid är 1. Det är kvadraterna (inte funktionerna själva) som adderas, och det är en summa — inte en differens eller produkt.
 
 **Svar:** $\\sin^2 v + \\cos^2 v = 1$`,
@@ -36528,12 +36531,12 @@ I första kvadranten är $\\cos v$ ($x$-koordinaten) positiv, så vi väljer plu
             level: 1,
             question: `Vilket uttryck är lika med $1 - \\sin^2 v$?`,
             choices: [
-                `$\\cos^2 v$`,
-                `$\\sin^2 v$`,
-                `$1 + \\cos^2 v$`,
                 `$\\tan^2 v$`,
+                `$\\cos^2 v$`,
+                `$1 + \\cos^2 v$`,
+                `$\\sin^2 v$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Skriv om trigonometriska ettan $\\sin^2 v + \\cos^2 v = 1$ genom att flytta över $\\sin^2 v$:
 
 $$
@@ -36547,12 +36550,12 @@ $$
             level: 2,
             question: `Vinkeln $v$ ligger i tredje kvadranten och $\\cos v = -0{,}28$. Bestäm $\\sin v$.`,
             choices: [
-                `$-0{,}96$`,
                 `$0{,}96$`,
-                `$-0{,}28$`,
                 `$-0{,}92$`,
+                `$-0{,}28$`,
+                `$-0{,}96$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi använder trigonometriska ettan för att lösa ut $\\sin v$.
 
 $$
@@ -36571,12 +36574,12 @@ I tredje kvadranten är $\\sin v$ ($y$-koordinaten) negativ, så vi väljer minu
             level: 2,
             question: `Vinkeln $v$ ligger i fjärde kvadranten och $\\sin v = -\\dfrac{5}{13}$. Bestäm det exakta värdet av $\\cos v$.`,
             choices: [
-                `$\\dfrac{12}{13}$`,
-                `$-\\dfrac{12}{13}$`,
                 `$\\dfrac{5}{13}$`,
+                `$-\\dfrac{12}{13}$`,
                 `$\\dfrac{13}{12}$`,
+                `$\\dfrac{12}{13}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Trigonometriska ettan ger
 
 $$
@@ -36596,12 +36599,12 @@ I fjärde kvadranten är $\\cos v$ ($x$-koordinaten) positiv, så vi väljer plu
             level: 3,
             question: `För en vinkel $v$ gäller att $\\sin v \\cdot \\cos v = 0{,}3$. Bestäm värdet av $(\\sin v + \\cos v)^2$.`,
             choices: [
-                `$1{,}6$`,
-                `$0{,}6$`,
                 `$0{,}9$`,
+                `$1{,}6$`,
                 `$1{,}0$`,
+                `$0{,}6$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** ingen av $\\sin v$ och $\\cos v$ är känd var för sig, men kvadreringen av summan skapar en term $2\\sin v\\cos v$ som är given, och resten är trigonometriska ettan.
 
 Utveckla kvadraten:
@@ -36641,12 +36644,12 @@ De felaktiga alternativen glömmer korstermen $2\\sin v\\cos v$, missar faktorn 
             level: 1,
             question: `Vilket uttryck är lika med $\\sin 2v$?`,
             choices: [
-                `$2\\sin v\\cos v$`,
                 `$\\sin^2 v + \\cos^2 v$`,
-                `$2\\cos^2 v - 1$`,
                 `$\\sin v + \\sin v$`,
+                `$2\\sin v\\cos v$`,
+                `$2\\cos^2 v - 1$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Formeln för dubbla vinkeln följer av additionsformeln för sinus med $u = v$:
 
 $$
@@ -36672,12 +36675,12 @@ $$
             level: 2,
             question: `Bestäm det exakta värdet av $\\cos 15^\\circ$ genom att skriva $15^\\circ = 45^\\circ - 30^\\circ$.`,
             choices: [
-                `$\\dfrac{\\sqrt{6} + \\sqrt{2}}{4}$`,
-                `$\\dfrac{\\sqrt{6} - \\sqrt{2}}{4}$`,
                 `$\\dfrac{\\sqrt{3} + 1}{2}$`,
+                `$\\dfrac{\\sqrt{6} + \\sqrt{2}}{4}$`,
                 `$\\dfrac{\\sqrt{2} - \\sqrt{6}}{4}$`,
+                `$\\dfrac{\\sqrt{6} - \\sqrt{2}}{4}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi använder subtraktionsformeln för cosinus med de kända vinklarna $45^\\circ$ och $30^\\circ$:
 
 $$
@@ -36713,12 +36716,12 @@ $$
             level: 3,
             question: `En spetsig vinkel $v$ uppfyller $\\sin v + \\cos v = \\dfrac{7}{5}$. Bestäm det exakta värdet av $\\sin 2v$.`,
             choices: [
-                `$\\dfrac{24}{25}$`,
                 `$\\dfrac{7}{25}$`,
                 `$\\dfrac{49}{25}$`,
                 `$\\dfrac{2}{5}$`,
+                `$\\dfrac{24}{25}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** kvadrera summan — då dyker $2\\sin v\\cos v = \\sin 2v$ upp tillsammans med trigonometriska ettan.
 
 $$
@@ -36742,12 +36745,12 @@ Alternativet $\\dfrac{49}{25}$ är kvadraten innan man dragit bort ettan.
             level: 1,
             question: `Vilket samband gäller för dubbla vinkeln av sinus?`,
             choices: [
-                `$\\sin 2v = 2\\sin v \\cos v$`,
                 `$\\sin 2v = \\sin v \\cos v$`,
                 `$\\sin 2v = 2\\sin v$`,
+                `$\\sin 2v = 2\\sin v \\cos v$`,
                 `$\\sin 2v = \\cos^2 v - \\sin^2 v$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Formeln fås ur additionsformeln $\\sin(v+v) = \\sin v\\cos v + \\cos v\\sin v = 2\\sin v\\cos v$. Uttrycket $\\cos^2 v - \\sin^2 v$ är i stället $\\cos 2v$.
 
 **Svar:** $\\sin 2v = 2\\sin v \\cos v$`,
@@ -36756,12 +36759,12 @@ Alternativet $\\dfrac{49}{25}$ är kvadraten innan man dragit bort ettan.
             level: 1,
             question: `Hur kan produkten $\\sin x \\cos x$ skrivas med hjälp av dubbla vinkeln?`,
             choices: [
-                `$\\dfrac{1}{2}\\sin 2x$`,
-                `$\\sin 2x$`,
-                `$2\\sin 2x$`,
                 `$\\cos 2x$`,
+                `$\\sin 2x$`,
+                `$\\dfrac{1}{2}\\sin 2x$`,
+                `$2\\sin 2x$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Eftersom $\\sin 2x = 2\\sin x\\cos x$ är $\\sin x\\cos x = \\dfrac{1}{2}\\sin 2x$. Man delar alltså med 2, inte multiplicerar.
 
 **Svar:** $\\dfrac{1}{2}\\sin 2x$`,
@@ -36770,12 +36773,12 @@ Alternativet $\\dfrac{49}{25}$ är kvadraten innan man dragit bort ettan.
             level: 1,
             question: `Ekvationen $\\sin x\\,(2\\cos x - 1) = 0$ löses med nollproduktmetoden. Vilka två ekvationer delas den upp i?`,
             choices: [
-                `$\\sin x = 0$ och $2\\cos x - 1 = 0$`,
+                `$\\sin x \\cdot 2\\cos x = 1$`,
                 `$\\sin x = 1$ och $2\\cos x = 1$`,
                 `$\\sin x = 0$ och $\\cos x = 2$`,
-                `$\\sin x \\cdot 2\\cos x = 1$`,
+                `$\\sin x = 0$ och $2\\cos x - 1 = 0$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `En produkt är noll om (minst) en faktor är noll. Alltså $\\sin x = 0$ eller $2\\cos x - 1 = 0$. Man sätter varje faktor för sig lika med noll — man multiplicerar inte ihop dem.
 
 **Svar:** $\\sin x = 0$ och $2\\cos x - 1 = 0$`,
@@ -36785,12 +36788,12 @@ Alternativet $\\dfrac{49}{25}$ är kvadraten innan man dragit bort ettan.
             level: 2,
             question: `Lös ekvationen $2\\sin x\\cos x = \\dfrac{1}{2}$ och ange den allmänna lösningen i radianer.`,
             choices: [
-                `$x = \\dfrac{\\pi}{12} + n\\cdot\\pi$ och $x = \\dfrac{5\\pi}{12} + n\\cdot\\pi$`,
                 `$x = \\dfrac{\\pi}{6} + n\\cdot 2\\pi$ och $x = \\dfrac{5\\pi}{6} + n\\cdot 2\\pi$`,
                 `$x = \\dfrac{\\pi}{12} + n\\cdot 2\\pi$`,
+                `$x = \\dfrac{\\pi}{12} + n\\cdot\\pi$ och $x = \\dfrac{5\\pi}{12} + n\\cdot\\pi$`,
                 `$x = \\dfrac{\\pi}{6} + n\\cdot\\pi$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vänsterledet är $\\sin 2x$, så ekvationen blir $\\sin 2x = \\dfrac{1}{2}$. Eftersom $\\sin\\dfrac{\\pi}{6} = \\dfrac{1}{2}$:
 
 $$
@@ -36807,12 +36810,12 @@ $$
             level: 2,
             question: `Lös ekvationen $\\sin 2x = \\sin x$ och svara i grader.`,
             choices: [
-                `$x = n\\cdot 180^\\circ$ och $x = \\pm 60^\\circ + n\\cdot 360^\\circ$`,
-                `$x = n\\cdot 360^\\circ$ och $x = 60^\\circ + n\\cdot 360^\\circ$`,
-                `$x = \\pm 60^\\circ + n\\cdot 360^\\circ$`,
                 `$x = 90^\\circ + n\\cdot 180^\\circ$`,
+                `$x = \\pm 60^\\circ + n\\cdot 360^\\circ$`,
+                `$x = n\\cdot 360^\\circ$ och $x = 60^\\circ + n\\cdot 360^\\circ$`,
+                `$x = n\\cdot 180^\\circ$ och $x = \\pm 60^\\circ + n\\cdot 360^\\circ$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Skriv om $\\sin 2x = 2\\sin x\\cos x$ och flytta allt till ena ledet:
 
 $$
@@ -36877,12 +36880,12 @@ $$
             level: 1,
             question: `Vad är perioden för sinusfunktionen $y = \\sin x$?`,
             choices: [
-                `$360^\\circ$ (motsvarande $2\\pi$)`,
-                `$180^\\circ$ (motsvarande $\\pi$)`,
                 `$90^\\circ$ (motsvarande $\\dfrac{\\pi}{2}$)`,
                 `$720^\\circ$ (motsvarande $4\\pi$)`,
+                `$360^\\circ$ (motsvarande $2\\pi$)`,
+                `$180^\\circ$ (motsvarande $\\pi$)`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Efter ett helt varv i enhetscirkeln upprepas exakt samma sinusvärden, så kurvan upprepar sig med perioden $360^\\circ$, vilket motsvarar $2\\pi$ radianer.
 
 **Svar:** $360^\\circ$ (motsvarande $2\\pi$)`,
@@ -36918,12 +36921,12 @@ $$
             level: 2,
             question: `Skärningspunkterna mellan $y = \\sin x$ och $y = 0{,}4$ ger inom ett varv $x_1 \\approx 23{,}6^\\circ$ och $x_2 \\approx 156{,}4^\\circ$. Vilket uttryck beskriver **samtliga** lösningar till $\\sin x = 0{,}4$?`,
             choices: [
-                `$x \\approx 23{,}6^\\circ + n \\cdot 360^\\circ$ och $x \\approx 156{,}4^\\circ + n \\cdot 360^\\circ$`,
                 `$x \\approx 23{,}6^\\circ + n \\cdot 180^\\circ$ och $x \\approx 156{,}4^\\circ + n \\cdot 180^\\circ$`,
                 `enbart $x \\approx 23{,}6^\\circ$ och $x \\approx 156{,}4^\\circ$`,
+                `$x \\approx 23{,}6^\\circ + n \\cdot 360^\\circ$ och $x \\approx 156{,}4^\\circ + n \\cdot 360^\\circ$`,
                 `$x \\approx 23{,}6^\\circ + n \\cdot 360^\\circ$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Sinusfunktionen är periodisk med perioden $360^\\circ$, så varje lösning upprepas efter ett helt varv. Vi anger de två lösningarna inom första varvet och lägger till ett helt antal perioder $n \\cdot 360^\\circ$, där $n$ är ett heltal.
 
 **Svar:** $x \\approx 23{,}6^\\circ + n \\cdot 360^\\circ$ och $x \\approx 156{,}4^\\circ + n \\cdot 360^\\circ$`,
@@ -36947,12 +36950,12 @@ $$
             level: 3,
             question: `För vilka värden på $k$ har ekvationen $\\sin x = k$ **exakt en** lösning inom ett varv, $0^\\circ \\leq x < 360^\\circ$?`,
             choices: [
-                `$k = 1$ eller $k = -1$`,
-                `$k = 0$`,
                 `alla $k$ med $-1 \\leq k \\leq 1$`,
+                `$k = 0$`,
+                `$k = 1$ eller $k = -1$`,
                 `$k = 0{,}5$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** en vågrät linje $y = k$ skär sinuskurvan olika många gånger inom ett varv. För de flesta $k$-värden i $[-1,\\ 1]$ träffar linjen kurvan i **två** punkter (kurvan går upp och sedan ner igen). Undantaget är kurvans topp och botten, där linjen precis tangerar:
 
 - Vid $k = 1$ nuddar linjen toppen i en enda punkt, $x = 90^\\circ$.
@@ -36969,12 +36972,12 @@ För $k = 0$ blir det tvärtom två lösningar ($x = 0^\\circ$ och $x = 180^\\ci
             level: 1,
             question: `Vilken är amplituden för funktionen $y = 4 \\sin x$?`,
             choices: [
-                `4`,
                 `1`,
-                `8`,
                 `$-4$`,
+                `4`,
+                `8`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Amplituden för $y = A \\sin x$ är $|A|$, alltså koefficienten framför sinus (utan tecken).
 
 $$
@@ -36999,12 +37002,12 @@ $$
             level: 1,
             question: `Vilken är amplituden för funktionen $y = -3 \\sin 2x$?`,
             choices: [
-                `3`,
-                `$-3$`,
                 `2`,
+                `3`,
                 `6`,
+                `$-3$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `En negativ koefficient speglar grafen i $x$-axeln, men amplituden är ett avstånd och kan aldrig vara negativ. Vi tar absolutbeloppet av koefficienten framför sinus.
 
 $$
@@ -37018,12 +37021,12 @@ $$
             level: 2,
             question: `Bestäm amplituden och perioden (i grader) för funktionen $y = 8 \\sin 4x$.`,
             choices: [
-                `Amplitud 8 och period 90°`,
-                `Amplitud 4 och period 90°`,
-                `Amplitud 8 och period 45°`,
                 `Amplitud 8 och period 4°`,
+                `Amplitud 8 och period 45°`,
+                `Amplitud 4 och period 90°`,
+                `Amplitud 8 och period 90°`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Koefficienten framför sinus ger amplituden, och koefficienten framför $x$ ger perioden via $\\dfrac{360^\\circ}{B}$.
 
 $$
@@ -37040,12 +37043,12 @@ $$
             level: 2,
             question: `Bestäm amplituden och perioden (i grader) för funktionen $y = 10 \\sin\\left(\\dfrac{x}{2}\\right)$.`,
             choices: [
-                `Amplitud 10 och period 720°`,
-                `Amplitud 10 och period 180°`,
                 `Amplitud 5 och period 720°`,
+                `Amplitud 10 och period 720°`,
                 `Amplitud 10 och period 2°`,
+                `Amplitud 10 och period 180°`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Argumentet innehåller en division. Vi skriver om den som en multiplikation för att hitta koefficienten $B$:
 
 $$
@@ -37067,12 +37070,12 @@ $$
             level: 3,
             question: `En funktion $y = A \\sin Bx$ med $A > 0$ och $B > 0$ har största värdet 4 och gör exakt två hela svängningar (perioder) på intervallet $0^\\circ \\le x \\le 360^\\circ$. Bestäm $A$ och $B$.`,
             choices: [
-                `$A = 4$ och $B = 2$`,
                 `$A = 4$ och $B = \\dfrac{1}{2}$`,
                 `$A = 2$ och $B = 4$`,
+                `$A = 4$ och $B = 2$`,
                 `$A = 4$ och $B = 180$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** koefficienten $B$ är just antalet hela perioder som ryms på $360^\\circ$ — funktionen "svänger $B$ gånger så fort". Två uppgifter göms i frågan.
 
 Största värdet är amplituden, så
@@ -37098,12 +37101,12 @@ De felaktiga alternativen vänder på period-sambandet ($B = \\dfrac{1}{2}$ ger 
             level: 1,
             question: `Hur förskjuts grafen till $y = \\sin x + 4$ jämfört med $y = \\sin x$?`,
             choices: [
-                `4 enheter uppåt`,
-                `4 enheter nedåt`,
                 `$4^\\circ$ åt höger`,
                 `$4^\\circ$ åt vänster`,
+                `4 enheter uppåt`,
+                `4 enheter nedåt`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Konstanten adderas till hela funktionsvärdet, så varje $y$-koordinat blir 4 större. Det motsvarar en förskjutning i $y$-led.
 
 **Svar:** 4 enheter uppåt`,
@@ -37126,12 +37129,12 @@ De felaktiga alternativen vänder på period-sambandet ($B = \\dfrac{1}{2}$ ger 
             level: 1,
             question: `Vilken funktion är förskjuten 3 enheter nedåt och $20^\\circ$ åt vänster jämfört med $y = \\sin x$?`,
             choices: [
-                `$y = \\sin (x + 20^\\circ) - 3$`,
                 `$y = \\sin (x - 20^\\circ) - 3$`,
-                `$y = \\sin (x + 20^\\circ) + 3$`,
+                `$y = \\sin (x + 20^\\circ) - 3$`,
                 `$y = \\sin (x - 3^\\circ) + 20$`,
+                `$y = \\sin (x + 20^\\circ) + 3$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Åt vänster kräver ett positivt $C$, så $C = +20^\\circ$ ger argumentet $(x + 20^\\circ)$. Nedåt ger ett negativt $D$, alltså $D = -3$.
 
 $$
@@ -37145,12 +37148,12 @@ $$
             level: 2,
             question: `Beskriv hur grafen till $y = \\sin (x + 90^\\circ) + 1$ ser ut jämfört med $y = \\sin x$.`,
             choices: [
-                `$90^\\circ$ åt vänster och 1 enhet uppåt`,
                 `$90^\\circ$ åt höger och 1 enhet uppåt`,
                 `$90^\\circ$ åt vänster och 1 enhet nedåt`,
+                `$90^\\circ$ åt vänster och 1 enhet uppåt`,
                 `1 enhet åt vänster och $90^\\circ$ uppåt`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Konstanten i argumentet ($C = +90^\\circ$) ger förskjutning i $x$-led; eftersom $C > 0$ blir det åt vänster. Termen utanför ($D = +1$) ger förskjutning 1 enhet uppåt i $y$-led.
 
 **Svar:** $90^\\circ$ åt vänster och 1 enhet uppåt`,
@@ -37159,12 +37162,12 @@ $$
             level: 2,
             question: `En kurva har samma form som $y = \\sin x$ men är förskjuten $25^\\circ$ åt vänster och 4 enheter nedåt. Skriv funktionens ekvation.`,
             choices: [
-                `$y = \\sin (x + 25^\\circ) - 4$`,
                 `$y = \\sin (x - 25^\\circ) - 4$`,
+                `$y = \\sin (x + 25^\\circ) - 4$`,
                 `$y = \\sin (x + 25^\\circ) + 4$`,
                 `$y = \\sin (x - 25^\\circ) + 4$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Åt vänster ger ett positivt $C$, alltså $C = +25^\\circ$ och argumentet $(x + 25^\\circ)$. Nedåt ger ett negativt $D$, alltså $D = -4$.
 
 $$
@@ -37178,12 +37181,12 @@ $$
             level: 3,
             question: `Grafen till $y = \\sin (x + C) + D$ har sitt största värde 4, och detta maximum inträffar för $x = 20^\\circ$. Bestäm $C$ och $D$ (välj $0^\\circ \\le C < 360^\\circ$).`,
             choices: [
+                `$C = 70^\\circ$ och $D = 4$`,
+                `$C = 110^\\circ$ och $D = 3$`,
                 `$C = 70^\\circ$ och $D = 3$`,
                 `$C = 20^\\circ$ och $D = 4$`,
-                `$C = 110^\\circ$ och $D = 3$`,
-                `$C = 70^\\circ$ och $D = 4$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** grundfunktionen $\\sin$ har amplituden 1, så det största värdet är $1 + D$ (inte $D$), och det inträffar när argumentet $x + C = 90^\\circ$.
 
 Störst värde ger $D$:
@@ -37268,12 +37271,12 @@ $$
             level: 2,
             question: `Beskriv hur grafen till $y = \\tan\\left(x - \\dfrac{\\pi}{4}\\right) - 1$ är förskjuten jämfört med grafen till $y = \\tan x$.`,
             choices: [
-                `$\\dfrac{\\pi}{4}$ åt höger och $1$ nedåt`,
-                `$\\dfrac{\\pi}{4}$ åt vänster och $1$ nedåt`,
                 `$\\dfrac{\\pi}{4}$ åt höger och $1$ uppåt`,
+                `$\\dfrac{\\pi}{4}$ åt höger och $1$ nedåt`,
                 `$1$ åt höger och $\\dfrac{\\pi}{4}$ nedåt`,
+                `$\\dfrac{\\pi}{4}$ åt vänster och $1$ nedåt`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Förskjutningar för $\\tan x$ fungerar som för sinus och cosinus. Argumentet $x - \\dfrac{\\pi}{4}$ (motsvarar $C = -\\dfrac{\\pi}{4} < 0$) förskjuter grafen $\\dfrac{\\pi}{4}$ åt höger, och den fristående termen $-1$ förskjuter grafen $1$ enhet nedåt.
 
 **Svar:** $\\dfrac{\\pi}{4}$ åt höger och $1$ nedåt`,
@@ -37283,12 +37286,12 @@ $$
             level: 3,
             question: `För vilka värden på $x$ är funktionen $y = \\tan 3x$ inte definierad?`,
             choices: [
-                `$x = \\dfrac{\\pi}{6} + n \\cdot \\dfrac{\\pi}{3}$`,
                 `$x = \\dfrac{\\pi}{2} + n \\cdot \\pi$`,
+                `$x = \\dfrac{\\pi}{6} + n \\cdot \\dfrac{\\pi}{3}$`,
                 `$x = \\dfrac{\\pi}{6} + n \\cdot \\pi$`,
                 `$x = \\dfrac{\\pi}{2} + n \\cdot \\dfrac{\\pi}{3}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** asymptoterna kommer från nämnaren $\\cos 3x$, och när man löser ut $x$ måste HELA högerledet — även termen $n \\cdot \\pi$ — divideras med $3$.
 
 Vi skriver om funktionen: $\\tan 3x = \\dfrac{\\sin 3x}{\\cos 3x}$. Den är inte definierad då nämnaren är $0$:
@@ -37314,12 +37317,12 @@ Fällan är att glömma dividera $n \\cdot \\pi$ med $3$ (ger $\\dfrac{\\pi}{6} 
             level: 1,
             question: `Bestäm amplituden till funktionen $y = 3 \\sin x + 4 \\cos x$.`,
             choices: [
-                `$5$`,
                 `$7$`,
+                `$5$`,
                 `$\\sqrt{7}$`,
                 `$25$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Amplituden är $c = \\sqrt{a^2 + b^2}$ med $a = 3$ och $b = 4$.
 
 $$
@@ -37361,12 +37364,12 @@ Det minsta värdet är det negativa värdet av amplituden, alltså $-c$.
             level: 2,
             question: `Bestäm $a$ så att funktionen $y = a \\sin x + 8 \\cos x$ får amplituden 10.`,
             choices: [
-                `$a = \\pm 6$`,
                 `$a = 6$`,
+                `$a = \\pm 6$`,
                 `$a = \\pm 2$`,
                 `$a = \\pm\\sqrt{164}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Amplituden är faktorn framför den sammanslagna sinusfunktionen, $c = \\sqrt{a^2 + 8^2}$, och den ska vara 10.
 
 $$
@@ -37385,12 +37388,12 @@ Båda tecknen ger amplituden 10, så det finns två lösningar.
             level: 2,
             question: `Bestäm det exakta största värdet till funktionen $y = 2 \\sin x - 3 \\cos x$.`,
             choices: [
-                `$\\sqrt{13}$`,
-                `$\\sqrt{5}$`,
-                `$13$`,
                 `$5$`,
+                `$\\sqrt{13}$`,
+                `$13$`,
+                `$\\sqrt{5}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Här är $a = 2$ och $b = -3$. Amplituden $c = \\sqrt{a^2 + b^2}$ innehåller kvadrater, så tecknet på $b$ spelar ingen roll.
 
 $$
@@ -37406,12 +37409,12 @@ Det största värdet är lika med amplituden.
             level: 3,
             question: `Låt $f(x) = 8 \\sin\\!\\left(x + \\dfrac{\\pi}{3}\\right)$. Skriv $f(x)$ på formen $a \\sin x + b \\cos x$ där $a, b > 0$.`,
             choices: [
-                `$4 \\sin x + 4\\sqrt{3}\\,\\cos x$`,
                 `$4\\sqrt{3}\\,\\sin x + 4 \\cos x$`,
-                `$8 \\sin x + 8\\sqrt{3}\\,\\cos x$`,
                 `$2\\sqrt{3}\\,\\sin x + 2 \\cos x$`,
+                `$8 \\sin x + 8\\sqrt{3}\\,\\cos x$`,
+                `$4 \\sin x + 4\\sqrt{3}\\,\\cos x$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** jämför $8\\sin\\!\\left(x + \\dfrac{\\pi}{3}\\right)$ med $c \\sin(x + v)$. Då är $c = 8$ och $v = \\dfrac{\\pi}{3}$, och de två sambanden $c = \\sqrt{a^2 + b^2}$ och $\\tan v = \\dfrac{b}{a}$ bildar ett ekvationssystem.
 
 Ur amplituden:
@@ -37500,12 +37503,12 @@ $$
             level: 2,
             question: `Temperaturen i ett växthus varierar under dygnet mellan lägst 18 °C och högst 26 °C och modelleras med $y = A \\sin(Bt + C) + D$. Bestäm amplituden $A$ och jämviktsläget $D$.`,
             choices: [
-                `$A = 4$ och $D = 22$`,
-                `$A = 8$ och $D = 22$`,
                 `$A = 4$ och $D = 44$`,
+                `$A = 4$ och $D = 22$`,
                 `$A = 22$ och $D = 4$`,
+                `$A = 8$ och $D = 22$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Amplituden är halva avståndet mellan max och min, och jämviktsläget $D$ är värdet mitt emellan max och min.
 
 $$
@@ -37558,12 +37561,12 @@ Fällan är att sätta argumentet till $0$ i stället för $\\dfrac{\\pi}{2}$ vi
             level: 1,
             question: `Bestäm derivatan $f'(x)$ då $f(x) = x^5$.`,
             choices: [
+                `$f'(x) = 4x^5$`,
+                `$f'(x) = 5x^6$`,
                 `$f'(x) = 5x^4$`,
                 `$f'(x) = x^4$`,
-                `$f'(x) = 5x^6$`,
-                `$f'(x) = 4x^5$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi använder potensregeln $f(x) = x^n \\Rightarrow f'(x) = nx^{n-1}$ med $n = 5$:
 
 $$
@@ -37617,12 +37620,12 @@ $$
             level: 2,
             question: `Derivera $f(x) = 3\\sqrt{x}$.`,
             choices: [
-                `$f'(x) = \\dfrac{3}{2\\sqrt{x}}$`,
-                `$f'(x) = \\dfrac{3}{\\sqrt{x}}$`,
                 `$f'(x) = \\dfrac{3}{2}\\sqrt{x}$`,
+                `$f'(x) = \\dfrac{3}{\\sqrt{x}}$`,
                 `$f'(x) = \\dfrac{\\sqrt{x}}{2}$`,
+                `$f'(x) = \\dfrac{3}{2\\sqrt{x}}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi skriver först om roten som en potens, $\\sqrt{x} = x^{1/2}$, och deriverar sedan med potensregeln.
 
 $$
@@ -37658,12 +37661,12 @@ $$
             level: 3,
             question: `För funktionen $f(x) = e^{kx}$ gäller att $f''(x) = 25\\,f(x)$ för alla $x$, och att $f$ är växande. Bestäm konstanten $k$.`,
             choices: [
+                `$k = -5$`,
+                `$k = 25$`,
                 `$k = 5$`,
                 `$k = \\pm 5$`,
-                `$k = 25$`,
-                `$k = -5$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** derivera $f$ två gånger och jämför med villkoret $f''(x) = 25\\,f(x)$. Varje derivering av $e^{kx}$ drar ner en faktor $k$, så andraderivatan får faktorn $k^2$.
 
 $$
@@ -37687,12 +37690,12 @@ Här sitter fällan: $k^2 = 25$ ger både $k = 5$ och $k = -5$. Men $f$ ska vara
             level: 1,
             question: `Vad motsvarar derivatan i en punkt grafiskt?`,
             choices: [
+                `Tangentens $y$-skärning ($m$-värde)`,
+                `Arean under kurvan`,
                 `Tangentens lutning ($k$-värde) i punkten`,
                 `Kurvans $y$-värde i punkten`,
-                `Arean under kurvan`,
-                `Tangentens $y$-skärning ($m$-värde)`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Grafiskt motsvarar derivatan i en punkt lutningen på den tangent (räta linje) som tangerar kurvan i den punkten — samma sak som tangentens riktningskoefficient $k$.
 
 **Svar:** Tangentens lutning ($k$-värde) i punkten`,
@@ -37728,12 +37731,12 @@ $$
             level: 2,
             question: `Bestäm ekvationen för tangenten till kurvan $y = x^2 - 2x + 1$ i punkten där $x = 2$.`,
             choices: [
-                `$y = 2x - 3$`,
-                `$y = 2x + 1$`,
-                `$y = 2x - 1$`,
                 `$y = 4x - 7$`,
+                `$y = 2x - 1$`,
+                `$y = 2x + 1$`,
+                `$y = 2x - 3$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Tangenten är en rät linje $y = kx + m$. Lutningen är derivatans värde: $y' = 2x - 2$, så
 
 $$
@@ -37765,12 +37768,12 @@ $$
             level: 3,
             question: `Den räta linjen $y = 4x + m$ är tangent till kurvan $y = x^2$. Bestäm $m$.`,
             choices: [
-                `$m = -4$`,
-                `$m = 4$`,
                 `$m = -2$`,
                 `$m = 0$`,
+                `$m = 4$`,
+                `$m = -4$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** i tangeringspunkten har kurvan samma lutning som tangenten. Kurvans derivata är $y' = 2x$, och tangentens lutning är $4$, så
 
 $$
@@ -37810,12 +37813,12 @@ $$
             level: 1,
             question: `Derivera $y = (2x + 1)^3$.`,
             choices: [
+                `$y' = 2(2x + 1)^2$`,
                 `$y' = 6(2x + 1)^2$`,
                 `$y' = 3(2x + 1)^2$`,
-                `$y' = 2(2x + 1)^2$`,
                 `$y' = 6(2x + 1)^3$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Yttre funktion $z^3$, inre funktion $2x + 1$ med inre derivata $2$. Kedjeregeln ger:
 
 $$
@@ -37841,12 +37844,12 @@ $$
             level: 2,
             question: `Derivera $y = \\sqrt{x^2 + 1}$.`,
             choices: [
-                `$y' = \\dfrac{x}{\\sqrt{x^2 + 1}}$`,
-                `$y' = \\dfrac{1}{2\\sqrt{x^2 + 1}}$`,
                 `$y' = \\dfrac{2x}{\\sqrt{x^2 + 1}}$`,
+                `$y' = \\dfrac{1}{2\\sqrt{x^2 + 1}}$`,
+                `$y' = \\dfrac{x}{\\sqrt{x^2 + 1}}$`,
                 `$y' = \\dfrac{x}{2\\sqrt{x^2 + 1}}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi skriver om roten som en potens: $y = (x^2 + 1)^{1/2}$. Kedjeregeln med inre derivata $2x$ ger:
 
 $$
@@ -37872,12 +37875,12 @@ $$
             level: 3,
             question: `Kurvan $y = (x^2 - 4x)^3$ har vågräta tangenter i tre punkter. Bestäm samtliga $x$-värden där tangenten är vågrät.`,
             choices: [
+                `$x = 0$ och $x = 4$`,
                 `$x = 0$, $x = 2$ och $x = 4$`,
                 `Endast $x = 2$`,
-                `$x = 0$ och $x = 4$`,
                 `$x = 2$ och $x = 4$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** kedjeregeln ger en produkt av två faktorer, och båda faktorernas nollställen ger vågrät tangent — inte bara den inre derivatans.
 
 $$
@@ -37905,12 +37908,12 @@ Glömmer man den kvadrerade inre faktorn får man bara $x = 2$; struntar man i d
             level: 1,
             question: `Kedjeregeln på Leibniz form säger att om $y = f(z)$ och $z = g(x)$ så gäller ...`,
             choices: [
+                `$\\dfrac{dy}{dx} = \\dfrac{dy}{dz}\\cdot \\dfrac{dx}{dz}$`,
                 `$\\dfrac{dy}{dx} = \\dfrac{dy}{dz}\\cdot \\dfrac{dz}{dx}$`,
                 `$\\dfrac{dy}{dx} = \\dfrac{dy}{dz} + \\dfrac{dz}{dx}$`,
                 `$\\dfrac{dy}{dx} = \\dfrac{dz}{dy}\\cdot \\dfrac{dx}{dz}$`,
-                `$\\dfrac{dy}{dx} = \\dfrac{dy}{dz}\\cdot \\dfrac{dx}{dz}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Man deriverar den yttre funktionen med avseende på $z$ och multiplicerar med den inre funktionens derivata, $\\dfrac{dz}{dx}$. Ser man det som ett "bråk" förkortas $dz$ bort och kvar blir $\\dfrac{dy}{dx}$.
 
 **Svar:** $\\dfrac{dy}{dx} = \\dfrac{dy}{dz}\\cdot \\dfrac{dz}{dx}$`,
@@ -37919,12 +37922,12 @@ Glömmer man den kvadrerade inre faktorn får man bara $x = 2$; struntar man i d
             level: 1,
             question: `Arean av en cirkel är $A(r) = \\pi r^2$. Vad är $\\dfrac{dA}{dr}$?`,
             choices: [
-                `$2\\pi r$`,
                 `$\\pi r^2$`,
-                `$\\pi r$`,
                 `$2\\pi r^2$`,
+                `$\\pi r$`,
+                `$2\\pi r$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi deriverar $A(r) = \\pi r^2$ med avseende på $r$. Konstanten $\\pi$ står kvar och $r^2$ deriveras till $2r$:
 
 $$
@@ -38051,12 +38054,12 @@ $$
             level: 2,
             question: `Derivera $f(x) = -5\\cos\\dfrac{x}{3}$.`,
             choices: [
-                `$f'(x) = \\dfrac{5}{3}\\sin\\dfrac{x}{3}$`,
                 `$f'(x) = 5\\sin\\dfrac{x}{3}$`,
-                `$f'(x) = -\\dfrac{5}{3}\\sin\\dfrac{x}{3}$`,
                 `$f'(x) = \\dfrac{5}{3}\\cos\\dfrac{x}{3}$`,
+                `$f'(x) = -\\dfrac{5}{3}\\sin\\dfrac{x}{3}$`,
+                `$f'(x) = \\dfrac{5}{3}\\sin\\dfrac{x}{3}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi använder kedjeregeln. Den inre funktionen är $\\dfrac{x}{3}$ med derivatan $\\dfrac{1}{3}$, och cosinus deriveras till $-\\sin$.
 
 $$
@@ -38115,12 +38118,12 @@ I intervallet $0 \\leq x \\leq \\dfrac{\\pi}{2}$ ger $\\tan x = 1$ lösningen $x
             level: 1,
             question: `Vad är $D(\\ln x)$ för $x > 0$?`,
             choices: [
-                `$\\dfrac{1}{x}$`,
+                `$e^x$`,
                 `$\\ln x$`,
                 `$x\\ln x$`,
-                `$e^x$`,
+                `$\\dfrac{1}{x}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Derivatan av logaritmfunktionen $y = \\ln x$ är
 
 $$
@@ -38133,12 +38136,12 @@ $$
             level: 1,
             question: `Derivera $y = e^{3x}$.`,
             choices: [
-                `$3e^{3x}$`,
                 `$e^{3x}$`,
                 `$3x\\,e^{3x}$`,
                 `$e^{3}$`,
+                `$3e^{3x}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Derivatan av en exponentialfunktion med basen $e$ är densamma multiplicerad med exponentens inre derivata. Här är den inre derivatan $3$:
 
 $$
@@ -38151,12 +38154,12 @@ $$
             level: 1,
             question: `Derivera $y = 5\\ln x$.`,
             choices: [
-                `$\\dfrac{5}{x}$`,
-                `$5x$`,
-                `$\\dfrac{1}{5x}$`,
                 `$5\\ln x$`,
+                `$\\dfrac{1}{5x}$`,
+                `$5x$`,
+                `$\\dfrac{5}{x}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Konstanten $5$ följer med, och derivatan av $\\ln x$ är $\\dfrac{1}{x}$:
 
 $$
@@ -38170,12 +38173,12 @@ $$
             level: 2,
             question: `Derivera $y = \\ln t^4$ med avseende på $t$.`,
             choices: [
-                `$\\dfrac{4}{t}$`,
                 `$\\dfrac{1}{t^4}$`,
                 `$4t^3$`,
                 `$\\dfrac{4}{t^4}$`,
+                `$\\dfrac{4}{t}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Yttre funktion $\\ln z$ med inre funktion $z = t^4$. Kedjeregeln ger
 
 $$
@@ -38188,12 +38191,12 @@ $$
             level: 2,
             question: `Derivera $y = e^{\\sin x}$.`,
             choices: [
+                `$e^{\\cos x}$`,
                 `$\\cos x\\cdot e^{\\sin x}$`,
                 `$e^{\\sin x}$`,
-                `$e^{\\cos x}$`,
                 `$\\sin x\\cdot e^{\\cos x}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Yttre funktion $e^z$ med inre funktion $z = \\sin x$. Den inre derivatan är $\\cos x$:
 
 $$
@@ -38207,12 +38210,12 @@ $$
             level: 3,
             question: `Derivera $y = \\ln(3x - 4)^2$ och förenkla svaret så långt som möjligt.`,
             choices: [
-                `$\\dfrac{6}{3x - 4}$`,
                 `$\\dfrac{2}{3x - 4}$`,
-                `$\\dfrac{6(3x - 4)}{(3x - 4)^2}$`,
                 `$\\dfrac{1}{(3x - 4)^2}$`,
+                `$\\dfrac{6}{3x - 4}$`,
+                `$\\dfrac{6(3x - 4)}{(3x - 4)^2}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** den inre funktionen $(3x - 4)^2$ har i sin tur en inre funktion $(3x - 4)$, så kedjeregeln tillämpas i två steg — och sedan måste bråket förkortas.
 
 Yttre funktion $\\ln z$ med $z = (3x - 4)^2$:
@@ -38238,12 +38241,12 @@ Alternativet $\\dfrac{6(3x - 4)}{(3x - 4)^2}$ är rätt men oförkortat.
             level: 1,
             question: `Om $y = f(x)\\cdot g(x)$, vilket uttryck är derivatan $y'$?`,
             choices: [
-                `$f'(x)\\cdot g(x) + f(x)\\cdot g'(x)$`,
-                `$f'(x)\\cdot g'(x)$`,
-                `$f'(x)\\cdot g(x) - f(x)\\cdot g'(x)$`,
                 `$f(x)\\cdot g(x)$`,
+                `$f'(x)\\cdot g(x) + f(x)\\cdot g'(x)$`,
+                `$f'(x)\\cdot g(x) - f(x)\\cdot g'(x)$`,
+                `$f'(x)\\cdot g'(x)$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Produktregeln säger att man deriverar den ena faktorn i taget och adderar: derivatan av $f$ gånger $g$, plus $f$ gånger derivatan av $g$.
 
 **Svar:** $f'(x)\\cdot g(x) + f(x)\\cdot g'(x)$`,
@@ -38320,12 +38323,12 @@ $$
             level: 3,
             question: `Kurvan $y = x\\,e^{x}$ har en horisontell tangent i exakt en punkt. Bestäm punktens koordinater.`,
             choices: [
-                `$\\left(-1,\\ -\\dfrac{1}{e}\\right)$`,
-                `$(0,\\ 0)$`,
-                `$(1,\\ e)$`,
                 `$\\left(-1,\\ e\\right)$`,
+                `$(0,\\ 0)$`,
+                `$\\left(-1,\\ -\\dfrac{1}{e}\\right)$`,
+                `$(1,\\ e)$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** en horisontell tangent betyder $y' = 0$. Produktregeln på $y = x\\cdot e^{x}$ ger
 
 $$
@@ -38353,12 +38356,12 @@ $$
             level: 1,
             question: `Du har definierat en funktion $f$ i Geogebra. Vilket kommando ger derivatans värde i punkten $x = 3$?`,
             choices: [
-                `$f'(3)$`,
-                `$f(3)$`,
                 `$\\text{NLös}(f(x) = 0)$`,
                 `Verktyget Nollställen`,
+                `$f(3)$`,
+                `$f'(3)$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Derivatans värde i en punkt får man genom att skriva $f'$ följt av $x$-värdet. $f(3)$ ger funktionens värde, inte förändringen, och de övriga alternativen löser i stället ekvationer.
 
 **Svar:** $f'(3)$`,
@@ -38394,12 +38397,12 @@ $$
             level: 2,
             question: `För en dammnivå $N(t)$ (i meter, $t$ i månader) ger Geogebra $N'(4) \\approx -1{,}7$. Hur tolkas värdet?`,
             choices: [
-                `Nivån minskar med ungefär $1{,}7$ meter per månad`,
-                `Nivån ökar med ungefär $1{,}7$ meter per månad`,
                 `Nivån är $1{,}7$ meter vid $t = 4$`,
+                `Nivån minskar med ungefär $1{,}7$ meter per månad`,
                 `Nivån minskar med $1{,}7$ meter under hela perioden`,
+                `Nivån ökar med ungefär $1{,}7$ meter per månad`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `$N'(4)$ är förändringshastigheten vid $t = 4$. Det negativa tecknet betyder att nivån avtar, och beloppet $1{,}7$ mäts i meter per månad eftersom $N$ är meter och $t$ månader. Värdet är en hastighet vid en tidpunkt, inte själva nivån och inte förändringen över hela perioden.
 
 **Svar:** Nivån minskar med ungefär $1{,}7$ meter per månad`,
@@ -38421,12 +38424,12 @@ $$
             level: 3,
             question: `Funktionen $f(x) = x\\,e^{-x}$ har en maximipunkt. Löser du $f'(x) = 0$ för hand — vilket $x$-värde får du?`,
             choices: [
-                `$x = 1$`,
                 `Ekvationen saknar lösning eftersom $e^{-x} \\neq 0$`,
                 `$x = 0$`,
                 `$x = e$`,
+                `$x = 1$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** derivera med produktregeln och bryt ut $e^{-x}$ — då kan man använda nollproduktmetoden.
 
 $$
@@ -38450,12 +38453,12 @@ Fällan är att stanna vid "$e^{-x} \\neq 0$" och tro att ekvationen saknar lös
             level: 1,
             question: `En deriverbar funktion har $f'(a) = 0$ och $f''(a) > 0$. Vilken typ av punkt är $x = a$?`,
             choices: [
+                `En punkt där funktionen växer`,
+                `En terrasspunkt`,
                 `En lokal minimipunkt`,
                 `En lokal maximipunkt`,
-                `En terrasspunkt`,
-                `En punkt där funktionen växer`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Att $f'(a) = 0$ betyder att lutningen är noll, så det är en extrempunkt eller terrasspunkt. Andraderivatans tecken avgör karaktären: $f''(a) > 0$ betyder att kurvan böjer uppåt ("glad" kurva), alltså en minimipunkt.
 
 **Svar:** En lokal minimipunkt`,
@@ -38526,12 +38529,12 @@ Det största av dessa är $0$. Fällan är att $x = 2$ ger en *minimi*punkt, så
             level: 3,
             question: `Talet 12 ska delas i två positiva tal $x$ och $12 - x$ så att produkten $P = x^2(12 - x)$ blir så stor som möjligt. Bestäm det största värdet av produkten.`,
             choices: [
-                `256`,
+                `144`,
                 `216`,
                 `288`,
-                `144`,
+                `256`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** använd villkoret för att skriva produkten som en funktion av *en* variabel, derivera och förkasta den rot som inte ger något maximum.
 
 $$
@@ -38559,12 +38562,12 @@ Alternativet $216$ är fällan att dela lika ($x = 6$ ger $6^2\\cdot 6 = 216$), 
             level: 1,
             question: `I ett extremvärdesproblem ritar man upp grafen till funktionen som ska optimeras. Vad läser man sedan av med verktyget för extrempunkter?`,
             choices: [
-                `Grafens maximi- och minimipunkter`,
                 `Grafens nollställen`,
-                `Grafens skärning med $y$-axeln`,
+                `Grafens maximi- och minimipunkter`,
                 `Grafens lutning i varje punkt`,
+                `Grafens skärning med $y$-axeln`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Tumregeln vid extremvärdesproblem med digitala hjälpmedel är att rita grafen till funktionen och läsa av dess maximi- och minimipunkter. Extrempunktens $y$-koordinat är det sökta största eller minsta värdet.
 
 **Svar:** Grafens maximi- och minimipunkter`,
@@ -38610,12 +38613,12 @@ $$
             level: 2,
             question: `En kostnad $C(x)$ (i tusen kr) ska minimeras. I GeoGebra hittar man extrempunkterna $(2;\\ 15)$ som är en minimipunkt och $(6;\\ 40)$ som är en maximipunkt. Vilket $x$ ger den lägsta kostnaden?`,
             choices: [
-                `$x = 2$`,
                 `$x = 6$`,
                 `$x = 15$`,
+                `$x = 2$`,
                 `$x = 40$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Den lägsta kostnaden svarar mot **minimipunkten**, inte maximipunkten. Minimipunkten är $(2;\\ 15)$, så den lägsta kostnaden inträffar vid $x = 2$ och är $15$ tusen kr. Värdena $15$ och $40$ är $y$-koordinater (kostnader), inte $x$-värden.
 
 **Svar:** $x = 2$`,
@@ -38625,12 +38628,12 @@ $$
             level: 3,
             question: `Modellen $K(t) = 5t^{1{,}4}\\cdot e^{-0{,}25t} + 1{,}5\\cos(0{,}8t) + 3$ gäller endast för $t \\geq 0$. När den snabbaste ökningstakten söks studeras derivatans graf $K'(t)$, som svänger och har flera lokala maxima. Hjälpmedlet visar en extrempunkt även vid ett litet negativt $t$-värde. Varför ska man ändå välja maximipunkten vid $t = 0{,}62$?`,
             choices: [
+                `Eftersom $t = 0{,}62$ är funktionens $K(t)$ maximipunkt.`,
                 `Eftersom modellen bara gäller för $t \\geq 0$ saknar en extrempunkt med negativt $t$ mening — den giltiga största ökningstakten är derivatans största värde i området $t \\geq 0$.`,
                 `Eftersom en negativ tidpunkt alltid ger ett större värde på derivatan.`,
                 `Eftersom derivatan $K'(t)$ är noll vid $t = 0{,}62$.`,
-                `Eftersom $t = 0{,}62$ är funktionens $K(t)$ maximipunkt.`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** en digital lösning måste tolkas mot modellens giltighetsområde. Grafen till $K'(t)$ finns matematiskt för alla $t$, men modellen gäller bara för $t \\geq 0$, så extrempunkter med $t < 0$ är utan mening här. Den snabbaste ökningen är därför derivatans största värde i området $t \\geq 0$, som avläses vid $t = 0{,}62$.
 
 Fällan i alternativ 4 är att blanda ihop de två frågorna: funktionens $K(t)$ egen maximipunkt ligger vid $t = 7{,}09$ (störst koncentration), medan derivatans $K'(t)$ maximipunkt vid $t = 0{,}62$ ger störst ökningstakt.
@@ -38644,12 +38647,12 @@ Fällan i alternativ 4 är att blanda ihop de två frågorna: funktionens $K(t)$
             level: 1,
             question: `I en teckentabell växlar derivatan tecken från $-$ till $+$ vid $x = 2$. Vilken karaktär har punkten där $x = 2$?`,
             choices: [
-                `En lokal minimipunkt`,
-                `En lokal maximipunkt`,
                 `En terrasspunkt`,
                 `En ändpunkt`,
+                `En lokal maximipunkt`,
+                `En lokal minimipunkt`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `När derivatan går från negativ till positiv avtar funktionen före punkten och växer efter den — kurvan vänder uppåt.
 
 **Svar:** En lokal minimipunkt`,
@@ -38658,12 +38661,12 @@ Fällan i alternativ 4 är att blanda ihop de två frågorna: funktionens $K(t)$
             level: 1,
             question: `Lös ekvationen $e^x(x^2 - 4) = 0$ med nollproduktmetoden.`,
             choices: [
-                `$x = -2$ och $x = 2$`,
-                `$x = 4$`,
                 `$x = 2$`,
+                `$x = -2$ och $x = 2$`,
                 `Ekvationen saknar lösning`,
+                `$x = 4$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Faktorn $e^x = 0$ saknar lösning eftersom $e^x > 0$ för alla $x$. Kvar är:
 
 $$
@@ -38701,12 +38704,12 @@ $$
             level: 2,
             question: `En funktion har derivatan $g'(x) = x^2 e^x$. Vilken typ av punkt har grafen där $g'(x) = 0$?`,
             choices: [
-                `En terrasspunkt i $x = 0$`,
                 `En minimipunkt i $x = 0$`,
+                `En terrasspunkt i $x = 0$`,
                 `En maximipunkt i $x = 0$`,
                 `Ingen speciell punkt — $g'(x)$ saknar nollställe`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Nollproduktmetoden ger $g'(x) = 0$ endast då $x^2 = 0$, alltså $x = 0$ (eftersom $e^x > 0$). Undersök derivatans tecken på båda sidor: för både $x < 0$ och $x > 0$ är $x^2 > 0$ och $e^x > 0$, så $g'(x) > 0$. Derivatan är noll men växlar **inte** tecken, vilket ger en terrasspunkt.
 
 **Svar:** En terrasspunkt i $x = 0$`,
@@ -38787,12 +38790,12 @@ $$
             level: 2,
             question: `Bestäm den horisontella asymptoten till $f(x) = \\dfrac{2x + 1}{x - 4}$.`,
             choices: [
+                `$y = 0$`,
+                `$y = 4$`,
                 `$y = 2$`,
                 `$y = 1$`,
-                `$y = 4$`,
-                `$y = 0$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi bestämmer gränsvärdet då $x \\to \\infty$. Konstanttermerna kan försummas, så täljare och nämnare bestäms av $x$-termerna:
 
 $$
@@ -38857,12 +38860,12 @@ Funktionen är alltså den räta linjen $y = x + 2$ (med ett hål i punkten $x =
             level: 1,
             question: `När har en rationell funktion en sned asymptot?`,
             choices: [
-                `När täljarens grad är exakt en högre än nämnarens grad`,
                 `När täljarens grad är exakt lika med nämnarens grad`,
-                `När täljarens grad är exakt en lägre än nämnarens grad`,
                 `När nämnarens grad är noll`,
+                `När täljarens grad är exakt en högre än nämnarens grad`,
+                `När täljarens grad är exakt en lägre än nämnarens grad`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `En sned asymptot uppstår just när täljarens grad överstiger nämnarens med exakt $1$. Vid en polynomdivision blir då "heldelen" en förstagradare $kx + m$ och resten en restterm som går mot $0$.
 
 **Svar:** När täljarens grad är exakt en högre än nämnarens grad`,
@@ -38871,12 +38874,12 @@ Funktionen är alltså den räta linjen $y = x + 2$ (med ett hål i punkten $x =
             level: 1,
             question: `Ett uttryck är skrivet på formen $y = 3x - 2 + \\dfrac{5}{x+4}$. Vilken är den sneda asymptoten?`,
             choices: [
-                `$y = 3x - 2$`,
                 `$y = 3x + 4$`,
-                `$y = \\dfrac{5}{x+4}$`,
                 `$y = -2$`,
+                `$y = \\dfrac{5}{x+4}$`,
+                `$y = 3x - 2$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Uttrycket har redan formen $y = kx + m + R(x)$, där resttermen $R(x) = \\dfrac{5}{x+4} \\to 0$ då $x \\to \\pm\\infty$. Den räta linjen $y = kx + m$ som blir kvar är den sneda asymptoten.
 
 **Svar:** $y = 3x - 2$`,
@@ -38885,12 +38888,12 @@ Funktionen är alltså den räta linjen $y = x + 2$ (med ett hål i punkten $x =
             level: 1,
             question: `I omskrivningen $y = 4x + 1 + \\dfrac{2}{x-5}$, vilken del är resttermen $R(x)$?`,
             choices: [
-                `$\\dfrac{2}{x-5}$`,
-                `$4x$`,
                 `$4x + 1$`,
                 `$1$`,
+                `$4x$`,
+                `$\\dfrac{2}{x-5}$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Resttermen $R(x)$ är den del som går mot $0$ när $x$ blir mycket stor. Här är det bråket $\\dfrac{2}{x-5}$, medan $4x + 1$ är själva den sneda asymptoten.
 
 **Svar:** $\\dfrac{2}{x-5}$`,
@@ -38900,12 +38903,12 @@ Funktionen är alltså den räta linjen $y = x + 2$ (med ett hål i punkten $x =
             level: 2,
             question: `Bestäm den sneda asymptoten till $y = \\dfrac{2x^2 - 4x + 3}{x}$.`,
             choices: [
+                `$y = 2x$`,
                 `$y = 2x - 4$`,
                 `$y = 2x + 3$`,
                 `$y = 2x - 4 + \\dfrac{3}{x}$`,
-                `$y = 2x$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi delar upp bråket term för term:
 
 $$
@@ -38920,12 +38923,12 @@ Resttermen $\\dfrac{3}{x} \\to 0$ då $x \\to \\pm\\infty$, så den sneda asympt
             level: 2,
             question: `Bestäm den sneda asymptoten till $y = \\dfrac{x^2 - 3x + 5}{x - 1}$.`,
             choices: [
-                `$y = x - 2$`,
                 `$y = x - 3$`,
                 `$y = x + 2$`,
                 `$y = x - 2 + \\dfrac{3}{x-1}$`,
+                `$y = x - 2$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Polynomdivision av $x^2 - 3x + 5$ med $x - 1$ ger kvoten $x - 2$ och resten $3$:
 
 $$
@@ -38941,12 +38944,12 @@ Resttermen $\\dfrac{3}{x-1} \\to 0$ då $x \\to \\pm\\infty$, så den sneda asym
             level: 3,
             question: `Kurvan $y = \\dfrac{x^2 + bx + 7}{x + 1}$ har den sneda asymptoten $y = x + 4$. Bestäm konstanten $b$.`,
             choices: [
-                `$b = 5$`,
-                `$b = 4$`,
-                `$b = 3$`,
                 `$b = -3$`,
+                `$b = 4$`,
+                `$b = 5$`,
+                `$b = 3$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** det är bara *kvoten* vid polynomdivisionen — inte resten — som bestämmer den sneda asymptoten. Vi dividerar $x^2 + bx + 7$ med $x + 1$:
 
 $$
@@ -38970,12 +38973,12 @@ Resten blir då $8 - b = 3 \\neq 0$, så asymptoten är genuint sned. Talet $7$ 
             level: 1,
             question: `Vilken lodrät (vertikal) asymptot har funktionen $f(x) = \\dfrac{x^2 + 1}{x}$?`,
             choices: [
-                `$x = 0$`,
-                `$y = 0$`,
-                `$x = 1$`,
                 `$y = x$`,
+                `$y = 0$`,
+                `$x = 0$`,
+                `$x = 1$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Uttrycket kan inte förkortas, så vi söker de $x$-värden där nämnaren blir noll. Nämnaren är $x$, vilket ger $x = 0$.
 
 **Svar:** $x = 0$`,
@@ -38984,12 +38987,12 @@ Resten blir då $8 - b = 3 \\neq 0$, så asymptoten är genuint sned. Talet $7$ 
             level: 1,
             question: `Skriv om $f(x) = \\dfrac{x^2 + 1}{x}$ på formen $kx + m + R(x)$. Vilken blir den sneda asymptoten?`,
             choices: [
-                `$y = x$`,
                 `$y = x + 1$`,
-                `$y = \\dfrac{1}{x}$`,
                 `$y = x^2$`,
+                `$y = x$`,
+                `$y = \\dfrac{1}{x}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi delar upp uttrycket i termer:
 
 $$
@@ -39017,12 +39020,12 @@ $$
             level: 2,
             question: `Bestäm den sneda asymptoten till $g(x) = \\dfrac{2x^2 + 1}{x}$.`,
             choices: [
-                `$y = 2x$`,
                 `$y = x$`,
                 `$y = 2x + 1$`,
+                `$y = 2x$`,
                 `$y = \\dfrac{1}{x}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi delar upp uttrycket i termer:
 
 $$
@@ -39126,12 +39129,12 @@ $$
             level: 2,
             question: `Ange samtliga primitiva funktioner till $f(x) = \\dfrac{2}{x} + \\sin x$.`,
             choices: [
-                `$F(x) = 2\\ln x - \\cos x + C$`,
-                `$F(x) = 2\\ln x + \\cos x + C$`,
                 `$F(x) = -\\dfrac{2}{x^2} + \\cos x + C$`,
+                `$F(x) = 2\\ln x + \\cos x + C$`,
+                `$F(x) = 2\\ln x - \\cos x + C$`,
                 `$F(x) = 2\\ln x - \\cos x$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi tar en primitiv funktion term för term. Termen $\\dfrac{2}{x}$ ger $2\\ln x$, och $\\sin x$ har den primitiva funktionen $-\\cos x$. Eftersom vi ska ange *samtliga* primitiva funktioner lägger vi till konstanten $C$.
 
 $$
@@ -39293,12 +39296,12 @@ $$
             level: 1,
             question: `Vilket uttryck är lika med $\\int_a^b 3f(x)\\,dx$?`,
             choices: [
-                `$3\\int_a^b f(x)\\,dx$`,
-                `$\\int_a^b f(x)\\,dx + 3$`,
                 `$\\dfrac{1}{3}\\int_a^b f(x)\\,dx$`,
+                `$3\\int_a^b f(x)\\,dx$`,
                 `$3 + f(x)$`,
+                `$\\int_a^b f(x)\\,dx + 3$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `En konstant faktor kan brytas ut framför integraltecknet, eftersom $3$ inte innehåller variabeln $x$:
 
 $$
@@ -39358,12 +39361,12 @@ Alltså $14 - 2 = 12$.
             level: 2,
             question: `Beräkna det exakta värdet av $\\int_2^1 \\dfrac{4}{x}\\,dx$.`,
             choices: [
-                `$-4\\ln 2$`,
                 `$4\\ln 2$`,
-                `$-2\\ln 2$`,
                 `$4\\ln 2 - 4$`,
+                `$-2\\ln 2$`,
+                `$-4\\ln 2$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Gränserna står i "fel" ordning (den övre är mindre än den nedre). Vi kastar om dem och byter tecken:
 
 $$
@@ -39410,12 +39413,12 @@ Fällan $19$ fås om man adderar i stället för att subtrahera $2g$; $10$ om ma
             level: 1,
             question: `Vilket uttryck ger arean mellan två kurvor där $f(x)$ ligger ovanför $g(x)$ i intervallet $a \\le x \\le b$?`,
             choices: [
-                `$A = \\displaystyle\\int_a^b \\big(f(x) - g(x)\\big)\\,dx$`,
-                `$A = \\displaystyle\\int_a^b \\big(g(x) - f(x)\\big)\\,dx$`,
                 `$A = \\displaystyle\\int_a^b f(x)\\,g(x)\\,dx$`,
+                `$A = \\displaystyle\\int_a^b \\big(f(x) - g(x)\\big)\\,dx$`,
                 `$A = \\displaystyle\\int_a^b \\big(f(x) + g(x)\\big)\\,dx$`,
+                `$A = \\displaystyle\\int_a^b \\big(g(x) - f(x)\\big)\\,dx$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Arean mellan två kurvor är integralen av den övre funktionen minus den undre.
 
 $$
@@ -39428,12 +39431,12 @@ $$
             level: 1,
             question: `Du ska beräkna arean mellan två kurvor men ser inte mellan vilka $x$-värden området ligger. Vad gör du först?`,
             choices: [
-                `Bestämmer skärningspunkterna genom att sätta funktionsuttrycken lika`,
-                `Deriverar båda funktionerna`,
                 `Sätter båda funktionerna lika med noll`,
+                `Deriverar båda funktionerna`,
+                `Bestämmer skärningspunkterna genom att sätta funktionsuttrycken lika`,
                 `Adderar funktionsuttrycken och integrerar summan`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Skärningspunkternas $x$-koordinater blir integrationsgränserna $a$ och $b$. Dem hittar vi genom att sätta funktionsuttrycken lika och lösa ekvationen.
 
 **Svar:** Bestämmer skärningspunkterna genom att sätta funktionsuttrycken lika`,
@@ -39459,12 +39462,12 @@ $$
             level: 2,
             question: `Beräkna arean av området som begränsas av linjen $y = x + 2$ och parabeln $y = x^2$.`,
             choices: [
-                `$\\dfrac{9}{2}$ a.e.`,
+                `$9$ a.e.`,
                 `$\\dfrac{7}{6}$ a.e.`,
                 `$\\dfrac{10}{3}$ a.e.`,
-                `$9$ a.e.`,
+                `$\\dfrac{9}{2}$ a.e.`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Skärningspunkter: $x^2 = x + 2 \\;\\Leftrightarrow\\; x^2 - x - 2 = 0 \\;\\Leftrightarrow\\; (x + 1)(x - 2) = 0$, alltså $x = -1$ och $x = 2$. Linjen är övre funktion:
 
 $$
@@ -39481,12 +39484,12 @@ $$
             level: 2,
             question: `Beräkna arean av området som begränsas av parabeln $y = x^2$ och linjen $y = 2x$.`,
             choices: [
-                `$\\dfrac{4}{3}$ a.e.`,
-                `$\\dfrac{8}{3}$ a.e.`,
                 `$2$ a.e.`,
                 `$4$ a.e.`,
+                `$\\dfrac{8}{3}$ a.e.`,
+                `$\\dfrac{4}{3}$ a.e.`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Skärningspunkter: $x^2 = 2x \\;\\Leftrightarrow\\; x^2 - 2x = 0 \\;\\Leftrightarrow\\; x(x - 2) = 0$, alltså $x = 0$ och $x = 2$. Mellan dem är $y = 2x$ övre funktion:
 
 $$
@@ -39500,12 +39503,12 @@ $$
             level: 3,
             question: `Beräkna den totala arean av området som begränsas av kurvan $y = x^3$ och linjen $y = x$.`,
             choices: [
-                `$\\dfrac{1}{2}$ a.e.`,
                 `$0$ a.e.`,
-                `$\\dfrac{1}{4}$ a.e.`,
+                `$\\dfrac{1}{2}$ a.e.`,
                 `$1$ a.e.`,
+                `$\\dfrac{1}{4}$ a.e.`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** kurvorna skär varandra i $x = -1$, $x = 0$ och $x = 1$, så området består av **två** delar. Räknar man naivt $\\displaystyle\\int_{-1}^{1} (x - x^3)\\,dx$ blir svaret $0$, eftersom integranden är udda och delarna tar ut varandra — men arean är inte noll.
 
 I intervallet $0 \\le x \\le 1$ är $y = x$ övre kurva; i $-1 \\le x \\le 0$ är $y = x^3$ övre. Av symmetrin är delarna lika stora, så
@@ -39557,12 +39560,12 @@ $$
             level: 1,
             question: `Effekten i en apparat varierar med tiden enligt $P(t)$. Vilken integral ger den omvandlade energin mellan $t_1$ och $t_2$?`,
             choices: [
-                `$E = \\int_{t_1}^{t_2} P(t)\\,dt$`,
-                `$E = \\int_{t_1}^{t_2} P'(t)\\,dt$`,
-                `$E = P(t_2) - P(t_1)$`,
                 `$E = \\dfrac{P(t_2)}{t_2 - t_1}$`,
+                `$E = P(t_2) - P(t_1)$`,
+                `$E = \\int_{t_1}^{t_2} P'(t)\\,dt$`,
+                `$E = \\int_{t_1}^{t_2} P(t)\\,dt$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Energi är effekt multiplicerat med tid. Eftersom effekten varierar summerar vi bidragen med en integral av effekten över tiden:
 
 $$
@@ -39607,12 +39610,12 @@ $$
             level: 3,
             question: `Vatten rinner in i en tank med flödet $q(t) = 6t$ (liter/minut). Vid $t = 0$ innehåller tanken redan 5 liter. Vid vilken tidpunkt innehåller tanken 32 liter?`,
             choices: [
-                `$t = 3$ min`,
                 `$t = 9$ min`,
-                `$t \\approx 3{,}3$ min`,
+                `$t = 3$ min`,
                 `$t \\approx 5{,}3$ min`,
+                `$t \\approx 3{,}3$ min`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** flödet är volymändring per tid, så volymen är integralen av flödet — och begynnelsevolymen 5 liter bestämmer integrationskonstanten.
 
 Volymfunktionen fås genom att integrera flödet:
@@ -39638,12 +39641,12 @@ $$
             level: 1,
             question: `Arean under en täthetsfunktion $f(x)$ mellan $x = a$ och $x = b$ är lika med vad?`,
             choices: [
-                `Sannolikheten $P(a \\leq X \\leq b)$`,
-                `Medelvärdet av $X$`,
                 `Funktionens största värde i intervallet`,
+                `Medelvärdet av $X$`,
                 `Längden $b - a$`,
+                `Sannolikheten $P(a \\leq X \\leq b)$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Sannolikheten att utfallet hamnar mellan $a$ och $b$ ges av integralen av täthetsfunktionen:
 
 $$
@@ -39658,12 +39661,12 @@ Integralen är just arean under grafen mellan $a$ och $b$.
             level: 1,
             question: `Vad måste den totala arean under en täthetsfunktions graf vara?`,
             choices: [
-                `Exakt $1$`,
-                `Exakt $0$`,
-                `Alltid $100$`,
                 `Vilket positivt tal som helst`,
+                `Exakt $0$`,
+                `Exakt $1$`,
+                `Alltid $100$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Den totala sannolikheten är $100\\ \\%$, vilket motsvarar arean $1$ under hela kurvan:
 
 $$
@@ -39718,12 +39721,12 @@ $$
             level: 3,
             question: `Funktionen $f(t) = k\\cdot e^{-0{,}0005t}$ är definierad för $t \\geq 0$. Bestäm konstanten $k$ så att $f(t)$ blir en täthetsfunktion.`,
             choices: [
-                `$k = 0{,}0005$`,
-                `$k = 2000$`,
                 `$k = 0{,}5$`,
                 `$k = 0{,}002$`,
+                `$k = 0{,}0005$`,
+                `$k = 2000$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** intervallet saknar övre gräns, så integralen går ända till oändligheten. Där avtar $e^{-0{,}0005t}$ mot noll, vilket gör den generaliserade integralen ändlig. Vi kräver att den totala arean är $1$:
 
 $$
@@ -39751,12 +39754,12 @@ Alternativet $2000$ är vad man får om man glömmer att invertera på slutet.
             level: 1,
             question: `En kurva $y = f(x)$ roterar runt $x$-axeln i intervallet $a \\leq x \\leq b$. Vilken formel ger rotationskroppens volym?`,
             choices: [
-                `$V = \\pi\\displaystyle\\int_a^b y^2\\, dx$`,
-                `$V = \\pi\\displaystyle\\int_a^b y\\, dx$`,
-                `$V = \\displaystyle\\int_a^b y^2\\, dx$`,
                 `$V = 2\\pi\\displaystyle\\int_a^b y\\, dx$`,
+                `$V = \\pi\\displaystyle\\int_a^b y^2\\, dx$`,
+                `$V = \\displaystyle\\int_a^b y^2\\, dx$`,
+                `$V = \\pi\\displaystyle\\int_a^b y\\, dx$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Varje skiva är en cylinder med radien $r = y$ och tjockleken $dx$, så skivans volym är $\\pi r^2\\, dx = \\pi y^2\\, dx$. Summeras alla skivor med en integral fås
 
 $$
@@ -39837,12 +39840,12 @@ Kontroll med konvolymen $\\dfrac{\\pi r^2 h}{3} = \\dfrac{\\pi\\cdot 2^2\\cdot 2
             level: 3,
             question: `Området mellan kurvan $y = \\sqrt{x}$ och $x$-axeln, från $x = 0$ till $x = b$, roterar runt $x$-axeln. För vilket värde på $b$ blir rotationskroppens volym exakt $8\\pi$?`,
             choices: [
+                `$b = 2\\sqrt{2}$`,
+                `$b = 8$`,
                 `$b = 4$`,
                 `$b = 16$`,
-                `$b = 8$`,
-                `$b = 2\\sqrt{2}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** ställ upp volymen med den okända övre gränsen $b$ och lös sedan ekvationen $V = 8\\pi$. Eftersom $y^2 = x$:
 
 $$
@@ -39866,12 +39869,12 @@ $$
             level: 1,
             question: `Vilken formel ger volymen då kurvan $y = f(x)$ roterar kring $y$-axeln i intervallet $a \\leq y \\leq b$?`,
             choices: [
-                `$V = \\pi\\int_a^b x^2\\, dy$`,
-                `$V = \\pi\\int_a^b y^2\\, dx$`,
                 `$V = \\pi\\int_a^b x\\, dy$`,
+                `$V = \\pi\\int_a^b x^2\\, dy$`,
                 `$V = 2\\pi\\int_a^b x\\, dy$`,
+                `$V = \\pi\\int_a^b y^2\\, dx$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vid rotation kring $y$-axeln är radien för varje skiva kurvans $x$-värde, och skivan har tjockleken $dy$. En skivas volym är basytan $\\pi x^2$ gånger höjden $dy$, och summan blir en integral i $y$-led.
 
 **Svar:** $V = \\pi\\int_a^b x^2\\, dy$`,
@@ -39880,12 +39883,12 @@ $$
             level: 1,
             question: `Kurvan $y = \\sqrt{x}$ ska roteras kring $y$-axeln. Vilket uttryck ger $x$ uttryckt i $y$?`,
             choices: [
-                `$x = y^2$`,
                 `$x = \\sqrt{y}$`,
                 `$x = y^2 + 1$`,
+                `$x = y^2$`,
                 `$x = \\dfrac{1}{y^2}$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Eftersom vi integrerar med avseende på $y$ måste $x$ uttryckas i $y$. Vi kvadrerar båda led i $y = \\sqrt{x}$:
 
 $$
@@ -39929,12 +39932,12 @@ $$
             level: 2,
             question: `Området begränsas av kurvan $y = \\sqrt{x}$, $y$-axeln och linjen $y = 1$ och roterar kring $y$-axeln. Bestäm volymen exakt.`,
             choices: [
-                `$\\dfrac{\\pi}{5}$`,
                 `$\\dfrac{\\pi}{3}$`,
+                `$\\dfrac{\\pi}{5}$`,
                 `$\\dfrac{2\\pi}{5}$`,
                 `$\\pi$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi löser ut $x$ ur $y = \\sqrt{x}$ genom att kvadrera: $x = y^2$, så $x^2 = y^4$. Med gränserna $a = 0$ och $b = 1$:
 
 $$
@@ -39975,12 +39978,12 @@ $$
             level: 1,
             question: `Vilket värde har $i^2$?`,
             choices: [
-                `$-1$`,
-                `$1$`,
                 `$i$`,
                 `$-i$`,
+                `$1$`,
+                `$-1$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Den imaginära enheten $i$ definieras just av egenskapen
 
 $$
@@ -39993,12 +39996,12 @@ $$
             level: 1,
             question: `Beräkna $\\sqrt{-36}$.`,
             choices: [
+                `$6$`,
+                `$36i$`,
                 `$6i$`,
                 `$-6i$`,
-                `$36i$`,
-                `$6$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi använder snabbvarianten $\\sqrt{-a} = \\sqrt{a}\\cdot i$.
 
 $$
@@ -40024,12 +40027,12 @@ $$
             level: 2,
             question: `Lös ekvationen $x^2 = -64$.`,
             choices: [
-                `$x = \\pm 8i$`,
-                `$x = \\pm 8$`,
                 `$x = \\pm 64i$`,
+                `$x = \\pm 8$`,
+                `$x = \\pm 8i$`,
                 `$x = 8i$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi skriver om $-64$ som en produkt där $i^2 = -1$ ingår och drar sedan roten:
 
 $$
@@ -40044,12 +40047,12 @@ Ekvationen har två lösningar, så både $+8i$ och $-8i$ ska med.
             level: 2,
             question: `Lös ekvationen $(x + 9)^2 = -49$.`,
             choices: [
-                `$x = -9 \\pm 7i$`,
                 `$x = 9 \\pm 7i$`,
-                `$x = -9 \\pm 49i$`,
+                `$x = -9 \\pm 7i$`,
                 `$x = -16 \\text{ och } x = -2$`,
+                `$x = -9 \\pm 49i$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi drar kvadratroten ur båda led och löser sedan ut $x$:
 
 $$
@@ -40066,12 +40069,12 @@ $$
             level: 3,
             question: `Lös ekvationen $x^2 + 6x + 34 = 0$.`,
             choices: [
-                `$x = -3 \\pm 5i$`,
+                `$x = -6 \\pm 5i$`,
                 `$x = 3 \\pm 5i$`,
                 `$x = -3 \\pm 25i$`,
-                `$x = -6 \\pm 5i$`,
+                `$x = -3 \\pm 5i$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** kvadratkomplettera vänsterledet så att ekvationen får formen $(x + a)^2 = \\text{negativt tal}$ — precis den form vi kan dra roten ur.
 
 $$
@@ -40115,12 +40118,12 @@ $$
             level: 1,
             question: `Vad är konjugatet $\\bar{z}$ till $z = 6 - 2i$?`,
             choices: [
-                `$6 + 2i$`,
-                `$6 - 2i$`,
                 `$-6 + 2i$`,
+                `$6 + 2i$`,
                 `$-6 - 2i$`,
+                `$6 - 2i$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Konjugatet fås genom att byta tecken på imaginärdelen. Realdelen $6$ behålls.
 
 $$
@@ -40133,12 +40136,12 @@ $$
             level: 1,
             question: `Beräkna $(2 + i)(3 - i)$. Använd att $i^2 = -1$.`,
             choices: [
-                `$7 + i$`,
                 `$6 - i$`,
+                `$7 + i$`,
                 `$5 + i$`,
                 `$6 + i$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi multiplicerar ihop parenteserna och använder $i^2 = -1$.
 
 $$
@@ -40152,12 +40155,12 @@ $$
             level: 2,
             question: `Skriv $\\dfrac{4 + 2i}{1 - i}$ på formen $a + bi$.`,
             choices: [
-                `$1 + 3i$`,
                 `$3 + i$`,
-                `$1 - 3i$`,
                 `$2 + 6i$`,
+                `$1 - 3i$`,
+                `$1 + 3i$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi förlänger bråket med nämnarens konjugat $(1 + i)$ så att nämnaren blir reell.
 
 $$
@@ -40170,12 +40173,12 @@ $$
             level: 2,
             question: `Bestäm det komplexa talet $z$ som uppfyller $3\\operatorname{Re} z + z = 8 + 4i$.`,
             choices: [
+                `$z = 4 + 2i$`,
+                `$z = 2 - 4i$`,
                 `$z = 2 + 4i$`,
                 `$z = 8 + 4i$`,
-                `$z = 2 - 4i$`,
-                `$z = 4 + 2i$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi skriver $z = a + bi$, så att $\\operatorname{Re} z = a$. Insättning ger
 
 $$
@@ -40224,12 +40227,12 @@ $$
             level: 1,
             question: `En andragradsekvation med reella koefficienter har en negativ diskriminant. Vad gäller för rötterna?`,
             choices: [
-                `Ekvationen har två icke-reella, komplexkonjugerade rötter`,
-                `Ekvationen har två reella rötter`,
                 `Ekvationen har en reell dubbelrot`,
                 `Ekvationen saknar helt lösningar`,
+                `Ekvationen har två reella rötter`,
+                `Ekvationen har två icke-reella, komplexkonjugerade rötter`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Antalet lösningar avgörs av diskriminantens tecken. Är talet under rottecknet negativt drar vi roten ur ett negativt tal, vilket ger ett imaginärt led. Rötterna blir då $a + bi$ och $a - bi$ — varandras komplexkonjugat.
 
 **Svar:** Två icke-reella, komplexkonjugerade rötter`,
@@ -40238,12 +40241,12 @@ $$
             level: 1,
             question: `Lös ekvationen $z^2 - 2z + 10 = 0$.`,
             choices: [
-                `$z = 1 \\pm 3i$`,
-                `$z = 2 \\pm 3i$`,
                 `$z = 1 \\pm 9i$`,
+                `$z = 2 \\pm 3i$`,
+                `$z = 1 \\pm 3i$`,
                 `$z = -1 \\pm 3i$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Här är $p = -2$ och $q = 10$. *pq*-formeln ger
 
 $$
@@ -40271,12 +40274,12 @@ Rötterna är alltså $\\pm 4i$, så $b = 4$.
             level: 2,
             question: `Lös ekvationen $z^2 - 4iz - 5 = 0$ (observera att koefficienterna är komplexa).`,
             choices: [
-                `$z = 2i \\pm 1$`,
-                `$z = 2 \\pm i$`,
-                `$z = -2i \\pm 1$`,
                 `$z = i \\pm 2$`,
+                `$z = 2i \\pm 1$`,
+                `$z = -2i \\pm 1$`,
+                `$z = 2 \\pm i$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `*pq*-formeln fungerar även med komplexa koefficienter. Här är $p = -4i$ och $q = -5$:
 
 $$
@@ -40309,12 +40312,12 @@ Alltså $a = 10$.
             level: 3,
             question: `En andragradsekvation $x^2 + px + q = 0$ med reella koefficienter har roten $2 + 5i$. Bestäm $p$ och $q$.`,
             choices: [
-                `$p = -4$ och $q = 29$`,
-                `$p = 4$ och $q = 29$`,
                 `$p = -4$ och $q = -21$`,
                 `$p = -4$ och $q = 21$`,
+                `$p = -4$ och $q = 29$`,
+                `$p = 4$ och $q = 29$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** när koefficienterna är reella kommer komplexa rötter alltid i konjugatpar, så den andra roten måste vara $2 - 5i$. Ekvationen kan då faktoriseras:
 
 $$
@@ -40352,12 +40355,12 @@ alltså $x^2 - 4x + 29 = 0$. Jämförelse med $x^2 + px + q = 0$ ger $p = -4$ oc
             level: 1,
             question: `Lös ekvationen $(x - 2)(x + 5) = 0$ med nollproduktmetoden.`,
             choices: [
+                `$x = 2$ eller $x = 5$`,
                 `$x = 2$ eller $x = -5$`,
                 `$x = -2$ eller $x = 5$`,
-                `$x = 2$ eller $x = 5$`,
                 `$x = -2$ eller $x = -5$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `En produkt är $0$ om minst en faktor är $0$:
 
 $$
@@ -40399,12 +40402,12 @@ Det ger $x_2 = 2$ och $x_3 = 5$. Den största roten är $5$.
             level: 2,
             question: `En tredjegradsekvation har roten $x = 2$. Polynomdivision med $(x - 2)$ ger andragradsfaktorn $x^2 + 6x + 5$. Vilka är ekvationens övriga rötter?`,
             choices: [
-                `$x = -1$ och $x = -5$`,
-                `$x = 1$ och $x = 5$`,
                 `$x = -2$ och $x = -3$`,
+                `$x = 1$ och $x = 5$`,
                 `$x = 2$ och $x = -5$`,
+                `$x = -1$ och $x = -5$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `De övriga rötterna fås ur andragradsfaktorn $x^2 + 6x + 5 = 0$:
 
 $$
@@ -40420,12 +40423,12 @@ vilket ger $x = -1$ och $x = -5$.
             level: 3,
             question: `Ekvationen $x^3 - x^2 + x - 1 = 0$ har den reella roten $x = 1$. Bestäm ekvationens övriga (komplexa) rötter.`,
             choices: [
-                `$x = i$ och $x = -i$`,
-                `$x = 1$ och $x = -1$`,
-                `$x = i$ (dubbelrot)`,
                 `Inga övriga rötter — endast $x = 1$`,
+                `$x = 1$ och $x = -1$`,
+                `$x = i$ och $x = -i$`,
+                `$x = i$ (dubbelrot)`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** eftersom $x = 1$ är en rot är $(x - 1)$ en faktor. Polynomdivision av $x^3 - x^2 + x - 1$ med $x - 1$ ger kvoten $x^2 + 1$ (kontroll: $(x - 1)(x^2 + 1) = x^3 - x^2 + x - 1$).
 
 De övriga rötterna fås ur $x^2 + 1 = 0$, alltså $x^2 = -1$:
@@ -40445,12 +40448,12 @@ De icke-reella rötterna bildar ett konjugerat par.
             level: 1,
             question: `Vilket komplext tal motsvarar punkten med realdel $3$ och imaginärdel $-2$ i det komplexa talplanet?`,
             choices: [
-                `$3 - 2i$`,
-                `$-2 + 3i$`,
                 `$3 + 2i$`,
                 `$-3 - 2i$`,
+                `$3 - 2i$`,
+                `$-2 + 3i$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Realdelen är talet framför (utan $i$) och imaginärdelen är koefficienten framför $i$. Realdel $3$ och imaginärdel $-2$ ger alltså $z = 3 + (-2)i = 3 - 2i$.
 
 **Svar:** $3 - 2i$`,
@@ -40459,12 +40462,12 @@ De icke-reella rötterna bildar ett konjugerat par.
             level: 1,
             question: `Beräkna $(2 + 3i) + (1 + 4i)$.`,
             choices: [
-                `$3 + 7i$`,
-                `$3 + 12i$`,
                 `$2 + 7i$`,
+                `$3 + 7i$`,
                 `$7 + 3i$`,
+                `$3 + 12i$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Vi adderar realdelarna för sig och imaginärdelarna för sig:
 
 $$
@@ -40570,12 +40573,12 @@ $$
             level: 1,
             question: `Vilket uttryck är den polära formen av ett komplext tal?`,
             choices: [
-                `$r(\\cos v + i\\sin v)$`,
                 `$r(\\cos v - i\\sin v)$`,
                 `$r(\\sin v + i\\cos v)$`,
+                `$r(\\cos v + i\\sin v)$`,
                 `$r + v\\,i$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Den polära formen bygger på visarens längd $r$ och vinkel $v$, med sambanden $a = r\\cos v$ och $b = r\\sin v$:
 
 $$
@@ -40623,12 +40626,12 @@ $$
             level: 2,
             question: `Bestäm $\\arg z$ i grader för $z = -1 + i$.`,
             choices: [
+                `$45^\\circ$`,
                 `$135^\\circ$`,
                 `$-45^\\circ$`,
-                `$45^\\circ$`,
                 `$225^\\circ$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Här är $a = -1$ och $b = 1$, så talet ligger i **andra kvadranten**. Räknaren ger
 
 $$
@@ -40683,12 +40686,12 @@ Alternativet $\\sqrt{13} + 2$ är i stället det **största** värdet av $|z|$.
             level: 1,
             question: `Beräkna produkten $z\\cdot w$ i polär form, där $z = 2(\\cos 20^\\circ + i\\sin 20^\\circ)$ och $w = 3(\\cos 50^\\circ + i\\sin 50^\\circ)$.`,
             choices: [
-                `$6(\\cos 70^\\circ + i\\sin 70^\\circ)$`,
-                `$5(\\cos 70^\\circ + i\\sin 70^\\circ)$`,
                 `$6(\\cos 30^\\circ + i\\sin 30^\\circ)$`,
                 `$6(\\cos 1000^\\circ + i\\sin 1000^\\circ)$`,
+                `$5(\\cos 70^\\circ + i\\sin 70^\\circ)$`,
+                `$6(\\cos 70^\\circ + i\\sin 70^\\circ)$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vid multiplikation i polär form multiplicerar vi beloppen och adderar argumenten.
 
 $$
@@ -40701,12 +40704,12 @@ $$
             level: 1,
             question: `Vad motsvarar en multiplikation med $i$ geometriskt i det komplexa talplanet?`,
             choices: [
-                `En vridning $90^\\circ$ moturs`,
                 `En vridning $90^\\circ$ medurs`,
-                `En vridning $180^\\circ$`,
+                `En vridning $90^\\circ$ moturs`,
                 `En fördubbling av beloppet`,
+                `En vridning $180^\\circ$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Talet $i$ har beloppet $1$ och argumentet $90^\\circ$. Vid multiplikation multipliceras beloppen (här med $1$, ingen skalning) och argumenten adderas — visaren vrids alltså $90^\\circ$ moturs.
 
 **Svar:** En vridning $90^\\circ$ moturs`,
@@ -40728,12 +40731,12 @@ $$
             level: 2,
             question: `Beräkna $z_1\\cdot z_2$ och skriv svaret med ett argument mellan $0^\\circ$ och $360^\\circ$, där $z_1 = 5(\\cos 300^\\circ + i\\sin 300^\\circ)$ och $z_2 = 4(\\cos 100^\\circ + i\\sin 100^\\circ)$.`,
             choices: [
-                `$20(\\cos 40^\\circ + i\\sin 40^\\circ)$`,
+                `$20(\\cos(-40^\\circ) + i\\sin(-40^\\circ))$`,
                 `$9(\\cos 40^\\circ + i\\sin 40^\\circ)$`,
                 `$20(\\cos 200^\\circ + i\\sin 200^\\circ)$`,
-                `$20(\\cos(-40^\\circ) + i\\sin(-40^\\circ))$`,
+                `$20(\\cos 40^\\circ + i\\sin 40^\\circ)$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Vi multiplicerar beloppen och adderar argumenten:
 
 $$
@@ -40752,12 +40755,12 @@ $$
             level: 2,
             question: `Talet $5 - 2i$ multipliceras med $i$. Vilket tal får man?`,
             choices: [
-                `$2 + 5i$`,
-                `$5 + 2i$`,
                 `$-2 + 5i$`,
+                `$5 + 2i$`,
+                `$2 + 5i$`,
                 `$2 - 5i$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Vi multiplicerar in $i$ och använder $i^2 = -1$:
 
 $$
@@ -40773,12 +40776,12 @@ Geometriskt är $2 + 5i$ visaren för $5 - 2i$ vriden $90^\\circ$ moturs.
             level: 3,
             question: `Multiplikation med ett komplext tal $w$ vrider varje visare $60^\\circ$ moturs och gör den tre gånger så lång. Bestäm $w$ skrivet på formen $a + bi$.`,
             choices: [
-                `$\\dfrac{3}{2} + \\dfrac{3\\sqrt{3}}{2}i$`,
-                `$\\dfrac{3\\sqrt{3}}{2} + \\dfrac{3}{2}i$`,
                 `$\\dfrac{1}{2} + \\dfrac{\\sqrt{3}}{2}i$`,
+                `$\\dfrac{3\\sqrt{3}}{2} + \\dfrac{3}{2}i$`,
+                `$\\dfrac{3}{2} + \\dfrac{3\\sqrt{3}}{2}i$`,
                 `$3 + 3i$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `**Insikten:** en multiplikation med $w$ är en skalning med beloppet $|w|$ och en vridning med argumentet $\\arg w$. Vridningen är $60^\\circ$ moturs och längden tredubblas, så
 
 $$
@@ -40802,12 +40805,12 @@ Alternativet $\\dfrac{1}{2} + \\dfrac{\\sqrt{3}}{2}i$ är $w$ utan skalningen me
             level: 1,
             question: `Enligt de Moivres formel är $\\bigl(r(\\cos v + i\\sin v)\\bigr)^n$ lika med vilket uttryck?`,
             choices: [
-                `$r^n(\\cos nv + i\\sin nv)$`,
-                `$r^n(\\cos v + i\\sin v)$`,
-                `$nr(\\cos nv + i\\sin nv)$`,
                 `$r^n(\\cos v^n + i\\sin v^n)$`,
+                `$r^n(\\cos v + i\\sin v)$`,
+                `$r^n(\\cos nv + i\\sin nv)$`,
+                `$nr(\\cos nv + i\\sin nv)$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `de Moivres formel säger att beloppet upphöjs till $n$ och att argumentet multipliceras med $n$.
 
 **Svar:** $r^n(\\cos nv + i\\sin nv)$`,
@@ -40841,12 +40844,12 @@ $$
             level: 2,
             question: `Beräkna $z^3$ för $z = 2(\\cos 30^\\circ + i\\sin 30^\\circ)$ och ange svaret på formen $a + bi$.`,
             choices: [
-                `$8i$`,
                 `$-8i$`,
-                `$8$`,
+                `$8i$`,
                 `$4 + 4i$`,
+                `$8$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `de Moivres formel med $r = 2$, $v = 30^\\circ$ och $n = 3$ ger:
 
 $$
@@ -40859,12 +40862,12 @@ $$
             level: 2,
             question: `Låt $z = \\cos 40^\\circ + i\\sin 40^\\circ$. Beräkna $z^9$ och ange svaret på formen $a + bi$.`,
             choices: [
-                `$-1$`,
                 `$1$`,
-                `$-i$`,
+                `$-1$`,
                 `$i$`,
+                `$-i$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `de Moivres formel med $r = 1$, $v = 40^\\circ$ och $n = 9$ ger:
 
 $$
@@ -40917,12 +40920,12 @@ Här är $(\\sqrt{2})^8 = 2^4 = 16$ och $8\\cdot 45^\\circ = 360^\\circ$, som pe
             level: 1,
             question: `Hur många lösningar har ekvationen $z^6 = w$, där $n = 6$ och $w \\neq 0$?`,
             choices: [
-                `Exakt $6$ stycken`,
-                `Exakt $1$ styck`,
                 `Exakt $2$ stycken`,
+                `Exakt $6$ stycken`,
                 `Oändligt många`,
+                `Exakt $1$ styck`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `En ekvation av formen $z^n = w$ (med $w \\neq 0$) har exakt $n$ olika lösningar. Här är $n = 6$.
 
 **Svar:** $6$ lösningar`,
@@ -40943,12 +40946,12 @@ $$
             level: 1,
             question: `Hur många grader skiljer två närliggande lösningar till $z^4 = w$ åt i det komplexa talplanet?`,
             choices: [
-                `$90^\\circ$`,
-                `$45^\\circ$`,
                 `$120^\\circ$`,
                 `$360^\\circ$`,
+                `$45^\\circ$`,
+                `$90^\\circ$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `De $n$ lösningarna ligger jämnt fördelade runt cirkeln, så mellanrummet är $\\dfrac{360^\\circ}{n}$. Med $n = 4$:
 
 $$
@@ -40962,12 +40965,12 @@ $$
             level: 2,
             question: `Ekvationen $z^3 = 8$ löses i polär form. Vilka argument $v$ får de tre lösningarna?`,
             choices: [
-                `$0^\\circ$, $120^\\circ$ och $240^\\circ$`,
                 `$0^\\circ$, $90^\\circ$ och $180^\\circ$`,
-                `$0^\\circ$, $60^\\circ$ och $120^\\circ$`,
+                `$0^\\circ$, $120^\\circ$ och $240^\\circ$`,
                 `$120^\\circ$, $240^\\circ$ och $360^\\circ$`,
+                `$0^\\circ$, $60^\\circ$ och $120^\\circ$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Talet $8$ har argumentet $\\arg w = 0^\\circ$. Argumenten ges av
 
 $$
@@ -40995,12 +40998,12 @@ $$
             level: 3,
             question: `En av lösningarna till en ekvation $z^3 = w$ är $z_1 = 2(\\cos 20^\\circ + i\\sin 20^\\circ)$. Bestäm de två övriga lösningarna i polär form.`,
             choices: [
+                `$z_2 = 6(\\cos 140^\\circ + i\\sin 140^\\circ)$ och $z_3 = 6(\\cos 260^\\circ + i\\sin 260^\\circ)$`,
                 `$z_2 = 2(\\cos 140^\\circ + i\\sin 140^\\circ)$ och $z_3 = 2(\\cos 260^\\circ + i\\sin 260^\\circ)$`,
                 `$z_2 = 2(\\cos 120^\\circ + i\\sin 120^\\circ)$ och $z_3 = 2(\\cos 240^\\circ + i\\sin 240^\\circ)$`,
                 `$z_2 = 2(\\cos 80^\\circ + i\\sin 80^\\circ)$ och $z_3 = 2(\\cos 160^\\circ + i\\sin 160^\\circ)$`,
-                `$z_2 = 6(\\cos 140^\\circ + i\\sin 140^\\circ)$ och $z_3 = 6(\\cos 260^\\circ + i\\sin 260^\\circ)$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `**Insikten:** de tre lösningarna har alla samma absolutbelopp och ligger jämnt fördelade $\\dfrac{360^\\circ}{3} = 120^\\circ$ från varandra. Man behöver alltså inte ens känna $w$ — det räcker att addera $120^\\circ$ till argumentet.
 
 Absolutbeloppet är oförändrat $r = 2$ (radien är $\\sqrt[3]{|w|}$, samma för alla rötter). Argumenten ökar med $120^\\circ$:
@@ -41020,12 +41023,12 @@ Alternativet med radien $6$ är fällan: man kubar $r$ i stället för att behå
             level: 1,
             question: `Vilket samband är **Eulers formel**?`,
             choices: [
+                `$e^{iv} = i(\\cos v + \\sin v)$`,
+                `$e^{iv} = \\sin v + i\\cos v$`,
                 `$e^{iv} = \\cos v + i\\sin v$`,
                 `$e^{iv} = \\cos v - i\\sin v$`,
-                `$e^{iv} = \\sin v + i\\cos v$`,
-                `$e^{iv} = i(\\cos v + \\sin v)$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Eulers formel binder samman exponentialfunktionen med de trigonometriska funktionerna: realdelen ges av $\\cos v$ och imaginärdelen av $\\sin v$.
 
 **Svar:** $e^{iv} = \\cos v + i\\sin v$`,
@@ -41046,12 +41049,12 @@ $$
             level: 1,
             question: `Skriv $z = 3e^{i\\frac{\\pi}{2}}$ på rektangulär form $a + bi$.`,
             choices: [
-                `$3i$`,
-                `$-3i$`,
                 `$3$`,
                 `$-3$`,
+                `$3i$`,
+                `$-3i$`,
             ],
-            correct: 0,
+            correct: 2,
             solution: `Med $r = 3$ och $v = \\dfrac{\\pi}{2}$ ger Eulers formel:
 
 $$
@@ -41065,12 +41068,12 @@ $$
             level: 2,
             question: `Skriv $z = 2e^{i\\frac{\\pi}{3}}$ på formen $a + bi$.`,
             choices: [
+                `$2 + 2i\\sqrt{3}$`,
                 `$1 + i\\sqrt{3}$`,
                 `$\\sqrt{3} + i$`,
-                `$2 + 2i\\sqrt{3}$`,
                 `$1 - i\\sqrt{3}$`,
             ],
-            correct: 0,
+            correct: 1,
             solution: `Med $r = 2$ och $v = \\dfrac{\\pi}{3}$ ger den polära formen:
 
 $$
@@ -41083,12 +41086,12 @@ $$
             level: 2,
             question: `Skriv $z = e^{2 + i\\pi}$ på formen $a + bi$.`,
             choices: [
-                `$-e^2$`,
                 `$e^2$`,
                 `$e^2 i$`,
                 `$-e^2 i$`,
+                `$-e^2$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `Faktorisera exponenten med potenslagarna och använd Eulers identitet $e^{i\\pi} = -1$:
 
 $$
@@ -41102,12 +41105,12 @@ $$
             level: 3,
             question: `Bestäm en lösning till ekvationen $e^z = 2i$.`,
             choices: [
-                `$z = \\ln 2 + \\dfrac{\\pi}{2}i$`,
                 `$z = \\ln 2 + \\dfrac{3\\pi}{2}i$`,
                 `$z = 2 + \\dfrac{\\pi}{2}i$`,
                 `$z = \\dfrac{\\pi}{2} + i\\ln 2$`,
+                `$z = \\ln 2 + \\dfrac{\\pi}{2}i$`,
             ],
-            correct: 0,
+            correct: 3,
             solution: `**Insikten:** skriv båda leden på polär form och identifiera belopp och argument var för sig. Med $z = a + bi$ blir vänsterledet
 
 $$
@@ -41136,12 +41139,12 @@ $$
             level: 1,
             question: `Vilken av följande storheter är vektoriell?`,
             choices: [
-                `Massa`,
                 `Förflyttning`,
-                `Temperatur`,
                 `Energi`,
+                `Temperatur`,
+                `Massa`,
             ],
-            correct: 1,
+            correct: 0,
             solution: `En vektoriell storhet har både storlek och riktning. En förflyttning på 500 m är inte fullständigt beskriven förrän man vet åt vilket håll den går. Massa, temperatur och energi saknar riktning och är skalära.
 
 **Svar:** Förflyttning`,
@@ -41164,12 +41167,12 @@ riktad åt samma håll som $\\vec{v}$.
             level: 1,
             question: `Vektorn $\\vec{w}$ går 4 rutor åt höger och 2 rutor uppåt. Hur ser vektorn $-3\\vec{w}$ ut?`,
             choices: [
-                `12 rutor åt höger och 6 rutor uppåt`,
                 `4 rutor åt vänster och 2 rutor nedåt`,
-                `12 rutor åt vänster och 6 rutor nedåt`,
+                `12 rutor åt höger och 6 rutor uppåt`,
                 `12 rutor åt höger och 6 rutor nedåt`,
+                `12 rutor åt vänster och 6 rutor nedåt`,
             ],
-            correct: 2,
+            correct: 3,
             solution: `Talet 3 gör vektorn tre gånger så lång: $3 \\cdot 4 = 12$ rutor och $3 \\cdot 2 = 6$ rutor. Minustecknet vänder riktningen, så $-3\\vec{w}$ går åt vänster och nedåt.
 
 **Svar:** 12 rutor åt vänster och 6 rutor nedåt`,
@@ -41216,12 +41219,12 @@ Läggs $-\\vec{v}$ i spetsen på $\\vec{u}$ går vi sammanlagt $4 + 2 = 6$ rutor
             level: 3,
             question: `Vektorerna $\\vec{u}$ och $\\vec{v}$ har längderna $|\\vec{u}| = 5$ och $|\\vec{v}| = 7$. När de ritas från samma punkt är vinkeln mellan dem $60^\\circ$. Bestäm längderna av $\\vec{u} + \\vec{v}$ och $\\vec{u} - \\vec{v}$.`,
             choices: [
-                `$|\\vec{u} + \\vec{v}| = 12$ och $|\\vec{u} - \\vec{v}| = 2$`,
-                `$|\\vec{u} + \\vec{v}| = \\sqrt{39} \\approx 6{,}2$ och $|\\vec{u} - \\vec{v}| = \\sqrt{109} \\approx 10{,}4$`,
                 `$|\\vec{u} + \\vec{v}| = \\sqrt{109} \\approx 10{,}4$ och $|\\vec{u} - \\vec{v}| = \\sqrt{39} \\approx 6{,}2$`,
+                `$|\\vec{u} + \\vec{v}| = \\sqrt{39} \\approx 6{,}2$ och $|\\vec{u} - \\vec{v}| = \\sqrt{109} \\approx 10{,}4$`,
                 `$|\\vec{u} + \\vec{v}| = |\\vec{u} - \\vec{v}| = \\sqrt{74} \\approx 8{,}6$`,
+                `$|\\vec{u} + \\vec{v}| = 12$ och $|\\vec{u} - \\vec{v}| = 2$`,
             ],
-            correct: 2,
+            correct: 0,
             solution: `**Insikten:** summan och differensen är parallellogrammens två diagonaler, och deras längder fås ur varsin triangel med cosinussatsen. Fällan är vilken vinkel som hör till vilken diagonal.
 
 **Summan.** Ritas $\\vec{v}$ spets mot start efter $\\vec{u}$ bildar $\\vec{u}$, $\\vec{v}$ och $\\vec{u} + \\vec{v}$ en triangel. Vinkeln mellan sidorna $\\vec{u}$ och $\\vec{v}$ i den triangeln är **inte** $60^\\circ$ utan grannvinkeln $180^\\circ - 60^\\circ = 120^\\circ$, eftersom $\\vec{v}$ nu startar i spetsen på $\\vec{u}$. Cosinussatsen ger
@@ -41259,10 +41262,10 @@ Rimlighet: summan ska vara kortare än $5 + 7 = 12$ (vektorerna drar inte åt ex
             choices: [
                 `$(3,\\ 2)$`,
                 `$(-2,\\ 3)$`,
-                `$(3,\\ -2)$`,
                 `$(1,\\ 1)$`,
+                `$(3,\\ -2)$`,
             ],
-            correct: 2,
+            correct: 3,
             solution: `Koordinaterna är talen framför basvektorerna, i ordningen $\\vec{e}_x$ först och $\\vec{e}_y$ sedan: $3\\vec{e}_x - 2\\vec{e}_y = (3,\\ -2)$.
 
 **Svar:** $(3,\\ -2)$`,

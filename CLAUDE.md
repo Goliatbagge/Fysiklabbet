@@ -113,8 +113,21 @@ node .claude/verify-ovningsblad-kontakt.js [ovningsblad/fil.html …]
 # systematiskt ligga först (correct: 0) — blanda alternativen så att
 # rätt-index blir jämnt fördelat; verifieraren ger fel vid > 45 % på ett
 # index inom en kurs (felet har hänt: hela ma2c/ma3c/ma4 hade alltid
-# alternativ A rätt, påpekat av en besökare 2026-08-18).
+# alternativ A rätt, påpekat av en besökare 2026-08-18). Ger också fel om
+# alla frågor i ett avsnitt har rätt svar på samma bokstav.
 node .claude/verify-exittickets.js
+
+# Verifiera FLERVALSUPPGIFTERNA i data/ovningar.js (KÖR FÖRE COMMIT vid nya
+# eller ändrade övningar!) — samma regel som för exit tickets: rätt svar får
+# ALDRIG systematiskt ligga på samma plats. Fel vid > 45 % på ett index inom
+# en kurs, när alla flervalsuppgifter i ett avsnitt har samma bokstav, när
+# "**Svar:** Alternativ X" inte stämmer med correct och när lösningen
+# hänvisar till ett alternativ via dess plats ("det sista alternativet").
+# Felet har hänt: exit tickets rättades 2026-08-18 men övningarna granskades
+# inte, och där hade 648 av 771 uppgifter rätt svar på A (påpekat av en
+# lärare 2026-09-30). Gäller varje ny datamängd med flerval: lägg in samma
+# balanskontroll i dess verifierare. Se OVNINGAR.md, "Flervalsfrågor".
+node .claude/verify-ovningar-flerval.js
 
 # Verifiera pennlösningarna (::: handskrift-scenerna i handskrift.js) —
 # KÖR FÖRE COMMIT vid nya eller ändrade scener! Bygger varje scens
@@ -577,6 +590,7 @@ när en genomgång byggs om från en ny PDF i `Genomgångar/`):
 2. **Övningar** — `data/ovningar.js`, nyckel = teori-id (t.ex. `'fy2-1.2'`).
    Uppgifterna ska spegla det NYA innehållet (3 N1 + 2 N2 + 1 N3, se
    `OVNINGAR.md`); ta bort/ersätt uppgifter som testar borttaget stoff.
+   Blanda flervalsalternativen och kör `node .claude/verify-ovningar-flerval.js`.
 3. **Exit tickets** — `data/exittickets.js`, samma id. Frågorna ska förhöra
    det nya innehållet. Kör `node .claude/verify-exittickets.js`.
 3b. **Pennlösningar** — varje nytt eller omskrivet `::: exempel` med

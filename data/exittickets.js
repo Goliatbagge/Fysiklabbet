@@ -22044,33 +22044,33 @@ window.EXITTICKETS = {
   {
     question: 'Skrivsättet $D\\big(f(x)\\big)$ betyder samma sak som vad?',
     choices: [
-      'Ett gränsvärde av $f(x)$ då $x \\to 0$',
+      '$f\'(x)$',
       'Integralen av $f(x)$',
       '$f(x)$',
-      '$f\'(x)$',
+      'Ett gränsvärde av $f(x)$ då $x \\to 0$',
     ],
-    correct: 3,
+    correct: 0,
     why: [
-      '$D$ står för derivatan, inte för ett gränsvärde av funktionen själv.',
+      'Just det — $D\\big(f(x)\\big)$ är bara ett annat sätt att skriva derivatan $f\'(x)$, och uttrycket kan sättas in direkt.',
       '$D$ betecknar derivering, inte integrering.',
       '$f(x)$ är själva funktionen; $D$ betyder att den ska deriveras.',
-      'Just det — $D\\big(f(x)\\big)$ är bara ett annat sätt att skriva derivatan $f\'(x)$, och uttrycket kan sättas in direkt.',
+      '$D$ står för derivatan, inte för ett gränsvärde av funktionen själv.',
     ],
   },
   {
     question: 'Vad är $D(e^{kx})$?',
     choices: [
       '$e^{kx}$',
-      '$kx\\,e^{kx}$',
-      '$e^{k}$',
       '$k\\,e^{kx}$',
+      '$e^{k}$',
+      '$kx\\,e^{kx}$',
     ],
-    correct: 3,
+    correct: 1,
     why: [
       'Det gäller bara när $k = 1$; för $e^{kx}$ tillkommer faktorn $k$ från kedjeregeln.',
-      'Man multiplicerar med den inre derivatan $k$, inte med hela exponenten $kx$.',
-      'Variabeln $x$ försvinner inte vid derivering av en exponentialfunktion.',
       'Precis — exponentialfunktionen med basen $e$ deriveras till sig själv gånger exponentens inre derivata $k$.',
+      'Variabeln $x$ försvinner inte vid derivering av en exponentialfunktion.',
+      'Man multiplicerar med den inre derivatan $k$, inte med hela exponenten $kx$.',
     ],
   },
   {

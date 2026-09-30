@@ -138,6 +138,16 @@ for (const [kurs, dist] of Object.entries(courseDist)) {
         }
     }
 }
+// Samma sak inom ETT avsnitt: en elev som gör en exit ticket ser mönstret
+// direkt om alla frågor har rätt svar på samma bokstav (ma4-2.6 hade D på
+// alla fem, upptäckt 2026-09-30).
+for (const [id, list] of Object.entries(ET)) {
+    if (!Array.isArray(list)) continue;
+    const idx = list.map(q => q.correct).filter(Number.isInteger);
+    if (idx.length >= 4 && new Set(idx).size === 1) {
+        errors.push(`${id}: alla ${idx.length} frågor har rätt svar på index ${idx[0]} — blanda om alternativen (och why i samma ordning)`);
+    }
+}
 
 console.log(`Avsnitt i katalogen: ${sections.length}, med exit ticket: ${Object.keys(ET).filter(id => sections.includes(id)).length}`);
 console.log(`Totalt antal frågor: ${totalQ}`);

@@ -21818,7 +21818,7 @@ Kontroll mot a): $100 \\cdot \\left(1{,}3^{1/6} - 1\\right) = 100 \\cdot 0{,}044
         },
         {
             level: 3,
-            question: `Keplers tredje lag säger att kvadraten på en planets omloppstid är proportionell mot kuben på dess medelavstånd till solen. Mäts tiden i år och avståndet i astronomiska enheter (1 AE är jordens avstånd) blir sambandet $T^2 = r^3$.<br>a) Mars medelavstånd är 1,52 AE. Bestäm Mars omloppstid.<br>b) En asteroid har omloppstiden 5,0 år. Hur långt från solen är den?<br>c) Visa att $r = T^{2/3}$, och använd formeln för att kontrollera svaret i b).`,
+            question: `Keplers tredje lag säger att kvadraten på en planets omloppstid är proportionell mot kuben på dess medelavstånd till solen. Mäts tiden i år och avståndet i astronomiska enheter (1 AE är jordens medelavstånd till solen) blir sambandet $T^2 = r^3$.<br>a) Mars medelavstånd är 1,52 AE. Bestäm Mars omloppstid.<br>b) En asteroid har omloppstiden 5,0 år. Hur långt från solen är den?<br>c) Visa att $r = T^{2/3}$, och använd formeln för att kontrollera svaret i b).`,
             answer: { value: 1.87, unit: 'år', tol: 0.02 },
             solution: `**a)** Sätter in $r = 1{,}52$:
 

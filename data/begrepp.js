@@ -56,6 +56,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'superhydrid',
+    term: 'Superhydrid',
+    former: ['superhydrid', 'superhydriden', 'superhydrider', 'superhydriderna', 'hydrid', 'hydriden', 'hydrider', 'hydriderna', 'metallhydrid', 'metallhydriden', 'metallhydrider'],
+    kort: 'Ett ämne där metallatomer sitter inneslutna i burar av väteatomer, tillverkat under extremt tryck. Flera superhydrider leder ström helt utan motstånd vid temperaturer som är höga med supraledningsmått mätt.',
+    relaterade: ['supraledare', 'diamantstadcell', 'cooperpar'],
+    body: [
+      { type: 'p', html: 'En hydrid är helt enkelt en förening där väte ingår. Det vanliga är att vätet sitter som enstaka atomer mellan metallatomerna, ungefär som russinen i en kaka. I en <em>superhydrid</em> är förhållandet det omvända: väteatomerna är så många att de bygger ett eget sammanhängande skelett, och metallatomerna hamnar inuti burar av väte. Namnen avslöjar mängden. LaH<sub>10</sub> betyder tio väteatomer per lantanatom, och LaSc<sub>2</sub>H<sub>24</sub> betyder tjugofyra väteatomer per lantanatom.' },
+      { type: 'p', html: 'Anledningen till att fysiker bygger sådana ämnen är en gammal idé om rent väte. Pressas väte tillräckligt hårt ska det bli en metall, och en metall av så lätta atomer borde kunna leda ström utan motstånd vid ovanligt hög temperatur. Skälet är att lätta atomer skakar snabbt, och det är just atomernas skakningar som binder ihop elektronerna parvis i en supraledare. Problemet är att rent väte kräver ofattbart höga tryck för att ge med sig.' },
+      { type: 'p', html: 'Superhydriden är genvägen. Metallatomen drar åt sig elektroner från vätet och pressar på så vis ihop vätegittret kemiskt, inifrån, så att en del av jobbet är gjort innan man ens börjat klämma. Resten sköts i en diamantstädcell. Trycken som behövs ligger ändå kring hundra gigapascal och uppåt, alltså en miljon gånger lufttrycket eller mer, och provbiten är bara några hundradels millimeter bred. Det är därför ingen superhydrid ännu har använts till något utanför ett laboratorium: lättar man på trycket faller kristallen isär.' }
+    ]
+  },
+  {
+    id: 'meissnereffekten',
+    term: 'Meissnereffekten',
+    former: ['meissnereffekten', 'meissnereffekt', 'meissner-effekten', 'meissnereffekter'],
+    kort: 'Att en supraledare aktivt trycker ut magnetfältet ur sitt inre när den kyls under sin kritiska temperatur. Det är den egenskap som får en magnet att sväva ovanför en kall supraledare.',
+    relaterade: ['supraledare', 'cooperpar'],
+    body: [
+      { type: 'p', html: 'När ett material blir supraledande händer två saker samtidigt. Det ena är välkänt: det elektriska motståndet försvinner. Det andra upptäcktes 1933 av Walther Meissner och Robert Ochsenfeld, och är egentligen det märkligare. Materialet vägrar ha magnetfält inuti sig. Fältlinjer som gick rakt igenom trängs ut och tvingas gå runt utanför i stället.' },
+      { type: 'p', html: 'Att det inte bara handlar om att strömmar sitter fast är just poängen med upptäckten. Också ett prov som kyls medan magneten redan ligger där kastar ut fältet i samma ögonblick som det blir supraledande. Materialet skapar alltså av sig självt ytströmmar som är precis så starka att deras eget magnetfält tar ut det yttre inne i kroppen.' },
+      { type: 'p', html: 'Det är detta man ser i den klassiska demonstrationen med en svävande magnet. Magnetens fält stöts bort av de strömmar som den själv framkallar i supraledaren under, och bortstötningen bär magnetens tyngd. Tål materialet bara ett visst magnetfält bryter supraledningen samman, och magneten faller ner. Den gränsen kallas det kritiska fältet, och är tillsammans med den kritiska temperaturen det som avgör var en supraledare går att använda.' }
+    ]
+  },
+  {
+    id: 'elektron-fonon-koppling',
+    term: 'Elektron-fonon-koppling',
+    former: ['elektron-fonon-koppling', 'elektron-fonon-kopplingen', 'elektron-fonon-kopplingar', 'elektron-fononkoppling', 'elektron-fononkopplingen'],
+    kort: 'Måttet på hur hårt elektronerna i ett material känner av atomernas skakningar. Är kopplingen stark kan skakningarna binda ihop elektronerna två och två, och materialet kan bli supraledande.',
+    relaterade: ['fonon', 'cooperpar', 'supraledare'],
+    body: [
+      { type: 'p', html: 'Atomerna i ett fast material sitter aldrig still. De skakar kring sina platser, och skakningarna räknas i portioner som kallas fononer. Hur mycket en elektron på väg genom materialet påverkas av de skakningarna är vad elektron-fonon-kopplingen mäter. Storheten betecknas oftast med den grekiska bokstaven <em>λ</em> (lambda) och är ett rent tal utan enhet.' },
+      { type: 'p', html: 'Kopplingen har två ansikten. I en vanlig metall är den orsaken till det elektriska motståndet: elektronerna sprids mot de skakande atomerna, tappar fart och lämnar ifrån sig energi som värme. I en supraledare gör samma koppling tvärtom nytta. En elektron som passerar drar de positivt laddade atomkärnorna en aning mot sig, och det lilla överskottet av positiv laddning som blir kvar ett kort ögonblick lockar till sig nästa elektron. På så vis kan två elektroner hänga ihop parvis trots att de båda är negativt laddade.' },
+      { type: 'p', html: 'Ju större <em>λ</em>, desto hårdare hänger paren ihop och desto varmare kan materialet vara innan de slits isär. Under ungefär <em>λ</em>&nbsp;=&nbsp;0,5 talar man om svag koppling, medan värden över 1 räknas som stark. Men det räcker inte att summan är stor: kopplingen behöver också vara jämnt fördelad över de elektrontillstånd som faktiskt bär strömmen. Sitter den samlad i ett hörn av materialets elektronstruktur kommer den sämre till användning än om den är utspridd.' }
+    ]
+  },
+  {
     id: 'hong-ou-mandel-effekten',
     term: 'Hong-Ou-Mandel-effekten',
     former: ['hong-ou-mandel-effekten', 'hong-ou-mandel-effekt', 'hong-ou-mandel-interferens', 'hong-ou-mandel-interferensen', 'tvåfotoninterferens', 'tvåfotoninterferensen'],

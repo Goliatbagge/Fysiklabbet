@@ -103,6 +103,84 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-09-30-rumstempererad-supraledare-under-tryck",
+    date: "2026-09-30",
+    title: "Kristallen som ska leda ström utan motstånd vid 43 °C — nu pekas två skandiumatomer ut som förklaringen",
+    deck: "En burliknande kristall av lantan, skandium och väte beräknas tappa allt elektriskt motstånd vid 43 °C, långt över rumstemperatur. Haken är trycket: 167 GPa, ungefär 1,6 miljoner gånger lufttrycket vid havsytan. En ny studie i Physical Review B förklarar vad skandiumet gör för nytta, och varför just dess 3d-elektroner är avgörande.",
+    category: "Materialfysik",
+    readingTime: "7 min",
+    image: "nyheter/bilder/2026-09-30-rumstempererad-supraledare-under-tryck.jpg",
+    imageAlt: "Tre forskare i skyddsglasögon lutar sig in mot en glänsande apparat av aluminium vid en synkrotronstråle. Längst fram håller en av dem en liten metallcell mellan fingrarna; bakom dem syns rack med kablar och elektronik.",
+    imageCredit: "Foto: Argonne National Laboratory / USA:s energidepartement (public domain). Bilden visar en diamantstädcell vid synkrotronanläggningen Advanced Photon Source i Illinois, alltså samma sorts apparat som används för att nå megabartryck. Det är inte den cell som användes i den studie artikeln handlar om.",
+    tags: ["materialfysik", "supraledning", "högtryck", "väte", "hydrid", "resistans", "cooperpar", "skandium", "lantan", "kristallstruktur", "elektron-fonon-koppling"],
+    sources: [
+      { name: "Phys.org: Scandium's electrons may explain predicted room-temperature superconductivity (29 september 2026)", url: "https://phys.org/news/2026-09-scandium-electrons-room-temperature-superconductivity.html" },
+      { name: "Physical Review B: Isotropic superconductivity in the room-temperature superconductor LaSc2H24 (1 september 2026)", url: "https://journals.aps.org/prb/abstract/10.1103/3b4x-77yq" },
+      { name: "PNAS: Predicted hot superconductivity in LaSc2H24 under pressure (25 juni 2024, den ursprungliga förutsägelsen)", url: "https://www.pnas.org/doi/10.1073/pnas.2401840121" },
+      { name: "arXiv: Room-Temperature Superconductivity at 298 K in Ternary La-Sc-H System at High-pressure Conditions (förtryck, september 2025, experimentet)", url: "https://arxiv.org/abs/2510.01273" },
+      { name: "Journal of the American Chemical Society: Promising Room-Temperature Superconductor in the La-Sc-H System at High Pressure (22 juli 2026, om den andra fasen)", url: "https://pubs.acs.org/doi/10.1021/jacs.6c05374" }
+    ],
+    research: {
+      citation: "Zefang Wang, Wenbo Zhao, Yuan Ma, Hanyu Liu och Yanming Ma, ”Isotropic superconductivity in the room-temperature superconductor LaSc2H24”, Physical Review B 114, 154501 (2026). Kollegialt granskad. En tidigare version finns som förtryck, arXiv:2601.01398.",
+      url: "https://doi.org/10.1103/3b4x-77yq"
+    },
+    larare: {
+      moment: [
+        { label: "Resistans och Ohms lag", href: "katalog.html?id=fy1-7.5" },
+        { label: "Tryck och tryckkraft", href: "katalog.html?id=fy1-5.2" },
+        { label: "Magnetism och magnetfält", href: "katalog.html?id=fy2-3.1" }
+      ],
+      fragor: [
+        "Resistansen i en vanlig metall beror på att elektronerna sprids mot gittrets svängningar. Ändå är det just gittersvängningar som binder ihop elektronerna till par i en supraledare. Förklara hur samma rörelse kan vara både orsaken till motståndet och förutsättningen för att motståndet ska försvinna.",
+        "Den kritiska temperaturen 43 °C är uträknad ur en modell, medan de uppmätta kurvorna kommer från ett annat lag och ännu bara ligger som förtryck. Vad skulle krävas för att du själv skulle betrakta saken som avgjord, och varför räcker inte tretton mätningar i samma laboratorium?",
+        "Trycket 167 GPa finns ingenstans på jordytan, och provbiten är inte större än ett dammkorn. Vilken vetenskaplig nytta har ändå ett resultat som bara går att uppnå under sådana förhållanden?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Ett material som leder elektrisk ström utan minsta motstånd, vid en temperatur man kan ha hemma i köket, står högt upp på fysikens önskelista. Den 1&nbsp;september publicerade tidskriften <em>Physical Review B</em> en studie som svarar på en delfråga i den jakten: varför två atomer skandium tycks lyfta en vätekristall från att bli supraledande i sträng kyla till att göra det i rumsvärme.' },
+      { type: 'p', html: 'Kristallen heter LaSc<sub>2</sub>H<sub>24</sub> och innehåller lantan, skandium och väte. Enligt beräkningarna tappar den allt elektriskt motstånd under den kritiska temperaturen $T_\\mathrm{c} = 316\\ \\mathrm{K}$, alltså ungefär 43&nbsp;°C. Förbehållet står i samma andetag: det gäller vid trycket 167&nbsp;GPa, ungefär 1,6&nbsp;miljoner gånger lufttrycket vid havsytan.' },
+
+      { type: 'h2', text: 'Noll resistans, och magnetfältet stängs ute' },
+      { type: 'p', html: 'En supraledare gör inte bara litet motstånd. Under sin kritiska temperatur gör den inget motstånd alls. Sätter man i gång en ström i en sluten supraledande ring fortsätter den runt utan att avta, och ingen energi omvandlas till värme på vägen. Samtidigt stänger materialet ute magnetfält: fältlinjerna trängs undan i stället för att gå igenom. Det kallas Meissnereffekten, och är skälet till att en magnet kan sväva stilla ovanför en nedkyld supraledare.' },
+      { type: 'p', html: 'Förklaringen ligger i hur elektronerna färdas. I en vanlig metall studsar de mot ett gitter av atomer som hela tiden svänger, och de studsarna är precis vad vi mäter som resistans. I en supraledare gör samma svängningar något annat: de binder ihop elektronerna två och två till så kallade Cooperpar. En ensam elektron är en fermion, och Paulis uteslutningsprincip förbjuder två fermioner att inta samma tillstånd. Ett par beter sig i stället som en boson, och bosoner får gärna samsas i ett och samma tillstånd. Hela skaran rör sig då som en enda enhet, och det finns inget enskilt att studsa emot.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-09-30-rumstempererad-supraledare-under-tryck-2.jpg', alt: 'En liten svart magnetbit svävar några centimeter ovanför en ljus skiva som ligger på ett vitt frigolitunderlag. Vit dimma av kall luft rinner ned över kanten.', caption: 'Att magnetfältet trängs undan går att se direkt: en magnet svävar ovanför en supraledare som kylts under sin kritiska temperatur. Demonstrationen görs med ett keramiskt material kylt med flytande kväve, inte med den vätekristall studien handlar om.', credit: 'Foto: Mai-Linh Doan (CC BY-SA 3.0), via Wikimedia Commons' },
+
+      { type: 'h2', text: 'Vätets löfte, och vad det kostar' },
+      { type: 'p', html: 'Ju varmare man vill att materialet ska klara, desto snabbare måste gittret svänga. Lätta atomer svänger snabbast, och väte är det lättaste som finns. Därför har tanken på supraledande metalliskt väte funnits sedan 1960-talet. Problemet är att rent väte inte blir en metall förrän det pressas ihop bortom vad någon har lyckats åstadkomma.' },
+      { type: 'p', html: 'Vägen runt hindret är att låta ett annat grundämne sköta en del av hoptryckningen kemiskt. I de så kallade superhydriderna sitter metallatomer inne i burar av väteatomer, och burens väggar hålls på plats av bindningarna i stället för enbart av yttre tryck. Ett av de mest kända exemplen är LaH<sub>10</sub>, som 2018 rapporterades bli supraledande upp till omkring −13&nbsp;°C, ett rekord vid tillfället. Priset var 188&nbsp;GPa, drygt 1,8&nbsp;miljoner atmosfärer.' },
+      { type: 'p', html: 'Sådana tryck skapas i en diamantstädcell: två slipade diamanter pressas mot varandra med spetsarna vända inåt, och mellan dem ligger provet som ett korn några hundradels millimeter brett. Att diamant används beror dels på hårdheten, dels på att den släpper igenom ljus och röntgenstrålning så att provet går att studera medan det kläms. Det är också därför bara en handfull laboratorier i världen kan göra de här mätningarna alls.' },
+
+      { type: 'h2', text: 'Två skandiumatomer i vätets burar' },
+      { type: 'p', html: 'År 2024 föreslog ett lag med bland andra forskare från Jilin University i Changchun att en tillsats av skandium skulle göra saken bättre. Med datorsökningar efter möjliga kristallstrukturer och beräkningar från första principer landade de i LaSc<sub>2</sub>H<sub>24</sub>: stabil mellan 167 och 300&nbsp;GPa, med en beräknad kritisk temperatur på 316&nbsp;K vid det lägre trycket och upp till 331&nbsp;K, alltså cirka 58&nbsp;°C, vid 250&nbsp;GPa.' },
+      { type: 'p', html: 'Strukturen är värd en bild för sitt inre öga. Lantanatomen sitter helt innesluten i en bur av 30&nbsp;väteatomer, medan skandiumatomerna sitter i delvis öppna burar av 24. Metallatomerna själva bildar samma gitter som magnesiumdiborid, MgB<sub>2</sub>, en känd supraledare, med lantan där magnesiumet sitter och skandium där boret sitter. Den likheten visar sig vara mer än en kuriositet.' },
+
+      { type: 'h2', text: 'Två gap blev ett' },
+      { type: 'p', html: 'Det förutsägelsen inte kunde svara på var varför skandiumet hjälpte. Den nya studien går igenom hur hårt elektronerna kopplas till gittrets svängningar. Styrkan i den elektron-fonon-kopplingen betecknas $\\lambda$. I LaH<sub>10</sub> är kopplingen ojämnt fördelad: en avskild del av ytan där elektronerna rör sig har $\\lambda$ mellan 6 och 8, medan resten av ytan ligger kring 2. Materialet får då två olika energigap, ett för varje sorts tillstånd.' },
+      { type: 'p', html: 'I LaSc<sub>2</sub>H<sub>24</sub> blandas de två sorterna i stället upp med varandra. Kopplingen hamnar överallt i intervallet 2 till 4, och gapet blir ett enda och nästan lika stort i alla riktningar. Det är den utjämningen laget pekar ut som orsaken till den högre kritiska temperaturen: den samlade kopplingsstyrkan kommer till bättre användning när den är spridd över hela ytan än när den är hopad på en del av den.' },
+      { type: 'p', html: 'Storleken på gapet säger något om hur svårt det är att slita isär ett par. Vid 20&nbsp;K ligger det på mellan 50 och 70&nbsp;meV i LaSc<sub>2</sub>H<sub>24</sub>. I niob, en klassisk supraledare som måste kylas till 9,3&nbsp;K, är motsvarande gap omkring 1,5&nbsp;meV.' },
+      { type: 'p', html: 'Skandiumets 3d-elektroner gör två saker samtidigt, enligt studien. Dels drar de i väteburarna så att vissa bindningar mellan väteatomer i olika skikt sträcks ut till omkring 1,2&nbsp;Å, vilket gör vätet mer metalliskt och mjukar upp just de svängningar som binder paren. Dels lägger de egna tillstånd där elektronerna rör sig, i form av bindningar av samma slag som ger MgB<sub>2</sub> dess supraledning. Och eftersom skandium och väteburarna blandar sig grundligt med varandra smälter de två bidragen ihop till ett.' },
+      { type: 'p', html: 'Att det verkligen är 3d-elektronerna som gör jobbet prövade laget genom att byta ut skandium mot kalcium respektive magnesium, som saknar skandiums 3d-elektroner. Båda kristallerna gick att bygga och var stabila. Ingen av dem blev supraledande.' },
+      { type: 'quote', html: 'Våra resultat pekar ut den skandiumdrivna sammanslagningen av gapen som den grundläggande mekanismen bakom rumstempererad supraledning i LaSc<sub>2</sub>H<sub>24</sub>, och ger en strategisk ritning för hur bättre ternära hydrider kan konstrueras.', cite: 'Ur studien, Zefang Wang med flera' },
+
+      { type: 'h2', text: 'Uträknat, eller uppmätt?' },
+      { type: 'p', html: 'Här är den fråga som avgör hur mycket det hela väger. Den nya studien är en beräkning. Den innehåller ingen ny mätning, utan förklarar ett material som någon annan säger sig ha tillverkat.' },
+      { type: 'p', html: 'Det påståendet kom hösten 2025. Ett lag där flera av forskarna bakom förutsägelsen ingår rapporterade att de pressat en legering av lantan och skandium tillsammans med ammoniakboran, ett fast ämne som lämnar ifrån sig väte, till mellan 250 och 260&nbsp;GPa i en diamantstädcell och värmt provet med laser. De uppger noll resistans med början någonstans mellan 271 och 298&nbsp;K, alltså mellan −2 och 25&nbsp;°C, vid tryck mellan 195 och 266&nbsp;GPa. De uppger också att den kritiska temperaturen sjunker när ett magnetfält läggs på, vilket är ett klassiskt prov på att det handlar om supraledning, och att röntgendiffraktion vid en synkrotron ger den sexkantiga struktur som förutsägelsen pekade ut. Tretton körningar, skriver de.' },
+      { type: 'p', html: 'Den rapporten ligger fortfarande som ett förtryck. Ett år senare har den inte passerat kollegial granskning i någon tidskrift. Området har dessutom skäl att gå försiktigt fram: två uppmärksammade artiklar om supraledning nära rumstemperatur har dragits tillbaka av tidskriften <em>Nature</em>, den ena 2022 och den andra 2023. Så länge inget annat lag, med egna diamanter och eget prov, har gjort om mätningen är resultatet ett påstående. Ett välunderbyggt och detaljerat påstående, men ett påstående.' },
+      { type: 'p', html: 'Det finns en komplikation till. I några av proven syns spår av en andra kristallfas som ingen först kunde sätta namn på. I juli i år publicerade samma miljö en genomsökning av möjliga strukturer i <em>Journal of the American Chemical Society</em> och föreslog att den okända fasen är La<sub>2</sub>ScH<sub>36</sub> med brist på väte, med en beräknad kritisk temperatur mellan 261 och 282&nbsp;K. Exakt vilken av flera möjliga lantan-skandium-vätekristaller som ger vilken signal är alltså inte avgjort.' },
+
+      { type: 'h2', text: 'Trycket är hela problemet' },
+      { type: 'p', html: 'Även om alltsammans håller kommer ingen att dra en kraftledning av materialet. 167&nbsp;GPa råder ingenstans på jordytan, och inne i en diamantstädcell bara i ett prov stort som ett dammkorn. Lyfter man locket faller kristallen isär. Det som skulle förändra något är ett material som behåller egenskapen vid vanligt tryck, och dit är det långt.' },
+      { type: 'p', html: 'Just därför är slutsatsen om mekanismen intressantare än själva temperatursiffran. Stämmer den, att ett grundämne med besatta 3d-nivåer kan jämna ut kopplingen över hela ytan där elektronerna rör sig, blir den en konstruktionsregel. Då slutar letandet efter nya supraledare vara en fråga om att pröva sig fram bland grundämnena, och blir en fråga om att räkna ut vad man ska leta efter.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Supraledningen upptäcktes 1911 av Heike Kamerlingh Onnes i Leiden. Han kylde kvicksilver med flytande helium och såg resistansen försvinna vid 4,2&nbsp;K, alltså −269&nbsp;°C.',
+        'Att väte skulle bli en metall om det pressas hårt nog föreslogs redan 1935 av Eugene Wigner och Hillard Bell Huntington. 1968 gick Neil Ashcroft vidare och menade att metalliskt väte i så fall borde vara supraledande vid hög temperatur, och 2004 var det samme Ashcroft som föreslog att låta andra grundämnen sköta en del av hoptryckningen kemiskt.',
+        'Trycket i jordens mittpunkt uppskattas till omkring 360&nbsp;GPa. De 167&nbsp;GPa som beräkningarna kräver motsvarar ungefär vad som råder en bit ned i jordens yttre kärna.'
+      ] }
+    ]
+  },
+  {
     id: "2026-09-29-kvantdatorn-i-omloppsbana",
     date: "2026-09-29",
     title: "Första kvantdatorn i omloppsbana klarade sig på halva detektorerna",

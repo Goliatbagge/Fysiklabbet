@@ -15,7 +15,8 @@ Format per post:
 - **Laddningen en fjärdedels elektron** **[BREVTEASER]** — ett sällsynt kvanttillstånd i ett tvådimensionellt material ger
   kvasipartiklar som bär en fjärdedel av elementarladdningen. Ingång: att laddning normalt kommer i hela
   steg, och vad det betyder att en kollektiv rörelse hos många elektroner kan bete sig som en partikel med
-  en bråkdels laddning. OBS: kvantfysik och materialfysik är väl representerade — låt det gå tid.
+  en bråkdels laddning. OBS: kvantfysik och materialfysik är väl representerade, och materialfysik kördes
+  2026-09-30 (supraledaren under tryck) — publicera alltså inte den här dagen efter.
   Källa (Phys.org 2026-09-25): https://phys.org/news/2026-09-rare-quantum-state-reveals-particles.html
   (tillagd 2026-09-27)
 
@@ -41,6 +42,27 @@ Format per post:
   inte för allt. Källa (Phys.org 2026-09-29):
   https://phys.org/news/2026-09-glass-transparent-terahertz.html
   (tillagd 2026-09-29)
+
+- **Vattenvågor som bildar ett kvasikristallmönster** — ytvågor på vatten fås att lägga sig i ett mönster med
+  femtalig symmetri, alltså samma slags ordning som i en kvasikristall, och i mönstret uppstår topologiska
+  strukturer. Ingång: interferens mellan vågor, symmetri och varför femtalig symmetri är omöjlig i ett vanligt
+  kristallgitter men möjlig i en kvasikristall. Snyggt att filma och lätt att visa. OBS: vågfysik kördes
+  2026-09-26 (virvelns vågor). Källa (Physics, APS, 2026-09-29):
+  https://link.aps.org/doi/10.1103/Physics.19.s119
+  (tillagd 2026-09-30)
+
+- **Laserns frekvens avläst ur en enda bild** — ett roterande ljusmönster gör att våglängden går att läsa av i
+  en ögonblicksbild i stället för med ett spektrometersvep. Ingång: interferens, våglängd och frekvens, och
+  varför det är svårt att mäta hur snabbt ljus svänger. OBS: optik och fotonik är väl representerade.
+  Källa (Phys.org 2026-09-29): https://phys.org/news/2026-09-rotating-pattern-reveals-laser-frequency.html
+  (tillagd 2026-09-30)
+
+- **Radioteleskopet som ska lyssna på universum före de första stjärnorna** — CosmoCube, en satellit stor som
+  en resväska, ska ställa sig bakom månen och använda den som skärm mot jordens radiobrus för att fånga
+  21-centimeterssignalen från de mörka tidsåldrarna. Ingång: våglängd, radiovågor och varför jordens eget
+  brus är det stora hindret. OBS: astronomi och kosmologi räknas som samma område.
+  Källa (ScienceDaily 2026-09-28): https://www.sciencedaily.com/releases/2026/09/260927225034.htm
+  (tillagd 2026-09-30)
 
 - **LHC kopplas ned för att byta magneter** — CERN har börjat plocka isär acceleratorn inför uppgraderingen
   till High-Luminosity LHC: 28 supraledande magneter byts, de nya ger 11,3 tesla, ungefär 40 procent starkare

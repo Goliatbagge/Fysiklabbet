@@ -601,7 +601,7 @@ const PRESETS = [
 const STORE_KEY = 'sannolikhetskalkylator-v1';
 function newState() {
   return {
-    tab: 'fordelning', d: 'normal', pt: {}, m: 'interval', a: -1, b: 1, u: '', xl: '',
+    adv: false, tab: 'fordelning', d: 'normal', pt: {}, m: 'interval', a: -1, b: 1, u: '', xl: '',
     cum: false, sig: false, apx: false, tbl: false, cmp: false, cpt: {}, names: null,
     dec: 4, N: '100', pre: null, simN: 1000, proc: 'z1', st: {},
   };
@@ -707,6 +707,8 @@ function loadState() {
   if (m) { try { d = decodeState(m[1]); } catch (e) { d = null; } }
   if (!d) { try { d = JSON.parse(localStorage.getItem(STORE_KEY)); } catch (e) { d = null; } }
   if (d && DISTS[d.d]) S = Object.assign(newState(), d);
+  // En länk till något utanför grundläget öppnar det avancerade läget.
+  if (S.d !== 'normal' || S.tab === 'statistik') S.adv = true;
 }
 
 // Förinställningen gäller bara så länge parametrarna inte ändrats.
@@ -808,7 +810,7 @@ function drawDist(W, H, opt = {}) {
   const D = D_(), { p } = params(S.d), disk = D.kind === 'disk';
   const cmpP = S.cmp ? params(S.d, S.cpt, 'c').p : null;
   const head = opt.exp ? 56 : 0;
-  const M = { l: 58, r: 22, t: 50 + head + (W < 640 && !opt.exp ? 18 : 0), b: 58 };
+  const M = { l: S.adv ? 58 : 26, r: 22, t: 50 + head + (W < 640 && !opt.exp ? 18 : 0), b: 58 };
   const pw = W - M.l - M.r, ph = H - M.t - M.b;
   const v = opt.view || V;
   const x0 = v.x0, x1 = v.x1, y1 = S.cum ? 1.08 : v.y1;
@@ -824,7 +826,7 @@ function drawDist(W, H, opt = {}) {
   const xt = tickList(x0, x1, Math.max(4, Math.floor(pw / 76)), disk ? 1 : 0);
   const yt = S.cum ? tickList(0, 1, 5) : tickList(0, y1, Math.max(2, Math.floor(ph / 60)));
   xt.out.forEach(t => { out.push(`<line x1="${f2(X(t))}" y1="${M.t}" x2="${f2(X(t))}" y2="${base}" stroke="${COL.grid}" stroke-width="1"/>`); });
-  yt.out.forEach(t => { if (t > 0) out.push(`<line x1="${M.l}" y1="${f2(Y(t))}" x2="${M.l + pw}" y2="${f2(Y(t))}" stroke="${COL.grid}" stroke-width="1"/>`); });
+  if (S.adv) yt.out.forEach(t => { if (t > 0) out.push(`<line x1="${M.l}" y1="${f2(Y(t))}" x2="${M.l + pw}" y2="${f2(Y(t))}" stroke="${COL.grid}" stroke-width="1"/>`); });
 
   // Gränserna som gäller för läget
   const bounds = [];
@@ -890,6 +892,9 @@ function drawDist(W, H, opt = {}) {
   // Axlar (x-axeln med pil åt det positiva hållet)
   out.push(`<line x1="${M.l}" y1="${f2(base)}" x2="${M.l + pw + 6}" y2="${f2(base)}" stroke="${COL.axis}" stroke-width="1.4"/>`);
   out.push(`<polygon points="${M.l + pw + 14},${f2(base)} ${M.l + pw + 5},${f2(base - 4)} ${M.l + pw + 5},${f2(base + 4)}" fill="${COL.axis}"/>`);
+  // Grundläget har ingen y-axel, precis som figurerna i ma2c-6.5: det är
+  // arean som räknas, inte kurvans höjd.
+  if (S.adv) {
   out.push(`<line x1="${M.l}" y1="${f2(base)}" x2="${M.l}" y2="${M.t - 8}" stroke="${COL.axis}" stroke-width="1.2"/>`);
   out.push(`<polygon points="${M.l},${M.t - 16} ${M.l - 4},${M.t - 7} ${M.l + 4},${M.t - 7}" fill="${COL.axis}"/>`);
   yt.out.forEach(t => {
@@ -900,6 +905,7 @@ function drawDist(W, H, opt = {}) {
   const ylab = disk ? (S.cum ? `<tspan font-style="italic">P</tspan>(<tspan font-style="italic">X</tspan> ≤ <tspan font-style="italic">k</tspan>)` : `<tspan font-style="italic">P</tspan>(<tspan font-style="italic">X</tspan> = <tspan font-style="italic">k</tspan>)`)
     : (S.cum ? `<tspan font-style="italic">F</tspan>(<tspan font-style="italic">x</tspan>)` : `<tspan font-style="italic">f</tspan>(<tspan font-style="italic">x</tspan>)`);
   out.push(txt(M.l + 10, M.t - 6, ylab, { fs: 12.5, fill: COL.soft }));
+  }
 
   // Gränsernas värden som etiketter under axeln; skalans tal som krockar döljs.
   const pills = [];
@@ -1199,8 +1205,10 @@ function renderLeft() {
   if (S.tab === 'statistik') { renderProcList(); return; }
   const D = D_(), t = ptext(S.d), { bad, err } = params(S.d);
   const pr = curPreset();
-  let h = `<div class="eyebrow">Fördelning</div>
-  <div class="picker"><button type="button" class="pick-btn" id="pickBtn" aria-haspopup="true">${spark(S.d)}<span><b>${dname(D)}</b><small>${D.kind === 'disk' ? 'Diskret' : 'Kontinuerlig'}</small></span>${CARET}</button>
+  let h = `<div class="eyebrow">Fördelning</div>`;
+  if (!S.adv) h += `<div class="picker"><div class="pick-btn static">${spark(S.d)}<span><b>${dname(D)}</b><small>Klockkurvan</small></span></div></div>
+  <p class="prm-help" style="margin-top:8px">Fler fördelningar finns under Avancerad.</p>`;
+  else h += `<div class="picker"><button type="button" class="pick-btn" id="pickBtn" aria-haspopup="true">${spark(S.d)}<span><b>${dname(D)}</b><small>${D.kind === 'disk' ? 'Diskret' : 'Kontinuerlig'}</small></span>${CARET}</button>
   <div class="pick-list" id="pickList">${GROUPS.map(([g, gt]) => `<div class="eyebrow">${gt}</div>` + ORDER.filter(d => DISTS[d].grp === g).map(d => `<button type="button" class="pick-it${d === S.d ? ' on' : ''}" data-d="${d}">${spark(d, 38, 24)}<span>${dname(DISTS[d])}</span></button>`).join('')).join('')}</div></div>`;
   D.params.forEach(q => {
     const r = rng[q.k] || { min: 0, max: 1, step: 0.01 };
@@ -1215,8 +1223,8 @@ function renderLeft() {
   h += `<div class="unitrow"><label for="unitIn">Enhet</label><input id="unitIn" value="${esc(S.u)}" placeholder="ingen" autocomplete="off"></div>`;
   h += `<div class="presets"><div class="eyebrow">Exempel med riktiga data</div><div class="pset-list">`;
   let lastG = '';
-  PRESETS.forEach(x => {
-    if (x.grp !== lastG) { h += `<div class="pset-g eyebrow" style="letter-spacing:.08em">${x.grp}</div>`; lastG = x.grp; }
+  PRESETS.filter(x => S.adv || x.d === 'normal').forEach(x => {
+    if (S.adv && x.grp !== lastG) { h += `<div class="pset-g eyebrow" style="letter-spacing:.08em">${x.grp}</div>`; lastG = x.grp; }
     h += `<button type="button" class="pset${pr && pr.id === x.id ? ' on' : ''}" data-pre="${x.id}"><b>${x.title}</b><small>${presetMeta(x)}</small><span class="tag">${x.src}</span></button>`;
   });
   h += `</div></div>`;
@@ -1350,9 +1358,9 @@ function renderRight() {
   const hasSd = isFinite(D.sd(params(S.d).p));
   let h = `<div class="res"><div class="eyebrow">Svar</div><p id="resWords" class="words"></p><div id="cmpRes"></div></div>`;
   h += `<div class="grp"><div class="eyebrow">Redovisning <button type="button" class="copytxt" id="copyRedov">Kopiera</button></div><div class="redov" id="redov"></div></div>`;
-  h += `<div class="grp"><div class="eyebrow">Fördelningen</div><div class="formel" id="formel"></div><dl class="props" id="props"></dl></div>`;
+  h += `<div class="grp"><div class="eyebrow">Fördelningen</div>${S.adv ? '<div class="formel" id="formel"></div>' : ''}<dl class="props" id="props"></dl></div>`;
   h += `<div class="grp"><div class="eyebrow">Visa</div>
-    <label class="tgl"><input type="checkbox" data-t="cum"${S.cum ? ' checked' : ''}><span class="sw"></span><span class="tx">Kumulativ fördelning<small>${disk ? '<i>P</i>(<i>X</i> ≤ <i>k</i>) i stället för <i>P</i>(<i>X</i> = <i>k</i>)' : '<i>F</i>(<i>x</i>) = <i>P</i>(<i>X</i> ≤ <i>x</i>) i stället för tätheten'}</small></span></label>
+    ${S.adv ? `<label class="tgl"><input type="checkbox" data-t="cum"${S.cum ? ' checked' : ''}><span class="sw"></span><span class="tx">Kumulativ fördelning<small>${disk ? '<i>P</i>(<i>X</i> ≤ <i>k</i>) i stället för <i>P</i>(<i>X</i> = <i>k</i>)' : '<i>F</i>(<i>x</i>) = <i>P</i>(<i>X</i> ≤ <i>x</i>) i stället för tätheten'}</small></span></label>` : ''}
     ${hasSd ? `<label class="tgl"><input type="checkbox" data-t="sig"${S.sig ? ' checked' : ''}><span class="sw"></span><span class="tx">Visa <i>μ</i> ± <i>σ</i>, 2<i>σ</i> och 3<i>σ</i><small>Streckade linjer vid hela standardavvikelser</small></span></label>` : ''}
     ${disk ? `<label class="tgl"><input type="checkbox" data-t="apx"${S.apx ? ' checked' : ''}><span class="sw"></span><span class="tx">Normalapproximation<small>Normalfördelning med samma <i>μ</i> och <i>σ</i></small></span></label><div id="apxOut" class="note"></div>
     <label class="tgl"><input type="checkbox" data-t="tbl"${S.tbl ? ' checked' : ''}><span class="sw"></span><span class="tx">Tabell<small>Sannolikheten för varje värde</small></span></label><div id="tblBox"></div>` : ''}
@@ -1363,7 +1371,7 @@ function renderRight() {
     h += `<div class="sub">` + D.params.map(q => `<div class="fld"><span>${q.label} <span class="sym">${q.sym}</span></span><input data-cp="${q.k}" value="${esc(ct[q.k])}" inputmode="decimal" autocomplete="off" class="${cb[q.k] ? 'bad' : ''}"></div>`).join('') + `</div>`;
   }
   h += `</div>`;
-  h += `<div class="grp"><div class="eyebrow">Simulera ett stickprov</div>
+  if (S.adv) h += `<div class="grp"><div class="eyebrow">Simulera ett stickprov</div>
     <div class="optrow"><span>Antal värden</span><div class="seg" data-seg="simN">${[100, 1000, 10000].map(n => `<button type="button" data-v="${n}" class="${S.simN === n ? 'on' : ''}">${num(n, 0)}</button>`).join('')}</div></div>
     <div style="display:flex;gap:8px;margin-top:6px"><button type="button" class="wbtn dark" id="simBtn">Slumpa</button><button type="button" class="wbtn" id="simClr"${sim ? '' : ' hidden'}>Ta bort</button></div>
     <div class="note simstat" id="simStat"></div></div>`;
@@ -1429,8 +1437,8 @@ function update(o = {}) {
     const nd = v => num(v, 4);
     let h = `<dt>Medelvärde <i>μ</i></dt><dd>${isFinite(mu) ? nd(mu) : 'saknas'}</dd>`;
     h += `<dt>Standardavvikelse <i>σ</i></dt><dd>${isFinite(sd) ? nd(sd) : sd === Infinity ? '∞' : 'saknas'}</dd>`;
-    h += `<dt>Varians <i>σ</i><sup>2</sup></dt><dd>${isFinite(sd) ? nd(sd * sd) : sd === Infinity ? '∞' : 'saknas'}</dd>`;
-    h += `<dt>Median</dt><dd>${disk ? num(med, 0) : nd(med)}</dd>`;
+    if (S.adv) h += `<dt>Varians <i>σ</i><sup>2</sup></dt><dd>${isFinite(sd) ? nd(sd * sd) : sd === Infinity ? '∞' : 'saknas'}</dd>`;
+    if (S.adv) h += `<dt>Median</dt><dd>${disk ? num(med, 0) : nd(med)}</dd>`;
     if (S.d === 'normal') {
       const zs = [];
       if (S.m !== 'right') zs.push(S.b);
@@ -1502,6 +1510,12 @@ function syncSliders() {
   });
 }
 function renderAll() {
+  document.body.classList.toggle('avancerad', !!S.adv);
+  const ab = $('#advBtn'); if (ab) ab.setAttribute('aria-pressed', S.adv ? 'true' : 'false');
+  const sub = $('#underrubrik');
+  if (sub) sub.textContent = S.adv
+    ? 'Normalfördelningen och fjorton andra fördelningar, hypotesprövning och konfidensintervall.'
+    : 'Räkna med normalfördelningen. Dra i gränserna eller skriv in dem, så syns andelen direkt.';
   document.querySelectorAll('.tabs button').forEach(b => { const on = b.dataset.tab === S.tab; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
   $('.zoom').style.display = S.tab === 'fordelning' ? '' : 'none';
   renderLeft(); renderSbar(); renderRight(); update();
@@ -2275,6 +2289,21 @@ document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click
   renderAll();
   if (S.tab === 'fordelning') draw();
 }));
+// Avancerad: alla fördelningar och statistikfliken. Tillbaka till grundläget
+// går man alltid till normalfördelningen.
+$('#advBtn').addEventListener('click', () => {
+  S.adv = !S.adv;
+  if (!S.adv) {
+    S.tab = 'fordelning'; S.cum = false; S.apx = false; S.tbl = false; sim = null;
+    if (S.d !== 'normal') {
+      S.d = 'normal'; S.pre = null; S.cmp = false; S.names = null; S.u = ''; S.xl = ''; lastInv = null;
+      ptext(S.d); computeRanges(); defaultBounds();
+    }
+  }
+  V = fitView();
+  renderAll();
+  if (S.tab === 'fordelning') draw();
+});
 $('#resetBtn').addEventListener('click', () => {
   const old = JSON.stringify(S), oldV = Object.assign({}, V);
   S = newState(); sim = null; lastInv = null;

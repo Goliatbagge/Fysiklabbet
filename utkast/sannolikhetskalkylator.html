@@ -186,6 +186,15 @@ i.v, .v i, .sym i { font-family: var(--math); font-style: italic; }
 .tabs { display: inline-flex; background: var(--bg2); border-radius: 12px; padding: 3px; gap: 2px; }
 .tabs button { border: 0; background: none; padding: 8px 14px; border-radius: 9px; font: 600 13.5px var(--sans); color: var(--soft); cursor: pointer; white-space: nowrap; transition: background .15s, color .15s; }
 .tabs button.on { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(15, 22, 32, .16); }
+.advbtn { display: inline-flex; align-items: center; gap: 9px; height: 38px; padding: 0 14px 0 10px; border-radius: 11px; border: 1px solid var(--line2); background: var(--panel); font: 600 13.5px var(--sans); color: var(--ink); cursor: pointer; transition: border-color .15s; }
+.advbtn:hover { border-color: var(--ink); }
+.advbtn .sw { width: 30px; height: 18px; }
+.advbtn .sw::after { width: 14px; height: 14px; }
+.advbtn[aria-pressed="true"] .sw { background: var(--ink); }
+.advbtn[aria-pressed="true"] .sw::after { transform: translateX(12px); }
+body:not(.avancerad) .tabs { display: none; }
+.pick-btn.static { cursor: default; }
+.pick-btn.static:hover { border-color: var(--line2); }
 .ibtn { width: 38px; height: 38px; flex: none; border-radius: 10px; border: 1px solid var(--line2); background: var(--panel); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: border-color .15s, transform .15s; }
 .ibtn:hover { border-color: var(--ink); }
 .ibtn:active { transform: scale(.96); }
@@ -543,9 +552,10 @@ details.datab summary { cursor: pointer; font-size: 13px; font-weight: 600; colo
 <header class="top">
   <div class="titles">
     <h1>Sannolikhets<em>kalkylator</em></h1>
-    <p>Räkna med normalfördelningen och fjorton andra fördelningar. Dra i gränserna eller skriv in dem, så syns andelen direkt.</p>
+    <p id="underrubrik">Räkna med normalfördelningen. Dra i gränserna eller skriv in dem, så syns andelen direkt.</p>
   </div>
   <div class="actions">
+    <button type="button" class="advbtn" id="advBtn" aria-pressed="false" title="Visa alla fördelningar, hypotesprövning och konfidensintervall"><span class="sw" aria-hidden="true"></span>Avancerad</button>
     <div class="tabs" role="tablist">
       <button type="button" role="tab" data-tab="fordelning" class="on">Fördelningar</button>
       <button type="button" role="tab" data-tab="statistik">Test och intervall</button>
@@ -586,12 +596,12 @@ details.datab summary { cursor: pointer; font-size: 13px; font-weight: 600; colo
 <article class="seo" id="om-verktyget">
   <div class="seo-inner">
     <h2>Räkna med normalfördelning online</h2>
-    <p class="seo-lede">Sannolikhetskalkylatorn räknar ut hur stor andel av värdena i en fördelning som ligger inom ett visst intervall. Skriv in medelvärdet och standardavvikelsen, dra i gränserna, och se andelen som en färgad area under normalfördelningskurvan. Samma verktyg klarar binomialfördelning, Poissonfördelning, <i>t</i>-fördelning, chitvåfördelning och tio fördelningar till, och det gör hypotesprövningar och konfidensintervall.</p>
+    <p class="seo-lede">Sannolikhetskalkylatorn räknar ut hur stor andel av värdena i en fördelning som ligger inom ett visst intervall. Skriv in medelvärdet och standardavvikelsen, dra i gränserna, och se andelen som en färgad area under normalfördelningskurvan. Under <b>Avancerad</b> klarar samma verktyg binomialfördelning, Poissonfördelning, <i>t</i>-fördelning, chitvåfördelning och tio fördelningar till, och där finns också hypotesprövning och konfidensintervall.</p>
     <a class="seo-cta" href="#verktyget">Öppna sannolikhetskalkylatorn</a>
 
     <h2>Så använder du kalkylatorn</h2>
     <ol class="seo-steps">
-      <li><b>Välj fördelning</b> och skriv in parametrarna, för normalfördelningen medelvärdet <i>μ</i> och standardavvikelsen <i>σ</i>. Dra i reglagen så ser du hur kurvan ändras: liten spridning ger en hög och smal kurva, stor spridning en låg och bred.</li>
+      <li><b>Skriv in medelvärdet <i>μ</i> och standardavvikelsen <i>σ</i></b>, eller välj ett av exemplen med riktiga data. Dra i reglagen så ser du hur kurvan ändras: liten spridning ger en hög och smal kurva, stor spridning en låg och bred.</li>
       <li><b>Välj intervalltyp</b> med knapparna under grafen.</li>
       <li><b>Skriv in gränserna</b> eller dra i de röda handtagen i grafen. Andelen visas direkt, som decimaltal och i procent.</li>
       <li><b>Söker du en gräns</b> i stället för en andel skriver du andelen i fältet efter likhetstecknet, till exempel 0,99. Då räknas gränsen ut.</li>
@@ -618,7 +628,7 @@ details.datab summary { cursor: pointer; font-size: 13px; font-weight: 600; colo
     <p>Exemplen i vänsterspalten bygger på uppmätta värden. Längden hos svenska kvinnor och män kommer från en undersökning av Statistiska centralbyrån 1998–2000, där kvinnorna i åldern 16–84 år hade medellängden 165,5 cm med standardavvikelsen 6,15 cm och männen medellängden 179,0 cm med standardavvikelsen 6,85 cm. Med exemplet där de jämförs ser du båda kurvorna i samma graf.</p>
 
     <h2>Hypotesprövning och konfidensintervall</h2>
-    <p>Under fliken <b>Test och intervall</b> finns <i>z</i>-test och <i>t</i>-test för medelvärden och andelar, konfidensintervall och chitvåtest för anpassning och oberoende. Grafen visar nollhypotesens fördelning med det kritiska området och teststorhetens läge, så att <i>p</i>-värdet syns som en area.</p>
+    <p>Slå på <b>Avancerad</b> och välj fliken <b>Test och intervall</b>. Där finns <i>z</i>-test och <i>t</i>-test för medelvärden och andelar, konfidensintervall och chitvåtest för anpassning och oberoende. Grafen visar nollhypotesens fördelning med det kritiska området och teststorhetens läge, så att <i>p</i>-värdet syns som en area.</p>
 
     <h2>Vanliga frågor</h2>
     <div class="faq">
@@ -652,7 +662,7 @@ details.datab summary { cursor: pointer; font-size: 13px; font-weight: 600; colo
 
 <!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
      webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
-<script src="sannolikhetskalkylator.js?v=202609302030"></script>
+<script src="sannolikhetskalkylator.js?v=202609302130"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

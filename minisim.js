@@ -186,6 +186,12 @@
  * jämviktsläget. Ritad i laboranstemat (ljust papper med rutnät), samma
  * färger som teorifigurerna: v = #2563c9, a = #c0392b. Pausknapp,
  * "Ultrarapid" och fullskärm som övriga minisims; inget ljud.
+ * Med `visa: krafter` byts vektorerna mot krafterna på vikten: fjäder-
+ * kraften F_fj (uppåt från kontaktpunkten mot fjädern, växer med
+ * förlängningen), tyngdkraften F_G (från tyngdpunkten, konstant) och den
+ * resulterande kraften F_R (streckad, bredvid vikten, F_R = −k · y).
+ * Alla tre skalenliga i samma skala; bara fjäderkraften är ikryssad från
+ * början. Jämviktslinjen har etiketten "Jämviktsläge" i båda varianterna.
  *
  * ── typ: linjal ──────────────────────────────────────────────────────────
  * Demonstrationen ur fy2-1.2 (Mer kraftmoment): en linjal vilar vågrätt på
@@ -2758,6 +2764,11 @@
         var COL_V = '#2563c9';          // hastighetens färg (som teorifiguren)
         var COL_A = '#c0392b';          // accelerationens färg (som teorifiguren)
         var INK = '#1f2530';
+        // Variant "krafter": krafterna på vikten i stället för v och a.
+        var KRAFTER = cfg.visa === 'krafter';
+        var COL_F = '#c0392b';          // krafternas färg (som F_R i teorifiguren)
+        var L_STAT = 140;               // fjäderns förlängning i jämviktsläget (px)
+        var F_SKALA = 0.5;              // pillängd per px förlängning (F = k · Δl)
 
         // ── DOM ───────────────────────────────────────────────────────────
         var card = document.createElement('div');
@@ -2773,7 +2784,12 @@
         var canvas = document.createElement('canvas');
         canvas.className = 'minisim-canvas';
         canvas.setAttribute('role', 'img');
-        canvas.setAttribute('aria-label',
+        canvas.setAttribute('aria-label', KRAFTER ?
+            'En vikt som hänger i en spiralfjäder från taket. Dra i vikten och ' +
+            'släpp så pendlar den kring jämviktsläget. Kryssrutor visar ' +
+            'fjäderkraften, tyngdkraften och den resulterande kraften på vikten. ' +
+            'Tyngdkraften är konstant, fjäderkraften växer med förlängningen och ' +
+            'den resulterande kraften är alltid riktad mot jämviktsläget.' :
             'En vikt som hänger i en spiralfjäder från taket. Dra i vikten och ' +
             'släpp så pendlar den kring jämviktsläget. Kryssrutor visar ' +
             'hastighetsvektorn och accelerationsvektorn: farten är störst i ' +
@@ -2841,12 +2857,21 @@
             lbl.appendChild(document.createTextNode(text));
             return { lbl: lbl, cb: cb };
         }
-        var vChk = makeCheck('Visa hastighet', true, COL_V);
-        var aChk = makeCheck('Visa acceleration', true, COL_A);
+        var vChk = null, aChk = null, fjChk = null, gChk = null, rChk = null;
+        if (KRAFTER) {
+            fjChk = makeCheck('Fjäderkraft', true, COL_F);
+            gChk = makeCheck('Tyngdkraft', false, COL_F);
+            rChk = makeCheck('Resulterande kraft', false, COL_F);
+            toggles.appendChild(fjChk.lbl);
+            toggles.appendChild(gChk.lbl);
+            toggles.appendChild(rChk.lbl);
+        } else {
+            vChk = makeCheck('Visa hastighet', true, COL_V);
+            aChk = makeCheck('Visa acceleration', true, COL_A);
+            toggles.appendChild(vChk.lbl);
+            toggles.appendChild(aChk.lbl);
+        }
         var slowChk = makeCheck('Ultrarapid', false, null);
-
-        toggles.appendChild(vChk.lbl);
-        toggles.appendChild(aChk.lbl);
         toggles.appendChild(slowChk.lbl);
         card.appendChild(toggles);
         node.appendChild(card);
@@ -2973,6 +2998,8 @@
             drawMixed(152, EQ_Y + 4,
                 [{ t: 'y', it: true }, { t: ' = 0', it: false }],
                 'right', 14, INK);
+            drawMixed(458, EQ_Y + 5, [{ t: 'Jämviktsläge', it: false }],
+                'left', 14, INK);
             // vändlägena ±A — streckade
             if (yTop !== null) {
                 ctx.strokeStyle = '#9aa0a6';
@@ -3060,7 +3087,69 @@
                 labelSide === 'left' ? 'right' : 'left', 16, color);
         }
 
+        // Kraftpil med index-etikett (F med upprätt index) bredvid spetsen.
+        // sgn > 0 = uppåt. dashed = resultant (streckat skaft).
+        function drawForce(x, yTail, len, sgn, sub, labelSide, dashed) {
+            if (len < 6) return;
+            var yTip = yTail - sgn * len;
+            var head = Math.max(9, Math.min(14, len * 0.5));
+            var yBase = yTip + sgn * head;
+            ctx.strokeStyle = COL_F;
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'butt';
+            ctx.setLineDash(dashed ? [6, 4] : []);
+            ctx.beginPath();
+            ctx.moveTo(x, yTail);
+            ctx.lineTo(x, yBase);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = COL_F;
+            ctx.beginPath();
+            ctx.moveTo(x, yTip);
+            ctx.lineTo(x - 5.5, yBase);
+            ctx.lineTo(x + 5.5, yBase);
+            ctx.closePath();
+            ctx.fill();
+            // etiketten bredvid pilhuvudet, i fri yta
+            var ly = yTip + (sgn > 0 ? 12 : -2);
+            ctx.font = 'italic 16px ' + FONT;
+            var wF = ctx.measureText('F').width;
+            ctx.font = '12px ' + FONT;
+            var wS = ctx.measureText(sub).width;
+            var x0 = labelSide === 'left' ? x - 10 - wF - wS : x + 10;
+            ctx.fillStyle = COL_F;
+            ctx.textAlign = 'left';
+            ctx.font = 'italic 16px ' + FONT;
+            ctx.fillText('F', x0, ly);
+            ctx.font = '12px ' + FONT;
+            ctx.fillText(sub, x0 + wF, ly + 4);
+        }
+
+        function drawForces() {
+            var cy = massCY();
+            var y = elong();                      // positiv uppåt
+            // fjäderkraften: uppåt från kontaktpunkten mot fjädern
+            if (fjChk.cb.checked) {
+                drawForce(CX, cy - MASS_H / 2, (L_STAT - y) * F_SKALA, 1,
+                    'fj', 'right', false);
+            }
+            // tyngdkraften: nedåt från tyngdpunkten (markerad med prick)
+            if (gChk.cb.checked) {
+                drawForce(CX, cy, L_STAT * F_SKALA, -1, 'G', 'right', false);
+                ctx.fillStyle = COL_F;
+                ctx.beginPath();
+                ctx.arc(CX, cy, 2.6, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+            // resulterande kraften F_R = −k · y: streckad, bredvid vikten
+            if (rChk.cb.checked && Math.abs(y) * F_SKALA >= 6) {
+                drawForce(CX - MASS_W / 2 - 16, cy, Math.abs(y) * F_SKALA,
+                    y > 0 ? -1 : 1, 'R', 'left', true);
+            }
+        }
+
         function drawVectors() {
+            if (KRAFTER) { drawForces(); return; }
             var cy = massCY();
             var v = veloc(), a = accel();
             // skalenligt: pillängd ∝ belopp, samma referens (full
@@ -3163,8 +3252,9 @@
             if (!paused) kick();
             else render();      // frys exakt den bild som visas
         });
-        vChk.cb.addEventListener('change', function () { render(); });
-        aChk.cb.addEventListener('change', function () { render(); });
+        [vChk, aChk, fjChk, gChk, rChk].forEach(function (c) {
+            if (c) c.cb.addEventListener('change', function () { render(); });
+        });
         slowChk.cb.addEventListener('change', kick);
 
         // ── Dra i vikten (pekare/touch/mus) ───────────────────────────────

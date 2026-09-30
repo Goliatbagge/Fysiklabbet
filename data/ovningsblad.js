@@ -22,6 +22,9 @@
 // fram lösningsförslagen maskinellt och kontrollerar dem genom insättning.
 // Hävarmsbladet (fy2-1.1) byggs av .claude/bygg-ovningsblad-havarm.js, som
 // räknar ut fotpunkterna och hävarmarna i facit ur figurernas koordinater.
+// Kraftbladet (fy1-3.S) byggs av .claude/bygg-ovningsblad-krafter.js, som
+// kontrollerar kraft- och momentsumman i varje facitfigur; kontakterna i
+// figurerna mäts av .claude/verify-ovningsblad-kontakt.js.
 // Matematik nivå 1b och 2b speglas via aliaskartorna i katalog.html, så
 // ett blad på ett ma1c-id syns automatiskt även i 1b.
 window.OVNINGSBLAD = {
@@ -69,6 +72,16 @@ window.OVNINGSBLAD = {
       antal: 44,
       html: 'ovningsblad/ovningsblad-ekvationer-5.html',
       pdf: 'ovningsblad/ovningsblad-ekvationer-5.pdf',
+    },
+  ],
+  'fy1-3.S': [
+    {
+      titel: 'Rita krafterna',
+      beskrivning: 'Rita alla krafter som verkar på en kropp, med rätt angreppspunkt och skalenliga längder. Femton situationer från en låda i vila till hiss, lutande plan och ett lastbilsflak som accelererar, med de vanliga fällorna inbyggda. Facit med förklaring till varje uppgift.',
+      niva: ['Grund', 'Medel'],
+      antal: 15,
+      html: 'ovningsblad/ovningsblad-krafter.html',
+      pdf: 'ovningsblad/ovningsblad-krafter.pdf',
     },
   ],
   'fy2-1.1': [

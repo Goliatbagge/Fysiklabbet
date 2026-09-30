@@ -96,6 +96,15 @@ node .claude/verify-uppgiftsruta.js [uppgift …]
 # Se "Kopplingsscheman: jämn fördelning och centrering" nedan.
 node .claude/verify-kopplingsschema.js
 
+# Verifiera att föremål som ska ha KONTAKT i övningsbladens figurer
+# verkligen nuddar varandra (KÖR FÖRE COMMIT vid nya eller ändrade
+# övningsbladsfigurer!) — elementen som ska mötas märks med samma
+# data-k-namn i byggskriptet, och skriptet mäter glipan i den renderade
+# sidan. Felet har hänt: en hand som skulle skjuta en låda slutade 3 px
+# före lådan. Se punkt 5 under "Kraftfigurer". Kräver dev-servern på
+# port 8000 + puppeteer-core i %TEMP%\pptr-test.
+node .claude/verify-ovningsblad-kontakt.js [ovningsblad/fil.html …]
+
 # Verifiera exit tickets efter ändringar i data/exittickets.js (KÖR FÖRE
 # COMMIT!) — syntax, täckning mot katalogen, choices/why-längder, emoji,
 # tappade KaTeX-backslash. Dataformatet dokumenteras i filens huvud;
@@ -2660,6 +2669,20 @@ de ska inte behöva påpekas av användaren:
    nudda ytan** — inget mellanrum. Fejka tillplattad kontakt med z-ordning:
    rita objektet först och ytan (taket/väggen) *ovanpå*, så objektets kant
    göms och ser intryckt ut.
+   **Det gäller varje kontakt som ger en kraft: handen som skjuter, snöret
+   som drar, lådan på golvet, hjulet på vägen.** Felet har hänt trots
+   regeln (2026-09-30, övningsbladet "Rita krafterna"): fingrarna slutade
+   3 px före lådan de skulle skjuta på. Kraft- och momentkontrollen gick
+   igenom och översiktsskärmdumpen såg rätt ut, men eleven ser en hand som
+   inte rör lådan, och då finns ingen kontaktkraft att rita. Därför:
+   - **Placera det som trycker utifrån ytan det trycker på**, aldrig med
+     egna fristående koordinater: räkna ut handens läge ur lådans kant
+     (`translate(boxX − handX)`), inte "ungefär där".
+   - **Märk båda elementen** med samma `data-k`-namn och kör
+     `node .claude/verify-ovningsblad-kontakt.js`, som mäter glipan i den
+     renderade figuren (övningsbladen; mönstret går att återanvända).
+   - **Zooma in på varje kontaktpunkt i skärmdumpen** innan figuren räknas
+     som klar. En glipa på 1–3 px syns inte i en översikt.
 6. **Igenkännbara verkliga objekt (hand, kropp, fordon) ritas med omsorg**
    värdig en modern, inspirerande sida — inte som grova klumpar. Bygg t.ex.
    en hand av handflata + separata fingrar + tumme + en subtil veck-linje,
@@ -2897,8 +2920,12 @@ Vid varje skärmdumpsgranskning, kontrollera **systematiskt**:
 8. **Στ = 0 i jämviktsfigurer** — motriktade lika stora krafter på samma
    verkningslinje, hävarmar som balanserar momenten numeriskt (se
    "Vridmomentskontroll" punkt 2b under Kraftfigurer).
+9. **Kontakt där figuren påstår kontakt** — zooma in på varje ställe där
+   något trycker, drar eller vilar mot något annat (hand mot låda, snöre
+   mot krok, låda mot golv) och kontrollera att det inte finns en glipa.
+   Se punkt 5 under Kraftfigurer.
 
-Markera först som klart när skärmdumpen passerar alla åtta kontroller.
+Markera först som klart när skärmdumpen passerar alla nio kontroller.
 
 ## Fysikämnen
 

@@ -37,7 +37,7 @@ motsvarar det intervall vi är intresserade av och fyller i värdena.
 | --- | --- |
 | Öppet åt vänster | "Hur många procent är mindre än $x$?" |
 | Intervall | "Hur många procent ligger mellan $x$ och $y$?" |
-| Intervallkomplement | "Hur många procent är mindre än $x$, men större än $y$?" |
+| Intervallkomplement | "Hur många procent är mindre än $x$ eller större än $y$?" |
 | Öppet åt höger | "Hur många procent är större än $x$?" |
 
 Hur hög normalfördelningskurvan blir beror på spridningen. Vid liten

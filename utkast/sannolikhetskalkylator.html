@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Sannolikhetskalkylator: normalfördelning online — Fysiklabbet</title>
+<meta name="description" content="Räkna ut sannolikheter i normalfördelningen och 14 andra fördelningar. Dra i gränserna, se kurvan ändras, hitta gränsen för en given andel och gör hypotesprövningar och konfidensintervall. Gratis och utan inloggning.">
+<link rel="canonical" href="https://fysiklabbet.se/utkast/sannolikhetskalkylator.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fysiklabbet">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:title" content="Sannolikhetskalkylator: normalfördelning online">
+<meta property="og:description" content="Räkna ut sannolikheter i normalfördelningen och 14 andra fördelningar. Dra i gränserna, se kurvan ändras, hitta gränsen för en given andel och gör hypotesprövningar och konfidensintervall. Gratis och utan inloggning.">
+<meta property="og:url" content="https://fysiklabbet.se/utkast/sannolikhetskalkylator.html">
+<meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sannolikhetskalkylator: normalfördelning online">
+<meta name="twitter:description" content="Räkna ut sannolikheter i normalfördelningen och 14 andra fördelningar. Dra i gränserna, se kurvan ändras, hitta gränsen för en given andel och gör hypotesprövningar och konfidensintervall. Gratis och utan inloggning.">
+<meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Sannolikhetskalkylator",
+   "alternateName": [
+    "Normalfördelning online",
+    "Räkna med normalfördelning",
+    "Normalfördelningskalkylator"
+   ],
+   "url": "https://fysiklabbet.se/utkast/sannolikhetskalkylator.html",
+   "description": "Räkna ut sannolikheter i normalfördelningen och 14 andra fördelningar. Dra i gränserna, se kurvan ändras, hitta gränsen för en given andel och gör hypotesprövningar och konfidensintervall. Gratis och utan inloggning.",
+   "applicationCategory": "EducationalApplication",
+   "operatingSystem": "Webbläsare",
+   "inLanguage": "sv",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "SEK"
+   },
+   "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "student"
+   },
+   "featureList": [
+    "Normalfördelning, binomialfördelning, Poissonfördelning och tolv fördelningar till",
+    "Öppet åt vänster, intervall, intervallkomplement och öppet åt höger",
+    "Gränser som dras direkt i grafen",
+    "Skriv in en andel och få gränsen uträknad",
+    "Kumulativ fördelningsfunktion och tabell för diskreta fördelningar",
+    "Normalapproximation av diskreta fördelningar",
+    "Exempel med riktiga data, till exempel längden hos svenska kvinnor och män",
+    "Jämförelse av två fördelningar i samma graf",
+    "Simulering av stickprov",
+    "Z-test, t-test, konfidensintervall och chitvåtest",
+    "Kopiera grafen till Word, PowerPoint och Google Dokument"
+   ],
+   "publisher": {
+    "@type": "Organization",
+    "name": "Fysiklabbet",
+    "url": "https://fysiklabbet.se/"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://fysiklabbet.se/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Sannolikhetskalkylator",
+     "item": "https://fysiklabbet.se/utkast/sannolikhetskalkylator.html"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Hur räknar man ut en andel i en normalfördelning?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Skriv in medelvärdet och standardavvikelsen, välj intervalltyp och skriv in gränserna. Andelen är arean under kurvan mellan gränserna, och den visas både som decimaltal och i procent. Ligger gränserna på hela standardavvikelser från medelvärdet går det också att räkna för hand med procentsatserna 34,1 %, 13,6 % och 2,3 %."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Hur hittar man gränsen när andelen är känd?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Skriv in andelen i fältet efter likhetstecknet, till exempel 0,99 eller 99 %. Då räknas gränsen ut i stället. Med öppet åt vänster får du värdet som 99 % ligger under, och med intervall får du ett intervall kring medelvärdet som rymmer 99 %."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Vad är skillnaden mellan intervall och intervallkomplement?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Intervall ger andelen mellan två gränser. Intervallkomplement ger andelen utanför gränserna, alltså mindre än den undre gränsen eller större än den övre. De två andelarna blir tillsammans 100 %."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Måste decimaltal skrivas med punkt?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nej. Här går det bra att skriva decimaltal med kommatecken, som 165,5, eller med punkt. Sannolikheter kan skrivas som decimaltal, i procent eller som bråk, till exempel 1/6."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Kostar verktyget något?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nej. Verktyget är gratis och kräver inget konto. Inställningarna sparas i din webbläsare, och du kan dela exakt det du ser som en länk."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<link rel="stylesheet" href="../styles-laborans.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&family=Poppins:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<style>
+:root {
+  --bg: #f3eee4;
+  --bg2: #ebe4d4;
+  --panel: #fffdf9;
+  --ink: #0f1620;
+  --soft: #3f4a5c;
+  --muted: #69655c;
+  --line: rgba(15, 22, 32, 0.10);
+  --line2: rgba(15, 22, 32, 0.20);
+  --accent: #c8324a;
+  --accent-soft: rgba(200, 50, 74, 0.08);
+  --blue: #1c3d6b;
+  --area: #8fb8d8;
+  --green: #3f7a34;
+  --shadow: 0 1px 2px rgba(15, 22, 32, 0.05), 0 12px 32px -18px rgba(15, 22, 32, 0.28);
+  --sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --serif: "Instrument Serif", Georgia, serif;
+  --math: Poppins, "DM Sans", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background:
+    radial-gradient(900px 500px at 12% -10%, rgba(200, 50, 74, 0.06), transparent 60%),
+    radial-gradient(900px 600px at 100% 0%, rgba(28, 61, 107, 0.06), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font-family: inherit; }
+.lab-header { background: var(--bg); }
+.lab-nav-dd-trigger.aktiv { border-bottom-color: var(--lab-accent); }
+i.v, .v i, .sym i { font-family: var(--math); font-style: italic; }
+.sym { font-family: var(--math); }
+.xbar { text-decoration: overline; text-decoration-thickness: 1.2px; }
+
+/* ---------- Sidhuvud ---------- */
+.top { display: flex; align-items: center; gap: 22px; padding: 14px 22px 12px; }
+.titles { flex: 1; min-width: 0; }
+.titles h1 { font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1; margin: 0; letter-spacing: -.01em; }
+.titles h1 em { color: var(--accent); }
+.titles p { margin: 5px 0 0; color: var(--soft); font-size: 13.5px; }
+.actions { display: flex; align-items: center; gap: 8px; }
+.tabs { display: inline-flex; background: var(--bg2); border-radius: 12px; padding: 3px; gap: 2px; }
+.tabs button { border: 0; background: none; padding: 8px 14px; border-radius: 9px; font: 600 13.5px var(--sans); color: var(--soft); cursor: pointer; white-space: nowrap; transition: background .15s, color .15s; }
+.tabs button.on { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(15, 22, 32, .16); }
+.ibtn { width: 38px; height: 38px; flex: none; border-radius: 10px; border: 1px solid var(--line2); background: var(--panel); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: border-color .15s, transform .15s; }
+.ibtn:hover { border-color: var(--ink); }
+.ibtn:active { transform: scale(.96); }
+.split { display: inline-flex; position: relative; }
+.primary { height: 40px; padding: 0 16px 0 14px; border: 0; background: var(--ink); color: #fff; font: 600 14px var(--sans); display: inline-flex; align-items: center; gap: 9px; cursor: pointer; transition: background .15s; }
+.primary:hover { background: #22324a; }
+.split .primary:first-child { border-radius: 11px 0 0 11px; box-shadow: 0 8px 18px -10px rgba(15, 22, 32, .7); }
+.split .more { border-radius: 0 11px 11px 0; padding: 0 11px; border-left: 1px solid rgba(255, 255, 255, .16); }
+.menu { position: absolute; right: 0; top: calc(100% + 8px); width: 300px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 24px 48px -20px rgba(15, 22, 32, .45); padding: 8px; display: none; z-index: 40; }
+.menu.open { display: block; animation: pop .16s ease-out; }
+@keyframes pop { from { opacity: 0; transform: translateY(-4px) scale(.98); } }
+.mi { display: flex; align-items: flex-start; gap: 11px; width: 100%; padding: 9px 10px; border: 0; background: none; border-radius: 9px; font: 600 13.5px var(--sans); color: var(--ink); cursor: pointer; text-align: left; }
+.mi svg { margin-top: 2px; flex: none; color: var(--soft); }
+.mi:hover { background: var(--bg); }
+.mi small { display: block; color: var(--muted); font-weight: 400; font-size: 12px; margin-top: 1px; }
+.menu hr { border: 0; border-top: 1px solid var(--line); margin: 6px 4px 8px; }
+
+/* ---------- Arbetsytan ---------- */
+.tool { height: calc(100vh - var(--hdr, 80px)); min-height: 640px; display: flex; flex-direction: column; }
+.app { flex: 1; min-height: 0; display: grid; grid-template-columns: 262px minmax(0, 1fr) 312px; gap: 14px; padding: 0 22px 20px; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); overflow: auto; scrollbar-width: thin; }
+.eyebrow { font: 500 10px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.left { padding: 16px 14px 14px; }
+.right { padding: 16px 16px 18px; }
+.center { min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 10px; }
+
+/* Fördelningsväljaren */
+.picker { position: relative; margin-top: 8px; }
+.pick-btn { display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px 8px 8px; border-radius: 12px; border: 1px solid var(--line2); background: #fff; cursor: pointer; text-align: left; transition: border-color .15s; }
+.pick-btn:hover { border-color: var(--ink); }
+.pick-btn .spark { width: 46px; height: 30px; flex: none; border-radius: 8px; background: var(--bg); }
+.pick-btn b { display: block; font-size: 15px; font-weight: 600; color: var(--ink); }
+.pick-btn small { display: block; font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+.pick-btn .car { margin-left: auto; color: var(--muted); flex: none; }
+.pick-list { margin-top: 6px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 24px 48px -20px rgba(15, 22, 32, .45); padding: 6px; display: none; max-height: 70vh; overflow: auto; }
+.pick-list.open { display: block; animation: pop .16s ease-out; }
+.pick-list .eyebrow { padding: 8px 8px 4px; }
+.pick-it { display: flex; align-items: center; gap: 10px; width: 100%; padding: 6px 8px; border: 0; background: none; border-radius: 9px; cursor: pointer; text-align: left; font: 500 13.5px var(--sans); color: var(--ink); }
+.pick-it:hover { background: var(--bg); }
+.pick-it.on { background: var(--accent-soft); color: var(--accent); }
+.pick-it .spark { width: 38px; height: 24px; flex: none; }
+
+/* Parametrar */
+.prm { margin-top: 14px; }
+.prm-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.prm-top label { font-size: 13px; font-weight: 600; color: var(--soft); }
+.prm-top label .sym { color: var(--ink); margin-left: 3px; font-weight: 400; }
+.nf { position: relative; }
+.nf input, .fld input, .fld select, .cnt input { width: 96px; height: 34px; border-radius: 9px; border: 1px solid var(--line2); background: #fff; padding: 0 10px; font: 500 14.5px var(--sans); color: var(--ink); outline: none; text-align: right; transition: border-color .15s, box-shadow .15s; }
+.nf input:focus, .fld input:focus, .fld select:focus, .cnt input:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(15, 22, 32, .08); }
+.nf input.bad, .fld input.bad, .sbar input.bad { border-color: var(--accent); background: #fff6f7; }
+.nf .u { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 13px; pointer-events: none; }
+.nf.has-u input { padding-right: 34px; }
+input[type=range] { width: 100%; margin: 8px 0 0; accent-color: var(--ink); height: 18px; }
+.prm-help { font-size: 11.5px; color: var(--muted); margin: 3px 0 0; line-height: 1.35; }
+.unitrow { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--soft); }
+.unitrow input { width: 104px; height: 32px; border-radius: 9px; border: 1px solid var(--line2); background: #fff; padding: 0 10px; font: 500 14px var(--sans); outline: none; text-align: right; }
+
+/* Exempel */
+.presets { margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--line); }
+.pset { display: block; width: 100%; margin-top: 7px; padding: 9px 11px; border-radius: 11px; border: 1px solid var(--line); background: #fff; text-align: left; cursor: pointer; transition: border-color .15s, transform .15s, box-shadow .15s; }
+.pset:hover { border-color: var(--line2); transform: translateY(-1px); box-shadow: 0 10px 20px -14px rgba(15, 22, 32, .4); }
+.pset.on { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.pset b { display: block; font-size: 13.5px; font-weight: 600; color: var(--ink); }
+.pset small { display: block; font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.35; }
+.pset .tag { display: inline-block; font: 500 11px var(--sans); color: var(--blue); background: rgba(28, 61, 107, .07); border-radius: 5px; padding: 2px 6px; margin-top: 5px; line-height: 1.35; }
+.pset-g { margin-top: 12px; }
+
+/* Grafen */
+.sheet { position: relative; flex: 1; min-height: 300px; border-radius: 18px; border: 1px solid var(--line); background: #fffefb; box-shadow: var(--shadow); overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.sheet svg#svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; font-family: Poppins, Arial, sans-serif; }
+.sheet .hnd { cursor: ew-resize; touch-action: none; }
+.sheet.panning { cursor: grabbing; }
+.sheet-tag { position: absolute; left: 16px; top: 13px; right: 150px; font-size: 13px; color: var(--soft); pointer-events: none; line-height: 1.35; }
+.sheet-tag i { font-family: var(--math); }
+.zoom { position: absolute; right: 12px; top: 10px; display: flex; gap: 4px; }
+.zoom button { width: 32px; height: 32px; border-radius: 9px; border: 1px solid var(--line); background: rgba(255, 255, 255, .9); color: var(--soft); cursor: pointer; display: grid; place-items: center; transition: border-color .15s, color .15s; }
+.zoom button:hover { border-color: var(--ink); color: var(--ink); }
+.tip { position: absolute; left: 0; top: 0; pointer-events: none; background: var(--ink); color: #fff; border-radius: 9px; padding: 6px 9px; font: 500 12px var(--sans); line-height: 1.45; white-space: nowrap; display: none; z-index: 5; box-shadow: 0 10px 22px -12px rgba(15, 22, 32, .6); }
+.tip.on { display: block; }
+.tip i { font-family: var(--math); }
+
+/* Frågan under grafen: intervalltyp som ord, frågan som mening, svaret stort */
+.sbar { display: flex; flex-direction: column; gap: 10px; padding: 12px 16px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); }
+.qtypes { display: flex; flex-wrap: wrap; gap: 6px; }
+.qtypes button { display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 12px 0 7px; border-radius: 999px; border: 1px solid var(--line2); background: #fff; color: var(--soft); font: 500 13px var(--sans); cursor: pointer; transition: border-color .15s, background .15s, color .15s; }
+.qtypes button svg { width: 28px; height: 18px; flex: none; }
+.qtypes button:hover { border-color: var(--ink); color: var(--ink); }
+.qtypes button.on { background: var(--ink); border-color: var(--ink); color: #fff; }
+.qrow { display: flex; align-items: center; gap: 18px; }
+.qtext { flex: 1; min-width: 0; font: 400 18px/1.9 var(--sans); color: var(--ink); }
+.qf { display: inline-flex; align-items: baseline; gap: 4px; white-space: nowrap; }
+.qf input { width: 4.6em; border: 0; border-bottom: 2px solid var(--accent); background: var(--accent-soft); border-radius: 6px 6px 0 0; padding: 1px 6px 0; font: 600 18px var(--sans); color: var(--accent); text-align: center; outline: none; transition: background .15s; }
+.qf input:focus { background: rgba(200, 50, 74, .16); }
+.qf input.bad { border-bottom-style: dashed; }
+.qf .qu { font-weight: 500; color: var(--soft); }
+.qsym { font: 400 13px/1.4 var(--sans); color: var(--muted); margin-top: 2px; }
+.qsym i { font-family: var(--math); }
+.qans { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 1px; padding: 6px 4px 4px 18px; border-left: 1px solid var(--line); cursor: text; }
+.qans-l { font: 500 10px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.qans-v { display: inline-flex; align-items: baseline; gap: 4px; }
+.qans-v input { width: 3.9em; border: 0; border-bottom: 2px dashed transparent; background: none; font: 400 46px/1 var(--serif); color: var(--blue); text-align: right; outline: none; padding: 0; transition: border-color .15s; }
+.qans:hover .qans-v input, .qans-v input:focus { border-bottom-color: rgba(28, 61, 107, .45); }
+.qans-v input.bad { color: var(--accent); }
+.qans-v .pc { font: 400 30px var(--serif); color: var(--blue); }
+.qans-d { font-size: 12px; color: var(--muted); }
+.sbar-hint { font-size: 12px; color: var(--muted); margin: -2px 0 0 2px; }
+.sbar-hint.warn { color: var(--accent); }
+.stbar { font: 400 17px var(--math); color: var(--ink); padding: 4px 2px; }
+.stbar i { font-style: italic; }
+.stbar .sep { color: var(--muted); margin: 0 10px; }
+@media (max-width: 600px) {
+  .qrow { flex-direction: column; align-items: stretch; gap: 6px; }
+  .qtext { font-size: 16.5px; }
+  .qans { border-left: 0; border-top: 1px solid var(--line); padding: 8px 0 0; align-items: flex-start; }
+  .qans-v input { text-align: left; }
+  .qtypes button span { font-size: 12px; }
+}
+
+/* Högerpanelen */
+.res { padding: 4px 2px 14px; border-bottom: 1px solid var(--line); }
+.res .big { font: 400 46px/1 var(--serif); color: var(--ink); margin-top: 8px; letter-spacing: -.01em; }
+.res .big small { font: 600 15px var(--sans); color: var(--blue); margin-left: 8px; letter-spacing: 0; }
+.res p { margin: 8px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--soft); }
+.res p.words { font-size: 15px; color: var(--ink); }
+.res p i { font-family: var(--math); }
+.cmpres { margin-top: 10px; padding: 8px 10px; border-radius: 10px; background: var(--accent-soft); font-size: 13px; color: var(--soft); line-height: 1.45; }
+.cmpres b { color: var(--accent); }
+.grp { padding: 13px 0 12px; border-bottom: 1px solid var(--line); }
+.grp:last-child { border-bottom: 0; }
+.grp > .eyebrow { margin: 0 0 9px; display: flex; align-items: center; justify-content: space-between; }
+.redov { font-size: 13.5px; line-height: 1.55; color: var(--ink); background: var(--bg); border-radius: 10px; padding: 10px 12px; }
+.redov i { font-family: var(--math); }
+.copytxt { border: 0; background: none; color: var(--accent); font: 600 12px var(--sans); cursor: pointer; padding: 0; letter-spacing: 0; text-transform: none; }
+.copytxt:hover { text-decoration: underline; }
+.formel { overflow-x: auto; overflow-y: hidden; padding: 4px 0 8px; font-size: 15.5px; }
+.props { display: grid; grid-template-columns: 1fr auto; gap: 5px 10px; font-size: 13.5px; }
+.props dt { color: var(--soft); }
+.props dt i, .props dd i { font-family: var(--math); }
+.props dd { margin: 0; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+.tgl { display: flex; align-items: center; gap: 11px; padding: 7px 0; cursor: pointer; position: relative; }
+.tgl input { position: absolute; opacity: 0; pointer-events: none; }
+.sw { width: 34px; height: 20px; border-radius: 20px; background: #d8d0bf; position: relative; flex: none; transition: background .18s; }
+.sw::after { content: ''; position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, .25); transition: transform .18s; }
+.tgl input:checked + .sw { background: var(--ink); }
+.tgl input:checked + .sw::after { transform: translateX(14px); }
+.tgl input:focus-visible + .sw { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tgl .tx { font-size: 13.5px; font-weight: 500; line-height: 1.25; }
+.tgl .tx small { display: block; color: var(--muted); font-weight: 400; font-size: 12px; margin-top: 1px; }
+.tgl .tx i { font-family: var(--math); }
+.sub { margin: 4px 0 4px 14px; padding-left: 12px; border-left: 2px solid rgba(200, 50, 74, .35); }
+.seg { display: inline-flex; background: var(--bg); border-radius: 10px; padding: 3px; gap: 2px; flex-wrap: wrap; }
+.seg button { border: 0; background: none; padding: 6px 10px; border-radius: 8px; font: 500 13px var(--sans); color: var(--soft); cursor: pointer; transition: background .15s, color .15s; }
+.seg button i { font-family: var(--math); }
+.seg button.on { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(15, 22, 32, .16); }
+.optrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 5px 0; font-size: 13.5px; font-weight: 500; }
+.wbtn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line2); background: #fff; font: 600 13.5px var(--sans); color: var(--ink); cursor: pointer; transition: border-color .15s; }
+.wbtn:hover { border-color: var(--ink); }
+.wbtn.dark { background: var(--ink); color: #fff; border-color: var(--ink); }
+.wbtn.dark:hover { background: #22324a; }
+.cnt { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--soft); flex-wrap: wrap; }
+.cnt input { width: 84px; }
+.cnt-out { margin-top: 8px; font-size: 13.5px; color: var(--ink); line-height: 1.5; }
+.simstat { margin-top: 10px; }
+.tbl-wrap { max-height: 280px; overflow: auto; border: 1px solid var(--line); border-radius: 10px; margin-top: 8px; }
+table.vt { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+table.vt th { position: sticky; top: 0; background: var(--bg); font-weight: 600; color: var(--soft); padding: 6px 8px; text-align: right; }
+table.vt th:first-child, table.vt td:first-child { text-align: center; }
+table.vt th i { font-family: var(--math); }
+table.vt td { padding: 4px 8px; text-align: right; border-top: 1px solid var(--line); cursor: pointer; }
+table.vt tr.in td { background: rgba(143, 184, 216, .32); }
+table.vt tr:hover td { background: rgba(200, 50, 74, .08); }
+
+/* Statistikfliken */
+.proc-g + .proc-g { margin-top: 14px; }
+.proc { display: block; width: 100%; margin-top: 5px; padding: 8px 10px; border-radius: 10px; border: 1px solid transparent; background: none; text-align: left; cursor: pointer; font: 500 13.5px var(--sans); color: var(--ink); line-height: 1.3; transition: background .15s; }
+.proc:hover { background: var(--bg); }
+.proc.on { background: #fff; border-color: var(--accent); color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.fld { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; font-size: 13px; color: var(--soft); }
+.fld > span { line-height: 1.3; }
+.fld > span .sym { color: var(--ink); font-size: 14px; }
+.fld input, .fld select { width: 96px; flex: none; }
+.fld select { text-align: left; }
+.hyp { font: 400 15px var(--math); color: var(--ink); margin: 2px 0 8px; }
+.samp-h { font: 600 12.5px var(--sans); color: var(--ink); margin: 14px 0 0; }
+.concl { margin-top: 12px; padding: 11px 12px; border-radius: 11px; font-size: 13.5px; line-height: 1.5; }
+.concl.rej { background: rgba(200, 50, 74, .09); color: #7d1a2c; }
+.concl.keep { background: rgba(28, 61, 107, .08); color: var(--blue); }
+.concl i { font-family: var(--math); }
+.ctab { border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+.ctab td, .ctab th { padding: 3px; }
+.ctab th { font-weight: 600; color: var(--muted); font-size: 11.5px; }
+.ctab input { width: 58px; height: 32px; border-radius: 8px; border: 1px solid var(--line2); background: #fff; text-align: center; font: 500 14px var(--sans); outline: none; }
+.ctab input:focus { border-color: var(--ink); }
+.ctab .exp { font-size: 11px; color: var(--muted); text-align: center; }
+.tb-acts { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.tb-acts .wbtn { height: 30px; font-size: 12.5px; padding: 0 10px; }
+.datab textarea { width: 100%; min-height: 70px; border-radius: 10px; border: 1px solid var(--line2); padding: 8px 10px; font: 500 13.5px var(--sans); resize: vertical; outline: none; }
+.datab textarea:focus { border-color: var(--ink); }
+details.datab { margin-top: 12px; }
+details.datab summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--accent); }
+.note { font-size: 12px; color: var(--muted); line-height: 1.45; margin: 8px 0 0; }
+.note.warn { color: var(--accent); }
+
+/* ---------- Toast ---------- */
+.toast { position: fixed; left: 50%; bottom: 26px; transform: translate(-50%, 30px); opacity: 0; pointer-events: none; background: var(--ink); color: #fff; padding: 12px 16px; border-radius: 13px; font-size: 13.5px; display: flex; gap: 12px; align-items: center; box-shadow: 0 18px 40px -16px rgba(15, 22, 32, .6); transition: opacity .22s, transform .22s; z-index: 80; max-width: calc(100vw - 32px); }
+.toast.on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.toast .tk { width: 22px; height: 22px; border-radius: 50%; background: #2f9e62; display: grid; place-items: center; flex: none; }
+
+/* ---------- Mindre skärmar ---------- */
+@media (max-width: 1240px) {
+  .app { grid-template-columns: 236px minmax(0, 1fr) 286px; }
+}
+@media (max-width: 980px) {
+  .tool { height: auto; min-height: 0; }
+  .top { flex-wrap: wrap; padding: 12px 16px; gap: 12px; }
+  .titles { flex-basis: 100%; }
+  .titles h1 { font-size: 28px; }
+  .actions { width: 100%; justify-content: space-between; }
+  .primary .lbl-long { display: none; }
+  .app { grid-template-columns: minmax(0, 1fr); padding: 0 12px 24px; gap: 10px; }
+  .actions { flex-wrap: wrap; gap: 10px; }
+  .presets { margin-left: -14px; margin-right: -14px; padding-left: 14px; }
+  .pset-list { display: flex; gap: 8px; overflow-x: auto; padding: 2px 14px 8px 0; scroll-snap-type: x proximity; scrollbar-width: thin; }
+  .pset-list .pset-g { display: none; }
+  .pset-list .pset { flex: none; width: 210px; margin-top: 4px; scroll-snap-align: start; }
+  .left { order: 1; }
+  .center { order: 2; }
+  .right { order: 3; }
+  .sheet { flex: none; height: clamp(320px, 56vh, 520px); }
+  .menu { position: fixed; left: 12px; right: 12px; top: 64px; width: auto; }
+  .panel { overflow: visible; }
+}
+@media (max-width: 600px) {
+  .tabs button { padding: 8px 10px; font-size: 13px; }
+  .sheet-tag { right: 120px; font-size: 12px; }
+}
+
+/* ---------- Texten om verktyget ---------- */
+.seo { border-top: 1px solid var(--line2); background: var(--panel); }
+.seo-inner { max-width: 860px; margin: 0 auto; padding: 56px 24px 72px; color: var(--soft); font-size: 16.5px; line-height: 1.7; }
+.seo h2 { font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.15; color: var(--ink); margin: 52px 0 14px; letter-spacing: -.01em; }
+.seo h2:first-of-type { margin-top: 10px; }
+.seo p { margin: 0 0 14px; }
+.seo b { color: var(--ink); font-weight: 600; }
+.seo i { font-family: var(--math); }
+.seo-lede { font-size: 18px; color: var(--ink); }
+.seo-steps { margin: 0; padding-left: 22px; }
+.seo-steps li { margin-bottom: 10px; padding-left: 4px; }
+.seo-tbl { width: 100%; border-collapse: collapse; margin: 8px 0 18px; font-size: 15.5px; }
+.seo-tbl th, .seo-tbl td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.seo-tbl th { color: var(--ink); font-weight: 600; }
+.seo-tbl-wrap { overflow-x: auto; }
+.faq details { border-bottom: 1px solid var(--line); padding: 4px 0; }
+.faq summary { cursor: pointer; list-style: none; padding: 12px 30px 12px 0; position: relative; font-weight: 600; color: var(--ink); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; position: absolute; right: 4px; top: 8px; font-size: 22px; font-weight: 400; color: var(--accent); }
+.faq details[open] summary::after { content: '−'; }
+.faq details p { margin: 0 0 14px; }
+.seo-links { margin: 0; padding-left: 20px; }
+.seo-links a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--accent); }
+.seo-links a:hover { color: var(--accent); }
+.seo-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; padding: 10px 16px; border-radius: 11px; background: var(--ink); color: #fff; text-decoration: none; font: 600 14px var(--sans); }
+.seo-cta:hover { background: #22324a; }
+.kallor { font-size: 14px; }
+.sidfot { text-align: center; padding: 26px 16px 40px; font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.sidfot a { color: inherit; text-decoration: none; margin: 0 8px; }
+.sidfot a:hover { color: var(--ink); }
+@media (max-width: 600px) {
+  .seo-inner { padding: 40px 18px 56px; font-size: 16px; }
+  .seo h2 { font-size: 27px; }
+}
+</style>
+</head>
+<body>
+<div class="lab-header">
+  <div class="lab-header-inner">
+    <a class="lab-logo" href="../index.html">
+      <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+        <g transform="rotate(-24 18 18)">
+          <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+          <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+        </g>
+        <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+      </svg>
+      <span class="lab-logo-text">Fysiklabbet</span>
+    </a>
+    <nav class="lab-nav" aria-label="Huvudnavigation">
+      <a href="../index.html">Start</a>
+      <div class="lab-nav-dd">
+        <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">Ämne <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+        <div class="lab-nav-dd-menu">
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Fysik <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="../katalog.html#fy1">Nivå 1</a>
+              <a href="../katalog.html#fy2">Nivå 2</a>
+            </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Matematik <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="../katalog.html#ma1b">Nivå 1b</a>
+              <a href="../katalog.html#ma1c">Nivå 1c</a>
+              <a href="../katalog.html#ma2b">Nivå 2b</a>
+              <a href="../katalog.html#ma2c">Nivå 2c</a>
+            </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Matematik – fortsättning <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="../katalog.html#ma3c">Nivå 1c</a>
+              <a href="../katalog.html#ma4">Nivå 2</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="../simuleringar.html">Simuleringar</a>
+      <a href="../np.html">Nationella prov</a>
+      <div class="lab-nav-dd">
+        <button type="button" class="lab-nav-dd-trigger aktiv" aria-haspopup="true">
+          Resurser
+          <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+        </button>
+        <div class="lab-nav-dd-menu">
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">
+              Verktyg
+              <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+            </button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="../kopplingsschema.html">Kopplingsschema</a>
+                          </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">
+              Övningsblad
+              <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+            </button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="../ovningsblad.html#fysik">Fysik</a>
+              <a href="../ovningsblad.html#matematik">Matematik</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="../nyheter.html">Fysiknyheter</a>
+      <a href="../om.html">Om</a>
+      <a href="../kontakt.html">Kontakt</a>
+    </nav>
+  </div>
+</div>
+
+<section class="tool" id="verktyget" aria-label="Sannolikhetskalkylatorn">
+<header class="top">
+  <div class="titles">
+    <h1>Sannolikhets<em>kalkylator</em></h1>
+    <p>Räkna med normalfördelningen och fjorton andra fördelningar. Dra i gränserna eller skriv in dem, så syns andelen direkt.</p>
+  </div>
+  <div class="actions">
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" data-tab="fordelning" class="on">Fördelningar</button>
+      <button type="button" role="tab" data-tab="statistik">Test och intervall</button>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="ibtn" id="resetBtn" title="Börja om med standardnormalfördelningen" aria-label="Börja om"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+      <div class="split">
+        <button class="primary" id="copyBtn" title="Kopiera grafen som bild">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="13" height="13" rx="2.5"/><path d="M16 8V5.5A2.5 2.5 0 0 0 13.5 3h-8A2.5 2.5 0 0 0 3 5.5v8A2.5 2.5 0 0 0 5.5 16H8"/></svg>
+          <span>Kopiera <span class="lbl-long">bild</span></span>
+        </button>
+        <button class="primary more" id="moreBtn" aria-label="Fler sätt att spara" title="Fler sätt att spara"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="menu" id="exportMenu"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="app">
+  <aside class="panel left" id="left" aria-label="Fördelning och parametrar"></aside>
+  <section class="center">
+    <div class="sheet" id="sheet" aria-label="Grafen">
+      <svg id="svg" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="sheet-tag" id="sheetTag"></div>
+      <div class="zoom">
+        <button type="button" id="zoomOut" title="Zooma ut" aria-label="Zooma ut"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+        <button type="button" id="zoomIn" title="Zooma in" aria-label="Zooma in"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M12 5v14"/></svg></button>
+        <button type="button" id="zoomFit" title="Anpassa vyn efter kurvan" aria-label="Anpassa vyn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+      </div>
+      <div class="tip" id="tip"></div>
+    </div>
+    <div class="sbar" id="sbar"></div>
+  </section>
+  <aside class="panel right" id="right" aria-label="Resultat och fler verktyg"></aside>
+</main>
+</section>
+
+<article class="seo" id="om-verktyget">
+  <div class="seo-inner">
+    <h2>Räkna med normalfördelning online</h2>
+    <p class="seo-lede">Sannolikhetskalkylatorn räknar ut hur stor andel av värdena i en fördelning som ligger inom ett visst intervall. Skriv in medelvärdet och standardavvikelsen, dra i gränserna, och se andelen som en färgad area under normalfördelningskurvan. Samma verktyg klarar binomialfördelning, Poissonfördelning, <i>t</i>-fördelning, chitvåfördelning och tio fördelningar till, och det gör hypotesprövningar och konfidensintervall.</p>
+    <a class="seo-cta" href="#verktyget">Öppna sannolikhetskalkylatorn</a>
+
+    <h2>Så använder du kalkylatorn</h2>
+    <ol class="seo-steps">
+      <li><b>Välj fördelning</b> och skriv in parametrarna, för normalfördelningen medelvärdet <i>μ</i> och standardavvikelsen <i>σ</i>. Dra i reglagen så ser du hur kurvan ändras: liten spridning ger en hög och smal kurva, stor spridning en låg och bred.</li>
+      <li><b>Välj intervalltyp</b> med knapparna under grafen.</li>
+      <li><b>Skriv in gränserna</b> eller dra i de röda handtagen i grafen. Andelen visas direkt, som decimaltal och i procent.</li>
+      <li><b>Söker du en gräns</b> i stället för en andel skriver du andelen i fältet efter likhetstecknet, till exempel 0,99. Då räknas gränsen ut.</li>
+      <li><b>Kopiera bilden</b> och klistra in den i Word, PowerPoint eller Google Dokument, eller kopiera redovisningen i högerspalten.</li>
+    </ol>
+
+    <h2>Fyra intervalltyper</h2>
+    <div class="seo-tbl-wrap">
+    <table class="seo-tbl">
+      <thead><tr><th>Intervalltyp</th><th>Exempelformulering</th></tr></thead>
+      <tbody>
+        <tr><td>Öppet åt vänster</td><td>Hur många procent är mindre än <i>x</i>?</td></tr>
+        <tr><td>Intervall</td><td>Hur många procent ligger mellan <i>x</i> och <i>y</i>?</td></tr>
+        <tr><td>Intervallkomplement</td><td>Hur många procent är mindre än <i>x</i> eller större än <i>y</i>?</td></tr>
+        <tr><td>Öppet åt höger</td><td>Hur många procent är större än <i>x</i>?</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h2>Normalfördelningens procentsatser</h2>
+    <p>I en normalfördelning ligger 68,3 % av värdena inom en standardavvikelse från medelvärdet, 95,4 % inom två och 99,7 % inom tre. Slå på <b>Visa <i>μ</i> ± <i>σ</i></b> i högerspalten så markeras gränserna i grafen. Ligger gränserna inte på hela standardavvikelser behövs ett digitalt verktyg, och det är vad kalkylatorn är till för.</p>
+
+    <h2>Exempel med riktiga data</h2>
+    <p>Exemplen i vänsterspalten bygger på uppmätta värden. Längden hos svenska kvinnor och män kommer från en undersökning av Statistiska centralbyrån 1998–2000, där kvinnorna i åldern 16–84 år hade medellängden 165,5 cm med standardavvikelsen 6,15 cm och männen medellängden 179,0 cm med standardavvikelsen 6,85 cm. Med exemplet där de jämförs ser du båda kurvorna i samma graf.</p>
+
+    <h2>Hypotesprövning och konfidensintervall</h2>
+    <p>Under fliken <b>Test och intervall</b> finns <i>z</i>-test och <i>t</i>-test för medelvärden och andelar, konfidensintervall och chitvåtest för anpassning och oberoende. Grafen visar nollhypotesens fördelning med det kritiska området och teststorhetens läge, så att <i>p</i>-värdet syns som en area.</p>
+
+    <h2>Vanliga frågor</h2>
+    <div class="faq">
+      <details><summary>Hur räknar man ut en andel i en normalfördelning?</summary><p>Skriv in medelvärdet och standardavvikelsen, välj intervalltyp och skriv in gränserna. Andelen är arean under kurvan mellan gränserna, och den visas både som decimaltal och i procent. Ligger gränserna på hela standardavvikelser från medelvärdet går det också att räkna för hand med procentsatserna 34,1 %, 13,6 % och 2,3 %.</p></details>
+      <details><summary>Hur hittar man gränsen när andelen är känd?</summary><p>Skriv in andelen i fältet efter likhetstecknet, till exempel 0,99 eller 99 %. Då räknas gränsen ut i stället. Med öppet åt vänster får du värdet som 99 % ligger under, och med intervall får du ett intervall kring medelvärdet som rymmer 99 %.</p></details>
+      <details><summary>Vad är skillnaden mellan intervall och intervallkomplement?</summary><p>Intervall ger andelen mellan två gränser. Intervallkomplement ger andelen utanför gränserna, alltså mindre än den undre gränsen eller större än den övre. De två andelarna blir tillsammans 100 %.</p></details>
+      <details><summary>Måste decimaltal skrivas med punkt?</summary><p>Nej. Här går det bra att skriva decimaltal med kommatecken, som 165,5, eller med punkt. Sannolikheter kan skrivas som decimaltal, i procent eller som bråk, till exempel 1/6.</p></details>
+      <details><summary>Kostar verktyget något?</summary><p>Nej. Verktyget är gratis och kräver inget konto. Inställningarna sparas i din webbläsare, och du kan dela exakt det du ser som en länk.</p></details>
+    </div>
+
+    <h2>Läs mer</h2>
+    <ul class="seo-links">
+      <li><a href="../katalog.html?id=ma2c-6.5">Normalfördelning</a></li>
+      <li><a href="../katalog.html?id=ma4-3.6">Normalfördelning i Matematik fortsättning nivå 2</a></li>
+    </ul>
+
+    <h2>Källor till exemplen</h2>
+    <ul class="kallor">
+      <li>Längd: Statistiska centralbyrån, undersökning 1998–2000 av svenska kvinnor och män i åldern 16–84 år.</li>
+      <li>Kroppstemperatur: Mackowiak, Wasserman och Levine, <i>JAMA</i> 268 (1992), 700 mätningar i munnen hos 148 friska vuxna.</li>
+      <li>IQ: testerna normeras så att medelvärdet blir 100 och standardavvikelsen 15.</li>
+      <li>Fotbolls-VM 2022: 172 mål på 64 matcher.</li>
+      <li>Hästsparkar: Ladislaus von Bortkiewicz, <i>Das Gesetz der kleinen Zahlen</i> (1898), 122 dödsfall på 200 kårår i den preussiska armén 1875–1894.</li>
+      <li>Radon-222: halveringstiden 3,82 dygn.</li>
+    </ul>
+  </div>
+</article>
+<footer class="sidfot"><a href="../index.html">Fysiklabbet</a>·<a href="../om.html">Om</a>·<a href="../kontakt.html">Kontakt</a></footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
+     webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
+<script src="sannolikhetskalkylator.js?v=202609301900"></script>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

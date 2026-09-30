@@ -1596,6 +1596,12 @@ simuleringar och nyhetsartiklar.
 - Skriv `\alpha` i KaTeX (`\\alpha` i JS-strängar) och α i SVG-etiketter,
   kursivt som alla andra variabler (`<tspan font-style="italic">α</tspan>`).
 - **Vinkeländringar** följer med: `$\Delta \alpha$`, aldrig `$\Delta \theta$`.
+- **Behövs en andra vinkel tar du β, sedan γ, aldrig någon annan grekisk
+  bokstav** (påpekat 2026-09-30: kaströrelseuppgifterna i ett övningsblad
+  betecknade landningsvinkeln med *φ*, som eleverna inte känner igen).
+  Den första vinkeln som förekommer i uppgiften, till exempel utkastvinkeln
+  eller backens lutning, får α. Nästa vinkel, till exempel hastighetens
+  vinkel vid landningen, får β.
 - **Undantag:** en beteckning som hör till en etablerad formel där något
   annat är standard behålls — sfäriska koordinater, fasvinkeln *φ* i
   svängningar, *λ* för våglängd. Det är *θ* som generell vinkelbeteckning
@@ -3419,6 +3425,56 @@ styckar orden i `<span>`-taggar och då hittas de inte längre (se
 17. [ ] **Cloudflares mättagg före `</body>`** — kopiera de tre raderna från
     `fysik1-densitet-app.html`. Utan dem finns sidan inte i besöksstatistiken,
     och det syns inte på sidan. Kör `node .claude/verify-analytics.js`.
+
+## Övningsblad: lösningsförslagen ska gå att följa rad för rad
+
+**Lösningsförslagen till ett övningsblad (`ovningsblad/`, byggda av
+`.claude/bygg-ovningsblad*.js`) ska vara pedagogiska ända ned till minsta
+steg, också när uppgifterna är avsedda för de starkaste eleverna**
+(uttryckligt önskemål 2026-09-30, efter bladet "Kapitel 1, avancerade
+uppgifter" i Fysik nivå 2). En elev som kör fast ska kunna följa varje rad
+utan att gissa varifrån ett uttryck kom. Referens:
+`.claude/bygg-ovningsblad-fy2-kap1-avancerad.js`.
+
+**Nivåerna heter Grund, Mellan och Avancerad, aldrig E, C eller A**
+(uttryckligt önskemål 2026-09-30). Betyg sätts på en avslutad kurs, inte på
+enskilda uppgifter, så en betygsbokstav får aldrig stå i ett blads titel,
+rubriker, filnamn, beskrivning i `data/ovningsblad.js` eller i mejlet som
+skickar bladet. Gäller även när beställningen själv säger "E-, C- och
+A-nivå". Referens för ett blad med alla tre nivåerna:
+`.claude/bygg-ovningsblad-potenser.js`.
+
+1. **Hjälpfigur i uppgiften** när situationen inte är självklar i ord: en
+   kroppsdel, en apparat, en attraktion eller en geometri ska ritas, inte
+   bara beskrivas (uppgift 1 och 5 i referensbladet saknade figur, påpekat).
+2. **Figur i lösningen med alla beteckningar som lösningen använder.**
+   - *Kraftmoment:* förutom kraftfiguren en egen **hävarmsfigur** där
+     krafternas verkningslinjer är streckade och hävarmarna ritas som
+     måttlinjer (turkosa) med sina beteckningar (*l*_N2, *l*_G …), plus
+     längder och vinklar (*L*, *x*, *α*). Krafter som angriper i
+     vridningspunkten utelämnas där, och bildtexten säger varför.
+   - *Komposantuppdelning:* en utlyft krafttriangel bredvid kroppen, med
+     vinkeln *α* och komposanterna utskrivna (*F*_G · sin *α*).
+   - *Kaströrelse:* koordinatsystemet med origo, punktens koordinater och
+     hastighetens komposanter *v*_x, *v*_y med vinkeln.
+   - Krafterna i skala; kan en kraft inte synas i skala säger bildtexten det.
+3. **Numrera ekvationerna** som används igen (`\tag{n}`), och **skriv varje
+   insättning i ord**: "$F_f = F_{N2}$ från (2) och $F_{N1} = (m + m_P) \cdot g$
+   från (1) insatta i (3) ger", följt av ekvationen. Aldrig ett uttryck som
+   bara dyker upp.
+4. **En ekvationsoperation per rad, i båda led, med operationen i fetstil**
+   (samma princip som "Båda led" i pennlösningarna). Skriv tecknet som
+   `\mathbin{\boldsymbol{-}} \boldsymbol{…}`, annars tappar KaTeX
+   mellanrummet runt tecknet och raden ser hopträngd ut.
+5. **Motivera varje samband innan det används:** vilken sida som är
+   motstående/närliggande katet eller hypotenusa, varför en kraft saknar
+   moment, varför en kraft är centripetalkraften, att en vinkel är lika med
+   lutningen och så vidare. Kort, en mening, och med stöd i figuren.
+6. **Svar efter varje deluppgift** och en rimlighetsbedömning före svaret.
+7. **Ingen display-formel får vara bredare än utskriftsspalten.** Mät med
+   fönstret 700 px brett (`.katex-display` med `scrollWidth > clientWidth`)
+   och dela för breda rader. En för bred formel klipps i PDF:en utan att
+   något ser trasigt ut i webbläsaren.
 
 ## Övningar
 

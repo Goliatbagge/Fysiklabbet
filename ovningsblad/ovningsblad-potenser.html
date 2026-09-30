@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Övningsblad: Potenser — Fysiklabbet</title>
+<meta name="description" content="63 uppgifter om potenser i Matematik nivå 1c på tre nivåer: exponenten noll, negativa exponenter och ekvationer som löses med potenslagarna. Med svar och lösningsförslag. Utskriftsklart.">
+<link rel="canonical" href="https://fysiklabbet.se/ovningsblad/ovningsblad-potenser.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  renderMathInElement(document.body, {
+    delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
+    throwOnError: false
+  });
+  document.documentElement.setAttribute('data-katex', 'klar');
+});
+</script>
+<style>
+:root { --ink:#1f2530; --paper:#f7f2e8; --line:rgba(31,37,48,.22); --teal:#0d9488; }
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin:0; font-family:'Poppins', system-ui, sans-serif; color:var(--ink); background:#fff; font-size:11pt; line-height:1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { max-width: 186mm; margin: 0 auto; padding: 10mm 6mm 20mm; }
+header { border-bottom: 2px solid var(--ink); padding-bottom: 6px; margin-bottom: 12px; }
+.over { font-size: 9.5pt; text-transform: uppercase; letter-spacing: .06em; color:#5b6472; margin:0; }
+h1 { font-size: 20pt; margin: 2px 0 0; line-height:1.2; }
+.under { margin: 2px 0 0; font-size: 11pt; color:#3b4350; }
+.namn { display:flex; gap: 28px; margin-top: 8px; font-size: 10pt; color:#3b4350; }
+.namn span { flex:1; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.box { background: var(--paper); border: 1px solid rgba(31,37,48,.18); border-radius: 8px; padding: 8px 14px; margin: 0 0 10px; break-inside: avoid; }
+.box p { margin: 3px 0; }
+.boxgrid { display:grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
+.box ul { margin: 2px 0 2px 16px; padding: 0; }
+.box li { margin: 1px 0; }
+.box .katex-display { margin: 2px 0 3px; text-align:left; }
+.box .katex-display > .katex { text-align:left; }
+.rub { font-weight: 600; }
+.nivaer { font-size: 9.5pt; color:#3b4350; margin: 0 0 6px; }
+.niva { margin-bottom: 6px; }
+h2 { display:flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; font-size: 13pt; margin: 14px 0 4px; padding: 3px 0; border-bottom: 1.4px solid var(--ink); break-after: avoid; }
+h2 .nivanamn { color: var(--teal); }
+h2 .sv { font-weight: 400; font-size: 9pt; color:#5b6472; }
+.instr { font-weight: 600; margin: 8px 0 3px; break-after: avoid; }
+.tasks { display: grid; gap: 4px 14px; }
+.c1 { grid-template-columns: 1fr; } .c2 { grid-template-columns: repeat(2, 1fr); }
+.c3 { grid-template-columns: repeat(3, 1fr); } .c4 { grid-template-columns: repeat(4, 1fr); }
+.task { break-inside: avoid; padding: 4px 4px 0; border-bottom: 1px dotted var(--line); display:flex; gap: 6px; align-items: baseline; }
+.task .nr { font-weight: 600; min-width: 1.7em; text-align:right; font-size: 10pt; }
+.task .eq { flex:1; min-width: 0; }
+.task .katex, .sol p .katex, .svarlista .katex, .box p .katex, .box li .katex { white-space: nowrap; }
+.kort { min-height: 16mm; } .mellan { min-height: 30mm; } .hog { min-height: 44mm; }
+.facit { break-before: page; page-break-before: always; }
+.facit h2 { font-size: 14pt; }
+.svarniva, .losniva { font-size: 11pt; margin: 8px 0 3px; color: var(--teal); break-after: avoid; }
+.svarlista { display:grid; grid-template-columns: repeat(4, 1fr); gap: 2px 12px; font-size: 9.8pt; margin-bottom: 6px; }
+.svarlista div { display:flex; gap: 6px; align-items: center; min-height: 9mm; }
+.svarlista div.lang { grid-column: span 2; }
+.svarlista .nr { font-weight: 600; min-width: 1.7em; text-align:right; }
+.los { columns: 2; column-gap: 10mm; font-size: 9.8pt; }
+.sol { break-inside: avoid; page-break-inside: avoid; margin: 0 0 8px; padding: 0 0 5px; border-bottom: 1px dotted var(--line); }
+.sol .solh { font-weight: 600; margin: 0 0 1px; }
+.sol .solh .nr { margin-right: 4px; }
+.sol p { margin: 2px 0; }
+.sol .del { font-weight: 700; margin: 5px 0 1px; }
+.sol .kontroll { color:#3b4350; }
+.sol .katex-display { margin: 2px 0 3px; text-align: left; padding-left: 3mm; overflow-x: auto; overflow-y: hidden; padding-bottom: 2px; }
+.sol .katex-display > .katex { text-align: left; }
+.sol .svar { margin: 3px 0 0; }
+footer { margin-top: 18px; font-size: 9pt; color:#5b6472; border-top: 1px solid var(--line); padding-top: 6px; display:flex; justify-content: space-between; }
+@page { size: A4; margin: 13mm 12mm 14mm; }
+@media print {
+  body { font-size: 10.5pt; }
+  .page { max-width: none; padding: 0; }
+}
+@media (max-width: 640px) {
+  .c3, .c4 { grid-template-columns: repeat(2, 1fr); }
+  .c2, .c3:has(.hog) { grid-template-columns: 1fr; }
+  .boxgrid { grid-template-columns: 1fr; }
+  .svarlista { grid-template-columns: repeat(2, 1fr); }
+  .los { columns: 1; }
+  .sol .katex-display { padding-left: 0; }
+}
+</style>
+</head>
+<body>
+<section class="page">
+  <header>
+    <p class="over">Matematik nivå 1c · Övningsblad</p>
+    <h1>Potenser</h1>
+    <p class="under">Exponenten noll, negativa exponenter och ekvationer med potenslagarna</p>
+    <div class="namn"><span>Namn:</span><span>Klass:</span></div>
+  </header>
+  <div class="box boxgrid">
+    <div>
+      <p class="rub">Kom ihåg</p>
+      <ul>
+        <li>$a^0 = 1$ för alla $a \neq 0$, inte 0.</li>
+        <li>$a^{-n} = \dfrac{1}{a^n}$, så $2^{-3} = \dfrac{1}{8}$. Talet blir inte negativt.</li>
+        <li>$\left(\dfrac{a}{b}\right)^{-1} = \dfrac{b}{a}$, att invertera bråket.</li>
+        <li>$a^x \cdot a^y = a^{x+y}$, $\dfrac{a^x}{a^y} = a^{x-y}$, $(a^x)^y = a^{x \cdot y}$, $(ab)^x = a^x b^x$</li>
+        <li>Lagarna gäller för multiplikation och division, aldrig för en summa.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="rub">Exempel: lös ekvationen $4^x \cdot 2 = 2^{-5}$</p>
+      <p>Skriv allt med samma bas, $4 = 2^2$:</p>
+      $$2^{2x} \cdot 2^1 = 2^{-5}$$
+      $$2^{2x+1} = 2^{-5}$$
+      <p>Samma bas i båda led, så exponenterna är lika:</p>
+      $$2x + 1 = -5$$
+      $$2x + 1 \mathbin{\boldsymbol{-}} \boldsymbol{1} = -5 \mathbin{\boldsymbol{-}} \boldsymbol{1} \quad\text{ger}\quad 2x = -6$$
+      $$\frac{2x}{\boldsymbol{2}} = \frac{-6}{\boldsymbol{2}} \quad\text{ger}\quad x = -3$$
+    </div>
+  </div>
+  <p class="nivaer"><b>Grund</b> tränar reglerna en i taget. <b>Mellan</b> blandar reglerna och har några vanliga fällor. <b>Avancerad</b> kräver att du kombinerar flera potenslagar och resonerar generellt. Räkna utan räknare. Svar och lösningsförslag finns efter uppgifterna.</p>
+
+  <section class="niva">
+    <h2><span class="nivanamn">Grund</span><span class="sv">Uppgift 1–26 · Exponenten noll, negativa exponenter, potenslagarna och ekvationer med samma bas</span></h2>
+    <p class="instr">Beräkna utan räknare.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">1</span><span class="eq">$7^0$</span></div>
+      <div class="task kort"><span class="nr">2</span><span class="eq">$2^{-1}$</span></div>
+      <div class="task kort"><span class="nr">3</span><span class="eq">$3^{-2}$</span></div>
+      <div class="task kort"><span class="nr">4</span><span class="eq">$10^{-3}$</span></div>
+      <div class="task kort"><span class="nr">5</span><span class="eq">$4^0 + 4^{-1}$</span></div>
+      <div class="task kort"><span class="nr">6</span><span class="eq">$2^{-3}$</span></div>
+      <div class="task kort"><span class="nr">7</span><span class="eq">$5^0 \cdot 5^{-2}$</span></div>
+      <div class="task kort"><span class="nr">8</span><span class="eq">$1^{-5}$</span></div>
+    </div>
+    <p class="instr">Skriv som en enda potens.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">9</span><span class="eq">$5^3 \cdot 5^4$</span></div>
+      <div class="task kort"><span class="nr">10</span><span class="eq">$\dfrac{2^9}{2^3}$</span></div>
+      <div class="task kort"><span class="nr">11</span><span class="eq">$(3^2)^4$</span></div>
+      <div class="task kort"><span class="nr">12</span><span class="eq">$x^2 \cdot x^5$</span></div>
+      <div class="task kort"><span class="nr">13</span><span class="eq">$\dfrac{a^3}{a^5}$</span></div>
+      <div class="task kort"><span class="nr">14</span><span class="eq">$\dfrac{7^4}{7^4}$</span></div>
+      <div class="task kort"><span class="nr">15</span><span class="eq">$6 \cdot 6^3$</span></div>
+      <div class="task kort"><span class="nr">16</span><span class="eq">$(x^3)^2 \cdot x$</span></div>
+    </div>
+    <p class="instr">Skriv som en potens med negativ exponent.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">17</span><span class="eq">$\dfrac{1}{2^5}$</span></div>
+      <div class="task kort"><span class="nr">18</span><span class="eq">$\dfrac{1}{x^3}$</span></div>
+      <div class="task kort"><span class="nr">19</span><span class="eq">$\dfrac{1}{10}$</span></div>
+      <div class="task kort"><span class="nr">20</span><span class="eq">$\dfrac{4}{x}$</span></div>
+    </div>
+    <p class="instr">Lös ekvationerna.</p>
+    <div class="tasks c3">
+      <div class="task mellan"><span class="nr">21</span><span class="eq">$2^x = 2^5$</span></div>
+      <div class="task mellan"><span class="nr">22</span><span class="eq">$3^x \cdot 3^2 = 3^6$</span></div>
+      <div class="task mellan"><span class="nr">23</span><span class="eq">$\dfrac{5^x}{5^2} = 5^4$</span></div>
+      <div class="task mellan"><span class="nr">24</span><span class="eq">$7^x = 1$</span></div>
+      <div class="task mellan"><span class="nr">25</span><span class="eq">$2^x = \dfrac{1}{2^3}$</span></div>
+      <div class="task mellan"><span class="nr">26</span><span class="eq">$(4^x)^2 = 4^{10}$</span></div>
+    </div>
+  </section>
+
+  <section class="niva">
+    <h2><span class="nivanamn">Mellan</span><span class="sv">Uppgift 27–50 · Teckenfällor, bråk med negativ exponent, byte till samma bas och resonemang</span></h2>
+    <p class="instr">Beräkna utan räknare.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">27</span><span class="eq">$(-3)^0$</span></div>
+      <div class="task kort"><span class="nr">28</span><span class="eq">$-3^0$</span></div>
+      <div class="task kort"><span class="nr">29</span><span class="eq">$\left(\dfrac{2}{3}\right)^{-1}$</span></div>
+      <div class="task kort"><span class="nr">30</span><span class="eq">$\left(\dfrac{1}{2}\right)^{-3}$</span></div>
+      <div class="task kort"><span class="nr">31</span><span class="eq">$2^{-1} + 2^{-2}$</span></div>
+      <div class="task kort"><span class="nr">32</span><span class="eq">$\left(\dfrac{3}{4}\right)^{-2}$</span></div>
+      <div class="task kort"><span class="nr">33</span><span class="eq">$10^{-2} \cdot 10^5$</span></div>
+      <div class="task kort"><span class="nr">34</span><span class="eq">$6 \cdot 6^{-2}$</span></div>
+    </div>
+    <p class="instr">Förenkla så långt som möjligt. Svara utan negativa exponenter.</p>
+    <div class="tasks c3">
+      <div class="task kort"><span class="nr">35</span><span class="eq">$x^{-3} \cdot x^5$</span></div>
+      <div class="task kort"><span class="nr">36</span><span class="eq">$\dfrac{x^2}{x^{-4}}$</span></div>
+      <div class="task kort"><span class="nr">37</span><span class="eq">$(a^{-2})^3$</span></div>
+      <div class="task kort"><span class="nr">38</span><span class="eq">$(2x^{-1})^3$</span></div>
+      <div class="task kort"><span class="nr">39</span><span class="eq">$\dfrac{12x^3}{4x^5}$</span></div>
+      <div class="task kort"><span class="nr">40</span><span class="eq">$(5x)^0 + x^0$</span></div>
+    </div>
+    <p class="instr">Lös ekvationerna. Skriv först båda led som potenser med samma bas.</p>
+    <div class="tasks c3">
+      <div class="task mellan"><span class="nr">41</span><span class="eq">$2^x = 32$</span></div>
+      <div class="task mellan"><span class="nr">42</span><span class="eq">$3^x = \dfrac{1}{9}$</span></div>
+      <div class="task mellan"><span class="nr">43</span><span class="eq">$10^x = 0{,}001$</span></div>
+      <div class="task mellan"><span class="nr">44</span><span class="eq">$4^x = 2^6$</span></div>
+      <div class="task mellan"><span class="nr">45</span><span class="eq">$5^{x+1} = 125$</span></div>
+      <div class="task mellan"><span class="nr">46</span><span class="eq">$9^x = 27$</span></div>
+    </div>
+    <p class="instr">Lös ekvationerna.</p>
+    <div class="tasks c2">
+      <div class="task mellan"><span class="nr">47</span><span class="eq">$x^{-1} = \dfrac{1}{6}$</span></div>
+      <div class="task mellan"><span class="nr">48</span><span class="eq">$x^{-2} = \dfrac{1}{9}$</span></div>
+    </div>
+    <p class="instr">Resonera och förklara.</p>
+    <div class="tasks c1">
+      <div class="task hog"><span class="nr">49</span><span class="eq txt">Ordna talen i storleksordning, med det minsta först:&emsp;$3^{-2}$,&ensp;$\left(\dfrac{1}{2}\right)^{-2}$,&ensp;$0^5$,&ensp;$2^{-3}$,&ensp;$4^0$</span></div>
+      <div class="task hog"><span class="nr">50</span><span class="eq txt">Elin skriver $5^{-2} = -25$ och Ali skriver $8^0 = 0$. Förklara vad de har gjort för fel och beräkna rätt värden.</span></div>
+    </div>
+  </section>
+
+  <section class="niva">
+    <h2><span class="nivanamn">Avancerad</span><span class="sv">Uppgift 51–63 · Flera potenslagar i samma uppgift, ekvationer med olika baser och generella resonemang</span></h2>
+    <p class="instr">Lös ekvationerna.</p>
+    <div class="tasks c3">
+      <div class="task hog"><span class="nr">51</span><span class="eq">$2^x \cdot 4^3 = 8^5$</span></div>
+      <div class="task hog"><span class="nr">52</span><span class="eq">$3^{2x-1} = 27^{x-2}$</span></div>
+      <div class="task hog"><span class="nr">53</span><span class="eq">$\left(\dfrac{1}{4}\right)^{x} = 32$</span></div>
+      <div class="task hog"><span class="nr">54</span><span class="eq">$\dfrac{25^x}{5^3} = \dfrac{1}{125}$</span></div>
+      <div class="task hog"><span class="nr">55</span><span class="eq">$4^x + 4^x + 4^x + 4^x = 2^{12}$</span></div>
+      <div class="task hog"><span class="nr">56</span><span class="eq">$3^x \cdot 9^x = \dfrac{1}{27}$</span></div>
+    </div>
+    <p class="instr">Förenkla så långt som möjligt. Svara utan negativa exponenter.</p>
+    <div class="tasks c2">
+      <div class="task mellan"><span class="nr">57</span><span class="eq">$\left(2^{-1} + 2^{-2}\right)^{-1}$</span></div>
+      <div class="task mellan"><span class="nr">58</span><span class="eq">$(x^{-2}y^3)^{-2} \cdot x^{-4}y^6$</span></div>
+      <div class="task mellan"><span class="nr">59</span><span class="eq">$\dfrac{(a^3 b^{-2})^2}{(a^{-1} b)^{-3}}$</span></div>
+      <div class="task mellan"><span class="nr">60</span><span class="eq">$\dfrac{8^n \cdot 2^{-n}}{4^{n+1}}$</span></div>
+    </div>
+    <p class="instr">Visa, lös och motivera.</p>
+    <div class="tasks c1">
+      <div class="task hog"><span class="nr">61</span><span class="eq txt">Talet $n$ är ett heltal.<br>a) Visa att $5^{n+1} - 5^n = 4 \cdot 5^n$ för alla heltal $n$.<br>b) Bestäm $n$ så att $5^{n+1} - 5^n = 100$.</span></div>
+      <div class="task hog"><span class="nr">62</span><span class="eq txt">Lös ekvationerna.<br>a)&nbsp;$x^{-3} = \dfrac{8}{27}$&emsp;&emsp;b)&nbsp;$2x^{-4} = 32$</span></div>
+      <div class="task hog"><span class="nr">63</span><span class="eq txt">Vilket tal är störst, $2^{-10}$ eller $10^{-3}$? Motivera utan räknare.</span></div>
+    </div>
+  </section>
+  <section class="facit">
+    <h2><span>Svar</span></h2>
+
+    <h3 class="svarniva">Grund</h3>
+    <div class="svarlista"><div><span class="nr">1</span><span>1</span></div><div><span class="nr">2</span><span>$\dfrac{1}{2}$</span></div><div><span class="nr">3</span><span>$\dfrac{1}{9}$</span></div><div><span class="nr">4</span><span>0,001</span></div><div><span class="nr">5</span><span>$\dfrac{5}{4}$</span></div><div><span class="nr">6</span><span>$\dfrac{1}{8}$</span></div><div><span class="nr">7</span><span>$\dfrac{1}{25}$</span></div><div><span class="nr">8</span><span>1</span></div><div><span class="nr">9</span><span>$5^7$</span></div><div><span class="nr">10</span><span>$2^6$</span></div><div><span class="nr">11</span><span>$3^8$</span></div><div><span class="nr">12</span><span>$x^7$</span></div><div><span class="nr">13</span><span>$a^{-2}$</span></div><div><span class="nr">14</span><span>$7^0 = 1$</span></div><div><span class="nr">15</span><span>$6^4$</span></div><div><span class="nr">16</span><span>$x^7$</span></div><div><span class="nr">17</span><span>$2^{-5}$</span></div><div><span class="nr">18</span><span>$x^{-3}$</span></div><div><span class="nr">19</span><span>$10^{-1}$</span></div><div><span class="nr">20</span><span>$4x^{-1}$</span></div><div><span class="nr">21</span><span>$x = 5$</span></div><div><span class="nr">22</span><span>$x = 4$</span></div><div><span class="nr">23</span><span>$x = 6$</span></div><div><span class="nr">24</span><span>$x = 0$</span></div><div><span class="nr">25</span><span>$x = -3$</span></div><div><span class="nr">26</span><span>$x = 5$</span></div></div>
+    <h3 class="svarniva">Mellan</h3>
+    <div class="svarlista"><div><span class="nr">27</span><span>1</span></div><div><span class="nr">28</span><span>$-1$</span></div><div><span class="nr">29</span><span>$\dfrac{3}{2}$</span></div><div><span class="nr">30</span><span>8</span></div><div><span class="nr">31</span><span>$\dfrac{3}{4}$</span></div><div><span class="nr">32</span><span>$\dfrac{16}{9}$</span></div><div><span class="nr">33</span><span>1 000</span></div><div><span class="nr">34</span><span>$\dfrac{1}{6}$</span></div><div><span class="nr">35</span><span>$x^2$</span></div><div><span class="nr">36</span><span>$x^6$</span></div><div><span class="nr">37</span><span>$\dfrac{1}{a^6}$</span></div><div><span class="nr">38</span><span>$\dfrac{8}{x^3}$</span></div><div><span class="nr">39</span><span>$\dfrac{3}{x^2}$</span></div><div><span class="nr">40</span><span>2</span></div><div><span class="nr">41</span><span>$x = 5$</span></div><div><span class="nr">42</span><span>$x = -2$</span></div><div><span class="nr">43</span><span>$x = -3$</span></div><div><span class="nr">44</span><span>$x = 3$</span></div><div><span class="nr">45</span><span>$x = 2$</span></div><div><span class="nr">46</span><span>$x = \dfrac{3}{2}$</span></div><div><span class="nr">47</span><span>$x = 6$</span></div><div><span class="nr">48</span><span>$x = \pm 3$</span></div><div class="lang"><span class="nr">49</span><span>$0^5,\ 3^{-2},\ 2^{-3},\ 4^0,\ \left(\dfrac{1}{2}\right)^{-2}$</span></div><div class="lang"><span class="nr">50</span><span>$5^{-2} = \dfrac{1}{25}$ och $8^0 = 1$</span></div></div>
+    <h3 class="svarniva">Avancerad</h3>
+    <div class="svarlista"><div><span class="nr">51</span><span>$x = 9$</span></div><div><span class="nr">52</span><span>$x = 5$</span></div><div><span class="nr">53</span><span>$x = -\dfrac{5}{2}$</span></div><div><span class="nr">54</span><span>$x = 0$</span></div><div><span class="nr">55</span><span>$x = 5$</span></div><div><span class="nr">56</span><span>$x = -1$</span></div><div><span class="nr">57</span><span>$\dfrac{4}{3}$</span></div><div><span class="nr">58</span><span>1</span></div><div><span class="nr">59</span><span>$\dfrac{a^3}{b}$</span></div><div><span class="nr">60</span><span>$\dfrac{1}{4}$</span></div><div><span class="nr">61</span><span>b) $n = 2$</span></div><div class="lang"><span class="nr">62</span><span>a) $x = \dfrac{3}{2}$&emsp;b) $x = \pm\dfrac{1}{2}$</span></div><div><span class="nr">63</span><span>$10^{-3}$</span></div></div>
+    <h2><span>Lösningsförslag</span></h2>
+
+    <h3 class="losniva">Grund</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">1</span> $7^0$</p><p>Varje tal utom 0 upphöjt till 0 är 1, inte 0.</p>$$7^0 = 1$$<p class="svar"><b>Svar:</b> 1</p></div>
+      <div class="sol"><p class="solh"><span class="nr">2</span> $2^{-1}$</p><p>Negativ exponent betyder "1 delat med potensen utan minustecknet":</p>$$2^{-1} = \frac{1}{2^1} = \frac{1}{2}$$<p class="svar"><b>Svar:</b> $\dfrac{1}{2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">3</span> $3^{-2}$</p>$$3^{-2} = \frac{1}{3^2} = \frac{1}{9}$$<p class="svar"><b>Svar:</b> $\dfrac{1}{9}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">4</span> $10^{-3}$</p>$$10^{-3} = \frac{1}{10^3} = \frac{1}{1\,000} = 0{,}001$$<p class="svar"><b>Svar:</b> 0,001</p></div>
+      <div class="sol"><p class="solh"><span class="nr">5</span> $4^0 + 4^{-1}$</p><p>Vi beräknar potenserna var för sig, $4^0 = 1$ och $4^{-1} = \dfrac{1}{4}$:</p>$$4^0 + 4^{-1} = 1 + \frac{1}{4} = \frac{4}{4} + \frac{1}{4} = \frac{5}{4}$$<p class="svar"><b>Svar:</b> $\dfrac{5}{4}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">6</span> $2^{-3}$</p>$$2^{-3} = \frac{1}{2^3} = \frac{1}{8}$$<p class="svar"><b>Svar:</b> $\dfrac{1}{8}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">7</span> $5^0 \cdot 5^{-2}$</p>$$5^0 \cdot 5^{-2} = 1 \cdot \frac{1}{5^2} = \frac{1}{25}$$<p class="svar"><b>Svar:</b> $\dfrac{1}{25}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">8</span> $1^{-5}$</p><p>Ettor multiplicerade med varandra blir alltid 1:</p>$$1^{-5} = \frac{1}{1^5} = \frac{1}{1} = 1$$<p class="svar"><b>Svar:</b> 1</p></div>
+      <div class="sol"><p class="solh"><span class="nr">9</span> $5^3 \cdot 5^4$</p><p>Samma bas: exponenterna adderas.</p>$$5^3 \cdot 5^4 = 5^{3+4} = 5^7$$<p class="svar"><b>Svar:</b> $5^7$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">10</span> $\dfrac{2^9}{2^3}$</p><p>Samma bas: nämnarens exponent subtraheras från täljarens.</p>$$\frac{2^9}{2^3} = 2^{9-3} = 2^6$$<p class="svar"><b>Svar:</b> $2^6$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">11</span> $(3^2)^4$</p><p>En potens upphöjd till en exponent: exponenterna multipliceras.</p>$$(3^2)^4 = 3^{2 \cdot 4} = 3^8$$<p class="svar"><b>Svar:</b> $3^8$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">12</span> $x^2 \cdot x^5$</p>$$x^2 \cdot x^5 = x^{2+5} = x^7$$<p class="svar"><b>Svar:</b> $x^7$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">13</span> $\dfrac{a^3}{a^5}$</p><p>Exponenten blir negativ, och det går bra:</p>$$\frac{a^3}{a^5} = a^{3-5} = a^{-2}$$<p>Samma sak kan skrivas $\dfrac{1}{a^2}$.</p><p class="svar"><b>Svar:</b> $a^{-2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">14</span> $\dfrac{7^4}{7^4}$</p>$$\frac{7^4}{7^4} = 7^{4-4} = 7^0$$<p>Ett tal delat med sig självt är 1, och det är just därför $7^0 = 1$.</p><p class="svar"><b>Svar:</b> $7^0 = 1$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">15</span> $6 \cdot 6^3$</p><p>Talet 6 är $6^1$:</p>$$6 \cdot 6^3 = 6^1 \cdot 6^3 = 6^{1+3} = 6^4$$<p class="svar"><b>Svar:</b> $6^4$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">16</span> $(x^3)^2 \cdot x$</p><p>Först parentesen, sedan $x = x^1$:</p>$$(x^3)^2 \cdot x = x^{3 \cdot 2} \cdot x^1 = x^6 \cdot x^1 = x^{6+1} = x^7$$<p class="svar"><b>Svar:</b> $x^7$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">17</span> $\dfrac{1}{2^5}$</p><p>Eftersom $2^{-5} = \dfrac{1}{2^5}$ gäller även det omvända:</p>$$\frac{1}{2^5} = 2^{-5}$$<p class="svar"><b>Svar:</b> $2^{-5}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">18</span> $\dfrac{1}{x^3}$</p>$$\frac{1}{x^3} = x^{-3}$$<p class="svar"><b>Svar:</b> $x^{-3}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">19</span> $\dfrac{1}{10}$</p><p>Talet 10 i nämnaren är $10^1$:</p>$$\frac{1}{10} = \frac{1}{10^1} = 10^{-1}$$<p class="svar"><b>Svar:</b> $10^{-1}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">20</span> $\dfrac{4}{x}$</p><p>Flytta upp nämnaren till täljaren och byt tecken på exponenten. Fyran står kvar:</p>$$\frac{4}{x} = \frac{4}{x^1} = 4x^{-1}$$<p class="svar"><b>Svar:</b> $4x^{-1}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">21</span> $2^x = 2^5$</p><p>Båda led är potenser med basen 2. Då måste exponenterna vara lika:</p>$$x = 5$$<p class="svar"><b>Svar:</b> $x = 5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">22</span> $3^x \cdot 3^2 = 3^6$</p><p>Vi skriver vänsterledet som en enda potens:</p>$$3^{x+2} = 3^6$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$x + 2 = 6$$$$x + 2 \mathbin{\boldsymbol{-}} \boldsymbol{2} = 6 \mathbin{\boldsymbol{-}} \boldsymbol{2}$$$$x = 4$$<p class="svar"><b>Svar:</b> $x = 4$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">23</span> $\dfrac{5^x}{5^2} = 5^4$</p>$$5^{x-2} = 5^4$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$x - 2 = 4$$$$x - 2 \mathbin{\boldsymbol{+}} \boldsymbol{2} = 4 \mathbin{\boldsymbol{+}} \boldsymbol{2}$$$$x = 6$$<p class="svar"><b>Svar:</b> $x = 6$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">24</span> $7^x = 1$</p><p>Talet 1 kan skrivas som en potens av 7, nämligen $7^0$:</p>$$7^x = 7^0$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$x = 0$$<p class="svar"><b>Svar:</b> $x = 0$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">25</span> $2^x = \dfrac{1}{2^3}$</p><p>Högerledet är $\dfrac{1}{2^3} = 2^{-3}$:</p>$$2^x = 2^{-3}$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$x = -3$$<p class="svar"><b>Svar:</b> $x = -3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">26</span> $(4^x)^2 = 4^{10}$</p><p>Exponenterna i vänsterledet multipliceras:</p>$$4^{2x} = 4^{10}$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$2x = 10$$$$\frac{2x}{\boldsymbol{2}} = \frac{10}{\boldsymbol{2}}$$$$x = 5$$<p class="svar"><b>Svar:</b> $x = 5$</p></div>
+    </div>
+    <h3 class="losniva">Mellan</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">27</span> $(-3)^0$</p><p>Parentesen gör att hela talet $-3$ är basen:</p>$$(-3)^0 = 1$$<p class="svar"><b>Svar:</b> 1</p></div>
+      <div class="sol"><p class="solh"><span class="nr">28</span> $-3^0$</p><p>Här är basen bara 3. Minustecknet står utanför potensen:</p>$$-3^0 = -(3^0) = -1$$<p class="svar"><b>Svar:</b> $-1$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">29</span> $\left(\dfrac{2}{3}\right)^{-1}$</p><p>Att upphöja ett bråk till $-1$ är att invertera det:</p>$$\left(\frac{2}{3}\right)^{-1} = \frac{3}{2}$$<p class="svar"><b>Svar:</b> $\dfrac{3}{2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">30</span> $\left(\dfrac{1}{2}\right)^{-3}$</p><p>Invertera bråket och byt tecken på exponenten:</p>$$\left(\frac{1}{2}\right)^{-3} = \left(\frac{2}{1}\right)^{3} = 2^3 = 8$$<p class="svar"><b>Svar:</b> 8</p></div>
+      <div class="sol"><p class="solh"><span class="nr">31</span> $2^{-1} + 2^{-2}$</p><p>Potenserna beräknas var för sig, sedan adderas bråken med gemensam nämnare:</p>$$2^{-1} + 2^{-2} = \frac{1}{2} + \frac{1}{4} = \frac{2}{4} + \frac{1}{4} = \frac{3}{4}$$<p class="svar"><b>Svar:</b> $\dfrac{3}{4}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">32</span> $\left(\dfrac{3}{4}\right)^{-2}$</p>$$\left(\frac{3}{4}\right)^{-2} = \left(\frac{4}{3}\right)^{2} = \frac{4^2}{3^2} = \frac{16}{9}$$<p class="svar"><b>Svar:</b> $\dfrac{16}{9}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">33</span> $10^{-2} \cdot 10^5$</p><p>Samma bas: exponenterna adderas, också när en av dem är negativ.</p>$$10^{-2} \cdot 10^5 = 10^{-2+5} = 10^3 = 1\,000$$<p class="svar"><b>Svar:</b> 1&nbsp;000</p></div>
+      <div class="sol"><p class="solh"><span class="nr">34</span> $6 \cdot 6^{-2}$</p>$$6 \cdot 6^{-2} = 6^{1+(-2)} = 6^{-1} = \frac{1}{6}$$<p class="svar"><b>Svar:</b> $\dfrac{1}{6}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">35</span> $x^{-3} \cdot x^5$</p>$$x^{-3} \cdot x^5 = x^{-3+5} = x^2$$<p class="svar"><b>Svar:</b> $x^2$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">36</span> $\dfrac{x^2}{x^{-4}}$</p><p>Att subtrahera ett negativt tal är att addera:</p>$$\frac{x^2}{x^{-4}} = x^{2-(-4)} = x^{2+4} = x^6$$<p class="svar"><b>Svar:</b> $x^6$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">37</span> $(a^{-2})^3$</p>$$(a^{-2})^3 = a^{-2 \cdot 3} = a^{-6} = \frac{1}{a^6}$$<p class="svar"><b>Svar:</b> $\dfrac{1}{a^6}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">38</span> $(2x^{-1})^3$</p><p>Både talet 2 och $x^{-1}$ upphöjs till 3:</p>$$(2x^{-1})^3 = 2^3 \cdot (x^{-1})^3 = 8x^{-3} = \frac{8}{x^3}$$<p class="svar"><b>Svar:</b> $\dfrac{8}{x^3}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">39</span> $\dfrac{12x^3}{4x^5}$</p><p>Talen förenklas för sig och potenserna för sig:</p>$$\frac{12x^3}{4x^5} = \frac{12}{4} \cdot x^{3-5} = 3x^{-2} = \frac{3}{x^2}$$<p class="svar"><b>Svar:</b> $\dfrac{3}{x^2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">40</span> $(5x)^0 + x^0$</p><p>Båda termerna har exponenten 0, så båda är 1 (för $x \neq 0$):</p>$$(5x)^0 + x^0 = 1 + 1 = 2$$<p class="svar"><b>Svar:</b> 2</p></div>
+      <div class="sol"><p class="solh"><span class="nr">41</span> $2^x = 32$</p><p>$32 = 2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 = 2^5$:</p>$$2^x = 2^5$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$x = 5$$<p class="svar"><b>Svar:</b> $x = 5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">42</span> $3^x = \dfrac{1}{9}$</p><p>$\dfrac{1}{9} = \dfrac{1}{3^2} = 3^{-2}$:</p>$$3^x = 3^{-2}$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$x = -2$$<p class="svar"><b>Svar:</b> $x = -2$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">43</span> $10^x = 0{,}001$</p><p>$0{,}001 = \dfrac{1}{1\,000} = \dfrac{1}{10^3} = 10^{-3}$:</p>$$10^x = 10^{-3}$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$x = -3$$<p class="svar"><b>Svar:</b> $x = -3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">44</span> $4^x = 2^6$</p><p>Baserna är olika, men $4 = 2^2$:</p>$$(2^2)^x = 2^6$$$$2^{2x} = 2^6$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$2x = 6$$$$\frac{2x}{\boldsymbol{2}} = \frac{6}{\boldsymbol{2}}$$$$x = 3$$<p class="svar"><b>Svar:</b> $x = 3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">45</span> $5^{x+1} = 125$</p><p>$125 = 5 \cdot 5 \cdot 5 = 5^3$:</p>$$5^{x+1} = 5^3$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$x + 1 = 3$$$$x + 1 \mathbin{\boldsymbol{-}} \boldsymbol{1} = 3 \mathbin{\boldsymbol{-}} \boldsymbol{1}$$$$x = 2$$<p class="svar"><b>Svar:</b> $x = 2$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">46</span> $9^x = 27$</p><p>Varken 27 eller 9 är en potens av den andra, men båda är potenser av 3: $9 = 3^2$ och $27 = 3^3$.</p>$$(3^2)^x = 3^3$$$$3^{2x} = 3^3$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$2x = 3$$$$\frac{2x}{\boldsymbol{2}} = \frac{3}{\boldsymbol{2}}$$$$x = \frac{3}{2}$$<p class="svar"><b>Svar:</b> $x = \dfrac{3}{2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">47</span> $x^{-1} = \dfrac{1}{6}$</p><p>Nu är det basen som är okänd. Vi upphöjer båda led till $-1$, så att exponenten i vänsterledet blir $(-1) \cdot (-1) = 1$:</p>$$\left(x^{-1}\right)^{\boldsymbol{-1}} = \left(\frac{1}{6}\right)^{\boldsymbol{-1}}$$<p>Ett bråk upphöjt till $-1$ är det inverterade bråket:</p>$$x = 6$$<p class="svar"><b>Svar:</b> $x = 6$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">48</span> $x^{-2} = \dfrac{1}{9}$</p><p>Vi upphöjer båda led till $-1$:</p>$$\left(x^{-2}\right)^{\boldsymbol{-1}} = \left(\frac{1}{9}\right)^{\boldsymbol{-1}}$$$$x^2 = 9$$<p>Exponenten 2 är jämn, så det finns två lösningar: både $3^2$ och $(-3)^2$ är 9.</p>$$x = \pm\sqrt{9}$$$$x = \pm 3$$<p class="svar"><b>Svar:</b> $x = \pm 3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">49</span></p><p>Vi beräknar varje tal för sig:</p>$$3^{-2} = \frac{1}{9} \qquad \left(\frac{1}{2}\right)^{-2} = 2^2 = 4 \qquad 0^5 = 0$$$$2^{-3} = \frac{1}{8} \qquad 4^0 = 1$$<p>$\dfrac{1}{9}$ är mindre än $\dfrac{1}{8}$: delar man 1 i nio lika delar blir varje del mindre än om man delar i åtta.</p><p class="svar"><b>Svar:</b> $0^5,\ 3^{-2},\ 2^{-3},\ 4^0,\ \left(\dfrac{1}{2}\right)^{-2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">50</span></p><p><b>Elin</b> har trott att minustecknet i exponenten gör talet negativt. En negativ exponent betyder i stället "1 delat med potensen utan minustecknet":</p>$$5^{-2} = \frac{1}{5^2} = \frac{1}{25}$$<p><b>Ali</b> har trott att exponenten noll gör potensen noll. Vi kan se vad $8^0$ måste vara genom att beräkna $\dfrac{8^3}{8^3}$ på två sätt:</p>$$\frac{8^3}{8^3} = 8^{3-3} = 8^0 \qquad \text{och} \qquad \frac{8^3}{8^3} = 1$$<p>Båda är rätt, så $8^0 = 1$.</p><p class="svar"><b>Svar:</b> $5^{-2} = \dfrac{1}{25}$ och $8^0 = 1$</p></div>
+    </div>
+    <h3 class="losniva">Avancerad</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">51</span> $2^x \cdot 4^3 = 8^5$</p><p>Alla baser är potenser av 2: $4 = 2^2$ och $8 = 2^3$.</p>$$4^3 = (2^2)^3 = 2^6 \qquad 8^5 = (2^3)^5 = 2^{15}$$$$2^x \cdot 2^6 = 2^{15}$$$$2^{x+6} = 2^{15}$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$x + 6 = 15$$$$x + 6 \mathbin{\boldsymbol{-}} \boldsymbol{6} = 15 \mathbin{\boldsymbol{-}} \boldsymbol{6}$$$$x = 9$$<p class="kontroll"><i>Kontroll:</i> $2^9 \cdot 4^3 = 512 \cdot 64 = 32\,768$ och $8^5 = 32\,768$.</p><p class="svar"><b>Svar:</b> $x = 9$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">52</span> $3^{2x-1} = 27^{x-2}$</p><p>$27 = 3^3$, och hela exponenten $x - 2$ multipliceras med 3:</p>$$3^{2x-1} = (3^3)^{x-2}$$$$3^{2x-1} = 3^{3(x-2)}$$$$3^{2x-1} = 3^{3x-6}$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$2x - 1 = 3x - 6$$$$2x - 1 \mathbin{\boldsymbol{-}} \boldsymbol{2x} = 3x - 6 \mathbin{\boldsymbol{-}} \boldsymbol{2x}$$$$-1 = x - 6$$$$-1 \mathbin{\boldsymbol{+}} \boldsymbol{6} = x - 6 \mathbin{\boldsymbol{+}} \boldsymbol{6}$$$$5 = x$$<p class="kontroll"><i>Kontroll:</i> Vänsterledet blir $3^{9}$ och högerledet $27^{3} = (3^3)^3 = 3^9$.</p><p class="svar"><b>Svar:</b> $x = 5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">53</span> $\left(\dfrac{1}{4}\right)^{x} = 32$</p><p>Båda led går att skriva som potenser av 2: $\dfrac{1}{4} = \dfrac{1}{2^2} = 2^{-2}$ och $32 = 2^5$.</p>$$(2^{-2})^x = 2^5$$$$2^{-2x} = 2^5$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$-2x = 5$$$$\frac{-2x}{\boldsymbol{-2}} = \frac{5}{\boldsymbol{-2}}$$$$x = -\frac{5}{2}$$<p class="kontroll"><i>Kontroll:</i> $\left(\dfrac{1}{4}\right)^{-5/2} = 4^{5/2} = \left(\sqrt{4}\right)^5 = 2^5 = 32$.</p><p class="svar"><b>Svar:</b> $x = -\dfrac{5}{2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">54</span> $\dfrac{25^x}{5^3} = \dfrac{1}{125}$</p><p>$25^x = (5^2)^x = 5^{2x}$ och $\dfrac{1}{125} = \dfrac{1}{5^3} = 5^{-3}$:</p>$$\frac{5^{2x}}{5^3} = 5^{-3}$$$$5^{2x-3} = 5^{-3}$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$2x - 3 = -3$$$$2x - 3 \mathbin{\boldsymbol{+}} \boldsymbol{3} = -3 \mathbin{\boldsymbol{+}} \boldsymbol{3}$$$$2x = 0$$$$\frac{2x}{\boldsymbol{2}} = \frac{0}{\boldsymbol{2}}$$$$x = 0$$<p class="kontroll"><i>Kontroll:</i> $\dfrac{25^0}{5^3} = \dfrac{1}{125}$.</p><p class="svar"><b>Svar:</b> $x = 0$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">55</span> $4^x + 4^x + 4^x + 4^x = 2^{12}$</p><p>Potenslagarna gäller bara för multiplikation och division, så vi skriver först om summan. Fyra likadana termer är 4 gånger termen:</p>$$4 \cdot 4^x = 2^{12}$$$$4^1 \cdot 4^x = 2^{12}$$$$4^{x+1} = 2^{12}$$<p>Nu skriver vi $4 = 2^2$:</p>$$(2^2)^{x+1} = 2^{12}$$$$2^{2x+2} = 2^{12}$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$2x + 2 = 12$$$$2x + 2 \mathbin{\boldsymbol{-}} \boldsymbol{2} = 12 \mathbin{\boldsymbol{-}} \boldsymbol{2}$$$$2x = 10$$$$\frac{2x}{\boldsymbol{2}} = \frac{10}{\boldsymbol{2}}$$$$x = 5$$<p class="kontroll"><i>Kontroll:</i> $4 \cdot 4^5 = 4^6 = 4\,096$ och $2^{12} = 4\,096$.</p><p class="svar"><b>Svar:</b> $x = 5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">56</span> $3^x \cdot 9^x = \dfrac{1}{27}$</p><p>$9^x = (3^2)^x = 3^{2x}$ och $\dfrac{1}{27} = \dfrac{1}{3^3} = 3^{-3}$:</p>$$3^x \cdot 3^{2x} = 3^{-3}$$$$3^{3x} = 3^{-3}$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$3x = -3$$$$\frac{3x}{\boldsymbol{3}} = \frac{-3}{\boldsymbol{3}}$$$$x = -1$$<p class="kontroll"><i>Kontroll:</i> $3^{-1} \cdot 9^{-1} = \dfrac{1}{3} \cdot \dfrac{1}{9} = \dfrac{1}{27}$.</p><p class="svar"><b>Svar:</b> $x = -1$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">57</span> $\left(2^{-1} + 2^{-2}\right)^{-1}$</p><p>Potenslagarna gäller inte för en summa, så vi beräknar parentesen först:</p>$$2^{-1} + 2^{-2} = \frac{1}{2} + \frac{1}{4} = \frac{3}{4}$$$$\left(\frac{3}{4}\right)^{-1} = \frac{4}{3}$$<p>Fällan är att skriva $2^{1} + 2^{2} = 6$, som om exponenten $-1$ kunde multipliceras in i varje term.</p><p class="svar"><b>Svar:</b> $\dfrac{4}{3}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">58</span> $(x^{-2}y^3)^{-2} \cdot x^{-4}y^6$</p><p>Båda faktorerna i parentesen upphöjs till $-2$:</p>$$(x^{-2})^{-2} \cdot (y^3)^{-2} = x^{4} y^{-6}$$<p>Sedan samlar vi potenserna med samma bas:</p>$$x^{4} y^{-6} \cdot x^{-4} y^{6} = x^{4-4} \cdot y^{-6+6} = x^0 \cdot y^0 = 1$$<p class="svar"><b>Svar:</b> 1</p></div>
+      <div class="sol"><p class="solh"><span class="nr">59</span> $\dfrac{(a^3 b^{-2})^2}{(a^{-1} b)^{-3}}$</p><p>Täljare och nämnare var för sig:</p>$$(a^3 b^{-2})^2 = a^{6} b^{-4} \qquad (a^{-1} b)^{-3} = a^{3} b^{-3}$$$$\frac{a^{6} b^{-4}}{a^{3} b^{-3}} = a^{6-3} \cdot b^{-4-(-3)} = a^3 b^{-1} = \frac{a^3}{b}$$<p class="svar"><b>Svar:</b> $\dfrac{a^3}{b}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">60</span> $\dfrac{8^n \cdot 2^{-n}}{4^{n+1}}$</p><p>Vi skriver allt med basen 2: $8^n = (2^3)^n = 2^{3n}$ och $4^{n+1} = (2^2)^{n+1} = 2^{2n+2}$.</p>$$\frac{2^{3n} \cdot 2^{-n}}{2^{2n+2}} = \frac{2^{2n}}{2^{2n+2}} = 2^{2n-(2n+2)}$$$$2^{2n-2n-2} = 2^{-2} = \frac{1}{4}$$<p>Talet $n$ tar ut sig självt, så uttrycket är $\dfrac{1}{4}$ vilket heltal $n$ än är.</p><p class="svar"><b>Svar:</b> $\dfrac{1}{4}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">61</span></p><p class="del">a)</p><p>Vi skriver $5^{n+1} = 5^n \cdot 5^1 = 5 \cdot 5^n$. Då har båda termerna faktorn $5^n$, som vi bryter ut:</p>$$5^{n+1} - 5^n = 5 \cdot 5^n - 1 \cdot 5^n$$$$= (5 - 1) \cdot 5^n = 4 \cdot 5^n$$<p>Det är samma sak som $5y - y = 4y$ med $y = 5^n$. Det var det som skulle visas.</p><p class="del">b)</p><p>Enligt a) är vänsterledet $4 \cdot 5^n$:</p>$$4 \cdot 5^n = 100$$$$\frac{4 \cdot 5^n}{\boldsymbol{4}} = \frac{100}{\boldsymbol{4}}$$$$5^n = 25$$$$5^n = 5^2$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$n = 2$$<p class="kontroll"><i>Kontroll:</i> $5^3 - 5^2 = 125 - 25 = 100$.</p><p class="svar"><b>Svar:</b> $n = 2$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">62</span></p><p class="del">a)</p><p>Vi upphöjer båda led till $-1$ för att bli av med minustecknet i exponenten:</p>$$\left(x^{-3}\right)^{\boldsymbol{-1}} = \left(\frac{8}{27}\right)^{\boldsymbol{-1}}$$$$x^3 = \frac{27}{8}$$<p>Sedan upphöjer vi båda led till $\dfrac{1}{3}$, så att exponenten blir $3 \cdot \dfrac{1}{3} = 1$:</p>$$\left(x^3\right)^{\boldsymbol{1/3}} = \left(\frac{27}{8}\right)^{\boldsymbol{1/3}}$$$$x = \frac{3}{2}$$<p>eftersom $\left(\dfrac{3}{2}\right)^3 = \dfrac{27}{8}$. Exponenten 3 är udda, så det finns bara en lösning.</p><p class="svar"><b>Svar:</b> $x = \dfrac{3}{2}$</p><p class="del">b)</p>$$\frac{2x^{-4}}{\boldsymbol{2}} = \frac{32}{\boldsymbol{2}}$$$$x^{-4} = 16$$$$\left(x^{-4}\right)^{\boldsymbol{-1}} = \left(16\right)^{\boldsymbol{-1}}$$$$x^4 = \frac{1}{16}$$<p>Exponenten 4 är jämn, så det finns två lösningar, en positiv och en negativ:</p>$$x = \pm\sqrt[4]{\frac{1}{16}}$$$$x = \pm\frac{1}{2}$$<p>eftersom $\left(\dfrac{1}{2}\right)^4 = \dfrac{1}{16}$.</p><p class="kontroll"><i>Kontroll:</i> $2 \cdot \left(\pm\dfrac{1}{2}\right)^{-4} = 2 \cdot 2^4 = 32$.</p><p class="svar"><b>Svar:</b> $x = \pm\dfrac{1}{2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">63</span></p><p>Vi skriver båda talen som bråk:</p>$$2^{-10} = \frac{1}{2^{10}} = \frac{1}{1\,024}$$$$10^{-3} = \frac{1}{10^3} = \frac{1}{1\,000}$$<p>Båda bråken har täljaren 1. Ju större nämnaren är, desto mindre blir bråket, och 1 024 är större än 1 000. Alltså är $2^{-10}$ det minsta talet.</p><p class="svar"><b>Svar:</b> $10^{-3}$ är störst.</p></div>
+    </div>
+  </section>
+  <footer><span>Matematik nivå 1c · Potenser</span><span>fysiklabbet.se</span></footer>
+</section>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

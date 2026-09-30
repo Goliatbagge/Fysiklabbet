@@ -190,8 +190,8 @@
  * kraften F_fj (uppåt från kontaktpunkten mot fjädern, växer med
  * förlängningen), tyngdkraften F_G (från tyngdpunkten, konstant) och den
  * resulterande kraften F_R (streckad, bredvid vikten, F_R = −k · y).
- * Alla tre skalenliga i samma skala; bara fjäderkraften är ikryssad från
- * början. Jämviktslinjen har etiketten "Jämviktsläge" i båda varianterna.
+ * Alla tre skalenliga i samma skala; bara den resulterande kraften är
+ * ikryssad från början. Jämviktslinjen har etiketten "Jämviktsläge" i båda varianterna.
  *
  * ── typ: linjal ──────────────────────────────────────────────────────────
  * Demonstrationen ur fy2-1.2 (Mer kraftmoment): en linjal vilar vågrätt på
@@ -2859,9 +2859,9 @@
         }
         var vChk = null, aChk = null, fjChk = null, gChk = null, rChk = null;
         if (KRAFTER) {
-            fjChk = makeCheck('Fjäderkraft', true, COL_F);
+            fjChk = makeCheck('Fjäderkraft', false, COL_F);
             gChk = makeCheck('Tyngdkraft', false, COL_F);
-            rChk = makeCheck('Resulterande kraft', false, COL_F);
+            rChk = makeCheck('Resulterande kraft', true, COL_F);
             toggles.appendChild(fjChk.lbl);
             toggles.appendChild(gChk.lbl);
             toggles.appendChild(rChk.lbl);

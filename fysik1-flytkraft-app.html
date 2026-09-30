@@ -278,8 +278,10 @@
         // järn i kvicksilver): den vickar över och lägger sig på snedden. En
         // kloss med kvadratisk botten ligger stabilt plant för ALLA densiteter
         // när bredd/höjd > √(6s(1 − s)), som är högst √1,5 ≈ 1,22 (vid s = 0,5).
-        // 1,5 ger god marginal. Påpekat av en besökare 2026-09-30.
-        const ASPECT = 1.5;
+        // 2 ger god marginal även för verkligt, ojämnt trä (metacentrisk höjd
+        // minst ~0,32 · höjden för alla densiteter; 1,5 gav bara ~0,11).
+        // Påpekat av en besökare 2026-09-30.
+        const ASPECT = 2;
         const dims = (V) => { const bh = Math.cbrt(V / (ASPECT * ASPECT)); return { bw: ASPECT * bh, bh }; };
 
         // ── Vätskor ───────────────────────────────────────────────

@@ -272,7 +272,15 @@
 
         const toPx = (xm) => xm * PX;
         const toPy = (ym) => BENCH_PY - ym * PX;
-        const side = (V) => Math.cbrt(V);
+        // Föremålen är flata klossar med kvadratisk botten: bredd = djup =
+        // ASPECT · höjd. En KUB flyter inte med en sida nedåt när densiteten
+        // ligger mellan ungefär 21 % och 79 % av vätskans (trä i vatten, kork,
+        // järn i kvicksilver): den vickar över och lägger sig på snedden. En
+        // kloss med kvadratisk botten ligger stabilt plant för ALLA densiteter
+        // när bredd/höjd > √(6s(1 − s)), som är högst √1,5 ≈ 1,22 (vid s = 0,5).
+        // 1,5 ger god marginal. Påpekat av en besökare 2026-09-30.
+        const ASPECT = 1.5;
+        const dims = (V) => { const bh = Math.cbrt(V / (ASPECT * ASPECT)); return { bw: ASPECT * bh, bh }; };
 
         // ── Vätskor ───────────────────────────────────────────────
         const FLUIDS = [
@@ -320,10 +328,10 @@
 
         function submergedVolume(b, h) {
             if (!centerInTank(b)) return 0;
-            const s = side(b.V);
-            const depth = Math.min(h - (b.y - s / 2), s);
+            const { bw, bh } = dims(b.V);
+            const depth = Math.min(h - (b.y - bh / 2), bh);
             if (depth <= 0) return 0;
-            return s * s * depth;
+            return bw * bw * depth;
         }
 
         function waterLevel(blocks) {
@@ -432,39 +440,39 @@
         }
 
         // ── Blockrendering (front + liten 2,5D-avfasning + materialkänsla) ──
-        function BlockDeco({ x0, y0, sp, mat, edge }) {
+        function BlockDeco({ x0, y0, sp, hp, mat, edge }) {
             if (mat === 'Trä (furu)') return (
                 <g fill="none" stroke={edge} strokeWidth="1.2" opacity="0.4" pointerEvents="none">
-                    <path d={`M ${x0 + sp * 0.08} ${y0 + sp * 0.32} q ${sp * 0.24} ${sp * 0.08} ${sp * 0.46} 0 t ${sp * 0.38} 0`} />
-                    <path d={`M ${x0 + sp * 0.08} ${y0 + sp * 0.66} q ${sp * 0.22} ${-sp * 0.07} ${sp * 0.44} 0 t ${sp * 0.4} 0`} />
+                    <path d={`M ${x0 + sp * 0.08} ${y0 + hp * 0.32} q ${sp * 0.24} ${hp * 0.1} ${sp * 0.46} 0 t ${sp * 0.38} 0`} />
+                    <path d={`M ${x0 + sp * 0.08} ${y0 + hp * 0.66} q ${sp * 0.22} ${-hp * 0.09} ${sp * 0.44} 0 t ${sp * 0.4} 0`} />
                 </g>
             );
             if (mat === 'Kork') return (
                 <g fill={edge} opacity="0.3" pointerEvents="none">
                     {[[0.22, 0.25], [0.55, 0.18], [0.8, 0.38], [0.3, 0.58], [0.68, 0.66], [0.18, 0.82], [0.52, 0.86], [0.84, 0.8]].map(([fx, fy], i) => (
-                        <circle key={i} cx={x0 + sp * fx} cy={y0 + sp * fy} r={Math.max(1.2, sp * 0.03)} />
+                        <circle key={i} cx={x0 + sp * fx} cy={y0 + hp * fy} r={Math.max(1.2, hp * 0.035)} />
                     ))}
                 </g>
             );
             if (mat === 'Tegel') return (
                 <g fill="none" stroke={edge} strokeWidth="1.2" opacity="0.35" pointerEvents="none">
-                    <line x1={x0} y1={y0 + sp / 3} x2={x0 + sp} y2={y0 + sp / 3} />
-                    <line x1={x0} y1={y0 + 2 * sp / 3} x2={x0 + sp} y2={y0 + 2 * sp / 3} />
-                    <line x1={x0 + sp * 0.5} y1={y0} x2={x0 + sp * 0.5} y2={y0 + sp / 3} />
-                    <line x1={x0 + sp * 0.25} y1={y0 + sp / 3} x2={x0 + sp * 0.25} y2={y0 + 2 * sp / 3} />
-                    <line x1={x0 + sp * 0.75} y1={y0 + 2 * sp / 3} x2={x0 + sp * 0.75} y2={y0 + sp} />
+                    <line x1={x0} y1={y0 + hp / 3} x2={x0 + sp} y2={y0 + hp / 3} />
+                    <line x1={x0} y1={y0 + 2 * hp / 3} x2={x0 + sp} y2={y0 + 2 * hp / 3} />
+                    <line x1={x0 + sp * 0.5} y1={y0} x2={x0 + sp * 0.5} y2={y0 + hp / 3} />
+                    <line x1={x0 + sp * 0.25} y1={y0 + hp / 3} x2={x0 + sp * 0.25} y2={y0 + 2 * hp / 3} />
+                    <line x1={x0 + sp * 0.75} y1={y0 + 2 * hp / 3} x2={x0 + sp * 0.75} y2={y0 + hp} />
                 </g>
             );
             if (mat === 'Is') return (
                 <g fill="none" stroke="#e8f6fb" strokeLinecap="round" opacity="0.85" pointerEvents="none">
-                    <line x1={x0 + sp * 0.2} y1={y0 + sp * 0.4} x2={x0 + sp * 0.42} y2={y0 + sp * 0.14} strokeWidth={Math.max(2, sp * 0.055)} />
-                    <line x1={x0 + sp * 0.34} y1={y0 + sp * 0.52} x2={x0 + sp * 0.5} y2={y0 + sp * 0.33} strokeWidth={Math.max(1.4, sp * 0.035)} />
+                    <line x1={x0 + sp * 0.2} y1={y0 + hp * 0.4} x2={x0 + sp * 0.42} y2={y0 + hp * 0.14} strokeWidth={Math.max(2, hp * 0.065)} />
+                    <line x1={x0 + sp * 0.34} y1={y0 + hp * 0.52} x2={x0 + sp * 0.5} y2={y0 + hp * 0.33} strokeWidth={Math.max(1.4, hp * 0.042)} />
                 </g>
             );
             if (mat === 'Frigolit') return (
                 <g fill="#c6ccd2" opacity="0.7" pointerEvents="none">
                     {[[0.25, 0.3], [0.6, 0.2], [0.78, 0.5], [0.35, 0.62], [0.6, 0.8], [0.2, 0.85]].map(([fx, fy], i) => (
-                        <circle key={i} cx={x0 + sp * fx} cy={y0 + sp * fy} r={Math.max(1, sp * 0.022)} />
+                        <circle key={i} cx={x0 + sp * fx} cy={y0 + hp * fy} r={Math.max(1, hp * 0.026)} />
                     ))}
                 </g>
             );
@@ -472,11 +480,11 @@
         }
 
         function BlockShape({ b, style }) {
-            const s = side(b.V);
-            const sp = s * PX;
+            const { bw, bh } = dims(b.V);
+            const sp = bw * PX, hp = bh * PX;
             const x0 = toPx(b.x) - sp / 2;
-            const y0 = toPy(b.y) - sp / 2;
-            const bev = Math.min(10, sp * 0.16);
+            const y0 = toPy(b.y) - hp / 2;
+            const bev = Math.min(10, hp * 0.16);
             const grabber = b.grabbed;
             return (
                 <g style={{ cursor: grabber ? 'grabbing' : 'grab' }}>
@@ -485,16 +493,16 @@
                         fill={style.fill} stroke={style.edge} strokeWidth="1.4" strokeLinejoin="round"
                         style={{ filter: 'brightness(1.12)' }} />
                     {/* höger-fasning */}
-                    <polygon points={`${x0 + sp},${y0} ${x0 + sp + bev},${y0 - bev * 0.72} ${x0 + sp + bev},${y0 + sp - bev * 0.72} ${x0 + sp},${y0 + sp}`}
+                    <polygon points={`${x0 + sp},${y0} ${x0 + sp + bev},${y0 - bev * 0.72} ${x0 + sp + bev},${y0 + hp - bev * 0.72} ${x0 + sp},${y0 + hp}`}
                         fill={style.fill} stroke={style.edge} strokeWidth="1.4" strokeLinejoin="round"
                         style={{ filter: 'brightness(0.82)' }} />
                     {/* frontyta */}
-                    <rect x={x0} y={y0} width={sp} height={sp}
+                    <rect x={x0} y={y0} width={sp} height={hp}
                         fill={style.fill} stroke={style.edge} strokeWidth="1.8" />
-                    <BlockDeco x0={x0} y0={y0} sp={sp} mat={style.mat} edge={style.edge} />
+                    <BlockDeco x0={x0} y0={y0} sp={sp} hp={hp} mat={style.mat} edge={style.edge} />
                     {style.mystery && (
-                        <text x={x0 + sp / 2} y={y0 + sp / 2 + sp * 0.18} textAnchor="middle"
-                            fontSize={sp * 0.52} fontWeight="700" fill="#3a4151" pointerEvents="none">?</text>
+                        <text x={x0 + sp / 2} y={y0 + hp / 2 + hp * 0.22} textAnchor="middle"
+                            fontSize={hp * 0.64} fontWeight="700" fill="#3a4151" pointerEvents="none">?</text>
                     )}
                 </g>
             );
@@ -574,12 +582,12 @@
                 const w = worldRef.current;
                 const hanging = mode === 'gissa' && gissaRef.current.phase === 'gissa';
                 w.blocks = blockCfg.map(cfg => {
-                    const s = side(cfg.V);
-                    const hangY = (BENCH_PY - HANG_TOP_PY) / PX - s;
+                    const { bh } = dims(cfg.V);
+                    const hangY = (BENCH_PY - HANG_TOP_PY) / PX - bh;
                     return {
                         id: cfg.id, V: cfg.V, m: cfg.m,
                         x: hanging ? HANG_X : (cfg.id === 'A' ? 0.50 : 1.68),
-                        y: hanging ? hangY + s / 2 : s / 2, vy: 0,
+                        y: hanging ? hangY + bh / 2 : bh / 2, vy: 0,
                         grabbed: false, resting: !hanging, held: hanging,
                     };
                 });
@@ -598,9 +606,9 @@
                 w.blocks.forEach((b, i) => {
                     b.V = blockCfg[i].V;
                     b.m = blockCfg[i].m;
-                    const s = side(b.V);
+                    const { bh } = dims(b.V);
                     const floorY = centerInTank(b) ? FLOOR_M : 0;
-                    if (!b.held && b.y - s / 2 < floorY) { b.y = floorY + s / 2; }
+                    if (!b.held && b.y - bh / 2 < floorY) { b.y = floorY + bh / 2; }
                 });
             }, [blockCfg]);
 
@@ -637,10 +645,10 @@
             // ── Plask ──
             const spawnSplash = (b, h, speed) => {
                 const w = worldRef.current;
-                const s = side(b.V);
-                const n = Math.round(Math.min(18, 6 + speed * 6 + s * 20));
+                const { bw } = dims(b.V);
+                const n = Math.round(Math.min(18, 6 + speed * 6 + bw * 20));
                 for (let i = 0; i < n; i++) {
-                    const spread = (Math.random() - 0.5) * s * 1.6;
+                    const spread = (Math.random() - 0.5) * bw * 1.6;
                     w.splashes.push({
                         x: b.x + spread,
                         y: h,
@@ -650,13 +658,13 @@
                         r: 1.6 + Math.random() * 2.2,
                     });
                 }
-                w.ripples.push({ xPx: toPx(b.x), py: toPy(h), age: 0, w: s * PX });
-                if (n > 10) w.ripples.push({ xPx: toPx(b.x), py: toPy(h), age: -0.12, w: s * PX * 0.6 });
+                w.ripples.push({ xPx: toPx(b.x), py: toPy(h), age: 0, w: bw * PX });
+                if (n > 10) w.ripples.push({ xPx: toPx(b.x), py: toPy(h), age: -0.12, w: bw * PX * 0.6 });
             };
 
             const maybeSplash = (b, prevBottom, h) => {
-                const s = side(b.V);
-                const bottom = b.y - s / 2;
+                const { bh } = dims(b.V);
+                const bottom = b.y - bh / 2;
                 if (centerInTank(b) && prevBottom > h && bottom <= h && b.vy < -0.35) {
                     spawnSplash(b, h, -b.vy);
                 }
@@ -677,8 +685,8 @@
                         w.h = h;
                         for (const b of w.blocks) {
                             if (b.grabbed || b.held) continue;
-                            const s = side(b.V);
-                            const prevBottom = b.y - s / 2;
+                            const { bw, bh } = dims(b.V);
+                            const prevBottom = b.y - bh / 2;
                             const inTank = centerInTank(b);
                             const floorY = inTank ? FLOOR_M : 0;
                             const subV = submergedVolume(b, h);
@@ -687,37 +695,37 @@
                             // Dämpningen skalar med vätskans densitet (kvicksilver
                             // bromsar mer än bensin) + en liten luftterm.
                             let F = -b.m * G_ACC + fl.rho * G_ACC * subV;
-                            const c = 0.9 * s * s + 0.42 * fl.rho * s * s * subFrac * fl.drag;
+                            const c = 0.9 * bw * bw + 0.42 * fl.rho * bw * bw * subFrac * fl.drag;
                             F -= c * b.vy;
                             b.vy += (F / b.m) * dt;
                             b.y += b.vy * dt;
                             // Golv (akvariets botten eller bänkskivan)
-                            if (b.y - s / 2 < floorY) {
-                                b.y = floorY + s / 2;
+                            if (b.y - bh / 2 < floorY) {
+                                b.y = floorY + bh / 2;
                                 b.vy = b.vy < 0 ? -b.vy * 0.12 : b.vy;
                                 if (Math.abs(b.vy) < 0.06) b.vy = 0;
                             }
-                            b.resting = Math.abs(b.vy) < 0.02 && (b.y - s / 2) <= floorY + 0.002;
+                            b.resting = Math.abs(b.vy) < 0.02 && (b.y - bh / 2) <= floorY + 0.002;
                             // Under glaskanten → håll föremålet innanför eller
                             // helt utanför glasväggarna
-                            if (b.y - s / 2 < RIM_M - 0.005) {
+                            if (b.y - bh / 2 < RIM_M - 0.005) {
                                 if (inTank) {
-                                    b.x = Math.max(TANK_L + s / 2 + 0.004, Math.min(TANK_R - s / 2 - 0.004, b.x));
+                                    b.x = Math.max(TANK_L + bw / 2 + 0.004, Math.min(TANK_R - bw / 2 - 0.004, b.x));
                                 } else if (b.x < TANK_L) {
-                                    b.x = Math.min(b.x, TANK_L - WALL_M - s / 2 - 0.004);
+                                    b.x = Math.min(b.x, TANK_L - WALL_M - bw / 2 - 0.004);
                                 } else if (b.x > TANK_R) {
-                                    b.x = Math.max(b.x, TANK_R + WALL_M + s / 2 + 0.004);
+                                    b.x = Math.max(b.x, TANK_R + WALL_M + bw / 2 + 0.004);
                                 }
                             }
-                            b.x = Math.max(s / 2 + 0.01, Math.min(SCENE_W_M - s / 2 - 0.01, b.x));
+                            b.x = Math.max(bw / 2 + 0.01, Math.min(SCENE_W_M - bw / 2 - 0.01, b.x));
                             maybeSplash(b, prevBottom, h);
                         }
                         // Enkel separation i sidled mellan två föremål
                         if (w.blocks.length === 2) {
                             const [a, b2] = w.blocks;
-                            const sa = side(a.V), sb = side(b2.V);
+                            const da = dims(a.V), db = dims(b2.V);
                             const dx = Math.abs(a.x - b2.x), dy = Math.abs(a.y - b2.y);
-                            const ox = (sa + sb) / 2 - dx, oy = (sa + sb) / 2 - dy;
+                            const ox = (da.bw + db.bw) / 2 - dx, oy = (da.bh + db.bh) / 2 - dy;
                             if (ox > 0 && oy > 0) {
                                 const dirX = a.x < b2.x ? -1 : 1;
                                 if (!a.grabbed && !b2.grabbed) { a.x += dirX * ox / 2; b2.x -= dirX * ox / 2; }
@@ -808,25 +816,25 @@
                 const d = dragRef.current;
                 if (!d || d.id !== b.id || !b.grabbed) return;
                 const p = svgPoint(e);
-                const s = side(b.V);
+                const { bw, bh } = dims(b.V);
                 const w = worldRef.current;
-                const prevBottom = b.y - s / 2;
+                const prevBottom = b.y - bh / 2;
                 let nx = p.x - d.dx;
                 let ny = p.y - d.dy;
                 // Klipp mot scenen (föremålets topp ska rymmas i bilden)
-                nx = Math.max(s / 2 + 0.01, Math.min(SCENE_W_M - s / 2 - 0.01, nx));
+                nx = Math.max(bw / 2 + 0.01, Math.min(SCENE_W_M - bw / 2 - 0.01, nx));
                 const topMax = (BENCH_PY - 12) / PX;
-                ny = Math.min(ny, topMax - s / 2 + 0.02);
+                ny = Math.min(ny, topMax - bh / 2 + 0.02);
                 // Under glaskanten → antingen i akvariet (innanför glaset)
                 // eller utanför på bänken
-                if (ny - s / 2 < RIM_M - 0.005) {
+                if (ny - bh / 2 < RIM_M - 0.005) {
                     if (nx > TANK_L - 0.02 && nx < TANK_R + 0.02) {
-                        nx = Math.max(TANK_L + s / 2 + 0.004, Math.min(TANK_R - s / 2 - 0.004, nx));
-                        ny = Math.max(FLOOR_M + s / 2, ny);
+                        nx = Math.max(TANK_L + bw / 2 + 0.004, Math.min(TANK_R - bw / 2 - 0.004, nx));
+                        ny = Math.max(FLOOR_M + bh / 2, ny);
                     } else {
-                        if (nx < TANK_L) nx = Math.min(nx, TANK_L - WALL_M - s / 2 - 0.004);
-                        else nx = Math.max(nx, TANK_R + WALL_M + s / 2 + 0.004);
-                        ny = Math.max(s / 2, ny);
+                        if (nx < TANK_L) nx = Math.min(nx, TANK_L - WALL_M - bw / 2 - 0.004);
+                        else nx = Math.max(nx, TANK_R + WALL_M + bw / 2 + 0.004);
+                        ny = Math.max(bh / 2, ny);
                     }
                 }
                 b.x = nx; b.y = ny;
@@ -984,7 +992,7 @@
                             <rect x="493" y="160" width="12" height="14" rx="2" fill="#6a7076" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
                             {gissa.phase === 'gissa' && w.blocks[0] && (
                                 <line x1={toPx(HANG_X)} y1="174" x2={toPx(HANG_X)}
-                                    y2={toPy(w.blocks[0].y + side(w.blocks[0].V) / 2)}
+                                    y2={toPy(w.blocks[0].y + dims(w.blocks[0].V).bh / 2)}
                                     stroke="#3a4151" strokeWidth="1.6" />
                             )}
                         </g>
@@ -1066,8 +1074,8 @@
                     {/* Kraftpilar + föremålsetiketter (överst) */}
                     {blockData.map(({ b, FG, FL, FN }) => {
                         if (b.held) return null;
-                        const s = side(b.V);
-                        const sp = s * PX;
+                        const { bw, bh } = dims(b.V);
+                        const sp = bw * PX, hp = bh * PX;
                         const cx = toPx(b.x);
                         const cy = toPy(b.y);
                         const sc = w.forceScale;
@@ -1082,14 +1090,14 @@
                                         color={COL_FG} sub="G" value={FG} showValue={showValues} dot />
                                 )}
                                 {showFN && FN > 0.5 && (
-                                    <ForceArrow xPx={cx + sp * 0.28} fromPy={cy + sp / 2} lenPy={FN * sc} dir={-1}
+                                    <ForceArrow xPx={cx + sp * 0.28} fromPy={cy + hp / 2} lenPy={FN * sc} dir={-1}
                                         color={COL_FN} sub="N" value={FN} showValue={showValues} />
                                 )}
                                 {/* Föremålsbokstav */}
                                 {w.blocks.length > 1 && (
                                     <g>
-                                        <rect x={cx - sp / 2 + 3} y={cy - sp / 2 + 3} width="16" height="16" rx="3" fill="#0f1620" opacity="0.85" />
-                                        <text x={cx - sp / 2 + 11} y={cy - sp / 2 + 15} textAnchor="middle" fontSize="11"
+                                        <rect x={cx - sp / 2 + 3} y={cy - hp / 2 + 3} width="16" height="16" rx="3" fill="#0f1620" opacity="0.85" />
+                                        <text x={cx - sp / 2 + 11} y={cy - hp / 2 + 15} textAnchor="middle" fontSize="11"
                                             fontWeight="600" fill="#f3eee4">{b.id}</text>
                                     </g>
                                 )}
@@ -1099,7 +1107,7 @@
                                     // bred) så att F_G/F_L:s fulla längd alltid syns
                                     const txt = fmtSmart(b.m, 2) + ' kg';
                                     const cw = txt.length * 11 * 0.58 + 12;
-                                    return <Chip xPx={cx - 10 - cw / 2} yPy={cy + sp / 2 - 11} text={txt} size={11} />;
+                                    return <Chip xPx={cx - 10 - cw / 2} yPy={cy + hp / 2 - 11} text={txt} size={11} />;
                                 })()}
                             </g>
                         );
@@ -1107,8 +1115,7 @@
 
                     {/* Massa-chip även för hängande mysterieföremål */}
                     {blockData.filter(d => d.b.held).map(({ b }) => {
-                        const s = side(b.V);
-                        const sp = s * PX;
+                        const sp = dims(b.V).bw * PX;
                         const cx = toPx(b.x);
                         const cy = toPy(b.y);
                         const txt = fmtSmart(b.m, 2) + ' kg';

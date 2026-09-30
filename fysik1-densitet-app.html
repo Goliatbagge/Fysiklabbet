@@ -52,26 +52,6 @@
             border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
         }
 
-        /* ── Lägesflikar (Densitet / Flytförmåga) ────────────────── */
-        .tab-button {
-            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-            background: transparent;
-            color: var(--lab-ink-soft, #3a4151);
-            border-color: transparent;
-        }
-        .tab-button.active-explore,
-        .tab-button.active-buoyancy {
-            background: var(--lab-ink, #0f1620);
-            border-color: var(--lab-ink, #0f1620);
-            color: var(--lab-bg, #f3eee4);
-            box-shadow: none;
-        }
-        .tab-button:hover:not(.active-explore):not(.active-buoyancy) {
-            color: var(--lab-ink, #0f1620);
-            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
-            background: var(--lab-bg-panel, #ffffff);
-        }
-
         /* ── Material-knappar ─────────────────────────────────────── */
         /* Grundstil hanteras av styles-laborans-sim.css (.material-btn).
            Aktiv-variant (vald material) visas med accent-tint + kant. */
@@ -80,28 +60,6 @@
             border: 1px solid var(--lab-accent, #c8324a);
             color: var(--lab-ink, #0f1620);
             box-shadow: none;
-        }
-
-        /* ── Våganimationer (flytförmåge-läget) ───────────────────── */
-        .water-wave.wave1 {
-            animation: waveShift1 3s ease-in-out infinite;
-        }
-        .water-wave.wave2 {
-            animation: waveShift2 4s ease-in-out infinite;
-        }
-        @keyframes waveShift1 {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(-15px); }
-        }
-        @keyframes waveShift2 {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(10px); }
-        }
-
-        /* ── Guppande animation för flytande kuber ─────────────────── */
-        @keyframes bobbing {
-            0%, 100% { transform: var(--bob-base) translateY(0px); }
-            50% { transform: var(--bob-base) translateY(-6px); }
         }
 
         /* ── Fullskärmsläge ── */
@@ -262,8 +220,7 @@
         const MAX_VOLUME_CM3 = 4700;
         const MAX_MASS_G = 100000;
         const MIN_MASS_G = 1;
-        const WATER_DENSITY = 1000;   // kg/m³ (SI), används för flytlogik
-
+        
         // Pre-generate random positions for atoms (separate sets per face)
         const MAX_DOTS = 1000;
         const STATIC_ATOM_POSITIONS = Array.from({ length: MAX_DOTS }).map(() => ({
@@ -318,7 +275,7 @@
         const DEFAULT_CUBE_COLOR = 'bg-slate-300 border-slate-400';
         const DEFAULT_DOT_COLOR = 'bg-slate-500';
 
-        const CubeVisualizer = React.memo(({ volume, mass, density, mode, selectedMaterialName }) => {
+        const CubeVisualizer = React.memo(({ volume, mass, density, selectedMaterialName }) => {
           // Kubens visuella sida är ÄKTA proportionell mot den fysiska sidan
           // (∝ ∛V): minsta kuben (MIN_VOLUME_CM3) blir en liten tärning,
           // största (MAX_VOLUME_CM3) fyller plattan. Volym i cm³.
@@ -343,82 +300,20 @@
           // Inset så att atomerna håller sig en bit innanför kubens väggar
           const ATOM_INSET = 0.08;
 
-          const NEUTRAL_TOLERANCE = 0.5; // kg/m³ – krymper floating-point-glapp kring 1000
-          const isNeutralBuoyant = Math.abs(density - WATER_DENSITY) < NEUTRAL_TOLERANCE;
-          const isFloating = !isNeutralBuoyant && density < WATER_DENSITY;
-          const containerHeight = 400;
-          const waterHeight = 280; // px vatten
-          const waterSurfaceY = containerHeight - waterHeight; // 120px from top
-
-          // Arkimedes princip: andel under vatten = ρ_objekt / ρ_vatten
-          let buoyancyTop;
-          const bottomThickness = 70;
-          if (isNeutralBuoyant) {
-            // Samma densitet som vatten – svävar mitt i vattnet
-            buoyancyTop = waterSurfaceY + (waterHeight - bottomThickness - sideLength) / 2;
-          } else if (isFloating) {
-            const submergedFraction = density / WATER_DENSITY;
-            buoyancyTop = waterSurfaceY - sideLength * (1 - submergedFraction);
-          } else {
-            // Sjunker till botten, vilar på sandbotten
-            // Extra offset för att 3D-rotationen gör att hörnen sticker ut ~20px
-            buoyancyTop = Math.max(waterSurfaceY, containerHeight - bottomThickness - sideLength + 20);
-          }
           // Kuben vilar på den fasta vågplattan: underkanten hamnar på samma
           // nivå oavsett kubstorlek → currentTop härleds ur SCALE_TOP.
           const exploreTop = SCALE_TOP + 6 - sideLength;
           const exploreLeft = (400 - sideLength) / 2;
 
-          const currentTop = mode === 'BUOYANCY' ? buoyancyTop : exploreTop;
-          const currentLeft = mode === 'BUOYANCY' ? (400 - sideLength) / 2 : exploreLeft;
+          const currentTop = exploreTop;
+          const currentLeft = exploreLeft;
 
           return (
             <div className="relative w-[400px] h-[400px] rounded-xl overflow-hidden shadow-inner"
                  style={{ background: '#e7ded0', border: '1px solid rgba(200, 50, 74, 0.18)', perspective: '800px', boxShadow: 'inset 0 3px 12px rgba(15,22,32,0.16)' }}>
 
-              {mode === 'BUOYANCY' && (
-                <>
-                  {/* Sandbotten – bakom kuben (z-0) */}
-                  <div className="absolute bottom-0 w-full pointer-events-none" style={{ height: '70px', zIndex: 0 }}>
-                    {/* Bottenyta med perspektiv */}
-                    <div className="absolute bottom-0 w-full" style={{
-                      height: '70px',
-                      background: 'linear-gradient(180deg, rgba(160, 140, 95, 0.25) 0%, rgba(130, 110, 70, 0.55) 30%, rgba(100, 85, 55, 0.7) 70%, rgba(80, 65, 40, 0.8) 100%)',
-                      borderTop: '1px solid rgba(180, 160, 110, 0.25)',
-                    }}>
-                      {/* Sandtextur */}
-                      <div className="absolute inset-0 opacity-25" style={{ backgroundImage: 'radial-gradient(circle 1.5px, rgba(210, 190, 140, 0.5) 0%, transparent 100%)', backgroundSize: '10px 8px' }}></div>
-                      {/* Små stenar / ojämnheter */}
-                      <div className="absolute opacity-20" style={{ top: '4px', left: '15%', width: '12px', height: '6px', borderRadius: '50%', background: 'rgba(140, 120, 80, 0.8)' }}></div>
-                      <div className="absolute opacity-15" style={{ top: '6px', left: '55%', width: '8px', height: '4px', borderRadius: '50%', background: 'rgba(160, 140, 90, 0.7)' }}></div>
-                      <div className="absolute opacity-20" style={{ top: '3px', left: '80%', width: '10px', height: '5px', borderRadius: '50%', background: 'rgba(130, 110, 70, 0.8)' }}></div>
-                    </div>
-                  </div>
-
-                  {/* Vattenkropp – bakom kuben (z-1) */}
-                  <div className="absolute bottom-0 w-full pointer-events-none" style={{ height: `${waterHeight}px`, zIndex: 1, background: 'linear-gradient(180deg, rgba(200, 50, 74, 0.2) 0%, rgba(30, 64, 175, 0.35) 80%, rgba(25, 55, 140, 0.3) 100%)' }}>
-                  </div>
-
-                  {/* Vågyta – framför kuben (z-20) */}
-                  <div className="absolute w-full pointer-events-none" style={{ bottom: `${waterHeight - 6}px`, height: '20px', zIndex: 20 }}>
-                    <svg className="absolute bottom-0 left-0 w-full" style={{ height: '14px' }}
-                         viewBox="0 0 400 14" preserveAspectRatio="none">
-                      <path d="M0,8 C30,2 60,12 100,6 C140,0 170,12 200,8 C230,4 260,14 300,6 C340,-2 370,10 400,8 L400,14 L0,14 Z"
-                            fill="rgba(200, 50, 74, 0.3)" className="water-wave wave1" />
-                      <path d="M0,6 C40,12 80,2 120,8 C160,14 200,2 240,6 C280,10 320,0 360,8 C380,12 390,4 400,6 L400,14 L0,14 Z"
-                            fill="rgba(96, 165, 250, 0.2)" className="water-wave wave2" />
-                    </svg>
-                  </div>
-
-                  {/* Etikett */}
-                  <div className="absolute pointer-events-none" style={{ bottom: `${waterHeight - 2}px`, right: '8px', zIndex: 21 }}>
-                    <span className="font-semibold text-sm" style={{color: 'var(--lab-ink-soft, #3a4151)'}}>Vatten (1 000 kg/m³)</span>
-                  </div>
-                </>
-              )}
-
-              {/* Digital våg – kuben vilar på vågplattan (endast densitets-läget) */}
-              {mode === 'EXPLORE' && (() => {
+              {/* Digital våg – kuben vilar på vågplattan */}
+              {(() => {
                 const W = SCALE_W;            // fast plattbredd
                 const Dp = SCALE_DP;          // fast plattdjup
                 const Hh = SCALE_HH;          // våghusets höjd
@@ -488,15 +383,13 @@
               })()}
 
               <div
-                className={`absolute ${mode === 'BUOYANCY' ? 'transition-transform duration-300 ease-out' : ''}`}
+                className="absolute"
                 style={{
                   width: `${sideLength}px`,
                   height: `${sideLength}px`,
-                  '--bob-base': `translate(${currentLeft}px, ${currentTop}px)`,
                   transform: `translate(${currentLeft}px, ${currentTop}px)`,
                   transformStyle: 'preserve-3d',
                   zIndex: 10,
-                  ...(mode === 'BUOYANCY' && density <= WATER_DENSITY ? { animation: 'bobbing 3s ease-in-out infinite' } : {}),
                 }}
               >
                 {/* 3D cube with CSS transforms */}
@@ -560,7 +453,6 @@
         const App = () => {
           const [mass, setMass] = useState(1000);     // gram
           const [volume, setVolume] = useState(1000);  // cm³
-          const [mode, setMode] = useState('EXPLORE');
           const [selectedMaterialName, setSelectedMaterialName] = useState(null);
           const [isFullscreen, setIsFullscreen] = useState(false);
           const sceneWrapRef = useRef(null);
@@ -683,24 +575,6 @@
                   <p className="mt-2" style={{color: 'var(--lab-ink-soft, #3a4151)'}}>Utforska sambandet mellan massa, volym och densitet.</p>
                 </div>
 
-                <div className="p-1 flex gap-1" style={{background: 'var(--lab-bg, #f3eee4)', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', borderRadius: '6px'}}>
-                  <button
-                    onClick={() => setMode('EXPLORE')}
-                    className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${
-                      mode === 'EXPLORE' ? 'active-explore' : ''
-                    }`}
-                  >
-                    Densitet
-                  </button>
-                  <button
-                     onClick={() => setMode('BUOYANCY')}
-                     className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${
-                       mode === 'BUOYANCY' ? 'active-buoyancy' : ''
-                     }`}
-                  >
-                    Flytförmåga
-                  </button>
-                </div>
               </header>
 
               <main className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -730,7 +604,6 @@
                           mass={mass}
                           volume={volume}
                           density={density}
-                          mode={mode}
                           selectedMaterialName={selectedMaterialName}
                        />
                        <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
@@ -747,16 +620,7 @@
                        </button>
                        {isFullscreen && (
                          <div className="scene-toggles">
-                           <div className="st-title">Läge</div>
-                           <label>
-                             <input type="radio" name="fs-mode" checked={mode === 'EXPLORE'} onChange={() => setMode('EXPLORE')} />
-                             <span>Densitet</span>
-                           </label>
-                           <label>
-                             <input type="radio" name="fs-mode" checked={mode === 'BUOYANCY'} onChange={() => setMode('BUOYANCY')} />
-                             <span>Flytförmåga</span>
-                           </label>
-                           <div className="st-title mt">Material</div>
+                           <div className="st-title">Material</div>
                            <select
                              value={selectedMaterialName || ''}
                              onChange={(e) => {
@@ -857,7 +721,7 @@
 
                   <div className="p-4 text-sm" style={{background: 'var(--lab-bg, #f3eee4)', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', borderLeft: '3px solid var(--lab-accent, #c8324a)', borderRadius: '0 4px 4px 0'}}>
                     <strong style={{color: 'var(--lab-accent, #c8324a)'}}>Tips:</strong>
-                    <span style={{color: 'var(--lab-ink-soft, #3a4151)'}}> Observera hur atomerna (prickarna) packas tätare när densiteten ökar. Testa "Flytförmåga"-läget för att se vad som händer när du lägger kuben i vatten!</span>
+                    <span style={{color: 'var(--lab-ink-soft, #3a4151)'}}> Observera hur atomerna (prickarna) packas tätare när densiteten ökar. Vill du se vad som händer i vatten? Prova simuleringen <a href="fysik1-flytkraft-app.html" style={{color: 'var(--lab-accent, #c8324a)', textDecoration: 'underline'}}>Flyta eller sjunka</a>.</span>
                   </div>
 
                 </div>

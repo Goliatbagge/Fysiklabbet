@@ -101,7 +101,7 @@ window.KATALOG = {
             number: 5,
             intro: 'Hur tätt packad materia är och hur krafter fördelas över ytor — från is som spricker under fötter till varmluftballonger som lyfter. Vi börjar med densitet och möter sedan Arkimedes princip, lufttryck och den ideala gaslagen.',
             sections: [
-              { num: '5.1', title: 'Densitet', description: 'Hur tätt packat ett material är — ρ = m / V och vattnets densitet.', href: 'fysik1-densitet-app.html', icon: '🔬', keywords: ['densitet','massa','volym','flytförmåga','flytkraft','atomer','material','vatten'] },
+              { num: '5.1', title: 'Densitet', description: 'Hur tätt packat ett material är — ρ = m / V och vattnets densitet.', href: 'fysik1-densitet-app.html', icon: '🔬', keywords: ['densitet','massa','volym','atomer','material','vatten','våg'] },
               { num: '5.2', title: 'Tryck och tryckkraft', description: 'Tryck p = F / A — håller isen?', href: 'fysik1-tryck-pa-app.html', icon: '🧊', keywords: ['tryck','kraft','area','is','mekanik'] },
               { num: '5.3', title: 'Vätsketryck', description: 'Trycket i en vätska beror på djupet — p = ρ · g · h.', href: null, icon: '🌊', keywords: ['tryck','vätska','vatten','djup','hydrostatik'] },
               { num: '5.4', title: 'Lufttryck och totalt tryck', description: 'Atmosfärstrycket och dess effekter — Magdeburgska halvkloten.', href: 'fysik1-magdeburgska-halvklot.html', icon: '🐴', keywords: ['tryck','vakuum','atmosfärstryck','luft','historia','guericke'] },

@@ -1126,11 +1126,19 @@ komponenter på ledningarna och kopierar bilden till sina dokument. Modellen,
 layoutreglerna och kretsberäkningen beskrivs i filhuvudet och i sektionerna
 i `kopplingsschema.js`; läs dem innan du ändrar något.
 
-- **Menyvalet Verktyg** (rullgardin med Kopplingsschema) ligger efter
-  Nationella prov i huvudmenyn på tio sidor: `avsnitt`, `begrepp`, `index`,
-  `katalog`, `kontakt`, `nyheter`, `nyhetsbrev`, `om`, `simuleringar`, `np`
-  (samt `kopplingsschema.html` själv). Ett nytt verktyg läggs till i alla
-  elva; en ny sida med huvudmenyn ska ha Verktyg med.
+- **Menyvalet Resurser** (infört 2026-09-30, hette tidigare Verktyg) ligger
+  efter Nationella prov i huvudmenyn. Det är en rullgardin med två grupper,
+  byggda som Ämne-menyns grupper (`.lab-nav-dd-grupp`): **Verktyg**
+  (Kopplingsschema) och **Övningsblad** (Fysik, Matematik, som går till
+  `ovningsblad.html#fysik`/`#matematik`). Menyn finns på tolv sidor:
+  `avsnitt`, `begrepp`, `index`, `katalog`, `kontakt`, `nyheter`,
+  `nyhetsbrev`, `om`, `simuleringar`, `np`, `kopplingsschema` och
+  `ovningsblad` (samt `utkast/sannolikhetshornan.html`). Ett nytt verktyg
+  läggs till i alla; en ny sida med huvudmenyn ska ha Resurser med.
+- **`ovningsblad.html`** listar alla övningsblad ämne för ämne och kurs för
+  kurs, direkt ur `data/ovningsblad.js` + `data/katalog.js`. Ett blad som
+  registreras där syns alltså både på avsnittets kort och på översikten,
+  utan att sidan behöver ändras.
 - **Sökrutan** hittar verktygen via listan `VERKTYG` överst i `data/sok.js`.
 - **Öka versionsnumret** i `<script src="kopplingsschema.js?v=…">` när
   skriptet ändras. GitHub Pages låter webbläsaren spara filerna i tio

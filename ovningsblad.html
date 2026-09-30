@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontakt — Fysiklabbet</title>
+    <title>Övningsblad — Fysiklabbet</title>
+    <meta name="description" content="Utskriftsklara övningsblad i fysik och matematik för gymnasiet, med genomräknade exempel och facit eller lösningsförslag. Gratis att skriva ut eller öppna i mobilen.">
+    <link rel="canonical" href="https://fysiklabbet.se/ovningsblad.html">
+    <meta property="og:title" content="Övningsblad — Fysiklabbet">
+    <meta property="og:description" content="Utskriftsklara övningsblad i fysik och matematik med exempel och facit.">
+    <meta property="og:url" content="https://fysiklabbet.se/ovningsblad.html">
+    <meta name="twitter:title" content="Övningsblad — Fysiklabbet">
+    <meta name="twitter:description" content="Utskriftsklara övningsblad i fysik och matematik med exempel och facit.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
@@ -84,7 +91,7 @@
                     <a href="simuleringar.html">Simuleringar</a>
                     <a href="np.html">Nationella prov</a>
                     <div class="lab-nav-dd">
-                        <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        <button type="button" class="lab-nav-dd-trigger aktiv" aria-haspopup="true">
                             Resurser
                             <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
                         </button>
@@ -112,55 +119,31 @@
                     </div>
                     <a href="nyheter.html">Fysiknyheter</a>
                     <a href="om.html">Om</a>
-                    <a href="kontakt.html" class="active">Kontakt</a>
+                    <a href="kontakt.html">Kontakt</a>
                 </nav>
             </div>
         </div>
 
         <header class="lab-about-hero">
             <div class="lab-about-hero-inner">
-                <span class="lab-about-mono">KONTAKT · FYSIKLABBET</span>
-                <h1 class="lab-about-title">Hör <em>av</em> dig.</h1>
+                <span class="lab-about-mono">RESURSER · ÖVNINGSBLAD</span>
+                <h1 class="lab-about-title">Övnings<em>blad</em>.</h1>
                 <p class="lab-about-tagline">
-                    Har du frågor, förslag eller hittat ett fel i en simulering? Skriv några
-                    rader så återkommer jag så snart jag kan.
+                    Utskriftsklara blad för mängdträning, kopplade till genomgångarna i katalogen.
+                    Varje blad inleds med ett genomräknat exempel och har svar eller lösningsförslag
+                    på de sista sidorna, så att det går att arbeta helt på egen hand.
                 </p>
             </div>
         </header>
 
         <main class="lab-about-body">
-            <section class="lab-about-block">
-                <h2>Skicka ett meddelande</h2>
-                <p>
-                    Använd formuläret nedan så hamnar meddelandet direkt i min inkorg. Saknar
-                    du ett ämne, har en idé på en ny simulering eller hittat något som inte
-                    fungerar som det ska — berätta gärna!
-                </p>
-
-                <form id="contact-form" class="lab-form"
-                      action="https://formspree.io/f/mgolndaz" method="POST">
-                    <div class="lab-form-group">
-                        <label for="name">Namn</label>
-                        <input type="text" id="name" name="name" class="lab-input"
-                               placeholder="Ditt namn" required>
-                    </div>
-                    <div class="lab-form-group">
-                        <label for="email">E-post</label>
-                        <input type="email" id="email" name="email" class="lab-input"
-                               placeholder="din@epost.se" required>
-                    </div>
-                    <div class="lab-form-group">
-                        <label for="message">Meddelande</label>
-                        <textarea id="message" name="message" class="lab-textarea"
-                                  placeholder="Skriv ditt meddelande här…" required></textarea>
-                    </div>
-                    <button type="submit" class="lab-submit">Skicka meddelande →</button>
-                </form>
-
-                <div class="lab-form-success" id="success-message">
-                    <h3>Tack för ditt meddelande!</h3>
-                    <p>Jag återkommer så snart jag kan.</p>
-                </div>
+            <section class="lab-about-block ob-amne" id="fysik">
+                <h2>Fysik</h2>
+                <div class="ob-lista" data-amne="Fysik"></div>
+            </section>
+            <section class="lab-about-block ob-amne" id="matematik">
+                <h2>Matematik</h2>
+                <div class="ob-lista" data-amne="Matematik"></div>
             </section>
         </main>
 
@@ -170,33 +153,69 @@
         </footer>
     </div>
 
+    <style>
+        .lab-nav-dd-trigger.aktiv { border-bottom-color: var(--lab-accent); }
+        .ob-amne { scroll-margin-top: 16px; }
+        .ob-kurs { margin: 22px 0 0; }
+        .ob-kurs:first-child { margin-top: 4px; }
+        .ob-kurs h3 {
+            font-family: var(--lab-font-mono, 'JetBrains Mono', monospace);
+            font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--lab-ink-soft, #5b6472);
+            margin: 0 0 4px;
+        }
+        .ob-avsnitt { font-size: 13px; color: var(--lab-ink-soft, #5b6472); margin: 0 0 4px; }
+        .ob-avsnitt a { color: var(--lab-accent); text-decoration: none; }
+        .ob-avsnitt a:hover { text-decoration: underline; }
+        .ob-tom { color: var(--lab-ink-soft, #5b6472); font-size: 15px; }
+    </style>
+    <script>document.write('<scr' + 'ipt src="data/katalog.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/ovningsblad.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>
-        const form = document.getElementById('contact-form');
-        const successMessage = document.getElementById('success-message');
-
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const data = new FormData(form);
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    form.style.display = 'none';
-                    successMessage.style.display = 'block';
-                    form.reset();
-                } else {
-                    // Formspree avvisade AJAX-inskickningen (t.ex. CAPTCHA-krav).
-                    // Fall tillbaka på vanlig inskickning så meddelandet aldrig
-                    // försvinner tyst.
-                    form.submit();
-                }
-            } catch (error) {
-                form.submit();
-            }
+    // Listar alla blad i data/ovningsblad.js, ämne för ämne och kurs för kurs
+    // i katalogens ordning. Samma data som kortet Övningsblad i katalogen, så
+    // ett nytt blad syns här automatiskt.
+    (function () {
+        var blad = window.OVNINGSBLAD || {};
+        var flat = window.KATALOG_FLAT || [];
+        // Kursnamn → kurskod, samma som HASH_COURSES i katalog.html. Ett
+        // avsnitts id är kurskod + nummer (fy1-3.S).
+        var KOD = { 'Fysik nivå 1': 'fy1', 'Fysik nivå 2': 'fy2', 'Matematik nivå 1b': 'ma1b',
+            'Matematik nivå 1c': 'ma1c', 'Matematik nivå 2b': 'ma2b', 'Matematik nivå 2c': 'ma2c',
+            'Matematik fortsättning nivå 1c': 'ma3c', 'Matematik fortsättning nivå 2': 'ma4' };
+        flat = flat.map(function (a) { return Object.assign({ id: KOD[a.course] + '-' + a.num }, a); });
+        var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+        var em = function (s) { return esc(s).replace(/\*([^*]+)\*/g, '<em>$1</em>'); };
+        document.querySelectorAll('.ob-lista').forEach(function (el) {
+            var amne = el.getAttribute('data-amne');
+            var kurser = [], perKurs = {};
+            flat.forEach(function (a) {
+                if (a.subject !== amne || !blad[a.id]) return;
+                if (!perKurs[a.course]) { perKurs[a.course] = []; kurser.push(a.course); }
+                perKurs[a.course].push(a);
+            });
+            if (!kurser.length) { el.innerHTML = '<p class="ob-tom">Övningsblad kommer snart.</p>'; return; }
+            el.innerHTML = kurser.map(function (k) {
+                var rader = perKurs[k].map(function (a) {
+                    return blad[a.id].map(function (b, j) {
+                        return '<li class="lab-ovningsblad-rad"><div class="lab-ovningsblad-text">' +
+                            (j === 0 ? '<p class="ob-avsnitt">Avsnitt <a class="artikel-lank" href="katalog.html?id=' + esc(a.id) + ':ovningsblad">' + esc(a.num) + ' ' + em(a.title) + '</a></p>' : '') +
+                            '<div class="lab-ovningsblad-titel">' + em(b.titel) + '</div>' +
+                            '<div class="lab-ovningsblad-meta"><span class="lab-ovningsblad-niva">Nivå: ' + esc((b.niva || []).join(' - ')) + '</span>' +
+                            (b.antal ? '<span> · ' + b.antal + ' uppgifter</span>' : '') + '</div>' +
+                            (b.beskrivning ? '<div class="lab-ovningsblad-besk">' + em(b.beskrivning) + '</div>' : '') +
+                            '</div><div class="lab-ovningsblad-lankar">' +
+                            '<a class="lab-btn lab-btn-primary" href="' + esc(b.html) + '" target="_blank" rel="noopener">Öppna bladet</a>' +
+                            (b.pdf ? '<a class="lab-btn" href="' + esc(b.pdf) + '" target="_blank" rel="noopener">PDF för utskrift</a>' : '') +
+                            '</div></li>';
+                    }).join('');
+                }).join('');
+                return '<div class="ob-kurs"><h3>' + esc(k) + '</h3><ul class="lab-ovningsblad-lista">' + rader + '</ul></div>';
+            }).join('');
         });
+        // Hashen pekar på ett ämne som ritades först nu: skrolla dit igen.
+        if (location.hash) { var t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
+    })();
     </script>
     <script>document.write('<scr' + 'ipt src="feedback.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
     <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->

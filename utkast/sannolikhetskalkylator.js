@@ -572,19 +572,27 @@ const plain = h => String(h).replace(/<sub>(.*?)<\/sub>/g, '$1').replace(/<sup>2
 
 /* ================= 4. Exempel med riktiga data ================= */
 // Källorna står också under "Källor till exemplen" i sidans text.
+// Frågornas ordval följer det som mäts: längder är kortare eller längre,
+// inte mindre eller större. {a} och {b} är gränserna, vem är gruppen.
+const Q_STD = { vem: 'av värdena', left: 'är mindre än {b}', right: 'är större än {a}', interval: 'ligger mellan {a} och {b}', outside: 'är mindre än {a} eller större än {b}' };
+const Q_KVINNOR = { vem: 'av kvinnorna', left: 'är kortare än {b}', right: 'är längre än {a}', interval: 'är mellan {a} och {b} långa', outside: 'är kortare än {a} eller längre än {b}' };
+const Q_MAN = Object.assign({}, Q_KVINNOR, { vem: 'av männen' });
+const Q_IQ = { vem: 'av dem som testas', left: 'har lägre IQ än {b}', right: 'har högre IQ än {a}', interval: 'har ett IQ mellan {a} och {b}', outside: 'har lägre IQ än {a} eller högre IQ än {b}' };
+const Q_TEMP = { vem: 'av friska vuxna', left: 'har lägre temperatur än {b}', right: 'har högre temperatur än {a}', interval: 'har en temperatur mellan {a} och {b}', outside: 'har lägre temperatur än {a} eller högre temperatur än {b}' };
+const Q_SONDER = { vem: 'av atomerna', left: 'sönderfaller inom {b}', right: 'finns kvar efter {a}', interval: 'sönderfaller mellan {a} och {b}', outside: 'sönderfaller inom {a} eller finns kvar efter {b}' };
 const PRESETS = [
-  { id: 'kvinnor', grp: 'Normalfördelning', title: 'Längd, svenska kvinnor', d: 'normal', pt: { mu: '165,5', sigma: '6,15' }, u: 'cm', xl: 'Längd', desc: I('X') + ' = längden hos en slumpvis vald svensk kvinna', src: 'SCB 1998–2000, 16–84 år', m: 'interval', a: 160, b: 170 },
-  { id: 'man', grp: 'Normalfördelning', title: 'Längd, svenska män', d: 'normal', pt: { mu: '179', sigma: '6,85' }, u: 'cm', xl: 'Längd', desc: I('X') + ' = längden hos en slumpvis vald svensk man', src: 'SCB 1998–2000, 16–84 år', m: 'right', a: 190 },
-  { id: 'jamfor', grp: 'Normalfördelning', title: 'Kvinnor och män jämförda', d: 'normal', pt: { mu: '165,5', sigma: '6,15' }, cmp: { mu: '179', sigma: '6,85' }, names: ['Kvinnor', 'Män'], u: 'cm', xl: 'Längd', desc: 'Hur stor andel av kvinnorna är längre än medellängden för män?', src: 'SCB 1998–2000, 16–84 år', m: 'right', a: 179 },
-  { id: 'iq', grp: 'Normalfördelning', title: 'IQ', d: 'normal', pt: { mu: '100', sigma: '15' }, u: '', xl: 'IQ', desc: I('X') + ' = resultatet på ett IQ-test', src: 'Testerna normeras till 100 och 15', m: 'right', a: 130 },
-  { id: 'temp', grp: 'Normalfördelning', title: 'Kroppstemperatur', d: 'normal', pt: { mu: '36,8', sigma: '0,4' }, u: '°C', xl: 'Temperatur', desc: I('X') + ' = temperaturen i munnen hos en frisk vuxen', src: 'Mackowiak och kollegor 1992', m: 'right', a: 37.7 },
+  { id: 'kvinnor', grp: 'Normalfördelning', title: 'Längd, svenska kvinnor', d: 'normal', pt: { mu: '165,5', sigma: '6,15' }, u: 'cm', xl: 'Längd', q: Q_KVINNOR, desc: I('X') + ' = längden hos en slumpvis vald svensk kvinna', src: 'SCB 1998–2000, 16–84 år', m: 'interval', a: 160, b: 170 },
+  { id: 'man', grp: 'Normalfördelning', title: 'Längd, svenska män', d: 'normal', pt: { mu: '179', sigma: '6,85' }, u: 'cm', xl: 'Längd', q: Q_MAN, desc: I('X') + ' = längden hos en slumpvis vald svensk man', src: 'SCB 1998–2000, 16–84 år', m: 'right', a: 190 },
+  { id: 'jamfor', grp: 'Normalfördelning', title: 'Kvinnor och män jämförda', d: 'normal', pt: { mu: '165,5', sigma: '6,15' }, cmp: { mu: '179', sigma: '6,85' }, names: ['Kvinnor', 'Män'], u: 'cm', xl: 'Längd', q: Q_KVINNOR, desc: 'Hur stor andel av kvinnorna är längre än medellängden för män?', src: 'SCB 1998–2000, 16–84 år', m: 'right', a: 179 },
+  { id: 'iq', grp: 'Normalfördelning', title: 'IQ', d: 'normal', pt: { mu: '100', sigma: '15' }, u: '', xl: 'IQ', q: Q_IQ, desc: I('X') + ' = resultatet på ett IQ-test', src: 'Testerna normeras till 100 och 15', m: 'right', a: 130 },
+  { id: 'temp', grp: 'Normalfördelning', title: 'Kroppstemperatur', d: 'normal', pt: { mu: '36,8', sigma: '0,4' }, u: '°C', xl: 'Temperatur', q: Q_TEMP, desc: I('X') + ' = temperaturen i munnen hos en frisk vuxen', src: 'Mackowiak och kollegor 1992', m: 'right', a: 37.7 },
   { id: 'z', grp: 'Normalfördelning', title: 'Standardnormalfördelningen', d: 'normal', pt: { mu: '0', sigma: '1' }, u: '', xl: '', desc: '95' + NB + '% av värdena ligger mellan ' + MINUS + '1,96 och 1,96', src: 'Medelvärde 0, standardavvikelse 1', m: 'interval', a: -1.96, b: 1.96 },
   { id: 'tarning', grp: 'Binomialfördelning', title: 'Sexor på 60 tärningskast', d: 'binom', pt: { n: '60', p: '1/6' }, u: '', xl: 'Antal sexor', desc: I('X') + ' = antalet sexor på 60 kast med en tärning', src: 'Sannolikheten 1/6 per kast', m: 'right', a: 15 },
   { id: 'mynt', grp: 'Binomialfördelning', title: 'Krona på 100 myntkast', d: 'binom', pt: { n: '100', p: '0,5' }, u: '', xl: 'Antal krona', desc: I('X') + ' = antalet krona på 100 kast med ett mynt', src: 'Sannolikheten 0,5 per kast', m: 'interval', a: 40, b: 60 },
   { id: 'gissa', grp: 'Binomialfördelning', title: 'Gissa på ett flervalsprov', d: 'binom', pt: { n: '20', p: '0,25' }, u: '', xl: 'Antal rätt', desc: I('X') + ' = antalet rätt när alla 20 frågor med fyra alternativ gissas', src: 'Sannolikheten 1/4 per fråga', m: 'right', a: 10 },
   { id: 'vm', grp: 'Poissonfördelning', title: 'Mål per match i fotbolls-VM 2022', d: 'poisson', pt: { lam: '2,69' }, u: '', xl: 'Antal mål', desc: I('X') + ' = antalet mål i en match', src: '172 mål på 64 matcher', m: 'right', a: 5 },
   { id: 'hast', grp: 'Poissonfördelning', title: 'Hästsparkar i preussiska armén', d: 'poisson', pt: { lam: '0,61' }, u: '', xl: 'Antal döda', desc: I('X') + ' = antalet soldater i en kår som dödades av hästsparkar under ett år', src: 'Bortkiewicz 1898, 122 döda på 200 kårår', m: 'right', a: 2 },
-  { id: 'radon', grp: 'Exponentialfördelning', title: 'Sönderfall av radon-222', d: 'exp', pt: { lam: '0,18145' }, u: 'dygn', xl: 'Tid', desc: I('X') + ' = tiden tills en radonatom sönderfaller', src: 'Halveringstiden 3,82 dygn ger ' + I('λ') + ' = ln 2 / 3,82', m: 'left', b: 3.82 },
+  { id: 'radon', grp: 'Exponentialfördelning', title: 'Sönderfall av radon-222', d: 'exp', pt: { lam: '0,18145' }, u: 'dygn', xl: 'Tid', q: Q_SONDER, desc: I('X') + ' = tiden tills en radonatom sönderfaller', src: 'Halveringstiden 3,82 dygn ger ' + I('λ') + ' = ln 2 / 3,82', m: 'left', b: 3.82 },
   { id: 't95', grp: I('t') + '- och chitvåfördelning', title: 'Kritiska värden, ' + I('t') + '-fördelning', d: 't', pt: { nu: '9' }, u: '', xl: '', desc: '95' + NB + '% av värdena ligger mellan de kritiska värdena (stickprov med 10 värden)', src: '9 frihetsgrader', m: 'interval', a: -2.262, b: 2.262 },
   { id: 'chi', grp: I('t') + '- och chitvåfördelning', title: 'Kritiskt värde, chitvåfördelning', d: 'chi2', pt: { nu: '3' }, u: '', xl: '', desc: '5' + NB + '% av värdena ligger över det kritiska värdet 7,815', src: '3 frihetsgrader', m: 'right', a: 7.815 },
 ];
@@ -1241,10 +1249,8 @@ function renderSbar() {
   const inp = h => `<span class="qf"><input data-b="${h}" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="${h === 'a' ? 'Undre gräns' : 'Övre gräns'}">${u}</span>`;
   let q;
   if (!disk) {
-    if (S.m === 'left') q = `Hur många procent är mindre än ${inp('b')}?`;
-    else if (S.m === 'right') q = `Hur många procent är större än ${inp('a')}?`;
-    else if (S.m === 'interval') q = `Hur många procent ligger mellan ${inp('a')} och ${inp('b')}?`;
-    else q = `Hur många procent är mindre än ${inp('a')} eller större än ${inp('b')}?`;
+    const Q = qTmpl();
+    q = `Hur många procent ${Q.vem === Q_STD.vem ? '' : Q.vem + ' '}${fillQ(inp('a'), inp('b'))}?`;
   } else {
     const st = 'Hur stor är sannolikheten att utfallet blir';
     if (S.m === 'left') q = `${st} högst ${inp('b')}?`;
@@ -1289,7 +1295,7 @@ function intervalX() {
 // Svaret som mening, för bildens rubrik.
 function answerHtml(pr) {
   const disk = D_().kind === 'disk';
-  return disk ? `Sannolikheten att utfallet blir ${wordsFor()}: ${pctfmt(pr)}` : `Andelen som är ${wordsFor()}: ${pctfmt(pr)}`;
+  return disk ? `Sannolikheten att utfallet blir ${wordsFor()}: ${pctfmt(pr)}` : `Andelen ${qTmpl().vem} som ${wordsFor()}: ${pctfmt(pr)}`;
 }
 function paramList(d, src, withUnit) {
   const D = DISTS[d], t = ptext(d, src);
@@ -1315,11 +1321,15 @@ function wordsFor() {
     if (S.m === 'interval') return `från och med ${f(S.a)} till och med ${f(S.b)}`;
     return `högst ${f(S.a)} eller minst ${f(S.b)}`;
   }
-  if (S.m === 'left') return `mindre än ${f(S.b)}`;
-  if (S.m === 'right') return `större än ${f(S.a)}`;
-  if (S.m === 'interval') return `mellan ${f(S.a)} och ${f(S.b)}`;
-  return `mindre än ${f(S.a)} eller större än ${f(S.b)}`;
+  return fillQ(f(S.a), f(S.b));
 }
+// Förinställningens ordval gäller så länge fördelningen är densamma, även
+// om parametrarna ändras.
+function qTmpl() {
+  const pr = PRESETS.find(x => x.id === S.pre && x.d === S.d);
+  return (pr && pr.q) || Q_STD;
+}
+const fillQ = (a, b) => qTmpl()[S.m].replace('{a}', a).replace('{b}', b);
 function redovHtml(pr) {
   const D = D_(), disk = D.kind === 'disk';
   const pl = paramList(S.d, null, false);
@@ -1357,7 +1367,7 @@ function renderRight() {
     <div class="optrow"><span>Antal värden</span><div class="seg" data-seg="simN">${[100, 1000, 10000].map(n => `<button type="button" data-v="${n}" class="${S.simN === n ? 'on' : ''}">${num(n, 0)}</button>`).join('')}</div></div>
     <div style="display:flex;gap:8px;margin-top:6px"><button type="button" class="wbtn dark" id="simBtn">Slumpa</button><button type="button" class="wbtn" id="simClr"${sim ? '' : ' hidden'}>Ta bort</button></div>
     <div class="note simstat" id="simStat"></div></div>`;
-  h += `<div class="grp"><div class="eyebrow">Antal i en grupp</div><div class="cnt"><span>Av</span><input id="cntN" value="${esc(S.N)}" inputmode="numeric" autocomplete="off" aria-label="Antal i gruppen"><span>väntas</span></div><div class="cnt-out" id="cntOut"></div></div>`;
+  h += `<div class="grp"><div class="eyebrow">Antal i en grupp</div><div class="cnt"><span>Antal i gruppen</span><input id="cntN" value="${esc(S.N)}" inputmode="numeric" autocomplete="off" aria-label="Antal i gruppen"></div><div class="cnt-out" id="cntOut"></div></div>`;
   h += `<div class="grp"><div class="optrow"><span>Decimaler</span><div class="seg" data-seg="dec">${[2, 3, 4, 5, 6].map(n => `<button type="button" data-v="${n}" class="${S.dec === n ? 'on' : ''}">${n}</button>`).join('')}</div></div></div>`;
   rightEl.innerHTML = h;
   renderFormula();
@@ -1403,7 +1413,7 @@ function update(o = {}) {
   const big = $('#bigP');
   if (big) big.innerHTML = isFinite(pr) ? `${pfmt(pr)}<small>${pctfmt(pr)}</small>` : '–';
   const words = $('#resWords');
-  if (words) words.innerHTML = isFinite(pr) ? (disk ? `Sannolikheten att utfallet blir ${wordsFor()} är ${pfmt(pr)} = ${pctfmt(pr)}.` : `${pctfmt(pr)} av värdena är ${wordsFor()}. Andelen är arean under grafen i intervallet.`) : '';
+  if (words) words.innerHTML = isFinite(pr) ? (disk ? `Sannolikheten att utfallet blir ${wordsFor()} är ${pfmt(pr)} = ${pctfmt(pr)}.` : `${pctfmt(pr)} ${qTmpl().vem} ${wordsFor()}. Andelen är arean under grafen i intervallet.`) : '';
   const cr = $('#cmpRes');
   if (cr) {
     if (S.cmp) {
@@ -1465,7 +1475,10 @@ function update(o = {}) {
   const co = $('#cntOut');
   if (co) {
     const N = parseNum(S.N);
-    co.innerHTML = (isFinite(N) && N > 0 && isFinite(pr)) ? `i genomsnitt <b>${num(N * pr, N * pr >= 100 ? 0 : 1)}</b> ha ett värde som är ${wordsFor()}.` : 'Skriv hur många som ingår i gruppen.';
+    const cnt = num(N * pr, N * pr >= 100 ? 0 : 1);
+    co.innerHTML = !(isFinite(N) && N > 0 && isFinite(pr)) ? 'Skriv hur många som ingår i gruppen.'
+      : disk ? `Av ${num(N, 0)} gånger blir utfallet ${wordsFor()} i genomsnitt <b>${cnt}</b> gånger.`
+      : `Av ${num(N, 0)} är det i genomsnitt <b>${cnt}</b> som ${wordsFor()}.`;
   }
   const tag = $('#sheetTag'); if (tag) tag.innerHTML = sheetTagHtml();
   if (!o.noDraw) draw();

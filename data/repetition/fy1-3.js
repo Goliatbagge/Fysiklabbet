@@ -6,7 +6,7 @@ window.REPETITION['fy1-3'] = {
     courseCode: 'fy1',
     chapter: 'Krafter',
     chapterNumber: 3,
-    intro: 'Här repeterar du Newtons tre lagar, tyngdkraft och normalkraft, gravitationslagen, friktion och komposantuppdelning på lutande plan.',
+    intro: 'Här repeterar du Newtons tre lagar, tyngdkraft och normalkraft, gravitationslagen, friktion, komposantuppdelning på lutande plan och kraftmoment.',
     stations: [
         {
             type: 'par',
@@ -20,6 +20,7 @@ window.REPETITION['fy1-3'] = {
                 { a: '$F_S$', b: 'Spännkraft' },
                 { a: '$\\mu$', b: 'Friktionstal' },
                 { a: '$G$', b: 'Gravitationskonstanten' },
+                { a: '$M$', b: 'Kraftmoment' },
             ],
         },
         {
@@ -32,6 +33,7 @@ window.REPETITION['fy1-3'] = {
                 { fore: 'Friktionskraften ges av formeln', efter: '.', svar: '$F_f = \\mu \\cdot F_N$' },
                 { fore: 'Newtons gravitationslag skrivs', efter: '.', svar: '$F_G = G \\cdot \\dfrac{m_1 \\cdot m_2}{r^{2}}$' },
                 { fore: 'Tyngdkraftens komposant nedför ett lutande plan med vinkeln α ges av', efter: '.', svar: '$F_1 = m \\cdot g \\cdot \\sin \\alpha$' },
+                { fore: 'Kraftmomentet ges av formeln', efter: '.', svar: '$M = F \\cdot l$' },
             ],
             distraktorer: ['$F_R = m + a$', '$F_G = \\dfrac{m}{g}$'],
         },
@@ -71,8 +73,8 @@ window.REPETITION['fy1-3'] = {
                   sant: false, varfor: 'Normalkraften är alltid vinkelrät mot kontaktytan — på ett lutande plan pekar den snett ut från planet.' },
                 { text: 'Jorden och månen drar i varandra med exakt lika stor gravitationskraft, trots att jorden har mycket större massa.',
                   sant: true, varfor: 'Enligt Newtons tredje lag är krafterna lika stora — det är accelerationen som blir mycket mindre hos den tyngre jorden.' },
-                { text: 'En raket som accelererar uppåt gör det genom att skjuta ut gas nedåt.',
-                  sant: true, varfor: 'Newtons tredje lag: raketen trycker gasen nedåt, och gasen trycker raketen uppåt med en lika stor motriktad kraft.' },
+                { text: 'Samma kraft ger ett större kraftmoment ju närmare vridningspunkten den verkar.',
+                  sant: false, varfor: 'Kraftmomentet $M = F \\cdot l$ ökar med hävarmen $l$, så samma kraft vrider mer ju längre från vridningspunkten den verkar.' },
             ],
         },
     ],

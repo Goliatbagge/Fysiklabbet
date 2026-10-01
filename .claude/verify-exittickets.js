@@ -49,7 +49,8 @@ for (const subj of Object.values(WK.KATALOG)) {
 // Täckning. Matematik nivå 1b delar innehåll med 1c och nivå 2b med 2c:
 // aliasade avsnitt (WK.MA1B_ALIAS/WK.MA2B_ALIAS, b-id → c-id) täcks av
 // c-posten och ska INTE ha någon egen post i exittickets.js.
-const ALIAS = { ...(WK.MA1B_ALIAS || {}), ...(WK.MA2B_ALIAS || {}) };
+// Kraftmomentet i Fysik nivå 1 delas på samma sätt med nivå 2 (WK.FY1_ALIAS).
+const ALIAS = { ...(WK.MA1B_ALIAS || {}), ...(WK.MA2B_ALIAS || {}), ...(WK.FY1_ALIAS || {}) };
 for (const id of sections) {
     const cid = ALIAS[id] || id;
     if (!ET[cid] || !Array.isArray(ET[cid]) || ET[cid].length === 0) {

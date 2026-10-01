@@ -64,7 +64,10 @@
         const MA1B_ALIAS = window.MA1B_ALIAS || {};
         // Matematik nivå 2b delar innehåll med 2c på samma sätt (MA2B_SPEC).
         const MA2B_ALIAS = window.MA2B_ALIAS || {};
-        for (const [bId, cId] of Object.entries({ ...MA1B_ALIAS, ...MA2B_ALIAS })) {
+        // Kraftmomentet delas mellan Fysik nivå 2 och nivå 1 (Gy25) på samma
+        // sätt: fy1-3.11 → fy2-1.1 osv. (FY1_ALIAS i data/katalog.js).
+        const FY1_ALIAS = window.FY1_ALIAS || {};
+        for (const [bId, cId] of Object.entries({ ...MA1B_ALIAS, ...MA2B_ALIAS, ...FY1_ALIAS })) {
             if (TEORI[bId] === undefined && TEORI[cId] !== undefined) TEORI[bId] = TEORI[cId];
             if (OVNINGAR[bId] === undefined && OVNINGAR[cId] !== undefined) OVNINGAR[bId] = OVNINGAR[cId];
             if (EXITTICKETS[bId] === undefined && EXITTICKETS[cId] !== undefined) EXITTICKETS[bId] = EXITTICKETS[cId];
@@ -2634,7 +2637,8 @@
                     // sitt eget (1c/2c-)id — fall tillbaka på det.
                     const mod = (window.VISUALISERINGAR || {})[id]
                         || (window.VISUALISERINGAR || {})[MA1B_ALIAS[id]]
-                        || (window.VISUALISERINGAR || {})[MA2B_ALIAS[id]];
+                        || (window.VISUALISERINGAR || {})[MA2B_ALIAS[id]]
+                        || (window.VISUALISERINGAR || {})[FY1_ALIAS[id]];
                     if (mod && mod.mount) {
                         instance = mod.mount(hostRef.current);
                     } else {

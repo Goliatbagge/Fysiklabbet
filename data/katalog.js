@@ -64,7 +64,7 @@ window.KATALOG = {
           },
           'Krafter': {
             number: 3,
-            intro: 'Vad som får saker att röra sig eller stanna. Newtons tre lagar förklarar samspelet mellan kraft, massa och rörelse — från friktion på lutande plan till gravitationen mellan planeter.',
+            intro: 'Vad som får saker att röra sig eller stanna. Newtons tre lagar förklarar samspelet mellan kraft, massa och rörelse — från friktion på lutande plan till gravitationen mellan planeter. Kapitlet avslutas med kraftmoment: hur krafter får föremål att vrida sig och när de står i jämvikt.',
             sections: [
               { num: '3.1', title: 'Kraft och Newtons första lag', description: 'Tröghet — en kropp förblir i vila eller likformig rörelse om resulterande kraft är noll. Tre scenarier: rymden, en bil och en fallskärmshoppare.', href: 'fysik1-newtons-forsta-app.html', icon: '⚖️', keywords: ['krafter','newton','första lagen','tröghetslagen','tröghet','jämvikt','resulterande kraft','konstant hastighet','likformig rörelse','luftmotstånd','gränshastighet','fallskärm','mekanik'] },
               { num: '3.2', title: 'Newtons andra lag', description: 'F = m · a — lägg en kraft på en kärra och se accelerationen. Ändra objektets massa och kraftens storlek.', href: 'fysik1-newtons-andra-app.html', icon: '➡️', keywords: ['krafter','newton','andra lagen','kraft','massa','acceleration','f=ma','kärra','vagn','resulterande kraft','dynamik','mekanik','hastighetsmätare'] },
@@ -77,7 +77,7 @@ window.KATALOG = {
               { num: '3.9', title: 'Accelerationens riktning', description: 'Att avgöra åt vilket håll accelerationen pekar.', href: null, icon: '↗️', keywords: ['krafter','acceleration','riktning','vektor'] },
               { num: '3.10', title: 'Trissor', description: 'Krafter och rörelse i system med trissor och linor.', href: null, icon: '⚙️', keywords: ['krafter','trissa','remskiva','mekanik'] },
               { num: '3.E', title: 'Enhetskoll', description: 'Quiz på kapitlets storheter, enheter och beteckningar — kraft, massa, tyngdfaktor och friktionstal.', href: 'fysik-enhetskoll.html#fy1-3', icon: '✓', keywords: ['enhetskoll','enheter','storheter','beteckningar','si-enheter','krafter','newton','quiz'] },
-              { num: '3.S', title: 'Sammanfattning', description: 'Newtons lagar, friktion och lutande plan — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy1-3', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','krafter','newton','friktion','mekanik'] },
+              { num: '3.S', title: 'Sammanfattning', description: 'Newtons lagar, friktion, lutande plan och kraftmoment — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy1-3', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','krafter','newton','friktion','mekanik','kraftmoment','hävarm','momentjämvikt'] },
             ],
           },
           'Energi': {
@@ -973,6 +973,54 @@ window.MA2B_ALIAS = {};
     },
     chapters,
   };
+})();
+
+// ═══════════════════════════════════════════════════════════════════════
+// Kraftmoment i BÅDE Fysik nivå 1 och Fysik nivå 2 (infört 2026-10-01).
+//
+// Med Gy25 flyttade kraftmomentet från Fysik 2 till Fysik nivå 1. Avsnitten
+// ligger kvar i Fysik nivå 2 (fy2-1.1–1.3) för dem som läser den gamla
+// kursen Fysik 2, och DELAS med Fysik nivå 1 kapitel 3 (Krafter) på samma
+// sätt som Matematik 1b delar med 1c: katalogposten kopieras härifrån och
+// innehållet (teori-md, övningar, exit tickets, övningsblad,
+// visualiseringar) slås upp via aliaskartan window.FY1_ALIAS
+// (fy1-id → fy2-id). Redigera ALLTID fy2-filerna — skapa aldrig egna
+// fy1-3.11/3.12/3.13-poster i data/teori, ovningar.js eller exittickets.js.
+//
+// Posterna läggs SIST i kapitlet (före Enhetskoll och Sammanfattning), så
+// att inga befintliga fy1-adresser numreras om. Fältet `delad` på en post
+// betyder "innehållet ägs av detta id": section-nav.js hoppar då över posten
+// (simuleringssidan ska peka på sitt egentliga avsnitt i nivå 2), och
+// sökrutan ger den bara en teorirad, ingen dubblerad simuleringsrad.
+// ═══════════════════════════════════════════════════════════════════════
+window.FY1_ALIAS = {};
+(function () {
+  const fy1 = window.KATALOG['Fysik'].courses['Fysik nivå 1'];
+  const fy2 = window.KATALOG['Fysik'].courses['Fysik nivå 2'];
+  const kopia = (o) => JSON.parse(JSON.stringify(o));
+  const DELADE = [
+    { kapitel: 'Krafter', fran: { kapitel: 'Rörelse och krafter', num: ['1.1', '1.2', '1.3'] } },
+  ];
+  for (const d of DELADE) {
+    const mal = fy1.chapters[d.kapitel];
+    const src = fy2.chapters[d.fran.kapitel];
+    const kap = mal.number;
+    // Sista vanliga avsnittsnumret i kapitlet (hoppar över K.E och K.S).
+    let n = Math.max(...mal.sections
+      .map((s) => String(s.num).split('.')[1])
+      .filter((t) => /^\d+$/.test(t))
+      .map(Number));
+    const nya = d.fran.num.map((num) => {
+      const sec = kopia(src.sections.find((s) => String(s.num) === num));
+      n += 1;
+      sec.num = kap + '.' + n;
+      sec.delad = 'fy2-' + num;
+      window.FY1_ALIAS['fy1-' + sec.num] = sec.delad;
+      return sec;
+    });
+    const forst = mal.sections.findIndex((s) => /\.(E|S)$/.test(String(s.num)));
+    mal.sections.splice(forst < 0 ? mal.sections.length : forst, 0, ...nya);
+  }
 })();
 
 // Platt lista — full kontext per avsnitt. Används för sök och listvyer.

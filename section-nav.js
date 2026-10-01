@@ -41,6 +41,10 @@
             for (const chapKey in chapters) {
                 const sections = chapters[chapKey].sections || [];
                 for (const sec of sections) {
+                    // Delade avsnitt (sec.delad, t.ex. kraftmomentet i Fysik
+                    // nivå 1) pekar på samma simulering som sitt egentliga
+                    // avsnitt — raden ska visa ägaren, inte kopian.
+                    if (sec.delad) continue;
                     if ((sec.href && sec.href.toLowerCase() === file) ||
                         (sec.href2 && sec.href2.toLowerCase() === file) ||
                         (sec.href3 && sec.href3.toLowerCase() === file)) {

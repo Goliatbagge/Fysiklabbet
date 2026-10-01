@@ -664,6 +664,27 @@ ovan gäller likadant, med 2b:s egna fakta:
   `description`/`keywords` (används för 2.S, vars 2c-beskrivning nämner
   rotekvationer).
 
+## ⚠️ Kraftmomentet delas mellan Fysik nivå 2 och Fysik nivå 1
+
+Med Gy25 flyttade kraftmomentet till Fysik nivå 1, men elever som läser den
+gamla kursen Fysik 2 behöver det kvar där. Avsnitten fy2-1.1 (Kraftmoment),
+fy2-1.2 (Mer kraftmoment) och fy2-1.3 (Stabilitet, fördjupning) visas därför
+ÄVEN som fy1-3.11–3.13 i Fysik nivå 1, kapitel Krafter (infört 2026-10-01
+efter ett lärarmejl). Samma mekanism som Matematik 1b/1c: `DELADE` +
+`window.FY1_ALIAS` sist i `data/katalog.js`.
+
+- **Redigera alltid fy2-filerna** (md, övningar, exit tickets,
+  pennlösningar). Skapa aldrig egna poster under fy1-3.11/3.12/3.13 —
+  `verify-exittickets.js` ger DUBBLETT-fel.
+- Fältet `delad` på katalogposten gör att `section-nav.js` hoppar över
+  kopian (simuleringssidan pekar på nivå 2-avsnittet) och att sökrutan bara
+  ger kopian en teorirad, ingen dubblerad simuleringsrad.
+- Ett nytt avsnitt i fy1 kapitel 3 läggs FÖRE de delade (eller så numreras
+  de om): de räknas fram som "sista numret + 1", så ett nytt 3.11 skulle
+  flytta kraftmomentet till 3.12 och bryta gamla länkar till fy1-3.11.
+- `fy1-3.S` (sammanfattningen) och enhetskollen fy1-3 täcker ännu inte
+  kraftmomentet.
+
 ## ⚠️ KRITISK: Navigation i ALLA HTML-filer
 
 **Varje HTML-simulering MÅSTE innehålla:**

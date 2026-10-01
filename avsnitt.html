@@ -40,6 +40,13 @@
         const K = window.KATALOG;
         const KF = window.KATALOG_FLAT;
         const TEORI = window.TEORI || {};
+        // Delade avsnitt (Matematik 1b/2b ur 1c/2c, kraftmomentet i Fysik
+        // nivå 1 ur nivå 2): slå upp teorin under ägarens id.
+        const ALIAS = { ...(window.MA1B_ALIAS || {}), ...(window.MA2B_ALIAS || {}),
+                        ...(window.FY1_ALIAS || {}) };
+        for (const [aId, srcId] of Object.entries(ALIAS)) {
+            if (TEORI[aId] === undefined && TEORI[srcId] !== undefined) TEORI[aId] = TEORI[srcId];
+        }
 
         // --- Skydda math-block från marked (annars äts \; \, \! upp och
         // semikolonet blir kvar som synlig text).
@@ -808,7 +815,8 @@
             }
 
             const courseSlug = meta.course.toLowerCase().replace(' ', '');
-            const chapterLabel = (fm.chapter || meta.chapter || '').toUpperCase();
+            // Ett delat avsnitt bär ägarens frontmatter (fel kapitel) — katalogen vinner då.
+            const chapterLabel = ((ALIAS[id] ? meta.chapter : fm.chapter) || meta.chapter || '').toUpperCase();
             const courseHash = meta.course === 'Fysik nivå 2' ? 'fy2' : 'fy1';
 
             return (

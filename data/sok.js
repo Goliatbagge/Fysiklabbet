@@ -114,7 +114,9 @@
       hay: normalize(sectionWords),
     });
 
-    const sims = simEntries(section);
+    // Ett delat avsnitt (section.delad, kraftmomentet i Fysik nivå 1) får
+    // bara sin teorirad: simuleringen finns redan som rad under ägaren.
+    const sims = section.delad ? [] : simEntries(section);
     const flera = sims.length > 1;
     for (const s of sims) {
       const ownWords = [s.name, s.desc, section.course, section.chapter]

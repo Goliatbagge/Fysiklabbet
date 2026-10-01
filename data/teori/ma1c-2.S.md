@@ -41,6 +41,9 @@ hur många lösningar en ekvation eller olikhet har.
   lösa den innebär att lösa ut variabeln.
 - **olikhet**: jämförelse mellan två uttryck med ett olikhetstecken
   (<, >, ≤, ≥) i stället för likhetstecken.
+- **intervall**: en sammanhängande mängd tal på tallinjen, till exempel
+  alla tal mellan −2 och 2, $-2 < x < 2$. Lösningen till en olikhet är
+  oftast ett eller flera intervall.
 - **andragradsekvation / tredjegradsekvation**: ekvation där variabelns
   högsta exponent är 2 respektive 3.
 - **potensekvation**: ekvation där variabeln står upphöjd till en

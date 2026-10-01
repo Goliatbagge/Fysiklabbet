@@ -264,25 +264,33 @@
         const VMAX = 25;              // begränsa farten för rimlig animation
         // Luftmotstånd: F_luft = DRAG_K · v² (kvadratiskt i farten, motriktad
         // rörelsen — vid dessa farter dominerar v²-termen, lärarpåpekat
-        // 2026-08-28). DRAG_K vald så att vid v = VMAX (25 m/s) ger den 20 N —
-        // lika med den maximala drivkraften → resulterande kraft 0 och
-        // konstant fart.
+        // 2026-08-28). DRAG_K vald så att vid v = VMAX (25 m/s) ger den 20 N,
+        // lika mycket som en motor orkar ge. Med båda motorerna på 20 N blir
+        // toppfarten √(40 / DRAG_K) ≈ 35 m/s.
         const DRAG_K = 20 / (VMAX * VMAX);   // = 0,032 N per (m/s)²
 
         // Greppet sätter ett tak för drivkraften (påpekat av Göran Malmsten
         // 2026-10-01: 40 N på 1 kg krävde friktionstalet 4 och gav 250 km/h på
         // knappt två sekunder). Drivkraften ÄR den statiska friktionskraften
-        // mellan drivhjulet och marken, så den kan aldrig bli större än
-        // μ · F_N. Varje drivhjul bär halva tyngden, F_N = m · g / 2, och med
-        // μ = 0,8 (gummi mot torrt underlag) blir taket μ · m · g / 2 per motor.
-        // Motorn själv orkar högst F_MOTOR. Största möjliga acceleration blir
-        // därmed μ · g ≈ 7,9 m/s², oavsett massa.
+        // mellan drivhjulen och marken, så den kan aldrig bli större än
+        // μ · F_N. Kärran har FYRA hjul (sidovyn visar två): ett hjulpar till
+        // vänster och ett till höger, och varje motor driver ett hjulpar. Lådan
+        // står mitt på en symmetrisk kärra, så varje hjulpar bär halva tyngden,
+        // F_N = m · g / 2, och med μ = 0,8 blir taket μ · m · g / 2 per motor.
+        // (Göran frågade 2026-10-01 "har inte vagnen fyra hjul?" när texten sa
+        // "varje drivhjul bär halva tyngden" — säg alltid HJULPAR.) Modellen
+        // bortser från att normalkrafterna omfördelas vid acceleration (det
+        // hjulpar som ligger bakom tyngdpunkten i accelerationens riktning
+        // pressas hårdare mot marken). Tyngden förskjuts INTE, det är
+        // normalkrafterna som ändras. Summan av normalkrafterna är ändå m · g,
+        // så taket för accelerationen, μ · g ≈ 7,9 m/s², gäller oavsett massa.
         const MU = 0.8;
         const G_FAKTOR = 9.82;
         const F_MOTOR = 20;
-        const F_STEG = 0.5;
-        const greppKraft = (m) => MU * m * G_FAKTOR / 2;          // μ · F_N per drivhjul
-        const maxKraft = (m) => Math.min(F_MOTOR, Math.floor(greppKraft(m) / F_STEG) * F_STEG);
+        const F_STEG = 0.1;           // fint steg, så att reglagets tak blir greppet med en decimal
+        const greppKraft = (m) => MU * m * G_FAKTOR / 2;          // μ · F_N per hjulpar
+        const rund1 = (x) => Math.round(x * 10) / 10 || 0;         // bort med flyttalsbrus (0,1-steg) och −0
+        const maxKraft = (m) => Math.min(F_MOTOR, Math.floor(greppKraft(m) * 10 + 1e-9) / 10);
 
         const COL = {
             f: '#0284c7',  // blå — drivkraft F₁ (vänstra motorn)
@@ -410,7 +418,7 @@
             // visningsrutan uppe till höger)
             const La = Math.min(aMag * 22, 120);
 
-            const DRIVE_X = -58;          // vänstra hjulet, rel. kärrans mitt (−DRIVE_X = höger)
+            const DRIVE_X = -58;          // vänstra hjulparet (sidovy), rel. kärrans mitt (−DRIVE_X = höger)
             // Drivkrafterna angriper i kontaktytan mellan hjul och mark: F₁ vid
             // vänster hjul (golvlinjen), F₂ vid höger hjul men en bit längre ner så
             // att de två pilarna aldrig krockar. Resulterande kraft och acceleration
@@ -603,8 +611,8 @@
                             </g>
                         ))}
 
-                        {/* två motorer under flaket — en driver vänstra hjulet (F₁),
-                            en driver högra hjulet (F₂), var och en via rem till navet */}
+                        {/* två motorer under flaket — en driver vänstra hjulparet (F₁),
+                            en driver högra hjulparet (F₂), var och en via rem till axeln */}
                         {motorG(-1)}
                         {motorG(1)}
                     </g>
@@ -633,7 +641,7 @@
                             </g>
                         ) : (
                             <Tag x={cartCX} y={A_Y} color="var(--lab-ink-muted)" size={14}>
-                                <tspan fontStyle="italic">a</tspan> = 0 ⟺ konstant fart (eller i vila)
+                                <tspan fontStyle="italic">a</tspan> = 0 ⟺ konstant hastighet
                             </Tag>
                         )
                     )}
@@ -842,11 +850,16 @@
                             <StSlider label="Massa (kärra + låda)" value={massObj} min={1} max={10} step={0.5}
                                       onChange={setMass} display={`${fmt(massObj, 1)} kg`} />
                             <StSlider label="Drivkraft <em>F</em>&#8321;" value={force1} min={-fMax} max={fMax} step={F_STEG}
-                                      onChange={setForce1}
+                                      onChange={(x) => setForce1(rund1(x))}
                                       display={force1 === 0 ? '0 N' : (force1 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force1), 1) + ' N'} />
                             <StSlider label="Drivkraft <em>F</em>&#8322;" value={force2} min={-fMax} max={fMax} step={F_STEG}
-                                      onChange={setForce2}
+                                      onChange={(x) => setForce2(rund1(x))}
                                       display={force2 === 0 ? '0 N' : (force2 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force2), 1) + ' N'} />
+                            {fMax < F_MOTOR && (
+                                <div style={{ fontSize: 11, lineHeight: 1.35, color: 'var(--lab-ink-muted)', margin: '2px 0 6px' }}>
+                                    Greppets tak: {fmt(fMax, 1)}&nbsp;N per hjulpar (<em>μ</em>&nbsp;=&nbsp;0,8).
+                                </div>
+                            )}
                             <div className="st-actions">
                                 <button className="btn-toggle" onClick={primaryAction}>{primaryLabel}</button>
                                 <button className="btn-toggle" onClick={reset}>Börja om</button>
@@ -877,14 +890,14 @@
                             </div>
                         </div>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
-                            En <strong>kraft</strong> ger en kropp en <strong>acceleration</strong> i kraftens riktning. Ju större
-                            massa, desto trögare är kroppen att sätta i rörelse. Kärran drivs av <strong>två motorer</strong> — en
-                            på vänster hjul (drivkraft <em>F</em><sub>1</sub>) och en på höger hjul (drivkraft <em>F</em><sub>2</sub>).
+                            Den <strong>resulterande kraften</strong> på en kropp ger kroppen en <strong>acceleration</strong> i kraftens riktning. Ju större
+                            massa, desto svårare är det att ändra kroppens hastighet. Kärran har fyra hjul och drivs av <strong>två motorer</strong>:
+                            en driver det vänstra hjulparet i bilden (drivkraft <em>F</em><sub>1</sub>) och en det högra (drivkraft <em>F</em><sub>2</sub>).
                             Ställ in varje kraft åt vänster eller höger och se hur de <strong>adderas</strong> (eller tar ut varandra)
-                            till en <strong>resulterande kraft</strong> <em>F</em><sub>R</sub> som bestämmer accelerationen och farten.
+                            till en <strong>resulterande kraft</strong> <em>F</em><sub>R</sub> som bestämmer accelerationen, och därmed hur farten ändras.
                             {airMode
                                 ? <span> I läget <strong>med luftmotstånd</strong> tillkommer en bromsande kraft <em>F</em><sub>luft</sub> som
-                                    växer med kvadraten på farten. Till slut tar den ut den pålagda kraften och kärran håller <strong>konstant fart</strong>.</span>
+                                    växer med kvadraten på farten. Farten närmar sig då en <strong>toppfart</strong>, där luftmotståndet tar ut den pålagda kraften.</span>
                                 : <span> Slå på <strong>luftmotstånd</strong> för att se hur farten i stället planar ut mot en toppfart.</span>}
                         </p>
 
@@ -930,13 +943,13 @@
                                             {fmt(massObj, 1)} kg
                                         </span>
                                     </Slider>
-                                    <Slider label="Drivkraft <em>F</em>&#8321; (◀ vänster / höger ▶)" value={force1} min={-fMax} max={fMax} step={F_STEG} onChange={setForce1}>
+                                    <Slider label="Drivkraft <em>F</em>&#8321; (◀ vänster / höger ▶)" value={force1} min={-fMax} max={fMax} step={F_STEG} onChange={(x) => setForce1(rund1(x))}>
                                         <span className="font-mono font-semibold text-sm flex-shrink-0"
                                               style={{ minWidth: 70, textAlign: 'right', color: COL.f }}>
                                             {force1 === 0 ? '0 N' : (force1 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force1), 1) + ' N'}
                                         </span>
                                     </Slider>
-                                    <Slider label="Drivkraft <em>F</em>&#8322; (◀ vänster / höger ▶)" value={force2} min={-fMax} max={fMax} step={F_STEG} onChange={setForce2}>
+                                    <Slider label="Drivkraft <em>F</em>&#8322; (◀ vänster / höger ▶)" value={force2} min={-fMax} max={fMax} step={F_STEG} onChange={(x) => setForce2(rund1(x))}>
                                         <span className="font-mono font-semibold text-sm flex-shrink-0"
                                               style={{ minWidth: 70, textAlign: 'right', color: COL.f2 }}>
                                             {force2 === 0 ? '0 N' : (force2 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force2), 1) + ' N'}
@@ -944,10 +957,10 @@
                                     </Slider>
                                     <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
                                         {fMax < F_MOTOR
-                                            ? <span>Greppet sätter taket: hjulen kan som mest ge {fmt(fMax, 1)} N var innan de slirar
-                                                (friktionstal <em>μ</em> = 0,8). Öka massan för att få större grepp.</span>
-                                            : <span>Motorerna orkar högst {F_MOTOR} N var. Greppet räcker till {fmt(greppKraft(massObj), 1)} N per hjul
-                                                (friktionstal <em>μ</em> = 0,8).</span>}
+                                            ? <span>Greppet sätter taket: varje hjulpar kan som mest ge {fmt(fMax, 1)}&nbsp;N innan hjulen slirar
+                                                (friktionstal <em>μ</em>&nbsp;=&nbsp;0,8). Öka massan för att få större grepp.</span>
+                                            : <span>Motorerna orkar högst {F_MOTOR}&nbsp;N var. Greppet räcker till {fmt(greppKraft(massObj), 1)}&nbsp;N per hjulpar
+                                                (friktionstal <em>μ</em>&nbsp;=&nbsp;0,8).</span>}
                                     </p>
                                 </div>
 
@@ -997,38 +1010,48 @@
                                         <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                             Luftmotståndet <em>F</em><sub>luft</sub> = <em>k</em> · <em>v</em>² växer med kvadraten på
                                             farten och är riktat mot rörelsen. Allteftersom farten ökar minskar den resulterande
-                                            kraften, tills luftmotståndet precis tar ut den pålagda kraften (<em>F</em><sub>R</sub> = 0).
-                                            Då är accelerationen noll och kärran håller en <em>konstant</em> <strong>toppfart</strong>.
+                                            kraften, och farten närmar sig en <strong>toppfart</strong>. Vid toppfarten tar
+                                            luftmotståndet ut den pålagda kraften (<em>F</em><sub>R</sub> = 0), och accelerationen är noll.
                                         </p>
                                     ) : (
                                         <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                            Accelerationen är konstant så länge kraften ligger på — farten ökar då jämnt. Tar du
-                                            bort kraften (<em>F</em><sub>R</sub> = 0) blir accelerationen noll och kärran rullar vidare med
-                                            <em> konstant</em> fart (Newtons första lag). Lägg kraften åt motsatt håll mot rörelsen
-                                            för att bromsa.
+                                            Accelerationen är konstant så länge krafterna inte ändras, och hastigheten ändras då
+                                            jämnt. Gör du den resulterande kraften till noll (<em>F</em><sub>R</sub> = 0) blir accelerationen
+                                            noll och kärran rullar vidare med <em>konstant</em> hastighet (Newtons första lag). Lägg den
+                                            resulterande kraften mot rörelsen för att bromsa.
                                         </p>
                                     )}
                                     <p className="text-sm mt-2 pt-2" style={{ color: 'var(--lab-ink-soft)', borderTop: '1px solid var(--lab-line)' }}>
                                         {airMode
                                             ? <span>Proportionalitetskonstanten är <em>k</em> = 0,032 N per (m/s)². Vid 25 m/s ger
-                                                luftmotståndet 0,032 · 25² N = 20 N, lika stort som den största drivkraften
-                                                från en motor. Kärran rullar i övrigt förlustfritt.</span>
-                                            : <span>Luftmotstånd försummas och kärran rullar förlustfritt, så drivkraften
-                                                är den enda horisontella kraften på ekipaget. Massan <em>m</em> är hela
-                                                ekipagets, kärra och låda tillsammans. Drivkraften är
-                                                själva greppet: den statiska friktionskraften mellan de drivna hjulen och
+                                                luftmotståndet 0,032 · 25² N = 20 N, lika mycket som en motor som mest orkar
+                                                ge. Kärran rullar i övrigt förlustfritt.</span>
+                                            : <span>Luftmotstånd försummas och kärran rullar förlustfritt, så drivkrafterna
+                                                {' '}<em>F</em><sub>1</sub> och <em>F</em><sub>2</sub> är de enda horisontella krafterna på ekipaget. Massan <em>m</em> är hela
+                                                ekipagets, kärra och låda tillsammans. Drivkrafterna är
+                                                själva greppet: de statiska friktionskrafterna mellan hjulen och
                                                 marken. En kraft motriktad rörelsen betyder att motorn bromsar; hjulen
                                                 fortsätter då rulla åt samma håll medan farten sjunker. Pekar{' '}
                                                 <em>F</em><sub>1</sub> och <em>F</em><sub>2</sub> åt var sitt håll drar
-                                                motorerna dragkamp, som att gasa och bromsa samtidigt. Är summan noll
-                                                står kärran stilla, och hjulen med den: de sitter i samma vagn och
-                                                rullar utan att slira, så de har alltid en gemensam rotation och kan
-                                                aldrig snurra åt var sitt håll. Greppet har en gräns: friktionskraften
-                                                kan aldrig bli större än <em>μ</em> · <em>F</em><sub>N</sub>. Varje drivhjul bär
-                                                halva tyngden, och med friktionstalet <em>μ</em> = 0,8 (gummi mot torrt underlag)
-                                                kan en motor därför ge högst 0,8 gånger halva tyngden. Mer kraft än så får hjulen att slira, så
-                                                reglagen går inte längre. Det gör att accelerationen aldrig kan bli större än
-                                                <em> μ</em> · <em>g</em> ≈ 7,9 m/s², hur lätt ekipaget än är.</span>}
+                                                motorerna dragkamp, som att gasa och bromsa samtidigt. Är summan
+                                                {' '}<em>F</em><sub>1</sub>&nbsp;+&nbsp;<em>F</em><sub>2</sub> noll ändras inte hastigheten. Står
+                                                kärran stilla förblir den stilla, och hjulen med den: de sitter i samma vagn
+                                                och rullar utan att slira, så de snurrar alltid lika fort och åt samma håll.
+                                                Greppet har en gräns. Kärran har fyra hjul, två i varje hjulpar, och varje
+                                                motor driver ett hjulpar. Friktionskraften på ett hjulpar kan aldrig bli
+                                                större än <em>μ</em>&nbsp;·&nbsp;<em>F</em><sub>N</sub>, där <em>F</em><sub>N</sub> är
+                                                normalkraften från marken på hjulparet. Ekipagets tyngdpunkt ligger mitt
+                                                emellan hjulparen, så normalkraften på varje hjulpar är hälften av
+                                                tyngden. Med friktionstalet <em>μ</em>&nbsp;=&nbsp;0,8, ett typiskt värde för
+                                                gummihjul mot torrt underlag, kan en motor därför ge högst
+                                                {' '}<em>μ</em>&nbsp;·&nbsp;<em>F</em><sub>N</sub>&nbsp;=&nbsp;0,4&nbsp;·&nbsp;<em>m</em>&nbsp;·&nbsp;<em>g</em>, både när den driver och när
+                                                den bromsar. Mer kraft än så får hjulen att slira, så reglagen går inte
+                                                längre. I verkligheten omfördelas normalkrafterna när kärran accelererar:
+                                                det hjulpar som ligger bakom tyngdpunkten, sett i accelerationens
+                                                riktning, pressas hårdare mot marken och det andra lättare. Modellen
+                                                bortser från det. Normalkrafterna är ändå tillsammans alltid
+                                                {' '}<em>m</em>&nbsp;·&nbsp;<em>g</em>, så accelerationen kan aldrig bli
+                                                större än <em>μ</em>&nbsp;·&nbsp;<em>g</em>&nbsp;≈&nbsp;7,9&nbsp;m/s², hur lätt ekipaget än är.</span>}
                                     </p>
                                 </div>
                             </div>
@@ -1047,15 +1070,16 @@
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Riktning</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Accelerationen pekar alltid åt samma håll som den resulterande kraften. Pekar kraften
-                                    mot rörelsen bromsas kroppen in, byter riktning och accelererar åt andra hållet.
+                                    Accelerationen pekar alltid åt samma håll som den resulterande kraften. Pekar den
+                                    resulterande kraften mot rörelsen bromsas kroppen in. Ligger kraften kvar byter kroppen
+                                    sedan riktning och accelererar åt andra hållet.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Enheten newton</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    1 N är den kraft som ger massan 1 kg accelerationen 1 m/s². Alltså
-                                    1 N = 1 kg·m/s² — det följer direkt ur <em>F</em><sub>R</sub> = <em>m</em> · <em>a</em>.
+                                    1 N är den resulterande kraft som ger massan 1 kg accelerationen 1 m/s². Alltså
+                                    är 1 N = 1 kg·m/s², vilket följer direkt ur <em>F</em><sub>R</sub> = <em>m</em> · <em>a</em>.
                                 </p>
                             </div>
                         </div>
@@ -1065,11 +1089,13 @@
                                 <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
                             </summary>
                             <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                <li><strong>”Kraft ger fart.”</strong> Nej — en kraft ger <em>acceleration</em>, alltså en
-                                    <em> ändring</em> av farten. En konstant kraft ger ständigt ökande fart, inte en konstant fart.</li>
-                                <li><strong>”Ingen kraft betyder att kroppen stannar.”</strong> Nej — utan resulterande kraft
-                                    fortsätter kroppen med konstant fart (Newtons första lag). Här rullar kärran vidare när du tar bort kraften.</li>
-                                <li><strong>”Tunga föremål accelererar lika lätt som lätta.”</strong> Nej — vid samma kraft får
+                                <li><strong>”Kraft ger fart.”</strong> Nej, en resulterande kraft ger <em>acceleration</em>, alltså en
+                                    <em> ändring</em> av hastigheten. En konstant resulterande kraft får hastigheten att ändras hela
+                                    tiden, inte att vara konstant.</li>
+                                <li><strong>”Ingen kraft betyder att kroppen stannar.”</strong> Nej, utan resulterande kraft
+                                    fortsätter kroppen med konstant hastighet (Newtons första lag). I läget utan luftmotstånd rullar
+                                    kärran vidare när den resulterande kraften är noll.</li>
+                                <li><strong>”Tunga föremål accelererar lika lätt som lätta.”</strong> Nej, vid samma resulterande kraft får
                                     det tyngre föremålet mindre acceleration, eftersom <em>a</em> = <em>F</em><sub>R</sub> / <em>m</em>.</li>
                             </ul>
                         </details>

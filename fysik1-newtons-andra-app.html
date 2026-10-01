@@ -269,6 +269,21 @@
         // konstant fart.
         const DRAG_K = 20 / (VMAX * VMAX);   // = 0,032 N per (m/s)²
 
+        // Greppet sätter ett tak för drivkraften (påpekat av Göran Malmsten
+        // 2026-10-01: 40 N på 1 kg krävde friktionstalet 4 och gav 250 km/h på
+        // knappt två sekunder). Drivkraften ÄR den statiska friktionskraften
+        // mellan drivhjulet och marken, så den kan aldrig bli större än
+        // μ · F_N. Varje drivhjul bär halva tyngden, F_N = m · g / 2, och med
+        // μ = 0,8 (gummi mot torrt underlag) blir taket μ · m · g / 2 per motor.
+        // Motorn själv orkar högst F_MOTOR. Största möjliga acceleration blir
+        // därmed μ · g ≈ 7,9 m/s², oavsett massa.
+        const MU = 0.8;
+        const G_FAKTOR = 9.82;
+        const F_MOTOR = 20;
+        const F_STEG = 0.5;
+        const greppKraft = (m) => MU * m * G_FAKTOR / 2;          // μ · F_N per drivhjul
+        const maxKraft = (m) => Math.min(F_MOTOR, Math.floor(greppKraft(m) / F_STEG) * F_STEG);
+
         const COL = {
             f: '#0284c7',  // blå — drivkraft F₁ (vänstra motorn)
             f2: '#0d9488', // teal — drivkraft F₂ (högra motorn)
@@ -711,6 +726,15 @@
             const cartOffRef = useRef(0);
 
             const mTot = M_CART + massObj;
+            const fMax = maxKraft(massObj);                     // största drivkraft per motor (grepp eller motor)
+            // Byt massa: kraftreglagen kläms in under det nya greppets tak.
+            const setMass = (m) => {
+                setMassObj(m);
+                const lim = maxKraft(m);
+                const kläm = (f) => Math.max(-lim, Math.min(lim, f));
+                setForce1(kläm);
+                setForce2(kläm);
+            };
             const Fapplied = force1 + force2;                   // summan av de pålagda drivkrafterna
             const Fair = airMode ? -DRAG_K * v * Math.abs(v) : 0;   // luftmotstånd k·v², motriktat farten
             const Fres = Fapplied + Fair;                       // resulterande kraft (signerad)
@@ -816,11 +840,11 @@
                         <React.Fragment>
                             <div className="st-title mt">Reglage</div>
                             <StSlider label="Massa (kärra + låda)" value={massObj} min={1} max={10} step={0.5}
-                                      onChange={setMassObj} display={`${fmt(massObj, 1)} kg`} />
-                            <StSlider label="Drivkraft <em>F</em>&#8321;" value={force1} min={-20} max={20} step={1}
+                                      onChange={setMass} display={`${fmt(massObj, 1)} kg`} />
+                            <StSlider label="Drivkraft <em>F</em>&#8321;" value={force1} min={-fMax} max={fMax} step={F_STEG}
                                       onChange={setForce1}
                                       display={force1 === 0 ? '0 N' : (force1 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force1), 1) + ' N'} />
-                            <StSlider label="Drivkraft <em>F</em>&#8322;" value={force2} min={-20} max={20} step={1}
+                            <StSlider label="Drivkraft <em>F</em>&#8322;" value={force2} min={-fMax} max={fMax} step={F_STEG}
                                       onChange={setForce2}
                                       display={force2 === 0 ? '0 N' : (force2 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force2), 1) + ' N'} />
                             <div className="st-actions">
@@ -900,24 +924,31 @@
                             <div className="lg:w-2/5 order-2">
                                 {/* Reglage */}
                                 <div className="glass-card rounded-xl p-3 mb-3">
-                                    <Slider label="Massa <em>m</em> (kärra + låda)" value={massObj} min={1} max={10} step={0.5} onChange={setMassObj}>
+                                    <Slider label="Massa <em>m</em> (kärra + låda)" value={massObj} min={1} max={10} step={0.5} onChange={setMass}>
                                         <span className="font-mono font-semibold text-sm flex-shrink-0"
                                               style={{ minWidth: 64, textAlign: 'right', color: 'var(--lab-accent)' }}>
                                             {fmt(massObj, 1)} kg
                                         </span>
                                     </Slider>
-                                    <Slider label="Drivkraft <em>F</em>&#8321; (◀ vänster / höger ▶)" value={force1} min={-20} max={20} step={1} onChange={setForce1}>
+                                    <Slider label="Drivkraft <em>F</em>&#8321; (◀ vänster / höger ▶)" value={force1} min={-fMax} max={fMax} step={F_STEG} onChange={setForce1}>
                                         <span className="font-mono font-semibold text-sm flex-shrink-0"
                                               style={{ minWidth: 70, textAlign: 'right', color: COL.f }}>
                                             {force1 === 0 ? '0 N' : (force1 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force1), 1) + ' N'}
                                         </span>
                                     </Slider>
-                                    <Slider label="Drivkraft <em>F</em>&#8322; (◀ vänster / höger ▶)" value={force2} min={-20} max={20} step={1} onChange={setForce2}>
+                                    <Slider label="Drivkraft <em>F</em>&#8322; (◀ vänster / höger ▶)" value={force2} min={-fMax} max={fMax} step={F_STEG} onChange={setForce2}>
                                         <span className="font-mono font-semibold text-sm flex-shrink-0"
                                               style={{ minWidth: 70, textAlign: 'right', color: COL.f2 }}>
                                             {force2 === 0 ? '0 N' : (force2 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force2), 1) + ' N'}
                                         </span>
                                     </Slider>
+                                    <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
+                                        {fMax < F_MOTOR
+                                            ? <span>Greppet sätter taket: hjulen kan som mest ge {fmt(fMax, 1)} N var innan de slirar
+                                                (friktionstal <em>μ</em> = 0,8). Öka massan för att få större grepp.</span>
+                                            : <span>Motorerna orkar högst {F_MOTOR} N var. Greppet räcker till {fmt(greppKraft(massObj), 1)} N per hjul
+                                                (friktionstal <em>μ</em> = 0,8).</span>}
+                                    </p>
                                 </div>
 
                                 {/* Styrning */}
@@ -992,9 +1023,12 @@
                                                 motorerna dragkamp, som att gasa och bromsa samtidigt. Är summan noll
                                                 står kärran stilla, och hjulen med den: de sitter i samma vagn och
                                                 rullar utan att slira, så de har alltid en gemensam rotation och kan
-                                                aldrig snurra åt var sitt håll. Modellen antar dessutom fullt grepp:
-                                                hur stor kraften än ställs in fortsätter hjulen att rulla utan att
-                                                slira.</span>}
+                                                aldrig snurra åt var sitt håll. Greppet har en gräns: friktionskraften
+                                                kan aldrig bli större än <em>μ</em> · <em>F</em><sub>N</sub>. Varje drivhjul bär
+                                                halva tyngden, och med friktionstalet <em>μ</em> = 0,8 (gummi mot torrt underlag)
+                                                kan en motor därför ge högst 0,8 gånger halva tyngden. Mer kraft än så får hjulen att slira, så
+                                                reglagen går inte längre. Det gör att accelerationen aldrig kan bli större än
+                                                <em> μ</em> · <em>g</em> ≈ 7,9 m/s², hur lätt ekipaget än är.</span>}
                                     </p>
                                 </div>
                             </div>

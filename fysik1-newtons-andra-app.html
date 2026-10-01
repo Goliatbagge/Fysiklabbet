@@ -253,6 +253,15 @@
         const WHEEL_CY = FLOOR_Y - WHEEL_R;
         const DECK_TOP = 398;         // kärrans flak (ovansida)
         const PXPM = 26;              // px per meter (golvets skrollhastighet)
+        // Pilarnas skalor. Kraftpilarna är SKALENLIGA: samma px per N för alla
+        // krafter och ingen kapning, så att F_R = 40 N blir exakt dubbelt så
+        // lång som F₁ = 20 N (förr kapades längden vid 165 px och då blev den
+        // bara 1,27 gånger så lång). Skalan är FAST, oberoende av massan, så att
+        // samma kraft ser likadan ut vid olika massor. 6 px/N ger 240 px för
+        // 40 N och ändå synliga pilar för ett lätt ekipage (3,9 N ger 23 px).
+        // Accelerationen är högst μ · g ≈ 7,9 m/s² och ger då 118 px.
+        const K_F = 6;                // px per N
+        const K_A = 15;               // px per m/s²
 
         // Fysik
         // Massreglaget anger HELA ekipagets massa (kärra + låda). Tidigare hade
@@ -324,6 +333,7 @@
             const ang = Math.atan2(y2 - y1, x2 - x1);
             const len = Math.hypot(x2 - x1, y2 - y1);
             if (len < 0.5) return null;
+            head = Math.min(head, Math.max(8, len * 0.6));   // kort pil: mindre huvud, skaftet syns
             const hw = 0.42;
             const bx = x2 - head * 0.82 * Math.cos(ang);
             const by = y2 - head * 0.82 * Math.sin(ang);
@@ -389,19 +399,81 @@
         // ════════════════════════════════════════════════════════
         //  SCEN
         // ════════════════════════════════════════════════════════
-        const CartScene = ({ scroll, cartOff, v, massObj, f1, f2, fair, airMode, show, svgRef }) => {
+        const CartScene = ({ scroll, cartOff, v, massObj, f1, f2, fair, airMode, show, svgRef, ruta, vis }) => {
             const mTot = M_CART + massObj;
             const Fres = f1 + f2 + fair;                // resulterande kraft (F₁ + F₂ + luftmotstånd)
             const forceDir = Math.sign(Fres);           // -1 vänster, 0, +1 höger
             const appliedF = Math.abs(Fres);            // resulterande kraftens storlek
             const aMag = appliedF / mTot;
 
-            // Vagnens mitt — förskjuts (cartOff) när den drar ifrån kameran och lämnar bild.
-            const cartCX = CX + cartOff;
 
             // objektets storlek växer med massan
             const s = 46 + (massObj - 1) * 4;
             const objTop = DECK_TOP - s;
+
+            const DRIVE_X = -58;          // vänstra hjulparet (sidovy), rel. kärrans mitt (−DRIVE_X = höger)
+            // Drivkrafterna angriper i kontaktytan mellan hjul och mark: F₁ vid
+            // vänster hjul (golvlinjen), F₂ vid höger hjul men en bit längre ner så
+            // att de två pilarna aldrig krockar. Resulterande kraft och acceleration
+            // ritas ovanför kärran.
+            // Raderna ligger under visningsrutan i normalläget (rutan når ned
+            // till y ≈ 142, i luftläget 164, vid 1024 px bredd). Förr låg
+            // accelerationsraden på 150 och etiketten hamnade under rutan.
+            const A_Y  = 198;             // acceleration (överst, centrerad etikett)
+            const FR_Y = 240;             // resulterande kraft F_R
+            const AIR_Y = 282;            // luftmotstånd F_luft (massetiketten ovanför lådan börjar vid y ≈ 295)
+            const F1_Y = FLOOR_Y;         // F₁ — vänster hjuls kontaktyta mot marken
+            const F2_Y = FLOOR_Y + 42;    // F₂ — höger hjul, lite längre ner
+
+            // Visningsrutan uppe till höger ligger ovanpå scenen. På mindre
+            // skärmar i fullskärm (1024×768, 1100×800) når den ned över
+            // pilraderna, och då skulle F_R-etiketten hamna under den. Rutans
+            // läge mäts (i viewBox-koordinater, se App) och alla pilar skalas
+            // då ned med SAMMA faktor sk, så att de förblir skalenliga sinsemellan.
+            // Räknas mot största möjliga krafter och mot kärrans viloläge CXe,
+            // så att faktorn inte ändras medan man drar i reglagen.
+            // När rutan täcker högra delen av pilraderna (fullskärm) flyttas
+            // kärran in mot mitten av den fria ytan, i stället för att pilarna
+            // krymps mer än nödvändigt. Annars står den mitt i scenen (CX).
+            const CXe = (() => {
+                if (!vis) return CX;
+                const täckt = ruta && [A_Y, FR_Y, AIR_Y].some((y) => y - 26 < ruta.y2 + 4 && y + 12 > ruta.y1);
+                const R = täckt ? Math.min(ruta.x - 10, vis.r - 6) : vis.r - 6;
+                return Math.round(Math.min(CX, (vis.l + 6 + R) / 2));
+            })();
+
+            // Vagnens mitt. Förskjuts (cartOff) när den drar ifrån kameran och lämnar bild.
+            const cartCX = CXe + cartOff;
+
+            // Dessutom beskär scenen sidorna (preserveAspectRatio slice) när
+            // den är smal, och då får ingen etikett hamna utanför den synliga
+            // delen (vis) heller, åt något håll.
+            const sk = (() => {
+                if (!vis) return 1;
+                const visL = vis.l + 6, visR = vis.r - 6;
+                const bredd = (tecken, storlek) => tecken * 0.6 * storlek;
+                const iRuta = (y) => ruta && y - 26 < ruta.y2 + 4 && y + 12 > ruta.y1;
+                const hö = (y) => iRuta(y) ? Math.min(ruta.x - 10, visR) : visR;   // högra gränsen på rad y
+                const krav = [1];
+                // Accelerationen: pil från CXe, etikett centrerad över pilens mitt.
+                const LA = 7.9 * K_A, wA = bredd(12, 15);
+                krav.push((hö(A_Y) - CXe) / LA, (hö(A_Y) - CXe - wA / 2) / (LA / 2),
+                          (CXe - visL) / LA, (CXe - visL - wA / 2) / (LA / 2));
+                // F_R och F_luft: pil från CXe, etikett efter spetsen.
+                const rad = (y, tecken) => {
+                    const w = 14 + bredd(tecken, 14);
+                    krav.push((hö(y) - CXe - w) / (40 * K_F), (CXe - w - visL) / (40 * K_F));
+                };
+                rad(FR_Y, 11);
+                if (airMode) rad(AIR_Y, 14);
+                // F₁ och F₂: pil från hjulparet, etikett efter spetsen men
+                // aldrig närmare kärrans mitt än 88 (clearCart).
+                for (const [x0, y] of [[CXe + DRIVE_X, F1_Y], [CXe - DRIVE_X, F2_Y]]) {
+                    const w = 14 + bredd(10, 14);
+                    krav.push((hö(y) - x0 - w) / (20 * K_F), (x0 - w - visL) / (20 * K_F));
+                }
+                return Math.max(0.3, Math.min(...krav));
+            })();
 
             // hjulrotation (rullar utan att slira) — total sträcka = kameraskroll + vagnens egen förskjutning
             const wheelAng = ((scroll + cartOff) / WHEEL_R) * 180 / Math.PI;
@@ -416,18 +488,8 @@
 
             // accelerationspilens längd (kapad så att spetsen aldrig når
             // visningsrutan uppe till höger)
-            const La = Math.min(aMag * 22, 120);
+            const La = Math.min(aMag * K_A, 125) * sk;
 
-            const DRIVE_X = -58;          // vänstra hjulparet (sidovy), rel. kärrans mitt (−DRIVE_X = höger)
-            // Drivkrafterna angriper i kontaktytan mellan hjul och mark: F₁ vid
-            // vänster hjul (golvlinjen), F₂ vid höger hjul men en bit längre ner så
-            // att de två pilarna aldrig krockar. Resulterande kraft och acceleration
-            // ritas ovanför kärran.
-            const A_Y  = 150;             // acceleration (överst, centrerad etikett)
-            const FR_Y = 196;             // resulterande kraft F_R
-            const AIR_Y = 240;            // luftmotstånd F_luft
-            const F1_Y = FLOOR_Y;         // F₁ — vänster hjuls kontaktyta mot marken
-            const F2_Y = FLOOR_Y + 42;    // F₂ — höger hjul, lite längre ner
 
             // En enskild vågrät kraftpil. Angreppspunkten x0 är kärrans mitt om inget
             // annat anges. Längden är proportionell mot kraftens storlek (kapad för
@@ -438,7 +500,7 @@
             const forceArrow = (fi, y, color, sub, { x0 = cartCX, labelDY = -9, clearCart = false } = {}) => {
                 if (!(Math.abs(fi) > 0.05)) return null;
                 const dir = Math.sign(fi);
-                const L = Math.min(Math.abs(fi) * 6.5, 165);
+                const L = Math.min(Math.abs(fi) * K_F, 40 * K_F) * sk;   // taket är bara ett skydd, 40 N är största kraften
                 const tipX = x0 + dir * L;
                 let labelX = tipX + dir * 14;
                 if (clearCart) labelX = dir > 0 ? Math.max(labelX, cartCX + 88) : Math.min(labelX, cartCX - 88);
@@ -479,7 +541,10 @@
                 const dir = Math.sign(v);
                 const yc = objTop + s / 2;            // lådans vertikala mitt
                 const x0 = cartCX + dir * (s / 2);    // lådans kant i rörelseriktningen
-                const Lv = Math.max(14, Math.min(Math.abs(v) * 4.5, 140));
+                let Lv = Math.max(14, Math.min(Math.abs(v) * 4.5, 140));
+                if (ruta && dir > 0 && yc - 26 < ruta.y2 + 4 && x0 + Lv + 10 + 80 > ruta.x - 10)
+                    Lv = Math.max(14, ruta.x - 10 - 80 - 10 - x0);   // farten står ändå i etiketten
+                if (vis) Lv = Math.max(14, Math.min(Lv, dir > 0 ? vis.r - 6 - 80 - 10 - x0 : x0 - 80 - 10 - (vis.l + 6)));
                 const labelX = x0 + dir * (Lv + 10);
                 return (
                     <g>
@@ -583,8 +648,11 @@
                                   fill="url(#crate)" stroke="#8a5f24" strokeWidth="2.5" />
                             <line x1={-s / 2 + 4} y1={objTop + 7} x2={s / 2 - 4} y2={objTop + 7}
                                   stroke="#8a5f24" strokeWidth="1.5" opacity="0.5" />
-                            <Tag x="0" y={objTop + s / 2 + 6} color="#3a2a10" size={s > 60 ? 17 : 14}>
-                                <tspan fontStyle="italic">m</tspan> = {fmt(massObj, 1)} kg
+                            {/* Massan står OVANFÖR lådan: på lådans trästruktur blev den svårläst,
+                                och den var bredare än en lätt låda så att hastighetspilen började
+                                ovanpå texten. m är hela ekipagets massa, därav (kärra + låda). */}
+                            <Tag x="0" y={objTop - 9} color="#3a2a10" size={15}>
+                                <tspan fontStyle="italic">m</tspan> = {fmt(massObj, 1)} kg<tspan fontSize="12" fontWeight="500" fill="#5b4a2a"> (kärra + låda)</tspan>
                             </Tag>
                         </g>
 
@@ -621,7 +689,7 @@
                         hjul en bit längre ner, F_luft ovanför kärran ── */}
                     {show.forces && (
                         <g>
-                            {forceArrow(f1, F1_Y, COL.f, '1', { x0: cartCX + DRIVE_X, labelDY: 4, clearCart: true })}
+                            {forceArrow(f1, F1_Y, COL.f, '1', { x0: cartCX + DRIVE_X, labelDY: -9, clearCart: true })}
                             {forceArrow(f2, F2_Y, COL.f2, '2', { x0: cartCX - DRIVE_X, labelDY: 4, clearCart: true })}
                             {airMode && forceArrow(fair, AIR_Y, COL.air, 'luft')}
                         </g>
@@ -794,6 +862,41 @@
                     document.removeEventListener('webkitfullscreenchange', handler);
                 };
             }, []);
+            // Visningsrutans läge i scenens viewBox-koordinater (null när den
+            // inte ligger över scenen, till exempel dockad under den på mobil).
+            const [geo, setGeo] = useState({ ruta: null, vis: null });
+            useEffect(() => {
+                const mät = () => {
+                    const svg = svgRef.current, wrap = sceneWrapRef.current;
+                    const box = wrap && wrap.querySelector('.scene-toggles');
+                    const ctm = svg && svg.getScreenCTM();
+                    if (!svg || !box || !ctm) return;
+                    const inv = ctm.inverse();
+                    const tillSvg = (x, y) => new DOMPoint(x, y).matrixTransform(inv);
+                    const r = box.getBoundingClientRect();
+                    let ruta = null;
+                    if (r.width > 0 && r.height > 0) {
+                        const a = tillSvg(r.left, r.top), b = tillSvg(r.right, r.bottom);
+                        if (b.y > 0 && a.y < VBH && a.x < VBW && b.x > 0)
+                            ruta = { x: Math.round(a.x), y1: Math.round(a.y), y2: Math.round(b.y) };
+                    }
+                    // Den synliga delen av scenen: svg:n klipps av scenramen.
+                    const sr = svg.getBoundingClientRect(), wr = wrap.getBoundingClientRect();
+                    const vl = tillSvg(Math.max(sr.left, wr.left), 0).x, vr = tillSvg(Math.min(sr.right, wr.right), 0).x;
+                    const vis = { l: Math.round(Math.max(0, vl)), r: Math.round(Math.min(VBW, vr)) };
+                    const ny = { ruta, vis };
+                    setGeo((f) => JSON.stringify(f) === JSON.stringify(ny) ? f : ny);
+                };
+                mät();
+                const ro = new ResizeObserver(mät);
+                if (svgRef.current) ro.observe(svgRef.current);
+                const box = sceneWrapRef.current && sceneWrapRef.current.querySelector('.scene-toggles');
+                if (box) ro.observe(box);
+                window.addEventListener('resize', mät);
+                const t1 = setTimeout(mät, 300), t2 = setTimeout(mät, 1200);
+                return () => { ro.disconnect(); window.removeEventListener('resize', mät); clearTimeout(t1); clearTimeout(t2); };
+            }, [isFullscreen, airMode]);
+
             const toggleFullscreen = () => {
                 const el = sceneWrapRef.current;
                 if (!el) return;
@@ -909,7 +1012,7 @@
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
                                     <CartScene scroll={scroll} cartOff={cartOff} v={v} massObj={massObj}
                                                f1={force1} f2={force2} fair={Fair} airMode={airMode}
-                                               show={show} svgRef={svgRef} />
+                                               show={show} svgRef={svgRef} ruta={geo.ruta} vis={geo.vis} />
 
                                     <div className="scene-hint">
                                         {airMode ? 'Luftmotståndet växer med kvadraten på farten.' : 'Luftmotstånd försummas.'}

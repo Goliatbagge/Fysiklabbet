@@ -79,14 +79,6 @@ Format per post:
   Källa (Phys.org 2026-09-24): https://phys.org/news/2026-09-universe-oldest.html
   (tillagd 2026-09-27)
 
-- **Kärnan snurrar ifrån manteln — och dygnet blir några millisekunder längre** — jordens flytande yttre kärna
-  varvar upp under några decennier och saktar sedan in, medan manteln kompenserar åt andra hållet. Utbytet av
-  rörelsemängdsmoment mellan kärna och mantel förlänger och förkortar dygnet med några millisekunder. Ingång:
-  rörelsemängdsmoment, tröghetsmoment och varför en snurrande kropp ändrar fart när massan flyttar sig.
-  Kontrollera vad som är uppmätt (längden på dygnet) och vad som är modellerat (kärnans rotation).
-  Källa (Phys.org 2026-09-24): https://phys.org/news/2026-09-earth-deep-secret-day-isnt.html
-  (tillagd 2026-09-25)
-
 - **Tidskristaller på avstånd faller i samma takt** — flera tidskristaller i en halvledare synkroniserar sina
   svängningar, kopplade via spinnpolariserade elektroner, ungefär som Huygens pendelur på samma bräda. Ingång:
   synkronisering, resonans och vad en tidskristall alls är (ordlistan har redan posten tidskristall). OBS:

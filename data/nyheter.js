@@ -103,6 +103,67 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-01-dragkampen-som-andrar-dygnet",
+    date: "2026-10-01",
+    title: "Dragkampen 5 000 kilometer ner som gör dygnet längre och kortare",
+    deck: "Ett dygn är inte lika långt från årtionde till årtionde: det kan bli några millisekunder längre och sedan kortare igen. Två geofysiker vid University of Alberta visar nu i Nature att den främsta orsaken är gravitationen mellan jordens fasta inre kärna och ojämnt fördelad massa längst ned i manteln.",
+    category: "Geofysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-10-01-dragkampen-som-andrar-dygnet.jpg",
+    imageAlt: "Jorden sedd från rymden som ett helt klot mot svart bakgrund. Afrika och Arabiska halvön syns i brunt och gult, omgivna av blått hav, och Antarktis isar lyser vita längst ned. Virvlar av vita moln ligger över haven.",
+    imageCredit: "Foto: NASA, besättningen på Apollo 17 (public domain), via Wikimedia Commons. Bilden togs den 7 december 1972 och kallas ”The Blue Marble”. Den visar jorden utifrån, inte något av det som studien handlar om.",
+    tags: ["geofysik", "mekanik", "rörelsemängdsmoment", "tröghetsmoment", "kraftmoment", "gravitation", "jordens kärna", "jordmanteln", "dygnets längd", "seismologi", "skottsekund"],
+    sources: [
+      { name: "Phys.org: Earth's deep secret: Why your day isn't quite 24 hours (24 september 2026)", url: "https://phys.org/news/2026-09-earth-deep-secret-day-isnt.html" },
+      { name: "ScienceDaily: Earth's day isn't exactly 24 hours. The reason may lie deep inside the planet (28 september 2026)", url: "https://www.sciencedaily.com/releases/2026/09/260928100540.htm" },
+      { name: "Nature: Gravitational torque drives multidecadal variations in length of day (23 september 2026, studien)", url: "https://www.nature.com/articles/s41586-026-10999-2" },
+      { name: "Nature Geoscience: Multidecadal variation of the Earth's inner-core rotation (2023, de seismiska mätningarna av den inre kärnans vridning)", url: "https://doi.org/10.1038/s41561-022-01112-z" }
+    ],
+    research: {
+      citation: "Huifeng Zhang och Mathieu Dumberry, ”Gravitational torque drives multidecadal variations in length of day”, Nature (2026), publicerad 23 september 2026. Kollegialt granskad.",
+      url: "https://doi.org/10.1038/s41586-026-10999-2"
+    },
+    larare: {
+      moment: [
+        { label: "Gravitationslagen", href: "katalog.html?id=fy1-3.5" },
+        { label: "Kraftmoment", href: "katalog.html?id=fy2-1.1" },
+        { label: "Rörelsemängdens bevarande", href: "katalog.html?id=fy1-4.8" }
+      ],
+      fragor: [
+        "Jorden som helhet behåller sitt rörelsemängdsmoment, ändå ändras dygnets längd. Förklara hur båda sakerna kan vara sanna samtidigt, och jämför med en stillastående båt där någon går från fören till aktern.",
+        "En klotrund inre kärna skulle inte kunna dra i manteln på det sätt studien beskriver, hur den än vreds. Varför är det just avvikelserna från klotformen, både hos kärnan och hos manteln, som ger ett kraftmoment?",
+        "Ingen har kunnat se eller borra sig ned till den inre kärnan. Vilka mätningar bygger slutsatsen på, och vad gör att forskarna ändå litar på en modell av något som ligger över 5 000 kilometer under fötterna?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Ett dygn är 24&nbsp;timmar, i varje fall i almanackan. Mäter man efter jordens egen rotation är det aldrig riktigt så. Under några decennier kan dygnet bli ett par millisekunder längre, för att sedan krympa igen. Den 23&nbsp;september publicerade tidskriften <em>Nature</em> en studie som pekar ut den främsta orsaken till de svängningarna, och den sitter mer än 5&nbsp;000&nbsp;kilometer under fötterna.' },
+      { type: 'p', html: 'Bakom studien står Huifeng Zhang och geofysikern Mathieu Dumberry, vid University of Alberta i Kanada. Deras slutsats är att den fasta inre kärnan och ojämnt fördelad massa i jordmanteln drar i varandra med gravitation, och att det är den dragkampen som ger dygnets långsamma pendling.' },
+
+      { type: 'h2', text: 'Jorden snurrar i flera lager' },
+      { type: 'p', html: 'Jorden är inte en stel kula. Ytterst ligger skorpan, sedan den knappt 2&nbsp;900&nbsp;kilometer tjocka manteln av sten. Därunder finns den yttre kärnan av flytande järn och nickel, och längst in den inre kärnan: ett fast järnklot med en radie på omkring 1&nbsp;220&nbsp;kilometer. Det dygn vi upplever är skorpans och mantelns rotation. Kärnan kan snurra en aning i otakt med resten.' },
+      { type: 'p', html: 'Här kommer en av mekanikens bevarandelagar in. Ett snurrande föremåls rotation mäts med rörelsemängdsmomentet $L = I \\cdot \\omega$, där $\\omega$ är vinkelhastigheten och $I$ är tröghetsmomentet, som är större ju mer massa som sitter långt från axeln. Så länge inget utifrån vrider på jorden är det totala rörelsemängdsmomentet i stort sett konstant. Men det kan flyttas mellan lagren. Varvar kärnan upp måste manteln sakta in för att summan ska bli densamma, och tvärtom.' },
+      { type: 'p', html: 'Ändringarna är små. Två millisekunder av 86&nbsp;400&nbsp;sekunder är drygt två hundramiljondelar av dygnet. Ändå går de att mäta: radioteleskop på olika kontinenter riktas samtidigt mot avlägsna kvasarer, och med atomur som tidhållare går det att räkna ut exakt hur långt jorden hunnit vrida sig.' },
+
+      { type: 'h2', text: 'Tre sätt att få manteln att snurra' },
+      { type: 'p', html: 'Att rotation byts mellan kärna och mantel har varit känt länge. Frågan har varit hur. För att ändra rörelsemängdsmomentet behövs ett kraftmoment, en vridande kraft, på samma sätt som en kraft under en tid behövs för att ändra en rörelsemängd. Tre kandidater har funnits. Den flytande yttre kärnan leder ström, så magnetfältet kan koppla den till manteln elektromagnetiskt. Gränsytan mellan kärna och mantel är inte slät, så strömmande järn kan trycka mot dess ojämnheter. Och så finns gravitationen.' },
+      { type: 'p', html: 'Den inre kärnan är inte perfekt klotformad. Manteln är inte heller jämnt tät, utan har partier med mer och mindre massa. När strömmarna i den flytande kärnan vrider den inre kärnan en aning hamnar dess utbuktningar ur läge i förhållande till mantelns tätare partier. Gravitationen strävar då efter att dra tillbaka dem, och den återställande kraften verkar med en hävarm kring jordaxeln. Det ger ett kraftmoment som lämnar över rotation till manteln, eller tar rotation från den.' },
+
+      { type: 'h2', text: 'Kärnan svänger fram och tillbaka' },
+      { type: 'p', html: 'Ingen kan se den inre kärnan, men dess rörelse går att spåra. Jordbävningar som upprepas på samma ställe med åratal emellan skickar vågor genom kärnan, och ändras vågornas gångtid har kärnan vridit sig mellan skalven. En studie i <em>Nature Geoscience</em> 2023 tolkade sådana mätningar som att den inre kärnans vridning i förhållande till manteln stannade upp omkring 2009, som en del av en svängning på ungefär sju decennier.' },
+      { type: 'p', html: 'Zhang och Dumberry utgick från den seismiskt rekonstruerade rörelsen hos den inre kärnan. Enligt den svänger kärnan omkring 2,35&nbsp;grader fram och tillbaka i förhållande till manteln, med en period på 60 till 70&nbsp;år. Längs kärnans yta motsvarar 2,35&nbsp;grader ungefär 50&nbsp;kilometer. Strömmarna i den flytande kärnan tog de fram ur hur jordens magnetfält förändrats. Ur det räknade de fram de tre kraftmomenten och jämförde med hur dygnets längd faktiskt ändrats från början av 1970-talet till 2021.' },
+      { type: 'p', html: 'Resultatet blev en tydlig arbetsfördelning. Det är gravitationsmomentet som driver de långsamma ändringarna i dygnets längd. De elektromagnetiska och topografiska momenten vid kärnans gräns verkar i stället emot och begränsar hur mycket dygnet kan ändras. Modellen träffade både tidpunkterna och storleken på de observerade ändringarna, men bara på ett villkor: den inre kärnans ojämna yta måste få ge efter och formas om, ungefär som en mycket seg massa, på en tidsskala kring tio år.' },
+
+      { type: 'h2', text: 'Ett fönster mot jordens innandöme' },
+      { type: 'p', html: 'Att spåra ett mätvärde tillbaka till sin orsak ger också en bild av orsaken. För att kraftmomenten ska få rätt storlek måste nedersta manteln se ut på ett visst sätt, skriver forskarna: de två väldiga områden av avvikande sten som ligger längst ned i manteln under Afrika och Stilla havet ska vara nästan lika tunga som stenen omkring dem, stenen närmast kärnan ska vara ovanligt lättflytande, och allra längst ned ska ett järnrikt skikt några kilometer tjockt leda ström mycket bra. Ingen av de sakerna går att undersöka direkt. Men de går nu att pröva mot ett mätvärde som registreras varje dag.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Månen bromsar jordens rotation genom tidvattnet. Gamla förmörkelser, noterade av astronomer i Babylon, Kina och Europa, visar att dygnet i genomsnitt blivit knappt två millisekunder längre per sekel de senaste 2&nbsp;700 åren, främst på grund av den bromsen.',
+        'Är varje dygn en millisekund för långt hamnar jordens rotation efter atomuren med omkring 0,37&nbsp;sekunder på ett år. Därför har 27&nbsp;skottsekunder lagts in sedan 1972, den senaste vid nyåret 2017. År 2022 beslutade den internationella måttkonferensen att skottsekunderna ska avskaffas senast 2035.',
+        'Trycket i jordens mitt uppskattas till omkring 360&nbsp;GPa och temperaturen till omkring 5&nbsp;000&nbsp;°C, ungefär lika varmt som solens yta. Att den inre kärnan ändå är fast beror på trycket.'
+      ] }
+    ]
+  },
+  {
     id: "2026-09-30-rumstempererad-supraledare-under-tryck",
     date: "2026-09-30",
     title: "Kristallen som ska leda ström utan motstånd vid 43 °C — nu pekas två skandiumatomer ut som förklaringen",

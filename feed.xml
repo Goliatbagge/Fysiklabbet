@@ -6,7 +6,15 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Wed, 30 Sep 2026 06:34:45 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 04:44:27 GMT</lastBuildDate>
+    <item>
+      <title>Dragkampen 5 000 kilometer ner som gör dygnet längre och kortare</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-01-dragkampen-som-andrar-dygnet</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-01-dragkampen-som-andrar-dygnet</guid>
+      <pubDate>Thu, 01 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Geofysik</category>
+      <description>Ett dygn är inte lika långt från årtionde till årtionde: det kan bli några millisekunder längre och sedan kortare igen. Två geofysiker vid University of Alberta visar nu i Nature att den främsta orsaken är gravitationen mellan jordens fasta inre kärna och ojämnt fördelad massa längst ned i manteln.</description>
+    </item>
     <item>
       <title>Kristallen som ska leda ström utan motstånd vid 43 °C — nu pekas två skandiumatomer ut som förklaringen</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-09-30-rumstempererad-supraledare-under-tryck</link>
@@ -177,15 +185,6 @@
       <category>Optik</category>
       <description>Snö och is består av precis samma sak, men bara den ena är vit. Skillnaden sitter i antalet gränsytor som ljuset måste passera. Ett forskarlag vid Kyoto universitet har nu lärt sig att skumma upp en plastfilm inifrån med hjälp av ljus, och därmed trycka vitt helt utan pigment.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-12-vitt-utan-pigment.jpg" length="176677" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Ingen spektrallinje är knivskarp — och bredden mäter hur länge ett hål i atomens innersta skal hinner finnas</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-11-linjen-som-aldrig-blir-skarp</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-11-linjen-som-aldrig-blir-skarp</guid>
-      <pubDate>Fri, 11 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Atomfysik</category>
-      <description>Ett fält av omkring 250 supraledande termometrar, kylda till en bråkdel av en grad över absoluta nollpunkten, har mätt röntgenljuset från uran, neptunium och plutonium noggrannare än någon gjort förut. Det som sätter gränsen är inte längre instrumentet utan atomerna själva.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-11-linjen-som-aldrig-blir-skarp.jpg" length="282385" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

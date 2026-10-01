@@ -56,6 +56,54 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'troghetsmoment',
+    term: 'Tröghetsmoment',
+    former: ['tröghetsmoment', 'tröghetsmomentet', 'tröghetsmomenten'],
+    kort: 'Ett mått på hur svårt det är att sätta något i rotation eller få det att sluta snurra. Det beror inte bara på hur tungt föremålet är, utan på hur långt från rotationsaxeln massan sitter.',
+    relaterade: ['rorelsemangdsmoment'],
+    body: [
+      { type: 'p', html: 'Massa är ett mått på tröghet: en tung kärra är svårare att få fart på än en lätt. För rotation finns en motsvarighet, och den heter tröghetsmoment. Den säger hur svårt det är att få något att börja snurra, eller att bromsa det när det väl snurrar. Skillnaden mot vanlig massa är att placeringen spelar roll. Ett kilo som sitter långt ut från axeln gör betydligt mer motstånd än samma kilo nära axeln.' },
+      { type: 'p', html: 'Det märks i vardagen. En dörr är lätt att öppna om du trycker vid handtaget och tung om du trycker nära gångjärnen, och en lång stav är mycket lättare att snurra kring sin mittpunkt än kring ena änden. För en liten klump med massan <em>m</em> på avståndet <em>r</em> från axeln är tröghetsmomentet <em>m</em>&nbsp;·&nbsp;<em>r</em><sup>2</sup>, och för ett helt föremål summerar man bidragen från alla dess delar. Att avståndet står i kvadrat gör att massa långt ut väger extra tungt.' },
+      { type: 'p', html: 'Tröghetsmomentet gånger vinkelhastigheten ger rörelsemängdsmomentet, och det är bevarat så länge inget vrider på föremålet utifrån. Därför snurrar en konståkare fortare när hon drar in armarna: tröghetsmomentet minskar och farten måste öka. Samma räkning gäller för planeter. Flyttas massa inuti jorden, närmare eller längre från axeln, ändras dygnets längd en aning.' }
+    ]
+  },
+  {
+    id: 'jordens-karna',
+    term: 'Jordens kärna',
+    former: ['jordens kärna', 'jordkärnan', 'inre kärnan', 'inre kärna', 'yttre kärnan', 'yttre kärna'],
+    kort: 'Jordens innersta del, ett klot av främst järn och nickel med en radie på omkring 3 500 kilometer. Den yttre delen är flytande, den innersta är fast.',
+    relaterade: ['jordmanteln', 'troghetsmoment'],
+    body: [
+      { type: 'p', html: 'Går man rakt ned genom jorden passerar man först skorpan, sedan manteln av sten, och efter knappt 2&nbsp;900&nbsp;kilometer når man kärnan. Den består främst av järn med en del nickel och är uppdelad i två lager. Den yttre kärnan är flytande metall, omkring 2&nbsp;200&nbsp;kilometer tjock. Innerst sitter den inre kärnan, ett fast klot med en radie på omkring 1&nbsp;220&nbsp;kilometer, ungefär 70&nbsp;procent av månens.' },
+      { type: 'p', html: 'Att den innersta delen är fast fast den är hetast kan verka bakvänt. Temperaturen där är omkring 5&nbsp;000&nbsp;°C, men trycket är så enormt, över tre miljoner gånger lufttrycket vid havsytan, att järnatomerna pressas ihop till en kristall trots hettan. Den inre kärnan växer dessutom långsamt, eftersom jorden kyls och järn från den yttre kärnan stelnar på dess yta.' },
+      { type: 'p', html: 'Ingen har varit där, och det djupaste borrhålet når bara drygt tolv kilometer ned. Allt vi vet kommer från jordbävningsvågor som färdats genom jorden och från jordens magnetfält, som skapas av strömmande järn i den flytande yttre kärnan. Ur hur vågornas gångtid ändras mellan skalv som upprepas på samma ställe går det till och med att se att den inre kärnan vrider sig lite i förhållande till resten av planeten.' }
+    ]
+  },
+  {
+    id: 'jordmanteln',
+    term: 'Jordmanteln',
+    former: ['jordmanteln', 'jordmantel', 'manteln'],
+    kort: 'Det knappt 2 900 kilometer tjocka lagret av het sten mellan jordskorpan och kärnan. Det utgör ungefär två tredjedelar av jordens massa.',
+    relaterade: ['jordens-karna', 'viskositet'],
+    body: [
+      { type: 'p', html: 'Under kontinenterna och havsbottnarna, ett par mil eller mindre ned, slutar jordskorpan och manteln tar vid. Den fortsätter ned till knappt 2&nbsp;900&nbsp;kilometers djup, där kärnan av järn börjar. Manteln är alltså det överlägset största lagret i jorden, med ungefär två tredjedelar av planetens massa.' },
+      { type: 'p', html: 'Manteln är av sten och i huvudsak fast, men den är så het att den under mycket lång tid flyter, ungefär som en glaciär som långsamt glider nedför en dal. Hastigheten är några centimeter per år, lika fort som naglar växer. Den rörelsen driver kontinentaldriften: varmare sten stiger, kallare sten sjunker, och de stela plattorna ovanpå följer med.' },
+      { type: 'p', html: 'Manteln är inte lika tät överallt. Jordbävningsvågor som går igenom den färdas olika fort på olika ställen, och längst ned, alldeles ovanför kärnan, ligger två väldiga områden av avvikande sten, det ena under Afrika och det andra under Stilla havet. Vad de består av och hur tunga de är jämfört med omgivningen är fortfarande en öppen fråga.' }
+    ]
+  },
+  {
+    id: 'skottsekund',
+    term: 'Skottsekund',
+    former: ['skottsekund', 'skottsekunden', 'skottsekunder', 'skottsekunderna'],
+    kort: 'En extra sekund som läggs in i världens officiella tid för att klockorna inte ska dra ifrån jordens rotation. Sedan 1972 har 27 sådana lagts in.',
+    relaterade: ['atomur'],
+    body: [
+      { type: 'p', html: 'Våra klockor räknar tiden på två sätt som inte riktigt stämmer överens. Det ena är atomuren, som tickar fullständigt jämnt. Det andra är jordens rotation, som avgör när solen står högst på himlen. Jorden snurrar inte helt jämnt: tidvattnet bromsar den långsamt, och rörelser i jordens inre gör att dygnet ibland är ett par tusendels sekunder längre och ibland kortare.' },
+      { type: 'p', html: 'Små skillnader växer när de adderas. Är varje dygn en millisekund för långt har jorden efter ett år kommit omkring 0,37&nbsp;sekunder efter atomuren. För att hålla ihop de två tidsskalorna har man sedan 1972 lagt in en extra sekund när det behövts för att skillnaden aldrig ska bli större än 0,9&nbsp;sekunder, i praktiken alltid sist i juni eller sist i december. Klockan visar då 23:59:60 innan den slår om till midnatt.' },
+      { type: 'p', html: 'Det har ställt till med problem i datorsystem, som ofta inte räknar med att en minut kan ha 61&nbsp;sekunder. Den internationella måttkonferensen beslutade därför 2022 att skottsekunderna ska avskaffas senast 2035 och att skillnaden får växa sig större innan den rättas till på något annat sätt.' }
+    ]
+  },
+  {
     id: 'superhydrid',
     term: 'Superhydrid',
     former: ['superhydrid', 'superhydriden', 'superhydrider', 'superhydriderna', 'hydrid', 'hydriden', 'hydrider', 'hydriderna', 'metallhydrid', 'metallhydriden', 'metallhydrider'],

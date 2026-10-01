@@ -178,6 +178,33 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
 Använd WebSearch/WebFetch. **Korsläs** gärna nyheten mot fler än en källa och mot
 originalpublikationen innan du skriver — siffror och namn måste stämma.
 
+### ⛔ Ingen artikel utan läst originalkälla
+
+**En nyhet får inte skrivas om du inte själv kommer åt originalkällan**
+(uttryckligt önskemål 2026-10-01). Originalkällan är studien själv: artikeln
+i tidskriften, förtrycket på arXiv eller rapporten från labbet. Du ska ha
+läst minst abstractet, resultatdelen och metoddelen, och varje siffra du
+skriver ska gå att peka ut där. Pressmeddelanden och nyhetssajter som
+Phys.org och ScienceDaily duger för att hitta nyheten men aldrig som ersättning
+för studien.
+
+- **Kommer du inte åt studien** (robotkontroll, betalvägg, spärrad domän,
+  nätfel, bara abstractet syns och siffrorna du vill använda inte står där):
+  välj en annan nyhet vars original du kan läsa. Lägg den spärrade nyheten
+  i `ko.md` med en notering om varför, så kan den tas upp en annan dag eller
+  i en session med vanlig nätåtkomst.
+- **Prova vägarna till fulltexten först**: DOI-länken, tidskriftens sida
+  (många Nature-, Physical Review- och AIP-artiklar är öppet tillgängliga),
+  arXiv-förtrycket, författarnas eller universitetets egen kopia.
+- **Gissa aldrig och fyll aldrig i från andrahandskällor.** Felet som
+  utlöste regeln (2026-10-01, `2026-10-01-dragkampen-som-andrar-dygnet`):
+  molnsessionen kom inte åt nature.com och byggde artikeln på sammanfattningar.
+  Studien, som var öppet tillgänglig, visade sedan att jämförelseperioden var
+  1964–2019 och inte "1970-talet till 2021", och att den inre kärnans
+  svängning har en period på omkring 70 år och inte "60 till 70 år".
+- **Hittar du ingen nyhet alls med läsbar originalkälla: publicera ingenting**
+  och säg det i slutrapporten. En utebliven nyhet är bättre än en felaktig.
+
 ### Källbank (växer över tid — lägg till bra fynd själv)
 
 Trovärdiga källor som upptäckts under researchen och är värda att återkomma till.
@@ -475,6 +502,9 @@ Se den utförliga kommentaren överst i `data/nyheter.js`. Varje artikel:
 
 - Publicera påhittade nyheter, citat eller siffror.
 - Publicera utan källa.
+- Skriva en nyhet utan att själv ha läst originalstudien (se "Ingen artikel
+  utan läst originalkälla" under Källor). Pressmeddelanden och
+  sammanfattningar räcker aldrig.
 - Använda bild med vattenstämpel, inbränd text eller oklar licens.
 - Generera en AI-bild när det finns en fri riktig bild att använda, eller
   generera mer än en AI-bild till samma artikel (kostnad — se Bildregler).

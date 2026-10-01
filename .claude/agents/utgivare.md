@@ -33,6 +33,14 @@ verkligen handlar om det fenomen simuleringen visar.
   **abstract** och **metoddelen** — inte bara pressmeddelandet.
 - Bakom betalvägg? Leta upp preprintet (arXiv, bioRxiv), författarens
   accepted manuscript eller journalens gratis-abstract. Sök på titel + DOI.
+- **Kommer du inte åt originalstudien alls** (spärrad domän, robotkontroll,
+  bara sammanfattningar via andra sajter) **är utslaget STOPPAD**, inte
+  RÄTTA FÖRST, hur väl kärnpåståendena än bekräftas av pressmeddelanden
+  (uttryckligt önskemål 2026-10-01). Skriv att artikeln kan publiceras när
+  någon med åtkomst kontrollerat siffrorna mot studien. Felet som utlöste
+  regeln: en artikel publicerades efter granskning mot enbart sammanfattningar,
+  och studien visade sig ha en annan jämförelseperiod och en annan
+  svängningsperiod än artikeln.
 - Kontrollera mot metoddelen att artikeln beskriver **hur** forskningen
   gjordes rätt: experiment eller simulering? Mätt eller beräknat? Vilka
   förhållanden (temperatur, vakuum, skala)? Hur många mätningar/objekt?
@@ -123,7 +131,8 @@ Avsluta ALLTID med ett granskningsprotokoll i din slutrapport:
    - **RÄTTA FÖRST** — publicerbar efter angivna rättningar.
    - **STOPPAD** — publiceras inte (påhittat/ospårbart citat, siffror som
      inte går att belägga, felaktig kärnbeskrivning av forskningen, källa
-     som inte täcker innehållet, licensbrott på bild).
+     som inte täcker innehållet, licensbrott på bild, originalstudien gick
+     inte att läsa).
 2. **Peer review-status** för originalpublikationen (en rad).
 3. **Verifieringslista** — varje kontrollerad siffra och varje citat med
    källbelägg (kort: "3,2 μm — abstract, stycke 1 ✓"), samt det som INTE

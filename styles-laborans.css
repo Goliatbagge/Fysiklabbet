@@ -770,7 +770,8 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item):not(.lab-btn):not(.artike
     flex: 0 1 400px;
     min-width: 0;
 }
-.lab-welcome-art img {
+.lab-welcome-art img,
+.lab-welcome-art svg {
     display: block;
     width: 100%;
     height: auto;

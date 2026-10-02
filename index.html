@@ -321,6 +321,97 @@
             );
         }
 
+        // Heroloen med kulan i rörelse. Bilden är uppdelad i tre lager ur
+        // herologotyp-hero.png: basen (ringen och klotet, kulan bortmålad),
+        // kulan och klotet (för att skymma kulan när den går bakom). Kulan
+        // ritas två gånger, under och över klotet, och bara den som ska synas
+        // visas: bakom klotet på ringens bortre halva, framför på den
+        // främre. Ringen är en lutad cirkel, så en jämn vinkelhastighet i
+        // ellipsens parameter ger en likformig cirkelrörelse. Ellipsen och
+        // kulans läge är uppmätta i bilden (900 × 576).
+        const ORBIT = {
+            cx: 460.28, cy: 296.64, a: 301.12, b: 122.09, phi: 2.6252,
+            rho: 0.9797, th0: 2.4489,            // kulans läge i originalbilden
+            kula: { w: 78, h: 78, ox: 38.98, oy: 39.13 },
+            klot: { x: 322, y: 146, w: 283, h: 284 },
+            varv: 30000,                         // ms per varv
+            djup: 0.1,                           // kulan växer något framtill
+        };
+
+        function orbitTransform(th) {
+            const o = ORBIT;
+            const ux = Math.cos(o.phi), uy = Math.sin(o.phi);
+            const u = o.rho * o.a * Math.cos(th), v = o.rho * o.b * Math.sin(th);
+            const x = o.cx + u * ux - v * uy, y = o.cy + u * uy + v * ux;
+            const s = (1 - o.djup * Math.sin(th)) / (1 - o.djup * Math.sin(o.th0));
+            return {
+                fram: Math.sin(th) < 0,
+                tf: `translate(${x.toFixed(2)} ${y.toFixed(2)}) scale(${s.toFixed(4)}) translate(${-o.kula.ox} ${-o.kula.oy})`,
+            };
+        }
+
+        function HeroOrbit() {
+            const svgRef = useRef(null);
+            const bakRef = useRef(null);
+            const framRef = useRef(null);
+            const start = orbitTransform(ORBIT.th0);
+
+            useEffect(() => {
+                const svg = svgRef.current;
+                if (!svg) return;
+                const lugn = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+                let th = ORBIT.th0, raf = 0, senast = null, synlig = false;
+
+                const rita = () => {
+                    const { fram, tf } = orbitTransform(th);
+                    bakRef.current.setAttribute('transform', tf);
+                    framRef.current.setAttribute('transform', tf);
+                    bakRef.current.style.visibility = fram ? 'hidden' : 'visible';
+                    framRef.current.style.visibility = fram ? 'visible' : 'hidden';
+                };
+                const steg = (nu) => {
+                    // Tidssteget begränsas så att kulan inte hoppar efter en paus.
+                    const dt = senast === null ? 0 : Math.min(nu - senast, 100);
+                    senast = nu;
+                    th -= dt / ORBIT.varv * 2 * Math.PI;
+                    rita();
+                    raf = requestAnimationFrame(steg);
+                };
+                const starta = () => {
+                    if (raf || !synlig || (lugn && lugn.matches)) return;
+                    senast = null;
+                    raf = requestAnimationFrame(steg);
+                };
+                const stoppa = () => { cancelAnimationFrame(raf); raf = 0; };
+
+                // Går bara när loggan syns (den är dold under 960 px).
+                const io = new IntersectionObserver(([e]) => {
+                    synlig = e.isIntersecting;
+                    synlig ? starta() : stoppa();
+                });
+                io.observe(svg);
+                const byt = () => { if (lugn.matches) { stoppa(); th = ORBIT.th0; rita(); } else starta(); };
+                if (lugn && lugn.addEventListener) lugn.addEventListener('change', byt);
+                return () => {
+                    stoppa();
+                    io.disconnect();
+                    if (lugn && lugn.removeEventListener) lugn.removeEventListener('change', byt);
+                };
+            }, []);
+
+            const k = ORBIT.kula, kl = ORBIT.klot;
+            return (
+                <svg ref={svgRef} viewBox="0 0 900 576" role="presentation" focusable="false">
+                    <image href="bilder/herologotyp-bas.png" x="0" y="0" width="900" height="576" />
+                    <image ref={bakRef} href="bilder/herologotyp-kula.png" width={k.w} height={k.h}
+                           transform={start.tf} style={{ visibility: start.fram ? 'hidden' : 'visible' }} />
+                    <image href="bilder/herologotyp-klot.png" x={kl.x} y={kl.y} width={kl.w} height={kl.h} />
+                    <image ref={framRef} href="bilder/herologotyp-kula.png" width={k.w} height={k.h}
+                           transform={start.tf} style={{ visibility: start.fram ? 'visible' : 'hidden' }} />
+                </svg>
+            );
+        }
+
         function WelcomeHero() {
             return (
                 <section className="lab-welcome">
@@ -368,7 +459,7 @@
                             </div>
                         </div>
                         <div className="lab-welcome-art" aria-hidden="true">
-                            <img src="bilder/herologotyp-hero.png" alt="" />
+                            <HeroOrbit />
                         </div>
                     </div>
                 </section>

@@ -2057,6 +2057,19 @@ window.BEGREPP = [
   },
 
   {
+    id: 'myografi',
+    term: 'Myografi',
+    former: ['myografi', 'myografin', 'myontomografi', 'myontomografin', 'myonavbildning', 'myonavbildningen'],
+    kort: 'Ett sätt att se in i stora eller täta föremål, som pyramider, vulkaner och reaktorer, genom att mäta hur många myoner som tar sig igenom dem. Det fungerar som en röntgenbild, men med myoner i stället för röntgenstrålning.',
+    relaterade: ['myon', 'kosmisk-stralning', 'scintillator'],
+    body: [
+      { type: 'p', html: 'Tänk dig att du håller upp handen mot solen. Där handen är tjockast släpps minst ljus igenom, och du ser konturerna av benen inuti. En röntgenbild bygger på samma idé, men röntgenstrålningen räcker bara genom några decimeter vävnad. Myografi gör samma sak med myoner, tunga släktingar till elektronen som kan tränga igenom tiotals meter sten. Man ställer en detektor på ena sidan om föremålet och räknar hur många myoner som kommer fram från olika håll. Där det kommer färre än väntat finns mer eller tätare materia i vägen, och där det kommer fler finns ett hålrum.' },
+      { type: 'p', html: 'Myonerna behöver man oftast inte tillverka själv. De bildas hela tiden högt uppe i atmosfären när partiklar från rymden krockar med luften, och omkring en per kvadratcentimeter och minut når marken. Det är gratis och ofarligt, men också långsamt: eftersom myonerna är få måste en mätning ofta pågå i veckor eller månader innan bilden blir skarp. Dessutom kommer de flesta myonerna uppifrån, så det är svårt att lysa igenom något från sidan.' },
+      { type: 'p', html: 'Metoden prövades redan 1970, när fysikern Luis Alvarez letade efter dolda kammare i en av pyramiderna i Giza. År 2017 hittades ett tidigare okänt hålrum i Cheopspyramiden på samma sätt. I dag används myografi också för att följa magman i vulkaner, kontrollera broar och leta efter malm, och forskare försöker skapa egna myonstrålar med acceleratorer och lasrar för att mätningarna ska gå fortare.' }
+    ]
+  },
+
+  {
     id: 'kosmisk-stralning',
     term: 'Kosmisk strålning',
     former: ['kosmisk strålning', 'kosmiska strålningen', 'kosmiska strålar', 'kosmiska strålarna', 'kosmiska partiklar', 'kosmiska partiklarna'],

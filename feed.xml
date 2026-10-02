@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Thu, 01 Oct 2026 04:49:47 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 02 Oct 2026 01:28:31 GMT</lastBuildDate>
+    <item>
+      <title>Lasern som tillverkar myoner har tagit sin första bild genom bly</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-02-myoner-ur-en-laser</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-02-myoner-ur-en-laser</guid>
+      <pubDate>Fri, 02 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Partikelfysik</category>
+      <description>Myoner från rymden används redan för att se in i pyramider och vulkaner, men de kommer få och när de själva vill. Vid ett laserlabb i Rumänien har forskare nu skapat egna myoner med en laserpuls och avbildat ett blyblock 23 meter bort.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-02-myoner-ur-en-laser.jpg" length="250789" type="image/jpeg"/>
+    </item>
     <item>
       <title>Dragkampen 5 000 kilometer ner som gör dygnet längre och kortare</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-01-dragkampen-som-andrar-dygnet</link>
@@ -177,15 +186,6 @@
       <category>Materialfysik</category>
       <description>Djupt inne i Uranus och Neptunus finns vatten i ett tillstånd som varken är vätska eller vanlig is: syreatomerna sitter kvar i ett gitter medan vätekärnorna rinner fritt mellan dem. Ett franskt forskarlag har nu klämt is mellan två diamanter, hettat den med laser till 2 630 K och sett gittret stapla om sig till ett helt annat mönster än det man räknat med.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-13-het-is-under-tryck.jpg" length="103570" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Skum i stället för pigment: nu går det att trycka bländvitt utan ett enda korn färgämne</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-12-vitt-utan-pigment</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-12-vitt-utan-pigment</guid>
-      <pubDate>Sat, 12 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Optik</category>
-      <description>Snö och is består av precis samma sak, men bara den ena är vit. Skillnaden sitter i antalet gränsytor som ljuset måste passera. Ett forskarlag vid Kyoto universitet har nu lärt sig att skumma upp en plastfilm inifrån med hjälp av ljus, och därmed trycka vitt helt utan pigment.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-12-vitt-utan-pigment.jpg" length="176677" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

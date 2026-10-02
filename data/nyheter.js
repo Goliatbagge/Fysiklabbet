@@ -103,6 +103,74 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-02-myoner-ur-en-laser",
+    date: "2026-10-02",
+    title: "Lasern som tillverkar myoner har tagit sin första bild genom bly",
+    deck: "Myoner från rymden används redan för att se in i pyramider och vulkaner, men de kommer få och när de själva vill. Vid ett laserlabb i Rumänien har forskare nu skapat egna myoner med en laserpuls och avbildat ett blyblock 23 meter bort.",
+    category: "Partikelfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-10-02-myoner-ur-en-laser.jpg",
+    imageAlt: "En stor ljus experimenthall med blått golv. Mitt i hallen står en gul ställning av fyrkantsrör med svarta, platta detektorpaneler på var sin sida. Bredvid står ett vitt stativ med kablar och elektronik, och till vänster leder en stålstege upp mot ett gångbord.",
+    imageCredit: "Foto: M. Dobre med flera, arXiv:2609.28788 (CC BY 4.0), beskuren. Bilden visar detektorerna SiRO (på den gula ställningen) och T32, 12 meter från blykvadern där myonerna skapades.",
+    tags: ["partikelfysik", "myoner", "myografi", "laser", "kölvattenacceleration", "bromsstrålning", "parbildning", "relativitetsteori", "e = mc²", "strålning", "skärmning"],
+    sources: [
+      { name: "Phys.org: Laser-made muons produce first images of dense objects (30 september 2026)", url: "https://phys.org/news/2026-09-laser-muons-images-dense.html" },
+      { name: "arXiv: Imaging with GeV muons produced via laser-wakefield-accelerated electrons (förtrycket, 23 september 2026)", url: "https://arxiv.org/abs/2609.28788" }
+    ],
+    research: {
+      citation: "M. Dobre, P. Ghenuche, A. Bălăceanu, D. Catana, M. O. Cernaianu, D. Dorobanţu, R. Lica, V. Malka, D. Martello, I. Mitu, M. Niculescu-Oglinzanu, L. Stan, D. Stanca, P. Tomassini, C. A. Ur, C. Vancea, A. Saftoiu och D. Doria, ”Imaging with GeV muons produced via laser-wakefield-accelerated electrons”, arXiv:2609.28788 (2026), inskickad 23 september 2026. Förtryck, ännu inte kollegialt granskat.",
+      url: "https://arxiv.org/abs/2609.28788"
+    },
+    larare: {
+      moment: [
+        { label: "Relativitetsteori", href: "katalog.html?id=fy1-8.1" },
+        { label: "Stråldoser", href: "katalog.html?id=fy1-9.5" },
+        { label: "Elektromagnetiska vågor och ljus", href: "katalog.html?id=fy2-4.1" }
+      ],
+      fragor: [
+        "En foton kan bli ett myon–antimyonpar men aldrig en ensam myon. Vilka storheter måste vara lika före och efter, och varför räcker det inte att fotonen har tillräckligt med energi?",
+        "Gammastrålning och neutroner nådde också detektorerna, ändå menar forskarna att skuggan av blyet bara kan ha gjorts av myoner. Vilka egenskaper hos myonerna gör att de ger en skarp skugga när de andra partiklarna inte gör det?",
+        "Laserljuset har effekten tio petawatt under en puls men en medeleffekt på bara några watt. Hur går det ihop, och vad säger det om skillnaden mellan energi och effekt?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Det regnar ständigt myoner genom atmosfären, och genom att räkna hur många som tar sig igenom ett föremål har forskare kunnat se in i både pyramider och vulkaner. Men naturens myoner är få, och de kommer när de själva vill. Ett forskarlag vid laseranläggningen ELI-NP i Măgurele utanför Bukarest har nu gått åt andra hållet: de har tillverkat sina egna myoner med en laserpuls och använt dem till att avbilda ett blyblock 23&nbsp;meter bort.' },
+      { type: 'p', html: 'Resultatet beskrivs i ett förtryck som lades ut på arXiv den 23&nbsp;september och som ännu inte har granskats av andra forskare. Enligt laget själva är det första gången en bild tagits med en myonstråle som en laser skapat.' },
+
+      { type: 'h2', text: 'Elektronens tunga släkting' },
+      { type: 'p', html: 'Myonen har samma laddning som elektronen men är omkring 207&nbsp;gånger tyngre. Den är instabil och sönderfaller efter i genomsnitt 2,2&nbsp;mikrosekunder, räknat i myonens egen vila. Att den är så tung gör den svår att bromsa. En elektron som passerar nära en atomkärna böjs av och strålar ut en stor del av sin energi, men en myon böjs knappt av alls. Därför tar sig snabba myoner igenom meter efter meter av sten och metall.' },
+      { type: 'p', html: 'Det har gjort dem till ett verktyg för att se in i saker som inte går att öppna. Redan 1970 letade fysikern Luis Alvarez efter dolda kammare i Chefrens pyramid i Giza genom att mäta hur många myoner som kom igenom stenen från olika håll, och 2017 hittade forskarlaget bakom ScanPyramids ett stort, tidigare okänt hålrum i Cheopspyramiden med samma metod. Tekniken kallas myografi. Den har en svaghet: de myoner som bildas när kosmisk strålning krockar med luften är inte många, ungefär en per kvadratcentimeter och minut vid havsytan, och de kommer mest uppifrån med blandade energier. En mätning kan därför ta veckor eller månader.' },
+
+      { type: 'h2', text: 'Från laserpuls till myonpar' },
+      { type: 'p', html: 'ELI-NP har en av världens kraftigaste lasrar. Den lägger 230&nbsp;joule på målet under 23&nbsp;femtosekunder. Effekten blir då $P = \\dfrac{E}{t} = \\dfrac{230\\ \\mathrm{J}}{23 \\cdot 10^{-15}\\ \\mathrm{s}} = 1 \\cdot 10^{16}\\ \\mathrm{W}$, alltså tio petawatt. Det är omkring tre tusen gånger mer än vad världens alla kraftverk levererar i genomsnitt, men bara under en ofattbart kort stund, och lasern kan avfyras högst en gång i minuten.' },
+      { type: 'p', html: 'Pulsen skickas in i en sex centimeter lång gasbehållare. Det intensiva ljuset slår sönder gasen till ett plasma och knuffar undan elektronerna, så att det bildas en våg av laddning i pulsens spår, ungefär som kölvattnet efter en båt. Elektroner som hamnar på rätt ställe i vågen surfar med och accelereras. Metoden kallas kölvattenacceleration, och här gav den elektroner med energier upp mot omkring 8&nbsp;GeV efter bara sex centimeter. En konventionell linjäraccelerator behöver hundratals meter för samma sak.' },
+      { type: 'p', html: 'Elektronerna fick sedan träffa en kvader av bly som var 40&nbsp;centimeter tjock i strålens riktning. När de bromsas in i blyet sänder de ut gammastrålning, så kallad bromsstrålning. En gammafoton med tillräckligt hög energi som passerar nära en blykärna kan i sin tur förvandlas till ett par: en myon och dess antipartikel, en antimyon. Energin räcker till paret enligt $E = m \\cdot c^2$. Myonens viloenergi är 105,7&nbsp;MeV, så fotonen måste ha minst 211&nbsp;MeV, och här fanns det gott om fotoner med långt mer än så.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-10-02-myoner-ur-en-laser-2.jpg', alt: 'En vägg av grå, rektangulära block staplade på varandra på en träpall, med vita plastskivor staplade ovanpå. Till vänster en stålstege, till höger en stor grå metallvägg med en rund lucka.', caption: 'Skärmningen under uppbyggnaden. De grå blocken är paraffin och de vita skivorna polyeten. De omsluter blykvadern där myonerna skapas och fångar upp en stor del av gammastrålningen och neutronerna.', credit: 'Foto: M. Dobre med flera, arXiv:2609.28788 (CC BY 4.0)' },
+
+      { type: 'h2', text: 'Två meter betong som filter' },
+      { type: 'p', html: 'Det svåra var inte att skapa myonerna utan att hitta dem. Krocken i blyet ger samtidigt enorma mängder gammastrålning och neutroner, som drunknar signalen. Forskarna byggde därför in kvadern i en meter polyeten och 60&nbsp;centimeter paraffin längs strålens riktning, och lät dessutom strålen passera experimenthallens två meter tjocka vägg av armerad betong. Allt det bromsar upp de andra partiklarna, men släpper igenom de snabbaste myonerna. Enligt lagets simuleringar når ingen myon med mindre energi än 1,5&nbsp;GeV detektorerna, medan nästan alla med mer än 3&nbsp;GeV kommer fram.' },
+      { type: 'p', html: 'Bakom väggen stod detektorer på 12, 20, 29 och 42&nbsp;meters avstånd. De bygger på stavar av plast som blinkar till när en laddad partikel passerar, och de är byggda för att räkna kosmiska myoner en och en. Under kampanjen avfyrades lasern 230&nbsp;gånger. En av detektorerna, kallad μ36, satt i en skåpbil som flyttades rakt bakom källan och ut åt sidorna, så att strålens bredd kunde mätas. På 20&nbsp;meters avstånd var den 4,5&nbsp;meter bred räknat vid halva maxvärdet, och på 29&nbsp;meter 6,4&nbsp;meter. Strålen sprider sig alltså med en vinkel på omkring 12,6&nbsp;grader.' },
+      { type: 'p', html: 'Laget jämförde med datorsimuleringar där de mätta elektronenergierna matades in. Simuleringarna gav nästan exakt samma bredder, 4,4 och 6,3&nbsp;meter, och visade att omkring 87&nbsp;procent av den energi som avsattes i detektorn på 20&nbsp;meter kom från myoner.' },
+
+      { type: 'image', src: 'nyheter/bilder/2026-10-02-myoner-ur-en-laser-3.jpg', alt: 'Bakluckan på en skåpbil står öppen. Inne i bilen står svarta, platta detektorpaneler på högkant, fastspända med spännband och fulla av svarta kablar. I mitten sitter ett grönt kretskort på en träskiva.', caption: 'Detektorn μ36 monterad i en skåpbil, med detektorplattorna vända mot strålen. Bilen flyttades mellan mätpunkterna och användes också när blyblocket avbildades.', credit: 'Foto: M. Dobre med flera, arXiv:2609.28788 (CC BY 4.0)' },
+
+      { type: 'h2', text: 'Skuggan av blyet' },
+      { type: 'p', html: 'Sedan kom själva bilden. Forskarna byggde ett blyblock av tegelstensstora blybitar, 20&nbsp;centimeter djupt, 25&nbsp;centimeter brett och en meter högt, och ställde det omkring 30&nbsp;centimeter framför skåpbilens detektor, 23&nbsp;meter från källan. Efter 30&nbsp;laserpulser syntes en skugga: bakom blyet var signalen omkring 26&nbsp;procent svagare. Varje plaststav i detektorn är 2,5&nbsp;centimeter bred, och skuggan täckte nio till tio stavar, alltså 22,5 till 25&nbsp;centimeter. Det stämmer med blockets bredd.' },
+      { type: 'p', html: 'Att det verkligen var myonerna som tecknade skuggan avgör forskarna med hjälp av simuleringarna. Gammastrålning och neutroner bromsas och sprids så mycket på vägen att de bara ger en jämn bakgrund över hela detektorn. En skarpt avgränsad skugga kan bara de genomträngande myonerna ge. Myoner gjorda med laser har påvisats förut, 2025 vid laseranläggningen SULF i Shanghai och vid BELLA i Berkeley, men då genom att forskarna fångade elektronerna från myonernas sönderfall. Här användes strålen för första gången till att se något.' },
+
+      { type: 'h2', text: 'Ett första steg' },
+      { type: 'p', html: 'Bilden är grov, och det säger forskarna själva. Upplösningen bestäms av stavarnas bredd, och detektorerna är byggda för enstaka kosmiska myoner, inte för en skur av partiklar som kommer samtidigt. Hur väl de räknar när många partiklar träffar på en gång har laget ännu inte utvärderat. Nästa steg är högre elektronenergier och detektorer som är gjorda för täta skurar och kan skilja olika slags partiklar åt.' },
+      { type: 'p', html: 'Lockelsen är ändå tydlig. En myonstråle från en laser kommer från ett känt håll, vid en känd tidpunkt och med energier som går att styra. Det skulle kunna korta mättider som i dag tar månader och göra det möjligt att lysa igenom föremål från sidan, något de kosmiska myonerna sällan gör. Forskarna nämner bland annat arkeologi, geologi, byggnadskontroll och kärnsäkerhet som tänkbara användningsområden.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'En myon med energin 3&nbsp;GeV har en total energi som är omkring 28&nbsp;gånger dess viloenergi. Enligt relativitetsteorin tar då varje tick i dess inre klocka lika många gånger längre tid sett från labbet, så i stället för 2,2&nbsp;mikrosekunder lever den omkring 60&nbsp;mikrosekunder och hinner närmare 19&nbsp;kilometer. Resan på 42&nbsp;meter är för den ingenting.',
+        'Lasern ger tio petawatt under en puls, men eftersom den skjuter högst en gång i minuten blir medeleffekten i laserljuset bara omkring 230&nbsp;J på 60&nbsp;s, knappt 4&nbsp;watt. Det är mindre än en vanlig LED-lampa.',
+        'Myonen upptäcktes 1936 i kosmisk strålning. Den var så oväntad att fysikern Isidor Rabi lär ha frågat: ”Vem beställde den?”'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-01-dragkampen-som-andrar-dygnet",
     date: "2026-10-01",
     title: "Dragkampen 5 000 kilometer ner som gör dygnet längre och kortare",

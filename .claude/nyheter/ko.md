@@ -20,6 +20,14 @@ Format per post:
   Källa (Phys.org 2026-09-25): https://phys.org/news/2026-09-rare-quantum-state-reveals-particles.html
   (tillagd 2026-09-27)
 
+- **Därför glöder saltgurkan** — Josh Méndez vid Portland State University har testat över hundra saltgurkor i eluttaget: elektrolys ger vätgas vid minuspolen, en ljusbåge tänder gasen och natrium ger det orangea skenet. Lätt att visa (på film!) och vardagsnära. OBS: hittade ingen publicerad studie 2026-10-02, bara pressmeddelandet — publiceras inte förrän en originalkälla finns.
+  Källa (Phys.org 2026-10-01): https://phys.org/news/2026-10-pickles-explosive.html
+  (tillagd 2026-10-02)
+
+- **Ljus som vandrar genom mjölk ger skarpare bilder** — en överraskande avbildningsmetod som utnyttjar spritt ljus i stället för att bekämpa det. Ingång: spridning och varför mjölk är vit. OBS: optik är väl representerad.
+  Källa (Phys.org 2026-10-02): https://phys.org/news/2026-10-approach-imaging.html
+  (tillagd 2026-10-02)
+
 - **Vågorna som hittar ordning i en skev hålighet** — i ett mekaniskt metamaterial med hyperboliska egenskaper
   samlar sig vågorna i en oregelbundet formad hålighet på bestämda, upprepade banor i stället för att spridas
   kaotiskt. Samma sak är känt för inre vågor i havet. Ingång: reflexion, stående vågor och vad det betyder att ett

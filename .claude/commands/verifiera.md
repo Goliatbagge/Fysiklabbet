@@ -17,6 +17,13 @@ node .claude/verify-no-white-outline.js
 node .claude/verify-figur-bounds.js
 ```
 
+### 1c. Räkningen i lösningarna
+Räkna om varje numeriskt led i övningar, exit tickets och teori, och
+jämför övningarnas facit (`answer.value`) med svarsraden:
+```bash
+node .claude/verify-rakning.js
+```
+
 ### 2. HTML-validering
 Kontrollera alla HTML-filer för:
 - `lang="sv"` på `<html>`

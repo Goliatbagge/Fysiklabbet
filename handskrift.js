@@ -32520,7 +32520,7 @@
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    T.str('=1 176 J≈1,1 kJ',
+    T.str('=1 176 J≈1,2 kJ',
           T.fracH('48·7,0^2', '2', T.str('E_k=', padL, y), y) + 0.12 * F, y);
     T.stepEnd();
 
@@ -32530,7 +32530,7 @@
       [['energin positiv. Samma rörelse,']],
       [['två helt olika storheter!']]
     ]));
-    T.underline(T.str('Svar: 1,1 kJ', padL, y), y);
+    T.underline(T.str('Svar: 1,2 kJ', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };

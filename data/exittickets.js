@@ -10062,7 +10062,7 @@ window.EXITTICKETS = {
     why: [
       'Visst går det: $270\\ 000 = 2{,}7 \\cdot 10^5$ — men den tiopotensen saknar prefix.',
       'Det handlar inte om ovanlighet — det finns helt enkelt inget SI-prefix för $10^5$.',
-      'Prefixen hoppar i tretal kring de vanliga ($10^3$, $10^6$, $10^9$ …), så $2{,}7 \\cdot 10^5$ skrivs om till $0{,}27 \\cdot 10^6 = 0{,}27$ MN.',
+      'Prefixen hoppar i tretal kring de vanliga ($10^3$, $10^6$, $10^9$ …), så $2{,}7 \\cdot 10^5\\ \\mathrm{N}$ skrivs om till $0{,}27 \\cdot 10^6\\ \\mathrm{N} = 0{,}27\\ \\mathrm{MN}$.',
       'Kontrollera: $27\\ \\mathrm{kN} = 27\\ 000\\ \\mathrm{N}$, vilket är tio gånger för litet.',
     ],
   },

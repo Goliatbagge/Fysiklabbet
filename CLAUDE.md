@@ -129,6 +129,16 @@ node .claude/verify-exittickets.js
 # balanskontroll i dess verifierare. Se OVNINGAR.md, "Flervalsfrågor".
 node .claude/verify-ovningar-flerval.js
 
+# Verifiera RÄKNINGEN i lösningarna (KÖR FÖRE COMMIT vid nya eller ändrade
+# övningar, exit tickets eller teoriexempel!) — räknar om varje led i
+# formlerna som bara innehåller tal (insättningsled, mellanled, slutvärde)
+# och larmar när ett likhetstecken inte stämmer, samt när övningens facit
+# (answer.value) inte finns på svarsraden. Felet har hänt: stighöjden i
+# fy2-1.8 stod som 324 · 0,25 / 19,64 = 8,2 m (rätt: 4,1 m), och när
+# verifieraren först kördes 2026-10-02 hittade den sex fel till på sajten.
+# Se "Räkningen ska räknas om, inte läsas" nedan. Valfritt: avsnitts-id.
+node .claude/verify-rakning.js [avsnitts-id …]
+
 # Verifiera pennlösningarna (::: handskrift-scenerna i handskrift.js) —
 # KÖR FÖRE COMMIT vid nya eller ändrade scener! Bygger varje scens
 # aktlista i Node (utan webbläsare, via HANDSKRIFT.scen) och mäter att
@@ -1974,6 +1984,38 @@ uppgiften var 120 N, och ingen verifierare fångar det.
 - **Mellanled avrundas aldrig** (redan regel i `handskrift.js` filhuvud):
   196,4 och 117,84 bärs vidare oavrundade, och avrundningen sker först i
   sista steget.
+
+### Räkningen ska räknas om, inte läsas
+
+**Ett slutvärde får aldrig skrivas in utan att det räknats fram ur just det
+led som står före det — och facit (`answer.value`) ska vara samma tal som
+svarsraden.** Felet som utlöste regeln (påpekat 2026-10-02): stighöjden i
+`fy2-1.8` stod som $\dfrac{324 \cdot 0{,}25}{19{,}64} = 8{,}2\ \mathrm{m}$,
+fast kvoten är 4,1. Uppställningen var rätt, men slutvärdet hade räknats
+med $\sin 30^\circ$ i stället för $\sin^2 30^\circ$, och facit följde
+slutvärdet. Ett sådant fel ser helt rimligt ut för den som läser, och en
+elev som räknar rätt får "fel" av sidan. När
+`node .claude/verify-rakning.js` först kördes hittade den sex fel till av
+samma sort: en acceleration på 1,32 m/s² i stället för 2,2, ett friktionstal
+0,094 som borde varit 0,47, ett facit på 1 929 N mot svarets 2,4 kN, ett
+facit dubbelt så stort som lösningens svar (med "Vänta, låt mig räkna om …
+Hmm." kvarlämnat i lösningen) och 1 176 J avrundat till 1,1 kJ.
+
+- **Räkna varje led på nytt med räknaren (eller Node)** innan det skrivs:
+  insättningsledet, varje mellanled och slutvärdet. Skriv aldrig ett tal
+  för att det "ser rimligt ut" eller för att det stod i ett tidigare utkast.
+- **Facit kopieras från svarsraden, aldrig tvärtom**, och ändras ett svar
+  ändras facit i samma redigering.
+- **En lösning får aldrig innehålla spår av omräkning** ("Vänta", "Hmm",
+  "låt mig räkna om", "korrigerar jag"). Räkna klart först, skriv sedan
+  lösningen rent.
+- **Ändras givna data i en uppgift** (för att få ett rimligare svar) ska
+  hela kedjan räknas om: frågestammen, varje led, svarsraden och facit.
+- **Kör `node .claude/verify-rakning.js` före commit.** Den räknar om alla
+  led som bara innehåller tal och jämför facit med svarsraden. Den granskar
+  inte algebran (led med bokstäver hoppas över) och inte pennlösningarna i
+  `handskrift.js`, så räkna själv där. Ett medvetet felräknat led (en
+  elevlösning som ska granskas) läggs i listan `UNDANTAG` i skriptet.
 
 ### Decimalformatering
 

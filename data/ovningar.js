@@ -6436,7 +6436,7 @@ ${makeForceDiagram({
         { label: 'F_G', angle: 270, length: 90, color: '#1c3d6b' },
     ],
 })}`,
-            answer: { value: 1.32, unit: 'm/s²', tol: 0.05 },
+            answer: { value: 2.2, unit: 'm/s²', tol: 0.05 },
             solution: `Detta problem är knepigt eftersom repets vertikala komposant *lyfter* lådan något, vilket **minskar normalkraften** och därmed friktionskraften.
 
 Vi delar upp dragkraften i komposanter:
@@ -6456,13 +6456,13 @@ F_N + F_y = F_G \\quad\\Leftrightarrow\\quad F_N = m \\cdot g - F \\cdot \\sin 2
 $$
 
 $$
-F_N = 12 \\cdot 9{,}82 - 60 \\cdot \\sin 25^{\\circ} \\approx 117{,}8 - 25{,}4 \\approx 92{,}5\\ \\mathrm{N}
+F_N = 12 \\cdot 9{,}82 - 60 \\cdot \\sin 25^{\\circ} = 117{,}84 - 25{,}36 = 92{,}48\\ \\mathrm{N}
 $$
 
 **Steg 2 — friktionskraft:**
 
 $$
-F_f = \\mu \\cdot F_N = 0{,}30 \\cdot 92{,}5 \\approx 27{,}7\\ \\mathrm{N}
+F_f = \\mu \\cdot F_N = 0{,}30 \\cdot 92{,}48 = 27{,}74\\ \\mathrm{N}
 $$
 
 **Steg 3 — Newton 2 horisontellt:**
@@ -6472,16 +6472,16 @@ F_R = F_x - F_f = F \\cdot \\cos 25^{\\circ} - F_f
 $$
 
 $$
-F_R = 60 \\cdot \\cos 25^{\\circ} - 27{,}7 \\approx 54{,}4 - 27{,}7 \\approx 26{,}7\\ \\mathrm{N}
+F_R = 60 \\cdot \\cos 25^{\\circ} - 27{,}74 = 54{,}38 - 27{,}74 = 26{,}64\\ \\mathrm{N}
 $$
 
 Acceleration:
 
 $$
-a = \\frac{F_R}{m} = \\frac{26{,}7}{12} \\approx 1{,}32\\ \\mathrm{m/s^2}
+a = \\frac{F_R}{m} = \\frac{26{,}64}{12} = 2{,}22 \\approx 2{,}2\\ \\mathrm{m/s^2}
 $$
 
-**Svar:** Lådans acceleration är ca 1,3 m/s².
+**Svar:** Lådans acceleration är cirka 2,2 m/s².
 
 **Generell slutsats:** När en kraft drar i en vinkel uppåt på ett friktions­belastat föremål påverkar den **både** den drivande komposanten och normalkraften. Det finns alltid en **optimal vinkel** $\\alpha_\\text{opt}$ som maximerar accelerationen — för stora vinklar lyfter man föremålet effektivt men drar inte framåt; för små vinklar drar man bra framåt men maximerar friktionen.`,
         },
@@ -7873,8 +7873,8 @@ $$
         },
         {
             level: 2,
-            question: `En 0,40 kg tung hockeypuck skjuts iväg med farten 18 m/s och glider sedan 35 m innan den stannar på ett plant isfält. Beräkna friktionstalet mellan pucken och isen. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
-            answer: { value: 0.0944, unit: '', tol: 0.05 },
+            question: `En 0,40 kg tung hockeypuck skjuts iväg med farten 8,0 m/s och glider sedan 35 m innan den stannar på ett plant isfält. Beräkna friktionstalet mellan pucken och isen. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 0.093, unit: '', tol: 0.05 },
             solution: `Hela rörelseenergin omvandlas till friktionsvärme:
 
 $$
@@ -7890,10 +7890,10 @@ $$
 Massan stryker bort sig:
 
 $$
-\\mu = \\frac{18^{2}}{2 \\cdot 9{,}82 \\cdot 35} = \\frac{324}{687{,}4} \\approx 0{,}094
+\\mu = \\frac{8{,}0^{2}}{2 \\cdot 9{,}82 \\cdot 35} = \\frac{64}{687{,}4} \\approx 0{,}093
 $$
 
-**Svar:** Friktionstalet är ca 0,094 — alltså ca 9 %.
+**Svar:** Friktionstalet är cirka 0,093.
 
 **Generell slutsats:** Friktion mellan en gummiluftig hockeypuck och nyspolad is brukar ligga på 0,05–0,10 — vilket stämmer med detta resultat. Detta är *bland de lägsta friktionstalen* i vardagliga material.`,
         },
@@ -13887,12 +13887,12 @@ $$ x_{\\max} = \\frac{v_0^2 \\cdot \\sin(2\\alpha)}{g} = \\frac{18^2 \\cdot \\si
             question: `Samma boll sparkas från marken med utgångsfarten $18\\ \\mathrm{m/s}$ och vinkeln $30^\\circ$. Hur hög blir bollens stighöjd (högsta punkt)? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
 ${makeProjectile({ kind: 'angle', angle: 30, v0Label: 'v_0 = 18 m/s', apex: true, apexLabel: 'y_max' })}`,
-            answer: { value: 8.2, unit: 'm' },
+            answer: { value: 4.1, unit: 'm' },
             solution: `Stighöjden ges av
 
-$$ y_{\\max} = \\frac{v_0^2 \\cdot \\sin^2\\alpha}{2g} = \\frac{18^2 \\cdot \\sin^2 30^\\circ}{2 \\cdot 9{,}82} = \\frac{324 \\cdot 0{,}25}{19{,}64} = 8{,}2\\ \\mathrm{m} $$
+$$ y_{\\max} = \\frac{v_0^2 \\cdot \\sin^2\\alpha}{2g} = \\frac{18^2 \\cdot \\sin^2 30^\\circ}{2 \\cdot 9{,}82} = \\frac{324 \\cdot 0{,}25}{19{,}64} = 4{,}1\\ \\mathrm{m} $$
 
-**Svar:** Stighöjden är ungefär $8{,}2\\ \\mathrm{m}$.
+**Svar:** Stighöjden är ungefär $4{,}1\\ \\mathrm{m}$.
 
 **Generell slutsats:** I högsta punkten är hastigheten i *y*-led noll ($v_y = 0$); bollen rör sig då enbart vågrätt med $v_x = v_0\\cos\\alpha$.`,
         },
@@ -17576,7 +17576,7 @@ $$ \\Delta r = \\frac{3{,}3\\cdot 10^{-27} \\cdot 1{,}0\\cdot 10^5}{4{,}005\\cdo
         {
             level: 3,
             question: `En jon med laddningen $q$ accelereras från vila genom potentialskillnaden $U = 200\\ \\mathrm{V}$ och kommer sedan in i ett magnetfält $B = 0{,}050\\ \\mathrm{T}$ vinkelrätt. Den följer en cirkelbana med radien $r = 0{,}064\\ \\mathrm{m}$. Bestäm jonens massa-till-laddning-förhållande $m/q$.`,
-            answer: { value: 5.12e-8, unit: 'kg/C' },
+            answer: { value: 2.56e-8, unit: 'kg/C', tol: 0.03 },
             solution: `**Insikten är att vi har två oberoende fysikaliska principer:**
 1. **Energiprincipen** vid accelerationen: $qU = mv^2/2$
 2. **Cirkelrörelse** i magnetfältet: $qvB = mv^2/r$, det vill säga $v = qBr/m$
@@ -17604,13 +17604,7 @@ U = 200\\ \\mathrm{V}
 \\end{array} \\right]
 $$
 
-$$ \\frac{m}{q} = \\frac{0{,}050^2 \\cdot 0{,}064^2}{2 \\cdot 200} = \\frac{0{,}0025 \\cdot 4{,}096\\cdot 10^{-3}}{400} = \\frac{1{,}024\\cdot 10^{-5}}{400} \\approx 2{,}56\\cdot 10^{-8} \\cdot 2 = 5{,}12\\cdot 10^{-8}\\ \\mathrm{kg/C} $$
-
-Vänta — låt mig räkna om: $\\dfrac{0{,}050^2 \\cdot 0{,}064^2}{400} = \\dfrac{0{,}0025 \\cdot 0{,}004096}{400} = \\dfrac{1{,}024\\cdot 10^{-5}}{400} = 2{,}56\\cdot 10^{-8}$. Hmm.
-
-Faktiskt korrigerar jag: $0{,}050^2 = 0{,}0025$, $0{,}064^2 = 0{,}004096$, produkt $= 1{,}024\\cdot 10^{-5}$. Dividerat med $2\\cdot 200 = 400$: $1{,}024\\cdot 10^{-5}/400 = 2{,}56\\cdot 10^{-8}\\ \\mathrm{kg/C}$.
-
-(Hmm — felaktig $\\times 2$ i mitt mellanled ovan. Korrekt slutresultat är $2{,}56\\cdot 10^{-8}$.)
+$$ \\frac{m}{q} = \\frac{0{,}050^2 \\cdot 0{,}064^2}{2 \\cdot 200} = \\frac{0{,}0025 \\cdot 4{,}096\\cdot 10^{-3}}{400} = \\frac{1{,}024\\cdot 10^{-5}}{400} = 2{,}56\\cdot 10^{-8}\\ \\mathrm{kg/C} $$
 
 **Svar:** Massa-till-laddning-förhållandet är ungefär $2{,}6\\cdot 10^{-8}\\ \\mathrm{kg/C}$.
 
@@ -17706,7 +17700,7 @@ Den inducerade strömmen i ringen skapar ett eget magnetfält **motriktat** spol
         {
             level: 3,
             question: `En kvadratisk aluminiumplatta med sidan $20\\ \\mathrm{cm}$, tjockleken $5{,}0\\ \\mathrm{mm}$ och resistivitet $\\rho_\\text{Al} = 2{,}65\\cdot 10^{-8}\\ \\mathrm{\\Omega\\cdot m}$ dras med hastigheten $0{,}50\\ \\mathrm{m/s}$ vinkelrätt ut ur ett magnetfält $B = 0{,}80\\ \\mathrm{T}$. Bara den kant ($l = 20\\ \\mathrm{cm}$) som korsar fältgränsen inducerar ström. Uppskatta den dragande kraften som krävs för att hålla konstant fart, om resistansen i den kortslutande virvelströms-banan är $R \\approx 5{,}3\\cdot 10^{-6}\\ \\mathrm{\\Omega}$.`,
-            answer: { value: 1929, unit: 'N' },
+            answer: { value: 2400, unit: 'N', tol: 0.03 },
             solution: `**Insikten är att kraftbalans gäller vid konstant hastighet** — den dragande kraften är exakt lika med den bromsande magnetiska kraften.
 
 **Steg 1 — inducerad ems.**
@@ -17723,7 +17717,7 @@ $$ F = B\\cdot I\\cdot l = 0{,}80 \\cdot 1{,}51\\cdot 10^4 \\cdot 0{,}20 \\appro
 
 **Svar:** Den dragande kraften måste vara ungefär $2{,}4\\ \\mathrm{kN}$ — nästan $250\\ \\mathrm{kg}$-tyngd!
 
-**Generell slutsats:** Virvelströmmarna i en *icke-skåd* metallplatta är otroligt starka eftersom resistansen i den kortslutande banan är extremt liten — bara mikroohm. Det är därför **virvelströmsbromsar** kan vara så effektiva och varför man måste skikta transformator-kärnor i isolerade lameller för att minska virvelströmsförluster.`,
+**Generell slutsats:** Virvelströmmarna i en *oskiktad* metallplatta är otroligt starka eftersom resistansen i den kortslutande banan är extremt liten — bara mikroohm. Det är därför **virvelströmsbromsar** kan vara så effektiva och varför man måste skikta transformator-kärnor i isolerade lameller för att minska virvelströmsförluster.`,
         },
     ],
 
@@ -20769,7 +20763,7 @@ Subtraherar $x$ från båda led:
 
 $$ 2 = 12 $$
 
-Det är en motsägelse, så ekvationen saknar lösning. Tolkning: hur mycket saft man än tillsätter finns de 10 dl vattnet kvar i kannan, så blandningen består aldrig av enbart saft. Andelen kan komma hur nära 100 % som helst (100 dl tillsatt saft ger $\\dfrac{102}{112} \\approx 91$ %) men når aldrig dit.
+Det är en motsägelse, så ekvationen saknar lösning. Tolkning: hur mycket saft man än tillsätter finns de 10 dl vattnet kvar i kannan, så blandningen består aldrig av enbart saft. Andelen kan komma hur nära 100 % som helst (100 dl tillsatt saft ger $\\dfrac{102}{112} \\approx 91\\ \\%$) men når aldrig dit.
 
 **Svar:** a) $\\dfrac{4}{3}$ dl $\\approx 1{,}3$ dl saft. b) 4 dl vatten. c) Nej. Ekvationen leder till $2 = 12$ och saknar lösning, eftersom vattnet alltid finns kvar i blandningen.
 

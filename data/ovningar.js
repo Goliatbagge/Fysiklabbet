@@ -5624,7 +5624,15 @@ $$
 t = \\frac{s}{v} = \\frac{15}{0{,}24} \\approx 63\\ \\mathrm{s}
 $$
 
-**Svar:** a) 0,24 m/s. b) Ca 63 s — en dryg minut.
+**Men hon får väl inte farten direkt?** Nej, under själva kastet accelererar hon från stillastående, så hon har inte farten 0,24 m/s hela vägen. Den fasen är ändå så kort att vi kan bortse från den. Under kastets 0,40 s hinner hon bara förflytta sig
+
+$$
+s_1 = \\frac{a \\cdot (\\Delta t)^2}{2} = \\frac{0{,}60 \\cdot 0{,}40^2}{2} \\approx 0{,}05\\ \\mathrm{m}
+$$
+
+alltså cirka 5 cm av de 15 m. Räknar man med accelerationsfasen blir den totala tiden $0{,}40 + \\dfrac{15 - 0{,}048}{0{,}24} \\approx 62{,}7\\ \\mathrm{s}$, vilket också avrundas till 63 s.
+
+**Svar:** a) 0,24 m/s. b) Cirka 63 s, en dryg minut.
 
 **Generell slutsats:** I rymden finns inget att ta spjärn mot — det enda sättet att ändra sin rörelse är att kasta massa åt motsatt håll. Det är exakt raketmotorns princip: avgaserna är "verktygslådan" som kastas bakåt, kontinuerligt. Notera kedjan i lösningen: Newtons tredje lag (motkraften) → Newtons andra lag (accelerationen) → kinematik (fart och tid).`,
         },

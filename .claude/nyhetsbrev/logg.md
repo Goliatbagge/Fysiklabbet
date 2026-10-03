@@ -14,7 +14,7 @@ Format:
 ## 2026-10-04 — "92 antiprotoner åkte lastbil. Ingen försvann på vägen."
 - EmailOctopus: kampanjen "Nyhetsbrev nr 8 - 2026-10-04" upplagd 2026-10-03
   (All subscribers, 27 kontakter), testmejl skickat till användaren samma
-  dag. Schemaläggningen (söndag 06.00, tidszon Stockholm) är användarens.
+  dag. SCHEMALAGT 2026-10-03 på användarens uttryckliga begäran: söndag 2026-10-04 kl 06.00, tidszon Europe/Amsterdam (UTC+02:00, samma som Stockholm), 27 mottagare.
 - Status: UTKAST skrivet 2026-10-03 (lördag, inom 08.00-deadline, körd som
   schemalagd molnroutine). Tänkt utskick söndag 2026-10-04 kl 06.00 svensk tid.
   Brevperiod (nyheter) 2026-09-27 till 2026-10-03 (sju artiklar, alla sju

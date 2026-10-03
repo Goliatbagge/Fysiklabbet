@@ -18,7 +18,7 @@ för någon månad sedan är en perfekt tipskandidat nu).
 | Handskrivna lösningar (växling penna/text) | katalog.html?id=fy2-1.4 | Lösningar som skrivs för hand steg för steg — och knappen som växlar till vanlig text | Alltid; bra på projektor | 2026-08-16 (nämnd i brevet) |
 | Interaktiva grafer i teorin | katalog.html | Dra i glidare och se grafen ändras live, med ekvationen uppdaterad under | När ett graf-tungt avsnitt är i säsong | 2026-09-27 |
 | Minisimuleringar i genomgångarna | katalog.html?id=fy2-1.5 | Klassrumsdemonstrationer körbara direkt i teoritexten (tomtebloss, centrifug) | Alltid; mörka årstider för tomteblosset | 2026-08-02 (teaser) |
-| Begreppsordlistan | begrepp.html | Svåra ord i nyheterna är klickbara; hela ordlistan A–Ö med enkla förklaringar | Alltid | 2026-08-02 |
+| Begreppsordlistan | begrepp.html | Svåra ord i nyheterna är klickbara; hela ordlistan A–Ö med enkla förklaringar | Alltid | 2026-10-04 |
 | Sökrutan | index.html | Sök över genomgångar, simuleringar, enhetskollar och begrepp — normaliserar å/ä/ö ("rorelsemangd" ger träff). Prov och minisimuleringar ingår INTE i indexet | Alltid | 2026-08-16 |
 | "För läraren"-rutorna | nyheter.html | Diskussionsfrågor och momentkoppling på nyhetsartiklarna — färdig lektionsstart | Terminsstart, måndagar | 2026-08-02 |
 | RSS-flödet | feed.xml | Prenumerera på nyheterna i valfri RSS-läsare | När nyhetsflödet nämns | 2026-09-13 |

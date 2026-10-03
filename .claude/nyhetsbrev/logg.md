@@ -11,6 +11,56 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-10-04 — "92 antiprotoner åkte lastbil. Ingen försvann på vägen."
+- Status: UTKAST skrivet 2026-10-03 (lördag, inom 08.00-deadline, körd som
+  schemalagd molnroutine). Tänkt utskick söndag 2026-10-04 kl 06.00 svensk tid.
+  Brevperiod (nyheter) 2026-09-27 till 2026-10-03 (sju artiklar, alla sju
+  länkade); sajtuppdateringar sedan förra brevet (`git log --since="2026-09-26
+  12:00" origin/main`, 50 commits). `node .claude/verify-nyhetsbrev.js
+  2026-10-04` och `verify-sprak.js` gav inga fel (bara längdvarning, ~629 ord,
+  en innehållsrik vecka).
+- **Kampanjen är INTE upplagd i EmailOctopus** (molnsessionen saknar Chrome):
+  kör `/brev-till-octopus` lokalt, granska och schemalägg söndag 06.00 svensk
+  tid (tidszonen default:ar till London). Bilderna i nyheter/brev/ pushades till
+  main i den här körningen, men kontrollera att de syns live före utskicket.
+- Molnets nätverkspolicy blockerade CDN:erna igen; kringgicks som tidigare
+  veckor med lokalt npm-installerade react/babel/marked/katex och
+  `page.route()` i Playwright.
+- Nyheter: 2026-09-28-antiprotoner-pa-lastbil (hjälte, bedömd mest
+  häpnadsväckande: första vägtransporten av antimateria; detta var förra
+  brevets [BREVTEASER], infriat första dagen i fönstret, nämnt utan att peka
+  tillbaka på att det var teasat), 2026-09-29-kvantdatorn-i-omloppsbana
+  (miniatyr) + 2026-10-03-vattenvagor-med-femtalig-symmetri (miniatyr, dagens
+  artikel, publicerad 03:15 samma morgon, obligatorisk enligt uppdraget). Läs
+  även: 2026-09-27-neutrinernas-smak-avgor-stjarnans-ode (publicerades
+  söndagen 09-27 och kom inte med i förra brevet), 2026-09-30-rumstempererad-
+  supraledare-under-tryck, 2026-10-01-dragkampen-som-andrar-dygnet,
+  2026-10-02-myoner-ur-en-laser. Samtliga sju artiklar listade.
+- Nytt på sajten: fjädersimuleringen i Hookes lag (fy2-2.1, med skärmdump),
+  kraftmomentet som nu delas med Fysik nivå 1 (fy1-3.11 till 3.13), fyra nya
+  övningsblad (Rita krafterna, Rita hävarmen, avancerade uppgifter i Fysik 2
+  kapitel 1, Potenser Ma 1c). Bortvalt: de dolda utkasten (Solsystemet,
+  Sannolikhetshörnan, sannolikhetskalkylatorn, melon i gelé), finlir i
+  kopplingsschemat, justeringar i Newtons andra lag och Flyta eller sjunka,
+  menybytet till Resurser (nämns bara som plats för övningsbladen).
+- Bilder: nyheter/brev/2026-10-04-antiproton-hero.jpg (beskärning av
+  nyhetsbilden, 1064 px, 166 kB), -kvantdator-thumb.jpg och
+  -vattenvagor-thumb.jpg (kvadratiska 500 px-beskärningar), sajtbilden
+  -fjader-krafter.jpg (minisimuleringen i fy2-2.1, pausad under jämviktsläget
+  med alla tre kraftpilar, klickbar till simuleringen).
+- Veckans tips: begreppsordlistan (senast tipsad 2026-08-02, krok: veckans
+  artiklar gav tre nya begrepp: kvasikristall, myografi, CPT-symmetri).
+  Daterat 2026-10-04 i tips.md.
+- Teaser: nyhetskö-uppslaget om laddningen en fjärdedels elektron (sällsynt
+  kvanttillstånd i ett tvådimensionellt material), avslutat med "Vi läser på."
+  Låg redan överst i ko.md, märkt [BREVTEASER] sedan 2026-09-27, ingen flytt
+  behövdes. Kontrollerat att det inte publicerats (grep på "fjärdedels
+  elektron" och "kvasipartikl" i data/nyheter.js och publicerat.md: bara den
+  äldre tredjedelsartikeln 2026-08-18, ett annat uppslag).
+- Förhandsvisning: renderad till JPEG (680 px fönster, ~600 px) via headless
+  Chromium mot dev-servern med bild-URL:erna omdirigerade lokalt; skickad med
+  SendUserFile.
+
 ## 2026-09-27 — "Fem millimeter som gör tiden gå olika fort"
 - Status: **SCHEMALAGT i EmailOctopus 2026-09-26** för söndag 2026-09-27 kl 06.00
   (UTC+2, Stockholm), 23 mottagare. Dessförinnan två rader i kopplingsschema-

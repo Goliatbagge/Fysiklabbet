@@ -1,0 +1,124 @@
+<!--
+  ÄMNESRAD:  92 antiprotoner åkte lastbil. Ingen försvann på vägen.
+  PREHEADER: Plus: en kvantdator i rymden och en simulering av krafterna i en fjäder.
+  Utskick:   söndag 2026-10-04 kl 06.00 svensk tid (EmailOctopus)
+  Brevperiod: 2026-09-27 till 2026-10-03 (nyheter, sju artiklar, alla länkade).
+  Sajtuppdateringar sedan förra brevet (git log --since 2026-09-26 12:00,
+  origin/main, 50 commits). Publika och medtagna: fjädersimuleringen i
+  Hookes lag (fy2-2.1, UPDATES 2026-09-30, med skärmdump), kraftmomentet som
+  nu delas med Fysik nivå 1 (fy1-3.11 till 3.13, commit 55e1d42) samt fyra nya
+  övningsblad (UPDATES 2026-09-29 och 2026-09-30). Bortvalt: de dolda
+  utkasten (Solsystemet/Ljusresan, Sannolikhetshörnan, sannolikhetskalkylatorn,
+  melon i gelé), kopplingsschema-finlir, Newtons andra lag-justeringar,
+  Flyta eller sjunka-klossarna, menybytet Verktyg till Resurser (nämns bara
+  som plats för övningsbladen), språk- och verifierarfixar.
+
+  Skrivet som schemalagd molnroutine (lördag). Molnets nätverkspolicy
+  blockerar unpkg/jsdelivr/fonts (agentproxyn), men npm-registret är öppet:
+  react/react-dom/@babel-standalone/marked/katex installerades lokalt och
+  CDN-anropen fångades med page.route() i Playwright. Sajtbilden är
+  minisimuleringen fjaderpendel (visa: krafter) i fy2-2.1, pausad under
+  jämviktsläget (elongation -4,7 cm) med alla tre kraftpilar synliga.
+-->
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fysiklabbets nyhetsbrev, vecka 40</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f7f2e8;">
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f2e8;">
+<tr><td align="center" style="padding:28px 12px 40px;">
+
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%;">
+
+    <tr><td align="center" style="padding:8px 8px 26px;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; padding-bottom:10px;">Nyhetsbrev nr 8 &middot; vecka 40 &middot; 2026</div>
+      <div style="font-family:Georgia,'Times New Roman',serif; font-size:34px; font-weight:bold; color:#0f1620;">Fysiklabbet</div>
+    </td></tr>
+
+    <tr><td style="background-color:#fdfaf3; border-radius:10px; padding:30px 34px 8px;">
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Det har varit en vecka av förstagångare. Antimateria har för första gången fått åka lastbil, och en kvantdator har arbetat i omloppsbana åtta månader trots att hälften av dess ljusdetektorer var obrukbara efter uppskjutningen.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Först några nyheter från sajten, för dig som undervisar.</p>
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Nytt på Fysiklabbet</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;"><strong>Dra i en vikt och se krafterna i fjädern.</strong> I genomgången <a href="https://fysiklabbet.se/katalog.html?id=fy2-2.1&amp;block=testa-sjalv-krafterna-pa-vikten-i-fjadern" style="color:#2563a8;">Hookes lag</a> i Fysik nivå 2 finns nu en simulering där du drar ner en vikt och släpper den. Under svängningen ritas fjäderkraften, tyngdkraften och den resulterande kraften ut som pilar. Tyngdkraften är lika stor hela tiden, fjäderkraften växer ju mer fjädern dras ut, och skillnaden mellan dem, den resulterande kraften, pekar alltid mot jämviktsläget. Pausa mitt i svängningen och peka på pilarna.</p>
+      <a href="https://fysiklabbet.se/katalog.html?id=fy2-2.1&amp;block=testa-sjalv-krafterna-pa-vikten-i-fjadern" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-10-04-fjader-krafter.jpg" width="532" alt="Simuleringen av en vikt i en fjäder: vikten hänger under jämviktsläget, fjäderkraften pekar uppåt och är större än tyngdkraften som pekar nedåt, och den resulterande kraften pekar uppåt" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0; margin:0 0 6px;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:0px 0 20px;">Vikten under jämviktsläget: fjäderkraften är större än tyngdkraften, så den resulterande kraften pekar uppåt. Klicka för att prova.</div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;"><strong>Kraftmomentet finns nu också i Fysik nivå 1.</strong> Med Gy25 flyttade kraftmomentet dit från Fysik nivå 2. Därför finns genomgångarna <a href="https://fysiklabbet.se/katalog.html?id=fy1-3.11" style="color:#2563a8;">Kraftmoment, Mer kraftmoment och Stabilitet</a> nu även som avsnitt 3.11 till 3.13 i kapitlet Krafter, med samma simuleringar och övningar som i Fysik nivå 2.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 20px;"><strong>Fyra nya övningsblad att skriva ut.</strong> I Fysik nivå 1 ritar eleven alla krafter på en kropp i femton situationer, och i Fysik nivå 2 finns ett blad om att rita hävarmen och ett med nio avancerade uppgifter ur kapitel 1. Matematik nivå 1c har fått ett om potenser, med 63 uppgifter på tre nivåer. Alla har facit eller lösningsförslag, och <a href="https://fysiklabbet.se/ovningsblad.html" style="color:#2563a8;">alla övningsblad finns samlade</a> under Resurser i menyn.</p>
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:26px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Veckans tips</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 8px;">Du har väl inte glömt <a href="https://fysiklabbet.se/begrepp.html" style="color:#2563a8;">ordlistan</a>? Svåra ord i nyhetsartiklarna är klickbara och leder till en förklaring på vanlig svenska, och hela listan finns i bokstavsordning. Den här veckan har den fått bland annat <a href="https://fysiklabbet.se/begrepp.html?ord=kvasikristall" style="color:#2563a8;">kvasikristall</a>, <a href="https://fysiklabbet.se/begrepp.html?ord=myografi" style="color:#2563a8;">myografi</a> och <a href="https://fysiklabbet.se/begrepp.html?ord=cpt-symmetri" style="color:#2563a8;">CPT-symmetri</a>. Bra att skicka vidare till en elev som fastnat på ett ord.</p>
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:26px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Veckans fysik</div>
+      </div>
+      <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-28-antiprotoner-pa-lastbil" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-10-04-antiproton-hero.jpg" width="532" alt="Vy uppifrån över antimateriefabriken vid CERN, med den sjuhörniga acceleratorringen ELENA i blå och orange magneter" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 18px;">Foto: Unnerving duck (CC&nbsp;BY-SA&nbsp;4.0), via Wikimedia Commons. Decelerationsringen ELENA vid CERN, där antiprotonerna bromsas.</div>
+      <h2 style="font-family:Georgia,'Times New Roman',serif; font-size:22px; line-height:1.35; color:#0f1620; margin:0 0 10px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-28-antiprotoner-pa-lastbil" style="color:#0f1620; text-decoration:none;">Antimateria har åkt lastbil</a></h2>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;">Den 24 mars körde forskare vid CERN en lastbil åtta kilometer runt området, med 92&nbsp;antiprotoner instängda i en flyttbar magnetfälla. Farten var högst 42&nbsp;km/h och inte en enda antiproton gick förlorad. Efteråt höll de sig kvar i fällan i över en månad. Lasten är försvinnande liten, men aggregatet som håller den kvar i magnetfältet väger nästan ett ton.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; margin:0 0 26px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-28-antiprotoner-pa-lastbil" style="color:#2563a8; text-decoration:underline;">Läs artikeln &rarr;</a></p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="48%" valign="top" style="padding-right:10px;">
+            <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-29-kvantdatorn-i-omloppsbana" style="text-decoration:none;">
+              <img src="https://fysiklabbet.se/nyheter/brev/2026-10-04-kvantdator-thumb.jpg" width="250" alt="Sex forskare i vita renrumsrockar står tätt ihop framför en avlång aluminiumlåda på ett optiskt bord" style="display:block; width:100%; height:auto; border-radius:8px; border:0;">
+            </a>
+            <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:7px 0 0;">Foto: Walther Group / DLR RSC3 (pressbild, universitetet i Wien)</div>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.55; color:#0f1620; margin:10px 0 4px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-29-kvantdatorn-i-omloppsbana" style="color:#0f1620; text-decoration:none;"><strong>Kvantdatorn i rymden klarade sig på halva detektorerna.</strong></a> En aluminiumlåda på 9,8&nbsp;kilogram har räknat med ljus 510&nbsp;kilometer över jordytan i åtta månader. Bara tre av sex detektorer fungerade efter uppskjutningen, men det räckte för att få två fotoner att interferera. Resultatet är ett förtryck och väntar ännu på granskning.</p>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; margin:0;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-09-29-kvantdatorn-i-omloppsbana" style="color:#2563a8; text-decoration:underline;">Läs mer &rarr;</a></p>
+          </td>
+          <td width="48%" valign="top" style="padding-left:10px;">
+            <a href="https://fysiklabbet.se/nyheter.html?id=2026-10-03-vattenvagor-med-femtalig-symmetri" style="text-decoration:none;">
+              <img src="https://fysiklabbet.se/nyheter/brev/2026-10-04-vattenvagor-thumb.jpg" width="250" alt="Datorritad bild av en vattenyta med små vågtoppar och tre flytande kulor i grönt, rött och gult" style="display:block; width:100%; height:auto; border-radius:8px; border:0;">
+            </a>
+            <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:7px 0 0;">Illustration: J.-L. Duan med flera (CC&nbsp;BY&nbsp;4.0)</div>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.55; color:#0f1620; margin:10px 0 4px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-10-03-vattenvagor-med-femtalig-symmetri" style="color:#0f1620; text-decoration:none;"><strong>Fem vågor ger ett mönster som aldrig upprepar sig.</strong></a> Fem vattenvågor möts i ett femhörnigt kar och bildar ett mönster som är strängt ordnat men aldrig börjar om, som i en kvasikristall. Virvlarna i mönstret fångar flytande kulor och får dem att snurra.</p>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; margin:0;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-10-03-vattenvagor-med-femtalig-symmetri" style="color:#2563a8; text-decoration:underline;">Läs mer &rarr;</a></p>
+          </td>
+        </tr>
+      </table>
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:26px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Läs även</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; line-height:1.9; color:#0f1620; margin:0;">
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-27-neutrinernas-smak-avgor-stjarnans-ode" style="color:#2563a8; text-decoration:underline;">Neutrinernas sortbyte kan avgöra om stjärnan exploderar</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-09-30-rumstempererad-supraledare-under-tryck" style="color:#2563a8; text-decoration:underline;">Supraledaren som ska fungera vid 43&nbsp;°C under enormt tryck</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-10-01-dragkampen-som-andrar-dygnet" style="color:#2563a8; text-decoration:underline;">Dragkampen i jordens inre som ändrar dygnets längd</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-10-02-myoner-ur-en-laser" style="color:#2563a8; text-decoration:underline;">Lasern som tillverkar myoner tog sin första bild genom bly</a>
+      </p>
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:14px;">Nästa vecka</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Ur nyhetskön väntar ett sällsynt kvanttillstånd i ett tvådimensionellt material, där en kollektiv rörelse hos många elektroner beter sig som en enda partikel med bara en fjärdedel av elementarladdningen. Laddning kommer annars alltid i hela steg. Vi läser på.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:26px 0 4px;">Trevlig läsning, och trevlig vecka.</p>
+      <p style="font-family:Georgia,'Times New Roman',serif; font-size:17px; color:#0f1620; margin:0 0 30px;">/ Fysiklabbet</p>
+
+    </td></tr>
+
+    <!-- ── Sidfot ───────────────────────────────────────────── -->
+    <!-- {{UnsubscribeURL}}, {{SenderInfo}} och {{RewardsURL}} krävs av
+         EmailOctopus i egen HTML. Ta inte bort dem. -->
+    <tr><td align="center" style="padding:20px 8px 0;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); padding-bottom:12px;"><a href="https://fysiklabbet.se" style="color:rgba(15,22,32,0.5);">fysiklabbet.se</a> &middot; Interaktiva simuleringar, teori och övningar i fysik och matematik</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.5); padding-bottom:6px;">Du får det här brevet för att du prenumererar på Fysiklabbets nyhetsbrev. <a href="{{UnsubscribeURL}}" style="color:rgba(15,22,32,0.5); text-decoration:underline;">Avsluta prenumerationen</a>.</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.45); padding-bottom:6px;">{{SenderInfo}}</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:11px; color:rgba(15,22,32,0.4);"><a href="{{RewardsURL}}" style="color:rgba(15,22,32,0.4); text-decoration:underline;">Powered by EmailOctopus</a></div>
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>
+
+</body>
+</html>

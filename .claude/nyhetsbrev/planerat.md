@@ -57,5 +57,4 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   bygger snygga kopplingsscheman (till prov, genomgångar, tavlan). Utkastet
   ligger i `utkast/kopplingsschema.html` (dolt, noindex) och är ännu inte
   lanserat. **Teasat 2026-09-27** på användarens begäran, utan att
-  namnge det ("en av de pilligaste sakerna i elläran … Håll utkik."). Håll teasern öppen utan datumlöfte; när verktyget lanseras
-  hör det hemma under "Nytt på Fysiklabbet".
+  namnge det ("en av de pilligaste sakerna i elläran … Håll utkik."). **[AVKLARAT 2026-09-27]** Verktyget lanserades 2026-09-26 och nämndes i brevet 2026-09-27.

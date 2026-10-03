@@ -158,7 +158,7 @@ const NYHETER_ALL = [
       },
       {
         "type": "p",
-        "html": "Priset kan delas av högst tre personer. Förra året gick det till John Clarke, Michel Devoret och John Martinis, som visade att en hel elektrisk krets kan bete sig som en enda kvantpartikel. Här är våra tio tips, ordnade efter upptäckt."
+        "html": "Priset kan delas av högst tre personer. Förra året gick det till John Clarke, Michel Devoret och John Martinis, som visade att en hel elektrisk krets kan bete sig som en enda kvantpartikel. Här är våra tio tips, grupperade efter upptäckt. Numren är ingen rangordning."
       },
       {
         "type": "h2",
@@ -166,7 +166,7 @@ const NYHETER_ALL = [
       },
       {
         "type": "p",
-        "html": "<strong>John Pendry</strong>, Imperial College London, och <strong>David Smith</strong>, Duke University i USA. Ett metamaterial är konstgjort och byggt av små strukturer, mindre än våglängden, som styr elektromagnetiska vågor på sätt som inget naturligt material kan. Pendry visade år 2000 i teorin att ett material med negativt brytningsindex skulle bryta ljuset åt fel håll och kunna ge en lins utan den vanliga gränsen för hur skarp en bild kan bli. Samma år byggde Smith och hans kolleger det första sådana materialet, för mikrovågor. År 2006 byggde Smiths grupp, med Pendry som en av medförfattarna, den första fungerande osynlighetsmanteln för mikrovågor. Den dolde en kopparcylinder genom att leda vågorna runt den, så att cylindern och manteln tillsammans nästan såg ut som tomt rum."
+        "html": "<strong>1. John Pendry</strong>, Imperial College London, och <strong>2. David Smith</strong>, Duke University i USA. Ett metamaterial är konstgjort och byggt av små strukturer, mindre än våglängden, som styr elektromagnetiska vågor på sätt som inget naturligt material kan. Pendry visade år 2000 i teorin att ett material med negativt brytningsindex skulle bryta ljuset åt fel håll och kunna ge en lins utan den vanliga gränsen för hur skarp en bild kan bli. Samma år byggde Smith och hans kolleger det första sådana materialet, för mikrovågor. År 2006 byggde Smiths grupp, med Pendry som en av medförfattarna, den första fungerande osynlighetsmanteln för mikrovågor. Den dolde en kopparcylinder genom att leda vågorna runt den, så att cylindern och manteln tillsammans nästan såg ut som tomt rum."
       },
       {
         "type": "h2",
@@ -174,7 +174,7 @@ const NYHETER_ALL = [
       },
       {
         "type": "p",
-        "html": "<strong>Pablo Jarillo-Herrero</strong>, MIT, och <strong>Allan MacDonald</strong>, University of Texas i Austin. Grafen är ett lager kolatomer, bara en atom tjockt. MacDonald räknade 2011 tillsammans med Rafi Bistritzer ut att något märkligt borde hända om man lägger två sådana lager på varandra och vrider det ena drygt en grad: elektronerna borde nästan stanna upp. År 2018 gjorde Jarillo-Herreros grupp försöket och fann att det vridna grafenet blev supraledande, alltså ledde ström helt utan motstånd, vid en vinkel kring 1,1 grader och en temperatur nära absoluta nollpunkten. Upptäckten startade ett helt nytt forskningsfält."
+        "html": "<strong>3. Pablo Jarillo-Herrero</strong>, MIT, och <strong>4. Allan MacDonald</strong>, University of Texas i Austin. Grafen är ett lager kolatomer, bara en atom tjockt. MacDonald räknade 2011 tillsammans med Rafi Bistritzer ut att något märkligt borde hända om man lägger två sådana lager på varandra och vrider det ena drygt en grad: elektronerna borde nästan stanna upp. År 2018 gjorde Jarillo-Herreros grupp försöket och fann att det vridna grafenet blev supraledande, alltså ledde ström helt utan motstånd, vid en vinkel kring 1,1 grader och en temperatur nära absoluta nollpunkten. Upptäckten startade ett helt nytt forskningsfält."
       },
       {
         "type": "h2",
@@ -182,7 +182,7 @@ const NYHETER_ALL = [
       },
       {
         "type": "p",
-        "html": "<strong>Hidetoshi Katori</strong>, Tokyos universitet, och <strong>Jun Ye</strong>, JILA i Boulder, USA. I en optisk gitterklocka hålls tusentals atomer fast i ett mönster av laserljus, och klockan räknar svängningarna i det ljus som atomerna tar upp. Katori kom på hur laserfällan kan byggas utan att störa atomernas tickande, genom att välja en noga utvald ”magisk” våglängd, och visade de första klockorna 2005. Ye har drivit noggrannheten så långt att hans grupp 2022 kunde mäta att tiden går olika fort över ett enda litet moln av atomer som bara är en millimeter högt, i överensstämmelse med Einsteins allmänna relativitetsteori."
+        "html": "<strong>5. Hidetoshi Katori</strong>, Tokyos universitet, och <strong>6. Jun Ye</strong>, JILA i Boulder, USA. I en optisk gitterklocka hålls tusentals atomer fast i ett mönster av laserljus, och klockan räknar svängningarna i det ljus som atomerna tar upp. Katori kom på hur laserfällan kan byggas utan att störa atomernas tickande, genom att välja en noga utvald ”magisk” våglängd, och visade de första klockorna 2005. Ye har drivit noggrannheten så långt att hans grupp 2022 kunde mäta att tiden går olika fort över ett enda litet moln av atomer som bara är en millimeter högt, i överensstämmelse med Einsteins allmänna relativitetsteori."
       },
       {
         "type": "h2",
@@ -190,11 +190,11 @@ const NYHETER_ALL = [
       },
       {
         "type": "p",
-        "html": "<strong>Nicola Spaldin</strong>, ETH Zürich i Schweiz. Magnetism och elektrisk polarisering brukar inte finnas i samma material. Spaldin förklarade år 2000, då under namnet Hill, varför, och visade sedan vägen till så kallade multiferroiska material där båda egenskaperna finns samtidigt och påverkar varandra, även i rumstemperatur. Det öppnar för minnen och sensorer som styrs med en elektrisk spänning i stället för med en ström, och därför drar mycket mindre energi. Clarivate lyfter i år fram henne som en av de forskare vars arbete håller Nobelklass."
+        "html": "<strong>7. Nicola Spaldin</strong>, ETH Zürich i Schweiz. Magnetism och elektrisk polarisering brukar inte finnas i samma material. Spaldin förklarade år 2000, då under namnet Hill, varför, och visade sedan vägen till så kallade multiferroiska material där båda egenskaperna finns samtidigt och påverkar varandra, även i rumstemperatur. Det öppnar för minnen och sensorer som styrs med en elektrisk spänning i stället för med en ström, och därför drar mycket mindre energi. Clarivate lyfter i år fram henne som en av de forskare vars arbete håller Nobelklass."
       },
       {
         "type": "p",
-        "html": "<strong>Qikun Xue</strong>, Southern University of Science and Technology och Tsinghuauniversitetet i Kina. I kvant-Halleffekten kan ett materials motstånd tvärs strömmen bara anta vissa exakta värden, men effekten kräver normalt ett mycket starkt magnetfält. Xues grupp visade 2013 att den kan uppstå helt utan yttre magnetfält, i en tunn film av ett magnetiskt material och vid mycket låg temperatur. Det kallas den anomala kvant-Halleffekten. Strömmen går då längs filmens kanter nästan utan förluster, vilket gör effekten intressant för framtidens elektronik. Även Xue finns på Clarivates lista i år."
+        "html": "<strong>8. Qikun Xue</strong>, Southern University of Science and Technology och Tsinghuauniversitetet i Kina. I kvant-Halleffekten kan ett materials motstånd tvärs strömmen bara anta vissa exakta värden, men effekten kräver normalt ett mycket starkt magnetfält. Xues grupp visade 2013 att den kan uppstå helt utan yttre magnetfält, i en tunn film av ett magnetiskt material och vid mycket låg temperatur. Det kallas den anomala kvant-Halleffekten. Strömmen går då längs filmens kanter nästan utan förluster, vilket gör effekten intressant för framtidens elektronik. Även Xue finns på Clarivates lista i år."
       },
       {
         "type": "h2",
@@ -202,7 +202,7 @@ const NYHETER_ALL = [
       },
       {
         "type": "p",
-        "html": "<strong>Stephen Forrest</strong>, University of Michigan i USA. I en OLED-skärm lyser varje bildpunkt av sig själv, i tunna lager av organiska molekyler. De första lysdioderna av det slaget kunde bara få ungefär en fjärdedel av de exciterade tillstånden i molekylerna att lysa, eftersom tre av fyra var av ett slag som inte ger ifrån sig något ljus. Forrest och kemisten Mark Thompson visade 1998 att fosforescerande molekyler kan få nästan alla att lysa. Tekniken finns i dag i många mobil- och tv-skärmar. Clarivate nämner dem i år tillsammans med Chihaya Adachi i Japan, så ett pris för upptäckten skulle lika gärna kunna bli ett kemipris."
+        "html": "<strong>9. Stephen Forrest</strong>, University of Michigan i USA. I en OLED-skärm lyser varje bildpunkt av sig själv, i tunna lager av organiska molekyler. De första lysdioderna av det slaget kunde bara få ungefär en fjärdedel av de exciterade tillstånden i molekylerna att lysa, eftersom tre av fyra var av ett slag som inte ger ifrån sig något ljus. Forrest och kemisten Mark Thompson visade 1998 att fosforescerande molekyler kan få nästan alla att lysa. Tekniken finns i dag i många mobil- och tv-skärmar. Clarivate nämner dem i år tillsammans med Chihaya Adachi i Japan, så ett pris för upptäckten skulle lika gärna kunna bli ett kemipris."
       },
       {
         "type": "h2",
@@ -210,7 +210,7 @@ const NYHETER_ALL = [
       },
       {
         "type": "p",
-        "html": "<strong>Jeffrey Hangst</strong>, Aarhus universitet i Danmark. Antiväte är den enklaste atomen av antimateria: en antiproton med en positron runt sig. Hangst leder experimentet ALPHA vid CERN, som 2010 för första gången fångade antiväteatomer i en magnetfälla. Sedan dess har gruppen mätt antivätets ljus med stor precision och 2023 visat att antimateria faller nedåt i jordens tyngdkraft och inte stöts bort. Exakt hur stark dragningen är återstår att mäta noggrant. Physics World nämner Hangst först bland kandidaterna inom partikelfysik, men påpekar att antimateriexperimenten ännu inte har hittat någon avvikelse från standardmodellen för partikelfysik."
+        "html": "<strong>10. Jeffrey Hangst</strong>, Aarhus universitet i Danmark. Antiväte är den enklaste atomen av antimateria: en antiproton med en positron runt sig. Hangst leder experimentet ALPHA vid CERN, som 2010 för första gången fångade antiväteatomer i en magnetfälla. Sedan dess har gruppen mätt antivätets ljus med stor precision och 2023 visat att antimateria faller nedåt i jordens tyngdkraft och inte stöts bort. Exakt hur stark dragningen är återstår att mäta noggrant. Physics World nämner Hangst först bland kandidaterna inom partikelfysik, men påpekar att antimateriexperimenten ännu inte har hittat någon avvikelse från standardmodellen för partikelfysik."
       },
       {
         "type": "p",

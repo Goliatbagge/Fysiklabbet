@@ -147,8 +147,24 @@ sektionen Veckans fysik, inte direkt under anslaget.
    och nyfikenhetsväckande — brevets bästa godbit, inte "Nyhetsbrev v. 32".
    Preheadern (~80 tecken) kompletterar ämnesraden i stället för att upprepa
    den.
-2. **Hälsning/anslag** — 2–4 meningar som sätter tonen och veckans tema. Här
-   bor värmen och glimten. Variera; börja aldrig två veckor i rad likadant.
+2. **Hälsning/anslag** — 2–4 meningar som sätter tonen. Här bor värmen och
+   glimten. Variera; börja aldrig två veckor i rad likadant.
+   **Första meningen ska INTE leta efter en gemensam nämnare i veckans
+   nyheter** ("en vecka av förstagångare") — det blir nästan alltid krystat
+   (uttryckligt önskemål 2026-10-03). Ta i stället en krok utanför veckans
+   innehåll:
+   - **skolåret**: "Om tre veckor är det läslov …", terminsstart, nationella
+     prov, jullov;
+   - **kalendern eller en stor händelse som allmänheten har koll på**:
+     Nobelpriset i fysik (tillkännages i början av oktober, kontrollera
+     datum och tid på nobelprize.org), en solförmörkelse, sommartidens slut,
+     ett val (neutralt, bara som tidsmarkör);
+   - **något som rör sajten men inte är en uppdatering eller nyhet**:
+     en prenumerantmilstolpe och liknande (bara om den är sann; kolla
+     antalet i EmailOctopus eller fråga).
+   Kommer du inte på något: skriv helt enkelt att det är månadens första
+   nyhetsbrev ("Det här är oktobers första nyhetsbrev …"). Anslagets sista
+   mening leder sedan som vanligt in i sajtnyheterna.
 3. **Nytt på Fysiklabbet** — veckans sajtuppdateringar med länkar.
 4. **Veckans tips** — en kort påminnelse (2–3 meningar + länk) om en
    funktion som **redan finns** på sajten. Nya prenumeranter har missat

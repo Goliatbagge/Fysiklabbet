@@ -103,6 +103,132 @@
  */
 const NYHETER_ALL = [
   {
+    "id": "2026-10-03-tio-namn-till-nobelpriset-i-fysik",
+    "date": "2026-10-03",
+    "title": "Tio namn vi tror kan få Nobelpriset i fysik",
+    "deck": "På tisdag tillkännages årets Nobelpris i fysik. Ingen utanför Vetenskapsakademien vet vem som får det, men vissa namn dyker upp på tipslistorna år efter år. Här är tio forskare som Fysiklabbet tippar, och vad de har upptäckt.",
+    "category": "Nobelpriset",
+    "readingTime": "5 min",
+    "image": "nyheter/bilder/2026-10-03-tio-namn-till-nobelpriset-i-fysik.jpg",
+    "imageAlt": "Vetenskapsakademiens huvudbyggnad i rött tegel med vita kolonner och texten Kungl. Vetenskapsakademien på gaveln, fotograferad en vinterdag med snö och kala träd i förgrunden.",
+    "imageCredit": "Foto: Hackspett, via Wikimedia Commons (CC BY-SA 2.5). Kungliga Vetenskapsakademiens huvudbyggnad i Stockholm, där fysikpriset tillkännages.",
+    "tags": [
+      "nobelpriset",
+      "nobelpris i fysik",
+      "metamaterial",
+      "grafen",
+      "supraledning",
+      "atomur",
+      "multiferroiska material",
+      "kvant-halleffekten",
+      "oled",
+      "antimateria"
+    ],
+    "sources": [
+      {
+        "name": "Nobelstiftelsen: Tillkännagivande av 2026 års Nobelpris",
+        "url": "https://www.nobelprize.org/press-release/tillkannagivande-av-2026-ars-nobelpris/"
+      },
+      {
+        "name": "Clarivate: Citation Laureates 2026 in Physics (17 september 2026)",
+        "url": "https://clarivate.com/citation-laureates/physics/"
+      },
+      {
+        "name": "Physics World: Is this the year for a Nobel prize in condensed matter, or maybe particle physics? (30 september 2026)",
+        "url": "https://physicsworld.com/a/is-this-the-year-for-a-nobel-prize-in-condensed-matter-or-maybe-particle-physics/"
+      }
+    ],
+    "research": null,
+    "larare": {
+      "moment": [],
+      "fragor": [
+        "Nobelpriset i fysik delas nästan alltid ut för upptäckter som är tjugo, trettio eller fyrtio år gamla. Vad vinner man på att vänta så länge, och vad förlorar man?",
+        "Högst tre personer får dela ett pris. Vad blir svårt när en upptäckt har gjorts av ett experiment med flera tiotals forskare, som antimateriefällan vid CERN?",
+        "Flera av upptäckterna i listan började som en uträkning på papper och bekräftades först senare i ett försök. Vem borde få priset när teori och experiment har gjorts av olika personer?"
+      ]
+    },
+    "body": [
+      {
+        "type": "p",
+        "html": "Tisdagen den 6 oktober, tidigast klockan 11.45, läser Kungliga Vetenskapsakademien i Stockholm upp namnen på årets pristagare i fysik. Fram till dess vet ingen utanför akademien vem det blir. Vilka som har nominerats hålls dessutom hemligt i 50 år, så alla förhandstips är gissningar."
+      },
+      {
+        "type": "p",
+        "html": "Gissningarna går ändå att göra kvalificerade. Pristagarna har nästan alltid gjort en upptäckt som är flera decennier gammal, som har bekräftats många gånger om och som andra forskare har byggt vidare på. Ett sätt att leta är att räkna hur ofta forskarnas artiklar citeras, vilket analysföretaget Clarivate gör varje år. Ett annat är att följa vilka namn som får andra stora priser."
+      },
+      {
+        "type": "p",
+        "html": "Priset kan delas av högst tre personer. Förra året gick det till John Clarke, Michel Devoret och John Martinis, som visade att en hel elektrisk krets kan bete sig som en enda kvantpartikel. Här är våra tio tips, ordnade efter upptäckt."
+      },
+      {
+        "type": "h2",
+        "text": "Material som böjer ljuset åt fel håll"
+      },
+      {
+        "type": "p",
+        "html": "<strong>John Pendry</strong>, Imperial College London, och <strong>David Smith</strong>, Duke University i USA. Ett metamaterial är konstgjort och byggt av små strukturer, mindre än våglängden, som styr elektromagnetiska vågor på sätt som inget naturligt material kan. Pendry visade år 2000 i teorin att ett material med negativt brytningsindex skulle bryta ljuset åt fel håll och kunna ge en lins utan den vanliga gränsen för hur skarp en bild kan bli. Samma år byggde Smith och hans kolleger det första sådana materialet, för mikrovågor. År 2006 byggde Smiths grupp, med Pendry som en av medförfattarna, den första fungerande osynlighetsmanteln för mikrovågor. Den dolde en kopparcylinder genom att leda vågorna runt den, så att cylindern och manteln tillsammans nästan såg ut som tomt rum."
+      },
+      {
+        "type": "h2",
+        "text": "Två lager kol, vridna en grad"
+      },
+      {
+        "type": "p",
+        "html": "<strong>Pablo Jarillo-Herrero</strong>, MIT, och <strong>Allan MacDonald</strong>, University of Texas i Austin. Grafen är ett lager kolatomer, bara en atom tjockt. MacDonald räknade 2011 tillsammans med Rafi Bistritzer ut att något märkligt borde hända om man lägger två sådana lager på varandra och vrider det ena drygt en grad: elektronerna borde nästan stanna upp. År 2018 gjorde Jarillo-Herreros grupp försöket och fann att det vridna grafenet blev supraledande, alltså ledde ström helt utan motstånd, vid en vinkel kring 1,1 grader och en temperatur nära absoluta nollpunkten. Upptäckten startade ett helt nytt forskningsfält."
+      },
+      {
+        "type": "h2",
+        "text": "Klockorna som känner av en millimeter"
+      },
+      {
+        "type": "p",
+        "html": "<strong>Hidetoshi Katori</strong>, Tokyos universitet, och <strong>Jun Ye</strong>, JILA i Boulder, USA. I en optisk gitterklocka hålls tusentals atomer fast i ett mönster av laserljus, och klockan räknar svängningarna i det ljus som atomerna tar upp. Katori kom på hur laserfällan kan byggas utan att störa atomernas tickande, genom att välja en noga utvald ”magisk” våglängd, och visade de första klockorna 2005. Ye har drivit noggrannheten så långt att hans grupp 2022 kunde mäta att tiden går olika fort över ett enda litet moln av atomer som bara är en millimeter högt, i överensstämmelse med Einsteins allmänna relativitetsteori."
+      },
+      {
+        "type": "h2",
+        "text": "Två oväntade material"
+      },
+      {
+        "type": "p",
+        "html": "<strong>Nicola Spaldin</strong>, ETH Zürich i Schweiz. Magnetism och elektrisk polarisering brukar inte finnas i samma material. Spaldin förklarade år 2000, då under namnet Hill, varför, och visade sedan vägen till så kallade multiferroiska material där båda egenskaperna finns samtidigt och påverkar varandra, även i rumstemperatur. Det öppnar för minnen och sensorer som styrs med en elektrisk spänning i stället för med en ström, och därför drar mycket mindre energi. Clarivate lyfter i år fram henne som en av de forskare vars arbete håller Nobelklass."
+      },
+      {
+        "type": "p",
+        "html": "<strong>Qikun Xue</strong>, Southern University of Science and Technology och Tsinghuauniversitetet i Kina. I kvant-Halleffekten kan ett materials motstånd tvärs strömmen bara anta vissa exakta värden, men effekten kräver normalt ett mycket starkt magnetfält. Xues grupp visade 2013 att den kan uppstå helt utan yttre magnetfält, i en tunn film av ett magnetiskt material och vid mycket låg temperatur. Det kallas den anomala kvant-Halleffekten. Strömmen går då längs filmens kanter nästan utan förluster, vilket gör effekten intressant för framtidens elektronik. Även Xue finns på Clarivates lista i år."
+      },
+      {
+        "type": "h2",
+        "text": "Skärmen i din mobil"
+      },
+      {
+        "type": "p",
+        "html": "<strong>Stephen Forrest</strong>, University of Michigan i USA. I en OLED-skärm lyser varje bildpunkt av sig själv, i tunna lager av organiska molekyler. De första lysdioderna av det slaget kunde bara få ungefär en fjärdedel av de exciterade tillstånden i molekylerna att lysa, eftersom tre av fyra var av ett slag som inte ger ifrån sig något ljus. Forrest och kemisten Mark Thompson visade 1998 att fosforescerande molekyler kan få nästan alla att lysa. Tekniken finns i dag i många mobil- och tv-skärmar. Clarivate nämner dem i år tillsammans med Chihaya Adachi i Japan, så ett pris för upptäckten skulle lika gärna kunna bli ett kemipris."
+      },
+      {
+        "type": "h2",
+        "text": "Antimateria som faller"
+      },
+      {
+        "type": "p",
+        "html": "<strong>Jeffrey Hangst</strong>, Aarhus universitet i Danmark. Antiväte är den enklaste atomen av antimateria: en antiproton med en positron runt sig. Hangst leder experimentet ALPHA vid CERN, som 2010 för första gången fångade antiväteatomer i en magnetfälla. Sedan dess har gruppen mätt antivätets ljus med stor precision och 2023 visat att antimateria faller nedåt i jordens tyngdkraft och inte stöts bort. Exakt hur stark dragningen är återstår att mäta noggrant. Physics World nämner Hangst först bland kandidaterna inom partikelfysik, men påpekar att antimateriexperimenten ännu inte har hittat någon avvikelse från standardmodellen för partikelfysik."
+      },
+      {
+        "type": "p",
+        "html": "Det kan förstås bli någon helt annan. Akademien har överraskat förr, och det är en del av nöjet."
+      },
+      {
+        "type": "fact",
+        "title": "Så utses pristagarna",
+        "items": [
+          "Fysikpriset delas ut av Kungliga Vetenskapsakademien. Inbjudna forskare runt om i världen föreslår kandidater, Nobelkommittén för fysik granskar förslagen och akademien fattar beslutet.",
+          "Högst tre personer kan dela på ett pris. Det delas inte ut postumt, utom om pristagaren dör efter tillkännagivandet.",
+          "Nomineringarna hålls hemliga i 50 år.",
+          "Tillkännagivandet sänds direkt i Nobelprisets digitala kanaler, tisdag 6 oktober från klockan 11.45."
+        ]
+      }
+    ]
+  },
+  {
     id: "2026-10-03-vattenvagor-med-femtalig-symmetri",
     date: "2026-10-03",
     title: "Fem vågor i en vattenbricka bildar ett mönster som aldrig upprepar sig",

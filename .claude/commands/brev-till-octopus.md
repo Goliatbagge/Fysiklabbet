@@ -113,5 +113,15 @@ fysiklabbet.se innan du fortsätter.
   hittar den inte; klicka via `find`-referensen.
 - Tidszonen på Send-steget default:ar till London (UTC+1). 06.00 svensk
   sommartid = 05.00 London — byt hellre tidszon till Stockholm än att räkna om.
+- **Bakgrundsflik (`document.visibilityState === 'hidden'`)**: skärmdumpar
+  hänger sig (CDP-timeout) och klick via `ref` på Preview & test gör ingenting.
+  Det går ändå att köra via `javascript_tool`: `.click()` på länken
+  "Preview & test", sedan på knappen "Send as test", och sedan på "Send" i
+  dialogen "Send a test" (mottagaren är förifylld med kontots adress). Ett
+  "Sent!" i en `role=status`/alert bekräftar. Testat 2026-10-03.
+- **Utkastet kan hämtas direkt i sidan** i stället för att föra över base64:
+  `fetch('https://fysiklabbet.se/.claude/nyhetsbrev/utkast/<datum>.html')`
+  fungerar (CORS `*`) när utkastet ligger på main. Skala bort den inledande
+  HTML-kommentaren och lägg in preheader-diven som ovan.
 - En aktiv automation (välkomstmejlet) ska INTE röras — den är skrivskyddad
   när den är aktiv, och så ska den förbli.

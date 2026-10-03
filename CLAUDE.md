@@ -1183,7 +1183,7 @@ i `kopplingsschema.js`; läs dem innan du ändrar något.
 - **Menyvalet Resurser** (infört 2026-09-30, hette tidigare Verktyg) ligger
   efter Nationella prov i huvudmenyn. Det är en rullgardin med två grupper,
   byggda som Ämne-menyns grupper (`.lab-nav-dd-grupp`): **Verktyg**
-  (Kopplingsschema) och **Övningsblad** (Fysik, Matematik, som går till
+  (Kopplingsschema, Sannolikhetskalkylator) och **Övningsblad** (Fysik, Matematik, som går till
   `ovningsblad.html#fysik`/`#matematik`). Menyn finns på tolv sidor:
   `avsnitt`, `begrepp`, `index`, `katalog`, `kontakt`, `nyheter`,
   `nyhetsbrev`, `om`, `simuleringar`, `np`, `kopplingsschema` och
@@ -1209,6 +1209,28 @@ i `kopplingsschema.js`; läs dem innan du ändrar något.
   Dubbeltryck eller "Automatiskt format" tar bort `doc.frame`.
 - `utkast/kopplingsschema.html` är en vidarebefordran från den gamla
   adressen (behåller `#s=` så att sparade scheman fortsätter fungera).
+
+### Sannolikhetskalkylatorn (sannolikhetskalkylator.html)
+
+Andra verktyget (officiellt 2026-10-03): `sannolikhetskalkylator.html` +
+`sannolikhetskalkylator.js` i roten, med samma sidhuvud, exportmeny och
+SEO-upplägg som kopplingsschemat. Strukturen beskrivs i filhuvudet.
+
+- **Grundläget är bara normalfördelningen** (det som hör till Ma 2c), och
+  grafen ritas där utan *y*-axel som figurerna i `ma2c-6.5`. Knappen
+  **Avancerad** visar övriga fjorton fördelningar, fliken Test och
+  intervall, kumulativ fördelning, formeln och stickprovssimuleringen.
+- **Frågan ställs i ord** efter tabellen i `ma2c-6.5` (Öppet åt vänster,
+  Intervall, Intervallkomplement, Öppet åt höger) och efter vad som mäts:
+  exemplen har egna ordval (`Q_KVINNOR`, `Q_IQ` …), så längder är kortare
+  och längre, aldrig mindre och större. Beteckningen *P*(*a* ≤ *X* ≤ *b*)
+  följer `ma4-3.6` och står bara som en extra rad, och redovisningen följer
+  "Lämplig redovisning" i `ma2c-6.5` (intervallet 160 ≤ *x* ≤ 170).
+- **Exemplen med riktiga data har källor** under "Källor till exemplen" i
+  sidans text. Lägg aldrig till ett exempel utan en kontrollerad källa.
+- `utkast/sannolikhetskalkylator.html` är en vidarebefordran från
+  förhandsvisningens adress. Öka `?v=` på skriptet när det ändras.
+- Teoriavsnittet `ma2c-6.5` länkar till verktyget.
 
 ## Besöksstatistik
 

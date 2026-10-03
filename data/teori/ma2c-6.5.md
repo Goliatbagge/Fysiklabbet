@@ -26,7 +26,9 @@ där $\mu$ = medelvärde och $\sigma$ = standardavvikelse.
 
 Om man ska bestämma andelar som inte ligger vid jämna
 standardavvikelser får man ta hjälp av digitala verktyg, till exempel
-Geogebra.
+Geogebra eller Fysiklabbets
+[sannolikhetskalkylator](sannolikhetskalkylator.html), där decimaltal
+skrivs med kommatecken och frågan ställs i ord.
 
 För att beräkna procentsatser vid normalfördelningar i Geogebra klickar
 vi på knappen "Växla till sannolikhetskalkylator", fyller i medelvärde

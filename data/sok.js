@@ -78,6 +78,12 @@
            'kretsschema', 'elektrisk krets', 'krets', 'ellära', 'elektricitet', 'resistor', 'lampa',
            'batteri', 'seriekoppling', 'parallellkoppling', 'kretssymboler', 'symboler', 'verktyg',
            'lärare', 'ritverktyg'] },
+    { title: 'Sannolikhetskalkylator', href: 'sannolikhetskalkylator.html',
+      description: 'Räkna ut andelar i normalfördelningen, dra i gränserna och se arean under kurvan.',
+      kw: ['sannolikhetskalkylator', 'sannolikhet', 'normalfördelning', 'normalfordelning',
+           'klockkurva', 'standardavvikelse', 'medelvärde', 'andel', 'procent', 'statistik',
+           'binomialfördelning', 'poissonfördelning', 't-fördelning', 'chitvå', 'hypotesprövning',
+           'konfidensintervall', 'p-värde', 'z-värde', 'verktyg', 'geogebra', 'kalkylator'] },
   ];
   for (const v of VERKTYG) {
     index.push({

@@ -124,14 +124,14 @@ fysiklabbet.se innan du fortsätter.
   fungerar (CORS `*`) när utkastet ligger på main. Skala bort den inledande
   HTML-kommentaren och lägg in preheader-diven som ovan.
 - **Schemaläggning när användaren uttryckligen ber om det** (2026-10-03):
-  tidsfältet är en mask som inte tar emot  eller ett satt värde
+  tidsfältet är en mask som inte tar emot `type` eller ett satt värde
   (det blev 01:06 i stället för 06:00). Klicka i stället i rullgardinens
-  tre kolumner (: timme 1–12, minut 00–59,
+  tre kolumner (`[class*=_dropdown-item_]`: timme 1–12, minut 00–59,
   AM/PM) med hela förloppet pointerdown, mousedown, pointerup, mouseup,
-  click; vanlig  registreras inte. Datumet väljs med
-  . Kontrollera de dolda fälten
-  ,  och
-  tidszonen innan Schedule, och läs bekräftelserutan (”Ready to schedule a
+  click; vanlig `.click()` registreras inte. Datumet väljs med
+  `.vc-day.id-ÅÅÅÅ-MM-DD .vc-day-content`. Kontrollera de dolda fälten
+  `campaign_review_delayedSendAt_date` och `_time`, att `delaySend` är 1
+  och tidszonen innan Schedule, och läs bekräftelserutan (”Ready to schedule a
   send to N subscribers for …”) innan den bekräftas.
 - En aktiv automation (välkomstmejlet) ska INTE röras — den är skrivskyddad
   när den är aktiv, och så ska den förbli.

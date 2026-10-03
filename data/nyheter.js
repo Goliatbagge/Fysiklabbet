@@ -174,7 +174,7 @@ const NYHETER_ALL = [
       },
       {
         "type": "p",
-        "html": "Priset kan delas av högst tre personer. Förra året gick det till John Clarke, Michel Devoret och John Martinis, som visade att en hel elektrisk krets kan bete sig som en enda kvantpartikel. Här är våra tio tips: tio upptäckter, var och en med de forskare vi tror skulle dela priset. Numren är ingen rangordning."
+        "html": "Priset kan delas av högst tre personer. Förra året gick det till John Clarke, Michel Devoret och John Martinis, som visade att en hel elektrisk krets kan bete sig som en enda kvantpartikel. Här är våra tio tips: tio upptäckter, var och en med de forskare vi tror skulle dela priset, utan inbördes ordning."
       },
       {
         "type": "h2",

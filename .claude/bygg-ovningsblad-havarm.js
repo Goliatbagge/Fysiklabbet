@@ -1,4 +1,4 @@
-// Bygger övningsbladet "Rita hävarmen" (Fysik nivå 2, avsnitt fy2-1.1
+// Bygger övningsbladet "Rita hävarmen" (Fysik nivå 1, avsnitt fy1-3.11, delat med fy2-1.1
 // Kraftmoment): ett genomräknat exempel i tre steg och tolv figurer där
 // eleven ritar in hävarmen, facit på baksidan. Fotpunkterna, de räta
 // vinklarna och hävarmarna i facit räknas ut ur figurernas koordinater.
@@ -289,7 +289,7 @@ const html = `<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Övningsblad: Rita hävarmen — Fysiklabbet</title>
-<meta name="description" content="Övningsblad i kraftmoment (Fysik nivå 2): rita in hävarmen som det kortaste avståndet mellan vridningspunkten och kraftens riktningslinje. Genomräknat exempel i tre steg, tolv figurer och facit. Utskriftsklart.">
+<meta name="description" content="Övningsblad i kraftmoment (Fysik nivå 1): rita in hävarmen som det kortaste avståndet mellan vridningspunkten och kraftens riktningslinje. Genomräknat exempel i tre steg, tolv figurer och facit. Utskriftsklart.">
 <link rel="canonical" href="https://fysiklabbet.se/ovningsblad/ovningsblad-havarm.html">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -351,7 +351,7 @@ i { font-style: italic; }
 <body>
 <section class="page">
   <div class="top">
-    <div><div class="kicker">Fysik nivå 2 · Kraftmoment</div><h1>Rita hävarmen</h1></div>
+    <div><div class="kicker">Fysik nivå 1 · Kraftmoment</div><h1>Rita hävarmen</h1></div>
     <div class="namn">Namn:<span></span></div>
   </div>
   <div class="def"><b>Hävarmen <i>l</i></b> är det kortaste avståndet mellan vridningspunkten och kraftens riktningslinje. Det kortaste avståndet möter alltid linjen i <b>rät vinkel</b>. Kraftmomentet är <i>M</i> = <i>F</i> · <i>l</i>.</div>
@@ -367,7 +367,7 @@ i { font-style: italic; }
 </section>
 <section class="page facit">
   <div class="top">
-    <div><div class="kicker">Fysik nivå 2 · Kraftmoment</div><h1>Facit: Rita hävarmen</h1></div>
+    <div><div class="kicker">Fysik nivå 1 · Kraftmoment</div><h1>Facit: Rita hävarmen</h1></div>
   </div>
   <div class="def">Streckad linje: kraftens riktningslinje. Grön sträcka med pilar i båda ändar: hävarmen <i>l</i>. Den lilla vinkelmarkeringen visar att hävarmen möter riktningslinjen i rät vinkel.</div>
   <div class="grid">${tasks.map((t, i) => cell(t, i, 'facit')).join('')}</div>

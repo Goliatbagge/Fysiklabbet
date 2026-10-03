@@ -103,6 +103,74 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-03-vattenvagor-med-femtalig-symmetri",
+    date: "2026-10-03",
+    title: "Fem vågor i en vattenbricka bildar ett mönster som aldrig upprepar sig",
+    deck: "Fem vattenvågor som möts i ett femhörnigt kar bildar ett ordnat mönster som ändå aldrig upprepar sig, samma sorts ordning som i en kvasikristall. Virvlarna i mönstret fångar flytande kulor och får dem att snurra.",
+    category: "Vågfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-03-vattenvagor-med-femtalig-symmetri.jpg",
+    imageAlt: "Datorritad bild av en blå vattenyta full av små vågtoppar som glittrar i ljuset. Tre små kulor, en grön, en röd och en gul, flyter på ytan, och böjda pilar runt dem visar att de snurrar.",
+    imageCredit: "Illustration: J.-L. Duan med flera, Physical Review X 16, 031078 (2026) (CC BY 4.0), utsnitt ur figur 1. En datorritad gestaltning av försöket, inte ett foto.",
+    tags: ["vågfysik", "vattenvågor", "interferens", "kvasikristall", "symmetri", "topologi", "skyrmion", "fasvirvel", "rörelsemängdsmoment"],
+    sources: [
+      { name: "Physics Magazine (APS): Quasicrystalline Water Waves (29 september 2026)", url: "https://physics.aps.org/articles/v19/s119" },
+      { name: "Physical Review X: Quasicrystal Topological Hydrodynamics (studien, öppet tillgänglig)", url: "https://doi.org/10.1103/rfgr-n77g" }
+    ],
+    research: {
+      citation: "J.-L. Duan, C. Hu, J. Ning, X.-J. Chai, L.-W. Wang, Y. Dong, J. Liu, S. Zhu, H. Chen, J.-H. Jiang och J.-H. Chen, ”Quasicrystal Topological Hydrodynamics”, Physical Review X 16, 031078 (2026), publicerad 29 september 2026. Kollegialt granskad, öppet tillgänglig (CC BY 4.0).",
+      url: "https://doi.org/10.1103/rfgr-n77g"
+    },
+    simulering: {
+      href: "fysik2-vagsimulator.html",
+      name: "Vågsimulator",
+      text: "Låt två vågkällor svänga i takt och se hur vågorna förstärker och släcker ut varandra längs nodlinjer. Med två källor blir mönstret ordnat och förutsägbart. I försöket behövdes fem för att ordningen aldrig skulle upprepa sig."
+    },
+    larare: {
+      moment: [
+        { label: "Diffraktion och interferens", href: "katalog.html?id=fy2-2.14" },
+        { label: "Pulser, vågor och utbredningshastighet", href: "katalog.html?id=fy2-2.7" }
+      ],
+      fragor: [
+        "Tre vågor som möts med 120\u00a0graders vinkel mellan riktningarna ger ett mönster som upprepar sig, men fem vågor med 72\u00a0graders vinkel gör det inte. Vad har det med frågan att göra om man kan lägga kakel av en viss form utan glipor?",
+        "En kula som flyter på vattnet börjar snurra fast vattnet i stort sett bara gungar upp och ned och fram och tillbaka. Vad måste vågen föra med sig för att kunna vrida kulan?",
+        "Tre av mönstren ser likadana ut men visar sig ändå vara olika när man beskriver dem med fler dimensioner. Hur kan två saker vara lika i ett avseende och olika i ett annat, och hur avgör man vilket avseende som spelar roll?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Släpp en sten i en damm, så sprider sig ringar. Släpp två, så möts ringarna och bildar ett mönster där vågorna på vissa ställen förstärker varandra och på andra släcker ut varandra. Ett forskarlag vid Xiamens universitet i Kina har tagit idén några steg längre. De har låtit fem vågor mötas i ett femhörnigt kar med vatten och fått ett mönster som är strängt ordnat men ändå aldrig upprepar sig, samma sorts ordning som finns i en kvasikristall. I mönstret sitter dessutom små virvlar som kan fånga flytande kulor och få dem att snurra.' },
+      { type: 'p', html: 'Studien publicerades i <em>Physical Review X</em> den 29&nbsp;september.' },
+
+      { type: 'h2', text: 'Ordning utan upprepning' },
+      { type: 'p', html: 'I en vanlig kristall sitter atomerna i ett mönster som upprepas om och om igen, som kakel på ett golv. Men alla former går inte att lägga så. Trianglar, kvadrater och sexhörningar täcker golvet utan glipor, femhörningar gör det inte. En regelbunden femhörning har hörnvinkeln 108°, och tre sådana runt en punkt ger 324°, fyra ger 432°. Det blir aldrig jämnt 360°. Länge ansågs därför femtalig symmetri omöjlig i fasta ämnen.' },
+      { type: 'p', html: 'Så 1982 såg materialforskaren Dan Shechtman ett mönster med just femtalig symmetri när han sköt elektroner genom en snabbt avkyld legering av aluminium och mangan. Förklaringen var en ny sorts materia, kvasikristallen: atomerna är ordnade, men mönstret upprepar sig aldrig exakt. Upptäckten mötte hårt motstånd i flera år och belönades till slut med Nobelpriset i kemi 2011.' },
+
+      { type: 'h2', text: 'Fem vågor mot mitten' },
+      { type: 'p', html: 'Forskarnas kar är 3D-printat i form av en femhörning med sidan 24&nbsp;centimeter och fyllt med vatten till 1,5&nbsp;centimeters djup. Varje sida är en vågkälla. Den är kopplad med en slang till en högtalare, nuddar vattenytan lätt och skickar in raka vågor mot mitten, 7,2&nbsp;svängningar i sekunden. Alla fem vågorna är lika stora, och deras riktningar skiljer sig åt med 72°.' },
+      { type: 'p', html: 'Där vågtoppar möts blir vågen högre, och där en topp möter en dal tar de ut varandra. Det är interferens, och resultatet beror på hur många vågor som möts och från vilka håll. Två vågor ger ränder. Tre vågor med 120° mellan sig, eller fyra med 90°, ger rutmönster som upprepar sig precis som kakel. Med fem vågor går det inte: mönstret får femtalig symmetri och blir en kvasikristall av vatten.' },
+      { type: 'p', html: 'För att mäta vågorna lade forskarna ett mönster av prickar på karets genomskinliga botten och filmade det ovanifrån. När vattenytan buktar sig förvrängs prickarna, ungefär som kaklet i en pool ser vågigt ut, och ur förvrängningen räknar en dator fram ytans höjd i varje punkt. Liknande mönster har tidigare gjorts med ljus, men vattenvågor är så långsamma att en vanlig kamera hinner följa hur hela mönstret förändras.' },
+
+      { type: 'h2', text: 'Samma utseende, olika inre' },
+      { type: 'p', html: 'Det enda forskarna kan ändra är när varje källa börjar sin svängning, alltså vågornas fas. De förskjöt faserna i steg om femtedels varv och betecknade inställningarna med talet $Q$. Med $Q = 0$, $Q = 1$ och $Q = 2$ fick de tre mönster som ser likadana ut: virvlarna i mönstren är desamma, avstånden lika, och medan vattnet svänger kan mönstren gå över i nästan exakt samma bild.' },
+      { type: 'p', html: 'Ändå är de olika. En kvasikristall kan beskrivas som en sned skuggbild av ett vanligt, upprepande gitter i fler dimensioner än tre, ungefär som skuggan av en kub på en vägg kan bli en sexhörning. Med fem vågor och en fas som inte spelar någon roll finns fyra fria inställningar, och i den fyrdimensionella beskrivningen bär varje mönster en egen topologisk laddning. Laddningarna följer enligt forskarna en lag som liknar bevarandet av rörelsemängdsmoment.' },
+
+      { type: 'h2', text: 'Virvlar som snurrar kulor' },
+      { type: 'p', html: 'I mönstret finns punkter där vattnet står nästan stilla medan vågens fas går runt punkten som visarna på en klocka. Sådana fasvirvlar kan påverka det som flyter på ytan, eftersom vågor bär både rörelsemängd och rörelsemängdsmoment. Forskarna sänkte frekvensen till 6,1&nbsp;svängningar i sekunden och lade ut kulor av skumplast, två centimeter i diameter. En kula drogs snabbt in i en virvel och snurrade sedan moturs med vinkelhastigheten $\\omega \\approx \\dfrac{2\\pi}{3}\\ \\mathrm{rad/s}$, alltså omkring ett varv på tre sekunder.' },
+      { type: 'image', src: 'nyheter/bilder/2026-10-03-vattenvagor-med-femtalig-symmetri-2.jpg', alt: 'Fyra bilder i rad tagna rakt ovanifrån, märkta från 0 till 16 sekunder. På en botten full av små svarta prickar flyter en gul kula med ett svart kryss. Vita pilar runt kulan visar att den snurrar, och krysset har vridit sig från bild till bild.', caption: 'En gul skumplastkula, två centimeter bred, har fångats av en virvel i vågmönstret och snurrar moturs. Prickarna under är mönstret på karets botten som kameran använder för att mäta vågornas höjd.', credit: 'Bild: J.-L. Duan med flera, Physical Review X 16, 031078 (2026) (CC BY 4.0), utsnitt ur figur 4' },
+      { type: 'p', html: 'I ett annat mönster lade sig kulan först mot mitten, men drogs sedan till en grannvirvel och snurrade åt andra hållet. Två kulor på olika platser kunde snurra åt samma håll eller åt var sitt, och som mest snurrade fem kulor samtidigt. Var en kula fastnar och åt vilket håll den snurrar bestäms alltså av vågmönstret, och det går att ställa in med faserna.' },
+      { type: 'p', html: 'Vattenytan rör sig inte bara upp och ned. Varje litet vattenpaket går runt i en liten ellips. Genom att kombinera ytans höjd med dess lutning byggde forskarna ett tredimensionellt pilfält och hittade skyrmioner i det, knutliknande virvlar i pilarnas riktning. I kvasikristallen ändrar de form och vandrar medan mönstret svänger, och de uppstår och försvinner parvis.' },
+
+      { type: 'h2', text: 'Från kar till chip' },
+      { type: 'p', html: 'Forskarna ser framför allt två nyheter i försöket. Det ena är att fenomen som hittills studerats med ljus och kvantsystem går att se direkt med en kamera i en bricka vatten. Det andra är att virvlarna ger krafter som är stora nog att flytta föremål utan att något rör vid dem. Forskarna nämner biomedicin och små laboratorier på chip som tänkbara tillämpningar, där partiklar eller celler skulle kunna styras med vågor. Hittills handlar det dock om kulor stora som en fingertopp i ett kar några decimeter brett, och att krympa tekniken är ett senare steg.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Matematikern Roger Penrose visade redan på 1970-talet att man kan täcka ett plan med två sorters romber så att mönstret får femtalig symmetri men aldrig upprepar sig. Sådana penrosemönster liknar kvasikristallernas atomordning.',
+        'Den första kvasikristallen i naturen hittades 2009 i ett stenprov från Korjakbergen i östra Ryssland. Den visade sig komma från en meteorit.',
+        'Femtalig symmetri är vanlig i levande ting, som sjöstjärnor och många blommor. Det är bara i en upprepande kristall som den är omöjlig.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-02-myoner-ur-en-laser",
     date: "2026-10-02",
     title: "Lasern som tillverkar myoner har tagit sin första bild genom bly",

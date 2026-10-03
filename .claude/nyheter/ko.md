@@ -20,6 +20,12 @@ Format per post:
   Källa (Phys.org 2026-09-25): https://phys.org/news/2026-09-rare-quantum-state-reveals-particles.html
   (tillagd 2026-09-27)
 
+- **Ljus som stelnar en vätskestråle till fiber** — en ring av UV-lysdioder 5 mm under ett munstycke får en fritt fallande stråle av ljushärdande vätska att stelna till fiber, och forskarna har en parameterfri formel för fiberns radie. Ingång: varför en vätskestråle bryts upp i droppar (Plateau–Rayleigh) och hur man hinner före. OBS: PRL är inte öppen, kontrollera arXiv-förtryck innan publicering. Physical Review Letters 137, 144004 (2026), DOI 10.1103/yh2j-b3wq (J. S. Smink, C. W. Visser, H. Lhuissier). Källa (Physics, APS, 2026-10-02): https://physics.aps.org/articles/v19/137
+  (tillagd 2026-10-03)
+
+- **Första typ I-supraledaren som bryter tidsomvändningssymmetrin** — ett kännetecken för okonventionell supraledning hittat i ett material av den enkla typ I-sorten. Ingång: supraledning, meissnereffekten och skillnaden mellan typ I och typ II. OBS: supraledning kördes 2026-09-30 — låt det gå minst en vecka. Källor: Phys.org 2026-10-03 https://phys.org/news/2026-10-scientists-superconductor-reversal-symmetry.html och Physics (APS) https://physics.aps.org/articles/v19/s115
+  (tillagd 2026-10-03)
+
 - **Därför glöder saltgurkan** — Josh Méndez vid Portland State University har testat över hundra saltgurkor i eluttaget: elektrolys ger vätgas vid minuspolen, en ljusbåge tänder gasen och natrium ger det orangea skenet. Lätt att visa (på film!) och vardagsnära. OBS: hittade ingen publicerad studie 2026-10-02, bara pressmeddelandet — publiceras inte förrän en originalkälla finns.
   Källa (Phys.org 2026-10-01): https://phys.org/news/2026-10-pickles-explosive.html
   (tillagd 2026-10-02)
@@ -31,7 +37,7 @@ Format per post:
 - **Vågorna som hittar ordning i en skev hålighet** — i ett mekaniskt metamaterial med hyperboliska egenskaper
   samlar sig vågorna i en oregelbundet formad hålighet på bestämda, upprepade banor i stället för att spridas
   kaotiskt. Samma sak är känt för inre vågor i havet. Ingång: reflexion, stående vågor och vad det betyder att ett
-  system är kaotiskt. OBS: vågfysik kördes 2026-09-26 (virvelns vågor) — låt det gå tid. Nature Physics,
+  system är kaotiskt. OBS: vågfysik kördes 2026-09-26 (virvelns vågor) och 2026-10-03 (kvasikristallvågorna) — låt det gå tid. Nature Physics,
   DOI 10.1038/s41567-026-03453-7, kollegialt granskad. Källa (Phys.org 2026-09-24):
   https://phys.org/news/2026-09-chaos-oddly-cavity.html
   (tillagd 2026-09-29)
@@ -51,13 +57,6 @@ Format per post:
   https://phys.org/news/2026-09-glass-transparent-terahertz.html
   (tillagd 2026-09-29)
 
-- **Vattenvågor som bildar ett kvasikristallmönster** — ytvågor på vatten fås att lägga sig i ett mönster med
-  femtalig symmetri, alltså samma slags ordning som i en kvasikristall, och i mönstret uppstår topologiska
-  strukturer. Ingång: interferens mellan vågor, symmetri och varför femtalig symmetri är omöjlig i ett vanligt
-  kristallgitter men möjlig i en kvasikristall. Snyggt att filma och lätt att visa. OBS: vågfysik kördes
-  2026-09-26 (virvelns vågor). Källa (Physics, APS, 2026-09-29):
-  https://link.aps.org/doi/10.1103/Physics.19.s119
-  (tillagd 2026-09-30)
 
 - **Laserns frekvens avläst ur en enda bild** — ett roterande ljusmönster gör att våglängden går att läsa av i
   en ögonblicksbild i stället för med ett spektrometersvep. Ingång: interferens, våglängd och frekvens, och

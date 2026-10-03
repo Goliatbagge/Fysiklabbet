@@ -1112,7 +1112,31 @@ window.BEGREPP = [
     body: [
       { type: 'p', html: 'I vissa magnetiska material kan elektronernas spinn ordna sig i ett litet virvelmönster: i mitten pekar spinnen åt ett håll, längst ut åt motsatt håll, och däremellan vrider de sig mjukt runt. Ett sådant mönster kallas skyrmion, efter den brittiske fysikern Tony Skyrme som beskrev matematiken bakom redan på 1960-talet — då som en modell för atomkärnornas partiklar.' },
       { type: 'p', html: 'Skyrmionens finess är att den är <em>topologiskt skyddad</em>: virveln kan inte slätas ut steg för steg, av samma skäl som en knut på ett rep inte försvinner hur man än drar i ändarna — den måste ”klippas upp”. Det gör skyrmioner ovanligt tåliga mot störningar, samtidigt som de kan vara bara några nanometer små och knuffas runt med svaga elektriska strömmar. Därför utforskas de som databärare i framtida minnen, där ettor och nollor skulle kunna lagras som närvaro eller frånvaro av enskilda skyrmioner.' },
-      { type: 'p', html: 'Idén är inte begränsad till magneter: forskare har på senare år skapat optiska skyrmioner — samma slags knutmönster fast i ljusets fält — som kan behålla sin form över anmärkningsvärda avstånd.' }
+      { type: 'p', html: 'Idén är inte begränsad till magneter: forskare har på senare år skapat optiska skyrmioner — samma slags knutmönster fast i ljusets fält — som kan behålla sin form över anmärkningsvärda avstånd. Liknande mönster har också hittats i vågor på en vattenyta, där pilarna beskriver hur vattnet rör sig upp, ned och åt sidan.' }
+    ]
+  },
+  {
+    id: 'kvasikristall',
+    term: 'Kvasikristall',
+    former: ['kvasikristall', 'kvasikristallen', 'kvasikristaller', 'kvasikristallerna'],
+    kort: 'Ett ämne vars atomer sitter strängt ordnade men i ett mönster som aldrig upprepar sig exakt. Kvasikristaller kan ha symmetrier, som den femtaliga, som en vanlig kristall aldrig kan ha.',
+    relaterade: ['interferens', 'topologiskt-skydd'],
+    body: [
+      { type: 'p', html: 'I en vanlig kristall, som salt eller is, sitter atomerna i ett mönster som upprepas om och om igen, ungefär som kakel på ett badrumsgolv. Den som vet hur en liten bit ser ut vet hur hela kristallen ser ut. Men alla former går inte att lägga som kakel. Trianglar, kvadrater och sexhörningar täcker golvet utan glipor, medan femhörningar alltid lämnar luckor. Därför trodde man länge att ett fast ämne aldrig kunde ha femtalig symmetri.' },
+      { type: 'p', html: 'År 1982 såg materialforskaren Dan Shechtman ändå ett sådant mönster i en snabbt avkyld legering av aluminium och mangan. Förklaringen var att atomerna kan vara ordnade utan att mönstret upprepar sig. Tänk på decimalerna i ett tal som följer en bestämd regel men aldrig börjar om från början, eller på ett golv lagt med två sorters romber som aldrig bildar samma mönster två gånger. Shechtman möttes av hård skepsis i flera år men fick Nobelpriset i kemi 2011.' },
+      { type: 'p', html: 'Ett användbart sätt att förstå kvasikristaller är att se dem som en sned skuggbild av ett vanligt, upprepande gitter i fler dimensioner än tre. Skuggan är ordnad, men eftersom vinkeln är sned upprepar den sig aldrig. Samma sorts ordning kan också skapas med vågor: låter man fem vågor mötas från fem riktningar blir interferensmönstret en kvasikristall. Kvasikristaller används i dag bland annat i slitstarka ytbeläggningar, och den första naturliga kvasikristallen hittades 2009 i en meteorit.' }
+    ]
+  },
+  {
+    id: 'fasvirvel',
+    term: 'Fasvirvel',
+    former: ['fasvirvel', 'fasvirveln', 'fasvirvlar', 'fasvirvlarna', 'fassingularitet', 'fassingulariteten', 'fassingulariteter'],
+    kort: 'En punkt i ett vågmönster där vågen står stilla medan vågens fas går runt punkten, som visarna på en klocka. Sådana punkter kan bära rörelsemängdsmoment.',
+    relaterade: ['interferens', 'skyrmion'],
+    body: [
+      { type: 'p', html: 'En våg har i varje punkt en fas, som säger var i sin svängning den är: på väg upp, i toppen, på väg ned eller i botten. När flera vågor möts kan det uppstå punkter där de tar ut varandra helt, så att det inte finns någon våg alls just där. Runt en sådan punkt gör fasen något märkligt. Går man ett varv runt punkten ändras fasen jämnt och kommer tillbaka till samma värde först efter ett helt varv, ungefär som när man går runt en klocka och ser timmarna passera.' },
+      { type: 'p', html: 'Mönstret ser ut som en virvel, och därför kallas punkten fasvirvel eller fassingularitet. Vågens toppar vandrar runt mittpunkten i stället för att gå rakt fram. Det betyder att vågen runt punkten bär ett rörelsemängdsmoment, och det kan överföras till föremål. Små kulor som flyter på en vattenyta med fasvirvlar kan fångas i virvlarna och börja snurra, och med ljus på samma sätt kan små partiklar vridas i ett mikroskop.' },
+      { type: 'p', html: 'Fasvirvlar finns i alla sorters vågor: i laserljus, i ljud, i vattenvågor och i havets tidvatten, där det finns punkter som kallas amfidromiska punkter. Där är tidvattnet nära noll, och högvattnet vandrar runt punkten en gång per tidvattenperiod.' }
     ]
   },
   {

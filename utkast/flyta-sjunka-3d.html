@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Flyta eller sjunka i 3D — Fysiklabbet</title>
+<meta name="description" content="Utkast: klossar av olika material släpps ned i ett akvarium där vattnet räknas fram partikel för partikel på grafikkortet. Flyter de, svävar de eller sjunker de?">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!--
+  Flyta eller sjunka i 3D (utkast, 2026-10-03)
+
+  Försök med biblioteket threejs-particle-fluids (MIT, github.com/dgreenheck/
+  threejs-particle-fluids): vattnet och klossarna är partiklar som löses med
+  Position Based Fluids/XPBD i compute-shaders på grafikkortet. Biblioteket
+  kräver WebGPU och three.js r184, och sidan måste serveras från localhost
+  eller https (WebGPU finns bara i en säker kontext, alltså INTE via
+  http://bosgame:8000 från en annan dator).
+
+  Fysiken i biblioteket är byggd för realtidsgrafik, inte för mätning. Därför
+  räknas avläsningarna (densitet, flyter/sjunker, andel under ytan) med
+  Arkimedes princip i den här filen, och vätskans densitet läggs in genom att
+  klossarnas densitet skalas: solvern har alltid vilodensiteten 1 000 kg/m³,
+  så en kloss med densiteten rho i en vätska med densiteten rhoF får
+  rho · 1000 / rhoF. Det ger samma kvot rho/rhoF, och det är den som avgör.
+
+  Inget kan läggas till eller tas bort när en Simulation väl startat, så varje
+  ändring av vätska, material eller detaljnivå bygger en ny simulering.
+-->
+<style>
+:root {
+    --bg: #ece3d2;
+    --ink: #1b2430;
+    --ink-2: #4a5462;
+    --ink-3: #828b97;
+    --line: rgba(27, 36, 48, 0.13);
+    --card: rgba(250, 247, 240, 0.86);
+    --blue: #2f6f9f;
+    --accent: #b4543a;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --sans: 'Poppins', system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); overflow: hidden; }
+body { font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+#scen { position: fixed; inset: 0; }
+#scen canvas { display: block; width: 100%; height: 100%; touch-action: none; outline: none; }
+
+.ui { position: fixed; pointer-events: none; }
+.ui > * { pointer-events: auto; }
+.kicker { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); }
+
+.rubrik { top: 24px; left: 28px; max-width: 380px; }
+.rubrik a.hem { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); text-decoration: none; }
+.rubrik a.hem:hover { color: var(--ink); }
+.rubrik h1 { font-weight: 600; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.05; letter-spacing: -0.01em; margin: 10px 0 8px; }
+.rubrik p { margin: 0; font-size: 14.5px; line-height: 1.45; color: var(--ink-2); }
+
+.panel { top: 18px; right: 18px; bottom: 18px; width: 318px; background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 16px 18px; overflow-y: auto; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset, 0 14px 40px -20px rgba(40,30,20,0.35); }
+.panel::-webkit-scrollbar { width: 8px; }
+.panel::-webkit-scrollbar-thumb { background: rgba(27,36,48,0.15); border-radius: 8px; }
+.grupp { padding: 12px 0; border-top: 1px solid var(--line); }
+.grupp:first-child { border-top: 0; padding-top: 0; }
+.grupp > .kicker { display: block; margin-bottom: 9px; }
+
+button, select { font: inherit; color: inherit; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.knapp { font-size: 13px; border: 1px solid var(--line); background: rgba(255,255,255,0.6); border-radius: 9px; padding: 7px 10px;
+    cursor: pointer; text-align: left; line-height: 1.25; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+.knapp:hover { background: #fff; }
+.knapp small { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); }
+.knapp[aria-pressed="true"] { background: var(--ink); color: #f6f1e7; border-color: var(--ink); }
+.knapp[aria-pressed="true"] small { color: #c5ccd6; }
+.knapp:disabled { opacity: 0.5; cursor: default; }
+
+.kloss { display: grid; grid-template-columns: 30px 1fr; gap: 4px 10px; align-items: center; margin-bottom: 11px; }
+.kloss:last-child { margin-bottom: 0; }
+.prov { width: 30px; height: 30px; border-radius: 6px; background-size: cover; box-shadow: 0 0 0 1px rgba(0,0,0,0.12) inset, 0 1px 2px rgba(0,0,0,0.15); grid-row: span 2; }
+.kloss select { width: 100%; font-size: 13.5px; padding: 5px 8px; border-radius: 8px; border: 1px solid var(--line); background: rgba(255,255,255,0.75); cursor: pointer; }
+.kloss .las { font-size: 12.5px; color: var(--ink-2); line-height: 1.35; }
+.kloss .las b { font-weight: 600; }
+.flyter { color: #2b6a3f; }
+.sjunker { color: #9b3b26; }
+.svavar { color: #7a5a12; }
+
+/* Densitetstrappan: tätare nedåt, vätskans linje skiljer flytande från sjunkande */
+.trappa { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+.trappa li { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+.trappa li .punkt { width: 12px; height: 12px; border-radius: 3px; flex: none; background-size: cover; box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset; }
+.trappa li .rho { margin-left: auto; font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); white-space: nowrap; }
+.trappa li.vatska { border-top: 2px solid var(--blue); border-bottom: 2px solid var(--blue); background: rgba(47,111,159,0.08); color: var(--blue); font-weight: 500; padding: 5px 6px; margin: 4px -6px; border-radius: 4px; }
+.trappa li.vatska .rho { color: var(--blue); }
+.trappa-not { font-size: 11.5px; color: var(--ink-3); margin: 8px 0 0; line-height: 1.4; }
+
+.forsok { display: grid; gap: 6px; }
+.atgarder { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.atgarder .knapp { text-align: center; }
+.atgarder .huvud { background: var(--ink); color: #f6f1e7; border-color: var(--ink); font-weight: 500; }
+.atgarder .huvud:hover { background: #2c3949; }
+label.kryss { display: flex; align-items: center; gap: 7px; font-size: 13px; cursor: pointer; margin-top: 10px; }
+.detalj { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-top: 10px; }
+.detalj select { font-size: 13px; padding: 4px 6px; border-radius: 7px; border: 1px solid var(--line); background: rgba(255,255,255,0.75); }
+.status { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); margin-top: 10px; line-height: 1.5; }
+.kalla { font-size: 11.5px; color: var(--ink-3); line-height: 1.45; margin: 0; }
+.kalla a { color: var(--ink-2); }
+
+.ladda { inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(236,227,210,0.55);
+    transition: opacity 0.35s; }
+.ladda[hidden] { display: flex !important; opacity: 0; pointer-events: none; }
+.ladda > div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 22px; font-size: 14px;
+    display: flex; align-items: center; gap: 12px; box-shadow: 0 14px 40px -20px rgba(40,30,20,0.35); }
+.snurr { width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(27,36,48,0.18); border-top-color: var(--blue); animation: snurr 0.8s linear infinite; }
+@keyframes snurr { to { transform: rotate(360deg); } }
+
+.fel { inset: 0; display: none; align-items: center; justify-content: center; padding: 24px; }
+.fel.syns { display: flex; }
+.fel > div { max-width: 520px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px 26px; font-size: 15px; line-height: 1.5; }
+.fel h2 { margin: 0 0 8px; font-size: 20px; font-weight: 600; }
+.fel code { font-family: var(--mono); font-size: 13px; background: rgba(27,36,48,0.07); padding: 1px 5px; border-radius: 4px; }
+
+.tips { left: 28px; bottom: 22px; font-size: 12.5px; color: var(--ink-2); }
+
+@media (max-width: 760px) {
+    .rubrik { top: 12px; left: 16px; right: 16px; max-width: none; }
+    .rubrik h1 { font-size: 24px; margin: 4px 0 2px; }
+    .rubrik p { display: none; }
+    .panel { top: auto; left: 0; right: 0; bottom: 0; width: auto; max-height: 46vh; border-radius: 14px 14px 0 0; padding: 12px 16px; }
+    .tips { display: none; }
+}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.webgpu.js",
+    "three/webgpu": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.webgpu.js",
+    "three/tsl": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.tsl.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/",
+    "threejs-particle-fluids": "https://cdn.jsdelivr.net/npm/threejs-particle-fluids@0.2.0/dist/index.js"
+  }
+}
+</script>
+</head>
+<body>
+<div id="scen"></div>
+
+<div class="ui rubrik">
+    <a class="hem" href="../katalog.html?id=fy1">Fysiklabbet · Fysik nivå 1 · utkast</a>
+    <h1>Flyta eller sjunka i 3D</h1>
+    <p>Vattnet i akvariet består av tusentals partiklar som räknas fram på grafikkortet. Välj material, släpp klossarna och se vilka som flyter.</p>
+</div>
+
+<aside class="ui panel" id="panel">
+    <div class="grupp">
+        <span class="kicker">Vätska</span>
+        <div class="seg" id="vatskor"></div>
+    </div>
+    <div class="grupp">
+        <span class="kicker">Klossar, 13 cm i kanten</span>
+        <div id="klossar"></div>
+    </div>
+    <div class="grupp">
+        <span class="kicker">Flytkarta, tätare nedåt</span>
+        <ul class="trappa" id="trappa"></ul>
+        <p class="trappa-not">Det som ligger ovanför vätskans rad flyter, det som ligger under sjunker.</p>
+    </div>
+    <div class="grupp">
+        <span class="kicker">Färdiga försök</span>
+        <div class="forsok" id="forsok"></div>
+    </div>
+    <div class="grupp">
+        <div class="atgarder">
+            <button class="knapp huvud" id="slapp">Släpp klossarna igen</button>
+            <button class="knapp" id="paus" aria-pressed="false">Paus</button>
+        </div>
+        <label class="kryss"><input type="checkbox" id="partiklar"> Visa partiklarna i stället för ytan</label>
+        <div class="detalj">Detaljnivå
+            <select id="niva">
+                <option value="4000">Låg, cirka 4 000 partiklar</option>
+                <option value="8000">Mellan, cirka 8 000 partiklar</option>
+                <option value="16000">Hög, cirka 16 000 partiklar</option>
+            </select>
+        </div>
+        <div class="status" id="status">Startar …</div>
+    </div>
+    <div class="grupp">
+        <p class="kalla">Vätskefysiken kommer från biblioteket <a href="https://github.com/dgreenheck/threejs-particle-fluids" target="_blank" rel="noopener">threejs-particle-fluids</a> av Dan Greenheck (MIT-licens). Det kräver WebGPU. Avläsningarna ovan räknas med Arkimedes princip.</p>
+    </div>
+</aside>
+
+<div class="ui tips">Dra för att vrida på kameran, skrolla för att zooma. Mellanslag pausar.</div>
+
+<div class="ui ladda" id="ladda"><div><span class="snurr"></span><span id="ladda-text">Fyller akvariet …</span></div></div>
+
+<div class="ui fel" id="fel"><div>
+    <h2>Simuleringen kunde inte starta</h2>
+    <div id="fel-text"></div>
+</div></div>
+
+<script type="module">
+import {
+    ACESFilmicToneMapping, BoxGeometry, CanvasTexture, Color, DirectionalLight, DoubleSide, Group,
+    HemisphereLight, Mesh, MeshStandardMaterial, PCFSoftShadowMap, PerspectiveCamera, PlaneGeometry,
+    RepeatWrapping, SRGBColorSpace, Scene, Vector3, Box3,
+} from 'three';
+import { PMREMGenerator } from 'three/webgpu';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+// ─── Data ──────────────────────────────────────────────────────────────────
+// Samma vätskor och material som i fysik1-flytkraft-app.html.
+const VATSKOR = [
+    { id: 'vatten', namn: 'Vatten', rho: 998, sim: { viscosity: 0.01, surfaceTension: 0.1 },
+      utseende: { color: 0x3f9dc6, attenuationDistance: 0.42, scattering: 0.07, roughness: 0.05, ior: 1.333 } },
+    { id: 'saltvatten', namn: 'Saltvatten', rho: 1025, sim: { viscosity: 0.012, surfaceTension: 0.1 },
+      utseende: { color: 0x3c9db0, attenuationDistance: 0.36, scattering: 0.12, roughness: 0.05, ior: 1.34 } },
+    { id: 'olja', namn: 'Matolja', rho: 920, sim: { viscosity: 0.09, surfaceTension: 0.06 },
+      utseende: { color: 0xd9a92a, attenuationDistance: 0.32, scattering: 0.03, roughness: 0.04, ior: 1.47 } },
+    { id: 'honung', namn: 'Honung', rho: 1420, sim: { viscosity: 0.05, surfaceTension: 0.08, thickness: 8 },
+      utseende: { color: 0xc4801a, attenuationDistance: 0.16, scattering: 0.05, roughness: 0.06, ior: 1.5 } },
+];
+
+const MATERIAL = [
+    { id: 'frigolit', namn: 'Frigolit', rho: 50 },
+    { id: 'kork', namn: 'Kork', rho: 240 },
+    { id: 'tra', namn: 'Trä (furu)', rho: 500 },
+    { id: 'is', namn: 'Is', rho: 917 },
+    { id: 'pvc', namn: 'PVC', rho: 1400 },
+    { id: 'tegel', namn: 'Tegel', rho: 1900 },
+    { id: 'aluminium', namn: 'Aluminium', rho: 2700 },
+    { id: 'jarn', namn: 'Järn', rho: 7870 },
+];
+
+const FORSOK = [
+    { namn: 'Från lätt till tung', desc: 'kork, is och tegel i vatten', vatska: 'vatten', klossar: ['kork', 'is', 'tegel'] },
+    { namn: 'Matolja', desc: 'kork och trä flyter, PVC sjunker', vatska: 'olja', klossar: ['kork', 'tra', 'pvc'] },
+    { namn: 'Honung', desc: 'trä och PVC flyter, tegel sjunker långsamt', vatska: 'honung', klossar: ['tra', 'pvc', 'tegel'] },
+    { namn: 'Samma storlek, olika massa', desc: 'frigolit, trä och järn i vatten', vatska: 'vatten', klossar: ['frigolit', 'tra', 'jarn'] },
+];
+
+const tillstand = {
+    vatska: 'vatten',
+    klossar: ['tra', 'is', 'tegel'],
+    partiklar: innerWidth < 760 ? 4000 : 8000,
+};
+
+// ─── Hjälpare ──────────────────────────────────────────────────────────────
+const fmt = (n, d = 0) => {
+    const s = n.toFixed(d);
+    if (parseFloat(s) === 0) return '0';
+    const [heltal, dec] = s.split('.');
+    const grupp = heltal.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return dec !== undefined ? grupp + ',' + dec : grupp;
+};
+const vatskaAv = (id) => VATSKOR.find((v) => v.id === id);
+const materialAv = (id) => MATERIAL.find((m) => m.id === id);
+const statusAv = (rho, rhoF) => {
+    const tol = Math.max(2, rhoF * 0.005);
+    if (Math.abs(rho - rhoF) < tol) return 'svavar';
+    return rho < rhoF ? 'flyter' : 'sjunker';
+};
+
+// ─── Texturer (ritade på canvas, inga bildfiler) ───────────────────────────
+let fro = 7;
+const slump = () => { fro = (fro * 16807) % 2147483647; return (fro - 1) / 2147483646; };
+
+function canvasTextur(storlek, rita, upprepa = 1) {
+    const c = document.createElement('canvas');
+    c.width = c.height = storlek;
+    rita(c.getContext('2d'), storlek);
+    const t = new CanvasTexture(c);
+    t.colorSpace = SRGBColorSpace;
+    t.wrapS = t.wrapT = RepeatWrapping;
+    t.repeat.set(upprepa, upprepa);
+    t.anisotropy = 8;
+    t.userData.url = c.toDataURL();
+    return t;
+}
+
+function brus(g, s, antal, farger, rMin, rMax) {
+    for (let i = 0; i < antal; i++) {
+        g.fillStyle = farger[Math.floor(slump() * farger.length)];
+        g.beginPath();
+        g.arc(slump() * s, slump() * s, rMin + slump() * (rMax - rMin), 0, Math.PI * 2);
+        g.fill();
+    }
+}
+
+function traadring(g, s, bas, morkt, ljust, tathet = 1) {
+    g.fillStyle = bas;
+    g.fillRect(0, 0, s, s);
+    for (let y = 0; y < s; y++) {
+        const v = Math.sin(y * 0.11 * tathet + Math.sin(y * 0.031) * 3) * 0.5 + 0.5;
+        g.fillStyle = v > 0.82 ? morkt : v < 0.12 ? ljust : 'rgba(0,0,0,0)';
+        g.globalAlpha = 0.35 + slump() * 0.25;
+        g.fillRect(0, y, s, 1);
+    }
+    g.globalAlpha = 1;
+    for (let i = 0; i < 40; i++) {
+        g.strokeStyle = 'rgba(90,55,20,0.12)';
+        g.beginPath();
+        const y = slump() * s;
+        g.moveTo(0, y);
+        g.bezierCurveTo(s * 0.3, y + 6 * (slump() - 0.5), s * 0.7, y + 6 * (slump() - 0.5), s, y);
+        g.stroke();
+    }
+}
+
+const TEXTURER = {
+    frigolit: () => canvasTextur(256, (g, s) => {
+        g.fillStyle = '#eef0f1'; g.fillRect(0, 0, s, s);
+        for (let i = 0; i < 520; i++) {
+            const x = slump() * s, y = slump() * s, r = 5 + slump() * 6;
+            g.strokeStyle = 'rgba(150,160,170,0.35)'; g.lineWidth = 1;
+            g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.stroke();
+        }
+    }),
+    kork: () => canvasTextur(256, (g, s) => {
+        g.fillStyle = '#c99e68'; g.fillRect(0, 0, s, s);
+        brus(g, s, 2600, ['#a77a45', '#8a5f31', '#ddb986', '#b88b55', '#6f4a24'], 0.6, 2.4);
+    }),
+    tra: () => canvasTextur(256, (g, s) => traadring(g, s, '#d9a55f', '#a46f33', '#ecc489')),
+    is: () => canvasTextur(256, (g, s) => {
+        const gr = g.createLinearGradient(0, 0, s, s);
+        gr.addColorStop(0, '#e6f5fa'); gr.addColorStop(1, '#bfe3ef');
+        g.fillStyle = gr; g.fillRect(0, 0, s, s);
+        brus(g, s, 260, ['rgba(255,255,255,0.55)', 'rgba(255,255,255,0.3)'], 1, 6);
+        g.strokeStyle = 'rgba(255,255,255,0.6)'; g.lineWidth = 1.2;
+        for (let i = 0; i < 9; i++) {
+            g.beginPath(); let x = slump() * s, y = slump() * s; g.moveTo(x, y);
+            for (let k = 0; k < 4; k++) { x += (slump() - 0.5) * 70; y += (slump() - 0.5) * 70; g.lineTo(x, y); }
+            g.stroke();
+        }
+    }),
+    pvc: () => canvasTextur(128, (g, s) => {
+        g.fillStyle = '#8b96a8'; g.fillRect(0, 0, s, s);
+        brus(g, s, 300, ['rgba(255,255,255,0.05)', 'rgba(0,0,0,0.05)'], 1, 3);
+    }),
+    tegel: () => canvasTextur(256, (g, s) => {
+        g.fillStyle = '#d8cfc2'; g.fillRect(0, 0, s, s);
+        const h = s / 4, w = s / 2;
+        for (let r = 0; r < 4; r++) {
+            for (let k = -1; k < 3; k++) {
+                const x = k * w + (r % 2 ? w / 2 : 0);
+                const ton = 150 + Math.floor(slump() * 40);
+                g.fillStyle = `rgb(${ton + 30},${Math.floor(ton * 0.42)},${Math.floor(ton * 0.3)})`;
+                g.fillRect(x + 3, r * h + 3, w - 6, h - 6);
+            }
+        }
+        brus(g, s, 900, ['rgba(60,20,10,0.18)', 'rgba(255,220,200,0.12)'], 0.5, 1.8);
+    }),
+    aluminium: () => canvasTextur(256, (g, s) => {
+        g.fillStyle = '#c3cad3'; g.fillRect(0, 0, s, s);
+        for (let y = 0; y < s; y++) {
+            g.fillStyle = slump() < 0.5 ? 'rgba(255,255,255,0.10)' : 'rgba(60,70,80,0.08)';
+            g.fillRect(0, y, s, 1);
+        }
+    }),
+    jarn: () => canvasTextur(256, (g, s) => {
+        g.fillStyle = '#5b6168'; g.fillRect(0, 0, s, s);
+        brus(g, s, 1800, ['rgba(30,32,36,0.25)', 'rgba(140,146,152,0.18)', 'rgba(120,80,50,0.10)'], 0.5, 2.5);
+    }),
+};
+const YTA = {
+    frigolit: { roughness: 0.9, metalness: 0 },
+    kork: { roughness: 0.95, metalness: 0 },
+    tra: { roughness: 0.7, metalness: 0 },
+    is: { roughness: 0.12, metalness: 0 },
+    pvc: { roughness: 0.42, metalness: 0 },
+    tegel: { roughness: 0.92, metalness: 0 },
+    aluminium: { roughness: 0.32, metalness: 0.9 },
+    jarn: { roughness: 0.5, metalness: 0.8 },
+};
+const texturCache = {};
+const textur = (id) => (texturCache[id] ??= TEXTURER[id]());
+
+// ─── Scen ──────────────────────────────────────────────────────────────────
+// Akvariets inre mått (m). Golvet ligger i y = 0.
+const AQ = { b: 0.62, d: 0.38, h: 0.42, vatten: 0.22 };
+const KLOSS = 0.13;
+
+const felRuta = (html) => {
+    document.getElementById('fel-text').innerHTML = html;
+    document.getElementById('fel').classList.add('syns');
+    document.getElementById('ladda').hidden = true;
+};
+
+if (!window.isSecureContext) {
+    felRuta(`<p>WebGPU fungerar bara när sidan öppnas säkert, via <code>https://</code> eller från <code>localhost</code>. Den här adressen (<code>${location.host}</code>) är en vanlig <code>http</code>-adress från en annan dator, och då stänger webbläsaren av grafikkortsberäkningarna.</p><p>Öppna sidan på datorn som kör servern (<code>http://localhost:8000/utkast/flyta-sjunka-3d.html</code>) eller på den publicerade sajten.</p>`);
+    throw new Error('Ingen säker kontext');
+}
+if (!navigator.gpu) {
+    felRuta(`<p>Webbläsaren saknar WebGPU, som den här simuleringen kräver. Det finns i Chrome och Edge på datorn, i Chrome på Android och i Safari från iOS 26 och macOS 26. Firefox har det än så länge bara på vissa system.</p>`);
+    throw new Error('Inget WebGPU');
+}
+
+let Simulation, createParticleRenderer, SoftbodySystem;
+try {
+    ({ Simulation, createParticleRenderer, SoftbodySystem } = await import('threejs-particle-fluids'));
+} catch (e) {
+    felRuta(`<p>Biblioteket kunde inte laddas från CDN:en. Kontrollera nätverket och ladda om sidan.</p><p><code>${e.message}</code></p>`);
+    throw e;
+}
+
+// Stela klossar. Simulation.addSoftbody bygger alltid mjuka kroppar
+// ('local' formmatchning, som kan böjas). Trä, tegel och järn ska inte böja
+// sig, så vi byter till bibliotekets stela läge ('global' formmatchning:
+// en enda rotation och ett tyngdpunktsläge per kropp) precis innan
+// beräkningskärnorna byggs. Simulation ger ändå varje kropp kanter, så
+// mjukkroppsmeshen binds som vanligt.
+const byggOrig = SoftbodySystem.prototype.build;
+SoftbodySystem.prototype.build = function (ctx) {
+    this.shapeMatching = 'global';
+    return byggOrig.call(this, ctx);
+};
+
+let renderer;
+try {
+    renderer = await createParticleRenderer({ antialias: true });
+} catch (e) {
+    felRuta(`<p>Grafikkortet gav inte simuleringen de resurser den behöver.</p><p><code>${e.message}</code></p>`);
+    throw e;
+}
+const scenEl = document.getElementById('scen');
+// Dynamisk upplösning: vätskeytan ritas per pixel och är det tyngsta i
+// varje bild. ruta() sänker upplösningen när bildfrekvensen faller.
+const PR_MAX = Math.min(devicePixelRatio, 1.25), PR_MIN = 0.55;
+let pr = PR_MAX;
+renderer.setPixelRatio(pr);
+renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = PCFSoftShadowMap;
+scenEl.append(renderer.domElement);
+window.__renderer = renderer;
+
+const scene = new Scene();
+scene.background = new Color(0xe9dfcc);
+scene.environment = new PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.75;
+
+const sol = new DirectionalLight(0xfff4e6, 2.4);
+sol.position.set(1.2, 2.6, 1.6);
+sol.castShadow = true;
+sol.shadow.mapSize.set(2048, 2048);
+Object.assign(sol.shadow.camera, { left: -1.2, right: 1.2, top: 1.2, bottom: -1.2, near: 0.5, far: 6 });
+sol.shadow.bias = -0.0004;
+scene.add(sol, new HemisphereLight(0xfaf3e6, 0x8a6a48, 0.55));
+
+// Kameran ramar in akvariet; på smal skärm backar den så att hela tanken ryms.
+const camera = new PerspectiveCamera(36, innerWidth / innerHeight, 0.02, 30);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.minDistance = 0.6;
+controls.maxDistance = 4.5;
+controls.maxPolarAngle = Math.PI * 0.49;
+function placeraKamera() {
+    const W = innerWidth, H = innerHeight, smal = W < 760;
+    // Avståndet väljs så att akvariet (med lite luft) ryms i bredd.
+    const halvH = Math.tan((camera.fov / 2) * Math.PI / 180);
+    const halvB = Math.atan(halvH * (W / H));
+    const avstand = Math.min(3.6, Math.max(1.78, 0.48 / Math.tan(halvB)));
+    const riktning = new Vector3(0.38, 0.5, 1).normalize();
+    controls.target.set(0.02, smal ? 0.14 : 0.26, 0);
+    camera.position.copy(controls.target).addScaledVector(riktning, avstand);
+    // Flytta bildens mitt bort från panelen: uppåt på mobil (panelen ligger
+    // nedtill), åt vänster på bred skärm (panelen ligger till höger).
+    camera.aspect = W / H;
+    if (smal) camera.setViewOffset(W, H, 0, H * 0.2, W, H);
+    else camera.setViewOffset(W, H, 150, 0, W, H);
+    camera.updateProjectionMatrix();
+    controls.update();
+}
+placeraKamera();
+
+// Labbänk: skiva med plankor, framkant och en vägg med kollegieblocksrutor.
+function labbmiljo() {
+    const grupp = new Group();
+    const skivTextur = canvasTextur(512, (g, s) => {
+        traadring(g, s, '#b9874f', '#8a5d2c', '#d0a36b', 0.6);
+        g.fillStyle = 'rgba(70,40,15,0.35)';
+        for (let i = 1; i < 4; i++) g.fillRect(0, (i * s) / 4, s, 2);
+    }, 1);
+    skivTextur.repeat.set(2, 1.2);
+    const skiva = new Mesh(new BoxGeometry(3.6, 0.05, 1.7), new MeshStandardMaterial({ map: skivTextur, roughness: 0.62 }));
+    skiva.position.set(0, -0.036, 0.12);
+    skiva.receiveShadow = true;
+    grupp.add(skiva);
+
+    const vaggTextur = canvasTextur(256, (g, s) => {
+        g.fillStyle = '#f4eee2'; g.fillRect(0, 0, s, s);
+        g.strokeStyle = 'rgba(92,134,168,0.32)'; g.lineWidth = 1.2;
+        for (let i = 0; i <= s; i += 32) {
+            g.beginPath(); g.moveTo(i, 0); g.lineTo(i, s); g.stroke();
+            g.beginPath(); g.moveTo(0, i); g.lineTo(s, i); g.stroke();
+        }
+    }, 1);
+    vaggTextur.repeat.set(9, 5);
+    const vagg = new Mesh(new PlaneGeometry(6, 3.2), new MeshStandardMaterial({ map: vaggTextur, roughness: 0.95 }));
+    vagg.position.set(0, 1.2, -0.75);
+    vagg.receiveShadow = true;
+    grupp.add(vagg);
+    return grupp;
+}
+
+// Akvariet: glasväggar, glasbotten och en ram av aluminiumprofiler.
+// Allt ligger UTANFÖR simuleringens container, så vattnet aldrig når in i det.
+function akvarium() {
+    const grupp = new Group();
+    const t = 0.008, ram = 0.016;
+    const glas = new MeshStandardMaterial({ color: 0xd4ecf2, roughness: 0.04, metalness: 0, transparent: true, opacity: 0.1, depthWrite: false, side: DoubleSide });
+    const profil = new MeshStandardMaterial({ color: 0xaeb7bf, roughness: 0.3, metalness: 0.85 });
+    const { b, d, h } = AQ;
+    const ruta = (sx, sy, sz, x, y, z) => { const m = new Mesh(new BoxGeometry(sx, sy, sz), glas); m.position.set(x, y, z); grupp.add(m); };
+    ruta(b + 2 * t, h, t, 0, h / 2, d / 2 + t / 2);
+    ruta(b + 2 * t, h, t, 0, h / 2, -d / 2 - t / 2);
+    ruta(t, h, d, b / 2 + t / 2, h / 2, 0);
+    ruta(t, h, d, -b / 2 - t / 2, h / 2, 0);
+    const botten = new Mesh(new BoxGeometry(b + 2 * t, 0.012, d + 2 * t), new MeshStandardMaterial({ color: 0x9fb8bf, roughness: 0.1, transparent: true, opacity: 0.55 }));
+    botten.position.y = -0.006;
+    botten.receiveShadow = true;
+    grupp.add(botten);
+    const kant = (sx, sy, sz, x, y, z) => { const m = new Mesh(new BoxGeometry(sx, sy, sz), profil); m.position.set(x, y, z); m.castShadow = true; grupp.add(m); };
+    const X = b / 2 + t, Z = d / 2 + t;
+    for (const y of [-0.004, h]) {
+        kant(b + 2 * t + 2 * ram, ram, ram, 0, y, Z + ram / 2 - 0.002);
+        kant(b + 2 * t + 2 * ram, ram, ram, 0, y, -Z - ram / 2 + 0.002);
+        kant(ram, ram, d + 2 * t, X + ram / 2 - 0.002, y, 0);
+        kant(ram, ram, d + 2 * t, -X - ram / 2 + 0.002, y, 0);
+    }
+    for (const x of [-1, 1]) for (const z of [-1, 1]) kant(ram, h, ram, x * (X + ram / 2 - 0.002), h / 2, z * (Z + ram / 2 - 0.002));
+    return grupp;
+}
+scene.add(labbmiljo(), akvarium());
+
+// ─── Simuleringen ──────────────────────────────────────────────────────────
+const container = new Box3(new Vector3(-AQ.b / 2, 0, -AQ.d / 2), new Vector3(AQ.b / 2, AQ.h, AQ.d / 2));
+let sim = null;
+let klossMeshar = [];
+let bygger = false;
+let byggIgen = false;
+let pausad = false;
+// Bibliotekets automatik väljer 11 delsteg när det finns klossar i vattnet.
+// Med stela klossar räcker sex, och det sparar nästan hälften av arbetet.
+const DELSTEG = 6;
+// Långsam dator: ett 1/60-sekundssteg per bildruta (simuleringen går då i
+// ultrarapid). Snabb dator: step() utan argument, som håller realtid.
+let ultrarapid = true;
+
+function skapaKloss(id, i) {
+    const geo = new RoundedBoxGeometry(KLOSS, KLOSS, KLOSS, 2, 0.012);
+    const mat = new MeshStandardMaterial({ map: textur(id), ...YTA[id] });
+    const m = new Mesh(geo, mat);
+    // Lite olika lutning så att klossarna inte landar som tre likadana stämplar.
+    m.position.set((i - 1) * 0.195, AQ.vatten + 0.13, [0.05, -0.05, 0.04][i]);
+    m.rotation.set([0.18, -0.12, 0.1][i], [0.35, -0.25, 0.55][i], [-0.15, 0.2, 0.12][i]);
+    m.castShadow = true;
+    return m;
+}
+
+const laddEl = document.getElementById('ladda');
+const statusEl = document.getElementById('status');
+
+async function bygg() {
+    if (bygger) { byggIgen = true; return; }
+    bygger = true;
+    laddEl.hidden = false;
+    document.getElementById('ladda-text').textContent = 'Fyller akvariet …';
+    // Låt webbläsaren rita laddningsrutan innan start() blockerar sidan.
+    await new Promise(requestAnimationFrame);
+    await new Promise(requestAnimationFrame);
+
+    if (sim) { sim.dispose(); sim = null; }
+    for (const m of klossMeshar) { scene.remove(m); m.geometry.dispose(); m.material.dispose(); }
+
+    const v = vatskaAv(tillstand.vatska);
+    klossMeshar = tillstand.klossar.map(skapaKloss);
+    scene.add(...klossMeshar);
+
+    const ny = new Simulation({ renderer, scene, camera, container, particles: tillstand.partiklar, substeps: DELSTEG });
+    ny.addFluid({
+        box: new Box3(new Vector3(-AQ.b / 2, 0, -AQ.d / 2), new Vector3(AQ.b / 2, AQ.vatten, AQ.d / 2)),
+        ...v.sim,
+        appearance: v.utseende,
+    });
+    tillstand.klossar.forEach((id, i) => {
+        // Solvern har alltid vilodensiteten 1 000 kg/m³; skala så att kvoten stämmer.
+        const rho = materialAv(id).rho * 1000 / v.rho;
+        ny.addSoftbody({ mesh: klossMeshar[i], density: rho, softness: 0 });
+    });
+    try {
+        await ny.start();
+        ny.showParticles = document.getElementById('partiklar').checked;
+        sim = ny;
+        window.__sim = ny;
+        statusEl.textContent = `${fmt(ny.particleCount)} partiklar · radie ${fmt(ny.particleRadius * 1000, 1)} mm`;
+    } catch (e) {
+        console.error(e);
+        statusEl.textContent = 'Fel: ' + e.message;
+    }
+    laddEl.hidden = true;
+    bygger = false;
+    if (byggIgen) { byggIgen = false; bygg(); }
+}
+
+// ─── Bildrutor ─────────────────────────────────────────────────────────────
+let fpsTid = performance.now(), fpsAntal = 0, fps = 0;
+async function ruta() {
+    if (sim && !bygger && !pausad) {
+        try { await (ultrarapid ? sim.step(1 / 60) : sim.step()); } catch (e) { console.error(e); }
+    }
+    controls.update();
+    renderer.render(scene, camera);
+    fpsAntal++;
+    const nu = performance.now();
+    if (nu - fpsTid > 1000) {
+        fps = Math.round((fpsAntal * 1000) / (nu - fpsTid));
+        fpsTid = nu; fpsAntal = 0;
+        if (sim && !bygger && !pausad) {
+            const fore = pr;
+            if (fps < 26 && pr > PR_MIN) pr = Math.max(PR_MIN, pr - 0.12);
+            else if (fps > 52 && pr < PR_MAX) pr = Math.min(PR_MAX, pr + 0.08);
+            if (pr !== fore) renderer.setPixelRatio(pr);
+            if (ultrarapid && fps > 55) ultrarapid = false;
+            else if (!ultrarapid && fps < 40) ultrarapid = true;
+        }
+        if (sim && !bygger) statusEl.textContent = `${fmt(sim.particleCount)} partiklar · ${fps} bilder/s · upplösning ${fmt(100 * pr / devicePixelRatio)} %${ultrarapid ? ' · ultrarapid' : ''}${pausad ? ' · pausad' : ''}`;
+    }
+    requestAnimationFrame(ruta);
+}
+
+addEventListener('resize', () => {
+    renderer.setSize(innerWidth, innerHeight);
+    const W = innerWidth, H = innerHeight;
+    camera.aspect = W / H;
+    if (W < 760) camera.setViewOffset(W, H, 0, H * 0.2, W, H);
+    else camera.setViewOffset(W, H, 150, 0, W, H);
+    camera.updateProjectionMatrix();
+});
+
+// ─── Panelen ───────────────────────────────────────────────────────────────
+const vatskorEl = document.getElementById('vatskor');
+const klossarEl = document.getElementById('klossar');
+const trappaEl = document.getElementById('trappa');
+
+function ritaPanel() {
+    const v = vatskaAv(tillstand.vatska);
+    vatskorEl.innerHTML = VATSKOR.map((x) =>
+        `<button class="knapp" data-vatska="${x.id}" aria-pressed="${x.id === v.id}">${x.namn}<small>${fmt(x.rho)} kg/m³</small></button>`).join('');
+
+    klossarEl.innerHTML = tillstand.klossar.map((id, i) => {
+        const m = materialAv(id);
+        const st = statusAv(m.rho, v.rho);
+        const andel = Math.min(100, (100 * m.rho) / v.rho);
+        const text = st === 'flyter'
+            ? `<b class="flyter">Flyter</b>, cirka ${fmt(andel)}&nbsp;% under ytan`
+            : st === 'svavar' ? `<b class="svavar">Svävar</b>, helt under ytan`
+            : `<b class="sjunker">Sjunker</b>, tyngre än undanträngd ${v.namn.toLowerCase()}`;
+        return `<div class="kloss">
+            <span class="prov" style="background-image:url(${textur(id).userData.url})"></span>
+            <select data-kloss="${i}" aria-label="Material för kloss ${i + 1}">
+                ${MATERIAL.map((x) => `<option value="${x.id}"${x.id === id ? ' selected' : ''}>${x.namn}, ${fmt(x.rho)} kg/m³</option>`).join('')}
+            </select>
+            <span class="las"><i>ρ</i> = ${fmt(m.rho)} kg/m³ · ${text}</span>
+        </div>`;
+    }).join('');
+
+    // Flytkartan: klossarna sorterade efter densitet, vätskans rad där den hör hemma.
+    const rader = tillstand.klossar.map((id) => ({ ...materialAv(id), typ: 'kloss' }))
+        .filter((x, i, alla) => alla.findIndex((y) => y.id === x.id) === i);
+    rader.push({ namn: v.namn, rho: v.rho, typ: 'vatska' });
+    rader.sort((a, b) => a.rho - b.rho || (a.typ === 'vatska' ? -1 : 1));
+    trappaEl.innerHTML = rader.map((r) => r.typ === 'vatska'
+        ? `<li class="vatska">${r.namn}<span class="rho">${fmt(r.rho)} kg/m³</span></li>`
+        : `<li><span class="punkt" style="background-image:url(${textur(r.id).userData.url})"></span>${r.namn}<span class="rho">${fmt(r.rho)} kg/m³</span></li>`).join('');
+}
+
+vatskorEl.addEventListener('click', (e) => {
+    const k = e.target.closest('[data-vatska]');
+    if (!k || k.dataset.vatska === tillstand.vatska) return;
+    tillstand.vatska = k.dataset.vatska;
+    ritaPanel(); bygg();
+});
+klossarEl.addEventListener('change', (e) => {
+    const s = e.target.closest('[data-kloss]');
+    if (!s) return;
+    tillstand.klossar[+s.dataset.kloss] = s.value;
+    ritaPanel(); bygg();
+});
+document.getElementById('forsok').innerHTML = FORSOK.map((f, i) =>
+    `<button class="knapp" data-forsok="${i}">${f.namn}<small>${f.desc}</small></button>`).join('');
+document.getElementById('forsok').addEventListener('click', (e) => {
+    const k = e.target.closest('[data-forsok]');
+    if (!k) return;
+    const f = FORSOK[+k.dataset.forsok];
+    tillstand.vatska = f.vatska;
+    tillstand.klossar = [...f.klossar];
+    ritaPanel(); bygg();
+});
+document.getElementById('slapp').addEventListener('click', () => bygg());
+const pausKnapp = document.getElementById('paus');
+const vaxlaPaus = () => {
+    pausad = !pausad;
+    pausKnapp.setAttribute('aria-pressed', pausad);
+    pausKnapp.textContent = pausad ? 'Fortsätt' : 'Paus';
+};
+pausKnapp.addEventListener('click', vaxlaPaus);
+addEventListener('keydown', (e) => {
+    if (e.code === 'Space' && !/SELECT|INPUT|BUTTON/.test(document.activeElement?.tagName)) { e.preventDefault(); vaxlaPaus(); }
+});
+document.getElementById('partiklar').addEventListener('change', (e) => { if (sim) sim.showParticles = e.target.checked; });
+const nivaEl = document.getElementById('niva');
+nivaEl.value = String(tillstand.partiklar);
+nivaEl.addEventListener('change', () => { tillstand.partiklar = +nivaEl.value; bygg(); });
+
+// Mät hur lång tid ett steg + en bild tar på grafikkortet (väntar in kön).
+async function matBild(n = 4) {
+    const dev = renderer.backend.device;
+    // Uppvärmning: de första bilderna kompilerar shaders och tar en sekund eller mer.
+    for (let k = 0; k < 3; k++) { await sim.step(1 / 60); renderer.render(scene, camera); }
+    await dev.queue.onSubmittedWorkDone();
+    const t = performance.now();
+    for (let k = 0; k < n; k++) {
+        await sim.step(1 / 60);
+        renderer.render(scene, camera);
+        await dev.queue.onSubmittedWorkDone();
+    }
+    return (performance.now() - t) / n;
+}
+
+ritaPanel();
+await bygg();
+// Första gången: sänk detaljnivån tills en bild tar under ~45 ms, och växla
+// till ultrarapid om inte ens lägsta nivån hinner med i realtid.
+try {
+    const nivaer = [4000, 8000, 16000];
+    renderer.setPixelRatio(PR_MIN); // mät simuleringen, inte skärmens storlek
+    let ms = await matBild();
+    while (ms > 45 && nivaer.indexOf(tillstand.partiklar) > 0) {
+        tillstand.partiklar = nivaer[nivaer.indexOf(tillstand.partiklar) - 1];
+        nivaEl.value = String(tillstand.partiklar);
+        await bygg();
+        ms = await matBild();
+    }
+    renderer.setPixelRatio(pr);
+    console.info(`Grafikkortet: ${ms.toFixed(1)} ms per bild vid ${tillstand.partiklar} partiklar`);
+} catch (e) { console.warn('Mätningen misslyckades', e); }
+await bygg();
+requestAnimationFrame(ruta);
+</script>
+</body>
+</html>

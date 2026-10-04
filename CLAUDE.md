@@ -3315,7 +3315,17 @@ skydd:
    `installera-task.ps1`) plus skyddsnätet 5 minuter efter inloggning.
    Skriptet tillåter tre försök per dygn och gör ingenting om dagens artikel
    redan finns. Omförsöket kräver att `installera-task.ps1` körs om en gång
-   på datorn.
+   på datorn, **som administratör** (uppgiften skapades så, och annars ger
+   `Register-ScheduledTask` "Åtkomst nekad").
+1b. **Omförsök när Claude-gränsen släpper.** Slår körningen i
+   sessionsgränsen ("You've hit your session limit · resets 3:50am", som
+   natten 2026-10-04) läser skriptet av klockslaget och lägger en
+   engångsuppgift, `Fysiklabbet daglig nyhet (efter grans)`, fem minuter
+   efter det. Uppgiften kör samma skript med huvuduppgiftens inställningar.
+   Ett sådant försök räknas inte mot taket på tre körningar; i stället
+   gäller ett eget tak på fyra gränsförsök per dygn. Går klockslaget inte
+   att läsa, eller ligger det mer än sex timmar bort, görs ett nytt försök
+   om en timme.
 2. **`.github/workflows/nyhetsvakt.yml`** kollar main varje timme 08.41–12.41
    och öppnar ett ärende "Ingen nyhet publicerad <datum>" (ett per dag, alltså
    ett mejl till ägaren) om artikeln saknas. Ärendet stängs av sig självt när

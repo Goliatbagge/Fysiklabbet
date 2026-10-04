@@ -26,6 +26,8 @@ $LogDir  = Join-Path $Repo '.claude\nyheter\logg'
 $DataJs  = Join-Path $Repo 'data\nyheter.js'
 $Today   = Get-Date -Format 'yyyy-MM-dd'
 $LogFile = Join-Path $LogDir "$Today.log"
+# Namnet som installera-task.ps1 registrerar (dess -Namn-standard).
+$HuvudTask = 'Fysiklabbet daglig nyhet'
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 
@@ -60,6 +62,56 @@ function Find-Python {
     if ($cmd) { return $cmd.Source }
 
     return 'python'
+}
+
+function Planera-OmforsokEfterGrans([string]$Utdata) {
+    # Claude-gransen slog i (2026-10-04: "You've hit your session limit -
+    # resets 3:50am", korningen dog efter fem sekunder). Vi vantar INTE i
+    # processen - uppgiften har en tidsgrans pa 1 h och gransen kan slappa
+    # flera timmar senare. I stallet laggs en engangsuppgift som kor samma
+    # skript 5 min efter att gransen slappt, med huvuduppgiftens atgard,
+    # konto och installningar.
+    # Ett gransforsok dog innan det hann gora nagot, sa det raknas inte mot
+    # taket pa tunga korningar. Egna tak: hogst 4 sadana omforsok per dygn.
+    $GransFil = Join-Path $LogDir ('.gransforsok-{0}' -f $Today)
+    $Antal = 0
+    if (Test-Path $GransFil) { [void][int]::TryParse((Get-Content $GransFil -TotalCount 1), [ref]$Antal) }
+    if ($Antal -ge 4) { Log "Claude-gransen nadd igen, men redan 4 omforsok idag - avstar."; return }
+    Set-Content -Path $GransFil -Value ($Antal + 1) -Encoding ascii
+    Set-Content -Path $ForsokFil -Value $AntalForsok -Encoding ascii
+
+    # "resets 3:50am" / "resets 4pm" / "resets 15:50". Ett datum efter
+    # "resets" (veckograns, "resets Oct 7, 4am") matchar inte - da forsoker
+    # vi om en timme och later taket ovan satta stopp.
+    $Nu = Get-Date
+    $Mal = $Nu.AddHours(1)
+    $m = [regex]::Match($Utdata, 'resets\s+(\d{1,2})(?::(\d{2}))?\s*(am|pm)?', 'IgnoreCase')
+    if ($m.Success) {
+        $h = [int]$m.Groups[1].Value
+        $min = if ($m.Groups[2].Success) { [int]$m.Groups[2].Value } else { 0 }
+        $ampm = $m.Groups[3].Value.ToLower()
+        if ($ampm -eq 'pm' -and $h -lt 12) { $h += 12 }
+        if ($ampm -eq 'am' -and $h -eq 12) { $h = 0 }
+        if ($h -le 23 -and $min -le 59) {
+            $Slapp = $Nu.Date.AddHours($h).AddMinutes($min)
+            if ($Slapp -le $Nu) { $Slapp = $Slapp.AddDays(1) }
+            if (($Slapp - $Nu).TotalHours -le 6) { $Mal = $Slapp }
+        }
+    }
+    $Mal = $Mal.AddMinutes(5)
+
+    try {
+        $Huvud = Get-ScheduledTask -TaskName $HuvudTask -ErrorAction Stop
+        Register-ScheduledTask -TaskName ('{0} (efter grans)' -f $HuvudTask) `
+            -Action $Huvud.Actions -Principal $Huvud.Principal -Settings $Huvud.Settings `
+            -Trigger (New-ScheduledTaskTrigger -Once -At $Mal) `
+            -Description 'Engangsomforsok efter att Claude-gransen slagit i. Skrivs over av daglig-nyhet.ps1 vid behov.' `
+            -Force -ErrorAction Stop | Out-Null
+        Log ("Claude-gransen nadd. Nytt forsok planerat {0:HH:mm}." -f $Mal)
+    }
+    catch {
+        Log ("FEL: kunde inte planera omforsok efter gransen: {0}" -f $_.Exception.Message)
+    }
 }
 
 function Invoke-Native {
@@ -127,9 +179,20 @@ try {
         Log "Dagens nyhet kom in via pull. Inget mer att gora."
     }
     else {
-        # 5) Hitta claude.exe.
-        $Claude = Join-Path $env:USERPROFILE '.local\bin\claude.exe'
-        if (-not (Test-Path $Claude)) { $Claude = 'claude' }
+        # 5) Hitta claude.exe. Samma ordning som fb-/ig-jobben: winget-
+        #    installationen forst. ~\.local\bin forsvann i slutet av sept 2026
+        #    och da hittades ingen claude alls (natten 2026-10-01 uteblev).
+        $Claude = $null
+        foreach ($k in @(
+            (Join-Path $env:LOCALAPPDATA 'Microsoft\WinGet\Packages\Anthropic.ClaudeCode_Microsoft.Winget.Source_8wekyb3d8bbwe\claude.exe'),
+            (Join-Path $env:USERPROFILE '.local\bin\claude.exe'))) {
+            if (Test-Path $k) { $Claude = $k; break }
+        }
+        if (-not $Claude) {
+            $cmd = Get-Command claude -ErrorAction SilentlyContinue
+            if ($cmd) { $Claude = $cmd.Source } else { throw 'claude.exe hittas inte (varken winget, ~\.local\bin eller PATH).' }
+        }
+        Log "claude.exe: $Claude"
 
         $Python = Find-Python
         Log ("Python for bildgenerering: {0}" -f $Python)
@@ -148,12 +211,19 @@ Publish ONLY ONE article. If today's date already exists in data/nyheter.js, mak
         # 0 = vanta ut bakgrundsjobben i stallet for att kapa dem.
         $env:CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS = '0'
 
+        # Ror inte Telegram-kanalen: pluginens server tar over boten fran
+        # starta-telegram.cmd-sessionen. Utan token i denna katalog avslutar den direkt.
+        $env:TELEGRAM_STATE_DIR = Join-Path $env:TEMP 'telegram-ingen-kanal'
+
         # Modell: opus (uttryckligt onskemal 2026-07-31). Nyhetsagenten gor
         # research, faktakoll och redaktionell bedomning - det tjanar pa den
         # starkaste modellen. 'opus' = senaste Opus-versionen.
         Log "Startar Claude Code (headless, modell opus)..."
-        Invoke-Native $Claude @('-p', $Prompt, '--model', 'opus', '--dangerously-skip-permissions')
+        $ClaudeUt = New-Object System.Collections.Generic.List[string]
+        & $Claude @('-p', $Prompt, '--model', 'opus', '--dangerously-skip-permissions') 2>&1 |
+            ForEach-Object { $ClaudeUt.Add([string]$_); Log $_ }
         Log ("Claude avslutade med kod {0}" -f $LASTEXITCODE)
+        $GransNadd = (($ClaudeUt -join "`n") -match "hit your .*limit")
 
         # Lita INTE pa exitkoden - den kan bli 0 aven nar ingen artikel skrevs.
         # Kontrollera resultatet i data/nyheter.js i stallet.
@@ -163,6 +233,7 @@ Publish ONLY ONE article. If today's date already exists in data/nyheter.js, mak
         else {
             $Misslyckades = $true
             Log ('FEL: Claude avslutade utan att skriva nagon artikel for {0} - ingen rad "date: {1}{0}{1}" i data/nyheter.js.' -f $Today, '"')
+            if ($GransNadd) { Planera-OmforsokEfterGrans ($ClaudeUt -join "`n") }
         }
     }
 

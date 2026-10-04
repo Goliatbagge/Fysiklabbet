@@ -8,6 +8,7 @@
 #
 #  Tva uppgifter registreras:
 #    "<Namn>"          DAILY <Tid>      - huvudkorningen
+#                      DAILY <OmforsokTid> - omforsok om natten misslyckades
 #    "<Namn> (start)"  ONLOGON + 5 min  - skyddsnat efter omstart
 #                                         (stromavbrott, Windows Update)
 #
@@ -28,6 +29,11 @@
 
 param(
     [string]$Tid  = '03:15',
+    # Omforsok samma morgon. Den 4 oktober 2026 kom ingen nyhet alls:
+    # nattens korning gav inget resultat och nasta chans var forst nasta natt
+    # (logon-triggern hjalper inte pa en dator som star pa). Ett andra forsok
+    # pa morgonen tar t.ex. en Claude-grans som slagit i under natten.
+    [string]$OmforsokTid = '07:15',
     [string]$Namn = 'Fysiklabbet daglig nyhet',
     [switch]$Avinstallera
 )
@@ -104,14 +110,15 @@ $Settings = New-ScheduledTaskSettingsSet `
     -DontStopOnIdleEnd
 
 # --- 1) Huvudkorning: dagligen pa klockslag -------------------------
-$TriggerDaily = New-ScheduledTaskTrigger -Daily -At $Tid
+$TriggerDaily   = New-ScheduledTaskTrigger -Daily -At $Tid
+$TriggerOmforsok = New-ScheduledTaskTrigger -Daily -At $OmforsokTid
 
 Register-ScheduledTask -TaskName $Namn `
-                       -Action $Action -Trigger $TriggerDaily `
+                       -Action $Action -Trigger @($TriggerDaily, $TriggerOmforsok) `
                        -Principal $Principal -Settings $Settings `
-                       -Description "Skapar dagens fysiknyhet via Claude Code och pushar till GitHub. Kors $Tid varje natt." `
+                       -Description "Skapar dagens fysiknyhet via Claude Code och pushar till GitHub. Kors $Tid varje natt, med omforsok $OmforsokTid om ingen artikel kom." `
                        -Force | Out-Null
-Write-Output "OK  $Namn - dagligen $Tid"
+Write-Output "OK  $Namn - dagligen $Tid, omforsok $OmforsokTid"
 
 # --- 2) Skyddsnat: vid inloggning efter omstart ----------------------
 # -User MASTE anges. Utan den blir triggern "vid vilken anvandares inloggning

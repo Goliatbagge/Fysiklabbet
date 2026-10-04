@@ -1,0 +1,113 @@
+# Nyhetsvakt: larmar när dagens nyhet saknas på main.
+#
+# VARFÖR DEN FINNS
+# Dagens nyhet skrivs av en schemalagd uppgift på Windows-datorn kl 03.15
+# (.claude/nyheter/daglig-nyhet.ps1). Den 4 oktober 2026 publicerades ingen
+# nyhet alls, och ingenting på sajten såg trasigt ut: listan visade bara
+# gårdagens artikel överst. Felet upptäcktes först när användaren själv tittade.
+#
+# Försvaret har två lager:
+#   1. Windows-uppgiften kl 03.15, med omförsök 07.15 och ett skyddsnät vid
+#      inloggning efter omstart (.claude/nyheter/installera-task.ps1).
+#   2. Det här arbetsflödet. Det skriver ingenting själv (det finns ingen
+#      Claude-nyckel i GitHub), men öppnar ett ärende om dagens nyhet ändå
+#      saknas en bit in på förmiddagen. Ägaren får då ett mejl, i stället för
+#      att missen märks av en besökare. Se CLAUDE.md, "Dagens nyhet".
+#
+# Ett ärende per dag, inte ett rött kryss per timme: körningen går varje timme
+# (GitHub skjuter ibland upp cron i flera timmar), men öppnar bara ett ärende
+# om det inte redan finns ett för dagen. Kommer nyheten sedan in stängs
+# ärendet automatiskt vid nästa körning.
+
+name: Nyhetsvakt
+
+on:
+  schedule:
+    # 06:41–10:41 UTC = 08:41–12:41 svensk sommartid (07:41–11:41 vintertid).
+    # Udda minut: kön är längst på :00.
+    - cron: '41 6-10 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  vakt:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/Stockholm
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Finns dagens nyhet?
+        id: koll
+        run: |
+          idag=$(date +%F)
+          timme=$(date +%-H)
+          echo "idag=$idag" >> "$GITHUB_OUTPUT"
+          # Båda nyckelformerna förekommer: date: "…" och "date": "…".
+          if grep -Eq "[\"']?date[\"']?[[:space:]]*:[[:space:]]*[\"']$idag[\"']" data/nyheter.js; then
+            echo "finns=ja" >> "$GITHUB_OUTPUT"
+            echo "Dagens nyhet ($idag) finns i data/nyheter.js."
+          elif [ "$GITHUB_EVENT_NAME" = "schedule" ] && [ "$timme" -lt 8 ]; then
+            # Vintertid: första körningen hamnar 07.41, då kan omförsöket
+            # från 07.15 fortfarande hålla på. Vänta till nästa timme.
+            echo "finns=tidigt" >> "$GITHUB_OUTPUT"
+            echo "Ingen nyhet än, men klockan är bara $timme. Väntar."
+          else
+            echo "finns=nej" >> "$GITHUB_OUTPUT"
+            echo "::warning::Ingen nyhet daterad $idag i data/nyheter.js."
+          fi
+
+      - name: Öppna eller stäng dagens ärende
+        if: steps.koll.outputs.finns != 'tidigt'
+        uses: actions/github-script@v7
+        env:
+          IDAG: ${{ steps.koll.outputs.idag }}
+          FINNS: ${{ steps.koll.outputs.finns }}
+        with:
+          script: |
+            const idag = process.env.IDAG;
+            const titel = `Ingen nyhet publicerad ${idag}`;
+            const oppna = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100,
+            });
+            const dagens = oppna.filter((i) => !i.pull_request && i.title === titel);
+
+            if (process.env.FINNS === 'ja') {
+              for (const i of dagens) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner, repo: context.repo.repo, issue_number: i.number,
+                  body: `Dagens nyhet finns nu i data/nyheter.js. Stänger ärendet automatiskt.`,
+                });
+                await github.rest.issues.update({
+                  owner: context.repo.owner, repo: context.repo.repo, issue_number: i.number,
+                  state: 'closed', state_reason: 'completed',
+                });
+              }
+              return;
+            }
+
+            if (dagens.length) {
+              core.info(`Ärendet #${dagens[0].number} finns redan, öppnar inget nytt.`);
+              return;
+            }
+
+            const kropp = [
+              `Det finns ingen artikel daterad **${idag}** i \`data/nyheter.js\` på main.`,
+              '',
+              'Windows-uppgiften har alltså inte publicerat något, varken kl 03.15 eller vid omförsöket 07.15.',
+              '',
+              'Felsök så här:',
+              `1. Läs loggen på Windows-datorn: \`.claude\\nyheter\\logg\\${idag}.log\`. Vanliga orsaker: datorn var avstängd, Claude-gränsen var nådd, nätet var nere vid \`git pull\`.`,
+              "2. Kör om för hand på datorn: `Start-ScheduledTask -TaskName 'Fysiklabbet daglig nyhet'` (skriptet tillåter tre försök per dygn).",
+              '3. En molnsession kan bara skriva nyheten om miljöns nätverksåtkomst släpper in nyhetskällorna (phys.org, physics.aps.org, arxiv.org, nature.com med flera). Med standardpolicyn blockeras de.',
+              '',
+              'Ärendet stängs automatiskt när dagens nyhet finns på main.',
+            ].join('\n');
+
+            const nytt = await github.rest.issues.create({
+              owner: context.repo.owner, repo: context.repo.repo, title: titel, body: kropp,
+            });
+            core.warning(`Öppnade ärende #${nytt.data.number}: ${titel}`);

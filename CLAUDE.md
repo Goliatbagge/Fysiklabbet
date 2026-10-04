@@ -3302,6 +3302,37 @@ går ut automatiskt till varje ny prenumerant utan att någon läser det först.
   genomskinlig (skälet står i filens egen kommentar).
 - Inga tankstreck, se `.claude/agents/nyhetsbrev.md`.
 
+## ⚠️ Dagens nyhet: Windows-uppgiften, omförsöket och nyhetsvakten
+
+**Dagens nyhet skrivs av en schemalagd uppgift på Windows-datorn**, inte i
+molnet: `.claude/nyheter/daglig-nyhet.ps1` kör nyhetsagenten headless kl 03.15
+och pushar till main. Den 4 oktober 2026 kom ingen nyhet alls, och
+ingenting såg trasigt ut. Listan visade bara gårdagens artikel överst, så
+missen märktes först när användaren själv tittade. Sedan dess finns tre
+skydd:
+
+1. **Omförsök kl 07.15** (andra triggern på uppgiften, se
+   `installera-task.ps1`) plus skyddsnätet 5 minuter efter inloggning.
+   Skriptet tillåter tre försök per dygn och gör ingenting om dagens artikel
+   redan finns. Omförsöket kräver att `installera-task.ps1` körs om en gång
+   på datorn.
+2. **`.github/workflows/nyhetsvakt.yml`** kollar main varje timme 08.41–12.41
+   och öppnar ett ärende "Ingen nyhet publicerad <datum>" (ett per dag, alltså
+   ett mejl till ägaren) om artikeln saknas. Ärendet stängs av sig självt när
+   nyheten kommit in. Arbetsflödet skriver ingen nyhet själv, eftersom det
+   inte finns någon Claude-nyckel i GitHub.
+3. **Dagskollen känner igen båda nyckelformerna**, `date: "…"` och
+   `"date": "…"`. Tidigare såg skriptet bara den första, så en artikel i
+   JSON-stil (som extraartikeln 2026-10-03) hade gett två artiklar samma dag.
+
+**En molnsession kan INTE skriva dagens nyhet med standardpolicyn för
+nätverket.** Proxyn ger 403 på phys.org, physics.aps.org, arxiv.org,
+nature.com, doi.org, journals.aps.org med flera, och nyhetsagenten får inte
+skriva utan att ha läst originalkällan (se nyhetsagent.md). Ska en
+molnrutin fungera som reserv måste miljöns nätverksåtkomst först vidgas
+(Custom med nyhetskällorna under Allowed domains), och rutinen skapas från
+claude.ai med repot som källa (se nästa avsnitt).
+
 ## ⚠️ Schemalagda routines MÅSTE skapas via claude.ai — annars saknar de repot
 
 **En routine (schemalagd trigger) som ska arbeta i Fysiklabbet-repot måste

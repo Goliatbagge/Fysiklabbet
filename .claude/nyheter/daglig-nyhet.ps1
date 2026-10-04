@@ -3,6 +3,11 @@
 #  Korsa av Windows Schemalaggaren vid inloggning (se installera-task.ps1).
 #  Skapar EN fysiknyhet per dag via Claude Code + nyhetsagenten och pushar.
 #  Idempotent: kors den flera ganger samma dag hander inget extra.
+#  Reserv: misslyckas nattens korning (Claude-gransen nadd, natfel) gors ett
+#  nytt forsok 07:15 (se installera-task.ps1), och
+#  .github/workflows/nyhetsvakt.yml oppnar ett arende pa GitHub (= mejl till
+#  agaren) om ingen nyhet finns pa main en bit in pa formiddagen.
+#  Se CLAUDE.md, "Dagens nyhet".
 #  Loggar till .claude\nyheter\logg\<datum>.log
 # =====================================================================
 
@@ -31,7 +36,13 @@ function Log($msg) {
 }
 
 function HasTodayArticle {
-    return [bool](Select-String -Path $DataJs -SimpleMatch ('date: "{0}"' -f $Today) -Quiet)
+    # Bada nyckelformerna forekommer i data/nyheter.js: date: "..." (de flesta
+    # artiklarna) och "date": "..." (JSON-stil, t.ex. extraartikeln
+    # 2026-10-03). Den gamla bokstavliga sokningen sag bara den forsta formen,
+    # sa en artikel i JSON-stil fran molnets reservjobb hade gett en andra
+    # artikel samma dag.
+    $monster = '[''"]?date[''"]?\s*:\s*[''"]{0}[''"]' -f [regex]::Escape($Today)
+    return [bool](Select-String -Path $DataJs -Pattern $monster -Quiet)
 }
 
 function Find-Python {
@@ -69,10 +80,11 @@ if (HasTodayArticle) {
     return
 }
 
-# 2) Hogst tva tunga korningar per dag: forsta inloggningen + en retry (t.ex.
-#    om natverket inte hunnit upp). Utan detta skulle VARJE inloggning samma
-#    dag starta en ny full Claude-korning sa lange nagot gatt fel.
-$MaxForsok   = 2
+# 2) Hogst tre tunga korningar per dag: nattens korning, morgonens omforsok
+#    och ett skyddsnat vid inloggning efter omstart. Utan taket skulle VARJE
+#    inloggning samma dag starta en ny full Claude-korning sa lange nagot
+#    gatt fel.
+$MaxForsok   = 3
 $ForsokFil   = Join-Path $LogDir ('.forsok-{0}' -f $Today)
 $AntalForsok = 0
 if (Test-Path $ForsokFil) {
@@ -127,7 +139,7 @@ Today is $Today. Read the file .claude/agents/nyhetsagent.md and carry out its F
 
 Steps: check the queue/log in .claude/nyheter/ so you do not repeat a story; pick the single most relevant story from the listed sources (Phys.org, Physics Magazine/APS, Physics World, Quanta, ScienceDaily, Nature) and research it thoroughly (you may read other reputable sites and the original paper too); write an in-depth, popular-science article in Swedish that follows the project's typography rules (Swedish quotation marks, comma decimals, NBSP, italic variables, no emojis); obtain a clean open-source image or generate one with the Gemini image script using the system Python at $Python; save the image under nyheter/bilder/ and add the article object to the TOP of window.NYHETER in data/nyheter.js with a real source link and a direct link to the original research when one exists; update .claude/nyheter/publicerat.md and ko.md; run node .claude/verify-navigation.js; then git add, git commit and git push origin main.
 
-Publish ONLY ONE article. If today's date already exists in data/nyheter.js, make no changes and do not commit.
+Publish ONLY ONE article. If today's date already exists in data/nyheter.js, make no changes and do not commit. Another run (a retry, or a manual cloud session) may publish today's article in parallel, so immediately before you commit: run git pull --rebase origin main, and if an article dated $Today has appeared in data/nyheter.js from someone else, discard your own article and do not commit or push.
 "@
 
         # Headless print-lage avslutar bakgrundsagenter efter 600 s som standard.

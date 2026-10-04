@@ -291,21 +291,21 @@ const TAU = Math.PI * 2;
    1. Innehåll: världarna byggs ur katalogen
    ===================================================================== */
 const VARLDAR = [
-  { kurs: 'Matematik nivå 1c', kod: 'ma1c', namn: 'Talens rike', kort: 'Nivå 1c',
+  { kurs: 'Matematik nivå 1c', kod: 'ma1c', namn: 'Dina första steg', kort: 'Nivå 1c',
     farg: '#ffb547', farg2: '#fff1c9', form: 'spiral', pos: [-72, 0, 62],
-    ingress: 'Här börjar allt. Tal och räkning, bokstäver som gör entré, procent, räta linjer, statistik och de första vinklarna. Spiralen är byggd av tal som läggs ut med den gyllene vinkeln, och de ljusaste punkterna är primtalen.',
+    ingress: 'Här börjar resan. Tal och räkning, bokstäver som gör entré, procent, räta linjer, statistik och de första vinklarna. Spiralen är byggd av tal som läggs ut med den gyllene vinkeln, och de ljusaste punkterna är primtalen.',
     glyfer: [[['7','r']], [['+','r']], [['π','i']], [['÷','r']], [['%','r']], [['3','r']], [['½','r']], [['×','r']], [['x','i']], [['=','r']], [['−','r']], [['0','r']]] },
-  { kurs: 'Matematik nivå 2c', kod: 'ma2c', namn: 'Algebrans rike', kort: 'Nivå 2c',
+  { kurs: 'Matematik nivå 2c', kod: 'ma2c', namn: 'Du bygger vidare', kort: 'Nivå 2c',
     farg: '#45e6d6', farg2: '#b9fff6', form: 'sadel', pos: [46, 16, -22],
-    ingress: 'Ekvationssystem, parabler, geometri och logaritmer. Ytan är en sadel, där en parabel öppnar sig uppåt och en annan nedåt i samma punkt.',
+    ingress: 'Med grunden på plats bygger du vidare med ekvationssystem, parabler, geometri och logaritmer. Ytan är en sadel, där en parabel öppnar sig uppåt och en annan nedåt i samma punkt.',
     glyfer: [[['x','i'],['2','S']], [['√','r']], [['lg','r']], [['y','i']], [['±','r']], [['a','i'],['x','i'],['2','S']], [['=','r']], [['∠','r']], [['α','i']], [['p','i'],['q','i']]] },
-  { kurs: 'Matematik fortsättning nivå 1c', kod: 'ma3c', namn: 'Förändringens rike', kort: 'Fortsättning 1c',
+  { kurs: 'Matematik fortsättning nivå 1c', kod: 'ma3c', namn: 'Du tar höjd', kort: 'Fortsättning 1c',
     farg: '#b884ff', farg2: '#f0dcff', form: 'krusning', pos: [-36, -10, -122],
-    ingress: 'Gränsvärden, derivator och integraler. Matematiken som beskriver hur saker förändras, ögonblick för ögonblick. Ytan böljar hela tiden, för här står ingenting stilla.',
+    ingress: 'Nu tar du höjd med gränsvärden, derivator och integraler, matematiken som beskriver hur saker förändras ögonblick för ögonblick. Ytan böljar hela tiden, för här står ingenting stilla.',
     glyfer: [[['f','i'],['′(','r'],['x','i'],[')','r']], [['∫','r']], [['d','r'],['x','i']], [['Δ','r']], [['lim','r']], [['e','i'],['x','s']], [['∞','r']], [['→','r']], [['Δ','r'],['y','i']]] },
-  { kurs: 'Matematik fortsättning nivå 2', kod: 'ma4', namn: 'De komplexa talens rike', kort: 'Fortsättning 2',
+  { kurs: 'Matematik fortsättning nivå 2', kod: 'ma4', namn: 'Du når målet', kort: 'Fortsättning 2',
     farg: '#ff5fa2', farg2: '#8fb8ff', form: 'mandelbrot', pos: [58, 14, -218],
-    ingress: 'Längst in, där talen lämnar tallinjen. Enhetscirkeln, nya derivator och integraler, och det imaginära talet <em>i</em> där <em>i</em><sup>2</sup> = −1. Världen är Mandelbrotmängden, ritad i det komplexa talplanet.',
+    ingress: 'Längst in når resan sitt mål, och talen lämnar tallinjen. Enhetscirkeln, nya derivator och integraler, och det imaginära talet <em>i</em> där <em>i</em><sup>2</sup> = −1. Världen är Mandelbrotmängden, ritad i det komplexa talplanet.',
     glyfer: [[['i','i']], [['z','i']], [['e','i'],['iπ','s']], [['|','r'],['z','i'],['|','r']], [['arg','r']], [['sin','r']], [['cos','r']], [['ω','i']], [['∞','r']]] },
 ];
 
@@ -1048,7 +1048,7 @@ function panelVarld(w) {
       const kd = k.avsnitt.filter((s) => klarade.has(s.id)).length;
       return `<button data-k="${k.ci}"><span class="kapnr">${k.nummer}</span><span>${k.namn}</span><span class="minibar"><span style="width:${kd / k.avsnitt.length * 100}%"></span></span></button>`;
     }).join('')}</div>
-    <div class="knappar"><button class="knapp prim" id="p-fortsatt">Fortsätt i ${w.namn.toLowerCase()}</button>
+    <div class="knappar"><button class="knapp prim" id="p-fortsatt">Fortsätt på den här nivån</button>
     <a class="knapp" href="../katalog.html?id=${w.kod}">Öppna nivån i katalogen</a></div>`;
   inre.querySelectorAll('[data-k]').forEach((b) => b.addEventListener('click', () => gaTillKapitel(w.kapitel[+b.dataset.k])));
   inre.querySelector('#p-fortsatt').addEventListener('click', () => { const s = nastaI(w.kapitel.flatMap((k) => k.avsnitt)); if (s) valjAvsnitt(s, true); });

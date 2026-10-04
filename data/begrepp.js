@@ -56,6 +56,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'vatebindning',
+    term: 'Vätebindning',
+    former: ['vätebindning', 'vätebindningen', 'vätebindningar', 'vätebindningarna'],
+    kort: 'En svag dragningskraft mellan en väteatom i en molekyl och en syre-, kväve- eller fluoratom i en annan. Vätebindningarna håller ihop vattnet och förklarar varför det kokar först vid 100 °C.',
+    relaterade: ['spektroskopi'],
+    body: [
+      { type: 'p', html: 'En vattenmolekyl består av en syreatom och två väteatomer. Syret drar elektronerna till sig mer än vätet gör, så syresidan av molekylen blir lite negativt laddad och vätesidorna lite positivt laddade. När två vattenmolekyler kommer nära varandra dras den ena molekylens väte mot den andras syre, ungefär som två svaga magneter. Den dragningen kallas en vätebindning.' },
+      { type: 'p', html: 'En vätebindning är ungefär en tjugondel så stark som bindningen mellan atomerna inne i molekylen, men i flytande vatten finns det oerhört många av dem. Varje molekyl är bunden till flera grannar, och bindningarna bryts och bildas hela tiden, biljoner gånger i sekunden. Därför håller vattnet ihop mycket bättre än man kunde vänta sig av så små molekyler. Utan vätebindningar skulle vatten koka långt under noll grader, ungefär som svavelväte, som har en likadant byggd men tyngre molekyl och ändå är en gas vid rumstemperatur.' },
+      { type: 'p', html: 'Det är också vätebindningarna som gör att det krävs så mycket energi för att förånga vatten: varje molekyl som lämnar ytan måste slita sig loss från sina grannar. Samma sorts bindning håller ihop de två strängarna i DNA och ger proteiner deras form, och den förklarar varför is är lättare än flytande vatten, eftersom bindningarna i is låser molekylerna i ett glest mönster.' }
+    ]
+  },
+  {
+    id: 'hydrogel',
+    term: 'Hydrogel',
+    former: ['hydrogel', 'hydrogelen', 'hydrogeler', 'hydrogelerna'],
+    kort: 'Ett mjukt material av långa molekylkedjor som är sammanlänkade till ett nätverk och fyllt med vatten. Det kan bestå till största delen av vatten och ändå hålla formen, som gelé.',
+    relaterade: ['aerogel'],
+    body: [
+      { type: 'p', html: 'Tänk dig ett fisknät i tre dimensioner, gjort av långa och smala molekyler som är fästa vid varandra här och där. Lägg nätet i vatten, så sugs vattnet in i maskorna och nätet sväller. Det är en hydrogel. Vattnet sitter kvar eftersom molekylkedjorna drar till sig vattenmolekyler, och nätet håller ihop eftersom kedjorna är sammanlänkade. Gelé och kokt potatismjöl är vardagliga exempel.' },
+      { type: 'p', html: 'En hydrogel kan bestå av över 90&nbsp;procent vatten och ändå vara ett fast föremål som går att plocka upp. Samtidigt kan vattnet röra sig ganska fritt i maskorna. Därför används hydrogeler i mjuka kontaktlinser, i sårförband som håller såret fuktigt och i blöjor, där ett pulver av hydrogel kan suga upp flera hundra gånger sin egen vikt.' },
+      { type: 'p', html: 'Forskare använder också hydrogeler för att rena vatten med solljus. Gelen får då flyta på vattnet, ta upp ljus och värmas, och eftersom bara det tunna lagret i gelen blir varmt avdunstar vattnet effektivt. Ångan kan sedan kondenseras till rent vatten. Hur mycket som avdunstar beror både på gelens kemi och på dess form, vilket gör det svårt att reda ut exakt vad ljuset gör.' }
+    ]
+  },
+  {
+    id: 'summafrekvensgenerering',
+    term: 'Summafrekvensgenerering',
+    former: ['summafrekvensgenerering', 'summafrekvensgenereringen', 'summafrekvens', 'summafrekvensen'],
+    kort: 'En metod där två laserstrålar med olika frekvens möts och skapar ljus vars frekvens är summan av de två. Eftersom det bara sker vid en gränsyta används metoden för att studera de allra yttersta molekylerna på en yta.',
+    relaterade: ['laser', 'spektroskopi', 'foton', 'vatebindning'],
+    body: [
+      { type: 'p', html: 'Vanligt ljus påverkar inte färgen på annat ljus: två ficklampor som lyser på samma vägg ger bara mer ljus. Men med mycket starka laserpulser kan ljuset få molekylerna i ett material att svänga så kraftigt att två ljusvågor blandas. Då kan det komma ut ljus med en helt ny frekvens, summan av de två ingående frekvenserna. I fotonbilden smälter två fotoner ihop till en, och den nya fotonens energi är summan av de två.' },
+      { type: 'p', html: 'Det fiffiga är att det bara går där materialet ser olika ut åt olika håll. Inne i en vätska pekar molekylerna åt alla möjliga håll och bidragen tar ut varandra. Men i ytan är det skillnad på uppåt, mot luften, och nedåt, mot vätskan, och där uppstår signalen. Därför ser metoden bara de yttersta molekylerna, ofta bara två eller tre lager, och struntar i de miljarder molekyler som ligger under.' },
+      { type: 'p', html: 'Väljer man den ena laserstrålen infraröd och ställer in dess frekvens så att den passar molekylernas egna svängningar, blir signalen starkast just vid de frekvenser där molekylerna i ytan svänger. Då får man ett spektrum över hur de yttersta molekylerna sitter och hur hårt de är bundna till sina grannar. Metoden används för att studera vattenytor, is, membran i celler och ytor där kemiska reaktioner sker.' }
+    ]
+  },
+  {
     id: 'troghetsmoment',
     term: 'Tröghetsmoment',
     former: ['tröghetsmoment', 'tröghetsmomentet', 'tröghetsmomenten'],

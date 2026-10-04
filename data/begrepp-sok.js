@@ -10,6 +10,9 @@
  */
 window.BEGREPP_LATT = true;
 window.BEGREPP = [
+  {"id":"vatebindning","term":"Vätebindning","kort":"En svag dragningskraft mellan en väteatom i en molekyl och en syre-, kväve- eller fluoratom i en annan. Vätebindningarna håller ihop vattnet och förklarar varför det kokar först vid 100 °C.","former":["vätebindning","vätebindningen","vätebindningar","vätebindningarna"]},
+  {"id":"hydrogel","term":"Hydrogel","kort":"Ett mjukt material av långa molekylkedjor som är sammanlänkade till ett nätverk och fyllt med vatten. Det kan bestå till största delen av vatten och ändå hålla formen, som gelé.","former":["hydrogel","hydrogelen","hydrogeler","hydrogelerna"]},
+  {"id":"summafrekvensgenerering","term":"Summafrekvensgenerering","kort":"En metod där två laserstrålar med olika frekvens möts och skapar ljus vars frekvens är summan av de två. Eftersom det bara sker vid en gränsyta används metoden för att studera de allra yttersta molekylerna på en yta.","former":["summafrekvensgenerering","summafrekvensgenereringen","summafrekvens","summafrekvensen"]},
   {"id":"troghetsmoment","term":"Tröghetsmoment","kort":"Ett mått på hur svårt det är att sätta något i rotation eller få det att sluta snurra. Det beror inte bara på hur tungt föremålet är, utan på hur långt från rotationsaxeln massan sitter.","former":["tröghetsmoment","tröghetsmomentet","tröghetsmomenten"]},
   {"id":"jordens-karna","term":"Jordens kärna","kort":"Jordens innersta del, ett klot av främst järn och nickel med en radie på omkring 3 500 kilometer. Den yttre delen är flytande, den innersta är fast.","former":["jordens kärna","jordkärnan","inre kärnan","inre kärna","yttre kärnan","yttre kärna"]},
   {"id":"jordmanteln","term":"Jordmanteln","kort":"Det knappt 2 900 kilometer tjocka lagret av het sten mellan jordskorpan och kärnan. Det utgör ungefär två tredjedelar av jordens massa.","former":["jordmanteln","jordmantel","manteln"]},

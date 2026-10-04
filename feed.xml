@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sat, 03 Oct 2026 08:22:05 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 04 Oct 2026 13:19:10 GMT</lastBuildDate>
+    <item>
+      <title>Synligt ljus skyndar inte på avdunstningen, visar noggranna mätningar</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-04-ljus-skyndar-inte-pa-avdunstningen</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-04-ljus-skyndar-inte-pa-avdunstningen</guid>
+      <pubDate>Sun, 04 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Termodynamik</category>
+      <description>För tre år sedan rapporterades att grönt ljus kan slita loss vattenmolekyler direkt ur ytan, utan att värma vattnet. Forskare i Mainz har nu lyst på rent vatten med blå, grön och röd laser och mätt både hur fort ytan sjunker och hur de yttersta molekylerna sitter. Ingenting ändrades.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-04-ljus-skyndar-inte-pa-avdunstningen.jpg" length="499897" type="image/jpeg"/>
+    </item>
     <item>
       <title>Tio upptäckter vi tror kan få Nobelpriset i fysik</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-03-tio-namn-till-nobelpriset-i-fysik</link>
@@ -177,15 +186,6 @@
       <category>Partikelfysik</category>
       <description>Myonium finns kvar i ett par miljondels sekunder och har hittills sprutat åt alla håll. Nu har fysiker i Schweiz fått atomerna att lämna ett två millimeter tunt skikt superfluid helium med nästan samma fart och samma riktning. Om ett par år ska strålen användas till något ingen gjort förut: att se efter om tyngdkraften drar lika hårt i en partikel ur andra generationen.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-16-atomen-som-skjuts-ur-heliumet.jpg" length="451718" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Sex atomer hänger ihop utan en enda kemisk bindning — och kedjan klarar krocken, så länge den bara får röra sig åt ett håll</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-15-kedjan-som-bara-finns-i-en-dimension</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-15-kedjan-som-bara-finns-i-en-dimension</guid>
-      <pubDate>Tue, 15 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Kvantfysik</category>
-      <description>Hans Bethe räknade fram dem 1931, men ingen hade lyckats fylla en gas med dem. Nu har fysiker i Innsbruck byggt Bethe-strängar av cesiumatomer nära absoluta nollpunkten, låtit dem kollidera utan att de gick sönder, och sett dem falla isär i samma stund som atomerna släpptes fria i tre dimensioner.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-15-kedjan-som-bara-finns-i-en-dimension.jpg" length="214132" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

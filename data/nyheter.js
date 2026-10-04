@@ -103,6 +103,70 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-04-ljus-skyndar-inte-pa-avdunstningen",
+    date: "2026-10-04",
+    title: "Synligt ljus skyndar inte på avdunstningen, visar noggranna mätningar",
+    deck: "För tre år sedan rapporterades att grönt ljus kan slita loss vattenmolekyler direkt ur ytan, utan att värma vattnet. Forskare i Mainz har nu lyst på rent vatten med blå, grön och röd laser och mätt både hur fort ytan sjunker och hur de yttersta molekylerna sitter. Ingenting ändrades.",
+    category: "Termodynamik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-04-ljus-skyndar-inte-pa-avdunstningen.jpg",
+    imageAlt: "En stilla sjö i gryningen. Låga dimslöjor ligger över vattnet och längs en skogsklädd strand, himlen är blå och orange vid horisonten och vass sticker upp ur vattnet i förgrunden.",
+    imageCredit: "Foto: Jules Verne Times Two, Montargilreservoaren i Portugal, via Wikimedia Commons (CC BY-SA 4.0). Bilden visar inte försöket.",
+    tags: ["termodynamik", "avdunstning", "fasövergång", "vatten", "vätebindning", "ljus", "laser", "spektroskopi", "fotomolekylär effekt"],
+    sources: [
+      { name: "Phys.org: Visible light does not speed up water evaporation, rigorous experiments suggest (3 oktober 2026)", url: "https://phys.org/news/2026-10-visible-evaporation-rigorous.html" },
+      { name: "PNAS: Visible light leaves evaporation and interfacial structure of neat water unchanged at the air–water interface (studien, öppet tillgänglig)", url: "https://doi.org/10.1073/pnas.2615377123" },
+      { name: "Physics World: Light evaporates water without heating it (om den ursprungliga MIT-studien, 2024)", url: "https://physicsworld.com/a/light-evaporates-water-without-heating-it/" }
+    ],
+    research: {
+      citation: "Y. Chen, J. C. Shirley, Z. X. Ng, Y. Wang, Y. Nagata, A. S. Hazrah och M. Bonn, ”Visible light leaves evaporation and interfacial structure of neat water unchanged at the air–water interface”, Proceedings of the National Academy of Sciences 123, e2615377123 (2026). Kollegialt granskad, öppet tillgänglig (CC BY 4.0).",
+      url: "https://doi.org/10.1073/pnas.2615377123"
+    },
+    larare: {
+      moment: [
+        { label: "Faser och fasövergångar", href: "katalog.html?id=fy1-6.3" },
+        { label: "Värme och temperatur", href: "katalog.html?id=fy1-6.1" },
+        { label: "Elektromagnetiska vågor och ljus", href: "katalog.html?id=fy2-4.1" }
+      ],
+      fragor: [
+        "Vatten släpper igenom nästan allt synligt ljus. Varför är det ett problem för påståendet att grönt ljus skulle få vatten att avdunsta snabbare, och varför kan det bli annorlunda om vattnet sitter i en gel som själv kan ta upp lite ljus?",
+        "Forskarna kunde inte se någon ändring, men deras mätning har en gräns på ungefär 5 procent. Vad har de då visat, och vad har de inte visat?",
+        "Den ursprungliga upptäckten och den nya mätningen publicerades båda i samma granskade tidskrift. Hur avgör forskarsamhället vilken som stämmer, och varför är det viktigt att andra grupper försöker upprepa ett överraskande resultat?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Häng ut tvätt en solig dag, så torkar den fort. Förklaringen är värme: solljuset värmer tyget och vattnet i det, och ju varmare vattnet är, desto fler molekyler har tillräckligt med energi för att lämna ytan. Men 2023 föreslog en forskargrupp vid MIT i USA att ljuset kan göra mer än så. Enligt dem kan synligt ljus, särskilt grönt, slita loss små klumpar av vattenmolekyler direkt ur ytan, utan att gå omvägen via värme. De kallade fenomenet den fotomolekylära effekten.' },
+      { type: 'p', html: 'Nu har en grupp vid Max Planck-institutet för polymerforskning i Mainz, ledd av Mischa Bonn, prövat idén på enklast tänkbara sätt: rent vatten med en plan yta, belyst med laser. Resultatet, publicerat i september i <em>Proceedings of the National Academy of Sciences</em> (PNAS), är tydligt. Vattnet avdunstade lika fort med ljuset på som med ljuset av, och de yttersta molekylerna satt precis som förut.' },
+
+      { type: 'h2', text: 'Ett påstående som utmanade läroböckerna' },
+      { type: 'p', html: 'För att en vattenmolekyl ska kunna lämna ytan måste den slita sig loss från sina grannar. Molekylerna i flytande vatten hålls ihop av vätebindningar, och energin som behövs för att bryta dem är stor: att förånga ett kilogram vatten vid rumstemperatur kräver omkring 2,4&nbsp;miljoner joule. Den energin kommer normalt från värme. Det går därför att räkna ut hur mycket vatten som högst kan avdunsta om man vet hur mycket energi provet tar emot.' },
+      { type: 'p', html: 'MIT-gruppen, ledd av Gang Chen, rapporterade att vatten i en hydrogel, ett geléartat nätverk som håller vatten, avdunstade snabbare än den gränsen tillåter när den belystes, och att effekten var störst för grönt ljus kring 520&nbsp;nanometer. Det väckte uppmärksamhet, eftersom avdunstning styr allt från molnbildning och klimat till tekniker som renar vatten med solljus. Men det fanns ett fysikaliskt problem. Vatten absorberar nästan inget synligt ljus, det är därför ett glas vatten är genomskinligt, och molekylerna saknar energinivåer som passar det synliga ljusets fotoner. Om ljuset ändå skulle påverka ytan måste det ske på något annat sätt, och det har varit omstritt. Andra forskare har redan ifrågasatt de spektra som skulle visa de lösslitna klumparna, och MIT-gruppen har svarat.' },
+
+      { type: 'h2', text: 'Ytan som sjönk lika fort' },
+      { type: 'p', html: 'Mainzgruppen fyllde ett glaskärl, 2&nbsp;centimeter i diameter, med extremt rent vatten och riktade en laser snett ned mot ytan. De använde tre färger: blått på 450&nbsp;nanometer, grönt på 532 och rött på 635. Ljuset fokuserades så att det träffade ytan med omkring 1&nbsp;000&nbsp;watt per kvadratmeter, ungefär lika starkt som solljuset en klar sommardag och samma styrka som i de tidigare försöken.' },
+      { type: 'p', html: 'Ovanför kärlet satt en optisk avståndsmätare som tio gånger i sekunden registrerade var vattenytan befann sig, med en upplösning på en kvarts mikrometer. När vatten avdunstar sjunker ytan, och hur fort den sjunker är ett direkt mått på avdunstningen. Varje försök pågick i 90&nbsp;minuter: en halvtimme i mörker, en halvtimme med lasern på och en halvtimme i mörker igen. Försöken gjordes både i torr luft och i vanlig rumsluft, eftersom luftfuktigheten hade föreslagits spela roll.' },
+      { type: 'p', html: 'I rumsluften sjönk ytan omkring 2&nbsp;mikrometer per minut, ungefär vad andra uppmätt. När lasern tändes hände ingenting. I torr luft ändrades avdunstningen med mellan −1,8 och −0,8&nbsp;procent, i rumsluft med mellan −0,1 och +0,7&nbsp;procent. Mätningen kan upptäcka en ändring på omkring 5&nbsp;procent, och de tidigare studierna hade rapporterat ökningar på omkring 12&nbsp;procent och upp till 40&nbsp;procent. En sådan ökning hade alltså synts tydligt.' },
+      { type: 'image', src: 'nyheter/bilder/2026-10-04-ljus-skyndar-inte-pa-avdunstningen-2.jpg', alt: 'Sex diagram i två kolumner som visar avdunstningshastigheten i mikrometer per minut under 90 minuter. Mellan 30 och 60 minuter är bakgrunden färgad blå, grön eller röd. Kurvorna fortsätter i ungefär samma nivå genom det färgade området.', caption: 'Avdunstningshastigheten under 90&nbsp;minuter. Det färgade fältet är halvtimmen då ytan belystes med blått, grönt eller rött laserljus. Vänster kolumn: torr luft. Höger kolumn: rumsluft. Hastigheten med ljus på (m<sub>light on</sub>) och av (m<sub>light off</sub>) är densamma inom mätosäkerheten.', credit: 'Diagram: Y. Chen med flera, PNAS 123, e2615377123 (2026) (CC BY 4.0), figur 2' },
+
+      { type: 'h2', text: 'En blick på de yttersta molekylerna' },
+      { type: 'p', html: 'Att ytan sjunker lika fort utesluter inte att något mindre händer i den. Forskarna använde därför en metod som bara ser de allra yttersta två eller tre lagren av vattenmolekyler. Två laserpulser, en infraröd och en synlig, möts på ytan och skapar ljus med en ny frekvens, summan av de två. Metoden kallas summafrekvensgenerering, och det sker bara där vattnet har en gränsyta, inte inne i vätskan. Det infraröda ljuset ställs in så att det sätter syre–väte-bindningarna i molekylerna i svängning, och hur de svänger avslöjar hur hårt molekylerna sitter fast i sina vätebindningar. En del molekyler i ytan har dessutom en syre–väte-bindning som pekar rakt ut i luften och därför saknar vätebindning. De fria bindningarna syns som en egen, skarp topp.' },
+      { type: 'p', html: 'Om ljuset bröt vätebindningar och slet loss klumpar av molekyler skulle signalen från de bundna molekylerna försvagas och toppen från de fria ändras. Ingenting av det syntes, varken med blått, grönt eller rött ljus och oavsett luftfuktighet.' },
+
+      { type: 'h2', text: 'Hundra miljarder gånger starkare ljus' },
+      { type: 'p', html: 'Förespråkarna menar att effekten inte är termisk utan beror på ljusets elektriska fält. I så fall borde den bli större ju starkare fältet är. Forskarna prövade därför också med korta pulser, en till ett par biljondels sekunder långa, på 515, 800 och 1&nbsp;030&nbsp;nanometer. Under pulsen var ljuset mer än 10<sup>10</sup>&nbsp;watt per kvadratcentimeter, mer än hundra miljarder gånger starkare än den gröna laserns 0,1&nbsp;watt per kvadratcentimeter. Inte heller då ändrades något i ytans spektrum.' },
+
+      { type: 'h2', text: 'Vad betyder det?' },
+      { type: 'p', html: 'Forskarnas slutsats är att en plan yta av rent vatten är okänslig för synligt ljus. Det betyder inte att de tidigare mätningarna var påhittade, men att förklaringen sannolikt finns någon annanstans. I en gel eller en droppe kan ljus absorberas av själva materialet och värma det, värmen kan ledas på oväntade vägar, vattenånga kan samlas eller blåsas bort och ljusets strålningstryck kan forma en droppe. Alla sådana effekter kan få det att se ut som om avdunstningen ökat, utan att vattenytan själv påverkas.' },
+      { type: 'p', html: 'Studien har sina gränser. En ökning som är mindre än mätningens känslighet, några procent, kan inte uteslutas, och försöken gjordes på rent vatten i stället för i de geler där effekten först sågs. Men för den som vill bygga solvärmda vattenrenare säger resultatet något viktigt: för att få vatten att avdunsta med solljus behöver ljuset fortfarande först bli till värme.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Synligt ljus tar sig långt ned i klart vatten. Rött ljus absorberas inom några meter, medan blått och grönt ljus når tiotals meter innan det mesta är borta. Infrarött ljus med våglängden 3&nbsp;mikrometer stoppas däremot redan inom någon mikrometer, eftersom det är där vattenmolekylerna har sina egna svängningar.',
+        'Om allt solljus som faller på en kvadratmeter, 1&nbsp;000&nbsp;watt, gick åt till att förånga vatten skulle det räcka till ungefär 0,4&nbsp;gram per sekund, eller att ytan sjönk omkring 25&nbsp;mikrometer per minut. Det är gränsen som den fotomolekylära effekten påstods överskrida.',
+        'Dimma över en sjö en kall morgon är inte avdunstning man ser. Vattenångan är osynlig, och det som syns är små droppar som bildas när ångan kondenserar i den kalla luften ovanför.'
+      ] }
+    ]
+  },
+  {
     "id": "2026-10-03-tio-namn-till-nobelpriset-i-fysik",
     "date": "2026-10-03",
     "title": "Tio upptäckter vi tror kan få Nobelpriset i fysik",

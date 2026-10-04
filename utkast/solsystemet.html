@@ -29,7 +29,7 @@
   --vanster: clamp(112px, 11vw, 176px);
 }
 * { box-sizing: border-box; }
-html { scroll-snap-type: y proximity; background: var(--bg); }
+html { background: var(--bg); }
 html, body { margin: 0; color: var(--ink); }
 body { font-family: var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; background: var(--bg); }
 body.last { overflow: hidden; }
@@ -44,7 +44,6 @@ sup { font-size: .68em; line-height: 0; }
 }
 #noter { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; overflow: visible; }
 main#resa { position: relative; z-index: 2; }
-.stopp { scroll-snap-align: start; }
 
 /* ---------- Laddning ---------- */
 #laddare {
@@ -121,6 +120,19 @@ main#resa { position: relative; z-index: 2; }
 .s-data dt { font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); margin-bottom: 4px; }
 .s-data dd { margin: 0; font-family: var(--mono); font-size: 13.5px; color: var(--ink); white-space: nowrap; }
 .s-knappar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+/* Skrollhjälpen på startsidan: mus med rullande hjul (pekskärm: svepande finger) */
+.skrolltips { display: inline-flex; align-items: center; gap: 14px; margin-top: 22px; padding: 11px 20px 11px 14px; border: 1px solid var(--hud); border-radius: 999px; background: rgba(6, 9, 18, .55); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: var(--ink); }
+.skrolltips svg { flex: none; width: 26px; height: 38px; color: var(--foton); overflow: visible; }
+.skrolltips .hjul { animation: hjul 1.8s ease-in-out infinite; }
+.skrolltips .svep { animation: svep 1.8s ease-in-out infinite; }
+@keyframes hjul { 0% { transform: translateY(0); opacity: 1; } 60% { transform: translateY(7px); opacity: 0; } 61%, 100% { transform: translateY(0); opacity: 0; } 80%, 100% { opacity: 1; } }
+@keyframes svep { 0% { transform: translateY(8px); opacity: 0; } 20% { opacity: 1; } 70% { transform: translateY(-8px); opacity: 1; } 100% { transform: translateY(-8px); opacity: 0; } }
+.st-rad1 { display: block; font-size: 14.5px; font-weight: 500; letter-spacing: .01em; }
+.st-rad1 b { color: var(--foton); font-weight: 600; }
+.st-rad2 { display: block; margin-top: 2px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+.st-mus { display: contents; }
+.st-pek { display: none; }
+@media not (any-pointer: fine) { .st-mus { display: none; } .st-pek { display: contents; } }
 .knapp {
   font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; cursor: pointer;
   border-radius: 999px; padding: 13px 20px; display: inline-flex; align-items: center; gap: 10px; border: 1px solid transparent;
@@ -331,6 +343,8 @@ body.omlopp main#resa { touch-action: none; }
   .s-data div:nth-child(3) { border-left: 0; padding-left: 0; }
   .s-data div:nth-child(n+3) { border-top: 1px solid var(--hud2); }
   .s-knappar { margin-top: 16px; }
+  .skrolltips { margin-top: 16px; padding: 9px 16px 9px 12px; gap: 12px; }
+  .st-rad1 { font-size: 13px; }
   .knapp { padding: 11px 16px; font-size: 10.5px; }
   .klocka { bottom: 16px; }
   .k-tid { font-size: 26px; }
@@ -353,6 +367,7 @@ body.omlopp main#resa { touch-action: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .status .pil { animation: none; }
+  .skrolltips .hjul, .skrolltips .svep { animation: none; }
 }
 </style>
 </head>
@@ -1563,7 +1578,13 @@ const SKOTT = {
 const START_SPIN = { solen: 0, merkurius: 1.2, venus: 0, jorden: 4.9, manen: 4.2, mars: 3.2, jupiter: 1.0, saturnus: 0.4, uranus: 0, neptunus: 0, pluto: 4.3 };
 const STOPP = [...PLANETER.map((p) => p.id), 'slut'];
 const NS = STOPP.length;
-const SLUT_W = new V3(-620, 190, -1380);
+// avstånden längs resan dras ut, så att världarna inte ligger tätt (månen behåller sitt avstånd till jorden)
+const AVST = 1.9;
+const zVarld = (id) => id === 'manen' ? LAYOUT.jorden.Z * AVST + (LAYOUT.manen.Z - LAYOUT.jorden.Z) : LAYOUT[id].Z * AVST;
+// slutstationen: långt ut åt sidan, med blicken tillbaka mot solen
+const SLUT_P = new V3(-620, 230, -1380).multiplyScalar(AVST);
+const SLUT_T = new V3(257, -20, -734).multiplyScalar(AVST);
+const VOY_POS = new V3();
 
 const scen = new THREE.Scene();
 const kamera = new THREE.PerspectiveCamera(48, 1, 0.05, 20000);
@@ -1645,11 +1666,275 @@ scen.add(strimmor.linjer, strimmor.punkter);
 const kroppar = PLANETER.map((p) => {
   const L = LAYOUT[p.id];
   const o = byggPlanet(p, { glod: p.sol ? 3.2 : 4.6, startSpin: START_SPIN[p.id] || 0 });
-  o.root.position.set(L.X, L.Y, -L.Z);
+  o.root.position.set(L.X, L.Y, -zVarld(p.id));
   o.root.scale.setScalar(L.R);
   scen.add(o.root);
   return o;
 });
+
+/* ---------- Voyager 1 vid slutstationen ----------
+   Byggd av enkla former efter NASA:s ritningar, i meter: parabolantennen
+   (3,7 m), det tiokantiga skrovet med guldskivan, bommen med de tre
+   radioisotopgeneratorerna, vetenskapsbommen med kamerorna och den långa
+   magnetometerbommen. Sonden ritas i sin egen skala, nära kameran. */
+const voyager = (() => {
+  const root = new THREE.Group(), kropp = new THREE.Group();
+  root.add(kropp);
+  root.visible = false;
+  const solRikt = SLUT_P.clone().negate().normalize();
+
+  // omgivning för metallytorna: mörk rymd med solen som en ljus fläck
+  const pm = new THREE.PMREMGenerator(renderer);
+  const es = new THREE.Scene();
+  es.add(new THREE.Mesh(new THREE.SphereGeometry(50, 32, 16), new THREE.MeshBasicMaterial({ color: 0x0a0f1d, side: THREE.BackSide })));
+  const band = new THREE.Mesh(new THREE.TorusGeometry(47, 7, 8, 64), new THREE.MeshBasicMaterial({ color: 0x232b44 }));
+  band.rotation.set(1.1, 0.4, 0);
+  es.add(band);
+  const solFlack = new THREE.Mesh(new THREE.SphereGeometry(4, 16, 8), new THREE.MeshBasicMaterial({ color: new THREE.Color(16, 13, 9) }));
+  solFlack.position.copy(solRikt).multiplyScalar(40);
+  es.add(solFlack);
+  const env = pm.fromScene(es, 0.02).texture;
+  pm.dispose();
+
+  function canvasTex(w, h, rita, farg) {
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    rita(c.getContext('2d'), w, h);
+    const t = new THREE.CanvasTexture(c);
+    if (farg) t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = ANISO;
+    return t;
+  }
+  // skrynklig isoleringsfolie
+  function veck(g, x0, y0, w, h, n) {
+    for (let i = 0; i < n; i++) {
+      const x = x0 + Math.random() * w, y = y0 + Math.random() * h, a = Math.random() * Math.PI, l = 6 + Math.random() * 34;
+      const ljus = Math.random() < 0.5;
+      g.strokeStyle = ljus ? `rgba(255,255,255,${0.12 + Math.random() * 0.3})` : `rgba(0,0,0,${0.12 + Math.random() * 0.3})`;
+      g.lineWidth = 0.6 + Math.random() * 1.8;
+      g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l); g.stroke();
+    }
+  }
+  const veckTex = canvasTex(256, 256, (g, w, h) => { g.fillStyle = '#808080'; g.fillRect(0, 0, w, h); veck(g, 0, 0, w, h, 320); });
+  veckTex.wrapS = veckTex.wrapT = THREE.RepeatWrapping;
+
+  const vit = new THREE.MeshStandardMaterial({ color: 0xe9e6dd, roughness: 0.55, metalness: 0, side: THREE.DoubleSide, envMap: env, envMapIntensity: 0.6 });
+  const stomme = new THREE.MeshStandardMaterial({ color: 0xa7adb5, roughness: 0.4, metalness: 0.7, envMap: env });
+  const mork = new THREE.MeshStandardMaterial({ color: 0x2b2e34, roughness: 0.6, metalness: 0.4, envMap: env });
+  const guld = new THREE.MeshStandardMaterial({ color: 0xdba646, roughness: 0.3, metalness: 0.95, envMap: env, bumpMap: veckTex, bumpScale: 1.2 });
+  const kamFarg = new THREE.MeshStandardMaterial({ color: 0xd9d2c0, roughness: 0.5, metalness: 0.1, envMap: env });
+
+  const Y = new V3(0, 1, 0);
+  const stavGeo = new THREE.CylinderGeometry(1, 1, 1, 6, 1, true);
+  function stav(a, b, r, mat, f) {
+    const d = new V3().subVectors(b, a), L = d.length();
+    const m = new THREE.Mesh(stavGeo, mat);
+    m.scale.set(r, L, r);
+    m.position.copy(a).addScaledVector(d, 0.5);
+    m.quaternion.setFromUnitVectors(Y, d.divideScalar(L));
+    f.add(m);
+    return m;
+  }
+  function fackverk(a, b, bredd, n, f) {
+    const d = new V3().subVectors(b, a).normalize();
+    const u = new V3().crossVectors(d, Math.abs(d.y) < 0.9 ? Y : new V3(1, 0, 0)).normalize();
+    const v = new V3().crossVectors(d, u);
+    const horn = [0, 1, 2].map((k) => u.clone().multiplyScalar(Math.cos(k * 2.0944) * bredd).addScaledVector(v, Math.sin(k * 2.0944) * bredd));
+    horn.forEach((h) => stav(a.clone().add(h), b.clone().add(h), 0.016, stomme, f));
+    for (let i = 0; i < n; i++) {
+      const p0 = a.clone().lerp(b, i / n), p1 = a.clone().lerp(b, (i + 1) / n);
+      for (let k = 0; k < 3; k++) stav(p0.clone().add(horn[k]), p1.clone().add(horn[(k + 1) % 3]), 0.009, stomme, f);
+    }
+  }
+  // lägger en grupp längs riktningen a → b, med gruppens y-axel längs bommen
+  function langs(a, b, t, f) {
+    const g = new THREE.Group();
+    g.position.copy(a).lerp(b, t);
+    g.quaternion.setFromUnitVectors(Y, new V3().subVectors(b, a).normalize());
+    f.add(g);
+    return g;
+  }
+
+  // parabolantennen, öppningen längs +y
+  const fokus = 1.52, Rd = 1.83, djup = Rd * Rd / (4 * fokus);
+  const pts = [];
+  for (let i = 0; i <= 28; i++) { const r = Rd * i / 28; pts.push(new THREE.Vector2(r, r * r / (4 * fokus))); }
+  kropp.add(new THREE.Mesh(new THREE.LatheGeometry(pts, 80), vit));
+  const kant = new THREE.Mesh(new THREE.TorusGeometry(Rd, 0.024, 6, 120), stomme);
+  kant.rotation.x = Math.PI / 2; kant.position.y = djup;
+  kropp.add(kant);
+  for (let k = 0; k < 12; k++) {
+    const a = k / 12 * Math.PI * 2, c = Math.cos(a), sn = Math.sin(a);
+    const r0 = 0.4, r1 = 1.78;
+    stav(new V3(r0 * c, r0 * r0 / (4 * fokus) - 0.05, r0 * sn), new V3(r1 * c, r1 * r1 / (4 * fokus) - 0.04, r1 * sn), 0.018, stomme, kropp);
+  }
+  const sub = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.16, 0.05, 32), vit);
+  sub.position.y = 1.25; kropp.add(sub);
+  for (let k = 0; k < 4; k++) {
+    const a = k / 4 * Math.PI * 2 + 0.4;
+    stav(new V3(1.05 * Math.cos(a), 1.05 * 1.05 / (4 * fokus), 1.05 * Math.sin(a)), new V3(0.14 * Math.cos(a), 1.23, 0.14 * Math.sin(a)), 0.014, stomme, kropp);
+  }
+  const horn = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.13, 0.42, 16), stomme);
+  horn.position.y = 0.21; kropp.add(horn);
+
+  // skrovet: tio fack, omväxlande guldfolie och mörka elektroniklådor
+  const skrovTex = canvasTex(1024, 128, (g, w, h) => {
+    for (let j = 0; j < 10; j++) {
+      const x = j * w / 10;
+      if (j % 2 === 0) {
+        g.fillStyle = '#b8892f'; g.fillRect(x, 0, w / 10, h);
+        veck(g, x, 0, w / 10, h, 70);
+      } else {
+        g.fillStyle = '#2c2f35'; g.fillRect(x, 0, w / 10, h);
+        g.strokeStyle = 'rgba(160,168,180,.5)'; g.lineWidth = 2;
+        g.strokeRect(x + 6, 10, w / 10 - 12, h - 20);
+        if (j === 3) for (let k = 0; k < 9; k++) { g.fillStyle = k % 2 ? '#8d939c' : '#c9ced6'; g.fillRect(x + 14 + k * 9, 22, 7, h - 44); }
+        else { g.fillStyle = 'rgba(120,128,140,.55)'; g.fillRect(x + 16, 24, w / 10 - 32, 18); g.fillRect(x + 16, h - 46, w / 10 - 32, 14); }
+      }
+      g.fillStyle = 'rgba(0,0,0,.6)'; g.fillRect(x, 0, 2, h);
+    }
+  }, true);
+  const metallTex = canvasTex(1024, 128, (g, w, h) => {
+    for (let j = 0; j < 10; j++) { g.fillStyle = j % 2 === 0 ? '#f0f0f0' : '#555'; g.fillRect(j * w / 10, 0, w / 10, h); }
+  });
+  const skrovMat = new THREE.MeshStandardMaterial({ map: skrovTex, metalnessMap: metallTex, metalness: 1, roughness: 0.38, envMap: env, bumpMap: veckTex, bumpScale: 0.8 });
+  const skrov = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.95, 0.47, 10), [skrovMat, mork, mork]);
+  skrov.position.y = -0.38; kropp.add(skrov);
+  const adapter = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.62, 0.16, 10), mork);
+  adapter.position.y = -0.07; kropp.add(adapter);
+  const tank = new THREE.Mesh(new THREE.SphereGeometry(0.38, 32, 16), guld);
+  tank.position.y = -0.72; kropp.add(tank);
+  const kjol = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.42, 0.24, 16), mork);
+  kjol.position.y = -0.98; kropp.add(kjol);
+
+  // guldskivan på ett av de mörka facken
+  const REKORD = 5;
+  const skivTex = canvasTex(256, 256, (g, w, h) => {
+    const gr = g.createRadialGradient(w * 0.42, h * 0.38, 10, w / 2, h / 2, w / 2);
+    gr.addColorStop(0, '#f6d77a'); gr.addColorStop(1, '#a8771f');
+    g.fillStyle = gr; g.fillRect(0, 0, w, h);
+    g.strokeStyle = 'rgba(70,45,5,.75)'; g.lineWidth = 2;
+    // skivan med pickupen, pulsarkartan och väteatomen, förenklat
+    g.beginPath(); g.arc(78, 80, 34, 0, Math.PI * 2); g.stroke();
+    g.beginPath(); g.arc(78, 80, 6, 0, Math.PI * 2); g.stroke();
+    g.beginPath(); g.moveTo(112, 60); g.lineTo(84, 92); g.stroke();
+    for (let k = 0; k < 14; k++) { const a = k / 14 * Math.PI * 2 + 0.2, l = 22 + (k * 37 % 30); g.beginPath(); g.moveTo(80, 182); g.lineTo(80 + Math.cos(a) * l, 182 + Math.sin(a) * l); g.stroke(); }
+    g.beginPath(); g.arc(170, 200, 9, 0, Math.PI * 2); g.stroke();
+    g.beginPath(); g.arc(205, 200, 9, 0, Math.PI * 2); g.stroke();
+    g.beginPath(); g.moveTo(179, 200); g.lineTo(196, 200); g.stroke();
+    g.beginPath(); g.moveTo(150, 70); g.lineTo(210, 70); g.moveTo(150, 90); g.lineTo(200, 90); g.moveTo(150, 110); g.lineTo(215, 110); g.stroke();
+  }, true);
+  const skivMat = new THREE.MeshStandardMaterial({ map: skivTex, color: 0xffffff, metalness: 0.55, roughness: 0.32, envMap: env, emissive: 0x3a2a08, emissiveMap: skivTex, emissiveIntensity: 0.6 });
+  const skiva = new THREE.Mesh(new THREE.CylinderGeometry(0.19, 0.19, 0.014, 48), [guld, skivMat, guld]);
+  const vR = (REKORD + 0.5) / 10 * Math.PI * 2;
+  const nR = new V3(Math.sin(vR), 0, Math.cos(vR));
+  skiva.position.copy(nR).multiplyScalar(0.95 * Math.cos(Math.PI / 10) + 0.008).setY(-0.38);
+  skiva.quaternion.setFromUnitVectors(Y, nR);
+  kropp.add(skiva);
+
+  // bommen med de tre radioisotopgeneratorerna
+  const rA = new V3(-0.88, -0.42, 0), rB = new V3(-3.7, -0.95, 0);
+  fackverk(rA, rB, 0.075, 11, kropp);
+  const rtgMitt = new THREE.Object3D();
+  [0.56, 0.73, 0.9].forEach((t, q) => {
+    const g = langs(rA, rB, t, kropp);
+    g.add(new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.11, 0.48, 16), mork));
+    for (let k = 0; k < 6; k++) {
+      const fena = new THREE.Mesh(new THREE.BoxGeometry(0.014, 0.46, 0.12), mork);
+      const a = k / 6 * Math.PI * 2;
+      fena.position.set(Math.cos(a) * 0.16, 0, Math.sin(a) * 0.16);
+      fena.rotation.y = -a;
+      g.add(fena);
+    }
+    [-0.25, 0.25].forEach((yy) => { const fl = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.13, 0.025, 16), stomme); fl.position.y = yy; g.add(fl); });
+    if (q === 1) { rtgMitt.position.set(0, 0, 0.2); g.add(rtgMitt); }
+  });
+
+  // vetenskapsbommen med instrumenten och kameraplattformen ytterst
+  const vA = new V3(0.88, -0.36, 0), vB = new V3(3.1, -0.55, 0);
+  fackverk(vA, vB, 0.07, 9, kropp);
+  const crs = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.26, 0.36), guld);
+  crs.position.copy(vA).lerp(vB, 0.32).add(new V3(0, 0.2, 0)); kropp.add(crs);
+  const lecp = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.11, 0.28, 20), mork);
+  lecp.position.copy(vA).lerp(vB, 0.58).add(new V3(0, -0.2, 0)); kropp.add(lecp);
+  const platt = new THREE.Group();
+  platt.position.copy(vB).add(new V3(0.15, 0.05, 0));
+  kropp.add(platt);
+  const lada = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.34, 0.5), [guld, mork, mork, mork, guld, mork]);
+  platt.add(lada);
+  const kamRikt = new V3(0.35, 0.25, -1).normalize();
+  [[0.09, 0.95, -0.12], [0.065, 0.55, 0.14]].forEach(([r, l, dy]) => {
+    const kam = new THREE.Mesh(new THREE.CylinderGeometry(r, r, l, 24), kamFarg);
+    kam.quaternion.setFromUnitVectors(Y, kamRikt);
+    kam.position.copy(kamRikt).multiplyScalar(l / 2 + 0.1).add(new V3(0.05, dy + 0.12, 0));
+    platt.add(kam);
+    const lins = new THREE.Mesh(new THREE.CylinderGeometry(r * 0.8, r * 0.8, 0.01, 24), mork);
+    lins.quaternion.copy(kam.quaternion);
+    lins.position.copy(kam.position).addScaledVector(kamRikt, l / 2 + 0.005);
+    platt.add(lins);
+  });
+  const iris = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.36, 28), vit);
+  iris.position.set(0, -0.32, 0.05); platt.add(iris);
+  const kamAnkare = new THREE.Object3D();
+  kamAnkare.position.set(0.15, 0.32, -0.3); platt.add(kamAnkare);
+
+  // magnetometerbommen, 13 m, och de två tunna radioantennerna
+  const mA = new V3(0, -0.3, 0.9), mRikt = new V3(0.3, 0.12, 1).normalize();
+  stav(mA, mA.clone().addScaledVector(mRikt, 13), 0.028, vit, kropp);
+  [6.5, 13].forEach((l) => { const sn = langs(mA, mA.clone().addScaledVector(mRikt, 13), l / 13, kropp); sn.add(new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.2, 16), vit)); });
+  const aA = new V3(0.2, -0.62, 0.55);
+  [[0.62, 0.12, 0.78], [-0.3, 0.12, 0.95]].forEach((d) => stav(aA, aA.clone().addScaledVector(new V3(...d).normalize(), 10), 0.011, stomme, kropp));
+
+  // ankare för fältanteckningarna
+  const antAnkare = new THREE.Object3D();
+  antAnkare.position.set(Rd * Math.cos(-0.9), djup, Rd * Math.sin(-0.9));
+  kropp.add(antAnkare);
+  const skivAnkare = new THREE.Object3D();
+  skivAnkare.position.copy(skiva.position);
+  kropp.add(skivAnkare);
+
+  // ljus som bara de vanliga materialen påverkas av (planeterna har egna ljusberäkningar).
+  // Solen ligger bakom sonden sett från kameran, så den ger kantljus. Huvudljuset kommer
+  // som i NASA:s illustrationer från betraktarens sida, annars syns bara skuggsidan.
+  const sol = new THREE.DirectionalLight(0xffe6c0, 2.4);
+  const huvud = new THREE.DirectionalLight(0xf4f1ea, 2.6);
+  sol.target = root; huvud.target = root;
+  const fyll = new THREE.HemisphereLight(0x8ea4d6, 0x141824, 0.45);
+  scen.add(sol, huvud, fyll);
+
+  const noter = [
+    { ankare: antAnkare, text: 'Parabolantennen', sub: '3,7 m bred, riktad mot jorden' },
+    { ankare: skivAnkare, text: 'Guldskivan', sub: 'ljud, musik och bilder från jorden' },
+    { ankare: rtgMitt, text: 'Radioisotopgeneratorer', sub: 'ger el ur värmen från plutonium' },
+    { ankare: kamAnkare, text: 'Kamerorna', sub: 'tog bilden av jorden som en blek blå prick' },
+  ];
+
+  let grundVrid = 0;
+  const VRID_EXTRA = 0.15;
+  // placeras framför slutstationens kamera: till höger om texten, på smala skärmar under den
+  const _d = new V3(), _r = new V3(), _u = new V3(), _m4 = new THREE.Matrix4();
+  function placera(aspect) {
+    _d.copy(SLUT_T).sub(SLUT_P).normalize();
+    _r.crossVectors(_d, UPP).normalize();
+    _u.crossVectors(_r, _d);
+    const smal = aspect < 0.9;
+    root.position.copy(SLUT_P).addScaledVector(_d, smal ? 20 : 14).addScaledVector(_r, smal ? 0.9 : 3.6).addScaledVector(_u, smal ? -6.2 : -0.5);
+    VOY_POS.copy(root.position);
+    // antennen pekar ungefär mot solen och jorden, vriden så att sonden syns snett från sidan
+    const sv = root.position.clone().negate().normalize();
+    const b = sv.clone().multiplyScalar(0.3).addScaledVector(_r, 1).addScaledVector(_u, 0.3).normalize();
+    const x = _r.clone().addScaledVector(b, -_r.dot(b)).normalize().negate();
+    const z = new V3().crossVectors(x, b);
+    _m4.makeBasis(x, b, z);
+    root.quaternion.setFromRotationMatrix(_m4);
+    // vrid kring antennaxeln så att guldskivans fack vetter mot kameran
+    const c = _d.clone().negate().applyQuaternion(root.quaternion.clone().invert());
+    grundVrid = Math.atan2(c.x, c.z) - vR + VRID_EXTRA;
+    sol.position.copy(root.position).addScaledVector(sv, 50);
+    huvud.position.copy(root.position).addScaledVector(_d, -30).addScaledVector(_r, -22).addScaledVector(_u, 26);
+  }
+  scen.add(root);
+  return { root, kropp, noter, placera, vrid: () => grundVrid };
+})();
 
 /* ---------- Kamerans vyer ---------- */
 const _A = new V3(), _B = new V3(), _D = new V3(), _U = new V3(), _L = new V3(), _Ad = new V3(), _Bd = new V3();
@@ -1669,10 +1954,10 @@ const nyPose = () => ({ pos: new V3(), quat: new Q4(), W: new V3(), R: 1 });
 function pose(i, tid, ut) {
   if (i >= PLANETER.length) {
     // långt ut åt sidan: planeterna syns halvbelysta i en diagonal rad, solen som en stark stjärna
-    ut.pos.set(-620, 230, -1380);
-    _D.set(257, -20, -734).sub(ut.pos).normalize();
+    ut.pos.copy(SLUT_P);
+    _D.copy(SLUT_T).sub(ut.pos).normalize();
     quatFran(_D, UPP, ut.quat);
-    ut.W.copy(SLUT_W); ut.R = 30;
+    ut.W.copy(VOY_POS); ut.R = 3;
     return ut;
   }
   const p = PLANETER[i], o = kroppar[i], W = o.root.position, R = o.root.scale.x;
@@ -1720,7 +2005,11 @@ function resPose(s, tid) {
   const gap = _f.length();
   _f.divideScalar(gap);
   _p1.copy(poseA.pos).sub(poseA.W).normalize().multiplyScalar(poseA.R * 1.6).add(poseA.pos).addScaledVector(_f, gap * 0.28);
-  _p2.copy(poseB.pos).sub(poseB.W).normalize().multiplyScalar(poseB.R * 1.6).add(poseB.pos).addScaledVector(_f, -gap * 0.28);
+  if (i + 1 === NS - 1) {
+    _D.copy(SLUT_T).sub(SLUT_P).normalize();
+    _U.crossVectors(_D, UPP).normalize();
+    _p2.copy(poseB.pos).addScaledVector(_U, -gap * 0.3).addScaledVector(UPP, gap * 0.08);
+  } else _p2.copy(poseB.pos).sub(poseB.W).normalize().multiplyScalar(poseB.R * 1.6).add(poseB.pos).addScaledVector(_f, -gap * 0.28);
   bezier(poseA.pos, _p1, _p2, poseB.pos, e, malPose.pos);
   _D.copy(poseB.W).sub(malPose.pos).normalize();
   quatFran(_D, UPP, _qt);
@@ -1909,7 +2198,16 @@ function presentera(k) {
 function uppdateraNoter(aktiv, synlighet) {
   const w = window.innerWidth, h = window.innerHeight;
   const kandidater = [];
-  if (noterPa && aktiv >= 0 && aktiv < PLANETER.length && synlighet > 0.5) {
+  if (noterPa && aktiv === NS - 1 && synlighet > 0.5 && voyager.root.visible) {
+    voyager.noter.forEach((n, j) => {
+      n.ankare.getWorldPosition(_np);
+      _nv.copy(_np).project(kamera);
+      if (_nv.z > 1) return;
+      const x = (_nv.x + 1) / 2 * w, y = (1 - _nv.y) / 2 * h;
+      if (x < 30 || x > w - 30 || y < 90 || y > h - 70) return;
+      kandidater.push({ nyckel: 'voyager' + j, n, x, y });
+    });
+  } else if (noterPa && aktiv >= 0 && aktiv < PLANETER.length && synlighet > 0.5) {
     const p = PLANETER[aktiv], o = kroppar[aktiv];
     (NOTER[p.id] || []).forEach((n, j) => {
       if (n.villkor && !n.villkor(o)) return;
@@ -1969,7 +2267,9 @@ const stopptext = $('stopptext');
 const klockaEl = document.querySelector('.klocka');
 const statusEl = $('status');
 const resaEl = $('resa');
-let stoppH = window.innerHeight * 1.5;
+// varje sträcka mellan två världar är tre skärmhöjder lång, så att man skrollar en stund mellan dem
+const STOPP_HOJD = 3;
+let stoppH = window.innerHeight * STOPP_HOJD;
 STOPP.forEach((id, i) => {
   const sek = document.createElement('section');
   sek.className = 'stopp';
@@ -1977,11 +2277,26 @@ STOPP.forEach((id, i) => {
   resaEl.appendChild(sek);
 });
 function satSektionshojd() {
-  stoppH = Math.round(window.innerHeight * 1.5);
+  stoppH = Math.round(window.innerHeight * STOPP_HOJD);
   [...resaEl.children].forEach((s, i) => { s.style.height = (i === NS - 1 ? window.innerHeight : stoppH) + 'px'; });
 }
 satSektionshojd();
 function scrollS() { return klamp(window.scrollY / stoppH, 0, NS - 1); }
+// Stannar man strax före en värld på väg mot den glider sidan det sista biten fram.
+// Åt andra hållet, när man just lämnat en värld, dras man aldrig tillbaka.
+let landningsTimer = 0, senastY = window.scrollY, skrollRiktning = 0;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y !== senastY) skrollRiktning = Math.sign(y - senastY);
+  senastY = y;
+  clearTimeout(landningsTimer);
+  landningsTimer = setTimeout(() => {
+    if (omlopp.aktiv || karta.oppen) return;
+    const s = window.scrollY / stoppH, k = Math.round(s), d = s - k;
+    if (Math.abs(d) < 0.004 || Math.abs(d) > 0.26) return;
+    if ((d < 0 && skrollRiktning > 0) || (d > 0 && skrollRiktning < 0)) gaTillStopp(k);
+  }, 280);
+}, { passive: true });
 function gaTillStopp(i, snabbt) {
   window.scrollTo({ top: klamp(i, 0, NS - 1) * stoppH, behavior: snabbt || REDUCERA ? 'auto' : 'smooth' });
 }
@@ -2019,13 +2334,23 @@ function fyllStopptext(i) {
       <h1 class="s-namn intro-namn">Ljusresan</h1>
       <div class="s-stråle"></div>
       <p class="s-ingress">Följ en ljusstråle från solens yta ut till Pluto och vidare. I verkligheten tar resan till Pluto fem och en halv timme. Här tar den så lång tid som du vill: skrolla för att resa, stanna vid varje värld och gå in i omloppsbana.</p>
-      <div class="s-knappar"><button class="knapp prim" data-till="1">Starta resan</button><button class="knapp sek" data-omlopp="0">Om solen</button></div>`;
+      <div class="s-knappar"><button class="knapp prim" data-till="1">Starta resan</button><button class="knapp sek" data-omlopp="0">Om solen</button></div>
+      <div class="skrolltips">
+        <span class="st-mus">
+          <svg viewBox="0 0 26 38" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="1.5" y="1.5" width="23" height="35" rx="11.5"/><line class="hjul" x1="13" y1="8" x2="13" y2="13" stroke-linecap="round" stroke-width="2.6"/></svg>
+          <span><span class="st-rad1">Rulla med <b>mushjulet</b> för att påbörja ljusets resa</span><span class="st-rad2">eller använd piltangenterna</span></span>
+        </span>
+        <span class="st-pek">
+          <svg viewBox="0 0 26 38" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 30V8M7 14l6-6 6 6"/><circle class="svep" cx="13" cy="26" r="4.5" fill="currentColor" stroke="none" opacity=".85"/></svg>
+          <span><span class="st-rad1">Svep uppåt med <b>fingret</b> för att påbörja ljusets resa</span><span class="st-rad2">en värld i taget</span></span>
+        </span>
+      </div>`;
   } else if (i === NS - 1) {
     stopptext.innerHTML = `
       <div class="s-rad"><div class="s-nr">∞</div><div class="s-kicker">Stopp <b>12</b> av 12</div></div>
       <h2 class="s-namn lang">Bortom Pluto</h2>
       <div class="s-stråle"></div>
-      <p class="s-ingress">Ungefär här, 170 gånger så långt från solen som jorden, finns Voyager 1: det föremål som människor har skickat längst bort. Den sköts upp 1977, och ljuset behöver nästan ett helt dygn för att nå den. Härifrån är solen bara en ljusstark stjärna. Under resan stod världarna på rad och avstånden var hoptryckta, men ljusklockan visade de verkliga tiderna.</p>
+      <p class="s-ingress">Rymdsonden framför dig är Voyager 1, det föremål som människor har skickat längst bort. Den sköts upp 1977 och är nu ungefär 170 gånger så långt från solen som jorden. Ljuset behöver nästan ett helt dygn för att nå den, och härifrån är solen bara en ljusstark stjärna. Under resan stod världarna på rad och avstånden var hoptryckta, men ljusklockan visade de verkliga tiderna.</p>
       <dl class="s-data">
         <div><dt>Voyager 1</dt><dd>${nb('cirka 170 AE')}</dd></div>
         <div><dt>Ljuset</dt><dd>${nb('nästan 24 h')}</dd></div>
@@ -2573,8 +2898,8 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') { if (karta.oppen) stangKarta(); else if (omlopp.aktiv) stangDossier(); return; }
   if (omlopp.aktiv || karta.oppen) return;
   const s = scrollS();
-  if (e.key === 'ArrowRight') { gaTillStopp(Math.floor(s + 0.5) + 1); e.preventDefault(); }
-  if (e.key === 'ArrowLeft') { gaTillStopp(Math.ceil(s - 0.5) - 1); e.preventDefault(); }
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { gaTillStopp(Math.floor(s + 0.5) + 1); e.preventDefault(); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { gaTillStopp(Math.ceil(s - 0.5) - 1); e.preventDefault(); }
 });
 $('noterKnapp').addEventListener('click', (e) => { noterPa = !noterPa; e.currentTarget.setAttribute('aria-pressed', noterPa); });
 
@@ -2757,6 +3082,7 @@ function anpassaStorlek() {
   kamera.aspect = w / h;
   kamera.fov = kamera.aspect < 0.9 ? 64 : 48;
   kamera.updateProjectionMatrix();
+  voyager.placera(kamera.aspect);
   if (!baraHojd) {
     const s = scrollS();
     satSektionshojd();
@@ -2804,6 +3130,13 @@ function frame(nu) {
   // närplanet efter avståndet till närmaste yta
   let narmast = 1e9;
   kroppar.forEach((o) => { narmast = Math.min(narmast, kamera.position.distanceTo(o.root.position) - o.root.scale.x * 1.03); });
+  voyager.root.visible = s > NS - 2.15;
+  if (voyager.root.visible) {
+    narmast = Math.min(narmast, Math.max(0.3, kamera.position.distanceTo(voyager.root.position) - 8));
+    const vagga = REDUCERA ? 0 : 1;
+    voyager.kropp.rotation.y = voyager.vrid() + Math.sin(tid * 0.06) * 0.1 * vagga;
+    voyager.kropp.rotation.z = Math.sin(tid * 0.045) * 0.035 * vagga;
+  }
   kamera.near = klamp(narmast * 0.3, 0.02, 4);
   satVyforskjutning(omlopp.g);
   kamera.updateProjectionMatrix();
@@ -2853,8 +3186,8 @@ function uppdateraHUD(s, info) {
   const synlig = omlopp.aktiv ? 0 : mjuk(-0.15, -0.06, nara) * (1 - mjuk(0.14, 0.24, nara));
   if (k !== visatStopp && !omlopp.aktiv) fyllStopptext(k);
   // presentera först när kameran är framme, annars är världen fortfarande liten i bild
-  const framme = k < PLANETER.length && kamera.position.distanceTo(malPose.pos) < kroppar[k].root.scale.x * 0.06;
-  if (synlig > 0.85 && framme && presenterat !== k && !omlopp.aktiv) { if (presentera(k)) { presenterat = k; musik.ankomst(); } }
+  const framme = kamera.position.distanceTo(malPose.pos) < (k < PLANETER.length ? kroppar[k].root.scale.x * 0.06 : 0.4);
+  if (synlig > 0.85 && framme && presenterat !== k && !omlopp.aktiv) { if (k >= PLANETER.length || presentera(k)) { presenterat = k; musik.ankomst(); } }
   if (synlig < 0.1 && presenterat === k) presenterat = -1;
   stopptext.style.opacity = (synlig * (1 - omlopp.g)).toFixed(3);
   stopptext.style.transform = `translateY(${((1 - synlig) * 16).toFixed(1)}px)`;

@@ -192,7 +192,7 @@ label.kryss { display: flex; align-items: center; gap: 7px; font-size: 13px; cur
     </div>
 </aside>
 
-<div class="ui tips">Dra för att vrida på kameran, skrolla för att zooma. Mellanslag pausar.</div>
+<div class="ui tips">Dra för att vrida på kameran, skrolla för att zooma. Mellanslag pausar. När klossarna har lagt sig vilar simuleringen.</div>
 
 <div class="ui ladda" id="ladda"><div><span class="snurr"></span><span id="ladda-text">Fyller akvariet …</span></div></div>
 
@@ -552,6 +552,25 @@ const DELSTEG = 6;
 // Långsam dator: ett 1/60-sekundssteg per bildruta (simuleringen går då i
 // ultrarapid). Snabb dator: step() utan argument, som håller realtid.
 let ultrarapid = true;
+// Högst 30 bilder/s. Plask och flytande syns lika bra, och arbetet halveras
+// på datorer som annars hade ritat 60.
+const BILDTID = 1000 / 30;
+
+// Viloläge: när klossarna har lagt sig stannar både fysik och ritning, och
+// bilden ritas bara om när kameran rör sig. Fart duger inte som mått (metoden
+// lämnar ett jämnt brus på cirka 0,08 m/s även i vila), så vi mäter hur långt
+// klossarnas tyngdpunkter och vattnet faktiskt flyttat sig per simulerad
+// sekund. Flytande klossar guppar några millimeter länge; därför gränserna
+// nedan och ett tak efter 60 simulerade sekunder.
+const VILA = { klossMax: 0.004, vattenMedel: 0.003, lugnaKoll: 2, takSek: 60 };
+let vila = false;
+let simTid = 0;          // simulerad tid sedan släppet, s
+let nastaKoll = 1;
+let foreKoll = null;
+let lugnaKoll = 0;
+let kollar = false;
+let kroppar = [];        // partikelintervall per kloss
+let tvingaRita = true;   // rita nästa bild även i vila (bygge, resize, vyval)
 
 function skapaKloss(id, i) {
     const geo = new RoundedBoxGeometry(KLOSS, KLOSS, KLOSS, 2, 0.012);
@@ -589,54 +608,120 @@ async function bygg() {
         ...v.sim,
         appearance: v.utseende,
     });
-    tillstand.klossar.forEach((id, i) => {
+    const handtag = tillstand.klossar.map((id, i) => {
         // Solvern har alltid vilodensiteten 1 000 kg/m³; skala så att kvoten stämmer.
         const rho = materialAv(id).rho * 1000 / v.rho;
-        ny.addSoftbody({ mesh: klossMeshar[i], density: rho, softness: 0 });
+        return ny.addSoftbody({ mesh: klossMeshar[i], density: rho, softness: 0 });
     });
     try {
         await ny.start();
         ny.showParticles = document.getElementById('partiklar').checked;
         sim = ny;
         window.__sim = ny;
+        kroppar = handtag.map((h) => h.softbodySystem.particleRange(h.bodyIndex));
+        vila = false; simTid = 0; nastaKoll = 1; foreKoll = null; lugnaKoll = 0;
         statusEl.textContent = `${fmt(ny.particleCount)} partiklar · radie ${fmt(ny.particleRadius * 1000, 1)} mm`;
     } catch (e) {
         console.error(e);
         statusEl.textContent = 'Fel: ' + e.message;
     }
     laddEl.hidden = true;
+    tvingaRita = true;
     bygger = false;
     if (byggIgen) { byggIgen = false; bygg(); }
 }
 
 // ─── Bildrutor ─────────────────────────────────────────────────────────────
-let fpsTid = performance.now(), fpsAntal = 0, fps = 0;
-async function ruta() {
-    if (sim && !bygger && !pausad) {
-        try { await (ultrarapid ? sim.step(1 / 60) : sim.step()); } catch (e) { console.error(e); }
+let fpsTid = performance.now(), fpsAntal = 0, fps = 0, senastRitad = 0, braSek = 0;
+
+// Läser tillbaka partiklarna (väntar in grafikkortet, därför bara en gång per
+// simulerad sekund) och avgör om allt har lagt sig.
+async function kollaVila() {
+    kollar = true;
+    const s = sim;
+    try {
+        const P = (await s.particleSystem.readback()).positions;
+        if (s !== sim) return;  // simuleringen byggdes om under tiden
+        const centrum = kroppar.map(({ start, count }) => {
+            let x = 0, y = 0, z = 0;
+            for (let i = start; i < start + count; i++) { x += P[4 * i]; y += P[4 * i + 1]; z += P[4 * i + 2]; }
+            return [x / count, y / count, z / count];
+        });
+        const iKropp = new Uint8Array(s.particleCount);
+        for (const { start, count } of kroppar) iKropp.fill(1, start, start + count);
+        if (foreKoll) {
+            const klossMax = Math.max(...centrum.map((c, b) => Math.hypot(c[0] - foreKoll.c[b][0], c[1] - foreKoll.c[b][1], c[2] - foreKoll.c[b][2])));
+            let summa = 0, n = 0;
+            for (let i = 0; i < s.particleCount; i++) {
+                if (iKropp[i]) continue;
+                summa += Math.hypot(P[4 * i] - foreKoll.P[4 * i], P[4 * i + 1] - foreKoll.P[4 * i + 1], P[4 * i + 2] - foreKoll.P[4 * i + 2]);
+                n++;
+            }
+            const lugnt = klossMax < VILA.klossMax && summa / n < VILA.vattenMedel;
+            lugnaKoll = lugnt ? lugnaKoll + 1 : 0;
+            if (lugnaKoll >= VILA.lugnaKoll || simTid > VILA.takSek) {
+                vila = true;
+                statusEl.textContent = `${fmt(s.particleCount)} partiklar · vilar, klossarna har lagt sig`;
+            }
+        }
+        foreKoll = { c: centrum, P: P.slice(0, 4 * s.particleCount) };
+        nastaKoll = simTid + 1;
+    } catch (e) {
+        console.warn('Vilokollen misslyckades', e);
+        nastaKoll = simTid + 1;
+    } finally {
+        kollar = false;
     }
-    controls.update();
-    renderer.render(scene, camera);
-    fpsAntal++;
+}
+
+async function ruta(t) {
+    requestAnimationFrame(ruta);
+    if (t - senastRitad < BILDTID - 3) return;   // taket på 30 bilder/s
+    const sedan = senastRitad ? t - senastRitad : BILDTID;
+    senastRitad = t;
+    if (ritar) return;   // förra bilden är inte klar än
+    ritar = true;
+    const kameraRor = controls.update();
+    const aktiv = sim && !bygger && !pausad && !vila;
+    if (aktiv) {
+        try {
+            if (ultrarapid) { await sim.step(1 / 60); simTid += 1 / 60; }
+            else { await sim.step(); simTid += Math.min(sedan / 1000, 4 / 60); }
+        } catch (e) { console.error(e); }
+        if (simTid >= nastaKoll && !kollar) kollaVila();
+    }
+    if (aktiv || kameraRor || tvingaRita) {
+        renderer.render(scene, camera);
+        tvingaRita = false;
+        fpsAntal++;
+    }
+    ritar = false;
+
     const nu = performance.now();
     if (nu - fpsTid > 1000) {
         fps = Math.round((fpsAntal * 1000) / (nu - fpsTid));
         fpsTid = nu; fpsAntal = 0;
-        if (sim && !bygger && !pausad) {
+        if (aktiv) {
+            // Dynamisk upplösning: sänk snabbt när det går trögt, höj försiktigt
+            // när taket på 30 bilder/s hållits i tre sekunder.
             const fore = pr;
-            if (fps < 26 && pr > PR_MIN) pr = Math.max(PR_MIN, pr - 0.12);
-            else if (fps > 52 && pr < PR_MAX) pr = Math.min(PR_MAX, pr + 0.08);
+            if (fps < 24 && pr > PR_MIN) { pr = Math.max(PR_MIN, pr - 0.12); braSek = 0; }
+            else if (fps >= 29) { if (++braSek >= 3 && pr < PR_MAX) { pr = Math.min(PR_MAX, pr + 0.05); braSek = 0; } }
+            else braSek = 0;
             if (pr !== fore) renderer.setPixelRatio(pr);
-            if (ultrarapid && fps > 55) ultrarapid = false;
-            else if (!ultrarapid && fps < 40) ultrarapid = true;
+            if (ultrarapid && fps >= 29 && pr >= PR_MAX) ultrarapid = false;
+            else if (!ultrarapid && fps < 22) ultrarapid = true;
+            statusEl.textContent = `${fmt(sim.particleCount)} partiklar · ${fps} bilder/s · upplösning ${fmt(100 * pr / devicePixelRatio)} %${ultrarapid ? ' · ultrarapid' : ''}`;
+        } else if (sim && !bygger && pausad) {
+            statusEl.textContent = `${fmt(sim.particleCount)} partiklar · pausad`;
         }
-        if (sim && !bygger) statusEl.textContent = `${fmt(sim.particleCount)} partiklar · ${fps} bilder/s · upplösning ${fmt(100 * pr / devicePixelRatio)} %${ultrarapid ? ' · ultrarapid' : ''}${pausad ? ' · pausad' : ''}`;
     }
-    requestAnimationFrame(ruta);
 }
+let ritar = false;
 
 addEventListener('resize', () => {
     renderer.setSize(innerWidth, innerHeight);
+    tvingaRita = true;
     const W = innerWidth, H = innerHeight;
     camera.aspect = W / H;
     if (W < 760) camera.setViewOffset(W, H, 0, H * 0.2, W, H);
@@ -707,6 +792,7 @@ document.getElementById('slapp').addEventListener('click', () => bygg());
 const pausKnapp = document.getElementById('paus');
 const vaxlaPaus = () => {
     pausad = !pausad;
+    tvingaRita = true;
     pausKnapp.setAttribute('aria-pressed', pausad);
     pausKnapp.textContent = pausad ? 'Fortsätt' : 'Paus';
 };
@@ -714,7 +800,7 @@ pausKnapp.addEventListener('click', vaxlaPaus);
 addEventListener('keydown', (e) => {
     if (e.code === 'Space' && !/SELECT|INPUT|BUTTON/.test(document.activeElement?.tagName)) { e.preventDefault(); vaxlaPaus(); }
 });
-document.getElementById('partiklar').addEventListener('change', (e) => { if (sim) sim.showParticles = e.target.checked; });
+document.getElementById('partiklar').addEventListener('change', (e) => { if (sim) sim.showParticles = e.target.checked; tvingaRita = true; });
 const nivaEl = document.getElementById('niva');
 nivaEl.value = String(tillstand.partiklar);
 nivaEl.addEventListener('change', () => { tillstand.partiklar = +nivaEl.value; bygg(); });
@@ -748,6 +834,11 @@ try {
         await bygg();
         ms = await matBild();
     }
+    // Starta på en upplösning som passar datorn. Varje byte av upplösning
+    // kostar en omallokering (upp till ett par sekunder på svag grafik), så
+    // det är bättre att hamna rätt direkt än att låta ruta() stega dit.
+    pr = ms > 35 ? PR_MIN : ms > 20 ? Math.min(PR_MAX, 0.8) : PR_MAX;
+    ultrarapid = ms > 25;
     renderer.setPixelRatio(pr);
     console.info(`Grafikkortet: ${ms.toFixed(1)} ms per bild vid ${tillstand.partiklar} partiklar`);
 } catch (e) { console.warn('Mätningen misslyckades', e); }

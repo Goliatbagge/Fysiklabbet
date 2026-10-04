@@ -21,6 +21,7 @@ Format per post:
   (tillagd 2026-09-27)
 
 - **Ljus som stelnar en vätskestråle till fiber** — en ring av UV-lysdioder 5 mm under ett munstycke får en fritt fallande stråle av ljushärdande vätska att stelna till fiber, och forskarna har en parameterfri formel för fiberns radie. Ingång: varför en vätskestråle bryts upp i droppar (Plateau–Rayleigh) och hur man hinner före. OBS: PRL är inte öppen, kontrollera arXiv-förtryck innan publicering. Physical Review Letters 137, 144004 (2026), DOI 10.1103/yh2j-b3wq (J. S. Smink, C. W. Visser, H. Lhuissier). Källa (Physics, APS, 2026-10-02): https://physics.aps.org/articles/v19/137
+  OBS 2026-10-04: molnsessionen kunde inte läsa originalet (physics.aps.org, arxiv.org, phys.org, nature.com m.fl. blockerade av egress-proxyn), så ingen nyhet publicerades den dagen. Passar området (strömningslära, senast 2026-09-21) och grannarna 2026-10-03 (vågfysik) och 2026-10-02 (partikelfysik); första kandidat när originalet går att läsa.
   (tillagd 2026-10-03)
 
 - **Första typ I-supraledaren som bryter tidsomvändningssymmetrin** — ett kännetecken för okonventionell supraledning hittat i ett material av den enkla typ I-sorten. Ingång: supraledning, meissnereffekten och skillnaden mellan typ I och typ II. OBS: supraledning kördes 2026-09-30 — låt det gå minst en vecka. Källor: Phys.org 2026-10-03 https://phys.org/news/2026-10-scientists-superconductor-reversal-symmetry.html och Physics (APS) https://physics.aps.org/articles/v19/s115

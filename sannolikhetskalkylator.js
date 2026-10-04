@@ -581,9 +581,9 @@ const Q_IQ = { vem: 'av dem som testas', left: 'har lägre IQ än {b}', right: '
 const Q_TEMP = { vem: 'av friska vuxna', left: 'har lägre temperatur än {b}', right: 'har högre temperatur än {a}', interval: 'har en temperatur mellan {a} och {b}', outside: 'har lägre temperatur än {a} eller högre temperatur än {b}' };
 const Q_SONDER = { vem: 'av atomerna', left: 'sönderfaller inom {b}', right: 'finns kvar efter {a}', interval: 'sönderfaller mellan {a} och {b}', outside: 'sönderfaller inom {a} eller finns kvar efter {b}' };
 const PRESETS = [
-  { id: 'kvinnor', grp: 'Normalfördelning', title: 'Längd, svenska kvinnor', d: 'normal', pt: { mu: '165,5', sigma: '6,15' }, u: 'cm', xl: 'Längd', q: Q_KVINNOR, desc: I('X') + ' = längden hos en slumpvis vald svensk kvinna', src: 'SCB 1998–2000, 16–84 år', m: 'interval', a: 160, b: 170 },
-  { id: 'man', grp: 'Normalfördelning', title: 'Längd, svenska män', d: 'normal', pt: { mu: '179', sigma: '6,85' }, u: 'cm', xl: 'Längd', q: Q_MAN, desc: I('X') + ' = längden hos en slumpvis vald svensk man', src: 'SCB 1998–2000, 16–84 år', m: 'right', a: 190 },
-  { id: 'jamfor', grp: 'Normalfördelning', title: 'Kvinnor och män jämförda', d: 'normal', pt: { mu: '165,5', sigma: '6,15' }, cmp: { mu: '179', sigma: '6,85' }, names: ['Kvinnor', 'Män'], u: 'cm', xl: 'Längd', q: Q_KVINNOR, desc: 'Hur stor andel av kvinnorna är längre än medellängden för män?', src: 'SCB 1998–2000, 16–84 år', m: 'right', a: 179 },
+  { id: 'kvinnor', langd: ['svenska kvinnor'], grp: 'Normalfördelning', title: 'Längd, svenska kvinnor', d: 'normal', pt: { mu: '165,5', sigma: '6,15' }, u: 'cm', xl: 'Längd', q: Q_KVINNOR, desc: I('X') + ' = längden hos en slumpvis vald svensk kvinna', src: 'SCB 1998–2000, 16–84 år', m: 'interval', a: 160, b: 170 },
+  { id: 'man', langd: ['svenska män'], grp: 'Normalfördelning', title: 'Längd, svenska män', d: 'normal', pt: { mu: '179', sigma: '6,85' }, u: 'cm', xl: 'Längd', q: Q_MAN, desc: I('X') + ' = längden hos en slumpvis vald svensk man', src: 'SCB 1998–2000, 16–84 år', m: 'right', a: 190 },
+  { id: 'jamfor', langd: ['svenska kvinnor', 'svenska män'], grp: 'Normalfördelning', title: 'Kvinnor och män jämförda', d: 'normal', pt: { mu: '165,5', sigma: '6,15' }, cmp: { mu: '179', sigma: '6,85' }, names: ['Kvinnor', 'Män'], u: 'cm', xl: 'Längd', q: Q_KVINNOR, desc: 'Hur stor andel av kvinnorna är längre än medellängden för män?', src: 'SCB 1998–2000, 16–84 år', m: 'right', a: 179 },
   { id: 'iq', grp: 'Normalfördelning', title: 'IQ', d: 'normal', pt: { mu: '100', sigma: '15' }, u: '', xl: 'IQ', q: Q_IQ, desc: I('X') + ' = resultatet på ett IQ-test', src: 'Testerna normeras till 100 och 15', m: 'right', a: 130 },
   { id: 'temp', grp: 'Normalfördelning', title: 'Kroppstemperatur', d: 'normal', pt: { mu: '36,8', sigma: '0,4' }, u: '°C', xl: 'Temperatur', q: Q_TEMP, desc: I('X') + ' = temperaturen i munnen hos en frisk vuxen', src: 'Mackowiak och kollegor 1992', m: 'right', a: 37.7 },
   { id: 'z', grp: 'Normalfördelning', title: 'Standardnormalfördelningen', d: 'normal', pt: { mu: '0', sigma: '1' }, u: '', xl: '', desc: '95' + NB + '% av värdena ligger mellan ' + MINUS + '1,96 och 1,96', src: 'Medelvärde 0, standardavvikelse 1', m: 'interval', a: -1.96, b: 1.96 },
@@ -603,7 +603,7 @@ function newState() {
   return {
     adv: false, tab: 'fordelning', d: 'normal', pt: {}, m: 'interval', a: -1, b: 1, u: '', xl: '',
     cum: false, sig: false, apx: false, tbl: false, cmp: false, cpt: {}, names: null,
-    dec: 4, N: '100', pre: null, simN: 1000, proc: 'z1', st: {},
+    dec: 4, N: '100', min: '', pre: null, simN: 1000, proc: 'z1', st: {},
   };
 }
 let S = newState();
@@ -954,6 +954,15 @@ function drawDist(W, H, opt = {}) {
       out.push(`<g class="hnd" data-h="${pl.h}">${pill(cx, base + 27, pl.lab, COL.accent)}</g>`);
     } else out.push(pill(cx, base + 27, pl.lab, COL.accent));
   });
+
+  // Den egna längden: grön linje med etiketten "Du" ovanför kurvan.
+  const minH = minLangd();
+  if (isFinite(minH) && langdGrupper() && minH >= x0 && minH <= x1) {
+    const fh = Math.max(D.pdf(minH, p), cmpP ? D.pdf(minH, cmpP) : 0);
+    const xx = X(minH), ytop = Math.max(M.t + 30, Y(Math.min(fh, y1)) - 30);
+    out.push(`<line x1="${f2(xx)}" y1="${f2(base)}" x2="${f2(xx)}" y2="${f2(ytop + 10)}" stroke="${COL.green}" stroke-width="2.4" stroke-dasharray="6 4"/>`);
+    out.push(pill(Math.max(M.l + 40, Math.min(M.l + pw - 40, xx)), ytop, 'Du: ' + num(minH, 1) + NB + 'cm', COL.green));
+  }
 
   // Förklaring när två kurvor visas
   const leg = [];
@@ -1352,11 +1361,45 @@ function redovHtml(pr) {
   return `${intro} med intervallet ${intervalX()} ger ${pfmt(pr, Math.min(S.dec, 4))} ≈ ${roughPct(pr)}.`;
 }
 
+// "Hur lång är du?": bara för längdexemplen, och bara så länge
+// parametrarna är exemplets egna (annars är jämförelsen med SCB:s data fel).
+function langdGrupper() {
+  if (S.tab !== 'fordelning' || S.d !== 'normal') return null;
+  const pr = curPreset();
+  if (!pr || !pr.langd) return null;
+  const g = [{ namn: pr.langd[0], p: params('normal').p }];
+  if (pr.langd[1] && S.cmp) g.push({ namn: pr.langd[1], p: params('normal', S.cpt, 'c').p });
+  return g;
+}
+function minLangd() {
+  const h = parseNum(S.min);
+  return h >= 50 && h <= 300 ? h : NaN;
+}
+function minLangdHtml(h, grupper) {
+  if (!isFinite(h)) return S.min.trim() ? '<p class="note warn">Skriv en längd i centimeter, till exempel 172.</p>' : '';
+  return grupper.map(g => {
+    const kortare = Phi((h - g.p.mu) / g.p.sigma), langre = 1 - kortare;
+    const z = (h - g.p.mu) / g.p.sigma;
+    const zTxt = Math.abs(z) < 0.05 ? 'Du är precis lika lång som medelvärdet.'
+      : `Du ligger ${num(Math.abs(z), 1)} standardavvikelse${num(Math.abs(z), 1) === '1' ? '' : 'r'} ${z > 0 ? 'över' : 'under'} medelvärdet ${num(g.p.mu, 1)}${NB}cm.`;
+    let ovanl = '';
+    if (langre < 0.02) ovanl = `Bara ungefär 1 av ${num(Math.round(1 / langre), 0)} är längre än du.`;
+    else if (kortare < 0.02) ovanl = `Bara ungefär 1 av ${num(Math.round(1 / kortare), 0)} är kortare än du.`;
+    else ovanl = `Av 100 ${g.namn.replace('svenska ', '')} är i genomsnitt ${num(Math.round(100 * kortare), 0)} kortare och ${num(Math.round(100 * langre), 0)} längre än du.`;
+    return `<div class="minrad"><div class="minbig">${pctfmt(kortare, 3)}</div><div class="mintxt">av ${g.namn} är kortare än du</div><p class="note">${zTxt} ${ovanl}</p></div>`;
+  }).join('');
+}
 function renderRight() {
   if (S.tab === 'statistik') { renderStatRight(); return; }
   const D = D_(), disk = D.kind === 'disk';
   const hasSd = isFinite(D.sd(params(S.d).p));
-  let h = `<div class="res"><div class="eyebrow">Svar</div><p id="resWords" class="words"></p><div id="cmpRes"></div></div>`;
+  let h = '';
+  if (langdGrupper()) h += `<div class="grp minlangd"><div class="eyebrow">Hur lång är du?</div>
+    <div class="cnt"><span>Min längd</span><input id="minLangd" value="${esc(S.min)}" inputmode="decimal" autocomplete="off" placeholder="172" aria-label="Din längd i centimeter"><span>cm</span></div>
+    <div id="minOut"></div>
+    <div class="tb-acts" id="minActs"><button type="button" class="wbtn" data-min="left">Visa dem som är kortare</button><button type="button" class="wbtn" data-min="right">Visa dem som är längre</button></div>
+    <p class="note">Jämförelsen gäller vuxna i åldern 16–84 år enligt SCB:s undersökning 1998–2000.</p></div>`;
+  h += `<div class="res"><div class="eyebrow">Svar</div><p id="resWords" class="words"></p><div id="cmpRes"></div></div>`;
   h += `<div class="grp"><div class="eyebrow">Redovisning <button type="button" class="copytxt" id="copyRedov">Kopiera</button></div><div class="redov" id="redov"></div></div>`;
   h += `<div class="grp"><div class="eyebrow">Fördelningen</div>${S.adv ? '<div class="formel" id="formel"></div>' : ''}<dl class="props" id="props"></dl></div>`;
   h += `<div class="grp"><div class="eyebrow">Visa</div>
@@ -1487,6 +1530,12 @@ function update(o = {}) {
     co.innerHTML = !(isFinite(N) && N > 0 && isFinite(pr)) ? 'Skriv hur många som ingår i gruppen.'
       : disk ? `Av ${num(N, 0)} gånger blir utfallet ${wordsFor()} i genomsnitt <b>${cnt}</b> gånger.`
       : `Av ${num(N, 0)} är det i genomsnitt <b>${cnt}</b> som ${wordsFor()}.`;
+  }
+  const mo = $('#minOut');
+  if (mo) {
+    const lg = langdGrupper(), h = minLangd();
+    mo.innerHTML = lg ? minLangdHtml(h, lg) : '';
+    const ma = $('#minActs'); if (ma) ma.hidden = !isFinite(h);
   }
   const tag = $('#sheetTag'); if (tag) tag.innerHTML = sheetTagHtml();
   if (!o.noDraw) draw();
@@ -1691,6 +1740,17 @@ rightEl.addEventListener('change', e => {
   if (t.dataset.cp) { renderRight(); update({ noDraw: true }); maybeRefit(); draw(); }
 });
 rightEl.addEventListener('input', e => {
+  if (e.target.id === 'minLangd') {
+    S.min = e.target.value;
+    update();
+    const h = minLangd();
+    if (isFinite(h) && (h < V.x0 || h > V.x1)) {
+      const w = V.x1 - V.x0;
+      animateTo({ x0: Math.min(V.x0, h - w * 0.08), x1: Math.max(V.x1, h + w * 0.08), y1: V.y1 });
+    }
+  }
+});
+rightEl.addEventListener('input', e => {
   const t = e.target;
   if (S.tab === 'statistik') return;
   if (t.dataset.cp) {
@@ -1700,6 +1760,16 @@ rightEl.addEventListener('input', e => {
     update();
   }
   if (t.id === 'cntN') { S.N = t.value; update({ noDraw: true }); }
+});
+rightEl.addEventListener('click', e => {
+  const mb = e.target.closest('[data-min]');
+  if (!mb || S.tab !== 'fordelning') return;
+  const h = minLangd();
+  if (!isFinite(h)) return;
+  S.m = mb.dataset.min;
+  if (S.m === 'left') S.b = h; else S.a = h;
+  lastInv = null;
+  renderSbar(); renderRight(); update();
 });
 rightEl.addEventListener('click', e => {
   if (S.tab === 'statistik') return;

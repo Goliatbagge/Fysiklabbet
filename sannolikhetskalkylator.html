@@ -357,6 +357,14 @@ input[type=range] { width: 100%; margin: 8px 0 0; accent-color: var(--ink); heig
 .wbtn.dark:hover { background: #22324a; }
 .cnt { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--soft); flex-wrap: wrap; }
 .cnt input { width: 84px; }
+.minlangd { background: rgba(63, 122, 52, .06); border: 1px solid rgba(63, 122, 52, .22); border-radius: 13px; padding: 12px 13px 10px; margin-bottom: 12px; }
+.minlangd .eyebrow { color: var(--green); }
+.minlangd .cnt input { font-weight: 600; }
+.minrad { margin-top: 10px; }
+.minrad + .minrad { padding-top: 10px; border-top: 1px solid rgba(63, 122, 52, .2); }
+.minbig { font: 400 38px/1 var(--serif); color: var(--green); }
+.mintxt { font-size: 14px; color: var(--ink); margin-top: 3px; }
+.minrad .note { margin-top: 4px; }
 .cnt-out { margin-top: 8px; font-size: 13.5px; color: var(--ink); line-height: 1.5; }
 .simstat { margin-top: 10px; }
 .tbl-wrap { max-height: 280px; overflow: auto; border: 1px solid var(--line); border-radius: 10px; margin-top: 8px; }
@@ -663,7 +671,7 @@ details.datab summary { cursor: pointer; font-size: 13px; font-weight: 600; colo
 
 <!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
      webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
-<script src="sannolikhetskalkylator.js?v=202610031200"></script>
+<script src="sannolikhetskalkylator.js?v=202610041000"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

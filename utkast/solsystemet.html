@@ -79,6 +79,8 @@ main#resa { position: relative; z-index: 2; }
 .hudknapp[aria-pressed="true"] { color: var(--ink); border-color: color-mix(in srgb, var(--foton) 55%, transparent); }
 .hudknapp[aria-pressed="true"] .lampa { background: var(--foton); box-shadow: 0 0 8px var(--foton); }
 .lampa { width: 6px; height: 6px; border-radius: 50%; background: var(--faint); }
+#musikKnapp .vag { opacity: .35; transition: opacity .4s; }
+#musikKnapp[aria-pressed="true"] .vag { opacity: 1; }
 
 /* Rutten längs vänsterkanten */
 .rutt { left: clamp(18px, 2.4vw, 32px); top: 50%; transform: translateY(-50%); height: min(64vh, 560px); width: 90px; }
@@ -375,6 +377,7 @@ body.omlopp main#resa { touch-action: none; }
     <b>Fysiklabbet</b> <span class="lang">/ Ljusresan</span>
   </a>
   <div class="topp-knappar">
+    <button class="hudknapp" id="musikKnapp" aria-pressed="false" title="Slå på eller av bakgrundsmusiken"><span class="lampa"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h4l5 4V6L8 10z"/><path class="vag" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg><span class="text">Musik</span></button>
     <button class="hudknapp" id="noterKnapp" aria-pressed="true" title="Visa eller dölj fältanteckningarna"><span class="lampa"></span><span class="text">Anteckningar</span></button>
     <button class="hudknapp" id="kartaKnapp" title="Solsystemet som det ser ut i dag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4.5"/><ellipse cx="12" cy="12" rx="6" ry="2.6"/></svg><span class="text">Solsystemet i dag</span></button>
   </div>
@@ -2576,6 +2579,170 @@ document.addEventListener('keydown', (e) => {
 $('noterKnapp').addEventListener('click', (e) => { noterPa = !noterPa; e.currentTarget.setAttribute('aria-pressed', noterPa); });
 
 /* =====================================================================
+   BAKGRUNDSMUSIKEN
+   Allt ljud skapas i webbläsaren med Web Audio, inga ljudfiler: långsamma
+   ackordmattor i D-dur, en djup grundton, glittrande klockklanger med eko
+   och ett svagt rymdsus som sveper upp när resan går fort. Webbläsare
+   tillåter inte att ljud startar av sig själv, så musiken slås på med
+   knappen. Valet minns mellan besöken, men även då väntar musiken på
+   första klicket eller tangenttrycket.
+   ===================================================================== */
+const musik = (() => {
+  const midi = (n) => 440 * Math.pow(2, (n - 69) / 12);
+  // [grundton, fyra toner i mattan]
+  const ACKORD = [
+    [38, [57, 61, 64, 66]],   // Dmaj9
+    [35, [54, 57, 62, 64]],   // Bm11
+    [31, [54, 59, 61, 62]],   // Gmaj7#11
+    [40, [55, 59, 62, 66]],   // Em9
+    [38, [57, 62, 64, 69]],   // Dadd9
+    [33, [52, 57, 59, 61]],   // Asus2
+    [31, [55, 59, 62, 66]],   // Gmaj7
+    [36, [55, 60, 64, 67]],   // Cmaj7, en mjuk utflykt
+  ];
+  const KLANG = [74, 76, 78, 81, 83, 86, 88];
+  let ctx = null, master, padBus, padFilter, hallSend, ekoIn, susGain, susFilter;
+  let pa = false, ackordIx = 0, ackordTimer = null, klangTimer = null, aktiva = [];
+  function hall(sek) {
+    const len = Math.round(ctx.sampleRate * sek), buf = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let c = 0; c < 2; c++) {
+      const d = buf.getChannelData(c);
+      for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3.2);
+    }
+    return buf;
+  }
+  function bygg() {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const komp = ctx.createDynamicsCompressor();
+    komp.threshold.value = -18; komp.ratio.value = 3;
+    master = ctx.createGain(); master.gain.value = 0;
+    master.connect(komp).connect(ctx.destination);
+    const reverb = ctx.createConvolver(); reverb.buffer = hall(7);
+    hallSend = ctx.createGain(); hallSend.gain.value = 1;
+    hallSend.connect(reverb).connect(master);
+    // mattan: ett gemensamt lågpassfilter som andas långsamt
+    padBus = ctx.createGain(); padBus.gain.value = 1;
+    padFilter = ctx.createBiquadFilter(); padFilter.type = 'lowpass'; padFilter.frequency.value = 900; padFilter.Q.value = 0.4;
+    const lfo = ctx.createOscillator(), lfoDjup = ctx.createGain();
+    lfo.frequency.value = 0.045; lfoDjup.gain.value = 320;
+    lfo.connect(lfoDjup).connect(padFilter.frequency); lfo.start();
+    padBus.connect(padFilter);
+    const torr = ctx.createGain(); torr.gain.value = 0.55;
+    padFilter.connect(torr).connect(master);
+    padFilter.connect(hallSend);
+    // eko för klangerna
+    ekoIn = ctx.createGain();
+    const eko = ctx.createDelay(2), ekoAter = ctx.createGain();
+    eko.delayTime.value = 0.43; ekoAter.gain.value = 0.38;
+    ekoIn.connect(eko); eko.connect(ekoAter).connect(eko);
+    eko.connect(hallSend); ekoIn.connect(hallSend);
+    const ekoTorr = ctx.createGain(); ekoTorr.gain.value = 0.35;
+    ekoIn.connect(ekoTorr).connect(master);
+    // rymdsuset: brus genom ett bandpassfilter
+    const brusBuf = ctx.createBuffer(1, ctx.sampleRate * 3, ctx.sampleRate), bd = brusBuf.getChannelData(0);
+    let b0 = 0;
+    for (let i = 0; i < bd.length; i++) { b0 = 0.985 * b0 + 0.15 * (Math.random() * 2 - 1); bd[i] = b0; }
+    const brus = ctx.createBufferSource(); brus.buffer = brusBuf; brus.loop = true;
+    susFilter = ctx.createBiquadFilter(); susFilter.type = 'bandpass'; susFilter.frequency.value = 380; susFilter.Q.value = 0.8;
+    susGain = ctx.createGain(); susGain.gain.value = 0.02;
+    brus.connect(susFilter).connect(susGain);
+    susGain.connect(master); susGain.connect(hallSend);
+    brus.start();
+  }
+  function ton(frekv, t0, atk, varak, rel, styrka, typer, ut) {
+    const env = ctx.createGain();
+    env.gain.setValueAtTime(0, t0);
+    env.gain.linearRampToValueAtTime(styrka, t0 + atk);
+    env.gain.setValueAtTime(styrka, t0 + atk + varak);
+    env.gain.linearRampToValueAtTime(0, t0 + atk + varak + rel);
+    env.connect(ut);
+    const osc = typer.map(([typ, cent]) => {
+      const o = ctx.createOscillator();
+      o.type = typ; o.frequency.value = frekv; o.detune.value = cent;
+      o.connect(env); o.start(t0); o.stop(t0 + atk + varak + rel + 0.1);
+      return o;
+    });
+    return { env, osc };
+  }
+  function nastaAckord() {
+    if (!pa) return;
+    const [grund, toner] = ACKORD[ackordIx % ACKORD.length];
+    ackordIx++;
+    const t0 = ctx.currentTime, langd = 14;
+    toner.forEach((n, k) => ton(midi(n), t0 + k * 0.35, 5.5, langd - 4, 8, 0.045, [['sawtooth', -7], ['triangle', 6]], padBus));
+    ton(midi(grund), t0, 6, langd - 4, 8, 0.11, [['sine', 0]], padBus);
+    ton(midi(grund + 12), t0, 6, langd - 4, 8, 0.03, [['triangle', 3]], padBus);
+    ackordTimer = setTimeout(nastaAckord, langd * 1000);
+  }
+  function klang(n, t0, styrka = 0.05) {
+    ton(midi(n), t0, 0.01, 0.05, 4.5, styrka, [['sine', 0]], ekoIn);
+    ton(midi(n + 12), t0, 0.01, 0.02, 2.2, styrka * 0.25, [['sine', 4]], ekoIn);
+  }
+  function slumpklang() {
+    if (!pa) return;
+    if (Math.random() < 0.8) klang(KLANG[Math.floor(Math.random() * KLANG.length)], ctx.currentTime + 0.05, 0.03 + Math.random() * 0.025);
+    klangTimer = setTimeout(slumpklang, 2500 + Math.random() * 5500);
+  }
+  function satPa(nytt) {
+    pa = nytt;
+    $('musikKnapp').setAttribute('aria-pressed', pa);
+    try { localStorage.setItem('ljusresanMusik', pa ? '1' : '0'); } catch (_) {}
+    if (pa) {
+      if (!ctx) bygg();
+      ctx.resume();
+      const t = ctx.currentTime;
+      master.gain.cancelScheduledValues(t);
+      master.gain.setValueAtTime(master.gain.value, t);
+      master.gain.linearRampToValueAtTime(0.75, t + 4);
+      clearTimeout(ackordTimer); clearTimeout(klangTimer);
+      nastaAckord();
+      klangTimer = setTimeout(slumpklang, 3000);
+    } else if (ctx) {
+      clearTimeout(ackordTimer); clearTimeout(klangTimer);
+      const t = ctx.currentTime;
+      master.gain.cancelScheduledValues(t);
+      master.gain.setValueAtTime(master.gain.value, t);
+      master.gain.linearRampToValueAtTime(0, t + 1.5);
+      setTimeout(() => { if (!pa) ctx.suspend(); }, 1700);
+    }
+  }
+  $('musikKnapp').addEventListener('click', () => satPa(!pa));
+  // var musiken på förra gången väntar den på första klicket eller tangenttrycket
+  let sparad = false;
+  try { sparad = localStorage.getItem('ljusresanMusik') === '1'; } catch (_) {}
+  if (sparad) {
+    const forsta = (e) => {
+      window.removeEventListener('pointerdown', forsta, true);
+      window.removeEventListener('keydown', forsta, true);
+      if (!pa && !(e.target.closest && e.target.closest('#musikKnapp'))) satPa(true);
+    };
+    window.addEventListener('pointerdown', forsta, true);
+    window.addEventListener('keydown', forsta, true);
+  }
+  // pausa när fliken inte syns
+  document.addEventListener('visibilitychange', () => {
+    if (!ctx || !pa) return;
+    if (document.hidden) ctx.suspend(); else ctx.resume();
+  });
+  return {
+    // rymdsuset och mattans filter följer resans fart
+    fart(v) {
+      if (!ctx || !pa) return;
+      const s = mjuk(4, 150, v), t = ctx.currentTime;
+      susFilter.frequency.setTargetAtTime(380 + 2600 * s, t, 0.25);
+      susGain.gain.setTargetAtTime(0.02 + 0.07 * s, t, 0.25);
+      padBus.gain.setTargetAtTime(1 - 0.35 * s, t, 0.4);
+    },
+    // en ljus klang när man kommer fram till en värld
+    ankomst() {
+      if (!ctx || !pa) return;
+      const t = ctx.currentTime + 0.1;
+      [74, 78, 81, 86].forEach((n, k) => klang(n, t + k * 0.18, 0.045));
+    },
+  };
+})();
+
+/* =====================================================================
    HUVUDLOOP
    ===================================================================== */
 let senast = performance.now(), tid = 0, storlek = { w: -1, h: -1 };
@@ -2652,6 +2819,7 @@ function frame(nu) {
   strimmor.puni.uTime.value = tid;
   himmel.position.copy(kamera.position);
   $('varp').style.opacity = (mjuk(20, 160, fartJamn) * 0.9).toFixed(3);
+  musik.fart(fartJamn);
 
   const stannar = Math.round(s);
   kroppar.forEach((o, i) => {
@@ -2686,7 +2854,7 @@ function uppdateraHUD(s, info) {
   if (k !== visatStopp && !omlopp.aktiv) fyllStopptext(k);
   // presentera först när kameran är framme, annars är världen fortfarande liten i bild
   const framme = k < PLANETER.length && kamera.position.distanceTo(malPose.pos) < kroppar[k].root.scale.x * 0.06;
-  if (synlig > 0.85 && framme && presenterat !== k && !omlopp.aktiv) { if (presentera(k)) presenterat = k; }
+  if (synlig > 0.85 && framme && presenterat !== k && !omlopp.aktiv) { if (presentera(k)) { presenterat = k; musik.ankomst(); } }
   if (synlig < 0.1 && presenterat === k) presenterat = -1;
   stopptext.style.opacity = (synlig * (1 - omlopp.g)).toFixed(3);
   stopptext.style.transform = `translateY(${((1 - synlig) * 16).toFixed(1)}px)`;

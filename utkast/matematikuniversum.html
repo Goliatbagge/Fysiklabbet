@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Matematikens universum — Fysiklabbet</title>
+<meta name="description" content="Ett utkast till en ny ingång till matematiken på Fysiklabbet: fyra världar i 3D, en för varje nivå, där varje avsnitt du klarar tänder en stjärna.">
+<meta name="theme-color" content="#03040a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700&family=Poppins:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="importmap">{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }</script>
+<!--
+  Matematikens universum (utkast, 2026-10-04)
+  ===========================================
+  En experimentell startsida för matematiken: fyra världar i 3D, en per nivå,
+  byggda ur den matematik nivån handlar om (gyllene vinkelns spiral av tal,
+  en sadelyta, en krusning som ändras i tiden, Mandelbrotmängden). Kapitlen
+  är planeter runt varje värld och avsnitten stjärnbilder runt kapitlen.
+  Innehållet läses direkt ur ../data/katalog.js, så sidan följer katalogen.
+
+  Framstegen sparas i localStorage ('mu-klarade'). Det är en prototyp: i en
+  färdig version skulle en stjärna tändas när avsnittets exit ticket klarats.
+  Färgen sprids ut från världens mitt mot det kapitel som har framsteg
+  (uniformen uProg per kapitelsektor i molnets shader).
+-->
+<style>
+:root {
+  --bg: #03040a;
+  --ink: #eef1fa;
+  --dim: #a6aec6;
+  --faint: #636b85;
+  --glas: rgba(12, 15, 30, 0.74);
+  --glas2: rgba(205, 215, 255, 0.07);
+  --kant: rgba(205, 215, 255, 0.14);
+  --acc: #ffd27a;
+  --disp: 'Unbounded', 'Arial Black', sans-serif;
+  --sans: 'Poppins', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); overflow: hidden; }
+body { font-family: var(--sans); -webkit-font-smoothing: antialiased; user-select: none; -webkit-user-select: none; }
+button { font: inherit; color: inherit; cursor: pointer; }
+a { color: inherit; }
+em { font-style: italic; }
+
+#scen { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+.etiketter { position: fixed !important; inset: 0; pointer-events: none; transition: opacity 1.6s var(--ease); }
+body.intro .etiketter, body.varp .etiketter { opacity: 0; }
+body.varp .etiketter * { pointer-events: none !important; }
+
+/* ---------- Etiketter i rymden ---------- */
+.wl { pointer-events: auto; cursor: pointer; text-align: center; transition: opacity .5s var(--ease); white-space: nowrap; }
+.wl .kurs { display: block; font: 500 11px/1.3 var(--mono); letter-spacing: .14em; color: var(--dim); }
+.wl .namn { display: block; font: 500 clamp(17px, 1.8vw, 24px)/1.15 var(--disp); letter-spacing: .01em; margin: 4px 0 6px; text-shadow: 0 0 24px rgba(0,0,0,.9); }
+.wl .prog { display: inline-block; font: 500 11px/1 var(--mono); color: var(--dim); padding: 5px 9px; border: 1px solid var(--kant); border-radius: 99px; background: rgba(5,7,16,.5); }
+.wl:hover .namn, .wl.hov .namn { color: var(--wc); }
+.wl.fjarran { opacity: .45; }
+.wl.fjarran .prog, .wl.fjarran .kurs { display: none; }
+.wl.fjarran .namn { font-size: 13px; }
+
+.cl { pointer-events: auto; cursor: pointer; margin-top: -26px; white-space: nowrap; display: flex; align-items: center; gap: 8px; padding: 6px 11px 6px 7px; border-radius: 99px; background: rgba(6, 8, 18, .55); border: 1px solid var(--kant); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); font: 500 13px/1 var(--sans); transition: border-color .3s, background .3s; }
+.cl b { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; font: 500 11px/1 var(--mono); background: var(--wc); color: #070912; }
+.cl i { font: 400 11px/1 var(--mono); font-style: normal; color: var(--dim); }
+.cl:hover, .cl.hov { border-color: var(--wc); background: rgba(10, 14, 30, .8); }
+
+.sl { pointer-events: auto; cursor: pointer; margin-left: 16px; max-width: 200px; font: 400 12.5px/1.3 var(--sans); color: var(--dim); padding: 4px 8px; border-radius: 7px; background: rgba(4, 6, 14, .5); transition: color .25s, background .25s; }
+.sl.vanster { margin-left: -16px; text-align: right; }
+.sl .nr { font: 500 10.5px/1 var(--mono); color: var(--faint); margin-right: 5px; }
+.sl.tand { color: var(--ink); }
+.sl.tand .nr { color: var(--wc); }
+.sl:hover, .sl.hov, .sl.vald { color: #fff; background: rgba(10, 14, 30, .7); }
+.sl.vald { outline: 1px solid var(--wc); }
+
+/* ---------- Gränssnitt ---------- */
+.hud { position: fixed; z-index: 5; transition: opacity .7s var(--ease), transform .7s var(--ease); }
+body.intro .hud { opacity: 0; pointer-events: none; }
+
+#topp { top: 18px; left: 20px; right: 20px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; pointer-events: none; }
+#topp > * { pointer-events: auto; }
+.marke { display: flex; flex-direction: column; gap: 10px; }
+.logga { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font: 500 14px/1 var(--disp); letter-spacing: .02em; color: var(--ink); opacity: .9; }
+.logga svg { width: 22px; height: 22px; }
+.logga:hover { opacity: 1; }
+#smula { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font: 400 12.5px/1 var(--sans); color: var(--dim); }
+#smula button { background: none; border: 0; padding: 4px 0; color: var(--dim); }
+#smula button:hover { color: var(--ink); }
+#smula .sep { color: var(--faint); }
+#smula .nu { color: var(--ink); }
+.ikonrad { display: flex; gap: 8px; }
+.ikon { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--glas); border: 1px solid var(--kant); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: border-color .25s, background .25s, opacity .3s; }
+.ikon:hover { border-color: rgba(255,255,255,.4); }
+.ikon svg { width: 18px; height: 18px; }
+.ikon[disabled] { opacity: .3; pointer-events: none; }
+
+#rubrik { left: clamp(20px, 5vw, 72px); top: 50%; transform: translateY(-50%); max-width: 400px; pointer-events: none; }
+#rubrik h2 { font: 300 clamp(26px, 3.4vw, 44px)/1.08 var(--disp); margin: 0 0 14px; letter-spacing: -.01em; }
+#rubrik p { margin: 0; color: var(--dim); font-size: 15px; line-height: 1.6; max-width: 32ch; }
+body:not(.niva-universum) #rubrik { opacity: 0; transform: translate(-20px, -50%); }
+
+#framsteg { left: 20px; bottom: 20px; padding: 14px 16px; border-radius: 16px; background: var(--glas); border: 1px solid var(--kant); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); min-width: 230px; }
+#framsteg .rad1 { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; }
+#framsteg .lbl { font: 500 11px/1 var(--mono); letter-spacing: .12em; color: var(--dim); }
+#framsteg .tal { font: 500 22px/1 var(--disp); }
+#framsteg .tal small { font: 400 13px/1 var(--sans); color: var(--dim); }
+.staplar { display: grid; gap: 7px; margin-top: 12px; }
+.stapel { display: grid; grid-template-columns: 104px 1fr 34px; align-items: center; gap: 8px; font-size: 11.5px; color: var(--dim); background: none; border: 0; padding: 0; text-align: left; }
+.stapel:hover { color: var(--ink); }
+.stapel .spar { height: 4px; border-radius: 4px; background: rgba(255,255,255,.08); overflow: hidden; }
+.stapel .fyll { height: 100%; width: 0; background: var(--wc); box-shadow: 0 0 10px var(--wc); transition: width .8s var(--ease); }
+.stapel .pr { font: 400 10.5px/1 var(--mono); text-align: right; }
+
+#atgarder { right: 20px; bottom: 20px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 60vw; }
+.knapp { display: inline-flex; align-items: center; gap: 8px; padding: 11px 16px; border-radius: 99px; background: var(--glas); border: 1px solid var(--kant); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font: 500 13px/1 var(--sans); text-decoration: none; transition: border-color .25s, background .25s, transform .25s; }
+.knapp:hover { border-color: rgba(255,255,255,.4); }
+.knapp.prim { background: linear-gradient(135deg, #ffe2a3, #ffb547); color: #1a1205; border-color: transparent; }
+.knapp.prim:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(255, 181, 71, .35); }
+.knapp svg { width: 15px; height: 15px; }
+
+#tips { left: 50%; bottom: 26px; transform: translateX(-50%); font: 400 12px/1.4 var(--sans); color: var(--faint); text-align: center; pointer-events: none; white-space: nowrap; }
+
+/* ---------- Panel ---------- */
+#panel { right: 20px; top: 76px; bottom: 84px; width: min(370px, calc(100vw - 40px)); display: flex; flex-direction: column; border-radius: 20px; background: var(--glas); border: 1px solid var(--kant); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); overflow: hidden; }
+#panel.dold { opacity: 0; transform: translateX(30px); pointer-events: none; }
+#panel .inre { overflow-y: auto; padding: 22px 22px 24px; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.15) transparent; }
+#panel .stang { position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: none; border: 1px solid transparent; color: var(--dim); }
+#panel .stang:hover { border-color: var(--kant); color: var(--ink); }
+.kicker { font: 500 11px/1.4 var(--mono); letter-spacing: .1em; color: var(--wc, var(--dim)); margin: 0 36px 10px 0; }
+#panel h3 { font: 500 22px/1.2 var(--disp); margin: 0 0 12px; letter-spacing: -.005em; }
+#panel h3 .nr { color: var(--wc); margin-right: 8px; }
+#panel p { color: var(--dim); font-size: 14px; line-height: 1.65; margin: 0 0 16px; }
+.ptstapel { margin: 4px 0 18px; }
+.ptstapel .spar { height: 6px; border-radius: 6px; background: rgba(255,255,255,.08); overflow: hidden; }
+.ptstapel .fyll { height: 100%; background: var(--wc); box-shadow: 0 0 14px var(--wc); transition: width .8s var(--ease); }
+.ptstapel .txt { display: flex; justify-content: space-between; font: 400 11.5px/1 var(--mono); color: var(--dim); margin-top: 8px; }
+.lista { display: grid; gap: 4px; margin: 0 0 18px; }
+.lista button { display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 10px; text-align: left; background: none; border: 1px solid transparent; border-radius: 10px; padding: 9px 10px; font-size: 13.5px; line-height: 1.35; color: var(--ink); }
+.lista button:hover { background: var(--glas2); border-color: var(--kant); }
+.lista .prick { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--faint); justify-self: center; }
+.lista .tand .prick { background: var(--wc); border-color: var(--wc); box-shadow: 0 0 10px var(--wc); }
+.lista .nasta .prick { border-color: #fff; animation: puls 1.6s ease-in-out infinite; }
+.lista .nr { font: 500 11px/1 var(--mono); color: var(--faint); }
+.lista .minibar { width: 46px; height: 3px; border-radius: 3px; background: rgba(255,255,255,.1); overflow: hidden; }
+.lista .minibar span { display: block; height: 100%; background: var(--wc); }
+.lista .kapnr { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font: 500 11px/1 var(--mono); border: 1px solid var(--kant); color: var(--dim); }
+.status { display: inline-flex; align-items: center; gap: 8px; font: 500 12px/1 var(--mono); padding: 8px 12px; border-radius: 99px; border: 1px solid var(--kant); color: var(--dim); margin-bottom: 18px; }
+.status .p { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--faint); }
+.status.tand { color: var(--ink); border-color: var(--wc); }
+.status.tand .p { background: var(--wc); border-color: var(--wc); box-shadow: 0 0 10px var(--wc); }
+.knappar { display: grid; gap: 8px; margin-bottom: 16px; }
+.knappar .knapp { justify-content: center; padding: 13px 16px; }
+.knapp.tand-knapp { border-color: var(--wc); }
+.knapp.tand-knapp:hover { background: rgba(255,255,255,.06); }
+.not { font-size: 12px !important; color: var(--faint) !important; line-height: 1.55 !important; }
+.lank { background: none; border: 0; padding: 0; color: var(--dim); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+.lank:hover { color: var(--ink); }
+@keyframes puls { 0%,100% { box-shadow: 0 0 0 0 rgba(255,255,255,.5); } 50% { box-shadow: 0 0 0 5px rgba(255,255,255,0); } }
+
+/* ---------- Intro ---------- */
+#intro { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 24px; background: radial-gradient(ellipse at center, rgba(3,4,10,0) 0%, rgba(3,4,10,.55) 55%, rgba(3,4,10,.9) 100%); transition: opacity 1.4s var(--ease), visibility 1.4s; }
+#intro.borta { opacity: 0; visibility: hidden; pointer-events: none; }
+#intro .mitt { text-align: center; max-width: 640px; }
+#intro .kick { font: 500 12px/1 var(--mono); letter-spacing: .26em; color: var(--dim); margin-bottom: 26px; opacity: 0; animation: upp 1.4s .3s var(--ease) forwards; }
+#intro h1 { font: 300 clamp(38px, 7.2vw, 92px)/1.0 var(--disp); letter-spacing: -.025em; margin: 0 0 26px; background: linear-gradient(100deg, #ffe6b0 0%, #ffb547 22%, #ff6fa8 48%, #b98bff 70%, #58e3d9 100%); -webkit-background-clip: text; background-clip: text; color: transparent; opacity: 0; animation: upp 1.8s .6s var(--ease) forwards; }
+#intro p { color: var(--dim); font-size: clamp(15px, 1.6vw, 17px); line-height: 1.7; margin: 0 auto 36px; max-width: 48ch; opacity: 0; animation: upp 1.6s 1.1s var(--ease) forwards; }
+#intro .kliv { position: relative; padding: 18px 40px; border-radius: 99px; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.04); font: 500 15px/1 var(--disp); letter-spacing: .08em; overflow: hidden; opacity: 0; animation: upp 1.4s 1.6s var(--ease) forwards; transition: border-color .3s, background .3s, box-shadow .3s; }
+#intro .kliv::before { content: ''; position: absolute; inset: -2px; background: conic-gradient(from var(--v, 0deg), transparent 0 70%, rgba(255,210,122,.8) 85%, transparent 100%); animation: snurr 3s linear infinite; z-index: -1; opacity: .7; }
+#intro .kliv::after { content: ''; position: absolute; inset: 1px; border-radius: 99px; background: #070912; z-index: -1; }
+#intro .kliv:hover { box-shadow: 0 0 50px rgba(255, 181, 71, .35); border-color: rgba(255,210,122,.7); }
+#intro .liten { margin-top: 26px; font-size: 12.5px; color: var(--faint); opacity: 0; animation: upp 1.4s 2s var(--ease) forwards; }
+@property --v { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@keyframes snurr { to { --v: 360deg; } }
+@keyframes upp { from { opacity: 0; transform: translateY(14px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+
+#fel { position: fixed; inset: 0; display: none; place-items: center; text-align: center; padding: 30px; z-index: 20; background: var(--bg); color: var(--dim); }
+
+/* ---------- Mobil ---------- */
+@media (max-width: 760px) {
+  #topp { top: 12px; left: 14px; right: 14px; }
+  #rubrik { top: 88px; transform: none; left: 16px; right: 16px; }
+  body:not(.niva-universum) #rubrik { transform: translateY(-10px); }
+  #rubrik h2 { font-size: 24px; margin-bottom: 8px; }
+  #rubrik p { font-size: 13px; line-height: 1.5; max-width: 40ch; }
+  #framsteg { left: 12px; right: auto; bottom: 12px; min-width: 0; padding: 9px 12px; border-radius: 99px; }
+  #framsteg .staplar, #framsteg .lbl { display: none; }
+  #framsteg .tal { font-size: 16px; }
+  #atgarder { right: 12px; bottom: 12px; max-width: none; gap: 6px; flex-wrap: nowrap; }
+  #atgarder .knapp { padding: 10px 12px; font-size: 12px; white-space: nowrap; }
+  #atgarder .valfri { display: none; }
+  #simulera .lang { display: none; }
+  #tips { display: none; }
+  #panel { left: 10px; right: 10px; top: auto; bottom: 64px; width: auto; max-height: 44vh; border-radius: 18px; }
+  #panel .inre { padding: 18px 18px 20px; }
+  #panel h3 { font-size: 19px; }
+  .wl .kurs { display: none; }
+  #panel.dold { transform: translateY(30px); }
+  .sl { padding: 2px 5px; }
+  .sl .t { display: none; }
+  .sl .nr { margin: 0; color: var(--dim); }
+  .wl .namn { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #intro .kick, #intro h1, #intro p, #intro .kliv, #intro .liten { animation-duration: .01s; animation-delay: 0s; }
+}
+</style>
+</head>
+<body class="intro niva-universum">
+
+<canvas id="scen" aria-label="Ett tredimensionellt universum av matematik med fyra världar"></canvas>
+
+<section id="intro" aria-labelledby="intro-rubrik">
+  <div class="mitt">
+    <div class="kick">FYSIKLABBET · MATEMATIK</div>
+    <h1 id="intro-rubrik">Matematikens universum</h1>
+    <p id="intro-text">Fyra världar och hundratals stjärnor. En resa från de första talen till de komplexa. Varje avsnitt du klarar tänder en stjärna, och universum färgas långsamt i takt med det du kan.</p>
+    <button class="kliv" id="kliv">Kliv in</button>
+    <div class="liten" id="intro-tips">Dra för att se dig omkring. Skrolla för att zooma in och ut.</div>
+  </div>
+</section>
+
+<header class="hud" id="topp">
+  <div class="marke">
+    <a class="logga" href="../index.html" title="Till Fysiklabbets startsida">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2.2" fill="currentColor"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg>
+      Fysiklabbet
+    </a>
+    <nav id="smula" aria-label="Var du är"></nav>
+  </div>
+  <div class="ikonrad">
+    <button class="ikon" id="upp" title="Zooma ut en nivå (Esc)" aria-label="Zooma ut en nivå" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H3v6"/><path d="M15 21h6v-6"/><path d="M3 3l7 7"/><path d="M21 21l-7-7"/></svg>
+    </button>
+    <button class="ikon" id="ljud" title="Ljud på" aria-label="Slå på ljud">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path class="vag" d="M16 9.5a4 4 0 0 1 0 5" style="display:none"/><path class="vag" d="M19 7a8 8 0 0 1 0 10" style="display:none"/><path class="av" d="M16 9l5 6M21 9l-5 6"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="hud" id="rubrik">
+  <h2>Välj en värld</h2>
+  <p>Varje värld är en nivå i matematiken. Ju djupare in i rymden, desto högre nivå. Klicka på en värld, eller skrolla mot den, för att kliva in.</p>
+</div>
+
+<aside class="hud dold" id="panel" aria-live="polite">
+  <button class="stang" id="stang" aria-label="Stäng panelen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="inre" id="panel-inre"></div>
+</aside>
+
+<div class="hud" id="framsteg">
+  <div class="rad1"><span class="lbl">TÄNDA STJÄRNOR</span><span class="tal" id="tal">0 <small>av 0</small></span></div>
+  <div class="staplar" id="staplar"></div>
+</div>
+
+<div class="hud" id="tips">Dra för att rotera · Skrolla för att zooma · Esc tar dig ut en nivå</div>
+
+<div class="hud" id="atgarder">
+  <button class="knapp prim" id="fortsatt">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    Fortsätt resan
+  </button>
+  <button class="knapp" id="simulera" title="Tänder nästa tolv stjärnor, så att du ser hur universum färgas">Simulera<span class="lang"> framsteg</span></button>
+  <button class="knapp valfri" id="nollstall">Nollställ</button>
+</div>
+
+<div id="fel"></div>
+
+<script src="../data/katalog.js"></script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+
+const $ = (s) => document.querySelector(s);
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isTouch = matchMedia('(pointer: coarse)').matches;
+const TAU = Math.PI * 2;
+
+/* =====================================================================
+   1. Innehåll: världarna byggs ur katalogen
+   ===================================================================== */
+const VARLDAR = [
+  { kurs: 'Matematik nivå 1c', kod: 'ma1c', namn: 'Talens rike', kort: 'Nivå 1c',
+    farg: '#ffb547', farg2: '#fff1c9', form: 'spiral', pos: [-72, 0, 62],
+    ingress: 'Här börjar allt. Tal och räkning, bokstäver som gör entré, procent, räta linjer, statistik och de första vinklarna. Spiralen är byggd av tal som läggs ut med den gyllene vinkeln, och de ljusaste punkterna är primtalen.',
+    glyfer: [[['7','r']], [['+','r']], [['π','i']], [['÷','r']], [['%','r']], [['3','r']], [['½','r']], [['×','r']], [['x','i']], [['=','r']], [['−','r']], [['0','r']]] },
+  { kurs: 'Matematik nivå 2c', kod: 'ma2c', namn: 'Algebrans rike', kort: 'Nivå 2c',
+    farg: '#45e6d6', farg2: '#b9fff6', form: 'sadel', pos: [46, 16, -22],
+    ingress: 'Ekvationssystem, parabler, geometri och logaritmer. Ytan är en sadel, där en parabel öppnar sig uppåt och en annan nedåt i samma punkt.',
+    glyfer: [[['x','i'],['2','S']], [['√','r']], [['lg','r']], [['y','i']], [['±','r']], [['a','i'],['x','i'],['2','S']], [['=','r']], [['∠','r']], [['α','i']], [['p','i'],['q','i']]] },
+  { kurs: 'Matematik fortsättning nivå 1c', kod: 'ma3c', namn: 'Förändringens rike', kort: 'Fortsättning 1c',
+    farg: '#b884ff', farg2: '#f0dcff', form: 'krusning', pos: [-36, -10, -122],
+    ingress: 'Gränsvärden, derivator och integraler. Matematiken som beskriver hur saker förändras, ögonblick för ögonblick. Ytan böljar hela tiden, för här står ingenting stilla.',
+    glyfer: [[['f','i'],['′(','r'],['x','i'],[')','r']], [['∫','r']], [['d','r'],['x','i']], [['Δ','r']], [['lim','r']], [['e','i'],['x','s']], [['∞','r']], [['→','r']], [['Δ','r'],['y','i']]] },
+  { kurs: 'Matematik fortsättning nivå 2', kod: 'ma4', namn: 'De komplexa talens rike', kort: 'Fortsättning 2',
+    farg: '#ff5fa2', farg2: '#8fb8ff', form: 'mandelbrot', pos: [58, 14, -218],
+    ingress: 'Längst in, där talen lämnar tallinjen. Enhetscirkeln, nya derivator och integraler, och det imaginära talet <em>i</em> där <em>i</em><sup>2</sup> = −1. Världen är Mandelbrotmängden, ritad i det komplexa talplanet.',
+    glyfer: [[['i','i']], [['z','i']], [['e','i'],['iπ','s']], [['|','r'],['z','i'],['|','r']], [['arg','r']], [['sin','r']], [['cos','r']], [['ω','i']], [['∞','r']]] },
+];
+
+const KAT = window.KATALOG && window.KATALOG.Matematik;
+if (!KAT) {
+  const f = $('#fel');
+  f.style.display = 'grid';
+  f.textContent = 'Katalogen kunde inte läsas in. Öppna sidan via webbservern (till exempel http://localhost:8000/utkast/matematikuniversum.html).';
+  throw new Error('KATALOG saknas');
+}
+// Äldre katalogtexter har tankstreck och markdown-kursiv.
+const html = (s) => String(s || '').replace(/\s—\s/g, ', ').replace(/\*([^*]+)\*/g, '<em>$1</em>');
+const ren = (s) => String(s || '').replace(/\*/g, '');
+
+const ALLA = [];
+VARLDAR.forEach((w, wi) => {
+  const kurs = KAT.courses[w.kurs];
+  w.wi = wi;
+  w.center = new THREE.Vector3(...w.pos);
+  w.col = new THREE.Color(w.farg);
+  w.col2 = new THREE.Color(w.farg2);
+  w.ljus = { spiral: 1, sadel: 1, krusning: 1, mandelbrot: 0.7 }[w.form];
+  w.tagline = html(kurs.intro && kurs.intro.tagline);
+  w.kapitel = Object.entries(kurs.chapters)
+    .sort((a, b) => a[1].number - b[1].number)
+    .map(([namn, cc], ci) => ({
+      w, ci, namn, nummer: cc.number, intro: html(cc.intro),
+      avsnitt: cc.sections.map((s) => ({
+        num: s.num, titel: html(s.title), titelRen: ren(s.title), text: html(s.description),
+        id: w.kod + '-' + s.num, sam: /\.S$/.test(s.num),
+      })),
+    }));
+  w.kapitel.forEach((k) => k.avsnitt.forEach((s) => { s.k = k; s.w = w; s.ix = ALLA.length; ALLA.push(s); }));
+  w.antal = w.kapitel.reduce((n, k) => n + k.avsnitt.length, 0);
+});
+if (isTouch) $('#intro-tips').textContent = 'Dra för att se dig omkring. Nyp för att zooma in och ut.';
+$('#intro-text').innerHTML = `Fyra världar och ${ALLA.length} stjärnor. En resa från de första talen till de komplexa. Varje avsnitt du klarar tänder en stjärna, och universum färgas långsamt i takt med det du kan.`;
+
+/* Framsteg (lokalt, per webbläsare) */
+const NYCKEL = 'mu-klarade';
+let klarade = new Set();
+try { klarade = new Set(JSON.parse(localStorage.getItem(NYCKEL) || '[]')); } catch (e) {}
+const spara = () => { try { localStorage.setItem(NYCKEL, JSON.stringify([...klarade])); } catch (e) {} };
+const kapProg = (k) => k.avsnitt.filter((s) => klarade.has(s.id)).length / k.avsnitt.length;
+const varldAntal = (w) => w.kapitel.reduce((n, k) => n + k.avsnitt.filter((s) => klarade.has(s.id)).length, 0);
+const nastaI = (lista) => lista.find((s) => !klarade.has(s.id));
+
+/* =====================================================================
+   2. Renderare, kamera, efterbehandling
+   ===================================================================== */
+const canvas = $('#scen');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
+const PR = Math.min(devicePixelRatio || 1, isTouch ? 1.5 : 2);
+renderer.setPixelRatio(PR);
+renderer.setSize(innerWidth, innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#03040a');
+const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 14000);
+scene.add(camera);
+
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 1.0, 0.62, 0.1);
+composer.addPass(bloom);
+composer.addPass(new OutputPass());
+
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize(innerWidth, innerHeight);
+labelRenderer.domElement.className = 'etiketter';
+document.body.insertBefore(labelRenderer.domElement, $('#intro'));
+// etiketterna ligger ovanpå canvasen; skicka vidare hjulet så att zoomen fungerar även över dem
+labelRenderer.domElement.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  canvas.dispatchEvent(new WheelEvent('wheel', { deltaX: e.deltaX, deltaY: e.deltaY, deltaMode: e.deltaMode, clientX: e.clientX, clientY: e.clientY, ctrlKey: e.ctrlKey, bubbles: true, cancelable: true }));
+}, { passive: false });
+
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.rotateSpeed = 0.55;
+controls.zoomSpeed = 0.9;
+controls.enablePan = false;
+controls.enabled = false;
+
+// smal skärm (telefon på höjden): kameran backar så att samma bredd ryms
+const avstF = () => Math.min(2.3, Math.max(1, 1.2 / camera.aspect));
+const pxSkala = () => innerHeight / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2));
+const delade = { uTime: { value: 0 }, uPR: { value: PR }, uScale: { value: pxSkala() } };
+
+/* =====================================================================
+   3. Shaders
+   ===================================================================== */
+const MOLN_VERT = /* glsl */`
+  uniform float uTime, uPR, uScale, uWave, uDim;
+  uniform float uProg[8];
+  uniform vec3 uColor, uColor2;
+  attribute float aSize, aSector, aRank, aSeed, aMix;
+  varying vec3 vColor;
+  void main() {
+    vec3 p = position;
+    if (uWave > 0.0) {
+      float r = length(p.xz);
+      p.y += uWave * sin(r * 0.62 - uTime * 1.3) * exp(-r * 0.035);
+    }
+    float prog = uProg[int(aSector + 0.5)];
+    float lit = smoothstep(aRank - 0.08, aRank, prog * 1.04);
+    vec3 lc = mix(uColor, uColor2, aMix) * 1.05;
+    vec3 grey = vec3(0.50, 0.57, 0.78) * 0.40;
+    float tw = 0.78 + 0.22 * sin(uTime * (0.7 + aSeed * 1.8) + aSeed * 40.0);
+    vColor = mix(grey, lc, lit) * tw * uDim;
+    vec4 mv = modelViewMatrix * vec4(p, 1.0);
+    gl_PointSize = min(aSize * (1.0 + lit * 0.3) * uScale / -mv.z, 48.0) * uPR;
+    gl_Position = projectionMatrix * mv;
+  }`;
+const PUNKT_FRAG = /* glsl */`
+  varying vec3 vColor;
+  void main() {
+    float d = length(gl_PointCoord - 0.5);
+    if (d > 0.5) discard;
+    float a = pow(1.0 - d * 2.0, 1.7);
+    gl_FragColor = vec4(vColor * a, a);
+  }`;
+const STJARN_VERT = /* glsl */`
+  uniform float uTime, uPR, uScale;
+  attribute float aSize, aSeed;
+  attribute vec3 color;
+  varying vec3 vColor;
+  void main() {
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    vColor = color * (0.65 + 0.35 * sin(uTime * (0.4 + aSeed) + aSeed * 60.0));
+    gl_PointSize = clamp(aSize * uScale / -mv.z, 1.0, 7.0) * uPR;
+    gl_Position = projectionMatrix * mv;
+  }`;
+const KLOT_VERT = /* glsl */`
+  varying vec3 vN; varying vec3 vV;
+  void main() {
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    vN = normalize(normalMatrix * normal);
+    vV = normalize(-mv.xyz);
+    gl_Position = projectionMatrix * mv;
+  }`;
+const KLOT_FRAG = /* glsl */`
+  uniform vec3 uColor; uniform float uProg, uHover, uTime;
+  varying vec3 vN; varying vec3 vV;
+  void main() {
+    float f = 1.0 - max(dot(normalize(vN), normalize(vV)), 0.0);
+    float rim = pow(f, 2.2);
+    vec3 grey = vec3(0.45, 0.52, 0.72);
+    vec3 c = mix(grey * 0.55, uColor * 1.7, uProg);
+    float core = mix(0.08, 0.6, uProg) * (0.85 + 0.15 * sin(uTime * 2.2));
+    vec3 col = c * (rim * 1.9 + core) + vec3(uHover * 0.22);
+    gl_FragColor = vec4(col, 1.0);
+  }`;
+
+function molnMaterial(w) {
+  return new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: delade.uTime, uPR: delade.uPR, uScale: delade.uScale,
+      uWave: { value: w.form === 'krusning' ? 1.25 : 0 },
+      uDim: { value: w.ljus },
+      uProg: { value: [0, 0, 0, 0, 0, 0, 0, 0] },
+      uColor: { value: w.col.clone() }, uColor2: { value: w.col2.clone() },
+    },
+    vertexShader: MOLN_VERT, fragmentShader: PUNKT_FRAG,
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  });
+}
+
+/* =====================================================================
+   4. Hjälpare: texturer och glyfer
+   ===================================================================== */
+function glodTextur(inre = 'rgba(255,255,255,1)', yttre = 'rgba(255,255,255,0)') {
+  const c = document.createElement('canvas'); c.width = c.height = 256;
+  const g = c.getContext('2d');
+  const gr = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+  gr.addColorStop(0, inre); gr.addColorStop(0.35, inre.replace(/[\d.]+\)$/, '0.35)')); gr.addColorStop(1, yttre);
+  g.fillStyle = gr; g.fillRect(0, 0, 256, 256);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const GLOD = glodTextur();
+
+// Glyf: lista av [text, stil], stil i = kursiv variabel, r = rak, s/S = upphöjd kursiv/rak
+const MATTEFONT = '"Cambria Math", "STIX Two Math", "Latin Modern Math", "Times New Roman", serif';
+const glyfCache = new Map();
+function glyfTextur(delar) {
+  const nyckel = JSON.stringify(delar);
+  if (glyfCache.has(nyckel)) return glyfCache.get(nyckel);
+  const c = document.createElement('canvas'); c.width = 512; c.height = 256;
+  const g = c.getContext('2d');
+  const F = 150;
+  const font = (st) => `${st === 'i' || st === 's' ? 'italic ' : ''}${st === 's' || st === 'S' ? F * 0.58 : F}px ${MATTEFONT}`;
+  let bredd = 0;
+  delar.forEach(([t, st]) => { g.font = font(st); bredd += g.measureText(t).width + (st === 'i' ? 6 : 2); });
+  let x = 256 - bredd / 2;
+  g.fillStyle = '#fff'; g.textBaseline = 'alphabetic';
+  delar.forEach(([t, st]) => {
+    g.font = font(st);
+    g.fillText(t, x, st === 's' || st === 'S' ? 128 + 2 : 128 + F * 0.34);
+    x += g.measureText(t).width + (st === 'i' ? 6 : 2);
+  });
+  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
+  glyfCache.set(nyckel, tex);
+  return tex;
+}
+function glyfSprite(delar, farg, opac, storlek) {
+  const m = new THREE.SpriteMaterial({ map: glyfTextur(delar), color: farg, transparent: true, opacity: opac, depthWrite: false, blending: THREE.AdditiveBlending });
+  const s = new THREE.Sprite(m);
+  s.scale.set(storlek * 2, storlek, 1);
+  return s;
+}
+
+/* =====================================================================
+   5. Bakgrund: stjärnhimmel, nebulosor, svävande matematik
+   ===================================================================== */
+(function stjarnhimmel() {
+  const N = isTouch ? 5000 : 9000;
+  const pos = new Float32Array(N * 3), col = new Float32Array(N * 3), size = new Float32Array(N), seed = new Float32Array(N);
+  const palett = [new THREE.Color('#9fb4ff'), new THREE.Color('#ffffff'), new THREE.Color('#ffd9a8'), new THREE.Color('#c8a8ff')];
+  for (let i = 0; i < N; i++) {
+    const nara = i < N * 0.3;
+    const r = nara ? 120 + Math.random() * 600 : 2600 + Math.random() * 2400;
+    const u = Math.random() * 2 - 1, f = Math.random() * TAU, s = Math.sqrt(1 - u * u);
+    pos.set([r * s * Math.cos(f), r * u * 0.7, r * s * Math.sin(f) - 80], i * 3);
+    const c = palett[(Math.random() * palett.length) | 0].clone().multiplyScalar(0.35 + Math.random() * 0.65);
+    col.set([c.r, c.g, c.b], i * 3);
+    size[i] = nara ? 0.5 + Math.random() * 1.1 : 6 + Math.random() * 14;
+    seed[i] = Math.random();
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  geo.setAttribute('aSize', new THREE.BufferAttribute(size, 1));
+  geo.setAttribute('aSeed', new THREE.BufferAttribute(seed, 1));
+  const mat = new THREE.ShaderMaterial({ uniforms: delade, vertexShader: STJARN_VERT, fragmentShader: PUNKT_FRAG, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending });
+  scene.add(new THREE.Points(geo, mat));
+})();
+
+function nebulosa(pos, farg, skala, opac) {
+  const m = new THREE.SpriteMaterial({ map: GLOD, color: farg, transparent: true, opacity: opac, depthWrite: false, blending: THREE.AdditiveBlending });
+  const s = new THREE.Sprite(m); s.position.copy(pos); s.scale.setScalar(skala); scene.add(s); return s;
+}
+VARLDAR.forEach((w) => { nebulosa(w.center, w.col, 150, 0.10); nebulosa(w.center, w.col2, 60, 0.06); });
+nebulosa(new THREE.Vector3(-260, 120, -600), new THREE.Color('#3a4cff'), 900, 0.07);
+nebulosa(new THREE.Vector3(380, -160, -420), new THREE.Color('#9b3cff'), 700, 0.06);
+nebulosa(new THREE.Vector3(-120, -200, 300), new THREE.Color('#ff7a3d'), 600, 0.04);
+
+const svavare = [];
+(function svavandeMatematik() {
+  const alla = VARLDAR.flatMap((w) => w.glyfer).concat([
+    [['∑','r']], [['∂','r']], [['φ','i']], [['e','i']], [['n','i'],['!','r']], [['0','r']], [['1','r']], [['∀','r']], [['∈','r']], [['ℝ','r']], [['ℂ','r']],
+  ]);
+  const N = isTouch ? 60 : 110;
+  for (let i = 0; i < N; i++) {
+    const d = alla[(Math.random() * alla.length) | 0];
+    const s = glyfSprite(d, new THREE.Color().setHSL(0.6 + Math.random() * 0.25, 0.5, 0.8), 0.07 + Math.random() * 0.13, 5 + Math.random() * 11);
+    const r = 90 + Math.random() * 360, f = Math.random() * TAU;
+    s.position.set(Math.cos(f) * r, (Math.random() - 0.5) * 240, Math.sin(f) * r - 80);
+    s.userData = { v: new THREE.Vector3((Math.random() - 0.5) * 0.6, (Math.random() - 0.5) * 0.4, (Math.random() - 0.5) * 0.6), rot: (Math.random() - 0.5) * 0.1, opac: s.material.opacity };
+    scene.add(s); svavare.push(s);
+  }
+})();
+
+/* =====================================================================
+   6. Världarnas strukturer (punktmoln ur matematiken själv)
+   ===================================================================== */
+function arPrimtal(n) { if (n < 2) return false; for (let d = 2; d * d <= n; d++) if (n % d === 0) return false; return true; }
+
+const FORMER = {
+  spiral() { // phyllotaxis: punkt nr n i vinkeln n · 137,5°
+    const pts = [], N = isTouch ? 2600 : 3400, G = Math.PI * (3 - Math.sqrt(5));
+    for (let n = 1; n <= N; n++) {
+      const r = 0.29 * Math.sqrt(n), f = n * G, p = arPrimtal(n);
+      pts.push({ x: r * Math.cos(f), z: r * Math.sin(f), y: 2.4 * Math.cos(r * 0.19) - 0.6 + (Math.random() - 0.5) * 0.25,
+        size: p ? 0.95 : 0.42, mix: p ? 0.9 : Math.random() * 0.3 });
+    }
+    return pts;
+  },
+  sadel() { // y = (x² − z²) / k, ritad som rutnät av ljus
+    const pts = [], L = 21, M = isTouch ? 120 : 170, R = 15.5;
+    const yta = (u, v) => 4.6 * (u * u - v * v);
+    for (let a = 0; a < L; a++) {
+      const fast = -1 + (2 * a) / (L - 1);
+      for (let b = 0; b < M; b++) {
+        const t = -1 + (2 * b) / (M - 1);
+        for (const [u, v] of [[fast, t], [t, fast]]) {
+          if (u * u + v * v > 1.08) continue;
+          pts.push({ x: u * R, z: v * R, y: yta(u, v), size: 0.36, mix: Math.abs(u * v) * 1.2 });
+        }
+      }
+    }
+    // en parabel i varje riktning, extra ljus
+    for (let b = 0; b < 220; b++) {
+      const t = -1 + (2 * b) / 219;
+      pts.push({ x: t * R, z: 0, y: yta(t, 0), size: 0.7, mix: 1 });
+      pts.push({ x: 0, z: t * R, y: yta(0, t), size: 0.7, mix: 1 });
+    }
+    return pts;
+  },
+  krusning() { // koncentriska ringar; vågen läggs på i shadern
+    const pts = [];
+    for (let i = 0; i < 34; i++) {
+      const r = 0.6 + i * 0.5, n = Math.round(r * (isTouch ? 14 : 19));
+      for (let j = 0; j < n; j++) {
+        const f = (j / n) * TAU + i * 0.13;
+        pts.push({ x: r * Math.cos(f), z: r * Math.sin(f), y: 0, size: i % 4 === 0 ? 0.62 : 0.36, mix: i % 4 === 0 ? 0.85 : (i / 34) * 0.4 });
+      }
+    }
+    // en tangent som glider längs kurvan, ritad som punktlinje
+    return pts;
+  },
+  mandelbrot() { // z ↦ z² + c, höjden ger hur snabbt talföljden flyr
+    const pts = [], MAX = 70, S = 8.4, steg = isTouch ? 0.014 : 0.0105;
+    for (let cx = -2.15; cx <= 0.62; cx += steg) {
+      for (let cy = -1.25; cy <= 1.25; cy += steg) {
+        let x = 0, y = 0, n = 0;
+        while (n < MAX && x * x + y * y <= 4) { const xt = x * x - y * y + cx; y = 2 * x * y + cy; x = xt; n++; }
+        const inne = n === MAX;
+        // själva mängden glest, randen (där talföljden flyr långsamt) tätt
+        if (inne ? Math.random() > 0.05 : n < 4 || (n < 8 ? Math.random() > 0.07 : Math.random() > 0.7)) continue;
+        const h = inne ? 1 : Math.pow(n / MAX, 0.5);
+        pts.push({ x: (cx + 0.72) * S, z: cy * S, y: -2 + 4.6 * h + (Math.random() - 0.5) * 0.12,
+          size: inne ? 0.26 : 0.24 + 0.36 * h, mix: inne ? 1 : n / MAX * 1.4 });
+      }
+    }
+    return pts;
+  },
+};
+
+const KAP_RADIE = 28;
+const vinkelFor = (w, ci) => -Math.PI / 2 + (ci / w.kapitel.length) * TAU + w.wi * 0.5;
+
+function byggMoln(w) {
+  const pts = FORMER[w.form]();
+  const n = w.kapitel.length, steg = TAU / n, off = vinkelFor(w, 0);
+  let maxR = 0; pts.forEach((p) => { p.r = Math.hypot(p.x, p.z); maxR = Math.max(maxR, p.r); });
+  const N = pts.length;
+  const pos = new Float32Array(N * 3), size = new Float32Array(N), sec = new Float32Array(N), rank = new Float32Array(N), seed = new Float32Array(N), mix = new Float32Array(N);
+  pts.forEach((p, i) => {
+    pos.set([p.x, p.y, p.z], i * 3);
+    size[i] = p.size; mix[i] = Math.min(1, p.mix); seed[i] = Math.random();
+    let k = Math.round((Math.atan2(p.z, p.x) - off) / steg); k = ((k % n) + n) % n;
+    sec[i] = k;
+    rank[i] = Math.min(1, Math.max(0.04, p.r / maxR * 0.94 + Math.random() * 0.06));
+  });
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('aSize', new THREE.BufferAttribute(size, 1));
+  geo.setAttribute('aSector', new THREE.BufferAttribute(sec, 1));
+  geo.setAttribute('aRank', new THREE.BufferAttribute(rank, 1));
+  geo.setAttribute('aSeed', new THREE.BufferAttribute(seed, 1));
+  geo.setAttribute('aMix', new THREE.BufferAttribute(mix, 1));
+  const pts3 = new THREE.Points(geo, molnMaterial(w));
+  pts3.position.copy(w.center);
+  pts3.frustumCulled = false;
+  scene.add(pts3);
+  w.moln = pts3;
+  w.progNu = new Array(8).fill(0);
+}
+
+/* =====================================================================
+   7. Kapitel (planeter) och avsnitt (stjärnbilder)
+   ===================================================================== */
+const klotGeo = new THREE.SphereGeometry(1.7, 48, 32);
+const stjarnGeo = new THREE.IcosahedronGeometry(0.27, 2);
+const stjarnMat = new THREE.MeshBasicMaterial({ color: 0xffffff, toneMapped: false });
+const stjarnor = new THREE.InstancedMesh(stjarnGeo, stjarnMat, ALLA.length);
+stjarnor.frustumCulled = false;
+scene.add(stjarnor);
+const SLACKT = new THREE.Color(0.30, 0.34, 0.48);
+const pickVarldar = [], pickKlot = [];
+
+function ringGeo(andel) {
+  return new THREE.TorusGeometry(2.6, 0.075, 6, 96, Math.max(0.0001, andel) * TAU);
+}
+
+VARLDAR.forEach((w) => {
+  byggMoln(w);
+
+  // osynligt klot för klick på hela världen
+  const pk = new THREE.Mesh(new THREE.SphereGeometry(34, 16, 12), new THREE.MeshBasicMaterial({ visible: false }));
+  pk.position.copy(w.center); pk.userData.w = w; scene.add(pk); pickVarldar.push(pk);
+
+  // världens etikett
+  const el = document.createElement('div');
+  el.className = 'wl'; el.style.setProperty('--wc', w.farg);
+  el.innerHTML = `<span class="kurs">${w.kurs}</span><span class="namn">${w.namn}</span><span class="prog"></span>`;
+  el.addEventListener('click', (e) => { e.stopPropagation(); gaTillVarld(w); });
+  w.etikett = new CSS2DObject(el);
+  w.etikett.position.copy(w.center).add(new THREE.Vector3(0, 27, 0));
+  scene.add(w.etikett);
+
+  // svävande glyfer i omloppsbana
+  w.glyfSprites = w.glyfer.map((d, i) => {
+    const s = glyfSprite(d, w.col2, 0.42, 2.6 + Math.random() * 1.6);
+    s.userData = { r: 20 + Math.random() * 16, f: (i / w.glyfer.length) * TAU, y: (Math.random() - 0.5) * 16, v: 0.04 + Math.random() * 0.05 };
+    scene.add(s); return s;
+  });
+
+  // enhetscirkeln med e^{iωt} i den komplexa världen
+  if (w.form === 'mandelbrot') {
+    const pts = []; for (let i = 0; i <= 160; i++) { const f = (i / 160) * TAU; pts.push(new THREE.Vector3(Math.cos(f) * 19.5, -2, Math.sin(f) * 19.5)); }
+    const cirkel = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: w.col2, transparent: true, opacity: 0.35 }));
+    cirkel.position.copy(w.center); scene.add(cirkel);
+    const prick = new THREE.Mesh(new THREE.SphereGeometry(0.45, 16, 12), new THREE.MeshBasicMaterial({ color: new THREE.Color(w.farg2).multiplyScalar(3), toneMapped: false }));
+    const radie = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3(1, 0, 0)]), new THREE.LineBasicMaterial({ color: w.col2, transparent: true, opacity: 0.5 }));
+    scene.add(prick, radie);
+    w.enhet = { prick, radie };
+  }
+
+  // kapitlen
+  w.kapitel.forEach((k) => {
+    const f = vinkelFor(w, k.ci);
+    k.vinkel = f;
+    k.pos = new THREE.Vector3(Math.cos(f) * KAP_RADIE, 3.2 * Math.sin(k.ci * 2.1 + w.wi), Math.sin(f) * KAP_RADIE).add(w.center);
+    const mat = new THREE.ShaderMaterial({ uniforms: { uColor: { value: w.col.clone() }, uProg: { value: 0 }, uHover: { value: 0 }, uTime: delade.uTime }, vertexShader: KLOT_VERT, fragmentShader: KLOT_FRAG });
+    k.klot = new THREE.Mesh(klotGeo, mat);
+    k.klot.position.copy(k.pos); k.klot.userData.k = k;
+    scene.add(k.klot); pickKlot.push(k.klot);
+
+    k.ringar = new THREE.Group(); k.ringar.position.copy(k.pos);
+    const spar = new THREE.Mesh(ringGeo(1), new THREE.MeshBasicMaterial({ color: 0x2a3048, transparent: true, opacity: 0.8 }));
+    k.ringFyll = new THREE.Mesh(ringGeo(0), new THREE.MeshBasicMaterial({ color: w.col.clone().multiplyScalar(2.4), toneMapped: false }));
+    k.ringFyll.rotation.z = Math.PI / 2;
+    k.ringar.add(spar, k.ringFyll); scene.add(k.ringar);
+    k.ringAndel = -1;
+
+    const cel = document.createElement('div');
+    cel.className = 'cl'; cel.style.setProperty('--wc', w.farg);
+    cel.innerHTML = `<b>${k.nummer}</b>${k.namn}<i></i>`;
+    cel.addEventListener('click', (e) => { e.stopPropagation(); gaTillKapitel(k); });
+    k.etikett = new CSS2DObject(cel); k.etikett.position.copy(k.pos); scene.add(k.etikett);
+    k.etikett.center.set(0.5, 1);
+
+    // stjärnbilden: avsnitten i en spiral runt planeten, i ett lodrätt plan
+    // som vetter mot kameran när man klivit in i kapitlet. Kameran står
+    // snett utanför planeten, så att världens ljusa mitt hamnar åt sidan
+    // (bakom panelen) i stället för rakt bakom stjärnorna.
+    const n = k.avsnitt.length;
+    const utat = new THREE.Vector3(Math.cos(f), 0, Math.sin(f));
+    const UPP = new THREE.Vector3(0, 1, 0);
+    let vy = null;
+    for (const th of [0.42, -0.42]) {
+      const d = utat.clone().applyAxisAngle(UPP, th);
+      const hoger = UPP.clone().cross(d).normalize();
+      if (!vy || utat.clone().negate().dot(hoger) > 0) vy = { d, hoger };
+    }
+    k.vy = vy.d.clone().add(new THREE.Vector3(0, 0.34, 0)).normalize();
+    const punkter = [];
+    // två kolumner, vänster uppifrån och ned och sedan höger, så att
+    // etiketterna kan läsas i ordning och aldrig hamnar ovanpå varandra
+    const halv = Math.ceil(n / 2), radH = 2.35, rx = 4.6;
+    k.avsnitt.forEach((s, i) => {
+      const vanster = i < halv, j = vanster ? i : i - halv, m = vanster ? halv : n - halv;
+      const u = m === 1 ? 0 : j / (m - 1) * 2 - 1;
+      const y = -u * (m - 1) * radH / 2 + (vanster ? 0.6 : -0.6);
+      const x = (vanster ? -1 : 1) * rx * (1.05 - 0.28 * u * u);
+      const p = k.pos.clone()
+        .addScaledVector(vy.hoger, x)
+        .addScaledVector(UPP, y)
+        .addScaledVector(vy.d, Math.sin(i * 1.9) * 0.5);
+      s.pos = p; punkter.push(p);
+      const sel = document.createElement('div');
+      sel.className = 'sl' + (vanster ? ' vanster' : ''); sel.style.setProperty('--wc', w.farg);
+      sel.innerHTML = `<span class="nr">${s.num}</span><span class="t">${s.sam ? 'Sammanfattning' : s.titel}</span>`;
+      sel.addEventListener('click', (e) => { e.stopPropagation(); valjAvsnitt(s, true); });
+      s.etikett = new CSS2DObject(sel); s.etikett.position.copy(p); scene.add(s.etikett);
+      s.etikett.center.set(vanster ? 1 : 0, 0.5);
+      s.skala = s.sam ? 1.6 : 1;
+    });
+    // linjen mellan stjärnorna
+    const kurva = new THREE.CatmullRomCurve3(punkter.length > 1 ? punkter : [punkter[0], punkter[0].clone().add(new THREE.Vector3(0.01, 0, 0))]);
+    const SEG = 10, total = (punkter.length - 1) * SEG + 1;
+    const lp = kurva.getSpacedPoints(Math.max(1, total - 1));
+    const lg = new THREE.BufferGeometry().setFromPoints(lp);
+    lg.setAttribute('color', new THREE.BufferAttribute(new Float32Array(lp.length * 3), 3));
+    k.linje = new THREE.Line(lg, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.85, toneMapped: false, blending: THREE.AdditiveBlending, depthWrite: false }));
+    k.linjeSeg = SEG;
+    scene.add(k.linje);
+  });
+});
+
+/* Kunskapsvägen: en ström av ljus genom världarna, i nivåordning */
+const vag = (() => {
+  const c = VARLDAR.map((w) => w.center);
+  const kurva = new THREE.CatmullRomCurve3([
+    c[0].clone().add(new THREE.Vector3(-60, -20, 70)), c[0],
+    c[0].clone().lerp(c[1], 0.5).add(new THREE.Vector3(0, 30, 10)), c[1],
+    c[1].clone().lerp(c[2], 0.5).add(new THREE.Vector3(10, -25, 0)), c[2],
+    c[2].clone().lerp(c[3], 0.5).add(new THREE.Vector3(-10, 30, 0)), c[3],
+    c[3].clone().add(new THREE.Vector3(40, 10, -80)),
+  ], false, 'catmullrom', 0.5);
+  const S = 3000, prov = kurva.getSpacedPoints(S);
+  // var på vägen ligger varje värld?
+  const vt = c.map((p) => { let b = 0, bd = 1e9; prov.forEach((q, i) => { const d = q.distanceToSquared(p); if (d < bd) { bd = d; b = i; } }); return b / S; });
+  const N = isTouch ? 1400 : 2400;
+  const pos = new Float32Array(N * 3), col = new Float32Array(N * 3), size = new Float32Array(N), seed = new Float32Array(N);
+  const t0 = new Float32Array(N), jit = [];
+  for (let i = 0; i < N; i++) {
+    t0[i] = Math.random(); seed[i] = Math.random(); size[i] = 0.35 + Math.random() * 0.6;
+    const r = Math.pow(Math.random(), 1.8) * 4.5, f = Math.random() * TAU;
+    jit.push([Math.cos(f) * r, Math.sin(f) * r * 0.6, Math.sin(f + 1) * r]);
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  geo.setAttribute('aSize', new THREE.BufferAttribute(size, 1));
+  geo.setAttribute('aSeed', new THREE.BufferAttribute(seed, 1));
+  const mat = new THREE.ShaderMaterial({ uniforms: delade, vertexShader: STJARN_VERT.replace('clamp(aSize * uScale / -mv.z, 1.0, 7.0)', 'clamp(aSize * uScale / -mv.z, 0.6, 14.0)'), fragmentShader: PUNKT_FRAG, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending });
+  const p = new THREE.Points(geo, mat); p.frustumCulled = false; scene.add(p);
+  const dim = new THREE.Color(0.22, 0.25, 0.36);
+  let ljusT = 0, ljusMal = 0;
+  return {
+    satt(mal) { ljusMal = mal; },
+    uppdatera(time, dt) {
+      ljusT += (ljusMal - ljusT) * Math.min(1, dt * 1.2);
+      const c3 = new THREE.Color();
+      for (let i = 0; i < N; i++) {
+        const t = (t0[i] + time * 0.004) % 1;
+        const q = prov[Math.min(S, Math.round(t * S))];
+        pos[i * 3] = q.x + jit[i][0]; pos[i * 3 + 1] = q.y + jit[i][1]; pos[i * 3 + 2] = q.z + jit[i][2];
+        let wi = 0; while (wi < 3 && t > vt[wi + 1]) wi++;
+        const a = VARLDAR[wi], b = VARLDAR[Math.min(3, wi + 1)];
+        const lok = wi < 3 ? Math.min(1, Math.max(0, (t - vt[wi]) / (vt[wi + 1] - vt[wi]))) : 0;
+        c3.copy(a.col).lerp(b.col, lok).multiplyScalar(1.9);
+        if (t >= ljusT) c3.copy(dim);
+        col[i * 3] = c3.r; col[i * 3 + 1] = c3.g; col[i * 3 + 2] = c3.b;
+      }
+      geo.attributes.position.needsUpdate = true; geo.attributes.color.needsUpdate = true;
+    },
+    // vägens ljus når en världs position när världen före är klar
+    malFran() {
+      let t = vt[0];
+      for (let wi = 0; wi < 4; wi++) {
+        const p = varldAntal(VARLDAR[wi]) / VARLDAR[wi].antal;
+        const slut = wi < 3 ? vt[wi + 1] : 1;
+        t = vt[wi] + (slut - vt[wi]) * p;
+        if (p < 1) break;
+      }
+      return varldAntal(VARLDAR[0]) === 0 ? 0 : t;
+    },
+  };
+})();
+
+/* Nästa-ring, chockvågor */
+const nastaRing = new THREE.Mesh(new THREE.RingGeometry(0.62, 0.72, 48), new THREE.MeshBasicMaterial({ color: new THREE.Color(2.2, 2.2, 2.2), toneMapped: false, transparent: true, side: THREE.DoubleSide, depthWrite: false }));
+nastaRing.visible = false; scene.add(nastaRing);
+const vagor = [];
+function chockvag(pos, farg, storlek = 1) {
+  const m = new THREE.Mesh(new THREE.RingGeometry(0.85, 1, 64), new THREE.MeshBasicMaterial({ color: farg.clone().multiplyScalar(2.5), toneMapped: false, transparent: true, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending }));
+  m.position.copy(pos); m.userData = { t: 0, s: storlek };
+  scene.add(m); vagor.push(m);
+}
+
+/* =====================================================================
+   8. Uppdatering av framstegen i scenen och i gränssnittet
+   ===================================================================== */
+let nastaAvsnitt = null;
+function ritaFramsteg() {
+  const tmp = new THREE.Object3D(), c = new THREE.Color();
+  nastaAvsnitt = nastaI(ALLA);
+  ALLA.forEach((s) => {
+    const tand = klarade.has(s.id);
+    const hov = hovS === s || valtS === s;
+    tmp.position.copy(s.pos);
+    const bort = niva === 'kapitel' && s.k !== fokusK;
+    tmp.scale.setScalar(s.skala * (tand ? 1.25 : 1) * (hov ? 1.7 : 1) * (bort ? 0.6 : 1));
+    tmp.updateMatrix();
+    stjarnor.setMatrixAt(s.ix, tmp.matrix);
+    if (tand) c.copy(s.w.col).multiplyScalar(2.1);
+    else if (s === nastaAvsnitt) c.setRGB(1.1, 1.1, 1.2);
+    else c.copy(SLACKT);
+    if (bort) c.multiplyScalar(0.35);
+    stjarnor.setColorAt(s.ix, c);
+    s.etikett.element.classList.toggle('tand', tand);
+  });
+  stjarnor.instanceMatrix.needsUpdate = true;
+  stjarnor.instanceColor.needsUpdate = true;
+
+  VARLDAR.forEach((w) => {
+    w.kapitel.forEach((k) => {
+      const p = kapProg(k);
+      k.mal = p;
+      const d = k.avsnitt.filter((s) => klarade.has(s.id)).length;
+      k.etikett.element.querySelector('i').textContent = `${d}/${k.avsnitt.length}`;
+      // linjens färg: ett segment lyser när båda ändarnas stjärnor är tända
+      const col = k.linje.geometry.attributes.color, n = col.count;
+      for (let v = 0; v < n; v++) {
+        const seg = Math.min(k.avsnitt.length - 2, Math.floor(v / k.linjeSeg));
+        const a = k.avsnitt[Math.max(0, seg)], b = k.avsnitt[Math.max(0, seg) + 1] || a;
+        if (klarade.has(a.id) && klarade.has(b.id)) c.copy(w.col).multiplyScalar(1.5);
+        else c.setRGB(0.16, 0.18, 0.27);
+        col.setXYZ(v, c.r, c.g, c.b);
+      }
+      col.needsUpdate = true;
+      k.linje.material.opacity = niva === 'kapitel' && k !== fokusK ? 0.2 : 0.85;
+    });
+    const d = varldAntal(w);
+    w.etikett.element.querySelector('.prog').textContent = `${d} av ${w.antal} stjärnor`;
+  });
+  vag.satt(vag.malFran());
+
+  // gränssnitt
+  $('#tal').innerHTML = `${klarade.size} <small>av ${ALLA.length}</small>`;
+  $('#staplar').innerHTML = VARLDAR.map((w) => {
+    const p = varldAntal(w) / w.antal;
+    return `<button class="stapel" data-w="${w.wi}" style="--wc:${w.farg}"><span>${w.kort}</span><span class="spar"><span class="fyll" style="width:${(p * 100).toFixed(1)}%"></span></span><span class="pr">${Math.round(p * 100)} %</span></button>`;
+  }).join('');
+  $('#staplar').querySelectorAll('.stapel').forEach((b) => b.addEventListener('click', () => gaTillVarld(VARLDAR[+b.dataset.w])));
+  if (panelVy) panelVy();
+}
+
+/* =====================================================================
+   9. Nivåer, flygturer och navigering
+   ===================================================================== */
+let niva = 'universum', fokusW = null, fokusK = null, valtS = null;
+let flygning = null;
+const GRANS = { universum: [70, 720], varld: [24, 150], kapitel: [7, 44] };
+const OVERSIKT = (() => {
+  const c = new THREE.Vector3(); VARLDAR.forEach((w) => c.add(w.center)); c.divideScalar(VARLDAR.length);
+  return { mal: c, get pos() { return c.clone().add(new THREE.Vector3(55, 135, 262).multiplyScalar(avstF())); } };
+})();
+
+const ease = {
+  inOutCubic: (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2),
+  inOutQuart: (t) => (t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2),
+};
+function flyg(tillPos, tillMal, tid = 1.9, klar, opt = {}) {
+  const franPos = camera.position.clone(), franMal = controls.target.clone();
+  flygning = {
+    franPos, franMal, tillPos, tillMal, t: 0, tid: reduceMotion ? Math.min(tid, 0.5) : tid,
+    klar, bage: opt.bage != null ? opt.bage : franPos.distanceTo(tillPos) * 0.16,
+    ease: opt.ease || ease.inOutCubic, fov: opt.fov || 0,
+  };
+  controls.enabled = false;
+  Ljud.svisch(flygning.tid, Math.min(1, franPos.distanceTo(tillPos) / 300));
+}
+function satsGranser() {
+  const [mi, ma] = GRANS[niva];
+  controls.minDistance = mi; controls.maxDistance = ma * avstF();
+  controls.autoRotate = niva === 'universum' && !reduceMotion;
+  controls.autoRotateSpeed = 0.35;
+}
+function satsNiva(n) {
+  niva = n;
+  document.body.classList.toggle('niva-universum', n === 'universum');
+  $('#upp').disabled = n === 'universum';
+  VARLDAR.forEach((w) => {
+    w.etikett.visible = n === 'universum' || (n === 'varld' && w !== fokusW);
+    w.etikett.element.classList.toggle('fjarran', n !== 'universum');
+    w.kapitel.forEach((k) => {
+      k.etikett.visible = w === fokusW && n === 'varld';
+      k.avsnitt.forEach((s) => { s.etikett.visible = n === 'kapitel' && k === fokusK; });
+    });
+  });
+  ritaSmula();
+}
+
+function gaTillUniversum() {
+  fokusW = null; fokusK = null; valtS = null;
+  satsNiva('universum');
+  visaPanel(null);
+  flyg(OVERSIKT.pos.clone(), OVERSIKT.mal.clone(), 2.4, satsGranser);
+  ritaFramsteg();
+}
+function gaTillVarld(w) {
+  fokusW = w; fokusK = null; valtS = null;
+  satsNiva('varld');
+  const rikt = camera.position.clone().sub(w.center).setY(0).normalize();
+  if (!isFinite(rikt.x)) rikt.set(0, 0, 1);
+  const pos = w.center.clone().addScaledVector(rikt, 58 * avstF()).add(new THREE.Vector3(0, 50 * avstF(), 0));
+  flyg(pos, w.center.clone(), 2.2, satsGranser);
+  visaPanel(() => panelVarld(w));
+  ritaFramsteg();
+}
+function gaTillKapitel(k, sedan) {
+  fokusW = k.w; fokusK = k; if (!sedan) valtS = null;
+  satsNiva('kapitel');
+  const mal = k.pos.clone();
+  const avst = (17 + k.avsnitt.length * 0.95) * Math.min(1.9, avstF());
+  const pos = mal.clone().addScaledVector(k.vy, avst);
+  flyg(pos, mal, 2.0, satsGranser);
+  if (sedan) sedan(); else visaPanel(() => panelKapitel(k));
+  ritaFramsteg();
+}
+function valjAvsnitt(s, flygDit) {
+  valtS = s;
+  if (flygDit && fokusK !== s.k) { gaTillKapitel(s.k, () => visaPanel(() => panelAvsnitt(s))); return; }
+  visaPanel(() => panelAvsnitt(s));
+  ALLA.forEach((x) => x.etikett.element.classList.toggle('vald', x === s));
+  ritaFramsteg();
+}
+function uppEnNiva() {
+  if (flygning) return;
+  if (niva === 'kapitel') gaTillVarld(fokusW);
+  else if (niva === 'varld') gaTillUniversum();
+}
+
+function ritaSmula() {
+  const s = $('#smula');
+  const delar = [`<button data-g="u" class="${niva === 'universum' ? 'nu' : ''}">Universum</button>`];
+  if (fokusW) delar.push(`<span class="sep">/</span><button data-g="w" class="${niva === 'varld' ? 'nu' : ''}">${fokusW.namn}</button>`);
+  if (fokusK && niva === 'kapitel') delar.push(`<span class="sep">/</span><button data-g="k" class="nu">${fokusK.namn}</button>`);
+  s.innerHTML = delar.join('');
+  s.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
+    if (flygning) return;
+    if (b.dataset.g === 'u') gaTillUniversum();
+    else if (b.dataset.g === 'w') gaTillVarld(fokusW);
+    else if (b.dataset.g === 'k') gaTillKapitel(fokusK);
+  }));
+}
+
+/* =====================================================================
+   10. Panelen
+   ===================================================================== */
+let panelVy = null;
+function visaPanel(vy) {
+  panelVy = vy;
+  const p = $('#panel');
+  if (!vy) { p.classList.add('dold'); return; }
+  p.classList.remove('dold');
+  vy();
+}
+const stapelHtml = (d, n, farg) => `<div class="ptstapel" style="--wc:${farg}"><div class="spar"><div class="fyll" style="width:${(d / n * 100).toFixed(1)}%"></div></div><div class="txt"><span>${d} av ${n} stjärnor tända</span><span>${Math.round(d / n * 100)} %</span></div></div>`;
+
+function panelVarld(w) {
+  const d = varldAntal(w);
+  const inre = $('#panel-inre');
+  $('#panel').style.setProperty('--wc', w.farg);
+  inre.innerHTML = `
+    <div class="kicker">${w.kurs}</div>
+    <h3>${w.namn}</h3>
+    <p>${w.ingress}</p>
+    ${stapelHtml(d, w.antal, w.farg)}
+    <div class="lista">${w.kapitel.map((k) => {
+      const kd = k.avsnitt.filter((s) => klarade.has(s.id)).length;
+      return `<button data-k="${k.ci}"><span class="kapnr">${k.nummer}</span><span>${k.namn}</span><span class="minibar"><span style="width:${kd / k.avsnitt.length * 100}%"></span></span></button>`;
+    }).join('')}</div>
+    <div class="knappar"><button class="knapp prim" id="p-fortsatt">Fortsätt i ${w.namn.toLowerCase()}</button>
+    <a class="knapp" href="../katalog.html?id=${w.kod}">Öppna nivån i katalogen</a></div>`;
+  inre.querySelectorAll('[data-k]').forEach((b) => b.addEventListener('click', () => gaTillKapitel(w.kapitel[+b.dataset.k])));
+  inre.querySelector('#p-fortsatt').addEventListener('click', () => { const s = nastaI(w.kapitel.flatMap((k) => k.avsnitt)); if (s) valjAvsnitt(s, true); });
+}
+function panelKapitel(k) {
+  const w = k.w, d = k.avsnitt.filter((s) => klarade.has(s.id)).length;
+  const nasta = nastaI(k.avsnitt);
+  $('#panel').style.setProperty('--wc', w.farg);
+  const inre = $('#panel-inre');
+  inre.innerHTML = `
+    <div class="kicker">${w.namn} · Kapitel ${k.nummer}</div>
+    <h3>${k.namn}</h3>
+    <p>${k.intro || ''}</p>
+    ${stapelHtml(d, k.avsnitt.length, w.farg)}
+    <div class="lista">${k.avsnitt.map((s, i) => `<button data-s="${i}" class="${klarade.has(s.id) ? 'tand' : ''} ${s === nasta ? 'nasta' : ''}"><span class="prick"></span><span>${s.sam ? 'Sammanfattning' : s.titel}</span><span class="nr">${s.num}</span></button>`).join('')}</div>`;
+  inre.querySelectorAll('[data-s]').forEach((b) => b.addEventListener('click', () => valjAvsnitt(k.avsnitt[+b.dataset.s], false)));
+}
+function panelAvsnitt(s) {
+  const w = s.w, k = s.k, tand = klarade.has(s.id);
+  $('#panel').style.setProperty('--wc', w.farg);
+  const inre = $('#panel-inre');
+  inre.innerHTML = `
+    <div class="kicker">${w.namn} · Kapitel ${k.nummer} ${k.namn}</div>
+    <h3><span class="nr">${s.num}</span>${s.sam ? 'Sammanfattning' : s.titel}</h3>
+    <div class="status ${tand ? 'tand' : ''}"><span class="p"></span>${tand ? 'Stjärnan lyser' : 'Stjärnan väntar på dig'}</div>
+    <p>${s.text}</p>
+    <div class="knappar">
+      <a class="knapp prim" href="../katalog.html?id=${s.id}">Öppna genomgången</a>
+      ${s.sam ? '' : `<a class="knapp" href="../katalog.html?id=${s.id}:ovningar">Öva på avsnittet</a>`}
+      <button class="knapp tand-knapp" id="p-tand">${tand ? 'Släck stjärnan' : 'Tänd stjärnan'}</button>
+    </div>
+    <p class="not">I det här utkastet tänder du stjärnan själv. I en färdig version tänds den när du klarat avsnittets exit ticket.</p>
+    <button class="lank" id="p-tillbaka">Alla avsnitt i kapitlet</button>`;
+  inre.querySelector('#p-tand').addEventListener('click', () => vaxla(s));
+  inre.querySelector('#p-tillbaka').addEventListener('click', () => { valtS = null; ALLA.forEach((x) => x.etikett.element.classList.remove('vald')); visaPanel(() => panelKapitel(k)); ritaFramsteg(); });
+}
+
+function vaxla(s, tyst) {
+  if (klarade.has(s.id)) { klarade.delete(s.id); }
+  else {
+    const fore = kapProg(s.k);
+    klarade.add(s.id);
+    chockvag(s.pos, s.w.col, 1);
+    if (!tyst) Ljud.klang(s.ix);
+    if (kapProg(s.k) === 1 && fore < 1) {
+      setTimeout(() => { chockvag(s.k.pos, s.w.col, 4); Ljud.ackord(); }, 250);
+    }
+  }
+  spara();
+  ritaFramsteg();
+}
+
+/* =====================================================================
+   11. Pekare: hovring, klick, skroll in och ut
+   ===================================================================== */
+const ray = new THREE.Raycaster();
+const mus = new THREE.Vector2();
+let hovW = null, hovK = null, hovS = null, nedPos = null;
+function trff(e) {
+  mus.set((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+  ray.setFromCamera(mus, camera);
+  let w = null, k = null, s = null;
+  if (niva === 'universum') { const h = ray.intersectObjects(pickVarldar)[0]; if (h) w = h.object.userData.w; }
+  else {
+    const hk = ray.intersectObjects(pickKlot.filter((m) => m.userData.k.w === fokusW))[0];
+    if (hk) k = hk.object.userData.k;
+    if (niva === 'kapitel') {
+      const hs = ray.intersectObject(stjarnor);
+      const fs = hs.map((h) => ALLA[h.instanceId]).find((x) => x && x.k === fokusK);
+      if (fs) { s = fs; k = null; }
+    }
+    if (niva === 'varld' && !k) {
+      const hw = ray.intersectObjects(pickVarldar.filter((m) => m.userData.w !== fokusW))[0];
+      if (hw && hw.distance < 400) w = hw.object.userData.w;
+    }
+  }
+  return { w, k, s };
+}
+function satsHov({ w, k, s }) {
+  if (w !== hovW) { if (hovW) hovW.etikett.element.classList.remove('hov'); hovW = w; if (w) w.etikett.element.classList.add('hov'); }
+  if (k !== hovK) { if (hovK) { hovK.klot.material.uniforms.uHover.value = 0; hovK.etikett.element.classList.remove('hov'); } hovK = k; if (k) { k.klot.material.uniforms.uHover.value = 1; k.etikett.element.classList.add('hov'); } }
+  if (s !== hovS) { if (hovS) hovS.etikett.element.classList.remove('hov'); hovS = s; if (s) s.etikett.element.classList.add('hov'); ritaFramsteg(); }
+  canvas.style.cursor = w || k || s ? 'pointer' : 'grab';
+}
+canvas.addEventListener('pointermove', (e) => { if (!flygning && !document.body.classList.contains('intro') && e.pointerType === 'mouse') satsHov(trff(e)); });
+canvas.addEventListener('pointerdown', (e) => { nedPos = [e.clientX, e.clientY]; controls.autoRotate = false; });
+canvas.addEventListener('pointerup', (e) => {
+  if (!nedPos || flygning) return;
+  const flytt = Math.hypot(e.clientX - nedPos[0], e.clientY - nedPos[1]); nedPos = null;
+  if (flytt > 7) return;
+  const { w, k, s } = trff(e);
+  if (s) valjAvsnitt(s, false);
+  else if (k) gaTillKapitel(k);
+  else if (w) gaTillVarld(w);
+});
+let utAck = 0, inAck = 0, ackTimer = 0;
+canvas.addEventListener('wheel', (e) => {
+  if (flygning || document.body.classList.contains('intro')) return;
+  const d = camera.position.distanceTo(controls.target);
+  clearTimeout(ackTimer); ackTimer = setTimeout(() => { utAck = inAck = 0; }, 380);
+  if (e.deltaY > 0 && niva !== 'universum' && d >= controls.maxDistance * 0.95) {
+    utAck += e.deltaY; if (utAck > 260) { utAck = 0; uppEnNiva(); }
+  } else if (e.deltaY < 0) {
+    const t = trff(e);
+    if ((niva === 'universum' && t.w) || (niva === 'varld' && (t.k || t.w))) {
+      inAck -= e.deltaY;
+      if (inAck > 240) { inAck = 0; if (t.k) gaTillKapitel(t.k); else gaTillVarld(t.w); }
+    }
+  }
+}, { passive: true });
+addEventListener('keydown', (e) => { if (e.key === 'Escape') uppEnNiva(); });
+
+/* =====================================================================
+   12. Ljud (syntetiserat, inga ljudfiler)
+   ===================================================================== */
+const Ljud = {
+  ctx: null, pa: false, master: null, eko: null,
+  starta() {
+    try {
+      const ctx = this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+      this.master = ctx.createGain(); this.master.gain.value = 0; this.master.connect(ctx.destination);
+      // eko för klangerna
+      const dl = ctx.createDelay(1); dl.delayTime.value = 0.34;
+      const fb = ctx.createGain(); fb.gain.value = 0.42;
+      const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2400;
+      dl.connect(lp); lp.connect(fb); fb.connect(dl); lp.connect(this.master);
+      this.eko = dl;
+      // rymdton: tre svaga toner och ett filtrerat brus som andas
+      const dron = ctx.createGain(); dron.gain.value = 0.32; dron.connect(this.master);
+      [[55, 'sine', 0.5], [82.41, 'sine', 0.3], [110.3, 'triangle', 0.07], [164.8, 'sine', 0.05]].forEach(([f, typ, g]) => {
+        const o = ctx.createOscillator(); o.type = typ; o.frequency.value = f;
+        const gg = ctx.createGain(); gg.gain.value = g; o.connect(gg); gg.connect(dron); o.start();
+        const lfo = ctx.createOscillator(); lfo.frequency.value = 0.05 + Math.random() * 0.08;
+        const lg = ctx.createGain(); lg.gain.value = g * 0.6; lfo.connect(lg); lg.connect(gg.gain); lfo.start();
+      });
+      const buf = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate), d = buf.getChannelData(0);
+      for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+      this.brus = buf;
+      const src = ctx.createBufferSource(); src.buffer = buf; src.loop = true;
+      const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 420; bp.Q.value = 0.8;
+      const bg = ctx.createGain(); bg.gain.value = 0.05;
+      const lfo = ctx.createOscillator(); lfo.frequency.value = 0.07; const lfg = ctx.createGain(); lfg.gain.value = 260;
+      lfo.connect(lfg); lfg.connect(bp.frequency); lfo.start();
+      src.connect(bp); bp.connect(bg); bg.connect(dron); src.start();
+    } catch (e) { this.ctx = null; }
+  },
+  vaxla() {
+    if (!this.ctx) this.starta();
+    if (!this.ctx) return;
+    this.pa = !this.pa;
+    if (this.ctx.state === 'suspended') this.ctx.resume();
+    const t = this.ctx.currentTime;
+    this.master.gain.cancelScheduledValues(t);
+    this.master.gain.setTargetAtTime(this.pa ? 0.5 : 0, t, 0.6);
+    const knapp = $('#ljud');
+    knapp.querySelectorAll('.vag').forEach((p) => { p.style.display = this.pa ? '' : 'none'; });
+    knapp.querySelector('.av').style.display = this.pa ? 'none' : '';
+    knapp.title = this.pa ? 'Ljud av' : 'Ljud på';
+    knapp.setAttribute('aria-label', knapp.title);
+  },
+  ton(f, nar, styrka = 0.18, varak = 1.6, typ = 'sine') {
+    const ctx = this.ctx, t = ctx.currentTime + nar;
+    const o = ctx.createOscillator(); o.type = typ; o.frequency.value = f;
+    const g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(styrka, t + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, t + varak);
+    o.connect(g); g.connect(this.master); g.connect(this.eko); o.start(t); o.stop(t + varak + 0.1);
+  },
+  klang(i) {
+    if (!this.pa) return;
+    const skala = [0, 2, 4, 7, 9, 12, 14, 16, 19, 21];
+    const f = 392 * Math.pow(2, skala[i % skala.length] / 12);
+    this.ton(f, 0, 0.14, 1.8); this.ton(f * 2, 0.004, 0.035, 0.9);
+  },
+  ackord() {
+    if (!this.pa) return;
+    [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => this.ton(f, i * 0.07, 0.09, 2.6, 'triangle'));
+  },
+  svisch(tid, styrka) {
+    if (!this.pa || !this.brus) return;
+    const ctx = this.ctx, t = ctx.currentTime;
+    const src = ctx.createBufferSource(); src.buffer = this.brus; src.loop = true;
+    const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 1.4;
+    bp.frequency.setValueAtTime(180, t); bp.frequency.exponentialRampToValueAtTime(1400, t + tid * 0.5); bp.frequency.exponentialRampToValueAtTime(220, t + tid);
+    const g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.16 * styrka, t + tid * 0.5); g.gain.linearRampToValueAtTime(0, t + tid);
+    src.connect(bp); bp.connect(g); g.connect(this.master); src.start(t); src.stop(t + tid + 0.1);
+  },
+};
+$('#ljud').addEventListener('click', () => Ljud.vaxla());
+
+/* =====================================================================
+   13. Knapparna
+   ===================================================================== */
+$('#upp').addEventListener('click', uppEnNiva);
+$('#stang').addEventListener('click', () => { valtS = null; ALLA.forEach((x) => x.etikett.element.classList.remove('vald')); visaPanel(null); ritaFramsteg(); });
+$('#fortsatt').addEventListener('click', () => { if (flygning) return; const s = nastaI(ALLA); if (s) valjAvsnitt(s, true); else gaTillUniversum(); });
+let simulerar = false;
+$('#simulera').addEventListener('click', () => {
+  if (simulerar) return;
+  const kö = ALLA.filter((s) => !klarade.has(s.id)).slice(0, 12);
+  if (!kö.length) return;
+  simulerar = true;
+  kö.forEach((s, i) => setTimeout(() => { vaxla(s); if (i === kö.length - 1) simulerar = false; }, 160 + i * 190));
+});
+$('#nollstall').addEventListener('click', () => {
+  if (!klarade.size) return;
+  if (!confirm('Släcka alla stjärnor? Framstegen i det här utkastet sparas bara i din webbläsare.')) return;
+  klarade.clear(); spara(); ritaFramsteg();
+});
+
+/* Intro och varpsträckor */
+const varp = (() => {
+  const N = 520, pos = new Float32Array(N * 6), col = new Float32Array(N * 6), bas = [];
+  const pal = [new THREE.Color('#ffd27a'), new THREE.Color('#9fd9ff'), new THREE.Color('#d6b6ff'), new THREE.Color('#ffffff')];
+  for (let i = 0; i < N; i++) {
+    const r = 4 + Math.pow(Math.random(), 0.6) * 60, f = Math.random() * TAU;
+    bas.push({ x: Math.cos(f) * r, y: Math.sin(f) * r, z: -20 - Math.random() * 600 });
+    const c = pal[i % pal.length];
+    col.set([c.r * 0.2, c.g * 0.2, c.b * 0.2, c.r * 1.6, c.g * 1.6, c.b * 1.6], i * 6);
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  const mat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false });
+  const lin = new THREE.LineSegments(geo, mat); lin.frustumCulled = false; camera.add(lin);
+  return {
+    uppdatera(fart, dt) {
+      mat.opacity = Math.min(1, fart * 1.4);
+      lin.visible = mat.opacity > 0.01;
+      if (!lin.visible) return;
+      const L = 2 + fart * 70;
+      for (let i = 0; i < N; i++) {
+        const b = bas[i];
+        b.z += fart * 900 * dt;
+        if (b.z > -2) b.z -= 620;
+        pos.set([b.x, b.y, b.z - L, b.x, b.y, b.z], i * 6);
+      }
+      geo.attributes.position.needsUpdate = true;
+    },
+  };
+})();
+
+const START = OVERSIKT.mal.clone().add(new THREE.Vector3(260, 640, 2400));
+camera.position.copy(START);
+controls.target.copy(OVERSIKT.mal);
+camera.lookAt(OVERSIKT.mal);
+
+$('#kliv').addEventListener('click', () => {
+  document.body.classList.remove('intro');
+  document.body.classList.add('varp');
+  $('#intro').classList.add('borta');
+  if (!Ljud.pa && !isTouch) Ljud.vaxla();
+  flyg(OVERSIKT.pos.clone(), OVERSIKT.mal.clone(), 4.6, () => { document.body.classList.remove('varp'); satsGranser(); controls.update(); }, { ease: ease.inOutQuart, bage: 0, fov: 22 });
+});
+
+/* =====================================================================
+   14. Animationsloopen
+   ===================================================================== */
+const klocka = new THREE.Clock();
+let fart = 0, tid = 0, forskj = 0, forskjY = 0, forraPos = camera.position.clone();
+satsNiva('universum');
+ritaFramsteg();
+// molnen startar med det som redan är klarat, men sprider sig in vid start
+function loop() {
+  const dt = Math.min(0.05, klocka.getDelta());
+  tid += dt;
+  delade.uTime.value = tid;
+
+  if (flygning) {
+    const f = flygning;
+    f.t = Math.min(1, f.t + dt / f.tid);
+    const k = f.ease(f.t);
+    camera.position.lerpVectors(f.franPos, f.tillPos, k).y += Math.sin(Math.PI * k) * f.bage;
+    controls.target.lerpVectors(f.franMal, f.tillMal, k);
+    camera.lookAt(controls.target);
+    if (f.fov) { camera.fov = 55 + f.fov * Math.sin(Math.PI * k); camera.updateProjectionMatrix(); delade.uScale.value = pxSkala(); }
+    if (f.t >= 1) {
+      flygning = null; controls.enabled = true;
+      if (f.fov) { camera.fov = 55; camera.updateProjectionMatrix(); delade.uScale.value = pxSkala(); }
+      if (f.klar) f.klar();
+    }
+  } else if (controls.enabled) {
+    controls.update();
+  }
+
+  // skjut bilden åt sidan så att det man tittar på hamnar mitt i den fria ytan
+  const bred = innerWidth > 760;
+  const panelOppen = !$('#panel').classList.contains('dold');
+  const forskjMal = !bred ? 0 : panelOppen ? (Math.min(370, innerWidth - 40) + 20) / 2 : niva === 'universum' && !document.body.classList.contains('intro') ? -Math.min(220, innerWidth * 0.14) : 0;
+  const forskjYMal = !bred && panelOppen ? $('#panel').offsetHeight * 0.42 : 0;
+  forskj += (forskjMal - forskj) * Math.min(1, dt * 3);
+  forskjY += (forskjYMal - forskjY) * Math.min(1, dt * 3);
+  if (Math.abs(forskj) > 0.5 || Math.abs(forskjY) > 0.5 || camera.view) {
+    camera.setViewOffset(innerWidth, innerHeight, forskj, forskjY, innerWidth, innerHeight);
+    camera.updateProjectionMatrix();
+  }
+
+  // hastighet → varpsträckor
+  const v = camera.position.distanceTo(forraPos) / Math.max(dt, 1e-4);
+  forraPos.copy(camera.position);
+  fart += (Math.min(1, Math.max(0, (v - 60) / 900)) - fart) * Math.min(1, dt * 6);
+  varp.uppdatera(fart, dt);
+
+  // framstegen sprider sig som bläck i molnen
+  VARLDAR.forEach((w) => {
+    const u = w.moln.material.uniforms.uProg.value;
+    w.kapitel.forEach((k, i) => {
+      const mal = k.mal || 0;
+      u[i] += (mal - u[i]) * Math.min(1, dt * 0.9);
+      k.klot.material.uniforms.uProg.value = u[i];
+      const andel = Math.round(u[i] * 200) / 200;
+      if (andel !== k.ringAndel) { k.ringAndel = andel; k.ringFyll.geometry.dispose(); k.ringFyll.geometry = ringGeo(andel); k.ringFyll.visible = andel > 0.002; }
+      k.ringar.quaternion.copy(camera.quaternion);
+    });
+    const dimMal = (niva === 'kapitel' && w === fokusW ? 0.2 : 1) * w.ljus;
+    const gMal = niva === 'kapitel' && w === fokusW ? 0.1 : 0.42;
+    w.glyfSprites.forEach((g) => { g.material.opacity += (gMal - g.material.opacity) * Math.min(1, dt * 2); });
+    const ud = w.moln.material.uniforms.uDim;
+    ud.value += (dimMal - ud.value) * Math.min(1, dt * 2);
+    w.glyfSprites.forEach((s) => {
+      const d = s.userData; d.f += d.v * dt;
+      s.position.set(w.center.x + Math.cos(d.f) * d.r, w.center.y + d.y + Math.sin(tid * 0.3 + d.r) * 1.2, w.center.z + Math.sin(d.f) * d.r);
+    });
+    if (w.enhet) {
+      const f = tid * 0.5, p = w.center.clone().add(new THREE.Vector3(Math.cos(f) * 19.5, -2, Math.sin(f) * 19.5));
+      w.enhet.prick.position.copy(p);
+      w.enhet.radie.geometry.attributes.position.setXYZ(0, w.center.x, w.center.y - 2, w.center.z);
+      w.enhet.radie.geometry.attributes.position.setXYZ(1, p.x, p.y, p.z);
+      w.enhet.radie.geometry.attributes.position.needsUpdate = true;
+    }
+  });
+
+  vag.uppdatera(tid, dt);
+
+  // svävande tecken tonas bort när kameran kommer nära, så att de aldrig skymmer
+  svavare.forEach((s) => {
+    s.position.addScaledVector(s.userData.v, dt); s.material.rotation += s.userData.rot * dt;
+    const d = s.position.distanceTo(camera.position);
+    s.material.opacity = s.userData.opac * THREE.MathUtils.smoothstep(d, 25, 90);
+  });
+
+  // nästa stjärna: pulserande ring i det kapitel man tittar på
+  const nasta = fokusW && nastaAvsnitt && nastaAvsnitt.w === fokusW && niva !== 'universum' ? nastaAvsnitt : null;
+  nastaRing.visible = !!nasta;
+  if (nasta) {
+    nastaRing.position.copy(nasta.pos);
+    nastaRing.quaternion.copy(camera.quaternion);
+    nastaRing.scale.setScalar(1 + 0.35 * Math.sin(tid * 3.2));
+    nastaRing.material.opacity = 0.55 + 0.35 * Math.sin(tid * 3.2);
+  }
+
+  for (let i = vagor.length - 1; i >= 0; i--) {
+    const m = vagor[i]; m.userData.t += dt / 1.3;
+    const t = m.userData.t;
+    m.scale.setScalar(0.4 + t * 4.5 * m.userData.s);
+    m.material.opacity = Math.max(0, 1 - t) * 0.9;
+    m.quaternion.copy(camera.quaternion);
+    if (t >= 1) { scene.remove(m); m.geometry.dispose(); m.material.dispose(); vagor.splice(i, 1); }
+  }
+
+  composer.render();
+  labelRenderer.render(scene, camera);
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight); composer.setSize(innerWidth, innerHeight);
+  labelRenderer.setSize(innerWidth, innerHeight);
+  delade.uScale.value = pxSkala();
+});
+</script>
+</body>
+</html>

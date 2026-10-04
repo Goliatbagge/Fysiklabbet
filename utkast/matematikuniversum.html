@@ -57,13 +57,13 @@ body.varp .etiketter * { pointer-events: none !important; }
 
 /* ---------- Etiketter i rymden ---------- */
 .wl { pointer-events: auto; cursor: pointer; text-align: center; transition: opacity .5s var(--ease); white-space: nowrap; }
-.wl .kurs { display: block; font: 500 11px/1.3 var(--mono); letter-spacing: .14em; color: var(--dim); }
-.wl .namn { display: block; font: 500 clamp(17px, 1.8vw, 24px)/1.15 var(--disp); letter-spacing: .01em; margin: 4px 0 6px; text-shadow: 0 0 24px rgba(0,0,0,.9); }
+.wl .niva { display: block; font: 500 clamp(19px, 2vw, 27px)/1.1 var(--disp); letter-spacing: .005em; text-shadow: 0 0 24px rgba(0,0,0,.9); }
+.wl .namn { display: block; font: 500 14px/1.3 var(--sans); color: var(--wc); margin: 5px 0 8px; text-shadow: 0 0 14px rgba(0,0,0,.9); }
 .wl .prog { display: inline-block; font: 500 11px/1 var(--mono); color: var(--dim); padding: 5px 9px; border: 1px solid var(--kant); border-radius: 99px; background: rgba(5,7,16,.5); }
-.wl:hover .namn, .wl.hov .namn { color: var(--wc); }
-.wl.fjarran { opacity: .45; }
-.wl.fjarran .prog, .wl.fjarran .kurs { display: none; }
-.wl.fjarran .namn { font-size: 13px; }
+.wl:hover .niva, .wl.hov .niva { color: var(--wc); }
+.wl.fjarran { opacity: .6; }
+.wl.fjarran .prog, .wl.fjarran .namn { display: none; }
+.wl.fjarran .niva { font-size: 14px; }
 
 .cl { pointer-events: auto; cursor: pointer; margin-top: -26px; white-space: nowrap; display: flex; align-items: center; gap: 8px; padding: 6px 11px 6px 7px; border-radius: 99px; background: rgba(6, 8, 18, .55); border: 1px solid var(--kant); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); font: 500 13px/1 var(--sans); transition: border-color .3s, background .3s; }
 .cl b { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; font: 500 11px/1 var(--mono); background: var(--wc); color: #070912; }
@@ -81,6 +81,7 @@ body.varp .etiketter * { pointer-events: none !important; }
 /* ---------- Gränssnitt ---------- */
 .hud { position: fixed; z-index: 5; transition: opacity .7s var(--ease), transform .7s var(--ease); }
 body.intro .hud { opacity: 0; pointer-events: none; }
+body.varp .hud { pointer-events: none; }
 
 #topp { top: 18px; left: 20px; right: 20px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; pointer-events: none; }
 #topp > * { pointer-events: auto; }
@@ -198,12 +199,13 @@ body:not(.niva-universum) #rubrik { opacity: 0; transform: translate(-20px, -50%
   #panel { left: 10px; right: 10px; top: auto; bottom: 64px; width: auto; max-height: 44vh; border-radius: 18px; }
   #panel .inre { padding: 18px 18px 20px; }
   #panel h3 { font-size: 19px; }
-  .wl .kurs { display: none; }
+  .wl .namn { font-size: 11.5px; margin: 2px 0 0; }
+  .wl .prog { display: none; }
   #panel.dold { transform: translateY(30px); }
   .sl { padding: 2px 5px; }
   .sl .t { display: none; }
   .sl .nr { margin: 0; color: var(--dim); }
-  .wl .namn { font-size: 15px; }
+  .wl .niva { font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   #intro .kick, #intro h1, #intro p, #intro .kliv, #intro .liten { animation-duration: .01s; animation-delay: 0s; }
@@ -325,6 +327,8 @@ VARLDAR.forEach((w, wi) => {
   w.center = new THREE.Vector3(...w.pos);
   w.col = new THREE.Color(w.farg);
   w.col2 = new THREE.Color(w.farg2);
+  // "Matematik nivå 1c" → "Nivå 1c", "Matematik fortsättning nivå 2" → "Fortsättning nivå 2"
+  w.niva = w.kurs.replace(/^Matematik /, '').replace(/^./, (c) => c.toUpperCase());
   w.ljus = { spiral: 1, sadel: 1, krusning: 1, mandelbrot: 0.7 }[w.form];
   w.tagline = html(kurs.intro && kurs.intro.tagline);
   w.kapitel = Object.entries(kurs.chapters)
@@ -692,7 +696,7 @@ VARLDAR.forEach((w) => {
   // världens etikett
   const el = document.createElement('div');
   el.className = 'wl'; el.style.setProperty('--wc', w.farg);
-  el.innerHTML = `<span class="kurs">${w.kurs}</span><span class="namn">${w.namn}</span><span class="prog"></span>`;
+  el.innerHTML = `<span class="niva">${w.niva}</span><span class="namn">${w.namn}</span><span class="prog"></span>`;
   el.addEventListener('click', (e) => { e.stopPropagation(); gaTillVarld(w); });
   w.etikett = new CSS2DObject(el);
   w.etikett.position.copy(w.center).add(new THREE.Vector3(0, 27, 0));
@@ -914,7 +918,7 @@ function ritaFramsteg() {
     const p = varldAntal(w) / w.antal;
     return `<button class="stapel" data-w="${w.wi}" style="--wc:${w.farg}"><span>${w.kort}</span><span class="spar"><span class="fyll" style="width:${(p * 100).toFixed(1)}%"></span></span><span class="pr">${Math.round(p * 100)} %</span></button>`;
   }).join('');
-  $('#staplar').querySelectorAll('.stapel').forEach((b) => b.addEventListener('click', () => gaTillVarld(VARLDAR[+b.dataset.w])));
+  $('#staplar').querySelectorAll('.stapel').forEach((b) => b.addEventListener('click', () => { if (!flygning) gaTillVarld(VARLDAR[+b.dataset.w]); }));
   if (panelVy) panelVy();
 }
 
@@ -1321,6 +1325,7 @@ function loop() {
     if (f.fov) { camera.fov = 55 + f.fov * Math.sin(Math.PI * k); camera.updateProjectionMatrix(); delade.uScale.value = pxSkala(); }
     if (f.t >= 1) {
       flygning = null; controls.enabled = true;
+      document.body.classList.remove('varp');
       if (f.fov) { camera.fov = 55; camera.updateProjectionMatrix(); delade.uScale.value = pxSkala(); }
       if (f.klar) f.klar();
     }

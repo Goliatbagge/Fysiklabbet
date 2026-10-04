@@ -38,7 +38,12 @@ jobs:
     env:
       TZ: Europe/Stockholm
     steps:
+      # Bara nyhetsfilen: repot är stort (bilder, film, ljud), och en full
+      # utcheckning tar minuter för en koll som tar en sekund.
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: data/nyheter.js
+          sparse-checkout-cone-mode: false
 
       - name: Finns dagens nyhet?
         id: koll

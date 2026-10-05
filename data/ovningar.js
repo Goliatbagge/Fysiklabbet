@@ -14164,9 +14164,9 @@ $$ \\Delta l_2 = \\frac{0{,}080}{2} = 0{,}040\\ \\mathrm{m} = 4{,}0\\ \\mathrm{c
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `En fjäder med fjäderkonstanten $120\\ \\mathrm{N/m}$ dras ut $15\\ \\mathrm{cm}$ från jämviktsläget och hålls stilla. Hur mycket potentiell energi har lagrats i fjädern?`,
+            question: `En fjäder med fjäderkonstanten $120\\ \\mathrm{N/m}$ dras ut $15\\ \\mathrm{cm}$ från jämviktsläget och hålls stilla. Hur stor är den potentiella energin, räknad från jämviktsläget?`,
             answer: { value: 1.35, unit: 'J' },
-            solution: `Fjäderns potentiella energi i ett vändläge är hela dess totala energi:
+            solution: `Den potentiella energin i ett vändläge är hela svängningens totala energi:
 
 $$ E = \\frac{k \\cdot A^2}{2} $$
 

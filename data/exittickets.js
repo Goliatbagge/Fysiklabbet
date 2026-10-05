@@ -5933,7 +5933,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'I vändlägena har fjädern töjts (eller tryckts ihop) maximalt, och hela svängningens energi är där lagrad som potentiell energi.',
+      'I vändlägena är vikten som längst från jämviktsläget och står stilla ett ögonblick, så hela svängningens energi är där potentiell energi.',
       'I jämviktsläget är den potentiella energin faktiskt 0 — där är istället rörelseenergin som störst.',
       'Den potentiella energin ökar successivt hela vägen ut till vändläget, så den är inte som störst på halva vägen.',
       'Energin växlar ständigt mellan potentiell energi och rörelseenergi under svängningen — bara den totala energin är konstant.',
@@ -5962,7 +5962,7 @@ window.EXITTICKETS = {
     why: [
       'Det är precis tvärtom — i jämviktsläget är den potentiella energin 0.',
       'Fördelningen är inte jämn i just detta läge — i jämviktsläget är energin uteslutande rörelseenergi.',
-      'I jämviktsläget rör sig vikten som snabbast och fjädern är i sitt naturliga läge (ingen lagrad potentiell energi), så all energi är rörelseenergi.',
+      'I jämviktsläget rör sig vikten som snabbast. Den potentiella energin räknas från jämviktsläget och är där 0, så all energi är rörelseenergi.',
       'Den totala mekaniska energin är konstant (om vi bortser från förluster) — den finns kvar, bara i en annan form.',
     ],
   },

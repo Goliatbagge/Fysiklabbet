@@ -766,46 +766,71 @@ function dorrZoner(r) {
     return { x0: r.W - L, x1: r.W, y0: a, y1: b };
   });
 }
-function motVaggarna(r) {
+function motVaggarna(r, N) {
   const t = geo({ typ: 'enkel' }), b = lokalBox('enkel');
   const bw = t.w, h = t.h, ut = b.y1;          // ut: stolens yttersta kant räknat från bänkens mitt
   const kant = 5, gap = 10, gang = 100;
-  const ut_ = [];
   const kat = (r.items || []).find(i => i.typ === 'kateder');
   let yStart = 190;
   if (kat) { const kb = aabb(kat); if (kb.y1 < r.D / 2) yStart = Math.max(yStart, kb.y1 + 40); }
   const hinder = dorrZoner(r);
-  const fri = it => {
-    const a = aabb(it);
-    if (hinder.some(z => a.x1 > z.x0 && a.x0 < z.x1 && a.y1 > z.y0 && a.y0 < z.y1)) return false;
-    if (kat && krockar(kat, it)) return false;
-    return !ut_.some(o => krockar(o, it));
+  // Sträckorna där bänkar kan stå: { fran, till, pos: s => [x, y], rot }.
+  // Längs en vägg klipps sträckan där dörren svänger upp.
+  const strackor = [];
+  const ny = (fran, till, pos, rot, band) => {
+    let delar = [[fran, till]];
+    if (band) for (const z of hinder) {
+      const [z0, z1] = band.langsX ? [z.x0, z.x1] : [z.y0, z.y1];
+      const [q0, q1] = band.langsX ? [z.y0, z.y1] : [z.x0, z.x1];
+      if (q1 <= band.a || q0 >= band.b) continue;
+      delar = delar.flatMap(([f, t2]) => (z1 <= f || z0 >= t2) ? [[f, t2]] : [[f, z0 - gap], [z1 + gap, t2]].filter(([u, w]) => w - u >= bw));
+    }
+    for (const [f, t2] of delar) if (t2 - f >= bw) strackor.push({ fran: f, till: t2, pos, rot });
   };
-  // Jämnt fördelade mittpunkter längs en sträcka, med minst gap mellan bänkarna.
-  const langs = (fran, till) => {
-    const L = till - fran; if (L < bw) return [];
-    const n = Math.floor((L + gap) / (bw + gap));
-    if (n === 1) return [(fran + till) / 2];
-    const steg = (L - bw) / (n - 1);
-    return Array.from({ length: n }, (_, i) => fran + bw / 2 + i * steg);
-  };
-  const lagg = (x, y, rot) => { const it = { id: uid(), typ: 'enkel', x: r1(x), y: r1(y), rot }; if (fri(it)) ut_.push(it); };
-  // Bakväggen
   const ySyd = r.D - kant - h / 2;
   const sidaInre = kant + h / 2 + ut;            // sidokolumnernas inre kant (med stol)
-  for (const x of langs(sidaInre + gap, r.W - sidaInre - gap)) lagg(x, ySyd, 180);
-  // Vänster och höger vägg
   const sydOvre = ySyd - ut;                      // bakraden når hit (med stol)
-  for (const y of langs(yStart, sydOvre - gap)) { lagg(kant + h / 2, y, 270); lagg(r.W - kant - h / 2, y, 90); }
-  // En rektangulär ring i mitten med tomt golv inuti. Eleverna sitter på
-  // ringens utsida och tittar inåt, rygg mot rygg med eleverna vid väggarna,
-  // så att skärmarna i ringen är vända bort från alla andra.
+  // Bakväggen, vänster och höger vägg (eleverna tittar in i väggen)
+  ny(sidaInre + gap, r.W - sidaInre - gap, s2 => [s2, ySyd], 180, { langsX: true, a: sydOvre, b: r.D });
+  ny(yStart, sydOvre - gap, s2 => [kant + h / 2, s2], 270, { langsX: false, a: 0, b: sidaInre });
+  ny(yStart, sydOvre - gap, s2 => [r.W - kant - h / 2, s2], 90, { langsX: false, a: r.W - sidaInre, b: r.W });
+  // Ringen i mitten: tomt golv inuti, eleverna på utsidan tittar inåt,
+  // rygg mot rygg med eleverna vid väggarna.
   const v = sidaInre + gang, hX = r.W - sidaInre - gang;
   const o = yStart + 20, n = sydOvre - gang;
   const djupRad = ut + h / 2;                     // från ringens ytterkant till bänkens framkant
   if (hX - v >= Math.max(bw, 2 * djupRad + 60) && n - o >= 2 * djupRad + 60) {
-    for (const x of langs(v, hX)) { lagg(x, o + ut, 180); lagg(x, n - ut, 0); }
-    for (const y of langs(o + djupRad + gap, n - djupRad - gap)) { lagg(v + ut, y, 90); lagg(hX - ut, y, 270); }
+    ny(v, hX, s2 => [s2, o + ut], 180);
+    ny(v, hX, s2 => [s2, n - ut], 0);
+    ny(o + djupRad + gap, n - djupRad - gap, s2 => [v + ut, s2], 90);
+    ny(o + djupRad + gap, n - djupRad - gap, s2 => [hX - ut, s2], 270);
+  }
+  // Hur många bänkar varje sträcka får. Utan antal: så många som ryms. Med
+  // antal: en bänk i taget där det fria utrymmet per bänk är störst, så att
+  // mellanrummen blir så lika stora som möjligt överallt.
+  for (const q of strackor) { q.L = q.till - q.fran; q.max = Math.floor((q.L + gap) / (bw + gap)); q.k = 0; }
+  const maxTot = strackor.reduce((a, q) => a + q.max, 0);
+  if (N == null || N >= maxTot) strackor.forEach(q => { q.k = q.max; });
+  else for (let i = 0; i < N; i++) {
+    let bast = null, bp = -Infinity;
+    for (const q of strackor) {
+      if (q.k >= q.max) continue;
+      const p = (q.L - (q.k + 1) * bw) / (q.k + 1);
+      if (p > bp) { bp = p; bast = q; }
+    }
+    if (!bast) break;
+    bast.k++;
+  }
+  const ut_ = [];
+  for (const q of strackor) {
+    for (let i = 0; i < q.k; i++) {
+      const s2 = q.k === 1 ? (q.fran + q.till) / 2 : q.fran + bw / 2 + i * (q.L - bw) / (q.k - 1);
+      const [x, y] = q.pos(s2);
+      const it = { id: uid(), typ: 'enkel', x: r1(x), y: r1(y), rot: q.rot };
+      if (kat && krockar(kat, it)) continue;
+      if (ut_.some(o2 => krockar(o2, it))) continue;
+      ut_.push(it);
+    }
   }
   return ut_;
 }
@@ -817,9 +842,19 @@ const FORVAL = {
   trio: { namn: 'Labbsal', bes: 'Långa labbänkar för tre', gor: r => rutnat(r, 'trio', 70, 150, 230) },
   vaggar: { namn: 'Mot väggarna', bes: 'Datorprov: mot väggen runt om och en ring i mitten', gor: motVaggarna },
 };
-function forval(r, namn) {
-  r.items = r.items.filter(it => it.typ === 'kateder').concat(FORVAL[namn].gor(r));
+/* En färdig möblering. Med ett antal platser (N) fördelas bänkarna jämnt i
+   Mot väggarna; de andra möbleringarna fylls framifrån tills antalet nåtts. */
+function forval(r, namn, N) {
+  let nya = FORVAL[namn].gor(r, N);
+  if (N && namn !== 'vaggar') {
+    nya.sort((a, b) => (aabb(a).y0 - aabb(b).y0) || (a.x - b.x));
+    const behall = []; let platser = 0;
+    for (const it of nya) { if (platser >= N) break; behall.push(it); platser += geo(it).seats.length; }
+    nya = behall;
+  }
+  r.items = r.items.filter(it => it.typ === 'kateder').concat(nya);
   r.blocked = [];
+  return nya.reduce((a, it) => a + geo(it).seats.length, 0);
 }
 
 /* ================= Namn ================= */
@@ -1399,6 +1434,8 @@ function panelRum() {
   </div>
   <div class="grp">
     <div class="grp-h"><span class="eyebrow">Färdiga möbleringar</span></div>
+    <div class="row" style="margin-top:0">Antal platser <span class="stepper"><button data-act="pAntal-" aria-label="En plats färre">−</button><input id="forvalAntal" type="number" min="1" max="200" inputmode="numeric" placeholder="Alla" value="${S.inst.forvalAntal || ''}" aria-label="Antal platser"><button data-act="pAntal+" aria-label="En plats till">+</button></span></div>
+    <p class="note" style="margin:0 0 10px">Lämna tomt för att fylla salen. Med ett antal fördelas bänkarna jämnt i <b>Mot väggarna</b>, och de andra möbleringarna fylls framifrån.</p>
     <div class="forval">${Object.keys(FORVAL).map(n => `<button data-act="forval" data-n="${n}">${forvalIkon(n)}<span><b>${FORVAL[n].namn}</b><small>${FORVAL[n].bes}</small></span></button>`).join('')}</div>
     <p class="note">En färdig möblering ersätter bänkarna i salen. Kateder, dörr och fönster står kvar.</p>
     <div class="btns"><button class="btn liten fara" data-act="tomSal">${IKON.sop}Töm salen</button></div>
@@ -2319,6 +2356,10 @@ panel.addEventListener('click', e => {
     ui.forslagSvar = null; spara(); ritaPanel(); return;
   }
   if (act === 'foresla') { foresla(); return; }
+  if (act === 'pAntal+' || act === 'pAntal-') {
+    const k = klass(), start = S.inst.forvalAntal || (k ? k.elever.filter(e => e.har).length : 0) || 30;
+    S.inst.forvalAntal = clamp(start + (S.inst.forvalAntal ? (act === 'pAntal+' ? 1 : -1) : 0), 1, 200); spara(); ritaPanel(); return;
+  }
   if (act === 'mattStd') { minns(); r.matt = {}; ui.forslagSvar = null; spara(); allt(); return; }
   if (act === 'enkel+' || act === 'enkel-') {
     minns();
@@ -2340,7 +2381,13 @@ panel.addEventListener('click', e => {
   switch (act) {
     case 'forval':
       if (r.items.some(it => it.typ !== 'kateder') && !confirm('Den färdiga möbleringen ersätter bänkarna som står i salen nu. Vill du fortsätta?')) return;
-      minns(); forval(r, b.dataset.n); ui.val = null; spara(); allt(); break;
+      {
+        minns();
+        const N = S.inst.forvalAntal || null, fick = forval(r, b.dataset.n, N);
+        avmarkera(); spara(); allt();
+        visaTips(N && fick < N ? `Det fick bara plats ${fick} platser med den här möbleringen` : `Möbleringen har ${fick} platser`);
+      }
+      break;
     case 'skarmLage': ui.skarm = !ui.skarm; ui.sparr = false; avmarkera(); allt(); break;
     case 'sparrLage': ui.sparr = !ui.sparr; ui.skarm = false; avmarkera(); allt(); break;
     case 'sparrBort': minns(); r.blocked = []; spara(); allt(); break;
@@ -2454,6 +2501,8 @@ panel.addEventListener('change', e => {
     if (m.w === std.w && m.h === std.h) delete r.matt[typ]; else r.matt[typ] = m;
     for (const it of r.items) if (it.typ === typ) hallInne(it, r);
     ui.forslagSvar = null; spara(); allt();
+  } else if (t.id === 'forvalAntal') {
+    const v = Math.round(+t.value); S.inst.forvalAntal = v > 0 ? clamp(v, 1, 200) : null; spara(); ritaPanel();
   } else if (t.id === 'forslagAntal') {
     S.inst.forslagAntal = clamp(Math.round(+t.value) || 1, 1, 80); ui.forslagSvar = null; spara(); ritaPanel();
   } else if (t.id === 'antalEnkel') {
@@ -2475,7 +2524,7 @@ panel.addEventListener('change', e => {
 });
 panel.addEventListener('keydown', e => {
   if (e.key === 'Enter' && e.target.id === 'mobNamn') { e.preventDefault(); panel.querySelector('[data-act="mobSpara"]').click(); return; }
-  if (e.key === 'Enter' && (e.target.id === 'rumNamn' || e.target.id === 'klassNamn' || e.target.id === 'antalEnkel' || e.target.id === 'forslagAntal' || !!e.target.dataset.matt || e.target.classList.contains('enamn'))) e.target.blur();
+  if (e.key === 'Enter' && (e.target.id === 'rumNamn' || e.target.id === 'klassNamn' || e.target.id === 'antalEnkel' || e.target.id === 'forslagAntal' || e.target.id === 'forvalAntal' || !!e.target.dataset.matt || e.target.classList.contains('enamn'))) e.target.blur();
 });
 function nyKlassDialog() {
   minns();

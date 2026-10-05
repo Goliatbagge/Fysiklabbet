@@ -173,7 +173,7 @@ function angra() {
 }
 
 /* UI-tillstånd som inte sparas */
-const ui = { val: null, drag: null, mal: null, anim: null, pop: null, senaste: null, skarm: false, sparr: false };
+const ui = { val: null, grupp: [], ram: null, drag: null, mal: null, anim: null, pop: null, senaste: null, skarm: false, sparr: false };
 
 /* ================= Geometri ================= */
 const lokalBoxCache = {};
@@ -299,6 +299,117 @@ function snappa(it, r) {
     }
   }
   it.x = r1(it.x); it.y = r1(it.y);
+}
+/* ---------- Flera markerade möbler ----------
+   ui.grupp håller id:n när mer än en möbel är markerad. Gruppen flyttas,
+   vrids, kopieras och tas bort som en enhet, med bibehållen inbördes placering. */
+function gruppen() {
+  const r = rum(), ids = new Set(ui.grupp);
+  return r.items.filter(i => ids.has(i.id));
+}
+function avmarkera() { ui.val = null; ui.grupp = []; }
+function gruppBox(g) {
+  const b = g.map(aabb);
+  return { x0: Math.min(...b.map(x => x.x0)), x1: Math.max(...b.map(x => x.x1)), y0: Math.min(...b.map(x => x.y0)), y1: Math.max(...b.map(x => x.y1)) };
+}
+function gruppFlytta(g, dx, dy) { for (const it of g) { it.x = r1(it.x + dx); it.y = r1(it.y + dy); } }
+function gruppHallInne(g, r) {
+  const b = gruppBox(g);
+  let dx = 0, dy = 0;
+  if (b.x0 < 0) dx = -b.x0; else if (b.x1 > r.W) dx = r.W - b.x1;
+  if (b.y0 < 0) dy = -b.y0; else if (b.y1 > r.D) dy = r.D - b.y1;
+  if (dx || dy) gruppFlytta(g, dx, dy);
+}
+// Skjut gruppen till närmaste läge där ingen av dess möbler krockar med någon annan möbel.
+function gruppSnappa(g, r) {
+  const ids = new Set(g.map(i => i.id)), andra = r.items.filter(i => !ids.has(i.id));
+  const fri = () => !g.some(a => andra.some(o => krockar(a, o)));
+  const inne = () => { const b = gruppBox(g); return b.x0 > -0.5 && b.y0 > -0.5 && b.x1 < r.W + 0.5 && b.y1 < r.D + 0.5; };
+  if (fri()) return;
+  const kand = [];
+  for (const a of g) for (const o of andra) {
+    if (!krockar(a, o)) continue;
+    const A = aabb(a), C = aabb(o);
+    kand.push([C.x0 - A.x1, 0], [C.x1 - A.x0, 0], [0, C.y0 - A.y1], [0, C.y1 - A.y0]);
+    const m = mtv(a, o); if (m) kand.push(m);
+  }
+  let bast = null, bd = Infinity;
+  for (const [dx, dy] of kand) {
+    const d = Math.hypot(dx, dy * 1.25); if (d >= bd) continue;
+    gruppFlytta(g, dx, dy);
+    if (fri() && inne()) { bd = d; bast = [dx, dy]; }
+    gruppFlytta(g, -dx, -dy);
+  }
+  if (bast) gruppFlytta(g, bast[0], bast[1]);
+}
+function gruppVrid(g, r, grader) {
+  const b = gruppBox(g), cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+  for (const it of g) {
+    const [nx, ny] = rot(it.x - cx, it.y - cy, grader);
+    it.x = r1(cx + nx); it.y = r1(cy + ny); it.rot = ((it.rot + grader) % 360 + 360) % 360;
+  }
+  gruppHallInne(g, r);
+}
+function gruppKopiera(g, r) {
+  const b = gruppBox(g), nya = g.map(it => ({ ...it, id: uid() }));
+  const karta = new Map(g.map((it, i) => [it.id, nya[i].id]));
+  r.items.push(...nya);
+  gruppFlytta(nya, b.x1 - b.x0, 0);
+  gruppHallInne(nya, r);
+  gruppSnappa(nya, r);
+  for (const x of r.skarmar.filter(x => karta.has(x.bord))) r.skarmar.push({ id: uid(), bord: karta.get(x.bord), k: x.k });
+  ui.grupp = nya.map(i => i.id); ui.val = null;
+}
+function gruppBort(g, r) {
+  const ids = new Set(g.map(i => i.id));
+  r.items = r.items.filter(i => !ids.has(i.id));
+  r.blocked = r.blocked.filter(x => !ids.has(x.split(':')[0]));
+  avmarkera();
+}
+/* Väggen trycker möblerna framför sig när salen görs mindre. axel är 'x'
+   eller 'y', tecken 1 när väggen på den stora sidan (öster, söder) rör sig och
+   −1 när den på den lilla sidan (väster, norr) rör sig, då koordinaterna redan
+   har förskjutits så att väggen ligger i 0. Möblerna gås igenom från väggen
+   och inåt; var och en stannar mot väggen eller mot en möbel som redan
+   knuffats och som står framför den i samma rad. Räcker inte salen till görs
+   den så liten som möblerna tillåter. */
+function trangIn(r, axel, tecken, d) {
+  const lo = axel + '0', hi = axel + '1', alo = axel === 'x' ? 'y0' : 'x0', ahi = axel === 'x' ? 'y1' : 'x1';
+  const flytta = (it, v) => { if (axel === 'x') it.x += v; else it.y += v; };
+  const kor = () => {
+    const L = axel === 'x' ? r.W : r.D;
+    const lista = r.items.map(it => ({ it, b: aabb(it) }));
+    lista.sort((a, b) => tecken > 0 ? b.b[hi] - a.b[hi] : a.b[lo] - b.b[lo]);
+    const klara = [];
+    let over = 0;
+    for (const o of lista) {
+      let grans = tecken > 0 ? L : 0;
+      for (const q of klara) {
+        if (Math.min(o.b[ahi], q.b[ahi]) - Math.max(o.b[alo], q.b[alo]) <= 0.5) continue;
+        if (tecken > 0 && q.b[lo] >= o.b[hi] - 1) grans = Math.min(grans, q.ny0);
+        if (tecken < 0 && q.b[hi] <= o.b[lo] + 1) grans = Math.max(grans, q.ny1);
+      }
+      let v = 0;
+      if (tecken > 0 && o.b[hi] > grans) v = grans - o.b[hi];
+      if (tecken < 0 && o.b[lo] < grans) v = grans - o.b[lo];
+      flytta(o.it, v);
+      o.ny0 = o.b[lo] + v; o.ny1 = o.b[hi] + v;
+      over = Math.max(over, tecken > 0 ? -o.ny0 : o.ny1 - L);
+      klara.push(o);
+    }
+    return { lista, over };
+  };
+  for (let varv = 0; varv < 200; varv++) {
+    const start = r.items.map(it => [it.x, it.y]);
+    const { over } = kor();
+    if (over <= 0.5) break;
+    // Får inte plats: backa och gör salen lite större i den här riktningen.
+    r.items.forEach((it, i) => { it.x = start[i][0]; it.y = start[i][1]; });
+    const steg = Math.max(SNAP, Math.ceil(over / SNAP) * SNAP);
+    if (axel === 'x') { r.W += steg; if (tecken < 0) { r.items.forEach(it => { it.x += steg; }); r.vagg.forEach(v => { if (v.wall === 'n' || v.wall === 's') v.t += steg; }); } }
+    else { r.D += steg; if (tecken < 0) { r.items.forEach(it => { it.y += steg; }); r.vagg.forEach(v => { if (v.wall === 'w' || v.wall === 'e') v.t += steg; }); } }
+  }
+  for (const it of r.items) { it.x = r1(it.x); it.y = r1(it.y); }
 }
 function hallInne(it, r) {
   const b = aabb(it);
@@ -596,6 +707,7 @@ function planSvg(opt = {}) {
     s += `<text x="${bx}" y="${by}" transform="rotate(-90 ${bx} ${by})" text-anchor="middle" font-size="15" fill="${FARG.muted}">${fmtM(r.D)}</text>`;
   }
   // Möbler
+  const gruppSet = new Set(lage === 'rum' && !exp ? ui.grupp : []);
   const krock = new Set();
   if (!exp && lage === 'rum') {
     for (let i = 0; i < r.items.length; i++) for (let j = i + 1; j < r.items.length; j++) {
@@ -620,7 +732,7 @@ function planSvg(opt = {}) {
           (egna.has(g.k) ? '' : `<line class="kand" x1="${g.x1}" y1="${g.y1}" x2="${g.x2}" y2="${g.y2}" stroke="${FARG.accent}" stroke-opacity=".5" stroke-width="2.2" stroke-dasharray="5 4"/>`) + '</g>';
       }
     }
-    if (!exp && lage === 'rum' && !verktygLage && (ui.val === it.id || krock.has(it.id))) {
+    if (!exp && lage === 'rum' && !verktygLage && (ui.val === it.id || gruppSet.has(it.id) || krock.has(it.id))) {
       const b = lokalBox(it);
       const farg = krock.has(it.id) ? FARG.accent : FARG.blue;
       s += `<rect x="${b.x0 - 6}" y="${b.y0 - 6}" width="${b.x1 - b.x0 + 12}" height="${b.y1 - b.y0 + 12}" rx="8" fill="none" stroke="${farg}" stroke-width="2" stroke-dasharray="${krock.has(it.id) ? '0' : '6 4'}"/>`;
@@ -658,6 +770,11 @@ function planSvg(opt = {}) {
       const t = geo(it);
       s += `<text x="${r1(vx)}" y="${r1(vy) + 5}" text-anchor="middle" font-size="${t.w >= 120 ? 14 : 11}" font-weight="600" fill="${FARG.bankKant}" pointer-events="none">Kateder</text>`;
     }
+  }
+  // Markeringsramen (vykoordinater)
+  if (!exp && ui.ram) {
+    const q = ui.ram;
+    s += `<rect x="${Math.min(q.x0, q.x1)}" y="${Math.min(q.y0, q.y1)}" width="${Math.abs(q.x1 - q.x0)}" height="${Math.abs(q.y1 - q.y0)}" fill="${FARG.blue}" fill-opacity=".07" stroke="${FARG.blue}" stroke-width="1.6" stroke-dasharray="6 4" pointer-events="none"/>`;
   }
   // Namnkorten
   if (visaNamn) {
@@ -763,6 +880,9 @@ function ritaStatus() {
     } else {
       nasta.innerHTML = `Nästa steg: klassen ${IKON.pil}`;
       nasta.dataset.till = 'klass';
+      if (ui.grupp.length > 1) {
+        $('status').innerHTML = `<b>${esc(r.namn)}</b><span class="sep"></span><span><b>${ui.grupp.length}</b> möbler markerade, dra i en av dem för att flytta alla</span>`;
+      }
     }
   } else {
     go.hidden = !k || lage === 'klass';
@@ -841,7 +961,7 @@ function panelRum() {
       const under = TYPER[t] ? (n ? n + (n === 1 ? ' plats' : ' platser') : 'Lärarens bord') : 'På väggen';
       return `<div class="mobelkort" data-ny="${t}" role="button" tabindex="0" aria-label="Lägg till ${esc(typ.namn)}">${ikonSvg(t)}<b>${esc(typ.namn)}</b><small>${under}</small></div>`;
     }).join('')}</div>
-    <p class="note">Klicka för att ställa ut en möbel eller dra in den i salen. Dörren och fönstren dras längs väggarna, och ett klick på dörren vänder den så att den öppnas åt andra hållet. Släpps en bänk på en annan snäpper de ihop kant i kant (håll ned Alt för att placera fritt). Markera en möbel för att vrida, kopiera eller ta bort den. Katedern blir större eller mindre när du drar i en kant eller ett hörn av den.</p>
+    <p class="note">Klicka för att ställa ut en möbel eller dra in den i salen. Dörren och fönstren dras längs väggarna, och ett klick på dörren vänder den så att den öppnas åt andra hållet. Släpps en bänk på en annan snäpper de ihop kant i kant (håll ned Alt för att placera fritt). Markera en möbel för att vrida, kopiera eller ta bort den. Vill du flytta flera bänkar på en gång drar du en ram runt dem från golvet (eller håller ned Skift och klickar), och drar sedan i en av dem. Katedern blir större eller mindre när du drar i en kant eller ett hörn av den.</p>
   </div>
   <div class="grp">
     <div class="grp-h"><span class="eyebrow">Platser som inte används</span><span class="count"><b>${r.blocked.length}</b> spärrade</span></div>
@@ -1326,13 +1446,32 @@ svg.addEventListener('pointerdown', e => {
     }
     if (itEl) {
       const it = r.items.find(i => i.id === itEl.dataset.item);
-      ui.val = it.id;
-      ui.drag = { kind: 'item', id: it.id, dx: it.x - x, dy: it.y - y, cx: e.clientX, cy: e.clientY, moved: false, fore: JSON.stringify(S) };
+      if (e.shiftKey || e.ctrlKey || e.metaKey) {
+        // Skift- eller Ctrl-klick lägger till eller tar bort möbeln ur markeringen.
+        const ids = ui.grupp.length ? ui.grupp.slice() : (ui.val && r.items.some(i => i.id === ui.val) ? [ui.val] : []);
+        const i = ids.indexOf(it.id);
+        if (i >= 0) ids.splice(i, 1); else ids.push(it.id);
+        ui.grupp = ids.length > 1 ? ids : []; ui.val = ids.length === 1 ? ids[0] : null;
+      } else if (ui.grupp.includes(it.id)) {
+        const g = gruppen();
+        ui.drag = { kind: 'grupp', x0: x, y0: y, pos0: g.map(i => [i.x, i.y]), cx: e.clientX, cy: e.clientY, moved: false, fore: JSON.stringify(S) };
+      } else {
+        ui.grupp = []; ui.val = it.id;
+        ui.drag = { kind: 'item', id: it.id, dx: it.x - x, dy: it.y - y, cx: e.clientX, cy: e.clientY, moved: false, fore: JSON.stringify(S) };
+      }
     } else if (vEl) {
-      ui.val = vEl.dataset.vagg;
+      ui.grupp = []; ui.val = vEl.dataset.vagg;
       ui.drag = { kind: 'vagg', id: vEl.dataset.vagg, cx: e.clientX, cy: e.clientY, moved: false, fore: JSON.stringify(S) };
-    } else ui.val = null;
+    } else {
+      // Tomt golv: börja dra en markeringsram, som när man markerar filer.
+      const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+      const v0 = pt.matrixTransform(svg.getScreenCTM().inverse());
+      const behall = (e.shiftKey || e.ctrlKey || e.metaKey) ? (ui.grupp.length ? ui.grupp.slice() : (ui.val ? [ui.val] : [])) : [];
+      if (!behall.length) avmarkera();
+      ui.drag = { kind: 'ram', vx: v0.x, vy: v0.y, behall, cx: e.clientX, cy: e.clientY, moved: false };
+    }
     ritaPlan();
+    ritaStatus();
     e.preventDefault();
     return;
   }
@@ -1353,27 +1492,53 @@ window.addEventListener('pointermove', e => {
     it.x = snap(x + d.dx); it.y = snap(y + d.dy); hallInne(it, r);
     if (!e.altKey) { snappa(it, r); hallInne(it, r); }
     ritaPlan();
+  } else if (d.kind === 'grupp') {
+    const g = gruppen();
+    let dx = snap(x - d.x0), dy = snap(y - d.y0);
+    g.forEach((it, i) => { it.x = d.pos0[i][0] + dx; it.y = d.pos0[i][1] + dy; });
+    gruppHallInne(g, r);
+    if (!e.altKey) { gruppSnappa(g, r); gruppHallInne(g, r); }
+    ritaPlan();
+  } else if (d.kind === 'ram') {
+    const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+    const v1 = pt.matrixTransform(svg.getScreenCTM().inverse());
+    ui.ram = { x0: d.vx, y0: d.vy, x1: v1.x, y1: v1.y };
+    // Allt som ramen nuddar blir markerat.
+    const [ax, ay] = V(d.vx, d.vy), [bx, by] = V(v1.x, v1.y);
+    const q = { x0: Math.min(ax, bx), x1: Math.max(ax, bx), y0: Math.min(ay, by), y1: Math.max(ay, by) };
+    const inne = r.items.filter(it => { const b = aabb(it); return b.x1 > q.x0 && b.x0 < q.x1 && b.y1 > q.y0 && b.y0 < q.y1; }).map(i => i.id);
+    const ids = [...new Set(d.behall.concat(inne))];
+    ui.grupp = ids.length > 1 ? ids : []; ui.val = ids.length === 1 ? ids[0] : null;
+    ritaPlan();
   } else if (d.kind === 'rumstorlek') {
     // Mät avståndet från pekaren till den motsatta väggen, som står still.
     const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
     const p = pt.matrixTransform(svg.getScreenCTM().inverse());
     const fast = (vx, vy) => V(vx, vy);
+    // Utgå alltid från läget när dragningen började, så att bänkarna går
+    // tillbaka om väggen dras ut igen under samma dragning.
+    r.items.forEach((it, i) => { it.x = d.items0[i][0]; it.y = d.items0[i][1]; });
+    r.vagg.forEach((v, i) => { v.t = d.vagg0[i]; });
     if (d.sx) {
       const [fx] = fast(d.sx > 0 ? 0 : r.W, 0);
       const W = clamp(snap(Math.abs(p.x - fx) - 5), MIN_W, MAX_W);
       const skift = d.sx < 0 ? W - d.W0 : 0;
       r.W = W;
-      r.items.forEach((it, i) => { it.x = d.items0[i][0] + skift; });
-      r.vagg.forEach((v, i) => { if (v.wall === 'n' || v.wall === 's') v.t = d.vagg0[i] + skift; });
+      r.items.forEach(it => { it.x += skift; });
+      r.vagg.forEach(v => { if (v.wall === 'n' || v.wall === 's') v.t += skift; });
     }
     if (d.sy) {
       const [, fy] = fast(0, d.sy > 0 ? 0 : r.D);
       const D = clamp(snap(Math.abs(p.y - fy) - 5), MIN_D, MAX_D);
       const skift = d.sy < 0 ? D - d.D0 : 0;
       r.D = D;
-      r.items.forEach((it, i) => { it.y = d.items0[i][1] + skift; });
-      r.vagg.forEach((v, i) => { if (v.wall === 'w' || v.wall === 'e') v.t = d.vagg0[i] + skift; });
+      r.items.forEach(it => { it.y += skift; });
+      r.vagg.forEach(v => { if (v.wall === 'w' || v.wall === 'e') v.t += skift; });
     }
+    // Väggen skjuter bänkarna framför sig, och de knuffar i sin tur bänkarna
+    // de står kant i kant med. Går det inte att trycka ihop mer stannar väggen.
+    if (d.sx) trangIn(r, 'x', d.sx, d);
+    if (d.sy) trangIn(r, 'y', d.sy, d);
     for (const it of r.items) hallInne(it, r);
     for (const v of r.vagg) { const L = VAGGTYP[v.typ].len, langd = (v.wall === 'n' || v.wall === 's') ? r.W : r.D; v.t = clamp(v.t, L / 2, langd - L / 2); }
     visaTips(`Salen är ${fmtM(r.W)} × ${fmtM(r.D)}`);
@@ -1420,7 +1585,8 @@ window.addEventListener('pointerup', e => {
     const v = r.vagg.find(i => i.id === d.id);
     if (v && v.typ === 'dorr') { minns(); v.spegel = !v.spegel; spara(); }
   }
-  if (d.kind === 'item' || d.kind === 'vagg' || d.kind === 'storlek' || d.kind === 'rumstorlek') {
+  if (d.kind === 'ram') { ui.ram = null; ritaPlan(); ritaStatus(); return; }
+  if (d.kind === 'item' || d.kind === 'vagg' || d.kind === 'storlek' || d.kind === 'rumstorlek' || d.kind === 'grupp') {
     if (d.moved) { angraStack.push(d.fore); if (angraStack.length > 40) angraStack.shift(); $('angraBtn').hidden = false; spara(); ritaPanel(); ritaStatus(); }
     ritaPlan();
     return;
@@ -1484,6 +1650,21 @@ function laggTillMobel(typ, x, y) {
 /* Verktygsraden vid den markerade möbeln */
 function placeraVerktyg() {
   const v = $('verktyg');
+  if (S.inst.lage === 'rum' && ui.grupp.length > 1 && !(ui.drag && ui.drag.moved)) {
+    const els = ui.grupp.map(id => svg.querySelector(`[data-item="${id}"]`)).filter(Boolean);
+    if (!els.length) { v.classList.remove('on'); return; }
+    v.querySelectorAll('[data-v="vridV"], [data-v="vridH"], [data-v="kopia"], .delare').forEach(b => { b.style.display = ''; });
+    v.querySelector('[data-v="vandDorr"]').style.display = 'none';
+    v.classList.add('on');
+    const rs = els.map(el => el.getBoundingClientRect()), s = stage.getBoundingClientRect();
+    const b = { left: Math.min(...rs.map(x => x.left)), right: Math.max(...rs.map(x => x.right)), top: Math.min(...rs.map(x => x.top)), bottom: Math.max(...rs.map(x => x.bottom)) };
+    const vw = v.offsetWidth, vh = v.offsetHeight;
+    let top = b.top - s.top - vh - 10;
+    if (top < 62) top = b.bottom - s.top + 10;
+    if (top + vh > s.height - 8) top = 62;
+    v.style.left = clamp((b.left + b.right) / 2 - s.left - vw / 2, 8, s.width - vw - 8) + 'px'; v.style.top = top + 'px';
+    return;
+  }
   if (S.inst.lage !== 'rum' || !ui.val || (ui.drag && ui.drag.moved)) { v.classList.remove('on'); return; }
   const el = svg.querySelector(`[data-item="${ui.val}"], [data-vagg="${ui.val}"]`);
   if (!el) { v.classList.remove('on'); return; }
@@ -1501,7 +1682,17 @@ function placeraVerktyg() {
   v.style.left = left + 'px'; v.style.top = top + 'px';
 }
 $('verktyg').addEventListener('click', e => {
-  const b = e.target.closest('[data-v]'); if (!b || !ui.val) return;
+  const b = e.target.closest('[data-v]'); if (!b) return;
+  if (ui.grupp.length > 1) {
+    const r = rum(), g = gruppen();
+    minns();
+    if (b.dataset.v === 'bort') gruppBort(g, r);
+    else if (b.dataset.v === 'vridV') gruppVrid(g, r, -45);
+    else if (b.dataset.v === 'vridH') gruppVrid(g, r, 45);
+    else if (b.dataset.v === 'kopia') gruppKopiera(g, r);
+    spara(); allt(); return;
+  }
+  if (!ui.val) return;
   const r = rum();
   const it = r.items.find(i => i.id === ui.val);
   minns();
@@ -1604,8 +1795,8 @@ panel.addEventListener('click', e => {
     case 'forval':
       if (r.items.some(it => it.typ !== 'kateder') && !confirm('Den färdiga möbleringen ersätter bänkarna som står i salen nu. Vill du fortsätta?')) return;
       minns(); forval(r, b.dataset.n); ui.val = null; spara(); allt(); break;
-    case 'skarmLage': ui.skarm = !ui.skarm; ui.sparr = false; ui.val = null; allt(); break;
-    case 'sparrLage': ui.sparr = !ui.sparr; ui.skarm = false; ui.val = null; allt(); break;
+    case 'skarmLage': ui.skarm = !ui.skarm; ui.sparr = false; avmarkera(); allt(); break;
+    case 'sparrLage': ui.sparr = !ui.sparr; ui.skarm = false; avmarkera(); allt(); break;
     case 'sparrBort': minns(); r.blocked = []; spara(); allt(); break;
     case 'skarmAlla': {
       minns(); const fore = r.skarmar.length; skarmarMellanAlla(r); ui.skarm = true; ui.sparr = false; spara(); allt();
@@ -1772,7 +1963,7 @@ function importeraFil() {
 
 /* ================= Sidhuvud, knappar och tangenter ================= */
 document.querySelectorAll('.mode').forEach(b => b.addEventListener('click', () => {
-  S.inst.lage = b.dataset.lage; ui.val = null; ui.skarm = ui.sparr = false; stangPop(); spara(); allt(); panel.scrollTop = 0;
+  S.inst.lage = b.dataset.lage; avmarkera(); ui.skarm = ui.sparr = false; stangPop(); spara(); allt(); panel.scrollTop = 0;
 }));
 $('nastaBtn').addEventListener('click', () => {
   if ($('nastaBtn').dataset.till === 'verktygKlar') { ui.skarm = ui.sparr = false; allt(); return; }
@@ -1802,9 +1993,28 @@ document.addEventListener('keydown', e => {
   const iFalt = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable);
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && !iFalt) { e.preventDefault(); angra(); return; }
   if (iFalt) return;
-  if (e.key === 'Escape') { stangPop(); if (ui.skarm || ui.sparr) { ui.skarm = ui.sparr = false; allt(); return; } if (ui.val) { ui.val = null; ritaPlan(); } return; }
+  if (e.key === 'Escape') { stangPop(); if (ui.skarm || ui.sparr) { ui.skarm = ui.sparr = false; allt(); return; } if (ui.val || ui.grupp.length) { avmarkera(); ritaPlan(); ritaStatus(); } return; }
   if (S.inst.lage !== 'rum') {
     if (e.key === ' ' && !t.closest('button')) { e.preventDefault(); if (!ui.anim) slumpa(); }
+    return;
+  }
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'a' && !ui.skarm && !ui.sparr) {
+    e.preventDefault(); ui.val = null; ui.grupp = rum().items.map(i => i.id);
+    if (ui.grupp.length === 1) { ui.val = ui.grupp[0]; ui.grupp = []; }
+    ritaPlan(); ritaStatus(); return;
+  }
+  if (ui.grupp.length > 1) {
+    const r = rum(), g = gruppen();
+    const pilar = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
+    if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); minns(); gruppBort(g, r); spara(); allt(); return; }
+    if (pilar[e.key]) {
+      e.preventDefault();
+      let [dx, dy] = pilar[e.key]; if (vand()) { dx = -dx; dy = -dy; }
+      const steg = e.shiftKey ? 50 : SNAP;
+      gruppFlytta(g, dx * steg, dy * steg); gruppHallInne(g, r); spara(); ritaPlan(); return;
+    }
+    if (e.key === 'r' || e.key === 'R') { minns(); gruppVrid(g, r, e.shiftKey ? -45 : 45); spara(); allt(); return; }
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd') { e.preventDefault(); minns(); gruppKopiera(g, r); spara(); allt(); return; }
     return;
   }
   if (!ui.val) return;

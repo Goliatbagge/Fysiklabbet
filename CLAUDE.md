@@ -1183,12 +1183,19 @@ i `kopplingsschema.js`; läs dem innan du ändrar något.
 - **Menyvalet Resurser** (infört 2026-09-30, hette tidigare Verktyg) ligger
   efter Nationella prov i huvudmenyn. Det är en rullgardin med två grupper,
   byggda som Ämne-menyns grupper (`.lab-nav-dd-grupp`): **Verktyg**
-  (Kopplingsschema, Sannolikhetskalkylator) och **Övningsblad** (Fysik, Matematik, som går till
-  `ovningsblad.html#fysik`/`#matematik`). Menyn finns på tolv sidor:
+  (Kopplingsschema, Sannolikhetskalkylator, Sammanfattningar) och **Övningsblad** (Fysik, Matematik, som går till
+  `ovningsblad.html#fysik`/`#matematik`). Menyn finns på tretton sidor:
   `avsnitt`, `begrepp`, `index`, `katalog`, `kontakt`, `nyheter`,
-  `nyhetsbrev`, `om`, `simuleringar`, `np`, `kopplingsschema` och
-  `ovningsblad` (samt `utkast/sannolikhetshornan.html`). Ett nytt verktyg
-  läggs till i alla; en ny sida med huvudmenyn ska ha Resurser med.
+  `nyhetsbrev`, `om`, `simuleringar`, `np`, `kopplingsschema`,
+  `sannolikhetskalkylator` och `ovningsblad` (samt
+  `utkast/sannolikhetshornan.html`). Ett nytt verktyg läggs till i alla;
+  en ny sida med huvudmenyn ska ha Resurser med.
+- **`sammanfattningar.html`** (2026-10-05) visar avsnittens
+  `::: sammanfattning`-rutor som bildspel för valda kapitel i en kurs. Den
+  nås också från kortet "Sammanfattningar för varje avsnitt" i varje
+  kapitelsammanfattning (K.S) i `katalog.html`, som öppnar valrutan med
+  kapitlet förkryssat (`?kurs=…&kap=…&val=1`). Kurser och kapitel läses ur
+  katalogen, så sidan behöver inte ändras när avsnitt läggs till.
 - **`ovningsblad.html`** listar alla övningsblad ämne för ämne och kurs för
   kurs, direkt ur `data/ovningsblad.js` + `data/katalog.js`. Ett blad som
   registreras där syns alltså både på avsnittets kort och på översikten,

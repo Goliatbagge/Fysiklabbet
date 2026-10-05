@@ -84,6 +84,11 @@
            'klockkurva', 'standardavvikelse', 'medelvärde', 'andel', 'procent', 'statistik',
            'binomialfördelning', 'poissonfördelning', 't-fördelning', 'chitvå', 'hypotesprövning',
            'konfidensintervall', 'p-värde', 'z-värde', 'verktyg', 'geogebra', 'kalkylator'] },
+    { title: 'Sammanfattningar för varje avsnitt', href: 'sammanfattningar.html',
+      description: 'Välj kurs och kapitel, så visas avsnittens sammanfattningar en i taget i ett bildspel.',
+      kw: ['sammanfattningar', 'sammanfattning', 'repetition', 'repetera', 'prov', 'inför provet',
+           'provplugg', 'plugga', 'bildspel', 'presentation', 'kapitel', 'avsnitt', 'formler',
+           'klassrum', 'storskärm', 'verktyg', 'lärare'] },
   ];
   for (const v of VERKTYG) {
     index.push({

@@ -3,25 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow">
-<title>Sammanfattningar i rotation — Fysiklabbet</title>
+<title>Sammanfattningar för varje avsnitt — Fysiklabbet</title>
 <!--
-  Vidarebefordran (2026-10-05). Utkastet gällde först bara Ma4 kapitel 1
-  och 4; det är numera generellt och ligger i sammanfattningar.html.
-  Den här adressen pekar dit med samma val, och ?tid= följer med.
+  Vidarebefordran (2026-10-05). Sidan var ett utkast här och ligger nu
+  officiellt i roten: sammanfattningar.html. Den här adressen gällde först bara Ma4 kapitel 1 och 4, och pekar dit med samma val.
 -->
+<link rel="canonical" href="https://fysiklabbet.se/sammanfattningar.html">
 <script>
 (function () {
     var p = new URLSearchParams(location.search);
     var kap = p.get('kap');
-    var mal = 'sammanfattningar.html?kurs=ma4&kap=' + (kap === '1' || kap === '4' ? kap : '1,4');
+    var mal = '../sammanfattningar.html?kurs=ma4&kap=' + (kap === '1' || kap === '4' ? kap : '1,4');
     var tid = parseInt(p.get('tid'), 10);
     if (tid >= 5 && tid <= 600) mal += '&tid=' + tid;
     location.replace(mal);
 })();
 </script>
-<noscript><meta http-equiv="refresh" content="0; url=sammanfattningar.html?kurs=ma4&amp;kap=1,4"></noscript>
+<noscript><meta http-equiv="refresh" content="0; url=../sammanfattningar.html?kurs=ma4&amp;kap=1,4"></noscript>
 </head>
 <body>
-<p><a href="sammanfattningar.html?kurs=ma4&amp;kap=1,4">Till sammanfattningarna</a></p>
+<p><a href="../sammanfattningar.html?kurs=ma4&amp;kap=1,4">Till sammanfattningarna</a></p>
 </body>
 </html>

@@ -2708,6 +2708,19 @@
             // Sammanfattningsavsnitt (num 'K.S'): repetitionsspel i stället för
             // exit tickets/övningar — visa inga "Kommer snart"-kort där.
             const isSummary = activeSection && String(activeSection.num).endsWith('.S');
+            // Kapitelsammanfattningen länkar till bildspelet med avsnittens
+            // ::: sammanfattning-rutor (sammanfattningar.html), med det här
+            // kapitlet förkryssat i valrutan (&val=1) så att fler kapitel kan
+            // läggas till. Kortet visas bara om kapitlet har sådana rutor.
+            const antalAvsnittsSam = isSummary
+                ? sections.filter(s => {
+                    const md = TEORI[teoriId(course, s.num)];
+                    return md && /^:::\s*sammanfattning\b/m.test(md);
+                }).length
+                : 0;
+            const avsnittsSamUrl = antalAvsnittsSam
+                ? 'sammanfattningar.html?kurs=' + courseCode(course) + '&kap=' + chapterNumber + '&val=1'
+                : null;
             // Enhetskollavsnitt (num 'K.E'): quiz på kapitlets storheter och
             // enheter (fysik-enhetskoll.html) — ingen teori, inga övningar.
             const isEnhetskoll = activeSection && String(activeSection.num).endsWith('.E');
@@ -3048,6 +3061,13 @@
                                                             {hasTeori ? 'Genomgång' : 'Kommer snart'}
                                                         </div>
                                                     </button>}
+                                                    {avsnittsSamUrl && (
+                                                        <a className="lab-card lab-card-clickable" href={avsnittsSamUrl}>
+                                                            <div className="lab-card-tag">Bildspel</div>
+                                                            <div className="lab-card-title">Sammanfattningar för varje avsnitt</div>
+                                                            <div className="lab-card-meta">{antalAvsnittsSam} st</div>
+                                                        </a>
+                                                    )}
                                                     {hasExit ? (
                                                         <button type="button"
                                                             className={'lab-card ' + (view === 'exitticket' ? 'lab-card-active' : 'lab-card-clickable')}

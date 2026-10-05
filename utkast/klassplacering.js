@@ -749,12 +749,75 @@ function hastsko(r) {
   for (let i = 0; i < nBak; i++) ut.push({ id: uid(), typ: 'par', x: r1(start + i * 130), y: r1(yBak), rot: 0 });
   return ut;
 }
+/* Mot väggarna (datorprov): enkelbänkar längs vänster, höger och bakre vägg
+   med eleverna vända mot väggen, och i mitten en eller flera öar med två
+   rader bänkar fram mot fram, där eleverna sitter mot varandra. Väggen med
+   tavlan och området vid katedern lämnas fria, liksom dörrens svängområde.
+   Vridningar: 270 = eleven tittar mot väster, 90 = mot öster, 180 = mot
+   bakväggen, 0 = mot tavlan. */
+function dorrZoner(r) {
+  return (r.vagg || []).filter(v => v.typ === 'dorr').map(v => {
+    const L = vaggLen(v), a = v.t - L / 2, b = v.t + L / 2;
+    if (v.wall === 'n') return { x0: a, x1: b, y0: 0, y1: L };
+    if (v.wall === 's') return { x0: a, x1: b, y0: r.D - L, y1: r.D };
+    if (v.wall === 'w') return { x0: 0, x1: L, y0: a, y1: b };
+    return { x0: r.W - L, x1: r.W, y0: a, y1: b };
+  });
+}
+function motVaggarna(r) {
+  const t = geo({ typ: 'enkel' }), b = lokalBox('enkel');
+  const bw = t.w, h = t.h, ut = b.y1;          // ut: stolens yttersta kant räknat från bänkens mitt
+  const kant = 5, gap = 10, gang = 100;
+  const ut_ = [];
+  const kat = (r.items || []).find(i => i.typ === 'kateder');
+  let yStart = 190;
+  if (kat) { const kb = aabb(kat); if (kb.y1 < r.D / 2) yStart = Math.max(yStart, kb.y1 + 40); }
+  const hinder = dorrZoner(r);
+  const fri = it => {
+    const a = aabb(it);
+    if (hinder.some(z => a.x1 > z.x0 && a.x0 < z.x1 && a.y1 > z.y0 && a.y0 < z.y1)) return false;
+    if (kat && krockar(kat, it)) return false;
+    return !ut_.some(o => krockar(o, it));
+  };
+  // Jämnt fördelade mittpunkter längs en sträcka, med minst gap mellan bänkarna.
+  const langs = (fran, till) => {
+    const L = till - fran; if (L < bw) return [];
+    const n = Math.floor((L + gap) / (bw + gap));
+    if (n === 1) return [(fran + till) / 2];
+    const steg = (L - bw) / (n - 1);
+    return Array.from({ length: n }, (_, i) => fran + bw / 2 + i * steg);
+  };
+  const lagg = (x, y, rot) => { const it = { id: uid(), typ: 'enkel', x: r1(x), y: r1(y), rot }; if (fri(it)) ut_.push(it); };
+  // Bakväggen
+  const ySyd = r.D - kant - h / 2;
+  const sidaInre = kant + h / 2 + ut;            // sidokolumnernas inre kant (med stol)
+  for (const x of langs(sidaInre + gap, r.W - sidaInre - gap)) lagg(x, ySyd, 180);
+  // Vänster och höger vägg
+  const sydOvre = ySyd - ut;                      // bakraden når hit (med stol)
+  for (const y of langs(yStart, sydOvre - gap)) { lagg(kant + h / 2, y, 270); lagg(r.W - kant - h / 2, y, 90); }
+  // Öar i mitten
+  const x0 = sidaInre + gang, x1 = r.W - sidaInre - gang;
+  const y0 = yStart + 20, y1 = sydOvre - gang;
+  const H = h + 2 * ut;                           // en ö: två rader fram mot fram
+  const antalOar = Math.max(0, Math.floor((y1 - y0 + gang) / (H + gang)));
+  const per = Math.floor((x1 - x0) / bw);
+  if (antalOar && per) {
+    const totH = antalOar * H + (antalOar - 1) * gang, start = y0 + (y1 - y0 - totH) / 2;
+    const xs = Array.from({ length: per }, (_, i) => (r.W - per * bw) / 2 + bw / 2 + i * bw);
+    for (let o = 0; o < antalOar; o++) {
+      const yN = start + o * (H + gang) + ut;      // norra raden, vänd mot söder
+      for (const x of xs) { lagg(x, yN, 180); lagg(x, yN + h, 0); }
+    }
+  }
+  return ut_;
+}
 const FORVAL = {
   par: { namn: 'Rader med parbänkar', bes: 'Klassisk möblering, två och två', gor: r => rutnat(r, 'par', 60, 140, 230) },
   enkel: { namn: 'Enskilda bänkar', bes: 'En och en, till exempel vid prov', gor: r => rutnat(r, 'enkel', 50, 115, 230) },
   grupp4: { namn: 'Grupper om fyra', bes: 'Gruppbord för samarbete', gor: r => rutnat(r, 'grupp4', 90, 230, 240) },
   hastsko: { namn: 'Hästsko', bes: 'Bänkarna i en U-form mot tavlan', gor: hastsko },
   trio: { namn: 'Labbsal', bes: 'Långa labbänkar för tre', gor: r => rutnat(r, 'trio', 70, 150, 230) },
+  vaggar: { namn: 'Mot väggarna', bes: 'Datorprov: mot väggen runt om och en ö i mitten', gor: motVaggarna },
 };
 function forval(r, namn) {
   r.items = r.items.filter(it => it.typ === 'kateder').concat(FORVAL[namn].gor(r));

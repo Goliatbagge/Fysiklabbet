@@ -634,6 +634,15 @@ function skarmLagen(it) {
   for (let i = 1; i < n; i++) { const x = r1(-w / 2 + i * w / n); L.push({ k: 's' + i, x1: x, y1: -h / 2, x2: x, y2: h / 2 }); }
   return L;
 }
+// Roteringshandtaget: ett runt handtag med en vridpil, på ett kort skaft.
+function vridHandtag(cx, cy, fotX, fotY, data) {
+  return `<line x1="${r1(fotX)}" y1="${r1(fotY)}" x2="${r1(cx)}" y2="${r1(cy)}" stroke="${FARG.blue}" stroke-width="1.6" pointer-events="none"/>` +
+    `<g ${data} transform="translate(${r1(cx)} ${r1(cy)})" style="cursor:grab">` +
+    `<circle r="13" fill="#ffffff" stroke="${FARG.blue}" stroke-width="2.2"/>` +
+    `<path d="M5.6 -3.2A6.5 6.5 0 1 0 6.4 2.4" fill="none" stroke="${FARG.blue}" stroke-width="2" stroke-linecap="round"/>` +
+    `<path d="M6.9 -7.4 6 -2.6 1.3 -3.8" fill="none" stroke="${FARG.blue}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>` +
+    `<circle r="20" fill="transparent"/></g>`;
+}
 function skarmSvg(g) {
   const L = Math.hypot(g.x2 - g.x1, g.y2 - g.y1) || 1, ux = (g.x2 - g.x1) / L, uy = (g.y2 - g.y1) / L, kant = 3;
   const a = [r1(g.x1 + ux * kant), r1(g.y1 + uy * kant)], b = [r1(g.x2 - ux * kant), r1(g.y2 - uy * kant)];
@@ -939,6 +948,7 @@ function planSvg(opt = {}) {
       const b = lokalBox(it);
       const farg = krock.has(it.id) ? FARG.accent : FARG.blue;
       s += `<rect x="${b.x0 - 6}" y="${b.y0 - 6}" width="${b.x1 - b.x0 + 12}" height="${b.y1 - b.y0 + 12}" rx="8" fill="none" stroke="${farg}" stroke-width="2" stroke-dasharray="${krock.has(it.id) ? '0' : '6 4'}"/>`;
+      if (ui.val === it.id && !ui.grupp.length && !(ui.drag && ui.drag.moved && ui.drag.kind !== 'vrid')) s += vridHandtag(0, b.y0 - 34, 0, b.y0 - 6, 'data-vrid="1"');
     }
     // Spärrläget: varje stol går att klicka på
     if (sparrLage) {
@@ -972,6 +982,15 @@ function planSvg(opt = {}) {
     if (it.typ === 'kateder') {
       const t = geo(it);
       s += `<text x="${r1(vx)}" y="${r1(vy) + 5}" text-anchor="middle" font-size="${t.w >= 120 ? 14 : 11}" font-weight="600" fill="${FARG.bankKant}" pointer-events="none">Kateder</text>`;
+    }
+  }
+  // Roteringshandtag för en markerad grupp
+  if (!exp && lage === 'rum' && !verktygLage && ui.grupp.length > 1 && !(ui.drag && ui.drag.moved && ui.drag.kind !== 'gruppvrid')) {
+    const g = gruppen();
+    if (g.length > 1) {
+      const gb = gruppBox(g), mx = (gb.x0 + gb.x1) / 2;
+      const [hx, hy] = V(mx, gb.y0 - 40), [fx, fy] = V(mx, gb.y0 - 8);
+      s += vridHandtag(hx, hy, fx, fy, 'data-gruppvrid="1"');
     }
   }
   // Hjälplinjer vid linjering
@@ -1173,7 +1192,7 @@ function panelRum() {
       const under = TYPER[t] ? (n ? n + (n === 1 ? ' plats' : ' platser') : 'Lärarens bord') : 'På väggen';
       return `<div class="mobelkort" data-ny="${t}" role="button" tabindex="0" aria-label="Lägg till ${esc(typ.namn)}">${ikonSvg(t)}<b>${esc(typ.namn)}</b><small>${under}</small></div>`;
     }).join('')}</div>
-    <p class="note">Klicka för att ställa ut en möbel eller dra in den i salen. Dörren och fönstren dras längs väggarna, och ett klick på dörren vänder den så att den öppnas åt andra hållet. Ett fönster blir längre eller kortare när du drar i någon av dess ändar. Släpps en bänk på en annan snäpper de ihop kant i kant, och en bänk som dras nästan i linje med en annan bänk snäpper rakt bakom, framför eller bredvid den (håll ned Alt för att placera fritt). Markera en möbel för att vrida, kopiera eller ta bort den. Vill du flytta flera bänkar på en gång drar du en ram runt dem från golvet (eller håller ned Skift och klickar), och drar sedan i en av dem. Katedern blir större eller mindre när du drar i en kant eller ett hörn av den.</p>
+    <p class="note">Klicka för att ställa ut en möbel eller dra in den i salen. Dörren och fönstren dras längs väggarna, och ett klick på dörren vänder den så att den öppnas åt andra hållet. Ett fönster blir längre eller kortare när du drar i någon av dess ändar. Släpps en bänk på en annan snäpper de ihop kant i kant, och en bänk som dras nästan i linje med en annan bänk snäpper rakt bakom, framför eller bredvid den (håll ned Alt för att placera fritt). Markera en möbel för att vrida, kopiera eller ta bort den. Ta tag i det runda handtaget ovanför en markerad bänk och dra runt för att vrida den i steg om 45°. Vill du flytta flera bänkar på en gång drar du en ram runt dem från golvet (eller håller ned Skift och klickar), och drar sedan i en av dem. Katedern blir större eller mindre när du drar i en kant eller ett hörn av den.</p>
   </div>
   <div class="grp">
     <div class="grp-h"><span class="eyebrow">Bänkarnas mått</span></div>
@@ -1688,6 +1707,18 @@ svg.addEventListener('pointerdown', e => {
       e.preventDefault();
       return;
     }
+    if (e.target.closest('[data-vrid]') && ui.val) {
+      const it = r.items.find(i => i.id === ui.val);
+      if (it) {
+        ui.drag = { kind: 'vrid', id: it.id, cx: e.clientX, cy: e.clientY, moved: false, fore: JSON.stringify(S) };
+        e.preventDefault(); return;
+      }
+    }
+    if (e.target.closest('[data-gruppvrid]') && ui.grupp.length > 1) {
+      const g = gruppen(), gb = gruppBox(g), mx = (gb.x0 + gb.x1) / 2, my = (gb.y0 + gb.y1) / 2;
+      ui.drag = { kind: 'gruppvrid', mx, my, a0: Math.atan2(x - mx, -(y - my)) * 180 / Math.PI, pos0: g.map(i => [i.x, i.y, i.rot]), cx: e.clientX, cy: e.clientY, moved: false, fore: JSON.stringify(S) };
+      e.preventDefault(); return;
+    }
     const hEl = e.target.closest('[data-handtag]'), itEl = e.target.closest('[data-item]'), vEl = e.target.closest('[data-vagg]');
     if (hEl && itEl) {
       const it = r.items.find(i => i.id === itEl.dataset.item), t = geo(it);
@@ -1755,6 +1786,29 @@ window.addEventListener('pointermove', e => {
       snappa(it, r); hallInne(it, r);
       linjera([it], r, false);
     }
+    ritaPlan();
+  } else if (d.kind === 'vrid') {
+    // Vinkeln från möbelns mitt till pekaren, i steg om 45°. Handtaget sitter
+    // framför bänken, så pekaren rakt mot tavlan betyder ingen vridning.
+    const it = r.items.find(i => i.id === d.id); if (!it) return;
+    const a = Math.atan2(x - it.x, -(y - it.y)) * 180 / Math.PI;
+    const ny = ((Math.round(a / 45) * 45) % 360 + 360) % 360;
+    if (ny !== it.rot) { it.rot = ny; hallInne(it, r); }
+    visaTips(`Vriden ${it.rot}°`);
+    ritaPlan();
+  } else if (d.kind === 'gruppvrid') {
+    const g = gruppen();
+    const a = Math.atan2(x - d.mx, -(y - d.my)) * 180 / Math.PI;
+    let delta = Math.round((a - d.a0) / 45) * 45;
+    g.forEach((it, i) => { it.x = d.pos0[i][0]; it.y = d.pos0[i][1]; it.rot = d.pos0[i][2]; });
+    if (delta) {
+      for (const it of g) {
+        const [nx, ny] = rot(it.x - d.mx, it.y - d.my, delta);
+        it.x = r1(d.mx + nx); it.y = r1(d.my + ny); it.rot = ((it.rot + delta) % 360 + 360) % 360;
+      }
+      gruppHallInne(g, r);
+    }
+    visaTips(`Gruppen vriden ${((delta % 360) + 360) % 360}°`);
     ritaPlan();
   } else if (d.kind === 'fonster') {
     // Den andra änden står still; fönstret får inte bli kortare än 40 cm eller gå utanför väggen.
@@ -1861,7 +1915,7 @@ window.addEventListener('pointerup', e => {
   }
   ui.guider = null;
   if (d.kind === 'ram') { ui.ram = null; ritaPlan(); ritaStatus(); return; }
-  if (d.kind === 'item' || d.kind === 'vagg' || d.kind === 'storlek' || d.kind === 'rumstorlek' || d.kind === 'grupp' || d.kind === 'fonster') {
+  if (d.kind === 'item' || d.kind === 'vagg' || d.kind === 'storlek' || d.kind === 'rumstorlek' || d.kind === 'grupp' || d.kind === 'fonster' || d.kind === 'vrid' || d.kind === 'gruppvrid') {
     if (d.moved) { angraStack.push(d.fore); if (angraStack.length > 40) angraStack.shift(); $('angraBtn').hidden = false; spara(); ritaPanel(); ritaStatus(); }
     ritaPlan();
     return;
@@ -1931,7 +1985,8 @@ function placeraVerktyg() {
     v.querySelectorAll('[data-v="vridV"], [data-v="vridH"], [data-v="kopia"], .delare').forEach(b => { b.style.display = ''; });
     v.querySelector('[data-v="vandDorr"]').style.display = 'none';
     v.classList.add('on');
-    const rs = els.map(el => el.getBoundingClientRect()), s = stage.getBoundingClientRect();
+    const hv = svg.querySelector('[data-gruppvrid]');
+    const rs = els.concat(hv ? [hv] : []).map(el => el.getBoundingClientRect()), s = stage.getBoundingClientRect();
     const b = { left: Math.min(...rs.map(x => x.left)), right: Math.max(...rs.map(x => x.right)), top: Math.min(...rs.map(x => x.top)), bottom: Math.max(...rs.map(x => x.bottom)) };
     const vw = v.offsetWidth, vh = v.offsetHeight;
     let top = b.top - s.top - vh - 10;

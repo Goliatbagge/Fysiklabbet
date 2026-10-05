@@ -520,12 +520,13 @@ function vaggSvg(v, r, vald) {
       : `<line x1="${x}" y1="${y + h / 2}" x2="${x + w}" y2="${y + h / 2}" stroke="${FARG.vagg}" stroke-width="1"/>`;
   } else {
     // Gångjärnet i ena änden, dörrbladet öppet in i salen och en streckad svängbåge.
+    // Med v.spegel sitter gångjärnet i den andra änden och dörren svänger åt andra hållet.
     let hx, hy, lx, ly, jx, jy;
-    const a = v.t - L / 2;
-    if (v.wall === 'n') { hx = a; hy = 0; lx = a; ly = L; jx = a + L; jy = 0; }
-    else if (v.wall === 's') { hx = a; hy = r.D; lx = a; ly = r.D - L; jx = a + L; jy = r.D; }
-    else if (v.wall === 'w') { hx = 0; hy = a; lx = L; ly = a; jx = 0; jy = a + L; }
-    else { hx = r.W; hy = a; lx = r.W - L; ly = a; jx = r.W; jy = a + L; }
+    const a = v.spegel ? v.t + L / 2 : v.t - L / 2, b = v.spegel ? v.t - L / 2 : v.t + L / 2;
+    if (v.wall === 'n') { hx = a; hy = 0; lx = a; ly = L; jx = b; jy = 0; }
+    else if (v.wall === 's') { hx = a; hy = r.D; lx = a; ly = r.D - L; jx = b; jy = r.D; }
+    else if (v.wall === 'w') { hx = 0; hy = a; lx = L; ly = a; jx = 0; jy = b; }
+    else { hx = r.W; hy = a; lx = r.W - L; ly = a; jx = r.W; jy = b; }
     const [Hx, Hy] = V(hx, hy), [Lx, Ly] = V(lx, ly), [Jx, Jy] = V(jx, jy);
     const sweep = ((Lx - Hx) * (Jy - Hy) - (Ly - Hy) * (Jx - Hx)) > 0 ? 1 : 0;
     s += `<rect x="${x - 1}" y="${y - 1}" width="${w + 2}" height="${h + 2}" fill="${FARG.golv}"/>`;
@@ -840,7 +841,7 @@ function panelRum() {
       const under = TYPER[t] ? (n ? n + (n === 1 ? ' plats' : ' platser') : 'Lärarens bord') : 'På väggen';
       return `<div class="mobelkort" data-ny="${t}" role="button" tabindex="0" aria-label="Lägg till ${esc(typ.namn)}">${ikonSvg(t)}<b>${esc(typ.namn)}</b><small>${under}</small></div>`;
     }).join('')}</div>
-    <p class="note">Klicka för att ställa ut en möbel eller dra in den i salen. Släpps en bänk på en annan snäpper de ihop kant i kant (håll ned Alt för att placera fritt). Markera en möbel för att vrida, kopiera eller ta bort den. Katedern blir större eller mindre när du drar i en kant eller ett hörn av den.</p>
+    <p class="note">Klicka för att ställa ut en möbel eller dra in den i salen. Dörren och fönstren dras längs väggarna, och ett klick på dörren vänder den så att den öppnas åt andra hållet. Släpps en bänk på en annan snäpper de ihop kant i kant (håll ned Alt för att placera fritt). Markera en möbel för att vrida, kopiera eller ta bort den. Katedern blir större eller mindre när du drar i en kant eller ett hörn av den.</p>
   </div>
   <div class="grp">
     <div class="grp-h"><span class="eyebrow">Platser som inte används</span><span class="count"><b>${r.blocked.length}</b> spärrade</span></div>
@@ -1415,6 +1416,10 @@ window.addEventListener('pointerup', e => {
   stage.classList.remove('greppar');
   tabortSpoke();
   const r = rum();
+  if (d.kind === 'vagg' && !d.moved) {
+    const v = r.vagg.find(i => i.id === d.id);
+    if (v && v.typ === 'dorr') { minns(); v.spegel = !v.spegel; spara(); }
+  }
   if (d.kind === 'item' || d.kind === 'vagg' || d.kind === 'storlek' || d.kind === 'rumstorlek') {
     if (d.moved) { angraStack.push(d.fore); if (angraStack.length > 40) angraStack.shift(); $('angraBtn').hidden = false; spara(); ritaPanel(); ritaStatus(); }
     ritaPlan();
@@ -1483,7 +1488,10 @@ function placeraVerktyg() {
   const el = svg.querySelector(`[data-item="${ui.val}"], [data-vagg="${ui.val}"]`);
   if (!el) { v.classList.remove('on'); return; }
   const arVagg = !!el.dataset.vagg;
-  v.querySelectorAll('[data-v="vridV"], [data-v="vridH"], [data-v="kopia"], .delare').forEach(b => { b.style.display = arVagg ? 'none' : ''; });
+  const arDorr = arVagg && rum().vagg.some(x => x.id === ui.val && x.typ === 'dorr');
+  v.querySelectorAll('[data-v="vridV"], [data-v="vridH"], [data-v="kopia"]').forEach(b => { b.style.display = arVagg ? 'none' : ''; });
+  v.querySelector('[data-v="vandDorr"]').style.display = arDorr ? '' : 'none';
+  v.querySelector('.delare').style.display = arVagg && !arDorr ? 'none' : '';
   v.classList.add('on');
   const b = el.getBoundingClientRect(), s = stage.getBoundingClientRect();
   const vw = v.offsetWidth, vh = v.offsetHeight;
@@ -1502,6 +1510,7 @@ $('verktyg').addEventListener('click', e => {
     else r.vagg = r.vagg.filter(v => v.id !== ui.val);
     ui.val = null;
   } else if (it && b.dataset.v === 'vridV') { it.rot = (it.rot + 315) % 360; hallInne(it, r); }
+  else if (b.dataset.v === 'vandDorr') { const dv = r.vagg.find(x => x.id === ui.val); if (dv) dv.spegel = !dv.spegel; }
   else if (it && b.dataset.v === 'vridH') { it.rot = (it.rot + 45) % 360; hallInne(it, r); }
   else if (it && b.dataset.v === 'kopia') {
     const ny = { ...it, id: uid() };

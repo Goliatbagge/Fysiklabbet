@@ -128,6 +128,11 @@ button, input, select, textarea { font-family: inherit; }
 .mobelkort svg { height: 46px; width: 100%; display: block; pointer-events: none; }
 .mobelkort b { font-size: 12.5px; font-weight: 600; color: var(--ink); text-align: center; line-height: 1.2; }
 .mobelkort small { font: 500 9.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.skarmrad { display: flex; align-items: center; gap: 12px; }
+.skarmrad svg { width: 70px; height: 52px; flex: none; }
+.stage.rum [data-kand] { cursor: pointer; }
+.stage .rumkant:hover { stroke: rgba(28, 61, 107, .28); }
+.stage [data-kand]:hover .kand { stroke-opacity: 1; stroke-width: 4; stroke-dasharray: none; }
 .forval { display: grid; grid-template-columns: 1fr; gap: 6px; }
 .forval button { display: flex; align-items: center; gap: 11px; text-align: left; padding: 7px 10px; border-radius: 11px; border: 1px solid var(--line2); background: #fff; cursor: pointer; transition: border-color .15s; }
 .forval button:hover { border-color: var(--ink); }
@@ -442,7 +447,7 @@ textarea { width: 100%; min-height: 92px; resize: vertical; padding: 9px 11px; b
 
     <h2>Så använder du verktyget</h2>
     <ol class="seo-steps">
-      <li><b>Klassrummet.</b> Ange salens mått och välj en färdig möblering, till exempel rader med parbänkar eller grupper om fyra. Dra sedan bänkarna dit de står i verkligheten. Markera en bänk för att vrida, kopiera eller ta bort den. Dörren och fönstren dras längs väggarna.</li>
+      <li><b>Klassrummet.</b> Ange salens mått och välj en färdig möblering, till exempel rader med parbänkar eller grupper om fyra. Dra sedan bänkarna dit de står i verkligheten. En bänk som släpps på en annan snäpper fast kant i kant. Markera en bänk för att vrida, kopiera eller ta bort den. Salen blir större eller mindre när du drar i en vägg eller ett hörn, och katedern när du drar i dess handtag. Dörren och fönstren dras längs väggarna.</li>
       <li><b>Klassen.</b> Klistra in klasslistan med ett namn per rad. Bocka av den som är frånvarande, markera vem som behöver sitta fram och lägg till par som ska hållas isär eller sitta ihop.</li>
       <li><b>Placeringen.</b> Tryck på Slumpa placering. Är du inte nöjd drar du ett namn till en annan plats, och två elever byter då plats med varandra. Lås en elev på sin plats så ligger hen kvar nästa gång du slumpar.</li>
       <li><b>Visa och spara.</b> Visa planen i helskärm för klassen, skriv ut den eller ladda ned den som bild. Spara placeringen när den används, så kan verktyget ge eleverna nya grannar nästa gång.</li>
@@ -454,6 +459,7 @@ textarea { width: 100%; min-height: 92px; resize: vertical; padding: 9px 11px; b
 
     <h3>Provplacering</h3>
     <p>Är salen större än klassen kan du välja hur de tomma platserna ska fördelas. <b>Längst bak</b> fyller salen framifrån, som vid en vanlig lektion. <b>Utspridda</b> sätter eleverna så långt isär som möjligt, vilket passar vid prov.</p>
+    <p>Slå på <b>Ingen bredvid någon</b> så hamnar ingen elev direkt bredvid en annan. Räcker platserna inte till sätter verktyget automatiskt ut en provskärm mellan dem som måste sitta bredvid varandra. Du kan också själv sätta ut provskärmar i bänkarnas kanter och i mitten av parbänkarna, och spärra stolar som står för tätt så att de aldrig används.</p>
 
     <h3>Nya grannar</h3>
     <p>När du sparar en placering minns verktyget vilka som satt bredvid varandra. Nästa gång du slumpar undviks samma grannar, och verktyget talar om hur många elever som fick helt nya grannar.</p>
@@ -472,7 +478,7 @@ textarea { width: 100%; min-height: 92px; resize: vertical; padding: 9px 11px; b
 
 <!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
      webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
-<script src="klassplacering.js?v=202610051200"></script>
+<script src="klassplacering.js?v=202610052130"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

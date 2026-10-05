@@ -179,6 +179,10 @@ body:not(.niva-universum) #rubrik { opacity: 0; transform: translate(-20px, -50%
 @keyframes snurr { to { --v: 360deg; } }
 @keyframes upp { from { opacity: 0; transform: translateY(14px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
 
+#blixt { position: fixed; inset: 0; z-index: 25; pointer-events: none; opacity: 0; background: radial-gradient(circle at center, #ffeec4 0%, #d99a45 32%, #120c05 100%); transition: opacity .45s var(--ease); }
+#blixt.pa { opacity: 1; }
+body.lektion-in .hud, body.lektion-in .etiketter { opacity: 0 !important; pointer-events: none !important; }
+body.lektion-in .etiketter * { pointer-events: none !important; }
 #fel { position: fixed; inset: 0; display: none; place-items: center; text-align: center; padding: 30px; z-index: 20; background: var(--bg); color: var(--dim); }
 
 /* ---------- Mobil ---------- */
@@ -271,6 +275,7 @@ body:not(.niva-universum) #rubrik { opacity: 0; transform: translate(-20px, -50%
 </div>
 
 <div id="fel"></div>
+<div id="blixt"></div>
 
 <script src="../data/katalog.js"></script>
 <script type="module">
@@ -372,7 +377,8 @@ const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 14
 scene.add(camera);
 
 const composer = new EffectComposer(renderer);
-composer.addPass(new RenderPass(scene, camera));
+const renderPass = new RenderPass(scene, camera);
+composer.addPass(renderPass);
 const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 1.0, 0.62, 0.1);
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
@@ -1076,13 +1082,15 @@ function panelAvsnitt(s) {
     <div class="status ${tand ? 'tand' : ''}"><span class="p"></span>${tand ? 'Stjärnan lyser' : 'Stjärnan väntar på dig'}</div>
     <p>${s.text}</p>
     <div class="knappar">
-      <a class="knapp prim" href="../katalog.html?id=${s.id}">Öppna genomgången</a>
+      ${LEKTIONER.has(s.id) ? `<button class="knapp prim" id="p-lek">Starta genomgången</button><a class="knapp" href="../katalog.html?id=${s.id}">Den vanliga genomgången</a>` : `<a class="knapp prim" href="../katalog.html?id=${s.id}">Öppna genomgången</a>`}
       ${s.sam ? '' : `<a class="knapp" href="../katalog.html?id=${s.id}:ovningar">Öva på avsnittet</a>`}
       <button class="knapp tand-knapp" id="p-tand">${tand ? 'Släck stjärnan' : 'Tänd stjärnan'}</button>
     </div>
     <p class="not">I det här utkastet tänder du stjärnan själv. I en färdig version tänds den när du klarat avsnittets exit ticket.</p>
     <button class="lank" id="p-tillbaka">Alla avsnitt i kapitlet</button>`;
   inre.querySelector('#p-tand').addEventListener('click', () => vaxla(s));
+  const lekKnapp = inre.querySelector('#p-lek');
+  if (lekKnapp) lekKnapp.addEventListener('click', () => startaLektion(s));
   inre.querySelector('#p-tillbaka').addEventListener('click', () => { valtS = null; ALLA.forEach((x) => x.etikett.element.classList.remove('vald')); visaPanel(() => panelKapitel(k)); ritaFramsteg(); });
 }
 
@@ -1133,10 +1141,10 @@ function satsHov({ w, k, s }) {
   if (s !== hovS) { if (hovS) hovS.etikett.element.classList.remove('hov'); hovS = s; if (s) s.etikett.element.classList.add('hov'); ritaFramsteg(); }
   canvas.style.cursor = w || k || s ? 'pointer' : 'grab';
 }
-canvas.addEventListener('pointermove', (e) => { if (!flygning && !document.body.classList.contains('intro') && e.pointerType === 'mouse') satsHov(trff(e)); });
+ canvas.addEventListener('pointermove', (e) => { if (!flygning && !lektion && !document.body.classList.contains('intro') && e.pointerType === 'mouse') satsHov(trff(e)); });
 canvas.addEventListener('pointerdown', (e) => { nedPos = [e.clientX, e.clientY]; controls.autoRotate = false; });
 canvas.addEventListener('pointerup', (e) => {
-  if (!nedPos || flygning) return;
+  if (!nedPos || flygning || lektion) return;
   const flytt = Math.hypot(e.clientX - nedPos[0], e.clientY - nedPos[1]); nedPos = null;
   if (flytt > 7) return;
   const { w, k, s } = trff(e);
@@ -1146,7 +1154,7 @@ canvas.addEventListener('pointerup', (e) => {
 });
 let utAck = 0, inAck = 0, ackTimer = 0;
 canvas.addEventListener('wheel', (e) => {
-  if (flygning || document.body.classList.contains('intro')) return;
+  if (flygning || lektion || document.body.classList.contains('intro')) return;
   const d = camera.position.distanceTo(controls.target);
   clearTimeout(ackTimer); ackTimer = setTimeout(() => { utAck = inAck = 0; }, 380);
   if (e.deltaY > 0 && niva !== 'universum' && d >= controls.maxDistance * 0.95) {
@@ -1159,7 +1167,7 @@ canvas.addEventListener('wheel', (e) => {
     }
   }
 }, { passive: true });
-addEventListener('keydown', (e) => { if (e.key === 'Escape') uppEnNiva(); });
+addEventListener('keydown', (e) => { if (e.key === 'Escape' && !lektion && !document.body.classList.contains('lektion-in')) uppEnNiva(); });
 
 /* =====================================================================
    12. Ljud (syntetiserat, inga ljudfiler)
@@ -1238,6 +1246,49 @@ const Ljud = {
 $('#ljud').addEventListener('click', () => Ljud.vaxla());
 
 /* =====================================================================
+   12b. Genomgångar inuti universumet (mu-genomgang.js)
+   ===================================================================== */
+const LEKTIONER = new Set(['ma1c-1.1']);
+let lektion = null;
+const vanta = (ms) => new Promise((r) => setTimeout(r, ms));
+const blixt = (pa) => $('#blixt').classList.toggle('pa', pa);
+async function startaLektion(s) {
+  if (flygning || lektion) return;
+  const modP = import('./mu-genomgang.js?v=3');
+  visaPanel(null);
+  document.body.classList.add('lektion-in');
+  // flyg in i stjärnan
+  const rikt = camera.position.clone().sub(s.pos).normalize();
+  await new Promise((klar) => flyg(s.pos.clone().addScaledVector(rikt, 0.8), s.pos.clone(), 1.7, klar, { bage: 0, ease: ease.inOutQuart, fov: 14 }));
+  controls.enabled = false;
+  blixt(true);
+  await vanta(480);
+  try {
+    const mod = await modP;
+    lektion = await mod.starta({ THREE, renderer, renderPass, CSS2DRenderer, CSS2DObject, Ljud, farg: s.w.farg, avsnitt: s, slut: (klar) => avslutaLektion(s, klar) });
+  } catch (e) {
+    console.error(e);
+    location.href = '../katalog.html?id=' + s.id;
+    return;
+  }
+  await vanta(120);
+  blixt(false);
+}
+async function avslutaLektion(s, klar) {
+  blixt(true);
+  await vanta(480);
+  lektion.stang(); lektion = null;
+  renderPass.scene = scene; renderPass.camera = camera;
+  document.body.classList.remove('lektion-in');
+  camera.position.copy(s.pos).add(new THREE.Vector3(0, 0.4, 1.2));
+  controls.target.copy(s.pos);
+  valtS = s;
+  gaTillKapitel(s.k, () => visaPanel(() => panelAvsnitt(s)));
+  blixt(false);
+  if (klar && !klarade.has(s.id)) setTimeout(() => vaxla(s), 2100);
+}
+
+/* =====================================================================
    13. Knapparna
    ===================================================================== */
 $('#upp').addEventListener('click', uppEnNiva);
@@ -1314,6 +1365,14 @@ function loop() {
   const dt = Math.min(0.05, klocka.getDelta());
   tid += dt;
   delade.uTime.value = tid;
+
+  if (lektion) {
+    lektion.tick(dt);
+    composer.render();
+    lektion.ritaEtiketter();
+    requestAnimationFrame(loop);
+    return;
+  }
 
   if (flygning) {
     const f = flygning;

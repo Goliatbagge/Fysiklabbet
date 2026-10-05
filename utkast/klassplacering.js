@@ -649,6 +649,25 @@ function skarmSvg(g) {
   return `<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${FARG.skarm}" stroke-width="6" stroke-linecap="round"/>` +
     `<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${FARG.skarmLjus}" stroke-width="1.6" stroke-linecap="round"/>`;
 }
+// Närmaste lediga skärmläge till en punkt (världskoordinater), inom 35 cm.
+function narmasteSkarmLage(x, y, r, undantag) {
+  const c = cur(), upptagna = new Set(r.skarmar.concat(c.skarmar || []).filter(sk => sk.id !== undantag).map(sk => sk.bord + '|' + sk.k));
+  let bast = null, bd = 35;
+  for (const it of r.items) for (const g of skarmLagen(it)) {
+    if (upptagna.has(it.id + '|' + g.k)) continue;
+    const [ax, ay] = rot(g.x1, g.y1, it.rot), [bx, by] = rot(g.x2, g.y2, it.rot);
+    const x1 = it.x + ax, y1 = it.y + ay, x2 = it.x + bx, y2 = it.y + by;
+    const L2 = (x2 - x1) ** 2 + (y2 - y1) ** 2 || 1;
+    const t = clamp(((x - x1) * (x2 - x1) + (y - y1) * (y2 - y1)) / L2, 0, 1);
+    const d = Math.hypot(x - (x1 + t * (x2 - x1)), y - (y1 + t * (y2 - y1)));
+    if (d < bd) { bd = d; bast = { bord: it.id, k: g.k }; }
+  }
+  return bast;
+}
+function overKorg(cx, cy) {
+  const k = $('korg'); if (!k || !k.classList.contains('on')) return false;
+  const b = k.getBoundingClientRect(); return cx >= b.left - 8 && cx <= b.right + 8 && cy >= b.top - 8 && cy <= b.bottom + 8;
+}
 // Ligger punkten (världskoordinater) på någon annan bänk än undantaget?
 function paAnnanBank(x, y, r, undantag) {
   return r.items.some(o => {
@@ -934,7 +953,14 @@ function planSvg(opt = {}) {
     // Provskärmarna, och i skärmläget de lediga lägena som streckade linjer
     const lagen = skarmLagen(it);
     const egna = new Set(r.skarmar.concat(c.skarmar || []).filter(x => x.bord === it.id).map(x => x.k));
-    for (const g of lagen) if (egna.has(g.k)) s += skarmSvg(g);
+    const flyttas = ui.drag && ui.drag.kind === 'skarmflytt' && ui.drag.moved ? ui.drag.id : null;
+    for (const sk of r.skarmar.concat(c.skarmar || [])) {
+      if (sk.bord !== it.id) continue;
+      const g = lagen.find(l => l.k === sk.k); if (!g) continue;
+      const grip = !exp && lage === 'rum' && !verktygLage;
+      s += `<g data-skarm="${sk.id}"${flyttas === sk.id ? ' opacity=".25"' : ''}${grip ? ' style="cursor:grab"' : ''}>${skarmSvg(g)}` +
+        (grip ? `<line x1="${g.x1}" y1="${g.y1}" x2="${g.x2}" y2="${g.y2}" stroke="transparent" stroke-width="14"/>` : '') + '</g>';
+    }
     if (skarmLage) {
       const ordning = lagen.filter(g => g.k[0] === 's' || g.k === 'mitt').concat(lagen.filter(g => !(g.k[0] === 's' || g.k === 'mitt')));
       for (const g of ordning) {
@@ -991,6 +1017,16 @@ function planSvg(opt = {}) {
       const gb = gruppBox(g), mx = (gb.x0 + gb.x1) / 2;
       const [hx, hy] = V(mx, gb.y0 - 40), [fx, fy] = V(mx, gb.y0 - 8);
       s += vridHandtag(hx, hy, fx, fy, 'data-gruppvrid="1"');
+    }
+  }
+  // Det skärmläge en skärm som flyttas skulle hamna i
+  if (!exp && ui.drag && ui.drag.kind === 'skarmflytt' && ui.drag.mal) {
+    const m = ui.drag.mal, it = r.items.find(i => i.id === m.bord);
+    const g = it && skarmLagen(it).find(l => l.k === m.k);
+    if (g) {
+      const [ax, ay] = rot(g.x1, g.y1, it.rot), [bx, by] = rot(g.x2, g.y2, it.rot);
+      const [p1x, p1y] = V(it.x + ax, it.y + ay), [p2x, p2y] = V(it.x + bx, it.y + by);
+      s += `<line x1="${r1(p1x)}" y1="${r1(p1y)}" x2="${r1(p2x)}" y2="${r1(p2y)}" stroke="${FARG.accent}" stroke-width="7" stroke-linecap="round" stroke-opacity=".75" pointer-events="none"/>`;
     }
   }
   // Hjälplinjer vid linjering
@@ -1240,7 +1276,7 @@ function panelRum() {
       <button class="btn${ui.skarm ? ' mork' : ''}" data-act="skarmLage" aria-pressed="${ui.skarm}">${ui.skarm ? IKON.bock + 'Klar' : IKON.plus + 'Placera provskärmar'}</button>
     </div>
     <div class="btns"><button class="btn liten" data-act="skarmAlla">Mellan alla platser</button><button class="btn liten fara" data-act="skarmBort"${r.skarmar.length ? '' : ' disabled'}>${IKON.sop}Ta bort alla</button></div>
-    <p class="note">Skärmar kan stå i bänkarnas kanter och i mitten av par- och labbänkar. Klicka på en streckad linje för att sätta ut en skärm och på skärmen igen för att ta bort den. Skärmarna följer med när bänken flyttas.</p>
+    <p class="note">Skärmar kan stå i bänkarnas kanter och i mitten av par- och labbänkar. Klicka på en streckad linje för att sätta ut en skärm och på skärmen igen för att ta bort den. En utplacerad skärm kan också dras till en ny plats, eller till papperskorgen som dyker upp nederst i planen. Skärmarna följer med när bänken flyttas.</p>
   </div>
   <div class="grp">
     <div class="grp-h"><span class="eyebrow">Färdiga möbleringar</span></div>
@@ -1707,6 +1743,13 @@ svg.addEventListener('pointerdown', e => {
       e.preventDefault();
       return;
     }
+    const skEl = e.target.closest('[data-skarm]');
+    if (skEl) {
+      const id = skEl.dataset.skarm, c = cur();
+      const auto = !r.skarmar.some(sk => sk.id === id) && (c.skarmar || []).some(sk => sk.id === id);
+      ui.drag = { kind: 'skarmflytt', id, auto, mal: null, korg: false, cx: e.clientX, cy: e.clientY, moved: false, fore: JSON.stringify(S) };
+      e.preventDefault(); return;
+    }
     if (e.target.closest('[data-vrid]') && ui.val) {
       const it = r.items.find(i => i.id === ui.val);
       if (it) {
@@ -1786,6 +1829,14 @@ window.addEventListener('pointermove', e => {
       snappa(it, r); hallInne(it, r);
       linjera([it], r, false);
     }
+    ritaPlan();
+  } else if (d.kind === 'skarmflytt') {
+    $('korg').classList.add('on');
+    d.korg = overKorg(e.clientX, e.clientY);
+    $('korg').classList.toggle('mal', d.korg);
+    d.mal = d.korg ? null : narmasteSkarmLage(x, y, r, d.id);
+    spoke('<svg width="44" height="10" viewBox="0 0 44 10"><line x1="4" y1="5" x2="40" y2="5" stroke="#4a5d78" stroke-width="6" stroke-linecap="round"/><line x1="4" y1="5" x2="40" y2="5" stroke="#a9b9cf" stroke-width="1.6" stroke-linecap="round"/></svg>', e.clientX, e.clientY, 'skarm');
+    $('spoke').style.opacity = d.mal ? '0' : '1';
     ritaPlan();
   } else if (d.kind === 'vrid') {
     // Vinkeln från möbelns mitt till pekaren, i steg om 45°. Handtaget sitter
@@ -1914,6 +1965,20 @@ window.addEventListener('pointerup', e => {
     if (v && v.typ === 'dorr') { minns(); v.spegel = !v.spegel; spara(); }
   }
   ui.guider = null;
+  if (d.kind === 'skarmflytt') {
+    $('korg').classList.remove('on', 'mal');
+    if (!d.moved) { visaTips('Dra skärmen till en ny plats, eller till papperskorgen för att ta bort den'); ritaPlan(); return; }
+    const c = cur();
+    if (d.korg || d.mal) {
+      angraStack.push(d.fore); if (angraStack.length > 40) angraStack.shift(); $('angraBtn').hidden = false;
+      if (d.auto) c.skarmar = (c.skarmar || []).filter(sk => sk.id !== d.id);
+      else r.skarmar = r.skarmar.filter(sk => sk.id !== d.id);
+      if (d.mal) r.skarmar.push({ id: uid(), bord: d.mal.bord, k: d.mal.k });
+      spara(); ritaPanel();
+      if (d.korg) visaTips('Provskärmen är borttagen');
+    }
+    ritaPlan(); return;
+  }
   if (d.kind === 'ram') { ui.ram = null; ritaPlan(); ritaStatus(); return; }
   if (d.kind === 'item' || d.kind === 'vagg' || d.kind === 'storlek' || d.kind === 'rumstorlek' || d.kind === 'grupp' || d.kind === 'fonster' || d.kind === 'vrid' || d.kind === 'gruppvrid') {
     if (d.moved) { angraStack.push(d.fore); if (angraStack.length > 40) angraStack.shift(); $('angraBtn').hidden = false; spara(); ritaPanel(); ritaStatus(); }

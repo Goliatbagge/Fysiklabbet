@@ -664,6 +664,15 @@ function narmasteSkarmLage(x, y, r, undantag) {
   }
   return bast;
 }
+function borjaFlyttaSkarm(e, r) {
+  const skEl = e.target.closest('[data-skarm]');
+  if (!skEl) return false;
+  const id = skEl.dataset.skarm, c = cur();
+  const auto = !r.skarmar.some(sk => sk.id === id) && (c.skarmar || []).some(sk => sk.id === id);
+  ui.drag = { kind: 'skarmflytt', id, auto, mal: null, korg: false, cx: e.clientX, cy: e.clientY, moved: false, fore: JSON.stringify(S) };
+  e.preventDefault();
+  return true;
+}
 function overKorg(cx, cy) {
   const k = $('korg'); if (!k || !k.classList.contains('on')) return false;
   const b = k.getBoundingClientRect(); return cx >= b.left - 8 && cx <= b.right + 8 && cy >= b.top - 8 && cy <= b.bottom + 8;
@@ -957,7 +966,7 @@ function planSvg(opt = {}) {
     for (const sk of r.skarmar.concat(c.skarmar || [])) {
       if (sk.bord !== it.id) continue;
       const g = lagen.find(l => l.k === sk.k); if (!g) continue;
-      const grip = !exp && lage === 'rum' && !verktygLage;
+      const grip = !exp && !verktygLage;
       s += `<g data-skarm="${sk.id}"${flyttas === sk.id ? ' opacity=".25"' : ''}${grip ? ' style="cursor:grab"' : ''}>${skarmSvg(g)}` +
         (grip ? `<line x1="${g.x1}" y1="${g.y1}" x2="${g.x2}" y2="${g.y2}" stroke="transparent" stroke-width="14"/>` : '') + '</g>';
     }
@@ -1743,13 +1752,7 @@ svg.addEventListener('pointerdown', e => {
       e.preventDefault();
       return;
     }
-    const skEl = e.target.closest('[data-skarm]');
-    if (skEl) {
-      const id = skEl.dataset.skarm, c = cur();
-      const auto = !r.skarmar.some(sk => sk.id === id) && (c.skarmar || []).some(sk => sk.id === id);
-      ui.drag = { kind: 'skarmflytt', id, auto, mal: null, korg: false, cx: e.clientX, cy: e.clientY, moved: false, fore: JSON.stringify(S) };
-      e.preventDefault(); return;
-    }
+    if (borjaFlyttaSkarm(e, r)) return;
     if (e.target.closest('[data-vrid]') && ui.val) {
       const it = r.items.find(i => i.id === ui.val);
       if (it) {
@@ -1808,6 +1811,8 @@ svg.addEventListener('pointerdown', e => {
     e.preventDefault();
     return;
   }
+  // Provskärmarna går att flytta i alla steg, inte bara när salen ritas upp.
+  if (borjaFlyttaSkarm(e, r)) return;
   const sEl = e.target.closest('[data-seat]');
   if (sEl) {
     ui.drag = { kind: 'seat', fran: sEl.dataset.seat, st: cur().map[sEl.dataset.seat], cx: e.clientX, cy: e.clientY, moved: false };

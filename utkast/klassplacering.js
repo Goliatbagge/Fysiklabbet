@@ -139,7 +139,7 @@ function lasIn() {
 }
 let S = null;   // sätts längst ned, när alla tabeller finns
 function normalisera(st) {
-  for (const r of st.rum) { r.skarmar = r.skarmar || []; r.blocked = r.blocked || []; r.vagg = r.vagg || []; }
+  for (const r of st.rum) { r.skarmar = r.skarmar || []; r.blocked = r.blocked || []; r.vagg = r.vagg || []; r.mobleringar = r.mobleringar || []; }
   return st;
 }
 let sparTimer = 0;
@@ -1198,8 +1198,46 @@ function forvalIkon(namn) {
   }
   return s + '</svg>';
 }
+/* ---------- Sparade möbleringar och kopior av klassrum ----------
+   En möblering är bänkarna, provskärmarna, de spärrade platserna och
+   bänkmåtten. Salens mått, dörr och fönster ingår inte. Bänkarna behåller
+   sina id:n, så klassernas placeringar gäller igen när en möblering används.
+   Id:n behöver bara vara unika inom en sal, så en kopierad sal kan behålla
+   dem, och då följer klassernas placeringar med till kopian. */
+const mobleringNu = r => JSON.stringify({ items: r.items, skarmar: r.skarmar, blocked: r.blocked, matt: r.matt || {} });
+function sparaMoblering(r, namn) {
+  const kopia = JSON.parse(mobleringNu(r));
+  const fanns = r.mobleringar.find(m => m.namn.toLowerCase() === namn.toLowerCase());
+  if (fanns && !confirm(`Det finns redan en möblering som heter ${fanns.namn}. Vill du skriva över den?`)) return false;
+  minns();
+  if (fanns) Object.assign(fanns, kopia, { datum: new Date().toISOString() });
+  else r.mobleringar.unshift({ id: uid(), namn, datum: new Date().toISOString(), ...kopia });
+  return true;
+}
+function anvandMoblering(r, m) {
+  minns();
+  const k = JSON.parse(JSON.stringify(m));
+  r.items = k.items; r.skarmar = k.skarmar; r.blocked = k.blocked; r.matt = k.matt || {};
+  for (const it of r.items) hallInne(it, r);
+  avmarkera(); ui.forslagSvar = null;
+}
+function kopieraRum(r) {
+  minns();
+  const ny = JSON.parse(JSON.stringify(r));
+  ny.id = uid();
+  let namn = r.namn + ' (kopia)', n = 2;
+  while (S.rum.some(x => x.namn === namn)) namn = `${r.namn} (kopia ${n++})`;
+  ny.namn = namn;
+  S.rum.splice(S.rum.indexOf(r) + 1, 0, ny);
+  for (const [key, pl] of Object.entries(S.plac)) {
+    const [kid, rid] = key.split('|');
+    if (rid === r.id) S.plac[kid + '|' + ny.id] = JSON.parse(JSON.stringify(pl));
+  }
+  S.rumId = ny.id; avmarkera();
+}
 function valjare(lista, valdId, prefix) {
   return `<div class="valj"><select id="${prefix}Sel" aria-label="Välj">${lista.map(x => `<option value="${x.id}"${x.id === valdId ? ' selected' : ''}>${esc(x.namn)}</option>`).join('')}<option value="__ny">${prefix === 'rum' ? 'Nytt klassrum …' : 'Ny klass …'}</option></select>` +
+    (prefix === 'rum' ? `<button class="ibtn" data-act="rumKopia" title="Kopiera klassrummet" aria-label="Kopiera klassrummet">${IKON.kopiera}</button>` : '') +
     `<button class="ibtn fara" data-act="${prefix}Bort" title="Ta bort" aria-label="Ta bort">${IKON.sop}</button></div>`;
 }
 function ritaPanel() {
@@ -1226,7 +1264,18 @@ function panelRum() {
     <input class="falt" id="rumNamn" value="${esc(r.namn)}" style="width:100%">
     <div class="row" style="margin-top:12px">Bredd ${stepper('W', fmtM(r.W))}</div>
     <div class="row">Djup ${stepper('D', fmtM(r.D))}</div>
-    <p class="note">Du kan också dra i en vägg eller ett hörn av salen.</p>
+    <p class="note">Du kan också dra i en vägg eller ett hörn av salen. Knappen bredvid listan gör en kopia av hela klassrummet, så att du kan prova något nytt och ha originalet kvar.</p>
+  </div>
+  <div class="grp">
+    <div class="grp-h"><span class="eyebrow">Sparade möbleringar</span><span class="count"><b>${r.mobleringar.length}</b> sparade</span></div>
+    <div class="valj"><input class="falt" id="mobNamn" placeholder="Namn, till exempel Prov" aria-label="Namn på möbleringen"><button class="btn mork" data-act="mobSpara" style="height:36px">${IKON.spara}Spara</button></div>
+    ${r.mobleringar.length ? `<div class="hist">${r.mobleringar.map(m => {
+      const aktuell = mobleringNu(r) === JSON.stringify({ items: m.items, skarmar: m.skarmar, blocked: m.blocked, matt: m.matt || {} });
+      const antal = m.items.reduce((a, it) => a + (TYPER[it.typ] ? TYPER[it.typ].seats.length : 0), 0) - (m.blocked || []).length;
+      return `<div class="histrad${aktuell ? ' aktuell' : ''}"><span><b>${esc(m.namn)}</b> · ${antal} platser · ${esc(new Date(m.datum).toLocaleDateString('sv-SE', { day: 'numeric', month: 'long' }))}${aktuell ? ' · <i>används nu</i>' : ''}</span>` +
+        `<button class="btn liten" data-act="mobAnvand" data-id="${m.id}"${aktuell ? ' disabled' : ''}>Använd</button><button class="x" data-act="mobBort" data-id="${m.id}" aria-label="Ta bort ${esc(m.namn)}">${IKON.x}</button></div>`;
+    }).join('')}</div>` : ''}
+    <p class="note">Spara möbleringen innan du provar en ny, så kan du gå tillbaka till den med <b>Använd</b>. Bänkar, provskärmar, spärrade platser och bänkmått sparas. Salens mått, dörr och fönster påverkas inte.</p>
   </div>
   <div class="grp">
     <div class="grp-h"><span class="eyebrow">Möbler</span><span class="count"><b>${pl.length - r.blocked.length}</b> platser</span></div>
@@ -1402,7 +1451,7 @@ function panelPlac() {
       <button class="btn" data-act="kopieraBild"${placerade.size ? '' : ' disabled'}>${IKON.kopiera}Kopiera bild</button>
     </div>
     <p class="note">Spara placeringen när klassen börjar använda den. Då minns verktyget vilka som satt bredvid varandra.</p>
-    ${k.hist.length ? `<div class="hist">${k.hist.map(h => `<div class="histrad"><span><b>${esc(new Date(h.datum).toLocaleDateString('sv-SE', { day: 'numeric', month: 'short' }))}</b> · ${esc(h.rumNamn)}</span><button class="btn liten" data-act="histVisa" data-id="${h.id}">Visa</button><button class="x" data-act="histBort" data-id="${h.id}" aria-label="Ta bort">${IKON.x}</button></div>`).join('')}</div>` : ''}
+    ${k.hist.length ? `<div class="hist">${k.hist.map(h => `<div class="histrad"><span><b>${esc(new Date(h.datum).toLocaleDateString('sv-SE', { day: 'numeric', month: 'long' }))}</b> · ${esc(h.rumNamn)}</span><button class="btn liten" data-act="histVisa" data-id="${h.id}">Visa</button><button class="x" data-act="histBort" data-id="${h.id}" aria-label="Ta bort">${IKON.x}</button></div>`).join('')}</div>` : ''}
   </div>`;
 }
 
@@ -2243,6 +2292,25 @@ panel.addEventListener('click', e => {
     case 'tomSal':
       if (!confirm('Vill du ta bort alla bänkar i salen?')) return;
       minns(); r.items = r.items.filter(it => it.typ === 'kateder'); r.blocked = []; ui.val = null; spara(); allt(); break;
+    case 'rumKopia': kopieraRum(r); spara(); allt(); visaTips(`Kopian heter ${rum().namn}`); { const f = $('rumNamn'); if (f) { f.focus(); f.select(); } } break;
+    case 'mobSpara': {
+      const f = $('mobNamn'), namn = (f.value.trim() || `Möblering ${r.mobleringar.length + 1}`).slice(0, 40);
+      if (sparaMoblering(r, namn)) { spara(); ritaPanel(); visaTips(`Möbleringen ${namn} är sparad`); }
+      break;
+    }
+    case 'mobAnvand': {
+      const m = r.mobleringar.find(x => x.id === b.dataset.id); if (!m) return;
+      const sparad = r.mobleringar.some(x => mobleringNu(r) === JSON.stringify({ items: x.items, skarmar: x.skarmar, blocked: x.blocked, matt: x.matt || {} }));
+      if (!sparad && r.items.some(it => it.typ !== 'kateder') && !confirm('Möbleringen som står i salen nu är inte sparad. Vill du ändå byta? (Den går att få tillbaka med Ångra.)')) return;
+      anvandMoblering(r, m); spara(); allt(); visaTips(`Möbleringen ${m.namn} används`);
+      break;
+    }
+    case 'mobBort': {
+      const m = r.mobleringar.find(x => x.id === b.dataset.id); if (!m) return;
+      if (!confirm(`Vill du ta bort den sparade möbleringen ${m.namn}?`)) return;
+      minns(); r.mobleringar = r.mobleringar.filter(x => x !== m); spara(); ritaPanel();
+      break;
+    }
     case 'rumBort':
       if (S.rum.length < 2) { visaTips('Det måste finnas minst ett klassrum.'); return; }
       if (!confirm(`Vill du ta bort klassrummet ${r.namn}?`)) return;
@@ -2345,6 +2413,7 @@ panel.addEventListener('change', e => {
   }
 });
 panel.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.target.id === 'mobNamn') { e.preventDefault(); panel.querySelector('[data-act="mobSpara"]').click(); return; }
   if (e.key === 'Enter' && (e.target.id === 'rumNamn' || e.target.id === 'klassNamn' || e.target.id === 'antalEnkel' || e.target.id === 'forslagAntal' || !!e.target.dataset.matt || e.target.classList.contains('enamn'))) e.target.blur();
 });
 function nyKlassDialog() {

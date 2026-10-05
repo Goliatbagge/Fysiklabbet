@@ -103,6 +103,67 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-05-laddningen-en-fjardedels-elektron",
+    date: "2026-10-05",
+    title: "Två laboratorier fick samma svar: kvasipartiklar med en fjärdedels elektronladdning",
+    deck: "All elektrisk laddning kommer i hela elementarladdningar. Men när elektroner i ett tunt lager av galliumarsenid kyls nära absoluta nollpunkten i ett starkt magnetfält uppstår kvasipartiklar som bär en fjärdedel av den. Forskare i Schweiz och Israel har mätt laddningen var för sig och fått samma värde.",
+    category: "Kvantfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-05-laddningen-en-fjardedels-elektron.jpg",
+    imageAlt: "Insidan av ett kylskåp för extremt låga temperaturer: runda metallplattor i guld och stål ovanför varandra, förbundna av stänger, kopparflätor, en spiralformad slang och tunna ledningar. I bakgrunden syns en labbänk med mätinstrument och verktyg.",
+    imageCredit: "Foto: UCL Mathematical & Physical Sciences, en utspädningskryostat vid London Centre for Nanotechnology, via Wikimedia Commons (CC BY 2.0). Bilden visar inte försöket, men mätningarna gjordes i kylskåp av samma typ.",
+    tags: ["kvantfysik", "elementarladdning", "kvasipartiklar", "kvant-halleffekten", "skottbrus", "galliumarsenid", "magnetfält", "anyoner", "kvantdator"],
+    sources: [
+      { name: "Phys.org: Rare quantum state reveals particles with quarter-electron charge (pressmeddelande från EPFL, september 2026)", url: "https://phys.org/news/2026-09-rare-quantum-state-reveals-particles.html" },
+      { name: "arXiv: Observation of e/4 charge at ν = 1/2 in GaAs (förtrycket, öppet tillgängligt)", url: "https://arxiv.org/abs/2602.08468" }
+    ],
+    research: {
+      citation: "T. Alkalay, E. Hajigeorgiou, A. Gupta, T. Senapati, P. Tiwari, C.-T. Tai, S. K. Singh, K. W. Baldwin, L. N. Pfeiffer, M. Shayegan, M. Banerjee och M. Heiblum, ”Observation of e/4 Charge at ν = 1/2 in a Wide GaAs Quantum Well”, Physical Review Letters 137, 136503 (2026). Kollegialt granskad, publicerad 22 september 2026. Förtrycket finns öppet på arXiv (2602.08468).",
+      url: "https://doi.org/10.1103/c73x-q4z7"
+    },
+    larare: {
+      moment: [
+        { label: "Laddning och influens", href: "katalog.html?id=fy1-7.1" },
+        { label: "Elektrisk ström", href: "katalog.html?id=fy1-7.3" },
+        { label: "Laddade partiklar i magnetfält", href: "katalog.html?id=fy2-3.4" }
+      ],
+      fragor: [
+        "Ingen har fångat en enskild kvasipartikel. Laddningen räknas i stället ut ur hur mycket strömmen fluktuerar. Varför blir bruset större om strömmen bärs av färre men större laddningsportioner?",
+        "Båda grupperna mätte först tillstånd där laddningen redan var känd, en hel och två tredjedelar av elementarladdningen. Varför är det ett viktigt steg innan man mäter något nytt?",
+        "Laddningen e/4 förutsägs av två olika teorier om tillståndet. Vad har mätningen då visat, och vad har den inte visat? Vilken sorts mätning skulle behövas för att skilja teorierna åt?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Elektrisk laddning kommer i bestämda portioner. En elektron bär elementarladdningen $e \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$, och ingen har någonsin hittat en fri partikel med mindre laddning än så. Ändå har forskare vid EPFL i Lausanne och Weizmanninstitutet i Israel, med prover från Princeton University, mätt en ström som bärs av kvasipartiklar med en fjärdedel av elementarladdningen. Resultatet publicerades den 22 september i <em>Physical Review Letters</em>.' },
+
+      { type: 'h2', text: 'Elektroner som rör sig i flock' },
+      { type: 'p', html: 'Kvasipartiklarna är inga nya elementarpartiklar. De uppstår när väldigt många elektroner rör sig tillsammans, ungefär som en våg på en läktare. Ingen enskild åskådare flyttar sig, ändå vandrar vågen runt arenan som om den vore ett eget föremål. På samma sätt kan ett kollektivt mönster i ett hav av elektroner bete sig som en partikel med egen laddning, och den laddningen behöver inte vara en hel elementarladdning.' },
+      { type: 'p', html: 'Det kräver extrema förhållanden. Elektronerna måste vara instängda i ett lager så tunt att de bara kan röra sig i två dimensioner, de måste kylas till hundradelar av en grad över absoluta nollpunkten och ett starkt magnetfält måste läggas vinkelrätt mot lagret. Magnetfältet tvingar elektronerna in i små cirkelbanor. När antalet elektroner passar på ett bestämt sätt mot magnetfältets styrka, ett förhållande som kallas fyllnadsfaktorn $\\nu$ (ny), låser de sig i ett gemensamt tillstånd. Det kallas kvant-halleffekten. I den fraktionella varianten, som upptäcktes 1982 och belönades med Nobelpriset i fysik 1998, bär kvasipartiklarna bråkdelar av elementarladdningen, till exempel en tredjedel.' },
+
+      { type: 'h2', text: 'Ett bråk med jämn nämnare' },
+      { type: 'p', html: 'De flesta fraktionella tillstånd uppträder när fyllnadsfaktorn är ett bråk med udda nämnare, som $\\dfrac{1}{3}$ eller $\\dfrac{2}{5}$. Tillstånd med jämn nämnare är sällsynta och passar inte in i de vanliga teorierna. Det mest studerade är $\\nu = \\dfrac{5}{2}$, där Moty Heiblums grupp vid Weizmanninstitutet redan 2008 mätte laddningen till en fjärdedel.' },
+      { type: 'p', html: 'Det nu undersökta tillståndet, $\\nu = \\dfrac{1}{2}$, uppstår bara i speciella prover. Elektronerna sitter i en 70&nbsp;nanometer bred brunn av galliumarsenid, en så kallad kvantbrunn, som ligger 300&nbsp;nanometer under ytan på en kristall som byggts upp atomlager för atomlager. Brunnen är så bred att elektronerna samlas mot dess två väggar och nästan beter sig som två separata lager. Det är växelverkan mellan lagren som håller ihop tillståndet, och det uppträder först i ett magnetfält på 12&nbsp;tesla.' },
+
+      { type: 'h2', text: 'Laddningen syns i bruset' },
+      { type: 'p', html: 'Ingen kan väga en enskild kvasipartikel. I stället lyssnade forskarna på strömmens brus. En elektrisk ström består av små laddningsportioner, och när de passerar en trång passage gör de det slumpvis, som regndroppar mot ett plåttak. Ju större varje droppe är, desto ojämnare smattrar det vid samma mängd vatten. På samma sätt blir strömmens fluktuationer, skottbruset, större ju större laddning varje bärare har.' },
+      { type: 'p', html: 'Mitt i varje prov fanns en förträngning, omkring en mikrometer bred, med metallelektroder som finjusterar hur mycket ström som släpps igenom. Om en andel $t$ av strömmen $I$ passerar är bruset $S = 2 e^{*} I\\,(1 - t)$, där $e^{*}$ är laddningen hos de kvasipartiklar som reflekteras i förträngningen. Genom att mäta brus och ström kan man alltså räkna ut laddningen. Forskarna ställde in förträngningen så att 93 till 96&nbsp;procent av strömmen passerade. Då reflekteras kvasipartiklarna sällan och oberoende av varandra, vilket är förutsättningen för att formeln ska gälla.' },
+
+      { type: 'h2', text: 'Två labb, samma svar' },
+      { type: 'p', html: 'Två nästan identiska prover tillverkades. Det ena mättes vid Weizmanninstitutet, där elektronerna höll 11&nbsp;millikelvin, det andra vid EPFL, där de höll 25&nbsp;millikelvin, i olika kylskåp och med olika förstärkare. Först prövade grupperna metoden på tillstånd där svaret redan är känt och fick en hel elementarladdning respektive två tredjedelar, som väntat. Sedan mätte de vid $\\nu = \\dfrac{1}{2}$. Resultaten blev $0{,}250 \\pm 0{,}013$ och $0{,}249 \\pm 0{,}018$ elementarladdningar.' },
+      { type: 'quote', html: 'För första gången i det här fältets historia har två olika grupper, Weizmann och EPFL, mätt samma värden för en bråkdelsladdning.', cite: 'Mitali Banerjee, EPFL' },
+
+      { type: 'h2', text: 'Byggsten för en kvantdator?' },
+      { type: 'p', html: 'Tillståndet lockar eftersom det kanske hör till en exotisk sort där kvasipartiklarna är så kallade icke-abelska anyoner. För sådana partiklar beror systemets tillstånd på i vilken ordning de har flyttats runt varandra, och information som lagras på det sättet blir svår att störa. Det är grundidén bakom en topologisk kvantdator. Banerjee framhåller att tillståndet överlever upp till några kelvin, vilket är varmt i sammanhanget, och att det tros vara bara det andra kända tillståndet i galliumarsenid med sådana egenskaper.' },
+      { type: 'p', html: 'Laddningen avgör dock inte frågan, och det skriver forskarna själva. Både den icke-abelska kandidaten och en mer ordinär, abelsk, förutsäger kvasipartiklar med laddningen $\\dfrac{e}{4}$. Mätningen visar alltså att tillståndet klarar ett nödvändigt prov, inte att det är det eftersökta. För att avgöra saken krävs andra försök, till exempel mätningar av hur värme leds längs provets kanter eller interferensförsök där kvasipartiklarna skickas runt varandra.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Kvarkar har laddningen en eller två tredjedelar av elementarladdningen, men de sitter alltid ihop i grupper, till exempel tre och tre i protoner och neutroner, som tillsammans har hel laddning. En fri kvark har aldrig observerats.',
+        'Magnetfältet på 12&nbsp;tesla är ungefär 240&nbsp;000 gånger starkare än jordmagnetfältet, som är omkring 50&nbsp;mikrotesla.',
+        'Elektronerna i proverna rör sig ovanligt fritt. Vid 0,3&nbsp;kelvin är deras rörlighet 1,5&nbsp;·&nbsp;10<sup>7</sup>&nbsp;cm²/(V·s), omkring tiotusen gånger större än i kisel vid rumstemperatur.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-04-ljus-skyndar-inte-pa-avdunstningen",
     date: "2026-10-04",
     title: "Synligt ljus skyndar inte på avdunstningen, visar noggranna mätningar",

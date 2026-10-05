@@ -12,13 +12,10 @@ Format per post:
 
 ## Kö
 
-- **Laddningen en fjärdedels elektron** **[BREVTEASER — teasad i brevet 2026-10-04, publiceras TIDIGAST måndag 2026-10-05, senast lördag 2026-10-10]** — ett sällsynt kvanttillstånd i ett tvådimensionellt material ger
-  kvasipartiklar som bär en fjärdedel av elementarladdningen. Ingång: att laddning normalt kommer i hela
-  steg, och vad det betyder att en kollektiv rörelse hos många elektroner kan bete sig som en partikel med
-  en bråkdels laddning. OBS: kvantfysik och materialfysik är väl representerade, och materialfysik kördes
-  2026-09-30 (supraledaren under tryck) — publicera alltså inte den här dagen efter.
-  Källa (Phys.org 2026-09-25): https://phys.org/news/2026-09-rare-quantum-state-reveals-particles.html
-  (tillagd 2026-09-27)
+- **Ljus som vandrar genom mjölk ger skarpare bilder** **[BREVTEASER]** (nominerad 2026-10-05; kontrollera att originalstudien går att läsa innan brevet teasar den) — en överraskande avbildningsmetod som utnyttjar spritt ljus i stället för att bekämpa det. Ingång: spridning och varför mjölk är vit. OBS: optik är väl representerad.
+  Källa (Phys.org 2026-10-02): https://phys.org/news/2026-10-approach-imaging.html
+  (tillagd 2026-10-02)
+
 
 - **Ljus som stelnar en vätskestråle till fiber** — en ring av UV-lysdioder 5 mm under ett munstycke får en fritt fallande stråle av ljushärdande vätska att stelna till fiber, och forskarna har en parameterfri formel för fiberns radie. Ingång: varför en vätskestråle bryts upp i droppar (Plateau–Rayleigh) och hur man hinner före. OBS: PRL är inte öppen, kontrollera arXiv-förtryck innan publicering. Physical Review Letters 137, 144004 (2026), DOI 10.1103/yh2j-b3wq (J. S. Smink, C. W. Visser, H. Lhuissier). Källa (Physics, APS, 2026-10-02): https://physics.aps.org/articles/v19/137
   OBS 2026-10-04: molnsessionen kunde inte läsa originalet (physics.aps.org, arxiv.org, phys.org, nature.com m.fl. blockerade av egress-proxyn), så ingen nyhet publicerades den dagen. Passar området (strömningslära, senast 2026-09-21) och grannarna 2026-10-03 (vågfysik) och 2026-10-02 (partikelfysik); första kandidat när originalet går att läsa.
@@ -30,10 +27,6 @@ Format per post:
 
 - **Därför glöder saltgurkan** — Josh Méndez vid Portland State University har testat över hundra saltgurkor i eluttaget: elektrolys ger vätgas vid minuspolen, en ljusbåge tänder gasen och natrium ger det orangea skenet. Lätt att visa (på film!) och vardagsnära. OBS: hittade ingen publicerad studie 2026-10-02, bara pressmeddelandet — publiceras inte förrän en originalkälla finns.
   Källa (Phys.org 2026-10-01): https://phys.org/news/2026-10-pickles-explosive.html
-  (tillagd 2026-10-02)
-
-- **Ljus som vandrar genom mjölk ger skarpare bilder** — en överraskande avbildningsmetod som utnyttjar spritt ljus i stället för att bekämpa det. Ingång: spridning och varför mjölk är vit. OBS: optik är väl representerad.
-  Källa (Phys.org 2026-10-02): https://phys.org/news/2026-10-approach-imaging.html
   (tillagd 2026-10-02)
 
 - **Vågorna som hittar ordning i en skev hålighet** — i ett mekaniskt metamaterial med hyperboliska egenskaper

@@ -2234,6 +2234,32 @@ window.BEGREPP = [
   },
 
   {
+    id: 'anyon',
+    term: 'Anyon',
+    former: ['anyon', 'anyonen', 'anyoner', 'anyonerna', 'icke-abelsk anyon', 'icke-abelska anyoner', 'icke-abelska anyonerna'],
+    kort: 'En sorts kvasipartikel som bara kan finnas i två dimensioner och som varken beter sig som en elektron eller som en foton när två av dem byter plats.',
+    relaterade: ['kvasipartikel', 'kvant-halleffekten', 'topologiskt-skydd', 'kvantdator'],
+    body: [
+      { type: 'p', html: 'I vår tredimensionella värld finns det bara två sorters partiklar när man ser på vad som händer om två likadana partiklar byter plats. Fermioner, som elektroner och protoner, får sin kvantmekaniska våg vänd till sitt motsatta tecken. Bosoner, som fotoner, lämnar vågen som den var. Det låter som en abstrakt detalj, men det är skälet till att elektroner inte kan trängas i samma tillstånd och därför bygger upp atomernas skal, medan fotoner gärna gör det, vilket är det som får en laser att fungera.' },
+      { type: 'p', html: 'I en platt värld, där partiklarna bara kan röra sig i två riktningar, finns fler möjligheter. Där spelar det roll hur två partiklar har gått runt varandra, ungefär som när två snören flätas: en fläta åt vänster går inte att räta ut till en fläta åt höger utan att klippa av snörena. Partiklar som får vilken som helst fasvridning när de byter plats kallas anyoner, efter engelskans <em>any</em>, alltså ”vilken som helst”. Riktiga elementarpartiklar kan inte vara anyoner, men kvasipartiklar i tunna elektronlager, till exempel i kvant-halleffekten, kan vara det.' },
+      { type: 'p', html: 'Den mest eftertraktade sorten kallas icke-abelska anyoner. För dem beror slutresultatet på i vilken ordning bytena gjordes, precis som det spelar roll i vilken ordning man vrider sidorna på en kub. Ordningen kan då användas för att lagra information, och eftersom informationen sitter i hur partiklarna flätats och inte på en enda plats är den svår att störa. Det är idén bakom en topologisk kvantdator. Ingen har ännu entydigt visat att icke-abelska anyoner finns, och flera experiment pågår för att avgöra saken.' }
+    ]
+  },
+
+  {
+    id: 'kvantbrunn',
+    term: 'Kvantbrunn',
+    former: ['kvantbrunn', 'kvantbrunnen', 'kvantbrunnar', 'kvantbrunnarna'],
+    kort: 'Ett mycket tunt skikt av ett halvledarmaterial, inklämt mellan två andra material, där elektroner fångas så att de bara kan röra sig längs skiktet och inte på tvären.',
+    relaterade: ['halvledare', 'kvant-halleffekten'],
+    body: [
+      { type: 'p', html: 'Tänk dig en smal dalgång mellan två höga berg. En boll som rullar där kan röra sig fram och tillbaka längs dalen, men den kan inte ta sig över bergen. En kvantbrunn fungerar på samma sätt för elektroner. Ett skikt av en halvledare, ofta galliumarsenid, läggs mellan två skikt av ett material där elektronerna har högre energi, till exempel aluminiumgalliumarsenid. Elektronerna samlas då i det mellersta skiktet och stannar där.' },
+      { type: 'p', html: 'Skiktet är bara några till några tiotal nanometer tjockt, alltså några hundra atomlager eller färre. Då märks kvantmekaniken: i riktningen tvärs över skiktet kan elektronerna bara ha vissa bestämda energier, precis som en sträng som bara kan svänga med vissa toner. Vid låg temperatur ligger alla elektroner i den lägsta av dessa energier, och i praktiken rör de sig bara i två dimensioner. Kristallerna byggs upp ett atomlager i taget i en vakuumkammare, en teknik som kallas molekylstråleepitaxi.' },
+      { type: 'p', html: 'Kvantbrunnar finns i vardagen. De sitter i laserdioderna i streckkodsläsare och fiberoptisk kommunikation, och i många lysdioder, där skiktets tjocklek bestämmer vilken färg ljuset får. I forskningen används de för att skapa extremt rena tvådimensionella elektronlager, där elektronerna kan färdas långt utan att krocka och där exotiska kvanttillstånd kan uppstå.' }
+    ]
+  },
+
+  {
     id: 'kvant-halleffekten',
     term: 'Kvant-Halleffekten',
     former: ['kvant-halleffekten', 'kvant-halleffekt', 'kvanthalleffekten', 'kvanthalleffekt', 'kvant-halltillstånd', 'kvant-halltillståndet', 'fyllnadsfaktor', 'fyllnadsfaktorn'],

@@ -173,22 +173,45 @@ function angra() {
 }
 
 /* UI-tillstånd som inte sparas */
-const ui = { forslagSvar: null, val: null, grupp: [], ram: null, drag: null, mal: null, anim: null, pop: null, senaste: null, skarm: false, sparr: false };
+const ui = { guider: null, forslagSvar: null, val: null, grupp: [], ram: null, drag: null, mal: null, anim: null, pop: null, senaste: null, skarm: false, sparr: false };
 
 /* ================= Geometri ================= */
 const lokalBoxCache = {};
 // Möblernas mått. Katedern kan dras större eller mindre och har då egna w och h.
 const KATEDER_MIN = [80, 50], KATEDER_MAX = [400, 220];
+/* Egna bänkmått: varje sal kan ha egen bredd och eget djup för varje
+   bänktyp (r.matt[typ] = { w, h } i cm). Stolarna står kvar 22 cm från
+   bänkens kant och fördelas jämnt längs bredden. */
+const MATT_MIN = [40, 30], MATT_MAX = [320, 200];
+const STOLAVSTAND = 22;
+const skaladCache = {};
+function bankMatt(typ) {
+  if (!S || !S.rum || typ === 'kateder') return null;
+  const r = rum(); return r && r.matt ? r.matt[typ] || null : null;
+}
+function skalad(typ, w, h) {
+  const key = typ + '|' + w + '|' + h;
+  if (skaladCache[key]) return skaladCache[key];
+  const t = TYPER[typ], n = t.seats.length > 3 ? t.seats.length / 2 : t.seats.length;
+  const seats = t.seats.map(([sx, sy]) => [r1(sx * w / t.w), sy < 0 ? -(h / 2 + STOLAVSTAND) : h / 2 + STOLAVSTAND]);
+  const kort = clamp(Math.round(w / n - 3), 44, 96);
+  return (skaladCache[key] = { ...t, w, h, seats, kort });
+}
 function geo(it) {
   const t = TYPER[it.typ];
-  if (it.typ !== 'kateder' || !(it.w || it.h)) return t;
-  const w = it.w || t.w, h = it.h || t.h;
-  return { ...t, w, h, larare: [0, -h / 2 - 22] };
+  if (it.typ === 'kateder') {
+    if (!(it.w || it.h)) return t;
+    const w = it.w || t.w, h = it.h || t.h;
+    return { ...t, w, h, larare: [0, -h / 2 - 22] };
+  }
+  const m = bankMatt(it.typ);
+  return m ? skalad(it.typ, m.w, m.h) : t;
 }
 function lokalBox(x) {
   const it = typeof x === 'string' ? { typ: x } : x;
   const egen = it.typ === 'kateder' && (it.w || it.h);
-  if (!egen && lokalBoxCache[it.typ]) return lokalBoxCache[it.typ];
+  const g0 = geo(it), nyckel = it.typ + '|' + g0.w + '|' + g0.h;
+  if (!egen && lokalBoxCache[nyckel]) return lokalBoxCache[nyckel];
   const t = geo(it);
   let x0 = -t.w / 2, x1 = t.w / 2, y0 = -t.h / 2, y1 = t.h / 2;
   const stolar = t.seats.slice(); if (t.larare) stolar.push(t.larare);
@@ -197,7 +220,7 @@ function lokalBox(x) {
     y0 = Math.min(y0, sy - STOL_D / 2); y1 = Math.max(y1, sy + STOL_D / 2);
   }
   const box = { x0, x1, y0, y1 };
-  if (!egen) lokalBoxCache[it.typ] = box;
+  if (!egen) lokalBoxCache[nyckel] = box;
   return box;
 }
 function horn(it) {
@@ -449,8 +472,9 @@ function stallAntal(r, typ, n) {
    som ett schackmönster) prövas med alla antal bänkar per rad, och den
    uppställning som ger störst minsta avstånd väljs. Vid lika avstånd vinner
    raka rader. Kateder, dörr och fönster står kvar. */
-const BANKAVSTAND = 70;   // cm, en enkelbänks bredd
-function fmtAvst(cm) { const v = cm / BANKAVSTAND; return (Math.round(v * 10) / 10).toFixed(1).replace('.', ','); }
+// Ett bänkavstånd är en enkelbänks bredd i salen (70 cm om inget annat angetts).
+const bankavstand = () => geo({ typ: 'enkel' }).w;
+function fmtAvst(cm) { const v = cm / bankavstand(); return (Math.round(v * 10) / 10).toFixed(1).replace('.', ','); }
 function foreslaLayout(r, N) {
   const b = lokalBox('enkel'), bw = b.x1 - b.x0, bh = b.y1 - b.y0;
   const kat = r.items.find(i => i.typ === 'kateder');
@@ -508,15 +532,30 @@ function forslagAntal() {
   const k = klass(), n = k ? k.elever.filter(e => e.har).length : 0;
   return n || 24;
 }
+/* Minsta avståndet sparas i den enhet läraren valt (S.inst.forslagEnhet):
+   i bänkavstånd (S.inst.forslagAvst) eller i centimeter (S.inst.forslagCm).
+   Då förblir 1 bänkavstånd 1 bänkavstånd när bänkmåtten ändras. Värdet
+   räknas om först när enheten byts. */
+function forslagCm() {
+  if (S.inst.forslagEnhet === 'm') {
+    if (S.inst.forslagCm == null) S.inst.forslagCm = Math.round((S.inst.forslagAvst ?? 1) * bankavstand());
+    return S.inst.forslagCm;
+  }
+  return (S.inst.forslagAvst ?? 1) * bankavstand();
+}
+const fmtMeter = cm => (cm / 100).toFixed(cm % 10 ? 2 : 1).replace('.', ',');
+function avstText(cm) {
+  return S.inst.forslagEnhet === 'm' ? `${fmtMeter(cm)}&nbsp;m` : `${fmtAvst(cm)} bänkavstånd`;
+}
 function foresla() {
-  const r = rum(), N = forslagAntal(), kMin = S.inst.forslagAvst ?? 1;
+  const r = rum(), N = forslagAntal(), minCm = forslagCm();
   const res = foreslaLayout(r, N);
-  if (!res || res.d < kMin * BANKAVSTAND - 0.5) {
+  if (!res || res.d < minCm - 0.5) {
     let max = 0;
-    for (let n = N - 1; n >= 1; n--) { const x = foreslaLayout(r, n); if (x && x.d >= kMin * BANKAVSTAND - 0.5) { max = n; break; } }
+    for (let n = N - 1; n >= 1; n--) { const x = foreslaLayout(r, n); if (x && x.d >= minCm - 0.5) { max = n; break; } }
     ui.forslagSvar = { ok: false, html: max
-      ? `Med minst <b>${fmtAvst(kMin * BANKAVSTAND)}</b> bänkavstånd ryms högst <b>${max}</b> bänkar i salen. Minska avståndet, gör salen större eller ställ ut färre bänkar.`
-      : `Det går inte att ställa ut bänkar med minst <b>${fmtAvst(kMin * BANKAVSTAND)}</b> bänkavstånd i salen. Minska avståndet eller gör salen större.` };
+      ? `Med minst <b>${avstText(minCm)}</b> mellan eleverna ryms högst <b>${max}</b> bänkar i salen. Minska avståndet, gör salen större eller ställ ut färre bänkar.`
+      : `Det går inte att ställa ut bänkar med minst <b>${avstText(minCm)}</b> mellan eleverna i salen. Minska avståndet eller gör salen större.` };
     ritaPanel();
     return;
   }
@@ -525,8 +564,42 @@ function foresla() {
   r.items = r.items.filter(it => it.typ === 'kateder').concat(res.items);
   r.blocked = [];
   avmarkera();
-  ui.forslagSvar = { ok: true, html: `<b>${N}</b> enkelbänkar i ${res.forsk ? 'förskjutna' : 'raka'} rader, med minst <b>${fmtAvst(res.d)}</b> bänkavstånd mellan eleverna (${Math.round(res.d)}&nbsp;cm).` };
+  ui.forslagSvar = { ok: true, html: `<b>${N}</b> enkelbänkar i ${res.forsk ? 'förskjutna' : 'raka'} rader, med minst <b>${fmtAvst(res.d)}</b> bänkavstånd mellan eleverna (${fmtMeter(Math.round(res.d))}&nbsp;m).` };
   spara(); allt();
+}
+/* Linjering: en möbel (eller grupp) som dras nästan i linje med en annan
+   möbel snäpper i linje med den, oavsett hur långt bort den står, så att det
+   blir lätt att få raka kolumner och rader. Mitten, vänster- och högerkant
+   jämförs i sidled, mitten, fram- och bakkant framåt och bakåt. Hjälplinjerna
+   ritas medan man drar. */
+const LINJERA = 12;
+function linjera(g, r, flytta = true) {
+  ui.guider = [];
+  const ids = new Set(g.map(i => i.id)), andra = r.items.filter(i => !ids.has(i.id));
+  if (!andra.length) return;
+  const varden = it => { const b = aabb(it); return { x: [b.x0, (b.x0 + b.x1) / 2, b.x1], y: [b.y0, (b.y0 + b.y1) / 2, b.y1], b }; };
+  const mal = andra.map(varden);
+  if (flytta) for (const ax of ['x', 'y']) {
+    let bast = null;
+    for (const e of g.map(varden)) for (let i = 0; i < 3; i++) for (const m of mal) {
+      const d = m[ax][i] - e[ax][i];
+      if (Math.abs(d) < LINJERA && (bast === null || Math.abs(d) < Math.abs(bast))) bast = d;
+    }
+    if (bast !== null) gruppFlytta(g, ax === 'x' ? bast : 0, ax === 'y' ? bast : 0);
+  }
+  // Hjälplinjer där något nu står exakt i linje, från den ena möbeln till den andra
+  const sedda = new Set();
+  for (const e of g.map(varden)) for (const m of mal) for (const ax of ['x', 'y']) for (let i = 0; i < 3; i++) {
+    if (Math.abs(m[ax][i] - e[ax][i]) > 0.6) continue;
+    const v = r1(e[ax][i]), nyckel = ax + v;
+    const tv = ax === 'x' ? 'y' : 'x';
+    const fran = Math.min(e.b[tv + '0'], m.b[tv + '0']), till = Math.max(e.b[tv + '1'], m.b[tv + '1']);
+    const fanns = ui.guider.find(q => q.nyckel === nyckel);
+    if (fanns) { fanns.fran = Math.min(fanns.fran, fran); fanns.till = Math.max(fanns.till, till); }
+    else if (!sedda.has(nyckel)) { sedda.add(nyckel); ui.guider.push({ nyckel, ax, v, fran, till, mitt: i === 1 }); }
+  }
+  // Står mitten i linje räcker den hjälplinjen; kanterna visas bara annars.
+  for (const ax of ['x', 'y']) if (ui.guider.some(q => q.ax === ax && q.mitt)) ui.guider = ui.guider.filter(q => q.ax !== ax || q.mitt);
 }
 function hallInne(it, r) {
   const b = aabb(it);
@@ -542,7 +615,7 @@ function platser(r) {
       const [dx, dy] = rot(sx, sy, it.rot);
       const tecken = sy < 0 ? -1 : 1;
       const [kx, ky] = rot(sx, sy - tecken * 6, it.rot);
-      out.push({ id: it.id + ':' + i, item: it.id, x: it.x + dx, y: it.y + dy, kx: it.x + kx, ky: it.y + ky, kort: t.kort });
+      out.push({ id: it.id + ':' + i, item: it.id, rot: it.rot, x: it.x + dx, y: it.y + dy, kx: it.x + kx, ky: it.y + ky, kort: t.kort });
     });
   }
   return out;
@@ -901,6 +974,14 @@ function planSvg(opt = {}) {
       s += `<text x="${r1(vx)}" y="${r1(vy) + 5}" text-anchor="middle" font-size="${t.w >= 120 ? 14 : 11}" font-weight="600" fill="${FARG.bankKant}" pointer-events="none">Kateder</text>`;
     }
   }
+  // Hjälplinjer vid linjering
+  if (!exp && ui.guider && ui.drag && ui.drag.moved) {
+    for (const q of ui.guider) {
+      const [a1, b1] = q.ax === 'x' ? V(q.v, q.fran - 12) : V(q.fran - 12, q.v);
+      const [a2, b2] = q.ax === 'x' ? V(q.v, q.till + 12) : V(q.till + 12, q.v);
+      s += `<line x1="${r1(a1)}" y1="${r1(b1)}" x2="${r1(a2)}" y2="${r1(b2)}" stroke="${FARG.accent}" stroke-width="1.4" stroke-dasharray="6 4" pointer-events="none"/>`;
+    }
+  }
   // Markeringsramen (vykoordinater)
   if (!exp && ui.ram) {
     const q = ui.ram;
@@ -1092,13 +1173,34 @@ function panelRum() {
       const under = TYPER[t] ? (n ? n + (n === 1 ? ' plats' : ' platser') : 'Lärarens bord') : 'På väggen';
       return `<div class="mobelkort" data-ny="${t}" role="button" tabindex="0" aria-label="Lägg till ${esc(typ.namn)}">${ikonSvg(t)}<b>${esc(typ.namn)}</b><small>${under}</small></div>`;
     }).join('')}</div>
-    <p class="note">Klicka för att ställa ut en möbel eller dra in den i salen. Dörren och fönstren dras längs väggarna, och ett klick på dörren vänder den så att den öppnas åt andra hållet. Ett fönster blir längre eller kortare när du drar i någon av dess ändar. Släpps en bänk på en annan snäpper de ihop kant i kant (håll ned Alt för att placera fritt). Markera en möbel för att vrida, kopiera eller ta bort den. Vill du flytta flera bänkar på en gång drar du en ram runt dem från golvet (eller håller ned Skift och klickar), och drar sedan i en av dem. Katedern blir större eller mindre när du drar i en kant eller ett hörn av den.</p>
+    <p class="note">Klicka för att ställa ut en möbel eller dra in den i salen. Dörren och fönstren dras längs väggarna, och ett klick på dörren vänder den så att den öppnas åt andra hållet. Ett fönster blir längre eller kortare när du drar i någon av dess ändar. Släpps en bänk på en annan snäpper de ihop kant i kant, och en bänk som dras nästan i linje med en annan bänk snäpper rakt bakom, framför eller bredvid den (håll ned Alt för att placera fritt). Markera en möbel för att vrida, kopiera eller ta bort den. Vill du flytta flera bänkar på en gång drar du en ram runt dem från golvet (eller håller ned Skift och klickar), och drar sedan i en av dem. Katedern blir större eller mindre när du drar i en kant eller ett hörn av den.</p>
+  </div>
+  <div class="grp">
+    <div class="grp-h"><span class="eyebrow">Bänkarnas mått</span></div>
+    <div class="matt">
+      <div class="matt-h"><span></span><span>Bredd</span><span>Djup</span></div>
+      ${['enkel', 'par', 'trio', 'grupp4', 'grupp6'].map(typ => {
+        const t = geo({ typ }), std = TYPER[typ], egen = !!bankMatt(typ);
+        return `<div class="matt-rad${egen ? ' egen' : ''}"><span>${esc(std.namn)}</span>
+          <label><input type="number" data-matt="${typ}" data-dim="w" min="${MATT_MIN[0]}" max="${MATT_MAX[0]}" step="5" value="${t.w}" aria-label="${esc(std.namn)}, bredd i centimeter"><i>cm</i></label>
+          <label><input type="number" data-matt="${typ}" data-dim="h" min="${MATT_MIN[1]}" max="${MATT_MAX[1]}" step="5" value="${t.h}" aria-label="${esc(std.namn)}, djup i centimeter"><i>cm</i></label></div>`;
+      }).join('')}
+    </div>
+    <div class="btns"><button class="btn liten" data-act="mattStd"${r.matt && Object.keys(r.matt).length ? '' : ' disabled'}>Standardmått</button></div>
+    <p class="note">Mät bänkarna i salen och skriv in måtten, så stämmer planen med verkligheten. Bänkarna som redan står i salen ändrar storlek direkt. Bredden är bänkens långsida, där eleverna sitter, och djupet avståndet från framkant till bakkant.</p>
   </div>
   <div class="grp">
     <div class="grp-h"><span class="eyebrow">Föreslå bänkplacering</span></div>
     <div class="row" style="margin-top:0">Antal bänkar <span class="stepper"><button data-act="fAntal-" aria-label="En bänk färre">−</button><input id="forslagAntal" type="number" min="1" max="80" inputmode="numeric" value="${forslagAntal()}" aria-label="Antal bänkar"><button data-act="fAntal+" aria-label="En bänk till">+</button></span></div>
-    <div class="row">Minsta bänkavstånd ${stepper('fAvst', fmtAvst((S.inst.forslagAvst ?? 1) * BANKAVSTAND))}</div>
-    <p class="note" style="margin-top:2px">Avståndet anges i bänkavstånd. Ett bänkavstånd är en bänkbredd, 70 cm: med 1 bänkavstånd får en tom bänk plats mellan två elever.</p>
+    <span class="lbl">Minsta avstånd mellan eleverna</span>
+    <div class="row" style="margin-top:0">
+      <div class="seg" role="group" aria-label="Enhet" style="flex:none">
+        <button data-act="fEnhet" data-v="bank" aria-pressed="${S.inst.forslagEnhet !== 'm'}">Bänkavstånd</button>
+        <button data-act="fEnhet" data-v="m" aria-pressed="${S.inst.forslagEnhet === 'm'}">Meter</button>
+      </div>
+      ${stepper('fAvst', S.inst.forslagEnhet === 'm' ? fmtMeter(forslagCm()) + '\u00a0m' : fmtAvst(forslagCm()))}
+    </div>
+    <p class="note" style="margin-top:2px">Avståndet mäts från kant till kant mellan bänkarna med stolar. Ett bänkavstånd är en enkelbänks bredd, ${Math.round(bankavstand())} cm i den här salen: med 1 bänkavstånd får en tom bänk plats mellan två elever.</p>
     <div class="btns"><button class="btn mork" data-act="foresla">${IKON.pil}Föreslå bänkplacering</button></div>
     ${ui.forslagSvar ? `<div class="rapport" style="margin-top:10px"><div class="${ui.forslagSvar.ok ? 'ok' : 'nej'}">${ui.forslagSvar.ok ? IKON.bock : IKON.kryss}<span>${ui.forslagSvar.html}</span></div></div>` : ''}
     <p class="note">Enkelbänkarna sprids över hela golvet, i raka eller förskjutna rader beroende på vad som ger störst avstånd. Kateder, dörr och fönster står kvar.</p>
@@ -1243,8 +1345,18 @@ function panelPlac() {
 /* ================= Slumpningen ================= */
 // Direkt bredvid: sida vid sida vid samma bänk eller vid två bänkar som står tätt.
 // Elever mitt emot varandra vid ett gruppbord räknas inte, inte heller rader framför och bakom.
-const BREDVID = 85;
-const bredvid = (a, b) => Math.hypot(a.x - b.x, a.y - b.y) < BREDVID;
+// Platserna står i samma rad (mindre än 30 cm isär framåt eller bakåt, sett från
+// a:s bänk) och är närmare varandra i sidled än en platsbredd plus lite marginal.
+function bredvidGrans() {
+  let g = 0;
+  for (const it of rum().items) { const t = geo(it), n = t.seats.length > 3 ? t.seats.length / 2 : t.seats.length; if (n) g = Math.max(g, t.w / n); }
+  return Math.max(85, g + 15);
+}
+let BREDVID = 85;
+const bredvid = (a, b) => {
+  const [lx, ly] = rot(b.x - a.x, b.y - a.y, -(a.rot || 0));
+  return Math.abs(ly) < 30 && Math.abs(lx) < BREDVID;
+};
 // Alla lediga platser i den ordning läget föredrar dem.
 function ordnaPlatser(fria, lage, fasta) {
   if (lage === 'slump') return blanda(fria.slice());
@@ -1294,6 +1406,7 @@ function valjPlatser(fria, n, lage, fasta, avstand) {
 }
 function slumpa(animera = true) {
   const r = rum(), k = klass(); if (!k) return;
+  BREDVID = bredvidGrans();
   const c = cur();
   const alla = platser(r).filter(p => !r.blocked.includes(p.id));
   if (!alla.length) { visaTips('Ställ först ut bänkar i salen.'); return; }
@@ -1447,6 +1560,7 @@ function starta() {
    placeringen (inte till salen) och räknas om när placeringen ändras. */
 function autoSkarmar(r, c) {
   c.skarmar = [];
+  BREDVID = bredvidGrans();
   if (!S.inst.avstand) return 0;
   const items = new Map(r.items.map(i => [i.id, i]));
   const pl = platser(r).filter(p => c.map[p.id]);
@@ -1635,7 +1749,12 @@ window.addEventListener('pointermove', e => {
   if (d.kind === 'item') {
     const it = r.items.find(i => i.id === d.id); if (!it) return;
     it.x = snap(x + d.dx); it.y = snap(y + d.dy); hallInne(it, r);
-    if (!e.altKey) { snappa(it, r); hallInne(it, r); }
+    ui.guider = null;
+    if (!e.altKey) {
+      linjera([it], r); hallInne(it, r);
+      snappa(it, r); hallInne(it, r);
+      linjera([it], r, false);
+    }
     ritaPlan();
   } else if (d.kind === 'fonster') {
     // Den andra änden står still; fönstret får inte bli kortare än 40 cm eller gå utanför väggen.
@@ -1651,7 +1770,8 @@ window.addEventListener('pointermove', e => {
     let dx = snap(x - d.x0), dy = snap(y - d.y0);
     g.forEach((it, i) => { it.x = d.pos0[i][0] + dx; it.y = d.pos0[i][1] + dy; });
     gruppHallInne(g, r);
-    if (!e.altKey) { gruppSnappa(g, r); gruppHallInne(g, r); }
+    ui.guider = null;
+    if (!e.altKey) { linjera(g, r); gruppHallInne(g, r); gruppSnappa(g, r); gruppHallInne(g, r); linjera(g, r, false); }
     ritaPlan();
   } else if (d.kind === 'ram') {
     const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
@@ -1739,6 +1859,7 @@ window.addEventListener('pointerup', e => {
     const v = r.vagg.find(i => i.id === d.id);
     if (v && v.typ === 'dorr') { minns(); v.spegel = !v.spegel; spara(); }
   }
+  ui.guider = null;
   if (d.kind === 'ram') { ui.ram = null; ritaPlan(); ritaStatus(); return; }
   if (d.kind === 'item' || d.kind === 'vagg' || d.kind === 'storlek' || d.kind === 'rumstorlek' || d.kind === 'grupp' || d.kind === 'fonster') {
     if (d.moved) { angraStack.push(d.fore); if (angraStack.length > 40) angraStack.shift(); $('angraBtn').hidden = false; spara(); ritaPanel(); ritaStatus(); }
@@ -1940,9 +2061,30 @@ panel.addEventListener('click', e => {
     S.inst.forslagAntal = clamp(forslagAntal() + (act === 'fAntal+' ? 1 : -1), 1, 80); ui.forslagSvar = null; spara(); ritaPanel(); return;
   }
   if (act === 'fAvst+' || act === 'fAvst-') {
-    S.inst.forslagAvst = clamp((S.inst.forslagAvst ?? 1) + (act === 'fAvst+' ? 0.5 : -0.5), 0, 5); ui.forslagSvar = null; spara(); ritaPanel(); return;
+    const upp = act === 'fAvst+', cm = forslagCm(), bw = bankavstand();
+    if (S.inst.forslagEnhet === 'm') {
+      // steg om 1 dm, till närmaste hela decimeter
+      const dm = upp ? Math.floor(cm / 10 + 1e-9) + 1 : Math.ceil(cm / 10 - 1e-9) - 1;
+      S.inst.forslagCm = clamp(dm * 10, 0, 500);
+    } else {
+      // steg om ett halvt bänkavstånd, till närmaste halva
+      const k = cm / bw, kn = upp ? Math.floor(k * 2 + 1e-9) / 2 + 0.5 : Math.ceil(k * 2 - 1e-9) / 2 - 0.5;
+      S.inst.forslagAvst = clamp(kn, 0, 6);
+    }
+    ui.forslagSvar = null; spara(); ritaPanel(); return;
+  }
+  if (act === 'fEnhet') {
+    const ny = b.dataset.v === 'm' ? 'm' : 'bank';
+    if (ny !== (S.inst.forslagEnhet === 'm' ? 'm' : 'bank')) {
+      const cm = forslagCm();
+      if (ny === 'm') S.inst.forslagCm = Math.round(cm);
+      else S.inst.forslagAvst = Math.round(cm / bankavstand() * 10) / 10;
+      S.inst.forslagEnhet = ny;
+    }
+    ui.forslagSvar = null; spara(); ritaPanel(); return;
   }
   if (act === 'foresla') { foresla(); return; }
+  if (act === 'mattStd') { minns(); r.matt = {}; ui.forslagSvar = null; spara(); allt(); return; }
   if (act === 'enkel+' || act === 'enkel-') {
     minns();
     const nu = r.items.filter(i => i.typ === 'enkel').length;
@@ -2046,6 +2188,18 @@ panel.addEventListener('change', e => {
   } else if (t.id === 'klassSel') {
     if (t.value === '__ny') nyKlassDialog();
     else { S.klassId = t.value; spara(); allt(); }
+  } else if (t.dataset.matt) {
+    const typ = t.dataset.matt, std = TYPER[typ], nu = geo({ typ });
+    const i = t.dataset.dim === 'w' ? 0 : 1;
+    let v = Math.round(+t.value);
+    if (!v) { t.value = i ? nu.h : nu.w; return; }
+    v = clamp(v, MATT_MIN[i], MATT_MAX[i]);
+    minns();
+    r.matt = r.matt || {};
+    const m = { w: nu.w, h: nu.h }; if (i) m.h = v; else m.w = v;
+    if (m.w === std.w && m.h === std.h) delete r.matt[typ]; else r.matt[typ] = m;
+    for (const it of r.items) if (it.typ === typ) hallInne(it, r);
+    ui.forslagSvar = null; spara(); allt();
   } else if (t.id === 'forslagAntal') {
     S.inst.forslagAntal = clamp(Math.round(+t.value) || 1, 1, 80); ui.forslagSvar = null; spara(); ritaPanel();
   } else if (t.id === 'antalEnkel') {
@@ -2066,7 +2220,7 @@ panel.addEventListener('change', e => {
   }
 });
 panel.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && (e.target.id === 'rumNamn' || e.target.id === 'klassNamn' || e.target.id === 'antalEnkel' || e.target.id === 'forslagAntal' || e.target.classList.contains('enamn'))) e.target.blur();
+  if (e.key === 'Enter' && (e.target.id === 'rumNamn' || e.target.id === 'klassNamn' || e.target.id === 'antalEnkel' || e.target.id === 'forslagAntal' || !!e.target.dataset.matt || e.target.classList.contains('enamn'))) e.target.blur();
 });
 function nyKlassDialog() {
   minns();

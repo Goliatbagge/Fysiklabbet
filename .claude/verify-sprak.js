@@ -278,6 +278,39 @@ for (const fil of filer) {
     }
 }
 
+// ── Tomrad mellan deluppgifter (teorins exempel) ──────────────────────
+// Deluppgifterna i ett ::: exempel skrivs som KONSEKUTIVA rader
+// (**a) …**, **b) …** utan tomrad emellan), så att katalogen samlar dem i
+// sitt täta rutnät (.lab-deluppgifter). En tomrad gör varje deluppgift till
+// ett eget stycke med full styckesluft, och uppgiften ser utspridd ut
+// (påpekat 2026-10-05 i fy2-2.2). En deluppgift som bryts över flera
+// källrader faller också ur rutnätet, så den ska stå på EN rad.
+// Regeln är radöverskridande och körs därför här, inte i REGLER.
+for (const fil of filer) {
+    if (!/[\\/]data[\\/]teori[\\/][^\\/]+\.md$/.test(fil)) continue;
+    let rader;
+    try { rader = fs.readFileSync(fil, 'utf8').split(/\r?\n/); } catch (e) { continue; }
+    const arDel = r => /^\*\*[a-h]\)\s/.test(r);
+    let iFraga = false;
+    rader.forEach((rad, i) => {
+        if (/^::: exempel/.test(rad)) iFraga = true;
+        else if (/^::: (handskrift|textlosning)/.test(rad)) iFraga = false;
+        if (!iFraga || !arDel(rad)) return;
+        const post = { fil: path.relative(ROT, fil).replace(/\\/g, '/'), rad: i + 1,
+                       traff: rad.slice(0, 4), utdrag: rad.slice(0, 80) };
+        if (i >= 2 && rader[i - 1].trim() === '' && arDel(rader[i - 2])) {
+            fel.push({ ...post, regel: 'tomrad-mellan-deluppgifter',
+                rattelse: 'Deluppgifter skrivs på rader direkt under varandra, utan ' +
+                          'tomrad emellan. Se "Deluppgifter" i CLAUDE.md.' });
+        }
+        if (!/\*\*\s*$/.test(rad.slice(2))) {
+            fel.push({ ...post, regel: 'deluppgift-over-flera-rader',
+                rattelse: 'En deluppgift ska stå på EN källrad (**a) …**), annars ' +
+                          'hamnar den utanför deluppgiftsrutnätet. Se "Deluppgifter" i CLAUDE.md.' });
+        }
+    });
+}
+
 // ── Utfall ────────────────────────────────────────────────────────────
 function skriv(lista, etikett) {
     const perRegel = {};

@@ -2088,6 +2088,23 @@ Se undantagen längst ned.
 - ✗ `**…<br>a) Bestäm indextalet år 2023.&emsp;&emsp;b) Med hur många procent …**`
 - ✗ `**Vad är SI-enheten för a) hastighet, b) volym?**` (inbäddat i meningen)
 
+**Aldrig en tomrad mellan deluppgifterna** (uttryckligt önskemål
+2026-10-05, Exempel 1 i `fy2-2.2`). Står deluppgifterna som egna rader i
+md-filen ska raderna ligga DIREKT under varandra, en deluppgift per
+källrad:
+
+```
+**a) Bestäm fjäderkonstanten.**
+**b) Hur stor är accelerationen i släppögonblicket?**
+```
+
+Renderarna (`preprocessSubproblems` i `katalog.html`/`avsnitt.html`)
+samlar då raderna i det täta rutnätet `.lab-deluppgifter`. En tomrad
+emellan gör varje deluppgift till ett eget stycke med full styckesluft,
+och en deluppgift som bryts över två källrader faller ur rutnätet. Båda
+felen ger `verify-sprak.js` fel på (`tomrad-mellan-deluppgifter`,
+`deluppgift-over-flera-rader`). Hela teorin sveptes samma dag.
+
 **Deluppgifter åtskiljs BARA av radbrytningen — aldrig av kommatecken**
 (uttryckligt önskemål 2026-08-26). Radbrytningen gör redan hela jobbet, och
 ett kommatecken som hänger kvar i radslutet läser som om meningen fortsatte.

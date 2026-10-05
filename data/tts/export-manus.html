@@ -138,7 +138,7 @@
 
         function preprocessSubproblems(md) {
             const lines = md.split('\n');
-            const isSub = (l) => /^\*\*[a-d]\)\s+.+\*\*\s*$/i.test(l);
+            const isSub = (l) => /^\*\*[a-h]\)\s+.+\*\*\s*$/i.test(l);
             const out = [];
             let i = 0;
             while (i < lines.length) {

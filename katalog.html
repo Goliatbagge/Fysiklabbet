@@ -188,13 +188,13 @@
             return md;
         }
 
-        // --- Markdown-preprocessor: gruppera deluppgifter (a/b/c/d-frågor).
+        // --- Markdown-preprocessor: gruppera deluppgifter (a)–h)-frågor).
         // Två eller fler konsekutiva rader på formen **a) ... ?** läggs i en
         // grid (.lab-deluppgifter) så att de visas i två kolumner — c) under
         // a), d) under b) — istället för att smälta ihop till en rad.
         function preprocessSubproblems(md) {
             const lines = md.split('\n');
-            const isSub = (l) => /^\*\*[a-d]\)\s+.+\*\*\s*$/i.test(l);
+            const isSub = (l) => /^\*\*[a-h]\)\s+.+\*\*\s*$/i.test(l);
             const out = [];
             let i = 0;
             while (i < lines.length) {

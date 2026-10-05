@@ -105,10 +105,7 @@ $$
 \end{array}\right.
 $$
 
-**a) Hur stor andel av de som svarade var positiva till utbyggnad av
-kärnkraft?<br>b) Hur stort var bortfallet procentuellt?<br>c) Om vi tar
-hänsyn till bortfallet, mellan vilka värden kan andelen positiva till
-utbyggnad av kärnkraft ligga?**
+**a) Hur stor andel av de som svarade var positiva till utbyggnad av kärnkraft?<br>b) Hur stort var bortfallet procentuellt?<br>c) Om vi tar hänsyn till bortfallet, mellan vilka värden kan andelen positiva till utbyggnad av kärnkraft ligga?**
 
 ::: handskrift
 typ: bortfall

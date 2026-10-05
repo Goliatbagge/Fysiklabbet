@@ -750,9 +750,11 @@ function hastsko(r) {
   return ut;
 }
 /* Mot väggarna (datorprov): enkelbänkar längs vänster, höger och bakre vägg
-   med eleverna vända mot väggen, och i mitten en eller flera öar med två
-   rader bänkar fram mot fram, där eleverna sitter mot varandra. Väggen med
-   tavlan och området vid katedern lämnas fria, liksom dörrens svängområde.
+   med eleverna vända mot väggen, och i mitten en rektangulär ring av bänkar
+   med tomt golv inuti, där eleverna sitter på utsidan och tittar inåt. Då
+   sitter alla rygg mot rygg och ingen skärm går att se från en annan plats.
+   Bara en ring: en inre ring skulle synas över axeln från den yttre. Väggen
+   med tavlan och området vid katedern lämnas fria, liksom dörrens svängområde.
    Vridningar: 270 = eleven tittar mot väster, 90 = mot öster, 180 = mot
    bakväggen, 0 = mot tavlan. */
 function dorrZoner(r) {
@@ -795,19 +797,15 @@ function motVaggarna(r) {
   // Vänster och höger vägg
   const sydOvre = ySyd - ut;                      // bakraden når hit (med stol)
   for (const y of langs(yStart, sydOvre - gap)) { lagg(kant + h / 2, y, 270); lagg(r.W - kant - h / 2, y, 90); }
-  // Öar i mitten
-  const x0 = sidaInre + gang, x1 = r.W - sidaInre - gang;
-  const y0 = yStart + 20, y1 = sydOvre - gang;
-  const H = h + 2 * ut;                           // en ö: två rader fram mot fram
-  const antalOar = Math.max(0, Math.floor((y1 - y0 + gang) / (H + gang)));
-  const per = Math.floor((x1 - x0) / bw);
-  if (antalOar && per) {
-    const totH = antalOar * H + (antalOar - 1) * gang, start = y0 + (y1 - y0 - totH) / 2;
-    const xs = Array.from({ length: per }, (_, i) => (r.W - per * bw) / 2 + bw / 2 + i * bw);
-    for (let o = 0; o < antalOar; o++) {
-      const yN = start + o * (H + gang) + ut;      // norra raden, vänd mot söder
-      for (const x of xs) { lagg(x, yN, 180); lagg(x, yN + h, 0); }
-    }
+  // En rektangulär ring i mitten med tomt golv inuti. Eleverna sitter på
+  // ringens utsida och tittar inåt, rygg mot rygg med eleverna vid väggarna,
+  // så att skärmarna i ringen är vända bort från alla andra.
+  const v = sidaInre + gang, hX = r.W - sidaInre - gang;
+  const o = yStart + 20, n = sydOvre - gang;
+  const djupRad = ut + h / 2;                     // från ringens ytterkant till bänkens framkant
+  if (hX - v >= Math.max(bw, 2 * djupRad + 60) && n - o >= 2 * djupRad + 60) {
+    for (const x of langs(v, hX)) { lagg(x, o + ut, 180); lagg(x, n - ut, 0); }
+    for (const y of langs(o + djupRad + gap, n - djupRad - gap)) { lagg(v + ut, y, 90); lagg(hX - ut, y, 270); }
   }
   return ut_;
 }
@@ -817,7 +815,7 @@ const FORVAL = {
   grupp4: { namn: 'Grupper om fyra', bes: 'Gruppbord för samarbete', gor: r => rutnat(r, 'grupp4', 90, 230, 240) },
   hastsko: { namn: 'Hästsko', bes: 'Bänkarna i en U-form mot tavlan', gor: hastsko },
   trio: { namn: 'Labbsal', bes: 'Långa labbänkar för tre', gor: r => rutnat(r, 'trio', 70, 150, 230) },
-  vaggar: { namn: 'Mot väggarna', bes: 'Datorprov: mot väggen runt om och en ö i mitten', gor: motVaggarna },
+  vaggar: { namn: 'Mot väggarna', bes: 'Datorprov: mot väggen runt om och en ring i mitten', gor: motVaggarna },
 };
 function forval(r, namn) {
   r.items = r.items.filter(it => it.typ === 'kateder').concat(FORVAL[namn].gor(r));

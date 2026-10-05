@@ -132,10 +132,11 @@ button, input, select, textarea { font-family: inherit; }
 .mobelkort b { font-size: 12.5px; font-weight: 600; color: var(--ink); text-align: center; line-height: 1.2; }
 .mobelkort small { font: 500 9.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .skarmrad { display: flex; align-items: center; gap: 12px; }
-.skarmrad svg { width: 70px; height: 52px; flex: none; }
+.skarmrad > svg { width: 70px; height: 52px; flex: none; }
 .stage.rum [data-kand] { cursor: pointer; }
 .stage .rumkant:hover { stroke: rgba(28, 61, 107, .28); }
 .stage .katkant:hover { stroke: rgba(28, 61, 107, .32); }
+.stage .fkant:hover { fill: rgba(28, 61, 107, .28); }
 .stage [data-kand]:hover .kand { stroke-opacity: 1; stroke-width: 4; stroke-dasharray: none; }
 .forval { display: grid; grid-template-columns: 1fr; gap: 6px; }
 .forval button { display: flex; align-items: center; gap: 11px; text-align: left; padding: 7px 10px; border-radius: 11px; border: 1px solid var(--line2); background: #fff; cursor: pointer; transition: border-color .15s; }
@@ -452,7 +453,7 @@ textarea { width: 100%; min-height: 92px; resize: vertical; padding: 9px 11px; b
 
     <h2>Så använder du verktyget</h2>
     <ol class="seo-steps">
-      <li><b>Klassrummet.</b> Ange salens mått och välj en färdig möblering, till exempel rader med parbänkar eller grupper om fyra. Dra sedan bänkarna dit de står i verkligheten. En bänk som släpps på en annan snäpper fast kant i kant. Flera bänkar flyttar du på en gång genom att dra en ram runt dem och sedan dra i en av dem, så behåller de sin inbördes placering. Markera en bänk för att vrida, kopiera eller ta bort den. Salen blir större eller mindre när du drar i en vägg eller ett hörn, och katedern när du drar i en kant eller ett hörn av den. Dörren och fönstren dras längs väggarna, och ett klick på dörren vänder den så att den öppnas åt andra hållet.</li>
+      <li><b>Klassrummet.</b> Ange salens mått och välj en färdig möblering, till exempel rader med parbänkar eller grupper om fyra. Dra sedan bänkarna dit de står i verkligheten. En bänk som släpps på en annan snäpper fast kant i kant. Flera bänkar flyttar du på en gång genom att dra en ram runt dem och sedan dra i en av dem, så behåller de sin inbördes placering. Markera en bänk för att vrida, kopiera eller ta bort den. Salen blir större eller mindre när du drar i en vägg eller ett hörn, och katedern när du drar i en kant eller ett hörn av den. Dörren och fönstren dras längs väggarna, och ett klick på dörren vänder den så att den öppnas åt andra hållet. Ett fönster blir längre eller kortare när du drar i någon av dess ändar. Vill du ha hjälp att ställa ut bänkarna med så stort avstånd som möjligt mellan eleverna väljer du <b>Föreslå bänkplacering</b> och anger antal bänkar och minsta bänkavstånd.</li>
       <li><b>Klassen.</b> Klistra in klasslistan med ett namn per rad. Bocka av den som är frånvarande, markera vem som behöver sitta fram och lägg till par som ska hållas isär eller sitta ihop.</li>
       <li><b>Placeringen.</b> Tryck på Slumpa placering. Är du inte nöjd drar du ett namn till en annan plats, och två elever byter då plats med varandra. Lås en elev på sin plats så ligger hen kvar nästa gång du slumpar.</li>
       <li><b>Visa och spara.</b> Visa planen i helskärm för klassen, skriv ut den eller ladda ned den som bild. Spara placeringen när den används, så kan verktyget ge eleverna nya grannar nästa gång.</li>
@@ -483,7 +484,7 @@ textarea { width: 100%; min-height: 92px; resize: vertical; padding: 9px 11px; b
 
 <!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
      webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
-<script src="klassplacering.js?v=202610052330"></script>
+<script src="klassplacering.js?v=202610060010"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

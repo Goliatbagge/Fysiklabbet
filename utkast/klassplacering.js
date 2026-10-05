@@ -173,7 +173,7 @@ function angra() {
 }
 
 /* UI-tillstånd som inte sparas */
-const ui = { val: null, grupp: [], ram: null, drag: null, mal: null, anim: null, pop: null, senaste: null, skarm: false, sparr: false };
+const ui = { forslagSvar: null, val: null, grupp: [], ram: null, drag: null, mal: null, anim: null, pop: null, senaste: null, skarm: false, sparr: false };
 
 /* ================= Geometri ================= */
 const lokalBoxCache = {};
@@ -440,6 +440,94 @@ function stallAntal(r, typ, n) {
   while (antal < n) { const it = ledigPlats(typ, r, 30) || ledigPlats(typ, r, 0); if (!it) break; r.items.push(it); antal++; }
   return { fick: antal, ville: n };
 }
+/* ---------- Föreslå bänkplacering ----------
+   Sprider N enkelbänkar över golvet så att det minsta fria avståndet mellan
+   två elevers platser blir så stort som möjligt. Avståndet mäts kant mot kant
+   mellan bänkarnas fotavtryck (bänk och stol) och anges i bänkavstånd, där ett
+   bänkavstånd är en bänkbredd: med 1 bänkavstånd får en tom bänk plats emellan.
+   Både raka rader och förskjutna rader (varannan rad en halv plats åt sidan,
+   som ett schackmönster) prövas med alla antal bänkar per rad, och den
+   uppställning som ger störst minsta avstånd väljs. Vid lika avstånd vinner
+   raka rader. Kateder, dörr och fönster står kvar. */
+const BANKAVSTAND = 70;   // cm, en enkelbänks bredd
+function fmtAvst(cm) { const v = cm / BANKAVSTAND; return (Math.round(v * 10) / 10).toFixed(1).replace('.', ','); }
+function foreslaLayout(r, N) {
+  const b = lokalBox('enkel'), bw = b.x1 - b.x0, bh = b.y1 - b.y0;
+  const kat = r.items.find(i => i.typ === 'kateder');
+  let yStart = 170;
+  if (kat) { const kb = aabb(kat); if (kb.y1 < r.D / 2) yStart = Math.max(yStart, kb.y1 + 40); }
+  const X0 = 30, X1 = r.W - 30, Y0 = yStart, Y1 = r.D - 30;
+  const aw = X1 - X0, ah = Y1 - Y0;
+  if (N < 1 || aw < bw || ah < bh) return null;
+  let bast = null;
+  const cmax = Math.max(1, Math.floor(aw / bw));
+  for (const forsk of [false, true]) {
+    for (let c = forsk ? 2 : 1; c <= cmax; c++) {
+      const kap = rr => forsk ? Math.ceil(rr / 2) * c + Math.floor(rr / 2) * (c - 1) : rr * c;
+      let rows = 1;
+      while (kap(rows) < N) rows++;
+      const px = c > 1 ? (aw - bw) / (c - 1) : 0, py = rows > 1 ? (ah - bh) / (rows - 1) : 0;
+      if ((c > 1 && px < bw) || (rows > 1 && py < bh)) continue;
+      let d = Infinity;
+      if (c > 1) d = Math.min(d, px - bw);
+      if (rows > 1) {
+        if (forsk) {
+          d = Math.min(d, Math.hypot(Math.max(0, px / 2 - bw), py - bh));
+          if (rows > 2) d = Math.min(d, 2 * py - bh);
+        } else d = Math.min(d, py - bh);
+      }
+      if (d === Infinity) d = Math.min(aw - bw, ah - bh);
+      const poang = d - (forsk ? 1 : 0);
+      if (!bast || poang > bast.poang) bast = { poang, d, c, rows, forsk, px, py };
+    }
+  }
+  if (!bast) return null;
+  const { c, rows, forsk, px, py } = bast;
+  const rader = [];
+  for (let i = 0; i < rows; i++) {
+    const udda = forsk && i % 2 === 1, n = udda ? c - 1 : c, xs = [];
+    for (let j = 0; j < n; j++) xs.push(X0 - b.x0 + (c > 1 ? (udda ? (j + 0.5) * px : j * px) : (aw - bw) / 2));
+    rader.push({ y: Y0 - b.y0 + (rows > 1 ? i * py : (ah - bh) / 2), xs });
+  }
+  // Överskottet tas bort längst bak; de bänkar som blir kvar i en rad sprids jämnt.
+  let over = rader.reduce((a, R) => a + R.xs.length, 0) - N;
+  for (let i = rader.length - 1; i >= 0 && over > 0; i--) {
+    const R = rader[i], kvar = Math.max(0, R.xs.length - over);
+    over -= R.xs.length - kvar;
+    if (!kvar) { R.xs = []; continue; }
+    const nya = [];
+    for (let j = 0; j < kvar; j++) nya.push(R.xs[kvar === 1 ? Math.floor((R.xs.length - 1) / 2) : Math.round(j * (R.xs.length - 1) / (kvar - 1))]);
+    R.xs = nya;
+  }
+  const items = [];
+  for (const R of rader) for (const x of R.xs) items.push({ id: uid(), typ: 'enkel', x: r1(x), y: r1(R.y), rot: 0 });
+  return { items, d: bast.d, forsk };
+}
+function forslagAntal() {
+  if (S.inst.forslagAntal) return S.inst.forslagAntal;
+  const k = klass(), n = k ? k.elever.filter(e => e.har).length : 0;
+  return n || 24;
+}
+function foresla() {
+  const r = rum(), N = forslagAntal(), kMin = S.inst.forslagAvst ?? 1;
+  const res = foreslaLayout(r, N);
+  if (!res || res.d < kMin * BANKAVSTAND - 0.5) {
+    let max = 0;
+    for (let n = N - 1; n >= 1; n--) { const x = foreslaLayout(r, n); if (x && x.d >= kMin * BANKAVSTAND - 0.5) { max = n; break; } }
+    ui.forslagSvar = { ok: false, html: max
+      ? `Med minst <b>${fmtAvst(kMin * BANKAVSTAND)}</b> bänkavstånd ryms högst <b>${max}</b> bänkar i salen. Minska avståndet, gör salen större eller ställ ut färre bänkar.`
+      : `Det går inte att ställa ut bänkar med minst <b>${fmtAvst(kMin * BANKAVSTAND)}</b> bänkavstånd i salen. Minska avståndet eller gör salen större.` };
+    ritaPanel();
+    return;
+  }
+  if (r.items.some(it => it.typ !== 'kateder') && !confirm('Förslaget ersätter bänkarna som står i salen nu. Vill du fortsätta?')) return;
+  minns();
+  r.items = r.items.filter(it => it.typ === 'kateder').concat(res.items);
+  r.blocked = [];
+  avmarkera();
+  ui.forslagSvar = { ok: true, html: `<b>${N}</b> enkelbänkar i ${res.forsk ? 'förskjutna' : 'raka'} rader, med minst <b>${fmtAvst(res.d)}</b> bänkavstånd mellan eleverna (${Math.round(res.d)}&nbsp;cm).` };
+  spara(); allt();
+}
 function hallInne(it, r) {
   const b = aabb(it);
   if (b.x0 < 0) it.x += -b.x0; if (b.x1 > r.W) it.x -= b.x1 - r.W;
@@ -635,8 +723,11 @@ function mobelInre(it, blockerade) {
   if (typ === 'par' || typ === 'grupp4') s += `<line x1="0" y1="${-t.h / 2 + 3}" x2="0" y2="${t.h / 2 - 3}" stroke="${FARG.bankKant}" stroke-opacity=".3" stroke-width="1"/>`;
   return s;
 }
+// Fönster kan dras längre eller kortare och har då en egen längd.
+const vaggLen = v => v.len || VAGGTYP[v.typ].len;
+const FONSTER_MIN = 40;
 function vaggRekt(v, r) {
-  const L = VAGGTYP[v.typ].len, a = v.t - L / 2, b = v.t + L / 2;
+  const L = vaggLen(v), a = v.t - L / 2, b = v.t + L / 2;
   switch (v.wall) {
     case 'n': return [a, -10, b, 0];
     case 's': return [a, r.D, b, r.D + 10];
@@ -649,7 +740,7 @@ function vyRekt(x0, y0, x1, y1) {
   return [Math.min(ax, bx), Math.min(ay, by), Math.abs(bx - ax), Math.abs(by - ay)];
 }
 function vaggSvg(v, r, vald) {
-  const L = VAGGTYP[v.typ].len;
+  const L = vaggLen(v);
   const [x0, y0, x1, y1] = vaggRekt(v, r);
   const [x, y, w, h] = vyRekt(x0, y0, x1, y1);
   let s = `<g data-vagg="${v.id}">`;
@@ -658,6 +749,16 @@ function vaggSvg(v, r, vald) {
     const lodr = w < h;
     s += lodr ? `<line x1="${x + w / 2}" y1="${y}" x2="${x + w / 2}" y2="${y + h}" stroke="${FARG.vagg}" stroke-width="1"/>`
       : `<line x1="${x}" y1="${y + h / 2}" x2="${x + w}" y2="${y + h / 2}" stroke="${FARG.vagg}" stroke-width="1"/>`;
+    // Ändarna går att dra i för att göra fönstret längre eller kortare.
+    if (S.inst.lage === 'rum' && !ui.skarm && !ui.sparr) {
+      const a0 = v.t - L / 2, a1 = v.t + L / 2, lang = v.wall === 'n' || v.wall === 's';
+      for (const [sida, a] of [[-1, a0], [1, a1]]) {
+        const box = lang ? [a - 8, v.wall === 'n' ? -16 : r.D - 6, a + 8, v.wall === 'n' ? 6 : r.D + 16]
+          : [v.wall === 'w' ? -16 : r.W - 6, a - 8, v.wall === 'w' ? 6 : r.W + 16, a + 8];
+        const [fx, fy, fw, fh] = vyRekt(...box);
+        s += `<rect class="fkant" data-fkant="${v.id},${sida}" x="${fx}" y="${fy}" width="${fw}" height="${fh}" rx="3" fill="transparent" style="cursor:${lang ? 'ew-resize' : 'ns-resize'}"/>`;
+      }
+    }
   } else {
     // Gångjärnet i ena änden, dörrbladet öppet in i salen och en streckad svängbåge.
     // Med v.spegel sitter gångjärnet i den andra änden och dörren svänger åt andra hållet.
@@ -991,7 +1092,16 @@ function panelRum() {
       const under = TYPER[t] ? (n ? n + (n === 1 ? ' plats' : ' platser') : 'Lärarens bord') : 'På väggen';
       return `<div class="mobelkort" data-ny="${t}" role="button" tabindex="0" aria-label="Lägg till ${esc(typ.namn)}">${ikonSvg(t)}<b>${esc(typ.namn)}</b><small>${under}</small></div>`;
     }).join('')}</div>
-    <p class="note">Klicka för att ställa ut en möbel eller dra in den i salen. Dörren och fönstren dras längs väggarna, och ett klick på dörren vänder den så att den öppnas åt andra hållet. Släpps en bänk på en annan snäpper de ihop kant i kant (håll ned Alt för att placera fritt). Markera en möbel för att vrida, kopiera eller ta bort den. Vill du flytta flera bänkar på en gång drar du en ram runt dem från golvet (eller håller ned Skift och klickar), och drar sedan i en av dem. Katedern blir större eller mindre när du drar i en kant eller ett hörn av den.</p>
+    <p class="note">Klicka för att ställa ut en möbel eller dra in den i salen. Dörren och fönstren dras längs väggarna, och ett klick på dörren vänder den så att den öppnas åt andra hållet. Ett fönster blir längre eller kortare när du drar i någon av dess ändar. Släpps en bänk på en annan snäpper de ihop kant i kant (håll ned Alt för att placera fritt). Markera en möbel för att vrida, kopiera eller ta bort den. Vill du flytta flera bänkar på en gång drar du en ram runt dem från golvet (eller håller ned Skift och klickar), och drar sedan i en av dem. Katedern blir större eller mindre när du drar i en kant eller ett hörn av den.</p>
+  </div>
+  <div class="grp">
+    <div class="grp-h"><span class="eyebrow">Föreslå bänkplacering</span></div>
+    <div class="row" style="margin-top:0">Antal bänkar <span class="stepper"><button data-act="fAntal-" aria-label="En bänk färre">−</button><input id="forslagAntal" type="number" min="1" max="80" inputmode="numeric" value="${forslagAntal()}" aria-label="Antal bänkar"><button data-act="fAntal+" aria-label="En bänk till">+</button></span></div>
+    <div class="row">Minsta bänkavstånd ${stepper('fAvst', fmtAvst((S.inst.forslagAvst ?? 1) * BANKAVSTAND))}</div>
+    <p class="note" style="margin-top:2px">Avståndet anges i bänkavstånd. Ett bänkavstånd är en bänkbredd, 70 cm: med 1 bänkavstånd får en tom bänk plats mellan två elever.</p>
+    <div class="btns"><button class="btn mork" data-act="foresla">${IKON.pil}Föreslå bänkplacering</button></div>
+    ${ui.forslagSvar ? `<div class="rapport" style="margin-top:10px"><div class="${ui.forslagSvar.ok ? 'ok' : 'nej'}">${ui.forslagSvar.ok ? IKON.bock : IKON.kryss}<span>${ui.forslagSvar.html}</span></div></div>` : ''}
+    <p class="note">Enkelbänkarna sprids över hela golvet, i raka eller förskjutna rader beroende på vad som ger störst avstånd. Kateder, dörr och fönster står kvar.</p>
   </div>
   <div class="grp">
     <div class="grp-h"><span class="eyebrow">Platser som inte används</span><span class="count"><b>${r.blocked.length}</b> spärrade</span></div>
@@ -1406,7 +1516,7 @@ function narmasteVagg(x, y, r) {
 }
 function placeraVagg(v, x, y, r) {
   v.wall = narmasteVagg(x, y, r);
-  const L = VAGGTYP[v.typ].len, langd = (v.wall === 'n' || v.wall === 's') ? r.W : r.D;
+  const L = vaggLen(v), langd = (v.wall === 'n' || v.wall === 's') ? r.W : r.D;
   v.t = clamp(snap(v.wall === 'n' || v.wall === 's' ? x : y), L / 2, langd - L / 2);
 }
 function spoke(html, cx, cy, klass2) {
@@ -1489,6 +1599,11 @@ svg.addEventListener('pointerdown', e => {
         ui.grupp = []; ui.val = it.id;
         ui.drag = { kind: 'item', id: it.id, dx: it.x - x, dy: it.y - y, cx: e.clientX, cy: e.clientY, moved: false, fore: JSON.stringify(S) };
       }
+    } else if (e.target.closest('[data-fkant]')) {
+      const [id, sida] = e.target.closest('[data-fkant]').dataset.fkant.split(',');
+      const v = r.vagg.find(x => x.id === id), L = vaggLen(v);
+      ui.grupp = []; ui.val = id;
+      ui.drag = { kind: 'fonster', id, fast: sida === '1' ? v.t - L / 2 : v.t + L / 2, sida: +sida, cx: e.clientX, cy: e.clientY, moved: false, fore: JSON.stringify(S) };
     } else if (vEl) {
       ui.grupp = []; ui.val = vEl.dataset.vagg;
       ui.drag = { kind: 'vagg', id: vEl.dataset.vagg, cx: e.clientX, cy: e.clientY, moved: false, fore: JSON.stringify(S) };
@@ -1521,6 +1636,15 @@ window.addEventListener('pointermove', e => {
     const it = r.items.find(i => i.id === d.id); if (!it) return;
     it.x = snap(x + d.dx); it.y = snap(y + d.dy); hallInne(it, r);
     if (!e.altKey) { snappa(it, r); hallInne(it, r); }
+    ritaPlan();
+  } else if (d.kind === 'fonster') {
+    // Den andra änden står still; fönstret får inte bli kortare än 40 cm eller gå utanför väggen.
+    const v = r.vagg.find(i => i.id === d.id); if (!v) return;
+    const lang = v.wall === 'n' || v.wall === 's', vagg = lang ? r.W : r.D;
+    const pos = snap(lang ? x : y);
+    const ande = d.sida > 0 ? clamp(pos, d.fast + FONSTER_MIN, vagg) : clamp(pos, 0, d.fast - FONSTER_MIN);
+    v.len = Math.abs(ande - d.fast); v.t = (ande + d.fast) / 2;
+    visaTips(`Fönstret är ${fmtM(v.len)}`);
     ritaPlan();
   } else if (d.kind === 'grupp') {
     const g = gruppen();
@@ -1570,7 +1694,7 @@ window.addEventListener('pointermove', e => {
     if (d.sx) trangIn(r, 'x', d.sx, d);
     if (d.sy) trangIn(r, 'y', d.sy, d);
     for (const it of r.items) hallInne(it, r);
-    for (const v of r.vagg) { const L = VAGGTYP[v.typ].len, langd = (v.wall === 'n' || v.wall === 's') ? r.W : r.D; v.t = clamp(v.t, L / 2, langd - L / 2); }
+    for (const v of r.vagg) { const L = vaggLen(v), langd = (v.wall === 'n' || v.wall === 's') ? r.W : r.D; v.t = clamp(v.t, L / 2, langd - L / 2); }
     visaTips(`Salen är ${fmtM(r.W)} × ${fmtM(r.D)}`);
     ritaPlan();
   } else if (d.kind === 'storlek') {
@@ -1616,7 +1740,7 @@ window.addEventListener('pointerup', e => {
     if (v && v.typ === 'dorr') { minns(); v.spegel = !v.spegel; spara(); }
   }
   if (d.kind === 'ram') { ui.ram = null; ritaPlan(); ritaStatus(); return; }
-  if (d.kind === 'item' || d.kind === 'vagg' || d.kind === 'storlek' || d.kind === 'rumstorlek' || d.kind === 'grupp') {
+  if (d.kind === 'item' || d.kind === 'vagg' || d.kind === 'storlek' || d.kind === 'rumstorlek' || d.kind === 'grupp' || d.kind === 'fonster') {
     if (d.moved) { angraStack.push(d.fore); if (angraStack.length > 40) angraStack.shift(); $('angraBtn').hidden = false; spara(); ritaPanel(); ritaStatus(); }
     ritaPlan();
     return;
@@ -1812,6 +1936,13 @@ panel.addEventListener('keydown', e => {
 panel.addEventListener('click', e => {
   const b = e.target.closest('[data-act]'); if (!b) return;
   const act = b.dataset.act, r = rum(), k = klass();
+  if (act === 'fAntal+' || act === 'fAntal-') {
+    S.inst.forslagAntal = clamp(forslagAntal() + (act === 'fAntal+' ? 1 : -1), 1, 80); ui.forslagSvar = null; spara(); ritaPanel(); return;
+  }
+  if (act === 'fAvst+' || act === 'fAvst-') {
+    S.inst.forslagAvst = clamp((S.inst.forslagAvst ?? 1) + (act === 'fAvst+' ? 0.5 : -0.5), 0, 5); ui.forslagSvar = null; spara(); ritaPanel(); return;
+  }
+  if (act === 'foresla') { foresla(); return; }
   if (act === 'enkel+' || act === 'enkel-') {
     minns();
     const nu = r.items.filter(i => i.typ === 'enkel').length;
@@ -1826,7 +1957,7 @@ panel.addEventListener('click', e => {
     const steg = dim[2] === '+' ? 50 : -50;
     if (dim[1] === 'W') r.W = clamp(r.W + steg, MIN_W, MAX_W); else r.D = clamp(r.D + steg, MIN_D, MAX_D);
     for (const it of r.items) hallInne(it, r);
-    for (const v of r.vagg) { const L = VAGGTYP[v.typ].len, langd = (v.wall === 'n' || v.wall === 's') ? r.W : r.D; v.t = clamp(v.t, L / 2, langd - L / 2); }
+    for (const v of r.vagg) { const L = vaggLen(v), langd = (v.wall === 'n' || v.wall === 's') ? r.W : r.D; v.t = clamp(v.t, L / 2, langd - L / 2); }
     spara(); allt(); return;
   }
   switch (act) {
@@ -1915,6 +2046,8 @@ panel.addEventListener('change', e => {
   } else if (t.id === 'klassSel') {
     if (t.value === '__ny') nyKlassDialog();
     else { S.klassId = t.value; spara(); allt(); }
+  } else if (t.id === 'forslagAntal') {
+    S.inst.forslagAntal = clamp(Math.round(+t.value) || 1, 1, 80); ui.forslagSvar = null; spara(); ritaPanel();
   } else if (t.id === 'antalEnkel') {
     minns();
     const res = stallAntal(r, 'enkel', +t.value);
@@ -1933,7 +2066,7 @@ panel.addEventListener('change', e => {
   }
 });
 panel.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && (e.target.id === 'rumNamn' || e.target.id === 'klassNamn' || e.target.id === 'antalEnkel' || e.target.classList.contains('enamn'))) e.target.blur();
+  if (e.key === 'Enter' && (e.target.id === 'rumNamn' || e.target.id === 'klassNamn' || e.target.id === 'antalEnkel' || e.target.id === 'forslagAntal' || e.target.classList.contains('enamn'))) e.target.blur();
 });
 function nyKlassDialog() {
   minns();

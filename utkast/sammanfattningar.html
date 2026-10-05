@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Sammanfattningar i rotation — Fysiklabbet</title>
+<meta name="description" content="Utkast: välj kurs och kapitel, så visas avsnittens sammanfattningar en i taget i ett rullande bildspel.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script>window.__CB = String(Date.now());</script>
+<script>document.write('<link rel="stylesheet" href="../styles-laborans.css?v=' + window.__CB + '">');</script>
+<!--
+  Sammanfattningar i rotation (utkast, 2026-10-05)
+
+  Välj en kurs och ett eller flera av dess kapitel, så visas
+  ::: sammanfattning-rutorna ur kapitlens avsnitt en i taget och byts av
+  sig själva efter en inställbar tid. Tänkt för en skärm i klassrummet
+  eller korridoren inför ett prov.
+
+  Kurser, kapitel och avsnittstitlar läses ur data/katalog.js
+  (KATALOG_FLAT, så dolda kurser kommer inte med) och innehållet ur
+  data/teori/bundle.js, så sidan följer med när en genomgång skrivs om
+  (kör data/teori/build.js som vanligt). Härledda kurser (Ma 1b, Ma 2b)
+  och de delade kraftmomentsavsnitten i Fy 1 slås upp via aliaskartorna,
+  precis som i katalog.html. Avsnitt utan ::: sammanfattning-ruta (till
+  exempel kapitlens egna sammanfattningsavsnitt X.S) hoppas över, och
+  kapitel utan en enda ruta visas inte i valet.
+
+  Renderingen är en avskalad kopia av katalog.html: protectMath →
+  preprocessBlocks → marked → restoreMath → KaTeX, med samma klasser
+  (.lab-block-sammanfattning/.lab-block-sampunkt) och samma
+  storleksanpassning som presentationsläget (fitSammanfattning): rutan
+  krymps om den är för hög eller ett kort spiller i sidled, och växer så
+  länge det finns luft kvar. Bilderna renderas först när deras kapitel
+  väljs.
+
+  Adressparametrar (skrivs om när valet ändras, så adressen går att
+  dela): ?kurs=ma4&kap=1,4&tid=45. Utan kurs öppnas valrutan.
+  Den äldre adressen sammanfattningar-ma4.html vidarebefordrar hit.
+-->
+<style>
+html, body { height: 100%; }
+body.laborans { overflow: hidden; }
+
+.rot {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    background: var(--lab-bg);
+}
+
+/* --- Slidens huvud: kurs och kapitel, sedan avsnittets titel --- */
+.rot-scen {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 2.2vh 3vw 1.2vh;
+    box-sizing: border-box;
+}
+/* Dolda bilder har display: none, inte bara visibility: hidden: med
+   hela kursen vald ligger hundratals bilder i DOM:en, och synliga i
+   layouten gjorde de varje mätning i anpassa() så tung att sidan hängde. */
+.rot-slide {
+    position: absolute;
+    inset: 2.2vh 3vw 1.2vh;
+    display: none; flex-direction: column;
+}
+.rot-slide.is-on {
+    display: flex;
+    animation: rot-in 0.6s ease;
+}
+@keyframes rot-in { from { opacity: 0; } to { opacity: 1; } }
+.rot-huvud {
+    display: flex; align-items: baseline; gap: 18px;
+    margin: 0 0 1.4vh;
+    flex: 0 0 auto;
+}
+.rot-nr {
+    font-family: var(--lab-font-mono);
+    font-size: clamp(14px, 1.6vw, 22px);
+    color: var(--lab-accent);
+    font-weight: 500;
+}
+.rot-titel {
+    font-family: var(--lab-font-display);
+    font-size: clamp(26px, 3.1vw, 46px);
+    line-height: 1.1;
+    margin: 0;
+    font-weight: 400;
+}
+.rot-titel em { font-style: italic; }
+.rot-kapitel {
+    margin-left: auto;
+    font-family: var(--lab-font-mono);
+    font-size: clamp(10px, 0.9vw, 13px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lab-ink-muted);
+    text-align: right;
+    white-space: nowrap;
+}
+.rot-yta { flex: 1 1 auto; min-height: 0; }
+
+/* Rutan fyller bredden. Rubriken "Sammanfattning" behövs inte: slidens
+   huvud säger redan vad det är. */
+.rot .lab-block-sammanfattning {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.55;
+    gap: 14px;
+    box-sizing: border-box;
+}
+.rot .lab-block-sammanfattning > .lab-block-title { display: none; }
+
+.rot-tom {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--lab-font-display);
+    font-size: clamp(22px, 2.4vw, 34px);
+    color: var(--lab-ink-muted);
+    text-align: center;
+    padding: 0 6vw;
+}
+
+/* --- Kontrollisten --- */
+.rot-lista {
+    flex: 0 0 auto;
+    display: flex; align-items: center; gap: 10px;
+    flex-wrap: wrap;
+    padding: 10px 3vw 12px;
+    border-top: 1px solid var(--lab-line);
+    background: var(--lab-bg-raised);
+    font-family: var(--lab-font-mono);
+    font-size: 12px;
+    color: var(--lab-ink-soft);
+    position: relative;
+}
+.rot-tidlinje {
+    position: absolute; left: 0; top: -1px; height: 3px;
+    width: 100%;
+    background: var(--lab-accent);
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 0.1s linear;
+}
+.rot-knapp {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px;
+    border: 1px solid var(--lab-line-strong);
+    border-radius: 50%;
+    background: var(--lab-bg-panel);
+    color: var(--lab-ink);
+    cursor: pointer;
+    padding: 0;
+}
+.rot-knapp:hover, .rot-valknapp:hover { border-color: var(--lab-ink); }
+.rot-knapp:focus-visible, .rot-valknapp:focus-visible { outline: 2px solid var(--lab-accent-2); outline-offset: 2px; }
+.rot-raknare { min-width: 64px; text-align: center; }
+.rot-valknapp {
+    font: inherit;
+    color: var(--lab-ink);
+    background: var(--lab-bg-panel);
+    border: 1px solid var(--lab-line-strong);
+    border-radius: 3px;
+    padding: 7px 10px;
+    cursor: pointer;
+    max-width: 46vw;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.rot-lista label { display: inline-flex; align-items: center; gap: 6px; }
+.rot-lista select, .rot-val select {
+    font: inherit;
+    color: var(--lab-ink);
+    background: var(--lab-bg-panel);
+    border: 1px solid var(--lab-line-strong);
+    border-radius: 3px;
+    padding: 5px 6px;
+}
+.rot-hoger { margin-left: auto; display: inline-flex; align-items: center; gap: 12px; }
+.rot-lista a { color: var(--lab-accent-2); text-decoration: underline; text-underline-offset: 3px; }
+.rot-utkast {
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--lab-accent); font-size: 11px;
+}
+
+/* --- Valrutan: kurs och kapitel --- */
+.rot-val-bakgrund {
+    position: fixed; inset: 0;
+    background: rgba(15, 22, 32, 0.32);
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px;
+    z-index: 10;
+}
+.rot-val-bakgrund[hidden] { display: none; }
+.rot-val {
+    width: min(560px, 100%);
+    max-height: calc(100vh - 32px);
+    display: flex; flex-direction: column;
+    background: var(--lab-bg-panel);
+    border: 1px solid var(--lab-line-strong);
+    border-radius: 6px;
+    box-shadow: 0 18px 50px rgba(15, 22, 32, 0.22);
+    box-sizing: border-box;
+}
+.rot-val-topp { padding: 20px 22px 12px; border-bottom: 1px solid var(--lab-line); }
+.rot-val h2 {
+    font-family: var(--lab-font-display);
+    font-weight: 400;
+    font-size: 30px;
+    margin: 0 0 4px;
+}
+.rot-val-ingress { margin: 0 0 14px; color: var(--lab-ink-soft); font-size: 15px; }
+.rot-val-kurs {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--lab-font-mono); font-size: 12px;
+    color: var(--lab-ink-soft);
+}
+.rot-val-kurs select { flex: 1 1 auto; font-size: 14px; padding: 7px 8px; }
+.rot-val-kapitel {
+    list-style: none; margin: 0; padding: 8px 12px;
+    overflow-y: auto;
+    flex: 1 1 auto;
+}
+.rot-val-kapitel label {
+    display: flex; align-items: baseline; gap: 10px;
+    padding: 8px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.rot-val-kapitel label:hover { background: var(--lab-bg); }
+.rot-val-kapitel input { accent-color: var(--lab-accent-2); transform: translateY(1px); }
+.rot-val-kapnr { font-family: var(--lab-font-mono); font-size: 13px; color: var(--lab-accent); min-width: 1.6em; }
+.rot-val-antal { margin-left: auto; font-family: var(--lab-font-mono); font-size: 12px; color: var(--lab-ink-muted); white-space: nowrap; }
+.rot-val-fot {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 12px 22px 18px;
+    border-top: 1px solid var(--lab-line);
+    font-family: var(--lab-font-mono); font-size: 12px;
+}
+.rot-val-fot .rot-lank {
+    font: inherit; background: none; border: 0; padding: 0;
+    color: var(--lab-accent-2); text-decoration: underline; text-underline-offset: 3px;
+    cursor: pointer;
+}
+.rot-val-summa { color: var(--lab-ink-muted); }
+.rot-starta {
+    margin-left: auto;
+    font: inherit; font-size: 13px; letter-spacing: 0.06em;
+    color: #fff;
+    background: var(--lab-accent-2);
+    border: 1px solid var(--lab-accent-2);
+    border-radius: 3px;
+    padding: 9px 18px;
+    cursor: pointer;
+}
+.rot-starta:disabled { opacity: 0.4; cursor: default; }
+
+/* Smal eller stående skärm: ingen helsidesanpassning, rutan får skrolla
+   (samma undantag som presentationsläget i katalogen). */
+@media (max-width: 899px), (orientation: portrait) {
+    body.laborans { overflow: auto; }
+    .rot { position: static; min-height: 100%; }
+    .rot-scen { min-height: 60vh; }
+    .rot-slide { position: static; }
+    .rot-huvud { flex-wrap: wrap; gap: 4px 12px; }
+    .rot-kapitel { margin-left: 0; width: 100%; text-align: left; white-space: normal; order: -1; }
+    .rot-lista { position: sticky; bottom: 0; }
+    .rot-hoger { margin-left: 0; width: 100%; justify-content: space-between; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .rot-slide.is-on { animation: none; }
+}
+.rot-fel { padding: 40px 3vw; font-size: 17px; }
+</style>
+</head>
+<body class="laborans">
+<div class="rot" id="rot">
+    <div class="rot-scen" id="scen"></div>
+    <div class="rot-lista">
+        <div class="rot-tidlinje" id="tidlinje"></div>
+        <button class="rot-knapp" id="bak" aria-label="Föregående sammanfattning" title="Föregående (vänsterpil)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button class="rot-knapp" id="spela" aria-label="Pausa" title="Pausa (mellanslag)"></button>
+        <button class="rot-knapp" id="fram" aria-label="Nästa sammanfattning" title="Nästa (högerpil)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+        <span class="rot-raknare" id="raknare">0 / 0</span>
+        <button class="rot-valknapp" id="oppnaVal" title="Välj kurs och kapitel (K)">Välj kapitel</button>
+        <label>Visningstid
+            <select id="tid">
+                <option value="15">15 s</option>
+                <option value="30">30 s</option>
+                <option value="45">45 s</option>
+                <option value="60">1 min</option>
+                <option value="90">1,5 min</option>
+                <option value="120">2 min</option>
+            </select>
+        </label>
+        <span class="rot-hoger">
+            <a id="oppna" href="#" target="_blank" rel="noopener">Öppna genomgången</a>
+            <span class="rot-utkast">Utkast</span>
+            <button class="rot-knapp" id="helskarm" aria-label="Helskärm" title="Helskärm (F)"></button>
+        </span>
+    </div>
+</div>
+
+<div class="rot-val-bakgrund" id="valBakgrund" hidden>
+    <div class="rot-val" role="dialog" aria-modal="true" aria-labelledby="valRubrik">
+        <div class="rot-val-topp">
+            <h2 id="valRubrik">Välj kapitel</h2>
+            <p class="rot-val-ingress">Sammanfattningarna i de kapitel du kryssar i visas en i taget, i avsnittsordning.</p>
+            <label class="rot-val-kurs">Kurs <select id="kurs"></select></label>
+        </div>
+        <ul class="rot-val-kapitel" id="kapitellista"></ul>
+        <div class="rot-val-fot">
+            <button class="rot-lank" id="markeraAlla">Markera alla</button>
+            <button class="rot-lank" id="markeraInga">Inga</button>
+            <span class="rot-val-summa" id="valSumma"></span>
+            <button class="rot-starta" id="starta">Starta</button>
+        </div>
+    </div>
+</div>
+
+<script>document.write('<scr' + 'ipt src="../data/katalog.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+<script>document.write('<scr' + 'ipt src="../data/teori/bundle.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+<script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+(function () {
+    'use strict';
+    const TEORI = window.TEORI || {};
+    const KF = window.KATALOG_FLAT || [];
+    const ALIAS = Object.assign({}, window.MA1B_ALIAS, window.MA2B_ALIAS, window.FY1_ALIAS);
+
+    // Samma kurskoder som courseCode() i katalog.html.
+    const KURSKOD = {
+        'Fysik nivå 1': 'fy1',
+        'Fysik nivå 2': 'fy2',
+        'Matematik nivå 1b': 'ma1b',
+        'Matematik nivå 1c': 'ma1c',
+        'Matematik nivå 2b': 'ma2b',
+        'Matematik nivå 2c': 'ma2c',
+        'Matematik fortsättning nivå 1c': 'ma3c',
+        'Matematik fortsättning nivå 2': 'ma4',
+    };
+
+    const IKON_PAUS = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+    const IKON_SPELA = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>';
+    const IKON_FS_IN = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+    const IKON_FS_UT = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+
+    // ---------- Rendering (avskalad kopia av katalog.html) ----------
+
+    function protectMath(md) {
+        const tokens = [];
+        md = md.replace(/\$\$([\s\S]+?)\$\$/g, (m) => { tokens.push(m); return '@@LABMATH' + (tokens.length - 1) + '@@'; });
+        md = md.replace(/\$([^\n$]+?)\$/g, (m) => { tokens.push(m); return '@@LABMATH' + (tokens.length - 1) + '@@'; });
+        return { md, tokens };
+    }
+    function restoreMath(html, tokens) {
+        html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
+        // Samma nowrap-omslag som i katalogen: parentes + formel och
+        // variabel + bindestreck + efterled ("$n$-hörning").
+        html = html.replace(/\(( *)(\$(?!\$)[^$\n]+?\$)/g, '<span class="math-paren">($1$2</span>');
+        html = html.replace(/(\$(?!\$)[^$\n]+?\$|<em>[^<]{1,8}<\/em>)-([a-zA-Zåäöé]+)/g,
+            '<span class="var-compound">$1-$2</span>');
+        return html;
+    }
+    function escapeHtml(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    function emTitel(s) {
+        return escapeHtml(s).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    }
+    // ::: typ "Titel" … ::: → blockrutor (bara de typer en sammanfattning har).
+    function preprocessBlocks(md) {
+        const out = [];
+        const stack = [];
+        for (const line of md.split('\n')) {
+            const open = line.match(/^:::\s*([a-zåäö]+)(?:\s+"([^"]*)")?\s*$/i);
+            if (open) {
+                const ty = open[1].toLowerCase();
+                stack.push(ty);
+                out.push('<div class="lab-block lab-block-' + ty + '">');
+                if (open[2]) out.push('<div class="lab-block-title">' + emTitel(open[2]) + '</div>');
+                out.push('');
+            } else if (/^:::\s*$/.test(line) && stack.length) {
+                stack.pop();
+                out.push('', '</div>');
+            } else {
+                out.push(line);
+            }
+        }
+        return out.join('\n');
+    }
+    function utanFrontmatter(md) {
+        md = md.replace(/\r\n?/g, '\n');
+        if (!md.startsWith('---\n')) return md;
+        const end = md.indexOf('\n---\n', 4);
+        return end === -1 ? md : md.slice(end + 5);
+    }
+    // Plocka ut ::: sammanfattning-rutan, med de nästlade sampunkt-korten.
+    function hamtaSammanfattning(md) {
+        const rader = utanFrontmatter(md).split('\n');
+        const start = rader.findIndex(r => /^:::\s*sammanfattning\b/i.test(r));
+        if (start === -1) return null;
+        let djup = 0;
+        for (let i = start; i < rader.length; i++) {
+            if (/^:::\s*[a-zåäö]/i.test(rader[i])) djup++;
+            else if (/^:::\s*$/.test(rader[i])) {
+                djup--;
+                if (djup === 0) return rader.slice(start, i + 1).join('\n');
+            }
+        }
+        return rader.slice(start).join('\n');
+    }
+
+    marked.setOptions({ gfm: true, breaks: false });
+
+    // ---------- Kurser, kapitel och avsnitt ur katalogen ----------
+    // KURSER: [{ namn, kod, kapitel: [{ nr, namn, avsnitt: [...] }] }]
+    // Bara avsnitt som faktiskt har en sammanfattningsruta tas med.
+
+    const KURSER = [];
+    for (const s of KF) {
+        const kod = KURSKOD[s.course];
+        if (!kod) continue;
+        const id = kod + '-' + s.num;
+        const md = TEORI[id] !== undefined ? TEORI[id] : TEORI[ALIAS[id]];
+        const sam = md ? hamtaSammanfattning(md) : null;
+        if (!sam) continue;
+        let kurs = KURSER.find(k => k.kod === kod);
+        if (!kurs) { kurs = { namn: s.course, kod, kapitel: [] }; KURSER.push(kurs); }
+        const nr = String(s.chapterNumber);
+        let kap = kurs.kapitel.find(k => k.nr === nr);
+        if (!kap) { kap = { nr, namn: s.chapter, avsnitt: [] }; kurs.kapitel.push(kap); }
+        kap.avsnitt.push({ id, kurs: s.course, kap: nr, kapitel: s.chapter, nr: s.num, titel: s.title, md: sam, el: null, ruta: null });
+    }
+    // Avsnitt som 3.S eller 3.E (inget tal efter punkten) läggs sist.
+    const avsnittsNr = (a) => { const n = Number(String(a.nr).split('.')[1]); return isNaN(n) ? 999 : n; };
+    for (const kurs of KURSER) {
+        kurs.kapitel.sort((a, b) => Number(a.nr) - Number(b.nr));
+        for (const kap of kurs.kapitel) kap.avsnitt.sort((a, b) => avsnittsNr(a) - avsnittsNr(b));
+    }
+
+    const scen = document.getElementById('scen');
+    if (!KURSER.length) {
+        scen.innerHTML = '<p class="rot-fel">Inga sammanfattningar kunde läsas in. Öppna sidan via webbservern, till exempel http://localhost:8000/utkast/sammanfattningar.html.</p>';
+        return;
+    }
+
+    // Bilden byggs första gången avsnittet visas i ett valt kapitel.
+    function bygg(a) {
+        if (a.el) return;
+        const el = document.createElement('section');
+        el.className = 'rot-slide';
+        const { md, tokens } = protectMath(a.md);
+        el.innerHTML =
+            '<header class="rot-huvud">' +
+                '<span class="rot-nr">' + escapeHtml(a.nr) + '</span>' +
+                '<h1 class="rot-titel">' + emTitel(a.titel) + '</h1>' +
+                '<span class="rot-kapitel">' + escapeHtml(a.kurs) + '<br>Kapitel ' +
+                    escapeHtml(a.kap) + ' · ' + escapeHtml(a.kapitel) + '</span>' +
+            '</header>' +
+            '<div class="rot-yta">' + restoreMath(marked.parse(preprocessBlocks(md)), tokens) + '</div>';
+        renderMathInElement(el, {
+            delimiters: [
+                { left: '$$', right: '$$', display: true },
+                { left: '$', right: '$', display: false },
+            ],
+            throwOnError: false,
+        });
+        scen.appendChild(el);
+        a.el = el;
+        a.ruta = el.querySelector('.lab-block-sammanfattning');
+    }
+
+    // ---------- Storleksanpassning (som fitSammanfattning i katalogen) ----------
+
+    const SAM_MIN = 12, SAM_MAX = 34;
+    const SAM_KOLUMNER = { 1: 1, 2: 2, 3: 3, 4: 2, 5: 3, 6: 3, 7: 4, 8: 4 };
+    const helsida = () => window.innerWidth >= 900 && window.innerWidth >= window.innerHeight;
+
+    function anpassa(a) {
+        const el = a && a.ruta;
+        if (!el) return;
+        el.style.fontSize = '';
+        el.style.gridTemplateColumns = '';
+        el.style.gridTemplateRows = '';
+        el.style.gridAutoRows = '';
+        el.style.height = '';
+        if (!helsida()) return;
+        const kortlista = el.querySelectorAll(':scope > .lab-block-sampunkt');
+        if (kortlista.length) el.style.gridTemplateColumns = 'repeat(' + (SAM_KOLUMNER[kortlista.length] || 4) + ', minmax(0, 1fr))';
+        const maxH = el.parentElement.clientHeight;
+        // För stor: rutan är högre än ytan, ELLER ett kort spiller i sidled.
+        // En lång inline-formel bryts aldrig (nowrap) och klipps annars av
+        // kortets högerkant (de Moivres formel i ma4-4.8).
+        const forStor = () => el.getBoundingClientRect().height > maxH ||
+            [...kortlista].some(k => k.scrollWidth > k.clientWidth + 1);
+        let size = 17;
+        el.style.fontSize = size + 'px';
+        while (size > SAM_MIN && forStor()) {
+            size -= 0.5;
+            el.style.fontSize = size + 'px';
+        }
+        while (size < SAM_MAX) {
+            el.style.fontSize = (size + 0.5) + 'px';
+            if (forStor()) { el.style.fontSize = size + 'px'; break; }
+            size += 0.5;
+        }
+        // Slår texten i taket med yta kvar fördelas luften i korten i
+        // stället för att samlas som ett tomt band i underkant.
+        if (size >= SAM_MAX && el.getBoundingClientRect().height < maxH) {
+            el.style.gridAutoRows = '1fr';
+            el.style.height = maxH + 'px';
+        }
+    }
+
+    // ---------- Valet: kurs och kapitel ----------
+
+    const $ = (id) => document.getElementById(id);
+    const kursSel = $('kurs'), tidSel = $('tid');
+    for (const k of KURSER) {
+        const o = document.createElement('option');
+        o.value = k.kod; o.textContent = k.namn;
+        kursSel.appendChild(o);
+    }
+
+    let valdKurs = null;          // kurskod som spelas
+    let valdaKap = [];            // kapitelnummer (strängar) som spelas
+
+    function ritaKapitellista(kod, ikryssade) {
+        const kurs = KURSER.find(k => k.kod === kod);
+        const ul = $('kapitellista');
+        ul.innerHTML = '';
+        for (const kap of kurs.kapitel) {
+            const li = document.createElement('li');
+            const n = kap.avsnitt.length;
+            li.innerHTML = '<label><input type="checkbox" value="' + escapeHtml(kap.nr) + '"' +
+                (ikryssade.includes(kap.nr) ? ' checked' : '') + '>' +
+                '<span class="rot-val-kapnr">' + escapeHtml(kap.nr) + '</span>' +
+                '<span>' + emTitel(kap.namn) + '</span>' +
+                '<span class="rot-val-antal">' + n + (n === 1 ? ' sammanfattning' : ' sammanfattningar') + '</span></label>';
+            ul.appendChild(li);
+        }
+        uppdateraSumma();
+    }
+    function kryssade() {
+        return [...$('kapitellista').querySelectorAll('input:checked')].map(i => i.value);
+    }
+    function uppdateraSumma() {
+        const kurs = KURSER.find(k => k.kod === kursSel.value);
+        const val = kryssade();
+        const n = kurs.kapitel.filter(k => val.includes(k.nr)).reduce((s, k) => s + k.avsnitt.length, 0);
+        $('valSumma').textContent = val.length ? n + (n === 1 ? ' sammanfattning' : ' sammanfattningar') : 'Inget kapitel valt';
+        $('starta').disabled = !val.length;
+    }
+    function oppnaVal() {
+        kursSel.value = valdKurs || KURSER[0].kod;
+        ritaKapitellista(kursSel.value, valdKurs ? valdaKap : []);
+        $('valBakgrund').hidden = false;
+        const forsta = $('kapitellista').querySelector('input');
+        (forsta || kursSel).focus();
+    }
+    function stangVal() {
+        if (!valdKurs) return;   // utan val finns inget att visa bakom rutan
+        $('valBakgrund').hidden = true;
+        $('oppnaVal').focus();
+    }
+
+    kursSel.onchange = () => ritaKapitellista(kursSel.value, kursSel.value === valdKurs ? valdaKap : []);
+    $('kapitellista').addEventListener('change', uppdateraSumma);
+    $('markeraAlla').onclick = () => { $('kapitellista').querySelectorAll('input').forEach(i => { i.checked = true; }); uppdateraSumma(); };
+    $('markeraInga').onclick = () => { $('kapitellista').querySelectorAll('input').forEach(i => { i.checked = false; }); uppdateraSumma(); };
+    $('starta').onclick = () => {
+        const val = kryssade();
+        if (!val.length) return;
+        valdKurs = kursSel.value;
+        valdaKap = val;
+        $('valBakgrund').hidden = true;
+        byggLista();
+        visa(0);
+        satSpelar(true);
+        skrivAdress();
+    };
+    $('oppnaVal').onclick = oppnaVal;
+    $('valBakgrund').addEventListener('click', (e) => { if (e.target === $('valBakgrund')) stangVal(); });
+
+    // ---------- Bildspelet ----------
+
+    let lista = [], pos = 0, spelar = true;
+    let startTid = 0, forbrukat = 0;   // ms av aktuell visningstid som gått
+    const varaktighet = () => parseInt(tidSel.value, 10) * 1000;
+
+    function byggLista() {
+        const kurs = KURSER.find(k => k.kod === valdKurs);
+        lista = kurs ? kurs.kapitel.filter(k => valdaKap.includes(k.nr)).flatMap(k => k.avsnitt) : [];
+        lista.forEach(bygg);
+        const kort = kurs ? kurs.kod.replace(/^ma/, 'Ma ').replace(/^fy/, 'Fy ') : '';
+        $('oppnaVal').textContent = kurs
+            ? kort + ' · kapitel ' + valdaKap.join(', ')
+            : 'Välj kapitel';
+    }
+    function visa(i) {
+        if (!lista.length) {
+            scen.querySelectorAll('.rot-slide.is-on').forEach(s => s.classList.remove('is-on'));
+            $('raknare').textContent = '0 / 0';
+            return;
+        }
+        const tom = scen.querySelector('.rot-tom');
+        if (tom) tom.remove();
+        pos = (i + lista.length) % lista.length;
+        const a = lista[pos];
+        scen.querySelectorAll('.rot-slide').forEach(s => s.classList.toggle('is-on', s === a.el));
+        anpassa(a);
+        if (!helsida()) window.scrollTo(0, 0);   // smal skärm: sidan skrollar
+        $('raknare').textContent = (pos + 1) + ' / ' + lista.length;
+        $('oppna').href = '../katalog.html?id=' + a.id + '&block=sammanfattning';
+        forbrukat = 0;
+        startTid = performance.now();
+    }
+    function satSpelar(v) {
+        spelar = v;
+        if (v) startTid = performance.now() - forbrukat;
+        $('spela').innerHTML = v ? IKON_PAUS : IKON_SPELA;
+        $('spela').setAttribute('aria-label', v ? 'Pausa' : 'Spela');
+        $('spela').title = (v ? 'Pausa' : 'Spela') + ' (mellanslag)';
+    }
+    // En vanlig timer, inte requestAnimationFrame: rAF står still när
+    // fliken eller fönstret är dolt, och då slutar bildspelet att rulla.
+    // Medan valrutan är öppen står klockan still.
+    function tick() {
+        const nu = performance.now();
+        const valOppen = !$('valBakgrund').hidden;
+        if (spelar && lista.length > 1 && !valOppen) {
+            forbrukat = nu - startTid;
+            if (forbrukat >= varaktighet()) visa(pos + 1);
+        } else if (valOppen) {
+            startTid = nu - forbrukat;
+        }
+        $('tidlinje').style.transform = 'scaleX(' + Math.min(1, forbrukat / varaktighet()) + ')';
+    }
+
+    // Adressen speglar valet, så att den går att dela eller bokmärka.
+    function skrivAdress() {
+        const p = new URLSearchParams();
+        if (valdKurs) { p.set('kurs', valdKurs); p.set('kap', valdaKap.join(',')); }
+        p.set('tid', tidSel.value);
+        history.replaceState(null, '', location.pathname + '?' + p.toString().replace(/%2C/g, ','));
+    }
+
+    $('bak').onclick = () => visa(pos - 1);
+    $('fram').onclick = () => visa(pos + 1);
+    $('spela').onclick = () => satSpelar(!spelar);
+    tidSel.onchange = () => { forbrukat = 0; startTid = performance.now(); skrivAdress(); };
+
+    function uppdateraFsIkon() {
+        const fs = !!document.fullscreenElement;
+        $('helskarm').innerHTML = fs ? IKON_FS_UT : IKON_FS_IN;
+        $('helskarm').title = fs ? 'Lämna helskärm (F)' : 'Helskärm (F)';
+    }
+    function vaxlaHelskarm() {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+    }
+    $('helskarm').onclick = vaxlaHelskarm;
+    document.addEventListener('fullscreenchange', uppdateraFsIkon);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.altKey || e.ctrlKey || e.metaKey) return;
+        if (!$('valBakgrund').hidden) {
+            if (e.key === 'Escape') stangVal();
+            return;
+        }
+        if (e.target.tagName === 'SELECT') return;
+        if (e.key === 'ArrowRight' || e.key === 'PageDown') { visa(pos + 1); e.preventDefault(); }
+        else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { visa(pos - 1); e.preventDefault(); }
+        else if (e.key === ' ') { satSpelar(!spelar); e.preventDefault(); }
+        else if (e.key === 'f' || e.key === 'F') vaxlaHelskarm();
+        else if (e.key === 'k' || e.key === 'K') oppnaVal();
+    });
+
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => anpassa(lista[pos]), 120);
+    });
+    // Teckensnitten ändrar textens bredd; mät om när de laddats.
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => anpassa(lista[pos]));
+
+    // ---------- Start: valet ur adressen, annars valrutan ----------
+
+    const params = new URLSearchParams(location.search);
+    const tidParam = parseInt(params.get('tid'), 10);
+    if (tidParam >= 5 && tidParam <= 600) {
+        if (![...tidSel.options].some(o => o.value === String(tidParam))) {
+            const o = document.createElement('option');
+            o.value = String(tidParam); o.textContent = tidParam + ' s';
+            tidSel.appendChild(o);
+        }
+        tidSel.value = String(tidParam);
+    } else {
+        tidSel.value = '30';
+    }
+    const kursParam = KURSER.find(k => k.kod === params.get('kurs'));
+    if (kursParam) {
+        const finns = kursParam.kapitel.map(k => k.nr);
+        const kapParam = (params.get('kap') || '').split(',').map(s => s.trim()).filter(s => finns.includes(s));
+        valdKurs = kursParam.kod;
+        valdaKap = kapParam.length ? kapParam : finns;   // inget kapitel angivet: hela kursen
+    }
+
+    uppdateraFsIkon();
+    satSpelar(true);
+    byggLista();
+    if (valdKurs) {
+        visa(0);
+    } else {
+        scen.innerHTML = '<p class="rot-tom">Välj en kurs och ett eller flera kapitel.</p>';
+        oppnaVal();
+    }
+    setInterval(tick, 100);
+})();
+</script>
+</body>
+</html>

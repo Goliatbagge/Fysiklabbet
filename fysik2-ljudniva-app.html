@@ -579,7 +579,7 @@
                     // referensexempel (ur teorin) i två staplade rader ovanför skalan
                     const refs = [
                         [0, 'hörbarhetsgräns', 0], [20, 'viskning', 1], [60, 'samtal', 0],
-                        [85, 'hörselskaderisk', 1], [130, 'smärtgräns', 0],
+                        [85, 'hörselskaderisk', 1], [120, 'smärtgräns', 0],
                     ];
                     refs.forEach(([db, name, row]) => {
                         const y = row ? BARY - 40 : BARY - 22;
@@ -761,7 +761,7 @@
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Från hörbarhetsgräns till smärtgräns</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                     Örat hör ner till <em>I</em><sub>0</sub> = 10<sup>−12</sup> W/m² — det är 0 dB.
-                                    Smärtgränsen går vid ungefär 1 W/m², alltså 130 dB. Däremellan ryms hela vår
+                                    Smärtgränsen går vid ungefär 1 W/m², alltså 120 dB. Däremellan ryms hela vår
                                     ljudvärld: en viskning kring 20 dB, ett samtal kring 60 dB och risk för
                                     hörselskada från 85 dB vid långvarig exponering.
                                 </p>

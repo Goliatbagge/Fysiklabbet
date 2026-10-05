@@ -6585,13 +6585,13 @@ window.EXITTICKETS = {
   },
   {
     question: 'Vilken ljudnivå motsvarar ungefär den mänskliga smärtgränsen?',
-    choices: ['$130\\ \\mathrm{dB}$', '$30\\ \\mathrm{dB}$', '$60\\ \\mathrm{dB}$', '$100\\ \\mathrm{dB}$'],
+    choices: ['$120\\ \\mathrm{dB}$', '$30\\ \\mathrm{dB}$', '$60\\ \\mathrm{dB}$', '$100\\ \\mathrm{dB}$'],
     correct: 0,
     why: [
-      'Smärtgränsen, där ljud övergår till smärta, ligger vid ungefär $130\\ \\mathrm{dB}$ (motsvarande intensiteten 1 W/m²).',
+      'Smärtgränsen, där ljud övergår till smärta, ligger vid ungefär $120\\ \\mathrm{dB}$ (motsvarande intensiteten 1 W/m²).',
       'Det är en mycket tyst nivå, ungefär bakgrundsljud i ett tyst rum, långt under smärtgränsen.',
       'Det motsvarar ungefär ett samtal på kort avstånd, alltså en normal ljudnivå, inte smärtgränsen.',
-      'Det är hög men fortfarande under smärtgränsen — nivån ligger snarare i närheten av en tryckluftsborr (120 dB).',
+      'Det är en hög ljudnivå, men den ligger fortfarande under smärtgränsen. Intensiteten är bara en hundradel av den vid smärtgränsen.',
     ],
   },
   {

@@ -411,6 +411,35 @@ function trangIn(r, axel, tecken, d) {
   }
   for (const it of r.items) { it.x = r1(it.x); it.y = r1(it.y); }
 }
+/* Antal enkelbänkar: fler ställs ut på lediga ytor framifrån, med mellanrum
+   så att de är lätta att ta tag i; färre tar bort de senast tillagda. */
+function ledigPlats(typ, r, marg) {
+  const b = lokalBox(typ), it = { id: uid(), typ, x: 0, y: 0, rot: 0 };
+  const andra = r.items.map(aabb);
+  const y0 = Math.min(200, r.D / 3);
+  for (let y = y0 - b.y0; y + b.y1 <= r.D - 10; y += 10) {
+    for (let x = 40 - b.x0; x + b.x1 <= r.W - 40; x += 10) {
+      const A = { x0: x + b.x0, x1: x + b.x1, y0: y + b.y0, y1: y + b.y1 };
+      if (!andra.some(C => A.x1 + marg > C.x0 && C.x1 + marg > A.x0 && A.y1 + marg > C.y0 && C.y1 + marg > A.y0)) {
+        it.x = x; it.y = y; return it;
+      }
+    }
+  }
+  return null;
+}
+function stallAntal(r, typ, n) {
+  n = clamp(Math.round(n) || 0, 0, 80);
+  const nu = r.items.filter(i => i.typ === typ);
+  if (n <= nu.length) {
+    const bort = new Set(nu.slice(n).map(i => i.id));
+    r.items = r.items.filter(i => !bort.has(i.id));
+    r.blocked = r.blocked.filter(x => !bort.has(x.split(':')[0]));
+    return { fick: n, ville: n };
+  }
+  let antal = nu.length;
+  while (antal < n) { const it = ledigPlats(typ, r, 30) || ledigPlats(typ, r, 0); if (!it) break; r.items.push(it); antal++; }
+  return { fick: antal, ville: n };
+}
 function hallInne(it, r) {
   const b = aabb(it);
   if (b.x0 < 0) it.x += -b.x0; if (b.x1 > r.W) it.x -= b.x1 - r.W;
@@ -955,6 +984,7 @@ function panelRum() {
   </div>
   <div class="grp">
     <div class="grp-h"><span class="eyebrow">Möbler</span><span class="count"><b>${pl.length - r.blocked.length}</b> platser</span></div>
+    <div class="row" style="margin:0 0 12px">Antal enkelbänkar <span class="stepper"><button data-act="enkel-" aria-label="En enkelbänk färre">−</button><input id="antalEnkel" type="number" min="0" max="80" inputmode="numeric" value="${r.items.filter(i => i.typ === 'enkel').length}" aria-label="Antal enkelbänkar"><button data-act="enkel+" aria-label="En enkelbänk till">+</button></span></div>
     <div class="palett">${PALETT.map(t => {
       const typ = TYPER[t] || VAGGTYP[t];
       const n = TYPER[t] ? TYPER[t].seats.length : 0;
@@ -1782,6 +1812,14 @@ panel.addEventListener('keydown', e => {
 panel.addEventListener('click', e => {
   const b = e.target.closest('[data-act]'); if (!b) return;
   const act = b.dataset.act, r = rum(), k = klass();
+  if (act === 'enkel+' || act === 'enkel-') {
+    minns();
+    const nu = r.items.filter(i => i.typ === 'enkel').length;
+    const res = stallAntal(r, 'enkel', nu + (act === 'enkel+' ? 1 : -1));
+    ui.grupp = []; ui.val = null; spara(); allt();
+    if (res.fick < res.ville) visaTips('Det finns ingen ledig yta för fler bänkar');
+    return;
+  }
   const dim = act.match(/^([WD])([+-])$/);
   if (dim) {
     minns();
@@ -1877,6 +1915,11 @@ panel.addEventListener('change', e => {
   } else if (t.id === 'klassSel') {
     if (t.value === '__ny') nyKlassDialog();
     else { S.klassId = t.value; spara(); allt(); }
+  } else if (t.id === 'antalEnkel') {
+    minns();
+    const res = stallAntal(r, 'enkel', +t.value);
+    avmarkera(); spara(); allt();
+    if (res.fick < res.ville) visaTips(`Det fick bara plats ${res.fick} enkelbänkar i salen`);
   } else if (t.id === 'rumNamn') { minns(); r.namn = t.value.trim() || 'Klassrum'; spara(); allt(); }
   else if (t.id === 'klassNamn') { minns(); k.namn = t.value.trim() || 'Klass'; spara(); allt(); }
   else if (t.id === 'nyaTgl') { S.inst.nya = t.checked; spara(); ritaPanel(); }
@@ -1890,7 +1933,7 @@ panel.addEventListener('change', e => {
   }
 });
 panel.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && (e.target.id === 'rumNamn' || e.target.id === 'klassNamn' || e.target.classList.contains('enamn'))) e.target.blur();
+  if (e.key === 'Enter' && (e.target.id === 'rumNamn' || e.target.id === 'klassNamn' || e.target.id === 'antalEnkel' || e.target.classList.contains('enamn'))) e.target.blur();
 });
 function nyKlassDialog() {
   minns();

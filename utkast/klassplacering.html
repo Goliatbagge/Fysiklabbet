@@ -86,6 +86,9 @@ button, input, select, textarea { font-family: inherit; }
 .stepper { display: inline-flex; align-items: center; border: 1px solid var(--line2); border-radius: 10px; background: #fff; overflow: hidden; flex: none; }
 .stepper button { width: 30px; height: 30px; border: 0; background: none; color: var(--ink); font-size: 17px; line-height: 1; cursor: pointer; }
 .stepper button:hover { background: var(--bg); }
+.stepper input { width: 46px; height: 30px; border: 0; padding: 0; text-align: center; font: 600 13.5px var(--sans); color: var(--ink); background: none; font-variant-numeric: tabular-nums; -moz-appearance: textfield; appearance: textfield; }
+.stepper input::-webkit-inner-spin-button, .stepper input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.stepper input:focus { outline: none; background: var(--blue-soft); }
 .stepper output { min-width: 56px; text-align: center; font: 600 13.5px var(--sans); color: var(--ink); font-variant-numeric: tabular-nums; }
 .seg { display: flex; flex-wrap: wrap; gap: 5px; }
 .seg button { flex: 1 1 auto; height: 32px; padding: 0 10px; border-radius: 9px; border: 1px solid var(--line2); background: #fff; color: var(--soft); font: 600 12.5px var(--sans); cursor: pointer; transition: border-color .15s, color .15s, background .15s; }
@@ -480,7 +483,7 @@ textarea { width: 100%; min-height: 92px; resize: vertical; padding: 9px 11px; b
 
 <!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
      webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
-<script src="klassplacering.js?v=202610052300"></script>
+<script src="klassplacering.js?v=202610052330"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

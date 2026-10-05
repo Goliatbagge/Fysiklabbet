@@ -264,6 +264,11 @@ node .claude/verify-sitemap.js
 node .claude/verify-analytics.js
 
 # Uppläsning (talsyntes).
+# ⛔ BORTTAGEN FRÅN SAJTEN (2026-10-05, uttrycklig begäran): spelaren i
+# katalog.html, tts.js och prototyp-tts.html är borttagna, så inget ljud
+# spelas upp någonstans. Lägg inte tillbaka någon uppläsningsspelare utan att
+# användaren ber om det. Ljudfilerna i audio/ och kedjan i data/tts/ ligger
+# kvar orörda tills vidare.
 # ⛔ PAUSAT (2026-08-03, tills vidare på uttrycklig begäran): generera INGET
 # nytt ljud och committa inga ljudkedje-artefakter (audio/,
 # data/tts/manus/teori.json) — ljudproduktionen löses på annat sätt framöver.
@@ -606,7 +611,8 @@ när en genomgång byggs om från en ny PDF i `Genomgångar/`):
 3b. **Pennlösningar** — varje nytt eller omskrivet `::: exempel` med
    `::: textlosning` ska ha en `::: handskrift`-scen (se avsnittet ovan).
    Kör `node .claude/verify-handskrift.js`.
-4. **Uppläsning (TTS)** — ⛔ **PAUSAT tills vidare** (se Kommandon):
+4. **Uppläsning (TTS)** — ⛔ **borttagen från sajten 2026-10-05 och PAUSAD**
+   (se Kommandon):
    generera inget nytt ljud och committa inga ljudkedje-artefakter;
    ljudet löses separat. (Normalt: `node data/tts/build-manus.js` +
    `python data/tts/generate-audio.py`, dev-server på port 8000 krävs.)

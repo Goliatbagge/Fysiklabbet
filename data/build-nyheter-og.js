@@ -272,7 +272,6 @@ ${items.join('\n')}
 // Publika sidor = alla *.html i repo-roten utom interna verktygs-/testsidor.
 const SITEMAP_EXCLUDE = new Set([
   'figur-preview.html',          // internt figur-testverktyg
-  'prototyp-tts.html',           // prototyp
   'handskrift-demo.html',        // intern demo för handskriftsmotorn
   'matte-triangel-rektangel.html', // olänkad arbetsfil
   'nivakriterier-reviderad.html', // olänkad lokal arbetsfil (ej i repot)

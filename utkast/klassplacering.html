@@ -132,6 +132,7 @@ button, input, select, textarea { font-family: inherit; }
 .skarmrad svg { width: 70px; height: 52px; flex: none; }
 .stage.rum [data-kand] { cursor: pointer; }
 .stage .rumkant:hover { stroke: rgba(28, 61, 107, .28); }
+.stage .katkant:hover { stroke: rgba(28, 61, 107, .32); }
 .stage [data-kand]:hover .kand { stroke-opacity: 1; stroke-width: 4; stroke-dasharray: none; }
 .forval { display: grid; grid-template-columns: 1fr; gap: 6px; }
 .forval button { display: flex; align-items: center; gap: 11px; text-align: left; padding: 7px 10px; border-radius: 11px; border: 1px solid var(--line2); background: #fff; cursor: pointer; transition: border-color .15s; }
@@ -447,7 +448,7 @@ textarea { width: 100%; min-height: 92px; resize: vertical; padding: 9px 11px; b
 
     <h2>Så använder du verktyget</h2>
     <ol class="seo-steps">
-      <li><b>Klassrummet.</b> Ange salens mått och välj en färdig möblering, till exempel rader med parbänkar eller grupper om fyra. Dra sedan bänkarna dit de står i verkligheten. En bänk som släpps på en annan snäpper fast kant i kant. Markera en bänk för att vrida, kopiera eller ta bort den. Salen blir större eller mindre när du drar i en vägg eller ett hörn, och katedern när du drar i dess handtag. Dörren och fönstren dras längs väggarna.</li>
+      <li><b>Klassrummet.</b> Ange salens mått och välj en färdig möblering, till exempel rader med parbänkar eller grupper om fyra. Dra sedan bänkarna dit de står i verkligheten. En bänk som släpps på en annan snäpper fast kant i kant. Markera en bänk för att vrida, kopiera eller ta bort den. Salen blir större eller mindre när du drar i en vägg eller ett hörn, och katedern när du drar i en kant eller ett hörn av den. Dörren och fönstren dras längs väggarna.</li>
       <li><b>Klassen.</b> Klistra in klasslistan med ett namn per rad. Bocka av den som är frånvarande, markera vem som behöver sitta fram och lägg till par som ska hållas isär eller sitta ihop.</li>
       <li><b>Placeringen.</b> Tryck på Slumpa placering. Är du inte nöjd drar du ett namn till en annan plats, och två elever byter då plats med varandra. Lås en elev på sin plats så ligger hen kvar nästa gång du slumpar.</li>
       <li><b>Visa och spara.</b> Visa planen i helskärm för klassen, skriv ut den eller ladda ned den som bild. Spara placeringen när den används, så kan verktyget ge eleverna nya grannar nästa gång.</li>
@@ -478,7 +479,7 @@ textarea { width: 100%; min-height: 92px; resize: vertical; padding: 9px 11px; b
 
 <!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
      webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
-<script src="klassplacering.js?v=202610052130"></script>
+<script src="klassplacering.js?v=202610052200"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

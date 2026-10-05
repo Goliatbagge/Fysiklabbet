@@ -631,13 +631,25 @@ function planSvg(opt = {}) {
         s += `<rect data-sparr="${it.id}:${i}" x="${sx - STOL_B / 2 - 5}" y="${sy - STOL_D / 2 - 5}" width="${STOL_B + 10}" height="${STOL_D + 10}" rx="11" fill="${sparrad ? FARG.accent : 'transparent'}" fill-opacity="${sparrad ? 0.1 : 0}" stroke="${FARG.accent}" stroke-opacity="${sparrad ? 0.9 : 0.45}" stroke-width="1.8" stroke-dasharray="${sparrad ? '0' : '4 3'}" style="cursor:pointer"/>`;
       });
     }
-    // Handtag för att ändra katederns storlek
-    if (!exp && lage === 'rum' && !verktygLage && ui.val === it.id && it.typ === 'kateder') {
-      const t = geo(it);
-      for (const [hx, hy] of [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]]) {
+    // Katederns kanter och hörn går alltid att dra i för att ändra storleken,
+    // utan att katedern först markeras. Handtagen ritas synligt när den är markerad.
+    if (!exp && lage === 'rum' && !verktygLage && it.typ === 'kateder') {
+      const t = geo(it), w2 = t.w / 2, h2 = t.h / 2;
+      const markor = (hx, hy) => {
         const vinkel = ((rv + Math.atan2(hy, hx) * 180 / Math.PI) % 180 + 180) % 180;
-        const cur = ['ew-resize', 'nwse-resize', 'ns-resize', 'nesw-resize'][Math.round(vinkel / 45) % 4];
-        s += `<circle data-handtag="${hx},${hy}" cx="${hx * t.w / 2}" cy="${hy * t.h / 2}" r="${hx && hy ? 6 : 7.5}" fill="#ffffff" stroke="${FARG.blue}" stroke-width="2.2" style="cursor:${cur}"/>`;
+        return ['ew-resize', 'nwse-resize', 'ns-resize', 'nesw-resize'][Math.round(vinkel / 45) % 4];
+      };
+      for (const [hx, hy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const x1 = hx ? hx * w2 : -w2 + 8, x2 = hx ? hx * w2 : w2 - 8, y1 = hy ? hy * h2 : -h2 + 8, y2 = hy ? hy * h2 : h2 - 8;
+        s += `<line class="katkant" data-handtag="${hx},${hy}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="transparent" stroke-width="14" style="cursor:${markor(hx, hy)}"/>`;
+      }
+      for (const [hx, hy] of [[1, 1], [-1, -1], [1, -1], [-1, 1]]) {
+        s += `<circle data-handtag="${hx},${hy}" cx="${hx * w2}" cy="${hy * h2}" r="9" fill="transparent" style="cursor:${markor(hx, hy)}"/>`;
+      }
+      if (ui.val === it.id) {
+        for (const [hx, hy] of [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]]) {
+          s += `<circle data-handtag="${hx},${hy}" cx="${hx * w2}" cy="${hy * h2}" r="${hx && hy ? 6 : 7.5}" fill="#ffffff" stroke="${FARG.blue}" stroke-width="2.2" style="cursor:${markor(hx, hy)}"/>`;
+        }
       }
     }
     s += '</g>';
@@ -828,7 +840,7 @@ function panelRum() {
       const under = TYPER[t] ? (n ? n + (n === 1 ? ' plats' : ' platser') : 'Lärarens bord') : 'På väggen';
       return `<div class="mobelkort" data-ny="${t}" role="button" tabindex="0" aria-label="Lägg till ${esc(typ.namn)}">${ikonSvg(t)}<b>${esc(typ.namn)}</b><small>${under}</small></div>`;
     }).join('')}</div>
-    <p class="note">Klicka för att ställa ut en möbel eller dra in den i salen. Släpps en bänk på en annan snäpper de ihop kant i kant (håll ned Alt för att placera fritt). Markera en möbel för att vrida, kopiera eller ta bort den. Katedern blir större eller mindre när du drar i handtagen på dess kanter.</p>
+    <p class="note">Klicka för att ställa ut en möbel eller dra in den i salen. Släpps en bänk på en annan snäpper de ihop kant i kant (håll ned Alt för att placera fritt). Markera en möbel för att vrida, kopiera eller ta bort den. Katedern blir större eller mindre när du drar i en kant eller ett hörn av den.</p>
   </div>
   <div class="grp">
     <div class="grp-h"><span class="eyebrow">Platser som inte används</span><span class="count"><b>${r.blocked.length}</b> spärrade</span></div>
@@ -1306,6 +1318,8 @@ svg.addEventListener('pointerdown', e => {
       const it = r.items.find(i => i.id === itEl.dataset.item), t = geo(it);
       const [hx, hy] = hEl.dataset.handtag.split(',').map(Number);
       ui.drag = { kind: 'storlek', id: it.id, hx, hy, x0: it.x, y0: it.y, w0: t.w, h0: t.h, cx: e.clientX, cy: e.clientY, moved: false, fore: JSON.stringify(S) };
+      ui.val = it.id;
+      ritaPlan();
       e.preventDefault();
       return;
     }

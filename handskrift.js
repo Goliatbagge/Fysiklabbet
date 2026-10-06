@@ -46705,9 +46705,12 @@
    * strecket, med början ovanför x^3. Varje varv är fyra klick: kvotens
    * term, produkten under rätt termer, parentesen med minus framför (hela
    * produkten dras bort), strecket under. Under strecket skrivs HELA det
-   * som blir kvar, inte bara nästa term. Till sist ringas kvoten in och
-   * svaret dubbelstryks. Textlösningen i ma4-4.4 ställer upp divisionen
-   * likadant. */
+   * som blir kvar, inte bara nästa term. Innan en term skrivs i kvoten
+   * ringas först nämnarens x och sedan radens första term in med
+   * blåpennan (det är de två som delas); ringarna tonar ut i nästa steg.
+   * Till sist ringas kvoten in. Textlösningen i ma4-4.4 ställer upp
+   * divisionen likadant, och alla andra polynomdivisioner på sajten
+   * redovisas på samma sätt (se CLAUDE.md, "Polynomdivision"). */
   function layoutPolynomdivision(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T), adv = T.adv;
@@ -46727,8 +46730,6 @@
       T.line([xa, yb + 0.42 * F], [xb, yb + 0.42 * F]);
     }
 
-    T.str('a)', padL, 140, null, 0.62);
-
     /* ---- täljaren och trappan ---- */
     var yD = 222, yQ = yD - 1.78 * F;
     var xD = T.str('x^3+4x^2-7x-10', x0, yD);
@@ -46747,18 +46748,29 @@
     T.line([xv, yB], [xv + adv('x-2') + 0.9 * F, yB]);
     T.stepEnd();
 
-    T.str('x-2', xv + 0.45 * F, yD);
+    var xn = xv + 0.45 * F;
+    T.str('x-2', xn, yD);
     T.stepEnd();
+
+    /* HJÄLPMARKERINGEN före varje term i kvoten: först nämnarens x,
+     * sedan radens första term (ledS vid xs, baslinje yb) */
+    function ringaIn(xs, ledS, yb) {
+      return substRings(acts, [
+        [xn, xn + adv('x'), yD, F, { ry: 0.56 * F, cy: yD - 0.30 * F }],
+        [xs, xs + adv(ledS) + 0.12 * F, yb, F]
+      ]);
+    }
 
     /* kolumner: x^2-termerna, x-termerna och konstanttermernas sista siffra */
     var c2 = x0 + adv('x^3+'), c1 = c2 + adv('6x^2-');
 
     /* ---- varv 1 ---- */
     tanke(yD, [
-      [['Högstagradstermen x^3 delat']],
-      [['med x är x^2. Det är kvotens']],
-      [['första term.']]
+      [['Första termen x^3 delat med']],
+      [['nämnarens x är x^2. Det är']],
+      [['kvotens första term.']]
     ]);
+    var ringar = ringaIn(x0, 'x^3', yD);
     var xq = T.str('x^2', x0, yQ);
     T.stepEnd();
 
@@ -46767,6 +46779,7 @@
       [['Jag skriver produkten under']],
       [['termerna med samma grad.']]
     ]);
+    fadeRings(acts, ringar);
     y = yD + dy;
     xe = T.str('x^3-2x^2', x0, y);
     T.stepEnd();
@@ -46796,12 +46809,14 @@
       [['Samma sak igen: 6x^2 delat']],
       [['med x är 6x.']]
     ]);
+    ringar = ringaIn(c2, '6x^2', yR1);
     xq = T.str('+6x', xq, yQ);
     T.stepEnd();
 
     tanke(yR1, [
       [['6x gånger (x-2) blir 6x^2-12x.']]
     ]);
+    fadeRings(acts, ringar);
     y = yR1 + dy;
     xe = T.str('6x^2-12x', c2, y);
     T.stepEnd();
@@ -46824,12 +46839,14 @@
     tanke(yR2, [
       [['5x delat med x är 5.']]
     ]);
+    ringar = ringaIn(c1, '5x', yR2);
     xq = T.str('+5', xq, yQ);
     T.stepEnd();
 
     tanke(yR2, [
       [['5 gånger (x-2) blir 5x-10.']]
     ]);
+    fadeRings(acts, ringar);
     y = yR2 + dy;
     xe = T.str('5x-10', c1, y);
     T.stepEnd();
@@ -46851,19 +46868,12 @@
     T.ring(x0 - 0.12 * F, xq + 0.12 * F, yQ);
     T.stepEnd();
 
-    var yS = y0 + 2.7 * F;
-    xe = T.str('Svar: x^2+6x+5', padL, yS);
-    T.underline(xe, yS);
-    T.stepEnd();
-
-    /* ---- b) ---- */
-    y = yS + 3.4 * F;
-    T.str('b)', padL, y - 1.5 * F, null, 0.62);
-    tanke(yS, [
+    y = y0 + 3.6 * F;
+    tanke(y0, [
       [['Kvoten är den andra faktorn,']],
       [['så ekvationen kan skrivas som']],
       [['en produkt som är noll.']]
-    ], 0.45);
+    ]);
     T.str('(x-2)(x^2+6x+5)=0', padL, y);
     T.stepEnd();
 

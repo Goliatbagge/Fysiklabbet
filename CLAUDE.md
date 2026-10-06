@@ -592,6 +592,33 @@ Så här bygger du scenen:
    filhuvudet (felet hände 2026-09-07: 12x² ringades in i båda led i
    stället för att −12x² skrevs ut).
 
+## Polynomdivision ställs alltid upp som en trappa
+
+**Varje polynomdivision på sajten, i teori, exempel, pennlösningar, övningar
+och lösningsförslag, redovisas på samma sätt** (lärarens egen uppställning,
+fotograferad steg för steg 2026-10-06). Referens: `layoutPolynomdivision` i
+`handskrift.js` och Exempel 4 i `ma4-4.4`.
+
+1. Täljaren skrivs först. Sedan ritas trappan: ett streck ovanför täljaren,
+   ett lodrätt streck vid dess högra ände och ett streck under nämnaren, som
+   står i trappsteget till höger om täljaren.
+2. Kvoten byggs term för term **ovanför** strecket, med början ovanför
+   täljarens första term.
+3. **Innan en term skrivs i kvoten ringas först nämnarens *x* och sedan
+   radens första term in med blåpennan** (de två som delas). Ringarna tonar
+   ut i nästa steg (`ringaIn` + `fadeRings`).
+4. Produkten skrivs under termerna med samma grad, och i nästa steg får den
+   en parentes med minus framför: `−(x³ − 2x²)`. Hela produkten dras bort.
+5. Ett streck under raden, och under strecket skrivs **hela** det som blir
+   kvar (`6x² − 7x − 10`), inte bara nästa term.
+6. När resten är skriven ringas kvoten in.
+
+I text (KaTeX) görs samma uppställning med en `array{l}`, `\overline` +
+`\rule` + `\underline` för trappan och `\phantom` för kolumnerna. Kopiera
+mallen från `ma4-4.4.md` (eller lösningarna till `ma4-2.13` i
+`data/ovningar.js`), i stället för att bygga en egen. Skriv aldrig bara
+"polynomdivision ger kvoten …" i en lösning utan att visa divisionen.
+
 ## ⚠️ KRITISK: Uppdateringskedja när teoriinnehåll ändras
 
 **En ändring i en teorigenomgång (`data/teori/*.md`) är ALDRIG klar med bara

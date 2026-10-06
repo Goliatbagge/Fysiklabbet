@@ -38931,7 +38931,21 @@ Resttermen $\\dfrac{3}{x} \\to 0$ då $x \\to \\pm\\infty$, så den sneda asympt
                 `$y = x - 2$`,
             ],
             correct: 3,
-            solution: `Polynomdivision av $x^2 - 3x + 5$ med $x - 1$ ger kvoten $x - 2$ och resten $3$:
+            solution: `Vi dividerar $x^2 - 3x + 5$ med $x - 1$. Polynomet får ett streck ovanför och nämnaren står i trappsteget till höger:
+
+$$
+\\def\\arraystretch{1.45}
+\\begin{array}{l}
+\\phantom{-\\,(}x - 2 \\\\
+\\phantom{-\\,(}\\overline{x^2 - 3x + 5\\;}\\rule[-0.24em]{0.04em}{1.12em}\\underline{\\;x - 1\\;} \\\\
+\\phantom{-\\,(}\\mkern-24mu{-}\\,\\underline{(\\mathrlap{x^2 - x)}\\phantom{x^2 - 3x + 5}} \\\\
+\\phantom{-\\,(x^2}\\:{-}2x + 5 \\\\
+\\phantom{-\\,(x^2}\\:\\mkern-24mu{-}\\,\\underline{({-}2x + 2)} \\\\
+\\phantom{-\\,(x^2}\\:\\phantom{{-}2x {}+{}}3
+\\end{array}
+$$
+
+$x^2 : x = x$, och när $x(x - 1) = x^2 - x$ dras bort blir $-2x + 5$ kvar. Sedan ger $-2x : x = -2$, och när $-2(x - 1) = -2x + 2$ dras bort blir resten $3$. Kvoten är $x - 2$ och resten $3$:
 
 $$
 y = \\frac{x^2 - 3x + 5}{x - 1} = x - 2 + \\frac{3}{x - 1}
@@ -38952,7 +38966,21 @@ Resttermen $\\dfrac{3}{x-1} \\to 0$ då $x \\to \\pm\\infty$, så den sneda asym
                 `$b = 3$`,
             ],
             correct: 2,
-            solution: `**Insikten:** det är bara *kvoten* vid polynomdivisionen — inte resten — som bestämmer den sneda asymptoten. Vi dividerar $x^2 + bx + 7$ med $x + 1$:
+            solution: `**Insikten:** det är bara *kvoten* vid polynomdivisionen — inte resten — som bestämmer den sneda asymptoten. Vi dividerar $x^2 + bx + 7$ med $x + 1$. Polynomet får ett streck ovanför och nämnaren står i trappsteget till höger:
+
+$$
+\\def\\arraystretch{1.45}
+\\begin{array}{l}
+\\phantom{-\\,(}x + (b - 1) \\\\
+\\phantom{-\\,(}\\overline{x^2 + bx + 7\\;}\\rule[-0.24em]{0.04em}{1.12em}\\underline{\\;x + 1\\;} \\\\
+\\phantom{-\\,(}\\mkern-24mu{-}\\,\\underline{(\\mathrlap{x^2 + x)}\\phantom{x^2 + bx + 7}} \\\\
+\\phantom{-\\,(x^2 {}+{}}(b - 1)x + 7 \\\\
+\\phantom{-\\,(x^2 {}+{}}\\mkern-24mu{-}\\,\\underline{\\bigl((b - 1)x + (b - 1)\\bigr)} \\\\
+\\phantom{-\\,(x^2 {}+{} (b - 1)x {}+{}}8 - b
+\\end{array}
+$$
+
+$x^2 : x = x$, och när $x(x + 1) = x^2 + x$ dras bort blir $bx - x + 7 = (b - 1)x + 7$ kvar. Sedan ger $(b - 1)x : x = b - 1$, och när $(b - 1)(x + 1)$ dras bort blir resten $7 - (b - 1) = 8 - b$. Alltså är
 
 $$
 x^2 + bx + 7 = (x + 1)\\bigl(x + (b-1)\\bigr) + (8 - b)
@@ -40431,7 +40459,21 @@ vilket ger $x = -1$ och $x = -5$.
                 `$x = i$ (dubbelrot)`,
             ],
             correct: 2,
-            solution: `**Insikten:** eftersom $x = 1$ är en rot är $(x - 1)$ en faktor. Polynomdivision av $x^3 - x^2 + x - 1$ med $x - 1$ ger kvoten $x^2 + 1$ (kontroll: $(x - 1)(x^2 + 1) = x^3 - x^2 + x - 1$).
+            solution: `**Insikten:** eftersom $x = 1$ är en rot är $(x - 1)$ en faktor. Vi dividerar $x^3 - x^2 + x - 1$ med $x - 1$. Polynomet får ett streck ovanför och nämnaren står i trappsteget till höger:
+
+$$
+\\def\\arraystretch{1.45}
+\\begin{array}{l}
+\\phantom{-\\,(}x^2 + 1 \\\\
+\\phantom{-\\,(}\\overline{x^3 - x^2 + x - 1\\;}\\rule[-0.24em]{0.04em}{1.12em}\\underline{\\;x - 1\\;} \\\\
+\\phantom{-\\,(}\\mkern-24mu{-}\\,\\underline{(\\mathrlap{x^3 - x^2)}\\phantom{x^3 - x^2 + x - 1}} \\\\
+\\phantom{-\\,(x^3 {}-{} x^2 {}+{}}x - 1 \\\\
+\\phantom{-\\,(x^3 {}-{} x^2 {}+{}}\\mkern-24mu{-}\\,\\underline{(x - 1)} \\\\
+\\phantom{-\\,(x^3 {}-{} x^2 {}+{} x {}-{}}0
+\\end{array}
+$$
+
+$x^3 : x = x^2$, och när $x^2(x - 1) = x^3 - x^2$ dras bort blir $x - 1$ kvar. Sedan ger $x : x = 1$, och när $1 \cdot (x - 1)$ dras bort blir resten $0$. Kvoten är $x^2 + 1$ (kontroll: $(x - 1)(x^2 + 1) = x^3 - x^2 + x - 1$).
 
 De övriga rötterna fås ur $x^2 + 1 = 0$, alltså $x^2 = -1$:
 

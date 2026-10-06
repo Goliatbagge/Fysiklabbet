@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Tue, 06 Oct 2026 01:30:43 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2026 10:05:12 GMT</lastBuildDate>
+    <item>
+      <title>SPECIAL: Nobelpriset i fysik 2026 går till Francis Halzen, som gjorde isen på Sydpolen till ett teleskop</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-06-nobelpriset-i-fysik-francis-halzen</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-06-nobelpriset-i-fysik-francis-halzen</guid>
+      <pubDate>Tue, 06 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Nobelpriset</category>
+      <description>Årets Nobelpris i fysik går till belgaren Francis Halzen. Han kom på hur en kubikkilometer is under Sydpolen kan fånga neutriner, spöklika partiklar som passerar rakt genom hela jordklotet, och med observatoriet IceCube har forskarna för första gången sett neutriner som kommer från andra galaxer.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-06-nobelpriset-halzen-icecube.jpg" length="35793" type="image/jpeg"/>
+    </item>
     <item>
       <title>Laserpulser gör luften till en radioantenn</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-06-antennen-gjord-av-ljus</link>
@@ -177,15 +186,6 @@
       <category>Materialfysik</category>
       <description>Pressa ihop en bit vanlig cellplast, håll den nere en stund och släpp: kraften har hunnit sjunka, och materialet hittar inte tillbaka till punkten där det vände. En skog av lodräta kolnanorör gör precis det, gång på gång, lika gärna i ultrarapid som i ett slag. Ett lag vid University of Wisconsin–Madison visar att förlusterna i skummet inte kommer från sega polymerkedjor utan från torr friktion mellan rören, och att materialet därför bär ett minne som inte bleknar.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-19-skummet-som-minns.jpg" length="74206" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Om rumtiden darrar ska vanlig materia lysa av sig själv — 1 400 meter under ett italienskt berg lyste ingenting</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-18-tystnaden-under-berget</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-18-tystnaden-under-berget</guid>
-      <pubDate>Fri, 18 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Kvantfysik</category>
-      <description>Varför sitter aldrig ett dammkorn på två ställen samtidigt? Ett förslag från 1960-talet lägger skulden på gravitationen: rumtiden skulle darra, och darrningarna sudda ut stora föremåls kvanttillstånd. Samma darrningar skulle rycka i laddade partiklar, och en laddning som rycks till sänder ut strålning. Ett italienskt lag har letat efter just den strålningen i en germaniumkristall under berget Gran Sasso. Den fanns inte, och därmed faller modellen.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-18-tystnaden-under-berget.jpg" length="290488" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

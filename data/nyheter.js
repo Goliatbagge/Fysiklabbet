@@ -103,6 +103,78 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-06-nobelpriset-i-fysik-francis-halzen",
+    date: "2026-10-06",
+    title: "SPECIAL: Nobelpriset i fysik 2026 går till Francis Halzen, som gjorde isen på Sydpolen till ett teleskop",
+    deck: "Årets Nobelpris i fysik går till belgaren Francis Halzen. Han kom på hur en kubikkilometer is under Sydpolen kan fånga neutriner, spöklika partiklar som passerar rakt genom hela jordklotet, och med observatoriet IceCube har forskarna för första gången sett neutriner som kommer från andra galaxer.",
+    category: "Nobelpriset",
+    readingTime: "8 min",
+    image: "nyheter/bilder/2026-10-06-nobelpriset-halzen-icecube.jpg",
+    imageAlt: "IceCube-laboratoriet, en blå byggnad på stålben med två höga silverfärgade torn, står på den platta snövidden vid Sydpolen under en klarblå himmel. I förgrunden ligger borrutrustning och en stor slangtrumma.",
+    imageCredit: "Foto: U.S. Geological Survey (public domain)",
+    tags: ["nobelpriset", "nobelpris i fysik", "neutrino", "icecube", "sydpolen", "astrofysik", "partikelfysik", "kosmisk strålning", "tjerenkovstrålning", "blazar", "vintergatan", "francis halzen"],
+    sources: [
+      { name: "ETV Bharat: Nobel Prize in Physics 2026 awarded to Francis Halzen (6 oktober 2026)", url: "https://www.etvbharat.com/en/international/nobel-prize-in-physics-2026-awarded-to-francis-halzen-for-contribution-to-icecube-neutrino-observatory-and-astrophysical-discoveries-enn26100603679" },
+      { name: "University of Wisconsin–Madison: IceCube Neutrino Observatory reports first evidence for extraterrestrial high-energy neutrinos (november 2013)", url: "https://news.wisc.edu/icecube-neutrino-observatory-reports-first-evidence-for-extraterrestrial-high-energy-neutrinos" },
+      { name: "Physics Today: IceCube pinpoints an extragalactic neutrino source (2018)", url: "https://physicstoday.aip.org/news/icecube-pinpoints-an-extragalactic-neutrino-source" },
+      { name: "IceCube: Neutrino emission from NGC 1068 (2022)", url: "https://icecube.wisc.edu/gallery/neutrino-emission-from-ngc-1068/" },
+      { name: "ScienceDaily: IceCube shows Milky Way galaxy is a neutrino desert (juni 2023)", url: "https://www.ScienceDaily.com/releases/2023/06/230629193310.htm" }
+    ],
+    research: {
+      citation: "IceCube Collaboration, ”Evidence for High-Energy Extraterrestrial Neutrinos at the IceCube Detector”, Science 342, 1242856 (2013). Den första upptäckten av neutriner från rymden med IceCube, kollegialt granskad.",
+      url: "https://doi.org/10.1126/science.1242856"
+    },
+    larare: {
+      moment: [
+        { label: "Ljusets brytning", href: "katalog.html?id=fy2-4.4" },
+        { label: "Radioaktivt sönderfall", href: "katalog.html?id=fy1-9.3" },
+        { label: "Universums struktur", href: "katalog.html?id=fy2-5.1" }
+      ],
+      fragor: [
+        "IceCube letar helst efter partiklar som kommer underifrån, genom hela jordklotet. Varför gör det mätningen lättare i stället för svårare?",
+        "En partikel kan inte färdas snabbare än ljuset i vakuum, men väl snabbare än ljuset i is. Hur går det ihop, och vilken roll spelar brytningsindex?",
+        "Ljus, laddade partiklar och neutriner bär alla information från rymden. Vilka fördelar och nackdelar har var och en som budbärare, och varför behövs alla tre?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Kungliga Vetenskapsakademien har beslutat att ge 2026 års Nobelpris i fysik till Francis Halzen, professor vid University of Wisconsin–Madison i USA. Han får priset ”för avgörande bidrag till IceCube-observatoriet och upptäckten av högenergetiska neutriner av astrofysikaliskt ursprung”. Med andra ord: Halzen fick idén att bygga ett jättelikt teleskop av is på Sydpolen, ledde arbetet med att förverkliga det, och teleskopet har fångat partiklar som har färdats till oss från andra sidan universum. Prissumman är 12&nbsp;miljoner kronor.' },
+
+      { type: 'h2', text: 'Universums skyggaste partikel' },
+      { type: 'p', html: 'Neutriner är elementarpartiklar, precis som elektroner. Men de saknar elektrisk laddning och väger nästan ingenting, och de påverkas nästan inte av något alls. Från solen strömmar så många neutriner att omkring 60&nbsp;miljarder passerar genom varje kvadratcentimeter av din kropp varje sekund, dag som natt, eftersom de går rakt genom jordklotet också. Du märker ingenting. Bara en försvinnande liten del av dem krockar någonsin med en atom i din kropp.' },
+      { type: 'p', html: 'Just den egenskapen gör neutriner till perfekta budbärare från rymden. Ljus stoppas av gas och stoft, och därför ser vi aldrig in i de tätaste och våldsammaste delarna av universum. Elektriskt laddade partiklar böjs av magnetfälten mellan stjärnorna, så när de når jorden pekar de inte längre tillbaka mot sin källa. En neutrino däremot färdas i rak linje genom allt, från platsen där den skapades och hela vägen till oss. Det är därför Vetenskapsakademien kallar dem ”spöklika budbärare från rymden”.' },
+
+      { type: 'h2', text: 'Ett hundra år gammalt mysterium' },
+      { type: 'p', html: 'År 1912 upptäckte österrikaren Victor Hess att jorden ständigt bombarderas av laddade partiklar från rymden, så kallad kosmisk strålning. Vissa av partiklarna har energier långt högre än vad världens största partikelaccelerator klarar av. Men var de får sin fart ifrån har varit en gåta i över hundra år, just för att de laddade partiklarna har böjts av så många gånger på vägen att de inte avslöjar sitt ursprung.' },
+      { type: 'p', html: 'Halzen och andra fysiker insåg att neutriner kan lösa gåtan. Där protoner accelereras till enorma energier krockar en del av dem med gas eller ljus i omgivningen. Då bildas kortlivade partiklar som sönderfaller och bland annat ger neutriner. Neutrinerna fortsätter rakt ut i rymden och pekar alltså tillbaka mot den kosmiska partikelacceleratorn. Problemet var bara att fånga dem. Eftersom neutriner nästan aldrig krockar med något behövs en detektor som är ofattbart stor.' },
+
+      { type: 'h2', text: 'Idén: använd isen på Sydpolen' },
+      { type: 'p', html: 'Under Sydpolen ligger ett istäcke som är nästan tre kilometer tjockt. Djupt nere är isen kolsvart, eftersom inget solljus når dit, och mycket klar, eftersom trycket har pressat ut nästan alla luftbubblor. Halzen började på 1980-talet arbeta med tanken att isen själv kunde bli detektorn: man behöver bara sänka ned ljuskänsliga sensorer i den och vänta.' },
+      { type: 'p', html: 'Ett första försök, AMANDA, byggdes på 1990-talet och visade att idén fungerade, men också att isen närmast ytan innehöll för många bubblor. Sensorerna fick sänkas djupare. Erfarenheterna blev grunden till IceCube, som byggdes mellan 2005 och 2010. Med varmt vatten smälte forskarna 86&nbsp;hål, vart och ett omkring 2,5&nbsp;km djupt, och i varje hål sänktes en kabel med 60&nbsp;sensorer ned innan vattnet frös igen. Totalt sitter 5&nbsp;160&nbsp;sensorer fastfrusna på mellan 1&nbsp;450 och 2&nbsp;450&nbsp;meters djup. Tillsammans övervakar de en kubikkilometer is, knappt en miljard ton. På ytan står laboratoriet där alla kablar samlas.' },
+
+      { type: 'h2', text: 'Ett blått blixtljus i mörkret' },
+      { type: 'p', html: 'Ingen kan se en neutrino direkt. Men någon enstaka gång krockar en av dem med en atomkärna i isen, och då bildas en laddad partikel, ofta en myon, som rusar vidare i nästan ljusets hastighet. Här kommer en fin detalj ur fysiken. Ingenting kan färdas snabbare än ljuset i vakuum, men ljuset självt går långsammare i is, eftersom isen har brytningsindex $n \\approx 1{,}31$:' },
+      { type: 'p', html: '$v = \\dfrac{c}{n} = \\dfrac{3{,}0 \\cdot 10^{8}\\ \\mathrm{m/s}}{1{,}31} \\approx 2{,}3 \\cdot 10^{8}\\ \\mathrm{m/s}$' },
+      { type: 'p', html: 'Myonen kan alltså vara snabbare än ljuset i isen. Då sänder den ut ett svagt blått ljus i en kon framåt, ungefär som en ljudbang från ett överljudsplan. Ljuset kallas tjerenkovstrålning. Sensorerna registrerar när ljuset kommer fram till var och en av dem, på några miljarddels sekunder när, och ur mönstret räknar datorerna ut vilket håll partikeln kom ifrån och hur mycket energi den hade.' },
+      { type: 'p', html: 'Det svåra är att hitta rätt partiklar. Varje sekund tränger tusentals myoner ned i isen från jordens egen atmosfär, där kosmisk strålning krockar med luften. Ett smart knep är att leta efter partiklar som kommer <em>underifrån</em>, genom jordklotet. Ingenting annat än neutriner tar sig igenom hela jorden, så då fungerar själva planeten som ett filter. Av de omkring hundratusen neutriner som IceCube fångar varje år är ändå nästan alla bildade i atmosfären. Bara ett fåtal kommer från rymden, och de känns igen på sin väldiga energi.' },
+
+      { type: 'h2', text: 'Bert och Ernie, och sedan galaxerna' },
+      { type: 'p', html: 'Genombrottet kom 2013. Forskarna i IceCube rapporterade 28&nbsp;händelser med så hög energi att atmosfären ensam inte kunde förklara dem. Sannolikheten för att alla skulle komma från atmosfären bedömdes som mycket liten. De två starkaste, som fick smeknamnen Bert och Ernie efter figurerna i Sesam, hade vardera omkring en petaelektronvolt, alltså 10<sup>15</sup>&nbsp;elektronvolt. Det är ungefär 150&nbsp;gånger mer energi än protonerna i världens största accelerator, LHC i Genève, får. I joule är det bara 0,16&nbsp;millijoule, ungefär lika mycket rörelseenergi som en pingisboll som rullar långsamt över ett bord, men samlat i en enda partikel. Tidskriften <em>Physics World</em> utsåg upptäckten till årets genombrott inom fysiken.' },
+      { type: 'p', html: 'Sedan började pusselbitarna falla på plats. Den 22&nbsp;september 2017 fångade IceCube en ensam högenergetisk neutrino och skickade inom en minut ett larm till teleskop runt hela världen. De riktade in sig på samma punkt på himlen och hittade en blazar, en galax omkring fyra miljarder ljusår bort med ett supermassivt svart hål som sprutar ut en stråle av materia rakt mot oss. Blazaren, som heter TXS&nbsp;0506+056, flammade upp just då. Det var första gången man pekat ut en sannolik källa till neutriner från rymden.' },
+      { type: 'p', html: 'År 2022 kom nästa steg. IceCube hittade ett överskott av neutriner från galaxen NGC&nbsp;1068, omkring 47&nbsp;miljoner ljusår bort. I dess mitt finns ett supermassivt svart hål som är dolt bakom tjocka moln av gas och stoft. Ljuset därifrån stoppas, men neutrinerna tar sig ut. Året därpå, 2023, gjorde forskarna den första bilden av vår egen galax, Vintergatan, sedd i neutriner i stället för i ljus.' },
+
+      { type: 'h2', text: 'Mannen bakom isen' },
+      { type: 'p', html: 'Francis Halzen föddes den 23&nbsp;mars 1944 i staden Tienen i Belgien och är alltså 82&nbsp;år. Han tog sin doktorsexamen vid universitetet i Leuven 1969 och har sedan 1972 forskat vid University of Wisconsin–Madison. Han började som teoretisk partikelfysiker, en forskare som arbetar med papper, penna och ekvationer, men blev ledaren för ett av världens mest äventyrliga experiment, byggt på den kallaste och mest avlägsna platsen på jorden. Halzen har varit IceCubes huvudansvarige forskare, den som haft det övergripande vetenskapliga ansvaret, från idé till färdigt observatorium.' },
+      { type: 'p', html: 'Priset går till honom ensam, men IceCube är i dag ett samarbete med flera hundra forskare från ett dussintal länder, bland dem Sverige: forskare vid Stockholms och Uppsala universitet har varit med sedan AMANDA-tiden. Arbetet fortsätter. Detektorn har nyligen fått nya, tätare placerade sensorer, och forskarna planerar en ännu större efterföljare. Frågan Halzen ställde för snart fyrtio år sedan, var den kosmiska strålningen egentligen kommer ifrån, är bara delvis besvarad. Men i dag finns ett verktyg som kan titta.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Neutrinon föreslogs 1930 av Wolfgang Pauli för att förklara varför energi tycktes försvinna i radioaktivt betasönderfall. Han trodde själv att den aldrig skulle gå att upptäcka. Det tog 26&nbsp;år innan den fångades.',
+        'Det här är inte första Nobelpriset för neutriner. År 2002 belönades bland andra Raymond Davis och Masatoshi Koshiba för neutriner från solen och från en supernova, och 2015 Takaaki Kajita och Arthur McDonald för upptäckten att neutriner byter sort under färden.',
+        'Sensorerna i IceCube kan inte tas upp igen. De har suttit fastfrusna i isen sedan de sänktes ned, och de allra flesta fungerar fortfarande.',
+        'Victor Hess, som upptäckte den kosmiska strålningen, fick själv Nobelpriset i fysik 1936.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-06-antennen-gjord-av-ljus",
     date: "2026-10-06",
     title: "Laserpulser gör luften till en radioantenn",

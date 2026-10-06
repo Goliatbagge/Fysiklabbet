@@ -46698,78 +46698,189 @@
   }
 
   /* ---------------- scen: polynomdivision (ma4-4.4 ex 4) -------------
-   * En känd rot ger en faktor. Divisionen ställs upp som en trappa:
-   * multiplicera upp, dra bort, ta ned nästa term. */
+   * TRAPPAN (användarkrav 2026-10-06, efter fotograferade steg): täljaren
+   * skrivs först, sedan ritas trappan — ett streck över täljaren, ett
+   * lodrätt streck vid dess högra ände och ett streck under nämnaren, som
+   * skrivs i trappsteget till höger. Kvoten byggs term för term OVANFÖR
+   * strecket, med början ovanför x^3. Varje varv är fyra klick: kvotens
+   * term, produkten under rätt termer, parentesen med minus framför (hela
+   * produkten dras bort), strecket under. Under strecket skrivs HELA det
+   * som blir kvar, inte bara nästa term. Till sist ringas kvoten in och
+   * svaret dubbelstryks. Textlösningen i ma4-4.4 ställer upp divisionen
+   * likadant. */
   function layoutPolynomdivision(cfg, F) {
-    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, x0;
-    var tanke = mkTanke(T);
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), adv = T.adv;
+    var x0 = padL + 66, dy = 1.85 * F;
 
-    y = 186;
-    T.str('x^3+4x^2-7x-10=0,', padL, y);
-    T.str(' x=2', padL + 380, y);
+    /* minus och parentes framför en produkt som redan står på raden;
+     * xs = produktens första tecken, xe = produktens slut */
+    function dragBort(xs, xe, yb) {
+      var xp = xs - adv('(');
+      T.str('-', xp - adv('-'), yb);
+      T.pause(160);
+      T.str('(', xp, yb);
+      T.pause(160);
+      return T.str(')', xe, yb);
+    }
+    function streck(xa, xb, yb) {
+      T.line([xa, yb + 0.42 * F], [xb, yb + 0.42 * F]);
+    }
+
+    T.str('a)', padL, 140, null, 0.62);
+
+    /* ---- täljaren och trappan ---- */
+    var yD = 222, yQ = yD - 1.78 * F;
+    var xD = T.str('x^3+4x^2-7x-10', x0, yD);
     T.stepEnd();
 
-    tanke(y, [
-      [['Är x=2 en rot så är (x-2) en']],
-      [['faktor. Det säger faktorsatsen.']],
-      [['Den andra faktorn får jag med']],
-      [['polynomdivision.']]
+    tanke(yD, [
+      [['x=2 är ett nollställe, så (x-2)']],
+      [['är en faktor enligt faktorsatsen.']],
+      [['Jag dividerar med x-2.']]
     ]);
-
-    /* ---- divisionstrappan ---- */
-    y += 4.8 * F;
-    x0 = padL + 30;
-    T.str('(x^3+4x^2-7x-10):(x-2)=', padL, y, null, 0.88);
+    var yL = yD - 1.24 * F, yB = yD + 0.42 * F, xv = xD + 0.30 * F;
+    T.line([x0 - 0.15 * F, yL], [xv, yL]);
+    T.pause(120);
+    T.line([xv, yL], [xv, yB]);
+    T.pause(120);
+    T.line([xv, yB], [xv + adv('x-2') + 0.9 * F, yB]);
     T.stepEnd();
 
-    y += 2.6 * F;
-    xx = T.str('x^3-2x^2', x0, y);
-    T.line([x0 - 6, y + 0.34 * F], [xx + 6, y + 0.34 * F]);
+    T.str('x-2', xv + 0.45 * F, yD);
     T.stepEnd();
 
-    tanke(y, [
-      [['x^3 delat med x är x^2. Den']],
-      [['termen gånger (x-2) blir']],
-      [['x^3-2x^2, som jag drar bort.']]
-    ], 0.5);
-    y += 2.8 * F;
-    xx = T.str('6x^2-7x-10', x0, y);
-    T.stepEnd();
+    /* kolumner: x^2-termerna, x-termerna och konstanttermernas sista siffra */
+    var c2 = x0 + adv('x^3+'), c1 = c2 + adv('6x^2-');
 
-    y += 2.6 * F;
-    xx = T.str('6x^2-12x', x0, y);
-    T.line([x0 - 6, y + 0.34 * F], [xx + 6, y + 0.34 * F]);
-    T.stepEnd();
-
-    y += 2.8 * F;
-    xx = T.str('5x-10', x0, y);
-    T.stepEnd();
-
-    y += 2.6 * F;
-    xx = T.str('5x-10', x0, y);
-    T.line([x0 - 6, y + 0.34 * F], [xx + 6, y + 0.34 * F]);
-    T.stepEnd();
-
-    y += 2.8 * F;
-    T.str('0', x0, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Resten blev noll, precis som']],
-      [['den ska när (x-2) verkligen']],
-      [['är en faktor. Kvoten är den']],
-      [['andra faktorn.']]
+    /* ---- varv 1 ---- */
+    tanke(yD, [
+      [['Högstagradstermen x^3 delat']],
+      [['med x är x^2. Det är kvotens']],
+      [['första term.']]
     ]);
-    y += 4.8 * F;
-    xx = T.str('(x-2)(x^2+6x+5)=0', padL, y);
+    var xq = T.str('x^2', x0, yQ);
+    T.stepEnd();
+
+    tanke(yD, [
+      [['x^2 gånger (x-2) blir x^3-2x^2.']],
+      [['Jag skriver produkten under']],
+      [['termerna med samma grad.']]
+    ]);
+    y = yD + dy;
+    xe = T.str('x^3-2x^2', x0, y);
     T.stepEnd();
 
     tanke(y, [
-      [['Nu återstår bara']],
-      [['andragradsfaktorn. pq-formeln']],
-      [['med p=6 och q=5.']]
+      [['Hela produkten ska dras bort,']],
+      [['så den får en parentes med']],
+      [['minus framför.']]
     ]);
-    y += 4.6 * F;
+    dragBort(x0, xe, y);
+    T.stepEnd();
+
+    streck(x0 - adv('(') - 0.1 * F, xD + 0.1 * F, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x^3-x^3=0 och 4x^2-(-2x^2)=6x^2.']],
+      [['Resten av termerna skriver jag']],
+      [['av som de står.']]
+    ], 0.42);
+    var yR1 = y + dy;
+    var xR1 = T.str('6x^2-7x-10', c2, yR1);
+    T.stepEnd();
+
+    /* ---- varv 2 ---- */
+    tanke(yR1, [
+      [['Samma sak igen: 6x^2 delat']],
+      [['med x är 6x.']]
+    ]);
+    xq = T.str('+6x', xq, yQ);
+    T.stepEnd();
+
+    tanke(yR1, [
+      [['6x gånger (x-2) blir 6x^2-12x.']]
+    ]);
+    y = yR1 + dy;
+    xe = T.str('6x^2-12x', c2, y);
+    T.stepEnd();
+
+    xe = dragBort(c2, xe, y);
+    T.stepEnd();
+
+    streck(c2 - adv('(') - 0.1 * F, Math.max(xR1, xe) + 0.1 * F, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['-7x-(-12x)=5x, och -10']],
+      [['skriver jag av.']]
+    ], 0.42);
+    var yR2 = y + dy;
+    var xR2 = T.str('5x-10', c1, yR2);
+    T.stepEnd();
+
+    /* ---- varv 3 ---- */
+    tanke(yR2, [
+      [['5x delat med x är 5.']]
+    ]);
+    xq = T.str('+5', xq, yQ);
+    T.stepEnd();
+
+    tanke(yR2, [
+      [['5 gånger (x-2) blir 5x-10.']]
+    ]);
+    y = yR2 + dy;
+    xe = T.str('5x-10', c1, y);
+    T.stepEnd();
+
+    xe = dragBort(c1, xe, y);
+    T.stepEnd();
+
+    streck(c1 - adv('(') - 0.1 * F, Math.max(xR2, xe) + 0.1 * F, y);
+    T.pause(200);
+    var y0 = y + dy;
+    T.str('0', c1 + adv('5x-1'), y0);
+    T.stepEnd();
+
+    tanke(y0, [
+      [['Resten blev noll, så x-2 går']],
+      [['jämnt upp. Kvoten står överst']],
+      [['ovanför strecket.']]
+    ]);
+    T.ring(x0 - 0.12 * F, xq + 0.12 * F, yQ);
+    T.stepEnd();
+
+    var yS = y0 + 2.7 * F;
+    xe = T.str('Svar: x^2+6x+5', padL, yS);
+    T.underline(xe, yS);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y = yS + 3.4 * F;
+    T.str('b)', padL, y - 1.5 * F, null, 0.62);
+    tanke(yS, [
+      [['Kvoten är den andra faktorn,']],
+      [['så ekvationen kan skrivas som']],
+      [['en produkt som är noll.']]
+    ], 0.45);
+    T.str('(x-2)(x^2+6x+5)=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x-2=0 ger roten x=2, som jag']],
+      [['redan känner till. Kvar är']],
+      [['andragradsfaktorn.']]
+    ]);
+    y += 2.8 * F;
+    T.str('x^2+6x+5=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['pq-formeln med p=6 och q=5.']],
+      [['Halva p är 3.']]
+    ]);
+    y += 3.2 * F;
     xx = T.str('x=-3±', padL, y);
     T.rot('3^2-5', xx, y);
     T.stepEnd();
@@ -46780,11 +46891,19 @@
     T.str('=-3±2', xx, y);
     T.stepEnd();
 
-    y += 3.0 * F;
-    xe = T.str('x_1=-5', padL + 40, y);
-    T.underline(xe, y);
+    y += 2.9 * F;
+    T.str('x_1=-3-2=-5', padL + 40, y);
     T.pause(300);
-    xe = T.str('x_2=-1', padL + 250, y);
+    y += 2.4 * F;
+    T.str('x_2=-3+2=-1', padL + 40, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll med x=-1:']],
+      [['-1+4+7-10=0. Det stämmer.']]
+    ]);
+    y += 2.9 * F;
+    xe = T.str('Svar: x_1=-5 och x_2=-1', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

@@ -3680,5 +3680,29 @@ window.BEGREPP = [
       { type: 'p', html: 'Att leta efter dem är svårt, för man letar efter något som inte händer. Metoden är att fotografera samma galaxer år efter år och se om någon ljusstark stjärna har försvunnit utan att först ha exploderat. Några enstaka kandidater finns, och de är intressanta av två skäl: de skulle förklara varför astronomerna ser färre supernovor än antalet nyfödda tunga stjärnor tycks kräva, och varför de tyngsta röda superjättarna aldrig verkar hinna explodera.' }
     ]
   },
+  {
+    id: 'tjerenkovstralning',
+    term: 'Tjerenkovstrålning',
+    former: ['tjerenkovstrålning', 'tjerenkovstrålningen', 'tjerenkovljus', 'tjerenkovljuset', 'cherenkovstrålning', 'cherenkovstrålningen', 'tjerenkoveffekten'],
+    kort: 'Ett svagt blått ljus som uppstår när en laddad partikel rör sig snabbare än ljuset gör i samma material, till exempel i vatten eller is.',
+    relaterade: ['brytningsindex', 'neutrino', 'myon', 'chockvag'],
+    body: [
+      { type: 'p', html: 'Ingenting kan färdas snabbare än ljuset i vakuum, omkring 300&nbsp;000&nbsp;km/s. Men i vatten, glas och is går ljuset långsammare. Hur mycket långsammare anges av materialets brytningsindex <em>n</em>: i vatten är ljusets fart ungefär 225&nbsp;000&nbsp;km/s och i is ungefär 230&nbsp;000&nbsp;km/s. En elektron eller myon med mycket hög energi kan därför vara snabbare än ljuset i materialet utan att bryta mot någon naturlag.' },
+      { type: 'p', html: 'När det händer sänder partikeln ut ljus i en kon som pekar framåt, längs partikelns väg. Det liknar ljudbangen bakom ett flygplan som flyger snabbare än ljudet, eller den V-formade vågen bakom en båt som går fortare än vattenvågorna. Ljuset är mest blått, och det är därför vattnet runt bränslet i en kärnreaktor lyser blått.' },
+      { type: 'p', html: 'Effekten upptäcktes 1934 av den sovjetiske fysikern Pavel Tjerenkov, som fick Nobelpriset 1958 för den. I dag är den ett av fysikernas viktigaste verktyg för att se partiklar som annars är osynliga. Neutrinoteleskop som IceCube på Sydpolen och Super-Kamiokande i Japan består av tusentals ljuskänsliga sensorer som väntar på de svaga blå blixtarna. Ur när ljuset når varje sensor går det att räkna ut åt vilket håll partikeln färdades.' },
+    ]
+  },
+  {
+    id: 'blazar',
+    term: 'Blazar',
+    former: ['blazar', 'blazaren', 'blazarer', 'blazarerna'],
+    kort: 'En galax med ett supermassivt svart hål i mitten som sprutar ut en smal stråle av materia i nästan ljusets hastighet, och där strålen råkar peka rakt mot jorden.',
+    relaterade: ['svart-hal', 'kvasar', 'straljet', 'ackretionsskiva', 'neutrino'],
+    body: [
+      { type: 'p', html: 'I mitten av de flesta stora galaxer finns ett svart hål som väger miljoner eller miljarder gånger mer än solen. När gas faller in mot hålet virvlar den runt i en het skiva, och en del av materien slungas i stället ut i två smala strålar, åt var sitt håll, i nästan ljusets hastighet. Strålarna kan bli längre än hela galaxen.' },
+      { type: 'p', html: 'Om en sådan stråle råkar peka nästan rakt mot jorden ser vi en blazar. Det är som att titta in i en ficklampa i stället för från sidan: ljuset blir mycket starkare, och eftersom strålen rör sig mot oss nästan lika fort som sitt eget ljus ser förändringar ut att gå snabbare än de gör. Blazarer kan därför flamma upp och dämpas på bara några dagar eller timmar.' },
+      { type: 'p', html: 'Blazarer hör till de mest energirika föremålen i universum och är misstänkta som acceleratorer av den kosmiska strålningen. År 2017 fångade neutrinoteleskopet IceCube en neutrino med mycket hög energi från samma riktning som blazaren TXS 0506+056, omkring fyra miljarder ljusår bort, just när den flammade upp. Det var första gången en sannolik källa till neutriner från rymden pekades ut.' },
+    ]
+  },
 ];
 

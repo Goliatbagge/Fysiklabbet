@@ -17,6 +17,12 @@ Format per post:
   (tillagd 2026-10-02)
 
 
+- **Fusionständning: värm först, fyll på bränsle sedan** — PPPL har räknat om Lawsonkriteriet med heliumaska, föroreningar (volfram: en del på 10 000 fördubblar trycket som krävs), synkrotronstrålning och temperaturberoende värmeförluster, och föreslår en energisnålare väg runt toppen. Ingång: fusion, Lawsonkriteriet, varför plasma måste vara både hett och tätt. OBS: teoretiskt, PRL (DOI 10.1103/mmc9-nzfx) troligen låst, inget arXiv-förtryck hittat 2026-10-06. Källa (Phys.org 2026-10-05): https://phys.org/news/2026-10-path-fusion-ignition-fuel.html
+  (tillagd 2026-10-06)
+
+- **En mjuk ventil stänger lättare om flödet fladdrar** — små variationer i flödet får en mjuk ventil (modell av en hjärtklaff) att stänga vid mycket lägre tryck än ett jämnt flöde. Ingång: tryck, strömning, resonans. OBS: strömningslära senast 2026-09-26. Källa (Physics, APS, 2026-10-05): https://link.aps.org/doi/10.1103/Physics.19.130
+  (tillagd 2026-10-06)
+
 - **Ljus som stelnar en vätskestråle till fiber** — en ring av UV-lysdioder 5 mm under ett munstycke får en fritt fallande stråle av ljushärdande vätska att stelna till fiber, och forskarna har en parameterfri formel för fiberns radie. Ingång: varför en vätskestråle bryts upp i droppar (Plateau–Rayleigh) och hur man hinner före. OBS: PRL är inte öppen, kontrollera arXiv-förtryck innan publicering. Physical Review Letters 137, 144004 (2026), DOI 10.1103/yh2j-b3wq (J. S. Smink, C. W. Visser, H. Lhuissier). Källa (Physics, APS, 2026-10-02): https://physics.aps.org/articles/v19/137
   OBS 2026-10-04: molnsessionen kunde inte läsa originalet (physics.aps.org, arxiv.org, phys.org, nature.com m.fl. blockerade av egress-proxyn), så ingen nyhet publicerades den dagen. Passar området (strömningslära, senast 2026-09-21) och grannarna 2026-10-03 (vågfysik) och 2026-10-02 (partikelfysik); första kandidat när originalet går att läsa.
   OBS 2026-10-04 (lokal session): inget arXiv-förtryck finns (arXiv-API:t ger ingen träff på titeln eller författarna) och PRL-fulltexten är låst. Väntar tills ett förtryck eller en öppen kopia dyker upp.

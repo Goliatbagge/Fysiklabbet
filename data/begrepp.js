@@ -56,6 +56,54 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'laserfilament',
+    term: 'Laserfilament',
+    former: ['laserfilament', 'laserfilamentet', 'laserfilamenten', 'plasmatråd', 'plasmatråden', 'plasmatrådar', 'plasmatrådarna'],
+    kort: 'En tunn, lång tråd av joniserad luft som bildas när en extremt kort och kraftig laserpuls fokuserar sig själv. Tråden kan vara mycket längre än vad en vanlig lins kan hålla en stråle samlad.',
+    relaterade: ['kerreffekten', 'plasma', 'plasmafrekvens'],
+    body: [
+      { type: 'p', html: 'En vanlig laserstråle sprids ut efter hand, ungefär som ljuset från en ficklampa. Men om pulsen är tillräckligt kraftig händer något oväntat: strålen drar ihop sig av sig själv. Luften i strålens mitt, där ljuset är starkast, får lite större brytningsindex än luften runt omkring, och fungerar därför som en samlingslins. Strålen blir smalare, ljuset ännu starkare, och linsen ännu kraftigare.' },
+      { type: 'p', html: 'Till slut blir ljuset så intensivt att elektroner slits loss ur luftens molekyler. De fria elektronerna gör motsatsen, de sprider ljuset. När samlingen och spridningen tar ut varandra bildas en smal kanal där strålen håller sig samlad långt längre än annars, ofta tiondels millimeter tjock och från några centimeter till många meter lång. Kanalen är fylld av svagt joniserad gas, ett plasma, och leder därför elektrisk ström en aning. Den lyser ofta blåviolett, eftersom kvävemolekyler i luften exciteras och sänder ut ljus.' },
+      { type: 'p', html: 'Laserfilament kräver pulser som bara varar femtosekunder (miljondelar av en miljarddels sekund) men har en toppeffekt på miljarder watt. De studeras bland annat för att leda blixtar, för att mäta föroreningar i atmosfären på avstånd och för att bygga antenner av luft.' }
+    ]
+  },
+  {
+    id: 'kerreffekten',
+    term: 'Kerreffekten',
+    former: ['kerreffekten', 'kerreffekt', 'kerr-effekten', 'kerr-effekt', 'självfokusering', 'självfokuseringen'],
+    kort: 'Att ett materials brytningsindex ändras av ett starkt elektriskt fält. I en kraftig laserstråle är det ljusets eget fält som gör det, och då kan strålen fokusera sig själv.',
+    relaterade: ['laserfilament'],
+    body: [
+      { type: 'p', html: 'Brytningsindex talar om hur mycket ljuset saktar in i ett material och hur mycket det bryts när det går in i det. Normalt är brytningsindex en egenskap hos materialet, oberoende av hur starkt ljuset är. Men i ett mycket starkt elektriskt fält rubbas elektronerna i atomerna så mycket att materialet reagerar annorlunda, och då ändras brytningsindex lite grand. Det upptäckte den skotske fysikern John Kerr på 1870-talet.' },
+      { type: 'p', html: 'En kraftig laserpuls har ett så starkt elektriskt fält att den själv ändrar brytningsindex i det den passerar. Där ljuset är starkast, i strålens mitt, blir brytningsindex störst. Ljuset går då lite långsammare i mitten än i kanterna, precis som i en glaslins som är tjockast på mitten, och strålen böjs inåt. Det kallas självfokusering.' },
+      { type: 'p', html: 'Självfokusering kan vara ett problem: den kan bränna sönder linser och kristaller i kraftiga lasrar. Men den kan också utnyttjas, till exempel för att skapa laserfilament i luft. Samma effekt används för att göra mycket korta ljuspulser och för att styra ljus med ljus i optisk kommunikation.' }
+    ]
+  },
+  {
+    id: 'plasmafrekvens',
+    term: 'Plasmafrekvens',
+    former: ['plasmafrekvens', 'plasmafrekvensen', 'plasmafrekvenser'],
+    kort: 'Den frekvens som de fria elektronerna i ett plasma naturligt svänger med. Elektromagnetiska vågor med lägre frekvens reflekteras av plasmat, vågor med högre frekvens går igenom.',
+    relaterade: ['plasma', 'laserfilament'],
+    body: [
+      { type: 'p', html: 'I ett plasma finns fria elektroner och positiva joner. Om elektronerna knuffas lite åt ena hållet blir det ett överskott av negativ laddning på ena sidan och positiv på den andra, och elektronerna dras tillbaka. De skjuter över målet och svänger fram och tillbaka, ungefär som en vikt i en fjäder. Hur snabbt de svänger kallas plasmafrekvensen. Ju fler fria elektroner, desto starkare blir den återförande kraften och desto högre blir frekvensen.' },
+      { type: 'p', html: 'Plasmafrekvensen avgör hur plasmat beter sig mot elektromagnetiska vågor. En våg som svänger långsammare än plasmafrekvensen hinner elektronerna följa med i, och de skärmar då av fältet så att vågen inte kommer in. Plasmat beter sig som en metallspegel. En våg som svänger snabbare hinner elektronerna inte med i, och då går vågen rakt igenom.' },
+      { type: 'p', html: 'Det är därför jonosfären, ett plasmaskikt högt upp i atmosfären, kan reflektera kortvågsradio runt jordklotet medan FM-radio och mobilsignaler med högre frekvens går rakt ut i rymden. Metaller glänser av samma skäl: deras elektroner har en plasmafrekvens i ultraviolett, så synligt ljus reflekteras.' }
+    ]
+  },
+  {
+    id: 'narfalt',
+    term: 'Närfält',
+    former: ['närfält', 'närfältet', 'närfälten'],
+    kort: 'Området närmast en antenn, ungefär inom en sjättedel av våglängden, där de elektriska och magnetiska fälten ännu inte har lossnat från antennen som en fri våg.',
+    relaterade: ['plasmafrekvens'],
+    body: [
+      { type: 'p', html: 'En antenn sänder ut elektromagnetiska vågor som lämnar den och fortsätter av sig själva, i princip hur långt som helst. Men alldeles intill antennen ser fälten annorlunda ut. Där finns också fält som hela tiden pendlar fram och tillbaka mellan antennen och rummet runt den, utan att ge sig av. Det området kallas närfältet, och längre bort, där bara den fria vågen finns kvar, ligger fjärrfältet.' },
+      { type: 'p', html: 'Gränsen brukar anges till ungefär våglängden delad med 2π, alltså en sjättedel av våglängden. För en radiosignal med våglängden 10&nbsp;m är det cirka 1,6&nbsp;m, för en mobilsignal några centimeter. I närfältet avtar fälten mycket snabbt med avståndet, och en mottagare där kan påverka sändaren, ungefär som två kondensatorplattor eller två spolar som står nära varandra.' },
+      { type: 'p', html: 'Närfältet används med flit i trådlösa laddare, kontaktlösa betalkort och passerkort, som bara fungerar på några centimeters avstånd. Men när man vill visa att en antenn verkligen sänder ut radiovågor behöver mätningen göras i fjärrfältet.' }
+    ]
+  },
+  {
     id: 'vatebindning',
     term: 'Vätebindning',
     former: ['vätebindning', 'vätebindningen', 'vätebindningar', 'vätebindningarna'],

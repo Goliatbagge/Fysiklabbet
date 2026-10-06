@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Mon, 05 Oct 2026 07:31:04 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2026 01:30:43 GMT</lastBuildDate>
+    <item>
+      <title>Laserpulser gör luften till en radioantenn</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-06-antennen-gjord-av-ljus</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-06-antennen-gjord-av-ljus</guid>
+      <pubDate>Tue, 06 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Elektromagnetism</category>
+      <description>En antenn brukar vara en metallstav med bestämd längd. Forskare vid North Carolina State University har i stället skjutit korta laserpulser genom luft, så att en 20 centimeter lång tråd av joniserad gas bildas, och fått tråden att sända en radiosignal på 30 megahertz. Det är ett första steg: mottagaren stod bara fem centimeter bort.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-06-antennen-gjord-av-ljus.jpg" length="653169" type="image/jpeg"/>
+    </item>
     <item>
       <title>Två laboratorier fick samma svar: kvasipartiklar med en fjärdedels elektronladdning</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-05-laddningen-en-fjardedels-elektron</link>
@@ -177,15 +186,6 @@
       <category>Kvantfysik</category>
       <description>Varför sitter aldrig ett dammkorn på två ställen samtidigt? Ett förslag från 1960-talet lägger skulden på gravitationen: rumtiden skulle darra, och darrningarna sudda ut stora föremåls kvanttillstånd. Samma darrningar skulle rycka i laddade partiklar, och en laddning som rycks till sänder ut strålning. Ett italienskt lag har letat efter just den strålningen i en germaniumkristall under berget Gran Sasso. Den fanns inte, och därmed faller modellen.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-18-tystnaden-under-berget.jpg" length="290488" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Cykeln rullar redan när klockan börjar gå — och ändå är det ingen tjuvstart</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-17-starten-som-redan-rullar</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-17-starten-som-redan-rullar</guid>
-      <pubDate>Thu, 17 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Mekanik</category>
-      <description>Ett tempolopp på cykelbana börjar från stillastående, med bakhjulet fastlåst i en startgrind. Ändå passerade en av åkarna i en ny studie startlinjen i 0,4 meter i sekunden. Fyra franska forskare har filmat elitåkare och byggt en modell av de första tiondelarna. Drivkraften visar sig sitta i kroppen, inte i pedalerna.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-17-starten-som-redan-rullar.jpg" length="261208" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

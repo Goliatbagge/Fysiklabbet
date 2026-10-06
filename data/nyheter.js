@@ -103,6 +103,67 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-06-antennen-gjord-av-ljus",
+    date: "2026-10-06",
+    title: "Laserpulser gör luften till en radioantenn",
+    deck: "En antenn brukar vara en metallstav med bestämd längd. Forskare vid North Carolina State University har i stället skjutit korta laserpulser genom luft, så att en 20\u00a0centimeter lång tråd av joniserad gas bildas, och fått tråden att sända en radiosignal på 30\u00a0megahertz. Det är ett första steg: mottagaren stod bara fem centimeter bort.",
+    category: "Elektromagnetism",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-06-antennen-gjord-av-ljus.jpg",
+    imageAlt: "Ett mörkt optiklaboratorium med linshållare och speglar på ett optiskt bord. Mitt i bilden svävar en tunn, rak, blåviolett lysande tråd i luften, och runt dess mitt sitter en liten kopparring på en svart stolpe.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["elektromagnetism", "antenn", "radiovågor", "laser", "plasma", "laserfilament", "kerreffekten", "plasmafrekvens", "närfält", "kondensator", "satellit"],
+    sources: [
+      { name: "Phys.org: Lightsaber-like plasma antenna uses laser-ionized air to transmit radio waves (pressmeddelande från North Carolina State University, oktober 2026)", url: "https://phys.org/news/2026-10-lightsaber-plasma-antenna-laser-ionized.html" },
+      { name: "IEEE Xplore: Laser-Induced-Plasma-Filament Antenna Transmitting 30 MHz VHF (studien, öppet tillgänglig)", url: "https://ieeexplore.ieee.org/document/11674160/" }
+    ],
+    research: {
+      citation: "P. Darshni, A. Dogariu och P. D. Franzon, ”Laser-Induced-Plasma-Filament Antenna Transmitting 30 MHz VHF”, IEEE Journal of Microwaves 6(5), 1174–1183 (2026). Kollegialt granskad, publicerad i septembernumret 2026, öppet tillgänglig (CC BY-NC-ND 4.0).",
+      url: "https://doi.org/10.1109/JMW.2026.3722433"
+    },
+    larare: {
+      moment: [
+        { label: "Elektromagnetiska vågor och ljus", href: "katalog.html?id=fy2-4.1" },
+        { label: "Pulser, vågor och utbredningshastighet", href: "katalog.html?id=fy2-2.7" },
+        { label: "Stående vågor i strängar", href: "katalog.html?id=fy2-2.9" }
+      ],
+      fragor: [
+        "Signalen i mottagaren blev 2,5 gånger starkare när plasmatråden fanns, men mottagaren stod bara 5 cm bort. Varför räcker det inte för att visa att tråden fungerar som radiosändare på långt avstånd? Vad skulle du vilja mäta härnäst?",
+        "Varje laserpuls bär bara 5 millijoule, ändå är effekten omkring 50 gigawatt. Hur kan båda uppgifterna stämma, och varför är det effekten och inte energin som avgör om luften joniseras?",
+        "En klassisk dipolantenn för 30 MHz är ungefär 5 m lång, en halv våglängd. Hur hänger det ihop med stående vågor, och vad säger det om en antenn som bara är 20 cm lång?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Varje mobiltelefon, radio och satellit har en antenn: en ledare där elektroner drivs fram och tillbaka i takt med signalen. Elektronernas svängningar sänder ut elektromagnetiska vågor. Hur lång antennen är avgör vilka våglängder den passar för, och därför bär satelliter ofta långa antenner som måste vikas ihop vid uppskjutningen och fällas ut i rymden. Doktoranden Prya Darshni och professor Paul Franzon vid North Carolina State University har tillsammans med Arthur Dogariu, verksam vid Texas A&amp;M och Princeton, prövat ett helt annat sätt: att göra antennen av luft. Studien publicerades i septembernumret av den öppet tillgängliga tidskriften <em>IEEE Journal of Microwaves</em>.' },
+
+      { type: 'h2', text: 'En ljusstråle som håller ihop sig själv' },
+      { type: 'p', html: 'Tricket heter laserfilament. Forskarna använde en laser i nära infrarött, omkring 800&nbsp;nanometer, som skickar tusen pulser i sekunden. Varje puls varar bara 100&nbsp;femtosekunder, alltså 10<sup>−13</sup>&nbsp;s, och bär 5&nbsp;millijoule. Det är lite energi, men den levereras på så kort tid att effekten blir enorm: $P = \\dfrac{E}{\\Delta t} = \\dfrac{5 \\cdot 10^{-3}\\ \\mathrm{J}}{10^{-13}\\ \\mathrm{s}} = 5 \\cdot 10^{10}\\ \\mathrm{W}$, eller 50&nbsp;gigawatt. Det är mer än tre gånger Sveriges genomsnittliga elförbrukning, fast bara under en tiondels biljondels sekund. Räknat över en hel sekund är lasern inte starkare än 5&nbsp;watt.' },
+      { type: 'p', html: 'Vid så hög intensitet ändrar ljuset själva luften. Brytningsindex blir lite större där strålen är starkast, alltså i mitten, och luften verkar då som en samlingslins. Strålen drar ihop sig av sig själv. Det kallas Kerreffekten, och den tar över när pulsens effekt överstiger en kritisk gräns, som forskarna uppskattar till knappt 2&nbsp;gigawatt i luft. När strålen krympt tillräckligt slits elektroner loss ur luftens molekyler. De fria elektronerna sprider i sin tur ljuset, och jämvikten mellan samling och spridning ger en lång, tunn kanal av plasma. Med en lins med brännvidden 2&nbsp;m blev tråden omkring 20&nbsp;cm lång och 0,1&nbsp;mm tjock. Den lyser blåviolett, eftersom lasern också exciterar kvävemolekyler som sedan sänder ut ljus.' },
+      { type: 'p', html: 'Plasmat är glest. Under liknande förhållanden har man uppmätt omkring 10<sup>22</sup> fria elektroner per kubikmeter, och ett överslag med luftens täthet vid normalt tryck ger att ungefär en molekyl på 2&nbsp;500 har förlorat en elektron. Det räcker för att tråden ska leda ström, även om koppar leder omkring 300&nbsp;000 gånger bättre.' },
+
+      { type: 'h2', text: 'Signalen matas in utan kontakt' },
+      { type: 'p', html: 'En metallantenn kopplas till sändaren med en kabel. En plasmatråd går inte att skruva fast en kontakt på, för då förstörs den. Forskarna lät därför lasern gå genom mitten av två koncentriska kopparrör, en centimeter långa och 0,8 respektive 2&nbsp;mm i diameter, som kopplades till en signalgenerator på 30&nbsp;megahertz. Rören och plasmat bildar tillsammans en sorts kondensator: det växlande elektriska fältet når in i plasmat och sätter dess elektroner i rörelse, utan att något rör vid tråden.' },
+      { type: 'image', src: 'nyheter/bilder/2026-10-06-antennen-gjord-av-ljus-2.jpg', alt: 'Foto av försöksuppställningen i ett mörkt labb med forskarnas inritade etiketter. En tunn blå lysande linje löper vågrätt genom bilden, och mitt på den sitter en liten metallhållare på en stolpe. Infällda rutor visar mottagarkedjan och en skiss av de två koncentriska kopparrören runt plasmatråden.', caption: 'Försöksuppställningen med forskarnas egna etiketter. Den blå linjen är plasmatråden, som lyser när lasern exciterar kvävemolekyler i luften. Kopparrören som matar in radiosignalen sitter i hållaren mitt på linjen.', credit: 'Bild: P. Darshni, A. Dogariu och P. D. Franzon, IEEE Journal of Microwaves, figur 6 (CC BY-NC-ND 4.0)' },
+      { type: 'p', html: 'Att plasmat beter sig som en ledare och inte som en genomskinlig gas beror på hur snabbt fältet växlar. Elektronerna i ett plasma kan följa och skärma av alla svängningar som är långsammare än plasmans egen svängningsfrekvens, plasmafrekvensen. Här är den omkring 6&nbsp;·&nbsp;10<sup>12</sup>&nbsp;radianer per sekund, ungefär en terahertz. Plasmat svänger alltså omkring 30&nbsp;000 gånger snabbare än radiosignalen, så för signalen är tråden lika ogenomtränglig som en metallstav, och vågen leds längs ytan.' },
+
+      { type: 'h2', text: 'Två och en halv gånger starkare, på fem centimeter' },
+      { type: 'p', html: 'Som mottagare använde forskarna en 12&nbsp;cm lång antenn, vriden åt samma håll som plasmatråden och placerad omkring 5&nbsp;cm bort. Först blockerades lasern, så att bara kopparrören sände. Sedan släpptes lasern på. Med plasmatråden på plats steg signalen från ungefär 0,2 till 0,5&nbsp;millivolt, alltså 2,5&nbsp;gånger. Mätningarna gjordes med ett oscilloskop som triggades av laserpulserna, och varje kurva var ett medelvärde av 64&nbsp;svep. Tråden finns bara en kort stund efter varje puls, så antennen tänds och släcks tusen gånger i sekunden.' },
+      { type: 'p', html: 'Resultatet ska läsas med två förbehåll, och forskarna nämner själva båda. Signalens våglängd är $\\lambda = \\dfrac{c}{f} = \\dfrac{3{,}0 \\cdot 10^{8}\\ \\mathrm{m/s}}{30 \\cdot 10^{6}\\ \\mathrm{Hz}} = 10\\ \\mathrm{m}$. Närmare en antenn än ungefär en sjättedel av våglängden, här cirka 1,6&nbsp;m, ligger det så kallade närfältet, där sändare och mottagare påverkar varandra mer direkt än genom en utsänd våg. Mottagaren stod alltså djupt inne i närfältet. Om signalen når långt, och hur stor del av effekten som verkligen strålas ut, återstår att visa. Dessutom är tråden kort: en vanlig dipolantenn för 30&nbsp;MHz är en halv våglängd, alltså 5&nbsp;m lång, 25&nbsp;gånger längre än plasmatråden.' },
+      { type: 'quote', html: 'Det här är det första steget, men det är ett stort steg. Nu när vi har visat att det är möjligt kan vi börja förbättra prestandan.', cite: 'Prya Darshni, North Carolina State University' },
+      { type: 'p', html: 'Idén att låta en laserstråle i luft bära radiovågor är inte ny. För drygt tio år sedan visade franska forskare att en meterlång plasmakanal kunde sända radiosignaler, men där hölls plasmat igång av en teslaspole, och det var svårt att skilja ut trådens eget bidrag. I den nya studien är plasmatråden ensam om att förstärka signalen. Någon mottagning har gruppen inte prövat, men Darshni ser ingen anledning till att tråden inte också skulle kunna ta emot signaler.' },
+
+      { type: 'h2', text: 'En antenn som byter längd och riktning' },
+      { type: 'p', html: 'Det lockande är flexibiliteten. Trådens längd styrs av laserns inställningar, så en och samma utrustning skulle kunna göra antenner för olika frekvenser, och antennen vrids genom att man helt enkelt riktar om laserstrålen. Forskarnas långsiktiga mål är trådar som är meter- eller till och med kilometerlånga, på flygplan och satelliter. Dit är det långt. Försöket gjordes med en stor labblaser i luft vid normalt tryck, och plasmatråden är i dag en bråkdel av en våglängd lång.' },
+      { type: 'quote', html: 'Det här är ett spännande nytt koncept som gör det möjligt att få en skräddarsydd antenn utan komplicerade mekaniska utfällningsmekanismer.', cite: 'Paul Franzon, North Carolina State University' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Kerreffekten är uppkallad efter den skotske fysikern John Kerr, som på 1870-talet upptäckte att ett elektriskt fält kan ändra ett materials brytningsindex. I ett laserfilament är det ljusets eget fält som gör det.',
+        '30&nbsp;MHz ligger precis på gränsen mellan kortvåg (3–30&nbsp;MHz) och VHF-bandet (30–300&nbsp;MHz). FM-radion sänder högre upp i VHF-bandet, mellan 88 och 108&nbsp;MHz.',
+        'Laserfilament har också prövats som åskledare. År 2023 rapporterade forskare att en kraftig laser på berget Säntis i Schweiz fick blixtnedslag att följa laserstrålen en bit på vägen ned mot åskledaren.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-05-laddningen-en-fjardedels-elektron",
     date: "2026-10-05",
     title: "Två laboratorier fick samma svar: kvasipartiklar med en fjärdedels elektronladdning",

@@ -450,18 +450,50 @@ function ledigPlats(typ, r, marg) {
   }
   return null;
 }
+/* Enkelbänkar som verktyget själv ställt ut (it.auto = [x, y, rot]) läggs om
+   centrerat varje gång antalet ändras: rad för rad framifrån, varje rad
+   centrerad i salen. En bänk som flyttats eller vridits sedan dess räknas som
+   lärarens egen och står kvar. */
+const arAuto = it => it.auto && it.auto[0] === it.x && it.auto[1] === it.y && it.auto[2] === it.rot;
 function stallAntal(r, typ, n) {
   n = clamp(Math.round(n) || 0, 0, 80);
-  const nu = r.items.filter(i => i.typ === typ);
-  if (n <= nu.length) {
-    const bort = new Set(nu.slice(n).map(i => i.id));
+  const egna = r.items.filter(i => i.typ === typ && !arAuto(i));
+  if (n <= egna.length) {
+    // Färre än de egna: de senast tillagda tas bort, och alla automatiska försvinner.
+    const bort = new Set(r.items.filter(i => i.typ === typ && arAuto(i)).map(i => i.id).concat(egna.slice(n).map(i => i.id)));
     r.items = r.items.filter(i => !bort.has(i.id));
     r.blocked = r.blocked.filter(x => !bort.has(x.split(':')[0]));
     return { fick: n, ville: n };
   }
-  let antal = nu.length;
-  while (antal < n) { const it = ledigPlats(typ, r, 30) || ledigPlats(typ, r, 0); if (!it) break; r.items.push(it); antal++; }
-  return { fick: antal, ville: n };
+  const gamla = r.items.filter(i => i.typ === typ && arAuto(i));
+  const gamlaIds = new Set(gamla.map(i => i.id));
+  r.items = r.items.filter(i => !gamlaIds.has(i.id));
+  const b = lokalBox(typ), bw = b.x1 - b.x0, bh = b.y1 - b.y0, gap = 30;
+  const kat = r.items.find(i => i.typ === 'kateder');
+  let y = 170;
+  if (kat) { const kb = aabb(kat); if (kb.y1 < r.D / 2) y = Math.max(y, kb.y1 + 40); }
+  const perRad = Math.max(1, Math.floor((r.W - 80 + gap) / (bw + gap)));
+  let kvar = n - egna.length;
+  const nya = [];
+  // Återanvänd de gamla id:na i tur och ordning, så att placeringarna i möjligaste mån gäller kvar.
+  const ids = gamla.map(i => i.id);
+  while (kvar > 0 && y + bh <= r.D - 10) {
+    const m = Math.min(perRad, kvar), bredd = m * bw + (m - 1) * gap;
+    for (let j = 0; j < m; j++) {
+      const it = { id: ids.shift() || uid(), typ, x: r1((r.W - bredd) / 2 + j * (bw + gap) - b.x0), y: r1(y - b.y0), rot: 0 };
+      if (r.items.some(o => krockar(o, it)) || nya.some(o => krockar(o, it))) { if (it.id) ids.unshift(it.id); continue; }
+      it.auto = [it.x, it.y, 0];
+      nya.push(it); kvar--;
+    }
+    y += bh + gap;
+  }
+  // Fick inte alla plats i raderna: fyll på där det finns ledigt golv.
+  r.items.push(...nya);
+  while (kvar > 0) { const it = ledigPlats(typ, r, 30) || ledigPlats(typ, r, 0); if (!it) break; r.items.push(it); kvar--; }
+  const fick = n - kvar;
+  const kvarIds = new Set(r.items.map(i => i.id));
+  r.blocked = r.blocked.filter(x => kvarIds.has(x.split(':')[0]));
+  return { fick, ville: n };
 }
 /* ---------- Föreslå bänkplacering ----------
    Sprider N enkelbänkar över golvet så att det minsta fria avståndet mellan
@@ -858,6 +890,13 @@ function forval(r, namn, N) {
 }
 
 /* ================= Namn ================= */
+const NAMNSTORLEK = [[1, 'Normal'], [1.35, 'Stor'], [1.7, 'Störst']];
+function bytNamnstorlek(v) {
+  if (v == null) { const i = NAMNSTORLEK.findIndex(([x]) => x === (S.inst.namnstorlek || 1)); v = NAMNSTORLEK[(i + 1) % NAMNSTORLEK.length][0]; }
+  S.inst.namnstorlek = v; passCache.clear(); spara(); ritaPlan();
+  if (S.inst.lage === 'plac') ritaPanel();
+  visaTips(`Namnstorlek: ${NAMNSTORLEK.find(([x]) => x === v)[1]}`);
+}
 function visningsnamn(k) {
   const m = new Map(); if (!k) return m;
   const delar = e => e.namn.trim().split(/\s+/);
@@ -1147,16 +1186,39 @@ function planSvg(opt = {}) {
     const q = ui.ram;
     s += `<rect x="${Math.min(q.x0, q.x1)}" y="${Math.min(q.y0, q.y1)}" width="${Math.abs(q.x1 - q.x0)}" height="${Math.abs(q.y1 - q.y0)}" fill="${FARG.blue}" fill-opacity=".07" stroke="${FARG.blue}" stroke-width="1.6" stroke-dasharray="6 4" pointer-events="none"/>`;
   }
-  // Namnkorten
+  // Namnkorten. Med större namnstorlek blir korten större än platsens bredd;
+  // ett kort som då skulle överlappa ett annat flyttas i första hand in över
+  // den egna bänken och i andra hand längre ut, så att alla namn syns och det
+  // ändå är tydligt vilken bänk namnet hör till.
   if (visaNamn) {
     const anim = ui.anim, pool = anim ? anim.pool : null;
     const drag = ui.drag && ui.drag.kind !== 'item' && ui.drag.kind !== 'vagg' && ui.drag.moved ? ui.drag : null;
+    const f = S.inst.namnstorlek || 1;
+    const itemById = new Map(r.items.map(i => [i.id, i]));
+    const upptagna = [];
     for (const p of pl) {
-      const [vx, vy] = V(p.kx, p.ky);
+      let [vx, vy] = V(p.kx, p.ky);
       const stId = c.map[p.id];
       const har = stId && elevIds.has(stId);
       const mal = !exp && ui.mal === p.id;
-      const w = p.kort - 2, h = S.inst.namn === 'hela' ? 38 : 29;
+      const w = (p.kort - 2) * f, h = (S.inst.namn === 'hela' ? 38 : 29) * f;
+      if (har && f > 1) {
+        // Riktningen rakt ut från bänkens framkant mot stolen (vinkelrätt mot bänken).
+        const it = itemById.get(p.item);
+        const sida = rot(p.x - it.x, p.y - it.y, -it.rot)[1] < 0 ? -1 : 1;
+        let [dx, dy] = rot(0, sida, it.rot);
+        if (vand()) { dx = -dx; dy = -dy; }
+        let val = null;
+        // Först på stolen, sedan in över den egna bänken, sist längre ut från den.
+        for (const niva of [0, -1, 1, 2]) {
+          if (val) break;
+          const x = vx + dx * niva * (h + 3), y = vy + dy * niva * (h + 3);
+          const q = { x0: x - w / 2, x1: x + w / 2, y0: y - h / 2, y1: y + h / 2 };
+          if (!upptagna.some(o => o.x0 < q.x1 - 1 && q.x0 < o.x1 - 1 && o.y0 < q.y1 - 1 && q.y0 < o.y1 - 1)) val = { x, y, q };
+        }
+        if (!val) val = { x: vx, y: vy, q: { x0: vx - w / 2, x1: vx + w / 2, y0: vy - h / 2, y1: vy + h / 2 } };
+        upptagna.push(val.q); vx = val.x; vy = val.y;
+      }
       if (!har) {
         if (mal) s += `<rect x="${vx - w / 2}" y="${vy - h / 2}" width="${w}" height="${h}" rx="6" fill="${FARG.accent}" fill-opacity=".08" stroke="${FARG.accent}" stroke-width="2.4" stroke-dasharray="5 3"/>`;
         if (!exp) s += `<rect data-seat="${p.id}" x="${vx - STOL_B / 2 - 4}" y="${vy - STOL_D / 2 - 4}" width="${STOL_B + 8}" height="${STOL_D + 8}" fill="transparent"/>`;
@@ -1181,11 +1243,11 @@ function planSvg(opt = {}) {
       s += `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="6" fill="${FARG.kort}" stroke="${kant}" stroke-width="${mal ? 2.6 : last ? 2 : 1.3}"/>`;
       const farg = snurr ? FARG.muted : FARG.ink;
       if (label.l2 !== undefined) {
-        const a = passa(label.l1, w - 7, 15, fam), b = passa(label.l2 || '', w - 7, 12, fam);
-        s += `<text y="-2" text-anchor="middle" font-size="${a.fs}" font-weight="600" fill="${farg}">${esc(a.s)}</text>`;
-        if (b.s) s += `<text y="${13}" text-anchor="middle" font-size="${b.fs}" font-weight="500" fill="${FARG.soft}">${esc(b.s)}</text>`;
+        const a = passa(label.l1, w - 7, r1(15 * f), fam), b = passa(label.l2 || '', w - 7, r1(12 * f), fam);
+        s += `<text y="${r1(-2 * f)}" text-anchor="middle" font-size="${a.fs}" font-weight="600" fill="${farg}">${esc(a.s)}</text>`;
+        if (b.s) s += `<text y="${r1(13 * f)}" text-anchor="middle" font-size="${b.fs}" font-weight="500" fill="${FARG.soft}">${esc(b.s)}</text>`;
       } else {
-        const a = passa(label.l1, w - 7, 17, fam);
+        const a = passa(label.l1, w - 7, r1(17 * f), fam);
         s += `<text y="${r1(a.fs * 0.35)}" text-anchor="middle" font-size="${a.fs}" font-weight="600" fill="${farg}">${esc(a.s)}</text>`;
       }
       if (last && !exp) {
@@ -1240,6 +1302,7 @@ function ritaStatus() {
   const go = $('goBtn'), nasta = $('nastaBtn');
   const tomt = $('tomt');
   stage.classList.toggle('rum', lage === 'rum');
+  $('storlekBtn').hidden = lage === 'rum';
   if (lage === 'rum') {
     go.hidden = true;
     nasta.hidden = false;
@@ -1539,6 +1602,11 @@ function panelPlac() {
       <button data-act="namn" data-v="kort" aria-pressed="${S.inst.namn === 'kort'}">Förnamn</button>
       <button data-act="namn" data-v="hela" aria-pressed="${S.inst.namn === 'hela'}">Hela namnet</button>
     </div>
+    <span class="lbl">Namnstorlek</span>
+    <div class="seg" role="group" aria-label="Namnstorlek">
+      ${NAMNSTORLEK.map(([v, t]) => `<button data-act="storlek" data-v="${v}" aria-pressed="${(S.inst.namnstorlek || 1) === v}">${t}</button>`).join('')}
+    </div>
+    <p class="note">Stora namn syns bättre på projektorn. Knappen <b>Aa</b> ovanför planen byter storlek, även i helskärm.</p>
   </div>
   <div class="grp">
     <div class="grp-h"><span class="eyebrow">Spara och dela</span></div>
@@ -2456,6 +2524,7 @@ panel.addEventListener('click', e => {
     case 'tomma': S.inst.tomma = b.dataset.v; spara(); ritaPanel(); break;
     case 'vy': S.inst.vy = b.dataset.v; spara(); allt(); break;
     case 'namn': S.inst.namn = b.dataset.v; spara(); allt(); break;
+    case 'storlek': bytNamnstorlek(+b.dataset.v); break;
     case 'sparaPlac': {
       minns();
       const c = cur();
@@ -2605,6 +2674,7 @@ $('nastaBtn').addEventListener('click', () => {
 });
 $('goBtn').addEventListener('click', () => { if (!ui.anim) slumpa(); });
 $('angraBtn').addEventListener('click', angra);
+$('storlekBtn').addEventListener('click', () => bytNamnstorlek());
 $('vandBtn').addEventListener('click', () => { S.inst.vy = vand() ? 'elev' : 'larare'; spara(); allt(); });
 $('fsBtn').addEventListener('click', () => {
   const ar = document.fullscreenElement || document.webkitFullscreenElement;

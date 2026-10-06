@@ -89,6 +89,36 @@ window.OVNINGSBLAD = {
       pdf: 'ovningsblad/ovningsblad-potenser.pdf',
     },
   ],
+  'ma1c-1.8': [
+    {
+      titel: 'Rationella exponenter',
+      beskrivning: 'Från exponent till rot och tillbaka, negativa bråkexponenter, potenslagarna med bråk i exponenten och ekvationer. Uppgifterna är ordnade i tre nivåer, från en potens i taget till exponentialekvationer med rötter och resonemang. Svar och lösningsförslag sist.',
+      niva: ['Grund', 'Mellan', 'Avancerad'],
+      antal: 59,
+      html: 'ovningsblad/ovningsblad-rationella-exponenter.html',
+      pdf: 'ovningsblad/ovningsblad-rationella-exponenter.pdf',
+    },
+  ],
+  'ma1c-2.8': [
+    {
+      titel: 'Problemlösning med ekvationer',
+      beskrivning: 'Textuppgifter om tal, ålder, pengar, figurer, tid och sträcka, blandningar och arbete. Tre nivåer, från en mening i taget till problem där man själv väljer vad som ska heta *x*. Lösningsförslagen följer stegen översätt, lös och tolka.',
+      niva: ['Grund', 'Mellan', 'Avancerad'],
+      antal: 23,
+      html: 'ovningsblad/ovningsblad-problemlosning.html',
+      pdf: 'ovningsblad/ovningsblad-problemlosning.pdf',
+    },
+  ],
+  'ma1c-2.11': [
+    {
+      titel: 'Olikheter',
+      beskrivning: 'Olikhetstecknen, när tecknet ska vändas, parenteser och nämnare, dubbla olikheter, olikheter av andra graden med tallinje och textuppgifter. Tre nivåer. Svar och lösningsförslag sist.',
+      niva: ['Grund', 'Mellan', 'Avancerad'],
+      antal: 48,
+      html: 'ovningsblad/ovningsblad-olikheter.html',
+      pdf: 'ovningsblad/ovningsblad-olikheter.pdf',
+    },
+  ],
   'fy1-3.S': [
     {
       titel: 'Rita krafterna',

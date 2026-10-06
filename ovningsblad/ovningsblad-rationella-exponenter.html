@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Övningsblad: Rationella exponenter — Fysiklabbet</title>
+<meta name="description" content="59 uppgifter om rationella exponenter i Matematik nivå 1c på tre nivåer: från exponent till rot, negativa bråkexponenter, potenslagarna och ekvationer. Med svar och lösningsförslag. Utskriftsklart.">
+<link rel="canonical" href="https://fysiklabbet.se/ovningsblad/ovningsblad-rationella-exponenter.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  renderMathInElement(document.body, {
+    delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
+    throwOnError: false
+  });
+  document.documentElement.setAttribute('data-katex', 'klar');
+});
+</script>
+<style>
+:root { --ink:#1f2530; --paper:#f7f2e8; --line:rgba(31,37,48,.22); --teal:#0d9488; }
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin:0; font-family:'Poppins', system-ui, sans-serif; color:var(--ink); background:#fff; font-size:11pt; line-height:1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { max-width: 186mm; margin: 0 auto; padding: 10mm 6mm 20mm; }
+header { border-bottom: 2px solid var(--ink); padding-bottom: 6px; margin-bottom: 12px; }
+.over { font-size: 9.5pt; text-transform: uppercase; letter-spacing: .06em; color:#5b6472; margin:0; }
+h1 { font-size: 20pt; margin: 2px 0 0; line-height:1.2; }
+.under { margin: 2px 0 0; font-size: 11pt; color:#3b4350; }
+.namn { display:flex; gap: 28px; margin-top: 8px; font-size: 10pt; color:#3b4350; }
+.namn span { flex:1; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.box { background: var(--paper); border: 1px solid rgba(31,37,48,.18); border-radius: 8px; padding: 8px 14px; margin: 0 0 10px; break-inside: avoid; }
+.box p { margin: 3px 0; }
+.boxgrid { display:grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
+.box ul, .box ol { margin: 2px 0 2px 16px; padding: 0; }
+.box li { margin: 1px 0; }
+.box .katex-display { margin: 2px 0 3px; text-align:left; }
+.box .katex-display > .katex { text-align:left; }
+.rub { font-weight: 600; }
+.nivaer { font-size: 9.5pt; color:#3b4350; margin: 0 0 6px; }
+.niva { margin-bottom: 6px; }
+.nivastart { break-inside: avoid; page-break-inside: avoid; }
+.nivastart + .tasks { margin-top: 4px; }
+h2 { display:flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; font-size: 13pt; margin: 14px 0 4px; padding: 3px 0; border-bottom: 1.4px solid var(--ink); break-after: avoid; }
+h2 .nivanamn { color: var(--teal); }
+h2 .sv { font-weight: 400; font-size: 9pt; color:#5b6472; }
+.instr { font-weight: 600; margin: 8px 0 3px; break-after: avoid; }
+.tasks { display: grid; gap: 4px 14px; }
+.c1 { grid-template-columns: 1fr; } .c2 { grid-template-columns: repeat(2, 1fr); }
+.c3 { grid-template-columns: repeat(3, 1fr); } .c4 { grid-template-columns: repeat(4, 1fr); }
+.task { break-inside: avoid; padding: 4px 4px 0; border-bottom: 1px dotted var(--line); display:flex; gap: 6px; align-items: baseline; }
+.task .nr { font-weight: 600; min-width: 1.7em; text-align:right; font-size: 10pt; }
+.task .eq { flex:1; min-width: 0; }
+.task .katex, .sol p .katex, .svarlista .katex, .box p .katex, .box li .katex { white-space: nowrap; }
+.kort { min-height: 16mm; } .mellan { min-height: 30mm; } .hog { min-height: 44mm; } .xhog { min-height: 64mm; }
+.fig { margin: 4px 0 2px; }
+.fig svg { max-width: 100%; height: auto; }
+.facit { break-before: page; page-break-before: always; }
+.facit h2 { font-size: 14pt; }
+.svarniva, .losniva { font-size: 11pt; margin: 8px 0 3px; color: var(--teal); break-after: avoid; }
+.svarlista { display:grid; grid-template-columns: repeat(4, 1fr); gap: 2px 12px; font-size: 9.8pt; margin-bottom: 6px; }
+.svarlista div { display:flex; gap: 6px; align-items: center; min-height: 9mm; }
+.svarlista div.lang { grid-column: span 2; }
+.svarlista .nr { font-weight: 600; min-width: 1.7em; text-align:right; }
+.los { columns: 2; column-gap: 10mm; font-size: 9.8pt; }
+.sol { break-inside: avoid; page-break-inside: avoid; margin: 0 0 8px; padding: 0 0 5px; border-bottom: 1px dotted var(--line); }
+.sol .solh { font-weight: 600; margin: 0 0 1px; }
+.sol .solh .nr { margin-right: 4px; }
+.sol p { margin: 2px 0; }
+.sol .del { font-weight: 700; margin: 5px 0 1px; }
+.sol .kontroll { color:#3b4350; }
+.sol .obs { color:#b42318; font-weight: 600; }
+.sol .katex-display { margin: 2px 0 3px; text-align: left; padding-left: 3mm; overflow-x: auto; overflow-y: hidden; padding-bottom: 2px; }
+.sol .katex-display > .katex { text-align: left; }
+.sol .svar { margin: 3px 0 0; }
+footer { margin-top: 18px; font-size: 9pt; color:#5b6472; border-top: 1px solid var(--line); padding-top: 6px; display:flex; justify-content: space-between; }
+@page { size: A4; margin: 13mm 12mm 14mm; }
+@media print {
+  body { font-size: 10.5pt; }
+  .page { max-width: none; padding: 0; }
+}
+@media (max-width: 640px) {
+  .c3, .c4 { grid-template-columns: repeat(2, 1fr); }
+  .c2, .c3:has(.hog) { grid-template-columns: 1fr; }
+  .boxgrid { grid-template-columns: 1fr; }
+  .svarlista { grid-template-columns: repeat(2, 1fr); }
+  .los { columns: 1; }
+  .sol .katex-display { padding-left: 0; }
+}
+</style>
+</head>
+<body>
+<section class="page">
+  <header>
+    <p class="over">Matematik nivå 1c · Övningsblad</p>
+    <h1>Rationella exponenter</h1>
+    <p class="under">Bråk i exponenten, rötter och potenslagarna</p>
+    <div class="namn"><span>Namn:</span><span>Klass:</span></div>
+  </header>
+  <div class="box boxgrid">
+    <div>
+      <p class="rub">Kom ihåg</p>
+      <ul>
+        <li>$a^{1/n} = \sqrt[n]{a}$, så $25^{1/2} = \sqrt{25} = 5$ och $27^{1/3} = \sqrt[3]{27} = 3$.</li>
+        <li>$a^{m/n} = \left(\sqrt[n]{a}\right)^m = \sqrt[n]{a^m}$. <b>Nämnaren</b> är rotens ordning, <b>täljaren</b> är exponenten.</li>
+        <li>$a^{-x} = \dfrac{1}{a^x}$, och alla potenslagar gäller som vanligt, även med bråk i exponenten.</li>
+        <li>Lös $x^{m/n} = b$ genom att upphöja båda led till $\dfrac{n}{m}$.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="rub">Exempel: beräkna $16^{3/4}$ och lös $x^{2/3} = 4$, $x > 0$</p>
+      $$16^{3/4} = \left(\sqrt[4]{16}\right)^3 = 2^3 = 8$$
+      <p>Upphöj båda led till $\dfrac{3}{2}$, så att exponenten blir $\dfrac{2}{3} \cdot \dfrac{3}{2} = 1$:</p>
+      $$\left(x^{2/3}\right)^{\boldsymbol{3/2}} = 4^{\boldsymbol{3/2}} \quad\text{ger}\quad x = \left(\sqrt{4}\right)^3 = 8$$
+    </div>
+  </div>
+  <p class="nivaer"><b>Grund</b> översätter mellan exponent och rot och beräknar en potens i taget. <b>Mellan</b> har negativa exponenter, bråk som bas, potenslagarna och enkla ekvationer. <b>Avancerad</b> kombinerar flera lagar och kräver resonemang. Räkna utan räknare. Svar och lösningsförslag finns efter uppgifterna.</p>
+
+  <section class="niva">
+    <div class="nivastart">
+    <h2><span class="nivanamn">Grund</span><span class="sv">Uppgift 1–20 · Från exponent till rot och tillbaka, och beräkningar utan räknare</span></h2>
+    <p class="instr">Beräkna utan räknare.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">1</span><span class="eq">$36^{1/2}$</span></div>
+      <div class="task kort"><span class="nr">2</span><span class="eq">$64^{1/3}$</span></div>
+      <div class="task kort"><span class="nr">3</span><span class="eq">$81^{1/4}$</span></div>
+      <div class="task kort"><span class="nr">4</span><span class="eq">$100^{1/2}$</span></div>
+    </div>
+    </div>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">5</span><span class="eq">$1\,000^{1/3}$</span></div>
+      <div class="task kort"><span class="nr">6</span><span class="eq">$32^{1/5}$</span></div>
+      <div class="task kort"><span class="nr">7</span><span class="eq">$2 \cdot 16^{1/2}$</span></div>
+      <div class="task kort"><span class="nr">8</span><span class="eq">$125^{1/3} + 9^{1/2}$</span></div>
+    </div>
+    <p class="instr">Skriv med rottecken.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">9</span><span class="eq">$7^{1/2}$</span></div>
+      <div class="task kort"><span class="nr">10</span><span class="eq">$x^{1/3}$</span></div>
+      <div class="task kort"><span class="nr">11</span><span class="eq">$5^{1/4}$</span></div>
+      <div class="task kort"><span class="nr">12</span><span class="eq">$a^{2/3}$</span></div>
+    </div>
+    <p class="instr">Skriv som en potens.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">13</span><span class="eq">$\sqrt{x}$</span></div>
+      <div class="task kort"><span class="nr">14</span><span class="eq">$\sqrt[3]{10}$</span></div>
+      <div class="task kort"><span class="nr">15</span><span class="eq">$\sqrt[5]{a}$</span></div>
+      <div class="task kort"><span class="nr">16</span><span class="eq">$\sqrt{x^3}$</span></div>
+    </div>
+    <p class="instr">Beräkna utan räknare. Ta roten först.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">17</span><span class="eq">$8^{2/3}$</span></div>
+      <div class="task kort"><span class="nr">18</span><span class="eq">$16^{3/4}$</span></div>
+      <div class="task kort"><span class="nr">19</span><span class="eq">$25^{3/2}$</span></div>
+      <div class="task kort"><span class="nr">20</span><span class="eq">$4^{5/2}$</span></div>
+    </div>
+  </section>
+
+  <section class="niva">
+    <div class="nivastart">
+    <h2><span class="nivanamn">Mellan</span><span class="sv">Uppgift 21–44 · Negativa bråkexponenter, bråk som bas, potenslagarna och enkla ekvationer</span></h2>
+    <p class="instr">Beräkna utan räknare.</p>
+    <div class="tasks c4">
+      <div class="task mellan"><span class="nr">21</span><span class="eq">$9^{-1/2}$</span></div>
+      <div class="task mellan"><span class="nr">22</span><span class="eq">$8^{-2/3}$</span></div>
+      <div class="task mellan"><span class="nr">23</span><span class="eq">$\left(\dfrac{1}{4}\right)^{1/2}$</span></div>
+      <div class="task mellan"><span class="nr">24</span><span class="eq">$\left(\dfrac{8}{27}\right)^{1/3}$</span></div>
+    </div>
+    </div>
+    <div class="tasks c4">
+      <div class="task mellan"><span class="nr">25</span><span class="eq">$\left(\dfrac{1}{16}\right)^{-1/4}$</span></div>
+      <div class="task mellan"><span class="nr">26</span><span class="eq">$0{,}01^{1/2}$</span></div>
+      <div class="task mellan"><span class="nr">27</span><span class="eq">$2^{1/2} \cdot 8^{1/2}$</span></div>
+      <div class="task mellan"><span class="nr">28</span><span class="eq">$\dfrac{5^{3/2}}{5^{1/2}}$</span></div>
+    </div>
+    <p class="instr">Skriv som en enda potens av x.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">29</span><span class="eq">$x^{1/2} \cdot x^{1/2}$</span></div>
+      <div class="task kort"><span class="nr">30</span><span class="eq">$x^{3/2} \cdot x^{1/2}$</span></div>
+      <div class="task kort"><span class="nr">31</span><span class="eq">$\dfrac{x^{5/3}}{x^{2/3}}$</span></div>
+      <div class="task kort"><span class="nr">32</span><span class="eq">$\left(x^{1/3}\right)^6$</span></div>
+      <div class="task kort"><span class="nr">33</span><span class="eq">$\left(x^4\right)^{3/4}$</span></div>
+      <div class="task kort"><span class="nr">34</span><span class="eq">$\sqrt{x} \cdot x$</span></div>
+      <div class="task kort"><span class="nr">35</span><span class="eq">$\dfrac{x^{1/2}}{x^2}$</span></div>
+      <div class="task kort"><span class="nr">36</span><span class="eq">$\sqrt[3]{x} \cdot \sqrt[3]{x^2}$</span></div>
+    </div>
+    <p class="instr">Lös ekvationerna, där $x > 0$.</p>
+    <div class="tasks c3">
+      <div class="task mellan"><span class="nr">37</span><span class="eq">$x^{1/2} = 6$</span></div>
+      <div class="task mellan"><span class="nr">38</span><span class="eq">$x^{1/3} = 2$</span></div>
+      <div class="task mellan"><span class="nr">39</span><span class="eq">$x^{1/2} + 3 = 7$</span></div>
+      <div class="task mellan"><span class="nr">40</span><span class="eq">$2x^{1/3} = 10$</span></div>
+      <div class="task mellan"><span class="nr">41</span><span class="eq">$x^{3/2} = 8$</span></div>
+      <div class="task mellan"><span class="nr">42</span><span class="eq">$x^{2/3} = 9$</span></div>
+    </div>
+    <p class="instr">Resonera och förklara.</p>
+    <div class="tasks c1">
+      <div class="task mellan"><span class="nr">43</span><span class="eq txt">Förklara med hjälp av potenslagarna varför $16^{1/2}$ måste vara lika med $\sqrt{16}$.</span></div>
+      <div class="task mellan"><span class="nr">44</span><span class="eq txt">Ordna talen i storleksordning, med det minsta först:&emsp;$8^{2/3}$,&ensp;$27^{1/3}$,&ensp;$32^{3/5}$,&ensp;$4^{-1/2}$</span></div>
+    </div>
+  </section>
+
+  <section class="niva">
+    <div class="nivastart">
+    <h2><span class="nivanamn">Avancerad</span><span class="sv">Uppgift 45–59 · Flera lagar i samma uttryck, exponentialekvationer med rötter och generella resonemang</span></h2>
+    <p class="instr">Beräkna eller förenkla så långt som möjligt.</p>
+    <div class="tasks c2">
+      <div class="task mellan"><span class="nr">45</span><span class="eq">$4^{3/2} - 27^{2/3} + 32^{-1/5}$</span></div>
+      <div class="task mellan"><span class="nr">46</span><span class="eq">$\dfrac{\sqrt{x} \cdot \sqrt[3]{x}}{\sqrt[6]{x}}$</span></div>
+    </div>
+    </div>
+    <div class="tasks c2">
+      <div class="task mellan"><span class="nr">47</span><span class="eq">$\left(x^{2/3} y^{-1/2}\right)^6 \cdot y^3$</span></div>
+      <div class="task mellan"><span class="nr">48</span><span class="eq">$\dfrac{\sqrt{x^3}}{\sqrt[4]{x}}$</span></div>
+      <div class="task mellan"><span class="nr">49</span><span class="eq">$8^{n/3} \cdot 2^{-n}$</span></div>
+      <div class="task mellan"><span class="nr">50</span><span class="eq">$\left(\dfrac{27}{64}\right)^{-2/3}$</span></div>
+    </div>
+    <p class="instr">Lös ekvationerna.</p>
+    <div class="tasks c3">
+      <div class="task hog"><span class="nr">51</span><span class="eq">$4^x = 8$</span></div>
+      <div class="task hog"><span class="nr">52</span><span class="eq">$9^x = \dfrac{1}{3}$</span></div>
+      <div class="task hog"><span class="nr">53</span><span class="eq">$27^x = \sqrt{3}$</span></div>
+      <div class="task hog"><span class="nr">54</span><span class="eq">$2^x = \sqrt[3]{16}$</span></div>
+      <div class="task hog"><span class="nr">55</span><span class="eq">$x^{-1/2} = \dfrac{1}{5}$</span></div>
+      <div class="task hog"><span class="nr">56</span><span class="eq">$x^{3/4} = 27, \ x > 0$</span></div>
+    </div>
+    <p class="instr">Visa och motivera.</p>
+    <div class="tasks c1">
+      <div class="task mellan"><span class="nr">57</span><span class="eq txt">Visa utan räknare att $2^{1/2} \cdot 2^{1/3} \cdot 2^{1/6} = 2$.</span></div>
+      <div class="task mellan"><span class="nr">58</span><span class="eq txt">Förklara varför $(-8)^{1/3}$ är ett reellt tal, men inte $(-8)^{1/2}$.</span></div>
+      <div class="task mellan"><span class="nr">59</span><span class="eq txt">Vilket tal är störst, $2^{1/2}$ eller $3^{1/3}$? Motivera utan räknare. Tips: upphöj båda talen till 6.</span></div>
+    </div>
+  </section>
+  <section class="facit">
+    <h2><span>Svar</span></h2>
+
+    <h3 class="svarniva">Grund</h3>
+    <div class="svarlista"><div><span class="nr">1</span><span>6</span></div><div><span class="nr">2</span><span>4</span></div><div><span class="nr">3</span><span>3</span></div><div><span class="nr">4</span><span>10</span></div><div><span class="nr">5</span><span>10</span></div><div><span class="nr">6</span><span>2</span></div><div><span class="nr">7</span><span>8</span></div><div><span class="nr">8</span><span>8</span></div><div><span class="nr">9</span><span>$\sqrt{7}$</span></div><div><span class="nr">10</span><span>$\sqrt[3]{x}$</span></div><div><span class="nr">11</span><span>$\sqrt[4]{5}$</span></div><div><span class="nr">12</span><span>$\sqrt[3]{a^2}$</span></div><div><span class="nr">13</span><span>$x^{1/2}$</span></div><div><span class="nr">14</span><span>$10^{1/3}$</span></div><div><span class="nr">15</span><span>$a^{1/5}$</span></div><div><span class="nr">16</span><span>$x^{3/2}$</span></div><div><span class="nr">17</span><span>4</span></div><div><span class="nr">18</span><span>8</span></div><div><span class="nr">19</span><span>125</span></div><div><span class="nr">20</span><span>32</span></div></div>
+    <h3 class="svarniva">Mellan</h3>
+    <div class="svarlista"><div><span class="nr">21</span><span>$\dfrac{1}{3}$</span></div><div><span class="nr">22</span><span>$\dfrac{1}{4}$</span></div><div><span class="nr">23</span><span>$\dfrac{1}{2}$</span></div><div><span class="nr">24</span><span>$\dfrac{2}{3}$</span></div><div><span class="nr">25</span><span>2</span></div><div><span class="nr">26</span><span>0,1</span></div><div><span class="nr">27</span><span>4</span></div><div><span class="nr">28</span><span>5</span></div><div><span class="nr">29</span><span>$x$</span></div><div><span class="nr">30</span><span>$x^2$</span></div><div><span class="nr">31</span><span>$x$</span></div><div><span class="nr">32</span><span>$x^2$</span></div><div><span class="nr">33</span><span>$x^3$</span></div><div><span class="nr">34</span><span>$x^{3/2}$</span></div><div><span class="nr">35</span><span>$x^{-3/2}$</span></div><div><span class="nr">36</span><span>$x$</span></div><div><span class="nr">37</span><span>$x = 36$</span></div><div><span class="nr">38</span><span>$x = 8$</span></div><div><span class="nr">39</span><span>$x = 16$</span></div><div><span class="nr">40</span><span>$x = 125$</span></div><div><span class="nr">41</span><span>$x = 4$</span></div><div><span class="nr">42</span><span>$x = 27$</span></div><div><span class="nr">43</span><span>Båda i kvadrat ger 16</span></div><div class="lang"><span class="nr">44</span><span>$4^{-1/2},\ 27^{1/3},\ 8^{2/3},\ 32^{3/5}$</span></div></div>
+    <h3 class="svarniva">Avancerad</h3>
+    <div class="svarlista"><div><span class="nr">45</span><span>$-\dfrac{1}{2}$</span></div><div><span class="nr">46</span><span>$x^{2/3} = \sqrt[3]{x^2}$</span></div><div><span class="nr">47</span><span>$x^4$</span></div><div><span class="nr">48</span><span>$x^{5/4}$</span></div><div><span class="nr">49</span><span>1</span></div><div><span class="nr">50</span><span>$\dfrac{16}{9}$</span></div><div><span class="nr">51</span><span>$x = \dfrac{3}{2}$</span></div><div><span class="nr">52</span><span>$x = -\dfrac{1}{2}$</span></div><div><span class="nr">53</span><span>$x = \dfrac{1}{6}$</span></div><div><span class="nr">54</span><span>$x = \dfrac{4}{3}$</span></div><div><span class="nr">55</span><span>$x = 25$</span></div><div><span class="nr">56</span><span>$x = 81$</span></div><div><span class="nr">57</span><span>Exponenternas summa är 1</span></div><div class="lang"><span class="nr">58</span><span>$(-8)^{1/3} = -2$; inget reellt tal i kvadrat är negativt</span></div><div><span class="nr">59</span><span>$3^{1/3}$</span></div></div>
+    <h2><span>Lösningsförslag</span></h2>
+
+    <h3 class="losniva">Grund</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">1</span> $36^{1/2}$</p><p>Exponenten $\dfrac{1}{2}$ betyder kvadratroten:</p>$$36^{1/2} = \sqrt{36} = 6$$<p class="svar"><b>Svar:</b> 6</p></div>
+      <div class="sol"><p class="solh"><span class="nr">2</span> $64^{1/3}$</p><p>Exponenten $\dfrac{1}{3}$ betyder tredjeroten:</p>$$64^{1/3} = \sqrt[3]{64} = 4$$<p>eftersom $4 \cdot 4 \cdot 4 = 64$.</p><p class="svar"><b>Svar:</b> 4</p></div>
+      <div class="sol"><p class="solh"><span class="nr">3</span> $81^{1/4}$</p>$$81^{1/4} = \sqrt[4]{81} = 3$$<p>eftersom $3^4 = 81$.</p><p class="svar"><b>Svar:</b> 3</p></div>
+      <div class="sol"><p class="solh"><span class="nr">4</span> $100^{1/2}$</p>$$100^{1/2} = \sqrt{100} = 10$$<p class="svar"><b>Svar:</b> 10</p></div>
+      <div class="sol"><p class="solh"><span class="nr">5</span> $1\,000^{1/3}$</p>$$1\,000^{1/3} = \sqrt[3]{1\,000} = 10$$<p>eftersom $10^3 = 1\,000$.</p><p class="svar"><b>Svar:</b> 10</p></div>
+      <div class="sol"><p class="solh"><span class="nr">6</span> $32^{1/5}$</p>$$32^{1/5} = \sqrt[5]{32} = 2$$<p>eftersom $2^5 = 32$.</p><p class="svar"><b>Svar:</b> 2</p></div>
+      <div class="sol"><p class="solh"><span class="nr">7</span> $2 \cdot 16^{1/2}$</p><p>Potensen beräknas först, sedan multiplikationen:</p>$$2 \cdot 16^{1/2} = 2 \cdot \sqrt{16} = 2 \cdot 4 = 8$$<p class="svar"><b>Svar:</b> 8</p></div>
+      <div class="sol"><p class="solh"><span class="nr">8</span> $125^{1/3} + 9^{1/2}$</p>$$125^{1/3} + 9^{1/2} = \sqrt[3]{125} + \sqrt{9} = 5 + 3 = 8$$<p class="svar"><b>Svar:</b> 8</p></div>
+      <div class="sol"><p class="solh"><span class="nr">9</span> $7^{1/2}$</p>$$7^{1/2} = \sqrt{7}$$<p class="svar"><b>Svar:</b> $\sqrt{7}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">10</span> $x^{1/3}$</p>$$x^{1/3} = \sqrt[3]{x}$$<p class="svar"><b>Svar:</b> $\sqrt[3]{x}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">11</span> $5^{1/4}$</p>$$5^{1/4} = \sqrt[4]{5}$$<p class="svar"><b>Svar:</b> $\sqrt[4]{5}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">12</span> $a^{2/3}$</p><p>Nämnaren 3 är rotens ordning och täljaren 2 är exponenten:</p>$$a^{2/3} = \sqrt[3]{a^2}$$<p>Det kan också skrivas $\left(\sqrt[3]{a}\right)^2$.</p><p class="svar"><b>Svar:</b> $\sqrt[3]{a^2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">13</span> $\sqrt{x}$</p>$$\sqrt{x} = x^{1/2}$$<p class="svar"><b>Svar:</b> $x^{1/2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">14</span> $\sqrt[3]{10}$</p>$$\sqrt[3]{10} = 10^{1/3}$$<p class="svar"><b>Svar:</b> $10^{1/3}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">15</span> $\sqrt[5]{a}$</p>$$\sqrt[5]{a} = a^{1/5}$$<p class="svar"><b>Svar:</b> $a^{1/5}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">16</span> $\sqrt{x^3}$</p><p>Roten är en exponent $\dfrac{1}{2}$, och potens av potens ger produkten av exponenterna:</p>$$\sqrt{x^3} = \left(x^3\right)^{1/2} = x^{3 \cdot \frac{1}{2}} = x^{3/2}$$<p class="svar"><b>Svar:</b> $x^{3/2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">17</span> $8^{2/3}$</p>$$8^{2/3} = \left(8^{1/3}\right)^2 = \left(\sqrt[3]{8}\right)^2 = 2^2 = 4$$<p class="svar"><b>Svar:</b> 4</p></div>
+      <div class="sol"><p class="solh"><span class="nr">18</span> $16^{3/4}$</p>$$16^{3/4} = \left(\sqrt[4]{16}\right)^3 = 2^3 = 8$$<p class="svar"><b>Svar:</b> 8</p></div>
+      <div class="sol"><p class="solh"><span class="nr">19</span> $25^{3/2}$</p>$$25^{3/2} = \left(\sqrt{25}\right)^3 = 5^3 = 125$$<p>Att ta roten först ger små tal. Annars hade vi behövt $\sqrt{25^3} = \sqrt{15\,625}$.</p><p class="svar"><b>Svar:</b> 125</p></div>
+      <div class="sol"><p class="solh"><span class="nr">20</span> $4^{5/2}$</p>$$4^{5/2} = \left(\sqrt{4}\right)^5 = 2^5 = 32$$<p class="svar"><b>Svar:</b> 32</p></div>
+    </div>
+    <h3 class="losniva">Mellan</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">21</span> $9^{-1/2}$</p><p>Minustecknet betyder "1 delat med", och $\dfrac{1}{2}$ betyder kvadratroten. Ett steg i taget:</p>$$9^{-1/2} = \frac{1}{9^{1/2}} = \frac{1}{\sqrt{9}} = \frac{1}{3}$$<p class="svar"><b>Svar:</b> $\dfrac{1}{3}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">22</span> $8^{-2/3}$</p>$$8^{-2/3} = \frac{1}{8^{2/3}} = \frac{1}{\left(\sqrt[3]{8}\right)^2} = \frac{1}{2^2} = \frac{1}{4}$$<p class="svar"><b>Svar:</b> $\dfrac{1}{4}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">23</span> $\left(\dfrac{1}{4}\right)^{1/2}$</p><p>Roten ur ett bråk är roten ur täljaren delad med roten ur nämnaren:</p>$$\left(\frac{1}{4}\right)^{1/2} = \frac{\sqrt{1}}{\sqrt{4}} = \frac{1}{2}$$<p class="svar"><b>Svar:</b> $\dfrac{1}{2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">24</span> $\left(\dfrac{8}{27}\right)^{1/3}$</p>$$\left(\frac{8}{27}\right)^{1/3} = \frac{\sqrt[3]{8}}{\sqrt[3]{27}} = \frac{2}{3}$$<p class="svar"><b>Svar:</b> $\dfrac{2}{3}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">25</span> $\left(\dfrac{1}{16}\right)^{-1/4}$</p><p>Den negativa exponenten inverterar bråket:</p>$$\left(\frac{1}{16}\right)^{-1/4} = 16^{1/4} = \sqrt[4]{16} = 2$$<p class="svar"><b>Svar:</b> 2</p></div>
+      <div class="sol"><p class="solh"><span class="nr">26</span> $0{,}01^{1/2}$</p>$$0{,}01^{1/2} = \sqrt{0{,}01} = 0{,}1$$<p>eftersom $0{,}1 \cdot 0{,}1 = 0{,}01$.</p><p class="svar"><b>Svar:</b> 0,1</p></div>
+      <div class="sol"><p class="solh"><span class="nr">27</span> $2^{1/2} \cdot 8^{1/2}$</p><p>Samma exponent, så baserna kan multipliceras först: $(ab)^x = a^x b^x$ baklänges.</p>$$2^{1/2} \cdot 8^{1/2} = (2 \cdot 8)^{1/2} = 16^{1/2} = 4$$<p class="svar"><b>Svar:</b> 4</p></div>
+      <div class="sol"><p class="solh"><span class="nr">28</span> $\dfrac{5^{3/2}}{5^{1/2}}$</p>$$\frac{5^{3/2}}{5^{1/2}} = 5^{\frac{3}{2} - \frac{1}{2}} = 5^{2/2} = 5^1 = 5$$<p class="svar"><b>Svar:</b> 5</p></div>
+      <div class="sol"><p class="solh"><span class="nr">29</span> $x^{1/2} \cdot x^{1/2}$</p>$$x^{1/2} \cdot x^{1/2} = x^{\frac{1}{2} + \frac{1}{2}} = x^1 = x$$<p>Det är samma sak som $\sqrt{x} \cdot \sqrt{x} = x$.</p><p class="svar"><b>Svar:</b> $x$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">30</span> $x^{3/2} \cdot x^{1/2}$</p>$$x^{3/2} \cdot x^{1/2} = x^{\frac{3}{2} + \frac{1}{2}} = x^{4/2} = x^2$$<p class="svar"><b>Svar:</b> $x^2$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">31</span> $\dfrac{x^{5/3}}{x^{2/3}}$</p>$$\frac{x^{5/3}}{x^{2/3}} = x^{\frac{5}{3} - \frac{2}{3}} = x^{3/3} = x$$<p class="svar"><b>Svar:</b> $x$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">32</span> $\left(x^{1/3}\right)^6$</p>$$\left(x^{1/3}\right)^6 = x^{\frac{1}{3} \cdot 6} = x^2$$<p class="svar"><b>Svar:</b> $x^2$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">33</span> $\left(x^4\right)^{3/4}$</p>$$\left(x^4\right)^{3/4} = x^{4 \cdot \frac{3}{4}} = x^3$$<p class="svar"><b>Svar:</b> $x^3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">34</span> $\sqrt{x} \cdot x$</p><p>Skriv roten som potens och $x$ som $x^1$:</p>$$\sqrt{x} \cdot x = x^{1/2} \cdot x^1 = x^{\frac{1}{2} + \frac{2}{2}} = x^{3/2}$$<p class="svar"><b>Svar:</b> $x^{3/2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">35</span> $\dfrac{x^{1/2}}{x^2}$</p>$$\frac{x^{1/2}}{x^2} = x^{\frac{1}{2} - \frac{4}{2}} = x^{-3/2}$$<p>Samma sak kan skrivas $\dfrac{1}{x^{3/2}}$.</p><p class="svar"><b>Svar:</b> $x^{-3/2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">36</span> $\sqrt[3]{x} \cdot \sqrt[3]{x^2}$</p>$$\sqrt[3]{x} \cdot \sqrt[3]{x^2} = x^{1/3} \cdot x^{2/3} = x^{\frac{1}{3} + \frac{2}{3}} = x^1 = x$$<p class="svar"><b>Svar:</b> $x$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">37</span> $x^{1/2} = 6$</p><p>Vi upphöjer båda led till 2, så att exponenten blir $\dfrac{1}{2} \cdot 2 = 1$:</p>$$\left(x^{1/2}\right)^{\boldsymbol{2}} = \left(6\right)^{\boldsymbol{2}}$$$$x = 36$$<p class="svar"><b>Svar:</b> $x = 36$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">38</span> $x^{1/3} = 2$</p>$$\left(x^{1/3}\right)^{\boldsymbol{3}} = \left(2\right)^{\boldsymbol{3}}$$$$x = 8$$<p class="svar"><b>Svar:</b> $x = 8$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">39</span> $x^{1/2} + 3 = 7$</p>$$x^{1/2} + 3 \mathbin{\boldsymbol{-}} \boldsymbol{3} = 7 \mathbin{\boldsymbol{-}} \boldsymbol{3}$$$$x^{1/2} = 4$$$$\left(x^{1/2}\right)^{\boldsymbol{2}} = \left(4\right)^{\boldsymbol{2}}$$$$x = 16$$<p class="svar"><b>Svar:</b> $x = 16$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">40</span> $2x^{1/3} = 10$</p>$$\frac{2x^{1/3}}{\boldsymbol{2}} = \frac{10}{\boldsymbol{2}}$$$$x^{1/3} = 5$$$$\left(x^{1/3}\right)^{\boldsymbol{3}} = \left(5\right)^{\boldsymbol{3}}$$$$x = 125$$<p class="svar"><b>Svar:</b> $x = 125$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">41</span> $x^{3/2} = 8$</p><p>Vi upphöjer båda led till det inverterade bråket $\dfrac{2}{3}$, så att exponenten blir $\dfrac{3}{2} \cdot \dfrac{2}{3} = 1$:</p>$$\left(x^{3/2}\right)^{\boldsymbol{2/3}} = \left(8\right)^{\boldsymbol{2/3}}$$$$x = 8^{2/3} = \left(\sqrt[3]{8}\right)^2 = 2^2 = 4$$<p class="kontroll"><i>Kontroll:</i> $4^{3/2} = \left(\sqrt{4}\right)^3 = 2^3 = 8$.</p><p class="svar"><b>Svar:</b> $x = 4$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">42</span> $x^{2/3} = 9$</p>$$\left(x^{2/3}\right)^{\boldsymbol{3/2}} = \left(9\right)^{\boldsymbol{3/2}}$$$$x = 9^{3/2} = \left(\sqrt{9}\right)^3 = 3^3 = 27$$<p class="kontroll"><i>Kontroll:</i> $27^{2/3} = \left(\sqrt[3]{27}\right)^2 = 3^2 = 9$.</p><p class="svar"><b>Svar:</b> $x = 27$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">43</span></p><p>Vi upphöjer $16^{1/2}$ till 2 och använder lagen om potens av potens:</p>$$\left(16^{1/2}\right)^2 = 16^{\frac{1}{2} \cdot 2} = 16^1 = 16$$<p>Talet $16^{1/2}$ är alltså ett positivt tal som blir 16 när det multipliceras med sig självt. Det är precis vad $\sqrt{16}$ betyder, så $16^{1/2} = \sqrt{16} = 4$.</p><p class="svar"><b>Svar:</b> $16^{1/2}$ i kvadrat blir 16, och det är definitionen av $\sqrt{16}$.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">44</span></p><p>Vi beräknar varje tal för sig:</p>$$8^{2/3} = \left(\sqrt[3]{8}\right)^2 = 4 \qquad 27^{1/3} = \sqrt[3]{27} = 3$$$$32^{3/5} = \left(\sqrt[5]{32}\right)^3 = 2^3 = 8 \qquad 4^{-1/2} = \frac{1}{\sqrt{4}} = \frac{1}{2}$$<p class="svar"><b>Svar:</b> $4^{-1/2},\ 27^{1/3},\ 8^{2/3},\ 32^{3/5}$</p></div>
+    </div>
+    <h3 class="losniva">Avancerad</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">45</span> $4^{3/2} - 27^{2/3} + 32^{-1/5}$</p><p>Vi beräknar varje potens för sig:</p>$$4^{3/2} = \left(\sqrt{4}\right)^3 = 2^3 = 8$$$$27^{2/3} = \left(\sqrt[3]{27}\right)^2 = 3^2 = 9$$$$32^{-1/5} = \frac{1}{32^{1/5}} = \frac{1}{\sqrt[5]{32}} = \frac{1}{2}$$$$8 - 9 + \frac{1}{2} = -\frac{1}{2}$$<p class="svar"><b>Svar:</b> $-\dfrac{1}{2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">46</span> $\dfrac{\sqrt{x} \cdot \sqrt[3]{x}}{\sqrt[6]{x}}$</p><p>Alla rötter skrivs som potenser, och exponenterna får den gemensamma nämnaren 6:</p>$$\frac{x^{1/2} \cdot x^{1/3}}{x^{1/6}} = x^{\frac{3}{6} + \frac{2}{6} - \frac{1}{6}} = x^{4/6} = x^{2/3}$$<p class="svar"><b>Svar:</b> $x^{2/3}$, alltså $\sqrt[3]{x^2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">47</span> $\left(x^{2/3} y^{-1/2}\right)^6 \cdot y^3$</p><p>Båda faktorerna i parentesen upphöjs till 6:</p>$$\left(x^{2/3}\right)^6 \cdot \left(y^{-1/2}\right)^6 = x^{4} y^{-3}$$$$x^4 y^{-3} \cdot y^3 = x^4 y^{-3+3} = x^4 y^0 = x^4$$<p class="svar"><b>Svar:</b> $x^4$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">48</span> $\dfrac{\sqrt{x^3}}{\sqrt[4]{x}}$</p>$$\frac{\sqrt{x^3}}{\sqrt[4]{x}} = \frac{x^{3/2}}{x^{1/4}} = x^{\frac{6}{4} - \frac{1}{4}} = x^{5/4}$$<p class="svar"><b>Svar:</b> $x^{5/4}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">49</span> $8^{n/3} \cdot 2^{-n}$</p><p>Vi skriver $8 = 2^3$:</p>$$8^{n/3} = \left(2^3\right)^{n/3} = 2^{3 \cdot \frac{n}{3}} = 2^n$$$$2^n \cdot 2^{-n} = 2^{n - n} = 2^0 = 1$$<p>Svaret är 1 vilket tal $n$ än är.</p><p class="svar"><b>Svar:</b> 1</p></div>
+      <div class="sol"><p class="solh"><span class="nr">50</span> $\left(\dfrac{27}{64}\right)^{-2/3}$</p><p>Den negativa exponenten inverterar bråket, sedan tar vi tredjeroten och kvadrerar:</p>$$\left(\frac{27}{64}\right)^{-2/3} = \left(\frac{64}{27}\right)^{2/3}$$$$= \left(\frac{\sqrt[3]{64}}{\sqrt[3]{27}}\right)^2 = \left(\frac{4}{3}\right)^2 = \frac{16}{9}$$<p class="svar"><b>Svar:</b> $\dfrac{16}{9}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">51</span> $4^x = 8$</p><p>Båda baserna är potenser av 2, $4 = 2^2$ och $8 = 2^3$:</p>$$\left(2^2\right)^x = 2^3$$$$2^{2x} = 2^3$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$2x = 3$$$$\frac{2x}{\boldsymbol{2}} = \frac{3}{\boldsymbol{2}}$$$$x = \frac{3}{2}$$<p class="kontroll"><i>Kontroll:</i> $4^{3/2} = \left(\sqrt{4}\right)^3 = 8$.</p><p class="svar"><b>Svar:</b> $x = \dfrac{3}{2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">52</span> $9^x = \dfrac{1}{3}$</p><p>$9 = 3^2$ och $\dfrac{1}{3} = 3^{-1}$:</p>$$3^{2x} = 3^{-1}$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$2x = -1$$$$\frac{2x}{\boldsymbol{2}} = \frac{-1}{\boldsymbol{2}}$$$$x = -\frac{1}{2}$$<p class="svar"><b>Svar:</b> $x = -\dfrac{1}{2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">53</span> $27^x = \sqrt{3}$</p><p>$27 = 3^3$ och $\sqrt{3} = 3^{1/2}$:</p>$$\left(3^3\right)^x = 3^{1/2}$$$$3^{3x} = 3^{1/2}$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$3x = \frac{1}{2}$$$$\frac{3x}{\boldsymbol{3}} = \frac{\frac{1}{2}}{\boldsymbol{3}}$$$$x = \frac{1}{6}$$<p class="svar"><b>Svar:</b> $x = \dfrac{1}{6}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">54</span> $2^x = \sqrt[3]{16}$</p><p>$16 = 2^4$, och tredjeroten är exponenten $\dfrac{1}{3}$:</p>$$\sqrt[3]{16} = \left(2^4\right)^{1/3} = 2^{4/3}$$$$2^x = 2^{4/3}$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$x = \frac{4}{3}$$<p class="svar"><b>Svar:</b> $x = \dfrac{4}{3}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">55</span> $x^{-1/2} = \dfrac{1}{5}$</p><p>Ett steg i taget. Vi upphöjer först båda led till $-1$ för att bli av med minustecknet:</p>$$\left(x^{-1/2}\right)^{\boldsymbol{-1}} = \left(\frac{1}{5}\right)^{\boldsymbol{-1}}$$$$x^{1/2} = 5$$<p>Sedan upphöjer vi båda led till 2:</p>$$\left(x^{1/2}\right)^{\boldsymbol{2}} = \left(5\right)^{\boldsymbol{2}}$$$$x = 25$$<p class="kontroll"><i>Kontroll:</i> $25^{-1/2} = \dfrac{1}{\sqrt{25}} = \dfrac{1}{5}$.</p><p class="svar"><b>Svar:</b> $x = 25$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">56</span> $x^{3/4} = 27, \ x > 0$</p>$$\left(x^{3/4}\right)^{\boldsymbol{4/3}} = \left(27\right)^{\boldsymbol{4/3}}$$$$x = 27^{4/3} = \left(\sqrt[3]{27}\right)^4 = 3^4 = 81$$<p class="kontroll"><i>Kontroll:</i> $81^{3/4} = \left(\sqrt[4]{81}\right)^3 = 3^3 = 27$.</p><p class="svar"><b>Svar:</b> $x = 81$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">57</span></p><p>Samma bas, så exponenterna adderas. Med den gemensamma nämnaren 6:</p>$$\frac{1}{2} + \frac{1}{3} + \frac{1}{6} = \frac{3}{6} + \frac{2}{6} + \frac{1}{6} = \frac{6}{6} = 1$$$$2^{1/2} \cdot 2^{1/3} \cdot 2^{1/6} = 2^1 = 2$$<p class="svar"><b>Svar:</b> Exponenterna har summan 1, så produkten är $2^1 = 2$.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">58</span></p><p>$(-8)^{1/3} = \sqrt[3]{-8}$ är det tal som multiplicerat med sig självt tre gånger blir $-8$. Det talet finns:</p>$$(-2) \cdot (-2) \cdot (-2) = -8$$<p>$(-8)^{1/2} = \sqrt{-8}$ skulle vara ett tal som multiplicerat med sig självt blir $-8$. Men ett tal i kvadrat är aldrig negativt: positivt gånger positivt och negativt gånger negativt blir båda positivt. Därför finns inget sådant reellt tal.</p><p class="svar"><b>Svar:</b> $(-8)^{1/3} = -2$, men inget reellt tal i kvadrat blir $-8$.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">59</span></p><p>Båda talen är positiva, och för positiva tal gäller att det större talet också har den större sjätte potensen. Vi upphöjer båda till 6:</p>$$\left(2^{1/2}\right)^6 = 2^{3} = 8 \qquad \left(3^{1/3}\right)^6 = 3^{2} = 9$$<p>Eftersom $9 > 8$ är $3^{1/3}$ störst. Talet 6 valdes för att det är minsta gemensamma nämnare till $\dfrac{1}{2}$ och $\dfrac{1}{3}$: då blir båda exponenterna heltal.</p><p class="svar"><b>Svar:</b> $3^{1/3}$ är störst.</p></div>
+    </div>
+  </section>
+  <footer><span>Matematik nivå 1c · Rationella exponenter</span><span>fysiklabbet.se</span></footer>
+</section>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

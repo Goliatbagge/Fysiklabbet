@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Övningsblad: Problemlösning med ekvationer — Fysiklabbet</title>
+<meta name="description" content="23 textuppgifter i Matematik nivå 1c på tre nivåer: tal, ålder, pengar, figurer, tid och sträcka, blandningar och arbete. Med svar och lösningsförslag i tre steg. Utskriftsklart.">
+<link rel="canonical" href="https://fysiklabbet.se/ovningsblad/ovningsblad-problemlosning.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  renderMathInElement(document.body, {
+    delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
+    throwOnError: false
+  });
+  document.documentElement.setAttribute('data-katex', 'klar');
+});
+</script>
+<style>
+:root { --ink:#1f2530; --paper:#f7f2e8; --line:rgba(31,37,48,.22); --teal:#0d9488; }
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin:0; font-family:'Poppins', system-ui, sans-serif; color:var(--ink); background:#fff; font-size:11pt; line-height:1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { max-width: 186mm; margin: 0 auto; padding: 10mm 6mm 20mm; }
+header { border-bottom: 2px solid var(--ink); padding-bottom: 6px; margin-bottom: 12px; }
+.over { font-size: 9.5pt; text-transform: uppercase; letter-spacing: .06em; color:#5b6472; margin:0; }
+h1 { font-size: 20pt; margin: 2px 0 0; line-height:1.2; }
+.under { margin: 2px 0 0; font-size: 11pt; color:#3b4350; }
+.namn { display:flex; gap: 28px; margin-top: 8px; font-size: 10pt; color:#3b4350; }
+.namn span { flex:1; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.box { background: var(--paper); border: 1px solid rgba(31,37,48,.18); border-radius: 8px; padding: 8px 14px; margin: 0 0 10px; break-inside: avoid; }
+.box p { margin: 3px 0; }
+.boxgrid { display:grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
+.box ul, .box ol { margin: 2px 0 2px 16px; padding: 0; }
+.box li { margin: 1px 0; }
+.box .katex-display { margin: 2px 0 3px; text-align:left; }
+.box .katex-display > .katex { text-align:left; }
+.rub { font-weight: 600; }
+.nivaer { font-size: 9.5pt; color:#3b4350; margin: 0 0 6px; }
+.niva { margin-bottom: 6px; }
+.nivastart { break-inside: avoid; page-break-inside: avoid; }
+.nivastart + .tasks { margin-top: 4px; }
+h2 { display:flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; font-size: 13pt; margin: 14px 0 4px; padding: 3px 0; border-bottom: 1.4px solid var(--ink); break-after: avoid; }
+h2 .nivanamn { color: var(--teal); }
+h2 .sv { font-weight: 400; font-size: 9pt; color:#5b6472; }
+.instr { font-weight: 600; margin: 8px 0 3px; break-after: avoid; }
+.tasks { display: grid; gap: 4px 14px; }
+.c1 { grid-template-columns: 1fr; } .c2 { grid-template-columns: repeat(2, 1fr); }
+.c3 { grid-template-columns: repeat(3, 1fr); } .c4 { grid-template-columns: repeat(4, 1fr); }
+.task { break-inside: avoid; padding: 4px 4px 0; border-bottom: 1px dotted var(--line); display:flex; gap: 6px; align-items: baseline; }
+.task .nr { font-weight: 600; min-width: 1.7em; text-align:right; font-size: 10pt; }
+.task .eq { flex:1; min-width: 0; }
+.task .katex, .sol p .katex, .svarlista .katex, .box p .katex, .box li .katex { white-space: nowrap; }
+.kort { min-height: 16mm; } .mellan { min-height: 30mm; } .hog { min-height: 44mm; } .xhog { min-height: 64mm; }
+.fig { margin: 4px 0 2px; }
+.fig svg { max-width: 100%; height: auto; }
+.facit { break-before: page; page-break-before: always; }
+.facit h2 { font-size: 14pt; }
+.svarniva, .losniva { font-size: 11pt; margin: 8px 0 3px; color: var(--teal); break-after: avoid; }
+.svarlista { display:grid; grid-template-columns: repeat(4, 1fr); gap: 2px 12px; font-size: 9.8pt; margin-bottom: 6px; }
+.svarlista div { display:flex; gap: 6px; align-items: center; min-height: 9mm; }
+.svarlista div.lang { grid-column: span 2; }
+.svarlista .nr { font-weight: 600; min-width: 1.7em; text-align:right; }
+.los { columns: 2; column-gap: 10mm; font-size: 9.8pt; }
+.sol { break-inside: avoid; page-break-inside: avoid; margin: 0 0 8px; padding: 0 0 5px; border-bottom: 1px dotted var(--line); }
+.sol .solh { font-weight: 600; margin: 0 0 1px; }
+.sol .solh .nr { margin-right: 4px; }
+.sol p { margin: 2px 0; }
+.sol .del { font-weight: 700; margin: 5px 0 1px; }
+.sol .kontroll { color:#3b4350; }
+.sol .obs { color:#b42318; font-weight: 600; }
+.sol .katex-display { margin: 2px 0 3px; text-align: left; padding-left: 3mm; overflow-x: auto; overflow-y: hidden; padding-bottom: 2px; }
+.sol .katex-display > .katex { text-align: left; }
+.sol .svar { margin: 3px 0 0; }
+footer { margin-top: 18px; font-size: 9pt; color:#5b6472; border-top: 1px solid var(--line); padding-top: 6px; display:flex; justify-content: space-between; }
+@page { size: A4; margin: 13mm 12mm 14mm; }
+@media print {
+  body { font-size: 10.5pt; }
+  .page { max-width: none; padding: 0; }
+}
+@media (max-width: 640px) {
+  .c3, .c4 { grid-template-columns: repeat(2, 1fr); }
+  .c2, .c3:has(.hog) { grid-template-columns: 1fr; }
+  .boxgrid { grid-template-columns: 1fr; }
+  .svarlista { grid-template-columns: repeat(2, 1fr); }
+  .los { columns: 1; }
+  .sol .katex-display { padding-left: 0; }
+}
+</style>
+</head>
+<body>
+<section class="page">
+  <header>
+    <p class="over">Matematik nivå 1c · Övningsblad</p>
+    <h1>Problemlösning med ekvationer</h1>
+    <p class="under">Översätt texten till en ekvation, lös den, tolka och svara</p>
+    <div class="namn"><span>Namn:</span><span>Klass:</span></div>
+  </header>
+  <div class="box boxgrid">
+    <div>
+      <p class="rub">Kom ihåg</p>
+      <ol>
+        <li><b>Översätt.</b> Skriv ut vad $x$ betyder och ställ upp en ekvation.</li>
+        <li><b>Lös ekvationen.</b></li>
+        <li><b>Tolka och svara</b> med enhet. Är svaret rimligt?</li>
+      </ol>
+      <ul>
+        <li>”dubbelt så mycket som $x$” blir $2x$, ”5 mindre än $x$” blir $x - 5$.</li>
+        <li>Låt $x$ vara det som allt annat kan uttryckas utifrån.</li>
+        <li>Tid, sträcka och hastighet: $s = v \cdot t$ och $t = \dfrac{s}{v}$. Minuter skrivs om till timmar: $20\ \text{min} = \dfrac{1}{3}\ \text{h}$.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="rub">Exempel: summan av tre heltal som följer direkt efter varandra är 87. Vilka är talen?</p>
+      <p><b>1.</b> Låt $x$ vara det minsta talet. Då är de andra $x + 1$ och $x + 2$:</p>
+      $$x + (x + 1) + (x + 2) = 87$$
+      <p><b>2.</b> $3x + 3 = 87$ ger $3x = 84$ och $x = 28$.</p>
+      <p><b>3.</b> Talen är 28, 29 och 30. Kontroll: $28 + 29 + 30 = 87$.</p>
+    </div>
+  </div>
+  <p class="nivaer"><b>Grund</b> översätter en mening i taget. <b>Mellan</b> har parenteser, variabler i båda led och samband som tid och sträcka. <b>Avancerad</b> kräver att du själv väljer vad som ska heta $x$, ibland något som inte efterfrågas. Räknare får användas. Svar och lösningsförslag finns efter uppgifterna.</p>
+
+  <section class="niva">
+    <div class="nivastart">
+    <h2><span class="nivanamn">Grund</span><span class="sv">Uppgift 1–10 · Översätt texten till en ekvation, lös den och svara med enhet</span></h2>
+    <p class="instr">Teckna en ekvation och lös den.</p>
+    <div class="tasks c2">
+      <div class="task hog"><span class="nr">1</span><span class="eq txt">Ett tal multipliceras med 4, och sedan adderas 7. Resultatet blir 43. Vilket är talet?</span></div>
+      <div class="task hog"><span class="nr">2</span><span class="eq txt">När man drar bort 12 från tre gånger ett tal får man 30. Vilket är talet?</span></div>
+    </div>
+    </div>
+    <div class="tasks c2">
+      <div class="task hog"><span class="nr">3</span><span class="eq txt">Summan av två tal är 50. Det ena talet är 8 större än det andra. Vilka är talen?</span></div>
+      <div class="task hog"><span class="nr">4</span><span class="eq txt">Summan av tre heltal som följer direkt efter varandra är 72. Vilka är talen?</span></div>
+    </div>
+    <p class="instr">Lös problemen. Skriv ut vad $x$ betyder, ställ upp en ekvation och svara med enhet.</p>
+    <div class="tasks c2">
+      <div class="task xhog"><span class="nr">5</span><span class="eq txt">Lina är tre gånger så gammal som sin lillebror. Tillsammans är de 32 år. Hur gammal är Lina?</span></div>
+      <div class="task xhog"><span class="nr">6</span><span class="eq txt">En biobiljett kostar 120 kr och en påse popcorn kostar 45 kr. Ett kompisgäng köper 4 biljetter och några påsar popcorn och betalar 750 kr. Hur många påsar popcorn köpte de?</span></div>
+      <div class="task xhog"><span class="nr">7</span><span class="eq txt">En rektangel är 5 cm längre än den är bred. Omkretsen är 46 cm. Hur långa är rektangelns sidor?</span></div>
+      <div class="task xhog"><span class="nr">8</span><span class="eq txt">En taxiresa kostar 45 kr i startavgift och 15 kr per kilometer. En resa kostade 330 kr. Hur lång var resan?</span></div>
+      <div class="task xhog"><span class="nr">9</span><span class="eq txt">Ali, Bea och Cleo delar på 1 200 kr. Ali får 100 kr mer än Bea, och Cleo får dubbelt så mycket som Bea. Hur mycket får var och en?</span></div>
+      <div class="task xhog"><span class="nr">10</span><span class="eq txt">En bil kör med medelhastigheten 80 km/h. Hur lång tid tar det att köra 200 km?</span></div>
+    </div>
+  </section>
+
+  <section class="niva">
+    <div class="nivastart">
+    <h2><span class="nivanamn">Mellan</span><span class="sv">Uppgift 11–17 · Parenteser, variabler i båda led, tid och sträcka, medelvärde och figurer</span></h2>
+    <p class="instr">Lös problemen. Skriv ut vad $x$ betyder, ställ upp en ekvation och svara med enhet.</p>
+    <div class="tasks c2">
+      <div class="task xhog"><span class="nr">11</span><span class="eq txt">Ett tal ökas med 6, och summan multipliceras med 3. Resultatet blir lika stort som när talet multipliceras med 5. Vilket är talet?</span></div>
+      <div class="task xhog"><span class="nr">12</span><span class="eq txt">En mamma är 28 år äldre än sin dotter. Om 6 år är mamman tre gånger så gammal som dottern. Hur gammal är dottern nu?</span></div>
+    </div>
+    </div>
+    <div class="tasks c2">
+      <div class="task xhog"><span class="nr">13</span><span class="eq txt">Ett gym har två sorters kort. Med kort A betalar man 300 kr i månaden och dessutom 20 kr per besök. Med kort B betalar man bara 50 kr per besök. Hur många besök i månaden ger samma kostnad? Vilket kort lönar sig om man tränar oftare än så?</span></div>
+      <div class="task xhog"><span class="nr">14</span><span class="eq txt">Elsa cyklar till skolan med medelhastigheten 15 km/h. Om hon åker moped i 30 km/h kommer hon fram 12 minuter snabbare. Hur långt är det till skolan?</span></div>
+      <div class="task xhog"><span class="nr">15</span><span class="eq txt">Ett rep som är 12 m långt delas i tre bitar. Den mellersta biten är dubbelt så lång som den kortaste, och den längsta är 1,5 m längre än den mellersta. Hur långa är bitarna?</span></div>
+      <div class="task xhog"><span class="nr">16</span><span class="eq txt">Ella har fått 14, 17 och 12 poäng på tre prov. Hur många poäng måste hon få på det fjärde provet för att medelvärdet ska bli 15 poäng?</span></div>
+      <div class="task xhog"><span class="nr">17</span><span class="eq txt">En rektangulär hönsgård ska byggas mot en vägg, så det behövs staket bara på tre sidor (se figuren). Sidan längs väggen ska vara dubbelt så lång som de andra sidorna. Det finns 36 m staket. Hur stor blir hönsgårdens area?<div class="fig"><svg viewBox="0 0 230 132" width="230" height="132" font-family="Poppins, sans-serif" font-size="12" fill="#1f2530"><text x="115" y="17" text-anchor="middle" font-size="11">Vägg</text><line x1="20" y1="34" x2="210" y2="34" stroke="#1f2530" stroke-width="2.5"/><line x1="22" y1="34" x2="28" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="30" y1="34" x2="36" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="38" y1="34" x2="44" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="46" y1="34" x2="52" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="54" y1="34" x2="60" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="62" y1="34" x2="68" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="70" y1="34" x2="76" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="78" y1="34" x2="84" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="86" y1="34" x2="92" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="94" y1="34" x2="100" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="102" y1="34" x2="108" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="110" y1="34" x2="116" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="118" y1="34" x2="124" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="126" y1="34" x2="132" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="134" y1="34" x2="140" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="142" y1="34" x2="148" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="150" y1="34" x2="156" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="158" y1="34" x2="164" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="166" y1="34" x2="172" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="174" y1="34" x2="180" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="182" y1="34" x2="188" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="190" y1="34" x2="196" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="198" y1="34" x2="204" y2="26" stroke="#1f2530" stroke-width="1"/><polyline points="45,34 45,104 185,104 185,34" fill="none" stroke="#1f2530" stroke-width="2.5" stroke-dasharray="7 3"/><text x="115" y="73" text-anchor="middle" font-size="11" fill="#5b6472">hönsgård</text><text x="115" y="122" text-anchor="middle" font-size="11">staket (streckat)</text></svg></div></span></div>
+    </div>
+  </section>
+
+  <section class="niva">
+    <div class="nivastart">
+    <h2><span class="nivanamn">Avancerad</span><span class="sv">Uppgift 18–23 · Problem där $x$ inte är det som söks, flera samband och flera steg</span></h2>
+    <p class="instr">Lös problemen. Skriv ut vad $x$ betyder, ställ upp en ekvation och svara med enhet.</p>
+    <div class="tasks c2">
+      <div class="task xhog"><span class="nr">18</span><span class="eq txt">En bil kör från A till B med medelhastigheten 90 km/h och tillbaka samma väg med medelhastigheten 60 km/h. Vilken är medelhastigheten för hela resan? (Svaret är inte 75 km/h.)</span></div>
+      <div class="task xhog"><span class="nr">19</span><span class="eq txt">Hur många liter vatten ska man blanda i 2 liter saft med 40 % koncentrat för att andelen koncentrat ska bli 25 %?</span></div>
+    </div>
+    </div>
+    <div class="tasks c2">
+      <div class="task xhog"><span class="nr">20</span><span class="eq txt">Anna klipper en gräsmatta på 3 timmar. Bo klipper samma gräsmatta på 6 timmar. Hur lång tid tar det om de klipper den tillsammans, med var sin gräsklippare?</span></div>
+      <div class="task xhog"><span class="nr">21</span><span class="eq txt">För 5 år sedan var Pia fyra gånger så gammal som Theo. Om 5 år är hon dubbelt så gammal som Theo. Hur gamla är de nu?</span></div>
+      <div class="task xhog"><span class="nr">22</span><span class="eq txt">I ett tvåsiffrigt tal är tiotalssiffran 3 större än entalssiffran, och siffrornas summa är 11. Vilket är talet? Vad händer med talet om siffrorna byter plats?</span></div>
+      <div class="task xhog"><span class="nr">23</span><span class="eq txt">Två tåg startar samtidigt från två städer som ligger 330 km från varandra och kör mot varandra. Det ena tåget kör 20 km/h fortare än det andra. De möts efter 1,5 timmar. Vilka medelhastigheter har tågen?</span></div>
+    </div>
+  </section>
+  <section class="facit">
+    <h2><span>Svar</span></h2>
+
+    <h3 class="svarniva">Grund</h3>
+    <div class="svarlista"><div><span class="nr">1</span><span>9</span></div><div><span class="nr">2</span><span>14</span></div><div><span class="nr">3</span><span>21 och 29</span></div><div><span class="nr">4</span><span>23, 24 och 25</span></div><div><span class="nr">5</span><span>24 år</span></div><div><span class="nr">6</span><span>6 påsar</span></div><div><span class="nr">7</span><span>9 cm och 14 cm</span></div><div><span class="nr">8</span><span>19 km</span></div><div class="lang"><span class="nr">9</span><span>Bea 275 kr, Ali 375 kr, Cleo 550 kr</span></div><div><span class="nr">10</span><span>2,5 h (2 h 30 min)</span></div></div>
+    <h3 class="svarniva">Mellan</h3>
+    <div class="svarlista"><div><span class="nr">11</span><span>9</span></div><div><span class="nr">12</span><span>8 år</span></div><div><span class="nr">13</span><span>10 besök; kort A</span></div><div><span class="nr">14</span><span>6 km</span></div><div><span class="nr">15</span><span>2,1 m, 4,2 m och 5,7 m</span></div><div><span class="nr">16</span><span>17 poäng</span></div><div><span class="nr">17</span><span>162 m<sup>2</sup></span></div></div>
+    <h3 class="svarniva">Avancerad</h3>
+    <div class="svarlista"><div><span class="nr">18</span><span>72 km/h</span></div><div><span class="nr">19</span><span>1,2 liter</span></div><div><span class="nr">20</span><span>2 h</span></div><div><span class="nr">21</span><span>Pia 25 år, Theo 10 år</span></div><div><span class="nr">22</span><span>74; det minskar med 27</span></div><div><span class="nr">23</span><span>100 km/h och 120 km/h</span></div></div>
+    <h2><span>Lösningsförslag</span></h2>
+
+    <h3 class="losniva">Grund</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">1</span></p><p><b>1. Översätt.</b> Låt $x$ vara talet. ”Multipliceras med 4” ger $4x$ och ”sedan adderas 7” ger $4x + 7$:</p>$$4x + 7 = 43$$<p><b>2. Lös ekvationen.</b> </p>$$4x + 7 \mathbin{\boldsymbol{-}} \boldsymbol{7} = 43 \mathbin{\boldsymbol{-}} \boldsymbol{7}$$$$4x = 36$$$$\frac{4x}{\boldsymbol{4}} = \frac{36}{\boldsymbol{4}}$$$$x = 9$$<p><b>3. Tolka och svara.</b> Kontroll: $4 \cdot 9 + 7 = 36 + 7 = 43$.</p><p class="svar"><b>Svar:</b> Talet är 9.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">2</span></p><p><b>1. Översätt.</b> Låt $x$ vara talet. Tre gånger talet är $3x$, och 12 dras bort från det:</p>$$3x - 12 = 30$$<p><b>2. Lös ekvationen.</b> </p>$$3x - 12 \mathbin{\boldsymbol{+}} \boldsymbol{12} = 30 \mathbin{\boldsymbol{+}} \boldsymbol{12}$$$$3x = 42$$$$\frac{3x}{\boldsymbol{3}} = \frac{42}{\boldsymbol{3}}$$$$x = 14$$<p><b>3. Tolka och svara.</b> Kontroll: $3 \cdot 14 - 12 = 42 - 12 = 30$.</p><p class="svar"><b>Svar:</b> Talet är 14.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">3</span></p><p><b>1. Översätt.</b> Låt $x$ vara det mindre talet. Det större är då $x + 8$, och summan är 50:</p>$$x + (x + 8) = 50$$<p><b>2. Lös ekvationen.</b> </p>$$2x + 8 = 50$$$$2x + 8 \mathbin{\boldsymbol{-}} \boldsymbol{8} = 50 \mathbin{\boldsymbol{-}} \boldsymbol{8}$$$$2x = 42$$$$\frac{2x}{\boldsymbol{2}} = \frac{42}{\boldsymbol{2}}$$$$x = 21$$<p><b>3. Tolka och svara.</b> Det mindre talet är 21 och det större $21 + 8 = 29$. Summan blir $21 + 29 = 50$.</p><p class="svar"><b>Svar:</b> 21 och 29</p></div>
+      <div class="sol"><p class="solh"><span class="nr">4</span></p><p><b>1. Översätt.</b> Låt $x$ vara det minsta talet. Nästa heltal är $x + 1$ och nästa igen $x + 2$:</p>$$x + (x + 1) + (x + 2) = 72$$<p><b>2. Lös ekvationen.</b> </p>$$3x + 3 = 72$$$$3x + 3 \mathbin{\boldsymbol{-}} \boldsymbol{3} = 72 \mathbin{\boldsymbol{-}} \boldsymbol{3}$$$$3x = 69$$$$\frac{3x}{\boldsymbol{3}} = \frac{69}{\boldsymbol{3}}$$$$x = 23$$<p><b>3. Tolka och svara.</b> Talen är 23, 24 och 25, och $23 + 24 + 25 = 72$.</p><p class="svar"><b>Svar:</b> 23, 24 och 25</p></div>
+      <div class="sol"><p class="solh"><span class="nr">5</span></p><p><b>1. Översätt.</b> Låt $x$ vara lillebroderns ålder i år. Den minsta delen får heta $x$, så slipper vi bråk. Lina är då $3x$ år:</p>$$x + 3x = 32$$<p><b>2. Lös ekvationen.</b> </p>$$4x = 32$$$$\frac{4x}{\boldsymbol{4}} = \frac{32}{\boldsymbol{4}}$$$$x = 8$$<p><b>3. Tolka och svara.</b> $x$ var <b>lillebroderns</b> ålder, men frågan gällde Lina: $3 \cdot 8 = 24$ år. Kontroll: $8 + 24 = 32$.</p><p class="svar"><b>Svar:</b> Lina är 24 år.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">6</span></p><p><b>1. Översätt.</b> Låt $x$ vara antalet påsar. Biljetterna kostar $4 \cdot 120 = 480$ kr och påsarna $45x$ kr:</p>$$480 + 45x = 750$$<p><b>2. Lös ekvationen.</b> </p>$$480 + 45x \mathbin{\boldsymbol{-}} \boldsymbol{480} = 750 \mathbin{\boldsymbol{-}} \boldsymbol{480}$$$$45x = 270$$$$\frac{45x}{\boldsymbol{45}} = \frac{270}{\boldsymbol{45}}$$$$x = 6$$<p><b>3. Tolka och svara.</b> Ett helt antal påsar, som det ska vara. Kontroll: $480 + 6 \cdot 45 = 480 + 270 = 750$.</p><p class="svar"><b>Svar:</b> 6 påsar</p></div>
+      <div class="sol"><p class="solh"><span class="nr">7</span></p><p><b>1. Översätt.</b> Låt $x$ vara bredden i cm. Längden är då $x + 5$. Omkretsen är summan av alla fyra sidorna:</p><div class="fig"><svg viewBox="0 0 200 122" width="200" height="122" font-family="Poppins, sans-serif" font-size="12" fill="#1f2530"><rect x="40" y="12" width="130" height="84" fill="none" stroke="#1f2530" stroke-width="2"/><text x="33" y="58" text-anchor="end"><tspan font-style="italic">x</tspan></text><text x="105" y="114" text-anchor="middle"><tspan font-style="italic">x</tspan> + 5</text></svg></div>$$x + (x + 5) + x + (x + 5) = 46$$<p><b>2. Lös ekvationen.</b> </p>$$4x + 10 = 46$$$$4x + 10 \mathbin{\boldsymbol{-}} \boldsymbol{10} = 46 \mathbin{\boldsymbol{-}} \boldsymbol{10}$$$$4x = 36$$$$\frac{4x}{\boldsymbol{4}} = \frac{36}{\boldsymbol{4}}$$$$x = 9$$<p><b>3. Tolka och svara.</b> Bredden är 9 cm och längden $9 + 5 = 14$ cm. Kontroll: $9 + 14 + 9 + 14 = 46$.</p><p class="svar"><b>Svar:</b> 9 cm och 14 cm</p></div>
+      <div class="sol"><p class="solh"><span class="nr">8</span></p><p><b>1. Översätt.</b> Låt $x$ vara resans längd i km. Kilometrarna kostar $15x$ kr, och startavgiften kommer till:</p>$$45 + 15x = 330$$<p><b>2. Lös ekvationen.</b> </p>$$45 + 15x \mathbin{\boldsymbol{-}} \boldsymbol{45} = 330 \mathbin{\boldsymbol{-}} \boldsymbol{45}$$$$15x = 285$$$$\frac{15x}{\boldsymbol{15}} = \frac{285}{\boldsymbol{15}}$$$$x = 19$$<p><b>3. Tolka och svara.</b> Kontroll: $45 + 15 \cdot 19 = 45 + 285 = 330$.</p><p class="svar"><b>Svar:</b> 19 km</p></div>
+      <div class="sol"><p class="solh"><span class="nr">9</span></p><p><b>1. Översätt.</b> Både Ali och Cleo beskrivs utifrån Bea, så Bea får heta $x$. Låt $x$ vara Beas belopp i kronor. Ali får $x + 100$ och Cleo $2x$:</p>$$x + (x + 100) + 2x = 1\,200$$<p><b>2. Lös ekvationen.</b> </p>$$4x + 100 = 1\,200$$$$4x + 100 \mathbin{\boldsymbol{-}} \boldsymbol{100} = 1\,200 \mathbin{\boldsymbol{-}} \boldsymbol{100}$$$$4x = 1\,100$$$$\frac{4x}{\boldsymbol{4}} = \frac{1\,100}{\boldsymbol{4}}$$$$x = 275$$<p><b>3. Tolka och svara.</b> Bea får 275 kr, Ali $275 + 100 = 375$ kr och Cleo $2 \cdot 275 = 550$ kr. Kontroll: $275 + 375 + 550 = 1\,200$.</p><p class="svar"><b>Svar:</b> Bea 275 kr, Ali 375 kr och Cleo 550 kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">10</span></p><p><b>1. Översätt.</b> Låt $t$ vara tiden i timmar. Sträckan är hastigheten gånger tiden, $s = v \cdot t$:</p>$$80t = 200$$<p><b>2. Lös ekvationen.</b> </p>$$\frac{80t}{\boldsymbol{80}} = \frac{200}{\boldsymbol{80}}$$$$t = 2{,}5$$<p><b>3. Tolka och svara.</b> Tiden är 2,5 timmar. En halv timme är 30 minuter, så det är 2 timmar och 30 minuter. Rimligt: 160 km tar 2 timmar, och 40 km till tar en halvtimme.</p><p class="svar"><b>Svar:</b> 2,5 h, alltså 2 h 30 min</p></div>
+    </div>
+    <h3 class="losniva">Mellan</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">11</span></p><p><b>1. Översätt.</b> Låt $x$ vara talet. ”Ökas med 6” ger $x + 6$, och hela summan multipliceras med 3, så parentesen behövs:</p>$$3(x + 6) = 5x$$<p><b>2. Lös ekvationen.</b> </p>$$3x + 18 = 5x$$$$3x + 18 \mathbin{\boldsymbol{-}} \boldsymbol{3x} = 5x \mathbin{\boldsymbol{-}} \boldsymbol{3x}$$$$18 = 2x$$$$\frac{18}{\boldsymbol{2}} = \frac{2x}{\boldsymbol{2}}$$$$9 = x$$<p><b>3. Tolka och svara.</b> Kontroll: $3 \cdot (9 + 6) = 45$ och $5 \cdot 9 = 45$.</p><p class="svar"><b>Svar:</b> Talet är 9.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">12</span></p><p><b>1. Översätt.</b> Låt $x$ vara dotterns ålder nu. Mamman är $x + 28$ år nu. Om 6 år är dottern $x + 6$ och mamman $x + 28 + 6 = x + 34$:</p>$$x + 34 = 3(x + 6)$$<p><b>2. Lös ekvationen.</b> </p>$$x + 34 = 3x + 18$$$$x + 34 \mathbin{\boldsymbol{-}} \boldsymbol{x} = 3x + 18 \mathbin{\boldsymbol{-}} \boldsymbol{x}$$$$34 = 2x + 18$$$$34 \mathbin{\boldsymbol{-}} \boldsymbol{18} = 2x + 18 \mathbin{\boldsymbol{-}} \boldsymbol{18}$$$$16 = 2x$$$$\frac{16}{\boldsymbol{2}} = \frac{2x}{\boldsymbol{2}}$$$$8 = x$$<p><b>3. Tolka och svara.</b> Dottern är 8 år och mamman 36 år. Om 6 år är de 14 och 42 år, och $3 \cdot 14 = 42$.</p><p class="svar"><b>Svar:</b> Dottern är 8 år.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">13</span></p><p><b>1. Översätt.</b> Låt $x$ vara antalet besök i månaden. Kort A kostar $300 + 20x$ kr och kort B $50x$ kr. Samma kostnad betyder att uttrycken är lika:</p>$$300 + 20x = 50x$$<p><b>2. Lös ekvationen.</b> </p>$$300 + 20x \mathbin{\boldsymbol{-}} \boldsymbol{20x} = 50x \mathbin{\boldsymbol{-}} \boldsymbol{20x}$$$$300 = 30x$$$$\frac{300}{\boldsymbol{30}} = \frac{30x}{\boldsymbol{30}}$$$$10 = x$$<p><b>3. Tolka och svara.</b> Vid 10 besök kostar båda korten 500 kr. Med fler besök kostar varje extra besök 20 kr med kort A men 50 kr med kort B, så kort A blir billigare. Vid 15 besök: kort A kostar 600 kr och kort B 750 kr.</p><p class="svar"><b>Svar:</b> 10 besök. Den som tränar oftare tjänar på kort A.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">14</span></p><p><b>1. Översätt.</b> Låt $x$ vara avståndet i km. Tiden är sträckan delad med hastigheten, $t = \dfrac{s}{v}$. Cykeltiden är $\dfrac{x}{15}$ h och mopedtiden $\dfrac{x}{30}$ h. Skillnaden är 12 minuter, som måste skrivas i timmar: $\dfrac{12}{60} = \dfrac{1}{5}$ h.</p>$$\frac{x}{15} - \frac{x}{30} = \frac{1}{5}$$<p><b>2. Lös ekvationen.</b> Minsta gemensamma nämnare är 30, så vi multiplicerar båda led med 30:</p>$$\boldsymbol{30} \mathbin{\boldsymbol{\cdot}} \left(\frac{x}{15} - \frac{x}{30}\right) = \boldsymbol{30} \mathbin{\boldsymbol{\cdot}} \frac{1}{5}$$$$2x - x = 6$$$$x = 6$$<p><b>3. Tolka och svara.</b> Cykeln tar $\dfrac{6}{15}$ h $= 24$ min och mopeden $\dfrac{6}{30}$ h $= 12$ min. Skillnaden är 12 minuter.</p><p class="svar"><b>Svar:</b> 6 km</p></div>
+      <div class="sol"><p class="solh"><span class="nr">15</span></p><p><b>1. Översätt.</b> Låt $x$ vara den kortaste bitens längd i meter. Den mellersta är $2x$ och den längsta $2x + 1{,}5$:</p>$$x + 2x + (2x + 1{,}5) = 12$$<p><b>2. Lös ekvationen.</b> </p>$$5x + 1{,}5 = 12$$$$5x + 1{,}5 \mathbin{\boldsymbol{-}} \boldsymbol{1{,}5} = 12 \mathbin{\boldsymbol{-}} \boldsymbol{1{,}5}$$$$5x = 10{,}5$$$$\frac{5x}{\boldsymbol{5}} = \frac{10{,}5}{\boldsymbol{5}}$$$$x = 2{,}1$$<p><b>3. Tolka och svara.</b> Bitarna är 2,1 m, $2 \cdot 2{,}1 = 4{,}2$ m och $4{,}2 + 1{,}5 = 5{,}7$ m. Kontroll: $2{,}1 + 4{,}2 + 5{,}7 = 12$.</p><p class="svar"><b>Svar:</b> 2,1 m, 4,2 m och 5,7 m</p></div>
+      <div class="sol"><p class="solh"><span class="nr">16</span></p><p><b>1. Översätt.</b> Låt $x$ vara poängen på det fjärde provet. Medelvärdet är summan av alla poäng delad med antalet prov:</p>$$\frac{14 + 17 + 12 + x}{4} = 15$$<p><b>2. Lös ekvationen.</b> </p>$$\frac{43 + x}{4} = 15$$$$\boldsymbol{4} \mathbin{\boldsymbol{\cdot}} \frac{43 + x}{4} = \boldsymbol{4} \mathbin{\boldsymbol{\cdot}} 15$$$$43 + x = 60$$$$43 + x \mathbin{\boldsymbol{-}} \boldsymbol{43} = 60 \mathbin{\boldsymbol{-}} \boldsymbol{43}$$$$x = 17$$<p><b>3. Tolka och svara.</b> Kontroll: $\dfrac{14 + 17 + 12 + 17}{4} = \dfrac{60}{4} = 15$.</p><p class="svar"><b>Svar:</b> 17 poäng</p></div>
+      <div class="sol"><p class="solh"><span class="nr">17</span></p><p><b>1. Översätt.</b> Låt $x$ vara längden i meter på de två sidorna som går ut från väggen. Sidan längs väggen är då $2x$. Väggen behöver inget staket, så staketet är tre sidor:</p><div class="fig"><svg viewBox="0 0 230 132" width="230" height="132" font-family="Poppins, sans-serif" font-size="12" fill="#1f2530"><text x="115" y="17" text-anchor="middle" font-size="11">Vägg</text><line x1="20" y1="34" x2="210" y2="34" stroke="#1f2530" stroke-width="2.5"/><line x1="22" y1="34" x2="28" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="30" y1="34" x2="36" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="38" y1="34" x2="44" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="46" y1="34" x2="52" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="54" y1="34" x2="60" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="62" y1="34" x2="68" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="70" y1="34" x2="76" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="78" y1="34" x2="84" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="86" y1="34" x2="92" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="94" y1="34" x2="100" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="102" y1="34" x2="108" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="110" y1="34" x2="116" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="118" y1="34" x2="124" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="126" y1="34" x2="132" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="134" y1="34" x2="140" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="142" y1="34" x2="148" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="150" y1="34" x2="156" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="158" y1="34" x2="164" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="166" y1="34" x2="172" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="174" y1="34" x2="180" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="182" y1="34" x2="188" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="190" y1="34" x2="196" y2="26" stroke="#1f2530" stroke-width="1"/><line x1="198" y1="34" x2="204" y2="26" stroke="#1f2530" stroke-width="1"/><polyline points="45,34 45,104 185,104 185,34" fill="none" stroke="#1f2530" stroke-width="2.5" stroke-dasharray="7 3"/><text x="115" y="73" text-anchor="middle" font-size="11" fill="#5b6472">hönsgård</text><text x="37" y="73" text-anchor="end"><tspan font-style="italic">x</tspan></text><text x="193" y="73"><tspan font-style="italic">x</tspan></text><text x="115" y="122" text-anchor="middle">2x</text></svg></div>$$x + 2x + x = 36$$<p><b>2. Lös ekvationen.</b> </p>$$4x = 36$$$$\frac{4x}{\boldsymbol{4}} = \frac{36}{\boldsymbol{4}}$$$$x = 9$$<p><b>3. Tolka och svara.</b> Sidorna är 9 m och $2 \cdot 9 = 18$ m. Men frågan gällde arean: $9 \cdot 18 = 162$ m². Kontroll av staketet: $9 + 18 + 9 = 36$ m.</p><p class="svar"><b>Svar:</b> 162 m<sup>2</sup></p></div>
+    </div>
+    <h3 class="losniva">Avancerad</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">18</span></p><p><b>1. Översätt.</b> Sträckan står inte i uppgiften, men båda tiderna beror på den. Låt därför $x$ vara sträckan mellan A och B i km. Tiden är sträckan delad med hastigheten:</p>$$\text{tid dit} = \frac{x}{90}\ \text{h} \qquad \text{tid hem} = \frac{x}{60}\ \text{h}$$<p>Medelhastigheten är hela sträckan, $2x$, delad med hela tiden:</p>$$v = \frac{2x}{\dfrac{x}{90} + \dfrac{x}{60}}$$<p><b>2. Lös ekvationen.</b> Vi skriver tiderna med den gemensamma nämnaren 180:</p>$$\frac{x}{90} + \frac{x}{60} = \frac{2x}{180} + \frac{3x}{180} = \frac{5x}{180} = \frac{x}{36}$$$$v = \frac{2x}{\dfrac{x}{36}} = 2x \cdot \frac{36}{x} = 72$$<p><b>3. Tolka och svara.</b> Sträckan $x$ tog ut sig själv, så svaret gäller hur lång vägen än är. Svaret är lägre än 75 km/h eftersom bilen kör längre <b>tid</b> med den låga hastigheten. Kontroll med $x = 180$ km: 2 h dit och 3 h hem, 360 km på 5 h ger 72 km/h.</p><p class="svar"><b>Svar:</b> 72 km/h</p></div>
+      <div class="sol"><p class="solh"><span class="nr">19</span></p><p><b>1. Översätt.</b> Låt $x$ vara mängden vatten i liter. Koncentratet ändras inte när vatten tillsätts: det är $0{,}40 \cdot 2 = 0{,}8$ liter före och efter. Hela mängden blir $2 + x$ liter, och koncentratet ska vara 25 % av den:</p>$$\frac{0{,}8}{2 + x} = 0{,}25$$<p><b>2. Lös ekvationen.</b> </p>$$\boldsymbol{(2 + x)} \mathbin{\boldsymbol{\cdot}} \frac{0{,}8}{2 + x} = \boldsymbol{(2 + x)} \mathbin{\boldsymbol{\cdot}} 0{,}25$$$$0{,}8 = 0{,}5 + 0{,}25x$$$$0{,}8 \mathbin{\boldsymbol{-}} \boldsymbol{0{,}5} = 0{,}5 + 0{,}25x \mathbin{\boldsymbol{-}} \boldsymbol{0{,}5}$$$$0{,}3 = 0{,}25x$$$$\frac{0{,}3}{\boldsymbol{0{,}25}} = \frac{0{,}25x}{\boldsymbol{0{,}25}}$$$$1{,}2 = x$$<p><b>3. Tolka och svara.</b> Det blir $2 + 1{,}2 = 3{,}2$ liter, och $\dfrac{0{,}8}{3{,}2} = 0{,}25 = 25\ \%$.</p><p class="svar"><b>Svar:</b> 1,2 liter vatten</p></div>
+      <div class="sol"><p class="solh"><span class="nr">20</span></p><p><b>1. Översätt.</b> Låt $x$ vara tiden i timmar när de klipper tillsammans. Anna klipper $\dfrac{1}{3}$ av gräsmattan per timme, så på $x$ timmar hinner hon $\dfrac{x}{3}$ av den. Bo hinner $\dfrac{x}{6}$. Tillsammans ska de klippa en hel gräsmatta:</p>$$\frac{x}{3} + \frac{x}{6} = 1$$<p><b>2. Lös ekvationen.</b> Vi multiplicerar båda led med 6:</p>$$\boldsymbol{6} \mathbin{\boldsymbol{\cdot}} \left(\frac{x}{3} + \frac{x}{6}\right) = \boldsymbol{6} \mathbin{\boldsymbol{\cdot}} 1$$$$2x + x = 6$$$$3x = 6$$$$\frac{3x}{\boldsymbol{3}} = \frac{6}{\boldsymbol{3}}$$$$x = 2$$<p><b>3. Tolka och svara.</b> Två personer ska gå fortare än Anna ensam (3 h), så 2 h är rimligt. På 2 h klipper Anna $\dfrac{2}{3}$ och Bo $\dfrac{2}{6} = \dfrac{1}{3}$, tillsammans hela gräsmattan.</p><p class="svar"><b>Svar:</b> 2 timmar</p></div>
+      <div class="sol"><p class="solh"><span class="nr">21</span></p><p><b>1. Översätt.</b> Låt $x$ vara Theos ålder nu. För 5 år sedan var Theo $x - 5$ och Pia fyra gånger så gammal, $4(x - 5) = 4x - 20$. Pia är alltså $4x - 20 + 5 = 4x - 15$ år nu.</p><p>Om 5 år är Theo $x + 5$ och Pia $4x - 15 + 5 = 4x - 10$. Då är hon dubbelt så gammal som Theo:</p>$$4x - 10 = 2(x + 5)$$<p><b>2. Lös ekvationen.</b> </p>$$4x - 10 = 2x + 10$$$$4x - 10 \mathbin{\boldsymbol{-}} \boldsymbol{2x} = 2x + 10 \mathbin{\boldsymbol{-}} \boldsymbol{2x}$$$$2x - 10 = 10$$$$2x - 10 \mathbin{\boldsymbol{+}} \boldsymbol{10} = 10 \mathbin{\boldsymbol{+}} \boldsymbol{10}$$$$2x = 20$$$$\frac{2x}{\boldsymbol{2}} = \frac{20}{\boldsymbol{2}}$$$$x = 10$$<p><b>3. Tolka och svara.</b> Theo är 10 år och Pia $4 \cdot 10 - 15 = 25$ år. För 5 år sedan: 20 och 5 år, och $20 = 4 \cdot 5$. Om 5 år: 30 och 15 år, och $30 = 2 \cdot 15$.</p><p class="svar"><b>Svar:</b> Pia är 25 år och Theo 10 år.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">22</span></p><p><b>1. Översätt.</b> Låt $x$ vara entalssiffran. Tiotalssiffran är då $x + 3$, och summan av siffrorna är 11:</p>$$x + (x + 3) = 11$$<p><b>2. Lös ekvationen.</b> </p>$$2x + 3 = 11$$$$2x + 3 \mathbin{\boldsymbol{-}} \boldsymbol{3} = 11 \mathbin{\boldsymbol{-}} \boldsymbol{3}$$$$2x = 8$$$$\frac{2x}{\boldsymbol{2}} = \frac{8}{\boldsymbol{2}}$$$$x = 4$$<p><b>3. Tolka och svara.</b> Entalssiffran är 4 och tiotalssiffran 7, så talet är 74. Byter siffrorna plats blir det 47, och $74 - 47 = 27$.</p><p class="svar"><b>Svar:</b> Talet är 74. Med siffrorna i omvänd ordning blir det 47, alltså 27 mindre.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">23</span></p><p><b>1. Översätt.</b> Låt $x$ vara det långsammare tågets hastighet i km/h. Det snabbare kör $x + 20$. På 1,5 h kör tågen sträckorna $1{,}5x$ och $1{,}5(x + 20)$, enligt $s = v \cdot t$. När de möts har de tillsammans kört hela avståndet:</p>$$1{,}5x + 1{,}5(x + 20) = 330$$<p><b>2. Lös ekvationen.</b> </p>$$1{,}5x + 1{,}5x + 30 = 330$$$$3x + 30 = 330$$$$3x + 30 \mathbin{\boldsymbol{-}} \boldsymbol{30} = 330 \mathbin{\boldsymbol{-}} \boldsymbol{30}$$$$3x = 300$$$$\frac{3x}{\boldsymbol{3}} = \frac{300}{\boldsymbol{3}}$$$$x = 100$$<p><b>3. Tolka och svara.</b> Tågen kör 100 km/h och 120 km/h. Kontroll: $1{,}5 \cdot 100 + 1{,}5 \cdot 120 = 150 + 180 = 330$ km.</p><p class="svar"><b>Svar:</b> 100 km/h och 120 km/h</p></div>
+    </div>
+  </section>
+  <footer><span>Matematik nivå 1c · Problemlösning med ekvationer</span><span>fysiklabbet.se</span></footer>
+</section>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Övningsblad: Olikheter — Fysiklabbet</title>
+<meta name="description" content="48 uppgifter om olikheter i Matematik nivå 1c på tre nivåer: olikhetstecknen, när tecknet ska vändas, parenteser och nämnare, olikheter av andra graden och textuppgifter. Med svar och lösningsförslag. Utskriftsklart.">
+<link rel="canonical" href="https://fysiklabbet.se/ovningsblad/ovningsblad-olikheter.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  renderMathInElement(document.body, {
+    delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
+    throwOnError: false
+  });
+  document.documentElement.setAttribute('data-katex', 'klar');
+});
+</script>
+<style>
+:root { --ink:#1f2530; --paper:#f7f2e8; --line:rgba(31,37,48,.22); --teal:#0d9488; }
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin:0; font-family:'Poppins', system-ui, sans-serif; color:var(--ink); background:#fff; font-size:11pt; line-height:1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { max-width: 186mm; margin: 0 auto; padding: 10mm 6mm 20mm; }
+header { border-bottom: 2px solid var(--ink); padding-bottom: 6px; margin-bottom: 12px; }
+.over { font-size: 9.5pt; text-transform: uppercase; letter-spacing: .06em; color:#5b6472; margin:0; }
+h1 { font-size: 20pt; margin: 2px 0 0; line-height:1.2; }
+.under { margin: 2px 0 0; font-size: 11pt; color:#3b4350; }
+.namn { display:flex; gap: 28px; margin-top: 8px; font-size: 10pt; color:#3b4350; }
+.namn span { flex:1; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.box { background: var(--paper); border: 1px solid rgba(31,37,48,.18); border-radius: 8px; padding: 8px 14px; margin: 0 0 10px; break-inside: avoid; }
+.box p { margin: 3px 0; }
+.boxgrid { display:grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
+.box ul, .box ol { margin: 2px 0 2px 16px; padding: 0; }
+.box li { margin: 1px 0; }
+.box .katex-display { margin: 2px 0 3px; text-align:left; }
+.box .katex-display > .katex { text-align:left; }
+.rub { font-weight: 600; }
+.nivaer { font-size: 9.5pt; color:#3b4350; margin: 0 0 6px; }
+.niva { margin-bottom: 6px; }
+.nivastart { break-inside: avoid; page-break-inside: avoid; }
+.nivastart + .tasks { margin-top: 4px; }
+h2 { display:flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; font-size: 13pt; margin: 14px 0 4px; padding: 3px 0; border-bottom: 1.4px solid var(--ink); break-after: avoid; }
+h2 .nivanamn { color: var(--teal); }
+h2 .sv { font-weight: 400; font-size: 9pt; color:#5b6472; }
+.instr { font-weight: 600; margin: 8px 0 3px; break-after: avoid; }
+.tasks { display: grid; gap: 4px 14px; }
+.c1 { grid-template-columns: 1fr; } .c2 { grid-template-columns: repeat(2, 1fr); }
+.c3 { grid-template-columns: repeat(3, 1fr); } .c4 { grid-template-columns: repeat(4, 1fr); }
+.task { break-inside: avoid; padding: 4px 4px 0; border-bottom: 1px dotted var(--line); display:flex; gap: 6px; align-items: baseline; }
+.task .nr { font-weight: 600; min-width: 1.7em; text-align:right; font-size: 10pt; }
+.task .eq { flex:1; min-width: 0; }
+.task .katex, .sol p .katex, .svarlista .katex, .box p .katex, .box li .katex { white-space: nowrap; }
+.kort { min-height: 16mm; } .mellan { min-height: 30mm; } .hog { min-height: 44mm; } .xhog { min-height: 64mm; }
+.fig { margin: 4px 0 2px; }
+.fig svg { max-width: 100%; height: auto; }
+.facit { break-before: page; page-break-before: always; }
+.facit h2 { font-size: 14pt; }
+.svarniva, .losniva { font-size: 11pt; margin: 8px 0 3px; color: var(--teal); break-after: avoid; }
+.svarlista { display:grid; grid-template-columns: repeat(4, 1fr); gap: 2px 12px; font-size: 9.8pt; margin-bottom: 6px; }
+.svarlista div { display:flex; gap: 6px; align-items: center; min-height: 9mm; }
+.svarlista div.lang { grid-column: span 2; }
+.svarlista .nr { font-weight: 600; min-width: 1.7em; text-align:right; }
+.los { columns: 2; column-gap: 10mm; font-size: 9.8pt; }
+.sol { break-inside: avoid; page-break-inside: avoid; margin: 0 0 8px; padding: 0 0 5px; border-bottom: 1px dotted var(--line); }
+.sol .solh { font-weight: 600; margin: 0 0 1px; }
+.sol .solh .nr { margin-right: 4px; }
+.sol p { margin: 2px 0; }
+.sol .del { font-weight: 700; margin: 5px 0 1px; }
+.sol .kontroll { color:#3b4350; }
+.sol .obs { color:#b42318; font-weight: 600; }
+.sol .katex-display { margin: 2px 0 3px; text-align: left; padding-left: 3mm; overflow-x: auto; overflow-y: hidden; padding-bottom: 2px; }
+.sol .katex-display > .katex { text-align: left; }
+.sol .svar { margin: 3px 0 0; }
+footer { margin-top: 18px; font-size: 9pt; color:#5b6472; border-top: 1px solid var(--line); padding-top: 6px; display:flex; justify-content: space-between; }
+@page { size: A4; margin: 13mm 12mm 14mm; }
+@media print {
+  body { font-size: 10.5pt; }
+  .page { max-width: none; padding: 0; }
+}
+@media (max-width: 640px) {
+  .c3, .c4 { grid-template-columns: repeat(2, 1fr); }
+  .c2, .c3:has(.hog) { grid-template-columns: 1fr; }
+  .boxgrid { grid-template-columns: 1fr; }
+  .svarlista { grid-template-columns: repeat(2, 1fr); }
+  .los { columns: 1; }
+  .sol .katex-display { padding-left: 0; }
+}
+</style>
+</head>
+<body>
+<section class="page">
+  <header>
+    <p class="over">Matematik nivå 1c · Övningsblad</p>
+    <h1>Olikheter</h1>
+    <p class="under">Olikhetstecken, lösning av olikheter och olikheter av andra graden</p>
+    <div class="namn"><span>Namn:</span><span>Klass:</span></div>
+  </header>
+  <div class="box boxgrid">
+    <div>
+      <p class="rub">Kom ihåg</p>
+      <ul>
+        <li>$<$ mindre än, $>$ större än, $\leq$ mindre än eller lika med, $\geq$ större än eller lika med. Tecknet gapar åt det större värdet.</li>
+        <li>Olikheter löses som ekvationer, med samma operation i båda led.</li>
+        <li><b>Olikhetstecknet vänds</b> när båda led multipliceras eller divideras med ett negativt tal.</li>
+        <li>Andra graden: lös gränsfallet ($x^2 = 9$ ger $x = \pm 3$) och pröva sedan ett värde i varje del av tallinjen.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="rub">Exempel: lös $-3x + 4 \leq 19$</p>
+      $$-3x + 4 \mathbin{\boldsymbol{-}} \boldsymbol{4} \leq 19 \mathbin{\boldsymbol{-}} \boldsymbol{4} \quad\text{ger}\quad -3x \leq 15$$
+      <p>Division med $-3$, så tecknet vänds:</p>
+      $$\frac{-3x}{\boldsymbol{-3}} \geq \frac{15}{\boldsymbol{-3}} \quad\text{ger}\quad x \geq -5$$
+      <p>Kontroll: $x = 0$ ger $4 \leq 19$, sant, och $0 \geq -5$.</p>
+    </div>
+  </div>
+  <p class="nivaer"><b>Grund</b> tränar tecknen och en operation i taget. <b>Mellan</b> har parenteser, nämnare, olikheter av andra graden och textuppgifter. <b>Avancerad</b> kräver flera steg, dubbla olikheter och resonemang. Räkna utan räknare. Svar och lösningsförslag finns efter uppgifterna.</p>
+
+  <section class="niva">
+    <div class="nivastart">
+    <h2><span class="nivanamn">Grund</span><span class="sv">Uppgift 1–26 · Olikhetstecknen, enkla olikheter och när tecknet ska vändas</span></h2>
+    <p class="instr">Vilket tecken, &lt; eller &gt;, ska stå i rutan?</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">1</span><span class="eq">$-3 \;\square\; 2$</span></div>
+      <div class="task kort"><span class="nr">2</span><span class="eq">$-5 \;\square\; -8$</span></div>
+      <div class="task kort"><span class="nr">3</span><span class="eq">$0{,}5 \;\square\; \dfrac{1}{3}$</span></div>
+      <div class="task kort"><span class="nr">4</span><span class="eq">$-\dfrac{1}{2} \;\square\; -0{,}4$</span></div>
+    </div>
+    </div>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">5</span><span class="eq">$2^3 \;\square\; 3^2$</span></div>
+      <div class="task kort"><span class="nr">6</span><span class="eq">$-0{,}1 \;\square\; -0{,}01$</span></div>
+      <div class="task kort"><span class="nr">7</span><span class="eq">$|{-7}| \;\square\; 6$</span></div>
+      <div class="task kort"><span class="nr">8</span><span class="eq">$\dfrac{3}{4} \;\square\; \dfrac{4}{5}$</span></div>
+    </div>
+    <p class="instr">Är $x = 4$ en lösning till olikheten? Svara ja eller nej och motivera.</p>
+    <div class="tasks c3">
+      <div class="task kort"><span class="nr">9</span><span class="eq">$2x + 1 > 9$</span></div>
+      <div class="task kort"><span class="nr">10</span><span class="eq">$3x - 5 \leq 7$</span></div>
+      <div class="task kort"><span class="nr">11</span><span class="eq">$10 - x < 7$</span></div>
+    </div>
+    <p class="instr">Lös olikheterna.</p>
+    <div class="tasks c3">
+      <div class="task mellan"><span class="nr">12</span><span class="eq">$x + 7 > 12$</span></div>
+      <div class="task mellan"><span class="nr">13</span><span class="eq">$x - 4 \leq 3$</span></div>
+      <div class="task mellan"><span class="nr">14</span><span class="eq">$3x < 21$</span></div>
+      <div class="task mellan"><span class="nr">15</span><span class="eq">$5x \geq -20$</span></div>
+      <div class="task mellan"><span class="nr">16</span><span class="eq">$2x + 3 > 15$</span></div>
+      <div class="task mellan"><span class="nr">17</span><span class="eq">$4x - 7 \leq 13$</span></div>
+      <div class="task mellan"><span class="nr">18</span><span class="eq">$\dfrac{x}{3} < 4$</span></div>
+      <div class="task mellan"><span class="nr">19</span><span class="eq">$6 + 2x \geq 0$</span></div>
+      <div class="task mellan"><span class="nr">20</span><span class="eq">$9 < 2x + 1$</span></div>
+    </div>
+    <p class="instr">Lös olikheterna. Här måste olikhetstecknet vändas.</p>
+    <div class="tasks c3">
+      <div class="task mellan"><span class="nr">21</span><span class="eq">$-x > 3$</span></div>
+      <div class="task mellan"><span class="nr">22</span><span class="eq">$-2x < 10$</span></div>
+      <div class="task mellan"><span class="nr">23</span><span class="eq">$-4x \geq -12$</span></div>
+      <div class="task mellan"><span class="nr">24</span><span class="eq">$5 - x \leq 2$</span></div>
+      <div class="task mellan"><span class="nr">25</span><span class="eq">$-\dfrac{x}{2} > 4$</span></div>
+      <div class="task mellan"><span class="nr">26</span><span class="eq">$7 - 3x > 1$</span></div>
+    </div>
+  </section>
+
+  <section class="niva">
+    <div class="nivastart">
+    <h2><span class="nivanamn">Mellan</span><span class="sv">Uppgift 27–39 · Parenteser, $x$ i båda led, nämnare, olikheter av andra graden och textuppgifter</span></h2>
+    <p class="instr">Lös olikheterna.</p>
+    <div class="tasks c3">
+      <div class="task hog"><span class="nr">27</span><span class="eq">$3(x - 2) < 12$</span></div>
+      <div class="task hog"><span class="nr">28</span><span class="eq">$5x + 4 > 2x + 19$</span></div>
+      <div class="task hog"><span class="nr">29</span><span class="eq">$2(x + 1) \geq 5x - 7$</span></div>
+    </div>
+    </div>
+    <div class="tasks c3">
+      <div class="task hog"><span class="nr">30</span><span class="eq">$\dfrac{x}{2} + 1 \leq \dfrac{x}{3} + 3$</span></div>
+      <div class="task hog"><span class="nr">31</span><span class="eq">$4 - 2(x - 3) > x + 1$</span></div>
+      <div class="task hog"><span class="nr">32</span><span class="eq">$\dfrac{2x - 1}{3} \geq x - 2$</span></div>
+    </div>
+    <p class="instr">Lös olikheterna av andra graden. Rita gärna en tallinje.</p>
+    <div class="tasks c2">
+      <div class="task hog"><span class="nr">33</span><span class="eq">$x^2 < 9$</span></div>
+      <div class="task hog"><span class="nr">34</span><span class="eq">$x^2 \geq 16$</span></div>
+      <div class="task hog"><span class="nr">35</span><span class="eq">$x^2 \leq 25$</span></div>
+      <div class="task hog"><span class="nr">36</span><span class="eq">$2x^2 > 50$</span></div>
+    </div>
+    <p class="instr">Lös uppgifterna.</p>
+    <div class="tasks c1">
+      <div class="task hog"><span class="nr">37</span><span class="eq txt">Ett mobilabonnemang kostar 99 kr i månaden och dessutom 0,50 kr per sms. Hur många sms kan Noah skicka om månadsräkningen högst får bli 150 kr?</span></div>
+      <div class="task hog"><span class="nr">38</span><span class="eq txt">Vilka heltal uppfyller båda olikheterna $2x - 3 > 1$ och $x + 4 \leq 9$?</span></div>
+      <div class="task hog"><span class="nr">39</span><span class="eq txt">Sara löser olikheten $4 - 2x < 10$ och får svaret $x < -3$. Förklara vad hon har gjort för fel och lös olikheten rätt.</span></div>
+    </div>
+  </section>
+
+  <section class="niva">
+    <div class="nivastart">
+    <h2><span class="nivanamn">Avancerad</span><span class="sv">Uppgift 40–48 · Flera bråk, dubbla olikheter, andragradsolikheter i flera steg och resonemang</span></h2>
+    <p class="instr">Lös olikheterna.</p>
+    <div class="tasks c2">
+      <div class="task hog"><span class="nr">40</span><span class="eq">$\dfrac{3 - x}{4} - \dfrac{x + 1}{2} \geq 1$</span></div>
+      <div class="task hog"><span class="nr">41</span><span class="eq">$-3 < 2x + 1 \leq 7$</span></div>
+    </div>
+    </div>
+    <div class="tasks c2">
+      <div class="task hog"><span class="nr">42</span><span class="eq">$x^2 - 7 > 2$</span></div>
+      <div class="task hog"><span class="nr">43</span><span class="eq">$(x - 1)^2 < 16$</span></div>
+      <div class="task hog"><span class="nr">44</span><span class="eq">$3x^2 + 5 \leq 32$</span></div>
+      <div class="task hog"><span class="nr">45</span><span class="eq">$-2x^2 + 8 < 0$</span></div>
+    </div>
+    <p class="instr">Lös uppgifterna.</p>
+    <div class="tasks c1">
+      <div class="task hog"><span class="nr">46</span><span class="eq txt">Ett företag tillverkar mobilskal. De fasta kostnaderna är 24 000 kr i månaden. Varje skal kostar dessutom 35 kr att tillverka och säljs för 99 kr. Hur många skal måste företaget sälja i månaden för att gå med vinst?</span></div>
+      <div class="task hog"><span class="nr">47</span><span class="eq txt">För vilka värden på talet $a$ har ekvationen $2x + a = 11$ en positiv lösning?</span></div>
+      <div class="task hog"><span class="nr">48</span><span class="eq txt">Vilka positiva heltal $x$ uppfyller olikheten $x^2 < 5x$? Förklara varför man får dividera båda led med $x$ här, men inte om $x$ kunde vara negativt.</span></div>
+    </div>
+  </section>
+  <section class="facit">
+    <h2><span>Svar</span></h2>
+
+    <h3 class="svarniva">Grund</h3>
+    <div class="svarlista"><div><span class="nr">1</span><span>$-3 < 2$</span></div><div><span class="nr">2</span><span>$-5 > -8$</span></div><div><span class="nr">3</span><span>$0{,}5 > \dfrac{1}{3}$</span></div><div><span class="nr">4</span><span>$-\dfrac{1}{2} < -0{,}4$</span></div><div><span class="nr">5</span><span>$2^3 < 3^2$</span></div><div><span class="nr">6</span><span>$-0{,}1 < -0{,}01$</span></div><div><span class="nr">7</span><span>$|{-7}| > 6$</span></div><div><span class="nr">8</span><span>$\dfrac{3}{4} < \dfrac{4}{5}$</span></div><div><span class="nr">9</span><span>Nej</span></div><div><span class="nr">10</span><span>Ja</span></div><div><span class="nr">11</span><span>Ja</span></div><div><span class="nr">12</span><span>$x > 5$</span></div><div><span class="nr">13</span><span>$x \leq 7$</span></div><div><span class="nr">14</span><span>$x < 7$</span></div><div><span class="nr">15</span><span>$x \geq -4$</span></div><div><span class="nr">16</span><span>$x > 6$</span></div><div><span class="nr">17</span><span>$x \leq 5$</span></div><div><span class="nr">18</span><span>$x < 12$</span></div><div><span class="nr">19</span><span>$x \geq -3$</span></div><div><span class="nr">20</span><span>$x > 4$</span></div><div><span class="nr">21</span><span>$x < -3$</span></div><div><span class="nr">22</span><span>$x > -5$</span></div><div><span class="nr">23</span><span>$x \leq 3$</span></div><div><span class="nr">24</span><span>$x \geq 3$</span></div><div><span class="nr">25</span><span>$x < -8$</span></div><div><span class="nr">26</span><span>$x < 2$</span></div></div>
+    <h3 class="svarniva">Mellan</h3>
+    <div class="svarlista"><div><span class="nr">27</span><span>$x < 6$</span></div><div><span class="nr">28</span><span>$x > 5$</span></div><div><span class="nr">29</span><span>$x \leq 3$</span></div><div><span class="nr">30</span><span>$x \leq 12$</span></div><div><span class="nr">31</span><span>$x < 3$</span></div><div><span class="nr">32</span><span>$x \leq 5$</span></div><div><span class="nr">33</span><span>$-3 < x < 3$</span></div><div><span class="nr">34</span><span>$x \leq -4$ och $x \geq 4$</span></div><div><span class="nr">35</span><span>$-5 \leq x \leq 5$</span></div><div><span class="nr">36</span><span>$x < -5$ och $x > 5$</span></div><div><span class="nr">37</span><span>Högst 102 sms</span></div><div><span class="nr">38</span><span>3, 4 och 5</span></div><div><span class="nr">39</span><span>$x > -3$</span></div></div>
+    <h3 class="svarniva">Avancerad</h3>
+    <div class="svarlista"><div><span class="nr">40</span><span>$x \leq -1$</span></div><div><span class="nr">41</span><span>$-2 < x \leq 3$</span></div><div><span class="nr">42</span><span>$x < -3$ och $x > 3$</span></div><div><span class="nr">43</span><span>$-3 < x < 5$</span></div><div><span class="nr">44</span><span>$-3 \leq x \leq 3$</span></div><div><span class="nr">45</span><span>$x < -2$ och $x > 2$</span></div><div><span class="nr">46</span><span>Minst 376 skal</span></div><div><span class="nr">47</span><span>$a < 11$</span></div><div><span class="nr">48</span><span>1, 2, 3 och 4</span></div></div>
+    <h2><span>Lösningsförslag</span></h2>
+
+    <h3 class="losniva">Grund</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">1</span> $-3 \;\square\; 2$</p><p>Alla negativa tal är mindre än alla positiva.</p>$$-3 < 2$$<p class="svar"><b>Svar:</b> $-3 < 2$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">2</span> $-5 \;\square\; -8$</p><p>På tallinjen ligger $-5$ till höger om $-8$, och talen växer åt höger.</p>$$-5 > -8$$<p class="svar"><b>Svar:</b> $-5 > -8$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">3</span> $0{,}5 \;\square\; \dfrac{1}{3}$</p><p>$0{,}5 = \dfrac{1}{2}$, och en halv är mer än en tredjedel.</p>$$0{,}5 > \frac{1}{3}$$<p class="svar"><b>Svar:</b> $0{,}5 > \dfrac{1}{3}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">4</span> $-\dfrac{1}{2} \;\square\; -0{,}4$</p><p>$-\dfrac{1}{2} = -0{,}5$, som ligger längre till vänster på tallinjen än $-0{,}4$.</p>$$-\frac{1}{2} < -0{,}4$$<p class="svar"><b>Svar:</b> $-\dfrac{1}{2} < -0{,}4$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">5</span> $2^3 \;\square\; 3^2$</p>$$2^3 = 8 \qquad 3^2 = 9$$$$2^3 < 3^2$$<p class="svar"><b>Svar:</b> $2^3 < 3^2$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">6</span> $-0{,}1 \;\square\; -0{,}01$</p><p>$-0{,}1 = -0{,}10$ ligger längre från noll åt vänster än $-0{,}01$.</p>$$-0{,}1 < -0{,}01$$<p class="svar"><b>Svar:</b> $-0{,}1 < -0{,}01$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">7</span> $|{-7}| \;\square\; 6$</p><p>Absolutbeloppet är avståndet till noll, så $|{-7}| = 7$.</p>$$7 > 6$$<p class="svar"><b>Svar:</b> $|{-7}| > 6$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">8</span> $\dfrac{3}{4} \;\square\; \dfrac{4}{5}$</p><p>Med den gemensamma nämnaren 20:</p>$$\frac{3}{4} = \frac{15}{20} \qquad \frac{4}{5} = \frac{16}{20}$$$$\frac{3}{4} < \frac{4}{5}$$<p class="svar"><b>Svar:</b> $\dfrac{3}{4} < \dfrac{4}{5}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">9</span> $2x + 1 > 9$</p><p>Vi sätter in $x = 4$:</p>$$2 \cdot 4 + 1 = 9$$<p>Är $9 > 9$? Nej, 9 är lika med 9, inte större.</p><p class="svar"><b>Svar:</b> Nej</p></div>
+      <div class="sol"><p class="solh"><span class="nr">10</span> $3x - 5 \leq 7$</p>$$3 \cdot 4 - 5 = 7$$<p>Är $7 \leq 7$? Ja, tecknet $\leq$ tillåter likhet.</p><p class="svar"><b>Svar:</b> Ja</p></div>
+      <div class="sol"><p class="solh"><span class="nr">11</span> $10 - x < 7$</p>$$10 - 4 = 6$$<p>Är $6 < 7$? Ja.</p><p class="svar"><b>Svar:</b> Ja</p></div>
+      <div class="sol"><p class="solh"><span class="nr">12</span> $x + 7 > 12$</p>$$x + 7 \mathbin{\boldsymbol{-}} \boldsymbol{7} > 12 \mathbin{\boldsymbol{-}} \boldsymbol{7}$$$$x > 5$$<p class="svar"><b>Svar:</b> $x > 5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">13</span> $x - 4 \leq 3$</p>$$x - 4 \mathbin{\boldsymbol{+}} \boldsymbol{4} \leq 3 \mathbin{\boldsymbol{+}} \boldsymbol{4}$$$$x \leq 7$$<p class="svar"><b>Svar:</b> $x \leq 7$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">14</span> $3x < 21$</p><p>Vi dividerar med 3, ett positivt tal, så tecknet står kvar:</p>$$\frac{3x}{\boldsymbol{3}} < \frac{21}{\boldsymbol{3}}$$$$x < 7$$<p class="svar"><b>Svar:</b> $x < 7$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">15</span> $5x \geq -20$</p><p>Det är talet vi dividerar <b>med</b> som avgör, och 5 är positivt. Att högerledet är negativt spelar ingen roll:</p>$$\frac{5x}{\boldsymbol{5}} \geq \frac{-20}{\boldsymbol{5}}$$$$x \geq -4$$<p class="svar"><b>Svar:</b> $x \geq -4$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">16</span> $2x + 3 > 15$</p>$$2x + 3 \mathbin{\boldsymbol{-}} \boldsymbol{3} > 15 \mathbin{\boldsymbol{-}} \boldsymbol{3}$$$$2x > 12$$$$\frac{2x}{\boldsymbol{2}} > \frac{12}{\boldsymbol{2}}$$$$x > 6$$<p class="svar"><b>Svar:</b> $x > 6$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">17</span> $4x - 7 \leq 13$</p>$$4x - 7 \mathbin{\boldsymbol{+}} \boldsymbol{7} \leq 13 \mathbin{\boldsymbol{+}} \boldsymbol{7}$$$$4x \leq 20$$$$\frac{4x}{\boldsymbol{4}} \leq \frac{20}{\boldsymbol{4}}$$$$x \leq 5$$<p class="svar"><b>Svar:</b> $x \leq 5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">18</span> $\dfrac{x}{3} < 4$</p>$$\boldsymbol{3} \mathbin{\boldsymbol{\cdot}} \frac{x}{3} < \boldsymbol{3} \mathbin{\boldsymbol{\cdot}} 4$$$$x < 12$$<p class="svar"><b>Svar:</b> $x < 12$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">19</span> $6 + 2x \geq 0$</p>$$6 + 2x \mathbin{\boldsymbol{-}} \boldsymbol{6} \geq 0 \mathbin{\boldsymbol{-}} \boldsymbol{6}$$$$2x \geq -6$$$$\frac{2x}{\boldsymbol{2}} \geq \frac{-6}{\boldsymbol{2}}$$$$x \geq -3$$<p class="svar"><b>Svar:</b> $x \geq -3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">20</span> $9 < 2x + 1$</p>$$9 \mathbin{\boldsymbol{-}} \boldsymbol{1} < 2x + 1 \mathbin{\boldsymbol{-}} \boldsymbol{1}$$$$8 < 2x$$$$\frac{8}{\boldsymbol{2}} < \frac{2x}{\boldsymbol{2}}$$$$4 < x$$<p>$4 < x$ betyder att $x$ är större än 4. Med $x$ till vänster vänds tecknet: $x > 4$.</p><p class="svar"><b>Svar:</b> $x > 4$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">21</span> $-x > 3$</p><p>Vi dividerar med $-1$:</p>$$\frac{-x}{\boldsymbol{-1}} < \frac{3}{\boldsymbol{-1}}$$<p class="obs">OBS! Vänd olikhetstecknet, eftersom vi dividerar med ett negativt tal.</p>$$x < -3$$<p class="kontroll"><i>Kontroll:</i> $x = -4$ ger $-(-4) = 4 > 3$. Stämmer.</p><p class="svar"><b>Svar:</b> $x < -3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">22</span> $-2x < 10$</p>$$\frac{-2x}{\boldsymbol{-2}} > \frac{10}{\boldsymbol{-2}}$$<p class="obs">OBS! Vänd olikhetstecknet, eftersom vi dividerar med ett negativt tal.</p>$$x > -5$$<p class="svar"><b>Svar:</b> $x > -5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">23</span> $-4x \geq -12$</p>$$\frac{-4x}{\boldsymbol{-4}} \leq \frac{-12}{\boldsymbol{-4}}$$<p class="obs">OBS! Vänd olikhetstecknet, eftersom vi dividerar med ett negativt tal.</p>$$x \leq 3$$<p class="svar"><b>Svar:</b> $x \leq 3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">24</span> $5 - x \leq 2$</p>$$5 - x \mathbin{\boldsymbol{-}} \boldsymbol{5} \leq 2 \mathbin{\boldsymbol{-}} \boldsymbol{5}$$$$-x \leq -3$$$$\frac{-x}{\boldsymbol{-1}} \geq \frac{-3}{\boldsymbol{-1}}$$<p class="obs">OBS! Vänd olikhetstecknet, eftersom vi dividerar med ett negativt tal.</p>$$x \geq 3$$<p class="svar"><b>Svar:</b> $x \geq 3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">25</span> $-\dfrac{x}{2} > 4$</p><p>Vi multiplicerar med $-2$:</p>$$\boldsymbol{(-2)} \mathbin{\boldsymbol{\cdot}} \left(-\frac{x}{2}\right) < \boldsymbol{(-2)} \mathbin{\boldsymbol{\cdot}} 4$$<p class="obs">OBS! Vänd olikhetstecknet, eftersom vi multiplicerar med ett negativt tal.</p>$$x < -8$$<p class="svar"><b>Svar:</b> $x < -8$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">26</span> $7 - 3x > 1$</p>$$7 - 3x \mathbin{\boldsymbol{-}} \boldsymbol{7} > 1 \mathbin{\boldsymbol{-}} \boldsymbol{7}$$$$-3x > -6$$$$\frac{-3x}{\boldsymbol{-3}} < \frac{-6}{\boldsymbol{-3}}$$<p class="obs">OBS! Vänd olikhetstecknet, eftersom vi dividerar med ett negativt tal.</p>$$x < 2$$<p class="kontroll"><i>Kontroll:</i> $x = 0$ ger $7 > 1$. Stämmer, och 0 är mindre än 2.</p><p class="svar"><b>Svar:</b> $x < 2$</p></div>
+    </div>
+    <h3 class="losniva">Mellan</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">27</span> $3(x - 2) < 12$</p><p>Vi utvecklar parentesen:</p>$$3x - 6 < 12$$$$3x - 6 \mathbin{\boldsymbol{+}} \boldsymbol{6} < 12 \mathbin{\boldsymbol{+}} \boldsymbol{6}$$$$3x < 18$$$$\frac{3x}{\boldsymbol{3}} < \frac{18}{\boldsymbol{3}}$$$$x < 6$$<p class="svar"><b>Svar:</b> $x < 6$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">28</span> $5x + 4 > 2x + 19$</p>$$5x + 4 \mathbin{\boldsymbol{-}} \boldsymbol{2x} > 2x + 19 \mathbin{\boldsymbol{-}} \boldsymbol{2x}$$$$3x + 4 > 19$$$$3x + 4 \mathbin{\boldsymbol{-}} \boldsymbol{4} > 19 \mathbin{\boldsymbol{-}} \boldsymbol{4}$$$$3x > 15$$$$\frac{3x}{\boldsymbol{3}} > \frac{15}{\boldsymbol{3}}$$$$x > 5$$<p class="svar"><b>Svar:</b> $x > 5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">29</span> $2(x + 1) \geq 5x - 7$</p>$$2x + 2 \geq 5x - 7$$$$2x + 2 \mathbin{\boldsymbol{-}} \boldsymbol{5x} \geq 5x - 7 \mathbin{\boldsymbol{-}} \boldsymbol{5x}$$$$-3x + 2 \geq -7$$$$-3x + 2 \mathbin{\boldsymbol{-}} \boldsymbol{2} \geq -7 \mathbin{\boldsymbol{-}} \boldsymbol{2}$$$$-3x \geq -9$$$$\frac{-3x}{\boldsymbol{-3}} \leq \frac{-9}{\boldsymbol{-3}}$$<p class="obs">OBS! Vänd olikhetstecknet, eftersom vi dividerar med ett negativt tal.</p>$$x \leq 3$$<p>Man kan också samla $x$ i högerledet, då slipper man vända tecknet: $9 \geq 3x$, alltså $3 \geq x$.</p><p class="svar"><b>Svar:</b> $x \leq 3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">30</span> $\dfrac{x}{2} + 1 \leq \dfrac{x}{3} + 3$</p><p>Minsta gemensamma nämnare är 6. Vi multiplicerar båda led med 6, ett positivt tal:</p>$$\boldsymbol{6} \mathbin{\boldsymbol{\cdot}} \left(\frac{x}{2} + 1\right) \leq \boldsymbol{6} \mathbin{\boldsymbol{\cdot}} \left(\frac{x}{3} + 3\right)$$$$3x + 6 \leq 2x + 18$$$$3x + 6 \mathbin{\boldsymbol{-}} \boldsymbol{2x} \leq 2x + 18 \mathbin{\boldsymbol{-}} \boldsymbol{2x}$$$$x + 6 \leq 18$$$$x + 6 \mathbin{\boldsymbol{-}} \boldsymbol{6} \leq 18 \mathbin{\boldsymbol{-}} \boldsymbol{6}$$$$x \leq 12$$<p class="svar"><b>Svar:</b> $x \leq 12$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">31</span> $4 - 2(x - 3) > x + 1$</p><p>Minus framför parentesen byter tecken på båda termerna: $-2(x - 3) = -2x + 6$.</p>$$4 - 2x + 6 > x + 1$$$$10 - 2x > x + 1$$$$10 - 2x \mathbin{\boldsymbol{-}} \boldsymbol{x} > x + 1 \mathbin{\boldsymbol{-}} \boldsymbol{x}$$$$10 - 3x > 1$$$$10 - 3x \mathbin{\boldsymbol{-}} \boldsymbol{10} > 1 \mathbin{\boldsymbol{-}} \boldsymbol{10}$$$$-3x > -9$$$$\frac{-3x}{\boldsymbol{-3}} < \frac{-9}{\boldsymbol{-3}}$$<p class="obs">OBS! Vänd olikhetstecknet, eftersom vi dividerar med ett negativt tal.</p>$$x < 3$$<p class="svar"><b>Svar:</b> $x < 3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">32</span> $\dfrac{2x - 1}{3} \geq x - 2$</p>$$\boldsymbol{3} \mathbin{\boldsymbol{\cdot}} \frac{2x - 1}{3} \geq \boldsymbol{3} \mathbin{\boldsymbol{\cdot}} (x - 2)$$$$2x - 1 \geq 3x - 6$$$$2x - 1 \mathbin{\boldsymbol{-}} \boldsymbol{3x} \geq 3x - 6 \mathbin{\boldsymbol{-}} \boldsymbol{3x}$$$$-x - 1 \geq -6$$$$-x - 1 \mathbin{\boldsymbol{+}} \boldsymbol{1} \geq -6 \mathbin{\boldsymbol{+}} \boldsymbol{1}$$$$-x \geq -5$$$$\frac{-x}{\boldsymbol{-1}} \leq \frac{-5}{\boldsymbol{-1}}$$<p class="obs">OBS! Vänd olikhetstecknet, eftersom vi dividerar med ett negativt tal.</p>$$x \leq 5$$<p class="svar"><b>Svar:</b> $x \leq 5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">33</span> $x^2 < 9$</p><p>Vi löser först gränsfallet, där vänsterledet är lika med högerledet:</p>$$x^2 = 9$$$$x = \pm\sqrt{9}$$$$x = \pm 3$$<p>Vi prövar ett värde mellan gränserna: $x = 0$ ger $0 < 9$, sant. Utanför, till exempel $x = 4$, ger $16 < 9$, falskt. Gränserna ingår inte eftersom tecknet är $<$:</p><div class="fig"><svg viewBox="0 0 280 52" width="280" height="52" font-family="Poppins, sans-serif" font-size="12" fill="#1f2530"><line x1="8" y1="26" x2="254" y2="26" stroke="#1f2530" stroke-width="1.4"/><polygon points="253,21.5 262,26 253,30.5" fill="#1f2530"/><line x1="22" y1="22" x2="22" y2="30" stroke="#1f2530" stroke-width="1"/><text x="22" y="44" text-anchor="middle" font-size="10.5">−5</text><line x1="44.400000000000006" y1="22" x2="44.400000000000006" y2="30" stroke="#1f2530" stroke-width="1"/><text x="44.400000000000006" y="44" text-anchor="middle" font-size="10.5">−4</text><line x1="66.80000000000001" y1="22" x2="66.80000000000001" y2="30" stroke="#1f2530" stroke-width="1"/><text x="66.80000000000001" y="44" text-anchor="middle" font-size="10.5">−3</text><line x1="89.2" y1="22" x2="89.2" y2="30" stroke="#1f2530" stroke-width="1"/><text x="89.2" y="44" text-anchor="middle" font-size="10.5">−2</text><line x1="111.60000000000001" y1="22" x2="111.60000000000001" y2="30" stroke="#1f2530" stroke-width="1"/><text x="111.60000000000001" y="44" text-anchor="middle" font-size="10.5">−1</text><line x1="134" y1="22" x2="134" y2="30" stroke="#1f2530" stroke-width="1"/><text x="134" y="44" text-anchor="middle" font-size="10.5">0</text><line x1="156.4" y1="22" x2="156.4" y2="30" stroke="#1f2530" stroke-width="1"/><text x="156.4" y="44" text-anchor="middle" font-size="10.5">1</text><line x1="178.79999999999998" y1="22" x2="178.79999999999998" y2="30" stroke="#1f2530" stroke-width="1"/><text x="178.79999999999998" y="44" text-anchor="middle" font-size="10.5">2</text><line x1="201.20000000000002" y1="22" x2="201.20000000000002" y2="30" stroke="#1f2530" stroke-width="1"/><text x="201.20000000000002" y="44" text-anchor="middle" font-size="10.5">3</text><line x1="223.6" y1="22" x2="223.6" y2="30" stroke="#1f2530" stroke-width="1"/><text x="223.6" y="44" text-anchor="middle" font-size="10.5">4</text><line x1="246" y1="22" x2="246" y2="30" stroke="#1f2530" stroke-width="1"/><text x="246" y="44" text-anchor="middle" font-size="10.5">5</text><line x1="66.80000000000001" y1="26" x2="201.20000000000002" y2="26" stroke="#2563eb" stroke-width="4" stroke-linecap="butt"/><circle cx="66.80000000000001" cy="26" r="4.6" fill="#fff" stroke="#2563eb" stroke-width="2"/><circle cx="201.20000000000002" cy="26" r="4.6" fill="#fff" stroke="#2563eb" stroke-width="2"/></svg></div><p class="svar"><b>Svar:</b> $-3 < x < 3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">34</span> $x^2 \geq 16$</p><p>Vi löser först gränsfallet, där vänsterledet är lika med högerledet:</p>$$x^2 = 16$$$$x = \pm\sqrt{16}$$$$x = \pm 4$$<p>$x = 0$ ger $0 \geq 16$, falskt, så mittdelen ingår inte. $x = 5$ ger $25 \geq 16$ och $x = -5$ ger $25 \geq 16$, sant på båda sidor. Gränserna ingår eftersom tecknet är $\geq$:</p><div class="fig"><svg viewBox="0 0 280 52" width="280" height="52" font-family="Poppins, sans-serif" font-size="12" fill="#1f2530"><line x1="8" y1="26" x2="254" y2="26" stroke="#1f2530" stroke-width="1.4"/><polygon points="253,21.5 262,26 253,30.5" fill="#1f2530"/><line x1="22" y1="22" x2="22" y2="30" stroke="#1f2530" stroke-width="1"/><text x="22" y="44" text-anchor="middle" font-size="10.5">−6</text><line x1="40.666666666666664" y1="22" x2="40.666666666666664" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="59.33333333333333" y1="22" x2="59.33333333333333" y2="30" stroke="#1f2530" stroke-width="1"/><text x="59.33333333333333" y="44" text-anchor="middle" font-size="10.5">−4</text><line x1="78" y1="22" x2="78" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="96.66666666666666" y1="22" x2="96.66666666666666" y2="30" stroke="#1f2530" stroke-width="1"/><text x="96.66666666666666" y="44" text-anchor="middle" font-size="10.5">−2</text><line x1="115.33333333333334" y1="22" x2="115.33333333333334" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="134" y1="22" x2="134" y2="30" stroke="#1f2530" stroke-width="1"/><text x="134" y="44" text-anchor="middle" font-size="10.5">0</text><line x1="152.66666666666669" y1="22" x2="152.66666666666669" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="171.33333333333331" y1="22" x2="171.33333333333331" y2="30" stroke="#1f2530" stroke-width="1"/><text x="171.33333333333331" y="44" text-anchor="middle" font-size="10.5">2</text><line x1="190" y1="22" x2="190" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="208.66666666666669" y1="22" x2="208.66666666666669" y2="30" stroke="#1f2530" stroke-width="1"/><text x="208.66666666666669" y="44" text-anchor="middle" font-size="10.5">4</text><line x1="227.33333333333331" y1="22" x2="227.33333333333331" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="246" y1="22" x2="246" y2="30" stroke="#1f2530" stroke-width="1"/><text x="246" y="44" text-anchor="middle" font-size="10.5">6</text><line x1="16" y1="26" x2="59.33333333333333" y2="26" stroke="#2563eb" stroke-width="4" stroke-linecap="butt"/><polygon points="25,20 15,26 25,32" fill="#2563eb"/><line x1="208.66666666666669" y1="26" x2="240" y2="26" stroke="#2563eb" stroke-width="4" stroke-linecap="butt"/><polygon points="231,20 241,26 231,32" fill="#2563eb"/><circle cx="59.33333333333333" cy="26" r="4.6" fill="#2563eb" stroke="#2563eb" stroke-width="2"/><circle cx="208.66666666666669" cy="26" r="4.6" fill="#2563eb" stroke="#2563eb" stroke-width="2"/></svg></div><p class="svar"><b>Svar:</b> $x \leq -4$ och $x \geq 4$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">35</span> $x^2 \leq 25$</p><p>Vi löser först gränsfallet, där vänsterledet är lika med högerledet:</p>$$x^2 = 25$$$$x = \pm\sqrt{25}$$$$x = \pm 5$$<p>$x = 0$ ger $0 \leq 25$, sant. Lösningen ligger mellan gränserna, och gränserna ingår:</p><div class="fig"><svg viewBox="0 0 280 52" width="280" height="52" font-family="Poppins, sans-serif" font-size="12" fill="#1f2530"><line x1="8" y1="26" x2="254" y2="26" stroke="#1f2530" stroke-width="1.4"/><polygon points="253,21.5 262,26 253,30.5" fill="#1f2530"/><line x1="22" y1="22" x2="22" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="40.666666666666664" y1="22" x2="40.666666666666664" y2="30" stroke="#1f2530" stroke-width="1"/><text x="40.666666666666664" y="44" text-anchor="middle" font-size="10.5">−5</text><line x1="59.33333333333333" y1="22" x2="59.33333333333333" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="78" y1="22" x2="78" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="96.66666666666666" y1="22" x2="96.66666666666666" y2="30" stroke="#1f2530" stroke-width="1"/><text x="96.66666666666666" y="44" text-anchor="middle" font-size="10.5">−2</text><line x1="115.33333333333334" y1="22" x2="115.33333333333334" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="134" y1="22" x2="134" y2="30" stroke="#1f2530" stroke-width="1"/><text x="134" y="44" text-anchor="middle" font-size="10.5">0</text><line x1="152.66666666666669" y1="22" x2="152.66666666666669" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="171.33333333333331" y1="22" x2="171.33333333333331" y2="30" stroke="#1f2530" stroke-width="1"/><text x="171.33333333333331" y="44" text-anchor="middle" font-size="10.5">2</text><line x1="190" y1="22" x2="190" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="208.66666666666669" y1="22" x2="208.66666666666669" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="227.33333333333331" y1="22" x2="227.33333333333331" y2="30" stroke="#1f2530" stroke-width="1"/><text x="227.33333333333331" y="44" text-anchor="middle" font-size="10.5">5</text><line x1="246" y1="22" x2="246" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="40.666666666666664" y1="26" x2="227.33333333333331" y2="26" stroke="#2563eb" stroke-width="4" stroke-linecap="butt"/><circle cx="40.666666666666664" cy="26" r="4.6" fill="#2563eb" stroke="#2563eb" stroke-width="2"/><circle cx="227.33333333333331" cy="26" r="4.6" fill="#2563eb" stroke="#2563eb" stroke-width="2"/></svg></div><p class="svar"><b>Svar:</b> $-5 \leq x \leq 5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">36</span> $2x^2 > 50$</p><p>Vi dividerar först med 2:</p>$$\frac{2x^2}{\boldsymbol{2}} > \frac{50}{\boldsymbol{2}}$$$$x^2 > 25$$<p>Vi löser först gränsfallet, där vänsterledet är lika med högerledet:</p>$$x^2 = 25$$$$x = \pm\sqrt{25}$$$$x = \pm 5$$<p>$x = 0$ ger $0 > 25$, falskt. Lösningen ligger utanför gränserna, och gränserna ingår inte:</p><div class="fig"><svg viewBox="0 0 280 52" width="280" height="52" font-family="Poppins, sans-serif" font-size="12" fill="#1f2530"><line x1="8" y1="26" x2="254" y2="26" stroke="#1f2530" stroke-width="1.4"/><polygon points="253,21.5 262,26 253,30.5" fill="#1f2530"/><line x1="22" y1="22" x2="22" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="38" y1="22" x2="38" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="54" y1="22" x2="54" y2="30" stroke="#1f2530" stroke-width="1"/><text x="54" y="44" text-anchor="middle" font-size="10.5">−5</text><line x1="70" y1="22" x2="70" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="86" y1="22" x2="86" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="102" y1="22" x2="102" y2="30" stroke="#1f2530" stroke-width="1"/><text x="102" y="44" text-anchor="middle" font-size="10.5">−2</text><line x1="118" y1="22" x2="118" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="134" y1="22" x2="134" y2="30" stroke="#1f2530" stroke-width="1"/><text x="134" y="44" text-anchor="middle" font-size="10.5">0</text><line x1="150" y1="22" x2="150" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="166" y1="22" x2="166" y2="30" stroke="#1f2530" stroke-width="1"/><text x="166" y="44" text-anchor="middle" font-size="10.5">2</text><line x1="182" y1="22" x2="182" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="198" y1="22" x2="198" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="214" y1="22" x2="214" y2="30" stroke="#1f2530" stroke-width="1"/><text x="214" y="44" text-anchor="middle" font-size="10.5">5</text><line x1="230" y1="22" x2="230" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="246" y1="22" x2="246" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="16" y1="26" x2="54" y2="26" stroke="#2563eb" stroke-width="4" stroke-linecap="butt"/><polygon points="25,20 15,26 25,32" fill="#2563eb"/><line x1="214" y1="26" x2="240" y2="26" stroke="#2563eb" stroke-width="4" stroke-linecap="butt"/><polygon points="231,20 241,26 231,32" fill="#2563eb"/><circle cx="54" cy="26" r="4.6" fill="#fff" stroke="#2563eb" stroke-width="2"/><circle cx="214" cy="26" r="4.6" fill="#fff" stroke="#2563eb" stroke-width="2"/></svg></div><p class="svar"><b>Svar:</b> $x < -5$ och $x > 5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">37</span></p><p>Låt $x$ vara antalet sms. Räkningen är $99 + 0{,}5x$ kr och får vara högst 150 kr, alltså mindre än eller lika med:</p>$$99 + 0{,}5x \leq 150$$$$99 + 0{,}5x \mathbin{\boldsymbol{-}} \boldsymbol{99} \leq 150 \mathbin{\boldsymbol{-}} \boldsymbol{99}$$$$0{,}5x \leq 51$$$$\frac{0{,}5x}{\boldsymbol{0{,}5}} \leq \frac{51}{\boldsymbol{0{,}5}}$$$$x \leq 102$$<p>Med 102 sms blir räkningen exakt 150 kr, med 103 sms 150,50 kr.</p><p class="svar"><b>Svar:</b> Högst 102 sms</p></div>
+      <div class="sol"><p class="solh"><span class="nr">38</span></p><p>Vi löser olikheterna var för sig:</p>$$2x - 3 > 1 \quad\text{ger}\quad 2x > 4 \quad\text{ger}\quad x > 2$$$$x + 4 \leq 9 \quad\text{ger}\quad x \leq 5$$<p>Båda ska gälla, så $2 < x \leq 5$. Talet 2 ingår inte, men 5 gör det:</p><div class="fig"><svg viewBox="0 0 280 52" width="280" height="52" font-family="Poppins, sans-serif" font-size="12" fill="#1f2530"><line x1="8" y1="26" x2="254" y2="26" stroke="#1f2530" stroke-width="1.4"/><polygon points="253,21.5 262,26 253,30.5" fill="#1f2530"/><line x1="22" y1="22" x2="22" y2="30" stroke="#1f2530" stroke-width="1"/><text x="22" y="44" text-anchor="middle" font-size="10.5">0</text><line x1="54" y1="22" x2="54" y2="30" stroke="#1f2530" stroke-width="1"/><text x="54" y="44" text-anchor="middle" font-size="10.5">1</text><line x1="86" y1="22" x2="86" y2="30" stroke="#1f2530" stroke-width="1"/><text x="86" y="44" text-anchor="middle" font-size="10.5">2</text><line x1="118" y1="22" x2="118" y2="30" stroke="#1f2530" stroke-width="1"/><text x="118" y="44" text-anchor="middle" font-size="10.5">3</text><line x1="150" y1="22" x2="150" y2="30" stroke="#1f2530" stroke-width="1"/><text x="150" y="44" text-anchor="middle" font-size="10.5">4</text><line x1="182" y1="22" x2="182" y2="30" stroke="#1f2530" stroke-width="1"/><text x="182" y="44" text-anchor="middle" font-size="10.5">5</text><line x1="214" y1="22" x2="214" y2="30" stroke="#1f2530" stroke-width="1"/><text x="214" y="44" text-anchor="middle" font-size="10.5">6</text><line x1="246" y1="22" x2="246" y2="30" stroke="#1f2530" stroke-width="1"/><text x="246" y="44" text-anchor="middle" font-size="10.5">7</text><line x1="86" y1="26" x2="182" y2="26" stroke="#2563eb" stroke-width="4" stroke-linecap="butt"/><circle cx="86" cy="26" r="4.6" fill="#fff" stroke="#2563eb" stroke-width="2"/><circle cx="182" cy="26" r="4.6" fill="#2563eb" stroke="#2563eb" stroke-width="2"/></svg></div><p class="svar"><b>Svar:</b> 3, 4 och 5</p></div>
+      <div class="sol"><p class="solh"><span class="nr">39</span></p><p>Sara har glömt att vända olikhetstecknet när hon dividerade med $-2$. Rätt lösning:</p>$$4 - 2x \mathbin{\boldsymbol{-}} \boldsymbol{4} < 10 \mathbin{\boldsymbol{-}} \boldsymbol{4}$$$$-2x < 6$$$$\frac{-2x}{\boldsymbol{-2}} > \frac{6}{\boldsymbol{-2}}$$<p class="obs">OBS! Vänd olikhetstecknet, eftersom vi dividerar med ett negativt tal.</p>$$x > -3$$<p class="kontroll"><i>Kontroll:</i> $x = 0$ ger $4 < 10$, sant. Talet 0 uppfyller alltså olikheten, men 0 är inte mindre än $-3$, så Saras svar kan inte stämma.</p><p class="svar"><b>Svar:</b> $x > -3$</p></div>
+    </div>
+    <h3 class="losniva">Avancerad</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">40</span> $\dfrac{3 - x}{4} - \dfrac{x + 1}{2} \geq 1$</p><p>Vi multiplicerar båda led med 4. Täljaren $x + 1$ får en parentes, eftersom hela täljaren dras bort:</p>$$\boldsymbol{4} \mathbin{\boldsymbol{\cdot}} \left(\frac{3 - x}{4} - \frac{x + 1}{2}\right) \geq \boldsymbol{4} \mathbin{\boldsymbol{\cdot}} 1$$$$(3 - x) - 2(x + 1) \geq 4$$$$3 - x - 2x - 2 \geq 4$$$$1 - 3x \geq 4$$$$1 - 3x \mathbin{\boldsymbol{-}} \boldsymbol{1} \geq 4 \mathbin{\boldsymbol{-}} \boldsymbol{1}$$$$-3x \geq 3$$$$\frac{-3x}{\boldsymbol{-3}} \leq \frac{3}{\boldsymbol{-3}}$$<p class="obs">OBS! Vänd olikhetstecknet, eftersom vi dividerar med ett negativt tal.</p>$$x \leq -1$$<p class="svar"><b>Svar:</b> $x \leq -1$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">41</span> $-3 < 2x + 1 \leq 7$</p><p>En dubbel olikhet löses genom att samma operation görs i alla tre leden:</p>$$-3 \mathbin{\boldsymbol{-}} \boldsymbol{1} < 2x + 1 \mathbin{\boldsymbol{-}} \boldsymbol{1} \leq 7 \mathbin{\boldsymbol{-}} \boldsymbol{1}$$$$-4 < 2x \leq 6$$$$\frac{-4}{\boldsymbol{2}} < \frac{2x}{\boldsymbol{2}} \leq \frac{6}{\boldsymbol{2}}$$$$-2 < x \leq 3$$<div class="fig"><svg viewBox="0 0 280 52" width="280" height="52" font-family="Poppins, sans-serif" font-size="12" fill="#1f2530"><line x1="8" y1="26" x2="254" y2="26" stroke="#1f2530" stroke-width="1.4"/><polygon points="253,21.5 262,26 253,30.5" fill="#1f2530"/><line x1="22" y1="22" x2="22" y2="30" stroke="#1f2530" stroke-width="1"/><text x="22" y="44" text-anchor="middle" font-size="10.5">−4</text><line x1="46.888888888888886" y1="22" x2="46.888888888888886" y2="30" stroke="#1f2530" stroke-width="1"/><text x="46.888888888888886" y="44" text-anchor="middle" font-size="10.5">−3</text><line x1="71.77777777777777" y1="22" x2="71.77777777777777" y2="30" stroke="#1f2530" stroke-width="1"/><text x="71.77777777777777" y="44" text-anchor="middle" font-size="10.5">−2</text><line x1="96.66666666666666" y1="22" x2="96.66666666666666" y2="30" stroke="#1f2530" stroke-width="1"/><text x="96.66666666666666" y="44" text-anchor="middle" font-size="10.5">−1</text><line x1="121.55555555555554" y1="22" x2="121.55555555555554" y2="30" stroke="#1f2530" stroke-width="1"/><text x="121.55555555555554" y="44" text-anchor="middle" font-size="10.5">0</text><line x1="146.44444444444446" y1="22" x2="146.44444444444446" y2="30" stroke="#1f2530" stroke-width="1"/><text x="146.44444444444446" y="44" text-anchor="middle" font-size="10.5">1</text><line x1="171.33333333333331" y1="22" x2="171.33333333333331" y2="30" stroke="#1f2530" stroke-width="1"/><text x="171.33333333333331" y="44" text-anchor="middle" font-size="10.5">2</text><line x1="196.22222222222223" y1="22" x2="196.22222222222223" y2="30" stroke="#1f2530" stroke-width="1"/><text x="196.22222222222223" y="44" text-anchor="middle" font-size="10.5">3</text><line x1="221.1111111111111" y1="22" x2="221.1111111111111" y2="30" stroke="#1f2530" stroke-width="1"/><text x="221.1111111111111" y="44" text-anchor="middle" font-size="10.5">4</text><line x1="246" y1="22" x2="246" y2="30" stroke="#1f2530" stroke-width="1"/><text x="246" y="44" text-anchor="middle" font-size="10.5">5</text><line x1="71.77777777777777" y1="26" x2="196.22222222222223" y2="26" stroke="#2563eb" stroke-width="4" stroke-linecap="butt"/><circle cx="71.77777777777777" cy="26" r="4.6" fill="#fff" stroke="#2563eb" stroke-width="2"/><circle cx="196.22222222222223" cy="26" r="4.6" fill="#2563eb" stroke="#2563eb" stroke-width="2"/></svg></div><p class="svar"><b>Svar:</b> $-2 < x \leq 3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">42</span> $x^2 - 7 > 2$</p>$$x^2 - 7 \mathbin{\boldsymbol{+}} \boldsymbol{7} > 2 \mathbin{\boldsymbol{+}} \boldsymbol{7}$$$$x^2 > 9$$<p>Vi löser först gränsfallet, där vänsterledet är lika med högerledet:</p>$$x^2 = 9$$$$x = \pm\sqrt{9}$$$$x = \pm 3$$<p>$x = 0$ ger $-7 > 2$, falskt. Lösningen ligger utanför gränserna:</p><div class="fig"><svg viewBox="0 0 280 52" width="280" height="52" font-family="Poppins, sans-serif" font-size="12" fill="#1f2530"><line x1="8" y1="26" x2="254" y2="26" stroke="#1f2530" stroke-width="1.4"/><polygon points="253,21.5 262,26 253,30.5" fill="#1f2530"/><line x1="22" y1="22" x2="22" y2="30" stroke="#1f2530" stroke-width="1"/><text x="22" y="44" text-anchor="middle" font-size="10.5">−5</text><line x1="44.400000000000006" y1="22" x2="44.400000000000006" y2="30" stroke="#1f2530" stroke-width="1"/><text x="44.400000000000006" y="44" text-anchor="middle" font-size="10.5">−4</text><line x1="66.80000000000001" y1="22" x2="66.80000000000001" y2="30" stroke="#1f2530" stroke-width="1"/><text x="66.80000000000001" y="44" text-anchor="middle" font-size="10.5">−3</text><line x1="89.2" y1="22" x2="89.2" y2="30" stroke="#1f2530" stroke-width="1"/><text x="89.2" y="44" text-anchor="middle" font-size="10.5">−2</text><line x1="111.60000000000001" y1="22" x2="111.60000000000001" y2="30" stroke="#1f2530" stroke-width="1"/><text x="111.60000000000001" y="44" text-anchor="middle" font-size="10.5">−1</text><line x1="134" y1="22" x2="134" y2="30" stroke="#1f2530" stroke-width="1"/><text x="134" y="44" text-anchor="middle" font-size="10.5">0</text><line x1="156.4" y1="22" x2="156.4" y2="30" stroke="#1f2530" stroke-width="1"/><text x="156.4" y="44" text-anchor="middle" font-size="10.5">1</text><line x1="178.79999999999998" y1="22" x2="178.79999999999998" y2="30" stroke="#1f2530" stroke-width="1"/><text x="178.79999999999998" y="44" text-anchor="middle" font-size="10.5">2</text><line x1="201.20000000000002" y1="22" x2="201.20000000000002" y2="30" stroke="#1f2530" stroke-width="1"/><text x="201.20000000000002" y="44" text-anchor="middle" font-size="10.5">3</text><line x1="223.6" y1="22" x2="223.6" y2="30" stroke="#1f2530" stroke-width="1"/><text x="223.6" y="44" text-anchor="middle" font-size="10.5">4</text><line x1="246" y1="22" x2="246" y2="30" stroke="#1f2530" stroke-width="1"/><text x="246" y="44" text-anchor="middle" font-size="10.5">5</text><line x1="16" y1="26" x2="66.80000000000001" y2="26" stroke="#2563eb" stroke-width="4" stroke-linecap="butt"/><polygon points="25,20 15,26 25,32" fill="#2563eb"/><line x1="201.20000000000002" y1="26" x2="240" y2="26" stroke="#2563eb" stroke-width="4" stroke-linecap="butt"/><polygon points="231,20 241,26 231,32" fill="#2563eb"/><circle cx="66.80000000000001" cy="26" r="4.6" fill="#fff" stroke="#2563eb" stroke-width="2"/><circle cx="201.20000000000002" cy="26" r="4.6" fill="#fff" stroke="#2563eb" stroke-width="2"/></svg></div><p class="svar"><b>Svar:</b> $x < -3$ och $x > 3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">43</span> $(x - 1)^2 < 16$</p><p>Vi löser först gränsfallet, där vänsterledet är lika med högerledet:</p>$$(x - 1)^2 = 16$$$$x - 1 = \pm\sqrt{16}$$$$x - 1 = \pm 4$$<p>Två fall: $x - 1 = 4$ ger $x = 5$, och $x - 1 = -4$ ger $x = -3$. Gränserna ligger alltså inte symmetriskt kring noll.</p><p>Vi prövar $x = 1$, mellan gränserna: $(1 - 1)^2 = 0 < 16$, sant. Vi prövar $x = 6$: $25 < 16$, falskt.</p><div class="fig"><svg viewBox="0 0 280 52" width="280" height="52" font-family="Poppins, sans-serif" font-size="12" fill="#1f2530"><line x1="8" y1="26" x2="254" y2="26" stroke="#1f2530" stroke-width="1.4"/><polygon points="253,21.5 262,26 253,30.5" fill="#1f2530"/><line x1="22" y1="22" x2="22" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="40.666666666666664" y1="22" x2="40.666666666666664" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="59.33333333333333" y1="22" x2="59.33333333333333" y2="30" stroke="#1f2530" stroke-width="1"/><text x="59.33333333333333" y="44" text-anchor="middle" font-size="10.5">−3</text><line x1="78" y1="22" x2="78" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="96.66666666666666" y1="22" x2="96.66666666666666" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="115.33333333333334" y1="22" x2="115.33333333333334" y2="30" stroke="#1f2530" stroke-width="1"/><text x="115.33333333333334" y="44" text-anchor="middle" font-size="10.5">0</text><line x1="134" y1="22" x2="134" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="152.66666666666669" y1="22" x2="152.66666666666669" y2="30" stroke="#1f2530" stroke-width="1"/><text x="152.66666666666669" y="44" text-anchor="middle" font-size="10.5">2</text><line x1="171.33333333333331" y1="22" x2="171.33333333333331" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="190" y1="22" x2="190" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="208.66666666666669" y1="22" x2="208.66666666666669" y2="30" stroke="#1f2530" stroke-width="1"/><text x="208.66666666666669" y="44" text-anchor="middle" font-size="10.5">5</text><line x1="227.33333333333331" y1="22" x2="227.33333333333331" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="246" y1="22" x2="246" y2="30" stroke="#1f2530" stroke-width="1"/><line x1="59.33333333333333" y1="26" x2="208.66666666666669" y2="26" stroke="#2563eb" stroke-width="4" stroke-linecap="butt"/><circle cx="59.33333333333333" cy="26" r="4.6" fill="#fff" stroke="#2563eb" stroke-width="2"/><circle cx="208.66666666666669" cy="26" r="4.6" fill="#fff" stroke="#2563eb" stroke-width="2"/></svg></div><p class="svar"><b>Svar:</b> $-3 < x < 5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">44</span> $3x^2 + 5 \leq 32$</p>$$3x^2 + 5 \mathbin{\boldsymbol{-}} \boldsymbol{5} \leq 32 \mathbin{\boldsymbol{-}} \boldsymbol{5}$$$$3x^2 \leq 27$$$$\frac{3x^2}{\boldsymbol{3}} \leq \frac{27}{\boldsymbol{3}}$$$$x^2 \leq 9$$<p>Vi löser först gränsfallet, där vänsterledet är lika med högerledet:</p>$$x^2 = 9$$$$x = \pm\sqrt{9}$$$$x = \pm 3$$<p>$x = 0$ ger $5 \leq 32$, sant. Lösningen ligger mellan gränserna, och gränserna ingår.</p><p class="svar"><b>Svar:</b> $-3 \leq x \leq 3$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">45</span> $-2x^2 + 8 < 0$</p>$$-2x^2 + 8 \mathbin{\boldsymbol{-}} \boldsymbol{8} < 0 \mathbin{\boldsymbol{-}} \boldsymbol{8}$$$$-2x^2 < -8$$$$\frac{-2x^2}{\boldsymbol{-2}} > \frac{-8}{\boldsymbol{-2}}$$<p class="obs">OBS! Vänd olikhetstecknet, eftersom vi dividerar med ett negativt tal.</p>$$x^2 > 4$$<p>Vi löser först gränsfallet, där vänsterledet är lika med högerledet:</p>$$x^2 = 4$$$$x = \pm\sqrt{4}$$$$x = \pm 2$$<p>$x = 0$ ger $8 < 0$ i den ursprungliga olikheten, falskt. Lösningen ligger utanför gränserna.</p><p class="svar"><b>Svar:</b> $x < -2$ och $x > 2$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">46</span></p><p>Låt $x$ vara antalet sålda skal. Intäkten är $99x$ kr och kostnaden $24\,000 + 35x$ kr. Vinst betyder att intäkten är större än kostnaden:</p>$$99x > 24\,000 + 35x$$$$99x \mathbin{\boldsymbol{-}} \boldsymbol{35x} > 24\,000 + 35x \mathbin{\boldsymbol{-}} \boldsymbol{35x}$$$$64x > 24\,000$$$$\frac{64x}{\boldsymbol{64}} > \frac{24\,000}{\boldsymbol{64}}$$$$x > 375$$<p>Vid exakt 375 skal går företaget jämnt upp, och det säljer bara hela skal. Det första heltalet som är större än 375 är 376.</p><p class="svar"><b>Svar:</b> Minst 376 skal</p></div>
+      <div class="sol"><p class="solh"><span class="nr">47</span></p><p>Vi löser ekvationen och låter $a$ stå kvar som ett tal:</p>$$2x + a \mathbin{\boldsymbol{-}} \boldsymbol{a} = 11 \mathbin{\boldsymbol{-}} \boldsymbol{a}$$$$2x = 11 - a$$$$\frac{2x}{\boldsymbol{2}} = \frac{11 - a}{\boldsymbol{2}}$$$$x = \frac{11 - a}{2}$$<p>Lösningen ska vara positiv:</p>$$\frac{11 - a}{2} > 0$$$$\boldsymbol{2} \mathbin{\boldsymbol{\cdot}} \frac{11 - a}{2} > \boldsymbol{2} \mathbin{\boldsymbol{\cdot}} 0$$$$11 - a > 0$$$$11 - a \mathbin{\boldsymbol{+}} \boldsymbol{a} > 0 \mathbin{\boldsymbol{+}} \boldsymbol{a}$$$$11 > a$$<p class="kontroll"><i>Kontroll:</i> $a = 5$ ger $2x + 5 = 11$ och $x = 3$, som är positivt.</p><p class="svar"><b>Svar:</b> $a < 11$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">48</span></p><p>Eftersom $x$ är positivt får vi dividera båda led med $x$ utan att vända tecknet:</p>$$\frac{x^2}{\boldsymbol{x}} < \frac{5x}{\boldsymbol{x}}$$$$x < 5$$<p>De positiva heltalen som är mindre än 5 är 1, 2, 3 och 4. Kontroll: $x = 4$ ger $16 < 20$, men $x = 5$ ger $25 < 25$, falskt.</p><p>Om $x$ vore negativt skulle divisionen med $x$ vända olikhetstecknet. Vet man inte tecknet på $x$ vet man alltså inte åt vilket håll tecknet ska stå, och då får man inte dividera.</p><p class="svar"><b>Svar:</b> 1, 2, 3 och 4</p></div>
+    </div>
+  </section>
+  <footer><span>Matematik nivå 1c · Olikheter</span><span>fysiklabbet.se</span></footer>
+</section>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

@@ -91,7 +91,7 @@ bort hela raden om även `ig:` redan är postad. Rör aldrig `ig:`-fältet.
 ## 3. Publicera
 
 1. Ladda Chrome-verktygen (ToolSearch `select:mcp__claude-in-chrome__...`:
-   tabs_context_mcp, navigate, computer, find, read_page, file_upload,
+   tabs_context_mcp, tabs_close_mcp, navigate, computer, find, read_page, file_upload,
    javascript_tool). Två webbläsare kan vara anslutna — välj i första
    hand den med deviceId `158b4037-ff82-4800-8498-0f69b8ba16df` med
    `select_browser` (identifiera på id, aldrig på namnet "Browser 1/2",
@@ -155,6 +155,26 @@ länkkommentaren är på plats (`länkkommentar: OK`) eller saknas
 (`länkkommentar: SAKNAS (<orsak>)`) — månadsrapporten läser det. Uppdatera `.claude/facebook/nyhetsbank.md` i samma
 veva — nya rader, `fb:`-status och borttagna/utgångna rader. Inte heller
 banken committas.
+
+## Stäng flikarna när jobbet är klart (alltid)
+
+Varje körning öppnar flikar i Chrome (första fliken, fräscha
+verifieringsflikar), och de blev liggande kvar och åt minne. Därför,
+som SISTA steg i varje körning, oavsett utfall (postat, inget att posta,
+AVBRYT, FEL):
+
+1. Ladda `mcp__claude-in-chrome__tabs_close_mcp` tillsammans med de
+   övriga Chrome-verktygen i samma ToolSearch-anrop.
+2. När loggen är uppdaterad: kör `tabs_context_mcp` och stäng med
+   `tabs_close_mcp` VARJE flik i körningens flikgrupp, också den sista
+   (gruppen försvinner då av sig själv).
+3. Stäng bara flikar i den egna gruppen. Användarens egna flikar
+   utanför gruppen rörs aldrig.
+4. Öppna inte fler flikar än nödvändigt: en "fräsch flik" för
+   verifiering stängs direkt efter att verifieringen är gjord.
+
+Stängningen får aldrig ersätta verifieringen: stäng först när inlägget
+är verifierat och loggen skriven.
 
 ## Säkerhetsregler (absoluta)
 

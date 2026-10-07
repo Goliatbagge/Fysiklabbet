@@ -93,6 +93,10 @@ fysiklabbet.se innan du fortsätter.
   schemaläggning) med värdena ifyllda i klartext.
 - Notera i `.claude/nyhetsbrev/logg.md` under brevets post att kampanjen är
   upplagd i EmailOctopus (datum + kampanjnamn).
+- **Stäng flikarna du öppnat** (`tabs_context_mcp` + `tabs_close_mcp`), utom
+  den enda flik som ska stå kvar åt användaren: förhandsvisningen med "Send as
+  test" (eller inloggningssidan om Chrome var utloggad). Flikar utanför
+  körningens egen flikgrupp rörs aldrig.
 
 ## Kända fällor
 

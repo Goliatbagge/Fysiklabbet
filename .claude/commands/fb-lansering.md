@@ -85,6 +85,26 @@ ett lanseringsinlägg: kolla om en passande bild redan finns i
 återanvändes så). Notera i loggen vilken bild du använt — nyhetsbrevs-
 agenten läser din logg åt andra hållet för att se vad som redan lyfts.
 
+## Stäng flikarna när jobbet är klart (alltid)
+
+Varje körning öppnar flikar i Chrome (första fliken, fräscha
+verifieringsflikar), och de blev liggande kvar och åt minne. Därför,
+som SISTA steg i varje körning, oavsett utfall (postat, inget att posta,
+AVBRYT, FEL):
+
+1. Ladda `mcp__claude-in-chrome__tabs_close_mcp` tillsammans med de
+   övriga Chrome-verktygen i samma ToolSearch-anrop.
+2. När loggen är uppdaterad: kör `tabs_context_mcp` och stäng med
+   `tabs_close_mcp` VARJE flik i körningens flikgrupp, också den sista
+   (gruppen försvinner då av sig själv).
+3. Stäng bara flikar i den egna gruppen. Användarens egna flikar
+   utanför gruppen rörs aldrig.
+4. Öppna inte fler flikar än nödvändigt: en "fräsch flik" för
+   verifiering stängs direkt efter att verifieringen är gjord.
+
+Stängningen får aldrig ersätta verifieringen: stäng först när inlägget
+är verifierat och loggen skriven.
+
 ## Säkerhetsregler (absoluta)
 
 - Publicera ENDAST inlägg på sidan Fysiklabbet. Gilla, dela eller följ

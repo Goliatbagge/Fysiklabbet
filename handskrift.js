@@ -20882,7 +20882,7 @@
     ]);
     tanke(bF1);
     /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
-    placeString('a) Fjäderns totala energi', padL, y, s * 0.62, F * 0.62, acts);
+    placeString('a) Svängningsenergin', padL, y, s * 0.62, F * 0.62, acts);
     pause(300);
     y += 2.0 * F;
     var xx = placeString('E_p=E=', padL, y, s, F, acts);

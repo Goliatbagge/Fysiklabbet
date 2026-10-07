@@ -5940,12 +5940,12 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vilken formel ger fjäderns totala mekaniska energi vid en svängning med amplituden *A*?',
+    question: 'Vilken formel ger svängningsenergin vid en svängning med amplituden *A*?',
     choices: ['$E = k \\cdot A$', '$E = \\dfrac{k \\cdot A^{2}}{2}$', '$E = \\dfrac{k \\cdot A}{2}$', '$E = 2 \\cdot k \\cdot A^{2}$'],
     correct: 1,
     why: [
       'Amplituden ska vara kvadrerad i formeln, och resultatet ska halveras — annars stämmer inte enheten joule.',
-      'Fjäderns totala energi ges av $E = \\dfrac{k \\cdot A^{2}}{2}$ — samma form som ytan av triangeln i ett *F*-Δ*l*-diagram.',
+      'Svängningsenergin ges av $E = \\dfrac{k \\cdot A^{2}}{2}$ — samma form som ytan av triangeln i ett *F*-Δ*l*-diagram.',
       'Amplituden *A* ska vara kvadrerad ($A^2$), inte i första potens — annars stämmer inte uträkningen med areametoden i härledningen.',
       'Här är faktorn 2 placerad fel — den ska stå i nämnaren (division med 2), inte som en multiplikation.',
     ],
@@ -5967,7 +5967,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En fjäder med fjäderkonstanten 10 N/m dras ut 0,20 m. Hur stor är fjäderns totala energi i detta vändläge?',
+    question: 'En fjäder med fjäderkonstanten 10 N/m dras ut 0,20 m. Hur stor är svängningsenergin i detta vändläge?',
     choices: ['1,0 J', '2,0 J', '0,020 J', '0,20 J'],
     correct: 3,
     why: [

@@ -10394,11 +10394,19 @@
       [['löser ut den ur formeln för']],
       [['andelen.']]
     ], 0);
-    y = 108;
-    T.str('Delen', padL, y - 1.6 * F, null, 0.62);
+    /* Formeln för andelen skrivs först, och delen löses ut med ⟺ i
+     * fortsättning på samma rad, så att eleven ser varifrån sambandet
+     * delen = andel · hela kommer (användarkrav 2026-10-07). Raden ligger
+     * under y = 150 eftersom den når in under inställningsrutan. */
+    y = 182;
+    T.str('Formeln för andelen', padL, y - 2.0 * F, null, 0.62);
     var yF = y;
-    var xf0 = padL;
-    var xf1 = T.str('delen=andel·hela', padL, y);
+    xx = T.str('andel=', padL, y);
+    xx = T.fracH('delen', 'hela', xx, y);
+    T.stepEnd();
+
+    var xf0 = T.str(' ⟺ ', xx, y);
+    var xf1 = T.str('delen=andel·hela', xf0, y);
     T.stepEnd();
 
     tanke(y, [
@@ -10406,7 +10414,7 @@
       [['decimalform. Promille är']],
       [['tusendelar, så 3,5 ‰ är 3,5']],
       [['tusendelar.']]
-    ]);
+    ], 1.05);
     y += 3.3 * F;
     xx = T.str('andel=3,5 ‰=', padL, y);
     xx = T.fracH('3,5', '1 000', xx, y);

@@ -27,7 +27,7 @@ $$
 \text{andel} = \frac{\text{delen}}{\text{hela}}
 $$
 
-**OBS!** Andelen anges i bråkform eller decimalform.
+**OBS!** Andelen fås i bråkform eller decimalform.
 :::
 
 För att bestämma delen eller det hela, så löser vi ut det från formeln

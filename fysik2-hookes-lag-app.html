@@ -366,6 +366,7 @@
             const [k, setK] = useState(25);          // fjäderkonstant (N/m)
             const [damped, setDamped] = useState(false);
             const [running, setRunning] = useState(true);
+            const [slow, setSlow] = useState(false);     // ultrarapid: tiden går 5 gånger långsammare
             const [show, setShow] = useState({
                 fjader: true, tyngd: true, res: false, vel: false, acc: false,
                 eq: true, dl: true,
@@ -398,16 +399,16 @@
                 vRef.current = 0;
             }
 
-            pRef.current = { F, k, m, om, damped, running, eqHook, aMax };
+            pRef.current = { F, k, m, om, damped, running, slow, eqHook, aMax };
 
             // ── Fysikloop (rAF) ──
             useEffect(() => {
                 let raf, last = performance.now();
                 const loop = (now) => {
                     raf = requestAnimationFrame(loop);
-                    const dt = Math.min((now - last) / 1000, 0.05);
-                    last = now;
                     const p = pRef.current;
+                    const dt = Math.min((now - last) / 1000, 0.05) * (p.slow ? 0.2 : 1);
+                    last = now;
                     if (p.running && !dragRef.current.on) {
                         const b = p.damped ? 2 * ZETA * Math.sqrt(p.k * p.m) : 0;
                         const steps = Math.min(60, Math.max(1, Math.ceil(p.om * dt / 0.04)));
@@ -555,6 +556,9 @@
                         <span>Odämpad (harmonisk)</span></label>
                     <label><input type="radio" name="damp" checked={damped} onChange={() => setDamped(true)} />
                         <span>Dämpad</span></label>
+                    <div className="st-title mt">Tempo</div>
+                    <label><input type="checkbox" checked={slow} onChange={() => setSlow(s => !s)} />
+                        <span>Ultrarapid (5 gånger långsammare)</span></label>
                     {/* Styrknappar visas här BARA i fullskärm — i normalläget finns
                         de i sidopanelen (aldrig dubblerade). */}
                     {isFullscreen && (

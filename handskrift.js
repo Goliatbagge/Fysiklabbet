@@ -10458,11 +10458,17 @@
       [['behövs. Då hamnar andelen']],
       [['i nämnaren.']]
     ], 0);
-    y = 116;
-    T.str('Det hela', padL, y - 2.0 * F, null, 0.62);
+    /* Som i layoutAndeldelen: formeln för andelen först, och det hela
+     * löses ut med ⟺ på samma rad (användarkrav 2026-10-07). */
+    y = 192;
+    T.str('Formeln för andelen', padL, y - 2.0 * F, null, 0.62);
     var yF = y;
-    var xf0 = padL;
-    var xf1 = T.str('hela=', padL, y);
+    xx = T.str('andel=', padL, y);
+    xx = T.fracH('delen', 'hela', xx, y);
+    T.stepEnd();
+
+    var xf0 = T.str(' ⟺ ', xx, y);
+    var xf1 = T.str('hela=', xf0, y);
     xf1 = T.fracH('delen', 'andelen', xf1, y);
     T.stepEnd();
 

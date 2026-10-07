@@ -69,6 +69,11 @@ figur-preview.html
 # Käll-PDF:er för nationella prov — endast lokala
 /NP/
 
+# Diagnoser och prov med facit och bedömningsanvisningar (byggs av
+# .claude/bygg-diagnos*.js). Får aldrig hamna på sajten, där elever
+# skulle kunna läsa facit före provet.
+/diagnoser/
+
 # Skarmbilder inklistrade fran HP_KONTOR via snabbtangent - alltid lokala
 /skarmbilder/
 

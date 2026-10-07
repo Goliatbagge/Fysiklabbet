@@ -86,7 +86,7 @@ $$
 
 ::: sampunkt "Total förändringsfaktor"
 - Vid flera förändringar efter varandra **multipliceras** faktorerna.
-- $\text{total} = f_1 \cdot f_2 \cdot \ldots$
+- $\text{total} = \mathit{ff}_1 \cdot \mathit{ff}_2 \cdot \ldots$
 - Procenttalen får **aldrig** adderas.
 :::
 
@@ -98,9 +98,9 @@ $$
 :::
 
 ::: sampunkt "Samma förändring flera gånger"
-- Upprepas samma faktor $n$ gånger blir totalen $f^{n}$.
+- Upprepas samma faktor $n$ gånger blir totalen $\mathit{ff}^{\,n}$.
 - $\text{nya värdet}
-  = \text{gamla värdet} \cdot f^{n}$.
+  = \text{gamla värdet} \cdot \mathit{ff}^{\,n}$.
 - $80\,000$ kr med 2,5 % ränta i 18 år blir
   $80\,000 \cdot 1{,}025^{18}$.
 :::

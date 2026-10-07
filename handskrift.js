@@ -10726,7 +10726,7 @@
     ], 0);
     y = 100;
     T.str('Förändringsfaktorer', padL, y - 1.6 * F, null, 0.62);
-    T.str('f_1=1+0,15=1,15', padL, y);
+    T.str('ff_1=1+0,15=1,15', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -10734,7 +10734,7 @@
       [['stället bort 0,15.']]
     ]);
     y += 2.6 * F;
-    T.str('f_2=1-0,15=0,85', padL, y);
+    T.str('ff_2=1-0,15=0,85', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -10744,7 +10744,7 @@
     ]);
     y += 3.6 * F;
     T.str('Total förändringsfaktor', padL, y - 1.6 * F, null, 0.62);
-    xx = T.str('f_t_o_t=1,15·0,85', padL, y);
+    xx = T.str('ff_t_o_t=1,15·0,85', padL, y);
     T.stepEnd();
 
     T.str('=0,9775', xx, y);
@@ -10790,7 +10790,7 @@
     ], 0);
     y = 100;
     T.str('Förändringsfaktor', padL, y - 1.6 * F, null, 0.62);
-    T.str('f=1+0,025=1,025', padL, y);
+    T.str('ff=1+0,025=1,025', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -10845,7 +10845,7 @@
     ], 0);
     y = 124;
     T.str('a) Förändringsfaktor', padL, y - 1.6 * F, null, 0.62);
-    T.str('f=1+0,035=1,035', padL, y);
+    T.str('ff=1+0,035=1,035', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -11448,9 +11448,9 @@
       [['mellan två års KPI ger']],
       [['faktorn mellan just de åren.']]
     ], 0);
-    y = 122;
+    y = 165;
     T.str('Förändringsfaktor 2010 → 2023', padL, y - 2.1 * F, null, 0.62);
-    xx = T.str('f=', padL, y);
+    xx = T.str('ff=', padL, y);
     xx = T.fracH('391,3', '303,5', xx, y);
     T.stepEnd();
 
@@ -11571,7 +11571,7 @@
     ]);
     y += 4.0 * F;
     T.str('b) Verklig höjning', padL, y - 2.1 * F, null, 0.62);
-    xx = T.str('f=', padL, y);
+    xx = T.str('ff=', padL, y);
     xx = T.fracH('10 400', '9 600', xx, y);
     T.stepEnd();
 
@@ -13107,7 +13107,7 @@
     ], 0);
     y = 116;
     T.str('Förändringsfaktor', padL, y - 1.6 * F, null, 0.62);
-    T.str('f=1+0,02=1,02', padL, y);
+    T.str('ff=1+0,02=1,02', padL, y);
     T.stepEnd();
 
     tanke(y, [

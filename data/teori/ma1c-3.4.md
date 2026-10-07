@@ -126,7 +126,7 @@ Vi tar tag i fyllnadshandtaget och drar ner till och med insättning 10:
 
 ::: sampunkt "Ett insatt belopp som växer"
 - Använd förändringsfaktorn upphöjd till antalet år:
-  $\text{behållning} = K \cdot f^{n}$.
+  $\text{behållning} = K \cdot \mathit{ff}^{\,n}$.
 - $30\,000$ kr med 3,5 % ränta i 8 år blir
   $30\,000 \cdot 1{,}035^{8}$.
 :::

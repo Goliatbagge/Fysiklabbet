@@ -15,9 +15,13 @@ vid procentuella förändringar.
 
 ::: formel "Förändringsfaktor och nya värdet"
 $$
+\begin{gathered}
 \text{förändringsfaktor} = \frac{\text{nya värdet}}{\text{gamla värdet}}
-\quad\Longleftrightarrow\quad
+\\[0.7em]
+\Longleftrightarrow
+\\[0.7em]
 \text{nya värdet} = \text{förändringsfaktor} \cdot \text{gamla värdet}
+\end{gathered}
 $$
 :::
 
@@ -25,7 +29,7 @@ Vi kan alltså få det nya värdet med en enda enkel uträkning om vi vet
 förändringsfaktorn.
 
 ::: formel "Bestämma förändringsfaktorn"
-Vi får förändringsfaktorn genom att lägga till ändringen i procentform
+Förändringsfaktorn fås genom att lägga till ändringen i procentform
 till 100 % (100 % står för det vi har från början) och sedan göra om till
 decimalform.
 :::
@@ -49,7 +53,7 @@ Vid jämförelser motsvarar det vi JÄMFÖR MED det gamla värdet.
 
 ::: exempel "Exempel 1 — Prissänkning"
 **En begagnad bil kostar 72 000 kr för sedan sänkas i pris med 8 %.
-Vilket blir det nya priset?**
+Vilket blir det nya priset? Lös med förändringsfaktor.**
 
 ::: handskrift
 typ: prissankning

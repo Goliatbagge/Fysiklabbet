@@ -10532,21 +10532,19 @@
       [['är 100 %. En sänkning med']],
       [['8 % drar bort 8 % från dem.']]
     ], 0);
-    y = 108;
+    /* Raden ligger under y=150 så att '=0,92' kan stå kvar på samma rad
+     * utan att nå in i inställningsrutans hörn på mobil. */
+    y = 180;
     T.str('Förändringsfaktor', padL, y - 1.6 * F, null, 0.62);
     xx = T.str('100 %-8 %=92 %', padL, y);
     T.stepEnd();
 
-    /* ⚠️ '=0,92' läggs på EGEN rad, inte i fortsättning på raden ovan:
-     * den raden ligger y<150 och skulle då sträcka sig in i arkets övre
-     * högra hörn, där inställningsrutan täcker den på mobil. */
     tanke(y, [
       [['Faktorn ska användas i en']],
       [['multiplikation, så den']],
       [['skrivs i decimalform.']]
-    ]);
-    y += 2.6 * F;
-    T.str('=0,92', padL + 30, y);
+    ], 1.05);
+    T.str('=0,92', xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -10586,9 +10584,11 @@
       [['175 är det gamla värdet och']],
       [['231 det nya.']]
     ], 0);
-    y = 116;
+    y = 185;
     T.str('Förändringsfaktor', padL, y - 2.0 * F, null, 0.62);
-    xx = T.str('f=', padL, y);
+    xx = T.str('ff=', padL, y);
+    xx = T.fracH('nya', 'gamla', xx, y);
+    xx = T.str('=', xx, y);
     xx = T.fracH('231', '175', xx, y);
     T.stepEnd();
 
@@ -10634,9 +10634,16 @@
       [['värdet och B:s 22 kr det']],
       [['nya.']]
     ], 0);
-    y = 124;
+    /* Formeln i förkortad form på egen rad, värdena på nästa: hela kedjan
+     * ff = nya/gamla = 22/18 = 1,222... ≈ 1,22 = 122 % ryms inte på en rad. */
+    y = 185;
     T.str('a) Jämför med butik A', padL, y - 2.0 * F, null, 0.62);
-    xx = T.str('f=', padL, y);
+    xx = T.str('ff=', padL, y);
+    T.fracH('nya', 'gamla', xx, y);
+    T.stepEnd();
+
+    y += 3.6 * F;
+    xx = T.str('ff=', padL, y);
     xx = T.fracH('22', '18', xx, y);
     T.stepEnd();
 
@@ -10646,13 +10653,10 @@
       [['oavrundade värdet först och']],
       [['avrundar sedan.']]
     ], 1.05);
-    T.str('=1,222...', xx, y);
+    xx = T.str('=1,222...', xx, y);
     T.stepEnd();
 
-    /* ⚠️ avrundningen på EGEN rad: a-raden ligger y<150 och skulle annars
-     * sträcka sig in i inställningsrutans hörn på mobil. */
-    y += 3.4 * F;
-    T.str('≈1,22=122 %', padL + 30, y);
+    T.str('≈1,22=122 %', xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -10672,7 +10676,12 @@
     ], 0.5);
     y += 4.5 * F;
     T.str('b) Jämför med butik B', padL, y - 2.0 * F, null, 0.62);
-    xx = T.str('f=', padL, y);
+    xx = T.str('ff=', padL, y);
+    T.fracH('nya', 'gamla', xx, y);
+    T.stepEnd();
+
+    y += 3.6 * F;
+    xx = T.str('ff=', padL, y);
     xx = T.fracH('18', '22', xx, y);
     T.stepEnd();
 

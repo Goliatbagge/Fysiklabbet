@@ -30772,9 +30772,11 @@
       [['trissorna och vikterna som']],
       [['hänger i snöret.']]
     ], 356));
-    T.line([xL - 30, bordY], [xR + 30, bordY]);
-    T.line([xL - 10, bordY], [xL - 10, bordY + 110]);
-    T.line([xR + 10, bordY], [xR + 10, bordY + 110]);
+    /* Bordsskivan slutar vid trissorna och benen står en bit in under
+       bordet, så att snörena och de hängande vikterna går fritt utanför. */
+    T.line([xL, bordY], [xR, bordY]);
+    T.line([xL + 30, bordY], [xL + 30, bordY + 110]);
+    T.line([xR - 30, bordY], [xR - 30, bordY + 110]);
     T.pause(150);
     T.circle(xL, bordY - 14, 14);
     T.circle(xR, bordY - 14, 14);
@@ -30791,7 +30793,7 @@
       [['Den tyngre vikten drar systemet']],
       [['åt sitt håll.']]
     ], 356));
-    T.lbl('m_1=1,0 kg', xL - 134, bordY + 122, BLUE);
+    T.lbl('m_1=1,0 kg', xL - 100, bordY + 122, BLUE);
     T.pause(150);
     T.lbl('m_3=3,0 kg', xR + 46, bordY + 122, BLUE);
     T.pause(150);

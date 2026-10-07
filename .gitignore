@@ -73,6 +73,9 @@ figur-preview.html
 # .claude/bygg-diagnos*.js). Får aldrig hamna på sajten, där elever
 # skulle kunna läsa facit före provet.
 /diagnoser/
+# Byggskripten innehåller själva uppgifterna och facit i klartext, och allt
+# i repot serveras på fysiklabbet.se (.nojekyll gör att även .claude/ syns).
+/.claude/bygg-diagnos*.js
 
 # Skarmbilder inklistrade fran HP_KONTOR via snabbtangent - alltid lokala
 /skarmbilder/

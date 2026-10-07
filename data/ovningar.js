@@ -1165,7 +1165,7 @@ function makeHangingRopes(opts) {
     const boxW = 50, boxH = 32, hang = 24;
     const boxTop = Ky + hang, boxBot = boxTop + boxH;
     if (opts.posts) {
-        const groundY = boxBot + (opts.spanLabel ? 26 : 22);
+        const groundY = boxBot + (opts.spanLabel ? 42 : 22);
         for (const x of [Ax, Bx]) {
             body += `<rect x="${f(x - 4)}" y="${f(topY)}" width="8" height="${f(groundY - topY)}" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/>`;
         }
@@ -1265,12 +1265,14 @@ function makePulley(opts) {
     let body = '';
 
     if (opts.kind === 'atwood') {
-        const W = 260, cx = 130, cy = 70, r = 22;
+        const W = 260, cx = 130, cy = 76, r = 36;
         const ceilY = 22;
         body += `<line x1="40" y1="${ceilY}" x2="220" y2="${ceilY}" stroke="${ink}" stroke-width="1.6"/>`;
         for (let xs = 44; xs < 220; xs += 12) body += `<line x1="${xs}" y1="${ceilY}" x2="${xs + 7}" y2="${ceilY - 8}" stroke="${ink}" stroke-width="1"/>`;
         body += `<line x1="${cx}" y1="${ceilY}" x2="${cx}" y2="${cy}" stroke="#8a8579" stroke-width="3"/>`;
-        const bw = 50, bh = 36;
+        // Trissans diameter (72) är tydligt större än lådans bredd (46), så
+        // lådorna kan passera varandra utan att slå i.
+        const bw = 46, bh = 36;
         const topL = cy + 110, topR = cy + 70;
         body += pulley(cx, cy, r);
         body += `<path d="M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}" fill="none" stroke="${ink}" stroke-width="1.8"/>`;
@@ -14999,7 +15001,7 @@ ${(() => {
     return svg;
 })()}`,
             answer: { value: 0.0980, unit: 'J' },
-            solution: `Skillnaden i fjäderns totala energi mellan vändlägena motsvarar den energi som omvandlats till värme.
+            solution: `Skillnaden i svängningsenergi mellan vändlägena motsvarar den energi som omvandlats till värme.
 
 $$ E_\\text{värme} = E_1 - E_3 = \\frac{k \\cdot A_1^2}{2} - \\frac{k \\cdot A_3^2}{2} = \\frac{k}{2}(A_1^2 - A_3^2) $$
 

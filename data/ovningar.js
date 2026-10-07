@@ -1128,6 +1128,181 @@ function makeInclinePlane(opts) {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W.toFixed(1)} ${H.toFixed(1)}" style="max-width:${Math.round(W)}px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">${body}</svg>`;
 }
 
+// ── Föremål som hänger i två sneda rep (makeHangingRopes) ────────────
+//
+// Ritar ett föremål som hänger i en knut, som i sin tur hålls av två
+// rep. Repen fästs i ett tak (standard) eller i toppen av två stolpar
+// (posts: true, till exempel en tvättlina). Vinklarna mäts mot det
+// vågräta och ritas som bågar vid knuten.
+//
+//   opts = {
+//     angL, angR,          // repens vinkel mot det vågräta (grader)
+//     mass,                // text i föremålet, till exempel '2,0 kg'
+//     showAngles,          // default true, rita vinkelbågar med gradtal
+//     ropeLabels,          // [vänster, höger], till exempel ['rep 1', 'rep 2']
+//     posts,               // true → stolpar och mark i stället för tak
+//     half,                // största halva spännvidd i px (default 170)
+//     spanLabel,           // måttlinje mellan fästpunkterna (posts-läget)
+//     sagLabel,            // lodrätt mått från fästlinjen ned till knuten
+//   }
+function makeHangingRopes(opts) {
+    const rad = Math.PI / 180;
+    const aL = opts.angL * rad, aR = opts.angR * rad;
+    const half = opts.half || 170;
+    const h = Math.min(120, half * Math.tan(Math.min(aL, aR)));
+    const dxL = h / Math.tan(aL), dxR = h / Math.tan(aR);
+    const padX = 64;
+    const topY = opts.posts ? 30 : 34;
+    const Ax = padX, Kx = padX + dxL, Bx = Kx + dxR;
+    const Ky = topY + h;
+    const W = Bx + padX;
+    const ink = SCENE_INK, muted = SCENE_MUTED;
+    const f = n => (+n).toFixed(1);
+    let body = '';
+
+    // Upphängning
+    let bottom;
+    const boxW = 50, boxH = 32, hang = 24;
+    const boxTop = Ky + hang, boxBot = boxTop + boxH;
+    if (opts.posts) {
+        const groundY = boxBot + (opts.spanLabel ? 26 : 22);
+        for (const x of [Ax, Bx]) {
+            body += `<rect x="${f(x - 4)}" y="${f(topY)}" width="8" height="${f(groundY - topY)}" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/>`;
+        }
+        body += sceneGround(Ax - 40, Bx + 40, groundY);
+        bottom = groundY + 10;
+        if (opts.spanLabel) {
+            const dy = groundY - 10;
+            body += `<line x1="${f(Ax + 4)}" y1="${f(dy)}" x2="${f(Bx - 4)}" y2="${f(dy)}" stroke="${muted}" stroke-width="1.3"/>`;
+            body += `<polygon points="${f(Ax + 4)},${f(dy)} ${f(Ax + 11)},${f(dy - 3.5)} ${f(Ax + 11)},${f(dy + 3.5)}" fill="${muted}"/>`;
+            body += `<polygon points="${f(Bx - 4)},${f(dy)} ${f(Bx - 11)},${f(dy - 3.5)} ${f(Bx - 11)},${f(dy + 3.5)}" fill="${muted}"/>`;
+            body += `<text x="${f((Ax + Bx) / 2)}" y="${f(dy - 6)}" font-size="13" fill="${muted}" text-anchor="middle">${opts.spanLabel}</text>`;
+        }
+    } else {
+        const x0 = Ax - 34, x1 = Bx + 34;
+        body += `<line x1="${f(x0)}" y1="${f(topY)}" x2="${f(x1)}" y2="${f(topY)}" stroke="${ink}" stroke-width="1.6"/>`;
+        for (let xs = x0 + 4; xs < x1; xs += 12) {
+            body += `<line x1="${f(xs)}" y1="${f(topY)}" x2="${f(xs + 7)}" y2="${f(topY - 8)}" stroke="${ink}" stroke-width="1"/>`;
+        }
+        bottom = boxBot + 14;
+    }
+
+    // Rep och knut
+    body += `<line x1="${f(Ax)}" y1="${f(topY)}" x2="${f(Kx)}" y2="${f(Ky)}" stroke="${ink}" stroke-width="1.8"/>`;
+    body += `<line x1="${f(Bx)}" y1="${f(topY)}" x2="${f(Kx)}" y2="${f(Ky)}" stroke="${ink}" stroke-width="1.8"/>`;
+    body += `<line x1="${f(Kx)}" y1="${f(Ky)}" x2="${f(Kx)}" y2="${f(boxTop)}" stroke="${ink}" stroke-width="1.8"/>`;
+    body += `<circle cx="${f(Kx)}" cy="${f(Ky)}" r="2.6" fill="${ink}"/>`;
+    body += `<rect x="${f(Kx - boxW / 2)}" y="${f(boxTop)}" width="${boxW}" height="${boxH}" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/>`;
+    if (opts.mass) body += `<text x="${f(Kx)}" y="${f(boxTop + boxH / 2 + 4.5)}" font-size="13" fill="${ink}" text-anchor="middle">${opts.mass}</text>`;
+    if (opts.posts) {
+        for (const x of [Ax, Bx]) body += `<circle cx="${f(x)}" cy="${f(topY)}" r="2.6" fill="${ink}"/>`;
+    }
+
+    // Repens namn utanför fästpunkterna
+    if (opts.ropeLabels) {
+        body += `<text x="${f(Ax - 8)}" y="${f(topY + 18)}" font-size="13" fill="${ink}" text-anchor="end">${opts.ropeLabels[0]}</text>`;
+        body += `<text x="${f(Bx + 8)}" y="${f(topY + 18)}" font-size="13" fill="${ink}" text-anchor="start">${opts.ropeLabels[1]}</text>`;
+    }
+
+    // Vinkelbågar vid knuten, mot en streckad vågrät linje
+    if (opts.showAngles !== false) {
+        const small = Math.min(opts.angL, opts.angR) < 20;
+        const r = small ? 62 : 34;
+        body += `<line x1="${f(Kx - r - 18)}" y1="${f(Ky)}" x2="${f(Kx + r + 18)}" y2="${f(Ky)}" stroke="${muted}" stroke-width="1.2" stroke-dasharray="5 4"/>`;
+        const arc = (a0, a1) => {
+            const x0 = Kx + r * Math.cos(a0), y0 = Ky + r * Math.sin(a0);
+            const x1 = Kx + r * Math.cos(a1), y1 = Ky + r * Math.sin(a1);
+            return `<path d="M ${f(x0)} ${f(y0)} A ${r} ${r} 0 0 1 ${f(x1)} ${f(y1)}" stroke="${muted}" stroke-width="1.4" fill="none"/>`;
+        };
+        body += arc(-Math.PI, -Math.PI + aL);
+        body += arc(-aR, 0);
+        const lbl = (a, deg, side) => {
+            if (small) {
+                const x = side < 0 ? Kx - r - 4 : Kx + r + 4;
+                return `<text x="${f(x)}" y="${f(Ky + 15)}" font-size="13" fill="${muted}" text-anchor="${side < 0 ? 'end' : 'start'}">${deg}°</text>`;
+            }
+            const lr = r + 15;
+            return `<text x="${f(Kx + lr * Math.cos(a))}" y="${f(Ky + lr * Math.sin(a) + 4.5)}" font-size="13" fill="${muted}" text-anchor="middle">${deg}°</text>`;
+        };
+        body += lbl(-Math.PI + aL / 2, opts.angL, -1);
+        body += lbl(-aR / 2, opts.angR, 1);
+    }
+
+    // Nedhängning: streckad fästlinje + lodrätt mått ned till knuten
+    if (opts.sagLabel) {
+        body += `<line x1="${f(Ax)}" y1="${f(topY)}" x2="${f(Bx)}" y2="${f(topY)}" stroke="${muted}" stroke-width="1.2" stroke-dasharray="5 4"/>`;
+        const x = Kx;
+        body += `<line x1="${f(x)}" y1="${f(topY + 1)}" x2="${f(x)}" y2="${f(Ky - 4)}" stroke="${muted}" stroke-width="1.3"/>`;
+        body += `<polygon points="${f(x)},${f(topY + 1)} ${f(x - 3.5)},${f(topY + 8)} ${f(x + 3.5)},${f(topY + 8)}" fill="${muted}"/>`;
+        body += `<polygon points="${f(x)},${f(Ky - 4)} ${f(x - 3.5)},${f(Ky - 11)} ${f(x + 3.5)},${f(Ky - 11)}" fill="${muted}"/>`;
+        body += `<text x="${f(x - 8)}" y="${f((topY + Ky) / 2 + 4.5)}" font-size="13" fill="${muted}" text-anchor="end">${opts.sagLabel}</text>`;
+    }
+
+    return sceneWrap(W, bottom, body);
+}
+
+// ── Trissor (makePulley) ─────────────────────────────────────────────
+//
+// Två uppställningar med friktionsfri trissa och ett snöre som löper
+// över den. Snöret slutar exakt i lådornas överkant/sida (kontakt).
+//
+//   opts = {
+//     kind: 'atwood',      // en trissa i taket, en låda på varje sida
+//       left, right,       // texter i lådorna, till exempel '2,0 kg'
+//     kind: 'bord',        // låda på ett bord, snöre över en trissa vid
+//       table, hanging,    //   bordskanten till en hängande vikt
+//   }
+function makePulley(opts) {
+    const ink = SCENE_INK;
+    const f = n => (+n).toFixed(1);
+    const boxFill = '#d3e4f5', boxStroke = '#4f7197';
+    const box = (x, y, w, h, label) =>
+        `<rect x="${f(x)}" y="${f(y)}" width="${w}" height="${h}" rx="2" fill="${boxFill}" stroke="${boxStroke}" stroke-width="1.4"/>` +
+        (label ? `<text x="${f(x + w / 2)}" y="${f(y + h / 2 + 4.5)}" font-size="13" fill="${ink}" text-anchor="middle">${label}</text>` : '');
+    const pulley = (cx, cy, r) =>
+        `<circle cx="${f(cx)}" cy="${f(cy)}" r="${r}" fill="#eaf2fb" stroke="#4f7197" stroke-width="1.6"/>` +
+        `<circle cx="${f(cx)}" cy="${f(cy)}" r="3" fill="#9aa3ad"/>`;
+    let body = '';
+
+    if (opts.kind === 'atwood') {
+        const W = 260, cx = 130, cy = 70, r = 22;
+        const ceilY = 22;
+        body += `<line x1="40" y1="${ceilY}" x2="220" y2="${ceilY}" stroke="${ink}" stroke-width="1.6"/>`;
+        for (let xs = 44; xs < 220; xs += 12) body += `<line x1="${xs}" y1="${ceilY}" x2="${xs + 7}" y2="${ceilY - 8}" stroke="${ink}" stroke-width="1"/>`;
+        body += `<line x1="${cx}" y1="${ceilY}" x2="${cx}" y2="${cy}" stroke="#8a8579" stroke-width="3"/>`;
+        const bw = 50, bh = 36;
+        const topL = cy + 110, topR = cy + 70;
+        body += pulley(cx, cy, r);
+        body += `<path d="M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}" fill="none" stroke="${ink}" stroke-width="1.8"/>`;
+        body += `<line x1="${cx - r}" y1="${cy}" x2="${cx - r}" y2="${topL}" stroke="${ink}" stroke-width="1.8"/>`;
+        body += `<line x1="${cx + r}" y1="${cy}" x2="${cx + r}" y2="${topR}" stroke="${ink}" stroke-width="1.8"/>`;
+        body += box(cx - r - bw / 2, topL, bw, bh, opts.left);
+        body += box(cx + r - bw / 2, topR, bw, bh, opts.right);
+        return sceneWrap(W, topL + bh + 18, body);
+    }
+
+    // kind 'bord'
+    const Ty = 110, Tx = 300, tableL = 30;
+    const bw = 76, bh = 44, bx = 150;
+    const r = 16;
+    const ropeY = Ty - bh / 2;
+    const px = Tx + r - 2, py = ropeY + r;
+    const hw = 44, hh = 36;
+    const hangTop = py + 72;
+    const floorY = Ty + 150;
+    body += sceneGround(10, Tx + 110, floorY);
+    body += `<rect x="${tableL}" y="${Ty}" width="${Tx - tableL}" height="8" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/>`;
+    for (const x of [tableL + 14, Tx - 22]) body += `<rect x="${x}" y="${Ty + 8}" width="8" height="${floorY - Ty - 8}" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/>`;
+    body += `<line x1="${Tx}" y1="${Ty + 4}" x2="${f(px)}" y2="${f(py)}" stroke="#8a8579" stroke-width="3"/>`;
+    body += box(bx, Ty - bh, bw, bh, opts.table);
+    body += `<line x1="${bx + bw}" y1="${f(ropeY)}" x2="${f(px)}" y2="${f(ropeY)}" stroke="${ink}" stroke-width="1.8"/>`;
+    body += pulley(px, py, r);
+    body += `<path d="M ${f(px)} ${f(ropeY)} A ${r} ${r} 0 0 1 ${f(px + r)} ${f(py)}" fill="none" stroke="${ink}" stroke-width="1.8"/>`;
+    body += `<line x1="${f(px + r)}" y1="${f(py)}" x2="${f(px + r)}" y2="${f(hangTop)}" stroke="${ink}" stroke-width="1.8"/>`;
+    body += box(px + r - hw / 2, hangTop, hw, hh, opts.hanging);
+    return sceneWrap(Tx + 110, floorY + 12, body);
+}
+
 // ── Vätskebägare / dyk (makeFluidBeaker) ───────────────────────────
 //
 // Ritar en rektangulär bägare/bassäng med vätska och valfri dykare/
@@ -6828,6 +7003,542 @@ Klossen glider alltså **ner igen** — nu med friktionen riktad *uppför* plane
 **Svar:** a) Ca 1,8 m. b) Ja — eftersom $\\tan 28^{\\circ} > \\mu$ glider den ner igen.
 
 **Generell slutsats:** Uppför och nedför är **inte** symmetriska när friktion finns: uppför bromsar $g(\\sin\\alpha + \\mu\\cos\\alpha)$, nedför driver bara $g(\\sin\\alpha - \\mu\\cos\\alpha)$. Klossen kommer därför tillbaka till startpunkten med **lägre** fart än den sköts iväg med — mellanskillnaden i rörelseenergi har friktionen omvandlat till värme. Att teckna friktionens riktning fel i uppförsfasen är ett av de vanligaste felen på prov.`,
+        },
+    ],
+    // ═══════════════════════════════════════════════════════════════════
+    // fy1-3.8  Exempel: Sneda spännkrafter
+    // Repens lodräta komposanter bär tillsammans tyngdkraften, de vågräta
+    // tar ut varandra. Symmetriskt fall och asymmetriskt fall.
+    // ═══════════════════════════════════════════════════════════════════
+    'fy1-3.8': [
+        // ── Nivå 1 ───────────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En lampa med massan 2,0 kg hänger stilla i två lika långa rep enligt figuren. Hur stor är spännkraften i vardera repet? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+${makeHangingRopes({ angL: 30, angR: 30, mass: '2,0 kg' })}`,
+            answer: { value: 20, unit: 'N', tol: 0.03 },
+            solution: `Lampan hänger stilla, så repens **lodräta komposanter** ska tillsammans vara lika stora som tyngdkraften. Figuren är symmetrisk, så vardera repet bär halva tyngden.
+
+$$
+F_\\mathrm{G} = m \\cdot g = 2{,}0 \\cdot 9{,}82 = 19{,}64\\ \\mathrm{N}
+$$
+
+Den lodräta komposanten är den katet som står mittemot vinkeln mot det vågräta, alltså $F_\\mathrm{S} \\cdot \\sin 30^{\\circ}$. Två rep ger
+
+$$
+2 \\cdot F_\\mathrm{S} \\cdot \\sin 30^{\\circ} = F_\\mathrm{G}
+\\quad\\Leftrightarrow\\quad
+F_\\mathrm{S} = \\frac{F_\\mathrm{G}}{2 \\cdot \\sin 30^{\\circ}}
+$$
+
+$$
+F_\\mathrm{S} = \\frac{19{,}64}{2 \\cdot 0{,}5} = 19{,}64\\ \\mathrm{N} \\approx 20\\ \\mathrm{N}
+$$
+
+**Svar:** Spännkraften i vardera repet är cirka 20 N.
+
+**Generell slutsats:** Vid just 30° blir spännkraften i varje rep lika stor som hela lampans tyngd, fast två rep delar på bördan. Det beror på att bara hälften av varje repkraft pekar uppåt.`,
+        },
+        {
+            level: 1,
+            question: `En tavla hänger i två sneda snören. Snörena byts mot längre snören, så att de blir **flackare** (vinkeln mot det vågräta blir mindre). Vad händer med spännkraften i snörena?`,
+            choices: [
+                `Den är oförändrad, eftersom tavlan väger lika mycket som förut.`,
+                `Den minskar, eftersom snörena lutar mindre.`,
+                `Den ökar, eftersom varje snöre måste ge samma lodräta komposant fast det lutar mindre uppåt.`,
+                `Den ökar i det ena snöret och minskar i det andra.`,
+            ],
+            correct: 2,
+            solution: `Tavlan hänger stilla, så snörenas lodräta komposanter ska tillsammans bära tyngdkraften, oavsett hur snörena lutar. Den lodräta komposanten är $F_\\mathrm{S} \\cdot \\sin \\alpha$. När vinkeln $\\alpha$ blir mindre blir $\\sin \\alpha$ mindre, och då måste $F_\\mathrm{S}$ bli **större** för att produkten ska bli lika stor som förut.
+
+Alternativet "oförändrad" blandar ihop tyngdkraften, som mycket riktigt är densamma, med spännkraften, som beror på vinkeln.
+
+**Svar:** Spännkraften ökar.`,
+        },
+        {
+            level: 1,
+            question: `Ett rep drar i en låda med spännkraften 40 N enligt figuren. Hur stor är spännkraftens **vågräta** komposant?
+
+${makeForceDiagram({
+    box: true,
+    vectors: [
+        { label: 'F_S', magnitude: '40 N', angle: 25, length: 160, showAngle: true },
+    ],
+})}`,
+            answer: { value: 36, unit: 'N', tol: 0.03 },
+            solution: `Spännkraften är hypotenusan i en rätvinklig triangel. Den vågräta komposanten ligger **intill** vinkeln 25°, alltså är den närliggande katet och fås med cosinus.
+
+$$
+F_x = F_\\mathrm{S} \\cdot \\cos 25^{\\circ} = 40 \\cdot \\cos 25^{\\circ} = 36{,}25\\ \\mathrm{N} \\approx 36\\ \\mathrm{N}
+$$
+
+**Svar:** Den vågräta komposanten är cirka 36 N.
+
+**Generell slutsats:** Den lodräta komposanten ligger mittemot vinkeln och fås med sinus: $F_y = 40 \\cdot \\sin 25^{\\circ} \\approx 17\\ \\mathrm{N}$. Kontrollera alltid vilken komposant som ligger intill vinkeln innan du väljer sinus eller cosinus.`,
+        },
+
+        // ── Nivå 2 ───────────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En blöt jacka med massan 1,5 kg hänger mitt på en tvättlina enligt figuren. Hur stor är spännkraften i linan? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+${makeHangingRopes({ angL: 8, angR: 8, mass: '1,5 kg', posts: true, half: 200 })}`,
+            answer: { value: 53, unit: 'N', tol: 0.03 },
+            solution: `Jackan hänger stilla. Linans två halvor lutar lika mycket, så de bär halva tyngden var med sina lodräta komposanter.
+
+$$
+F_\\mathrm{G} = m \\cdot g = 1{,}5 \\cdot 9{,}82 = 14{,}73\\ \\mathrm{N}
+$$
+
+Den lodräta komposanten av spännkraften i ena halvan är $F_\\mathrm{S} \\cdot \\sin 8{,}0^{\\circ}$, och de två halvorna tillsammans bär tyngden:
+
+$$
+2 \\cdot F_\\mathrm{S} \\cdot \\sin 8{,}0^{\\circ} = F_\\mathrm{G}
+\\quad\\Leftrightarrow\\quad
+F_\\mathrm{S} = \\frac{F_\\mathrm{G}}{2 \\cdot \\sin 8{,}0^{\\circ}}
+$$
+
+$$
+F_\\mathrm{S} = \\frac{14{,}73}{2 \\cdot 0{,}1392} = 52{,}92\\ \\mathrm{N} \\approx 53\\ \\mathrm{N}
+$$
+
+Rimlighet: linan är nästan vågrät, så bara en liten del av spännkraften pekar uppåt. Då måste spännkraften vara mycket större än tyngden, och 53 N är ungefär 3,6 gånger jackans tyngd.
+
+**Svar:** Spännkraften i linan är cirka 53 N.
+
+**Generell slutsats:** Ju mer man spänner en lina, desto mindre hänger den ned, men den kan aldrig bli helt rak med något hängande på sig. Då skulle vinkeln vara 0 och sinus 0, och ingen spännkraft i världen räcker för att bära tyngden.`,
+        },
+        {
+            level: 2,
+            question: `En gatlykta med massan 3,0 kg hänger mitt på en vajer mellan två stolpar. Avståndet mellan stolparna är 4,0 m, och lyktan får vajern att hänga ned 0,50 m under linjen mellan fästpunkterna. Hur stor är spännkraften i vajern? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+${makeHangingRopes({ angL: 14.04, angR: 14.04, mass: '3,0 kg', posts: true, half: 220, showAngles: false, spanLabel: '4,0 m', sagLabel: '0,50 m' })}`,
+            answer: { value: 61, unit: 'N', tol: 0.03 },
+            solution: `**Vinkeln.** Lyktan hänger mitt på vajern, så varje halva bildar en rätvinklig triangel med den vågräta kateten 2,0 m (halva avståndet) och den lodräta kateten 0,50 m. Vinkeln $\\alpha$ mot det vågräta ges av
+
+$$
+\\tan \\alpha = \\frac{0{,}50}{2{,}0} = 0{,}25
+\\quad\\Leftrightarrow\\quad
+\\alpha = 14{,}04^{\\circ}
+$$
+
+**Spännkraften.** De två halvornas lodräta komposanter bär tillsammans lyktans tyngd:
+
+$$
+F_\\mathrm{G} = m \\cdot g = 3{,}0 \\cdot 9{,}82 = 29{,}46\\ \\mathrm{N}
+$$
+
+$$
+2 \\cdot F_\\mathrm{S} \\cdot \\sin \\alpha = F_\\mathrm{G}
+\\quad\\Leftrightarrow\\quad
+F_\\mathrm{S} = \\frac{F_\\mathrm{G}}{2 \\cdot \\sin \\alpha}
+$$
+
+$$
+F_\\mathrm{S} = \\frac{29{,}46}{2 \\cdot \\sin 14{,}04^{\\circ}} = \\frac{29{,}46}{2 \\cdot 0{,}2425} = 60{,}73\\ \\mathrm{N} \\approx 61\\ \\mathrm{N}
+$$
+
+**Svar:** Spännkraften i vajern är cirka 61 N.
+
+**Generell slutsats:** Vinkeln stod inte i uppgiften utan fick tas fram ur måtten. Det är vanligt i verkligheten: det är lättare att mäta hur mycket en lina hänger ned än att mäta dess vinkel.`,
+        },
+
+        // ── Nivå 3 ───────────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En låda med massan 10 kg hänger stilla i två rep enligt figuren. Rep 1 bildar vinkeln 60° och rep 2 vinkeln 30° mot det vågräta.<br>a) Bestäm spännkraften i rep 1.<br>b) Bestäm spännkraften i rep 2.
+
+${makeHangingRopes({ angL: 60, angR: 30, mass: '10 kg', ropeLabels: ['rep 1', 'rep 2'] })}
+
+*Ange spännkraften i rep 1 (a) som ditt numeriska svar i N. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 85, unit: 'N', tol: 0.03 },
+            solution: `Repen lutar olika mycket, så de bär **inte** halva tyngden var. Vi kallar spännkrafterna $F_1$ och $F_2$ och ställer upp ett villkor i varje led.
+
+**Vågrätt:** lådan står still i sidled, så de vågräta komposanterna tar ut varandra. Den vågräta komposanten ligger intill vinkeln och fås med cosinus:
+
+$$
+F_1 \\cdot \\cos 60^{\\circ} = F_2 \\cdot \\cos 30^{\\circ} \\tag{1}
+$$
+
+**Lodrätt:** de lodräta komposanterna (sinus, mittemot vinkeln) bär tillsammans tyngden:
+
+$$
+F_1 \\cdot \\sin 60^{\\circ} + F_2 \\cdot \\sin 30^{\\circ} = m \\cdot g = 10 \\cdot 9{,}82 = 98{,}2\\ \\mathrm{N} \\tag{2}
+$$
+
+Ur (1) löser vi ut $F_1$:
+
+$$
+F_1 = F_2 \\cdot \\frac{\\cos 30^{\\circ}}{\\cos 60^{\\circ}} = F_2 \\cdot \\frac{0{,}8660}{0{,}5} = 1{,}732 \\cdot F_2
+$$
+
+$F_1 = 1{,}732 \\cdot F_2$ insatt i (2) ger
+
+$$
+1{,}732 \\cdot F_2 \\cdot 0{,}8660 + F_2 \\cdot 0{,}5 = 98{,}2
+$$
+
+$$
+1{,}5 \\cdot F_2 + 0{,}5 \\cdot F_2 = 98{,}2
+$$
+
+$$
+2{,}0 \\cdot F_2 = 98{,}2
+$$
+
+$$
+F_2 = 49{,}1\\ \\mathrm{N}
+$$
+
+och därmed
+
+$$
+F_1 = 1{,}732 \\cdot 49{,}1 = 85{,}04\\ \\mathrm{N}
+$$
+
+**a)** **Svar:** Spännkraften i rep 1 är cirka 85 N.
+
+**b)** **Svar:** Spännkraften i rep 2 är cirka 49 N.
+
+Kontroll: det brantare repet (rep 1) får den största spännkraften, och båda krafterna är mindre än tyngden 98,2 N. Det stämmer med att repen här bildar rät vinkel med varandra.
+
+**Generell slutsats:** I det asymmetriska fallet räcker det inte att dela tyngden på två. Man måste använda **båda** leden, vågrätt och lodrätt, och lösa ett ekvationssystem. Samma svar fås grafiskt med parallellogrammet i genomgången.`,
+        },
+    ],
+
+    // ═══════════════════════════════════════════════════════════════════
+    // fy1-3.9  Exempel: Accelerationens riktning
+    // Tecknet avgörs av hastighetens ändring som vektor (med tecken),
+    // inte av farten. a = Δv/Δt med tecken.
+    // ═══════════════════════════════════════════════════════════════════
+    'fy1-3.9': [
+        // ── Nivå 1 ───────────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Positiv riktning är åt **höger**. En bil kör åt **vänster** och bromsar in. Vilket tecken har bilens acceleration?`,
+            choices: [
+                `Negativ, eftersom bilen bromsar.`,
+                `Noll, eftersom bilen fortfarande rör sig.`,
+                `Negativ, eftersom bilen kör i negativ riktning.`,
+                `Positiv, eftersom hastigheten går från ett negativt värde mot noll.`,
+            ],
+            correct: 3,
+            solution: `Skriv hastigheten med tecken. Bilen kör åt vänster, så hastigheten är negativ, till exempel $-20\\ \\mathrm{m/s}$. När den bromsar blir den $-10\\ \\mathrm{m/s}$ och till sist 0. Hastigheten **ökar** alltså (från $-20$ mot 0), och då är accelerationen **positiv**.
+
+"Bromsar" betyder bara att **farten** minskar. Det säger ingenting om accelerationens tecken förrän man vet åt vilket håll bilen kör.
+
+**Svar:** Positiv.`,
+        },
+        {
+            level: 1,
+            question: `En boll kastas rakt upp. Positiv riktning är uppåt. Vilken acceleration har bollen i **vändläget**, högst upp, där hastigheten är noll?`,
+            choices: [
+                `$-9{,}82\\ \\mathrm{m/s^2}$`,
+                `0, eftersom bollen står still i vändläget.`,
+                `$+9{,}82\\ \\mathrm{m/s^2}$`,
+                `Den byter tecken från negativ till positiv just i vändläget.`,
+            ],
+            correct: 0,
+            solution: `I vändläget är **hastigheten** noll, men den **ändras** fortfarande: strax före är den positiv (på väg upp) och strax efter negativ (på väg ned). Hastigheten minskar alltså även här, lika mycket per sekund som under resten av kastet.
+
+Det är tyngdkraften som ger accelerationen, och den verkar hela tiden, även i vändläget. Med positiv riktning uppåt är accelerationen därför $-9{,}82\\ \\mathrm{m/s^2}$ under hela kastet.
+
+**Svar:** $-9{,}82\\ \\mathrm{m/s^2}$
+
+**Generell slutsats:** Hastigheten noll betyder inte accelerationen noll. Var accelerationen noll i vändläget skulle bollen bli hängande kvar i luften.`,
+        },
+        {
+            level: 1,
+            question: `En sten faller nedåt. Vid ett tillfälle är farten 3,0 m/s, och 0,50 s senare är farten 7,9 m/s. Positiv riktning är **uppåt**. Bestäm stenens acceleration med tecken.`,
+            answer: { value: -9.8, unit: 'm/s²', tol: 0.03 },
+            solution: `Stenen rör sig nedåt, alltså i negativ riktning. Hastigheterna är därför negativa:
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = -3{,}0\\ \\mathrm{m/s} \\\\
+v = -7{,}9\\ \\mathrm{m/s} \\\\
+\\Delta t = 0{,}50\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Accelerationen är hastighetens ändring per tidsenhet:
+
+$$
+a = \\frac{\\Delta v}{\\Delta t} = \\frac{v - v_0}{\\Delta t} = \\frac{-7{,}9 - (-3{,}0)}{0{,}50} = \\frac{-4{,}9}{0{,}50} = -9{,}8\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** Accelerationen är $-9{,}8\\ \\mathrm{m/s^2}$.
+
+**Generell slutsats:** Farten ökar, men hastigheten minskar (den blir mer negativ). Därför blir accelerationen negativ. Värdet är tyngdaccelerationen, som det ska vara för en sten i fritt fall.`,
+        },
+
+        // ── Nivå 2 ───────────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En hiss är på väg **nedåt** med farten 4,0 m/s. Den bromsar jämnt och stannar på 2,5 s. Positiv riktning är uppåt. Bestäm hissens acceleration med tecken.`,
+            answer: { value: 1.6, unit: 'm/s²', tol: 0.03 },
+            solution: `Hissen rör sig nedåt, så starthastigheten är negativ. Sluthastigheten är noll:
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = -4{,}0\\ \\mathrm{m/s} \\\\
+v = 0 \\\\
+\\Delta t = 2{,}5\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{v - v_0}{\\Delta t} = \\frac{0 - (-4{,}0)}{2{,}5} = \\frac{4{,}0}{2{,}5} = 1{,}6\\ \\mathrm{m/s^2}
+$$
+
+Rimlighet: hastigheten går från $-4{,}0\\ \\mathrm{m/s}$ upp mot 0, alltså **ökar** den. Då ska accelerationen vara positiv, och det är den.
+
+**Svar:** Accelerationen är $+1{,}6\\ \\mathrm{m/s^2}$, riktad uppåt.
+
+**Generell slutsats:** Det är just därför man känner sig tyngre när en hiss på väg ned stannar. Accelerationen är riktad uppåt, och golvet måste trycka på en med en större normalkraft än tyngdkraften.`,
+        },
+        {
+            level: 2,
+            question: `Positiv riktning är åt höger. I vilket av fallen har bilen **negativ** acceleration?`,
+            choices: [
+                `Bilen kör åt höger och ökar farten.`,
+                `Bilen kör åt vänster och bromsar in.`,
+                `Bilen kör åt vänster och ökar farten.`,
+                `Bilen står stilla vid ett rödljus.`,
+            ],
+            correct: 2,
+            solution: `Skriv hastigheten med tecken i början och i slutet för varje fall:
+
+- **Åt höger, ökar farten:** till exempel från 5 till 10 m/s. Hastigheten ökar, så accelerationen är positiv.
+- **Åt vänster, bromsar:** till exempel från $-10$ till $-5$ m/s. Hastigheten ökar, så accelerationen är positiv.
+- **Åt vänster, ökar farten:** till exempel från $-5$ till $-10$ m/s. Hastigheten **minskar**, så accelerationen är **negativ**.
+- **Står stilla:** hastigheten är hela tiden 0 och ändras inte, så accelerationen är noll.
+
+**Svar:** Bilen som kör åt vänster och ökar farten.
+
+**Generell slutsats:** Accelerationen är negativ när den pekar åt det negativa hållet. Det gäller både en bil som bromsar på väg åt höger och en bil som gasar på väg åt vänster.`,
+        },
+
+        // ── Nivå 3 ───────────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En tennisboll släpps mot ett golv. Den träffar golvet med farten 5,0 m/s och studsar upp igen med farten 4,0 m/s. Bollen har kontakt med golvet i 0,010 s. Bestäm bollens medelacceleration under studsen, med positiv riktning uppåt.`,
+            answer: { value: 900, unit: 'm/s²', tol: 0.03 },
+            solution: `Fällan är att räkna med farterna: $4{,}0 - 5{,}0 = -1{,}0\\ \\mathrm{m/s}$ ger en liten negativ acceleration, och det är fel. Hastigheten måste skrivas med tecken. Före studsen rör sig bollen nedåt, efter studsen uppåt:
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = -5{,}0\\ \\mathrm{m/s} \\\\
+v = +4{,}0\\ \\mathrm{m/s} \\\\
+\\Delta t = 0{,}010\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{v - v_0}{\\Delta t} = \\frac{4{,}0 - (-5{,}0)}{0{,}010} = \\frac{9{,}0}{0{,}010} = 900\\ \\mathrm{m/s^2}
+$$
+
+Rimlighet: under studsen ska bollen först bromsas från 5,0 m/s till stillastående och sedan få upp farten 4,0 m/s åt andra hållet. Hastighetsändringen är alltså summan av farterna, 9,0 m/s, och den sker på en hundradels sekund. Accelerationen blir därför enorm och riktad uppåt.
+
+**Svar:** Medelaccelerationen är $900\\ \\mathrm{m/s^2}$, riktad uppåt.
+
+**Generell slutsats:** Accelerationen är ungefär 90 gånger tyngdaccelerationen. Det är golvets normalkraft som ger den, och den är under studsen mycket större än bollens tyngd.`,
+        },
+    ],
+
+    // ═══════════════════════════════════════════════════════════════════
+    // fy1-3.10  Exempel: Trissor
+    // Spännkraften är lika stor i hela snöret. Accelerationen ur hela
+    // systemet (F_R = m_tot · a), spännkraften ur EN kropp.
+    // ═══════════════════════════════════════════════════════════════════
+    'fy1-3.10': [
+        // ── Nivå 1 ───────────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ett snöre löper över en friktionsfri trissa. Spännkraften i snörets ena ände är 12 N. Hur stor är spännkraften i snörets andra ände, på andra sidan trissan?`,
+            choices: [
+                `Mindre än 12 N, eftersom trissan tar upp en del av kraften.`,
+                `12 N, eftersom spännkraften är lika stor i hela snöret.`,
+                `24 N, eftersom snöret drar åt två håll.`,
+                `Det beror på vilken av sidorna som har den tyngsta vikten.`,
+            ],
+            correct: 1,
+            solution: `En friktionsfri trissa byter bara **riktning** på snörets kraft, den ändrar inte dess storlek. Spännkraften är därför lika stor i hela snöret och i båda fästpunkterna.
+
+Även när vikterna på de två sidorna är olika tunga är spännkraften densamma i hela snöret. Det är i stället den **resulterande kraften** på varje vikt som skiljer sig.
+
+**Svar:** 12 N.`,
+        },
+        {
+            level: 1,
+            question: `Två vikter med massan 2,0 kg vardera hänger i ett snöre över en trissa enligt figuren och är i vila. Hur stor är spännkraften i snöret? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+${makePulley({ kind: 'atwood', left: '2,0 kg', right: '2,0 kg' })}`,
+            answer: { value: 20, unit: 'N', tol: 0.03 },
+            solution: `Vikterna är lika tunga och står stilla, så den resulterande kraften på varje vikt är noll. För den ena vikten gäller då att spännkraften uppåt är lika stor som tyngdkraften nedåt:
+
+$$
+F_\\mathrm{S} = F_\\mathrm{G} = m \\cdot g = 2{,}0 \\cdot 9{,}82 = 19{,}64\\ \\mathrm{N} \\approx 20\\ \\mathrm{N}
+$$
+
+**Svar:** Spännkraften är cirka 20 N.
+
+**Generell slutsats:** Det är lätt att tro att snöret bär båda vikterna och att spännkraften blir 39 N. Men spännkraften är den kraft snöret drar med i **en** ände. Trissans upphängning i taket bär däremot båda: den drar uppåt med $2 \\cdot 19{,}64 = 39{,}28\\ \\mathrm{N}$.`,
+        },
+        {
+            level: 1,
+            question: `Två vikter med massorna 2,0 kg och 3,0 kg hänger i ett snöre över en friktionsfri trissa enligt figuren. Vikterna släpps. Vilken acceleration får de? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+${makePulley({ kind: 'atwood', left: '3,0 kg', right: '2,0 kg' })}`,
+            answer: { value: 2.0, unit: 'm/s²', tol: 0.03 },
+            solution: `Vi ser vikterna och snöret som **ett system**. Den tyngre vikten drar systemet åt sitt håll och den lättare bromsar:
+
+$$
+F_R = m_3 \\cdot g - m_2 \\cdot g = 3{,}0 \\cdot 9{,}82 - 2{,}0 \\cdot 9{,}82 = 9{,}82\\ \\mathrm{N}
+$$
+
+Hela systemets massa ska accelereras:
+
+$$
+m_\\text{tot} = 3{,}0 + 2{,}0 = 5{,}0\\ \\mathrm{kg}
+$$
+
+Newtons andra lag ger
+
+$$
+a = \\frac{F_R}{m_\\text{tot}} = \\frac{9{,}82}{5{,}0} = 1{,}964\\ \\mathrm{m/s^2} \\approx 2{,}0\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** Vikterna får accelerationen cirka 2,0 m/s².`,
+        },
+
+        // ── Nivå 2 ───────────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Två vikter med massorna 2,0 kg och 3,0 kg hänger i ett snöre över en friktionsfri trissa enligt figuren. När de släpps får de accelerationen $1{,}964\\ \\mathrm{m/s^2}$. Hur stor är spännkraften i snöret? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+${makePulley({ kind: 'atwood', left: '3,0 kg', right: '2,0 kg' })}`,
+            answer: { value: 24, unit: 'N', tol: 0.03 },
+            solution: `Spännkraften får vi genom att titta på **en** av vikterna, till exempel 2-kilosvikten. Den accelererar uppåt, så spännkraften uppåt är större än tyngdkraften nedåt:
+
+$$
+F_R = F_\\mathrm{S} - F_{\\mathrm{G}2}
+\\quad\\Leftrightarrow\\quad
+F_\\mathrm{S} = F_R + F_{\\mathrm{G}2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_R = m_2 \\cdot a = 2{,}0 \\cdot 1{,}964 = 3{,}928\\ \\mathrm{N} \\quad (\\text{bara 2-kilosviktens massa}) \\\\
+F_{\\mathrm{G}2} = m_2 \\cdot g = 2{,}0 \\cdot 9{,}82 = 19{,}64\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+F_\\mathrm{S} = 3{,}928 + 19{,}64 = 23{,}568\\ \\mathrm{N} \\approx 24\\ \\mathrm{N}
+$$
+
+Kontroll med 3-kilosvikten, som accelererar nedåt: $F_\\mathrm{S} = m_3 \\cdot g - m_3 \\cdot a = 3{,}0 \\cdot 9{,}82 - 3{,}0 \\cdot 1{,}964 = 23{,}568\\ \\mathrm{N}$. Samma svar, som det ska vara.
+
+**Svar:** Spännkraften är cirka 24 N.
+
+**Generell slutsats:** Spännkraften hamnar mellan de två tyngderna (19,64 N och 29,46 N). Den är större än den lätta viktens tyngd, så att den lätta vikten lyfts, och mindre än den tunga viktens tyngd, så att den tunga vikten sjunker.`,
+        },
+        {
+            level: 2,
+            question: `En låda med massan 3,0 kg ligger på ett bord. Ett snöre går från lådan över en friktionsfri trissa vid bordskanten till en hängande vikt med massan 2,0 kg, enligt figuren. Friktionstalet mellan lådan och bordet är 0,20.<br>a) Bestäm systemets acceleration.<br>b) Bestäm spännkraften i snöret.
+
+${makePulley({ kind: 'bord', table: '3,0 kg', hanging: '2,0 kg' })}
+
+*Ange accelerationen (a) som ditt numeriska svar i m/s². Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 2.7, unit: 'm/s²', tol: 0.03 },
+            solution: `**a)** Vi ser lådan, snöret och vikten som ett system. Den hängande viktens tyngd driver systemet, och friktionen på lådan bromsar. Lådans normalkraft är lika stor som dess tyngd, eftersom bordet är vågrätt.
+
+$$
+\\left[ \\begin{array}{l}
+F_{\\mathrm{G}2} = m_2 \\cdot g = 2{,}0 \\cdot 9{,}82 = 19{,}64\\ \\mathrm{N} \\\\
+F_\\mathrm{f} = \\mu \\cdot F_\\mathrm{N} = \\mu \\cdot m_1 \\cdot g = 0{,}20 \\cdot 3{,}0 \\cdot 9{,}82 = 5{,}892\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+F_R = F_{\\mathrm{G}2} - F_\\mathrm{f} = 19{,}64 - 5{,}892 = 13{,}748\\ \\mathrm{N}
+$$
+
+Båda kropparna ska accelereras, så massan är $m_\\text{tot} = 3{,}0 + 2{,}0 = 5{,}0\\ \\mathrm{kg}$:
+
+$$
+a = \\frac{F_R}{m_\\text{tot}} = \\frac{13{,}748}{5{,}0} = 2{,}7496\\ \\mathrm{m/s^2} \\approx 2{,}7\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** Accelerationen är cirka 2,7 m/s².
+
+**b)** Vi tittar på lådan ensam. I sidled verkar spännkraften framåt och friktionen bakåt:
+
+$$
+F_R = F_\\mathrm{S} - F_\\mathrm{f}
+\\quad\\Leftrightarrow\\quad
+F_\\mathrm{S} = m_1 \\cdot a + F_\\mathrm{f}
+$$
+
+$$
+F_\\mathrm{S} = 3{,}0 \\cdot 2{,}7496 + 5{,}892 = 14{,}1408\\ \\mathrm{N} \\approx 14\\ \\mathrm{N}
+$$
+
+Kontroll med den hängande vikten: $F_\\mathrm{S} = m_2 \\cdot g - m_2 \\cdot a = 19{,}64 - 2{,}0 \\cdot 2{,}7496 = 14{,}1408\\ \\mathrm{N}$.
+
+**Svar:** Spännkraften är cirka 14 N.`,
+        },
+
+        // ── Nivå 3 ───────────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En vagn med massan 3,0 kg står på ett bord och kan rulla utan friktion. Ett snöre går från vagnen över en friktionsfri trissa vid bordskanten till en hängande vikt, enligt figuren. Hur stor ska den hängande viktens massa *m* vara för att vagnen ska få accelerationen 2,0 m/s²? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+${makePulley({ kind: 'bord', table: '3,0 kg', hanging: '<tspan font-style="italic">m</tspan>' })}`,
+            answer: { value: 0.77, unit: 'kg', tol: 0.03 },
+            solution: `Den sökta massan finns på **två** ställen: viktens tyngd $m \\cdot g$ driver systemet, men vikten måste också själv accelereras och ingår därför i den totala massan. Vi kan alltså inte bara sätta in värden, utan måste ställa upp en ekvation och lösa ut *m*.
+
+Utan friktion är den hängande viktens tyngd den enda drivande kraften på systemet:
+
+$$
+F_R = m_\\text{tot} \\cdot a
+\\quad\\Leftrightarrow\\quad
+m \\cdot g = (3{,}0 + m) \\cdot a
+$$
+
+Värdena $g = 9{,}82$ och $a = 2{,}0$ insatta ger
+
+$$
+9{,}82 \\cdot m = (3{,}0 + m) \\cdot 2{,}0
+$$
+
+$$
+9{,}82 \\cdot m = 6{,}0 + 2{,}0 \\cdot m
+$$
+
+$$
+9{,}82 \\cdot m \\mathbin{\\boldsymbol{-}} \\boldsymbol{2{,}0 \\cdot m} = 6{,}0 + 2{,}0 \\cdot m \\mathbin{\\boldsymbol{-}} \\boldsymbol{2{,}0 \\cdot m}
+$$
+
+$$
+7{,}82 \\cdot m = 6{,}0
+$$
+
+$$
+\\frac{7{,}82 \\cdot m}{\\boldsymbol{7{,}82}} = \\frac{6{,}0}{\\boldsymbol{7{,}82}}
+$$
+
+$$
+m = 0{,}7673\\ \\mathrm{kg} \\approx 0{,}77\\ \\mathrm{kg}
+$$
+
+Kontroll: $F_R = 0{,}7673 \\cdot 9{,}82 = 7{,}535\\ \\mathrm{N}$ och $m_\\text{tot} = 3{,}7673\\ \\mathrm{kg}$ ger $a = \\dfrac{7{,}535}{3{,}7673} = 2{,}0\\ \\mathrm{m/s^2}$.
+
+**Svar:** Den hängande vikten ska ha massan cirka 0,77 kg.
+
+**Generell slutsats:** Den vanligaste missen är att glömma viktens egen massa och räkna $m \\cdot g = 3{,}0 \\cdot a$, vilket ger 0,61 kg. Då blir accelerationen för liten, eftersom en del av den drivande kraften går åt till att accelerera vikten själv.`,
         },
     ],
 

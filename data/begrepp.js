@@ -56,6 +56,30 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'knackning',
+    term: 'Knäckning',
+    former: ['knäckning', 'knäckningen'],
+    kort: 'När en tunn vägg, stav eller skal som belastas plötsligt viker sig och tar en helt ny form, i stället för att bara tryckas ihop lite i taget.',
+    relaterade: ['bifurkation'],
+    body: [
+      { type: 'p', html: 'Ställ en tom läskburk på golvet och tryck försiktigt ovanifrån. Länge händer nästan ingenting, burken håller emot. Men ökar du trycket en aning till viker sig väggen plötsligt, och burken skrynklas ihop på ett ögonblick. Samma sak händer om du trycker ihop ändarna på en lång linjal: den håller sig rak en stund och böjer sedan plötsligt ut åt sidan. Det kallas knäckning.' },
+      { type: 'p', html: 'Det speciella med knäckning är att formen ändras språngvis. En tunn konstruktion kan bära mycket så länge den är rak eller jämnt rundad, men så snart lasten passerar en kritisk gräns finns det ett annat läge som kräver mindre energi, och konstruktionen hoppar dit. Tunna skal, som en burk eller en kon, är dessutom känsliga för små skavanker: en buckla eller en ojämn belastning kan få dem att knäckas vid en betydligt lägre last än den teoretiska gränsen.' },
+      { type: 'p', html: 'Ingenjörer räknar därför noga på knäckning när de bygger pelare, kranar, flygplanskroppar och broar, eftersom en konstruktion kan rasa genom knäckning långt innan materialet självt går sönder. Men knäckning kan också vara användbar. Mjuka ventiler, gripklor i mjukrobotar och vissa leksaker som hoppar när de vänds ut och in utnyttjar just att formen slår om plötsligt.' }
+    ]
+  },
+  {
+    id: 'bifurkation',
+    term: 'Bifurkation',
+    former: ['bifurkation', 'bifurkationen', 'bifurkationer', 'bifurkationerna'],
+    kort: 'En punkt där en liten ändring av en inställning, till exempel ett flöde eller en last, får ett system att plötsligt byta beteende, så att ett stabilt läge försvinner eller ett nytt dyker upp.',
+    relaterade: ['knackning'],
+    body: [
+      { type: 'p', html: 'Ordet betyder ungefär förgrening. Tänk dig en kula som ligger i en grop bredvid en kulle. Knuffar du lite på den rullar den fram och tillbaka och lägger sig till rätta igen, för gropen är ett stabilt läge. Tänk dig sedan att någon långsamt fyller igen gropen. Länge märks ingenting, men vid en viss punkt är gropen borta, och kulan rullar i väg och kommer aldrig tillbaka. Den punkten är en bifurkation.' },
+      { type: 'p', html: 'Det som gör bifurkationer intressanta är att orsaken ändras jämnt medan följden blir plötslig. Ett flöde, en temperatur eller en last ökar steg för steg, och så slår systemet om på en gång. Exempel är en linjal som plötsligt böjer ut när den trycks ihop, en kran som går från ett jämnt flöde till droppar, och en befolkning av djur som plötsligt börjar växla mellan stora och små år.' },
+      { type: 'p', html: 'Nära en bifurkation blir systemet också extra känsligt för slumpmässiga störningar. När gropen nästan är borta räcker en liten knuff för att kulan ska ta sig över kanten. Därför kan brus få ett system att slå om tidigare än det annars skulle ha gjort, och därför försöker man ofta läsa av sådana tidiga darrningar för att varna för plötsliga omslag i allt från konstruktioner till klimatet.' }
+    ]
+  },
+  {
     id: 'laserfilament',
     term: 'Laserfilament',
     former: ['laserfilament', 'laserfilamentet', 'laserfilamenten', 'plasmatråd', 'plasmatråden', 'plasmatrådar', 'plasmatrådarna'],

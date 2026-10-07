@@ -16,11 +16,11 @@ Format per post:
   Källa (Phys.org 2026-10-02): https://phys.org/news/2026-10-approach-imaging.html
   (tillagd 2026-10-02)
 
+- **Tjernobyls bränslepartiklar har hållit ihop i 40 år** — sex heta partiklar (8–50 mikrometer) från 1986 analyserade med synkrotronröntgendiffraktion (Hannover + HZDR, Rossendorf Beamline i Grenoble): UO2 och U4O9 i stort sett intakta, även U3O8 och zirkoniumblandade faser. Ingång: radioaktivitet, kristallstruktur, röntgendiffraktion (Bragg). OBS 2026-10-07: studien är öppen (CC BY 4.0) men ScienceDirect visade robotkontroll för både curl och Chrome, så fulltexten gick inte att läsa; bara abstractet via Europe PMC. Försök igen från annan väg (HZDR-publikationsdatabasen, Hannovers repositorium). Journal of Hazardous Materials 505, 141533, DOI 10.1016/j.jhazmat.2026.141533. Källa (Phys.org 2026-10-06): https://phys.org/news/2026-10-chernobyl-particles-reveal-unexpectedly-stable.html
+  (tillagd 2026-10-07)
+
 
 - **Fusionständning: värm först, fyll på bränsle sedan** — PPPL har räknat om Lawsonkriteriet med heliumaska, föroreningar (volfram: en del på 10 000 fördubblar trycket som krävs), synkrotronstrålning och temperaturberoende värmeförluster, och föreslår en energisnålare väg runt toppen. Ingång: fusion, Lawsonkriteriet, varför plasma måste vara både hett och tätt. OBS: teoretiskt, PRL (DOI 10.1103/mmc9-nzfx) troligen låst, inget arXiv-förtryck hittat 2026-10-06. Källa (Phys.org 2026-10-05): https://phys.org/news/2026-10-path-fusion-ignition-fuel.html
-  (tillagd 2026-10-06)
-
-- **En mjuk ventil stänger lättare om flödet fladdrar** — små variationer i flödet får en mjuk ventil (modell av en hjärtklaff) att stänga vid mycket lägre tryck än ett jämnt flöde. Ingång: tryck, strömning, resonans. OBS: strömningslära senast 2026-09-26. Källa (Physics, APS, 2026-10-05): https://link.aps.org/doi/10.1103/Physics.19.130
   (tillagd 2026-10-06)
 
 - **Ljus som stelnar en vätskestråle till fiber** — en ring av UV-lysdioder 5 mm under ett munstycke får en fritt fallande stråle av ljushärdande vätska att stelna till fiber, och forskarna har en parameterfri formel för fiberns radie. Ingång: varför en vätskestråle bryts upp i droppar (Plateau–Rayleigh) och hur man hinner före. OBS: PRL är inte öppen, kontrollera arXiv-förtryck innan publicering. Physical Review Letters 137, 144004 (2026), DOI 10.1103/yh2j-b3wq (J. S. Smink, C. W. Visser, H. Lhuissier). Källa (Physics, APS, 2026-10-02): https://physics.aps.org/articles/v19/137

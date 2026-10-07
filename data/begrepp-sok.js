@@ -10,6 +10,8 @@
  */
 window.BEGREPP_LATT = true;
 window.BEGREPP = [
+  {"id":"knackning","term":"Knäckning","kort":"När en tunn vägg, stav eller skal som belastas plötsligt viker sig och tar en helt ny form, i stället för att bara tryckas ihop lite i taget.","former":["knäckning","knäckningen"]},
+  {"id":"bifurkation","term":"Bifurkation","kort":"En punkt där en liten ändring av en inställning, till exempel ett flöde eller en last, får ett system att plötsligt byta beteende, så att ett stabilt läge försvinner eller ett nytt dyker upp.","former":["bifurkation","bifurkationen","bifurkationer","bifurkationerna"]},
   {"id":"laserfilament","term":"Laserfilament","kort":"En tunn, lång tråd av joniserad luft som bildas när en extremt kort och kraftig laserpuls fokuserar sig själv. Tråden kan vara mycket längre än vad en vanlig lins kan hålla en stråle samlad.","former":["laserfilament","laserfilamentet","laserfilamenten","plasmatråd","plasmatråden","plasmatrådar","plasmatrådarna"]},
   {"id":"kerreffekten","term":"Kerreffekten","kort":"Att ett materials brytningsindex ändras av ett starkt elektriskt fält. I en kraftig laserstråle är det ljusets eget fält som gör det, och då kan strålen fokusera sig själv.","former":["kerreffekten","kerreffekt","kerr-effekten","kerr-effekt","självfokusering","självfokuseringen"]},
   {"id":"plasmafrekvens","term":"Plasmafrekvens","kort":"Den frekvens som de fria elektronerna i ett plasma naturligt svänger med. Elektromagnetiska vågor med lägre frekvens reflekteras av plasmat, vågor med högre frekvens går igenom.","former":["plasmafrekvens","plasmafrekvensen","plasmafrekvenser"]},

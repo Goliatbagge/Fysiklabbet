@@ -103,6 +103,68 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-07-brus-hjalper-mjuk-ventil-att-stanga",
+    date: "2026-10-07",
+    title: "Lite brus hjälper en mjuk ventil att stänga",
+    deck: "En hjärtklaff är en mjuk ventil som stänger utan att något styr den. Forskare vid Harvard har byggt en enkel modell av den, en kon av silikon i ett vattenrör, och upptäckt att små ojämnheter i flödet får den att stänga vid omkring en tiondel av det tryck som krävs när vattnet flyter jämnt.",
+    category: "Strömningslära",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-07-brus-hjalper-mjuk-ventil-att-stanga.jpg",
+    imageAlt: "En genomskinlig, ljusblå kon av mjukt material sitter i ett genomskinligt rör fyllt med vatten. Konens kant är veckad och viker sig inåt där vattnet strömmar mot den.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["strömningslära", "ventil", "hjärtklaff", "tryck", "bernoullis ekvation", "svängning", "brus", "knäckning", "bifurkation", "biofysik"],
+    sources: [
+      { name: "Physics (APS): A Little Noise Helps a Soft Valve Close (5 oktober 2026)", url: "https://physics.aps.org/articles/v19/130" },
+      { name: "arXiv: Stochastic elastohydrodynamics of soft valves (förtrycket, öppet tillgängligt)", url: "https://arxiv.org/abs/2504.08248" },
+      { name: "Harvard Soft Math Lab: publikationssidan för studien", url: "https://softmath.seas.harvard.edu/publication/stochastic-elastohydrodynamics-of-soft-valves/" }
+    ],
+    research: {
+      citation: "M. He, S. Cho, G. Dafflisio, S. Emani och L. Mahadevan, ”Stochastic Elastohydrodynamics of Soft Valves”, Physical Review Letters 137, 158401 (2026). Kollegialt granskad. Förtrycket finns öppet på arXiv (2504.08248).",
+      url: "https://doi.org/10.1103/h78n-3582"
+    },
+    larare: {
+      moment: [
+        { label: "Tryck och tryckkraft", href: "katalog.html?id=fy1-5.2" },
+        { label: "Vätsketryck", href: "katalog.html?id=fy1-5.3" },
+        { label: "Resonans", href: "katalog.html?id=fy2-2.6" }
+      ],
+      fragor: [
+        "Konen stängde vid ett lägre tryck när flödet var ojämnt. Varför kan en slumpmässig störning få ett system att gå över en tröskel som det inte når med jämn belastning?",
+        "Försöken gjordes med en silikonkon och vatten, inte med ett hjärta och blod. Vad kan en så förenklad modell visa om en riktig hjärtklaff, och vad kan den inte visa?",
+        "200 pascal motsvarar en vattenpelare på ungefär 2 centimeter. Hur räknar man fram det, och vad säger det om hur mjuk konen är?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'När hjärtats vänstra kammare drar ihop sig och pressar ut blodet i stora kroppspulsådern måste mitralisklaffen, mellan förmaket och kammaren, slå igen så att blodet inte rinner tillbaka. Klaffen består av två tunna segel, och ingen muskel eller nerv säger åt den att stänga. Det är flödet självt som gör jobbet, omkring hundratusen gånger per dygn, ett helt liv igenom.' },
+      { type: 'p', html: 'Hur en så mjuk struktur kan stänga pålitligt är inte självklart. Nu har Mengfei He, L. Mahadevan och kollegor vid Harvard University och Boston Children’s Hospital visat att en del av svaret kan ligga i något som man oftast försöker bli av med: brus, alltså små slumpmässiga variationer i flödet. Studien publicerades den 5 oktober i <em>Physical Review Letters</em>.' },
+
+      { type: 'h2', text: 'Från grishjärta till silikonkon' },
+      { type: 'p', html: 'Forskarna började med färska grishjärtan där förmaket skurits bort, så att klaffen syntes. När de pressade vätska bakvägen mot klaffen och filmade öppningen såg de ett tydligt mönster. Vid ett litet mottryck ändrade öppningen form bara lite, men över en viss gräns slog klaffen igen, nästan plötsligt.' },
+      { type: 'p', html: 'För att komma åt fysiken bakom byggde de sedan en så enkel kopia som möjligt: en tunn, ihålig kon av mjukt silikon med ett runt hål i spetsen. Konen monterades i ett genomskinligt akrylrör med samma radie som konens bas, och vatten drevs genom röret medan en flödesmätare registrerade hur många milliliter per sekund som passerade och en tryckgivare mätte tryckskillnaden över konen. En höghastighetskamera filmade hålets kant. En del koner fick tunna trådar som motsvarar senorna som håller hjärtklaffen på plats.' },
+      { type: 'p', html: 'Strömmar vattnet åt det håll konen smalnar böjer den knappt. Men åt andra hållet, mot konens insida, händer mycket. Vid ett litet flöde börjar kanten kring hålet darra. När flödet ökar växer svängningen i en del av kanten på bekostnad av resten, tills den delen viker sig inåt. Konen faller ihop och kanterna pressas mot varandra till en tät söm, ungefär som när klaffens segel möts. Ett sådant plötsligt hopfall av en tunn vägg kallas knäckning. Ökar flödet ännu mer vänds hela konen ut och in, och då läcker den igen.' },
+      { type: 'p', html: 'Hur mycket vatten som tar sig igenom hålet följer i alla lägen ett samband som bygger på Bernoullis ekvation, $Q = \\sqrt{2} \\cdot C \\cdot S \\cdot \\sqrt{\\frac{p}{\\rho}}$, där $Q$ är flödet, $S$ hålets area, $p$ tryckskillnaden och $\\rho$ vattnets densitet. Talet $C$, som är mindre än 1, tar hänsyn till att strålen genom ett hål blir smalare än själva hålet. När konen ändrar form ändras $S$ och $C$, och därmed hur mycket som läcker igenom.' },
+
+      { type: 'h2', text: 'Ett jämnt flöde gav en trasig ventil' },
+      { type: 'p', html: 'Det överraskande kom när forskarna ökade trycket långsamt och jämnt. Då vek sig konen vid en tryckskillnad i storleksordningen hundra pascal, vilket stämmer med en enkel uppskattning av när en tunn kon knäcks, omkring 200&nbsp;pascal. Men den stannade inte i det stängda läget. Den hoppade i stället direkt till det utvända läget, alltså en ventil som inte fungerar.' },
+      { type: 'p', html: 'Sedan gav forskarna flödet en kort knuff med en spruta kopplad framför konen. Då föll konen ihop vid ett mycket lägre tryck och blev kvar i det stängda läget, med bara ett litet läckage genom veck som inte slöt helt. Den höll tätt över ett betydligt större tryckintervall än utan störningen, ända tills ett mycket högre tryck till slut vände den ut och in. När flödet fluktuerade stängde ventilen vid omkring en tiondel av det tryck som krävdes i ett jämnt flöde.' },
+      { type: 'p', html: 'Hur små trycken är syns om man räknar med sambandet för vätsketryck, $p = \\rho \\cdot g \\cdot h$. En tryckskillnad på 200&nbsp;pascal motsvarar en vattenpelare som är ungefär 2&nbsp;centimeter hög, och en tiondel av det bara ett par millimeter.' },
+
+      { type: 'h2', text: 'En kula i en grop bredvid en kulle' },
+      { type: 'p', html: 'För att förstå varför byggde forskarna en matematisk modell där hålets kant beter sig som en dämpad fjäder som vattnet knuffar på. Fjädern är inte linjär: trycks kanten tillräckligt långt inåt räcker den återställande kraften inte längre, och konen faller ihop. Det kan liknas vid en kula i en grop bredvid en kulle. Så länge kulan rullar fram och tillbaka i gropen återgår allt, men knuffas den över krönet rullar den ned på andra sidan och kommer inte tillbaka. Ett ökat flöde gör gropen grundare, och vid en kritisk hastighet försvinner den helt. En sådan plötslig förändring i ett systems beteende kallas en bifurkation.' },
+      { type: 'p', html: 'Brus betyder att kulan hela tiden får små slumpmässiga knuffar. Då kan den ta sig över krönet innan gropen har försvunnit, och det är just det som får konen att stänga tidigt. Modellen förutsade också hur länge man får vänta innan konen faller ihop, och väntetiderna stämde med mätningar på två koner med olika öppningsvinkel. Den visade dessutom att det räcker med en enda väl avvägd knuff för att få konen att stänga under den kritiska gränsen, något forskarna bekräftade med sprutan.' },
+
+      { type: 'h2', text: 'Vad betyder det för hjärtat?' },
+      { type: 'p', html: 'Forskarnas tolkning är att det ojämna flödet i ett riktigt hjärta inte nödvändigtvis är ett problem för klaffen, utan kan hjälpa den att stänga i tid. De föreslår också att hjärtmuskelns sammandragningar kan ge klaffen sådana knuffar. Det är än så länge en hypotes. Modellen är en kon av silikon i ett rör med vatten, inte ett hjärta, och nästa steg är att lägga till ett rytmiskt pulserande flöde samt krafterna från senorna och hjärtats mjuka väggar.' },
+      { type: 'p', html: 'Resultatet kan ändå få betydelse utanför kroppen. Konstgjorda hjärtklaffar och mjuka ventiler i tekniska system ska fungera utan styrning, och studien antyder att det kan vara en fördel att låta dem dra nytta av de störningar som ändå finns i flödet, i stället för att bara försöka bygga bort dem.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Ett hjärta som slår 70 gånger i minuten stänger sina klaffar omkring 100&nbsp;000 gånger per dygn. Under ett 80&nbsp;år långt liv blir det omkring tre miljarder gånger.',
+        'Forskarna jämför konen med en diod: den släpper igenom flödet i den ena riktningen och stoppar det i den andra. Precis som en diod ger den till slut efter om mottrycket blir tillräckligt stort.',
+        'Att brus kan hjälpa i stället för att stjälpa är känt från flera områden. När slumpmässiga störningar gör en svag signal lättare att upptäcka kallas det stokastisk resonans.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-06-nobelpriset-i-fysik-francis-halzen",
     date: "2026-10-06",
     title: "SPECIAL: Nobelpriset i fysik 2026 går till Francis Halzen, som gjorde isen på Sydpolen till ett teleskop",

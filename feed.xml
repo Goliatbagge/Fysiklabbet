@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Tue, 06 Oct 2026 10:28:37 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 07 Oct 2026 01:29:36 GMT</lastBuildDate>
+    <item>
+      <title>Lite brus hjälper en mjuk ventil att stänga</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-07-brus-hjalper-mjuk-ventil-att-stanga</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-07-brus-hjalper-mjuk-ventil-att-stanga</guid>
+      <pubDate>Wed, 07 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Strömningslära</category>
+      <description>En hjärtklaff är en mjuk ventil som stänger utan att något styr den. Forskare vid Harvard har byggt en enkel modell av den, en kon av silikon i ett vattenrör, och upptäckt att små ojämnheter i flödet får den att stänga vid omkring en tiondel av det tryck som krävs när vattnet flyter jämnt.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-07-brus-hjalper-mjuk-ventil-att-stanga.jpg" length="547552" type="image/jpeg"/>
+    </item>
     <item>
       <title>SPECIAL: Nobelpriset i fysik 2026 går till Francis Halzen, som gjorde isen på Sydpolen till ett teleskop</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-06-nobelpriset-i-fysik-francis-halzen</link>
@@ -177,15 +186,6 @@
       <category>Plasmafysik</category>
       <description>Ett enda utbrott på solen kan frigöra mer energi på några minuter än hela mänskligheten gör av med under tiotusen år, och energin kommer inte från kärnreaktioner utan från solens eget magnetfält. Hur snabbt fältlinjerna kan slitas av och knytas ihop på nytt är en av plasmafysikens envisaste gåtor. Ett japanskt lag har nu byggt om förloppet i millimeterskala med en av världens kraftfullaste lasrar, och får samma takt hur de än ändrar förutsättningarna.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-20-nar-magnetfaltet-knyts-om.jpg" length="235417" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Skummet som minns exakt var det trycktes ihop — och struntar i hur fort det gick</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-19-skummet-som-minns</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-19-skummet-som-minns</guid>
-      <pubDate>Sat, 19 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Materialfysik</category>
-      <description>Pressa ihop en bit vanlig cellplast, håll den nere en stund och släpp: kraften har hunnit sjunka, och materialet hittar inte tillbaka till punkten där det vände. En skog av lodräta kolnanorör gör precis det, gång på gång, lika gärna i ultrarapid som i ett slag. Ett lag vid University of Wisconsin–Madison visar att förlusterna i skummet inte kommer från sega polymerkedjor utan från torr friktion mellan rören, och att materialet därför bär ett minne som inte bleknar.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-19-skummet-som-minns.jpg" length="74206" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

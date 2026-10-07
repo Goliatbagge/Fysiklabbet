@@ -958,6 +958,19 @@ function mobelInre(it, blockerade) {
   if (t.larare) s += stolSvg(t.larare[0], t.larare[1], false);
   const fill = typ === 'kateder' ? FARG.kateder : FARG.bank;
   s += `<rect x="${-t.w / 2}" y="${-t.h / 2}" width="${t.w}" height="${t.h}" rx="4" fill="${fill}" stroke="${FARG.bankKant}" stroke-width="1.6"/>`;
+  // En spärrad plats får kryss även på sin del av bänken (bänkens bredd delad
+  // mellan platserna på samma sida, och halva djupet på gruppbord).
+  if (blockerade && blockerade.size) {
+    const n = t.seats.length > 3 ? t.seats.length / 2 : t.seats.length, bredd = t.w / n;
+    const tvaSidor = typ === 'grupp4' || typ === 'grupp6';
+    t.seats.forEach(([sx, sy], i) => {
+      if (!blockerade.has(i)) return;
+      const y0 = tvaSidor ? (sy < 0 ? -t.h / 2 : 0) : -t.h / 2, hh = tvaSidor ? t.h / 2 : t.h;
+      const cx = sx, cy = y0 + hh / 2, k = Math.min(bredd, hh) * 0.28;
+      s += `<rect x="${r1(sx - bredd / 2 + 2)}" y="${r1(y0 + 2)}" width="${r1(bredd - 4)}" height="${r1(hh - 4)}" rx="3" fill="${FARG.accent}" fill-opacity=".1"/>` +
+        `<path d="M${r1(cx - k)} ${r1(cy - k)}l${r1(2 * k)} ${r1(2 * k)}M${r1(cx + k)} ${r1(cy - k)}l${r1(-2 * k)} ${r1(2 * k)}" stroke="${FARG.accent}" stroke-width="2.6" stroke-linecap="round"/>`;
+    });
+  }
   // Ådring: några tunna linjer längs bänken
   const n = Math.max(1, Math.round(t.h / 26));
   for (let i = 1; i <= n; i++) {
@@ -1587,7 +1600,7 @@ function panelPlac() {
     <div class="grp-h"><span class="eyebrow">Utan plats</span><span class="count"><b>${utan.length}</b> ${utan.length === 1 ? 'elev' : 'elever'}</span></div>
     <div class="utan" id="utan">${utan.length ? utan.map(e => `<span class="elevchip" data-chip="${e.id}">${esc(e.namn)}</span>`).join('') : '<span class="tom-lista">Alla som är här har en plats.</span>'}</div>
     ${borta.length ? `<div class="borta-rad">Frånvarande: ${borta.map(e => esc(e.namn)).join(', ')}</div>` : ''}
-    <p class="note">Dra ett namn till en plats. Drar du ett namn till en upptagen plats byter eleverna plats. Klicka på en plats för att låsa eleven där eller spärra platsen.</p>
+    <p class="note">Dra ett namn till en plats. Drar du ett namn till en upptagen plats byter eleverna plats. Klicka på en bänk eller en ledig stol för att spärra platsen, och klicka igen för att öppna den. Klicka på ett namn för att låsa eleven där.</p>
   </div>
   <div class="grp">
     <div class="grp-h"><span class="eyebrow">Visning</span></div>
@@ -2029,11 +2042,39 @@ svg.addEventListener('pointerdown', e => {
   // Provskärmarna går att flytta i alla steg, inte bara när salen ritas upp.
   if (borjaFlyttaSkarm(e, r)) return;
   const sEl = e.target.closest('[data-seat]');
-  if (sEl) {
-    ui.drag = { kind: 'seat', fran: sEl.dataset.seat, st: cur().map[sEl.dataset.seat], cx: e.clientX, cy: e.clientY, moved: false };
+  const k = klass(), c = cur();
+  const upptagen = sid => !!(c.map[sid] && k && k.elever.some(x => x.id === c.map[sid]));
+  if (sEl && upptagen(sEl.dataset.seat)) {
+    // Ett namnkort: dra för att byta plats, klicka för rutan (lås, ta bort, spärra)
+    ui.drag = { kind: 'seat', fran: sEl.dataset.seat, st: c.map[sEl.dataset.seat], cx: e.clientX, cy: e.clientY, moved: false };
+    e.preventDefault();
+    return;
+  }
+  // En ledig stol, eller en bänk: ett klick spärrar platsen och ett klick till öppnar den.
+  let sid = sEl ? sEl.dataset.seat : null;
+  const itEl = !sid && e.target.closest('[data-item]');
+  if (itEl) {
+    const pl = platser(r).filter(p => p.item === itEl.dataset.item);
+    let bd = Infinity;
+    for (const p of pl) { const d = Math.hypot(p.x - x, p.y - y); if (d < bd) { bd = d; sid = p.id; } }
+  }
+  if (sid) {
+    ui.drag = { kind: 'sparrklick', sid, cx: e.clientX, cy: e.clientY, moved: false };
     e.preventDefault();
   }
 });
+function vaxlaSparr(r, sid) {
+  minns();
+  const sparra = !r.blocked.includes(sid);
+  if (sparra) {
+    r.blocked.push(sid);
+    // Eleven som satt där flyttas till Utan plats, i alla klasser.
+    for (const [key, pl] of Object.entries(S.plac)) if (key.endsWith('|' + r.id)) { delete pl.map[sid]; pl.lasta = pl.lasta.filter(x => x !== sid); }
+  } else r.blocked = r.blocked.filter(x => x !== sid);
+  autoSkarmar(r, cur());
+  spara(); ritaPlan(); ritaPanel(); ritaStatus();
+  visaTips(sparra ? 'Platsen är spärrad. Klicka igen för att öppna den' : 'Platsen är öppen igen');
+}
 window.addEventListener('pointermove', e => {
   const d = ui.drag; if (!d) return;
   if (!d.moved && Math.hypot(e.clientX - d.cx, e.clientY - d.cy) < 5) return;
@@ -2185,6 +2226,7 @@ window.addEventListener('pointerup', e => {
     if (v && v.typ === 'dorr') { minns(); v.spegel = !v.spegel; spara(); }
   }
   ui.guider = null;
+  if (d.kind === 'sparrklick') { if (!d.moved) vaxlaSparr(r, d.sid); return; }
   if (d.kind === 'skarmflytt') {
     $('korg').classList.remove('on', 'mal');
     if (!d.moved) { visaTips('Dra skärmen till en ny plats, eller till papperskorgen för att ta bort den'); ritaPlan(); return; }

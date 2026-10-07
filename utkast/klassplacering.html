@@ -215,6 +215,7 @@ textarea { width: 100%; min-height: 92px; resize: vertical; padding: 9px 11px; b
 .stage.rum [data-item], .stage.rum [data-vagg] { cursor: grab; }
 .stage.rum.greppar [data-item], .stage.rum.greppar [data-vagg], .stage.greppar { cursor: grabbing; }
 .stage:not(.rum) [data-seat] { cursor: pointer; }
+.stage:not(.rum) [data-item] { cursor: pointer; }
 .stagebar { flex: none; display: flex; align-items: center; gap: 10px; padding: 12px 12px 4px; }
 .status { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--soft); white-space: nowrap; overflow: hidden; }
 .status > * { flex: none; }
@@ -476,7 +477,7 @@ textarea { width: 100%; min-height: 92px; resize: vertical; padding: 9px 11px; b
     <ol class="seo-steps">
       <li><b>Klassrummet.</b> Ange salens mått och välj en färdig möblering, till exempel rader med parbänkar eller grupper om fyra. Dra sedan bänkarna dit de står i verkligheten. En bänk som släpps på en annan snäpper fast kant i kant. Dras en bänk nästan i linje med en annan snäpper den rakt bakom, framför eller bredvid den, och en streckad hjälplinje visar vad den linjeras mot. Flera bänkar flyttar du på en gång genom att dra en ram runt dem och sedan dra i en av dem, så behåller de sin inbördes placering. Markera en bänk för att kopiera eller ta bort den, och vrid den genom att dra i det runda handtaget som dyker upp ovanför den. Salen blir större eller mindre när du drar i en vägg eller ett hörn, och katedern när du drar i en kant eller ett hörn av den. Dörren och fönstren dras längs väggarna, och ett klick på dörren vänder den så att den öppnas åt andra hållet. Ett fönster blir längre eller kortare när du drar i någon av dess ändar. Vill du prova en ny möblering sparar du först den du har under <b>Sparade möbleringar</b>, så kan du gå tillbaka till den. Du kan också kopiera hela klassrummet med knappen bredvid listan över klassrum. Utplacerade provskärmar flyttar du genom att dra dem, och du tar bort en skärm genom att dra den till papperskorgen. Vill du ha hjälp att ställa ut bänkarna med så stort avstånd som möjligt mellan eleverna väljer du <b>Föreslå bänkplacering</b> och anger antal bänkar och minsta avstånd mellan eleverna, i bänkavstånd eller meter. Under <b>Bänkarnas mått</b> skriver du in hur stora bänkarna i salen är, så att planen stämmer med verkligheten.</li>
       <li><b>Klassen.</b> Klistra in klasslistan med ett namn per rad. Bocka av den som är frånvarande, markera vem som behöver sitta fram och lägg till par som ska hållas isär eller sitta ihop.</li>
-      <li><b>Placeringen.</b> Tryck på Slumpa placering. Är du inte nöjd drar du ett namn till en annan plats, och två elever byter då plats med varandra. Lås en elev på sin plats så ligger hen kvar nästa gång du slumpar.</li>
+      <li><b>Placeringen.</b> Tryck på Slumpa placering. Är du inte nöjd drar du ett namn till en annan plats, och två elever byter då plats med varandra. Lås en elev på sin plats så ligger hen kvar nästa gång du slumpar. Ett klick på en bänk eller en ledig stol spärrar platsen, och ett klick till öppnar den igen.</li>
       <li><b>Visa och spara.</b> Visa planen i helskärm för klassen, skriv ut den eller ladda ned den som bild. Syns namnen dåligt på projektorn gör du dem större med knappen <b>Aa</b>. Spara placeringen när den används, så kan verktyget ge eleverna nya grannar nästa gång.</li>
     </ol>
 
@@ -505,7 +506,7 @@ textarea { width: 100%; min-height: 92px; resize: vertical; padding: 9px 11px; b
 
 <!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
      webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
-<script src="klassplacering.js?v=202610061000"></script>
+<script src="klassplacering.js?v=202610071000"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

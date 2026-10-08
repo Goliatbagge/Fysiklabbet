@@ -16,7 +16,15 @@ Format per post:
   Källa (Phys.org 2026-10-02): https://phys.org/news/2026-10-approach-imaging.html
   (tillagd 2026-10-02)
 
-- **Tjernobyls bränslepartiklar har hållit ihop i 40 år** — sex heta partiklar (8–50 mikrometer) från 1986 analyserade med synkrotronröntgendiffraktion (Hannover + HZDR, Rossendorf Beamline i Grenoble): UO2 och U4O9 i stort sett intakta, även U3O8 och zirkoniumblandade faser. Ingång: radioaktivitet, kristallstruktur, röntgendiffraktion (Bragg). OBS 2026-10-07: studien är öppen (CC BY 4.0) men ScienceDirect visade robotkontroll för både curl och Chrome, så fulltexten gick inte att läsa; bara abstractet via Europe PMC. Försök igen från annan väg (HZDR-publikationsdatabasen, Hannovers repositorium). Journal of Hazardous Materials 505, 141533, DOI 10.1016/j.jhazmat.2026.141533. Källa (Phys.org 2026-10-06): https://phys.org/news/2026-10-chernobyl-particles-reveal-unexpectedly-stable.html
+- **Kvantspinn som flyttar ett centimeterstort föremål** — första observationen av att kvantspinn förskjuter ett föremål i centimeterskala i labbet. Ingång: spinn, rörelsemängdsmoment, Einstein–de Haas-effekten (kontrollera). OBS: kvantfysik kördes 2026-10-05; originalet ej kontrollerat.
+  Källa (Phys.org 2026-10-08): https://phys.org/news/2026-10-quantum-shifting-centimeter-scale-lab.html
+  (tillagd 2026-10-08)
+
+- **Svävande glaskula sammanflätad med ljus i rumstemperatur** — en optiskt levitierad nanosfär vars rörelse sammanflätas med ljus utan kylning till nära absoluta nollpunkten. Ingång: strålningstryck, optisk pincett. OBS: originalet ej kontrollerat.
+  Källa (Phys.org 2026-10-07): https://phys.org/news/2026-10-levitating-glass-sphere-entangled-room.html
+  (tillagd 2026-10-08)
+
+- **Tjernobyls bränslepartiklar har hållit ihop i 40 år** — sex heta partiklar (8–50 mikrometer) från 1986 analyserade med synkrotronröntgendiffraktion (Hannover + HZDR, Rossendorf Beamline i Grenoble): UO2 och U4O9 i stort sett intakta, även U3O8 och zirkoniumblandade faser. Ingång: radioaktivitet, kristallstruktur, röntgendiffraktion (Bragg). OBS 2026-10-07: studien är öppen (CC BY 4.0) men ScienceDirect visade robotkontroll för både curl och Chrome, så fulltexten gick inte att läsa; bara abstractet via Europe PMC. Försök igen från annan väg (HZDR-publikationsdatabasen, Hannovers repositorium). Journal of Hazardous Materials 505, 141533, DOI 10.1016/j.jhazmat.2026.141533. OBS 2026-10-08: fortfarande 403 från ScienceDirect via curl; Europe PMC har bara abstractet (PMID 41722407), ingen PMC-fulltext. Källa (Phys.org 2026-10-06): https://phys.org/news/2026-10-chernobyl-particles-reveal-unexpectedly-stable.html
   (tillagd 2026-10-07)
 
 

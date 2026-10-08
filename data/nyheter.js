@@ -103,6 +103,71 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-08-karnklockan-som-haller-takten-sjalv",
+    date: "2026-10-08",
+    title: "Den första kärnklockan som håller takten på egen hand tickar i Wien",
+    deck: "I vanliga atomur är det elektroner som håller takten. Forskare i Wien och Braunschweig har nu byggt en klocka där en laser styrs av atomkärnor av thorium-229 i en kristall stor som ett riskorn, och den gick ett helt dygn utan att någon behövde röra den.",
+    category: "Kärnfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-08-karnklockan-som-haller-takten-sjalv.jpg",
+    imageAlt: "Ett mörkt laboratorium fullt av kablar, linser och metallrör. Längst fram syns en vakuumkammare med ett runt fönster som lyser svagt violett, och i bakgrunden lutar sig en forskare över en optisk bänk.",
+    imageCredit: "Foto: Matthias Heisler, TU Wien (pressbild). Vakuumkammaren med thoriumkristallen i förgrunden, uppe till höger justerar Luca Toscani de Col lasern.",
+    tags: ["kärnfysik", "atomkärna", "kärnklocka", "atomur", "thorium", "energinivåer", "foton", "laser", "ultraviolett", "mörk materia", "metrologi"],
+    sources: [
+      { name: "TU Wien: The First Stand-Alone Nuclear Clock is Ticking in Vienna (7 oktober 2026)", url: "https://www.tuwien.at/en/tu-wien/news/news-articles/news/die-erste-selbststabilisierende-atomkernuhr-tickt-in-wien" },
+      { name: "Phys.org: The first stand-alone nuclear clock is ticking in Vienna (7 oktober 2026)", url: "https://phys.org/news/2026-10-nuclear-clock-vienna.html" },
+      { name: "Nature: Continuous-wave laser absorption spectroscopy of the thorium-229 nucleus (16 september 2026, öppet tillgänglig)", url: "https://doi.org/10.1038/s41586-026-11011-7" }
+    ],
+    research: {
+      citation: "L. Toscani De Col, T. Riebner, I. Morawetz med flera, E. Peik och T. Schumm, ”A thorium-229 optical nuclear clock with feedback loop”, Nature (2026), publicerad 7 oktober 2026. Kollegialt granskad och öppet tillgänglig.",
+      url: "https://doi.org/10.1038/s41586-026-11084-4"
+    },
+    larare: {
+      moment: [
+        { label: "Atomkärnan", href: "katalog.html?id=fy1-9.1" },
+        { label: "Spektrallinjer", href: "katalog.html?id=fy2-4.7" },
+        { label: "Bohrs atommodell och energinivåer", href: "katalog.html?id=fy2-4.8" }
+      ],
+      fragor: [
+        "Övergången i thorium-229 har energin 8,4 eV. Räkna fram våglängden hos fotonen som behövs med E = h · f och c = f · λ. Varför går det inte att använda vanligt glas i fönster och linser för det ljuset?",
+        "Klockan stabiliserar lasern genom att mäta hur mycket ljus kärnorna absorberar. Varför räcker det inte att mäta på toppen av absorptionslinjen, och hur hjälper det att mäta på båda sidor om den?",
+        "Klockan var stabil inom ett dygn men gav något olika frekvens olika dagar, beroende på var i kristallen lasern gick. Vad är skillnaden mellan en klocka som är stabil och en klocka som är rätt?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Alla klockor bygger på något som svänger i jämn takt. I ett pendelur är det pendeln, i ett armbandsur en liten kvartskristall och i de bästa atomuren ljus som får elektroner att hoppa mellan två energinivåer i en atom. Ju fler svängningar per sekund och ju mindre takten påverkas av omgivningen, desto noggrannare klocka.' },
+      { type: 'p', html: 'Nu har forskare vid Technische Universität Wien och det tyska mätinstitutet PTB i Braunschweig tagit nästa steg. De har byggt en klocka där takten hålls av själva atomkärnan, inte av elektronerna runt den. Klockan styr sig själv och gick ett helt dygn utan att någon behövde ingripa. Resultatet publicerades den 7 oktober i <em>Nature</em>.' },
+
+      { type: 'h2', text: 'En atomkärna som går att nå med laser' },
+      { type: 'p', html: 'Även atomkärnor har energinivåer, men avstånden mellan dem brukar vara tusentals eller miljontals elektronvolt. Så energirika fotoner är gammastrålning, och ingen laser kan göra sådant ljus med den precision en klocka kräver. Isotopen thorium-229 är ett undantag. Där tar två stora bidrag till kärnans energi, den elektriska repulsionen mellan protonerna och den starka kärnkraften, nästan exakt ut varandra. Kvar blir en övergång på bara 8,4&nbsp;elektronvolt.' },
+      { type: 'p', html: 'Med $E = h \\cdot f$ motsvarar det frekvensen $f \\approx 2{,}02 \\cdot 10^{15}\\ \\mathrm{Hz}$ och våglängden 148&nbsp;nanometer, alltså ultraviolett ljus. Det är drygt 200&nbsp;000 gånger fler svängningar per sekund än i cesiumatomuren som definierar sekunden. Tanken att bygga en klocka på thorium-229 lades fram av Ekkehard Peik och Christian Tamm vid PTB redan 2003, men det dröjde till 2024 innan någon lyckades träffa övergången med laser. Det gjorde samma forskargrupper.' },
+
+      { type: 'h2', text: 'Kärnorna sitter i en kristall' },
+      { type: 'p', html: 'Thoriumkärnorna sitter instängda i en cylinder av kalciumfluorid, 3,1&nbsp;millimeter i diameter och 4,2&nbsp;millimeter lång, i rumstemperatur. I laserstrålens väg genom kristallen finns ungefär 10<sup>16</sup> thoriumkärnor. Lasern börjar som infrarött ljus på 1&nbsp;187&nbsp;nanometer, och i tre steg fördubblas frekvensen så att våglängden blir en åttondel, 148&nbsp;nanometer. Ljuset som når detektorn bakom kristallen har en effekt på bara 65&nbsp;pikowatt, och kärnorna absorberar ungefär 0,75&nbsp;procent av det.' },
+      { type: 'image', src: 'nyheter/bilder/2026-10-08-karnklockan-som-haller-takten-sjalv-2.jpg', alt: 'En blick in genom ett runt fönster i en vakuumkammare. Inne i den rosa och blå belysta kammaren sticker en blank metallhållare in från vänster, och längst ut på den sitter en liten genomskinlig kristall.', caption: 'Thoriumkristallen i sin hållare inne i vakuumkammaren. Ljuset på 148&nbsp;nm absorberas av luft, så det måste gå genom vakuum.', credit: 'Foto: Thorsten Schumm, TU Wien (pressbild)' },
+      { type: 'p', html: 'Det nya är hur signalen läses av. Tidigare skickade man in ljus, stängde av det och väntade på att de exciterade kärnorna skulle sända ut fotoner när de föll tillbaka. Det tar tid, eftersom en exciterad kärna i kristallen i genomsnitt dröjer omkring tio minuter innan den sänder ut sin foton. I en studie i <em>Nature</em> i september visade gruppen i stället att man kan mäta hur mycket ljus som försvinner på vägen genom kristallen, alltså absorptionen, med en laser som lyser hela tiden. Det ger omkring tusen gånger fler signalfotoner per sekund och gör att mätningen inte behöver vänta på kärnorna.' },
+
+      { type: 'h2', text: 'Kärnorna rättar lasern' },
+      { type: 'p', html: 'Så fungerar klockan: lasern hålls stadig från sekund till sekund av en optisk kavitet, två speglar som ljuset studsar mellan. Men kaviteten driver långsamt, så lasern glider bort. Med jämna mellanrum mäter därför systemet absorptionen på var sin sida om kärnornas absorptionstopp. Är lasern exakt rätt är absorptionen lika på båda sidor, och skillnaden blir noll. Har den glidit åt något håll säger skillnaden både hur mycket och åt vilket håll, och lasern ställs om med ett enda steg. Det är samma princip som i ett atomur, men med kärnor som referens.' },
+      { type: 'quote', html: 'Grundidén är enkel: man har en laser och man har thorium. Lasern ändrar thoriumkärnornas energitillstånd, och thoriumkärnorna används för att stabilisera laserns frekvens.', cite: 'Thorsten Schumm, TU Wien, i universitetets pressmeddelande' },
+      { type: 'p', html: 'För att kontrollera klockan jämfördes den via en optisk fiber med en atomklocka av ytterbiumjoner hos Österrikes mätmyndighet BEV. Mätt över ett dygn närmade sig klockans frekvensinstabilitet, ett mått på hur mycket takten fladdrar, $10^{-15}$. Universitetet översätter det till ett fel på ungefär en sekund på 30&nbsp;miljoner år.' },
+
+      { type: 'h2', text: 'Inget rekord ännu' },
+      { type: 'p', html: 'Klockan slår inte de bästa optiska atomklockorna, som når ned mot $10^{-18}$. Den har också en tydlig svaghet: mellan olika dagar skilde sig frekvensen med omkring $5 \\cdot 10^{-13}$, vilket är betydligt mer än inom ett och samma dygn. Forskarna visade att det beror på var i kristallen lasern går. Strålen är en halv millimeter bred, och på olika ställen skilde sig absorptionstoppens läge med upp till 1,7&nbsp;kilohertz, troligen på grund av spänningar i kristallen. Klockan är alltså stabil men ännu inte reproducerbar.' },
+      { type: 'p', html: 'Vägen framåt är starkare lasrar, längre kristaller och kristaller där thorium ingår i själva strukturen i stället för som inblandning. Med sådana förbättringar räknar forskarna med att en kärnklocka i fast form kan nå samma nivå som dagens bästa atomklockor, fortfarande i en kristall som ryms på en fingertopp. I samma nummer av <em>Nature</em> beskriver enligt TU Wien även en forskargrupp i Kina en egen kärnklocka.' },
+
+      { type: 'h2', text: 'Ett nytt sätt att leta efter mörk materia' },
+      { type: 'p', html: 'Att övergången i thorium-229 uppstår när två enorma bidrag nästan tar ut varandra gör den mycket känslig. Skulle naturkonstanterna, till exempel styrkan hos den starka kärnkraften, variera aningen i tiden, skulle kärnklockans takt ändras mycket mer än en atomklockas. Vissa teorier om mörk materia förutsäger just sådana långsamma svängningar.' },
+      { type: 'p', html: 'Forskarna letade efter dem i ett 23&nbsp;timmar långt mätpass, med perioder mellan 20&nbsp;sekunder och ett dygn. De hittade inga. Men redan det är ett resultat: för mörk materia som skulle påverka den starka kärnkraften eller kvarkarnas massor når mätningen 10 till 1&nbsp;000 gånger längre ned mot svaga kopplingar än tidigare försök med atomklockor. Exakt hur långt det räcker beror på hur känslig övergången faktiskt är, och det går ännu inte att räkna ut.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Sedan 1967 är sekunden definierad som 9&nbsp;192&nbsp;631&nbsp;770 svängningar hos strålningen från en övergång i cesiumatomen. En klocka med thorium-229 svänger omkring 2&nbsp;000&nbsp;000&nbsp;000&nbsp;000&nbsp;000 gånger per sekund.',
+        'Ljus med våglängden 148&nbsp;nm kallas vakuumultraviolett, eftersom det absorberas av luftens syre. Hela laserstrålen måste därför gå i vakuum eller i en gas som inte absorberar.',
+        'En atom är mer än tiotusen gånger större än kärnan i dess mitt. Därför påverkas kärnan mycket mindre av elektriska och magnetiska fält i omgivningen, och det är skälet till att den kan sitta i en kristall och ändå hålla takten.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-07-brus-hjalper-mjuk-ventil-att-stanga",
     date: "2026-10-07",
     title: "Lite brus hjälper en mjuk ventil att stänga",

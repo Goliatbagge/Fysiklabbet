@@ -56,6 +56,30 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'karnklocka',
+    term: 'Kärnklocka',
+    former: ['kärnklocka', 'kärnklockan', 'kärnklockor', 'kärnklockorna', 'atomkärnklocka', 'atomkärnklockan', 'thoriumklocka', 'thoriumklockan'],
+    kort: 'En klocka som håller tiden med hjälp av en övergång mellan två energinivåer i en atomkärna, i stället för mellan två nivåer hos elektronerna i en atom. Den enda kärna som hittills går att använda är thorium-229.',
+    relaterade: ['atomur', 'exciterat-tillstand', 'vakuumultraviolett', 'frekvenskam'],
+    body: [
+      { type: 'p', html: 'Ett atomur räknar svängningarna i ljus som får en elektron att hoppa mellan två bestämda energinivåer. En kärnklocka gör samma sak, men det är atomkärnan själv som hoppar. Även en kärna har nämligen energinivåer: protonerna och neutronerna kan ordna sig på olika sätt, och varje sätt har sin egen energi.' },
+      { type: 'p', html: 'Problemet är att avstånden mellan kärnans nivåer nästan alltid är enorma, tusentals eller miljontals elektronvolt. Det motsvarar gammastrålning, och sådan strålning går inte att göra med den skärpa en klocka kräver. Thorium-229 är ett lyckligt undantag. Där tar den elektriska repulsionen mellan protonerna och den starka kärnkraften nästan ut varandra, och kvar blir en övergång på bara 8,4&nbsp;elektronvolt. Den nås med ultraviolett laserljus med våglängden 148&nbsp;nm, som svänger omkring två biljarder gånger per sekund.' },
+      { type: 'p', html: 'Fördelen med en kärna är att den är liten och skyddad av elektronerna runt den. Elektriska och magnetiska störningar påverkar den därför mycket svagare än de påverkar en atoms elektroner, och kärnorna kan sitta i en vanlig kristall i rumstemperatur i stället för att fångas en och en i vakuum. Eftersom övergången uppstår när två stora krafter nästan tar ut varandra är den också mycket känslig för om naturkonstanterna skulle ändra sig det minsta. Därför hoppas fysiker kunna använda kärnklockor både som extremt noggranna ur och som instrument för att leta efter ny fysik, till exempel mörk materia.' }
+    ]
+  },
+  {
+    id: 'vakuumultraviolett',
+    term: 'Vakuumultraviolett',
+    former: ['vakuumultraviolett', 'vakuumultravioletta', 'vakuumultraviolett ljus', 'vakuumultraviolett strålning', 'vuv-ljus', 'vuv-strålning', 'vuv-laser', 'vuv-lasern'],
+    kort: 'Ultraviolett ljus med så kort våglängd, ungefär 100 till 200 nanometer, att det absorberas av luften. Det kan därför bara färdas i vakuum eller i en gas som släpper igenom det.',
+    relaterade: ['karnklocka', 'foton'],
+    body: [
+      { type: 'p', html: 'Ljus med kortare våglängd än det violetta vi kan se kallas ultraviolett. Solens UV-strålning, den som ger solbränna, har våglängder kring 300&nbsp;nm och tar sig utan problem genom luften. Men går man längre ned i våglängd, under ungefär 200&nbsp;nm, händer något: syremolekylerna i luften börjar slå i sig fotonerna. Redan efter några millimeter luft är ljuset borta.' },
+      { type: 'p', html: 'Därför heter det vakuumultraviolett. Den som vill arbeta med sådant ljus måste låta det gå i vakuum, eller i en gas som kväve eller argon som inte absorberar det. Vanligt glas släpper inte heller igenom det, så linser och fönster görs i stället av kristaller som kalciumfluorid eller magnesiumfluorid.' },
+      { type: 'p', html: 'Vakuumultraviolett ljus är svårt att tillverka. Inga vanliga lasrar lyser där, så man börjar ofta med infrarött eller synligt laserljus och fördubblar frekvensen i speciella kristaller, flera gånger efter varandra. Ljuset används bland annat i spektroskopi, i tillverkningen av datorchip och för att nå övergången i atomkärnan thorium-229, som ligger vid 148&nbsp;nm.' }
+    ]
+  },
+  {
     id: 'knackning',
     term: 'Knäckning',
     former: ['knäckning', 'knäckningen'],

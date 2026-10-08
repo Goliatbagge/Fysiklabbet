@@ -5993,6 +5993,17 @@ window.EXITTICKETS = {
       'Grafen $F = k \\cdot \\Delta l$ är en rät linje eftersom vi bortser från energiförluster i denna idealiserade modell.',
     ],
   },
+  {
+    question: 'Två likadana fjädrar, var och en med fjäderkonstanten *k*, kopplas parallellt och bär en vikt tillsammans. Vilken är den resulterande fjäderkonstanten?',
+    choices: ['$\\dfrac{k}{2}$', '$2 \\cdot k$', '$k$', '$k^{2}$'],
+    correct: 1,
+    why: [
+      'Så blir det i en seriekoppling, där varje fjäder bär hela vikten och paret förlängs dubbelt så mycket.',
+      'Parallellt delar fjädrarna på vikten och förlängs bara hälften så mycket, så $k_\\mathrm{R} = k_1 + k_2 = 2 \\cdot k$.',
+      'Paret blir styvare än en ensam fjäder, eftersom varje fjäder bara bär halva vikten.',
+      'Fjäderkonstanterna adderas parallellt, de multipliceras inte. Enheten N/m skulle dessutom bli fel.',
+    ],
+  },
 ],
 
 'fy2-2.3': [

@@ -14937,6 +14937,30 @@ $$ A = \\sqrt{\\frac{2 \\cdot 5{,}0}{250}} = \\sqrt{0{,}040} = 0{,}20\\ \\mathrm
 
 **Svar:** Fjädern dras ut $0{,}20\\ \\mathrm{m}$ (= $20\\ \\mathrm{cm}$).`,
         },
+        {
+            level: 1,
+            question: `Två fjädrar med fjäderkonstanterna $40\\ \\mathrm{N/m}$ och $120\\ \\mathrm{N/m}$ seriekopplas. Bestäm den resulterande fjäderkonstanten.`,
+            answer: { value: 30, unit: 'N/m' },
+            solution: `Fjädrar i serie beter sig som en enda fjäder med den resulterande fjäderkonstanten $k_\\mathrm{R}$:
+
+$$ \\frac{1}{k_\\mathrm{R}} = \\frac{1}{k_1} + \\frac{1}{k_2} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+k_1 = 40\\ \\mathrm{N/m} \\\\
+k_2 = 120\\ \\mathrm{N/m}
+\\end{array} \\right]
+$$
+
+$$ \\frac{1}{k_\\mathrm{R}} = \\frac{1}{40} + \\frac{1}{120} = \\frac{3}{120} + \\frac{1}{120} = \\frac{4}{120} = \\frac{1}{30} $$
+
+Båda leden är 1 delat med något, så $k_\\mathrm{R} = 30\\ \\mathrm{N/m}$.
+
+**Svar:** Den resulterande fjäderkonstanten är $30\\ \\mathrm{N/m}$.
+
+**Rimlighet:** Seriekopplingen är mjukare än den mjukaste fjädern, och 30 N/m är mindre än 40 N/m.`,
+        },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
@@ -15023,6 +15047,36 @@ $$ E_\\text{värme} = 0{,}14175 - 0{,}04375 = 0{,}098\\ \\mathrm{J} $$
 **Svar:** Ungefär $0{,}098\\ \\mathrm{J}$ har omvandlats till värme.
 
 **Generell slutsats:** I en dämpad svängning minskar amplituden över tid, och energiförlusten är inte linjär i amplituden — eftersom *E* ∝ *A*² är förlusten kvadratiskt fördelad.`,
+        },
+        {
+            level: 2,
+            question: `En vikt hängs i en fjäder med fjäderkonstanten $50\\ \\mathrm{N/m}$ och förlänger den $12\\ \\mathrm{cm}$. Samma vikt hängs sedan i två sådana fjädrar som är seriekopplade. Hur mycket förlängs fjäderparet?`,
+            answer: { value: 0.24, unit: 'm' },
+            solution: `Vikten är densamma i båda fallen, så kraften på fjädrarna är densamma. Vi tar fram den ur den första förlängningen med Hookes lag:
+
+$$ F = k \\cdot \\Delta l = 50 \\cdot 0{,}12 = 6{,}0\\ \\mathrm{N} $$
+
+Två likadana fjädrar i serie:
+
+$$ \\frac{1}{k_\\mathrm{R}} = \\frac{1}{50} + \\frac{1}{50} = \\frac{2}{50} = \\frac{1}{25} $$
+
+alltså $k_\\mathrm{R} = 25\\ \\mathrm{N/m}$. Hookes lag för paret ger förlängningen:
+
+$$ F = k_\\mathrm{R} \\cdot \\Delta l \\quad\\Leftrightarrow\\quad \\Delta l = \\frac{F}{k_\\mathrm{R}} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+F = 6{,}0\\ \\mathrm{N} \\\\
+k_\\mathrm{R} = 25\\ \\mathrm{N/m}
+\\end{array} \\right]
+$$
+
+$$ \\Delta l = \\frac{6{,}0}{25} = 0{,}24\\ \\mathrm{m} $$
+
+**Svar:** Fjäderparet förlängs $0{,}24\\ \\mathrm{m}$, alltså $24\\ \\mathrm{cm}$.
+
+**Generell slutsats:** I serie bär varje fjäder hela vikten och förlängs lika mycket som ensam. Två likadana fjädrar ger därför dubbel förlängning.`,
         },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────

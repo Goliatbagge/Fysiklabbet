@@ -21177,6 +21177,296 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ---------------- scen: kopplade fjädrar (fy2-2.2 Ex 3) -------------
+   * Fjädrarna 30 N/m och 60 N/m bär en vikt på 0,50 kg, först i serie och
+   * sedan parallellt. Figuren visar båda kopplingarna bredvid varandra med
+   * samma vikt. a) Den resulterande fjäderkonstanten ur 1/k_R = 1/k_1 +
+   * 1/k_2 (bråken förlängs till nämnaren 60), sedan Hookes lag löst för
+   * Δl med tyngden uträknad i klammern. b) k_R = k_1 + k_2, samma F. */
+  function layoutKoppladeFjadrar(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 300;
+    function figurBubble(w, lines) { return bubble(120, FIGB_Y, w, lines); }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function rect(x0, y0, x1, y1) {
+      line([x0, y0], [x1, y0]);
+      line([x1, y0], [x1, y1]);
+      line([x1, y1], [x0, y1]);
+      line([x0, y1], [x0, y0]);
+    }
+    function spring(x, y0, y1) {
+      var n = 5, yTop = y0 + 5, yBot = y1 - 5;
+      var step = (yBot - yTop) / (2 * n);
+      var pts = [[x, y0], [x, yTop]];
+      for (var k = 1; k <= 2 * n - 1; k++) {
+        pts.push([x + (k % 2 ? 11 : -11), yTop + k * step]);
+      }
+      pts.push([x, yBot]);
+      pts.push([x, y1]);
+      acts.push({ kind: 'stroke', pts: pts });
+    }
+    function tak(x0, x1, y) {
+      line([x0, y], [x1, y]);
+      for (var hx = x0 + 8; hx <= x1; hx += 16) line([hx, y], [hx - 8, y - 9]);
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* --- figurens geometri --- */
+    var takY = 56;
+    var sx = 120;                               /* seriekopplingen */
+    var px = 350, pa = px - 22, pb = px + 22;   /* parallellkopplingen */
+
+    /* ---- steg 1: rita kopplingarna ---- */
+    var b1 = figurBubble(270, [
+      [['Ritar fjädrarna efter varandra']],
+      [['(serie) och bredvid varandra']],
+      [['(parallellt), med samma vikt.']]
+    ]);
+    tanke(b1);
+    placeString('a)', sx - 70, takY - 16, s * 0.55, F * 0.55, acts);
+    tak(sx - 40, sx + 40, takY);
+    pause(120);
+    spring(sx, takY, takY + 80);
+    spring(sx, takY + 80, takY + 160);
+    pause(120);
+    rect(sx - 14, takY + 160, sx + 14, takY + 188);
+    pause(160);
+    placeString('b)', pa - 50, takY - 16, s * 0.55, F * 0.55, acts);
+    tak(pa - 24, pb + 24, takY);
+    pause(120);
+    spring(pa, takY, takY + 70);
+    spring(pb, takY, takY + 70);
+    pause(120);
+    rect(pa - 10, takY + 70, pb + 10, takY + 76);
+    rect(px - 14, takY + 76, px + 14, takY + 104);
+    stepEnd();
+
+    /* ---- steg 2: det vi vet (blått) ---- */
+    var b2 = figurBubble(250, [
+      [['Skriver in fjäderkonstanterna']],
+      [['och viktens massa.']]
+    ]);
+    tanke(b2);
+    placeString('k_1=30 N/m', sx + 20, takY + 46, s * 0.55, F * 0.55, acts, BLUE);
+    placeString('k_2=60 N/m', sx + 20, takY + 126, s * 0.55, F * 0.55, acts, BLUE);
+    placeString('m=0,50 kg', sx + 22, takY + 182, s * 0.55, F * 0.55, acts, BLUE);
+    pause(160);
+    placeString('k_1', pa - 44, takY + 42, s * 0.55, F * 0.55, acts, BLUE);
+    placeString('k_2', pb + 18, takY + 42, s * 0.55, F * 0.55, acts, BLUE);
+    placeString('m', px + 22, takY + 98, s * 0.55, F * 0.55, acts, BLUE);
+    stepEnd();
+
+    /* ---- a) resulterande fjäderkonstant i serie ---- */
+    var y = 372;
+    var adv = 1.7 * F;
+    var bw = 292;
+
+    var bS = bubble(120, bubbleTop(282), bw, [
+      [['a) Fjädrarna i serie beter sig']],
+      [['som en enda fjäder. Först tar']],
+      [['jag fram dess fjäderkonstant.']]
+    ]);
+    tanke(bS);
+    /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
+    placeString('a) Seriekopplade fjädrar', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.0 * F;
+    var xx = fracH('1', 'k_R', padL, y);
+    xx = placeString('=', xx + 0.1 * F, y, s, F, acts);
+    xx = fracH('1', 'k_1', xx, y);
+    xx = placeString('+', xx + 0.1 * F, y, s, F, acts);
+    fracH('1', 'k_2', xx, y);
+    stepEnd();
+
+    y += adv + 1.1 * F;
+    var bK1 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Fjäderkonstanterna i klammern.']]
+    ]);
+    tanke(bK1);
+    var klam1 = valueBracket(acts, ['k_1=30 N/m', 'k_2=60 N/m'],
+                             padL, y, s, F);
+    stepEnd();
+    y = klam1.yEnd;
+
+    y += adv + 1.4 * F;
+    var bI1 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Sätter in och skriver bråken']],
+      [['med samma nämnare, 60.']]
+    ]);
+    tanke(bI1);
+    xx = fracH('1', 'k_R', padL, y);
+    xx = placeString('=', xx + 0.1 * F, y, s, F, acts);
+    xx = fracH('1', '30', xx, y);
+    xx = placeString('+', xx + 0.1 * F, y, s, F, acts);
+    xx = fracH('1', '60', xx, y);
+    xx = placeString('=', xx + 0.1 * F, y, s, F, acts);
+    xx = fracH('2', '60', xx, y);
+    xx = placeString('+', xx + 0.1 * F, y, s, F, acts);
+    fracH('1', '60', xx, y);
+    stepEnd();
+
+    y += adv + 1.4 * F;
+    var bI2 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Lägger ihop täljarna och']],
+      [['förkortar med 3.']]
+    ]);
+    tanke(bI2);
+    xx = fracH('1', 'k_R', padL, y);
+    xx = placeString('=', xx + 0.1 * F, y, s, F, acts);
+    xx = fracH('3', '60', xx, y);
+    xx = placeString('=', xx + 0.1 * F, y, s, F, acts);
+    fracH('1', '20', xx, y);
+    stepEnd();
+
+    y += adv + 1.0 * F;
+    var bI3 = bubble(140, bubbleTop(y - adv + 0.3 * F), bw, [
+      [['Båda leden är 1 delat med']],
+      [['något. Då är nämnarna lika.']]
+    ]);
+    tanke(bI3);
+    placeString('k_R=20 N/m', padL, y, s, F, acts);
+    stepEnd();
+
+    /* ---- Hookes lag ---- */
+    y += adv + 1.4 * F;
+    var bH = bubble(120, bubbleTop(y - adv), bw, [
+      [['Vikten hänger stilla: fjäder-']],
+      [['kraften är lika stor som tyngden.']],
+      [['Hookes lag ger förlängningen.']]
+    ]);
+    tanke(bH);
+    placeString('Hookes lag ger förlängningen', padL, y,
+                s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.0 * F;
+    xx = placeString('F=k_R·Δl⟺Δl=', padL, y, s, F, acts);
+    fracH('F', 'k_R', xx, y);
+    stepEnd();
+
+    y += adv + 1.1 * F;
+    var bK2 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Kraften på fjädrarna är viktens']],
+      [['tyngd. Den räknas ut direkt i']],
+      [['klammern.']]
+    ]);
+    tanke(bK2);
+    var klam2 = valueBracket(acts,
+      ['F=m·g=0,50 kg·9,82 N/kg=4,91 N', 'k_R=20 N/m'],
+      padL, y, s, F);
+    stepEnd();
+    y = klam2.yEnd;
+
+    y += adv + 1.2 * F;
+    var bI4 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]);
+    tanke(bI4);
+    xx = placeString('Δl=', padL, y, s, F, acts);
+    var xe1 = fracH('4,91', '20', xx, y);
+    var xIns1 = placeString('=0,2455 m', xe1 + 0.15 * F, y, s, F, acts);
+    stepEnd();
+
+    var bAvr1 = bubble(140, bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag. Givna']],
+      [['värden har två värdesiffror.']]
+    ]);
+    tanke(bAvr1);
+    var avrA = '≈0,25 m';
+    if (xIns1 + stringAdvance(avrA, s, F) < PAPER_W - 34) {
+      placeString(avrA, xIns1, y, s, F, acts);
+    } else {
+      y += adv + 1.0 * F;
+      placeString(avrA, padL, y, s, F, acts);
+    }
+    stepEnd();
+
+    y += adv + 1.0 * F;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    var bR1 = bubble(120, bubbleTop(y - adv + 0.32 * F), bw, [
+      [['Seriekopplingen är mjukare än']],
+      [['båda fjädrarna. En kvarts meter']],
+      [['för ett halvt kilo är rimligt!']]
+    ]);
+    tanke(bR1);
+    var xeA = placeString('Svar: 0,25 m', padL, y, s, F, acts);
+    underline(xeA, y);
+    stepEnd();
+
+    /* ---- b) parallellkopplade ---- */
+    y += adv + 1.4 * F;
+    var bP = bubble(120, bubbleTop(y - adv), bw, [
+      [['b) Bredvid varandra förlängs']],
+      [['fjädrarna lika mycket och delar']],
+      [['på kraften. Konstanterna adderas.']]
+    ]);
+    tanke(bP);
+    placeString('b) Parallellkopplade fjädrar', padL, y,
+                s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 2.0 * F;
+    placeString('k_R=k_1+k_2=30+60=90 N/m', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 1.4 * F;
+    var bI5 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Samma tyngd som i a), nu med']],
+      [['den nya fjäderkonstanten.']]
+    ]);
+    tanke(bI5);
+    xx = placeString('Δl=', padL, y, s, F, acts);
+    var xe2 = fracH('F', 'k_R', xx, y);
+    xx = placeString('=', xe2 + 0.1 * F, y, s, F, acts);
+    var xe3 = fracH('4,91', '90', xx, y);
+    placeString('≈0,055 m', xe3 + 0.15 * F, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 1.0 * F;
+    var bR2 = bubble(120, bubbleTop(y - adv + 0.32 * F), bw, [
+      [['Parallellt är paret mycket']],
+      [['styvare, så förlängningen blir']],
+      [['bara några centimeter. Rimligt!']]
+    ]);
+    tanke(bR2);
+    var xeB = placeString('Svar: 0,055 m', padL, y, s, F, acts);
+    underline(xeB, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ---------------- scen: harmonisk svängning (fy2-2.3 Ex 1) ----------
    * y = 0,15 sin(10t): amplitud, svängningstid, hastighet som funktion av
    * t, maximal fart och acceleration. Figuren är ett y–t-diagram där de
@@ -57326,7 +57616,8 @@
                    kastboll: layoutKastboll, kasthojd: layoutKasthojd,
                    bordkula: layoutBordkula,
                    fjader: layoutFjader, fjaderenergi: layoutFjaderenergi,
-                   dampning: layoutDampning, harmonisk: layoutHarmonisk,
+                   dampning: layoutDampning,
+                   'kopplade-fjadrar': layoutKoppladeFjadrar, harmonisk: layoutHarmonisk,
                    periodfjader: layoutPeriodfjader,
                    massafjader: layoutMassafjader,
                    sekundpendel: layoutSekundpendel,

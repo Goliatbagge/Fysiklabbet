@@ -11369,6 +11369,22 @@ window.EXITTICKETS = {
       '132 % är hela förändringsfaktorn — själva ökningen är det som överstiger 100 %.',
     ],
   },
+  {
+    question: 'Efter en sänkning med 20 % kostar en tröja 360 kr. Vad kostade tröjan före sänkningen?',
+    choices: [
+      '288 kr',
+      '432 kr',
+      '450 kr',
+      '300 kr',
+    ],
+    correct: 2,
+    why: [
+      'Här har du sänkt 360 kr med 20 % en gång till. 360 kr är redan det nya priset.',
+      'Att lägga 20 % på 360 kr ger fel, eftersom sänkningen räknades på det gamla priset och inte på 360 kr.',
+      'Förändringsfaktorn är 0,80, och gamla värdet = nya värdet / förändringsfaktor = $360/0{,}80 = 450$ kr.',
+      'Att dividera med 1,20 vore att ta bort en höjning med 20 %, inte en sänkning.',
+    ],
+  },
 ],
 
 'ma1c-3.3': [

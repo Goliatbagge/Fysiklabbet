@@ -1,0 +1,1577 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Fackverkslabbet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: fullskärmscanvas (scenen) med svävande glaspaneler: verktyg vänster, analys höger, material/vikter nederst. Medvetet ett enda mörkt spel-UI över en ljus himmel. */
+:root{
+  --ink:#0d1422;           /* panelbas */
+  --glass:rgba(14,21,36,.80);
+  --glass-hi:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.10);
+  --text:#eef3fb;
+  --muted:#9eabc2;
+  --amber:#ffb02e;         /* accent: byggarnas gula */
+  --amber-deep:#f07b16;
+  --steel:#5ec8f2;
+  --good:#34d399; --warn:#facc15; --bad:#ef4444;
+  --f-display:"Fredoka","Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Figtree","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden;background:#20345a;color:var(--text);font-family:var(--f-body);font-size:14px;-webkit-font-smoothing:antialiased}
+canvas#cv{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}
+.hidden{display:none!important}
+.glass{background:var(--glass);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 34px rgba(5,10,25,.35)}
+button{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:7px;background:var(--glass-hi);border:1px solid transparent;border-radius:10px;padding:7px 11px;cursor:pointer;font-weight:600;font-size:13px;white-space:nowrap;transition:background .15s,transform .1s}
+.btn:hover{background:rgba(255,255,255,.14)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible,.tool:focus-visible,select:focus-visible,.wchip:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.btn.icon{padding:7px 8px}
+.btn svg,.tool svg{width:18px;height:18px;flex:none}
+.btn.sm{padding:5px 9px;font-size:12px}
+.btn[disabled]{opacity:.35;pointer-events:none}
+
+/* ---------- topbar ---------- */
+#top{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:10px;right:10px;height:52px;display:flex;align-items:center;gap:10px;padding:0 10px;z-index:5}
+.brand{display:flex;align-items:center;gap:9px;font-family:var(--f-display);font-weight:700;font-size:20px;letter-spacing:.2px;padding-right:8px;margin-right:4px;border-right:1px solid var(--line)}
+.brand svg{width:34px;height:34px}
+.brand small{display:block;font-family:var(--f-body);font-weight:500;font-size:11px;color:var(--muted);letter-spacing:.3px;margin-top:-3px}
+.tb{display:flex;align-items:center;gap:4px}
+.tb.right{margin-left:auto}
+.btn.primary{background:linear-gradient(180deg,#ffc04d,var(--amber-deep));color:#2a1600}
+.btn.primary:hover{filter:brightness(1.08)}
+
+/* ---------- tools ---------- */
+#tools{position:fixed;left:10px;top:calc(74px + env(safe-area-inset-top,0px));width:74px;padding:7px;display:flex;flex-direction:column;gap:5px;z-index:5}
+.tool{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 2px 7px;border-radius:11px;background:transparent;border:1px solid transparent;cursor:pointer;font-size:11.5px;font-weight:600;color:var(--muted);transition:background .15s,color .15s}
+.tool svg{width:24px;height:24px}
+.tool:hover{background:var(--glass-hi);color:var(--text)}
+.tool.on{background:linear-gradient(180deg,rgba(255,176,46,.95),rgba(240,123,22,.95));color:#271400;box-shadow:0 4px 14px rgba(255,150,30,.35)}
+.tool kbd{position:absolute;top:3px;right:5px;font-family:var(--f-mono);font-size:9px;opacity:.55}
+
+/* ---------- right panel ---------- */
+#panel{position:fixed;right:10px;top:calc(74px + env(safe-area-inset-top,0px));bottom:10px;width:300px;padding:14px;z-index:5;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
+#panel::-webkit-scrollbar{width:6px}#panel::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:3px}
+.ph{font-family:var(--f-display);font-weight:600;font-size:15px;letter-spacing:.3px;display:flex;align-items:center;justify-content:space-between;margin:0}
+.lbl{font-size:10.5px;letter-spacing:.9px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat{background:rgba(255,255,255,.045);border-radius:11px;padding:8px 10px;min-width:0}
+.stat.wide{grid-column:1/-1}
+.stat b{display:block;font-family:var(--f-mono);font-size:15px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stat.hero{background:linear-gradient(135deg,rgba(255,176,46,.16),rgba(255,176,46,.04));border:1px solid rgba(255,176,46,.25)}
+.stat.hero b{font-size:21px;color:#ffd27a}
+.stat small{display:block;color:var(--muted);font-size:11.5px;margin-top:2px;line-height:1.35}
+.meter{height:9px;border-radius:5px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:6px}
+.meter i{display:block;height:100%;width:0;border-radius:5px;transition:width .15s,background .15s}
+.status{display:flex;gap:9px;align-items:flex-start;padding:9px 11px;border-radius:11px;font-size:12.5px;line-height:1.4;font-weight:500}
+.status svg{width:18px;height:18px;flex:none;margin-top:1px}
+.status.ok{background:rgba(52,211,153,.12);color:#a7f3d0}
+.status.warn{background:rgba(250,204,21,.13);color:#fde68a}
+.status.bad{background:rgba(239,68,68,.16);color:#fecaca}
+.bigbtn{width:100%;justify-content:center;padding:12px;font-family:var(--f-display);font-size:16px;font-weight:600;border-radius:13px;letter-spacing:.2px}
+.bigbtn.fire{background:linear-gradient(180deg,#ff6a3d,#d7261e);color:#fff;box-shadow:0 6px 20px rgba(230,50,30,.35)}
+.bigbtn.fire:hover{filter:brightness(1.1)}
+.bigbtn.truck{background:linear-gradient(180deg,#3fb7e8,#1e6fb8);color:#fff;box-shadow:0 6px 20px rgba(30,120,200,.3)}
+.bigbtn.truck:hover{filter:brightness(1.1)}
+.bigbtn.reset{background:rgba(255,255,255,.1)}
+.trow{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.trow input[type=range]{flex:1;accent-color:var(--steel)}
+.trow b{font-family:var(--f-mono);color:var(--text);min-width:58px;text-align:right}
+.seg{display:flex;background:rgba(255,255,255,.06);border-radius:10px;padding:3px;gap:2px}
+.seg button{flex:1;border:0;background:transparent;border-radius:8px;padding:6px 4px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer}
+.seg button.on{background:rgba(255,255,255,.16);color:var(--text)}
+.legend{height:10px;border-radius:5px;margin-top:4px}
+.legendlbl{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:10.5px;color:var(--muted);margin-top:3px}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px}
+.chk{display:flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer;user-select:none}
+.chk input{accent-color:var(--amber);width:15px;height:15px}
+.selrow{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12.5px}
+select{background:rgba(255,255,255,.08);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:6px 8px;font:inherit;font-size:12.5px;cursor:pointer}
+select option{background:#16203a}
+.firstfail{border-left:3px solid var(--bad);background:rgba(239,68,68,.1);border-radius:8px;padding:8px 10px;font-size:12.5px;line-height:1.45}
+
+/* ---------- tray ---------- */
+#tray{position:fixed;left:94px;right:320px;bottom:10px;min-height:66px;padding:9px 12px;display:flex;align-items:center;gap:12px;z-index:5;flex-wrap:wrap}
+.grp{display:flex;flex-direction:column;gap:5px}
+.grp .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.sep{width:1px;align-self:stretch;background:var(--line)}
+.matdot{width:12px;height:12px;border-radius:4px;display:inline-block;border:1px solid rgba(0,0,0,.4)}
+.chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer;font-size:12.5px;font-weight:600;user-select:none}
+.chip.on{background:rgba(255,176,46,.22);border-color:rgba(255,176,46,.6);color:#ffe0a6}
+.chip svg{width:16px;height:16px}
+#weights{display:flex;gap:6px;flex-wrap:wrap}
+.wchip{display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px 8px 4px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid transparent;cursor:grab;user-select:none;touch-action:none;min-width:48px}
+.wchip:hover{background:rgba(255,255,255,.12)}
+.wchip.on{border-color:var(--amber);background:rgba(255,176,46,.16)}
+.wchip svg{width:24px;height:24px}
+.wchip span{font-family:var(--f-mono);font-size:11px;font-weight:700}
+#hint{position:fixed;left:94px;right:320px;bottom:84px;text-align:center;font-size:12.5px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6);pointer-events:none;z-index:4;font-weight:500}
+#hint b{color:#ffd27a}
+
+/* ---------- overlays ---------- */
+#hud{position:fixed;top:calc(74px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);padding:8px 16px;z-index:6;font-family:var(--f-display);font-size:16px;font-weight:600;display:flex;gap:14px;align-items:center;pointer-events:none}
+#hud .v{font-family:var(--f-mono);color:#ffd27a}
+#banner{position:fixed;top:calc(124px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);width:min(460px,calc(100vw - 32px));padding:16px 18px;z-index:7;animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
+#banner h2{font-family:var(--f-display);font-size:22px;margin:0 0 6px;font-weight:700}
+#banner p{margin:0 0 10px;line-height:1.5;color:#d6deeb}
+#banner .row{display:flex;gap:8px;flex-wrap:wrap}
+@keyframes pop{from{transform:translateX(-50%) scale(.85);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}
+#tip{position:fixed;z-index:8;padding:9px 11px;pointer-events:none;font-size:12.5px;line-height:1.5;max-width:270px;border-radius:12px}
+#tip h4,#card h4{margin:0 0 4px;font-family:var(--f-display);font-size:14.5px;font-weight:600}
+#tip .k,#card .k{color:var(--muted)}
+#tip .n,#card .n{font-family:var(--f-mono);font-weight:700}
+.pill{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.4px}
+.pill.t{background:rgba(255,140,66,.25);color:#ffc29a}
+.pill.c{background:rgba(78,168,255,.25);color:#b5dbff}
+.pill.z{background:rgba(255,255,255,.12);color:#ccd}
+#card{position:fixed;z-index:9;width:260px;padding:12px;font-size:12.5px;line-height:1.5;display:flex;flex-direction:column;gap:9px}
+#card .x{position:absolute;top:8px;right:8px;background:none;border:0;cursor:pointer;color:var(--muted);font-size:16px;line-height:1}
+#card .lr{display:flex;align-items:center;justify-content:space-between;gap:6px}
+#card .stepper{display:flex;align-items:center;gap:6px}
+#card .stepper b{font-family:var(--f-mono);min-width:64px;text-align:center}
+.btn.danger{background:rgba(239,68,68,.18);color:#fecaca}
+.btn.danger:hover{background:rgba(239,68,68,.3)}
+#ghost{position:fixed;z-index:20;pointer-events:none;transform:translate(-50%,-50%)}
+#ghost svg{width:44px;height:44px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.4))}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:30;background:rgba(6,10,20,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:16px}
+.mbox{width:min(980px,100%);max-height:calc(100vh - 32px);overflow:auto;padding:22px 24px}
+.mbox h2{font-family:var(--f-display);font-size:28px;margin:0;font-weight:700}
+.mbox .sub{color:var(--muted);margin:4px 0 16px;font-size:14px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.pcard{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:8px;cursor:pointer;text-align:left;transition:transform .15s,border-color .15s,background .15s;display:flex;flex-direction:column;gap:6px}
+.pcard:hover{transform:translateY(-3px);border-color:rgba(255,176,46,.6);background:rgba(255,176,46,.08)}
+.pcard canvas{width:100%;height:auto;aspect-ratio:2/1;border-radius:9px;display:block}
+.pcard b{font-family:var(--f-display);font-size:16px;font-weight:600;padding:0 4px}
+.pcard span{color:var(--muted);font-size:12px;line-height:1.4;padding:0 4px 4px}
+.pcard .tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#ffd27a;padding:0 4px}
+.help{line-height:1.6;color:#d8e0ee;font-size:14px}
+.help h3{font-family:var(--f-display);font-size:18px;margin:18px 0 6px;color:#fff;font-weight:600}
+.help p{margin:0 0 8px;max-width:72ch}
+.help ul{margin:0 0 8px;padding-left:20px;max-width:72ch}
+.help code,.help .f{font-family:var(--f-mono);background:rgba(255,255,255,.08);padding:1px 6px;border-radius:5px;font-size:13px}
+.help .cols{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
+.help table{border-collapse:collapse;font-size:12.5px;margin:6px 0 10px}
+.help td,.help th{padding:4px 10px;border-bottom:1px solid var(--line);text-align:left;font-variant-numeric:tabular-nums}
+.help th{color:var(--muted);font-weight:600}
+.tw{overflow-x:auto}
+
+body.nopanel #panel{display:none}
+body.nopanel #tray,body.nopanel #hint{right:10px}
+@media (max-width:1000px){
+  .brand small,.tb .btn .t{display:none}
+  #panel{width:270px}
+  #tray,#hint{right:290px}
+}
+@media (max-width:760px){
+  #tools{width:58px}.tool{font-size:0}.tool kbd{display:none}
+  #tray,#hint{left:76px;right:10px}
+  #panel{left:76px;width:auto;top:auto;max-height:55vh;bottom:96px}
+  .brand span{display:none}
+  .help .cols{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){#banner{animation:none}.pcard{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+
+<header id="top" class="glass">
+  <div class="brand">
+    <svg viewBox="0 0 40 40"><rect x="1" y="1" width="38" height="38" rx="10" fill="#ffb02e"/><path d="M6 27h28M8 27l6-11 6 11 6-11 6 11M14 16h12" stroke="#2a1600" stroke-width="2.6" fill="none" stroke-linejoin="round" stroke-linecap="round"/><circle cx="14" cy="16" r="2" fill="#2a1600"/><circle cx="26" cy="16" r="2" fill="#2a1600"/></svg>
+    <div><span>Fackverkslabbet</span><small>Bygg · belasta · se var det brister</small></div>
+  </div>
+  <div class="tb">
+    <button class="btn primary" id="bPresets"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span class="t">Mallar</span></button>
+    <button class="btn icon" id="bUndo" title="Ångra (Ctrl+Z)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg></button>
+    <button class="btn icon" id="bRedo" title="Gör om (Ctrl+Y)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H9a5 5 0 0 0 0 10h3"/></svg></button>
+    <button class="btn icon" id="bFit" title="Anpassa vy (F)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    <button class="btn" id="bClear" title="Börja om med tom ritning"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg><span class="t">Rensa</span></button>
+  </div>
+  <div class="tb right">
+    <button class="btn icon" id="bSave" title="Spara konstruktionen som fil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg></button>
+    <button class="btn icon" id="bOpen" title="Öppna sparad fil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h6l2 2h10v10H3z"/></svg></button>
+    <button class="btn icon" id="bShot" title="Spara bild (PNG)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></button>
+    <button class="btn icon" id="bSound" title="Ljud på/av"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h4l5 4V6l-5 4z"/><path id="sndWave" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg></button>
+    <button class="btn" id="bHelp" title="Hjälp och teori"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17h.01"/></svg><span class="t">Hjälp &amp; teori</span></button>
+    <button class="btn icon" id="bPanel" title="Visa/dölj analyspanelen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></svg></button>
+  </div>
+</header>
+
+<nav id="tools" class="glass">
+  <button class="tool on" data-tool="build" title="Bygg (1)"><kbd>1</kbd><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="5" r="2.5"/><path d="M7 17 17 7"/></svg>Bygg</button>
+  <button class="tool" data-tool="move" title="Flytta (2)"><kbd>2</kbd><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3M3 12l3-3M3 12l3 3M21 12l-3-3M21 12l-3 3"/></svg>Flytta</button>
+  <button class="tool" data-tool="erase" title="Sudda (3)"><kbd>3</kbd><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><path d="m15 4 5 5-9 9H6l-2-2a2 2 0 0 1 0-3z"/><path d="M10 9l5 5M6 18h14"/></svg>Sudda</button>
+  <button class="tool" data-tool="support" title="Stöd (4)"><kbd>4</kbd><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><path d="M12 5 6 15h12z"/><path d="M3 19h18"/><circle cx="12" cy="5" r="1.6" fill="currentColor"/></svg>Stöd</button>
+  <button class="tool" data-tool="load" title="Vikter (5)"><kbd>5</kbd><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M9 7a3 3 0 1 1 6 0"/><path d="M6.5 9h11l2 11h-15z"/></svg>Vikter</button>
+</nav>
+
+<aside id="panel" class="glass">
+  <div class="ph">Analys <span class="lbl" id="modeLbl">Byggläge</span></div>
+  <div id="status" class="status ok"></div>
+  <div class="stats">
+    <div class="stat"><div class="lbl">Pålagd last</div><b id="sLoad">–</b></div>
+    <div class="stat"><div class="lbl">Brons egenvikt</div><b id="sSelf">–</b></div>
+    <div class="stat wide"><div class="lbl">Högsta utnyttjande</div><div class="meter"><i id="sMeter"></i></div><b id="sMax">–</b><small id="sCrit"></small></div>
+    <div class="stat wide hero"><div class="lbl">Beräknad brottlast</div><b id="sBreak">–</b><small id="sBreakNote"></small></div>
+    <div class="stat wide"><div class="lbl">Bärförmåga / egenvikt</div><b id="sRatio">–</b><small>Hur många gånger sin egen vikt bron bär innan första stav går. Högre = effektivare.</small></div>
+  </div>
+  <div id="firstFail" class="firstfail hidden"></div>
+  <button class="btn bigbtn fire" id="bTest">Belasta tills det går sönder</button>
+  <button class="btn bigbtn truck" id="bTruck">Kör lastbil över bron</button>
+  <div class="trow"><span id="truckName">Lastbil</span><input type="range" id="truckMass" min="0" max="1000" value="500" aria-label="Fordonets vikt"><b id="truckLbl">10 t</b></div>
+  <button class="btn bigbtn reset hidden" id="bReset">Återställ bron</button>
+
+  <div class="ph" style="margin-top:4px">Visa</div>
+  <div class="seg" id="colorSeg">
+    <button data-v="util" class="on">Utnyttjande</button>
+    <button data-v="tc">Drag/tryck</button>
+    <button data-v="mat">Material</button>
+  </div>
+  <div id="legendBox">
+    <div class="legend" id="legend"></div>
+    <div class="legendlbl" id="legendLbl"><span>0 %</span><span>50 %</span><span>100 % = brott</span></div>
+  </div>
+  <div class="checks">
+    <label class="chk"><input type="checkbox" id="cForces"> Krafter i siffror</label>
+    <label class="chk"><input type="checkbox" id="cReact" checked> Stödreaktioner</label>
+    <label class="chk"><input type="checkbox" id="cSelf" checked> Egenvikt</label>
+    <label class="chk"><input type="checkbox" id="cSnap" checked> Fäst mot rutnät</label>
+  </div>
+  <div class="selrow"><span>Deformation</span>
+    <select id="deformSel"><option value="auto">Förstorad</option><option value="real">Verklig storlek</option><option value="off">Av</option></select>
+  </div>
+  <div class="selrow"><span>Skala</span><select id="scaleSel"></select></div>
+</aside>
+
+<footer id="tray" class="glass">
+  <div class="grp">
+    <div class="lbl">Material för nya stavar</div>
+    <div class="row"><span class="matdot" id="matDot"></span><select id="matSel" aria-label="Material"></select>
+      <button class="btn sm" id="bAllMat" title="Ge alla stavar detta material">Alla stavar</button></div>
+  </div>
+  <div class="grp">
+    <div class="lbl">Typ</div>
+    <div class="row"><button class="chip" id="bRoad" title="Nya stavar blir vägbana som fordon kan köra på"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 16h18M3 12h18"/><path d="M6 14h2M11 14h2M16 14h2"/></svg>Vägbana</button></div>
+  </div>
+  <div class="sep"></div>
+  <div class="grp" style="min-width:0">
+    <div class="lbl">Vikter · dra till en knutpunkt</div>
+    <div id="weights"></div>
+  </div>
+</footer>
+<div id="hint"></div>
+
+<div id="hud" class="glass hidden"></div>
+<div id="banner" class="glass hidden"></div>
+<div id="tip" class="glass hidden"></div>
+<div id="card" class="glass hidden"></div>
+<div id="ghost" class="hidden"></div>
+<input type="file" id="fileIn" accept=".json,application/json" hidden>
+
+<div id="presetModal" class="modal hidden">
+  <div class="mbox glass">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+      <div><h2>Välj ett fackverk att börja med</h2>
+      <p class="sub">Klassiska brotyper med vikter redan utlagda. Ändra fritt, eller välj en tom ritning och bygg ditt eget.</p></div>
+      <button class="btn icon" data-close aria-label="Stäng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="pgrid" id="pgrid"></div>
+  </div>
+</div>
+
+<div id="helpModal" class="modal hidden">
+  <div class="mbox glass help">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+      <h2>Så funkar Fackverkslabbet</h2>
+      <button class="btn icon" data-close aria-label="Stäng"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="cols">
+      <div>
+        <h3>Bygga</h3>
+        <ul>
+          <li><b>Dra</b> från en knutpunkt (eller från tom yta) för att bygga en stav.</li>
+          <li><b>Klicka</b> på en stav eller knutpunkt för att byta material, stöd eller vikt.</li>
+          <li><b>Dubbelklicka</b> på en stav för att dela den på mitten.</li>
+          <li><b>Högerklick</b> tar bort det du pekar på. <b>Ctrl+Z</b> ångrar.</li>
+          <li>Håll <b>Shift</b> för att bygga utan att fästa mot rutnätet.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Navigera och testa</h3>
+        <ul>
+          <li><b>Scrolla</b> för att zooma, <b>mellanknapp</b> eller <b>mellanslag + dra</b> för att panorera. <b>F</b> anpassar vyn.</li>
+          <li><b>Belasta tills det går sönder</b> ökar alla vikter lika mycket tills stavarna ger efter en efter en.</li>
+          <li><b>Kör lastbil</b> kräver stavar markerade som vägbana.</li>
+          <li>Tangenter: <code>1</code>–<code>5</code> verktyg, <code>T</code> test, <code>L</code> lastbil, <code>R</code> återställ.</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Vad räknar simulatorn ut?</h3>
+    <p>Fackverket räknas som ett <b>idealt fackverk</b>: stavarna är raka och sitter ihop i friktionsfria leder, och all last angriper i knutpunkterna. Då tar varje stav bara upp en <b>normalkraft</b> längs sin egen riktning, antingen <span class="pill t">DRAG</span> eller <span class="pill c">TRYCK</span>.</p>
+    <p>Krafterna beräknas med <b>förskjutningsmetoden</b> (styvhetsmetoden). Varje stav är en fjäder med styvheten <span class="f">k = EA/L</span>. Programmet ställer upp jämvikt i alla knutpunkter samtidigt, <span class="f">K·u = F</span>, löser ut förskjutningarna <span class="f">u</span> och får kraften i varje stav ur hur mycket den förlängs. Metoden klarar även statiskt obestämda fackverk, där knutpunktsmetoden från fysikboken inte räcker.</p>
+    <h3>När går en stav sönder?</h3>
+    <ul>
+      <li><b>Dragbrott:</b> stavkraften når <span class="f">N = f<sub>t</sub>·A</span> (draghållfasthet × tvärsnittsarea).</li>
+      <li><b>Knäckning:</b> en tryckt stav viker ut åt sidan vid Eulers knäcklast <span class="f">P<sub>k</sub> = π²EI/L²</span>. Dubbelt så lång stav ⇒ en fjärdedel av bärförmågan. Därför ritas tryckta stavar nära knäckning lite böjda.</li>
+      <li><b>Tryckbrott:</b> korta, tjocka tryckstavar krossas vid <span class="f">f<sub>c</sub>·A</span> innan de hinner knäckas.</li>
+    </ul>
+    <p><b>Utnyttjandegraden</b> är stavkraft delat med kapacitet. Vid 0 % är staven grön, sedan gul och orange, och vid 100 % röd och på väg att gå. Eftersom modellen är linjär blir den beräknade brottlasten <span class="f">din last / högsta utnyttjandegrad</span>.</p>
+    <p>När en stav går sönder räknas allt om utan den. Ibland tar de andra stavarna över lasten, ibland blir fackverket en <b>mekanism</b> som kan röra sig fritt, och då rasar det. Raset visas med en enkel fysiksimulering.</p>
+    <h3>Material i simulatorn</h3>
+    <div class="tw"><table id="matTable"></table></div>
+    <h3>Begränsningar att diskutera i ett gymnasiearbete</h3>
+    <ul>
+      <li>Fogar (lim, skruv, nitar) antas aldrig gå sönder. I riktiga modellbroar brister ofta limfogarna först.</li>
+      <li>Euler gäller för perfekt raka stavar. Riktiga stavar är lite krokiga och knäcks tidigare.</li>
+      <li>Knäckning beräknas i fackverkets plan. Ut ur planet antas bron vara stagad.</li>
+      <li>Trä och pasta har stor spridning i hållfasthet. Materialvärdena är typiska medelvärden.</li>
+      <li>Lastbilen kör långsamt, så dynamiska effekter (stötar, svängningar) räknas inte med.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ============================================================
+   FACKVERKSLABBET – fackverkssimulator
+   Geometri lagras i rutor (cells); state.cell = meter per ruta.
+   ============================================================ */
+const G = 9.81;
+const $ = s => document.querySelector(s);
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+const lerp = (a,b,t) => a + (b-a)*t;
+
+const MATS = {
+  stal:  {name:'Stålrör 100×100×5',  E:210e9, A:1.90e-3, I:2.87e-6,  ft:355e6, fc:355e6, rho:7850, col:[160,178,198], w:1.0},
+  stal2: {name:'Stålrör 200×200×8',  E:210e9, A:6.14e-3, I:3.78e-5,  ft:355e6, fc:355e6, rho:7850, col:[120,140,166], w:1.4},
+  tra:   {name:'Limträ 90×225 mm',   E:13e9,  A:2.03e-2, I:1.37e-5,  ft:19e6,  fc:24e6,  rho:450,  col:[206,150,88],  w:1.25},
+  glass: {name:'Glasspinne 10×2 mm', E:10e9,  A:20e-6,   I:6.67e-12, ft:40e6,  fc:30e6,  rho:650,  col:[236,210,160], w:1.0},
+  grill: {name:'Grillpinne Ø3 mm',   E:15e9,  A:7.07e-6, I:3.98e-12, ft:120e6, fc:60e6,  rho:800,  col:[214,186,128], w:0.8},
+  balsa: {name:'Balsa 5×5 mm',       E:3e9,   A:25e-6,   I:5.21e-11, ft:15e6,  fc:10e6,  rho:160,  col:[242,228,192], w:0.95},
+  spag:  {name:'Spagetti Ø1,8 mm',   E:3.5e9, A:2.54e-6, I:5.15e-13, ft:20e6,  fc:20e6,  rho:1500, col:[245,212,104], w:0.6},
+};
+const SCALES = [0.02,0.05,0.1,0.25,0.5,1,2];
+
+/* ---------------- formatering ---------------- */
+const nf3 = x => (Math.abs(x) >= 1000 ? Math.round(x) : +x.toPrecision(3)).toLocaleString('sv-SE');
+function fmtForce(N){ const a=Math.abs(N); if(a>=1e6) return nf3(N/1e6)+' MN'; if(a>=1e3) return nf3(N/1e3)+' kN'; if(a>=1) return nf3(N)+' N'; if(a<1e-6) return '0 N'; return nf3(N*1000)+' mN'; }
+function fmtMass(kg){ if(!isFinite(kg)) return '∞'; const a=Math.abs(kg); if(a>=1000) return nf3(kg/1000)+' t'; if(a>=1) return nf3(kg)+' kg'; return nf3(kg*1000)+' g'; }
+function fmtLen(m){ return m>=1 ? nf3(m)+' m' : nf3(m*100)+' cm'; }
+function fmtPct(u){ return (u>=10?'>999':Math.round(u*100))+' %'; }
+function scaleLabel(c){ return '1 ruta = '+fmtLen(c); }
+
+/* ---------------- färger ---------------- */
+const UST=[[0,[52,211,153]],[0.35,[163,230,53]],[0.6,[250,204,21]],[0.8,[251,146,60]],[1,[239,68,68]]];
+function utilRGB(u){ if(u>1) return [190,24,24]; u=clamp(u,0,1);
+  for(let i=1;i<UST.length;i++) if(u<=UST[i][0]){ const [a,ca]=UST[i-1],[b,cb]=UST[i],t=(u-a)/(b-a); return ca.map((v,k)=>Math.round(v+(cb[k]-v)*t)); }
+  return UST[UST.length-1][1]; }
+const mix=(c1,c2,t)=>c1.map((v,i)=>Math.round(v+(c2[i]-v)*t));
+const rgb=(c,a=1)=>`rgba(${c[0]},${c[1]},${c[2]},${a})`;
+function tcRGB(N,u){ const base = N>0 ? [255,138,61] : [78,168,255]; return mix([200,208,220], base, clamp(u*1.6,0,1)); }
+
+/* ---------------- tillstånd ---------------- */
+let state = { cell:1, nodes:[], members:[], nextId:1, selfWeight:true };
+const ui = { tool:'build', mat:'stal', road:false, weightIdx:2, colorMode:'util', showForces:false, showReact:true,
+             deform:'auto', snap:true, sound:true, truckKg:10000, sel:null, hover:null };
+let nodeById = new Map(), memById = new Map();
+function reindex(){ nodeById = new Map(state.nodes.map(n=>[n.id,n])); memById = new Map(state.members.map(m=>[m.id,m])); }
+const memNo = m => state.members.indexOf(m)+1;
+const nodeNo = n => state.nodes.indexOf(n)+1;
+
+/* ---------------- historik ---------------- */
+const hist = {undo:[], redo:[]};
+const snapshot = () => JSON.stringify({cell:state.cell,nodes:state.nodes,members:state.members,nextId:state.nextId});
+function pushHist(){ hist.undo.push(snapshot()); if(hist.undo.length>150) hist.undo.shift(); hist.redo.length=0; updateUndoBtns(); }
+function restore(s){ const o=JSON.parse(s); state.cell=o.cell; state.nodes=o.nodes; state.members=o.members; state.nextId=o.nextId; changed(true); }
+function undo(){ if(!hist.undo.length) return; hist.redo.push(snapshot()); restore(hist.undo.pop()); updateUndoBtns(); }
+function redo(){ if(!hist.redo.length) return; hist.undo.push(snapshot()); restore(hist.redo.pop()); updateUndoBtns(); }
+function updateUndoBtns(){ $('#bUndo').disabled=!hist.undo.length; $('#bRedo').disabled=!hist.redo.length; }
+
+let dirty = true, An = null, saveTimer = 0, scaleChanged = false;
+function changed(structural){
+  reindex(); dirty = true;
+  if(sim.mode!=='build') resetSim();
+  if(ui.sel && !(ui.sel.kind==='node'?nodeById.get(ui.sel.id):memById.get(ui.sel.id))) closeCard();
+  clearTimeout(saveTimer); saveTimer = setTimeout(autosave, 400);
+  if(structural) syncScaleUI();
+}
+function autosave(){ try{ localStorage.setItem('fackverkslabbet-v1', snapshot()); }catch(e){} }
+
+/* ---------------- modelleditering ---------------- */
+function addNode(x,y){ const n={id:state.nextId++, x, y, support:0, load:0}; state.nodes.push(n); nodeById.set(n.id,n); return n; }
+function nodeAt(x,y,tol=1e-6){ for(const n of state.nodes) if(Math.abs(n.x-x)<tol && Math.abs(n.y-y)<tol) return n; return null; }
+function hasMember(a,b){ return state.members.some(m=>(m.a===a&&m.b===b)||(m.a===b&&m.b===a)); }
+function addMember(a,b){ if(a===b||hasMember(a,b)) return null; const m={id:state.nextId++, a, b, mat:ui.mat, road:ui.road}; state.members.push(m); memById.set(m.id,m); return m; }
+function deleteNode(id){ state.nodes=state.nodes.filter(n=>n.id!==id); state.members=state.members.filter(m=>m.a!==id&&m.b!==id); }
+function deleteMember(id){ const m=memById.get(id); state.members=state.members.filter(x=>x.id!==id);
+  if(m) for(const nid of [m.a,m.b]){ const n=nodeById.get(nid); if(n && !n.support && !n.load && !state.members.some(x=>x.a===nid||x.b===nid)) state.nodes=state.nodes.filter(k=>k.id!==nid); } }
+function splitMember(id){ const m=memById.get(id); if(!m) return; const A=nodeById.get(m.a),B=nodeById.get(m.b);
+  pushHist(); const n=addNode((A.x+B.x)/2,(A.y+B.y)/2); const keep={mat:m.mat,road:m.road};
+  state.members=state.members.filter(x=>x.id!==id);
+  for(const [p,q] of [[m.a,n.id],[n.id,m.b]]){ const k={id:state.nextId++,a:p,b:q,...keep}; state.members.push(k); }
+  changed(); Snd.place(); }
+
+/* ============================================================
+   ANALYS – direkta styvhetsmetoden med Cholesky
+   ============================================================ */
+const sim = { mode:'build', broken:new Map(), brokeT:new Map(), lambda:1, rate:0, lamCap:Infinity, wait:0, first:null,
+              maxU:0, maxUId:null, truck:null, parts:null, cons:null, ct:0, ts:1, frozen:null, defF:null, result:null, kind:null };
+
+function buildAnalysis(){
+  const cm=state.cell, nodes=state.nodes, nN=nodes.length;
+  const idx=new Map(); nodes.forEach((n,i)=>idx.set(n.id,i));
+  const deg=new Int32Array(nN), md=[];
+  for(const m of state.members){
+    if(sim.broken.has(m.id)) continue;
+    const ia=idx.get(m.a), ib=idx.get(m.b); if(ia==null||ib==null) continue;
+    const A=nodes[ia],B=nodes[ib], dx=(B.x-A.x)*cm, dy=(B.y-A.y)*cm, L=Math.hypot(dx,dy); if(L<1e-9) continue;
+    deg[ia]++; deg[ib]++;
+    const mat=MATS[m.mat]||MATS.stal, Pe=Math.PI*Math.PI*mat.E*mat.I/(L*L), Sq=mat.fc*mat.A;
+    md.push({id:m.id, m, ia, ib, L, c:dx/L, s:dy/L, k:mat.E*mat.A/L, Ct:mat.ft*mat.A, Cc:Math.min(Sq,Pe), Pe, Sq, buckle:Pe<Sq, mass:mat.rho*mat.A*L});
+  }
+  const dof=new Int32Array(2*nN).fill(-1); let nf=0;
+  for(let i=0;i<nN;i++){ if(!deg[i]) continue; const sp=nodes[i].support; if(sp!==1) dof[2*i]=nf++; if(sp===0) dof[2*i+1]=nf++; }
+  const K=new Float64Array(nf*nf);
+  for(const e of md){ const d=[dof[2*e.ia],dof[2*e.ia+1],dof[2*e.ib],dof[2*e.ib+1]], v=[-e.c,-e.s,e.c,e.s];
+    for(let p=0;p<4;p++){ if(d[p]<0) continue; for(let q=0;q<4;q++){ if(d[q]<0) continue; K[d[p]*nf+d[q]]+=e.k*v[p]*v[q]; } } }
+  let kref=0; for(let i=0;i<nf;i++) kref=Math.max(kref,K[i*nf+i]); if(!kref) kref=1;
+  const eps=kref*1e-11; for(let i=0;i<nf;i++) K[i*nf+i]+=eps;
+  let mechanism=false;
+  for(let j=0;j<nf;j++){
+    let sum=K[j*nf+j]; for(let k=0;k<j;k++) sum-=K[j*nf+k]*K[j*nf+k];
+    if(sum < kref*1e-7){ mechanism=true; if(sum<eps) sum=eps; }
+    const d=Math.sqrt(sum); K[j*nf+j]=d;
+    for(let i=j+1;i<nf;i++){ let s=K[i*nf+j]; for(let k=0;k<j;k++) s-=K[i*nf+k]*K[j*nf+k]; K[i*nf+j]=s/d; }
+  }
+  const A={nodes, nN, idx, md, dof, nf, L:K, deg, mechanism, kref, unstable:new Set(), floating:[]};
+  const dead=new Float64Array(2*nN), live=new Float64Array(2*nN);
+  if(state.selfWeight) for(const e of md){ const w=e.mass*G/2; dead[2*e.ia+1]-=w; dead[2*e.ib+1]-=w; }
+  nodes.forEach((n,i)=>{ if(n.load>0){ if(deg[i]) live[2*i+1]-=n.load*G; else A.floating.push(n.id); } });
+  A.selfMass=md.reduce((s,e)=>s+e.mass,0);
+  A.liveMass=nodes.reduce((s,n,i)=>s+(deg[i]?n.load:0),0);
+  A.supports=nodes.filter((n,i)=>n.support&&deg[i]).length;
+  A.dead=solveCase(A,dead); A.live=solveCase(A,live);
+  // Extra kontroll: en mekanism ger orimligt stora förskjutningar för en liten provlast
+  const probe=new Float64Array(2*nN); for(let i=0;i<2*nN;i++) probe[i]=(i%2?-1:0.37)+(i%7)*0.05;
+  const pr=nf?solveCase(A,probe):null; let pmx=0;
+  if(pr) for(let i=0;i<nN;i++) pmx=Math.max(pmx,Math.hypot(pr.u[2*i],pr.u[2*i+1]));
+  if(pr && pmx*kref>1e6*1.5) A.mechanism=mechanism=true;
+  if(mechanism){
+    for(let i=0;i<nN;i++) if(deg[i] && Math.hypot(pr.u[2*i],pr.u[2*i+1])>pmx*0.02) A.unstable.add(nodes[i].id);
+  }
+  A.crit=critLambda(A);
+  return A;
+}
+function cholSolve(L,nf,b){ const y=new Float64Array(b);
+  for(let i=0;i<nf;i++){ let s=y[i]; for(let k=0;k<i;k++) s-=L[i*nf+k]*y[k]; y[i]=s/L[i*nf+i]; }
+  for(let i=nf-1;i>=0;i--){ let s=y[i]; for(let k=i+1;k<nf;k++) s-=L[k*nf+i]*y[k]; y[i]=s/L[i*nf+i]; }
+  return y; }
+function solveCase(A,F){
+  const {nf,dof,md}=A, b=new Float64Array(nf);
+  for(let i=0;i<dof.length;i++) if(dof[i]>=0) b[dof[i]]+=F[i];
+  const x=nf?cholSolve(A.L,nf,b):b, u=new Float64Array(dof.length);
+  for(let i=0;i<dof.length;i++) if(dof[i]>=0) u[i]=x[dof[i]];
+  const N=new Float64Array(md.length);
+  md.forEach((e,j)=>{ N[j]=e.k*((u[2*e.ib]-u[2*e.ia])*e.c+(u[2*e.ib+1]-u[2*e.ia+1])*e.s); });
+  return {u,N,F};
+}
+function critLambda(A){
+  let best=Infinity, bj=-1, mode=null;
+  A.md.forEach((e,j)=>{ const D=A.dead.N[j], L=A.live.N[j]; let lam=Infinity, m=null;
+    const cm = e.buckle?'knack':'tryck';
+    if(D>=e.Ct){lam=0;m='drag';} else if(D<=-e.Cc){lam=0;m=cm;}
+    else if(L>1e-9*e.Ct){ lam=(e.Ct-D)/L; m='drag'; } else if(L<-1e-9*e.Cc){ lam=(-e.Cc-D)/L; m=cm; }
+    if(lam<best){best=lam;bj=j;mode=m;} });
+  return {lam:best, j:bj, mode, id: bj>=0?A.md[bj].id:null};
+}
+function getA(){ if(dirty||!An){ An=buildAnalysis(); dirty=false; } return An; }
+
+/* aktuellt lastfall (bygg / ramp / lastbil) */
+let caseCache=null, frameNo=0;
+function currentCase(){
+  if(caseCache && caseCache.f===frameNo && caseCache.A===getA()) return caseCache;
+  const A=getA(), n=A.md.length, lam=(sim.mode==='build')?1:sim.lambda;
+  let T=null;
+  if(sim.truck && (sim.mode==='truck' || (sim.mode==='done' && sim.kind==='truck' && !sim.parts))) T=solveCase(A, truckLoadVec(A));
+  const N=new Float64Array(n), u=new Float64Array(n), disp=new Float64Array(2*A.nN);
+  let maxU=0, maxJ=-1;
+  for(let j=0;j<n;j++){ const e=A.md[j]; N[j]=A.dead.N[j]+lam*A.live.N[j]+(T?T.N[j]:0); u[j]=N[j]>0?N[j]/e.Ct:-N[j]/e.Cc; if(u[j]>maxU){maxU=u[j];maxJ=j;} }
+  for(let i=0;i<2*A.nN;i++) disp[i]=A.dead.u[i]+lam*A.live.u[i]+(T?T.u[i]:0);
+  const F=new Float64Array(2*A.nN); for(let i=0;i<F.length;i++) F[i]=A.dead.F[i]+lam*A.live.F[i]+(T?T.F[i]:0);
+  const info=new Map(); A.md.forEach((e,j)=>info.set(e.id,{N:N[j],u:u[j],e}));
+  caseCache={f:frameNo, A, N, u, disp, F, maxU, maxJ, info, lam, T};
+  return caseCache;
+}
+function reactionsOf(C){ const A=C.A, R=new Map();
+  A.nodes.forEach((n,i)=>{ if(n.support&&A.deg[i]) R.set(n.id,[-C.F[2*i],-C.F[2*i+1]]); });
+  A.md.forEach((e,j)=>{ const N=C.N[j]; const na=A.nodes[e.ia], nb=A.nodes[e.ib];
+    if(R.has(na.id)){ const r=R.get(na.id); r[0]-=N*e.c; r[1]-=N*e.s; }
+    if(R.has(nb.id)){ const r=R.get(nb.id); r[0]+=N*e.c; r[1]+=N*e.s; } });
+  return R; }
+
+/* ============================================================
+   SIMULERING: ramp, lastbil, ras
+   ============================================================ */
+function resetSim(){
+  Object.assign(sim,{mode:'build', lambda:1, rate:0, wait:0, first:null, maxU:0, maxUId:null, truck:null, parts:null, cons:null, ct:0, frozen:null, defF:null, result:null, kind:null});
+  sim.broken.clear(); sim.brokeT.clear(); dirty=true; particles.length=0; floaters.length=0;
+  $('#banner').classList.add('hidden'); $('#hud').classList.add('hidden'); syncModeUI();
+}
+function preflight(){
+  const A=getA();
+  if(!A.md.length){ toast('Bygg något först','Dra mellan punkter för att skapa stavar, eller välj en mall.'); return false; }
+  return true;
+}
+function startRamp(){
+  if(sim.mode!=='build') resetSim();
+  if(!preflight()) return;
+  const A=getA();
+  if(!A.mechanism && A.liveMass<=0){ toast('Inga vikter att öka','Dra en vikt från lådan nedanför till en knutpunkt, och testa sedan igen.'); return; }
+  closeCard(); Snd.init();
+  sim.defF=deformFactor(); sim.mode='ramp'; sim.kind='ramp'; sim.lambda=0;
+  const l1=isFinite(A.crit.lam)?A.crit.lam:1;
+  sim.rate=Math.max(l1,1e-6)/3.0; sim.lamCap=Math.max(l1,1e-6)*4; sim.l1=l1;
+  syncModeUI();
+}
+function startTruck(){
+  if(sim.mode!=='build') resetSim();
+  if(!preflight()) return;
+  const road=roadInfo();
+  if(!road){ toast('Ingen vägbana','Markera stavarna som bilen ska köra på som vägbana: klicka på en stav och kryssa i ”Vägbana”, eller slå på Vägbana nedanför innan du bygger.'); return; }
+  closeCard(); Snd.init();
+  const wb=clamp(0.17*road.len, 1.2, 8);
+  sim.defF=deformFactor(); sim.mode='truck'; sim.kind='truck'; sim.lambda=1;
+  sim.truck={x:road.x0-wb*1.6, end:road.x1+wb*0.5, wb, v:(road.len+wb*2.2)/7, kg:ui.truckKg, free:null, spin:0};
+  syncModeUI(); Snd.engine(true);
+}
+function breakMember(id, mode){
+  const C=currentCase(), inf=C.info.get(id);
+  sim.broken.set(id, mode); sim.brokeT.set(id, time);
+  const m=memById.get(id);
+  if(!sim.first){
+    const A=getA();
+    sim.first={id, no:memNo(m), mode, N:inf?inf.N:0, cap:inf?(inf.N>0?inf.e.Ct:inf.e.Cc):0, lam:sim.lambda, load:A.liveMass*sim.lambda + (sim.truck?sim.truck.kg:0)};
+    shake=10; slowmo=0.5;
+  } else shake=Math.max(shake,5);
+  // effekter
+  const P=lastPos; const ia=state.nodes.findIndex(n=>n.id===m.a), ib=state.nodes.findIndex(n=>n.id===m.b);
+  if(P && ia>=0 && ib>=0){
+    const mx=(P[ia].x+P[ib].x)/2, my=(P[ia].y+P[ib].y)/2;
+    const col = inf? utilRGB(Math.min(inf.u,1)) : [239,68,68];
+    burst(mx,my,col,MATS[m.mat].col);
+    floaters.push({x:mx,y:my,t:0,text: mode==='drag'?'DRAGBROTT!':mode==='knack'?'KNÄCKNING!':'TRYCKBROTT!', col: mode==='drag'?'#ffb27a':'#9fd2ff'});
+  }
+  Snd.crack();
+  dirty=true;
+}
+function rampStep(dt){
+  if(sim.wait>0){ sim.wait-=dt; return; }
+  const A=getA();
+  if(A.mechanism){ startCollapse(); return; }
+  const c=A.crit;
+  if(!isFinite(c.lam) || c.lam>sim.lamCap){ sim.lambda=Math.min(sim.lambda+sim.rate*dt, sim.lamCap);
+    if(sim.lambda>=sim.lamCap-1e-12) finish('held'); return; }
+  if(c.lam<=sim.lambda+1e-12){ breakMember(c.id, c.mode); sim.wait=0.3; return; }
+  sim.lambda=Math.min(c.lam, sim.lambda+sim.rate*dt);
+}
+function truckStep(dt){
+  const tr=sim.truck; tr.spin+=dt*tr.v/(tr.wb*0.11);
+  if(sim.wait>0){ sim.wait-=dt; return; }
+  const A=getA();
+  if(A.mechanism){ startCollapse(); return; }
+  tr.x+=tr.v*dt;
+  const ax=truckAxles(A);
+  if(ax.some(a=>a.gap)){ startCollapse(); return; }
+  caseCache=null; const C=currentCase();
+  if(C.maxU>sim.maxU){ sim.maxU=C.maxU; sim.maxUId=C.maxJ>=0?A.md[C.maxJ].id:null; }
+  if(C.maxU>=1){ const e=A.md[C.maxJ]; breakMember(e.id, C.N[C.maxJ]>0?'drag':(e.buckle?'knack':'tryck')); sim.wait=0.22; return; }
+  if(tr.x>=tr.end) finish('truckOK');
+}
+function finish(kind){
+  sim.mode='done'; sim.result=kind; Snd.engine(false); syncModeUI(); showResult();
+}
+
+/* ---------- vägbana & lastbil ---------- */
+function roadSegs(useBroken){
+  const segs=[];
+  for(const m of state.members){ if(!m.road) continue; if(useBroken && sim.broken.has(m.id)) continue;
+    const A=nodeById.get(m.a),B=nodeById.get(m.b); if(!A||!B) continue; segs.push({m,A,B}); }
+  return segs; }
+function roadInfo(){ const s=roadSegs(false); if(!s.length) return null;
+  let x0=Infinity,x1=-Infinity; for(const g of s){ x0=Math.min(x0,g.A.x,g.B.x); x1=Math.max(x1,g.A.x,g.B.x); }
+  const yAt=x=>{ let best=-Infinity; for(const g of s){ const lo=Math.min(g.A.x,g.B.x),hi=Math.max(g.A.x,g.B.x); if(x>=lo-1e-9&&x<=hi+1e-9&&hi>lo){ const t=(x-g.A.x)/(g.B.x-g.A.x); best=Math.max(best,lerp(g.A.y,g.B.y,t)); } } return best; };
+  return {x0,x1,len:x1-x0,y0:yAt(x0),y1:yAt(x1)}; }
+function axleAt(x){
+  const segs=roadSegs(true); let best=null;
+  for(const g of segs){ const lo=Math.min(g.A.x,g.B.x),hi=Math.max(g.A.x,g.B.x); if(hi-lo<1e-9) continue;
+    if(x>=lo-1e-9&&x<=hi+1e-9){ const t=clamp((x-g.A.x)/(g.B.x-g.A.x),0,1), y=lerp(g.A.y,g.B.y,t); if(!best||y>best.y) best={m:g.m,t,y}; } }
+  return best; }
+function truckAxles(){
+  const tr=sim.truck, ri=roadInfo(); const out=[];
+  for(const x of [tr.x, tr.x+tr.wb]){
+    if(x<ri.x0) { out.push({x, ground:true, y:ri.y0}); continue; }
+    if(x>ri.x1) { out.push({x, ground:true, y:ri.y1}); continue; }
+    const a=axleAt(x); if(a) out.push({x, ...a}); else out.push({x, gap:true, y:ri.y0});
+  }
+  return out; }
+function truckLoadVec(A){
+  const F=new Float64Array(2*A.nN); if(!sim.truck) return F;
+  const W=sim.truck.kg*G/2;
+  for(const a of truckAxles()){ if(!a.m) continue; const ia=A.idx.get(a.m.a), ib=A.idx.get(a.m.b);
+    F[2*ia+1]-=W*(1-a.t); F[2*ib+1]-=W*a.t; }
+  return F; }
+
+/* ---------- ras (Verlet + avståndsvillkor) ---------- */
+function startCollapse(){
+  const C=currentCase(); sim.frozen=C.info;
+  const P=lastPos||state.nodes.map(n=>({x:n.x,y:n.y}));
+  const lam=sim.lambda;
+  const parts=state.nodes.map((n,i)=>({x:P[i].x,y:P[i].y,px:P[i].x,py:P[i].y,x0:P[i].x,y0:P[i].y,m:0,fx:n.support===1,fy:n.support>0,wet:false}));
+  const idx=new Map(state.nodes.map((n,i)=>[n.id,i]));
+  for(const m of state.members){ const mat=MATS[m.mat], a=idx.get(m.a), b=idx.get(m.b); const L=Math.hypot(state.nodes[a].x-state.nodes[b].x,state.nodes[a].y-state.nodes[b].y)*state.cell; const ms=mat.rho*mat.A*L/2; parts[a].m+=ms; parts[b].m+=ms; }
+  state.nodes.forEach((n,i)=>{ parts[i].m+=n.load*(sim.kind==='ramp'?lam:1); });
+  // lastbil
+  if(sim.truck){ const ax=truckAxles(); sim.truck.att=ax.map(a=>a.m?{id:a.m.id,a:idx.get(a.m.a),b:idx.get(a.m.b),t:a.t}:null);
+    ax.forEach((a,k)=>{ const at=sim.truck.att[k]; if(at){ parts[at.a].m+=sim.truck.kg/2*(1-at.t); parts[at.b].m+=sim.truck.kg/2*at.t; } });
+    if(ax.some(a=>a.gap)){ // bilen störtar fritt
+      const T=computeTerrain(); const ri=roadInfo();
+      sim.truck.free=ax.map(a=>({x:a.x,y:(a.gap?ri.y0:a.y),px:a.x-sim.truck.v*(1/60),py:(a.gap?ri.y0:a.y)}));
+      sim.truck.att=[null,null];
+    }
+  }
+  let mx=0; for(const p of parts) mx=Math.max(mx,p.m); for(const p of parts){ p.m=Math.max(p.m, mx*0.03, 1e-9); p.w=(p.fx&&p.fy)?0:1/p.m; }
+  for(const p of parts){ if(!(p.fx&&p.fy)){ p.px-= (Math.random()-0.5)*0.002; } }
+  const cons=[];
+  for(const m of state.members){ const a=idx.get(m.a), b=idx.get(m.b), br=sim.broken.get(m.id);
+    if(br==='drag'||br==='tryck') continue;
+    const L0=Math.hypot(state.nodes[a].x-state.nodes[b].x,state.nodes[a].y-state.nodes[b].y);
+    const mat=MATS[m.mat], Lm=L0*state.cell, Pe=Math.PI*Math.PI*mat.E*mat.I/(Lm*Lm), Sq=mat.fc*mat.A;
+    const base={a,b,id:m.id,Ct:mat.ft*mat.A,Cc:Math.min(Pe,Sq),buckle:Pe<Sq,over:0};
+    if(br==='knack') cons.push({...base,L:L0,max:true}); else cons.push({...base,L:Math.hypot(parts[a].x-parts[b].x,parts[a].y-parts[b].y)}); }
+  const T=computeTerrain();
+  sim.parts=parts; sim.cons=cons; sim.ct=0; sim.ts=clamp(Math.sqrt(T.span*state.cell/14),0.22,1);
+  sim.mode='collapse'; Snd.engine(false); Snd.rumble(); shake=Math.max(shake,8); syncModeUI();
+}
+function collapseStep(dt){
+  sim.ct+=dt; const T=computeTerrain();
+  const SUB=6, h=dt*sim.ts/SUB, g=G/state.cell;
+  const parts=sim.parts, cons=sim.cons;
+  const freeT=sim.truck&&sim.truck.free;
+  for(let s=0;s<SUB;s++){
+    for(const p of parts){ if(p.fy&&!p.fx&&groundY(T,p.x)<p.y0-0.05){ p.fy=false; p.w=1/p.m; } }
+    for(const p of parts){ if(p.fx&&p.fy) continue; const vx=(p.x-p.px)*0.998, vy=(p.y-p.py)*0.998; p.px=p.x; p.py=p.y; p.x+=vx; p.y+=vy-g*h*h; if(p.fx) p.x=p.x0; if(p.fy) p.y=p.y0; }
+    if(freeT) for(const p of freeT){ const vx=(p.x-p.px), vy=(p.y-p.py); p.px=p.x; p.py=p.y; p.x+=vx; p.y+=vy-g*h*h; }
+    for(const c of cons) c.acc=0;
+    for(let it=0;it<14;it++){
+      for(const c of cons){ if(c.dead) continue; const A=parts[c.a],B=parts[c.b]; const dx=B.x-A.x,dy=B.y-A.y,d=Math.hypot(dx,dy)||1e-9;
+        if(c.max && d<=c.L) continue; const wsum=A.w+B.w; if(!wsum) continue;
+        c.acc+=(d-c.L)/wsum;
+        const k=(d-c.L)/d/wsum; if(!(A.fx&&A.fy)){ if(!A.fx) A.x+=dx*k*A.w; if(!A.fy) A.y+=dy*k*A.w; }
+        if(!(B.fx&&B.fy)){ if(!B.fx) B.x-=dx*k*B.w; if(!B.fy) B.y-=dy*k*B.w; } }
+      if(freeT){ const A=freeT[0],B=freeT[1],dx=B.x-A.x,dy=B.y-A.y,d=Math.hypot(dx,dy)||1e-9,k=(d-sim.truck.wb)/d/2; A.x+=dx*k;A.y+=dy*k;B.x-=dx*k;B.y-=dy*k; }
+    }
+    // stavkrafter under raset (PBD: F ≈ m·Δ/h²) – överbelastade stavar brister
+    if(sim.ct>0.05) for(const c of cons){ if(c.dead||c.max) continue;
+      const F=c.acc*state.cell/(h*h);
+      const over = F>0 ? F>c.Ct : -F>c.Cc;
+      c.over = over ? c.over+1 : 0;
+      if(c.over>=3){ const mode=F>0?'drag':(c.buckle?'knack':'tryck');
+        if(mode==='knack'){ c.max=true; c.L=Math.hypot(state.nodes[c.a].x-state.nodes[c.b].x,state.nodes[c.a].y-state.nodes[c.b].y); } else c.dead=true;
+        collapseBreak(c.id,mode,(parts[c.a].x+parts[c.b].x)/2,(parts[c.a].y+parts[c.b].y)/2); } }
+    const all = freeT? parts.concat(freeT) : parts;
+    for(const p of all){
+      if(p.fx&&p.fy) continue;
+      if(!p.wet && p.y<T.river && p.py>=T.river){ p.wet=true; const sp=Math.abs(p.y-p.py)/h; if(sp>0.5) splash(p.x, T.river, sp); }
+      if(p.y<T.river){ p.x=lerp(p.px,p.x,0.985); p.y=lerp(p.py,p.y,0.985); }
+      const gy=groundY(T,p.x); if(p.y<gy){ p.y=gy; p.py=gy; p.px=lerp(p.px,p.x,0.6); }
+    }
+  }
+  if(sim.ct>5.5) finish('collapsed');
+}
+function collapseBreak(id,mode,x,y){
+  sim.broken.set(id,mode); sim.brokeT.set(id,time);
+  const m=memById.get(id); burst(x,y,[239,68,68],m?MATS[m.mat].col:[200,200,200]);
+  if(sim.broken.size<12) Snd.crack(); shake=Math.max(shake,4);
+}
+
+/* ============================================================
+   VY / KAMERA
+   ============================================================ */
+const cv=$('#cv'), ctx=cv.getContext('2d');
+let W=0,H=0,DPR=1;
+const view={x:12,y:3,s:40};
+let shake=0, slowmo=0, time=0;
+function resize(){ DPR=Math.min(window.devicePixelRatio||1,2); W=innerWidth; H=innerHeight; cv.width=W*DPR; cv.height=H*DPR; }
+addEventListener('resize',resize); resize();
+let shx=0,shy=0;
+const w2s=(x,y)=>[(x-view.x)*view.s+W/2+shx, H/2-(y-view.y)*view.s+shy];
+const s2w=(sx,sy)=>[(sx-W/2)/view.s+view.x, (H/2-sy)/view.s+view.y];
+function viewRect(){ const panel=!document.body.classList.contains('nopanel') && W>760;
+  const l=W>760?100:80, r=panel?(W>1000?320:290):16, t=78, b=W>760?150:120;
+  return {l,r,t,b}; }
+function fitView(){
+  const ns=state.nodes; let x0,x1,y0,y1;
+  if(!ns.length){ x0=0;x1=20;y0=-2;y1=5; }
+  else { x0=Math.min(...ns.map(n=>n.x)); x1=Math.max(...ns.map(n=>n.x)); y0=Math.min(...ns.map(n=>n.y)); y1=Math.max(...ns.map(n=>n.y)); }
+  const span=Math.max(x1-x0,4);
+  y0-= Math.max(span*0.12,1.8); y1+= Math.max(span*0.06,1);
+  x0-=span*0.08; x1+=span*0.08;
+  const r=viewRect(), aw=W-r.l-r.r, ah=H-r.t-r.b;
+  view.s=clamp(Math.min(aw/(x1-x0), ah/(y1-y0)), 3, 400);
+  const cxs=r.l+aw/2, cys=r.t+ah/2;
+  view.x=(x0+x1)/2-(cxs-W/2)/view.s; view.y=(y0+y1)/2+(cys-H/2)/view.s;
+}
+
+/* ---------- terräng ---------- */
+let terrainCache=null;
+function computeTerrain(){
+  const key=state.nodes.map(n=>n.support?`${n.x},${n.y},${n.support}`:'').join('|')+state.nodes.length+':'+(sim.parts?1:0);
+  if(terrainCache&&terrainCache.key===key&&!sim.parts) return terrainCache;
+  if(sim.parts && terrainCache && terrainCache.locked) return terrainCache;
+  const sup=state.nodes.filter(n=>n.support>0).sort((a,b)=>a.x-b.x);
+  let L,R,yL,yR;
+  if(sup.length>=2 && sup[sup.length-1].x-sup[0].x>1){ L=sup[0].x; R=sup[sup.length-1].x; yL=sup[0].y; yR=sup[sup.length-1].y; }
+  else if(state.nodes.length){ const xs=state.nodes.map(n=>n.x), ys=state.nodes.map(n=>n.y); L=Math.min(...xs); R=Math.max(...xs); yL=yR=Math.min(...ys); if(sup.length===1){ yL=yR=sup[0].y; } }
+  else { L=0;R=20;yL=yR=0; }
+  if(R-L<4){ const c=(L+R)/2; L=c-2; R=c+2; }
+  const span=R-L, minY=Math.min(yL,yR,...state.nodes.map(n=>n.y));
+  const river=minY-Math.max(0.3*span,3), bed=river-Math.max(0.05*span,0.8);
+  const lip=0.6, fw=Math.max(0.06*span,0.8);
+  terrainCache={key,L,R,yL,yR,span,river,bed,lip,fw,locked:!!sim.parts};
+  return terrainCache;
+}
+function groundY(T,x){
+  const a=T.L+T.lip, b=a+T.fw, d=T.R-T.lip, c=d-T.fw;
+  if(x<=a) return T.yL; if(x>=d) return T.yR;
+  if(x<b) return lerp(T.yL,T.bed,(x-a)/(b-a)); if(x>c) return lerp(T.bed,T.yR,(x-c)/(d-c)); return T.bed; }
+
+/* ============================================================
+   RITNING
+   ============================================================ */
+const clouds=Array.from({length:7},(_,i)=>({x:Math.random()*1.4,y:0.06+Math.random()*0.3,s:0.6+Math.random()*0.9,v:0.004+Math.random()*0.006}));
+const particles=[], floaters=[];
+let lastPos=null, weightHits=[], nodeScr=new Map(), memScr=new Map();
+
+function ridge(seed, base, amp, color, par){
+  ctx.beginPath(); ctx.moveTo(-10,H+10);
+  const off=view.x*view.s*par;
+  for(let x=-10;x<=W+20;x+=14){ const u=x+off;
+    const y=base-amp*(0.55*Math.sin(u*0.0042+seed)+0.3*Math.sin(u*0.011+seed*2.3)+0.15*Math.sin(u*0.027+seed*5.1));
+    ctx.lineTo(x,y); }
+  ctx.lineTo(W+20,H+10); ctx.closePath(); ctx.fillStyle=color; ctx.fill(); }
+
+function drawBackground(T){
+  const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#2f5fa8'); g.addColorStop(0.5,'#7fb3e3'); g.addColorStop(0.82,'#f2d9b0'); g.addColorStop(1,'#f6c995');
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  const sx=W*0.8, sy=H*0.2, rg=ctx.createRadialGradient(sx,sy,0,sx,sy,H*0.5);
+  rg.addColorStop(0,'rgba(255,246,214,0.95)'); rg.addColorStop(0.08,'rgba(255,236,190,0.75)'); rg.addColorStop(0.3,'rgba(255,220,170,0.18)'); rg.addColorStop(1,'rgba(255,220,170,0)');
+  ctx.fillStyle=rg; ctx.fillRect(0,0,W,H);
+  for(const c of clouds){ c.x+=c.v*0.016; if(c.x>1.25) c.x=-0.25;
+    const cx=((c.x - view.x*view.s*0.00003)%1.5+1.5)%1.5*W*0.9 - W*0.1, cy=c.y*H, s=c.s*60;
+    ctx.fillStyle='rgba(255,255,255,0.75)'; ctx.beginPath();
+    ctx.ellipse(cx,cy,s*1.2,s*0.42,0,0,7); ctx.ellipse(cx-s*0.6,cy+s*0.08,s*0.6,s*0.32,0,0,7); ctx.ellipse(cx+s*0.4,cy-s*0.18,s*0.62,s*0.42,0,0,7); ctx.fill();
+    ctx.fillStyle='rgba(190,200,230,0.25)'; ctx.beginPath(); ctx.ellipse(cx,cy+s*0.2,s*1.1,s*0.18,0,0,7); ctx.fill(); }
+  const hy=w2s(0,Math.min(T.yL,T.yR))[1];
+  ridge(1.3, lerp(H*0.5,hy,0.25)-10, 70, 'rgba(120,140,190,0.55)', 0.12);
+  ridge(4.1, lerp(H*0.62,hy,0.45)+10, 55, 'rgba(92,118,160,0.75)', 0.25);
+  ridge(7.7, lerp(H*0.72,hy,0.7)+30, 40, 'rgba(70,102,110,0.9)', 0.45);
+}
+
+function cliffPath(T, side){
+  const big=T.span*4+200;
+  const pts=[];
+  if(side<0){ const a=T.L+T.lip, b=a+T.fw;
+    pts.push([T.L-big,T.yL],[a,T.yL]);
+    const n=7; for(let i=1;i<n;i++){ const t=i/n; pts.push([lerp(a,b,t)+Math.sin(i*2.7)*T.fw*0.12, lerp(T.yL,T.bed,t)]); }
+    pts.push([b,T.bed],[b,T.bed-big],[T.L-big,T.bed-big]);
+  } else { const d=T.R-T.lip, c=d-T.fw;
+    pts.push([T.R+big,T.yR],[d,T.yR]);
+    const n=7; for(let i=1;i<n;i++){ const t=i/n; pts.push([lerp(d,c,t)-Math.sin(i*3.1)*T.fw*0.12, lerp(T.yR,T.bed,t)]); }
+    pts.push([c,T.bed],[c,T.bed-big],[T.R+big,T.bed-big]); }
+  ctx.beginPath(); pts.forEach((p,i)=>{ const s=w2s(p[0],p[1]); i?ctx.lineTo(s[0],s[1]):ctx.moveTo(s[0],s[1]); }); ctx.closePath();
+}
+function drawTerrain(T){
+  // flodbädd
+  const bt=w2s(0,T.bed)[1];
+  ctx.fillStyle='#3b4a3f'; ctx.fillRect(0,bt,W,H-bt+10);
+  for(const side of [-1,1]){
+    const top = side<0?T.yL:T.yR;
+    const gy0=w2s(0,top)[1], gy1=w2s(0,T.bed)[1];
+    const g=ctx.createLinearGradient(0,gy0,0,gy1+60); g.addColorStop(0,'#9a7b5c'); g.addColorStop(0.5,'#7a5f48'); g.addColorStop(1,'#4b3c33');
+    cliffPath(T,side); ctx.fillStyle=g; ctx.fill();
+    ctx.save(); cliffPath(T,side); ctx.clip();
+    ctx.strokeStyle='rgba(255,230,200,0.10)'; ctx.lineWidth=2;
+    const step=Math.max(14, view.s*0.7);
+    for(let y=gy0+step*0.7;y<gy1+40;y+=step){ ctx.beginPath(); ctx.moveTo(0,y); for(let x=0;x<=W;x+=40) ctx.lineTo(x,y+Math.sin(x*0.03+y)*3); ctx.stroke(); }
+    ctx.fillStyle='rgba(30,20,10,0.12)';
+    const edge = side<0 ? w2s(T.L+T.lip+T.fw,0)[0] : w2s(T.R-T.lip-T.fw,0)[0];
+    const rg=ctx.createLinearGradient(edge-side*60,0,edge,0); rg.addColorStop(0,'rgba(0,0,0,0)'); rg.addColorStop(1,'rgba(20,10,0,0.28)');
+    ctx.fillStyle=rg; ctx.fillRect(0,0,W,H);
+    ctx.restore();
+    // gräs
+    const a = side<0 ? w2s(T.L-T.span*4-200, top) : w2s(T.R-T.lip, top);
+    const b = side<0 ? w2s(T.L+T.lip, top) : w2s(T.R+T.span*4+200, top);
+    const gh=clamp(view.s*0.22,5,14);
+    ctx.fillStyle='#5fae3e'; ctx.fillRect(a[0],a[1]-2,b[0]-a[0],gh);
+    ctx.fillStyle='#7cc94f'; ctx.fillRect(a[0],a[1]-2,b[0]-a[0],gh*0.35);
+    ctx.fillStyle='#3d7f2a';
+    for(let x=Math.max(a[0],-10);x<Math.min(b[0],W+10);x+=7){ const hgt=3+((x*13)%5); ctx.fillRect(x,a[1]-2-hgt*0.6,2,hgt*0.6); }
+  }
+}
+function drawWater(T){
+  const sy=w2s(0,T.river)[1], by=w2s(0,T.bed)[1];
+  if(sy>H+20) return;
+  const g=ctx.createLinearGradient(0,sy,0,by+40); g.addColorStop(0,'rgba(64,170,220,0.78)'); g.addColorStop(1,'rgba(20,80,130,0.92)');
+  const x0=w2s(T.L+T.lip,0)[0], x1=w2s(T.R-T.lip,0)[0];
+  ctx.save(); ctx.beginPath(); ctx.rect(x0,sy-6,x1-x0,by-sy+50); ctx.clip();
+  ctx.fillStyle=g; ctx.beginPath(); ctx.moveTo(x0,by+50);
+  for(let x=x0;x<=x1+8;x+=8) ctx.lineTo(x, sy+Math.sin(x*0.035+time*1.8)*2.2+Math.sin(x*0.013-time)*1.6);
+  ctx.lineTo(x1,by+50); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,0.55)'; ctx.lineWidth=2; ctx.beginPath();
+  for(let x=x0;x<=x1+8;x+=8){ const y=sy+Math.sin(x*0.035+time*1.8)*2.2+Math.sin(x*0.013-time)*1.6; x===x0?ctx.moveTo(x,y):ctx.lineTo(x,y); } ctx.stroke();
+  ctx.strokeStyle='rgba(255,255,255,0.18)'; ctx.lineWidth=1.5;
+  for(let k=1;k<5;k++){ const yy=sy+k*12; ctx.beginPath(); for(let x=x0;x<=x1;x+=60){ const ox=((time*20*k+x*1.3)%60); ctx.moveTo(x+ox,yy); ctx.lineTo(x+ox+18,yy); } ctx.stroke(); }
+  ctx.restore();
+}
+function drawGrid(){
+  if(sim.mode!=='build') return;
+  const [x0,y1]=s2w(0,0), [x1,y0]=s2w(W,H);
+  let step=1; while(step*view.s<9) step*=2;
+  const r=clamp(view.s*0.035,0.8,1.8);
+  ctx.fillStyle='rgba(255,255,255,0.32)';
+  for(let x=Math.floor(x0/step)*step;x<=x1;x+=step) for(let y=Math.floor(y0/step)*step;y<=y1;y+=step){ const [sx,sy]=w2s(x,y); ctx.fillRect(sx-r,sy-r,r*2,r*2); }
+  ctx.strokeStyle='rgba(255,255,255,0.07)'; ctx.lineWidth=1; const big=step*5;
+  ctx.beginPath();
+  for(let x=Math.floor(x0/big)*big;x<=x1;x+=big){ const sx=w2s(x,0)[0]; ctx.moveTo(sx,0); ctx.lineTo(sx,H); }
+  for(let y=Math.floor(y0/big)*big;y<=y1;y+=big){ const sy=w2s(0,y)[1]; ctx.moveTo(0,sy); ctx.lineTo(W,sy); }
+  ctx.stroke();
+}
+const beamW = m => clamp(view.s*0.15,4,15)*(MATS[m.mat]||MATS.stal).w;
+function upNormal(ax,ay,bx,by){ const dx=bx-ax,dy=by-ay,l=Math.hypot(dx,dy)||1; let nx=-dy/l, ny=dx/l; if(ny>0||(ny===0&&nx>0)){nx=-nx;ny=-ny;} return [nx,ny]; }
+function beamPath(ax,ay,bx,by,bow){ ctx.beginPath(); ctx.moveTo(ax,ay);
+  if(bow){ const dx=bx-ax,dy=by-ay,l=Math.hypot(dx,dy)||1; ctx.quadraticCurveTo((ax+bx)/2-dy/l*bow*2,(ay+by)/2+dx/l*bow*2,bx,by); } else ctx.lineTo(bx,by); }
+function strokeBeam(ax,ay,bx,by,w,col,bow,glow,mat){
+  ctx.lineCap='round';
+  beamPath(ax,ay,bx,by,bow); ctx.lineWidth=w+3.5; ctx.strokeStyle='rgba(12,18,30,0.6)'; ctx.stroke();
+  if(glow){ ctx.save(); ctx.shadowColor=rgb(col,0.95); ctx.shadowBlur=glow; }
+  beamPath(ax,ay,bx,by,bow); ctx.lineWidth=w; ctx.strokeStyle=rgb(col); ctx.stroke();
+  if(glow) ctx.restore();
+  const [nx,ny]=upNormal(ax,ay,bx,by);
+  ctx.save(); ctx.translate(nx*w*0.2,ny*w*0.2); beamPath(ax,ay,bx,by,bow); ctx.lineWidth=Math.max(1,w*0.3); ctx.strokeStyle='rgba(255,255,255,0.38)'; ctx.stroke(); ctx.restore();
+  if(mat==='tra'||mat==='glass'||mat==='balsa'||mat==='grill'){ ctx.save(); ctx.translate(-nx*w*0.18,-ny*w*0.18); ctx.setLineDash([w*1.6,w*1.2]); beamPath(ax,ay,bx,by,bow); ctx.lineWidth=Math.max(0.7,w*0.12); ctx.strokeStyle='rgba(70,40,10,0.28)'; ctx.stroke(); ctx.restore(); }
+}
+function drawBroken(m, pa, pb, mode, w){
+  const A=nodeById.get(m.a),B=nodeById.get(m.b); const L0=Math.hypot(A.x-B.x,A.y-B.y)*view.s;
+  const age=time-(sim.brokeT.get(m.id)||time);
+  const col=[110,40,40];
+  ctx.lineCap='round';
+  if(mode==='knack'){
+    const dx=pb[0]-pa[0],dy=pb[1]-pa[1],d=Math.hypot(dx,dy)||1;
+    if(d<L0*1.02){ let h=Math.sqrt(Math.max(0,(L0/2)**2-(d/2)**2)); h=Math.max(h,L0*0.12*Math.min(1,age*4));
+      const sgn=(m.id%2?1:-1); const mx=(pa[0]+pb[0])/2-dy/d*h*sgn, my=(pa[1]+pb[1])/2+dx/d*h*sgn;
+      for(const [p,q] of [[pa,[mx,my]],[[mx,my],pb]]){ ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); ctx.lineWidth=w+3; ctx.strokeStyle='rgba(12,18,30,0.6)'; ctx.stroke(); ctx.lineWidth=w; ctx.strokeStyle=rgb(col); ctx.stroke(); }
+      ctx.fillStyle='#ffdd99'; ctx.beginPath(); ctx.arc(mx,my,w*0.45,0,7); ctx.fill();
+      return; }
+  }
+  const droop=Math.min(1,age*1.6)*0.9;
+  for(const [p,q,s] of [[pa,pb,1],[pb,pa,-1]]){
+    let ang=Math.atan2(q[1]-p[1],q[0]-p[0]); const target=Math.PI/2; let diff=target-ang; while(diff>Math.PI) diff-=2*Math.PI; while(diff<-Math.PI) diff+=2*Math.PI; ang+=diff*droop*0.6;
+    const len=L0*0.32, ex=p[0]+Math.cos(ang)*len, ey=p[1]+Math.sin(ang)*len;
+    ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(ex,ey); ctx.lineWidth=w+3; ctx.strokeStyle='rgba(12,18,30,0.6)'; ctx.stroke(); ctx.lineWidth=w; ctx.strokeStyle=rgb(col); ctx.stroke();
+    const nx=-Math.sin(ang), ny=Math.cos(ang); ctx.fillStyle='#ffe2b0'; ctx.beginPath();
+    ctx.moveTo(ex+nx*w/2,ey+ny*w/2); ctx.lineTo(ex+Math.cos(ang)*w*0.7,ey+Math.sin(ang)*w*0.7); ctx.lineTo(ex,ey); ctx.lineTo(ex+Math.cos(ang)*w*0.5-nx*w*0.2,ey+Math.sin(ang)*w*0.5-ny*w*0.2); ctx.lineTo(ex-nx*w/2,ey-ny*w/2); ctx.closePath(); ctx.fill();
+  }
+}
+function drawSupport(n,p){
+  const [x,y]=p, sz=clamp(view.s*0.55,14,34);
+  ctx.save(); ctx.lineJoin='round';
+  const hatch=(yy,wd)=>{ ctx.fillStyle='#46505e'; ctx.fillRect(x-wd/2,yy,wd,sz*0.22); ctx.strokeStyle='rgba(255,255,255,0.25)'; ctx.lineWidth=1.2; ctx.beginPath(); for(let k=-wd/2;k<wd/2;k+=5){ ctx.moveTo(x+k,yy+sz*0.22); ctx.lineTo(x+k+5,yy);} ctx.stroke(); };
+  const g=ctx.createLinearGradient(0,y,0,y+sz); g.addColorStop(0,'#eef2f6'); g.addColorStop(1,'#98a3b2');
+  if(n.support===1){
+    ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x-sz*0.58,y+sz); ctx.lineTo(x+sz*0.58,y+sz); ctx.closePath();
+    ctx.fillStyle=g; ctx.fill(); ctx.strokeStyle='#263040'; ctx.lineWidth=2; ctx.stroke(); hatch(y+sz,sz*1.5);
+  } else {
+    const th=sz*0.68; ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x-sz*0.5,y+th); ctx.lineTo(x+sz*0.5,y+th); ctx.closePath();
+    ctx.fillStyle=g; ctx.fill(); ctx.strokeStyle='#263040'; ctx.lineWidth=2; ctx.stroke();
+    const r=sz*0.14; ctx.fillStyle='#d6dde6';
+    for(const k of [-0.28,0.28]){ ctx.beginPath(); ctx.arc(x+k*sz,y+th+r,r,0,7); ctx.fill(); ctx.stroke(); }
+    hatch(y+th+2*r,sz*1.5);
+  }
+  ctx.restore();
+}
+function kettlebell(x,y,wd,label,hl){
+  const h=wd*0.82;
+  ctx.save();
+  ctx.lineWidth=Math.max(2,wd*0.12); ctx.strokeStyle='#2a3140';
+  ctx.beginPath(); ctx.arc(x,y+wd*0.2,wd*0.24,Math.PI,0); ctx.stroke();
+  const g=ctx.createLinearGradient(x-wd/2,0,x+wd/2,0); g.addColorStop(0,'#2b3240'); g.addColorStop(0.35,'#5a6577'); g.addColorStop(1,'#1e232d');
+  ctx.beginPath(); const t=y+wd*0.2, b=t+h; ctx.moveTo(x-wd*0.36,t); ctx.lineTo(x+wd*0.36,t); ctx.quadraticCurveTo(x+wd*0.56,b,x+wd*0.42,b); ctx.lineTo(x-wd*0.42,b); ctx.quadraticCurveTo(x-wd*0.56,b,x-wd*0.36,t); ctx.closePath();
+  ctx.fillStyle=g; ctx.fill(); ctx.lineWidth=hl?2.5:1.5; ctx.strokeStyle=hl?'#ffb02e':'#11151c'; ctx.stroke();
+  ctx.fillStyle='#fff'; ctx.font=`700 ${clamp(wd*0.3,9,14)}px ${getComputedStyle(document.body).getPropertyValue('--f-mono')||'monospace'}`;
+  ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(label,x,t+h*0.56);
+  ctx.restore();
+  return [x-wd*0.56,y,x+wd*0.56,b];
+}
+function drawWeights(P){
+  weightHits=[];
+  const pal=palette(), lam=(sim.mode==='ramp'||(sim.mode!=='build'&&sim.kind==='ramp'))?sim.lambda:1;
+  state.nodes.forEach((n,i)=>{ if(!(n.load>0)) return; const [x,y]=w2s(P[i].x,P[i].y);
+    const chain=clamp(view.s*0.5,12,30);
+    const wd=clamp(view.s*0.62,20,44)*(0.85+0.13*Math.log10(1+n.load/pal[0]))*(lam>1?Math.min(1.6,0.9+0.12*Math.log2(lam+1)):1);
+    ctx.strokeStyle='#39414f'; ctx.lineWidth=2; ctx.setLineDash([4,3]); ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x,y+chain); ctx.stroke(); ctx.setLineDash([]);
+    const hl = ui.hover&&ui.hover.kind==='weight'&&ui.hover.id===n.id;
+    const r=kettlebell(x,y+chain,wd,fmtMass(n.load*lam),hl);
+    weightHits.push({id:n.id,r}); });
+}
+function drawTruck(P){
+  const tr=sim.truck; if(!tr) return;
+  let a,b;
+  const surf=(pt)=>pt;
+  if(tr.free){ a=w2s(tr.free[0].x,tr.free[0].y); b=w2s(tr.free[1].x,tr.free[1].y); }
+  else {
+    const pos=[];
+    const ax= sim.mode==='collapse'||(sim.mode==='done'&&sim.parts) ? null : truckAxles();
+    for(let k=0;k<2;k++){
+      let p;
+      if(ax){ const q=ax[k]; if(q.m){ const ia=state.nodes.findIndex(n=>n.id===q.m.a), ib=state.nodes.findIndex(n=>n.id===q.m.b); p=[lerp(P[ia].x,P[ib].x,q.t),lerp(P[ia].y,P[ib].y,q.t)]; } else p=[q.x,q.y]; }
+      else { const at=tr.att&&tr.att[k]; if(at) p=[lerp(P[at.a].x,P[at.b].x,at.t),lerp(P[at.a].y,P[at.b].y,at.t)]; else { const q=k?tr.x+tr.wb:tr.x; const ri=roadInfo(); p=[q, q<ri.x0?ri.y0:ri.y1]; } }
+      pos.push(w2s(p[0],p[1]));
+    }
+    [a,b]=pos;
+  }
+  const ang=Math.atan2(b[1]-a[1],b[0]-a[0]); const wb=Math.hypot(b[0]-a[0],b[1]-a[1])||tr.wb*view.s;
+  const rw=beamW({mat:'stal'})*0.9; const lift = tr.free?0:(rw*0.5+rw*0.8);
+  const r=wb*0.13;
+  ctx.save(); ctx.translate(a[0],a[1]); ctx.rotate(ang); ctx.translate(0,-lift-r);
+  // trailer
+  const g=ctx.createLinearGradient(0,-r-wb*0.5,0,-r*0.6); g.addColorStop(0,'#ffcf6b'); g.addColorStop(1,'#e8891c');
+  rr(-wb*0.22,-r*0.55-wb*0.46,wb*0.98,wb*0.46,wb*0.04); ctx.fillStyle=g; ctx.fill(); ctx.lineWidth=2; ctx.strokeStyle='#2a1a08'; ctx.stroke();
+  ctx.fillStyle='rgba(255,255,255,0.25)'; ctx.fillRect(-wb*0.2,-r*0.55-wb*0.44,wb*0.94,wb*0.05);
+  ctx.fillStyle='#4a2a08'; ctx.font=`700 ${clamp(wb*0.15,9,22)}px Fredoka, sans-serif`; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText(fmtMass(tr.kg), wb*0.27, -r*0.55-wb*0.23);
+  // hytt
+  ctx.beginPath(); ctx.moveTo(wb*0.8,-r*0.55); ctx.lineTo(wb*0.8,-r*0.55-wb*0.4); ctx.lineTo(wb*1.06,-r*0.55-wb*0.4); ctx.lineTo(wb*1.2,-r*0.55-wb*0.18); ctx.lineTo(wb*1.22,-r*0.55); ctx.closePath();
+  ctx.fillStyle='#e23d3d'; ctx.fill(); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(wb*0.86,-r*0.55-wb*0.2); ctx.lineTo(wb*0.86,-r*0.55-wb*0.34); ctx.lineTo(wb*1.03,-r*0.55-wb*0.34); ctx.lineTo(wb*1.13,-r*0.55-wb*0.2); ctx.closePath(); ctx.fillStyle='#bfe6ff'; ctx.fill();
+  ctx.fillStyle='#2a1a08'; ctx.fillRect(-wb*0.24,-r*0.62,wb*1.48,r*0.18);
+  for(const x of [0, wb*0.18, wb]){ ctx.save(); ctx.translate(x,0); ctx.rotate(tr.spin); ctx.beginPath(); ctx.arc(0,0,r,0,7); ctx.fillStyle='#1b1f27'; ctx.fill(); ctx.beginPath(); ctx.arc(0,0,r*0.5,0,7); ctx.fillStyle='#aab3c0'; ctx.fill(); ctx.fillStyle='#1b1f27'; ctx.fillRect(-r*0.08,-r*0.5,r*0.16,r); ctx.restore(); }
+  ctx.restore();
+}
+function rr(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+function arrow(x,y,dx,dy,col,label){
+  const l=Math.hypot(dx,dy); if(l<4) return; const ux=dx/l,uy=dy/l;
+  ctx.save(); ctx.strokeStyle=col; ctx.fillStyle=col; ctx.lineWidth=3; ctx.lineCap='round';
+  ctx.beginPath(); ctx.moveTo(x-dx,y-dy); ctx.lineTo(x-ux*8,y-uy*8); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x-ux*11-uy*6,y-uy*11+ux*6); ctx.lineTo(x-ux*11+uy*6,y-uy*11-ux*6); ctx.closePath(); ctx.fill();
+  if(label) pillText(x-dx-ux*4, y-dy-uy*4+ (uy>0?-10:10), label, 'rgba(8,60,80,0.85)', '#a5f3fc');
+  ctx.restore(); }
+function pillText(x,y,t,bg,fg){
+  ctx.save(); ctx.font='700 11px "JetBrains Mono", monospace'; const w=ctx.measureText(t).width+10;
+  rr(x-w/2,y-9,w,18,9); ctx.fillStyle=bg; ctx.fill(); ctx.fillStyle=fg; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(t,x,y+0.5); ctx.restore(); }
+
+function deformFactor(){
+  if(ui.deform==='off') return 0;
+  if(sim.mode!=='build' && sim.defF!=null) return sim.defF;
+  const A=getA(); if(A.mechanism) return 0;
+  if(ui.deform==='real') return 1;
+  let mx=0; for(let i=0;i<A.nN;i++) mx=Math.max(mx,Math.hypot(A.dead.u[2*i]+A.live.u[2*i],A.dead.u[2*i+1]+A.live.u[2*i+1]));
+  if(mx<1e-15) return 1;
+  let f=0.18*state.cell/mx; if(f<1) return 1;
+  const p=Math.pow(10,Math.floor(Math.log10(f))), q=f/p; return (q>=5?5:q>=2?2:1)*p;
+}
+
+function render(){
+  frameNo++;
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  shx=shake?(Math.random()-0.5)*shake:0; shy=shake?(Math.random()-0.5)*shake:0;
+  const T=computeTerrain();
+  drawBackground(T); drawTerrain(T); drawGrid();
+  const A=getA(), C=(sim.parts)?null:currentCase();
+  const info = sim.parts ? sim.frozen : C.info;
+  // positioner
+  const f = (sim.parts||A.mechanism)?0:deformFactor();
+  const P = state.nodes.map((n,i)=>{ if(sim.parts) return {x:sim.parts[i].x,y:sim.parts[i].y};
+    const d=C&&f?[C.disp[2*i]*f/state.cell,C.disp[2*i+1]*f/state.cell]:[0,0];
+    const di=A.idx.get(n.id); return {x:n.x+(di!=null&&A.deg[di]?d[0]:0), y:n.y+(di!=null&&A.deg[di]?d[1]:0)}; });
+  lastPos=P;
+  const S=P.map(p=>w2s(p.x,p.y)); nodeScr=new Map(state.nodes.map((n,i)=>[n.id,S[i]])); memScr=new Map();
+  const ix=new Map(state.nodes.map((n,i)=>[n.id,i]));
+  // vägbana (bakom)
+  for(const m of state.members){ if(!m.road||sim.broken.has(m.id)) continue; const a=S[ix.get(m.a)], b=S[ix.get(m.b)], w=beamW(m), rw=w*0.9;
+    const [nx,ny]=upNormal(a[0],a[1],b[0],b[1]); const o=w*0.5+rw*0.4;
+    ctx.lineCap='butt'; ctx.beginPath(); ctx.moveTo(a[0]+nx*o,a[1]+ny*o); ctx.lineTo(b[0]+nx*o,b[1]+ny*o); ctx.lineWidth=rw+2; ctx.strokeStyle='#14171d'; ctx.stroke(); ctx.lineWidth=rw; ctx.strokeStyle='#3c424d'; ctx.stroke();
+    ctx.setLineDash([rw*1.2,rw*1.2]); ctx.lineWidth=Math.max(1,rw*0.12); ctx.strokeStyle='rgba(255,255,255,0.65)'; ctx.stroke(); ctx.setLineDash([]); }
+  // stavar
+  const hov=ui.hover, sel=ui.sel, mech=A.mechanism&&sim.mode==='build';
+  for(const m of state.members){
+    const ia=ix.get(m.a), ib=ix.get(m.b); if(ia==null||ib==null) continue; const a=S[ia], b=S[ib]; memScr.set(m.id,[a,b]);
+    const w=beamW(m), br=sim.broken.get(m.id);
+    if(br){ drawBroken(m,a,b,br,w); continue; }
+    const it=info&&info.get(m.id);
+    let col, glow=0, bow=0;
+    if(mech||!it){ col=[176,186,204]; }
+    else if(ui.colorMode==='util'){ col=utilRGB(it.u); if(it.u>0.8) glow=8+6*Math.sin(time*7)*clamp((it.u-0.8)*5,0,1)+ (it.u>=1?8:0); }
+    else if(ui.colorMode==='tc'){ col=tcRGB(it.N,it.u); }
+    else col=MATS[m.mat].col;
+    if(it && !mech && it.N<0 && it.e.buckle && it.u>0.55){ const L=Math.hypot(b[0]-a[0],b[1]-a[1]); bow=L*0.05*Math.pow(clamp((it.u-0.55)/0.45,0,1.2),2)*(m.id%2?1:-1); }
+    const isH=(hov&&hov.kind==='member'&&hov.id===m.id)||(sel&&sel.kind==='member'&&sel.id===m.id);
+    if(isH){ beamPath(a[0],a[1],b[0],b[1],bow); ctx.lineWidth=w+10; ctx.strokeStyle='rgba(255,255,255,0.55)'; ctx.lineCap='round'; ctx.stroke(); }
+    strokeBeam(a[0],a[1],b[0],b[1],w,col,bow,glow,m.mat);
+  }
+  // knutar
+  state.nodes.forEach((n,i)=>{ if(n.support) drawSupport(n,S[i]); });
+  drawWeights(P);
+  state.nodes.forEach((n,i)=>{ const [x,y]=S[i];
+    const conn=state.members.filter(m=>(m.a===n.id||m.b===n.id)&&!sim.broken.has(m.id));
+    const wmax=conn.length?Math.max(...conn.map(beamW)):clamp(view.s*0.15,4,15);
+    const r=Math.max(4.5,wmax*0.72);
+    const isH=(hov&&(hov.kind==='node'||hov.kind==='weight')&&hov.id===n.id)||(sel&&sel.kind==='node'&&sel.id===n.id);
+    if(mech&&A.unstable.has(n.id)){ ctx.beginPath(); ctx.arc(x,y,r+6+3*Math.sin(time*8),0,7); ctx.fillStyle='rgba(250,204,21,0.45)'; ctx.fill(); }
+    if(isH){ ctx.beginPath(); ctx.arc(x,y,r+5,0,7); ctx.fillStyle='rgba(255,255,255,0.55)'; ctx.fill(); }
+    ctx.beginPath(); ctx.arc(x,y,r+1.8,0,7); ctx.fillStyle='#161d29'; ctx.fill();
+    const g=ctx.createRadialGradient(x-r*0.35,y-r*0.35,r*0.1,x,y,r); g.addColorStop(0,'#ffffff'); g.addColorStop(1,'#8d9aad');
+    ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fillStyle=g; ctx.fill();
+    ctx.beginPath(); ctx.arc(x,y,r*0.34,0,7); ctx.fillStyle='#3b4556'; ctx.fill();
+    if(!conn.length && sim.mode==='build'){ ctx.beginPath(); ctx.arc(x,y,r+3,0,7); ctx.strokeStyle='rgba(255,255,255,0.6)'; ctx.setLineDash([3,3]); ctx.lineWidth=1.5; ctx.stroke(); ctx.setLineDash([]); }
+  });
+  drawTruck(P);
+  // etiketter
+  if(info && !mech && !sim.parts){
+    if(ui.showForces){ for(const m of state.members){ const it=info.get(m.id); if(!it||sim.broken.has(m.id)) continue; const s=memScr.get(m.id); if(!s) continue;
+      const x=(s[0][0]+s[1][0])/2, y=(s[0][1]+s[1][1])/2; const t=(it.N>0?'+':'−')+fmtForce(Math.abs(it.N));
+      pillText(x,y,t, it.N>0?'rgba(120,50,10,0.88)':'rgba(15,55,110,0.88)', it.N>0?'#ffd2b0':'#cfe6ff'); } }
+    if(ui.showReact && C){ const R=reactionsOf(C); for(const [id,r] of R){ const s=nodeScr.get(id); const n=nodeById.get(id); if(!s) continue;
+      const sz=clamp(view.s*0.55,14,34); const base=s[1]+sz*1.25+6; const mag=Math.hypot(r[0],r[1]); if(mag<1e-9) continue;
+      const len=clamp(view.s*1.1,30,70);
+      if(Math.abs(r[1])>1e-9*mag) arrow(s[0], base, 0, -len*Math.sign(r[1]), '#22d3ee', fmtForce(r[1]));
+      if(Math.abs(r[0])>0.01*mag) arrow(s[0]-sz*0.9, s[1]+sz*0.5, len*0.7*Math.sign(r[0]), 0, '#22d3ee', fmtForce(Math.abs(r[0]))); } }
+  }
+  drawWater(T);
+  drawParticles();
+  drawGhost();
+  // deformationsmärkning
+  if(f>1 && !sim.parts && sim.mode!=='collapse'){ ctx.save(); ctx.font='600 12px Figtree, sans-serif'; ctx.fillStyle='rgba(255,255,255,0.85)'; ctx.textAlign='left';
+    const r=viewRect(); ctx.fillText('Deformation förstorad ×'+f.toLocaleString('sv-SE'), r.l+4, H-r.b+20); ctx.restore(); }
+  if(sim.mode==='collapse'&&sim.ts<0.9){ ctx.save(); ctx.font='700 13px Fredoka, sans-serif'; ctx.fillStyle='rgba(255,255,255,0.85)'; const r=viewRect(); ctx.fillText('Slowmotion ×'+(Math.round(sim.ts*100)/100).toLocaleString('sv-SE'), r.l+4, H-r.b+20); ctx.restore(); }
+}
+
+/* ---------- partiklar ---------- */
+function burst(x,y,col,matcol){
+  for(let i=0;i<22;i++){ const a=Math.random()*Math.PI*2, v=(2+Math.random()*6);
+    particles.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v+3,life:1+Math.random()*0.6,t:0,col:i%2?col:matcol,sz:0.06+Math.random()*0.12,rot:Math.random()*6,vr:(Math.random()-0.5)*20,kind:'chip'}); }
+  for(let i=0;i<8;i++){ particles.push({x,y,vx:(Math.random()-0.5)*2,vy:Math.random()*1.5,life:0.9,t:0,col:[230,225,215],sz:0.3+Math.random()*0.3,kind:'dust'}); }
+  particles.push({x,y,t:0,life:0.35,kind:'flash'});
+}
+function splash(x,y,sp){ Snd.splash();
+  for(let i=0;i<26;i++){ const a=Math.PI/2+(Math.random()-0.5)*1.6, v=(3+Math.random()*5)*clamp(sp/10,0.6,1.6);
+    particles.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:1.1,t:0,col:[220,240,255],sz:0.05+Math.random()*0.1,kind:'drop'}); } }
+function stepParticles(dt){
+  const g=12;
+  for(const p of particles){ p.t+=dt; if(p.kind==='chip'||p.kind==='drop'){ p.vy-=g*dt; p.x+=p.vx*dt; p.y+=p.vy*dt; p.rot+=(p.vr||0)*dt; } else if(p.kind==='dust'){ p.x+=p.vx*dt; p.y+=p.vy*dt; p.sz+=dt*0.6; } }
+  for(let i=particles.length-1;i>=0;i--) if(particles[i].t>particles[i].life) particles.splice(i,1);
+  for(const f of floaters) f.t+=dt;
+  for(let i=floaters.length-1;i>=0;i--) if(floaters[i].t>1.6) floaters.splice(i,1);
+}
+function drawParticles(){
+  const unit=Math.max(view.s,25);
+  for(const p of particles){ const [x,y]=w2s(p.x,p.y); const a=1-p.t/p.life;
+    if(p.kind==='flash'){ const r=unit*1.2*(0.4+p.t*3); const g=ctx.createRadialGradient(x,y,0,x,y,r); g.addColorStop(0,`rgba(255,250,220,${a})`); g.addColorStop(1,'rgba(255,200,120,0)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); continue; }
+    if(p.kind==='dust'){ ctx.fillStyle=rgb(p.col,0.35*a); ctx.beginPath(); ctx.arc(x,y,p.sz*unit,0,7); ctx.fill(); continue; }
+    ctx.save(); ctx.translate(x,y); ctx.rotate(p.rot||0); ctx.fillStyle=rgb(p.col,clamp(a*1.5,0,1)); const s=p.sz*unit*0.5; ctx.fillRect(-s,-s*0.4,s*2,s*0.8); ctx.restore(); }
+  for(const f of floaters){ const [x,y]=w2s(f.x,f.y); const a=clamp(1.6-f.t,0,1), sc=f.t<0.15?f.t/0.15:1;
+    ctx.save(); ctx.translate(x,y-30-f.t*40); ctx.scale(sc,sc); ctx.font='700 22px Fredoka, sans-serif'; ctx.textAlign='center'; ctx.lineWidth=5; ctx.strokeStyle=`rgba(20,10,10,${0.7*a})`; ctx.strokeText(f.text,0,0); ctx.fillStyle=f.col; ctx.globalAlpha=a; ctx.fillText(f.text,0,0); ctx.restore(); }
+}
+
+/* ============================================================
+   INTERAKTION
+   ============================================================ */
+let drag=null, spaceDown=false, shiftDown=false;
+const pointers=new Map();
+const mouse={sx:0,sy:0,in:false};
+function snapW(wx,wy,free){ if(!ui.snap||free) return [Math.round(wx*20)/20, Math.round(wy*20)/20]; return [Math.round(wx),Math.round(wy)]; }
+function hitTest(sx,sy){
+  for(let k=weightHits.length-1;k>=0;k--){ const h=weightHits[k],r=h.r; if(sx>=r[0]&&sx<=r[2]&&sy>=r[1]&&sy<=r[3]) return {kind:'weight',id:h.id}; }
+  let best=null, bd=1e9;
+  for(const [id,s] of nodeScr){ const d=Math.hypot(s[0]-sx,s[1]-sy); if(d<bd){bd=d;best=id;} }
+  if(best!=null && bd<=Math.max(12,clamp(view.s*0.15,4,15)*0.72+6)) return {kind:'node',id:best};
+  let bm=null; bd=1e9;
+  for(const [id,[a,b]] of memScr){ const m=memById.get(id); if(!m) continue; const d=segDist(sx,sy,a[0],a[1],b[0],b[1]); const tol=Math.max(7,beamW(m)/2+4); if(d<tol&&d<bd){bd=d;bm=id;} }
+  if(bm!=null) return {kind:'member',id:bm};
+  return null; }
+function segDist(px,py,ax,ay,bx,by){ const dx=bx-ax,dy=by-ay,l2=dx*dx+dy*dy; let t=l2?((px-ax)*dx+(py-ay)*dy)/l2:0; t=clamp(t,0,1); return Math.hypot(px-ax-t*dx,py-ay-t*dy); }
+
+cv.addEventListener('contextmenu',e=>e.preventDefault());
+cv.addEventListener('pointerdown',e=>{
+  Snd.init(); cv.setPointerCapture(e.pointerId); pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  const sx=e.clientX, sy=e.clientY;
+  if(pointers.size===2){ const p=[...pointers.values()]; drag={type:'pinch',d0:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y),s0:view.s,c0:s2w((p[0].x+p[1].x)/2,(p[0].y+p[1].y)/2)}; return; }
+  if(e.button===1||spaceDown){ drag={type:'pan',sx,sy,vx:view.x,vy:view.y}; e.preventDefault(); return; }
+  if(sim.mode==='ramp'||sim.mode==='truck'||sim.mode==='collapse'){ drag={type:'pan',sx,sy,vx:view.x,vy:view.y}; return; }
+  const hit=hitTest(sx,sy);
+  if(e.button===2){ if(hit){ if(sim.mode!=='build') resetSim(); eraseHit(hit,true); } return; }
+  if(sim.mode==='done'){ if(!hit){ drag={type:'pan',sx,sy,vx:view.x,vy:view.y}; return; } resetSim(); }
+  const [wx,wy]=s2w(sx,sy);
+  switch(ui.tool){
+    case 'build': drag={type:'pending',sx,sy,hit,wx,wy}; break;
+    case 'move': if(hit&&(hit.kind==='node'||hit.kind==='weight')){ drag={type:'move',id:hit.id,pushed:false}; closeCard(); } else drag={type:'pan',sx,sy,vx:view.x,vy:view.y}; break;
+    case 'erase': drag={type:'erase',pushed:false}; if(hit){ pushHist(); drag.pushed=true; eraseHit(hit,false); } break;
+    case 'support': if(hit&&(hit.kind==='node'||hit.kind==='weight')){ const n=nodeById.get(hit.id); pushHist(); n.support=(n.support+1)%3; changed(); Snd.place(); }
+                    else if(!hit){ const [x,y]=snapW(wx,wy,e.shiftKey); let n=nodeAt(x,y); pushHist(); if(!n) n=addNode(x,y); n.support=1; changed(); Snd.place(); } break;
+    case 'load': if(hit&&(hit.kind==='node'||hit.kind==='weight')){ const n=nodeById.get(hit.id); pushHist(); const w=palette()[ui.weightIdx];
+                    if(e.shiftKey) n.load=Math.max(0,+(n.load-w).toFixed(6)); else n.load=+(n.load+w).toFixed(6); changed(); Snd.clunk(); }
+                  else drag={type:'pan',sx,sy,vx:view.x,vy:view.y}; break;
+  }
+});
+cv.addEventListener('pointermove',e=>{
+  const sx=e.clientX, sy=e.clientY; mouse.sx=sx; mouse.sy=sy; mouse.in=true;
+  if(pointers.has(e.pointerId)) pointers.set(e.pointerId,{x:sx,y:sy});
+  if(drag&&drag.type==='pinch'&&pointers.size===2){ const p=[...pointers.values()]; const d=Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y); view.s=clamp(drag.s0*d/drag.d0,3,400);
+    const mx=(p[0].x+p[1].x)/2,my=(p[0].y+p[1].y)/2; view.x=drag.c0[0]-(mx-W/2)/view.s; view.y=drag.c0[1]+(my-H/2)/view.s; return; }
+  if(!drag){ updateHover(sx,sy); return; }
+  const [wx,wy]=s2w(sx,sy);
+  if(drag.type==='pan'){ view.x=drag.vx-(sx-drag.sx)/view.s; view.y=drag.vy+(sy-drag.sy)/view.s; return; }
+  if(drag.type==='pending'){
+    if(Math.hypot(sx-drag.sx,sy-drag.sy)>6){
+      const h=drag.hit; let from=null;
+      if(h&&(h.kind==='node'||h.kind==='weight')) from=h.id;
+      drag={type:'member',from,start:from?null:snapW(drag.wx,drag.wy,e.shiftKey),cur:[wx,wy],free:e.shiftKey}; closeCard();
+    } return; }
+  if(drag.type==='member'){ drag.cur=[wx,wy]; drag.free=e.shiftKey; const h=hitTest(sx,sy); drag.target=(h&&(h.kind==='node'||h.kind==='weight'))?h.id:null; return; }
+  if(drag.type==='move'){ const n=nodeById.get(drag.id); const [x,y]=snapW(wx,wy,e.shiftKey); if(x===n.x&&y===n.y) return; const o=nodeAt(x,y); if(o&&o!==n) return;
+    if(!drag.pushed){ pushHist(); drag.pushed=true; } n.x=x; n.y=y; changed(); return; }
+  if(drag.type==='erase'){ const h=hitTest(sx,sy); if(h){ if(!drag.pushed){ pushHist(); drag.pushed=true; } eraseHit(h,false); } return; }
+});
+function endPointer(e){
+  pointers.delete(e.pointerId);
+  if(!drag) return; const d=drag; drag=null;
+  const sx=e.clientX, sy=e.clientY;
+  if(d.type==='pinch'){ return; }
+  if(d.type==='pending'){ // klick
+    const h=d.hit;
+    if(h&&(h.kind==='node'||h.kind==='weight')) openCard({kind:'node',id:h.id});
+    else if(h&&h.kind==='member') openCard({kind:'member',id:h.id});
+    else { closeCard(); const [x,y]=snapW(d.wx,d.wy,e.shiftKey); if(!nodeAt(x,y,0.3)){ pushHist(); addNode(x,y); changed(); Snd.place(); } }
+    return; }
+  if(d.type==='member'){
+    let toId=d.target;
+    const [ex,ey]=snapW(d.cur[0],d.cur[1],d.free);
+    pushHist();
+    let fromId=d.from;
+    if(fromId==null){ const [x,y]=d.start; let n=nodeAt(x,y,1e-6); if(!n) n=addNode(x,y); fromId=n.id; }
+    if(toId==null){ let n=nodeAt(ex,ey,1e-6); if(!n){ const f=nodeById.get(fromId); if(Math.hypot(f.x-ex,f.y-ey)<0.4){ hist.undo.pop(); changed(); return; } n=addNode(ex,ey); } toId=n.id; }
+    if(fromId===toId||!addMember(fromId,toId)){ /* inget nytt */ }
+    else Snd.place();
+    changed(); return; }
+}
+cv.addEventListener('pointerup',endPointer);
+cv.addEventListener('pointercancel',endPointer);
+cv.addEventListener('pointerleave',()=>{ mouse.in=false; if(!drag){ ui.hover=null; hideTip(); } });
+cv.addEventListener('dblclick',e=>{ if(ui.tool!=='build'||sim.mode!=='build') return; const h=hitTest(e.clientX,e.clientY); if(h&&h.kind==='member'){ closeCard(); splitMember(h.id); } });
+cv.addEventListener('wheel',e=>{ e.preventDefault(); const [wx,wy]=s2w(e.clientX,e.clientY); const k=Math.exp(-e.deltaY*0.0015); view.s=clamp(view.s*k,3,400);
+  view.x=wx-(e.clientX-W/2)/view.s; view.y=wy+(e.clientY-H/2)/view.s; },{passive:false});
+
+function eraseHit(h,push){
+  if(push) pushHist();
+  if(h.kind==='weight'){ const n=nodeById.get(h.id); if(n) n.load=0; }
+  else if(h.kind==='node') deleteNode(h.id);
+  else if(h.kind==='member') deleteMember(h.id);
+  changed(); Snd.erase(); updateHover(mouse.sx,mouse.sy);
+}
+function updateHover(sx,sy){
+  const h=hitTest(sx,sy); ui.hover=h;
+  cv.style.cursor = spaceDown?'grab' : (ui.tool==='move'&&h&&h.kind!=='member')?'move' : (h?'pointer':(ui.tool==='build'?'crosshair':'default'));
+  if(h && !(ui.sel && ui.sel.kind===(h.kind==='weight'?'node':h.kind) && ui.sel.id===h.id)) showTip(h,sx,sy); else hideTip();
+}
+
+/* ---------- spökstav under dragning ---------- */
+function drawGhost(){
+  if(!drag||drag.type!=='member') return;
+  let a; if(drag.from!=null) a=nodeScr.get(drag.from); else a=w2s(drag.start[0],drag.start[1]);
+  let b, bw;
+  if(drag.target!=null){ b=nodeScr.get(drag.target); const n=nodeById.get(drag.target); bw=[n.x,n.y]; }
+  else { bw=snapW(drag.cur[0],drag.cur[1],drag.free); b=w2s(bw[0],bw[1]); }
+  const aw = drag.from!=null ? [nodeById.get(drag.from).x,nodeById.get(drag.from).y] : drag.start;
+  const w=beamW({mat:ui.mat});
+  ctx.save(); ctx.globalAlpha=0.75; strokeBeam(a[0],a[1],b[0],b[1],w,MATS[ui.mat].col,0,0,ui.mat); ctx.restore();
+  if(drag.target==null){ ctx.beginPath(); ctx.arc(b[0],b[1],6,0,7); ctx.fillStyle='rgba(255,255,255,0.85)'; ctx.fill(); }
+  const Lm=Math.hypot(bw[0]-aw[0],bw[1]-aw[1])*state.cell;
+  if(Lm>0){ const mat=MATS[ui.mat]; const Pk=Math.PI**2*mat.E*mat.I/(Lm*Lm);
+    pillText((a[0]+b[0])/2,(a[1]+b[1])/2-22, fmtLen(Lm)+'  ·  knäcklast '+fmtForce(Math.min(Pk,mat.fc*mat.A)), 'rgba(15,20,32,0.9)', '#ffe2a8'); }
+}
+
+/* ---------- tooltip & kort ---------- */
+const tip=$('#tip'), card=$('#card');
+function memberInfoHTML(m){
+  const A=getA(), C=sim.parts?null:currentCase(); const info=sim.parts?sim.frozen:C.info; const it=info&&info.get(m.id);
+  const na=nodeById.get(m.a), nb=nodeById.get(m.b); const L=Math.hypot(na.x-nb.x,na.y-nb.y)*state.cell; const mat=MATS[m.mat];
+  const Pe=Math.PI**2*mat.E*mat.I/(L*L), Sq=mat.fc*mat.A, Cc=Math.min(Pe,Sq), Ct=mat.ft*mat.A;
+  let s=`<div><span class="k">Längd</span> <span class="n">${fmtLen(L)}</span> · <span class="k">vikt</span> <span class="n">${fmtMass(mat.rho*mat.A*L)}</span></div>`;
+  const br=sim.broken.get(m.id);
+  if(br) s+=`<div style="color:#fca5a5;font-weight:700">Trasig: ${br==='drag'?'dragbrott':br==='knack'?'knäckt':'tryckbrott'}</div>`;
+  else if(A.mechanism&&sim.mode==='build') s+=`<div class="k">Instabilt fackverk, inga krafter kan beräknas.</div>`;
+  else if(it){ const pill=Math.abs(it.N)<1e-9*Ct?'<span class="pill z">NOLLSTAV</span>':it.N>0?'<span class="pill t">DRAG</span>':'<span class="pill c">TRYCK</span>';
+    s+=`<div><span class="k">Kraft</span> <span class="n">${fmtForce(Math.abs(it.N))}</span> ${pill}</div>`;
+    s+=`<div><span class="k">Klarar</span> <span class="n">${fmtForce(Ct)}</span> <span class="k">drag ·</span> <span class="n">${fmtForce(Cc)}</span> <span class="k">tryck${Pe<Sq?' (knäckning)':''}</span></div>`;
+    const c=utilRGB(it.u); s+=`<div><span class="k">Utnyttjande</span> <span class="n" style="color:${rgb(mix(c,[255,255,255],0.25))}">${fmtPct(it.u)}</span></div>
+      <div class="meter"><i style="width:${clamp(it.u*100,0,100)}%;background:${rgb(c)}"></i></div>`; }
+  return s; }
+function nodeInfoHTML(n){
+  const A=getA(); let s='';
+  s+=`<div><span class="k">Stöd</span> <b>${['Inget','Fast led','Rullstöd'][n.support]}</b> · <span class="k">Last</span> <span class="n">${n.load?fmtMass(n.load*(sim.kind==='ramp'?sim.lambda:1)):'–'}</span></div>`;
+  if(n.support && !A.mechanism && !sim.parts){ const R=reactionsOf(currentCase()).get(n.id); if(R) s+=`<div><span class="k">Stödreaktion</span> <span class="n">${fmtForce(R[1])}</span> <span class="k">uppåt</span>${Math.abs(R[0])>1e-6*Math.abs(R[1]||1)?` · <span class="n">${fmtForce(Math.abs(R[0]))}</span> <span class="k">i sidled</span>`:''}</div>`; }
+  if(A.floating.includes(n.id)) s+=`<div style="color:#fde68a">Vikten hänger i luften – koppla knutpunkten till en stav.</div>`;
+  return s; }
+function showTip(h,sx,sy){
+  let html='';
+  if(h.kind==='member'){ const m=memById.get(h.id); if(!m) return hideTip(); html=`<h4>Stav S${memNo(m)} <span class="k" style="font-family:var(--f-body);font-size:12px">· ${MATS[m.mat].name}${m.road?' · vägbana':''}</span></h4>`+memberInfoHTML(m); }
+  else { const n=nodeById.get(h.id); if(!n) return hideTip(); html=`<h4>Knutpunkt K${nodeNo(n)}</h4>`+nodeInfoHTML(n); }
+  tip.innerHTML=html; tip.classList.remove('hidden');
+  const r=tip.getBoundingClientRect(); let x=sx+18, y=sy+18; if(x+r.width>W-8) x=sx-r.width-14; if(y+r.height>H-8) y=sy-r.height-14; tip.style.left=x+'px'; tip.style.top=y+'px'; }
+function hideTip(){ tip.classList.add('hidden'); }
+function openCard(sel){ ui.sel=sel; hideTip(); renderCard(true); Snd.click(); }
+function closeCard(){ ui.sel=null; card.classList.add('hidden'); }
+function renderCard(position){
+  const sel=ui.sel; if(!sel) return;
+  let html='<button class="x" data-a="close" aria-label="Stäng">✕</button>';
+  if(sel.kind==='member'){ const m=memById.get(sel.id); if(!m) return closeCard();
+    html+=`<h4>Stav S${memNo(m)}</h4>
+    <div class="lr"><span class="k">Material</span><select data-k="mat" id="cardMat">${Object.entries(MATS).map(([k,v])=>`<option value="${k}" ${k===m.mat?'selected':''}>${v.name}</option>`).join('')}</select></div>
+    <label class="chk"><input type="checkbox" data-k="road" id="cardRoad" ${m.road?'checked':''}> Vägbana (fordon kan köra här)</label>
+    <div id="cardInfo">${memberInfoHTML(m)}</div>
+    <div class="lr"><button class="btn sm" data-a="split">Dela på mitten</button><button class="btn sm danger" data-a="delm">Ta bort stav</button></div>`; }
+  else { const n=nodeById.get(sel.id); if(!n) return closeCard(); const w=palette()[ui.weightIdx];
+    html+=`<h4>Knutpunkt K${nodeNo(n)}</h4>
+    <div class="seg" id="cardSup">${['Inget stöd','Fast led','Rullstöd'].map((t,i)=>`<button data-sup="${i}" class="${n.support===i?'on':''}">${t}</button>`).join('')}</div>
+    <div class="lr"><span class="k">Vikt</span><div class="stepper"><button class="btn sm" data-a="ldec" title="Minska med ${fmtMass(w)}">−</button><b>${n.load?fmtMass(n.load):'ingen'}</b><button class="btn sm" data-a="linc" title="Öka med ${fmtMass(w)}">+</button></div></div>
+    <div class="k" style="font-size:11.5px;margin-top:-4px">Steg: ${fmtMass(w)} (välj vikt i lådan nedanför)</div>
+    <div id="cardInfo">${nodeInfoHTML(n)}</div>
+    <div class="lr"><span></span><button class="btn sm danger" data-a="deln">Ta bort knutpunkt</button></div>`; }
+  card.innerHTML=html; card.classList.remove('hidden');
+  if(position){ let p; if(sel.kind==='member'){ const s=memScr.get(sel.id); p=s?[(s[0][0]+s[1][0])/2,(s[0][1]+s[1][1])/2]:[W/2,H/2]; } else p=nodeScr.get(sel.id)||[W/2,H/2];
+    const r=card.getBoundingClientRect(); let x=p[0]+24, y=p[1]-r.height/2; if(x+r.width>W-12) x=p[0]-r.width-24; y=clamp(y,74,H-r.height-12); x=clamp(x,12,W-r.width-12); card.style.left=x+'px'; card.style.top=y+'px'; }
+}
+card.addEventListener('click',e=>{
+  const b=e.target.closest('[data-a],[data-sup]'); if(!b) return; const sel=ui.sel; if(!sel) return;
+  if(b.dataset.a==='close') return closeCard();
+  if(sim.mode!=='build') resetSim();
+  if(b.dataset.sup!=null){ const n=nodeById.get(sel.id); pushHist(); n.support=+b.dataset.sup; changed(); Snd.place(); renderCard(); return; }
+  const a=b.dataset.a;
+  if(a==='delm'){ pushHist(); deleteMember(sel.id); changed(); closeCard(); Snd.erase(); }
+  if(a==='split'){ const id=sel.id; closeCard(); splitMember(id); }
+  if(a==='deln'){ pushHist(); deleteNode(sel.id); changed(); closeCard(); Snd.erase(); }
+  if(a==='linc'||a==='ldec'){ const n=nodeById.get(sel.id); const w=palette()[ui.weightIdx]; pushHist(); n.load=Math.max(0,+(n.load+(a==='linc'?w:-w)).toFixed(6)); changed(); Snd.clunk(); renderCard(); }
+});
+card.addEventListener('change',e=>{
+  const sel=ui.sel; if(!sel||sel.kind!=='member') return; const m=memById.get(sel.id); if(sim.mode!=='build') resetSim();
+  if(e.target.dataset.k==='mat'){ pushHist(); m.mat=e.target.value; changed(); renderCard(); }
+  if(e.target.dataset.k==='road'){ pushHist(); m.road=e.target.checked; changed(); renderCard(); }
+});
+
+/* ---------- tangentbord ---------- */
+addEventListener('keydown',e=>{
+  if(e.target.matches('input,select,textarea')) return;
+  if(e.code==='Space'){ spaceDown=true; cv.style.cursor='grab'; e.preventDefault(); return; }
+  const k=e.key.toLowerCase();
+  if((e.ctrlKey||e.metaKey)&&k==='z'){ e.preventDefault(); if(e.shiftKey) redo(); else undo(); return; }
+  if((e.ctrlKey||e.metaKey)&&k==='y'){ e.preventDefault(); redo(); return; }
+  if(e.ctrlKey||e.metaKey||e.altKey) return;
+  const tools={'1':'build','2':'move','3':'erase','4':'support','5':'load'};
+  if(tools[k]) setTool(tools[k]);
+  if(k==='f') fitView();
+  if(k==='t') startRamp();
+  if(k==='l') startTruck();
+  if(k==='r') resetSim();
+  if(k==='escape'){ closeCard(); drag=null; closeModals(); }
+  if((k==='delete'||k==='backspace')&&ui.sel){ pushHist(); if(ui.sel.kind==='member') deleteMember(ui.sel.id); else deleteNode(ui.sel.id); changed(); closeCard(); }
+});
+addEventListener('keyup',e=>{ if(e.code==='Space'){ spaceDown=false; cv.style.cursor='crosshair'; } });
+
+/* ============================================================
+   UI-KOPPLING
+   ============================================================ */
+const HINTS={
+  build:'<b>Dra</b> för att bygga en stav · <b>Klicka</b> på stav eller knut för att ändra · <b>Dubbelklicka</b> på en stav för att dela den',
+  move:'<b>Dra</b> knutpunkter för att flytta dem · Dra på tom yta för att panorera',
+  erase:'<b>Klicka</b> eller <b>dra</b> över stavar, knutar och vikter för att ta bort dem',
+  support:'<b>Klicka</b> på en knutpunkt: fast led → rullstöd → inget stöd',
+  load:'<b>Klicka</b> på en knutpunkt för att hänga på vald vikt · <b>Shift-klick</b> tar bort · eller dra en vikt från lådan'};
+function setTool(t){ ui.tool=t; document.querySelectorAll('.tool').forEach(b=>b.classList.toggle('on',b.dataset.tool===t)); $('#hint').innerHTML=HINTS[t]+' <span style="opacity:.7">· Scrolla = zooma · Högerklick = ta bort</span>'; }
+document.querySelectorAll('.tool').forEach(b=>b.addEventListener('click',()=>setTool(b.dataset.tool)));
+
+function palette(){ const c=state.cell; if(c<=0.1) return [0.1,0.2,0.5,1,2,5]; if(c<=0.5) return [5,10,25,50,100,250]; return [100,500,1000,2000,5000,10000]; }
+function truckRange(){ const c=state.cell; if(c<=0.1) return [0.1,20,1,'Leksaksbil']; if(c<=0.5) return [10,2000,200,'Kärra']; return [500,60000,10000,'Lastbil']; }
+const KB_SVG='<svg viewBox="0 0 24 24"><path d="M9 7a3 3 0 1 1 6 0" fill="none" stroke="#c9d2df" stroke-width="2.2"/><path d="M6.5 9h11l2 11h-15z" fill="#5a6577" stroke="#11151c" stroke-width="1.2" stroke-linejoin="round"/></svg>';
+function renderWeights(){
+  const pal=palette(); ui.weightIdx=clamp(ui.weightIdx,0,pal.length-1);
+  $('#weights').innerHTML=pal.map((w,i)=>`<div class="wchip ${i===ui.weightIdx?'on':''}" data-i="${i}" tabindex="0" title="Välj ${fmtMass(w)} – eller dra den till en knutpunkt">${KB_SVG}<span>${fmtMass(w)}</span></div>`).join('');
+}
+$('#weights').addEventListener('pointerdown',e=>{
+  const c=e.target.closest('.wchip'); if(!c) return; e.preventDefault(); Snd.init();
+  ui.weightIdx=+c.dataset.i; renderWeights(); if(ui.sel&&ui.sel.kind==='node') renderCard();
+  const g=$('#ghost'); g.innerHTML=KB_SVG.replace('<svg','<svg ')+''; g.classList.remove('hidden'); g.style.left=e.clientX+'px'; g.style.top=e.clientY+'px';
+  const move=ev=>{ g.style.left=ev.clientX+'px'; g.style.top=ev.clientY+'px'; const h=hitTest(ev.clientX,ev.clientY); ui.hover=h&&h.kind!=='member'?h:null; };
+  const up=ev=>{ removeEventListener('pointermove',move); removeEventListener('pointerup',up); g.classList.add('hidden');
+    const el=document.elementFromPoint(ev.clientX,ev.clientY);
+    if(el===cv){ const h=hitTest(ev.clientX,ev.clientY);
+      if(h&&h.kind!=='member'){ if(sim.mode!=='build') resetSim(); const n=nodeById.get(h.id); pushHist(); n.load=+(n.load+palette()[ui.weightIdx]).toFixed(6); changed(); Snd.clunk(); }
+      else toast('Släpp vikten på en knutpunkt','Vikter hängs i knutpunkterna, där stavarna möts.'); }
+    else if(Math.hypot(ev.clientX-e.clientX,ev.clientY-e.clientY)<5) setTool('load');
+  };
+  addEventListener('pointermove',move); addEventListener('pointerup',up);
+});
+$('#weights').addEventListener('keydown',e=>{ const c=e.target.closest('.wchip'); if(c&&(e.key==='Enter'||e.key===' ')){ ui.weightIdx=+c.dataset.i; renderWeights(); setTool('load'); } });
+
+function renderMats(){ $('#matSel').innerHTML=Object.entries(MATS).map(([k,v])=>`<option value="${k}" ${k===ui.mat?'selected':''}>${v.name}</option>`).join(''); $('#matDot').style.background=rgb(MATS[ui.mat].col); }
+$('#matSel').addEventListener('change',e=>{ ui.mat=e.target.value; renderMats(); });
+$('#bAllMat').addEventListener('click',()=>{ if(!state.members.length) return; if(sim.mode!=='build') resetSim(); pushHist(); state.members.forEach(m=>m.mat=ui.mat); changed(); toast('Material bytt','Alla stavar är nu '+MATS[ui.mat].name+'.'); });
+$('#bRoad').addEventListener('click',()=>{ ui.road=!ui.road; $('#bRoad').classList.toggle('on',ui.road); });
+
+function syncScaleUI(){
+  $('#scaleSel').innerHTML=SCALES.map(c=>`<option value="${c}" ${c===state.cell?'selected':''}>${scaleLabel(c)}</option>`).join('');
+  renderWeights();
+  const [lo,hi,def,name]=truckRange(); $('#truckName').textContent=name;
+  if(!(ui.truckKg>=lo&&ui.truckKg<=hi)) ui.truckKg=def;
+  $('#truckMass').value=Math.round(Math.log(ui.truckKg/lo)/Math.log(hi/lo)*1000); $('#truckLbl').textContent=fmtMass(ui.truckKg);
+  $('#bTruck').textContent='Kör '+name.toLowerCase()+' över bron';
+}
+$('#scaleSel').addEventListener('change',e=>{ if(sim.mode!=='build') resetSim(); pushHist(); state.cell=+e.target.value; changed(true); });
+$('#truckMass').addEventListener('input',e=>{ const [lo,hi]=truckRange(); let v=lo*Math.pow(hi/lo,e.target.value/1000); const p=Math.pow(10,Math.floor(Math.log10(v))-1); v=Math.round(v/p)*p; ui.truckKg=v; $('#truckLbl').textContent=fmtMass(v); });
+
+$('#colorSeg').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; ui.colorMode=b.dataset.v; document.querySelectorAll('#colorSeg button').forEach(x=>x.classList.toggle('on',x===b)); renderLegend(); });
+function renderLegend(){
+  const L=$('#legend'), l=$('#legendLbl');
+  $('#legendBox').classList.toggle('hidden',ui.colorMode==='mat');
+  if(ui.colorMode==='util'){ L.style.background=`linear-gradient(90deg,${UST.map(([u,c])=>rgb(c)+' '+u*100+'%').join(',')})`; l.innerHTML='<span>0 %</span><span>50 %</span><span>100 % = brott</span>'; }
+  else { L.style.background='linear-gradient(90deg,rgb(78,168,255),rgb(200,208,220) 50%,rgb(255,138,61))'; l.innerHTML='<span>Tryck</span><span>0</span><span>Drag</span>'; }
+}
+$('#cForces').addEventListener('change',e=>ui.showForces=e.target.checked);
+$('#cReact').addEventListener('change',e=>ui.showReact=e.target.checked);
+$('#cSelf').addEventListener('change',e=>{ state.selfWeight=e.target.checked; changed(); });
+$('#cSnap').addEventListener('change',e=>ui.snap=e.target.checked);
+$('#deformSel').addEventListener('change',e=>ui.deform=e.target.value);
+$('#bTest').addEventListener('click',startRamp);
+$('#bTruck').addEventListener('click',startTruck);
+$('#bReset').addEventListener('click',()=>{ resetSim(); });
+$('#bUndo').addEventListener('click',undo); $('#bRedo').addEventListener('click',redo);
+$('#bFit').addEventListener('click',fitView);
+$('#bClear').addEventListener('click',()=>{ resetSim(); pushHist(); const c=state.cell; applyPreset(PRESETS.find(p=>p.id==='tom'),false); state.cell=c; changed(true); fitView(); toast('Tom ritning','Två stöd står kvar. Dra mellan punkter för att bygga. Ångra med Ctrl+Z.'); });
+$('#bPanel').addEventListener('click',()=>{ document.body.classList.toggle('nopanel'); });
+$('#bSound').addEventListener('click',()=>{ ui.sound=!ui.sound; $('#sndWave').style.display=ui.sound?'':'none'; if(ui.sound){Snd.init();Snd.click();} });
+$('#bHelp').addEventListener('click',()=>$('#helpModal').classList.remove('hidden'));
+$('#bPresets').addEventListener('click',openPresets);
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m||e.target.closest('[data-close]')) m.classList.add('hidden'); }));
+function closeModals(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); }
+$('#bSave').addEventListener('click',()=>{ const blob=new Blob([JSON.stringify({app:'fackverkslabbet',v:1,...JSON.parse(snapshot())},null,1)],{type:'application/json'}); download(blob,'fackverk.json'); });
+$('#bOpen').addEventListener('click',()=>$('#fileIn').click());
+$('#fileIn').addEventListener('change',e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{ const o=JSON.parse(r.result); if(!Array.isArray(o.nodes)||!Array.isArray(o.members)) throw 0; resetSim(); pushHist(); restore(JSON.stringify(o)); fitView(); toast('Fil öppnad',f.name); }catch(err){ toast('Kunde inte öppna filen','Filen är inte en sparad Fackverkslabbet-konstruktion (.json).'); } }; r.readAsText(f); e.target.value=''; });
+$('#bShot').addEventListener('click',()=>{ cv.toBlob(b=>download(b,'fackverk.png')); });
+function download(blob,name){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500); }
+
+let toastTimer=0;
+function toast(title,text,buttons){
+  const b=$('#banner'); b.innerHTML=`<h2 style="font-size:18px">${title}</h2><p>${text}</p>${buttons||''}`; b.classList.remove('hidden');
+  b.style.animation='none'; void b.offsetWidth; b.style.animation='';
+  clearTimeout(toastTimer); if(!buttons) toastTimer=setTimeout(()=>b.classList.add('hidden'),3800); }
+function showResult(){
+  clearTimeout(toastTimer);
+  const f=sim.first, b=$('#banner'); let h='', p='';
+  const ff = f ? `Första brott: <b>stav S${f.no}</b> (${f.mode==='drag'?'dragbrott':f.mode==='knack'?'knäckning':'tryckbrott'}) när lasten var <b>${fmtMass(f.load)}</b>${sim.kind==='ramp'?` – ${nf3(f.lam)} gånger dina vikter`:''}. Kraften var ${fmtForce(Math.abs(f.N))}.` : '';
+  if(sim.result==='collapsed'){ h='Bron rasade!'; p=ff||'Fackverket var instabilt och kunde inte bära någon last. Lägg till diagonaler så att det bildas trianglar, och kontrollera att det finns ett fast stöd och ett rullstöd.'; }
+  else if(sim.result==='held'){ h='Bron höll'; p=(ff?ff+' ':'')+'Resten av fackverket tog över lasten, och provet avbröts vid fyra gånger första brottlasten.'; }
+  else if(sim.result==='truckOK'){ h=(f?'Fordonet kom över, men inte utan skador':'Fordonet tog sig över!'); p=(f?ff+' ':'')+`Högsta utnyttjande under färden: <b>${fmtPct(sim.maxU)}</b>${sim.maxUId!=null&&memById.get(sim.maxUId)?` i stav S${memNo(memById.get(sim.maxUId))}`:''}.`; }
+  b.innerHTML=`<h2>${h}</h2><p>${p}</p><div class="row"><button class="btn primary" id="rBuild">Bygg om</button><button class="btn" id="rAgain">Kör igen</button></div>`;
+  b.classList.remove('hidden'); b.style.animation='none'; void b.offsetWidth; b.style.animation='';
+  $('#rBuild').onclick=()=>resetSim();
+  $('#rAgain').onclick=()=>{ const k=sim.kind; resetSim(); k==='truck'?startTruck():startRamp(); };
+}
+function syncModeUI(){
+  const m=sim.mode;
+  $('#modeLbl').textContent={build:'Byggläge',ramp:'Belastar…',truck:'Fordon kör…',collapse:'Rasar!',done:'Resultat'}[m];
+  $('#bReset').classList.toggle('hidden',m==='build');
+  $('#bTest').disabled=$('#bTruck').disabled=(m==='ramp'||m==='truck'||m==='collapse');
+  $('#hud').classList.toggle('hidden',!(m==='ramp'||m==='truck'||m==='collapse'));
+  $('#hint').style.visibility=m==='build'?'visible':'hidden';
+  if(m!=='build') hideTip();
+}
+
+/* ---------- statistik ---------- */
+let statT=0;
+function updateStats(){
+  const A=getA(), C=sim.parts?null:currentCase();
+  const lam=(sim.mode==='build')?1:sim.lambda;
+  const truckKg=sim.truck?sim.truck.kg:0;
+  $('#sLoad').textContent=fmtMass(A.liveMass*(sim.kind==='ramp'&&sim.mode!=='build'?lam:1)+truckKg);
+  $('#sSelf').textContent=fmtMass(A.selfMass);
+  const st=$('#status'); let cls='ok', msg='';
+  const I_OK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>';
+  const I_W='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/></svg>';
+  if(!A.md.length){ cls='warn'; msg='Inga stavar än. Dra mellan två punkter för att bygga, eller välj en mall.'; }
+  else if(A.mechanism && sim.mode==='build'){ cls='warn'; msg = A.supports<2 ? 'Instabilt: fackverket behöver ett <b>fast stöd</b> och ett <b>rullstöd</b> (verktyget Stöd).' : 'Instabilt: fackverket kan röra sig fritt (en mekanism). Lägg till diagonaler så att allt består av <b>trianglar</b>. De gula knutarna kan röra sig.'; }
+  else if(C && C.maxU>=1 && sim.mode==='build'){ cls='bad'; msg=`Överbelastat! Stav S${memNo(A.md[C.maxJ].m)} klarar inte lasten och går sönder direkt om du testar.`; }
+  else if(A.floating.length && sim.mode==='build'){ cls='warn'; msg='En vikt hänger i en knutpunkt utan stavar och räknas inte.'; }
+  else if(sim.mode==='build'){ msg='Stabilt fackverk – alla stavar håller.'; }
+  else { cls = sim.broken.size?'bad':'ok'; msg = sim.broken.size? `${sim.broken.size} stav${sim.broken.size>1?'ar':''} har gått sönder.` : 'Inga brott än.'; }
+  st.className='status '+cls; st.innerHTML=(cls==='ok'?I_OK:I_W)+'<div>'+msg+'</div>';
+  if(C && !(A.mechanism&&sim.mode==='build') && A.md.length){
+    const c=utilRGB(C.maxU); $('#sMeter').style.width=clamp(C.maxU*100,0,100)+'%'; $('#sMeter').style.background=rgb(c);
+    $('#sMax').textContent=fmtPct(C.maxU); $('#sMax').style.color=rgb(mix(c,[255,255,255],0.3));
+    if(C.maxJ>=0){ const e=A.md[C.maxJ]; $('#sCrit').textContent=`Stav S${memNo(e.m)} · ${C.N[C.maxJ]>0?'drag':(e.buckle?'tryck, risk för knäckning':'tryck')}`; } else $('#sCrit').textContent='';
+  } else { $('#sMeter').style.width='0'; $('#sMax').textContent='–'; $('#sMax').style.color=''; $('#sCrit').textContent=''; }
+  // brottlast (byggläge)
+  if(sim.mode==='build'){
+    if(!A.md.length||A.mechanism){ $('#sBreak').textContent='–'; $('#sBreakNote').textContent=A.mechanism&&A.md.length?'Fackverket är instabilt.':''; $('#sRatio').textContent='–'; }
+    else if(A.liveMass<=0){ $('#sBreak').textContent='–'; $('#sBreakNote').textContent='Lägg ut vikter för att räkna fram brottlasten.'; $('#sRatio').textContent='–'; }
+    else { const bl=A.crit.lam*A.liveMass; $('#sBreak').textContent='≈ '+fmtMass(bl);
+      const e=A.md[A.crit.j];
+      $('#sBreakNote').innerHTML=`om alla vikter ökas lika mycket (×${nf3(A.crit.lam)}). Först går stav S${memNo(e.m)} genom ${A.crit.mode==='drag'?'dragbrott':A.crit.mode==='knack'?'knäckning':'tryckbrott'}.`;
+      $('#sRatio').textContent=A.selfMass>0? '×'+nf3(bl/A.selfMass) : '–'; }
+  }
+  const ff=$('#firstFail');
+  if(sim.first){ const f=sim.first; ff.classList.remove('hidden'); ff.innerHTML=`<b>Första brott:</b> stav S${f.no}, ${f.mode==='drag'?'dragbrott':f.mode==='knack'?'knäckning':'tryckbrott'} vid ${fmtMass(f.load)}${sim.kind==='ramp'?` (×${nf3(f.lam)})`:''}.`; }
+  else ff.classList.add('hidden');
+  // HUD
+  if(sim.mode==='ramp') $('#hud').innerHTML=`Last <span class="v">${fmtMass(A.liveMass*sim.lambda)}</span> <span style="opacity:.6">×${nf3(sim.lambda)}</span> · Max <span class="v">${C?fmtPct(C.maxU):'–'}</span>`;
+  else if(sim.mode==='truck') $('#hud').innerHTML=`${truckRange()[3]} <span class="v">${fmtMass(sim.truck.kg)}</span> · Max nu <span class="v">${C?fmtPct(C.maxU):'–'}</span>`;
+  else if(sim.mode==='collapse') $('#hud').innerHTML='<span style="color:#ffb4a0">Bron rasar…</span>';
+  // kort-info
+  if(ui.sel){ const ci=$('#cardInfo'); if(ci){ if(ui.sel.kind==='member'){ const m=memById.get(ui.sel.id); if(m) ci.innerHTML=memberInfoHTML(m); } else { const n=nodeById.get(ui.sel.id); if(n) ci.innerHTML=nodeInfoHTML(n); } } }
+  if(ui.hover && !tip.classList.contains('hidden') && mouse.in) showTip(ui.hover,mouse.sx,mouse.sy);
+}
+
+/* ============================================================
+   LJUD (WebAudio, syntetiskt)
+   ============================================================ */
+const Snd={ctx:null,noise:null,eng:null,
+  init(){ if(this.ctx){ if(this.ctx.state==='suspended') this.ctx.resume(); return; } try{ this.ctx=new (window.AudioContext||window.webkitAudioContext)(); const n=this.ctx.sampleRate*1.5, b=this.ctx.createBuffer(1,n,this.ctx.sampleRate), d=b.getChannelData(0); for(let i=0;i<n;i++) d[i]=Math.random()*2-1; this.noise=b; }catch(e){} },
+  ok(){ return ui.sound&&this.ctx; },
+  env(node,t0,a,d,peak){ const g=this.ctx.createGain(); g.gain.setValueAtTime(0,t0); g.gain.linearRampToValueAtTime(peak,t0+a); g.gain.exponentialRampToValueAtTime(0.0001,t0+a+d); node.connect(g); g.connect(this.ctx.destination); return g; },
+  tone(f,d,type='sine',peak=0.15,f2){ if(!this.ok()) return; const t=this.ctx.currentTime, o=this.ctx.createOscillator(); o.type=type; o.frequency.setValueAtTime(f,t); if(f2) o.frequency.exponentialRampToValueAtTime(f2,t+d); this.env(o,t,0.005,d,peak); o.start(t); o.stop(t+d+0.05); },
+  burst(d,fType,freq,peak,q=1){ if(!this.ok()) return; const t=this.ctx.currentTime, s=this.ctx.createBufferSource(); s.buffer=this.noise; const f=this.ctx.createBiquadFilter(); f.type=fType; f.frequency.value=freq; f.Q.value=q; s.connect(f); this.env(f,t,0.003,d,peak); s.start(t,Math.random()); s.stop(t+d+0.05); },
+  click(){ this.tone(900,0.04,'triangle',0.05); },
+  place(){ this.tone(420,0.08,'triangle',0.12,260); },
+  clunk(){ this.tone(140,0.18,'sine',0.25,70); this.burst(0.06,'lowpass',900,0.12); },
+  erase(){ this.tone(300,0.1,'sawtooth',0.04,120); },
+  crack(){ this.burst(0.22,'highpass',1800,0.5); this.burst(0.35,'bandpass',500,0.35,0.8); this.tone(90,0.3,'sine',0.3,40); },
+  splash(){ if(this._sp&&this.ctx&&this.ctx.currentTime-this._sp<0.25) return; this._sp=this.ctx&&this.ctx.currentTime; this.burst(0.7,'lowpass',1400,0.35); },
+  rumble(){ this.burst(1.6,'lowpass',260,0.5); this.tone(55,1.2,'sine',0.25,30); },
+  engine(on){ if(!this.ok()){ return; } if(on&&!this.eng){ const o=this.ctx.createOscillator(); o.type='sawtooth'; o.frequency.value=55; const f=this.ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=300; const g=this.ctx.createGain(); g.gain.value=0.05; o.connect(f); f.connect(g); g.connect(this.ctx.destination); o.start(); this.eng={o,g}; }
+    if(!on&&this.eng){ const e=this.eng; e.g.gain.setTargetAtTime(0,this.ctx.currentTime,0.1); setTimeout(()=>e.o.stop(),500); this.eng=null; } },
+};
+
+/* ============================================================
+   MALLAR
+   ============================================================ */
+function Bd(){ const nodes=[],members=[]; return {nodes,members, n(x,y,s=0,l=0){nodes.push({x,y,support:s,load:l});return nodes.length-1;}, m(a,b,road=false){members.push({a,b,road});}}; }
+function truss(b,{n,p,h,load,top=()=>h,diag='pratt',ends='inclined'}){
+  const B=[],T=[];
+  for(let i=0;i<=n;i++) B[i]=b.n(i*p,0,i===0?1:i===n?2:0,(i>0&&i<n)?load:0);
+  const t0=ends==='vertical'?0:1, t1=ends==='vertical'?n:n-1;
+  for(let i=t0;i<=t1;i++) T[i]=b.n(i*p,top(i));
+  for(let i=0;i<n;i++) b.m(B[i],B[i+1],true);
+  for(let i=t0;i<t1;i++) b.m(T[i],T[i+1]);
+  if(ends!=='vertical'){ b.m(B[0],T[1]); b.m(B[n],T[n-1]); }
+  for(let i=t0;i<=t1;i++) b.m(B[i],T[i]);
+  for(let i=t0;i<t1;i++){ const left=(i+0.5)<n/2; const down = diag==='pratt'?left : diag==='howe'?!left : (i%2===1);
+    if(down) b.m(T[i],B[i+1]); else b.m(B[i],T[i+1]); }
+}
+function warren(b,{n,p,h,load}){
+  const B=[],M=[];
+  for(let i=0;i<=n;i++) B[i]=b.n(i*p,0,i===0?1:i===n?2:0,(i>0&&i<n)?load:0);
+  for(let i=0;i<n;i++) M[i]=b.n(i*p+p/2,h);
+  for(let i=0;i<n;i++){ b.m(B[i],B[i+1],true); b.m(B[i],M[i]); b.m(M[i],B[i+1]); if(i<n-1) b.m(M[i],M[i+1]); }
+}
+function ktruss(b,{n,p,h,load}){
+  const B=[],T=[],M=[], c=n/2;
+  for(let i=0;i<=n;i++){ B[i]=b.n(i*p,0,i===0?1:i===n?2:0,(i>0&&i<n)?load:0); T[i]=b.n(i*p,h); if(i!==c) M[i]=b.n(i*p,h/2); }
+  for(let i=0;i<n;i++){ b.m(B[i],B[i+1],true); b.m(T[i],T[i+1]); }
+  for(let i=0;i<=n;i++){ if(i===c) b.m(B[i],T[i]); else { b.m(B[i],M[i]); b.m(M[i],T[i]); } }
+  for(let i=0;i<=n;i++){ if(i<c){ b.m(M[i],T[i+1]); b.m(M[i],B[i+1]); } else if(i>c){ b.m(M[i],T[i-1]); b.m(M[i],B[i-1]); } }
+}
+const PRESETS=[
+  {id:'pratt', name:'Pratt', tag:'Stålbro · 24 m', desc:'Diagonalerna lutar in mot mitten och blir dragna. Vanlig i stål- och järnvägsbroar.', make(){ const b=Bd(); truss(b,{n:6,p:4,h:4,load:3000,diag:'pratt'}); return {cell:1,mat:'stal',...b}; }},
+  {id:'howe', name:'Howe', tag:'Stålbro · 24 m', desc:'Spegelvänd Pratt: diagonalerna trycks och vertikalerna dras. Klassisk i träbroar.', make(){ const b=Bd(); truss(b,{n:6,p:4,h:4,load:3000,diag:'howe',ends:'vertical'}); return {cell:1,mat:'stal',...b}; }},
+  {id:'warren', name:'Warren', tag:'Stålbro · 24 m', desc:'Liksidiga trianglar utan vertikaler. Diagonalerna växlar mellan drag och tryck.', make(){ const b=Bd(); warren(b,{n:6,p:4,h:4,load:3000}); return {cell:1,mat:'stal',...b}; }},
+  {id:'warrenv', name:'Warren med vertikaler', tag:'Stålbro · 24 m', desc:'Warren-sicksack plus vertikaler, så att överramens stavar blir kortare.', make(){ const b=Bd(); truss(b,{n:6,p:4,h:4,load:3000,diag:'warren'}); return {cell:1,mat:'stal',...b}; }},
+  {id:'k', name:'K-fackverk', tag:'Stålbro · 24 m', desc:'Vertikalerna delas på mitten. Korta tryckstavar knäcks inte lika lätt i höga fackverk.', make(){ const b=Bd(); ktruss(b,{n:8,p:3,h:6,load:4000}); return {cell:1,mat:'stal',...b}; }},
+  {id:'parker', name:'Bågbro (Parker)', tag:'Stålbro · 24 m', desc:'Pratt med böjd överram: högst där böjmomentet är störst, i mitten.', make(){ const b=Bd(); truss(b,{n:8,p:3,h:5,load:2500,diag:'pratt',top:i=>Math.round((2+3*(1-(2*i/8-1)**2))*2)/2}); return {cell:1,mat:'stal',...b}; }},
+  {id:'king', name:'Kingpost', tag:'Träbro · 8 m', desc:'Det enklaste fackverket: en triangel med en mittstolpe. Används till korta gångbroar.', make(){ const b=Bd(); const a=b.n(0,0,1), m=b.n(4,0,0,5000), c=b.n(8,0,2), t=b.n(4,3); b.m(a,m,true); b.m(m,c,true); b.m(a,t); b.m(t,c); b.m(m,t); return {cell:1,mat:'tra',...b}; }},
+  {id:'queen', name:'Queenpost', tag:'Träbro · 12 m', desc:'Två stolpar och ett mittfack. Når längre än kingpost.', make(){ const b=Bd(); const n0=b.n(0,0,1), n1=b.n(4,0,0,2500), n2=b.n(8,0,0,2500), n3=b.n(12,0,2), t1=b.n(4,3), t2=b.n(8,3);
+      b.m(n0,n1,true); b.m(n1,n2,true); b.m(n2,n3,true); b.m(n0,t1); b.m(t1,t2); b.m(t2,n3); b.m(n1,t1); b.m(n2,t2); b.m(t1,n2); return {cell:1,mat:'tra',...b}; }},
+  {id:'fink', name:'Fink-takstol', tag:'Takstol · 12 m', desc:'W-formade takstolar som bär snölast på taket. Lasten ligger på överramen.', make(){ const b=Bd(); const B0=b.n(0,0,1),B1=b.n(4,0),B2=b.n(8,0),B3=b.n(12,0,2),A=b.n(6,4,0,2500),P1=b.n(3,2,0,2500),P2=b.n(9,2,0,2500);
+      b.m(B0,B1); b.m(B1,B2); b.m(B2,B3); b.m(B0,P1); b.m(P1,A); b.m(A,P2); b.m(P2,B3); b.m(P1,B1); b.m(B1,A); b.m(A,B2); b.m(B2,P2); return {cell:1,mat:'tra',...b}; }},
+  {id:'glass', name:'Glasspinnebro', tag:'Modell · 60 cm', desc:'Warrenbro av glasspinnar, som i klassrumstävlingar. 1 kg i varje knutpunkt.', make(){ const b=Bd(); warren(b,{n:6,p:2,h:2,load:1}); return {cell:0.05,mat:'glass',...b}; }},
+  {id:'spag', name:'Spagettibro', tag:'Modell · 40 cm', desc:'Pratt i spagetti. Hur mycket bär den? Prova grillpinnar i tryckstavarna.', make(){ const b=Bd(); truss(b,{n:8,p:2.5,h:3,load:0.05,diag:'pratt'}); return {cell:0.02,mat:'spag',...b}; }},
+  {id:'tom', name:'Tom ritning', tag:'Bygg själv · 20 m', desc:'Bara två stöd på var sin klippkant. Bygg ditt eget fackverk.', make(){ const b=Bd(); b.n(0,0,1); b.n(20,0,2); return {cell:1,mat:'stal',...b}; }},
+];
+function applyPreset(p,fit=true){
+  const d=p.make(); state.cell=d.cell; state.nodes=[]; state.members=[]; state.nextId=1;
+  const ids=d.nodes.map(n=>{ const id=state.nextId++; state.nodes.push({id,x:n.x,y:n.y,support:n.support,load:n.load}); return id; });
+  d.members.forEach(m=>state.members.push({id:state.nextId++,a:ids[m.a],b:ids[m.b],mat:d.mat,road:m.road}));
+  ui.mat=d.mat; renderMats(); changed(true); if(fit) fitView();
+}
+function thumb(cvs,p){
+  const d=p.make(), c=cvs.getContext('2d'), w=cvs.width, h=cvs.height;
+  const g=c.createLinearGradient(0,0,0,h); g.addColorStop(0,'#3b6db3'); g.addColorStop(1,'#a9cbe9'); c.fillStyle=g; c.fillRect(0,0,w,h);
+  const xs=d.nodes.map(n=>n.x), ys=d.nodes.map(n=>n.y); let x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const s=Math.min((w-40)/Math.max(x1-x0,1),(h-46)/Math.max(y1-y0,1)); const ox=(w-(x1-x0)*s)/2-x0*s, oy=h-24-Math.max(0,((h-46)-(y1-y0)*s)/2)*0.6+y0*s;
+  const P=n=>[ox+n.x*s, oy-n.y*s];
+  c.fillStyle='#7a5f48'; c.fillRect(0,oy,ox+x0*s+4,h); c.fillRect(ox+x1*s-4,oy,w,h); c.fillStyle='#5fae3e'; c.fillRect(0,oy-1,ox+x0*s+4,4); c.fillRect(ox+x1*s-4,oy-1,w,4);
+  c.lineCap='round';
+  for(const m of d.members){ const a=P(d.nodes[m.a]),b=P(d.nodes[m.b]); c.strokeStyle='rgba(10,15,25,.6)'; c.lineWidth=5; c.beginPath(); c.moveTo(...a); c.lineTo(...b); c.stroke(); c.strokeStyle=rgb(MATS[d.mat].col); c.lineWidth=3; c.stroke(); }
+  for(const n of d.nodes){ const [x,y]=P(n); c.fillStyle='#fff'; c.beginPath(); c.arc(x,y,2.6,0,7); c.fill(); if(n.load){ c.fillStyle='#2b3240'; c.fillRect(x-4,y+5,8,7); } if(n.support){ c.fillStyle='#dfe5ec'; c.beginPath(); c.moveTo(x,y); c.lineTo(x-6,y+9); c.lineTo(x+6,y+9); c.fill(); } }
+}
+function openPresets(){
+  const g=$('#pgrid');
+  if(!g.children.length){
+    PRESETS.forEach(p=>{ const b=document.createElement('button'); b.className='pcard'; b.innerHTML=`<canvas width="440" height="220"></canvas><span class="tag">${p.tag}</span><b>${p.name}</b><span>${p.desc}</span>`;
+      thumb(b.querySelector('canvas'),p); b.onclick=()=>{ resetSim(); pushHist(); applyPreset(p); closeCard(); $('#presetModal').classList.add('hidden'); Snd.init(); Snd.place(); }; g.appendChild(b); });
+  }
+  $('#presetModal').classList.remove('hidden');
+}
+function renderMatTable(){
+  $('#matTable').innerHTML='<tr><th>Material</th><th>E-modul</th><th>Area A</th><th>Drag f<sub>t</sub></th><th>Tryck f<sub>c</sub></th><th>Densitet</th></tr>'+
+    Object.values(MATS).map(m=>`<tr><td>${m.name}</td><td>${nf3(m.E/1e9)} GPa</td><td>${m.A>=1e-4?nf3(m.A*1e4)+' cm²':nf3(m.A*1e6)+' mm²'}</td><td>${nf3(m.ft/1e6)} MPa</td><td>${nf3(m.fc/1e6)} MPa</td><td>${nf3(m.rho)} kg/m³</td></tr>`).join(''); }
+
+/* ============================================================
+   HUVUDLOOP
+   ============================================================ */
+let last=performance.now();
+function frame(t){
+  let dt=Math.min(0.05,(t-last)/1000); last=t; time+=dt;
+  if(slowmo>0){ slowmo-=dt; dt*=0.35; }
+  shake=Math.max(0,shake-dt*25);
+  try{
+    if(sim.mode==='ramp') rampStep(dt);
+    else if(sim.mode==='truck') truckStep(dt);
+    else if(sim.mode==='collapse') collapseStep(dt);
+    stepParticles(dt);
+    render();
+    statT-=dt; if(statT<=0){ statT=0.1; updateStats(); }
+  }catch(err){ console.error(err); }
+  requestAnimationFrame(frame);
+}
+
+/* start */
+(function init(){
+  renderMats(); renderLegend(); renderMatTable(); setTool('build'); updateUndoBtns();
+  let loaded=false;
+  try{ const s=localStorage.getItem('fackverkslabbet-v1'); if(s){ const o=JSON.parse(s); if(o&&Array.isArray(o.nodes)&&o.nodes.length){ restore(s); loaded=true; } } }catch(e){}
+  if(!loaded) applyPreset(PRESETS[0],false);
+  syncScaleUI(); fitView(); syncModeUI();
+  if(!loaded) openPresets();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

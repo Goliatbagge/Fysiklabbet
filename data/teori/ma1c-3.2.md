@@ -13,7 +13,7 @@ En faktor som anger hur mycket något har förändrats kallas
 **förändringsfaktor** och kan användas för att snabbt beräkna nya värden
 vid procentuella förändringar.
 
-::: formel "Förändringsfaktor och nya värdet"
+::: formel "Förändringsfaktor, nya och gamla värdet"
 $$
 \begin{gathered}
 \text{förändringsfaktor} = \frac{\text{nya värdet}}{\text{gamla värdet}}
@@ -21,28 +21,39 @@ $$
 \Longleftrightarrow
 \\[0.7em]
 \text{nya värdet} = \text{förändringsfaktor} \cdot \text{gamla värdet}
+\\[0.7em]
+\Longleftrightarrow
+\\[0.7em]
+\text{gamla värdet} = \frac{\text{nya värdet}}{\text{förändringsfaktor}}
 \end{gathered}
 $$
 :::
 
 Vi kan alltså få det nya värdet med en enda enkel uträkning om vi vet
+förändringsfaktorn. Vet vi i stället det nya värdet och förändringsfaktorn
+får vi det gamla värdet genom att dividera det nya värdet med
 förändringsfaktorn.
 
 ::: formel "Bestämma förändringsfaktorn"
 Förändringsfaktorn fås genom att lägga till ändringen i procentform
 till 100 % (100 % står för det vi har från början) och sedan göra om till
-decimalform.
+decimalform. Man kan också direkt lägga till ändringen i decimalform till 1,
+eftersom 100 % = 1.
 :::
 
 Exempel:
 
 | Förändring | Förändringsfaktor (procentform) | Förändringsfaktor (decimalform) |
 | --- | --- | --- |
-| + 5 % | 100 % + 5 % = 105 % | 1,05 |
-| + 27 % | 100 % + 27 % = 127 % | 1,27 |
-| + 140 % | 100 % + 140 % = 240 % | 2,40 |
-| − 4 % | 100 % − 4 % = 96 % | 0,96 |
-| − 25 % | 100 % − 25 % = 75 % | 0,75 |
+| + 5 % | 100 % + 5 % = 105 % | 1 + 0,05 = 1,05 |
+| + 27 % | 100 % + 27 % = 127 % | 1 + 0,27 = 1,27 |
+| + 140 % | 100 % + 140 % = 240 % | 1 + 1,40 = 2,40 |
+| − 4 % | 100 % − 4 % = 96 % | 1 − 0,04 = 0,96 |
+| − 25 % | 100 % − 25 % = 75 % | 1 − 0,25 = 0,75 |
+
+Förändringsfaktorn är alltid ett tal som är **större än eller lika med 0**.
+Ett värde kan som mest minska med 100 %, och då blir förändringsfaktorn
+$1 - 1 = 0$. Någon negativ förändringsfaktor finns alltså inte.
 
 Ibland jämför vi två värden procentuellt och då är det inte alltid
 självklart vad som är "nya värdet" och "gamla värdet".
@@ -147,6 +158,8 @@ beror på vad vi jämför med!
   = \dfrac{\text{nya värdet}}{\text{gamla värdet}}$
 - $\text{nya värdet}
   = \text{förändringsfaktor} \cdot \text{gamla värdet}$
+- $\text{gamla värdet}
+  = \dfrac{\text{nya värdet}}{\text{förändringsfaktor}}$
 :::
 
 ::: sampunkt "Bestämma faktorn"
@@ -159,6 +172,7 @@ beror på vad vi jämför med!
 ::: sampunkt "Tolka faktorn"
 - Faktor **större än 1**: ökning.
 - Faktor **mindre än 1**: minskning.
+- Faktorn är alltid **större än eller lika med 0**.
 - Faktorn 1,32 betyder en ökning med 32 %, faktorn 0,75 en minskning med
   25 %.
 :::

@@ -235,6 +235,24 @@ main#resa { position: relative; z-index: 2; }
 }
 .udda li::before { content: 'obs!'; position: absolute; left: 12px; top: 13px; font-family: var(--hand); font-size: 19px; color: var(--acc); transform: rotate(-8deg); }
 
+.tidslinje { list-style: none; padding: 0; margin: 0; border-left: 1px solid var(--hud); }
+.tidslinje li { position: relative; padding: 0 0 22px 22px; }
+.tidslinje li::before { content: ''; position: absolute; left: -4px; top: 6px; width: 7px; height: 7px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 10px var(--acc); }
+.tidslinje .tl-datum { font-family: var(--mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--acc); }
+.tidslinje h3 { font-family: var(--disp); font-weight: 500; font-size: 16px; margin: 4px 0 6px; }
+.tidslinje p { font-size: 14px; line-height: 1.75; color: #c8cedb; margin: 0; }
+.omslag { display: grid; grid-template-columns: 200px 1fr; gap: 22px; align-items: center; }
+.omslag svg { width: 100%; height: auto; }
+.omslag ol { margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.65; color: #d0d5e2; }
+.omslag li { margin-bottom: 6px; }
+.omslag li::marker { color: var(--acc); font-family: var(--mono); }
+@container (max-width: 460px) { .omslag { grid-template-columns: 1fr; } .omslag svg { max-width: 220px; margin: 0 auto; display: block; } }
+.lattar { list-style: none; padding: 0; margin: 0; columns: 2 220px; column-gap: 22px; }
+.lattar li { break-inside: avoid; font-size: 13px; line-height: 1.5; color: #d0d5e2; padding: 0 0 9px; }
+.lattar li span { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+.citat { border-left: 2px solid var(--acc); padding: 4px 0 4px 16px; margin: 14px 0; font-family: var(--hand); font-size: 21px; line-height: 1.35; color: #fff2d2; }
+.citat small { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; color: var(--dim); margin-top: 6px; }
+.levande { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 .ruta { border: 1px solid var(--hud2); border-radius: 4px; padding: 18px 18px 16px; background: rgba(255,255,255,.015); }
 .reglage { margin-bottom: 14px; }
 .reglage label { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; }
@@ -1668,6 +1686,33 @@ function byggStrimmor(antal, box) {
 const strimmor = byggStrimmor(MOBIL ? 1500 : 2800, 700);
 scen.add(strimmor.linjer, strimmor.punkter);
 
+// Vid slutstationen fuskar vi med solen: från 170 AE ser den ut som en ljusstark stjärna,
+// så den krymper när man passerar Pluto, och en liten stjärnglans tar över.
+const SOL_R = LAYOUT.solen.R;
+const solStjarna = (() => {
+  const c = document.createElement('canvas'); c.width = c.height = 128;
+  const g = c.getContext('2d');
+  const gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+  gr.addColorStop(0, 'rgba(255,255,250,1)'); gr.addColorStop(0.08, 'rgba(255,246,220,1)');
+  gr.addColorStop(0.22, 'rgba(255,214,140,.45)'); gr.addColorStop(0.5, 'rgba(255,190,110,.1)'); gr.addColorStop(1, 'rgba(255,180,100,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+  g.globalCompositeOperation = 'lighter';
+  [[0, 1], [Math.PI / 2, 1], [Math.PI / 4, 0.45], [-Math.PI / 4, 0.45]].forEach(([a, l]) => {
+    g.save(); g.translate(64, 64); g.rotate(a);
+    const lg = g.createLinearGradient(-64 * l, 0, 64 * l, 0);
+    lg.addColorStop(0, 'rgba(255,230,180,0)'); lg.addColorStop(0.5, 'rgba(255,240,210,.8)'); lg.addColorStop(1, 'rgba(255,230,180,0)');
+    g.fillStyle = lg; g.fillRect(-64 * l, -1.2, 128 * l, 2.4); g.restore();
+  });
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false, transparent: true, opacity: 0, sizeAttenuation: false }));
+  sp.scale.setScalar(0.07);
+  sp.renderOrder = 5;
+  sp.visible = false;
+  scen.add(sp);
+  return sp;
+})();
+const solAnkare = new THREE.Object3D();
+scen.add(solAnkare);
 const kroppar = PLANETER.map((p) => {
   const L = LAYOUT[p.id];
   const o = byggPlanet(p, { glod: p.sol ? 3.2 : 4.6, startSpin: START_SPIN[p.id] || 0 });
@@ -1912,6 +1957,8 @@ const voyager = (() => {
     { ankare: rtgMitt, text: 'Radioisotopgeneratorer', sub: 'ger el ur värmen från plutonium' },
     { ankare: kamAnkare, text: 'Kamerorna', sub: 'tog bilden av jorden som en blek blå prick' },
   ];
+  // solen räknas som en egen anteckning, med företräde, så att den alltid får plats
+  noter.unshift({ ankare: null, sol: true, text: 'Solen', sub: 'härifrån bara en ljusstark stjärna' });
 
   let grundVrid = 0;
   const VRID_EXTRA = 0.15;
@@ -1922,7 +1969,7 @@ const voyager = (() => {
     _r.crossVectors(_d, UPP).normalize();
     _u.crossVectors(_r, _d);
     const smal = aspect < 0.9;
-    root.position.copy(SLUT_P).addScaledVector(_d, smal ? 20 : 14).addScaledVector(_r, smal ? 0.9 : 3.6).addScaledVector(_u, smal ? -6.2 : -0.5);
+    root.position.copy(SLUT_P).addScaledVector(_d, smal ? 21 : 14).addScaledVector(_r, smal ? 0.9 : 3.6).addScaledVector(_u, smal ? -7.4 : -0.5);
     VOY_POS.copy(root.position);
     // antennen pekar ungefär mot solen och jorden, vriden så att sonden syns snett från sidan
     const sv = root.position.clone().negate().normalize();
@@ -2026,7 +2073,7 @@ function resPose(s, tid) {
 /* ---------- Omloppsläget ---------- */
 const omlopp = { aktiv: false, k: 0, az: 0, el: 0, dist: 10, distMal: 10, g: 0, vaz: 0, vel: 0 };
 function omloppPose(tid, dt) {
-  const o = kroppar[omlopp.k], W = o.root.position;
+  const { W } = omloppMal();
   if (!drag || !drag.drog) { omlopp.az += omlopp.vaz * dt + (REDUCERA ? 0 : 0.035 * dt); omlopp.el += omlopp.vel * dt; omlopp.vaz *= Math.exp(-dt * 2.4); omlopp.vel *= Math.exp(-dt * 2.4); }
   omlopp.el = klamp(omlopp.el, -1.35, 1.35);
   omlopp.dist += (omlopp.distMal - omlopp.dist) * (1 - Math.exp(-dt * 4));
@@ -2205,7 +2252,7 @@ function uppdateraNoter(aktiv, synlighet) {
   const kandidater = [];
   if (noterPa && aktiv === NS - 1 && synlighet > 0.5 && voyager.root.visible) {
     voyager.noter.forEach((n, j) => {
-      n.ankare.getWorldPosition(_np);
+      if (n.sol) { if (omlopp.aktiv) return; _np.set(0, 0, 0); } else n.ankare.getWorldPosition(_np);
       _nv.copy(_np).project(kamera);
       if (_nv.z > 1) return;
       const x = (_nv.x + 1) / 2 * w, y = (1 - _nv.y) / 2 * h;
@@ -2362,7 +2409,7 @@ function fyllStopptext(i) {
         <div><dt>Närmaste stjärnan</dt><dd>${nb('4,2 ljusår')}</dd></div>
         <div><dt>Resan dit</dt><dd>${nb('drygt 4 år')}</dd></div>
       </dl>
-      <div class="s-knappar"><button class="knapp prim" data-karta>Solsystemet i dag</button><button class="knapp sek" data-till="0">Tillbaka till solen</button></div>
+      <div class="s-knappar"><button class="knapp prim" data-voyager>Läs om Voyager 1</button><button class="knapp sek" data-voyager="skivan">Guldskivan</button><button class="knapp sek" data-till="0">Tillbaka till solen</button></div>
       `;
   } else {
     const p = PLANETER[i];
@@ -2379,6 +2426,7 @@ function fyllStopptext(i) {
   stopptext.querySelectorAll('[data-till]').forEach((b) => b.addEventListener('click', () => gaTillStopp(+b.dataset.till)));
   stopptext.querySelectorAll('[data-omlopp]').forEach((b) => b.addEventListener('click', () => oppnaDossier(+b.dataset.omlopp, b.dataset.flik)));
   stopptext.querySelectorAll('[data-karta]').forEach((b) => b.addEventListener('click', oppnaKarta));
+  stopptext.querySelectorAll('[data-voyager]').forEach((b) => b.addEventListener('click', () => oppnaVoyager(b.dataset.voyager || 'oversikt')));
   ruttLista.querySelectorAll('li').forEach((li, k) => { li.classList.toggle('aktiv', k === i); });
 }
 
@@ -2439,8 +2487,14 @@ function storlekSVG(p) {
 
 function visaFlik(flik) {
   dFlik = flik;
-  const i = omlopp.k, p = PLANETER[i], o = kroppar[i];
   $('dFlikar').querySelectorAll('button').forEach((b) => b.setAttribute('aria-selected', b.dataset.flik === flik));
+  if (omlopp.k === NS - 1) {
+    dInnehall.innerHTML = voyagerFlik(flik);
+    dInnehall.scrollTop = 0;
+    startaVoyRaknare();
+    return;
+  }
+  const i = omlopp.k, p = PLANETER[i], o = kroppar[i];
   let html = '';
   if (flik === 'oversikt') {
     const lager = (p.lager || []).map((l) => `<button class="vaxel" data-lager="${l.id}" aria-pressed="${o.lagerMal[l.id] > 0.5}">${l.text}</button>`).join('');
@@ -2843,6 +2897,226 @@ function uppdateraBanor(dt, w, h) {
   if (datum !== datumSenast) { $('kDatum').textContent = datum; datumSenast = datum; }
 }
 
+
+/* =====================================================================
+   VOYAGER 1: artikeln i dossiern
+   Källor: NASA/JPL (voyager.jpl.nasa.gov, science.nasa.gov/mission/voyager),
+   uppgifterna om skivans innehåll efter NASA:s förteckning över guldskivan.
+   ===================================================================== */
+// Voyager 1 är ett ljusdygn (173,1 AE) från jorden den 18 november 2026 och fjärmar sig 3,565 AE per år
+function voyagerAE() { return 173.1 + 3.565 * (Date.now() - Date.UTC(2026, 10, 18)) / (365.25 * 864e5); }
+const VOY_FLIKAR = [['oversikt', 'Översikt'], ['skivan', 'Guldskivan'], ['resan', 'Resan'], ['teknik', 'Tekniken'], ['fordj', 'Fördjupning']];
+const VOY_LATTAR = [
+  ['Brandenburgkonsert nr 2, första satsen', 'Johann Sebastian Bach, Tyskland'],
+  ['Puspåwarnå, gamelanmusik', 'Java, Indonesien'],
+  ['Trummor', 'Senegal'],
+  ['Alima-sång', 'Mbutifolket, Kongo'],
+  ['Sånger av aboriginer', 'Australien'],
+  ['El Cascabel', 'Mariachi, Mexiko'],
+  ['Johnny B. Goode', 'Chuck Berry, USA'],
+  ['Sång från männens hus', 'Papua Nya Guinea'],
+  ['Tranornas bo, för shakuhachi', 'Japan'],
+  ['Gavotte ur partita nr 3 för violin', 'Johann Sebastian Bach'],
+  ['Nattens drottnings aria ur Trollflöjten', 'Wolfgang Amadeus Mozart, Österrike'],
+  ['Chakrulo, körsång', 'Georgien'],
+  ['Panflöjter och trummor', 'Peru'],
+  ['Melancholy Blues', 'Louis Armstrong, USA'],
+  ['Mugham', 'Azerbajdzjan'],
+  ['Våroffer', 'Igor Stravinskij'],
+  ['Preludium och fuga i C-dur', 'Johann Sebastian Bach, spelad av Glenn Gould'],
+  ['Symfoni nr 5, första satsen', 'Ludwig van Beethoven'],
+  ['Izlel je Deljo Hajdutin', 'Valja Balkanska, Bulgarien'],
+  ['Nattsång', 'Navajofolket, USA'],
+  ['The Fairie Round', 'Anthony Holborne, England'],
+  ['Panflöjter', 'Salomonöarna'],
+  ['Bröllopssång', 'Peru'],
+  ['Flödande vatten, för guqin', 'Kina'],
+  ['Jaat Kahan Ho', 'Kesarbai Kerkar, Indien'],
+  ['Dark Was the Night, Cold Was the Ground', 'Blind Willie Johnson, USA'],
+  ['Stråkkvartett nr 13, Cavatina', 'Ludwig van Beethoven (skivans sista spår)'],
+];
+const OMSLAG_SVG = `<svg viewBox="0 0 200 200" role="img" aria-label="Guldskivans omslag med fyra instruktionsbilder">
+  <defs><radialGradient id="omslagGr" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#f3d37a"/><stop offset="1" stop-color="#9c6d1c"/></radialGradient></defs>
+  <circle cx="100" cy="100" r="96" fill="url(#omslagGr)"/>
+  <circle cx="100" cy="100" r="5" fill="#5a3d0a"/>
+  <g fill="none" stroke="#4a3208" stroke-width="1.6" stroke-linecap="round">
+    <circle cx="60" cy="60" r="24"/><circle cx="60" cy="60" r="3"/><path d="M88 40 L66 66"/>
+    <path d="M118 44 h44 M118 52 h44 M118 60 h44 M118 68 h44 M118 76 h30"/>
+    <g transform="translate(60 140)">${Array.from({ length: 14 }, (_, k) => { const a = k / 14 * Math.PI * 2 + 0.2, l = 14 + (k * 37) % 20; return `<path d="M0 0 L${(Math.cos(a) * l).toFixed(1)} ${(Math.sin(a) * l).toFixed(1)}"/>`; }).join('')}</g>
+    <circle cx="128" cy="140" r="7"/><circle cx="160" cy="140" r="7"/><path d="M135 140 h18"/>
+  </g>
+  <g font-family="ui-monospace, monospace" font-size="15" font-weight="700" fill="#e6b84f" text-anchor="middle">
+    <text x="16" y="20">1</text><text x="186" y="20">2</text><text x="16" y="193">3</text><text x="186" y="193">4</text>
+  </g>
+</svg>`;
+
+function voyagerFlik(flik) {
+  const ae = voyagerAE(), km = ae * AE_KM;
+  if (flik === 'oversikt') return `<p class="d-ingress">Voyager 1 är en obemannad rymdsond som sköts upp den 5 september 1977. Den skulle egentligen bara besöka Jupiter och Saturnus, men fortsatte sedan utåt och är i dag det föremål som människor har skickat längst bort. Sedan 2012 befinner den sig i det interstellära rummet, utanför den bubbla av solvind som omger solen och planeterna.</p>
+    <div class="rubrik">Fakta</div>
+    <dl class="fakta">
+      <div><dt>Uppskjuten</dt><dd>5 september 1977</dd></div>
+      <div><dt>Massa vid starten</dt><dd>${nb('drygt 800 kg')}</dd></div>
+      <div><dt>Avstånd från solen</dt><dd class="levande" data-voy="ae">${fmt(ae, 1)}${NB}AE</dd></div>
+      <div><dt>Fart</dt><dd>${nb('16,9 km/s')}</dd></div>
+      <div><dt>Antennens diameter</dt><dd>${nb('3,7 m')}</dd></div>
+      <div><dt>Energikälla</dt><dd>plutonium-238</dd></div>
+      <div><dt>Instrument i drift</dt><dd>2 av 10</dd></div>
+      <div><dt>Systersond</dt><dd>Voyager 2</dd></div>
+    </dl>
+    <div class="rubrik">Visste du att</div>
+    <ol class="visste">
+      <li>Voyager 1 sköts upp 16 dagar <em>efter</em> sin tvilling Voyager 2. Den fick ändå nummer 1, eftersom den tog en snabbare väg och kom fram till Jupiter först.</li>
+      <li>Runt den 18 november 2026 blir Voyager 1 det första föremål som är ett helt ljusdygn från jorden. En radiosignal behöver då 24 timmar åt varje håll, så en fråga till sonden ger svar först efter två dygn.</li>
+      <li>Datorerna ombord har tillsammans ungefär 70 kilobyte minne, mindre än en enda bild i en mobiltelefon. Ändå har teknikerna programmerat om dem på distans många gånger.</li>
+      <li>Sändaren har en effekt på drygt 20 watt, ungefär som en kylskåpslampa. Signalen fångas upp av NASA:s 70 meter stora antenner i Kalifornien, Spanien och Australien.</li>
+      <li>Ombord finns en guldpläterad grammofonskiva med bilder, ljud, musik och hälsningar på 55 språk, bland annat svenska. Den är tänkt som en flaskpost till den som en dag kanske hittar sonden.</li>
+    </ol>`;
+
+  if (flik === 'skivan') return `<p class="d-ingress">På sidan av skrovet sitter en grammofonskiva av koppar, 30${NB}cm bred och pläterad med guld. Den är en flaskpost från jorden: om någon en dag hittar sonden ska skivan berätta vilka vi var. Innehållet valdes 1977 av en grupp under ledning av astronomen Carl Sagan, och exakt samma skiva finns på Voyager 2.</p>
+    <dl class="fakta">
+      <div><dt>Bilder</dt><dd>116</dd></div>
+      <div><dt>Hälsningar</dt><dd>55 språk</dd></div>
+      <div><dt>Musik</dt><dd>${nb('27 stycken, 90 min')}</dd></div>
+      <div><dt>Hastighet</dt><dd>${nb('16⅔ varv per minut')}</dd></div>
+    </dl>
+    <div class="fordj" style="margin-top:26px">
+      <h3>Hälsningar på 55 språk</h3>
+      <p>Skivan inleds med hälsningar på 55 språk, från sumeriska, som talades för mer än 4 000 år sedan, till dagens stora och små språk. Det svenska bidraget lästes in av Gunnel Almgren Schaar:</p>
+    </div>
+    <div class="citat">”Hälsningar från en dataprogrammerare i den lilla universitetsstaden Ithaca på planeten Jorden.”<small>Den svenska hälsningen på guldskivan</small></div>
+    <div class="fordj">
+      <p>Den sista hälsningen är på engelska och kommer från Carl Sagans son Nick, som då var sex år: ”Hello from the children of planet Earth”, hälsningar från barnen på planeten jorden. Där finns också en inspelad hälsning från FN:s generalsekreterare Kurt Waldheim och ett skrivet budskap från USA:s president Jimmy Carter.</p>
+      <h3>116 bilder, inspelade som ljud</h3>
+      <p>Bilderna är lagrade som ljudsignaler, ungefär som en gammal tv-signal: varje bild består av 512 linjer som läses en i taget. Den första bilden är en enkel cirkel som visar mottagaren om bilden har avkodats rätt. Därefter följer matematiska och fysikaliska definitioner, solsystemets planeter, DNA-molekylen och människokroppen, men också landskap, djur, städer och människor som äter, dricker, arbetar och leker.</p>
+      <h3>Jordens ljud</h3>
+      <p>Ett kapitel på skivan är ett ljudcollage som går från naturen till människan: vulkaner, jordbävningar, åska, vind, regn och bränningar, sedan syrsor, grodor, fåglar, valar och en schimpans. Därefter kommer hjärtslag, fotsteg och skratt, smedens hammare, en traktor, morsekod, ett tåg, starten av en Saturnus V-raket, en kyss och en mamma som pratar med sitt barn.</p>
+    </div>
+    <div class="rubrik">Musiken, 27 stycken</div>
+    <ol class="lattar">${VOY_LATTAR.map(([t, v]) => `<li>${t}<span>${v}</span></li>`).join('')}</ol>
+    <div class="rubrik">Bruksanvisningen på omslaget</div>
+    <div class="omslag">${OMSLAG_SVG}
+      <ol>
+        <li><b>Så spelas skivan.</b> En skiva och en pickup, med hur lång tid ett varv tar.</li>
+        <li><b>Så blir ljudet bilder.</b> Hur signalen ritas ut linje för linje, och hur den första bilden ska se ut.</li>
+        <li><b>Var vi bor.</b> En karta med 14 pulsarer. Varje pulsar blinkar i sin egen takt, så kartan pekar ut solens läge i galaxen.</li>
+        <li><b>Tidens enhet.</b> En väteatom i sina två lägsta tillstånd. Övergången mellan dem tar en bestämd tid, och alla tider på omslaget mäts i den enheten.</li>
+      </ol>
+    </div>
+    <div class="fordj" style="margin-top:22px">
+      <p>Instruktionerna är skrivna med binära tal, eftersom den som hittar skivan inte kan svenska, engelska eller något annat av våra språk. Fysiken antas däremot vara densamma överallt i universum, så väteatomen fungerar som en gemensam klocka.</p>
+      <h3>En klocka av uran</h3>
+      <p>På omslaget finns ett tunt lager mycket rent uran-238. Halveringstiden är omkring 4,5 miljarder år, så den som mäter hur mycket av uranet som har sönderfallit kan räkna ut hur länge skivan har varit ute i rymden.</p>
+    </div>`;
+
+  if (flik === 'resan') {
+    const H = [
+      ['20 augusti 1977', 'Tvillingen startar först', 'Voyager 2 skjuts upp från Cape Canaveral i Florida.'],
+      ['5 september 1977', 'Uppskjutningen', 'Voyager 1 lämnar jorden med en Titan IIIE-raket, på en snabbare bana än tvillingen.'],
+      ['5 mars 1979', 'Jupiter', `Sonden passerar ${nb('349 000 km')} från Jupiter. Den upptäcker aktiva vulkaner på månen Io, de första som har setts någon annanstans än på jorden, och en tunn ring runt planeten.`],
+      ['12 november 1980', 'Saturnus och Titan', `Sonden passerar ${nb('124 000 km')} från Saturnus och flyger nära månen Titan, som har en tät atmosfär av mest kväve. Förbiflygningen böjer av banan uppåt, ut ur det plan där planeterna rör sig. Därför besöker Voyager 1 inga fler planeter.`],
+      ['14 februari 1990', 'Den blekblå pricken', `På Carl Sagans initiativ vänds kameran mot hemmet. Från ungefär ${nb('6 miljarder km')} är jorden mindre än en bildpunkt, en blekblå prick i en solstråle. Strax efteråt stängs kamerorna av för att spara energi, och de har aldrig startats igen.`],
+      ['17 februari 1998', 'Längst bort av allt', 'Voyager 1 går förbi rymdsonden Pioneer 10 och blir det föremål som människor har skickat längst bort.'],
+      ['15 december 2004', 'Termineringschocken', `Vid ungefär 94${NB}AE bromsas solvinden tvärt in av gasen mellan stjärnorna. Sonden passerar gränsen där solvinden plötsligt går långsammare än ljudet i den tunna gasen.`],
+      ['25 augusti 2012', 'In i det interstellära rummet', `Vid 121${NB}AE lämnar Voyager 1 heliosfären, den bubbla som solvinden blåser upp. Den mäter nu plasma som kommer från andra stjärnor.`],
+      ['November 2023 till april 2024', 'Räddningen på distans', `Ett trasigt minneschip gör att sonden bara skickar obegriplig data. Teknikerna hittar felet och flyttar programkoden till andra delar av minnet, på över ${nb('24 miljarder km')} avstånd och med nästan ett dygns fördröjning.`],
+      ['April 2026', 'Ännu ett instrument stängs av', 'För att spara energi stängs instrumentet för laddade partiklar med låg energi av. Två instrument är kvar: magnetometern och instrumentet som lyssnar på plasmavågor.'],
+      ['18 november 2026', 'Ett ljusdygn bort', 'Voyager 1 blir det första föremål som är ett helt ljusdygn från jorden.'],
+      ['Mitten av 2030-talet', 'Strömmen tar slut', 'Effekten från plutoniumet sjunker med ungefär 4 watt per år. Någon gång kring mitten av 2030-talet räcker den inte längre till att sända.'],
+      ['Om ungefär 40 000 år', 'Förbi en annan stjärna', `Voyager 1 passerar stjärnan Gliese 445, men på ${nb('1,6 ljusårs')} avstånd.`],
+    ];
+    return `<ol class="tidslinje">${H.map(([d, r, t]) => `<li><div class="tl-datum">${d}</div><h3>${r}</h3><p>${t}</p></li>`).join('')}</ol>`;
+  }
+
+  if (flik === 'teknik') {
+    const timmar = km / C_KM / 3600;
+    return `<div class="ruta">
+        <div class="rubrik" style="margin-top:0">Just nu</div>
+        <dl class="fakta">
+          <div><dt>Avstånd från solen</dt><dd class="levande" data-voy="km">${fmt(km / 1e9, 3)}${NB}miljarder km</dd></div>
+          <div><dt>Det är</dt><dd class="levande" data-voy="ae">${fmt(ae, 2)}${NB}AE</dd></div>
+          <div><dt>Ljuset behöver</dt><dd class="levande" data-voy="tid">${fmt(timmar, 2)}${NB}timmar</dd></div>
+          <div><dt>Sedan du öppnade fliken</dt><dd class="levande" data-voy="sedan">0${NB}km</dd></div>
+        </dl>
+        <p class="not-text">Värdena är beräknade ur sondens fart, ${nb('16,9 km/s')} bort från solen. Avståndet till jorden ändras dessutom med upp till 1${NB}AE under året, när jorden går runt solen.</p>
+      </div>
+      <div class="fordj" style="margin-top:28px">
+        <h3>Varför inga solceller?</h3>
+        <p>Ljusets intensitet avtar med kvadraten på avståndet. Vid Jupiter, som ligger drygt 5 gånger så långt från solen som jorden, får en solcell bara ungefär en tjugosjundedel så mycket ljus som här. Vid ${fmt(ae, 0)}${NB}AE är det ungefär en trettiotusendel. Därför får Voyager sin el från tre radioisotopgeneratorer. I dem sönderfaller plutonium-238, värmen tas om hand av termoelement som gör om den till elektrisk energi, och allt sker utan rörliga delar.</p>
+        <h3>Energin tar slut, långsamt</h3>
+        <p>Vid starten gav generatorerna ungefär 470 watt. Plutoniet har en halveringstid på 88 år, och termoelementen åldras, så effekten sjunker med ungefär 4 watt per år. Teknikerna har därför stängt av instrument och värmare ett efter ett. Kvar är magnetometern och plasmavågsinstrumentet.</p>
+        <h3>Antennen och signalen</h3>
+        <p>Parabolantennen är 3,7 meter bred och pekar hela tiden mot jorden. Sändaren har en effekt på drygt 20 watt, och när signalen når jorden har den spritts ut över ett område som är mycket större än hela jorden. Därför krävs NASA:s största antenner, 70 meter breda, för att fånga upp den. Data kommer i dag med 160 bitar per sekund, ungefär tjugo tecken text per sekund.</p>
+        <h3>Magnetometern på en 13 meter lång bom</h3>
+        <p>Sondens egen elektronik har svaga magnetfält. Därför sitter magnetometern längst ut på en tunn bom, 13 meter från skrovet, så att den mäter fältet i rymden och inte sondens eget.</p>
+        <h3>Datorer från 1970-talet</h3>
+        <p>Sonden styrs av tre datorsystem med tillsammans ungefär 70 kilobyte minne. De programmeras om från jorden, och 2024 flyttade teknikerna kod runt ett trasigt minneschip, ungefär som att laga en bil som befinner sig ett helt ljusdygn bort.</p>
+      </div>`;
+  }
+
+  return `<div class="fordj">
+      <h3>Planeterna på rad</h3>
+      <p>I slutet av 1970-talet stod de fyra gasjättarna i ett läge som bara återkommer ungefär vart 175:e år. En sond kunde då flyga från planet till planet och få fartökning vid varje förbiflygning. Voyager 2 utnyttjade det hela vägen till Neptunus. Voyager 1 fick i stället en kortare och snabbare bana, med Saturnus måne Titan som sista mål.</p>
+      <h3>Gravitationsslungan</h3>
+      <p>När sonden passerar bakom en planet i dess bana dras den med och lämnar planeten med högre fart i förhållande till solen. Rörelseenergin tas från planeten, men Jupiter är så tung att dess bana ändras omätbart lite. Utan slungor från Jupiter och Saturnus hade Voyager 1 aldrig nått de farter som behövs för att lämna solsystemet.</p>
+      <h3>Har Voyager 1 lämnat solsystemet?</h3>
+      <p>Både ja och nej. Sonden har lämnat heliosfären, det område där solvinden dominerar, och mäter nu gas som kommer från andra stjärnor. Men långt utanför finns Oorts moln, ett skal av isiga småkroppar som fortfarande hålls kvar av solens gravitation. Voyager 1 når den inre delen om ungefär 300 år och behöver kanske 30 000 år för att ta sig igenom det.</p>
+      <h3>Den blekblå pricken</h3>
+      <p>Bilden från 1990 där jorden syns som en liten prick är kanske den mest kända som sonden har tagit. Carl Sagan skrev senare att varje människa som någonsin har levt har levt sitt liv på den lilla pricken. Bilden visar hur liten jorden är, men också hur långt människor har lyckats nå.</p>
+    </div>
+    <div class="rubrik">Udda och oväntat</div>
+    <ul class="udda">
+      <li>På skivan finns en timmes hjärnvågor från Ann Druyan, som var med och valde innehållet. De spelades in med EEG och trycktes ihop till en minut ljud. Hon tänkte bland annat på jordens historia och på hur det känns att vara kär.</li>
+      <li>I den släta delen mellan skivans spår har någon för hand ristat in en kort hälsning: ”till dem som gör musik, i alla världar och alla tider”.</li>
+      <li>Chuck Berrys Johnny B. Goode finns med, liksom Bach, Beethoven och Mozart. Beethovens Cavatina är skivans sista spår.</li>
+      <li>Voyager 1 färdas ungefär 1,5 miljoner kilometer per dygn, men det tar ändå mer än 70 000 år att nå så långt som till den närmaste stjärnan.</li>
+    </ul>`;
+}
+let voyTimer = 0;
+function startaVoyRaknare() {
+  clearInterval(voyTimer);
+  const start = Date.now();
+  voyTimer = setInterval(() => {
+    if (!dossier.classList.contains('oppen')) { clearInterval(voyTimer); return; }
+    const ae = voyagerAE(), km = ae * AE_KM;
+    dInnehall.querySelectorAll('[data-voy]').forEach((el) => {
+      const t = el.dataset.voy;
+      if (t === 'km') el.textContent = fmt(km / 1e9, 3) + NB + 'miljarder km';
+      else if (t === 'ae') el.textContent = fmt(ae, el.closest('.ruta') ? 2 : 1) + NB + 'AE';
+      else if (t === 'tid') el.textContent = fmt(km / C_KM / 3600, 2) + NB + 'timmar';
+      else if (t === 'sedan') el.textContent = fmt((Date.now() - start) / 1000 * 16.9, 0) + NB + 'km';
+    });
+  }, 250);
+}
+function oppnaVoyager(flik) {
+  omlopp.k = NS - 1;
+  omlopp.aktiv = true;
+  const W = voyager.root.position;
+  _f.copy(kamera.position).sub(W);
+  const d = _f.length();
+  omlopp.dist = d;
+  omlopp.az = Math.atan2(_f.x, _f.z);
+  omlopp.el = Math.asin(klamp(_f.y / d, -1, 1));
+  omlopp.distMal = kamera.aspect < 0.9 ? 17 : 11;
+  omlopp.vaz = 0; omlopp.vel = 0;
+  $('dNr').textContent = 'V1';
+  $('dKicker').textContent = 'Rymdsond, uppskjuten 1977';
+  $('dNamn').textContent = 'Voyager 1';
+  $('dFlikar').innerHTML = VOY_FLIKAR.map(([id, t]) => `<button role="tab" data-flik="${id}" aria-selected="false">${t}</button>`).join('');
+  $('dFlikar').querySelectorAll('button').forEach((b) => b.addEventListener('click', () => visaFlik(b.dataset.flik)));
+  document.documentElement.style.setProperty('--acc', '#e6b84f');
+  visaFlik(flik || 'oversikt');
+  dossier.classList.add('oppen');
+  dossier.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('last', 'omlopp');
+}
+// mål och "radie" för omloppskameran: en värld, eller sonden
+function omloppMal() {
+  if (omlopp.k === NS - 1) return { W: voyager.root.position, R: 2.4 };
+  const o = kroppar[omlopp.k];
+  return { W: o.root.position, R: o.root.scale.x };
+}
+
 /* =====================================================================
    INTERAKTION
    ===================================================================== */
@@ -2895,6 +3169,11 @@ window.addEventListener('pointermove', (e) => {
 window.addEventListener('pointerup', (e) => {
   if (!drag || e.pointerId !== drag.id) return;
   if (!drag.drog) {
+    if (!omlopp.aktiv && voyager.root.visible) {
+      _mus.set(e.clientX / window.innerWidth * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
+      _ray.setFromCamera(_mus, kamera);
+      if (_ray.intersectObject(voyager.root, true).length) { oppnaVoyager(); drag = null; return; }
+    }
     const i = traffKropp(e);
     if (i >= 0 && !omlopp.aktiv) oppnaDossier(i);
   } else if (omlopp.aktiv && performance.now() - drag.lt > 90) { omlopp.vaz = 0; omlopp.vel = 0; }
@@ -2907,7 +3186,7 @@ document.addEventListener('selectstart', (e) => { if (drag && !omlopp.aktiv && !
 window.addEventListener('wheel', (e) => {
   if (!omlopp.aktiv || karta.oppen || e.target.closest('.dossier')) return;
   e.preventDefault();
-  const R = kroppar[omlopp.k].root.scale.x;
+  const R = omloppMal().R;
   omlopp.distMal = klamp(omlopp.distMal * (1 + e.deltaY * 0.0012), R * 1.5, R * 9);
 }, { passive: false });
 document.addEventListener('keydown', (e) => {
@@ -3169,6 +3448,13 @@ function frame(nu) {
   let narmast = 1e9;
   kroppar.forEach((o) => { narmast = Math.min(narmast, kamera.position.distanceTo(o.root.position) - o.root.scale.x * 1.03); });
   voyager.root.visible = s > NS - 2.15;
+  // solen krymper till en stjärna på väg ut mot Voyager 1
+  const stjarna = mjuk(NS - 1.75, NS - 1.1, s);
+  kroppar[0].root.scale.setScalar(SOL_R * (1 - 0.985 * stjarna));
+  kroppar[0].root.visible = stjarna < 0.995;
+  solStjarna.visible = stjarna > 0.01;
+  solStjarna.material.opacity = stjarna;
+  solStjarna.scale.setScalar(kamera.aspect < 0.9 ? 0.1 : 0.075);
   if (voyager.root.visible) {
     narmast = Math.min(narmast, Math.max(0.3, kamera.position.distanceTo(voyager.root.position) - 8));
     const vagga = REDUCERA ? 0 : 1;

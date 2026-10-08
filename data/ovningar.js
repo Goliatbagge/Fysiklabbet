@@ -10887,7 +10887,7 @@ $$ Q = \\frac{+6{,}0 + (-2{,}0)}{2} = \\frac{+4{,}0}{2} = +2{,}0\\ \\mathrm{nC} 
         {
             level: 2,
             question: `En ballong gnuggas mot håret och får då ett överskott på $3{,}0 \\cdot 10^{10}$ elektroner. Hur stor laddning får ballongen? Svara i nC. Elementarladdningen är $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
-            answer: { value: 4.8, unit: 'nC' },
+            answer: { value: -4.8, unit: 'nC', ignoreSign: true },
             solution: `Laddningen *Q* är antalet överskottselektroner *n* multiplicerat med elektronens laddning $q_e$:
 
 $$ Q = n \\cdot q_e $$
@@ -17654,7 +17654,7 @@ $$ B_\\text{jh} = \\frac{1{,}5\\cdot 10^{-5}}{\\tan 30^\\circ} = \\frac{1{,}5\\c
         {
             level: 3,
             question: `En kompassnål i Sverige (där $i = 71^\\circ$) är balanserad horisontellt. När man tar med kompassen till **ekvatorn** (där $i = 0^\\circ$) ändras motverkan från fältets vertikalkomposant. Räkna med att jordmagnetiska fältets totala flödestäthet är ungefär densamma på båda platser ($B_j = 50\\ \\mathrm{\\mu T}$). Med vilken faktor ändras den vridande horisontalkomposanten på kompassen från Sverige till ekvatorn?`,
-            answer: { value: 3.07, unit: '' },
+            answer: { value: 3.07, unit: '', tol: 0.03 },
             solution: `**Insikten är att det är *horisontalkomposanten* $B_\\text{jh} = B_j\\cos i$ som vrider kompassnålen** — vertikalkomposanten verkar lodrätt och påverkar inte kompassens rotation kring vertikalaxeln.
 
 **Steg 1 — horisontalkomposanten i Sverige.**
@@ -18280,7 +18280,7 @@ $$ \\Delta r = \\frac{(m_2 - m_1)\\cdot v}{q\\cdot B} = \\frac{(6{,}80 - 6{,}47)
 
 $$ \\Delta r = \\frac{3{,}3\\cdot 10^{-27} \\cdot 1{,}0\\cdot 10^5}{4{,}005\\cdot 10^{-20}} = \\frac{3{,}3\\cdot 10^{-22}}{4{,}005\\cdot 10^{-20}} \\approx 8{,}24\\cdot 10^{-3}\\ \\mathrm{m} $$
 
-**Svar:** Skillnaden i banradie är ungefär $8\\ \\mathrm{mm}$ — fullt tillräckligt för att separera isotoperna på en fotografisk plåt.
+**Svar:** Skillnaden i banradie är ungefär $8{,}2\\ \\mathrm{mm}$ — fullt tillräckligt för att separera isotoperna på en fotografisk plåt.
 
 **Generell slutsats:** Masspektrometri är så känslig att den kan särskilja isotoper som skiljer sig med bara *en* atommassenhet. Detta används praktiskt vid t.ex. åldersbestämning av arkeologiska fynd (kol-14-metoden).`,
         },
@@ -34250,7 +34250,7 @@ bakterier/h.
         {
             level: 1,
             question: `Mängden radioaktivt ämne $M(t)$ gram ges av $M(t) = 250 \\cdot 0{,}95^t$, där $t$ är tiden i dygn. Beräkna och tolka $M'(10)$.`,
-            answer: { value: -7.7, unit: 'g/dygn', tol: 0.3 },
+            answer: { value: -7.7, unit: 'g/dygn', tol: 0.02 },
             solution: `Vi deriverar $M(t)$ och sätter sedan in $t = 10$.
 
 $$

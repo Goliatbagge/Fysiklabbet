@@ -2147,32 +2147,74 @@
         // Tolka en sträng som ett tal — accepterar både komma och punkt som
         // decimal, mellanslag som tusentalsavgränsare, och ·10^n eller e-notation
         // (inkl. Unicode-superscript som ⁻³, ⁹). Plockar ut första numret i texten.
-        function parseAnswerNumber(input) {
-            if (typeof input !== 'string') return NaN;
+        // Returnerar { value, sig } där sig är antalet värdesiffror eleven
+        // skrev (nollor sist i ett heltal räknas inte, "120" har två).
+        function parseAnswerParts(input) {
+            if (typeof input !== 'string') return null;
             let s = input.trim();
-            if (!s) return NaN;
+            if (!s) return null;
             // Unicode-superscript → ASCII
             const supMap = { '⁻': '-', '⁺': '+', '⁰': '0', '¹': '1', '²': '2',
                 '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9' };
             s = s.replace(/[⁻⁺⁰¹²³⁴⁵⁶⁷⁸⁹]/g, ch => supMap[ch] || ch);
+            // Äkta minustecken och tankstreck (mobilens tangentbord, inklistrat) → bindestreck
+            s = s.replace(/[−–—]/g, '-');
             // Komma → punkt, ta bort mellanslag i tal
             s = s.replace(/,/g, '.').replace(/(\d)\s+(\d)/g, '$1$2');
-            // ·10^n eller *10^n eller x10^n → e-notation
-            s = s.replace(/[·*x×]\s*10\^?(-?\d+)/g, 'e$1');
+            // ·10^n, * 10^(n), x10^{n} … → e-notation. Mellanslag tillåts runt
+            // multiplikationstecknet: "1,1 · 10^-8" lämnade förr ett mellanslag
+            // före e och lästes som 1,1.
+            s = s.replace(/\s*[·⋅*x×]\s*10\s*\^?\s*[({]?\s*([+-]?\d+)\s*[)}]?/g, 'e$1');
+            // Bråk: "1/2", "-3 / 4" (men inte enheter som m/s, där en bokstav
+            // står efter snedstrecket)
+            const fr = s.match(/(-?)(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)(?![\d.e])/i);
+            if (fr && parseFloat(fr[3]) !== 0) {
+                const v = parseFloat(fr[2]) / parseFloat(fr[3]);
+                return { value: fr[1] ? -v : v, sig: Infinity };
+            }
             // Plocka första numret (med valfri e-notation)
-            const m = s.match(/-?\d+(\.\d+)?(e-?\d+)?/i);
-            if (!m) return NaN;
-            return parseFloat(m[0]);
+            const m = s.match(/(-?)(\d+(?:\.\d+)?)(?:e([+-]?\d+))?/i);
+            if (!m) return null;
+            const value = parseFloat(m[0]);
+            let digits = m[2].replace('.', '').replace(/^0+/, '');
+            if (!m[2].includes('.')) digits = digits.replace(/0+$/, '');
+            return { value, sig: Math.max(digits.length, 1) };
         }
 
+        function parseAnswerNumber(input) {
+            const p = parseAnswerParts(input);
+            return p ? p.value : NaN;
+        }
+
+        function roundSig(x, n) {
+            if (x === 0) return 0;
+            // Liten knuff utåt så att 1,25·10⁻⁵ (lagrat som 1,2499…) avrundas uppåt
+            return Number((x * (1 + 1e-10)).toPrecision(n));
+        }
+
+        // expected.ignoreSign: true godtar både +värdet och −värdet (t.ex. en
+        // laddning där frågan bara gäller storleken men svaret anger tecknet).
         function checkAnswer(input, expected) {
             if (!expected || typeof expected.value !== 'number') return null;
-            const num = parseAnswerNumber(input);
-            if (isNaN(num)) return 'unparseable';
+            const p = parseAnswerParts(input);
+            if (!p) return 'unparseable';
+            if (expected.ignoreSign) {
+                const utanTecken = input.replace(/^\s*[-−–]\s*/, '');
+                return checkAnswer(utanTecken, { ...expected, value: Math.abs(expected.value), ignoreSign: false });
+            }
+            const num = p.value;
             const tol = typeof expected.tol === 'number' ? expected.tol : 0.02;
             const abs = Math.abs(expected.value);
             const margin = abs > 0 ? abs * tol : Math.max(tol, 0.001);
-            return Math.abs(num - expected.value) <= margin ? 'correct' : 'wrong';
+            if (Math.abs(num - expected.value) <= margin) return 'correct';
+            // Rätt avrundat till elevens antal värdesiffror (minst två) är också
+            // rätt: facit 1,067·10⁻⁸ med 3 % tolerans underkände 1,1·10⁻⁸, som
+            // är 3,1 % ifrån men precis det svar lösningen själv ger.
+            if (p.sig >= 2 && abs > 0) {
+                const target = roundSig(expected.value, p.sig);
+                if (Math.abs(num - target) <= Math.abs(target) * 1e-9) return 'correct';
+            }
+            return 'wrong';
         }
 
         // Symboler för formaterings-popover. ·10ⁿ infogar literalt "·10^"

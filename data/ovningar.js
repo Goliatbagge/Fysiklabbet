@@ -23548,23 +23548,205 @@ $$ \\text{hela} = \\frac{2{,}0}{0{,}000\\ 008} = 250\\ 000\\ \\text{gram} = 250\
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En guldlegering innehåller 750 ‰ guld (18 karat). En smyckessmed har 40 g rent guld och vill tillverka så mycket 18-karats legering som möjligt. Hur många gram legering kan hon göra?`,
-            answer: { value: 53.3, unit: 'g', tol: 0.02 },
-            solution: `**Insikten:** det rena guldet är DELEN och legeringen är det HELA — frågan är alltså baklänges jämfört med de flesta promilleuppgifter.
+            question: `$15\\ \\%$ av talet $a$ är lika med $b$. Skriv $40\\ \\%$ av $6a$ uttryckt i $b$. Förenkla så långt som möjligt.`,
+            answer: { value: 16, unit: '· b' },
+            solution: `**Insikten:** vi känner inget av talen, men sambandet mellan dem räcker. Uttryck först $a$ med hjälp av $b$, och sätt sedan in.
 
-Andelen guld i legeringen är
+Att $15\\ \\%$ av $a$ är $b$ betyder
 
-$$ 750\\ \\text{‰} = \\frac{750}{1\\ 000} = 0{,}75 $$
+$$ 0{,}15a = b $$
 
-Det hela (legeringen) löses ut ur andelsformeln:
+Dividerar båda led med $0{,}15$:
 
-$$ \\text{hela} = \\frac{\\text{delen}}{\\text{andelen}} = \\frac{40}{0{,}75} = 53{,}33\\ldots \\approx 53{,}3\\ \\mathrm{g} $$
+$$ \\frac{0{,}15a}{\\boldsymbol{0{,}15}} = \\frac{b}{\\boldsymbol{0{,}15}} $$
 
-**Tolka:** av 53,3 g legering är $0{,}75 \\cdot 53{,}3 \\approx 40$ g guld — resten (13,3 g) är andra metaller. Rimligt!
+$$ a = \\frac{b}{0{,}15} $$
 
-**Svar:** cirka 53,3 g legering
+$40\\ \\%$ av $6a$ är
 
-**Generell slutsats:** identifiera alltid vilken av de tre storheterna (andel, del, hela) som är okänd innan du räknar — procenttriangeln hjälper: täck det du söker.`,
+$$ 0{,}40 \\cdot 6a = 2{,}4a $$
+
+Vi sätter in $a = \\dfrac{b}{0{,}15}$:
+
+$$ 2{,}4a = 2{,}4 \\cdot \\frac{b}{0{,}15} = \\frac{2{,}4}{0{,}15} \\cdot b = 16b $$
+
+Kontroll med påhittade tal: välj $a = 100$. Då är $b = 15$, och $40\\ \\%$ av $600$ är $240$. Mycket riktigt är $16 \\cdot 15 = 240$.
+
+**Svar:** $16b$
+
+**Generell slutsats:** när en uppgift bara innehåller bokstäver kan man alltid pröva sitt svar med ett påhittat tal. Stämmer kontrollen för ett val av $a$ är det ett starkt tecken på att algebran är rätt.`,
+        },
+        {
+            level: 3,
+            question: `Lös uppgiften utan räknare. Hur många av talen nedan är större än $2{,}5$ promille?
+
+$$ \\frac{1}{399} \\qquad 0{,}00251 \\qquad \\frac{2}{801} \\qquad \\frac{1}{401} \\qquad 2{,}6 \\cdot 10^{-3} \\qquad \\frac{3}{1\\,250} $$`,
+            answer: { value: 3, unit: 'st' },
+            solution: `**Insikten:** skriv gränsen på flera former, så att varje tal kan jämföras med den form som passar det bäst.
+
+$$ 2{,}5\\ \\text{‰} = \\frac{2{,}5}{1\\,000} = 0{,}0025 = \\frac{1}{400} $$
+
+Nu jämför vi talen ett i taget.
+
+- $\\dfrac{1}{399}$: samma täljare som $\\dfrac{1}{400}$ men mindre nämnare. Man delar 1 i färre delar, så varje del blir större. **Större.**
+- $0{,}00251$ jämförs med $0{,}00250$. **Större.**
+- $\\dfrac{2}{801}$: gränsen kan skrivas $\\dfrac{2}{800}$. Samma täljare, större nämnare. **Mindre.**
+- $\\dfrac{1}{401}$: större nämnare än $\\dfrac{1}{400}$. **Mindre.**
+- $2{,}6 \\cdot 10^{-3} = 0{,}0026$, som är större än $0{,}0025$. **Större.**
+- $\\dfrac{3}{1\\,250}$: förläng med 8, så att nämnaren blir $10\\,000$: $\\dfrac{24}{10\\,000} = 0{,}0024$. **Mindre.**
+
+Tre av talen är större än $2{,}5\\ \\text{‰}$: $\\dfrac{1}{399}$, $0{,}00251$ och $2{,}6 \\cdot 10^{-3}$.
+
+**Svar:** 3 stycken
+
+**Generell slutsats:** ett bråk med samma täljare blir mindre när nämnaren växer. Genom att skriva gränsen som ett bråk med passande täljare ($\\dfrac{1}{400}$ och $\\dfrac{2}{800}$) blir jämförelsen nästan omedelbar.`,
+        },
+        {
+            level: 3,
+            question: `Sterlingsilver har silverhalten $925$ promille. En silversmed har ett silver med halten $800$ promille och vill smälta ihop det med sterlingsilver så att hon får $50$ g legering med halten $875$ promille. Hur många gram sterlingsilver ska hon använda?`,
+            answer: { value: 30, unit: 'g' },
+            solution: `**Insikten:** mängden rent silver ändras inte när metallerna smälts ihop. Silvret i de två delarna ska tillsammans bli silvret i den färdiga legeringen.
+
+Låt $x$ gram vara sterlingsilvret. Då är resten, $(50 - x)$ gram, det andra silvret.
+
+Mängden rent silver i varje del är andelen gånger det hela:
+
+- i sterlingsilvret: $0{,}925x$ gram
+- i det andra silvret: $0{,}800(50 - x)$ gram
+- i den färdiga legeringen: $0{,}875 \\cdot 50 = 43{,}75$ gram
+
+Silvret ska räcka exakt, så
+
+$$ 0{,}925x + 0{,}800(50 - x) = 43{,}75 $$
+
+Utvecklar parentesen:
+
+$$ 0{,}925x + 40 - 0{,}8x = 43{,}75 $$
+
+$$ 0{,}125x + 40 = 43{,}75 $$
+
+Subtraherar 40 från båda led:
+
+$$ 0{,}125x + 40 \\mathbin{\\boldsymbol{-}}\\boldsymbol{40} = 43{,}75 \\mathbin{\\boldsymbol{-}}\\boldsymbol{40} $$
+
+$$ 0{,}125x = 3{,}75 $$
+
+Dividerar båda led med $0{,}125$:
+
+$$ \\frac{0{,}125x}{\\boldsymbol{0{,}125}} = \\frac{3{,}75}{\\boldsymbol{0{,}125}} $$
+
+$$ x = 30 $$
+
+Kontroll: $0{,}925 \\cdot 30 + 0{,}800 \\cdot 20 = 27{,}75 + 16 = 43{,}75$ gram silver av 50 gram, och $\\dfrac{43{,}75}{50} = 0{,}875 = 875\\ \\text{‰}$.
+
+Rimligt? $875$ ligger närmare $925$ än $800$, så mer än hälften ska vara sterlingsilver.
+
+**Svar:** 30 g sterlingsilver (och 20 g av det andra silvret)
+
+**Generell slutsats:** vid blandningar räknar man på det som bevaras, här mängden rent silver. Andelarna får aldrig adderas direkt.`,
+        },
+        {
+            level: 3,
+            question: `I en klass är $60\\ \\%$ av eleverna tjejer. $25\\ \\%$ av tjejerna och $40\\ \\%$ av killarna spelar fotboll.<br>a) Hur många procent av klassen spelar fotboll?<br>b) Hur många procent av dem som spelar fotboll är tjejer? Avrunda till en decimal.`,
+            answer: { value: 48.4, unit: '%', tol: 0.005 },
+            solution: `**Insikten:** varje procentsats är en andel av ett eget hela. Skriv ut vad som är det hela innan du räknar: tjejerna, killarna, klassen eller fotbollsspelarna.
+
+**a)** Tjejerna är $60\\ \\%$ av klassen, så killarna är $40\\ \\%$.
+
+Tjejer som spelar fotboll, som andel av klassen: $25\\ \\%$ av $60\\ \\%$:
+
+$$ 0{,}25 \\cdot 0{,}60 = 0{,}15 $$
+
+Killar som spelar fotboll, som andel av klassen: $40\\ \\%$ av $40\\ \\%$:
+
+$$ 0{,}40 \\cdot 0{,}40 = 0{,}16 $$
+
+Tillsammans:
+
+$$ 0{,}15 + 0{,}16 = 0{,}31 = 31\\ \\% $$
+
+Lägg märke till att svaret INTE är medelvärdet av $25\\ \\%$ och $40\\ \\%$. Det finns fler tjejer, så deras lägre andel väger tyngre.
+
+**Svar:** 31 %
+
+**b)** Nu är fotbollsspelarna det hela, $31\\ \\%$ av klassen, och tjejerna bland dem delen, $15\\ \\%$ av klassen:
+
+$$ \\text{andel} = \\frac{\\text{delen}}{\\text{hela}} = \\frac{0{,}15}{0{,}31} = 0{,}4838\\ldots \\approx 48{,}4\\ \\% $$
+
+Kontroll med en klass på 100 elever: 60 tjejer, varav 15 spelar fotboll, och 40 killar, varav 16 spelar. Av de 31 fotbollsspelarna är 15 tjejer, och $\\dfrac{15}{31} \\approx 0{,}484$.
+
+**Svar:** Cirka 48,4 %
+
+**Generell slutsats:** "andelen tjejer som spelar fotboll" ($25\\ \\%$) och "andelen fotbollsspelare som är tjejer" ($48{,}4\\ \\%$) låter lika men har olika hela. Att tänka sig 100 elever gör det lätt att hålla isär.`,
+        },
+        {
+            level: 3,
+            question: `Gränsvärdet för bly i dricksvatten är $10$ mikrogram per liter. Ett prov från en brunn innehåller $0{,}03$ ppm bly, räknat som massandel. En liter vatten väger $1$ kg. Hur många gånger högre än gränsvärdet är blyhalten i brunnen?`,
+            answer: { value: 3, unit: 'gånger' },
+            solution: `**Insikten:** halterna står i olika form, en andel (ppm) och en massa per volym (mikrogram per liter). De måste göras om till samma form innan de kan jämföras.
+
+$0{,}03$ ppm betyder att delen är $0{,}03$ miljondelar av det hela:
+
+$$ 0{,}03\\ \\text{ppm} = \\frac{0{,}03}{1\\,000\\,000} = 0{,}000\\,000\\,03 $$
+
+En liter vatten väger 1 kg, och $1\\ \\mathrm{kg} = 1\\,000\\,000\\,000$ mikrogram (1 kg är 1 000 g, och 1 g är 1 000 000 mikrogram). Delen är andelen gånger det hela:
+
+$$ \\text{delen} = 0{,}000\\,000\\,03 \\cdot 1\\,000\\,000\\,000 = 30 $$
+
+En liter brunnsvatten innehåller alltså 30 mikrogram bly. Jämför med gränsvärdet:
+
+$$ \\frac{30}{10} = 3 $$
+
+**Svar:** 3 gånger högre än gränsvärdet
+
+**Generell slutsats:** 1 ppm av en massa på 1 kg är 1 mg, eftersom ett milligram är en miljondel av ett kilogram. För vatten betyder därför 1 ppm samma sak som 1 mg per liter, ett samband som används mycket i kemi och miljöanalys.`,
+        },
+        {
+            level: 3,
+            question: `Färska svampar innehåller $90\\ \\%$ vatten, räknat i massa. Efter torkning innehåller svamparna $20\\ \\%$ vatten. Hur mycket väger de torkade svamparna om man började med $5{,}0$ kg färska svampar? Svara i gram.`,
+            answer: { value: 625, unit: 'g' },
+            solution: `**Insikten:** vattnet försvinner vid torkningen, men allt annat i svampen, torrsubstansen, finns kvar. Räkna på det som INTE ändras.
+
+I de färska svamparna är $100\\ \\% - 90\\ \\% = 10\\ \\%$ torrsubstans:
+
+$$ \\text{delen} = 0{,}10 \\cdot 5{,}0 = 0{,}5\\ \\mathrm{kg} $$
+
+I de torkade svamparna är fortfarande $0{,}5$ kg torrsubstans, men nu utgör den $100\\ \\% - 20\\ \\% = 80\\ \\%$ av massan. Delen och andelen är kända, och det hela söks:
+
+$$ \\text{hela} = \\frac{\\text{delen}}{\\text{andelen}} = \\frac{0{,}5}{0{,}80} = 0{,}625\\ \\mathrm{kg} = 625\\ \\mathrm{g} $$
+
+Kontroll: i 625 g torkad svamp är $0{,}20 \\cdot 625 = 125$ g vatten och $500$ g torrsubstans.
+
+Rimligt? Svamparna har förlorat $4{,}375$ kg av sina $4{,}5$ kg vatten. Nästan allt vatten är borta, och då ska vikten sjunka kraftigt.
+
+**Svar:** 625 g
+
+**Generell slutsats:** den vanliga felräkningen är "vattenhalten minskar med 70 procentenheter, alltså minskar vikten med $70\\ \\%$". Men procentsatserna räknas på olika hela före och efter torkningen. Leta i stället efter den storhet som är densamma före och efter.`,
+        },
+        {
+            level: 3,
+            question: `På en skola cyklar $15\\ \\%$ av eleverna till skolan. Året därpå har antalet elever som cyklar ökat med $20\\ \\%$, samtidigt som antalet elever på skolan har minskat med $20\\ \\%$. Hur många procent av eleverna cyklar nu?`,
+            answer: { value: 22.5, unit: '%' },
+            solution: `**Insikten:** andelen är en kvot, $\\dfrac{\\text{delen}}{\\text{hela}}$. Både täljaren och nämnaren ändras, så varje förändringsfaktor ska verka på sin egen del av kvoten.
+
+Låt skolan ha $N$ elever från början. Då cyklar $0{,}15N$ elever.
+
+Året därpå:
+
+- antalet cyklister är $1{,}20 \\cdot 0{,}15N = 0{,}18N$
+- antalet elever är $0{,}80N$
+
+Den nya andelen:
+
+$$ \\text{andel} = \\frac{0{,}18N}{0{,}80N} = \\frac{0{,}18}{0{,}80} = 0{,}225 = 22{,}5\\ \\% $$
+
+$N$ tar ut sig självt, så svaret gäller hur stor skolan än är.
+
+Kontroll med 1 000 elever: 150 cyklister blir 180, och skolan krymper till 800 elever. $\\dfrac{180}{800} = 0{,}225$.
+
+**Svar:** 22,5 %
+
+**Generell slutsats:** andelen har ändrats med faktorn $\\dfrac{1{,}20}{0{,}80} = 1{,}5$, alltså ökat med $50\\ \\%$. Den vanliga felräkningen, "$+20\\ \\%$ och $+20\\ \\%$ blir $+40\\ \\%$", missar att en minskning av nämnaren ger en DIVISION med $0{,}80$.`,
         },
     ],
 
@@ -23660,21 +23842,248 @@ Lägg märke till att det är fel att dra bort 15 % av 5 520 kr. Höjningen räk
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Ett elpris höjs med 40 % under vintern. Till våren sänks det nya priset så att det hamnar tillbaka på det ursprungliga. Hur många procent sänktes priset? Avrunda till en decimal.`,
-            answer: { value: 28.6, unit: '%', tol: 0.01 },
-            solution: `**Insikten:** en höjning med 40 % återställs INTE av en sänkning med 40 % — procentsatsen räknas på olika "gamla värden".
+            question: `Talet $x$ ligger någonstans mellan talen $24$ och $36$. Talet $x$ är $p\\ \\%$ större än $24$ och $p\\ \\%$ mindre än $36$. Bestäm $x$.`,
+            answer: { value: 28.8, unit: '' },
+            solution: `**Insikten:** samma procentsats ger två förändringsfaktorer, $1 + q$ uppåt från 24 och $1 - q$ nedåt från 36, där $q$ är $p\\ \\%$ i decimalform. Båda vägarna ska landa på samma tal $x$, och det ger en ekvation.
 
-Kalla det ursprungliga priset $P$. Efter höjningen är priset $1{,}40P$.
+Från 24 ökat med $p\\ \\%$:
 
-Sänkningen ska ta $1{,}40P$ tillbaka till $P$. Förändringsfaktorn för sänkningen är
+$$ x = 24(1 + q) $$
 
-$$ \\frac{\\text{nya värdet}}{\\text{gamla värdet}} = \\frac{P}{1{,}40P} = \\frac{1}{1{,}40} = 0{,}714\\ldots \\approx 71{,}4\\ \\% $$
+Från 36 minskat med $p\\ \\%$:
 
-Priset sänktes alltså med $100\\ \\% - 71{,}4\\ \\% = 28{,}6\\ \\%$.
+$$ x = 36(1 - q) $$
 
-**Svar:** cirka 28,6 %
+Båda uttrycken är $x$, alltså
 
-**Generell slutsats:** faktorn "dit" och faktorn "hem" är varandras inverser ($1{,}40 \\cdot \\dfrac{1}{1{,}40} = 1$) — aldrig samma procentsats åt båda hållen (utom vid 0 %).`,
+$$ 24(1 + q) = 36(1 - q) $$
+
+Utvecklar parenteserna:
+
+$$ 24 + 24q = 36 - 36q $$
+
+Adderar $36q$ till båda led:
+
+$$ 24 + 24q \\mathbin{\\boldsymbol{+}}\\boldsymbol{36q} = 36 - 36q \\mathbin{\\boldsymbol{+}}\\boldsymbol{36q} $$
+
+$$ 24 + 60q = 36 $$
+
+Subtraherar 24 från båda led:
+
+$$ 24 + 60q \\mathbin{\\boldsymbol{-}}\\boldsymbol{24} = 36 \\mathbin{\\boldsymbol{-}}\\boldsymbol{24} $$
+
+$$ 60q = 12 $$
+
+Dividerar båda led med 60:
+
+$$ \\frac{60q}{\\boldsymbol{60}} = \\frac{12}{\\boldsymbol{60}} $$
+
+$$ q = 0{,}2 $$
+
+Procentsatsen är alltså $20\\ \\%$, och
+
+$$ x = 24 \\cdot 1{,}2 = 28{,}8 $$
+
+Kontroll: $36 \\cdot 0{,}8 = 28{,}8$. Båda vägarna ger samma tal.
+
+Lägg märke till att $x$ INTE är mittpunkten 30. Ökningen räknas på det mindre talet 24 och minskningen på det större talet 36, så samma procentsats ger olika långa steg.
+
+**Svar:** $x = 28{,}8$`,
+        },
+        {
+            level: 3,
+            question: `Lisa har $x$ kr. Moa har $25\\ \\%$ mer pengar än Lisa och Nils har $25\\ \\%$ mindre än Lisa. Hur många procent mer pengar har Moa än Nils? Avrunda till en decimal.`,
+            answer: { value: 66.7, unit: '%', tol: 0.005 },
+            solution: `**Insikten:** Lisas belopp är okänt, men det behövs inte. Uttryck både Moas och Nils belopp i $x$ och jämför dem med varandra. Svaret är INTE $50\\ \\%$.
+
+Moa har $25\\ \\%$ mer än Lisa: förändringsfaktorn är $1{,}25$, så Moa har $1{,}25x$ kr.
+
+Nils har $25\\ \\%$ mindre än Lisa: förändringsfaktorn är $0{,}75$, så Nils har $0{,}75x$ kr.
+
+Vi jämför Moa MED Nils, så Nils belopp är det gamla värdet:
+
+$$ \\text{förändringsfaktor} = \\frac{\\text{nya värdet}}{\\text{gamla värdet}} = \\frac{1{,}25x}{0{,}75x} = \\frac{1{,}25}{0{,}75} = 1{,}666\\ldots \\approx 166{,}7\\ \\% $$
+
+Moa har alltså $166{,}7\\ \\% - 100\\ \\% = 66{,}7\\ \\%$ mer än Nils.
+
+Kontroll med $x = 100$: Moa har 125 kr och Nils 75 kr. Skillnaden är 50 kr, och $\\dfrac{50}{75} \\approx 0{,}667$.
+
+**Svar:** Cirka 66,7 % mer
+
+**Generell slutsats:** skillnaden mellan Moa och Nils är $50\\ \\%$ av LISAS belopp, men frågan jämför med Nils, som har mindre. Ju mindre det gamla värdet är, desto större blir samma skillnad i procent.`,
+        },
+        {
+            level: 3,
+            question: `Ett pris höjs med $p\\ \\%$. Senare sänks det nya priset så att det hamnar tillbaka på det ursprungliga.<br>a) Hur många procent sänks priset om $p = 25$?<br>b) Visa att sänkningen alltid är mindre än höjningen, oavsett hur stort $p$ är.<br>c) Hur stor måste höjningen ha varit om priset sedan sänktes med $50\\ \\%$ för att komma tillbaka?`,
+            answer: { value: 100, unit: '%' },
+            solution: `**Insikten:** höjningen och sänkningen har varsin förändringsfaktor, och tillsammans ska de ge faktorn 1 (oförändrat pris). Sänkningens faktor är alltså 1 delat med höjningens.
+
+**a)** Höjningen med $25\\ \\%$ har faktorn $1{,}25$. Sänkningen ska ta tillbaka priset, så dess faktor $f$ uppfyller
+
+$$ 1{,}25 \\cdot f = 1 $$
+
+Dividerar båda led med $1{,}25$:
+
+$$ \\frac{1{,}25 \\cdot f}{\\boldsymbol{1{,}25}} = \\frac{1}{\\boldsymbol{1{,}25}} $$
+
+$$ f = 0{,}8 $$
+
+Faktorn $0{,}8$ motsvarar en sänkning med $100\\ \\% - 80\\ \\% = 20\\ \\%$.
+
+**Svar:** 20 %
+
+**b)** Skriv höjningen i decimalform som $q$, där $q > 0$. Höjningens faktor är $1 + q$, och sänkningens faktor är $\\dfrac{1}{1 + q}$. Sänkningen i decimalform blir
+
+$$ 1 - \\frac{1}{1 + q} = \\frac{1 + q}{1 + q} - \\frac{1}{1 + q} = \\frac{q}{1 + q} $$
+
+Täljaren är höjningen $q$, och den divideras med $1 + q$, som är större än 1. En division med ett tal större än 1 ger ett mindre tal, alltså är $\\dfrac{q}{1 + q} < q$.
+
+Kontroll med a): $q = 0{,}25$ ger $\\dfrac{0{,}25}{1{,}25} = 0{,}2$, precis som ovan.
+
+**Svar:** Sänkningen är $\\dfrac{q}{1 + q}$, som är mindre än $q$ eftersom nämnaren $1 + q$ är större än 1.
+
+**c)** Sänkningen med $50\\ \\%$ har faktorn $0{,}5$. Höjningens faktor $g$ ska uppfylla
+
+$$ g \\cdot 0{,}5 = 1 $$
+
+Dividerar båda led med $0{,}5$:
+
+$$ \\frac{g \\cdot 0{,}5}{\\boldsymbol{0{,}5}} = \\frac{1}{\\boldsymbol{0{,}5}} $$
+
+$$ g = 2 $$
+
+Faktorn 2 motsvarar en höjning med $200\\ \\% - 100\\ \\% = 100\\ \\%$. Priset hade alltså fördubblats, och en halvering tar det tillbaka.
+
+**Svar:** 100 %
+
+**Generell slutsats:** en sänkning kan aldrig bli större än $100\\ \\%$, men en höjning kan bli hur stor som helst. Därför måste "vägen tillbaka" alltid vara en mindre procentsats än "vägen dit".`,
+        },
+        {
+            level: 3,
+            question: `En rektangulär odlingslott ska göras om. Längden ökas med $20\\ \\%$. Hur många procent måste bredden minskas för att arean ska vara densamma som förut? Avrunda till en decimal.`,
+            answer: { value: 16.7, unit: '%', tol: 0.005 },
+            solution: `**Insikten:** arean är längd gånger bredd. När varje sida ändras med en faktor, ändras arean med produkten av faktorerna. Arean ska vara oförändrad, alltså ska produkten vara 1. Svaret är INTE $20\\ \\%$.
+
+Kalla längden $l$ och bredden $b$. Arean är $l \\cdot b$.
+
+Den nya längden är $1{,}20l$. Låt bredden ändras med faktorn $f$, så att den nya bredden är $f \\cdot b$. Den nya arean ska vara lika stor som den gamla:
+
+$$ 1{,}20l \\cdot fb = l \\cdot b $$
+
+Dividerar båda led med $l \\cdot b$, som inte är 0:
+
+$$ \\frac{1{,}20l \\cdot fb}{\\boldsymbol{l \\cdot b}} = \\frac{l \\cdot b}{\\boldsymbol{l \\cdot b}} $$
+
+$$ 1{,}20f = 1 $$
+
+Dividerar båda led med $1{,}20$:
+
+$$ \\frac{1{,}20f}{\\boldsymbol{1{,}20}} = \\frac{1}{\\boldsymbol{1{,}20}} $$
+
+$$ f = 0{,}8333\\ldots $$
+
+Faktorn $0{,}8333\\ldots$ motsvarar en minskning med $1 - 0{,}8333\\ldots = 0{,}1666\\ldots \\approx 16{,}7\\ \\%$.
+
+Kontroll med en lott som är 10 m lång och 6 m bred, arean $60\\ \\mathrm{m}^2$: den nya längden är 12 m och den nya bredden $\\dfrac{60}{12} = 5$ m. Bredden har minskat med 1 m av 6 m, och $\\dfrac{1}{6} \\approx 0{,}167$.
+
+**Svar:** Cirka 16,7 %
+
+**Generell slutsats:** att minska bredden med $20\\ \\%$ hade gett faktorn $1{,}20 \\cdot 0{,}80 = 0{,}96$, alltså $4\\ \\%$ mindre area. Två lika stora procentsatser åt olika håll tar inte ut varandra.`,
+        },
+        {
+            level: 3,
+            question: `En cykel kostar $10\\,000$ kr, inklusive $25\\ \\%$ moms. Momsen räknas på priset utan moms. Regeringen sänker momsen på cyklar till $12\\ \\%$, och butiken behåller sitt pris utan moms. Med hur många procent sjunker priset för kunden?`,
+            answer: { value: 10.4, unit: '%', tol: 0.005 },
+            solution: `**Insikten:** momsen är en procentsats av priset UTAN moms. Momsen sjunker med 13 procentenheter, men priset för kunden sjunker inte med $13\\ \\%$, eftersom kundpriset räknas från ett annat hela.
+
+Priset utan moms är det gamla värdet och kundpriset det nya, med förändringsfaktorn $1{,}25$:
+
+$$ \\text{gamla värdet} = \\frac{\\text{nya värdet}}{\\text{förändringsfaktor}} = \\frac{10\\,000}{1{,}25} = 8\\,000\\ \\mathrm{kr} $$
+
+Med $12\\ \\%$ moms blir kundpriset
+
+$$ 1{,}12 \\cdot 8\\,000 = 8\\,960\\ \\mathrm{kr} $$
+
+Kundpriset ändras alltså från $10\\,000$ kr till $8\\,960$ kr:
+
+$$ \\text{förändringsfaktor} = \\frac{8\\,960}{10\\,000} = 0{,}896 = 89{,}6\\ \\% $$
+
+Det motsvarar en sänkning med $100\\ \\% - 89{,}6\\ \\% = 10{,}4\\ \\%$.
+
+Samma sak kortare: faktorn från gammalt till nytt kundpris är $\\dfrac{1{,}12}{1{,}25} = 0{,}896$, oberoende av vad cykeln kostar.
+
+**Svar:** 10,4 %
+
+**Generell slutsats:** de två momssatserna verkar på samma pris utan moms, så kvoten $\\dfrac{1{,}12}{1{,}25}$ ger kundprisets förändring direkt. Att subtrahera procentsatserna ger fel, eftersom kunden betalar $125\\ \\%$ och inte $100\\ \\%$ från början.`,
+        },
+        {
+            level: 3,
+            question: `En lampa och en matta kostar tillsammans $500$ kr. Lampans pris höjs med $10\\ \\%$ och mattans pris sänks med $20\\ \\%$. Efter prisändringarna kostar de tillsammans $460$ kr. Vad kostade lampan före höjningen?`,
+            answer: { value: 200, unit: 'kr' },
+            solution: `**Insikten:** det räcker med en obekant. Kallas lampans pris $x$ kr är mattans pris $(500 - x)$ kr, och förändringsfaktorerna ger de nya priserna.
+
+Nya priser:
+
+- lampan: $1{,}10x$ kr
+- mattan: $0{,}80(500 - x)$ kr
+
+Tillsammans 460 kr:
+
+$$ 1{,}10x + 0{,}80(500 - x) = 460 $$
+
+Utvecklar parentesen:
+
+$$ 1{,}10x + 400 - 0{,}80x = 460 $$
+
+$$ 0{,}30x + 400 = 460 $$
+
+Subtraherar 400 från båda led:
+
+$$ 0{,}30x + 400 \\mathbin{\\boldsymbol{-}}\\boldsymbol{400} = 460 \\mathbin{\\boldsymbol{-}}\\boldsymbol{400} $$
+
+$$ 0{,}30x = 60 $$
+
+Dividerar båda led med $0{,}30$:
+
+$$ \\frac{0{,}30x}{\\boldsymbol{0{,}30}} = \\frac{60}{\\boldsymbol{0{,}30}} $$
+
+$$ x = 200 $$
+
+Lampan kostade 200 kr och mattan 300 kr.
+
+Kontroll: $1{,}10 \\cdot 200 + 0{,}80 \\cdot 300 = 220 + 240 = 460$ kr.
+
+Rimligt? Totalpriset sjönk med 40 kr. Hade båda varorna kostat 250 kr hade lampan blivit 25 kr dyrare och mattan 50 kr billigare, alltså bara 25 kr billigare totalt. Sänkningen är större än så, och då måste mattan vara den dyrare varan.
+
+**Svar:** 200 kr`,
+        },
+        {
+            level: 3,
+            question: `Ett pris höjs med $8\\ \\%$. Hade priset i stället sänkts med $8\\ \\%$, hade varan kostat $120$ kr mindre än den nu gör efter höjningen. Vad kostar varan efter höjningen?`,
+            answer: { value: 810, unit: 'kr' },
+            solution: `**Insikten:** båda prisen räknas från samma gamla pris. Skillnaden mellan dem motsvarar skillnaden mellan förändringsfaktorerna, $1{,}08 - 0{,}92$, gånger det gamla priset.
+
+Kalla det gamla priset $x$ kr. Efter höjningen kostar varan $1{,}08x$ kr, och efter en sänkning hade den kostat $0{,}92x$ kr. Skillnaden är 120 kr:
+
+$$ 1{,}08x - 0{,}92x = 120 $$
+
+$$ 0{,}16x = 120 $$
+
+Dividerar båda led med $0{,}16$:
+
+$$ \\frac{0{,}16x}{\\boldsymbol{0{,}16}} = \\frac{120}{\\boldsymbol{0{,}16}} $$
+
+$$ x = 750 $$
+
+Det gamla priset var 750 kr. Efter höjningen kostar varan
+
+$$ 1{,}08 \\cdot 750 = 810\\ \\mathrm{kr} $$
+
+Kontroll: en sänkning hade gett $0{,}92 \\cdot 750 = 690$ kr, och $810 - 690 = 120$ kr.
+
+**Svar:** 810 kr
+
+**Generell slutsats:** skillnaden mellan en höjning och en sänkning med samma procentsats är dubbla procentsatsen, här $16\\ \\%$, av det GAMLA priset. Den som delar 120 med $0{,}08$ eller räknar $16\\ \\%$ av det nya priset får fel.`,
         },
     ],
 
@@ -23762,19 +24171,209 @@ $$ 1{,}08 \\cdot 0{,}95 = 1{,}026 $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En sjö växer igen: vassens yta ökar med 12 % per år. Efter hur många hela år har vassytan mer än fördubblats?`,
-            answer: { value: 7, unit: 'år' },
-            solution: `**Insikten:** frågan "hur många gånger måste faktorn 1,12 multipliceras för att nå 2?" löses genom att testa potenser av den årliga förändringsfaktorn.
+            question: `Antalet medlemmar i en förening ökar procentuellt lika mycket varje år. Under tre år ökar antalet med totalt $33{,}1\\ \\%$.<br>a) Med hur många procent ökar antalet varje år?<br>b) Efter hur många hela år, räknat från början av treårsperioden, har antalet medlemmar fördubblats om ökningen fortsätter i samma takt?`,
+            answer: { value: 8, unit: 'år' },
+            solution: `**Insikten:** den totala förändringsfaktorn är den årliga faktorn multiplicerad med sig själv tre gånger. Den årliga faktorn är alltså en tredjeroten, inte en tredjedel av $33{,}1\\ \\%$.
 
-Förändringsfaktorn per år är 1,12. Total faktor efter $n$ år: $1{,}12^n$. Vi söker minsta $n$ med $1{,}12^n > 2$:
+**a)** Låt den årliga förändringsfaktorn vara $a$. Den totala faktorn efter tre år är $1 + 0{,}331 = 1{,}331$, så
 
-$$ 1{,}12^5 = 1{,}762\\ldots \\quad 1{,}12^6 = 1{,}973\\ldots \\quad 1{,}12^7 = 2{,}210\\ldots $$
+$$ a^3 = 1{,}331 $$
 
-Efter 6 år är ytan inte riktigt fördubblad (faktor 1,97), men efter 7 år är faktorn 2,21 > 2.
+$$ a = \\sqrt[3]{1{,}331} = 1{,}1 $$
 
-**Svar:** Efter 7 år.
+Faktorn $1{,}1$ motsvarar en ökning med $10\\ \\%$ per år.
 
-**Generell slutsats:** exponentiell tillväxt smyger — 12 % per år fördubblar på ungefär 6–7 år. På senare nivåer löses $1{,}12^n = 2$ exakt med logaritmer; här räcker systematisk testning.`,
+Kontroll: $1{,}1 \\cdot 1{,}1 \\cdot 1{,}1 = 1{,}331$. Att dela $33{,}1\\ \\%$ med 3 hade gett ungefär $11\\ \\%$, och $1{,}11^3 \\approx 1{,}368$, alltså för mycket.
+
+**Svar:** 10 %
+
+**b)** Efter $n$ år är den totala faktorn $1{,}1^n$. Vi söker det minsta hela $n$ där faktorn är minst 2, och prövar:
+
+$$ 1{,}1^6 = 1{,}771\\ldots \\qquad 1{,}1^7 = 1{,}948\\ldots \\qquad 1{,}1^8 = 2{,}143\\ldots $$
+
+Efter 7 år saknas fortfarande en bit, men efter 8 år har antalet mer än fördubblats.
+
+**Svar:** Efter 8 år
+
+**Generell slutsats:** en lika stor procentuell ökning varje år betyder att faktorerna multipliceras. Den årliga faktorn hittas därför med en rot ur den totala faktorn, inte genom division.`,
+        },
+        {
+            level: 3,
+            question: `En cylinderformad burk görs om. Radien ökas med $10\\ \\%$ och höjden minskas med $15\\ \\%$. Volymen är $\\pi r^2 h$.<br>a) Hur många procent ändras burkens volym?<br>b) Hur många procent skulle höjden i stället behöva minskas för att volymen ska vara oförändrad? Avrunda till en decimal.`,
+            answer: { value: 17.4, unit: '%', tol: 0.005 },
+            solution: `**Insikten:** radien står i kvadrat i volymformeln. En ökning av radien med $10\\ \\%$ ger därför faktorn $1{,}1$ TVÅ gånger i volymen, alltså faktorn $1{,}1^2 = 1{,}21$.
+
+**a)** Den nya volymen är
+
+$$ \\pi (1{,}1r)^2 \\cdot 0{,}85h = 1{,}1^2 \\cdot 0{,}85 \\cdot \\pi r^2 h $$
+
+Den totala förändringsfaktorn för volymen är
+
+$$ 1{,}1^2 \\cdot 0{,}85 = 1{,}21 \\cdot 0{,}85 = 1{,}0285 $$
+
+Faktorn $1{,}0285$ motsvarar en ökning med $2{,}85\\ \\%$.
+
+**Svar:** Volymen ökar med 2,85 %.
+
+**b)** Låt höjdens faktor vara $f$. Volymen ska vara oförändrad, alltså ska den totala faktorn vara 1:
+
+$$ 1{,}21 \\cdot f = 1 $$
+
+Dividerar båda led med $1{,}21$:
+
+$$ \\frac{1{,}21 \\cdot f}{\\boldsymbol{1{,}21}} = \\frac{1}{\\boldsymbol{1{,}21}} $$
+
+$$ f = 0{,}8264\\ldots $$
+
+Faktorn $0{,}8264\\ldots$ motsvarar en minskning med $1 - 0{,}8264\\ldots = 0{,}1735\\ldots \\approx 17{,}4\\ \\%$.
+
+**Svar:** Cirka 17,4 %
+
+**Generell slutsats:** när en storhet står i kvadrat i en formel får dess förändringsfaktor också kvadreras. En ökning med $10\\ \\%$ av radien ökar arean av burkens botten med $21\\ \\%$, inte med $10\\ \\%$.`,
+        },
+        {
+            level: 3,
+            question: `En boll släpps från höjden $2{,}0$ m. Efter varje studs når bollen $75\\ \\%$ av höjden före studsen.<br>a) Efter hur många studsar når bollen för första gången lägre än $30$ cm?<br>b) En annan boll av samma sort släpps från en okänd höjd. Efter tredje studsen når den $54$ cm. Från vilken höjd släpptes den? Svara i cm.`,
+            answer: { value: 128, unit: 'cm' },
+            solution: `**Insikten:** varje studs är en procentuell förändring med samma faktor, $0{,}75$. Efter $n$ studsar är höjden alltså starthöjden gånger $0{,}75^n$.
+
+**a)** Starthöjden är $200$ cm. Vi söker det minsta $n$ där
+
+$$ 200 \\cdot 0{,}75^n < 30 $$
+
+Vi prövar några värden på $n$:
+
+$$ 200 \\cdot 0{,}75^6 = 35{,}6\\ldots \\qquad 200 \\cdot 0{,}75^7 = 26{,}6\\ldots $$
+
+Efter sex studsar når bollen fortfarande över 30 cm, men efter sju studsar under.
+
+**Svar:** Efter 7 studsar
+
+**b)** Kalla starthöjden $h$ cm. Efter tre studsar är höjden
+
+$$ h \\cdot 0{,}75^3 = 54 $$
+
+$0{,}75^3 = 0{,}421\\,875$, så
+
+$$ 0{,}421\\,875h = 54 $$
+
+Dividerar båda led med $0{,}421\\,875$:
+
+$$ \\frac{0{,}421\\,875h}{\\boldsymbol{0{,}421\\,875}} = \\frac{54}{\\boldsymbol{0{,}421\\,875}} $$
+
+$$ h = 128 $$
+
+Kontroll: $128 \\cdot 0{,}75 = 96$, $96 \\cdot 0{,}75 = 72$ och $72 \\cdot 0{,}75 = 54$ cm.
+
+**Svar:** 128 cm
+
+**Generell slutsats:** att gå bakåt i en upprepad förändring är att dividera med den totala faktorn, precis som "gamla värdet = nya värdet / förändringsfaktor" för en enda förändring.`,
+        },
+        {
+            level: 3,
+            question: `En aktie ökar i värde med $10\\ \\%$ per år i fem år och minskar sedan med $10\\ \\%$ per år i fem år.<br>a) Med hur många procent har värdet ändrats efter de tio åren? Avrunda till en decimal.<br>b) Spelar det någon roll om de fem minskningarna kommer först? Motivera.`,
+            answer: { value: 4.9, unit: '%', tol: 0.01 },
+            solution: `**Insikten:** tio förändringar i följd ger tio förändringsfaktorer som multipliceras. Fem par med en ökning och en minskning tar INTE ut varandra.
+
+**a)** Den totala förändringsfaktorn är
+
+$$ 1{,}1^5 \\cdot 0{,}9^5 $$
+
+Eftersom multiplikationens ordning inte spelar någon roll kan faktorerna paras ihop, en $1{,}1$ med en $0{,}9$:
+
+$$ 1{,}1^5 \\cdot 0{,}9^5 = (1{,}1 \\cdot 0{,}9)^5 = 0{,}99^5 = 0{,}9509\\ldots $$
+
+Faktorn $0{,}9509\\ldots$ motsvarar en minskning med $1 - 0{,}9509\\ldots = 0{,}049\\ldots \\approx 4{,}9\\ \\%$.
+
+Varje par med en ökning och en minskning med $10\\ \\%$ ger faktorn $0{,}99$, alltså en förlust på $1\\ \\%$. Fem sådana par ger nästan $5\\ \\%$.
+
+**Svar:** Värdet har minskat med cirka 4,9 %.
+
+**b)** Nej. Den totala faktorn är en produkt av samma tio faktorer, och en produkt blir densamma i vilken ordning faktorerna än multipliceras.
+
+Under vägen ser det dock olika ut. Kommer ökningarna först är aktien efter fem år värd $1{,}1^5 \\approx 1{,}61$ gånger startvärdet. Kommer minskningarna först är den bara värd $0{,}9^5 \\approx 0{,}59$ gånger startvärdet. Slutvärdet blir ändå detsamma.
+
+**Svar:** Nej, produkten av faktorerna är densamma i vilken ordning de än kommer.
+
+**Generell slutsats:** en ökning och en minskning med samma procentsats ger alltid en förlust, eftersom $(1 + q)(1 - q) = 1 - q^2$, som är mindre än 1.`,
+        },
+        {
+            level: 3,
+            question: `En tumregel säger att den tid det tar för ett belopp att fördubblas, räknat i år, är ungefär $72$ dividerat med den procentuella ökningen per år.<br>a) Skriv tumregeln som en formel för fördubblingstiden $T$ år när ökningen är $p\\ \\%$ per år.<br>b) Kontrollera tumregeln för $p = 8$.<br>c) Bestäm med en annan metod än tumregeln den procentuella ökningen per år som ger en fördubbling på exakt 8 år. Avrunda till två decimaler.`,
+            answer: { value: 9.05, unit: '%', tol: 0.002 },
+            solution: `**Insikten:** tumregeln är en uppskattning. Den exakta metoden är att den totala förändringsfaktorn efter $T$ år ska vara 2.
+
+**a)** Fördubblingstiden är 72 dividerat med $p$:
+
+$$ T = \\frac{72}{p} $$
+
+**Svar:** $T = \\dfrac{72}{p}$
+
+**b)** Tumregeln ger $T = \\dfrac{72}{8} = 9$ år. Den exakta totala faktorn efter 9 år med $8\\ \\%$ ökning per år är
+
+$$ 1{,}08^9 = 1{,}999\\ldots $$
+
+Beloppet har alltså i stort sett exakt fördubblats.
+
+**Svar:** Tumregeln ger 9 år, och $1{,}08^9 \\approx 2{,}0$. Den stämmer mycket bra.
+
+**c)** Låt den årliga förändringsfaktorn vara $a$. Efter 8 år ska den totala faktorn vara 2:
+
+$$ a^8 = 2 $$
+
+$$ a = \\sqrt[8]{2} = 1{,}0905\\ldots $$
+
+Faktorn $1{,}0905\\ldots$ motsvarar en ökning med cirka $9{,}05\\ \\%$ per år. Tumregeln hade gett $\\dfrac{72}{8} = 9\\ \\%$, alltså nästan samma.
+
+Kontroll: $1{,}0905^8 = 1{,}9998\\ldots$, som avrundas till 2.
+
+**Svar:** Cirka 9,05 % per år
+
+**Generell slutsats:** tumregeln fungerar bra för ökningar på några procent per år, men blir sämre för stora ökningar. Exakt löser man $a^T = 2$ med en rot när tiden är känd, och genom att pröva sig fram när ökningen är känd.`,
+        },
+        {
+            level: 3,
+            question: `Ett kreditkortsföretag tar $2\\ \\%$ ränta per månad på obetalda skulder, och räntan läggs till skulden varje månad. I reklamen står det "bara $24\\ \\%$ om året". Hur många procent växer en obetald skuld på ett år? Avrunda till en decimal.`,
+            answer: { value: 26.8, unit: '%', tol: 0.005 },
+            solution: `**Insikten:** räntan läggs till skulden varje månad, så nästa månads ränta räknas på en större skuld. Det är ränta på ränta, och de tolv månadsfaktorerna ska multipliceras, inte adderas.
+
+Förändringsfaktorn per månad är $1 + 0{,}02 = 1{,}02$. Efter tolv månader är den totala förändringsfaktorn
+
+$$ 1{,}02^{12} = 1{,}268\\ldots $$
+
+Faktorn $1{,}268\\ldots$ motsvarar en ökning med cirka $26{,}8\\ \\%$.
+
+Kontroll med en skuld på $10\\,000$ kr: efter ett år är den $10\\,000 \\cdot 1{,}02^{12} \\approx 12\\,682$ kr. Med $24\\ \\%$ ränta hade den varit $12\\,400$ kr.
+
+**Svar:** Cirka 26,8 %
+
+**Generell slutsats:** "$12 \\cdot 2\\ \\% = 24\\ \\%$" stämmer bara om räntan inte läggs till skulden. När räntan växer med skulden blir den verkliga årsräntan alltid högre än tolv gånger månadsräntan.`,
+        },
+        {
+            level: 3,
+            question: `Fond A är värd $20\\,000$ kr och ökar i värde med $8\\ \\%$ per år. Fond B är värd $30\\,000$ kr och ökar i värde med $5\\ \\%$ per år. Efter hur många hela år är fond A för första gången värd mer än fond B?`,
+            answer: { value: 15, unit: 'år' },
+            solution: `**Insikten:** jämför fonderna genom deras kvot. A ska bli mer värd än B, alltså ska kvoten $\\dfrac{A}{B}$ bli större än 1, och kvoten ändras själv med en egen förändringsfaktor varje år.
+
+Efter $n$ år är fonderna värda $20\\,000 \\cdot 1{,}08^n$ kr och $30\\,000 \\cdot 1{,}05^n$ kr. Fond A är mer värd när
+
+$$ 20\\,000 \\cdot 1{,}08^n > 30\\,000 \\cdot 1{,}05^n $$
+
+Dividerar båda led med $20\\,000 \\cdot 1{,}05^n$, som är positivt:
+
+$$ \\frac{20\\,000 \\cdot 1{,}08^n}{\\boldsymbol{20\\,000 \\cdot 1{,}05^n}} > \\frac{30\\,000 \\cdot 1{,}05^n}{\\boldsymbol{20\\,000 \\cdot 1{,}05^n}} $$
+
+$$ \\left(\\frac{1{,}08}{1{,}05}\\right)^n > 1{,}5 $$
+
+Kvoten mellan fonderna växer alltså med faktorn $\\dfrac{1{,}08}{1{,}05} \\approx 1{,}0286$ per år, inte med $3\\ \\%$. Vi prövar:
+
+$$ \\left(\\frac{1{,}08}{1{,}05}\\right)^{14} = 1{,}483\\ldots \\qquad \\left(\\frac{1{,}08}{1{,}05}\\right)^{15} = 1{,}525\\ldots $$
+
+Kontroll med fondernas värden: efter 14 år är A värd $58\\,744$ kr och B $59\\,398$ kr. Efter 15 år är A värd $63\\,443$ kr och B $62\\,368$ kr.
+
+**Svar:** Efter 15 år
+
+**Generell slutsats:** att två exponentiella förlopp jämförs blir enklare när man dividerar dem med varandra, eftersom kvoten då följer ett eget exponentiellt förlopp med faktorn $\\dfrac{1{,}08}{1{,}05}$.`,
         },
     ],
 
@@ -23852,23 +24451,208 @@ $$ 60\\ 000 \\cdot 1{,}024^6 = 60\\ 000 \\cdot 1{,}1528\\ldots = 69\\ 166{,}0\\l
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Livia sätter in 8 000 kr i slutet av varje år på ett konto med 3,0 % ränta. Vad är behållningen direkt efter den FJÄRDE insättningen? Avrunda till hela kronor.`,
-            answer: { value: 33469, unit: 'kr', tol: 0.001 },
-            solution: `**Insikten:** vid årligt sparande växer det gamla beloppet med räntan SAMTIDIGT som en ny insättning läggs till — precis som kalkylbladsformeln \`=B2*1,03+8000\`.
+            question: `Joel sätter in $10\\,000$ kr i slutet av varje år på ett konto med räntan $4\\ \\%$. Direkt efter vilken insättning är behållningen för första gången större än $100\\,000$ kr?`,
+            answer: { value: 9, unit: '' },
+            solution: `**Insikten:** inför varje ny insättning har hela den tidigare behållningen vuxit med $4\\ \\%$. Varje rad i beräkningen är alltså "förra behållningen gånger $1{,}04$, plus $10\\,000$". Det är mer än $10 \\cdot 10\\,000$, så svaret blir färre än tio insättningar.
 
-Steg för steg (behållningen direkt efter varje insättning):
+I ett kalkylblad skrivs $10\\,000$ i B2 och formeln \`=B2*1,04+10000\` i B3, som sedan dras nedåt med fyllnadshandtaget:
 
-Efter insättning 1: $8\\ 000$ kr
+| Insättning | Behållning (kr) |
+| --- | --- |
+| 1 | 10 000,00 |
+| 2 | 20 400,00 |
+| 3 | 31 216,00 |
+| 4 | 42 464,64 |
+| 5 | 54 163,23 |
+| 6 | 66 329,75 |
+| 7 | 78 982,94 |
+| 8 | 92 142,26 |
+| 9 | 105 827,95 |
 
-Efter insättning 2: $8\\ 000 \\cdot 1{,}03 + 8\\ 000 = 16\\ 240$ kr
+Kontroll av en rad: $92\\,142{,}26 \\cdot 1{,}04 + 10\\,000 = 105\\,827{,}95$ kr.
 
-Efter insättning 3: $16\\ 240 \\cdot 1{,}03 + 8\\ 000 = 24\\ 727{,}20$ kr
+Efter åtta insättningar saknas knappt $8\\,000$ kr, och efter nio har behållningen passerat $100\\,000$ kr. Joel har då satt in $90\\,000$ kr, och resten, $15\\,828$ kr, är ränta.
 
-Efter insättning 4: $24\\ 727{,}20 \\cdot 1{,}03 + 8\\ 000 = 33\\ 469{,}02 \\approx 33\\ 469$ kr
+**Svar:** Direkt efter den 9:e insättningen
 
-**Svar:** cirka 33 469 kr
+**Generell slutsats:** vid regelbundet sparande växer räntan för varje år, eftersom den räknas på en allt större behållning. Ett kalkylblad sköter de upprepade beräkningarna, och varje rad kan kontrolleras för hand.`,
+        },
+        {
+            level: 3,
+            question: `Ali och Bea sparar båda $50\\,000$ kr på konton med räntan $3\\ \\%$. Ali sätter in hela beloppet på en gång och låter det stå i 10 år. Bea sätter in $5\\,000$ kr i slutet av varje år i 10 år. Hur mycket mer har Ali än Bea direkt efter Beas tionde insättning? Avrunda till hela kronor.`,
+            answer: { value: 9876, unit: 'kr', tol: 0.001 },
+            solution: `**Insikten:** de sparar lika mycket pengar, men pengarna står inne olika länge. Alis alla pengar växer i tio år, medan Beas första insättning växer i nio år och den sista inte alls.
 
-**Generell slutsats:** varje insättning hinner växa olika länge (den första i tre år, den sista inte alls) — därför är behållningen mer än $4 \\cdot 8\\ 000 = 32\\ 000$ kr men mindre än om allt satts in från början. Kalkylblad är perfekta för sådana stegvisa beräkningar.`,
+**Ali:** samma faktor $1{,}03$ i tio år:
+
+$$ 50\\,000 \\cdot 1{,}03^{10} = 67\\,195{,}8\\ldots\\ \\mathrm{kr} $$
+
+**Bea:** den första insättningen hinner växa i 9 år, den andra i 8 år och så vidare. Direkt efter den tionde insättningen är behållningen
+
+$$ 5\\,000 \\cdot 1{,}03^9 + 5\\,000 \\cdot 1{,}03^8 + \\ldots + 5\\,000 \\cdot 1{,}03 + 5\\,000 $$
+
+I ett kalkylblad med $5\\,000$ i B2 och \`=B2*1,03+5000\` i B3, nedåt till tionde insättningen, blir behållningen $57\\,319{,}40$ kr.
+
+Skillnaden:
+
+$$ 67\\,195{,}82 - 57\\,319{,}40 = 9\\,876{,}42\\ \\mathrm{kr} $$
+
+**Svar:** Cirka 9 876 kr mer
+
+**Generell slutsats:** tid är det som gör ränta på ränta kraftfull. Pengar som sätts in tidigt hinner växa länge, och det är därför ett tidigt sparande lönar sig mer än samma belopp sparat senare.`,
+        },
+        {
+            level: 3,
+            question: `Emma sparar $5\\,000$ kr per år i 10 år på ett konto med räntan $4\\ \\%$. Hon kan sätta in pengarna i början av varje år eller i slutet av varje år. Beräkna behållningen efter 10 år i båda fallen, och bestäm hur mycket mer det ger att sätta in pengarna i början av året. Avrunda till hela kronor.`,
+            answer: { value: 2401, unit: 'kr', tol: 0.001 },
+            solution: `**Insikten:** sätts varje insättning in ett år tidigare växer VARJE insättning ett år längre. Hela behållningen blir alltså exakt $4\\ \\%$ större, och man behöver bara räkna ut det ena fallet.
+
+**Insättning i slutet av året:** i ett kalkylblad med $5\\,000$ i B2 och \`=B2*1,04+5000\` i B3, nedåt till tionde insättningen, blir behållningen direkt efter den tionde insättningen
+
+$$ 60\\,030{,}54\\ \\mathrm{kr} $$
+
+**Insättning i början av året:** varje insättning har fått ett års ränta mer när året är slut, så behållningen efter 10 år är
+
+$$ 1{,}04 \\cdot 60\\,030{,}54 = 62\\,431{,}76\\ \\mathrm{kr} $$
+
+(I kalkylbladet blir formeln \`=(B2+5000)*1,04\`: först insättningen, sedan växer allt under året.)
+
+Skillnaden:
+
+$$ 62\\,431{,}76 - 60\\,030{,}54 = 2\\,401{,}22\\ \\mathrm{kr} $$
+
+Skillnaden är precis $4\\ \\%$ av den första behållningen: $0{,}04 \\cdot 60\\,030{,}54 = 2\\,401{,}22$ kr.
+
+**Svar:** I slutet av året 60 031 kr, i början av året 62 432 kr. Det ger cirka 2 401 kr mer att sätta in i början.
+
+**Generell slutsats:** när alla belopp i en summa multipliceras med samma faktor multipliceras hela summan med den faktorn. Att se det sparar en hel beräkning.`,
+        },
+        {
+            level: 3,
+            question: `Greta har $200\\,000$ kr på ett konto med räntan $3\\ \\%$. I slutet av varje år, efter att räntan lagts till, tar hon ut pengar.<br>a) Hur mycket kan hon ta ut varje år utan att behållningen någonsin minskar?<br>b) Hon tar i stället ut $15\\,000$ kr i slutet av varje år. Hur många hela uttag på $15\\,000$ kr kan hon göra?`,
+            answer: { value: 17, unit: 'uttag' },
+            solution: `**Insikten:** behållningen minskar bara om uttaget är större än räntan. Varje år gäller "förra behållningen gånger $1{,}03$, minus uttaget".
+
+**a)** Räntan första året är
+
+$$ 0{,}03 \\cdot 200\\,000 = 6\\,000\\ \\mathrm{kr} $$
+
+Tar Greta ut exakt räntan är behållningen efter uttaget $200\\,000$ kr igen, och samma sak upprepas varje år.
+
+**Svar:** 6 000 kr per år
+
+**b)** Uttaget är större än räntan, så behållningen krymper, och den krymper allt snabbare eftersom räntan blir mindre för varje år. I ett kalkylblad med $200\\,000$ i B2 och \`=B2*1,03-15000\` i B3, nedåt:
+
+| Uttag | Behållning efter uttaget (kr) |
+| --- | --- |
+| 1 | 191 000,00 |
+| 2 | 181 730,00 |
+| 3 | 172 181,90 |
+| … | … |
+| 15 | 32 609,78 |
+| 16 | 18 588,07 |
+| 17 | 4 145,71 |
+| 18 | −10 729,92 |
+
+Kontroll av en rad: $18\\,588{,}07 \\cdot 1{,}03 - 15\\,000 = 4\\,145{,}71$ kr.
+
+Efter det 17:e uttaget finns $4\\,145{,}71$ kr kvar. Med ränta blir det $4\\,270{,}08$ kr, och det räcker inte till ett 18:e uttag.
+
+**Svar:** 17 hela uttag
+
+**Generell slutsats:** utan ränta hade pengarna räckt till $\\dfrac{200\\,000}{15\\,000} \\approx 13{,}3$ uttag. Räntan förlänger tiden, men eftersom behållningen minskar blir räntan mindre för varje år, och de sista åren går det fort.`,
+        },
+        {
+            level: 3,
+            question: `Vilken årsränta behövs för att $40\\,000$ kr ska växa till $50\\,000$ kr på 6 år, utan att några fler insättningar görs? Svara i procent med två decimaler.`,
+            answer: { value: 3.79, unit: '%', tol: 0.002 },
+            solution: `**Insikten:** räntan ger samma förändringsfaktor varje år. Den totala faktorn efter 6 år är den årliga faktorn upphöjd till 6, och den årliga faktorn fås med en sjätteroten. Att dela den totala ökningen med 6 ger fel, eftersom det missar ränta på ränta.
+
+Låt den årliga förändringsfaktorn vara $a$:
+
+$$ 40\\,000 \\cdot a^6 = 50\\,000 $$
+
+Dividerar båda led med $40\\,000$:
+
+$$ \\frac{40\\,000 \\cdot a^6}{\\boldsymbol{40\\,000}} = \\frac{50\\,000}{\\boldsymbol{40\\,000}} $$
+
+$$ a^6 = 1{,}25 $$
+
+$$ a = \\sqrt[6]{1{,}25} = 1{,}037\\,89\\ldots $$
+
+Faktorn $1{,}037\\,89\\ldots$ motsvarar en årsränta på cirka $3{,}79\\ \\%$.
+
+Kontroll: $40\\,000 \\cdot 1{,}0379^6 = 50\\,002{,}6\\ldots$ kr, alltså $50\\,000$ kr när räntan avrundats.
+
+Den vanliga felräkningen är att den totala ökningen $25\\ \\%$ delas med 6, vilket ger $4{,}17\\ \\%$. Med den räntan blir det $40\\,000 \\cdot 1{,}0417^6 \\approx 51\\,111$ kr, alltså för mycket.
+
+**Svar:** Cirka 3,79 %
+
+**Generell slutsats:** "vilken årlig procentsats ger en viss total förändring?" löses med en rot: $a = \\sqrt[n]{\\text{total förändringsfaktor}}$.`,
+        },
+        {
+            level: 3,
+            question: `Wilma vill ha $50\\,000$ kr på sitt konto direkt efter sin femte insättning. Hon sätter in samma belopp i slutet av varje år, och räntan är $2\\ \\%$. Hur stort belopp måste hon sätta in varje gång? Avrunda uppåt till hela kronor.`,
+            answer: { value: 9608, unit: 'kr', tol: 0.001 },
+            solution: `**Insikten:** kalla insättningen $x$ kr och skriv ut vad varje insättning är värd direkt efter den femte. Då står $x$ i varje term och kan brytas ut, och kvar blir en ekvation med en enda obekant.
+
+Den första insättningen hinner växa i 4 år, den andra i 3 år och så vidare, och den femte inte alls:
+
+$$ x \\cdot 1{,}02^4 + x \\cdot 1{,}02^3 + x \\cdot 1{,}02^2 + x \\cdot 1{,}02 + x = 50\\,000 $$
+
+Bryter ut $x$:
+
+$$ x(1{,}02^4 + 1{,}02^3 + 1{,}02^2 + 1{,}02 + 1) = 50\\,000 $$
+
+Summan i parentesen:
+
+$$ 1{,}082\\,43\\ldots + 1{,}061\\,20\\ldots + 1{,}0404 + 1{,}02 + 1 = 5{,}204\\,04\\ldots $$
+
+$$ 5{,}204\\,04x = 50\\,000 $$
+
+Dividerar båda led med $5{,}204\\,04$:
+
+$$ \\frac{5{,}204\\,04x}{\\boldsymbol{5{,}204\\,04}} = \\frac{50\\,000}{\\boldsymbol{5{,}204\\,04}} $$
+
+$$ x = 9\\,607{,}9\\ldots $$
+
+Med $9\\,607$ kr räcker det inte riktigt, så vi avrundar uppåt till $9\\,608$ kr.
+
+Kontroll: $9\\,608 \\cdot 5{,}204\\,04 \\approx 50\\,000{,}4$ kr.
+
+Rimligt? Utan ränta hade hon behövt $\\dfrac{50\\,000}{5} = 10\\,000$ kr per gång. Räntan gör att det räcker med lite mindre.
+
+**Svar:** 9 608 kr per år
+
+**Generell slutsats:** när det sökta beloppet är detsamma i varje term kan det brytas ut, och då blir en lång kalkylbladsberäkning en enkel ekvation.`,
+        },
+        {
+            level: 3,
+            question: `Hugo har pengar på ett konto med räntan $3\\ \\%$. Samtidigt stiger priserna i samhället med $5\\ \\%$ per år.<br>a) Med hur många procent minskar det Hugo kan köpa för pengarna under ett år? Avrunda till en decimal.<br>b) Med hur många procent har det han kan köpa minskat efter 10 år? Avrunda till en decimal.`,
+            answer: { value: 17.5, unit: '%', tol: 0.005 },
+            solution: `**Insikten:** det som avgör vad pengarna räcker till är kvoten mellan behållningen och priserna. Behållningen ökar med faktorn $1{,}03$ och priserna med faktorn $1{,}05$, så kvoten ändras med faktorn $\\dfrac{1{,}03}{1{,}05}$ varje år.
+
+**a)** Med behållningen $B$ kr och priset $P$ kr för en vara kan Hugo köpa $\\dfrac{B}{P}$ varor. Efter ett år kan han köpa
+
+$$ \\frac{1{,}03B}{1{,}05P} = \\frac{1{,}03}{1{,}05} \\cdot \\frac{B}{P} = 0{,}9809\\ldots \\cdot \\frac{B}{P} $$
+
+Faktorn $0{,}9809\\ldots$ motsvarar en minskning med $1 - 0{,}9809\\ldots = 0{,}019\\ldots \\approx 1{,}9\\ \\%$.
+
+Lägg märke till att svaret inte är exakt $5\\ \\% - 3\\ \\% = 2\\ \\%$. Det ligger nära, men skillnaden är en kvot och inte en differens.
+
+**Svar:** Cirka 1,9 %
+
+**b)** Samma faktor varje år i tio år ger den totala faktorn
+
+$$ \\left(\\frac{1{,}03}{1{,}05}\\right)^{10} = 0{,}8250\\ldots $$
+
+Faktorn $0{,}8250\\ldots$ motsvarar en minskning med $1 - 0{,}8250\\ldots = 0{,}1749\\ldots \\approx 17{,}5\\ \\%$.
+
+Kontroll med påhittade tal: $10\\,000$ kr växer till $10\\,000 \\cdot 1{,}03^{10} \\approx 13\\,439$ kr, medan en vara för $100$ kr blir $100 \\cdot 1{,}05^{10} \\approx 162{,}89$ kr. Före räckte pengarna till 100 varor, efter till $\\dfrac{13\\,439}{162{,}89} \\approx 82{,}5$ varor.
+
+**Svar:** Cirka 17,5 %
+
+**Generell slutsats:** ett sparande kan växa i kronor och ändå bli värt mindre. Det som räknas är kvoten mellan sparandets förändringsfaktor och prisernas.`,
         },
     ],
 
@@ -23952,25 +24736,231 @@ $$ 2\\ 500 + 540 = 3\\ 040\\ \\mathrm{kr} $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Ellens billån: 150 000 kr, rak amortering 2 500 kr/månad i 60 månader, årsränta 4,8 %. Totalt betalar hon 168 300 kr. Hur stor är den TOTALA räntekostnaden — och varför är den mindre än $60 \\cdot 600 = 36\\ 000$ kr (första månadens ränta gånger 60)?`,
-            choices: [
-                `7 200 kr — en årsränta`,
-                `36 000 kr — räntan är 600 kr varje månad`,
-                `18 300 kr — skulden minskar för varje månad, så räntan sjunker från 600 kr mot 10 kr`,
-                `18 300 kr — banken ger rabatt vid rak amortering`,
-            ],
-            correct: 2,
-            solution: `**Insikten:** vid rak amortering räknas räntan varje månad på den AKTUELLA skulden, som hela tiden krymper.
+            question: `Ett lån på $240\\,000$ kr ska betalas tillbaka med rak amortering varje kvartal i 10 år. Årsräntan är $6\\ \\%$. Räntan betalas varje kvartal på den aktuella skulden.<br>a) Hur stor är räntan vid den första och vid den sista inbetalningen?<br>b) Bestäm den totala räntekostnaden för lånet utan att räkna ut varje inbetalning.`,
+            answer: { value: 73800, unit: 'kr', tol: 0.001 },
+            solution: `**Insikten:** skulden minskar med lika mycket varje kvartal, så räntan minskar också med lika mycket varje kvartal. Räntorna bildar en jämn trappa, och summan av en jämn trappa är antalet steg gånger medelvärdet av första och sista steget.
 
-Total räntekostnad = totalt betalt − lånebelopp:
+Ett år har 4 kvartal, så lånet betalas med $4 \\cdot 10 = 40$ inbetalningar. Amorteringen per kvartal är
 
-$$ 168\\ 300 - 150\\ 000 = 18\\ 300\\ \\mathrm{kr} $$
+$$ \\frac{240\\,000}{40} = 6\\,000\\ \\mathrm{kr} $$
 
-Första månaden är räntan $\\dfrac{0{,}048 \\cdot 150\\ 000}{12} = 600$ kr, men sista månaden är skulden bara 2 500 kr och räntan $\\dfrac{0{,}048 \\cdot 2\\ 500}{12} = 10$ kr. Räntan sjunker linjärt, så i genomsnitt betalas ungefär $\\dfrac{600 + 10}{2} = 305$ kr/månad — och $60 \\cdot 305 = 18\\ 300$ kr. Stämmer!
+Räntan per kvartal är en fjärdedel av årsräntan: $\\dfrac{6\\ \\%}{4} = 1{,}5\\ \\%$ av skulden.
 
-**Svar:** 18 300 kr — räntan räknas på den krympande skulden, inte på det ursprungliga lånebeloppet.
+**a)** Vid den första inbetalningen är skulden hela lånet:
 
-**Generell slutsats:** total kostnad − lånat belopp = total ränta. Och vid rak amortering är genomsnittsräntan ungefär hälften av den första månadens, eftersom skulden i snitt är halva lånet.`,
+$$ 0{,}015 \\cdot 240\\,000 = 3\\,600\\ \\mathrm{kr} $$
+
+Vid den sista inbetalningen återstår bara den sista amorteringen, $6\\,000$ kr:
+
+$$ 0{,}015 \\cdot 6\\,000 = 90\\ \\mathrm{kr} $$
+
+**Svar:** 3 600 kr vid den första och 90 kr vid den sista inbetalningen
+
+**b)** Skulden minskar med $6\\,000$ kr per kvartal, så räntan minskar med $0{,}015 \\cdot 6\\,000 = 90$ kr per kvartal: $3\\,600$, $3\\,510$, $3\\,420$, … , $180$, $90$ kr.
+
+Para ihop den första och den sista räntan, den andra och den näst sista och så vidare. Varje par blir $3\\,600 + 90 = 3\\,690$ kr, och de 40 räntorna bildar 20 par:
+
+$$ 20 \\cdot 3\\,690 = 73\\,800\\ \\mathrm{kr} $$
+
+Samma sak med medelvärdet: räntan är i genomsnitt $\\dfrac{3\\,600 + 90}{2} = 1\\,845$ kr per kvartal, och $40 \\cdot 1\\,845 = 73\\,800$ kr.
+
+Rimligt? Skulden är i genomsnitt ungefär halva lånet, $120\\,000$ kr, och $6\\ \\%$ av det i 10 år är $72\\,000$ kr. Det ligger nära.
+
+**Svar:** 73 800 kr
+
+**Generell slutsats:** vid rak amortering sjunker räntan lika mycket varje gång. Den totala räntan blir då antalet inbetalningar gånger medelvärdet av den första och den sista räntan.`,
+        },
+        {
+            level: 3,
+            question: `Nora tar ett sms-lån på $2\\,000$ kr. Lånet ska betalas tillbaka efter en månad, och månadsräntan är $15\\ \\%$. När månaden är slut har Nora inte råd att betala, så hon tar ett nytt sms-lån med samma villkor på hela det belopp hon är skyldig. Så fortsätter hon varje månad.<br>a) Hur stor är skulden efter ett halvår?<br>b) Efter hur många månader har skulden för första gången blivit mer än fem gånger så stor som det första lånet?`,
+            answer: { value: 12, unit: 'månader' },
+            solution: `**Insikten:** varje nytt lån gäller hela den förra skulden, räntan inräknad. Skulden växer alltså med samma förändringsfaktor, $1{,}15$, varje månad, som ränta på ränta.
+
+**a)** Efter 6 månader är den totala förändringsfaktorn $1{,}15^6$:
+
+$$ 2\\,000 \\cdot 1{,}15^6 = 4\\,626{,}1\\ldots\\ \\mathrm{kr} $$
+
+**Svar:** Cirka 4 626 kr
+
+**b)** Skulden är fem gånger så stor som det första lånet när den totala förändringsfaktorn är större än 5. Vi söker det minsta $n$ där $1{,}15^n > 5$ och prövar:
+
+$$ 1{,}15^{11} = 4{,}65\\ldots \\qquad 1{,}15^{12} = 5{,}35\\ldots $$
+
+Efter 11 månader är skulden $2\\,000 \\cdot 4{,}65 \\approx 9\\,305$ kr, och efter 12 månader $2\\,000 \\cdot 5{,}35 \\approx 10\\,701$ kr.
+
+**Svar:** Efter 12 månader
+
+**Generell slutsats:** en månadsränta som låter hanterbar blir enorm över ett år, eftersom faktorerna multipliceras. $15\\ \\%$ i månaden motsvarar en ökning med $435\\ \\%$ på ett år, inte $12 \\cdot 15\\ \\% = 180\\ \\%$.`,
+        },
+        {
+            level: 3,
+            question: `Sam lånar $180\\,000$ kr med rak amortering varje månad i 5 år. Årsräntan är $4{,}2\\ \\%$. Hur mycket mindre är den sista inbetalningen än den första?`,
+            answer: { value: 619.5, unit: 'kr', tol: 0.002 },
+            solution: `**Insikten:** vid rak amortering är amorteringen lika stor varje månad. Skillnaden mellan två inbetalningar beror därför bara på räntan, och räntan beror bara på skulden.
+
+Lånet betalas med $5 \\cdot 12 = 60$ inbetalningar, och amorteringen per månad är
+
+$$ \\frac{180\\,000}{60} = 3\\,000\\ \\mathrm{kr} $$
+
+Vid den första inbetalningen är skulden $180\\,000$ kr. Vid den sista återstår bara den sista amorteringen, $3\\,000$ kr. Skillnaden i skuld är
+
+$$ 180\\,000 - 3\\,000 = 177\\,000\\ \\mathrm{kr} $$
+
+Räntan för en månad är $\\dfrac{4{,}2\\ \\%}{12}$ av skulden, alltså är skillnaden i ränta
+
+$$ \\frac{0{,}042 \\cdot 177\\,000}{12} = 619{,}5\\ \\mathrm{kr} $$
+
+Kontroll: den första räntan är $\\dfrac{0{,}042 \\cdot 180\\,000}{12} = 630$ kr och den sista $\\dfrac{0{,}042 \\cdot 3\\,000}{12} = 10{,}5$ kr. Den första inbetalningen är $3\\,630$ kr och den sista $3\\,010{,}50$ kr, och $3\\,630 - 3\\,010{,}50 = 619{,}50$ kr.
+
+**Svar:** 619,50 kr mindre
+
+**Generell slutsats:** genom att se att amorteringen tar ut sig själv räcker det att räkna på skillnaden i skuld. Det är ofta snabbare att räkna direkt på det som skiljer än att räkna ut båda värdena.`,
+        },
+        {
+            level: 3,
+            question: `Ett lån betalas med rak amortering varje månad. Amorteringen är $2\\,500$ kr per månad. Den andra inbetalningen är $25$ kr mindre än den första, och den första inbetalningen är $4\\,500$ kr.<br>a) Vilken är lånets årsränta?<br>b) Hur stort är lånet?`,
+            answer: { value: 200000, unit: 'kr', tol: 0.001 },
+            solution: `**Insikten:** mellan två inbetalningar har skulden minskat med en amortering. Skillnaden på 25 kr är alltså månadsräntan på $2\\,500$ kr, och då kan räntesatsen lösas ut. Därefter avslöjar den första inbetalningens ränta hur stor skulden var från början.
+
+**a)** Låt årsräntan i decimalform vara $r$. Räntan för en månad är $\\dfrac{r}{12}$ av skulden. Skulden har minskat med $2\\,500$ kr, så räntan har minskat med
+
+$$ \\frac{r}{12} \\cdot 2\\,500 = 25 $$
+
+Multiplicerar båda led med 12:
+
+$$ \\frac{r}{12} \\cdot 2\\,500 \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{12} = 25 \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{12} $$
+
+$$ 2\\,500r = 300 $$
+
+Dividerar båda led med $2\\,500$:
+
+$$ \\frac{2\\,500r}{\\boldsymbol{2\\,500}} = \\frac{300}{\\boldsymbol{2\\,500}} $$
+
+$$ r = 0{,}12 $$
+
+**Svar:** 12 %
+
+**b)** Den första inbetalningen är amortering plus ränta. Räntan är alltså
+
+$$ 4\\,500 - 2\\,500 = 2\\,000\\ \\mathrm{kr} $$
+
+Månadsräntan är $\\dfrac{12\\ \\%}{12} = 1\\ \\%$ av skulden, och vid den första inbetalningen är skulden hela lånet $L$:
+
+$$ 0{,}01L = 2\\,000 $$
+
+Dividerar båda led med $0{,}01$:
+
+$$ \\frac{0{,}01L}{\\boldsymbol{0{,}01}} = \\frac{2\\,000}{\\boldsymbol{0{,}01}} $$
+
+$$ L = 200\\,000 $$
+
+Kontroll: den andra inbetalningen har skulden $197\\,500$ kr och räntan $1\\,975$ kr, alltså inbetalningen $4\\,475$ kr, som är 25 kr mindre än $4\\,500$ kr.
+
+**Svar:** 200 000 kr
+
+**Generell slutsats:** vid rak amortering minskar inbetalningen med samma belopp varje gång, nämligen räntan på en amortering. Det gör att räntesatsen kan läsas av direkt ur två inbetalningar.`,
+        },
+        {
+            level: 3,
+            question: `Ett lån på $120\\,000$ kr ska betalas med rak amortering varje månad, och årsräntan är $5\\ \\%$. Hur mycket mer ränta betalar man totalt om amorteringstiden är 10 år i stället för 5 år?`,
+            answer: { value: 15000, unit: 'kr', tol: 0.001 },
+            solution: `**Insikten:** räntan sjunker lika mycket varje månad, så den totala räntan är antalet inbetalningar gånger medelvärdet av den första och den sista räntan. Den första räntan är densamma i båda fallen, men lånet finns kvar dubbelt så länge.
+
+Månadsräntan är $\\dfrac{5\\ \\%}{12}$ av skulden. Den första räntan är i båda fallen
+
+$$ \\frac{0{,}05 \\cdot 120\\,000}{12} = 500\\ \\mathrm{kr} $$
+
+**5 år:** 60 inbetalningar med amorteringen $\\dfrac{120\\,000}{60} = 2\\,000$ kr. Den sista räntan är på skulden $2\\,000$ kr:
+
+$$ \\frac{0{,}05 \\cdot 2\\,000}{12} = 8{,}33\\ldots\\ \\mathrm{kr} $$
+
+$$ \\text{total ränta} = 60 \\cdot \\frac{500 + 8{,}33\\ldots}{2} = 15\\,250\\ \\mathrm{kr} $$
+
+**10 år:** 120 inbetalningar med amorteringen $\\dfrac{120\\,000}{120} = 1\\,000$ kr. Den sista räntan är på skulden $1\\,000$ kr:
+
+$$ \\frac{0{,}05 \\cdot 1\\,000}{12} = 4{,}166\\ldots\\ \\mathrm{kr} $$
+
+$$ \\text{total ränta} = 120 \\cdot \\frac{500 + 4{,}166\\ldots}{2} = 30\\,250\\ \\mathrm{kr} $$
+
+Skillnaden:
+
+$$ 30\\,250 - 15\\,250 = 15\\,000\\ \\mathrm{kr} $$
+
+Rimligt? Skulden är i genomsnitt ungefär halva lånet, $60\\,000$ kr. Fem år extra med $5\\ \\%$ ränta på det är $5 \\cdot 0{,}05 \\cdot 60\\,000 = 15\\,000$ kr.
+
+**Svar:** 15 000 kr mer
+
+**Generell slutsats:** med rak amortering är den totala räntan nästan exakt årsräntan på halva lånet gånger antalet år. Dubbel amorteringstid ger därför ungefär dubbel räntekostnad.`,
+        },
+        {
+            level: 3,
+            question: `Elias lånar $30\\,000$ kr. Räntan är $1\\ \\%$ per månad på den aktuella skulden. Varje månad betalar han $2\\,000$ kr, och av det går först räntan och sedan resten till amortering. Den sista inbetalningen är bara så stor att skulden blir 0.<br>a) Hur många inbetalningar behövs?<br>b) Hur stor blir den totala räntekostnaden? Avrunda till hela kronor.`,
+            answer: { value: 2668, unit: 'kr', tol: 0.001 },
+            solution: `**Insikten:** här är inbetalningen fast, inte amorteringen. Räntan tar en del av varje inbetalning, och den delen krymper när skulden krymper, så amorteringen växer för varje månad. Varje månad gäller "skulden gånger $1{,}01$, minus $2\\,000$".
+
+**a)** I ett kalkylblad med $30\\,000$ i B2 och \`=B2*1,01-2000\` i B3, nedåt:
+
+| Inbetalning | Ränta (kr) | Skuld efter inbetalningen (kr) |
+| --- | --- | --- |
+| 1 | 300,00 | 28 300,00 |
+| 2 | 283,00 | 26 583,00 |
+| 3 | 265,83 | 24 848,83 |
+| … | … | … |
+| 15 | 45,89 | 2 635,28 |
+| 16 | 26,35 | 661,63 |
+| 17 | 6,62 | 0 |
+
+Efter 16 inbetalningar återstår $661{,}63$ kr. Den 17:e inbetalningen blir
+
+$$ 661{,}63 \\cdot 1{,}01 = 668{,}25\\ \\mathrm{kr} $$
+
+och därefter är lånet betalt.
+
+**Svar:** 17 inbetalningar
+
+**b)** Elias betalar 16 hela inbetalningar och en sista på $668{,}25$ kr:
+
+$$ 16 \\cdot 2\\,000 + 668{,}25 = 32\\,668{,}25\\ \\mathrm{kr} $$
+
+Den totala räntekostnaden är det han betalat minus det han lånat:
+
+$$ 32\\,668{,}25 - 30\\,000 = 2\\,668{,}25\\ \\mathrm{kr} $$
+
+Rimligt? Utan ränta hade 15 inbetalningar räckt. Räntan är i början 300 kr per månad och sjunker sedan, så drygt 2 600 kr på 17 månader är rimligt.
+
+**Svar:** Cirka 2 668 kr
+
+**Generell slutsats:** total räntekostnad är alltid totalt inbetalt minus lånat belopp, oavsett hur lånet betalas av. Det är ett snabbt sätt att slippa summera alla räntor.`,
+        },
+        {
+            level: 3,
+            question: `Linnea ska låna $100\\,000$ kr i 2 år med rak amortering varje månad. Bank A erbjuder årsräntan $6\\ \\%$ utan avgifter. Bank B erbjuder årsräntan $5{,}5\\ \\%$, men tar en avgift på $1\\,000$ kr när lånet tas och en avgift på $25$ kr för varje inbetalning. Vilken bank är billigast, och hur mycket billigare är den? Avrunda till hela kronor.`,
+            answer: { value: 1079, unit: 'kr', tol: 0.001 },
+            solution: `**Insikten:** båda lånen har samma skuld varje månad, eftersom amorteringen är densamma. Räntan i båda bankerna räknas alltså på samma skulder, och summan av skulderna behöver bara räknas ut en gång.
+
+Lånet betalas med 24 inbetalningar och amorteringen är $\\dfrac{100\\,000}{24}$ kr per månad. Skulden vid inbetalningarna är 24, 23, 22, … , 1 amorteringar. Summan $24 + 23 + \\ldots + 1$ blir 12 par som vart och ett är $24 + 1 = 25$, alltså $12 \\cdot 25 = 300$. Summan av alla skulder är
+
+$$ 300 \\cdot \\frac{100\\,000}{24} = 1\\,250\\,000\\ \\mathrm{kr} $$
+
+**Bank A:** månadsräntan är $\\dfrac{6\\ \\%}{12} = 0{,}5\\ \\%$ av skulden:
+
+$$ 0{,}005 \\cdot 1\\,250\\,000 = 6\\,250\\ \\mathrm{kr} $$
+
+**Bank B:** månadsräntan är $\\dfrac{5{,}5\\ \\%}{12}$ av skulden, och därtill kommer avgifterna $1\\,000$ kr och $24 \\cdot 25 = 600$ kr:
+
+$$ \\frac{0{,}055}{12} \\cdot 1\\,250\\,000 = 5\\,729{,}17\\ \\mathrm{kr} $$
+
+$$ 5\\,729{,}17 + 1\\,000 + 600 = 7\\,329{,}17\\ \\mathrm{kr} $$
+
+Skillnaden:
+
+$$ 7\\,329{,}17 - 6\\,250 = 1\\,079{,}17\\ \\mathrm{kr} $$
+
+Den lägre räntan i bank B sparar $6\\,250 - 5\\,729{,}17 = 520{,}83$ kr, men avgifterna kostar $1\\,600$ kr.
+
+**Svar:** Bank A är billigast, cirka 1 079 kr billigare.
+
+**Generell slutsats:** jämför alltid den totala kostnaden, ränta plus alla avgifter. Ett halvt procents lägre ränta på ett lån som i genomsnitt är $52\\,000$ kr i två år är värt drygt 500 kr, och det äts lätt upp av fasta avgifter.`,
         },
     ],
 

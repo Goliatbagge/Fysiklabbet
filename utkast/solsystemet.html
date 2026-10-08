@@ -324,6 +324,11 @@ body.kartalage .hud, body.kartalage #noter, body.kartalage #varp { display: none
 /* Omloppsläget */
 body.omlopp .stopptext, body.omlopp .status, body.omlopp .rutt, body.omlopp .fart { opacity: 0 !important; pointer-events: none; }
 body.omlopp main#resa { touch-action: none; }
+/* under färden går det att se sig omkring: dra med musen (eller sidledes med fingret) */
+body.kan-titta main#resa { cursor: grab; touch-action: pan-y; }
+body.tittar main#resa, body.tittar { cursor: grabbing; }
+body.kan-titta, body.tittar { -webkit-user-select: none; user-select: none; }
+.status .titta { display: block; margin-top: 7px; font-size: 10px; letter-spacing: .16em; color: var(--faint); }
 .hud, .rutt, .fart { transition: opacity .6s; }
 
 @media (max-width: 760px) {
@@ -2842,6 +2847,10 @@ function uppdateraBanor(dt, w, h) {
    INTERAKTION
    ===================================================================== */
 let drag = null;
+// Blicken under färden: en vridning ovanpå kamerans riktning. Den följer musen när man drar,
+// står kvar när man släpper och glider tillbaka mot färdriktningen när nästa värld närmar sig.
+const blick = { yaw: 0, pitch: 0, malYaw: 0, malPitch: 0, kan: false };
+const basQuat = new Q4(), _qYaw = new Q4(), _qPitch = new Q4(), _xAx = new V3(1, 0, 0);
 const _ray = new THREE.Raycaster(), _mus = new THREE.Vector2(), _rv = new V3();
 function traffKropp(e) {
   _mus.set(e.clientX / window.innerWidth * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
@@ -2868,6 +2877,11 @@ window.addEventListener('pointermove', (e) => {
   if (!drag || e.pointerId !== drag.id) return;
   const dx = e.clientX - drag.lx, dy = e.clientY - drag.ly;
   if (!drag.drog && Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 6) drag.drog = true;
+  if (drag.drog && !omlopp.aktiv && blick.kan) {
+    if (!document.body.classList.contains('tittar')) { document.body.classList.add('tittar'); window.getSelection()?.removeAllRanges(); }
+    blick.malYaw += dx * 0.0042;
+    blick.malPitch = klamp(blick.malPitch + dy * 0.0036, -1.35, 1.35);
+  }
   if (drag.drog && omlopp.aktiv) {
     const now = performance.now(), dt = Math.max(1, now - drag.lt) / 1000;
     omlopp.az -= dx * 0.006;
@@ -2885,8 +2899,11 @@ window.addEventListener('pointerup', (e) => {
     if (i >= 0 && !omlopp.aktiv) oppnaDossier(i);
   } else if (omlopp.aktiv && performance.now() - drag.lt > 90) { omlopp.vaz = 0; omlopp.vel = 0; }
   drag = null;
+  document.body.classList.remove('tittar');
 });
-window.addEventListener('pointercancel', () => { drag = null; });
+window.addEventListener('pointercancel', () => { drag = null; document.body.classList.remove('tittar'); });
+// en dragning för att se sig omkring ska aldrig markera sidans text
+document.addEventListener('selectstart', (e) => { if (drag && !omlopp.aktiv && !e.target.closest?.('.dossier')) e.preventDefault(); });
 window.addEventListener('wheel', (e) => {
   if (!omlopp.aktiv || karta.oppen || e.target.closest('.dossier')) return;
   e.preventDefault();
@@ -3125,7 +3142,28 @@ function frame(nu) {
   const kk = 1 - Math.exp(-dtVerklig * lambda);
   forraKam.copy(kamera.position);
   kamera.position.lerp(mal.pos, kk);
-  kamera.quaternion.slerp(mal.quat, kk);
+  basQuat.slerp(mal.quat, kk);
+  // blicken: fri att vrida under färden, men den hittar tillbaka till färdriktningen
+  // före ankomsten (och direkt om man drar vid ett stopp), så att ankomstbilden blir rätt
+  const iFard = !omlopp.aktiv && info.t > 0.02 && info.t < 0.97;
+  blick.kan = !omlopp.aktiv;
+  document.body.classList.toggle('kan-titta', iFard);
+  const haller = drag && drag.drog && !omlopp.aktiv;
+  if (!haller) {
+    const atergang = omlopp.aktiv ? 1 : (iFard ? mjuk(0.7, 0.95, info.t) : 1);
+    const ak = 1 - Math.exp(-dtVerklig * 3.2 * atergang);
+    blick.malYaw -= blick.malYaw * ak;
+    blick.malPitch -= blick.malPitch * ak;
+  }
+  const bk = 1 - Math.exp(-dtVerklig * 9);
+  blick.yaw += (blick.malYaw - blick.yaw) * bk;
+  blick.pitch += (blick.malPitch - blick.pitch) * bk;
+  kamera.quaternion.copy(basQuat);
+  if (Math.abs(blick.yaw) > 1e-4 || Math.abs(blick.pitch) > 1e-4) {
+    _qYaw.setFromAxisAngle(UPP, blick.yaw);
+    _qPitch.setFromAxisAngle(_xAx, blick.pitch);
+    kamera.quaternion.premultiply(_qYaw).multiply(_qPitch);
+  }
 
   // närplanet efter avståndet till närmaste yta
   let narmast = 1e9;
@@ -3217,7 +3255,7 @@ function uppdateraHUD(s, info) {
   if (omlopp.aktiv) st = '';
   else if (info.t > 0.02 && info.t < 0.98 && i + 1 < NS) {
     const namn = STOPP[i + 1] === 'slut' ? 'Voyager 1' : PLANETER[i + 1].namn;
-    st = `På väg mot <b>${namn}</b> · framme om ${nb(tidText(Math.max(0, ljusTid(b - ae))))}`;
+    st = `På väg mot <b>${namn}</b> · framme om ${nb(tidText(Math.max(0, ljusTid(b - ae))))}<span class="titta">Håll ned musknappen och dra för att se dig omkring</span>`;
   } else if (k < NS - 1) {
     st = `Skrolla vidare mot <b>${STOPP[k + 1] === 'slut' ? 'Voyager 1' : PLANETER[k + 1].namn}</b><span class="pil"></span>`;
   }

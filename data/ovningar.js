@@ -23641,6 +23641,22 @@ Elsa tjänar alltså 25 % mer än Karim.
 
 **Svar:** 25 %`,
         },
+        {
+            level: 2,
+            question: `Efter en prishöjning med 15 % kostar en cykel 5 520 kr. Vad kostade cykeln före höjningen?`,
+            answer: { value: 4800, unit: 'kr' },
+            solution: `Förändringsfaktorn är $100\\ \\% + 15\\ \\% = 115\\ \\% = 1{,}15$.
+
+Vi känner det nya värdet och förändringsfaktorn och söker det gamla värdet:
+
+$$ \\text{gamla värdet} = \\frac{\\text{nya värdet}}{\\text{förändringsfaktor}} = \\frac{5\\ 520}{1{,}15} = 4\\ 800\\ \\mathrm{kr} $$
+
+Kontroll: $1{,}15 \\cdot 4\\ 800 = 5\\ 520$. Det stämmer.
+
+Lägg märke till att det är fel att dra bort 15 % av 5 520 kr. Höjningen räknades på det gamla priset, inte på det nya.
+
+**Svar:** 4 800 kr`,
+        },
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,

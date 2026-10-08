@@ -110,8 +110,8 @@ const NYHETER_ALL = [
     category: "Kärnfysik",
     readingTime: "5 min",
     image: "nyheter/bilder/2026-10-08-karnklockan-som-haller-takten-sjalv.jpg",
-    imageAlt: "Ett mörkt laboratorium fullt av kablar, linser och metallrör. Längst fram syns en vakuumkammare med ett runt fönster som lyser svagt violett, och i bakgrunden lutar sig en forskare över en optisk bänk.",
-    imageCredit: "Foto: Matthias Heisler, TU Wien (pressbild). Vakuumkammaren med thoriumkristallen i förgrunden, uppe till höger justerar Luca Toscani de Col lasern.",
+    imageAlt: "En blick in genom ett runt fönster i en vakuumkammare. Inne i den rosa och blå belysta kammaren sticker en blank metallhållare in från vänster, och längst ut på den sitter en liten genomskinlig kristall.",
+    imageCredit: "Foto: Thorsten Schumm, TU Wien (pressbild). Thoriumkristallen i sin hållare inne i vakuumkammaren.",
     tags: ["kärnfysik", "atomkärna", "kärnklocka", "atomur", "thorium", "energinivåer", "foton", "laser", "ultraviolett", "mörk materia", "metrologi"],
     sources: [
       { name: "TU Wien: The First Stand-Alone Nuclear Clock is Ticking in Vienna (7 oktober 2026)", url: "https://www.tuwien.at/en/tu-wien/news/news-articles/news/die-erste-selbststabilisierende-atomkernuhr-tickt-in-wien" },
@@ -144,7 +144,7 @@ const NYHETER_ALL = [
 
       { type: 'h2', text: 'Kärnorna sitter i en kristall' },
       { type: 'p', html: 'Thoriumkärnorna sitter instängda i en cylinder av kalciumfluorid, 3,1&nbsp;millimeter i diameter och 4,2&nbsp;millimeter lång, i rumstemperatur. I laserstrålens väg genom kristallen finns ungefär 10<sup>16</sup> thoriumkärnor. Lasern börjar som infrarött ljus på 1&nbsp;187&nbsp;nanometer, och i tre steg fördubblas frekvensen så att våglängden blir en åttondel, 148&nbsp;nanometer. Ljuset som når detektorn bakom kristallen har en effekt på bara 65&nbsp;pikowatt, och kärnorna absorberar ungefär 0,75&nbsp;procent av det.' },
-      { type: 'image', src: 'nyheter/bilder/2026-10-08-karnklockan-som-haller-takten-sjalv-2.jpg', alt: 'En blick in genom ett runt fönster i en vakuumkammare. Inne i den rosa och blå belysta kammaren sticker en blank metallhållare in från vänster, och längst ut på den sitter en liten genomskinlig kristall.', caption: 'Thoriumkristallen i sin hållare inne i vakuumkammaren. Ljuset på 148&nbsp;nm absorberas av luft, så det måste gå genom vakuum.', credit: 'Foto: Thorsten Schumm, TU Wien (pressbild)' },
+      { type: 'image', src: 'nyheter/bilder/2026-10-08-karnklockan-som-haller-takten-sjalv-2.jpg', alt: 'Ett mörkt laboratorium fullt av kablar, linser och metallrör. Längst fram syns en vakuumkammare med ett runt fönster som lyser svagt violett, och i bakgrunden lutar sig en forskare över en optisk bänk.', caption: 'Vakuumkammaren med thoriumkristallen i förgrunden, uppe till höger justerar Luca Toscani de Col lasern. Ljuset på 148&nbsp;nm absorberas av luft, så det måste gå genom vakuum hela vägen fram till kristallen.', credit: 'Foto: Matthias Heisler, TU Wien (pressbild)' },
       { type: 'p', html: 'Det nya är hur signalen läses av. Tidigare skickade man in ljus, stängde av det och väntade på att de exciterade kärnorna skulle sända ut fotoner när de föll tillbaka. Det tar tid, eftersom en exciterad kärna i kristallen i genomsnitt dröjer omkring tio minuter innan den sänder ut sin foton. I en studie i <em>Nature</em> i september visade gruppen i stället att man kan mäta hur mycket ljus som försvinner på vägen genom kristallen, alltså absorptionen, med en laser som lyser hela tiden. Det ger omkring tusen gånger fler signalfotoner per sekund och gör att mätningen inte behöver vänta på kärnorna.' },
 
       { type: 'h2', text: 'Kärnorna rättar lasern' },

@@ -553,7 +553,7 @@
       [['kopplar ihop farten med']],
       [['sträckan.']]
     ]));
-    T.str('Bromssträcka', padL, y, null, 0.62);
+    T.str('Torricellis ekvation', padL, y, null, 0.62);
     T.pause(300);
     y += 2.5 * F;
     var xb = T.str('v^2-v_0^2=2·a·s⟺s=', padL, y);

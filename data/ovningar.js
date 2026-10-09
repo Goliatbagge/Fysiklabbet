@@ -6525,7 +6525,7 @@ $$
         {
             level: 2,
             penna: 'ov-fy1-3.6-u7',
-            question: `En bil med massan 1 400 kg kör i 90 km/h på en torr asfaltväg och bromsar med låsta hjul (skid-broms). Friktionstalet mellan låsta däck och asfalt är 0,72. Hur lång blir bilens **bromssträcka**? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            question: `En bil med massan 1 400 kg kör i 90 km/h på en torr asfaltväg och bromsar med låsta hjul. Friktionstalet mellan låsta däck och asfalt är 0,72. Hur lång blir bilens **bromssträcka**? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 44.2, unit: 'm', tol: 0.03 },
             solution: `Friktionskraften ger en negativ acceleration (retardation). Vi räknar ut den och använder Torricellis ekvation för att hitta bromssträckan.
 

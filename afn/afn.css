@@ -1,0 +1,280 @@
+/* ÄFN – Äkta Fejkade Nyheter. Övningssida i kursen Artificiell intelligens. */
+:root {
+  --rod: #d1001f;
+  --rod-mork: #a80019;
+  --svart: #111111;
+  --text: #1b1b1b;
+  --gra: #686868;
+  --gra-ljus: #9a9a9a;
+  --linje: #e2e2e2;
+  --bg: #ffffff;
+  --bg-ruta: #f6f4ef;
+  --plus: #0b6b5c;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- Toppremsa ---------- */
+.topbar { border-bottom: 1px solid var(--linje); font-size: 13px; color: var(--gra); }
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 38px; }
+.topbar-datum::first-letter { text-transform: uppercase; }
+.topbar-hoger { display: flex; align-items: center; gap: 14px; }
+.vader { white-space: nowrap; }
+.tb-knapp {
+  border: 0; background: none; color: var(--svart); font-weight: 600; font-size: 13px; padding: 4px 0;
+}
+.tb-knapp.primar {
+  background: var(--rod); color: #fff; border-radius: 3px; padding: 5px 12px;
+}
+
+/* ---------- Tidningshuvud ---------- */
+.masthead { padding: 22px 0 16px; }
+.masthead .wrap { display: flex; justify-content: center; }
+.logo { display: inline-flex; align-items: center; gap: 14px; }
+.logo-mark {
+  background: var(--rod); color: #fff;
+  font-family: var(--serif); font-weight: 800; font-size: 46px; line-height: 1;
+  padding: 10px 14px 12px; letter-spacing: -1px; border-radius: 2px;
+}
+.logo-text { display: flex; flex-direction: column; line-height: 1.05; }
+.logo-text b { font-family: var(--serif); font-weight: 800; font-size: 30px; color: var(--svart); letter-spacing: -0.5px; }
+.logo-text small { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gra); margin-top: 6px; }
+
+/* ---------- Sektionsmeny ---------- */
+.sektioner { border-top: 3px solid var(--svart); border-bottom: 1px solid var(--linje); position: sticky; top: 0; background: var(--bg); z-index: 20; }
+.sektioner .wrap { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+.sektioner .wrap::-webkit-scrollbar { display: none; }
+.sektioner a {
+  flex: 0 0 auto; padding: 12px 12px 11px; font-weight: 700; font-size: 14.5px; color: var(--svart);
+  border-bottom: 3px solid transparent; margin-bottom: -1px;
+}
+.sektioner a:hover { color: var(--rod); }
+.sektioner a.aktiv { border-bottom-color: var(--rod); color: var(--rod); }
+
+/* ---------- Just nu-remsa ---------- */
+.ticker { background: var(--svart); color: #fff; font-size: 14px; }
+.ticker .wrap { display: flex; align-items: center; height: 40px; gap: 14px; }
+.ticker-etikett {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 7px;
+  background: var(--rod); color: #fff; font-weight: 800; text-transform: uppercase; font-size: 12.5px;
+  letter-spacing: 0.8px; padding: 4px 9px; border-radius: 2px;
+}
+.ticker-etikett::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%; background: #fff; animation: puls 1.4s infinite;
+}
+@keyframes puls { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+.ticker-spar { overflow: hidden; flex: 1; mask-image: linear-gradient(90deg, transparent, #000 3%, #000 95%, transparent); }
+.ticker-inner { display: inline-flex; gap: 40px; white-space: nowrap; animation: rulla 60s linear infinite; padding-left: 10px; }
+.ticker-inner:hover { animation-play-state: paused; }
+.ticker-inner a:hover { text-decoration: underline; }
+.ticker-inner b { color: #ff5a6e; margin-right: 6px; font-weight: 700; }
+@keyframes rulla { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .ticker-inner, .ticker-etikett::before { animation: none; }
+}
+
+/* ---------- Gemensamma delar ---------- */
+.vinjett { color: var(--rod); font-weight: 800; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.6px; }
+.etikett { color: var(--rod); }
+.plus-badge {
+  display: inline-block; background: var(--plus); color: #fff; font-family: var(--sans);
+  font-size: 11px; font-weight: 800; padding: 2px 6px 1px; border-radius: 2px; vertical-align: 0.25em; margin-right: 6px; letter-spacing: 0.3px;
+}
+.meta { color: var(--gra); font-size: 13px; }
+.meta .ny { color: var(--rod); font-weight: 700; }
+.bildram { position: relative; overflow: hidden; background: #ddd; aspect-ratio: 16 / 9; }
+.bildram img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+a:hover .bildram img { transform: scale(1.03); }
+a:hover .rubrik { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.rubrik { font-family: var(--serif); font-weight: 800; color: var(--svart); margin: 0; letter-spacing: -0.3px; line-height: 1.12; }
+
+/* ---------- Förstasidan ---------- */
+.front { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 32px; padding-top: 24px; }
+.front-main { min-width: 0; }
+
+.hero { display: block; padding-bottom: 24px; border-bottom: 1px solid var(--linje); }
+.hero .bildram { aspect-ratio: 16 / 8.5; }
+.hero-text { padding-top: 14px; }
+.hero .rubrik { font-size: clamp(30px, 4.6vw, 52px); margin: 6px 0 10px; line-height: 1.05; letter-spacing: -0.8px; }
+.hero .ingress { font-size: 18px; line-height: 1.45; margin: 0 0 8px; color: #2a2a2a; }
+.hero.utan-bild .rubrik { font-size: clamp(36px, 6vw, 68px); }
+
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--linje); }
+
+.kort { display: flex; flex-direction: column; gap: 8px; }
+.kort .rubrik { font-size: 22px; }
+.kort .ingress { margin: 0; font-size: 15px; color: #3a3a3a; line-height: 1.45; }
+.kort.utan-bild { border-top: 4px solid var(--rod); padding-top: 10px; }
+.kort.utan-bild .rubrik { font-size: 26px; }
+
+.band { margin-top: 30px; }
+.band-rubrik {
+  display: flex; align-items: baseline; justify-content: space-between;
+  border-top: 3px solid var(--svart); padding-top: 8px; margin: 0 0 16px;
+}
+.band-rubrik h2 { font-family: var(--serif); font-size: 26px; font-weight: 800; margin: 0; letter-spacing: -0.3px; }
+.band-rubrik a.fler { font-size: 13px; font-weight: 700; color: var(--rod); }
+.rutnat { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px 24px; }
+.rutnat .kort.stor { grid-column: span 2; }
+.rutnat .kort.stor .rubrik { font-size: 30px; }
+
+/* Sidokolumn */
+.front-aside { min-width: 0; display: flex; flex-direction: column; gap: 26px; }
+.ruta { background: var(--bg-ruta); padding: 16px 18px 6px; }
+.ruta h3 {
+  margin: 0 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 800; color: var(--svart);
+  display: flex; align-items: center; gap: 8px;
+}
+.ruta h3 .prick { width: 8px; height: 8px; border-radius: 50%; background: var(--rod); animation: puls 1.4s infinite; }
+.senaste-lista, .mest-lista { list-style: none; margin: 0; padding: 0; }
+.senaste-lista li { border-top: 1px solid #e3dfd6; }
+.senaste-lista li:first-child { border-top: 0; }
+.senaste-lista a { display: grid; grid-template-columns: 46px 1fr; gap: 8px; padding: 10px 0; font-size: 14.5px; line-height: 1.35; font-weight: 600; color: var(--svart); }
+.senaste-lista a:hover span:last-child { text-decoration: underline; }
+.senaste-lista time { color: var(--rod); font-weight: 700; font-size: 13px; }
+.mest-lista li { border-top: 1px solid #e3dfd6; }
+.mest-lista li:first-child { border-top: 0; }
+.mest-lista a { display: grid; grid-template-columns: 38px 1fr; gap: 6px; padding: 11px 0; align-items: start; }
+.mest-lista .nr { font-family: var(--serif); font-size: 32px; font-weight: 800; color: var(--rod); line-height: 0.9; }
+.mest-lista .t { font-family: var(--serif); font-weight: 700; font-size: 17px; line-height: 1.25; color: var(--svart); }
+.mest-lista a:hover .t { text-decoration: underline; }
+
+.annons { border: 1px solid var(--linje); padding: 8px; }
+.annons-etikett { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gra-ljus); text-align: center; margin-bottom: 6px; }
+.annons-innehall {
+  background: linear-gradient(150deg, #2b1a0e 0%, #6b3f1d 55%, #c98a4b 100%); color: #fff; padding: 26px 20px; text-align: center;
+}
+.annons-innehall b { display: block; font-family: var(--serif); font-size: 26px; line-height: 1.1; margin-bottom: 8px; }
+.annons-innehall span { display: block; font-size: 13.5px; opacity: 0.92; margin-bottom: 14px; }
+.annons-innehall i { display: inline-block; font-style: normal; background: #fff; color: #2b1a0e; font-weight: 800; font-size: 13px; padding: 7px 16px; border-radius: 20px; }
+
+.plus-ruta { background: var(--plus); color: #fff; padding: 18px; }
+.plus-ruta b { font-family: var(--serif); font-size: 21px; display: block; line-height: 1.2; margin-bottom: 6px; }
+.plus-ruta p { margin: 0 0 12px; font-size: 14px; opacity: 0.92; }
+.plus-ruta button { border: 0; background: #fff; color: var(--plus); font-weight: 800; padding: 8px 14px; border-radius: 3px; font-size: 14px; }
+
+/* Sektionssida */
+.sektionshuvud { padding: 26px 0 4px; border-bottom: 3px solid var(--svart); margin-bottom: 22px; }
+.sektionshuvud h1 { font-family: var(--serif); font-size: 44px; margin: 0; letter-spacing: -0.8px; }
+.tomt { padding: 60px 0; color: var(--gra); font-size: 18px; text-align: center; }
+
+/* ---------- Artikelsidan ---------- */
+.artikel-sida { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px; padding-top: 28px; }
+.artikel { max-width: 720px; min-width: 0; }
+.artikel .vinjett a:hover { text-decoration: underline; }
+.artikel h1 {
+  font-family: var(--serif); font-weight: 800; color: var(--svart);
+  font-size: clamp(32px, 5vw, 50px); line-height: 1.06; letter-spacing: -0.9px; margin: 10px 0 16px;
+}
+.artikel > .ingress { font-family: var(--serif); font-weight: 600; font-size: 21px; line-height: 1.45; margin: 0 0 20px; color: #222; }
+.byline-rad {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 0; border-top: 1px solid var(--linje); border-bottom: 1px solid var(--linje); margin-bottom: 22px;
+}
+.byline { display: flex; align-items: center; gap: 11px; }
+.avatar {
+  width: 42px; height: 42px; border-radius: 50%; background: var(--svart); color: #fff;
+  display: grid; place-items: center; font-weight: 700; font-size: 14px; letter-spacing: 0.5px; flex: 0 0 auto; overflow: hidden;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.byline-namn { font-weight: 700; font-size: 15px; color: var(--svart); line-height: 1.2; }
+.byline-namn small { display: block; font-weight: 400; color: var(--gra); font-size: 13px; }
+.tider { font-size: 13px; color: var(--gra); line-height: 1.5; }
+.dela { display: flex; gap: 8px; }
+.dela button {
+  border: 1px solid var(--linje); background: #fff; border-radius: 20px; padding: 6px 14px;
+  font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; color: var(--svart);
+}
+.dela button:hover { border-color: var(--svart); }
+.dela svg { width: 15px; height: 15px; }
+
+.art-bild { margin: 0 0 24px; }
+.art-bild .bild-yta { background: #ececec; }
+.art-bild img { width: 100%; max-height: 78vh; object-fit: contain; margin: 0 auto; }
+.art-bild figcaption { font-size: 13.5px; color: #444; padding: 8px 0 0; line-height: 1.45; }
+.art-bild figcaption .foto { color: var(--gra-ljus); text-transform: uppercase; font-size: 11.5px; letter-spacing: 0.5px; margin-left: 4px; }
+
+.brodtext { font-family: var(--serif); font-size: 19px; line-height: 1.65; color: #1d1d1d; }
+.brodtext p { margin: 0 0 1.05em; }
+.brodtext h2 { font-family: var(--sans); font-size: 19px; font-weight: 800; margin: 1.6em 0 0.4em; color: var(--svart); }
+.brodtext blockquote {
+  margin: 1.4em 0; padding: 4px 0 4px 20px; border-left: 4px solid var(--rod);
+  font-size: 25px; line-height: 1.3; font-weight: 700; color: var(--svart);
+}
+.brodtext .art-bild { margin: 1.5em 0; font-family: var(--sans); }
+.fakta { background: var(--bg-ruta); border-top: 4px solid var(--rod); padding: 16px 20px 6px; margin: 1.5em 0; font-family: var(--sans); font-size: 15.5px; line-height: 1.5; }
+.fakta h4 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 800; }
+.fakta ul { margin: 0 0 10px; padding-left: 18px; }
+.fakta li { margin-bottom: 6px; }
+
+.amnen { display: flex; flex-wrap: wrap; gap: 8px; padding: 18px 0; border-top: 1px solid var(--linje); margin-top: 28px; }
+.amnen span { font-size: 13px; color: var(--gra); align-self: center; margin-right: 4px; }
+.amnen a { border: 1px solid var(--linje); border-radius: 20px; padding: 5px 12px; font-size: 13px; font-weight: 600; }
+.amnen a:hover { border-color: var(--svart); }
+
+.las-ocksa { margin-top: 30px; }
+.las-ocksa .rutnat { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.artikel-aside { min-width: 0; display: flex; flex-direction: column; gap: 26px; }
+.artikel-aside .sticky { position: sticky; top: 64px; display: flex; flex-direction: column; gap: 26px; }
+
+/* ---------- Sidfot ---------- */
+.sidfot { background: var(--svart); color: #cfcfcf; margin-top: 60px; padding: 40px 0 30px; font-size: 14px; }
+.sidfot-topp { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 28px; padding-bottom: 28px; border-bottom: 1px solid #333; }
+.sidfot .logo-mark { font-size: 34px; padding: 8px 11px 9px; }
+.sidfot h4 { color: #fff; font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; margin: 4px 0 10px; }
+.sidfot ul { list-style: none; margin: 0; padding: 0; }
+.sidfot li { padding: 3px 0; }
+.sidfot-botten { padding-top: 20px; font-size: 13px; color: #9a9a9a; line-height: 1.6; }
+.sidfot-botten strong { color: #fff; }
+
+.toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); opacity: 0;
+  background: var(--svart); color: #fff; padding: 11px 18px; border-radius: 4px; font-size: 14px; font-weight: 600;
+  transition: opacity 0.2s, transform 0.2s; pointer-events: none; z-index: 50; max-width: calc(100% - 32px); text-align: center;
+}
+.toast.syns { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---------- Mindre skärmar ---------- */
+@media (max-width: 1000px) {
+  .front, .artikel-sida { grid-template-columns: minmax(0, 1fr); }
+  .front-aside, .artikel-aside { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+  .artikel-aside .sticky { position: static; display: contents; }
+  .artikel { max-width: none; }
+  .sidfot-topp { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 700px) {
+  .topbar .vader { display: none; }
+  .masthead { padding: 16px 0 12px; }
+  .logo-mark { font-size: 34px; padding: 8px 10px 9px; }
+  .logo-text b { font-size: 21px; }
+  .logo-text small { font-size: 9.5px; letter-spacing: 1.6px; margin-top: 4px; }
+  .duo, .rutnat, .las-ocksa .rutnat { grid-template-columns: minmax(0, 1fr); }
+  .rutnat .kort.stor { grid-column: auto; }
+  .rutnat .kort.stor .rubrik, .kort .rubrik { font-size: 22px; }
+  .front-aside, .artikel-aside { grid-template-columns: minmax(0, 1fr); }
+  .hero .ingress { font-size: 16.5px; }
+  .artikel > .ingress { font-size: 18.5px; }
+  .brodtext { font-size: 18px; }
+  .brodtext blockquote { font-size: 21px; }
+  .sidfot-topp { grid-template-columns: 1fr; }
+  .hero .bildram { margin: 0 -16px; }
+}
+
+/* Bilder inne i brödtexten: lagom höga, utan grå kantytor */
+.brodtext .art-bild .bild-yta { background: none; }
+.brodtext .art-bild img { width: auto; max-width: 100%; max-height: 460px; }

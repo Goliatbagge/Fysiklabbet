@@ -108,12 +108,22 @@ function loadHandskrift() {
   return win.HANDSKRIFT;
 }
 
-/* data/np/<prov>-penna.js — en fil per nationellt prov */
+/* data/np/<prov>-penna.js — en fil per nationellt prov — och
+ * data/ovningar-penna/<avsnitt>.js — övningarnas pennlösningar, en fil per
+ * teoriavsnitt (scennamn ov-<avsnitt>-u<nr>, se Ovning i katalog.html) */
 function pennaFiler() {
+  const ut = [];
   const dir = path.join(ROOT, 'data', 'np');
-  if (!fs.existsSync(dir)) return [];
-  return fs.readdirSync(dir).filter(n => n.endsWith('-penna.js')).sort()
-    .map(n => path.join(dir, n));
+  if (fs.existsSync(dir)) {
+    ut.push(...fs.readdirSync(dir).filter(n => n.endsWith('-penna.js')).sort()
+      .map(n => path.join(dir, n)));
+  }
+  const ovDir = path.join(ROOT, 'data', 'ovningar-penna');
+  if (fs.existsSync(ovDir)) {
+    ut.push(...fs.readdirSync(ovDir).filter(n => n.endsWith('.js')).sort()
+      .map(n => path.join(ovDir, n)));
+  }
+  return ut;
 }
 
 /* ---------- vilka scener används i teorin? ---------- */
@@ -297,9 +307,15 @@ const npScener = HK.typer().filter(t => /^[a-z0-9]+-[a-z]{2}\d{4}-u\d+$/.test(t)
     const na = +a.split('-u')[1], nb = +b.split('-u')[1];
     return a.replace(/-u\d+$/, '').localeCompare(b.replace(/-u\d+$/, '')) || na - nb;
   });
+/* Övningarnas scener heter ov-<avsnitt>-u<nr> */
+const ovScener = HK.typer().filter(t => /^ov-.+-u\d+$/.test(t))
+  .sort((a, b) => {
+    const na = +a.split('-u').pop(), nb = +b.split('-u').pop();
+    return a.replace(/-u\d+$/, '').localeCompare(b.replace(/-u\d+$/, '')) || na - nb;
+  });
 const valda = process.argv.slice(2).length
   ? process.argv.slice(2)
-  : [...anvanda.keys()].sort().concat(npScener);
+  : [...anvanda.keys()].sort().concat(npScener, ovScener);
 
 let felTot = 0, varnTot = 0, gamlaTot = 0;
 for (const typ of valda) {

@@ -3863,6 +3863,44 @@ body.laborans u .lab-term {
     border-top: 1px dashed var(--lab-line);
 }
 
+/* Pennlösning i övningarna: växeln "Med penna"/"Som text" och arket.
+   Wrappern bär lab-block-exempel bara för att handskrift.js ska hitta
+   frågestammen att klona till helskärmens uppgiftspanel. Den ritar ingen
+   egen ruta, och frågekopian syns bara i klonen. */
+.lab-ovning-vyval {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 0 14px;
+}
+.lab-ovning-vyval-label {
+    font-size: 12.5px;
+    color: var(--lab-ink-muted);
+    margin-right: 2px;
+}
+.lab-ovning-vyval-btn.is-on {
+    background: var(--lab-ink);
+    border-color: var(--lab-ink);
+    color: var(--lab-bg);
+}
+.lab-ovning-penna-ex,
+.lab-ovning-solution .lab-ovning-penna-ex {
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+.lab-ovning-penna-ex::before { display: none; }
+.lab-ovning-penna-ex > .lab-ovning-penna-fraga { display: none; }
+.hk-uppgift .lab-ovning-penna-fraga { display: block; }
+.lab-ovning-penna-val { list-style: none; margin: 8px 0 0; padding: 0; }
+.lab-ovning-penna-val li { display: flex; gap: 8px; align-items: baseline; }
+.lab-ovning-penna-val li > span { font-weight: 600; }
+.lab-ovning-penna-val p { margin: 0; }
+.lab-ovning-solution .lab-ovning-penna { margin: 0 0 6px; }
+
 /* === Presentationsläge (teori som bildspel) ========================== */
 
 /* Launch-knapp i teori-verktygsraden — högerställd pill i mono-stil */

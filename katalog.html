@@ -2236,6 +2236,87 @@
             { label: 'Δ', insert: 'Δ' },
         ];
 
+        // ── Pennlösningar till övningarna ─────────────────────────────
+        // En övning med fältet penna: 'ov-<avsnitt>-u<nr>' får samma
+        // animerade handskrift som teorins exempel, med växeln "Med penna"/
+        // "Som text" överst i lösningsförslaget. Scenerna bor i
+        // data/ovningar-penna/<avsnitt>.js (en fil per avsnitt, registrerad
+        // med HANDSKRIFT.registrera) och laddas först när en övning i
+        // avsnittet visas — katalogen ska inte bära alla övningars scener.
+        // Avsnittet läses ur scennamnet, så alias (ma1b → ma1c, fy1-3.11 →
+        // fy2-1.1) laddar rätt fil. Finns ingen scen visas bara texten.
+        const OV_PENNA_LADDAR = {};
+        function laddaOvningPenna(typ) {
+            const avsnitt = typ.replace(/^ov-/, '').replace(/-u\d+$/, '');
+            if (!OV_PENNA_LADDAR[avsnitt]) {
+                OV_PENNA_LADDAR[avsnitt] = new Promise((resolve) => {
+                    const s = document.createElement('script');
+                    s.src = 'data/ovningar-penna/' + avsnitt + '.js?v=' + window.__CB;
+                    s.onload = () => resolve(true);
+                    s.onerror = () => resolve(false);
+                    document.head.appendChild(s);
+                });
+            }
+            return OV_PENNA_LADDAR[avsnitt];
+        }
+        function harPennScen(typ) {
+            return !!(typ && window.HANDSKRIFT && window.HANDSKRIFT.typer &&
+                      window.HANDSKRIFT.typer().indexOf(typ) >= 0);
+        }
+        function useOvningPenna(typ) {
+            const [klar, setKlar] = useState(() => harPennScen(typ));
+            useEffect(() => {
+                if (!typ || harPennScen(typ)) { setKlar(harPennScen(typ)); return; }
+                let aktiv = true;
+                laddaOvningPenna(typ).then(() => { if (aktiv) setKlar(harPennScen(typ)); });
+                return () => { aktiv = false; };
+            }, [typ]);
+            // redan laddad scen syns direkt, utan en bildruta i textläget
+            return klar || harPennScen(typ);
+        }
+        // Vyvalet delas med teorins exempel och proven (samma nyckel), så
+        // den som föredrar textlösningar slipper välja om på varje sida.
+        function lasHkVy() {
+            try { return localStorage.getItem('hkLosningsvy') === 'text' ? 'text' : 'penna'; }
+            catch (e) { return 'penna'; }
+        }
+        function skrivHkVy(v) {
+            try { localStorage.setItem('hkLosningsvy', v); } catch (e) {}
+        }
+        // Wrappern bär klassen lab-block-exempel: handskrift.js klonar allt
+        // som står FÖRE arket till den fastnålade uppgiftspanelen i
+        // helskärm. Frågekopian är dold på sidan (uppgiften står redan
+        // ovanför) men syns i klonen.
+        function OvningPenna({ typ, uppgift }) {
+            const host = useRef(null);
+            useEffect(() => {
+                const el = host.current;
+                if (!el || !window.HANDSKRIFT) return;
+                el.innerHTML = '';
+                window.HANDSKRIFT.mount(el, { typ }, {});
+                return () => { el.innerHTML = ''; };
+            }, [typ]);
+            const isMC = Array.isArray(uppgift.choices);
+            return (
+                <div className="lab-ovning-penna-ex lab-block-exempel">
+                    <div className="lab-ovning-penna-fraga">
+                        <MarkdownBody source={uppgift.question} />
+                        {isMC && (
+                            <ol className="lab-ovning-penna-val">
+                                {uppgift.choices.map((c, i) => (
+                                    <li key={i}>
+                                        <span>{String.fromCharCode(65 + i)}</span>
+                                        <MarkdownBody source={c} />
+                                    </li>
+                                ))}
+                            </ol>
+                        )}
+                    </div>
+                    <div className="lab-ovning-penna lab-handskrift" ref={host} />
+                </div>
+            );
+        }
+
         function Ovning({ uppgift, index, total }) {
             const isMC = Array.isArray(uppgift.choices) && typeof uppgift.correct === 'number';
             const [answer, setAnswer] = useState('');
@@ -2246,6 +2327,9 @@
             const [formatOpen, setFormatOpen] = useState(false);
             const inputRef = useRef(null);
             const answerOnly = useMemo(() => extractAnswer(uppgift.solution), [uppgift.solution]);
+            const pennaKlar = useOvningPenna(showSolution ? uppgift.penna : null);
+            const [losVy, setLosVy] = useState(lasHkVy);
+            const pennaVy = pennaKlar && losVy === 'penna';
             const levelLabel = uppgift.level === 1 ? 'Nivå 1 · Grundläggande'
                              : uppgift.level === 2 ? 'Nivå 2 · Medel'
                              : 'Nivå 3 · Avancerad';
@@ -2415,7 +2499,22 @@
                             <div className="lab-mono-label" style={{ marginBottom: 8 }}>
                                 Lösningsförslag
                             </div>
-                            <MarkdownBody source={uppgift.solution} />
+                            {pennaKlar && (
+                                <div className="lab-ovning-vyval" role="group" aria-label="Välj hur lösningen visas">
+                                    <span className="lab-ovning-vyval-label">Lösning</span>
+                                    <button type="button"
+                                        className={'lab-btn lab-btn-quiet lab-ovning-vyval-btn' + (pennaVy ? ' is-on' : '')}
+                                        onClick={() => { setLosVy('penna'); skrivHkVy('penna'); }}
+                                        title="Se hur lösningen skrivs för hand, steg för steg">Med penna</button>
+                                    <button type="button"
+                                        className={'lab-btn lab-btn-quiet lab-ovning-vyval-btn' + (pennaVy ? '' : ' is-on')}
+                                        onClick={() => { setLosVy('text'); skrivHkVy('text'); }}
+                                        title="Visa lösningen som vanlig text">Som text</button>
+                                </div>
+                            )}
+                            {pennaVy
+                                ? <OvningPenna typ={uppgift.penna} uppgift={uppgift} />
+                                : <MarkdownBody source={uppgift.solution} />}
                         </div>
                     )}
                 </div>

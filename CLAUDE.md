@@ -592,6 +592,24 @@ Så här bygger du scenen:
    filhuvudet (felet hände 2026-09-07: 12x² ringades in i båda led i
    stället för att −12x² skrevs ut).
 
+## Pennlösningar till övningarna (`penna:` i data/ovningar.js)
+
+En övning kan få samma animerade pennlösning som teorins exempel (infört
+2026-10-09, första avsnitt: `fy1-3.6`). Övningen får fältet
+`penna: 'ov-<avsnitt>-u<nr>'` (numret = övningens plats i listan), och
+scenen registreras med `HANDSKRIFT.registrera` i
+`data/ovningar-penna/<avsnitt>.js`, en fil per avsnitt. Katalogen laddar
+filen först när ett lösningsförslag i avsnittet öppnas och visar då växeln
+"Med penna"/"Som text" (`Ovning`/`OvningPenna` i `katalog.html`).
+
+- Alla regler för pennscener gäller (handskrift.js filhuvud), och
+  **siffrorna ska vara identiska** med övningens textlösning. Skriv om
+  textlösningen när den avrundar i mellanled.
+- `node .claude/verify-handskrift.js` laddar filerna och granskar
+  `ov-`-scenerna automatiskt. Kör även `verify-rakning.js <avsnitt>`.
+- Granska figurerna i skärmdump: en testsida under `.shots/` som laddar
+  `handskrift.js` + scenfilen och monterar med `{instant:true, stegvis:false}`.
+
 ## Polynomdivision ställs alltid upp som en trappa
 
 **Varje polynomdivision på sajten, i teori, exempel, pennlösningar, övningar

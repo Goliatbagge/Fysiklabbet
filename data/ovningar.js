@@ -6400,6 +6400,7 @@ $$
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
+            penna: 'ov-fy1-3.6-u1',
             question: `En låda dras längs ett plant golv. Friktionstalet mellan låda och golv är 0,30, och normalkraften från golvet på lådan är 200 N. Beräkna friktionskraften.`,
             answer: { value: 60, unit: 'N', tol: 0.02 },
             solution: `Direkt insättning i formeln för friktionskraft:
@@ -6412,18 +6413,19 @@ $$
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.6-u2',
             question: `En sandsäck med massan 25 kg vilar på ett plant golv. Friktionstalet mellan säck och golv är 0,45. Hur stor kraft krävs det **minst** för att få säcken att börja glida? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 110, unit: 'N', tol: 0.03 },
             solution: `På plant underlag är normalkraften lika med tyngdkraften:
 
 $$
-F_N = F_G = m \\cdot g = 25 \\cdot 9{,}82 \\approx 245{,}5\\ \\mathrm{N}
+F_N = F_G = m \\cdot g = 25 \\cdot 9{,}82 = 245{,}5\\ \\mathrm{N}
 $$
 
 Friktionskraften vid glidningsgränsen:
 
 $$
-F_f = \\mu \\cdot F_N = 0{,}45 \\cdot 245{,}5 \\approx 110\\ \\mathrm{N}
+F_f = \\mu \\cdot F_N = 0{,}45 \\cdot 245{,}5 = 110{,}475 \\approx 110\\ \\mathrm{N}
 $$
 
 För att säcken ska börja glida måste dragkraften minst vara lika med friktionskraften:
@@ -6432,10 +6434,11 @@ $$
 F_\\text{min} = F_f \\approx 110\\ \\mathrm{N}
 $$
 
-**Svar:** Det krävs minst ca 110 N.`,
+**Svar:** Det krävs minst cirka 110 N.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.6-u3',
             question: `En kloss glider över ett bord. Friktionskraften är 8,5 N och normalkraften från bordet är 25 N. Beräkna friktionstalet *μ*.`,
             answer: { value: 0.34, unit: '', tol: 0.03 },
             solution: `Lös ut $\\mu$ ur friktionsformeln:
@@ -6454,6 +6457,7 @@ $$
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.6-u4',
             question: `En stekspade av stål glider mot en teflonpanna med friktionskraften 0,60 N. Friktionstalet mellan stål och teflon är bara 0,040 — ett av de lägsta som finns mellan fasta material. Hur stor är normalkraften mellan spaden och pannan?`,
             answer: { value: 15, unit: 'N', tol: 0.02 },
             solution: `Lös ut normalkraften ur friktionsformeln:
@@ -6468,6 +6472,7 @@ $$
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.6-u5',
             question: `En tung packlåda står stilla på golvet. Du puttar horisontellt på lådan med kraften 50 N — den står fortfarande stilla. Hur stor är friktionskraften på lådan i det ögonblicket?`,
             choices: [
                 `0 N — lådan rör sig ju inte, så det finns ingen friktion.`,
@@ -6490,11 +6495,12 @@ $$
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
+            penna: 'ov-fy1-3.6-u6',
             question: `En bokhylla med massan 50 kg dras horisontellt över ett golv med kraften 325 N. Bokhyllan får då accelerationen 4,0 m/s². Beräkna friktionstalet mellan bokhyllan och golvet. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 0.25, unit: '', tol: 0.05 },
             solution: `Vi använder Newtons andra lag på horisontella krafter för att hitta friktionskraften, sedan friktionsformeln för att hitta friktionstalet.
 
-**Steg 1 — friktionskraft.** Newtons andra lag:
+**Steg 1: friktionskraften.** Newtons andra lag:
 
 $$
 F_R = F_\\text{drag} - F_f \\quad\\Leftrightarrow\\quad F_f = F_\\text{drag} - m \\cdot a
@@ -6504,25 +6510,26 @@ $$
 F_f = 325 - 50 \\cdot 4{,}0 = 325 - 200 = 125\\ \\mathrm{N}
 $$
 
-**Steg 2 — friktionstal.** Normalkraften är lika med tyngdkraften (plant golv):
+**Steg 2: friktionstalet.** Normalkraften är lika med tyngdkraften (plant golv):
 
 $$
 F_N = m \\cdot g = 50 \\cdot 9{,}82 = 491\\ \\mathrm{N}
 $$
 
 $$
-\\mu = \\frac{F_f}{F_N} = \\frac{125}{491} \\approx 0{,}25
+\\mu = \\frac{F_f}{F_N} = \\frac{125}{491} = 0{,}2545\\ldots \\approx 0{,}25
 $$
 
-**Svar:** Friktionstalet är ca 0,25.`,
+**Svar:** Friktionstalet är cirka 0,25.`,
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.6-u7',
             question: `En bil med massan 1 400 kg kör i 90 km/h på en torr asfaltväg och bromsar med låsta hjul (skid-broms). Friktionstalet mellan låsta däck och asfalt är 0,72. Hur lång blir bilens **bromssträcka**? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 44.2, unit: 'm', tol: 0.03 },
             solution: `Friktionskraften ger en negativ acceleration (retardation). Vi räknar ut den och använder Torricellis ekvation för att hitta bromssträckan.
 
-**Steg 1 — friktionsacceleration.** På plant underlag är $F_N = m g$, så:
+**Steg 1: accelerationen.** På plant underlag är $F_N = m g$, så:
 
 $$
 F_f = \\mu \\cdot m \\cdot g \\quad\\Rightarrow\\quad a = \\frac{F_f}{m} = \\mu \\cdot g
@@ -6531,70 +6538,76 @@ $$
 Notera att massan **stryker bort sig** — bromsaccelerationen beror bara på friktionstalet och *g*:
 
 $$
-a = -\\mu \\cdot g = -0{,}72 \\cdot 9{,}82 \\approx -7{,}07\\ \\mathrm{m/s^2}
+a = -\\mu \\cdot g = -0{,}72 \\cdot 9{,}82 = -7{,}0704\\ \\mathrm{m/s^2}
 $$
 
-**Steg 2 — bromssträcka.** Med Torricellis ekvation och *v* = 0 (bilen stannar):
+**Steg 2: bromssträckan.** Med Torricellis ekvation och $v = 0$ (bilen stannar):
 
 $$
-v^{2} - v_0^{2} = 2 a s \\quad\\Leftrightarrow\\quad s = \\frac{-v_0^{2}}{2 a}
+v^{2} - v_0^{2} = 2 a s \\quad\\Leftrightarrow\\quad s = \\frac{v^{2} - v_0^{2}}{2 a}
 $$
 
 Mätvärden: $v_0 = 90\\ \\mathrm{km/h} = 25\\ \\mathrm{m/s}$.
 
 $$
-s = \\frac{-25^{2}}{2 \\cdot (-7{,}07)} = \\frac{-625}{-14{,}14} \\approx 44{,}2\\ \\mathrm{m}
+s = \\frac{0^{2} - 25^{2}}{2 \\cdot (-7{,}0704)} = 44{,}198\\ldots \\approx 44\\ \\mathrm{m}
 $$
 
-**Svar:** Bromssträckan är ca 44 m.
+**Svar:** Bromssträckan är cirka 44 m.
 
 **Generell slutsats:** Bromssträckan beror **inte på bilens massa** (vid given $\\mu$ och $v_0$). Massa-beroendet av $F_f = \\mu m g$ tar ut massa-beroendet i $F_R = m a$. Däremot fördubblas bromssträckan om friktionstalet halveras (våt väg!) och fyrdubblas om hastigheten dubblas.`,
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.6-u8',
             question: `Ett hundspann med åtta draghundar drar en släde över snö. Släden med förare och last har massan 210 kg (hundarnas egen massa räknas inte hit — de bär sig själva). Varje hund drar med kraften 60 N i färdriktningen, och friktionstalet mellan medarna och snön är 0,14. Vilken acceleration får släden vid starten? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 0.91, unit: 'm/s²', tol: 0.04 },
-            solution: `**Steg 1 — total dragkraft:**
+            solution: `**Steg 1: den totala dragkraften.**
 
 $$
 F_\\text{drag} = 8 \\cdot 60 = 480\\ \\mathrm{N}
 $$
 
-**Steg 2 — friktionskraften.** På plan mark är normalkraften lika med slädens tyngdkraft:
+**Steg 2: friktionskraften.** På plan mark är normalkraften lika med slädens tyngdkraft:
 
 $$
-F_f = \\mu \\cdot F_N = \\mu \\cdot m g = 0{,}14 \\cdot 210 \\cdot 9{,}82 \\approx 289\\ \\mathrm{N}
+F_f = \\mu \\cdot F_N = \\mu \\cdot m \\cdot g = 0{,}14 \\cdot 210 \\cdot 9{,}82 = 288{,}708\\ \\mathrm{N}
 $$
 
-**Steg 3 — Newtons andra lag:**
+**Steg 3: Newtons andra lag.**
 
 $$
-a = \\frac{F_R}{m} = \\frac{F_\\text{drag} - F_f}{m} = \\frac{480 - 289}{210} \\approx 0{,}91\\ \\mathrm{m/s^2}
+a = \\frac{F_R}{m} = \\frac{F_\\text{drag} - F_f}{m} = \\frac{480 - 288{,}708}{210} = 0{,}9109\\ldots \\approx 0{,}91\\ \\mathrm{m/s^2}
 $$
 
-**Svar:** Ca 0,91 m/s².
+**Svar:** Cirka 0,91 m/s².
 
 **Generell slutsats:** Notera att över hälften av hundarnas samlade dragkraft går åt bara till att övervinna friktionen. Det är därför slädförare vallar medarna — sänks $\\mu$ från 0,14 till 0,05 mer än fördubblas accelerationen.`,
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.6-u9',
             question: `En curlingsten släpps iväg med farten 2,2 m/s och glider 28 m på isen innan den stannar av sig själv. Bestäm friktionstalet mellan stenen och isen. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 0.0088, unit: '', tol: 0.05 },
-            solution: `**Steg 1 — retardationen** ur Torricellis ekvation ($v = 0$ när stenen stannar):
+            solution: `**Steg 1: friktionstalet uttryckt i retardationen.** Friktionen är den enda kraften i rörelseriktningen. Med retardationens storlek $a$ ger Newtons andra lag $F_f = m \\cdot a$, och samtidigt är $F_f = \\mu \\cdot m \\cdot g$. Massan finns i båda leden och divideras bort:
 
 $$
-v^{2} - v_0^{2} = 2 a s
-\\quad\\Leftrightarrow\\quad
-a = \\frac{-v_0^{2}}{2 s} = \\frac{-2{,}2^{2}}{2 \\cdot 28} \\approx -0{,}086\\ \\mathrm{m/s^2}
+\\mu \\cdot m \\cdot g = m \\cdot a \\quad\\Leftrightarrow\\quad \\mu = \\frac{a}{g}
 $$
 
-**Steg 2 — friktionstalet.** Den enda horisontella kraften är friktionen, så $F_f = m \\cdot |a|$. Samtidigt är $F_f = \\mu m g$. Massan stryker bort sig:
+**Steg 2: retardationen.** Stenen bromsas jämnt från $v_0$ till stillastående på sträckan $s$. Torricellis ekvation med sluthastigheten noll ger $v_0^{2} = 2 \\cdot a \\cdot s$:
 
 $$
-\\mu = \\frac{|a|}{g} = \\frac{0{,}086}{9{,}82} \\approx 0{,}0088
+a = \\frac{v_0^{2}}{2 \\cdot s} = \\frac{2{,}2^{2}}{2 \\cdot 28} = 0{,}08642\\ldots\\ \\mathrm{m/s^2}
 $$
 
-**Svar:** Friktionstalet är ca 0,009 — ungefär en hundradel av trä mot trä.
+**Steg 3: insättning.**
+
+$$
+\\mu = \\frac{a}{g} = \\frac{0{,}08642\\ldots}{9{,}82} = 0{,}008801\\ldots \\approx 0{,}0088
+$$
+
+**Svar:** Friktionstalet är cirka 0,0088.
 
 **Generell slutsats:** Isens extremt låga friktionstal är hela förutsättningen för curling: stenen "minns" sin fart i tiotals meter. Sopningen framför stenen sänker $\\mu$ ytterligare en aning — det räcker för att förlänga glidsträckan flera meter och styra stenen.`,
         },
@@ -6602,6 +6615,7 @@ $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
+            penna: 'ov-fy1-3.6-u10',
             question: `En låda med massan 12 kg dras längs ett plant golv enligt figuren. Friktionstalet mellan låda och golv är 0,30. Beräkna lådans **acceleration**. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
 ${makeForceDiagram({
@@ -6626,36 +6640,36 @@ $$
 F_y = F \\cdot \\sin 25^{\\circ} \\quad (\\text{vertikalt, uppåt — minskar } F_N)
 $$
 
-**Steg 1 — normalkraft.** Lådan rör sig inte vertikalt, så kraftbalansen i lodled ger:
+**Steg 1: normalkraften.** Lådan rör sig inte vertikalt, så kraftbalansen i lodled ger:
 
 $$
 F_N + F_y = F_G \\quad\\Leftrightarrow\\quad F_N = m \\cdot g - F \\cdot \\sin 25^{\\circ}
 $$
 
 $$
-F_N = 12 \\cdot 9{,}82 - 60 \\cdot \\sin 25^{\\circ} = 117{,}84 - 25{,}36 = 92{,}48\\ \\mathrm{N}
+F_N = 12 \\cdot 9{,}82 - 60 \\cdot \\sin 25^{\\circ} = 92{,}482\\ldots\\ \\mathrm{N}
 $$
 
-**Steg 2 — friktionskraft:**
+**Steg 2: friktionskraften.**
 
 $$
-F_f = \\mu \\cdot F_N = 0{,}30 \\cdot 92{,}48 = 27{,}74\\ \\mathrm{N}
+F_f = \\mu \\cdot F_N = 0{,}30 \\cdot 92{,}482\\ldots = 27{,}744\\ldots\\ \\mathrm{N}
 $$
 
-**Steg 3 — Newton 2 horisontellt:**
+**Steg 3: Newtons andra lag i sidled.**
 
 $$
 F_R = F_x - F_f = F \\cdot \\cos 25^{\\circ} - F_f
 $$
 
 $$
-F_R = 60 \\cdot \\cos 25^{\\circ} - 27{,}74 = 54{,}38 - 27{,}74 = 26{,}64\\ \\mathrm{N}
+F_R = 60 \\cdot \\cos 25^{\\circ} - 27{,}744\\ldots = 26{,}633\\ldots\\ \\mathrm{N}
 $$
 
 Acceleration:
 
 $$
-a = \\frac{F_R}{m} = \\frac{26{,}64}{12} = 2{,}22 \\approx 2{,}2\\ \\mathrm{m/s^2}
+a = \\frac{F_R}{m} = \\frac{26{,}633\\ldots}{12} = 2{,}219\\ldots \\approx 2{,}2\\ \\mathrm{m/s^2}
 $$
 
 **Svar:** Lådans acceleration är cirka 2,2 m/s².
@@ -6664,35 +6678,32 @@ $$
         },
         {
             level: 3,
-            question: `En framhjulsdriven bil med massan 1 400 kg står på torr asfalt, där friktionstalet mellan däck och väg är 0,90. Hälften av bilens tyngd vilar på de drivande framhjulen.
-
-a) Hur stor är den största acceleration bilen kan få utan att drivhjulen spinner loss?
-
-b) Hur kort kan tiden 0–100 km/h då som bäst bli?
+            penna: 'ov-fy1-3.6-u11',
+            question: `En framhjulsdriven bil med massan 1 400 kg står på torr asfalt, där friktionstalet mellan däck och väg är 0,90. Hälften av bilens tyngd vilar på de drivande framhjulen.<br>a) Hur stor är den största acceleration bilen kan få utan att drivhjulen spinner loss?<br>b) Hur kort kan tiden 0–100 km/h då som bäst bli?
 
 *Ange tiden (b) som ditt numeriska svar i s. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
             answer: { value: 6.29, unit: 's', tol: 0.03 },
             solution: `**a) Bara drivhjulens normalkraft räknas.** Den drivande kraften är friktionen mellan drivhjulen och vägen — och den begränsas av normalkraften på **just drivhjulen**, som bara bär halva tyngden:
 
 $$
-F_\\text{max} = \\mu \\cdot \\frac{m g}{2} = 0{,}90 \\cdot \\frac{1\\,400 \\cdot 9{,}82}{2} \\approx 6\\,190\\ \\mathrm{N}
+F_\\text{max} = \\mu \\cdot \\frac{m \\cdot g}{2} = 0{,}90 \\cdot \\frac{1\\,400 \\cdot 9{,}82}{2} = 6\\,186{,}6\\ \\mathrm{N}
 $$
 
 Newtons andra lag (hela bilens massa ska accelereras):
 
 $$
-a_\\text{max} = \\frac{F_\\text{max}}{m} = \\frac{\\mu \\cdot m g / 2}{m} = \\frac{\\mu \\cdot g}{2} = \\frac{0{,}90 \\cdot 9{,}82}{2} \\approx 4{,}4\\ \\mathrm{m/s^2}
+m \\cdot a_\\text{max} = \\mu \\cdot \\frac{m \\cdot g}{2} \\quad\\Leftrightarrow\\quad a_\\text{max} = \\frac{\\mu \\cdot g}{2} = \\frac{0{,}90 \\cdot 9{,}82}{2} = 4{,}419 \\approx 4{,}4\\ \\mathrm{m/s^2}
 $$
 
 Notera att massan **stryker bort sig** — maxaccelerationen beror bara på $\\mu$ och viktfördelningen.
 
-**b) Kortaste tiden till 100 km/h.** Med $v = 100\\ \\mathrm{km/h} = 27{,}8\\ \\mathrm{m/s}$:
+**b) Kortaste tiden till 100 km/h.** Bilen startar från stillastående med konstant acceleration, så $v = a \\cdot t$. Med $v = 100\\ \\mathrm{km/h} = 27{,}777\\ldots\\ \\mathrm{m/s}$ och den oavrundade accelerationen från a):
 
 $$
-t = \\frac{v}{a_\\text{max}} = \\frac{27{,}8}{4{,}4} \\approx 6{,}3\\ \\mathrm{s}
+t = \\frac{v}{a_\\text{max}} = \\frac{27{,}777\\ldots}{4{,}419} = 6{,}285\\ldots \\approx 6{,}3\\ \\mathrm{s}
 $$
 
-**Svar:** a) Ca 4,4 m/s². b) Ca 6,3 s.
+**Svar:** a) Cirka 4,4 m/s²&emsp;&emsp;b) Cirka 6,3 s
 
 **Generell slutsats:** Det är **friktionen, inte motorn**, som sätter den yttersta gränsen för acceleration — en starkare motor hjälper inte om hjulen spinner. Formeln $a_\\text{max} = \\mu g \\cdot (\\text{andel av tyngden på drivhjulen})$ förklarar varför sportbilar ofta har bakhjulsdrift och motorn baktill (tyngden förskjuts bakåt vid acceleration → mer normalkraft på drivhjulen) och varför fyrhjulsdrift ($\\text{andelen} = 1$) accelererar bäst.`,
         },

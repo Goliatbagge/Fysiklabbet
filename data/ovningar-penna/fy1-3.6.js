@@ -463,15 +463,17 @@
 
     y += adv + 2.2 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
-      [['Ingen av krafterna är given.']],
-      [['Newtons andra lag: dragkraften']],
-      [['minus friktionen är m·a. Normal-']],
-      [['kraften är hyllans tyngd.']]
+      [['Ingen av krafterna är given. Den']],
+      [['resulterande kraften är drag-']],
+      [['kraften minus friktionen, och']],
+      [['den är m·a. Normalkraften är']],
+      [['hyllans tyngd.']]
     ]));
     var klam = valueBracket(T.acts, [
-      'F_f=F_d_r_a_g-m·a=325 N-50 kg·4,0 m/s^2=125 N',
+      'F_R=F_d_r_a_g-F_f⟺F_f=F_d_r_a_g-F_R=F_d_r_a_g-m·a',
+      '    =325 N-50 kg·4,0 m/s^2=125 N',
       'F_N=F_G=m·g=50 kg·9,82 N/kg=491 N'
-    ], padL, y, T.s, F, { rs: 0.7 });
+    ], padL, y, T.s, F);
     T.stepEnd();
     y = klam.yEnd;
 

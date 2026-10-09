@@ -6503,7 +6503,7 @@ $$
 **Steg 1: friktionskraften.** Newtons andra lag:
 
 $$
-F_R = F_\\text{drag} - F_f \\quad\\Leftrightarrow\\quad F_f = F_\\text{drag} - m \\cdot a
+F_R = F_\\text{drag} - F_f \\quad\\Leftrightarrow\\quad F_f = F_\\text{drag} - F_R = F_\\text{drag} - m \\cdot a
 $$
 
 $$

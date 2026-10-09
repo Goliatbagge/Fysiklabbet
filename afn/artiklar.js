@@ -300,4 +300,210 @@ Skolan kommer att följa upp testet under hela vårterminen. Bland annat ska nä
 Blir resultatet tydligt bättre kan den senare skolstarten fortsätta även efter vårterminen. Annars kan skolan gå tillbaka till de tidigare tiderna. Den stora frågan för eleverna blir alltså om en timmes extra sömn faktiskt gör någon skillnad under resten av skoldagen.`,
     amnen: ['Västerdal', 'Skolan', 'Sömn'],
   },
+  {
+    rubrik: 'Kraftig översvämning efter skyfall i Göteborg – gator fyllda med vatten',
+    ingress: 'Kraftiga regn har orsakat översvämningar på flera platser i Göteborg. Vägar och trottoarer har täckts av vatten, och räddningstjänsten uppmanar allmänheten att undvika de drabbade områdena.',
+    kategori: 'Nyheter',
+    vinjett: 'Skyfallet',
+    reporter: 'Per Almqvist',
+    bild: 'bilder/oversvamning.jpg',
+    bildtext: 'Vattnet forsar fram längs gatorna efter nattens skyfall.',
+    foto: 'Läsarbild',
+    brodtext: `**GÖTEBORG.** Under natten och fredagsmorgonen föll stora mängder regn över Göteborg. Vattnet samlades snabbt på gator och i lågt belägna områden. På vissa platser blev det svårt för trafikanter att ta sig fram, samtidigt som flera boende uttryckte oro över situationen.
+
+– Jag blev förvånad när jag såg hur mycket vatten det var på gatan. Jag har aldrig sett det så här illa tidigare, säger Göteborgsbon Anna Karlsson.
+
+## Räddningstjänsten varnar
+
+De stora regnmängderna har gjort att dagvattensystemen haft svårt att leda bort allt vatten. När regnet faller snabbare än vattnet kan rinna undan ökar risken för översvämningar.
+
+Räddningstjänsten uppmanar människor att hålla sig borta från vattenfyllda vägar och att inte försöka köra genom områden där vattendjupet är okänt.
+
+– Det är viktigt att människor tar situationen på allvar. Vatten på vägar kan vara djupare än det ser ut, och det kan finnas dolda hinder under ytan, säger räddningsledaren.
+
+## Trafiken påverkas
+
+Översvämningen har även påverkat framkomligheten i staden. Bilister har tvingats sänka hastigheten, och i vissa områden kan trafiken behöva ledas om om vägarna blir oframkomliga. Även fotgängare har fått problem på grund av vattenfyllda trottoarer och gångvägar.
+
+## Fortsatt osäkert läge
+
+Hur omfattande konsekvenserna blir beror på hur mycket mer regn som faller och hur snabbt vattnet kan rinna undan. Invånare uppmanas att följa information från Göteborgs Stad och räddningstjänsten.
+
+Flera boende hoppas nu att regnet ska avta så att vattnet kan börja sjunka undan.`,
+    amnen: ['Göteborg', 'Väder', 'Översvämning'],
+  },
+  {
+    rubrik: 'Skola överväger förbud mot energidrycker – vill förbättra elevernas hälsa',
+    ingress: 'En skola planerar att utreda ett förbud mot energidrycker i skolans lokaler. Bakgrunden är en diskussion om hur koffein påverkar elevernas sömn, koncentration och välmående.',
+    kategori: 'Hälsa',
+    vinjett: 'Skolan',
+    reporter: 'Sofia Berg',
+    bild: 'bilder/energidrycker.jpg',
+    bildtext: 'Energidrycker är vanliga under skoldagen – nu kan de bli förbjudna.',
+    foto: 'ÄFN',
+    brodtext: `Frågan om energidrycker bland ungdomar har blivit allt mer aktuell. Nu överväger en skola att införa nya regler för att minska konsumtionen under skoldagen. Förslaget innebär att elever inte längre skulle få dricka energidrycker i klassrummen eller under skolans raster.
+
+Ett eventuellt beslut kan påverka både elevernas raster och vad de får ta med sig till skolan.
+
+## Vill skapa bättre studiemiljö
+
+Tanken bakom förslaget är att skapa en bättre studiemiljö och uppmuntra eleverna att göra mer hälsosamma val. Energidrycker innehåller ofta stora mängder koffein, vilket kan påverka sömnen och orsaka till exempel oro och hjärtklappning hos känsliga personer.
+
+## Delade åsikter bland eleverna
+
+Förslaget väcker olika reaktioner. Vissa elever tycker att ett förbud är onödigt och att de själva borde få bestämma vad de dricker. Andra välkomnar initiativet och anser att skolan bör ta ett större ansvar för elevernas hälsa.
+
+Innan något beslut fattas kan skolan genomföra en enkät för att ta reda på hur eleverna ser på frågan. Därefter ska elevrådet, skolledningen och elevhälsan diskutera vilka åtgärder som är lämpliga.
+
+## ”Vi har inte bestämt oss än”
+
+ÄFN har pratat med en representant för skolan.
+
+**Varför vill ni förbjuda energidrycker?**
+
+– Vi vill att eleverna ska må bättre och kunna koncentrera sig på lektionerna.
+
+**Vad tycker eleverna om förslaget?**
+
+– Vissa tycker att det är bra, medan andra tycker att det är onödigt.
+
+**Kommer förbudet att införas?**
+
+– Vi har inte bestämt oss än, men vi ska diskutera frågan vidare.
+
+## Kan bli ett test
+
+Ett förbud kan först införas som ett test under en begränsad period innan skolan utvärderar resultatet. Då kan man bland annat undersöka hur eleverna upplever reglerna och om information om koffein och sömn leder till mer medvetna val.
+
+Frågan visar hur skolor kan behöva balansera elevernas frihet med ambitionen att skapa en trygg och hälsosam skolmiljö.`,
+    amnen: ['Skolan', 'Energidrycker', 'Hälsa'],
+  },
+  {
+    rubrik: 'Skolor kan förändra examinationerna efter AI-boomen – muntliga prov får större roll',
+    ingress: 'Artificiell intelligens förändrar hur elever arbetar med skoluppgifter. Nu växer frågan om hur lärare ska kunna avgöra vad eleverna faktiskt kan. Muntliga examinationer och fler uppgifter i klassrummet diskuteras som möjliga lösningar.',
+    kategori: 'Teknik',
+    vinjett: 'AI i skolan',
+    reporter: 'Karin Holm',
+    bild: 'bilder/muntliga-prov.jpg',
+    bildtext: 'Fler uppgifter kan komma att göras på lektionstid, där läraren kan följa arbetet.',
+    foto: 'ÄFN',
+    brodtext: `Artificiell intelligens har på kort tid blivit ett verktyg som kan hjälpa elever att sammanfatta texter, förklara komplicerade begrepp och lösa matematiska problem. För många innebär tekniken nya möjligheter att lära sig snabbare och få stöd när läraren inte finns till hands.
+
+Samtidigt ställs skolan inför en utmaning: hur ska lärare kunna bedöma elevernas egna kunskaper när en AI-tjänst kan producera välformulerade svar på några sekunder?
+
+Frågan har blivit särskilt viktig vid skriftliga inlämningar. En text kan vara korrekt, välstrukturerad och innehålla avancerade resonemang utan att det går att avgöra hur mycket eleven själv förstår.
+
+## Muntliga prov som komplement
+
+En möjlig lösning är att förändra hur vissa kunskaper examineras. I stället för att bara bedöma en färdig text kan lärare kombinera skriftliga arbeten med muntliga frågor, kortare prov och uppgifter som görs under lektionstid.
+
+Vid en muntlig examination får eleven förklara hur ett svar har tagits fram, motivera sina slutsatser och svara på följdfrågor. Läraren kan till exempel be en elev förklara varför en matematisk formel fungerar, eller beskriva hur en historisk händelse påverkade samhället.
+
+Men det finns begränsningar. En elev kan förstå ett ämne väl men ha svårt att uttrycka sig muntligt på grund av nervositet. Därför bör muntliga prov inte automatiskt ersätta skriftliga examinationer.
+
+## Forskare: handlar om mer än fusk
+
+Rose Luckin, professor vid University College London, har länge forskat om hur AI kan användas i utbildning och hur tekniken påverkar undervisning och lärande. Hennes forskning visar att diskussionen om AI i skolan handlar om mer än fusk – den handlar också om hur undervisningen kan utformas så att elever utvecklar förståelse, kritiskt tänkande och förmågan att lösa problem på egen hand.
+
+## Processen blir viktigare
+
+Ett centralt problem är att slutprodukten inte alltid visar elevens arbetsprocess. En elev kan använda AI för att få en förklaring och sedan själv lösa liknande uppgifter. En annan kan lämna in ett färdigt AI-svar utan att förstå resonemanget. På papperet kan resultaten se likadana ut.
+
+Därför behöver skolor tydliga riktlinjer för när AI får användas och hur användningen ska redovisas. Bedömningen kan inte heller bygga på misstankar: automatiska AI-detektorer kan ge felaktiga resultat och bör inte ensamma användas som bevis för fusk.
+
+## Mer arbete för lärarna
+
+För eleverna kan förändringen innebära att större vikt läggs vid att förstå innehållet och kunna förklara det med egna ord. För lärarna kan den innebära mer arbete – individuella samtal tar tid, särskilt i stora klasser.
+
+En möjlig kompromiss är korta uppföljningsfrågor efter vissa inlämningar, utvalda uppgifter på lektionstid och vanliga skriftliga prov i kombination.
+
+## Inte skolans fiende
+
+Det är lätt att beskriva AI som ett hot mot utbildningen, men tekniken kan också vara ett stöd. En elev som har svårt för en matematisk metod kan be om en stegvis förklaring, och lärare kan använda tekniken för att skapa övningsmaterial.
+
+En skola som förbjuder all AI riskerar att gå miste om användbara möjligheter. En skola som tillåter allt utan regler riskerar att inte längre kunna bedöma elevernas kunskaper.
+
+Hur framtidens examinationer kommer att se ut återstår att se. Klart är att AI ställer nya frågor om undervisning, bedömning och ansvar.`,
+    amnen: ['AI', 'Skolan', 'Prov'],
+  },
+  {
+    rubrik: 'Skövde HC skriver historia – klart för SHL',
+    ingress: 'Efter en dramatisk kvalserie är det klart: Skövde HC spelar i SHL nästa säsong. På söndagskvällen säkrade laget avancemanget med en dramatisk seger inför ett fullsatt Billingehov.',
+    kategori: 'Sport',
+    vinjett: 'Hockey',
+    reporter: 'Oskar Wall',
+    reportertitel: 'Sportreporter',
+    bild: 'bilder/skovde-shl.jpg',
+    bildtext: 'Jublet ville aldrig ta slut när Skövde HC var klart för SHL.',
+    foto: 'ÄFN',
+    brodtext: `**SKÖVDE.** Det var en kväll som få i Skövde kommer att glömma.
+
+Tusentals supportrar hade tagit sig till Billingehov för att följa den avgörande matchen. Förutsättningarna var enkla – Skövde behövde vinna för att ta det historiska steget upp till svensk ishockeys högsta serie.
+
+Och laget levererade.
+
+Efter en jämn första period tog Skövde ledningen tidigt i den andra. Motståndarna kvitterade senare, men med bara minuter kvar av matchen kom det avgörande målet. När slutsignalen gick exploderade arenan i jubel.
+
+## ”Det är svårt att förstå”
+
+Efter matchen var känslorna stora bland spelare, ledare och supportrar. Elias Bergström beskriver kvällen som den största i hans hockeykarriär.
+
+– Det är helt otroligt. Man har drömt om sådana här ögonblick sedan man var liten. Att få göra det tillsammans med det här laget och framför vår publik är svårt att beskriva, säger Bergström.
+
+Vägen till SHL har varit lång, med både motgångar och pressade matcher. Men enligt Bergström har sammanhållningen varit avgörande.
+
+– Vi har aldrig slutat tro på varandra. Även när det har gått emot oss har vi fortsatt jobba. Det är nog det som har gjort skillnaden.
+
+## Ett historiskt ögonblick
+
+På läktarna syntes supportrar med flaggor och halsdukar medan spelarna firade på isen. Många stannade kvar långt efter slutsignalen för att ta in ögonblicket.
+
+Även tränaren hyllade laget.
+
+– Spelarna har lagt ner ett enormt arbete under hela säsongen. De har visat mod, disciplin och framför allt en fantastisk lagkänsla, säger huvudtränaren Johan Lind.
+
+## Nu börjar nästa kapitel
+
+Trots glädjen börjar arbetet inför nästa säsong redan nu. SHL innebär ett betydligt tuffare motstånd. För Skövde HC väntar en sommar där truppen ska byggas, organisationen utvecklas och Billingehov förberedas för SHL-hockey.
+
+Men den här kvällen handlade om något annat. Om spelarna som vägrade ge upp. Om supportrarna som fortsatte tro. Och om en förening som nu har skrivit in sig i Skövdes hockeyhistoria.`,
+    amnen: ['Skövde HC', 'SHL', 'Ishockey'],
+  },
+  {
+    rubrik: 'Back avstängd för doping – Skövde HC chockade',
+    ingress: 'Backen Albin Ekwall, 17, stängs av i fyra år efter ett positivt dopingprov. Klubben säger sig vara ”djupt skakad”.',
+    kategori: 'Sport',
+    vinjett: 'Hockey',
+    reporter: 'Oskar Wall',
+    reportertitel: 'Sportreporter',
+    bild: 'bilder/doping.jpg',
+    bildtext: 'Provet innehöll ett förbjudet anabolt ämne.',
+    foto: 'ÄFN',
+    brodtext: `**SKÖVDE.** Skövde HC:s Albin Ekwall har stängts av från all tävlingsverksamhet efter att ett dopingprov från januari innehöll ett förbjudet anabolt ämne. Beskedet kom på torsdagen, när förbundets disciplinnämnd meddelade sitt beslut. Avstängningen gäller i fyra år.
+
+Ekwall, som i vintras var en av lagets mest använda backar, har enligt klubben inte tidigare varit misstänkt för regelbrott. Han har enligt uppgift begärt att få analysera B-provet.
+
+– Det här är ett tungt besked för hela föreningen. Vi tar dopingfrågor på största allvar och kommer att följa processen noga, säger tränaren Lennart Hedqvist.
+
+Hedqvist beskriver Ekwall som en professionell spelare.
+
+– Han har alltid skött träningar och återhämtning exemplariskt. Därför är det här så svårt att ta in. Men regler är regler, och vi måste respektera nämndens beslut.
+
+## Tung stämning i omklädningsrummet
+
+Det var dålig stämning när laget samlades efter träningen.
+
+– Man blir helt tom. Vi har spelat tillsammans i tre säsonger, och jag har svårt att förstå det här, säger lagkaptenen Oskar Brandt.
+
+Forwarden Emil Sjöqvist vill inte spekulera i orsaken.
+
+– Det är inte vår sak att döma. Vi tänker på honom som kompis, men också på hur vi hanterar situationen som lag. Ren idrott är grunden för allt vi gör.
+
+## Kan överklaga
+
+Skövde HC har meddelat att Ekwall inte kommer att delta i någon av lagets aktiviteter under avstängningen. Klubben har också kallat till ett möte med spelartruppen och planerar en genomgång av sina rutiner kring antidoping.
+
+Ekwall själv har inte kommenterat beslutet. Enligt hans advokat överväger han att överklaga.`,
+    amnen: ['Skövde HC', 'Doping', 'Ishockey'],
+  },
 ];

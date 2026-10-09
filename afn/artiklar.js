@@ -124,6 +124,40 @@ För många elever skulle gratis elcyklar kunna innebära ett enklare sätt att 
     amnen: ['Skolan', 'Elcyklar', 'Miljö'],
   },
   {
+    rubrik: 'Man smög in i främmande bubbelpool – blev ”besatt” av familjens gummianka',
+    ingress: 'Mitt i natten tog sig en okänd man in på en privat tomt, badade i poolen och bubbelpoolen – och ägnade över tio minuter åt familjens gummianka. Sedan cyklade han iväg med badhanddukar för över 10 000 kronor.',
+    kategori: 'Världen',
+    vinjett: 'USA',
+    reporter: 'Maja Lindqvist',
+    bild: 'bilder/gummianka.jpg',
+    bildtext: 'En gummianka i en pool. Arkivbild.',
+    foto: 'Dorian Wallender (CC BY-SA 2.0)',
+    brodtext: `**GEORGIA.** Polisen i Chatham County i den amerikanska delstaten Georgia letar efter en man som natten till den 1 september tog sig in på en privat tomt och använde familjens pool och bubbelpool – helt utan lov.
+
+Allt fångades av husets övervakningskameror. Mannen befann sig på tomten någon gång mellan kvart över två och halv sex på morgonen.
+
+## Tio minuter med ankan
+
+Det som har fått störst uppmärksamhet är vad som hände i bubbelpoolen. Enligt polisen visar videon hur mannen blir *förtjust* i familjens gummianka och ägnar mer än tio minuter åt att intensivt pyssla med den.
+
+> ”Han tog sig in på deras tomt, använde deras bubbelpool, blev besatt av deras gummianka och stal sedan deras poolhanddukar.”
+
+Så sammanfattar Chatham County-polisen händelsen i sitt efterlysningsmeddelande.
+
+## Flydde på cykel
+
+När badet var över tog mannen med sig familjens badhanddukar, värda omkring 1 200 dollar – drygt 10 000 kronor. Sedan försvann han från platsen på en cykel.
+
+Enligt polisen har fallet ”en hel del äckelfaktor”.
+
+Mannen är fortfarande inte identifierad. Polisen ber allmänheten om tips, som kan lämnas anonymt via polisens app eller via Crime Stoppers.`,
+    fakta: {
+      rubrik: 'Fakta: Händelsen',
+      punkter: ['**Var:** Chatham County, Georgia, USA', '**När:** 1 september 2026, mellan 02.15 och 05.30', '**Tid med gummiankan:** över tio minuter', '**Stöldgods:** badhanddukar för cirka 1 200 dollar', '**Flyktfordon:** cykel'],
+    },
+    amnen: ['USA', 'Polisen', 'Kuriosa'],
+  },
+  {
     rubrik: 'Kommunen inför kameraövervakning efter ökad skadegörelse',
     ingress: 'Efter en kraftig ökning av skadegörelse i centrum vill Björkstad kommun sätta upp övervakningskameror på flera offentliga platser. Kommunen hoppas att åtgärden både ska förebygga nya brott och göra det lättare för polisen att utreda dem som redan har begåtts.',
     kategori: 'Lokalt',
@@ -171,60 +205,6 @@ Tanken är att kameraövervakningen ska kombineras med andra åtgärder, bland a
 
 För invånarna återstår nu att se om kamerorna blir en del av Björkstads centrum, eller om förslaget möter tillräckligt stort motstånd för att ändras innan beslutet fattas.`,
     amnen: ['Björkstad', 'Kameraövervakning', 'Brott'],
-  },
-  {
-    rubrik: '82-åring grävde ner 5 000 glaskulor i isen vid Sydpolen – nu får han Nobelpriset',
-    ingress: 'Han jagade ”spökpartiklar” som susar rakt igenom jordklotet – och genom dig, just nu. När Francis Halzen fick samtalet om Nobelpriset var hans första tanke en ansökan om pengar.',
-    kategori: 'Vetenskap',
-    vinjett: 'Nobelpriset',
-    reporter: 'Maja Lindqvist',
-    reportertitel: 'Vetenskapsreporter',
-    bild: 'bilder/icecube-2.jpg',
-    bildtext: 'Forskningsstationen IceCube vid Sydpolen. Under isen, upp till två och en halv kilometer ner, sitter tusentals ljussensorer infrysta.',
-    foto: 'Christopher Michel (CC BY-SA 4.0)',
-    brodtext: `Årets Nobelpris i fysik går till den belgiskfödde forskaren Francis Halzen, 82, vid University of Wisconsin–Madison i USA. Det meddelade Kungliga Vetenskapsakademien i Stockholm på tisdagen.
-
-Halzen belönas ”för avgörande bidrag till IceCube-observatoriet och upptäckten av högenergetiska neutriner av astrofysikaliskt ursprung”.
-
-## Fick idén 1988
-
-Neutriner kallas ofta för spökpartiklar. Biljoner av dem passerar genom din kropp varje sekund, utan att du märker något – de flyger rakt igenom både människor och hela jordklotet. Därför är de nästan omöjliga att fånga.
-
-Redan 1988 kom Halzen på idén att använda isen vid Sydpolen som en jättelik detektor. Resultatet blev IceCube: drygt 5 000 ljussensorer, inneslutna i tåliga glasklot, som har sänkts ner i borrhål och frusit fast i en hel kubikkilometer is.
-
-När en neutrino någon gång krockar med en atomkärna i isen uppstår en svag ljusblixt. Den kan sensorerna upptäcka.
-
-[bild: bilder/icecube-dom.jpg | En av IceCubes ljussensorer. Över 5 000 sådana klot sitter infrysta i isen. | Amble (CC BY-SA 3.0)]
-
-## Spökpartiklar från rymden
-
-Bygget blev klart 2011. Två år senare kunde forskarna för första gången visa att IceCube fångat högenergetiska neutriner som kommer från långt bortom vårt solsystem.
-
-> – Det är nu helt befäst att det här IceCube-observatoriet har sett högenergetiska neutriner som kommer från yttre rymden, sa Sara Strandberg, ledamot av Vetenskapsakademien, när priset presenterades.
-
-År 2023 tog forskarna dessutom den första bilden någonsin av Vintergatan med hjälp av neutriner i stället för ljus.
-
-## Tänkte direkt på pengarna
-
-Francis Halzen befann sig i Italien när telefonen ringde.
-
-– Det var en stor överraskning, och jag hade uppenbarligen inte väntat mig det, sa han i telefon till Nobelkommittén.
-
-Sedan berättade han vad han höll på med just då:
-
-– Jag arbetar på en ansökan, och jag hoppas att det här priset kan hjälpa till att få den beviljad.
-
-Kommentaren fick publiken i Stockholm att skratta. Prissumman är tolv miljoner kronor – och forskarna drömmer redan om IceCube-Gen2, en detektor som ska bli åtta gånger större.`,
-    fakta: {
-      rubrik: 'Fakta: IceCube',
-      punkter: [
-        'Neutrinoobservatorium vid Sydpolen i Antarktis.',
-        'Drygt 5 000 ljussensorer i en kubikkilometer is, upp till cirka 2,5 kilometer ner.',
-        'Färdigbyggt 2011, utbyggt med nya sensorer 2026.',
-        'Nobelpriset i fysik 2026 tillkännagavs den 6 oktober.',
-      ],
-    },
-    amnen: ['Nobelpriset', 'Rymden', 'Fysik'],
   },
   {
     rubrik: 'Skolan testar fyradagarsvecka: ”Kan minska elevernas stress”',

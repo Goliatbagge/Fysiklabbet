@@ -103,6 +103,76 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-09-kvantspinn-flyttar-svavande-diamant",
+    date: "2026-10-09",
+    title: "Elektronernas spinn fick en svävande diamant att gunga",
+    deck: "Forskare i Okinawa har hängt en liten diamant under en grafitplatta som svävar över magneter. När de blinkar med en grön laser ändras spinnet hos elektronerna i diamantens defekter, och den svaga kraft som uppstår räcker för att sätta hela den 128 milligram tunga konstruktionen i gungning.",
+    category: "Kvantfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-09-kvantspinn-flyttar-svavande-diamant.jpg",
+    imageAlt: "En liten fyrkantig diamant hänger i en tunn stav ovanför en blank cylindrisk magnet. Hela scenen badar i grönt laserljus, och diamanten lyser klart röd.",
+    imageCredit: "Foto: Cassondra George, OIST (pressbild). Diamanten lyser rött när den belyses med grön laser, ovanför magneten som ger kraften.",
+    tags: ["kvantfysik", "spinn", "magnetiskt moment", "magnetfält", "diamant", "kvävevakans", "levitation", "diamagnetism", "resonans", "svängning", "laser", "interferometer"],
+    sources: [
+      { name: "OIST: First observation of quantum spins shifting a centimeter-scale object in the lab (8 oktober 2026)", url: "https://www.oist.jp/news-center/news/2026/10/8/first-observation-quantum-spins-shifting-centimeter-scale-object-lab" },
+      { name: "Phys.org: First observation of quantum spins shifting a centimeter-scale object in the lab (7 oktober 2026)", url: "https://phys.org/news/2026-10-quantum-shifting-centimeter-scale-lab.html" },
+      { name: "PubMed Central: studien i fulltext (öppet tillgänglig, CC BY-NC 4.0)", url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC13644766/" }
+    ],
+    research: {
+      citation: "A. Nayak, D. Kim, S. Tian och J. Twamley, ”Spin force from a nitrogen-vacancy ensemble drives a 100-mg levitated resonator”, Science Advances 12, eaeh0566 (2026), publicerad 7 oktober 2026. Kollegialt granskad och öppet tillgänglig.",
+      url: "https://doi.org/10.1126/sciadv.aeh0566"
+    },
+    simulering: {
+      href: "fysik2-resonans-app.html",
+      name: "Resonans (driven svängning)",
+      text: "Driv en svängande kropp med en periodisk kraft och vrid på drivfrekvensen. När den träffar egenfrekvensen växer amplituden kraftigt, precis som när forskarna blinkade med lasern i takt med diamantens gungning."
+    },
+    larare: {
+      moment: [
+        { label: "Magnetism och magnetfält", href: "katalog.html?id=fy2-3.1" },
+        { label: "Harmonisk svängning", href: "katalog.html?id=fy2-2.3" },
+        { label: "Resonans", href: "katalog.html?id=fy2-2.6" }
+      ],
+      fragor: [
+        "Konstruktionen väger 128 mg och spinnkraften var omkring 5 nN. Hur stor del av tyngdkraften är det? Varför gick kraften ändå att mäta?",
+        "Forskarna upprepade försöket utan magnet och med en infraröd laser i stället för den gröna. Vad skulle ha kunnat förklara rörelsen om de inte gjort de kontrollerna?",
+        "Lasern blinkade med frekvensen 17,6 Hz. Vad hade hänt med rörelsen om den i stället hade blinkat med 10 Hz, och varför?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Kvantfysiken styr allt det allra minsta: elektroner, atomer och ljus. Ett av dess mest kännetecknande drag är spinnet, en inbyggd egenskap som gör varje elektron till en liten magnet. Men den kraft som ett enskilt spinn kan utöva är så svag att den aldrig märks i vardagen. Hur stort föremål kan man egentligen knuffa med den?' },
+      { type: 'p', html: 'Forskare vid Okinawa Institute of Science and Technology (OIST) i Japan har nu flyttat på en konstruktion som väger 128&nbsp;milligram, med kraften från spinnen i en liten diamant. Konstruktionen svävar fritt över magneter och påverkas av tyngdkraften som vilket föremål som helst. Resultatet publicerades den 7&nbsp;oktober i tidskriften <em>Science Advances</em>.' },
+
+      { type: 'h2', text: 'En diamant med inbyggda kompassnålar' },
+      { type: 'p', html: 'Diamanten är en platta på 3&nbsp;×&nbsp;3&nbsp;millimeter och en halv millimeter tjock. Den är inte helt ren: på några ställen per miljon kolatomer har en kväveatom tagit en kolatoms plats, och intill den saknas en kolatom helt. En sådan defekt kallas ett kvävevakanscentrum. Där sitter elektroner som tillsammans har ett spinn, och det spinnet kan ställas in med ljus. Lyser man med grön laser hamnar elektronerna i ett bestämt spinntillstånd, och det tillståndet avgör hur stort magnetiskt moment defekten har.' },
+      { type: 'p', html: 'Ett magnetiskt moment i ett homogent magnetfält vrids bara, som en kompassnål. Men där fältet blir starkare åt ett håll dras momentet också mot det starkare fältet. Kraften är $F = m \\cdot \\dfrac{\\Delta B}{\\Delta z}$, där $m$ är det magnetiska momentet och $\\dfrac{\\Delta B}{\\Delta z}$ anger hur snabbt fältet ändras med avståndet. Det är samma kraft som låg bakom Stern–Gerlach-försöket 1922, när Otto Stern och Walther Gerlach skickade silveratomer genom ett ojämnt magnetfält och såg strålen delas i två. Det försöket blev ett av de första bevisen för att spinnet är kvantiserat.' },
+      { type: 'p', html: 'Under diamanten står en cylindrisk permanentmagnet. Vid diamanten är fältet omkring 0,6&nbsp;tesla, och det ändras med upp till omkring 100&nbsp;tesla per meter. När den gröna lasern är släckt har spinnen ett litet magnetiskt moment, som bestäms av värmerörelserna i rumstemperatur. Tänds lasern växer momentet kraftigt, och diamanten dras en aning närmare magneten.' },
+
+      { type: 'h2', text: 'Svävande grafit håller diamanten fri' },
+      { type: 'p', html: 'För att en så svag kraft ska kunna flytta något får diamanten inte sitta fast. Forskarna limmade den längst ned på en 5&nbsp;centimeter lång stav av kolfiber, och stavens övre ände sitter i en platta av pyrolytisk grafit på 10&nbsp;×&nbsp;10&nbsp;millimeter. Grafit är diamagnetisk, vilket betyder att den stöts bort av magnetfält. Över fyra starka neodymmagneter, ordnade som rutorna på ett schackbräde, svävar plattan därför fritt, utan kontakt och utan att något behöver styras. Staven går ned genom ett hål mellan magneterna och genom en järnplatta som skärmar av deras fält, så att diamanten bara känner fältet från den egna magneten under den.' },
+      { type: 'p', html: 'Hela konstruktionen gungar upp och ned med sin egenfrekvens, 17,6&nbsp;hertz. Ovanpå grafiten sitter en liten spegel, och en interferometer som studsar laserljus mot den mäter läget med en noggrannhet på bråkdelar av en nanometer.' },
+
+      { type: 'h2', text: 'Knuffar i takt, som på en gunga' },
+      { type: 'p', html: 'Spinnkraften är svag. Som mest mätte forskarna den till drygt 5&nbsp;nanonewton, medan tyngdkraften på konstruktionen är omkring 1,3&nbsp;millinewton. Spinnkraften är alltså ungefär fyra miljondelar av tyngden. En konstant kraft av den storleken skulle bara flytta konstruktionen några nanometer, ungefär lika mycket som den hela tiden skakar av sig själv, av vibrationer i labbet och av luftmolekyler som stöter mot den.' },
+      { type: 'p', html: 'Lösningen är densamma som när man knuffar ett barn på en gunga: knuffa i takt. Forskarna tände och släckte lasern 17,6 gånger per sekund, i fas med konstruktionens egen svängning. Varje knuff kom i rätt ögonblick, och rörelsen byggdes upp tills svängningen var omkring 100&nbsp;nanometer stor i luft. I vakuum, där luften inte bromsar, blev den upp till omkring 1,5&nbsp;mikrometer. En sådan förstärkning när en kraft driver ett system med dess egen frekvens kallas resonans.' },
+      { type: 'quote', html: 'Vi har visat ett stort klassiskt svar på en liten kvanteffekt. Det är inte längre en fråga om sådan teknik är möjlig, utan om hur vi kan förfina försöksförhållandena för att nå kvantsuperposition inom ramen för Einsteins allmänna relativitetsteori.', cite: 'Jason Twamley, OIST, i institutets pressmeddelande' },
+
+      { type: 'h2', text: 'Var det verkligen spinnet?' },
+      { type: 'p', html: 'En laser som blinkar mot ett föremål kan knuffa på det på flera sätt. Ljuset har ett litet strålningstryck, och om diamanten värms upp kan luften runt den börja röra sig. Forskarna gjorde därför två kontrollförsök. När magneten under diamanten togs bort försvann svängningen. När den gröna lasern byttes mot en infraröd laser på 980&nbsp;nanometer, som inte kan ändra spinnen, försvann den också, trots att den infraröda lasern var starkare. Rörelsen kräver alltså både ett ojämnt magnetfält och ljus som ändrar spinnen.' },
+      { type: 'p', html: 'Forskarna mätte också hur kraften beror på avståndet till magneten, och provade två magneter. Den stora magneten gav ett starkare fält men en mindre skillnad i fältstyrka över diamanten, och den gav den svagare kraften. Det stämmer med att det är fältets ändring och inte fältets storlek som ger kraften. En beräkning av spinnens tillstånd stämde väl med mätningarna, både när laserns effekt och när avståndet varierades.' },
+
+      { type: 'h2', text: 'Ett steg mot kvantgravitationen' },
+      { type: 'p', html: 'Själva gungningen är klassisk fysik, och diamanten befinner sig inte i någon kvantsuperposition. Det nya är att en kraft som har sitt ursprung i kvantmekaniska spinntillstånd har styrt rörelsen hos ett föremål av den här storleken. Enligt Jason Twamley är konstruktionen åtta till nio tiopotenser tyngre än i tidigare försök där spinn har satt föremål i rörelse.' },
+      { type: 'p', html: 'Målet på längre sikt är att använda spinnet för att försätta ett tungt föremål i en superposition, alltså på två ställen samtidigt. Sådana försök har föreslagits som ett sätt att pröva på ett labbord om gravitationen följer kvantfysikens regler, en av fysikens stora obesvarade frågor. Dit är det långt. Forskarna räknar med att vakuum, en grafitplatta som bromsar mindre och styrning av spinnen med mikrovågor kan ge betydligt större rörelser. Redan nu tror de att uppställningen kan bli en mycket känslig sensor för svaga krafter.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Diamantplattan i försöket är ingen ädelsten utan en färdig produkt som säljs till laboratorier. Diamanter med kvävevakanscentra används redan i dag som mycket känsliga magnetfältsmätare, eftersom spinnen går att läsa av med ljus i rumstemperatur.',
+        'Diamanten lyser rött när den belyses med grönt ljus. Det röda ljuset kommer från kvävevakanscentra som först exciteras av det gröna ljuset och sedan faller tillbaka och sänder ut ljus med längre våglängd.',
+        'Alla ämnen är svagt diamagnetiska, även vatten. 1997 fick fysikern Andre Geim en levande groda att sväva i ett magnetfält på omkring 16&nbsp;tesla.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-08-karnklockan-som-haller-takten-sjalv",
     date: "2026-10-08",
     title: "Den första kärnklockan som håller takten på egen hand tickar i Wien",

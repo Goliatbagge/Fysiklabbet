@@ -16,9 +16,14 @@ Format per post:
   Källa (Phys.org 2026-10-02): https://phys.org/news/2026-10-approach-imaging.html
   (tillagd 2026-10-02)
 
-- **Kvantspinn som flyttar ett centimeterstort föremål** — första observationen av att kvantspinn förskjuter ett föremål i centimeterskala i labbet. Ingång: spinn, rörelsemängdsmoment, Einstein–de Haas-effekten (kontrollera). OBS: kvantfysik kördes 2026-10-05; originalet ej kontrollerat.
-  Källa (Phys.org 2026-10-08): https://phys.org/news/2026-10-quantum-shifting-centimeter-scale-lab.html
-  (tillagd 2026-10-08)
+- **Kontinuerlig avbildning av levande celler utan lins och utan färgning** — linsfri avbildningsmetod som följer celler under lång tid. Ingång: diffraktion, holografi. OBS: optik, och mjölkuppslaget (brevteaser) är också optik; originalet ej kontrollerat. Källa (Phys.org 2026-10-08): https://phys.org/news/2026-10-lensless-imaging-method-enables-term.html
+  (tillagd 2026-10-09)
+
+- **Vätska som dras till tunna fibrer av tyngdkraft och ljus** — Phys.org 2026-10-08, troligen samma studie som uppslaget ”Ljus som stelnar en vätskestråle till fiber” nedan (Smink, Visser, Lhuissier, PRL). Kontrollera om ett förtryck nu finns. Källa: https://phys.org/news/2026-10-gravity-reveal-liquids-thin-fibers.html
+  (tillagd 2026-10-09)
+
+- **Rosa bollen i dag-natt-cricket syns sämre för färgblinda spelare** — modellering av bollens synlighet med reflektansspektra (Sports Medicine, DOI 10.1007/s40279-026-02518-0). Ingång: färgseende, tappar, spektra. Vardagsnära men mer syn än fysik; originalet ej kontrollerat. Källa (Phys.org 2026-10-07): https://phys.org/news/2026-10-cricket-day-night-pink-ball.html
+  (tillagd 2026-10-09)
 
 - **Svävande glaskula sammanflätad med ljus i rumstemperatur** — en optiskt levitierad nanosfär vars rörelse sammanflätas med ljus utan kylning till nära absoluta nollpunkten. Ingång: strålningstryck, optisk pincett. OBS: originalet ej kontrollerat.
   Källa (Phys.org 2026-10-07): https://phys.org/news/2026-10-levitating-glass-sphere-entangled-room.html

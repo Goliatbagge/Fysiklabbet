@@ -3752,5 +3752,41 @@ window.BEGREPP = [
       { type: 'p', html: 'Blazarer hör till de mest energirika föremålen i universum och är misstänkta som acceleratorer av den kosmiska strålningen. År 2017 fångade neutrinoteleskopet IceCube en neutrino med mycket hög energi från samma riktning som blazaren TXS 0506+056, omkring fyra miljarder ljusår bort, just när den flammade upp. Det var första gången en sannolik källa till neutriner från rymden pekades ut.' },
     ]
   },
+  {
+    id: 'kvavevakanscentrum',
+    term: 'Kvävevakanscentrum',
+    former: ['kvävevakanscentrum', 'kvävevakanscentrumet', 'kvävevakanscentra', 'kvävevakanscentrat', 'kvävevakanscentrana', 'kvävevakans', 'kvävevakansen', 'kvävevakanser', 'kvävevakanserna', 'nv-centrum', 'nv-centra'],
+    kort: 'Ett litet fel i en diamants kristall, där en kväveatom sitter bredvid en tom plats. Elektronerna där har ett spinn som kan ställas in och läsas av med ljus, även i rumstemperatur.',
+    relaterade: ['spinn', 'magnetiskt-moment', 'magnetometer'],
+    body: [
+      { type: 'p', html: 'En diamant är kolatomer ordnade i ett mycket regelbundet mönster. Men inga kristaller är perfekta. Ibland har en kväveatom hamnat på en plats där det borde sitta en kolatom, och ibland saknas en kolatom helt, så att det blir ett hål i mönstret. När de två felen hamnar precis bredvid varandra bildas ett kvävevakanscentrum. På engelska kallas det <em>nitrogen-vacancy center</em>, och därför förkortas det ofta NV-centrum.' },
+      { type: 'p', html: 'I defekten samlas elektroner som tillsammans har ett spinn, och spinnet gör defekten till en liten magnet. Det märkliga är att spinnet går att styra med vanligt ljus. Belyser man diamanten med grön laser hamnar spinnet i ett bestämt tillstånd, och samtidigt lyser defekten rött. Hur starkt det röda ljuset är beror på spinnets tillstånd, så genom att mäta ljuset kan man också läsa av spinnet. Allt detta fungerar i rumstemperatur, vilket är ovanligt: de flesta kvantsystem måste kylas till nära absoluta nollpunkten för att inte störas ut.' },
+      { type: 'p', html: 'Eftersom spinnet påverkas av magnetfält i omgivningen används kvävevakanscentra som mycket känsliga magnetfältsmätare, bland annat för att mäta de svaga fälten från nervceller och för att undersöka magnetiska material på nanometerskala. Forskare använder dem också för att utforska kvantfysik, till exempel för att låta spinnet påverka rörelsen hos ett helt föremål.' }
+    ]
+  },
+  {
+    id: 'stern-gerlach-forsoket',
+    term: 'Stern–Gerlach-försöket',
+    former: ['stern–gerlach-försöket', 'stern-gerlach-försöket', 'sterngerlachförsöket', 'stern–gerlach-experimentet', 'stern-gerlach-experimentet'],
+    kort: 'Försöket från 1922 där en stråle av silveratomer delades i två när den passerade ett ojämnt magnetfält. Det visade att atomernas magnetiska moment bara kan peka åt bestämda håll.',
+    relaterade: ['spinn', 'magnetiskt-moment', 'kvantmekanik'],
+    body: [
+      { type: 'p', html: 'År 1922 skickade de tyska fysikerna Otto Stern och Walther Gerlach en stråle av silveratomer mellan polerna på en magnet. Polerna var formade så att fältet var mycket starkare på ena sidan än på den andra. Varje silveratom är en liten magnet, och i ett sådant ojämnt fält dras en liten magnet åt det ena eller andra hållet beroende på hur den är vänd. Atomerna träffade sedan en glasplatta, där de lämnade ett spår.' },
+      { type: 'p', html: 'Enligt den klassiska fysiken borde atomernas små magneter ha pekat åt alla möjliga håll, och spåret borde därför ha blivit en utdragen fläck. I stället delades strålen i två tydliga delar. Atomernas magnetiska moment kunde alltså bara peka åt två bestämda håll, inget däremellan. Det var ett av de första direkta bevisen för att naturen är kvantiserad, att vissa storheter bara kan anta bestämda värden.' },
+      { type: 'p', html: 'Några år senare förstod man att det som gav silveratomerna deras magnetiska moment var elektronens spinn. Samma princip, att ett magnetiskt moment påverkas av en kraft i ett ojämnt magnetfält, används fortfarande i forskningen, både för att sortera atomer och för att låta spinnet knuffa på större föremål.' }
+    ]
+  },
+  {
+    id: 'interferometer',
+    term: 'Interferometer',
+    former: ['interferometer', 'interferometern', 'interferometrar', 'interferometrarna', 'laserinterferometer', 'laserinterferometern', 'laserinterferometrar'],
+    kort: 'Ett instrument som delar en ljusstråle i två och sedan lägger ihop dem igen. Hur vågorna förstärker eller släcker varandra avslöjar mycket små skillnader i avstånd.',
+    relaterade: ['interferens', 'atominterferometri'],
+    body: [
+      { type: 'p', html: 'Ljus är en våg, och när två ljusvågor möts kan de förstärka eller försvaga varandra. Möts två vågtoppar blir ljuset starkare, men möts en vågtopp och en vågdal kan de släcka ut varandra helt. Det kallas interferens. En interferometer använder detta för att mäta. Ljuset från en laser delas i två strålar som går olika vägar, och sedan förs strålarna ihop igen.' },
+      { type: 'p', html: 'Om den ena vägen blir längre med bara en halv våglängd, några hundra nanometer för synligt ljus, går vågorna från att förstärka varandra till att släcka varandra. Genom att mäta hur ljust det blir där strålarna möts kan man därför bestämma en avståndsändring som är mycket mindre än ljusets våglängd. Låter man den ena strålen studsa mot en spegel på ett föremål kan man följa hur föremålet rör sig, ned mot bråkdelar av en atoms diameter.' },
+      { type: 'p', html: 'Den mest berömda interferometern är kanske Michelson–Morleys från 1887, som visade att ljusets fart är densamma i alla riktningar. I dag används interferometrar i allt från tillverkningen av linser till observatoriet LIGO, vars armar är fyra kilometer långa och som har mätt gravitationsvågor från kolliderande svarta hål.' }
+    ]
+  },
 ];
 

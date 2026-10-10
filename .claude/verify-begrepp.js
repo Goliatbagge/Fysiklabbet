@@ -41,7 +41,7 @@ if (!Array.isArray(BEGREPP)) {
 // typografiska tecken (→ · ° ⟂ ± grekiska) är däremot tillåtna.
 const EMOJI = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}]/u;
 const SUPERSCRIPT = /[⁰¹²³⁴-ₜ]/;
-const BLOCK_TYPES = new Set(['p', 'h2', 'fact']);
+const BLOCK_TYPES = new Set(['p', 'h2', 'fact', 'image']);
 const ID_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -186,6 +186,14 @@ for (const b of BEGREPP) {
                 else checkText(`${bt} title`, blk.title, true);
                 if (!Array.isArray(blk.items) || blk.items.length === 0) errors.push(`${bt}: fact-block utan items`);
                 else blk.items.forEach((it, k) => checkText(`${bt} item[${k}]`, it));
+            } else if (blk.type === 'image') {
+                // src/alt/credit rendereras som attribut/ren text, caption som HTML.
+                if (!blk.src) errors.push(`${bt}: image-block utan src`);
+                else if (!fs.existsSync(path.join(ROOT, blk.src))) errors.push(`${bt}: bildfilen ${blk.src} finns inte`);
+                if (!blk.alt) errors.push(`${bt}: image-block utan alt`);
+                if (!blk.credit) errors.push(`${bt}: image-block utan credit (källa och licens)`);
+                else checkText(`${bt} credit`, blk.credit, true);
+                if (blk.caption) checkText(`${bt} caption`, blk.caption);
             }
         });
         const ord = b.body.filter(x => x.type === 'p')

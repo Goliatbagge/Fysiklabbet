@@ -3788,5 +3788,41 @@ window.BEGREPP = [
       { type: 'p', html: 'Den mest berömda interferometern är kanske Michelson–Morleys från 1887, som visade att ljusets fart är densamma i alla riktningar. I dag används interferometrar i allt från tillverkningen av linser till observatoriet LIGO, vars armar är fyra kilometer långa och som har mätt gravitationsvågor från kolliderande svarta hål.' }
     ]
   },
+  {
+    id: 'gravitationsvag',
+    term: 'Gravitationsvåg',
+    former: ['gravitationsvåg', 'gravitationsvågen', 'gravitationsvågor', 'gravitationsvågorna', 'gravitationsvågsdetektor', 'gravitationsvågsdetektorn', 'gravitationsvågsdetektorer', 'gravitationsvågsdetektorerna'],
+    kort: 'En krusning i rumtiden som breder ut sig med ljusets fart när tunga föremål accelererar, till exempel när två svarta hål eller neutronstjärnor kretsar kring varandra och kolliderar.',
+    relaterade: ['rumtid', 'neutronstjarna', 'svart-hal', 'interferometer'],
+    body: [
+      { type: 'p', html: 'Enligt Einsteins allmänna relativitetsteori är gravitation inte en kraft som verkar på avstånd, utan en krökning av rummet och tiden. En tung kropp gör en grop i rumtiden, ungefär som en bowlingklot på en studsmatta. Om två tunga kroppar snurrar runt varandra rör sig groparna hela tiden, och då sprids krusningar utåt, precis som vågor sprids på en vattenyta när man rör handen fram och tillbaka i den.' },
+      { type: 'p', html: 'När en gravitationsvåg passerar töjs och trycks avstånd ihop, omväxlande i två riktningar som står vinkelrätt mot varandra. Effekten är ofattbart liten. Även från två svarta hål som kolliderar ändras avståndet mellan två speglar fyra kilometer isär med bara några tusendelar av en protons diameter. För att mäta det använder man laserinterferometrar, där en ljusstråle delas i två armar och sedan förenas igen. Minsta ändring i armarnas längd syns som en ändring i hur ljusvågorna samverkar.' },
+      { type: 'p', html: 'Einstein förutsade vågorna 1916 men trodde att de aldrig skulle gå att mäta. De första mättes ändå 2015, från två svarta hål som slogs ihop över en miljard ljusår bort, och upptäckten belönades med Nobelpriset i fysik 2017. Samma år sågs för första gången två neutronstjärnor kollidera både i gravitationsvågor och i ljus. Sedan dess har gravitationsvågor blivit ett nytt sätt att observera universum, som ett extra sinne vid sidan av teleskopen.' }
+    ]
+  },
+  {
+    id: 'kilonova',
+    term: 'Kilonova',
+    former: ['kilonova', 'kilonovan', 'kilonovor', 'kilonovorna'],
+    kort: 'Ett utbrott av ljus som varar i några dagar efter att två neutronstjärnor kolliderat. Ljuset kommer från radioaktiva grundämnen som bildas i det utslungade materialet, bland dem guld och platina.',
+    relaterade: ['neutronstjarna', 'gravitationsvag', 'supernova', 'gammablixt'],
+    body: [
+      { type: 'p', html: 'När två neutronstjärnor kolliderar slungas en del av deras materia ut i rymden. Materialet består nästan bara av neutroner, och i den täta, heta gasen fångar atomkärnor in neutroner i snabb takt. På bråkdelar av en sekund byggs mycket tunga kärnor upp, betydligt tyngre än de som bildas i vanliga stjärnor.' },
+      { type: 'p', html: 'De flesta av de nybildade kärnorna är instabila och sönderfaller radioaktivt. Sönderfallen värmer gasen så att den lyser, först blått och sedan allt rödare när molnet expanderar och svalnar. Ljuset varar i några dagar till veckor. Namnet kommer av att utbrottet är omkring tusen gånger ljusstarkare än en nova, men svagare än en supernova.' },
+      { type: 'p', html: 'Den första kilonovan som studerades ordentligt syntes 2017, efter en neutronstjärnekollision som också fångades i gravitationsvågor. Spektrumet visade spår av tunga grundämnen, och det var ett starkt belägg för att en stor del av universums guld, platina och uran har bildats i sådana kollisioner. Ringen på ditt finger kan alltså innehålla atomer från en krock mellan två döda stjärnor.' }
+    ]
+  },
+  {
+    id: 'efterglod',
+    term: 'Efterglöd',
+    former: ['efterglöd', 'efterglöden', 'efterglöder', 'efterglöderna'],
+    kort: 'Det sken som följer efter en gammablixt i röntgen, synligt ljus och radiovågor, när explosionens chockvåg bromsas in i gasen runt omkring. Det kan synas i dagar eller månader.',
+    relaterade: ['gammablixt', 'rodforskjutning', 'gammastralning'],
+    body: [
+      { type: 'p', html: 'En gammablixt varar ofta bara några sekunder eller ännu kortare. Men explosionen slungar ut en stråle av materia med nästan ljusets fart, och den fortsätter att plöja in i gasen runt källan långt efter att blixten tagit slut. Där bildas en chockvåg som hettar upp gasen, och elektronerna i den sänder ut strålning när de böjs av i magnetfält. Det är efterglöden.' },
+      { type: 'p', html: 'Medan strålen bromsas in faller energin hos strålningen. Efterglöden syns därför först i röntgen och sedan i synligt ljus och i radiovågor, och den bleknar jämnt och långsamt. Det jämna förloppet skiljer den från strålning som kommer direkt från källan i explosionens centrum, som kan flämta till snabbt och ändra karaktär.' },
+      { type: 'p', html: 'Efterglöden är ofta astronomernas bästa ledtråd. Gammateleskop kan bara grovt ange var på himlen blixten kom ifrån, men efterglöden går att se med vanliga teleskop och peka ut exakt. Därefter kan spektrumet visa hur långt bort källan ligger, genom ljusets rödförskjutning. Upptäckten av den första efterglöden 1997 visade att gammablixtar kommer från avlägsna galaxer och inte från vår egen.' }
+    ]
+  },
 ];
 

@@ -103,6 +103,72 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-10-tio-minuter-efter-kollisionen",
+    date: "2026-10-10",
+    title: "Blixten varade en halv sekund, men röntgenljuset lyste i nästan tio minuter",
+    deck: "När två kompakta stjärnor kolliderade för omkring sex miljarder år sedan uppfattade gammateleskopen bara en blixt som varade knappt en halv sekund. Den kinesisk-europeiska satelliten Einstein Probe såg att källan fortsatte att skicka ut mjuk röntgenstrålning i nästan tio minuter, troligen från en snabbt roterande neutronstjärna som bildats vid kollisionen.",
+    category: "Astronomi",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-10-tio-minuter-efter-kollisionen.jpg",
+    imageAlt: "Illustration av satelliten Einstein Probe mot en stjärnhimmel. Från satellitkroppen sticker två blå solpaneler ut, och på framsidan sitter tolv fyrkantiga vita moduler runt två runda teleskopöppningar.",
+    imageCredit: "Illustration: China News Service, via Wikimedia Commons (CC BY 4.0)",
+    tags: ["astronomi", "gammablixt", "röntgenstrålning", "neutronstjärna", "magnetar", "gravitationsvågor", "kilonova", "einstein probe", "elektromagnetiskt spektrum", "fotonenergi"],
+    sources: [
+      { name: "ScienceDaily (Science China Press): Einstein Probe reveals a hidden phase of neutron star collisions (8 oktober 2026)", url: "https://www.sciencedaily.com/releases/2026/10/261006234511.htm" },
+      { name: "arXiv: studien i fulltext (version 2, 22 augusti 2026)", url: "https://arxiv.org/abs/2601.14137" },
+      { name: "ESA: Einstein Probe factsheet", url: "https://www.esa.int/Science_Exploration/Space_Science/Einstein_Probe_factsheet" }
+    ],
+    research: {
+      citation: "A. Li, C.-W. Wang, N. Passaleva, J. An, B.-B. Zhang, E. Troja, Y.-H. I. Yin m.fl., ”Minutes-long soft X-ray prompt emission from a compact object merger”, Science Bulletin 71 (18), 4657 (2026). Kollegialt granskad. Förtrycket på arXiv (2601.14137) är öppet tillgängligt.",
+      url: "https://doi.org/10.1016/j.scib.2026.08.021"
+    },
+    larare: {
+      moment: [
+        { label: "Elektromagnetiska vågor och ljus", href: "katalog.html?id=fy2-4.1" },
+        { label: "Mäta avstånd i rymden", href: "katalog.html?id=fy2-5.2" },
+        { label: "Svarta hål", href: "katalog.html?id=fy2-5.5" }
+      ],
+      fragor: [
+        "Röntgenstrålningen bar ungefär en tjugondel så mycket energi som gammablixten men varade över tusen gånger längre. Vad säger det om effekten, alltså energin per sekund, i de två faserna? Varför missade gammateleskopen den långa fasen?",
+        "Forskarna räknade med att strålningen gick lika starkt åt alla håll, fast de vet att den sänds ut i smala strålar. Blir den verkliga energin då större eller mindre än den uträknade, och varför?",
+        "Ljuset har färdats i omkring sex miljarder år. Vad betyder det för frågan om magnetaren finns kvar i dag?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Den 4&nbsp;juli 2025, klockan 10.16 svensk tid, registrerade tre satelliter samtidigt en blixt av gammastrålning från en avlägsen galax. Blixten varade 0,37&nbsp;sekunder. Så korta utbrott brukar uppstå när två neutronstjärnor kolliderar, och för gammateleskopen var det hela över på mindre än en halv sekund.' },
+      { type: 'p', html: 'Men den kinesisk-europeiska satelliten Einstein Probe tittade på samma himmelsområde med ett röntgenteleskop, och där tog det inte slut. Källan fortsatte att skicka ut röntgenstrålning i nästan tio minuter. En internationell forskargrupp med nästan åttio forskare har nu beskrivit händelsen i tidskriften <em>Science Bulletin</em>, och de menar att den visar ett skede i neutronstjärnekollisioner som tidigare har varit dolt.' },
+
+      { type: 'h2', text: 'Två sorters ljus från samma källa' },
+      { type: 'p', html: 'Gammastrålning och röntgenstrålning är båda elektromagnetisk strålning, precis som synligt ljus, men fotonerna har mycket högre energi. Energin anges ofta i kiloelektronvolt, keV. En foton av synligt ljus har ett par elektronvolt, gammablixtens strålning var starkast kring 600&nbsp;keV, och den röntgenstrålning Einstein Probe fångade låg mellan 0,5 och 4&nbsp;keV. Den kallas mjuk röntgenstrålning, eftersom fotonerna har låg energi för att vara röntgen.' },
+      { type: 'p', html: 'Ett gammateleskop är byggt för att fånga de högenergetiska fotonerna och ser knappt den mjuka strålningen. Det är skälet till att det långa efterspelet aldrig har synts förut. Forskarna har räknat på vad satelliten Swift, som har studerat gammablixtar i över tjugo år, hade sett av samma händelse: bara den korta blixten. Röntgenstrålningen hade legat under dess gräns för vad som går att upptäcka.' },
+      { type: 'quote', html: 'Händelsen såg först ut som en vanlig kort gammablixt, en klar blixt som varade mindre än en halv sekund. Men i stället för att tona bort fortsatte källan att skicka ut skurar av mjuk röntgenstrålning i nästan tio minuter.', cite: 'An Li, doktorand vid Beijing Normal University, i Science China Press pressmeddelande' },
+
+      { type: 'h2', text: 'Ett teleskop som ser en elftedel av himlen' },
+      { type: 'p', html: 'Att röntgenstrålningen alls fångades från första sekunden beror på hur Einstein Probe är byggd. Vanliga röntgenteleskop ser en liten bit av himlen åt gången och måste vridas mot en källa efter att ett gammateleskop har larmat. Då har de första minuterna redan gått. Einstein Probes vidvinkelteleskop har i stället tolv moduler med så kallad hummerögeoptik. Röntgenstrålningen leds genom hundratusentals fyrkantiga rör ned mot en detektor, ungefär som i ögat hos en hummer. Tillsammans ser modulerna 3&nbsp;600 kvadratgrader, omkring en elftedel av hela himlen, på en gång.' },
+      { type: 'p', html: 'Satelliten sköts upp i januari 2024 och drivs av Kinas vetenskapsakademi tillsammans med den europeiska rymdorganisationen ESA och Max Planck-institutet för utomjordisk fysik i Tyskland. När den här händelsen inträffade råkade vidvinkelteleskopet redan peka mot rätt område, och det fångade både den första spiken och allt som följde.' },
+
+      { type: 'h2', text: 'Tre skeden i röntgenljuset' },
+      { type: 'p', html: 'Röntgenkurvan består av tre delar. Först kom en spik som varade 0,35&nbsp;sekunder och sammanföll exakt med den starkaste pulsen i gammablixten. Den är alltså samma explosion sedd i lägre energier. Sedan följde en svans på några sekunder, och efter en kort paus började en lång puckel omkring 20&nbsp;sekunder efter blixten, som pågick i omkring 540&nbsp;sekunder. Sammanlagt lyste källan i omkring 560&nbsp;sekunder, alltså drygt nio minuter.' },
+      { type: 'p', html: 'Teleskop på marken fångade sedan efterglöden i synligt ljus och i radiovågor. Ljusets spektrum gav galaxens rödförskjutning, $z \\approx 0{,}661$, och med den kunde avståndet bestämmas. Ljuset har färdats i omkring sex miljarder år innan det nådde oss, alltså sedan universum var drygt hälften så gammalt som i dag. Djupa bilder med stora teleskop, bland dem det europeiska VLT i Chile, visade ingen supernova, vilket talar emot att blixten kom från en kollapsande jättestjärna. Det stärker att det var två kompakta stjärnor som kolliderade.' },
+      { type: 'p', html: 'Energierna är svindlande. Om strålningen hade gått lika starkt åt alla håll skulle gammablixten ha sänt ut omkring $3{,}8 \\cdot 10^{44}\\ \\mathrm{J}$ på mindre än en halv sekund, ungefär lika mycket som solen strålar ut på 30&nbsp;miljarder år. Den långa röntgenpuckeln bar omkring $1{,}9 \\cdot 10^{43}\\ \\mathrm{J}$, i storleksordningen vad solen strålar ut på 1,6&nbsp;miljarder år. I själva verket sänds strålningen troligen ut i smala strålar, så de verkliga energierna är mindre, men fortfarande enorma.' },
+
+      { type: 'h2', text: 'En magnetar som motor' },
+      { type: 'p', html: 'Det långa röntgenljuset kan inte vara vanlig efterglöd, alltså det sken som uppstår när explosionens chockvåg plöjer in i gasen runt omkring. Sådan efterglöd ändras långsamt och jämnt. Röntgenpuckeln flämtade i stället till på tidsskalor som var mindre än en tiondel av tiden sedan blixten, och spektrumet ändrade form. Forskarna drar slutsatsen att något i centrum av kollisionen fortsatte att leverera energi i flera minuter.' },
+      { type: 'p', html: 'Den troligaste kandidaten är en magnetar: en neutronstjärna som roterar ett varv på bara några tusendels sekunder och har ett magnetfält som hör till de starkaste i universum. När den nybildade stjärnan bromsas av sitt eget magnetfält strålar den bort rotationsenergi, och det kan ha drivit röntgenljuset. Ur kurvans form uppskattar forskarna att inbromsningen tog omkring fem minuter. Var den för tung för att klara sig när rotationen avtog kan den senare ha kollapsat till ett svart hål.' },
+      { type: 'quote', html: 'Det som ser ut som en typisk kort gammablixt kan i själva verket dölja ett mycket längre och rikare skede av aktivitet i mjuk röntgenstrålning.', cite: 'Bin-Bin Zhang, Nanjinguniversitetet, i Science China Press pressmeddelande' },
+
+      { type: 'h2', text: 'Ett nytt sätt att följa kollisionerna' },
+      { type: 'p', html: 'Tidigare har bara 10 till 15&nbsp;procent av gammablixtarna från kollisioner visat tecken på en lång efterföljande strålning. Forskarna tror nu att mjukt röntgenljus av det här slaget kan vara vanligt, men att det nästan alltid har missats. Om händelsen hade legat närmare än omkring en miljard ljusår hade Swift kanske kunnat ana den, men så nära inträffar sådana kollisioner sällan.' },
+      { type: 'p', html: 'Det har betydelse för en av astronomins mest lovande metoder. När två neutronstjärnor kolliderar skickar de också ut gravitationsvågor, krusningar i rumtiden som detektorer på jorden kan mäta. År 2017 sågs en sådan kollision för första gången både i gravitationsvågor och i ljus. Gravitationsvågsdetektorerna kan dock bara säga ungefär var på himlen kollisionen skedde, och en lång röntgensignal som syns i ett teleskop med vid blick kan bli ett sätt att snabbt peka ut den. Händelsen den 4&nbsp;juli låg för långt bort för att gravitationsvågorna skulle kunna mätas, och detsamma gällde den kilonova, ett sken från nybildade radioaktiva grundämnen, som brukar lysa upp under dagarna efter en kollision, men nästa gång kan en sådan signal komma från en kollision som också hörs i detektorerna.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'En neutronstjärna har ungefär solens massa eller något mer, men samlad i en kula som bara är omkring 20&nbsp;kilometer i diameter. En tesked av materialet skulle väga flera miljarder ton på jorden.',
+        'Hummer och kräftor ser inte med linser. Deras ögon består av tusentals fyrkantiga rör med speglande väggar som leder ljuset till ett gemensamt fokus. Röntgenstrålning bryts nästan inte alls i linser men kan reflekteras i mycket flack vinkel, och därför fungerar samma princip för röntgenteleskop.',
+        'Gammablixtar delas in i korta och långa. De korta varar mindre än omkring två sekunder och kommer från kollisioner mellan kompakta stjärnor, de långa från kollapsande jättestjärnor. Den här blixten var kort i gammastrålning men lång i röntgenljus.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-09-kvantspinn-flyttar-svavande-diamant",
     date: "2026-10-09",
     title: "Elektronernas spinn fick en svävande diamant att gunga",

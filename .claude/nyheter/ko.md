@@ -16,6 +16,12 @@ Format per post:
   Källa (Phys.org 2026-10-02): https://phys.org/news/2026-10-approach-imaging.html
   (tillagd 2026-10-02)
 
+- **Störning av svart hål med koppling till Hawking (rubrik ur URL, ej läst)** — Phys.org oktober 2026, varken artikeln eller originalet kontrollerat. Ingång: svarta hål, händelsehorisont. OBS: astronomi publicerades 2026-10-10, vänta några dagar. Källa: https://phys.org/news/2026-10-black-hole-disturbance-hawking.html
+  (tillagd 2026-10-10)
+
+- **Lavafontän på Kīlaueas topp mätt av forskare** — vulkanfysik, kastbanor och gasexpansion. Originalet ej kontrollerat. Källa (Phys.org oktober 2026): https://phys.org/news/2026-10-klauea-summit-scientists-lava-fountain.html
+  (tillagd 2026-10-10)
+
 - **Kontinuerlig avbildning av levande celler utan lins och utan färgning** — linsfri avbildningsmetod som följer celler under lång tid. Ingång: diffraktion, holografi. OBS: optik, och mjölkuppslaget (brevteaser) är också optik; originalet ej kontrollerat. Källa (Phys.org 2026-10-08): https://phys.org/news/2026-10-lensless-imaging-method-enables-term.html
   (tillagd 2026-10-09)
 

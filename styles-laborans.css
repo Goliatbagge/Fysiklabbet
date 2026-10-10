@@ -2366,9 +2366,7 @@ details.lab-forklaring > .formel-harledning-body { padding-top: 12px; }
    som besökare läste som bilder som inte laddats). Samma undantag från
    bildtextens 46ch som svg:n ovan. Fotot hålls nere i höjd så att ett
    stående foto inte fyller hela skärmen; .lab-foto-rad lägger två foton
-   bredvid varandra och staplar dem på smal skärm. Källraden
-   (.lab-foto-kalla) är upprätt och liten: licensen kräver den, men den är
-   inte en del av bildtexten. */
+   bredvid varandra och staplar dem på smal skärm. */
 .lab-block-figur p:has(> img),
 .lab-block-figur .lab-foto-rad {
     max-width: none;
@@ -2405,12 +2403,27 @@ details.lab-forklaring > .formel-harledning-body { padding-top: 12px; }
 @media (max-width: 600px) {
     .lab-block-figur .lab-foto-paneler img { flex-basis: calc(50% - 5px); }
 }
-.lab-block-figur .lab-foto-kalla {
-    font-size: 12px;
-    font-style: normal;
-    margin-top: 6px;
+/* Källraderna under fotona visas inte där: samlaBildkallor() i katalog.html
+   och avsnitt.html flyttar dem till en hopfälld lista "Bildkällor" sist i
+   genomgången (licenserna kräver att källan anges, inte var). */
+.lab-foto-kalla { display: none; }
+.lab-bildkallor {
+    margin: 28px 0 4px;
+    font-size: 13px;
+    color: var(--lab-ink-muted);
 }
-.lab-block-figur .lab-foto-kalla a {
+.lab-bildkallor > summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--lab-ink-soft);
+}
+.lab-bildkallor ol {
+    margin: 8px 0 0;
+    padding-left: 22px;
+    line-height: 1.55;
+}
+.lab-bildkallor-namn { color: var(--lab-ink-soft); }
+.lab-bildkallor a {
     text-decoration: underline;
     text-underline-offset: 2px;
 }

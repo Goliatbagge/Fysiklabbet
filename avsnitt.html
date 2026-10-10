@@ -458,6 +458,37 @@
             return out.join('\n');
         }
 
+        // Bildkällor: källraderna (.lab-foto-kalla) under fotona i teorin
+        // döljs av CSS:en och samlas här i en hopfälld lista "Bildkällor"
+        // sist i genomgången. Licenserna (CC BY, CC BY-SA, Free Art License)
+        // kräver att upphovsperson och licens anges, men inte direkt under
+        // bilden. Bildens namn i listan kommer från data-bild på källraden.
+        // Presentationsläget bygger ingen lista (den skulle bli ett eget steg).
+        function samlaBildkallor(root) {
+            if (!root || root.querySelector(':scope > .lab-bildkallor')) return;
+            const rader = [...root.querySelectorAll('.lab-foto-kalla')];
+            if (!rader.length) return;
+            const det = document.createElement('details');
+            det.className = 'lab-bildkallor no-begrepp';
+            const sum = document.createElement('summary');
+            sum.textContent = 'Bildkällor';
+            det.appendChild(sum);
+            const ol = document.createElement('ol');
+            rader.forEach(p => {
+                const li = document.createElement('li');
+                if (p.dataset.bild) {
+                    const b = document.createElement('span');
+                    b.className = 'lab-bildkallor-namn';
+                    b.textContent = p.dataset.bild + '. ';
+                    li.appendChild(b);
+                }
+                p.childNodes.forEach(n => li.appendChild(n.cloneNode(true)));
+                ol.appendChild(li);
+            });
+            det.appendChild(ol);
+            root.appendChild(det);
+        }
+
         function escapeHtml(s) {
             return String(s)
                 .replace(/&/g, '&amp;')
@@ -743,6 +774,8 @@
                 if (window.HANDSKRIFT) window.HANDSKRIFT.mountAll(containerRef.current);
                 // Minisimuleringar (::: minisim) — bygg widgetarna.
                 if (window.FYSIKMINISIM) window.FYSIKMINISIM.mountAll(containerRef.current);
+                // Bildkällorna samlas sist i genomgången.
+                samlaBildkallor(containerRef.current);
                 const root = containerRef.current;
                 const fit = () => fitMathDisplays(root);
                 let cancelled = false;

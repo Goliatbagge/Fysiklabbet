@@ -57,4 +57,10 @@ window.NP_INDEX = [
         namn: 'Kursprov, våren 2016',
         meta: '19 uppgifter · Delprov A (teoriuppgifter) · Lösningar steg för steg',
     },
+    {
+        id: 'fy1-vt2017',
+        kurs: 'Fysik nivå 1',
+        namn: 'Kursprov, våren 2017',
+        meta: '21 uppgifter · Delprov A (teoriuppgifter) · Lösningar steg för steg',
+    },
 ];

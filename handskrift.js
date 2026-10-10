@@ -1000,10 +1000,14 @@
                              [58, 52]]] },
     /* upphöjt plus — för β⁺ */
     '⁺': { w: 52, strokes: [[[14, 30], [44, 30]], [[29, 16], [29, 45]]] },
-    /* rho (densitet): en ögla med rakt nedstaplat ben till vänster */
-    'ρ': { w: 66, strokes: [[[26, 52], [27, 126]],
-                            [[27, 62], [40, 50], [54, 56], [58, 74],
-                             [52, 92], [38, 98], [27, 90]]] },
+    /* rho (densitet): en rund ögla som skrivs i ETT drag nerifrån, med
+     * ett SNETT ben som börjar under öglan till vänster. Benet når aldrig
+     * upp över öglan, till skillnad från p:s raka stapel som börjar i
+     * x-höjd (2026-10-10: den gamla rho-glyfen var identisk med 'p'). */
+    'ρ': { w: 66, strokes: [[[14, 126], [19, 108], [24, 92], [27, 80],
+                             [31, 66], [40, 55], [51, 53], [59, 62],
+                             [61, 77], [56, 92], [44, 99], [32, 96],
+                             [26, 86]]] },
     /* eta (verkningsgrad): som ett 'n' men med nedstapel på högra benet */
     'η': { w: 66, strokes: [[[24, 52], [25, 100]],
                             [[25, 60], [36, 50], [48, 50], [58, 60],

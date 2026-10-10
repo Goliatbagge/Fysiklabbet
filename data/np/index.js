@@ -46,6 +46,12 @@ window.NP_INDEX = [
         meta: '28 uppgifter · Delprov B, C och D · Lösningar steg för steg',
     },
     {
+        id: 'ma4-vt2022',
+        kurs: 'Matematik fortsättning nivå 2',
+        namn: 'Nationellt prov, våren 2022',
+        meta: '27 uppgifter · Delprov B, C och D · Lösningar steg för steg',
+    },
+    {
         id: 'fy2-vt2016',
         kurs: 'Fysik nivå 2',
         namn: 'Kursprov, våren 2016',

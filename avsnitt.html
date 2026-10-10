@@ -63,6 +63,23 @@
             return { md, tokens };
         }
         function restoreMath(html, tokens) {
+            // Håll ihop deluppgiftens bokstav med sin uppgift ("f) $3x^2 = …$").
+            // KaTeX renderar inline-formeln som ett atomärt inline-block, och
+            // webbläsaren får då bryta raden mellan "f)" och formeln — ett hårt
+            // mellanslag i md-källan hjälper INTE mot en inline-ruta (påpekat
+            // 2026-09-21 i ma1c-2.9: "f)" blev ensam kvar i radslutet). Samma
+            // problem som öppningsparentesen nedan, och samma lösning: en
+            // nowrap-span runt bokstaven och formeln. Är deluppgiften vanlig
+            // text räcker ett hårt mellanslag (två teckenföljder, ingen ruta).
+            // Bokstavsreglerna (deluppgiftens bokstav + formel, se nedan) körs
+            // mot platshållarna INNAN formlerna sätts tillbaka, och bara i
+            // text, aldrig i taggar: annars träffar de ")" inne i en formel
+            // ("$(b - a)$ då $x$") och slår sönder sättningen (2026-10-10).
+            html = html.split(/(<[^>]*>)/).map(seg => seg.charAt(0) === '<' ? seg : seg
+                .replace(/(^|[\s>;])([a-h])\)(?:&nbsp;|\u00a0|[ \t])*(@@LABMATH\d+@@)/g,
+                    '$1<span class="delupp-bokstav">$2)&nbsp;$3</span>')
+                .replace(/(^|[\s>;])([a-h])\)(?:&nbsp;|\u00a0|[ \t])(?=[0-9A-Za-zÅÄÖåäöÉé])/g,
+                    '$1$2)&nbsp;')).join('');
             html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
             // Skydda attributvärden (data-tip="…<em>s-t</em>-graf…") från
             // nowrap-omslagen nedan: en <span class="…"> inuti ett attribut
@@ -73,21 +90,6 @@
                 attrs.push(m);
                 return '@@RMATTR' + (attrs.length - 1) + '@@';
             });
-            // Håll ihop deluppgiftens bokstav med sin uppgift ("f) $3x^2 = …$").
-            // KaTeX renderar inline-formeln som ett atomärt inline-block, och
-            // webbläsaren får då bryta raden mellan "f)" och formeln — ett hårt
-            // mellanslag i md-källan hjälper INTE mot en inline-ruta (påpekat
-            // 2026-09-21 i ma1c-2.9: "f)" blev ensam kvar i radslutet). Samma
-            // problem som öppningsparentesen nedan, och samma lösning: en
-            // nowrap-span runt bokstaven och formeln.
-            html = html.replace(
-                /(^|[\s>;])([a-h])\)(?:&nbsp;|\u00a0|[ \t])*(\$(?!\$)[^$\n]+?\$)/g,
-                '$1<span class="delupp-bokstav">$2)&nbsp;$3</span>');
-            // Är deluppgiften vanlig text räcker ett hårt mellanslag — då är det
-            // två teckenföljder som ska hållas ihop, inte text + inline-ruta.
-            html = html.replace(
-                /(^|[\s>;])([a-h])\)(?:&nbsp;|\u00a0|[ \t])(?=[0-9A-Za-zÅÄÖåäöÉé])/g,
-                '$1$2)&nbsp;');
             // Håll ihop variabel + bindestreck + efterled ("$x$-termen",
             // "<em>pq</em>-formeln") — annars kan raden brytas efter
             // bindestrecket eller mellan variabeln och bindestrecket.

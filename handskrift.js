@@ -1024,6 +1024,9 @@
     /* versalt Y: gaffel ned till mitten och sedan en rak stapel —
      * granskad sida vid sida med 'V' och gemena 'y' */
     'Y': { w: 76, strokes: [[[18, 12], [44, 56], [70, 11]], [[44, 56], [40, 100]]] },
+    /* versalt Z (namnet Zara i NP Ma 4 VT 2022 u20): ett enda drag
+     * överst → diagonal → nederst, högre och bredare än gemena 'z' */
+    'Z': { w: 78, strokes: [[[22, 13], [70, 12], [20, 99], [72, 98]]] },
     /* versalt Ä: A med två prickar — för versaler i figur- och
      * resonemangsrader ("FÖRSTÄRKS", "FÖRSVAGAS") */
     'Ä': { w: 80, strokes: [[[22, 100], [46, 12], [70, 100]], [[32, 68], [61, 68]],

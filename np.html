@@ -748,6 +748,8 @@
     <script>document.write('<scr' + 'ipt src="data/np/ma2c-vt2018.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/ma3c-vt2022-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/ma3c-vt2022.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma4-vt2022-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma4-vt2022.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/fy2-vt2016-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/fy2-vt2016.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <!-- Pennlösningarna: motorn + en scenfil per prov. Scenfilerna
@@ -761,6 +763,7 @@
     <script>document.write('<scr' + 'ipt src="data/np/ma2c-vt2022-penna.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/ma2c-vt2018-penna.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/ma3c-vt2022-penna.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma4-vt2022-penna.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/fy2-vt2016-penna.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="kanonisk.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
@@ -833,7 +836,6 @@
             return { md, tokens };
         }
         function restoreMath(html, tokens) {
-            html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
             // Håll ihop deluppgiftens bokstav med sin uppgift ("f) $3x^2 = …$").
             // KaTeX renderar inline-formeln som ett atomärt inline-block, och
             // webbläsaren får då bryta raden mellan "f)" och formeln — ett hårt
@@ -841,14 +843,18 @@
             // 2026-09-21 i ma1c-2.9: "f)" blev ensam kvar i radslutet). Samma
             // problem som öppningsparentesen nedan, och samma lösning: en
             // nowrap-span runt bokstaven och formeln.
+            // Båda bokstavsreglerna körs mot platshållarna INNAN formlerna
+            // sätts tillbaka: annars träffar de ")" inne i en formel
+            // ("$(b - a)$ då $x$") och slår sönder sättningen (2026-10-10).
             html = html.replace(
-                /(^|[\s>;])([a-h])\)(?:&nbsp;|\u00a0|[ \t])*(\$(?!\$)[^$\n]+?\$)/g,
+                /(^|[\s>;])([a-h])\)(?:&nbsp;|\u00a0|[ \t])*(@@LABMATH\d+@@)/g,
                 '$1<span class="delupp-bokstav">$2)&nbsp;$3</span>');
             // Är deluppgiften vanlig text räcker ett hårt mellanslag — då är det
             // två teckenföljder som ska hållas ihop, inte text + inline-ruta.
             html = html.replace(
                 /(^|[\s>;])([a-h])\)(?:&nbsp;|\u00a0|[ \t])(?=[0-9A-Za-zÅÄÖåäöÉé])/g,
                 '$1$2)&nbsp;');
+            html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
             html = html.replace(/\(( *)(\$(?!\$)[^$\n]+?\$)/g, '<span class="math-paren">($1$2</span>');
             return html;
         }

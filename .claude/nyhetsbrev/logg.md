@@ -20,7 +20,11 @@ Format:
   kontrollera att de syns live före utskicket.
 - EmailOctopus: kampanjen "Nyhetsbrev nr 9 - 2026-10-11" upplagd 2026-10-10
   (lokal session), testmejl skickat till sam.skoglund83@gmail.com. Bilderna
-  verifierade live (200). Schemaläggningen återstår (användarens).
+  verifierade live (200). Efter användarens ändringar (Nobelpriset som
+  anslag, kursnamn med "nivå", poddmeningen i tipset, "bekämpa" bort)
+  inklistrat på nytt och nytt testmejl skickat. **SCHEMALAGT 2026-10-10**
+  på användarens begäran till söndag 2026-10-11 kl 06.00 (tidszon
+  Europe/Amsterdam, samma tid som Stockholm), 29 mottagare.
 - Brevperiod 2026-10-04 till 2026-10-10: åtta artiklar, alla länkade.
   `verify-nyhetsbrev.js` och `verify-sprak.js` utan fel (längdvarning ~624 ord).
 - Nyheter: 2026-10-08-karnklockan-som-haller-takten-sjalv (hjälte),

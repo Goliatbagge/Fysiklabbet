@@ -58,3 +58,24 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   ligger i `utkast/kopplingsschema.html` (dolt, noindex) och är ännu inte
   lanserat. **Teasat 2026-09-27** på användarens begäran, utan att
   namnge det ("en av de pilligaste sakerna i elläran … Håll utkik."). **[AVKLARAT 2026-09-27]** Verktyget lanserades 2026-09-26 och nämndes i brevet 2026-09-27.
+
+- **Fysiklabbets presentationsfilm: SKA MED I BREVET 2026-10-18** (uttryckligt
+  önskemål 2026-10-10: "i nästa veckas nyhetsbrev måste vi såklart stolt
+  visa upp den"). Gäller brevet söndag 18 oktober, INTE brevet 11 oktober,
+  som redan var schemalagt när filmen blev klar. En 68 sekunder lång film
+  i sajtens eget utseende (rutat papper, Instrument Serif, logotypens
+  omloppsbana) med riktiga klipp ur sajten: magneten i kopparröret,
+  bandgeneratorns gnista, solförmörkelsen ända in i totaliteten,
+  tomteblosset, dubbelspalten i 3D under titeln "Fysik du kan se.",
+  flygningen till neutronstjärnan, pennlösningen som skrivs fram, parabeln
+  som ändras med reglagen och övningarna. Musiken är instrumental och
+  gjord för filmen. Filmen ligger på startsidan och på Om-sidan sedan
+  2026-10-10, och postades som reel på Facebook och Instagram samma kväll.
+  **Ge den en stolt, framträdande plats** (gärna överst under "Nytt på
+  Fysiklabbet", eller som eget block före nyheterna), med bilden
+  `nyheter/brev/2026-10-18-presentationsfilm.jpg` (affisch med spelknapp)
+  länkad till `https://fysiklabbet.se/#film` (startsidan, där filmen
+  spelas). Finns filmen på YouTube-kanalen Fysiklabbet när brevet skrivs,
+  länka dit i stället; kontrollera det, gissa inte. E-post kan inte spela
+  video, så bilden med spelknappen är länken. Uppmana gärna läsaren att
+  visa filmen för kollegor och elever. Bocka av här när brevet är skrivet.

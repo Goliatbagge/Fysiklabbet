@@ -2405,9 +2405,6 @@ details.lab-forklaring > .formel-harledning-body { padding-top: 12px; }
 @media (max-width: 600px) {
     .lab-block-figur .lab-foto-paneler img { flex-basis: calc(50% - 5px); }
 }
-/* Litet föremål (dynamometern): ett smalt stående foto blir annars
-   onödigt högt. */
-.lab-block-figur img.lab-foto-smal { max-height: 260px; }
 .lab-block-figur .lab-foto-kalla {
     font-size: 12px;
     font-style: normal;

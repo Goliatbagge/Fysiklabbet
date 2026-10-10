@@ -11,6 +11,32 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-10-11 — "Ett ur där själva atomkärnan håller takten"
+- Status: UTKAST skrivet lördag 2026-10-10 (före 08.00-deadline, schemalagd
+  molnroutine). Tänkt utskick söndag 2026-10-11 kl 06.00 svensk tid.
+  **Kampanjen är INTE upplagd i EmailOctopus** (molnet saknar Chrome): kör
+  `/brev-till-octopus` lokalt, testskicka och schemalägg (tidszonen
+  default:ar till London). Bilderna pushades till main i den här körningen;
+  kontrollera att de syns live före utskicket.
+- Brevperiod 2026-10-04 till 2026-10-10: åtta artiklar, alla länkade.
+  `verify-nyhetsbrev.js` och `verify-sprak.js` utan fel (längdvarning ~624 ord).
+- Nyheter: 2026-10-08-karnklockan-som-haller-takten-sjalv (hjälte),
+  2026-10-06-nobelpriset-i-fysik-francis-halzen och
+  2026-10-10-tio-minuter-efter-kollisionen (dagens nyhet) som miniatyrer. Läs
+  även: diamant, laserantenn, fjärdedels elektron (förra brevets teaser,
+  infriad), mjuk ventil, avdunstning.
+- Nytt på sajten: sannolikhetskalkylatorn (med skärmdump), fy2-2.2 Fjäderenergi
+  och kopplade fjädrar (med figur), kort och gott: sammanfattningar som
+  bildspel, övningsbladen Problemlösning med ekvationer och Olikheter, 
+  pennlösningar i fy1-3.6. Bortvalt: dolda utkast och småjusteringar.
+- Bilder: nyheter/brev/2026-10-11-{sannolikhetskalkylator,fjaderkoppling,
+  karnklocka-hero,icecube-thumb,einsteinprobe-thumb}.jpg. Sammanfattnings-
+  bildspelet saknar egen bild.
+- Veckans tips: poddspelaren (Nobelartikeln har ljudöversikt). Daterat i tips.md.
+- Teaser: mjölkavbildningen ur ko.md ([BREVTEASER], redan överst). Originalet
+  kunde inte kontrolläsas i molnet; kontrollerat att det inte är publicerat.
+- Förhandsvisning renderad (600 px JPEG) och skickad med SendUserFile.
+
 ## 2026-10-04 — "92 antiprotoner åkte lastbil. Ingen försvann på vägen."
 - EmailOctopus: kampanjen "Nyhetsbrev nr 8 - 2026-10-04" upplagd 2026-10-03
   (All subscribers, 27 kontakter), testmejl skickat till användaren samma

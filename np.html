@@ -626,6 +626,39 @@
             line-height: 1.55;
             color: var(--lab-ink-soft);
         }
+        /* Rutan blinkar till tre gånger när uppgiften öppnas, så att den inte
+           missas (önskemål 2026-10-11). Ramen och bakgrunden pulserar i
+           accentfärgen och landar sedan i den lugna grundstilen. Elementet
+           har key={uppgift.nr}, så att blinkningen spelas upp på nytt när man
+           går mellan två uppgifter som båda har rutan. */
+        .np-utgatt {
+            animation: npUtgattBlink 0.7s ease-in-out 0.4s 3;
+        }
+        .np-utgatt-rubrik {
+            animation: npUtgattRubrik 0.7s ease-in-out 0.4s 3;
+        }
+        @keyframes npUtgattBlink {
+            0%, 100% {
+                border-color: var(--lab-line-strong);
+                border-left-color: var(--lab-ink-muted);
+                background: var(--lab-bg-raised);
+                box-shadow: none;
+            }
+            50% {
+                border-color: var(--lab-accent);
+                border-left-color: var(--lab-accent);
+                background: var(--lab-accent-soft);
+                box-shadow: 0 0 0 3px var(--lab-accent-soft);
+            }
+        }
+        @keyframes npUtgattRubrik {
+            0%, 100% { color: var(--lab-ink-muted); }
+            50% { color: var(--lab-accent-dark); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .np-utgatt, .np-utgatt-rubrik { animation: none; }
+            .np-utgatt { border-left-color: var(--lab-accent); }
+        }
 
         /* Genomgångarna som täcker uppgiftens teori — högst upp i lösningen,
            så att den som kör fast kan läsa på innan stegen klickas fram. */
@@ -1803,7 +1836,7 @@
                     </div>
 
                     {uppgift.utgatt && (
-                        <div className="np-utgatt">
+                        <div className="np-utgatt" key={uppgift.nr}>
                             <span className="np-utgatt-rubrik">Ingår inte längre i kursen</span>
                             <p>{uppgift.utgatt}</p>
                         </div>

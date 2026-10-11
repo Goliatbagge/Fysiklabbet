@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Övningsblad: Aritmetik — Fysiklabbet</title>
+<meta name="description" content="61 uppgifter i kapitlet Aritmetik i Matematik nivå 1b, på nivåerna Grund och Mellan: negativa tal, bråk, decimalform, potenser, grundpotensform och prioriteringsregler. Med svar och lösningsförslag. Utskriftsklart.">
+<link rel="canonical" href="https://fysiklabbet.se/ovningsblad/ovningsblad-ma1b-kap1.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  renderMathInElement(document.body, {
+    delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
+    ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'svg'],
+    throwOnError: false
+  });
+  document.documentElement.setAttribute('data-katex', 'klar');
+});
+</script>
+<style>
+:root { --ink:#1f2530; --paper:#f7f2e8; --line:rgba(31,37,48,.22); --teal:#0d9488; }
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin:0; font-family:'Poppins', system-ui, sans-serif; color:var(--ink); background:#fff; font-size:11pt; line-height:1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { max-width: 186mm; margin: 0 auto; padding: 10mm 6mm 20mm; }
+header { border-bottom: 2px solid var(--ink); padding-bottom: 6px; margin-bottom: 12px; }
+.over { font-size: 9.5pt; text-transform: uppercase; letter-spacing: .06em; color:#5b6472; margin:0; }
+h1 { font-size: 20pt; margin: 2px 0 0; line-height:1.2; }
+.under { margin: 2px 0 0; font-size: 11pt; color:#3b4350; }
+.namn { display:flex; gap: 28px; margin-top: 8px; font-size: 10pt; color:#3b4350; }
+.namn span { flex:1; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.box { background: var(--paper); border: 1px solid rgba(31,37,48,.18); border-radius: 8px; padding: 8px 14px; margin: 0 0 10px; break-inside: avoid; }
+.box p { margin: 3px 0; }
+.boxgrid { display:grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
+.box ul { margin: 2px 0 2px 16px; padding: 0; }
+.box li { margin: 1px 0; }
+.box .katex-display { margin: 2px 0 3px; text-align:left; }
+.box .katex-display > .katex { text-align:left; }
+.rub { font-weight: 600; }
+.nw { white-space: nowrap; }
+.nivaer { font-size: 9.5pt; color:#3b4350; margin: 0 0 6px; }
+.niva { margin-bottom: 6px; }
+h2 { display:flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; font-size: 13pt; margin: 14px 0 4px; padding: 3px 0; border-bottom: 1.4px solid var(--ink); break-after: avoid; }
+h2 .nivanamn { color: var(--teal); }
+h2 .sv { font-weight: 400; font-size: 9pt; color:#5b6472; }
+.instr { font-weight: 600; margin: 8px 0 3px; break-after: avoid; }
+.tasks { display: grid; gap: 4px 14px; }
+.c1 { grid-template-columns: 1fr; } .c2 { grid-template-columns: repeat(2, 1fr); }
+.c3 { grid-template-columns: repeat(3, 1fr); } .c4 { grid-template-columns: repeat(4, 1fr); }
+.task { break-inside: avoid; padding: 4px 4px 0; border-bottom: 1px dotted var(--line); display:flex; gap: 6px; align-items: baseline; }
+.task .nr { font-weight: 600; min-width: 1.7em; text-align:right; font-size: 10pt; }
+.task .eq { flex:1; min-width: 0; }
+.task:has(.fig) { align-items: flex-start; }
+.task .katex, .sol p .katex, .svarlista .katex, .box p .katex, .box li .katex { white-space: nowrap; }
+.kort { min-height: 16mm; } .mellan { min-height: 30mm; } .hog { min-height: 44mm; }
+.fig { margin: 6px 0 4px; }
+.fig svg { display:block; max-width: 100%; height: auto; margin: 0 auto; }
+.sol .fig svg { max-width: 62mm; }
+code { font-family: 'JetBrains Mono', Consolas, monospace; font-size: .92em; background: rgba(31,37,48,.06); padding: 0 3px; border-radius: 3px; }
+.sol .kod { padding-left: 3mm; }
+.facit { break-before: page; page-break-before: always; }
+.facit h2 { font-size: 14pt; }
+.svarniva, .losniva { font-size: 11pt; margin: 8px 0 3px; color: var(--teal); break-after: avoid; }
+.svarlista { display:grid; grid-template-columns: repeat(4, 1fr); gap: 2px 12px; font-size: 9.8pt; margin-bottom: 6px; }
+.svarlista div { display:flex; gap: 6px; align-items: center; min-height: 9mm; }
+.svarlista div.lang { grid-column: span 2; }
+.svarlista .nr { font-weight: 600; min-width: 1.7em; text-align:right; }
+.los { columns: 2; column-gap: 10mm; font-size: 9.8pt; }
+.sol { break-inside: avoid; page-break-inside: avoid; margin: 0 0 8px; padding: 0 0 5px; border-bottom: 1px dotted var(--line); }
+.sol .solh { font-weight: 600; margin: 0 0 1px; }
+.sol .solh .nr { margin-right: 4px; }
+.sol p { margin: 2px 0; }
+.sol .del { font-weight: 700; margin: 5px 0 1px; }
+.sol .kontroll { color:#3b4350; }
+.sol .katex-display { margin: 2px 0 3px; text-align: left; padding-left: 3mm; overflow-x: auto; overflow-y: hidden; padding-bottom: 2px; }
+.sol .katex-display > .katex { text-align: left; }
+.sol .svar { margin: 3px 0 0; }
+footer { margin-top: 18px; font-size: 9pt; color:#5b6472; border-top: 1px solid var(--line); padding-top: 6px; display:flex; justify-content: space-between; }
+@page { size: A4; margin: 13mm 12mm 14mm; }
+@media print {
+  body { font-size: 10.5pt; }
+  .page { max-width: none; padding: 0; }
+}
+@media (max-width: 640px) {
+  .c3, .c4 { grid-template-columns: repeat(2, 1fr); }
+  .c2, .c3:has(.hog) { grid-template-columns: 1fr; }
+  .boxgrid { grid-template-columns: 1fr; }
+  .svarlista { grid-template-columns: repeat(2, 1fr); }
+  .los { columns: 1; }
+  .sol .katex-display { padding-left: 0; }
+}
+</style>
+</head>
+<body>
+<section class="page">
+  <header>
+    <p class="over">Matematik nivå 1b · Övningsblad</p>
+    <h1>Aritmetik</h1>
+    <p class="under">Negativa tal, bråk, decimalform, potenser, grundpotensform och prioriteringsregler</p>
+    <div class="namn"><span>Namn:</span><span>Klass:</span></div>
+  </header>
+  <div class="box boxgrid">
+    <div>
+      <p class="rub">Kom ihåg</p>
+      <ul>
+        <li>Lika tecken ger plus, olika tecken ger minus: $a - (-b) = a + b$ och $(-a) \cdot (-b) = a \cdot b$.</li>
+        <li>Bråk adderas när de har samma nämnare. Vid division inverteras bråket man delar med: $\dfrac{a}{b} \Big/ \dfrac{c}{d} = \dfrac{a}{b} \cdot \dfrac{d}{c}$.</li>
+        <li>Vid multiplikation och division avgör minst antal värdesiffror, vid addition och subtraktion minst antal decimaler.</li>
+        <li>$a^x \cdot a^y = a^{x+y}$, $\dfrac{a^x}{a^y} = a^{x-y}$, $(a^x)^y = a^{x \cdot y}$, $a^0 = 1$, $a^{-n} = \dfrac{1}{a^n}$</li>
+        <li>Grundpotensform: $a \cdot 10^n$ med $1 \leq a < 10$. Prefix: <span class="nw">G $= 10^9$</span>, <span class="nw">M $= 10^6$</span>, <span class="nw">k $= 10^3$</span>, <span class="nw">m $= 10^{-3}$</span>, <span class="nw">µ $= 10^{-6}$</span>.</li>
+        <li>Ordning: parenteser, potenser, multiplikation och division, sist addition och subtraktion.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="rub">Exempel: beräkna $\dfrac{3}{4} - \dfrac{1}{6}$</p>
+      <p>Nämnarna är olika. Både 4 och 6 går jämnt upp i 12, så vi förlänger bråken till nämnaren 12:</p>
+      $$\frac{3 \cdot 3}{4 \cdot 3} - \frac{1 \cdot 2}{6 \cdot 2} = \frac{9}{12} - \frac{2}{12}$$
+      <p>Med samma nämnare subtraheras täljarna:</p>
+      $$\frac{9}{12} - \frac{2}{12} = \frac{7}{12}$$
+      <p>Bråket går inte att förkorta, så svaret är $\dfrac{7}{12}$.</p>
+    </div>
+  </div>
+  <p class="nivaer"><b>Grund</b> tränar kapitlets metoder en i taget. <b>Mellan</b> kräver några steg till och har en del uppgifter i text. Räkna utan räknare. Svar och lösningsförslag finns efter uppgifterna.</p>
+
+  <section class="niva">
+    <h2><span class="nivanamn">Grund</span><span class="sv">Uppgift 1–48 · Kapitlets metoder en i taget</span></h2>
+    <p class="instr">Beräkna utan räknare.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">1</span><span class="eq">$4 - (-9)$</span></div>
+      <div class="task kort"><span class="nr">2</span><span class="eq">$(-5) - 3$</span></div>
+      <div class="task kort"><span class="nr">3</span><span class="eq">$-7 + 12$</span></div>
+      <div class="task kort"><span class="nr">4</span><span class="eq">$25 + (-10)$</span></div>
+      <div class="task kort"><span class="nr">5</span><span class="eq">$6 \cdot (-4)$</span></div>
+      <div class="task kort"><span class="nr">6</span><span class="eq">$(-8) \cdot (-3)$</span></div>
+      <div class="task kort"><span class="nr">7</span><span class="eq">$\dfrac{-42}{6}$</span></div>
+      <div class="task kort"><span class="nr">8</span><span class="eq">$\dfrac{-36}{-9}$</span></div>
+    </div>
+    <p class="instr">Förkorta så långt som möjligt.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">9</span><span class="eq">$\dfrac{6}{15}$</span></div>
+      <div class="task kort"><span class="nr">10</span><span class="eq">$\dfrac{12}{18}$</span></div>
+      <div class="task kort"><span class="nr">11</span><span class="eq">$\dfrac{35}{49}$</span></div>
+      <div class="task kort"><span class="nr">12</span><span class="eq">$\dfrac{36}{48}$</span></div>
+    </div>
+    <p class="instr">Beräkna. Svara i enklaste form.</p>
+    <div class="tasks c4">
+      <div class="task mellan"><span class="nr">13</span><span class="eq">$\dfrac{2}{7} + \dfrac{3}{7}$</span></div>
+      <div class="task mellan"><span class="nr">14</span><span class="eq">$\dfrac{5}{6} - \dfrac{1}{6}$</span></div>
+      <div class="task mellan"><span class="nr">15</span><span class="eq">$\dfrac{1}{2} + \dfrac{1}{3}$</span></div>
+      <div class="task mellan"><span class="nr">16</span><span class="eq">$\dfrac{3}{4} - \dfrac{2}{5}$</span></div>
+      <div class="task mellan"><span class="nr">17</span><span class="eq">$\dfrac{2}{3} \cdot \dfrac{4}{5}$</span></div>
+      <div class="task mellan"><span class="nr">18</span><span class="eq">$3 \cdot \dfrac{5}{6}$</span></div>
+      <div class="task mellan"><span class="nr">19</span><span class="eq">$\dfrac{3}{4} \Big/ \dfrac{2}{5}$</span></div>
+      <div class="task mellan"><span class="nr">20</span><span class="eq">$\dfrac{2}{3} \Big/ 4$</span></div>
+    </div>
+    <p class="instr">Lös uppgifterna.</p>
+    <div class="tasks c2">
+      <div class="task mellan"><span class="nr">21</span><span class="eq txt">Hur mycket är $\dfrac{3}{4}$ av 60&nbsp;kr?</span></div>
+      <div class="task mellan"><span class="nr">22</span><span class="eq txt">Avrunda 47,386 till<br>a)&nbsp;en decimal&emsp;&emsp;b)&nbsp;heltal<br>c)&nbsp;fyra värdesiffror</span></div>
+      <div class="task mellan"><span class="nr">23</span><span class="eq txt">En rektangel är 4,2&nbsp;m lång och 3,15&nbsp;m bred. Beräkna arean och avrunda till rätt antal värdesiffror.</span></div>
+      <div class="task mellan"><span class="nr">24</span><span class="eq txt">En planka är 2,48&nbsp;m lång. Du sågar av 1,6&nbsp;m. Hur lång bit är kvar? Avrunda till rätt antal decimaler.</span></div>
+    </div>
+    <p class="instr">Beräkna utan räknare.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">25</span><span class="eq">$2^5$</span></div>
+      <div class="task kort"><span class="nr">26</span><span class="eq">$(-3)^2$</span></div>
+      <div class="task kort"><span class="nr">27</span><span class="eq">$-3^2$</span></div>
+      <div class="task kort"><span class="nr">28</span><span class="eq">$10^{-2}$</span></div>
+      <div class="task kort"><span class="nr">29</span><span class="eq">$5^0$</span></div>
+      <div class="task kort"><span class="nr">30</span><span class="eq">$4^{-1}$</span></div>
+    </div>
+    <p class="instr">Skriv som en enda potens.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">31</span><span class="eq">$3^4 \cdot 3^5$</span></div>
+      <div class="task kort"><span class="nr">32</span><span class="eq">$\dfrac{7^8}{7^3}$</span></div>
+      <div class="task kort"><span class="nr">33</span><span class="eq">$(2^3)^4$</span></div>
+      <div class="task kort"><span class="nr">34</span><span class="eq">$x^2 \cdot x^6$</span></div>
+    </div>
+    <p class="instr">Skriv i grundpotensform.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">35</span><span class="eq">$743\,000$</span></div>
+      <div class="task kort"><span class="nr">36</span><span class="eq">$8\,000\,000\,000$</span></div>
+      <div class="task kort"><span class="nr">37</span><span class="eq">$0{,}0009$</span></div>
+      <div class="task kort"><span class="nr">38</span><span class="eq">$0{,}000\,024$</span></div>
+    </div>
+    <p class="instr">Skriv utan prefix, i grundpotensform.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">39</span><span class="eq txt">5&nbsp;MHz</span></div>
+      <div class="task kort"><span class="nr">40</span><span class="eq txt">3,2&nbsp;km</span></div>
+      <div class="task kort"><span class="nr">41</span><span class="eq txt">45&nbsp;mg</span></div>
+      <div class="task kort"><span class="nr">42</span><span class="eq txt">7&nbsp;µs</span></div>
+    </div>
+    <p class="instr">Beräkna utan räknare. Tänk på prioriteringsreglerna.</p>
+    <div class="tasks c3">
+      <div class="task kort"><span class="nr">43</span><span class="eq">$5 \cdot (3 + 6)$</span></div>
+      <div class="task kort"><span class="nr">44</span><span class="eq">$20 - 4 \cdot 3$</span></div>
+      <div class="task kort"><span class="nr">45</span><span class="eq">$7 \cdot 4 - (9 - 5)^2$</span></div>
+      <div class="task kort"><span class="nr">46</span><span class="eq">$2 + 3^2 \cdot 2$</span></div>
+      <div class="task kort"><span class="nr">47</span><span class="eq">$\dfrac{18}{5 - 2}$</span></div>
+      <div class="task kort"><span class="nr">48</span><span class="eq">$\dfrac{4 + 8}{2 \cdot 3}$</span></div>
+    </div>
+  </section>
+
+  <section class="niva">
+    <h2><span class="nivanamn">Mellan</span><span class="sv">Uppgift 49–61 · Flera steg i samma uppgift, och uppgifter i text</span></h2>
+    <p class="instr">Beräkna utan räknare. Svara i enklaste form.</p>
+    <div class="tasks c3">
+      <div class="task mellan"><span class="nr">49</span><span class="eq">$(-2)^3 - (-3)^2$</span></div>
+      <div class="task mellan"><span class="nr">50</span><span class="eq">$\dfrac{2}{3} + \dfrac{5}{6} \cdot \dfrac{4}{5}$</span></div>
+      <div class="task mellan"><span class="nr">51</span><span class="eq">$\left(\dfrac{1}{2} + \dfrac{1}{4}\right) \Big/ \dfrac{3}{8}$</span></div>
+      <div class="task mellan"><span class="nr">52</span><span class="eq">$\dfrac{3^4 \cdot 3^{-2}}{3^3}$</span></div>
+      <div class="task mellan"><span class="nr">53</span><span class="eq">$(3 \cdot 10^4) \cdot (2 \cdot 10^{-6})$</span></div>
+      <div class="task mellan"><span class="nr">54</span><span class="eq">$\dfrac{8 \cdot 10^9}{4 \cdot 10^3}$</span></div>
+    </div>
+    <p class="instr">Lös ekvationerna.</p>
+    <div class="tasks c2">
+      <div class="task mellan"><span class="nr">55</span><span class="eq">$2^x \cdot 2^3 = 2^{10}$</span></div>
+      <div class="task mellan"><span class="nr">56</span><span class="eq">$\dfrac{5^x}{5^2} = 5^6$</span></div>
+    </div>
+    <p class="instr">Lös uppgifterna.</p>
+    <div class="tasks c1">
+      <div class="task hog"><span class="nr">57</span><span class="eq txt">Lisa har läst $\dfrac{3}{8}$ av en bok på 320 sidor. Hur många sidor har hon kvar att läsa?</span></div>
+      <div class="task hog"><span class="nr">58</span><span class="eq txt">En bil kör 154&nbsp;km på 1,75 timmar. Beräkna medelhastigheten och svara med rätt antal värdesiffror.</span></div>
+      <div class="task hog"><span class="nr">59</span><span class="eq txt">Ett minneskort rymmer 64&nbsp;GB. En bild tar 4&nbsp;MB. Hur många bilder får plats på kortet?</span></div>
+      <div class="task hog"><span class="nr">60</span><span class="eq txt">Vilket bråk är störst, $\dfrac{5}{8}$ eller $\dfrac{7}{11}$? Motivera utan räknare.</span></div>
+      <div class="task hog"><span class="nr">61</span><span class="eq txt">Elias skriver $-4^2 = 16$ och $\dfrac{1}{2} + \dfrac{1}{3} = \dfrac{2}{5}$. Förklara vad som är fel och beräkna rätt värden.</span></div>
+    </div>
+  </section>
+  <section class="facit">
+    <h2><span>Svar</span></h2>
+
+    <h3 class="svarniva">Grund</h3>
+    <div class="svarlista"><div><span class="nr">1</span><span>13</span></div><div><span class="nr">2</span><span>$-8$</span></div><div><span class="nr">3</span><span>5</span></div><div><span class="nr">4</span><span>15</span></div><div><span class="nr">5</span><span>$-24$</span></div><div><span class="nr">6</span><span>24</span></div><div><span class="nr">7</span><span>$-7$</span></div><div><span class="nr">8</span><span>4</span></div><div><span class="nr">9</span><span>$\dfrac{2}{5}$</span></div><div><span class="nr">10</span><span>$\dfrac{2}{3}$</span></div><div><span class="nr">11</span><span>$\dfrac{5}{7}$</span></div><div><span class="nr">12</span><span>$\dfrac{3}{4}$</span></div><div><span class="nr">13</span><span>$\dfrac{5}{7}$</span></div><div><span class="nr">14</span><span>$\dfrac{2}{3}$</span></div><div><span class="nr">15</span><span>$\dfrac{5}{6}$</span></div><div><span class="nr">16</span><span>$\dfrac{7}{20}$</span></div><div><span class="nr">17</span><span>$\dfrac{8}{15}$</span></div><div><span class="nr">18</span><span>$\dfrac{5}{2}$</span></div><div><span class="nr">19</span><span>$\dfrac{15}{8}$</span></div><div><span class="nr">20</span><span>$\dfrac{1}{6}$</span></div><div><span class="nr">21</span><span>45 kr</span></div><div><span class="nr">22</span><span>a) 47,4&emsp;b) 47&emsp;c) 47,39</span></div><div><span class="nr">23</span><span>13&nbsp;m<sup>2</sup></span></div><div><span class="nr">24</span><span>0,9&nbsp;m</span></div><div><span class="nr">25</span><span>32</span></div><div><span class="nr">26</span><span>9</span></div><div><span class="nr">27</span><span>$-9$</span></div><div><span class="nr">28</span><span>0,01</span></div><div><span class="nr">29</span><span>1</span></div><div><span class="nr">30</span><span>$\dfrac{1}{4}$</span></div><div><span class="nr">31</span><span>$3^9$</span></div><div><span class="nr">32</span><span>$7^5$</span></div><div><span class="nr">33</span><span>$2^{12}$</span></div><div><span class="nr">34</span><span>$x^8$</span></div><div><span class="nr">35</span><span>$7{,}43 \cdot 10^5$</span></div><div><span class="nr">36</span><span>$8 \cdot 10^9$</span></div><div><span class="nr">37</span><span>$9 \cdot 10^{-4}$</span></div><div><span class="nr">38</span><span>$2{,}4 \cdot 10^{-5}$</span></div><div><span class="nr">39</span><span>$5 \cdot 10^6$ Hz</span></div><div><span class="nr">40</span><span>$3{,}2 \cdot 10^3$ m</span></div><div><span class="nr">41</span><span>$4{,}5 \cdot 10^{-2}$ g</span></div><div><span class="nr">42</span><span>$7 \cdot 10^{-6}$ s</span></div><div><span class="nr">43</span><span>45</span></div><div><span class="nr">44</span><span>8</span></div><div><span class="nr">45</span><span>12</span></div><div><span class="nr">46</span><span>20</span></div><div><span class="nr">47</span><span>6</span></div><div><span class="nr">48</span><span>2</span></div></div>
+    <h3 class="svarniva">Mellan</h3>
+    <div class="svarlista"><div><span class="nr">49</span><span>$-17$</span></div><div><span class="nr">50</span><span>$\dfrac{4}{3}$</span></div><div><span class="nr">51</span><span>2</span></div><div><span class="nr">52</span><span>$\dfrac{1}{3}$</span></div><div><span class="nr">53</span><span>$6 \cdot 10^{-2}$</span></div><div><span class="nr">54</span><span>$2 \cdot 10^6$</span></div><div><span class="nr">55</span><span>$x = 7$</span></div><div><span class="nr">56</span><span>$x = 8$</span></div><div><span class="nr">57</span><span>200 sidor</span></div><div><span class="nr">58</span><span>88,0&nbsp;km/h</span></div><div><span class="nr">59</span><span>16&nbsp;000 bilder</span></div><div><span class="nr">60</span><span>$\dfrac{7}{11}$</span></div><div class="lang"><span class="nr">61</span><span>$-4^2 = -16$ och $\dfrac{1}{2} + \dfrac{1}{3} = \dfrac{5}{6}$</span></div></div>
+    <h2><span>Lösningsförslag</span></h2>
+
+    <h3 class="losniva">Grund</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">1</span> $4 - (-9)$</p><p>Minus minus ger plus:</p>$$4 - (-9) = 4 + 9 = 13$$<p class="svar"><b>Svar:</b> 13</p></div>
+      <div class="sol"><p class="solh"><span class="nr">2</span> $(-5) - 3$</p><p>Här dras ett positivt tal ifrån. Tänk på en termometer som visar $-5$ grader: sjunker temperaturen 3 grader till visar den $-8$ grader.</p>$$(-5) - 3 = -8$$<p class="svar"><b>Svar:</b> $-8$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">3</span> $-7 + 12$</p><p>Att börja på $-7$ och gå 12 steg uppåt är samma sak som $12 - 7$:</p>$$-7 + 12 = 12 - 7 = 5$$<p class="svar"><b>Svar:</b> 5</p></div>
+      <div class="sol"><p class="solh"><span class="nr">4</span> $25 + (-10)$</p><p>Plus minus ger minus:</p>$$25 + (-10) = 25 - 10 = 15$$<p class="svar"><b>Svar:</b> 15</p></div>
+      <div class="sol"><p class="solh"><span class="nr">5</span> $6 \cdot (-4)$</p><p>Olika tecken ger minus:</p>$$6 \cdot (-4) = -24$$<p class="svar"><b>Svar:</b> $-24$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">6</span> $(-8) \cdot (-3)$</p><p>Lika tecken ger plus:</p>$$(-8) \cdot (-3) = 24$$<p class="svar"><b>Svar:</b> 24</p></div>
+      <div class="sol"><p class="solh"><span class="nr">7</span> $\dfrac{-42}{6}$</p><p>Samma teckenregel gäller vid division. Olika tecken ger minus:</p>$$\frac{-42}{6} = -7$$<p class="svar"><b>Svar:</b> $-7$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">8</span> $\dfrac{-36}{-9}$</p><p>Lika tecken ger plus:</p>$$\frac{-36}{-9} = 4$$<p class="svar"><b>Svar:</b> 4</p></div>
+      <div class="sol"><p class="solh"><span class="nr">9</span> $\dfrac{6}{15}$</p><p>Täljaren och nämnaren har den gemensamma faktorn 3, som stryks:</p>$$\frac{6}{15} = \frac{2 \cdot 3}{5 \cdot 3} = \frac{2}{5}$$<p class="svar"><b>Svar:</b> $\dfrac{2}{5}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">10</span> $\dfrac{12}{18}$</p><p>Den största gemensamma faktorn är 6:</p>$$\frac{12}{18} = \frac{2 \cdot 6}{3 \cdot 6} = \frac{2}{3}$$<p class="svar"><b>Svar:</b> $\dfrac{2}{3}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">11</span> $\dfrac{35}{49}$</p><p>Både 35 och 49 finns i sjuans tabell:</p>$$\frac{35}{49} = \frac{5 \cdot 7}{7 \cdot 7} = \frac{5}{7}$$<p class="svar"><b>Svar:</b> $\dfrac{5}{7}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">12</span> $\dfrac{36}{48}$</p><p>Den största gemensamma faktorn är 12:</p>$$\frac{36}{48} = \frac{3 \cdot 12}{4 \cdot 12} = \frac{3}{4}$$<p>Förkortar du med en mindre faktor, till exempel 2, får du förkorta flera gånger och kommer till samma svar.</p><p class="svar"><b>Svar:</b> $\dfrac{3}{4}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">13</span> $\dfrac{2}{7} + \dfrac{3}{7}$</p><p>Samma nämnare: täljarna adderas och nämnaren står kvar.</p>$$\frac{2}{7} + \frac{3}{7} = \frac{2 + 3}{7} = \frac{5}{7}$$<p class="svar"><b>Svar:</b> $\dfrac{5}{7}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">14</span> $\dfrac{5}{6} - \dfrac{1}{6}$</p>$$\frac{5}{6} - \frac{1}{6} = \frac{4}{6} = \frac{2}{3}$$<p>Bråket förkortas med 2 på slutet.</p><p class="svar"><b>Svar:</b> $\dfrac{2}{3}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">15</span> $\dfrac{1}{2} + \dfrac{1}{3}$</p><p>Olika nämnare. Båda bråken kan skrivas med nämnaren 6:</p>$$\frac{1 \cdot 3}{2 \cdot 3} + \frac{1 \cdot 2}{3 \cdot 2} = \frac{3}{6} + \frac{2}{6} = \frac{5}{6}$$<p class="svar"><b>Svar:</b> $\dfrac{5}{6}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">16</span> $\dfrac{3}{4} - \dfrac{2}{5}$</p><p>Gemensam nämnare är $4 \cdot 5 = 20$:</p>$$\frac{3 \cdot 5}{4 \cdot 5} - \frac{2 \cdot 4}{5 \cdot 4} = \frac{15}{20} - \frac{8}{20} = \frac{7}{20}$$<p class="svar"><b>Svar:</b> $\dfrac{7}{20}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">17</span> $\dfrac{2}{3} \cdot \dfrac{4}{5}$</p><p>Täljare gånger täljare och nämnare gånger nämnare:</p>$$\frac{2}{3} \cdot \frac{4}{5} = \frac{2 \cdot 4}{3 \cdot 5} = \frac{8}{15}$$<p class="svar"><b>Svar:</b> $\dfrac{8}{15}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">18</span> $3 \cdot \dfrac{5}{6}$</p><p>Bara täljaren multipliceras med 3:</p>$$3 \cdot \frac{5}{6} = \frac{3 \cdot 5}{6} = \frac{15}{6} = \frac{5}{2}$$<p>Bråket förkortas med 3 på slutet.</p><p class="svar"><b>Svar:</b> $\dfrac{5}{2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">19</span> $\dfrac{3}{4} \Big/ \dfrac{2}{5}$</p><p>Att dividera med ett bråk är att multiplicera med det inverterade bråket:</p>$$\frac{3}{4} \Big/ \frac{2}{5} = \frac{3}{4} \cdot \frac{5}{2} = \frac{15}{8}$$<p class="svar"><b>Svar:</b> $\dfrac{15}{8}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">20</span> $\dfrac{2}{3} \Big/ 4$</p><p>Talet 4 är $\dfrac{4}{1}$, och inverterat blir det $\dfrac{1}{4}$:</p>$$\frac{2}{3} \Big/ 4 = \frac{2}{3} \cdot \frac{1}{4} = \frac{2}{12} = \frac{1}{6}$$<p class="svar"><b>Svar:</b> $\dfrac{1}{6}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">21</span> Hur mycket är $\dfrac{3}{4}$ av 60&nbsp;kr?</p><p>En bråkdel av något beräknas genom att multiplicera med bråkdelen:</p>$$\frac{3}{4} \cdot 60 = \frac{3 \cdot 60}{4} = \frac{180}{4} = 45$$<p class="svar"><b>Svar:</b> 45 kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">22</span></p><p class="del">a)</p><p>Tiondelssiffran är 3. Siffran efter den är 8, som är 5 eller mer, så vi avrundar uppåt.</p>$$47{,}386 \approx 47{,}4$$<p class="svar"><b>Svar:</b> 47,4</p><p class="del">b)</p><p>Entalssiffran är 7. Siffran efter den är 3, som är mindre än 5, så vi avrundar nedåt.</p>$$47{,}386 \approx 47$$<p class="svar"><b>Svar:</b> 47</p><p class="del">c)</p><p>De fyra första siffrorna är 4, 7, 3 och 8. Siffran efter är 6, så åttan avrundas uppåt till en nia.</p>$$47{,}386 \approx 47{,}39$$<p class="svar"><b>Svar:</b> 47,39</p></div>
+      <div class="sol"><p class="solh"><span class="nr">23</span></p><p>Arean av en rektangel är längden gånger bredden:</p>$$A = 4{,}2 \cdot 3{,}15 = 13{,}23$$<p>Vid multiplikation avgör talet med minst antal värdesiffror. 4,2 har två värdesiffror och 3,15 har tre, så svaret ska ha två.</p>$$13{,}23\ \mathrm{m^2} \approx 13\ \mathrm{m^2}$$<p class="svar"><b>Svar:</b> 13&nbsp;m<sup>2</sup></p></div>
+      <div class="sol"><p class="solh"><span class="nr">24</span></p>$$2{,}48 - 1{,}6 = 0{,}88$$<p>Vid subtraktion avgör talet med minst antal decimaler. 1,6 har en decimal, så svaret ska ha en decimal.</p>$$0{,}88\ \mathrm{m} \approx 0{,}9\ \mathrm{m}$$<p class="svar"><b>Svar:</b> 0,9&nbsp;m</p></div>
+      <div class="sol"><p class="solh"><span class="nr">25</span> $2^5$</p>$$2^5 = 2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 = 32$$<p class="svar"><b>Svar:</b> 32</p></div>
+      <div class="sol"><p class="solh"><span class="nr">26</span> $(-3)^2$</p><p>Parentesen gör hela $-3$ till bas:</p>$$(-3)^2 = (-3) \cdot (-3) = 9$$<p class="svar"><b>Svar:</b> 9</p></div>
+      <div class="sol"><p class="solh"><span class="nr">27</span> $-3^2$</p><p>Utan parentes är basen bara 3. Minustecknet står utanför potensen:</p>$$-3^2 = -(3 \cdot 3) = -9$$<p class="svar"><b>Svar:</b> $-9$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">28</span> $10^{-2}$</p><p>Negativ exponent betyder 1 delat med potensen:</p>$$10^{-2} = \frac{1}{10^2} = \frac{1}{100} = 0{,}01$$<p class="svar"><b>Svar:</b> 0,01</p></div>
+      <div class="sol"><p class="solh"><span class="nr">29</span> $5^0$</p><p>Varje tal utom 0 upphöjt till 0 är 1, inte 0:</p>$$5^0 = 1$$<p class="svar"><b>Svar:</b> 1</p></div>
+      <div class="sol"><p class="solh"><span class="nr">30</span> $4^{-1}$</p>$$4^{-1} = \frac{1}{4^1} = \frac{1}{4}$$<p class="svar"><b>Svar:</b> $\dfrac{1}{4}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">31</span> $3^4 \cdot 3^5$</p><p>Samma bas: exponenterna adderas.</p>$$3^4 \cdot 3^5 = 3^{4+5} = 3^9$$<p class="svar"><b>Svar:</b> $3^9$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">32</span> $\dfrac{7^8}{7^3}$</p><p>Samma bas: nämnarens exponent dras ifrån täljarens.</p>$$\frac{7^8}{7^3} = 7^{8-3} = 7^5$$<p class="svar"><b>Svar:</b> $7^5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">33</span> $(2^3)^4$</p><p>En potens upphöjd till en exponent: exponenterna multipliceras.</p>$$(2^3)^4 = 2^{3 \cdot 4} = 2^{12}$$<p class="svar"><b>Svar:</b> $2^{12}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">34</span> $x^2 \cdot x^6$</p>$$x^2 \cdot x^6 = x^{2+6} = x^8$$<p class="svar"><b>Svar:</b> $x^8$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">35</span> $743\,000$</p><p>Talet framför tiopotensen ska ligga mellan 1 och 10. Decimaltecknet flyttas 5 steg åt vänster:</p>$$743\,000 = 7{,}43 \cdot 100\,000 = 7{,}43 \cdot 10^5$$<p class="svar"><b>Svar:</b> $7{,}43 \cdot 10^5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">36</span> $8\,000\,000\,000$</p><p>Nio nollor ger exponenten 9:</p>$$8\,000\,000\,000 = 8 \cdot 10^9$$<p class="svar"><b>Svar:</b> $8 \cdot 10^9$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">37</span> $0{,}0009$</p><p>Decimaltecknet flyttas 4 steg åt höger, så exponenten blir $-4$:</p>$$0{,}0009 = \frac{9}{10\,000} = 9 \cdot 10^{-4}$$<p class="svar"><b>Svar:</b> $9 \cdot 10^{-4}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">38</span> $0{,}000\,024$</p><p>Decimaltecknet flyttas 5 steg åt höger:</p>$$0{,}000\,024 = \frac{2{,}4}{100\,000} = 2{,}4 \cdot 10^{-5}$$<p class="svar"><b>Svar:</b> $2{,}4 \cdot 10^{-5}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">39</span> 5&nbsp;MHz</p><p>M (mega) betyder $10^6$:</p>$$5\ \mathrm{MHz} = 5 \cdot 10^6\ \mathrm{Hz}$$<p class="svar"><b>Svar:</b> $5 \cdot 10^6$&nbsp;Hz</p></div>
+      <div class="sol"><p class="solh"><span class="nr">40</span> 3,2&nbsp;km</p><p>k (kilo) betyder $10^3$:</p>$$3{,}2\ \mathrm{km} = 3{,}2 \cdot 10^3\ \mathrm{m}$$<p class="svar"><b>Svar:</b> $3{,}2 \cdot 10^3$&nbsp;m</p></div>
+      <div class="sol"><p class="solh"><span class="nr">41</span> 45&nbsp;mg</p><p>m (milli) betyder $10^{-3}$:</p>$$45\ \mathrm{mg} = 45 \cdot 10^{-3}\ \mathrm{g}$$<p>Talet 45 ligger inte mellan 1 och 10. Vi skriver $45 = 4{,}5 \cdot 10^1$ och adderar exponenterna:</p>$$4{,}5 \cdot 10^{1} \cdot 10^{-3}\ \mathrm{g} = 4{,}5 \cdot 10^{-2}\ \mathrm{g}$$<p class="svar"><b>Svar:</b> $4{,}5 \cdot 10^{-2}$&nbsp;g</p></div>
+      <div class="sol"><p class="solh"><span class="nr">42</span> 7&nbsp;µs</p><p>µ (mikro) betyder $10^{-6}$, så 7&nbsp;µs är $7 \cdot 10^{-6}$&nbsp;s.</p><p class="svar"><b>Svar:</b> $7 \cdot 10^{-6}$&nbsp;s</p></div>
+      <div class="sol"><p class="solh"><span class="nr">43</span> $5 \cdot (3 + 6)$</p><p>Parentesen först:</p>$$5 \cdot (3 + 6) = 5 \cdot 9 = 45$$<p class="svar"><b>Svar:</b> 45</p></div>
+      <div class="sol"><p class="solh"><span class="nr">44</span> $20 - 4 \cdot 3$</p><p>Multiplikation före subtraktion:</p>$$20 - 4 \cdot 3 = 20 - 12 = 8$$<p class="svar"><b>Svar:</b> 8</p></div>
+      <div class="sol"><p class="solh"><span class="nr">45</span> $7 \cdot 4 - (9 - 5)^2$</p><p>Parentesen först, sedan potensen, sedan multiplikationen och sist subtraktionen:</p>$$7 \cdot 4 - (9 - 5)^2 = 7 \cdot 4 - 4^2 = 28 - 16 = 12$$<p class="svar"><b>Svar:</b> 12</p></div>
+      <div class="sol"><p class="solh"><span class="nr">46</span> $2 + 3^2 \cdot 2$</p><p>Potensen först, sedan multiplikationen och sist additionen:</p>$$2 + 3^2 \cdot 2 = 2 + 9 \cdot 2 = 2 + 18 = 20$$<p class="svar"><b>Svar:</b> 20</p></div>
+      <div class="sol"><p class="solh"><span class="nr">47</span> $\dfrac{18}{5 - 2}$</p><p>Nämnaren räknas ut först, som om den stod inom parentes:</p>$$\frac{18}{5 - 2} = \frac{18}{3} = 6$$<p class="svar"><b>Svar:</b> 6</p></div>
+      <div class="sol"><p class="solh"><span class="nr">48</span> $\dfrac{4 + 8}{2 \cdot 3}$</p><p>Täljare och nämnare räknas ut var för sig innan divisionen:</p>$$\frac{4 + 8}{2 \cdot 3} = \frac{12}{6} = 2$$<p class="svar"><b>Svar:</b> 2</p></div>
+    </div>
+    <h3 class="losniva">Mellan</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">49</span> $(-2)^3 - (-3)^2$</p><p>Potenserna först:</p>$$(-2)^3 = (-2) \cdot (-2) \cdot (-2) = -8$$$$(-3)^2 = (-3) \cdot (-3) = 9$$$$(-2)^3 - (-3)^2 = -8 - 9 = -17$$<p class="svar"><b>Svar:</b> $-17$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">50</span> $\dfrac{2}{3} + \dfrac{5}{6} \cdot \dfrac{4}{5}$</p><p>Multiplikation före addition:</p>$$\frac{5}{6} \cdot \frac{4}{5} = \frac{20}{30} = \frac{2}{3}$$<p>Sedan additionen:</p>$$\frac{2}{3} + \frac{2}{3} = \frac{4}{3}$$<p class="svar"><b>Svar:</b> $\dfrac{4}{3}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">51</span> $\left(\dfrac{1}{2} + \dfrac{1}{4}\right) \Big/ \dfrac{3}{8}$</p><p>Parentesen först, med nämnaren 4:</p>$$\frac{1}{2} + \frac{1}{4} = \frac{2}{4} + \frac{1}{4} = \frac{3}{4}$$<p>Sedan divisionen, som blir multiplikation med det inverterade bråket:</p>$$\frac{3}{4} \Big/ \frac{3}{8} = \frac{3}{4} \cdot \frac{8}{3} = \frac{24}{12} = 2$$<p class="svar"><b>Svar:</b> 2</p></div>
+      <div class="sol"><p class="solh"><span class="nr">52</span> $\dfrac{3^4 \cdot 3^{-2}}{3^3}$</p><p>Täljaren först, sedan divisionen:</p>$$\frac{3^4 \cdot 3^{-2}}{3^3} = \frac{3^{4 + (-2)}}{3^3} = \frac{3^2}{3^3}$$$$\frac{3^2}{3^3} = 3^{2-3} = 3^{-1} = \frac{1}{3}$$<p class="svar"><b>Svar:</b> $\dfrac{1}{3}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">53</span> $(3 \cdot 10^4) \cdot (2 \cdot 10^{-6})$</p><p>Talen för sig och tiopotenserna för sig:</p>$$3 \cdot 2 \cdot 10^{4 + (-6)} = 6 \cdot 10^{-2}$$<p class="svar"><b>Svar:</b> $6 \cdot 10^{-2}$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">54</span> $\dfrac{8 \cdot 10^9}{4 \cdot 10^3}$</p>$$\frac{8 \cdot 10^9}{4 \cdot 10^3} = \frac{8}{4} \cdot 10^{9-3} = 2 \cdot 10^6$$<p class="svar"><b>Svar:</b> $2 \cdot 10^6$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">55</span> $2^x \cdot 2^3 = 2^{10}$</p><p>Vänsterledet skrivs som en enda potens:</p>$$2^{x+3} = 2^{10}$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$x + 3 = 10$$$$x + 3 \mathbin{\boldsymbol{-}} \boldsymbol{3} = 10 \mathbin{\boldsymbol{-}} \boldsymbol{3}$$$$x = 7$$<p class="kontroll"><i>Kontroll:</i> $2^7 \cdot 2^3 = 2^{10}$.</p><p class="svar"><b>Svar:</b> $x = 7$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">56</span> $\dfrac{5^x}{5^2} = 5^6$</p><p>Vänsterledet skrivs som en enda potens:</p>$$5^{x-2} = 5^6$$<p>Båda led är nu potenser med samma bas. Då måste exponenterna vara lika:</p>$$x - 2 = 6$$$$x - 2 \mathbin{\boldsymbol{+}} \boldsymbol{2} = 6 \mathbin{\boldsymbol{+}} \boldsymbol{2}$$$$x = 8$$<p class="svar"><b>Svar:</b> $x = 8$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">57</span></p><p>En bråkdel av något beräknas genom att multiplicera med bråkdelen. Lisa har läst</p>$$\frac{3}{8} \cdot 320 = \frac{3 \cdot 320}{8} = \frac{960}{8} = 120$$<p>sidor. Kvar att läsa är</p>$$320 - 120 = 200$$<p class="svar"><b>Svar:</b> 200 sidor</p></div>
+      <div class="sol"><p class="solh"><span class="nr">58</span></p><p>Medelhastighet är sträcka delat med tid:</p>$$\text{medelhastighet} = \frac{\text{sträcka}}{\text{tid}}$$$$\frac{154\ \mathrm{km}}{1{,}75\ \mathrm{h}} = 88\ \mathrm{km/h}$$<p>Vid division avgör talet med minst antal värdesiffror. Både 154 och 1,75 har tre värdesiffror, så svaret ska också ha tre. Då måste nollan skrivas ut: 88,0&nbsp;km/h.</p><p class="svar"><b>Svar:</b> 88,0&nbsp;km/h</p></div>
+      <div class="sol"><p class="solh"><span class="nr">59</span></p><p>G (giga) betyder $10^9$ och M (mega) betyder $10^6$. Antalet bilder är kortets storlek delat med en bilds storlek:</p>$$\frac{64 \cdot 10^9\ \mathrm{B}}{4 \cdot 10^6\ \mathrm{B}} = \frac{64}{4} \cdot 10^{9-6} = 16 \cdot 10^3 = 16\,000$$<p class="svar"><b>Svar:</b> 16&nbsp;000 bilder</p></div>
+      <div class="sol"><p class="solh"><span class="nr">60</span></p><p>Vi skriver bråken med samma nämnare, $8 \cdot 11 = 88$:</p>$$\frac{5}{8} = \frac{5 \cdot 11}{8 \cdot 11} = \frac{55}{88} \qquad \frac{7}{11} = \frac{7 \cdot 8}{11 \cdot 8} = \frac{56}{88}$$<p>Med samma nämnare är det bråk störst som har störst täljare.</p><p class="svar"><b>Svar:</b> $\dfrac{7}{11}$ är störst.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">61</span></p><p><b>Första felet:</b> utan parentes är basen bara 4, och minustecknet står utanför potensen:</p>$$-4^2 = -(4 \cdot 4) = -16$$<p><b>Andra felet:</b> bråk adderas inte genom att täljarna och nämnarna adderas var för sig. Bråken måste först få samma nämnare:</p>$$\frac{1}{2} + \frac{1}{3} = \frac{3}{6} + \frac{2}{6} = \frac{5}{6}$$<p class="svar"><b>Svar:</b> $-4^2 = -16$ och $\dfrac{1}{2} + \dfrac{1}{3} = \dfrac{5}{6}$</p></div>
+    </div>
+  </section>
+  <footer><span>Matematik nivå 1b · Aritmetik</span><span>fysiklabbet.se</span></footer>
+</section>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

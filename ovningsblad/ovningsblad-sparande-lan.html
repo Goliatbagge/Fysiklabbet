@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Övningsblad: Sparande, lån och ränta — Fysiklabbet</title>
+<meta name="description" content="25 uppgifter på grundnivå om sparande, lån och ränta i Matematik nivå 1b och 1c: ränta och behållning, kalkylblad, rak amortering och vad en inbetalning består av. Med svar och lösningsförslag. Utskriftsklart.">
+<link rel="canonical" href="https://fysiklabbet.se/ovningsblad/ovningsblad-sparande-lan.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  renderMathInElement(document.body, {
+    delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
+    ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'svg'],
+    throwOnError: false
+  });
+  document.documentElement.setAttribute('data-katex', 'klar');
+});
+</script>
+<style>
+:root { --ink:#1f2530; --paper:#f7f2e8; --line:rgba(31,37,48,.22); --teal:#0d9488; }
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin:0; font-family:'Poppins', system-ui, sans-serif; color:var(--ink); background:#fff; font-size:11pt; line-height:1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { max-width: 186mm; margin: 0 auto; padding: 10mm 6mm 20mm; }
+header { border-bottom: 2px solid var(--ink); padding-bottom: 6px; margin-bottom: 12px; }
+.over { font-size: 9.5pt; text-transform: uppercase; letter-spacing: .06em; color:#5b6472; margin:0; }
+h1 { font-size: 20pt; margin: 2px 0 0; line-height:1.2; }
+.under { margin: 2px 0 0; font-size: 11pt; color:#3b4350; }
+.namn { display:flex; gap: 28px; margin-top: 8px; font-size: 10pt; color:#3b4350; }
+.namn span { flex:1; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.box { background: var(--paper); border: 1px solid rgba(31,37,48,.18); border-radius: 8px; padding: 8px 14px; margin: 0 0 10px; break-inside: avoid; }
+.box p { margin: 3px 0; }
+.boxgrid { display:grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
+.box ul { margin: 2px 0 2px 16px; padding: 0; }
+.box li { margin: 1px 0; }
+.box .katex-display { margin: 2px 0 3px; text-align:left; }
+.box .katex-display > .katex { text-align:left; }
+.rub { font-weight: 600; }
+.nw { white-space: nowrap; }
+.nivaer { font-size: 9.5pt; color:#3b4350; margin: 0 0 6px; }
+.niva { margin-bottom: 6px; }
+h2 { display:flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; font-size: 13pt; margin: 14px 0 4px; padding: 3px 0; border-bottom: 1.4px solid var(--ink); break-after: avoid; }
+h2 .nivanamn { color: var(--teal); }
+h2 .sv { font-weight: 400; font-size: 9pt; color:#5b6472; }
+.instr { font-weight: 600; margin: 8px 0 3px; break-after: avoid; }
+.tasks { display: grid; gap: 4px 14px; }
+.c1 { grid-template-columns: 1fr; } .c2 { grid-template-columns: repeat(2, 1fr); }
+.c3 { grid-template-columns: repeat(3, 1fr); } .c4 { grid-template-columns: repeat(4, 1fr); }
+.task { break-inside: avoid; padding: 4px 4px 0; border-bottom: 1px dotted var(--line); display:flex; gap: 6px; align-items: baseline; }
+.task .nr { font-weight: 600; min-width: 1.7em; text-align:right; font-size: 10pt; }
+.task .eq { flex:1; min-width: 0; }
+.task:has(.fig), .task:has(table) { align-items: flex-start; }
+.task .katex, .sol p .katex, .svarlista .katex, .box p .katex, .box li .katex { white-space: nowrap; }
+.kort { min-height: 16mm; } .mellan { min-height: 30mm; } .hog { min-height: 44mm; }
+.fig { margin: 6px 0 4px; }
+.fig svg { display:block; max-width: 100%; height: auto; margin: 0 auto; }
+.delfig { break-after: avoid; break-inside: avoid; }
+.sol .fig svg { max-width: 62mm; }
+code { font-family: 'JetBrains Mono', Consolas, monospace; font-size: .92em; background: rgba(31,37,48,.06); padding: 0 3px; border-radius: 3px; white-space: nowrap; }
+table { border-collapse: collapse; margin: 5px 0; font-size: 10pt; }
+table th, table td { border: 1px solid rgba(31,37,48,.45); padding: 2px 8px; text-align: center; }
+table th { background: var(--paper); font-weight: 600; }
+.vt td { min-width: 12mm; height: 7mm; }
+.box .vt td { height: auto; min-width: 0; }
+.kalk { margin: 4px auto 6px; font-size: 9.5pt; }
+.kalk th { background: #e9e6df; color:#3b4350; font-weight: 500; min-width: 8mm; }
+.kalk td { min-width: 22mm; height: 6.5mm; text-align: left; }
+.fyll { width: 100%; font-size: 9.5pt; }
+.fyll td { height: 9mm; }
+.fyll.los-tab { font-size: 8.8pt; }
+.fyll.los-tab td { height: auto; padding: 1px 4px; }
+.fyll.los-tab th { padding: 1px 4px; }
+.facit { break-before: page; page-break-before: always; }
+.facit h2 { font-size: 14pt; }
+.svarniva, .losniva { font-size: 11pt; margin: 8px 0 3px; color: var(--teal); break-after: avoid; }
+.svarlista { display:grid; grid-template-columns: repeat(4, 1fr); gap: 2px 12px; font-size: 9.8pt; margin-bottom: 6px; }
+.svarlista div { display:flex; gap: 6px; align-items: center; min-height: 9mm; }
+.svarlista div.lang { grid-column: span 2; }
+.svarlista .nr { font-weight: 600; min-width: 1.7em; text-align:right; }
+.los { columns: 2; column-gap: 10mm; font-size: 9.8pt; }
+.sol { break-inside: avoid; page-break-inside: avoid; margin: 0 0 8px; padding: 0 0 5px; border-bottom: 1px dotted var(--line); }
+.sol .solh { font-weight: 600; margin: 0 0 1px; }
+.sol .solh .nr { margin-right: 4px; }
+.sol p { margin: 2px 0; }
+.sol .del { font-weight: 700; margin: 5px 0 1px; }
+.sol .katex-display { margin: 2px 0 3px; text-align: left; padding-left: 3mm; overflow-x: auto; overflow-y: hidden; padding-bottom: 2px; }
+.sol .katex-display > .katex { text-align: left; }
+.sol .svar { margin: 3px 0 0; }
+footer { margin-top: 18px; font-size: 9pt; color:#5b6472; border-top: 1px solid var(--line); padding-top: 6px; display:flex; justify-content: space-between; }
+@page { size: A4; margin: 13mm 12mm 14mm; }
+@media print {
+  body { font-size: 10.5pt; }
+  .page { max-width: none; padding: 0; }
+}
+@media (max-width: 640px) {
+  .c3, .c4 { grid-template-columns: repeat(2, 1fr); }
+  .c2, .c3:has(.hog) { grid-template-columns: 1fr; }
+  .boxgrid { grid-template-columns: 1fr; }
+  .svarlista { grid-template-columns: repeat(2, 1fr); }
+  .los { columns: 1; }
+  .sol .katex-display { padding-left: 0; }
+  .fyll th { font-size: 8pt; padding: 2px 3px; }
+  .kalk { font-size: 8.5pt; }
+  .kalk td { min-width: 0; padding: 2px 4px; }
+  .kalk th { min-width: 0; padding: 2px 4px; }
+  .delfig { overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<section class="page">
+  <header>
+    <p class="over">Matematik nivå 1b och 1c · Övningsblad · Grund</p>
+    <h1>Sparande, lån och ränta</h1>
+    <p class="under">Ränta och behållning, kalkylblad, rak amortering och vad en inbetalning består av</p>
+    <div class="namn"><span>Namn:</span><span>Klass:</span></div>
+  </header>
+  <div class="box boxgrid">
+    <div>
+      <p class="rub">Kom ihåg: sparande</p>
+      <ul>
+        <li><b>Årsränta</b>: hur många procent pengarna växer på ett år. Står det bara "ränta" menas årsränta.</li>
+        <li><b>Behållning</b>: beloppet som finns på kontot.</li>
+        <li>Insatt belopp $K$ i $n$ år: behållning $= K \cdot$ förändringsfaktorn$^{\,n}$.</li>
+        <li>En formel i ett kalkylblad inleds med $=$. Dollartecken låser en cell när formeln dras nedåt: <code>=B2*$D$2</code>.</li>
+      </ul>
+      <p class="rub">Kom ihåg: lån</p>
+      <ul>
+        <li><b>Amortering</b>: att betala tillbaka själva lånet. <b>Ränta</b>: kostnaden för att låna.</li>
+        <li><b>Rak amortering</b>: samma amortering varje gång, $\dfrac{\text{lånet}}{\text{antal inbetalningar}}$.</li>
+        <li>Inbetalning $=$ amortering $+$ ränta. Räntan räknas på den skuld som är kvar.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="rub">Exempel: lån på 150&nbsp;000&nbsp;kr, rak amortering varje månad i 5 år, årsränta 4,8&nbsp;%</p>
+      <p>Antal inbetalningar: $5 \cdot 12 = 60$. Amortering varje månad:</p>
+      $$\frac{150\,000\ \mathrm{kr}}{60} = 2\,500\ \mathrm{kr}$$
+      <p>Ränta för ett år på hela skulden, och för en månad:</p>
+      $$0{,}048 \cdot 150\,000\ \mathrm{kr} = 7\,200\ \mathrm{kr}$$
+      $$\frac{7\,200\ \mathrm{kr}}{12} = 600\ \mathrm{kr}$$
+      <p>Första inbetalningen är amortering plus ränta:</p>
+      $$2\,500\ \mathrm{kr} + 600\ \mathrm{kr} = 3\,100\ \mathrm{kr}$$
+    </div>
+  </div>
+  <p class="nivaer">Bladet är på <b>grundnivå</b>: uppgifterna tränar avsnittets metoder en i taget, och de sista uppgifterna i varje del är i text. Räknare får användas. Svar och lösningsförslag finns efter uppgifterna.</p>
+
+  <section class="niva">
+    <h2><span class="nivanamn">Sparande</span><span class="sv">Uppgift 1–15 · Ränta, behållning, kalkylblad och årligt sparande</span></h2>
+    <p class="instr">Beräkna.</p>
+    <div class="tasks c2">
+      <div class="task kort"><span class="nr">1</span><span class="eq txt">Du har 8&nbsp;000&nbsp;kr på ett konto med årsräntan 2&nbsp;%. Hur mycket ränta får du på ett år?</span></div>
+      <div class="task kort"><span class="nr">2</span><span class="eq txt">Du har 25&nbsp;000&nbsp;kr på ett konto med årsräntan 3,5&nbsp;%. Hur mycket ränta får du på ett år?</span></div>
+      <div class="task kort"><span class="nr">3</span><span class="eq txt">Du sätter in 12&nbsp;000&nbsp;kr på ett konto med årsräntan 1,5&nbsp;%. Hur stor är behållningen efter ett år?</span></div>
+      <div class="task kort"><span class="nr">4</span><span class="eq txt">Du sätter in 40&nbsp;000&nbsp;kr på ett konto med årsräntan 4&nbsp;%. Hur stor är behållningen efter ett år?</span></div>
+    </div>
+    <p class="instr">Pengarna står kvar på kontot och inga pengar tas ut. Avrunda till hela kronor.</p>
+    <div class="tasks c2">
+      <div class="task mellan"><span class="nr">5</span><span class="eq txt">10&nbsp;000&nbsp;kr sätts in med årsräntan 2&nbsp;%. Hur stor är behållningen efter 3 år?</span></div>
+      <div class="task mellan"><span class="nr">6</span><span class="eq txt">20&nbsp;000&nbsp;kr sätts in med årsräntan 4,5&nbsp;%. Hur stor är behållningen efter 8 år?</span></div>
+      <div class="task mellan"><span class="nr">7</span><span class="eq txt">När ett barn föds sätter föräldrarna in 5&nbsp;000&nbsp;kr på ett konto med årsräntan 2,5&nbsp;%. Hur mycket finns på kontot när barnet fyller 18 år?</span></div>
+      <div class="task mellan"><span class="nr">8</span><span class="eq txt">50&nbsp;000&nbsp;kr sätts in med årsräntan 3&nbsp;%.<br>a) Hur stor är behållningen efter 10 år?<br>b) Hur mycket ränta har pengarna gett totalt under de 10 åren?</span></div>
+    </div>
+    <p class="instr">Kalkylbladet nedan ska visa behållningen på ett sparkonto. I cell B2 står insättningen och i cell D2 förändringsfaktorn.</p>
+    <div class="fig delfig"><table class="kalk"><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr><tr><th>1</th><td>År</td><td>Behållning (kr)</td><td></td><td>Förändringsfaktor</td></tr><tr><th>2</th><td>0</td><td>15000</td><td></td><td>1,02</td></tr><tr><th>3</th><td>1</td><td></td><td></td><td></td></tr><tr><th>4</th><td>2</td><td></td><td></td><td></td></tr><tr><th>5</th><td>3</td><td></td><td></td><td></td></tr><tr><th>6</th><td>4</td><td></td><td></td><td></td></tr><tr><th>7</th><td>5</td><td></td><td></td><td></td></tr></table></div>
+    <div class="tasks c2">
+      <div class="task mellan"><span class="nr">9</span><span class="eq txt">Hur stor är räntan på kontot?</span></div>
+      <div class="task mellan"><span class="nr">10</span><span class="eq txt">Vilket år står i cell A5?</span></div>
+      <div class="task mellan"><span class="nr">11</span><span class="eq txt">Vilken formel ska stå i cell B3 för att visa behållningen efter ett år?</span></div>
+      <div class="task mellan"><span class="nr">12</span><span class="eq txt">Formeln i B3 ska dras nedåt med fyllnadshandtaget till B7. Hur ska den då skrivas? Förklara varför.</span></div>
+      <div class="task mellan"><span class="nr">13</span><span class="eq txt">Vilka värden visas i cellerna B3 och B4?</span></div>
+    </div>
+    <p class="instr">Årligt sparande.</p>
+    <div class="tasks c2">
+      <div class="task hog"><span class="nr">14</span><span class="eq txt">Du sätter in 2&nbsp;000&nbsp;kr i slutet av varje år på ett konto med årsräntan 3&nbsp;%. I ett kalkylblad står behållningen efter den första insättningen i cell B2. Vilken formel ska stå i cell B3?</span></div>
+      <div class="task hog"><span class="nr">15</span><span class="eq txt">Du sätter in 2&nbsp;000&nbsp;kr i slutet av varje år på ett konto med årsräntan 3&nbsp;%. Hur stor är behållningen direkt efter den tredje insättningen?</span></div>
+    </div>
+  </section>
+
+  <section class="niva">
+    <h2><span class="nivanamn">Lån</span><span class="sv">Uppgift 16–25 · Rak amortering, ränta per år, månad och kvartal</span></h2>
+    <p class="instr">Beräkna.</p>
+    <div class="tasks c2">
+      <div class="task kort"><span class="nr">16</span><span class="eq txt">Ett lån på 60&nbsp;000&nbsp;kr betalas tillbaka med rak amortering en gång per år i 5 år. Hur stor är amorteringen varje år?</span></div>
+      <div class="task kort"><span class="nr">17</span><span class="eq txt">Ett lån på 36&nbsp;000&nbsp;kr betalas tillbaka med rak amortering varje månad i 3 år. Hur stor är amorteringen varje månad?</span></div>
+      <div class="task kort"><span class="nr">18</span><span class="eq txt">Skulden är 80&nbsp;000&nbsp;kr och räntesatsen är 6&nbsp;%. Hur stor är räntan för ett år?</span></div>
+      <div class="task kort"><span class="nr">19</span><span class="eq txt">Skulden är 80&nbsp;000&nbsp;kr och räntesatsen är 6&nbsp;%. Hur stor är räntan för en månad?</span></div>
+      <div class="task kort"><span class="nr">20</span><span class="eq txt">Skulden är 120&nbsp;000&nbsp;kr och räntesatsen är 4,5&nbsp;%. Hur stor är räntan för en månad?</span></div>
+      <div class="task kort"><span class="nr">21</span><span class="eq txt">Skulden är 30&nbsp;000&nbsp;kr och räntesatsen är 8&nbsp;%. Hur stor är räntan för ett kvartal? Ett kvartal är tre månader.</span></div>
+    </div>
+    <p class="instr">Lös uppgifterna.</p>
+    <div class="tasks c1">
+      <div class="task hog"><span class="nr">22</span><span class="eq txt">Noah lånar 48&nbsp;000&nbsp;kr till en begagnad bil. Lånet betalas tillbaka med rak amortering varje månad i 2 år, och årsräntan är 6&nbsp;%.<br>a) Hur stor är amorteringen varje månad?<br>b) Hur mycket ränta betalar Noah den första månaden?<br>c) Hur mycket betalar Noah totalt vid den första inbetalningen?<br>d) Hur mycket betalar Noah vid den andra inbetalningen?</span></div>
+      <div class="task hog"><span class="nr">23</span><span class="eq txt">Elsa lånar 20&nbsp;000&nbsp;kr. Lånet betalas tillbaka med rak amortering en gång per år i 4 år, och räntan är 5&nbsp;%.<br>a) Fyll i tabellen.<br>b) Hur mycket betalar Elsa i ränta totalt?<table class="fyll"><tr><th>År</th><th>Skuld före inbetalningen (kr)</th><th>Ränta (kr)</th><th>Amortering (kr)</th><th>Inbetalning (kr)</th></tr><tr><td>1</td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td></tr></table></span></div>
+    </div>
+    <p class="instr">Förklara.</p>
+    <div class="tasks c2">
+      <div class="task mellan"><span class="nr">24</span><span class="eq txt">Vad är skillnaden mellan amortering och ränta?</span></div>
+      <div class="task mellan"><span class="nr">25</span><span class="eq txt">Varför blir inbetalningarna mindre för varje gång när ett lån betalas med rak amortering?</span></div>
+    </div>
+  </section>
+  <section class="facit">
+    <h2><span>Svar</span></h2>
+
+    <h3 class="svarniva">Sparande</h3>
+    <div class="svarlista"><div><span class="nr">1</span><span>160&nbsp;kr</span></div><div><span class="nr">2</span><span>875&nbsp;kr</span></div><div><span class="nr">3</span><span>12&nbsp;180&nbsp;kr</span></div><div><span class="nr">4</span><span>41&nbsp;600&nbsp;kr</span></div><div><span class="nr">5</span><span>10&nbsp;612&nbsp;kr</span></div><div><span class="nr">6</span><span>28&nbsp;442&nbsp;kr</span></div><div><span class="nr">7</span><span>7&nbsp;798&nbsp;kr</span></div><div class="lang"><span class="nr">8</span><span>a) 67&nbsp;196&nbsp;kr&emsp;b) 17&nbsp;196&nbsp;kr</span></div><div><span class="nr">9</span><span>2&nbsp;%</span></div><div><span class="nr">10</span><span>3</span></div><div><span class="nr">11</span><span><code>=B2*D2</code></span></div><div><span class="nr">12</span><span><code>=B2*$D$2</code></span></div><div><span class="nr">13</span><span>15&nbsp;300 och 15&nbsp;606</span></div><div><span class="nr">14</span><span><code>=B2*1,03+2000</code></span></div><div><span class="nr">15</span><span>6&nbsp;181,80&nbsp;kr</span></div></div>
+    <h3 class="svarniva">Lån</h3>
+    <div class="svarlista"><div><span class="nr">16</span><span>12&nbsp;000&nbsp;kr</span></div><div><span class="nr">17</span><span>1&nbsp;000&nbsp;kr</span></div><div><span class="nr">18</span><span>4&nbsp;800&nbsp;kr</span></div><div><span class="nr">19</span><span>400&nbsp;kr</span></div><div><span class="nr">20</span><span>450&nbsp;kr</span></div><div><span class="nr">21</span><span>600&nbsp;kr</span></div><div class="lang"><span class="nr">22</span><span>a) 2&nbsp;000&nbsp;kr&emsp;b) 240&nbsp;kr&emsp;c) 2&nbsp;240&nbsp;kr&emsp;d) 2&nbsp;230&nbsp;kr</span></div><div class="lang"><span class="nr">23</span><span>a) Inbetalningarna blir 6&nbsp;000, 5&nbsp;750, 5&nbsp;500 och 5&nbsp;250&nbsp;kr.&emsp;b) 2&nbsp;500&nbsp;kr</span></div><div class="lang"><span class="nr">24</span><span>Amortering betalar tillbaka lånet, ränta är kostnaden för att låna.</span></div><div class="lang"><span class="nr">25</span><span>Räntan räknas på skulden, som minskar.</span></div></div>
+    <h2><span>Lösningsförslag</span></h2>
+
+    <h3 class="losniva">Sparande</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">1</span></p><p>Räntan är 2&nbsp;% av beloppet:</p>$$0{,}02 \cdot 8\,000\ \mathrm{kr} = 160\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 160&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">2</span></p><p>3,5&nbsp;% är 0,035:</p>$$0{,}035 \cdot 25\,000\ \mathrm{kr} = 875\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 875&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">3</span></p><p>Behållningen ökar med 1,5&nbsp;%, så förändringsfaktorn är 1,015:</p>$$12\,000 \cdot 1{,}015 = 12\,180\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 12&nbsp;180&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">4</span></p><p>Förändringsfaktorn är 1,04:</p>$$40\,000 \cdot 1{,}04 = 41\,600\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 41&nbsp;600&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">5</span></p><p>Förändringsfaktorn 1,02 används 3 gånger:</p>$$10\,000 \cdot 1{,}02^3 = 10\,612{,}08 \approx 10\,612\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 10&nbsp;612&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">6</span></p><p>Förändringsfaktorn 1,045 används 8 gånger:</p>$$20\,000 \cdot 1{,}045^8 = 28\,442{,}01\ldots \approx 28\,442\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 28&nbsp;442&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">7</span></p><p>Pengarna växer i 18 år med förändringsfaktorn 1,025:</p>$$5\,000 \cdot 1{,}025^{18} = 7\,798{,}29\ldots \approx 7\,798\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 7&nbsp;798&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">8</span></p><p class="del">a)</p><p>Förändringsfaktorn 1,03 används 10 gånger:</p>$$50\,000 \cdot 1{,}03^{10} = 67\,195{,}81\ldots \approx 67\,196\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 67&nbsp;196&nbsp;kr</p><p class="del">b)</p><p>Räntan är det som tillkommit utöver insättningen:</p>$$67\,195{,}81\ldots - 50\,000 \approx 17\,196\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 17&nbsp;196&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">9</span> Hur stor är räntan på kontot?</p><p>Förändringsfaktorn i D2 är 1,02:</p>$$1{,}02 - 1 = 0{,}02 = 2\ \%$$<p class="svar"><b>Svar:</b> 2&nbsp;%</p></div>
+      <div class="sol"><p class="solh"><span class="nr">10</span> Vilket år står i cell A5?</p><p>Kolumn A börjar med år 0 på rad 2, så rad 5 är år 3.</p><p class="svar"><b>Svar:</b> År 3</p></div>
+      <div class="sol"><p class="solh"><span class="nr">11</span></p><p>Behållningen efter ett år är insättningen i B2 gånger förändringsfaktorn i D2. En formel inleds med likhetstecken:</p><p><code>=B2*D2</code></p><p class="svar"><b>Svar:</b> <code>=B2*D2</code></p></div>
+      <div class="sol"><p class="solh"><span class="nr">12</span></p><p>När formeln dras nedåt flyttas alla cellnamn en rad: B2 blir B3, B4 och så vidare, och det är rätt. Men D2 skulle bli D3, D4, som är tomma. Därför låses D2 med dollartecken:</p><p><code>=B2*$D$2</code></p><p class="svar"><b>Svar:</b> <code>=B2*$D$2</code></p></div>
+      <div class="sol"><p class="solh"><span class="nr">13</span> Vilka värden visas i cellerna B3 och B4?</p>$$B3:\quad 15\,000 \cdot 1{,}02 = 15\,300$$$$B4:\quad 15\,300 \cdot 1{,}02 = 15\,606$$<p class="svar"><b>Svar:</b> 15&nbsp;300 och 15&nbsp;606</p></div>
+      <div class="sol"><p class="solh"><span class="nr">14</span></p><p>Behållningen från året innan växer med 3&nbsp;%, och samtidigt läggs 2&nbsp;000&nbsp;kr till:</p><p><code>=B2*1,03+2000</code></p><p class="svar"><b>Svar:</b> <code>=B2*1,03+2000</code></p></div>
+      <div class="sol"><p class="solh"><span class="nr">15</span></p><p>Efter den första insättningen finns 2&nbsp;000&nbsp;kr. Efter den andra har de vuxit med 3&nbsp;% och 2&nbsp;000&nbsp;kr har lagts till:</p>$$2\,000 \cdot 1{,}03 + 2\,000 = 4\,060\ \mathrm{kr}$$<p>Efter den tredje:</p>$$4\,060 \cdot 1{,}03 + 2\,000 = 6\,181{,}80\ \mathrm{kr}$$<p>Rimligt: du har satt in 6&nbsp;000&nbsp;kr, och räntan är lite mer än 180&nbsp;kr.</p><p class="svar"><b>Svar:</b> 6&nbsp;181,80&nbsp;kr</p></div>
+    </div>
+    <h3 class="losniva">Lån</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">16</span></p><p>Lånet delas upp i 5 lika stora delar:</p>$$\frac{60\,000\ \mathrm{kr}}{5} = 12\,000\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 12&nbsp;000&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">17</span></p><p>På 3 år görs $3 \cdot 12 = 36$ inbetalningar:</p>$$\frac{36\,000\ \mathrm{kr}}{36} = 1\,000\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 1&nbsp;000&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">18</span></p><p>Räntan för ett år är 6&nbsp;% av skulden:</p>$$0{,}06 \cdot 80\,000\ \mathrm{kr} = 4\,800\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 4&nbsp;800&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">19</span></p><p>Räntan för ett år är $0{,}06 \cdot 80\,000\ \mathrm{kr} = 4\,800\ \mathrm{kr}$. Ett år har 12 månader:</p>$$\frac{4\,800\ \mathrm{kr}}{12} = 400\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 400&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">20</span></p><p>Räntan för ett år:</p>$$0{,}045 \cdot 120\,000\ \mathrm{kr} = 5\,400\ \mathrm{kr}$$<p>Räntan för en månad är en tolftedel av det:</p>$$\frac{5\,400\ \mathrm{kr}}{12} = 450\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 450&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">21</span></p><p>Räntan för ett år:</p>$$0{,}08 \cdot 30\,000\ \mathrm{kr} = 2\,400\ \mathrm{kr}$$<p>Ett år har fyra kvartal:</p>$$\frac{2\,400\ \mathrm{kr}}{4} = 600\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 600&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">22</span></p><p class="del">a)</p><p>På 2 år görs $2 \cdot 12 = 24$ inbetalningar:</p>$$\frac{48\,000\ \mathrm{kr}}{24} = 2\,000\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 2&nbsp;000&nbsp;kr</p><p class="del">b)</p><p>Den första månaden är hela lånet kvar. Räntan för ett år och för en månad:</p>$$0{,}06 \cdot 48\,000\ \mathrm{kr} = 2\,880\ \mathrm{kr}$$$$\frac{2\,880\ \mathrm{kr}}{12} = 240\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 240&nbsp;kr</p><p class="del">c)</p><p>Inbetalningen är amortering plus ränta:</p>$$2\,000\ \mathrm{kr} + 240\ \mathrm{kr} = 2\,240\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 2&nbsp;240&nbsp;kr</p><p class="del">d)</p><p>Efter första inbetalningen är skulden $48\,000 - 2\,000 = 46\,000\ \mathrm{kr}$. Räntan räknas nu på den:</p>$$\frac{0{,}06 \cdot 46\,000\ \mathrm{kr}}{12} = 230\ \mathrm{kr}$$$$2\,000\ \mathrm{kr} + 230\ \mathrm{kr} = 2\,230\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 2&nbsp;230&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">23</span></p><p class="del">a)</p><p>Amorteringen är $\dfrac{20\,000\ \mathrm{kr}}{4} = 5\,000\ \mathrm{kr}$ varje år. Räntan är 5&nbsp;% av skulden som är kvar, till exempel $0{,}05 \cdot 20\,000 = 1\,000$ det första året. Skulden minskar med 5&nbsp;000&nbsp;kr varje år.</p><table class="fyll los-tab"><tr><th>År</th><th>Skuld</th><th>Ränta</th><th>Amort.</th><th>Inbet.</th></tr><tr><td>1</td><td>20&nbsp;000</td><td>1&nbsp;000</td><td>5&nbsp;000</td><td>6&nbsp;000</td></tr><tr><td>2</td><td>15&nbsp;000</td><td>750</td><td>5&nbsp;000</td><td>5&nbsp;750</td></tr><tr><td>3</td><td>10&nbsp;000</td><td>500</td><td>5&nbsp;000</td><td>5&nbsp;500</td></tr><tr><td>4</td><td>5&nbsp;000</td><td>250</td><td>5&nbsp;000</td><td>5&nbsp;250</td></tr></table><p class="del">b)</p>$$1\,000 + 750 + 500 + 250 = 2\,500\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 2&nbsp;500&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">24</span> Vad är skillnaden mellan amortering och ränta?</p><p>Med amorteringen betalar man tillbaka själva lånet, så att skulden minskar. Räntan är priset för att få låna pengarna. Den minskar inte skulden.</p><p class="svar"><b>Svar:</b> Amortering är återbetalning av lånet, ränta är kostnaden för lånet.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">25</span></p><p>Amorteringen är lika stor varje gång, men räntan räknas på den skuld som är kvar. Skulden blir mindre för varje inbetalning, och då blir räntan också mindre.</p><p class="svar"><b>Svar:</b> Räntan räknas på en skuld som minskar, så räntedelen blir mindre för varje gång.</p></div>
+    </div>
+  </section>
+  <footer><span>Matematik nivå 1b och 1c · Sparande, lån och ränta</span><span>fysiklabbet.se</span></footer>
+</section>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

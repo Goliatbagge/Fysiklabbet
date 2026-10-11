@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Övningsblad: Upprepade procentuella förändringar — Fysiklabbet</title>
+<meta name="description" content="34 uppgifter på grundnivå om upprepade procentuella förändringar i Matematik nivå 1b och 1c: total förändringsfaktor, samma förändring flera gånger och tillbaka till procent. Med svar och lösningsförslag. Utskriftsklart.">
+<link rel="canonical" href="https://fysiklabbet.se/ovningsblad/ovningsblad-upprepade-procent.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  renderMathInElement(document.body, {
+    delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }],
+    ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'svg'],
+    throwOnError: false
+  });
+  document.documentElement.setAttribute('data-katex', 'klar');
+});
+</script>
+<style>
+:root { --ink:#1f2530; --paper:#f7f2e8; --line:rgba(31,37,48,.22); --teal:#0d9488; }
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin:0; font-family:'Poppins', system-ui, sans-serif; color:var(--ink); background:#fff; font-size:11pt; line-height:1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { max-width: 186mm; margin: 0 auto; padding: 10mm 6mm 20mm; }
+header { border-bottom: 2px solid var(--ink); padding-bottom: 6px; margin-bottom: 12px; }
+.over { font-size: 9.5pt; text-transform: uppercase; letter-spacing: .06em; color:#5b6472; margin:0; }
+h1 { font-size: 20pt; margin: 2px 0 0; line-height:1.2; }
+.under { margin: 2px 0 0; font-size: 11pt; color:#3b4350; }
+.namn { display:flex; gap: 28px; margin-top: 8px; font-size: 10pt; color:#3b4350; }
+.namn span { flex:1; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.box { background: var(--paper); border: 1px solid rgba(31,37,48,.18); border-radius: 8px; padding: 8px 14px; margin: 0 0 10px; break-inside: avoid; }
+.box p { margin: 3px 0; }
+.boxgrid { display:grid; grid-template-columns: 1fr 1fr; gap: 4px 18px; }
+.box ul { margin: 2px 0 2px 16px; padding: 0; }
+.box li { margin: 1px 0; }
+.box .katex-display { margin: 2px 0 3px; text-align:left; }
+.box .katex-display > .katex { text-align:left; }
+.rub { font-weight: 600; }
+.nw { white-space: nowrap; }
+.nivaer { font-size: 9.5pt; color:#3b4350; margin: 0 0 6px; }
+.niva { margin-bottom: 6px; }
+h2 { display:flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; font-size: 13pt; margin: 14px 0 4px; padding: 3px 0; border-bottom: 1.4px solid var(--ink); break-after: avoid; }
+h2 .nivanamn { color: var(--teal); }
+h2 .sv { font-weight: 400; font-size: 9pt; color:#5b6472; }
+.instr { font-weight: 600; margin: 8px 0 3px; break-after: avoid; }
+.tasks { display: grid; gap: 4px 14px; }
+.c1 { grid-template-columns: 1fr; } .c2 { grid-template-columns: repeat(2, 1fr); }
+.c3 { grid-template-columns: repeat(3, 1fr); } .c4 { grid-template-columns: repeat(4, 1fr); }
+.task { break-inside: avoid; padding: 4px 4px 0; border-bottom: 1px dotted var(--line); display:flex; gap: 6px; align-items: baseline; }
+.task .nr { font-weight: 600; min-width: 1.7em; text-align:right; font-size: 10pt; }
+.task .eq { flex:1; min-width: 0; }
+.task:has(.fig), .task:has(table) { align-items: flex-start; }
+.task .katex, .sol p .katex, .svarlista .katex, .box p .katex, .box li .katex { white-space: nowrap; }
+.kort { min-height: 16mm; } .mellan { min-height: 30mm; } .hog { min-height: 44mm; }
+.fig { margin: 6px 0 4px; }
+.fig svg { display:block; max-width: 100%; height: auto; margin: 0 auto; }
+.delfig { break-after: avoid; break-inside: avoid; }
+.sol .fig svg { max-width: 62mm; }
+code { font-family: 'JetBrains Mono', Consolas, monospace; font-size: .92em; background: rgba(31,37,48,.06); padding: 0 3px; border-radius: 3px; white-space: nowrap; }
+table { border-collapse: collapse; margin: 5px 0; font-size: 10pt; }
+table th, table td { border: 1px solid rgba(31,37,48,.45); padding: 2px 8px; text-align: center; }
+table th { background: var(--paper); font-weight: 600; }
+.vt td { min-width: 12mm; height: 7mm; }
+.box .vt td { height: auto; min-width: 0; }
+.kalk { margin: 4px auto 6px; font-size: 9.5pt; }
+.kalk th { background: #e9e6df; color:#3b4350; font-weight: 500; min-width: 8mm; }
+.kalk td { min-width: 22mm; height: 6.5mm; text-align: left; }
+.fyll { width: 100%; font-size: 9.5pt; }
+.fyll td { height: 9mm; }
+.fyll.los-tab { font-size: 8.8pt; }
+.fyll.los-tab td { height: auto; padding: 1px 4px; }
+.fyll.los-tab th { padding: 1px 4px; }
+.facit { break-before: page; page-break-before: always; }
+.facit h2 { font-size: 14pt; }
+.svarniva, .losniva { font-size: 11pt; margin: 8px 0 3px; color: var(--teal); break-after: avoid; }
+.svarlista { display:grid; grid-template-columns: repeat(4, 1fr); gap: 2px 12px; font-size: 9.8pt; margin-bottom: 6px; }
+.svarlista div { display:flex; gap: 6px; align-items: center; min-height: 9mm; }
+.svarlista div.lang { grid-column: span 2; }
+.svarlista .nr { font-weight: 600; min-width: 1.7em; text-align:right; }
+.los { columns: 2; column-gap: 10mm; font-size: 9.8pt; }
+.sol { break-inside: avoid; page-break-inside: avoid; margin: 0 0 8px; padding: 0 0 5px; border-bottom: 1px dotted var(--line); }
+.sol .solh { font-weight: 600; margin: 0 0 1px; }
+.sol .solh .nr { margin-right: 4px; }
+.sol p { margin: 2px 0; }
+.sol .del { font-weight: 700; margin: 5px 0 1px; }
+.sol .katex-display { margin: 2px 0 3px; text-align: left; padding-left: 3mm; overflow-x: auto; overflow-y: hidden; padding-bottom: 2px; }
+.sol .katex-display > .katex { text-align: left; }
+.sol .svar { margin: 3px 0 0; }
+footer { margin-top: 18px; font-size: 9pt; color:#5b6472; border-top: 1px solid var(--line); padding-top: 6px; display:flex; justify-content: space-between; }
+@page { size: A4; margin: 13mm 12mm 14mm; }
+@media print {
+  body { font-size: 10.5pt; }
+  .page { max-width: none; padding: 0; }
+}
+@media (max-width: 640px) {
+  .c3, .c4 { grid-template-columns: repeat(2, 1fr); }
+  .c2, .c3:has(.hog) { grid-template-columns: 1fr; }
+  .boxgrid { grid-template-columns: 1fr; }
+  .svarlista { grid-template-columns: repeat(2, 1fr); }
+  .los { columns: 1; }
+  .sol .katex-display { padding-left: 0; }
+  .fyll th { font-size: 8pt; padding: 2px 3px; }
+  .kalk { font-size: 8.5pt; }
+  .kalk td { min-width: 0; padding: 2px 4px; }
+  .kalk th { min-width: 0; padding: 2px 4px; }
+  .delfig { overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<section class="page">
+  <header>
+    <p class="over">Matematik nivå 1b och 1c · Övningsblad · Grund</p>
+    <h1>Upprepade procentuella förändringar</h1>
+    <p class="under">Total förändringsfaktor, samma förändring flera gånger och tillbaka till procent</p>
+    <div class="namn"><span>Namn:</span><span>Klass:</span></div>
+  </header>
+  <div class="box boxgrid">
+    <div>
+      <p class="rub">Kom ihåg</p>
+      <ul>
+        <li>Ökning med 12&nbsp;% ger förändringsfaktorn $1 + 0{,}12 = 1{,}12$.</li>
+        <li>Minskning med 12&nbsp;% ger förändringsfaktorn $1 - 0{,}12 = 0{,}88$.</li>
+        <li>Flera förändringar efter varandra: <b>multiplicera</b> förändringsfaktorerna. Procenttalen får aldrig adderas.</li>
+        <li>Samma förändring $n$ gånger: nya värdet $=$ gamla värdet $\cdot$ förändringsfaktorn$^{\,n}$.</li>
+        <li>Från total förändringsfaktor till procent: jämför med 1. Över 1 är en ökning, under 1 en minskning.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="rub">Exempel: ett pris höjs med 15&nbsp;% och sänks sedan med 15&nbsp;%</p>
+      <p>Förändringsfaktorerna är 1,15 och 0,85. Den totala förändringsfaktorn är</p>
+      $$1{,}15 \cdot 0{,}85 = 0{,}9775$$
+      <p>0,9775 är mindre än 1, alltså en minskning:</p>
+      $$1 - 0{,}9775 = 0{,}0225 = 2{,}25\ \%$$
+      <p><b>Svar:</b> Priset har minskat med 2,25&nbsp;%, trots att det höjdes och sänktes lika många procent. Sänkningen räknas på det höjda priset.</p>
+    </div>
+  </div>
+  <p class="nivaer">Bladet är på <b>grundnivå</b>: uppgifterna tränar avsnittets metoder en i taget, och de sista uppgifterna i varje del är i text. Räknare får användas. Svar och lösningsförslag finns efter uppgifterna.</p>
+
+  <section class="niva">
+    <h2><span class="nivanamn">Förändringsfaktorer</span><span class="sv">Uppgift 1–17 · Från procent till förändringsfaktor och tillbaka</span></h2>
+    <p class="instr">Skriv förändringsfaktorn.</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">1</span><span class="eq txt">Ökning med 20&nbsp;%</span></div>
+      <div class="task kort"><span class="nr">2</span><span class="eq txt">Minskning med 15&nbsp;%</span></div>
+      <div class="task kort"><span class="nr">3</span><span class="eq txt">Ökning med 4&nbsp;%</span></div>
+      <div class="task kort"><span class="nr">4</span><span class="eq txt">Minskning med 2,5&nbsp;%</span></div>
+    </div>
+    <p class="instr">Beräkna den totala förändringsfaktorn.</p>
+    <div class="tasks c2">
+      <div class="task kort"><span class="nr">5</span><span class="eq txt">Ökning med 10&nbsp;% och sedan ökning med 20&nbsp;%</span></div>
+      <div class="task kort"><span class="nr">6</span><span class="eq txt">Ökning med 25&nbsp;% och sedan minskning med 20&nbsp;%</span></div>
+      <div class="task kort"><span class="nr">7</span><span class="eq txt">Minskning med 10&nbsp;% två gånger</span></div>
+      <div class="task kort"><span class="nr">8</span><span class="eq txt">Minskning med 30&nbsp;% och sedan ökning med 40&nbsp;%</span></div>
+      <div class="task kort"><span class="nr">9</span><span class="eq txt">Ökning med 50&nbsp;% och sedan minskning med 50&nbsp;%</span></div>
+      <div class="task kort"><span class="nr">10</span><span class="eq txt">Ökning med 5&nbsp;% tre gånger</span></div>
+    </div>
+    <p class="instr">Den totala förändringsfaktorn är given. Är det en ökning eller en minskning, och med hur många procent?</p>
+    <div class="tasks c4">
+      <div class="task kort"><span class="nr">11</span><span class="eq">$1{,}32$</span></div>
+      <div class="task kort"><span class="nr">12</span><span class="eq">$0{,}81$</span></div>
+      <div class="task kort"><span class="nr">13</span><span class="eq">$1{,}08$</span></div>
+      <div class="task kort"><span class="nr">14</span><span class="eq">$0{,}9775$</span></div>
+    </div>
+    <p class="instr">Skriv den totala förändringsfaktorn som en potens. Du behöver inte beräkna den.</p>
+    <div class="tasks c3">
+      <div class="task kort"><span class="nr">15</span><span class="eq txt">Ökning med 3&nbsp;% per år i 8 år</span></div>
+      <div class="task kort"><span class="nr">16</span><span class="eq txt">Minskning med 12&nbsp;% per år i 5 år</span></div>
+      <div class="task kort"><span class="nr">17</span><span class="eq txt">Ökning med 2,5&nbsp;% per år i 18 år</span></div>
+    </div>
+  </section>
+
+  <section class="niva">
+    <h2><span class="nivanamn">Uppgifter i text</span><span class="sv">Uppgift 18–34 · Priser, sparande och värdeminskning</span></h2>
+    <p class="instr">Lös uppgifterna. Svara med den totala förändringen i procent.</p>
+    <div class="tasks c2">
+      <div class="task mellan"><span class="nr">18</span><span class="eq txt">Priset på en cykel höjs först med 10&nbsp;% och sedan med 20&nbsp;%. Hur många procent har priset höjts totalt?</span></div>
+      <div class="task mellan"><span class="nr">19</span><span class="eq txt">En tröja sänks först med 20&nbsp;% och sedan med 25&nbsp;% från det nya priset. Hur många procent har priset sänkts totalt?</span></div>
+      <div class="task mellan"><span class="nr">20</span><span class="eq txt">Ett pris höjs med 20&nbsp;% och sänks sedan med 20&nbsp;%. Hur många procent har priset ändrats totalt?</span></div>
+      <div class="task mellan"><span class="nr">21</span><span class="eq txt">En aktie ökar i värde med 40&nbsp;% ett år och minskar med 30&nbsp;% året efter. Har värdet ökat eller minskat totalt, och med hur många procent?</span></div>
+    </div>
+    <p class="instr">Lös uppgifterna.</p>
+    <div class="tasks c2">
+      <div class="task mellan"><span class="nr">22</span><span class="eq txt">En vara kostar 500&nbsp;kr. Priset höjs med 10&nbsp;% och sedan med 10&nbsp;% till. Vad kostar varan nu?</span></div>
+      <div class="task mellan"><span class="nr">23</span><span class="eq txt">En jacka kostar 1&nbsp;200&nbsp;kr. Den sänks först med 30&nbsp;% och sedan med 10&nbsp;% från det nya priset. Vad kostar jackan efter sänkningarna?</span></div>
+      <div class="task mellan"><span class="nr">24</span><span class="eq txt">Lisa sätter in 10&nbsp;000&nbsp;kr på ett sparkonto med årsräntan 3&nbsp;% och tar inte ut några pengar. Hur mycket finns på kontot efter 5 år? Avrunda till hela kronor.</span></div>
+      <div class="task mellan"><span class="nr">25</span><span class="eq txt">En bil köps för 200&nbsp;000&nbsp;kr. Bilens värde minskar med 12&nbsp;% varje år. Vad är bilen värd efter 6 år? Avrunda till hela hundratal kronor.</span></div>
+      <div class="task mellan"><span class="nr">26</span><span class="eq txt">I en stad bor 25&nbsp;000 personer, och antalet invånare ökar med 2&nbsp;% per år. Hur många bor i staden efter 10 år? Avrunda till hela hundratal.</span></div>
+      <div class="task mellan"><span class="nr">27</span><span class="eq txt">Mängden av ett läkemedel i blodet minskar med 20&nbsp;% per timme. Från början finns 400&nbsp;mg. Hur mycket finns kvar efter 4 timmar? Avrunda till hela milligram.</span></div>
+      <div class="task mellan"><span class="nr">28</span><span class="eq txt">Ett belopp växer med 4&nbsp;% per år i 10 år. Med hur många procent har beloppet ökat totalt? Avrunda till hela procent.</span></div>
+    </div>
+    <p class="instr">Resonera och förklara.</p>
+    <div class="tasks c2">
+      <div class="task mellan"><span class="nr">29</span><span class="eq txt">Elias säger att om ett pris höjs med 15&nbsp;% och sedan sänks med 15&nbsp;% blir det samma pris som från början. Har han rätt? Förklara.</span></div>
+      <div class="task mellan"><span class="nr">30</span><span class="eq txt">Ett pris sänks först med 15&nbsp;% och höjs sedan med 15&nbsp;%. Blir det en annan total förändring än om priset först höjs och sedan sänks? Förklara.</span></div>
+      <div class="task mellan"><span class="nr">31</span><span class="eq txt">Sara räknar ut att två höjningar med 10&nbsp;% efter varandra ger en höjning med 20&nbsp;%. Vad har hon gjort för fel, och hur stor blir höjningen?</span></div>
+      <div class="task mellan"><span class="nr">32</span><span class="eq txt">Hampus har pengar på ett konto med årsräntan 5&nbsp;%. Han tror att pengarna har ökat med 10&nbsp;% efter två år. Har han rätt?</span></div>
+      <div class="task mellan"><span class="nr">33</span><span class="eq txt">Vilket ger det högsta priset: att höja ett pris med 30&nbsp;% en gång, eller att höja det med 15&nbsp;% två gånger? Motivera.</span></div>
+      <div class="task mellan"><span class="nr">34</span><span class="eq txt">En tröja kostade 400&nbsp;kr. På rean sänks priset med 50&nbsp;% till 200&nbsp;kr. Med hur många procent måste priset sedan höjas för att tröjan ska kosta 400&nbsp;kr igen?</span></div>
+    </div>
+  </section>
+  <section class="facit">
+    <h2><span>Svar</span></h2>
+
+    <h3 class="svarniva">Förändringsfaktorer</h3>
+    <div class="svarlista"><div><span class="nr">1</span><span>1,20</span></div><div><span class="nr">2</span><span>0,85</span></div><div><span class="nr">3</span><span>1,04</span></div><div><span class="nr">4</span><span>0,975</span></div><div><span class="nr">5</span><span>1,32</span></div><div><span class="nr">6</span><span>1,00</span></div><div><span class="nr">7</span><span>0,81</span></div><div><span class="nr">8</span><span>0,98</span></div><div><span class="nr">9</span><span>0,75</span></div><div><span class="nr">10</span><span>1,157625</span></div><div><span class="nr">11</span><span>Ökning med 32&nbsp;%</span></div><div><span class="nr">12</span><span>Minskning med 19&nbsp;%</span></div><div><span class="nr">13</span><span>Ökning med 8&nbsp;%</span></div><div><span class="nr">14</span><span>Minskning med 2,25&nbsp;%</span></div><div><span class="nr">15</span><span>$1{,}03^8$</span></div><div><span class="nr">16</span><span>$0{,}88^5$</span></div><div><span class="nr">17</span><span>$1{,}025^{18}$</span></div></div>
+    <h3 class="svarniva">Uppgifter i text</h3>
+    <div class="svarlista"><div><span class="nr">18</span><span>32&nbsp;%</span></div><div><span class="nr">19</span><span>40&nbsp;%</span></div><div><span class="nr">20</span><span>Minskat med 4&nbsp;%</span></div><div><span class="nr">21</span><span>Minskat med 2&nbsp;%</span></div><div><span class="nr">22</span><span>605&nbsp;kr</span></div><div><span class="nr">23</span><span>756&nbsp;kr</span></div><div><span class="nr">24</span><span>11&nbsp;593&nbsp;kr</span></div><div><span class="nr">25</span><span>92&nbsp;900&nbsp;kr</span></div><div><span class="nr">26</span><span>Cirka 30&nbsp;500</span></div><div><span class="nr">27</span><span>164&nbsp;mg</span></div><div><span class="nr">28</span><span>48&nbsp;%</span></div><div class="lang"><span class="nr">29</span><span>Nej, priset minskar med 2,25&nbsp;%.</span></div><div class="lang"><span class="nr">30</span><span>Nej, det blir samma: en minskning med 2,25&nbsp;%.</span></div><div class="lang"><span class="nr">31</span><span>Hon har adderat procenttalen. Höjningen blir 21&nbsp;%.</span></div><div class="lang"><span class="nr">32</span><span>Nej, de har ökat med 10,25&nbsp;%.</span></div><div><span class="nr">33</span><span>15&nbsp;% två gånger</span></div><div><span class="nr">34</span><span>100&nbsp;%</span></div></div>
+    <h2><span>Lösningsförslag</span></h2>
+
+    <h3 class="losniva">Förändringsfaktorer</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">1</span> Ökning med 20&nbsp;%</p><p>Det nya värdet är 100&nbsp;% + 20&nbsp;% = 120&nbsp;% av det gamla:</p>$$1 + 0{,}20 = 1{,}20$$<p class="svar"><b>Svar:</b> 1,20</p></div>
+      <div class="sol"><p class="solh"><span class="nr">2</span> Minskning med 15&nbsp;%</p><p>Det nya värdet är 100&nbsp;% − 15&nbsp;% = 85&nbsp;% av det gamla:</p>$$1 - 0{,}15 = 0{,}85$$<p class="svar"><b>Svar:</b> 0,85</p></div>
+      <div class="sol"><p class="solh"><span class="nr">3</span> Ökning med 4&nbsp;%</p><p>4&nbsp;% är 0,04, inte 0,4:</p>$$1 + 0{,}04 = 1{,}04$$<p class="svar"><b>Svar:</b> 1,04</p></div>
+      <div class="sol"><p class="solh"><span class="nr">4</span> Minskning med 2,5&nbsp;%</p><p>2,5&nbsp;% är 0,025:</p>$$1 - 0{,}025 = 0{,}975$$<p class="svar"><b>Svar:</b> 0,975</p></div>
+      <div class="sol"><p class="solh"><span class="nr">5</span> Ökning med 10&nbsp;% och sedan ökning med 20&nbsp;%</p><p>Förändringsfaktorerna är 1,10 och 1,20. De multipliceras:</p>$$1{,}10 \cdot 1{,}20 = 1{,}32$$<p class="svar"><b>Svar:</b> 1,32</p></div>
+      <div class="sol"><p class="solh"><span class="nr">6</span> Ökning med 25&nbsp;% och sedan minskning med 20&nbsp;%</p><p>Förändringsfaktorerna är 1,25 och 0,80:</p>$$1{,}25 \cdot 0{,}80 = 1{,}00$$<p>Värdet är alltså tillbaka där det började.</p><p class="svar"><b>Svar:</b> 1,00</p></div>
+      <div class="sol"><p class="solh"><span class="nr">7</span> Minskning med 10&nbsp;% två gånger</p><p>Förändringsfaktorn 0,90 används två gånger:</p>$$0{,}90 \cdot 0{,}90 = 0{,}81$$<p class="svar"><b>Svar:</b> 0,81</p></div>
+      <div class="sol"><p class="solh"><span class="nr">8</span> Minskning med 30&nbsp;% och sedan ökning med 40&nbsp;%</p><p>Förändringsfaktorerna är 0,70 och 1,40:</p>$$0{,}70 \cdot 1{,}40 = 0{,}98$$<p class="svar"><b>Svar:</b> 0,98</p></div>
+      <div class="sol"><p class="solh"><span class="nr">9</span> Ökning med 50&nbsp;% och sedan minskning med 50&nbsp;%</p><p>Förändringsfaktorerna är 1,50 och 0,50:</p>$$1{,}50 \cdot 0{,}50 = 0{,}75$$<p class="svar"><b>Svar:</b> 0,75</p></div>
+      <div class="sol"><p class="solh"><span class="nr">10</span> Ökning med 5&nbsp;% tre gånger</p><p>Förändringsfaktorn 1,05 används tre gånger:</p>$$1{,}05 \cdot 1{,}05 \cdot 1{,}05 = 1{,}05^3 = 1{,}157625$$<p class="svar"><b>Svar:</b> 1,157625</p></div>
+      <div class="sol"><p class="solh"><span class="nr">11</span> $1{,}32$</p><p>1,32 är större än 1, alltså en ökning. Vi drar bort 1:</p>$$1{,}32 - 1 = 0{,}32 = 32\ \%$$<p class="svar"><b>Svar:</b> Ökning med 32&nbsp;%</p></div>
+      <div class="sol"><p class="solh"><span class="nr">12</span> $0{,}81$</p><p>0,81 är mindre än 1, alltså en minskning. Skillnaden mot 1 är minskningen:</p>$$1 - 0{,}81 = 0{,}19 = 19\ \%$$<p class="svar"><b>Svar:</b> Minskning med 19&nbsp;%</p></div>
+      <div class="sol"><p class="solh"><span class="nr">13</span> $1{,}08$</p>$$1{,}08 - 1 = 0{,}08 = 8\ \%$$<p class="svar"><b>Svar:</b> Ökning med 8&nbsp;%</p></div>
+      <div class="sol"><p class="solh"><span class="nr">14</span> $0{,}9775$</p>$$1 - 0{,}9775 = 0{,}0225 = 2{,}25\ \%$$<p class="svar"><b>Svar:</b> Minskning med 2,25&nbsp;%</p></div>
+      <div class="sol"><p class="solh"><span class="nr">15</span> Ökning med 3&nbsp;% per år i 8 år</p><p>Förändringsfaktorn 1,03 multipliceras med sig själv 8 gånger:</p>$$1{,}03 \cdot 1{,}03 \cdot \ldots \cdot 1{,}03 = 1{,}03^8$$<p class="svar"><b>Svar:</b> $1{,}03^8$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">16</span> Minskning med 12&nbsp;% per år i 5 år</p><p>En minskning med 12&nbsp;% ger förändringsfaktorn 0,88, och den används 5 gånger:</p>$$0{,}88^5$$<p class="svar"><b>Svar:</b> $0{,}88^5$</p></div>
+      <div class="sol"><p class="solh"><span class="nr">17</span> Ökning med 2,5&nbsp;% per år i 18 år</p><p>Förändringsfaktorn är 1,025, och den används 18 gånger:</p>$$1{,}025^{18}$$<p class="svar"><b>Svar:</b> $1{,}025^{18}$</p></div>
+    </div>
+    <h3 class="losniva">Uppgifter i text</h3>
+    <div class="los">
+      <div class="sol"><p class="solh"><span class="nr">18</span></p><p>Förändringsfaktorerna är 1,10 och 1,20. Den totala förändringsfaktorn är</p>$$1{,}10 \cdot 1{,}20 = 1{,}32$$<p>1,32 är större än 1, alltså en ökning:</p>$$1{,}32 - 1 = 0{,}32 = 32\ \%$$<p>Svaret är inte 30&nbsp;%. Den andra höjningen räknas på det redan höjda priset.</p><p class="svar"><b>Svar:</b> Priset har höjts med 32&nbsp;%.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">19</span></p><p>Förändringsfaktorerna är 0,80 och 0,75:</p>$$0{,}80 \cdot 0{,}75 = 0{,}60$$<p>0,60 är mindre än 1, alltså en minskning:</p>$$1 - 0{,}60 = 0{,}40 = 40\ \%$$<p class="svar"><b>Svar:</b> Priset har sänkts med 40&nbsp;%.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">20</span></p><p>Förändringsfaktorerna är 1,20 och 0,80:</p>$$1{,}20 \cdot 0{,}80 = 0{,}96$$<p>0,96 är mindre än 1, alltså en minskning:</p>$$1 - 0{,}96 = 0{,}04 = 4\ \%$$<p class="svar"><b>Svar:</b> Priset har minskat med 4&nbsp;%.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">21</span></p><p>Förändringsfaktorerna är 1,40 och 0,70:</p>$$1{,}40 \cdot 0{,}70 = 0{,}98$$<p>0,98 är mindre än 1, så värdet har minskat, trots att ökningen var fler procent än minskningen:</p>$$1 - 0{,}98 = 0{,}02 = 2\ \%$$<p class="svar"><b>Svar:</b> Värdet har minskat med 2&nbsp;%.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">22</span></p><p>Den totala förändringsfaktorn är</p>$$1{,}10 \cdot 1{,}10 = 1{,}21$$<p>Nya priset är gamla priset gånger den totala förändringsfaktorn:</p>$$500 \cdot 1{,}21 = 605\ \mathrm{kr}$$<p>Rimligt: den första höjningen är 50&nbsp;kr och den andra lite mer, 55&nbsp;kr, eftersom den räknas på 550&nbsp;kr.</p><p class="svar"><b>Svar:</b> 605&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">23</span></p><p>Förändringsfaktorerna är 0,70 och 0,90:</p>$$0{,}70 \cdot 0{,}90 = 0{,}63$$$$1\,200 \cdot 0{,}63 = 756\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 756&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">24</span></p><p>Förändringsfaktorn är 1,03 varje år, och den används 5 gånger:</p>$$10\,000 \cdot 1{,}03^5 = 11\,592{,}74\ldots \approx 11\,593\ \mathrm{kr}$$<p class="svar"><b>Svar:</b> 11&nbsp;593&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">25</span></p><p>En minskning med 12&nbsp;% ger förändringsfaktorn 0,88, och den används 6 gånger:</p>$$200\,000 \cdot 0{,}88^6 = 92\,880{,}8\ldots \approx 92\,900\ \mathrm{kr}$$<p>Rimligt: bilen har tappat drygt halva sitt värde på sex år.</p><p class="svar"><b>Svar:</b> 92&nbsp;900&nbsp;kr</p></div>
+      <div class="sol"><p class="solh"><span class="nr">26</span></p><p>Förändringsfaktorn är 1,02, och den används 10 gånger:</p>$$25\,000 \cdot 1{,}02^{10} = 30\,474{,}8\ldots \approx 30\,500$$<p class="svar"><b>Svar:</b> Cirka 30&nbsp;500 personer</p></div>
+      <div class="sol"><p class="solh"><span class="nr">27</span></p><p>En minskning med 20&nbsp;% ger förändringsfaktorn 0,80, och den används 4 gånger:</p>$$400 \cdot 0{,}80^4 = 163{,}84 \approx 164\ \mathrm{mg}$$<p class="svar"><b>Svar:</b> 164&nbsp;mg</p></div>
+      <div class="sol"><p class="solh"><span class="nr">28</span></p><p>Den totala förändringsfaktorn är</p>$$1{,}04^{10} = 1{,}4802\ldots$$<p>Vi drar bort 1:</p>$$1{,}4802\ldots - 1 = 0{,}4802\ldots \approx 48\ \%$$<p>Svaret är inte $10 \cdot 4\ \% = 40\ \%$, eftersom varje års ränta räknas på ett större belopp än året innan.</p><p class="svar"><b>Svar:</b> Beloppet har ökat med cirka 48&nbsp;%.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">29</span></p><p>Pröva med ett pris på 100&nbsp;kr. Efter höjningen kostar varan 115&nbsp;kr. Sänkningen räknas på 115&nbsp;kr:</p>$$0{,}15 \cdot 115 = 17{,}25\ \mathrm{kr}$$$$115 - 17{,}25 = 97{,}75\ \mathrm{kr}$$<p>Med förändringsfaktorer:</p>$$1{,}15 \cdot 0{,}85 = 0{,}9775$$<p>Sänkningen tar bort mer kronor än höjningen lade till, eftersom den räknas på ett större pris.</p><p class="svar"><b>Svar:</b> Nej. Priset minskar med 2,25&nbsp;%.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">30</span></p><p>Den totala förändringsfaktorn blir</p>$$0{,}85 \cdot 1{,}15 = 0{,}9775$$<p>Det är samma tal som $1{,}15 \cdot 0{,}85$, eftersom ordningen inte spelar någon roll när man multiplicerar.</p><p class="svar"><b>Svar:</b> Nej. Båda ger en minskning med 2,25&nbsp;%.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">31</span></p><p>Sara har adderat procenttalen, men den andra höjningen räknas på det redan höjda priset. Förändringsfaktorerna ska multipliceras:</p>$$1{,}10 \cdot 1{,}10 = 1{,}21$$$$1{,}21 - 1 = 0{,}21 = 21\ \%$$<p class="svar"><b>Svar:</b> Hon har adderat procenttalen. Höjningen blir 21&nbsp;%.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">32</span></p><p>Det andra årets ränta räknas också på det första årets ränta:</p>$$1{,}05^2 = 1{,}1025$$$$1{,}1025 - 1 = 0{,}1025 = 10{,}25\ \%$$<p>Han har nästan rätt, men pengarna har ökat lite mer än 10&nbsp;%.</p><p class="svar"><b>Svar:</b> Nej. Pengarna har ökat med 10,25&nbsp;%.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">33</span></p><p>Vi jämför de totala förändringsfaktorerna:</p>$$1{,}30 \qquad \text{och} \qquad 1{,}15^2 = 1{,}3225$$<p>1,3225 är större än 1,30, eftersom den andra höjningen med 15&nbsp;% räknas på ett högre pris.</p><p class="svar"><b>Svar:</b> Två höjningar med 15&nbsp;% ger det högsta priset.</p></div>
+      <div class="sol"><p class="solh"><span class="nr">34</span></p><p>Priset ska gå från 200&nbsp;kr till 400&nbsp;kr. Förändringsfaktorn är nya priset delat med gamla priset:</p>$$\frac{400}{200} = 2{,}00$$$$2{,}00 - 1 = 1{,}00 = 100\ \%$$<p>Höjningen räknas på 200&nbsp;kr, så den måste vara 100&nbsp;%, inte 50&nbsp;%.</p><p class="svar"><b>Svar:</b> 100&nbsp;%</p></div>
+    </div>
+  </section>
+  <footer><span>Matematik nivå 1b och 1c · Upprepade procentuella förändringar</span><span>fysiklabbet.se</span></footer>
+</section>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

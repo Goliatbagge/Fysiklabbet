@@ -198,8 +198,15 @@
             });
             if (!kurser.length) { el.innerHTML = '<p class="ob-tom">Övningsblad kommer snart.</p>'; return; }
             el.innerHTML = kurser.map(function (k) {
+                // Ett blad som hör till flera avsnitt (Sparande, lån och ränta
+                // ligger på både 3.4 och 3.5) listas bara vid det första.
+                var sett = {};
                 var rader = perKurs[k].map(function (a) {
-                    return blad[a.id].map(function (b, j) {
+                    return blad[a.id].filter(function (b) {
+                        if (sett[b.html]) return false;
+                        sett[b.html] = true;
+                        return true;
+                    }).map(function (b, j) {
                         return '<li class="lab-ovningsblad-rad"><div class="lab-ovningsblad-text">' +
                             (j === 0 ? '<p class="ob-avsnitt">Avsnitt <a class="artikel-lank" href="katalog.html?id=' + esc(a.id) + ':ovningsblad">' + esc(a.num) + ' ' + em(a.title) + '</a></p>' : '') +
                             '<div class="lab-ovningsblad-titel">' + em(b.titel) + '</div>' +

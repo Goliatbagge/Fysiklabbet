@@ -29,9 +29,13 @@
 // figurerna mäts av .claude/verify-ovningsblad-kontakt.js. Potensbladet
 // (ma1c-1.7) och de avancerade uppgifterna i Fysik 2 kapitel 1 (fy2-1.S)
 // byggs av .claude/bygg-ovningsblad-potenser.js respektive
-// .claude/bygg-ovningsblad-fy2-kap1-avancerad.js.
+// .claude/bygg-ovningsblad-fy2-kap1-avancerad.js. Grundnivåbladen för
+// ma1c-3.3, 3.4/3.5 (ett gemensamt blad, registrerat på båda) och 4.1 byggs
+// av .claude/bygg-ovningsblad-ma1c-grund.js.
 // Matematik nivå 1b och 2b speglas via aliaskartorna i katalog.html, så
-// ett blad på ett ma1c-id syns automatiskt även i 1b.
+// ett blad på ett ma1c-id syns automatiskt även i 1b. Kapitelbladen för 1b
+// (ma1b-1.S, ma1b-3.S, ma1b-4.S) ligger däremot på egna 1b-id och visas
+// bara i 1b; de byggs av .claude/bygg-ovningsblad-ma1b.js.
 window.OVNINGSBLAD = {
   'ma1c-2.5': [
     {
@@ -117,6 +121,76 @@ window.OVNINGSBLAD = {
       antal: 48,
       html: 'ovningsblad/ovningsblad-olikheter.html',
       pdf: 'ovningsblad/ovningsblad-olikheter.pdf',
+    },
+  ],
+  'ma1c-3.3': [
+    {
+      titel: 'Upprepade procentuella förändringar',
+      beskrivning: 'Förändringsfaktorer, total förändringsfaktor, samma förändring flera gånger som en potens och tillbaka till procent. Priser, sparande och värdeminskning i text, och resonemang om varför +15 % följt av −15 % inte blir 0 %. Svar och lösningsförslag sist.',
+      niva: ['Grund'],
+      antal: 34,
+      html: 'ovningsblad/ovningsblad-upprepade-procent.html',
+      pdf: 'ovningsblad/ovningsblad-upprepade-procent.pdf',
+    },
+  ],
+  'ma1c-3.4': [
+    {
+      titel: 'Sparande, lån och ränta',
+      beskrivning: 'Ränta och behållning, ett kalkylblad att läsa och skriva formler i, årligt sparande, rak amortering, ränta per månad och kvartal och en lånetabell att fylla i. Svar och lösningsförslag sist.',
+      niva: ['Grund'],
+      antal: 25,
+      html: 'ovningsblad/ovningsblad-sparande-lan.html',
+      pdf: 'ovningsblad/ovningsblad-sparande-lan.pdf',
+    },
+  ],
+  'ma1c-3.5': [
+    {
+      titel: 'Sparande, lån och ränta',
+      beskrivning: 'Ränta och behållning, ett kalkylblad att läsa och skriva formler i, årligt sparande, rak amortering, ränta per månad och kvartal och en lånetabell att fylla i. Svar och lösningsförslag sist.',
+      niva: ['Grund'],
+      antal: 25,
+      html: 'ovningsblad/ovningsblad-sparande-lan.html',
+      pdf: 'ovningsblad/ovningsblad-sparande-lan.pdf',
+    },
+  ],
+  'ma1c-4.1': [
+    {
+      titel: 'Koordinatsystem och linjära modeller',
+      beskrivning: 'Läsa av och rita in punkter, kvadranter, formler för linjära modeller, värdetabeller, en graf att läsa av och en att rita, och att avgöra om ett samband är linjärt. Svar och lösningsförslag sist.',
+      niva: ['Grund'],
+      antal: 32,
+      html: 'ovningsblad/ovningsblad-koordinatsystem.html',
+      pdf: 'ovningsblad/ovningsblad-koordinatsystem.pdf',
+    },
+  ],
+  'ma1b-1.S': [
+    {
+      titel: 'Kapitel 1, Aritmetik',
+      beskrivning: 'Negativa tal, bråk, avrundning och värdesiffror, potenser, grundpotensform med prefix och prioriteringsreglerna. Mest uppgifter på grundnivå, en i taget, och några på mellannivå med flera steg och text. Svar och lösningsförslag sist.',
+      niva: ['Grund', 'Mellan'],
+      antal: 61,
+      html: 'ovningsblad/ovningsblad-ma1b-kap1.html',
+      pdf: 'ovningsblad/ovningsblad-ma1b-kap1.pdf',
+    },
+  ],
+  'ma1b-3.S': [
+    {
+      titel: 'Kapitel 3, Procentuella förändringar',
+      beskrivning: 'Procent och andel, förändringsfaktor, upprepade förändringar, sparande och lån med rak amortering. Mest uppgifter på grundnivå och några på mellannivå, bland annat baklänges och jämförelser åt båda hållen. Svar och lösningsförslag sist.',
+      niva: ['Grund', 'Mellan'],
+      antal: 42,
+      html: 'ovningsblad/ovningsblad-ma1b-kap3.html',
+      pdf: 'ovningsblad/ovningsblad-ma1b-kap3.pdf',
+    },
+  ],
+  'ma1b-4.S': [
+    {
+      titel: 'Kapitel 4, Räta linjer och funktioner',
+      beskrivning: 'Koordinater, linjära modeller, proportionalitet, *k*- och *m*-värde ur ekvation, graf och två punkter, funktionsvärden, grafisk lösning, definitions- och värdemängd samt exponentialfunktioner. Grafer att rita i och läsa av. Svar och lösningsförslag sist.',
+      niva: ['Grund', 'Mellan'],
+      antal: 48,
+      html: 'ovningsblad/ovningsblad-ma1b-kap4.html',
+      pdf: 'ovningsblad/ovningsblad-ma1b-kap4.pdf',
     },
   ],
   'fy1-3.S': [

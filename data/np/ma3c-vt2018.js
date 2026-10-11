@@ -8,7 +8,8 @@
 //
 // Provet skrevs enligt ämnesplanen från 2011. Kursen Matematik 3c motsvarar
 // dagens "Matematik fortsättning nivå 1c". Uppgifter på stoff som utgick vid
-// revideringen 2021 är märkta med `utgatt`. Det muntliga delprovet A ingår
+// revideringen 2021 är märkta med `utgatt`: bara uppgift 11 (cirkelns
+// ekvation, som stod i Ma 3c 2011–2021; se Styrdokument/Gy11-matematik/). Det muntliga delprovet A ingår
 // inte här. Källa: Skolverket/Umeå universitet. Provet är frisläppt och
 // återanvänds inte.
 
@@ -22,7 +23,8 @@ window.NP_PROV['ma3c-vt2018'] = {
     intro: 'Det här är det nationella provet i Matematik 3c (dagens Matematik fortsättning ' +
         'nivå 1c) från våren 2018 (Skolverket/Umeå universitet). Provet är frisläppt och ' +
         'återanvänds inte, och här finns de tre skriftliga delproven B, C och D. Provet skrevs ' +
-        'enligt ämnesplanen från 2011. Välj en uppgift, lös den själv, och klicka sedan fram ' +
+        'enligt ämnesplanen från 2011; den enda uppgiften på stoff som utgick vid revideringen ' +
+        '2021 (cirkelns ekvation i uppgift 11) är märkt. Välj en uppgift, lös den själv, och klicka sedan fram ' +
         'lösningen ett steg i taget. Varje steg förklarar både vad som görs och varför, ' +
         'figurerna byggs upp i takt med lösningen och varje uppgift kan också följas som en ' +
         'pennlösning.',
@@ -524,6 +526,9 @@ window.NP_PROV['ma3c-vt2018'] = {
         {
             nr: 11, del: 'B', poang: [0, 0, 1], omrade: 'Cirkelns ekvation och tangent',
             genomgangar: ['ma2c-4.6', 'ma2c-4.11'],
+            utgatt: 'Cirkelns ekvation ingår inte längre i Matematik fortsättning nivå 1c. Stoffet ' +
+                'utgick vid revideringen av ämnesplanerna 2021, så du behöver inte kunna det till provet. ' +
+                'Lös uppgiften bara om du tycker att den ser rolig ut.',
             endastSvar: true,
             fraga: 'Figuren visar en cirkel med ekvationen $(x + 2)^2 + (y - 2)^2 = 8$<br>' +
                 'I punkten $P$ är cirkelns tangent parallell med $y$-axeln.<br>' +

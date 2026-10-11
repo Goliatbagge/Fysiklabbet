@@ -9788,7 +9788,7 @@
             if (!vis) { node.textContent = 'Kunde inte ladda Galtonbrädan.'; return; }
             var host = document.createElement('div');
             node.appendChild(host);
-            vis.mount(host);
+            vis.mount(host, { inbaddad: true });
         }
         if (window.VISUALISERINGAR && window.VISUALISERINGAR[NYCKEL]) { montera(); return; }
         if (!galtonLaddning) {

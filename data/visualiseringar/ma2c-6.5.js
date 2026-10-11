@@ -19,19 +19,24 @@
  * staplarna växer zoomar skalan ut i steg — kulorna i facken krymper — och
  * vid tusentals kulor ritas högen som en sammanhängande stålpelare.
  *
- * Tre steg (lager):
- *   1. Släpp kulor   — +1/+100/+1000/+10 000 kulor, val av antal rader.
- *   2. Mönstret       — normalfördelningskurvan (röd) ritas på glaset;
- *                        live-andel mittersta/yttersta fack.
- *   3. 68–95-regeln   — zonerna mu ± sigma och mu ± 2·sigma skuggas;
- *                        live-andel jämförs med 68,2 % / 95,4 %.
+ * En enda vy (stegen 1–3 togs bort 2026-10-11): knapparna för att släppa
+ * kulor (+1/+100/+1 000/+10 000) ligger PÅ brädan i glasets övre vänstra
+ * hörn, och under brädan finns antal rader, kryssrutorna "Visa
+ * normalfördelningskurva" (röd kurva på glaset) och "Visa 68–95-regeln"
+ * (zonerna mu ± sigma och mu ± 2·sigma, formlerna för mu och sigma och
+ * andelen kulor i zonerna). Andelen i de mittersta och yttersta facken
+ * visas alltid när kulor fallit.
+ *
+ * mount(el, { inbaddad: true }) döljer kortets rubrik och ingress; så
+ * monteras brädan i teorin (minisim-typen galton i minisim.js), där en
+ * demo-ruta runt den har rubriken och förklaringen.
  *
  * Rendering: tre förrenderade lager (bakgrund, kulhögar, front med stift,
  * skiljeväggar, tratt och ram) + kulor i luften per bildruta. Kulhögarna
  * ritas inkrementellt (bara nya kulor) och görs om helt bara när skalan
  * ändras, så att 10 000 kulor går att animera.
  *
- * API: window.VISUALISERINGAR['ma2c-6.5'] = { mount(el) -> { destroy() } }.
+ * API: window.VISUALISERINGAR['ma2c-6.5'] = { mount(el, opts) -> { destroy() } }.
  */
 (function () {
     'use strict';
@@ -93,8 +98,11 @@
     var G = 2600;            // "tyngdacceleration" i logiska px/s²
     var T_ROW = 0.15;        // tid mellan två stiftrader (s)
 
-    function mount(el) {
-        var state = { step: 1, showCurve: false, rows: 11 };
+    function mount(el, opts) {
+        opts = opts || {};
+        // inbaddad: brädan ligger i en teoriruta som redan har rubrik och
+        // förklarande text, så kortets egen rubrik och ingress döljs.
+        var state = { showCurve: false, showZones: false, rows: 11 };
         var ROWS, BINS, MU, SIGMA;
         var counts, pending, total;
         var flying = [], queue = 0, emitAcc = 0, batchRate = 0;
@@ -113,19 +121,30 @@
         title.textContent = 'Galtonbrädan: normalfördelningen växer fram';
         card.appendChild(title);
 
-        var stepsRow = document.createElement('div');
-        stepsRow.className = 'lab-vis-steps';
-        card.appendChild(stepsRow);
-
         var instr = document.createElement('div');
         instr.className = 'lab-vis-instr';
         card.appendChild(instr);
+        if (opts.inbaddad) {
+            title.style.display = 'none';
+            instr.style.display = 'none';
+            // Teorins demo-ruta är redan ramen: inget kort i kortet, så att
+            // brädan får hela bredden (viktigt på mobil).
+            card.style.border = 'none';
+            card.style.background = 'transparent';
+            card.style.padding = '0';
+        }
 
         var scene = document.createElement('div');
         scene.className = 'lab-graf-scene lab-vis-scene';
         scene.style.maxWidth = '640px';
         scene.style.position = 'relative';
         card.appendChild(scene);
+        // board: själva brädan (canvas + knappar som ligger på den). Knapparna
+        // storleksätts i cqw (procent av brädans bredd) och följer skalningen.
+        var board = document.createElement('div');
+        board.style.position = 'relative';
+        board.style.containerType = 'inline-size';
+        scene.appendChild(board);
 
         var canvas = document.createElement('canvas');
         canvas.style.display = 'block';
@@ -133,7 +152,7 @@
         canvas.style.height = 'auto';
         canvas.style.aspectRatio = W + ' / ' + H;
         canvas.setAttribute('role', 'img');
-        scene.appendChild(canvas);
+        board.appendChild(canvas);
         var ctx = canvas.getContext('2d');
 
         // Ljudknapp (högtalare / överstruken högtalare), samma stil som
@@ -157,7 +176,63 @@
             'border-radius:50%;display:flex;align-items:center;justify-content:center;' +
             'background:rgba(255,255,255,0.92);color:#0f1620;border:none;cursor:pointer;' +
             'padding:0;z-index:5;box-shadow:0 1px 4px rgba(0,0,0,0.35);';
-        scene.appendChild(sndBtn);
+        board.appendChild(sndBtn);
+
+        // Släpp-knapparna ligger PÅ brädan, i glasets övre vänstra hörn
+        // (fritt utrymme mellan ramen, tratten och stiftens triangel).
+        var UI_FONT = "Poppins, 'DM Sans', system-ui, sans-serif";
+        // På smal skärm (brädan < 440 px) finns inte plats på glaset; då
+        // ligger samma knappar i en rad direkt ovanför brädan (layoutDrop).
+        var dropPanel = document.createElement('div');
+        var dropCap = document.createElement('div');
+        dropCap.textContent = 'Släpp kulor';
+        dropPanel.appendChild(dropCap);
+        var dropGrid = document.createElement('div');
+        dropPanel.appendChild(dropGrid);
+        var dropBtns = [];
+        [[1, '1'], [100, '100'], [1000, '1\u00a0000'], [10000, '10\u00a0000']].forEach(function (d) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.textContent = '+' + d[1];
+            b.setAttribute('aria-label', 'Släpp ' + d[1] + (d[0] === 1 ? ' kula' : ' kulor'));
+            dropBtns.push(b);
+            b.addEventListener('mouseenter', function () { b.style.background = '#fff'; });
+            b.addEventListener('mouseleave', function () { b.style.background = 'rgba(255,255,255,0.92)'; });
+            b.addEventListener('click', function () { addBalls(d[0]); });
+            dropGrid.appendChild(b);
+        });
+        var dropNarrow = null;
+        function layoutDrop(narrow) {
+            if (narrow === dropNarrow) return;
+            dropNarrow = narrow;
+            var btnBase = 'font-family:' + UI_FONT + ';font-weight:600;color:#1f2530;' +
+                'white-space:nowrap;padding:0;border-radius:999px;cursor:pointer;' +
+                'border:1px solid rgba(31,37,48,0.45);background:rgba(255,255,255,0.92);' +
+                'box-shadow:0 1px 3px rgba(0,0,0,0.18);';
+            var capBase = 'font-family:' + UI_FONT + ';font-weight:600;color:#5b6472;' +
+                'letter-spacing:0.02em;';
+            if (narrow) {
+                dropPanel.style.cssText = 'display:flex;flex-wrap:wrap;align-items:center;' +
+                    'justify-content:center;gap:6px;margin:0 0 8px;';
+                dropCap.style.cssText = capBase + 'font-size:13px;width:100%;text-align:center;';
+                dropGrid.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;justify-content:center;';
+                dropBtns.forEach(function (b) {
+                    b.style.cssText = btnBase + 'font-size:13.5px;height:34px;min-width:52px;padding:0 10px;';
+                });
+                scene.insertBefore(dropPanel, board);
+            } else {
+                dropPanel.style.cssText = 'position:absolute;top:4.6%;left:9.4%;z-index:5;' +
+                    'display:flex;flex-direction:column;gap:clamp(2px,0.9cqw,6px);';
+                dropCap.style.cssText = capBase + 'font-size:clamp(9px,2cqw,13px);';
+                dropGrid.style.cssText = 'display:grid;grid-template-columns:auto auto;' +
+                    'gap:clamp(3px,1cqw,7px);';
+                dropBtns.forEach(function (b) {
+                    b.style.cssText = btnBase + 'font-size:clamp(9px,2.15cqw,14px);' +
+                        'width:clamp(38px,12.4cqw,82px);height:clamp(20px,5.6cqw,36px);';
+                });
+                board.appendChild(dropPanel);
+            }
+        }
 
         var legend = document.createElement('div');
         legend.className = 'lab-vis-legend';
@@ -192,46 +267,17 @@
         el.innerHTML = '';
         el.appendChild(card);
 
-        // ── Steg-knappar ──────────────────────────────────────────────────
-        var STEPS = [
-            { n: 1, label: '1 · Släpp kulor' },
-            { n: 2, label: '2 · Mönstret' },
-            { n: 3, label: '3 · 68–95-regeln' }
-        ];
-        function instrText(step) {
-            if (step === 1) {
-                return 'Släpp kulor genom Galtonbrädan. Vid varje stift studsar kulan åt ' +
-                    'vänster eller höger med lika stor sannolikhet, helt slumpmässigt. ' +
-                    'Antalet högersteg (<em>k</em>) avgör vilket av de ' + BINS + ' facken ' +
-                    'kulan hamnar i. Innan du börjar: var tror du kulorna samlas när många ' +
-                    'har fallit? Jämnt utspritt över alla fack, eller mest i mitten?';
-            }
-            if (step === 2) {
-                return 'Klicka i "Visa kurvan" för att rita en normalfördelningskurva ' +
-                    '(röd) på glaset. Fastän varje enskild kula bara studsar ' +
-                    'slumpmässigt åt vänster eller höger bildar många kulor tillsammans ' +
-                    'en förutsägbar klockform: normalfördelningen.';
-            }
-            return '68–95-regeln säger att ungefär 68 % av alla värden i en ' +
-                'normalfördelning ligger inom en standardavvikelse (<em>σ</em>) från ' +
-                'medelvärdet (<em>μ</em>), och ungefär 95 % inom två ' +
-                'standardavvikelser. De skuggade zonerna visar detta. Jämför med ' +
-                'hur stor andel av dina kulor som faktiskt hamnat där.';
+        // ── Ingress (en enda vy, inga steg) ─────────────────────────────────
+        function instrText() {
+            return 'Släpp kulor genom Galtonbrädan med knapparna +1, +100, +1 000 ' +
+                'och +10 000. Vid varje stift studsar kulan åt vänster eller höger med lika ' +
+                'stor sannolikhet, helt slumpmässigt. Antalet högersteg (<em>k</em>) ' +
+                'avgör vilket av de ' + BINS + ' facken kulan hamnar i. Var tror du att ' +
+                'kulorna samlas när många har fallit? Kryssa sedan i <em>Visa ' +
+                'normalfördelningskurva</em> och jämför klockformen med kurvan, och ' +
+                '<em>Visa 68–95-regeln</em> för att se hur stor andel av dina kulor som ' +
+                'hamnar inom en och två standardavvikelser från medelvärdet.';
         }
-        var stepBtns = [];
-        STEPS.forEach(function (s) {
-            var b = document.createElement('button');
-            b.type = 'button';
-            b.className = 'lab-vis-step';
-            b.textContent = s.label;
-            b.addEventListener('click', function () {
-                state.step = s.n;
-                if (s.n >= 3) { state.showCurve = true; curveCb.checked = true; }
-                update();
-            });
-            stepsRow.appendChild(b);
-            stepBtns.push(b);
-        });
 
         // ── Legend ────────────────────────────────────────────────────────
         function legendItem(color, html, kind) {
@@ -273,20 +319,6 @@
         counterSpan.style.textAlign = 'center';
         actions.appendChild(counterSpan);
 
-        function makeBtn(parent, txt, fn) {
-            var b = document.createElement('button');
-            b.type = 'button';
-            b.className = 'lab-btn';
-            b.textContent = txt;
-            b.addEventListener('click', fn);
-            parent.appendChild(b);
-            return b;
-        }
-        makeBtn(actions, '+1 kula', function () { addBalls(1); });
-        makeBtn(actions, '+100 kulor', function () { addBalls(100); });
-        makeBtn(actions, '+1 000 kulor', function () { addBalls(1000); });
-        makeBtn(actions, '+10 000 kulor', function () { addBalls(10000); });
-
         // Antal rader (ändring nollställer brädan)
         var rowsWrap = document.createElement('span');
         rowsWrap.style.display = 'inline-flex';
@@ -314,7 +346,7 @@
         rowsWrap.appendChild(rowsMinus);
         rowsWrap.appendChild(rowsLbl);
         rowsWrap.appendChild(rowsPlus);
-        actions2.appendChild(rowsWrap);
+        actions.appendChild(rowsWrap);
 
         var curveLabel = document.createElement('label');
         curveLabel.className = 'lab-graf-check';
@@ -326,9 +358,23 @@
         });
         curveLabel.appendChild(curveCb);
         var curveTxt = document.createElement('span');
-        curveTxt.textContent = 'Visa kurvan';
+        curveTxt.textContent = 'Visa normalfördelningskurva';
         curveLabel.appendChild(curveTxt);
         actions2.appendChild(curveLabel);
+
+        var zoneLabel = document.createElement('label');
+        zoneLabel.className = 'lab-graf-check';
+        var zoneCb = document.createElement('input');
+        zoneCb.type = 'checkbox';
+        zoneCb.addEventListener('change', function () {
+            state.showZones = zoneCb.checked;
+            update();
+        });
+        zoneLabel.appendChild(zoneCb);
+        var zoneTxt = document.createElement('span');
+        zoneTxt.textContent = 'Visa 68–95-regeln';
+        zoneLabel.appendChild(zoneTxt);
+        actions2.appendChild(zoneLabel);
 
         // ── Nollställ ────────────────────────────────────────────────────
         var reset = document.createElement('button');
@@ -337,8 +383,6 @@
         reset.textContent = 'Nollställ';
         reset.addEventListener('click', function () {
             setupModel();
-            state.showCurve = false;
-            curveCb.checked = false;
             update();
         });
         foot.appendChild(reset);
@@ -543,6 +587,7 @@
         }
         function resize() {
             var cssW = canvas.clientWidth || scene.clientWidth || W;
+            layoutDrop(cssW < 440);
             dpr = Math.min(window.devicePixelRatio || 1, 2.5);
             cssScale = cssW / W;
             px = cssScale * dpr;
@@ -1058,7 +1103,7 @@
         }
 
         // ── Rita en bildruta ──────────────────────────────────────────────
-        function showCurveNow() { return (state.step === 2 && state.showCurve) || state.step >= 3; }
+        function showCurveNow() { return state.showCurve; }
         function draw() {
             if (!geo || !canvas.width) return;
             var c = ctx;
@@ -1069,7 +1114,7 @@
             var g = geo;
 
             // Zonskuggning bakom högarna (steg 3)
-            if (state.step >= 3) {
+            if (state.showZones) {
                 var x2a = binX(MU - 2 * SIGMA), x2b = binX(MU + 2 * SIGMA);
                 var x1a = binX(MU - SIGMA), x1b = binX(MU + SIGMA);
                 c.fillStyle = COL.zone2;
@@ -1098,7 +1143,7 @@
             var labelFont = Math.round(clampNum(9.5 / cssScale, 12.5, 23));
 
             // Zongränser + etiketter (steg 3)
-            if (state.step >= 3) {
+            if (state.showZones) {
                 var marks = [
                     { v: MU - 2 * SIGMA, t: ['*μ', ' − 2', '*σ'] },
                     { v: MU - SIGMA, t: ['*μ', ' − ', '*σ'] },
@@ -1184,7 +1229,7 @@
 
         // ── Formel (mu, sigma) ────────────────────────────────────────────
         function updateFormula() {
-            if (state.step >= 3) {
+            if (state.showZones) {
                 katexInto(formelMu,
                     '\\mu = \\dfrac{n}{2} = \\dfrac{' + ROWS + '}{2} = ' + fmtTex(MU, 1));
                 katexInto(formelSigma,
@@ -1195,41 +1240,33 @@
         // ── Räknare + live-text ────────────────────────────────────────────
         function updateCounterAndNote() {
             counterSpan.textContent = 'Antal kulor: ' + fmtInt(total);
-            if (state.step === 1) {
-                note.textContent = '';
-                return;
-            }
-            if (total === 0) { note.textContent = 'Släpp några kulor för att se mönstret.'; return; }
-            if (state.step === 2) {
-                var mids = midBins();
-                var midShare = sumBins(mids) / total;
-                var edgeShare = sumBins([0, ROWS]) / total;
-                var midLabel = mids.length === 2 ? (mids[0] + ' och ' + mids[1]) : String(mids[0]);
-                note.innerHTML = 'De mittersta facken (' + midLabel + ') innehåller <strong>' +
-                    pct(midShare) + '</strong> av kulorna. De yttersta facken (0 och ' + ROWS +
-                    ') innehåller bara <strong>' + pct(edgeShare) + '</strong> tillsammans.';
-            } else {
+            if (total === 0) { note.textContent = ''; return; }
+            var mids = midBins();
+            var midShare = sumBins(mids) / total;
+            var edgeShare = sumBins([0, ROWS]) / total;
+            var midLabel = mids.length === 2 ? (mids[0] + ' och ' + mids[1]) : String(mids[0]);
+            var html = 'De mittersta facken (' + midLabel + ') innehåller <strong>' +
+                pct(midShare) + '</strong> av kulorna. De yttersta facken (0 och ' + ROWS +
+                ') innehåller bara <strong>' + pct(edgeShare) + '</strong> tillsammans.';
+            if (state.showZones) {
                 var s1 = zoneCount(1) / total;
                 var s2 = zoneCount(2) / total;
-                note.innerHTML = 'Andel kulor inom <em>μ</em> ± <em>σ</em>: <strong>' + pct(s1) +
+                html += '<br>Andel kulor inom <em>μ</em> ± <em>σ</em>: <strong>' + pct(s1) +
                     '</strong> (normalfördelningen ger 68,2 %). Andel inom <em>μ</em> ± 2<em>σ</em>: <strong>' +
                     pct(s2) + '</strong> (normalfördelningen ger 95,4 %). Kantfacken räknas efter ' +
                     'hur stor del av dem som ligger i zonen.';
             }
+            note.innerHTML = html;
         }
 
         // ── Visa/dölj per steg + omritning ────────────────────────────────
         function update() {
-            stepBtns.forEach(function (b, i) { b.classList.toggle('active', state.step === i + 1); });
-            instr.innerHTML = instrText(state.step);
-            legCurve.style.display = state.step >= 2 ? '' : 'none';
-            legZone1.style.display = state.step >= 3 ? '' : 'none';
-            legZone2.style.display = state.step >= 3 ? '' : 'none';
-            curveLabel.style.display = state.step === 2 ? '' : 'none';
-            if (state.step >= 3) { curveCb.checked = true; curveCb.disabled = true; state.showCurve = true; }
-            else { curveCb.disabled = false; }
-            formelMu.style.display = state.step >= 3 ? '' : 'none';
-            formelSigma.style.display = state.step >= 3 ? '' : 'none';
+            instr.innerHTML = instrText();
+            legCurve.style.display = state.showCurve ? '' : 'none';
+            legZone1.style.display = state.showZones ? '' : 'none';
+            legZone2.style.display = state.showZones ? '' : 'none';
+            formelMu.style.display = state.showZones ? '' : 'none';
+            formelSigma.style.display = state.showZones ? '' : 'none';
             updateFormula();
             choosePileScale(false);
             draw();

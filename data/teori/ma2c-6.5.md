@@ -24,16 +24,29 @@ andelen visas.
 
 där $\mu$ = medelvärde och $\sigma$ = standardavvikelse.
 
-Varför fördelar sig så mycket på just det här sättet? I simuleringen nedan
-faller kulor genom en Galtonbräda. Vid varje stift studsar kulan åt vänster
-eller höger, helt slumpmässigt. En enskild kula kan hamna nästan var som
-helst, men när många kulor har fallit bildar de tillsammans en klockform som
-liknar normalfördelningskurvan. När många små slumpmässiga bidrag läggs ihop
-blir resultatet normalfördelat, och därför är till exempel människors längd
-ungefär normalfördelad.
+::: demo "Testa själv: Galtonbrädan"
+Varför fördelar sig så mycket på just det här sättet? Det går att se med en
+**Galtonbräda**, som den brittiske forskaren Francis Galton konstruerade på
+1870-talet. Kulor släpps ned genom rader av stift. Vid varje stift studsar
+kulan åt vänster eller höger med lika stor sannolikhet, helt slumpmässigt.
+Antalet steg åt höger avgör i vilket fack kulan hamnar.
+
+En enskild kula kan hamna nästan var som helst, men när många kulor har
+fallit bildar de tillsammans en klockform. Kryssa i *Visa
+normalfördelningskurva* så ritas kurvan på glaset. Fastän varje kula bara
+studsar slumpmässigt följer helheten normalfördelningskurvan. När många små
+slumpmässiga bidrag läggs ihop blir resultatet normalfördelat, och därför är
+till exempel människors längd ungefär normalfördelad.
+
+Kryssa i *Visa 68–95-regeln* för att pröva procentsatserna i figuren ovan.
+Med många kulor hamnar ungefär två tredjedelar av kulorna inom en
+standardavvikelse från medelvärdet och ungefär 95 % inom två, nära
+procentsatserna i normalfördelningskurvan. Helt exakt blir det inte,
+eftersom brädan bara har ett begränsat antal rader.
 
 ::: minisim
 typ: galton
+:::
 :::
 
 Om man ska bestämma andelar som inte ligger vid jämna

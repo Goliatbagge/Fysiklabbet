@@ -24,6 +24,18 @@ andelen visas.
 
 där $\mu$ = medelvärde och $\sigma$ = standardavvikelse.
 
+Varför fördelar sig så mycket på just det här sättet? I simuleringen nedan
+faller kulor genom en Galtonbräda. Vid varje stift studsar kulan åt vänster
+eller höger, helt slumpmässigt. En enskild kula kan hamna nästan var som
+helst, men när många kulor har fallit bildar de tillsammans en klockform som
+liknar normalfördelningskurvan. När många små slumpmässiga bidrag läggs ihop
+blir resultatet normalfördelat, och därför är till exempel människors längd
+ungefär normalfördelad.
+
+::: minisim
+typ: galton
+:::
+
 Om man ska bestämma andelar som inte ligger vid jämna
 standardavvikelser får man ta hjälp av digitala verktyg, till exempel
 Geogebra eller Fysiklabbets

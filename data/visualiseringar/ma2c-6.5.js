@@ -124,6 +124,7 @@
         var scene = document.createElement('div');
         scene.className = 'lab-graf-scene lab-vis-scene';
         scene.style.maxWidth = '640px';
+        scene.style.position = 'relative';
         card.appendChild(scene);
 
         var canvas = document.createElement('canvas');
@@ -134,6 +135,29 @@
         canvas.setAttribute('role', 'img');
         scene.appendChild(canvas);
         var ctx = canvas.getContext('2d');
+
+        // Ljudknapp (högtalare / överstruken högtalare), samma stil som
+        // minisimuleringarnas.
+        var ICON_SND_ON =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M11 5 6 9H3v6h3l5 4z"/>' +
+            '<path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+        var ICON_SND_OFF =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M11 5 6 9H3v6h3l5 4z"/>' +
+            '<line x1="16" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="16" y2="15"/></svg>';
+        var sndBtn = document.createElement('button');
+        sndBtn.type = 'button';
+        sndBtn.setAttribute('aria-label', 'Ljud på/av');
+        // Placeras inne i glasets övre högra hörn (ramen börjar 30 enheter
+        // in från canvasens kant), i procent så att den följer skalningen.
+        sndBtn.style.cssText = 'position:absolute;top:4.5%;right:8.6%;width:40px;height:40px;' +
+            'border-radius:50%;display:flex;align-items:center;justify-content:center;' +
+            'background:rgba(255,255,255,0.92);color:#0f1620;border:none;cursor:pointer;' +
+            'padding:0;z-index:5;box-shadow:0 1px 4px rgba(0,0,0,0.35);';
+        scene.appendChild(sndBtn);
 
         var legend = document.createElement('div');
         legend.className = 'lab-vis-legend';
@@ -780,6 +804,123 @@
             }
         }
 
+        // ── Ljud (Web Audio, helt syntetiserat — inga ljudfiler) ──────────
+        // Stiftträff: kort metalliskt pling (grundton + inharmonisk överton,
+        // panorerat efter x). Landning: dovt klick (brusskur genom bandpass).
+        // Tät ström: ett regnliknande brus vars styrka följer antalet kulor i
+        // luften. Antalet enskilda pling per sekund begränsas med en
+        // "tokenhink", annars blir 10 000 kulor ett enda skrän.
+        var AC = window.AudioContext || window.webkitAudioContext;
+        var LJUD_NYCKEL = 'fysiklabbetGaltonLjud';
+        var soundOn = true;
+        try { soundOn = localStorage.getItem(LJUD_NYCKEL) !== 'av'; } catch (e) { /* privat läge */ }
+        var actx = null, master = null, noiseBuf = null;
+        var rainGain = null, rainSrc = null;
+        var tokPeg = 0, tokLand = 0, tokTs = 0;
+        function ensureAudio() {
+            if (actx || !AC) return;
+            try { actx = new AC(); } catch (e) { actx = null; return; }
+            master = actx.createGain();
+            master.gain.value = 0.55;
+            master.connect(actx.destination);
+            var len = Math.floor(actx.sampleRate * 1.0);
+            noiseBuf = actx.createBuffer(1, len, actx.sampleRate);
+            var d = noiseBuf.getChannelData(0);
+            for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+        }
+        function resumeAudio() {
+            if (!soundOn) return;
+            ensureAudio();
+            if (actx && actx.state === 'suspended') actx.resume();
+        }
+        function audioReady() { return soundOn && actx && actx.state === 'running'; }
+        function panNode(x) {
+            if (!actx.createStereoPanner) return null;
+            var p = actx.createStereoPanner();
+            p.pan.value = clampNum((x - W / 2) / (W / 2), -1, 1) * 0.6;
+            return p;
+        }
+        function refillTokens() {
+            var now = actx.currentTime;
+            var dt = Math.min(0.25, now - tokTs);
+            tokTs = now;
+            tokPeg = Math.min(6, tokPeg + dt * 42);
+            tokLand = Math.min(4, tokLand + dt * 22);
+        }
+        function soundPeg(x) {
+            if (!audioReady()) return;
+            refillTokens();
+            if (tokPeg < 1) return;
+            tokPeg -= 1;
+            var t = actx.currentTime + 0.002;
+            var f = 2900 + Math.random() * 1300;
+            var g = actx.createGain();
+            var vol = 0.05 + Math.random() * 0.035;
+            g.gain.setValueAtTime(vol, t);
+            g.gain.exponentialRampToValueAtTime(0.0001, t + 0.07);
+            var o1 = actx.createOscillator(), o2 = actx.createOscillator();
+            o1.type = 'sine'; o1.frequency.value = f;
+            o2.type = 'sine'; o2.frequency.value = f * 2.76;
+            var g2 = actx.createGain(); g2.gain.value = 0.35;
+            o1.connect(g); o2.connect(g2); g2.connect(g);
+            var p = panNode(x);
+            if (p) { g.connect(p); p.connect(master); } else g.connect(master);
+            o1.start(t); o2.start(t); o1.stop(t + 0.08); o2.stop(t + 0.08);
+        }
+        function soundLand(x) {
+            if (!audioReady()) return;
+            refillTokens();
+            if (tokLand < 1) return;
+            tokLand -= 1;
+            var t = actx.currentTime + 0.002;
+            var src = actx.createBufferSource();
+            src.buffer = noiseBuf;
+            var bp = actx.createBiquadFilter();
+            bp.type = 'bandpass';
+            bp.frequency.value = pile && pile.solid ? 900 : 1500 + Math.random() * 600;
+            bp.Q.value = 2.2;
+            var g = actx.createGain();
+            g.gain.setValueAtTime(0.32, t);
+            g.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
+            src.connect(bp); bp.connect(g);
+            var p = panNode(x);
+            if (p) { g.connect(p); p.connect(master); } else g.connect(master);
+            src.start(t, Math.random() * 0.9, 0.06);
+        }
+        // Regnbruset följer antalet kulor i luften (hörs först vid tät ström).
+        function updateRain() {
+            if (!actx) return;
+            var target = 0;
+            if (soundOn && actx.state === 'running') {
+                target = Math.min(0.11, Math.max(0, flying.length - 25) / 1500 * 0.11);
+            }
+            if (!rainSrc && target > 0) {
+                rainSrc = actx.createBufferSource();
+                rainSrc.buffer = noiseBuf;
+                rainSrc.loop = true;
+                var bp = actx.createBiquadFilter();
+                bp.type = 'bandpass'; bp.frequency.value = 3600; bp.Q.value = 0.7;
+                rainGain = actx.createGain();
+                rainGain.gain.value = 0;
+                rainSrc.connect(bp); bp.connect(rainGain); rainGain.connect(master);
+                rainSrc.start();
+            }
+            if (rainGain) rainGain.gain.setTargetAtTime(target, actx.currentTime, 0.15);
+        }
+        function syncSndBtn() {
+            sndBtn.innerHTML = soundOn ? ICON_SND_ON : ICON_SND_OFF;
+            sndBtn.title = soundOn ? 'Ljud av' : 'Ljud på';
+            sndBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+        }
+        sndBtn.addEventListener('click', function () {
+            soundOn = !soundOn;
+            try { localStorage.setItem(LJUD_NYCKEL, soundOn ? 'pa' : 'av'); } catch (e) { /* ignorera */ }
+            syncSndBtn();
+            if (soundOn) resumeAudio();
+            updateRain();
+        });
+        syncSndBtn();
+
         // ── Kulor i luften ────────────────────────────────────────────────
         // Varje kula följer en kedja av paraboliska hopp: tratt → stift i rad
         // 0 → … → stift i sista raden → ned i sitt fack. Vid varje stift
@@ -830,6 +971,7 @@
                 b.t += dt;
                 while (b.t >= b.segs[b.si].T) {
                     b.t -= b.segs[b.si].T;
+                    soundPeg(b.segs[b.si].x1);   // kulan träffar ett stift
                     b.si++;
                     if (b.si >= b.segs.length) { enterFinal(b); return stepFinal(b, 0); }
                 }
@@ -860,6 +1002,7 @@
 
         // ── Släpp kulor ───────────────────────────────────────────────────
         function addBalls(n) {
+            resumeAudio();   // knapptrycket är den användargest ljudet kräver
             queue += n;
             // Takten väljs så att en hel sats tar ungefär 4,5 s att rinna ut.
             // Taket håller strömmen läsbar: 10 000 kulor tar då cirka 7 s.
@@ -895,6 +1038,7 @@
             for (var j = flying.length - 1; j >= 0; j--) {
                 var b = flying[j];
                 if (stepBall(b, dt)) {
+                    soundLand(b.x);
                     counts[b.bin]++;
                     pending[b.bin]--;
                     total++;
@@ -908,6 +1052,7 @@
                 updateCounterAndNote();
             }
             draw();
+            updateRain();
             if (flying.length > 0 || queue > 0) animId = requestAnimationFrame(frame);
             else { lastTs = null; updateCounterAndNote(); }
         }
@@ -1088,6 +1233,7 @@
             updateFormula();
             choosePileScale(false);
             draw();
+            updateRain();
             updateCounterAndNote();
         }
 
@@ -1124,6 +1270,7 @@
             destroy: function () {
                 destroyed = true;
                 stopAnim();
+                if (actx) { try { actx.close(); } catch (e) { /* redan stängd */ } }
                 if (ro) ro.disconnect(); else window.removeEventListener('resize', resize);
                 document.removeEventListener('fullscreenchange', onFullscreen);
                 document.removeEventListener('webkitfullscreenchange', onFullscreen);

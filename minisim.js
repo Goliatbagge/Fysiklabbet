@@ -20,7 +20,7 @@
  *           eulersdisk, fjaderpendel, skiftnyckel, valtning, gaffelbalans,
  *           gaffelbalans3d, dubbelkon, linjal, fodelsedag, talmangder,
  *           magnetpoler, magnetdelning, koniskpendel, kastvektorer,
- *           snettkast, skjutochslapp, kanonvagn
+ *           snettkast, skjutochslapp, kanonvagn, galton
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -312,6 +312,14 @@
  * markeringen. Regionerna är tangentbordsnåbara (tab + Enter/mellanslag).
  * Ritad i laboranstemat (SVG på papper med kollegierutnät); inga knappar,
  * inget ljud, ingen fullskärm — figuren ÄR interaktionen.
+ *
+ * ── typ: galton ──────────────────────────────────────────────────────────
+ * Galtonbrädan i ma2c-6.5 (Normalfördelning): kulor faller genom en bräda
+ * av trä och glas och staplas i facken så att klockformen växer fram, med
+ * normalkurvan och 68–95-regeln som steg 2 och 3. Brädan BOR i
+ * data/visualiseringar/ma2c-6.5.js (avsnittets flik Visualisering); typen
+ * här laddar den modulen vid behov och monterar samma bräda i teorin, så
+ * att den bara finns på ett ställe. Ändra alltså brädan där, inte här.
  */
 (function () {
     'use strict';
@@ -9768,6 +9776,33 @@
         updateInfo();
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: galton — monterar visualiseringen ma2c-6.5 (Galtonbrädan)
+    // ══════════════════════════════════════════════════════════════════════
+    var galtonLaddning = null;
+    function buildGalton(node) {
+        var NYCKEL = 'ma2c-6.5';
+        node.classList.add('lab-minisim-galton');
+        function montera() {
+            var vis = window.VISUALISERINGAR && window.VISUALISERINGAR[NYCKEL];
+            if (!vis) { node.textContent = 'Kunde inte ladda Galtonbrädan.'; return; }
+            var host = document.createElement('div');
+            node.appendChild(host);
+            vis.mount(host);
+        }
+        if (window.VISUALISERINGAR && window.VISUALISERINGAR[NYCKEL]) { montera(); return; }
+        if (!galtonLaddning) {
+            galtonLaddning = new Promise(function (resolve) {
+                var s = document.createElement('script');
+                s.src = 'data/visualiseringar/' + NYCKEL + '.js?v=' + (window.__CB || '');
+                s.onload = resolve;
+                s.onerror = resolve;
+                document.head.appendChild(s);
+            });
+        }
+        galtonLaddning.then(montera);
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   cirkularrorelse: buildCirkularrorelse,
                   kastvektorer: buildKastvektorer,
@@ -9782,7 +9817,8 @@
                   dubbelkon: buildDubbelkon,
                   linjal: buildLinjal, linjaltrio: buildLinjaltrio,
                   fodelsedag: buildFodelsedag, talmangder: buildTalmangder,
-                  magnetpoler: buildMagnetpoler, magnetdelning: buildMagnetdelning };
+                  magnetpoler: buildMagnetpoler, magnetdelning: buildMagnetdelning,
+                  galton: buildGalton };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

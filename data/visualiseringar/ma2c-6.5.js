@@ -94,7 +94,7 @@
     var FONT = 'Poppins, "DM Sans", system-ui, sans-serif';
 
     // Logisk ritstorlek (allt räknas i dessa koordinater och skalas sedan).
-    var W = 640, H = 672;
+    var W = 640, H = 740;
     var G = 2600;            // "tyngdacceleration" i logiska px/s²
     var T_ROW = 0.15;        // tid mellan två stiftrader (s)
 
@@ -155,34 +155,35 @@
         board.appendChild(canvas);
         var ctx = canvas.getContext('2d');
 
-        // Ljudknapp (högtalare / överstruken högtalare), samma stil som
-        // minisimuleringarnas.
+        // ── Allt på brädan ──────────────────────────────────────────────────
+        // Uppe till vänster: släppknapparna + antal kulor (fritt utrymme mellan
+        // ramen, tratten och stiftens triangel). Uppe till höger: en hopfällbar
+        // inställningsruta som i fysiksimuleringarna (.scene-toggles): ljud,
+        // kryssrutorna, glidare för antal rader och Nollställ. Allt storleks-
+        // sätts i cqw (procent av brädans bredd) och följer skalningen. På smal
+        // skärm (brädan < 440 px) finns inte plats på glaset: då ligger
+        // släppknapparna i en rad ovanför brädan och inställningarna i en ruta
+        // direkt under den (layoutPanels).
+        var UI_FONT = "Poppins, 'DM Sans', system-ui, sans-serif";
         var ICON_SND_ON =
-            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
             'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
             '<path d="M11 5 6 9H3v6h3l5 4z"/>' +
             '<path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
         var ICON_SND_OFF =
-            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
             'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
             '<path d="M11 5 6 9H3v6h3l5 4z"/>' +
             '<line x1="16" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="16" y2="15"/></svg>';
-        var sndBtn = document.createElement('button');
-        sndBtn.type = 'button';
-        sndBtn.setAttribute('aria-label', 'Ljud på/av');
-        // Placeras inne i glasets övre högra hörn (ramen börjar 30 enheter
-        // in från canvasens kant), i procent så att den följer skalningen.
-        sndBtn.style.cssText = 'position:absolute;top:4.5%;right:8.6%;width:40px;height:40px;' +
-            'border-radius:50%;display:flex;align-items:center;justify-content:center;' +
-            'background:rgba(255,255,255,0.92);color:#0f1620;border:none;cursor:pointer;' +
-            'padding:0;z-index:5;box-shadow:0 1px 4px rgba(0,0,0,0.35);';
-        board.appendChild(sndBtn);
+        var ICON_CLOSE =
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+        var ICON_SLIDERS =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/>' +
+            '<circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>';
 
-        // Släpp-knapparna ligger PÅ brädan, i glasets övre vänstra hörn
-        // (fritt utrymme mellan ramen, tratten och stiftens triangel).
-        var UI_FONT = "Poppins, 'DM Sans', system-ui, sans-serif";
-        // På smal skärm (brädan < 440 px) finns inte plats på glaset; då
-        // ligger samma knappar i en rad direkt ovanför brädan (layoutDrop).
+        // Släpp kulor (uppe till vänster)
         var dropPanel = document.createElement('div');
         var dropCap = document.createElement('div');
         dropCap.textContent = 'Släpp kulor';
@@ -201,16 +202,107 @@
             b.addEventListener('click', function () { addBalls(d[0]); });
             dropGrid.appendChild(b);
         });
+        var counterSpan = document.createElement('div');
+        var trattSpan = document.createElement('div');
+        dropPanel.appendChild(counterSpan);
+        dropPanel.appendChild(trattSpan);
+
+        // Inställningsrutan (uppe till höger)
+        var setPanel = document.createElement('div');
+        setPanel.setAttribute('role', 'group');
+        setPanel.setAttribute('aria-label', 'Inställningar');
+        var setHead = document.createElement('div');
+        var sndBtn = document.createElement('button');
+        sndBtn.type = 'button';
+        sndBtn.setAttribute('aria-label', 'Ljud på/av');
+        var sndTxt = document.createElement('span');
+        var hideBtn = document.createElement('button');
+        hideBtn.type = 'button';
+        hideBtn.innerHTML = ICON_CLOSE;
+        hideBtn.title = 'Dölj inställningarna';
+        hideBtn.setAttribute('aria-label', 'Dölj inställningarna');
+        setHead.appendChild(sndBtn);
+        setHead.appendChild(hideBtn);
+        setPanel.appendChild(setHead);
+
+        function makeCheck(txt, onChange) {
+            var lbl = document.createElement('label');
+            var cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.addEventListener('change', function () { onChange(cb.checked); update(); });
+            var t = document.createElement('span');
+            t.textContent = txt;
+            lbl.appendChild(cb);
+            lbl.appendChild(t);
+            setPanel.appendChild(lbl);
+            return { lbl: lbl, cb: cb };
+        }
+        var curveCheck = makeCheck('Visa normalfördelningskurva', function (v) { state.showCurve = v; });
+        var zoneCheck = makeCheck('Visa 68–95-regeln', function (v) { state.showZones = v; });
+
+        // Glidare: antal rader (ändring nollställer brädan)
+        var rowsBox = document.createElement('div');
+        var rowsTop = document.createElement('div');
+        var rowsName = document.createElement('span');
+        rowsName.textContent = 'Antal rader';
+        var rowsVal = document.createElement('strong');
+        rowsTop.appendChild(rowsName);
+        rowsTop.appendChild(rowsVal);
+        var rowsSlider = document.createElement('input');
+        rowsSlider.type = 'range';
+        rowsSlider.min = '6'; rowsSlider.max = '14'; rowsSlider.step = '1';
+        rowsSlider.value = String(state.rows);
+        rowsSlider.setAttribute('aria-label', 'Antal rader stift');
+        rowsSlider.addEventListener('input', function () {
+            var nr = clampNum(parseInt(rowsSlider.value, 10) || 11, 6, 14);
+            if (nr === state.rows) return;
+            state.rows = nr;
+            setupModel();
+            update();
+        });
+        rowsBox.appendChild(rowsTop);
+        rowsBox.appendChild(rowsSlider);
+        setPanel.appendChild(rowsBox);
+
+        var reset = document.createElement('button');
+        reset.type = 'button';
+        reset.textContent = 'Nollställ';
+        reset.addEventListener('click', function () {
+            setupModel();
+            update();
+        });
+        setPanel.appendChild(reset);
+
+        // Rund knapp som tar tillbaka en hopfälld ruta
+        var showBtn = document.createElement('button');
+        showBtn.type = 'button';
+        showBtn.innerHTML = ICON_SLIDERS;
+        showBtn.title = 'Visa inställningarna';
+        showBtn.setAttribute('aria-label', 'Visa inställningarna');
+        var panelHidden = false;
+        hideBtn.addEventListener('click', function () { panelHidden = true; applyHidden(); showBtn.focus(); });
+        showBtn.addEventListener('click', function () { panelHidden = false; applyHidden(); hideBtn.focus(); });
+        function applyHidden() {
+            var narrow = dropNarrow;
+            setPanel.style.display = (panelHidden && !narrow) ? 'none' : 'flex';
+            showBtn.style.display = (panelHidden && !narrow) ? 'flex' : 'none';
+        }
+
         var dropNarrow = null;
-        function layoutDrop(narrow) {
+        function layoutPanels(narrow) {
             if (narrow === dropNarrow) return;
             dropNarrow = narrow;
+            var f = function (lo, cq, hi) { return narrow ? hi + 'px' : 'clamp(' + lo + 'px,' + cq + 'cqw,' + hi + 'px)'; };
             var btnBase = 'font-family:' + UI_FONT + ';font-weight:600;color:#1f2530;' +
                 'white-space:nowrap;padding:0;border-radius:999px;cursor:pointer;' +
                 'border:1px solid rgba(31,37,48,0.45);background:rgba(255,255,255,0.92);' +
                 'box-shadow:0 1px 3px rgba(0,0,0,0.18);';
             var capBase = 'font-family:' + UI_FONT + ';font-weight:600;color:#5b6472;' +
                 'letter-spacing:0.02em;';
+            var txtBase = 'font-family:' + UI_FONT + ';color:#1f2530;';
+            var boxBase = 'background:rgba(255,255,255,0.93);border:1px solid rgba(15,22,32,0.28);' +
+                'border-radius:8px;box-shadow:0 2px 8px rgba(15,22,32,0.12);';
+
             if (narrow) {
                 dropPanel.style.cssText = 'display:flex;flex-wrap:wrap;align-items:center;' +
                     'justify-content:center;gap:6px;margin:0 0 8px;';
@@ -219,9 +311,14 @@
                 dropBtns.forEach(function (b) {
                     b.style.cssText = btnBase + 'font-size:13.5px;height:34px;min-width:52px;padding:0 10px;';
                 });
+                counterSpan.style.cssText = txtBase + 'font-weight:600;font-size:13px;width:100%;text-align:center;';
+                trattSpan.style.cssText = 'display:none;';
                 scene.insertBefore(dropPanel, board);
+                setPanel.style.cssText = boxBase + 'position:static;display:flex;flex-direction:column;' +
+                    'gap:8px;padding:10px 12px;margin:8px 0 0;';
+                scene.appendChild(setPanel);
             } else {
-                dropPanel.style.cssText = 'position:absolute;top:4.6%;left:9.4%;z-index:5;' +
+                dropPanel.style.cssText = 'position:absolute;top:4.1%;left:9.4%;z-index:5;' +
                     'display:flex;flex-direction:column;gap:clamp(2px,0.9cqw,6px);';
                 dropCap.style.cssText = capBase + 'font-size:clamp(9px,2cqw,13px);';
                 dropGrid.style.cssText = 'display:grid;grid-template-columns:auto auto;' +
@@ -230,8 +327,41 @@
                     b.style.cssText = btnBase + 'font-size:clamp(9px,2.15cqw,14px);' +
                         'width:clamp(38px,12.4cqw,82px);height:clamp(20px,5.6cqw,36px);';
                 });
+                counterSpan.style.cssText = txtBase + 'font-weight:600;font-size:clamp(9px,2cqw,13px);' +
+                    'margin-top:clamp(2px,0.8cqw,6px);';
+                trattSpan.style.cssText = capBase + 'font-weight:500;font-size:clamp(9px,1.9cqw,12.5px);';
                 board.appendChild(dropPanel);
+                setPanel.style.cssText = boxBase + 'position:absolute;top:4.1%;right:8.6%;z-index:5;' +
+                    'width:29cqw;display:flex;flex-direction:column;' +
+                    'gap:clamp(4px,1.1cqw,8px);padding:clamp(6px,1.4cqw,10px) clamp(7px,1.6cqw,12px);';
+                board.appendChild(setPanel);
             }
+            var fs = f(9.5, 1.95, 13);
+            setHead.style.cssText = 'display:flex;align-items:center;justify-content:space-between;';
+            sndBtn.style.cssText = 'display:inline-flex;align-items:center;gap:6px;background:none;' +
+                'border:none;padding:2px 4px 2px 0;cursor:pointer;color:#1f2530;' +
+                txtBase + 'font-size:' + fs + ';';
+            hideBtn.style.cssText = 'display:' + (narrow ? 'none' : 'flex') + ';align-items:center;' +
+                'justify-content:center;width:22px;height:22px;background:none;border:none;' +
+                'border-radius:6px;cursor:pointer;color:#5a6170;padding:0;';
+            [curveCheck.lbl, zoneCheck.lbl].forEach(function (l) {
+                l.style.cssText = txtBase + 'display:flex;align-items:flex-start;gap:6px;' +
+                    'cursor:pointer;line-height:1.3;font-size:' + fs + ';';
+                l.firstChild.style.cssText = 'margin:0.15em 0 0;accent-color:#c8324a;flex:0 0 auto;';
+            });
+            rowsBox.style.cssText = 'display:flex;flex-direction:column;gap:3px;';
+            rowsTop.style.cssText = txtBase + 'display:flex;justify-content:space-between;' +
+                'gap:8px;font-size:' + fs + ';';
+            rowsSlider.style.cssText = 'width:100%;margin:0;accent-color:#c8324a;cursor:pointer;';
+            reset.style.cssText = btnBase + 'font-size:' + f(9.5, 1.95, 13) + ';' +
+                'height:' + f(22, 5, 32) + ';padding:0 12px;align-self:flex-start;' +
+                'border-radius:6px;letter-spacing:0.04em;';
+            showBtn.style.cssText = 'position:absolute;top:4.1%;right:8.6%;z-index:6;width:38px;' +
+                'height:38px;border-radius:50%;align-items:center;justify-content:center;' +
+                'background:rgba(255,255,255,0.92);color:#0f1620;cursor:pointer;padding:0;' +
+                'border:1px solid rgba(15,22,32,0.28);box-shadow:0 2px 8px rgba(15,22,32,0.12);';
+            board.appendChild(showBtn);
+            applyHidden();
         }
 
         var legend = document.createElement('div');
@@ -251,18 +381,6 @@
         var note = document.createElement('div');
         note.className = 'lab-vis-note';
         card.appendChild(note);
-
-        var actions = document.createElement('div');
-        actions.className = 'lab-vis-actions';
-        card.appendChild(actions);
-
-        var actions2 = document.createElement('div');
-        actions2.className = 'lab-vis-actions';
-        card.appendChild(actions2);
-
-        var foot = document.createElement('div');
-        foot.className = 'lab-graf-foot';
-        card.appendChild(foot);
 
         el.innerHTML = '';
         el.appendChild(card);
@@ -310,83 +428,6 @@
         legend.appendChild(legZone1);
         legend.appendChild(legZone2);
 
-        // ── Actions: räknare, kula-knappar, kryssruta, rader ─────────────────
-        var counterSpan = document.createElement('span');
-        counterSpan.style.fontSize = '13.5px';
-        counterSpan.style.fontWeight = '600';
-        counterSpan.style.color = COL.ink;
-        counterSpan.style.minWidth = '9.5em';
-        counterSpan.style.textAlign = 'center';
-        actions.appendChild(counterSpan);
-
-        // Antal rader (ändring nollställer brädan)
-        var rowsWrap = document.createElement('span');
-        rowsWrap.style.display = 'inline-flex';
-        rowsWrap.style.alignItems = 'center';
-        rowsWrap.style.gap = '8px';
-        rowsWrap.style.fontSize = '13.5px';
-        rowsWrap.style.color = COL.ink;
-        var rowsLbl = document.createElement('span');
-        var rowsMinus = document.createElement('button');
-        var rowsPlus = document.createElement('button');
-        [rowsMinus, rowsPlus].forEach(function (b, i) {
-            b.type = 'button';
-            b.className = 'lab-btn';
-            b.style.padding = '6px 13px';
-            b.textContent = i === 0 ? '−' : '+';
-            b.setAttribute('aria-label', i === 0 ? 'Färre rader' : 'Fler rader');
-            b.addEventListener('click', function () {
-                var nr = clampNum(state.rows + (i === 0 ? -1 : 1), 6, 14);
-                if (nr === state.rows) return;
-                state.rows = nr;
-                setupModel();
-                update();
-            });
-        });
-        rowsWrap.appendChild(rowsMinus);
-        rowsWrap.appendChild(rowsLbl);
-        rowsWrap.appendChild(rowsPlus);
-        actions.appendChild(rowsWrap);
-
-        var curveLabel = document.createElement('label');
-        curveLabel.className = 'lab-graf-check';
-        var curveCb = document.createElement('input');
-        curveCb.type = 'checkbox';
-        curveCb.addEventListener('change', function () {
-            state.showCurve = curveCb.checked;
-            update();
-        });
-        curveLabel.appendChild(curveCb);
-        var curveTxt = document.createElement('span');
-        curveTxt.textContent = 'Visa normalfördelningskurva';
-        curveLabel.appendChild(curveTxt);
-        actions2.appendChild(curveLabel);
-
-        var zoneLabel = document.createElement('label');
-        zoneLabel.className = 'lab-graf-check';
-        var zoneCb = document.createElement('input');
-        zoneCb.type = 'checkbox';
-        zoneCb.addEventListener('change', function () {
-            state.showZones = zoneCb.checked;
-            update();
-        });
-        zoneLabel.appendChild(zoneCb);
-        var zoneTxt = document.createElement('span');
-        zoneTxt.textContent = 'Visa 68–95-regeln';
-        zoneLabel.appendChild(zoneTxt);
-        actions2.appendChild(zoneLabel);
-
-        // ── Nollställ ────────────────────────────────────────────────────
-        var reset = document.createElement('button');
-        reset.type = 'button';
-        reset.className = 'lab-graf-reset';
-        reset.textContent = 'Nollställ';
-        reset.addEventListener('click', function () {
-            setupModel();
-            update();
-        });
-        foot.appendChild(reset);
-
         // ── Modell + geometri ────────────────────────────────────────────
         function setupModel() {
             stopAnim();
@@ -402,9 +443,8 @@
             buildGeometry();
             pile = null;
             choosePileScale(true);
-            rowsLbl.textContent = ROWS + ' rader';
-            rowsMinus.disabled = ROWS <= 6;
-            rowsPlus.disabled = ROWS >= 14;
+            rowsVal.textContent = String(ROWS);
+            rowsSlider.value = String(ROWS);
             canvas.setAttribute('aria-label', 'Galtonbräda i trä och glas med ' + ROWS +
                 ' rader mässingsstift ovanför ' + BINS + ' fack. Kulor faller ur en tratt, ' +
                 'studsar slumpmässigt åt vänster eller höger vid varje stift och staplas i facken.');
@@ -413,7 +453,7 @@
 
         function buildGeometry() {
             var g = {};
-            g.ox0 = 30; g.ox1 = W - 30; g.oy0 = 6; g.oy1 = 622;   // ramens ytterkant
+            g.ox0 = 30; g.ox1 = W - 30; g.oy0 = 6; g.oy1 = 690;   // ramens ytterkant
             g.wood = 17;
             g.ix0 = g.ox0 + g.wood; g.ix1 = g.ox1 - g.wood;      // glasytan
             g.iy0 = g.oy0 + g.wood; g.iy1 = g.oy1 - g.wood;
@@ -422,13 +462,13 @@
             g.binW = Math.min(58, innerW / BINS);
             g.binsLeft = g.cx - BINS * g.binW / 2;
             g.binsRight = g.cx + BINS * g.binW / 2;
-            g.binTop = 372;
+            g.binTop = 440;
             g.base = g.iy1;
             g.divW = 3.2;
             g.pileH = g.base - g.binTop - 10;
             g.funTop = g.iy0 + 6; g.funBot = 82; g.neckBot = 92;
             g.funTopW = 156;
-            g.pegTop = 118;
+            g.pegTop = 186;
             var pegBottom = g.binTop - 48;
             g.rowSp = (pegBottom - g.pegTop) / (ROWS - 1);
             g.pegR = clampNum(g.binW * 0.085, 2.8, 4.4);
@@ -587,7 +627,7 @@
         }
         function resize() {
             var cssW = canvas.clientWidth || scene.clientWidth || W;
-            layoutDrop(cssW < 440);
+            layoutPanels(cssW < 440);
             dpr = Math.min(window.devicePixelRatio || 1, 2.5);
             cssScale = cssW / W;
             px = cssScale * dpr;
@@ -953,8 +993,9 @@
             if (rainGain) rainGain.gain.setTargetAtTime(target, actx.currentTime, 0.15);
         }
         function syncSndBtn() {
-            sndBtn.innerHTML = soundOn ? ICON_SND_ON : ICON_SND_OFF;
-            sndBtn.title = soundOn ? 'Ljud av' : 'Ljud på';
+            sndBtn.innerHTML = (soundOn ? ICON_SND_ON : ICON_SND_OFF) +
+                '<span>' + (soundOn ? 'Ljud på' : 'Ljud av') + '</span>';
+            sndBtn.title = soundOn ? 'Stäng av ljudet' : 'Slå på ljudet';
             sndBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
         }
         sndBtn.addEventListener('click', function () {
@@ -1197,14 +1238,9 @@
                 c.fillText('antal', g.binsLeft - 10, y);
             }
 
-            // Kö-räknare vid tratten
-            if (queue > 0) {
-                c.font = '600 ' + labelFont + 'px ' + FONT;
-                c.fillStyle = COL.tick;
-                c.textAlign = 'left';
-                c.textBaseline = 'middle';
-                c.fillText('i tratten: ' + fmtInt(queue), g.cx + g.funTopW / 2 + 12, (g.funTop + g.funBot) / 2);
-            }
+            // Kö-räknaren står i panelen uppe till vänster
+            var tq = queue > 0 ? 'I tratten: ' + fmtInt(queue) : '';
+            if (trattSpan.textContent !== tq) trattSpan.textContent = tq;
         }
         // Text med kursiva delar (märkta med *), centrerad kring x.
         function drawMixedText(c, parts, x, y, size, color) {

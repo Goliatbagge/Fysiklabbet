@@ -70,9 +70,8 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   flygningen till neutronstjärnan, pennlösningen som skrivs fram, parabeln
   som ändras med reglagen och övningarna. Musiken är instrumental och
   gjord för filmen. Filmen ligger på startsidan och på Om-sidan sedan
-  2026-10-10. En stående version (9:16) finns för Facebook och Instagram;
-  kontrollera i `.claude/facebook/logg.md` om den hunnit postas innan du
-  skriver om det i brevet.
+  2026-10-10, och postades som reel på Facebook och Instagram 2026-10-11
+  (fäst högst upp på Facebook-sidan).
   **Ge den en stolt, framträdande plats** (gärna överst under "Nytt på
   Fysiklabbet", eller som eget block före nyheterna), med bilden
   `nyheter/brev/2026-10-18-presentationsfilm.jpg` (affisch med spelknapp)

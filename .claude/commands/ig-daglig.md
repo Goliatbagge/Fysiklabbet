@@ -73,10 +73,14 @@ dagar gammal.
 ## 3. Publicera
 
 1. Ladda Chrome-verktygen (ToolSearch, se fb-daglig.md).
-2. Två webbläsare kan vara anslutna: välj ALLTID den med deviceId
-   `158b4037-ff82-4800-8498-0f69b8ba16df` med `select_browser`
+2. Jobbet körs på BOSGAME: välj ALLTID Chrome på BOSGAME, deviceId
+   `c9c6284f-cddf-4f77-bfb5-d82ea9ee269c`, med `select_browser`
    (identifiera på id, aldrig på namnet "Browser 1/2" — numreringen
-   kastas om mellan körningar, se loggen 3 sep). Gå till
+   kastas om mellan körningar). **Använd ALDRIG `158b4037…`** (Chrome på
+   HP_KONTOR, användarens andra dator; beslut 2026-10-11). Instagram i
+   BOSGAME-Chrome har flera sparade konton (fysiklabbet, samsmattefysik,
+   goliatbagge): byt till fysiklabbet via "Byt konto" om ett annat är
+   aktivt. Kräver bytet ett lösenord → AVBRYT och logga, fyll aldrig i. Gå till
    `https://www.instagram.com/`. Kontrollera (javascript_tool mot
    sidopanelens profillänkar ska ge `/fysiklabbet/`, plus skärmdump) att
    du agerar som FYSIKLABBETS konto — inte ett personligt. Fel konto: byt

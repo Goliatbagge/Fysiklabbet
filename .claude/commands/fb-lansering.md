@@ -56,9 +56,10 @@ avsluta.
 ## 3. Publicera
 
 Exakt samma procedur som `fb-daglig.md` steg 3: Chrome-verktygen via
-ToolSearch (välj webbläsaren på deviceId `158b4037…`; visar Facebook ett
-inloggningsformulär där, byt till den andra anslutna webbläsaren och
-fyll aldrig i formuläret), kontrollera att du agerar som sidan
+ToolSearch (välj ALLTID Chrome på BOSGAME, deviceId `c9c6284f…`, aldrig
+`158b4037…` som är HP_KONTOR; "Byt nu" till sidläget om Facebook står i
+personligt läge; visar Facebook ett inloggningsformulär: AVBRYT och fyll
+aldrig i det), kontrollera att du agerar som sidan
 Fysiklabbet ("Hantera sida") — annars AVBRYT utan att posta och logga
 orsaken — ladda upp bilden FÖRST med `file_upload`
 (så att inget länkkort skapas), skriv texten, Nästa → Publicera

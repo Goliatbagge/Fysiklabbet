@@ -92,16 +92,18 @@ bort hela raden om även `ig:` redan är postad. Rör aldrig `ig:`-fältet.
 
 1. Ladda Chrome-verktygen (ToolSearch `select:mcp__claude-in-chrome__...`:
    tabs_context_mcp, tabs_close_mcp, navigate, computer, find, read_page, file_upload,
-   javascript_tool). Två webbläsare kan vara anslutna — välj i första
-   hand den med deviceId `158b4037-ff82-4800-8498-0f69b8ba16df` med
-   `select_browser` (identifiera på id, aldrig på namnet "Browser 1/2",
-   numreringen kastas om mellan körningar). Visar Facebook ett
-   inloggningsformulär där (det hände 5 sep, när Facebook-sessionen i den
-   webbläsaren loggades ut av en kontoändring): byt till den ANDRA
-   anslutna webbläsaren (`list_connected_browsers`) och kontrollera
-   sidläget på nytt. Fyll ALDRIG i ett inloggningsformulär, inte ens med
-   webbläsarens förifyllda uppgifter — är sidan utloggad i båda
-   webbläsarna: AVBRYT och logga `nyhet: FEL (Facebook utloggad)`.
+   javascript_tool, select_browser, list_connected_browsers). Jobbet körs
+   på BOSGAME och ska ALLTID använda Chrome på BOSGAME: deviceId
+   `c9c6284f-cddf-4f77-bfb5-d82ea9ee269c` med `select_browser` (identifiera på id,
+   aldrig på namnet "Browser 1/2", numreringen kastas om mellan
+   körningar). **Använd ALDRIG `158b4037…`**: det är Chrome på HP_KONTOR,
+   användarens andra dator, och jobben styrde den av misstag fram till
+   2026-10-11 (beslut samma dag). Står Facebook i personligt läge med
+   rutan "Växla till Fysiklabbets sida … Byt nu": klicka "Byt nu" (det är
+   ett byte av profil, ingen inloggning). Visar Facebook ett
+   inloggningsformulär: fyll ALDRIG i det, inte ens med förifyllda
+   uppgifter, och byt inte till någon annan webbläsare — AVBRYT och logga
+   `nyhet: FEL (Facebook utloggad i BOSGAME-Chrome)`.
 2. `tabs_context_mcp` med `createIfEmpty: true`, navigera till
    `https://www.facebook.com/fysiklabbet`.
 3. Kontrollera i skärmdump: du är inloggad och sidan visar "Hantera sida"

@@ -183,6 +183,59 @@
             'stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/>' +
             '<circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>';
 
+        // Fullskärm (samma ikon som simuleringarnas .fs-btn). Bara när brädan
+        // är inbäddad i teorin: på fliken Visualisering har katalogens
+        // värdruta redan en fullskärmsknapp för hela kortet, och två vore
+        // dubbelt UI. Knappen sitter uppe till vänster på glaset, och
+        // släppknapparna flyttas ned under den.
+        var ICON_FS_IN =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var ICON_FS_UT =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        var egenFs = !!opts.inbaddad;
+        var fsBtn = null;
+        var pseudoFs = false;     // reserv där requestFullscreen saknas (iPhone)
+        var cardStil = null;
+        if (egenFs) {
+            fsBtn = document.createElement('button');
+            fsBtn.type = 'button';
+            fsBtn.innerHTML = ICON_FS_IN;
+            fsBtn.title = 'Fullskärm';
+            fsBtn.setAttribute('aria-label', 'Fullskärm');
+            fsBtn.style.cssText = 'position:absolute;top:4.1%;left:9.4%;z-index:6;' +
+                'width:clamp(30px,6.2cqw,40px);height:clamp(30px,6.2cqw,40px);border-radius:50%;' +
+                'display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;' +
+                'background:rgba(255,255,255,0.92);color:#0f1620;border:1px solid rgba(15,22,32,0.28);' +
+                'box-shadow:0 1px 4px rgba(15,22,32,0.18);';
+            fsBtn.addEventListener('click', function () { toggleFullscreen(); });
+            board.appendChild(fsBtn);
+        }
+        function isFs() {
+            var fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+            return pseudoFs || fsEl === card;
+        }
+        function toggleFullscreen() {
+            if (isFs()) {
+                if (pseudoFs) { pseudoFs = false; onFullscreen(); return; }
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                return;
+            }
+            var req = card.requestFullscreen || card.webkitRequestFullscreen;
+            if (req) {
+                try {
+                    var pr = req.call(card);
+                    if (pr && pr.catch) pr.catch(function () { pseudoFs = true; onFullscreen(); });
+                } catch (e) { pseudoFs = true; onFullscreen(); }
+            } else {
+                pseudoFs = true;
+                onFullscreen();
+            }
+        }
+
         // Släpp kulor (uppe till vänster)
         var dropPanel = document.createElement('div');
         var dropCap = document.createElement('div');
@@ -318,7 +371,8 @@
                     'gap:8px;padding:10px 12px;margin:8px 0 0;';
                 scene.appendChild(setPanel);
             } else {
-                dropPanel.style.cssText = 'position:absolute;top:4.1%;left:9.4%;z-index:5;' +
+                dropPanel.style.cssText = 'position:absolute;left:9.4%;z-index:5;' +
+                    'top:' + (egenFs ? 'calc(4.1% + clamp(36px,7.6cqw,50px))' : '4.1%') + ';' +
                     'display:flex;flex-direction:column;gap:clamp(2px,0.9cqw,6px);';
                 dropCap.style.cssText = capBase + 'font-size:clamp(9px,2cqw,13px);';
                 dropGrid.style.cssText = 'display:grid;grid-template-columns:auto auto;' +
@@ -1313,14 +1367,40 @@
         // ── Storlek: följ kortets bredd (och fullskärm) ─────────────────────
         function onFullscreen() {
             var fsEl = document.fullscreenElement || document.webkitFullscreenElement;
-            if (fsEl && fsEl.contains(el)) {
-                var maxW = Math.max(640, Math.min(980, (window.innerHeight - 300) * W / H));
+            var egen = isFs();
+            var host = !egen && fsEl && fsEl.contains(el);   // katalogens värdruta
+            if (egen) {
+                if (cardStil == null) cardStil = card.getAttribute('style') || '';
+                // Ljust papper som i övriga fullskärmslägen; kortet skrollar om
+                // förklaringarna under brädan inte ryms.
+                card.style.cssText = cardStil + ';background:#f3eee4;padding:16px clamp(12px,3vw,40px) 28px;' +
+                    'overflow-y:auto;box-sizing:border-box;' +
+                    (pseudoFs ? 'position:fixed;inset:0;z-index:10000;' : 'width:100%;height:100%;');
+                document.documentElement.style.overflow = pseudoFs ? 'hidden' : '';
+            } else if (cardStil != null) {
+                card.setAttribute('style', cardStil);
+                cardStil = null;
+                document.documentElement.style.overflow = '';
+            }
+            if (fsBtn) {
+                fsBtn.innerHTML = egen ? ICON_FS_UT : ICON_FS_IN;
+                fsBtn.title = egen ? 'Lämna fullskärm' : 'Fullskärm';
+            }
+            if (egen || host) {
+                // Brädan så stor som höjden tillåter (förklaringen under den
+                // får skrollas fram).
+                var reserv = egen ? 40 : 300;
+                var maxW = clampNum((window.innerHeight - reserv) * W / H, 320, 1000);
                 scene.style.maxWidth = Math.round(maxW) + 'px';
             } else {
                 scene.style.maxWidth = '640px';
             }
             resize();
         }
+        function onKey(e) {
+            if (pseudoFs && e.key === 'Escape') { pseudoFs = false; onFullscreen(); }
+        }
+        document.addEventListener('keydown', onKey);
         var ro = null;
         if (window.ResizeObserver) {
             ro = new ResizeObserver(function () { resize(); });
@@ -1347,6 +1427,8 @@
                 if (ro) ro.disconnect(); else window.removeEventListener('resize', resize);
                 document.removeEventListener('fullscreenchange', onFullscreen);
                 document.removeEventListener('webkitfullscreenchange', onFullscreen);
+                document.removeEventListener('keydown', onKey);
+                document.documentElement.style.overflow = '';
                 el.innerHTML = '';
             }
         };

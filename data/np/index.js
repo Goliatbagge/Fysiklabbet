@@ -46,9 +46,21 @@ window.NP_INDEX = [
         meta: '28 uppgifter · Delprov B, C och D · Lösningar steg för steg',
     },
     {
+        id: 'ma3c-vt2018',
+        kurs: 'Matematik fortsättning nivå 1c',
+        namn: 'Nationellt prov, våren 2018',
+        meta: '28 uppgifter · Delprov B, C och D · Lösningar steg för steg',
+    },
+    {
         id: 'ma4-vt2022',
         kurs: 'Matematik fortsättning nivå 2',
         namn: 'Nationellt prov, våren 2022',
+        meta: '27 uppgifter · Delprov B, C och D · Lösningar steg för steg',
+    },
+    {
+        id: 'ma4-vt2018',
+        kurs: 'Matematik fortsättning nivå 2',
+        namn: 'Nationellt prov, våren 2018',
         meta: '27 uppgifter · Delprov B, C och D · Lösningar steg för steg',
     },
     {

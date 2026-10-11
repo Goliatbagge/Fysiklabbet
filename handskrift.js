@@ -31003,14 +31003,15 @@
     T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
       [['Under HELA kastet är det bara']],
       [['tyngdkraften som verkar']],
-      [['(luftmotståndet försummas), så']],
-      [['accelerationen är ', 0], ['g', 1]]
+      [['(luftmotståndet försummas), och']],
+      [['den pekar nedåt. Uppåt är']],
+      [['positivt, så accelerationen är ', 0], ['−g', 1]]
     ]));
     T.str('b) Accelerationen är tyngdaccelerationen',
           padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
-    T.str('a=g=−9,82 m/s^2', padL, y);
+    T.str('a=-g=-9,82 m/s^2', padL, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;

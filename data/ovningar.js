@@ -2676,7 +2676,7 @@ function makeSwing(opts) {
 // ── Stege mot vägg (makeLadder) ──────────────────────────────────────
 //
 // Stege lutad mot en lodrät vägg, med vinkel mot marken och valfria
-// krafter (F_G i mitten, N_mark + F_f vid foten, N_vägg vid toppen).
+// krafter (F_G i mitten, F_N + F_f vid foten, väggens kraft F_V vid toppen).
 // Rita UTAN krafter i frågan (eleven ska själv identifiera dem) och MED
 // krafter i lösningen.
 //
@@ -2705,15 +2705,19 @@ function makeLadder(opts) {
     if (opts.lenLabel) { const mx = (footX + topX) / 2, my = (groundY + topY) / 2, o = 18; body += sceneText(mx - Math.sin(aRad) * o, my - Math.cos(aRad) * o, sceneQty(opts.lenLabel), { color: SCENE_INK, anchor: 'end', size: 13 }); }
     // krafter
     if (opts.forces) {
+        // Skalenligt: F_G = F_N (lodrätt) och F_f = F_V (vågrätt). Längderna
+        // ges i px; standard 0,38 px/N för 15 kg och 65° (147 N mot 34 N).
+        const kL = opts.fLong || 56, kS = opts.fShort || 13;
         const midX = (footX + topX) / 2, midY = (groundY + topY) / 2;
-        body += sceneArrow(midX, midY, midX, midY + 50, { color: SCENE_ACCENT });
-        body += sceneText(midX + 9, midY + 50, sceneVar('F_G'), { color: SCENE_ACCENT, anchor: 'start' });
-        body += sceneArrow(footX, groundY, footX, groundY - 52, { color: SCENE_ACCENT });
-        body += sceneText(footX - 9, groundY - 52, sceneVar('N_mark'), { color: SCENE_ACCENT, anchor: 'end' });
-        body += sceneArrow(footX, groundY, footX + 50, groundY, { color: SCENE_ACCENT });
-        body += sceneText(footX + 54, groundY - 9, sceneVar('F_f'), { color: SCENE_ACCENT, anchor: 'start' });
-        body += sceneArrow(topX, topY, topX - 50, topY, { color: SCENE_ACCENT });
-        body += sceneText(topX - 54, topY - 9, sceneVar('N_vägg'), { color: SCENE_ACCENT, anchor: 'end' });
+        body += `<circle cx="${midX.toFixed(1)}" cy="${midY.toFixed(1)}" r="2.6" fill="${SCENE_ACCENT}"/>`;
+        body += sceneArrow(midX, midY, midX, midY + kL, { color: SCENE_ACCENT });
+        body += sceneText(midX + 9, midY + kL, sceneVar('F_G'), { color: SCENE_ACCENT, anchor: 'start' });
+        body += sceneArrow(footX, groundY, footX, groundY - kL, { color: SCENE_ACCENT });
+        body += sceneText(footX - 9, groundY - kL, sceneVar('F_N'), { color: SCENE_ACCENT, anchor: 'end' });
+        body += sceneArrow(footX, groundY, footX + kS, groundY, { color: SCENE_ACCENT });
+        body += sceneText(footX + 4, groundY + 20, sceneVar('F_f'), { color: SCENE_ACCENT, anchor: 'start' });
+        body += sceneArrow(topX, topY, topX - kS, topY, { color: SCENE_ACCENT });
+        body += sceneText(topX - kS - 6, topY - 9, sceneVar('F_V'), { color: SCENE_ACCENT, anchor: 'end' });
     }
     return sceneWrap(W, groundY + padB, body);
 }
@@ -5108,6 +5112,7 @@ $$
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
+            penna: 'ov-fy1-3.1-u1',
             question: `Två krafter $F_1 = 35\\ \\mathrm{N}$ och $F_2 = 18\\ \\mathrm{N}$ verkar på samma föremål och **i samma riktning**. Beräkna den resulterande kraften.`,
             answer: { value: 53, unit: 'N', tol: 0.02 },
             solution: `Krafter i samma riktning adderas (vektor­summa = skalär summa när riktningen är gemensam):
@@ -5120,6 +5125,7 @@ $$
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.1-u2',
             question: `Två krafter $F_1 = 60\\ \\mathrm{N}$ och $F_2 = 25\\ \\mathrm{N}$ verkar på samma föremål men **i motsatt riktning**. Hur stor är den resulterande kraften?`,
             answer: { value: 35, unit: 'N', tol: 0.02 },
             solution: `När krafterna är motriktade subtraherar vi den mindre från den större:
@@ -5132,6 +5138,7 @@ $$
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.1-u3',
             question: `Vad innebär **Newtons första lag** (tröghetslagen)?`,
             choices: [
                 `Att en kraft alltid är lika med massan gånger accelerationen.`,
@@ -5150,6 +5157,7 @@ $$
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.1-u4',
             question: `En varmluftsballong påverkas av två vertikala krafter enligt figuren: lyftkraften $F_\\text{lyft} = 8\\,400\\ \\mathrm{N}$ riktad uppåt och tyngdkraften $F_G = 7\\,900\\ \\mathrm{N}$ riktad nedåt. Beräkna den resulterande kraften på ballongen.
 
 ${makeForceDiagram({
@@ -5169,6 +5177,7 @@ $$
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.1-u5',
             question: `En buss bromsar hastigt in och passagerarna "kastas" framåt i sätena. Hur förklaras detta bäst med Newtons första lag?`,
             choices: [
                 `En framåtriktad kraft slungar passagerarna framåt när bussen bromsar.`,
@@ -5191,6 +5200,7 @@ När bussen bromsar verkar bromskraften på **bussen**, inte direkt på passager
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
+            penna: 'ov-fy1-3.1-u6',
             question: `Två krafter verkar vinkelrätt mot varandra på samma föremål enligt diagrammet nedan. Beräkna resultantens storlek.
 
 ${makeForceDiagram({
@@ -5211,6 +5221,7 @@ $$
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.1-u7',
             question: `En kraft *F* drar i ett rep enligt figuren nedan. Hur stor är kraftens **horisontella komposant** ($F_x$)?
 
 ${makeForceDiagram({
@@ -5219,19 +5230,20 @@ ${makeForceDiagram({
         { label: 'F', magnitude: '80 N', angle: 30, length: 220, showAngle: true },
     ],
 })}`,
-            answer: { value: 69.3, unit: 'N', tol: 0.03 },
-            solution: `Den horisontella komposanten är den närliggande kateten till vinkeln 30°. Vi använder cosinus:
+            answer: { value: 69.28, unit: 'N', tol: 0.03 },
+            solution: `Den horisontella komposanten är den närliggande kateten till vinkeln 30°, och kraften är hypotenusan. Vi använder cosinus:
 
 $$
-F_x = F \\cdot \\cos \\alpha = 80 \\cdot \\cos 30^{\\circ} \\approx 80 \\cdot 0{,}866 \\approx 69{,}3\\ \\mathrm{N}
+\\cos 30^{\\circ} = \\frac{F_x}{80} \\quad\\Leftrightarrow\\quad F_x = 80 \\cdot \\cos 30^{\\circ} = 69{,}282\\ldots \\approx 69\\ \\mathrm{N}
 $$
 
-**Svar:** Den horisontella komposanten är ca 69 N.
+**Svar:** Den horisontella komposanten är 69 N.
 
-**Generell slutsats:** Detta är formeln för "nyttig" drag­kraft — t.ex. när man drar en kälke i ett rep, är det $F \\cos \\alpha$ som driver kälken framåt, inte hela kraften $F$. Den vertikala komposanten $F \\sin \\alpha$ lyfter kälken något (minskar normalkraften och därmed friktionen).`,
+**Generell slutsats:** Detta är formeln för "nyttig" drag­kraft. När man till exempel drar en kälke i ett rep är det $F \\cos \\alpha$ som driver kälken framåt, inte hela kraften $F$. Den vertikala komposanten $F \\sin \\alpha$ lyfter kälken något (minskar normalkraften och därmed friktionen).`,
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.1-u8',
             question: `Två snöskotrar drar en timmersläde med var sitt rep enligt figuren (sedd uppifrån). Vardera repet spänns med kraften 900 N, och repen bildar vinkeln 25° med färdriktningen åt var sitt håll. Beräkna den resulterande kraften på släden.
 
 ${makeForceDiagram({
@@ -5244,16 +5256,16 @@ ${makeForceDiagram({
             answer: { value: 1631, unit: 'N', tol: 0.03 },
             solution: `Vi delar upp varje kraft i komposanter längs färdriktningen och vinkelrätt mot den.
 
-**Vinkelrätt mot färdriktningen:** komposanterna $F_1 \\sin 25^{\\circ}$ och $F_2 \\sin 25^{\\circ}$ pekar åt var sitt håll och är lika stora — de **tar ut varandra**.
+**Vinkelrätt mot färdriktningen:** komposanterna $F_1 \\sin 25^{\\circ}$ och $F_2 \\sin 25^{\\circ}$ pekar åt var sitt håll och är lika stora. De **tar ut varandra**.
 
 **Längs färdriktningen:** komposanterna samverkar:
 
 $$
-F_R = F_1 \\cos 25^{\\circ} + F_2 \\cos 25^{\\circ} = 2 \\cdot 900 \\cdot \\cos 25^{\\circ}
+F_R = F_1 \\cos 25^{\\circ} + F_2 \\cos 25^{\\circ}
 $$
 
 $$
-F_R = 1\\,800 \\cdot 0{,}906 \\approx 1\\,630\\ \\mathrm{N} \\approx 1{,}6\\ \\mathrm{kN}
+F_R = 900 \\cdot \\cos 25^{\\circ} + 900 \\cdot \\cos 25^{\\circ} = 1\\,631{,}35\\ldots\\ \\mathrm{N} \\approx 1{,}6\\ \\mathrm{kN}
 $$
 
 ${makeForceDiagram({
@@ -5265,12 +5277,13 @@ ${makeForceDiagram({
     ],
 })}
 
-**Svar:** Resultanten är ca 1,6 kN riktad rakt framåt i färdriktningen.
+**Svar:** Resultanten är 1,6 kN riktad rakt framåt i färdriktningen.
 
 **Generell slutsats:** Vid symmetrisk dragning ($\\pm\\alpha$ kring färdriktningen) är resultanten alltid $2F\\cos\\alpha$ rakt framåt — sidokomposanterna tar ut varandra. Ju större vinkel, desto mer kraft "slösas" i sidled.`,
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.1-u9',
             question: `En person kör en gräsklippare genom att trycka längs handtaget med kraften 90 N. Handtaget lutar 40° mot marken, så kraften riktas snett nedåt–framåt enligt figuren. Hur stor är den komposant som trycker gräsklipparen **mot marken**?
 
 ${makeForceDiagram({
@@ -5279,14 +5292,14 @@ ${makeForceDiagram({
         { label: 'F', magnitude: '90 N', angle: -40, length: 200, showAngle: true, angleLabel: '40°' },
     ],
 })}`,
-            answer: { value: 57.9, unit: 'N', tol: 0.03 },
-            solution: `Kraften bildar vinkeln 40° med marken. Den vertikala komposanten (motstående katet till vinkeln) ges av sinus:
+            answer: { value: 57.85, unit: 'N', tol: 0.03 },
+            solution: `Kraften bildar vinkeln 40° med marken. Den vertikala komposanten är motstående katet till vinkeln, och kraften är hypotenusan. Vi använder sinus:
 
 $$
-F_y = F \\cdot \\sin 40^{\\circ} = 90 \\cdot 0{,}643 \\approx 58\\ \\mathrm{N}
+\\sin 40^{\\circ} = \\frac{F_y}{90} \\quad\\Leftrightarrow\\quad F_y = 90 \\cdot \\sin 40^{\\circ} = 57{,}850\\ldots \\approx 58\\ \\mathrm{N}
 $$
 
-**Svar:** Ca 58 N trycker gräsklipparen mot marken.
+**Svar:** 58 N trycker gräsklipparen mot marken.
 
 **Generell slutsats:** Detta är skillnaden mellan att **skjuta** och att **dra** ett föremål med ett snett handtag: när man skjuter pressar $F \\sin \\alpha$ föremålet mot marken (ökar normalkraften och därmed friktionen), men när man drar lyfter samma komposant i stället föremålet (minskar friktionen). Därför är det lättare att dra en kälke än att skjuta den.`,
         },
@@ -5294,6 +5307,7 @@ $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
+            penna: 'ov-fy1-3.1-u10',
             question: `Tre horisontella krafter verkar på en låda som ligger på ett friktionsfritt golv. Lådan är i **kraftjämvikt** (står helt stilla). Beräkna storleken av kraften $F_3$.
 
 ${makeForceDiagram({
@@ -5304,39 +5318,40 @@ ${makeForceDiagram({
         { label: 'F_3', magnitude: '?', angle: 210.96, length: 175, dashed: true, color: '#1c3d6b' },
     ],
 })}`,
-            answer: { value: 58.3, unit: 'N', tol: 0.02 },
-            solution: `För att lådan ska stå stilla måste kraftresultanten vara noll. $F_3$ måste alltså motverka resultanten av $F_1$ och $F_2$ — den ska vara lika stor och motriktad.
+            answer: { value: 58.31, unit: 'N', tol: 0.02 },
+            solution: `För att lådan ska stå stilla måste kraftresultanten vara noll. $F_3$ måste alltså motverka resultanten $F_{12}$ av $F_1$ och $F_2$. Den ska vara lika stor och motriktad.
 
-Resultanten av $F_1$ (öster) och $F_2$ (norr) — vinkelräta:
+$F_1$ (öster) och $F_2$ (norr) är vinkelräta, så resultanten ges av Pythagoras sats:
 
 $$
 F_{12} = \\sqrt{F_1^{2} + F_2^{2}} = \\sqrt{50^{2} + 30^{2}} = \\sqrt{2\\,500 + 900} = \\sqrt{3\\,400}
 $$
 
 $$
-F_{12} \\approx 58{,}3\\ \\mathrm{N}
+F_3 = F_{12} = \\sqrt{3\\,400} = 58{,}309\\ldots \\approx 58\\ \\mathrm{N}
 $$
 
-För kraftjämvikt: $F_3 = F_{12} \\approx 58{,}3$ N, riktad i exakt motsatt riktning mot $F_{12}$ (alltså mot sydväst, vinkel $\\arctan(30/50) \\approx 31^{\\circ}$ söder om västerlig riktning).
+$F_3$ är riktad i exakt motsatt riktning mot $F_{12}$, alltså mot sydväst, cirka $31^{\\circ}$ söder om västerlig riktning (vinkeln $\\alpha$ med $\\tan \\alpha = \\dfrac{30}{50}$).
 
-**Svar:** $F_3 \\approx 58$ N (riktad sydväst).
+**Svar:** 58 N, riktad mot sydväst.
 
 **Generell slutsats:** Vid kraftjämvikt med tre eller fler krafter kan vi alltid hitta den okända kraften genom att räkna ut resultanten av de kända, och sedan välja $F_\\text{okänd}$ som lika stor och motriktad. Geometriskt bildar tre balanserande krafter en sluten triangel.`,
         },
         {
             level: 3,
+            penna: 'ov-fy1-3.1-u11',
             question: `En bil har kört fast i leran. Föraren spänner ett rep hårt mellan bilen och ett träd, och trycker sedan **mitt på repet, vinkelrätt mot repets riktning**, med kraften 300 N. Repet viker sig då 5,0° vid mittpunkten enligt figuren (sedd uppifrån). Hur stor kraft drar repet i bilen med?
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 200" style="max-width:540px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><circle cx="48" cy="70" r="26" fill="rgba(90,125,90,0.28)" stroke="#0f1620" stroke-width="1.6"/><circle cx="48" cy="70" r="4" fill="#0f1620"/><text x="48" y="114" text-anchor="middle" font-size="12" fill="#0f1620">träd</text><rect x="452" y="42" width="64" height="56" rx="10" fill="#fafaf5" stroke="#0f1620" stroke-width="1.6"/><line x1="468" y1="48" x2="468" y2="92" stroke="#0f1620" stroke-width="1.2"/><line x1="500" y1="48" x2="500" y2="92" stroke="#0f1620" stroke-width="1.2"/><text x="484" y="114" text-anchor="middle" font-size="12" fill="#0f1620">bil</text><line x1="74" y1="70" x2="452" y2="70" stroke="#8a8579" stroke-width="1.3" stroke-dasharray="6 5"/><polyline points="74,70 263,120 452,70" fill="none" stroke="#0f1620" stroke-width="2.2"/><path d="M 134 70 A 60 60 0 0 1 132 85.3" stroke="#8a8579" stroke-width="1.4" fill="none"/><text x="178" y="84" text-anchor="middle" font-size="12" fill="#8a8579" dominant-baseline="middle">5,0°</text><line x1="263" y1="120" x2="263" y2="161" stroke="#c8324a" stroke-width="2.6"/><polygon points="263,168 258,157 268,157" fill="#c8324a"/><text x="275" y="164" text-anchor="start" font-size="14" fill="#c8324a"><tspan font-style="italic">F</tspan> = 300 N</text></svg>
 
 *Vinkeln är överdriven i figuren för tydlighets skull.*`,
             answer: { value: 1721, unit: 'N', tol: 0.03 },
-            solution: `Betrakta repets mittpunkt. Tre krafter verkar där: spännkraften $T$ längs repet mot trädet, spännkraften $T$ längs repet mot bilen, och tryckkraften $F = 300\\ \\mathrm{N}$ vinkelrätt mot repets ursprungliga riktning. Mittpunkten är i jämvikt.
+            solution: `Betrakta repets mittpunkt. Tre krafter verkar där: spännkraften $F_S$ längs repet mot trädet, spännkraften $F_S$ längs repet mot bilen, och tryckkraften $F = 300\\ \\mathrm{N}$ vinkelrätt mot repets ursprungliga riktning. Mittpunkten är i jämvikt.
 
 ${makeForceDiagram({
     vectors: [
-        { label: 'T', angle: 175, length: 200 },
-        { label: 'T', angle: 5, length: 200 },
+        { label: 'F_S', angle: 175, length: 200 },
+        { label: 'F_S', angle: 5, length: 200 },
         { label: 'F', magnitude: '300 N', angle: 270, length: 66, color: '#1c3d6b' },
     ],
 })}
@@ -5344,18 +5359,18 @@ ${makeForceDiagram({
 Vardera spännkraften bildar bara vinkeln 5,0° med den ursprungliga replinjen. Komposanterna **längs** replinjen tar ut varandra (de pekar åt var sitt håll). Komposanterna **vinkelrätt** mot replinjen måste tillsammans balansera $F$:
 
 $$
-2 \\cdot T \\cdot \\sin 5{,}0^{\\circ} = F
+2 \\cdot F_S \\cdot \\sin 5{,}0^{\\circ} = F
 \\quad\\Leftrightarrow\\quad
-T = \\frac{F}{2 \\sin 5{,}0^{\\circ}}
+F_S = \\frac{F}{2 \\cdot \\sin 5{,}0^{\\circ}}
 $$
 
 $$
-T = \\frac{300}{2 \\cdot 0{,}0872} \\approx 1\\,720\\ \\mathrm{N} \\approx 1{,}7\\ \\mathrm{kN}
+F_S = \\frac{300}{2 \\cdot \\sin 5{,}0^{\\circ}} = 1\\,721{,}05\\ldots\\ \\mathrm{N} \\approx 1{,}7\\ \\mathrm{kN}
 $$
 
-**Svar:** Repet drar i bilen med ca 1,7 kN.
+**Svar:** Repet drar i bilen med 1,7 kN.
 
-**Generell slutsats:** Repet fungerar som en **kraftväxel**: en måttlig kraft på 300 N växlas upp nästan 6 gånger. Ju mindre vinkeln är, desto större blir spännkraften ($T \\to \\infty$ när $\\alpha \\to 0$) — det är därför tricket fungerar så bra på ett nästan rakt rep, och därför man aldrig kan spänna en tvättlina helt rak när något hänger på den.`,
+**Generell slutsats:** Repet fungerar som en **kraftväxel**: en måttlig kraft på 300 N växlas upp nästan 6 gånger. Ju mindre vinkeln är, desto större blir spännkraften ($F_S \\to \\infty$ när $\\alpha \\to 0$). Det är därför tricket fungerar så bra på ett nästan rakt rep, och därför man aldrig kan spänna en tvättlina helt rak när något hänger på den.`,
         },
     ],
 
@@ -5367,6 +5382,7 @@ $$
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
+            penna: 'ov-fy1-3.2-u1',
             question: `En resulterande kraft på 24 N verkar på ett föremål med massan 6,0 kg. Vilken acceleration får föremålet?`,
             answer: { value: 4.0, unit: 'm/s²', tol: 0.02 },
             solution: `Vi löser ut accelerationen ur Newtons andra lag:
@@ -5391,6 +5407,7 @@ $$
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.2-u2',
             question: `Ett föremål med massan 1,5 kg accelererar med 8,0 m/s². Vilken är den resulterande kraften på föremålet?`,
             answer: { value: 12, unit: 'N', tol: 0.02 },
             solution: `Direkt insättning i Newtons andra lag:
@@ -5415,12 +5432,21 @@ $$
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.2-u3',
             question: `En kraft på 45 N accelererar ett föremål med 3,0 m/s². Vilken är föremålets massa?`,
             answer: { value: 15, unit: 'kg', tol: 0.02 },
             solution: `Lös ut massan ur Newtons andra lag:
 
 $$
 F_R = m \\cdot a \\quad\\Leftrightarrow\\quad m = \\frac{F_R}{a}
+$$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+F_R = 45\\ \\mathrm{N} \\\\
+a = 3{,}0\\ \\mathrm{m/s^2}
+\\end{array} \\right]
 $$
 
 $$
@@ -5431,6 +5457,7 @@ $$
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.2-u4',
             question: `Ett godståg har massan $4{,}0 \\cdot 10^{6}\\ \\mathrm{kg}$. Lokets dragkraft ger den resulterande kraften $3{,}2 \\cdot 10^{5}\\ \\mathrm{N}$ på tåget. Vilken acceleration får tåget?`,
             answer: { value: 0.08, unit: 'm/s²', tol: 0.02 },
             solution: `Newtons andra lag med accelerationen utlöst:
@@ -5445,6 +5472,7 @@ $$
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.2-u5',
             question: `Vid en serve verkar racketen på en tennisboll med massan 58 g med den genomsnittliga kraften 130 N. Vilken acceleration får bollen under träffen?`,
             answer: { value: 2241, unit: 'm/s²', tol: 0.03 },
             solution: `Massan måste först göras om till SI-enheten kilogram:
@@ -5459,13 +5487,18 @@ $$
 Newtons andra lag:
 
 $$
-a = \\frac{F_R}{m} = \\frac{130}{0{,}058} \\approx 2\\,200\\ \\mathrm{m/s^2}
+a = \\frac{F_R}{m} = \\frac{130}{0{,}058} = 2\\,241{,}379\\ldots\\ \\mathrm{m/s^2} \\approx 2\\,200\\ \\mathrm{m/s^2}
 $$
 
-**Svar:** Ca 2 200 m/s² — mer än 200 gånger tyngdaccelerationen. Lätta föremål kan få enorma accelerationer även av måttliga krafter.`,
+Massan har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** 2 200 m/s²
+
+Det är mer än 200 gånger tyngdaccelerationen. Lätta föremål kan få enorma accelerationer även av måttliga krafter.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.2-u6',
             question: `En tom kundvagn får accelerationen 2,0 m/s² när den puttas med kraften *F*. Vilken acceleration får en **dubbelt så tung** vagn om den puttas med **samma** kraft *F*?`,
             choices: [
                 `4,0 m/s²`,
@@ -5474,13 +5507,23 @@ $$
                 `0,50 m/s²`,
             ],
             correct: 2,
-            solution: `Enligt Newtons andra lag är $a = F_R/m$. Vid oförändrad kraft är accelerationen **omvänt proportionell** mot massan:
+            solution: `Enligt Newtons andra lag är $a = \\dfrac{F_R}{m}$. Vid oförändrad kraft är accelerationen **omvänt proportionell** mot massan. För den tomma vagnen gäller
 
 $$
-a \\propto \\frac{1}{m}
+a_1 = \\frac{F}{m} = 2{,}0\\ \\mathrm{m/s^2}
 $$
 
-Dubbel massa ger alltså halv acceleration: $2{,}0 / 2 = 1{,}0\\ \\mathrm{m/s^2}$.
+Den tunga vagnen har massan $2 \\cdot m$ men samma kraft:
+
+$$
+a_2 = \\frac{F}{2 \\cdot m} = \\frac{1}{2} \\cdot \\frac{F}{m}
+$$
+
+$$
+a_2 = \\frac{2{,}0}{2} = 1{,}0\\ \\mathrm{m/s^2}
+$$
+
+Dubbel massa ger alltså halv acceleration.
 
 **Svar:** Alternativ C (1,0 m/s²).`,
         },
@@ -5488,6 +5531,7 @@ Dubbel massa ger alltså halv acceleration: $2{,}0 / 2 = 1{,}0\\ \\mathrm{m/s^2}
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
+            penna: 'ov-fy1-3.2-u7',
             question: `En låda med massan 8,0 kg dras längs ett golv med kraften 50 N. Mellan lådan och golvet verkar en friktionskraft på 18 N i motsatt riktning. Vilken acceleration får lådan?`,
             answer: { value: 4.0, unit: 'm/s²', tol: 0.02 },
             solution: `Den resulterande kraften är skillnaden mellan dragkraften och friktionen:
@@ -5507,6 +5551,7 @@ $$
         {
             level: 2,
             question: `En bil med massan 1 200 kg accelererar från 0 till 90 km/h på 12 sekunder. Beräkna den **genomsnittliga** resulterande kraften på bilen under accelerationen.`,
+            penna: 'ov-fy1-3.2-u8',
             answer: { value: 2500, unit: 'N', tol: 0.03 },
             solution: `Vi räknar först ut accelerationen i SI-enheter, sedan sätter in i Newtons andra lag.
 
@@ -5521,18 +5566,19 @@ $$
 
 Acceleration:
 $$
-a = \\frac{\\Delta v}{\\Delta t} = \\frac{25}{12} \\approx 2{,}08\\ \\mathrm{m/s^2}
+a = \\frac{\\Delta v}{\\Delta t} = \\frac{25}{12} = 2{,}083\\ldots\\ \\mathrm{m/s^2}
 $$
 
 Resulterande kraft:
 $$
-F_R = m \\cdot a = 1\\,200 \\cdot 2{,}08 \\approx 2\\,500\\ \\mathrm{N} = 2{,}5\\ \\mathrm{kN}
+F_R = m \\cdot a = 1\\,200 \\cdot 2{,}083\\ldots = 2\\,500\\ \\mathrm{N} = 2{,}5\\ \\mathrm{kN}
 $$
 
-**Svar:** Ca 2,5 kN.`,
+**Svar:** 2,5 kN.`,
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.2-u9',
             question: `Diagrammet visar hastigheten för en motorbåt med massan 750 kg som accelererar från stillastående. Beräkna den resulterande kraften på båten under de första 8,0 sekunderna.
 
 ${makeDiagram({
@@ -5541,7 +5587,7 @@ ${makeDiagram({
     yTicks: [0, 2, 4, 6, 8, 10, 12],
     paths: [{ points: [[0, 0], [8, 10], [12, 10]] }],
 })}`,
-            answer: { value: 938, unit: 'N', tol: 0.03 },
+            answer: { value: 937.5, unit: 'N', tol: 0.03 },
             solution: `Accelerationen är grafens **lutning** under accelerationsfasen. Vi läser av i rutnätet: hastigheten ökar från 0 till 10 m/s på 8,0 s.
 
 ${makeDiagram({
@@ -5562,17 +5608,20 @@ $$
 Newtons andra lag ger kraften:
 
 $$
-F_R = m \\cdot a = 750 \\cdot 1{,}25 \\approx 940\\ \\mathrm{N}
+F_R = m \\cdot a = 750 \\cdot 1{,}25 = 937{,}5\\ \\mathrm{N} \\approx 940\\ \\mathrm{N}
 $$
 
-**Svar:** Ca 940 N.
+Tiden $8{,}0\\ \\mathrm{s}$ har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** 940 N.
 
 **Generell slutsats:** Efter $t = 8{,}0\\ \\mathrm{s}$ är grafen vågrät — hastigheten är konstant och den resulterande kraften därför **noll** (motorns dragkraft balanserar exakt vattnets motstånd). En resulterande kraft behövs för att *ändra* hastigheten, inte för att *hålla* den.`,
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.2-u10',
             question: `En delfin med massan 150 kg saktar in från 12 m/s till 7,5 m/s på 2,3 s för att ansluta till en lekkamrat. Hur stor är den genomsnittliga resulterande bromskraften på delfinen? (Tyngdkraften balanseras av vattnets lyftkraft.)`,
-            answer: { value: 293, unit: 'N', tol: 0.03 },
+            answer: { value: 293.5, unit: 'N', tol: 0.03 },
             solution: `Först retardationen, sedan Newtons andra lag.
 
 Mätvärden:
@@ -5585,24 +5634,27 @@ m = 150\\ \\mathrm{kg} \\\\
 $$
 
 $$
-a = \\frac{\\Delta v}{\\Delta t} = \\frac{4{,}5}{2{,}3} \\approx 1{,}96\\ \\mathrm{m/s^2}
+a = \\frac{\\Delta v}{\\Delta t} = \\frac{4{,}5}{2{,}3} = 1{,}956\\ldots\\ \\mathrm{m/s^2}
 $$
 
 $$
-F_R = m \\cdot a = 150 \\cdot 1{,}96 \\approx 290\\ \\mathrm{N}
+F_R = m \\cdot a = 150 \\cdot 1{,}956\\ldots = 293{,}478\\ldots\\ \\mathrm{N} \\approx 290\\ \\mathrm{N}
 $$
 
-**Svar:** Ca 290 N, riktad mot rörelseriktningen (bromsande).`,
+Tiden $2{,}3\\ \\mathrm{s}$ har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** 290 N, riktad bakåt, motsatt rörelseriktningen (bromsande).`,
         },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Två lådor, *A* (massa 3,0 kg) och *B* (massa 2,0 kg), är förbundna med ett lätt, osträckbart snöre och ligger på ett friktionsfritt bord. En horisontell kraft $F = 15\\ \\mathrm{N}$ drar i låda *A* så att hela systemet glider i väg med *B* på släp. Snöret går mellan dem och drar därför *B* framåt med en spännkraft *T*.
+            penna: 'ov-fy1-3.2-u11',
+            question: `Två lådor, A (massa 3,0 kg) och B (massa 2,0 kg), är förbundna med ett lätt, osträckbart snöre och ligger på ett friktionsfritt bord. En horisontell kraft $F = 15\\ \\mathrm{N}$ drar i låda A så att hela systemet glider i väg med B på släp. Snöret går mellan dem och drar därför B framåt med en spännkraft $F_\\mathrm{S}$.
 
 a) Beräkna systemets gemensamma acceleration.
 
-b) Beräkna **spännkraften** *T* i snöret.
+b) Beräkna **spännkraften** $F_\\mathrm{S}$ i snöret.
 
 *Ange spännkraften (b) som ditt numeriska svar i N.*`,
             answer: { value: 6.0, unit: 'N', tol: 0.03 },
@@ -5612,10 +5664,10 @@ $$
 a = \\frac{F}{m_A + m_B} = \\frac{15}{3{,}0 + 2{,}0} = \\frac{15}{5{,}0} = 3{,}0\\ \\mathrm{m/s^2}
 $$
 
-**b)** Spännkraften *T* är den enda horisontella kraften på låda *B*. Newtons andra lag på låda *B* ensam:
+**b)** Spännkraften $F_\\mathrm{S}$ är den enda horisontella kraften på låda B. Newtons andra lag på låda B ensam:
 
 $$
-T = m_B \\cdot a = 2{,}0 \\cdot 3{,}0 = 6{,}0\\ \\mathrm{N}
+F_\\mathrm{S} = m_B \\cdot a = 2{,}0 \\cdot 3{,}0 = 6{,}0\\ \\mathrm{N}
 $$
 
 **Svar:** a) Accelerationen är 3,0 m/s². b) Spännkraften är 6,0 N.
@@ -5633,22 +5685,42 @@ a) Hur stor är den största acceleration ekipaget kan ha utan att linan brister
 b) Hur stor är bilens drivkraft *F* vid just den accelerationen? (Bortse från luft- och rullmotstånd.)
 
 *Ange drivkraften (b) som ditt numeriska svar i N.*`,
+            penna: 'ov-fy1-3.2-u12',
             answer: { value: 2689, unit: 'N', tol: 0.03 },
             solution: `**a) Linan drar bara husvagnen.** Nyckelinsikten är att spännkraften i linan är den enda horisontella kraften på **husvagnen** — det är alltså husvagnens massa (inte hela ekipagets) som avgör hur stor kraft linan måste överföra:
 
 $$
-T = m_\\text{husvagn} \\cdot a
+F_\\mathrm{S} = m_\\text{husvagn} \\cdot a
 \\quad\\Leftrightarrow\\quad
-a_\\text{max} = \\frac{T_\\text{max}}{m_\\text{husvagn}} = \\frac{1\\,100}{900} \\approx 1{,}22\\ \\mathrm{m/s^2}
+a = \\frac{F_\\mathrm{S}}{m_\\text{husvagn}}
+$$
+
+Accelerationen blir störst när linan drar så hårt den tål:
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{S} = 1\\,100\\ \\mathrm{N} \\\\
+m_\\text{husvagn} = 900\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{1\\,100}{900} = 1{,}222\\ldots\\ \\mathrm{m/s^2} \\approx 1{,}2\\ \\mathrm{m/s^2}
 $$
 
 **b) Drivkraften accelererar hela ekipaget.** Newtons andra lag på systemet bil + husvagn (linkraften är intern):
 
 $$
-F = (m_\\text{bil} + m_\\text{husvagn}) \\cdot a_\\text{max} = (1\\,300 + 900) \\cdot 1{,}22 \\approx 2\\,700\\ \\mathrm{N}
+F = (m_\\text{bil} + m_\\text{husvagn}) \\cdot a = (1\\,300 + 900) \\cdot 1{,}222\\ldots
 $$
 
-**Svar:** a) Ca 1,2 m/s². b) Ca 2,7 kN.
+$$
+F = 2\\,688{,}8\\ldots\\ \\mathrm{N} \\approx 2\\,700\\ \\mathrm{N} = 2{,}7\\ \\mathrm{kN}
+$$
+
+Accelerationen räknas oavrundad, och svaret avrundas till två värdesiffror som i a).
+
+**Svar:** a) 1,2 m/s². b) 2,7 kN.
 
 **Generell slutsats:** Samma teknik som i förra uppgiften: växla mellan **helheten** (för drivkraften) och en **delkropp** (för linkraften). Notera att bilen ensam hade tålt mycket större acceleration — det är den svagaste länken, bogserlinan, som sätter gränsen, och dess belastning bestäms enbart av husvagnens massa.`,
         },
@@ -5661,6 +5733,7 @@ $$
     'fy1-3.3': [
         {
             level: 1,
+            penna: 'ov-fy1-3.3-u1',
             question: `Vad innebär **Newtons tredje lag** (lagen om verkan och återverkan)?`,
             choices: [
                 `En kraft är massa gånger acceleration.`,
@@ -5679,6 +5752,7 @@ Det är viktigt att inte blanda ihop motkrafter med jämviktskrafter:
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.3-u2',
             question: `En vikt vilar på ett bord. Två krafter verkar på vikten: tyngdkraften $F_G$ nedåt och normalkraften $F_N$ från bordet uppåt. Är dessa två krafter **motkrafter enligt Newtons tredje lag**?`,
             choices: [
                 `Ja, de är lika stora och motriktade — det är ju definitionen av motkrafter.`,
@@ -5697,6 +5771,7 @@ Det är viktigt att inte blanda ihop motkrafter med jämviktskrafter:
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.3-u3',
             question: `En simmare tar ett simtag och för handen bakåt genom vattnet. Vilken kraft är det som driver simmaren framåt?`,
             choices: [
                 `Handens kraft på vattnet.`,
@@ -5717,6 +5792,7 @@ Alternativ A är lömskt: handens kraft på vattnet är visserligen halva kraftp
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.3-u4',
             question: `En mygga kolliderar med vindrutan på en lastbil i full fart. Hur förhåller sig kraften från lastbilen på myggan till kraften från myggan på lastbilen under kollisionen?`,
             choices: [
                 `Lastbilen påverkar myggan med en mycket större kraft än tvärtom.`,
@@ -5733,17 +5809,18 @@ Det som skiljer sig dramatiskt är **effekten** av samma kraft: myggan har en ma
         },
         {
             level: 2,
-            question: `Två lag drar i ett rep i en dragkamp. Lag *A* vinner och drar lag *B* mot sig. Vilken av följande utsagor är korrekt om **spännkraften** i repet?`,
+            penna: 'ov-fy1-3.3-u5',
+            question: `Två lag drar i ett rep i en dragkamp. Lag A vinner och drar lag B mot sig. Vilken av följande utsagor är korrekt om **spännkraften** i repet?`,
             choices: [
-                `Lag *A* drar i repet med större kraft än lag *B* — det är därför *A* vinner.`,
-                `Spännkraften i repet är **lika stor** vid båda lagens händer. *A* vinner för att de har större friktion mot underlaget.`,
+                `Lag A drar i repet med större kraft än lag B — det är därför A vinner.`,
+                `Spännkraften i repet är **lika stor** vid båda lagens händer. A vinner för att de har större friktion mot underlaget.`,
                 `Spännkraften är lika stor som tyngdkraften på det lättaste laget.`,
                 `Spännkraften är noll så länge ingen rör sig.`,
             ],
             correct: 1,
             solution: `Detta är ett av de absolut mest klassiska missförstånden i krafter — även läroböcker gör fel ibland!
 
-Spännkraften i ett (idealiserat masslöst) rep är **alltid lika stor i båda ändar** enligt Newtons tredje lag. Om lag *A* drar i repet med kraften *F*, så drar repet tillbaka på *A* med *F* — och samma sak vid *B*.
+Spännkraften i ett (idealiserat masslöst) rep är **alltid lika stor i båda ändar** enligt Newtons tredje lag. Om lag A drar i repet med kraften *F*, så drar repet tillbaka på A med *F* — och samma sak vid B.
 
 Det som avgör vem som vinner dragkampen är därför inte spännkraften i repet, utan **friktionskraften mot underlaget**. Det lag som kan stå emot en större friktionskraft mot marken (tyngre, bättre skor, bättre teknik) "håller emot" en större spännkraft i repet utan att glida bakåt.
 
@@ -5754,7 +5831,8 @@ Det som avgör vem som vinner dragkampen är därför inte spännkraften i repet
         {
             level: 2,
             question: `Astrid (55 kg) och Bo (75 kg) står stilla mitt emot varandra på blank is. Astrid puttar Bo, som under själva putten får accelerationen 1,2 m/s² bakåt. Vilken acceleration får Astrid under putten? (Bortse från friktionen mot isen.)`,
-            answer: { value: 1.64, unit: 'm/s²', tol: 0.03 },
+            answer: { value: 1.636, unit: 'm/s²', tol: 0.03 },
+            penna: 'ov-fy1-3.3-u6',
             solution: `**Steg 1 — kraften på Bo.** Newtons andra lag på Bo ger kraften Astrid puttar med:
 
 $$
@@ -5764,10 +5842,10 @@ $$
 **Steg 2 — motkraften på Astrid.** Enligt Newtons tredje lag puttar Bo tillbaka på Astrid med en **lika stor** kraft, 90 N, i motsatt riktning. Newtons andra lag på Astrid:
 
 $$
-a_\\text{Astrid} = \\frac{F}{m_\\text{Astrid}} = \\frac{90}{55} \\approx 1{,}6\\ \\mathrm{m/s^2}
+a_\\text{Astrid} = \\frac{F}{m_\\text{Astrid}} = \\frac{90}{55} = 1{,}636\\ldots \\approx 1{,}6\\ \\mathrm{m/s^2}
 $$
 
-**Svar:** Astrid får ca 1,6 m/s² — riktad åt motsatt håll mot Bos acceleration.
+**Svar:** Astrid får cirka 1,6 m/s², riktad åt motsatt håll mot Bos acceleration.
 
 **Generell slutsats:** Den som puttar puttas alltid tillbaka. Eftersom krafterna är lika stora är accelerationerna omvänt proportionella mot massorna: $a_\\text{Astrid}/a_\\text{Bo} = m_\\text{Bo}/m_\\text{Astrid}$. Den lättare personen glider alltid iväg fortast.`,
         },
@@ -5783,6 +5861,7 @@ b) Hur lång tid tar det henne sedan att glida tillbaka till luftslussen?
 
 *Ange tiden (b) som ditt numeriska svar i s.*`,
             answer: { value: 62.5, unit: 's', tol: 0.03 },
+            penna: 'ov-fy1-3.3-u7',
             solution: `**a) Motkraften ger astronauten fart.** Enligt Newtons tredje lag verkar lådan tillbaka på astronauten med kraften 54 N — riktad **mot stationen**. Astronautens acceleration under kastet:
 
 $$
@@ -5798,7 +5877,7 @@ $$
 **b) Likformig rörelse tillbaka.** Efter kastet verkar inga krafter på astronauten (Newtons första lag) — hon glider med konstant fart 0,24 m/s:
 
 $$
-t = \\frac{s}{v} = \\frac{15}{0{,}24} \\approx 63\\ \\mathrm{s}
+t = \\frac{s}{v} = \\frac{15}{0{,}24} = 62{,}5 \\approx 63\\ \\mathrm{s}
 $$
 
 **Men hon får väl inte farten direkt?** Nej, under själva kastet accelererar hon från stillastående, så hon har inte farten 0,24 m/s hela vägen. Den fasen är ändå så kort att vi kan bortse från den. Under kastets 0,40 s hinner hon bara förflytta sig
@@ -5824,76 +5903,86 @@ alltså cirka 5 cm av de 15 m. Räknar man med accelerationsfasen blir den tot
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
+            penna: 'ov-fy1-3.4-u1',
             question: `Hur stor tyngdkraft verkar på en lärobok med massan 1,2 kg på jordytan? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
-            answer: { value: 11.8, unit: 'N', tol: 0.02 },
+            answer: { value: 11.78, unit: 'N', tol: 0.02 },
             solution: `Direkt insättning i formeln för tyngdkraft:
 
 $$
-F_G = m \\cdot g = 1{,}2 \\cdot 9{,}82 \\approx 11{,}8\\ \\mathrm{N}
+F_G = m \\cdot g = 1{,}2 \\cdot 9{,}82 = 11{,}784 \\approx 12\\ \\mathrm{N}
 $$
 
-**Svar:** Tyngdkraften är ca 11,8 N.`,
+Massan har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Tyngdkraften är 12 N.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.4-u2',
             question: `En person väger 75 kg. Vilken tyngdkraft verkar på personen på jordytan? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
-            answer: { value: 737, unit: 'N', tol: 0.02 },
+            answer: { value: 736.5, unit: 'N', tol: 0.02 },
             solution: `Tyngdkraften ges av $F_G = m \\cdot g$:
 
 $$
-F_G = 75 \\cdot 9{,}82 = 736{,}5 \\approx 737\\ \\mathrm{N}
+F_G = 75 \\cdot 9{,}82 = 736{,}5 \\approx 740\\ \\mathrm{N}
 $$
 
-**Svar:** Tyngdkraften är ca 740 N.
+Massan har två värdesiffror, så svaret avrundas till två värdesiffror.
 
-**Generell slutsats:** I vardagsspråk säger vi att personen "väger 75 kg", men det är egentligen *massan*. **Tyngden** (i N) är massan gånger tyngdfaktorn — på månen skulle samma person ha massan 75 kg men en tyngd på bara cirka 124 N.`,
+**Svar:** Tyngdkraften är 740 N.
+
+**Generell slutsats:** I vardagsspråk säger vi att personen "väger 75 kg", men det är egentligen *massan*. **Tyngden** (i N) är massan gånger tyngdfaktorn — på månen skulle samma person ha massan 75 kg men en tyngd på bara cirka 120 N.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.4-u3',
             question: `Ett föremål med massan 5,0 kg vilar på ett plant horisontellt bord. Hur stor är **normalkraften** från bordet på föremålet? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 49.1, unit: 'N', tol: 0.02 },
             solution: `Eftersom föremålet vilar (är i jämvikt) gäller enligt Newtons första lag att kraftresultanten är noll. På plant underlag balanserar normalkraften $F_N$ uppåt tyngdkraften $F_G$ nedåt:
 
 $$
-F_N = F_G = m \\cdot g = 5{,}0 \\cdot 9{,}82 = 49{,}1\\ \\mathrm{N}
+F_N = F_G = m \\cdot g = 5{,}0 \\cdot 9{,}82 = 49{,}1 \\approx 49\\ \\mathrm{N}
 $$
 
-**Svar:** Normalkraften är ca 49 N.`,
+**Svar:** Normalkraften är 49 N.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.4-u4',
             question: `På månens yta är tyngdfaktorn $g_\\text{månen} = 1{,}62\\ \\mathrm{N/kg}$. Hur stor är tyngdkraften på en utrustningsväska med massan 24 kg som en astronaut bär på månen?`,
-            answer: { value: 38.9, unit: 'N', tol: 0.02 },
-            solution: `Samma formel som på jorden — men med månens tyngdfaktor:
+            answer: { value: 38.88, unit: 'N', tol: 0.02 },
+            solution: `Samma formel som på jorden, men med månens tyngdfaktor:
 
 $$
-F_G = m \\cdot g_\\text{månen} = 24 \\cdot 1{,}62 \\approx 39\\ \\mathrm{N}
+F_G = m \\cdot g_\\text{månen} = 24 \\cdot 1{,}62 = 38{,}88 \\approx 39\\ \\mathrm{N}
 $$
 
-**Svar:** Ca 39 N.
+**Svar:** 39 N.
 
 **Generell slutsats:** På jorden väger samma väska $24 \\cdot 9{,}82 \\approx 236\\ \\mathrm{N}$ — sex gånger mer. Massan (24 kg) är däremot exakt densamma på båda platserna. Det är därför astronauter kan bära utrustning på månen som de knappt kan rubba på jorden.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.4-u5',
             question: `Ett spädbarn vägs i en korg som hängs i en fjädervåg. Vågen visar 51 N. Korgen ensam har tyngden 12 N. Vilken massa har barnet? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
-            answer: { value: 3.97, unit: 'kg', tol: 0.03 },
-            solution: `Barnets tyngd är skillnaden mellan vågens utslag och korgens tyngd:
+            answer: { value: 3.971, unit: 'kg', tol: 0.03 },
+            solution: `Vågen bär både korgen och barnet. Barnets tyngd är därför skillnaden mellan vågens utslag och korgens tyngd:
 
 $$
-F_G = 51 - 12 = 39\\ \\mathrm{N}
+F_G = F_\\text{våg} - F_{G\\,\\text{korg}} = 51 - 12 = 39\\ \\mathrm{N}
 $$
 
 Massan löses ut ur tyngdkraftsformeln:
 
 $$
-F_G = m \\cdot g \\quad\\Leftrightarrow\\quad m = \\frac{F_G}{g} = \\frac{39}{9{,}82} \\approx 4{,}0\\ \\mathrm{kg}
+F_G = m \\cdot g \\quad\\Leftrightarrow\\quad m = \\frac{F_G}{g} = \\frac{39}{9{,}82} = 3{,}9714\\ldots \\approx 4{,}0\\ \\mathrm{kg}
 $$
 
-**Svar:** Barnet har massan ca 4,0 kg.`,
+**Svar:** Barnet har massan 4,0 kg.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.4-u6',
             question: `Vilket av följande påståenden om **massa** och **tyngd** är korrekt?`,
             choices: [
                 `Massan minskar när man reser till månen.`,
@@ -5916,8 +6005,9 @@ $$
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
+            penna: 'ov-fy1-3.4-u7',
             question: `En låda med massan 30 kg står på ett plant golv. En person trycker dessutom lodrätt **nedåt** på lådan med en extra kraft på 80 N. Hur stor är normalkraften från golvet på lådan? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
-            answer: { value: 375, unit: 'N', tol: 0.02 },
+            answer: { value: 374.6, unit: 'N', tol: 0.02 },
             solution: `Tre lodräta krafter verkar på lådan:
 - Tyngdkraft $F_G = m g$ nedåt
 - Extra tryckkraft $F = 80$ N nedåt
@@ -5926,47 +6016,70 @@ $$
 Eftersom lådan står stilla råder kraftjämvikt:
 
 $$
-F_N = F_G + F = m \\cdot g + 80
+F_N = F_G + F
 $$
 
 $$
-F_N = 30 \\cdot 9{,}82 + 80 = 294{,}6 + 80 = 374{,}6 \\approx 375\\ \\mathrm{N}
+\\left[ \\begin{array}{l}
+F_G = m \\cdot g = 30\\ \\mathrm{kg} \\cdot 9{,}82\\ \\mathrm{N/kg} = 294{,}6\\ \\mathrm{N} \\\\
+F = 80\\ \\mathrm{N}
+\\end{array} \\right]
 $$
 
-**Svar:** Normalkraften är ca 375 N.`,
+$$
+F_N = 294{,}6 + 80 = 374{,}6 \\approx 370\\ \\mathrm{N}
+$$
+
+Massan och kraften har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Normalkraften är 370 N.`,
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.4-u8',
             question: `En vikt på 12 kg hänger i ett snöre från taket och är helt i vila. Hur stor är **spännkraften** i snöret? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
-            answer: { value: 118, unit: 'N', tol: 0.02 },
+            answer: { value: 117.84, unit: 'N', tol: 0.02 },
             solution: `Två krafter verkar på vikten:
 - Tyngdkraft $F_G = m g$ nedåt
-- Spännkraft *T* (snörets dragning) uppåt
+- Spännkraft $F_S$ (snörets dragning) uppåt
 
 Eftersom vikten är i vila gäller kraftjämvikt:
 
 $$
-T = F_G = m \\cdot g = 12 \\cdot 9{,}82 \\approx 118\\ \\mathrm{N}
+F_S = F_G = m \\cdot g = 12 \\cdot 9{,}82 = 117{,}84 \\approx 120\\ \\mathrm{N}
 $$
 
-**Svar:** Spännkraften är ca 118 N.
+Massan har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Spännkraften är 120 N.
 
 **Generell slutsats:** I en hängande, stillastående vikt är spännkraften alltid lika med tyngdkraften. Om vikten istället accelererar uppåt blir spännkraften *större* än tyngdkraften, om den accelererar nedåt blir spännkraften *mindre*.`,
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.4-u9',
             question: `I studsens lägsta punkt trycker en trampolinduk på en gymnast med massan 45 kg så att gymnasten får accelerationen 7,0 m/s² rakt uppåt. Hur stor är normalkraften från duken på gymnasten i det ögonblicket? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
-            answer: { value: 757, unit: 'N', tol: 0.02 },
+            answer: { value: 756.9, unit: 'N', tol: 0.02 },
             solution: `Två krafter verkar på gymnasten: normalkraften $F_N$ från duken uppåt och tyngdkraften $F_G = m g$ nedåt. Newtons andra lag med uppåt som positiv riktning:
 
 $$
-F_N - m g = m \\cdot a
+F_R = m \\cdot a
+\\quad\\Rightarrow\\quad
+F_N - F_G = m \\cdot a
 \\quad\\Leftrightarrow\\quad
-F_N = m \\cdot (g + a)
+F_N = F_G + m \\cdot a
 $$
 
 $$
-F_N = 45 \\cdot (9{,}82 + 7{,}0) = 45 \\cdot 16{,}82 \\approx 760\\ \\mathrm{N}
+\\left[ \\begin{array}{l}
+F_G = m \\cdot g = 45\\ \\mathrm{kg} \\cdot 9{,}82\\ \\mathrm{N/kg} = 441{,}9\\ \\mathrm{N} \\\\
+m = 45\\ \\mathrm{kg} \\\\
+a = 7{,}0\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+F_N = 441{,}9 + 45 \\cdot 7{,}0 = 756{,}9 \\approx 760\\ \\mathrm{N}
 $$
 
 ${makeForceDiagram({
@@ -5976,27 +6089,40 @@ ${makeForceDiagram({
     ],
 })}
 
-**Svar:** Ca 760 N.
+**Svar:** 760 N.
 
 **Generell slutsats:** Duken måste både **bära** gymnasten (motverka $m g \\approx 440\\ \\mathrm{N}$) och dessutom **accelerera** henne uppåt (ytterligare $m a \\approx 320\\ \\mathrm{N}$). Notera i figuren att pilarnas längder är proportionella mot krafterna — det är obalansen mellan dem som ger accelerationen uppåt.`,
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.4-u10',
             question: `En lyftkran lyfter en container med massan 2 400 kg. Under lyftets första fas accelererar containern uppåt med 0,60 m/s². Hur stor är spännkraften i vajern då? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 25008, unit: 'N', tol: 0.02 },
-            solution: `Två krafter verkar på containern: spännkraften *T* uppåt och tyngdkraften $F_G = m g$ nedåt. Newtons andra lag med uppåt som positiv riktning:
+            solution: `Två krafter verkar på containern: spännkraften $F_S$ uppåt och tyngdkraften $F_G = m g$ nedåt. Newtons andra lag med uppåt som positiv riktning:
 
 $$
-T - m g = m \\cdot a
+F_R = m \\cdot a
+\\quad\\Rightarrow\\quad
+F_S - F_G = m \\cdot a
 \\quad\\Leftrightarrow\\quad
-T = m \\cdot (g + a)
+F_S = F_G + m \\cdot a
 $$
 
 $$
-T = 2\\,400 \\cdot (9{,}82 + 0{,}60) = 2\\,400 \\cdot 10{,}42 \\approx 25\\,000\\ \\mathrm{N} = 25\\ \\mathrm{kN}
+\\left[ \\begin{array}{l}
+F_G = m \\cdot g = 2\\,400\\ \\mathrm{kg} \\cdot 9{,}82\\ \\mathrm{N/kg} = 23\\,568\\ \\mathrm{N} \\\\
+m = 2\\,400\\ \\mathrm{kg} \\\\
+a = 0{,}60\\ \\mathrm{m/s^2}
+\\end{array} \\right]
 $$
 
-**Svar:** Ca 25 kN.
+$$
+F_S = 23\\,568 + 2\\,400 \\cdot 0{,}60 = 25\\,008\\ \\mathrm{N} \\approx 25\\ \\mathrm{kN}
+$$
+
+Accelerationen har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** 25 kN.
 
 **Generell slutsats:** Vajern belastas alltid som mest i början av lyftet (accelerationsfasen). När containern sedan höjs med **konstant** fart är spännkraften bara $m g \\approx 23{,}6\\ \\mathrm{kN}$ — det är därför lyftanordningar dimensioneras med marginal för just accelerationen.`,
         },
@@ -6004,6 +6130,7 @@ $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
+            penna: 'ov-fy1-3.4-u11',
             question: `En person med massan 70 kg står på en personvåg i en hiss. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
 a) Vad visar vågen (i N) när hissen står stilla?
@@ -6013,48 +6140,58 @@ b) Vad visar vågen när hissen accelererar **uppåt** med 1,8 m/s²?
 c) Vad visar vågen när hissen accelererar **nedåt** med 1,2 m/s²?
 
 *Ange vågens utslag från **b)** som ditt numeriska svar i N.*`,
-            answer: { value: 814, unit: 'N', tol: 0.02 },
+            answer: { value: 813.4, unit: 'N', tol: 0.02 },
             solution: `Personvågen visar i grunden den normalkraft den utövar på personen ($F_N$). Den enligt Newtons tredje lag är lika stor som personens tryck nedåt på vågen — det är *den* kraften vågen registrerar.
 
 Två krafter verkar på personen: tyngdkraft $F_G = m g$ nedåt och normalkraft $F_N$ uppåt. Personens acceleration är samma som hissens. Vi väljer **uppåt som positiv** riktning.
 
 Newtons andra lag på personen:
 $$
-F_N - F_G = m \\cdot a \\quad\\Leftrightarrow\\quad F_N = m \\cdot (g + a)
+F_R = m \\cdot a \\quad\\Rightarrow\\quad F_N - F_G = m \\cdot a \\quad\\Leftrightarrow\\quad F_N = F_G + m \\cdot a
 $$
 
 där *a* är hissens acceleration (+ uppåt, − nedåt).
 
+$$
+\\left[ \\begin{array}{l}
+F_G = m \\cdot g = 70\\ \\mathrm{kg} \\cdot 9{,}82\\ \\mathrm{N/kg} = 687{,}4\\ \\mathrm{N} \\\\
+m = 70\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
 **a) Hissen står stilla** ($a = 0$):
 $$
-F_N = m \\cdot g = 70 \\cdot 9{,}82 \\approx 687\\ \\mathrm{N}
+F_N = 687{,}4 + 70 \\cdot 0 = 687{,}4 \\approx 690\\ \\mathrm{N}
 $$
 
-**b) Hissen accelererar uppåt** ($a = +1{,}8\\ \\mathrm{m/s^2}$):
+**b) Hissen accelererar uppåt** ($a = 1{,}8\\ \\mathrm{m/s^2}$):
 $$
-F_N = 70 \\cdot (9{,}82 + 1{,}8) = 70 \\cdot 11{,}62 \\approx 814\\ \\mathrm{N}
+F_N = 687{,}4 + 70 \\cdot 1{,}8 = 813{,}4 \\approx 810\\ \\mathrm{N}
 $$
 
-Vågen visar alltså mer än vid stillastående — personen känner sig "tyngre".
+Vågen visar alltså mer än vid stillastående. Personen känner sig "tyngre".
 
 **c) Hissen accelererar nedåt** ($a = -1{,}2\\ \\mathrm{m/s^2}$):
 $$
-F_N = 70 \\cdot (9{,}82 - 1{,}2) = 70 \\cdot 8{,}62 \\approx 603\\ \\mathrm{N}
+F_N = 687{,}4 + 70 \\cdot (-1{,}2) = 603{,}4 \\approx 600\\ \\mathrm{N}
 $$
 
-Vågen visar mindre — personen känner sig "lättare".
+Vågen visar mindre. Personen känner sig "lättare".
 
-**Svar:** a) 687 N, b) 814 N, c) 603 N.
+Massan och accelerationerna har två värdesiffror, så svaren avrundas till två värdesiffror.
+
+**Svar:** a) 690 N, b) 810 N, c) 600 N.
 
 **Generell slutsats:** Vågens utslag $F_N = m(g + a)$ kallas ofta för *skenbar vikt* (apparent weight). När en hiss i fritt fall (*a* = −*g*) skulle vågen visa noll — eftersom då accelererar både person och våg lika fort nedåt, ingen normalkraft behövs. Detta är samma fenomen som astronauter upplever i kretsande rymdfarkoster.`,
         },
         {
             level: 3,
+            penna: 'ov-fy1-3.4-u12',
             question: `En basketspelare med massan 78 kg hoppar rakt upp för att blocka ett skott. Han böjer först knäna så att tyngdpunkten sänks 0,40 m, och trycker sedan ifrån genom just denna sträcka. Han lämnar golvet med en fart som räcker för att lyfta tyngdpunkten 0,85 m.
 
 a) Med vilken fart lämnar han golvet?
 
-b) Vilken (konstant antagen) acceleration har han under frånskjutet?
+b) Vilken acceleration har han under frånskjutet, om den antas vara konstant?
 
 c) Hur stor normalkraft trycker golvet på honom under frånskjutet?
 
@@ -6067,30 +6204,44 @@ c) Hur stor normalkraft trycker golvet på honom under frånskjutet?
 $$
 0 - v_0^{2} = -2 g h
 \\quad\\Leftrightarrow\\quad
-v_0 = \\sqrt{2 g h} = \\sqrt{2 \\cdot 9{,}82 \\cdot 0{,}85} \\approx 4{,}1\\ \\mathrm{m/s}
-$$
-
-**b) Accelerationen under frånskjutet.** Han går från stillastående till 4,1 m/s på sträckan 0,40 m. Torricelli igen:
-
-$$
-v_0^{2} = 2 a s
+v_0^{2} = 2 g h
 \\quad\\Leftrightarrow\\quad
-a = \\frac{v_0^{2}}{2 s} = \\frac{16{,}7}{2 \\cdot 0{,}40} \\approx 21\\ \\mathrm{m/s^2}
+v_0 = \\sqrt{2 g h} = \\sqrt{2 \\cdot 9{,}82 \\cdot 0{,}85} = 4{,}0858\\ldots \\approx 4{,}1\\ \\mathrm{m/s}
+$$
+
+**b) Accelerationen under frånskjutet.** Han går från stillastående till farten från a), oavrundat 4,0858... m/s på sträckan 0,40 m. Torricellis ekvation igen, nu med slutfarten $v = 4{,}0858\\ldots\\ \\mathrm{m/s}$ och startfarten $v_0 = 0$:
+
+$$
+v^{2} - v_0^{2} = 2 a s
+\\quad\\Leftrightarrow\\quad
+a = \\frac{v^{2} - v_0^{2}}{2 s} = \\frac{4{,}0858\\ldots^{2} - 0^{2}}{2 \\cdot 0{,}40} = 20{,}8675 \\approx 21\\ \\mathrm{m/s^2}
 $$
 
 **c) Normalkraften.** Under frånskjutet verkar normalkraften $F_N$ uppåt och tyngdkraften $m g$ nedåt. Newtons andra lag (uppåt positiv):
 
 $$
-F_N - m g = m \\cdot a
+F_R = m \\cdot a
+\\quad\\Rightarrow\\quad
+F_N - F_G = m \\cdot a
 \\quad\\Leftrightarrow\\quad
-F_N = m \\cdot (g + a)
+F_N = F_G + m \\cdot a
 $$
 
 $$
-F_N = 78 \\cdot (9{,}82 + 20{,}9) \\approx 78 \\cdot 30{,}7 \\approx 2\\,400\\ \\mathrm{N}
+\\left[ \\begin{array}{l}
+F_G = m \\cdot g = 78\\ \\mathrm{kg} \\cdot 9{,}82\\ \\mathrm{N/kg} = 765{,}96\\ \\mathrm{N} \\\\
+m = 78\\ \\mathrm{kg} \\\\
+a = 20{,}8675\\ \\mathrm{m/s^2}\\ \\text{(oavrundat från b)}
+\\end{array} \\right]
 $$
 
-**Svar:** a) Ca 4,1 m/s. b) Ca 21 m/s². c) Ca 2,4 kN — drygt tre gånger hans egen tyngd.
+$$
+F_N = 765{,}96 + 78 \\cdot 20{,}8675 = 2\\,393{,}625\\ \\mathrm{N} \\approx 2{,}4\\ \\mathrm{kN}
+$$
+
+Massan och sträckorna har två värdesiffror, så svaren avrundas till två värdesiffror.
+
+**Svar:** a) 4,1 m/s. b) 21 m/s². c) 2,4 kN, drygt tre gånger hans egen tyngd.
 
 **Generell slutsats:** Ju kortare sträcka frånskjutet sker på, desto större måste kraften vara för samma hopphöjd — det är därför man hoppar högre med djup knäböj än med styva ben. Samma resonemang (fast omvänt) förklarar varför man ska **böja på benen vid landning**: en längre bromssträcka ger mindre kraft på kroppen.`,
         },
@@ -6104,127 +6255,178 @@ $$
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
+            penna: 'ov-fy1-3.5-u1',
             question: `Två kulor med massorna 5,0 kg respektive 8,0 kg har sina tyngdpunkter på avståndet 0,50 m från varandra. Beräkna gravitationskraften mellan dem. Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.`,
-            answer: { value: 1.067e-8, unit: 'N', tol: 0.03 },
-            solution: `Vi sätter in i Newtons gravitationslag:
+            answer: { value: 1.0672e-8, unit: 'N', tol: 0.05 },
+            solution: `Vi använder Newtons gravitationslag:
 
 $$
-F = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
+F_G = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
 $$
 
-Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
-m_1 = 5{,}0\\ \\mathrm{kg},\\quad m_2 = 8{,}0\\ \\mathrm{kg} \\\\
+m_1 = 5{,}0\\ \\mathrm{kg} \\\\
+m_2 = 8{,}0\\ \\mathrm{kg} \\\\
 r = 0{,}50\\ \\mathrm{m}
 \\end{array} \\right]
 $$
 
 $$
-F = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{5{,}0 \\cdot 8{,}0}{0{,}50^{2}}
-= 6{,}67 \\cdot 10^{-11} \\cdot \\frac{40}{0{,}25}
+F_G = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{5{,}0 \\cdot 8{,}0}{0{,}50^{2}}
 = 6{,}67 \\cdot 10^{-11} \\cdot 160
+= 1{,}0672 \\cdot 10^{-8}\\ \\mathrm{N}
+\\approx 1{,}1 \\cdot 10^{-8}\\ \\mathrm{N}
 $$
 
-$$
-F \\approx 1{,}07 \\cdot 10^{-8}\\ \\mathrm{N}
-$$
+Svaret avrundas till två värdesiffror, som massorna och avståndet.
 
-**Svar:** Gravitationskraften är ca $1{,}1 \\cdot 10^{-8}$ N — alltså försvinnande liten.`,
+**Svar:** $1{,}1 \\cdot 10^{-8}\\ \\mathrm{N}$, alltså försvinnande liten.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.5-u2',
             question: `Två satelliter med samma massa 500 kg vardera kretsar med tyngdpunkterna 100 m från varandra. Hur stor gravitationskraft verkar mellan dem? Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.`,
-            answer: { value: 1.67e-9, unit: 'N', tol: 0.03 },
-            solution: `Newtons gravitationslag:
+            answer: { value: 1.6675e-9, unit: 'N', tol: 0.03 },
+            solution: `Vi använder Newtons gravitationslag:
 
 $$
-F = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}} = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{500 \\cdot 500}{100^{2}}
+F_G = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
 $$
 
 $$
-F = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{250\\,000}{10\\,000} = 6{,}67 \\cdot 10^{-11} \\cdot 25 \\approx 1{,}67 \\cdot 10^{-9}\\ \\mathrm{N}
+\\left[ \\begin{array}{l}
+G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
+m_1 = 500\\ \\mathrm{kg} \\\\
+m_2 = 500\\ \\mathrm{kg} \\\\
+r = 100\\ \\mathrm{m}
+\\end{array} \\right]
 $$
 
-**Svar:** Ca $1{,}7 \\cdot 10^{-9}$ N.`,
+$$
+F_G = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{500 \\cdot 500}{100^{2}}
+= 6{,}67 \\cdot 10^{-11} \\cdot 25
+= 1{,}6675 \\cdot 10^{-9}\\ \\mathrm{N}
+\\approx 1{,}7 \\cdot 10^{-9}\\ \\mathrm{N}
+$$
+
+**Svar:** $1{,}7 \\cdot 10^{-9}\\ \\mathrm{N}$`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.5-u3',
             question: `Vad anger konstanten *G* i Newtons gravitationslag?`,
             choices: [
                 `Tyngdfaktorn vid jordytan (9,82 N/kg).`,
-                `Gravitationskonstanten — ett universellt naturkonstant som anger styrkan i gravitationsväxelverkan.`,
+                `Gravitationskonstanten, en universell naturkonstant som anger hur stark gravitationen är.`,
                 `Den massa ett föremål måste ha för att accelerera med 1 m/s².`,
                 `Den hastighet med vilken gravitationskraften utbreder sig.`,
             ],
             correct: 1,
-            solution: `*G* är **gravitationskonstanten** — en universell naturkonstant med värdet $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$. Den anger styrkan i gravitationskraften per massa-par-och-avstånds-kvadrat.
+            solution: `*G* står i Newtons gravitationslag tillsammans med massorna och avståndet:
 
-- Alternativ A är *g* (tyngdfaktorn), inte *G*.
-- Alternativ C beskriver definitionen av 1 newton.
-- Alternativ D är fel — gravitationen utbreder sig med ljusets hastighet (enligt allmän relativitetsteori), men *G* har inget med utbredningshastighet att göra.
+$$
+F_G = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
+$$
+
+*G* är **gravitationskonstanten**, en universell naturkonstant med värdet $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$. Den bestämmer hur stark gravitationen är och har samma värde överallt i universum.
+
+- Alternativ A är tyngdfaktorn $g = 9{,}82\\ \\mathrm{N/kg}$, med litet *g*. Den är en annan storhet och gäller vid jordytan.
+- Alternativ C beskriver enheten newton.
+- Alternativ D handlar om en fart. Gravitationen utbreder sig visserligen med ljusets hastighet, men *G* har inget med det att göra.
 
 **Svar:** Alternativ B.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.5-u4',
             question: `Beräkna gravitationskraften mellan jorden och månen. Jordens massa är $5{,}972 \\cdot 10^{24}\\ \\mathrm{kg}$, månens massa $7{,}35 \\cdot 10^{22}\\ \\mathrm{kg}$ och avståndet mellan deras centrum $3{,}84 \\cdot 10^{8}\\ \\mathrm{m}$. Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.`,
             answer: { value: 1.99e20, unit: 'N', tol: 0.03 },
-            solution: `Direkt insättning i Newtons gravitationslag:
+            solution: `Vi använder Newtons gravitationslag, med jordens massa som $m_1$ och månens som $m_2$:
 
 $$
-F = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
-= 6{,}67 \\cdot 10^{-11} \\cdot \\frac{5{,}972 \\cdot 10^{24} \\cdot 7{,}35 \\cdot 10^{22}}{(3{,}84 \\cdot 10^{8})^{2}}
+F_G = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
 $$
 
 $$
-F = \\frac{6{,}67 \\cdot 10^{-11} \\cdot 4{,}39 \\cdot 10^{47}}{1{,}47 \\cdot 10^{17}}
-\\approx 2{,}0 \\cdot 10^{20}\\ \\mathrm{N}
+\\left[ \\begin{array}{l}
+G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
+m_1 = 5{,}972 \\cdot 10^{24}\\ \\mathrm{kg} \\quad (\\text{jorden}) \\\\
+m_2 = 7{,}35 \\cdot 10^{22}\\ \\mathrm{kg} \\quad (\\text{månen}) \\\\
+r = 3{,}84 \\cdot 10^{8}\\ \\mathrm{m}
+\\end{array} \\right]
 $$
 
-**Svar:** Ca $2{,}0 \\cdot 10^{20}$ N.
+$$
+F_G = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{5{,}972 \\cdot 10^{24} \\cdot 7{,}35 \\cdot 10^{22}}{(3{,}84 \\cdot 10^{8})^{2}}
+= 1{,}9855\\ldots \\cdot 10^{20}\\ \\mathrm{N}
+\\approx 1{,}99 \\cdot 10^{20}\\ \\mathrm{N}
+$$
 
-**Generell slutsats:** Det är denna enorma kraft som håller kvar månen i sin bana — och som (via månens lika stora motkraft på jorden, Newtons tredje lag) skapar tidvattnet i jordens hav.`,
+Svaret avrundas till tre värdesiffror, som *G*, månens massa och avståndet.
+
+**Svar:** $1{,}99 \\cdot 10^{20}\\ \\mathrm{N}$
+
+**Generell slutsats:** Det är denna enorma kraft som håller kvar månen i sin bana. Månen drar lika hårt i jorden (Newtons tredje lag), och det är den kraften som skapar tidvattnet i jordens hav.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.5-u5',
             question: `Två fullastade supertankrar, vardera med massan $1{,}5 \\cdot 10^{8}\\ \\mathrm{kg}$, ligger förtöjda med tyngdpunkterna 100 m från varandra. Hur stor är gravitationskraften mellan fartygen? Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.`,
             answer: { value: 150, unit: 'N', tol: 0.03 },
-            solution: `Newtons gravitationslag:
+            solution: `Vi använder Newtons gravitationslag:
 
 $$
-F = G \\cdot \\frac{m^{2}}{r^{2}}
-= 6{,}67 \\cdot 10^{-11} \\cdot \\frac{(1{,}5 \\cdot 10^{8})^{2}}{100^{2}}
+F_G = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
 $$
 
 $$
-F = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{2{,}25 \\cdot 10^{16}}{10^{4}}
-= 6{,}67 \\cdot 10^{-11} \\cdot 2{,}25 \\cdot 10^{12}
+\\left[ \\begin{array}{l}
+G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
+m_1 = m_2 = 1{,}5 \\cdot 10^{8}\\ \\mathrm{kg} \\\\
+r = 100\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+F_G = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{(1{,}5 \\cdot 10^{8})^{2}}{100^{2}}
+= 150{,}075\\ \\mathrm{N}
 \\approx 150\\ \\mathrm{N}
 $$
 
-**Svar:** Ca 150 N.
+**Svar:** 150 N.
 
-**Generell slutsats:** Här är gravitationen mellan två vardagsföremål faktiskt märkbar — 150 N motsvarar tyngden av en full resväska! Det krävs dock extrema massor (150 000 ton vardera) för att komma dit. Mellan två personer på samma avstånd är kraften bara ~$10^{-11}$ N. I praktiken märks fartygens attraktion ändå inte, eftersom vattenmotstånd och förtöjningar är många storleksordningar större.`,
+**Generell slutsats:** Här är gravitationen mellan två föremål på jorden faktiskt märkbar: 150 N motsvarar tyngden av en full resväska! Det krävs dock extrema massor (150 000 ton vardera) för att komma dit. Mellan två personer på samma avstånd är kraften bara ungefär $10^{-11}\\ \\mathrm{N}$. I praktiken märks fartygens attraktion ändå inte, eftersom vattenmotstånd och förtöjningar är många storleksordningar större.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.5-u6',
             question: `Avståndet mellan två rymdsonder **fördubblas**. Vad händer med gravitationskraften mellan dem?`,
             choices: [
                 `Den halveras.`,
                 `Den minskar till en fjärdedel.`,
                 `Den fördubblas.`,
-                `Den är oförändrad — kraften beror bara på massorna.`,
+                `Den är oförändrad, eftersom kraften bara beror på massorna.`,
             ],
             correct: 1,
             solution: `Gravitationslagen har avståndet i **kvadrat** i nämnaren:
 
 $$
-F = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
+F_G = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
 $$
 
-Om $r$ ersätts med $2r$ blir nämnaren $(2r)^{2} = 4r^{2}$ — kraften minskar alltså till en fjärdedel.
+Avståndet fördubblas, så vi byter $r$ mot $2 \\cdot r$. Massorna är desamma som förut. Både tvåan och $r$ kvadreras, så nämnaren blir fyra gånger så stor:
+
+$$
+F_\\text{ny} = G \\cdot \\frac{m_1 \\cdot m_2}{(2 \\cdot r)^{2}} = G \\cdot \\frac{m_1 \\cdot m_2}{4 \\cdot r^{2}}
+$$
+
+$$
+F_\\text{ny} = \\frac{1}{4} \\cdot G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}} = \\frac{F_G}{4}
+$$
+
+Kraften minskar alltså till en fjärdedel, inte till hälften.
 
 **Svar:** Alternativ B.
 
@@ -6234,48 +6436,63 @@ Om $r$ ersätts med $2r$ blir nämnaren $(2r)^{2} = 4r^{2}$ — kraften minskar 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
+            penna: 'ov-fy1-3.5-u7',
             question: `Två kulor med samma massa *m* drar varandra med gravitationskraften $4{,}0 \\cdot 10^{-8}\\ \\mathrm{N}$ när tyngdpunkterna är 0,25 m från varandra. Bestäm kulornas massa. Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.`,
-            answer: { value: 6.12, unit: 'kg', tol: 0.03 },
-            solution: `Vi löser ut $m$ ur gravitationslagen, där $m_1 = m_2 = m$:
+            answer: { value: 6.122, unit: 'kg', tol: 0.03 },
+            solution: `Båda kulorna har massan $m$, så i gravitationslagen blir $m_1 \\cdot m_2 = m \\cdot m = m^{2}$:
 
 $$
-F = G \\cdot \\frac{m^{2}}{r^{2}} \\quad\\Leftrightarrow\\quad m = r \\cdot \\sqrt{\\frac{F}{G}}
+F_G = G \\cdot \\frac{m \\cdot m}{r^{2}} = G \\cdot \\frac{m^{2}}{r^{2}}
 $$
 
-Mätvärden:
+Vi löser ut $m^{2}$ genom att multiplicera med $r^{2}$ och dela med $G$. Massan är roten ur $m^{2}$ (en massa är alltid positiv):
+
+$$
+m^{2} = \\frac{F_G \\cdot r^{2}}{G}
+\\quad\\Leftrightarrow\\quad
+m = \\sqrt{\\frac{F_G \\cdot r^{2}}{G}}
+$$
+
 $$
 \\left[ \\begin{array}{l}
-F = 4{,}0 \\cdot 10^{-8}\\ \\mathrm{N} \\\\
+F_G = 4{,}0 \\cdot 10^{-8}\\ \\mathrm{N} \\\\
 r = 0{,}25\\ \\mathrm{m} \\\\
 G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}
 \\end{array} \\right]
 $$
 
 $$
-m = 0{,}25 \\cdot \\sqrt{\\frac{4{,}0 \\cdot 10^{-8}}{6{,}67 \\cdot 10^{-11}}}
-= 0{,}25 \\cdot \\sqrt{599{,}7}
+m = \\sqrt{\\frac{4{,}0 \\cdot 10^{-8} \\cdot 0{,}25^{2}}{6{,}67 \\cdot 10^{-11}}}
+= 6{,}122\\ldots\\ \\mathrm{kg}
+\\approx 6{,}1\\ \\mathrm{kg}
 $$
 
-$$
-m \\approx 0{,}25 \\cdot 24{,}49 \\approx 6{,}12\\ \\mathrm{kg}
-$$
+Svaret avrundas till två värdesiffror, som kraften och avståndet.
 
-**Svar:** Varje kula har massan ca 6,1 kg.`,
+**Svar:** Varje kula har massan 6,1 kg.`,
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.5-u8',
             question: `På vilket avstånd från jordens centrum är tyngdkraften på en person med massan 70 kg lika med 100 N? Använd jordens massa $m_j = 5{,}972 \\cdot 10^{24}$ kg och $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.`,
-            answer: { value: 1.67e7, unit: 'm', tol: 0.03 },
-            solution: `Vi löser ut $r$ ur Newtons gravitationslag:
+            answer: { value: 16698000, unit: 'm', tol: 0.03 },
+            solution: `Tyngdkraften på personen ges av Newtons gravitationslag, med personens massa $m$ och jordens massa $m_j$:
 
 $$
-F = G \\cdot \\frac{m \\cdot m_j}{r^{2}} \\quad\\Leftrightarrow\\quad r = \\sqrt{\\frac{G \\cdot m \\cdot m_j}{F}}
+F_G = G \\cdot \\frac{m \\cdot m_j}{r^{2}}
 $$
 
-Mätvärden:
+Vi löser ut $r^{2}$ genom att multiplicera med $r^{2}$ och dela med $F_G$. Avståndet är roten ur $r^{2}$:
+
+$$
+r^{2} = \\frac{G \\cdot m \\cdot m_j}{F_G}
+\\quad\\Leftrightarrow\\quad
+r = \\sqrt{\\frac{G \\cdot m \\cdot m_j}{F_G}}
+$$
+
 $$
 \\left[ \\begin{array}{l}
-F = 100\\ \\mathrm{N} \\\\
+F_G = 100\\ \\mathrm{N} \\\\
 m = 70\\ \\mathrm{kg} \\\\
 m_j = 5{,}972 \\cdot 10^{24}\\ \\mathrm{kg} \\\\
 G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}
@@ -6284,18 +6501,18 @@ $$
 
 $$
 r = \\sqrt{\\frac{6{,}67 \\cdot 10^{-11} \\cdot 70 \\cdot 5{,}972 \\cdot 10^{24}}{100}}
-= \\sqrt{\\frac{2{,}789 \\cdot 10^{16}}{100}}
+= 1{,}6698\\ldots \\cdot 10^{7}\\ \\mathrm{m}
+\\approx 1{,}7 \\cdot 10^{7}\\ \\mathrm{m}
 $$
 
-$$
-r = \\sqrt{2{,}789 \\cdot 10^{14}} \\approx 1{,}67 \\cdot 10^{7}\\ \\mathrm{m} = 16\\,700\\ \\mathrm{km}
-$$
+Svaret avrundas till två värdesiffror, som massan $70\\ \\mathrm{kg}$ och kraften $100\\ \\mathrm{N}$.
 
-**Svar:** Ca $1{,}7 \\cdot 10^{7}$ m, alltså ungefär 17 000 km från jordens centrum (cirka 10 000 km över jordytan).`,
+**Svar:** $1{,}7 \\cdot 10^{7}\\ \\mathrm{m}$, alltså ungefär 17 000 km från jordens centrum (cirka 10 000 km över jordytan).`,
         },
 
         {
             level: 2,
+            penna: 'ov-fy1-3.5-u9',
             question: `Inom astrologin påstås planeternas positioner vid födseln påverka våra liv. Låt oss räkna på det!
 
 a) Beräkna gravitationskraften från en förälder med massan 80 kg på ett nyfött barn med massan 3,5 kg, när föräldern står 0,50 m från barnet.
@@ -6303,75 +6520,127 @@ a) Beräkna gravitationskraften från en förälder med massan 80 kg på ett ny
 b) Jämför med gravitationskraften från planeten Mars (massa $6{,}42 \\cdot 10^{23}\\ \\mathrm{kg}$) på samma barn, när Mars står som närmast jorden ($5{,}6 \\cdot 10^{10}\\ \\mathrm{m}$ bort).
 
 *Ange kraften från föräldern (a) som ditt numeriska svar i N. Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.*`,
-            answer: { value: 7.47e-8, unit: 'N', tol: 0.03 },
-            solution: `**a) Kraften från föräldern:**
+            answer: { value: 7.4704e-8, unit: 'N', tol: 0.03 },
+            solution: `**a) Kraften från föräldern.** Vi använder Newtons gravitationslag:
 
 $$
-F_\\text{förälder} = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
-= 6{,}67 \\cdot 10^{-11} \\cdot \\frac{80 \\cdot 3{,}5}{0{,}50^{2}}
+F_G = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
 $$
 
 $$
-F_\\text{förälder} = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{280}{0{,}25}
+\\left[ \\begin{array}{l}
+G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
+m_1 = 80\\ \\mathrm{kg} \\\\
+m_2 = 3{,}5\\ \\mathrm{kg} \\\\
+r = 0{,}50\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+F_G = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{80 \\cdot 3{,}5}{0{,}50^{2}}
+= 7{,}4704 \\cdot 10^{-8}\\ \\mathrm{N}
 \\approx 7{,}5 \\cdot 10^{-8}\\ \\mathrm{N}
 $$
 
-**b) Kraften från Mars:**
+**Svar:** $7{,}5 \\cdot 10^{-8}\\ \\mathrm{N}$
+
+**b) Kraften från Mars.** Samma lag, men nu är $m_1$ Mars massa och $r$ avståndet till Mars:
 
 $$
-F_\\text{Mars} = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{6{,}42 \\cdot 10^{23} \\cdot 3{,}5}{(5{,}6 \\cdot 10^{10})^{2}}
+\\left[ \\begin{array}{l}
+G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
+m_1 = 6{,}42 \\cdot 10^{23}\\ \\mathrm{kg} \\quad (\\text{Mars}) \\\\
+m_2 = 3{,}5\\ \\mathrm{kg} \\\\
+r = 5{,}6 \\cdot 10^{10}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+F_G = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{6{,}42 \\cdot 10^{23} \\cdot 3{,}5}{(5{,}6 \\cdot 10^{10})^{2}}
+= 4{,}779\\ldots \\cdot 10^{-8}\\ \\mathrm{N}
 \\approx 4{,}8 \\cdot 10^{-8}\\ \\mathrm{N}
 $$
 
-**Svar:** a) Ca $7{,}5 \\cdot 10^{-8}$ N. b) Föräldern i förlossningsrummet drar i barnet med **större** gravitationskraft än planeten Mars — trots att Mars är nästan $10^{22}$ gånger tyngre.
+Båda krafterna har tiopotensen $10^{-8}$, så vi jämför talen framför: $7{,}5 \\cdot 10^{-8}\\ \\mathrm{N} > 4{,}8 \\cdot 10^{-8}\\ \\mathrm{N}$.
 
-**Generell slutsats:** Avståndet i kvadrat i nämnaren straffar avlägsna föremål brutalt: Mars enorma massa räcker inte på $5{,}6 \\cdot 10^{10}$ m avstånd. Om planeterna verkligen styrde våra liv via gravitationen skulle barnmorskan ha större inflytande än hela solsystemet — ett fint exempel på hur en enkel beräkning kan granska ett påstående.`,
+**Svar:** Föräldern drar hårdare än Mars. Föräldern i förlossningsrummet drar i barnet med **större** gravitationskraft än planeten Mars, trots att Mars är nästan $10^{22}$ gånger tyngre.
+
+**Generell slutsats:** Avståndet i kvadrat i nämnaren gör kraften från avlägsna föremål mycket liten: Mars enorma massa räcker inte på $5{,}6 \\cdot 10^{10}\\ \\mathrm{m}$ avstånd. Om planeterna verkligen styrde våra liv via gravitationen skulle barnmorskan ha större inflytande än Mars. Ett fint exempel på hur en enkel beräkning kan granska ett påstående.`,
         },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
+            penna: 'ov-fy1-3.5-u10',
             question: `På vilken höjd över jordytan är tyngdfaktorn hälften så stor som vid jordytan? Jordens radie är 6 371 km.
 
-*Tips: du behöver varken jordens massa eller $G$ — ställ upp en kvot.*`,
+*Tips: du behöver varken jordens massa eller $G$, de divideras bort.*`,
             answer: { value: 2639, unit: 'km', tol: 0.03 },
-            solution: `Tyngdfaktorn på avståndet $r$ från jordens centrum är $g(r) = G m_j / r^{2}$. I stället för att räkna ut den bildar vi **kvoten** mellan tyngdfaktorn på höjden $h$ och vid ytan (radien $R$):
+            solution: `Tyngdfaktorn på avståndet $r$ från jordens medelpunkt ges av gravitationslagen:
 
 $$
-\\frac{g(R+h)}{g(R)} = \\frac{G m_j / (R+h)^{2}}{G m_j / R^{2}} = \\frac{R^{2}}{(R+h)^{2}}
+g = G \\cdot \\frac{m_j}{r^{2}}
 $$
 
-Både $G$ och jordmassan stryker bort sig! Villkoret att tyngdfaktorn ska halveras:
+Vid ytan är $r = R$ (jordens radie) och på höjden $h$ är $r = R + h$. Där ska tyngdfaktorn vara hälften så stor som vid ytan:
 
 $$
-\\frac{R^{2}}{(R+h)^{2}} = \\frac{1}{2}
+G \\cdot \\frac{m_j}{(R+h)^{2}} = \\frac{1}{2} \\cdot G \\cdot \\frac{m_j}{R^{2}}
+$$
+
+$G$ och $m_j$ finns som faktorer i båda leden och divideras bort. Kvar står två bråk med täljaren 1, och de är lika när nämnarna är lika:
+
+$$
+\\frac{1}{(R+h)^{2}} = \\frac{1}{2 \\cdot R^{2}}
 \\quad\\Leftrightarrow\\quad
-(R+h)^{2} = 2 R^{2}
-\\quad\\Leftrightarrow\\quad
-R + h = R\\sqrt{2}
+(R+h)^{2} = 2 \\cdot R^{2}
+$$
+
+Vi drar roten ur båda leden (avstånden är positiva):
+
+$$
+R + h = \\sqrt{2 \\cdot R^{2}} = \\sqrt{2} \\cdot R
+$$
+
+Vi drar bort $R$ från båda leden och bryter ut $R$:
+
+$$
+R + h - R = \\sqrt{2} \\cdot R - R
 $$
 
 $$
-h = R(\\sqrt{2} - 1) = 6\\,371 \\cdot 0{,}414 \\approx 2\\,600\\ \\mathrm{km}
+h = \\sqrt{2} \\cdot R - R = R \\cdot (\\sqrt{2} - 1)
 $$
 
-**Svar:** På ca 2 600 km höjd — knappt en halv jordradie upp.
+$$
+\\left[ \\begin{array}{l}
+R = 6\\,371\\ \\mathrm{km}
+\\end{array} \\right]
+$$
 
-**Generell slutsats:** Kvotmetoden är ett kraftfullt A-nivå-verktyg: när samma konstanter förekommer i täljare och nämnare försvinner de, och problemet löses utan att man ens behöver slå upp deras värden. Notera också att satelliter på låg bana (400 km, som ISS) har nästan full tyngdfaktor — "tyngdlösheten" ombord beror på det fria fallet runt jorden, inte på avståndet.`,
+$$
+h = 6\\,371 \\cdot (\\sqrt{2} - 1) = 2\\,638{,}95\\ldots\\ \\mathrm{km} \\approx 2\\,639\\ \\mathrm{km}
+$$
+
+Svaret avrundas till fyra värdesiffror, som jordens radie.
+
+**Svar:** 2 639 km, alltså knappt en halv jordradie upp.
+
+**Generell slutsats:** Metoden är kraftfull: när samma konstanter förekommer i båda leden försvinner de, och problemet löses utan att man ens behöver slå upp deras värden. Notera också att satelliter på låg bana (400 km, som ISS) har nästan full tyngdfaktor. "Tyngdlösheten" ombord beror på det fria fallet runt jorden, inte på avståndet.`,
         },
         {
             level: 3,
+            penna: 'ov-fy1-3.5-u11',
             question: `Mars har massan $6{,}39 \\cdot 10^{23}\\ \\mathrm{kg}$ och radien $3\\,389\\ \\mathrm{km}$. Beräkna **tyngdfaktorn $g_\\text{Mars}$** vid Mars yta (i N/kg). Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.`,
             answer: { value: 3.71, unit: 'N/kg', tol: 0.03 },
-            solution: `På Mars yta är tyngdkraften på ett föremål med massan *m* både $F = m \\cdot g_\\text{Mars}$ och $F = G \\cdot m \\cdot m_\\text{Mars} / r^{2}$. Sätt dem lika och dividera bort *m*:
+            solution: `Tyngdkraften på ett föremål med massan *m* vid Mars yta kan skrivas på två sätt: med tyngdfaktorn, $F_G = m \\cdot g_\\text{Mars}$, och med gravitationslagen. Det är samma kraft, så uttrycken sätts lika. Massan *m* finns som faktor i båda leden och divideras bort:
 
 $$
 m \\cdot g_\\text{Mars} = G \\cdot \\frac{m \\cdot m_\\text{Mars}}{r^{2}}
 \\quad\\Leftrightarrow\\quad
-g_\\text{Mars} = \\frac{G \\cdot m_\\text{Mars}}{r^{2}}
+g_\\text{Mars} = G \\cdot \\frac{m_\\text{Mars}}{r^{2}}
 $$
 
-Mätvärden (i SI-enheter):
 $$
 \\left[ \\begin{array}{l}
 G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
@@ -6381,14 +6650,16 @@ r = 3\\,389\\ \\mathrm{km} = 3{,}389 \\cdot 10^{6}\\ \\mathrm{m}
 $$
 
 $$
-g_\\text{Mars} = \\frac{6{,}67 \\cdot 10^{-11} \\cdot 6{,}39 \\cdot 10^{23}}{(3{,}389 \\cdot 10^{6})^{2}}
-= \\frac{4{,}262 \\cdot 10^{13}}{1{,}148 \\cdot 10^{13}}
+g_\\text{Mars} = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{6{,}39 \\cdot 10^{23}}{(3{,}389 \\cdot 10^{6})^{2}}
+= 3{,}7109\\ldots\\ \\mathrm{N/kg}
 \\approx 3{,}71\\ \\mathrm{N/kg}
 $$
 
-**Svar:** Tyngdfaktorn på Mars yta är ca 3,71 N/kg.
+Svaret avrundas till tre värdesiffror, som *G* och Mars massa.
 
-**Generell slutsats:** Detta är knappt 38 % av jordens tyngdfaktor. En person som väger 700 N på jorden skulle väga drygt 260 N på Mars — fortfarande mer än på månen (170 N), men klart mindre än hemma. Notera att tyngdfaktorn beror på *två* saker: planetens massa och dess radie i kvadrat. En liten men extremt tät planet (t.ex. en neutronstjärna) skulle ha enorm tyngdfaktor.`,
+**Svar:** Tyngdfaktorn på Mars yta är 3,71 N/kg.
+
+**Generell slutsats:** Detta är knappt 38 % av jordens tyngdfaktor. En person som väger 700 N på jorden skulle väga drygt 260 N på Mars, fortfarande mer än på månen (knappt 120 N) men klart mindre än hemma. Notera att tyngdfaktorn beror på *två* saker: planetens massa och dess radie i kvadrat. En liten men extremt tät himlakropp (till exempel en neutronstjärna) skulle ha enorm tyngdfaktor.`,
         },
     ],
 
@@ -6721,39 +6992,36 @@ $$
             question: `En låda med massan 4,0 kg ligger på ett plan enligt figuren. Beräkna tyngdkraftens komposant $F_1$ **nedför planet**. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
 ${makeInclinePlane({ angle: 30, mass: '4,0 kg' })}`,
-            answer: { value: 19.6, unit: 'N', tol: 0.03 },
+            penna: 'ov-fy1-3.7-u1',
+            answer: { value: 19.64, unit: 'N', tol: 0.03 },
             solution: `Komposanten nedför planet ges av:
 
 $$
-F_1 = m \\cdot g \\cdot \\sin \\alpha = 4{,}0 \\cdot 9{,}82 \\cdot \\sin 30^{\\circ}
+F_1 = m \\cdot g \\cdot \\sin \\alpha = 4{,}0 \\cdot 9{,}82 \\cdot \\sin 30^{\\circ} = 19{,}64\\ \\mathrm{N} \\approx 20\\ \\mathrm{N}
 $$
 
-$$
-F_1 = 4{,}0 \\cdot 9{,}82 \\cdot 0{,}5 \\approx 19{,}6\\ \\mathrm{N}
-$$
+Massan har två värdesiffror, så svaret avrundas till två värdesiffror.
 
-**Svar:** Komposanten nedför planet är ca 19,6 N.`,
+**Svar:** Komposanten nedför planet är cirka 20 N.`,
         },
         {
             level: 1,
             question: `En låda med massan 4,0 kg ligger på ett plan som lutar 30° mot horisontalplanet. Beräkna tyngdkraftens komposant $F_2$ **vinkelrätt mot planet**. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            penna: 'ov-fy1-3.7-u2',
             answer: { value: 34, unit: 'N', tol: 0.03 },
             solution: `Komposanten vinkelrätt mot planet ges av:
 
 $$
-F_2 = m \\cdot g \\cdot \\cos \\alpha = 4{,}0 \\cdot 9{,}82 \\cdot \\cos 30^{\\circ}
+F_2 = m \\cdot g \\cdot \\cos \\alpha = 4{,}0 \\cdot 9{,}82 \\cdot \\cos 30^{\\circ} = 34{,}017\\ldots\\ \\mathrm{N} \\approx 34\\ \\mathrm{N}
 $$
 
-$$
-F_2 \\approx 4{,}0 \\cdot 9{,}82 \\cdot 0{,}866 \\approx 34\\ \\mathrm{N}
-$$
-
-**Svar:** Ca 34 N.
+**Svar:** Cirka 34 N.
 
 **Generell slutsats:** $F_2$ är också lika med **normalkraften** $F_N$ på lådan från det lutande planet — eftersom lådan inte accelererar vinkelrätt mot planet.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.7-u3',
             question: `På ett lutande plan glider en låda **nedför planet med konstant hastighet**. Vad gäller då för friktionskraften $F_f$ och tyngdkraftens komposant nedför planet $F_1$?`,
             choices: [
                 `$F_f$ är större än $F_1$ — det är därför lådan inte glider snabbare.`,
@@ -6777,23 +7045,23 @@ För att $F_R = 0$ måste de vara lika stora: $F_f = F_1$.
             question: `En skidåkare med massan 65 kg (inklusive utrustning) står stilla i en backe enligt figuren. Hur stor är tyngdkraftens komposant **längs backen**? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
 ${makeInclinePlane({ angle: 15, mass: '65 kg' })}`,
-            answer: { value: 165, unit: 'N', tol: 0.03 },
+            penna: 'ov-fy1-3.7-u4',
+            answer: { value: 165.2, unit: 'N', tol: 0.03 },
             solution: `Komposanten längs planet ges av:
 
 $$
-F_1 = m \\cdot g \\cdot \\sin \\alpha = 65 \\cdot 9{,}82 \\cdot \\sin 15^{\\circ}
+F_1 = m \\cdot g \\cdot \\sin \\alpha = 65 \\cdot 9{,}82 \\cdot \\sin 15^{\\circ} = 165{,}20\\ldots\\ \\mathrm{N} \\approx 170\\ \\mathrm{N}
 $$
 
-$$
-F_1 \\approx 638 \\cdot 0{,}259 \\approx 165\\ \\mathrm{N}
-$$
+Massan och vinkeln har två värdesiffror, så svaret avrundas till två värdesiffror.
 
-**Svar:** Ca 165 N.
+**Svar:** Cirka 170 N.
 
 **Generell slutsats:** Det är denna kraft skidåkarens skidor (via kantgrepp eller stavar) måste hålla emot för att hen ska stå stilla i backen — och samma kraft som accelererar åkaren nedför när hen släpper taget.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.7-u5',
             question: `Ett lutande plan görs allt **brantare**. Vad händer med tyngdkraftens komposanter $F_1$ (längs planet) och $F_2$ (vinkelrätt mot planet)?`,
             choices: [
                 `Båda är oförändrade — tyngdkraften ändras ju inte.`,
@@ -6817,20 +7085,25 @@ Alternativ A blandar ihop tyngdkraften (som mycket riktigt är oförändrad) med
         {
             level: 2,
             question: `En 6,0 kg tung låda glider med **konstant hastighet** nedför ett lutande plan som lutar 28° mot horisontalplanet. Beräkna friktionstalet *μ* mellan låda och plan.`,
+            penna: 'ov-fy1-3.7-u6',
             answer: { value: 0.53, unit: '', tol: 0.05 },
-            solution: `Vid konstant hastighet är $F_f = F_1$ (kraftjämvikt längs planet). Friktionskraften ges av $F_f = \\mu \\cdot F_N = \\mu \\cdot m g \\cos\\alpha$.
+            solution: `Vid konstant hastighet är $F_f = F_1$ (kraftjämvikt längs planet). Friktionskraften ges av $F_f = \\mu \\cdot F_N$, och normalkraften är lika stor som komposanten vinkelrätt mot planet, $F_N = F_2 = m \\cdot g \\cdot \\cos\\alpha$:
 
 $$
-\\mu \\cdot m g \\cos\\alpha = m g \\sin\\alpha
+\\mu \\cdot m \\cdot g \\cdot \\cos\\alpha = m \\cdot g \\cdot \\sin\\alpha
 $$
 
-Massan och tyngdfaktorn **stryker bort sig**, och vi får:
+Massan och tyngdfaktorn divideras bort, och vi delar med $\\cos\\alpha$:
 
 $$
-\\mu = \\frac{\\sin\\alpha}{\\cos\\alpha} = \\tan\\alpha = \\tan 28^{\\circ} \\approx 0{,}53
+\\mu \\cdot \\cos\\alpha = \\sin\\alpha \\quad\\Leftrightarrow\\quad \\mu = \\frac{\\sin\\alpha}{\\cos\\alpha} = \\tan\\alpha
 $$
 
-**Svar:** Friktionstalet är ca 0,53.
+$$
+\\mu = \\tan 28^{\\circ} = 0{,}5317\\ldots \\approx 0{,}53
+$$
+
+**Svar:** Friktionstalet är cirka 0,53.
 
 **Generell slutsats:** En låda som glider med konstant hastighet på ett lutande plan ger en mycket enkel metod att mäta friktionstalet: $\\mu = \\tan\\alpha$ där $\\alpha$ är den minsta vinkel där lådan börjar glida av sig själv. Detta är *gränsvinkeln* för glidning och kallas **friktionsvinkeln**.`,
         },
@@ -6839,44 +7112,48 @@ $$
             question: `En kälke med massan 8,0 kg glider **friktionsfritt** nedför ett plan enligt figuren. Vilken acceleration får kälken? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
 ${makeInclinePlane({ angle: 22, mass: '8,0 kg' })}`,
-            answer: { value: 3.68, unit: 'm/s²', tol: 0.03 },
-            solution: `Utan friktion är den enda kraften längs planet $F_1 = mg \\sin\\alpha$. Newtons andra lag ger:
+            penna: 'ov-fy1-3.7-u7',
+            answer: { value: 3.678, unit: 'm/s²', tol: 0.03 },
+            solution: `Utan friktion är den enda kraften längs planet $F_1 = m \\cdot g \\cdot \\sin\\alpha$. Newtons andra lag ger:
 
 $$
-F_R = m \\cdot a \\quad\\Leftrightarrow\\quad m g \\sin\\alpha = m \\cdot a
+F_R = m \\cdot a \\quad\\Leftrightarrow\\quad m \\cdot g \\cdot \\sin\\alpha = m \\cdot a
 $$
 
-Massan stryker bort sig:
+Massan divideras bort:
 
 $$
-a = g \\cdot \\sin\\alpha = 9{,}82 \\cdot \\sin 22^{\\circ} \\approx 9{,}82 \\cdot 0{,}375 \\approx 3{,}68\\ \\mathrm{m/s^2}
+a = g \\cdot \\sin\\alpha = 9{,}82 \\cdot \\sin 22^{\\circ} = 3{,}678\\ldots\\ \\mathrm{m/s^2} \\approx 3{,}7\\ \\mathrm{m/s^2}
 $$
 
-**Svar:** Accelerationen är ca 3,7 m/s².
+**Svar:** Accelerationen är cirka 3,7 m/s².
 
 **Generell slutsats:** På ett friktionsfritt lutande plan beror accelerationen **bara på vinkeln**, inte på massan. Detta var en av Galileos genialiska insikter — han använde lutande plan med små lutningar för att "späda ut" tyngdaccelerationen och kunna mäta tider med dåtidens primitiva instrument.`,
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.7-u8',
             question: `Flaket på en lastbil tippas långsamt allt brantare för att lasten ska glida av. Vilofriktionstalet mellan lastlådorna och flaket är 0,42. Vid vilken lutningsvinkel börjar lådorna glida?`,
-            answer: { value: 22.8, unit: '°', tol: 0.03 },
-            solution: `Lådorna börjar glida när tyngdkraftens komposant längs flaket precis överstiger den maximala vilofriktionen:
+            answer: { value: 22.78, unit: '°', tol: 0.03 },
+            solution: `Lådorna börjar glida när tyngdkraftens komposant längs flaket precis når vilofriktionens största värde, $F_1 = F_f = \\mu \\cdot F_N$, där $F_N = F_2$:
 
 $$
-m g \\sin\\alpha = \\mu \\cdot m g \\cos\\alpha
+m \\cdot g \\cdot \\sin\\alpha = \\mu \\cdot m \\cdot g \\cdot \\cos\\alpha
 $$
 
-Massan och tyngdfaktorn stryker bort sig:
+Massan och tyngdfaktorn divideras bort, och vi delar med $\\cos\\alpha$:
 
 $$
-\\tan\\alpha = \\mu
-\\quad\\Leftrightarrow\\quad
-\\alpha = \\arctan 0{,}42 \\approx 23^{\\circ}
+\\sin\\alpha = \\mu \\cdot \\cos\\alpha \\quad\\Leftrightarrow\\quad \\frac{\\sin\\alpha}{\\cos\\alpha} = \\mu \\quad\\Leftrightarrow\\quad \\tan\\alpha = \\mu
+$$
+
+$$
+\\tan\\alpha = 0{,}42 \\quad\\Leftrightarrow\\quad \\alpha = \\arctan 0{,}42 = 22{,}78\\ldots^{\\circ} \\approx 23^{\\circ}
 $$
 
 ${makeInclinePlane({ angle: 23, forces: { G: 1, N: 1, F1: 1, f: 1 } })}
 
-**Svar:** Vid ca 23° börjar lådorna glida.
+**Svar:** Vid cirka 23° börjar lådorna glida.
 
 **Generell slutsats:** Gränsvinkeln $\\alpha = \\arctan\\mu$ kallas **friktionsvinkeln** och beror varken på lastens massa eller på flakets material i övrigt — bara på friktionstalet. Sambandet används baklänges som en enkel mätmetod: tippa underlaget tills föremålet börjar glida och läs av vinkeln, så är $\\mu = \\tan\\alpha$.`,
         },
@@ -6889,25 +7166,32 @@ a) Vilken acceleration får åkaren?
 b) Vilken fart har åkaren efter 80 m i backen?
 
 *Ange farten (b) som ditt numeriska svar i m/s. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
-            answer: { value: 13.2, unit: 'm/s', tol: 0.03 },
-            solution: `**a) Accelerationen.** Längs planet verkar $F_1 = m g \\sin\\alpha$ nedför och friktionen $F_f = \\mu m g \\cos\\alpha$ uppför. Newtons andra lag — massan stryker bort sig:
+            penna: 'ov-fy1-3.7-u9',
+            answer: { value: 13.15, unit: 'm/s', tol: 0.03 },
+            solution: `**a) Accelerationen.** Längs planet verkar $F_1 = m \\cdot g \\cdot \\sin\\alpha$ nedför och friktionen $F_f = \\mu \\cdot F_N = \\mu \\cdot m \\cdot g \\cdot \\cos\\alpha$ uppför. Newtons andra lag ger
 
 $$
-a = g \\cdot (\\sin\\alpha - \\mu \\cos\\alpha)
-= 9{,}82 \\cdot (\\sin 12^{\\circ} - 0{,}10 \\cdot \\cos 12^{\\circ})
+F_1 - F_f = m \\cdot a \\quad\\Leftrightarrow\\quad m \\cdot g \\cdot \\sin\\alpha - \\mu \\cdot m \\cdot g \\cdot \\cos\\alpha = m \\cdot a
+$$
+
+Massan divideras bort:
+
+$$
+a = g \\cdot \\sin\\alpha - \\mu \\cdot g \\cdot \\cos\\alpha
+= 9{,}82 \\cdot \\sin 12^{\\circ} - 0{,}10 \\cdot 9{,}82 \\cdot \\cos 12^{\\circ}
 $$
 
 $$
-a = 9{,}82 \\cdot (0{,}208 - 0{,}098) \\approx 1{,}1\\ \\mathrm{m/s^2}
+a = 1{,}081\\ldots\\ \\mathrm{m/s^2} \\approx 1{,}1\\ \\mathrm{m/s^2}
 $$
 
-**b) Farten efter 80 m.** Torricellis ekvation från stillastående:
+**b) Farten efter 80 m.** Torricellis ekvation från stillastående ($v_0 = 0$) ger $v^2 = 2 \\cdot a \\cdot s$. Accelerationen tas oavrundad från a):
 
 $$
-v = \\sqrt{2 a s} = \\sqrt{2 \\cdot 1{,}1 \\cdot 80} \\approx 13\\ \\mathrm{m/s}
+v = \\sqrt{2 \\cdot a \\cdot s} = \\sqrt{2 \\cdot 1{,}081\\ldots \\cdot 80} = 13{,}15\\ldots\\ \\mathrm{m/s} \\approx 13\\ \\mathrm{m/s}
 $$
 
-**Svar:** a) Ca 1,1 m/s². b) Ca 13 m/s — ungefär 47 km/h.
+**Svar:** a) Cirka 1,1 m/s²&emsp;&emsp;b) Cirka 13 m/s, ungefär 47 km/h.
 
 **Generell slutsats:** En till synes blygsam backe (12°) och lång glidsträcka räcker alltså för rejäl fart. Jämför gärna med det friktionsfria fallet: utan friktion hade accelerationen varit $g \\sin 12^{\\circ} \\approx 2{,}0\\ \\mathrm{m/s^2}$ — snöns friktion "äter" nästan halva accelerationen.`,
         },
@@ -6924,43 +7208,42 @@ a) Visa att lådan **accelererar nedför planet** (kraften nedför planet är st
 b) Beräkna lådans acceleration nedför planet.
 
 *Ange accelerationen från (b) som ditt numeriska svar i m/s². Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
-            answer: { value: 2.11, unit: 'm/s²', tol: 0.03 },
-            solution: `**a) Kontrollera att lådan glider.** Mata in värdena för $F_1$ (drivande kraft nedför planet) och maximal friktion $F_{f,\\max}$:
+            penna: 'ov-fy1-3.7-u10',
+            answer: { value: 2.111, unit: 'm/s²', tol: 0.03 },
+            solution: `**a) Kontrollera att lådan glider.** Beräkna $F_1$ (drivande kraft nedför planet) och friktionens största värde $F_{f,\\max}$:
 
 $$
-F_1 = m g \\sin\\alpha = 6{,}0 \\cdot 9{,}82 \\cdot \\sin 31^{\\circ} \\approx 30{,}3\\ \\mathrm{N}
+F_1 = m \\cdot g \\cdot \\sin\\alpha = 6{,}0 \\cdot 9{,}82 \\cdot \\sin 31^{\\circ} = 30{,}346\\ldots\\ \\mathrm{N}
 $$
 
 $$
-F_{f,\\max} = \\mu \\cdot m g \\cos\\alpha = 0{,}35 \\cdot 6{,}0 \\cdot 9{,}82 \\cdot \\cos 31^{\\circ} \\approx 17{,}7\\ \\mathrm{N}
+F_{f,\\max} = \\mu \\cdot m \\cdot g \\cdot \\cos\\alpha = 0{,}35 \\cdot 6{,}0 \\cdot 9{,}82 \\cdot \\cos 31^{\\circ} = 17{,}676\\ldots\\ \\mathrm{N}
 $$
 
-Eftersom $F_1 > F_{f,\\max}$ (30,3 > 17,7) kommer lådan att accelerera nedför planet.
+Eftersom $F_1 > F_{f,\\max}$ (ungefär 30 N mot högst 18 N) kommer lådan att accelerera nedför planet.
 
 Alternativ kontroll: jämför $\\tan\\alpha$ med $\\mu$. Om $\\tan\\alpha > \\mu$ glider lådan. $\\tan 31^{\\circ} \\approx 0{,}60 > 0{,}35$ ✓.
 
-**b) Acceleration.** Den resulterande kraften nedför planet:
+**b) Acceleration.** Newtons andra lag ger
 
 $$
-F_R = F_1 - F_f = mg \\sin\\alpha - \\mu m g \\cos\\alpha = mg \\cdot (\\sin\\alpha - \\mu \\cos\\alpha)
+F_R = m \\cdot a \\quad\\Leftrightarrow\\quad a = \\frac{F_R}{m}
 $$
 
-Newtons andra lag — massan stryker bort sig:
+Den resulterande kraften nedför planet är $F_1$ minus friktionen. Båda värdena tas oavrundade från a):
 
 $$
-a = g \\cdot (\\sin\\alpha - \\mu \\cos\\alpha)
-$$
-
-$$
-a = 9{,}82 \\cdot (\\sin 31^{\\circ} - 0{,}35 \\cdot \\cos 31^{\\circ})
-= 9{,}82 \\cdot (0{,}515 - 0{,}35 \\cdot 0{,}857)
+\\left[ \\begin{array}{l}
+F_R = F_1 - F_f = 30{,}346\\ldots\\ \\mathrm{N} - 17{,}676\\ldots\\ \\mathrm{N} = 12{,}669\\ldots\\ \\mathrm{N} \\\\
+m = 6{,}0\\ \\mathrm{kg}
+\\end{array} \\right]
 $$
 
 $$
-a = 9{,}82 \\cdot (0{,}515 - 0{,}300) = 9{,}82 \\cdot 0{,}215 \\approx 2{,}11\\ \\mathrm{m/s^2}
+a = \\frac{12{,}669\\ldots}{6{,}0} = 2{,}111\\ldots\\ \\mathrm{m/s^2} \\approx 2{,}1\\ \\mathrm{m/s^2}
 $$
 
-**Svar:** a) $F_1 \\approx 30$ N $>$ $F_{f,\\max} \\approx 18$ N — lådan accelererar. b) Accelerationen är ca 2,1 m/s² nedför planet.
+**Svar:** a) $F_1 \\approx 30$ N $>$ $F_{f,\\max} \\approx 18$ N, så lådan accelererar.&emsp;&emsp;b) Accelerationen är cirka 2,1 m/s² nedför planet.
 
 **Generell slutsats:** Generellt för en låda på lutande plan med friktion:
 
@@ -6985,35 +7268,49 @@ a) Hur långt upp längs planet glider klossen innan den vänder?
 b) Blir klossen liggande i vändpunkten, eller glider den ner igen? Motivera med en beräkning.
 
 *Ange sträckan (a) som ditt numeriska svar i m. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
-            answer: { value: 1.84, unit: 'm', tol: 0.03 },
+            penna: 'ov-fy1-3.7-u11',
+            answer: { value: 1.844, unit: 'm', tol: 0.03 },
             solution: `**Fällan i uppgiften:** friktionen verkar alltid **mot rörelseriktningen**. På vägen upp glider klossen uppför — då pekar friktionen *nedför* planet och **samverkar** med tyngdkraftskomposanten i att bromsa klossen. Det är alltså inte samma acceleration som när en kloss glider nedför!
 
-**a) Sträckan uppför.** På vägen upp bromsas klossen av både $F_1 = m g \\sin\\alpha$ och $F_f = \\mu m g \\cos\\alpha$, båda riktade nedför planet. Massan stryker bort sig:
-
-$$
-a = g \\cdot (\\sin\\alpha + \\mu \\cos\\alpha)
-= 9{,}82 \\cdot (\\sin 28^{\\circ} + 0{,}25 \\cdot \\cos 28^{\\circ})
-$$
-
-$$
-a = 9{,}82 \\cdot (0{,}469 + 0{,}221) \\approx 6{,}8\\ \\mathrm{m/s^2} \\quad (\\text{riktad nedför planet})
-$$
+**a) Sträckan uppför.** På vägen upp bromsas klossen av både $F_1 = m g \\sin\\alpha$ och $F_f = \\mu m g \\cos\\alpha$, båda riktade nedför planet. Med positiv riktning uppför planet ger Newtons andra lag $m \\cdot a = -(m \\cdot g \\cdot \\sin\\alpha + \\mu \\cdot m \\cdot g \\cdot \\cos\\alpha)$, och massan divideras bort.
 
 Torricellis ekvation med $v = 0$ i vändpunkten:
 
 $$
-s = \\frac{v_0^{2}}{2 a} = \\frac{5{,}0^{2}}{2 \\cdot 6{,}8} \\approx 1{,}8\\ \\mathrm{m}
+v^2 - v_0^2 = 2 \\cdot a \\cdot s \\quad\\Leftrightarrow\\quad s = \\frac{v^2 - v_0^2}{2 \\cdot a}
 $$
 
-**b) Glider den ner igen?** I vändpunkten står klossen stilla ett ögonblick. Den glider ner om tyngdkraftskomposanten längs planet överstiger den maximala vilofriktionen, dvs. om $\\tan\\alpha > \\mu$:
+$$
+\\left[ \\begin{array}{l}
+v = 0 \\\\
+v_0 = 5{,}0\\ \\mathrm{m/s} \\\\
+a = -(g \\cdot \\sin\\alpha + \\mu \\cdot g \\cdot \\cos\\alpha) = -(9{,}82 \\cdot \\sin 28^{\\circ} + 0{,}25 \\cdot 9{,}82 \\cdot \\cos 28^{\\circ}) = -6{,}777\\ldots\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
 
 $$
-\\tan 28^{\\circ} \\approx 0{,}53 > 0{,}25
+s = \\frac{0^2 - 5{,}0^2}{2 \\cdot (-6{,}777\\ldots)} = 1{,}844\\ldots\\ \\mathrm{m} \\approx 1{,}8\\ \\mathrm{m}
 $$
 
-Klossen glider alltså **ner igen** — nu med friktionen riktad *uppför* planet, och den mindre accelerationen $a = g(\\sin\\alpha - \\mu\\cos\\alpha) \\approx 3{,}5\\ \\mathrm{m/s^2}$.
+**b) Glider den ner igen?** I vändpunkten står klossen stilla ett ögonblick. Den glider ner om tyngdkraftskomposanten längs planet överstiger vilofriktionens största värde:
 
-**Svar:** a) Ca 1,8 m. b) Ja — eftersom $\\tan 28^{\\circ} > \\mu$ glider den ner igen.
+$$
+F_1 > \\mu \\cdot F_N \\quad\\Leftrightarrow\\quad m \\cdot g \\cdot \\sin\\alpha > \\mu \\cdot m \\cdot g \\cdot \\cos\\alpha
+$$
+
+Massan och tyngdfaktorn divideras bort, och vi delar med $\\cos\\alpha$ (som är positiv):
+
+$$
+\\sin\\alpha > \\mu \\cdot \\cos\\alpha \\quad\\Leftrightarrow\\quad \\frac{\\sin\\alpha}{\\cos\\alpha} > \\mu \\quad\\Leftrightarrow\\quad \\tan\\alpha > \\mu
+$$
+
+$$
+\\tan 28^{\\circ} = 0{,}5317\\ldots > 0{,}25
+$$
+
+Klossen glider alltså **ner igen** — nu med friktionen riktad *uppför* planet, och den mindre accelerationen $a = g(\\sin\\alpha - \\mu\\cos\\alpha) = 2{,}442\\ldots\\ \\mathrm{m/s^2} \\approx 2{,}4\\ \\mathrm{m/s^2}$.
+
+**Svar:** a) Cirka 1,8 m&emsp;&emsp;b) Ja, eftersom $\\tan 28^{\\circ} > \\mu$ glider den ner igen.
 
 **Generell slutsats:** Uppför och nedför är **inte** symmetriska när friktion finns: uppför bromsar $g(\\sin\\alpha + \\mu\\cos\\alpha)$, nedför driver bara $g(\\sin\\alpha - \\mu\\cos\\alpha)$. Klossen kommer därför tillbaka till startpunkten med **lägre** fart än den sköts iväg med — mellanskillnaden i rörelseenergi har friktionen omvandlat till värme. Att teckna friktionens riktning fel i uppförsfasen är ett av de vanligaste felen på prov.`,
         },
@@ -7027,6 +7324,7 @@ Klossen glider alltså **ner igen** — nu med friktionen riktad *uppför* plane
         // ── Nivå 1 ───────────────────────────────────────────────────
         {
             level: 1,
+            penna: 'ov-fy1-3.8-u1',
             question: `En lampa med massan 2,0 kg hänger stilla i två lika långa rep enligt figuren. Hur stor är spännkraften i vardera repet? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
 ${makeHangingRopes({ angL: 30, angR: 30, mass: '2,0 kg' })}`,
@@ -7055,6 +7353,7 @@ $$
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.8-u2',
             question: `En tavla hänger i två sneda snören. Snörena byts mot längre snören, så att de blir **flackare** (vinkeln mot det vågräta blir mindre). Vad händer med spännkraften i snörena?`,
             choices: [
                 `Den är oförändrad, eftersom tavlan väger lika mycket som förut.`,
@@ -7071,6 +7370,7 @@ Alternativet "oförändrad" blandar ihop tyngdkraften, som mycket riktigt är de
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.8-u3',
             question: `Ett rep drar i en låda med spännkraften 40 N enligt figuren. Hur stor är spännkraftens **vågräta** komposant?
 
 ${makeForceDiagram({
@@ -7083,7 +7383,7 @@ ${makeForceDiagram({
             solution: `Spännkraften är hypotenusan i en rätvinklig triangel. Den vågräta komposanten ligger **intill** vinkeln 25°, alltså är den närliggande katet och fås med cosinus.
 
 $$
-F_x = F_\\mathrm{S} \\cdot \\cos 25^{\\circ} = 40 \\cdot \\cos 25^{\\circ} = 36{,}25\\ \\mathrm{N} \\approx 36\\ \\mathrm{N}
+F_x = F_\\mathrm{S} \\cdot \\cos 25^{\\circ} = 40 \\cdot \\cos 25^{\\circ} = 36{,}252\\ldots\\ \\mathrm{N} \\approx 36\\ \\mathrm{N}
 $$
 
 **Svar:** Den vågräta komposanten är cirka 36 N.
@@ -7094,6 +7394,7 @@ $$
         // ── Nivå 2 ───────────────────────────────────────────────────
         {
             level: 2,
+            penna: 'ov-fy1-3.8-u4',
             question: `En blöt jacka med massan 1,5 kg hänger mitt på en tvättlina enligt figuren. Hur stor är spännkraften i linan? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
 ${makeHangingRopes({ angL: 8, angR: 8, mass: '1,5 kg', posts: true, half: 200 })}`,
@@ -7113,7 +7414,7 @@ F_\\mathrm{S} = \\frac{F_\\mathrm{G}}{2 \\cdot \\sin 8{,}0^{\\circ}}
 $$
 
 $$
-F_\\mathrm{S} = \\frac{14{,}73}{2 \\cdot 0{,}1392} = 52{,}92\\ \\mathrm{N} \\approx 53\\ \\mathrm{N}
+F_\\mathrm{S} = \\frac{14{,}73}{2 \\cdot \\sin 8{,}0^{\\circ}} = 52{,}919\\ldots\\ \\mathrm{N} \\approx 53\\ \\mathrm{N}
 $$
 
 Rimlighet: linan är nästan vågrät, så bara en liten del av spännkraften pekar uppåt. Då måste spännkraften vara mycket större än tyngden, och 53 N är ungefär 3,6 gånger jackans tyngd.
@@ -7124,6 +7425,7 @@ Rimlighet: linan är nästan vågrät, så bara en liten del av spännkraften pe
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.8-u5',
             question: `En gatlykta med massan 3,0 kg hänger mitt på en vajer mellan två stolpar. Avståndet mellan stolparna är 4,0 m, och lyktan får vajern att hänga ned 0,50 m under linjen mellan fästpunkterna. Hur stor är spännkraften i vajern? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
 ${makeHangingRopes({ angL: 14.04, angR: 14.04, mass: '3,0 kg', posts: true, half: 220, showAngles: false, spanLabel: '4,0 m', sagLabel: '0,50 m' })}`,
@@ -7133,7 +7435,7 @@ ${makeHangingRopes({ angL: 14.04, angR: 14.04, mass: '3,0 kg', posts: true, half
 $$
 \\tan \\alpha = \\frac{0{,}50}{2{,}0} = 0{,}25
 \\quad\\Leftrightarrow\\quad
-\\alpha = 14{,}04^{\\circ}
+\\alpha = \\tan^{-1} 0{,}25 = 14{,}036\\ldots^{\\circ}
 $$
 
 **Spännkraften.** De två halvornas lodräta komposanter bär tillsammans lyktans tyngd:
@@ -7149,7 +7451,7 @@ F_\\mathrm{S} = \\frac{F_\\mathrm{G}}{2 \\cdot \\sin \\alpha}
 $$
 
 $$
-F_\\mathrm{S} = \\frac{29{,}46}{2 \\cdot \\sin 14{,}04^{\\circ}} = \\frac{29{,}46}{2 \\cdot 0{,}2425} = 60{,}73\\ \\mathrm{N} \\approx 61\\ \\mathrm{N}
+F_\\mathrm{S} = \\frac{29{,}46}{2 \\cdot \\sin 14{,}036\\ldots^{\\circ}} = 60{,}733\\ldots\\ \\mathrm{N} \\approx 61\\ \\mathrm{N}
 $$
 
 **Svar:** Spännkraften i vajern är cirka 61 N.
@@ -7160,6 +7462,7 @@ $$
         // ── Nivå 3 ───────────────────────────────────────────────────
         {
             level: 3,
+            penna: 'ov-fy1-3.8-u6',
             question: `En låda med massan 10 kg hänger stilla i två rep enligt figuren. Rep 1 bildar vinkeln 60° och rep 2 vinkeln 30° mot det vågräta.<br>a) Bestäm spännkraften i rep 1.<br>b) Bestäm spännkraften i rep 2.
 
 ${makeHangingRopes({ angL: 60, angR: 30, mass: '10 kg', ropeLabels: ['rep 1', 'rep 2'] })}
@@ -7183,14 +7486,16 @@ $$
 Ur (1) löser vi ut $F_1$:
 
 $$
-F_1 = F_2 \\cdot \\frac{\\cos 30^{\\circ}}{\\cos 60^{\\circ}} = F_2 \\cdot \\frac{0{,}8660}{0{,}5} = 1{,}732 \\cdot F_2
+F_1 = F_2 \\cdot \\frac{\\cos 30^{\\circ}}{\\cos 60^{\\circ}} = 1{,}732\\ldots \\cdot F_2
 $$
 
-$F_1 = 1{,}732 \\cdot F_2$ insatt i (2) ger
+$F_1 = 1{,}732\\ldots \\cdot F_2$ insatt i (2) ger
 
 $$
-1{,}732 \\cdot F_2 \\cdot 0{,}8660 + F_2 \\cdot 0{,}5 = 98{,}2
+1{,}732\\ldots \\cdot F_2 \\cdot \\sin 60^{\\circ} + F_2 \\cdot \\sin 30^{\\circ} = 98{,}2
 $$
+
+där $1{,}732\\ldots \\cdot \\sin 60^{\\circ}$ blir precis 1,5 och $\\sin 30^{\\circ} = 0{,}5$:
 
 $$
 1{,}5 \\cdot F_2 + 0{,}5 \\cdot F_2 = 98{,}2
@@ -7207,7 +7512,7 @@ $$
 och därmed
 
 $$
-F_1 = 1{,}732 \\cdot 49{,}1 = 85{,}04\\ \\mathrm{N}
+F_1 = 1{,}732\\ldots \\cdot 49{,}1 = 85{,}043\\ldots\\ \\mathrm{N}
 $$
 
 **a)** **Svar:** Spännkraften i rep 1 är cirka 85 N.
@@ -7229,6 +7534,7 @@ Kontroll: det brantare repet (rep 1) får den största spännkraften, och båda 
         // ── Nivå 1 ───────────────────────────────────────────────────
         {
             level: 1,
+            penna: 'ov-fy1-3.9-u1',
             question: `Positiv riktning är åt **höger**. En bil kör åt **vänster** och bromsar in. Vilket tecken har bilens acceleration?`,
             choices: [
                 `Negativ, eftersom bilen bromsar.`,
@@ -7241,10 +7547,11 @@ Kontroll: det brantare repet (rep 1) får den största spännkraften, och båda 
 
 "Bromsar" betyder bara att **farten** minskar. Det säger ingenting om accelerationens tecken förrän man vet åt vilket håll bilen kör.
 
-**Svar:** Positiv.`,
+**Svar:** Alternativ D.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.9-u2',
             question: `En boll kastas rakt upp. Positiv riktning är uppåt. Vilken acceleration har bollen i **vändläget**, högst upp, där hastigheten är noll?`,
             choices: [
                 `$-9{,}82\\ \\mathrm{m/s^2}$`,
@@ -7257,12 +7564,13 @@ Kontroll: det brantare repet (rep 1) får den största spännkraften, och båda 
 
 Det är tyngdkraften som ger accelerationen, och den verkar hela tiden, även i vändläget. Med positiv riktning uppåt är accelerationen därför $-9{,}82\\ \\mathrm{m/s^2}$ under hela kastet.
 
-**Svar:** $-9{,}82\\ \\mathrm{m/s^2}$
+**Svar:** Alternativ A.
 
 **Generell slutsats:** Hastigheten noll betyder inte accelerationen noll. Var accelerationen noll i vändläget skulle bollen bli hängande kvar i luften.`,
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.9-u3',
             question: `En sten faller nedåt. Vid ett tillfälle är farten 3,0 m/s, och 0,50 s senare är farten 7,9 m/s. Positiv riktning är **uppåt**. Bestäm stenens acceleration med tecken.`,
             answer: { value: -9.8, unit: 'm/s²', tol: 0.03 },
             solution: `Stenen rör sig nedåt, alltså i negativ riktning. Hastigheterna är därför negativa:
@@ -7289,6 +7597,7 @@ $$
         // ── Nivå 2 ───────────────────────────────────────────────────
         {
             level: 2,
+            penna: 'ov-fy1-3.9-u4',
             question: `En hiss är på väg **nedåt** med farten 4,0 m/s. Den bromsar jämnt och stannar på 2,5 s. Positiv riktning är uppåt. Bestäm hissens acceleration med tecken.`,
             answer: { value: 1.6, unit: 'm/s²', tol: 0.03 },
             solution: `Hissen rör sig nedåt, så starthastigheten är negativ. Sluthastigheten är noll:
@@ -7313,6 +7622,7 @@ Rimlighet: hastigheten går från $-4{,}0\\ \\mathrm{m/s}$ upp mot 0, alltså **
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.9-u5',
             question: `Positiv riktning är åt höger. I vilket av fallen har bilen **negativ** acceleration?`,
             choices: [
                 `Bilen kör åt höger och ökar farten.`,
@@ -7328,7 +7638,7 @@ Rimlighet: hastigheten går från $-4{,}0\\ \\mathrm{m/s}$ upp mot 0, alltså **
 - **Åt vänster, ökar farten:** till exempel från $-5$ till $-10$ m/s. Hastigheten **minskar**, så accelerationen är **negativ**.
 - **Står stilla:** hastigheten är hela tiden 0 och ändras inte, så accelerationen är noll.
 
-**Svar:** Bilen som kör åt vänster och ökar farten.
+**Svar:** Alternativ C.
 
 **Generell slutsats:** Accelerationen är negativ när den pekar åt det negativa hållet. Det gäller både en bil som bromsar på väg åt höger och en bil som gasar på väg åt vänster.`,
         },
@@ -7336,6 +7646,7 @@ Rimlighet: hastigheten går från $-4{,}0\\ \\mathrm{m/s}$ upp mot 0, alltså **
         // ── Nivå 3 ───────────────────────────────────────────────────
         {
             level: 3,
+            penna: 'ov-fy1-3.9-u6',
             question: `En tennisboll släpps mot ett golv. Den träffar golvet med farten 5,0 m/s och studsar upp igen med farten 4,0 m/s. Bollen har kontakt med golvet i 0,010 s. Bestäm bollens medelacceleration under studsen, med positiv riktning uppåt.`,
             answer: { value: 900, unit: 'm/s²', tol: 0.03 },
             solution: `Fällan är att räkna med farterna: $4{,}0 - 5{,}0 = -1{,}0\\ \\mathrm{m/s}$ ger en liten negativ acceleration, och det är fel. Hastigheten måste skrivas med tecken. Före studsen rör sig bollen nedåt, efter studsen uppåt:
@@ -7369,6 +7680,7 @@ Rimlighet: under studsen ska bollen först bromsas från 5,0 m/s till stillastå
         // ── Nivå 1 ───────────────────────────────────────────────────
         {
             level: 1,
+            penna: 'ov-fy1-3.10-u1',
             question: `Ett snöre löper över en friktionsfri trissa. Spännkraften i snörets ena ände är 12 N. Hur stor är spännkraften i snörets andra ände, på andra sidan trissan?`,
             choices: [
                 `Mindre än 12 N, eftersom trissan tar upp en del av kraften.`,
@@ -7385,6 +7697,7 @@ Rimlighet: under studsen ska bollen först bromsas från 5,0 m/s till stillastå
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.10-u2',
             question: `Två vikter med massan 2,0 kg vardera hänger i ett snöre över en trissa enligt figuren och är i vila. Hur stor är spännkraften i snöret? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
 ${makePulley({ kind: 'atwood', left: '2,0 kg', right: '2,0 kg' })}`,
@@ -7401,6 +7714,7 @@ $$
         },
         {
             level: 1,
+            penna: 'ov-fy1-3.10-u3',
             question: `Två vikter med massorna 2,0 kg och 3,0 kg hänger i ett snöre över en friktionsfri trissa enligt figuren. Vikterna släpps. Vilken acceleration får de? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
 ${makePulley({ kind: 'atwood', left: '3,0 kg', right: '2,0 kg' })}`,
@@ -7429,6 +7743,7 @@ $$
         // ── Nivå 2 ───────────────────────────────────────────────────
         {
             level: 2,
+            penna: 'ov-fy1-3.10-u4',
             question: `Två vikter med massorna 2,0 kg och 3,0 kg hänger i ett snöre över en friktionsfri trissa enligt figuren. När de släpps får de accelerationen $1{,}964\\ \\mathrm{m/s^2}$. Hur stor är spännkraften i snöret? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
 ${makePulley({ kind: 'atwood', left: '3,0 kg', right: '2,0 kg' })}`,
@@ -7460,6 +7775,7 @@ Kontroll med 3-kilosvikten, som accelererar nedåt: $F_\\mathrm{S} = m_3 \\cdot 
         },
         {
             level: 2,
+            penna: 'ov-fy1-3.10-u5',
             question: `En låda med massan 3,0 kg ligger på ett bord. Ett snöre går från lådan över en friktionsfri trissa vid bordskanten till en hängande vikt med massan 2,0 kg, enligt figuren. Friktionstalet mellan lådan och bordet är 0,20.<br>a) Bestäm systemets acceleration.<br>b) Bestäm spännkraften i snöret.
 
 ${makePulley({ kind: 'bord', table: '3,0 kg', hanging: '2,0 kg' })}
@@ -7492,11 +7808,20 @@ $$
 $$
 F_R = F_\\mathrm{S} - F_\\mathrm{f}
 \\quad\\Leftrightarrow\\quad
-F_\\mathrm{S} = m_1 \\cdot a + F_\\mathrm{f}
+F_\\mathrm{S} = F_R + F_\\mathrm{f}
+$$
+
+Nu räknas bara lådans massa. Accelerationen och friktionen tas oavrundade från a):
+
+$$
+\\left[ \\begin{array}{l}
+F_R = m_1 \\cdot a = 3{,}0 \\cdot 2{,}7496 = 8{,}2488\\ \\mathrm{N} \\\\
+F_\\mathrm{f} = 5{,}892\\ \\mathrm{N}
+\\end{array} \\right]
 $$
 
 $$
-F_\\mathrm{S} = 3{,}0 \\cdot 2{,}7496 + 5{,}892 = 14{,}1408\\ \\mathrm{N} \\approx 14\\ \\mathrm{N}
+F_\\mathrm{S} = 8{,}2488 + 5{,}892 = 14{,}1408\\ \\mathrm{N} \\approx 14\\ \\mathrm{N}
 $$
 
 Kontroll med den hängande vikten: $F_\\mathrm{S} = m_2 \\cdot g - m_2 \\cdot a = 19{,}64 - 2{,}0 \\cdot 2{,}7496 = 14{,}1408\\ \\mathrm{N}$.
@@ -7507,6 +7832,7 @@ Kontroll med den hängande vikten: $F_\\mathrm{S} = m_2 \\cdot g - m_2 \\cdot a 
         // ── Nivå 3 ───────────────────────────────────────────────────
         {
             level: 3,
+            penna: 'ov-fy1-3.10-u6',
             question: `En vagn med massan 3,0 kg står på ett bord och kan rulla utan friktion. Ett snöre går från vagnen över en friktionsfri trissa vid bordskanten till en hängande vikt, enligt figuren. Hur stor ska den hängande viktens massa *m* vara för att vagnen ska få accelerationen 2,0 m/s²? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
 ${makePulley({ kind: 'bord', table: '3,0 kg', hanging: '<tspan font-style="italic">m</tspan>' })}`,
@@ -7544,10 +7870,10 @@ $$
 $$
 
 $$
-m = 0{,}7673\\ \\mathrm{kg} \\approx 0{,}77\\ \\mathrm{kg}
+m = 0{,}7672\\ldots\\ \\mathrm{kg} \\approx 0{,}77\\ \\mathrm{kg}
 $$
 
-Kontroll: $F_R = 0{,}7673 \\cdot 9{,}82 = 7{,}535\\ \\mathrm{N}$ och $m_\\text{tot} = 3{,}7673\\ \\mathrm{kg}$ ger $a = \\dfrac{7{,}535}{3{,}7673} = 2{,}0\\ \\mathrm{m/s^2}$.
+Kontroll: $F_R = 0{,}7672\\ldots \\cdot 9{,}82 = 7{,}534\\ldots\\ \\mathrm{N}$ och $m_\\text{tot} = 3{,}7672\\ldots\\ \\mathrm{kg}$ ger $a = \\dfrac{7{,}534\\ldots}{3{,}7672\\ldots} = 2{,}0\\ \\mathrm{m/s^2}$.
 
 **Svar:** Den hängande vikten ska ha massan cirka 0,77 kg.
 
@@ -13640,6 +13966,7 @@ $$ H = D \\cdot Q = 2{,}4 \\cdot 10^{-7} \\cdot 20 = 4{,}8 \\cdot 10^{-6}\\ \\ma
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
+            penna: 'ov-fy2-1.1-u1',
             question: `En kraft på $25\\ \\mathrm{N}$ verkar vinkelrätt mot en skiftnyckel $0{,}18\\ \\mathrm{m}$ från muttern. Beräkna kraftmomentet kring muttern.
 
 ${makeTorqueArm({ armAngle: 0, armLabel: 'l = 0,18 m', force: { angle: -90, label: 'F = 25 N', len: 72 }, pivotLabel: 'mutter' })}`,
@@ -13664,6 +13991,7 @@ $$ M = 25 \\cdot 0{,}18 = 4{,}5\\ \\mathrm{Nm} $$
         },
         {
             level: 1,
+            penna: 'ov-fy2-1.1-u2',
             question: `Hur stor kraft måste verka vinkelrätt $0{,}30\\ \\mathrm{m}$ från ett gångjärn för att ge kraftmomentet $18\\ \\mathrm{Nm}$?`,
             answer: { value: 60, unit: 'N' },
             solution: `Vi löser ut kraften *F* ur formeln för kraftmoment:
@@ -13686,24 +14014,35 @@ $$ F = \\frac{18}{0{,}30} = 60\\ \\mathrm{N} $$
         },
         {
             level: 1,
+            penna: 'ov-fy2-1.1-u3',
             question: `Ett barn som väger $25\\ \\mathrm{kg}$ sitter $2{,}4\\ \\mathrm{m}$ från vridpunkten på en gungbräda. Hur långt från vridpunkten ska en vuxen på $75\\ \\mathrm{kg}$ sitta för att brädan ska vara i momentjämvikt?
 
 ${makeLever({ pivot: { posFrac: 0.5, type: 'wedge' }, loads: [{ posFrac: 0.12, kind: 'weight', label: '25 kg' }, { posFrac: 0.64, kind: 'weight', label: '75 kg' }], dims: [{ fromFrac: 0.12, toFrac: 0.5, label: '2,4 m' }, { fromFrac: 0.5, toFrac: 0.64, label: '?', row: 1 }] })}`,
             answer: { value: 0.80, unit: 'm' },
-            solution: `Vid momentjämvikt är momentet medurs lika med momentet moturs. Med tyngdkraften $F = m \\cdot g$ blir villkoret (tyngdfaktorn *g* finns i båda led och stryks):
+            solution: `Vid momentjämvikt är momentet moturs lika stort som momentet medurs:
 
-$$ m_\\text{barn} \\cdot l_\\text{barn} = m_\\text{vuxen} \\cdot l_\\text{vuxen} \\quad\\Leftrightarrow\\quad l_\\text{vuxen} = \\frac{m_\\text{barn} \\cdot l_\\text{barn}}{m_\\text{vuxen}} $$
+$$ \\overset{\\displaystyle\\curvearrowleft}{M} = \\overset{\\displaystyle\\curvearrowright}{M} $$
 
-Mätvärden:
+Barnets tyngd $F_\\mathrm{B}$ vrider brädan moturs och den vuxnes tyngd $F_\\mathrm{V}$ medurs. Varje moment är kraften gånger hävarmen:
+
+$$ F_\\mathrm{B} \\cdot l_\\mathrm{B} = F_\\mathrm{V} \\cdot l_\\mathrm{V} $$
+
+Tyngdkraften är $F = m \\cdot g$, och tyngdfaktorn *g* finns i båda leden och divideras bort:
+
+$$ m_\\mathrm{B} \\cdot g \\cdot l_\\mathrm{B} = m_\\mathrm{V} \\cdot g \\cdot l_\\mathrm{V} $$
+
+$$ m_\\mathrm{B} \\cdot l_\\mathrm{B} = m_\\mathrm{V} \\cdot l_\\mathrm{V} \\quad\\Leftrightarrow\\quad l_\\mathrm{V} = \\frac{m_\\mathrm{B} \\cdot l_\\mathrm{B}}{m_\\mathrm{V}} $$
+
+Mätvärden (B = barnet, V = den vuxne):
 $$
 \\left[ \\begin{array}{l}
-m_\\text{barn} = 25\\ \\mathrm{kg} \\\\
-l_\\text{barn} = 2{,}4\\ \\mathrm{m} \\\\
-m_\\text{vuxen} = 75\\ \\mathrm{kg}
+m_\\mathrm{B} = 25\\ \\mathrm{kg} \\\\
+l_\\mathrm{B} = 2{,}4\\ \\mathrm{m} \\\\
+m_\\mathrm{V} = 75\\ \\mathrm{kg}
 \\end{array} \\right]
 $$
 
-$$ l_\\text{vuxen} = \\frac{25 \\cdot 2{,}4}{75} = 0{,}80\\ \\mathrm{m} $$
+$$ l_\\mathrm{V} = \\frac{25 \\cdot 2{,}4}{75} = 0{,}80\\ \\mathrm{m} $$
 
 **Svar:** Den vuxne ska sitta $0{,}80\\ \\mathrm{m}$ från vridpunkten.
 
@@ -13713,46 +14052,62 @@ $$ l_\\text{vuxen} = \\frac{25 \\cdot 2{,}4}{75} = 0{,}80\\ \\mathrm{m} $$
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
+            penna: 'ov-fy2-1.1-u4',
             question: `En $0{,}80\\ \\mathrm{m}$ lång arm lutar $35^\\circ$ över horisontalplanet och är fäst i sin nedre ände. Vid den övre änden verkar en kraft på $120\\ \\mathrm{N}$ rakt nedåt. Beräkna kraftmomentet kring den nedre änden.
 
 ${makeTorqueArm({ armAngle: 35, armLabel: 'L = 0,80 m', force: { angle: -90, label: 'F = 120 N', len: 66 }, leverHint: true })}`,
-            answer: { value: 79, unit: 'Nm' },
-            solution: `Hävarmen är **inte** armens längd, utan det vinkelräta avståndet från vridpunkten till kraftens (lodräta) riktningslinje. Det är den vågräta sträckan ut till övre änden:
+            answer: { value: 78.64, unit: 'Nm' },
+            solution: `Kraftmomentet är kraft gånger hävarm:
 
-$$ l = L \\cdot \\cos 35^\\circ $$
+$$ M = F \\cdot l $$
 
-Kraftmomentet blir då
-
-$$ M = F \\cdot l = F \\cdot L \\cdot \\cos 35^\\circ $$
+Hävarmen är **inte** armens längd, utan det vinkelräta avståndet från vridpunkten till kraftens (lodräta) riktningslinje. Det är den vågräta sträckan ut till övre änden. Den är närliggande katet till $35^\\circ$ i en rätvinklig triangel där armen *L* är hypotenusan, så hävarmen räknas ut med cosinus.
 
 Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 F = 120\\ \\mathrm{N} \\\\
-L = 0{,}80\\ \\mathrm{m} \\\\
-\\alpha = 35^\\circ
+\\cos 35^\\circ = \\dfrac{l}{L} \\quad\\Leftrightarrow\\quad l = L \\cdot \\cos 35^\\circ = 0{,}80 \\cdot \\cos 35^\\circ = 0{,}6553\\ldots\\ \\mathrm{m}
 \\end{array} \\right]
 $$
 
-$$ M = 120 \\cdot 0{,}80 \\cdot \\cos 35^\\circ = 79\\ \\mathrm{Nm} $$
+$$ M = 120 \\cdot 0{,}6553\\ldots = 78{,}638\\ldots\\ \\mathrm{Nm} \\approx 79\\ \\mathrm{Nm} $$
 
-**Generell slutsats:** När kraften inte är vinkelrät mot armen måste man projicera fram den vinkelräta hävarmen med trigonometri. En lodrät kraft "ser" bara det vågräta avståndet till vridpunkten.
+**Svar:** Kraftmomentet är $79\\ \\mathrm{Nm}$.
 
-**Svar:** Kraftmomentet är ungefär $79\\ \\mathrm{Nm}$.`,
+**Generell slutsats:** När kraften inte är vinkelrät mot armen måste man projicera fram den vinkelräta hävarmen med trigonometri. En lodrät kraft "ser" bara det vågräta avståndet till vridpunkten.`,
         },
         {
             level: 2,
+            penna: 'ov-fy2-1.1-u5',
             question: `En $4{,}0\\ \\mathrm{m}$ lång jämntjock planka väger $12\\ \\mathrm{kg}$ och vilar på en stödpunkt $1{,}5\\ \\mathrm{m}$ från vänster ände. Var (avstånd från stödpunkten) ska en vikt på $8{,}0\\ \\mathrm{kg}$ placeras för att plankan ska vara i jämvikt?
 
-${makeLever({ pivot: { posFrac: 0.375, type: 'wedge' }, cog: { posFrac: 0.5, label: 'F_G' }, loads: [{ posFrac: 0.16, kind: 'weight', label: '8,0 kg' }], dims: [{ fromFrac: 0, toFrac: 0.375, label: '1,5 m' }, { fromFrac: 0.375, toFrac: 1, label: '2,5 m' }, { fromFrac: 0.16, toFrac: 0.375, label: 'd', row: 1 }] })}`,
+${makeLever({ pivot: { posFrac: 0.375, type: 'wedge' }, cog: { posFrac: 0.5, label: 'F_G' }, loads: [{ posFrac: 0.16, kind: 'weight', label: '8,0 kg' }], dims: [{ fromFrac: 0, toFrac: 0.375, label: '1,5 m', row: 1 }, { fromFrac: 0.375, toFrac: 1, label: '2,5 m' }, { fromFrac: 0.16, toFrac: 0.375, label: 'l_V' }] })}`,
             answer: { value: 0.75, unit: 'm' },
-            solution: `Plankans egen tyngd verkar i dess **tyngdpunkt**, mitt på plankan — alltså $2{,}0\\ \\mathrm{m}$ från vänster ände, vilket är $2{,}0 - 1{,}5 = 0{,}5\\ \\mathrm{m}$ till höger om stödpunkten. Det ger ett moment som vill tippa plankan åt höger.
+            solution: `Plankans egen tyngd $F_\\mathrm{G}$ verkar i dess **tyngdpunkt**, mitt på plankan. Det är $2{,}0\\ \\mathrm{m}$ från vänster ände, alltså $2{,}0 - 1{,}5 = 0{,}5\\ \\mathrm{m}$ till höger om stödpunkten, och den vrider plankan medurs.
 
-För jämvikt måste vikten placeras till **vänster** om stödpunkten och ge ett lika stort motverkande moment. Momentbalans (tyngdfaktorn *g* stryks):
+För jämvikt måste vikten placeras till **vänster** om stödpunkten, så att dess tyngd $F_\\mathrm{V}$ vrider moturs. Stödkraften går genom vridningspunkten och ger inget moment. Momentjämvikt kring stödpunkten:
 
-$$ m_\\text{vikt} \\cdot d = m_\\text{planka} \\cdot 0{,}5 $$
+$$ \\overset{\\displaystyle\\curvearrowleft}{M} = \\overset{\\displaystyle\\curvearrowright}{M} $$
 
-$$ d = \\frac{m_\\text{planka} \\cdot 0{,}5}{m_\\text{vikt}} = \\frac{12 \\cdot 0{,}5}{8{,}0} = 0{,}75\\ \\mathrm{m} $$
+$$ F_\\mathrm{V} \\cdot l_\\mathrm{V} = F_\\mathrm{G} \\cdot l_\\mathrm{G} $$
+
+Tyngdkrafterna är $m \\cdot g$, och *g* finns i båda leden och divideras bort:
+
+$$ m_\\mathrm{V} \\cdot g \\cdot l_\\mathrm{V} = m_\\mathrm{P} \\cdot g \\cdot l_\\mathrm{G} $$
+
+$$ m_\\mathrm{V} \\cdot l_\\mathrm{V} = m_\\mathrm{P} \\cdot l_\\mathrm{G} \\quad\\Leftrightarrow\\quad l_\\mathrm{V} = \\frac{m_\\mathrm{P} \\cdot l_\\mathrm{G}}{m_\\mathrm{V}} $$
+
+Mätvärden (V = vikten, P = plankan):
+$$
+\\left[ \\begin{array}{l}
+m_\\mathrm{P} = 12\\ \\mathrm{kg} \\\\
+l_\\mathrm{G} = 2{,}0 - 1{,}5 = 0{,}5\\ \\mathrm{m} \\\\
+m_\\mathrm{V} = 8{,}0\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ l_\\mathrm{V} = \\frac{12 \\cdot 0{,}5}{8{,}0} = 0{,}75\\ \\mathrm{m} $$
 
 **Svar:** Vikten ska placeras $0{,}75\\ \\mathrm{m}$ från stödpunkten (på motsatt sida mot plankans tyngdpunkt).
 
@@ -13762,27 +14117,43 @@ $$ d = \\frac{m_\\text{planka} \\cdot 0{,}5}{m_\\text{vikt}} = \\frac{12 \\cdot 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
+            penna: 'ov-fy2-1.1-u6',
             question: `En $5{,}0\\ \\mathrm{m}$ lång stege som väger $15\\ \\mathrm{kg}$ lutar mot en vägg med vinkeln $65^\\circ$ mot marken. Friktionen mellan stege och vägg är försumbar, men friktionen mot marken är tillräcklig för att stegen ska stå still. Hur stor är friktionskraften från marken? ($g = 9{,}82\\ \\mathrm{N/kg}$)
 
 ${makeLadder({ angle: 65, lenLabel: 'L = 5,0 m' })}`,
-            answer: { value: 34, unit: 'N' },
-            solution: `Det räcker inte med en formel — vi måste kombinera **momentjämvikt** och **kraftjämvikt** och se vilka krafter som verkar.
+            answer: { value: 34.34, unit: 'N' },
+            solution: `Det räcker inte med en formel. Vi måste kombinera **momentjämvikt** och **kraftjämvikt** och se vilka krafter som verkar.
 
-Fyra krafter verkar på stegen: tyngdkraften $F_G = mg$ nedåt i mitten, markens normalkraft $N_\\text{mark}$ uppåt vid foten, markens friktion $F_f$ vågrätt vid foten, och väggens normalkraft $N_\\text{vägg}$ vågrätt vid toppen (väggen är friktionsfri, så den kan bara trycka vinkelrätt utåt).
+Fyra krafter verkar på stegen: tyngdkraften $F_\\mathrm{G} = m \\cdot g$ nedåt i mitten, markens normalkraft $F_\\mathrm{N}$ uppåt vid foten, markens friktionskraft $F_f$ vågrätt vid foten och väggens normalkraft $F_\\mathrm{V}$ vågrätt vid toppen (väggen är friktionsfri, så den kan bara trycka vinkelrätt ut från väggen).
 
 ${makeLadder({ angle: 65, lenLabel: 'L = 5,0 m', forces: true })}
 
-**Momentjämvikt kring stegens fot** (då försvinner $N_\\text{mark}$ och *f*, som verkar i vridpunkten). Väggkraften har hävarmen $L\\sin 65^\\circ$ (höjden till toppen); tyngdkraften har hävarmen $\\dfrac{L}{2}\\cos 65^\\circ$ (vågrätt avstånd till mitten):
+**Momentjämvikt kring stegens fot.** Där angriper $F_\\mathrm{N}$ och $F_f$, så deras hävarmar är 0 och de ger inget moment. Väggens kraft vrider stegen moturs och tyngdkraften medurs:
 
-$$ N_\\text{vägg} \\cdot L\\sin 65^\\circ = mg \\cdot \\tfrac{L}{2}\\cos 65^\\circ \\quad\\Rightarrow\\quad N_\\text{vägg} = \\frac{mg}{2\\tan 65^\\circ} $$
+$$ \\overset{\\displaystyle\\curvearrowleft}{M} = \\overset{\\displaystyle\\curvearrowright}{M} $$
 
-**Kraftjämvikt i vågrätt led:** friktionen balanserar väggkraften, $F_f = N_\\text{vägg}$. Alltså
+$$ F_\\mathrm{V} \\cdot l_\\mathrm{V} = F_\\mathrm{G} \\cdot l_\\mathrm{G} \\quad\\Leftrightarrow\\quad F_\\mathrm{V} = \\frac{F_\\mathrm{G} \\cdot l_\\mathrm{G}}{l_\\mathrm{V}} $$
 
-$$ F_f = \\frac{mg}{2\\tan 65^\\circ} = \\frac{15 \\cdot 9{,}82}{2 \\cdot \\tan 65^\\circ} = 34\\ \\mathrm{N} $$
+Väggens kraft är vågrät, så dess hävarm $l_\\mathrm{V}$ är stegens höjd, motstående katet till $65^\\circ$. Tyngdkraften angriper mitt på stegen, $2{,}5\\ \\mathrm{m}$ upp längs den, och är lodrät, så dess hävarm $l_\\mathrm{G}$ är det vågräta avståndet, närliggande katet till $65^\\circ$.
 
-**Svar:** Friktionskraften från marken är ungefär $34\\ \\mathrm{N}$.
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{G} = m \\cdot g = 15 \\cdot 9{,}82 = 147{,}3\\ \\mathrm{N} \\\\
+l_\\mathrm{G} = 2{,}5 \\cdot \\cos 65^\\circ = 1{,}0565\\ldots\\ \\mathrm{m} \\\\
+l_\\mathrm{V} = 5{,}0 \\cdot \\sin 65^\\circ = 4{,}5315\\ldots\\ \\mathrm{m}
+\\end{array} \\right]
+$$
 
-**Generell slutsats:** Den avgörande insikten är att *två* jämviktsvillkor måste gälla samtidigt: summan av momenten = 0 *och* summan av krafterna = 0. Genom att lägga vridpunkten vid foten försvinner två okända krafter, och momentekvationen ger väggkraften direkt — som i sin tur måste balanseras av friktionen. Stegens längd *L* stryks ur ekvationen.`,
+$$ F_\\mathrm{V} = \\frac{147{,}3 \\cdot 1{,}0565\\ldots}{4{,}5315\\ldots} = 34{,}343\\ldots\\ \\mathrm{N} $$
+
+**Kraftjämvikt i sidled:** stegen glider inte, och i sidled verkar bara friktionen och väggens kraft. De är alltså lika stora:
+
+$$ F_f = F_\\mathrm{V} = 34{,}343\\ldots\\ \\mathrm{N} \\approx 34\\ \\mathrm{N} $$
+
+**Svar:** Friktionskraften från marken är $34\\ \\mathrm{N}$.
+
+**Generell slutsats:** Den avgörande insikten är att *två* jämviktsvillkor måste gälla samtidigt: momenten moturs och medurs ska vara lika stora, *och* krafterna åt varje håll ska ta ut varandra. Genom att lägga vridningspunkten vid foten försvinner två okända krafter, och momentekvationen ger väggkraften direkt. Den måste i sin tur balanseras av friktionen.`,
         },
     ],
 
@@ -13790,6 +14161,7 @@ $$ F_f = \\frac{mg}{2\\tan 65^\\circ} = \\frac{15 \\cdot 9{,}82}{2 \\cdot \\tan 
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
+            penna: 'ov-fy2-1.2-u1',
             question: `En jämntjock bräda vilar på två bockar. Brädans tyngdpunkt ligger närmare den högra bocken än den vänstra. Vilket påstående stämmer?`,
             choices: [
                 `Den högra bocken trycker uppåt med större kraft än den vänstra.`,
@@ -13806,31 +14178,41 @@ $$ F_f = \\frac{mg}{2\\tan 65^\\circ} = \\frac{15 \\cdot 9{,}82}{2 \\cdot \\tan 
         },
         {
             level: 1,
+            penna: 'ov-fy2-1.2-u2',
             question: `En bräda vilar på två stöd, P och Q. Både stödkraften $F_\\mathrm{P}$ och stödkraften $F_\\mathrm{Q}$ är okända. Varför är det smart att välja vridningspunkten i P när man ställer upp momentlagen?`,
             choices: [
-                `$F_\\mathrm{P}$ får då hävarmen 0 och försvinner ur ekvationen — kvar finns bara en okänd kraft.`,
                 `$F_\\mathrm{P}$ blir då lika stor som $F_\\mathrm{Q}$.`,
+                `$F_\\mathrm{P}$ får då hävarmen 0 och försvinner ur ekvationen — kvar finns bara en okänd kraft.`,
                 `Tyngdkraften försvinner då ur ekvationen.`,
                 `Momentlagen gäller bara om vridningspunkten ligger vid ett stöd.`,
             ],
-            correct: 0,
-            solution: `När det saknas en naturlig vridningspunkt får den **väljas valfritt**. En kraft vars riktningslinje går genom vridningspunkten har hävarmen 0 och ger inget kraftmoment. Väljer vi vridningspunkten i P försvinner alltså den okända kraften $F_\\mathrm{P}$ ur momentekvationen, och $F_\\mathrm{Q}$ kan lösas ut direkt.
+            correct: 1,
+            solution: `När det saknas en naturlig vridningspunkt får den **väljas valfritt**. En kraft vars riktningslinje går genom vridningspunkten har hävarmen 0 och ger inget kraftmoment. Väljer vi vridningspunkten i P försvinner alltså den okända kraften $F_\\mathrm{P}$ ur momentekvationen, och $F_\\mathrm{Q}$ kan lösas ut direkt. Tyngdkraften finns kvar i ekvationen, $F_\\mathrm{P}$ behöver inte vara lika stor som $F_\\mathrm{Q}$, och momentlagen gäller kring vilken punkt som helst.
 
-**Svar:** Alternativ A.
+**Svar:** Alternativ B.
 
 **Generell slutsats:** Två okända krafter → lägg vridningspunkten i den enas angreppspunkt och beräkna den andra. Den första kan sedan fås ur kraftjämvikt (eller ur momentlagen med den andra angreppspunkten som vridningspunkt).`,
         },
         {
             level: 1,
+            penna: 'ov-fy2-1.2-u3',
             question: `En jämntjock bräda med massan $24\\ \\mathrm{kg}$ vilar på två bockar som står lika långt från brädans mitt, en på var sida. Hur stor kraft trycker varje bock uppåt med? ($g = 9{,}82\\ \\mathrm{N/kg}$)`,
-            answer: { value: 118, unit: 'N', tol: 1 },
-            solution: `Tyngdpunkten sitter mitt på brädan, lika långt från båda stöden — då bär stöden **hälften var** av tyngden.
+            answer: { value: 117.84, unit: 'N' },
+            solution: `Tyngdpunkten sitter mitt på brädan, lika långt från båda stöden — då bär stöden **hälften var** av tyngden. Brädan är i vila, så krafterna uppåt är tillsammans lika stora som tyngdkraften nedåt (kraftjämvikt):
 
-$$ F_\\mathrm{G} = m \\cdot g = 24 \\cdot 9{,}82 = 235{,}68\\ \\mathrm{N} $$
+$$ F + F = F_\\mathrm{G} \\quad\\Leftrightarrow\\quad 2 \\cdot F = F_\\mathrm{G} \\quad\\Leftrightarrow\\quad F = \\frac{F_\\mathrm{G}}{2} $$
 
-$$ F = \\frac{F_\\mathrm{G}}{2} = \\frac{235{,}68}{2} = 117{,}84\\ \\mathrm{N} \\approx 118\\ \\mathrm{N} $$
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{G} = m \\cdot g = 24\\ \\mathrm{kg} \\cdot 9{,}82\\ \\mathrm{N/kg} = 235{,}68\\ \\mathrm{N}
+\\end{array} \\right]
+$$
 
-**Svar:** Varje bock trycker uppåt med ungefär $118\\ \\mathrm{N}$.
+$$ F = \\frac{235{,}68}{2} = 117{,}84\\ \\mathrm{N} \\approx 120\\ \\mathrm{N} $$
+
+Massan $24\\ \\mathrm{kg}$ har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Varje bock trycker uppåt med ungefär $120\\ \\mathrm{N}$.
 
 **Generell slutsats:** Symmetri ger lika fördelning. Flyttas tyngdpunkten (eller en last) mot det ena stödet tar det stödet en större del av tyngden — ju närmare tyngdpunkten, desto större kraft.`,
         },
@@ -13838,17 +14220,18 @@ $$ F = \\frac{F_\\mathrm{G}}{2} = \\frac{235{,}68}{2} = 117{,}84\\ \\mathrm{N} \
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
+            penna: 'ov-fy2-1.2-u4',
             question: `En $4{,}0\\ \\mathrm{m}$ lång jämntjock planka med massan $30\\ \\mathrm{kg}$ vilar på två stöd: A vid plankans vänstra ände och B $1{,}0\\ \\mathrm{m}$ från högra änden. Hur stor kraft trycker stödet B uppåt med? ($g = 9{,}82\\ \\mathrm{N/kg}$)
 
 ${makeBeamSupports({ supports: [{ posFrac: 0, label: 'A' }, { posFrac: 0.75, label: 'B' }], cog: { posFrac: 0.5, label: 'F_G' }, dims: [{ fromFrac: 0, toFrac: 0.5, label: '2,0 m' }, { fromFrac: 0.75, toFrac: 1, label: '1,0 m' }] })}`,
-            answer: { value: 196, unit: 'N', tol: 2 },
+            answer: { value: 196.4, unit: 'N' },
             solution: `Två okända stödkrafter — vi väljer **vridningspunkten i A** så att $F_\\mathrm{A}$ får hävarmen 0 och försvinner ur momentlagen. Kvar står tyngdkraftens moment (medurs) mot $F_\\mathrm{B}$:s moment (moturs):
 
 $$ F_\\mathrm{B} \\cdot l_\\mathrm{B} = F_\\mathrm{G} \\cdot l_\\mathrm{G} \\quad\\Leftrightarrow\\quad F_\\mathrm{B} = \\frac{F_\\mathrm{G} \\cdot l_\\mathrm{G}}{l_\\mathrm{B}} $$
 
 $$
 \\left[ \\begin{array}{l}
-F_\\mathrm{G} = m \\cdot g = 30 \\cdot 9{,}82 = 294{,}6\\ \\mathrm{N} \\\\
+F_\\mathrm{G} = m \\cdot g = 30\\ \\mathrm{kg} \\cdot 9{,}82\\ \\mathrm{N/kg} = 294{,}6\\ \\mathrm{N} \\\\
 l_\\mathrm{G} = 2{,}0\\ \\mathrm{m}\\ \\text{(A till tyngdpunkten mitt på plankan)} \\\\
 l_\\mathrm{B} = 4{,}0 - 1{,}0 = 3{,}0\\ \\mathrm{m}
 \\end{array} \\right]
@@ -13856,30 +14239,38 @@ $$
 
 $$ F_\\mathrm{B} = \\frac{294{,}6 \\cdot 2{,}0}{3{,}0} = 196{,}4\\ \\mathrm{N} \\approx 0{,}20\\ \\mathrm{kN} $$
 
-**Svar:** Ungefär $196\\ \\mathrm{N}$ (0,20 kN).
+Längderna och massan har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Ungefär $0{,}20\\ \\mathrm{kN}$.
 
 **Generell slutsats:** Kontrollera gärna med kraftjämvikt: $F_\\mathrm{A} = 294{,}6 - 196{,}4 \\approx 98\\ \\mathrm{N}$. B sitter närmare tyngdpunkten än A och bär mycket riktigt den större delen av tyngden.`,
         },
         {
             level: 2,
+            penna: 'ov-fy2-1.2-u5',
             question: `En $4{,}0\\ \\mathrm{m}$ lång jämntjock bräda med massan $15\\ \\mathrm{kg}$ vilar på två bockar, en vid varje ände. En person med massan $60\\ \\mathrm{kg}$ står $1{,}0\\ \\mathrm{m}$ från den vänstra änden. Hur stor kraft trycker den vänstra bocken uppåt med? ($g = 9{,}82\\ \\mathrm{N/kg}$)
 
 ${makeBeamSupports({ supports: [{ posFrac: 0, label: 'V' }, { posFrac: 1, label: 'H' }], cog: { posFrac: 0.5, label: 'F_G' }, person: { posFrac: 0.25, label: '60 kg' }, dims: [{ fromFrac: 0, toFrac: 0.25, label: '1,0 m', row: 0 }, { fromFrac: 0, toFrac: 0.5, label: '2,0 m', row: 1 }, { fromFrac: 0, toFrac: 1, label: '4,0 m', row: 2 }] })}`,
-            answer: { value: 516, unit: 'N', tol: 5 },
-            solution: `Två okända stödkrafter. Vi väljer **vridningspunkten i det högra stödet H** så att $F_\\mathrm{H}$ får hävarmen 0 och försvinner. Kvar står momentjämvikten kring H: den vänstra stödkraftens moment åt ena hållet mot personens och brädans tyngdkrafters moment åt det andra. Hävarmarna mäts från H: personen står $4{,}0 - 1{,}0 = 3{,}0\\ \\mathrm{m}$ från H och brädans tyngdpunkt $2{,}0\\ \\mathrm{m}$ från H.
+            answer: { value: 515.55, unit: 'N' },
+            solution: `Två okända stödkrafter. Vi väljer **vridningspunkten i det högra stödet H** så att $F_\\mathrm{H}$ får hävarmen 0 och försvinner. Kvar står momentjämvikten kring H: personens och brädans tyngdkrafter vrider moturs, och den vänstra stödkraften vrider medurs. Hävarmarna mäts från H: personen står $4{,}0 - 1{,}0 = 3{,}0\\ \\mathrm{m}$ från H, brädans tyngdpunkt (mitt på brädan) $4{,}0 - 2{,}0 = 2{,}0\\ \\mathrm{m}$ från H och den vänstra bocken $4{,}0\\ \\mathrm{m}$ från H.
 
-$$ F_\\mathrm{V} \\cdot 4{,}0 = F_\\mathrm{person} \\cdot 3{,}0 + F_\\mathrm{G} \\cdot 2{,}0 $$
+$$ F_\\mathrm{person} \\cdot l_\\mathrm{person} + F_\\mathrm{G} \\cdot l_\\mathrm{G} = F_\\mathrm{V} \\cdot l_\\mathrm{V} \\quad\\Leftrightarrow\\quad F_\\mathrm{V} = \\frac{F_\\mathrm{person} \\cdot l_\\mathrm{person} + F_\\mathrm{G} \\cdot l_\\mathrm{G}}{l_\\mathrm{V}} $$
 
 $$
 \\left[ \\begin{array}{l}
-F_\\mathrm{person} = 60 \\cdot 9{,}82 = 589{,}2\\ \\mathrm{N} \\\\
-F_\\mathrm{G} = 15 \\cdot 9{,}82 = 147{,}3\\ \\mathrm{N}
+F_\\mathrm{person} = m_\\mathrm{person} \\cdot g = 60\\ \\mathrm{kg} \\cdot 9{,}82\\ \\mathrm{N/kg} = 589{,}2\\ \\mathrm{N} \\\\
+F_\\mathrm{G} = m_\\text{bräda} \\cdot g = 15\\ \\mathrm{kg} \\cdot 9{,}82\\ \\mathrm{N/kg} = 147{,}3\\ \\mathrm{N} \\\\
+l_\\mathrm{person} = 3{,}0\\ \\mathrm{m} \\\\
+l_\\mathrm{G} = 2{,}0\\ \\mathrm{m} \\\\
+l_\\mathrm{V} = 4{,}0\\ \\mathrm{m}
 \\end{array} \\right]
 $$
 
 $$ F_\\mathrm{V} = \\frac{589{,}2 \\cdot 3{,}0 + 147{,}3 \\cdot 2{,}0}{4{,}0} = \\frac{2\\,062{,}2}{4{,}0} = 515{,}55\\ \\mathrm{N} \\approx 520\\ \\mathrm{N} $$
 
-**Svar:** Ungefär $520\\ \\mathrm{N}$ (0,52 kN).
+Alla mätvärden har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Ungefär $520\\ \\mathrm{N}$.
 
 **Generell slutsats:** Med flera tyngdkrafter på samma bräda får varje kraft sitt eget moment med sin egen hävarm: momentlagen blir en summa i varje led. Kontrollera gärna med kraftjämvikt: $F_\\mathrm{H} = (589{,}2 + 147{,}3) - 515{,}55 \\approx 220\\ \\mathrm{N}$, och mycket riktigt bär den vänstra bocken mest eftersom personen står närmast den.`,
         },
@@ -13887,17 +14278,30 @@ $$ F_\\mathrm{V} = \\frac{589{,}2 \\cdot 3{,}0 + 147{,}3 \\cdot 2{,}0}{4{,}0} = 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
+            penna: 'ov-fy2-1.2-u6',
             question: `En $6{,}0\\ \\mathrm{m}$ lång jämntjock bräda med massan $20\\ \\mathrm{kg}$ ligger på två bockar: P står $1{,}5\\ \\mathrm{m}$ från vänstra änden och Q står $2{,}0\\ \\mathrm{m}$ från högra änden. En person med massan $60\\ \\mathrm{kg}$ går sakta ut mot brädans högra ände. **Hur långt förbi stödet Q kan personen gå innan brädan börjar tippa?**
 
 ${makeBeamSupports({ width: 500, supports: [{ posFrac: 0.25, label: 'P' }, { posFrac: 0.6667, label: 'Q' }], cog: { posFrac: 0.5, label: 'F_G' }, person: { posFrac: 0.8, label: '60 kg' }, dims: [{ fromFrac: 0.6667, toFrac: 0.8, label: 'd', row: 0 }, { fromFrac: 0, toFrac: 0.25, label: '1,5 m', row: 1 }, { fromFrac: 0.25, toFrac: 0.6667, label: '2,5 m', row: 1 }, { fromFrac: 0.6667, toFrac: 1, label: '2,0 m', row: 1 }] })}`,
-            answer: { value: 0.33, unit: 'm', tol: 0.01 },
+            answer: { value: 0.3333, unit: 'm' },
             solution: `Insikten är vad som händer i **tippögonblicket**: brädan lyfter från stödet P, så kraften där blir noll, $F_\\mathrm{P} = 0$. Brädan vrider sig då kring Q — vi väljer alltså **Q som vridningspunkt**, och den okända stödkraften $F_\\mathrm{Q}$ går genom vridningspunkten och försvinner ur momentlagen.
 
-Kvar står två moment kring Q: personens tyngd (medurs, hävarm *d*) mot brädans tyngd (moturs). Brädans tyngdpunkt sitter mitt på brädan, $3{,}0\\ \\mathrm{m}$ från vänstra änden — alltså $4{,}0 - 3{,}0 = 1{,}0\\ \\mathrm{m}$ innanför Q. Momentlagen (tyngdfaktorn *g* stryks ur båda led):
+Kvar står två moment kring Q: brädans tyngd (moturs) mot personens tyngd (medurs, hävarm *d*). Q står $1{,}5 + 2{,}5 = 4{,}0\\ \\mathrm{m}$ från vänstra änden och brädans tyngdpunkt mitt på brädan, $3{,}0\\ \\mathrm{m}$ från vänstra änden. Brädans hävarm är alltså $l_\\mathrm{G} = 4{,}0 - 3{,}0 = 1{,}0\\ \\mathrm{m}$. Momentlagen:
 
-$$ m_\\text{person} \\cdot d = m_\\text{bräda} \\cdot 1{,}0 $$
+$$ F_\\mathrm{G} \\cdot l_\\mathrm{G} = F_\\mathrm{person} \\cdot d $$
 
-$$ d = \\frac{20 \\cdot 1{,}0}{60} = 0{,}33\\ \\mathrm{m} $$
+Med $F = m \\cdot g$ i båda led finns tyngdfaktorn *g* som faktor i båda leden och kan divideras bort:
+
+$$ m_\\text{bräda} \\cdot g \\cdot l_\\mathrm{G} = m_\\text{person} \\cdot g \\cdot d \\quad\\Leftrightarrow\\quad m_\\text{bräda} \\cdot l_\\mathrm{G} = m_\\text{person} \\cdot d \\quad\\Leftrightarrow\\quad d = \\frac{m_\\text{bräda} \\cdot l_\\mathrm{G}}{m_\\text{person}} $$
+
+$$
+\\left[ \\begin{array}{l}
+m_\\text{bräda} = 20\\ \\mathrm{kg} \\\\
+l_\\mathrm{G} = 1{,}0\\ \\mathrm{m} \\\\
+m_\\text{person} = 60\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ d = \\frac{20 \\cdot 1{,}0}{60} = 0{,}333\\ldots\\ \\mathrm{m} \\approx 0{,}33\\ \\mathrm{m} $$
 
 **Svar:** Personen kan gå ungefär $0{,}33\\ \\mathrm{m}$ förbi Q innan brädan tippar.
 
@@ -13909,6 +14313,7 @@ $$ d = \\frac{20 \\cdot 1{,}0}{60} = 0{,}33\\ \\mathrm{m} $$
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
+            penna: 'ov-fy2-1.3-u1',
             question: `Ett föremål står på ett vågrätt underlag. Vad krävs för att det ska stå kvar utan att välta?`,
             choices: [
                 `Tyngdpunkten måste ligga exakt över stödytans mittpunkt.`,
@@ -13925,6 +14330,7 @@ $$ d = \\frac{20 \\cdot 1{,}0}{60} = 0{,}33\\ \\mathrm{m} $$
         },
         {
             level: 1,
+            penna: 'ov-fy2-1.3-u2',
             question: `En kula ligger i botten av en skål, en annan balanserar på toppen av en kulle och en tredje ligger på ett plant golv. Vilken typ av jämvikt har kulorna, i tur och ordning?`,
             choices: [
                 `Labil, stabil, indifferent`,
@@ -13941,6 +14347,7 @@ $$ d = \\frac{20 \\cdot 1{,}0}{60} = 0{,}33\\ \\mathrm{m} $$
         },
         {
             level: 1,
+            penna: 'ov-fy2-1.3-u3',
             question: `Två gafflar sitter fast i en kork som balanserar på en nålspets. Varför är jämvikten stabil?`,
             choices: [
                 `Gafflarnas tyngd pressar korken mot nålen så att friktionen håller emot.`,
@@ -13959,15 +14366,25 @@ $$ d = \\frac{20 \\cdot 1{,}0}{60} = 0{,}33\\ \\mathrm{m} $$
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
+            penna: 'ov-fy2-1.3-u4',
             question: `En låda är $0{,}60\\ \\mathrm{m}$ bred och $0{,}80\\ \\mathrm{m}$ hög med tyngdpunkten i mitten. Den tippas sakta åt sidan kring sin nedre kant. Vid vilken lutningsvinkel välter lådan?
 
 ${makeTippingBox({ boxW: 84, boxH: 112, tipArrow: true, gravityLine: true, wLabel: '0,60 m', hLabel: '0,80 m' })}`,
-            answer: { value: 37, unit: '°' },
-            solution: `Lådan välter när **tyngdpunkten hamnar utanför vridningspunkten**, alltså när tyngdkraftens lodräta riktningslinje genom tyngdpunkten passerar tippkanten. Tyngdpunkten ligger $\\dfrac{0{,}60}{2} = 0{,}30\\ \\mathrm{m}$ in från kanten (i sidled) och $\\dfrac{0{,}80}{2} = 0{,}40\\ \\mathrm{m}$ upp. Vältningsvinkeln $\\alpha$ uppfyller
+            answer: { value: 36.87, unit: '°' },
+            solution: `Lådan välter när **tyngdpunkten hamnar utanför vridningspunkten**, alltså när tyngdkraftens lodräta riktningslinje genom tyngdpunkten passerar tippkanten. Vid gränsen står tyngdpunkten rakt ovanför kanten, och för en jämntjock låda med bredden $b$ och höjden $h$ uppfyller vältningsvinkeln $\\alpha$
 
-$$ \\tan \\alpha = \\frac{0{,}30}{0{,}40} = \\frac{0{,}60}{0{,}80} = 0{,}75 $$
+$$ \\tan \\alpha = \\frac{b}{h} $$
 
-$$ \\alpha = \\arctan(0{,}75) = 37^\\circ $$
+$$
+\\left[ \\begin{array}{l}
+b = 0{,}60\\ \\mathrm{m} \\\\
+h = 0{,}80\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ \\tan \\alpha = \\frac{0{,}60}{0{,}80} = 0{,}75 $$
+
+$$ \\alpha = \\tan^{-1}(0{,}75) = 36{,}869...^\\circ \\approx 37^\\circ $$
 
 **Svar:** Lådan välter om den lutas mer än cirka $37^\\circ$.
 
@@ -13975,15 +14392,23 @@ $$ \\alpha = \\arctan(0{,}75) = 37^\\circ $$
         },
         {
             level: 2,
+            penna: 'ov-fy2-1.3-u5',
             question: `En transportlåda ska tåla att lutas $25^\\circ$ utan att välta. Lådan är $0{,}40\\ \\mathrm{m}$ bred och jämnt packad, så att tyngdpunkten ligger i mitten. Hur hög får lådan högst vara?
 
 ${makeTippingBox({ boxW: 56, boxH: 116, gravityLine: true, wLabel: '0,40 m', hLabel: 'h' })}`,
-            answer: { value: 0.86, unit: 'm', tol: 0.02 },
+            answer: { value: 0.8578, unit: 'm', tol: 0.02 },
             solution: `Vältningsvinkeln för en jämntjock låda uppfyller $\\tan \\alpha = \\dfrac{b}{h}$. Ju högre lådan är, desto mindre blir vältningsvinkeln. Gränsfallet är att vältningsvinkeln är exakt $25^\\circ$. Vi löser ut höjden:
 
-$$ \\tan 25^\\circ = \\frac{b}{h} \\quad\\Leftrightarrow\\quad h = \\frac{b}{\\tan 25^\\circ} $$
+$$ \\tan \\alpha = \\frac{b}{h} \\quad\\Leftrightarrow\\quad h \\cdot \\tan \\alpha = b \\quad\\Leftrightarrow\\quad h = \\frac{b}{\\tan \\alpha} $$
 
-$$ h = \\frac{0{,}40}{\\tan 25^\\circ} = \\frac{0{,}40}{0{,}4663} = 0{,}8578\\ \\mathrm{m} \\approx 0{,}86\\ \\mathrm{m} $$
+$$
+\\left[ \\begin{array}{l}
+b = 0{,}40\\ \\mathrm{m} \\\\
+\\alpha = 25^\\circ
+\\end{array} \\right]
+$$
+
+$$ h = \\frac{0{,}40}{\\tan 25^\\circ} = 0{,}8578...\\ \\mathrm{m} \\approx 0{,}86\\ \\mathrm{m} $$
 
 **Svar:** Lådan får vara högst cirka $0{,}86\\ \\mathrm{m}$ hög.
 
@@ -13993,21 +14418,43 @@ $$ h = \\frac{0{,}40}{\\tan 25^\\circ} = \\frac{0{,}40}{0{,}4663} = 0{,}8578\\ \
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
+            penna: 'ov-fy2-1.3-u6',
             question: `En jämntjock bräda är $1{,}2\\ \\mathrm{m}$ lång och har massan $2{,}4\\ \\mathrm{kg}$. Den skjuts sakta ut över en bordskant, och på brädans inre ände står en vikt med massan $1{,}2\\ \\mathrm{kg}$. **Hur långt utanför bordskanten kan brädans yttre ände som mest sticka ut utan att brädan tippar?**
 
 <svg viewBox="0 0 420 170" width="420" height="170" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En bräda ligger på ett bord och sticker ut en bit utanför bordskanten åt höger. På brädans vänstra ände står en vikt märkt 1,2 kg. Brädan är märkt 2,4 kg och är 1,2 m lång. Utsticket utanför bordskanten är märkt d."><rect x="20" y="110" width="210" height="10" fill="#d8c39a" stroke="#8a6a3a" stroke-width="1.4"/><rect x="36" y="120" width="8" height="45" fill="#b8925f" stroke="#8a6a3a" stroke-width="1.2"/><rect x="198" y="120" width="8" height="45" fill="#b8925f" stroke="#8a6a3a" stroke-width="1.2"/><rect x="50" y="100" width="300" height="10" rx="2" fill="#c69a5e" stroke="#8a6a3a" stroke-width="1.4"/><rect x="54" y="74" width="36" height="26" rx="3" fill="#9aa2ad" stroke="#1f2530" stroke-width="1.4"/><text x="72" y="66" text-anchor="middle" font-size="13" fill="#1f2530">1,2 kg</text><text x="215" y="93" text-anchor="middle" font-size="13" fill="#1f2530">2,4 kg</text><line x1="50" y1="40" x2="50" y2="96" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="350" y1="40" x2="350" y2="96" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="50" y1="36" x2="350" y2="36" stroke="#1f2530" stroke-width="1.3"/><polygon points="50,36 58,32.8 58,39.2" fill="#1f2530"/><polygon points="350,36 342,32.8 342,39.2" fill="#1f2530"/><text x="200" y="30" text-anchor="middle" font-size="13" fill="#1f2530">1,2 m</text><line x1="230" y1="122" x2="230" y2="144" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="350" y1="112" x2="350" y2="144" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="230" y1="140" x2="350" y2="140" stroke="#1f2530" stroke-width="1.3"/><polygon points="230,140 238,136.8 238,143.2" fill="#1f2530"/><polygon points="350,140 342,136.8 342,143.2" fill="#1f2530"/><text x="290" y="158" text-anchor="middle" font-size="14" fill="#1f2530" font-style="italic">d</text></svg>`,
             answer: { value: 0.8, unit: 'm', tol: 0.02 },
-            solution: `I **tippögonblicket** vrider sig brädan kring bordskanten: hela normalkraften samlas där, så vi väljer **bordskanten som vridningspunkt**. Kalla utsticket $d$. Brädans tyngdpunkt sitter mitt på brädan, $0{,}60\\ \\mathrm{m}$ från den yttre änden, alltså $d - 0{,}60$ **utanför** kanten. Vikten står på den inre änden, $1{,}2 - d$ **innanför** kanten.
+            solution: `I **tippögonblicket** vrider sig brädan kring bordskanten: hela normalkraften $F_\\mathrm{N}$ samlas där, så vi väljer **bordskanten som vridningspunkt**. Då saknar normalkraften moment. Kalla utsticket $d$. Vikten står på den inre änden, så dess tyngdkraft $F_\\mathrm{V}$ har hävarmen $l_\\mathrm{V} = 1{,}2 - d$ **innanför** kanten och vrider moturs. Brädans tyngdpunkt sitter mitt på brädan, $0{,}60\\ \\mathrm{m}$ från den yttre änden, så brädans tyngdkraft $F_\\mathrm{B}$ har hävarmen $l_\\mathrm{B} = d - 0{,}60$ **utanför** kanten och vrider medurs.
 
-Momentlagen kring kanten (tyngdfaktorn $g$ finns i båda led och stryks):
+Momentlagen kring kanten, moturs = medurs:
 
-$$ m_\\text{bräda} \\cdot (d - 0{,}60) = m_\\text{vikt} \\cdot (1{,}2 - d) $$
+$$ F_\\mathrm{V} \\cdot l_\\mathrm{V} = F_\\mathrm{B} \\cdot l_\\mathrm{B} $$
 
-$$ 2{,}4 \\cdot (d - 0{,}60) = 1{,}2 \\cdot (1{,}2 - d) $$
+$$ m_\\mathrm{V} \\cdot g \\cdot (1{,}2 - d) = m_\\mathrm{B} \\cdot g \\cdot (d - 0{,}60) $$
 
-$$ 2{,}4d - 1{,}44 = 1{,}44 - 1{,}2d $$
+Tyngdfaktorn $g$ finns i båda led och divideras bort.
 
-$$ 3{,}6d = 2{,}88 \\quad\\Leftrightarrow\\quad d = 0{,}80\\ \\mathrm{m} $$
+$$
+\\left[ \\begin{array}{l}
+m_\\mathrm{V} = 1{,}2\\ \\mathrm{kg} \\\\
+m_\\mathrm{B} = 2{,}4\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ 1{,}2 \\cdot (1{,}2 - d) = 2{,}4 \\cdot (d - 0{,}60) $$
+
+$$ 1{,}44 - 1{,}2d = 2{,}4d - 1{,}44 $$
+
+$$ 1{,}44 - 1{,}2d \\mathbin{\\boldsymbol{+}} \\boldsymbol{1{,}2d} = 2{,}4d - 1{,}44 \\mathbin{\\boldsymbol{+}} \\boldsymbol{1{,}2d} $$
+
+$$ 1{,}44 = 3{,}6d - 1{,}44 $$
+
+$$ 1{,}44 \\mathbin{\\boldsymbol{+}} \\boldsymbol{1{,}44} = 3{,}6d - 1{,}44 \\mathbin{\\boldsymbol{+}} \\boldsymbol{1{,}44} $$
+
+$$ 2{,}88 = 3{,}6d $$
+
+$$ \\frac{2{,}88}{\\boldsymbol{3{,}6}} = \\frac{3{,}6d}{\\boldsymbol{3{,}6}} $$
+
+$$ 0{,}80 = d \\quad\\Leftrightarrow\\quad d = 0{,}80\\ \\mathrm{m} $$
 
 **Svar:** Brädan kan sticka ut som mest $0{,}80\\ \\mathrm{m}$ utanför bordskanten.
 

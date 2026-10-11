@@ -61,6 +61,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'landauers-princip',
+    term: 'Landauers princip',
+    former: ['landauers princip', 'landauerprincipen', 'landauers gräns', 'landauergränsen'],
+    kort: 'Principen att det alltid kostar energi att radera information. Att sudda ut en enda bit kräver att minst en bestämd mängd värme avges till omgivningen, och mängden växer med temperaturen.',
+    relaterade: ['entropi', 'maxwells-demon'],
+    body: [
+      { type: 'p', html: 'Tänk dig ett minne som består av en enda strömbrytare som kan stå i läget 0 eller 1. Att radera minnet betyder att ställa brytaren i läget 0, oavsett var den stod innan. Det låter som något som borde gå att göra helt gratis. Men den tysk-amerikanske fysikern Rolf Landauer visade 1961 att det inte går. Varje gång en bit raderas måste minst <em>k</em><sub>B</sub>&nbsp;·&nbsp;<em>T</em>&nbsp;·&nbsp;ln&nbsp;2 i värme avges till omgivningen, där <em>k</em><sub>B</sub> är Boltzmanns konstant och <em>T</em> den absoluta temperaturen.' },
+      { type: 'p', html: 'Skälet är termodynamikens andra huvudsats. Innan raderingen kunde minnet vara i två olika lägen, efteråt bara i ett. Minnets oordning, dess entropi, har alltså minskat. Eftersom den totala entropin aldrig kan minska måste oordningen flyttas någon annanstans, och det sker genom att värme går ut i omgivningen och sätter fart på dess molekyler.' },
+      { type: 'p', html: 'Vid rumstemperatur blir kostnaden ungefär 2,9&nbsp;·&nbsp;10<sup>−21</sup>&nbsp;J per bit, vilket är försvinnande lite. Dagens datorer gör av med mycket mer energi än så, men gränsen visar att även en perfekt dator måste bli lite varm. Principen mättes upp första gången 2012, och den förklarar också varför det tänkta väsen som kallas Maxwells demon inte kan bryta mot andra huvudsatsen.' }
+    ]
+  },
+  {
+    id: 'maxwells-demon',
+    term: 'Maxwells demon',
+    former: ['maxwells demon', 'maxwelldemon', 'maxwelldemonen', 'maxwells demoner'],
+    kort: 'Ett tankeexperiment där ett litet väsen sorterar snabba och långsamma molekyler och på så sätt verkar skapa temperaturskillnader utan att göra något arbete. Paradoxen löses av att information kostar energi.',
+    relaterade: ['landauers-princip', 'entropi'],
+    body: [
+      { type: 'p', html: 'År 1867 föreslog den skotske fysikern James Clerk Maxwell ett tankeexperiment. Två behållare med gas står bredvid varandra med en liten lucka emellan. Vid luckan sitter ett pyttelitet väsen som ser varje molekyl som kommer. När en snabb molekyl närmar sig från vänster öppnar väsendet luckan, och när en långsam närmar sig från höger gör det likadant. Efter ett tag har de snabba molekylerna samlats till höger och de långsamma till vänster. Den högra behållaren har blivit varm och den vänstra kall.' },
+      { type: 'p', html: 'Det borde inte gå. Termodynamikens andra huvudsats säger att värme av sig själv bara flyter från varmt till kallt, aldrig tvärtom, och att det kostar arbete att skapa en temperaturskillnad. Ett kylskåp drar ström av just det skälet. Väsendet, som senare fick namnet Maxwells demon, verkade klara samma sak gratis.' },
+      { type: 'p', html: 'Lösningen tog över hundra år att hitta. Demonen måste mäta varje molekyls fart och komma ihåg resultatet för att veta när luckan ska öppnas. Minnet blir till slut fullt och måste raderas, och enligt Landauers princip kostar raderingen minst lika mycket energi som demonen tjänade på sorteringen. I dag går det att bygga små ”demoner” i laboratoriet, till exempel med en enda elektron, och studera hur information kan omvandlas till energi.' }
+    ]
+  },
+  {
+    id: 'entropi',
+    term: 'Entropi',
+    former: ['entropi', 'entropin', 'entropiökning', 'entropiökningen'],
+    kort: 'Ett mått på hur många olika sätt ett system kan vara ordnat på i smådelarna utan att man ser någon skillnad utifrån. Ju större entropi, desto större oordning. I ett isolerat system kan entropin aldrig minska.',
+    relaterade: ['landauers-princip', 'maxwells-demon'],
+    body: [
+      { type: 'p', html: 'Blanda en kortlek ordentligt. Det finns bara en ordning där alla kort ligger i följd efter färg och valör, men ofantligt många ordningar som ser ut som en vanlig blandad hög. Därför blir kortleken nästan aldrig sorterad av sig själv när man blandar den. Entropi bygger på samma idé: den mäter hur många sätt ett systems atomer och molekyler kan arrangeras på utan att systemet ser annorlunda ut utifrån.' },
+      { type: 'p', html: 'En droppe bläck i ett glas vatten sprider ut sig, men ett utspätt glas samlar aldrig ihop bläcket till en droppe igen. Det beror inte på någon särskild kraft. Det finns helt enkelt överväldigande många fler utspridda tillstånd än samlade. Det är innehållet i termodynamikens andra huvudsats: i ett isolerat system ökar entropin eller förblir konstant, men den minskar aldrig. Lokalt kan ordningen öka, som när vatten fryser till is i en frys, men då ökar entropin ännu mer någon annanstans, i det här fallet genom värmen som frysen släpper ut i köket.' },
+      { type: 'p', html: 'Entropi och information hänger ihop. Att veta exakt hur ett system är ordnat är detsamma som att dess entropi, sett från den som vet, är liten. Därför kostar det energi att radera information, och därför kan kunskap om ett system i princip användas för att utvinna arbete ur det.' }
+    ]
+  },
+  {
     id: 'karnklocka',
     term: 'Kärnklocka',
     former: ['kärnklocka', 'kärnklockan', 'kärnklockor', 'kärnklockorna', 'atomkärnklocka', 'atomkärnklockan', 'thoriumklocka', 'thoriumklockan'],

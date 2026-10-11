@@ -103,6 +103,68 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-11-att-glomma-kan-spara-energi",
+    date: "2026-10-11",
+    title: "En maskin som glömmer kan utvinna mer energi än en som minns allt",
+    deck: "Att radera information kostar energi, och omvänt kan kunskap om omgivningen ge energi. Teoretiska fysiker i Innsbruck har nu bevisat att en maskin som påverkar sin omgivning ibland utvinner mest energi om den glömmer en del av vad den själv har gjort, trots att minnet hade gjort den bättre på att förutsäga vad som händer härnäst.",
+    category: "Termodynamik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-11-att-glomma-kan-spara-energi.jpg",
+    imageAlt: "Digital illustration mot en mörk bakgrund med kretsmönster. Till vänster en lysande blå hjärna kopplad till ett batteri, till höger runda bilder av människor, en stad och ett landskap. Mellan dem går ljusa banor i en cirkel, fyllda med symboler som siffror och bokstäver.",
+    imageCredit: "Illustration: Alex Rommel, Universität Innsbruck (pressbild). Bilden visar en agent som tar in information från omgivningen och svarar med handlingar.",
+    tags: ["termodynamik", "information", "entropi", "landauers princip", "maxwells demon", "szilards motor", "andra huvudsatsen", "energi", "artificiell intelligens"],
+    sources: [
+      { name: "Universität Innsbruck: AI: The price of remembering (pressmeddelande 9 oktober 2026)", url: "https://www.uibk.ac.at/en/newsroom/2026/ai-the-price-of-remembering/" },
+      { name: "Phys.org: Physics model reveals fundamental trade-off between prediction and energy efficiency in intelligent systems (9 oktober 2026)", url: "https://phys.org/news/2026-10-physics-reveals-fundamental-energy-efficiency.html" },
+      { name: "arXiv: studien i fulltext (version 2, 30 september 2026)", url: "https://arxiv.org/abs/2504.06209" }
+    ],
+    research: {
+      citation: "L. J. Fiderer, P. C. Barth, I. D. Smith och H. J. Briegel, ”Information thermodynamics of agents: The work capacity of channels with memory”, Physical Review X 16, 041004 (2026). Kollegialt granskad och öppet tillgänglig (CC BY 4.0).",
+      url: "https://doi.org/10.1103/7nds-tjr8"
+    },
+    larare: {
+      moment: [
+        { label: "Termodynamikens fyra huvudsatser", href: "katalog.html?id=fy1-6.5" },
+        { label: "Verkningsgrad", href: "katalog.html?id=fy1-4.6" }
+      ],
+      fragor: [
+        "Szilards motor gör arbete av värme från en enda omgivning med konstant temperatur. Varför bryter den ändå inte mot termodynamikens andra huvudsats? Vad händer med informationen?",
+        "Landauers gräns är proportionell mot temperaturen. Skulle det löna sig att kyla en dator till nära absoluta nollpunkten för att radera information billigare? Tänk på vad kylningen själv kostar.",
+        "Förklara med egna ord varför roboten vid dörren kan vinna energi på att glömma hur hårt den puttade, fast minnet hade gjort förutsägelserna bättre. Vilka delar av studien är matematiskt bevisade, och vilka är forskarnas förhoppningar?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'En dator blir varm när den räknar. Det mesta av värmen beror på att dagens elektronik är långt ifrån perfekt, men en liten del går inte att bli av med ens i princip: att radera information kostar energi. Det visade fysikern Rolf Landauer vid IBM redan 1961.' },
+      { type: 'p', html: 'Nu har en forskargrupp vid Innsbrucks universitet i Österrike använt samma fysik för att undersöka en maskin som både samlar information och använder den för att utvinna energi ur sin omgivning. Resultatet, som publicerats i tidskriften <em>Physical Review X</em>, är oväntat. I vissa omgivningar fungerar maskinen bäst om den glömmer en del av vad den själv har gjort, trots att minnet hade hjälpt den att förutsäga vad som kommer härnäst.' },
+
+      { type: 'h2', text: 'Information har ett energipris' },
+      { type: 'p', html: 'Landauers princip säger att den som raderar en bit, alltså en etta eller en nolla, måste avge minst $W = k_\\mathrm{B} \\cdot T \\cdot \\ln 2$ i värme till omgivningen. Här är $k_\\mathrm{B} \\approx 1{,}38 \\cdot 10^{-23}\\ \\mathrm{J/K}$ Boltzmanns konstant och $T$ omgivningens temperatur. Vid rumstemperatur, 300&nbsp;K, blir det omkring $2{,}9 \\cdot 10^{-21}\\ \\mathrm{J}$ per bit. Det är försvinnande lite, men ingen konstruktion kan komma under gränsen, eftersom den följer av termodynamikens andra huvudsats. När en bit raderas minskar minnets entropi, alltså dess oordning, och den oordningen måste flyttas ut i omgivningen som värme.' },
+      { type: 'p', html: 'Sambandet gäller också åt andra hållet. Det klassiska tankeexperimentet är Szilards motor: en låda med en enda gasmolekyl. Skjuter man in en vägg mitt i lådan och tar reda på vilken halva molekylen hamnade i, kan man låta molekylen trycka väggen åt sidan som en kolv. Då kan som mest $k_\\mathrm{B} \\cdot T \\cdot \\ln 2$ arbete utvinnas ur omgivningens värme, och informationen om var molekylen fanns är förbrukad. Kunskap om ett system fungerar alltså som en sorts bränsle. Szilards motor är en förenklad variant av Maxwells demon, ett tänkt väsen som sorterar gasmolekyler och som länge såg ut att kunna lura andra huvudsatsen.' },
+
+      { type: 'h2', text: 'En agent som påverkar det den försöker förutsäga' },
+      { type: 'p', html: 'Forskarna studerar det de kallar en agent: ett system som tar in observationer från sin omgivning, sparar något av dem i ett minne och svarar med en handling. Det kan vara en robot, en levande cell eller ett datorprogram. I modellen sker utbytet i omgångar. I varje omgång får agenten en symbol från omgivningen, en etta eller en nolla, och lämnar tillbaka en symbol som sin handling. Allt sker i en omgivning med konstant temperatur, och frågan är hur mycket arbete agenten i bästa fall kan utvinna per omgång.' },
+      { type: 'p', html: 'Svaret består av två delar. Agenten vinner på att bli så lite överraskad som möjligt av det som kommer in. En observation som den kunde förutsäga ur sitt minne är som molekylen vars halva den redan känner till, och kan användas som bränsle. Men agenten vinner också på att dess egen handling är så oförutsägbar som möjligt, sett från dess minne. Det som lämnas ut ska vara oordnat, för det är när ordning blir oordning som arbete kan frigöras. Den största arbetstakt som någon agent kan nå kallar forskarna omgivningens arbetskapacitet.' },
+
+      { type: 'h2', text: 'När det lönar sig att glömma' },
+      { type: 'p', html: 'Om omgivningen inte bryr sig om vad agenten gör, som när en maskin läser av en remsa med färdiga symboler, går de två målen att förena. Tidigare forskning har visat att den bästa agenten då minns allt som hjälper den att förutsäga nästa symbol och ingenting om sina egna handlingar.' },
+      { type: 'p', html: 'I verkligheten påverkar handlingarna det man sedan observerar. När en robot puttar på en dörr beror dörrens rörelse på hur hårt den puttade. För att förutsäga dörren behöver roboten minnas sin egen handling, men då blir handlingen mindre oförutsägbar sett från minnet. De två delarna drar åt olika håll. Forskarna bevisar matematiskt att det finns omgivningar där ingen agent som förutsäger så bra som möjligt kan nå den högsta arbetstakten. Den mest energieffektiva agenten måste glömma delar av vad den har gjort, också sådant som hade förbättrat förutsägelserna.' },
+      { type: 'p', html: 'I ett räkneexempel låter forskarna handlingarna påverka observationerna olika mycket. Så snart påverkan finns, men inte är total, visar deras beräkningar att de mest förutseende agenterna inte längre är de mest energieffektiva. De bästa agenterna hittar en balans: de förutsäger sämre än de mest förutseende men bättre än agenter helt utan minne.' },
+      { type: 'quote', html: 'Det överraskande är att en agent kan vinna energi på att glömma information som faktiskt hade förbättrat dess förutsägelser.', cite: 'Lukas Fiderer, huvudförfattare, i Innsbrucks universitets pressmeddelande' },
+      { type: 'p', html: 'Konflikten försvinner inte om agenten får ett större minne. I räkneexemplet gav minnen med två, tre och fyra tillstånd samma bästa resultat. Den beror inte heller på vad det kostar att bygga ett minne i praktiken.' },
+      { type: 'quote', html: 'Avvägningen mellan att förutsäga och att glömma finns kvar även om vi bortser från de praktiska kostnaderna för att bygga och underhålla minnet. Det är alltså en konflikt som följer av fysikens grundläggande lagar.', cite: 'Lukas Fiderer, i Innsbrucks universitets pressmeddelande' },
+
+      { type: 'h2', text: 'Långt från gränsen, än så länge' },
+      { type: 'p', html: 'Studien är teoretisk. Den räknar med idealiserade processer och anger vad som är möjligt i princip, inte hur en sådan maskin ska byggas. Dagens datorer gör av med långt mer energi än Landauers gräns för varje bit de hanterar. Naturen ligger närmare. Enligt de beräkningar forskarna hänvisar till utför cellens ribosomer, som läser av arvsmassans instruktioner när proteiner byggs, sina enkla avkodningar med en energikostnad som ligger inom en faktor tio från gränsen.' },
+      { type: 'p', html: 'Fiderer tror att resultatet går att pröva med dagens experimentuppställningar. Forskarna lyfter också två mer spekulativa tankar. När framtidens datorer för artificiell intelligens närmar sig de fysikaliska gränserna kan deras minnen behöva byggas med energin i åtanke, och beteenden hos levande varelser som ser ut att vara dåliga för förutsägelsen kan i själva verket vara ett sätt att spara energi. Båda idéerna återstår att undersöka.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'En bit är den minsta mängden information: svaret på en ja- eller nej-fråga. Med Landauers gräns vid rumstemperatur skulle en enda joule räcka för att radera ungefär 3,5&nbsp;·&nbsp;10<sup>20</sup> bitar.',
+        'James Clerk Maxwell beskrev 1867 ett tänkt väsen, senare kallat Maxwells demon, som öppnar och stänger en lucka mellan två gasbehållare och bara släpper igenom snabba molekyler åt ena hållet. Då skulle ena sidan bli varm och den andra kall utan att något arbete tillfördes. Paradoxen löses av att demonen måste mäta och minnas, och att minnet förr eller senare måste raderas.',
+        'Landauers gräns mättes första gången 2012. Forskare i Frankrike och Tyskland lagrade en bit i läget hos en mikrometerstor glaskula som hölls fast med laserljus, raderade den och mätte värmen som avgavs.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-10-tio-minuter-efter-kollisionen",
     date: "2026-10-10",
     title: "Blixten varade en halv sekund, men röntgenljuset lyste i nästan tio minuter",

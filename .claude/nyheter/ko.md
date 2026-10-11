@@ -12,14 +12,20 @@ Format per post:
 
 ## Kö
 
-- **Ljus som vandrar genom mjölk ger skarpare bilder** **[BREVTEASER]** (nominerad 2026-10-05; kontrollera att originalstudien går att läsa innan brevet teasar den) — en överraskande avbildningsmetod som utnyttjar spritt ljus i stället för att bekämpa det. Ingång: spridning och varför mjölk är vit. OBS: optik är väl representerad.
+- **Ljus som vandrar genom mjölk ger skarpare bilder** **[BREVTEASER — teasad i brevet 2026-10-11, publiceras TIDIGAST måndag 2026-10-12, senast lördag 2026-10-17]** (nominerad 2026-10-05; originalet ej kontrolläst ännu, gör det först) — en överraskande avbildningsmetod som utnyttjar spritt ljus i stället för att bekämpa det. Ingång: spridning och varför mjölk är vit. OBS: optik är väl representerad.
   Källa (Phys.org 2026-10-02): https://phys.org/news/2026-10-approach-imaging.html
   (tillagd 2026-10-02)
+
+- **Titan som flyter: ihåliga gitter fyllda med skum** — RMIT har 3D-skrivit gitter av titanlegering vars ihåliga stavar fylls med polyuretanskum, så att konstruktionen flyter trots att vatten strömmar igenom den (skelettdensitet under vattnets). Ingång: densitet, Arkimedes princip. Advanced Materials, DOI 10.1002/adma.74641 (CC BY-NC-ND), men Wiley gav 403 för både curl och headless Chrome 2026-10-11; försök via RMIT:s arkiv eller en annan väg. Källa (Physics World 2026-10-07): https://physicsworld.com/a/titanium-polymer-metamaterial-floats-in-water/
+  (tillagd 2026-10-11)
+
+- **Kvarkar lämnar svallvågor i kvark-gluonplasman (CMS, Z-bosoner)** — OBS: MIT:s pressmeddelande är från januari 2026 och studien (Physics Letters B 874, 140120, öppen, arXiv 2507.09307) från december 2025. ScienceDaily lade upp den först 2026-10-06, så den är inte färsk. Passar bara som tidlös reserv. (tillagd 2026-10-11)
 
 - **Störning av svart hål med koppling till Hawking (rubrik ur URL, ej läst)** — Phys.org oktober 2026, varken artikeln eller originalet kontrollerat. Ingång: svarta hål, händelsehorisont. OBS: astronomi publicerades 2026-10-10, vänta några dagar. Källa: https://phys.org/news/2026-10-black-hole-disturbance-hawking.html
   (tillagd 2026-10-10)
 
 - **Lavafontän på Kīlaueas topp mätt av forskare** — vulkanfysik, kastbanor och gasexpansion. Originalet ej kontrollerat. Källa (Phys.org oktober 2026): https://phys.org/news/2026-10-klauea-summit-scientists-lava-fountain.html
+  OBS 2026-10-11: studien är Flinders m.fl., Science 2026, DOI 10.1126/science.aef2931 (54 fontänepisoder, upp till ~480 m), inte öppen och inte i Europe PMC eller USGS-arkivet. USGS-foton är public domain.
   (tillagd 2026-10-10)
 
 - **Kontinuerlig avbildning av levande celler utan lins och utan färgning** — linsfri avbildningsmetod som följer celler under lång tid. Ingång: diffraktion, holografi. OBS: optik, och mjölkuppslaget (brevteaser) är också optik; originalet ej kontrollerat. Källa (Phys.org 2026-10-08): https://phys.org/news/2026-10-lensless-imaging-method-enables-term.html

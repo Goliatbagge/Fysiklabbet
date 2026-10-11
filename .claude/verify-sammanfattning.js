@@ -56,7 +56,12 @@ async function routeCdn(page) {
   const W = 1290, H = 730;                 // liggande laptop, den snålaste vanliga
   // Webbläsare: PW_CHROMIUM om den är satt, annars den förinstallerade i
   // molnmiljön, annars playwright-cores egen (samma logik som verify-formelklipp).
-  const exe = process.env.PW_CHROMIUM || '/opt/pw-browsers/chromium';
+  // PW_CHROMIUM, annars molnmiljöns chromium, annars systemets Chrome på
+  // Windows (så att verifieraren går utan miljövariabel på BOSGAME).
+  const exe = [process.env.PW_CHROMIUM, '/opt/pw-browsers/chromium',
+    'C:/Program Files/Google/Chrome/Application/chrome.exe',
+    'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe']
+    .find(p => p && fs.existsSync(p)) || '';
   const browser = await chromium.launch(fs.existsSync(exe) ? { executablePath: exe } : {});
   const page = await browser.newPage({ viewport: { width: W, height: H } });
   await routeCdn(page);

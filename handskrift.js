@@ -889,6 +889,14 @@
     /* E som F med bottenstreck — jämför med F vid granskning */
     'E': { w: 68, strokes: [[[32, 12], [28, 100]], [[32, 12], [68, 11]],
                             [[30, 54], [60, 54]], [[28, 100], [66, 98]]] },
+    /* DUBBEL-E 𝔼 (elektrisk fältstyrka, som teorin skriver \mathbb{E}):
+     * E med dubbel stapel. 𝔼 ligger utanför BMP (två UTF-16-enheter), så
+     * motorn byter det mot det privata tecknet U+E001 innan strängen
+     * läses tecken för tecken (se tillBmp). Skriv alltså '𝔼=U/d' i
+     * scenerna som vanligt (2026-10-11, användarkrav: fält skrivs 𝔼). */
+    '': { w: 78, strokes: [[[32, 12], [28, 100]], [[46, 12], [42, 100]],
+                                 [[32, 12], [76, 11]], [[44, 54], [68, 54]],
+                                 [[28, 100], [74, 98]]] },
     /* D (2026-08-03, för rubriken "Derivera …"): stapel + hel bukt från
      * toppen runt till foten — jämför med B och P vid granskning: B har
      * två bukter, P bara en halv */
@@ -1158,7 +1166,18 @@
    * (.claude/verify-handskrift.js) läser listan via HANDSKRIFT.saknadeGlyfer()
    * och larmar, så att felet fångas maskinellt. */
   var SAKNADE = {};
+  /* Tecken utanför BMP (två UTF-16-enheter) läses inte rätt av looparna
+   * nedan, som går tecken för tecken med str[i]. De byts därför mot ett
+   * privat BMP-tecken med egen glyf innan strängen skrivs eller mäts. */
+  var ICKE_BMP = { '𝔼': '' };   /* 𝔼 → dubbel-E */
+  function tillBmp(str) {
+    if (str == null || !/[\uD800-\uDBFF]/.test(str)) return str;
+    return String(str).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function (p) {
+      return ICKE_BMP[p] || p;
+    });
+  }
   function placeGlyph(ch, x, baseline, s, out, color) {
+    ch = tillBmp(ch);
     var g = GLYPHS[ch];
     if (!g) { SAKNADE[ch] = (SAKNADE[ch] || 0) + 1; return x + 40 * s; }
     var rot = rnd(-0.022, 0.022);
@@ -1182,6 +1201,7 @@
   }
 
   function textWidth(str, s) {
+    str = tillBmp(str);
     var w = 0;
     for (var i = 0; i < str.length; i++) {
       var g = GLYPHS[str[i]];
@@ -1196,6 +1216,7 @@
    * Efter ∫ och ] placeras gränserna högt/lågt (integralgränser resp.
    * klammergränser) och staplas i samma x-kolumn. */
   function placeString(str, x, baseline, s, F, out, color) {
+    str = tillBmp(str);
     var prevBase = null, prevBaseX = x, scriptAnchor = null, scriptX = null;
     for (var i = 0; i < str.length; i++) {
       var ch = str[i];
@@ -1253,6 +1274,7 @@
   }
 
   function stringAdvance(str, s, F) {
+    str = tillBmp(str);
     var x = 0;
     for (var i = 0; i < str.length; i++) {
       var ch = str[i];
@@ -36633,7 +36655,7 @@
           padL, y, null, 0.62);
     T.pause(300);
     y += 2.35 * F;
-    T.fracH('Q', 'r^2', T.str('E=k·', padL, y), y);
+    T.fracH('Q', 'r^2', T.str('𝔼=k·', padL, y), y);
     T.stepEnd();
 
     y += adv + 1.9 * F;
@@ -36652,7 +36674,7 @@
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    T.fracH('20·10^−^9', '0,12^2', T.str('E=8,99·10^9·', padL, y), y);
+    T.fracH('20·10^−^9', '0,12^2', T.str('𝔼=8,99·10^9·', padL, y), y);
     T.stepEnd();
 
     y += adv + 2.2 * F;
@@ -36723,7 +36745,7 @@
     T.str('Fält från vardera laddningen', padL, y, null, 0.62);
     T.pause(300);
     y += 2.35 * F;
-    T.fracH('Q_1', 'r_1^2', T.str('E_1=k·', padL, y), y);
+    T.fracH('Q_1', 'r_1^2', T.str('𝔼_1=k·', padL, y), y);
     T.stepEnd();
 
     y += adv + 2.0 * F;
@@ -36739,7 +36761,7 @@
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    T.fracH('8,0·10^−^9', '0,020^2', T.str('E_1=8,99·10^9·', padL, y), y);
+    T.fracH('8,0·10^−^9', '0,020^2', T.str('𝔼_1=8,99·10^9·', padL, y), y);
     T.stepEnd();
 
     y += adv + 2.2 * F;
@@ -36752,7 +36774,7 @@
       [['laddningen — större avstånd ger']],
       [['mycket svagare fält.']]
     ]));
-    T.fracH('6,0·10^−^9', '0,050^2', T.str('E_2=8,99·10^9·', padL, y), y);
+    T.fracH('6,0·10^−^9', '0,050^2', T.str('𝔼_2=8,99·10^9·', padL, y), y);
     T.stepEnd();
 
     y += adv + 2.2 * F;
@@ -36764,7 +36786,7 @@
       [['Båda fälten pekar åt SAMMA håll,']],
       [['så jag adderar dem rakt av.']]
     ]));
-    T.str('E=E_1+E_2=179 800+21 576', padL, y);
+    T.str('𝔼=𝔼_1+𝔼_2=179 800+21 576', padL, y);
     T.stepEnd();
 
     y += adv + 0.9 * F;
@@ -36817,7 +36839,7 @@
     T.dblArrow([414, pT], [414, pB], BLUE);
     T.lbl('d=8,0 cm', 300, pB + 40, BLUE);
     T.pause(150);
-    T.lbl('E=5,0·10^4 V/m', 120, pB + 40, BLUE);
+    T.lbl('𝔼=5,0·10^4 V/m', 120, pB + 40, BLUE);
     T.stepEnd();
 
     var y = 400;
@@ -36829,8 +36851,8 @@
     T.str('Fältstyrka mellan plattor', padL, y, null, 0.62);
     T.pause(300);
     y += 2.5 * F;
-    var xa = T.fracH('U', 'd', T.str('E=', padL, y), y);
-    T.str('⟺U=E·d', xa + 0.12 * F, y);
+    var xa = T.fracH('U', 'd', T.str('𝔼=', padL, y), y);
+    T.str('⟺U=𝔼·d', xa + 0.12 * F, y);
     T.stepEnd();
 
     y += adv + 2.2 * F;
@@ -36840,7 +36862,7 @@
       [['per METER.']]
     ]));
     var klam = valueBracket(acts, [
-      'E=5,0·10^4 V/m', 'd=8,0 cm=0,080 m'
+      '𝔼=5,0·10^4 V/m', 'd=8,0 cm=0,080 m'
     ], padL, y, T.s, F);
     T.stepEnd();
     y = klam.yEnd;
@@ -37181,8 +37203,8 @@
           padL, y, null, 0.62);
     T.pause(300);
     y += 2.5 * F;
-    var xa = T.str('Q·E=m·g⟺Q=', padL, y);
-    T.fracH('m·g', 'E', xa, y);
+    var xa = T.str('Q·𝔼=m·g⟺Q=', padL, y);
+    T.fracH('m·g', '𝔼', xa, y);
     T.stepEnd();
 
     y += adv + 2.4 * F;
@@ -37194,7 +37216,7 @@
     ]));
     var klam = valueBracket(acts, [
       'm=2,15·10^−^1^4 kg', 'g≈9,82 N/kg',
-      ['E=', { frac: ['U', 'd'] }, '=',
+      ['𝔼=', { frac: ['U', 'd'] }, '=',
        { frac: ['2,2·10^3 V', '5,0·10^−^3 m'] }, '=440 000 V/m']
     ], padL, y, T.s, F, { rs: 0.72 });
     T.stepEnd();

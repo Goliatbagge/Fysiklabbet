@@ -970,7 +970,7 @@ window.NP_PROV['fy2-vt2016'] = {
                 'genom ett så kallat hastighetsfilter. Sedan går jonerna i en halvcirkelbana i ett ' +
                 'homogent magnetfält för att slutligen träffa en fotografisk film. Genom att studera ' +
                 'svärtningen på filmen kan de bestämma vilka argonisotoperna är.\n\n' +
-                'Figuren visar jonernas bana genom masspektrometern då $E = 25\\ \\mathrm{kV/m}$, ' +
+                'Figuren visar jonernas bana genom masspektrometern då $\\mathbb{E} = 25\\ \\mathrm{kV/m}$, ' +
                 '$B_1 = 49\\ \\mathrm{mT}$ och $B_2 = 0{,}50\\ \\mathrm{T}$.\n\n' +
                 'Förutom svärtningen från den vanligt förekommande isotopen $^{40}\\mathrm{Ar}$ ser de ' +
                 'ytterligare en svärtning med halvcirkelradien $r = 4{,}0\\ \\mathrm{dm}$. Vilken ' +
@@ -980,9 +980,9 @@ window.NP_PROV['fy2-vt2016'] = {
                 {
                     rubrik: 'Rita ut den elektriska kraften i hastighetsfiltret',
                     varfor: 'I hastighetsfiltret verkar två krafter på jonen. Vi ritar ut dem en i taget ' +
-                        'och börjar med den elektriska: fältet $E$ pekar nedåt mellan plattorna, och ' +
-                        'jonen är positiv, så kraften $F_E = QE$ pekar åt samma håll som fältet.',
-                    text: 'Den elektriska kraften på jonen:\n\n$$F_E = Q \\cdot E$$\n\n' +
+                        'och börjar med den elektriska: fältet $\\mathbb{E}$ pekar nedåt mellan plattorna, och ' +
+                        'jonen är positiv, så kraften $F_E = Q\\mathbb{E}$ pekar åt samma håll som fältet.',
+                    text: 'Den elektriska kraften på jonen:\n\n$$F_E = Q \\cdot \\mathbb{E}$$\n\n' +
                         'riktad nedåt i figuren (längs fältet, eftersom laddningen är positiv).',
                     figur: 'u17-s1',
                 },
@@ -993,10 +993,10 @@ window.NP_PROV['fy2-vt2016'] = {
                         'där krafterna precis balanserar går rakt fram genom filtret — det är så filtret ' +
                         '"väljer ut" en bestämd hastighet.',
                     text: 'Kraftjämvikt i filtret:\n\n$$F_B = F_E \\quad \\Longrightarrow \\quad ' +
-                        'Q v B_1 = Q E \\quad \\Longrightarrow \\quad v = \\dfrac{E}{B_1}$$\n\n' +
+                        'Q v B_1 = Q \\mathbb{E} \\quad \\Longrightarrow \\quad v = \\dfrac{\\mathbb{E}}{B_1}$$\n\n' +
                         'Mätvärden (efter omvandling till SI-enheter):\n\n' +
                         '$$\\left[ \\begin{array}{l} ' +
-                        'E = 25\\ \\mathrm{kV/m} = 25\\,000\\ \\mathrm{V/m} \\\\ ' +
+                        '\\mathbb{E} = 25\\ \\mathrm{kV/m} = 25\\,000\\ \\mathrm{V/m} \\\\ ' +
                         'B_1 = 49\\ \\mathrm{mT} = 0{,}049\\ \\mathrm{T} ' +
                         '\\end{array} \\right]$$\n\n' +
                         '$$v = \\dfrac{25\\,000}{0{,}049}\\ \\mathrm{m/s} ' +
@@ -1194,10 +1194,10 @@ window.NP_PROV['fy2-vt2016'] = {
                 },
                 {
                     rubrik: 'Gå från kraft till spänning',
-                    varfor: 'Kraften kommer från det elektriska fältet: $F = qE$. I ett homogent fält ' +
-                        'mellan två plattor med avståndet $d$ är fältstyrkan $E = U/d$ — det ger ' +
+                    varfor: 'Kraften kommer från det elektriska fältet: $F = q\\mathbb{E}$. I ett homogent fält ' +
+                        'mellan två plattor med avståndet $d$ är fältstyrkan $\\mathbb{E} = U/d$ — det ger ' +
                         'spänningen.',
-                    text: '$$F = q \\cdot E = q \\cdot \\dfrac{U}{d} \\quad \\Longrightarrow \\quad ' +
+                    text: '$$F = q \\cdot \\mathbb{E} = q \\cdot \\dfrac{U}{d} \\quad \\Longrightarrow \\quad ' +
                         'U = \\dfrac{F \\cdot d}{q}$$\n\n' +
                         'Mätvärden (efter omvandling till SI-enheter):\n\n' +
                         '$$\\left[ \\begin{array}{l} ' +

@@ -1935,7 +1935,7 @@
     T.dblArrow([440, yC], [440, yG], BLUE);
     T.lbl('d=1,5 km', 456, (yC + yG) / 2 + 6, BLUE);
     T.pause(140);
-    T.lbl('E=3,1 kV/m', 456, (yC + yG) / 2 + 40, BLUE);
+    T.lbl('𝔼=3,1 kV/m', 456, (yC + yG) / 2 + 40, BLUE);
     T.stepEnd();
 
     y = 420;
@@ -1955,8 +1955,8 @@
       [['två plattor.']]
     ]);
     T.str('b) Fältstyrka mellan plattor', padL, y - 2.0 * F, null, 0.62);
-    xx = T.fracH('U', 'd', T.str('E=', padL, y), y);
-    T.str(' ⟺ U=E·d', xx, y);
+    xx = T.fracH('U', 'd', T.str('𝔼=', padL, y), y);
+    T.str(' ⟺ U=𝔼·d', xx, y);
     T.stepEnd();
 
     y += adv + 2.2 * F;
@@ -1965,7 +1965,7 @@
       [['blir meter.']]
     ], 1.1);
     var klam = valueBracket(acts, [
-      'E=3,1 kV/m=3,1·10^3 V/m',
+      '𝔼=3,1 kV/m=3,1·10^3 V/m',
       'd=1,5 km=1,5·10^3 m'
     ], padL, y, T.s, F);
     T.stepEnd();

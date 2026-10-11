@@ -187,7 +187,12 @@ async function matPenna(page, i, smal) {
   if (!mals.length) { console.log('inget att granska'); process.exit(0); }
   const vyer = [{ w: 1290, h: 730, namn: 'laptop' }];
   if (process.env.MOBIL) vyer.push({ w: 390, h: 844, namn: 'mobil' });
-  const exe = process.env.PW_CHROMIUM || '/opt/pw-browsers/chromium';
+  // PW_CHROMIUM, annars molnmiljöns chromium, annars systemets Chrome på
+  // Windows (så att verifieraren går utan miljövariabel på BOSGAME).
+  const exe = [process.env.PW_CHROMIUM, '/opt/pw-browsers/chromium',
+    'C:/Program Files/Google/Chrome/Application/chrome.exe',
+    'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe']
+    .find(p => p && fs.existsSync(p)) || '';
   const browser = await chromium.launch(fs.existsSync(exe) ? { executablePath: exe } : {});
   let fel = 0, granskade = 0;
   for (const vy of vyer) {

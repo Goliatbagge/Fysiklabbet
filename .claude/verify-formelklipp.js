@@ -132,7 +132,12 @@ function mal(t) {
   if (process.env.BRED) vyer.push({ w: 1290, h: 800, namn: 'laptop' });
   // Webbläsare: PW_CHROMIUM om den är satt, annars den förinstallerade i
   // molnmiljön, annars playwright-cores egen (Windows/lokal utveckling).
-  const exe = process.env.PW_CHROMIUM || '/opt/pw-browsers/chromium';
+  // PW_CHROMIUM, annars molnmiljöns chromium, annars systemets Chrome på
+  // Windows (så att verifieraren går utan miljövariabel på BOSGAME).
+  const exe = [process.env.PW_CHROMIUM, '/opt/pw-browsers/chromium',
+    'C:/Program Files/Google/Chrome/Application/chrome.exe',
+    'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe']
+    .find(p => p && fs.existsSync(p)) || '';
   const browser = await chromium.launch(fs.existsSync(exe) ? { executablePath: exe } : {});
   let fel = 0, granskade = 0;
   for (const vy of vyer) {

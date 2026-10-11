@@ -261,7 +261,7 @@ module.exports = function (FIG) {
             for (const x of [90, 140, 190]) {
                 g.push(arrow(x, f.yTop + 10, x, f.yBot - 10, { c: SOFT, w: 1.2, head: 7 }));
             }
-            g.push(txt(108, f.yBot - 28, 'E', { italic: true, size: 12.5, fill: SOFT }));
+            g.push(txt(108, f.yBot - 28, '𝔼', { size: 13.5, fill: SOFT }));   // fältstyrkan skrivs 𝔼 som i teorin
             // B1: kryss (in i planet) i hörnen, fritt från jon och kraftpilar
             for (const [x, y] of [[75, f.yTop + 18], [225, f.yTop + 18], [75, f.yBot - 18], [225, f.yBot - 18]]) {
                 g.push(line(x - 4, y - 4, x + 4, y + 4, { c: INK, w: 1.4 }));
@@ -303,7 +303,7 @@ module.exports = function (FIG) {
             g.push(ionAt(ion.x, ion.y, BLUE));
             g.push(txt(ion.x - 8, ion.y - 10, 'Ar<tspan font-size="9" dy="-4">+</tspan>', { size: 11, fill: BLUE, anchor: 'end' }));
             g.push(arrow(ion.x, ion.y, ion.x, ion.y + 38, { c: RED, anim: BAS }));
-            g.push(txt(ion.x + 9, ion.y + 40, `${sub('F', 'E')} = <tspan font-style="italic">Q</tspan><tspan font-style="italic">E</tspan>`, { size: 11.5, fill: RED, anchor: 'start', anim: aFade(BAS + 0.4) }));
+            g.push(txt(ion.x + 9, ion.y + 40, `${sub('F', 'E')} = <tspan font-style="italic">Q</tspan>𝔼`, { size: 11.5, fill: RED, anchor: 'start', anim: aFade(BAS + 0.4) }));
             FIG['u17-s1'] = svg(W, Hh, g.join(''));
         })();
 

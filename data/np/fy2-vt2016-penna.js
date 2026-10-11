@@ -1680,7 +1680,7 @@
       T.arrow([fx0 + 50 + i * 70, fy - 54], [fx0 + 50 + i * 70, fy + 54]);
       T.pause(60);
     }
-    T.lbl('E', fx0 + 34, fy + 40);
+    T.lbl('𝔼', fx0 + 34, fy + 40);
     T.pause(140);
     T.symIn(fx0 + 90, fy - 30, 12);
     T.symIn(fx0 + 160, fy + 30, 12);
@@ -1707,8 +1707,8 @@
       [['stora och motriktade.']]
     ]));
     T.str('Kraftjämvikt i filtret', padL, y - 1.5 * F, null, 0.62);
-    xx = T.str('Q·v·B_1=Q·E ⟺ v=', padL, y);
-    T.fracH('E', 'B_1', xx, y);
+    xx = T.str('Q·v·B_1=Q·𝔼 ⟺ v=', padL, y);
+    T.fracH('𝔼', 'B_1', xx, y);
     T.stepEnd();
 
     y += adv + 2.4 * F;
@@ -1719,7 +1719,7 @@
       [['farten beror inte på massan.']]
     ]));
     var klam = valueBracket(acts, [
-      'E=25 kV/m=25 000 V/m',
+      '𝔼=25 kV/m=25 000 V/m',
       'B_1=49 mT=0,049 T'
     ], padL, y, T.s, F);
     T.stepEnd();

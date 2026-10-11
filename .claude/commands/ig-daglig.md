@@ -74,10 +74,10 @@ dagar gammal.
 
 1. Ladda Chrome-verktygen (ToolSearch, se fb-daglig.md).
 2. Jobbet körs på BOSGAME: välj ALLTID Chrome på BOSGAME, deviceId
-   `c9c6284f-cddf-4f77-bfb5-d82ea9ee269c`, med `select_browser`
+   `158b4037-ff82-4800-8498-0f69b8ba16df`, med `select_browser`
    (identifiera på id, aldrig på namnet "Browser 1/2" — numreringen
-   kastas om mellan körningar). **Använd ALDRIG `158b4037…`** (Chrome på
-   HP_KONTOR, användarens andra dator; beslut 2026-10-11). Instagram i
+   kastas om mellan körningar). **Använd ALDRIG `c9c6284f…`** (Chrome på
+   HP_KONTOR, användarens andra dator; beslut 2026-10-11). Kontrollera ALLTID först att det är rätt dator: öppna `http://localhost:8000/om.html` i en flik i den valda webbläsaren; laddar den inte ("localhost avvisade anslutningen") är webbläsaren på HP_KONTOR och då AVBRYTER du och loggar orsaken. Instagram i
    BOSGAME-Chrome har flera sparade konton (fysiklabbet, samsmattefysik,
    goliatbagge): byt till fysiklabbet via "Byt konto" om ett annat är
    aktivt. Kräver bytet ett lösenord → AVBRYT och logga, fyll aldrig i. Gå till

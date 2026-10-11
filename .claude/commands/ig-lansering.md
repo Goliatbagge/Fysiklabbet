@@ -97,9 +97,9 @@ node .claude/some/spela-in-reel.js --url http://localhost:8000/<sim>.html \
 Chrome-verktygen via ToolSearch (tabs_context_mcp, tabs_close_mcp, navigate, computer,
 find, read_page, file_upload, javascript_tool, select_browser). Två
 webbläsare kan vara anslutna — välj ALLTID Chrome på BOSGAME, deviceId
-`c9c6284f-cddf-4f77-bfb5-d82ea9ee269c`, med `select_browser`
+`158b4037-ff82-4800-8498-0f69b8ba16df`, med `select_browser`
 (identifiera på id, aldrig på namnet "Browser 1/2" — numreringen kastas
-om mellan körningar). **Använd ALDRIG `158b4037…`** (Chrome på
+om mellan körningar). **Använd ALDRIG `c9c6284f…`** (Chrome på
 HP_KONTOR, användarens andra dator; beslut 2026-10-11). Flera konton är
 sparade i BOSGAME-Chrome: byt till fysiklabbet via "Byt konto" om ett
 annat är aktivt, och skriv aldrig in något lösenord. Kontrollera att du agerar som

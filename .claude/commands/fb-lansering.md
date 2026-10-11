@@ -56,8 +56,8 @@ avsluta.
 ## 3. Publicera
 
 Exakt samma procedur som `fb-daglig.md` steg 3: Chrome-verktygen via
-ToolSearch (välj ALLTID Chrome på BOSGAME, deviceId `c9c6284f…`, aldrig
-`158b4037…` som är HP_KONTOR; "Byt nu" till sidläget om Facebook står i
+ToolSearch (välj ALLTID Chrome på BOSGAME, deviceId `158b4037…`, aldrig
+`c9c6284f…` som är HP_KONTOR; "Byt nu" till sidläget om Facebook står i
 personligt läge; visar Facebook ett inloggningsformulär: AVBRYT och fyll
 aldrig i det), kontrollera att du agerar som sidan
 Fysiklabbet ("Hantera sida") — annars AVBRYT utan att posta och logga

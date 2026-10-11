@@ -94,11 +94,11 @@ bort hela raden om även `ig:` redan är postad. Rör aldrig `ig:`-fältet.
    tabs_context_mcp, tabs_close_mcp, navigate, computer, find, read_page, file_upload,
    javascript_tool, select_browser, list_connected_browsers). Jobbet körs
    på BOSGAME och ska ALLTID använda Chrome på BOSGAME: deviceId
-   `c9c6284f-cddf-4f77-bfb5-d82ea9ee269c` med `select_browser` (identifiera på id,
+   `158b4037-ff82-4800-8498-0f69b8ba16df` med `select_browser` (identifiera på id,
    aldrig på namnet "Browser 1/2", numreringen kastas om mellan
-   körningar). **Använd ALDRIG `158b4037…`**: det är Chrome på HP_KONTOR,
-   användarens andra dator, och jobben styrde den av misstag fram till
-   2026-10-11 (beslut samma dag). Står Facebook i personligt läge med
+   körningar). **Använd ALDRIG `c9c6284f…`**: det är Chrome på HP_KONTOR,
+   användarens andra dator (fastställt 2026-10-11 med localhost-testet
+   nedan). Kontrollera ALLTID först att det är rätt dator: öppna `http://localhost:8000/om.html` i en flik i den valda webbläsaren; laddar den inte ("localhost avvisade anslutningen") är webbläsaren på HP_KONTOR och då AVBRYTER du och loggar orsaken. Står Facebook i personligt läge med
    rutan "Växla till Fysiklabbets sida … Byt nu": klicka "Byt nu" (det är
    ett byte av profil, ingen inloggning). Visar Facebook ett
    inloggningsformulär: fyll ALDRIG i det, inte ens med förifyllda

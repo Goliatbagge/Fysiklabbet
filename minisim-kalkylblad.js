@@ -271,6 +271,24 @@
             return cell.raw;
         }
 
+        // som farga(), men med textmarkören på plats pos (null = sist)
+        function fargaMedMarkor(text, pos, markor) {
+            if (pos === null || pos === undefined || pos >= text.length) return farga(text) + markor;
+            var spann = [], n = 0, m, re = /\$?[A-Z]\$?\d+/g;
+            if (text.charAt(0) === '=') {
+                while ((m = re.exec(text))) spann.push({ a: m.index, b: m.index + m[0].length, f: REFF[n++ % REFF.length] });
+            }
+            var html = '';
+            for (var i = 0; i <= text.length; i++) {
+                if (i === pos) html += markor;
+                if (i === text.length) break;
+                var sp = null;
+                for (var k = 0; k < spann.length; k++) if (i >= spann[k].a && i < spann[k].b) sp = spann[k];
+                var t = esc(text.charAt(i));
+                html += sp ? '<span style="color:' + sp.f + '">' + t + '</span>' : t;
+            }
+            return html;
+        }
         function farga(text) {
             // färgar cellreferenserna i en formel som Kalkylark gör
             if (text.charAt(0) !== '=') return esc(text);
@@ -322,8 +340,8 @@
                 showOv(ovEdit, er);
                 ovEdit.style.width = 'auto';
                 ovEdit.style.minWidth = er.w + 'px';
-                ovEdit.innerHTML = farga(S.edit) + (S.fbarEdit ? '' : caret);
-                ftext.innerHTML = farga(S.edit) + (S.fbarEdit ? caret : '');
+                ovEdit.innerHTML = S.fbarEdit ? farga(S.edit) : fargaMedMarkor(S.edit, S.caret, caret);
+                ftext.innerHTML = S.fbarEdit ? fargaMedMarkor(S.edit, S.caret, caret) : farga(S.edit);
             } else {
                 hideOv(ovEdit);
                 ftext.innerHTML = farga(text);
@@ -445,12 +463,29 @@
             render();
             for (var i = 0; i < text.length; i++) {
                 alive();
-                S.edit += text.charAt(i);
+                if (S.caret === null || S.caret === undefined) S.edit += text.charAt(i);
+                else {
+                    S.edit = S.edit.slice(0, S.caret) + text.charAt(i) + S.edit.slice(S.caret);
+                    S.caret++;
+                }
                 S.refs = refsI(S.edit);
                 if (!run.instant) render();
                 await sleep(text.charAt(i) === ' ' ? 60 : (tempo || 105));
             }
             render();
+        }
+        /* Piltangenterna flyttar textmarkören ett tecken i taget, så att
+         * eleven ser exakt var dollartecknet hamnar. */
+        async function pil(steg) {
+            if (S.caret === null || S.caret === undefined) S.caret = S.edit.length;
+            var n = Math.abs(steg), dir = steg < 0 ? -1 : 1;
+            for (var i = 0; i < n; i++) {
+                alive();
+                S.caret = Math.max(0, Math.min(S.edit.length, S.caret + dir));
+                render();
+                await tangent(dir < 0 ? '←' : '→');
+                await sleep(250);
+            }
         }
         async function radera(n) {
             for (var i = 0; i < n; i++) {
@@ -465,7 +500,7 @@
             await tangent(tangentNamn);
             var fmt = S.cells[S.act] && S.cells[S.act].fmt;
             S.cells[S.act] = { raw: tolka(S.edit), fmt: fmt };
-            S.edit = null; S.fbarEdit = false; S.refs = [];
+            S.edit = null; S.fbarEdit = false; S.refs = []; S.caret = null;
             var p = parseRef(S.act);
             S.act = refOf(p.c + dc, p.r + dr);
             render();
@@ -641,8 +676,18 @@
             { namn: 'Lås B12 med dollartecken och dra i fyllnadshandtaget',
               kor: async function () {
                   await klickaFbar();
-                  await radera(3);
-                  await skriv('$B$12', true);
+                  // pekaren flyttas undan så att formelfältet syns
+                  var undan = cellPunkt('D2');
+                  await flytta(undan.x, undan.y, 600);
+                  // markören stegar till före B och sedan efter B
+                  await pil(-3);
+                  await sleep(500);
+                  await skriv('$', true, 300);
+                  await sleep(700);
+                  await pil(1);
+                  await sleep(500);
+                  await skriv('$', true, 300);
+                  await sleep(600);
                   await sleep(800);
                   await enter();
                   await klickaCell('B3');

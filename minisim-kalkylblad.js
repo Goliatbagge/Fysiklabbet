@@ -223,6 +223,15 @@
         var ovHandle = el('div', 'kb-ov kb-handle', grid);
         var ovFill = el('div', 'kb-ov kb-fillprev', grid);
         var ovEdit = el('div', 'kb-ov kb-edit', grid);
+        // ringar som pekaren ritar runt en cell för att peka ut den
+        var SVGNS = 'http://www.w3.org/2000/svg';
+        var markLager = document.createElementNS(SVGNS, 'svg');
+        markLager.setAttribute('class', 'kb-ov kb-mark');
+        markLager.setAttribute('width', SHEET_W);
+        markLager.setAttribute('height', SHEET_H);
+        markLager.style.cssText = 'display:block;left:0;top:0;z-index:6;overflow:visible;';
+        grid.appendChild(markLager);
+        function rensaMarkeringar() { markLager.innerHTML = ''; }
         var refBoxes = [];
         for (var i = 0; i < 3; i++) refBoxes.push(el('div', 'kb-ov kb-ref', grid));
 
@@ -430,7 +439,7 @@
             if (text.charAt(0) !== '=') return [];
             return (text.match(/\$?[A-Z]\$?\d+/g) || []).map(function (m) { return m.replace(/\$/g, ''); });
         }
-        async function skriv(text, iFbar) {
+        async function skriv(text, iFbar, tempo) {
             if (S.edit === null) S.edit = '';
             S.fbarEdit = !!iFbar;
             render();
@@ -439,7 +448,7 @@
                 S.edit += text.charAt(i);
                 S.refs = refsI(S.edit);
                 if (!run.instant) render();
-                await sleep(text.charAt(i) === ' ' ? 60 : 105);
+                await sleep(text.charAt(i) === ' ' ? 60 : (tempo || 105));
             }
             render();
         }
@@ -534,6 +543,57 @@
             render();
             await sleep(700);
         }
+        /* Pekaren ringar in en cell och lämnar en ring efter sig, i samma
+         * färg som cellens referens får i formeln som skrivs efteråt. Det
+         * är lärarens "titta här" innan formeln byggs av de två värdena. */
+        async function ringaIn(ref, farg, varv) {
+            if (run.instant) return;
+            var r = cellRect(ref), o = sheetOrigin();
+            var cx = r.x + r.w / 2, cy = r.y + r.h / 2;
+            var rx = r.w / 2 + 2, ry = r.h / 2 + 6;   // tätt, så att ringen inte går in i grannens text
+            var el_ = document.createElementNS(SVGNS, 'ellipse');
+            el_.setAttribute('cx', cx); el_.setAttribute('cy', cy);
+            el_.setAttribute('rx', rx); el_.setAttribute('ry', ry);
+            el_.setAttribute('fill', 'none');
+            el_.setAttribute('stroke', farg);
+            el_.setAttribute('stroke-width', '2.5');
+            el_.setAttribute('pathLength', '1');
+            el_.setAttribute('stroke-dasharray', '1');
+            el_.setAttribute('stroke-dashoffset', '1');
+            el_.style.transform = 'rotate(180deg)';      // ringen börjar i vänsterkanten
+            el_.style.transformOrigin = cx + 'px ' + cy + 'px';
+            el_.style.transition = 'opacity .5s';
+            markLager.appendChild(el_);
+            var punkt = function (v) {
+                return { x: o.x + cx - rx * Math.cos(v), y: o.y + cy - ry * Math.sin(v) };
+            };
+            var p0 = punkt(0);
+            await flytta(p0.x, p0.y, 650);
+            await sleep(200);
+            var tid = 1500 * varv, R = run;
+            await new Promise(function (res, rej) {
+                var gjort = 0, last = performance.now();
+                function tick(now) {
+                    if (R.dead) return rej(new AVBRUTEN());
+                    if (!paused) gjort += now - last;
+                    last = now;
+                    var t = Math.min(1, gjort / tid);
+                    var e = t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+                    var v = e * varv * 2 * Math.PI;
+                    var q = punkt(v);
+                    setPek(q.x, q.y);
+                    el_.setAttribute('stroke-dashoffset', String(Math.max(0, 1 - v / (2 * Math.PI))));
+                    if (t < 1) requestAnimationFrame(tick); else res();
+                }
+                requestAnimationFrame(tick);
+            });
+        }
+        function tonaUtMarkeringar() {
+            var e = markLager.querySelectorAll('ellipse');
+            for (var i = 0; i < e.length; i++) e[i].style.opacity = '0';
+            setTimeout(rensaMarkeringar, 600);
+        }
+
         async function klickaFbar() {
             var p = fbarSlut();
             await flytta(p.x, p.y, 600);
@@ -560,13 +620,23 @@
               } },
             { namn: 'Formeln för behållningen efter 1 år',
               kor: async function () {
-                  await klickaCell('B3');
-                  await skriv('=B2*B12');
+                  // först de två värdena som ska multipliceras ...
+                  await ringaIn('B2', REFF[0], 1.15);
                   await sleep(900);
-                  await enter();
-                  await sleep(500);
+                  await ringaIn('B12', REFF[1], 1.15);
+                  await sleep(1100);
+                  // ... sedan formeln, lugnt, och den får stå kvar en stund
                   await klickaCell('B3');
-                  await sleep(800);
+                  await skriv('=B2*B12', false, 230);
+                  // pekaren flyttas undan så att formeln syns helt
+                  var vila = cellPunkt('C6');
+                  await flytta(vila.x, vila.y, 700);
+                  await sleep(3000);
+                  await enter();
+                  tonaUtMarkeringar();
+                  await sleep(1400);
+                  await klickaCell('B3');
+                  await sleep(1500);
               } },
             { namn: 'Lås B12 med dollartecken och dra i fyllnadshandtaget',
               kor: async function () {
@@ -630,6 +700,7 @@
         async function laget(k) {
             dodaKorning();
             S = nyttBlad();
+            rensaMarkeringar();
             var R = run = { dead: false, instant: true };
             try {
                 for (var i = 0; i < k; i++) await STEG[i].kor();

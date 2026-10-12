@@ -13,7 +13,7 @@ När du sätter in pengar på ett konto lånar du ut dina pengar till banken
 (som i sin tur lånar ut dina pengar till andra och tjänar på
 mellanskillnaden). Som betalning för lånet kan
 banken betala dig en viss avgift som kallas **ränta**. Räntan anges ofta i
-procent av det som du har på kontot. **Årsräntan** anger med hur många procent beloppet på kontot
+procent av det som du har på kontot. **Årsräntan** anger alltså med hur många procent beloppet på kontot
 växer varje år. Står det bara "ränta" i en uppgift är det underförstått
 *årsräntan*. Beloppet som finns på kontot kallas **behållning**.
 

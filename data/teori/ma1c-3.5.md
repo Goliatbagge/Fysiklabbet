@@ -15,12 +15,6 @@ Att betala tillbaka ett lån kallas **amortera**. Det vi får betala extra
 kan man säga är priset för lånet och kallas **ränta**. Ränta anges ofta
 som en viss procent av skulden och kallas då för **räntesats**.
 
-(När vi sätter in pengar på ett sparkonto får vi själva tillbaka ränta på
-de pengar vi sätter in. Det vi gör, fast vi kanske inte tänker på det, är
-att vi lånar ut våra pengar till banken och då får banken betala *oss*
-ränta. Det banken gör med våra pengar är att de lånar ut dem till andra
-till en högre ränta och tjänar pengar på mellanskillnaden.)
-
 Kom ihåg: Om det i uppgifter bara står "ränta" är det underförstått att
 de menar årsränta. Ibland förekommer kvartalsränta där ett kvartal är ett
 "kvarts år", det vill säga 3 månader.

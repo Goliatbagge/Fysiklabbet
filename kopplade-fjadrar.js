@@ -459,8 +459,9 @@
         var hangBtn = btn('Häng i vikterna', true);
         var svangBtn = btn('Sätt i svängning', false);
         var pausBtn = btn('Pausa', false);
-        var resetBtn = btn('Börja om', false);
-        [hangBtn, svangBtn, pausBtn, resetBtn].forEach(function (b) { controls.appendChild(b); });
+        // "Häng i vikterna" blir "Ta bort vikterna" när vikterna hänger i,
+        // och tar då tillbaka scenen till bara fjädrarna.
+        [hangBtn, svangBtn, pausBtn].forEach(function (b) { controls.appendChild(b); });
         card.appendChild(controls);
 
         var row2 = document.createElement('div');
@@ -479,13 +480,12 @@
         node.appendChild(card);
 
         function sync(s) {
-            hangBtn.disabled = s.state !== 'tom';
+            hangBtn.textContent = s.state === 'tom' ? 'Häng i vikterna' : 'Ta bort vikterna';
             svangBtn.disabled = s.state === 'tom' || s.state === 'hanger';
             svangBtn.className = 'minisim-btn' + (s.state === 'hangt' ? ' ms-primar' : '');
             hangBtn.className = 'minisim-btn' + (s.state === 'tom' ? ' ms-primar' : '');
             pausBtn.disabled = s.state !== 'svang';
             pausBtn.textContent = s.paused ? 'Fortsätt' : 'Pausa';
-            resetBtn.disabled = s.state === 'tom';
             info.textContent = s.state === 'svang'
                 ? 'Tid: ' + fmt(s.t, 1) + ' s'
                 : (s.state === 'tom' ? 'Alla fjädrar har k = ' + fmt(s.k, 0) + ' N/m.'
@@ -500,10 +500,11 @@
                 if (now - lastInfo > 90) { lastInfo = now; sync(s); }
             }
         });
-        hangBtn.addEventListener('click', function () { mot.hang(); });
+        hangBtn.addEventListener('click', function () {
+            if (mot.get().state === 'tom') mot.hang(); else mot.reset();
+        });
         svangBtn.addEventListener('click', function () { mot.svang(); });
         pausBtn.addEventListener('click', function () { mot.paus(); });
-        resetBtn.addEventListener('click', function () { mot.reset(); });
         slowCb.addEventListener('change', function () { mot.slow(slowCb.checked); });
 
         function isFs() {

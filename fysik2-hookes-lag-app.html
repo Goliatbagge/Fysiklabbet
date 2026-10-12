@@ -236,7 +236,7 @@
     </div>
 
     <div id="root"></div>
-    <script src="kopplade-fjadrar.js?v=1"></script>
+    <script src="kopplade-fjadrar.js?v=2"></script>
 
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
@@ -1081,14 +1081,13 @@
             const knappar = (cls) => (
                 <React.Fragment>
                     <button className={`btn-toggle ${cls} ${s.state === 'tom' ? 'active' : ''}`}
-                            disabled={s.state !== 'tom'} onClick={() => mot().hang()}>Häng i vikterna</button>
+                            onClick={() => (s.state === 'tom' ? mot().hang() : mot().reset())}>
+                        {s.state === 'tom' ? 'Häng i vikterna' : 'Ta bort vikterna'}</button>
                     <button className={`btn-toggle ${cls} ${s.state === 'hangt' ? 'active' : ''}`}
                             disabled={s.state === 'tom' || s.state === 'hanger'}
                             onClick={() => mot().svang()}>Sätt i svängning</button>
                     <button className={`btn-toggle ${cls}`} disabled={s.state !== 'svang'}
                             onClick={() => mot().paus()}>{s.paused ? 'Fortsätt' : 'Pausa'}</button>
-                    <button className={`btn-toggle ${cls}`} disabled={s.state === 'tom'}
-                            onClick={() => mot().reset()}>Börja om</button>
                 </React.Fragment>
             );
 

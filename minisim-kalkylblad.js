@@ -107,7 +107,10 @@
         '  white-space:pre;box-shadow:0 2px 6px rgba(60,64,67,.3);}',
         '.kb-caret{display:inline-block;width:1px;height:15px;background:#202124;margin-left:1px;vertical-align:middle;animation:kbblink 1s steps(1) infinite;}',
         '@keyframes kbblink{50%{opacity:0}}',
-        '.kb-cursor{position:absolute;left:0;top:0;z-index:20;pointer-events:none;transition:none;}',
+        // svg:n som block: inline hamnade den på textens baslinje, och i
+        // presentationsläget (större text) stod pekaren några px under cellen
+        '.kb-cursor{position:absolute;left:0;top:0;z-index:20;pointer-events:none;transition:none;line-height:0;}',
+        '.kb-cursor svg{display:block;}',
         '.kb-ripple{position:absolute;z-index:19;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;',
         '  background:rgba(26,115,232,.35);pointer-events:none;animation:kbrip .45s ease-out forwards;}',
         '@keyframes kbrip{from{transform:scale(.2);opacity:1}to{transform:scale(1.4);opacity:0}}',

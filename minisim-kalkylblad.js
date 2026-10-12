@@ -100,6 +100,8 @@
         '.kb-c{position:absolute;box-sizing:border-box;border-right:1px solid #e2e3e3;border-bottom:1px solid #e2e3e3;',
         '  padding:0 4px;display:flex;align-items:center;white-space:pre;overflow:hidden;}',
         '.kb-c.num{justify-content:flex-end;}',
+        '.kb-c.kb-blink{animation:kbblinkbg 2.6s ease-out;}',
+        '@keyframes kbblinkbg{0%,35%{background:#fde293}100%{background:transparent}}',
         '.kb-smal .kb-sheet,.kb-smal .kb-fbar{font-size:12px;}',
         '.kb-smal .kb-c{padding:0 3px;}',
         '.kb-smal .kb-ctrl{padding:0 10px;}',
@@ -168,7 +170,7 @@
 
     function mount(node, cfg) {
         cfg = cfg || {};
-        var scen = cfg.scen === 'arligt' ? 'arligt' : 'sparkonto';
+        var scen = ({ arligt: 1, 'sparkonto-b': 1, 'sparkonto-c': 1 })[cfg.scen] ? cfg.scen : 'sparkonto';
         injectCss();
         var smal = (node.clientWidth || 600) < 400;
         satKolumner(smal ? COLW_SMAL : COLW_BRED);
@@ -265,6 +267,10 @@
             if (!cell) return { t: '', num: false };
             var v = value(ref);
             if (typeof v === 'number') {
+                // ett formelresultat visas med högst två decimaler (kronor och
+                // ören, som tabellen i lösningen); ett inskrivet tal som det skrevs
+                var formel = typeof cell.raw === 'string' && cell.raw.charAt(0) === '=';
+                if (formel && !Number.isInteger(v)) v = Math.round(v * 100) / 100;
                 return { t: cell.fmt === 'kr' ? krFmt(v) : autoFmt(v), num: true };
             }
             return { t: String(v), num: false };
@@ -504,7 +510,19 @@
         async function bekrafta(tangentNamn, dc, dr) {
             await tangent(tangentNamn);
             var fmt = S.cells[S.act] && S.cells[S.act].fmt;
+            var fore = {};
+            for (var ref in cellEl) fore[ref] = visas(ref).t;
+            var redigerad = S.act;
             S.cells[S.act] = { raw: tolka(S.edit), fmt: fmt };
+            // celler vars värde ändrades av sig självt lyser upp en stund
+            if (!run.instant) {
+                for (ref in cellEl) {
+                    if (ref !== redigerad && fore[ref] && visas(ref).t !== fore[ref]) {
+                        var ce = cellEl[ref];
+                        ce.classList.remove('kb-blink'); void ce.offsetWidth; ce.classList.add('kb-blink');
+                    }
+                }
+            }
             S.edit = null; S.fbarEdit = false; S.refs = []; S.caret = null;
             var p = parseRef(S.act);
             S.act = refOf(p.c + dc, p.r + dr);
@@ -701,8 +719,6 @@
                   await sleep(600);
                   await klickaCell('B6');      // visa att formeln flyttats med
                   await sleep(1800);
-                  await draMarkera('B2', 'B10');
-                  await klickaKr();
               } }
         ];
 
@@ -742,16 +758,58 @@
                   await sleep(600);
                   await klickaCell('B6');      // samma formel, ett radsteg längre ned
                   await sleep(2200);
-                  await draMarkera('B2', 'B11');
-                  await klickaKr();
-                  await sleep(400);
                   await ringaIn('B11', REFF[2], 1.15);   // svaret
                   var undan = cellPunkt('D8');
                   await flytta(undan.x, undan.y, 600);
                   await sleep(800);
               } }
         ];
-        var STEG = scen === 'arligt' ? ARLIGT : SPARKONTO;
+
+        /* ---------- b) och c) i Exempel 1: börjar i det färdiga bladet ---------- */
+        async function andra(ref, text) {
+            await ringaIn(ref, REFF[0], 1.15);
+            await sleep(700);
+            await klickaCell(ref);
+            await skriv(text, false, 260);
+            var undan = cellPunkt('D6');
+            await flytta(undan.x, undan.y, 700);
+            await sleep(600);
+        }
+        async function enterOchSvar() {
+            await enter();
+            tonaUtMarkeringar();
+            await sleep(2600);
+            await ringaIn('B10', REFF[2], 1.15);   // behållningen efter 8 år
+            var undan = cellPunkt('D6');
+            await flytta(undan.x, undan.y, 600);
+            await sleep(600);
+        }
+        var SPARKONTO_B = [
+            { namn: 'Skriv den nya insättningen 40000 i B2',
+              kor: function () { return andra('B2', '40000'); } },
+            { namn: 'Tryck Enter: alla värden räknas om',
+              kor: enterOchSvar }
+        ];
+        var SPARKONTO_C = [
+            { namn: 'Skriv den nya förändringsfaktorn 1,045 i B12',
+              kor: function () { return andra('B12', '1,045'); } },
+            { namn: 'Tryck Enter: alla värden räknas om',
+              kor: enterOchSvar }
+        ];
+        // bladet som b) och c) börjar i: a) färdigt, och för c) även b)
+        async function fore(scener) {
+            for (var i = 0; i < scener.length; i++)
+                for (var k = 0; k < scener[i].length; k++) await scener[i][k].kor();
+            S.act = 'B6'; S.range = null;
+        }
+        var SCENER = {
+            sparkonto: { steg: SPARKONTO },
+            'sparkonto-b': { steg: SPARKONTO_B, fore: function () { return fore([SPARKONTO]); } },
+            'sparkonto-c': { steg: SPARKONTO_C, fore: function () { return fore([SPARKONTO, SPARKONTO_B]); } },
+            arligt: { steg: ARLIGT }
+        };
+        var SCEN = SCENER[scen];
+        var STEG = SCEN.steg;
 
         /* ---------- kontroller under bladet ---------- */
         var ctrl = el('div', 'kb-ctrl', wrap);
@@ -800,13 +858,14 @@
             rensaMarkeringar();
             var R = run = { dead: false, instant: true };
             try {
+                if (SCEN.fore) await SCEN.fore();
                 for (var i = 0; i < k; i++) await STEG[i].kor();
             } catch (e) {
                 if (e instanceof AVBRUTEN) return false;
                 throw e;
             }
             if (R.dead) return false;
-            S.act = k === 0 ? 'A1' : S.act;
+            if (k === 0 && !SCEN.fore) S.act = 'A1';
             render();
             return true;
         }

@@ -123,29 +123,37 @@ formeln i B3 till `=B2*$B$12`. Utan dollartecknen skulle B12 också flytta
 ner en rad för varje år, till tomma celler. Sedan markerar vi cell B3,
 tar tag i fyllnadshandtaget och drar ner till och med cell B10. I B6 står
 nu till exempel `=B5*$B$12`: B5 har flyttat med, men `$B$12` står kvar.
-Till sist markerar vi B2 till B10 och klickar på kr i verktygsfältet, så
-att beloppen visas i kronor med två decimaler.
 
 | År | Behållning (kr) |
 | --- | --- |
-| 0 | 30 000,00 kr |
-| 1 | 31 050,00 kr |
-| 2 | 32 136,75 kr |
-| 3 | 33 261,54 kr |
-| 4 | 34 425,69 kr |
-| 5 | 35 630,59 kr |
-| 6 | 36 877,66 kr |
-| 7 | 38 168,38 kr |
-| 8 | 39 504,27 kr |
+| 0 | 30 000,00 |
+| 1 | 31 050,00 |
+| 2 | 32 136,75 |
+| 3 | 33 261,54 |
+| 4 | 34 425,69 |
+| 5 | 35 630,59 |
+| 6 | 36 877,66 |
+| 7 | 38 168,38 |
+| 8 | 39 504,27 |
 
 **b)** Om insättningen istället är 40 000 kr går vi nu bara till cell B2
 och ändrar beloppet där till 40 000 kr. De resterande värdena ändras
 automatiskt (automagiskt!). Efter 8 år är behållningen 52 672,36 kr.
 
+::: minisim
+typ: kalkylblad
+scen: sparkonto-b
+:::
+
 **c)** Om räntan istället är 4,5 % går vi nu bara till cell B12 och
 ändrar förändringsfaktorn till 1,045. De resterande värdena ändras
 återigen automatiskt. Med 40 000 kr insatta blir behållningen efter 8 år
 56 884,02 kr.
+
+::: minisim
+typ: kalkylblad
+scen: sparkonto-c
+:::
 :::
 :::
 
@@ -180,21 +188,20 @@ beloppet växer med 2,8 % och 5 000 kr läggs till. Vi markerar B3, tar tag
 i fyllnadshandtaget och drar ner till och med B11, som är insättning 10.
 I B6 står nu till exempel `=B5*1,028+5000`. Här behövs inga
 dollartecken, eftersom formeln inte hämtar något från en annan fast
-cell. Till sist markerar vi B2 till B11 och klickar på kr i
-verktygsfältet.
+cell.
 
 | Insättning | Behållning (kr) |
 | --- | --- |
-| 1 | 5 000,00 kr |
-| 2 | 10 140,00 kr |
-| 3 | 15 423,92 kr |
-| 4 | 20 855,79 kr |
-| 5 | 26 439,75 kr |
-| 6 | 32 180,06 kr |
-| 7 | 38 081,11 kr |
-| 8 | 44 147,38 kr |
-| 9 | 50 383,50 kr |
-| 10 | 56 794,24 kr |
+| 1 | 5 000,00 |
+| 2 | 10 140,00 |
+| 3 | 15 423,92 |
+| 4 | 20 855,79 |
+| 5 | 26 439,75 |
+| 6 | 32 180,06 |
+| 7 | 38 081,11 |
+| 8 | 44 147,38 |
+| 9 | 50 383,50 |
+| 10 | 56 794,24 |
 
 **Svar:** 56 794,24 kr
 :::

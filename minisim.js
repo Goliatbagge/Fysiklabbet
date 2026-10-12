@@ -9979,18 +9979,33 @@
         var ritaBtn = mkBtn('Rita av lodet', 'ms-primar');
         var bytBtn = mkBtn('Byt upphängningspunkt');
         var omBtn = mkBtn('Börja om');
-        var tpLbl = document.createElement('label');
-        tpLbl.className = 'minisim-check';
-        var tpCb = document.createElement('input');
-        tpCb.type = 'checkbox';
-        tpCb.checked = true;
-        tpLbl.appendChild(tpCb);
-        tpLbl.appendChild(document.createTextNode('Visa tyngdpunkten'));
-        controls.appendChild(tpLbl);
+        card.appendChild(controls);
+
+        // Visningsval på egen rad: varje del av figuren kan tändas och
+        // släckas för sig (alla tända från början).
+        var checks = document.createElement('div');
+        checks.className = 'minisim-controls';
+        function mkCheck(txt) {
+            var l = document.createElement('label');
+            l.className = 'minisim-check';
+            var cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.checked = true;
+            l.appendChild(cb);
+            l.appendChild(document.createTextNode(txt));
+            checks.appendChild(l);
+            return cb;
+        }
+        var tpCb = mkCheck('Visa tyngdpunkten');
+        var llCb = mkCheck('Visa lodlinjen');
+        var fgCb = mkCheck('Visa tyngdkraften');
+        var lodCb = mkCheck('Visa lod');
+        var etCb = mkCheck('Visa etiketter');
+        var ALLA_CB = [tpCb, llCb, fgCb, lodCb, etCb];
         var info = document.createElement('span');
         info.className = 'minisim-info ms-brod';
-        controls.appendChild(info);
-        card.appendChild(controls);
+        checks.appendChild(info);
+        card.appendChild(checks);
 
         var sliderRow = document.createElement('div');
         sliderRow.className = 'minisim-slider-row';
@@ -10158,6 +10173,7 @@
             ctx.closePath();
             ctx.fill();
             ctx.stroke();
+            if (!etCb.checked) return;
             ctx.fillStyle = INK;
             ctx.font = '15px ' + FONT;
             ctx.textAlign = 'left';
@@ -10171,15 +10187,21 @@
             ctx.arc(NX, NY, 3.6, 0, 2 * Math.PI);
             ctx.fill();
             ctx.stroke();
+            if (!etCb.checked) return;
             ctx.fillStyle = INK;
             ctx.font = '15px ' + FONT;
             ctx.textAlign = 'left';
             ctx.fillText('Upphängningspunkt', NX + 16, NY - 38);
         }
-        function drawCog() {
-            if (!tpCb.checked) return;
+        // Etiketterna läggs på den sida som vänder bort från lodets snöre
+        function cogSide() {
             var c = cog();
-            // lodlinjen: streckad lodrät linje genom tyngdpunkten, hela höjden
+            return (c.x - NX >= 4) ? 1 : -1;
+        }
+        function drawLodlinje() {
+            if (!llCb.checked) return;
+            var c = cog(), side = cogSide();
+            // streckad lodrät linje genom tyngdpunkten, hela höjden
             ctx.strokeStyle = COL_TP;
             ctx.lineWidth = 2;
             ctx.setLineDash([7, 5]);
@@ -10188,7 +10210,15 @@
             ctx.lineTo(c.x, H);
             ctx.stroke();
             ctx.setLineDash([]);
-            // tyngdkraften längs lodlinjen
+            if (!etCb.checked) return;
+            ctx.fillStyle = COL_TP;
+            ctx.font = '600 15px ' + FONT;
+            ctx.textAlign = side > 0 ? 'left' : 'right';
+            ctx.fillText('Lodlinje', c.x + side * 8, H - 14);
+        }
+        function drawFG() {
+            if (!fgCb.checked) return;
+            var c = cog(), side = cogSide();
             var len = 70, head = 11, endY = c.y + len;
             ctx.strokeStyle = COL_FG;
             ctx.lineWidth = 3.2;
@@ -10204,27 +10234,26 @@
             ctx.lineTo(c.x + 5.5, endY - head);
             ctx.closePath();
             ctx.fill();
-            // F_G-etikett vid spetsen, på den sida som vänder bort från lodet
-            var side = c.x >= NX ? 1 : -1;
-            if (Math.abs(c.x - NX) < 4) side = -1;
-            ctx.textAlign = side > 0 ? 'left' : 'right';
+            // F_G vid spetsen (beteckningen hör till pilen, inte till etiketterna)
             ctx.font = 'italic 17px ' + FONT;
             var lx = c.x + side * 10, ly = endY + 2;
             var fw = ctx.measureText('F').width;
+            ctx.textAlign = 'left';
             if (side > 0) {
                 ctx.fillText('F', lx, ly);
                 ctx.font = '12px ' + FONT;
-                ctx.textAlign = 'left';
                 ctx.fillText('G', lx + fw + 1, ly + 4);
             } else {
                 ctx.font = '12px ' + FONT;
                 var gw = ctx.measureText('G').width;
-                ctx.textAlign = 'left';
                 ctx.fillText('G', lx - gw, ly + 4);
                 ctx.font = 'italic 17px ' + FONT;
                 ctx.fillText('F', lx - gw - 1 - fw, ly);
             }
-            // tyngdpunkten
+        }
+        function drawCog() {
+            if (!tpCb.checked) return;
+            var c = cog(), side = cogSide();
             ctx.fillStyle = COL_TP;
             ctx.strokeStyle = INK;
             ctx.lineWidth = 1;
@@ -10232,11 +10261,7 @@
             ctx.arc(c.x, c.y, 5.5, 0, 2 * Math.PI);
             ctx.fill();
             ctx.stroke();
-            // etiketter: lodlinjen nere i fri yta, tyngdpunkten bredvid pricken
-            ctx.fillStyle = COL_TP;
-            ctx.font = '600 15px ' + FONT;
-            ctx.textAlign = side > 0 ? 'left' : 'right';
-            ctx.fillText('Lodlinje', c.x + side * 8, H - 14);
+            if (!etCb.checked) return;
             // "Tyngdpunkt" utanför skivan (inte på träet), med en tunn
             // ledlinje till pricken, på sidan bort från lodets snöre
             ctx.font = '15px ' + FONT;
@@ -10264,8 +10289,10 @@
             drawBackground();
             drawStand();
             drawPlate();
+            drawLodlinje();
+            drawFG();
             drawCog();
-            drawLod();
+            if (lodCb.checked) drawLod();
             drawNail();
         }
 
@@ -10274,9 +10301,12 @@
             sliderVal.textContent = fmt(d, 0).replace('-', '−') + '°';
             var txt;
             if (atRest()) {
-                txt = tpCb.checked
-                    ? 'Skivan hänger still: tyngdpunkten ligger rakt under upphängningspunkten, och lodlinjen sammanfaller med lodets snöre.'
-                    : 'Skivan hänger still. Rita av lodet, byt upphängningspunkt och rita igen: där linjerna korsar varandra ligger tyngdpunkten.';
+                if (!tpCb.checked && lodCb.checked)
+                    txt = 'Skivan hänger still. Rita av lodet, byt upphängningspunkt och rita igen: där linjerna korsar varandra ligger tyngdpunkten.';
+                else if (lodCb.checked)
+                    txt = 'Skivan hänger still: tyngdpunkten ligger rakt under upphängningspunkten, och lodlinjen sammanfaller med lodets snöre.';
+                else
+                    txt = 'Skivan hänger still: tyngdpunkten ligger rakt under upphängningspunkten.';
             } else if (held) {
                 txt = 'Lodlinjen är fortfarande lodrät men går vid sidan av upphängningspunkten. Släpp, så vrider tyngdkraften tillbaka skivan.';
             } else {
@@ -10284,7 +10314,7 @@
             }
             if (lines.length >= 2) txt += ' Linjerna på skivan korsar varandra i tyngdpunkten.';
             info.textContent = txt;
-            ritaBtn.disabled = !atRest();
+            ritaBtn.disabled = !atRest() || !lodCb.checked;
         }
 
         // ── Fysik ─────────────────────────────────────────────────────────
@@ -10348,10 +10378,10 @@
             omega = 0;
             alpha = alphaEq();
             slider.value = '0';
-            tpCb.checked = true;
+            ALLA_CB.forEach(function (cb) { cb.checked = true; });
             redraw();
         });
-        tpCb.addEventListener('change', redraw);
+        ALLA_CB.forEach(function (cb) { cb.addEventListener('change', redraw); });
         slider.addEventListener('input', function () {
             held = true;
             omega = 0;

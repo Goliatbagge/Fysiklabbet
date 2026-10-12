@@ -9,8 +9,10 @@ section: '3.4'
 
 # Sparande och ränteberäkningar
 
-När du sätter in pengar på ett konto kan pengarna växa med en viss
-**ränta**. **Årsräntan** anger med hur många procent beloppet på kontot
+När du sätter in pengar på ett konto lånar du ut dina pengar till banken
+(som i sin tur lånar ut dina pengar till andra). Som tack för lånet kan
+banken betala dig en viss avgift som kallas **ränta**. Räntan kan anges i
+procent av det som du har satt in på kontot. **Årsräntan** anger med hur många procent beloppet på kontot
 växer varje år. Står det bara "ränta" i en uppgift är det underförstått
 *årsräntan*. Beloppet som finns på kontot kallas **behållning**.
 

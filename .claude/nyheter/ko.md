@@ -12,9 +12,9 @@ Format per post:
 
 ## Kö
 
-- **Ljus som vandrar genom mjölk ger skarpare bilder** **[BREVTEASER — teasad i brevet 2026-10-11, publiceras TIDIGAST måndag 2026-10-12, senast lördag 2026-10-17]** (nominerad 2026-10-05; originalet ej kontrolläst ännu, gör det först) — en överraskande avbildningsmetod som utnyttjar spritt ljus i stället för att bekämpa det. Ingång: spridning och varför mjölk är vit. OBS: optik är väl representerad.
-  Källa (Phys.org 2026-10-02): https://phys.org/news/2026-10-approach-imaging.html
-  (tillagd 2026-10-02)
+- **Svävande glaskula sammanflätad med ljus i rumstemperatur** **[BREVTEASER]** (nominerad 2026-10-12) — en optiskt levitierad nanosfär vars rörelse sammanflätas med ljus utan kylning till nära absoluta nollpunkten. Ingång: strålningstryck, optisk pincett. Science, DOI 10.1126/science.aeh1375 (Marin m.fl., Florens); förtrycket finns öppet på arXiv: https://arxiv.org/abs/2602.03456 (kontrollerat 2026-10-12). En 100 nm glaskula i optisk pincett, två lasrar. OBS: kvantfysik publicerades 2026-10-09.
+  Källa (Phys.org 2026-10-07): https://phys.org/news/2026-10-levitating-glass-sphere-entangled-room.html
+  (tillagd 2026-10-08)
 
 - **Titan som flyter: ihåliga gitter fyllda med skum** — RMIT har 3D-skrivit gitter av titanlegering vars ihåliga stavar fylls med polyuretanskum, så att konstruktionen flyter trots att vatten strömmar igenom den (skelettdensitet under vattnets). Ingång: densitet, Arkimedes princip. Advanced Materials, DOI 10.1002/adma.74641 (CC BY-NC-ND), men Wiley gav 403 för både curl och headless Chrome 2026-10-11; försök via RMIT:s arkiv eller en annan väg. Källa (Physics World 2026-10-07): https://physicsworld.com/a/titanium-polymer-metamaterial-floats-in-water/
   (tillagd 2026-10-11)
@@ -36,10 +36,6 @@ Format per post:
 
 - **Rosa bollen i dag-natt-cricket syns sämre för färgblinda spelare** — modellering av bollens synlighet med reflektansspektra (Sports Medicine, DOI 10.1007/s40279-026-02518-0). Ingång: färgseende, tappar, spektra. Vardagsnära men mer syn än fysik; originalet ej kontrollerat. Källa (Phys.org 2026-10-07): https://phys.org/news/2026-10-cricket-day-night-pink-ball.html
   (tillagd 2026-10-09)
-
-- **Svävande glaskula sammanflätad med ljus i rumstemperatur** — en optiskt levitierad nanosfär vars rörelse sammanflätas med ljus utan kylning till nära absoluta nollpunkten. Ingång: strålningstryck, optisk pincett. OBS: originalet ej kontrollerat.
-  Källa (Phys.org 2026-10-07): https://phys.org/news/2026-10-levitating-glass-sphere-entangled-room.html
-  (tillagd 2026-10-08)
 
 - **Tjernobyls bränslepartiklar har hållit ihop i 40 år** — sex heta partiklar (8–50 mikrometer) från 1986 analyserade med synkrotronröntgendiffraktion (Hannover + HZDR, Rossendorf Beamline i Grenoble): UO2 och U4O9 i stort sett intakta, även U3O8 och zirkoniumblandade faser. Ingång: radioaktivitet, kristallstruktur, röntgendiffraktion (Bragg). OBS 2026-10-07: studien är öppen (CC BY 4.0) men ScienceDirect visade robotkontroll för både curl och Chrome, så fulltexten gick inte att läsa; bara abstractet via Europe PMC. Försök igen från annan väg (HZDR-publikationsdatabasen, Hannovers repositorium). Journal of Hazardous Materials 505, 141533, DOI 10.1016/j.jhazmat.2026.141533. OBS 2026-10-08: fortfarande 403 från ScienceDirect via curl; Europe PMC har bara abstractet (PMID 41722407), ingen PMC-fulltext. Källa (Phys.org 2026-10-06): https://phys.org/news/2026-10-chernobyl-particles-reveal-unexpectedly-stable.html
   (tillagd 2026-10-07)

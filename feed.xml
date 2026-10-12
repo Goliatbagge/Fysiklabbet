@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sun, 11 Oct 2026 07:08:07 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 12 Oct 2026 01:28:21 GMT</lastBuildDate>
+    <item>
+      <title>Ett lager mjölk gör laserbilden skarpare</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-12-ljus-genom-mjolk</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-12-ljus-genom-mjolk</guid>
+      <pubDate>Mon, 12 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Optik</category>
+      <description>Spritt ljus brukar vara bildfysikerns fiende. Forskare i Warszawa har nu lagt ett provföremål i vanlig mjölk och låtit mjölkens kringdriftande fettdroppar skaka om laserljuset en aning mellan varje bild. Medelvärdet av hundra bilder blev nästan fritt från det kornighetsbrus som annars plågar laseravbildning, till priset av en liten och förutsägbar oskärpa.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-12-ljus-genom-mjolk.jpg" length="626239" type="image/jpeg"/>
+    </item>
     <item>
       <title>En maskin som glömmer kan utvinna mer energi än en som minns allt</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-11-att-glomma-kan-spara-energi</link>
@@ -177,15 +186,6 @@
       <category>Metrologi</category>
       <description>Ett lag vid Centre for Quantum Technologies i Singapore har byggt två optiska atomur som var för sig mäter tiden med en enda laddad lutetiumatom. Osäkerheten ligger på nittonde decimalen, fem gånger bättre än det tidigare rekordet: ett fel på en hel sekund skulle ta närmare 300 miljarder år att samla ihop. På den nivån räcker fem millimeters höjdskillnad mellan de två klockorna för att tiden ska gå olika fort i dem.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-25-klockan-pa-nittonde-decimalen.jpg" length="626489" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Duvans inre kompass skulle ge tolv miljarddels volt — och dränks av värmebruset i samma vätska</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-24-duvans-kompass-i-bruset</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-24-duvans-kompass-i-bruset</guid>
-      <pubDate>Thu, 24 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Elektromagnetism</category>
-      <description>En av de hetaste förklaringarna till hur brevduvor hittar hem är att båggångarna i innerörat fungerar som en generator: vätskan i dem är salt och leder ström, och när duvan vrider på huvudet i jordens magnetfält induceras en spänning. En fysiker vid University of Exeter har nu räknat på hur stor den spänningen blir. Svaret är ungefär 12 nV, och det termiska bruset i samma vätska är tusentals gånger större.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-24-duvans-kompass-i-bruset.jpg" length="144447" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

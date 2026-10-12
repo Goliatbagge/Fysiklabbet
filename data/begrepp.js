@@ -3883,5 +3883,41 @@ window.BEGREPP = [
       { type: 'p', html: 'Efterglöden är ofta astronomernas bästa ledtråd. Gammateleskop kan bara grovt ange var på himlen blixten kom ifrån, men efterglöden går att se med vanliga teleskop och peka ut exakt. Därefter kan spektrumet visa hur långt bort källan ligger, genom ljusets rödförskjutning. Upptäckten av den första efterglöden 1997 visade att gammablixtar kommer från avlägsna galaxer och inte från vår egen.' }
     ]
   },
+  {
+    id: 'speckle',
+    term: 'Speckle',
+    former: ['speckle', 'specklet', 'specklemönster', 'specklemönstret', 'specklebrus', 'specklebruset', 'laserspeckle'],
+    kort: 'Det korniga mönster av ljusa och mörka prickar som uppstår när laserljus sprids från en ojämn yta. Prickarna är ett slumpmässigt interferensmönster.',
+    relaterade: ['interferens', 'koherens', 'optisk-koherenstomografi'],
+    body: [
+      { type: 'p', html: 'Rikta en laserpekare mot en vit vägg. Fläcken ser inte jämn ut, den glittrar av små korn som tycks krypa omkring när du rör på huvudet. Det är speckle, och det syns bara med laserljus.' },
+      { type: 'p', html: 'Förklaringen är interferens. En vägg som ser slät ut är full av ojämnheter som är stora jämfört med ljusets våglängd, under en tusendels millimeter. Ljuset studsar från mängder av sådana små punkter, och vågorna når ögat efter lite olika långa vägar. På vissa ställen möts de topp mot topp och förstärker varandra, på andra topp mot dal och släcker varandra. Eftersom laserljus är koherent, med vågor som håller takten, står mönstret stilla. Med en vanlig lampa byts mönstret ut så snabbt att ögat bara ser ett jämnt medelvärde.' },
+      { type: 'p', html: 'Speckle är både ett problem och ett verktyg. I bilder tagna med laserljus, till exempel inom ögonsjukvården, döljer kornen fina detaljer. Det vanligaste botemedlet är att låta mönstret ändra sig mellan många bilder och ta medelvärdet. Samtidigt är mönstret mycket känsligt för rörelser, och det används för att mäta blodflöde i huden och för att upptäcka små förskjutningar i material.' }
+    ]
+  },
+  {
+    id: 'optisk-koherenstomografi',
+    term: 'Optisk koherenstomografi',
+    former: ['optisk koherenstomografi', 'optiska koherenstomografin', 'optisk koherenstomografi (oct)', 'koherenstomografi', 'koherenstomografin'],
+    kort: 'En avbildningsteknik som tar tvärsnittsbilder några millimeter in i vävnad med hjälp av ljus och interferens. Den används dagligen för att undersöka näthinnan i ögat.',
+    relaterade: ['interferens', 'koherens', 'speckle', 'interferometer'],
+    body: [
+      { type: 'p', html: 'En ultraljudsapparat skickar in ljudpulser i kroppen och lyssnar på ekot. Ju längre tid ekot tar, desto djupare ligger det som reflekterade ljudet. Optisk koherenstomografi, ofta förkortat OCT efter engelskans <em>optical coherence tomography</em>, gör samma sak med ljus. Men ljuset är så snabbt att ingen klocka kan mäta skillnaden i tid mellan ett eko från ytan och ett eko en tiondels millimeter längre in.' },
+      { type: 'p', html: 'I stället används interferens. Ljuset delas i två strålar. Den ena går in i provet, den andra till en spegel på känt avstånd. När strålarna förs ihop igen interfererar de bara om de gått nästan lika långt, eftersom ljuset som används har kort koherenslängd och bara håller takten med sig självt en kort sträcka. Genom att analysera interferensen går det att räkna ut från vilket djup varje del av ljuset kom. Med en avsökande stråle byggs en tredimensionell bild upp, med några mikrometers noggrannhet i djupled.' },
+      { type: 'p', html: 'Tekniken används framför allt på ögonkliniker, där den visar näthinnans olika skikt utan att något behöver röras. Den används också för att undersöka hud, kranskärl och tänder. Eftersom tekniken bygger på laserliknande ljus får bilderna ett kornigt brus, speckle, som forskare försöker få bort med olika knep.' }
+    ]
+  },
+  {
+    id: 'brownsk-rorelse',
+    term: 'Brownsk rörelse',
+    former: ['brownsk rörelse', 'brownska rörelsen', 'brownska rörelser', 'browns rörelse'],
+    kort: 'Den slumpmässiga, darrande rörelsen hos små partiklar i en vätska eller gas. Den beror på att partiklarna hela tiden knuffas av molekylerna runt omkring.',
+    relaterade: ['speckle'],
+    body: [
+      { type: 'p', html: 'År 1827 tittade den skotske botanikern Robert Brown i mikroskop på små partiklar från pollenkorn i vatten. De låg inte stilla utan darrade och vandrade hit och dit utan något mönster. Först trodde han att det var liv i dem, men samma rörelse syntes hos dammkorn och krossat glas.' },
+      { type: 'p', html: 'Förklaringen kom från Albert Einstein 1905. Vattnet består av molekyler som rör sig snabbare ju varmare det är. En liten partikel träffas hela tiden av molekyler från alla håll. Knuffarna tar nästan ut varandra, men inte riktigt: ibland kommer det lite fler från ena sidan, och partikeln rycker till. Summan av alla ryck blir en slumpvandring. Einstein räknade ut hur långt en partikel i genomsnitt hinner vandra, och när fransmannen Jean Perrin mätte det några år senare var det ett av de starkaste beläggen för att atomer och molekyler verkligen finns.' },
+      { type: 'p', html: 'Brownsk rörelse finns överallt där små partiklar svävar i en vätska, till exempel fettdropparna i mjölk. Den är skälet till att en droppe bläck så småningom sprider sig i ett glas vatten även utan omrörning, och den sätter en gräns för hur stilla mycket små föremål kan hållas. Mätningar av rörelsen används för att bestämma hur stora partiklarna i en vätska är: små partiklar vandrar snabbare än stora.' }
+    ]
+  },
 ];
 

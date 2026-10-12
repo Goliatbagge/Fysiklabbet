@@ -103,6 +103,66 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-12-ljus-genom-mjolk",
+    date: "2026-10-12",
+    title: "Ett lager mjölk gör laserbilden skarpare",
+    deck: "Spritt ljus brukar vara bildfysikerns fiende. Forskare i Warszawa har nu lagt ett provföremål i vanlig mjölk och låtit mjölkens kringdriftande fettdroppar skaka om laserljuset en aning mellan varje bild. Medelvärdet av hundra bilder blev nästan fritt från det kornighetsbrus som annars plågar laseravbildning, till priset av en liten och förutsägbar oskärpa.",
+    category: "Optik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-12-ljus-genom-mjolk.jpg",
+    imageAlt: "En glasskål med mjölk på ett svart optikbord i ett mörkt laboratorium. En tunn röd laserstråle går ned från ett mikroskopobjektiv och lyser upp en suddig röd fläck i mjölken. I bakgrunden syns linshållare och kablar.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["optik", "laser", "interferens", "koherens", "speckle", "optisk koherenstomografi", "brownsk rörelse", "spridning", "medicinsk avbildning"],
+    sources: [
+      { name: "Phys.org: Letting light wander through milk: A surprising approach to better imaging (1 oktober 2026)", url: "https://phys.org/news/2026-10-approach-imaging.html" },
+      { name: "Scientific Reports: studien i fulltext (publicerad 7 juli 2026)", url: "https://www.nature.com/articles/s41598-026-60563-1" }
+    ],
+    research: {
+      citation: "K. Nowacka-Pieszak, P. Kasprzycki, P. Espinoza Guevara, K. Karnowski och D. Borycki, ”Reducing spatial coherence via dynamic scattering media enables aberration and speckle suppression in optical imaging”, Scientific Reports (2026). Kollegialt granskad och öppet tillgänglig (CC BY-NC-ND 4.0).",
+      url: "https://doi.org/10.1038/s41598-026-60563-1"
+    },
+    larare: {
+      moment: [
+        { label: "Diffraktion och interferens", href: "katalog.html?id=fy2-2.14" }
+      ],
+      fragor: [
+        "Laserljus som reflekteras från en matt yta ger ett kornigt mönster av ljusa och mörka prickar. Förklara med interferens varför prickarna uppstår, och varför de inte syns när samma yta belyses med en vanlig glödlampa.",
+        "Om man tar medelvärdet av N oberoende brusiga bilder minskar bruset ungefär som $\\dfrac{1}{\\sqrt{N}}$. Hur många bilder behövs för att halvera bruset jämfört med 25 bilder? Stämmer forskarnas siffror för 100 bilder med regeln?",
+        "Metoden fungerar bara för föremål som står helt stilla. Varför? Vad skulle hända med medelvärdesbilden om föremålet rörde sig mellan mätningarna?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Lys med en laserpekare på en vit vägg och titta noga. Fläcken är inte jämnt röd utan full av små glittrande korn som tycks flytta sig när du rör på huvudet. Kornen kallas speckle, och de är en ständig plåga för den som vill ta skarpa bilder med laserljus. De döljer fina detaljer och gör bilderna brusiga.' },
+      { type: 'p', html: 'Det vanliga sättet att få skarpa bilder är att se till att ljuset sprids så lite som möjligt på vägen. Forskare vid International Center for Translational Eye Research (ICTER), som hör till Polska vetenskapsakademiens institut för fysikalisk kemi i Warszawa, har gjort tvärtom. De lade föremålet de ville avbilda i mjölk. Resultatet, som publicerats i den kollegialt granskade tidskriften <em>Scientific Reports</em>, är att bruset nästan försvinner.' },
+
+      { type: 'h2', text: 'Varför laserljus blir kornigt' },
+      { type: 'p', html: 'Laserljus är koherent: vågorna i strålen svänger i takt med varandra. När ljuset träffar en yta som är ojämn på mikrometernivå, och det är nästan alla ytor, studsar det från otaliga små punkter på lite olika avstånd. De reflekterade vågorna når kameran med olika fas. Där topp möter topp blir det ljust, där topp möter dal blir det mörkt. Kornen är alltså ett interferensmönster, men ett slumpmässigt sådant, och det ändrar sig inte så länge föremålet och ljuset står still.' },
+      { type: 'p', html: 'Med en vanlig lampa syns inga korn, eftersom dess ljus inte håller takten. Mönstret finns i varje ögonblick men byts ut så fort att ögat bara ser ett jämnt medelvärde. Det är den iakttagelsen forskarna bygger på. Får man laserns kornmönster att byta skepnad mellan bilderna, och lägger ihop många bilder, borde kornen jämnas ut medan föremålet självt står kvar.' },
+
+      { type: 'h2', text: 'Mjölken som skakar om ljuset' },
+      { type: 'p', html: 'Mjölk är vit för att den är full av små fettdroppar och proteinpartiklar som sprider ljus åt alla håll. Partiklarna ligger inte stilla. De knuffas hela tiden av vattenmolekylerna runt omkring och driver slumpmässigt omkring, så kallad brownsk rörelse. Ett tunt lager mjölk, i försöket ungefär en millimeter tjockt, sprider därför ljuset lite olika från ett ögonblick till ett annat.' },
+      { type: 'p', html: 'Det mesta av ljuset går ändå nästan rakt igenom ett så tunt lager, men det får små slumpmässiga knuffar i riktning och fas. Varje bild tas alltså med en något annorlunda belysning, och varje bild får ett eget kornmönster. Forskarna lade en standardiserad testtavla med svarta och vita streck i vanlig mjölk med 3,2&nbsp;procent fett och avbildade den med optisk koherenstomografi, en laserteknik som används i ögonsjukvården för att ta tvärsnittsbilder av näthinnan. Ljuset hade våglängden 795&nbsp;nanometer, alldeles bortom det synliga röda. De tog 100&nbsp;tredimensionella bilder med en minut mellan varje, så att mjölkens partiklar hann flytta sig ordentligt, och räknade sedan ut medelvärdet.' },
+      { type: 'quote', html: 'Spridning brukar ses som fienden till högupplöst avbildning. Vi visar att den kan bli ett användbart verktyg om den kontrolleras noga och får vara dynamisk.', cite: 'Klaudia Nowacka-Pieszak, huvudförfattare, i institutets pressmeddelande' },
+
+      { type: 'h2', text: 'Mindre brus, lite suddigare kanter' },
+      { type: 'p', html: 'I forskarnas datorsimuleringar var kornigheten i en enskild bild stor. Brusets storlek i förhållande till medelljusstyrkan låg mellan 0,69 och 0,93. Efter medelvärdet av 100 bilder hade det sjunkit till mellan 0,06 och 0,09. Det stämmer väl med en grundregel för slumpmässigt brus: tar man medelvärdet av $N$ oberoende mätningar minskar bruset ungefär som $\\dfrac{1}{\\sqrt{N}}$, och för 100 bilder är det en tiondel.' },
+      { type: 'p', html: 'Mjölken minskade också effekten av optiska fel. En bit vanlig tejp över testtavlan, som i en enskild bild förvränger den till ett kornigt virrvarr, jämnades ut i medelvärdet. Detsamma gällde när tavlan täcktes av en 250&nbsp;mikrometer tjock skiva hjärnvävnad från mus, riktig vävnad som förvränger ljuset kraftigt. Strecken under vävnaden syntes tydligare efter medelvärdesbildningen.' },
+      { type: 'p', html: 'Det finns ett pris. Eftersom ljuset knuffas en aning åt sidan blir bilden något suddigare. Utan mjölk var kanterna på testtavlans streck 4,6&nbsp;mikrometer breda i bilden, med mjölk omkring 7,5 till 7,7&nbsp;mikrometer. Forskarnas poäng är att priset går att förutsäga. Deras modell säger att oskärpan främst beror på hur mycket ljusets riktning varierar i det spridande lagret, och simuleringarna stämmer med experimenten.' },
+      { type: 'quote', html: 'Att minska bruset kostar en viss oskärpa, men det gjorde också att vi kunde förutsäga den kostnaden.', cite: 'Piotr Kasprzycki, medförfattare, i institutets pressmeddelande' },
+      { type: 'p', html: 'Forskarna jämförde också två sätt att lägga ihop bilderna. Det enkla är att ta medelvärdet av ljusstyrkan. Eftersom tekniken mäter själva ljusvågen, inte bara hur stark den är, går det också att ta medelvärdet av vågen med dess fas. Då tar de slumpmässiga bidragen ut varandra i stället för att lägga sig som en ljus slöja över bilden, och kontrasten mellan svarta och vita streck blir bättre. I en simulering med kraftigt fokusfel steg kontrasten från omkring 0,51 till 0,74.' },
+
+      { type: 'h2', text: 'Långt kvar till ögat' },
+      { type: 'p', html: 'Forskarna är tydliga med att metoden inte tillför något nytt i själva principen. Att jämna ut laserkorn genom att variera ljuset och ta medelvärden är känt sedan länge, och det görs i dag med roterande skivor, rörliga speglar och avancerad optik som formar om ljusvågen. Det nya är att ett enkelt, passivt lager mjölk direkt intill provet gör jobbet, tillsammans med en modell som talar om vad det kostar i skärpa.' },
+      { type: 'p', html: 'Än så länge fungerar det bara för föremål som står helt stilla. Med en minut mellan bilderna tog en serie på 100 bilder omkring 100 minuter, och ett levande öga rör sig hela tiden. Forskarnas egen uppskattning är att mjölkens partiklar hinner flytta sig tillräckligt på en bråkdel av en sekund, så mätningen borde gå att göra mycket snabbare. Nästa steg är att pröva lagret på vävnad och att bygga in det i ett objektiv.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Kornen i en laserfläck hänger inte på väggen utan bildas i ditt eget öga. Därför ser de ut att röra sig när du flyttar huvudet. En person som är närsynt ser dem dessutom vandra åt motsatt håll mot en som är översynt.',
+        'Brownsk rörelse har fått sitt namn efter botanikern Robert Brown, som 1827 såg pollenkorn darra i vatten under mikroskopet. Albert Einstein förklarade fenomenet 1905 med att vattenmolekyler ständigt knuffar på kornen, och förklaringen blev ett av de starkaste beläggen för att atomer och molekyler finns.',
+        'Optisk koherenstomografi används dagligen på ögonkliniker. Tekniken mäter hur långt in i ögat ljuset studsat genom att låta det interferera med en referensstråle, och kan visa näthinnans skikt med några mikrometers noggrannhet.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-11-att-glomma-kan-spara-energi",
     date: "2026-10-11",
     title: "En maskin som glömmer kan utvinna mer energi än en som minns allt",

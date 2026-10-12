@@ -129,15 +129,11 @@
         '  transition:opacity .15s;pointer-events:none;}',
         '.kb-key.on{opacity:1;}',
         '.kb-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:10px;}',
-        '.kb-steps{display:flex;gap:6px;}',
-        '.kb-step{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--lab-line-strong,#b9ae98);background:transparent;',
-        '  font:600 13px/1 Poppins,system-ui,sans-serif;color:var(--lab-ink,#1b2330);cursor:pointer;padding:0;}',
-        '.kb-step.klar{background:#e6dfd0;}',
-        '.kb-step.aktiv{background:var(--lab-ink,#1b2330);color:#fff;border-color:var(--lab-ink,#1b2330);}',
         '.kb-btn{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:17px;cursor:pointer;',
         '  font:600 13px/1 Poppins,system-ui,sans-serif;border:1.5px solid var(--lab-ink,#1b2330);background:transparent;color:var(--lab-ink,#1b2330);}',
         '.kb-btn.prim{background:var(--lab-ink,#1b2330);color:#fff;}',
         '.kb-btn[hidden]{display:none;}',
+        '.kb-btn:disabled{opacity:.35;cursor:default;}',
         '.kb-cap{flex:1 1 100%;font:400 14px/1.45 Poppins,system-ui,sans-serif;color:var(--lab-ink,#1b2330);}',
         '.kb-cap b{font-weight:600;}'
     ].join('\n');
@@ -164,6 +160,7 @@
     var IKON_PLAY = '<svg width="12" height="12" viewBox="0 0 12 12"><path d="M2.5 1.5v9l8-4.5z" fill="currentColor"/></svg>';
     var IKON_PAUS = '<svg width="12" height="12" viewBox="0 0 12 12"><rect x="2" y="1.5" width="2.8" height="9" fill="currentColor"/><rect x="7.2" y="1.5" width="2.8" height="9" fill="currentColor"/></svg>';
     var IKON_OM = '<svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2.5 7a4.5 4.5 0 1 0 1.4-3.3"/><path d="M2.2 1.8v2.6h2.6"/></svg>';
+    var IKON_BAK = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2L4 6l4 4"/></svg>';
     var IKON_FRAM = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2l4 4-4 4"/></svg>';
     var PEKARE = '<svg width="20" height="22" viewBox="0 0 20 22"><path d="M1.5 1.5v16l4.2-4 2.9 6.6 2.6-1.1-2.9-6.5h6z" fill="#fff" stroke="#202124" stroke-width="1.4" stroke-linejoin="round"/></svg>';
     var KORS = '<svg width="20" height="20" viewBox="-10 -10 20 20"><path d="M0-8V8M-8 0H8" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M0-8V8M-8 0H8" stroke="#202124" stroke-width="1.6"/></svg>';
@@ -813,28 +810,26 @@
 
         /* ---------- kontroller under bladet ---------- */
         var ctrl = el('div', 'kb-ctrl', wrap);
-        var stepsEl = el('div', 'kb-steps', ctrl);
-        var stegKnapp = [];
-        STEG.forEach(function (s, i) {
-            var b = el('button', 'kb-step', stepsEl);
-            b.type = 'button';
-            b.textContent = i + 1;
-            b.title = 'Steg ' + (i + 1) + ': ' + s.namn;
-            b.addEventListener('click', function () { forbered(i); });
-            stegKnapp.push(b);
-        });
+        // Föregående/Nästa i stället för numrerade stegknappar: siffrorna i
+        // de små cirklarna hamnade snett i fullskärm, och två pilknappar
+        // säger dessutom direkt hur man går vidare.
+        var bPrev = el('button', 'kb-btn', ctrl); bPrev.type = 'button';
+        bPrev.innerHTML = IKON_BAK + 'Föregående';
         var bPlay = el('button', 'kb-btn prim', ctrl); bPlay.type = 'button';
-        var bOm = el('button', 'kb-btn', ctrl); bOm.type = 'button';
+        var bNext = el('button', 'kb-btn', ctrl); bNext.type = 'button';
+        bNext.innerHTML = 'Nästa' + IKON_FRAM;
         var bSkip = el('button', 'kb-btn', ctrl); bSkip.type = 'button';
+        var bOm = el('button', 'kb-btn', ctrl); bOm.type = 'button';
         var cap = el('div', 'kb-cap', ctrl);
         cap.setAttribute('aria-live', 'polite');
 
         var aktuellt = 0, lage = 'redo';   // redo | spelar | klar
 
         function uppdateraKontroller() {
-            stegKnapp.forEach(function (b, i) {
-                b.className = 'kb-step' + (i === aktuellt ? ' aktiv' : (i < aktuellt || (i === aktuellt && lage === 'klar')) ? ' klar' : '');
-            });
+            var sista = aktuellt === STEG.length - 1;
+            bPrev.disabled = aktuellt === 0;
+            bNext.hidden = sista && lage === 'klar';
+            bNext.disabled = sista;
             cap.innerHTML = '<b>Steg ' + (aktuellt + 1) + ' av ' + STEG.length + ':</b> ' + STEG[aktuellt].namn;
             bOm.hidden = true; bSkip.hidden = true;
             if (lage === 'redo') {
@@ -843,9 +838,8 @@
                 bPlay.innerHTML = paused ? IKON_PLAY + 'Fortsätt' : IKON_PAUS + 'Paus';
                 bSkip.hidden = false; bSkip.innerHTML = 'Hoppa till slutet' + IKON_FRAM;
             } else {
-                bOm.hidden = false; bOm.innerHTML = IKON_OM + 'Spela igen';
-                if (aktuellt < STEG.length - 1) bPlay.innerHTML = 'Nästa steg' + IKON_FRAM;
-                else bPlay.innerHTML = IKON_OM + 'Börja om från början';
+                bPlay.innerHTML = IKON_OM + 'Spela igen';
+                if (sista) { bOm.hidden = false; bOm.innerHTML = IKON_OM + 'Börja om från början'; }
             }
         }
 
@@ -904,10 +898,11 @@
         bPlay.addEventListener('click', function () {
             if (lage === 'redo') spela(aktuellt);
             else if (lage === 'spelar') { paused = !paused; uppdateraKontroller(); }
-            else if (aktuellt < STEG.length - 1) spela(aktuellt + 1);
-            else forbered(0);
+            else spela(aktuellt);
         });
-        bOm.addEventListener('click', function () { spela(aktuellt); });
+        bPrev.addEventListener('click', function () { if (aktuellt > 0) spela(aktuellt - 1); });
+        bNext.addEventListener('click', function () { if (aktuellt < STEG.length - 1) spela(aktuellt + 1); });
+        bOm.addEventListener('click', function () { forbered(0); });
         bSkip.addEventListener('click', hoppa);
 
         forbered(0);

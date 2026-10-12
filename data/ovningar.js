@@ -15397,27 +15397,24 @@ $$ A = \\sqrt{\\frac{2 \\cdot 5{,}0}{250}} = \\sqrt{0{,}040} = 0{,}20\\ \\mathrm
         },
         {
             level: 1,
-            question: `Två fjädrar med fjäderkonstanterna $40\\ \\mathrm{N/m}$ och $120\\ \\mathrm{N/m}$ seriekopplas. Bestäm den resulterande fjäderkonstanten.`,
-            answer: { value: 30, unit: 'N/m' },
-            solution: `Fjädrar i serie beter sig som en enda fjäder med den resulterande fjäderkonstanten $k_\\mathrm{R}$:
+            question: `Två likadana fjädrar, var och en med fjäderkonstanten $45\\ \\mathrm{N/m}$, parallellkopplas. Bestäm den resulterande fjäderkonstanten.`,
+            answer: { value: 90, unit: 'N/m' },
+            solution: `Fjädrarna sitter bredvid varandra och delar på kraften. Paret beter sig som en enda fjäder med den resulterande fjäderkonstanten $k_\\mathrm{R}$:
 
-$$ \\frac{1}{k_\\mathrm{R}} = \\frac{1}{k_1} + \\frac{1}{k_2} $$
+$$ k_\\mathrm{R} = 2 \\cdot k $$
 
 Mätvärden:
 $$
 \\left[ \\begin{array}{l}
-k_1 = 40\\ \\mathrm{N/m} \\\\
-k_2 = 120\\ \\mathrm{N/m}
+k = 45\\ \\mathrm{N/m}
 \\end{array} \\right]
 $$
 
-$$ \\frac{1}{k_\\mathrm{R}} = \\frac{1}{40} + \\frac{1}{120} = \\frac{3}{120} + \\frac{1}{120} = \\frac{4}{120} = \\frac{1}{30} $$
+$$ k_\\mathrm{R} = 2 \\cdot 45 = 90\\ \\mathrm{N/m} $$
 
-Båda leden är 1 delat med något, så $k_\\mathrm{R} = 30\\ \\mathrm{N/m}$.
+**Svar:** Den resulterande fjäderkonstanten är $90\\ \\mathrm{N/m}$.
 
-**Svar:** Den resulterande fjäderkonstanten är $30\\ \\mathrm{N/m}$.
-
-**Rimlighet:** Seriekopplingen är mjukare än den mjukaste fjädern, och 30 N/m är mindre än 40 N/m.`,
+**Rimlighet:** Parallellkopplingen är styvare än en ensam fjäder, och 90 N/m är större än 45 N/m.`,
         },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
@@ -15514,11 +15511,11 @@ $$ E_\\text{värme} = 0{,}14175 - 0{,}04375 = 0{,}098\\ \\mathrm{J} $$
 
 $$ F = k \\cdot \\Delta l = 50 \\cdot 0{,}12 = 6{,}0\\ \\mathrm{N} $$
 
-Två likadana fjädrar i serie:
+Två likadana fjädrar i serie ger halva fjäderkonstanten:
 
-$$ \\frac{1}{k_\\mathrm{R}} = \\frac{1}{50} + \\frac{1}{50} = \\frac{2}{50} = \\frac{1}{25} $$
+$$ k_\\mathrm{R} = \\frac{k}{2} = \\frac{50}{2} = 25\\ \\mathrm{N/m} $$
 
-alltså $k_\\mathrm{R} = 25\\ \\mathrm{N/m}$. Hookes lag för paret ger förlängningen:
+Hookes lag för paret ger förlängningen:
 
 $$ F = k_\\mathrm{R} \\cdot \\Delta l \\quad\\Leftrightarrow\\quad \\Delta l = \\frac{F}{k_\\mathrm{R}} $$
 
@@ -15904,38 +15901,32 @@ $$ k = \\frac{4\\pi^2 \\cdot 0{,}45}{0{,}80^2} = \\frac{17{,}77}{0{,}64} \\appro
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Två fjädrar med fjäderkonstanterna $k_1 = 80\\ \\mathrm{N/m}$ respektive $k_2 = 120\\ \\mathrm{N/m}$ kopplas i **serie**: först fjäder 1 från taket, sedan fjäder 2 nedanför, och slutligen en vikt på $0{,}50\\ \\mathrm{kg}$ längst ner. Bestäm periodtiden om vikten sätts i svängning.
+            question: `Två likadana fjädrar, var och en med fjäderkonstanten $k = 96\\ \\mathrm{N/m}$, kopplas i **serie**: den ena hänger från taket och den andra i den, och slutligen en vikt på $0{,}50\\ \\mathrm{kg}$ längst ner. Bestäm periodtiden om vikten sätts i svängning.
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" width="280" height="280" style="display:block;margin:14px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:4px">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 236" width="280" height="236" style="display:block;margin:14px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:4px">
   <line x1="40" y1="22" x2="240" y2="22" stroke="#1a1d24" stroke-width="1.6"/>
   <g><line x1="48" y1="22" x2="42" y2="14" stroke="#1a1d24"/><line x1="60" y1="22" x2="54" y2="14" stroke="#1a1d24"/><line x1="72" y1="22" x2="66" y2="14" stroke="#1a1d24"/><line x1="84" y1="22" x2="78" y2="14" stroke="#1a1d24"/><line x1="96" y1="22" x2="90" y2="14" stroke="#1a1d24"/><line x1="108" y1="22" x2="102" y2="14" stroke="#1a1d24"/><line x1="120" y1="22" x2="114" y2="14" stroke="#1a1d24"/><line x1="132" y1="22" x2="126" y2="14" stroke="#1a1d24"/><line x1="144" y1="22" x2="138" y2="14" stroke="#1a1d24"/><line x1="156" y1="22" x2="150" y2="14" stroke="#1a1d24"/><line x1="168" y1="22" x2="162" y2="14" stroke="#1a1d24"/><line x1="180" y1="22" x2="174" y2="14" stroke="#1a1d24"/><line x1="192" y1="22" x2="186" y2="14" stroke="#1a1d24"/><line x1="204" y1="22" x2="198" y2="14" stroke="#1a1d24"/><line x1="216" y1="22" x2="210" y2="14" stroke="#1a1d24"/><line x1="228" y1="22" x2="222" y2="14" stroke="#1a1d24"/></g>
   <path d="M 140 22 L 140 32 L 150 38 L 130 46 L 150 54 L 130 62 L 150 70 L 130 78 L 150 86 L 140 92 L 140 102" stroke="#1a1d24" stroke-width="1.6" fill="none"/>
-  <text x="170" y="65" font-family="Poppins, sans-serif" font-size="14" fill="#1a1d24"><tspan font-style="italic">k</tspan>₁ = 80 N/m</text>
-  <path d="M 140 102 L 140 114 L 152 122 L 128 134 L 152 146 L 128 158 L 152 170 L 128 182 L 152 194 L 140 202 L 140 214" stroke="#1a1d24" stroke-width="1.6" fill="none"/>
-  <text x="170" y="160" font-family="Poppins, sans-serif" font-size="14" fill="#1a1d24"><tspan font-style="italic">k</tspan>₂ = 120 N/m</text>
-  <rect x="118" y="214" width="44" height="36" fill="#fafaf5" stroke="#1a1d24" stroke-width="1.6"/>
-  <text x="140" y="237" font-family="Poppins, sans-serif" font-size="12" text-anchor="middle" fill="#1a1d24">0,50 kg</text>
+  <text x="170" y="65" font-family="Poppins, sans-serif" font-size="14" fill="#1a1d24"><tspan font-style="italic">k</tspan> = 96 N/m</text>
+  <path d="M 140 102 L 140 112 L 150 118 L 130 126 L 150 134 L 130 142 L 150 150 L 130 158 L 150 166 L 140 172 L 140 182" stroke="#1a1d24" stroke-width="1.6" fill="none"/>
+  <text x="170" y="145" font-family="Poppins, sans-serif" font-size="14" fill="#1a1d24"><tspan font-style="italic">k</tspan> = 96 N/m</text>
+  <rect x="118" y="182" width="44" height="36" fill="#fafaf5" stroke="#1a1d24" stroke-width="1.6"/>
+  <text x="140" y="205" font-family="Poppins, sans-serif" font-size="12" text-anchor="middle" fill="#1a1d24">0,50 kg</text>
 </svg>`,
             answer: { value: 0.641, unit: 's' },
-            solution: `**Insikten är att två fjädrar i serie delar på *kraften*** — båda fjädrarna känner samma kraft (viktens tyngd), men deras *förlängningar* adderas. Det ger en mindre effektiv fjäderkonstant än vardera fjäder för sig.
+            solution: `**Insikten är att två fjädrar i serie känner samma *kraft*** (viktens tyngd), men deras *förlängningar* adderas. Paret blir därför mjukare än en ensam fjäder.
 
-**Steg 1 — effektiv fjäderkonstant.** Båda fjädrarna känner samma kraft *F* från vikten. Förlängningarna är $\\Delta l_1 = F/k_1$ och $\\Delta l_2 = F/k_2$, och totala förlängningen är summan:
+**Steg 1 — resulterande fjäderkonstant.** Båda fjädrarna känner samma kraft *F* och har samma fjäderkonstant, så de förlängs lika mycket. Paret förlängs dubbelt så mycket som en ensam fjäder, och fjäderkonstanten halveras:
 
-$$ \\Delta l_\\text{tot} = \\Delta l_1 + \\Delta l_2 = F\\left(\\frac{1}{k_1} + \\frac{1}{k_2}\\right) $$
-
-Definitionen av den effektiva fjäderkonstanten är $k_\\text{tot} = F/\\Delta l_\\text{tot}$, så
-
-$$ \\frac{1}{k_\\text{tot}} = \\frac{1}{k_1} + \\frac{1}{k_2} \\quad\\Leftrightarrow\\quad k_\\text{tot} = \\frac{k_1 \\cdot k_2}{k_1 + k_2} $$
-
-$$ k_\\text{tot} = \\frac{80 \\cdot 120}{80 + 120} = \\frac{9600}{200} = 48\\ \\mathrm{N/m} $$
+$$ k_\\mathrm{R} = \\frac{k}{2} = \\frac{96}{2} = 48\\ \\mathrm{N/m} $$
 
 **Steg 2 — periodtiden.**
 
-$$ T = 2\\pi\\sqrt{\\frac{m}{k_\\text{tot}}} = 2\\pi\\sqrt{\\frac{0{,}50}{48}} = 2\\pi\\cdot 0{,}1021 \\approx 0{,}64\\ \\mathrm{s} $$
+$$ T = 2\\pi\\sqrt{\\frac{m}{k_\\mathrm{R}}} = 2\\pi\\sqrt{\\frac{0{,}50}{48}} = 2\\pi\\cdot 0{,}1021 \\approx 0{,}64\\ \\mathrm{s} $$
 
 **Svar:** Periodtiden är ungefär $0{,}64\\ \\mathrm{s}$.
 
-**Generell slutsats:** Tvärtemot intuitionen blir två fjädrar i serie *vekare* än vardera fjäder för sig. Parallellt kombineras fjäderkonstanterna additivt ($k_\\text{tot} = k_1 + k_2$), i serie inverterat ($1/k_\\text{tot} = 1/k_1 + 1/k_2$). Att se vilken storhet (kraft eller förlängning) som är gemensam för fjädrarna är hela insikten.`,
+**Generell slutsats:** Två likadana fjädrar i serie är mjukare än en ensam fjäder, $k_\\mathrm{R} = \\dfrac{k}{2}$. Parallellt blir de styvare, $k_\\mathrm{R} = 2 \\cdot k$. Att se vilken storhet (kraft eller förlängning) som är gemensam för fjädrarna är hela insikten.`,
         },
     ],
 

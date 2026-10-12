@@ -5999,7 +5999,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Så blir det i en seriekoppling, där varje fjäder bär hela vikten och paret förlängs dubbelt så mycket.',
-      'Parallellt delar fjädrarna på vikten och förlängs bara hälften så mycket, så $k_\\mathrm{R} = k_1 + k_2 = 2 \\cdot k$.',
+      'Parallellt delar fjädrarna på vikten och förlängs bara hälften så mycket, så $k_\\mathrm{R} = 2 \\cdot k$.',
       'Paret blir styvare än en ensam fjäder, eftersom varje fjäder bara bär halva vikten.',
       'Fjäderkonstanterna adderas parallellt, de multipliceras inte. Enheten N/m skulle dessutom bli fel.',
     ],

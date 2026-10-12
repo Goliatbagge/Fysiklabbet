@@ -21207,11 +21207,11 @@
   }
 
   /* ---------------- scen: kopplade fjädrar (fy2-2.2 Ex 3) -------------
-   * Fjädrarna 30 N/m och 60 N/m bär en vikt på 0,50 kg, först i serie och
-   * sedan parallellt. Figuren visar båda kopplingarna bredvid varandra med
-   * samma vikt. a) Den resulterande fjäderkonstanten ur 1/k_R = 1/k_1 +
-   * 1/k_2 (bråken förlängs till nämnaren 60), sedan Hookes lag löst för
-   * Δl med tyngden uträknad i klammern. b) k_R = k_1 + k_2, samma F. */
+   * Två likadana fjädrar, 40 N/m var, bär en vikt på 0,50 kg, först i serie
+   * och sedan parallellt. Figuren visar båda kopplingarna bredvid varandra
+   * med samma vikt. a) Den resulterande fjäderkonstanten ur k_R = k/2,
+   * sedan Hookes lag löst för Δl med tyngden uträknad i klammern.
+   * b) k_R = 2·k, samma F. Kursen tar bara upp likadana fjädrar. */
   function layoutKoppladeFjadrar(cfg, F) {
     var s = F / 100;
     var acts = [];
@@ -21308,12 +21308,12 @@
       [['och viktens massa.']]
     ]);
     tanke(b2);
-    placeString('k_1=30 N/m', sx + 20, takY + 46, s * 0.55, F * 0.55, acts, BLUE);
-    placeString('k_2=60 N/m', sx + 20, takY + 126, s * 0.55, F * 0.55, acts, BLUE);
+    placeString('k=40 N/m', sx + 20, takY + 46, s * 0.55, F * 0.55, acts, BLUE);
+    placeString('k=40 N/m', sx + 20, takY + 126, s * 0.55, F * 0.55, acts, BLUE);
     placeString('m=0,50 kg', sx + 22, takY + 182, s * 0.55, F * 0.55, acts, BLUE);
     pause(160);
-    placeString('k_1', pa - 44, takY + 42, s * 0.55, F * 0.55, acts, BLUE);
-    placeString('k_2', pb + 18, takY + 42, s * 0.55, F * 0.55, acts, BLUE);
+    placeString('k', pa - 38, takY + 42, s * 0.55, F * 0.55, acts, BLUE);
+    placeString('k', pb + 18, takY + 42, s * 0.55, F * 0.55, acts, BLUE);
     placeString('m', px + 22, takY + 98, s * 0.55, F * 0.55, acts, BLUE);
     stepEnd();
 
@@ -21324,68 +21324,35 @@
 
     var bS = bubble(120, bubbleTop(282), bw, [
       [['a) Fjädrarna i serie beter sig']],
-      [['som en enda fjäder. Först tar']],
-      [['jag fram dess fjäderkonstant.']]
+      [['som en enda fjäder, dubbelt så']],
+      [['mjuk. Först dess fjäderkonstant.']]
     ]);
     tanke(bS);
     /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
     placeString('a) Seriekopplade fjädrar', padL, y, s * 0.62, F * 0.62, acts);
     pause(300);
     y += 2.0 * F;
-    var xx = fracH('1', 'k_R', padL, y);
-    xx = placeString('=', xx + 0.1 * F, y, s, F, acts);
-    xx = fracH('1', 'k_1', xx, y);
-    xx = placeString('+', xx + 0.1 * F, y, s, F, acts);
-    fracH('1', 'k_2', xx, y);
+    var xx = placeString('k_R=', padL, y, s, F, acts);
+    fracH('k', '2', xx, y);
     stepEnd();
 
     y += adv + 1.1 * F;
     var bK1 = bubble(140, bubbleTop(y - adv), bw, [
-      [['Fjäderkonstanterna i klammern.']]
+      [['Fjäderkonstanten i klammern.']]
     ]);
     tanke(bK1);
-    var klam1 = valueBracket(acts, ['k_1=30 N/m', 'k_2=60 N/m'],
-                             padL, y, s, F);
+    var klam1 = valueBracket(acts, ['k=40 N/m'], padL, y, s, F);
     stepEnd();
     y = klam1.yEnd;
 
     y += adv + 1.4 * F;
     var bI1 = bubble(140, bubbleTop(y - adv), bw, [
-      [['Sätter in och skriver bråken']],
-      [['med samma nämnare, 60.']]
+      [['Sätter in värdet ur klammern.']]
     ]);
     tanke(bI1);
-    xx = fracH('1', 'k_R', padL, y);
-    xx = placeString('=', xx + 0.1 * F, y, s, F, acts);
-    xx = fracH('1', '30', xx, y);
-    xx = placeString('+', xx + 0.1 * F, y, s, F, acts);
-    xx = fracH('1', '60', xx, y);
-    xx = placeString('=', xx + 0.1 * F, y, s, F, acts);
-    xx = fracH('2', '60', xx, y);
-    xx = placeString('+', xx + 0.1 * F, y, s, F, acts);
-    fracH('1', '60', xx, y);
-    stepEnd();
-
-    y += adv + 1.4 * F;
-    var bI2 = bubble(140, bubbleTop(y - adv), bw, [
-      [['Lägger ihop täljarna och']],
-      [['förkortar med 3.']]
-    ]);
-    tanke(bI2);
-    xx = fracH('1', 'k_R', padL, y);
-    xx = placeString('=', xx + 0.1 * F, y, s, F, acts);
-    xx = fracH('3', '60', xx, y);
-    xx = placeString('=', xx + 0.1 * F, y, s, F, acts);
-    fracH('1', '20', xx, y);
-    stepEnd();
-
-    y += adv + 1.0 * F;
-    var bI3 = bubble(140, bubbleTop(y - adv + 0.3 * F), bw, [
-      [['Båda leden är 1 delat med']],
-      [['något. Då är nämnarna lika.']]
-    ]);
-    tanke(bI3);
-    placeString('k_R=20 N/m', padL, y, s, F, acts);
+    xx = placeString('k_R=', padL, y, s, F, acts);
+    xx = fracH('40', '2', xx, y);
+    placeString('=20 N/m', xx + 0.15 * F, y, s, F, acts);
     stepEnd();
 
     /* ---- Hookes lag ---- */
@@ -21457,16 +21424,16 @@
     /* ---- b) parallellkopplade ---- */
     y += adv + 1.4 * F;
     var bP = bubble(120, bubbleTop(y - adv), bw, [
-      [['b) Bredvid varandra förlängs']],
-      [['fjädrarna lika mycket och delar']],
-      [['på kraften. Konstanterna adderas.']]
+      [['b) Bredvid varandra delar']],
+      [['fjädrarna på kraften. Paret blir']],
+      [['dubbelt så styvt.']]
     ]);
     tanke(bP);
     placeString('b) Parallellkopplade fjädrar', padL, y,
                 s * 0.62, F * 0.62, acts);
     pause(300);
     y += 2.0 * F;
-    placeString('k_R=k_1+k_2=30+60=90 N/m', padL, y, s, F, acts);
+    placeString('k_R=2·k=2·40=80 N/m', padL, y, s, F, acts);
     stepEnd();
 
     y += adv + 1.4 * F;
@@ -21478,18 +21445,32 @@
     xx = placeString('Δl=', padL, y, s, F, acts);
     var xe2 = fracH('F', 'k_R', xx, y);
     xx = placeString('=', xe2 + 0.1 * F, y, s, F, acts);
-    var xe3 = fracH('4,91', '90', xx, y);
-    placeString('≈0,055 m', xe3 + 0.15 * F, y, s, F, acts);
+    var xe3 = fracH('4,91', '80', xx, y);
+    var xIns2 = placeString('=0,061375 m', xe3 + 0.15 * F, y, s, F, acts);
+    stepEnd();
+
+    var bAvr2 = bubble(140, bubbleTop(y + 1.1 * F), bw, [
+      [['Avrundar till två värdesiffror,']],
+      [['som de givna värdena.']]
+    ]);
+    tanke(bAvr2);
+    var avrB = '≈0,061 m';
+    if (xIns2 + stringAdvance(avrB, s, F) < PAPER_W - 34) {
+      placeString(avrB, xIns2, y, s, F, acts);
+    } else {
+      y += adv + 1.0 * F;
+      placeString(avrB, padL, y, s, F, acts);
+    }
     stepEnd();
 
     y += adv + 1.0 * F;
     var bR2 = bubble(120, bubbleTop(y - adv + 0.32 * F), bw, [
-      [['Parallellt är paret mycket']],
-      [['styvare, så förlängningen blir']],
-      [['bara några centimeter. Rimligt!']]
+      [['Fyra gånger så styvt som i a),']],
+      [['så en fjärdedel av förlängningen:']],
+      [['0,25/4 ≈ 0,061. Rimligt!']]
     ]);
     tanke(bR2);
-    var xeB = placeString('Svar: 0,055 m', padL, y, s, F, acts);
+    var xeB = placeString('Svar: 0,061 m', padL, y, s, F, acts);
     underline(xeB, y);
     stepEnd();
 

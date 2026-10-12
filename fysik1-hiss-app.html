@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krafter i hissen — Fysiklabbet</title>
+    <meta name="description" content="Åk hiss med en person på en kraftplatta och se tyngdkraften, normalkraften, den resulterande kraften och accelerationen i varje del av färden. Kraftplattans mätning ritas som en graf, precis som i laborationen, och du kan förutsäga vad plattan visar innan du ser det.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik1-hiss-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Krafter i hissen — Fysik nivå 1">
+    <meta property="og:description" content="Åk hiss med en person på en kraftplatta och se tyngdkraften, normalkraften, den resulterande kraften och accelerationen i varje del av färden. Kraftplattans mätning ritas som en graf, precis som i laborationen, och du kan förutsäga vad plattan visar innan du ser det.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik1-hiss-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Krafter i hissen — Fysik nivå 1">
+    <meta name="twitter:description" content="Åk hiss med en person på en kraftplatta och se tyngdkraften, normalkraften, den resulterande kraften och accelerationen i varje del av färden. Kraftplattans mätning ritas som en graf, precis som i laborationen, och du kan förutsäga vad plattan visar innan du ser det.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>
+        var __q = new URLSearchParams(location.search);
+        if (__q.has('embed')) document.documentElement.classList.add('embed-mode');
+    </script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        /* Mobil: formeln får aldrig radbrytas. Behåll EN rad och skrolla
+           kortet i sidled i stället. */
+        @media (max-width: 600px) {
+            .formula-card { flex-wrap: nowrap !important; overflow-x: auto;
+                            justify-content: flex-start;
+                            -webkit-overflow-scrolling: touch; }
+            .formula-card > * { flex-shrink: 0; }
+            .formula-card .fnum { font-size: 16px; }
+        }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 76px; }
+        .num-in { width: 56px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* Scenen har en egen proportion (viewBox) och ingen fast höjd: på
+           mobil sätter sektion 8 i styles-laborans-sim.css höjden auto. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 900 / 640;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0; aspect-ratio: auto;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: manipulation; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 236px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+            padding-right: 22px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; padding-right: 0; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles .st-row { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; }
+        .scene-toggles .st-row label { gap: 4px; }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-swatch.dash {
+            background: repeating-linear-gradient(90deg, #c8324a 0 4px, transparent 4px 7px) !important;
+        }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-presets { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+        .scene-toggles .st-presets button { padding: 4px 8px; font-size: 11.5px; }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-small { padding: 5px 10px; font-size: 12.5px; }
+        .lage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .lage-grid button { padding: 6px 6px; font-size: 12px; line-height: 1.25; min-height: 44px; }
+
+        /* Hisspanelen: runda våningsknappar i borstat stål */
+        .hisspanel {
+            display: grid; grid-template-columns: repeat(3, 46px); gap: 9px;
+            justify-content: center; padding: 14px 12px; border-radius: 12px;
+            background: linear-gradient(160deg, #e3e1dc 0%, #c9c6bf 100%);
+            border: 1px solid rgba(15,22,32,0.28);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), 0 1px 3px rgba(15,22,32,0.12);
+        }
+        .vknapp {
+            width: 46px; height: 46px; border-radius: 50%;
+            font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 17px;
+            color: #2b313b; cursor: pointer;
+            background: radial-gradient(circle at 38% 32%, #fbfaf7 0%, #d8d5ce 70%, #bdb9b1 100%);
+            border: 2px solid #8d8a83;
+            box-shadow: 0 2px 3px rgba(15,22,32,0.22);
+            transition: transform 0.08s ease, box-shadow 0.15s ease;
+        }
+        .vknapp:active:not(:disabled) { transform: translateY(1px); box-shadow: 0 1px 1px rgba(15,22,32,0.22); }
+        .vknapp.lit { border-color: #e0701a; color: #b45309; box-shadow: 0 0 0 3px rgba(224,112,26,0.28), 0 2px 3px rgba(15,22,32,0.22); }
+        .vknapp.har { border-color: #3f4a57; background: radial-gradient(circle at 38% 32%, #ffffff 0%, #e6e3dc 70%, #cfcbc3 100%); }
+        .vknapp:disabled { opacity: 0.4; cursor: not-allowed; }
+        .hisspanel-st { grid-template-columns: repeat(5, 34px); gap: 6px; padding: 8px; }
+        .hisspanel-st .vknapp { width: 34px; height: 34px; font-size: 13px; }
+
+        .calc-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 7px;
+                    font-size: 15px; color: var(--lab-ink, #0f1620); line-height: 1.2; }
+        .calc-row + .calc-row { margin-top: 10px; }
+        .cfrac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; }
+        .cfrac > span:first-child { padding: 0 3px 2px; }
+        .cfrac > span:last-child { border-top: 1.6px solid currentColor; padding: 2px 3px 0; align-self: stretch; text-align: center; }
+        .nowrap { white-space: nowrap; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // ── Fysik: samma beteckningar som genomgångarna Newtons andra lag
+        //    (fy1-3.2) och Accelerationens riktning (fy1-3.9). Positiv
+        //    riktning är UPPÅT i hela simuleringen. ──
+        const g = 9.82;                 // tyngdfaktorn (N/kg)
+        const VAN_H = 3.0;              // våningshöjd (m)
+        const TOPP = 8;                 // översta våningen
+        const H_TOPP = VAN_H * TOPP;    // 24 m
+        const TAU = 0.6;                // tid för accelerationen att byggas upp (s), ryckbegränsning
+        const DT = 0.01;                // tidssteg i den förberäknade färden (s)
+        const HIST_DT = 1 / 30;         // mätpunkter i grafen (s)
+        const FONSTER = 30;             // grafens tidsfönster (s)
+
+        const COL = {
+            tyngd: '#7c3aed',   // lila: tyngdkraft F_G (som i Tyngdkraft och normalkraft)
+            norm:  '#15803d',   // grön: normalkraft F_N
+            res:   '#c8324a',   // crimson, streckad: resulterande kraft F_R
+            acc:   '#e0701a',   // orange: acceleration a
+            fart:  '#2563c9',   // blå: hastighet v
+            ink:   '#0f1620',
+            tung: '#b45309', normal: '#3f4a57', latt: '#0e7490', tyngdlos: '#155e75',
+        };
+        const KANSLA_ORD = { tung: 'tung', normal: 'normal', latt: 'lätt', tyngdlos: 'tyngdlös' };
+
+        // Talformat: komma som decimaltecken, hårt mellanslag i tusental,
+        // äkta minustecken, exakt noll utan decimaler.
+        const fmt = (n, d = 1) => {
+            if (!isFinite(n)) return '–';
+            const s = Math.abs(n).toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [ip, fr] = s.split('.');
+            const w = ip.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return (n < 0 ? '−' : '') + (fr !== undefined ? w + ',' + fr : w);
+        };
+        const r1 = (x) => Math.round(x * 10) / 10;
+
+        // Krafterna med en decimal, avrundade EN gång så att alla
+        // avläsningar räknar med samma tal: F_R = F_N − F_G exakt och
+        // a = F_R / m med två decimaler.
+        const krafter = (m, a) => {
+            const FG = r1(m * g);
+            const FN = r1(Math.max(0, m * (g + a)));
+            const FR = r1(FN - FG);
+            const aV = Math.round(FR / m * 100) / 100;
+            const kv = FG > 0 ? FN / FG : 1;
+            const kansla = kv < 0.02 ? 'tyngdlos' : (kv < 0.98 ? 'latt' : (kv <= 1.02 ? 'normal' : 'tung'));
+            return { FG, FN, FR, a: aV, kv, kansla };
+        };
+
+        // ── Faserna i färden ─────────────────────────────────────
+        const FAS = {
+            vila:       { titel: 'Hissen står stilla', svar: 'normal' },
+            okarUpp:    { titel: 'Hissen ökar farten uppåt', svar: 'tung',
+                          lab: 'Hissen har sin största acceleration på väg upp' },
+            konstUpp:   { titel: 'Hissen åker uppåt med konstant fart', svar: 'normal',
+                          lab: 'Hissen med konstant hastighet upp' },
+            bromsarUpp: { titel: 'Hissen bromsar in på väg upp', svar: 'latt',
+                          lab: 'Hissen bromsar in som mest på väg upp' },
+            okarNer:    { titel: 'Hissen ökar farten nedåt', svar: 'latt',
+                          lab: 'Hissen har sin största acceleration på väg ner' },
+            konstNer:   { titel: 'Hissen åker nedåt med konstant fart', svar: 'normal',
+                          lab: 'Hissen med konstant hastighet ner' },
+            bromsarNer: { titel: 'Hissen bromsar in på väg ner', svar: 'tung',
+                          lab: 'Hissen bromsar in som mest på väg ner' },
+            fall:       { titel: 'Linan har gått av: hissen faller fritt', svar: 'tyngdlos',
+                          lab: 'Hissen går sönder och faller fritt (teoretiskt)' },
+            fanga:      { titel: 'Fångapparaten bromsar hissen', svar: 'tung' },
+        };
+        const FORKLARING = {
+            vila: 'Hastigheten ändras inte, den är noll hela tiden. Då är a = 0 och den resulterande kraften är noll, så normalkraften är exakt lika stor som tyngdkraften. Du känner dig normal.',
+            okarUpp: 'Hastigheten ökar uppåt, från 0 mot ett positivt värde, så accelerationen är riktad uppåt. Då måste den resulterande kraften också peka uppåt: plattan trycker hårdare än tyngdkraften drar, F_N > F_G, och du känner dig tung.',
+            konstUpp: 'Hastigheten är konstant, så a = 0 och F_R = 0. Normalkraften är då lika stor som tyngdkraften. Att hissen rör sig uppåt spelar ingen roll, det är bara förändringen av hastigheten som märks. Du känner dig normal.',
+            bromsarUpp: 'Hissen är på väg uppåt men hastigheten minskar, så accelerationen är riktad nedåt. Den resulterande kraften pekar nedåt: plattan trycker svagare än tyngdkraften drar, F_N < F_G, och du känner dig lätt.',
+            okarNer: 'Hastigheten går från 0 mot allt mer negativa värden. Den minskar alltså, och accelerationen är riktad nedåt. F_R pekar nedåt, så F_N < F_G och du känner dig lätt.',
+            konstNer: 'Hastigheten är konstant, så a = 0 och F_R = 0. Normalkraften är lika stor som tyngdkraften trots att hissen åker nedåt. Du känner dig normal.',
+            bromsarNer: 'Hissen rör sig nedåt men hastigheten går från ett negativt värde mot 0. Hastigheten ökar alltså, och accelerationen är riktad uppåt. F_R pekar uppåt, så F_N > F_G och du känner dig tung. Det är därför det känns i knäna när hissen stannar längst ner.',
+            fall: 'Du och hissen faller tillsammans med accelerationen a = −g. Hela tyngdkraften går åt till att ge dig den accelerationen, F_R = F_G, så plattan behöver inte trycka alls: F_N = 0. Tyngdkraften finns kvar, men du känner dig tyngdlös. Den lilla knuff du får av benen när linan går av räcker för att du ska lyfta från plattan och sväva fritt i hissen.',
+            fanga: 'Hissen rör sig nedåt men bromsas hårt, så accelerationen är riktad uppåt och stor. Normalkraften blir mycket större än tyngdkraften, och du känner dig mycket tung.',
+        };
+        const RORLIG = new Set(['okarUpp', 'konstUpp', 'bromsarUpp', 'okarNer', 'konstNer', 'bromsarNer', 'fall', 'fanga']);
+
+        // ── Färdens profil ───────────────────────────────────────
+        // Accelerationen byggs upp linjärt under TAU, ligger kvar på sitt
+        // största värde och klingar av igen: så kör en riktig hiss, och det
+        // ger kraftplattans mjuka puckel i grafen.
+        const accBlock = (vp, aMax) => {
+            const ap = Math.min(aMax, vp / TAU);
+            const t1 = Math.max(0, vp / ap - TAU);
+            return { ap, t1, T: 2 * TAU + t1, d: vp * (2 * TAU + t1) / 2 };
+        };
+        const trapA = (t, ap, t1) => {
+            if (t <= 0) return 0;
+            if (t < TAU) return ap * t / TAU;
+            if (t < TAU + t1) return ap;
+            if (t < 2 * TAU + t1) return ap * (2 * TAU + t1 - t) / TAU;
+            return 0;
+        };
+        const planResa = (D, aMax, vMax) => {
+            let vp = vMax;
+            if (2 * accBlock(vMax, aMax).d > D) {
+                let lo = 0, hi = vMax;
+                for (let k = 0; k < 50; k++) {
+                    const mid = (lo + hi) / 2;
+                    if (2 * accBlock(mid, aMax).d > D) hi = mid; else lo = mid;
+                }
+                vp = lo;
+            }
+            const b = accBlock(vp, aMax);
+            return { vp, ...b, tc: Math.max(0, (D - 2 * b.d) / vp) };
+        };
+
+        // Tidslinjen: förberäknade punkter var DT:e sekund, och faserna
+        // (segs) med frågetidpunkter för gissa-läget.
+        const nyTL = (y0) => ({ s: [{ a: 0, v: 0, y: y0, ph: 'vila' }], segs: [{ ph: 'vila', t0: 0, t1: 0, efter: null }],
+                                 brottT: null, trasig: false, mal: [] });
+        const tSlut = (tl) => (tl.s.length - 1) * DT;
+        const sista = (tl) => tl.s[tl.s.length - 1];
+        const pushS = (tl, a, v, y, ph) => {
+            tl.s.push({ a, v, y, ph });
+            const t = tSlut(tl);
+            const last = tl.segs[tl.segs.length - 1];
+            if (last.ph === ph) last.t1 = t;
+            else tl.segs.push({ ph, t0: t - DT, t1: t, efter: last.ph });
+        };
+        // Frågetidpunkt (ask) och mittpunkt (mid) för varje ny fas
+        const markera = (tl) => {
+            for (const sg of tl.segs) {
+                if (sg.ask !== undefined) continue;
+                const len = sg.t1 - sg.t0;
+                if (sg.ph === 'okarUpp' || sg.ph === 'okarNer' || sg.ph === 'bromsarUpp' || sg.ph === 'bromsarNer') {
+                    sg.ask = sg.t0 + Math.min(TAU, len / 2);
+                    sg.mid = sg.t0 + Math.min(TAU, len / 2) + Math.max(0, len - 2 * TAU) / 2;
+                } else if (sg.ph === 'konstUpp' || sg.ph === 'konstNer') {
+                    sg.ask = sg.t0 + Math.min(0.5, len / 2); sg.mid = sg.t0 + len / 2;
+                } else if (sg.ph === 'fall' || sg.ph === 'fanga') {
+                    sg.ask = sg.t0 + Math.min(0.25, len / 2); sg.mid = sg.t0 + len / 2;
+                } else {
+                    // stilla: fråga bara när hissen just har stannat
+                    sg.ask = (sg.efter && RORLIG.has(sg.efter) && sg.efter !== 'fall') ? sg.t0 + 0.4 : null;
+                    sg.mid = sg.t0 + 1.0;
+                }
+            }
+        };
+        const laggVila = (tl, dur) => {
+            const st = sista(tl);
+            const n = Math.round(dur / DT);
+            for (let k = 0; k < n; k++) pushS(tl, 0, 0, st.y, 'vila');
+            markera(tl);
+        };
+        const laggResa = (tl, malY, aMax, vMax) => {
+            const st = sista(tl);
+            const D = Math.abs(malY - st.y);
+            if (D < 0.01 || tl.trasig) return;
+            const sgn = Math.sign(malY - st.y);
+            const p = planResa(D, aMax, vMax);
+            const T = 2 * p.T + p.tc;
+            const fas = (tr) => tr < p.T ? (sgn > 0 ? 'okarUpp' : 'okarNer')
+                : tr < p.T + p.tc ? (sgn > 0 ? 'konstUpp' : 'konstNer')
+                : (sgn > 0 ? 'bromsarUpp' : 'bromsarNer');
+            const aAt = (tr) => tr < p.T ? sgn * trapA(tr, p.ap, p.t1)
+                : tr < p.T + p.tc ? 0 : -sgn * trapA(tr - p.T - p.tc, p.ap, p.t1);
+            let v = 0, y = st.y, aPrev = 0;
+            const n = Math.ceil(T / DT);
+            for (let k = 1; k <= n; k++) {
+                const tr = k * DT;
+                const a = aAt(tr);
+                const vN = v + (aPrev + a) / 2 * DT;
+                y += (v + vN) / 2 * DT;
+                v = vN; aPrev = a;
+                pushS(tl, a, v, y, fas(tr - DT / 2));
+            }
+            tl.mal.push({ van: Math.round(malY / VAN_H), t: tSlut(tl) });
+            const s = sista(tl); s.y = malY; s.v = 0; s.a = 0;
+            pushS(tl, 0, 0, malY, 'vila');
+            laggVila(tl, 1.0);
+        };
+        // Linan går av: fritt fall i 1,0 s, sedan bromsar fångapparaten
+        // med a = +g tills hissen står still.
+        const laggBrott = (tl) => {
+            const st = sista(tl);
+            tl.brottT = tSlut(tl);
+            tl.trasig = true;
+            let v = 0, y = st.y, aPrev = 0;
+            for (let k = 1; k <= 100; k++) {
+                const a = -g;
+                const vN = v + (k === 1 ? a : (aPrev + a) / 2) * DT;
+                y += (v + vN) / 2 * DT; v = vN; aPrev = a;
+                pushS(tl, a, v, y, 'fall');
+            }
+            for (let k = 1; k <= 100; k++) {
+                const a = g;
+                const vN = Math.min(0, v + a * DT);
+                y += (v + vN) / 2 * DT; v = vN;
+                pushS(tl, a, v, y, 'fanga');
+            }
+            pushS(tl, 0, 0, y, 'vila');
+            laggVila(tl, 2.0);
+        };
+        // Svävandet efter linbrottet. Benen var ihoptryckta av tyngden, och
+        // när linan går av ger de personen en liten knuff uppåt (U0). Under
+        // det fria fallet har personen och hissen samma acceleration, så
+        // glipan växer med konstant fart. När fångapparaten bromsar hissen
+        // (a = +g) faller personen fortfarande fritt (a = −g) tills golvet
+        // kommer ikapp: glipan minskar då med den relativa accelerationen 2g.
+        // Så länge glipan finns är F_N = 0.
+        const U0 = 0.2;            // knuffen från benen (m/s)
+        const FALL_T = 1.0;        // det fria fallets längd (s), se laggBrott
+        const glipa = (tl, t) => {
+            if (tl.brottT == null || t <= tl.brottT) return 0;
+            const tf = t - tl.brottT;
+            if (tf <= FALL_T) return U0 * tf;
+            const t2 = tf - FALL_T;
+            return Math.max(0, U0 * FALL_T + U0 * t2 - g * t2 * t2);
+        };
+        // Personens tillstånd: hissens rörelse, men utan kontakt faller
+        // personen fritt med a = −g.
+        const personen = (tl, t) => {
+            const s = sampla(tl, t);
+            const gp = glipa(tl, t);
+            return gp > 0 ? { ...s, a: -g, glipa: gp } : { ...s, glipa: 0 };
+        };
+        const sampla = (tl, t) => {
+            const n = tl.s.length;
+            const f = t / DT, i = Math.floor(f);
+            if (i >= n - 1) return tl.s[n - 1];
+            if (i < 0) return tl.s[0];
+            const u = f - i, A = tl.s[i], B = tl.s[i + 1];
+            return { a: A.a + (B.a - A.a) * u, v: A.v + (B.v - A.v) * u, y: A.y + (B.y - A.y) * u, ph: u < 0.5 ? A.ph : B.ph };
+        };
+
+        // Labbens förlopp: stå stilla längst ner, åk upp, stanna, åk ner.
+        const labbTL = (aMax, vMax) => {
+            const tl = nyTL(0);
+            laggVila(tl, 2.0);
+            laggResa(tl, H_TOPP, aMax, vMax);
+            laggVila(tl, 2.0);
+            laggResa(tl, 0, aMax, vMax);
+            laggVila(tl, 1.0);
+            return tl;
+        };
+        const brottTL = () => {
+            const tl = nyTL(H_TOPP);
+            laggVila(tl, 1.5);
+            laggBrott(tl);
+            return tl;
+        };
+
+        // Labbens nio lägen, i samma ordning som på labbladet
+        const LAGEN = [
+            { id: 1, namn: 'Stilla längst ner', prog: 'labb', hitta: (tl) => 1.0 },
+            { id: 2, namn: 'Största acceleration upp', prog: 'labb', hitta: (tl) => tl.segs.find(s => s.ph === 'okarUpp').mid },
+            { id: 3, namn: 'Konstant hastighet upp', prog: 'labb', hitta: (tl) => tl.segs.find(s => s.ph === 'konstUpp').mid },
+            { id: 4, namn: 'Bromsar som mest, väg upp', prog: 'labb', hitta: (tl) => tl.segs.find(s => s.ph === 'bromsarUpp').mid },
+            { id: 5, namn: 'Stilla högst upp', prog: 'labb', hitta: (tl) => tl.segs.find(s => s.ph === 'vila' && s.efter === 'bromsarUpp').mid },
+            { id: 6, namn: 'Största acceleration ner', prog: 'labb', hitta: (tl) => tl.segs.find(s => s.ph === 'okarNer').mid },
+            { id: 7, namn: 'Konstant hastighet ner', prog: 'labb', hitta: (tl) => tl.segs.find(s => s.ph === 'konstNer').mid },
+            { id: 8, namn: 'Bromsar som mest, väg ner', prog: 'labb', hitta: (tl) => tl.segs.find(s => s.ph === 'bromsarNer').mid },
+            { id: 9, namn: 'Faller fritt (teoretiskt)', prog: 'brott', hitta: (tl) => tl.segs.find(s => s.ph === 'fall').t0 + 0.85 },
+        ];
+        const LAGE_TEXT = {
+            1: 'Hissen står stilla längst ner. Läs av normalkraften: den är lika stor som tyngdkraften.',
+            2: 'Hissen har just startat uppåt och har sin största acceleration. Jämför normalkraften med tyngdkraften.',
+            3: 'Hissen åker uppåt med konstant hastighet. Stämmer känslan med det du väntade dig?',
+            4: 'Hissen närmar sig översta våningen och bromsar in som mest.',
+            5: 'Hissen står stilla högst upp. Är normalkraften annorlunda än längst ner?',
+            6: 'Hissen har just startat nedåt och har sin största acceleration.',
+            7: 'Hissen åker nedåt med konstant hastighet.',
+            8: 'Hissen närmar sig bottenvåningen och bromsar in som mest.',
+            9: 'Linan har gått av och hissen faller fritt, ett tänkt fall. Fångapparaten tar sedan emot hissen.',
+        };
+
+        // ── SVG-hjälpare ─────────────────────────────────────────
+        // Pil utan vit kontur; edge = tunn bläckfärgad kant där pilen
+        // ligger över personen.
+        const Arrow = ({ x1, y1, x2, y2, color, width = 4.6, head = 14, dashed = false, edge = false }) => {
+            const ang = Math.atan2(y2 - y1, x2 - x1);
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 0.8) return null;
+            const hw = 0.44;
+            const hd = Math.max(6, Math.min(head, len * (len < 30 ? 0.62 : 0.95)));
+            const bx = x2 - hd * 0.82 * Math.cos(ang), by = y2 - hd * 0.82 * Math.sin(ang);
+            const pL = [x2 - hd * Math.cos(ang - hw), y2 - hd * Math.sin(ang - hw)];
+            const pR = [x2 - hd * Math.cos(ang + hw), y2 - hd * Math.sin(ang + hw)];
+            const pts = `${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`;
+            return (
+                <g>
+                    {edge && <line x1={x1} y1={y1} x2={bx} y2={by} stroke="rgba(15,22,32,0.55)" strokeWidth={width + 3}
+                                   strokeLinecap="butt" strokeDasharray={dashed ? '6 4' : undefined} />}
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="butt" strokeDasharray={dashed ? '6 4' : undefined} />
+                    <polygon points={pts} fill={color} stroke={edge ? 'rgba(15,22,32,0.55)' : 'rgba(15,22,32,0.18)'}
+                             strokeWidth={edge ? 1.6 : 1} strokeLinejoin="round" />
+                </g>
+            );
+        };
+        // F med index: kursiv bokstav, rakt index
+        const Sym = ({ s, sub, fs }) => (
+            <React.Fragment>
+                <tspan fontStyle="italic">{s}</tspan>
+                {sub && <tspan dy={fs * 0.28} fontSize={fs * 0.72}>{sub}</tspan>}
+                {sub && <tspan dy={-fs * 0.28}>{' '}</tspan>}
+            </React.Fragment>
+        );
+        // Radbrytning för SVG-text (ungefärlig teckenbredd)
+        const radbryt = (txt, maxTecken) => {
+            const ord = txt.split(' '), rader = [];
+            let rad = '';
+            for (const w of ord) {
+                if ((rad + ' ' + w).trim().length > maxTecken && rad) { rader.push(rad); rad = w; }
+                else rad = (rad + ' ' + w).trim();
+            }
+            if (rad) rader.push(rad);
+            return rader;
+        };
+
+        // ── Huset med hisschaktet (egna koordinater 158 × 542) ─────
+        const BY = (h) => 512 - h * 16;          // hissgolvets y för höjden h (m)
+        const Huset = ({ y, v, ph, trasig, cwH, visaV, glipa: gp = 0 }) => {
+            const yc = BY(y);
+            const carTop = yc - 40;
+            const cwBot = BY(cwH), cwTop = cwBot - 40;
+            const vL = Math.min(9 * Math.abs(v), 110);
+            const fanga = ph === 'fanga';
+            return (
+                <g>
+                    {/* mark */}
+                    <rect x="-14" y="512" width="186" height="30" fill="#d8ccb4" />
+                    {[...Array(12)].map((_, i) => (
+                        <line key={i} x1={-12 + i * 16} y1="540" x2={-2 + i * 16} y2="514" stroke="rgba(15,22,32,0.18)" strokeWidth="1" />
+                    ))}
+                    {/* husets stomme */}
+                    <rect x="0" y="64" width="158" height="448" fill="#ebe3d3" stroke="rgba(15,22,32,0.45)" strokeWidth="1.4" />
+                    {/* maskinrummet på taket */}
+                    <rect x="20" y="4" width="126" height="60" rx="2" fill="#ddd3c0" stroke="rgba(15,22,32,0.45)" strokeWidth="1.3" />
+                    <rect x="26" y="40" width="26" height="20" rx="2" fill="#9aa3ad" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
+                    <line x1="52" y1="50" x2="92" y2="34" stroke="#6b7280" strokeWidth="2" />
+                    {/* schakten */}
+                    <rect x="28" y="64" width="76" height="462" fill="#d6ccb8" stroke="rgba(15,22,32,0.4)" strokeWidth="1.1" />
+                    <rect x="108" y="64" width="20" height="462" fill="#d6ccb8" stroke="rgba(15,22,32,0.4)" strokeWidth="1.1" />
+                    <line x1="32" y1="64" x2="32" y2="526" stroke="rgba(15,22,32,0.25)" strokeWidth="1.4" />
+                    <line x1="100" y1="64" x2="100" y2="526" stroke="rgba(15,22,32,0.25)" strokeWidth="1.4" />
+                    {/* bjälklag och våningsnummer */}
+                    {[...Array(TOPP + 1)].map((_, k) => {
+                        const yy = BY(k * VAN_H);
+                        return (
+                            <g key={k}>
+                                <rect x="0" y={yy} width="28" height="4" fill="#b9ad97" />
+                                <rect x="128" y={yy} width="30" height="4" fill="#b9ad97" />
+                                {k > 0 && <rect x="104" y={yy} width="4" height="4" fill="#b9ad97" />}
+                                <text x="14" y={yy - 15} textAnchor="middle" fontSize="15" fontWeight="600"
+                                      fill="rgba(15,22,32,0.7)" fontFamily="'JetBrains Mono', monospace">{k}</text>
+                                {/* hissdörren på våningsplanet */}
+                                <rect x="25" y={yy - 34} width="3" height="34" fill="#8d8a83" />
+                            </g>
+                        );
+                    })}
+                    {/* linskivan */}
+                    <circle cx="92" cy="34" r="26" fill="#c9ced6" stroke="#3a3f47" strokeWidth="1.6" />
+                    <circle cx="92" cy="34" r="5" fill="#3a3f47" />
+                    {/* linor */}
+                    {!trasig ? (
+                        <line x1="66" y1="34" x2="66" y2={carTop} stroke="#3a3f47" strokeWidth="1.6" />
+                    ) : (
+                        <g>
+                            <path d="M 66 34 L 66 86 L 63 92 M 66 86 L 69 91" fill="none" stroke="#3a3f47" strokeWidth="1.6" />
+                            <path d={`M 66 ${carTop} L 66 ${carTop - 14} L 63 ${carTop - 19} M 66 ${carTop - 14} L 69 ${carTop - 18}`}
+                                  fill="none" stroke="#3a3f47" strokeWidth="1.6" />
+                        </g>
+                    )}
+                    <line x1="118" y1="34" x2="118" y2={cwTop} stroke="#3a3f47" strokeWidth="1.6" />
+                    {/* motvikten */}
+                    <rect x="111" y={cwTop} width="14" height="40" rx="1.5" fill="#6b7280" stroke="#3a3f47" strokeWidth="1" />
+                    {[8, 16, 24, 32].map(d => <line key={d} x1="111" y1={cwTop + d} x2="125" y2={cwTop + d} stroke="#3a3f47" strokeWidth="0.6" opacity="0.6" />)}
+                    {/* hisskorgen */}
+                    <rect x="36" y={carTop} width="60" height="40" rx="2" fill="#cfd5dc" stroke="#3a3f47" strokeWidth="1.4" />
+                    <line x1="66" y1={carTop + 3} x2="66" y2={yc - 2} stroke="rgba(58,63,71,0.5)" strokeWidth="1" />
+                    <rect x="36" y={yc - 4} width="60" height="4" fill="#565d68" />
+                    {/* personen i hissen, liten */}
+                    <g transform={`translate(0 ${-gp * 16})`}>
+                        <circle cx="56" cy={carTop + 12} r="4.2" fill="#e8b489" />
+                        <path d={`M 50.5 ${carTop + 18} L 61.5 ${carTop + 18} L 61 ${yc - 13} L 51 ${yc - 13} Z`} fill="#6f9fd0" />
+                        <rect x="51.5" y={yc - 13} width="9" height="9" fill="#3a4654" />
+                    </g>
+                    {/* fångapparaten */}
+                    {fanga && (
+                        <g>
+                            <rect x="30" y={carTop + 6} width="6" height="12" fill="#e0701a" stroke="#9a4a0c" strokeWidth="0.8" />
+                            <rect x="96" y={carTop + 6} width="6" height="12" fill="#e0701a" stroke="#9a4a0c" strokeWidth="0.8" />
+                            {[-1, 1].map(sd => [0, 1, 2].map(j => (
+                                <line key={sd + '_' + j} x1={sd < 0 ? 30 : 102} y1={carTop + 8 + j * 4}
+                                      x2={sd < 0 ? 22 : 110} y2={carTop + 2 + j * 7} stroke="#e0701a" strokeWidth="1.3" />
+                            )))}
+                        </g>
+                    )}
+                    {/* hastigheten: från korgens kant i rörelseriktningen */}
+                    {visaV && vL > 1.5 && (
+                        <g>
+                            <Arrow x1={46} y1={v > 0 ? carTop : yc} x2={46} y2={v > 0 ? carTop - vL : yc + vL}
+                                   color={COL.fart} width={3.6} head={11} />
+                            <text x={40} y={v > 0 ? carTop - vL + 6 : yc + vL - 2} textAnchor="end" fontSize="15"
+                                  fontWeight="700" fill={COL.fart}><tspan fontStyle="italic">v</tspan></text>
+                        </g>
+                    )}
+                </g>
+            );
+        };
+
+        // ── Personen i hissen, inzoomad (egna koordinater 390 × 316) ──
+        const ZW = 420, ZH = 316;
+        const FOT = 280;            // plattans ovansida = fotsulorna
+        const CM = 170;             // tyngdpunkten
+        const PX = 150;             // personens mittlinje
+        const LG = 78;              // F_G:s pillängd (px); F_N = LG · F_N/F_G
+        const ASKALA = 8.5;         // px per m/s²
+        const PX_PER_M = 114;       // personen, 1,75 m, ritas 200 px lång
+
+        const Ansikte = ({ k }) => {
+            const ink = '#3a2a1e';
+            if (k === 'tung') return (
+                <g stroke={ink} strokeWidth="1.6" strokeLinecap="round" fill="none">
+                    <path d="M 141 90 L 147 92.5" /><path d="M 159 90 L 153 92.5" />
+                    <path d="M 142.5 96.5 L 147 96.5" /><path d="M 153 96.5 L 157.5 96.5" />
+                    <path d="M 144 106 Q 150 103.5 156 106" />
+                </g>
+            );
+            if (k === 'latt') return (
+                <g>
+                    <g stroke={ink} strokeWidth="1.4" strokeLinecap="round" fill="none">
+                        <path d="M 141 90 Q 144.5 87.5 148 89.5" /><path d="M 152 89.5 Q 155.5 87.5 159 90" />
+                    </g>
+                    <circle cx="144.5" cy="96" r="2" fill={ink} /><circle cx="155.5" cy="96" r="2" fill={ink} />
+                    <ellipse cx="150" cy="106" rx="2.4" ry="2.8" fill={ink} />
+                </g>
+            );
+            if (k === 'tyngdlos') return (
+                <g>
+                    <g stroke={ink} strokeWidth="1.4" strokeLinecap="round" fill="none">
+                        <path d="M 140.5 88.5 Q 144.5 85 148.5 87.5" /><path d="M 151.5 87.5 Q 155.5 85 159.5 88.5" />
+                    </g>
+                    <circle cx="144.5" cy="96" r="3" fill="#fbf8f2" stroke={ink} strokeWidth="1.2" />
+                    <circle cx="155.5" cy="96" r="3" fill="#fbf8f2" stroke={ink} strokeWidth="1.2" />
+                    <circle cx="144.5" cy="96.5" r="1.3" fill={ink} /><circle cx="155.5" cy="96.5" r="1.3" fill={ink} />
+                    <path d="M 144.5 108.5 Q 150 102.5 155.5 108.5 Z" fill={ink} />
+                </g>
+            );
+            return (
+                <g>
+                    <circle cx="144.5" cy="96" r="1.7" fill={ink} /><circle cx="155.5" cy="96" r="1.7" fill={ink} />
+                    <path d="M 144 104 Q 150 109.5 156 104" stroke={ink} strokeWidth="1.6" fill="none" strokeLinecap="round" />
+                </g>
+            );
+        };
+
+        const Person = ({ k }) => {
+            const vinkel = { tung: 4, normal: 9, latt: 24, tyngdlos: 68 }[k] * Math.PI / 180;
+            const arm = (sx, sd) => {
+                const ex = sx + sd * 70 * Math.sin(vinkel), ey = 128 + 70 * Math.cos(vinkel);
+                const mx = sx + sd * 32 * Math.sin(vinkel), my = 128 + 32 * Math.cos(vinkel);
+                return (
+                    <g>
+                        <line x1={sx} y1="128" x2={mx} y2={my} stroke="#6f9fd0" strokeWidth="11.5" strokeLinecap="round" />
+                        <line x1={mx} y1={my} x2={ex} y2={ey} stroke="#e8b489" strokeWidth="9" strokeLinecap="round" />
+                        <circle cx={ex} cy={ey} r="5.4" fill="#e8b489" stroke="#c8895c" strokeWidth="1" />
+                    </g>
+                );
+            };
+            return (
+                <g>
+                    {/* ben och skor */}
+                    <path d="M 131 196 L 148 196 L 147 273 L 133 273 Z" fill="#3a4654" />
+                    <path d="M 152 196 L 169 196 L 167 273 L 153 273 Z" fill="#3a4654" />
+                    <path d="M 129 272 L 148 272 L 148 280 L 124 280 Q 124 274 129 272 Z" fill="#1f2530" />
+                    <path d="M 152 272 L 171 272 Q 176 274 176 280 L 152 280 Z" fill="#1f2530" />
+                    {/* armar bakom kroppen */}
+                    {arm(131, -1)}
+                    {arm(169, 1)}
+                    {/* bålen */}
+                    <path d="M 128 129 Q 128 121.5 137 121 L 163 121 Q 172 121.5 172 129 L 170 202 L 130 202 Z"
+                          fill="#6f9fd0" stroke="#3f6f9f" strokeWidth="1.2" strokeLinejoin="round" />
+                    <rect x="130" y="197" width="40" height="5" fill="#2b313b" />
+                    {/* hals och huvud */}
+                    <rect x="144.5" y="111" width="11" height="12" fill="#e8b489" />
+                    <circle cx="150" cy="98" r="17" fill="#e8b489" stroke="#c8895c" strokeWidth="1.2" />
+                    <path d="M 133.4 95 Q 134 79 150 79 Q 166 79 166.6 95 Q 160 86.5 150 87.5 Q 140 86.5 133.4 95 Z" fill="#5b4636" />
+                    <Ansikte k={k} />
+                </g>
+            );
+        };
+
+        const Zoom = ({ st, m, show, dolj, broken }) => {
+            const K = krafter(m, st.a);
+            const kv = K.kv;
+            const tipN = FOT - LG * kv;
+            const gp = (st.glipa || 0) * PX_PER_M;   // glipan i bildpunkter
+            const cm = CM - gp;
+            const tipG = cm + LG;
+            // Etiketterna till vänster om personen, två rader var: F_N-etiketten
+            // flyttas upp om den skulle hamna i F_G-etikettens rader.
+            const labG = tipG + 5;
+            let labN = tipN + 5;
+            if (labN > labG - 34) labN = labG - 34;
+            const lFR = LG * K.FR / K.FG;            // samma skala som de andra krafterna
+            const lA = ASKALA * K.a;
+            const tipR = cm - lFR, tipA = cm - lA;
+            const kansla = K.kansla;
+            const van = Math.max(0, Math.min(TOPP, Math.round(st.y / VAN_H)));
+            const riktn = st.v > 0.05 ? 1 : (st.v < -0.05 ? -1 : 0);
+            return (
+                <g>
+                    <defs>
+                        <clipPath id="zoomKlipp"><rect x="0" y="0" width={ZW} height={ZH} rx="10" /></clipPath>
+                        <linearGradient id="vaggG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#ece7dd" />
+                            <stop offset="100%" stopColor="#dcd5c7" />
+                        </linearGradient>
+                    </defs>
+                    <g clipPath="url(#zoomKlipp)">
+                        <rect x="0" y="0" width={ZW} height={ZH} fill="url(#vaggG)" />
+                        <rect x="0" y="0" width="7" height="290" fill="#c9c2b3" />
+                        <rect x={ZW - 7} y="0" width="7" height="290" fill="#c9c2b3" />
+                        {/* golvet i hisskorgen */}
+                        <rect x="0" y="290" width={ZW} height="26" fill="#565d68" />
+                        <text x={PX} y="307" textAnchor="middle" fontSize="11" fill="#e9edf3" letterSpacing="0.06em">KRAFTPLATTA</text>
+                        {/* kraftplattan och mätlådan */}
+                        <rect x="100" y={FOT} width="100" height="10" rx="1.5" fill="#4b5563" stroke="#2b313b" strokeWidth="1" />
+                        <rect x="100" y={FOT} width="100" height="2" fill="#8d96a3" />
+                        <path d="M 200 286 Q 210 286 216 284" fill="none" stroke="#2b313b" strokeWidth="1.8" />
+                        <rect x="216" y="274" width="34" height="16" rx="2" fill="#3b4656" stroke="#1f2530" strokeWidth="1" />
+                        <circle cx="243" cy="279" r="1.8" fill="#4ade80" />
+                        {/* våningsvisaren */}
+                        <rect x="122" y="14" width="56" height="30" rx="4" fill="#1f2530" />
+                        {riktn !== 0 && (
+                            <polygon points={riktn > 0 ? '133,22 139,33 127,33' : '127,24 139,24 133,35'} fill="#f2a33a" />
+                        )}
+                        <text x="160" y="36" textAnchor="middle" fontSize="19" fontWeight="700" fill="#f2a33a"
+                              fontFamily="'JetBrains Mono', monospace">{broken ? '–' : van}</text>
+                        {/* skärmen som visar normalkraften (Digits) */}
+                        <rect x="292" y="10" width="120" height="54" rx="6" fill="#2b313b" />
+                        <rect x="298" y="16" width="108" height="42" rx="3" fill="#dfe9d8" />
+                        <text x="352" y="28" textAnchor="middle" fontSize="9.5" fill="#3c4a3a" letterSpacing="0.04em">NORMALKRAFT (N)</text>
+                        <text x="352" y="51" textAnchor="middle" fontSize={K.FN >= 1000 && !dolj ? 17 : 20} fontWeight="700" fill={COL.ink}
+                              fontFamily="'JetBrains Mono', monospace">{dolj ? '?' : fmt(K.FN, 1)}</text>
+
+                        <g transform={`translate(0 ${-gp})`}><Person k={dolj ? 'normal' : kansla} /></g>
+
+                        {/* tankebubblan */}
+                        <rect x="8" y="12" width="110" height="50" rx="16" fill="#fbf8f2" stroke="rgba(15,22,32,0.45)" strokeWidth="1.2" />
+                        <circle cx="119" cy="66" r="4.5" fill="#fbf8f2" stroke="rgba(15,22,32,0.45)" strokeWidth="1.1" />
+                        <circle cx="124.5" cy="72.5" r="2.8" fill="#fbf8f2" stroke="rgba(15,22,32,0.45)" strokeWidth="1" />
+                        <text x="63" y="31" textAnchor="middle" fontSize="11.5" fill="rgba(15,22,32,0.75)">Jag känner mig</text>
+                        <text x="63" y="53" textAnchor="middle" fontSize={!dolj && kv > 1.6 ? 15 : 18} fontWeight="700"
+                              fill={dolj ? COL.ink : COL[kansla]}>{dolj ? '?' : (kv > 1.6 ? 'mycket tung' : KANSLA_ORD[kansla])}</text>
+
+                        {/* krafterna på personen: samma verkningslinje, skaften intill varandra */}
+                        {show.krafter && (
+                            <g>
+                                <Arrow x1={PX - 2.6} y1={cm} x2={PX - 2.6} y2={tipG} color={COL.tyngd} edge />
+                                <circle cx={PX - 2.6} cy={cm} r="2.8" fill={COL.tyngd} stroke="rgba(15,22,32,0.55)" strokeWidth="1" />
+                                <text x="100" y={labG} textAnchor="end" fontSize="15" fontWeight="700" fill={COL.tyngd}>
+                                    <Sym s="F" sub="G" fs={15} />
+                                </text>
+                                <text x="100" y={labG + 16} textAnchor="end" fontSize="13" fontWeight="600" fill={COL.tyngd}>
+                                    {fmt(K.FG, 1)} N
+                                </text>
+                                {!dolj && (
+                                    <g>
+                                        <Arrow x1={PX + 2.6} y1={FOT} x2={PX + 2.6} y2={tipN} color={COL.norm} edge />
+                                        <text x="100" y={labN} textAnchor="end" fontSize="15" fontWeight="700" fill={COL.norm}>
+                                            <Sym s="F" sub="N" fs={15} />
+                                        </text>
+                                        <text x="100" y={labN + 16} textAnchor="end" fontSize="13" fontWeight="600" fill={COL.norm}>
+                                            {fmt(K.FN, 1)} N
+                                        </text>
+                                    </g>
+                                )}
+                            </g>
+                        )}
+                        {/* resulterande kraft (streckad) och acceleration, bredvid personen */}
+                        {show.res && !dolj && (
+                            <g>
+                                <Arrow x1={252} y1={cm} x2={252} y2={tipR} color={COL.res} width={4} head={13} dashed />
+                                {Math.abs(lFR) >= 1 && <circle cx="252" cy={cm} r="2" fill={COL.res} />}
+                                <text x="252" y={Math.abs(lFR) < 1 ? cm + 20 : (lFR > 0 ? tipR - 8 : tipR + 18)} textAnchor="middle"
+                                      fontSize="13.5" fontWeight="700" fill={COL.res}>
+                                    <Sym s="F" sub="R" fs={13.5} /> = {fmt(K.FR, 1)} N
+                                </text>
+                            </g>
+                        )}
+                        {show.acc && !dolj && (
+                            <g>
+                                <Arrow x1={362} y1={cm} x2={362} y2={tipA} color={COL.acc} width={4} head={13} />
+                                {Math.abs(lA) >= 1 && <circle cx="362" cy={cm} r="2" fill={COL.acc} />}
+                                <text x="362" y={Math.abs(lA) < 1 ? cm + 20 : (lA > 0 ? tipA - 8 : tipA + 18)} textAnchor="middle"
+                                      fontSize="13.5" fontWeight="700" fill={COL.acc}>
+                                    <tspan fontStyle="italic">a</tspan> = {fmt(K.a, 2)} m/s²
+                                </text>
+                            </g>
+                        )}
+                    </g>
+                    <rect x="0" y="0" width={ZW} height={ZH} rx="10" fill="none" stroke="rgba(15,22,32,0.55)" strokeWidth="1.5" />
+                </g>
+            );
+        };
+
+        // ── Upplevd tyngd: skala från tyngdlös till dubbel tyngd ──
+        const Matare = ({ x, y, w, m, a, dolj }) => {
+            const K = krafter(m, a);
+            const X = (r) => x + w * Math.max(0, Math.min(2, r)) / 2;
+            const kg = K.FN / g;
+            return (
+                <g>
+                    <text x={x} y={y + 11} fontSize="11" fontWeight="600" letterSpacing="0.06em" fill="rgba(15,22,32,0.6)">UPPLEVD TYNGD</text>
+                    <text x={x} y={y + 33} fontSize="22" fontWeight="700" fill={dolj ? COL.ink : COL[K.kansla]}>
+                        {dolj ? '?' : (K.kv > 1.6 ? 'mycket tung' : KANSLA_ORD[K.kansla])}
+                    </text>
+                    <rect x={x} y={y + 52} width={w / 2} height="10" fill={COL.latt} opacity="0.22" />
+                    <rect x={x + w / 2} y={y + 52} width={w / 2} height="10" fill={COL.tung} opacity="0.22" />
+                    <rect x={x} y={y + 52} width={w} height="10" fill="none" stroke="rgba(15,22,32,0.45)" strokeWidth="1" />
+                    <line x1={X(1)} y1={y + 48} x2={X(1)} y2={y + 66} stroke={COL.ink} strokeWidth="1.6" />
+                    {!dolj && (
+                        <polygon points={`${X(K.kv)},${y + 51} ${X(K.kv) - 6},${y + 41} ${X(K.kv) + 6},${y + 41}`}
+                                 fill={COL[K.kansla]} stroke="rgba(15,22,32,0.4)" strokeWidth="1" />
+                    )}
+                    <text x={x} y={y + 78} fontSize="11.5" fill="rgba(15,22,32,0.7)">0</text>
+                    <text x={X(1)} y={y + 78} textAnchor="middle" fontSize="11.5" fill="rgba(15,22,32,0.7)"><Sym s="F" sub="G" fs={11.5} /></text>
+                    <text x={x + w} y={y + 78} textAnchor="end" fontSize="11.5" fill="rgba(15,22,32,0.7)">2 · <Sym s="F" sub="G" fs={11.5} /></text>
+                    <text x={x} y={y + 100} fontSize="13" fill="rgba(15,22,32,0.82)">
+                        En personvåg skulle visa {dolj ? '?' : fmt(kg, 0)} kg
+                    </text>
+                </g>
+            );
+        };
+
+        // ── Grafen: kraftplattans mätning ─────────────────────────
+        const niceStep = (span, maxTicks) => {
+            const raw = span / maxTicks;
+            const p = Math.pow(10, Math.floor(Math.log10(raw)));
+            for (const f of [1, 2, 2.5, 5, 10]) if (f * p >= raw) return f * p;
+            return 10 * p;
+        };
+        const Graf = ({ x, y, w, h, hist, mode, tNow, aMax, vMax, tGrans }) => {
+            const px0 = x + 54, px1 = x + w - 16, py0 = y + 36, py1 = y + h - 30;
+            const t0 = Math.max(0, tNow - FONSTER + 3), t1 = t0 + FONSTER;
+            const syns = hist.filter(p => p.t >= t0 - 0.1 && p.t <= Math.min(tNow, tGrans) + 1e-6);
+            let ymin, ymax;
+            if (mode === 'fn') {
+                let mx = 0, fg = 0;
+                for (const p of syns) { if (p.fn > mx) mx = p.fn; if (p.fg > fg) fg = p.fg; }
+                if (!fg && hist.length) fg = hist[hist.length - 1].fg;
+                let mn = Infinity;
+                for (const p of syns) if (p.fn < mn) mn = p.fn;
+                if (!isFinite(mn)) mn = fg;
+                // Som i mätprogrammet: skalan hugger runt mätvärdena, men
+                // når ned till 0 så snart plattan visar nära noll.
+                ymin = Math.max(0, Math.min(0.7 * fg, mn * 0.9)); ymax = Math.max(1.3 * fg, mx * 1.08, 100);
+            } else {
+                let mx = 0;
+                for (const p of syns) mx = Math.max(mx, Math.abs(mode === 'a' ? p.a : p.v));
+                const bas = mode === 'a' ? aMax * 1.3 : vMax * 1.25;
+                const A = Math.max(bas, mx * 1.1);
+                ymin = -A; ymax = A;
+            }
+            const steg = niceStep(ymax - ymin, 5);
+            ymax = Math.ceil(ymax / steg - 1e-9) * steg;
+            if (ymin < 0) ymin = -ymax;
+            else ymin = Math.floor(ymin / steg + 1e-9) * steg;
+            const X = (t) => px0 + (px1 - px0) * (t - t0) / (t1 - t0);
+            const Y = (v) => py1 - (py1 - py0) * (v - ymin) / (ymax - ymin);
+            const val = (p) => mode === 'fn' ? p.fn : (mode === 'a' ? p.a : p.v);
+            const ref = (p) => mode === 'fn' ? p.fg : 0;
+            const farg = mode === 'fn' ? COL.norm : (mode === 'a' ? COL.acc : COL.fart);
+            // Ytan mellan kurvan och referenslinjen (F_G, eller a = 0):
+            // ovanför = tung, nedanför = lätt
+            let dTung = '', dLatt = '';
+            if (mode !== 'v') {
+                for (let i = 1; i < syns.length; i++) {
+                    const A = syns[i - 1], B = syns[i];
+                    const dA = val(A) - ref(A), dB = val(B) - ref(B);
+                    const tol = mode === 'fn' ? 0.02 * (ref(B) || 1) : 0.196;
+                    const medel = (dA + dB) / 2;
+                    if (Math.abs(medel) < tol) continue;
+                    const q = `M${X(A.t).toFixed(1)},${Y(val(A)).toFixed(1)}L${X(B.t).toFixed(1)},${Y(val(B)).toFixed(1)}L${X(B.t).toFixed(1)},${Y(ref(B)).toFixed(1)}L${X(A.t).toFixed(1)},${Y(ref(A)).toFixed(1)}Z`;
+                    if (medel > 0) dTung += q; else dLatt += q;
+                }
+            }
+            const kurva = syns.map(p => X(p.t).toFixed(1) + ',' + Y(val(p)).toFixed(1)).join(' ');
+            const refLinje = mode === 'fn' ? syns.map(p => X(p.t).toFixed(1) + ',' + Y(p.fg).toFixed(1)).join(' ') : '';
+            const yTicks = [];
+            for (let v = ymin; v <= ymax + 1e-9; v += steg) yTicks.push(Math.round(v * 1000) / 1000);
+            const xTicks = [];
+            for (let t = Math.ceil(t0 / 5) * 5; t <= t1 + 1e-9; t += 5) xTicks.push(t);
+            const sist = syns[syns.length - 1];
+            const titel = mode === 'fn' ? ['Normalkraft ', 'F', 'N', ' (N), mätt med kraftplattan']
+                : mode === 'a' ? ['Acceleration ', 'a', null, ' (m/s²), positiv riktning uppåt']
+                : ['Hastighet ', 'v', null, ' (m/s), positiv riktning uppåt'];
+            const fgSist = mode === 'fn' && sist ? sist.fg : null;
+            return (
+                <g>
+                    <rect x={x} y={y} width={w} height={h} rx="10" fill="#faf7f0" stroke="rgba(15,22,32,0.4)" strokeWidth="1.2" />
+                    <text x={x + 14} y={y + 21} fontSize="13.5" fontWeight="700" fill={COL.ink}>
+                        {titel[0]}{titel[2] ? <Sym s={titel[1]} sub={titel[2]} fs={13.5} /> : <tspan fontStyle="italic">{titel[1]}</tspan>}
+                        <tspan fontWeight="400" fill="rgba(15,22,32,0.7)">{titel[3]}</tspan>
+                    </text>
+                    {mode !== 'v' && (
+                        <g fontSize="12" fill="rgba(15,22,32,0.75)">
+                            <rect x={x + w - 108} y={y + 11} width="12" height="10" fill={COL.tung} opacity="0.3" />
+                            <text x={x + w - 92} y={y + 20}>tung</text>
+                            <rect x={x + w - 58} y={y + 11} width="12" height="10" fill={COL.latt} opacity="0.3" />
+                            <text x={x + w - 42} y={y + 20}>lätt</text>
+                        </g>
+                    )}
+                    {/* rutnät och skalor */}
+                    {yTicks.map(v => (
+                        <g key={'y' + v}>
+                            <line x1={px0} y1={Y(v)} x2={px1} y2={Y(v)} stroke="rgba(37,99,201,0.13)" strokeWidth="1" />
+                            <text x={px0 - 6} y={Y(v) + 4} textAnchor="end" fontSize="11" fill="rgba(15,22,32,0.7)">{fmt(v, steg < 1 ? 1 : 0)}</text>
+                        </g>
+                    ))}
+                    {xTicks.map(t => (
+                        <g key={'x' + t}>
+                            <line x1={X(t)} y1={py0} x2={X(t)} y2={py1} stroke="rgba(37,99,201,0.13)" strokeWidth="1" />
+                            {X(t) < px1 - 34 && <text x={X(t)} y={py1 + 15} textAnchor="middle" fontSize="11" fill="rgba(15,22,32,0.7)">{fmt(t, 0)}</text>}
+                        </g>
+                    ))}
+                    <text x={px1} y={py1 + 15} textAnchor="end" fontSize="12" fill="rgba(15,22,32,0.8)"><tspan fontStyle="italic">t</tspan> (s)</text>
+                    <line x1={px0} y1={py0 - 4} x2={px0} y2={py1} stroke="rgba(15,22,32,0.6)" strokeWidth="1.2" />
+                    <line x1={px0} y1={Y(Math.max(0, ymin))} x2={px1} y2={Y(Math.max(0, ymin))} stroke="rgba(15,22,32,0.6)" strokeWidth="1.2" />
+                    {dTung && <path d={dTung} fill={COL.tung} opacity="0.22" />}
+                    {dLatt && <path d={dLatt} fill={COL.latt} opacity="0.22" />}
+                    {mode === 'fn' && syns.length > 1 && (
+                        <polyline points={refLinje} fill="none" stroke={COL.tyngd} strokeWidth="1.8" strokeDasharray="7 5" />
+                    )}
+                    {fgSist != null && (
+                        <text x={px1 - 4} y={Y(fgSist) - 6} textAnchor="end" fontSize="13" fontWeight="700" fill={COL.tyngd}>
+                            <Sym s="F" sub="G" fs={13} />
+                        </text>
+                    )}
+                    {syns.length > 1 && <polyline points={kurva} fill="none" stroke={farg} strokeWidth="2.4" strokeLinejoin="round" />}
+                    {sist && tNow <= tGrans + 1e-6 && (
+                        <g>
+                            <line x1={X(tNow)} y1={py0} x2={X(tNow)} y2={py1} stroke="rgba(15,22,32,0.35)" strokeWidth="1" strokeDasharray="3 3" />
+                            <circle cx={X(sist.t)} cy={Y(val(sist))} r="4" fill={farg} stroke="rgba(15,22,32,0.4)" strokeWidth="1" />
+                        </g>
+                    )}
+                </g>
+            );
+        };
+
+        // ── Gissa-panelen (ritas över grafen medan frågan står öppen) ──
+        const ALT = [
+            { id: 'tung', rad1: ['Större än ', 'F', 'G'], rad2: 'tung' },
+            { id: 'normal', rad1: ['Lika med ', 'F', 'G'], rad2: 'normal' },
+            { id: 'latt', rad1: ['Mindre än ', 'F', 'G'], rad2: 'lätt' },
+            { id: 'tyngdlos', rad1: ['Noll', null, null], rad2: 'tyngdlös' },
+        ];
+        const GissaPanel = ({ x, y, w, h, fraga, svara, fortsatt, poang, smal }) => {
+            const info = FAS[fraga.seg.ph];
+            const ratt = info.svar;
+            const besvarad = fraga.svar != null;
+            const titel = fraga.titel;
+            const knW = smal ? (w - 40) / 2 : (w - 50) / 4;
+            const knH = 46;
+            const knappar = ALT.map((o, i) => {
+                const kx = smal ? x + 14 + (i % 2) * (knW + 12) : x + 14 + i * (knW + 7.3);
+                const ky = smal ? y + 74 + Math.floor(i / 2) * (knH + 8) : y + 78;
+                let fill = '#f3eee4', stroke = 'rgba(15,22,32,0.4)', tc = COL.ink;
+                if (besvarad) {
+                    if (o.id === ratt) { fill = 'rgba(21,128,61,0.14)'; stroke = COL.norm; }
+                    else if (o.id === fraga.svar) { fill = 'rgba(200,50,74,0.10)'; stroke = COL.res; }
+                    else { tc = 'rgba(15,22,32,0.45)'; }
+                }
+                return (
+                    <g key={o.id} style={{ cursor: besvarad ? 'default' : 'pointer' }}
+                       onClick={() => { if (!besvarad) svara(o.id); }}>
+                        <rect x={kx} y={ky} width={knW} height={knH} rx="8" fill={fill} stroke={stroke} strokeWidth="1.5" />
+                        <text x={kx + knW / 2} y={ky + 20} textAnchor="middle" fontSize="14" fontWeight="700" fill={tc}>
+                            {o.rad1[0]}{o.rad1[1] && <Sym s={o.rad1[1]} sub={o.rad1[2]} fs={14} />}
+                        </text>
+                        <text x={kx + knW / 2} y={ky + 37} textAnchor="middle" fontSize="12" fill={tc}>{o.rad2}</text>
+                    </g>
+                );
+            });
+            const fy = smal ? y + 74 + 2 * (knH + 8) + 12 : y + 78 + knH + 20;
+            const maxT = Math.floor((w - 28) / 7.3);
+            const rader = besvarad ? radbryt(FORKLARING[fraga.seg.ph].replace(/F_N/g, 'FN').replace(/F_G/g, 'FG').replace(/F_R/g, 'FR'), maxT) : [];
+            // index i förklaringen skrivs ut som tspan
+            const radJSX = (r) => r.split(/(FN|FG|FR)/).map((del, i) =>
+                /^F[NGR]$/.test(del) ? <Sym key={i} s="F" sub={del[1]} fs={13} /> : <tspan key={i}>{del}</tspan>);
+            return (
+                <g>
+                    <rect x={x} y={y} width={w} height={h} rx="10" fill="#fbf8f2" stroke="rgba(15,22,32,0.55)" strokeWidth="1.5" />
+                    <text x={x + 14} y={y + 21} fontSize="11" fontWeight="600" letterSpacing="0.06em" fill="rgba(15,22,32,0.6)">
+                        {besvarad ? 'FACIT' : 'FÖRUTSÄG INNAN DU SER MÄTNINGEN'}
+                    </text>
+                    <text x={x + w - 14} y={y + 21} textAnchor="end" fontSize="12" fill="rgba(15,22,32,0.7)">
+                        {poang.n > 0 ? `${poang.ratt} av ${poang.n} rätt` : ''}
+                    </text>
+                    <text x={x + 14} y={y + 44} fontSize="16" fontWeight="700" fill={COL.ink}>{titel}.</text>
+                    <text x={x + 14} y={y + 63} fontSize="13.5" fill="rgba(15,22,32,0.82)">
+                        Hur stor är normalkraften <Sym s="F" sub="N" fs={13.5} /> jämfört med tyngdkraften <Sym s="F" sub="G" fs={13.5} />?
+                    </text>
+                    {knappar}
+                    {!besvarad && radbryt('Ledtråd: titta på hur hastigheten ändras, inte på åt vilket håll hissen åker. Accelerationen och den resulterande kraften pekar åt samma håll som förändringen.', maxT).map((r, i) => (
+                        <text key={i} x={x + 14} y={fy + 4 + i * 17} fontSize="13" fill="rgba(15,22,32,0.6)">{r}</text>
+                    ))}
+                    {besvarad && (
+                        <g>
+                            <text x={x + 14} y={fy + 4} fontSize="14" fontWeight="700"
+                                  fill={fraga.svar === ratt ? COL.norm : COL.res}>
+                                {fraga.svar === ratt ? 'Rätt svar.' : 'Inte riktigt. Rätt svar är ' + KANSLA_ORD[ratt] + '.'}
+                            </text>
+                            {rader.map((r, i) => (
+                                <text key={i} x={x + 14} y={fy + 26 + i * 17} fontSize="13" fill="rgba(15,22,32,0.85)">{radJSX(r)}</text>
+                            ))}
+                            <g style={{ cursor: 'pointer' }} onClick={fortsatt}>
+                                <rect x={x + w - 112} y={fy - 15} width="98" height="28" rx="8" fill={COL.ink} />
+                                <text x={x + w - 63} y={fy + 4} textAnchor="middle" fontSize="13.5" fontWeight="600" fill="#f3eee4">Fortsätt</text>
+                            </g>
+                        </g>
+                    )}
+                </g>
+            );
+        };
+
+        // ── Layouter: bred skärm och telefon ─────────────────────
+        const LAYOUT = {
+            bred: { W: 900, H: 640, hus: { x: 14, y: 78, s: 1 }, zoom: { x: 215, y: 72, s: 1 },
+                    banner: { x: 425, y: 34 }, matare: { x: 652, y: 270, w: 226 },
+                    graf: { x: 215, y: 398, w: 671, h: 230 } },
+            smal: { W: 520, H: 830, hus: { x: 6, y: 72, s: 0.6 }, zoom: { x: 124, y: 72, s: 392 / 420 },
+                    banner: { x: 292, y: 30 }, matare: { x: 12, y: 404, w: 496 },
+                    graf: { x: 6, y: 528, w: 508, h: 294 } },
+        };
+
+        const Scen = ({ L, smal, st, m, show, dolj, tl, tNow, hist, grafMode, aMax, vMax, fraga, svara, fortsatt, poang }) => {
+            const broken = tl.brottT != null && tNow >= tl.brottT;
+            let cwH = H_TOPP - st.y;
+            if (broken) {
+                const yb = sampla(tl, tl.brottT).y;
+                const tt = tNow - tl.brottT;
+                cwH = Math.max(-0.4, (H_TOPP - yb) - g * tt * tt / 2);
+            }
+            let titel = FAS[st.ph].titel;
+            if (st.ph === 'vila') {
+                if (broken) titel = 'Hissen har fastnat mellan våningarna';
+                else if (st.y < 0.05) titel = 'Hissen står stilla längst ner';
+                else if (st.y > H_TOPP - 0.05) titel = 'Hissen står stilla högst upp';
+                else titel = 'Hissen står stilla på våning ' + Math.round(st.y / VAN_H);
+            }
+            const K = krafter(m, st.a);
+            const under = dolj ? 'Positiv riktning är uppåt'
+                : K.a > 0.004 ? 'Accelerationen är riktad uppåt'
+                : K.a < -0.004 ? 'Accelerationen är riktad nedåt'
+                : 'Ingen acceleration: hastigheten ändras inte';
+            // zoomlinjer från korgen i huset till den inzoomade bilden
+            const hs = L.hus.s, carX = L.hus.x + 96 * hs;
+            const carT = L.hus.y + (BY(st.y) - 40) * hs, carB = L.hus.y + BY(st.y) * hs;
+            const tGrans = fraga && !fraga.svar ? fraga.seg.t0 : Infinity;
+            return (
+                <svg viewBox={`0 0 ${L.W} ${L.H}`} preserveAspectRatio="xMidYMid meet"
+                     style={{ fontFamily: "'Poppins', system-ui, sans-serif" }}>
+                    <defs>
+                        <linearGradient id="paperG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#f7f2e8" />
+                            <stop offset="100%" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <pattern id="rutG" width="24" height="24" patternUnits="userSpaceOnUse">
+                            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(37,99,201,0.09)" strokeWidth="1" />
+                        </pattern>
+                    </defs>
+                    <rect x="0" y="0" width={L.W} height={L.H} fill="url(#paperG)" />
+                    <rect x="0" y="0" width={L.W} height={L.H} fill="url(#rutG)" />
+
+                    <text x={L.banner.x} y={L.banner.y} textAnchor="middle" fontSize={smal ? 17 : 19} fontWeight="700" fill={COL.ink}>{titel}</text>
+                    <text x={L.banner.x} y={L.banner.y + 20} textAnchor="middle" fontSize={smal ? 12.5 : 13.5} fill="rgba(15,22,32,0.75)">{under}</text>
+
+                    <line x1={carX} y1={carT} x2={L.zoom.x} y2={L.zoom.y} stroke="rgba(15,22,32,0.3)" strokeWidth="1" strokeDasharray="4 4" />
+                    <line x1={carX} y1={carB} x2={L.zoom.x} y2={L.zoom.y + ZH * L.zoom.s} stroke="rgba(15,22,32,0.3)" strokeWidth="1" strokeDasharray="4 4" />
+
+                    <g transform={`translate(${L.hus.x} ${L.hus.y}) scale(${hs})`}>
+                        <Huset y={st.y} v={st.v} ph={st.ph} trasig={broken} cwH={cwH} visaV={show.fart} glipa={st.glipa} />
+                    </g>
+                    <g transform={`translate(${L.zoom.x} ${L.zoom.y}) scale(${L.zoom.s})`}>
+                        <Zoom st={st} m={m} show={show} dolj={dolj} broken={broken} />
+                    </g>
+                    <Matare x={L.matare.x} y={L.matare.y} w={L.matare.w} m={m} a={st.a} dolj={dolj} />
+                    {fraga ? (
+                        <GissaPanel x={L.graf.x} y={L.graf.y} w={L.graf.w} h={L.graf.h} fraga={fraga} svara={svara}
+                                    fortsatt={fortsatt} poang={poang} smal={smal} />
+                    ) : (
+                        <Graf x={L.graf.x} y={L.graf.y} w={L.graf.w} h={L.graf.h} hist={hist} mode={grafMode}
+                              tNow={tNow} aMax={aMax} vMax={vMax} tGrans={tGrans} />
+                    )}
+                </svg>
+            );
+        };
+
+        // ── Formelkort med ord-etiketter ──
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const Frac = ({ topLabel, top, bottomLabel, bottom }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{topLabel}</span>
+                <span className="fnum">{top}</span>
+                <span className="fnum" style={{ alignSelf: 'stretch', textAlign: 'center',
+                                                borderTop: '2px solid currentColor', paddingTop: 3, marginTop: 3 }}>{bottom}</span>
+                <span className="flbl">{bottomLabel}</span>
+            </div>
+        );
+        const FormulaCard = () => (
+            <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <Vbl label="Resulterande kraft"><em>F</em><sub>R</sub></Vbl>
+                <span className="fnum">=</span>
+                <Vbl label="Normalkraft"><em>F</em><sub>N</sub></Vbl>
+                <span className="fnum">−</span>
+                <Vbl label="Tyngdkraft"><em>F</em><sub>G</sub></Vbl>
+                <span className="fnum" style={{ margin: '0 12px', color: 'var(--lab-ink-muted)' }}>|</span>
+                <Vbl label="Resulterande kraft"><em>F</em><sub>R</sub></Vbl>
+                <span className="fnum">=</span>
+                <Vbl label="Massa"><em>m</em></Vbl>
+                <span className="fnum">·</span>
+                <Vbl label="Acceleration"><em>a</em></Vbl>
+                <span className="fnum">⟺</span>
+                <Vbl label="Acceleration"><em>a</em></Vbl>
+                <span className="fnum">=</span>
+                <Frac topLabel="Resulterande kraft" top={<span><em>F</em><sub>R</sub></span>}
+                      bottomLabel="Massa" bottom={<em>m</em>} />
+                <span className="text-sm" style={{ color: 'var(--lab-ink-muted)', marginLeft: 8 }}>positiv riktning uppåt</span>
+            </div>
+        );
+
+        const NumInput = ({ value, min, max, onCommit, d = 1, unit }) => {
+            const [txt, setTxt] = useState(() => fmt(value, d));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmt(value, d)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(/\s/g, '').replace(',', '.').replace('−', '-').trim();
+                if (norm === '' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                n = Math.max(min, Math.min(max, n));
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt}
+                           style={{ color: 'var(--lab-accent, #c8324a)' }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmt(value, d)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+        const Slider = ({ label, value, min, max, step, onChange, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 112, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, children }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    {children}
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const App = () => {
+            const [m, setM] = useState(70);
+            const [aMax, setAMax] = useState(1.5);
+            const [vMax, setVMax] = useState(2.5);
+            const [tempo, setTempo] = useState(1);
+            const [paused, setPaused] = useState(false);
+            const [show, setShow] = useState({ krafter: true, res: true, acc: true, fart: true });
+            const [grafMode, setGrafMode] = useState('fn');
+            const [gissa, setGissa] = useState(false);
+            const [fraga, setFraga] = useState(null);
+            const [poang, setPoang] = useState({ ratt: 0, n: 0 });
+            const [lage, setLage] = useState(null);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [smal, setSmal] = useState(() => window.innerWidth <= 600);
+            const [, setTick] = useState(0);
+            const sceneWrapRef = useRef(null);
+            const tlRef = useRef(null);
+            const tRef = useRef(0);
+            const histRef = useRef([]);
+            const lastRef = useRef(null);
+            const mRef = useRef(m); mRef.current = m;
+            const tempoRef = useRef(tempo); tempoRef.current = tempo;
+            const gissaRef = useRef(gissa); gissaRef.current = gissa;
+            if (!tlRef.current) { tlRef.current = nyTL(0); }
+
+            useEffect(() => {
+                const on = () => setSmal(window.innerWidth <= 600);
+                window.addEventListener('resize', on);
+                return () => window.removeEventListener('resize', on);
+            }, []);
+
+            const mata = (tl, fran, till) => {
+                const h = histRef.current;
+                let t = h.length ? h[h.length - 1].t + HIST_DT : fran;
+                const mm = mRef.current;
+                while (t <= till + 1e-9) {
+                    const s = personen(tl, t);
+                    h.push({ t, a: s.a, v: s.v, fn: Math.max(0, mm * (g + s.a)), fg: mm * g });
+                    t += HIST_DT;
+                }
+                while (h.length && h[0].t < till - FONSTER - 5) h.shift();
+            };
+
+            // animationsloop
+            useEffect(() => {
+                if (paused) { lastRef.current = null; return; }
+                let raf;
+                const step = (ts) => {
+                    if (lastRef.current == null) lastRef.current = ts;
+                    const dtR = Math.min((ts - lastRef.current) / 1000, 0.05);
+                    lastRef.current = ts;
+                    const tl = tlRef.current;
+                    const tGam = tRef.current;
+                    let tNy = tGam + dtR * tempoRef.current;
+                    let stopp = null;
+                    if (gissaRef.current) {
+                        for (const sg of tl.segs) {
+                            if (sg.ask != null && !sg.klar && sg.ask > tGam - 1e-9 && sg.ask <= tNy) { stopp = sg; break; }
+                        }
+                    }
+                    if (stopp) tNy = stopp.ask;
+                    for (const sg of tl.segs) if (sg.ask != null && sg.ask <= tNy) sg.klar = true;
+                    mata(tl, tGam, tNy);
+                    tRef.current = tNy;
+                    if (stopp) {
+                        const s = sampla(tl, tNy);
+                        let titel = FAS[stopp.ph].titel;
+                        if (stopp.ph === 'vila') titel = s.y > H_TOPP - 0.05 ? 'Hissen står stilla högst upp'
+                            : s.y < 0.05 ? 'Hissen står stilla längst ner' : 'Hissen har stannat';
+                        setFraga({ seg: stopp, svar: null, titel });
+                        setPaused(true);
+                        setTick(t => t + 1);
+                        return;
+                    }
+                    setTick(t => t + 1);
+                    raf = requestAnimationFrame(step);
+                };
+                raf = requestAnimationFrame(step);
+                return () => cancelAnimationFrame(raf);
+            }, [paused]);
+
+            // fullskärm
+            useEffect(() => {
+                const handler = () => {
+                    const fs = document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current;
+                    setIsFullscreen(fs);
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            // ── Åtgärder ──
+            const startaTL = (tl, tStart = 0) => {
+                tlRef.current = tl;
+                histRef.current = [];
+                tRef.current = 0;
+                mata(tl, 0, tStart);
+                tRef.current = tStart;
+                for (const sg of tl.segs) if (sg.ask != null && sg.ask < tStart - 1e-9) sg.klar = true;
+                setFraga(null);
+            };
+            const borjaOm = () => {
+                startaTL(nyTL(0));
+                setLage(null);
+                setPaused(false);
+            };
+            const aka = (van) => {
+                const tl = tlRef.current;
+                if (tl.trasig) return;
+                const slut = tSlut(tl);
+                if (tRef.current > slut) laggVila(tl, tRef.current - slut + DT);
+                laggResa(tl, van * VAN_H, aMax, vMax);
+                setLage(null);
+                if (fraga) setFraga(null);
+                setPaused(false);
+            };
+            const helaLabben = () => { startaTL(labbTL(aMax, vMax)); setLage(null); setPaused(false); };
+            const linanBrister = () => { startaTL(brottTL()); setLage(null); setPaused(false); };
+            const valjLage = (L) => {
+                const tl = L.prog === 'labb' ? labbTL(aMax, vMax) : brottTL();
+                startaTL(tl, L.hitta(tl));
+                setLage(L.id);
+                setPaused(true);
+            };
+            const svara = (val) => {
+                setFraga(f => f ? { ...f, svar: val } : f);
+                setPoang(p => ({ ratt: p.ratt + (val === FAS[fraga.seg.ph].svar ? 1 : 0), n: p.n + 1 }));
+            };
+            const fortsatt = () => { setFraga(null); setPaused(false); };
+            const spela = () => {
+                if (fraga) { setFraga(null); setPaused(false); return; }
+                setPaused(p => !p);
+            };
+            const tShow = (k) => setShow(sh => ({ ...sh, [k]: !sh[k] }));
+
+            const tl = tlRef.current;
+            const tNow = tRef.current;
+            const st = personen(tl, tNow);
+            const dolj = !!(fraga && !fraga.svar);
+            const K = krafter(m, st.a);
+            const vanNu = Math.round(st.y / VAN_H);
+            const ledig = tNow >= tSlut(tl) - 1e-9;
+            const malVan = new Set(tl.mal.filter(x => x.t > tNow).map(x => x.van));
+            const harVan = ledig && Math.abs(st.y - vanNu * VAN_H) < 0.02 ? vanNu : null;
+            const L = smal ? LAYOUT.smal : LAYOUT.bred;
+            const primaryLabel = fraga ? 'Fortsätt' : (paused ? 'Fortsätt' : 'Pausa');
+            const lageInfo = LAGEN.find(x => x.id === lage);
+
+            const reglage = (Sl) => (
+                <React.Fragment>
+                    <Sl label="Personens massa (<em>m</em>)" value={m} min={20} max={130} step={1} onChange={setM}>
+                        <NumInput value={m} min={1} max={500} d={0} unit="kg" onCommit={(x) => setM(Math.round(x))} />
+                    </Sl>
+                    <Sl label="Största acceleration" value={aMax} min={0.5} max={3} step={0.1} onChange={setAMax}>
+                        <NumInput value={aMax} min={0.3} max={5} d={1} unit="m/s²" onCommit={setAMax} />
+                    </Sl>
+                    <Sl label="Toppfart" value={vMax} min={1} max={6} step={0.1} onChange={setVMax}>
+                        <NumInput value={vMax} min={0.5} max={10} d={1} unit="m/s" onCommit={setVMax} />
+                    </Sl>
+                    <Sl label="Tempo" value={tempo} min={0.25} max={1.5} step={0.05} onChange={setTempo}>
+                        <span className="num-unit" style={{ minWidth: 60, textAlign: 'right' }}>{fmt(tempo, 2)} ×</span>
+                    </Sl>
+                </React.Fragment>
+            );
+
+            const hisspanel = (cls) => (
+                <div className={'hisspanel ' + cls} role="group" aria-label="Våningsknappar">
+                    {[...Array(TOPP + 1)].map((_, i) => TOPP - i).map(v => (
+                        <button key={v} className={'vknapp' + (malVan.has(v) ? ' lit' : '') + (harVan === v ? ' har' : '')}
+                                disabled={tl.trasig} onClick={() => aka(v)} aria-label={'Åk till våning ' + v}>{v}</button>
+                    ))}
+                </div>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" />
+                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" />
+                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                <path d="M6 6l12 12M18 6L6 18" />
+                            </svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        <label><input type="checkbox" checked={show.krafter} onChange={() => tShow('krafter')} />
+                            <span className="st-swatch" style={{ background: `linear-gradient(90deg, ${COL.norm} 50%, ${COL.tyngd} 50%)` }}></span>
+                            <span><em>F</em><sub>N</sub> och <em>F</em><sub>G</sub></span></label>
+                        <label><input type="checkbox" checked={show.res} onChange={() => tShow('res')} />
+                            <span className="st-swatch dash"></span>
+                            <span>Resultant <em>F</em><sub>R</sub></span></label>
+                        <label><input type="checkbox" checked={show.acc} onChange={() => tShow('acc')} />
+                            <span className="st-swatch" style={{ background: COL.acc }}></span>
+                            <span>Acceleration <em>a</em></span></label>
+                        <label><input type="checkbox" checked={show.fart} onChange={() => tShow('fart')} />
+                            <span className="st-swatch" style={{ background: COL.fart }}></span>
+                            <span>Hastighet <em>v</em></span></label>
+                        <div className="st-title mt">Graf</div>
+                        <div className="st-row">
+                            <label><input type="radio" name="graf" checked={grafMode === 'fn'} onChange={() => setGrafMode('fn')} /><span><em>F</em><sub>N</sub></span></label>
+                            <label><input type="radio" name="graf" checked={grafMode === 'a'} onChange={() => setGrafMode('a')} /><span><em>a</em></span></label>
+                            <label><input type="radio" name="graf" checked={grafMode === 'v'} onChange={() => setGrafMode('v')} /><span><em>v</em></span></label>
+                        </div>
+                        <label style={{ marginTop: 6 }}><input type="checkbox" checked={gissa} onChange={() => setGissa(x => !x)} />
+                            <span>Gissa först</span></label>
+                        {/* Våningsknappar, försök, glidare och styrknappar BARA i
+                            fullskärm. I normalläget bor de i sidopanelen. */}
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Åk till våning</div>
+                                {hisspanel('hisspanel-st')}
+                                <div className="st-title mt">Färdiga försök</div>
+                                <div className="st-presets">
+                                    <button className="btn-toggle" onClick={helaLabben}>Hela labben</button>
+                                    <button className="btn-toggle" onClick={linanBrister}>Linan brister</button>
+                                </div>
+                                <div className="st-title mt">Labbens nio lägen</div>
+                                <div className="st-presets">
+                                    {LAGEN.map(x => (
+                                        <button key={x.id} className={'btn-toggle' + (lage === x.id ? ' active' : '')}
+                                                onClick={() => valjLage(x)} title={x.namn}>{x.id}</button>
+                                    ))}
+                                </div>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglage(StSlider)}</div>
+                                <div className="st-actions">
+                                    <button className="btn-toggle" onClick={spela}>{primaryLabel}</button>
+                                    <button className="btn-toggle" onClick={borjaOm}>Börja om</button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const Avl = ({ val, lbl, col }) => (
+                <div>
+                    <div style={{ color: col || 'var(--lab-ink)', fontWeight: 700, fontSize: 15 }}>{val}</div>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: lbl }} />
+                </div>
+            );
+            const Fr = ({ t, n }) => <span className="cfrac"><span>{t}</span><span>{n}</span></span>;
+            const rikt = (x) => x > 0 ? 'uppåt' : (x < 0 ? 'nedåt' : '');
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-7xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Krafter i hissen
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Krafter i hissen</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            En person står på en kraftplatta i en hiss, precis som i laborationen. Två krafter verkar på personen:
+                            <strong> tyngdkraften</strong> <em>F</em><sub>G</sub> nedåt och <strong>normalkraften</strong> <em>F</em><sub>N</sub> från
+                            plattan uppåt. Det är normalkraften plattan mäter, och det är den du känner som din tyngd. Tryck på en
+                            våningsknapp och följ krafterna, den resulterande kraften och accelerationen genom hela färden. Slå på
+                            Gissa först om du vill förutsäga vad plattan visar innan du får se det.
+                        </p>
+
+                        <FormulaCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-2/3 order-1">
+                                <div className={"scene-wrap" + (isFullscreen ? " is-fs" : "")} data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <Scen L={L} smal={smal} st={st} m={m} show={show} dolj={dolj} tl={tl} tNow={tNow}
+                                          hist={histRef.current} grafMode={grafMode} aMax={aMax} vMax={vMax}
+                                          fraga={fraga} svara={svara} fortsatt={fortsatt} poang={poang} />
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-1/3 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Åk till våning</div>
+                                    <div className="flex gap-4 items-center">
+                                        {hisspanel('')}
+                                        <div className="flex flex-col gap-2 flex-1">
+                                            <button className="btn-toggle" onClick={spela}>{primaryLabel}</button>
+                                            <button className="btn-toggle" onClick={borjaOm}>Börja om</button>
+                                            <p className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>
+                                                {tl.trasig ? 'Hissen är ur funktion efter att linan gått av. Tryck Börja om.'
+                                                    : 'Trycker du på flera knappar åker hissen till våningarna i tur och ordning.'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Färdiga försök</div>
+                                    <div className="flex gap-2 flex-wrap mb-3">
+                                        <button className="btn-toggle btn-small" onClick={helaLabben}>Hela labben: upp och ner</button>
+                                        <button className="btn-toggle btn-small" onClick={linanBrister}>Linan brister (teoretiskt)</button>
+                                    </div>
+                                    <div className="flbl mb-2">Labbens nio lägen</div>
+                                    <div className="lage-grid">
+                                        {LAGEN.map(x => (
+                                            <button key={x.id} className={'btn-toggle' + (lage === x.id ? ' active' : '')}
+                                                    onClick={() => valjLage(x)}>{x.namn}</button>
+                                        ))}
+                                    </div>
+                                    <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
+                                        {lageInfo ? LAGE_TEXT[lageInfo.id] + ' Tryck Fortsätt för att köra vidare.'
+                                            : 'Samma nio lägen som i laborationen. Ett klick fryser bilden i just det läget, med mätningen fram till dess i grafen.'}
+                                    </p>
+                                </div>
+
+                                {/* Newtons andra lag med de aktuella värdena */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-3">Newtons andra lag just nu</div>
+                                    {dolj ? (
+                                        <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            Svara på frågan i scenen först, så visas uträkningen.
+                                        </p>
+                                    ) : (
+                                        <div>
+                                            <div className="calc-row">
+                                                <span className="nowrap"><em>F</em><sub>G</sub> = <em>m</em> · <em>g</em></span>
+                                                <span className="nowrap">= {fmt(m, 0)} kg · 9,82 N/kg</span>
+                                                <span className="nowrap" style={{ color: COL.tyngd, fontWeight: 700 }}>= {fmt(K.FG, 1)} N</span>
+                                            </div>
+                                            <div className="calc-row">
+                                                <span className="nowrap"><em>F</em><sub>R</sub> = <em>F</em><sub>N</sub> − <em>F</em><sub>G</sub></span>
+                                                <span className="nowrap">= {fmt(K.FN, 1)} N − {fmt(K.FG, 1)} N</span>
+                                                <span className="nowrap" style={{ color: COL.res, fontWeight: 700 }}>= {fmt(K.FR, 1)} N</span>
+                                            </div>
+                                            <div className="calc-row">
+                                                <span className="nowrap"><em>a</em> = <Fr t={<span><em>F</em><sub>R</sub></span>} n={<em>m</em>} /></span>
+                                                <span className="nowrap">= <Fr t={fmt(K.FR, 1) + ' N'} n={fmt(m, 0) + ' kg'} /></span>
+                                                <span className="nowrap" style={{ color: COL.acc, fontWeight: 700 }}>= {fmt(K.a, 2)} m/s²</span>
+                                            </div>
+                                            <p className="text-sm mt-3" style={{ color: 'var(--lab-ink-soft)' }}>
+                                                {Math.abs(K.FR) < 0.05
+                                                    ? <span>Den resulterande kraften är noll, så personen har ingen acceleration. <em>F</em><sub>N</sub> är lika stor som <em>F</em><sub>G</sub>.</span>
+                                                    : <span>Den resulterande kraften och accelerationen är riktade <strong>{rikt(K.FR)}</strong>. Normalkraften är {K.FN > K.FG ? 'större' : 'mindre'} än tyngdkraften, så personen känner sig <strong style={{ color: COL[K.kansla] }}>{KANSLA_ORD[K.kansla]}</strong>.</span>}
+                                            </p>
+                                        </div>
+                                    )}
+                                    <div className="grid grid-cols-3 gap-2 text-center mt-3 pt-3" style={{ borderTop: '1px solid var(--lab-line, rgba(15,22,32,0.14))' }}>
+                                        <Avl val={fmt(st.v, 2) + ' m/s'} lbl="hastighet <em>v</em>" col={COL.fart} />
+                                        <Avl val={fmt(st.y, 1) + ' m'} lbl="höjd över bottenvåningen" />
+                                        <Avl val={gissa ? `${poang.ratt} av ${poang.n}` : '–'} lbl="rätta gissningar" />
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3">
+                                    <div className="flbl mb-2">Reglage</div>
+                                    {reglage(Slider)}
+                                    <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
+                                        En vanlig hiss accelererar med ungefär 1 m/s² och har en toppfart på 1 till 2,5 m/s.
+                                        Ändrad acceleration och toppfart gäller från nästa resa.
+                                    </p>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Det är normalkraften du känner</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Tyngdkraften <em>F</em><sub>G</sub> = <em>m</em> · <em>g</em> är lika stor under hela resan. Det som
+                                    ändras är hur hårt golvet trycker upp mot dina fötter, alltså normalkraften <em>F</em><sub>N</sub>.
+                                    Den kraften känner du i fötterna och knäna, och den är det en våg eller en kraftplatta mäter.
+                                    Därför känns du tung när <em>F</em><sub>N</sub> är större än <em>F</em><sub>G</sub> och lätt när den är mindre.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Accelerationen avgör, inte rörelsen</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Med positiv riktning uppåt ger Newtons andra lag <em>F</em><sub>N</sub> − <em>F</em><sub>G</sub> = <em>m</em> · <em>a</em>.
+                                    Om hissen åker uppåt eller nedåt spelar ingen roll, bara åt vilket håll hastigheten ändras. En hiss som
+                                    startar uppåt och en hiss som bromsar in på väg ner har båda accelerationen riktad uppåt, och i båda
+                                    känner du dig tung. Med konstant fart är <em>a</em> = 0 och allt känns som vanligt.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Fritt fall: tyngdlös men inte viktlös</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Om linan går av faller hissen och du med accelerationen <em>g</em> nedåt. Då räcker tyngdkraften
+                                    ensam för att ge dig den accelerationen, och plattan behöver inte trycka alls: <em>F</em><sub>N</sub> = 0. Minsta knuff räcker för att du ska lyfta från golvet och sväva i hissen.
+                                    Tyngdkraften är precis lika stor som förut, men du känner den inte. Samma sak gäller astronauterna i
+                                    rymdstationen, som faller fritt runt jorden hela tiden. En riktig hiss har en fångapparat som griper
+                                    tag i skenorna och bromsar.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”När hissen åker uppåt känner man sig tung.”</strong> Bara medan den ökar farten. När den åker
+                                    uppåt med konstant fart är normalkraften lika stor som tyngdkraften, och när den bromsar in på väg
+                                    upp känner man sig lätt.</li>
+                                <li><strong>”Tyngdkraften ändras när hissen accelererar.”</strong> Nej, <em>F</em><sub>G</sub> = <em>m</em> · <em>g</em> är
+                                    densamma hela tiden. Det är normalkraften som ändras, och det är den plattan visar.</li>
+                                <li><strong>”Bromsar hissen är accelerationen negativ.”</strong> Det beror på åt vilket håll den åker. Bromsar
+                                    den på väg ner går hastigheten från ett negativt värde mot noll, den ökar alltså, och accelerationen
+                                    är positiv. Jämför med exemplet om hissen i genomgången Accelerationens riktning.</li>
+                                <li><strong>”I fritt fall finns ingen tyngdkraft.”</strong> Tyngdkraften finns kvar och är lika stor. Det är
+                                    normalkraften som försvinner, och därför känns det som om man saknar tyngd.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

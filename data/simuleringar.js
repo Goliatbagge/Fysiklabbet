@@ -46,6 +46,7 @@ window.SIM_NAMES = {
       kw: ['krafter','newton','tredje lagen','aktion','reaktion','motkraft','fluga','bägare','våg','vågutslag','laboratorievåg','rörelsemängd','lyftkraft','hovra','hovring','luft','nedsvep','vakuum','lock','impuls','fritt fall','mekanik'] },
   ],
   'fysik1-newtons-gravitationslag.html': 'Newtons gravitationslag',
+  'fysik1-hiss-app.html': 'Krafter i hissen',
   'fysik1-berg-och-dalbana.html': 'Berg-och-dalbana (energiprincipen)',
   'fysik1-tryck-pa-app.html': 'Tryck och tryckkraft',
   'fysik1-magdeburgska-halvklot.html': 'Magdeburgska halvkloten',

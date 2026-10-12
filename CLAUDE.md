@@ -66,6 +66,14 @@ node .claude/verify-sprak.js [fil …]
 # parentes upphöjd till en exponent). Se "Bråk i löptext" nedan.
 node .claude/verify-brak.js
 
+# Verifiera att RADBRYTNINGARNA i matteblocken verkligen bryter (KÖR FÖRE
+# COMMIT vid ändringar i teori, övningar, exit tickets eller prov!) — en
+# mätvärdesklammer, aligned eller cases ska ha \\ i radslutet (\\\\ i
+# JS-källan). Ett ensamt bakstreck ger ingen radbrytning, och värdena
+# hamnar bredvid varandra på samma rad. Se "Mätvärdesklammern: ett värde
+# per rad" nedan.
+node .claude/verify-matte-radbrytning.js
+
 # Verifiera att inga BLOCK-FORMLER klipps av sin egen ruta (KÖR FÖRE COMMIT
 # vid ändringar i teorins formler, i .katex-display-CSS:en eller i
 # nedskalningen av breda formler!) — laddar avsnitten på 390×844, fäller ut
@@ -2019,6 +2027,30 @@ det går att dra fram.
 formel (nästlade bråk, höga rottecken, `\begin{array}` med bråk på sista
 raden). Mätningen är geometrisk och kan i teorin missa ett tecken vars
 glyf sticker längre ned än sin ruta.
+
+### Mätvärdesklammern: ett värde per rad, alltid
+
+**Värdena i en mätvärdesklammer staplas ALLTID, ett värde per rad**
+(uttryckligt krav 2026-10-12), även när det bara är två korta värden som
+skulle få plats bredvid varandra. Samma sak gäller varje rad i en
+`aligned`-, `cases`- eller `array`-uppställning. Radbrytningen skrivs
+`\\` i radslutet i md-filerna och `\\\\` i JS-källan:
+
+```
+\left[ \begin{array}{l}
+k = 40\ \mathrm{N/m} \\
+n = 2
+\end{array} \right]
+```
+
+Ett ensamt bakstreck (`\` i md, `\\` i JS) ger ingen radbrytning i KaTeX,
+bara ett mellanslag, och inget felmeddelande. Värdena hamnar då på samma
+rad utan att något ser trasigt ut i källan. Felet hände 2026-10-12 i
+Exempel 3 i `fy2-2.2` (klammern med *k* och *n*), och när verifieraren
+först kördes hittades samma fel i `fy2-1.8`. Den vanligaste orsaken är att
+ett block skrivs eller flyttas med ett skript, där bakstrecken halveras på
+vägen. **Kör `node .claude/verify-matte-radbrytning.js` före commit**, och
+titta på klammern i skärmdump när du skrivit en ny.
 
 ### JS-strängar: dubbla alla backslash
 

@@ -52,6 +52,21 @@
                 color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
         .fnum { color: var(--lab-ink); font-size: 19px; }
 
+        /* Formelkortet: tätt. Etiketterna får bryta på två rader så att
+           kolumnerna inte blir lika breda som "RESULTERANDE KRAFT", och alla
+           etiketter är två rader höga (över: nedtill, under: upptill) så att
+           symboler, operatorer och bråkstreck ligger på samma mittlinje. */
+        .formula-card .flbl { max-width: 60px; margin: 0 -6px; white-space: normal; text-align: center;
+                              letter-spacing: 0.03em; min-height: 2.25em; display: flex;
+                              justify-content: center; hyphens: manual; -webkit-hyphens: manual; }
+        .formula-card .flbl.bred { max-width: 96px; margin: 0 -10px; }
+        .formula-card .frac-lbl { margin: 0 -16px; }
+        .formula-card .flbl.over { align-items: flex-end; }
+        .formula-card .flbl.under { align-items: flex-start; }
+        .formula-card .fgrupp { display: flex; align-items: center; gap: 5px; }
+        .formula-card .fgrupp + .fgrupp { padding-left: 24px;
+                              border-left: 1px solid var(--lab-line, rgba(15,22,32,0.14)); }
+
         /* Mobil: formeln får aldrig radbrytas. Behåll EN rad och skrolla
            kortet i sidled i stället. */
         @media (max-width: 600px) {
@@ -1184,41 +1199,44 @@
         };
 
         // ── Formelkort med ord-etiketter ──
-        const Vbl = ({ label, children }) => (
+        const Vbl = ({ label, children, bred }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
-                <span className="flbl">{label}</span>
+                <span className={'flbl over' + (bred ? ' bred' : '')}>{label}</span>
                 <span className="fnum">{children}</span>
-                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+                <span className={'flbl under' + (bred ? ' bred' : '')} aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
             </div>
         );
         const Frac = ({ topLabel, top, bottomLabel, bottom }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
-                <span className="flbl">{topLabel}</span>
+                <span className="flbl over bred frac-lbl">{topLabel}</span>
                 <span className="fnum">{top}</span>
-                <span className="fnum" style={{ alignSelf: 'stretch', textAlign: 'center',
-                                                borderTop: '2px solid currentColor', paddingTop: 3, marginTop: 3 }}>{bottom}</span>
-                <span className="flbl">{bottomLabel}</span>
+                <span className="fnum" style={{ alignSelf: 'center', textAlign: 'center', minWidth: '1.9em',
+                                                borderTop: '2px solid currentColor', padding: '3px 4px 0', marginTop: 3 }}>{bottom}</span>
+                <span className="flbl under bred frac-lbl">{bottomLabel}</span>
             </div>
         );
         const FormulaCard = () => (
-            <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
-                <Vbl label="Resulterande kraft"><em>F</em><sub>R</sub></Vbl>
-                <span className="fnum">=</span>
-                <Vbl label="Normalkraft"><em>F</em><sub>N</sub></Vbl>
-                <span className="fnum">−</span>
-                <Vbl label="Tyngdkraft"><em>F</em><sub>G</sub></Vbl>
-                <span className="fnum" style={{ margin: '0 12px', color: 'var(--lab-ink-muted)' }}>|</span>
-                <Vbl label="Resulterande kraft"><em>F</em><sub>R</sub></Vbl>
-                <span className="fnum">=</span>
-                <Vbl label="Massa"><em>m</em></Vbl>
-                <span className="fnum">·</span>
-                <Vbl label="Acceleration"><em>a</em></Vbl>
-                <span className="fnum">⟺</span>
-                <Vbl label="Acceleration"><em>a</em></Vbl>
-                <span className="fnum">=</span>
-                <Frac topLabel="Resulterande kraft" top={<span><em>F</em><sub>R</sub></span>}
-                      bottomLabel="Massa" bottom={<em>m</em>} />
-                <span className="text-sm" style={{ color: 'var(--lab-ink-muted)', marginLeft: 8 }}>positiv riktning uppåt</span>
+            <div className="formula-card glass-card rounded-xl px-5 py-3 mb-6 flex flex-wrap items-center gap-x-6 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <div className="fgrupp">
+                    <Vbl label="Resulterande kraft" bred><em>F</em><sub>R</sub></Vbl>
+                    <span className="fnum">=</span>
+                    <Vbl label="Normal­kraft"><em>F</em><sub>N</sub></Vbl>
+                    <span className="fnum">−</span>
+                    <Vbl label="Tyngd­kraft"><em>F</em><sub>G</sub></Vbl>
+                </div>
+                <div className="fgrupp">
+                    <Vbl label="Resulterande kraft" bred><em>F</em><sub>R</sub></Vbl>
+                    <span className="fnum">=</span>
+                    <Vbl label="Massa"><em>m</em></Vbl>
+                    <span className="fnum">·</span>
+                    <Vbl label="Accele­ration"><em>a</em></Vbl>
+                    <span className="fnum" style={{ margin: '0 4px' }}>⟺</span>
+                    <Vbl label="Accele­ration"><em>a</em></Vbl>
+                    <span className="fnum">=</span>
+                    <Frac topLabel="Resulterande kraft" top={<span><em>F</em><sub>R</sub></span>}
+                          bottomLabel="Massa" bottom={<em>m</em>} />
+                </div>
+                <span className="text-sm" style={{ color: 'var(--lab-ink-muted)' }}>Positiv riktning uppåt</span>
             </div>
         );
 

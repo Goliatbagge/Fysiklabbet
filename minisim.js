@@ -21,7 +21,7 @@
  *           gaffelbalans3d, dubbelkon, linjal, fodelsedag, talmangder,
  *           magnetpoler, magnetdelning, koniskpendel, kastvektorer,
  *           snettkast, skjutochslapp, kanonvagn, galton, kalkylblad,
- *           kopplade-fjadrar
+ *           kopplade-fjadrar, lodlinje
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -321,6 +321,12 @@
  * data/visualiseringar/ma2c-6.5.js (avsnittets flik Visualisering); typen
  * här laddar den modulen vid behov och monterar samma bräda i teorin, så
  * att den bara finns på ett ställe. Ändra alltså brädan där, inte här.
+ *
+ * ── typ: lodlinje ──────────────────────────────────────────────────────
+ * fy2-1.3 (Stabilitet): en oregelbunden skiva hänger i en spik bredvid ett
+ * lod. Tyngdpunkten, lodlinjen och F_G ritas ut; vrid skivan och släpp, så
+ * svänger den tills tyngdpunkten hänger rakt under spiken. "Rita av lodet"
+ * + "Byt upphängningspunkt" hittar tyngdpunkten där linjerna korsas.
  *
  * ── typ: kopplade-fjadrar ────────────────────────────────────────────────
  * fy2-2.2: en fjäder, två seriekopplade och två parallellkopplade likadana
@@ -9858,6 +9864,615 @@
         koppladeLaddning.then(montera);
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: lodlinje
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-1.3 (Stabilitet), stycket som definierar tyngdpunkt och lodlinje:
+    // en oregelbunden träskiva hänger i en spik (upphängningspunkten). Ett
+    // lod hänger i samma spik. Tyngdpunkten (grön prick) ritas ut med sin
+    // lodlinje (streckad) och tyngdkraften F_G längs den. Man tar tag i
+    // skivan och vrider den (eller använder glidaren): lodlinjen förblir
+    // lodrät men hamnar vid sidan av upphängningspunkten, och när skivan
+    // släpps svänger den tillbaka tills tyngdpunkten hänger rakt under
+    // spiken, då lodlinjen och lodets snöre sammanfaller. "Rita av lodet"
+    // ritar lodets snöre som en blyertslinje på skivan, och "Byt
+    // upphängningspunkt" hänger skivan i nästa hål. Två linjer korsar
+    // varandra i tyngdpunkten (det klassiska sättet att hitta den), vilket
+    // syns bäst med "Visa tyngdpunkten" avbockad. Fysiken är en fysisk
+    // pendel: alfa'' = −g·d/(k² + d²) · sin(alfa − alfa_jv) med dämpning,
+    // där d är avståndet spik–tyngdpunkt och k skivans tröghetsradie kring
+    // tyngdpunkten (räknad ur polygonen). Ritad i laboranstemat.
+    function buildLodlinje(node, cfg) {
+        var W = 560, H = 420;
+        var NX = 280, NY = 64;             // spiken (upphängningspunkten)
+        var GPX = 1500;                    // "g" i px/s²
+        var DAMP = 1.1;                    // dämpning (1/s)
+        var RAD = Math.PI / 180;
+        var INK = '#1f2530';
+        var COL_TP = '#2e9e4f';
+        var COL_FG = '#2563c9';
+        var BOB_Y = 372;                   // lodets spets
+
+        // Skivan: oregelbunden polygon, flyttas så att tyngdpunkten
+        // (arean-centroiden) hamnar i origo.
+        var RAW = [[-96, -46], [-18, -98], [70, -84], [128, -6],
+                   [92, 64], [6, 92], [-62, 70], [-118, 22]];
+        var poly = (function () {
+            var A = 0, cx = 0, cy = 0, i, n = RAW.length;
+            for (i = 0; i < n; i++) {
+                var p = RAW[i], q = RAW[(i + 1) % n];
+                var cr = p[0] * q[1] - q[0] * p[1];
+                A += cr; cx += (p[0] + q[0]) * cr; cy += (p[1] + q[1]) * cr;
+            }
+            A /= 2; cx /= 6 * A; cy /= 6 * A;
+            return RAW.map(function (p) { return [p[0] - cx, p[1] - cy]; });
+        })();
+        // tröghetsradie² kring tyngdpunkten (polär andra moment / area)
+        var K2 = (function () {
+            var A = 0, J = 0, n = poly.length;
+            for (var i = 0; i < n; i++) {
+                var p = poly[i], q = poly[(i + 1) % n];
+                var cr = p[0] * q[1] - q[0] * p[1];
+                A += cr / 2;
+                J += cr * (p[0] * p[0] + p[0] * q[0] + q[0] * q[0] +
+                           p[1] * p[1] + p[1] * q[1] + q[1] * q[1]) / 12;
+            }
+            return J / A;
+        })();
+        // Tre hål nära kanten, en bit in från hörnen
+        var HOLES = [1, 3, 6].map(function (i) {
+            var p = poly[i], L = Math.hypot(p[0], p[1]);
+            return [p[0] * (L - 20) / L, p[1] * (L - 20) / L];
+        });
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var canvas = document.createElement('canvas');
+        canvas.className = 'minisim-canvas';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label',
+            'En oregelbunden träskiva hänger i en spik, och ett lod hänger i ' +
+            'samma spik. Skivans tyngdpunkt är en grön prick, och lodlinjen ' +
+            'genom den är streckad, med tyngdkraften längs linjen. Vrid ' +
+            'skivan och släpp: lodlinjen är alltid lodrät, och skivan ' +
+            'svänger tillbaka tills tyngdpunkten hänger rakt under spiken. ' +
+            'Då sammanfaller lodlinjen med lodets snöre.');
+        canvas.style.touchAction = 'pan-y';
+        scene.appendChild(canvas);
+
+        var ICON_EXPAND =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var ICON_COMPRESS =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        var fsBtn = document.createElement('button');
+        fsBtn.type = 'button';
+        fsBtn.className = 'minisim-fsbtn';
+        fsBtn.setAttribute('aria-label', 'Fullskärm');
+        fsBtn.title = 'Fullskärm';
+        fsBtn.innerHTML = ICON_EXPAND;
+        scene.appendChild(fsBtn);
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        function mkBtn(txt, cls) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'minisim-btn' + (cls ? ' ' + cls : '');
+            b.textContent = txt;
+            controls.appendChild(b);
+            return b;
+        }
+        var ritaBtn = mkBtn('Rita av lodet', 'ms-primar');
+        var bytBtn = mkBtn('Byt upphängningspunkt');
+        var omBtn = mkBtn('Börja om');
+        var tpLbl = document.createElement('label');
+        tpLbl.className = 'minisim-check';
+        var tpCb = document.createElement('input');
+        tpCb.type = 'checkbox';
+        tpCb.checked = true;
+        tpLbl.appendChild(tpCb);
+        tpLbl.appendChild(document.createTextNode('Visa tyngdpunkten'));
+        controls.appendChild(tpLbl);
+        var info = document.createElement('span');
+        info.className = 'minisim-info ms-brod';
+        controls.appendChild(info);
+        card.appendChild(controls);
+
+        var sliderRow = document.createElement('div');
+        sliderRow.className = 'minisim-slider-row';
+        var sliderLbl = document.createElement('span');
+        sliderLbl.className = 'minisim-slider-lbl';
+        sliderLbl.textContent = 'Vrid skivan';
+        var slider = document.createElement('input');
+        slider.type = 'range';
+        slider.className = 'minisim-slider';
+        slider.min = '-90';
+        slider.max = '90';
+        slider.step = '1';
+        slider.value = '0';
+        slider.setAttribute('aria-label',
+            'Vrid skivan kring spiken, i grader från jämviktsläget. Skivan släpps när du släpper glidaren.');
+        var sliderVal = document.createElement('span');
+        sliderVal.className = 'minisim-slider-val';
+        sliderRow.appendChild(sliderLbl);
+        sliderRow.appendChild(slider);
+        sliderRow.appendChild(sliderVal);
+        card.appendChild(sliderRow);
+        node.appendChild(card);
+
+        var ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var cssW = canvas.clientWidth || W;
+            var scale = cssW / W * dpr;
+            var bw = Math.round(W * scale), bh = Math.round(H * scale);
+            if (canvas.width !== bw || canvas.height !== bh) {
+                canvas.width = bw;
+                canvas.height = bh;
+            }
+            ctx.setTransform(scale, 0, 0, scale, 0, 0);
+        }
+        resizeCanvas();
+
+        // ── Tillstånd ─────────────────────────────────────────────────────
+        var hole = 0;                      // index i HOLES
+        var alpha = 0;                     // skivans vridning (rad, canvas-medurs positiv)
+        var omega = 0;                     // vinkelfart (rad/s)
+        var held = false;                  // handen (drag/glidare) håller skivan
+        var lines = [];                    // avritade lodlinjer i skivans system
+        var running = false, visible = true, lastTs = 0, rafId = 0;
+
+        function hp() { return HOLES[hole]; }
+        function dist() { var h = hp(); return Math.hypot(h[0], h[1]); }
+        // jämviktsvinkeln: tyngdpunkten rakt under spiken
+        function alphaEq() { var h = hp(); return Math.PI / 2 - Math.atan2(-h[1], -h[0]); }
+        function wrap(a) {
+            while (a > Math.PI) a -= 2 * Math.PI;
+            while (a < -Math.PI) a += 2 * Math.PI;
+            return a;
+        }
+        function dev() { return wrap(alpha - alphaEq()); }
+        // skivans lokala punkt → världen
+        function toWorld(p) {
+            var h = hp(), c = Math.cos(alpha), s = Math.sin(alpha);
+            var x = p[0] - h[0], y = p[1] - h[1];
+            return { x: NX + x * c - y * s, y: NY + x * s + y * c };
+        }
+        function toLocal(x, y) {
+            var h = hp(), c = Math.cos(alpha), s = Math.sin(alpha);
+            var dx = x - NX, dy = y - NY;
+            return [dx * c + dy * s + h[0], -dx * s + dy * c + h[1]];
+        }
+        function cog() { return toWorld([0, 0]); }
+        function atRest() { return !held && Math.abs(dev()) < 0.6 * RAD && Math.abs(omega) < 0.05; }
+
+        // ── Rendering ─────────────────────────────────────────────────────
+        function drawBackground() {
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#f7f2e8');
+            g.addColorStop(1, '#ece3d2');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+            ctx.strokeStyle = 'rgba(96,130,175,0.20)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var x = 26; x < W; x += 26) { ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, H); }
+            for (var y = 26; y < H; y += 26) { ctx.moveTo(0, y + 0.5); ctx.lineTo(W, y + 0.5); }
+            ctx.stroke();
+        }
+        function drawStand() {
+            // stativarm från höger kant fram till spiken
+            ctx.fillStyle = '#9aa2ad';
+            ctx.strokeStyle = '#5a616b';
+            ctx.lineWidth = 1.4;
+            ctx.fillRect(NX - 16, NY - 30, W - NX + 20, 12);
+            ctx.strokeRect(NX - 16, NY - 30, W - NX + 20, 12);
+            // spikens hållare ned till spiken
+            ctx.fillRect(NX - 3, NY - 18, 6, 16);
+            ctx.strokeRect(NX - 3, NY - 18, 6, 16);
+        }
+        function platePath() {
+            ctx.beginPath();
+            for (var i = 0; i < poly.length; i++) {
+                var w = toWorld(poly[i]);
+                if (i === 0) ctx.moveTo(w.x, w.y); else ctx.lineTo(w.x, w.y);
+            }
+            ctx.closePath();
+        }
+        function drawPlate() {
+            platePath();
+            ctx.fillStyle = '#e8d3ae';
+            ctx.fill();
+            // träådring och blyertslinjer klipps till skivan
+            ctx.save();
+            platePath();
+            ctx.clip();
+            ctx.strokeStyle = 'rgba(138,106,58,0.30)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var k = -4; k <= 4; k++) {
+                var a = toWorld([-160, k * 24 + 6]), b = toWorld([160, k * 24 - 6]);
+                ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+            }
+            ctx.stroke();
+            ctx.strokeStyle = '#4a4f57';
+            ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            for (var j = 0; j < lines.length; j++) {
+                var L = lines[j];
+                var p0 = toWorld([L.px - L.dx * 400, L.py - L.dy * 400]);
+                var p1 = toWorld([L.px + L.dx * 400, L.py + L.dy * 400]);
+                ctx.moveTo(p0.x, p0.y); ctx.lineTo(p1.x, p1.y);
+            }
+            ctx.stroke();
+            ctx.restore();
+            platePath();
+            ctx.strokeStyle = '#8a6a3a';
+            ctx.lineWidth = 2;
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+            // hålen
+            for (var i = 0; i < HOLES.length; i++) {
+                var w = toWorld(HOLES[i]);
+                ctx.fillStyle = '#c9b38b';
+                ctx.strokeStyle = '#8a6a3a';
+                ctx.lineWidth = 1.2;
+                ctx.beginPath();
+                ctx.arc(w.x, w.y, 5, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.stroke();
+            }
+        }
+        function drawLod() {
+            ctx.strokeStyle = '#3a4049';
+            ctx.lineWidth = 1.2;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.moveTo(NX, NY);
+            ctx.lineTo(NX, BOB_Y - 26);
+            ctx.stroke();
+            // lodet: mässingskropp med spets nedåt
+            ctx.fillStyle = '#c9a24a';
+            ctx.strokeStyle = '#7a5d1e';
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.moveTo(NX - 4, BOB_Y - 26);
+            ctx.lineTo(NX + 4, BOB_Y - 26);
+            ctx.lineTo(NX + 9, BOB_Y - 14);
+            ctx.lineTo(NX, BOB_Y);
+            ctx.lineTo(NX - 9, BOB_Y - 14);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = INK;
+            ctx.font = '15px ' + FONT;
+            ctx.textAlign = 'left';
+            ctx.fillText('Lod', NX + 14, BOB_Y - 8);
+        }
+        function drawNail() {
+            ctx.fillStyle = '#d13b2e';
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(NX, NY, 3.6, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+            ctx.fillStyle = INK;
+            ctx.font = '15px ' + FONT;
+            ctx.textAlign = 'left';
+            ctx.fillText('Upphängningspunkt', NX + 16, NY - 38);
+        }
+        function drawCog() {
+            if (!tpCb.checked) return;
+            var c = cog();
+            // lodlinjen: streckad lodrät linje genom tyngdpunkten, hela höjden
+            ctx.strokeStyle = COL_TP;
+            ctx.lineWidth = 2;
+            ctx.setLineDash([7, 5]);
+            ctx.beginPath();
+            ctx.moveTo(c.x, 0);
+            ctx.lineTo(c.x, H);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            // tyngdkraften längs lodlinjen
+            var len = 70, head = 11, endY = c.y + len;
+            ctx.strokeStyle = COL_FG;
+            ctx.lineWidth = 3.2;
+            ctx.lineCap = 'butt';
+            ctx.beginPath();
+            ctx.moveTo(c.x, c.y);
+            ctx.lineTo(c.x, endY - head);
+            ctx.stroke();
+            ctx.fillStyle = COL_FG;
+            ctx.beginPath();
+            ctx.moveTo(c.x, endY);
+            ctx.lineTo(c.x - 5.5, endY - head);
+            ctx.lineTo(c.x + 5.5, endY - head);
+            ctx.closePath();
+            ctx.fill();
+            // F_G-etikett vid spetsen, på den sida som vänder bort från lodet
+            var side = c.x >= NX ? 1 : -1;
+            if (Math.abs(c.x - NX) < 4) side = -1;
+            ctx.textAlign = side > 0 ? 'left' : 'right';
+            ctx.font = 'italic 17px ' + FONT;
+            var lx = c.x + side * 10, ly = endY + 2;
+            var fw = ctx.measureText('F').width;
+            if (side > 0) {
+                ctx.fillText('F', lx, ly);
+                ctx.font = '12px ' + FONT;
+                ctx.textAlign = 'left';
+                ctx.fillText('G', lx + fw + 1, ly + 4);
+            } else {
+                ctx.font = '12px ' + FONT;
+                var gw = ctx.measureText('G').width;
+                ctx.textAlign = 'left';
+                ctx.fillText('G', lx - gw, ly + 4);
+                ctx.font = 'italic 17px ' + FONT;
+                ctx.fillText('F', lx - gw - 1 - fw, ly);
+            }
+            // tyngdpunkten
+            ctx.fillStyle = COL_TP;
+            ctx.strokeStyle = INK;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(c.x, c.y, 5.5, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+            // etiketter: lodlinjen nere i fri yta, tyngdpunkten bredvid pricken
+            ctx.fillStyle = COL_TP;
+            ctx.font = '600 15px ' + FONT;
+            ctx.textAlign = side > 0 ? 'left' : 'right';
+            ctx.fillText('Lodlinje', c.x + side * 8, H - 14);
+            // "Tyngdpunkt" utanför skivan (inte på träet), med en tunn
+            // ledlinje till pricken, på sidan bort från lodets snöre
+            ctx.font = '15px ' + FONT;
+            var tw = ctx.measureText('Tyngdpunkt').width;
+            var ext = c.x;
+            for (var i = 0; i < poly.length; i++) {
+                var w = toWorld(poly[i]);
+                ext = side > 0 ? Math.max(ext, w.x) : Math.min(ext, w.x);
+            }
+            var tx = ext + side * 16;
+            if (side < 0 && tx - tw < 6) { side = 1; tx = c.x + 12; }
+            if (side > 0 && tx + tw > W - 6) tx = Math.max(c.x + 12, W - 6 - tw);
+            var ty = c.y - 14;
+            ctx.strokeStyle = 'rgba(31,37,48,0.7)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(c.x + side * 7, c.y - 2);
+            ctx.lineTo(tx - side * 4, ty - 5);
+            ctx.stroke();
+            ctx.fillStyle = INK;
+            ctx.textAlign = side > 0 ? 'left' : 'right';
+            ctx.fillText('Tyngdpunkt', tx, ty);
+        }
+        function render() {
+            drawBackground();
+            drawStand();
+            drawPlate();
+            drawCog();
+            drawLod();
+            drawNail();
+        }
+
+        function updateInfo() {
+            var d = dev() / RAD;
+            sliderVal.textContent = fmt(d, 0).replace('-', '−') + '°';
+            var txt;
+            if (atRest()) {
+                txt = tpCb.checked
+                    ? 'Skivan hänger still: tyngdpunkten ligger rakt under upphängningspunkten, och lodlinjen sammanfaller med lodets snöre.'
+                    : 'Skivan hänger still. Rita av lodet, byt upphängningspunkt och rita igen: där linjerna korsar varandra ligger tyngdpunkten.';
+            } else if (held) {
+                txt = 'Lodlinjen är fortfarande lodrät men går vid sidan av upphängningspunkten. Släpp, så vrider tyngdkraften tillbaka skivan.';
+            } else {
+                txt = 'Skivan svänger tills tyngdpunkten hänger rakt under upphängningspunkten.';
+            }
+            if (lines.length >= 2) txt += ' Linjerna på skivan korsar varandra i tyngdpunkten.';
+            info.textContent = txt;
+            ritaBtn.disabled = !atRest();
+        }
+
+        // ── Fysik ─────────────────────────────────────────────────────────
+        function step(dt) {
+            if (held) return;
+            var d = dist();
+            var w2 = GPX * d / (K2 + d * d);
+            var n = Math.max(1, Math.ceil(dt / 0.004)), h = dt / n;
+            for (var i = 0; i < n; i++) {
+                omega += (-w2 * Math.sin(dev()) - DAMP * omega) * h;
+                alpha += omega * h;
+            }
+            if (Math.abs(dev()) < 0.05 * RAD && Math.abs(omega) < 0.01) {
+                alpha = alphaEq();
+                omega = 0;
+            }
+        }
+        function shouldRun() {
+            return visible && !document.hidden && !held &&
+                   (Math.abs(dev()) > 0 || Math.abs(omega) > 0);
+        }
+        function frame(ts) {
+            rafId = 0;
+            var dt = lastTs ? (ts - lastTs) / 1000 : 0.016;
+            lastTs = ts;
+            step(Math.min(dt, 0.045));
+            render();
+            updateInfo();
+            if (shouldRun()) { running = true; rafId = requestAnimationFrame(frame); }
+            else { running = false; lastTs = 0; }
+        }
+        function kick() {
+            if (running || rafId) return;
+            lastTs = 0;
+            running = true;
+            rafId = requestAnimationFrame(frame);
+        }
+        function redraw() { render(); updateInfo(); }
+
+        // ── Knappar och glidare ───────────────────────────────────────────
+        ritaBtn.addEventListener('click', function () {
+            if (!atRest()) return;
+            // lodets snöre (lodrätt genom spiken) i skivans eget system
+            var a = toLocal(NX, NY), b = toLocal(NX, NY + 1);
+            lines.push({ px: a[0], py: a[1], dx: b[0] - a[0], dy: b[1] - a[1] });
+            redraw();
+        });
+        bytBtn.addEventListener('click', function () {
+            // skivan behåller sin vridning men hängs i nästa hål och svänger
+            hole = (hole + 1) % HOLES.length;
+            omega = 0;
+            held = false;
+            slider.value = '0';
+            redraw();
+            kick();
+        });
+        omBtn.addEventListener('click', function () {
+            hole = 0;
+            lines = [];
+            held = false;
+            omega = 0;
+            alpha = alphaEq();
+            slider.value = '0';
+            tpCb.checked = true;
+            redraw();
+        });
+        tpCb.addEventListener('change', redraw);
+        slider.addEventListener('input', function () {
+            held = true;
+            omega = 0;
+            alpha = alphaEq() + parseFloat(slider.value) * RAD;
+            redraw();
+        });
+        slider.addEventListener('change', function () {
+            held = false;
+            slider.value = '0';
+            redraw();
+            kick();
+        });
+
+        // ── Ta tag i skivan och vrid den kring spiken ─────────────────────
+        var dragging = false, dragPtr = -1, lastAng = 0;
+        function logicalPos(e) {
+            var r = canvas.getBoundingClientRect();
+            return { x: (e.clientX - r.left) * W / r.width,
+                     y: (e.clientY - r.top) * H / r.height };
+        }
+        function overPlate(p) {
+            // punkt-i-polygon i skivans eget system
+            var q = toLocal(p.x, p.y), inside = false;
+            for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+                var a = poly[i], b = poly[j];
+                if ((a[1] > q[1]) !== (b[1] > q[1]) &&
+                    q[0] < (b[0] - a[0]) * (q[1] - a[1]) / (b[1] - a[1]) + a[0]) inside = !inside;
+            }
+            return inside && Math.hypot(p.x - NX, p.y - NY) > 14;
+        }
+        canvas.addEventListener('pointerdown', function (e) {
+            var p = logicalPos(e);
+            if (!overPlate(p)) return;
+            e.preventDefault();
+            dragging = true;
+            dragPtr = e.pointerId;
+            held = true;
+            omega = 0;
+            lastAng = Math.atan2(p.y - NY, p.x - NX);
+            canvas.setPointerCapture(e.pointerId);
+            canvas.style.cursor = 'grabbing';
+            redraw();
+        });
+        canvas.addEventListener('pointermove', function (e) {
+            var p = logicalPos(e);
+            if (!dragging) {
+                canvas.style.cursor = overPlate(p) ? 'grab' : 'default';
+                return;
+            }
+            if (e.pointerId !== dragPtr) return;
+            var a = Math.atan2(p.y - NY, p.x - NX);
+            alpha += wrap(a - lastAng);
+            lastAng = a;
+            slider.value = String(Math.max(-90, Math.min(90, dev() / RAD)));
+            redraw();
+        });
+        function endDrag(e) {
+            if (!dragging || e.pointerId !== dragPtr) return;
+            dragging = false;
+            dragPtr = -1;
+            held = false;
+            canvas.style.cursor = 'default';
+            slider.value = '0';
+            redraw();
+            kick();
+        }
+        canvas.addEventListener('pointerup', endDrag);
+        canvas.addEventListener('pointercancel', endDrag);
+
+        // ── Fullskärm ─────────────────────────────────────────────────────
+        function isFs() {
+            return document.fullscreenElement === card ||
+                   document.webkitFullscreenElement === card;
+        }
+        fsBtn.addEventListener('click', function () {
+            if (!isFs()) (card.requestFullscreen || card.webkitRequestFullscreen).call(card);
+            else (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+        });
+        function onFsChange() {
+            var fs = isFs();
+            fsBtn.innerHTML = fs ? ICON_COMPRESS : ICON_EXPAND;
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            resizeCanvas();
+            render();
+        }
+        document.addEventListener('fullscreenchange', onFsChange);
+        document.addEventListener('webkitfullscreenchange', onFsChange);
+        window.addEventListener('resize', function () { resizeCanvas(); if (!running) render(); });
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                visible = entries[0].isIntersecting;
+                if (visible) kick();
+            }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        document.addEventListener('visibilitychange', function () { if (!document.hidden) kick(); });
+        if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
+            document.fonts.ready.then(function () { render(); });
+        }
+
+        // Test-handtag för skärmdumpsskript: vrid skivan (grader från
+        // jämvikt) och håll den, välj hål, rita av linjer.
+        card._set = function (devDeg, holeIx, nLines) {
+            lines = [];
+            for (var i = 0; i < (nLines || 0); i++) {
+                hole = i % HOLES.length;
+                alpha = alphaEq();
+                var a = toLocal(NX, NY), b = toLocal(NX, NY + 1);
+                lines.push({ px: a[0], py: a[1], dx: b[0] - a[0], dy: b[1] - a[1] });
+            }
+            hole = holeIx || 0;
+            alpha = alphaEq() + (devDeg || 0) * RAD;
+            omega = 0;
+            held = !!devDeg;
+            redraw();
+        };
+
+        alpha = alphaEq();
+        redraw();
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   'kopplade-fjadrar': buildKoppladeFjadrar,
                   cirkularrorelse: buildCirkularrorelse,
@@ -9874,7 +10489,8 @@
                   linjal: buildLinjal, linjaltrio: buildLinjaltrio,
                   fodelsedag: buildFodelsedag, talmangder: buildTalmangder,
                   magnetpoler: buildMagnetpoler, magnetdelning: buildMagnetdelning,
-                  galton: buildGalton, kalkylblad: buildKalkylblad };
+                  galton: buildGalton, kalkylblad: buildKalkylblad,
+                  lodlinje: buildLodlinje };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

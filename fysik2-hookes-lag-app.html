@@ -236,7 +236,7 @@
     </div>
 
     <div id="root"></div>
-    <script src="kopplade-fjadrar.js?v=2"></script>
+    <script src="kopplade-fjadrar.js?v=3"></script>
 
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
@@ -1185,7 +1185,7 @@
                             <div className="lg:w-2/5 order-2">
                                 <div className="glass-card rounded-xl p-3 mb-3">
                                     <Slider label="Massa i varje upphängning (<em>m</em>)"
-                                            sub="Parallellt fördelas massan på två vikter, en under varje fjäder."
+                                            sub="Samma vikt hänger i alla tre upphängningarna. Parallellt hänger den mitt under stången."
                                             value={mg} min={KM_MIN} max={KM_MAX} step={10} unit="g" onChange={setMg} decimals={0} />
                                     <Slider label="Fjäderkonstant för varje fjäder (<em>k</em>)"
                                             sub="Alla fjädrar är likadana och har samma fjäderkonstant."
@@ -1253,9 +1253,9 @@
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Samma massa överallt</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    I parallellkopplingen hänger massan som två vikter med halva massan var, en under
-                                    varje fjäder. Den totala massan är ändå densamma i alla tre upphängningarna, så
-                                    det är bara kopplingen som skiljer dem åt.
+                                    Samma vikt hänger i alla tre upphängningarna. I parallellkopplingen hänger den mitt
+                                    under stången, så att fjädrarna delar lika på tyngden. Det är alltså bara kopplingen
+                                    som skiljer dem åt.
                                 </p>
                             </div>
                         </div>

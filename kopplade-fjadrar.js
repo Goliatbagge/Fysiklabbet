@@ -9,8 +9,8 @@
  *
  * Förloppet har tre steg:
  *   tom     bara fjädrarna, olastade
- *   hangt   samma massa m i varje upphängning (parallellt fördelad på två
- *           vikter med massan m/2), förlängningen markerad med måttlinjer
+ *   hangt   samma vikt med massan m i varje upphängning (parallellt mitt
+ *           under stången, som i teorifiguren), förlängningen markerad
  *   svang   alla tre dras ned lika långt (amplituden A) och släpps samtidigt
  *
  * Fysik (likadana fjädrar, fjäderkonstanten k, n = 2):
@@ -273,12 +273,11 @@
             // ── vikterna ──
             if (alfa > 0) {
                 ctx.globalAlpha = alfa;
-                var hel = fmt(m * 1000, 0) + ' g', halv = fmt(m * 500, 0) + ' g';
+                var hel = fmt(m * 1000, 0) + ' g';
                 block(x, y1, 36, 30, hel, 'right');
                 block(xs, y2, 36, 30, hel, 'right');
-                // två vikter med halva massan, en under varje fjäder, mot stången
-                block(xp - PAR_D, y3 + 5, 28, 22, halv, 'below');
-                block(xp + PAR_D, y3 + 5, 28, 22, halv, 'below');
+                // en vikt mitt under stången, så att fjädrarna delar lika
+                block(xp, y3 + 5, 36, 30, hel, 'right');
                 ctx.globalAlpha = 1;
             }
 

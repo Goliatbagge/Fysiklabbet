@@ -325,7 +325,7 @@
  * ── typ: kopplade-fjadrar ────────────────────────────────────────────────
  * fy2-2.2: en fjäder, två seriekopplade och två parallellkopplade likadana
  * fjädrar bredvid varandra. "Häng i vikterna" hänger samma massa i alla tre
- * (parallellt på två vikter) och markerar förlängningen; "Sätt i svängning"
+ * (parallellt mitt under stången) och markerar förlängningen; "Sätt i svängning"
  * visar periodtiderna. Motorn bor i kopplade-fjadrar.js och delas med läget
  * "Kopplade fjädrar" i fysik2-hookes-lag-app.html (?lage=kopplade).
  */

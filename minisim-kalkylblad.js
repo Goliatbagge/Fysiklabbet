@@ -134,8 +134,13 @@
         '.kb-btn.prim{background:var(--lab-ink,#1b2330);color:#fff;}',
         '.kb-btn[hidden]{display:none;}',
         '.kb-btn:disabled{opacity:.35;cursor:default;}',
-        '.kb-cap{flex:1 1 100%;font:400 14px/1.45 Poppins,system-ui,sans-serif;color:var(--lab-ink,#1b2330);}',
-        '.kb-cap b{font-weight:600;}'
+        // textrutan som förklarar det aktuella steget; byts ut vid varje steg
+        '.kb-cap{flex:1 1 100%;box-sizing:border-box;padding:10px 14px;background:#fbf8f1;border:1px solid var(--lab-line-strong,#b9ae98);',
+        '  border-left:3px solid var(--lab-ink,#1b2330);border-radius:6px;font:400 15px/1.55 Poppins,system-ui,sans-serif;color:var(--lab-ink,#1b2330);}',
+        '.kb-cap.in{animation:kbcap .35s ease-out;}',
+        '@keyframes kbcap{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}',
+        '.kb-cap-rub{display:block;margin-bottom:3px;font:600 11px/1.3 Poppins,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#6b6250;}',
+        '.kb-cap code{font:500 .92em/1 Roboto Mono,Consolas,monospace;background:#efe8da;padding:1px 4px;border-radius:3px;white-space:nowrap;}'
     ].join('\n');
 
     function injectCss() {
@@ -661,6 +666,7 @@
         /* ---------- stegen i Exempel 1 a) ---------- */
         var SPARKONTO = [
             { namn: 'Rubriker, år och startvärden',
+              text: 'Vi gör en kolumn för ”År” och en kolumn för ”Behållning (kr)”. Vi skriver 0 i A2 och 1 i A3, markerar de två cellerna och drar i <em>fyllnadshandtaget</em> (det runda hörnet i högra nederkanten) ner till och med A10. Då fylls åren i från år 0 till och med år 8. Vi fyller också i insättningen 30 000 kr i B2 och förändringsfaktorn för en ökning med 3,5 %, det vill säga 1 + 0,035 = 1,035, i B12 (med rubriken ”Förändringsfaktor” i A12).',
               kor: async function () {
                   await klickaCell('A1'); await skriv('År'); await enter();
                   await klickaCell('B1'); await skriv('Behållning (kr)'); await enter();
@@ -674,6 +680,7 @@
                   await skriv('1,035'); await enter();
               } },
             { namn: 'Formeln för behållningen efter 1 år',
+              text: 'För att få behållningen efter ett år multiplicerar vi 30 000 (värdet i B2) med förändringsfaktorn (värdet i B12). Vi ställer oss i cell B3 och skriver <code>=B2*B12</code> och får värdet efter 1 år, 31 050 kr.',
               kor: async function () {
                   // först de två värdena som ska multipliceras ...
                   await ringaIn('B2', REFF[0], 1.15);
@@ -694,6 +701,7 @@
                   await sleep(1500);
               } },
             { namn: 'Lås B12 med dollartecken och dra i fyllnadshandtaget',
+              text: 'Samma beräkning ska upprepas för åren 2 till 8, och varje värde ska multipliceras med förändringsfaktorn i B12. Den cellen ”låses” därför med dollartecken innan formeln kopieras: formeln i B3 blir <code>=B2*$B$12</code>. Utan dollartecknen skulle B12 också flytta ner en rad för varje år, till tomma celler. Sedan drar vi i fyllnadshandtaget ner till och med B10. I B6 står nu till exempel <code>=B5*$B$12</code>: B5 har flyttat med, men <code>$B$12</code> står kvar.',
               kor: async function () {
                   await klickaFbar();
                   // pekaren flyttas undan så att formelfältet syns
@@ -722,6 +730,7 @@
         /* ---------- stegen i Exempel 2 (årligt sparande) ---------- */
         var ARLIGT = [
             { namn: 'Rubriker, insättningarnas nummer och den första insättningen',
+              text: 'Vi gör en kolumn för ”Insättning” och en kolumn för ”Behållning (kr)”. Vi skriver 1 i A2 och 2 i A3, markerar de två cellerna och drar i fyllnadshandtaget ner till och med A11. Då fylls insättningarna i från 1 till och med 10. Vi fyller också i 5 000 kr i B2, som är behållningen direkt efter den första insättningen.',
               kor: async function () {
                   await klickaCell('A1'); await skriv('Insättning'); await enter();
                   await klickaCell('B1'); await skriv('Behållning (kr)'); await enter();
@@ -733,6 +742,7 @@
                   await sleep(400);
               } },
             { namn: 'Formeln för behållningen efter den andra insättningen',
+              text: 'Efter den andra insättningen har det föregående beloppet (5 000 kr i B2) vuxit med 2,8 % <em>samtidigt</em> som ytterligare 5 000 kr läggs till. Att beloppet växer med 2,8 % betyder att det multipliceras med förändringsfaktorn 1,028. Vi ställer oss i B3 och skriver <code>=B2*1,028+5000</code> och får värdet efter den andra insättningen, 10 140 kr.',
               kor: async function () {
                   // det föregående beloppet, som ska växa med 2,8 % ...
                   await ringaIn('B2', REFF[0], 1.15);
@@ -750,6 +760,7 @@
                   await sleep(1500);
               } },
             { namn: 'Dra formeln nedåt till den tionde insättningen',
+              text: 'Samma sak händer vid varje ny insättning: det föregående beloppet växer med 2,8 % och 5 000 kr läggs till. Vi drar i fyllnadshandtaget ner till och med B11, som är insättning 10. I B6 står nu till exempel <code>=B5*1,028+5000</code>. Här behövs inga dollartecken, eftersom formeln inte hämtar något från en fast cell.',
               kor: async function () {
                   await draHandtag('B11');
                   await sleep(600);
@@ -783,14 +794,18 @@
         }
         var SPARKONTO_B = [
             { namn: 'Skriv den nya insättningen 40000 i B2',
+              text: 'Insättningen är nu 40 000 kr i stället för 30 000 kr. Vi behöver inte göra om bladet, utan går bara till cell B2 och ändrar beloppet där till 40 000.',
               kor: function () { return andra('B2', '40000'); } },
             { namn: 'Tryck Enter: alla värden räknas om',
+              text: 'Vi trycker Enter. De resterande värdena ändras automatiskt (automagiskt!), eftersom alla formler i kolumn B bygger på den ändrade cellen. Behållningen efter 8 år står i B10.',
               kor: enterOchSvar }
         ];
         var SPARKONTO_C = [
             { namn: 'Skriv den nya förändringsfaktorn 1,045 i B12',
+              text: 'Räntan är nu 4,5 % i stället för 3,5 %. Vi går bara till cell B12 och ändrar förändringsfaktorn till 1 + 0,045 = 1,045.',
               kor: function () { return andra('B12', '1,045'); } },
             { namn: 'Tryck Enter: alla värden räknas om',
+              text: 'Vi trycker Enter. De resterande värdena ändras automatiskt (automagiskt!), eftersom alla formler i kolumn B bygger på den ändrade cellen. Behållningen efter 8 år står i B10.',
               kor: enterOchSvar }
         ];
         // bladet som b) och c) börjar i: a) färdigt, och för c) även b)
@@ -830,7 +845,13 @@
             bPrev.disabled = aktuellt === 0;
             bNext.hidden = sista && lage === 'klar';
             bNext.disabled = sista;
-            cap.innerHTML = '<b>Steg ' + (aktuellt + 1) + ' av ' + STEG.length + ':</b> ' + STEG[aktuellt].namn;
+            // byts texten (nytt steg) tonar den nya in; samma steg står still
+            if (cap.dataset.steg !== String(aktuellt)) {
+                cap.dataset.steg = String(aktuellt);
+                cap.innerHTML = '<span class="kb-cap-rub">Steg ' + (aktuellt + 1) + ' av ' + STEG.length + '</span>' +
+                    (STEG[aktuellt].text || STEG[aktuellt].namn);
+                cap.classList.remove('in'); void cap.offsetWidth; cap.classList.add('in');
+            }
             bOm.hidden = true; bSkip.hidden = true;
             if (lage === 'redo') {
                 bPlay.innerHTML = IKON_PLAY + 'Spela steg ' + (aktuellt + 1);

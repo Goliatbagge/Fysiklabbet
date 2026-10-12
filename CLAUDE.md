@@ -147,6 +147,14 @@ node .claude/verify-ovningar-flerval.js
 # Se "Räkningen ska räknas om, inte läsas" nedan. Valfritt: avsnitts-id.
 node .claude/verify-rakning.js [avsnitts-id …]
 
+# Verifiera att varje EXEMPEL i teorin har ett tydligt "Svar:" (KÖR FÖRE
+# COMMIT vid nya eller ändrade exempel!) — varje deluppgift a), b), c) …
+# ska få sitt svar, med egen **Svar:**-rad eller en gemensam svarsrad med
+# alla bokstäverna. Bara bevis och ritningar ("Visa att", "Bevisa",
+# "Härled", "Rita", "Konstruera") är undantagna. Se "Varje deluppgift
+# avslutas med Svar:" nedan.
+node .claude/verify-svar.js [avsnitts-id …]
+
 # Verifiera pennlösningarna (::: handskrift-scenerna i handskrift.js) —
 # KÖR FÖRE COMMIT vid nya eller ändrade scener! Bygger varje scens
 # aktlista i Node (utan webbläsare, via HANDSKRIFT.scen) och mäter att
@@ -599,6 +607,26 @@ Så här bygger du scenen:
    "EKVATIONSOPERATIONEN SKRIVS ALLTID UT" och "EN EKVATION SKRIVS PÅ EN RAD" i
    filhuvudet (felet hände 2026-09-07: 12x² ringades in i båda led i
    stället för att −12x² skrevs ut).
+
+## Varje deluppgift avslutas med "Svar:"
+
+**Varje lösning ska sluta med ett tydligt `**Svar:**`, och har uppgiften
+deluppgifter får VARJE deluppgift sitt eget svar** (uttryckligt krav
+2026-10-12). Det gäller även när lösningen visas som ett kalkylblad, en
+tabell eller en simulering: att svaret "syns i bladet" räcker inte, och
+en bisats som "Efter 8 år är behållningen 52 672,36 kr" mitt i
+förklaringen är inget svar. Felet som utlöste regeln: Exempel 1 i
+`ma1c-3.4` hade tre deluppgifter och inte ett enda "Svar:".
+
+- Skriv `**Svar:** …` direkt efter deluppgiftens lösning, eller en
+  gemensam svarsrad sist (`**Svar:** a) …&emsp;&emsp;b) …`).
+- Undantag: bevis och ritningar ("Visa att", "Bevisa", "Härled", "Rita",
+  "Konstruera"), där det inte finns något svar att ge.
+- Gäller teorins exempel, övningarnas lösningar, pennscenerna och de
+  nationella provens lösningar. Svarsraden följer reglerna 3b och 3f
+  under pennlösningarna (ingen bokstav i "Svar:", stor bokstav efter).
+- `node .claude/verify-svar.js` granskar teorins exempel. Listan
+  `UNDANTAG` i skriptet är arvsskulden från 2026-10-12 och ska bara krympa.
 
 ## Pennlösningar till övningarna (`penna:` i data/ovningar.js)
 

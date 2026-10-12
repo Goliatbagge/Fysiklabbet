@@ -100,62 +100,32 @@ c) sätter in 40 000 kr med räntan 4,5 %**
 
 ::: textlosning
 **a)** Vi öppnar ett kalkylark och gör beräkningen i tre steg. Klicka
-fram stegen ett i taget i kalkylbladet nedan och se hur cellerna fylls i.
+fram stegen ett i taget i kalkylbladet nedan. Under bladet förklaras vad som händer i varje steg.
 
 ::: minisim
 typ: kalkylblad
 :::
 
-**Steg 1.** Vi gör en kolumn för "År" och en kolumn för "Behållning (kr)".
-Vi skriver 0 i A2 och 1 i A3, markerar de två cellerna och drar i
-*fyllnadshandtaget* (det runda hörnet i högra nederkanten) ner till och
-med A10. Då fylls åren i från år 0 till och med år 8. Vi fyller också i
-insättningen 30 000 kr (i cell B2) samt förändringsfaktorn som motsvarar
-en ökning med 3,5 %, det vill säga $1 + 0{,}035 = 1{,}035$ (i cell B12,
-med rubriken "Förändringsfaktor" i A12).
+**Svar:** Behållningen varje år står i kolumn B i kalkylbladet. Efter
+8 år är den 39 504,27 kr.
 
-**Steg 2.** För att få behållningen efter ett år ska vi multiplicera
-30 000 (värdet i B2) med förändringsfaktorn (värdet i B12). Vi ställer
-oss i cell B3 och skriver `=B2*B12` och får värdet efter 1 år (31 050 kr).
-
-**Steg 3.** Samma beräkning ska nu upprepas för åren 2 till 8, och varje
-värde ska multipliceras med förändringsfaktorn i B12. Den cellen ska
-därför "låsas" med dollartecken innan formeln kopieras, så vi ändrar
-formeln i B3 till `=B2*$B$12`. Utan dollartecknen skulle B12 också flytta
-ner en rad för varje år, till tomma celler. Sedan markerar vi cell B3,
-tar tag i fyllnadshandtaget och drar ner till och med cell B10. I B6 står
-nu till exempel `=B5*$B$12`: B5 har flyttat med, men `$B$12` står kvar.
-
-| År | Behållning (kr) |
-| --- | --- |
-| 0 | 30 000,00 |
-| 1 | 31 050,00 |
-| 2 | 32 136,75 |
-| 3 | 33 261,54 |
-| 4 | 34 425,69 |
-| 5 | 35 630,59 |
-| 6 | 36 877,66 |
-| 7 | 38 168,38 |
-| 8 | 39 504,27 |
-
-**b)** Om insättningen istället är 40 000 kr går vi nu bara till cell B2
-och ändrar beloppet där till 40 000 kr. De resterande värdena ändras
-automatiskt (automagiskt!). Efter 8 år är behållningen 52 672,36 kr.
+**b)** Vi utgår från kalkylbladet i a) och klickar fram stegen.
 
 ::: minisim
 typ: kalkylblad
 scen: sparkonto-b
 :::
 
-**c)** Om räntan istället är 4,5 % går vi nu bara till cell B12 och
-ändrar förändringsfaktorn till 1,045. De resterande värdena ändras
-återigen automatiskt. Med 40 000 kr insatta blir behållningen efter 8 år
-56 884,02 kr.
+**Svar:** Efter 8 år är behållningen 52 672,36 kr.
+
+**c)** Vi utgår från kalkylbladet i b) och klickar fram stegen.
 
 ::: minisim
 typ: kalkylblad
 scen: sparkonto-c
 :::
+
+**Svar:** Efter 8 år är behållningen 56 884,02 kr.
 :::
 :::
 
@@ -165,45 +135,12 @@ ränta. Vad är behållningen på kontot direkt efter 10:e insättningen?**
 
 ::: textlosning
 Vi öppnar ett kalkylark och gör beräkningen i tre steg. Klicka fram
-stegen ett i taget i kalkylbladet nedan och se hur cellerna fylls i.
+stegen ett i taget i kalkylbladet nedan. Under bladet förklaras vad som händer i varje steg.
 
 ::: minisim
 typ: kalkylblad
 scen: arligt
 :::
-
-**Steg 1.** Vi gör en kolumn för "Insättning" och en kolumn för
-"Behållning (kr)". Vi skriver 1 i A2 och 2 i A3, markerar de två cellerna
-och drar i fyllnadshandtaget ner till och med A11. Då fylls insättningarna
-i från 1 till och med 10. Vi fyller också i 5 000 kr i B2, som är
-behållningen direkt efter den första insättningen.
-
-**Steg 2.** För att få behållningen efter den andra insättningen ska det
-föregående beloppet (5 000 kr i B2) ha vuxit med 2,8 % *samtidigt* som du
-lägger till ytterligare 5 000 kr. Att beloppet växer med 2,8 % betyder
-att det multipliceras med förändringsfaktorn 1,028. Vi ställer oss i
-cell B3 och skriver `=B2*1,028+5000` och får värdet efter den andra
-insättningen (10 140 kr).
-
-**Steg 3.** Samma sak händer vid varje ny insättning: det föregående
-beloppet växer med 2,8 % och 5 000 kr läggs till. Vi markerar B3, tar tag
-i fyllnadshandtaget och drar ner till och med B11, som är insättning 10.
-I B6 står nu till exempel `=B5*1,028+5000`. Här behövs inga
-dollartecken, eftersom formeln inte hämtar något från en annan fast
-cell.
-
-| Insättning | Behållning (kr) |
-| --- | --- |
-| 1 | 5 000,00 |
-| 2 | 10 140,00 |
-| 3 | 15 423,92 |
-| 4 | 20 855,79 |
-| 5 | 26 439,75 |
-| 6 | 32 180,06 |
-| 7 | 38 081,11 |
-| 8 | 44 147,38 |
-| 9 | 50 383,50 |
-| 10 | 56 794,24 |
 
 **Svar:** 56 794,24 kr
 :::

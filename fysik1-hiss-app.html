@@ -165,8 +165,6 @@
         .vknapp.lit { border-color: #e0701a; color: #b45309; box-shadow: 0 0 0 3px rgba(224,112,26,0.28), 0 2px 3px rgba(15,22,32,0.22); }
         .vknapp.har { border-color: #3f4a57; background: radial-gradient(circle at 38% 32%, #ffffff 0%, #e6e3dc 70%, #cfcbc3 100%); }
         .vknapp:disabled { opacity: 0.4; cursor: not-allowed; }
-        .hisspanel-st { grid-template-columns: repeat(5, 34px); gap: 6px; padding: 8px; }
-        .hisspanel-st .vknapp { width: 34px; height: 34px; font-size: 13px; }
 
         .calc-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 7px;
                     font-size: 15px; color: var(--lab-ink, #0f1620); line-height: 1.2; }
@@ -570,9 +568,25 @@
             return rader;
         };
 
+        // Rund våningsknapp i scenen (helskärm). knappar = { aka, lit, har, trasig }
+        const VKnapp = ({ x, y, r, fs, k, knappar }) => {
+            const lit = knappar.lit.has(k), har = knappar.har === k;
+            return (
+                <g style={{ cursor: knappar.trasig ? 'not-allowed' : 'pointer' }} opacity={knappar.trasig ? 0.45 : 1}
+                   role="button" aria-label={'Åk till våning ' + k}
+                   onClick={(e) => { e.stopPropagation(); if (!knappar.trasig) knappar.aka(k); }}>
+                    <circle cx={x} cy={y} r={r} fill={har ? '#ffffff' : '#ecebe7'}
+                            stroke={lit ? '#e0701a' : (har ? '#3f4a57' : '#8d8a83')} strokeWidth={lit ? 2.6 : 1.6} />
+                    <text x={x} y={y + fs * 0.36} textAnchor="middle" fontSize={fs} fontWeight="700"
+                          fill={lit ? '#b45309' : '#2b313b'} fontFamily="'JetBrains Mono', monospace"
+                          style={{ pointerEvents: 'none' }}>{k}</text>
+                </g>
+            );
+        };
+
         // ── Huset med hisschaktet (egna koordinater 158 × 542) ─────
         const BY = (h) => 512 - h * 16;          // hissgolvets y för höjden h (m)
-        const Huset = ({ y, v, ph, trasig, cwH, visaV, glipa: gp = 0 }) => {
+        const Huset = ({ y, v, ph, trasig, cwH, visaV, glipa: gp = 0, knappar = null }) => {
             const yc = BY(y);
             const carTop = yc - 40;
             const cwBot = BY(cwH), cwTop = cwBot - 40;
@@ -604,8 +618,12 @@
                                 <rect x="0" y={yy} width="28" height="4" fill="#b9ad97" />
                                 <rect x="128" y={yy} width="30" height="4" fill="#b9ad97" />
                                 {k > 0 && <rect x="104" y={yy} width="4" height="4" fill="#b9ad97" />}
-                                <text x="14" y={yy - 15} textAnchor="middle" fontSize="15" fontWeight="600"
-                                      fill="rgba(15,22,32,0.7)" fontFamily="'JetBrains Mono', monospace">{k}</text>
+                                {knappar ? (
+                                    <VKnapp x={14} y={yy - 22} r={11.5} fs={13} k={k} knappar={knappar} />
+                                ) : (
+                                    <text x="14" y={yy - 15} textAnchor="middle" fontSize="15" fontWeight="600"
+                                          fill="rgba(15,22,32,0.7)" fontFamily="'JetBrains Mono', monospace">{k}</text>
+                                )}
                                 {/* hissdörren på våningsplanet */}
                                 <rect x="25" y={yy - 34} width="3" height="34" fill="#8d8a83" />
                             </g>
@@ -1087,9 +1105,12 @@
             smal: { W: 520, H: 830, hus: { x: 6, y: 72, s: 0.6 }, zoom: { x: 124, y: 72, s: 392 / 420 },
                     banner: { x: 292, y: 30 }, matare: { x: 12, y: 404, w: 496 },
                     graf: { x: 6, y: 528, w: 508, h: 294 } },
+            smalFs: { W: 520, H: 892, hus: { x: 6, y: 72, s: 0.6 }, zoom: { x: 124, y: 72, s: 392 / 420 },
+                    banner: { x: 292, y: 30 }, matare: { x: 12, y: 404, w: 496 }, knapprad: { y: 526 },
+                    graf: { x: 6, y: 592, w: 508, h: 294 } },
         };
 
-        const Scen = ({ L, smal, st, m, show, dolj, tl, tNow, hist, grafMode, aMax, vMax, fraga, svara, fortsatt, poang }) => {
+        const Scen = ({ L, smal, st, m, show, dolj, tl, tNow, hist, grafMode, aMax, vMax, fraga, svara, fortsatt, poang, knappar }) => {
             const broken = tl.brottT != null && tNow >= tl.brottT;
             let cwH = H_TOPP - st.y;
             if (broken) {
@@ -1135,12 +1156,22 @@
                     <line x1={carX} y1={carB} x2={L.zoom.x} y2={L.zoom.y + ZH * L.zoom.s} stroke="rgba(15,22,32,0.3)" strokeWidth="1" strokeDasharray="4 4" />
 
                     <g transform={`translate(${L.hus.x} ${L.hus.y}) scale(${hs})`}>
-                        <Huset y={st.y} v={st.v} ph={st.ph} trasig={broken} cwH={cwH} visaV={show.fart} glipa={st.glipa} />
+                        <Huset y={st.y} v={st.v} ph={st.ph} trasig={broken} cwH={cwH} visaV={show.fart} glipa={st.glipa}
+                               knappar={knappar && !L.knapprad ? knappar : null} />
                     </g>
                     <g transform={`translate(${L.zoom.x} ${L.zoom.y}) scale(${L.zoom.s})`}>
                         <Zoom st={st} m={m} show={show} dolj={dolj} broken={broken} />
                     </g>
                     <Matare x={L.matare.x} y={L.matare.y} w={L.matare.w} m={m} a={st.a} dolj={dolj} />
+                    {knappar && L.knapprad && (
+                        <g>
+                            <text x={12} y={L.knapprad.y + 4} fontSize="11" fontWeight="600" letterSpacing="0.06em"
+                                  fill="rgba(15,22,32,0.6)">ÅK TILL VÅNING</text>
+                            {[...Array(TOPP + 1)].map((_, k) => (
+                                <VKnapp key={k} x={12 + 22 + k * 56.5} y={L.knapprad.y + 34} r={21} fs={18} k={k} knappar={knappar} />
+                            ))}
+                        </g>
+                    )}
                     {fraga ? (
                         <GissaPanel x={L.graf.x} y={L.graf.y} w={L.graf.w} h={L.graf.h} fraga={fraga} svara={svara}
                                     fortsatt={fortsatt} poang={poang} smal={smal} />
@@ -1393,7 +1424,10 @@
             const ledig = tNow >= tSlut(tl) - 1e-9;
             const malVan = new Set(tl.mal.filter(x => x.t > tNow).map(x => x.van));
             const harVan = ledig && Math.abs(st.y - vanNu * VAN_H) < 0.02 ? vanNu : null;
-            const L = smal ? LAYOUT.smal : LAYOUT.bred;
+            const L = smal ? (isFullscreen ? LAYOUT.smalFs : LAYOUT.smal) : LAYOUT.bred;
+            // Våningsknapparna ligger i scenen i helskärm (husets våningsnummer
+            // på bred skärm, en knapprad på telefon), i sidopanelen annars.
+            const knappar = isFullscreen ? { aka, lit: malVan, har: harVan, trasig: tl.trasig } : null;
             const primaryLabel = fraga ? 'Fortsätt' : (paused ? 'Fortsätt' : 'Pausa');
             const lageInfo = LAGEN.find(x => x.id === lage);
 
@@ -1470,8 +1504,6 @@
                             fullskärm. I normalläget bor de i sidopanelen. */}
                         {isFullscreen && (
                             <React.Fragment>
-                                <div className="st-title mt">Åk till våning</div>
-                                {hisspanel('hisspanel-st')}
                                 <div className="st-title mt">Färdiga försök</div>
                                 <div className="st-presets">
                                     <button className="btn-toggle" onClick={helaLabben}>Hela labben</button>
@@ -1528,7 +1560,7 @@
                                 <div className={"scene-wrap" + (isFullscreen ? " is-fs" : "")} data-theme="ljusPapper" ref={sceneWrapRef}>
                                     <Scen L={L} smal={smal} st={st} m={m} show={show} dolj={dolj} tl={tl} tNow={tNow}
                                           hist={histRef.current} grafMode={grafMode} aMax={aMax} vMax={vMax}
-                                          fraga={fraga} svara={svara} fortsatt={fortsatt} poang={poang} />
+                                          fraga={fraga} svara={svara} fortsatt={fortsatt} poang={poang} knappar={knappar} />
                                     {sceneToggles()}
                                     <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
                                             title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>

@@ -2232,6 +2232,19 @@ details.lab-forklaring > .formel-harledning-body { padding-top: 12px; }
     border-color: var(--lab-line-strong);
 }
 .lab-block-exempel .lab-block-title { color: var(--lab-ink); }
+/* Exemplets frågetext står i normal vikt (önskemål 2026-10-12). I md-filerna
+   är frågestammen inlindad i **…** (595 stammar, och preprocessSubproblems
+   känner igen deluppgifterna på just den formen), så fetstilen tas bort här
+   i stället för i källan: stammens stycken och deluppgiftsrutnätet direkt i
+   exempelrutan, och samma stam när handskrift.js klonar den till
+   uppgiftspanelen. Lösningen (textlösningen och stycken efter
+   pennlösningen) behåller sin fetstil, till exempel **Svar:**. */
+.lab-block-exempel > p strong,
+.lab-block-exempel > .lab-deluppgifter strong,
+.lab-block-exempel .hk-uppgift strong,
+.hk-uppgift strong { font-weight: inherit; }
+.lab-block-exempel > :is(.lab-handskrift, .lab-block-textlosning) ~ p strong,
+.lab-block-exempel > :is(.lab-handskrift, .lab-block-textlosning) ~ .lab-deluppgifter strong { font-weight: 700; }
 
 /* Sammanfattning — genomgångens viktigaste innehåll i punktform, sist i
    varje genomgång. En yttre ruta med små kort (nästlade ::: sampunkt) i

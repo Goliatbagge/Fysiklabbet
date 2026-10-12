@@ -76,6 +76,10 @@
         '  font:500 13px/1 Roboto,Arial,sans-serif;color:#444746;overflow:hidden;white-space:nowrap;}',
         '.kb-tb{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:24px;padding:0 5px;border-radius:4px;}',
         '.kb-tb.on{background:#d3e3fd;color:#0b57d0;}',
+        '.kb-meny{position:absolute;z-index:18;display:none;min-width:110px;padding:6px 0;background:#fff;border-radius:6px;',
+        '  box-shadow:0 2px 10px rgba(60,64,67,.3);font:13px/1 Roboto,Arial,sans-serif;color:#1f1f1f;}',
+        '.kb-meny-rad{padding:7px 16px;}',
+        '.kb-meny-rad.on{background:#e8eaed;}',
         '.kb-sep{width:1px;height:18px;background:#c7c7c7;margin:0 5px;}',
         '.kb-fbar{display:flex;align-items:center;height:30px;border-bottom:1px solid #e1e3e1;background:#fff;',
         '  font:13px/1 Arial,Helvetica,sans-serif;}',
@@ -202,9 +206,16 @@
             '<span class="kb-tb"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4L2 7l3 3"/><path d="M2 7h7.5a4 4 0 0 1 0 8H7"/></svg></span>' +
             '<span class="kb-tb"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4l3 3-3 3"/><path d="M14 7H6.5a4 4 0 0 0 0 8H9"/></svg></span>' +
             '<span class="kb-sep"></span><span class="kb-tb">100 %</span><span class="kb-sep"></span>' +
+            '<span class="kb-tb" data-tb="sum" style="font:600 15px/1 Arial,sans-serif">Σ</span><span class="kb-sep"></span>' +
             '<span class="kb-tb" data-tb="kr">kr</span><span class="kb-tb">%</span>' +
             '<span class="kb-tb">.0</span><span class="kb-tb">.00</span><span class="kb-tb">123</span>' +
             '<span class="kb-sep"></span><span class="kb-tb">Arial</span>';
+        // menyn under summaknappen (Σ), som i Kalkylark
+        var sumMeny = el('div', 'kb-meny', app);
+        ['SUM', 'AVERAGE', 'COUNT', 'MAX', 'MIN'].forEach(function (f) {
+            var it = el('div', 'kb-meny-rad', sumMeny);
+            it.textContent = f; it.setAttribute('data-f', f);
+        });
         var fbar = el('div', 'kb-fbar', app);
         var nameBox = el('div', 'kb-name', fbar);
         el('div', 'kb-fx', fbar).textContent = 'fx';
@@ -474,6 +485,11 @@
             var a = app.getBoundingClientRect(), r = b.getBoundingClientRect();
             return { x: r.left - a.left + r.width / 2, y: r.top - a.top + r.height / 2 };
         }
+        function tbPunkt(namn) {
+            var b = tool.querySelector('[data-tb="' + namn + '"]');
+            var a = app.getBoundingClientRect(), r = b.getBoundingClientRect();
+            return { x: r.left - a.left + r.width / 2, y: r.top - a.top + r.height / 2, b: r.bottom - a.top, l: r.left - a.left };
+        }
         function fbarSlut() {
             var a = app.getBoundingClientRect(), r = ftext.getBoundingClientRect();
             return { x: r.right - a.left + 2, y: r.top - a.top + r.height / 2 };
@@ -591,6 +607,56 @@
                 S.range = [fran, ref]; render();
             }
             await sleep(250);
+        }
+
+        /* Summaknappen: Σ i verktygsraden, SUM i menyn. Cellen får då
+         * =SUM( och väntar på det område som ska summeras. */
+        async function summaknapp() {
+            var p = tbPunkt('sum');
+            await flytta(p.x, p.y, 750);
+            ripple();
+            if (!run.instant) {
+                sumMeny.style.left = Math.max(4, p.l - 6) + 'px';
+                sumMeny.style.top = (p.b + 4) + 'px';
+                sumMeny.style.display = 'block';
+            }
+            await sleep(900);
+            var rad = sumMeny.querySelector('[data-f="SUM"]');
+            var a = app.getBoundingClientRect(), r = rad.getBoundingClientRect();
+            await flytta(r.left - a.left + 30, r.top - a.top + r.height / 2, 500);
+            rad.classList.add('on');
+            await sleep(500);
+            ripple();
+            await sleep(250);
+            rad.classList.remove('on');
+            sumMeny.style.display = 'none';
+            S.edit = '=SUM('; S.fbarEdit = false; S.caret = null; S.refs = [];
+            render();
+            await sleep(900);
+        }
+        /* Medan formeln skrivs: dra över ett område i en kolumn, nedifrån
+         * och upp. Området skrivs in i formeln och bladet rullar med. */
+        async function draOmrade(fran, till) {
+            var bas = S.edit, a = parseRef(fran), b = parseRef(till);
+            var p = cellPunkt(fran);
+            await flytta(p.x, p.y, 700);
+            ripple();
+            var radTid = Math.max(40, Math.min(200, 2600 / Math.max(1, Math.abs(a.r - b.r))));
+            var dir = b.r < a.r ? -1 : 1;
+            for (var r = a.r; ; r += dir) {
+                alive();
+                if (dir < 0 && r < S.top + 1 && S.top > 1) S.top--;
+                if (dir > 0 && r > S.top + VIS - 2 && S.top + VIS - 1 < ROWS) S.top++;
+                var lo = Math.min(r, a.r), hi = Math.max(r, a.r);
+                var omr = lo === hi ? refOf(a.c, lo) : refOf(a.c, lo) + ':' + refOf(a.c, hi);
+                S.edit = bas + omr; S.refs = [omr];
+                var q = cellPunkt(refOf(a.c, r));
+                await flytta(q.x, q.y, r === a.r ? 1 : radTid);
+                if (!run.instant) render();
+                if (r === b.r) break;
+            }
+            render();
+            await sleep(500);
         }
 
         async function draHandtag(till) {
@@ -893,16 +959,17 @@
                   await sleep(900);
               } },
             { namn: 'Summera alla inbetalningar',
-              text: 'Det Ellen betalar totalt är summan av alla 60 inbetalningar i kolumn D. Vi ställer oss i D62, under den sista inbetalningen, och skriver <code>=SUM(D2:D61)</code> (eller klickar på summasymbolen ∑ och markerar D2 till D61). Summan blir 168 300 kr.',
+              text: 'Det Ellen betalar totalt är summan av alla 60 inbetalningar i kolumn D. Vi ställer oss i D62, under den sista inbetalningen, klickar på summatecknet Σ i verktygsraden och väljer SUM. Sedan markerar vi alla inbetalningar genom att dra från D61 upp till D2, stänger parentesen och trycker Enter. Formeln blir <code>=SUM(D2:D61)</code>, och summan blir 168 300 kr.',
               kor: async function () {
                   await rulla(ROWS - VIS + 1);
                   await klickaCell('C62'); await skriv('Totalt'); await tab();
-                  await skriv('=SUM(D2:D61)', false, 200);
-                  var vila = cellPunkt('B56');
-                  await flytta(vila.x, vila.y, 700);
-                  await sleep(2600);
+                  await summaknapp();
+                  await draOmrade('D61', 'D2');
+                  await skriv(')', false, 200);
+                  await sleep(1800);
                   await enter();
-                  await sleep(600);
+                  await rulla(ROWS - VIS + 1);
+                  await sleep(400);
                   await ringaIn('D62', REFF[2], 1.15);
                   var undan = cellPunkt('B57');
                   await flytta(undan.x, undan.y, 600);

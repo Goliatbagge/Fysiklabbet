@@ -4148,6 +4148,11 @@ body.laborans u .lab-term {
 .lab-pres-body > .pres-item:not(.is-on) { display: none; }
 .lab-pres-body > .pres-block:not(.is-on) { display: none; }
 .lab-pres-body .pres-block > .pres-sub:not(.is-on) { display: none; }
+/* Textlösningen tänds en bit i taget (tlChunks i katalog.html) */
+.lab-pres-body .lab-block-textlosning > .pres-tl-dold { display: none; }
+.lab-pres-body .lab-block-textlosning > .pres-tl-ny {
+    animation: labPresIn 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
 
 /* Tidigare steg dimmas så fokus ligger på det aktuella */
 .lab-pres-body .pres-item,

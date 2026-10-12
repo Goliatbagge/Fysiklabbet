@@ -1649,6 +1649,85 @@
             }
         }
 
+        // ── Textlösningen i presentationsläget: en bit i taget ──────
+        // En textlösning (::: textlosning) är ETT presentationssteg, men den
+        // kan rymma lösningarna till a, b och c. Den delas därför i bitar som
+        // klickas fram en i taget: ett stycke tillsammans med formeln (eller
+        // tabellen) som hör till det, en svarsrad, ett kalkylblad tillsammans
+        // med stycket som presenterar det. Ett kalkylblad i den visade biten
+        // stegas färdigt innan nästa bit tänds (önskemål 2026-10-12).
+        function tlChunks(tl) {
+            const delar = Array.from(tl.children).filter(c => !c.classList.contains('lab-block-title'));
+            const arFormel = (c) => {
+                if (c.classList.contains('katex-display')) return true;
+                const k = c.querySelector('.katex-display');
+                return !!k && c.textContent.trim() === k.textContent.trim();
+            };
+            const hangerPa = (c) => arFormel(c) || c.classList.contains('lab-tabell') ||
+                c.tagName === 'TABLE' || c.classList.contains('lab-minisim') ||
+                c.classList.contains('lab-block-figur');
+            const chunks = [];
+            for (const c of delar) {
+                if (chunks.length && hangerPa(c)) chunks[chunks.length - 1].push(c);
+                else chunks.push([c]);
+            }
+            return chunks;
+        }
+        function setTlPos(tl, pos, ny) {
+            const chunks = tl.__tlChunks;
+            if (!chunks) return;
+            pos = Math.max(1, Math.min(chunks.length, pos));
+            tl.__tlPos = pos;
+            chunks.forEach((ch, i) => ch.forEach(e => {
+                e.classList.toggle('pres-tl-dold', i >= pos);
+                e.classList.toggle('pres-tl-ny', !!ny && i === pos - 1);
+            }));
+        }
+        function synligTextlosning(st) {
+            const tl = st.el.classList.contains('lab-block-textlosning') ? st.el
+                : (st.twins || []).find(t => t.classList.contains('lab-block-textlosning'));
+            if (!tl || !tl.__tlChunks || tl.__tlChunks.length < 2) return null;
+            // gömd bakom växeln "Med penna"/"Som text"
+            if (getComputedStyle(tl).display === 'none') return null;
+            return tl;
+        }
+        function tlCtl(tl, overlay) {
+            const chunks = tl.__tlChunks;
+            const kbI = (ch) => ch.flatMap(e => e.classList.contains('lab-minisim-kalkylblad') ? [e]
+                : [...e.querySelectorAll('.lab-minisim-kalkylblad')])
+                .filter(n => n.__kbCtl).map(n => n.__kbCtl);
+            const pos = () => tl.__tlPos || 1;
+            const senaste = () => kbI(chunks[pos() - 1]);
+            // den nya biten rullas in i bild om den hamnat för långt ned
+            const visa = () => {
+                if (!overlay) return;
+                requestAnimationFrame(() => {
+                    const rs = chunks[pos() - 1].map(e => e.getBoundingClientRect()).filter(r => r.height > 0);
+                    if (!rs.length) return;
+                    const top = Math.min(...rs.map(r => r.top)), bot = Math.max(...rs.map(r => r.bottom));
+                    const oh = overlay.clientHeight;
+                    if (bot <= oh * 0.82) return;
+                    // nedre kanten upp till 78 %, men biten får aldrig börja ovanför 10 %
+                    const d = Math.min(bot - oh * 0.78, top - oh * 0.10);
+                    if (d > 0) overlay.scrollTo({ top: overlay.scrollTop + d, behavior: 'smooth' });
+                });
+            };
+            return {
+                klar: () => pos() >= chunks.length && senaste().every(c => c.klar()),
+                vidStart: () => pos() <= 1 && kbI(chunks[0]).every(c => c.vidStart()),
+                nasta: () => {
+                    const k = senaste().find(c => !c.klar());
+                    if (k) { k.nasta(); return; }
+                    if (pos() < chunks.length) { setTlPos(tl, pos() + 1, true); visa(); }
+                },
+                forra: () => {
+                    const k = senaste().slice().reverse().find(c => !c.vidStart());
+                    if (k) { k.forra(); return; }
+                    if (pos() > 1) setTlPos(tl, pos() - 1, false);
+                },
+            };
+        }
+
         function PresentationMode({ id, num, title, chapter, chapterNumber, course, onClose }) {
             const overlayRef = useRef(null);
             const bodyRef = useRef(null);
@@ -1728,6 +1807,11 @@
             const curHkCtl = (s = stepRef.current) => {
                 const st = stepsRef.current[s - 1];
                 if (!st) return null;
+                // Textlösningen stegas en bit i taget när den visas (se
+                // tlChunks): annars tändes hela lösningen till a, b och c i
+                // ett enda klick (påpekat 2026-10-12, Exempel 1 i ma1c-3.5).
+                const tl = synligTextlosning(st);
+                if (tl) return tlCtl(tl, overlayRef.current);
                 // Kalkylbladen (minisim-kalkylblad.js) stegas på samma sätt:
                 // varje klick spelar nästa steg i bladet, och först efter
                 // sista steget går presentationen vidare (önskemål 2026-10-12).
@@ -1871,6 +1955,10 @@
                 if (window.HANDSKRIFT) window.HANDSKRIFT.mountAll(root);
                 if (window.FYSIKMINISIM) window.FYSIKMINISIM.mountAll(root);
                 const { steps, blocks } = buildPresSteps(root);
+                root.querySelectorAll('.lab-block-textlosning').forEach(tl => {
+                    tl.__tlChunks = tlChunks(tl);
+                    setTlPos(tl, 1, false);
+                });
                 stepsRef.current = steps;
                 blocksRef.current = blocks;
                 totalRef.current = steps.length;
@@ -1927,9 +2015,23 @@
             useEffect(() => {
                 if (!ready) return;
                 const steps = stepsRef.current;
+                const fran = prevStepRef.current;   // uppdateras längre ned
                 steps.forEach((st, i) => {
                     st.el.classList.toggle('is-on', i < step);
                     st.el.classList.toggle('is-current', i === step - 1);
+                    // Textlösningens bitar (tlChunks): ett passerat steg visas
+                    // helt, ett steg man kommer till framifrån börjar med första
+                    // biten och ett man backar in i börjar färdigt.
+                    if (fran !== step) {
+                        const tl = st.el.classList.contains('lab-block-textlosning') ? st.el
+                            : (st.twins || []).find(t => t.classList.contains('lab-block-textlosning'));
+                        if (tl && tl.__tlChunks) {
+                            const n = tl.__tlChunks.length;
+                            if (i < step - 1) setTlPos(tl, n, false);
+                            else if (i > step - 1) setTlPos(tl, 1, false);
+                            else setTlPos(tl, fran < step ? 1 : n, false);
+                        }
+                    }
                     // Tvilling (textlösningen till en handskrift-widget) följer
                     // sitt steg — vilken av dem som faktiskt syns styrs av
                     // växeln "Med penna"/"Som text" (inline display).

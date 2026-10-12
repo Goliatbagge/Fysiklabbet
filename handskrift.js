@@ -21435,18 +21435,55 @@
                 s * 0.62, F * 0.62, acts);
     pause(300);
     y += 2.0 * F;
-    placeString('k_R=n·k=2·40=80 N/m', padL, y, s, F, acts);
+    placeString('k_R=n·k', padL, y, s, F, acts);
     stepEnd();
 
+    y += adv + 1.1 * F;
+    var bK3 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Fjäderkonstanten och antalet']],
+      [['fjädrar i klammern.']]
+    ]);
+    tanke(bK3);
+    var klam3 = valueBracket(acts, ['k=40 N/m', 'n=2'], padL, y, s, F);
+    stepEnd();
+    y = klam3.yEnd;
+
     y += adv + 1.4 * F;
-    var bI5 = bubble(140, bubbleTop(y - adv), bw, [
+    var bI6 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Sätter in värdena ur klammern.']]
+    ]);
+    tanke(bI6);
+    placeString('k_R=2·40=80 N/m', padL, y, s, F, acts);
+    stepEnd();
+
+    /* ---- Hookes lag med den nya fjäderkonstanten ---- */
+    y += adv + 1.4 * F;
+    var bH2 = bubble(120, bubbleTop(y - adv), bw, [
       [['Samma tyngd som i a), nu med']],
       [['den nya fjäderkonstanten.']]
     ]);
+    tanke(bH2);
+    xx = placeString('Δl=', padL, y, s, F, acts);
+    fracH('F', 'k_R', xx, y);
+    stepEnd();
+
+    y += adv + 1.1 * F;
+    var bK4 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Kraften och den nya fjäder-']],
+      [['konstanten i klammern.']]
+    ]);
+    tanke(bK4);
+    var klam4 = valueBracket(acts, ['F=4,91 N', 'k_R=80 N/m'], padL, y, s, F);
+    stepEnd();
+    y = klam4.yEnd;
+
+    y += adv + 1.2 * F;
+    var bI5 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]);
     tanke(bI5);
     xx = placeString('Δl=', padL, y, s, F, acts);
-    var xe2 = fracH('F', 'k_R', xx, y);
-    xx = placeString('=', xe2 + 0.1 * F, y, s, F, acts);
     var xe3 = fracH('4,91', '80', xx, y);
     var xIns2 = placeString('=0,061375 m', xe3 + 0.15 * F, y, s, F, acts);
     stepEnd();

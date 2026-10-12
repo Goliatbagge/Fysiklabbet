@@ -1291,7 +1291,12 @@
             blockAnkare = null;
             const el = root.querySelector('[data-block="' + sok + '"]')
                     || root.querySelector('[data-blockkort="' + sok + '"]')
-                    || root.querySelector('[data-blocknr="' + sok + '"]');
+                    || root.querySelector('[data-blocknr="' + sok + '"]')
+                    // Rubriker i löptexten (## …) har inga egna attribut:
+                    // de matchas på slug av rubriktexten, så att
+                    // &block=stodytan-avgor-om-foremalet-star-kvar fungerar.
+                    || [...root.querySelectorAll('h2, h3, h4')]
+                        .find(h => blockSlug(h.textContent) === sok);
             if (!el) return;
             // Är målet en hopfällbar förklaring: fäll ut den, annars landar
             // besökaren på en stängd rad och undrar var texten tog vägen.

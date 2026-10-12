@@ -3332,6 +3332,11 @@ behöver inte skriva något i md-filen. Varje `:::`-ruta får tre former, och
   inget vettigt sätt att länka till filmen, och nästa text som nämner den
   hamnar överst på sidan igen. Kör `node data/teori/build.js` efteråt som
   vanligt.
+- **Rubriker i löptexten (`## …`) går också att länka till**, med slug av
+  rubriktexten: `&block=stodytan-avgor-om-foremalet-star-kvar` för
+  "Stödytan avgör om föremålet står kvar" (å/ä → a, ö → o, allt annat än
+  a–z och 0–9 blir bindestreck). Rubrikerna får inga egna attribut; de
+  matchas sist i `scrollaTillBlock()`, efter rutornas ankare.
 - **Länka helst med den korta formen** (`den-fatala-gungan`) — den överlever
   att exemplen numreras om, medan `exempel-2` överlever att titeln skrivs om.
 - **Ankaret läses bara när hashen är tom**, precis som `?id=` (se nedan), och

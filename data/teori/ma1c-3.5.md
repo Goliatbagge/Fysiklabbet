@@ -76,40 +76,16 @@ $$
 
 **Svar:** 3 100 kr
 
-**c)** Vi skapar ett kalkylark och fyller i månad 1–60 i kolumn A. I
-kolumn B har vi rubriken "Aktuell skuld" och fyller i 150 000 i den
-översta cellen. I kolumn C skriver vi "Ränta per månad" och i kolumn D
-"Inbetalning".
+**c)** Vi öppnar ett kalkylark och gör beräkningen i fem steg. Klicka
+fram stegen ett i taget i kalkylbladet nedan. Under bladet förklaras vad
+som händer i varje steg.
 
-Vi fyller i kolumnen för aktuell skuld genom att subtrahera amorteringen
-2 500 kr från föregående värde. Vi ställer oss i B3 och skriver `=B2-2500`
-och fyller i resten av värdena med fyllnadshandtaget.
+::: minisim
+typ: kalkylblad
+scen: billan
+:::
 
-Vi fyller i kolumnen för ränta per månad genom att beräkna årsräntan,
-4,8 % av skulden, och dividera med 12. Vi ställer oss i cellen C2 och
-skriver `=(B2*0,048)/12` och fyller i resten av värdena med
-fyllnadshandtaget.
-
-Vi fyller kolumnen för inbetalning genom att lägga till amorteringen
-2 500 kr till räntan per månad. Vi ställer oss i cellen D2, skriver
-`=2500+C2` och fyller i resten av värdena med fyllnadshandtaget:
-
-| Månad | Aktuell skuld | Ränta per månad | Inbetalning |
-| --- | --- | --- | --- |
-| 1 | 150 000 | 600 | 3 100 |
-| 2 | 147 500 | 590 | 3 090 |
-| 3 | 145 000 | 580 | 3 080 |
-| 4 | 142 500 | 570 | 3 070 |
-| … | … | … | … |
-| 59 | 5 000 | 20 | 2 520 |
-| 60 | 2 500 | 10 | 2 510 |
-
-Till sist beräknar vi det totala inbetalda beloppet genom att summera
-alla värden i kolumn D. Vi bläddrar längst ner i kalkylarket, ställer oss
-i cellen under den sista inbetalningen och klickar på summasymbolen ∑ i
-verktygsfältet och väljer "SUM". Därefter markerar vi alla värden i
-kolumn D, och texten i cellen blir då `=SUM(D2:D61)`, vilket ger den
-totala summan av alla inbetalningar 168 300 kr.
+Av de 168 300 kr är 150 000 kr själva lånet och 18 300 kr ränta.
 
 **Svar:** 168 300 kr
 :::

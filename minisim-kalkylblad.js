@@ -13,7 +13,8 @@
  *   :::
  *
  * Används i textlösningarna till Exempel 1 (scen: sparkonto, standard) och
- * Exempel 2 (scen: arligt) i ma1c-3.4. Varje scen är en egen steglista
+ * Exempel 2 (scen: arligt) i ma1c-3.4 samt Exempel 1 c i ma1c-3.5 (scen:
+ * billan, 63 rader som rullar, med SUM). Varje scen är en egen steglista
  * (SPARKONTO, ARLIGT nedan) byggd av samma primitiver (klicka, ringa in,
  * skriv, piltangenter, Enter, dra i fyllnadshandtaget, markera, formatera
  * som valuta). En ny uppgift får en egen steglista och ett eget scennamn.
@@ -34,36 +35,22 @@
     // smal skärm: A och B ska rymmas helt (radrubrik + "Förändringsfaktor" +
     // "39 504,27 kr"), resten av kolumnerna klipps i högerkanten
     var COLW_SMAL = [26, 108, 108, 90, 90, 90];
-    var COLW = COLW_BRED;
-    var ROWS = 13;
+    // billånet (ma1c-3.5): fyra smala kolumner som alla ska synas, även på
+    // telefonen, eftersom inbetalningarna i D är det som summeras
+    var COLW_BILAN_BRED = [38, 72, 104, 90, 112, 80];
+    var COLW_BILAN_SMAL = [24, 47, 56, 45, 68, 40];   // A–D = 240 px (bladet är 246 px på en 390 px-telefon)
+    var VIS = 13;         // synliga rader; ett längre blad rullar
     var RH = 23;          // radhöjd
     var HH = 23;          // höjd på kolumnrubrikerna
     var BLA = '#1a73e8';  // markeringens färg i Kalkylark
     var REFF = ['#e37400', '#9334e6', '#188038', '#d93025'];
-
-    var colX, SHEET_W, SHEET_H = HH + ROWS * RH;
-    function satKolumner(w) {
-        COLW = w;
-        colX = [0];
-        for (var ci = 0; ci < COLW.length; ci++) colX.push(colX[ci] + COLW[ci]);
-        SHEET_W = colX[colX.length - 1];
-    }
-    satKolumner(COLW_BRED);
+    // en cellreferens eller ett område (D2:D61)
+    var REF_RE = /\$?[A-Z]\$?\d+(?::\$?[A-Z]\$?\d+)?/g;
 
     function colIdx(L) { return COLS.indexOf(L); }
     function parseRef(ref) {
         var m = /^\$?([A-Z])\$?(\d+)$/.exec(ref);
         return { c: colIdx(m[1]), r: +m[2] };
-    }
-    function cellRect(ref) {
-        var p = parseRef(ref);
-        return { x: colX[p.c], y: HH + (p.r - 1) * RH, w: COLW[p.c], h: RH };
-    }
-    function rangeRect(a, b) {
-        var r1 = cellRect(a), r2 = cellRect(b);
-        var x = Math.min(r1.x, r2.x), y = Math.min(r1.y, r2.y);
-        return { x: x, y: y, w: Math.max(r1.x + r1.w, r2.x + r2.w) - x,
-                 h: Math.max(r1.y + r1.h, r2.y + r2.h) - y };
     }
     function refOf(c, r) { return COLS[c] + r; }
 
@@ -172,17 +159,41 @@
 
     function mount(node, cfg) {
         cfg = cfg || {};
-        var scen = ({ arligt: 1, 'sparkonto-b': 1, 'sparkonto-c': 1 })[cfg.scen] ? cfg.scen : 'sparkonto';
+        var scen = ({ arligt: 1, 'sparkonto-b': 1, 'sparkonto-c': 1, billan: 1 })[cfg.scen] ? cfg.scen : 'sparkonto';
         injectCss();
         var smal = (node.clientWidth || 600) < 400;
-        satKolumner(smal ? COLW_SMAL : COLW_BRED);
+
+        /* bladets geometri hör till instansen: flera blad på samma sida
+         * kan ha olika kolumnbredd och olika antal rader */
+        var ROWS = scen === 'billan' ? 63 : VIS;
+        var COLW = scen === 'billan' ? (smal ? COLW_BILAN_SMAL : COLW_BILAN_BRED)
+                                     : (smal ? COLW_SMAL : COLW_BRED);
+        var colX = [0];
+        for (var ci = 0; ci < COLW.length; ci++) colX.push(colX[ci] + COLW[ci]);
+        var SHEET_W = colX[colX.length - 1];
+        var SHEET_H = HH + ROWS * RH;          // hela bladet
+        var VIEW_H = HH + Math.min(ROWS, VIS) * RH;   // det som syns
+        function cellRect(ref) {
+            var p = parseRef(ref);
+            return { x: colX[p.c], y: HH + (p.r - 1) * RH, w: COLW[p.c], h: RH };
+        }
+        function rangeRect(a, b) {
+            var r1 = cellRect(a), r2 = cellRect(b);
+            var x = Math.min(r1.x, r2.x), y = Math.min(r1.y, r2.y);
+            return { x: x, y: y, w: Math.max(r1.x + r1.w, r2.x + r2.w) - x,
+                     h: Math.max(r1.y + r1.h, r2.y + r2.h) - y };
+        }
+        function refRect(rf) {
+            var d = rf.split(':');
+            return d.length > 1 ? rangeRect(d[0], d[1]) : cellRect(rf);
+        }
         var wrap = el('div', 'kb-wrap' + (smal ? ' kb-smal' : ''), node);
         var app = el('div', 'kb-app', wrap);
 
         /* ---------- programfönstrets överdel ---------- */
         var top = el('div', 'kb-top', app);
         var title = el('div', 'kb-title', top);
-        title.innerHTML = '<svg width="16" height="20" viewBox="0 0 16 20"><path d="M10 0H2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6z" fill="#0f9d58"/><path d="M10 0v6h6z" fill="#87ceac"/><rect x="3.5" y="9" width="9" height="7" fill="none" stroke="#fff" stroke-width="1.2"/><path d="M3.5 11.5h9M3.5 14h9M7 9v7" stroke="#fff" stroke-width="1.2"/></svg><span>' + (scen === 'arligt' ? 'Årligt sparande' : 'Sparkonto') + '</span>';
+        title.innerHTML = '<svg width="16" height="20" viewBox="0 0 16 20"><path d="M10 0H2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6z" fill="#0f9d58"/><path d="M10 0v6h6z" fill="#87ceac"/><rect x="3.5" y="9" width="9" height="7" fill="none" stroke="#fff" stroke-width="1.2"/><path d="M3.5 11.5h9M3.5 14h9M7 9v7" stroke="#fff" stroke-width="1.2"/></svg><span>' + (({ arligt: 'Årligt sparande', billan: 'Billån' })[scen] || 'Sparkonto') + '</span>';
         var tool = el('div', 'kb-tool', top);
         tool.innerHTML =
             '<span class="kb-tb"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4L2 7l3 3"/><path d="M2 7h7.5a4 4 0 0 1 0 8H7"/></svg></span>' +
@@ -197,7 +208,7 @@
         var ftext = el('div', 'kb-ftext', fbar);
 
         var sheet = el('div', 'kb-sheet', app);
-        sheet.style.height = SHEET_H + 'px';
+        sheet.style.height = VIEW_H + 'px';
         var grid = el('div', 'kb-grid', sheet);
         grid.style.width = SHEET_W + 'px';
         grid.style.height = SHEET_H + 'px';
@@ -213,6 +224,7 @@
             var h = el('div', 'kb-c kb-h', grid);
             place(h, { x: colX[c], y: 0, w: COLW[c], h: HH });
             h.textContent = COLS[c];
+            h.style.zIndex = 8;      // kolumnrubrikerna står kvar när bladet rullar
             hdrC.push(h);
         }
         for (var r = 1; r <= ROWS; r++) {
@@ -247,15 +259,31 @@
         var S;
         function nyttBlad() {
             return { cells: {}, act: 'A1', range: null, edit: null, fbarEdit: false,
-                     fill: null, refs: [], krOn: false };
+                     fill: null, refs: [], krOn: false, top: 1 };
         }
 
-        function value(ref, seen) {
-            var cell = S.cells[ref.replace(/\$/g, '')];
+        /* Värdena räknas i en kedja (B61 bygger på B60 och så vidare), så
+         * under ett renderingsvarv sparas varje uträknat värde i memo. */
+        var memo = null;
+        function value(ref) {
+            ref = ref.replace(/\$/g, '');
+            if (memo && ref in memo) return memo[ref];
+            var v = varde(ref);
+            if (memo) memo[ref] = v;
+            return v;
+        }
+        function varde(ref) {
+            var cell = S.cells[ref];
             if (!cell) return 0;
             if (typeof cell.raw === 'number') return cell.raw;
             if (typeof cell.raw === 'string' && cell.raw.charAt(0) === '=') {
-                var expr = cell.raw.slice(1).replace(/\$?[A-Z]\$?\d+/g, function (m) {
+                // SUM(D2:D61) summerar ett område i en kolumn
+                var expr = cell.raw.slice(1).replace(/SUM\(\$?([A-Z])\$?(\d+):\$?[A-Z]\$?(\d+)\)/g, function (m, L, r1, r2) {
+                    var sum = 0;
+                    for (var rr = +r1; rr <= +r2; rr++) { var x = value(L + rr); if (typeof x === 'number') sum += x; }
+                    return '(' + sum + ')';
+                });
+                expr = expr.replace(/\$?[A-Z]\$?\d+/g, function (m) {
                     return '(' + value(m) + ')';
                 });
                 expr = expr.replace(/(\d),(\d)/g, '$1.$2');   // decimalkomma i formeln
@@ -287,7 +315,7 @@
         // som farga(), men med textmarkören på plats pos (null = sist)
         function fargaMedMarkor(text, pos, markor) {
             if (pos === null || pos === undefined || pos >= text.length) return farga(text) + markor;
-            var spann = [], n = 0, m, re = /\$?[A-Z]\$?\d+/g;
+            var spann = [], n = 0, m, re = new RegExp(REF_RE.source, 'g');
             if (text.charAt(0) === '=') {
                 while ((m = re.exec(text))) spann.push({ a: m.index, b: m.index + m[0].length, f: REFF[n++ % REFF.length] });
             }
@@ -306,7 +334,7 @@
             // färgar cellreferenserna i en formel som Kalkylark gör
             if (text.charAt(0) !== '=') return esc(text);
             var n = 0;
-            return esc(text).replace(/\$?[A-Z]\$?\d+/g, function (m) {
+            return esc(text).replace(REF_RE, function (m) {
                 return '<span style="color:' + REFF[n++ % REFF.length] + '">' + m + '</span>';
             });
         }
@@ -317,6 +345,11 @@
         function showOv(e, rr) { e.style.display = 'block'; place(e, rr); }
 
         function render() {
+            // rullning: bladet flyttas uppåt, kolumnrubrikerna står kvar
+            var dy = (S.top - 1) * RH;
+            grid.style.top = -dy + 'px';
+            for (var hc = 0; hc < hdrC.length; hc++) hdrC[hc].style.top = dy + 'px';
+            memo = {};
             for (var ref in cellEl) {
                 var d = visas(ref), ce = cellEl[ref];
                 ce.textContent = d.t;
@@ -325,6 +358,7 @@
                 var p = parseRef(ref), nb = refOf(p.c + 1, p.r);
                 ce.classList.toggle('over', !d.num && !!d.t && p.c + 1 < COLS.length && !S.cells[nb]);
             }
+            memo = null;
             // rubrikmarkering
             var ap = parseRef(S.act);
             var rc = S.range ? [parseRef(S.range[0]), parseRef(S.range[1])] : [ap, ap];
@@ -362,7 +396,7 @@
             for (var i = 0; i < refBoxes.length; i++) {
                 var rf = S.refs[i];
                 if (rf) {
-                    showOv(refBoxes[i], cellRect(rf));
+                    showOv(refBoxes[i], refRect(rf));
                     refBoxes[i].style.borderColor = REFF[i % REFF.length];
                     refBoxes[i].style.background = REFF[i % REFF.length] + '14';
                 } else hideOv(refBoxes[i]);
@@ -395,8 +429,9 @@
 
         /* pekaren, i koordinater relativt programfönstret */
         var pek = { x: 0, y: 0 };
+        // bladets (0,0) i fönstrets koordinater; följer med när bladet rullar
         function sheetOrigin() {
-            return { x: sheet.offsetLeft, y: sheet.offsetTop };
+            return { x: sheet.offsetLeft, y: sheet.offsetTop - (S.top - 1) * RH };
         }
         function setPek(x, y, kors) {
             pek.x = x; pek.y = y;
@@ -468,7 +503,7 @@
         }
         function refsI(text) {
             if (text.charAt(0) !== '=') return [];
-            return (text.match(/\$?[A-Z]\$?\d+/g) || []).map(function (m) { return m.replace(/\$/g, ''); });
+            return (text.match(REF_RE) || []).map(function (m) { return m.replace(/\$/g, ''); });
         }
         async function skriv(text, iFbar, tempo) {
             if (S.edit === null) S.edit = '';
@@ -513,9 +548,11 @@
             await tangent(tangentNamn);
             var fmt = S.cells[S.act] && S.cells[S.act].fmt;
             var fore = {};
-            for (var ref in cellEl) fore[ref] = visas(ref).t;
+            memo = {};
+            if (!run.instant) for (var ref in cellEl) fore[ref] = visas(ref).t;
             var redigerad = S.act;
             S.cells[S.act] = { raw: tolka(S.edit), fmt: fmt };
+            memo = {};
             // celler vars värde ändrades av sig självt lyser upp en stund
             if (!run.instant) {
                 for (ref in cellEl) {
@@ -559,10 +596,14 @@
             await sleep(450);
             ripple();
             var a = parseRef(slut), b = parseRef(till);
+            // ett långt drag går fortare per rad, och bladet rullar med när
+            // pekaren når den nedersta synliga raden
+            var radTid = Math.max(45, Math.min(210, 2600 / Math.max(1, b.r - a.r)));
             for (var r = a.r + 1; r <= b.r; r++) {
+                if (r > S.top + VIS - 2 && S.top + VIS - 1 < ROWS) { S.top++; if (!run.instant) render(); }
                 var q = cellPunkt(refOf(b.c, r), 'handtag');
-                await flytta(q.x, q.y - 4, 210, true);
-                S.fill = [borjan, refOf(b.c, r)]; render();
+                await flytta(q.x, q.y - 4, radTid, true);
+                S.fill = [borjan, refOf(b.c, r)]; if (!run.instant) render();
             }
             await sleep(300);
             fyll(borjan, slut, till);
@@ -773,6 +814,111 @@
               } }
         ];
 
+        /* Rullar bladet (mushjulet) tills rad `top` står överst. */
+        async function rulla(top) {
+            top = Math.max(1, Math.min(ROWS - VIS + 1, top));
+            if (run.instant) { S.top = top; return; }
+            var steg = top > S.top ? 1 : -1, n = Math.abs(top - S.top);
+            var tid = Math.max(14, Math.min(60, 1400 / Math.max(1, n)));
+            while (S.top !== top) {
+                alive();
+                S.top += steg; render();
+                await sleep(tid);
+            }
+            await sleep(300);
+        }
+
+        /* ---------- stegen i Exempel 1 c) i ma1c-3.5 (billånet) ---------- */
+        var BILAN = [
+            { namn: 'Rubriker, månaderna och lånet',
+              text: 'Vi gör fyra kolumner: ”Månad”, ”Skuld” (skulden just före inbetalningen), ”Ränta” (räntan för månaden) och ”Inbetalning”. Vi skriver 1 i A2 och 2 i A3, markerar de två cellerna och drar i <em>fyllnadshandtaget</em> (det runda hörnet i högra nederkanten) ner till och med A61. Då fylls alla 60 månaderna i. I B2 skriver vi lånet 150 000 kr, som är skulden vid den första inbetalningen.',
+              kor: async function () {
+                  await klickaCell('A1'); await skriv('Månad'); await tab();
+                  await skriv('Skuld'); await tab();
+                  await skriv('Ränta'); await tab();
+                  await skriv('Inbetalning'); await enter();
+                  await klickaCell('A2'); await skriv('1'); await enter();
+                  await skriv('2'); await enter();
+                  await draMarkera('A2', 'A3');
+                  await draHandtag('A61');
+                  await sleep(600);
+                  await rulla(1);
+                  await klickaCell('B2'); await skriv('150000'); await enter();
+              } },
+            { namn: 'Skulden minskar med amorteringen varje månad',
+              text: 'Ellen amorterar 2 500 kr varje månad (se a), så till nästa månad har skulden minskat med 2 500 kr. Vi ställer oss i B3 och skriver <code>=B2-2500</code>, som ger 147 500 kr. Sedan drar vi i fyllnadshandtaget ner till och med B61. Vid den sista inbetalningen är skulden 2 500 kr, alltså precis det sista amorteringsbeloppet.',
+              kor: async function () {
+                  await ringaIn('B2', REFF[0], 1.15);
+                  await sleep(900);
+                  await klickaCell('B3');
+                  await skriv('=B2-2500', false, 230);
+                  var vila = cellPunkt('D7');
+                  await flytta(vila.x, vila.y, 700);
+                  await sleep(2400);
+                  await enter();
+                  tonaUtMarkeringar();
+                  await sleep(1000);
+                  await klickaCell('B3');
+                  await draHandtag('B61');
+                  await sleep(500);
+                  await ringaIn('B61', REFF[2], 1.15);
+                  await sleep(1200);
+                  tonaUtMarkeringar();
+              } },
+            { namn: 'Räntan för varje månad',
+              text: 'Räntan räknas alltid på skulden. Årsräntan är 4,8 % av skulden, och för en månad betalar Ellen en tolftedel av årsräntan. Vi ställer oss i C2 och skriver <code>=B2*0,048/12</code>, som ger 600 kr (samma som i b). Sedan drar vi i fyllnadshandtaget ner till och med C61. Räntan blir 10 kr mindre för varje månad, eftersom skulden minskar.',
+              kor: async function () {
+                  await rulla(1);
+                  await ringaIn('B2', REFF[0], 1.15);
+                  await sleep(900);
+                  await klickaCell('C2');
+                  await skriv('=B2*0,048/12', false, 230);
+                  var vila = cellPunkt('D7');
+                  await flytta(vila.x, vila.y, 700);
+                  await sleep(2600);
+                  await enter();
+                  tonaUtMarkeringar();
+                  await sleep(1000);
+                  await klickaCell('C2');
+                  await draHandtag('C61');
+                  await sleep(900);
+              } },
+            { namn: 'Inbetalningen varje månad',
+              text: 'Varje inbetalning består av räntan plus amorteringen 2 500 kr. Vi ställer oss i D2 och skriver <code>=C2+2500</code>, som ger 3 100 kr (samma som i b). Sedan drar vi i fyllnadshandtaget ner till och med D61. Den sista inbetalningen blir 2 510 kr.',
+              kor: async function () {
+                  await rulla(1);
+                  await ringaIn('C2', REFF[0], 1.15);
+                  await sleep(900);
+                  await klickaCell('D2');
+                  await skriv('=C2+2500', false, 230);
+                  var vila = cellPunkt('B8');
+                  await flytta(vila.x, vila.y, 700);
+                  await sleep(2400);
+                  await enter();
+                  tonaUtMarkeringar();
+                  await sleep(1000);
+                  await klickaCell('D2');
+                  await draHandtag('D61');
+                  await sleep(900);
+              } },
+            { namn: 'Summera alla inbetalningar',
+              text: 'Det Ellen betalar totalt är summan av alla 60 inbetalningar i kolumn D. Vi ställer oss i D62, under den sista inbetalningen, och skriver <code>=SUM(D2:D61)</code> (eller klickar på summasymbolen ∑ och markerar D2 till D61). Summan blir 168 300 kr.',
+              kor: async function () {
+                  await rulla(ROWS - VIS + 1);
+                  await klickaCell('C62'); await skriv('Totalt'); await tab();
+                  await skriv('=SUM(D2:D61)', false, 200);
+                  var vila = cellPunkt('B56');
+                  await flytta(vila.x, vila.y, 700);
+                  await sleep(2600);
+                  await enter();
+                  await sleep(600);
+                  await ringaIn('D62', REFF[2], 1.15);
+                  var undan = cellPunkt('B57');
+                  await flytta(undan.x, undan.y, 600);
+                  await sleep(800);
+              } }
+        ];
+
         /* ---------- b) och c) i Exempel 1: börjar i det färdiga bladet ---------- */
         async function andra(ref, text) {
             await ringaIn(ref, REFF[0], 1.15);
@@ -818,7 +964,8 @@
             sparkonto: { steg: SPARKONTO },
             'sparkonto-b': { steg: SPARKONTO_B, fore: function () { return fore([SPARKONTO]); } },
             'sparkonto-c': { steg: SPARKONTO_C, fore: function () { return fore([SPARKONTO, SPARKONTO_B]); } },
-            arligt: { steg: ARLIGT }
+            arligt: { steg: ARLIGT },
+            billan: { steg: BILAN }
         };
         var SCEN = SCENER[scen];
         var STEG = SCEN.steg;
@@ -896,8 +1043,7 @@
             if (!(await laget(k))) return;
             var R = run = { dead: false, instant: false };
             lage = 'spelar'; uppdateraKontroller();
-            var o = sheetOrigin();
-            if (cursor.style.display === 'none') setPek(o.x + SHEET_W * 0.55, o.y + 60);
+            if (cursor.style.display === 'none') setPek(sheet.offsetLeft + SHEET_W * 0.55, sheet.offsetTop + 60);
             try {
                 await STEG[k].kor();
             } catch (e) {

@@ -31,33 +31,38 @@
     const file = (window.location.pathname.split('/').pop() || '').toLowerCase();
     if (!file) return;
 
-    // Hitta avsnittet vars href matchar denna fil.
+    // Hitta avsnittet vars href matchar denna sida. En href med frågedel
+    // (djuplänk till ett läge, t.ex. fysik2-hookes-lag-app.html?lage=kopplade
+    // för fy2-2.2) matchar bara när sidan öppnats med samma frågedel, och
+    // vinner då över avsnittet som länkar till filen utan frågedel.
+    const fileQ = (file + window.location.search).toLowerCase();
     let found = null;
     const subjects = window.KATALOG;
-    for (const subjKey in subjects) {
-        const courses = (subjects[subjKey] && subjects[subjKey].courses) || {};
-        for (const courseKey in courses) {
-            const chapters = (courses[courseKey] && courses[courseKey].chapters) || {};
-            for (const chapKey in chapters) {
-                const sections = chapters[chapKey].sections || [];
-                for (const sec of sections) {
-                    // Delade avsnitt (sec.delad, t.ex. kraftmomentet i Fysik
-                    // nivå 1) pekar på samma simulering som sitt egentliga
-                    // avsnitt — raden ska visa ägaren, inte kopian.
-                    if (sec.delad) continue;
-                    if ((sec.href && sec.href.toLowerCase() === file) ||
-                        (sec.href2 && sec.href2.toLowerCase() === file) ||
-                        (sec.href3 && sec.href3.toLowerCase() === file)) {
-                        found = { courseKey, sec };
-                        break;
+    function sok(target) {
+        for (const subjKey in subjects) {
+            const courses = (subjects[subjKey] && subjects[subjKey].courses) || {};
+            for (const courseKey in courses) {
+                const chapters = (courses[courseKey] && courses[courseKey].chapters) || {};
+                for (const chapKey in chapters) {
+                    const sections = chapters[chapKey].sections || [];
+                    for (const sec of sections) {
+                        // Delade avsnitt (sec.delad, t.ex. kraftmomentet i Fysik
+                        // nivå 1) pekar på samma simulering som sitt egentliga
+                        // avsnitt — raden ska visa ägaren, inte kopian.
+                        if (sec.delad) continue;
+                        if ((sec.href && sec.href.toLowerCase() === target) ||
+                            (sec.href2 && sec.href2.toLowerCase() === target) ||
+                            (sec.href3 && sec.href3.toLowerCase() === target)) {
+                            return { courseKey, sec };
+                        }
                     }
                 }
-                if (found) break;
             }
-            if (found) break;
         }
-        if (found) break;
+        return null;
     }
+    if (fileQ !== file) found = sok(fileQ);
+    if (!found) found = sok(file);
     if (!found) return;
 
     const n = found.courseKey === 'Fysik nivå 1' ? '1' : '2';
@@ -122,7 +127,7 @@
 
         let mid = '';
         simHrefs.forEach((h, i) => {
-            const current = h.toLowerCase() === file;
+            const current = h.toLowerCase() === file || h.toLowerCase() === fileQ;
             // Med bara en simulering behålls den gamla etiketten "Simulering";
             // med två visas simuleringarnas egna namn så att de går att skilja åt.
             const title = simHrefs.length === 1

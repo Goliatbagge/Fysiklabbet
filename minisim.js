@@ -20,7 +20,8 @@
  *           eulersdisk, fjaderpendel, skiftnyckel, valtning, gaffelbalans,
  *           gaffelbalans3d, dubbelkon, linjal, fodelsedag, talmangder,
  *           magnetpoler, magnetdelning, koniskpendel, kastvektorer,
- *           snettkast, skjutochslapp, kanonvagn, galton, kalkylblad
+ *           snettkast, skjutochslapp, kanonvagn, galton, kalkylblad,
+ *           kopplade-fjadrar
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -320,6 +321,13 @@
  * data/visualiseringar/ma2c-6.5.js (avsnittets flik Visualisering); typen
  * här laddar den modulen vid behov och monterar samma bräda i teorin, så
  * att den bara finns på ett ställe. Ändra alltså brädan där, inte här.
+ *
+ * ── typ: kopplade-fjadrar ────────────────────────────────────────────────
+ * fy2-2.2: en fjäder, två seriekopplade och två parallellkopplade likadana
+ * fjädrar bredvid varandra. "Häng i vikterna" hänger samma massa i alla tre
+ * (parallellt på två vikter) och markerar förlängningen; "Sätt i svängning"
+ * visar periodtiderna. Motorn bor i kopplade-fjadrar.js och delas med läget
+ * "Kopplade fjädrar" i fysik2-hookes-lag-app.html (?lage=kopplade).
  */
 (function () {
     'use strict';
@@ -9827,7 +9835,31 @@
         kalkylLaddning.then(montera);
     }
 
+    /* typ: kopplade-fjadrar — en fjäder, två seriekopplade och två
+     * parallellkopplade fjädrar bredvid varandra (fy2-2.2). Motorn ligger i
+     * kopplade-fjadrar.js och delas med läget "Kopplade fjädrar" i
+     * fysik2-hookes-lag-app.html; den laddas först när blocket finns. */
+    var koppladeLaddning = null;
+    function buildKoppladeFjadrar(node, cfg) {
+        function montera() {
+            if (!window.FYSIKKOPPLADEFJADRAR) { node.textContent = 'Kunde inte ladda simuleringen.'; return; }
+            window.FYSIKKOPPLADEFJADRAR.mount(node, cfg);
+        }
+        if (window.FYSIKKOPPLADEFJADRAR) { montera(); return; }
+        if (!koppladeLaddning) {
+            koppladeLaddning = new Promise(function (resolve) {
+                var s = document.createElement('script');
+                s.src = 'kopplade-fjadrar.js?v=' + (window.__CB || '');
+                s.onload = resolve;
+                s.onerror = resolve;
+                document.head.appendChild(s);
+            });
+        }
+        koppladeLaddning.then(montera);
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
+                  'kopplade-fjadrar': buildKoppladeFjadrar,
                   cirkularrorelse: buildCirkularrorelse,
                   kastvektorer: buildKastvektorer,
                   koniskpendel: buildKoniskpendel,

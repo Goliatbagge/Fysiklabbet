@@ -91,6 +91,24 @@
         }
         .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
 
+        /* Läget "Kopplade fjädrar": scenen är en canvas (kopplade-fjadrar.js)
+           med egen proportion — scenen 560 + 230 logiska enheter tom yta till
+           höger för inställningsrutan. I fullskärm fyller den skärmen och
+           motorn centrerar scenen. På mobilen dockas rutan under scenen och
+           den tomma ytan tas bort (extraW = 0 i motorn). */
+        .scene-wrap.kf { height: auto; }
+        .scene-wrap.kf > canvas { display: block; width: 100%; aspect-ratio: 790 / 430; }
+        .scene-wrap.kf:fullscreen > canvas, .scene-wrap.kf:-webkit-full-screen > canvas {
+            height: 100%; aspect-ratio: auto;
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: default; }
+        @media (max-width: 600px) {
+            .scene-wrap.kf > canvas,
+            .scene-wrap.kf:fullscreen > canvas, .scene-wrap.kf:-webkit-full-screen > canvas {
+                height: auto; aspect-ratio: 560 / 430;
+            }
+        }
+
         .scene-hint {
             position: absolute; bottom: 10px; left: 12px; z-index: 5;
             font-size: 12px; color: #e9edf3;
@@ -218,6 +236,7 @@
     </div>
 
     <div id="root"></div>
+    <script src="kopplade-fjadrar.js?v=1"></script>
 
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
@@ -749,6 +768,7 @@
                             kraften alltid är riktad mot jämviktsläget.
                         </p>
 
+                        <Lagesval lage="en" />
                         <FormulaCard />
 
                         <main className="flex flex-col lg:flex-row gap-6">
@@ -910,7 +930,344 @@
             );
         };
 
-        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+        // ══════════════════════════════════════════════════════════════
+        //  Läget "Kopplade fjädrar" (fy2-2.2). Scenen ritas av
+        //  kopplade-fjadrar.js, samma motor som simuleringen i teorin, så
+        //  att de två alltid visar samma sak. Den här sidan lägger till
+        //  reglagen för massa och fjäderkonstant samt avläsningen.
+        //  Öppnas direkt med ?lage=kopplade (katalogens länk för fy2-2.2).
+        // ══════════════════════════════════════════════════════════════
+        const LAGE_START = (() => {
+            const q = new URLSearchParams(location.search).get('lage');
+            return (q === 'kopplade' || location.hash === '#kopplade') ? 'kopplade' : 'en';
+        })();
+
+        // Lägesbytet laddar om sidan med rätt adress: avsnittsraden överst
+        // (section-nav.js) ska visa fy2-2.1 för en fjäder och fy2-2.2 för
+        // kopplade fjädrar, och den byggs när sidan laddas.
+        const bytLage = (l) => {
+            const u = new URL(location.href);
+            if (l === 'kopplade') u.searchParams.set('lage', 'kopplade');
+            else u.searchParams.delete('lage');
+            u.hash = '';
+            location.assign(u.toString());
+        };
+
+        const Lagesval = ({ lage }) => (
+            <div className="flex flex-wrap gap-2 mb-5" role="group" aria-label="Välj läge">
+                <button className={`btn-toggle ${lage === 'en' ? 'active' : ''}`} aria-pressed={lage === 'en'}
+                        onClick={() => lage !== 'en' && bytLage('en')}>En fjäder</button>
+                <button className={`btn-toggle ${lage === 'kopplade' ? 'active' : ''}`} aria-pressed={lage === 'kopplade'}
+                        onClick={() => lage !== 'kopplade' && bytLage('kopplade')}>Kopplade fjädrar</button>
+            </div>
+        );
+
+        const KM_MIN = 50, KM_MAX = 150;      // massa i varje upphängning (g)
+        const KK_MIN = 5, KK_MAX = 25;        // fjäderkonstant för varje fjäder (N/m)
+
+        // Bråk i formelkortet: ord-etikett ovanför täljaren och under nämnaren
+        const Brak = ({ topLabel, top, bottom, bottomLabel }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{topLabel}</span>
+                <span className="fnum">{top}</span>
+                <span style={{ borderTop: '2px solid currentColor', width: 26, margin: '3px 0' }}></span>
+                <span className="fnum">{bottom}</span>
+                <span className="flbl">{bottomLabel}</span>
+            </div>
+        );
+
+        const KoppladeFormel = () => (
+            <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <span className="flbl" style={{ fontSize: 11 }}>Serie</span>
+                <Vbl label="Resulterande fjäderkonstant"><em>k</em><sub>R</sub></Vbl>
+                <span className="fnum">=</span>
+                <Brak topLabel="Fjäderkonstant" top={<em>k</em>} bottom={<em>n</em>} bottomLabel="Antal fjädrar" />
+                <span className="fnum" style={{ margin: '0 14px', color: 'var(--lab-ink-muted)' }}>|</span>
+                <span className="flbl" style={{ fontSize: 11 }}>Parallellt</span>
+                <Vbl label="Resulterande fjäderkonstant"><em>k</em><sub>R</sub></Vbl>
+                <span className="fnum">=</span>
+                <Vbl label="Antal fjädrar"><em>n</em></Vbl>
+                <span className="fnum">·</span>
+                <Vbl label="Fjäderkonstant"><em>k</em></Vbl>
+            </div>
+        );
+
+        // Litet bråk i löptext och tabell: rakt bråkstreck, aldrig snedstreck
+        const Ib = ({ t, n }) => (
+            <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center',
+                           verticalAlign: 'middle', lineHeight: 1.05, margin: '0 2px', fontSize: '0.92em' }}>
+                <span>{t}</span>
+                <span style={{ borderTop: '1.4px solid currentColor', alignSelf: 'stretch' }}>{n}</span>
+            </span>
+        );
+
+        const StSlider = ({ label, value, min, max, step, unit, onChange, decimals = 0 }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    <span className="font-mono font-semibold">{fmt(value, decimals)} {unit}</span>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        const KoppladeApp = () => {
+            const [mg, setMg] = useState(100);       // massa i varje upphängning (g)
+            const [k, setK] = useState(10);          // fjäderkonstant för varje fjäder (N/m)
+            const [visa, setVisa] = useState({ dl: true, T: true });
+            const [slow, setSlow] = useState(false);
+            const [st, setSt] = useState(null);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const wrapRef = useRef(null);
+            const canvasRef = useRef(null);
+            const motRef = useRef(null);
+
+            useEffect(() => {
+                if (!window.FYSIKKOPPLADEFJADRAR) return;
+                let last = 0;
+                const mot = window.FYSIKKOPPLADEFJADRAR.motor(canvasRef.current, {
+                    fyll: true, m: 0.1, k: 10,
+                    // tom yta till höger om scenen för inställningsrutan
+                    // (på mobilen dockas rutan under scenen i stället)
+                    extraW: () => (window.innerWidth <= 600 ? 0 : 230),
+                    onState: (s) => setSt(s),
+                    onTick: (s) => {
+                        const n = performance.now();
+                        if (n - last > 100) { last = n; setSt(s); }
+                    },
+                });
+                motRef.current = mot;
+                setSt(mot.get());
+                let ro = null;
+                if ('ResizeObserver' in window) {
+                    ro = new ResizeObserver(() => mot.resize());
+                    ro.observe(canvasRef.current);
+                }
+                return () => { if (ro) ro.disconnect(); mot.destroy(); };
+            }, []);
+            useEffect(() => { if (motRef.current) motRef.current.set({ m: mg / 1000, k }); }, [mg, k]);
+            useEffect(() => { if (motRef.current) motRef.current.visa(visa); }, [visa]);
+            useEffect(() => { if (motRef.current) motRef.current.slow(slow); }, [slow]);
+
+            useEffect(() => {
+                const handler = () => {
+                    const fs = document.fullscreenElement === wrapRef.current ||
+                        document.webkitFullscreenElement === wrapRef.current;
+                    setIsFullscreen(fs);
+                    if (motRef.current) setTimeout(() => motRef.current.resize(), 50);
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = wrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const mot = () => motRef.current;
+            const s = st || { state: 'tom', paused: false, t: 0, kR: [k, k / 2, 2 * k],
+                              dl: [0, 0, 0], T: [0, 0, 0] };
+            const tShow = (key) => setVisa(v => ({ ...v, [key]: !v[key] }));
+
+            const knappar = (cls) => (
+                <React.Fragment>
+                    <button className={`btn-toggle ${cls} ${s.state === 'tom' ? 'active' : ''}`}
+                            disabled={s.state !== 'tom'} onClick={() => mot().hang()}>Häng i vikterna</button>
+                    <button className={`btn-toggle ${cls} ${s.state === 'hangt' ? 'active' : ''}`}
+                            disabled={s.state === 'tom' || s.state === 'hanger'}
+                            onClick={() => mot().svang()}>Sätt i svängning</button>
+                    <button className={`btn-toggle ${cls}`} disabled={s.state !== 'svang'}
+                            onClick={() => mot().paus()}>{s.paused ? 'Fortsätt' : 'Pausa'}</button>
+                    <button className={`btn-toggle ${cls}`} disabled={s.state === 'tom'}
+                            onClick={() => mot().reset()}>Börja om</button>
+                </React.Fragment>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" />
+                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" />
+                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                <path d="M6 6l12 12M18 6L6 18" />
+                            </svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        <label><input type="checkbox" checked={visa.dl} onChange={() => tShow('dl')} />
+                            <span>Förlängning Δ<em>l</em></span></label>
+                        <label><input type="checkbox" checked={visa.T} onChange={() => tShow('T')} />
+                            <span>Periodtid <em>T</em></span></label>
+                        <div className="st-title mt">Tempo</div>
+                        <label><input type="checkbox" checked={slow} onChange={() => setSlow(x => !x)} />
+                            <span>Ultrarapid</span></label>
+                        {/* Glidare och styrknappar visas här BARA i fullskärm — i
+                            normalläget finns de i sidopanelen (aldrig dubblerade). */}
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">
+                                    <StSlider label="Massa (<em>m</em>)" value={mg} min={KM_MIN} max={KM_MAX}
+                                              step={10} unit="g" onChange={setMg} />
+                                    <StSlider label="Fjäderkonstant (<em>k</em>)" value={k} min={KK_MIN} max={KK_MAX}
+                                              step={1} unit="N/m" onChange={setK} />
+                                </div>
+                                <div className="st-actions">{knappar('')}</div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const NAMN = ['En fjäder', 'Seriekoppling', 'Parallellkoppling'];
+            const FORMEL = [<span><em>k</em></span>,
+                            <Ib t={<em>k</em>} n="2" />,
+                            <span>2&thinsp;·&thinsp;<em>k</em></span>];
+            const hangd = s.state !== 'tom';
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Hookes lag
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Kopplade fjädrar</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            Tre upphängningar med likadana fjädrar: en ensam fjäder, två seriekopplade och två
+                            parallellkopplade. Häng samma massa i alla tre och jämför förlängningarna. Sätt dem
+                            sedan i svängning och se vilken som svänger snabbast.
+                        </p>
+
+                        <Lagesval lage="kopplade" />
+                        <KoppladeFormel />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap kf" data-theme="ljusPapper" ref={wrapRef}>
+                                    <canvas ref={canvasRef} role="img"
+                                            aria-label="En fjäder, två seriekopplade och två parallellkopplade fjädrar bredvid varandra med samma massa i varje upphängning." />
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="lg:w-2/5 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <Slider label="Massa i varje upphängning (<em>m</em>)"
+                                            sub="Parallellt fördelas massan på två vikter, en under varje fjäder."
+                                            value={mg} min={KM_MIN} max={KM_MAX} step={10} unit="g" onChange={setMg} decimals={0} />
+                                    <Slider label="Fjäderkonstant för varje fjäder (<em>k</em>)"
+                                            sub="Alla fjädrar är likadana och har samma fjäderkonstant."
+                                            value={k} min={KK_MIN} max={KK_MAX} step={1} unit="N/m" onChange={setK} decimals={0} />
+                                    <div className="grid grid-cols-2 gap-2 mt-1">{knappar('w-full')}</div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning</div>
+                                    <table className="w-full text-sm" style={{ color: 'var(--lab-ink)' }}>
+                                        <thead>
+                                            <tr style={{ color: 'var(--lab-ink-muted)' }}>
+                                                <th className="text-left font-semibold pb-1"></th>
+                                                <th className="text-right font-semibold pb-1"><em>k</em><sub>R</sub></th>
+                                                <th className="text-right font-semibold pb-1">Δ<em>l</em></th>
+                                                <th className="text-right font-semibold pb-1"><em>T</em></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="font-mono">
+                                            {[0, 1, 2].map(i => (
+                                                <tr key={i} style={{ borderTop: '1px solid var(--lab-line, rgba(15,22,32,0.14))' }}>
+                                                    <td className="py-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                                                        {NAMN[i]}<br />
+                                                        <span className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>
+                                                            <em>k</em><sub>R</sub> = {FORMEL[i]}</span>
+                                                    </td>
+                                                    <td className="text-right py-1">{fmt(s.kR[i], 1)}&nbsp;N/m</td>
+                                                    <td className="text-right py-1">{hangd ? fmt(s.dl[i] * 100, 1) + ' cm' : '–'}</td>
+                                                    <td className="text-right py-1">{hangd ? fmt(s.T[i], 2) + ' s' : '–'}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3">
+                                    <div className="flbl mb-1">Mjukare svänger långsammare</div>
+                                    <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        Periodtiden är <span style={{ whiteSpace: 'nowrap' }}><em>T</em> = 2π&thinsp;·&thinsp;√<span style={{ borderTop: '1.4px solid currentColor', paddingTop: 1 }}><Ib t={<em>m</em>} n={<span><em>k</em><sub>R</sub></span>} /></span></span>.
+                                        Seriekopplingen har halva fjäderkonstanten och svänger därför √2&nbsp;≈&nbsp;1,4 gånger
+                                        långsammare än en ensam fjäder. Parallellkopplingen har dubbla fjäderkonstanten och
+                                        svänger 1,4 gånger snabbare.
+                                    </p>
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Seriekoppling</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Fjädrarna sitter efter varandra, så varje fjäder bär hela tyngden och förlängs lika
+                                    mycket som när den hänger ensam. Med <em>n</em> fjädrar blir förlängningen <em>n</em> gånger
+                                    så stor, och kopplingen är <strong>mjukare</strong>: <span style={{ whiteSpace: 'nowrap' }}><em>k</em><sub>R</sub> = <Ib t={<em>k</em>} n={<em>n</em>} /></span>.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Parallellkoppling</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Fjädrarna sitter bredvid varandra och delar på tyngden. Var och en förlängs bara
+                                    en <em>n</em>-del så mycket, och kopplingen är <strong>styvare</strong>:
+                                    {' '}<em>k</em><sub>R</sub> = <em>n</em>&thinsp;·&thinsp;<em>k</em>.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Samma massa överallt</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    I parallellkopplingen hänger massan som två vikter med halva massan var, en under
+                                    varje fjäder. Den totala massan är ändå densamma i alla tre upphängningarna, så
+                                    det är bara kopplingen som skiljer dem åt.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Root = () => (LAGE_START === 'kopplade' ? <KoppladeApp /> : <App />);
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<Root />);
     </script>
     <script src="feedback.js" defer></script>
     <script src="sim-dock.js" defer></script>

@@ -397,7 +397,9 @@
                 ftext.innerHTML = farga(text);
             }
             for (var i = 0; i < refBoxes.length; i++) {
-                var rf = S.refs[i];
+                // Exempel 2 (arligt) visar inga referensrutor: den gula
+                // rutan kring B2 när formeln skrivs var i vägen (2026-10-12)
+                var rf = scen === 'arligt' ? null : S.refs[i];
                 if (rf) {
                     showOv(refBoxes[i], refRect(rf));
                     refBoxes[i].style.borderColor = REFF[i % REFF.length];
@@ -741,7 +743,7 @@
                   await sleep(1500);
               } },
             { namn: 'Lås B12 med dollartecken och dra i fyllnadshandtaget',
-              text: 'Samma beräkning ska upprepas för åren 2 till 8, och varje värde ska multipliceras med förändringsfaktorn i B12. Den cellen ”låses” därför med dollartecken innan formeln kopieras: formeln i B3 blir <code>=B2*$B$12</code>. Utan dollartecknen skulle B12 också flytta ner en rad för varje år, till tomma celler. Sedan drar vi i fyllnadshandtaget ner till och med B10. I B6 står nu till exempel <code>=B5*$B$12</code>: B5 har flyttat med, men <code>$B$12</code> står kvar.',
+              text: 'Samma beräkning ska upprepas för åren 2 till 8, och varje värde ska multipliceras med förändringsfaktorn i B12. Den cellen ”låses” därför med dollartecken innan formeln kopieras: formeln i B3 blir <code>=B2*$B$12</code>. Utan dollartecknen skulle B12 också flytta ner en rad för varje år, till tomma celler. Sedan drar vi i fyllnadshandtaget ner till och med B10. I B10, där behållningen efter 8 år står, är formeln nu <code>=B9*$B$12</code>: B9 har flyttat med, men <code>$B$12</code> står kvar.',
               kor: async function () {
                   await klickaFbar();
                   // pekaren flyttas undan så att formelfältet syns
@@ -762,7 +764,7 @@
                   await sleep(500);
                   await draHandtag('B10');
                   await sleep(600);
-                  await klickaCell('B6');      // visa att formeln flyttats med
+                  await klickaCell('B10');     // svaret, och formeln som flyttats med
                   await sleep(1800);
               } }
         ];
@@ -796,11 +798,11 @@
                   await sleep(1500);
               } },
             { namn: 'Dra formeln nedåt till den tionde insättningen',
-              text: 'Samma sak händer vid varje ny insättning: det föregående beloppet växer med 2,8 % och 5 000 kr läggs till. Vi drar i fyllnadshandtaget ner till och med B11, som är insättning 10. I B6 står nu till exempel <code>=B5*1,028+5000</code>. Här behövs inga dollartecken, eftersom formeln inte hämtar något från en fast cell.',
+              text: 'Samma sak händer vid varje ny insättning: det föregående beloppet växer med 2,8 % och 5 000 kr läggs till. Vi drar i fyllnadshandtaget ner till och med B11, som är insättning 10. I B11 står nu <code>=B10*1,028+5000</code>. Här behövs inga dollartecken, eftersom formeln inte hämtar något från en fast cell.',
               kor: async function () {
                   await draHandtag('B11');
                   await sleep(600);
-                  await klickaCell('B6');      // samma formel, ett radsteg längre ned
+                  await klickaCell('B11');     // svaret, med samma formel längre ned
                   await sleep(2200);
                   await ringaIn('B11', REFF[2], 1.15);   // svaret
                   var undan = cellPunkt('D8');
@@ -1060,6 +1062,24 @@
         bNext.addEventListener('click', function () { if (aktuellt < STEG.length - 1) spela(aktuellt + 1); });
         bOm.addEventListener('click', function () { forbered(0); });
         bSkip.addEventListener('click', hoppa);
+
+        /* Styrning för presentationsläget (samma gränssnitt som
+         * pennlösningarnas __hkCtl): varje nästa-tryck spelar nästa steg i
+         * bladet, och först när sista steget är klart går presentationen
+         * vidare till nästa stycke. Bakåt likadant spegelvänt. */
+        node.__kbCtl = {
+            klar: function () { return aktuellt === STEG.length - 1 && lage === 'klar'; },
+            vidStart: function () { return aktuellt === 0 && lage === 'redo'; },
+            nasta: function () {
+                if (lage === 'redo') spela(aktuellt);
+                else if (aktuellt < STEG.length - 1) spela(aktuellt + 1);
+                else if (lage === 'spelar') hoppa();
+            },
+            forra: function () {
+                if (aktuellt > 0) spela(aktuellt - 1);
+                else forbered(0);
+            }
+        };
 
         forbered(0);
     }

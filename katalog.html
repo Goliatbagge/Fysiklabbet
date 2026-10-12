@@ -1727,7 +1727,29 @@
             const hkRaf = useRef(0);
             const curHkCtl = (s = stepRef.current) => {
                 const st = stepsRef.current[s - 1];
-                if (!st || !st.el.classList.contains('lab-handskrift')) return null;
+                if (!st) return null;
+                // Kalkylbladen (minisim-kalkylblad.js) stegas på samma sätt:
+                // varje klick spelar nästa steg i bladet, och först efter
+                // sista steget går presentationen vidare (önskemål 2026-10-12).
+                // Rymmer steget flera blad (Exempel 1: a, b och c i samma
+                // textlösning) stegas de i tur och ordning.
+                const kbn = (st.el.classList.contains('lab-minisim-kalkylblad') ? [st.el]
+                    : [...st.el.querySelectorAll('.lab-minisim-kalkylblad')])
+                    .filter(n => n.__kbCtl);
+                const kbs = kbn.map(n => n.__kbCtl);
+                // bladet som spelas rullas in i bild (b och c ligger längre ned)
+                const visa = (i) => { if (kbn.length > 1) kbn[i].scrollIntoView({ block: 'nearest', behavior: 'smooth' }); };
+                if (kbs.length) return {
+                    klar: () => kbs.every(c => c.klar()),
+                    vidStart: () => kbs.every(c => c.vidStart()),
+                    nasta: () => { const i = kbs.findIndex(c => !c.klar()); if (i >= 0) { visa(i); kbs[i].nasta(); } },
+                    forra: () => {
+                        let i = kbs.length - 1;
+                        while (i >= 0 && kbs[i].vidStart()) i--;
+                        if (i >= 0) { visa(i); kbs[i].forra(); }
+                    },
+                };
+                if (!st.el.classList.contains('lab-handskrift')) return null;
                 const ctl = st.el.__hkCtl;
                 if (!ctl || !ctl.klar) return null;
                 // "Som text"-vyn: arket är gömt och textlösningen visas
@@ -1772,7 +1794,7 @@
                 if (ctl && !ctl.klar()) {
                     ctl.nasta();
                     // I arkets helskärm sköter widgeten pennföljningen själv.
-                    if (!fsHkWrap()) followHk(ctl);
+                    if (!fsHkWrap() && ctl.pennaY) followHk(ctl);
                     return;
                 }
                 cancelAnimationFrame(hkRaf.current);

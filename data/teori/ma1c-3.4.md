@@ -153,23 +153,35 @@ automatiskt (automagiskt!). Efter 8 år är behållningen 52 672,36 kr.
 **Du sätter in 5 000 kr i slutet av varje år på ett konto med 2,8 %
 ränta. Vad är behållningen på kontot direkt efter 10:e insättningen?**
 
-::: handskrift
-typ: arligtsparande
+::: textlosning
+Vi öppnar ett kalkylark och gör beräkningen i tre steg. Klicka fram
+stegen ett i taget i kalkylbladet nedan och se hur cellerna fylls i.
+
+::: minisim
+typ: kalkylblad
+scen: arligt
 :::
 
-::: textlosning
-Vi öppnar ett kalkylark och gör en kolumn för "Insättning" och en kolumn
-för "Behållning (kr)". Vi fyller i kolumnen från insättning 1 till och
-med insättning 10. Vi fyller också i insättningen 5 000 kr för den första
-insättningen.
+**Steg 1.** Vi gör en kolumn för "Insättning" och en kolumn för
+"Behållning (kr)". Vi skriver 1 i A2 och 2 i A3, markerar de två cellerna
+och drar i fyllnadshandtaget ner till och med A11. Då fylls insättningarna
+i från 1 till och med 10. Vi fyller också i 5 000 kr i B2, som är
+behållningen direkt efter den första insättningen.
 
-För att få behållningen efter den andra insättningen ska det föregående
-beloppet (5 000 kr) ha vuxit med 2,8 % *samtidigt* som du lägger till
-ytterligare 5 000 kr. Vi ställer oss i cell B3 och skriver
-`=B2*1,028+5000` och får värdet efter den andra insättningen
-(10 140 kr).
+**Steg 2.** För att få behållningen efter den andra insättningen ska det
+föregående beloppet (5 000 kr i B2) ha vuxit med 2,8 % *samtidigt* som du
+lägger till ytterligare 5 000 kr. Att beloppet växer med 2,8 % betyder
+att det multipliceras med förändringsfaktorn 1,028. Vi ställer oss i
+cell B3 och skriver `=B2*1,028+5000` och får värdet efter den andra
+insättningen (10 140 kr).
 
-Vi tar tag i fyllnadshandtaget och drar ner till och med insättning 10:
+**Steg 3.** Samma sak händer vid varje ny insättning: det föregående
+beloppet växer med 2,8 % och 5 000 kr läggs till. Vi markerar B3, tar tag
+i fyllnadshandtaget och drar ner till och med B11, som är insättning 10.
+I B6 står nu till exempel `=B5*1,028+5000`. Här behövs inga
+dollartecken, eftersom formeln inte hämtar något från en annan fast
+cell. Till sist markerar vi B2 till B11 och klickar på kr i
+verktygsfältet.
 
 | Insättning | Behållning (kr) |
 | --- | --- |

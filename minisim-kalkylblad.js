@@ -9,12 +9,14 @@
  *
  *   ::: minisim
  *   typ: kalkylblad
+ *   scen: arligt
  *   :::
  *
- * Används i textlösningen till Exempel 1 i ma1c-3.4 (Sparkonto i
- * kalkylblad). Stegen (STEG nedan) är skrivna för just det exemplet; en ny
- * uppgift får en egen steglista med samma primitiver (klicka, skriv, Enter,
- * dra i fyllnadshandtaget, markera, formatera som valuta).
+ * Används i textlösningarna till Exempel 1 (scen: sparkonto, standard) och
+ * Exempel 2 (scen: arligt) i ma1c-3.4. Varje scen är en egen steglista
+ * (SPARKONTO, ARLIGT nedan) byggd av samma primitiver (klicka, ringa in,
+ * skriv, piltangenter, Enter, dra i fyllnadshandtaget, markera, formatera
+ * som valuta). En ny uppgift får en egen steglista och ett eget scennamn.
  *
  * Bladet ritas med absolut positionerade celler i fasta koordinater
  * (kolumnbredder i COLW), så att markeringar, referensramar och pekare kan
@@ -164,7 +166,9 @@
     var PEKARE = '<svg width="20" height="22" viewBox="0 0 20 22"><path d="M1.5 1.5v16l4.2-4 2.9 6.6 2.6-1.1-2.9-6.5h6z" fill="#fff" stroke="#202124" stroke-width="1.4" stroke-linejoin="round"/></svg>';
     var KORS = '<svg width="20" height="20" viewBox="-10 -10 20 20"><path d="M0-8V8M-8 0H8" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M0-8V8M-8 0H8" stroke="#202124" stroke-width="1.6"/></svg>';
 
-    function mount(node) {
+    function mount(node, cfg) {
+        cfg = cfg || {};
+        var scen = cfg.scen === 'arligt' ? 'arligt' : 'sparkonto';
         injectCss();
         var smal = (node.clientWidth || 600) < 400;
         satKolumner(smal ? COLW_SMAL : COLW_BRED);
@@ -174,7 +178,7 @@
         /* ---------- programfönstrets överdel ---------- */
         var top = el('div', 'kb-top', app);
         var title = el('div', 'kb-title', top);
-        title.innerHTML = '<svg width="16" height="20" viewBox="0 0 16 20"><path d="M10 0H2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6z" fill="#0f9d58"/><path d="M10 0v6h6z" fill="#87ceac"/><rect x="3.5" y="9" width="9" height="7" fill="none" stroke="#fff" stroke-width="1.2"/><path d="M3.5 11.5h9M3.5 14h9M7 9v7" stroke="#fff" stroke-width="1.2"/></svg><span>Sparkonto</span>';
+        title.innerHTML = '<svg width="16" height="20" viewBox="0 0 16 20"><path d="M10 0H2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6z" fill="#0f9d58"/><path d="M10 0v6h6z" fill="#87ceac"/><rect x="3.5" y="9" width="9" height="7" fill="none" stroke="#fff" stroke-width="1.2"/><path d="M3.5 11.5h9M3.5 14h9M7 9v7" stroke="#fff" stroke-width="1.2"/></svg><span>' + (scen === 'arligt' ? 'Årligt sparande' : 'Sparkonto') + '</span>';
         var tool = el('div', 'kb-tool', top);
         tool.innerHTML =
             '<span class="kb-tb"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4L2 7l3 3"/><path d="M2 7h7.5a4 4 0 0 1 0 8H7"/></svg></span>' +
@@ -250,6 +254,7 @@
                 var expr = cell.raw.slice(1).replace(/\$?[A-Z]\$?\d+/g, function (m) {
                     return '(' + value(m) + ')';
                 });
+                expr = expr.replace(/(\d),(\d)/g, '$1.$2');   // decimalkomma i formeln
                 if (!/^[0-9.()*+\-\/ ]+$/.test(expr)) return 0;
                 return Function('return ' + expr)();
             }
@@ -639,7 +644,7 @@
         }
 
         /* ---------- stegen i Exempel 1 a) ---------- */
-        var STEG = [
+        var SPARKONTO = [
             { namn: 'Rubriker, år och startvärden',
               kor: async function () {
                   await klickaCell('A1'); await skriv('År'); await enter();
@@ -700,6 +705,53 @@
                   await klickaKr();
               } }
         ];
+
+        /* ---------- stegen i Exempel 2 (årligt sparande) ---------- */
+        var ARLIGT = [
+            { namn: 'Rubriker, insättningarnas nummer och den första insättningen',
+              kor: async function () {
+                  await klickaCell('A1'); await skriv('Insättning'); await enter();
+                  await klickaCell('B1'); await skriv('Behållning (kr)'); await enter();
+                  await skriv('5000'); await enter();
+                  await klickaCell('A2'); await skriv('1'); await enter();
+                  await skriv('2'); await enter();
+                  await draMarkera('A2', 'A3');
+                  await draHandtag('A11');
+                  await sleep(400);
+              } },
+            { namn: 'Formeln för behållningen efter den andra insättningen',
+              kor: async function () {
+                  // det föregående beloppet, som ska växa med 2,8 % ...
+                  await ringaIn('B2', REFF[0], 1.15);
+                  await sleep(1100);
+                  // ... och den nya insättningen läggs till
+                  await klickaCell('B3');
+                  await skriv('=B2*1,028+5000', false, 230);
+                  var vila = cellPunkt('C7');
+                  await flytta(vila.x, vila.y, 700);
+                  await sleep(3200);
+                  await enter();
+                  tonaUtMarkeringar();
+                  await sleep(1400);
+                  await klickaCell('B3');
+                  await sleep(1500);
+              } },
+            { namn: 'Dra formeln nedåt till den tionde insättningen',
+              kor: async function () {
+                  await draHandtag('B11');
+                  await sleep(600);
+                  await klickaCell('B6');      // samma formel, ett radsteg längre ned
+                  await sleep(2200);
+                  await draMarkera('B2', 'B11');
+                  await klickaKr();
+                  await sleep(400);
+                  await ringaIn('B11', REFF[2], 1.15);   // svaret
+                  var undan = cellPunkt('D8');
+                  await flytta(undan.x, undan.y, 600);
+                  await sleep(800);
+              } }
+        ];
+        var STEG = scen === 'arligt' ? ARLIGT : SPARKONTO;
 
         /* ---------- kontroller under bladet ---------- */
         var ctrl = el('div', 'kb-ctrl', wrap);

@@ -21209,9 +21209,10 @@
   /* ---------------- scen: kopplade fjädrar (fy2-2.2 Ex 3) -------------
    * Två likadana fjädrar, 40 N/m var, bär en vikt på 0,50 kg, först i serie
    * och sedan parallellt. Figuren visar båda kopplingarna bredvid varandra
-   * med samma vikt. a) Den resulterande fjäderkonstanten ur k_R = k/2,
-   * sedan Hookes lag löst för Δl med tyngden uträknad i klammern.
-   * b) k_R = 2·k, samma F. Kursen tar bara upp likadana fjädrar. */
+   * med samma vikt. a) Den resulterande fjäderkonstanten ur k_R = k/n
+   * med n = 2, sedan Hookes lag löst för Δl med tyngden uträknad i
+   * klammern. b) k_R = n·k, samma F. Kursen tar bara upp likadana
+   * fjädrar. */
   function layoutKoppladeFjadrar(cfg, F) {
     var s = F / 100;
     var acts = [];
@@ -21324,8 +21325,8 @@
 
     var bS = bubble(120, bubbleTop(282), bw, [
       [['a) Fjädrarna i serie beter sig']],
-      [['som en enda fjäder, dubbelt så']],
-      [['mjuk. Först dess fjäderkonstant.']]
+      [['som en enda, mjukare fjäder.']],
+      [['Först dess fjäderkonstant.']]
     ]);
     tanke(bS);
     /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
@@ -21333,21 +21334,22 @@
     pause(300);
     y += 2.0 * F;
     var xx = placeString('k_R=', padL, y, s, F, acts);
-    fracH('k', '2', xx, y);
+    fracH('k', 'n', xx, y);
     stepEnd();
 
     y += adv + 1.1 * F;
     var bK1 = bubble(140, bubbleTop(y - adv), bw, [
-      [['Fjäderkonstanten i klammern.']]
+      [['Fjäderkonstanten och antalet']],
+      [['fjädrar i klammern.']]
     ]);
     tanke(bK1);
-    var klam1 = valueBracket(acts, ['k=40 N/m'], padL, y, s, F);
+    var klam1 = valueBracket(acts, ['k=40 N/m', 'n=2'], padL, y, s, F);
     stepEnd();
     y = klam1.yEnd;
 
     y += adv + 1.4 * F;
     var bI1 = bubble(140, bubbleTop(y - adv), bw, [
-      [['Sätter in värdet ur klammern.']]
+      [['Sätter in värdena ur klammern.']]
     ]);
     tanke(bI1);
     xx = placeString('k_R=', padL, y, s, F, acts);
@@ -21425,15 +21427,15 @@
     y += adv + 1.4 * F;
     var bP = bubble(120, bubbleTop(y - adv), bw, [
       [['b) Bredvid varandra delar']],
-      [['fjädrarna på kraften. Paret blir']],
-      [['dubbelt så styvt.']]
+      [['fjädrarna på kraften. Fortfarande']],
+      [['två fjädrar, n = 2.']]
     ]);
     tanke(bP);
     placeString('b) Parallellkopplade fjädrar', padL, y,
                 s * 0.62, F * 0.62, acts);
     pause(300);
     y += 2.0 * F;
-    placeString('k_R=2·k=2·40=80 N/m', padL, y, s, F, acts);
+    placeString('k_R=n·k=2·40=80 N/m', padL, y, s, F, acts);
     stepEnd();
 
     y += adv + 1.4 * F;

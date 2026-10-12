@@ -15397,24 +15397,25 @@ $$ A = \\sqrt{\\frac{2 \\cdot 5{,}0}{250}} = \\sqrt{0{,}040} = 0{,}20\\ \\mathrm
         },
         {
             level: 1,
-            question: `Två likadana fjädrar, var och en med fjäderkonstanten $45\\ \\mathrm{N/m}$, parallellkopplas. Bestäm den resulterande fjäderkonstanten.`,
-            answer: { value: 90, unit: 'N/m' },
-            solution: `Fjädrarna sitter bredvid varandra och delar på kraften. Paret beter sig som en enda fjäder med den resulterande fjäderkonstanten $k_\\mathrm{R}$:
+            question: `Tre likadana fjädrar, var och en med fjäderkonstanten $45\\ \\mathrm{N/m}$, parallellkopplas. Bestäm den resulterande fjäderkonstanten.`,
+            answer: { value: 135, unit: 'N/m' },
+            solution: `Fjädrarna sitter bredvid varandra och delar på kraften. Tillsammans beter de sig som en enda fjäder med den resulterande fjäderkonstanten $k_\\mathrm{R}$:
 
-$$ k_\\mathrm{R} = 2 \\cdot k $$
+$$ k_\\mathrm{R} = n \\cdot k $$
 
 Mätvärden:
 $$
 \\left[ \\begin{array}{l}
-k = 45\\ \\mathrm{N/m}
+k = 45\\ \\mathrm{N/m} \\\\
+n = 3
 \\end{array} \\right]
 $$
 
-$$ k_\\mathrm{R} = 2 \\cdot 45 = 90\\ \\mathrm{N/m} $$
+$$ k_\\mathrm{R} = 3 \\cdot 45 = 135\\ \\mathrm{N/m} $$
 
-**Svar:** Den resulterande fjäderkonstanten är $90\\ \\mathrm{N/m}$.
+**Svar:** Den resulterande fjäderkonstanten är $135\\ \\mathrm{N/m}$.
 
-**Rimlighet:** Parallellkopplingen är styvare än en ensam fjäder, och 90 N/m är större än 45 N/m.`,
+**Rimlighet:** Parallellkopplingen är styvare än en ensam fjäder, och 135 N/m är större än 45 N/m.`,
         },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
@@ -15511,9 +15512,9 @@ $$ E_\\text{värme} = 0{,}14175 - 0{,}04375 = 0{,}098\\ \\mathrm{J} $$
 
 $$ F = k \\cdot \\Delta l = 50 \\cdot 0{,}12 = 6{,}0\\ \\mathrm{N} $$
 
-Två likadana fjädrar i serie ger halva fjäderkonstanten:
+För $n$ likadana fjädrar i serie gäller $k_\\mathrm{R} = \\dfrac{k}{n}$. Här är $n = 2$:
 
-$$ k_\\mathrm{R} = \\frac{k}{2} = \\frac{50}{2} = 25\\ \\mathrm{N/m} $$
+$$ k_\\mathrm{R} = \\frac{k}{n} = \\frac{50}{2} = 25\\ \\mathrm{N/m} $$
 
 Hookes lag för paret ger förlängningen:
 
@@ -15916,9 +15917,9 @@ $$ k = \\frac{4\\pi^2 \\cdot 0{,}45}{0{,}80^2} = \\frac{17{,}77}{0{,}64} \\appro
             answer: { value: 0.641, unit: 's' },
             solution: `**Insikten är att två fjädrar i serie känner samma *kraft*** (viktens tyngd), men deras *förlängningar* adderas. Paret blir därför mjukare än en ensam fjäder.
 
-**Steg 1 — resulterande fjäderkonstant.** Båda fjädrarna känner samma kraft *F* och har samma fjäderkonstant, så de förlängs lika mycket. Paret förlängs dubbelt så mycket som en ensam fjäder, och fjäderkonstanten halveras:
+**Steg 1 — resulterande fjäderkonstant.** Båda fjädrarna känner samma kraft *F* och har samma fjäderkonstant, så de förlängs lika mycket. Paret förlängs dubbelt så mycket som en ensam fjäder. För $n$ likadana fjädrar i serie gäller $k_\\mathrm{R} = \\dfrac{k}{n}$, här med $n = 2$:
 
-$$ k_\\mathrm{R} = \\frac{k}{2} = \\frac{96}{2} = 48\\ \\mathrm{N/m} $$
+$$ k_\\mathrm{R} = \\frac{k}{n} = \\frac{96}{2} = 48\\ \\mathrm{N/m} $$
 
 **Steg 2 — periodtiden.**
 
@@ -15926,7 +15927,7 @@ $$ T = 2\\pi\\sqrt{\\frac{m}{k_\\mathrm{R}}} = 2\\pi\\sqrt{\\frac{0{,}50}{48}} =
 
 **Svar:** Periodtiden är ungefär $0{,}64\\ \\mathrm{s}$.
 
-**Generell slutsats:** Två likadana fjädrar i serie är mjukare än en ensam fjäder, $k_\\mathrm{R} = \\dfrac{k}{2}$. Parallellt blir de styvare, $k_\\mathrm{R} = 2 \\cdot k$. Att se vilken storhet (kraft eller förlängning) som är gemensam för fjädrarna är hela insikten.`,
+**Generell slutsats:** Likadana fjädrar i serie är mjukare än en ensam fjäder, $k_\\mathrm{R} = \\dfrac{k}{n}$. Parallellt blir de styvare, $k_\\mathrm{R} = n \\cdot k$. Att se vilken storhet (kraft eller förlängning) som är gemensam för fjädrarna är hela insikten.`,
         },
     ],
 

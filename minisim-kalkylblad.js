@@ -726,12 +726,8 @@
             { namn: 'Formeln för behållningen efter 1 år',
               text: 'För att få behållningen efter ett år multiplicerar vi 30 000 (värdet i B2) med förändringsfaktorn (värdet i B12). Vi ställer oss i cell B3 och skriver <code>=B2*B12</code> och får värdet efter 1 år, 31 050 kr.',
               kor: async function () {
-                  // först de två värdena som ska multipliceras ...
-                  await ringaIn('B2', REFF[0], 1.15);
-                  await sleep(900);
-                  await ringaIn('B12', REFF[1], 1.15);
-                  await sleep(1100);
-                  // ... sedan formeln, lugnt, och den får stå kvar en stund
+                  // formeln skrivs lugnt och får stå kvar en stund (inga ringar
+                  // före: de var i vägen när B3 fylldes i)
                   await klickaCell('B3');
                   await skriv('=B2*B12', false, 230);
                   // pekaren flyttas undan så att formeln syns helt
@@ -788,10 +784,6 @@
             { namn: 'Formeln för behållningen efter den andra insättningen',
               text: 'Efter den andra insättningen har det föregående beloppet (5 000 kr i B2) vuxit med 2,8 % <em>samtidigt</em> som ytterligare 5 000 kr läggs till. Att beloppet växer med 2,8 % betyder att det multipliceras med förändringsfaktorn 1,028. Vi ställer oss i B3 och skriver <code>=B2*1,028+5000</code> och får värdet efter den andra insättningen, 10 140 kr.',
               kor: async function () {
-                  // det föregående beloppet, som ska växa med 2,8 % ...
-                  await ringaIn('B2', REFF[0], 1.15);
-                  await sleep(1100);
-                  // ... och den nya insättningen läggs till
                   await klickaCell('B3');
                   await skriv('=B2*1,028+5000', false, 230);
                   var vila = cellPunkt('C7');
@@ -851,8 +843,6 @@
             { namn: 'Skulden minskar med amorteringen varje månad',
               text: 'Ellen amorterar 2 500 kr varje månad (se a), så till nästa månad har skulden minskat med 2 500 kr. Vi ställer oss i B3 och skriver <code>=B2-2500</code>, som ger 147 500 kr. Sedan drar vi i fyllnadshandtaget ner till och med B61. Vid den sista inbetalningen är skulden 2 500 kr, alltså precis det sista amorteringsbeloppet.',
               kor: async function () {
-                  await ringaIn('B2', REFF[0], 1.15);
-                  await sleep(900);
                   await klickaCell('B3');
                   await skriv('=B2-2500', false, 230);
                   var vila = cellPunkt('D7');
@@ -872,8 +862,6 @@
               text: 'Räntan räknas alltid på skulden. Årsräntan är 4,8 % av skulden, och för en månad betalar Ellen en tolftedel av årsräntan. Vi ställer oss i C2 och skriver <code>=B2*0,048/12</code>, som ger 600 kr (samma som i b). Sedan drar vi i fyllnadshandtaget ner till och med C61. Räntan blir 10 kr mindre för varje månad, eftersom skulden minskar.',
               kor: async function () {
                   await rulla(1);
-                  await ringaIn('B2', REFF[0], 1.15);
-                  await sleep(900);
                   await klickaCell('C2');
                   await skriv('=B2*0,048/12', false, 230);
                   var vila = cellPunkt('D7');
@@ -890,8 +878,6 @@
               text: 'Varje inbetalning består av räntan plus amorteringen 2 500 kr. Vi ställer oss i D2 och skriver <code>=C2+2500</code>, som ger 3 100 kr (samma som i b). Sedan drar vi i fyllnadshandtaget ner till och med D61. Den sista inbetalningen blir 2 510 kr.',
               kor: async function () {
                   await rulla(1);
-                  await ringaIn('C2', REFF[0], 1.15);
-                  await sleep(900);
                   await klickaCell('D2');
                   await skriv('=C2+2500', false, 230);
                   var vila = cellPunkt('B8');

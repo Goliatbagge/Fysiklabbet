@@ -20,7 +20,7 @@
  *           eulersdisk, fjaderpendel, skiftnyckel, valtning, gaffelbalans,
  *           gaffelbalans3d, dubbelkon, linjal, fodelsedag, talmangder,
  *           magnetpoler, magnetdelning, koniskpendel, kastvektorer,
- *           snettkast, skjutochslapp, kanonvagn, galton
+ *           snettkast, skjutochslapp, kanonvagn, galton, kalkylblad
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -9803,6 +9803,30 @@
         galtonLaddning.then(montera);
     }
 
+    /* typ: kalkylblad — animerat kalkylblad i Google Kalkylark-stil som
+     * klickas fram steg för steg (textlösningen till Exempel 1 i ma1c-3.4).
+     * Motorn ligger i minisim-kalkylblad.js och laddas först när blocket
+     * finns på sidan, precis som Galtonbrädan. */
+    var kalkylLaddning = null;
+    function buildKalkylblad(node, cfg) {
+        node.classList.add('lab-minisim-kalkylblad');
+        function montera() {
+            if (!window.FYSIKKALKYLBLAD) { node.textContent = 'Kunde inte ladda kalkylbladet.'; return; }
+            window.FYSIKKALKYLBLAD.mount(node, cfg);
+        }
+        if (window.FYSIKKALKYLBLAD) { montera(); return; }
+        if (!kalkylLaddning) {
+            kalkylLaddning = new Promise(function (resolve) {
+                var s = document.createElement('script');
+                s.src = 'minisim-kalkylblad.js?v=' + (window.__CB || '');
+                s.onload = resolve;
+                s.onerror = resolve;
+                document.head.appendChild(s);
+            });
+        }
+        kalkylLaddning.then(montera);
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   cirkularrorelse: buildCirkularrorelse,
                   kastvektorer: buildKastvektorer,
@@ -9818,7 +9842,7 @@
                   linjal: buildLinjal, linjaltrio: buildLinjaltrio,
                   fodelsedag: buildFodelsedag, talmangder: buildTalmangder,
                   magnetpoler: buildMagnetpoler, magnetdelning: buildMagnetdelning,
-                  galton: buildGalton };
+                  galton: buildGalton, kalkylblad: buildKalkylblad };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

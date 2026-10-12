@@ -2465,6 +2465,10 @@ details.lab-forklaring > .formel-harledning-body { padding-top: 12px; }
         margin-left: -22px;
         margin-right: -22px;
     }
+    /* Textlösningen saknar egen padding men klipper i sidled (.lab-block),
+       så en minisim i den (kalkylbladet i ma1c-3.4) skulle kapas i båda
+       kanterna. Låt den gå ut till exempelrutans kant i stället. */
+    .lab-block-textlosning:has(> .lab-minisim) { overflow: visible; }
 }
 
 /* ── Videoklipp (::: video) ──────────────────────────────────────────

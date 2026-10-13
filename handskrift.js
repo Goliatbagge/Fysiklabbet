@@ -11737,12 +11737,26 @@
     A.ticks(heltal(1, 4), [500, 1000, 1500, 2000]);
     T.stepEnd();
 
-    /* punkterna prickas in en i taget, med streckade hjälplinjer */
+    /* punkterna prickas in en i taget, med streckade hjälplinjer. Först
+     * ringar blåpennan in radens x- och y-värde i tabellen, så att eleven
+     * ser varifrån punkten kommer (användarkrav 2026-10-13). Ringarna
+     * tonar ut när punkten är prickad. */
     xv.forEach(function (xval, idx) {
+      var rowCy = TY + (idx + 1.5) * rowH;
+      var rX = { kind: 'stroke', color: BLUE,
+                 pts: ringPts(TX + colW / 2, rowCy, colW / 2 - 8, rowH / 2 - 3) };
+      acts.push(rX);
+      T.pause(220);
+      var rY = { kind: 'stroke', color: BLUE,
+                 pts: ringPts(TX + 1.5 * colW, rowCy, colW / 2 - 3, rowH / 2 - 3) };
+      acts.push(rY);
+      T.pause(260);
       var g = A.guides(xval, yv[idx]);
       T.pause(200);
       A.dot(xval, yv[idx]);
       g.forEach(function (st) { T.fade(st); });
+      T.fade(rX);
+      T.fade(rY);
       T.stepEnd();
     });
 

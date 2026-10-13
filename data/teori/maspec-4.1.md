@@ -203,9 +203,6 @@ från den gemensamma startpunkten.
 :::
 
 Båda metoderna ger samma vektor: fem rutor åt höger och en ruta nedåt.
-
-**Svar:** Se figurerna. Summan går fem rutor åt höger och en ruta
-nedåt.
 :::
 :::
 
@@ -259,8 +256,6 @@ sätta av $-\vec{v}$ och sedan gå lika långt en gång till.
 ::: figur
 <svg viewBox="-4 -11 344 207" width="467" height="281" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Tre konstruerade vektorer: 3u är sex rutor åt höger och tre uppåt. Minus v är en ruta åt höger och två nedåt. Minus 2v är två rutor åt höger och fyra nedåt."><line x1="0" y1="0" x2="0" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="24" y1="0" x2="24" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="48" y1="0" x2="48" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="72" y1="0" x2="72" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="96" y1="0" x2="96" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="120" y1="0" x2="120" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="144" y1="0" x2="144" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="168" y1="0" x2="168" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="192" y1="0" x2="192" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="216" y1="0" x2="216" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="240" y1="0" x2="240" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="264" y1="0" x2="264" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="288" y1="0" x2="288" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="312" y1="0" x2="312" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="336" y1="0" x2="336" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="0" x2="336" y2="0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="24" x2="336" y2="24" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="48" x2="336" y2="48" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="72" x2="336" y2="72" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="96" x2="336" y2="96" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="120" x2="336" y2="120" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="144" x2="336" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="168" x2="336" y2="168" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="192" x2="336" y2="192" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="24.0" y1="168.0" x2="159.1" y2="100.5" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="0,0 -10,4.5 -10,-4.5" transform="translate(168.0,96.0) rotate(-26.6)" fill="#2563c9"/><text x="79.1" y="110.4" font-size="14" fill="#2563c9">3<tspan font-style="italic">u</tspan></text><line x1="85.7" y1="97.39999999999999" x2="94.7" y2="97.39999999999999" stroke="#2563c9" stroke-width="1"/><polygon points="97.7,97.39999999999999 93.7,95.39999999999999 93.7,99.39999999999999" fill="#2563c9"/><line x1="192.0" y1="24.0" x2="211.5" y2="63.1" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="0,0 -10,4.5 -10,-4.5" transform="translate(216.0,72.0) rotate(63.4)" fill="#2563c9"/><text x="218.4" y="36.0" font-size="14" fill="#2563c9">−<tspan font-style="italic">v</tspan></text><line x1="225.5" y1="23.0" x2="234.5" y2="23.0" stroke="#2563c9" stroke-width="1"/><polygon points="237.5,23.0 233.5,21.0 233.5,25.0" fill="#2563c9"/><line x1="240.0" y1="24.0" x2="283.5" y2="111.1" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="0,0 -10,4.5 -10,-4.5" transform="translate(288.0,120.0) rotate(63.4)" fill="#2563c9"/><text x="283.2" y="57.6" font-size="14" fill="#2563c9">−2<tspan font-style="italic">v</tspan></text><line x1="297.9" y1="44.60000000000001" x2="306.9" y2="44.60000000000001" stroke="#2563c9" stroke-width="1"/><polygon points="309.9,44.60000000000001 305.9,42.60000000000001 305.9,46.60000000000001" fill="#2563c9"/><text x="24.0" y="62.4" font-size="14" text-anchor="start" fill="#1f2530">a)</text><text x="172.8" y="4.8" font-size="14" text-anchor="start" fill="#1f2530">b)</text><text x="259.2" y="4.8" font-size="14" text-anchor="start" fill="#1f2530">c)</text></svg>
 :::
-
-**Svar:** Se figuren.
 :::
 :::
 
@@ -314,9 +309,6 @@ $\vec{u}$. Hela parallellogrammen behöver inte ritas.
 :::
 
 Båda metoderna ger samma vektor: en ruta åt höger och fem rutor uppåt.
-
-**Svar:** Se figurerna. Differensen går en ruta åt höger och fem rutor
-uppåt.
 :::
 :::
 

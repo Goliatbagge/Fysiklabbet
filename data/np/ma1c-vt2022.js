@@ -560,7 +560,8 @@ window.NP_PROV['ma1c-vt2022'] = {
                     figur: 'u16-svar',
                 },
             ],
-            svar: 'Området mellan graferna till höger om skärningspunkten $(4,\\ 3)$ — se figuren i steg 3.',
+            /* ritningsuppgift: lösningen slutar med figuren, inget svar (2026-10-13) */
+            svar: '',
             bedomning: [['Korrekt skuggat område', '+A']],
         },
 

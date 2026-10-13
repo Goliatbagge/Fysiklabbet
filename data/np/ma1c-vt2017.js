@@ -120,7 +120,6 @@ window.NP_PROV['ma1c-vt2017'] = {
                         'och beskriver då alla temperaturer däremellan och utanför.',
                     text: 'Dra en rät linje genom $(-18,\\ 0)$ och $(38,\\ 100)$ och förläng den åt båda hållen:',
                     figur: 'u3-los2',
-                    delsvar: { del: 'a', text: 'En rät linje genom $(-18,\\ 0)$ och $(38,\\ 100)$ — se figuren.' },
                 },
                 {
                     del: 'b', rubrik: 'Läs av var linjen skär y-axeln (0 °C)',
@@ -132,7 +131,7 @@ window.NP_PROV['ma1c-vt2017'] = {
                     delsvar: { del: 'b', text: 'Ungefär $32\\degree$F (avläst i intervallet $30$–$35\\degree$F)' },
                 },
             ],
-            svar: '**a)** En rät linje genom $(-18,\\ 0)$ och $(38,\\ 100)$ **b)** ungefär $32\\degree$F ($30$–$35\\degree$F)',
+            svar: '**b)** Ungefär $32\\degree$F ($30$–$35\\degree$F)',
             bedomning: [
                 ['a) Godtagbart ritad graf', '+E'],
                 ['b) Godtagbart svar i intervallet $30$–$35\\degree$F', '+E'],
@@ -380,8 +379,8 @@ window.NP_PROV['ma1c-vt2017'] = {
                     figur: 'u11-los',
                 },
             ],
-            svar: 'En kurva inom $-5 \\leq x \\leq 6$ som går genom $(-3,\\ 0)$ och vars $y$-värden fyller ' +
-                '$-2 \\leq f(x) \\leq 4$ — se exemplet i figuren. (Flera riktiga svar finns.)',
+            /* ritningsuppgift: lösningen slutar med figuren, inget svar (2026-10-13) */
+            svar: '',
             bedomning: [
                 ['Ett av de tre villkoren är uppfyllt', '+E'],
                 ['Godtagbart ritad graf där två av de tre villkoren är uppfyllda', '+C'],

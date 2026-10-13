@@ -629,6 +629,12 @@ förklaringen är inget svar. Felet som utlöste regeln: Exempel 1 i
   gemensam svarsrad sist (`**Svar:** a) …&emsp;&emsp;b) …`).
 - Undantag: bevis och ritningar ("Visa att", "Bevisa", "Härled", "Rita",
   "Konstruera"), där det inte finns något svar att ge.
+  **En ritningsuppgift ("Rita", "Skissa", "Skugga", "Konstruera") slutar
+  när figuren är klar: ingen "Svar:"-rad, varken i pennscenen, i
+  textlösningen eller i provens `svar`/`delsvar`** (användarkrav
+  2026-10-13; "Svar: y = 500 + 400x" efter grafen i `ma1c-4.1` exempel 1c
+  var en övertolkning av regeln). En ritningsuppgift i proven får
+  `svar: ''`, och då visar `np.html` ingen svarsruta.
 - Gäller teorins exempel, övningarnas lösningar, pennscenerna och de
   nationella provens lösningar. Svarsraden följer reglerna 3b och 3f
   under pennlösningarna (ingen bokstav i "Svar:", stor bokstav efter).

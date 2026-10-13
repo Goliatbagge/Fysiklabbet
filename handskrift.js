@@ -11680,7 +11680,7 @@
     ]);
     y += 3.6 * F;
     T.str('Kostnaden', padL, y - 1.6 * F, null, 0.62);
-    xe = T.str('y=500+400x', padL, y);
+    xe = T.str('Svar: y=500+400x', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -11768,10 +11768,9 @@
     A.graphKM(400, 500, null, 0, 4.1);
     T.stepEnd();
 
-    y += 400;
-    xe = T.str('Svar: y=500+400x', padL, y);
-    T.underline(xe, y);
-    T.stepEnd();
+    /* c) är en ritningsuppgift: lösningen slutar när grafen är ritad, och
+     * ingen svarsrad skrivs (användarkrav 2026-10-13) */
+    y += 345;
 
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
@@ -11801,7 +11800,7 @@
       [['proportionalitetskonstanten.']]
     ]);
     y += 3.6 * F;
-    xe = T.str('k=20,00', padL, y);
+    xe = T.str('Svar: y=20,00x, k=20,00', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -11870,10 +11869,9 @@
     A.graphKM(20, 0, null, 0, 20.6);
     T.stepEnd();
 
-    y += 400;
-    xe = T.str('Svar: y=20,00x, k=20,00', padL, y);
-    T.underline(xe, y);
-    T.stepEnd();
+    /* c) är en ritningsuppgift: lösningen slutar när grafen är ritad, och
+     * ingen svarsrad skrivs (användarkrav 2026-10-13) */
+    y += 345;
 
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
@@ -12048,10 +12046,9 @@
     A.graphKM(-2, 3, null, -3.3, 3.3);
     T.stepEnd();
 
-    y += 530;
-    xe = T.str('Svar: Grafen till y=−2x+3', padL, y);
-    T.underline(xe, y);
-    T.stepEnd();
+    /* "Rita grafen": lösningen slutar när grafen är ritad, ingen
+     * svarsrad (användarkrav 2026-10-13) */
+    y += 500;
 
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
@@ -23025,8 +23022,8 @@
       [['igenom varandra utan att ta']],
       [['skada — rimligt!']]
     ]));
-    T.underline(T.str('Svar: Se figurerna ovan', padL, y), y);
-    T.stepEnd();
+    /* "Rita snörets utseende": figurerna är lösningen, ingen svarsrad
+     * (användarkrav 2026-10-13) */
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }

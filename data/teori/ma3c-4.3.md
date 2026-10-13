@@ -147,8 +147,6 @@ växande). Vi förbinder nu de fyra punkterna med en jämn kurva.
 maximipunkten $(-1, 2)$ och minimipunkten $(1, -2)$ med fyllda röda punkter.
 Kurvan är växande fram till maximipunkten, avtagande mellan max- och
 minimipunkten, och därefter växande igen fram till högra ändpunkten.*
-
-**Svar:** Se grafen ovan.
 :::
 :::
 

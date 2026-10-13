@@ -1495,7 +1495,8 @@
             // Har deluppgifterna egna delsvar behövs ingen samlad svarsbild
             // på slutet — presentationen slutar efter sista stegets delsvar.
             const harDelsvar = uppgift.steg.some(s => s.delsvar);
-            const total = antalSteg + (harDelsvar ? 1 : 2); // uppgiften + stegen (+ ev. svaret)
+            // En ritningsuppgift (svar: '') slutar med figuren och får ingen svarsbild.
+            const total = antalSteg + (harDelsvar || !uppgift.svar ? 1 : 2); // uppgiften + stegen (+ ev. svaret)
             const [step, setStep] = useState(() => Math.min(startStep || 0, total));
             const [chrome, setChrome] = useState(true);
             // Nålen på uppgiftskortet släpps när kortet inte ryms (NP_PRES_TAK)
@@ -1678,7 +1679,7 @@
                                     </div>
                                 </div>
                             ))}
-                            {!harDelsvar && (
+                            {!harDelsvar && uppgift.svar && (
                                 <div className={cls(total)} ref={el => { stageRefs.current[total] = el; }}>
                                     <div className="np-svar">
                                         <span className="np-kortlabel">Svar</span>
@@ -1937,7 +1938,7 @@
                         <div className="np-svar" ref={svarEl}>
                             {/* Har deluppgifterna egna delsvar är det samlade
                                 svaret överflödigt — visa bara bedömningen. */}
-                            {!uppgift.steg.some(s => s.delsvar) && (
+                            {!uppgift.steg.some(s => s.delsvar) && uppgift.svar && (
                                 <React.Fragment>
                                     <span className="np-kortlabel">Svar</span>
                                     <MdBlock source={uppgift.svar} />

@@ -211,12 +211,9 @@ window.NP_PROV['ma4-vt2022'] = {
                         '$x = 0,\\ 2\\pi,\\ 4\\pi,\\ 6\\pi$. I rutnätet: toppen ligger på andra rutlinjen, ' +
                         'och kurvan går genom $x$-axeln på var fjärde rutlinje.',
                     figur: 'u3-s2',
-                    delsvar: { del: 'b', text: 'En sinuskurva med amplituden $1$ och perioden $4\\pi$, ' +
-                        'med topp i $x = \\pi$ (se figuren).' },
                 },
             ],
-            svar: 'a) $x = 6\\pi$&emsp;&emsp;b) Kurvan $y = \\sin \\dfrac{x}{2}$ har amplituden $1$ och ' +
-                'perioden $4\\pi$ (se figuren).',
+            svar: '$x = 6\\pi$',
             bedomning: [
                 ['a) Korrekt svar ($6\\pi$)', '+E'],
                 ['b) Godtagbar skiss av kurvan $y = \\sin \\dfrac{x}{2}$ där godtagbar amplitud och period framgår', '+E'],

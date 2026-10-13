@@ -296,11 +296,9 @@
     });
     T.stepEnd();
 
-    y += 3.0 * F;
-    xe = T.str('Svar: Den blå kurvan i figuren', padL, y);
-    T.underline(xe, y);
-    T.stepEnd();
-
+    /* ritningsuppgift: lösningen slutar med figuren, ingen svarsrad
+     * (användarkrav 2026-10-13) */
+    y += 1.0 * F;   /* figurens nedersta bläck ska rymmas på arket */
     return { acts: acts, contentW: 640, lastBase: y + 1.4 * F, padL: padL };
   });
 

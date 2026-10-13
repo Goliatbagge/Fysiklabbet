@@ -1253,10 +1253,8 @@
     T.str('(4, 3) och åt höger.', padL + 30, y);
     T.stepEnd();
 
-    y += 2.3 * F;
-    xe = T.str('Svar: Se skuggningen i figuren', padL, y);
-    T.underline(xe, y);
-    T.stepEnd();
+    /* ritningsuppgift: lösningen slutar med figuren, ingen svarsrad
+     * (användarkrav 2026-10-13) */
 
     return { acts: acts, contentW: 620, lastBase: y + 1.4 * F, padL: padL };
   });

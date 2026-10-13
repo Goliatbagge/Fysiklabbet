@@ -597,9 +597,8 @@
     T.stepEnd();
 
     y = 530;
-    xe = T.str('a) Se linjen i figuren.', padL, y);
-    T.underline(xe, y);
-    T.stepEnd();
+    /* ritningsuppgift: a) slutar med figuren, ingen svarsrad
+     * (användarkrav 2026-10-13) */
 
     /* ---- b) ---- */
     tanke(y, [
@@ -837,10 +836,8 @@
       [['uppfyller de tre villkoren']],
       [['duger.']]
     ]);
-    y += 2.6 * F;
-    xe = T.str('Svar: Se grafen i figuren', padL, y);
-    T.underline(xe, y);
-    T.stepEnd();
+    /* ritningsuppgift: lösningen slutar med figuren, ingen svarsrad
+     * (användarkrav 2026-10-13) */
 
     return { acts: acts, contentW: 620, lastBase: y + 1.4 * F, padL: padL };
   });

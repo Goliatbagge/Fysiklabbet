@@ -16,6 +16,12 @@ Format per post:
   Källa (Phys.org 2026-10-07): https://phys.org/news/2026-10-levitating-glass-sphere-entangled-room.html
   (tillagd 2026-10-08)
 
+- **Einsteins ekvationer härledda ur kvantinformation** — Phys.org 2026-10-13 (”Gravity and quantum information linked through a derivation of Einstein's equations”). Teoretiskt, gravitation/allmän relativitetsteori. Originalet ej kontrollerat. Källa: https://phys.org/news/2026-10-gravity-quantum-linked-derivation-einstein.html
+  (tillagd 2026-10-13)
+
+- **2D-halvledare vars magnetism slås på med spänning** — Phys.org 2026-10-13 (”From nonmagnetic to magnetic”). Ingång: magnetism, halvledare. OBS: magnetism publicerades 2026-10-13, vänta. Originalet ej kontrollerat. Källa: https://phys.org/news/2026-10-nonmagnetic-magnetic-2d-semiconductor-electrically.html
+  (tillagd 2026-10-13)
+
 - **Titan som flyter: ihåliga gitter fyllda med skum** — RMIT har 3D-skrivit gitter av titanlegering vars ihåliga stavar fylls med polyuretanskum, så att konstruktionen flyter trots att vatten strömmar igenom den (skelettdensitet under vattnets). Ingång: densitet, Arkimedes princip. Advanced Materials, DOI 10.1002/adma.74641 (CC BY-NC-ND), men Wiley gav 403 för både curl och headless Chrome 2026-10-11; försök via RMIT:s arkiv eller en annan väg. Källa (Physics World 2026-10-07): https://physicsworld.com/a/titanium-polymer-metamaterial-floats-in-water/
   (tillagd 2026-10-11)
 

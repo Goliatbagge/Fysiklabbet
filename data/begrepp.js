@@ -61,6 +61,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'permeabilitet',
+    term: 'Permeabilitet',
+    former: ['permeabilitet', 'permeabiliteten', 'magnetisk permeabilitet', 'magnetiska permeabiliteten', 'relativ permeabilitet'],
+    kort: 'Ett mått på hur lätt ett material leder magnetfält. Järn har mycket hög permeabilitet och drar in fältlinjerna i sig, medan luft och de flesta andra ämnen påverkar fältet nästan inte alls.',
+    relaterade: ['supraledare', 'diamagnetism'],
+    body: [
+      { type: 'p', html: 'Håll en spik nära en magnet, så blir spiken själv magnetisk och kan lyfta en annan spik. Järnet har förstärkt fältet. Permeabilitet, som betecknas med den grekiska bokstaven <em>μ</em> (my), är storheten som talar om hur mycket ett material gör det. I tomrummet har den ett bestämt värde, och för andra material anger man ofta hur många gånger större den är. Den kallas då relativ permeabilitet.' },
+      { type: 'p', html: 'Luft, vatten, trä och plast har en relativ permeabilitet som är nästan exakt 1: de släpper igenom magnetfältet som om de inte fanns. Mjukt järn och vissa järn-nickellegeringar kan däremot ha värden på flera tusen eller till och med hundratusentals. Fältlinjerna samlas då hellre i järnet än i luften runt omkring, ungefär som vatten som hellre rinner i en fåra än över en äng. Därför sitter det järnkärnor i transformatorer och elektromagneter, och därför används järnskärmar för att leda bort magnetfält från känsliga instrument.' },
+      { type: 'p', html: 'Ett material med mycket hög permeabilitet har en speciell egenskap vid ytan: fältlinjerna går alltid rakt in, vinkelrätt mot ytan. Motsatsen är en supraledare, som stöter ut magnetfältet helt. Där stryker fältlinjerna i stället längs ytan, och man kan säga att permeabiliteten i praktiken är noll. Genom att kombinera de två sorternas material går det att styra fältlinjerna mycket noggrant.' }
+    ]
+  },
+  {
+    id: 'magnetisk-monopol',
+    term: 'Magnetisk monopol',
+    former: ['magnetisk monopol', 'magnetiska monopoler', 'magnetiska monopolen', 'monopol', 'monopoler', 'ensam magnetisk pol'],
+    kort: 'En tänkt partikel som bara har en magnetisk pol, alltså en nordända utan sydända eller tvärtom. Teorier förutsäger att sådana kan finnas, men ingen har hittat en.',
+    relaterade: ['magnetiskt-moment'],
+    body: [
+      { type: 'p', html: 'Bryt en stavmagnet mitt itu, så får du inte en lös nordända och en lös sydända. Du får två nya, kortare magneter, var och en med både nordända och sydända. Bryter du dem igen händer samma sak, ända ned till enskilda atomer och elektroner. Magnetpoler uppträder alltid parvis. En magnetisk monopol vore en partikel med bara den ena polen.' },
+      { type: 'p', html: 'Med elektrisk laddning är det annorlunda: en elektron har en ensam negativ laddning, och fältlinjerna strålar rakt in mot den från alla håll. En monopol skulle ge ett magnetfält med samma form, med fältlinjer som strålar rakt ut från en punkt. Fysikern Paul Dirac visade redan 1931 att om det finns en enda monopol någonstans i universum, så förklarar det varför elektrisk laddning alltid kommer i hela multipler av en minsta laddning.' },
+      { type: 'p', html: 'Många teorier som försöker förena naturkrafterna förutsäger att monopoler bildades i det tidiga universum. Trots att man letat i kosmisk strålning, i månsten och i partikelacceleratorer har ingen hittats. Däremot kan forskare skapa fält som ser ut som en monopols i ett avgränsat område, och vissa material innehåller kollektiva tillstånd som beter sig som monopoler utan att vara egna partiklar.' }
+    ]
+  },
+  {
+    id: 'utspadningskryostat',
+    term: 'Utspädningskryostat',
+    former: ['utspädningskryostat', 'utspädningskryostaten', 'utspädningskryostater', 'utspädningskylskåp'],
+    kort: 'En kylmaskin som når temperaturer omkring en hundradels grad över absoluta nollpunkten, genom att blanda två sorters helium. Används för kvantdatorer och supraledare.',
+    relaterade: ['absoluta-nollpunkten', 'supraledare'],
+    body: [
+      { type: 'p', html: 'Ett vanligt kylskåp kyler genom att låta ett köldmedium förångas: vätskan tar energi från omgivningen när den blir gas. En utspädningskryostat bygger på en liknande idé, men med helium, och den når ned till omkring 0,01&nbsp;kelvin. Det är kallare än i rymden mellan galaxerna.' },
+      { type: 'p', html: 'Helium finns i två sorter, helium-4 och den lättare och ovanligare helium-3. Under omkring 0,9&nbsp;kelvin delar sig en blandning av dem i två skikt, ungefär som olja och vatten. I det ena skiktet är helium-3 utspätt i helium-4. När helium-3-atomer pumpas över från det koncentrerade skiktet till det utspädda behöver de energi, och den tar de från omgivningen. Pumpar man runt helium-3 hela tiden fortsätter kylningen, utan några rörliga delar i den kallaste delen.' },
+      { type: 'p', html: 'Kryostaten ser ofta ut som en ljuskrona av förgyllda kopparplattor, där varje våning är kallare än den ovanför. Längst ned sitter provet. Supraledande kvantdatorer, känsliga strålningsdetektorer och experiment med supraledare kräver den här sortens kyla.' }
+    ]
+  },
+  {
     id: 'landauers-princip',
     term: 'Landauers princip',
     former: ['landauers princip', 'landauerprincipen', 'landauers gräns', 'landauergränsen'],

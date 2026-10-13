@@ -103,6 +103,74 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-13-magnetfaltet-som-formas-om",
+    date: "2026-10-13",
+    title: "Järn och en supraledare ger magnetfältet precis den form man vill",
+    deck: "Ett magnetfält får normalt den form som magneten eller spolen bakom det ger. Forskare i Barcelona och vid Chalmers i Göteborg har visat hur ett fält från vilken källa som helst kan formas om till exakt den form man vill, inuti ett avgränsat område. Verktygen är gjutjärn och supraledande aluminium.",
+    category: "Magnetism",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-13-magnetfaltet-som-formas-om.jpg",
+    imageAlt: "Ett blankt metallrör med en smal längsgående springa och svarta lock i båda ändar ligger på en kopparplatta. Bredvid ligger en platt spole av koppartråd. Blå fältlinjer böjer sig från spolen mot röret och löper raka och parallella i rörets uppskurna mitt.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["magnetism", "magnetfält", "fältlinjer", "supraledare", "ferromagnetism", "permeabilitet", "homogent fält", "spole", "kvantteknik", "chalmers"],
+    sources: [
+      { name: "Phys.org: Magnetic sculpting transforms single-source fields into predetermined shapes with mathematical precision (oktober 2026, pressmeddelande från Chalmers)", url: "https://phys.org/news/2026-10-magnetic-sculpting-source-fields-predetermined.html" },
+      { name: "Science Advances: studien i fulltext via Europe PMC", url: "https://europepmc.org/article/PMC/PMC13651880" }
+    ],
+    research: {
+      citation: "J. Cunill-Subiranas, N. Bort-Soldevila, F. Resare, N. Del-Valle, W. Wieczorek och C. Navau, ”Magnetic omniconversion: Source-independent molding of magnetostatic fields”, Science Advances 12, eaeh5747 (2026). Kollegialt granskad och öppet tillgänglig (CC BY 4.0).",
+      url: "https://doi.org/10.1126/sciadv.aeh5747"
+    },
+    simulering: {
+      href: "fysik2-magnetfalt-spole-app.html",
+      name: "Magnetfält i spole",
+      text: "Ändra strömmen, varvtalet och spolens längd och se hur fältlinjerna blir raka och jämnt fördelade inuti spolen men böjer sig utanför den."
+    },
+    larare: {
+      moment: [
+        { label: "Magnetism och magnetfält", href: "katalog.html?id=fy2-3.1" },
+        { label: "Magnetfält i spole", href: "katalog.html?id=fy2-3.3" }
+      ],
+      fragor: [
+        "Fältlinjer går rakt in i en järnyta men stryker längs ytan på en supraledare. Varför behövs båda sorternas material för att få ett jämnt fält inne i röret? Vad hade hänt med bara järnlocken, och med bara röret?",
+        "Formen på fältet i röret blir densamma vilken källa man än använder, men styrkan ändras. Varför är det rimligt att formen och styrkan beror på olika saker?",
+        "En lång spole ger också ett nästan homogent fält i sitt inre. Vilka fördelar och nackdelar har metoden i studien jämfört med att bara bygga en längre spole?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Strö järnfilspån runt en stavmagnet, så ritar spånen upp fältlinjerna: bågar som går ut från ena änden och böjer sig tillbaka mot den andra. Fältets form bestäms av magneten. Vill man ha ett annat fält får man byta magnet, eller bygga ihop flera spolar som tillsammans ger något som liknar det man är ute efter. Ett jämnt, homogent fält får man till exempel nästan inuti en lång spole, men bara nästan. Vid ändarna böjer linjerna av.' },
+      { type: 'p', html: 'Forskare vid Universitat Autònoma de Barcelona och Chalmers tekniska högskola i Göteborg har nu visat att det går att göra på ett annat sätt. Med rätt material runt ett område kan fältet från vilken källa som helst formas om, så att det inne i området får exakt den form man har bestämt i förväg. Studien har publicerats i den kollegialt granskade tidskriften <em>Science Advances</em>, och forskarna kallar metoden magnetisk omnikonvertering.' },
+      { type: 'quote', html: 'Det här är en universell metod som tar bort tidigare begränsningar för hur exakt ett befintligt magnetfält kan omvandlas till ett annat.', cite: 'Witlef Wieczorek, professor i kvantteknik vid Chalmers, i högskolans pressmeddelande' },
+
+      { type: 'h2', text: 'Kanterna bestämmer allt som finns innanför' },
+      { type: 'p', html: 'Idén vilar på en sats ur elläran som har över hundra år på nacken. I ett område där det inte finns några strömmar eller magneter är fältet helt bestämt av vad som gäller på områdets kanter. En liknelse är en gummiduk som spänns upp i en ram: duken kan bara lägga sig på ett enda sätt, och formen avgörs av ramens kanter, inte av vad som händer utanför ramen.' },
+      { type: 'p', html: 'Forskarna utgår därför från det fält de vill ha och ritar dess fältlinjer. Sedan väljer de en yta som fältlinjerna löper längs med, och två ytor som linjerna går rakt igenom. Ytorna bildar tillsammans ett slutet rum. Lyckas man tvinga ett verkligt fält att uppföra sig likadant på just de ytorna, blir fältet i rummet innanför exakt det man ritade, oavsett var källan sitter.' },
+
+      { type: 'h2', text: 'Ett material som drar till sig fältlinjerna och ett som stöter bort dem' },
+      { type: 'p', html: 'Två sorters material gör jobbet. Mjukt järn har mycket hög permeabilitet, $\\mu$, det vill säga det leder magnetfält oerhört mycket bättre än luft. Fältlinjerna sugs in i järnet och går därför alltid rakt in i dess yta, vinkelrätt. Ett lock av järn blir alltså en yta som linjerna går rakt igenom.' },
+      { type: 'p', html: 'En supraledare gör tvärtom. Den trycker ut magnetfältet ur sitt inre, så fältlinjerna kan inte tränga in utan stryker längs med ytan. En vägg av supraledare blir därför en yta som fältlinjerna löper parallellt med. Formar man supraledaren efter linjerna i det önskade fältet, och sätter järn där linjerna ska gå rakt igenom, är rummet färdigt.' },
+      { type: 'p', html: 'I datorberäkningar visar forskarna att receptet fungerar för många olika former. Fältet från en liten, snett placerad magnet utanför ett cylinderformat rum blev helt jämnt inne i rummet. Det gick också att få fältet att se ut som från en magnet som står i en helt annan riktning, att få fältlinjerna att löpa i parabelbågar, och att få dem att stråla rakt ut åt alla håll från en punkt, som om fältet kom från en ensam magnetisk pol. Någon sådan ensam pol har aldrig hittats i naturen, men inne i rummet går fältet alltså att forma som om den fanns.' },
+      { type: 'image', src: 'nyheter/bilder/2026-10-13-magnetfaltet-som-formas-om-3.jpg', alt: 'Sex färglagda datorberäkningar av magnetfält med svarta fältlinjer. I de två första är linjerna raka och parallella inne i en rektangel. I de andra bildar de en strålande stjärna, ett kryss och parabelformade bågar, inneslutna av vita och röda väggar.', caption: 'Beräknade fält från studien. A och B: ett helt jämnt fält inne i en cylinder, från en liten magnet respektive en strömslinga utanför. C till F: andra former ur samma recept, bland annat fältlinjer som strålar ut från en punkt (D) och linjer i parabelbågar (F). Röd färg visar starkt fält.', credit: 'Figur: Cunill-Subiranas med flera, Science Advances (CC BY 4.0)' },
+
+      { type: 'h2', text: 'Försöket i kylskåpet vid Chalmers' },
+      { type: 'p', html: 'För att visa att verkliga material räcker byggde forskarna en enkel version. Ett rör av mycket rent aluminium, 100&nbsp;millimeter långt och med 45&nbsp;millimeters innerdiameter, fick lock av gjutjärn i båda ändarna. Aluminium blir supraledande strax över 1&nbsp;kelvin, och försöket gjordes i en utspädningskryostat vid Chalmers, under 0,15&nbsp;kelvin. Utanför ena änden satt en platt, cirkelformad spole, alltså en källa vars fält är allt annat än jämnt.' },
+      { type: 'p', html: 'Inne i röret satt elva små magnetfältsgivare på ett kretskort. Med bara spolen varierade fältet kraftigt längs röret: givarnas värden spreds med omkring 82&nbsp;procent kring medelvärdet. När aluminiumet kyldes så att det blev supraledande, och järnlocken satt på plats, sjönk spridningen till omkring 12&nbsp;procent. Mätningarna stämde med datorberäkningarna inom någon procent.' },
+      { type: 'image', src: 'nyheter/bilder/2026-10-13-magnetfaltet-som-formas-om-2.jpg', alt: 'Överst fyra datorritade uppställningar: ett kretskort med en spole, kretskortet mellan två svarta lock, kretskortet i ett rör med springa, och röret med lock. Under varje uppställning en färgad rektangel med fältlinjer. I de två vänstra böjer sig linjerna och färgen går från gult till lila, i de två högra är linjerna raka och färgen jämn.', caption: 'Försöket i fyra steg (A till D) och det beräknade fältet inne i röret (E till H). Med bara spolen (E) eller bara järnlocken (F) är fältet starkt i ena änden och svagt i den andra. Med det supraledande röret (G) och röret med lock (H) blir fältlinjerna raka och fältet nästan lika starkt överallt. De små rutorna visar var givarna satt.', credit: 'Figur: Cunill-Subiranas med flera, Science Advances (CC BY 4.0)' },
+      { type: 'p', html: 'Att fältet inte blev helt perfekt beror enligt forskarna främst på en millimeterbred springa längs röret. Utan den skulle supraledaren kunna bära en ström runt röret som förstör effekten, och genom springan gick dessutom ledningarna till givarna. Beräkningarna med springan inräknad gav nästan samma avvikelse som mätningen, och det tyder på att materialen själva gör vad de ska.' },
+      { type: 'quote', html: 'Med kombinationer av spolar går det att efterlikna ett önskat magnetfält med hög precision, men med magnetisk omnikonvertering blir fältet som skapas matematiskt exakt.', cite: 'Fabian Resare, doktorand i kvantteknik vid Chalmers, i högskolans pressmeddelande' },
+
+      { type: 'h2', text: 'Formen följer med, styrkan gör det inte' },
+      { type: 'p', html: 'En viktig detalj är att bara fältets form blir oberoende av källan. Hur starkt fältet blir i rummet beror fortfarande på hur stark källan är och var den sitter. Och fältets form är exakt bara om materialen är idealiska. Verkligt järn leder inte fältet oändligt bra, och supraledare kräver kraftig kylning.' },
+      { type: 'p', html: 'Forskarna pekar ut tillämpningar där magnetfältets form är avgörande: magnetkameror på sjukhus, atomur, fällor för laddade partiklar och partikelacceleratorer. Gruppen på Chalmers arbetar själv med att få små supraledande kulor att sväva i magnetfält, för att studera kvantfysik hos föremål som är stora nog att se i mikroskop. Där kan ett fält med rätt form göra stor skillnad. Samtliga författare står bakom en patentansökan på tekniken.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Samma recept fungerar i princip för elektriska fält, men där saknas ett material som motsvarar supraledaren. Ett sådant material skulle behöva ha lägre permittivitet än tomrummet, och det kan inget passivt material ha i ett konstant fält.',
+        'Aluminium är en så kallad typ I-supraledare. Det trycker ut magnetfältet helt, utom i ett tunt skikt närmast ytan som bara är omkring 50&nbsp;nanometer tjockt. I ett rör med millimetertjocka väggar spelar skiktet ingen roll.',
+        'Att magnetiska material kan styra fältlinjer används redan i dag. Känsliga instrument skyddas mot jordens magnetfält med skärmar av så kallad mumetall, en järn-nickellegering som leder in fältlinjerna i skärmen och förbi det som ska skyddas.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-12-ljus-genom-mjolk",
     date: "2026-10-12",
     title: "Ett lager mjölk gör laserbilden skarpare",

@@ -1283,11 +1283,12 @@ i `kopplingsschema.js`; läs dem innan du ändrar något.
 - **Menyvalet Resurser** (infört 2026-09-30, hette tidigare Verktyg) ligger
   efter Nationella prov i huvudmenyn. Det är en rullgardin med två grupper,
   byggda som Ämne-menyns grupper (`.lab-nav-dd-grupp`): **Verktyg**
-  (Kopplingsschema, Sannolikhetskalkylator, Sammanfattningar) och **Övningsblad** (Fysik, Matematik, som går till
-  `ovningsblad.html#fysik`/`#matematik`). Menyn finns på tretton sidor:
+  (Kopplingsschema, Sannolikhetskalkylator, Sammanfattningar,
+  Slumpa grupper) och **Övningsblad** (Fysik, Matematik, som går till
+  `ovningsblad.html#fysik`/`#matematik`). Menyn finns på fjorton sidor:
   `avsnitt`, `begrepp`, `index`, `katalog`, `kontakt`, `nyheter`,
   `nyhetsbrev`, `om`, `simuleringar`, `np`, `kopplingsschema`,
-  `sannolikhetskalkylator` och `ovningsblad` (samt
+  `sannolikhetskalkylator`, `slumpa-grupper` och `ovningsblad` (samt
   `utkast/sannolikhetshornan.html`). Ett nytt verktyg läggs till i alla;
   en ny sida med huvudmenyn ska ha Resurser med.
 - **`sammanfattningar.html`** (2026-10-05) visar avsnittens
@@ -1338,6 +1339,25 @@ SEO-upplägg som kopplingsschemat. Strukturen beskrivs i filhuvudet.
 - `utkast/sannolikhetskalkylator.html` är en vidarebefordran från
   förhandsvisningens adress. Öka `?v=` på skriptet när det ändras.
 - Teoriavsnittet `ma2c-6.5` länkar till verktyget.
+
+### Slumpa grupper (slumpa-grupper.html)
+
+Tredje verktyget (2026-10-13): `slumpa-grupper.html` + `slumpa-grupper.js`,
+omskrivet från lärarens egen app Slumpify (repot `Goliatbagge/slumpify`,
+React + Firebase) till sajtens stil. Strukturen beskrivs i filhuvudet.
+
+- **Ingen inloggning och inget moln.** Klasslistor, inställningar och
+  senaste indelning ligger i `localStorage` (nyckeln `slumpaGrupper.v1`);
+  närvaron och de tillfälliga eleverna nollställs varje ny dag. Lägg aldrig
+  till något som skickar elevnamn till en server.
+- **Spara och öppna som fil** ersätter Slumpifys molnsynk. Filformatet
+  (`format: 'fysiklabbet-slumpa-grupper'`, `version: 1`) står i filhuvudet;
+  ändras det ska äldre filer fortfarande gå att öppna. En textfil med ett
+  namn per rad öppnas som ny klasslista.
+- "Hellre större grupper" får bara göra grupperna en elev större än valt
+  (7 elever, fyra per grupp blir 4 + 3, inte en grupp med sju).
+- FAQ:n i JSON-LD ska vara ordagrant samma som de synliga frågorna. Öka
+  `?v=` på skriptet när det ändras.
 
 ## Besöksstatistik
 

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<title>Slumpa grupper: gruppgenerator för klassrummet — Fysiklabbet</title>
+<meta name="description" content="Slumpa fram grupper ur din klasslista. Bocka för vilka som är här, välj gruppstorlek, bestäm vilka som ska arbeta tillsammans eller hållas isär och flytta elever med musen. Spara grupperna som fil. Gratis och utan inloggning.">
+<link rel="canonical" href="https://fysiklabbet.se/slumpa-grupper.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fysiklabbet">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:title" content="Slumpa grupper: gruppgenerator för klassrummet">
+<meta property="og:description" content="Slumpa fram grupper ur din klasslista. Bocka för vilka som är här, välj gruppstorlek, bestäm vilka som ska arbeta tillsammans eller hållas isär och flytta elever med musen. Spara grupperna som fil. Gratis och utan inloggning.">
+<meta property="og:url" content="https://fysiklabbet.se/slumpa-grupper.html">
+<meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Slumpa grupper: gruppgenerator för klassrummet">
+<meta name="twitter:description" content="Slumpa fram grupper ur din klasslista. Bocka för vilka som är här, välj gruppstorlek, bestäm vilka som ska arbeta tillsammans eller hållas isär och flytta elever med musen. Spara grupperna som fil. Gratis och utan inloggning.">
+<meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Slumpa grupper",
+   "alternateName": [
+    "Gruppgenerator",
+    "Slumpa elevgrupper",
+    "Dela in klassen i grupper"
+   ],
+   "url": "https://fysiklabbet.se/slumpa-grupper.html",
+   "description": "Slumpa fram grupper ur din klasslista. Bocka för vilka som är här, välj gruppstorlek, bestäm vilka som ska arbeta tillsammans eller hållas isär och flytta elever med musen. Spara grupperna som fil. Gratis och utan inloggning.",
+   "applicationCategory": "EducationalApplication",
+   "operatingSystem": "Webbläsare",
+   "inLanguage": "sv",
+   "isAccessibleForFree": true,
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "SEK"
+   },
+   "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "teacher"
+   },
+   "featureList": [
+    "Klasslistor som sparas i webbläsaren",
+    "Närvaro: bocka av den som inte är här",
+    "Elever per grupp eller antal grupper",
+    "Villkor: elever som ska arbeta tillsammans eller hållas isär",
+    "Flytta och byt elever mellan grupperna",
+    "Storskärmsläge för projektorn",
+    "Spara grupper och klasslistor som fil, utan konto",
+    "Kopiera grupperna som text eller skriv ut dem"
+   ],
+   "publisher": {
+    "@type": "Organization",
+    "name": "Fysiklabbet",
+    "url": "https://fysiklabbet.se/"
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Start",
+     "item": "https://fysiklabbet.se/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Slumpa grupper",
+     "item": "https://fysiklabbet.se/slumpa-grupper.html"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Var sparas mina klasslistor?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Klasslistorna sparas bara i din egen webbläsare, på den dator du använder. Inga namn skickas till någon server. Vill du använda en lista på en annan dator sparar du den som fil och öppnar filen där."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Hur sparar jag en gruppindelning?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Välj Spara grupperna som fil i menyn Spara. Filen innehåller både grupperna och klasslistan, och när du öppnar den igen visas grupperna precis som du lämnade dem. Grupperna kan också sparas som textfil, kopieras som text eller skrivas ut."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Vad händer om eleverna inte går jämnt ut i grupperna?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Då väljer du om du hellre vill ha några större eller några mindre grupper. Med 25 elever och fyra per grupp blir det antingen sex grupper, där en har fem elever, eller sju grupper, där tre har tre elever. Grupperna blir aldrig mer än en elev olika stora."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Kan jag bestämma att två elever inte ska hamna i samma grupp?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Ja. Lägg till ett villkor och välj Hålls isär, eller Tillsammans om de ska arbeta ihop. Villkoret kan gälla alltid eller bara nästa slumpning. Villkor som ska gälla alltid sparas med klasslistan."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Kostar verktyget något?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Nej. Verktyget är gratis och kräver inget konto."
+     }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<link rel="stylesheet" href="styles-laborans.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f3eee4;
+  --bg2: #ebe4d4;
+  --panel: #fffdf9;
+  --ink: #0f1620;
+  --soft: #3f4a5c;
+  --muted: #69655c;
+  --line: rgba(15, 22, 32, 0.10);
+  --line2: rgba(15, 22, 32, 0.20);
+  --accent: #c8324a;
+  --accent-soft: rgba(200, 50, 74, 0.08);
+  --blue: #1c3d6b;
+  --green: #3f7a34;
+  --amber: #a5641a;
+  --shadow: 0 1px 2px rgba(15, 22, 32, 0.05), 0 12px 32px -18px rgba(15, 22, 32, 0.28);
+  --sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --serif: "Instrument Serif", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background:
+    radial-gradient(900px 500px at 12% -10%, rgba(200, 50, 74, 0.06), transparent 60%),
+    radial-gradient(900px 600px at 100% 0%, rgba(28, 61, 107, 0.06), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font-family: inherit; font-size: inherit; color: inherit; }
+.lab-header { background: var(--bg); }
+.lab-nav-dd-trigger.aktiv { border-bottom-color: var(--lab-accent); }
+[hidden] { display: none !important; }
+
+/* ---------- Sidhuvud ---------- */
+.top { display: flex; align-items: center; gap: 22px; padding: 14px 22px 12px; max-width: 1480px; margin: 0 auto; }
+.titles { flex: 1; min-width: 0; }
+.titles h1 { font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1; margin: 0; letter-spacing: -.01em; }
+.titles h1 em { color: var(--accent); }
+.titles p { margin: 5px 0 0; color: var(--soft); font-size: 13.5px; }
+.actions { display: flex; align-items: center; gap: 8px; }
+.ibtn { width: 40px; height: 40px; flex: none; border-radius: 11px; border: 1px solid var(--line2); background: var(--panel); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: border-color .15s, transform .15s; }
+.ibtn:hover { border-color: var(--ink); }
+.ibtn:active { transform: scale(.96); }
+.split { display: inline-flex; position: relative; }
+.primary { height: 40px; padding: 0 16px 0 14px; border: 0; border-radius: 11px; background: var(--ink); color: #fff; font: 600 14px var(--sans); display: inline-flex; align-items: center; gap: 9px; cursor: pointer; transition: background .15s; }
+.primary:hover { background: #22324a; }
+.primary:disabled { opacity: .45; cursor: default; }
+.split .primary:first-child { border-radius: 11px 0 0 11px; box-shadow: 0 8px 18px -10px rgba(15, 22, 32, .7); }
+.split .more { border-radius: 0 11px 11px 0; padding: 0 11px; border-left: 1px solid rgba(255, 255, 255, .16); }
+.menu { position: absolute; right: 0; top: calc(100% + 8px); width: 300px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 24px 48px -20px rgba(15, 22, 32, .45); padding: 8px; display: none; z-index: 40; }
+.menu.open { display: block; animation: pop .16s ease-out; }
+@keyframes pop { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.menu button { width: 100%; display: flex; gap: 11px; align-items: flex-start; text-align: left; background: none; border: 0; border-radius: 10px; padding: 9px 10px; cursor: pointer; }
+.menu button:hover { background: var(--bg); }
+.menu button:disabled { opacity: .4; cursor: default; background: none; }
+.menu button svg { flex: none; margin-top: 2px; color: var(--soft); }
+.menu .mt { display: block; font-weight: 600; font-size: 14px; }
+.menu .ms { display: block; font-size: 12.5px; color: var(--muted); margin-top: 1px; }
+.menu hr { border: 0; border-top: 1px solid var(--line); margin: 6px 4px 8px; }
+
+/* ---------- Arbetsytan ---------- */
+.app { display: grid; grid-template-columns: 300px minmax(0, 1fr) 320px; gap: 14px; padding: 0 22px 28px; max-width: 1480px; margin: 0 auto; align-items: start; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); }
+.app > aside.panel { position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow: auto; scrollbar-width: thin; }
+.sec { padding: 16px 16px 18px; border-bottom: 1px solid var(--line); }
+.sec:last-child { border-bottom: 0; }
+.sec-h { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 12px; }
+.sec-h h2 { margin: 0; font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.sec-h .cnt { font-size: 12.5px; color: var(--soft); }
+.row { display: flex; gap: 6px; align-items: center; }
+.row > select { flex: 1; min-width: 0; }
+select, .inp, textarea { border: 1px solid var(--line2); border-radius: 10px; background: #fff; padding: 8px 10px; font-size: 14px; outline: none; transition: border-color .15s, box-shadow .15s; }
+select { height: 38px; padding: 0 8px; cursor: pointer; }
+select:focus, .inp:focus, textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(28, 61, 107, .12); }
+.ib { width: 38px; height: 38px; flex: none; border-radius: 10px; border: 1px solid var(--line2); background: #fff; display: grid; place-items: center; cursor: pointer; color: var(--soft); transition: border-color .15s, color .15s; }
+.ib:hover { border-color: var(--ink); color: var(--ink); }
+.ib.fara:hover { border-color: var(--accent); color: var(--accent); }
+.ghost { border: 1px solid var(--line2); background: #fff; border-radius: 10px; height: 34px; padding: 0 12px; font-size: 13px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; transition: border-color .15s; }
+.ghost:hover { border-color: var(--ink); }
+.ghost:disabled { opacity: .45; cursor: default; border-color: var(--line2); }
+.lank { background: none; border: 0; padding: 0; color: var(--blue); font-size: 12.5px; font-weight: 600; cursor: pointer; }
+.lank:hover { text-decoration: underline; }
+.tom { text-align: center; padding: 8px 4px 2px; color: var(--soft); font-size: 14px; line-height: 1.5; }
+.tom p { margin: 0 0 12px; }
+.tom .primary { margin: 0 auto; }
+
+/* Närvarolistan */
+.elever { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.elev { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 9px; cursor: pointer; user-select: none; font-size: 14.5px; transition: background .12s; }
+.elev:hover { background: var(--bg); }
+.elev input { width: 17px; height: 17px; accent-color: var(--ink); margin: 0; flex: none; cursor: pointer; }
+.elev .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.elev.borta .nm { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(15, 22, 32, .35); }
+.elev .tag { font: 500 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.elev .x { border: 0; background: none; color: var(--muted); cursor: pointer; padding: 0 2px; display: grid; place-items: center; }
+.elev .x:hover { color: var(--accent); }
+.tillfallig { display: flex; gap: 6px; margin-top: 10px; }
+.tillfallig .inp { flex: 1; min-width: 0; height: 36px; }
+
+/* Inställningar */
+.seg { display: flex; background: var(--bg); border-radius: 10px; padding: 3px; gap: 2px; }
+.seg button { flex: 1; border: 0; background: none; padding: 7px 8px; border-radius: 8px; font: 500 13px var(--sans); color: var(--soft); cursor: pointer; transition: background .15s, color .15s; }
+.seg button.on { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(15, 22, 32, .16); }
+.stepper { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 14px 0 4px; }
+.stepper button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line2); background: #fff; cursor: pointer; display: grid; place-items: center; transition: border-color .15s; }
+.stepper button:hover { border-color: var(--ink); }
+.stepper button:disabled { opacity: .35; cursor: default; border-color: var(--line2); }
+.stepper .val { min-width: 70px; text-align: center; }
+.stepper .val b { display: block; font-family: var(--serif); font-weight: 400; font-size: 46px; line-height: 1; }
+.stepper .val span { font-size: 12.5px; color: var(--muted); }
+.lbl { display: block; font-size: 12.5px; color: var(--muted); margin: 14px 0 6px; }
+.radio { display: flex; flex-direction: column; gap: 4px; }
+.radio label { display: flex; gap: 9px; align-items: center; font-size: 14px; cursor: pointer; padding: 3px 0; }
+.radio input { accent-color: var(--ink); margin: 0; width: 16px; height: 16px; }
+.forhands { margin: 14px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--bg); font-size: 13.5px; line-height: 1.45; color: var(--soft); }
+.forhands b { color: var(--ink); font-weight: 600; }
+
+/* Villkor */
+.villkor { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.villkor li { display: flex; align-items: center; gap: 9px; padding: 8px 8px 8px 10px; border-radius: 10px; border: 1px solid var(--line); font-size: 13.5px; }
+.villkor .ik { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; color: #fff; }
+.villkor .ik.ihop { background: var(--green); }
+.villkor .ik.isar { background: var(--accent); }
+.villkor .txt { flex: 1; min-width: 0; line-height: 1.3; }
+.villkor .txt small { display: block; color: var(--muted); font-size: 12px; }
+.villkor .x { border: 0; background: none; color: var(--muted); cursor: pointer; padding: 2px; display: grid; place-items: center; }
+.villkor .x:hover { color: var(--accent); }
+.vform { margin-top: 10px; padding: 12px; border-radius: 12px; background: var(--bg); display: flex; flex-direction: column; gap: 9px; }
+.vform select { width: 100%; }
+.vform .seg { background: var(--bg2); }
+.vform .knappar { display: flex; gap: 6px; justify-content: flex-end; }
+.vform .primary { height: 34px; font-size: 13px; padding: 0 14px; }
+.hint { font-size: 12.5px; color: var(--muted); margin: 8px 0 0; line-height: 1.45; }
+
+.slumpa { width: 100%; height: 52px; justify-content: center; font-size: 16px; border-radius: 13px; box-shadow: 0 10px 22px -12px rgba(15, 22, 32, .8); }
+.slumpa svg { transition: transform .5s; }
+.slumpa:not(:disabled):hover svg { transform: rotate(180deg); }
+
+/* ---------- Grupperna ---------- */
+.ark { min-height: 520px; padding: 18px; background: #fffefb; position: relative; }
+.ark-h { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; flex-wrap: wrap; }
+.ark-h h2 { margin: 0; flex: 1; font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1.1; }
+.ark-h .info { font-size: 13px; color: var(--muted); }
+.varning { margin: 0 0 14px; padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(165, 100, 26, .35); background: rgba(165, 100, 26, .07); color: #6d430f; font-size: 13.5px; line-height: 1.45; }
+.varning p { margin: 0; }
+.varning p + p { margin-top: 4px; }
+.grupper { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+.grupp { --g: var(--blue); background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 1px 2px rgba(15, 22, 32, .04); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .15s, transform .15s, border-color .15s; }
+.grupp.in { animation: kort .42s cubic-bezier(.2, .9, .3, 1.25) both; }
+@keyframes kort { from { opacity: 0; transform: translateY(10px) scale(.96); } to { opacity: 1; transform: none; } }
+.grupp-h { display: flex; align-items: center; gap: 10px; padding: 10px 12px 9px; border-top: 4px solid var(--g); border-bottom: 1px dashed var(--line); cursor: default; }
+.grupp-h .nr { width: 28px; height: 28px; border-radius: 50%; background: var(--g); color: #fff; display: grid; place-items: center; font: 600 14px var(--sans); flex: none; }
+.grupp-h .gn { flex: 1; font-weight: 600; font-size: 15px; }
+.grupp-h .gc { font-size: 12px; color: var(--muted); }
+.namn { list-style: none; margin: 0; padding: 8px; display: flex; flex-direction: column; gap: 4px; flex: 1; min-height: 46px; }
+.namn li { display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 9px; background: var(--bg); font-size: 15px; cursor: grab; user-select: none; -webkit-user-select: none; transition: background .12s, box-shadow .12s, opacity .12s; touch-action: manipulation; }
+.namn li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--g); flex: none; }
+.namn li:hover { background: var(--bg2); }
+.namn li.vald { background: #fff; box-shadow: 0 0 0 2px var(--ink); }
+.namn li.dras { opacity: .35; }
+.namn li.mal { box-shadow: 0 0 0 2px var(--g); background: #fff; }
+.grupp.mal { border-color: var(--g); box-shadow: 0 0 0 2px var(--g); }
+.grupp.kan-ta-emot .grupp-h { cursor: pointer; }
+.snurr .namn li { animation: snurr .12s linear; }
+@keyframes snurr { from { opacity: .3; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+.spok { position: fixed; z-index: 90; pointer-events: none; padding: 7px 12px; border-radius: 9px; background: #fff; box-shadow: 0 12px 30px -10px rgba(15, 22, 32, .5), 0 0 0 2px var(--ink); font-size: 15px; transform: translate(-50%, -60%) rotate(-2deg); }
+.ark-tom { display: grid; place-items: center; min-height: 460px; text-align: center; color: var(--soft); }
+.ark-tom svg { color: var(--line2); margin-bottom: 12px; }
+.ark-tom h3 { margin: 0 0 6px; font-family: var(--serif); font-weight: 400; font-size: 26px; color: var(--ink); }
+.ark-tom p { margin: 0 auto; max-width: 34ch; font-size: 14.5px; line-height: 1.5; }
+.tips { margin: 14px 0 0; font-size: 12.5px; color: var(--muted); }
+
+/* Storskärm */
+.ark:fullscreen { padding: 34px 40px; overflow: auto; background: #fffefb; }
+.ark:-webkit-full-screen { padding: 34px 40px; overflow: auto; background: #fffefb; }
+.ark:fullscreen .ark-h h2 { font-size: 40px; }
+.ark:fullscreen .grupper { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.ark:fullscreen .grupp-h .nr { width: 38px; height: 38px; font-size: 19px; }
+.ark:fullscreen .grupp-h .gn { font-size: 21px; }
+.ark:fullscreen .grupp-h .gc { font-size: 14px; }
+.ark:fullscreen .namn li { font-size: 24px; padding: 9px 14px; }
+.ark:fullscreen .varning, .ark:fullscreen .tips { display: none; }
+
+/* Dialog för klasslistan */
+dialog { border: 0; border-radius: 18px; padding: 0; width: min(520px, calc(100vw - 32px)); background: var(--panel); color: var(--ink); box-shadow: 0 30px 70px -20px rgba(15, 22, 32, .55); }
+dialog::backdrop { background: rgba(15, 22, 32, .38); backdrop-filter: blur(2px); }
+.dlg { padding: 20px 20px 18px; display: flex; flex-direction: column; gap: 6px; }
+.dlg h2 { margin: 0 0 6px; font-family: var(--serif); font-weight: 400; font-size: 28px; }
+.dlg label { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+.dlg .inp { height: 40px; }
+.dlg textarea { min-height: 240px; resize: vertical; line-height: 1.5; }
+.dlg .rak { font-size: 12.5px; color: var(--soft); }
+.dlg .knappar { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+
+/* Avisering */
+.toast { position: fixed; left: 50%; bottom: 26px; transform: translate(-50%, 30px); opacity: 0; pointer-events: none; background: var(--ink); color: #fff; padding: 12px 16px; border-radius: 13px; font-size: 13.5px; display: flex; gap: 12px; align-items: center; box-shadow: 0 18px 40px -16px rgba(15, 22, 32, .6); transition: opacity .22s, transform .22s; z-index: 100; max-width: calc(100vw - 32px); }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+.toast .tk { width: 22px; height: 22px; border-radius: 50%; background: #2f9e62; display: grid; place-items: center; flex: none; }
+
+/* ---------- Om verktyget ---------- */
+.seo { border-top: 1px solid var(--line2); background: var(--panel); }
+.seo-inner { max-width: 860px; margin: 0 auto; padding: 56px 24px 72px; color: var(--soft); font-size: 16.5px; line-height: 1.7; }
+.seo h2 { font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.15; color: var(--ink); margin: 52px 0 14px; letter-spacing: -.01em; }
+.seo h2:first-of-type { margin-top: 10px; }
+.seo p { margin: 0 0 14px; }
+.seo b { color: var(--ink); font-weight: 600; }
+.seo-lede { font-size: 18px; color: var(--ink); }
+.seo-steps { margin: 0; padding-left: 22px; }
+.seo-steps li { margin-bottom: 10px; padding-left: 4px; }
+.seo-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; padding: 10px 16px; border-radius: 11px; background: var(--ink); color: #fff; text-decoration: none; font: 600 14px var(--sans); }
+.seo-cta:hover { background: #22324a; }
+.faq details { border-bottom: 1px solid var(--line); padding: 12px 0; }
+.faq summary { cursor: pointer; color: var(--ink); font-weight: 600; }
+.faq details p { margin: 8px 0 0; }
+.sidfot { text-align: center; padding: 26px 16px 40px; font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.sidfot a { color: inherit; text-decoration: none; margin: 0 8px; }
+.sidfot a:hover { color: var(--ink); }
+
+@media (max-width: 1240px) {
+  .app { grid-template-columns: 270px minmax(0, 1fr) 290px; }
+}
+@media (max-width: 980px) {
+  .app { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .app > aside.panel { position: static; max-height: none; }
+  .ark-wrap { grid-column: 1 / -1; order: 3; }
+}
+@media (max-width: 600px) {
+  .top { flex-wrap: wrap; padding: 12px 16px 10px; gap: 12px; }
+  .titles h1 { font-size: 30px; }
+  .actions { width: 100%; justify-content: flex-end; }
+  .app { grid-template-columns: minmax(0, 1fr); padding: 0 16px 24px; gap: 10px; }
+  .ark { padding: 14px; min-height: 0; }
+  .ark-tom { min-height: 260px; }
+  .grupper { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .lbl-long { display: none; }
+  .menu { width: min(300px, calc(100vw - 32px)); }
+  .seo-inner { padding: 40px 16px 56px; }
+  .seo h2 { font-size: 27px; }
+}
+
+/* Utskrift: bara grupperna */
+@media print {
+  body { background: #fff; }
+  .lab-header, .top, .app > aside.panel, .seo, .sidfot, .toast, .ark-h .ghost, .ark-h .ibtn, .varning, .tips { display: none !important; }
+  .app { display: block; padding: 0; }
+  .ark { border: 0; box-shadow: none; padding: 0; }
+  .grupper { grid-template-columns: repeat(3, 1fr); }
+  .grupp { break-inside: avoid; box-shadow: none; }
+  .namn li { background: none; padding: 3px 4px; }
+}
+</style>
+</head>
+<body>
+<div class="lab-header">
+  <div class="lab-header-inner">
+    <a class="lab-logo" href="index.html">
+      <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+        <g transform="rotate(-24 18 18)">
+          <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+          <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+        </g>
+        <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+      </svg>
+      <span class="lab-logo-text">Fysiklabbet</span>
+    </a>
+    <nav class="lab-nav" aria-label="Huvudnavigation">
+      <a href="index.html">Start</a>
+      <div class="lab-nav-dd">
+        <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">Ämne <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+        <div class="lab-nav-dd-menu">
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Fysik <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="katalog.html#fy1">Nivå 1</a>
+              <a href="katalog.html#fy2">Nivå 2</a>
+            </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Matematik <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="katalog.html#ma1b">Nivå 1b</a>
+              <a href="katalog.html#ma1c">Nivå 1c</a>
+              <a href="katalog.html#ma2b">Nivå 2b</a>
+              <a href="katalog.html#ma2c">Nivå 2c</a>
+            </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Matematik – fortsättning <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="katalog.html#ma3c">Nivå 1c</a>
+              <a href="katalog.html#ma4">Nivå 2</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="simuleringar.html">Simuleringar</a>
+      <a href="np.html">Nationella prov</a>
+      <div class="lab-nav-dd">
+        <button type="button" class="lab-nav-dd-trigger aktiv" aria-haspopup="true">
+          Resurser
+          <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+        </button>
+        <div class="lab-nav-dd-menu">
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">
+              Verktyg
+              <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+            </button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="kopplingsschema.html">Kopplingsschema</a>
+              <a href="sannolikhetskalkylator.html">Sannolikhetskalkylator</a>
+              <a href="sammanfattningar.html">Sammanfattningar</a>
+              <a href="slumpa-grupper.html" aria-current="page">Slumpa grupper</a>
+                          </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">
+              Övningsblad
+              <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+            </button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="ovningsblad.html#fysik">Fysik</a>
+              <a href="ovningsblad.html#matematik">Matematik</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="nyheter.html">Fysiknyheter</a>
+      <a href="om.html">Om</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+  </div>
+</div>
+
+<section class="tool" id="verktyget" aria-label="Slumpa grupper">
+<header class="top">
+  <div class="titles">
+    <h1>Slumpa <em>grupper</em></h1>
+    <p>Välj klass, bocka av den som inte är här och slumpa fram grupperna. Dra i namnen för att flytta någon.</p>
+  </div>
+  <div class="actions">
+    <button type="button" class="ibtn" id="oppnaBtn" title="Öppna en sparad fil" aria-label="Öppna en sparad fil">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H9l2 2.5h7.5A2.5 2.5 0 0 1 21 10v7.5a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z"/></svg>
+    </button>
+    <div class="split">
+      <button class="primary" id="sparaBtn" title="Spara grupperna som fil">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+        <span>Spara <span class="lbl-long">som fil</span></span>
+      </button>
+      <button class="primary more" id="merBtn" aria-label="Fler sätt att spara" title="Fler sätt att spara" aria-haspopup="true" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+      <div class="menu" id="sparaMeny" role="menu"></div>
+    </div>
+    <input type="file" id="filval" accept=".json,.txt,application/json,text/plain" hidden>
+  </div>
+</header>
+
+<main class="app">
+  <aside class="panel" id="vanster" aria-label="Klass och närvaro"></aside>
+  <section class="ark-wrap panel" aria-label="Grupperna">
+    <div class="ark" id="ark"></div>
+  </section>
+  <aside class="panel" id="hoger" aria-label="Gruppstorlek och villkor"></aside>
+</main>
+</section>
+
+<dialog id="listDialog" aria-labelledby="listDialogRubrik">
+  <form class="dlg" method="dialog" id="listForm">
+    <h2 id="listDialogRubrik">Ny klasslista</h2>
+    <label for="listNamn">Namn på listan</label>
+    <input class="inp" id="listNamn" type="text" placeholder="Till exempel NA24b" autocomplete="off" required>
+    <label for="listElever">Elever, en per rad</label>
+    <textarea id="listElever" placeholder="Klistra in namnen från ett kalkylark eller skolans lärplattform, ett namn per rad." spellcheck="false"></textarea>
+    <span class="rak" id="listAntal">0 elever</span>
+    <div class="knappar">
+      <button type="button" class="ghost" id="listAvbryt">Avbryt</button>
+      <button type="submit" class="primary" id="listSpara">Spara listan</button>
+    </div>
+  </form>
+</dialog>
+
+<article class="seo" id="om-verktyget">
+  <div class="seo-inner">
+    <h2>Slumpa grupper i klassrummet</h2>
+    <p class="seo-lede">Slumpa grupper delar in klassen i grupper med ett klick. Du skriver in klasslistan en gång, bockar av den som inte är här och väljer hur stora grupperna ska vara. Grupperna visas som kort som går att visa på storskärmen, och du kan flytta elever mellan grupperna innan du sparar.</p>
+    <a class="seo-cta" href="#verktyget">Öppna verktyget</a>
+
+    <h2>Så använder du verktyget</h2>
+    <ol class="seo-steps">
+      <li><b>Skapa en klasslista.</b> Klistra in namnen, ett per rad, till exempel direkt ur ett kalkylark. Listan sparas i din webbläsare till nästa gång.</li>
+      <li><b>Bocka av den som inte är här.</b> Ska någon vara med bara i dag lägger du till namnet under listan.</li>
+      <li><b>Välj gruppstorlek</b>, antingen som antal elever per grupp eller som antal grupper. Går det inte jämnt ut väljer du om du hellre vill ha några större eller några mindre grupper.</li>
+      <li><b>Lägg till villkor</b> om två elever ska arbeta tillsammans eller hållas isär.</li>
+      <li><b>Tryck på Slumpa grupper.</b> Vill du ändra något drar du ett namn till en annan grupp, eller släpper det på ett namn så byter de två plats. På en pekskärm trycker du först på ett namn och sedan dit det ska.</li>
+      <li><b>Spara grupperna som fil</b>, visa dem på storskärmen eller skriv ut dem.</li>
+    </ol>
+
+    <h2>Ingen inloggning, inga namn på nätet</h2>
+    <p>Verktyget körs helt i din webbläsare. Klasslistorna sparas på den dator du använder och skickas aldrig till någon server. Vill du ha med dig en lista till en annan dator, eller spara en gruppindelning till nästa lektion, sparar du den som fil. Filen öppnas med knappen till vänster om Spara.</p>
+
+    <h2>Vanliga frågor</h2>
+    <div class="faq">
+      <details><summary>Var sparas mina klasslistor?</summary><p>Klasslistorna sparas bara i din egen webbläsare, på den dator du använder. Inga namn skickas till någon server. Vill du använda en lista på en annan dator sparar du den som fil och öppnar filen där.</p></details>
+      <details><summary>Hur sparar jag en gruppindelning?</summary><p>Välj Spara grupperna som fil i menyn Spara. Filen innehåller både grupperna och klasslistan, och när du öppnar den igen visas grupperna precis som du lämnade dem. Grupperna kan också sparas som textfil, kopieras som text eller skrivas ut.</p></details>
+      <details><summary>Vad händer om eleverna inte går jämnt ut i grupperna?</summary><p>Då väljer du om du hellre vill ha några större eller några mindre grupper. Med 25 elever och fyra per grupp blir det antingen sex grupper, där en har fem elever, eller sju grupper, där tre har tre elever. Grupperna blir aldrig mer än en elev olika stora.</p></details>
+      <details><summary>Kan jag bestämma att två elever inte ska hamna i samma grupp?</summary><p>Ja. Lägg till ett villkor och välj Hålls isär, eller Tillsammans om de ska arbeta ihop. Villkoret kan gälla alltid eller bara nästa slumpning. Villkor som ska gälla alltid sparas med klasslistan.</p></details>
+      <details><summary>Kostar verktyget något?</summary><p>Nej. Verktyget är gratis och kräver inget konto.</p></details>
+    </div>
+  </div>
+</article>
+<footer class="sidfot"><a href="index.html">Fysiklabbet</a>·<a href="om.html">Om</a>·<a href="kontakt.html">Kontakt</a></footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
+     webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
+<script src="slumpa-grupper.js?v=202610131200"></script>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

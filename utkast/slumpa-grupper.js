@@ -208,6 +208,7 @@
     isar: svg('<path d="M11 6.5 13 4.5a4 4 0 0 1 5.7 5.7l-2 2"/><path d="M13 17.5 11 19.5a4 4 0 0 1-5.7-5.7l2-2"/><path d="M4 4l16 16"/>', 14),
     slump: svg('<path d="M3 7h3.5c2 0 3.2 1 4.3 2.7l2.4 4.6C14.3 16 15.5 17 17.5 17H21"/><path d="M3 17h3.5c1.3 0 2.3-.5 3.1-1.3"/><path d="M14.4 8.3C15.2 7.5 16.2 7 17.5 7H21"/><path d="m18 4 3 3-3 3"/><path d="m18 14 3 3-3 3"/>', 20),
     skarm: svg('<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>'),
+    skarmUt: svg('<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>'),
     fil: svg('<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/>'),
     lista: svg('<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/>'),
     text: svg('<path d="M4 6h16M4 12h16M4 18h10"/>'),
@@ -521,8 +522,11 @@
     A.append(h('div', { class: 'ark-h' },
       h('h2', { text: l ? l.namn : 'Grupper' }),
       h('span', { class: 'info', text: `${S.grupper.length} ${ord(S.grupper.length, 'grupp', 'grupper')}, ${antal} elever` }),
-      h('button', { class: 'ghost', type: 'button', title: 'Visa grupperna på hela skärmen', html: IK.skarm + '<span>Storskärm</span>', onclick: storskarm }),
-      h('button', { class: 'ghost', type: 'button', title: 'Ta bort grupperna', text: 'Rensa', onclick: () => { S.grupper = null; S.varningar = []; spara(); ritaArk(); ritaHoger(); } })));
+      h('div', { class: 'ark-knappar' }, iStorskarm()
+        ? [h('button', { class: 'ghost', type: 'button', title: 'Slumpa nya grupper', html: IK.slump.replace('width="20" height="20"', 'width="16" height="16"') + '<span>Slumpa om</span>', onclick: slumpa }),
+           h('button', { class: 'ghost', type: 'button', title: 'Tillbaka till vanlig vy', html: IK.skarmUt + '<span>Avsluta</span>', onclick: storskarm })]
+        : [h('button', { class: 'ghost', type: 'button', title: 'Visa grupperna på hela skärmen', html: IK.skarm + '<span>Storskärm</span>', onclick: storskarm }),
+           h('button', { class: 'ghost', type: 'button', title: 'Ta bort grupperna', text: 'Rensa', onclick: () => { S.grupper = null; S.varningar = []; spara(); ritaArk(); ritaHoger(); } })])));
     if (S.varningar.length && !snurrGrupper) A.append(h('div', { class: 'varning', role: 'note' }, S.varningar.map(v => h('p', { text: v }))));
 
     const nat = h('div', { class: 'grupper' + (snurrGrupper ? ' snurr' : '') });
@@ -541,6 +545,7 @@
       if (!snurrGrupper) g.id = g.id || nyttId('g');
     });
     A.append(nat);
+    if (iStorskarm()) passaStorskarm(nat);
     if (!snurrGrupper) {
       A.append(h('p', { class: 'tips', text: 'Dra ett namn till en annan grupp, eller släpp det på ett namn så byter de plats. På en pekskärm trycker du först på namnet och sedan dit det ska.' }));
       if (vald) A.querySelectorAll('.grupp').forEach(k => { if (+k.dataset.g !== vald.g) k.classList.add('kan-ta-emot'); });
@@ -631,9 +636,82 @@
     if (vald) { const el = A.querySelector(`.namn li[data-g="${p.g}"][data-e="${p.e}"]`); if (el) el.focus({ preventScroll: true }); }
   }
 
+  // Storskärm: grupperna ska fylla skärmen, centrerade. Prövar varje
+  // kolumnantal och väljer det som ger störst text, med hänsyn till den
+  // största gruppen och det bredaste namnet. Måtten nedan (i em av
+  // textstorleken f) hör ihop med .ark.fs-reglerna i slumpa-grupper.html;
+  // ändras paddingen där ska talen här följa med.
+  const iStorskarm = () => (document.fullscreenElement || document.webkitFullscreenElement) === A;
+  let matCtx;
+  function bredd(txt, vikt) {
+    matCtx = matCtx || document.createElement('canvas').getContext('2d');
+    matCtx.font = vikt + ' 100px "DM Sans", system-ui, sans-serif';
+    return matCtx.measureText(txt).width / 100;
+  }
+  function passaStorskarm(nat) {
+    const k = S.grupper.length;
+    const alla = S.grupper.flatMap(g => g.elever);
+    const maxN = Math.max(1, ...S.grupper.map(g => g.elever.length));
+    const namnB = Math.max(...alla.map(e => bredd(e.namn, 400)));
+    const huvB = 1.5 + 0.5 + bredd('Grupp ' + k, 600) + 1.4;   // antalet elever visas inte på storskärm
+    const enhetB = Math.max(namnB + 2.75, huvB) * 1.05;   // kortets bredd i em
+    const enhetH = 3.25 + 2.2 * maxN;                      // kortets höjd i em
+    // Mät ytan utan förra passningens maxbredd, annars krymper den för varje
+    // gång (vid resize) och korten bryts om till fler rader än beräknat.
+    nat.style.removeProperty('--maxw');
+    // clientWidth avrundar till hela pixlar, ibland uppåt: 1804,8 blev 1805
+    // och tre kort bröts om till två rader. Mät exakt och lämna en pixel.
+    const yta = nat.getBoundingClientRect();
+    const W = Math.floor(yta.width) - 1, H = Math.floor(yta.height) - 1;
+    const gap = Math.round(Math.min(32, Math.max(14, W * 0.014)));
+    let bast = { f: 0 };
+    for (let c = 1; c <= k; c++) {
+      const r = Math.ceil(k / c);
+      const cw = (W - (c - 1) * gap) / c, ch = (H - (r - 1) * gap) / r;
+      const f = Math.min((cw - 4) / enhetB, (ch - 6) / enhetH, 76);
+      // Störst text vinner, men en layout som bara fyller halva höjden får
+      // stryka på foten: sex grupper på en rad med ett tomt band över och
+      // under ser sämre ut än 3 × 2 med nästan lika stor text.
+      const fyllnad = Math.min(1, (r * Math.min(ch, enhetH * f + 6) + (r - 1) * gap) / H);
+      const poang = f * Math.pow(fyllnad, 0.35);
+      if (poang > (bast.poang || 0) + 0.01) bast = { f, c, cw, ch, poang };
+    }
+    // Korten blir lagom breda för sitt innehåll (med lite luft) i stället
+    // för att sträckas ut, och lika höga, så att raderna blir jämna.
+    const satt = (f) => {
+      const kortB = Math.floor(Math.min(bast.cw, Math.max(enhetB * f * 1.6, f * 10)));
+      const kortH = Math.floor(Math.min(bast.ch, enhetH * f + 6));
+      nat.style.setProperty('--f', f + 'px');
+      nat.style.setProperty('--gap', gap + 'px');
+      nat.style.setProperty('--cw', kortB + 'px');
+      nat.style.setProperty('--ch', kortH + 'px');
+      // Begränsa radens bredd så att flexen bryter efter exakt c kort.
+      nat.style.setProperty('--maxw', Math.min(W, bast.c * kortB + (bast.c - 1) * gap + 1) + 'px');
+    };
+    // Uppskattningen ovan kan slå fel på någon pixel (teckensnitt, rundning).
+    // Krymp då texten tills inget spiller över, varken ytan eller ett kort.
+    let f = Math.max(12, Math.floor(bast.f));
+    for (let i = 0; i < 24; i++) {
+      satt(f);
+      const spiller = nat.scrollHeight > nat.clientHeight + 1 ||
+        [...nat.children].some(k => k.scrollHeight > k.clientHeight + 1 || k.scrollWidth > k.clientWidth + 1);
+      if (!spiller || f <= 12) break;
+      f = Math.max(12, Math.floor(f * 0.96));
+    }
+  }
+  function bytteStorskarm() { A.classList.toggle('fs', iStorskarm()); vald = null; if (S.grupper) ritaArk(); }
+  document.addEventListener('fullscreenchange', bytteStorskarm);
+  document.addEventListener('webkitfullscreenchange', bytteStorskarm);
+  let fsTimer;
+  window.addEventListener('resize', () => {
+    if (!iStorskarm()) return;
+    clearTimeout(fsTimer);
+    fsTimer = setTimeout(() => { const n = A.querySelector('.grupper'); if (n) passaStorskarm(n); }, 80);
+  });
+
   function storskarm() {
     const el = A;
-    if (document.fullscreenElement) { document.exitFullscreen(); return; }
+    if (iStorskarm()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
     const f = el.requestFullscreen || el.webkitRequestFullscreen;
     if (f) f.call(el);
   }

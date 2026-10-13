@@ -306,16 +306,28 @@ select:focus, .inp:focus, textarea:focus { border-color: var(--blue); box-shadow
 .ark-tom p { margin: 0 auto; max-width: 34ch; font-size: 14.5px; line-height: 1.5; }
 .tips { margin: 14px 0 0; font-size: 12.5px; color: var(--muted); }
 
-/* Storskärm */
-.ark:fullscreen { padding: 34px 40px; overflow: auto; background: #fffefb; }
-.ark:-webkit-full-screen { padding: 34px 40px; overflow: auto; background: #fffefb; }
-.ark:fullscreen .ark-h h2 { font-size: 40px; }
-.ark:fullscreen .grupper { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
-.ark:fullscreen .grupp-h .nr { width: 38px; height: 38px; font-size: 19px; }
-.ark:fullscreen .grupp-h .gn { font-size: 21px; }
-.ark:fullscreen .grupp-h .gc { font-size: 14px; }
-.ark:fullscreen .namn li { font-size: 24px; padding: 9px 14px; }
-.ark:fullscreen .varning, .ark:fullscreen .tips { display: none; }
+/* Storskärm: måtten i em av --f hör ihop med passaStorskarm() i skriptet. */
+.ark-knappar { display: flex; gap: 8px; }
+.ark:fullscreen { background: #fffefb; }
+.ark:-webkit-full-screen { background: #fffefb; }
+.ark.fs { display: flex; flex-direction: column; width: 100vw; height: 100vh; padding: 3.2vh 3vw 3.5vh; overflow: hidden;
+  background: radial-gradient(1200px 600px at 50% -10%, rgba(28, 61, 107, 0.05), transparent 60%), #fffefb; }
+.ark.fs .ark-h { position: relative; flex-direction: column; justify-content: center; gap: .4vh; margin: 0 0 3vh; min-height: 9vh; }
+.ark.fs .ark-h h2 { flex: none; text-align: center; font-size: clamp(34px, 5.6vh, 72px); }
+.ark.fs .ark-h .info { font-size: clamp(13px, 1.7vh, 20px); letter-spacing: .02em; }
+.ark.fs .ark-knappar { position: absolute; top: 0; right: 0; opacity: .5; transition: opacity .2s; }
+.ark.fs .ark-knappar:hover, .ark.fs .ark-knappar:focus-within { opacity: 1; }
+.ark.fs .grupper { flex: 1; min-height: 0; display: flex; flex-wrap: wrap; justify-content: center; align-content: center;
+  gap: var(--gap, 20px); font-size: var(--f, 24px); max-width: var(--maxw, none); width: 100%; margin: 0 auto; }
+.ark.fs .grupp { width: var(--cw); height: var(--ch); border-radius: .45em; box-shadow: 0 1px 2px rgba(15, 22, 32, .05), 0 .6em 1.4em -1em rgba(15, 22, 32, .35); }
+.ark.fs .grupp-h { gap: .5em; padding: .45em .7em .5em; border-top-width: max(4px, .16em); }
+.ark.fs .grupp-h .nr { width: 2em; height: 2em; font-size: .75em; }
+.ark.fs .grupp-h .gn { font-size: 1em; }
+.ark.fs .grupp-h .gc { display: none; }
+.ark.fs .namn { padding: .4em; gap: .25em; }
+.ark.fs .namn li { font-size: 1em; line-height: 1.25; padding: .35em .6em; gap: .45em; border-radius: .3em; }
+.ark.fs .namn li::before { width: .28em; height: .28em; }
+.ark.fs .varning, .ark.fs .tips { display: none; }
 
 /* Dialog för klasslistan */
 dialog { border: 0; border-radius: 18px; padding: 0; width: min(520px, calc(100vw - 32px)); background: var(--panel); color: var(--ink); box-shadow: 0 30px 70px -20px rgba(15, 22, 32, .55); }
@@ -549,7 +561,7 @@ dialog::backdrop { background: rgba(15, 22, 32, .38); backdrop-filter: blur(2px)
 
 <!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
      webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
-<script src="slumpa-grupper.js?v=202610131200"></script>
+<script src="slumpa-grupper.js?v=202610132000"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

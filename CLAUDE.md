@@ -1283,12 +1283,11 @@ i `kopplingsschema.js`; läs dem innan du ändrar något.
 - **Menyvalet Resurser** (infört 2026-09-30, hette tidigare Verktyg) ligger
   efter Nationella prov i huvudmenyn. Det är en rullgardin med två grupper,
   byggda som Ämne-menyns grupper (`.lab-nav-dd-grupp`): **Verktyg**
-  (Kopplingsschema, Sannolikhetskalkylator, Sammanfattningar,
-  Slumpa grupper) och **Övningsblad** (Fysik, Matematik, som går till
-  `ovningsblad.html#fysik`/`#matematik`). Menyn finns på fjorton sidor:
+  (Kopplingsschema, Sannolikhetskalkylator, Sammanfattningar) och **Övningsblad** (Fysik, Matematik, som går till
+  `ovningsblad.html#fysik`/`#matematik`). Menyn finns på tretton sidor:
   `avsnitt`, `begrepp`, `index`, `katalog`, `kontakt`, `nyheter`,
   `nyhetsbrev`, `om`, `simuleringar`, `np`, `kopplingsschema`,
-  `sannolikhetskalkylator`, `slumpa-grupper` och `ovningsblad` (samt
+  `sannolikhetskalkylator` och `ovningsblad` (samt
   `utkast/sannolikhetshornan.html`). Ett nytt verktyg läggs till i alla;
   en ny sida med huvudmenyn ska ha Resurser med.
 - **`sammanfattningar.html`** (2026-10-05) visar avsnittens
@@ -1340,10 +1339,14 @@ SEO-upplägg som kopplingsschemat. Strukturen beskrivs i filhuvudet.
   förhandsvisningens adress. Öka `?v=` på skriptet när det ändras.
 - Teoriavsnittet `ma2c-6.5` länkar till verktyget.
 
-### Slumpa grupper (slumpa-grupper.html)
+### Slumpa grupper (utkast/slumpa-grupper.html)
 
-Tredje verktyget (2026-10-13): `slumpa-grupper.html` + `slumpa-grupper.js`,
-omskrivet från lärarens egen app Slumpify (repot `Goliatbagge/slumpify`,
+Tredje verktyget, förhandsvisas sedan 2026-10-13 i `utkast/`
+(`slumpa-grupper.html` + `slumpa-grupper.js`, noindex, olänkat). När det
+blir officiellt: flytta till roten (rätta `../`-sökvägarna, `index, follow`
+och canonical), lägg in det i Resurser-menyn på alla sidor, i `VERKTYG` i
+`data/sok.js` och i `UPDATES`, kör `node data/build-nyheter-og.js`, och
+låt utkastadressen bli en vidarebefordran. Omskrivet från lärarens egen app Slumpify (repot `Goliatbagge/slumpify`,
 React + Firebase) till sajtens stil. Strukturen beskrivs i filhuvudet.
 
 - **Ingen inloggning och inget moln.** Klasslistor, inställningar och

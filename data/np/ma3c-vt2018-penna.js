@@ -771,7 +771,7 @@
     function f(x) { return k * (x * x * x / 3 + x * x - 3 * x); }
     var ax = mkAxes(T, F, { ox: 250, oy: 300, u: 22,
                             xmin: -5, xmax: 4, ymin: -4, ymax: 5 });
-    var FIGB_Y = 432;
+    var FIGB_Y = 452;
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
 
     /* steg 1: axlar och graf */
@@ -791,7 +791,7 @@
     ax.dot(-3, 4, BLUE);
     T.pause(120);
     ax.dot(1, f(1), BLUE);
-    y = 520;
+    y = 540;
     T.str('f’(-3)=0 och f’(1)=0', padL, y);
     T.stepEnd();
 
@@ -1976,7 +1976,7 @@
     /* exakt: f' = g (se kommentaren i generatorn) */
     function f(x) { return -2 * x * x * x / 3 + 2 * x * x + 2; }
     function g(x) { return 4 * x - 2 * x * x; }
-    var Ax = mkAxes(T, F, { ox: padL + 90, oy: 340, u: 40, xsc: 1, ysc: 1,
+    var Ax = mkAxes(T, F, { ox: padL + 90, oy: 378, u: 54, xsc: 1, ysc: 1,
                             xmin: -1, xmax: 3.6, ymin: -2.6, ymax: 5.2 });
 
     Ax.axes();

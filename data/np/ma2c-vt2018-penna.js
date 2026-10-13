@@ -257,7 +257,7 @@
     var tanke = mkTanke(T);
     var ax = mkAxes(T, F, { ox: 190, oy: 170, u: 22,
                             xmin: -4, xmax: 3, ymin: -5, ymax: 2 });
-    var FIGB_Y = 322;
+    var FIGB_Y = 342;
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
     function f(x) { return x * x + 2 * x - 3; }
 
@@ -288,7 +288,7 @@
     ax.dot(-3, 0, BLUE);
     T.pause(120);
     ax.dot(1, 0, BLUE);
-    y = 436;
+    y = 456;
     T.str('a) f(−3)=0 och f(1)=0', padL, y);
     T.stepEnd();
 
@@ -2003,7 +2003,7 @@
     var xw = padL + 30 + T.adv('−4=6+m') + 0.9 * F;
     var ax = mkAxes(T, F, { ox: 200, oy: 212, u: 20,
                             xmin: -4, xmax: 4, ymin: -4, ymax: 4 });
-    var FIGB_Y = 330;
+    var FIGB_Y = 366;
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
 
     /* steg 1: axlarna och linjen */
@@ -2030,7 +2030,7 @@
     T.pause(120);
     ax.dot(2, -4, BLUE);
     ax.tag(2, -4, '(2, −4)', 8, 6, BLUE);
-    y = 438;
+    y = 474;
     T.str('(0, −1) → (0+2, −1-3)=(2, −4)', padL, y);
     T.stepEnd();
 

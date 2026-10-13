@@ -219,6 +219,7 @@
     var ox = padL + 32, oy = 215;
     var A = mkAxes(T, F, { ox: ox, oy: oy, u: 34, xsc: Q, ysc: 0.65,
                            xmin: -0.85, xmax: 21.1, ymin: -1.3, ymax: 1.3 });
+    ox = A.ox; oy = A.oy;   /* rutnätssnäppt av mkAxes */
     var rutor = [];
     for (n = 1; n <= 13; n++) rutor.push(n * Q);
 
@@ -339,9 +340,10 @@
     T.stepEnd();
 
     /* ---- figuren: rutnätets axlar, asymptoterna streckade i blått ---- */
-    var u = 24, oy = y + 40 + 7.85 * u;
-    var A = mkAxes(T, F, { ox: padL + 165, oy: oy, u: u,
+    var u = 27, oy = y + 40 + 7.85 * u;
+    var A = mkAxes(T, F, { ox: padL + 186, oy: oy, u: u,
                            xmin: -6, xmax: 7, ymin: -6, ymax: 7 });
+    oy = A.oy; u = A.u;   /* rutnätssnäppt av mkAxes */
     tanke(y, [
       [['Nu ritar jag in asymptoterna']],
       [['som streckade linjer.']]
@@ -829,9 +831,10 @@
     T.stepEnd();
 
     /* ---- skissen: området mellan y-axeln och kurvan, under y = 2 ---- */
-    var ox = padL + 60, oy = 380, u = 24;
+    var ox = padL + 60, oy = 432, u = 27;
     var A = mkAxes(T, F, { ox: ox, oy: oy, u: u, xsc: 2, ysc: 0.25,
                            xmin: 0, xmax: 17, ymin: 0, ymax: 2.2 });
+    ox = A.ox; oy = A.oy; u = A.u;   /* rutnätssnäppt av mkAxes */
     A.axes();
     A.ticks([16], [2], [16], [2]);
     T.pause(160);
@@ -3202,7 +3205,7 @@
     var multIn = V.mkMultIn(T);
     var x0 = padL + 30;
     function f(x) { return 7 * x - x * x - 10; }
-    var A = mkAxes(T, F, { ox: padL + 40, oy: 230, u: 38, xsc: 1, ysc: 2,
+    var A = mkAxes(T, F, { ox: padL + 40, oy: 230, u: 54, xsc: 1, ysc: 2,
                            xmin: 0, xmax: 7, ymin: -6, ymax: 3 });
 
     /* ---- a) figuren ---- */

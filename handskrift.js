@@ -11207,10 +11207,23 @@
    *   xs, ys  vilka tal som får skalstreck (utelämnas ⇒ heltalen)
    *   ysc     y-talens ENHET per ruta (för grafer med stora y-värden,
    *           t.ex. kostnad i kronor: ysc=500 ⇒ en ruta är 500 kr)
-   * Returnerar ritfunktioner som lägger sina pennstreck i T.acts. */
+   * Returnerar ritfunktioner som lägger sina pennstreck i T.acts.
+   *
+   * REGEL (SKALAN FÖLJER RUTNÄTET, användarkrav 2026-10-13): origo och
+   * varje skalsteg ska ligga PÅ papperets rutlinjer (RUTA = 27 px från
+   * arkets hörn, samma mönster som #hkGrid). Ligger skalstrecken mellan
+   * rutlinjerna går punkterna inte att pricka in exakt, och eleven lär
+   * sig att rita koordinatsystem "på ett ungefär". Därför avrundas ox och
+   * oy till närmaste rutlinje och u till ett helt antal rutor (minst en),
+   * oavsett vad scenen begär. Scener som behöver de faktiska värdena
+   * läser A.ox, A.oy och A.u (eller använder A.X/A.Y), aldrig sina egna
+   * indata. Bygg aldrig runt detta med ett eget axelkors. */
+  var RUTA = 27;
   function mkAxes(T, F, o) {
     var s = F / 100, acts = T.acts;
-    var ox = o.ox, oy = o.oy, u = o.u == null ? 27 : o.u;
+    var u = o.u == null ? RUTA : o.u;
+    u = Math.max(1, Math.round(u / RUTA)) * RUTA;
+    var ox = Math.round(o.ox / RUTA) * RUTA, oy = Math.round(o.oy / RUTA) * RUTA;
     var ysc = o.ysc || 1, xsc = o.xsc || 1;
     function X(v) { return ox + (v / xsc) * u; }
     function Y(v) { return oy - (v / ysc) * u; }
@@ -11381,7 +11394,7 @@
     }
     return { X: X, Y: Y, num: num, line: line, rule: rule, axes: axes,
              ticks: ticks, dot: dot, guides: guides, tag: tag,
-             graphKM: graphKM, stair: stair };
+             graphKM: graphKM, stair: stair, ox: ox, oy: oy, u: u };
   }
 
   /* TAL I PENNSKRIFT: tusentalsgrupper åtskilda med mellanslag och

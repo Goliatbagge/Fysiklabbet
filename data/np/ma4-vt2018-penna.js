@@ -145,9 +145,10 @@
   reg(2, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, xi;
     var tanke = mkTanke(T);
-    var u = 46, ox = padL + 240, oy = 245;
+    var u = 54, ox = padL + 267, oy = 270;
     var A = mkAxes(T, F, { ox: ox, oy: oy, u: u,
                            xmin: -4.5, xmax: 4.5, ymin: -2.5, ymax: 3.5 });
+    ox = A.ox; oy = A.oy; u = A.u;   /* rutnätssnäppt av mkAxes */
 
     /* ---- steg 1: grafen av ---- */
     A.axes();
@@ -362,6 +363,7 @@
     var u = 52, ox = padL + 170, oy = y + 2.6 * F + 1.5 * u;
     var A = mkAxes(T, F, { ox: ox, oy: oy, u: u,
                            xmin: -1.3, xmax: 1.3, ymin: -1.3, ymax: 1.3 });
+    ox = A.ox; oy = A.oy; u = A.u;   /* rutnätssnäppt av mkAxes */
     A.axes();
     T.pause(160);
     var kurva = [];
@@ -766,9 +768,10 @@
       [['Båda är räta linjer genom origo.']],
       [['Dem ritar jag i talplanet.']]
     ]);
-    var u = 22, ox = padL + 190, oy = y + 1.4 * F + 6.0 * u;
+    var u = 27, ox = padL + 190, oy = y + 1.4 * F + 6.0 * u;
     var A = mkAxes(T, F, { ox: ox, oy: oy, u: u,
                            xmin: -5, xmax: 5, ymin: -5, ymax: 5 });
+    ox = A.ox; oy = A.oy; u = A.u;   /* rutnätssnäppt av mkAxes */
     /* egna axlar: beteckningarna Re och Im är två tecken, och mkAxes
      * axes() skriver bara en glyf */
     var xr = A.X(5) + 0.85 * u, yt = A.Y(5) - 0.85 * u;

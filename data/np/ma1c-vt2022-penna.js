@@ -266,10 +266,10 @@
   reg(6, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
-    /* fönstret är brett (33 enheter i x-led) — u=20 med två enheter per
-     * ruta håller hela figuren innanför arkets vänstra två tredjedelar,
-     * så att inget hamnar i inställningsrutans hörn */
-    var A = mkAxes(T, F, { ox: padL + 176, oy: 250, u: 20, xsc: 2, ysc: 2,
+    /* fönstret är brett (33 enheter i x-led): en ruta är två enheter, och
+     * figuren läggs så långt ned att kurvans högra gren (y upp till 17)
+     * hamnar under inställningsrutans hörn */
+    var A = mkAxes(T, F, { ox: padL + 240, oy: 405, u: 27, xsc: 2, ysc: 2,
                            xmin: -16, xmax: 17, ymin: -5, ymax: 16 });
 
     /* ---- steg 1: rita av grafen ---- */
@@ -288,8 +288,8 @@
     T.stepEnd();
 
     /* ---- a) f(2) ---- */
-    /* bubblan läggs UNDER hela figuren (y-axeln når ned till 310) */
-    tanke(322, [
+    /* bubblan läggs UNDER hela figuren (y-axeln når ned till 486) */
+    tanke(498, [
       [['f(2) är kurvans höjd vid']],
       [['x=2. Jag går upp från 2 på']],
       [['x-axeln till kurvan och sedan']],
@@ -299,7 +299,7 @@
     T.pause(180);
     A.dot(2, 8, BLUE);
     T.pause(200);
-    y = 440;
+    y = 616;
     T.str('a) f(2)=8', padL, y);
     T.stepEnd();
 

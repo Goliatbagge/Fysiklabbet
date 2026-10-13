@@ -192,9 +192,9 @@
   reg(2, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, i;
     var tanke = mkTanke(T);
-    var ax = mkAxes(T, F, { ox: 90, oy: 150, u: 24,
+    var ax = mkAxes(T, F, { ox: 108, oy: 162, u: 27,
                             xmin: -2, xmax: 5, ymin: -3, ymax: 4 });
-    var FIGB_Y = 262;                       /* bubblor under figuren */
+    var FIGB_Y = 286;                       /* bubblor under figuren */
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
     /* f(x) = −0,5x² + 1,5x + 2 går genom de tre punkterna */
     function f(x) { return -0.5 * x * x + 1.5 * x + 2; }
@@ -224,7 +224,7 @@
       [['för då är både ax^2 och bx noll.']],
       [['Där skär grafen y-axeln: i E.']]
     ]);
-    y = 400;
+    y = 424;
     T.str('a) c=f(0)=2', padL, y);
     T.stepEnd();
 

@@ -540,6 +540,13 @@ Så här bygger du scenen:
    nästa klick (användarkrav 2026-09-23, `regelNotT` +
    `OLIKHET_VAND_TEXT` i `handskrift.js`, referens: `ma1c-2.11`
    exempel 1b).
+3l. **Koordinatsystemen följer papperets rutnät.** Origo och varje
+   skalsteg ligger på en rutlinje (27 px), så att punkterna går att pricka
+   in exakt. `mkAxes()` snäpper själv `ox`, `oy` och `u` till rutnätet
+   (u blir ett helt antal rutor), så en scen behöver bara välja ett
+   rimligt läge. Läser scenen sina egna `ox`/`oy`/`u` efter anropet ska
+   den ta dem från `A.ox`/`A.oy`/`A.u` (användarkrav 2026-10-13,
+   `ma1c-4.1` exempel 1c). Bygg aldrig ett eget axelkors bredvid.
 3d. **Roten ur båda led som egen rad.** `x² = 9` → `x = ±√9` → `x = ±3`,
    aldrig direkt till `±3` (användarkrav 2026-09-20). De svagaste eleverna
    ska kunna följa varje steg. Gäller pennlösning och textlösning;

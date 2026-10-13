@@ -1182,10 +1182,11 @@
 
     /* ---- steg 1: rita av figuren ---- */
     A.axes();
-    /* parabeln skär x-axeln exakt vid 1 och 3 — talen knuffas i sidled
-     * så att de inte hamnar på kurvan */
+    /* parabeln skär x-axeln vid 1 och 3 och har sin botten en ruta under
+     * axeln vid 2 — x-talen sänks därför under parabelns botten */
     A.ticks(V.heltal(0, 5), V.heltal(-1, 9), V.heltal(1, 5),
-            [2, 4, 6, 8], { x: { 1: -13, 3: 13 } });
+            [2, 4, 6, 8],
+            { x: { 1: [0, 20], 2: [0, 20], 3: [0, 20], 4: [0, 20], 5: [0, 20] } });
     T.pause(200);
     A.rule([A.X(-0.5), A.Y(f(-0.5))], [A.X(5.6), A.Y(f(5.6))]);
     /* etiketten i den fria ytan mellan linjen och parabeln */

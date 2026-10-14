@@ -54,7 +54,7 @@ const INB = /^:::\s*(minisim|graf|video)\b/m;
         const t = m.match(/(\d+)\s*\/\s*(\d+)/);
         return t ? [+t[1], +t[2]] : [0, 0];
       });
-      const sedd = {};
+      const sedd = {}, visad = {};
       let antal = 0, total = 0;
       // Pennlösningarnas steg tar flera klick var, så tryck tills sista
       // steget är nått (med ett tak).
@@ -67,22 +67,28 @@ const INB = /^:::\s*(minisim|graf|video)\b/m;
           const bar = document.querySelector('.lab-pres-bar');
           const avail = bar ? bar.getBoundingClientRect().top : H;
           const els = [...document.querySelectorAll('.lab-pres .lab-minisim, .lab-pres .lab-graf, .lab-pres .lab-video')];
-          return { n: els.length, ok: els.map((e, k) => {
+          const vis = [];
+          const ok = els.map((e, k) => {
             if (!e.closest('.is-current')) return null;
             const b = e.getBoundingClientRect();
             if (b.height < 2) return null;
+            vis.push(k);
             const ryms = b.height <= avail - 4;
             const syns = ryms ? (b.top >= -2 && b.bottom <= avail + 2)
                               : (b.top >= -2 && b.top <= 0.2 * H);
             return syns ? k : null;
-          }).filter(k => k !== null) };
+          }).filter(k => k !== null);
+          return { n: els.length, ok, vis };
         }, H);
         antal = r.n;
         r.ok.forEach(k => { sedd[k] = true; });
+        r.vis.forEach(k => { visad[k] = true; });
         if (tot && n >= tot) break;
       }
       const saknas = [];
-      for (let k = 0; k < antal; k++) if (!sedd[k]) saknas.push(k + 1);
+      // En inbäddning som aldrig visas alls ligger i en dold vy (textlösningen
+      // bakom växeln "Med penna"/"Som text") och räknas inte.
+      for (let k = 0; k < antal; k++) if (visad[k] && !sedd[k]) saknas.push(k + 1);
       if (saknas.length) {
         fel++;
         console.log('FEL  ' + id + ': inbäddning nr ' + saknas.join(', ') + ' av ' + antal +

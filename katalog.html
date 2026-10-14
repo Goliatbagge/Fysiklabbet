@@ -1540,6 +1540,7 @@
                             if (arSim(c)) {
                                 if (introSteg && prev === introSteg) {
                                     (prev.twins || (prev.twins = [])).push(c);
+                                    prev.fokus = c;   // ryms de inte ihop går simuleringen före
                                 } else {
                                     steps.push({ el: c, block: el });
                                 }
@@ -2133,9 +2134,23 @@
                         .filter(r => r.width > 0 || r.height > 0);
                     const rects = measure([target, ...(target === st.el && st.twins ? st.twins : [])]);
                     if (!rects.length) return;
-                    const oTop = Math.min(...rects.map(x => x.top));
-                    const oBot = Math.max(...rects.map(x => x.bottom));
+                    let oTop = Math.min(...rects.map(x => x.top));
+                    let oBot = Math.max(...rects.map(x => x.bottom));
                     const oh = overlay.clientHeight;
+                    // Stycke + inbäddad simulering (st.fokus, se
+                    // buildPresSteps): ryms de inte tillsammans ovanför
+                    // kontrollisten är det SIMULERINGEN som ska synas helt,
+                    // och stycket ovanför får skrollas upp ur bild.
+                    if (st.fokus && target === st.el) {
+                        const bar = overlay.querySelector('.lab-pres-bar');
+                        const ledigt = (bar ? bar.getBoundingClientRect().top - overlay.getBoundingClientRect().top : oh) - 16;
+                        if (oBot - oTop > ledigt) {
+                            const f = st.fokus.getBoundingClientRect();
+                            const ovan = Math.max(0, ledigt - f.height) * 0.5;
+                            overlay.scrollTo({ top: Math.max(0, overlay.scrollTop + f.top - Math.max(8, ovan)), behavior: 'smooth' });
+                            return;
+                        }
+                    }
                     // Helsides-sliden placeras högt i rutan i stället för
                     // centrerat, så att hela den breda rutan får plats
                     // ovanför kontrollisten (den centrerande grenen nedan

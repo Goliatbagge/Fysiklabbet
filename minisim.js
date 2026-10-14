@@ -529,6 +529,14 @@
         '.ms-kv-svg{display:block;width:100%;max-width:593px;height:auto;margin:0 auto;font-style:normal;}',
         '.ms-kv-lager{transition:opacity .2s ease;}',
         '.ms-kv-lager.ms-dold{opacity:0;visibility:hidden;}',
+        /* SVG-scener med fullskärm (msFullskarm): scenen så stor som höjden
+           tillåter, med plats för verktygen under. --ms-asp = bredd/höjd. */
+        '.minisim-card.ms-svgfs:fullscreen{justify-content:center;}',
+        '.minisim-card.ms-svgfs:fullscreen .minisim-scene{width:min(100%,calc((100vh - var(--ms-fs-ctrl,220px))*var(--ms-asp,1.8)));}',
+        '.minisim-card.ms-svgfs:fullscreen .ms-kv-svg{max-width:none!important;width:100%;height:auto;}',
+        '.minisim-card.ms-svgfs:fullscreen .minisim-info{width:min(92vw,640px);}',
+        '.minisim-card.ms-svgfs:-webkit-full-screen .minisim-scene{width:min(100%,calc((100vh - var(--ms-fs-ctrl,220px))*var(--ms-asp,1.8)));}',
+        '.minisim-card.ms-svgfs:-webkit-full-screen .ms-kv-svg{max-width:none!important;width:100%;height:auto;}',
         '.lab-minisim p{margin:0;}'
     ].join('\n');
 
@@ -10534,6 +10542,44 @@
     // vinkeln α = ω · t räknas från den vågräta radien (som i genomgångens
     // härledningsfigur), så att y = A · sin(ω · t). En streckad vågrät linje
     // binder stift, skugga, vikt och grafens aktuella punkt till samma höjd.
+    // Fullskärmsknapp för SVG-scenerna (hjulprojektion, svangningsgrafer):
+    // samma ikon och plats som .fs-btn, kortet går i fullskärm och scenen
+    // skalas efter höjden (CSS-klassen ms-svgfs).
+    function msFullskarm(card, scene, asp, ctrlH) {
+        var UT = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>';
+        var IN = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>';
+        card.classList.add('ms-svgfs');
+        card.style.setProperty('--ms-asp', String(asp));
+        if (ctrlH) card.style.setProperty('--ms-fs-ctrl', ctrlH + 'px');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'minisim-fsbtn';
+        btn.setAttribute('aria-label', 'Fullskärm');
+        btn.title = 'Fullskärm';
+        btn.innerHTML = UT;
+        scene.appendChild(btn);
+        function arFs() { return (document.fullscreenElement || document.webkitFullscreenElement) === card; }
+        btn.addEventListener('click', function () {
+            if (!arFs()) {
+                var req = card.requestFullscreen || card.webkitRequestFullscreen;
+                if (req) { try { var pr = req.call(card); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {} }
+            } else {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            }
+        });
+        function byt() {
+            var fs = arFs();
+            btn.innerHTML = fs ? IN : UT;
+            btn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+        }
+        document.addEventListener('fullscreenchange', byt);
+        document.addEventListener('webkitfullscreenchange', byt);
+    }
+
     var hpRaknare = 0;
     function buildHjulprojektion(node, cfg) {
         var INK = '#1f2530', GREY = '#9aa0a6', BLA = '#2563c9', RUTA = '#2563c9', AXEL = '#38bdf8';
@@ -10710,6 +10756,7 @@
         var grafLager = scene.querySelector('.ms-hp-graf');
         var lampLager = scene.querySelector('.ms-hp-lampa');
         card.appendChild(scene);
+        msFullskarm(card, scene, 648 / 274, 200);
 
         function mkBtn(text, cls) {
             var b = document.createElement('button');
@@ -10872,7 +10919,7 @@
         // ── Fast bakgrund ────────────────────────────────────────────────
         var bas = '<defs><pattern id="' + id + '" width="20" height="20" patternUnits="userSpaceOnUse">' +
             '<path d="M 20 0 L 0 0 0 20" fill="none" stroke="' + RUTA + '" stroke-width="0.6" opacity="0.13"/></pattern></defs>' +
-            '<rect x="0" y="0" width="600" height="340" fill="url(#' + id + ')"/>';
+            '<rect x="0" y="-40" width="600" height="380" fill="url(#' + id + ')"/>';
         bas += '<line x1="' + (FX - 32) + '" y1="' + FTAK + '" x2="' + (FX + 32) + '" y2="' + FTAK + '" stroke="' + INK + '" stroke-width="1.8"/>';
         for (var hx = FX - 28; hx <= FX + 30; hx += 8) {
             bas += '<line x1="' + hx + '" y1="' + FTAK + '" x2="' + (hx - 7) + '" y2="' + (FTAK - 7) +
@@ -10978,7 +11025,7 @@
         }
         var scene = document.createElement('div');
         scene.className = 'minisim-scene ms-kv-scene';
-        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="14 8 584 326" width="620" height="346" ' +
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="14 -26 584 360" width="620" height="382" ' +
             'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
             'aria-label="En vikt svänger i en fjäder. Bredvid ritas tre grafer upp samtidigt: läget y, ' +
             'hastigheten v och accelerationen a mot tiden t. En lodrät markör visar samma ögonblick i alla tre.">' +
@@ -10987,6 +11034,7 @@
             '" height="' + (PANEL[2].c - PANEL[0].c + 104) + '" fill="transparent" style="cursor:ew-resize;touch-action:pan-y"/></svg>';
         var dyn = scene.querySelector('.ms-sg-dyn');
         card.appendChild(scene);
+        msFullskarm(card, scene, 584 / 360, 230);
 
         function mkBtn(text, cls) {
             var b = document.createElement('button');

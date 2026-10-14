@@ -28,7 +28,7 @@ const UNDANTAG = new Set([
     'fy2-5.2:Exempel 1 — Avstånd från parallax (C)',
     'fy2-5.3:Exempel — Månens och solens vinkeldiameter (C)',
     'ma1c-4.1:Exempel 1 — Bilverkstaden',
-    'ma1c-4.2:Exempel 1 — Tanka mopeden',
+    'ma1c-4.2:Exempel 1: Tanka mopeden',
     'ma2c-2.1:Exempel 1 — Utveckla med kvadreringsreglerna',
     'ma2c-6.3:Exempel 1 — Släktmiddagen i Geogebra',
     'ma3c-1.4:Exempel 2 — Förkorta uttrycket',

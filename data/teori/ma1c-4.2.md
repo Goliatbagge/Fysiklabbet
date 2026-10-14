@@ -42,7 +42,7 @@ k = \frac{y}{x}
 $$
 
 Undersök själv: dra i reglaget för $k$ och se hur proportionalitetens graf
-ändras. Lägg märke till att linjen alltid går genom origo — oavsett värdet
+ändras. Lägg märke till att linjen alltid går genom origo, oavsett värdet
 på $k$.
 
 ::: graf
@@ -55,7 +55,7 @@ x: -6, 6
 y: -6, 6
 :::
 
-::: exempel "Exempel 1 — Tanka mopeden"
+::: exempel "Exempel 1: Tanka mopeden"
 **Fabian tankar sin moped med bensin för 20,00 kr/liter. Visa sambandet
 mellan kostnaden $y$ kr och mängden bensin $x$ liter han tankar med en<br>
 a) formel, och ange proportionalitetskonstanten&emsp;&emsp;b) värdetabell&emsp;&emsp;c) graf.**
@@ -103,7 +103,7 @@ Grafen till proportionaliteten $y = 20x$ är en rät linje genom origo.
 :::
 :::
 
-::: exempel "Exempel 2 — Vilka grafer visar proportionalitet?"
+::: exempel "Exempel 2: Vilka grafer visar proportionalitet?"
 **Vilken eller vilka av graferna nedan visar en proportionalitet?**
 
 ::: figur

@@ -10568,13 +10568,14 @@
         bas += '<defs><linearGradient id="' + id + '-ljus" x1="0" y1="0" x2="1" y2="0">' +
             '<stop offset="0" stop-color="#f6c84c" stop-opacity="0.55"/>' +
             '<stop offset="1" stop-color="#f6c84c" stop-opacity="0.16"/></linearGradient></defs>';
+        bas += '<g class="ms-hp-lampa">';
         bas += '<polygon points="-12,124 ' + (VX - 7) + ',44 ' + (VX - 7) + ',256 -12,176" fill="url(#' + id + '-ljus)"/>';
         bas += '<line x1="-26" y1="170" x2="-26" y2="252" stroke="#3d434d" stroke-width="3"/>' +
             '<rect x="-44" y="250" width="36" height="6" rx="2" fill="#3d434d"/>' +
             '<polygon points="-42,138 -14,124 -14,176 -42,162" fill="#4a515c" stroke="#2b2f36" stroke-width="1.4" stroke-linejoin="round"/>' +
             '<rect x="-48" y="136" width="8" height="28" rx="2" fill="#2b2f36"/>' +
             '<line x1="-13" y1="125" x2="-13" y2="175" stroke="#f2b632" stroke-width="4" stroke-linecap="round"/>';
-        bas += lbl(-26, 276, 'middle', 'Lampa', 13, '#6a7180');
+        bas += lbl(-26, 276, 'middle', 'Lampa', 13, '#6a7180') + '</g>';
         [CY - A, CY, CY + A].forEach(function (yy) {
             bas += '<line x1="262" y1="' + yy + '" x2="' + GX1 + '" y2="' + yy + '" stroke="' + GREY +
                 '" stroke-width="1" stroke-dasharray="5 4" opacity="0.8"/>';
@@ -10705,6 +10706,7 @@
             bas + '<g class="ms-hp-graf">' + graf + '</g><g class="ms-hp-dyn"></g></svg>';
         var dyn = scene.querySelector('.ms-hp-dyn');
         var grafLager = scene.querySelector('.ms-hp-graf');
+        var lampLager = scene.querySelector('.ms-hp-lampa');
         card.appendChild(scene);
 
         function mkBtn(text, cls) {
@@ -10730,10 +10732,12 @@
         var omBtn = mkBtn('Börja om');
         var vinkelCk = mkCheck('Visa vinkeln', true);
         var grafCk = mkCheck('Visa graf', true);
+        var lampCk = mkCheck('Visa lampa', true);
         controls.appendChild(startBtn);
         controls.appendChild(omBtn);
         controls.appendChild(vinkelCk.label);
         controls.appendChild(grafCk.label);
+        controls.appendChild(lampCk.label);
         card.appendChild(controls);
 
         var sliderRow = document.createElement('div');
@@ -10793,6 +10797,9 @@
             rita();
         });
         vinkelCk.cb.addEventListener('change', function () { visaVinkel = vinkelCk.cb.checked; rita(); });
+        lampCk.cb.addEventListener('change', function () {
+            lampLager.style.display = lampCk.cb.checked ? '' : 'none';
+        });
         grafCk.cb.addEventListener('change', function () { visaGraf = grafCk.cb.checked; rita(); });
         slider.addEventListener('input', function () {
             T = parseFloat(slider.value);

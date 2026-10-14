@@ -103,6 +103,70 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-14-asteroiden-som-snurrar-pa-fyra-minuter",
+    date: "2026-10-14",
+    title: "En asteroid stor som en stadsdel snurrar ett varv på fyra minuter",
+    deck: "Stora asteroider brukar inte rotera fortare än ett varv på drygt två timmar, för då slits de sönder. Med mätningar från det nya Rubinobservatoriet i Chile har forskare hittat en asteroid som är två och en halv kilometer bred och ändå snurrar ett varv på fyra minuter. Den måste hållas ihop av något mer än sin egen gravitation.",
+    category: "Astronomi",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-14-asteroiden-som-snurrar-pa-fyra-minuter.jpg",
+    imageAlt: "En vit, kantig teleskopbyggnad på en klippig bergstopp under en mörkblå kvällshimmel med stjärnor och en ljus planet. Långt bort vid horisonten lyser en stads ljus.",
+    imageCredit: "Foto: Rubin Observatory/NOIRLab/NSF/AURA/B. Quint (CC BY 4.0), via Wikimedia Commons",
+    tags: ["astronomi", "asteroid", "rotation", "cirkulär rörelse", "centripetalkraft", "gravitation", "vinkelhastighet", "densitet", "ljuskurva", "rubinobservatoriet"],
+    sources: [
+      { name: "Phys.org: Vera Rubin Observatory spots the largest ultra-fast spinning asteroid yet (oktober 2026)", url: "https://phys.org/news/2026-10-vera-rubin-observatory-largest-ultra.html" },
+      { name: "arXiv: förtrycket i fulltext", url: "https://arxiv.org/abs/2610.07584" },
+      { name: "NASA JPL Small-Body Database: asteroiden 491384 (2012 BZ145)", url: "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=491384" }
+    ],
+    research: {
+      citation: "D. E. Vavilov, S. Eggl och S. Greenstreet, ”Discovery of 2 km ultra-fast rotating asteroid in Rubin DP2 catalog via varying Fourier order method”, arXiv:2610.07584 (2026). Förtryck, ännu inte kollegialt granskat.",
+      url: "https://arxiv.org/abs/2610.07584"
+    },
+    simulering: {
+      href: "fysik1-tyngdfaktor-jorden.html?sim=globe",
+      name: "Tyngdaccelerationen på jorden",
+      text: "Se hur jordens rotation gör tyngdaccelerationen lite mindre vid ekvatorn än vid polerna, eftersom en del av tyngdkraften går åt till att hålla kvar föremålen i cirkelbanan runt jordaxeln."
+    },
+    larare: {
+      moment: [
+        { label: "Cirkulär rörelse", href: "katalog.html?id=fy2-1.5" },
+        { label: "Energi och gravitation i cirkelbanor", href: "katalog.html?id=fy2-1.6" },
+        { label: "Gravitationslagen", href: "katalog.html?id=fy1-3.5" }
+      ],
+      fragor: [
+        "Visa att den kortaste möjliga perioden för en klotformad grushög, $T = \\sqrt{\\dfrac{3\\pi}{G \\cdot \\rho}}$, inte beror på klotets radie. Vad betyder det för om en liten eller en stor asteroid har lättast att snurra fort?",
+        "Asteroiden 491384 roterar ett varv på 4,18 minuter och är omkring 2,9 km lång. Beräkna farten och centripetalaccelerationen för en sten längst ut på den långa axeln.",
+        "Utan kontroller såg 1 487 asteroider ut att rotera fortare än barriären, men bara 66 återstod efter granskningen. Varför är det lätt att mäta fel period när man bara ser en asteroid vid enstaka, oregelbundna tillfällen?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'En asteroid lyser inte själv. Den syns för att den reflekterar solljus, och eftersom de flesta asteroider är avlånga och oregelbundna blir de omväxlande ljusare och mörkare när de roterar. Den breda sidan vänder sig mot oss, sedan den smala, sedan den breda igen. Ur den blinkningen, asteroidens ljuskurva, går det att räkna ut hur lång tid ett varv tar.' },
+      { type: 'p', html: 'När astronomer gjort det för tiotusentals asteroider har ett tydligt mönster dykt upp. Asteroider som är större än omkring 150&nbsp;meter roterar nästan aldrig fortare än ett varv på ungefär 2,2&nbsp;timmar. Gränsen kallas rotationsbarriären, och den har en enkel förklaring i mekaniken.' },
+
+      { type: 'h2', text: 'Varför en grushög har en hastighetsgräns' },
+      { type: 'p', html: 'Många asteroider är inga hela klippblock utan lösa högar av grus och sten som bara hålls ihop av sin egen svaga gravitation. En sten på ytan som följer med i rotationen rör sig i en cirkelbana, och för det krävs en kraft riktad mot centrum. Den kraften kan bara gravitationen stå för. Snurrar asteroiden för fort räcker gravitationen inte till, och stenarna vid ekvatorn lossnar och flyger iväg.' },
+      { type: 'p', html: 'För ett klot med radien $R$, massan $M$ och vinkelhastigheten $\\omega$ går gränsen där tyngdaccelerationen vid ytan precis räcker som centripetalacceleration, $\\dfrac{G \\cdot M}{R^2} = \\omega^2 \\cdot R$. Uttrycker man klotets massa med hjälp av densiteten $\\rho$ försvinner radien ur ekvationen, och kvar blir den kortaste möjliga perioden' },
+      { type: 'p', html: '$T = \\sqrt{\\dfrac{3\\pi}{G \\cdot \\rho}}$' },
+      { type: 'p', html: 'Gränsen beror alltså bara på densiteten, inte på storleken. Med en densitet på 1&nbsp;700&nbsp;kg/m<sup>3</sup>, som forskarna räknar med för steniga asteroider, blir den omkring 2,5&nbsp;timmar, och med något tätare sten landar man på drygt två timmar, precis där barriären syns i mätningarna.' },
+
+      { type: 'h2', text: 'Ett varv på 4,18 minuter' },
+      { type: 'p', html: 'Vera C. Rubinobservatoriet på berget Cerro Pachón i Chile har den största digitalkamera som byggts och fotograferar den södra stjärnhimlen om och om igen. Dmitrii Vavilov vid University of Washington, Siegfried Eggl vid University of Illinois och Sarah Greenstreet vid Rubinobservatoriet har gått igenom observatoriets tidiga mätningar, från april 2025 till januari 2026, och bestämt rotationen för 9&nbsp;417 asteroider som fotograferats minst 80 gånger var.' },
+      { type: 'p', html: 'Bland dem hittade de 66 som roterar fortare än rotationsbarriären. Två sticker ut. Asteroiden 491384 är omkring 2,5&nbsp;kilometer bred, ungefär 2,9&nbsp;kilometer lång på sin längsta ledd, och roterar ett varv på 4,18&nbsp;minuter. Det är den största asteroid som hittills uppmätts med en så snabb rotation. Asteroiden 566130 är omkring 2&nbsp;kilometer bred och roterar ett varv på 5,34&nbsp;minuter. Båda ligger i asteroidbältet mellan Mars och Jupiter, och 491384 går ett varv runt solen på drygt fyra år.' },
+      { type: 'p', html: 'Det går att räkna på vad det innebär. En sten längst ut på den långa axeln, knappt 1,5&nbsp;kilometer från mitten, färdas med omkring 37&nbsp;m/s, alltså ungefär 130&nbsp;km/h. För att hålla kvar den i cirkelbanan krävs en centripetalacceleration på nästan 1&nbsp;m/s<sup>2</sup>, men gravitationen vid ytan ger bara omkring 0,0006&nbsp;m/s<sup>2</sup>, ungefär en femtonhundradel av vad som behövs. Utan något som håller ihop materialet skulle asteroiden alltså slungas isär.' },
+
+      { type: 'h2', text: 'Något måste hålla ihop den' },
+      { type: 'p', html: 'Forskarnas slutsats är att 491384 måste ha en betydande inre hållfasthet. Med en modell för när en avlång kropp slits sönder räknar de ut att materialet behöver en hållfasthet på omkring 2,3&nbsp;megapascal, drygt 20 gånger atmosfärstrycket. Det motsvarar enligt studien ytgrus som är lätt hopkittat. En vanlig förklaring, som studien också nämner, är van der Waals-krafter: de svaga dragningskrafterna mellan molekyler som gör att fint damm klibbar ihop.' },
+      { type: 'p', html: 'Själva mätningen var den svåra delen. Rubinobservatoriet ser varje asteroid bara vid spridda tillfällen, och luckorna mellan bilderna gör att många olika perioder kan passa nästan lika bra. Utan kontroller hade 1&nbsp;487 asteroider i materialet sett ut att rotera fortare än barriären och 899 fortare än ett varv på fem minuter. Forskarna har därför byggt ett program som självt avgör hur pålitlig varje uppmätt period är och redovisar vilka andra perioder som fortfarande är möjliga. Det behövs: under de kommande tio åren väntas observatoriet mäta upp till fem miljoner små himlakroppar i solsystemet.' },
+      { type: 'p', html: 'Studien är ett förtryck som ännu inte granskats av andra forskare, och författarna skriver själva att perioderna för de två stora asteroiderna bör bekräftas med riktade observationer.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Även jordens rotation märks i tyngdaccelerationen. Vid ekvatorn går omkring 0,03&nbsp;m/s<sup>2</sup> åt till att hålla kvar oss i cirkelbanan runt jordaxeln, så rotationen ensam gör att vi väger ungefär en tredjedels procent mindre där än om jorden hade stått still.',
+        'En asteroids rotation kan ändras utan att något krockar med den. Solljuset värmer ytan, och när värmen strålar ut igen ger den en liten rekyl. Effekten kallas YORP-effekten och kan under miljontals år få små asteroider att snurra allt fortare.',
+        'Asteroider får ett nummer när deras bana är säkert känd. 491384 fick den preliminära beteckningen 2012&nbsp;BZ145 år 2012 och har ännu inget namn i ord.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-13-magnetfaltet-som-formas-om",
     date: "2026-10-13",
     title: "Järn och en supraledare ger magnetfältet precis den form man vill",

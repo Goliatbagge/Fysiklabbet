@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Tue, 13 Oct 2026 01:20:09 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2026 01:30:02 GMT</lastBuildDate>
+    <item>
+      <title>En asteroid stor som en stadsdel snurrar ett varv på fyra minuter</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-14-asteroiden-som-snurrar-pa-fyra-minuter</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-14-asteroiden-som-snurrar-pa-fyra-minuter</guid>
+      <pubDate>Wed, 14 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Astronomi</category>
+      <description>Stora asteroider brukar inte rotera fortare än ett varv på drygt två timmar, för då slits de sönder. Med mätningar från det nya Rubinobservatoriet i Chile har forskare hittat en asteroid som är två och en halv kilometer bred och ändå snurrar ett varv på fyra minuter. Den måste hållas ihop av något mer än sin egen gravitation.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-14-asteroiden-som-snurrar-pa-fyra-minuter.jpg" length="569925" type="image/jpeg"/>
+    </item>
     <item>
       <title>Järn och en supraledare ger magnetfältet precis den form man vill</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-13-magnetfaltet-som-formas-om</link>
@@ -177,15 +186,6 @@
       <category>Astrofysik</category>
       <description>När en tung stjärnas kärna faller ihop bärs nästan all energi bort av neutriner. Två forskare vid Niels Bohr-institutet har låtit 195 stjärnor kollapsa i datorn och sett vad som händer om neutrinerna hinner byta sort på vägen ut: stjärnor som annars hade exploderat slutar i stället som svarta hål. Känsligast är stjärnor mellan 16 och 30 solmassor.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-27-neutrinernas-smak-avgor-stjarnans-ode.jpg" length="470998" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Vattenvirvelns kärna bär vågor som ett spänt rep — och energin vandrar nedåt sex vågor i taget</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-26-vagorna-langs-virvelns-karna</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-26-vagorna-langs-virvelns-karna</guid>
-      <pubDate>Sat, 26 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Strömningslära</category>
-      <description>Lord Kelvin förutsade 1880 att en virvel kan bära spiralformade vågor längs sin egen mittlinje. Ett lag i Paris har nu filmat en fyra decimeter lång vattenvirvel med 480 bilder i sekunden och sett hur energin vandrar från centimeterstora krusningar ner till bråkdelar av en millimeter. Vägen nedåt kräver att sex vågor möts samtidigt.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-26-vagorna-langs-virvelns-karna.jpg" length="322278" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

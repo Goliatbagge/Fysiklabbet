@@ -61,6 +61,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'ljuskurva',
+    term: 'Ljuskurva',
+    former: ['ljuskurva', 'ljuskurvan', 'ljuskurvor', 'ljuskurvorna'],
+    kort: 'Ett diagram över hur ljusstyrkan hos en himlakropp ändras med tiden. Ur kurvans upprepningar kan man räkna ut till exempel hur fort en asteroid roterar.',
+    relaterade: ['asteroid', 'rotationsbarriaren'],
+    body: [
+      { type: 'p', html: 'Tänk dig att du står i ett mörkt rum och någon snurrar en avlång potatis framför en ficklampa. När potatisen vänder den breda sidan mot dig ser du mycket reflekterat ljus, när den vänder den smala sidan mot dig ser du mindre. Ritar du upp ljusstyrkan mot tiden får du en våg som går upp och ned, två toppar för varje varv. Det diagrammet är en ljuskurva.' },
+      { type: 'p', html: 'Astronomer gör precis så med asteroider. De flesta asteroider är för små och för långt bort för att synas som något annat än en ljuspunkt, även i stora teleskop. Men ljuspunkten blinkar i takt med rotationen, och genom att mäta ljusstyrkan många gånger kan man hitta perioden, alltså hur lång tid ett varv tar. Hur mycket ljuset varierar avslöjar dessutom ungefär hur avlång asteroiden är: en nästan rund kropp blinkar nästan inte alls.' },
+      { type: 'p', html: 'Det svåra är att man sällan ser asteroiden hela tiden. Mätningarna kommer vid spridda tillfällen, och då kan flera olika perioder passa nästan lika bra. Därför behövs både många mätningar och noggrann statistik för att avgöra vilken period som är den rätta. Ljuskurvor används också för variabla stjärnor, för supernovor och för att hitta planeter som passerar framför sin stjärna och skymmer en liten del av ljuset.' }
+    ]
+  },
+  {
+    id: 'rotationsbarriaren',
+    term: 'Rotationsbarriären',
+    former: ['rotationsbarriären', 'rotationsbarriär', 'rotationsbarriärer'],
+    kort: 'Den gräns på ungefär ett varv per 2,2 timmar som asteroider större än omkring 150 meter nästan aldrig roterar fortare än. Snurrar en lös grushög fortare slits den sönder.',
+    relaterade: ['asteroid', 'ljuskurva', 'yorp-effekten'],
+    body: [
+      { type: 'p', html: 'Snurra en hink med grus runt i en cirkel. För att gruset ska följa med i cirkelbanan måste något hela tiden dra det in mot mitten, och i hinken är det botten som gör det. På en asteroid som roterar finns ingen hink. Stenarna på ytan hålls kvar bara av asteroidens egen gravitation, och den är mycket svag: på en kilometerstor asteroid väger du bara några hundratusendelar av vad du väger på jorden.' },
+      { type: 'p', html: 'Ju fortare asteroiden snurrar, desto större kraft behövs för att hålla kvar stenarna vid ekvatorn. Vid en viss hastighet räcker gravitationen inte längre till, och stenarna lossnar. Räknar man på en klotformad hög av lösa stenar visar det sig att gränsen bara beror på hur tät asteroiden är, inte på hur stor den är. För vanlig stenig asteroid hamnar den kring två timmar per varv. Det stämmer med mätningarna: bland tiotusentals asteroider större än omkring 150&nbsp;meter roterar nästan ingen fortare än ett varv på 2,2&nbsp;timmar.' },
+      { type: 'p', html: 'Att barriären finns är ett av de starkaste beläggen för att många asteroider är lösa grushögar och inte hela klippblock. De få stora asteroider som ändå roterar fortare måste hållas ihop av något mer än gravitationen. Det kan vara att de är ett enda fast stycke berg, eller att små dragningskrafter mellan dammkornen klistrar ihop materialet. Mindre asteroider, under några hundra meter, roterar däremot ofta mycket fortare, eftersom de lättare kan vara hela klippblock.' }
+    ]
+  },
+  {
+    id: 'yorp-effekten',
+    term: 'YORP-effekten',
+    former: ['yorp-effekten', 'yorp-effekt', 'yorp'],
+    kort: 'En liten vridande verkan från solljuset som under miljontals år kan få små asteroider att rotera fortare eller långsammare.',
+    relaterade: ['asteroid', 'rotationsbarriaren'],
+    body: [
+      { type: 'p', html: 'Solljuset värmer upp en asteroids yta. Värmen strålar sedan ut igen som osynlig infraröd strålning, och strålning som lämnar en yta ger ytan en liten knuff åt motsatt håll, ungefär som rekylen när man kastar en boll. Om asteroiden vore ett perfekt klot skulle alla knuffar ta ut varandra. Men asteroider är oregelbundna, med kanter och sneda ytor, och då blir knuffarna lite starkare åt ena hållet än åt det andra.' },
+      { type: 'p', html: 'Resultatet blir ett litet vridmoment, som på en väderkvarn i vinden. Effekten är ofattbart svag, men den verkar hela tiden. Under miljontals år kan den få en liten asteroid att snurra allt fortare, tills den till slut kanske kastar av sig material eller delar sig i två. Den kan också bromsa rotationen eller ändra lutningen på asteroidens rotationsaxel.' },
+      { type: 'p', html: 'Namnet kommer från de fyra forskare som bidrog till idén: Yarkovsky, O’Keefe, Radzievskii och Paddack. Effekten har mätts direkt på flera asteroider, där rotationsperioden blivit lite kortare år för år. Den är en viktig orsak till att så många små asteroider roterar nära gränsen för vad de tål.' }
+    ]
+  },
+  {
     id: 'permeabilitet',
     term: 'Permeabilitet',
     former: ['permeabilitet', 'permeabiliteten', 'magnetisk permeabilitet', 'magnetiska permeabiliteten', 'relativ permeabilitet'],

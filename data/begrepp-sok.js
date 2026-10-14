@@ -10,6 +10,9 @@
  */
 window.BEGREPP_LATT = true;
 window.BEGREPP = [
+  {"id":"ljuskurva","term":"Ljuskurva","kort":"Ett diagram över hur ljusstyrkan hos en himlakropp ändras med tiden. Ur kurvans upprepningar kan man räkna ut till exempel hur fort en asteroid roterar.","former":["ljuskurva","ljuskurvan","ljuskurvor","ljuskurvorna"]},
+  {"id":"rotationsbarriaren","term":"Rotationsbarriären","kort":"Den gräns på ungefär ett varv per 2,2 timmar som asteroider större än omkring 150 meter nästan aldrig roterar fortare än. Snurrar en lös grushög fortare slits den sönder.","former":["rotationsbarriären","rotationsbarriär","rotationsbarriärer"]},
+  {"id":"yorp-effekten","term":"YORP-effekten","kort":"En liten vridande verkan från solljuset som under miljontals år kan få små asteroider att rotera fortare eller långsammare.","former":["yorp-effekten","yorp-effekt","yorp"]},
   {"id":"permeabilitet","term":"Permeabilitet","kort":"Ett mått på hur lätt ett material leder magnetfält. Järn har mycket hög permeabilitet och drar in fältlinjerna i sig, medan luft och de flesta andra ämnen påverkar fältet nästan inte alls.","former":["permeabilitet","permeabiliteten","magnetisk permeabilitet","magnetiska permeabiliteten","relativ permeabilitet"]},
   {"id":"magnetisk-monopol","term":"Magnetisk monopol","kort":"En tänkt partikel som bara har en magnetisk pol, alltså en nordända utan sydända eller tvärtom. Teorier förutsäger att sådana kan finnas, men ingen har hittat en.","former":["magnetisk monopol","magnetiska monopoler","magnetiska monopolen","monopol","monopoler","ensam magnetisk pol"]},
   {"id":"utspadningskryostat","term":"Utspädningskryostat","kort":"En kylmaskin som når temperaturer omkring en hundradels grad över absoluta nollpunkten, genom att blanda två sorters helium. Används för kvantdatorer och supraledare.","former":["utspädningskryostat","utspädningskryostaten","utspädningskryostater","utspädningskylskåp"]},

@@ -16,6 +16,12 @@ Format per post:
   Källa (Phys.org 2026-10-07): https://phys.org/news/2026-10-levitating-glass-sphere-entangled-room.html
   (tillagd 2026-10-08)
 
+- **Webb ser en supernova i det tidiga universum bara dagar efter explosionen** — transienten AT 2026abck i en galax vid rödförskjutning 5,017. Ingång: ljusets gångtid, rödförskjutning. OBS: astronomi publicerades 2026-10-14, vänta. Originalet ej kontrollerat. Källa (Phys.org 2026-10-13): https://phys.org/news/2026-10-webb-early-universe-supernova-days.html
+  (tillagd 2026-10-14)
+
+- **Sjöapor visar hur turbulensens energikaskad kan vändas** — simmare och stavar som lutar mer än 45° mot sträckriktningen vänder energiflödet i tvådimensionell turbulens (Fang, Si, De Lillo, Boffetta). OBS: Quanta-reportage 2026-10-02 om studier från 2024–2025 (PNAS Nexus, Science Advances), inte dagsfärskt; passar som strömningsreserv. Källa: https://www.quantamagazine.org/sea-monkeys-show-scientists-how-to-rewrite-a-rule-of-turbulence-20261002/
+  (tillagd 2026-10-14)
+
 - **Einsteins ekvationer härledda ur kvantinformation** — Phys.org 2026-10-13 (”Gravity and quantum information linked through a derivation of Einstein's equations”). Teoretiskt, gravitation/allmän relativitetsteori. Originalet ej kontrollerat. Källa: https://phys.org/news/2026-10-gravity-quantum-linked-derivation-einstein.html
   (tillagd 2026-10-13)
 

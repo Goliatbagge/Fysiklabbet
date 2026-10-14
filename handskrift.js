@@ -21820,9 +21820,21 @@
     fracH('2π', 'ω', xb, y);
     stepEnd();
 
+    /* mätvärdesklammern DIREKT under formeln (se REGEL) */
+    y += adv + 1.3 * F;
+    var bK2 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Samlar värdet jag ska sätta in:']],
+      [['', 0], ['ω', 1], [' från jämförelsen ovan.', 0]]
+    ]);
+    tanke(bK2);
+    var klam2 = valueBracket(acts, ['ω=10 rad/s'], padL, y, s, F);
+    stepEnd();
+    y = klam2.yEnd;
+
     y += adv + 1.3 * F;
     var bI2 = bubble(140, bubbleTop(y - adv), bw, [
-      [['Nu sätter jag in ', 0], ['ω', 1], [' = 10 rad/s.', 0]]
+      [['Nu sätter jag in värdet ur']],
+      [['klammern i formeln.']]
     ]);
     tanke(bI2);
     var xi2 = placeString('T=', padL, y, s, F, acts);

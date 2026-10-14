@@ -10560,7 +10560,19 @@
         // ── Fast bakgrund: rutnät, referenslinjer, vägg, tak, axlar ──────
         var bas = '<defs><pattern id="' + id + '" width="20" height="20" patternUnits="userSpaceOnUse">' +
             '<path d="M 20 0 L 0 0 0 20" fill="none" stroke="' + RUTA + '" stroke-width="0.6" opacity="0.13"/></pattern></defs>' +
-            '<rect x="0" y="0" width="600" height="290" fill="url(#' + id + ')"/>';
+            '<rect x="-60" y="0" width="660" height="290" fill="url(#' + id + ')"/>';
+        // lampan till vänster och ljuskäglan mot hjulet och väggen: det är
+        // den som kastar stiftets skugga på väggen
+        bas += '<defs><linearGradient id="' + id + '-ljus" x1="0" y1="0" x2="1" y2="0">' +
+            '<stop offset="0" stop-color="#f6c84c" stop-opacity="0.55"/>' +
+            '<stop offset="1" stop-color="#f6c84c" stop-opacity="0.16"/></linearGradient></defs>';
+        bas += '<polygon points="-12,124 ' + (VX - 7) + ',44 ' + (VX - 7) + ',256 -12,176" fill="url(#' + id + '-ljus)"/>';
+        bas += '<line x1="-26" y1="170" x2="-26" y2="252" stroke="#3d434d" stroke-width="3"/>' +
+            '<rect x="-44" y="250" width="36" height="6" rx="2" fill="#3d434d"/>' +
+            '<polygon points="-42,138 -14,124 -14,176 -42,162" fill="#4a515c" stroke="#2b2f36" stroke-width="1.4" stroke-linejoin="round"/>' +
+            '<rect x="-48" y="136" width="8" height="28" rx="2" fill="#2b2f36"/>' +
+            '<line x1="-13" y1="125" x2="-13" y2="175" stroke="#f2b632" stroke-width="4" stroke-linecap="round"/>';
+        bas += lbl(-26, 276, 'middle', 'Lampa', 13, '#6a7180');
         [CY - A, CY, CY + A].forEach(function (yy) {
             bas += '<line x1="262" y1="' + yy + '" x2="' + GX1 + '" y2="' + yy + '" stroke="' + GREY +
                 '" stroke-width="1" stroke-dasharray="5 4" opacity="0.8"/>';
@@ -10682,9 +10694,10 @@
         }
         var scene = document.createElement('div');
         scene.className = 'minisim-scene ms-kv-scene';
-        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="10 12 586 274" width="634" height="297" ' +
+        scene.innerHTML = '<svg class="ms-kv-svg" style="max-width:100%" viewBox="-52 12 648 274" width="664" height="281" ' +
             'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
-            'aria-label="Ett cykelhjul med ett stift på radien A snurrar med jämn fart. Ljus från sidan ' +
+            'aria-label="Ett cykelhjul med ett stift på radien A snurrar med jämn fart. En lampa till vänster ' +
+            'lyser på hjulet och ' +
             'kastar stiftets skugga på en vägg, och skuggan rör sig upp och ned i takt med en vikt som ' +
             'svänger i en fjäder bredvid. En graf till höger ritar viktens läge y mot tiden t som en sinuskurva.">' +
             bas + '<g class="ms-hp-graf">' + graf + '</g><g class="ms-hp-dyn"></g></svg>';

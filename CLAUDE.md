@@ -578,8 +578,11 @@ Så här bygger du scenen:
    skiljer ut något på grafen (tangent, sekant, markerat intervall, en av
    två kurvor som jämförs) behåller grundkurvan bläcket. Se REGEL "GRAFEN
    RITAS I BLÅTT" i filhuvudet.
-3m. **Räta linjer dras med linjal.** När eleven själv drar en rät linje
-   i lösningen (graf, hjälplinje, sekant, tangent) läggs en linjal an mot
+3m. **Räta linjer och axlar dras med linjal.** Koordinatsystemets axlar
+   (`mkAxes().axes()` gör det själv; handritade axelkors använder
+   `linjalStreck`/`linjalPil`, exporterade i `HANDSKRIFT.verktyg`) och
+   varje rät linje eleven själv drar
+   i lösningen (graf, hjälplinje, sekant, tangent) ritas så: linjalen läggs an mot
    punkterna, pennan drar linjen längs kanten och linjalen lyfts bort:
    `A.linjal(p0, p1, col)` / `A.linjalKM(k, m, col, x0, x1)` i
    `mkAxes()` (användarkrav 2026-10-14, referens `ma1c-4.1` exempel 1c).

@@ -2386,8 +2386,8 @@
 
     var ox = padL + 120, oy = y + 270, kx = 12, ky = 6.0;
     function P(v, m) { return [ox + v * kx, oy - m * ky]; }
-    T.arrow([ox, oy + 34], [ox, oy - 34 * ky]);
-    T.arrow([ox, oy], [ox + 33 * kx, oy]);
+    V.linjalPil(T.acts, [ox, oy + 34], [ox, oy - 34 * ky]);   /* axlar med linjal */
+    V.linjalPil(T.acts, [ox, oy], [ox + 33 * kx, oy]);
     T.lbl('m_L (g)', ox + 12, oy - 34 * ky + 4);
     T.lbl('V_B (dm^3)', ox + 33 * kx - 40, oy + 0.95 * F);
     T.pause(140);
@@ -2455,8 +2455,8 @@
       [['Ritar av diagrammet med']],
       [['mätpunkterna.']]
     ], 480));
-    T.arrow([ox, oy], [ox + 168 * kx, oy]);
-    T.arrow([ox, oy], [ox, oy - 43 * ky]);
+    V.linjalPil(T.acts, [ox, oy], [ox + 168 * kx, oy]);       /* axlar med linjal */
+    V.linjalPil(T.acts, [ox, oy], [ox, oy - 43 * ky]);
     T.lbl('t (min)', ox + 168 * kx + 12, oy + 6);
     T.lbl('T (°C)', ox + 12, oy - 43 * ky + 6);
     T.pause(140);

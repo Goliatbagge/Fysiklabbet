@@ -775,11 +775,11 @@
     /* egna axlar: beteckningarna Re och Im är två tecken, och mkAxes
      * axes() skriver bara en glyf */
     var xr = A.X(5) + 0.85 * u, yt = A.Y(5) - 0.85 * u;
-    T.line([A.X(-5) - 0.5 * u, oy], [xr, oy]);
+    V.linjalStreck(T.acts, [A.X(-5) - 0.5 * u, oy], [xr, oy]);   /* axlar med linjal */
     T.line([xr - 9, oy - 5], [xr + 1, oy]);
     T.line([xr - 9, oy + 5], [xr + 1, oy]);
     T.pause(140);
-    T.line([ox, A.Y(-5) + 0.5 * u], [ox, yt]);
+    V.linjalStreck(T.acts, [ox, A.Y(-5) + 0.5 * u], [ox, yt]);
     T.line([ox - 5, yt + 9], [ox, yt - 1]);
     T.line([ox + 5, yt + 9], [ox, yt - 1]);
     T.pause(140);
@@ -787,9 +787,9 @@
     T.str('Im', ox + 10, yt + 8, null, 0.5);
     A.ticks(V.heltal(-5, 5), V.heltal(-5, 5), [-4, -2, 2, 4], [-4, -2, 2, 4]);
     T.pause(160);
-    T.line([A.X(-5.3), A.Y(-5.3)], [A.X(5.3), A.Y(5.3)], BLUE);
+    A.linjal([A.X(-5.3), A.Y(-5.3)], [A.X(5.3), A.Y(5.3)], BLUE);
     T.pause(140);
-    T.line([A.X(-5.3), A.Y(5.3)], [A.X(5.3), A.Y(-5.3)], BLUE);
+    A.linjal([A.X(-5.3), A.Y(5.3)], [A.X(5.3), A.Y(-5.3)], BLUE);
     T.pause(140);
     T.str('y=x', A.X(4.5), A.Y(3.0), BLUE, 0.5);
     T.str('y=-x', A.X(-4.5) - T.adv('y=-x', 0.5), A.Y(3.0), BLUE, 0.5);

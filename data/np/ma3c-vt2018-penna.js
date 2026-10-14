@@ -189,10 +189,10 @@
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
 
     /* steg 1: axlarna, grafen och de fem linjerna */
-    T.line([X(-0.4), OY], [X(6.4), OY]);
+    V.linjalStreck(T.acts, [X(-0.4), OY], [X(6.4), OY]);   /* axlar med linjal */
     T.line([X(6.4) - 9, OY - 5], [X(6.4) + 1, OY]);
     T.line([X(6.4) - 9, OY + 5], [X(6.4) + 1, OY]);
-    T.line([X(0), OY + 14], [X(0), Y(3.6)]);
+    V.linjalStreck(T.acts, [X(0), OY + 14], [X(0), Y(3.6)]);
     T.line([X(0) - 5, Y(3.6) + 9], [X(0), Y(3.6) - 1]);
     T.line([X(0) + 5, Y(3.6) + 9], [X(0), Y(3.6) - 1]);
     T.str('x', X(6.4) - 6, OY + 26, null, 0.6);

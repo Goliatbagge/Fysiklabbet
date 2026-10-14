@@ -1182,6 +1182,42 @@
 
   /* Ett tvåpunktsstreck (rak linje) får en mittpunkt med liten vinkelrät
    * avvikelse — handskrivna "raka" streck är aldrig helt raka. */
+  /* LINJALEN (REGEL RÄTA LINJER OCH AXLAR DRAS MED LINJAL, användarkrav
+   * 2026-10-14): linjalen läggs an längs sträckan, pennan drar strecket
+   * längs kanten och linjalen lyfts bort. Rörelsen ritas av renderLagg i
+   * spelaren; pauserna här ger den tid. extra = egenskaper som strecket
+   * ska bära (till exempel ax: 1 för axelkorsets egna streck). */
+  var LAGG_PAUS = 820;   /* ≥ LAGG_MS i spelaren: linjalen hinner lyftas bort före steggränsen */
+  function linjalStreck(acts, p0, p1, col, extra) {
+    var lin = { ruler: 1, lagg: 1, x1: p0[0], y1: p0[1], x2: p1[0], y2: p1[1],
+                wins: [] };
+    acts.push({ kind: 'pause', ms: 150 });
+    acts.push({ kind: 'show', obj: lin });
+    acts.push({ kind: 'pause', ms: 1000 });   /* linjalen landar */
+    var st = { kind: 'stroke', color: col || null,
+               pts: [[p0[0], p0[1]], [p1[0], p1[1]]] };
+    for (var k in (extra || {})) st[k] = extra[k];
+    acts.push(st);
+    acts.push({ kind: 'pause', ms: 450 });
+    acts.push({ kind: 'hide', obj: lin });
+    acts.push({ kind: 'pause', ms: LAGG_PAUS });
+  }
+  /* AXEL MED LINJAL: linjen dras mot linjalen, pilspetsen för hand efteråt
+   * (samma spets som physTools.arrow) */
+  function linjalPil(acts, p0, p1, col, extra) {
+    linjalStreck(acts, p0, p1, col, extra);
+    var dx = p1[0] - p0[0], dy = p1[1] - p0[1], L = Math.hypot(dx, dy) || 1;
+    dx /= L; dy /= L;
+    var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a), len = 10;
+    [[p1[0] - (dx * ca - dy * sa) * len, p1[1] - (dx * sa + dy * ca) * len],
+     [p1[0] - (dx * ca + dy * sa) * len, p1[1] - (-dx * sa + dy * ca) * len]]
+      .forEach(function (q) {
+        var h = { kind: 'stroke', pts: humanize([q, [p1[0], p1[1]]]), color: col || null };
+        for (var k in (extra || {})) h[k] = extra[k];
+        acts.push(h);
+      });
+  }
+
   function humanize(pts) {
     if (pts.length !== 2) return pts;
     var a = pts[0], b = pts[1];
@@ -1581,10 +1617,10 @@
     /* ---- steg 12: koordinatsystem + skala ---- */
     var xa0 = ox + (xmin - 0.6) * u, xa1 = ox + (xmax + 0.8) * u;
     var ya0 = oy - (ymax + 0.8) * u, ya1 = oy - (ymin - 0.6) * u;
-    line([xa0, oy], [xa1, oy]);                          /* x-axel + pil */
+    linjalStreck(acts, [xa0, oy], [xa1, oy]);             /* x-axel + pil, med linjal */
     line([xa1 - 8, oy - 5], [xa1 + 1, oy]);
     line([xa1 - 8, oy + 5], [xa1 + 1, oy]);
-    line([ox, ya1], [ox, ya0]);                          /* y-axel + pil */
+    linjalStreck(acts, [ox, ya1], [ox, ya0]);             /* y-axel + pil, med linjal */
     line([ox - 5, ya0 + 8], [ox, ya0 - 1]);
     line([ox + 5, ya0 + 8], [ox, ya0 - 1]);
     placeGlyph('x', xa1 + 4, oy + 22, s * 0.6, acts);    /* axeletiketter */
@@ -11253,7 +11289,6 @@
    * läser A.ox, A.oy och A.u (eller använder A.X/A.Y), aldrig sina egna
    * indata. Bygg aldrig runt detta med ett eget axelkors. */
   var RUTA = 27;
-  var LAGG_PAUS = 820;   /* ≥ LAGG_MS i spelaren: linjalen hinner lyftas bort före steggränsen */
   function mkAxes(T, F, o) {
     var s = F / 100, acts = T.acts;
     var u = o.u == null ? RUTA : o.u;
@@ -11306,11 +11341,12 @@
     function axes() {
       var x0 = X(o.xmin) - 0.5 * u, x1 = X(o.xmax) + 0.85 * u;
       var y0 = Y(o.ymax) - 0.85 * u, y1 = Y(o.ymin) + 0.5 * u;
-      axLine([x0, oy], [x1, oy]);
+      /* axlarna dras med linjal (REGEL), pilspetsarna för hand efteråt */
+      linjalStreck(acts, [x0, oy], [x1, oy], null, { ax: 1 });
       axLine([x1 - 9, oy - 5], [x1 + 1, oy]);
       axLine([x1 - 9, oy + 5], [x1 + 1, oy]);
       T.pause(140);
-      axLine([ox, y1], [ox, y0]);
+      linjalStreck(acts, [ox, y1], [ox, y0], null, { ax: 1 });
       axLine([ox - 5, y0 + 9], [ox, y0 - 1]);
       axLine([ox + 5, y0 + 9], [ox, y0 - 1]);
       T.pause(140);
@@ -11417,18 +11453,7 @@
      * sekant, tangent). rule()/graphKM() utan linjal är bara för att
      * rita av uppgiftens egen figur och för korta hjälpstreck
      * (trappsteg, triangelsidor). */
-    function linjal(p0, p1, col) {
-      var lin = { ruler: 1, lagg: 1, x1: p0[0], y1: p0[1], x2: p1[0], y2: p1[1],
-                  wins: [] };
-      T.pause(150);
-      acts.push({ kind: 'show', obj: lin });
-      T.pause(1000);                       /* linjalen landar, eleven ser punkterna längs kanten */
-      acts.push({ kind: 'stroke', color: col || null,
-                  pts: [[p0[0], p0[1]], [p1[0], p1[1]]] });
-      T.pause(450);
-      acts.push({ kind: 'hide', obj: lin });
-      T.pause(LAGG_PAUS);
-    }
+    function linjal(p0, p1, col) { linjalStreck(acts, p0, p1, col); }
     /* grafen y = kx + m med linjal, i blått som graphKM (REGEL GRAFEN
      * RITAS I BLÅTT) */
     function linjalKM(k, m, col, x0, x1) {
@@ -21293,9 +21318,9 @@
       [['höjd för varje period.']]
     ]);
     tanke(b1);
-    line([ox, 210], [ox, 48]);                /* y-axeln */
+    linjalStreck(acts, [ox, 210], [ox, 48]);  /* y-axeln, med linjal */
     arrowHead(ox, 44, ox, 60, 9);
-    line([ox - 6, oy], [556, oy]);            /* t-axeln */
+    linjalStreck(acts, [ox - 6, oy], [556, oy]); /* t-axeln, med linjal */
     arrowHead(560, oy, 546, oy, 9);
     pause(140);
     placeString('A (cm)', 102, 50, s * 0.55, F * 0.55, acts);
@@ -21819,9 +21844,9 @@
       [['Kurvan blir en sinuskurva.']]
     ]);
     tanke(b1);
-    line([ox, 250], [ox, 62]);                /* y-axeln */
+    linjalStreck(acts, [ox, 250], [ox, 62]);  /* y-axeln, med linjal */
     arrowHead(ox, 58, ox, 74, 9);
-    line([ox - 8, oy], [552, oy]);            /* t-axeln */
+    linjalStreck(acts, [ox - 8, oy], [552, oy]); /* t-axeln, med linjal */
     arrowHead(556, oy, 542, oy, 9);
     pause(140);
     placeString('y (m)', 108, 72, s * 0.55, F * 0.55, acts);
@@ -25777,8 +25802,8 @@
       [['växer, ligger stilla och']],
       [['minskar sedan igen.']]
     ], 306));
-    T.arrow([ox, oy], [ox + 8 * kx, oy]);            /* t-axeln */
-    T.arrow([ox, oy], [ox, oy - 13.4 * ky]);         /* Φ-axeln */
+    linjalPil(acts, [ox, oy], [ox + 8 * kx, oy]);     /* t-axeln, med linjal */
+    linjalPil(acts, [ox, oy], [ox, oy - 13.4 * ky]);  /* Φ-axeln, med linjal */
     T.str('t (s)', ox + 8 * kx - 46, oy + 30, null, 0.55);
     T.str('Φ (mWb)', ox + 8, oy - 13.4 * ky - 8, null, 0.55);
     T.pause(150);
@@ -25895,8 +25920,8 @@
       [['varierar spänningen i ett']],
       [['växelströmsnät.']]
     ], 300));
-    T.arrow([ox, oy], [ox + 2.6 * per, oy]);
-    T.arrow([ox, oy + A + 26], [ox, oy - A - 26]);
+    linjalPil(T.acts, [ox, oy], [ox + 2.6 * per, oy]);           /* axlar med linjal */
+    linjalPil(T.acts, [ox, oy + A + 26], [ox, oy - A - 26]);
     T.str('t', ox + 2.6 * per - 22, oy + 28, null, 0.55);
     T.str('u', ox + 10, oy - A - 30, null, 0.55);
     T.pause(150);
@@ -26511,8 +26536,8 @@
       [['våglängd, och den flyttar sig']],
       [['med temperaturen.']]
     ], 300));
-    T.arrow([ox, oy], [ox + 300, oy]);
-    T.arrow([ox, oy], [ox, oy - 170]);
+    linjalPil(T.acts, [ox, oy], [ox + 300, oy]);                 /* axlar med linjal */
+    linjalPil(T.acts, [ox, oy], [ox, oy - 170]);
     T.str('λ', ox + 268, oy + 30, null, 0.55);
     T.str('intensitet', ox + 10, oy - 176, null, 0.55);
     T.pause(150);
@@ -27787,8 +27812,8 @@
     var ox = cfg.ox, oy = cfg.oy, kx = cfg.kx, ky = cfg.ky;
     var yMin = cfg.yMin || 0;
     function P(x, y) { return [ox + x * kx, oy - y * ky]; }
-    T.arrow([ox - 10, oy], [ox + cfg.xMax * kx + 18, oy]);
-    T.arrow([ox, oy - yMin * ky + 12], [ox, oy - cfg.yMax * ky - 18]);
+    linjalPil(T.acts, [ox - 10, oy], [ox + cfg.xMax * kx + 18, oy]);   /* axlar med linjal */
+    linjalPil(T.acts, [ox, oy - yMin * ky + 12], [ox, oy - cfg.yMax * ky - 18]);
     /* axelnamnen läggs BORTOM pilspetsen respektive ovanför den, så att de
        aldrig krockar med skalstrecken (se diagramkonventionerna) */
     if (cfg.xLbl) {
@@ -59613,6 +59638,7 @@
     verktyg: {
       mathTools: mathTools, physTools: physTools,
       mkTanke: mkTanke, mkArc: mkArc, mkMultIn: mkMultIn, mkAxes: mkAxes,
+      linjalStreck: linjalStreck, linjalPil: linjalPil,
       mkEkvOp: mkEkvOp, mkSamla: mkSamla,
       diagram: diagram, trigKvot: trigKvot, vinkelBage: vinkelBage,
       ratVinkel: ratVinkel, vecPil: vecPil, figurPil: figurPil,

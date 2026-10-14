@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hjulet och fjädern — Fysiklabbet</title>
+    <meta name="description" content="En lampa lyser på ett snurrande cykelhjul, och skuggan av ett stift på hjulet rör sig upp och ned på väggen i exakt samma takt som en vikt i en fjäder. Se hur en harmonisk svängning är projektionen av en cirkelrörelse, och hur grafen blir en sinuskurva.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-hjul-och-fjader-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Hjulet och fjädern — Fysik nivå 2">
+    <meta property="og:description" content="En lampa lyser på ett snurrande cykelhjul, och skuggan av ett stift på hjulet rör sig upp och ned på väggen i exakt samma takt som en vikt i en fjäder. Se hur en harmonisk svängning är projektionen av en cirkelrörelse, och hur grafen blir en sinuskurva.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-hjul-och-fjader-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hjulet och fjädern — Fysik nivå 2">
+    <meta name="twitter:description" content="En lampa lyser på ett snurrande cykelhjul, och skuggan av ett stift på hjulet rör sig upp och ned på väggen i exakt samma takt som en vikt i en fjäder. Se hur en harmonisk svängning är projektionen av en cirkelrörelse, och hur grafen blir en sinuskurva.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        /* Simuleringen är samma motor som i genomgången (minisim.js), här
+           i full bredd. */
+        .stor-sim .minisim-card.ms-bred { max-width: 1040px; margin: 0 auto; }
+        /* Sidans generella reglagestil (styles-laborans-sim.css) ska inte ta
+           över simuleringens egna glidare. */
+        body.lab-sim .stor-sim input.minisim-slider { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px; background: #d8cdb8; }
+        body.lab-sim .stor-sim input.minisim-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #c95f26; border: 2px solid #f9f5ec; box-shadow: 0 0 0 1px #c95f26; cursor: pointer; }
+        body.lab-sim .stor-sim input.minisim-slider::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #c95f26; border: 2px solid #f9f5ec; cursor: pointer; }
+        .stor-sim .minisim-card:not(:fullscreen) .ms-kv-svg { max-width: none !important; width: 100%; }
+        .stor-sim .minisim-controls, .stor-sim .minisim-slider-row { font-size: 15px; }
+        .sim-forklaring { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); max-width: 1040px; margin: 28px auto 0; }
+        .sim-forklaring section { background: #fdfaf3; border: 1px solid #ddd3c0; border-radius: 6px; padding: 14px 16px; }
+        .sim-forklaring h2 { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 16px; color: var(--lab-ink); margin: 0 0 6px; }
+        .sim-forklaring p { color: var(--lab-ink-soft); font-size: 15px; line-height: 1.55; margin: 0; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+    <main class="min-h-screen dark-container px-4 md:px-8 pb-12" style="font-family: 'DM Sans', sans-serif;">
+        <div class="max-w-7xl mx-auto pt-6">
+            <div class="breadcrumb mb-4" style="font-size: 13px;">
+                <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Hjulet och fjädern
+            </div>
+            <h1 class="text-3xl md:text-4xl font-black tracking-tight" style="color: var(--lab-ink);">Hjulet och fjädern</h1>
+            <p class="mt-2 mb-5" style="color: var(--lab-ink-soft); max-width: 860px;">En lampa lyser på ett cykelhjul som snurrar med jämn fart. Ett stift sitter på hjulet på avståndet <em>A</em> från navet, och stiftets skugga på väggen rör sig upp och ned i precis samma takt som vikten i fjädern bredvid. En harmonisk svängning är alltså projektionen av en cirkelrörelse på en linje. Grafen till höger ritar upp läget <em>y</em> mot tiden <em>t</em>, och kurvan blir en sinuskurva.</p>
+            <div class="stor-sim">
+                <div class="lab-minisim" data-minisim-src="dHlwOiBoanVscHJvamVrdGlvbg=="></div>
+            </div>
+            <div class="sim-forklaring">
+                <section><h2>Varför blir det en sinuskurva?</h2><p>Stiftet sitter på radien <em>A</em> och har vridits vinkeln <em>α</em> från den vågräta radien. Höjden över navet är då <em>y</em> = <em>A</em> · sin <em>α</em>. Hjulet snurrar med vinkelhastigheten <em>ω</em>, så vinkeln växer som <em>α</em> = <em>ω</em> · <em>t</em>, och därför blir <em>y</em> = <em>A</em> · sin(<em>ω</em> · <em>t</em>).</p></section>
+                <section><h2>Periodtid och vinkelhastighet</h2><p>Ett varv på hjulet är en hel svängning för vikten. Ett varv är 2π radianer, så <em>ω</em> = 2π/<em>T</em>. Ändra periodtiden med glidaren och se att både hjulet och vikten går fortare eller långsammare tillsammans.</p></section>
+                <section><h2>Prova själv</h2><p>Slå av lampan och tänk dig att du bara ser hjulet från sidan: då ser stiftet ut att röra sig rakt upp och ned, precis som vikten. Pausa när stiftet står längst upp och längst ned. Där vänder vikten, och där är grafen som högst och lägst.</p></section>
+            </div>
+            <p class="mt-6" style="color: var(--lab-ink-soft); max-width: 860px; font-size: 15px;">
+                Teorin finns i genomgången <a class="underline" href="katalog.html?id=fy2-2.3">Harmonisk svängning</a>.
+            </p>
+        </div>
+    </main>
+    <script src="minisim.js"></script>
+    <script>window.FYSIKMINISIM && window.FYSIKMINISIM.mountAll(document.querySelector('.stor-sim'));</script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

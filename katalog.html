@@ -1223,6 +1223,32 @@
             return fordjupningCache[id];
         }
 
+        // Sammanfattning-kortet: plockar ut genomgångens ::: sammanfattning
+        // (med nästlade ::: sampunkt) så att den kan visas som egen vy.
+        // Rutan står kvar sist i genomgången som förut.
+        const sammanfattningCache = {};
+        function getSammanfattning(id) {
+            if (sammanfattningCache[id] === undefined) {
+                let md = '';
+                const raw = TEORI[id];
+                if (raw) {
+                    const lines = getFordjupning(id).teori.split('\n');
+                    const start = lines.findIndex(l => /^:::\s*sammanfattning\b/i.test(l));
+                    if (start >= 0) {
+                        let depth = 1, j = start + 1;
+                        for (; j < lines.length; j++) {
+                            if (/^:::\s*[a-zåäöA-ZÅÄÖ]/.test(lines[j])) depth++;
+                            else if (/^:::\s*$/.test(lines[j])) depth--;
+                            if (depth === 0) break;
+                        }
+                        md = lines.slice(start, j + 1).join('\n');
+                    }
+                }
+                sammanfattningCache[id] = md;
+            }
+            return sammanfattningCache[id];
+        }
+
         // ── Direktlänk till en enskild ruta i genomgången (?block=) ────
         //
         // katalog.html?id=fy2-1.6&block=den-fatala-gungan tar besökaren rakt
@@ -1283,7 +1309,7 @@
         // positionen räknas om några gånger — men aldrig efter att besökaren
         // själv har börjat röra sidan.
         function scrollaTillBlock(root, del) {
-            if (!blockAnkare || !root || del === 'fordjupning') return;
+            if (!blockAnkare || !root || del === 'fordjupning' || del === 'sammanfattning') return;
             const sok = blockAnkare;
             // Förbrukat så snart genomgången ritats en gång — annars skulle
             // ett ankare som inte finns ligga kvar och rycka sidan långt
@@ -1337,6 +1363,8 @@
                 const delad = getFordjupning(id);
                 const body = del === 'fordjupning'
                     ? delad.delar.map(d => d.md).join('\n\n')
+                    : del === 'sammanfattning'
+                    ? getSammanfattning(id)
                     : delad.teori;
                 if (!body.trim()) return null;
                 const { md, tokens } = protectMath(body);
@@ -3124,7 +3152,11 @@
             // fördjupningsblock faller tillbaka på genomgången — annars hade
             // sidan visat en tom vy utan att något kort var markerat.
             const rawView = state.view || 'teori';
-            const view = (rawView === 'fordjupning' && !harFordjupning) ? 'teori' : rawView;
+            // Sammanfattning-kortet: bara när genomgången har en
+            // ::: sammanfattning (samma reserv till teorin som ovan).
+            const harSammanfattning = !!(tid && getSammanfattning(tid));
+            const view = ((rawView === 'fordjupning' && !harFordjupning)
+                       || (rawView === 'sammanfattning' && !harSammanfattning)) ? 'teori' : rawView;
             const setView = (v) => setState(s => ({ ...s, view: v }));
 
             // Bionisk läsning (lässtöd) — på/av sparas mellan besök.
@@ -3438,6 +3470,15 @@
                                                             {hasTeori ? 'Genomgång' : 'Kommer snart'}
                                                         </div>
                                                     </button>}
+                                                    {harSammanfattning && (
+                                                        <button type="button"
+                                                            className={'lab-card ' + (view === 'sammanfattning' ? 'lab-card-active' : 'lab-card-clickable')}
+                                                            onClick={() => setView('sammanfattning')}>
+                                                            <div className="lab-card-tag">Repetera</div>
+                                                            <div className="lab-card-title">Sammanfattning</div>
+                                                            <div className="lab-card-meta">Det viktigaste</div>
+                                                        </button>
+                                                    )}
                                                     {avsnittsSamUrl && (
                                                         <a className="lab-card lab-card-clickable" href={avsnittsSamUrl}>
                                                             <div className="lab-card-tag">Bildspel</div>
@@ -3608,6 +3649,10 @@
                                                     <TeoriBody id={tid} del="fordjupning"
                                                         bionic={bionic} dyslexia={dyslexia} />
                                                 )}
+                                                {view === 'sammanfattning' && (
+                                                    <TeoriBody id={tid} del="sammanfattning"
+                                                        bionic={bionic} dyslexia={dyslexia} />
+                                                )}
                                                 {view === 'ovningar' && <Ovningar id={tid} />}
                                                 {view === 'ovningsblad' && <Ovningsblad id={tid} />}
                                                 {view === 'exitticket' && <ExitTicket id={tid} onStudyAgain={() => setView('teori')} />}
@@ -3713,7 +3758,7 @@
             // befintliga länkar ändrar beteende.
             const hash = (window.location.hash || '').replace(/^#/, '')
                 || (params.get('id') || '');
-            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2b|ma2c|ma3c|ma4|maspec)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning|ovningsblad))?$/);
+            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2b|ma2c|ma3c|ma4|maspec)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning|ovningsblad|sammanfattning))?$/);
             if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
                 out.subject = HASH_COURSES[m[1]][0];
             }
@@ -3832,6 +3877,7 @@
                     exitticket: 'Exit ticket: ',
                     visualisering: 'Visualisering: ',
                     fordjupning: 'Fördjupning: ',
+                    sammanfattning: 'Sammanfattning: ',
                 }[state.view] || '';
 
                 let titel = 'Fysiklabbet — Teori, simuleringar och övningar i fysik';

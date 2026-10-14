@@ -578,6 +578,13 @@ Så här bygger du scenen:
    skiljer ut något på grafen (tangent, sekant, markerat intervall, en av
    två kurvor som jämförs) behåller grundkurvan bläcket. Se REGEL "GRAFEN
    RITAS I BLÅTT" i filhuvudet.
+3m. **Räta linjer dras med linjal.** När eleven själv drar en rät linje
+   i lösningen (graf, hjälplinje, sekant, tangent) läggs en linjal an mot
+   punkterna, pennan drar linjen längs kanten och linjalen lyfts bort:
+   `A.linjal(p0, p1, col)` / `A.linjalKM(k, m, col, x0, x1)` i
+   `mkAxes()` (användarkrav 2026-10-14, referens `ma1c-4.1` exempel 1c).
+   `rule()`/`graphKM()` utan linjal är bara för att rita av uppgiftens egen
+   figur och för korta hjälpstreck (trappsteg, triangelsidor).
 3d. **Roten ur båda led som egen rad.** `x² = 9` → `x = ±√9` → `x = ±3`,
    aldrig direkt till `±3` (användarkrav 2026-09-20). De svagaste eleverna
    ska kunna följa varje steg. Gäller pennlösning och textlösning;

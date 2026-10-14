@@ -2080,7 +2080,7 @@
     y += 2.6 * F;
     T.str('y=3x-10', padL + 30, y);
     T.pause(300);
-    ax.rule([ax.X(2), ax.Y(-4)], [ax.X(4.4), ax.Y(3.2)], BLUE);
+    ax.linjal([ax.X(2), ax.Y(-4)], [ax.X(4.4), ax.Y(3.2)], BLUE);
     T.stepEnd();
 
     y += 2.4 * F;

@@ -315,7 +315,7 @@
       [['en vågrät linje vid y=14 och']],
       [['ser var den skär kurvan.']]
     ]);
-    A.rule([A.X(-16), A.Y(14)], [A.X(17), A.Y(14)], BLUE);
+    A.linjal([A.X(-16), A.Y(14)], [A.X(17), A.Y(14)], BLUE);
     T.pause(220);
     y += 3.4 * F;
     T.str('b) y=14 skär kurvan på ett ställe.', padL, y);

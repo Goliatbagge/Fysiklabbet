@@ -1674,16 +1674,16 @@
     var ex0 = xmin - 0.2, ex1 = xmax + 0.2;
     var lp1 = [ox + ex0 * u, oy - (k * ex0 + m) * u];
     var lp2 = [ox + ex1 * u, oy - (k * ex1 + m) * u];
-    var ruler = { ruler: 1, x1: lp1[0], y1: lp1[1], x2: lp2[0], y2: lp2[1],
+    var ruler = { ruler: 1, lagg: 1, x1: lp1[0], y1: lp1[1], x2: lp2[0], y2: lp2[1],
                   wins: [] };
     acts.push({ kind: 'jump', to: [ox + xmax * u + 50, oy + 60] });  /* hämtar linjalen */
     pause(250);
-    acts.push({ kind: 'show', obj: ruler });
-    pause(550);
+    acts.push({ kind: 'show', obj: ruler });              /* läggs an, se renderLagg */
+    pause(1000);
     acts.push({ kind: 'stroke', pts: [lp1, lp2] });      /* exakt rak — mot linjalen */
-    pause(350);
+    pause(450);
     acts.push({ kind: 'hide', obj: ruler });
-    pause(400);
+    pause(820);
     acts.push({ kind: 'lineEnd' });
     pause(200);
 
@@ -11253,6 +11253,7 @@
    * läser A.ox, A.oy och A.u (eller använder A.X/A.Y), aldrig sina egna
    * indata. Bygg aldrig runt detta med ett eget axelkors. */
   var RUTA = 27;
+  var LAGG_PAUS = 820;   /* ≥ LAGG_MS i spelaren: linjalen hinner lyftas bort före steggränsen */
   function mkAxes(T, F, o) {
     var s = F / 100, acts = T.acts;
     var u = o.u == null ? RUTA : o.u;
@@ -11408,6 +11409,33 @@
       } else { pts = f; col = x0; }
       acts.push({ kind: 'stroke', pts: pts, color: col || BLUE });
     }
+    /* RÄT LINJE MED LINJAL (REGEL, användarkrav 2026-10-14): linjalen
+     * läggs an så att kanten går genom punkterna, pennan drar linjen
+     * längs kanten och linjalen lyfts bort, så att eleven ser hur man
+     * ritar en rät linje ordentligt. Använd linjal()/linjalKM() för VARJE
+     * rät linje som eleven själv drar i lösningen (graf, hjälplinje,
+     * sekant, tangent). rule()/graphKM() utan linjal är bara för att
+     * rita av uppgiftens egen figur och för korta hjälpstreck
+     * (trappsteg, triangelsidor). */
+    function linjal(p0, p1, col) {
+      var lin = { ruler: 1, lagg: 1, x1: p0[0], y1: p0[1], x2: p1[0], y2: p1[1],
+                  wins: [] };
+      T.pause(150);
+      acts.push({ kind: 'show', obj: lin });
+      T.pause(1000);                       /* linjalen landar, eleven ser punkterna längs kanten */
+      acts.push({ kind: 'stroke', color: col || null,
+                  pts: [[p0[0], p0[1]], [p1[0], p1[1]]] });
+      T.pause(450);
+      acts.push({ kind: 'hide', obj: lin });
+      T.pause(LAGG_PAUS);
+    }
+    /* grafen y = kx + m med linjal, i blått som graphKM (REGEL GRAFEN
+     * RITAS I BLÅTT) */
+    function linjalKM(k, m, col, x0, x1) {
+      x0 = x0 == null ? o.xmin - 0.4 : x0;
+      x1 = x1 == null ? o.xmax + 0.4 : x1;
+      linjal([X(x0), Y(k * x0 + m)], [X(x1), Y(k * x1 + m)], col || BLUE);
+    }
     /* LUTNINGSTRAPPAN mellan två punkter: vågrätt Δx och lodrätt Δy,
      * streckade i blått, med måtten skrivna intill i fri yta.
      * REGEL (MÅTTEN PÅ TRAPPSTEGET, användarkrav 2026-09-20): Δx-måttet
@@ -11470,7 +11498,7 @@
     }
     return { X: X, Y: Y, num: num, line: line, rule: rule, axes: axes,
              ticks: ticks, dot: dot, guides: guides, tag: tag,
-             graphKM: graphKM, curve: curve, stair: stair,
+             graphKM: graphKM, linjal: linjal, linjalKM: linjalKM, curve: curve, stair: stair,
              ox: ox, oy: oy, u: u };
   }
 
@@ -11912,7 +11940,7 @@
       [['linje. Då drar jag linjen']],
       [['med linjal.']]
     ], 0);
-    A.graphKM(400, 500, null, 0, 4.1);
+    A.linjalKM(400, 500, null, 0, 4.1);
     T.stepEnd();
 
     /* c) är en ritningsuppgift: lösningen slutar när grafen är ritad, och
@@ -12027,7 +12055,7 @@
       [['Rät linje OCH genom origo,']],
       [['alltså en proportionalitet.']]
     ], 0);
-    A.graphKM(20, 0, null, 0, 20.6);
+    A.linjalKM(20, 0, null, 0, 20.6);
     T.stepEnd();
 
     /* c) är en ritningsuppgift: lösningen slutar när grafen är ritad, och
@@ -12196,7 +12224,7 @@
       [['linje. Den lutar NEDÅT, för']],
       [['k är negativt.']]
     ]);
-    A.graphKM(-2, 3, null, -3.3, 3.3);
+    A.linjalKM(-2, 3, null, -3.3, 3.3);
     T.stepEnd();
 
     /* "Rita grafen": lösningen slutar när grafen är ritad, ingen
@@ -12713,7 +12741,7 @@
     A.axes();
     A.ticks(heltal(-3, 4), heltal(-3, 3), [-2, 2, 3, 4], [-2, 2]);
     T.pause(150);
-    A.rule([A.X(3), A.Y(-3.3)], [A.X(3), A.Y(3.3)], BLUE);
+    A.linjal([A.X(3), A.Y(-3.3)], [A.X(3), A.Y(3.3)], BLUE);
     T.stepEnd();
 
     tanke(360, [
@@ -13059,9 +13087,9 @@
     /* linjen y=-x+3 går rakt genom fyran, som tonas bort när linjen ritas */
     A.ticks(heltal(-2, 4), heltal(-5, 5), [-2, -1, 1, 2, 3, 4], [-4, -2, 2, 4]);
     T.pause(150);
-    A.graphKM(3, -5, null, -0.2, 3.3);
+    A.linjalKM(3, -5, null, -0.2, 3.3);
     T.pause(200);
-    A.graphKM(-1, 3, null, -2.2, 4.2);
+    A.linjalKM(-1, 3, null, -2.2, 4.2);
     T.stepEnd();
 
     tanke(y + 410, [
@@ -13120,9 +13148,9 @@
     A.ticks(heltal(-1, 6), heltal(-5, 6), [-1, 1, 2, 3, 4, 5, 6],
             [-4, -2, 2, 4, 6]);
     T.pause(150);
-    A.graphKM(-2, 5, null, -0.7, 5.2);
+    A.linjalKM(-2, 5, null, -0.7, 5.2);
     T.pause(200);
-    A.graphKM(1, -4, null, -0.7, 6.2);
+    A.linjalKM(1, -4, null, -0.7, 6.2);
     T.stepEnd();
 
     tanke(y + 440, [
@@ -13969,7 +13997,7 @@
       [['Prickarna sprider sig kring']],
       [['en linje som PEKAR UPPÅT.']]
     ], 0);
-    A.rule([A.X(0.3), A.Y(1.3)], [A.X(9.8), A.Y(6.9)], BLUE);
+    A.linjal([A.X(0.3), A.Y(1.3)], [A.X(9.8), A.Y(6.9)], BLUE);
     T.stepEnd();
 
     y = 420;
@@ -15617,7 +15645,7 @@
     A.dot(2, 4);
     A.tag(2, 4, '(2, 4)', 12, -12);
     T.pause(200);
-    A.rule([A.X(-2), A.Y(1)], [A.X(2), A.Y(4)]);
+    A.linjal([A.X(-2), A.Y(1)], [A.X(2), A.Y(4)]);
     T.stepEnd();
 
     tanke(A.Y(-1) + 1.4 * F, [
@@ -39674,6 +39702,7 @@
   function makeRuler(o) {
     var ang = Math.atan2(o.y2 - o.y1, o.x2 - o.x1) * 180 / Math.PI;
     var len = Math.hypot(o.x2 - o.x1, o.y2 - o.y1);
+    o._ang = ang;
     var g = el('g', { opacity: 0,
                       transform: 'translate(' + o.x1 + ' ' + o.y1 + ') ' +
                                  'rotate(' + ang.toFixed(2) + ')' });
@@ -58768,6 +58797,34 @@
       return o;
     }
 
+    /* LINJALEN LÄGGS AN (lagg: 1): i stället för att bara tona in glider
+     * linjalen in snett från sidan, vrids rätt och landar med kanten längs
+     * punkterna; när den döljs lyfts den bort samma väg. LAGG_MS är hela
+     * rörelsen — aktlistan måste ge den tid (pause) före och efter. */
+    var LAGG_MS = 760;
+    function laggLage(wins, time) {
+      var v = 0;
+      for (var i = 0; i < wins.length; i++) {
+        var a = wins[i][0], b = wins[i][1];
+        if (time < a) continue;
+        v = time < b ? Math.min(1, (time - a) / LAGG_MS)
+                     : Math.max(0, 1 - (time - b) / LAGG_MS);
+      }
+      return v;
+    }
+    function renderLagg(o, time) {
+      var v = laggLage(o.wins, time);
+      var e = 1 - Math.pow(1 - v, 3);          /* mjuk inbromsning */
+      var r = o._ang * Math.PI / 180, ut = 1 - e;
+      /* från linjalens egen sida (vinkelrätt ut från linjen) och lite bakåt */
+      var dx = ut * (-Math.sin(r) * 70 - Math.cos(r) * 40);
+      var dy = ut * (Math.cos(r) * 70 - Math.sin(r) * 40);
+      o.el.setAttribute('opacity', Math.min(1, v * 1.8).toFixed(3));
+      o.el.setAttribute('transform',
+        'translate(' + (o.x1 + dx).toFixed(1) + ' ' + (o.y1 + dy).toFixed(1) + ') ' +
+        'rotate(' + (o._ang + ut * 9).toFixed(2) + ')');
+    }
+
     function render(time) {
       for (var i = 0; i < strokes.length; i++) {
         var a = strokes[i];
@@ -58784,6 +58841,7 @@
         }
       }
       for (var j = 0; j < objs.length; j++) {
+        if (objs[j].lagg) { renderLagg(objs[j], time); continue; }
         objs[j].el.setAttribute('opacity', winOpacity(objs[j].wins, time));
       }
       var pp = penPosAt(time);

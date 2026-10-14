@@ -3091,7 +3091,7 @@
     A.axes();
     A.ticks([-3, 3], [], [-3, 3], []);
     T.pause(120);
-    A.rule([A.X(-4.2), A.Y(5)], [A.X(4.3), A.Y(5)], BLUE);
+    A.linjal([A.X(-4.2), A.Y(5)], [A.X(4.3), A.Y(5)], BLUE);
     T.pause(120);
     kurva(A, acts, f, -3.25, 3.25, BLUE, 70);
     T.pause(120);

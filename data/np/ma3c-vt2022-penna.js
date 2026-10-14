@@ -626,7 +626,7 @@
     A.dot(2, 4, BLUE);
     T.pause(160);
     /* tangenten y = -2(x-2)+4 = -2x+8 */
-    A.graphKM(-2, 8, BLUE, 1.1, 3.4);
+    A.linjalKM(-2, 8, BLUE, 1.1, 3.4);
     T.stepEnd();
 
     tanke(420, [
@@ -921,7 +921,7 @@
       [['ligger på höjden 3. Jag drar en']],
       [['vågrät linje vid y=3.']]
     ]);
-    A.rule([A.X(-2), A.Y(3)], [A.X(3), A.Y(3)], BLUE);
+    A.linjal([A.X(-2), A.Y(3)], [A.X(3), A.Y(3)], BLUE);
     T.pause(160);
     A.dot(1.8, 3, BLUE);
     T.pause(200);
@@ -1838,7 +1838,7 @@
     T.pause(120);
     A.dot(2, 4, BLUE);
     T.pause(140);
-    A.rule([A.X(-1), A.Y(0.5)], [A.X(2), A.Y(4)], BLUE);
+    A.linjal([A.X(-1), A.Y(0.5)], [A.X(2), A.Y(4)], BLUE);
     T.stepEnd();
 
     tanke(420, [

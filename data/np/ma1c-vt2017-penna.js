@@ -593,7 +593,7 @@
       [['förlänger den åt båda hållen.']]
     ], 0);
     /* linjen: k=100/56 per °C, m=32,14 — dras genom hela fönstret */
-    A.graphKM(100 / 56, 100 - (100 / 56) * 38, null, -30, 45);
+    A.linjalKM(100 / 56, 100 - (100 / 56) * 38, null, -30, 45);
     T.stepEnd();
 
     y = 530;
@@ -1608,7 +1608,7 @@
     ], 0);
     A.dot(2013 - 1996, 325, BLUE);
     T.pause(160);
-    A.rule([ar(2013), A.Y(325)], [ar(2024), A.Y(325)], BLUE);
+    A.linjal([ar(2013), A.Y(325)], [ar(2024), A.Y(325)], BLUE);
     T.pause(200);
     y = 520;
     T.str('a) 2013: ungefär 325 000 elever', padL, y);

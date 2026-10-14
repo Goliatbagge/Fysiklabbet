@@ -10809,6 +10809,7 @@
         nollstall();
         syncSlider();
         rita();
+        setSpelar(true);                         // startar av sig själv
     }
 
     // ══════════════════════════════════════════════════════════════════════

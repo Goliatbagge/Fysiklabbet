@@ -2141,6 +2141,26 @@
                     // buildPresSteps): ryms de inte tillsammans ovanför
                     // kontrollisten är det SIMULERINGEN som ska synas helt,
                     // och stycket ovanför får skrollas upp ur bild.
+                    // En simulering som ritar sig själv först när den blir
+                    // synlig (Galtonbrädan) har höjden 0 i första ögonblicket.
+                    // Vänta in den i stället för att placera steget fel och
+                    // sedan hoppa.
+                    if (st.fokus && st.fokus.getBoundingClientRect().height < 40 && (st.vantat || 0) < 6) {
+                        st.vantat = (st.vantat || 0) + 1;
+                        setTimeout(place, 200);
+                        return;
+                    }
+                    // Växer simuleringen när den ritats upp (Galtonbrädan
+                    // skalar sig efter bredden) placeras steget om en gång.
+                    if (st.fokus && !st.omplacerad) {
+                        st.omplacerad = true;
+                        const h0 = st.fokus.getBoundingClientRect().height;
+                        setTimeout(() => {
+                            if (st.el.classList.contains('is-current') &&
+                                Math.abs(st.fokus.getBoundingClientRect().height - h0) > 20) place();
+                            st.omplacerad = false;
+                        }, 700);
+                    }
                     if (st.fokus && target === st.el) {
                         const bar = overlay.querySelector('.lab-pres-bar');
                         const ledigt = (bar ? bar.getBoundingClientRect().top - overlay.getBoundingClientRect().top : oh) - 16;
@@ -2179,8 +2199,15 @@
                     // rutan. Ett steg får aldrig skrollas så att dess början
                     // hamnar ovanför överkanten — man ska alltid kunna börja
                     // läsa på första raden.
+                    // Ett högt steg som ändå ryms ovanför kontrollisten
+                    // lyfts så att även dess UNDERKANT syns (en graf eller
+                    // simulering på 90 % av duken hamnade annars med
+                    // nederkanten bakom listen), men aldrig högre än 24 px
+                    // från överkanten.
+                    const listen = overlay.querySelector('.lab-pres-bar');
+                    const ledigtH = (listen ? listen.getBoundingClientRect().top - overlay.getBoundingClientRect().top : oh) - 8;
                     const top = (rH > oh * 0.62)
-                        ? overlay.scrollTop + rTop - oh * 0.10
+                        ? overlay.scrollTop + rTop - Math.max(24, Math.min(oh * 0.10, ledigtH - rH))
                         : overlay.scrollTop + rTop - (oh - rH) / 2;
                     // Steget ska aldrig hamna med överkanten ovanför rutan.
                     const maxTop = overlay.scrollTop + oTop - 24;

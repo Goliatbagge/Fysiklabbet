@@ -63,7 +63,7 @@ const INB = /^:::\s*(minisim|graf|video)\b/m;
         await page.waitForTimeout(tryck === 0 ? 1400 : 650);
         const [n, tot] = await raknare();
         total = tot;
-        const r = await page.evaluate((H) => {
+        const mat = () => page.evaluate((H) => {
           const bar = document.querySelector('.lab-pres-bar');
           const avail = bar ? bar.getBoundingClientRect().top : H;
           const els = [...document.querySelectorAll('.lab-pres .lab-minisim, .lab-pres .lab-graf, .lab-pres .lab-video')];
@@ -80,6 +80,10 @@ const INB = /^:::\s*(minisim|graf|video)\b/m;
           }).filter(k => k !== null);
           return { n: els.length, ok, vis };
         }, H);
+        let r = await mat();
+        // Steget kan placeras om när en simulering ritat upp sig (den växer
+        // efter första mätningen); mät en gång till efter en stund.
+        if (r.vis.length > r.ok.length) { await page.waitForTimeout(1200); r = await mat(); }
         antal = r.n;
         r.ok.forEach(k => { sedd[k] = true; });
         r.vis.forEach(k => { visad[k] = true; });

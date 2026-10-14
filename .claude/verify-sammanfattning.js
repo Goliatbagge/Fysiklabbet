@@ -9,7 +9,8 @@
 // Utan argument granskas alla avsnitt som har en sammanfattning.
 // Kräver dev-servern på port 8000 + playwright-core/katex/marked/react i
 // %TEMP%\pptr-test\node_modules (eller peka ut dem med SAM_NODE_MODULES).
-// SHOT=1 sparar en skärmdump per avsnitt i .shots/.
+// SHOT=1 sparar en skärmdump per avsnitt i .shots/. KNAPP=1 öppnar sliden
+// via fullskärmsknappen i Sammanfattning-vyn i stället för End.
 const fs = require('fs'), path = require('path');
 const NM = process.env.SAM_NODE_MODULES
   || path.join(process.env.TEMP || require('os').tmpdir(), 'pptr-test', 'node_modules');
@@ -69,11 +70,14 @@ async function routeCdn(page) {
   for (const id of ids) {
     let r;
     try {
-      await page.goto('http://localhost:8000/katalog.html?id=' + id, { waitUntil: 'domcontentloaded' });
+      // KNAPP=1: gå via fullskärmsknappen i Sammanfattning-vyn
+      // (?id=<avsnitt>:sammanfattning), som öppnar direkt på sista sliden.
+      const knapp = !!process.env.KNAPP;
+      await page.goto('http://localhost:8000/katalog.html?id=' + id + (knapp ? ':sammanfattning' : ''), { waitUntil: 'domcontentloaded' });
       await page.waitForSelector('.lab-pres-launch', { timeout: 20000 });
       await page.click('.lab-pres-launch');
       await page.waitForSelector('.lab-pres.is-ready', { timeout: 20000 });
-      await page.keyboard.press('End');
+      if (!knapp) await page.keyboard.press('End');
       await page.waitForTimeout(2600);
       r = await page.evaluate(() => {
         const el = document.querySelector('.lab-pres .lab-block-sammanfattning');

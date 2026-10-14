@@ -1806,7 +1806,9 @@
             };
         }
 
-        function PresentationMode({ id, num, title, chapter, chapterNumber, course, onClose }) {
+        // startSist: öppna direkt på sista steget (sammanfattnings-sliden) —
+        // fullskärmsknappen i Sammanfattning-vyn använder det.
+        function PresentationMode({ id, num, title, chapter, chapterNumber, course, onClose, startSist }) {
             const overlayRef = useRef(null);
             const bodyRef = useRef(null);
             const stepsRef = useRef([]);
@@ -2041,7 +2043,7 @@
                 blocksRef.current = blocks;
                 totalRef.current = steps.length;
                 setTotal(steps.length);
-                setStep(0);
+                setStep(startSist ? steps.length : 0);
                 setReady(true);
                 const fit = () => {
                     fitFormel(root); fitMathDisplays(root);
@@ -3584,7 +3586,7 @@
 
                                                 {/* Lässtöden gäller all löpande text — alltså både
                                                     genomgången och fördjupningen. */}
-                                                {(view === 'teori' || view === 'fordjupning') && !isEnhetskoll && (
+                                                {(view === 'teori' || view === 'fordjupning' || view === 'sammanfattning') && !isEnhetskoll && (
                                                     <div className="lab-bionic-bar">
                                                         <button type="button"
                                                             className={'lab-bionic-toggle' + (bionic ? ' is-on' : '')}
@@ -3602,6 +3604,18 @@
                                                             <span className="lab-bionic-knob" />
                                                             <span className="lab-dys-label">Dyslexivänligt</span>
                                                         </button>
+                                                        {view === 'sammanfattning' && (
+                                                            <button type="button" className="lab-pres-launch"
+                                                                onClick={() => setPresenting('sist')}
+                                                                aria-label="Visa sammanfattningen i fullskärm"
+                                                                title="Fullskärm — visa sammanfattningen som i presentationsläget">
+                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" strokeWidth="2.2"
+                                                                    strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                                                    <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                                                                </svg>
+                                                            </button>
+                                                        )}
                                                         {hasTeori && view === 'teori' && (
                                                             <button type="button" className="lab-pres-launch"
                                                                 onClick={() => setPresenting(true)}
@@ -3643,6 +3657,7 @@
                                                         chapter={chapter}
                                                         chapterNumber={chapterNumber}
                                                         course={course}
+                                                        startSist={presenting === 'sist'}
                                                         onClose={() => setPresenting(false)} />
                                                 )}
                                                 {view === 'fordjupning' && (

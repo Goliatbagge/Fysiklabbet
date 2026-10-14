@@ -62,7 +62,8 @@
  * Ultrarapid; info-raden visar y, v och a med enhet. Kryssrutor tänder och
  * släcker varje graf, och en tidsglidare (0 till 2T) pausar och låter
  * eleven dra tiden fram och tillbaka; den lodräta markören i graferna går
- * också att dra direkt. Ren SVG, inget ljud.
+ * också att dra direkt. När markören når högerkanten flyter tidsaxeln med
+ * (graferna fortsätter); glidaren ställer tillbaka den fasta axeln 0–2T. Ren SVG, inget ljud.
  *
  * ── typ: magnetpoler / magnetdelning ────────────────────────────────────
  * Stavmagneterna ur fy2-3.1 (Magnetism och magnetfält). magnetpoler: två
@@ -10839,7 +10840,7 @@
         var GX0 = 196, GX1 = 572;                        // grafernas t-axel (två perioder)
         var PANEL = [{ c: 62, f: COL_Y, n: 'y' }, { c: 168, f: COL_V, n: 'v' }, { c: 274, f: COL_A, n: 'a' }];
         var PAMP = 32;
-        var tid = 0, spelar = false, ultra = false, visaPilar = true;
+        var tid = 0, t0 = 0, spelar = false, ultra = false, visaPilar = true;
         var visa = [true, true, true];          // kryssrutorna för y, v och a
         var id = 'ms-sg-rutnat-' + (++sgRaknare);
 
@@ -10863,7 +10864,10 @@
                 '<polygon points="' + r1(x - 5) + ',' + r1(by) + ' ' + r1(x) + ',' + r1(y2) + ' ' + r1(x + 5) + ',' + r1(by) +
                 '" fill="' + color + '"/>';
         }
-        function tx(t) { return GX0 + t / (2 * T) * (GX1 - GX0); }
+        // t0 = tidsaxelns början. Den står på 0 tills markören når högerkanten,
+        // sedan flyter axeln med tiden (graferna fortsätter i stället för att
+        // börja om). Glidaren för tiden ställer tillbaka den fasta axeln 0–2T.
+        function tx(t) { return GX0 + (t - t0) / (2 * T) * (GX1 - GX0); }
 
         // ── Fast bakgrund ────────────────────────────────────────────────
         var bas = '<defs><pattern id="' + id + '" width="20" height="20" patternUnits="userSpaceOnUse">' +
@@ -10888,15 +10892,11 @@
                 '<polygon points="' + (GX1 + 6) + ',' + (p.c - 4) + ' ' + (GX1 + 15) + ',' + p.c + ' ' + (GX1 + 6) + ',' + (p.c + 4) + '" fill="' + AXEL + '"/>' +
                 lbl(GX0 - 8, p.c - 34, 'end', it(p.n), 16, p.f) +
                 lbl(GX1 + 15, p.c + 18, 'end', it('t'), 14);
-            // stödlinjer vid varje halv period
-            for (var k = 1; k <= 4; k++) {
-                bas += '<line x1="' + r1(tx(k * T / 2)) + '" y1="' + (p.c - PAMP - 4) + '" x2="' + r1(tx(k * T / 2)) + '" y2="' + (p.c + PAMP + 4) +
-                    '" stroke="' + GREY + '" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.7"/>';
-            }
         });
-        var tLbl = ['', it('T') + '/2', it('T'), '3' + it('T') + '/2', '2' + it('T')];
-        for (var k2 = 1; k2 <= 3; k2++) {
-            bas += lbl(tx(k2 * T / 2), PANEL[2].c + PAMP + 22, 'middle', tLbl[k2], 13, '#4a5160');
+        // etiketten för k halva perioder: T/2, T, 3T/2, 2T …
+        function tEtikett(k) {
+            if (k % 2) return (k === 1 ? '' : k) + it('T') + '/2';
+            return (k === 2 ? '' : (k / 2)) + it('T');
         }
 
         function fjader(yTopp) {
@@ -10927,18 +10927,25 @@
                 if (Math.abs(vr) > 0.12) s += lbl(FX - 28, vy0 - vr * PILMAX + (vr > 0 ? 10 : 4), 'end', it('v'), 15, COL_V);
                 if (Math.abs(ar) > 0.12) s += lbl(FX + 28, ay0 - ar * PILMAX + (ar > 0 ? 10 : 4), 'start', it('a'), 15, COL_A);
             }
-            // kurvorna fram till nu (tiden räknas om efter två perioder)
-            // tiden räknas om efter två perioder; exakt 2T visar hela kurvan
-            var tm = tid - 2 * T * Math.floor(tid / (2 * T));
-            if (tm < 1e-9 && tid > 0) tm = 2 * T;
-            var cx = tx(tm);
+            // kurvorna från axelns början fram till nu
+            if (tid > t0 + 2 * T) t0 = tid - 2 * T;
+            var cx = tx(tid);
             var fns = [function (t) { return Math.sin(OM * t); }, function (t) { return Math.cos(OM * t); },
                        function (t) { return -Math.sin(OM * t); }];
+            // stödlinjer och etiketter vid varje halv period (flyttar med axeln)
+            for (var k = Math.ceil(t0 / (T / 2) + 1e-6); k * T / 2 <= t0 + 2 * T + 1e-6; k++) {
+                var gxk = tx(k * T / 2);
+                PANEL.forEach(function (p) {
+                    s += '<line x1="' + r1(gxk) + '" y1="' + (p.c - PAMP - 4) + '" x2="' + r1(gxk) + '" y2="' + (p.c + PAMP + 4) +
+                        '" stroke="' + GREY + '" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.7"/>';
+                });
+                if (gxk < GX1 - 22) s += lbl(gxk, PANEL[2].c + PAMP + 22, 'middle', tEtikett(k), 13, '#4a5160');
+            }
             PANEL.forEach(function (p, i) {
                 if (!visa[i]) return;
-                var N = Math.max(1, Math.ceil(tm / (2 * T) * 160)), pts = [];
+                var N = Math.max(1, Math.ceil((tid - t0) / (2 * T) * 160)), pts = [];
                 for (var j = 0; j <= N; j++) {
-                    var t = tm * j / N;
+                    var t = t0 + (tid - t0) * j / N;
                     pts.push(r1(tx(t)) + ',' + r1(p.c - PAMP * fns[i](t)));
                 }
                 if (N > 1) s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + p.f + '" stroke-width="2.2" stroke-linejoin="round"/>';
@@ -10951,12 +10958,12 @@
                 '" fill="' + INK + '" opacity="0.7"/>';
             PANEL.forEach(function (p, i) {
                 if (!visa[i]) return;
-                s += '<circle cx="' + r1(cx) + '" cy="' + r1(p.c - PAMP * fns[i](tm)) + '" r="4.2" fill="' + p.f + '"/>';
+                s += '<circle cx="' + r1(cx) + '" cy="' + r1(p.c - PAMP * fns[i](tid)) + '" r="4.2" fill="' + p.f + '"/>';
             });
             dyn.innerHTML = s;
-            if (!dragar) { tSlider.value = String(tm); }
-            tVal.textContent = fmt(tm, 2) + ' s';
-            info.textContent = 't = ' + fmt(tm, 2) + ' s,  y = ' + fmt(A_M * yr, 3) + ' m,  v = ' +
+            if (!dragar) { tSlider.value = String(Math.min(tid, 2 * T)); }
+            tVal.textContent = fmt(tid, 2) + ' s';
+            info.textContent = 't = ' + fmt(tid, 2) + ' s,  y = ' + fmt(A_M * yr, 3) + ' m,  v = ' +
                 fmt(OM * A_M * vr, 2) + ' m/s,  a = ' + fmt(OM * OM * A_M * ar, 2) + ' m/s²';
         }
 
@@ -11051,7 +11058,7 @@
             var m = svgEl.getScreenCTM();
             if (!m) return;
             var x = pt.matrixTransform(m.inverse()).x;
-            tid = Math.max(0, Math.min(2 * T, (x - GX0) / (GX1 - GX0) * 2 * T));
+            tid = t0 + Math.max(0, Math.min(2 * T, (x - GX0) / (GX1 - GX0) * 2 * T));
             if (spelar) setSpelar(false);
             startBtn.textContent = tid > 0 ? 'Fortsätt' : 'Starta';
             rita();
@@ -11069,6 +11076,7 @@
             dragar = true;
             if (spelar) setSpelar(false);
             tid = parseFloat(tSlider.value);
+            t0 = 0;                              // glidaren ger den fasta axeln 0–2T
             startBtn.textContent = tid > 0 ? 'Fortsätt' : 'Starta';
             rita();
             dragar = false;
@@ -11099,7 +11107,7 @@
             if (spelar) kor();
         }
         startBtn.addEventListener('click', function () { setSpelar(!spelar); });
-        omBtn.addEventListener('click', function () { tid = 0; setSpelar(false); rita(); });
+        omBtn.addEventListener('click', function () { tid = 0; t0 = 0; setSpelar(false); rita(); });
         ultraCk.cb.addEventListener('change', function () { ultra = ultraCk.cb.checked; });
         pilCk.cb.addEventListener('change', function () { visaPilar = pilCk.cb.checked; rita(); });
         if ('IntersectionObserver' in window) {

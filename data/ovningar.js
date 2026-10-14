@@ -26094,27 +26094,363 @@ $$ y = 200 + 150 \\cdot 6 = 200 + 900 = 1\\ 100 $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Punkterna (1, 700), (2, 950) och (3, 1 200) ligger på grafen till en linjär modell $y = a + bx$. Vilken är modellen?`,
-            choices: [
-                `$y = 250 + 450x$`,
-                `$y = 700 + 500x$`,
-                `$y = 450 + 250x$`,
-                `$y = 700 + 250x$`,
+            question: `Punkten $A = (a, b)$ ligger i första kvadranten. Punkten $B$ fås när $A$ speglas i *x*-axeln, och punkten $C$ fås när $A$ speglas i *y*-axeln.<br>a) Ange koordinaterna för $B$ och $C$ uttryckta i $a$ och $b$.<br>b) Visa att triangeln $ABC$ har arean $2ab$.<br>c) Punkten $A$ ligger på linjen $y = 2x$, och triangeln $ABC$ har arean 16 areaenheter. Bestäm koordinaterna för $A$.`,
+            answer: { value: 4, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 2, unit: '', etikett: '$x$-koordinaten' },
+                { del: 'c', value: 4, unit: '', etikett: '$y$-koordinaten' },
             ],
-            correct: 2,
-            solution: `**Insikten:** i en linjär modell är ökningen per steg konstant — den syns direkt i tabellen, och konstanttermen fås genom att "backa" till $x = 0$.
+            solution: `**Insikten:** att spegla en punkt i en axel betyder att den hamnar lika långt från axeln, fast på andra sidan. Den koordinat som anger läget längs axeln är oförändrad, och den andra byter tecken.
 
-Från $x = 1$ till $x = 2$ ökar $y$ med $950 - 700 = 250$, och från 2 till 3 med $1\\ 200 - 950 = 250$. Ökningen per steg är alltså $b = 250$.
+**a)** Vid spegling i *x*-axeln flyttas punkten rakt ned, lika långt under axeln som $A$ ligger ovanför. *x*-koordinaten är densamma och *y*-koordinaten byter tecken.
 
-Backa ett steg från (1, 700): vid $x = 0$ är $y = 700 - 250 = 450$. Alltså $a = 450$:
+Vid spegling i *y*-axeln flyttas punkten rakt åt vänster, lika långt till vänster om axeln som $A$ ligger till höger. *y*-koordinaten är densamma och *x*-koordinaten byter tecken.
 
-$$ y = 450 + 250x $$
+Kontroll med $A = (3, 2)$: $B = (3, -2)$ ligger i fjärde kvadranten och $C = (-3, 2)$ i andra, precis som speglingarna ska ge.
 
-Kontroll: $x = 3$ ger $450 + 750 = 1\\ 200$ — stämmer!
+**Svar:** $B = (a, -b)$ och $C = (-a, b)$
 
-**Svar:** $y = 450 + 250x$
+**b)** $A$ och $B$ har samma *x*-koordinat, så sidan $AB$ är lodrät. Den går från höjden $b$ ned till höjden $\\mathord{-}b$ och är alltså $b - (-b) = 2b$ lång.
 
-**Generell slutsats:** konstant skillnad i en värdetabell ⟺ linjär modell. Koefficienten är skillnaden per steg och konstanttermen är värdet vid $x = 0$.`,
+$A$ och $C$ har samma *y*-koordinat, så sidan $AC$ är vågrät. Den går från $\\mathord{-}a$ till $a$ i sidled och är $a - (-a) = 2a$ lång.
+
+En lodrät och en vågrät sida möts i rät vinkel, så triangeln är rätvinklig i $A$. De två sidorna är bas och höjd:
+
+$$ \\text{arean} = \\frac{2a \\cdot 2b}{2} = \\frac{4ab}{2} = 2ab $$
+
+**Svar:** Kateterna är $2a$ och $2b$, så arean är $\\dfrac{2a \\cdot 2b}{2} = 2ab$.
+
+**c)** På linjen $y = 2x$ är *y*-koordinaten dubbelt så stor som *x*-koordinaten, så $b = 2a$. Arean blir
+
+$$ 2a \\cdot 2a = 16 $$
+
+$$ 4a^2 = 16 $$
+
+Dividerar båda led med 4:
+
+$$ \\frac{4a^2}{\\boldsymbol{4}} = \\frac{16}{\\boldsymbol{4}} $$
+
+$$ a^2 = 4 $$
+
+Drar roten ur båda led:
+
+$$ a = \\pm\\sqrt{4} $$
+
+$$ a = \\pm 2 $$
+
+Punkten ligger i första kvadranten, så $a$ är positivt och $a = 2$. Då är $b = 2 \\cdot 2 = 4$.
+
+Kontroll: $B = (2, -4)$ och $C = (-2, 4)$. Sidorna är $AB = 8$ och $AC = 4$, och arean är $\\dfrac{8 \\cdot 4}{2} = 16$.
+
+**Svar:** $A = (2, 4)$
+
+**Generell slutsats:** speglingar i axlarna byter tecken på en koordinat i taget. Det gör att avstånd i ett koordinatsystem kan räknas med subtraktion, och att geometriska frågor blir ekvationer.`,
+        },
+        {
+            level: 3,
+            question: `Punkten $P = (a - 3,\\ 2a + 4)$ flyttar sig när talet $a$ ändras.<br>a) För vilka värden på $a$ ligger $P$ i andra kvadranten?<br>b) Visa att $P$ aldrig kan ligga i fjärde kvadranten.<br>c) För vilket värde på $a$ ligger $P$ på *y*-axeln, och var på axeln ligger den då?`,
+            answer: { value: 3, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 3, unit: '', etikett: '$a =$' },
+            ],
+            solution: `**Insikten:** en kvadrant bestäms av tecknen på koordinaterna. Varje krav på ett tecken blir en olikhet för $a$, och de två olikheterna måste gälla samtidigt.
+
+**a)** I andra kvadranten är *x*-koordinaten negativ och *y*-koordinaten positiv.
+
+*x*-koordinaten negativ:
+
+$$ a - 3 < 0 $$
+
+Adderar 3 till båda led:
+
+$$ a - 3 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3} < 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3} $$
+
+$$ a < 3 $$
+
+*y*-koordinaten positiv:
+
+$$ 2a + 4 > 0 $$
+
+Subtraherar 4 från båda led:
+
+$$ 2a + 4 \\mathbin{\\boldsymbol{-}} \\boldsymbol{4} > 0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{4} $$
+
+$$ 2a > -4 $$
+
+Dividerar båda led med 2:
+
+$$ \\frac{2a}{\\boldsymbol{2}} > \\frac{-4}{\\boldsymbol{2}} $$
+
+$$ a > -2 $$
+
+Båda villkoren gäller när $a$ ligger mellan $-2$ och 3.
+
+Kontroll med $a = 0$: $P = (-3, 4)$, som ligger i andra kvadranten.
+
+**Svar:** $-2 < a < 3$
+
+**b)** I fjärde kvadranten ska *x*-koordinaten vara positiv, $a - 3 > 0$, alltså $a > 3$. Samtidigt ska *y*-koordinaten vara negativ, $2a + 4 < 0$, vilket med samma räkning som i a) ger $a < -2$.
+
+Inget tal är både större än 3 och mindre än $-2$. Villkoren kan alltså aldrig vara uppfyllda samtidigt.
+
+**Svar:** Det skulle kräva att $a > 3$ och $a < -2$ samtidigt, och det är omöjligt.
+
+**c)** På *y*-axeln är *x*-koordinaten 0:
+
+$$ a - 3 = 0 $$
+
+Adderar 3 till båda led:
+
+$$ a - 3 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3} = 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3} $$
+
+$$ a = 3 $$
+
+*y*-koordinaten blir då $2 \\cdot 3 + 4 = 10$.
+
+**Svar:** $a = 3$, och då ligger $P$ i $(0, 10)$ på *y*-axeln.
+
+**Generell slutsats:** frågan "i vilken kvadrant ligger punkten?" blir för en punkt med en parameter två olikheter, en för varje koordinat. Ibland säger olikheterna emot varandra, och då kan punkten aldrig hamna där.`,
+        },
+        {
+            level: 3,
+            question: `Ella åker elsparkcykel, och varje resa tar 15 minuter. Hos bolag A kostar varje resa 10 kr i upplåsning plus 2 kr per minut. Hos bolag B betalar man 149 kr per månad och sedan 1,50 kr per minut, men ingen upplåsning.<br>a) Ställ upp en formel för månadskostnaden $y$ kr hos vartdera bolaget när Ella gör $x$ resor i månaden.<br>b) Hur många resor i månaden måste Ella minst göra för att bolag B ska bli billigast?`,
+            answer: { value: 9, unit: 'resor' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 9, unit: 'resor' },
+            ],
+            solution: `**Insikten:** frågan gäller antalet resor, inte antalet minuter. Börja därför med att räkna ut vad EN resa kostar hos vartdera bolaget. Då blir båda modellerna linjära i antalet resor $x$.
+
+**a)** Hos bolag A kostar en resa upplåsningen plus 15 minuter:
+
+$$ 10 + 2 \\cdot 15 = 40\\ \\text{kr per resa} $$
+
+Det finns ingen fast månadsavgift, så kostnaden är $40x$ kr.
+
+Hos bolag B kostar en resa $1{,}50 \\cdot 15 = 22{,}5$ kr, och månadsavgiften 149 kr betalas oavsett antalet resor. Den blir konstanttermen.
+
+**Svar:** Bolag A: $y = 40x$. Bolag B: $y = 149 + 22{,}5x$
+
+**b)** Vi tar reda på när bolagen kostar lika mycket:
+
+$$ 40x = 149 + 22{,}5x $$
+
+Subtraherar $22{,}5x$ från båda led:
+
+$$ 40x \\mathbin{\\boldsymbol{-}} \\boldsymbol{22{,}5x} = 149 + 22{,}5x \\mathbin{\\boldsymbol{-}} \\boldsymbol{22{,}5x} $$
+
+$$ 17{,}5x = 149 $$
+
+Dividerar båda led med $17{,}5$:
+
+$$ \\frac{17{,}5x}{\\boldsymbol{17{,}5}} = \\frac{149}{\\boldsymbol{17{,}5}} $$
+
+$$ x = 8{,}51\\ldots $$
+
+Antalet resor är ett heltal. Bolag B har den högre fasta avgiften men det lägre priset per resa, så B blir billigast först när Ella åker fler än $8{,}51\\ldots$ resor, alltså från 9 resor.
+
+Kontroll: 8 resor kostar $40 \\cdot 8 = 320$ kr hos A och $149 + 22{,}5 \\cdot 8 = 329$ kr hos B. 9 resor kostar $40 \\cdot 9 = 360$ kr hos A och $149 + 22{,}5 \\cdot 9 = 351{,}5$ kr hos B.
+
+**Svar:** Minst 9 resor i månaden
+
+**Generell slutsats:** en hög fast avgift lönar sig först när den rörliga delen är så stor att besparingen per gång hinner äta upp avgiften. Här sparar B $17{,}5$ kr per resa, och det tar 9 resor innan det är mer än 149 kr.`,
+        },
+        {
+            level: 3,
+            question: `Två vattentankar börjar tömmas samtidigt, och båda töms i jämn takt. Tank A innehåller 210 liter efter 2 minuter och 120 liter efter 5 minuter. Tank B innehåller 200 liter från början och töms med 20 liter per minut.<br>a) Hur mycket vatten fanns i tank A från början? Ställ upp en formel för vattenmängden $y$ liter i tank A efter $x$ minuter.<br>b) Efter hur lång tid innehåller tankarna lika mycket vatten, och hur mycket är det då?<br>c) Vilken av tankarna blir tom först?`,
+            answer: { value: 7, unit: 'min' },
+            delsvar: [
+                { del: 'a', value: 270, unit: 'liter', etikett: 'från början' },
+                { del: 'b', value: 7, unit: 'min', etikett: 'tid' },
+                { del: 'b', value: 60, unit: 'liter', etikett: 'vattenmängd' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** att tanken töms i jämn takt betyder att lika mycket vatten rinner ut varje minut. Den takten fås ur de två avläsningarna, och sedan kan man räkna baklänges till tiden 0.
+
+**a)** Mellan minut 2 och minut 5 går det 3 minuter, och vattenmängden minskar med $210 - 120 = 90$ liter. Minskningen per minut är minskningen i vattenmängd delad med tiden:
+
+$$ \\frac{90}{3} = 30\\ \\text{liter per minut} $$
+
+Från början var det 2 minuter tidigare än första avläsningen, alltså $2 \\cdot 30 = 60$ liter mer:
+
+$$ 210 + 60 = 270\\ \\text{liter} $$
+
+Vattenmängden är 270 liter från början och minskar med 30 liter per minut.
+
+Kontroll: $x = 5$ ger $270 - 30 \\cdot 5 = 120$ liter, som det ska.
+
+**Svar:** Tank A innehöll 270 liter, och $y = 270 - 30x$
+
+**b)** Tank B följer $y = 200 - 20x$. Tankarna innehåller lika mycket när
+
+$$ 270 - 30x = 200 - 20x $$
+
+Adderar $30x$ till båda led:
+
+$$ 270 - 30x \\mathbin{\\boldsymbol{+}} \\boldsymbol{30x} = 200 - 20x \\mathbin{\\boldsymbol{+}} \\boldsymbol{30x} $$
+
+$$ 270 = 200 + 10x $$
+
+Subtraherar 200 från båda led:
+
+$$ 270 \\mathbin{\\boldsymbol{-}} \\boldsymbol{200} = 200 + 10x \\mathbin{\\boldsymbol{-}} \\boldsymbol{200} $$
+
+$$ 70 = 10x $$
+
+Dividerar båda led med 10:
+
+$$ \\frac{70}{\\boldsymbol{10}} = \\frac{10x}{\\boldsymbol{10}} $$
+
+$$ 7 = x $$
+
+Vattenmängden då: $200 - 20 \\cdot 7 = 60$ liter. Kontroll med tank A: $270 - 30 \\cdot 7 = 60$ liter.
+
+Rimligt? Tank A har 70 liter mer från början men töms 10 liter per minut fortare. Försprånget är borta efter $\\dfrac{70}{10} = 7$ minuter.
+
+**Svar:** Efter 7 minuter, och då innehåller båda 60 liter.
+
+**c)** Tank A är tom när $270 - 30x = 0$, alltså efter $\\dfrac{270}{30} = 9$ minuter. Tank B är tom efter $\\dfrac{200}{20} = 10$ minuter.
+
+**Svar:** Tank A blir tom först, efter 9 minuter. Tank B blir tom efter 10 minuter.
+
+**Generell slutsats:** två linjära modeller som startar olika högt och ändras olika fort möts en gång. Mötet kommer när skillnaden från början har ätits upp av skillnaden i takt, och efter mötet ligger de i omvänd ordning.`,
+        },
+        {
+            level: 3,
+            question: `En ort hade $20\\,000$ invånare år 2015 och $23\\,000$ invånare år 2020. Kommunen räknar med att befolkningen fortsätter att växa enligt en linjär modell. Tilda gör en prognos: ”Ökningen var 15 % på fem år. I en linjär modell är ökningen densamma varje period, så befolkningen ökar med 15 % till år 2025 och med 15 % till år 2030.”<br>a) Förklara vad som är fel i Tildas resonemang, och beräkna vad den linjära modellen ger för år 2030.<br>b) Med hur många procent ökar befolkningen från år 2025 till år 2030 enligt den linjära modellen? Avrunda till en decimal.`,
+            answer: { value: 11.5, unit: '%', tol: 0.005 },
+            delsvar: [
+                { del: 'a', value: 29000, unit: 'invånare' },
+                { del: 'b', value: 11.5, unit: '%', tol: 0.005 },
+            ],
+            solution: `**Insikten:** en linjär modell ändras med samma ANTAL varje period, inte med samma procent. Samma procent varje period är en annan sorts modell, och den växer snabbare och snabbare.
+
+**a)** Från 2015 till 2020 ökade befolkningen med
+
+$$ 23\\,000 - 20\\,000 = 3\\,000\\ \\text{invånare} $$
+
+I den linjära modellen tillkommer alltså $3\\,000$ invånare var femte år, eller $\\dfrac{3\\,000}{5} = 600$ per år. Med $x$ år efter 2015 är modellen $y = 20\\,000 + 600x$. År 2030 är $x = 15$:
+
+$$ 20\\,000 + 600 \\cdot 15 = 29\\,000 $$
+
+Tildas sätt ger i stället $23\\,000 \\cdot 1{,}15 = 26\\,450$ år 2025 och $26\\,450 \\cdot 1{,}15 = 30\\,417{,}5$ år 2030. Hon låter ökningen bli större och större, och det är just det som en linjär modell inte gör.
+
+**Svar:** Tilda håller procenten konstant, men i en linjär modell är det antalet nya invånare som är konstant, $3\\,000$ per femårsperiod. Modellen ger $29\\,000$ invånare år 2030.
+
+**b)** Enligt modellen bor det $26\\,000$ invånare år 2025 och $29\\,000$ år 2030. Ökningen är $3\\,000$ invånare, och procentuell ökning är ökningen delad med värdet före ökningen:
+
+$$ \\frac{3\\,000}{26\\,000} = 0{,}115\\ldots \\approx 11{,}5\\ \\% $$
+
+Rimligt? Samma ökning räknas på en allt större befolkning, så procenten måste bli mindre än de $15\\ \\%$ som gällde från 2015.
+
+**Svar:** Cirka 11,5 %
+
+**Generell slutsats:** i en linjär modell är ökningen i antal konstant, och därför blir ökningen i procent mindre och mindre ju större värdet blir. Konstant procent hör till en annan sorts modell.`,
+        },
+        {
+            level: 3,
+            question: `Tabellen visar några värden ur en linjär modell. Värdena på $x$ ökar inte i jämna steg, och två av rutorna är tomma.<br>a) Bestäm de två tal som saknas.<br>b) Ange modellen som en formel.
+
+| $x$ | 2 | 5 | ? | 11 |
+| --- | --- | --- | --- | --- |
+| $y$ | 13 | ? | 35 | 49 |`,
+            answer: { value: 7.5, unit: '' },
+            delsvar: [
+                { del: 'a', value: 25, unit: '', etikett: '$y$ när $x = 5$' },
+                { del: 'a', value: 7.5, unit: '', etikett: '$x$ när $y = 35$' },
+                { del: 'b', value: 4, unit: '', etikett: 'talet framför $x$' },
+                { del: 'b', value: 5, unit: '', etikett: 'konstanttermen' },
+            ],
+            solution: `**Insikten:** i en linjär modell ökar $y$ lika mycket för varje steg i $x$, hur långa hopp tabellen än gör. Använd de två kolumner som är helt kända och räkna ut ökningen per steg.
+
+**a)** Från $x = 2$ till $x = 11$ är det $11 - 2 = 9$ steg, och $y$ ökar med $49 - 13 = 36$. Ökningen per steg är ökningen i $y$ delad med antalet steg i $x$:
+
+$$ \\frac{36}{9} = 4 $$
+
+*Rutan under $x = 5$:* från $x = 2$ är det 3 steg, och varje steg ger 4 till:
+
+$$ 13 + 3 \\cdot 4 = 25 $$
+
+*Rutan ovanför $y = 35$:* från $y = 13$ ska $y$ öka med $35 - 13 = 22$. Varje steg ger 4, så det behövs
+
+$$ \\frac{22}{4} = 5{,}5\\ \\text{steg} $$
+
+och $x = 2 + 5{,}5 = 7{,}5$.
+
+Kontroll: från $x = 7{,}5$ till $x = 11$ är det $3{,}5$ steg, och $35 + 3{,}5 \\cdot 4 = 49$, som i tabellen.
+
+**Svar:** $y = 25$ när $x = 5$, och $x = 7{,}5$ när $y = 35$
+
+**b)** Konstanttermen är värdet på $y$ när $x = 0$. Från $x = 2$ går vi 2 steg baklänges:
+
+$$ 13 - 2 \\cdot 4 = 5 $$
+
+Kontroll: $x = 11$ ger $5 + 4 \\cdot 11 = 49$.
+
+**Svar:** $y = 5 + 4x$
+
+**Generell slutsats:** ojämna steg i tabellen spelar ingen roll för en linjär modell. Dela den totala ökningen i $y$ med antalet steg i $x$, så får du ökningen per steg, och därifrån kan varje tomt värde räknas ut.`,
+        },
+        {
+            level: 3,
+            question: `Vid en fjällstation 300 m över havet är temperaturen 14 °C. Antag att temperaturen sjunker med 0,65 °C för varje 100 m man stiger uppåt.<br>a) Ställ upp en formel för temperaturen $y$ °C på höjden $x$ m över havet.<br>b) På vilken höjd är det 0 °C enligt modellen? Avrunda till tiotal meter.<br>c) I verkligheten slutar temperaturen att sjunka ungefär 11 km upp. Därifrån är den nästan konstant, cirka −56 °C, upp till 20 km. Vad ger modellen på höjderna $11\\,000$ m och $20\\,000$ m? Värdera modellen.`,
+            answer: { value: 2450, unit: 'm', tol: 0.01 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 2450, unit: 'm', tol: 0.01 },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** formeln ska utgå från havsytan, där $x = 0$, men temperaturen är bara känd 300 m upp. Räkna därför baklänges ned till havsytan, och omvandla minskningen till en minskning per meter.
+
+**a)** Temperaturen sjunker $0{,}65$ °C per 100 m, alltså
+
+$$ \\frac{0{,}65}{100} = 0{,}0065\\ \\text{grader per meter} $$
+
+Vid havsytan är det 300 m lägre, och 300 m är 3 gånger 100 m. Där är det alltså varmare:
+
+$$ 14 + 3 \\cdot 0{,}65 = 15{,}95\\ ^{\\circ}\\mathrm{C} $$
+
+Kontroll: $x = 300$ ger $15{,}95 - 0{,}0065 \\cdot 300 = 14$, som det ska.
+
+**Svar:** $y = 15{,}95 - 0{,}0065x$
+
+**b)** Vi söker höjden där $y = 0$:
+
+$$ 15{,}95 - 0{,}0065x = 0 $$
+
+Adderar $0{,}0065x$ till båda led:
+
+$$ 15{,}95 - 0{,}0065x \\mathbin{\\boldsymbol{+}} \\boldsymbol{0{,}0065x} = 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{0{,}0065x} $$
+
+$$ 15{,}95 = 0{,}0065x $$
+
+Dividerar båda led med $0{,}0065$:
+
+$$ \\frac{15{,}95}{\\boldsymbol{0{,}0065}} = \\frac{0{,}0065x}{\\boldsymbol{0{,}0065}} $$
+
+$$ x = 2\\,453{,}8\\ldots $$
+
+Rimligt? Från stationen ska temperaturen sjunka 14 grader, och det tar $\\dfrac{14}{0{,}65} \\approx 21{,}5$ hundratal meter, alltså drygt $2\\,150$ m ovanför stationen.
+
+**Svar:** Cirka $2\\,450$ m över havet
+
+**c)** På $11\\,000$ m ger modellen
+
+$$ 15{,}95 - 0{,}0065 \\cdot 11\\,000 = -55{,}55 $$
+
+och på $20\\,000$ m
+
+$$ 15{,}95 - 0{,}0065 \\cdot 20\\,000 = -114{,}05 $$
+
+Upp till 11 km stämmer modellen bra, cirka $-56$ °C mot verklighetens cirka $-56$ °C. Ovanför 11 km fortsätter modellen att sjunka, medan temperaturen i verkligheten slutar sjunka. På 20 km är modellens värde nästan 60 grader för kallt.
+
+**Svar:** Modellen ger cirka −56 °C på 11 000 m och cirka −114 °C på 20 000 m. Den är användbar upp till ungefär 11 km men inte högre upp.
+
+**Generell slutsats:** en linjär modell fortsätter i samma takt hur långt man än går, men verkligheten gör sällan det. Därför ska en modell alltid användas inom de värden där den har visat sig stämma.`,
         },
     ],
 
@@ -26200,21 +26536,329 @@ $$ y = 0{,}07 \\cdot 850 = 59{,}5\\ \\text{liter} $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En taxi tar 20 kr i startavgift plus 10 kr/km. Amanda betalar 60 kr för 4 km och resonerar: "Dubbla sträckan ger dubbla priset — 8 km kostar 120 kr." Vad kostar 8 km egentligen?`,
-            answer: { value: 100, unit: 'kr' },
-            solution: `**Insikten:** "dubbla sträckan ⟹ dubbla priset" gäller BARA för proportionaliteter ($y = kx$, genom origo). Startavgiften gör modellen linjär men inte proportionell.
+            question: `Storheterna $y_1$ och $y_2$ är båda proportionella mot $x$, med proportionalitetskonstanterna $a$ respektive $b$, där $a$ och $b$ är positiva.<br>a) Visa att summan $y_1 + y_2$ också är proportionell mot $x$.<br>b) Är produkten $y_1 \\cdot y_2$ proportionell mot $x$?<br>c) Är kvoten $\\dfrac{y_1}{y_2}$ proportionell mot $x$?`,
+            solution: `**Insikten:** ett samband är en proportionalitet när det kan skrivas $y = kx$, där $k$ är ett tal som inte beror på $x$. Skriv därför om varje uttryck och se om det går att få den formen.
 
-Modellen är $y = 20 + 10x$. För 8 km:
+Att $y_1$ och $y_2$ är proportionella mot $x$ betyder att
 
-$$ y = 20 + 10 \\cdot 8 = 100\\ \\mathrm{kr} $$
+$$ y_1 = ax \\qquad y_2 = bx $$
 
-— inte 120 kr. Amandas dubbling skulle även dubbla startavgiften, men den betalas bara en gång.
+**a)** Summan:
 
-Kontrollera kvoterna: $\\dfrac{60}{4} = 15$ kr/km men $\\dfrac{100}{8} = 12{,}5$ kr/km — kvoten $\\dfrac{y}{x}$ är inte konstant, alltså ingen proportionalitet. Grafen är en rät linje som skär *y*-axeln i 20, inte i origo.
+$$ y_1 + y_2 = ax + bx $$
 
-**Svar:** 100 kr
+Bryter ut $x$:
 
-**Generell slutsats:** skalningsknepet "dubbla in ⟹ dubbla ut" är ett kännetecken för proportionalitet. Finns ett startvärde måste formeln användas.`,
+$$ y_1 + y_2 = (a + b)x $$
+
+Talet $a + b$ beror inte på $x$, så summan har formen $kx$ med $k = a + b$.
+
+Ett exempel: äpplen för 20 kr/kg och päron för 30 kr/kg. Köper man lika många kilo av båda betalar man $20x + 30x = 50x$ kr för $x$ kg av vardera, alltså 50 kr per kilo av vardera sorten.
+
+**Svar:** Ja, $y_1 + y_2 = (a + b)x$, en proportionalitet med konstanten $a + b$.
+
+**b)** Produkten:
+
+$$ y_1 \\cdot y_2 = ax \\cdot bx = abx^2 $$
+
+Här står $x^2$ och inte $x$. Vi prövar med $a = b = 1$, så att produkten är $x^2$. Då ger $x = 1$ värdet 1 och $x = 2$ värdet 4. Kvoten mellan $y$ och $x$ är $\\dfrac{1}{1} = 1$ i första fallet och $\\dfrac{4}{2} = 2$ i det andra. Kvoten är inte konstant, och grafen är ingen rät linje.
+
+**Svar:** Nej, produkten är $abx^2$, och kvoten mellan den och $x$ ändras med $x$.
+
+**c)** Kvoten, för $x \\neq 0$:
+
+$$ \\frac{y_1}{y_2} = \\frac{ax}{bx} = \\frac{a}{b} $$
+
+Kvoten har samma värde $\\dfrac{a}{b}$ oavsett $x$. Grafen är en vågrät linje på höjden $\\dfrac{a}{b}$, och den går inte genom origo. Ett samband som inte ändras alls när $x$ ändras är inte proportionellt mot $x$.
+
+**Svar:** Nej, kvoten är konstant, $\\dfrac{a}{b}$, och ändras inte med $x$.
+
+**Generell slutsats:** summan av två proportionaliteter mot samma storhet är en ny proportionalitet. Produkten och kvoten är det inte: den ena växer för fort och den andra står still.`,
+        },
+        {
+            level: 3,
+            question: `Moa hänger vikter i en fjäder och mäter hur mycket den förlängs. Resultaten står i tabellen.<br>a) Undersök om det är rimligt att förlängningen är proportionell mot massan.<br>b) Bestäm en proportionalitetskonstant som bygger på alla mätningarna, och använd den för att förutsäga förlängningen med en vikt på 400 g.<br>c) Förklara varför modellen inte kan användas för att förutsäga förlängningen med en vikt på 5 kg.
+
+| Massa $x$ (g) | 50 | 100 | 150 | 200 | 250 |
+| --- | --- | --- | --- | --- | --- |
+| Förlängning $y$ (cm) | 1,9 | 4,1 | 6,0 | 7,9 | 10,2 |`,
+            answer: { value: 16, unit: 'cm', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 16, unit: 'cm', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** i en proportionalitet är kvoten $\\dfrac{y}{x}$ densamma för alla mätningar. Riktiga mätningar har alltid små fel, så kvoterna blir inte exakt lika. Frågan är om skillnaderna är så små att de kan vara mätfel.
+
+**a)** Kvoten mellan förlängning och massa för varje mätning:
+
+$$ \\frac{1{,}9}{50} = 0{,}038 \\qquad \\frac{4{,}1}{100} = 0{,}041 \\qquad \\frac{6{,}0}{150} = 0{,}04 $$
+
+$$ \\frac{7{,}9}{200} = 0{,}0395 \\qquad \\frac{10{,}2}{250} = 0{,}0408 $$
+
+Alla kvoter ligger mellan $0{,}038$ och $0{,}041$. De växer inte och krymper inte med massan, utan varierar slumpmässigt kring ungefär $0{,}04$. Det passar med mätfel på en eller ett par millimeter. Dessutom är förlängningen 0 utan vikt, så grafen ska gå genom origo.
+
+**Svar:** Ja, kvoterna är nästan lika, cirka 0,04 cm per gram, och skillnaderna är så små att de kan vara mätfel.
+
+**b)** Ett sätt att använda alla mätningarna är att ta medelvärdet av kvoterna:
+
+$$ k = \\frac{0{,}038 + 0{,}041 + 0{,}04 + 0{,}0395 + 0{,}0408}{5} = \\frac{0{,}1993}{5} = 0{,}039\\,86 $$
+
+Med $y = 0{,}039\\,86x$ och $x = 400$:
+
+$$ y = 0{,}039\\,86 \\cdot 400 = 15{,}944 $$
+
+Rimligt? 400 g är dubbelt så mycket som 200 g, och 200 g gav $7{,}9$ cm. Dubbla det är cirka 16 cm.
+
+**Svar:** Cirka 16 cm
+
+**c)** 5 kg är $5\\,000$ g, tjugo gånger så mycket som den tyngsta vikten Moa mätte med. Modellen säger $0{,}039\\,86 \\cdot 5\\,000 \\approx 200$ cm, alltså två meter. En vanlig fjäder tål inte det: den töjs ut så att den inte längre återgår, eller går sönder. Ingen mätning visar att sambandet håller så långt utanför de uppmätta värdena.
+
+**Svar:** 5 kg ligger långt utanför de mätta värdena, och där är det inte säkert att fjädern beter sig som i mätningarna. Fjädern kan till och med töjas ut för gott.
+
+**Generell slutsats:** med riktiga mätdata är frågan inte om kvoterna är exakt lika, utan om skillnaderna är små och slumpmässiga. En proportionalitet som stämmer för mätningarna ska bara användas nära de värden som mätts.`,
+        },
+        {
+            level: 3,
+            question: `Priset för lösviktsgodis är proportionellt mot vikten. Butiken höjer kilopriset med 15 %.<br>a) Max vill betala lika mycket som förut. Med hur många procent måste han minska mängden godis han köper? Avrunda till en decimal.<br>b) Saga köper i stället 20 % mer godis än förut. Med hur många procent ökar det hon betalar?`,
+            answer: { value: 13, unit: '%', tol: 0.005 },
+            delsvar: [
+                { del: 'a', value: 13, unit: '%', tol: 0.005, ignoreSign: true },
+                { del: 'b', value: 38, unit: '%' },
+            ],
+            solution: `**Insikten:** med priset $y = kx$ är priset proportionalitetskonstanten gånger vikten. En förändring av kilopriset och en förändring av vikten blir då två förändringsfaktorer som multipliceras. Procenten adderas inte.
+
+Kalla det gamla kilopriset $k$ och den gamla vikten $x$. Förut var priset $kx$. Det nya kilopriset är $1{,}15k$.
+
+**a)** Kalla Max nya vikt $v$. Han ska betala lika mycket som förut:
+
+$$ 1{,}15k \\cdot v = kx $$
+
+Dividerar båda led med $1{,}15k$:
+
+$$ \\frac{1{,}15k \\cdot v}{\\boldsymbol{1{,}15k}} = \\frac{kx}{\\boldsymbol{1{,}15k}} $$
+
+$$ v = \\frac{x}{1{,}15} = 0{,}8696 \\ldots \\cdot x $$
+
+Förändringsfaktorn $0{,}8696\\ldots$ betyder en minskning med $1 - 0{,}8696\\ldots = 0{,}1304\\ldots$, alltså cirka $13{,}0\\ \\%$.
+
+Lägg märke till att det inte räcker med 15 % mindre godis. Då hade han betalat $1{,}15 \\cdot 0{,}85 = 0{,}9775$ av det gamla priset, alltså för lite, och han hade kunnat köpa lite mer.
+
+**Svar:** Med cirka 13,0 %
+
+**b)** Saga köper $1{,}2x$ kg till det nya kilopriset:
+
+$$ 1{,}15k \\cdot 1{,}2x = 1{,}38kx $$
+
+Hon betalar alltså $1{,}38$ gånger det gamla priset, en ökning med $38\\ \\%$.
+
+Rimligt? $15\\ \\% + 20\\ \\% = 35\\ \\%$ är för lite, eftersom prishöjningen också gäller den extra godismängden.
+
+**Svar:** Med 38 %
+
+**Generell slutsats:** i en proportionalitet $y = kx$ ger en procentuell ändring av $k$ och en procentuell ändring av $x$ en total ändring som fås genom att förändringsfaktorerna multipliceras, $1{,}15 \\cdot 1{,}2$, aldrig genom att procenten adderas.`,
+        },
+        {
+            level: 3,
+            question: `Familjen Berg betalade $2\\,000$ kr för $40\\ \\mathrm{m^3}$ vatten ett år och $3\\,000$ kr för $65\\ \\mathrm{m^3}$ året efter, med samma taxa båda åren. Linnea resonerar: ”Vattnet kostar $\\dfrac{2\\,000}{40} = 50$ kr per kubikmeter, så $100\\ \\mathrm{m^3}$ kostar $5\\,000$ kr.”<br>a) Visa att priset inte är proportionellt mot förbrukningen.<br>b) Anta att sambandet är linjärt. Vad kostar $100\\ \\mathrm{m^3}$?`,
+            answer: { value: 4400, unit: 'kr' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 4400, unit: 'kr' },
+            ],
+            solution: `**Insikten:** Linnea räknar som om priset vore proportionellt mot förbrukningen. Det är det bara om kvoten mellan pris och förbrukning är densamma båda åren. Är den inte det finns en fast avgift som inte beror på förbrukningen.
+
+**a)** Kvoten mellan pris och förbrukning de två åren:
+
+$$ \\frac{2\\,000}{40} = 50 \\qquad \\frac{3\\,000}{65} = 46{,}15\\ldots $$
+
+Kvoterna är olika, så priset är inte proportionellt mot förbrukningen.
+
+**Svar:** Kvoten är 50 kr per kubikmeter det första året men cirka 46 kr per kubikmeter det andra, så den är inte konstant.
+
+**b)** Det andra året användes $65 - 40 = 25$ kubikmeter mer, och det kostade $3\\,000 - 2\\,000 = 1\\,000$ kr mer. Det rörliga priset är ökningen i pris delad med ökningen i förbrukning:
+
+$$ \\frac{1\\,000}{25} = 40\\ \\text{kr per kubikmeter} $$
+
+Den fasta avgiften är det som blir kvar när vattnet räknats bort från det första årets räkning:
+
+$$ 2\\,000 - 40 \\cdot 40 = 400\\ \\text{kr} $$
+
+Priset är alltså $y = 400 + 40x$ kr för $x$ kubikmeter. Kontroll: $400 + 40 \\cdot 65 = 3\\,000$, som det andra året.
+
+För $100\\ \\mathrm{m^3}$:
+
+$$ 400 + 40 \\cdot 100 = 4\\,400 $$
+
+Linneas fel var att hon fördelade den fasta avgiften på kubikmetrarna. Då betalar hon den fasta avgiften en gång till för varje ny kubikmeter.
+
+**Svar:** $4\\,400$ kr
+
+**Generell slutsats:** att dela priset med mängden ger bara ett riktigt styckpris när sambandet är en proportionalitet. Finns en fast avgift måste man i stället jämföra hur mycket priset ökar när mängden ökar.`,
+        },
+        {
+            level: 3,
+            question: `Diagrammet visar priset $y$ kr för $x$ meter av två tyger. Den heldragna röda linjen gäller tyg A och den streckade blå linjen tyg B.<br>a) Bestäm proportionalitetskonstanten för vartdera tyget.<br>b) Hur många meter av tyg B får man för samma pris som 6 m av tyg A?<br>c) Visa att man för vilket belopp som helst får $\\dfrac{5}{3}$ gånger så många meter av tyg B som av tyg A.
+
+${makeDiagram({
+    xMin: 0, xMax: 8, yMin: 0, yMax: 400,
+    xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    yTicks: [0, 50, 100, 150, 200, 250, 300, 350, 400],
+    xLabel: '<tspan font-style="italic">x</tspan> (m)',
+    yLabel: '<tspan font-style="italic">y</tspan> (kr)',
+    paths: [
+        { points: [[0, 0], [8, 400]] },
+        { points: [[0, 0], [8, 240]], color: '#2563c9', dash: '8 6' },
+    ],
+})}`,
+            answer: { value: 10, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 50, unit: 'kr/m', etikett: 'tyg A' },
+                { del: 'a', value: 30, unit: 'kr/m', etikett: 'tyg B' },
+                { del: 'b', value: 10, unit: 'm' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** båda linjerna går genom origo, så båda priserna är proportionella mot längden. Proportionalitetskonstanten är meterpriset, och den läses av i en punkt där linjen går genom ett hörn i rutnätet.
+
+**a)** Linje A går genom $(1, 50)$ och linje B genom $(5, 150)$. Proportionalitetskonstanten är kvoten mellan pris och längd:
+
+$$ k_A = \\frac{50}{1} = 50 \\qquad k_B = \\frac{150}{5} = 30 $$
+
+Kontroll: linje A ska då gå genom $(8, 400)$ och linje B genom $(8, 240)$, och det gör de.
+
+**Svar:** Tyg A: $k = 50$, alltså 50 kr/m. Tyg B: $k = 30$, alltså 30 kr/m.
+
+**b)** 6 m av tyg A kostar $50 \\cdot 6 = 300$ kr. För 300 kr får man av tyg B
+
+$$ \\frac{300}{30} = 10\\ \\text{m} $$
+
+**Svar:** 10 m
+
+**c)** Kalla längden av tyg A för $x_A$ och längden av tyg B för $x_B$. Samma belopp betyder
+
+$$ 50x_A = 30x_B $$
+
+Dividerar båda led med 30:
+
+$$ \\frac{50x_A}{\\boldsymbol{30}} = \\frac{30x_B}{\\boldsymbol{30}} $$
+
+$$ x_B = \\frac{5}{3} \\cdot x_A $$
+
+Beloppet finns inte med i uttrycket, så förhållandet är detsamma för alla belopp. Kontroll med b): $\\dfrac{5}{3} \\cdot 6 = 10$.
+
+**Svar:** Av $50x_A = 30x_B$ följer att $x_B = \\dfrac{5}{3} \\cdot x_A$ för alla belopp.
+
+**Generell slutsats:** för två proportionaliteter genom origo är förhållandet mellan *x*-värdena vid samma *y*-värde alltid detsamma. Det är kvoten mellan proportionalitetskonstanterna, fast omvänd: det billigare tyget ger fler meter.`,
+        },
+        {
+            level: 3,
+            question: `Sambandet $y = (a - 2)x + a^2 - 9$ innehåller talet $a$.<br>a) För vilka värden på $a$ är sambandet en proportionalitet? Ange formeln i varje fall.<br>b) Vilken av proportionaliteterna har en graf som lutar nedåt, och vilken proportionalitetskonstant har den?<br>c) För vilket värde på $a$ blir grafen en vågrät linje? Är sambandet då en proportionalitet?`,
+            answer: { value: -5, unit: '' },
+            delsvar: [
+                { del: 'a', values: [3, -3], unit: '', etikett: '$a =$' },
+                { del: 'b', value: -5, unit: '', etikett: '$k =$' },
+                { del: 'c', value: 2, unit: '', etikett: '$a =$' },
+            ],
+            solution: `**Insikten:** ett linjärt samband är en proportionalitet när grafen går genom origo, alltså när konstanttermen är 0. Här är konstanttermen $a^2 - 9$, och den ska sättas lika med 0.
+
+**a)** Konstanttermen ska vara 0:
+
+$$ a^2 - 9 = 0 $$
+
+Adderar 9 till båda led:
+
+$$ a^2 - 9 \\mathbin{\\boldsymbol{+}} \\boldsymbol{9} = 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{9} $$
+
+$$ a^2 = 9 $$
+
+Drar roten ur båda led. Både 3 och $-3$ ger 9 i kvadrat:
+
+$$ a = \\pm\\sqrt{9} $$
+
+$$ a = \\pm 3 $$
+
+$a = 3$ ger $y = (3 - 2)x + 9 - 9 = x$.
+
+$a = -3$ ger $y = (-3 - 2)x + 9 - 9 = -5x$.
+
+Båda har ett tal skilt från 0 framför $x$, så båda är riktiga proportionaliteter.
+
+**Svar:** $a = 3$ ger $y = x$ och $a = -3$ ger $y = -5x$
+
+**b)** En graf lutar nedåt när talet framför $x$ är negativt, och det gäller $y = -5x$.
+
+**Svar:** $y = -5x$, med proportionalitetskonstanten $-5$
+
+**c)** Grafen blir vågrät när talet framför $x$ är 0:
+
+$$ a - 2 = 0 $$
+
+Adderar 2 till båda led:
+
+$$ a - 2 \\mathbin{\\boldsymbol{+}} \\boldsymbol{2} = 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{2} $$
+
+$$ a = 2 $$
+
+Då blir sambandet $y = 0 \\cdot x + 4 - 9 = -5$. Grafen är en vågrät linje på höjden $-5$, och den går inte genom origo.
+
+**Svar:** $a = 2$ ger $y = -5$. Det är ingen proportionalitet, eftersom grafen inte går genom origo.
+
+**Generell slutsats:** att ett linjärt samband är en proportionalitet är ett villkor på konstanttermen: den ska vara 0. Talet framför $x$ bestämmer sedan bara hur linjen genom origo lutar.`,
+        },
+        {
+            level: 3,
+            question: `Ella cyklar hemifrån med den konstanta farten 18 km/h. Hennes bror Noah cyklar samma väg och startar 20 minuter senare med farten 24 km/h. Låt $x$ vara tiden i timmar sedan Ella startade.<br>a) Ställ upp formler för hur långt från hemmet Ella och Noah är efter $x$ timmar. Är Noahs sträcka proportionell mot $x$?<br>b) Hur lång tid efter Ellas start hinner Noah ikapp henne, och hur långt hemifrån är de då?`,
+            answer: { value: 24, unit: 'km' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 80, unit: 'min', etikett: 'tid efter Ellas start' },
+                { del: 'b', value: 24, unit: 'km', etikett: 'avstånd hemifrån' },
+            ],
+            solution: `**Insikten:** med konstant fart är sträckan proportionell mot den tid man har cyklat. För Noah är det inte $x$, utan $x$ minus de 20 minuter han väntade. Om ett samband är proportionellt beror alltså på var man börjar räkna tiden.
+
+**a)** Ella har cyklat i $x$ timmar, så hennes sträcka är farten gånger tiden, $18x$ km.
+
+Noah startar 20 minuter, alltså $\\dfrac{1}{3}$ timme, senare. Han har cyklat i $x - \\dfrac{1}{3}$ timmar:
+
+$$ 24\\left(x - \\frac{1}{3}\\right) = 24x - 8 $$
+
+Formeln gäller när Noah har startat, alltså för $x \\geq \\dfrac{1}{3}$.
+
+Noahs formel har konstanttermen $-8$, så grafen går inte genom origo. Hans sträcka är proportionell mot sin egen cykeltid, men inte mot $x$.
+
+**Svar:** Ella: $y = 18x$. Noah: $y = 24x - 8$. Noahs sträcka är inte proportionell mot $x$.
+
+**b)** Noah hinner ikapp när de har cyklat lika långt:
+
+$$ 18x = 24x - 8 $$
+
+Subtraherar $18x$ från båda led:
+
+$$ 18x \\mathbin{\\boldsymbol{-}} \\boldsymbol{18x} = 24x - 8 \\mathbin{\\boldsymbol{-}} \\boldsymbol{18x} $$
+
+$$ 0 = 6x - 8 $$
+
+Adderar 8 till båda led:
+
+$$ 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{8} = 6x - 8 \\mathbin{\\boldsymbol{+}} \\boldsymbol{8} $$
+
+$$ 8 = 6x $$
+
+Dividerar båda led med 6:
+
+$$ \\frac{8}{\\boldsymbol{6}} = \\frac{6x}{\\boldsymbol{6}} $$
+
+$$ x = \\frac{4}{3} $$
+
+$\\dfrac{4}{3}$ timme är 1 timme och 20 minuter, alltså 80 minuter. Avståndet: $18 \\cdot \\dfrac{4}{3} = 24$ km.
+
+Kontroll med Noahs formel: $24 \\cdot \\dfrac{4}{3} - 8 = 32 - 8 = 24$ km.
+
+Rimligt? När Noah startar har Ella ett försprång på $18 \\cdot \\dfrac{1}{3} = 6$ km. Noah tar in $24 - 18 = 6$ km i timmen, så det tar honom 1 timme, alltså 80 minuter efter Ellas start.
+
+**Svar:** 80 minuter efter Ellas start, 24 km hemifrån
+
+**Generell slutsats:** en rörelse med konstant fart är en proportionalitet mellan sträcka och tid bara om tiden räknas från starten. Mäts tiden från en annan händelse får formeln en konstantterm, och då är sambandet linjärt men inte proportionellt.`,
         },
     ],
 
@@ -26288,27 +26932,402 @@ $$ a = -2 \\cdot 5 + 3 = -10 + 3 = -7 $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Selma prickar in värdetabellen till $y = -2x + 3$ och ser att punkterna (1, 1), (2, −1) och (3, −3) ligger på en rät linje — men punkten hon räknat för $x = -2$ hamnar utanför linjen: (−2, −1). Vilket räknefel har hon gjort?`,
-            choices: [
-                `Hon räknade $-2 \\cdot (-2) = -4$ i stället för $+4$ — minus gånger minus ger plus, rätt punkt är (−2, 7)`,
-                `Hon glömde konstanttermen 3 helt`,
-                `Hon bytte plats på x och y i koordinaten`,
-                `Punkten är rätt — linjen är fel dragen`,
+            question: `Linjen $y = -3x + 20$ är given.<br>a) Bestäm talet $a$ så att punkten $(a,\\ 2a + 5)$ ligger på linjen. Vilken punkt är det?<br>b) Finns det en punkt på linjen där *x*-koordinaten och *y*-koordinaten är lika stora men har olika tecken? Bestäm den i så fall.`,
+            answer: { value: 3, unit: '' },
+            delsvar: [
+                { del: 'a', value: 3, unit: '', etikett: '$a =$' },
+                { del: 'b', value: 10, unit: '', etikett: '$x$-koordinaten' },
+                { del: 'b', value: -10, unit: '', etikett: '$y$-koordinaten' },
             ],
-            correct: 0,
-            solution: `**Insikten:** en punkt som faller utanför en i övrigt perfekt linje avslöjar nästan alltid ett teckenfel i värdetabellen — grafen fungerar som felsökare.
+            solution: `**Insikten:** en punkt ligger på en linje när dess koordinater uppfyller linjens ekvation. Sätt in punktens *x*-koordinat i ekvationen och kräv att resultatet blir punktens *y*-koordinat. Då får man en ekvation för det okända talet.
 
-Rätt beräkning för $x = -2$:
+**a)** Insättning av $x = a$ i linjens ekvation ger *y*-värdet $-3a + 20$. Det ska vara lika med punktens *y*-koordinat $2a + 5$:
 
-$$ y = -2 \\cdot (-2) + 3 = 4 + 3 = 7 $$
+$$ 2a + 5 = -3a + 20 $$
 
-Selmas punkt (−2, −1) fås av $-4 + 3 = -1$, det vill säga hon räknade $-2 \\cdot (-2) = -4$. Minus gånger minus ger plus!
+Adderar $3a$ till båda led:
 
-Kontroll mot linjen: linjen genom (1, 1) och (2, −1) har lutningen −2 och passerar (−2, 7) — precis den korrigerade punkten.
+$$ 2a + 5 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3a} = -3a + 20 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3a} $$
 
-**Svar:** Teckenfel: $-2 \\cdot (-2) = +4$, så rätt punkt är (−2, 7).
+$$ 5a + 5 = 20 $$
 
-**Generell slutsats:** när alla punkter utom en ligger på linjen är det punkten som är fel, inte linjen — räkna om just den raden i värdetabellen och leta efter teckenfel.`,
+Subtraherar 5 från båda led:
+
+$$ 5a + 5 \\mathbin{\\boldsymbol{-}} \\boldsymbol{5} = 20 \\mathbin{\\boldsymbol{-}} \\boldsymbol{5} $$
+
+$$ 5a = 15 $$
+
+Dividerar båda led med 5:
+
+$$ \\frac{5a}{\\boldsymbol{5}} = \\frac{15}{\\boldsymbol{5}} $$
+
+$$ a = 3 $$
+
+Punkten är $(3,\\ 2 \\cdot 3 + 5) = (3, 11)$. Kontroll: $-3 \\cdot 3 + 20 = 11$.
+
+Ett annat sätt att se det: punkterna $(a,\\ 2a + 5)$ ligger alla på linjen $y = 2x + 5$. Frågan är alltså var den linjen skär $y = -3x + 20$.
+
+**Svar:** $a = 3$, och punkten är $(3, 11)$
+
+**b)** Lika stora koordinater med olika tecken betyder att punkten är $(x, -x)$. Den ligger på linjen om
+
+$$ -x = -3x + 20 $$
+
+Adderar $3x$ till båda led:
+
+$$ -x \\mathbin{\\boldsymbol{+}} \\boldsymbol{3x} = -3x + 20 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3x} $$
+
+$$ 2x = 20 $$
+
+Dividerar båda led med 2:
+
+$$ \\frac{2x}{\\boldsymbol{2}} = \\frac{20}{\\boldsymbol{2}} $$
+
+$$ x = 10 $$
+
+Punkten är $(10, -10)$. Kontroll: $-3 \\cdot 10 + 20 = -10$.
+
+**Svar:** Ja, punkten $(10, -10)$
+
+**Generell slutsats:** ett villkor på en punkts koordinater, som "$y$ är $2x + 5$" eller "$y$ är $\\mathord{-}x$", är i själva verket en ny linje. Att hitta punkten på den givna linjen är att hitta var de två linjerna skär varandra.`,
+        },
+        {
+            level: 3,
+            question: `Grafen till $y = 2x - 3$ speglas i en av koordinataxlarna. Använd en värdetabell med $x = -2, -1, 0, 1$ och $2$ och bestäm ekvationen för den speglade linjen när grafen speglas i<br>a)&nbsp;*y*-axeln&emsp;&emsp;b)&nbsp;*x*-axeln<br>c) Grafen speglas först i *x*-axeln och sedan i *y*-axeln. Vilken ekvation får linjen då, och hur ligger den i förhållande till den ursprungliga linjen?`,
+            answer: { value: 3, unit: '' },
+            delsvar: [
+                { del: 'a', value: -2, unit: '', etikett: '$k =$' },
+                { del: 'a', value: -3, unit: '', etikett: '$m =$' },
+                { del: 'b', value: -2, unit: '', etikett: '$k =$' },
+                { del: 'b', value: 3, unit: '', etikett: '$m =$' },
+                { del: 'c', value: 2, unit: '', etikett: '$k =$' },
+                { del: 'c', value: 3, unit: '', etikett: '$m =$' },
+            ],
+            solution: `**Insikten:** spegling i *y*-axeln byter tecken på *x*-koordinaten i varje punkt, och spegling i *x*-axeln byter tecken på *y*-koordinaten. Spegla punkterna i värdetabellen, och läs sedan av den nya linjens *y*-skärning och trappsteg.
+
+Värdetabell för $y = 2x - 3$:
+
+| $x$ | $-2$ | $-1$ | 0 | 1 | 2 |
+| --- | --- | --- | --- | --- | --- |
+| $y$ | $-7$ | $-5$ | $-3$ | $-1$ | 1 |
+
+**a)** I *y*-axeln byter *x*-koordinaten tecken. Punkterna blir $(2, -7)$, $(1, -5)$, $(0, -3)$, $(-1, -1)$ och $(-2, 1)$.
+
+Linjen skär fortfarande *y*-axeln i $(0, -3)$, så $m = -3$. Går man ett steg åt höger, från $x = 0$ till $x = 1$, går *y* från $-3$ till $-5$, alltså 2 steg nedåt. Då är $k = -2$.
+
+Kontroll: $x = 2$ ger $-2 \\cdot 2 - 3 = -7$, som punkten $(2, -7)$.
+
+**Svar:** $y = -2x - 3$
+
+**b)** I *x*-axeln byter *y*-koordinaten tecken. Punkterna blir $(-2, 7)$, $(-1, 5)$, $(0, 3)$, $(1, 1)$ och $(2, -1)$.
+
+Linjen skär *y*-axeln i $(0, 3)$, så $m = 3$. Ett steg åt höger tar *y* från 3 till 1, alltså 2 steg nedåt, och $k = -2$.
+
+Kontroll: $x = -2$ ger $-2 \\cdot (-2) + 3 = 7$, som punkten $(-2, 7)$.
+
+**Svar:** $y = -2x + 3$
+
+**c)** Efter båda speglingarna har båda koordinaterna bytt tecken. Punkterna blir $(2, 7)$, $(1, 5)$, $(0, 3)$, $(-1, 1)$ och $(-2, -1)$.
+
+Linjen skär *y*-axeln i $(0, 3)$, och ett steg åt höger tar *y* från 3 till 5, alltså 2 steg uppåt. Linjen är $y = 2x + 3$.
+
+Den har samma lutning som $y = 2x - 3$, men skär *y*-axeln 6 steg högre upp. De två linjerna är parallella.
+
+**Svar:** $y = 2x + 3$, som är parallell med den ursprungliga linjen men ligger 6 steg högre.
+
+**Generell slutsats:** spegling i en axel byter tecken på antingen talet framför $x$ eller på båda talen i ekvationen. Två speglingar i rad ger en linje med samma lutning som från början, och därför en parallell linje.`,
+        },
+        {
+            level: 3,
+            question: `Med tändstickor bygger Alva kvadrater i en rad. Figur 1 är en kvadrat av 4 tändstickor. Figur 2 är två kvadrater bredvid varandra, med en gemensam sida, och kräver 7 tändstickor. Figur 3 är tre kvadrater i rad och kräver 10 tändstickor, och så vidare.<br>a) Ställ upp en formel för antalet tändstickor $y$ i figur nummer $x$. Hur många tändstickor kräver figur 20?<br>b) Kan en figur bestå av exakt 100 tändstickor? Av exakt 150?<br>c) Alva ritar sambandet i ett koordinatsystem. Ska hon dra en linje genom punkterna? Motivera.`,
+            answer: { value: 61, unit: 'tändstickor' },
+            delsvar: [
+                { del: 'a', value: 61, unit: 'tändstickor', etikett: 'figur 20' },
+                { del: 'b', value: 33, unit: '', etikett: 'figurnumret för 100 tändstickor' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** varje ny kvadrat delar en sida med den förra, så den kräver bara 3 nya tändstickor. Antalet ökar alltså med 3 för varje figur, och sambandet är linjärt. Men figurnumret är alltid ett positivt heltal.
+
+**a)** Figur 1 har 4 tändstickor, och varje ny figur har 3 till. Backar vi ett steg, till ett tänkt "figur 0", blir det $4 - 3 = 1$. Konstanttermen är alltså 1 och talet framför $x$ är 3.
+
+Kontroll: $x = 3$ ger $3 \\cdot 3 + 1 = 10$, som i figur 3.
+
+Figur 20:
+
+$$ 3 \\cdot 20 + 1 = 61 $$
+
+**Svar:** $y = 3x + 1$, och figur 20 kräver 61 tändstickor.
+
+**b)** *100 tändstickor:*
+
+$$ 3x + 1 = 100 $$
+
+Subtraherar 1 från båda led:
+
+$$ 3x + 1 \\mathbin{\\boldsymbol{-}} \\boldsymbol{1} = 100 \\mathbin{\\boldsymbol{-}} \\boldsymbol{1} $$
+
+$$ 3x = 99 $$
+
+Dividerar båda led med 3:
+
+$$ \\frac{3x}{\\boldsymbol{3}} = \\frac{99}{\\boldsymbol{3}} $$
+
+$$ x = 33 $$
+
+Det är ett heltal, så figur 33 har exakt 100 tändstickor.
+
+*150 tändstickor:* på samma sätt blir $3x = 149$ och
+
+$$ x = \\frac{149}{3} = 49{,}666\\ldots $$
+
+Det finns ingen figur nummer $49{,}666\\ldots$. Figur 49 har $3 \\cdot 49 + 1 = 148$ tändstickor och figur 50 har $3 \\cdot 50 + 1 = 151$.
+
+**Svar:** 100 tändstickor går, det är figur 33. 150 tändstickor går inte, eftersom ekvationen saknar heltalslösning.
+
+**c)** Det finns bara figurer för $x = 1, 2, 3, \\ldots$ Mellan punkterna, till exempel vid $x = 1{,}5$, finns ingen figur. Grafen ska därför ritas som separata punkter längs en rät linje, inte som en heldragen linje.
+
+**Svar:** Nej. Antalet figurer är ett heltal, så grafen består av punkter med $x = 1, 2, 3, \\ldots$ som ligger på en rät linje, men linjen mellan dem betyder ingenting.
+
+**Generell slutsats:** en ekvation som $y = 3x + 1$ ger en rät linje, men i en tillämpning är det sammanhanget som avgör vilka $x$ som är tillåtna. Ibland finns en lösning till ekvationen som inte är en lösning till problemet.`,
+        },
+        {
+            level: 3,
+            question: `Nora ska rita grafen till $y = 4 - 3x$. Hon tolkar talet 4 som linjens lutning och $-3$ som höjden där linjen skär *y*-axeln, och ritar därför grafen till $y = 4x - 3$.<br>a) Förklara Noras fel.<br>b) Noras linje och den rätta linjen skär varandra. Bestäm skärningspunkten.<br>c) Visa att linjerna $y = ax + b$ och $y = bx + a$ alltid skär varandra där $x = 1$ om $a \\neq b$.`,
+            answer: { value: 1, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1, unit: '', etikett: '$x$-koordinaten' },
+                { del: 'b', value: 1, unit: '', etikett: '$y$-koordinaten' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** lutningen är talet som står framför $x$, var i ekvationen det än står. Byter man plats på lutningen och konstanttermen får man en annan linje, men i $x = 1$ ger båda linjerna samma summa av de två talen.
+
+**a)** I $y = 4 - 3x$ står $-3$ framför $x$. Det är lutningen: ett steg åt höger ger 3 steg nedåt. Talet 4 är konstanttermen, så linjen skär *y*-axeln i $(0, 4)$. Ekvationen kan skrivas $y = -3x + 4$. Nora läste talen i den ordning de står i stället för att se vad som står framför $x$.
+
+**Svar:** Lutningen är $-3$, eftersom det är talet framför $x$, och linjen skär *y*-axeln i 4. Nora har bytt plats på dem.
+
+**b)** Linjerna skär varandra där de har samma *y*-värde:
+
+$$ 4x - 3 = 4 - 3x $$
+
+Adderar $3x$ till båda led:
+
+$$ 4x - 3 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3x} = 4 - 3x \\mathbin{\\boldsymbol{+}} \\boldsymbol{3x} $$
+
+$$ 7x - 3 = 4 $$
+
+Adderar 3 till båda led:
+
+$$ 7x - 3 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3} = 4 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3} $$
+
+$$ 7x = 7 $$
+
+Dividerar båda led med 7:
+
+$$ \\frac{7x}{\\boldsymbol{7}} = \\frac{7}{\\boldsymbol{7}} $$
+
+$$ x = 1 $$
+
+*y*-värdet: $4 \\cdot 1 - 3 = 1$. Kontroll med den rätta linjen: $4 - 3 \\cdot 1 = 1$.
+
+**Svar:** $(1, 1)$
+
+**c)** Linjerna skär varandra där
+
+$$ ax + b = bx + a $$
+
+Subtraherar $bx$ från båda led:
+
+$$ ax + b \\mathbin{\\boldsymbol{-}} \\boldsymbol{bx} = bx + a \\mathbin{\\boldsymbol{-}} \\boldsymbol{bx} $$
+
+$$ ax - bx + b = a $$
+
+Subtraherar $b$ från båda led:
+
+$$ ax - bx + b \\mathbin{\\boldsymbol{-}} \\boldsymbol{b} = a \\mathbin{\\boldsymbol{-}} \\boldsymbol{b} $$
+
+$$ ax - bx = a - b $$
+
+Bryter ut $x$:
+
+$$ (a - b)x = a - b $$
+
+Eftersom $a \\neq b$ är $a - b$ inte 0, och vi får dividera båda led med det:
+
+$$ \\frac{(a - b)x}{\\boldsymbol{a - b}} = \\frac{a - b}{\\boldsymbol{a - b}} $$
+
+$$ x = 1 $$
+
+Kontroll: i $x = 1$ ger båda linjerna $y = a + b$, och med $a = 4$, $b = -3$ blir det $4 + (-3) = 1$, som i b).
+
+Om $a = b$ är linjerna samma linje, och då finns ingen enskild skärningspunkt.
+
+**Svar:** Ekvationen $ax + b = bx + a$ blir $(a - b)x = a - b$, och när $a \\neq b$ ger den $x = 1$. Skärningspunkten är $(1,\\ a + b)$.
+
+**Generell slutsats:** att byta plats på lutning och konstantterm ger en ny linje som alltid skär den gamla i $x = 1$, eftersom $a \\cdot 1 + b$ och $b \\cdot 1 + a$ är samma tal. Ett allmänt resonemang med bokstäver visar varför det som hände med Noras tal inte var en slump.`,
+        },
+        {
+            level: 3,
+            question: `Ekvationen $y = kx + 2 - 3k$ ger en ny linje för varje värde på talet $k$.<br>a) Gör en värdetabell med $x = 1, 2, 3$ och $4$ för $k = 1$ och för $k = -1$. Vilken punkt har de två linjerna gemensamt?<br>b) Visa att alla linjer som ekvationen ger går genom den punkten.<br>c) Bestäm $k$ så att linjen går genom origo.<br>d) Finns det något värde på $k$ som ger en linje genom punkten $(3, 5)$?`,
+            answer: { value: 0.667, unit: '', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 3, unit: '', etikett: '$x$-koordinaten' },
+                { del: 'a', value: 2, unit: '', etikett: '$y$-koordinaten' },
+                { del: 'b' },
+                { del: 'c', value: 0.667, unit: '', tol: 0.01, etikett: '$k =$' },
+                { del: 'd' },
+            ],
+            solution: `**Insikten:** när man drar i reglaget för $k$ i en vanlig ekvation $y = kx + m$ vrider sig linjen kring sin punkt på *y*-axeln. Här ändras konstanttermen också när $k$ ändras, och linjen vrider sig i stället kring en annan punkt. Den punkten hittar man där $k$ försvinner ur ekvationen.
+
+**a)** $k = 1$ ger $y = x + 2 - 3 = x - 1$, och $k = -1$ ger $y = -x + 2 + 3 = -x + 5$.
+
+| $x$ | 1 | 2 | 3 | 4 |
+| --- | --- | --- | --- | --- |
+| $y = x - 1$ | 0 | 1 | 2 | 3 |
+| $y = -x + 5$ | 4 | 3 | 2 | 1 |
+
+För $x = 3$ har båda linjerna $y = 2$.
+
+**Svar:** $(3, 2)$
+
+**b)** Vi sätter in $x = 3$ i den allmänna ekvationen:
+
+$$ y = k \\cdot 3 + 2 - 3k = 3k - 3k + 2 = 2 $$
+
+Termerna med $k$ tar ut varandra, så för $x = 3$ blir $y = 2$ vad $k$ än är.
+
+**Svar:** För $x = 3$ blir $y = 3k + 2 - 3k = 2$ för alla $k$, så alla linjerna går genom $(3, 2)$.
+
+**c)** Linjen går genom origo när $y = 0$ för $x = 0$:
+
+$$ 0 = k \\cdot 0 + 2 - 3k $$
+
+$$ 0 = 2 - 3k $$
+
+Adderar $3k$ till båda led:
+
+$$ 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3k} = 2 - 3k \\mathbin{\\boldsymbol{+}} \\boldsymbol{3k} $$
+
+$$ 3k = 2 $$
+
+Dividerar båda led med 3:
+
+$$ \\frac{3k}{\\boldsymbol{3}} = \\frac{2}{\\boldsymbol{3}} $$
+
+$$ k = \\frac{2}{3} $$
+
+Kontroll: $y = \\dfrac{2}{3}x$ ger $y = \\dfrac{2}{3} \\cdot 3 = 2$ för $x = 3$, så linjen går både genom origo och genom $(3, 2)$.
+
+**Svar:** $k = \\dfrac{2}{3}$
+
+**d)** Alla linjerna går genom $(3, 2)$, så för $x = 3$ är $y$ alltid 2. Ingen av linjerna kan då ha $y = 5$ för $x = 3$.
+
+**Svar:** Nej, alla linjerna har $y = 2$ när $x = 3$.
+
+**Generell slutsats:** en ekvation som kan skrivas $y = k(x - 3) + 2$ beskriver alla linjer genom punkten $(3, 2)$, utom den lodräta. Att hitta en sådan gemensam punkt är att hitta det *x*-värde där parametern försvinner.`,
+        },
+        {
+            level: 3,
+            question: `Lukas ska rita grafen till $y = \\dfrac{2}{3}x - 1$ för hand och vill bara använda punkter där både *x*-koordinaten och *y*-koordinaten är heltal.<br>a) För vilka heltal $x$ blir $y$ ett heltal?<br>b) Hur många sådana punkter finns det på linjen när $-10 \\leq x \\leq 10$? Ange dem.<br>c) Beskriv med hjälp av trappsteg hur man går från en sådan punkt till nästa.`,
+            answer: { value: 7, unit: 'punkter' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 7, unit: 'punkter' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** $-1$ är redan ett heltal, så $y$ är ett heltal precis när $\\dfrac{2}{3}x$ är det. Talen 2 och 3 har ingen gemensam faktor, så det kräver att $x$ är delbart med 3.
+
+**a)** $\\dfrac{2}{3}x = \\dfrac{2x}{3}$. Är $x$ delbart med 3, till exempel $x = 6$, blir $\\dfrac{2 \\cdot 6}{3} = 4$, ett heltal. Är $x$ inte delbart med 3, till exempel $x = 4$, blir $\\dfrac{2 \\cdot 4}{3} = \\dfrac{8}{3}$, och 8 går inte att dela jämnt med 3. Faktorn 2 kan aldrig hjälpa till att dela med 3.
+
+**Svar:** När $x$ är delbart med 3, alltså $x = \\ldots, -6, -3, 0, 3, 6, \\ldots$
+
+**b)** Talen delbara med 3 mellan $-10$ och 10 är $-9, -6, -3, 0, 3, 6$ och 9. Motsvarande $y$-värden:
+
+| $x$ | $-9$ | $-6$ | $-3$ | 0 | 3 | 6 | 9 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| $y$ | $-7$ | $-5$ | $-3$ | $-1$ | 1 | 3 | 5 |
+
+Kontroll av en punkt: $\\dfrac{2}{3} \\cdot 9 - 1 = 6 - 1 = 5$.
+
+**Svar:** 7 punkter: $(-9, -7)$, $(-6, -5)$, $(-3, -3)$, $(0, -1)$, $(3, 1)$, $(6, 3)$ och $(9, 5)$
+
+**c)** Ett steg åt höger ger $\\dfrac{2}{3}$ steg uppåt, och det hamnar inte på ett heltal. Tre steg åt höger ger $3 \\cdot \\dfrac{2}{3} = 2$ steg uppåt. Från $(0, -1)$ går man alltså 3 åt höger och 2 upp till $(3, 1)$, och sedan likadant igen.
+
+**Svar:** Gå 3 steg åt höger och 2 steg uppåt. Då hamnar man på nästa punkt med heltalskoordinater.
+
+**Generell slutsats:** för en linje $y = \\dfrac{p}{q}x + m$ med heltal $m$ och ett förkortat bråk $\\dfrac{p}{q}$ ligger heltalspunkterna med jämna mellanrum: $q$ steg åt höger och $p$ steg uppåt. Att välja de *x*-värdena gör grafen lätt att rita exakt.`,
+        },
+        {
+            level: 3,
+            question: `Ett taxibolag tar betalt enligt $y = 12x + 45$, där $y$ kr är priset för en resa på $x$ km. Bolaget inför en ny taxa. I ett koordinatsystem ser man att den nya taxans graf ligger 15 enheter högre upp på *y*-axeln och är hälften så brant som den gamla.<br>a) Ange den nya taxans formel, och förklara vad ändringarna betyder för kunderna.<br>b) För vilka resor är den nya taxan billigare än den gamla?<br>c) Bolaget funderar på ett annat förslag: startavgiften ska vara kvar som i den gamla taxan, men en resa på 10 km ska bli 20 % billigare. Vilket pris per kilometer ger det?`,
+            answer: { value: 2.5, unit: 'km' },
+            delsvar: [
+                { del: 'a', value: 6, unit: '', etikett: '$k =$' },
+                { del: 'a', value: 60, unit: '', etikett: '$m =$' },
+                { del: 'b', value: 2.5, unit: 'km' },
+                { del: 'c', value: 8.7, unit: 'kr/km' },
+            ],
+            solution: `**Insikten:** konstanttermen $m$ är där grafen skär *y*-axeln, alltså startavgiften. Lutningen $k$ är hur mycket priset ökar för varje kilometer. Att flytta grafen uppåt och göra den flackare ändrar alltså startavgiften och kilometerpriset var för sig.
+
+**a)** 15 enheter högre på *y*-axeln ger konstanttermen $45 + 15 = 60$. Hälften så brant ger lutningen $\\dfrac{12}{2} = 6$.
+
+Startavgiften höjs från 45 kr till 60 kr, men varje kilometer kostar bara 6 kr i stället för 12 kr.
+
+**Svar:** $y = 6x + 60$. Startavgiften höjs med 15 kr och kilometerpriset halveras till 6 kr/km.
+
+**b)** Först tar vi reda på när taxorna kostar lika mycket:
+
+$$ 12x + 45 = 6x + 60 $$
+
+Subtraherar $6x$ från båda led:
+
+$$ 12x + 45 \\mathbin{\\boldsymbol{-}} \\boldsymbol{6x} = 6x + 60 \\mathbin{\\boldsymbol{-}} \\boldsymbol{6x} $$
+
+$$ 6x + 45 = 60 $$
+
+Subtraherar 45 från båda led:
+
+$$ 6x + 45 \\mathbin{\\boldsymbol{-}} \\boldsymbol{45} = 60 \\mathbin{\\boldsymbol{-}} \\boldsymbol{45} $$
+
+$$ 6x = 15 $$
+
+Dividerar båda led med 6:
+
+$$ \\frac{6x}{\\boldsymbol{6}} = \\frac{15}{\\boldsymbol{6}} $$
+
+$$ x = 2{,}5 $$
+
+Den nya grafen är flackare, så till höger om skärningspunkten ligger den under den gamla. Kontroll med 10 km: gamla taxan $12 \\cdot 10 + 45 = 165$ kr, nya $6 \\cdot 10 + 60 = 120$ kr.
+
+**Svar:** För resor längre än 2,5 km
+
+**c)** En resa på 10 km kostar i dag 165 kr. 20 % billigare är
+
+$$ 0{,}8 \\cdot 165 = 132\\ \\text{kr} $$
+
+Startavgiften 45 kr är kvar, så de 10 kilometerna ska kosta $132 - 45 = 87$ kr. Med kilometerpriset $k$ kr:
+
+$$ 10k + 45 = 132 $$
+
+Subtraherar 45 från båda led:
+
+$$ 10k + 45 \\mathbin{\\boldsymbol{-}} \\boldsymbol{45} = 132 \\mathbin{\\boldsymbol{-}} \\boldsymbol{45} $$
+
+$$ 10k = 87 $$
+
+Dividerar båda led med 10:
+
+$$ \\frac{10k}{\\boldsymbol{10}} = \\frac{87}{\\boldsymbol{10}} $$
+
+$$ k = 8{,}7 $$
+
+Kontroll: $8{,}7 \\cdot 10 + 45 = 132$, och $\\dfrac{132}{165} = 0{,}8$.
+
+Lägg märke till att kilometerpriset sänks med mer än 20 %, från 12 kr till $8{,}7$ kr, eftersom startavgiften inte sänks alls.
+
+**Svar:** 8,70 kr per kilometer
+
+**Generell slutsats:** i $y = kx + m$ styr $m$ var grafen skär *y*-axeln och $k$ hur brant den är. En flackare graf med högre startpunkt blir alltid billigast till slut, och brytpunkten är där graferna skär varandra.`,
         },
     ],
 
@@ -26386,33 +27405,394 @@ $$ y = -\\frac{1}{2} \\cdot 8 + 7 = -4 + 7 = 3 $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En linje går genom punkterna (3, 5) och (7, 13). Bestäm linjens ekvation. Vilken är den?`,
-            choices: [
-                `$y = \\dfrac{1}{2}x + 3{,}5$`,
-                `$y = 2x - 1$`,
-                `$y = 2x + 5$`,
-                `$y = 2x + 1$`,
+            question: `Linjen i figuren skär *y*-axeln mellan två rutlinjer, så $m$-värdet kan inte läsas av exakt.<br>a) Bestäm linjens ekvation exakt.<br>b) Bestäm exakt var linjen skär *x*-axeln.
+
+${makeDiagram({
+    xMax: 9, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    yMax: 7, yTicks: [0, 1, 2, 3, 4, 5, 6, 7],
+    xLabel: '<tspan font-style="italic">x</tspan>',
+    yLabel: '<tspan font-style="italic">y</tspan>',
+    paths: [{ points: [[0, 17 / 3], [8.5, 0]], color: '#2563c9' }],
+})}`,
+            answer: { value: 8.5, unit: '' },
+            delsvar: [
+                { del: 'a', value: -0.6667, unit: '', tol: 0.01, etikett: '$k =$' },
+                { del: 'a', value: 5.667, unit: '', tol: 0.01, etikett: '$m =$' },
+                { del: 'b', value: 8.5, unit: '', etikett: '$x =$' },
             ],
-            correct: 1,
-            solution: `**Insikten:** när ingen av punkterna ligger på *y*-axeln fås $m$ inte direkt ur grafen — det måste räknas fram ur $k$ och en känd punkt.
+            solution: `**Insikten:** $k$ går att bestämma exakt med ett trappsteg mellan två punkter där linjen korsar rutnätets hörn. Med $k$ känt räknas $m$ fram ur en av punkterna i stället för att gissas ur grafen.
 
-**Steg 1 — bestäm $k$** med trappstegsmetoden:
+**a)** Linjen går genom rutnätshörnen $(1, 5)$ och $(7, 1)$. Trappsteget från den vänstra till den högra punkten är 6 steg åt höger och 4 steg nedåt, så $\\Delta x = 6$ och $\\Delta y = -4$:
 
-$$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{13 - 5}{7 - 3} = \\frac{8}{4} = 2 $$
+$$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{-4}{6} = -\\frac{2}{3} $$
 
-**Steg 2 — bestäm $m$.** Linjen är $y = 2x + m$, och punkten (3, 5) ligger på linjen, så koordinaterna uppfyller ekvationen:
+Linjen är alltså $y = -\\dfrac{2}{3}x + m$. Punkten $(1, 5)$ ligger på linjen, så dess koordinater uppfyller ekvationen:
 
-$$ 5 = 2 \\cdot 3 + m $$
+$$ 5 = -\\frac{2}{3} \\cdot 1 + m $$
 
-$$ 5 = 6 + m \\qquad m = -1 $$
+Adderar $\\dfrac{2}{3}$ i båda led:
 
-Ekvationen är $y = 2x - 1$.
+$$ 5 \\mathbin{\\boldsymbol{+}} \\boldsymbol{\\frac{2}{3}} = -\\frac{2}{3} + m \\mathbin{\\boldsymbol{+}} \\boldsymbol{\\frac{2}{3}} $$
 
-Kontroll med andra punkten: $y = 2 \\cdot 7 - 1 = 13$ — stämmer!
+$$ \\frac{17}{3} = m $$
 
-**Svar:** $y = 2x - 1$
+Kontroll med den andra punkten $(7, 1)$: $-\\dfrac{2}{3} \\cdot 7 + \\dfrac{17}{3} = \\dfrac{-14 + 17}{3} = 1$. Det stämmer.
 
-**Generell slutsats:** två punkter räcker alltid: $k$ ur trappsteget, sedan $m$ genom insättning av en av punkterna. Kontrollera med den andra.`,
+Rimligt? $\\dfrac{17}{3} \\approx 5{,}67$, och i figuren skär linjen *y*-axeln en bit ovanför 5.
+
+**Svar:** $y = -\\dfrac{2}{3}x + \\dfrac{17}{3}$
+
+**b)** På *x*-axeln är $y = 0$:
+
+$$ 0 = -\\frac{2}{3}x + \\frac{17}{3} $$
+
+Adderar $\\dfrac{2}{3}x$ i båda led:
+
+$$ 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{\\frac{2}{3}x} = -\\frac{2}{3}x + \\frac{17}{3} \\mathbin{\\boldsymbol{+}} \\boldsymbol{\\frac{2}{3}x} $$
+
+$$ \\frac{2}{3}x = \\frac{17}{3} $$
+
+Multiplicerar båda led med $\\dfrac{3}{2}$:
+
+$$ \\boldsymbol{\\frac{3}{2}} \\mathbin{\\boldsymbol{\\cdot}} \\frac{2}{3}x = \\boldsymbol{\\frac{3}{2}} \\mathbin{\\boldsymbol{\\cdot}} \\frac{17}{3} $$
+
+$$ x = \\frac{17}{2} = 8{,}5 $$
+
+Kontroll med trappsteget: från $(7, 1)$ ska linjen gå ytterligare 1 steg nedåt, och det tar $\\dfrac{3}{2}$ steg åt höger. Det ger $x = 7 + 1{,}5 = 8{,}5$.
+
+**Svar:** I punkten $(8{,}5;\\ 0)$
+
+**Generell slutsats:** läs aldrig av ett värde som ligger mellan rutlinjerna. Välj två punkter som ligger exakt i rutnätets hörn, räkna ut $k$ med trappsteget och räkna sedan fram $m$ med insättning.`,
+        },
+        {
+            level: 3,
+            question: `Linjen $y = kx + 6$ bildar tillsammans med koordinataxlarna en triangel i första kvadranten.<br>a) Bestäm $k$ så att triangelns area blir 12 areaenheter.<br>b) För vilka värden på $k$ är triangelns area större än 9 areaenheter?`,
+            answer: { value: -1.5, unit: '' },
+            delsvar: [
+                { del: 'a', value: -1.5, unit: '', etikett: '$k =$' },
+                { del: 'b' },
+            ],
+            solution: `**Insikten:** $m = 6$ ger triangelns höjd längs *y*-axeln. Triangeln hamnar i första kvadranten bara om linjen lutar nedåt, alltså om $k < 0$. Basen längs *x*-axeln är avståndet till linjens skärning med *x*-axeln, och den beror på $k$.
+
+**a)** Linjen skär *y*-axeln i $(0, 6)$, så höjden är 6. På *x*-axeln är $y = 0$:
+
+$$ 0 = kx + 6 $$
+
+Subtraherar 6 i båda led:
+
+$$ 0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{6} = kx + 6 \\mathbin{\\boldsymbol{-}} \\boldsymbol{6} $$
+
+$$ -6 = kx $$
+
+Dividerar båda led med $k$:
+
+$$ \\frac{-6}{\\boldsymbol{k}} = \\frac{kx}{\\boldsymbol{k}} $$
+
+$$ x = -\\frac{6}{k} $$
+
+Eftersom $k < 0$ är $-\\dfrac{6}{k}$ positivt, och det är basen. Triangelns area är bas gånger höjd delat med 2:
+
+$$ \\text{area} = \\frac{1}{2} \\cdot \\left(-\\frac{6}{k}\\right) \\cdot 6 = -\\frac{18}{k} $$
+
+Arean ska vara 12:
+
+$$ -\\frac{18}{k} = 12 $$
+
+Multiplicerar båda led med $k$:
+
+$$ \\boldsymbol{k} \\mathbin{\\boldsymbol{\\cdot}} \\left(-\\frac{18}{k}\\right) = \\boldsymbol{k} \\mathbin{\\boldsymbol{\\cdot}} 12 $$
+
+$$ -18 = 12k $$
+
+Dividerar båda led med 12:
+
+$$ \\frac{-18}{\\boldsymbol{12}} = \\frac{12k}{\\boldsymbol{12}} $$
+
+$$ k = -1{,}5 $$
+
+Kontroll: linjen $y = -1{,}5x + 6$ skär *x*-axeln där $1{,}5x = 6$, alltså vid $x = 4$. Arean är $\\dfrac{4 \\cdot 6}{2} = 12$. Det stämmer.
+
+**Svar:** $k = -1{,}5$
+
+**b)** Arean $-\\dfrac{18}{k}$ ska vara större än 9. Skriv $\\mathord{-}k$ som ett positivt tal, eftersom $k < 0$:
+
+$$ \\frac{18}{-k} > 9 $$
+
+Multiplicerar båda led med $-k$. Det är ett positivt tal, så olikhetstecknet behåller sin riktning:
+
+$$ \\boldsymbol{(-k)} \\mathbin{\\boldsymbol{\\cdot}} \\frac{18}{-k} > \\boldsymbol{(-k)} \\mathbin{\\boldsymbol{\\cdot}} 9 $$
+
+$$ 18 > -9k $$
+
+Dividerar båda led med 9:
+
+$$ \\frac{18}{\\boldsymbol{9}} > \\frac{-9k}{\\boldsymbol{9}} $$
+
+$$ 2 > -k $$
+
+Alltså är $k > -2$. Samtidigt måste $k < 0$ för att triangeln ska ligga i första kvadranten.
+
+Kontroll: $k = -1$ ger basen 6 och arean $\\dfrac{6 \\cdot 6}{2} = 18$, som är större än 9. $k = -3$ ger basen 2 och arean $\\dfrac{2 \\cdot 6}{2} = 6$, som är mindre än 9.
+
+Rimligt? Ju flackare linjen är, desto längre ut skär den *x*-axeln, och desto större blir triangeln.
+
+**Svar:** $-2 < k < 0$
+
+**Generell slutsats:** när en linje tillsammans med axlarna bildar en triangel är $m$ den ena kateten och skärningen med *x*-axeln, $-\\dfrac{m}{k}$, den andra. En brantare linje ger en mindre triangel.`,
+        },
+        {
+            level: 3,
+            question: `Två ljus, A och B, tänds samtidigt. Diagrammet visar ljusens höjd $h$ cm under de två första timmarna. Anta att båda ljusen fortsätter att brinna ned i samma takt.
+
+${makeDiagram({
+    xMax: 3, xTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3],
+    yMax: 24, yTicks: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24],
+    xLabel: '<tspan font-style="italic">t</tspan> (h)',
+    yLabel: '<tspan font-style="italic">h</tspan> (cm)',
+    paths: [
+        { points: [[0, 24], [2, 18]], color: '#c8324a' },
+        { points: [[0, 18], [2, 16]], color: '#2563c9' },
+    ],
+})}
+
+Den röda linjen visar ljus A och den blå linjen visar ljus B.<br>a) Bestäm en ekvation för vardera ljusets höjd $h$ cm som funktion av tiden $t$ timmar.<br>b) Efter hur lång tid är ljusen lika höga?<br>c) Hur länge brinner vartdera ljuset? För vilka värden på $t$ är modellen för ljus A rimlig?`,
+            answer: { value: 3, unit: 'h' },
+            delsvar: [
+                { del: 'a', value: -3, unit: '', etikett: 'ljus A: $k =$' },
+                { del: 'a', value: 24, unit: '', etikett: 'ljus A: $m =$' },
+                { del: 'a', value: -1, unit: '', etikett: 'ljus B: $k =$' },
+                { del: 'a', value: 18, unit: '', etikett: 'ljus B: $m =$' },
+                { del: 'b', value: 3, unit: 'h' },
+                { del: 'c', value: 8, unit: 'h', etikett: 'ljus A' },
+                { del: 'c', value: 18, unit: 'h', etikett: 'ljus B' },
+            ],
+            solution: `**Insikten:** i en linjär modell är $m$ startvärdet och $k$ förändringshastigheten. Ljus A är högre från början men brinner ned snabbare, så ljus B kommer ikapp. Det sker när de två uttrycken för höjden är lika.
+
+**a)** Ljus A är 24 cm vid start, så $m = 24$. På 2 timmar sjunker höjden från 24 cm till 18 cm. Förändringshastigheten är förändringen i höjd delad med tiden:
+
+$$ k = \\frac{\\Delta h}{\\Delta t} = \\frac{18 - 24}{2} = \\frac{-6}{2} = -3 $$
+
+Ljus B är 18 cm vid start och sjunker till 16 cm på 2 timmar:
+
+$$ k = \\frac{\\Delta h}{\\Delta t} = \\frac{16 - 18}{2} = \\frac{-2}{2} = -1 $$
+
+Ljus A brinner alltså ned 3 cm per timme och ljus B 1 cm per timme.
+
+**Svar:** Ljus A: $h = -3t + 24$. Ljus B: $h = -t + 18$.
+
+**b)** Ljusen är lika höga när högerleden är lika:
+
+$$ -3t + 24 = -t + 18 $$
+
+Adderar $3t$ i båda led:
+
+$$ -3t + 24 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3t} = -t + 18 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3t} $$
+
+$$ 24 = 2t + 18 $$
+
+Subtraherar 18 i båda led:
+
+$$ 24 \\mathbin{\\boldsymbol{-}} \\boldsymbol{18} = 2t + 18 \\mathbin{\\boldsymbol{-}} \\boldsymbol{18} $$
+
+$$ 6 = 2t $$
+
+Dividerar båda led med 2:
+
+$$ \\frac{6}{\\boldsymbol{2}} = \\frac{2t}{\\boldsymbol{2}} $$
+
+$$ t = 3 $$
+
+Kontroll: ljus A är $-3 \\cdot 3 + 24 = 15$ cm och ljus B är $-3 + 18 = 15$ cm. Det stämmer.
+
+Rimligt? Skillnaden i höjd är 6 cm från början och minskar med $3 - 1 = 2$ cm per timme, så den är borta efter $\\dfrac{6}{2} = 3$ timmar.
+
+**Svar:** Efter 3 timmar, då båda är 15 cm höga
+
+**c)** Ett ljus har brunnit ut när $h = 0$. För ljus A:
+
+$$ 0 = -3t + 24 $$
+
+Adderar $3t$ i båda led:
+
+$$ 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3t} = -3t + 24 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3t} $$
+
+$$ 3t = 24 $$
+
+Dividerar båda led med 3:
+
+$$ \\frac{3t}{\\boldsymbol{3}} = \\frac{24}{\\boldsymbol{3}} $$
+
+$$ t = 8 $$
+
+På samma sätt ger $0 = -t + 18$ att ljus B brinner ut efter $t = 18$.
+
+För $t > 8$ ger modellen för ljus A en negativ höjd, och det är omöjligt. Modellen är bara rimlig för $0 \\leq t \\leq 8$. I verkligheten slocknar ljuset troligen en stund innan höjden är 0, när veken inte längre har något stearin omkring sig.
+
+**Svar:** Ljus A brinner i 8 timmar och ljus B i 18 timmar. Modellen för ljus A är rimlig för $0 \\leq t \\leq 8$.
+
+**Generell slutsats:** i en linjär modell är $k$ förändringen per tidsenhet och $m$ startvärdet. Två modeller jämförs genom att uttrycken sätts lika, och en modell gäller bara så länge den ger värden som är möjliga i verkligheten.`,
+        },
+        {
+            level: 3,
+            question: `Ett mobilabonnemang kostar $y$ kr för $x$ GB surf. Grafen visar sambandet. Lisa ska bestämma linjens ekvation och skriver:
+
+"Trappsteget är 3 rutor högt och 5 rutor långt, så $k = \\dfrac{3}{5} = 0{,}6$. Linjen skär *y*-axeln en ruta upp, så $m = 1$. Ekvationen är $y = 0{,}6x + 1$."
+
+${makeDiagram({
+    xMax: 10, xTicks: [0, 2, 4, 6, 8, 10],
+    yMax: 500, yTicks: [0, 100, 200, 300, 400, 500],
+    xLabel: '<tspan font-style="italic">x</tspan> (GB)',
+    yLabel: '<tspan font-style="italic">y</tspan> (kr)',
+    paths: [{ points: [[0, 100], [10, 400]], color: '#2563c9' }],
+})}
+
+a) Förklara vad Lisa har gjort fel.<br>b) Bestäm linjens rätta ekvation och tolka $k$- och $m$-värdet i sammanhanget.`,
+            answer: { value: 30, unit: 'kr/GB' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 30, unit: '', etikett: '$k =$' },
+                { del: 'b', value: 100, unit: '', etikett: '$m =$' },
+            ],
+            solution: `**Insikten:** en ruta betyder inte samma sak på de två axlarna. Här är en ruta 2 GB i sidled men 100 kr i höjdled. $\\Delta x$ och $\\Delta y$ ska därför mätas i axlarnas enheter, inte i antal rutor.
+
+**a)** Lisa har räknat rutor. Hennes trappsteg är rätt ritat, men 5 rutor i sidled är $5 \\cdot 2 = 10$ GB och 3 rutor i höjdled är $3 \\cdot 100 = 300$ kr. Samma fel gör hon med $m$: en ruta upp på *y*-axeln är 100 kr, inte 1.
+
+Hennes ekvation går att kontrollera: $y = 0{,}6x + 1$ ger 1 kr för 0 GB, men grafen visar 100 kr.
+
+**Svar:** Lisa räknar rutor i stället för att läsa av värdena på axlarna. En ruta är 2 GB i sidled och 100 kr i höjdled, så både $k$ och $m$ blir fel.
+
+**b)** Linjen går genom $(0, 100)$ och $(10, 400)$. Lutningen är förändringen i *y*-led delad med förändringen i *x*-led:
+
+$$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{400 - 100}{10 - 0} = \\frac{300}{10} = 30 $$
+
+Linjen skär *y*-axeln vid 100, så $m = 100$.
+
+Kontroll med en annan punkt i grafen: $x = 4$ ger $y = 30 \\cdot 4 + 100 = 220$, och linjen ligger strax ovanför 200 kr vid 4 GB. Det stämmer.
+
+$k = 30$ betyder att varje GB kostar 30 kr extra. $m = 100$ är den fasta avgiften, det man betalar även om man inte surfar alls.
+
+**Svar:** $y = 30x + 100$. Varje GB kostar 30 kr, och den fasta avgiften är 100 kr.
+
+**Generell slutsats:** kontrollera alltid axlarnas gradering innan du räknar trappsteg. Bara när en ruta är lika stor i båda led kan man räkna rutor direkt, och i ett sammanhang har $k$ enheten "*y*-enhet per *x*-enhet", här kr per GB.`,
+        },
+        {
+            level: 3,
+            question: `En rät linje skär *x*-axeln i punkten $(p, 0)$ och *y*-axeln i punkten $(0, q)$, där $p$ och $q$ är skilda från 0.<br>a) Visa att linjens lutning är $k = -\\dfrac{q}{p}$, och använd det för att bestämma ekvationen för linjen som skär axlarna i $(4, 0)$ och $(0, -3)$.<br>b) En linje skär båda axlarna på den positiva sidan, och skärningen med *x*-axeln ligger dubbelt så långt från origo som skärningen med *y*-axeln. Visa att linjens lutning alltid blir densamma, och bestäm den.`,
+            answer: { value: -0.5, unit: '' },
+            delsvar: [
+                { del: 'a', value: 0.75, unit: '', etikett: '$k =$' },
+                { del: 'a', value: -3, unit: '', etikett: '$m =$' },
+                { del: 'b', value: -0.5, unit: '', etikett: '$k =$' },
+            ],
+            solution: `**Insikten:** skärningen med *y*-axeln är direkt $m = q$. Lutningen fås med ett trappsteg mellan de två skärningspunkterna, och den beror bara på kvoten mellan $q$ och $p$, inte på hur stora de är.
+
+**a)** Gå från $(0, q)$ till $(p, 0)$. Förändringen i *x*-led är $\\Delta x = p - 0 = p$ och förändringen i *y*-led är $\\Delta y = 0 - q = -q$. Lutningen är förändringen i *y*-led delad med förändringen i *x*-led:
+
+$$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{-q}{p} = -\\frac{q}{p} $$
+
+Det gäller för alla $p$ och $q$ skilda från 0.
+
+För skärningspunkterna $(4, 0)$ och $(0, -3)$ är $p = 4$ och $q = -3$:
+
+$$ k = -\\frac{q}{p} = -\\frac{-3}{4} = \\frac{3}{4} $$
+
+Linjen skär *y*-axeln i $(0, -3)$, så $m = -3$.
+
+Kontroll: $x = 4$ ger $y = \\dfrac{3}{4} \\cdot 4 - 3 = 3 - 3 = 0$. Linjen går genom $(4, 0)$.
+
+**Svar:** $y = \\dfrac{3}{4}x - 3$
+
+**b)** Kalla skärningen med *y*-axeln $(0, q)$ där $q > 0$. Skärningen med *x*-axeln ligger dubbelt så långt från origo, alltså i $(2q, 0)$, så $p = 2q$. Formeln från a) ger
+
+$$ k = -\\frac{q}{p} = -\\frac{q}{2q} = -\\frac{1}{2} $$
+
+$q$ förkortas bort, så lutningen blir $-\\dfrac{1}{2}$ hur stort $q$ än är.
+
+Kontroll med $q = 3$: linjen $y = -\\dfrac{1}{2}x + 3$ skär *x*-axeln där $\\dfrac{1}{2}x = 3$, alltså vid $x = 6 = 2 \\cdot 3$. Det stämmer.
+
+**Svar:** Lutningen är alltid $k = -\\dfrac{1}{2}$
+
+**Generell slutsats:** en linjes lutning bestäms av förhållandet mellan skärningspunkterna, inte av deras storlek. Alla linjer med samma förhållande $\\dfrac{q}{p}$ har samma lutning och är alltså parallella.`,
+        },
+        {
+            level: 3,
+            question: `Linjen $y = kx + m$ går genom första, andra och fjärde kvadranten, men inte genom tredje kvadranten.<br>a) Vad kan man säga om tecknen på $k$ och $m$? Motivera.<br>b) Genom vilka kvadranter går då linjen $y = mx + k$, där $k$ och $m$ har bytt plats? Motivera.`,
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+            ],
+            solution: `**Insikten:** tecknet på $m$ avgör om linjen skär *y*-axeln ovanför eller nedanför origo, och tecknet på $k$ avgör om den lutar uppåt eller nedåt. Med de två uppgifterna går det att se vilka kvadranter linjen passerar, utan att räkna.
+
+Kvadranterna numreras moturs: första kvadranten uppe till höger, andra uppe till vänster, tredje nere till vänster och fjärde nere till höger.
+
+**a)** Linjen går genom både andra och fjärde kvadranten, alltså både uppe till vänster och nere till höger. Då måste den luta nedåt, så $k < 0$. (En vågrät linje, $k = 0$, når aldrig både ovanför och nedanför *x*-axeln.)
+
+Följ sedan linjen åt höger från *y*-axeln. Den sjunker hela tiden, och den ska passera första kvadranten innan den korsar *x*-axeln ned i fjärde. Alltså måste den ligga ovanför *x*-axeln när den korsar *y*-axeln, så $m > 0$. Med $m < 0$ hade linjen legat under *x*-axeln hela vägen åt höger, och åt vänster hade den passerat tredje kvadranten. Med $m = 0$ går linjen genom origo och bara genom andra och fjärde kvadranten.
+
+Kontroll med ett exempel: $y = -x + 2$ skär *y*-axeln i 2 och *x*-axeln i 2. Den går genom andra, första och fjärde kvadranten.
+
+**Svar:** $k < 0$ och $m > 0$
+
+**b)** Linjen $y = mx + k$ har lutningen $m > 0$, så den lutar uppåt, och skär *y*-axeln i $k < 0$, alltså under origo. Åt höger stiger den, passerar fjärde kvadranten och korsar sedan *x*-axeln in i första kvadranten. Åt vänster sjunker den ännu djupare under *x*-axeln och hamnar i tredje kvadranten. Den når aldrig andra kvadranten, eftersom den till vänster om *y*-axeln alltid ligger under $k < 0$.
+
+Kontroll med exemplet: $k = -1$ och $m = 2$ ger $y = 2x - 1$. Punkterna $(-1, -3)$, $(0{,}25;\\ -0{,}5)$ och $(2, 3)$ ligger i tredje, fjärde och första kvadranten.
+
+**Svar:** Genom första, tredje och fjärde kvadranten, men inte genom andra
+
+**Generell slutsats:** tecknet på $k$ och tecknet på $m$ räcker för att avgöra vilka kvadranter en linje passerar. En sned linje som inte går genom origo passerar alltid exakt tre kvadranter, och genom att byta plats på $k$ och $m$ kan man få en helt annan linje.`,
+        },
+        {
+            level: 3,
+            question: `Ett företags vinst har ökat linjärt sedan år 2020, enligt grafen.
+
+${makeDiagram({
+    xMax: 6, xTicks: [0, 1, 2, 3, 4, 5, 6],
+    yMax: 70, yTicks: [0, 10, 20, 30, 40, 50, 60, 70],
+    xLabel: 'År efter 2020',
+    yLabel: 'Vinst (miljoner kr)',
+    paths: [{ points: [[0, 40], [6, 64]], color: '#2563c9' }],
+})}
+
+a) Bestäm en ekvation för vinsten $y$ miljoner kronor $x$ år efter 2020.<br>b) Med hur många procent ökade vinsten från 2020 till 2021, och med hur många procent ökade den från 2025 till 2026? Avrunda till en decimal.<br>c) Hur stor hade vinsten varit år 2026 om den i stället hade ökat med samma procentsats varje år som det första året? Avrunda till en decimal.`,
+            answer: { value: 6.7, unit: '%', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 4, unit: '', etikett: '$k =$' },
+                { del: 'a', value: 40, unit: '', etikett: '$m =$' },
+                { del: 'b', value: 10, unit: '%', etikett: '2020 till 2021' },
+                { del: 'b', value: 6.7, unit: '%', tol: 0.01, etikett: '2025 till 2026' },
+                { del: 'c', value: 70.9, unit: 'miljoner kr', tol: 0.005 },
+            ],
+            solution: `**Insikten:** en linjär ökning är lika många kronor varje år. Men varje år räknas ökningen i procent av en större vinst, så procentsatsen blir mindre för varje år. En ökning med samma procentsats varje år är i stället exponentiell.
+
+**a)** Linjen skär *y*-axeln vid 40, så $m = 40$. Den går genom rutnätshörnet $(5, 60)$. Lutningen är förändringen i vinst delad med antalet år:
+
+$$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{60 - 40}{5 - 0} = \\frac{20}{5} = 4 $$
+
+Vinsten ökar alltså med 4 miljoner kronor per år.
+
+**Svar:** $y = 4x + 40$
+
+**b)** År 2021 är $x = 1$ och vinsten $4 \\cdot 1 + 40 = 44$ miljoner kronor. Ökningen i procent är ökningen delad med det gamla värdet:
+
+$$ \\frac{4}{40} = 0{,}1 = 10\\ \\% $$
+
+År 2025 är $x = 5$ och vinsten 60 miljoner kronor. År 2026 är den $4 \\cdot 6 + 40 = 64$ miljoner kronor. Ökningen är fortfarande 4 miljoner kronor, men nu av 60:
+
+$$ \\frac{4}{60} = 0{,}0666\\ldots \\approx 6{,}7\\ \\% $$
+
+**Svar:** 10 % från 2020 till 2021 och cirka 6,7 % från 2025 till 2026
+
+**c)** En ökning med $10\\ \\%$ varje år ger förändringsfaktorn $1{,}1$ varje år. Efter 6 år:
+
+$$ 40 \\cdot 1{,}1^6 = 70{,}862\\ldots \\approx 70{,}9 $$
+
+Kontroll: år för år blir det 44; 48,4; 53,24; 58,56; 64,42 och 70,86 miljoner kronor.
+
+Rimligt? Båda modellerna ger 44 miljoner kronor år 2021, men den exponentiella ökningen växer för varje år och ligger cirka 7 miljoner kronor högre efter sex år.
+
+**Svar:** Cirka 70,9 miljoner kronor
+
+**Generell slutsats:** i en linjär modell är ökningen i kronor konstant, och därför minskar den procentuella ökningen år för år. Är det i stället procentsatsen som är konstant är modellen exponentiell, och då växer ökningen i kronor.`,
         },
     ],
 
@@ -26486,33 +27866,411 @@ $$ m = 11 $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Bestäm ekvationen för linjen genom punkterna (−2, 9) och (4, −9). Vilken är den?`,
-            choices: [
-                `$y = 3x + 15$`,
-                `$y = -\\dfrac{1}{3}x + 3$`,
-                `$y = -3x + 9$`,
-                `$y = -3x + 3$`,
+            question: `En rät linje går genom punkterna $(2, a)$ och $(a, 8)$.<br>a) Bestäm $a$ så att linjens riktningskoefficient blir 3.<br>b) För vilket värde på $a$ saknar linjen riktningskoefficient? Förklara varför.`,
+            answer: { value: 3.5, unit: '' },
+            delsvar: [
+                { del: 'a', value: 3.5, unit: '', etikett: '$a =$' },
+                { del: 'b', value: 2, unit: '', etikett: '$a =$' },
             ],
-            correct: 3,
-            solution: `**Insikten:** hela kedjan i ett svep — $k$ ur tvåpunktsformeln, $m$ ur insättning av en punkt.
+            solution: `**Insikten:** formeln för riktningskoefficienten fungerar lika bra när koordinaterna innehåller en okänd. Kravet $k = 3$ blir då en ekvation i $a$. Nämnaren $x_2 - x_1$ får aldrig vara 0, och det ger svaret på b).
 
-**Steg 1 — riktningskoefficienten:**
+**a)** Med $(x_1, y_1) = (2, a)$ och $(x_2, y_2) = (a, 8)$ ger formeln för riktningskoefficienten
 
-$$ k = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{-9 - 9}{4 - (-2)} = \\frac{-18}{6} = -3 $$
+$$ k = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{8 - a}{a - 2} $$
 
-**Steg 2 — $m$-värdet.** Sätt in punkten (−2, 9) i $y = -3x + m$:
+Den ska vara 3:
 
-$$ 9 = -3 \\cdot (-2) + m $$
+$$ \\frac{8 - a}{a - 2} = 3 $$
 
-$$ 9 = 6 + m \\qquad m = 3 $$
+Multiplicerar båda led med $(a - 2)$:
 
-Ekvationen är $y = -3x + 3$.
+$$ \\boldsymbol{(a - 2)} \\mathbin{\\boldsymbol{\\cdot}} \\frac{8 - a}{a - 2} = \\boldsymbol{(a - 2)} \\mathbin{\\boldsymbol{\\cdot}} 3 $$
 
-Kontroll med andra punkten: $y = -3 \\cdot 4 + 3 = -9$ — stämmer!
+$$ 8 - a = 3a - 6 $$
 
-**Svar:** $y = -3x + 3$
+Adderar $a$ i båda led:
 
-**Generell slutsats:** teckenfelen lurar i $x_2 - x_1$ när en koordinat är negativ — skriv ut parenteserna ($4 - (-2) = 6$) i stället för att räkna i huvudet.`,
+$$ 8 - a \\mathbin{\\boldsymbol{+}} \\boldsymbol{a} = 3a - 6 \\mathbin{\\boldsymbol{+}} \\boldsymbol{a} $$
+
+$$ 8 = 4a - 6 $$
+
+Adderar 6 i båda led:
+
+$$ 8 \\mathbin{\\boldsymbol{+}} \\boldsymbol{6} = 4a - 6 \\mathbin{\\boldsymbol{+}} \\boldsymbol{6} $$
+
+$$ 14 = 4a $$
+
+Dividerar båda led med 4:
+
+$$ \\frac{14}{\\boldsymbol{4}} = \\frac{4a}{\\boldsymbol{4}} $$
+
+$$ a = 3{,}5 $$
+
+Kontroll: punkterna blir $(2;\\ 3{,}5)$ och $(3{,}5;\\ 8)$, och
+
+$$ k = \\frac{8 - 3{,}5}{3{,}5 - 2} = \\frac{4{,}5}{1{,}5} = 3 $$
+
+Det stämmer.
+
+**Svar:** $a = 3{,}5$
+
+**b)** Riktningskoefficienten saknas när nämnaren $a - 2$ är 0, alltså när $a = 2$. Då blir punkterna $(2, 2)$ och $(2, 8)$. De har samma *x*-koordinat och ligger rakt ovanför varandra, så linjen är lodrät. En lodrät linje har $\\Delta x = 0$, och man kan inte dividera med 0.
+
+**Svar:** $a = 2$, eftersom linjen då är lodrät och $\\Delta x = 0$
+
+**Generell slutsats:** villkor på en linje, som en given lutning, blir ekvationer när koordinaterna innehåller en okänd. Kontrollera alltid att nämnaren i formeln för $k$ inte kan bli 0.`,
+        },
+        {
+            level: 3,
+            question: `Punkterna $A = (-2, 7)$, $B = (1, 1)$ och $C = (6, c)$ ligger på samma räta linje.<br>a) Bestäm $c$.<br>b) Ligger punkten $(50, -95)$ också på linjen? Lös uppgiften utan räknare.`,
+            answer: { value: -9, unit: '' },
+            delsvar: [
+                { del: 'a', value: -9, unit: '', etikett: '$c =$' },
+                { del: 'b' },
+            ],
+            solution: `**Insikten:** tre punkter ligger på samma räta linje precis när lutningen är densamma mellan alla par av punkterna. Linjen bestäms av $A$ och $B$, och sedan räcker det att se om de andra punkterna uppfyller dess ekvation.
+
+**a)** Riktningskoefficienten för linjen genom $A$ och $B$:
+
+$$ k = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{1 - 7}{1 - (-2)} = \\frac{-6}{3} = -2 $$
+
+Linjen är $y = -2x + m$. Punkten $B = (1, 1)$ ligger på linjen:
+
+$$ 1 = -2 \\cdot 1 + m $$
+
+Adderar 2 i båda led:
+
+$$ 1 \\mathbin{\\boldsymbol{+}} \\boldsymbol{2} = -2 + m \\mathbin{\\boldsymbol{+}} \\boldsymbol{2} $$
+
+$$ 3 = m $$
+
+Linjen är $y = -2x + 3$. Kontroll med $A$: $-2 \\cdot (-2) + 3 = 7$. Det stämmer.
+
+$C$ har $x = 6$, så
+
+$$ c = -2 \\cdot 6 + 3 = -9 $$
+
+Kontroll med lutningen mellan $B$ och $C$:
+
+$$ \\frac{-9 - 1}{6 - 1} = \\frac{-10}{5} = -2 $$
+
+Samma lutning som mellan $A$ och $B$.
+
+**Svar:** $c = -9$
+
+**b)** På linjen ger $x = 50$
+
+$$ y = -2 \\cdot 50 + 3 = -100 + 3 = -97 $$
+
+Punkten på linjen med $x = 50$ är alltså $(50, -97)$, inte $(50, -95)$.
+
+**Svar:** Nej, punkten ligger 2 enheter ovanför linjen
+
+**Generell slutsats:** för att avgöra om en punkt ligger på en linje sätter man in punktens *x*-koordinat i ekvationen och jämför med dess *y*-koordinat. Med två punkter bestäms linjen, och varje ytterligare punkt kan prövas på det sättet.`,
+        },
+        {
+            level: 3,
+            question: `Hyrfirman Släpet tar ut en fast avgift och ett pris per dag för att hyra en släpvagn. Att hyra i 3 dagar kostar $1\\,150$ kr och att hyra i 7 dagar kostar $2\\,150$ kr. Hyrfirman Kärran tar bara ut $300$ kr per dag, utan fast avgift.<br>a) Bestäm ett uttryck för kostnaden $y$ kr för $x$ dagar hos Släpet.<br>b) Tolka $k$- och $m$-värdet i sammanhanget.<br>c) Från och med hur många dagar är Släpet billigast?`,
+            answer: { value: 9, unit: 'dagar' },
+            delsvar: [
+                { del: 'a', value: 250, unit: '', etikett: '$k =$' },
+                { del: 'a', value: 400, unit: '', etikett: '$m =$' },
+                { del: 'b' },
+                { del: 'c', value: 9, unit: 'dagar' },
+            ],
+            solution: `**Insikten:** de två hyrorna är två punkter på en rät linje, $(3, 1\\,150)$ och $(7, 2\\,150)$. Lutningen är priset per dag och $m$ är den fasta avgiften. Släpet har en fast avgift men lägre dagspris, så det blir billigast först när hyrtiden är tillräckligt lång.
+
+**a)** Riktningskoefficienten är förändringen i kostnad delad med förändringen i antal dagar:
+
+$$ k = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{2\\,150 - 1\\,150}{7 - 3} = \\frac{1\\,000}{4} = 250 $$
+
+Kostnaden är $y = 250x + m$. Punkten $(3, 1\\,150)$ ligger på linjen:
+
+$$ 1\\,150 = 250 \\cdot 3 + m $$
+
+$$ 1\\,150 = 750 + m $$
+
+Subtraherar 750 i båda led:
+
+$$ 1\\,150 \\mathbin{\\boldsymbol{-}} \\boldsymbol{750} = 750 + m \\mathbin{\\boldsymbol{-}} \\boldsymbol{750} $$
+
+$$ 400 = m $$
+
+Kontroll med den andra punkten: $250 \\cdot 7 + 400 = 1\\,750 + 400 = 2\\,150$. Det stämmer.
+
+**Svar:** $y = 250x + 400$
+
+**b)** $k = 250$ betyder att varje extra dag kostar 250 kr. $m = 400$ är det man betalar även för 0 dagar, alltså den fasta avgiften.
+
+**Svar:** Dagspriset är 250 kr och den fasta avgiften är 400 kr.
+
+**c)** Kärran kostar $300x$ kr. Släpet är billigast när
+
+$$ 250x + 400 < 300x $$
+
+Subtraherar $250x$ i båda led:
+
+$$ 250x + 400 \\mathbin{\\boldsymbol{-}} \\boldsymbol{250x} < 300x \\mathbin{\\boldsymbol{-}} \\boldsymbol{250x} $$
+
+$$ 400 < 50x $$
+
+Dividerar båda led med 50:
+
+$$ \\frac{400}{\\boldsymbol{50}} < \\frac{50x}{\\boldsymbol{50}} $$
+
+$$ 8 < x $$
+
+Vid exakt 8 dagar kostar båda lika mycket: $250 \\cdot 8 + 400 = 2\\,400$ kr och $300 \\cdot 8 = 2\\,400$ kr. Släpet är alltså billigast från och med 9 dagar.
+
+Kontroll: 9 dagar kostar $250 \\cdot 9 + 400 = 2\\,650$ kr hos Släpet och $300 \\cdot 9 = 2\\,700$ kr hos Kärran.
+
+Rimligt? Släpet är 50 kr billigare per dag, och det tar $\\dfrac{400}{50} = 8$ dagar att tjäna in den fasta avgiften.
+
+**Svar:** Från och med 9 dagar
+
+**Generell slutsats:** två priser för olika mängder räcker för att bestämma en linjär prismodell. Ett pris med fast avgift och lägre rörligt pris blir billigast först efter den brytpunkt där den fasta avgiften har tjänats in.`,
+        },
+        {
+            level: 3,
+            question: `Noah ska bestämma ekvationen för linjen genom punkterna $P = (-3, 4)$ och $Q = (5, -2)$. Han skriver:
+
+"$k = \\dfrac{-2 - 4}{-3 - 5} = \\dfrac{-6}{-8} = \\dfrac{3}{4}$. Insättning av $Q$ ger $-2 = \\dfrac{3}{4} \\cdot 5 + m$, alltså $m = -\\dfrac{23}{4}$. Linjen är $y = \\dfrac{3}{4}x - \\dfrac{23}{4}$, och den går genom $Q$, så den är rätt."<br>a) Vilket fel har Noah gjort, och varför avslöjade hans kontroll inte felet?<br>b) Bestäm linjens rätta ekvation.`,
+            answer: { value: -0.75, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: -0.75, unit: '', etikett: '$k =$' },
+                { del: 'b', value: 1.75, unit: '', etikett: '$m =$' },
+            ],
+            solution: `**Insikten:** i formeln för riktningskoefficienten måste punkterna tas i samma ordning i täljaren och nämnaren. Noah tar $Q$ först i täljaren men $P$ först i nämnaren. Hans kontroll med $Q$ kan inte avslöja felet, eftersom $m$ räknades fram just så att linjen går genom $Q$.
+
+**a)** I täljaren räknar Noah $y_Q - y_P = -2 - 4$, men i nämnaren $x_P - x_Q = -3 - 5$. Ordningen är omkastad i nämnaren, och därför får $k$ fel tecken.
+
+Kontrollen är meningslös: en linje med vilken lutning som helst går genom $Q$ om $m$ bestäms med $Q$. Kontrollen måste göras med den andra punkten. Noahs linje ger vid $x = -3$
+
+$$ y = \\frac{3}{4} \\cdot (-3) - \\frac{23}{4} = -\\frac{9}{4} - \\frac{23}{4} = -\\frac{32}{4} = -8 $$
+
+men $P$ har $y = 4$. Linjen går alltså inte genom $P$.
+
+**Svar:** Han tar punkterna i olika ordning i täljare och nämnare, så $k$ får fel tecken. Kontrollen med $Q$ avslöjar inget, eftersom $m$ beräknades med $Q$. Han borde ha kontrollerat med $P$.
+
+**b)** Med $(x_1, y_1) = (-3, 4)$ och $(x_2, y_2) = (5, -2)$:
+
+$$ k = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{-2 - 4}{5 - (-3)} = \\frac{-6}{8} = -\\frac{3}{4} $$
+
+Linjen är $y = -\\dfrac{3}{4}x + m$. Insättning av $Q = (5, -2)$:
+
+$$ -2 = -\\frac{3}{4} \\cdot 5 + m $$
+
+$$ -2 = -\\frac{15}{4} + m $$
+
+Adderar $\\dfrac{15}{4}$ i båda led:
+
+$$ -2 \\mathbin{\\boldsymbol{+}} \\boldsymbol{\\frac{15}{4}} = -\\frac{15}{4} + m \\mathbin{\\boldsymbol{+}} \\boldsymbol{\\frac{15}{4}} $$
+
+$$ \\frac{7}{4} = m $$
+
+Kontroll med den ANDRA punkten $P = (-3, 4)$:
+
+$$ -\\frac{3}{4} \\cdot (-3) + \\frac{7}{4} = \\frac{9}{4} + \\frac{7}{4} = \\frac{16}{4} = 4 $$
+
+Det stämmer.
+
+Rimligt? $P$ ligger till vänster och högre upp än $Q$, så linjen ska luta nedåt och $k$ vara negativt.
+
+**Svar:** $y = -\\dfrac{3}{4}x + \\dfrac{7}{4}$
+
+**Generell slutsats:** en kontroll är bara värd något om den prövar något som inte redan använts. Den punkt som gav $m$ uppfyller alltid ekvationen, så kontrollen ska göras med den andra punkten. Ett snabbt överslag av tecknet på $k$ fångar dessutom de flesta ordningsfel.`,
+        },
+        {
+            level: 3,
+            question: `En linje går genom punkterna $(1, t)$ och $(3, 2t + 4)$, där $t$ är ett tal.<br>a) Bestäm $t$ så att linjen går genom origo.<br>b) Bestäm $t$ så att linjen blir vågrät.`,
+            answer: { value: 4, unit: '' },
+            delsvar: [
+                { del: 'a', value: 4, unit: '', etikett: '$t =$' },
+                { del: 'b', value: -4, unit: '', etikett: '$t =$' },
+            ],
+            solution: `**Insikten:** både $k$ och $m$ går att uttrycka med $t$. Linjen går genom origo när $m = 0$, och den är vågrät när $k = 0$. Båda villkoren blir enkla ekvationer i $t$.
+
+Riktningskoefficienten:
+
+$$ k = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{(2t + 4) - t}{3 - 1} = \\frac{t + 4}{2} $$
+
+Punkten $(1, t)$ insatt i $y = kx + m$:
+
+$$ t = \\frac{t + 4}{2} \\cdot 1 + m $$
+
+Subtraherar $\\dfrac{t + 4}{2}$ i båda led:
+
+$$ t \\mathbin{\\boldsymbol{-}} \\boldsymbol{\\frac{t + 4}{2}} = \\frac{t + 4}{2} + m \\mathbin{\\boldsymbol{-}} \\boldsymbol{\\frac{t + 4}{2}} $$
+
+$$ m = \\frac{2t - (t + 4)}{2} = \\frac{t - 4}{2} $$
+
+**a)** Linjen går genom origo när $m = 0$:
+
+$$ \\frac{t - 4}{2} = 0 $$
+
+Multiplicerar båda led med 2:
+
+$$ \\boldsymbol{2} \\mathbin{\\boldsymbol{\\cdot}} \\frac{t - 4}{2} = \\boldsymbol{2} \\mathbin{\\boldsymbol{\\cdot}} 0 $$
+
+$$ t - 4 = 0 $$
+
+$$ t = 4 $$
+
+Kontroll: punkterna blir $(1, 4)$ och $(3, 12)$. I båda är *y*-koordinaten 4 gånger *x*-koordinaten, så de ligger på $y = 4x$, som går genom origo.
+
+**Svar:** $t = 4$
+
+**b)** Linjen är vågrät när $k = 0$:
+
+$$ \\frac{t + 4}{2} = 0 $$
+
+Multiplicerar båda led med 2:
+
+$$ \\boldsymbol{2} \\mathbin{\\boldsymbol{\\cdot}} \\frac{t + 4}{2} = \\boldsymbol{2} \\mathbin{\\boldsymbol{\\cdot}} 0 $$
+
+$$ t + 4 = 0 $$
+
+$$ t = -4 $$
+
+Kontroll: punkterna blir $(1, -4)$ och $(3, -4)$. De har samma *y*-koordinat, så linjen $y = -4$ är vågrät.
+
+**Svar:** $t = -4$
+
+**Generell slutsats:** när punkterna innehåller en parameter blir $k$ och $m$ uttryck i parametern. Egenskaper hos linjen, som att den går genom origo ($m = 0$) eller är vågrät ($k = 0$), blir då ekvationer som går att lösa.`,
+        },
+        {
+            level: 3,
+            question: `Linjen $L$ går genom punkterna $(2, 5)$ och $(6, -1)$. Linjen och de båda koordinataxlarna begränsar en triangel.<br>a) Bestäm triangelns area exakt.<br>b) En linje genom origo delar triangeln i två delar med lika stor area. Bestäm ekvationen för den linjen.`,
+            answer: { value: 21.33, unit: 'areaenheter', tol: 0.005 },
+            delsvar: [
+                { del: 'a', value: 21.33, unit: 'areaenheter', tol: 0.005 },
+                { del: 'b', value: 1.5, unit: '', etikett: '$k =$' },
+            ],
+            solution: `**Insikten:** triangelns hörn är origo och linjens skärningar med axlarna, så först behövs linjens ekvation. En linje genom origo delar triangeln i två mindre trianglar, och var den träffar $L$ avgör hur stora de blir.
+
+**a)** Riktningskoefficienten:
+
+$$ k = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{-1 - 5}{6 - 2} = \\frac{-6}{4} = -\\frac{3}{2} $$
+
+Insättning av $(2, 5)$ i $y = -\\dfrac{3}{2}x + m$:
+
+$$ 5 = -\\frac{3}{2} \\cdot 2 + m $$
+
+$$ 5 = -3 + m $$
+
+Adderar 3 i båda led:
+
+$$ 5 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3} = -3 + m \\mathbin{\\boldsymbol{+}} \\boldsymbol{3} $$
+
+$$ 8 = m $$
+
+Kontroll med $(6, -1)$: $-\\dfrac{3}{2} \\cdot 6 + 8 = -9 + 8 = -1$. Det stämmer.
+
+$L$ är $y = -\\dfrac{3}{2}x + 8$ och skär *y*-axeln i $(0, 8)$. På *x*-axeln är $y = 0$:
+
+$$ 0 = -\\frac{3}{2}x + 8 $$
+
+Adderar $\\dfrac{3}{2}x$ i båda led:
+
+$$ 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{\\frac{3}{2}x} = -\\frac{3}{2}x + 8 \\mathbin{\\boldsymbol{+}} \\boldsymbol{\\frac{3}{2}x} $$
+
+$$ \\frac{3}{2}x = 8 $$
+
+Multiplicerar båda led med $\\dfrac{2}{3}$:
+
+$$ \\boldsymbol{\\frac{2}{3}} \\mathbin{\\boldsymbol{\\cdot}} \\frac{3}{2}x = \\boldsymbol{\\frac{2}{3}} \\mathbin{\\boldsymbol{\\cdot}} 8 $$
+
+$$ x = \\frac{16}{3} $$
+
+Triangeln har katetrarna 8 och $\\dfrac{16}{3}$, och arean är bas gånger höjd delat med 2:
+
+$$ \\text{area} = \\frac{1}{2} \\cdot \\frac{16}{3} \\cdot 8 = \\frac{64}{3} \\approx 21{,}3 $$
+
+**Svar:** $\\dfrac{64}{3}$ areaenheter
+
+**b)** Linjen genom origo träffar $L$ i en punkt $(x_0, y_0)$. Den delar triangeln i en vänster del med hörnen $(0, 0)$, $(0, 8)$ och $(x_0, y_0)$, och en höger del. Den vänstra delen har basen 8 längs *y*-axeln och höjden $x_0$, alltså avståndet från *y*-axeln. Den ska ha halva arean, $\\dfrac{32}{3}$:
+
+$$ \\frac{1}{2} \\cdot 8 \\cdot x_0 = \\frac{32}{3} $$
+
+$$ 4x_0 = \\frac{32}{3} $$
+
+Dividerar båda led med 4:
+
+$$ \\frac{4x_0}{\\boldsymbol{4}} = \\frac{\\frac{32}{3}}{\\boldsymbol{4}} $$
+
+$$ x_0 = \\frac{32}{12} = \\frac{8}{3} $$
+
+Punkten ligger på $L$, så
+
+$$ y_0 = -\\frac{3}{2} \\cdot \\frac{8}{3} + 8 = -4 + 8 = 4 $$
+
+Linjen genom origo och $\\left(\\dfrac{8}{3}, 4\\right)$ har riktningskoefficienten
+
+$$ k = \\frac{4 - 0}{\\frac{8}{3} - 0} = 4 \\cdot \\frac{3}{8} = \\frac{3}{2} $$
+
+och $m = 0$, eftersom den går genom origo.
+
+Kontroll: den högra delen har basen $\\dfrac{16}{3}$ längs *x*-axeln och höjden $y_0 = 4$, och arean $\\dfrac{1}{2} \\cdot \\dfrac{16}{3} \\cdot 4 = \\dfrac{32}{3}$. De två delarna är lika stora.
+
+**Svar:** $y = \\dfrac{3}{2}x$
+
+**Generell slutsats:** areor i koordinatsystemet räknas enklast med baser längs axlarna, eftersom höjden då är ett avstånd som går att läsa ur en koordinat. Den linje genom origo som halverar triangeln går genom mittpunkten av den motstående sidan, här $\\left(\\dfrac{8}{3}, 4\\right)$.`,
+        },
+        {
+            level: 3,
+            question: `En ny bil kostar $240\\,000$ kr. Efter 3 år är den värd $168\\,000$ kr.<br>a) Anta att värdet minskar linjärt. Bestäm en ekvation för värdet $y$ kr efter $x$ år.<br>b) Anta i stället att värdet minskar med samma procentsats varje år. Beräkna bilens värde efter 8 år med båda modellerna.<br>c) Vilken av modellerna är rimligast om man vill veta bilens värde efter 12 år? Motivera.`,
+            answer: { value: 48000, unit: 'kr' },
+            delsvar: [
+                { del: 'a', value: -24000, unit: '', etikett: '$k =$' },
+                { del: 'a', value: 240000, unit: '', etikett: '$m =$' },
+                { del: 'b', value: 48000, unit: 'kr', etikett: 'linjär modell' },
+                { del: 'b', value: 92700, unit: 'kr', tol: 0.01, etikett: 'procentuell modell' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** två mätvärden räcker för båda modellerna. Den linjära modellen minskar med lika många kronor varje år, och den procentuella med samma förändringsfaktor varje år. De är lika efter 3 år men skiljer sig mer och mer därefter.
+
+**a)** Punkterna är $(0, 240\\,000)$ och $(3, 168\\,000)$. Riktningskoefficienten är förändringen i värde delad med antalet år:
+
+$$ k = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{168\\,000 - 240\\,000}{3 - 0} = \\frac{-72\\,000}{3} = -24\\,000 $$
+
+Bilen är värd $240\\,000$ kr när $x = 0$, så $m = 240\\,000$.
+
+**Svar:** $y = -24\\,000x + 240\\,000$
+
+**b)** Linjär modell efter 8 år:
+
+$$ y = -24\\,000 \\cdot 8 + 240\\,000 = -192\\,000 + 240\\,000 = 48\\,000 $$
+
+Procentuell modell: kalla den årliga förändringsfaktorn $a$. Efter 3 år har värdet multiplicerats med $a^3$:
+
+$$ 240\\,000 \\cdot a^3 = 168\\,000 $$
+
+Dividerar båda led med $240\\,000$:
+
+$$ \\frac{240\\,000 \\cdot a^3}{\\boldsymbol{240\\,000}} = \\frac{168\\,000}{\\boldsymbol{240\\,000}} $$
+
+$$ a^3 = 0{,}7 $$
+
+$$ a = \\sqrt[3]{0{,}7} = 0{,}887\\,90\\ldots $$
+
+Värdet minskar alltså med cirka $11\\ \\%$ per år. Efter 8 år, räknat med det oavrundade värdet på $a$:
+
+$$ 240\\,000 \\cdot a^8 = 240\\,000 \\cdot \\left(\\sqrt[3]{0{,}7}\\right)^8 = 92\\,712{,}7\\ldots \\approx 92\\,700 $$
+
+Kontroll av faktorn: $0{,}887\\,90^3 = 0{,}699\\,99\\ldots$, och $240\\,000 \\cdot 0{,}7 = 168\\,000$ kr.
+
+**Svar:** Linjär modell $48\\,000$ kr, procentuell modell cirka $92\\,700$ kr
+
+**c)** Den linjära modellen ger efter 10 år $-24\\,000 \\cdot 10 + 240\\,000 = 0$ kr, och efter 12 år
+
+$$ -24\\,000 \\cdot 12 + 240\\,000 = -48\\,000 $$
+
+kronor. Ett negativt värde är omöjligt. Den procentuella modellen ger $240\\,000 \\cdot a^{12} = 240\\,000 \\cdot 0{,}7^4 \\approx 57\\,600$ kr, eftersom $a^{12} = (a^3)^4$. Värdet närmar sig 0 men blir aldrig negativt, och en bil tappar i verkligheten mest i värde de första åren.
+
+**Svar:** Den procentuella modellen, eftersom den linjära ger ett negativt värde efter 12 år
+
+**Generell slutsats:** en linjär modell passar när förändringen är lika många kronor varje år, men den slår förr eller senare igenom noll. När förändringen snarare är en andel av värdet är en modell med förändringsfaktor rimligare på lång sikt.`,
         },
     ],
 
@@ -26608,29 +28366,451 @@ $$ 1 = -6 + m \\qquad m = 7 $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Linjen $ax + 2y - 8 = 0$ är parallell med linjen genom punkterna (1, 3) och (4, 12). Bestäm konstanten $a$.`,
-            answer: { value: -6, unit: '' },
-            solution: `**Insikten:** båda linjernas $k$-värden måste räknas fram i var sin väg och sedan sättas lika.
+            question: `En linje beskrivs av $(a - 1)x + (a + 2)y + 5 = 0$, där $a$ är en konstant. Bestäm $a$ så att linjen blir<br>a) vertikal&emsp;&emsp;b) vågrät<br>c) parallell med linjen $y = 2x + 7$`,
+            answer: { value: -1, unit: '' },
+            delsvar: [
+                { del: 'a', value: -2, unit: '', etikett: '$a =$' },
+                { del: 'b', value: 1, unit: '', etikett: '$a =$' },
+                { del: 'c', value: -1, unit: '', etikett: '$a =$' },
+            ],
+            solution: `**Insikten:** i allmän form avgör koefficienterna framför $x$ och $y$ hur linjen ligger. Försvinner $y$-termen kan ekvationen skrivas på formen $x = \text{konstant}$, och linjen är vertikal. Försvinner $x$-termen blir den $y = \text{konstant}$, och linjen är vågrät. För en sned linje löser man ut $y$ och läser av $k$.
 
-**Linjen genom punkterna** har
+**a)** Linjen är vertikal när $y$-termen försvinner, alltså när $a + 2 = 0$, det vill säga $a = -2$. Ekvationen blir då
 
-$$ k = \\frac{12 - 3}{4 - 1} = \\frac{9}{3} = 3 $$
+$$ (-2 - 1)x + 0 \\cdot y + 5 = 0 $$
 
-**Linjen i allmän form** skrivs om till k-form:
+$$ -3x + 5 = 0 $$
 
-$$ 2y = -ax + 8 \\qquad y = -\\frac{a}{2}x + 4 $$
+Subtraherar 5 i båda led:
 
-det vill säga $k = -\\dfrac{a}{2}$.
+$$ -3x + 5 \\mathbin{\\boldsymbol{-}} \\boldsymbol{5} = 0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{5} $$
 
-**Parallellitet** kräver samma $k$-värde:
+$$ -3x = -5 $$
 
-$$ -\\frac{a}{2} = 3 \\qquad a = -6 $$
+Dividerar båda led med $-3$:
 
-Kontroll: $-6x + 2y - 8 = 0$ ger $y = 3x + 4$ — lutning 3, parallell. Stämmer!
+$$ \\frac{-3x}{\\boldsymbol{-3}} = \\frac{-5}{\\boldsymbol{-3}} $$
 
-**Svar:** $a = -6$
+$$ x = \\frac{5}{3} $$
 
-**Generell slutsats:** allmän form döljer lutningen — lös alltid ut $y$ först. För $ax + by + c = 0$ är lutningen $-\\dfrac{a}{b}$.`,
+Det är en vertikal linje.
+
+**Svar:** $a = -2$ (linjen blir $x = \\dfrac{5}{3}$)
+
+**b)** Linjen är vågrät när $x$-termen försvinner, alltså när $a - 1 = 0$, det vill säga $a = 1$. Ekvationen blir då $3y + 5 = 0$, alltså $y = -\\dfrac{5}{3}$, en vågrät linje.
+
+**Svar:** $a = 1$ (linjen blir $y = -\\dfrac{5}{3}$)
+
+**c)** Parallella linjer har samma $k$-värde, så linjen ska ha $k = 2$. Vi löser ut $y$. Subtraherar $(a - 1)x$ och 5 i båda led:
+
+$$ (a - 1)x + (a + 2)y + 5 \\mathbin{\\boldsymbol{-}} \\boldsymbol{(a - 1)x} \\mathbin{\\boldsymbol{-}} \\boldsymbol{5} = 0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{(a - 1)x} \\mathbin{\\boldsymbol{-}} \\boldsymbol{5} $$
+
+$$ (a + 2)y = -(a - 1)x - 5 $$
+
+Dividerar båda led med $(a + 2)$, som inte är 0 för en sned linje:
+
+$$ \\frac{(a + 2)y}{\\boldsymbol{a + 2}} = \\frac{-(a - 1)x - 5}{\\boldsymbol{a + 2}} $$
+
+$$ y = \\frac{1 - a}{a + 2}x - \\frac{5}{a + 2} $$
+
+$k$-värdet är $\\dfrac{1 - a}{a + 2}$, och det ska vara 2:
+
+$$ \\frac{1 - a}{a + 2} = 2 $$
+
+Multiplicerar båda led med $(a + 2)$:
+
+$$ \\boldsymbol{(a + 2)} \\mathbin{\\boldsymbol{\\cdot}} \\frac{1 - a}{a + 2} = \\boldsymbol{(a + 2)} \\mathbin{\\boldsymbol{\\cdot}} 2 $$
+
+$$ 1 - a = 2a + 4 $$
+
+Adderar $a$ och subtraherar 4 i båda led:
+
+$$ 1 - a \\mathbin{\\boldsymbol{+}} \\boldsymbol{a} \\mathbin{\\boldsymbol{-}} \\boldsymbol{4} = 2a + 4 \\mathbin{\\boldsymbol{+}} \\boldsymbol{a} \\mathbin{\\boldsymbol{-}} \\boldsymbol{4} $$
+
+$$ -3 = 3a $$
+
+Dividerar båda led med 3:
+
+$$ \\frac{-3}{\\boldsymbol{3}} = \\frac{3a}{\\boldsymbol{3}} $$
+
+$$ a = -1 $$
+
+Kontroll: $a = -1$ ger $-2x + y + 5 = 0$, alltså $y = 2x - 5$. Den har $k = 2$ och $m = -5$, så den är parallell med $y = 2x + 7$ och inte samma linje.
+
+**Svar:** $a = -1$
+
+**Generell slutsats:** i $ax + by + c = 0$ är linjen vertikal när $b = 0$ och vågrät när $a = 0$. Annars ger lösningen för $y$ att $k = -\\dfrac{a}{b}$, och ett villkor på lutningen blir en ekvation i konstanten.`,
+        },
+        {
+            level: 3,
+            question: `Punkterna $A = (1, 1)$, $B = (5, 2)$ och $C = (6, 5)$ är tre av hörnen i parallellogrammen $ABCD$. I en parallellogram är motstående sidor parallella.<br>a) Bestäm koordinaterna för hörnet $D$.<br>b) Bestäm ekvationen för sidan $CD$ i allmän form med heltalskoefficienter.`,
+            answer: { value: 2, unit: '' },
+            delsvar: [
+                { del: 'a', value: 2, unit: '', etikett: '$x =$' },
+                { del: 'a', value: 4, unit: '', etikett: '$y =$' },
+                { del: 'b' },
+            ],
+            solution: `**Insikten:** $D$ ligger på linjen genom $A$ som är parallell med $BC$, och på linjen genom $C$ som är parallell med $AB$. Där de två linjerna skär varandra ligger $D$.
+
+**a)** Riktningskoefficienterna för sidorna $AB$ och $BC$:
+
+$$ k_{AB} = \\frac{2 - 1}{5 - 1} = \\frac{1}{4} \\qquad k_{BC} = \\frac{5 - 2}{6 - 5} = \\frac{3}{1} = 3 $$
+
+Sidan $AD$ är parallell med $BC$, så den har $k = 3$ och går genom $A = (1, 1)$:
+
+$$ 1 = 3 \\cdot 1 + m $$
+
+Subtraherar 3 i båda led:
+
+$$ 1 \\mathbin{\\boldsymbol{-}} \\boldsymbol{3} = 3 + m \\mathbin{\\boldsymbol{-}} \\boldsymbol{3} $$
+
+$$ -2 = m $$
+
+$AD$ ligger alltså på linjen $y = 3x - 2$.
+
+Sidan $CD$ är parallell med $AB$, så den har $k = \\dfrac{1}{4}$ och går genom $C = (6, 5)$:
+
+$$ 5 = \\frac{1}{4} \\cdot 6 + m $$
+
+Subtraherar $\\dfrac{6}{4}$ i båda led:
+
+$$ 5 \\mathbin{\\boldsymbol{-}} \\boldsymbol{\\frac{6}{4}} = \\frac{6}{4} + m \\mathbin{\\boldsymbol{-}} \\boldsymbol{\\frac{6}{4}} $$
+
+$$ \\frac{7}{2} = m $$
+
+$CD$ ligger alltså på linjen $y = \\dfrac{1}{4}x + \\dfrac{7}{2}$.
+
+$D$ ligger på båda linjerna, så där har de samma $y$-värde:
+
+$$ 3x - 2 = \\frac{1}{4}x + \\frac{7}{2} $$
+
+Multiplicerar båda led med 4:
+
+$$ \\boldsymbol{4} \\mathbin{\\boldsymbol{\\cdot}} (3x - 2) = \\boldsymbol{4} \\mathbin{\\boldsymbol{\\cdot}} \\left(\\frac{1}{4}x + \\frac{7}{2}\\right) $$
+
+$$ 12x - 8 = x + 14 $$
+
+Subtraherar $x$ och adderar 8 i båda led:
+
+$$ 12x - 8 \\mathbin{\\boldsymbol{-}} \\boldsymbol{x} \\mathbin{\\boldsymbol{+}} \\boldsymbol{8} = x + 14 \\mathbin{\\boldsymbol{-}} \\boldsymbol{x} \\mathbin{\\boldsymbol{+}} \\boldsymbol{8} $$
+
+$$ 11x = 22 $$
+
+Dividerar båda led med 11:
+
+$$ \\frac{11x}{\\boldsymbol{11}} = \\frac{22}{\\boldsymbol{11}} $$
+
+$$ x = 2 $$
+
+och $y = 3 \\cdot 2 - 2 = 4$.
+
+Kontroll med trappstegen: från $B$ till $A$ går man 4 steg åt vänster och 1 steg nedåt. Samma förflyttning från $C$ ger $(6 - 4, 5 - 1) = (2, 4)$. Det stämmer.
+
+**Svar:** $D = (2, 4)$
+
+**b)** Sidan $CD$ ligger på linjen $y = \\dfrac{1}{4}x + \\dfrac{7}{2}$. Multiplicerar båda led med 4 för att få heltal:
+
+$$ \\boldsymbol{4} \\mathbin{\\boldsymbol{\\cdot}} y = \\boldsymbol{4} \\mathbin{\\boldsymbol{\\cdot}} \\left(\\frac{1}{4}x + \\frac{7}{2}\\right) $$
+
+$$ 4y = x + 14 $$
+
+Subtraherar $4y$ i båda led:
+
+$$ 4y \\mathbin{\\boldsymbol{-}} \\boldsymbol{4y} = x + 14 \\mathbin{\\boldsymbol{-}} \\boldsymbol{4y} $$
+
+$$ 0 = x - 4y + 14 $$
+
+Kontroll: $C$ ger $6 - 4 \\cdot 5 + 14 = 0$ och $D$ ger $2 - 4 \\cdot 4 + 14 = 0$. Båda hörnen ligger på linjen.
+
+**Svar:** $x - 4y + 14 = 0$
+
+**Generell slutsats:** att två sidor är parallella betyder att de har samma $k$-värde. Med ett känt hörn och en känd lutning bestäms sidans linje, och ett okänt hörn är skärningen mellan två sådana linjer.`,
+        },
+        {
+            level: 3,
+            question: `Ett område i ett koordinatsystem begränsas av linjerna $x = -1$, $x = 4$, $y = -2$ och $2x - 5y + 15 = 0$. Bestäm områdets area.`,
+            answer: { value: 28, unit: 'areaenheter' },
+            solution: `**Insikten:** tre av linjerna är vertikala eller vågräta och bildar tre sidor av området. Den fjärde är sned och bildar taket. Löser man ut $y$ ur den sneda linjen kan takets höjd vid $x = -1$ och $x = 4$ räknas ut, och området delas i en rektangel och en triangel.
+
+Vi löser ut $y$ ur $2x - 5y + 15 = 0$. Subtraherar $2x$ och 15 i båda led:
+
+$$ 2x - 5y + 15 \\mathbin{\\boldsymbol{-}} \\boldsymbol{2x} \\mathbin{\\boldsymbol{-}} \\boldsymbol{15} = 0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{2x} \\mathbin{\\boldsymbol{-}} \\boldsymbol{15} $$
+
+$$ -5y = -2x - 15 $$
+
+Dividerar båda led med $-5$:
+
+$$ \\frac{-5y}{\\boldsymbol{-5}} = \\frac{-2x - 15}{\\boldsymbol{-5}} $$
+
+$$ y = \\frac{2}{5}x + 3 $$
+
+Linjen lutar uppåt, så den ligger ovanför $y = -2$ i hela intervallet och bildar områdets övre kant. Takets höjd vid kanterna:
+
+$$ x = -1: \\quad y = \\frac{2}{5} \\cdot (-1) + 3 = 2{,}6 $$
+
+$$ x = 4: \\quad y = \\frac{2}{5} \\cdot 4 + 3 = 4{,}6 $$
+
+Området har bredden $4 - (-1) = 5$. Mätt från golvet $y = -2$ är höjden $2{,}6 - (-2) = 4{,}6$ vid vänsterkanten och $4{,}6 - (-2) = 6{,}6$ vid högerkanten.
+
+Vi delar området i en rektangel med bredden 5 och höjden $4{,}6$, och en triangel ovanpå med basen 5 och höjden $6{,}6 - 4{,}6 = 2$:
+
+$$ \\text{rektangel:} \\quad 5 \\cdot 4{,}6 = 23 $$
+
+$$ \\text{triangel:} \\quad \\frac{5 \\cdot 2}{2} = 5 $$
+
+$$ \\text{area} = 23 + 5 = 28 $$
+
+Kontroll: områdets medelhöjd är $\\dfrac{4{,}6 + 6{,}6}{2} = 5{,}6$, och $5 \\cdot 5{,}6 = 28$. Det stämmer.
+
+**Svar:** 28 areaenheter
+
+**Generell slutsats:** vertikala linjer $x = a$ och vågräta linjer $y = b$ ger raka kanter som är lätta att mäta längs. En sned linje i allmän form skrivs om till k-form, så att dess *y*-värde vid kanterna kan räknas ut.`,
+        },
+        {
+            level: 3,
+            question: `Elin påstår att linjerna $3x - 2y + 4 = 0$ och $y = 3x - 1$ är parallella, eftersom båda har 3 framför $x$.<br>a) Har Elin rätt? Motivera.<br>b) Bestäm ekvationen för den linje som är parallell med $3x - 2y + 4 = 0$ och går genom punkten $(2, -1)$. Svara i allmän form med heltalskoefficienter.`,
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+            ],
+            solution: `**Insikten:** koefficienten framför $x$ i allmän form är inte $k$-värdet. $k$-värdet syns först när $y$ har lösts ut, och då delas allt med koefficienten framför $y$.
+
+**a)** Vi löser ut $y$ ur $3x - 2y + 4 = 0$. Subtraherar $3x$ och 4 i båda led:
+
+$$ 3x - 2y + 4 \\mathbin{\\boldsymbol{-}} \\boldsymbol{3x} \\mathbin{\\boldsymbol{-}} \\boldsymbol{4} = 0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{3x} \\mathbin{\\boldsymbol{-}} \\boldsymbol{4} $$
+
+$$ -2y = -3x - 4 $$
+
+Dividerar båda led med $-2$:
+
+$$ \\frac{-2y}{\\boldsymbol{-2}} = \\frac{-3x - 4}{\\boldsymbol{-2}} $$
+
+$$ y = \\frac{3}{2}x + 2 $$
+
+Den första linjen har $k = \\dfrac{3}{2}$ och den andra $k = 3$. Lutningarna är olika, så linjerna är inte parallella.
+
+**Svar:** Nej. Den första linjen har $k = \\dfrac{3}{2}$, inte 3, så linjerna har olika lutning.
+
+**b)** Den sökta linjen har $k = \\dfrac{3}{2}$. Insättning av $(2, -1)$ i $y = \\dfrac{3}{2}x + m$:
+
+$$ -1 = \\frac{3}{2} \\cdot 2 + m $$
+
+$$ -1 = 3 + m $$
+
+Subtraherar 3 i båda led:
+
+$$ -1 \\mathbin{\\boldsymbol{-}} \\boldsymbol{3} = 3 + m \\mathbin{\\boldsymbol{-}} \\boldsymbol{3} $$
+
+$$ -4 = m $$
+
+Linjen är $y = \\dfrac{3}{2}x - 4$. Multiplicerar båda led med 2 för att få heltal:
+
+$$ \\boldsymbol{2} \\mathbin{\\boldsymbol{\\cdot}} y = \\boldsymbol{2} \\mathbin{\\boldsymbol{\\cdot}} \\left(\\frac{3}{2}x - 4\\right) $$
+
+$$ 2y = 3x - 8 $$
+
+Subtraherar $2y$ i båda led:
+
+$$ 2y \\mathbin{\\boldsymbol{-}} \\boldsymbol{2y} = 3x - 8 \\mathbin{\\boldsymbol{-}} \\boldsymbol{2y} $$
+
+$$ 0 = 3x - 2y - 8 $$
+
+Kontroll: punkten $(2, -1)$ ger $3 \\cdot 2 - 2 \\cdot (-1) - 8 = 6 + 2 - 8 = 0$. Det stämmer.
+
+Det finns en genväg: den nya linjen har samma $3x - 2y$ som den gamla, bara konstanten är en annan. Ansatsen $3x - 2y + c = 0$ med punkten insatt ger $6 + 2 + c = 0$, alltså $c = -8$.
+
+**Svar:** $3x - 2y - 8 = 0$
+
+**Generell slutsats:** i allmän form har parallella linjer samma förhållande mellan koefficienterna framför $x$ och $y$, och bara konstanten skiljer dem åt. Lutningen ska aldrig läsas av direkt ur koefficienten framför $x$.`,
+        },
+        {
+            level: 3,
+            question: `Två linjer ges i allmän form: $a_1x + b_1y + c_1 = 0$ och $a_2x + b_2y + c_2 = 0$, där $b_1$ och $b_2$ är skilda från 0.<br>a) Visa att den första linjen har $k = -\\dfrac{a_1}{b_1}$, och att linjerna är parallella precis när $a_1 \\cdot b_2 = a_2 \\cdot b_1$.<br>b) Avgör med villkoret om linjerna $6x - 4y + 1 = 0$ och $-9x + 6y + 5 = 0$ är parallella.<br>c) Bestäm $p$ så att linjerna $px + 3y - 2 = 0$ och $4x - 6y + 1 = 0$ blir parallella.`,
+            answer: { value: -2, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: -2, unit: '', etikett: '$p =$' },
+            ],
+            solution: `**Insikten:** att lösa ut $y$ ur en allmän ekvation går likadant varje gång, så det kan göras en gång för alla med bokstäver. Villkoret för parallella linjer blir då en enkel produktregel som inte kräver några bråk.
+
+**a)** Subtraherar $a_1x$ och $c_1$ i båda led:
+
+$$ a_1x + b_1y + c_1 \\mathbin{\\boldsymbol{-}} \\boldsymbol{a_1x} \\mathbin{\\boldsymbol{-}} \\boldsymbol{c_1} = 0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{a_1x} \\mathbin{\\boldsymbol{-}} \\boldsymbol{c_1} $$
+
+$$ b_1y = -a_1x - c_1 $$
+
+Dividerar båda led med $b_1$, som inte är 0:
+
+$$ \\frac{b_1y}{\\boldsymbol{b_1}} = \\frac{-a_1x - c_1}{\\boldsymbol{b_1}} $$
+
+$$ y = -\\frac{a_1}{b_1}x - \\frac{c_1}{b_1} $$
+
+Alltså är $k_1 = -\\dfrac{a_1}{b_1}$, och på samma sätt $k_2 = -\\dfrac{a_2}{b_2}$. Linjerna är parallella när lutningarna är lika:
+
+$$ -\\frac{a_1}{b_1} = -\\frac{a_2}{b_2} $$
+
+Multiplicerar båda led med $-b_1 b_2$:
+
+$$ \\boldsymbol{(-b_1 b_2)} \\mathbin{\\boldsymbol{\\cdot}} \\left(-\\frac{a_1}{b_1}\\right) = \\boldsymbol{(-b_1 b_2)} \\mathbin{\\boldsymbol{\\cdot}} \\left(-\\frac{a_2}{b_2}\\right) $$
+
+$$ a_1 b_2 = a_2 b_1 $$
+
+Varje steg går att göra baklänges, så villkoret gäller åt båda hållen.
+
+**Svar:** Se beräkningen ovan.
+
+**b)** Här är $a_1 = 6$, $b_1 = -4$, $a_2 = -9$ och $b_2 = 6$:
+
+$$ a_1 \\cdot b_2 = 6 \\cdot 6 = 36 $$
+
+$$ a_2 \\cdot b_1 = (-9) \\cdot (-4) = 36 $$
+
+Produkterna är lika, så linjerna är parallella. Kontroll med lutningarna: $k_1 = -\\dfrac{6}{-4} = \\dfrac{3}{2}$ och $k_2 = -\\dfrac{-9}{6} = \\dfrac{3}{2}$.
+
+Det är inte samma linje: multipliceras den första ekvationen med $-\\dfrac{3}{2}$ blir den $-9x + 6y - 1{,}5 = 0$, och konstanten skiljer sig från 5.
+
+**Svar:** Ja, linjerna är parallella (men inte samma linje)
+
+**c)** Här är $a_1 = p$, $b_1 = 3$, $a_2 = 4$ och $b_2 = -6$. Villkoret ger
+
+$$ p \\cdot (-6) = 4 \\cdot 3 $$
+
+$$ -6p = 12 $$
+
+Dividerar båda led med $-6$:
+
+$$ \\frac{-6p}{\\boldsymbol{-6}} = \\frac{12}{\\boldsymbol{-6}} $$
+
+$$ p = -2 $$
+
+Kontroll: $-2x + 3y - 2 = 0$ ger $y = \\dfrac{2}{3}x + \\dfrac{2}{3}$, och $4x - 6y + 1 = 0$ ger $y = \\dfrac{2}{3}x + \\dfrac{1}{6}$. Båda har $k = \\dfrac{2}{3}$.
+
+**Svar:** $p = -2$
+
+**Generell slutsats:** i allmän form är $k = -\\dfrac{a}{b}$, och två linjer är parallella precis när $a_1 b_2 = a_2 b_1$. Korsvis multiplikation avgör alltså parallellitet utan att någon ekvation behöver skrivas om.`,
+        },
+        {
+            level: 3,
+            question: `Linjen $L_1$ har ekvationen $y = 2x + 3$ och linjen $L_2$ har ekvationen $ax - 3y + c = 0$. Bestäm $a$ och $c$, eller ange vilka villkor de måste uppfylla, så att linjerna<br>a) är samma linje&emsp;&emsp;b) saknar gemensamma punkter<br>c) har exakt en gemensam punkt, och den punkten är $(0, 3)$`,
+            delsvar: [
+                { del: 'a', value: 6, unit: '', etikett: '$a =$' },
+                { del: 'a', value: 9, unit: '', etikett: '$c =$' },
+                { del: 'b', value: 6, unit: '', etikett: '$a =$' },
+                { del: 'c', value: 9, unit: '', etikett: '$c =$' },
+            ],
+            solution: `**Insikten:** två räta linjer kan ligga på tre sätt. Med samma $k$ och samma $m$ är de samma linje. Med samma $k$ men olika $m$ är de parallella och möts aldrig. Med olika $k$ skär de varandra i exakt en punkt. Skriv $L_2$ i k-form, så kan $k$ och $m$ jämföras direkt.
+
+Vi löser ut $y$ ur $ax - 3y + c = 0$. Subtraherar $ax$ och $c$ i båda led:
+
+$$ ax - 3y + c \\mathbin{\\boldsymbol{-}} \\boldsymbol{ax} \\mathbin{\\boldsymbol{-}} \\boldsymbol{c} = 0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{ax} \\mathbin{\\boldsymbol{-}} \\boldsymbol{c} $$
+
+$$ -3y = -ax - c $$
+
+Dividerar båda led med $-3$:
+
+$$ \\frac{-3y}{\\boldsymbol{-3}} = \\frac{-ax - c}{\\boldsymbol{-3}} $$
+
+$$ y = \\frac{a}{3}x + \\frac{c}{3} $$
+
+$L_2$ har alltså $k = \\dfrac{a}{3}$ och $m = \\dfrac{c}{3}$, medan $L_1$ har $k = 2$ och $m = 3$.
+
+**a)** Samma linje kräver samma $k$ och samma $m$. $\\dfrac{a}{3} = 2$ ger $a = 6$, och $\\dfrac{c}{3} = 3$ ger $c = 9$.
+
+Kontroll: $6x - 3y + 9 = 0$ är $3 \\cdot (2x - y + 3) = 0$, och $2x - y + 3 = 0$ är just $y = 2x + 3$ i allmän form.
+
+**Svar:** $a = 6$ och $c = 9$
+
+**b)** Linjerna saknar gemensamma punkter när de är parallella men inte samma linje: samma $k$, olika $m$. Det kräver $a = 6$ och $\\dfrac{c}{3} \\neq 3$, alltså $c \\neq 9$.
+
+**Svar:** $a = 6$ och $c \\neq 9$
+
+**c)** Exakt en gemensam punkt kräver olika lutning, alltså $a \\neq 6$. Punkten $(0, 3)$ ligger på $L_1$, eftersom $2 \\cdot 0 + 3 = 3$. Den ska också ligga på $L_2$:
+
+$$ a \\cdot 0 - 3 \\cdot 3 + c = 0 $$
+
+$$ -9 + c = 0 $$
+
+Adderar 9 i båda led:
+
+$$ -9 + c \\mathbin{\\boldsymbol{+}} \\boldsymbol{9} = 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{9} $$
+
+$$ c = 9 $$
+
+Värdet på $a$ spelar ingen roll för om $(0, 3)$ ligger på $L_2$, eftersom $x = 0$. Det får vara vilket tal som helst utom 6.
+
+Kontroll med $a = 0$: $L_2$ blir $-3y + 9 = 0$, alltså den vågräta linjen $y = 3$, som skär $L_1$ i $(0, 3)$.
+
+**Svar:** $c = 9$ och $a \\neq 6$
+
+**Generell slutsats:** genom att jämföra $k$ och $m$ avgörs om två linjer sammanfaller (samma $k$ och $m$), är parallella (samma $k$, olika $m$) eller skär varandra i en punkt (olika $k$). Ett problem kan alltså ha en lösning, oändligt många lösningar eller ingen lösning alls.`,
+        },
+        {
+            level: 3,
+            question: `Klassen har $1\\,200$ kr att handla frukt och dryck för till en utflykt. En frukt kostar 15 kr och en dryck 20 kr. Klassen köper $x$ frukter och $y$ drycker och gör av med alla pengar.<br>a) Teckna sambandet mellan $x$ och $y$ som en rät linje i allmän form. Bestäm linjens $k$-värde och tolka det.<br>b) Budgeten höjs med 10 %. Förklara varför den nya linjen är parallell med den gamla, och beräkna hur många fler drycker klassen som mest kan köpa.<br>c) Budgeten är i stället kvar på $1\\,200$ kr, men priset på en dryck stiger med 25 %. Är den nya linjen parallell med den gamla? Bestäm dess $k$-värde.`,
+            answer: { value: 6, unit: 'drycker' },
+            delsvar: [
+                { del: 'a', value: -0.75, unit: '', etikett: '$k =$' },
+                { del: 'b', value: 6, unit: 'drycker' },
+                { del: 'c', value: -0.6, unit: '', etikett: '$k =$' },
+            ],
+            solution: `**Insikten:** det som betalas för frukt plus det som betalas för dryck är hela budgeten. Priserna står framför $x$ och $y$ och avgör lutningen, och budgeten är konstanten. Ändras bara budgeten flyttas linjen parallellt, men ändras ett pris vrids den.
+
+**a)** Frukterna kostar $15x$ kr och dryckerna $20y$ kr, och tillsammans blir det $1\\,200$ kr:
+
+$$ 15x + 20y = 1\\,200 $$
+
+Subtraherar $1\\,200$ i båda led:
+
+$$ 15x + 20y \\mathbin{\\boldsymbol{-}} \\boldsymbol{1\\,200} = 1\\,200 \\mathbin{\\boldsymbol{-}} \\boldsymbol{1\\,200} $$
+
+$$ 15x + 20y - 1\\,200 = 0 $$
+
+För $k$-värdet löser vi ut $y$ ur $15x + 20y = 1\\,200$. Subtraherar $15x$ i båda led:
+
+$$ 15x + 20y \\mathbin{\\boldsymbol{-}} \\boldsymbol{15x} = 1\\,200 \\mathbin{\\boldsymbol{-}} \\boldsymbol{15x} $$
+
+$$ 20y = -15x + 1\\,200 $$
+
+Dividerar båda led med 20:
+
+$$ \\frac{20y}{\\boldsymbol{20}} = \\frac{-15x + 1\\,200}{\\boldsymbol{20}} $$
+
+$$ y = -0{,}75x + 60 $$
+
+$k = -0{,}75$ betyder att varje extra frukt gör att klassen har råd med $0{,}75$ färre drycker. En frukt kostar ju $\\dfrac{15}{20} = 0{,}75$ av en dryck. Med hela tal: 4 frukter till betyder 3 drycker mindre.
+
+**Svar:** $15x + 20y - 1\\,200 = 0$ med $k = -0{,}75$. För varje extra frukt har klassen råd med 0,75 färre drycker.
+
+**b)** Den nya budgeten är $1{,}1 \\cdot 1\\,200 = 1\\,320$ kr, och linjen blir $15x + 20y - 1\\,320 = 0$. Koefficienterna framför $x$ och $y$ är desamma, så $k = -\\dfrac{15}{20} = -0{,}75$ som förut. Linjerna har samma lutning och är parallella. Bara konstanten, och därmed $m$-värdet, har ändrats.
+
+Flest drycker blir det om klassen inte köper någon frukt, $x = 0$. Det är linjens $m$-värde:
+
+$$ \\text{förut:} \\quad \\frac{1\\,200}{20} = 60 \\qquad \\text{nu:} \\quad \\frac{1\\,320}{20} = 66 $$
+
+$$ 66 - 60 = 6 $$
+
+Rimligt? $10\\ \\%$ mer pengar räcker till $10\\ \\%$ fler drycker, och $10\\ \\%$ av 60 är 6.
+
+**Svar:** Linjerna har samma $k$-värde och är därför parallella. Klassen kan köpa som mest 6 fler drycker.
+
+**c)** Det nya dryckespriset är $1{,}25 \\cdot 20 = 25$ kr, och linjen blir $15x + 25y - 1\\,200 = 0$. Vi löser ut $y$. Subtraherar $15x$ och adderar $1\\,200$ i båda led:
+
+$$ 15x + 25y - 1\\,200 \\mathbin{\\boldsymbol{-}} \\boldsymbol{15x} \\mathbin{\\boldsymbol{+}} \\boldsymbol{1\\,200} = 0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{15x} \\mathbin{\\boldsymbol{+}} \\boldsymbol{1\\,200} $$
+
+$$ 25y = -15x + 1\\,200 $$
+
+Dividerar båda led med 25:
+
+$$ \\frac{25y}{\\boldsymbol{25}} = \\frac{-15x + 1\\,200}{\\boldsymbol{25}} $$
+
+$$ y = -0{,}6x + 48 $$
+
+$k = -0{,}6$ skiljer sig från $-0{,}75$, så linjerna är inte parallella. Båda linjerna skär *x*-axeln vid $x = \\dfrac{1\\,200}{15} = 80$, eftersom fruktpriset är detsamma, så den nya linjen har vridits kring den punkten.
+
+**Svar:** Nej, den nya linjen har $k = -0{,}6$ och är inte parallell med den gamla.
+
+**Generell slutsats:** i en budgetlinje $ax + by - c = 0$ bestämmer priserna $a$ och $b$ lutningen och budgeten $c$ läget. En ändrad budget ger en parallell linje, medan ett ändrat pris vrider linjen. Modellen gäller bara för hela, icke-negativa tal $x$ och $y$.`,
         },
     ],
 
@@ -26706,23 +28886,323 @@ $$ f(5) - f(3) = 21 - 13 = 8 $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Sambandet $x = y^2$ ritas upp som en liggande parabel. Ali säger: "Det är en funktion, för varje *y*-värde ger exakt ett *x*-värde." Vad är rätt om vi som vanligt betraktar $y$ som funktion av $x$?`,
-            choices: [
-                `Ingen funktion — till exempel ger $x = 4$ två *y*-värden (2 och −2), så penntestet misslyckas`,
-                `En funktion — Alis motivering håller`,
-                `En funktion — parabler är alltid funktioner`,
-                `Ingen funktion — parabeln går inte genom origo`,
+            question: `$f$ är en linjär funktion där $f(2) = 7$ och $f(5) = -2$.<br>a) Bestäm $f(x)$.<br>b) Lös ekvationen $f(x) = x$ och förklara vad lösningen betyder för grafen.`,
+            answer: { value: 3.25, unit: '' },
+            delsvar: [
+                { del: 'a', value: -3, unit: '', etikett: '$k =$' },
+                { del: 'a', value: 13, unit: '', etikett: '$m =$' },
+                { del: 'b', value: 3.25, unit: '', etikett: '$x =$' },
             ],
-            correct: 0,
-            solution: `**Insikten:** funktionsbegreppet har en riktning — det är X-värdena som ska ge entydiga *y*-värden, inte tvärtom.
+            solution: `**Insikten:** $f(2) = 7$ betyder att punkten $(2, 7)$ ligger på grafen. Två funktionsvärden är alltså två punkter, och två punkter bestämmer en rät linje.
 
-Som samband "$y$ som funktion av $x$" kräver definitionen att varje tillåtet *x*-värde ger EXAKT ETT *y*-värde. Men $x = 4$ ger $y^2 = 4$, det vill säga både $y = 2$ och $y = -2$. En lodrät penna vid $x = 4$ skär den liggande parabeln två gånger — ingen funktion.
+**a)** Grafen går genom $(2, 7)$ och $(5, -2)$. Lutningen är förändringen i *y*-led delad med förändringen i *x*-led:
 
-Ali har i och för sig rätt i att varje y ger exakt ett x — så $x$ ÄR en funktion av $y$. Men det är en annan fråga än den vanliga.
+$$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{-2 - 7}{5 - 2} = \\frac{-9}{3} = -3 $$
 
-**Svar:** Ingen funktion av $x$ — penntestet ger två skärningar (t.ex. $y = \\pm 2$ vid $x = 4$).
+Så $f(x) = -3x + m$. Vi sätter in punkten $(2, 7)$:
 
-**Generell slutsats:** pennan läggs alltid LODRÄTT när $y = f(x)$ prövas. Vilken variabel som är oberoende avgör åt vilket håll entydigheten ska gälla.`,
+$$ 7 = -3 \\cdot 2 + m $$
+
+$$ 7 = -6 + m $$
+
+$$ 7 \\mathbin{\\boldsymbol{+}} \\boldsymbol{6} = -6 + m \\mathbin{\\boldsymbol{+}} \\boldsymbol{6} $$
+
+$$ 13 = m $$
+
+Kontroll med den andra punkten: $f(5) = -3 \\cdot 5 + 13 = -15 + 13 = -2$. Stämmer.
+
+**Svar:** $f(x) = -3x + 13$
+
+**b)** Ekvationen $f(x) = x$ blir
+
+$$ -3x + 13 = x $$
+
+$$ -3x + 13 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3x} = x \\mathbin{\\boldsymbol{+}} \\boldsymbol{3x} $$
+
+$$ 13 = 4x $$
+
+$$ \\frac{13}{\\boldsymbol{4}} = \\frac{4x}{\\boldsymbol{4}} $$
+
+$$ 3{,}25 = x $$
+
+Kontroll: $f(3{,}25) = -3 \\cdot 3{,}25 + 13 = -9{,}75 + 13 = 3{,}25$. Funktionsvärdet är lika med *x*-värdet, precis som ekvationen kräver.
+
+För grafen betyder det att funktionsvärdet är lika med *x*-värdet just där grafen till $f$ skär linjen $y = x$, alltså i punkten $(3{,}25;\\ 3{,}25)$.
+
+**Svar:** $x = 3{,}25$. Där skär grafen till $f$ linjen $y = x$.
+
+**Generell slutsats:** att $f(a) = b$ är samma sak som att punkten $(a, b)$ ligger på grafen. Med två sådana villkor kan en linjär funktion bestämmas helt.`,
+        },
+        {
+            level: 3,
+            question: `Låt $f(x) = 4x - 7$.<br>a) Förenkla $f(a + 3) - f(a)$.<br>b) Visa att $f(a + h) - f(a) = k \\cdot h$ för varje linjär funktion $f(x) = kx + m$, oavsett vilket värde $a$ har.`,
+            answer: { value: 12, unit: '' },
+            delsvar: [
+                { del: 'a', value: 12, unit: '' },
+                { del: 'b' },
+            ],
+            solution: `**Insikten:** i $f(a + 3)$ byts $x$ mot hela uttrycket $a + 3$. Det måste därför stå inom parentes när det sätts in.
+
+**a)** Först funktionsvärdet i $a + 3$:
+
+$$ f(a + 3) = 4(a + 3) - 7 = 4a + 12 - 7 = 4a + 5 $$
+
+Sedan skillnaden. Minustecknet framför parentesen byter tecken på båda termerna i $f(a)$:
+
+$$ f(a + 3) - f(a) = 4a + 5 - (4a - 7) = 4a + 5 - 4a + 7 = 12 $$
+
+Svaret beror inte på $a$. När *x* ökar med 3 ökar funktionsvärdet med $3 \\cdot 4 = 12$, oavsett var man börjar.
+
+Kontroll med $a = 0$: $f(3) - f(0) = 5 - (-7) = 12$.
+
+**Svar:** 12
+
+**b)** Samma räkning med bokstäver i stället för tal:
+
+$$ f(a + h) = k(a + h) + m = ka + kh + m $$
+
+$$ f(a + h) - f(a) = ka + kh + m - (ka + m) = ka + kh + m - ka - m = kh $$
+
+Termerna $ka$ och $m$ tar ut varandra, och kvar blir $k \\cdot h$ för varje värde på $a$. Det är just vad lutningen betyder: ett steg $h$ i *x*-led ger förändringen $k \\cdot h$ i *y*-led.
+
+**Generell slutsats:** för en linjär funktion beror förändringen i funktionsvärde bara på hur långt man går i *x*-led, aldrig på var man börjar. Det är därför grafen blir en rät linje.`,
+        },
+        {
+            level: 3,
+            question: `Funktionerna $f(x) = 2x + a$ och $g(x) = 3 - x$ är givna, där $a$ är en konstant. Bestäm $a$ så att $f(g(2)) = g(f(2))$.`,
+            answer: { value: -1.5, unit: '' },
+            solution: `**Insikten:** ett uttryck som $f(g(2))$ räknas inifrån och ut. Det inre funktionsvärdet blir ett tal eller ett uttryck med $a$, och det sätts sedan in i den yttre funktionen.
+
+**Vänster led:** först $g(2)$, sedan $f$ av resultatet:
+
+$$ g(2) = 3 - 2 = 1 $$
+
+$$ f(g(2)) = f(1) = 2 \\cdot 1 + a = 2 + a $$
+
+**Höger led:** först $f(2)$, sedan $g$ av resultatet:
+
+$$ f(2) = 2 \\cdot 2 + a = 4 + a $$
+
+$$ g(f(2)) = g(4 + a) = 3 - (4 + a) = -1 - a $$
+
+Leden ska vara lika:
+
+$$ 2 + a = -1 - a $$
+
+$$ 2 + a \\mathbin{\\boldsymbol{+}} \\boldsymbol{a} = -1 - a \\mathbin{\\boldsymbol{+}} \\boldsymbol{a} $$
+
+$$ 2 + 2a = -1 $$
+
+$$ 2 + 2a \\mathbin{\\boldsymbol{-}} \\boldsymbol{2} = -1 \\mathbin{\\boldsymbol{-}} \\boldsymbol{2} $$
+
+$$ 2a = -3 $$
+
+$$ \\frac{2a}{\\boldsymbol{2}} = \\frac{-3}{\\boldsymbol{2}} $$
+
+$$ a = -1{,}5 $$
+
+Kontroll med $a = -1{,}5$: $f(g(2)) = f(1) = 2 - 1{,}5 = 0{,}5$. Och $f(2) = 4 - 1{,}5 = 2{,}5$, så $g(f(2)) = g(2{,}5) = 3 - 2{,}5 = 0{,}5$. Båda leden blir 0,5.
+
+**Svar:** $a = -1{,}5$
+
+**Generell slutsats:** $f(g(x))$ och $g(f(x))$ är i allmänhet olika, eftersom ordningen spelar roll. Att de ska bli lika för ett visst *x* är ett villkor, och ett villkor ger en ekvation.`,
+        },
+        {
+            level: 3,
+            question: `Låt $f(x) = 5x - 4$. Elin ska lösa ekvationen $f(2x) = 3 \\cdot f(x) - 2$. Hon skriver $f(2x) = 2 \\cdot f(x) = 10x - 8$ och får lösningen $x = 1{,}2$.<br>a) Vilket misstag gör Elin?<br>b) Lös ekvationen korrekt.`,
+            answer: { value: 2, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 2, unit: '', etikett: '$x =$' },
+            ],
+            solution: `**Insikten:** $f(2x)$ betyder "sätt in $2x$ i stället för $x$", inte "dubbla funktionsvärdet". När funktionen har en konstantterm är det två olika saker.
+
+**a)** Rätt insättning ger
+
+$$ f(2x) = 5 \\cdot 2x - 4 = 10x - 4 $$
+
+Elin har även dubblat konstanttermen $-4$. Ett enkelt tal visar skillnaden: med $x = 1$ är $f(2) = 6$, men $2 \\cdot f(1) = 2 \\cdot 1 = 2$.
+
+**Svar:** Elin tror att $f(2x) = 2 \\cdot f(x)$. Bara *x*-termen ska dubblas, så $f(2x) = 10x - 4$.
+
+**b)** Högerledet:
+
+$$ 3 \\cdot f(x) - 2 = 3(5x - 4) - 2 = 15x - 12 - 2 = 15x - 14 $$
+
+Ekvationen blir
+
+$$ 10x - 4 = 15x - 14 $$
+
+$$ 10x - 4 \\mathbin{\\boldsymbol{-}} \\boldsymbol{10x} = 15x - 14 \\mathbin{\\boldsymbol{-}} \\boldsymbol{10x} $$
+
+$$ -4 = 5x - 14 $$
+
+$$ -4 \\mathbin{\\boldsymbol{+}} \\boldsymbol{14} = 5x - 14 \\mathbin{\\boldsymbol{+}} \\boldsymbol{14} $$
+
+$$ 10 = 5x $$
+
+$$ \\frac{10}{\\boldsymbol{5}} = \\frac{5x}{\\boldsymbol{5}} $$
+
+$$ 2 = x $$
+
+Kontroll: vänster led $f(2 \\cdot 2) = f(4) = 5 \\cdot 4 - 4 = 16$. Höger led $3 \\cdot f(2) - 2 = 3 \\cdot 6 - 2 = 16$. Stämmer.
+
+**Svar:** $x = 2$
+
+**Generell slutsats:** regeln $f(2x) = 2 \\cdot f(x)$ gäller bara proportionella funktioner $f(x) = kx$, där $m = 0$. Är du osäker på om en regel håller: pröva med ett enkelt tal.`,
+        },
+        {
+            level: 3,
+            question: `Kostnaden $K(s)$ kr för en taxiresa på $s$ km är $K(s) = 49 + 14{,}5s$.<br>a) Beräkna $K(12) - K(8)$ och förklara vad talet betyder.<br>b) Ida betalade $339\\ \\mathrm{kr}$ för en resa. Hur lång var resan?<br>c) Ett annat bolag tar $T(s) = 99 + 11s$ kr. Skriv villkoret "resan blir billigare med det andra bolaget" med funktionsbeteckningar, och bestäm för vilka resor det gäller. Avrunda till en decimal.`,
+            answer: { value: 14.3, unit: 'km', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 58, unit: 'kr' },
+                { del: 'b', value: 20, unit: 'km' },
+                { del: 'c', value: 14.3, unit: 'km', tol: 0.01, etikett: '$s >$' },
+            ],
+            solution: `**Insikten:** $K(12)$ är ett tal, kostnaden för en resa på 12 km. Påståenden om kostnader blir därför ekvationer och olikheter mellan funktionsvärden.
+
+**a)** Funktionsvärdena var för sig:
+
+$$ K(12) = 49 + 14{,}5 \\cdot 12 = 49 + 174 = 223 $$
+
+$$ K(8) = 49 + 14{,}5 \\cdot 8 = 49 + 116 = 165 $$
+
+$$ K(12) - K(8) = 223 - 165 = 58 $$
+
+Startavgiften 49 kr finns med i båda och tar ut sig. Kvar blir kostnaden för de 4 kilometrarna mellan 8 och 12 km: $4 \\cdot 14{,}5 = 58$.
+
+**Svar:** $58\\ \\mathrm{kr}$, det som de fyra extra kilometrarna kostar när resan blir 12 km i stället för 8 km.
+
+**b)** Vi söker $s$ så att $K(s) = 339$:
+
+$$ 49 + 14{,}5s = 339 $$
+
+$$ 49 + 14{,}5s \\mathbin{\\boldsymbol{-}} \\boldsymbol{49} = 339 \\mathbin{\\boldsymbol{-}} \\boldsymbol{49} $$
+
+$$ 14{,}5s = 290 $$
+
+$$ \\frac{14{,}5s}{\\boldsymbol{14{,}5}} = \\frac{290}{\\boldsymbol{14{,}5}} $$
+
+$$ s = 20 $$
+
+Kontroll: $K(20) = 49 + 14{,}5 \\cdot 20 = 49 + 290 = 339$.
+
+**Svar:** $20\\ \\mathrm{km}$
+
+**c)** "Billigare med det andra bolaget" betyder $T(s) < K(s)$:
+
+$$ 99 + 11s < 49 + 14{,}5s $$
+
+$$ 99 + 11s \\mathbin{\\boldsymbol{-}} \\boldsymbol{11s} < 49 + 14{,}5s \\mathbin{\\boldsymbol{-}} \\boldsymbol{11s} $$
+
+$$ 99 < 49 + 3{,}5s $$
+
+$$ 99 \\mathbin{\\boldsymbol{-}} \\boldsymbol{49} < 49 + 3{,}5s \\mathbin{\\boldsymbol{-}} \\boldsymbol{49} $$
+
+$$ 50 < 3{,}5s $$
+
+$$ \\frac{50}{\\boldsymbol{3{,}5}} < \\frac{3{,}5s}{\\boldsymbol{3{,}5}} $$
+
+$$ 14{,}28\\ldots < s $$
+
+Kontroll med ett tal på var sida: $s = 10$ ger $T(10) = 209$ och $K(10) = 194$, så där är det första bolaget billigast. $s = 20$ ger $T(20) = 319$ och $K(20) = 339$, så där är det andra bolaget billigast.
+
+Rimligt? Det andra bolaget har högre startavgift men lägre pris per kilometer, så det lönar sig först på långa resor.
+
+**Svar:** $T(s) < K(s)$. Det gäller för resor längre än cirka $14{,}3\\ \\mathrm{km}$.
+
+**Generell slutsats:** med funktionsbeteckningar kan ett påstående i ord skrivas kort och exakt, och sedan lösas som en vanlig ekvation eller olikhet.`,
+        },
+        {
+            level: 3,
+            question: `En rektangel har omkretsen $20\\ \\mathrm{cm}$. Den ena sidan är $x$ cm.<br>a) Skriv rektangelns area $A(x)\\ \\mathrm{cm^2}$ som en funktion av $x$.<br>b) Beräkna $A(3)$ och $A(7)$, och förklara varför de blir lika.<br>c) Ange två lösningar till ekvationen $A(x) = 21$ utan att räkna, och förklara varför ekvationen $A(x) = 30$ saknar lösning.`,
+            answer: { value: 21, unit: 'cm²' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 21, unit: 'cm²', etikett: '$A(3) = A(7) =$' },
+                { del: 'c', values: [3, 7], unit: '', etikett: '$x =$' },
+            ],
+            solution: `**Insikten:** två olika *x*-värden kan ge samma funktionsvärde. En funktion kräver bara att varje *x* ger ett enda *y*, inte att varje *y* kommer från ett enda *x*.
+
+**a)** Kalla den andra sidan $y$ cm. Omkretsen är två sidor av varje slag:
+
+$$ 2x + 2y = 20 $$
+
+$$ \\frac{2x + 2y}{\\boldsymbol{2}} = \\frac{20}{\\boldsymbol{2}} $$
+
+$$ x + y = 10 $$
+
+$$ x + y \\mathbin{\\boldsymbol{-}} \\boldsymbol{x} = 10 \\mathbin{\\boldsymbol{-}} \\boldsymbol{x} $$
+
+$$ y = 10 - x $$
+
+Arean är bredd gånger längd:
+
+$$ A(x) = x(10 - x) $$
+
+Båda sidorna måste vara positiva, så funktionen gäller för $0 < x < 10$.
+
+**Svar:** $A(x) = x(10 - x)$
+
+**b)**
+
+$$ A(3) = 3(10 - 3) = 3 \\cdot 7 = 21 $$
+
+$$ A(7) = 7(10 - 7) = 7 \\cdot 3 = 21 $$
+
+Med $x = 3$ blir den andra sidan 7 cm, och med $x = 7$ blir den andra sidan 3 cm. Det är samma rektangel, bara vriden ett kvarts varv.
+
+**Svar:** $A(3) = A(7) = 21$. Båda ger en rektangel med sidorna 3 cm och 7 cm.
+
+**c)** Enligt b ger både $x = 3$ och $x = 7$ arean 21.
+
+För att se hur stor arean kan bli skriver vi sidorna som $5 + d$ och $5 - d$, eftersom de tillsammans ska vara 10. Arean blir
+
+$$ (5 + d)(5 - d) = 25 - 5d + 5d - d^2 = 25 - d^2 $$
+
+Talet $d^2$ är aldrig negativt, så arean är högst 25, och störst när $d = 0$, alltså för kvadraten med sidan 5 cm. Arean 30 går inte att få.
+
+Kontroll med $d = 2$: sidorna 7 cm och 3 cm ger $25 - 4 = 21$, samma som i b.
+
+**Svar:** $x = 3$ och $x = 7$. $A(x) = 30$ saknar lösning eftersom arean aldrig blir större än $25\\ \\mathrm{cm^2}$.
+
+**Generell slutsats:** en ekvation $f(x) = c$ kan ha flera lösningar, en lösning eller ingen alls. Det avgörs av vilka funktionsvärden funktionen faktiskt kan anta.`,
+        },
+        {
+            level: 3,
+            question: `Temperaturen i en kopp te är $T(t)$ °C, där $t$ är tiden i minuter efter att teet hälldes upp.<br>a) Skriv påståendet "efter en kvart är teet 20 grader varmare än efter en halvtimme" med funktionsbeteckningar.<br>b) Förklara i ord vad olikheten $T(t + 1) < T(t)$ betyder.<br>c) En modell för temperaturen är $T(t) = 20 + 70 \\cdot 0{,}95^t$. Stämmer påståendet i a enligt modellen?`,
+            answer: { value: 17.4, unit: '°C', tol: 0.01 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 17.4, unit: '°C', tol: 0.01, etikett: '$T(15) - T(30) \\approx$' },
+            ],
+            solution: `**Insikten:** $T(15)$ är ett tal, temperaturen 15 minuter efter att teet hälldes upp. Varje påstående om temperaturer vid bestämda tider blir därför ett samband mellan funktionsvärden.
+
+**a)** En kvart är $t = 15$ och en halvtimme är $t = 30$. Temperaturen efter en kvart är 20 grader högre:
+
+**Svar:** $T(15) = T(30) + 20$
+
+**b)** $T(t + 1)$ är temperaturen en minut efter tidpunkten $t$. Olikheten säger att den alltid är lägre än temperaturen vid $t$.
+
+**Svar:** Teet blir kallare för varje minut som går.
+
+**c)** Vi sätter in $t = 15$ och $t = 30$ i modellen:
+
+$$ T(15) = 20 + 70 \\cdot 0{,}95^{15} = 20 + 70 \\cdot 0{,}4632\\ldots = 52{,}43\\ldots $$
+
+$$ T(30) = 20 + 70 \\cdot 0{,}95^{30} = 20 + 70 \\cdot 0{,}2146\\ldots = 35{,}02\\ldots $$
+
+$$ T(15) - T(30) \\approx 52{,}43 - 35{,}02 = 17{,}41 $$
+
+Skillnaden är cirka 17 grader, inte 20.
+
+Rimligt? Under den första kvarten sjunker temperaturen från $T(0) = 90$ till cirka 52, alltså med cirka 38 grader. Ju närmare rumstemperaturen 20 °C teet kommer, desto långsammare svalnar det, så den andra kvarten ger en mindre sänkning.
+
+**Svar:** Nej. Enligt modellen är teet cirka 17,4 grader varmare efter en kvart än efter en halvtimme.
+
+**Generell slutsats:** funktionsbeteckningen gör det möjligt att skriva ett påstående exakt och sedan pröva det mot en modell. Samma påstående kan vara sant i en modell och falskt i en annan.`,
         },
     ],
 
@@ -26806,23 +29286,239 @@ $$ x < 3 $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Tim löser $4x - 2 = x + 7$ grafiskt och läser av skärningspunkten till (3, 10). Som svar skriver han "$x = 10$". Läraren ger honom fel. Vad blandade Tim ihop, och vad är rätt svar?`,
-            choices: [
-                `Han svarade med *y*-koordinaten; lösningen är *x*-koordinaten, $x = 3$`,
-                `Han läste av fel punkt; lösningen är $x = 10$`,
-                `Grafisk lösning fungerar inte på denna ekvation`,
-                `Båda koordinaterna är lösningar`,
+            question: `a) Lös ekvationen $2^x = x + 3$ med grafritande hjälpmedel. Svara med två decimaler.<br>b) Förklara med hjälp av graferna varför ekvationen $2^x = x$ saknar lösning.`,
+            answer: { value: 2.44, unit: '', tol: 0.01 },
+            delsvar: [
+                { del: 'a', values: [-2.86, 2.44], unit: '', tol: 0.01, etikett: '$x \\approx$' },
+                { del: 'b' },
             ],
-            correct: 0,
-            solution: `**Insikten:** skärningspunkten innehåller TVÅ tal med olika betydelse — bara det ena är ekvationens lösning.
+            solution: `**Insikten:** här står *x* både i en exponent och i en vanlig term. De går inte att samla på samma sida med balansmetoden, men graferna kan alltid ritas. Graferna visar dessutom hur många lösningar det finns.
 
-*x*-koordinaten 3 är det värde på $x$ som gör VL = HL. *y*-koordinaten 10 är ledens gemensamma VÄRDE i den punkten: $4 \\cdot 3 - 2 = 10$ och $3 + 7 = 10$.
+**a)** VL $= 2^x$ och HL $= x + 3$. I GeoGebra skriver vi \`y = 2^x\` och \`y = x + 3\`. Kurvan och linjen skär varandra i två punkter. Med verktyget *Skärning mellan två objekt* får vi
 
-Kontroll av rätt svar: $x = 3$ ger $4 \\cdot 3 - 2 = 10 = 3 + 7$ — stämmer. Tims "$x = 10$" ger $4 \\cdot 10 - 2 = 38 \\neq 17$ — fel.
+$$ (-2{,}86;\\ 0{,}14) \\qquad \\text{och} \\qquad (2{,}44;\\ 5{,}44) $$
 
-**Svar:** Tim svarade med *y*-koordinaten. Rätt svar är $x = 3$.
+Lösningarna är skärningspunkternas *x*-koordinater.
 
-**Generell slutsats:** vid grafisk lösning är frågan alltid "för vilket $x$?" — läs av vågrätt läge (*x*-koordinaten), aldrig höjden.`,
+Kontroll genom insättning: $x = -2{,}86$ ger VL $= 2^{-2{,}86} \\approx 0{,}138$ och HL $= -2{,}86 + 3 = 0{,}14$. $x = 2{,}44$ ger VL $= 2^{2{,}44} \\approx 5{,}43$ och HL $= 2{,}44 + 3 = 5{,}44$. Leden är nästan lika, och den lilla skillnaden kommer av avrundningen.
+
+**Svar:** $x \\approx -2{,}86$ och $x \\approx 2{,}44$
+
+**b)** Vi ritar \`y = 2^x\` och \`y = x\`. Kurvan ligger hela tiden ovanför linjen och skär den aldrig. För negativa *x* är $2^x$ positivt medan $x$ är negativt. För positiva *x* börjar kurvan högre ($2^0 = 1$ medan linjen går genom origo) och växer dessutom snabbare: $2^1 = 2 > 1$, $2^2 = 4 > 2$, $2^3 = 8 > 3$.
+
+**Svar:** Graferna till $y = 2^x$ och $y = x$ har ingen skärningspunkt, eftersom kurvan alltid ligger ovanför linjen.
+
+**Generell slutsats:** en grafisk lösning fungerar även när algebran inte räcker till. Avläsningen ger närmevärden, och därför ska svaret alltid kontrolleras genom insättning.`,
+        },
+        {
+            level: 3,
+            question: `Staden Alby har $24\\,000$ invånare och ökar med $600$ invånare per år. Staden Borg har $18\\,000$ invånare och ökar med $3{,}5\\ \\%$ per år.<br>a) Ställ upp en ekvation för när städerna har lika många invånare, och lös den grafiskt. Avrunda till en decimal.<br>b) Hur många invånare har städerna då? Avrunda till hundratal.<br>c) Hur säkert är svaret i a? Resonera kring modellerna.`,
+            answer: { value: 20.3, unit: 'år', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 20.3, unit: 'år', tol: 0.01, etikett: '$x \\approx$' },
+                { del: 'b', value: 36200, unit: 'invånare', tol: 0.01 },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** Alby växer med samma antal varje år (linjärt), Borg med samma procent varje år (exponentiellt). Den exponentiella ökningen blir större för varje år och kommer förr eller senare ikapp.
+
+**a)** Efter $x$ år har Alby $24\\,000 + 600x$ invånare och Borg $18\\,000 \\cdot 1{,}035^x$ invånare. Ekvationen är
+
+$$ 18\\,000 \\cdot 1{,}035^x = 24\\,000 + 600x $$
+
+I GeoGebra skriver vi \`y = 18000*1.035^x\` och \`y = 24000 + 600x\` (decimalpunkt, inget mellanslag i talen). Vi zoomar ut tills skärningspunkten syns och tar fram den med *Skärning mellan två objekt*. Den hamnar vid $x = 20{,}29\\ldots$
+
+Kontroll med en tabell: efter 20 år har Alby $24\\,000 + 600 \\cdot 20 = 36\\,000$ invånare och Borg $18\\,000 \\cdot 1{,}035^{20} \\approx 35\\,816$. Efter 21 år har Alby $36\\,600$ och Borg $18\\,000 \\cdot 1{,}035^{21} \\approx 37\\,070$. Borg går alltså om Alby under det 21:a året, vilket stämmer med $x \\approx 20{,}3$.
+
+**Svar:** $18\\,000 \\cdot 1{,}035^x = 24\\,000 + 600x$, som ger $x \\approx 20{,}3$ år.
+
+**b)** Skärningspunktens *y*-koordinat är det gemensamma invånarantalet:
+
+$$ 24\\,000 + 600 \\cdot 20{,}29 \\approx 36\\,170 $$
+
+**Svar:** Cirka $36\\,200$ invånare
+
+**c)** Båda modellerna antar att utvecklingen är densamma i mer än 20 år, och det är osannolikt för en stad. Svaret är dessutom känsligt för procentsatsen: med $3{,}0\\ \\%$ i stället för $3{,}5\\ \\%$ ger samma metod cirka 27 år, och med $4{,}0\\ \\%$ cirka 16 år. En halv procentenhet flyttar alltså svaret flera år.
+
+**Svar:** Svaret är osäkert. Modellerna förutsätter oförändrad tillväxt i över 20 år, och en liten ändring av procentsatsen ändrar svaret med flera år.
+
+**Generell slutsats:** ekvationer där *x* står både i en exponent och utanför löses grafiskt. Svaret är aldrig säkrare än modellerna det bygger på.`,
+        },
+        {
+            level: 3,
+            question: `Lös olikheten $0{,}5x + 1 > 4 - x^2$ med grafritande hjälpmedel. Kontrollera svaret genom att pröva ett tal i varje del av tallinjen.`,
+            solution: `**Insikten:** olikheten frågar var linjen $y = 0{,}5x + 1$ ligger *ovanför* kurvan $y = 4 - x^2$. Kurvan är en parabel, och den kan skära linjen i två punkter. Då kan svaret bestå av två skilda delar av tallinjen.
+
+I GeoGebra skriver vi \`y = 0.5x + 1\` och \`y = 4 - x^2\`. Parabeln har sin topp i $(0, 4)$ och linjen skär den i två punkter, som vi tar fram med *Skärning mellan två objekt*:
+
+$$ (-2,\\ 0) \\qquad \\text{och} \\qquad (1{,}5;\\ 1{,}75) $$
+
+Kontroll av skärningspunkterna: $x = -2$ ger VL $= 0{,}5 \\cdot (-2) + 1 = 0$ och HL $= 4 - (-2)^2 = 4 - 4 = 0$. $x = 1{,}5$ ger VL $= 0{,}5 \\cdot 1{,}5 + 1 = 1{,}75$ och HL $= 4 - 1{,}5^2 = 4 - 2{,}25 = 1{,}75$. Avläsningen är alltså exakt.
+
+Mellan skärningspunkterna ligger parabeln ovanför linjen. Utanför dem ligger linjen ovanför parabeln, och där gäller olikheten. Själva skärningspunkterna ingår inte, eftersom VL ska vara *större än* HL och inte lika med.
+
+Prövning med ett tal i varje del:
+
+- $x = -3$: VL $= 0{,}5 \\cdot (-3) + 1 = -0{,}5$ och HL $= 4 - 9 = -5$. Eftersom $-0{,}5 > -5$ gäller olikheten.
+- $x = 0$: VL $= 1$ och HL $= 4$. Eftersom $1 < 4$ gäller den inte.
+- $x = 2$: VL $= 0{,}5 \\cdot 2 + 1 = 2$ och HL $= 4 - 4 = 0$. Eftersom $2 > 0$ gäller olikheten.
+
+**Svar:** $x < -2$ eller $x > 1{,}5$
+
+**Generell slutsats:** vid en grafisk olikhet avgör skärningspunkterna var gränserna går, och grafernas lägen avgör på vilka sidor olikheten gäller. Ett provtal i varje del bekräftar svaret.`,
+        },
+        {
+            level: 3,
+            question: `Ekvationen $4 - x^2 = k$, där $k$ är en konstant, ska lösas grafiskt.<br>a) Hur många lösningar har ekvationen för olika värden på $k$?<br>b) Bestäm $k$ så att ekvationen har två lösningar som ligger på avståndet 6 från varandra.`,
+            answer: { value: -5, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: -5, unit: '', etikett: '$k =$' },
+            ],
+            solution: `**Insikten:** HL $= k$ ger grafen $y = k$, en vågrät linje. Att ändra $k$ flyttar linjen upp och ned, och antalet lösningar är antalet gånger linjen skär parabeln.
+
+**a)** I GeoGebra skriver vi \`y = 4 - x^2\` och \`y = k\`. GeoGebra skapar då en glidare för $k$, och vi kan dra i den och se vad som händer. Parabeln har sin högsta punkt i $(0, 4)$.
+
+- Är $k < 4$ ligger linjen under toppen och skär parabeln två gånger.
+- Är $k = 4$ nuddar linjen bara toppen, och $x = 0$ är den enda lösningen.
+- Är $k > 4$ ligger linjen ovanför hela parabeln och skär den aldrig.
+
+**Svar:** Två lösningar om $k < 4$, en lösning om $k = 4$ och ingen lösning om $k > 4$.
+
+**b)** Parabeln är symmetrisk kring *y*-axeln, så de två lösningarna ligger lika långt från 0 på var sin sida. Avståndet 6 ger lösningarna $x = -3$ och $x = 3$. Vi sätter in $x = 3$ i VL:
+
+$$ k = 4 - 3^2 = 4 - 9 = -5 $$
+
+Kontroll: ekvationen $4 - x^2 = -5$ löses så här.
+
+$$ 4 - x^2 \\mathbin{\\boldsymbol{+}} \\boldsymbol{x^2} = -5 \\mathbin{\\boldsymbol{+}} \\boldsymbol{x^2} $$
+
+$$ 4 = -5 + x^2 $$
+
+$$ 4 \\mathbin{\\boldsymbol{+}} \\boldsymbol{5} = -5 + x^2 \\mathbin{\\boldsymbol{+}} \\boldsymbol{5} $$
+
+$$ 9 = x^2 $$
+
+$$ x = \\pm\\sqrt{9} $$
+
+$$ x = \\pm 3 $$
+
+Lösningarna $-3$ och $3$ ligger på avståndet 6 från varandra.
+
+**Svar:** $k = -5$
+
+**Generell slutsats:** en ekvation med en parameter undersöks bäst grafiskt, med en glidare. Antalet lösningar är antalet skärningspunkter, och det kan ändras när grafen flyttas förbi en topp.`,
+        },
+        {
+            level: 3,
+            question: `En boll kastas rakt uppåt. Bollens höjd över marken är $h(t)$ meter efter $t$ sekunder, där $h(t) = 1{,}8 + 12t - 4{,}91t^2$.<br>a) Hur skriver du in funktionen i GeoGebra, och varför?<br>b) Vid vilka tidpunkter är bollen $6\\ \\mathrm{m}$ över marken? Svara med två decimaler.<br>c) Hur länge är bollen högre än $6\\ \\mathrm{m}$ över marken? Svara med två decimaler.`,
+            answer: { value: 1.60, unit: 's', tol: 0.01 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', values: [0.42, 2.02], unit: 's', tol: 0.01, etikett: '$t \\approx$' },
+                { del: 'c', value: 1.60, unit: 's', tol: 0.01 },
+            ],
+            solution: `**Insikten:** frågan "när är bollen 6 m upp?" är ekvationen $h(t) = 6$. Bollen passerar den höjden två gånger, en gång på väg upp och en gång på väg ned.
+
+**a)** I grafiska lösningar förstår GeoGebra bara variablerna $x$ och $y$, och decimaltal skrivs med punkt.
+
+**Svar:** \`y = 1.8 + 12x - 4.91x^2\`, eftersom $t$ måste bytas mot $x$, $h$ mot $y$ och decimalkomma mot punkt.
+
+**b)** Vi ritar även \`y = 6\` och tar fram skärningspunkterna med *Skärning mellan två objekt*:
+
+$$ (0{,}42;\\ 6) \\qquad \\text{och} \\qquad (2{,}02;\\ 6) $$
+
+*x*-koordinaterna är tiderna, eftersom $x$ står för $t$.
+
+Kontroll: $h(0{,}42) = 1{,}8 + 12 \\cdot 0{,}42 - 4{,}91 \\cdot 0{,}42^2 \\approx 5{,}97$ och $h(2{,}02) = 1{,}8 + 12 \\cdot 2{,}02 - 4{,}91 \\cdot 2{,}02^2 \\approx 6{,}01$. Båda ligger mycket nära 6, och skillnaden kommer av avrundningen.
+
+**Svar:** Efter cirka $0{,}42\\ \\mathrm{s}$ och efter cirka $2{,}02\\ \\mathrm{s}$
+
+**c)** Mellan de två tidpunkterna ligger kurvan ovanför linjen $y = 6$. Vi räknar med de oavrundade värdena från GeoGebra:
+
+$$ 2{,}020\\ldots - 0{,}423\\ldots \\approx 1{,}60 $$
+
+Rimligt? Bollen når högsta punkten mitt emellan, vid cirka 1,2 s, och tillbringar lika lång tid på väg upp från 6 m som på väg ned till 6 m.
+
+**Svar:** Cirka $1{,}60\\ \\mathrm{s}$
+
+**Generell slutsats:** när en modell använder andra bokstäver än $x$ och $y$ byts de ut vid inmatningen och tolkas tillbaka i svaret. Svara alltid i modellens egna storheter, här sekunder.`,
+        },
+        {
+            level: 3,
+            question: `Moa ska lösa ekvationen $3(x - 2) + x = 4x - 6$ grafiskt. När hon ritar båda leden i GeoGebra ser hon bara en enda linje och ingen skärningspunkt. Hon drar slutsatsen att ekvationen saknar lösning.<br>a) Har Moa rätt? Förklara.<br>b) Högerledet ändras till $4x + 1$. Vad visar graferna nu, och vad betyder det för ekvationen?<br>c) Högerledet ändras i stället till $ax - 6$, där $a$ är en konstant. För vilka värden på $a$ har ekvationen exakt en lösning, och vilken är lösningen?`,
+            answer: { value: 0, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 0, unit: '', etikett: '$x =$' },
+            ],
+            solution: `**Insikten:** att graferna ser ut som en enda linje betyder att de ligger *ovanpå* varandra. Då är varje punkt på linjen en skärningspunkt.
+
+**a)** Vi förenklar VL:
+
+$$ 3(x - 2) + x = 3x - 6 + x = 4x - 6 $$
+
+VL och HL är alltså samma uttryck, och linjerna $y = 4x - 6$ sammanfaller. Varje *x* gör leden lika.
+
+Kontroll med $x = 10$: VL $= 3 \\cdot 8 + 10 = 34$ och HL $= 4 \\cdot 10 - 6 = 34$.
+
+**Svar:** Nej. Linjerna sammanfaller, så ekvationen har oändligt många lösningar: alla *x* är lösningar.
+
+**b)** Nu ritas $y = 4x - 6$ och $y = 4x + 1$. De har samma lutning, $k = 4$, men olika *m*-värden, så de är parallella och skär aldrig varandra. Algebraiskt syns det också: $4x - 6 = 4x + 1$ ger efter subtraktion med $4x$ i båda led $-6 = 1$, vilket aldrig stämmer.
+
+**Svar:** Graferna är två parallella linjer utan skärningspunkt, så ekvationen saknar lösning.
+
+**c)** VL är fortfarande $4x - 6$, och HL är $ax - 6$. Båda linjerna har *m*-värdet $-6$, så de går genom samma punkt $(0, -6)$ på *y*-axeln. Har de olika lutning, alltså $a \\neq 4$, skär de varandra precis där och ingen annanstans. Är $a = 4$ sammanfaller de som i a.
+
+Kontroll med $x = 0$: VL $= 3 \\cdot (0 - 2) + 0 = -6$ och HL $= a \\cdot 0 - 6 = -6$, oavsett värdet på $a$.
+
+**Svar:** Exakt en lösning när $a \\neq 4$, och lösningen är alltid $x = 0$.
+
+**Generell slutsats:** två räta linjer kan skära varandra i en punkt (en lösning), vara parallella (ingen lösning) eller sammanfalla (oändligt många lösningar). Grafen visar direkt vilket fall det är.`,
+        },
+        {
+            level: 3,
+            question: `Ekvationen $ax - 3 = 7 - 2x$, där $a$ är en konstant, löses grafiskt. Linjerna $y = ax - 3$ och $y = 7 - 2x$ skär varandra i en punkt med *y*-koordinaten 3.<br>a) Bestäm ekvationens lösning.<br>b) Bestäm $a$.`,
+            answer: { value: 3, unit: '' },
+            delsvar: [
+                { del: 'a', value: 2, unit: '', etikett: '$x =$' },
+                { del: 'b', value: 3, unit: '', etikett: '$a =$' },
+            ],
+            solution: `**Insikten:** i skärningspunkten har båda leden samma värde, och det värdet är skärningspunktens *y*-koordinat. Den linje vi känner helt kan då ge *x*-koordinaten, alltså lösningen.
+
+**a)** Skärningspunkten ligger på linjen $y = 7 - 2x$ och har $y = 3$:
+
+$$ 7 - 2x = 3 $$
+
+$$ 7 - 2x \\mathbin{\\boldsymbol{-}} \\boldsymbol{7} = 3 \\mathbin{\\boldsymbol{-}} \\boldsymbol{7} $$
+
+$$ -2x = -4 $$
+
+$$ \\frac{-2x}{\\boldsymbol{-2}} = \\frac{-4}{\\boldsymbol{-2}} $$
+
+$$ x = 2 $$
+
+Skärningspunkten är $(2, 3)$, och lösningen är dess *x*-koordinat.
+
+**Svar:** $x = 2$
+
+**b)** Punkten $(2, 3)$ ligger även på linjen $y = ax - 3$:
+
+$$ 3 = a \\cdot 2 - 3 $$
+
+$$ 3 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3} = 2a - 3 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3} $$
+
+$$ 6 = 2a $$
+
+$$ \\frac{6}{\\boldsymbol{2}} = \\frac{2a}{\\boldsymbol{2}} $$
+
+$$ 3 = a $$
+
+Kontroll: med $a = 3$ är ekvationen $3x - 3 = 7 - 2x$. Insättning av $x = 2$ ger VL $= 3 \\cdot 2 - 3 = 3$ och HL $= 7 - 2 \\cdot 2 = 3$. Leden är lika, och båda är 3, precis som *y*-koordinaten.
+
+**Svar:** $a = 3$
+
+**Generell slutsats:** skärningspunktens *y*-koordinat är inte lösningen, men den är det gemensamma värdet för båda leden. Det kan användas baklänges för att bestämma en okänd konstant.`,
         },
     ],
 
@@ -26912,29 +29608,271 @@ $$ -3 < x \\leq 5 $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Funktionen $f(x) = 4 - x^2$ har definitionsmängden $-1 < x \\leq 2$. Malte resonerar: "Värdemängden får jag genom att sätta in ändpunkterna: $f(-1) = 3$ och $f(2) = 0$, alltså $0 \\leq y < 3$." Vad missar Malte?`,
-            choices: [
-                `Ingenting — värdemängden är $0 \\leq y < 3$`,
-                `Att båda ändpunkterna alltid ingår i värdemängden`,
-                `Att värdemängden alltid är samma som definitionsmängden`,
-                `Funktionens topp ligger INUTI intervallet: $f(0) = 4$, så värdemängden är $0 \\leq y \\leq 4$`,
+            question: `En hage ska ha formen av en rektangel med arean $48\\ \\mathrm{m^2}$. Hagens bredd är $x$ m och dess längd är $y$ m. Båda sidorna ska vara minst $4\\ \\mathrm{m}$, och längden ska vara minst lika stor som bredden.<br>a) Skriv $y$ som en funktion av $x$.<br>b) Bestäm funktionens definitionsmängd. Svara exakt och med en decimal.<br>c) Bestäm funktionens värdemängd.`,
+            answer: { value: 6.9, unit: 'm', tol: 0.01 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 6.9, unit: 'm', tol: 0.01, etikett: 'största bredden' },
+                { del: 'c', value: 6.9, unit: 'm', tol: 0.01, etikett: 'minsta längden' },
+                { del: 'c', value: 12, unit: 'm', etikett: 'största längden' },
             ],
-            correct: 3,
-            solution: `**Insikten:** ändpunkterna räcker bara när funktionen är växande eller avtagande i HELA intervallet — en topp eller dal inuti kan ge större eller mindre värden.
+            solution: `**Insikten:** definitionsmängden bestäms av *alla* villkor tillsammans. Varje villkor ger en gräns för $x$, och det är den skarpaste gränsen åt varje håll som gäller.
 
-$f(x) = 4 - x^2$ har sitt största värde i $x = 0$ (mitt i intervallet):
+**a)** Arean är bredd gånger längd:
 
-$$ f(0) = 4 $$
+$$ x \\cdot y = 48 $$
 
-Grafen stiger från den tomma ringen vid $(-1, 3)$ upp till toppen $(0, 4)$ och faller sedan till den ifyllda punkten $(2, 0)$. Alla värden mellan 0 och 4 antas — även de mellan 3 och 4, och toppvärdet 4 nås (ty $x = 0$ ingår). Minsta värdet 0 nås vid $x = 2$ (ifylld).
+$$ \\frac{x \\cdot y}{\\boldsymbol{x}} = \\frac{48}{\\boldsymbol{x}} $$
 
-$$ \\text{Värdemängd: } 0 \\leq y \\leq 4 $$
+$$ y = \\frac{48}{x} $$
 
-(Att $y = 3$ inte nås i just $x = -1$ spelar ingen roll — värdet 3 antas även vid $x = 1$.)
+**Svar:** $y = \\dfrac{48}{x}$
 
-**Svar:** Toppen $f(0) = 4$ ligger i intervallet — värdemängden är $0 \\leq y \\leq 4$.
+**b)** Villkoren översatta till *x*:
 
-**Generell slutsats:** bestäm värdemängden ur GRAFEN (lägsta och högsta punkt som faktiskt nås), inte enbart ur ändpunkterna.`,
+- Bredden minst 4 m: $x \\geq 4$.
+- Längden minst lika stor som bredden: $\\dfrac{48}{x} \\geq x$. Vi multiplicerar båda led med det positiva talet $x$ och får $48 \\geq x^2$. Det största tillåtna *x* är alltså $\\sqrt{48} = 6{,}92\\ldots$, då hagen är en kvadrat.
+- Längden minst 4 m: $\\dfrac{48}{x} \\geq 4$ ger $x \\leq 12$. Den gränsen är svagare än $x \\leq \\sqrt{48}$ och påverkar inte svaret.
+
+Kontroll med en bredd inne i intervallet: $x = 6$ ger $y = \\dfrac{48}{6} = 8$, och både $6 \\geq 4$ och $8 \\geq 6$ stämmer. Med $x = 8$ blir $y = 6$, och då är längden kortare än bredden.
+
+**Svar:** $4 \\leq x \\leq \\sqrt{48}$, det vill säga ungefär $4 \\leq x \\leq 6{,}9$
+
+**c)** Ju bredare hagen är, desto kortare blir den, så det största *y* hör till det minsta *x* och tvärtom:
+
+$$ x = 4 \\text{ ger } y = \\frac{48}{4} = 12 $$
+
+$$ x = \\sqrt{48} \\text{ ger } y = \\frac{48}{\\sqrt{48}} = \\sqrt{48} $$
+
+Den sista likheten gäller eftersom $\\sqrt{48} \\cdot \\sqrt{48} = 48$: i kvadraten är längden lika med bredden.
+
+**Svar:** $\\sqrt{48} \\leq y \\leq 12$, det vill säga ungefär $6{,}9 \\leq y \\leq 12$
+
+**Generell slutsats:** i en tillämpning sätter sammanhanget gränserna för definitionsmängden. Skriv först varje villkor som en olikhet för *x*, och välj sedan de skarpaste gränserna.`,
+        },
+        {
+            level: 3,
+            question: `En linjär funktion $f(x) = kx + m$ har definitionsmängden $2 \\leq x \\leq 6$ och värdemängden $-1 \\leq y \\leq 7$.<br>a) Bestäm $f(x)$ om funktionen är avtagande.<br>b) Hur många linjära funktioner har denna definitionsmängd och värdemängd? Motivera.`,
+            answer: { value: 2, unit: '' },
+            delsvar: [
+                { del: 'a', value: -2, unit: '', etikett: '$k =$' },
+                { del: 'a', value: 11, unit: '', etikett: '$m =$' },
+                { del: 'b', value: 2, unit: '', etikett: 'antal' },
+            ],
+            solution: `**Insikten:** grafen till en linjär funktion är en sträcka som hela tiden stiger eller hela tiden faller. Dess ändpunkter måste därför ligga i värdemängdens ändar: lägsta och högsta *y* nås i definitionsmängdens ändar.
+
+**a)** En avtagande funktion har sitt största värde till vänster. Alltså är $f(2) = 7$ och $f(6) = -1$, och grafen går genom $(2, 7)$ och $(6, -1)$. Lutningen är förändringen i *y*-led delad med förändringen i *x*-led:
+
+$$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{-1 - 7}{6 - 2} = \\frac{-8}{4} = -2 $$
+
+Vi sätter in punkten $(2, 7)$ i $f(x) = -2x + m$:
+
+$$ 7 = -2 \\cdot 2 + m $$
+
+$$ 7 = -4 + m $$
+
+$$ 7 \\mathbin{\\boldsymbol{+}} \\boldsymbol{4} = -4 + m \\mathbin{\\boldsymbol{+}} \\boldsymbol{4} $$
+
+$$ 11 = m $$
+
+Kontroll: $f(6) = -2 \\cdot 6 + 11 = -12 + 11 = -1$.
+
+**Svar:** $f(x) = -2x + 11$
+
+**b)** Funktionen kan också vara växande. Då är $f(2) = -1$ och $f(6) = 7$:
+
+$$ k = \\frac{7 - (-1)}{6 - 2} = \\frac{8}{4} = 2 $$
+
+och $-1 = 2 \\cdot 2 + m$ ger $m = -5$. Kontroll: $f(6) = 2 \\cdot 6 - 5 = 7$.
+
+Fler linjära funktioner finns inte. Är $k = 0$ har funktionen bara ett enda värde, och annars är ändpunkternas *y*-värden låsta till $-1$ och $7$ i någon ordning. Två punkter bestämmer en linje, så varje ordning ger exakt en funktion.
+
+**Svar:** 2 funktioner, $f(x) = -2x + 11$ och $f(x) = 2x - 5$
+
+**Generell slutsats:** för en linjär funktion räcker det att räkna ut funktionsvärdena i definitionsmängdens ändpunkter för att få värdemängden. Omvänt bestämmer definitionsmängd och värdemängd tillsammans linjen nästan helt: bara riktningen återstår att välja.`,
+        },
+        {
+            level: 3,
+            question: `Funktionen $f(x) = x^2 - 4x + 1$ har definitionsmängden $0 \\leq x < 5$. Noah räknar ut $f(0) = 1$ och $f(5) = 6$ och skriver att värdemängden är $1 \\leq y < 6$.<br>a) Beräkna $f(1)$, $f(2)$ och $f(3)$, och förklara vad Noah har missat.<br>b) Bestäm den korrekta värdemängden.`,
+            answer: { value: -3, unit: '' },
+            delsvar: [
+                { del: 'a', value: -2, unit: '', etikett: '$f(1) =$' },
+                { del: 'a', value: -3, unit: '', etikett: '$f(2) =$' },
+                { del: 'a', value: -2, unit: '', etikett: '$f(3) =$' },
+                { del: 'b', value: -3, unit: '', etikett: 'minsta värdet' },
+                { del: 'b', value: 6, unit: '', etikett: 'övre gräns (ingår inte)' },
+            ],
+            solution: `**Insikten:** ändpunkterna räcker bara när grafen hela tiden stiger eller hela tiden faller. Här är grafen en parabel, och den kan ha en lägsta punkt inne i intervallet.
+
+**a)**
+
+$$ f(1) = 1^2 - 4 \\cdot 1 + 1 = 1 - 4 + 1 = -2 $$
+
+$$ f(2) = 2^2 - 4 \\cdot 2 + 1 = 4 - 8 + 1 = -3 $$
+
+$$ f(3) = 3^2 - 4 \\cdot 3 + 1 = 9 - 12 + 1 = -2 $$
+
+Funktionen antar negativa värden, lägre än både $f(0)$ och $f(5)$. Grafen faller alltså först och stiger sedan.
+
+**Svar:** $f(1) = -2$, $f(2) = -3$ och $f(3) = -2$. Noah har missat att grafen går ned under ändpunkternas värden inne i intervallet.
+
+**b)** Att $f(1) = f(3)$ tyder på att parabeln är symmetrisk kring $x = 2$, med lägsta punkten $(2, -3)$. Det går att visa genom att skriva om funktionen. Vi multiplicerar ut:
+
+$$ (x - 2)(x - 2) - 3 = x^2 - 2x - 2x + 4 - 3 = x^2 - 4x + 1 $$
+
+Alltså är $f(x) = (x - 2)^2 - 3$. En kvadrat är aldrig negativ, så $f(x) \\geq -3$, med likhet när $x = 2$. Det värdet ingår, eftersom $x = 2$ ingår i definitionsmängden.
+
+Det största värdet: grafen stiger från $(2, -3)$ mot $x = 5$, men $x = 5$ ingår inte. Värdet 6 nås därför aldrig, men alla värden strax under 6 nås. Till vänster om toppen blir funktionen som högst $f(0) = 1$, vilket är mindre än 6.
+
+Kontroll med ett värde nära gränsen: $f(4{,}9) = 4{,}9^2 - 4 \\cdot 4{,}9 + 1 = 24{,}01 - 19{,}6 + 1 = 5{,}41$, alltså under 6.
+
+**Svar:** $-3 \\leq y < 6$
+
+**Generell slutsats:** bestäm värdemängden ur hela grafen, alltså den lägsta och den högsta punkt som faktiskt nås, och inte enbart ur ändpunkterna.`,
+        },
+        {
+            level: 3,
+            question: `På en parkering är de två första timmarna gratis. Därefter kostar det $15\\ \\mathrm{kr}$ per påbörjad timme, och man får stå högst 8 timmar. Kostnaden är $K(x)$ kr när bilen står parkerad i $x$ timmar, där $0 < x \\leq 8$.<br>a) Beräkna $K(2{,}5)$ och $K(3)$.<br>b) Bestäm funktionens värdemängd.<br>c) Förklara varför värdemängden inte kan skrivas $0 \\leq y \\leq 90$.`,
+            answer: { value: 90, unit: 'kr' },
+            delsvar: [
+                { del: 'a', value: 15, unit: 'kr', etikett: '$K(2{,}5) =$' },
+                { del: 'a', value: 15, unit: 'kr', etikett: '$K(3) =$' },
+                { del: 'b', values: [0, 15, 30, 45, 60, 75, 90], unit: 'kr', etikett: 'möjliga kostnader' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** priset ändras i hopp, inte gradvis. Grafen blir en trappa, och då består värdemängden av ett antal enskilda värden i stället för ett helt intervall.
+
+**a)** Efter 2,5 timmar har bilen stått en halv timme längre än de fria timmarna. En påbörjad timme kostar 15 kr. Efter exakt 3 timmar är det fortfarande bara en påbörjad timme utöver de två fria.
+
+**Svar:** $K(2{,}5) = 15$ och $K(3) = 15$
+
+**b)** Antalet påbörjade betalda timmar kan vara 0, 1, 2, 3, 4, 5 eller 6, eftersom högst $8 - 2 = 6$ timmar ligger utöver de fria. Kostnaden är 15 kr gånger det antalet. Det största värdet är
+
+$$ 6 \\cdot 15 = 90 $$
+
+Kontroll: $K(8) = 90$, eftersom 8 timmar ger 6 betalda timmar. $K(7{,}5) = 90$ också, eftersom den sjätte betalda timmen redan är påbörjad.
+
+**Svar:** Värdemängden består av talen 0, 15, 30, 45, 60, 75 och 90 (kr).
+
+**c)** Skrivsättet $0 \\leq y \\leq 90$ betyder att *alla* tal mellan 0 och 90 är möjliga kostnader. Men ingen parkering kostar till exempel 20 kr eller 50 kr. Grafen hoppar från 0 till 15, från 15 till 30 och så vidare.
+
+**Svar:** Kostnaden kan bara bli en multipel av 15 kr. Värden däremellan, som 20 kr, antas aldrig, så värdemängden är inte ett intervall.
+
+**Generell slutsats:** en värdemängd behöver inte vara ett sammanhängande intervall. När ett pris räknas per påbörjad enhet antar funktionen bara vissa bestämda värden.`,
+        },
+        {
+            level: 3,
+            question: `Koncentrationen av ett läkemedel i blodet är $C(t)$ mg/l efter $t$ timmar, där $C(t) = 12 \\cdot 0{,}82^t$. Modellen gäller från det att dosen tas och tills koncentrationen har sjunkit till $2\\ \\mathrm{mg/l}$. Då tas nästa dos.<br>a) Bestäm modellens definitionsmängd. Avrunda till en decimal.<br>b) Bestäm modellens värdemängd.<br>c) Vad betyder talet 0,82 i modellen?`,
+            answer: { value: 9.0, unit: 'h', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 9.0, unit: 'h', tol: 0.01, etikett: '$0 \\leq t \\leq$' },
+                { del: 'b', value: 2, unit: 'mg/l', etikett: 'minsta värdet' },
+                { del: 'b', value: 12, unit: 'mg/l', etikett: 'största värdet' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** definitionsmängden slutar inte vid ett givet klockslag, utan där funktionsvärdet når 2. Gränsen för $t$ fås därför genom att lösa en ekvation.
+
+**a)** Modellen börjar vid $t = 0$ och slutar när
+
+$$ 12 \\cdot 0{,}82^t = 2 $$
+
+Ekvationen löses grafiskt. I GeoGebra skriver vi \`y = 12*0.82^x\` och \`y = 2\`, och skärningspunkten hamnar vid $x = 9{,}02\\ldots$
+
+Kontroll: $C(9) = 12 \\cdot 0{,}82^9 \\approx 2{,}01$, alltså strax över 2, och $C(9{,}1) = 12 \\cdot 0{,}82^{9{,}1} \\approx 1{,}97$, strax under 2. Gränsen ligger mellan 9,0 och 9,1, nära 9,0.
+
+**Svar:** $0 \\leq t \\leq 9{,}0$
+
+**b)** Koncentrationen minskar hela tiden, eftersom förändringsfaktorn är mindre än 1. Det största värdet är startvärdet och det minsta värdet är 2:
+
+$$ C(0) = 12 \\cdot 0{,}82^0 = 12 \\cdot 1 = 12 $$
+
+**Svar:** $2 \\leq C(t) \\leq 12$
+
+**c)** Varje timme multipliceras koncentrationen med 0,82. Förändringsfaktorn $0{,}82 = 1 - 0{,}18$ motsvarar en minskning med $18\\ \\%$ per timme.
+
+**Svar:** Koncentrationen minskar med 18 % varje timme.
+
+**Generell slutsats:** när en modell gäller "tills något händer" bestäms definitionsmängdens gräns av en ekvation. För en funktion som hela tiden minskar får värdemängden sina gränser i definitionsmängdens ändpunkter.`,
+        },
+        {
+            level: 3,
+            question: `Funktionen $f(x) = 5 - 2x$ har definitionsmängden $a \\leq x \\leq a + 4$, där $a$ är en konstant.<br>a) Visa att värdemängden är ett intervall med längden 8, oavsett värdet på $a$.<br>b) Bestäm $a$ så att värdemängden blir $-7 \\leq y \\leq 1$.`,
+            answer: { value: 2, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 2, unit: '', etikett: '$a =$' },
+            ],
+            solution: `**Insikten:** $k = -2$, så funktionen är avtagande. Det största värdet ligger i definitionsmängdens vänstra ände och det minsta i den högra. Värdemängden kan därför skrivas med $a$ som okänd.
+
+**a)** Största värdet, vid $x = a$:
+
+$$ f(a) = 5 - 2a $$
+
+Minsta värdet, vid $x = a + 4$:
+
+$$ f(a + 4) = 5 - 2(a + 4) = 5 - 2a - 8 = -3 - 2a $$
+
+Värdemängden är $-3 - 2a \\leq y \\leq 5 - 2a$. Dess längd är största minus minsta värdet:
+
+$$ (5 - 2a) - (-3 - 2a) = 5 - 2a + 3 + 2a = 8 $$
+
+Termerna med $a$ tar ut varandra, så längden är 8 för alla $a$. Det är lutningens storlek gånger definitionsmängdens längd: $2 \\cdot 4 = 8$.
+
+**b)** Det största värdet ska vara 1:
+
+$$ 5 - 2a = 1 $$
+
+$$ 5 - 2a \\mathbin{\\boldsymbol{-}} \\boldsymbol{5} = 1 \\mathbin{\\boldsymbol{-}} \\boldsymbol{5} $$
+
+$$ -2a = -4 $$
+
+$$ \\frac{-2a}{\\boldsymbol{-2}} = \\frac{-4}{\\boldsymbol{-2}} $$
+
+$$ a = 2 $$
+
+Kontroll av det minsta värdet: $-3 - 2 \\cdot 2 = -7$. Stämmer. Det var dessutom väntat, eftersom intervallet från $-7$ till $1$ har längden 8, precis som a kräver. En önskad värdemängd med någon annan längd hade inte gått att få.
+
+**Svar:** $a = 2$, då definitionsmängden är $2 \\leq x \\leq 6$.
+
+**Generell slutsats:** för en linjär funktion är värdemängdens längd lutningens storlek gånger definitionsmängdens längd. Att flytta definitionsmängden i sidled flyttar värdemängden, men ändrar inte dess längd.`,
+        },
+        {
+            level: 3,
+            question: `Ange den största möjliga definitionsmängden och funktionens värdemängd för<br>a)&nbsp;$f(x) = \\sqrt{6 - 2x}$&emsp;&emsp;b)&nbsp;$g(x) = \\dfrac{12}{x - 3}$`,
+            answer: { value: 3, unit: '' },
+            delsvar: [
+                { del: 'a', value: 3, unit: '', etikett: 'definitionsmängd $x \\leq$' },
+                { del: 'a', value: 0, unit: '', etikett: 'värdemängd $y \\geq$' },
+                { del: 'b', value: 3, unit: '', etikett: 'definitionsmängd $x \\neq$' },
+                { del: 'b', value: 0, unit: '', etikett: 'värdemängd $y \\neq$' },
+            ],
+            solution: `**Insikten:** när inget sammanhang sätter gränser är det matematiken själv som gör det. Det finns två saker som inte går: att dra roten ur ett negativt tal och att dividera med noll.
+
+**a)** Det som står under rottecknet får inte vara negativt:
+
+$$ 6 - 2x \\geq 0 $$
+
+$$ 6 - 2x \\mathbin{\\boldsymbol{+}} \\boldsymbol{2x} \\geq 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{2x} $$
+
+$$ 6 \\geq 2x $$
+
+$$ \\frac{6}{\\boldsymbol{2}} \\geq \\frac{2x}{\\boldsymbol{2}} $$
+
+$$ 3 \\geq x $$
+
+En kvadratrot är aldrig negativ, så $f(x) \\geq 0$. Värdet 0 nås vid $x = 3$, och varje större värde nås också. Till exempel ger $x = -5$ värdet $f(-5) = \\sqrt{6 + 10} = \\sqrt{16} = 4$. Ju längre åt vänster, desto större blir funktionsvärdet.
+
+**Svar:** Definitionsmängd $x \\leq 3$ och värdemängd $y \\geq 0$
+
+**b)** Nämnaren får inte vara 0, och $x - 3 = 0$ när $x = 3$. Alla andra *x* går bra.
+
+Värdemängden: en kvot är noll bara om täljaren är noll, och täljaren är alltid 12. Därför blir $g(x)$ aldrig 0. Alla andra värden nås: vill vi få värdet $y$ ska $x - 3 = \\dfrac{12}{y}$, alltså $x = 3 + \\dfrac{12}{y}$, och det går för varje $y$ utom 0.
+
+Kontroll med $y = -4$: formeln ger $x = 3 + \\dfrac{12}{-4} = 3 - 3 = 0$, och mycket riktigt är $g(0) = \\dfrac{12}{0 - 3} = -4$.
+
+**Svar:** Definitionsmängd: alla $x$ utom $x = 3$. Värdemängd: alla $y$ utom $y = 0$.
+
+**Generell slutsats:** den största möjliga definitionsmängden får man genom att utesluta de *x* som ger division med noll eller roten ur ett negativt tal. Värdemängden kräver ett eget resonemang om vilka värden funktionen kan anta.`,
         },
     ],
 
@@ -27012,27 +29950,339 @@ $$ V(5) = 240\\ 000 \\cdot 0{,}80^5 = 240\\ 000 \\cdot 0{,}32768 = 78\\ 643{,}2 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Kurvan i en graf passerar punkterna (0, 4) och (2, 25). Vilken av följande exponentialfunktioner är uppritad?`,
-            choices: [
-                `$y = 4 \\cdot 2{,}5^x$`,
-                `$y = 4 \\cdot 1{,}25^x$`,
-                `$y = 25 \\cdot 0{,}4^x$`,
-                `$y = 2{,}5 \\cdot 4^x$`,
+            question: `Grafen visar en del av funktionen $y = C \\cdot a^x$. Den del av grafen som ligger närmast *y*-axeln är bortklippt.${makeDiagram({
+                xMin: 0, xMax: 4, yMin: 0, yMax: 14,
+                xTicks: [0, 1, 2, 3, 4],
+                yTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                xLabel: '<tspan font-style="italic">x</tspan>',
+                yLabel: '<tspan font-style="italic">y</tspan>',
+                paths: [{ points: Array.from({ length: 45 }, (_, i) => { const x = 1 + i * 0.05; return [x, 1.5 * Math.pow(2, x)]; }) }],
+            })}<br>a) Bestäm $C$ och $a$.<br>b) Bestäm utan räknare för vilket värde på $x$ som $y = 96$.`,
+            answer: { value: 6, unit: '' },
+            delsvar: [
+                { del: 'a', value: 1.5, unit: '', etikett: '$C =$' },
+                { del: 'a', value: 2, unit: '', etikett: '$a =$' },
+                { del: 'b', value: 6, unit: '', etikett: '$x =$' },
             ],
-            correct: 0,
-            solution: `**Insikten:** punkten vid $x = 0$ avslöjar $C$ direkt (eftersom $a^0 = 1$), och en andra punkt bestämmer $a$.
+            solution: `**Insikten:** skärningen med *y*-axeln syns inte, så $C$ kan inte läsas av direkt. Men två avlästa punkter räcker: när $x$ ökar med 1 multipliceras $y$ med $a$, och sedan kan man räkna sig bakåt till $x = 0$.
 
-Vid $x = 0$: $y = C \\cdot a^0 = C = 4$. Alltså är $C = 4$, och alternativen som börjar med 25 och 2,5 faller direkt.
+**a)** Grafen går genom punkterna $(1, 3)$, $(2, 6)$ och $(3, 12)$. När $x$ ökar med 1 fördubblas $y$:
 
-Testa (2, 25) i $y = 4 \\cdot a^2$:
+$$ \\frac{6}{3} = 2 \\qquad \\frac{12}{6} = 2 $$
 
-$$ 4a^2 = 25 \\qquad a^2 = 6{,}25 \\qquad a = 2{,}5 $$
+Förändringsfaktorn är alltså $a = 2$. Insättning av punkten $(1, 3)$ i $y = C \\cdot 2^x$ ger
 
-Kontroll: $4 \\cdot 2{,}5^2 = 4 \\cdot 6{,}25 = 25$ — stämmer! ($4 \\cdot 1{,}25^2 = 6{,}25 \\neq 25$.)
+$$ C \\cdot 2^1 = 3 $$
 
-**Svar:** $y = 4 \\cdot 2{,}5^x$
+Dividerar båda led med 2:
 
-**Generell slutsats:** samma teststrategi som i genomgången — skärningen med *y*-axeln ger $C$, en till punkt ger $a$ via en enkel potensekvation.`,
+$$ \\frac{2C}{\\boldsymbol{2}} = \\frac{3}{\\boldsymbol{2}} $$
+
+$$ C = 1{,}5 $$
+
+Kontroll med den tredje punkten: $1{,}5 \\cdot 2^3 = 1{,}5 \\cdot 8 = 12$. Stämmer.
+
+**Svar:** $C = 1{,}5$ och $a = 2$, alltså $y = 1{,}5 \\cdot 2^x$
+
+**b)** Sätt funktionen lika med 96:
+
+$$ 1{,}5 \\cdot 2^x = 96 $$
+
+Dividerar båda led med 1,5:
+
+$$ \\frac{1{,}5 \\cdot 2^x}{\\boldsymbol{1{,}5}} = \\frac{96}{\\boldsymbol{1{,}5}} $$
+
+$$ 2^x = 64 $$
+
+Eftersom $2^6 = 64$ är $x = 6$.
+
+Kontroll: $1{,}5 \\cdot 2^6 = 1{,}5 \\cdot 64 = 96$. Stämmer.
+
+**Svar:** $x = 6$
+
+**Generell slutsats:** i en exponentialfunktion ger lika stora steg i *x*-led samma faktor i *y*-led. Kvoten mellan två *y*-värden ger $a$, och sedan ger vilken punkt som helst $C$, även när grafens skärning med *y*-axeln inte syns.`,
+        },
+        {
+            level: 3,
+            question: `I ett naturreservat räknades 50 bävrar år 2020 och 72 bävrar år 2022. Låt $x$ vara antalet år efter 2020.<br>a) Ställ upp en linjär modell $f(x) = kx + m$ och en exponentiell modell $g(x) = C \\cdot a^x$ som båda stämmer med de två räkningarna.<br>b) År 2025 räknades 124 bävrar. Vilken av modellerna stämmer bäst med den räkningen?<br>c) Använd den modell som stämmer bäst och beräkna antalet bävrar år 2030. Är prognosen rimlig?`,
+            answer: { value: 310, unit: 'bävrar', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 11, unit: '', etikett: '$k =$' },
+                { del: 'a', value: 50, unit: '', etikett: '$m =$' },
+                { del: 'a', value: 50, unit: '', etikett: '$C =$' },
+                { del: 'a', value: 1.2, unit: '', etikett: '$a =$' },
+                { del: 'b' },
+                { del: 'c', value: 310, unit: 'bävrar', tol: 0.01 },
+            ],
+            solution: `**Insikten:** två mätvärden räcker för att bestämma både en linjär och en exponentiell modell, och de två modellerna stämmer lika bra med dem. Först en tredje mätning kan avgöra vilken modell som beskriver förloppet. En linjär modell ökar med lika många bävrar per år, en exponentiell med lika många procent per år.
+
+**a)** År 2020 är $x = 0$, så båda modellerna startar i 50: $m = 50$ och $C = 50$.
+
+Linjär modell: lutning = förändring i antal delat med förändring i tid,
+
+$$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{72 - 50}{2 - 0} = \\frac{22}{2} = 11 $$
+
+Exponentiell modell: punkten $(2, 72)$ insatt i $g(x) = 50 \\cdot a^x$ ger
+
+$$ 50 \\cdot a^2 = 72 $$
+
+Dividerar båda led med 50:
+
+$$ \\frac{50 \\cdot a^2}{\\boldsymbol{50}} = \\frac{72}{\\boldsymbol{50}} $$
+
+$$ a^2 = 1{,}44 $$
+
+$$ a = \\pm\\sqrt{1{,}44} = \\pm 1{,}2 $$
+
+En förändringsfaktor är positiv, så $a = 1{,}2$.
+
+**Svar:** $f(x) = 11x + 50$ och $g(x) = 50 \\cdot 1{,}2^x$
+
+**b)** År 2025 är $x = 5$:
+
+$$ f(5) = 11 \\cdot 5 + 50 = 105 $$
+
+$$ g(5) = 50 \\cdot 1{,}2^5 = 124{,}416 $$
+
+Den exponentiella modellen ger 124 bävrar, precis som räkningen. Den linjära ger 19 för få.
+
+**Svar:** Den exponentiella modellen $g(x) = 50 \\cdot 1{,}2^x$ stämmer bäst
+
+**c)** År 2030 är $x = 10$:
+
+$$ g(10) = 50 \\cdot 1{,}2^{10} = 309{,}586\\ldots \\approx 310 $$
+
+Rimligt? Matematiskt fortsätter modellen att öka med $20\\ \\%$ per år hur länge som helst. Ett reservat har begränsat med föda och plats, så förr eller senare måste ökningen avta. På några års sikt kan prognosen vara rimlig, men den ska tolkas med försiktighet.
+
+**Svar:** Cirka 310 bävrar. Prognosen förutsätter att ökningen fortsätter med $20\\ \\%$ per år, vilket inte kan pågå i längden i ett begränsat område.
+
+**Generell slutsats:** två punkter bestämmer flera olika modeller. Det är nya mätvärden som avgör vilken modell som stämmer, och även en modell som stämmer bra kan bli orimlig om den används långt utanför mätningarna.`,
+        },
+        {
+            level: 3,
+            question: `För exponentialfunktionen $f(x) = C \\cdot a^x$, där $C > 0$ och $a > 0$, gäller att $f(3) = 20$ och $f(5) = 45$. Lös uppgiften utan räknare.<br>a) Bestäm $f(4)$.<br>b) Bestäm $f(7)$.`,
+            answer: { value: 101.25, unit: '' },
+            delsvar: [
+                { del: 'a', value: 30, unit: '', etikett: '$f(4) =$' },
+                { del: 'b', value: 101.25, unit: '', etikett: '$f(7) =$' },
+            ],
+            solution: `**Insikten:** man behöver aldrig ta reda på $C$. Varje gång $x$ ökar med 1 multipliceras funktionsvärdet med $a$. Från $x = 3$ till $x = 5$ är det två steg, alltså multipliceras värdet med $a \\cdot a = a^2$.
+
+$$ f(5) = f(3) \\cdot a^2 $$
+
+$$ 20 \\cdot a^2 = 45 $$
+
+Dividerar båda led med 20:
+
+$$ \\frac{20 \\cdot a^2}{\\boldsymbol{20}} = \\frac{45}{\\boldsymbol{20}} $$
+
+$$ a^2 = \\frac{9}{4} $$
+
+$$ a = \\pm\\sqrt{\\frac{9}{4}} = \\pm\\frac{3}{2} $$
+
+Förändringsfaktorn måste vara positiv, så $a = \\dfrac{3}{2} = 1{,}5$. (Med $a = -1{,}5$ skulle $a^x$ inte ens gå att beräkna för till exempel $x = 0{,}5$.)
+
+**a)** Från $x = 3$ till $x = 4$ är ett steg:
+
+$$ f(4) = f(3) \\cdot a = 20 \\cdot \\frac{3}{2} = 30 $$
+
+Kontroll: ett steg till ska ge $f(5)$, och $30 \\cdot \\dfrac{3}{2} = 45$. Stämmer.
+
+**Svar:** $f(4) = 30$
+
+**b)** Från $x = 5$ till $x = 7$ är två steg till:
+
+$$ f(7) = f(5) \\cdot a^2 = 45 \\cdot \\frac{9}{4} = \\frac{405}{4} = 101{,}25 $$
+
+**Svar:** $f(7) = 101{,}25$
+
+**Generell slutsats:** i en exponentialfunktion bildar värdena vid jämnt fördelade *x* en kedja där varje värde är det förra gånger samma faktor. Värdet mitt emellan två andra är därför inte deras medelvärde utan $\\sqrt{20 \\cdot 45} = \\sqrt{900} = 30$. Medelvärdet, 32,5, hade passat en linjär funktion.`,
+        },
+        {
+            level: 3,
+            question: `Moa förenklar funktionsuttrycket $y = 2 \\cdot 3^x$ så här:
+
+$$ 2 \\cdot 3^x = (2 \\cdot 3)^x = 6^x $$
+
+a) Visa med ett exempel att omskrivningen är fel, och förklara vad Moa gör för fel.<br>b) För vilket värde på $x$ gäller ändå att $2 \\cdot 3^x = 6^x$?<br>c) För vilka värden på $x$ är $2 \\cdot 3^x$ större än $6^x$?`,
+            answer: { value: 1, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1, unit: '', etikett: '$x =$' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** exponenten i $2 \\cdot 3^x$ hör bara till 3. Prioriteringsreglerna säger att potensen räknas före multiplikationen, så 2 upphöjs aldrig. I $(2 \\cdot 3)^x$ upphöjs däremot båda faktorerna, eftersom potenslagen ger $(2 \\cdot 3)^x = 2^x \\cdot 3^x$.
+
+**a)** Pröva $x = 2$:
+
+$$ 2 \\cdot 3^2 = 2 \\cdot 9 = 18 \\qquad 6^2 = 36 $$
+
+Uttrycken är olika, så omskrivningen är fel. Moa har flyttat in 2 i parentesen och därmed upphöjt även 2 till $x$.
+
+**Svar:** För $x = 2$ är $2 \\cdot 3^x = 18$ men $6^x = 36$. Moa upphöjer hela produkten, fast exponenten bara hör till 3.
+
+**b)** Skriv om högerledet med potenslagen, $6^x = (2 \\cdot 3)^x = 2^x \\cdot 3^x$:
+
+$$ 2 \\cdot 3^x = 2^x \\cdot 3^x $$
+
+Dividerar båda led med $3^x$ (som aldrig är 0):
+
+$$ \\frac{2 \\cdot 3^x}{\\boldsymbol{3^x}} = \\frac{2^x \\cdot 3^x}{\\boldsymbol{3^x}} $$
+
+$$ 2 = 2^x $$
+
+Eftersom $2^1 = 2$ är $x = 1$.
+
+Kontroll: $2 \\cdot 3^1 = 6$ och $6^1 = 6$. Stämmer.
+
+**Svar:** $x = 1$
+
+**c)** Samma division som i b) visar att $2 \\cdot 3^x > 6^x$ är samma sak som $2 > 2^x$. Funktionen $2^x$ är växande och är lika med 2 när $x = 1$, så den är mindre än 2 för alla $x < 1$.
+
+Kontroll med $x = 0$: $2 \\cdot 3^0 = 2$ och $6^0 = 1$, och $2 > 1$.
+
+**Svar:** För alla $x < 1$
+
+**Generell slutsats:** $C \\cdot a^x$ och $(C \\cdot a)^x$ är olika funktioner. Den första har startvärdet $C$ och förändringsfaktorn $a$, den andra har startvärdet 1 och förändringsfaktorn $C \\cdot a$. De ger samma värde bara när $x = 1$.`,
+        },
+        {
+            level: 3,
+            question: `Temperaturen $T$ °C hos en kopp kaffe $t$ minuter efter att den hällts upp beskrivs av modellen $T(t) = 20 + 70 \\cdot 0{,}9^t$.<br>a) Vad betyder talen 20, 70 och 0,9 i modellen?<br>b) Ange värdemängden för $T(t)$ när $t \\geq 0$.<br>c) Hur lång tid tar det innan kaffet har svalnat till 50 °C? Avrunda till hela minuter.`,
+            answer: { value: 8, unit: 'min', tol: 0.05 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 8, unit: 'min', tol: 0.05 },
+            ],
+            solution: `**Insikten:** det är inte temperaturen som minskar exponentiellt utan skillnaden mellan kaffets och rummets temperatur. Termen $70 \\cdot 0{,}9^t$ är en exponentialfunktion med $C = 70$ och $a = 0{,}9$, och den läggs ovanpå en konstant nivå på 20.
+
+**a)** När $t = 0$ är $0{,}9^0 = 1$, så starttemperaturen är
+
+$$ T(0) = 20 + 70 \\cdot 1 = 90 $$
+
+Kaffet är alltså 90 °C från början. Termen $70 \\cdot 0{,}9^t$ närmar sig 0 när tiden går, så temperaturen närmar sig 20 °C, rummets temperatur.
+
+**Svar:** 20 är rummets temperatur (i °C), som kaffet närmar sig. 70 är hur många grader varmare än rummet kaffet är från början. 0,9 är förändringsfaktorn: skillnaden mot rummets temperatur minskar med $10\\ \\%$ per minut.
+
+**b)** Faktorn $0{,}9 < 1$, så $0{,}9^t$ minskar hela tiden. Det största värdet är $T(0) = 90$. Hur stort $t$ än blir är $0{,}9^t$ positivt, så $T(t)$ är alltid större än 20 men kommer allt närmare.
+
+**Svar:** $20 < T \\leq 90$
+
+**c)** Sätt modellen lika med 50:
+
+$$ 20 + 70 \\cdot 0{,}9^t = 50 $$
+
+Subtraherar 20 från båda led:
+
+$$ 20 + 70 \\cdot 0{,}9^t \\mathbin{\\boldsymbol{-}} \\boldsymbol{20} = 50 \\mathbin{\\boldsymbol{-}} \\boldsymbol{20} $$
+
+$$ 70 \\cdot 0{,}9^t = 30 $$
+
+Dividerar båda led med 70:
+
+$$ \\frac{70 \\cdot 0{,}9^t}{\\boldsymbol{70}} = \\frac{30}{\\boldsymbol{70}} $$
+
+$$ 0{,}9^t = 0{,}428\\,57\\ldots $$
+
+Exponenten är okänd. Prövning ger $0{,}9^8 = 0{,}430\\,4\\ldots$ och $0{,}9^9 = 0{,}387\\,4\\ldots$, så lösningen ligger strax över 8. Med digitala verktyg (skärning mellan $y = 20 + 70 \\cdot 0{,}9^x$ och $y = 50$) blir $t = 8{,}04\\ldots$
+
+Kontroll: $T(8) = 20 + 70 \\cdot 0{,}9^8 = 50{,}13\\ldots$, alltså nästan exakt 50 °C.
+
+Rimligt? Kaffet har svalnat 40 grader av de 70 grader det kan svalna, alltså mer än hälften av vägen. Halva vägen tar drygt 6 minuter, eftersom $0{,}9^6 \\approx 0{,}53$, så drygt 8 minuter är rimligt.
+
+**Svar:** Efter cirka 8 minuter
+
+**Generell slutsats:** en exponentialfunktion kan beskriva hur något närmar sig en jämviktsnivå. Konstanten anger nivån, $C$ anger avståndet till nivån från början och $a$ hur snabbt avståndet krymper.`,
+        },
+        {
+            level: 3,
+            question: `Stad A har $12\\,000$ invånare och befolkningen minskar med $2\\ \\%$ per år. Stad B har $8\\,000$ invånare och befolkningen ökar med $3\\ \\%$ per år.<br>a) Teckna en funktion för vardera stadens befolkning efter $x$ år.<br>b) Efter hur lång tid har städerna lika många invånare? Svara med en decimal.<br>c) Hur stor årlig procentuell ökning hade stad B behövt för att städerna ska ha lika många invånare redan efter 5 år? Svara med en decimal.`,
+            answer: { value: 6.3, unit: '%', tol: 0.01 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 8.1, unit: 'år', tol: 0.01 },
+                { del: 'c', value: 6.3, unit: '%', tol: 0.01 },
+            ],
+            solution: `**Insikten:** städerna har lika många invånare där graferna till de två exponentialfunktionerna skär varandra. Den ena grafen sjunker och den andra stiger, så de skär varandra exakt en gång.
+
+**a)** Startvärdena är $C = 12\\,000$ och $C = 8\\,000$. En minskning med $2\\ \\%$ ger förändringsfaktorn $0{,}98$ och en ökning med $3\\ \\%$ ger $1{,}03$.
+
+**Svar:** $A(x) = 12\\,000 \\cdot 0{,}98^x$ och $B(x) = 8\\,000 \\cdot 1{,}03^x$
+
+**b)** Vi söker $x$ så att
+
+$$ 12\\,000 \\cdot 0{,}98^x = 8\\,000 \\cdot 1{,}03^x $$
+
+Prövning för hela år:
+
+| $x$ (år) | $A(x)$ | $B(x)$ |
+| --- | --- | --- |
+| 8 | $10\\,209$ | $10\\,134$ |
+| 9 | $10\\,005$ | $10\\,438$ |
+
+Efter 8 år har A fortfarande flest invånare, efter 9 år har B passerat. Med digitala verktyg (skärning mellan graferna) blir skärningspunktens *x*-värde $8{,}148\\ldots$, och befolkningen är då cirka $10\\,200$ i båda städerna.
+
+**Svar:** Efter cirka 8,1 år
+
+**c)** Kalla B:s förändringsfaktor $a$. Efter 5 år ska
+
+$$ 8\\,000 \\cdot a^5 = 12\\,000 \\cdot 0{,}98^5 $$
+
+Högerledet är $12\\,000 \\cdot 0{,}98^5 = 10\\,847{,}04\\ldots$. Dividerar båda led med $8\\,000$:
+
+$$ \\frac{8\\,000 \\cdot a^5}{\\boldsymbol{8\\,000}} = \\frac{10\\,847{,}04}{\\boldsymbol{8\\,000}} $$
+
+$$ a^5 = 1{,}355\\,88\\ldots $$
+
+$$ a = \\sqrt[5]{1{,}355\\,88} = 1{,}062\\,78\\ldots $$
+
+Förändringsfaktorn $1{,}0628$ motsvarar en ökning med cirka $6{,}3\\ \\%$ per år.
+
+Kontroll: $8\\,000 \\cdot 1{,}0628^5 \\approx 10\\,848$, nästan exakt lika mycket som stad A har efter 5 år.
+
+Rimligt? Med $3\\ \\%$ tog det drygt 8 år. För att hinna på 5 år krävs en betydligt snabbare ökning, men inte dubbelt så snabb, eftersom stad A samtidigt hinner minska mindre.
+
+**Svar:** Cirka 6,3 % per år
+
+**Generell slutsats:** när två exponentialfunktioner jämförs söks skärningen mellan graferna. Den går att ringa in genom prövning och bestämma noggrant med digitala verktyg, och omvänt kan en önskad skärningspunkt ge den förändringsfaktor som krävs.`,
+        },
+        {
+            level: 3,
+            question: `Graferna till $f(x) = 3 \\cdot 2^x$ och $g(x) = 12 \\cdot 0{,}5^x$ skär varandra i punkten $P$. Punkten $P$ och de två punkter där graferna skär *y*-axeln bildar en triangel. Bestäm triangelns area utan räknare.`,
+            answer: { value: 4.5, unit: 'areaenheter' },
+            solution: `**Insikten:** de två punkterna på *y*-axeln ges direkt av $C$-värdena, eftersom $a^0 = 1$. Sidan mellan dem ligger längs *y*-axeln och kan användas som bas. Höjden är då avståndet från $P$ till *y*-axeln, alltså $P$:s *x*-koordinat.
+
+**Punkterna på *y*-axeln:** $f(0) = 3 \\cdot 2^0 = 3$ och $g(0) = 12 \\cdot 0{,}5^0 = 12$. Basen är
+
+$$ 12 - 3 = 9 $$
+
+**Punkten $P$:** skriv om $0{,}5$ som en potens av 2, $0{,}5 = 2^{-1}$, så att $0{,}5^x = 2^{-x}$:
+
+$$ 3 \\cdot 2^x = 12 \\cdot 2^{-x} $$
+
+Multiplicerar båda led med $2^x$, och potenslagen ger $2^x \\cdot 2^x = 2^{2x}$ och $2^{-x} \\cdot 2^x = 2^0 = 1$:
+
+$$ 3 \\cdot 2^x \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{2^x} = 12 \\cdot 2^{-x} \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{2^x} $$
+
+$$ 3 \\cdot 2^{2x} = 12 $$
+
+Dividerar båda led med 3:
+
+$$ \\frac{3 \\cdot 2^{2x}}{\\boldsymbol{3}} = \\frac{12}{\\boldsymbol{3}} $$
+
+$$ 2^{2x} = 4 = 2^2 $$
+
+Exponenterna måste vara lika: $2x = 2$, alltså $x = 1$. Då är $y = f(1) = 3 \\cdot 2 = 6$, så $P = (1, 6)$.
+
+Kontroll: $g(1) = 12 \\cdot 0{,}5 = 6$. Stämmer.
+
+**Arean:** höjden är avståndet från $P$ till *y*-axeln, alltså 1. Triangelns area är bas gånger höjd delat med 2:
+
+$$ \\frac{9 \\cdot 1}{2} = 4{,}5 $$
+
+**Svar:** 4,5 areaenheter
+
+**Generell slutsats:** $0{,}5^x = 2^{-x}$, så grafen till $g$ är grafen till $y = 12 \\cdot 2^x$ speglad i *y*-axeln. Genom att skriva båda funktionerna med samma bas blir skärningsekvationen en ekvation mellan exponenter, som går att lösa utan räknare.`,
         },
     ],
 
@@ -27112,21 +30362,365 @@ $$ x = \\pm\\sqrt[6]{40} = \\pm 40^{1/6} = \\pm 1{,}849\\ldots \\approx \\pm 1{,
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Låt $f(x) = x^{1/2}$ och $g(x) = 9x^2$. Beräkna $f(g(4))$.`,
-            answer: { value: 12, unit: '' },
-            solution: `**Insikten:** funktion i funktion beräknas "inifrån och ut" — först den inre, sedan den yttre.
+            question: `Grafen visar en del av potensfunktionen $f(x) = C \\cdot x^a$ för $x \\geq 2$.${makeDiagram({
+                xMin: 0, xMax: 20, yMin: 0, yMax: 10,
+                xTicks: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+                yTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                xLabel: '<tspan font-style="italic">x</tspan>',
+                yLabel: '<tspan font-style="italic">y</tspan>',
+                paths: [{ points: Array.from({ length: 181 }, (_, i) => { const x = 2 + i * 0.1; return [x, 12 / Math.sqrt(x)]; }) }],
+            })}<br>a) Bestäm $C$ och $a$ med hjälp av två punkter som du läser av i grafen.<br>b) Lös ekvationen $f(x) = 0{,}5$ utan räknare.`,
+            answer: { value: 576, unit: '' },
+            delsvar: [
+                { del: 'a', value: 12, unit: '', etikett: '$C =$' },
+                { del: 'a', value: -0.5, unit: '', etikett: '$a =$' },
+                { del: 'b', value: 576, unit: '', etikett: '$x =$' },
+            ],
+            solution: `**Insikten:** dividerar man två funktionsvärden med varandra försvinner $C$, och kvar blir en ekvation där bara exponenten $a$ är okänd. Välj därför två punkter där den ena *x*-koordinaten är en enkel multipel av den andra.
 
-**Inre funktionen:**
+**a)** Grafen går genom $(4, 6)$ och $(16, 3)$:
 
-$$ g(4) = 9 \\cdot 4^2 = 9 \\cdot 16 = 144 $$
+$$ C \\cdot 4^a = 6 \\qquad C \\cdot 16^a = 3 $$
 
-**Yttre funktionen:**
+Dividerar den andra likheten med den första. Potenslagen ger $\\dfrac{16^a}{4^a} = \\left(\\dfrac{16}{4}\\right)^a = 4^a$:
 
-$$ f(g(4)) = f(144) = 144^{1/2} = \\sqrt{144} = 12 $$
+$$ \\frac{C \\cdot 16^a}{C \\cdot 4^a} = \\frac{3}{6} $$
 
-**Svar:** 12
+$$ 4^a = \\frac{1}{2} $$
 
-**Generell slutsats:** ordningen spelar roll — $g(f(4)) = 9 \\cdot (\\sqrt{4})^2 = 36$ är något helt annat. Räkna alltid den innersta parentesen först, precis som i prioriteringsreglerna.`,
+Kvadratroten ur 4 är 2, så $4^{\\frac{1}{2}} = 2$. Ett minustecken i exponenten ger det inverterade värdet, $4^{-\\frac{1}{2}} = \\dfrac{1}{2}$. Alltså är $a = -0{,}5$.
+
+Insättning i $C \\cdot 4^{-0{,}5} = 6$, där $4^{-0{,}5} = \\dfrac{1}{2}$:
+
+$$ \\frac{C}{2} = 6 $$
+
+Multiplicerar båda led med 2:
+
+$$ \\boldsymbol{2} \\mathbin{\\boldsymbol{\\cdot}} \\frac{C}{2} = \\boldsymbol{2} \\mathbin{\\boldsymbol{\\cdot}} 6 $$
+
+$$ C = 12 $$
+
+Kontroll med den andra punkten: $f(16) = 12 \\cdot 16^{-0{,}5} = \\dfrac{12}{\\sqrt{16}} = \\dfrac{12}{4} = 3$. Stämmer.
+
+**Svar:** $C = 12$ och $a = -0{,}5$, alltså $f(x) = 12x^{-0{,}5} = \\dfrac{12}{\\sqrt{x}}$
+
+**b)** Sätt funktionen lika med 0,5:
+
+$$ \\frac{12}{\\sqrt{x}} = 0{,}5 $$
+
+Multiplicerar båda led med $\\sqrt{x}$:
+
+$$ \\boldsymbol{\\sqrt{x}} \\mathbin{\\boldsymbol{\\cdot}} \\frac{12}{\\sqrt{x}} = 0{,}5 \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{\\sqrt{x}} $$
+
+$$ 12 = 0{,}5\\sqrt{x} $$
+
+Dividerar båda led med 0,5:
+
+$$ \\frac{12}{\\boldsymbol{0{,}5}} = \\frac{0{,}5\\sqrt{x}}{\\boldsymbol{0{,}5}} $$
+
+$$ \\sqrt{x} = 24 $$
+
+Kvadrerar båda led:
+
+$$ x = 24^2 = 576 $$
+
+Kontroll: $\\dfrac{12}{\\sqrt{576}} = \\dfrac{12}{24} = 0{,}5$. Stämmer.
+
+Rimligt? Grafen sjunker allt långsammare. Från 6 till 3 halveras funktionsvärdet när *x* blir fyra gånger så stort, eftersom $4^{-0{,}5} = \\dfrac{1}{2}$. Från 3 till 0,5 divideras funktionsvärdet med 6, och då måste *x* multipliceras med $6^2 = 36$, eftersom $36^{-0{,}5} = \\dfrac{1}{6}$. Det ger $16 \\cdot 36 = 576$.
+
+**Svar:** $x = 576$
+
+**Generell slutsats:** för en potensfunktion gäller att när *x* multipliceras med ett tal $k$ multipliceras funktionsvärdet med $k^a$. Kvoten mellan två funktionsvärden avslöjar därför exponenten.`,
+        },
+        {
+            level: 3,
+            question: `För fiskar av en viss art kan vikten $W$ gram beskrivas med en potensfunktion av längden $L$ cm, $W(L) = C \\cdot L^3$. En fisk som är 30 cm lång väger 400 g.<br>a) Hur mycket väger en fisk av samma art som är 45 cm lång?<br>b) Hur många procent längre än en annan fisk av samma art måste en fisk vara för att väga dubbelt så mycket? Avrunda till hela procent.`,
+            answer: { value: 26, unit: '%', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 1350, unit: 'g', tol: 0.01 },
+                { del: 'b', value: 26, unit: '%', tol: 0.02 },
+            ],
+            solution: `**Insikten:** konstanten $C$ behövs inte. Jämför man två fiskar är kvoten mellan vikterna lika med kvoten mellan längderna upphöjd till 3, eftersom $C$ förkortas bort:
+
+$$ \\frac{W(L_2)}{W(L_1)} = \\frac{C \\cdot L_2^3}{C \\cdot L_1^3} = \\left(\\frac{L_2}{L_1}\\right)^3 $$
+
+**a)** Längden ändras med faktorn $\\dfrac{45}{30} = 1{,}5$. Vikten ändras då med faktorn
+
+$$ 1{,}5^3 = 3{,}375 $$
+
+$$ 400 \\cdot 3{,}375 = 1\\,350 $$
+
+Kontroll med $C$: $C = \\dfrac{400}{30^3} = \\dfrac{400}{27\\,000}$, och $\\dfrac{400}{27\\,000} \\cdot 45^3 = \\dfrac{400 \\cdot 91\\,125}{27\\,000} = 1\\,350$. Stämmer.
+
+Rimligt? Fisken är bara $50\\ \\%$ längre, men den är också bredare och tjockare. Alla tre måtten växer, därför väger den mer än tre gånger så mycket.
+
+**Svar:** 1 350 g
+
+**b)** Kalla faktorn som längden ska multipliceras med för $k$. Vikten ska fördubblas:
+
+$$ k^3 = 2 $$
+
+$$ k = \\sqrt[3]{2} = 1{,}259\\,92\\ldots $$
+
+Faktorn $1{,}26$ motsvarar en ökning med cirka $26\\ \\%$.
+
+Kontroll: $1{,}26^3 = 2{,}000\\,376$, alltså nästan exakt 2.
+
+**Svar:** Cirka 26 % längre
+
+**Generell slutsats:** för en potensfunktion $f(x) = C \\cdot x^a$ gäller att om *x* multipliceras med $k$ multipliceras funktionsvärdet med $k^a$, oberoende av $C$ och av var man börjar. Med $a = 3$ räcker en ganska liten ökning av längden för en stor ökning av vikten.`,
+        },
+        {
+            level: 3,
+            question: `Låt $f(x) = x^4$ och $g(x) = 2^x$.<br>a) Visa utan räknare att graferna till $f$ och $g$ skär varandra där $x = 16$.<br>b) Bestäm alla positiva $x$ där $f(x) = g(x)$. Avrunda till två decimaler där det behövs.<br>c) För vilka positiva $x$ är $g(x) > f(x)$?`,
+            answer: { value: 16, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', values: [1.24, 16], unit: '', tol: 0.01, etikett: '$x =$' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** $f$ är en potensfunktion med variabeln i basen och $g$ en exponentialfunktion med variabeln i exponenten. För stora *x* vinner exponentialfunktionen alltid, men på vägen dit kan potensfunktionen ligga över.
+
+**a)** Skriv 16 som en potens av 2, $16 = 2^4$:
+
+$$ f(16) = 16^4 = \\left(2^4\\right)^4 = 2^{16} $$
+
+$$ g(16) = 2^{16} $$
+
+Båda funktionerna har värdet $2^{16}$ när $x = 16$, så graferna skär varandra där.
+
+**Svar:** $f(16) = 16^4 = (2^4)^4 = 2^{16} = g(16)$
+
+**b)** En tabell visar mellan vilka *x* som funktionerna byter plats:
+
+| $x$ | $f(x) = x^4$ | $g(x) = 2^x$ |
+| --- | --- | --- |
+| 1 | 1 | 2 |
+| 2 | 16 | 4 |
+| 10 | $10\\,000$ | $1\\,024$ |
+| 20 | $160\\,000$ | $1\\,048\\,576$ |
+
+När $x = 1$ är $g$ störst, när $x = 2$ är $f$ störst. Det finns alltså en skärning mellan 1 och 2. Mellan $x = 2$ och $x = 16$ ligger $f$ över, och efter 16 ligger $g$ över. Med digitala verktyg (skärning mellan graferna) blir den första skärningen $x = 1{,}2396\\ldots$
+
+**Svar:** $x \\approx 1{,}24$ och $x = 16$
+
+**c)** Enligt tabellen och skärningarna ligger grafen till $g$ över grafen till $f$ före den första skärningen och efter den andra.
+
+Kontroll: $x = 0{,}5$ ger $f(0{,}5) = 0{,}0625$ och $g(0{,}5) = \\sqrt{2} \\approx 1{,}41$, och $x = 20$ ger enligt tabellen $g(20) > f(20)$.
+
+**Svar:** För $0 < x < 1{,}24$ och för $x > 16$
+
+**Generell slutsats:** en exponentialfunktion med $a > 1$ växer till slut snabbare än varje potensfunktion, eftersom den multipliceras med samma faktor för varje steg, medan potensfunktionens ökning i procent blir allt mindre. Var omkörningen sker kan däremot ligga långt bort.`,
+        },
+        {
+            level: 3,
+            question: `Elin löser två ekvationer så här:
+
+$$ x^4 = 81 \\quad \\Longrightarrow \\quad x = \\sqrt[4]{81} = 3 $$
+
+$$ x^3 = -8 \\quad \\Longrightarrow \\quad \\text{ingen lösning, roten ur ett negativt tal finns inte} $$
+
+a) Förklara vad som är fel i Elins lösningar och ange de rätta lösningarna.<br>b) Låt $n$ vara ett positivt heltal. Hur många lösningar har ekvationen $x^n = b$, beroende på om $n$ är jämnt eller udda och om $b$ är positivt, 0 eller negativt?`,
+            answer: { value: -2, unit: '' },
+            delsvar: [
+                { del: 'a', values: [3, -3], unit: '', etikett: '$x^4 = 81$ ger $x =$' },
+                { del: 'a', value: -2, unit: '', etikett: '$x^3 = -8$ ger $x =$' },
+                { del: 'b' },
+            ],
+            solution: `**Insikten:** frågan att ställa är inte "vilken rot ska jag dra?" utan "vilka tal upphöjt till $n$ ger $b$?". En jämn exponent gör ett negativt tal positivt, en udda exponent behåller tecknet.
+
+**a)** Första ekvationen: både $3^4 = 81$ och $(-3)^4 = 81$, eftersom $(-3)^4 = (-3) \\cdot (-3) \\cdot (-3) \\cdot (-3)$ har ett jämnt antal minustecken. Elin har missat den negativa lösningen.
+
+$$ x = \\pm\\sqrt[4]{81} = \\pm 3 $$
+
+Andra ekvationen: ett negativt tal upphöjt till 3 är negativt, så det finns ett tal som fungerar. Eftersom $2^3 = 8$ är
+
+$$ (-2)^3 = (-2) \\cdot (-2) \\cdot (-2) = -8 $$
+
+Det som saknas är kvadratroten ur negativa tal, inte tredjeroten. $\\sqrt[3]{-8} = -2$.
+
+**Svar:** $x^4 = 81$ har lösningarna $x = \\pm 3$, och $x^3 = -8$ har lösningen $x = -2$
+
+**b)** Grafen till $y = x^n$ ser ut som $y = x^2$ när $n$ är jämnt och som $y = x^3$ när $n$ är udda. Antalet lösningar är antalet skärningar med den vågräta linjen $y = b$.
+
+- **$n$ jämnt:** grafen ligger aldrig under *x*-axeln och är symmetrisk kring *y*-axeln. Om $b > 0$ blir det två lösningar, $x = \\pm\\sqrt[n]{b}$. Om $b = 0$ blir det en lösning, $x = 0$. Om $b < 0$ finns ingen lösning.
+- **$n$ udda:** grafen går från långt ned till vänster till långt upp till höger och passerar varje höjd en gång. Det finns alltid exakt en lösning, $x = \\sqrt[n]{b}$, med samma tecken som $b$.
+
+Kontroll med exempel: $x^2 = 9$ ger $\\pm 3$ (två), $x^2 = -9$ saknar lösning, $x^5 = -32$ ger $-2$ (en).
+
+**Svar:** Jämnt $n$: två lösningar om $b > 0$, en lösning om $b = 0$ och ingen lösning om $b < 0$. Udda $n$: alltid exakt en lösning.
+
+**Generell slutsats:** udda eller jämn exponent avgör både grafens form och antalet lösningar till potensekvationen. Skissa grafen och linjen $y = b$ för att se svaret direkt.`,
+        },
+        {
+            level: 3,
+            question: `Pulsen $P$ slag per minut hos däggdjur i vila kan grovt beskrivas av modellen $P(m) = 240 \\cdot m^{-0{,}25}$, där $m$ är djurets massa i kg.<br>a) Beräkna enligt modellen pulsen hos en katt som väger 4 kg. Avrunda till tiotal.<br>b) Hur tungt är ett djur som enligt modellen har pulsen 60 slag per minut? Lös uppgiften utan räknare.<br>c) Hur ändras pulsen enligt modellen om massan blir 16 gånger så stor?`,
+            answer: { value: 256, unit: 'kg' },
+            delsvar: [
+                { del: 'a', value: 170, unit: 'slag/min', tol: 0.03 },
+                { del: 'b', value: 256, unit: 'kg' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** exponenten $-0{,}25$ betyder "dividera med fjärderoten". Eftersom $m^{0{,}25} = \\sqrt[4]{m}$ är modellen $P(m) = \\dfrac{240}{\\sqrt[4]{m}}$. Fjärderötter av 4, 16 och 256 går att räkna i huvudet.
+
+**a)** Fjärderoten ur 4 är $\\sqrt{2}$, eftersom $\\left(\\sqrt{2}\\right)^4 = 2^2 = 4$:
+
+$$ P(4) = \\frac{240}{\\sqrt[4]{4}} = \\frac{240}{\\sqrt{2}} = 169{,}7\\ldots \\approx 170 $$
+
+**Svar:** Cirka 170 slag per minut
+
+**b)** Sätt modellen lika med 60:
+
+$$ \\frac{240}{\\sqrt[4]{m}} = 60 $$
+
+Multiplicerar båda led med $\\sqrt[4]{m}$:
+
+$$ \\boldsymbol{\\sqrt[4]{m}} \\mathbin{\\boldsymbol{\\cdot}} \\frac{240}{\\sqrt[4]{m}} = 60 \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{\\sqrt[4]{m}} $$
+
+$$ 240 = 60\\sqrt[4]{m} $$
+
+Dividerar båda led med 60:
+
+$$ \\frac{240}{\\boldsymbol{60}} = \\frac{60\\sqrt[4]{m}}{\\boldsymbol{60}} $$
+
+$$ \\sqrt[4]{m} = 4 $$
+
+Upphöjer båda led till 4:
+
+$$ m = 4^4 = 256 $$
+
+Kontroll: $\\sqrt[4]{256} = 4$, eftersom $4^4 = 256$, och $\\dfrac{240}{4} = 60$. Stämmer.
+
+**Svar:** 256 kg
+
+**c)** Om massan multipliceras med 16 multipliceras pulsen med $16^{-0{,}25}$:
+
+$$ 16^{-0{,}25} = \\frac{1}{\\sqrt[4]{16}} = \\frac{1}{2} $$
+
+Kontroll med siffror från a) och b): massan $4 \\cdot 16 = 64$ kg ger $P(64) = \\dfrac{240}{\\sqrt[4]{64}} = \\dfrac{240}{2\\sqrt{2}} = 84{,}8\\ldots$, vilket är hälften av $169{,}7\\ldots$.
+
+**Svar:** Pulsen halveras
+
+**Generell slutsats:** en potensfunktion med negativ exponent är avtagande för $x > 0$. Med $a = -0{,}25$ halveras funktionsvärdet varje gång *x* blir 16 gånger så stort, var man än börjar. Det är därför små djur har så hög puls.`,
+        },
+        {
+            level: 3,
+            question: `Låt $f(x) = 2x^3$ och $g(x) = C \\cdot x^a$, där $C > 0$.<br>a) Bestäm $C$ och $a$ så att $f(g(x)) = 16x^6$ för alla $x$.<br>b) Är $g(f(x))$ samma funktion som $f(g(x))$ med de värden du fick i a)? Motivera.`,
+            answer: { value: 2, unit: '' },
+            delsvar: [
+                { del: 'a', value: 2, unit: '', etikett: '$C =$' },
+                { del: 'a', value: 2, unit: '', etikett: '$a =$' },
+                { del: 'b' },
+            ],
+            solution: `**Insikten:** räkna inifrån och ut, men med hela funktionsuttrycket i stället för ett tal. Sätt in $g(x)$ på varje ställe där $f$ har ett $x$. Två uttryck $p \\cdot x^q$ är lika för alla $x$ bara om både koefficienterna och exponenterna är lika.
+
+**a)** Den inre funktionen $g(x) = C \\cdot x^a$ sätts in i $f$:
+
+$$ f(g(x)) = 2 \\cdot \\left(C \\cdot x^a\\right)^3 $$
+
+Potenslagarna ger $\\left(C \\cdot x^a\\right)^3 = C^3 \\cdot \\left(x^a\\right)^3 = C^3 \\cdot x^{3a}$, så
+
+$$ f(g(x)) = 2C^3 \\cdot x^{3a} $$
+
+Det ska vara lika med $16x^6$ för alla $x$. Exponenterna ska vara lika:
+
+$$ 3a = 6 $$
+
+Dividerar båda led med 3:
+
+$$ \\frac{3a}{\\boldsymbol{3}} = \\frac{6}{\\boldsymbol{3}} $$
+
+$$ a = 2 $$
+
+Koefficienterna ska vara lika:
+
+$$ 2C^3 = 16 $$
+
+Dividerar båda led med 2:
+
+$$ \\frac{2C^3}{\\boldsymbol{2}} = \\frac{16}{\\boldsymbol{2}} $$
+
+$$ C^3 = 8 $$
+
+$$ C = \\sqrt[3]{8} = 2 $$
+
+Kontroll: $g(x) = 2x^2$ ger $f(g(x)) = 2 \\cdot \\left(2x^2\\right)^3 = 2 \\cdot 8x^6 = 16x^6$. Stämmer.
+
+**Svar:** $C = 2$ och $a = 2$, alltså $g(x) = 2x^2$
+
+**b)** Nu är $f(x) = 2x^3$ den inre funktionen:
+
+$$ g(f(x)) = 2 \\cdot \\left(2x^3\\right)^2 = 2 \\cdot 4x^6 = 8x^6 $$
+
+Kontroll med ett tal, $x = 1$: $f(g(1)) = f(2) = 16$ men $g(f(1)) = g(2) = 8$.
+
+**Svar:** Nej, $g(f(x)) = 8x^6$ medan $f(g(x)) = 16x^6$. Ordningen spelar roll.
+
+**Generell slutsats:** en potensfunktion insatt i en annan potensfunktion ger en ny potensfunktion, där exponenterna multipliceras. Koefficienterna behandlas olika beroende på vilken funktion som är den inre, och därför blir $f(g(x))$ och $g(f(x))$ i regel olika.`,
+        },
+        {
+            level: 3,
+            question: `Punkten $P$ ligger på grafen till $y = 8x^{-1}$, där $x > 0$. En rektangel har ett hörn i origo, det motsatta hörnet i $P$ och sidorna längs axlarna.<br>a) Visa att rektangelns area är 8 areaenheter, var på grafen $P$ än ligger.<br>b) För vilket värde på $a$ har rektangeln samma area för alla punkter $P$ om grafen i stället är $y = 8x^a$?<br>c) $P$ ligger nu på grafen till $y = 8x^{-2}$, där $x > 0$. Var ligger $P$ om rektangelns area är 2 areaenheter?`,
+            answer: { value: 4, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: -1, unit: '', etikett: '$a =$' },
+                { del: 'c', value: 4, unit: '', etikett: '$x =$' },
+                { del: 'c', value: 0.5, unit: '', etikett: '$y =$' },
+            ],
+            solution: `**Insikten:** om $P = (x, y)$ har rektangeln bredden $x$ och höjden $y$, så arean är $x \\cdot y$. Sätts funktionsuttrycket in blir arean en ny potensfunktion av $x$, och den är konstant precis när exponenten blir 0.
+
+**a)** Med $y = 8x^{-1}$ är arean
+
+$$ x \\cdot y = x \\cdot 8x^{-1} = 8x^{1 + (-1)} = 8x^0 = 8 $$
+
+Uttrycket innehåller inget $x$, så arean är 8 för varje punkt på grafen.
+
+Kontroll med två punkter: $P = (1, 8)$ ger $1 \\cdot 8 = 8$, och $P = (4, 2)$ ger $4 \\cdot 2 = 8$.
+
+**Svar:** Arean är $x \\cdot 8x^{-1} = 8$ areaenheter för alla $P$
+
+**b)** Med $y = 8x^a$ är arean
+
+$$ x \\cdot 8x^a = 8x^{a + 1} $$
+
+Den är oberoende av $x$ bara om exponenten är 0:
+
+$$ a + 1 = 0 $$
+
+Subtraherar 1 från båda led:
+
+$$ a + 1 \\mathbin{\\boldsymbol{-}} \\boldsymbol{1} = 0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{1} $$
+
+$$ a = -1 $$
+
+För alla andra $a$ beror arean på var $P$ ligger.
+
+**Svar:** $a = -1$
+
+**c)** Med $a = -2$ är arean $8x^{-2 + 1} = 8x^{-1} = \\dfrac{8}{x}$. Den ska vara 2:
+
+$$ \\frac{8}{x} = 2 $$
+
+Multiplicerar båda led med $x$:
+
+$$ \\boldsymbol{x} \\mathbin{\\boldsymbol{\\cdot}} \\frac{8}{x} = 2 \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{x} $$
+
+$$ 8 = 2x $$
+
+Dividerar båda led med 2:
+
+$$ \\frac{8}{\\boldsymbol{2}} = \\frac{2x}{\\boldsymbol{2}} $$
+
+$$ x = 4 $$
+
+Då är $y = 8 \\cdot 4^{-2} = \\dfrac{8}{16} = 0{,}5$.
+
+Kontroll: rektangeln har arean $4 \\cdot 0{,}5 = 2$. Stämmer.
+
+**Svar:** $P = (4;\\ 0{,}5)$
+
+**Generell slutsats:** för $y = C \\cdot x^a$ är rektangelns area $C \\cdot x^{a + 1}$. Grafen till $y = \\dfrac{C}{x}$ är den enda potensfunktion där alla sådana rektanglar har samma area. Det är ett kännetecken för omvänd proportionalitet: när $x$ fördubblas halveras $y$.`,
         },
     ],
 

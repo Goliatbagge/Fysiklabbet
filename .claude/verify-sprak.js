@@ -303,6 +303,14 @@ for (const fil of filer) {
                 rattelse: 'Deluppgifter skrivs på rader direkt under varandra, utan ' +
                           'tomrad emellan. Se "Deluppgifter" i CLAUDE.md.' });
         }
+        // Deluppgifterna åtskiljs av radbrytningen, aldrig av kommatecken
+        // (påpekat 2026-10-14, fy2-2.3 exempel 1): "**a) amplituden,**".
+        // Sista deluppgiften får sluta med punkt eller frågetecken.
+        if (/,\*\*\s*$/.test(rad)) {
+            fel.push({ ...post, regel: 'kommatecken-efter-deluppgift',
+                rattelse: 'En deluppgift slutar inte med kommatecken; radbrytningen ' +
+                          'skiljer deluppgifterna åt. Se "Deluppgifter" i CLAUDE.md.' });
+        }
         if (!/\*\*\s*$/.test(rad.slice(2))) {
             fel.push({ ...post, regel: 'deluppgift-over-flera-rader',
                 rattelse: 'En deluppgift ska stå på EN källrad (**a) …**), annars ' +

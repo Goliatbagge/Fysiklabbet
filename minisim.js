@@ -61,7 +61,8 @@
  * skalenliga, färgerna som i genomgångens figur. Starta/Pausa, Börja om,
  * Ultrarapid; info-raden visar y, v och a med enhet. Kryssrutor tänder och
  * släcker varje graf, och en tidsglidare (0 till 2T) pausar och låter
- * eleven dra tiden fram och tillbaka. Ren SVG, inget ljud.
+ * eleven dra tiden fram och tillbaka; den lodräta markören i graferna går
+ * också att dra direkt. Ren SVG, inget ljud.
  *
  * ── typ: magnetpoler / magnetdelning ────────────────────────────────────
  * Stavmagneterna ur fy2-3.1 (Magnetism och magnetfält). magnetpoler: två
@@ -10944,6 +10945,10 @@
             });
             s += '<line x1="' + r1(cx) + '" y1="' + (PANEL[0].c - 42) + '" x2="' + r1(cx) + '" y2="' + (PANEL[2].c + 42) +
                 '" stroke="' + INK + '" stroke-width="1" stroke-dasharray="4 3" opacity="0.55"/>';
+            // handtag: markören går att dra i sidled för att ändra tiden
+            var hy = PANEL[0].c - 42;
+            s += '<polygon points="' + r1(cx - 7) + ',' + (hy - 10) + ' ' + r1(cx + 7) + ',' + (hy - 10) + ' ' + r1(cx) + ',' + hy +
+                '" fill="' + INK + '" opacity="0.7"/>';
             PANEL.forEach(function (p, i) {
                 if (!visa[i]) return;
                 s += '<circle cx="' + r1(cx) + '" cy="' + r1(p.c - PAMP * fns[i](tm)) + '" r="4.2" fill="' + p.f + '"/>';
@@ -10970,7 +10975,9 @@
             'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
             'aria-label="En vikt svänger i en fjäder. Bredvid ritas tre grafer upp samtidigt: läget y, ' +
             'hastigheten v och accelerationen a mot tiden t. En lodrät markör visar samma ögonblick i alla tre.">' +
-            bas + '<g class="ms-sg-dyn"></g></svg>';
+            bas + '<g class="ms-sg-dyn"></g>' +
+            '<rect class="ms-sg-drag" x="' + (GX0 - 8) + '" y="' + (PANEL[0].c - 60) + '" width="' + (GX1 - GX0 + 16) +
+            '" height="' + (PANEL[2].c - PANEL[0].c + 104) + '" fill="transparent" style="cursor:ew-resize;touch-action:pan-y"/></svg>';
         var dyn = scene.querySelector('.ms-sg-dyn');
         card.appendChild(scene);
 
@@ -11036,6 +11043,28 @@
         tRad.appendChild(tVal);
         card.appendChild(tRad);
         var dragar = false;
+        // dra i den lodräta markören (eller var som helst i graferna)
+        var svgEl = scene.querySelector('svg'), dragYta = scene.querySelector('.ms-sg-drag'), drar = false;
+        function tidUrPekare(ev) {
+            var pt = svgEl.createSVGPoint();
+            pt.x = ev.clientX; pt.y = ev.clientY;
+            var m = svgEl.getScreenCTM();
+            if (!m) return;
+            var x = pt.matrixTransform(m.inverse()).x;
+            tid = Math.max(0, Math.min(2 * T, (x - GX0) / (GX1 - GX0) * 2 * T));
+            if (spelar) setSpelar(false);
+            startBtn.textContent = tid > 0 ? 'Fortsätt' : 'Starta';
+            rita();
+        }
+        dragYta.addEventListener('pointerdown', function (ev) {
+            drar = true;
+            try { dragYta.setPointerCapture(ev.pointerId); } catch (e) {}
+            tidUrPekare(ev);
+            ev.preventDefault();
+        });
+        dragYta.addEventListener('pointermove', function (ev) { if (drar) tidUrPekare(ev); });
+        dragYta.addEventListener('pointerup', function () { drar = false; });
+        dragYta.addEventListener('pointercancel', function () { drar = false; });
         tSlider.addEventListener('input', function () {
             dragar = true;
             if (spelar) setSpelar(false);

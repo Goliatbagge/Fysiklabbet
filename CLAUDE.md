@@ -86,6 +86,14 @@ node .claude/verify-matte-radbrytning.js
 # dev-servern på port 8000 + playwright-core i %TEMP%\pptr-test.
 node .claude/verify-formelklipp.js [avsnitts-id …]
 
+# Verifiera att varje INBÄDDNING (::: minisim, ::: graf, ::: video) syns i
+# presentationsläget (KÖR FÖRE COMMIT när du lagt in en ny inbäddning!) —
+# stegar igenom avsnittet på 1290×730 och kräver att varje inbäddning i
+# något steg ligger helt ovanför kontrollisten. Se punkt 7 under
+# "Presentationsläget". Kräver dev-servern på port 8000 + playwright-core
+# i %TEMP%\pptr-test.
+node .claude/verify-pres-inbaddning.js [avsnitts-id …]
+
 # Verifiera att de FASTNÅLADE UPPGIFTSRUTORNA aldrig skrollar i sig själva
 # (KÖR FÖRE COMMIT vid ändringar i np.html:s frågekort, handskrift.js
 # uppgiftspanel eller figurernas CSS!) — stegvyn, presentationsläget och
@@ -1115,6 +1123,18 @@ användaren påpekat (2026-08-25).
    automatiskt för alla exempel med lösning. Skriv ändå nya frågestammar
    som ETT stycke med `<br>` före deluppgifterna (se "Deluppgifter" under
    Typografi), så att teorivyn och presentationsläget läser likadant.
+
+7. **En inbäddad simulering, graf eller film i en ruta får ett EGET steg.**
+   En demonstrationsruta med text + simulering var ett enda steg och högre
+   än duken: rutans överkant lades 10 % ned, simuleringen hamnade under
+   kontrollisten och nästa klick hoppade förbi den (påpekat 2026-10-14,
+   båda demonstrationsrutorna i `fy2-2.3`). `buildPresSteps` delar därför
+   varje ruta som har en `.lab-minisim` som direkt barn: texten före är
+   ett steg, och simuleringen tänds tillsammans med stycket direkt före
+   den ("I simuleringen nedan …") som nästa steg. Skriv alltså gärna ett
+   kort inledande stycke direkt före en inbäddad simulering. Kör
+   `node .claude/verify-pres-inbaddning.js <avsnitt>` när du lagt in en
+   ny inbäddning.
 
 **Granska i skärmdump på en låg skärm (t.ex. 1290×730), inte bara i DOM:en**
 — felet syns bara i renderingen. Skriptet
@@ -2272,7 +2292,11 @@ felen ger `verify-sprak.js` fel på (`tomrad-mellan-deluppgifter`,
 ett kommatecken som hänger kvar i radslutet läser som om meningen fortsatte.
 Det gäller även när deluppgifterna är korta ord eller enheter, och även när
 den gemensamma frågestammen slutar mitt i en mening ("Bestäm
-vinkelhastigheten i").
+vinkelhastigheten i"). Det gäller
+också när deluppgifterna står på egna rader i md-filen: `**a) amplituden**`,
+aldrig `**a) amplituden,**`. Sista deluppgiften får sluta med punkt eller
+frågetecken (påpekat 2026-10-14, Exempel 1 i `fy2-2.3`; `verify-sprak.js`
+har regeln `kommatecken-efter-deluppgift`).
 
 - ✓ `**En karusell roterar ett varv på 10 sekunder. Bestäm vinkelhastigheten i<br>a) grader/s&emsp;&emsp;b) rad/s.**`
 - ✗ `**… Bestäm vinkelhastigheten i<br>a) grader/s, b) rad/s.**` (kommatecken)

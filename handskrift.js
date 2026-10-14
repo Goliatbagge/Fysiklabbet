@@ -11977,6 +11977,11 @@
     }
     T.str('x', TX + colW / 2 - T.adv('x', 0.6) / 2, TY + rowH - 8, null, 0.6);
     T.str('y', TX + colW * 1.5 - T.adv('y', 0.6) / 2, TY + rowH - 8, null, 0.6);
+    T.pause(160);
+    /* formeln som x-värdena sätts in i står överst, i uträkningarnas
+     * kolumn, så att eleven hela tiden ser vad som räknas (användarkrav
+     * 2026-10-14) */
+    T.str('y=−2x+3', TX + 2 * colW + 16, TY + rowH - 8, null, 0.6);
     T.stepEnd();
 
     tanke(TY + 8 * rowH, [

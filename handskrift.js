@@ -21907,11 +21907,31 @@
       [['som störst, alltså 1. Det sker']],
       [['i jämviktsläget.']]
     ]);
-    tanke(bF4);
-    placeString('d) Farten är störst då cos(10t)=1', padL, y,
-                s * 0.62, F * 0.62, acts);
+    /* Hastighetens formel skrivs först, sedan slutsatsen i ord, och en
+     * blå underklammer under cos(10t) med värdet 1 — så att det syns
+     * VAR ettan i v_max = 1,5 · 1 kommer ifrån. */
+    placeString('d) Maximala farten', padL, y, s * 0.62, F * 0.62, acts);
     pause(300);
     y += 1.7 * F;
+    var yV = y;
+    var xd0 = placeString('v=1,5 ', padL, y, s, F, acts);
+    var xd1 = placeString('cos(10t)', xd0, y, s, F, acts);
+    stepEnd();
+
+    y += 2.8 * F;
+    bF4.y = bubbleTop(y - adv);
+    tanke(bF4);
+    placeString('Farten störst då cos(10t)=1', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    /* underklammer: fötterna under svansarna, spetsen nedåt */
+    var ybFot = yV + 0.36 * F, bh = 0.30 * F;
+    acts.push({ kind: 'stroke', pts: bracePts(xd0 - 2, xd1 + 2, ybFot, -bh), color: BLUE });
+    pause(110);
+    var w1 = stringAdvance('1', s * 0.6, F * 0.6);
+    placeString('1', (xd0 + xd1) / 2 - w1 / 2, ybFot + bh * 1.18 + 0.82 * F, s * 0.6, F * 0.6, acts, BLUE);
+    stepEnd();
+
+    y += 1.9 * F;
     placeString('v_m_a_x=1,5·1=1,5 m/s', padL, y, s, F, acts);
     stepEnd();
 
@@ -21937,6 +21957,15 @@
     placeString('e) Derivera hastigheten', padL, y, s * 0.62, F * 0.62, acts);
     pause(300);
     y += 1.7 * F;
+    placeString('v=1,5 cos(10t)', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv;
+    var bE1 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Deriverar: cos blir −sin, och den']],
+      [['inre derivatan 10 hamnar framför.']]
+    ]);
+    tanke(bE1);
     placeString("a=v'=−10·1,5 sin(10t)", padL, y, s, F, acts);
     stepEnd();
 

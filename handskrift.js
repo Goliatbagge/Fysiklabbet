@@ -90,6 +90,15 @@
  *   Piltangent höger/vänster stegar också fram/tillbaka — i den SENAST
  *   ANVÄNDA widgeten (hovring/klick avgör när flera ligger på samma sida).
  *
+ * REGEL (RITA BARA AV DET SOM BEHÖVS, användarkrav 2026-10-14): en
+ * graf eller figur som redan står i uppgiften ritas INTE av i pennscenen
+ * när lösningen bara går ut på att avläsa eller bedöma den (vilken graf
+ * är en proportionalitet, vilken figur är likformig). Avritningen
+ * tillför ingenting och tar bara tid. Pennan ritar en figur när ritandet
+ * ÄR en del av lösningen: uppgiften ber om en graf, värden ska prickas
+ * in, hjälplinjer eller mått ska läggas till, eller figuren behövs för
+ * att resonemanget ska gå att följa. Referens: layoutProportionalitet.
+ *
  * REGEL (figurscener, t.ex. hage/gungbrada): i de handritade DIAGRAMMEN
  * (till skillnad från algebra-raderna) ritas grundscenen — streckgubbar,
  * bräda/vägg/hage-linjer, skraffering — alltid i grafit. Alla
@@ -11898,60 +11907,32 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
     var tanke = mkTanke(T);
 
+    /* Graferna ritas INTE av: de står redan i uppgiften, och uppgiften är
+     * bara att avläsa dem. En avritning tillför ingenting till lösningen
+     * (användarkrav 2026-10-14, se REGEL "RITA BARA AV DET SOM BEHÖVS"). */
     tanke(20, [
       [['En proportionalitet måste']],
       [['uppfylla TVÅ krav: rät linje,']],
       [['och gå genom origo.']]
     ], 0);
-    /* y0 vald så att axlarnas TOPPAR (y0 − 4·u − 22) hamnar under 150 —
-     * det tredje systemet ligger vid x≈476 och skulle annars sticka in i
-     * inställningsrutans mobilzon (se REGEL i filhuvudet). */
-    var y0 = 300, u = 26, boxW = 210;
-    var namn = ['A', 'B', 'C'];
-    var A = [], i;
-    for (i = 0; i < 3; i++) {
-      A.push(mkAxes(T, F, { ox: padL + 26 + i * boxW, oy: y0, u: u,
-                            xmin: 0, xmax: 4, ymin: 0, ymax: 4 }));
-    }
-    /* de tre koordinatsystemen ritas i ETT steg — de är bara ram */
-    for (i = 0; i < 3; i++) {
-      A[i].axes();
-      T.str(namn[i], A[i].X(1.6), y0 + 1.5 * F, null, 0.62);
-      T.pause(150);
-    }
+    y = 116;
+    T.str('Prövar båda kraven på varje graf', padL, y - 1.6 * F, null, 0.62);
+    T.str('A: rät linje, genom origo', padL, y, null, 0.62);
     T.stepEnd();
 
-    tanke(y0 + 1.7 * F, [
-      [['A är en rät linje som går']],
-      [['genom origo.']]
-    ], 0.3);
-    A[0].rule([A[0].X(0), A[0].Y(0)], [A[0].X(4.2), A[0].Y(4.2)]);
-    T.stepEnd();
-
-    tanke(y0 + 1.7 * F, [
+    tanke(y, [
       [['B är en rät linje, men den']],
       [['skär y-axeln ovanför origo.']]
     ], 0.3);
-    A[1].rule([A[1].X(0), A[1].Y(1.5)], [A[1].X(4.2), A[1].Y(4.4)]);
-    T.stepEnd();
-
-    tanke(y0 + 1.7 * F, [
-      [['C går genom origo, men den']],
-      [['är krokig, inte rät.']]
-    ], 0.3);
-    acts.push({ kind: 'stroke', pts: humanize([
-      [A[2].X(0), A[2].Y(0)], [A[2].X(1), A[2].Y(0.25)],
-      [A[2].X(2), A[2].Y(1)], [A[2].X(3), A[2].Y(2.25)],
-      [A[2].X(4), A[2].Y(4)]]) });
-    T.stepEnd();
-
-    y = y0 + 3.2 * F;
-    T.str('A: rät linje, genom origo', padL, y, null, 0.62);
-    T.stepEnd();
-    y += 1.5 * F;
+    y += 3.6 * F;
     T.str('B: rät linje, men INTE genom origo', padL, y, null, 0.62);
     T.stepEnd();
-    y += 1.5 * F;
+
+    tanke(y, [
+      [['C går genom origo, men den']],
+      [['är krökt, inte rät.']]
+    ], 0.3);
+    y += 3.6 * F;
     T.str('C: genom origo, men INTE rät linje', padL, y, null, 0.62);
     T.stepEnd();
 

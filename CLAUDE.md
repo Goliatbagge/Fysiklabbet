@@ -547,6 +547,14 @@ Så här bygger du scenen:
    rimligt läge. Läser scenen sina egna `ox`/`oy`/`u` efter anropet ska
    den ta dem från `A.ox`/`A.oy`/`A.u` (användarkrav 2026-10-13,
    `ma1c-4.1` exempel 1c). Bygg aldrig ett eget axelkors bredvid.
+3m. **Rita bara av det som behövs.** En graf eller figur som redan står i
+   uppgiften ritas inte av i pennscenen när lösningen bara går ut på att
+   avläsa eller bedöma den ("Vilken av graferna visar en
+   proportionalitet?"). Avritningen tillför ingenting. Pennan ritar när
+   ritandet är en del av lösningen: uppgiften ber om en graf, värden
+   prickas in, hjälplinjer eller mått läggs till, eller figuren behövs för
+   att resonemanget ska gå att följa (användarkrav 2026-10-14, referens:
+   `layoutProportionalitet`, `ma1c-4.2` exempel 2).
 3d. **Roten ur båda led som egen rad.** `x² = 9` → `x = ±√9` → `x = ±3`,
    aldrig direkt till `±3` (användarkrav 2026-09-20). De svagaste eleverna
    ska kunna följa varje steg. Gäller pennlösning och textlösning;

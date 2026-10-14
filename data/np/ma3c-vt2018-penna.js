@@ -1982,10 +1982,10 @@
     Ax.axes();
     Ax.ticks(V.heltal(-1, 3), V.heltal(-2, 5), [1], [1]);
     T.pause(160);
-    kurva(Ax, acts, f, -0.85, 3.54, null, 90);
+    kurva(Ax, acts, f, -0.85, 3.54, BLUE, 90);
     T.str('f', Ax.X(2.7), Ax.Y(4.4), null, 0.62);
     T.pause(140);
-    kurva(Ax, acts, g, -0.5, 2.5, null, 70);
+    kurva(Ax, acts, g, -0.5, 2.5, BLUE, 70);
     T.str('g', Ax.X(1.25), Ax.Y(2.35), null, 0.62);
     T.stepEnd();
 

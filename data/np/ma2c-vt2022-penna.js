@@ -209,7 +209,7 @@
     /* steg 2: grafen (samplad ur funktionen) och punkterna */
     var pts = [];
     for (i = -1.8; i <= 4.8 + 1e-9; i += 0.2) pts.push([ax.X(i), ax.Y(f(i))]);
-    acts.push({ kind: 'stroke', pts: pts });
+    acts.push({ kind: 'stroke', pts: pts, color: BLUE });
     T.pause(200);
     ax.dot(-1, 0); ax.tag(-1, 0, 'D', -24, -10);
     T.pause(120);
@@ -2542,7 +2542,7 @@
     /* steg 2: parabeln, samplad ur funktionen, med sin etikett */
     var pts = [];
     for (i = 0; i <= 28 + 1e-9; i += 0.5) pts.push([ax.X(i), ax.Y(f(i))]);
-    acts.push({ kind: 'stroke', pts: pts });
+    acts.push({ kind: 'stroke', pts: pts, color: BLUE });
     T.pause(200);
     T.str('y=f(x)', ax.X(25) + 14, ax.Y(15), null, 0.5);
     T.stepEnd();

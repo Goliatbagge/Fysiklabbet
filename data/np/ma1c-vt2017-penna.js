@@ -642,7 +642,7 @@
     /* skalsiffran 2 utelämnas: trappstegets mått "2 min" står just där */
     A.ticks(V.heltal(-3, 5), V.heltal(-20, 0, 5), [-2, 4], [-5, -10, -15, -20]);
     T.pause(200);
-    A.rule([A.X(0), A.Y(-6)], [A.X(4), A.Y(-18)]);
+    A.rule([A.X(0), A.Y(-6)], [A.X(4), A.Y(-18)], BLUE);
     T.stepEnd();
 
     tanke(400, [
@@ -813,7 +813,7 @@
                  [-1.4, -2], [-0.4, -1.2], [1, 0.6], [2.6, 2.4], [4, 3.6],
                  [5, 3.2], [6, 2]];
     acts.push({ kind: 'stroke',
-                pts: kurva.map(function (p) { return [A.X(p[0]), A.Y(p[1])]; }) });
+                pts: kurva.map(function (p) { return [A.X(p[0]), A.Y(p[1])]; }), color: BLUE });
     T.pause(200);
     A.dot(-5, 1);
     T.pause(120);

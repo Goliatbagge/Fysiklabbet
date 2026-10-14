@@ -635,7 +635,7 @@
     G.ticks([1, 2, 3, 4, 5, 6], [2, 4, 6, 8, 10]);
     T.lbl('m/s', G.X(0) - 58, G.Y(10) - 16);
     T.lbl('s', G.X(6) + 42, G.Y(0) + 30);
-    G.rule([G.X(0), G.Y(2)], [G.X(6), G.Y(8)]);
+    G.rule([G.X(0), G.Y(2)], [G.X(6), G.Y(8)], BLUE);
     T.stepEnd();
 
     T.tanke(T.figurBubble(292, [

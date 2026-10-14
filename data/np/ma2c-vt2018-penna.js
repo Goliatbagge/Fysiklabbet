@@ -199,7 +199,7 @@
     ax.ticks([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5], [-4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7],
              [-4, -2, 2, 4], [2, 4, 6]);
     T.pause(150);
-    ax.rule([ax.X(-3.5), ax.Y(-4)], [ax.X(2), ax.Y(7)]);
+    ax.rule([ax.X(-3.5), ax.Y(-4)], [ax.X(2), ax.Y(7)], BLUE);
     T.stepEnd();
 
     /* steg 2: m */
@@ -270,7 +270,7 @@
     /* steg 2: parabeln och de tre punkterna */
     var pts = [];
     for (i = -3.5; i <= 1.5 + 1e-9; i += 0.125) pts.push([ax.X(i), ax.Y(f(i))]);
-    acts.push({ kind: 'stroke', pts: pts });
+    acts.push({ kind: 'stroke', pts: pts, color: BLUE });
     T.pause(200);
     ax.dot(-3, 0);
     T.pause(120);
@@ -2187,7 +2187,7 @@
     T.pause(150);
     var pts = [];
     for (i = 1.4; i <= 8.6 + 1e-9; i += 0.2) pts.push([ax.X(i), ax.Y(f(i))]);
-    acts.push({ kind: 'stroke', pts: pts });
+    acts.push({ kind: 'stroke', pts: pts, color: BLUE });
     T.pause(150);
     dashLine(T, [ax.X(5), ax.Y(0)], [ax.X(5), ax.Y(4.8)], 11, BLUE);
     T.str('x=5', ax.X(5) + 6, ax.Y(4.7), BLUE, 0.5);

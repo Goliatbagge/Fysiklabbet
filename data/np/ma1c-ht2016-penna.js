@@ -340,7 +340,7 @@
     A.axes();
     A.ticks(V.heltal(2, 10, 2), V.heltal(1, 6), V.heltal(2, 10, 2), [2, 4, 6]);
     T.pause(200);
-    A.rule([A.X(0), A.Y(6)], [A.X(10), A.Y(1)]);
+    A.rule([A.X(0), A.Y(6)], [A.X(10), A.Y(1)], BLUE);
     T.stepEnd();
 
     /* ---- a) ---- */

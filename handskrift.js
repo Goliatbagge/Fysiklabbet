@@ -606,6 +606,31 @@
  * Eleven ska se vilka två saker som sätts lika. Källraden skrivs i
  * segment så att delarnas x-gränser finns.
  *
+ * REGEL (SKALVÄRDEN PÅ SIN PLATS, TONAS BORT NÄR GRAFEN RITAS,
+ * användarkrav 2026-10-14): skalvärdena på axlarna skrivs ALLTID på sin
+ * normala plats, mitt under sitt skalstreck på x-axeln och till vänster
+ * om sitt skalstreck på y-axeln. Flytta aldrig ett tal i sidled eller
+ * nedåt för att det ska gå fri från en graf som ritas senare (ticks()
+ * nudge-argument är bara till för krockar med något som redan står på
+ * arket). När en graf, en kurva eller en annan sammanhängande linje
+ * sedan ritas genom ett tal tonas talet bort just när linjen ritas. Det
+ * sköts automatiskt av efterpasset tonaSkalvarden(), som körs på varje
+ * scen: mkAxes() märker talen, och det första långa pennstreck som korsar
+ * ett tal får en fade på talet före sig. Korta streck (bokstäver, prickar,
+ * streckade hjälplinjer) och tillfälliga streck som själva tonas bort
+ * (ringar, hjälplinjer till en punkt) tonar inte bort något, för då
+ * pekar de ju på talet. Rita därför koordinatsystem med mkAxes() och
+ * graferna som egna streck, så följer regeln med av sig själv.
+ *
+ * REGEL (GRAFEN RITAS I BLÅTT, användarkrav 2026-10-14): en grafs kurva
+ * eller linje ritas med blåpennan (BLUE), aldrig i samma bläck som
+ * axlarna. A.graphKM() och A.curve() ritar blått som standard; en kurva
+ * som byggs för hand får color: BLUE. Undantag: när blått redan skiljer
+ * ut något PÅ eller LÄNGS grafen (en tangent, en sekant, ett markerat
+ * intervall av kurvan, en av två kurvor som ska jämföras) behåller
+ * grundkurvan bläcket, annars går skillnaden förlorad. Geometriska
+ * figurer i ett koordinatsystem (trianglar, vektorer) är inga grafer.
+ *
  * REGEL (SVAR MED STOR BOKSTAV, användarkrav 2026-09-20): svarsraden
  * inleds med stor bokstav när svaret är ett ord eller en mening — "Svar:
  * Till exempel a=10 och b=2", "Svar: Nollställen", "Svar: Cirka 1 760
@@ -11240,6 +11265,32 @@
     function line(p1, p2, col) {
       acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: col || null });
     }
+    /* axelkorsets och skalans egna streck märks (ax), så att efterpasset
+     * tonaSkalvarden() aldrig räknar dem som en graf som korsar ett tal */
+    function axLine(p1, p2) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: null, ax: 1 });
+    }
+    /* SKALVÄRDE: talet skrivs på sin NORMALA plats och dess streck märks
+     * med en gemensam ruta (axl). Korsar en graf, en kurva eller en punkt
+     * som ritas SENARE talet tonar efterpasset tonaSkalvarden() bort det
+     * just innan det strecket ritas. Se REGEL (SKALVÄRDEN PÅ SIN PLATS,
+     * TONAS BORT NÄR GRAFEN RITAS) i filhuvudet. */
+    function axStr(t, x, yb) {
+      var i0 = acts.length;
+      T.str(t, x, yb, null, 0.45);
+      var grupp = { x0: Infinity, y0: Infinity, x1: -Infinity, y1: -Infinity };
+      for (var i = i0; i < acts.length; i++) {
+        var a = acts[i];
+        if (a.kind !== 'stroke') continue;
+        a.axl = grupp;
+        a.pts.forEach(function (p) {
+          if (p[0] < grupp.x0) grupp.x0 = p[0];
+          if (p[0] > grupp.x1) grupp.x1 = p[0];
+          if (p[1] < grupp.y0) grupp.y0 = p[1];
+          if (p[1] > grupp.y1) grupp.y1 = p[1];
+        });
+      }
+    }
     /* rak linje utan handskakning — "dragen med linjal" */
     function rule(p1, p2, col) {
       acts.push({ kind: 'stroke',
@@ -11254,13 +11305,13 @@
     function axes() {
       var x0 = X(o.xmin) - 0.5 * u, x1 = X(o.xmax) + 0.85 * u;
       var y0 = Y(o.ymax) - 0.85 * u, y1 = Y(o.ymin) + 0.5 * u;
-      line([x0, oy], [x1, oy]);
-      line([x1 - 9, oy - 5], [x1 + 1, oy]);
-      line([x1 - 9, oy + 5], [x1 + 1, oy]);
+      axLine([x0, oy], [x1, oy]);
+      axLine([x1 - 9, oy - 5], [x1 + 1, oy]);
+      axLine([x1 - 9, oy + 5], [x1 + 1, oy]);
       T.pause(140);
-      line([ox, y1], [ox, y0]);
-      line([ox - 5, y0 + 9], [ox, y0 - 1]);
-      line([ox + 5, y0 + 9], [ox, y0 - 1]);
+      axLine([ox, y1], [ox, y0]);
+      axLine([ox - 5, y0 + 9], [ox, y0 - 1]);
+      axLine([ox + 5, y0 + 9], [ox, y0 - 1]);
       T.pause(140);
       placeGlyph(o.xlab || 'x', x1 - 6, oy + 30, s * 0.6, acts);
       placeGlyph(o.ylab || 'y', ox + 11, y0 + 6, s * 0.6, acts);
@@ -11288,19 +11339,19 @@
       }
       (xs || []).forEach(function (v) {
         if (v === 0) return;
-        line([X(v), oy - 4], [X(v), oy + 4]);
+        axLine([X(v), oy - 4], [X(v), oy + 4]);
         if (xlab && xlab.indexOf(v) < 0) return;
         var t = num(v), w = T.adv(t, 0.45), d = off(nx, v);
-        T.str(t, X(v) - w / 2 + d[0], oy + 0.83 * F + d[1], null, 0.45);
+        axStr(t, X(v) - w / 2 + d[0], oy + 0.83 * F + d[1]);
         T.pause(80);
       });
       T.pause(120);
       (ys || []).forEach(function (v) {
         if (v === 0) return;
-        line([ox - 4, Y(v)], [ox + 4, Y(v)]);
+        axLine([ox - 4, Y(v)], [ox + 4, Y(v)]);
         if (ylab && ylab.indexOf(v) < 0) return;
         var t = num(v), w = T.adv(t, 0.45), d = off(ny, v);
-        T.str(t, ox - 9 - w + d[0], Y(v) + 0.16 * F + d[1], null, 0.45);
+        axStr(t, ox - 9 - w + d[0], Y(v) + 0.16 * F + d[1]);
         T.pause(80);
       });
     }
@@ -11339,7 +11390,23 @@
     function graphKM(k, m, col, x0, x1) {
       x0 = x0 == null ? o.xmin - 0.4 : x0;
       x1 = x1 == null ? o.xmax + 0.4 : x1;
-      rule([X(x0), Y(k * x0 + m)], [X(x1), Y(k * x1 + m)], col);
+      /* GRAFEN I BLÅTT: aldrig i samma bläck som axlarna, se REGEL
+       * (GRAFEN RITAS I BLÅTT) i filhuvudet */
+      rule([X(x0), Y(k * x0 + m)], [X(x1), Y(k * x1 + m)], col || BLUE);
+    }
+    /* KURVA ur sin funktion (eller en färdig punktlista), i blått som
+     * standard. f är en funktion av x eller en lista [[px, py], …] i
+     * arkets koordinater. */
+    function curve(f, x0, x1, col, n) {
+      var pts = [];
+      if (typeof f === 'function') {
+        n = n || Math.max(24, Math.ceil(Math.abs(X(x1) - X(x0)) / 4));
+        for (var i = 0; i <= n; i++) {
+          var xv = x0 + (x1 - x0) * i / n;
+          pts.push([X(xv), Y(f(xv))]);
+        }
+      } else { pts = f; col = x0; }
+      acts.push({ kind: 'stroke', pts: pts, color: col || BLUE });
     }
     /* LUTNINGSTRAPPAN mellan två punkter: vågrätt Δx och lodrätt Δy,
      * streckade i blått, med måtten skrivna intill i fri yta.
@@ -11403,7 +11470,78 @@
     }
     return { X: X, Y: Y, num: num, line: line, rule: rule, axes: axes,
              ticks: ticks, dot: dot, guides: guides, tag: tag,
-             graphKM: graphKM, stair: stair, ox: ox, oy: oy, u: u };
+             graphKM: graphKM, curve: curve, stair: stair,
+             ox: ox, oy: oy, u: u };
+  }
+
+  /* EFTERPASS: SKALVÄRDEN SOM HAMNAR I VÄGEN TONAS BORT.
+   * Skalvärdena skrivs alltid på sin normala plats (mkAxes märker dem med
+   * en ruta, axl). Här letas, för varje värde, det FÖRSTA senare
+   * pennstrecket som korsar dess ruta (graf, kurva, punkt, etikett, men
+   * aldrig axelkorsets eller skalans egna streck). Precis före det
+   * strecket läggs en fade på värdets streck, så att talet tonar bort när
+   * grafen ritas genom det. Körs på varje scen, se mount() och scen().
+   * REGEL (SKALVÄRDEN PÅ SIN PLATS, TONAS BORT NÄR GRAFEN RITAS). */
+  function tonaSkalvarden(acts) {
+    if (!acts || !acts.length) return acts;
+    var grupper = [], sist = new Map();
+    acts.forEach(function (a, i) {
+      if (a.kind === 'stroke' && a.axl) {
+        if (!sist.has(a.axl)) grupper.push(a.axl);
+        sist.set(a.axl, i);
+      }
+    });
+    if (!grupper.length) return acts;
+    var M = 2;
+    /* bara sammanhängande linjer och kurvor räknas: korta streck är
+     * bokstäver, prickar eller streckade hjälplinjer som PEKAR på talet */
+    function langd(pts) {
+      var s = 0;
+      for (var i = 1; i < pts.length; i++) {
+        s += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
+      }
+      return s;
+    }
+    function korsar(g, pts) {
+      var x0 = g.x0 - M, x1 = g.x1 + M, y0 = g.y0 - M, y1 = g.y1 + M;
+      function inne(p) { return p[0] >= x0 && p[0] <= x1 && p[1] >= y0 && p[1] <= y1; }
+      for (var i = 0; i < pts.length; i++) {
+        if (inne(pts[i])) return true;
+        if (i) {
+          var a = pts[i - 1], b = pts[i];
+          var d = Math.hypot(b[0] - a[0], b[1] - a[1]), n = Math.ceil(d / 1.5);
+          for (var k = 1; k < n; k++) {
+            if (inne([a[0] + (b[0] - a[0]) * k / n, a[1] + (b[1] - a[1]) * k / n])) return true;
+          }
+        }
+      }
+      return false;
+    }
+    /* streck som själva tonas bort senare (hjälplinjer, ringar) är
+     * tillfälliga och får inte tona bort ett skalvärde: talet behövs
+     * ju just när hjälplinjen pekar på det */
+    var tillfalliga = new Set();
+    acts.forEach(function (a) { if (a.kind === 'fade' && a.ref) tillfalliga.add(a.ref); });
+    var infoga = {};   /* index → lista med fade-akter före det strecket */
+    grupper.forEach(function (g) {
+      for (var i = sist.get(g) + 1; i < acts.length; i++) {
+        var a = acts[i];
+        if (a.kind !== 'stroke' || a.ax || a.axl || !a.pts ||
+            tillfalliga.has(a) || langd(a.pts) < 40) continue;
+        if (!korsar(g, a.pts)) continue;
+        var lista = infoga[i] || (infoga[i] = []);
+        acts.forEach(function (b) {
+          if (b.kind === 'stroke' && b.axl === g) lista.push({ kind: 'fade', ref: b });
+        });
+        break;
+      }
+    });
+    var ut = [];
+    acts.forEach(function (a, i) {
+      if (infoga[i]) Array.prototype.push.apply(ut, infoga[i]);
+      ut.push(a);
+    });
+    return ut;
   }
 
   /* TAL I PENNSKRIFT: tusentalsgrupper åtskilda med mellanslag och
@@ -12016,10 +12154,9 @@
     var A = mkAxes(T, F, { ox: padL + 190, oy: y + 350, u: 26,
                            xmin: -3, xmax: 3, ymin: -3, ymax: 9 });
     A.axes();
-    /* linjen y=−2x+3 korsar x-axeln vid x=1,5 och passerar rakt genom
-     * tvåans siffra strax nedanför axeln — den flyttas därför åt vänster */
-    A.ticks(heltal(-3, 3), heltal(-3, 9), null, [-2, 2, 4, 6, 8],
-            { x: { 2: -15 } });
+    /* linjen y=−2x+3 går genom tvåan under x-axeln: tvåan står ändå på
+     * sin plats och tonas bort när linjen ritas (tonaSkalvarden) */
+    A.ticks(heltal(-3, 3), heltal(-3, 9), null, [-2, 2, 4, 6, 8]);
     T.stepEnd();
 
     /* Koordinatsystemet upptar x 129–320 och hela höjden här nedanför.
@@ -12576,7 +12713,7 @@
     A.axes();
     A.ticks(heltal(-3, 4), heltal(-3, 3), [-2, 2, 3, 4], [-2, 2]);
     T.pause(150);
-    A.rule([A.X(3), A.Y(-3.3)], [A.X(3), A.Y(3.3)]);
+    A.rule([A.X(3), A.Y(-3.3)], [A.X(3), A.Y(3.3)], BLUE);
     T.stepEnd();
 
     tanke(360, [
@@ -12828,7 +12965,7 @@
      * strax utanför och skulle annars ritas rakt igenom svarsraderna
      * längre ned på arket. −1,37 och 3,37 är där |f(x)| når 4. */
     for (t = -1.37; t <= 3.3701; t += 0.2) pts.push([A.X(t), A.Y(fv(t))]);
-    acts.push({ kind: 'stroke', pts: humanize(pts) });
+    acts.push({ kind: 'stroke', pts: humanize(pts), color: BLUE });
     T.str('f', A.X(3.4), A.Y(3.4), null, 0.62);
     T.stepEnd();
 
@@ -12919,9 +13056,8 @@
     var A = mkAxes(T, F, { ox: padL + 200, oy: y + 220, u: 28,
                            xmin: -2, xmax: 4, ymin: -5, ymax: 5 });
     A.axes();
-    /* linjen y=-x+3 korsar sifferraden vid x≈3,9 och går rakt genom fyran */
-    A.ticks(heltal(-2, 4), heltal(-5, 5), [-2, -1, 1, 2, 3, 4], [-4, -2, 2, 4],
-            { x: { 4: [0, 22] } });
+    /* linjen y=-x+3 går rakt genom fyran, som tonas bort när linjen ritas */
+    A.ticks(heltal(-2, 4), heltal(-5, 5), [-2, -1, 1, 2, 3, 4], [-4, -2, 2, 4]);
     T.pause(150);
     A.graphKM(3, -5, null, -0.2, 3.3);
     T.pause(200);
@@ -12979,10 +13115,10 @@
     var A = mkAxes(T, F, { ox: padL + 150, oy: y + 250, u: 26,
                            xmin: -1, xmax: 6, ymin: -5, ymax: 6 });
     A.axes();
-    /* BÅDA linjerna korsar sifferraden vid x≈3 (de skär ju varandra där),
-     * så trean måste ned under dem — i sidled finns ingen fri plats */
+    /* båda linjerna går genom trean (de skär varandra där), som tonas
+     * bort när den första linjen ritas */
     A.ticks(heltal(-1, 6), heltal(-5, 6), [-1, 1, 2, 3, 4, 5, 6],
-            [-4, -2, 2, 4, 6], { x: { 3: [0, 24] } });
+            [-4, -2, 2, 4, 6]);
     T.pause(150);
     A.graphKM(-2, 5, null, -0.7, 5.2);
     T.pause(200);
@@ -13099,7 +13235,7 @@
     T.pause(150);
     var pts = [], t;
     for (t = -1; t <= 2.0001; t += 0.15) pts.push([A.X(t), A.Y(fv(t))]);
-    acts.push({ kind: 'stroke', pts: humanize(pts) });
+    acts.push({ kind: 'stroke', pts: humanize(pts), color: BLUE });
     T.pause(180);
     /* öppen ring i vänsteränden, ifylld punkt i högeränden */
     acts.push({ kind: 'stroke', pts: ringPts(A.X(-1), A.Y(0), 4.5, 4.5) });
@@ -13301,7 +13437,7 @@
     T.pause(150);
     var pts = [], t;
     for (t = -2; t <= 2.3001; t += 0.2) pts.push([A.X(t), A.Y(Math.pow(2, t))]);
-    acts.push({ kind: 'stroke', pts: humanize(pts) });
+    acts.push({ kind: 'stroke', pts: humanize(pts), color: BLUE });
     T.stepEnd();
 
     tanke(360, [
@@ -58274,6 +58410,7 @@
     var L = (spec && !Array.isArray(spec) && SCENES[spec.typ])
       ? SCENES[spec.typ](Object.assign({}, spec, { vagg: ekvLage === 'vagg' }), F)
       : layout(spec, F);
+    if (L && L.acts) L.acts = tonaSkalvarden(L.acts);
 
     /* svg är "skrivbordet": papperet + extra marginal höger/nedåt så att
      * handen får rum att sticka ut utanför papperskanten. Bredden är
@@ -59382,9 +59519,11 @@
   window.HANDSKRIFT = {
     mount: mount, mountAll: mountAll, version: 1,
     scen: function (typ, F, cfg) {
-      return SCENES[typ]
+      var L = SCENES[typ]
         ? SCENES[typ](Object.assign({ typ: typ }, cfg || {}), F || FSIZE)
         : null;
+      if (L && L.acts) L.acts = tonaSkalvarden(L.acts);
+      return L;
     },
     typer: function () { return Object.keys(SCENES); },
     saknadeGlyfer: function () { return SAKNADE; },

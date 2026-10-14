@@ -160,7 +160,7 @@
     T.pause(200);
     var P = [[-4.5, 1], [-3, -2], [-1, 2], [2, 2], [4.35, -0.35]];
     for (var i = 1; i < P.length; i++) {
-      T.line([A.X(P[i - 1][0]), A.Y(P[i - 1][1])], [A.X(P[i][0]), A.Y(P[i][1])]);
+      T.line([A.X(P[i - 1][0]), A.Y(P[i - 1][1])], [A.X(P[i][0]), A.Y(P[i][1])], BLUE);
       T.pause(80);
     }
     T.str('y=f(x)', A.X(0.6), A.Y(2.9), null, 0.5);
@@ -2637,9 +2637,9 @@
     /* ---- figuren ---- */
     A.axes();
     T.pause(120);
-    kurva(A, acts, f, -0.3, 2.4, null, 70);
+    kurva(A, acts, f, -0.3, 2.4, BLUE, 70);
     T.pause(140);
-    kurva(A, acts, g, 0.95, 1.6, null, 50);
+    kurva(A, acts, g, 0.95, 1.6, BLUE, 50);
     T.pause(140);
     skugga(T, A, acts, f, function (x) { return x < 1 ? 0 : g(x); }, 0, a, 0.08);
     T.str('f', A.X(2.25), A.Y(f(2.25)) - 12, null, 0.62);
@@ -3091,9 +3091,9 @@
     A.axes();
     A.ticks([-3, 3], [], [-3, 3], []);
     T.pause(120);
-    A.rule([A.X(-4.2), A.Y(5)], [A.X(4.3), A.Y(5)]);
+    A.rule([A.X(-4.2), A.Y(5)], [A.X(4.3), A.Y(5)], BLUE);
     T.pause(120);
-    kurva(A, acts, f, -3.25, 3.25, null, 70);
+    kurva(A, acts, f, -3.25, 3.25, BLUE, 70);
     T.pause(120);
     /* luckan mellan x = 1,6 och 2,5 lämnas fri för radien (x = 2) */
     skugga(T, A, acts, function () { return 5; }, f, -3, 1.6, 0.3);

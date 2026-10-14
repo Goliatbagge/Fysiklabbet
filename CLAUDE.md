@@ -563,6 +563,21 @@ Så här bygger du scenen:
    prickas in, hjälplinjer eller mått läggs till, eller figuren behövs för
    att resonemanget ska gå att följa (användarkrav 2026-10-14, referens:
    `layoutProportionalitet`, `ma1c-4.2` exempel 2).
+3n. **Skalvärdena står på sin plats och tonas bort när grafen ritas.** Ett
+   tal på axeln flyttas aldrig i sidled eller nedåt för att gå fri från en
+   graf som ritas senare: när koordinatsystemet ritas står varje tal där
+   det ska stå. Går grafen sedan genom ett tal tonas talet bort just när
+   grafen ritas (användarkrav 2026-10-14, referens: `layoutRitagraf`,
+   `ma1c-4.3` exempel 1). Det sköts automatiskt av `tonaSkalvarden()` i
+   `handskrift.js` för alla koordinatsystem som ritas med `mkAxes()`:
+   streckade hjälplinjer och ringar tonar inte bort något, eftersom de
+   pekar på talet. Se REGEL "SKALVÄRDEN PÅ SIN PLATS" i filhuvudet.
+3o. **Grafen ritas i blått, axlarna i bläck.** `A.graphKM()` och
+   `A.curve()` ritar blått som standard, och en kurva som byggs för hand
+   får `color: BLUE` (användarkrav 2026-10-14). Undantag: när blått redan
+   skiljer ut något på grafen (tangent, sekant, markerat intervall, en av
+   två kurvor som jämförs) behåller grundkurvan bläcket. Se REGEL "GRAFEN
+   RITAS I BLÅTT" i filhuvudet.
 3d. **Roten ur båda led som egen rad.** `x² = 9` → `x = ±√9` → `x = ±3`,
    aldrig direkt till `±3` (användarkrav 2026-09-20). De svagaste eleverna
    ska kunna följa varje steg. Gäller pennlösning och textlösning;

@@ -375,7 +375,7 @@
       var t = i / 120, x = xTop + (7.3 - xTop) * t * t;
       gren.push([A.X(x), A.Y(f(x))]);
     }
-    acts.push({ kind: 'stroke', pts: gren });
+    acts.push({ kind: 'stroke', pts: gren, color: BLUE });
     T.stepEnd();
 
     y = oy + 6 * u + 70;
@@ -841,7 +841,7 @@
       var yy = 2.03 * i / 60;
       kurva.push([A.X(Math.pow(yy, 4)), A.Y(yy)]);
     }
-    acts.push({ kind: 'stroke', pts: kurva });
+    acts.push({ kind: 'stroke', pts: kurva, color: BLUE });
     T.pause(140);
     T.line([A.X(0), A.Y(2)], [A.X(16.6), A.Y(2)]);
     T.str('y=2', A.X(3), A.Y(2) - 8, null, 0.5);
@@ -2790,7 +2790,7 @@
     /* ---- figuren ---- */
     A.axes();
     T.pause(120);
-    kurva(A, acts, f, 0.74, 1.74, null, 70);
+    kurva(A, acts, f, 0.74, 1.74, BLUE, 70);
     T.pause(140);
     skugga(T, A, acts, f, function () { return 0; }, a, b, 0.07);
     T.str('a', A.X(a) - 22, A.Y(0) + 24, BLUE, 0.62);
@@ -3210,7 +3210,7 @@
     A.axes();
     A.ticks(V.heltal(1, 7), [2, -2, -4, -6], [1, 3, 4, 6, 7], [2, -2, -4, -6]);
     T.pause(120);
-    kurva(A, acts, f, 0.62, 6.38, null, 80);
+    kurva(A, acts, f, 0.62, 6.38, BLUE, 80);
     T.pause(140);
     skugga(T, A, acts, f, function () { return 0; }, 2, 5, 0.18);
     T.str('2', A.X(2) + 5, A.Y(0) + 22, BLUE, 0.5);

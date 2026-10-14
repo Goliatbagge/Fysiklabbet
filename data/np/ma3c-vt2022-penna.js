@@ -748,7 +748,7 @@
     T.pause(200);
     var kurva = [];
     for (i = -2.5; i <= 2.5; i += 0.2) kurva.push([A.X(i), A.Y(f(i))]);
-    acts.push({ kind: 'stroke', pts: kurva });
+    acts.push({ kind: 'stroke', pts: kurva, color: BLUE });
     T.stepEnd();
 
     tanke(400, [
@@ -819,7 +819,7 @@
     T.pause(200);
     var kurva = [];
     for (i = -1.2; i <= 4.1; i += 0.15) kurva.push([A.X(i), A.Y(p(i))]);
-    acts.push({ kind: 'stroke', pts: kurva });
+    acts.push({ kind: 'stroke', pts: kurva, color: BLUE });
     T.pause(160);
     A.dot(0, p(0), BLUE);
     T.pause(120);
@@ -889,7 +889,7 @@
     T.pause(200);
     var kurva = [];
     for (i = -1.15; i <= 2.15; i += 0.12) kurva.push([A.X(i), A.Y(f(i))]);
-    acts.push({ kind: 'stroke', pts: kurva });
+    acts.push({ kind: 'stroke', pts: kurva, color: BLUE });
     T.stepEnd();
 
     tanke(430, [
@@ -1058,7 +1058,7 @@
     T.pause(200);
     var kurva = [];
     for (i = -0.4; i <= 4.4; i += 0.15) kurva.push([A.X(i), A.Y(g(i))]);
-    acts.push({ kind: 'stroke', pts: kurva });
+    acts.push({ kind: 'stroke', pts: kurva, color: BLUE });
     T.pause(160);
     T.str('g', A.X(4.1), A.Y(g(4.1)) - 14, null, 0.62);
     T.pause(140);

@@ -15,7 +15,7 @@ fram på nivån kommer vi att göra det med digitala hjälpmedel, till exempel
 GeoGebra. För att förstå vad de digitala hjälpmedlen egentligen gör, så
 ska vi nu själva rita grafer för hand.
 
-::: exempel "Exempel 1 — Rita grafen för hand"
+::: exempel "Exempel 1: Rita grafen för hand"
 **Rita grafen till ekvationen $y = -2x + 3$.**
 
 ::: handskrift
@@ -56,12 +56,12 @@ Till sist förbinder vi punkterna med en rät linje och vi får då vår graf:
 ::: figur
 <svg viewBox="-26 -20 221 281" width="300" height="381" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Samma koordinatsystem där punkterna förbundits med en rät linje: grafen till y lika med minus 2 x plus 3."><line x1="14.4" y1="0.0" x2="14.4" y2="250.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="38.4" y1="0.0" x2="38.4" y2="250.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="62.4" y1="0.0" x2="62.4" y2="250.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="86.4" y1="0.0" x2="86.4" y2="250.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="110.4" y1="0.0" x2="110.4" y2="250.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="134.4" y1="0.0" x2="134.4" y2="250.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="158.4" y1="0.0" x2="158.4" y2="250.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="239.4" x2="172.8" y2="239.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="220.4" x2="172.8" y2="220.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="201.4" x2="172.8" y2="201.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="182.4" x2="172.8" y2="182.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="163.4" x2="172.8" y2="163.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="144.4" x2="172.8" y2="144.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="125.4" x2="172.8" y2="125.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="106.4" x2="172.8" y2="106.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="87.4" x2="172.8" y2="87.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="68.4" x2="172.8" y2="68.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="49.4" x2="172.8" y2="49.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="30.4" x2="172.8" y2="30.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="11.4" x2="172.8" y2="11.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="182.4" x2="180.8" y2="182.4" stroke="#1f2530" stroke-width="1.6"/><polygon points="188.8,182.4 178.8,177.9 178.8,186.9" fill="#1f2530"/><line x1="86.4" y1="250.8" x2="86.4" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="86.4,-16.0 81.9,-6.0 90.9,-6.0" fill="#1f2530"/><text x="186.8" y="200.4" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="95.4" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="14.4" y="198.4" font-size="12" text-anchor="middle" fill="#1f2530">−3</text><text x="38.4" y="198.4" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="62.4" y="198.4" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="110.4" y="198.4" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="134.4" y="198.4" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="158.4" y="198.4" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="80.4" y="243.4" font-size="12" text-anchor="end" fill="#1f2530">−3</text><text x="80.4" y="224.4" font-size="12" text-anchor="end" fill="#1f2530">−2</text><text x="80.4" y="205.4" font-size="12" text-anchor="end" fill="#1f2530">−1</text><text x="80.4" y="167.4" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="80.4" y="148.4" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="80.4" y="129.4" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="80.4" y="110.4" font-size="12" text-anchor="end" fill="#1f2530">4</text><text x="80.4" y="91.4" font-size="12" text-anchor="end" fill="#1f2530">5</text><text x="80.4" y="72.4" font-size="12" text-anchor="end" fill="#1f2530">6</text><text x="80.4" y="53.4" font-size="12" text-anchor="end" fill="#1f2530">7</text><text x="80.4" y="34.4" font-size="12" text-anchor="end" fill="#1f2530">8</text><text x="80.4" y="15.4" font-size="12" text-anchor="end" fill="#1f2530">9</text><line x1="7.2" y1="0.0" x2="165.6" y2="250.8" stroke="#4a7d3a" stroke-width="2"/><circle cx="14.4" cy="11.4" r="3.4" fill="#2563c9"/><circle cx="38.4" cy="49.4" r="3.4" fill="#2563c9"/><circle cx="62.4" cy="87.4" r="3.4" fill="#2563c9"/><circle cx="86.4" cy="125.4" r="3.4" fill="#2563c9"/><circle cx="110.4" cy="163.4" r="3.4" fill="#2563c9"/><circle cx="134.4" cy="201.4" r="3.4" fill="#2563c9"/><circle cx="158.4" cy="239.4" r="3.4" fill="#2563c9"/></svg>
 
-Grafen till $y = -2x + 3$ — en rät linje som lutar nedåt.
+Grafen till $y = -2x + 3$ är en rät linje som lutar nedåt.
 :::
 :::
 :::
 
-Det är precis det här som de digitala hjälpmedlen gör åt dig — fast på ett
+Det är precis det här som de digitala hjälpmedlen gör åt dig, fast på ett
 ögonblick. Dra i reglagen nedan och se direkt hur talet framför $x$
 (lutningen $k$) och den konstanta termen ($m$) ändrar linjens utseende. Sätt
 $k = -2$ och $m = 3$ så får du tillbaka grafen från exemplet ovan.
@@ -79,7 +79,7 @@ y: -6, 6
 
 Testa att låta $m$ vara oförändrad medan du drar i $k$: linjen vrider sig
 kring samma punkt på $y$-axeln. Ändrar du i stället $m$ flyttas hela linjen
-rakt upp eller ner. Den röda pricken visar var linjen skär $y$-axeln — den
+rakt upp eller ner. Den röda pricken visar var linjen skär $y$-axeln. Den
 ligger alltid i höjd med värdet på $m$. Det streckade trappsteget visar
 lutningen: går vi **ett steg åt höger** längs linjen, så går vi samtidigt
 **$k$ steg uppåt eller nedåt**. Du kan också dra i rutnätet för att flytta
@@ -89,7 +89,7 @@ höger).
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Rita en linje för hand"
-1. Välj några **enkla** $x$-värden, gärna $-2, 0, 2$.
+1. Välj några **enkla** $x$-värden, gärna $-2, -1, 0, 1$ och $2$.
 2. Räkna ut motsvarande $y$-värden och skriv dem i en värdetabell.
 3. Pricka in punkterna i koordinatsystemet.
 4. Dra en **rät linje** genom dem.

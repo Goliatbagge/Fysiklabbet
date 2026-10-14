@@ -284,7 +284,7 @@
                  [5, 6.5], [7, 5.6], [9, 5.0], [11, 6.0], [12, 6.8],
                  [14, 10.0], [16, 14.0], [17.2, 17.0]];
     acts.push({ kind: 'stroke',
-                pts: kurva.map(function (p) { return [A.X(p[0]), A.Y(p[1])]; }) });
+                pts: kurva.map(function (p) { return [A.X(p[0]), A.Y(p[1])]; }), color: BLUE });
     T.stepEnd();
 
     /* ---- a) f(2) ---- */
@@ -1182,19 +1182,18 @@
 
     /* ---- steg 1: rita av figuren ---- */
     A.axes();
-    /* parabeln skär x-axeln vid 1 och 3 och har sin botten en ruta under
-     * axeln vid 2 — x-talen sänks därför under parabelns botten */
+    /* x-talen står på sin plats; de som parabeln går genom (1, 2 och 3)
+     * tonas bort när den ritas (tonaSkalvarden i handskrift.js) */
     A.ticks(V.heltal(0, 5), V.heltal(-1, 9), V.heltal(1, 5),
-            [2, 4, 6, 8],
-            { x: { 1: [0, 20], 2: [0, 20], 3: [0, 20], 4: [0, 20], 5: [0, 20] } });
+            [2, 4, 6, 8]);
     T.pause(200);
-    A.rule([A.X(-0.5), A.Y(f(-0.5))], [A.X(5.6), A.Y(f(5.6))]);
+    A.rule([A.X(-0.5), A.Y(f(-0.5))], [A.X(5.6), A.Y(f(5.6))], BLUE);
     /* etiketten i den fria ytan mellan linjen och parabeln */
     T.str('f(x)', A.X(0.45), A.Y(4.4), null, 0.62);
     T.pause(220);
     var par = [];
     for (i = -0.5; i <= 5.15; i += 0.25) par.push([A.X(i), A.Y(g(i))]);
-    acts.push({ kind: 'stroke', pts: par });
+    acts.push({ kind: 'stroke', pts: par, color: BLUE });
     T.str('g(x)', A.X(4.2) - T.adv('g(x)', 0.62), A.Y(8.6), null, 0.62);
     T.stepEnd();
 

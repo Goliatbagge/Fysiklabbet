@@ -1326,11 +1326,12 @@ i `kopplingsschema.js`; läs dem innan du ändrar något.
 - **Menyvalet Resurser** (infört 2026-09-30, hette tidigare Verktyg) ligger
   efter Nationella prov i huvudmenyn. Det är en rullgardin med två grupper,
   byggda som Ämne-menyns grupper (`.lab-nav-dd-grupp`): **Verktyg**
-  (Kopplingsschema, Sannolikhetskalkylator, Sammanfattningar) och **Övningsblad** (Fysik, Matematik, som går till
-  `ovningsblad.html#fysik`/`#matematik`). Menyn finns på tretton sidor:
+  (Kopplingsschema, Sannolikhetskalkylator, Sammanfattningar,
+  Slumpa grupper) och **Övningsblad** (Fysik, Matematik, som går till
+  `ovningsblad.html#fysik`/`#matematik`). Menyn finns på fjorton sidor:
   `avsnitt`, `begrepp`, `index`, `katalog`, `kontakt`, `nyheter`,
   `nyhetsbrev`, `om`, `simuleringar`, `np`, `kopplingsschema`,
-  `sannolikhetskalkylator` och `ovningsblad` (samt
+  `sannolikhetskalkylator`, `slumpa-grupper` och `ovningsblad` (samt
   `utkast/sannolikhetshornan.html`). Ett nytt verktyg läggs till i alla;
   en ny sida med huvudmenyn ska ha Resurser med.
 - **`sammanfattningar.html`** (2026-10-05) visar avsnittens
@@ -1382,14 +1383,12 @@ SEO-upplägg som kopplingsschemat. Strukturen beskrivs i filhuvudet.
   förhandsvisningens adress. Öka `?v=` på skriptet när det ändras.
 - Teoriavsnittet `ma2c-6.5` länkar till verktyget.
 
-### Slumpa grupper (utkast/slumpa-grupper.html)
+### Slumpa grupper (slumpa-grupper.html)
 
-Tredje verktyget, förhandsvisas sedan 2026-10-13 i `utkast/`
-(`slumpa-grupper.html` + `slumpa-grupper.js`, noindex, olänkat). När det
-blir officiellt: flytta till roten (rätta `../`-sökvägarna, `index, follow`
-och canonical), lägg in det i Resurser-menyn på alla sidor, i `VERKTYG` i
-`data/sok.js` och i `UPDATES`, kör `node data/build-nyheter-og.js`, och
-låt utkastadressen bli en vidarebefordran. Omskrivet från lärarens egen app Slumpify (repot `Goliatbagge/slumpify`,
+Tredje verktyget (förhandsvisat 2026-10-13, officiellt 2026-10-14):
+`slumpa-grupper.html` + `slumpa-grupper.js` i roten.
+`utkast/slumpa-grupper.html` är en vidarebefordran från förhandsvisningens
+adress. Omskrivet från lärarens egen app Slumpify (repot `Goliatbagge/slumpify`,
 React + Firebase) till sajtens stil. Strukturen beskrivs i filhuvudet.
 
 - **Ingen inloggning och inget moln.** Klasslistor, inställningar och
@@ -1402,6 +1401,13 @@ React + Firebase) till sajtens stil. Strukturen beskrivs i filhuvudet.
   namn per rad öppnas som ny klasslista.
 - "Hellre större grupper" får bara göra grupperna en elev större än valt
   (7 elever, fyra per grupp blir 4 + 3, inte en grupp med sju).
+- **Storskärmen** (`passaStorskarm()`) räknar fram kolumnantal och
+  textstorlek ur antalet grupper, den största gruppen och det bredaste
+  namnet, och väger in hur mycket av höjden som fylls. Måtten i em hör ihop
+  med `.ark.fs`-reglerna i HTML-filen. Mät ytan med
+  `getBoundingClientRect()`, aldrig `clientWidth` (avrundningen uppåt bröt
+  om korten till fler rader). Den inbyggda webbläsaren ger ingen helskärm;
+  prova med puppeteer i riktig Chrome.
 - FAQ:n i JSON-LD ska vara ordagrant samma som de synliga frågorna. Öka
   `?v=` på skriptet när det ändras.
 

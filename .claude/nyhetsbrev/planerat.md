@@ -77,7 +77,9 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   `nyheter/brev/2026-10-18-presentationsfilm.jpg` (affisch med spelknapp)
   länkad till `https://fysiklabbet.se/#film` (startsidan, där filmen
   spelas). Finns filmen på YouTube-kanalen Fysiklabbet när brevet skrivs,
-  länka dit i stället; kontrollera det, gissa inte. E-post kan inte spela
+  länka dit i stället; kontrollera det, gissa inte. (Uppdatering
+  2026-10-14: filmen ligger nu offentligt på YouTube som kanalens första
+  video, https://youtu.be/ksLQWEVMWPo — länka dit.) E-post kan inte spela
   video, så bilden med spelknappen är länken. Uppmana gärna läsaren att
   visa filmen för kollegor och elever. Bocka av här när brevet är skrivet.
 
@@ -107,3 +109,27 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
      `https://fysiklabbet.se/fysik1-hiss-app.html`
   Ta egna skärmdumpar av hjulsimuleringen och hissen. Övrigt från veckan får
   bli korta rader eller vänta. Bocka av här när brevet är skrivet.
+
+- **Slumpa grupper, nytt lärarverktyg: SKA MED I BREVET 2026-10-18**
+  (användarens önskemål 2026-10-14). Lanserat 2026-10-14 under Resurser,
+  verktyg nummer tre efter kopplingsschemat och sannolikhetskalkylatorn:
+  `https://fysiklabbet.se/slumpa-grupper.html`
+  Läggs under "Nytt på Fysiklabbet" efter de tre punkterna ovan (filmen om
+  harmonisk svängning, hjulsimuleringen, hissen), som egen punkt med bild,
+  inte som kort rad. Det här ska fram:
+  - Klistra in klasslistan en gång, bocka av den som inte är här och slumpa
+    fram grupperna med ett klick. Elever per grupp eller antal grupper, och
+    om det inte går jämnt ut väljer man hellre större eller mindre grupper.
+  - Villkor: två elever kan arbeta tillsammans eller hållas isär, alltid
+    eller bara nästa gång.
+  - Dra i namnen (eller tryck två gånger på pekskärm) för att flytta eller
+    byta elever.
+  - **Storskärm**: grupperna fyller hela projektorduken med så stor text som
+    får plats, och man kan slumpa om direkt därifrån.
+  - **Ingen inloggning, inga namn på nätet**: allt sparas i webbläsaren, och
+    grupper och klasslistor sparas som fil för att tas med till nästa
+    lektion eller en annan dator. Det är en poäng för lärare som funderar
+    över elevnamn i molntjänster; formulera det sakligt.
+  Ta en egen skärmdump av storskärmsläget med påhittade namn (aldrig riktiga
+  elevnamn) och länka bilden till verktyget. Bocka av här när brevet är
+  skrivet.

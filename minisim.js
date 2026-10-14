@@ -59,7 +59,9 @@
  * ritas upp under två perioder, med en lodrät markör som binder ihop samma
  * ögonblick i alla tre. Pilarna för v (grön) och a (röd) på vikten är
  * skalenliga, färgerna som i genomgångens figur. Starta/Pausa, Börja om,
- * Ultrarapid; info-raden visar y, v och a med enhet. Ren SVG, inget ljud.
+ * Ultrarapid; info-raden visar y, v och a med enhet. Kryssrutor tänder och
+ * släcker varje graf, och en tidsglidare (0 till 2T) pausar och låter
+ * eleven dra tiden fram och tillbaka. Ren SVG, inget ljud.
  *
  * ── typ: magnetpoler / magnetdelning ────────────────────────────────────
  * Stavmagneterna ur fy2-3.1 (Magnetism och magnetfält). magnetpoler: två
@@ -10829,6 +10831,7 @@
         var PANEL = [{ c: 62, f: COL_Y, n: 'y' }, { c: 168, f: COL_V, n: 'v' }, { c: 274, f: COL_A, n: 'a' }];
         var PAMP = 32;
         var tid = 0, spelar = false, ultra = false, visaPilar = true;
+        var visa = [true, true, true];          // kryssrutorna för y, v och a
         var id = 'ms-sg-rutnat-' + (++sgRaknare);
 
         function r1(v) { return Math.round(v * 10) / 10; }
@@ -10916,11 +10919,14 @@
                 if (Math.abs(ar) > 0.12) s += lbl(FX + 28, ay0 - ar * PILMAX + (ar > 0 ? 10 : 4), 'start', it('a'), 15, COL_A);
             }
             // kurvorna fram till nu (tiden räknas om efter två perioder)
-            var tm = tid % (2 * T);
+            // tiden räknas om efter två perioder; exakt 2T visar hela kurvan
+            var tm = tid - 2 * T * Math.floor(tid / (2 * T));
+            if (tm < 1e-9 && tid > 0) tm = 2 * T;
             var cx = tx(tm);
             var fns = [function (t) { return Math.sin(OM * t); }, function (t) { return Math.cos(OM * t); },
                        function (t) { return -Math.sin(OM * t); }];
             PANEL.forEach(function (p, i) {
+                if (!visa[i]) return;
                 var N = Math.max(1, Math.ceil(tm / (2 * T) * 160)), pts = [];
                 for (var j = 0; j <= N; j++) {
                     var t = tm * j / N;
@@ -10931,10 +10937,13 @@
             s += '<line x1="' + r1(cx) + '" y1="' + (PANEL[0].c - 42) + '" x2="' + r1(cx) + '" y2="' + (PANEL[2].c + 42) +
                 '" stroke="' + INK + '" stroke-width="1" stroke-dasharray="4 3" opacity="0.55"/>';
             PANEL.forEach(function (p, i) {
+                if (!visa[i]) return;
                 s += '<circle cx="' + r1(cx) + '" cy="' + r1(p.c - PAMP * fns[i](tm)) + '" r="4.2" fill="' + p.f + '"/>';
             });
             dyn.innerHTML = s;
-            info.textContent = 't = ' + fmt(tid, 2) + ' s,  y = ' + fmt(A_M * yr, 3) + ' m,  v = ' +
+            if (!dragar) { tSlider.value = String(tm); }
+            tVal.textContent = fmt(tm, 2) + ' s';
+            info.textContent = 't = ' + fmt(tm, 2) + ' s,  y = ' + fmt(A_M * yr, 3) + ' m,  v = ' +
                 fmt(OM * A_M * vr, 2) + ' m/s,  a = ' + fmt(OM * OM * A_M * ar, 2) + ' m/s²';
         }
 
@@ -10985,6 +10994,49 @@
         controls.appendChild(ultraCk.label);
         controls.appendChild(pilCk.label);
         card.appendChild(controls);
+
+        // kryssrutor för de tre graferna
+        var visaRad = document.createElement('div');
+        visaRad.className = 'minisim-controls';
+        var grafCk = [['Läge ', 'y'], ['Hastighet ', 'v'], ['Acceleration ', 'a']].map(function (d, i) {
+            var c = mkCheck('', true);
+            var sp = document.createElement('span');
+            sp.innerHTML = d[0] + '<em>' + d[1] + '</em>';
+            sp.style.color = PANEL[i].f;
+            c.label.appendChild(sp);
+            c.cb.addEventListener('change', function () { visa[i] = c.cb.checked; rita(); });
+            visaRad.appendChild(c.label);
+            return c;
+        });
+        card.appendChild(visaRad);
+
+        // glidare för tiden: dra fram och tillbaka och läs av graferna
+        var tRad = document.createElement('div');
+        tRad.className = 'minisim-slider-row';
+        var tLblEl = document.createElement('span');
+        tLblEl.className = 'minisim-slider-lbl';
+        tLblEl.innerHTML = 'Tid <em>t</em>';
+        var tSlider = document.createElement('input');
+        tSlider.type = 'range';
+        tSlider.className = 'minisim-slider';
+        tSlider.min = '0'; tSlider.max = String(2 * T); tSlider.step = '0.01'; tSlider.value = '0';
+        tSlider.setAttribute('aria-label', 'Tiden i sekunder');
+        var tVal = document.createElement('span');
+        tVal.className = 'minisim-slider-val';
+        tRad.appendChild(tLblEl);
+        tRad.appendChild(tSlider);
+        tRad.appendChild(tVal);
+        card.appendChild(tRad);
+        var dragar = false;
+        tSlider.addEventListener('input', function () {
+            dragar = true;
+            if (spelar) setSpelar(false);
+            tid = parseFloat(tSlider.value);
+            startBtn.textContent = tid > 0 ? 'Fortsätt' : 'Starta';
+            rita();
+            dragar = false;
+        });
+
         var info = document.createElement('div');
         info.className = 'minisim-info';
         info.style.marginTop = '6px';

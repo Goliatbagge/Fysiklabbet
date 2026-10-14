@@ -1517,6 +1517,50 @@
                         continue;
                     }
                 }
+                // SIMULERINGEN FÅR ETT EGET STEG (påpekat 2026-10-14,
+                // fy2-2.3): en ruta (demo, formel …) med en inbäddad
+                // simulering är ofta högre än duken. Som ETT steg lades
+                // rutans överkant 10 % ned, simuleringen hamnade under
+                // underkanten och nästa klick hoppade förbi den. Rutan delas
+                // därför: texten före simuleringen är ett steg, och
+                // simuleringen tänds tillsammans med stycket direkt före den
+                // ("I simuleringen nedan …") som ett eget steg.
+                if (el.classList.contains('lab-block') &&
+                    Array.from(el.children).some(c => c.classList.contains('lab-minisim'))) {
+                    const subs = Array.from(el.children)
+                        .filter(c => !c.classList.contains('lab-block-title'));
+                    if (subs.length > 1) {
+                        el.classList.add('pres-block');
+                        blocks.push(el);
+                        const arSim = (c) => !!c && c.classList.contains('lab-minisim');
+                        let introSteg = null;   // stycket före simuleringen
+                        subs.forEach((c, i) => {
+                            c.classList.add('pres-sub');
+                            const prev = steps[steps.length - 1];
+                            if (arSim(c)) {
+                                if (introSteg && prev === introSteg) {
+                                    (prev.twins || (prev.twins = [])).push(c);
+                                } else {
+                                    steps.push({ el: c, block: el });
+                                }
+                                introSteg = null;
+                                return;
+                            }
+                            if (c.tagName === 'P' && i > 0 && arSim(subs[i + 1])) {
+                                introSteg = { el: c, block: el };
+                                steps.push(introSteg);
+                                return;
+                            }
+                            // första barnet, eller första efter en simulering
+                            if (i === 0 || arSim(subs[i - 1]) || !prev || prev.block !== el) {
+                                steps.push({ el: c, block: el });
+                                return;
+                            }
+                            (prev.twins || (prev.twins = [])).push(c);
+                        });
+                        continue;
+                    }
+                }
                 // EN NAMNGIVEN REGEL I TAGET (påpekat 2026-09-09): en
                 // formelruta som räknar upp FLERA regler under var sin
                 // fetstilsrubrik ("Addition — …", "Subtraktion — …",

@@ -2497,6 +2497,55 @@
             return 'wrong';
         }
 
+        // Deluppgift med flera lösningar (values: [8, -2]): eleven skriver
+        // lösningarna i valfri ordning, åtskilda av "och", "eller",
+        // semikolon eller komma följt av mellanslag. ±3 räknas som 3 och −3.
+        function checkDelsvarMangd(input, d) {
+            if (!input || !input.trim()) return 'unparseable';
+            const s = input.replace(/[−–—]/g, '-')
+                .replace(/±\s*(\d+(?:[.,]\d+)?)/g, '$1 och -$1')
+                .replace(/[a-zA-Zåäö₀-₉]+\s*=/g, ' ');
+            const tokens = s.split(/\s*(?:\boch\b|\beller\b|;|,\s+|\s{1,})\s*/i)
+                .map(t => parseAnswerParts(t)).filter(Boolean).map(p => p.value);
+            if (!tokens.length) return 'unparseable';
+            const kvar = d.values.slice();
+            for (const v of tokens) {
+                const i = kvar.findIndex(e => Math.abs(v - e) <= Math.max(Math.abs(e) * (d.tol || 0.02), 0.001));
+                if (i < 0) return 'wrong';
+                kvar.splice(i, 1);
+            }
+            return kvar.length ? 'wrong' : 'correct';
+        }
+        function checkDelsvar(input, d) {
+            if (Array.isArray(d.values)) return checkDelsvarMangd(input, d);
+            if (typeof d.value !== 'number') return null;   // besvaras i ord
+            return checkAnswer(input, d);
+        }
+        // Med svarsfält per deluppgift är frågans gamla instruktion ("Ange
+        // tiden (b) som ditt numeriska svar …") överflödig. Meningen tas
+        // bort ur kursivraden; övrigt där ("Räkna med g = …") står kvar.
+        function utanSvarsinstruktion(q) {
+            return q.replace(/(?<!\*)\*(?!\*)((?:[^*\n]|\*\*[^*\n]+\*\*)+)\*(?!\*)/g, (hel, inre) => {
+                inre = inre.replace(/\s+och ange [^.]*som ditt (?:numeriska )?svar/, '');
+                if (!/(^|\.\s+)Ange\b/.test(inre)) return '*' + inre + '*';
+                const kvar = inre.split(/(?<=\.)\s+(?=[A-ZÅÄÖ])/)
+                    .filter(m => !/^\s*Ange\b/.test(m))
+                    .join(' ').trim();
+                return kvar ? '*' + kvar + '*' : '';
+            }).replace(/\n{3,}/g, '\n\n').replace(/(\n|<br>)+\s*$/, '');
+        }
+        // Etikett i ett delsvarsfält: vanlig text med inslag av $…$.
+        function InlineMatte({ text }) {
+            const html = useMemo(() => text.split(/(\$[^$]+\$)/).map(del => {
+                if (/^\$[^$]+\$$/.test(del) && window.katex) {
+                    try { return window.katex.renderToString(del.slice(1, -1), { throwOnError: false }); }
+                    catch (e) {}
+                }
+                return del.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+            }).join(''), [text]);
+            return <span dangerouslySetInnerHTML={{ __html: html }} />;
+        }
+
         // Symboler för formaterings-popover. ·10ⁿ infogar literalt "·10^"
         // så eleven kan skriva valfri exponent direkt efter (t.ex. "·10^-3").
         const FORMAT_SYMBOLS = [
@@ -2606,6 +2655,16 @@
             const [showSolution, setShowSolution] = useState(false);
             const [formatOpen, setFormatOpen] = useState(false);
             const inputRef = useRef(null);
+            // Deluppgifter (a, b, c …) får var sitt svarsfält: uppgift.delsvar
+            // har en post per fält, se huvudet i data/ovningar.js.
+            const delar = !isMC && Array.isArray(uppgift.delsvar) && uppgift.delsvar.length ? uppgift.delsvar : null;
+            const [delSvar, setDelSvar] = useState(() => delar ? delar.map(() => '') : []);
+            const [delFb, setDelFb] = useState(() => delar ? delar.map(() => null) : []);
+            const delRefs = useRef([]);
+            const aktivDel = useRef(0);
+            const delarRattas = !!delar && delar.some(d => typeof d.value === 'number' || Array.isArray(d.values));
+            const fraga = useMemo(() => delar ? utanSvarsinstruktion(uppgift.question) : uppgift.question,
+                [uppgift.question, !!delar]);
             const answerOnly = useMemo(() => extractAnswer(uppgift.solution), [uppgift.solution]);
             const pennaKlar = useOvningPenna(showSolution ? uppgift.penna : null);
             const [losVy, setLosVy] = useState(lasHkVy);
@@ -2615,6 +2674,15 @@
                              : 'Nivå 3 · Avancerad';
 
             const handleCheck = () => {
+                if (delar) {
+                    setDelFb(delar.map((d, i) => {
+                        const ordDel = typeof d.value !== 'number' && !Array.isArray(d.values);
+                        if (!ordDel && !delSvar[i].trim()) return null;   // tomt fält: ingen dom
+                        const r = checkDelsvar(delSvar[i], d);
+                        return r === null ? 'ord' : r;
+                    }));
+                    return;
+                }
                 if (isMC) {
                     if (selected === null) return;
                     setFeedback(selected === uppgift.correct ? 'correct' : 'wrong');
@@ -2633,7 +2701,27 @@
                     handleCheck();
                 }
             };
+            const andraDel = (i, v) => {
+                setDelSvar(s => s.map((x, j) => j === i ? v : x));
+                setDelFb(f => f.map((x, j) => j === i ? null : x));
+            };
             const insertSymbol = (text) => {
+                if (delar) {
+                    const i = aktivDel.current;
+                    const el = delRefs.current[i];
+                    if (!el) return;
+                    const cur = delSvar[i];
+                    const start = el.selectionStart ?? cur.length;
+                    const end = el.selectionEnd ?? cur.length;
+                    andraDel(i, cur.slice(0, start) + text + cur.slice(end));
+                    setFormatOpen(false);
+                    setTimeout(() => {
+                        el.focus();
+                        const c = start + text.length;
+                        el.setSelectionRange(c, c);
+                    }, 0);
+                    return;
+                }
                 const el = inputRef.current;
                 if (!el) return;
                 const start = el.selectionStart ?? answer.length;
@@ -2659,8 +2747,89 @@
                         <span className="lab-mono-label">{levelLabel}</span>
                         <span className="lab-mono-label">Uppgift {index + 1} / {total}</span>
                     </div>
-                    <MarkdownBody source={uppgift.question} className="lab-ovning-question" />
-                    {isMC ? (
+                    <MarkdownBody source={fraga} className="lab-ovning-question" />
+                    {delar ? (
+                        <div className="lab-ovning-answer-row">
+                            <div className="lab-ovning-input-col lab-ovning-delar">
+                                <div className="lab-ovning-fx-bar">
+                                    <span className="lab-ovning-answer-label">Dina svar</span>
+                                    <div className="lab-ovning-fx-anchor">
+                                        <button
+                                            type="button"
+                                            className={'lab-ovning-fx-btn' + (formatOpen ? ' active' : '')}
+                                            onMouseDown={(e) => e.preventDefault()}
+                                            onClick={() => setFormatOpen(o => !o)}
+                                            title="Specialtecken"
+                                            aria-label="Specialtecken"
+                                        >fx</button>
+                                        {formatOpen && (
+                                            <div className="lab-ovning-fx-popover" onMouseLeave={() => setFormatOpen(false)}>
+                                                <div className="lab-ovning-fx-grid">
+                                                    {FORMAT_SYMBOLS.map(sym => (
+                                                        <button key={sym.label} type="button"
+                                                            title={sym.title}
+                                                            onMouseDown={(e) => e.preventDefault()}
+                                                            onClick={() => insertSymbol(sym.insert)}>
+                                                            {sym.label}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                                {delar.map((d, i) => {
+                                    const forst = i === 0 || delar[i - 1].del !== d.del;
+                                    const ord = typeof d.value !== 'number' && !Array.isArray(d.values);
+                                    const fb = delFb[i];
+                                    const cls = 'lab-ovning-answer-input'
+                                        + (fb === 'correct' ? ' is-correct' : '')
+                                        + (fb === 'wrong' ? ' is-wrong' : '');
+                                    return (
+                                        <div key={i} className={'lab-ovning-del' + (forst ? ' is-forst' : '')}>
+                                            <span className="lab-ovning-del-bokstav" aria-hidden={!forst}>
+                                                {forst ? d.del + ')' : ''}
+                                            </span>
+                                            <div className="lab-ovning-del-falt">
+                                                {d.etikett && (
+                                                    <span className="lab-ovning-del-etikett"><InlineMatte text={d.etikett} /></span>
+                                                )}
+                                                <div className="lab-ovning-input-wrap">
+                                                    <input
+                                                        type="text"
+                                                        ref={(el) => { delRefs.current[i] = el; }}
+                                                        className={cls + (ord ? ' is-ord' : '')}
+                                                        value={delSvar[i]}
+                                                        placeholder={ord ? 'Svara i ord' : ''}
+                                                        style={!ord && d.unit ? { paddingRight: 24 + d.unit.length * 8 } : undefined}
+                                                        aria-label={'Svar på ' + d.del + (d.etikett ? ', ' + d.etikett.replace(/\$/g, '') : '')}
+                                                        onFocus={() => { aktivDel.current = i; }}
+                                                        onChange={(e) => andraDel(i, e.target.value)}
+                                                        onKeyDown={(e) => {
+                                                            if (e.key === 'Enter' && delarRattas) { e.preventDefault(); handleCheck(); }
+                                                        }}
+                                                    />
+                                                    {!ord && d.unit && (
+                                                        <span className="lab-ovning-unit">{d.unit}</span>
+                                                    )}
+                                                </div>
+                                                {fb === 'correct' && <span className="lab-ovning-feedback is-correct">✓ Rätt!</span>}
+                                                {fb === 'wrong' && <span className="lab-ovning-feedback is-wrong">✗ Inte riktigt, försök igen</span>}
+                                                {fb === 'unparseable' && !ord && (
+                                                    <span className="lab-ovning-feedback is-wrong">
+                                                        {Array.isArray(d.values) ? 'Skriv lösningarna som tal' : 'Kunde inte tolka svaret som ett tal'}
+                                                    </span>
+                                                )}
+                                                {fb === 'ord' && (
+                                                    <span className="lab-ovning-feedback is-ord">Jämför med svaret under Visa svar</span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    ) : isMC ? (
                         <div className="lab-ovning-choices">
                             {uppgift.choices.map((choice, i) => {
                                 const isSelected = selected === i;
@@ -2745,7 +2914,7 @@
                         </div>
                     )}
                     <div className="lab-ovning-buttons">
-                        {(uppgift.answer || isMC) && (
+                        {(delar ? delarRattas : (uppgift.answer || isMC)) && (
                             <button type="button"
                                 className="lab-btn lab-btn-primary"
                                 onClick={handleCheck}

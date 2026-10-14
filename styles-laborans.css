@@ -3821,6 +3821,42 @@ body.laborans u .lab-term {
 
 .lab-ovning-feedback.is-correct { color: #4a8757; }
 .lab-ovning-feedback.is-wrong { color: var(--lab-accent); }
+.lab-ovning-feedback.is-ord { color: var(--lab-ink-muted); font-weight: 500; }
+
+/* Ett svarsfält per deluppgift (uppgift.delsvar i data/ovningar.js).
+   Bokstaven står i en egen spalt till vänster, och flera fält till samma
+   deluppgift (första och sista räntan) delar bokstav. */
+.lab-ovning-delar { width: 340px; gap: 0; }
+.lab-ovning-del {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 6px;
+}
+.lab-ovning-del.is-forst { margin-top: 12px; }
+.lab-ovning-delar .lab-ovning-fx-bar + .lab-ovning-del { margin-top: 4px; }
+.lab-ovning-del-bokstav {
+    flex: 0 0 1.6em;
+    padding-top: 9px;
+    font-family: var(--lab-font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--lab-ink);
+}
+.lab-ovning-del-falt {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.lab-ovning-del-etikett {
+    font-family: var(--lab-font-sans);
+    font-size: 13px;
+    color: var(--lab-ink-muted);
+}
+.lab-ovning-del .lab-ovning-feedback { margin-top: 0; }
+.lab-ovning-answer-input.is-ord { padding-right: 14px; }
 
 /* ── Exit ticket (kort förhör per avsnitt) ─────────────────────── */
 .lab-exit {

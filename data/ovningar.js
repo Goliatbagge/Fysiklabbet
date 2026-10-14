@@ -19,6 +19,22 @@
 //    Eleven skriver bara värdet — enheten visas som hint till höger om
 //    input-fältet. tol är relativ tolerans (default 0.02 = 2 %).
 //
+// 1b) Räkneuppgift med deluppgifter (a, b, c …): ett svarsfält per
+//    deluppgift, så att eleven aldrig behöver välja vilken deluppgift
+//    som ska skrivas in (önskemål 2026-10-14). answer står kvar som
+//    uppgiftens huvudsvar (verify-rakning.js), men sidan visar delsvar:
+//      delsvar: [
+//        { del: 'a', value: 3600, unit: 'kr', etikett: 'första räntan' },
+//        { del: 'a', value: 90, unit: 'kr', etikett: 'sista räntan' },
+//        { del: 'b', values: [8, -2], unit: '', etikett: '$x =$' },
+//        { del: 'c' },            // besvaras i ord, rättas inte
+//      ]
+//    value rättas som answer (tol, ignoreSign); values är flera lösningar
+//    i valfri ordning. Flera poster med samma del delar bokstav. etikett
+//    får innehålla $…$. Frågans instruktion "Ange … som ditt numeriska
+//    svar" döljs automatiskt när delsvar finns.
+//    Varje ny uppgift med deluppgifter och numeriskt svar ska ha delsvar.
+//
 // 2) Flervalsfråga (auto-rättning via val):
 //      choices: ['Alternativ A', 'Alternativ B', ...],
 //      correct: 1   // 0-indexerat index av rätt alternativ
@@ -3477,6 +3493,10 @@ b) Är kronan med säkerhet av rent guld? Rent guld har densiteten 19,3 g/cm³.
 
 *Ange din numeriska beräkning av densiteten som svar.*`,
             answer: { value: 16.9, unit: 'g/cm³', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 16.9, unit: 'g/cm³' },
+                { del: 'b' },
+            ],
             solution: `**a)** Volymökningen i mätglaset är lika med kronans volym.
 
 Mätvärden:
@@ -3695,6 +3715,10 @@ b) Hur lång tid tar det att korsa floden?
 
 *Ange tiden från b) som ditt numeriska svar (i sekunder).*`,
             answer: { value: 67, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 37, unit: '°', etikett: 'vinkel motströms', tol: 0.05 },
+                { del: 'b', value: 67, unit: 's', tol: 0.03 },
+            ],
             solution: `För att hamna rakt över måste simmarens **resulterande hastighet** vara riktad rakt norrut. Det betyder att hennes egen hastighetsvektor *v*_s måste ha en komponent motströms (österut) som exakt motverkar strömmen, och en komponent rakt norrut.
 
 **a)** Vi ritar en rätvinklig triangel där:
@@ -3881,6 +3905,11 @@ c) Är föremålets momentanhastighet vid *t* = 8 s större, mindre eller lika 
 
 *Ange medelhastigheten från a) som ditt numeriska svar i m/s.*`,
             answer: { value: 7.5, unit: 'm/s', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 7.5, unit: 'm/s' },
+                { del: 'b', value: 10, unit: 'm/s' },
+                { del: 'c' },
+            ],
             solution: `Vi läser av punkterna från grafen och använder att medelhastighet motsvarar **sekantens lutning** mellan två punkter.
 
 **a)** Sekant mellan (0; 0) och (8; 60):
@@ -3919,6 +3948,10 @@ b) Hur långt från startpunkten är de båda när Beata har hunnit ifatt?
 
 *Ange avståndet från startpunkten (b) som ditt numeriska svar i meter.*`,
             answer: { value: 360, unit: 'm', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 90, unit: 's' },
+                { del: 'b', value: 360, unit: 'm' },
+            ],
             solution: `Båda cyklisterna rör sig med konstant fart längs samma linje. Vi sätter upp deras lägesfunktioner — sträckan som en funktion av tiden — där *t* räknas från Annas start.
 
 För **Anna** (startar vid *t* = 0):
@@ -4102,6 +4135,10 @@ b) Är detta verkligen den **momentana** accelerationen vid någon tidpunkt unde
 
 *Ange medelaccelerationen från a) som ditt numeriska svar i m/s².*`,
             answer: { value: 1.04, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1.04, unit: 'm/s²', tol: 0.03 },
+                { del: 'b' },
+            ],
             solution: `**a)** Omvandling till SI-enheter:
 
 $$
@@ -4379,6 +4416,10 @@ b) Vilken är dess **tillryggalagda sträcka** under samma intervall?
 
 *Ange den tillryggalagda sträckan från b) som ditt svar i meter.*`,
             answer: { value: 50, unit: 'm', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 0, unit: 'm' },
+                { del: 'b', value: 50, unit: 'm' },
+            ],
             solution: `Arean under grafen motsvarar förflyttningen — men areor **under** *x*-axeln räknas som *negativa* (rörelsen är åt motsatt håll). Vi delar in i två trianglar:
 
 ${makeDiagram({
@@ -4432,6 +4473,10 @@ b) I vilket av de fyra delintervallen är cyklistens acceleration **störst i ab
 
 *Ange den totala förflyttningen från a) som ditt numeriska svar i meter.*`,
             answer: { value: 180, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 180, unit: 'm', tol: 0.03 },
+                { del: 'b', value: 2.4, unit: 'm/s²', etikett: 'största accelerationen', tol: 0.03, ignoreSign: true },
+            ],
             solution: `**a) Total förflyttning** — arean under hela *v-t*-grafen, uppdelad i fyra delar:
 
 ${makeDiagram({
@@ -4731,6 +4776,11 @@ c) Vilken är den totala stoppsträckan?
 
 *Ange den totala stoppsträckan från c) som ditt svar i meter.*`,
             answer: { value: 72, unit: 'm', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 20, unit: 'm' },
+                { del: 'b', value: 52, unit: 'm' },
+                { del: 'c', value: 72, unit: 'm' },
+            ],
             solution: `**a) Reaktionssträcka** — konstant hastighet:
 
 $$
@@ -4780,6 +4830,10 @@ b) Vilken hastighet har polisbilen då? Ange svaret i m/s.
 
 *Ange polisbilens hastighet vid mötet (b) som ditt numeriska svar.*`,
             answer: { value: 50, unit: 'm/s', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 12.5, unit: 's' },
+                { del: 'b', value: 50, unit: 'm/s' },
+            ],
             solution: `Vi sätter *t* = 0 vid det ögonblick polisen startar och låter både bilens och polisens lägen mätas från polisens startposition.
 
 **Bilen** rör sig med konstant fart från startposition:
@@ -5064,6 +5118,10 @@ b) På vilken **höjd över marken** sker mötet?
 
 *Ange höjden över marken (b) som ditt numeriska svar i meter.*`,
             answer: { value: 30.4, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2, unit: 's', tol: 0.03 },
+                { del: 'b', value: 30.4, unit: 'm', tol: 0.03 },
+            ],
             solution: `Vi väljer **uppåt som positiv riktning** och lägger origo vid marken direkt nedanför klippan. Båda bollarnas lägesfunktioner ges av $s(t) = s_0 + v_0 t - \\dfrac{1}{2} g t^{2}$.
 
 **Boll A** (släpps från $s_0 = 50$ m, $v_0 = 0$):
@@ -5658,6 +5716,10 @@ b) Beräkna **spännkraften** $F_\\mathrm{S}$ i snöret.
 
 *Ange spännkraften (b) som ditt numeriska svar i N.*`,
             answer: { value: 6.0, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 3, unit: 'm/s²' },
+                { del: 'b', value: 6, unit: 'N', tol: 0.03 },
+            ],
             solution: `**a)** Båda lådorna rör sig som ett system med total massa $m_A + m_B$. Den enda yttre horisontella kraften är $F = 15\\ \\mathrm{N}$ (snörets spännkraft är intern):
 
 $$
@@ -5687,6 +5749,10 @@ b) Hur stor är bilens drivkraft *F* vid just den accelerationen? (Bortse från 
 *Ange drivkraften (b) som ditt numeriska svar i N.*`,
             penna: 'ov-fy1-3.2-u12',
             answer: { value: 2689, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1.22, unit: 'm/s²', tol: 0.03 },
+                { del: 'b', value: 2689, unit: 'N', tol: 0.03 },
+            ],
             solution: `**a) Linan drar bara husvagnen.** Nyckelinsikten är att spännkraften i linan är den enda horisontella kraften på **husvagnen** — det är alltså husvagnens massa (inte hela ekipagets) som avgör hur stor kraft linan måste överföra:
 
 $$
@@ -5861,6 +5927,10 @@ b) Hur lång tid tar det henne sedan att glida tillbaka till luftslussen?
 
 *Ange tiden (b) som ditt numeriska svar i s.*`,
             answer: { value: 62.5, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.24, unit: 'm/s', tol: 0.03 },
+                { del: 'b', value: 62.5, unit: 's', tol: 0.03 },
+            ],
             penna: 'ov-fy1-3.3-u7',
             solution: `**a) Motkraften ger astronauten fart.** Enligt Newtons tredje lag verkar lådan tillbaka på astronauten med kraften 54 N — riktad **mot stationen**. Astronautens acceleration under kastet:
 
@@ -6141,6 +6211,11 @@ c) Vad visar vågen när hissen accelererar **nedåt** med 1,2 m/s²?
 
 *Ange vågens utslag från **b)** som ditt numeriska svar i N.*`,
             answer: { value: 813.4, unit: 'N', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 687.4, unit: 'N' },
+                { del: 'b', value: 813.4, unit: 'N' },
+                { del: 'c', value: 603.4, unit: 'N' },
+            ],
             solution: `Personvågen visar i grunden den normalkraft den utövar på personen ($F_N$). Den enligt Newtons tredje lag är lika stor som personens tryck nedåt på vågen — det är *den* kraften vågen registrerar.
 
 Två krafter verkar på personen: tyngdkraft $F_G = m g$ nedåt och normalkraft $F_N$ uppåt. Personens acceleration är samma som hissens. Vi väljer **uppåt som positiv** riktning.
@@ -6197,6 +6272,11 @@ c) Hur stor normalkraft trycker golvet på honom under frånskjutet?
 
 *Ange normalkraften (c) som ditt numeriska svar i N. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
             answer: { value: 2394, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 4.09, unit: 'm/s', tol: 0.03 },
+                { del: 'b', value: 20.9, unit: 'm/s²', tol: 0.03 },
+                { del: 'c', value: 2394, unit: 'N', tol: 0.03 },
+            ],
             solution: `Detta är en kedja av tre delproblem: fritt fall (uppåt), kinematik under frånskjutet, och Newtons andra lag.
 
 **a) Farten vid frånskjutet.** I luften bromsas han av tyngdaccelerationen. Torricellis ekvation med sluthastighet 0 vid höjden 0,85 m:
@@ -6521,6 +6601,10 @@ b) Jämför med gravitationskraften från planeten Mars (massa $6{,}42 \\cdot 10
 
 *Ange kraften från föräldern (a) som ditt numeriska svar i N. Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.*`,
             answer: { value: 7.4704e-8, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 7.4704e-8, unit: 'N', tol: 0.03 },
+                { del: 'b' },
+            ],
             solution: `**a) Kraften från föräldern.** Vi använder Newtons gravitationslag:
 
 $$
@@ -6954,6 +7038,10 @@ $$
 
 *Ange tiden (b) som ditt numeriska svar i s. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
             answer: { value: 6.29, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 4.42, unit: 'm/s²', tol: 0.03 },
+                { del: 'b', value: 6.29, unit: 's', tol: 0.03 },
+            ],
             solution: `**a) Bara drivhjulens normalkraft räknas.** Den drivande kraften är friktionen mellan drivhjulen och vägen — och den begränsas av normalkraften på **just drivhjulen**, som bara bär halva tyngden:
 
 $$
@@ -7168,6 +7256,10 @@ b) Vilken fart har åkaren efter 80 m i backen?
 *Ange farten (b) som ditt numeriska svar i m/s. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
             penna: 'ov-fy1-3.7-u9',
             answer: { value: 13.15, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1.08, unit: 'm/s²', tol: 0.03 },
+                { del: 'b', value: 13.15, unit: 'm/s', tol: 0.03 },
+            ],
             solution: `**a) Accelerationen.** Längs planet verkar $F_1 = m \\cdot g \\cdot \\sin\\alpha$ nedför och friktionen $F_f = \\mu \\cdot F_N = \\mu \\cdot m \\cdot g \\cdot \\cos\\alpha$ uppför. Newtons andra lag ger
 
 $$
@@ -7210,6 +7302,10 @@ b) Beräkna lådans acceleration nedför planet.
 *Ange accelerationen från (b) som ditt numeriska svar i m/s². Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
             penna: 'ov-fy1-3.7-u10',
             answer: { value: 2.111, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 2.111, unit: 'm/s²', tol: 0.03 },
+            ],
             solution: `**a) Kontrollera att lådan glider.** Beräkna $F_1$ (drivande kraft nedför planet) och friktionens största värde $F_{f,\\max}$:
 
 $$
@@ -7270,6 +7366,10 @@ b) Blir klossen liggande i vändpunkten, eller glider den ner igen? Motivera med
 *Ange sträckan (a) som ditt numeriska svar i m. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
             penna: 'ov-fy1-3.7-u11',
             answer: { value: 1.844, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1.844, unit: 'm', tol: 0.03 },
+                { del: 'b' },
+            ],
             solution: `**Fällan i uppgiften:** friktionen verkar alltid **mot rörelseriktningen**. På vägen upp glider klossen uppför — då pekar friktionen *nedför* planet och **samverkar** med tyngdkraftskomposanten i att bromsa klossen. Det är alltså inte samma acceleration som när en kloss glider nedför!
 
 **a) Sträckan uppför.** På vägen upp bromsas klossen av både $F_1 = m g \\sin\\alpha$ och $F_f = \\mu m g \\cos\\alpha$, båda riktade nedför planet. Med positiv riktning uppför planet ger Newtons andra lag $m \\cdot a = -(m \\cdot g \\cdot \\sin\\alpha + \\mu \\cdot m \\cdot g \\cdot \\cos\\alpha)$, och massan divideras bort.
@@ -7469,6 +7569,10 @@ ${makeHangingRopes({ angL: 60, angR: 30, mass: '10 kg', ropeLabels: ['rep 1', 'r
 
 *Ange spännkraften i rep 1 (a) som ditt numeriska svar i N. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
             answer: { value: 85, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 85, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 49.1, unit: 'N', tol: 0.03 },
+            ],
             solution: `Repen lutar olika mycket, så de bär **inte** halva tyngden var. Vi kallar spännkrafterna $F_1$ och $F_2$ och ställer upp ett villkor i varje led.
 
 **Vågrätt:** lådan står still i sidled, så de vågräta komposanterna tar ut varandra. Den vågräta komposanten ligger intill vinkeln och fås med cosinus:
@@ -7782,6 +7886,10 @@ ${makePulley({ kind: 'bord', table: '3,0 kg', hanging: '2,0 kg' })}
 
 *Ange accelerationen (a) som ditt numeriska svar i m/s². Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
             answer: { value: 2.7, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.75, unit: 'm/s²', tol: 0.03 },
+                { del: 'b', value: 14.1, unit: 'N', tol: 0.03 },
+            ],
             solution: `**a)** Vi ser lådan, snöret och vikten som ett system. Den hängande viktens tyngd driver systemet, och friktionen på lådan bromsar. Lådans normalkraft är lika stor som dess tyngd, eftersom bordet är vågrätt.
 
 $$
@@ -8684,6 +8792,11 @@ c) **Med** airbag förlängs stopptiden till 0,40 s. Hur stor blir då den geno
 
 *Ange kraften från (c) som ditt numeriska svar i N.*`,
             answer: { value: 3125, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1250, unit: 'kg·m/s', tol: 0.03 },
+                { del: 'b', value: 12500, unit: 'N', tol: 0.03 },
+                { del: 'c', value: 3125, unit: 'N', tol: 0.03 },
+            ],
             solution: `**a) Rörelsemängd före:** $v_0 = 60\\ \\mathrm{km/h} = 60/3{,}6 \\approx 16{,}67\\ \\mathrm{m/s}$.
 
 $$
@@ -8957,6 +9070,10 @@ b) Hur stor är friktionstalet, om vi gör den (något grova) approximationen at
 
 *Ange friktionskraften från (a) som ditt numeriska svar i N.*`,
             answer: { value: 27.8, unit: 'N', tol: 0.05 },
+            delsvar: [
+                { del: 'a', value: 27.8, unit: 'N', tol: 0.05 },
+                { del: 'b', value: 0.034, unit: '', tol: 0.05 },
+            ],
             solution: `**a) Friktionskraft.** Energiprincipen med friktion:
 
 $$
@@ -9142,6 +9259,12 @@ b) Härled en allmän formel för trycket en kubformad kropp med densiteten *ρ*
 
 *Ange trycket för 16 cm-kuben som ditt numeriska svar i Pa. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
             answer: { value: 12330, unit: 'Pa', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 3083, unit: 'Pa', etikett: '4,0 cm-kuben', tol: 0.03 },
+                { del: 'a', value: 6166, unit: 'Pa', etikett: '8,0 cm-kuben', tol: 0.03 },
+                { del: 'a', value: 12330, unit: 'Pa', etikett: '16 cm-kuben', tol: 0.03 },
+                { del: 'b' },
+            ],
             solution: `**a) Beräkna de tre trycken.** För en kub med kantlängd *a* är massan $m = \\rho \\cdot V = \\rho \\cdot a^{3}$, tyngden $F = m g$ och basytan $A = a^{2}$. För 4,0 cm-kuben:
 
 $$
@@ -9326,6 +9449,11 @@ c) Lina bor på markplan och lossar oavsiktligt en propp i sin tvättmaskins til
 
 *Räkna med vattnets densitet 998 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$. Ange kraften från (c) som ditt numeriska svar.*`,
             answer: { value: 11.3, unit: 'N', tol: 0.05 },
+            delsvar: [
+                { del: 'a', value: 294, unit: 'kPa', tol: 0.03 },
+                { del: 'b', value: 78.4, unit: 'kPa', tol: 0.03 },
+                { del: 'c', value: 11.3, unit: 'N', tol: 0.05 },
+            ],
             solution: `**a) Övertryck på markplan.** Vattnets nivåskillnad är hela tornets höjd, 30 m:
 
 $$
@@ -9478,6 +9606,11 @@ c) Vilken kraft skulle verka på en cirkelformad observationsruta med radien 15�
 
 *Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange totaltrycket i MPa som ditt numeriska svar.*`,
             answer: { value: 111, unit: 'MPa', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 111, unit: 'MPa', tol: 0.03 },
+                { del: 'b', value: 1100, unit: 'gånger', tol: 0.03 },
+                { del: 'c', value: 7.87, unit: 'MN', tol: 0.03 },
+            ],
             solution: `**a) Totalt tryck.**
 
 $$
@@ -9847,6 +9980,10 @@ b) Vilken temperatur motsvarar densiteten du fick i a)? Antag att vid 0 °C (27
 
 *Ange varmluftens densitet i kg/m³ som ditt numeriska svar.*`,
             answer: { value: 1.063, unit: 'kg/m³', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 1.063, unit: 'kg/m³' },
+                { del: 'b', value: 59, unit: '°C', tol: 0.05 },
+            ],
             solution: `**a) Densitet för varmluften.** Total massa att lyfta:
 
 $$
@@ -10019,6 +10156,10 @@ b) Vilket är trycket inne i klockan när den nått det djupet?
 
 *Räkna med vattnets densitet 998 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$. Ange den höjd som vattnet stigit upp inne i klockan (i meter).*`,
             answer: { value: 0.93, unit: 'm', tol: 0.05 },
+            delsvar: [
+                { del: 'a', value: 0.93, unit: 'm', tol: 0.05 },
+                { del: 'b', value: 189, unit: 'kPa', tol: 0.03 },
+            ],
             solution: `**Idé.** Luften i klockan fångas och får sin volym minskad när vattnet trycks in från botten. Eftersom temperaturen är konstant (20 °C) gäller Boyles lag: $p_1 V_1 = p_2 V_2$.
 
 Låt $h$ vara höjden som vattnet stigit upp inne i klockan. Då har luften:
@@ -10185,6 +10326,10 @@ b) Hur långt rör sig den stora kolven?
 
 *Ange svar för (b) i centimeter.*`,
             answer: { value: 0.80, unit: 'cm', tol: 0.05 },
+            delsvar: [
+                { del: 'a', value: 3000, unit: 'N' },
+                { del: 'b', value: 0.8, unit: 'cm', tol: 0.05 },
+            ],
             solution: `**a) Kraften på den stora kolven:**
 
 $$
@@ -21798,6 +21943,11 @@ $$ x = \\frac{7}{5} = 1{,}4 $$
             level: 3,
             question: `Ekvationen $\\dfrac{3x - 12}{x - 4} = k$ innehåller ett tal $k$.<br>a) Lös ekvationen när $k = 5$.<br>b) Bestäm $k$ så att ekvationen får oändligt många lösningar, och ange vilka $x$ som då är lösningar.<br>c) Finns det något värde på $k$ som ger ekvationen exakt en lösning? Motivera ditt svar.`,
             answer: { value: 3, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 3, unit: '', etikett: '$k =$' },
+                { del: 'c' },
+            ],
             solution: `Vi har $(x - 4)$ i nämnaren, så $x \\neq 4$. Det gäller för alla värden på $k$.
 
 **a)** Med $k = 5$ har ekvationen en bråkterm i VL och ingen i HL. Täljaren är lika med produkten av kvoten och nämnaren:
@@ -21856,6 +22006,10 @@ $$ x(3 - k) = 4(3 - k) $$
             level: 3,
             question: `Sara cyklar uppför en lång backe med medelfarten 12 km/h och sedan nedför samma backe igen. Medelfarten för hela turen är den totala sträckan delad med den totala tiden.<br>a) Vilken medelfart måste hon hålla nedför för att medelfarten för hela turen ska bli 20 km/h?<br>b) Sara påstår att om hon cyklar nedför i 36 km/h blir medelfarten för hela turen 24 km/h, eftersom medelvärdet av 12 och 36 är 24. Stämmer det? Motivera med en beräkning.<br>c) Visa att medelfarten 24 km/h för hela turen är omöjlig att nå, hur fort hon än cyklar nedför.`,
             answer: { value: 60, unit: 'km/h' },
+            delsvar: [
+                { del: 'a', value: 60, unit: 'km/h' },
+                { del: 'b', value: 18, unit: 'km/h', etikett: 'medelfarten blir' },
+            ],
             solution: `**1. Översätt.** Backens längd är inte given, så vi kallar den $s$ km. Farten nedför kallar vi $v$ km/h. Tiden för en sträcka är sträckan delad med farten:
 
 $$ \\text{tid uppför} = \\frac{s}{12} \\qquad \\text{tid nedför} = \\frac{s}{v} $$
@@ -21926,6 +22080,11 @@ Täljaren är lika med produkten av kvoten och nämnaren: $24 = 0 \\cdot v = 0$,
             level: 3,
             question: `En kanna innehåller 2 dl koncentrerad saft och 10 dl vatten.<br>a) Hur mycket saft ska tillsättas för att saften ska utgöra 25 % av blandningen?<br>b) Hur mycket vatten skulle man i stället behöva hälla bort för att saften ska utgöra 25 % av blandningen?<br>c) Kan man genom att bara tillsätta saft få en blandning som består av 100 % saft? Ställ upp och lös en ekvation, och tolka resultatet.`,
             answer: { value: 1.33, unit: 'dl', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1.33, unit: 'dl', tol: 0.03 },
+                { del: 'b', value: 4, unit: 'dl' },
+                { del: 'c' },
+            ],
             solution: `Andelen saft i blandningen är mängden saft delad med hela blandningens volym. Från början är andelen $\\dfrac{2}{12} \\approx 0{,}17$, alltså cirka 17 %.
 
 **a)** Låt $x$ vara mängden saft som tillsätts, i dl. Då finns $(2 + x)$ dl saft i en blandning på $(12 + x)$ dl. Andelen ska vara 25 %, det vill säga 0,25:
@@ -22026,6 +22185,11 @@ Alternativt kan man kalla talen $x$ och $y$ och ställa upp två ekvationer, $\\
             level: 3,
             question: `Två pumpar används för att tömma en bassäng. Pump A klarar tömningen ensam på 6 timmar. När båda pumparna arbetar samtidigt tar tömningen 4 timmar.<br>a) Hur lång tid skulle pump B behöva för att tömma bassängen ensam?<br>b) Antag i stället att pump A ensam behöver $a$ timmar och pump B ensam $b$ timmar. Visa att tömningen med båda pumparna tar $T = \\dfrac{ab}{a + b}$ timmar.<br>c) Förklara med hjälp av formeln i b) varför $T$ alltid är kortare än både $a$ och $b$.`,
             answer: { value: 12, unit: 'h' },
+            delsvar: [
+                { del: 'a', value: 12, unit: 'h' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
             solution: `**a)** Tiderna kan inte adderas eller subtraheras rakt av: pump B tar inte $6 - 4 = 2$ timmar. Det som går att addera är hur stor **del** av bassängen varje pump tömmer per timme.
 
 Pump A tömmer hela bassängen på 6 timmar, alltså $\\dfrac{1}{6}$ av bassängen per timme. Låt pump B behöva $x$ timmar ensam, så att den tömmer $\\dfrac{1}{x}$ av bassängen per timme. Tillsammans töms $\\dfrac{1}{4}$ av bassängen per timme:
@@ -22080,6 +22244,11 @@ Eftersom $a$ är positivt är nämnaren $a + b$ större än täljaren $b$, så b
             level: 3,
             question: `Tidsskillnaden $t$ minuter mellan att köra en sträcka på $s$ km med medelhastigheten $h_1$ km/h och med den högre medelhastigheten $h_2$ km/h ges av formeln $$t = \\left(\\frac{1}{h_1} - \\frac{1}{h_2}\\right) \\cdot s \\cdot 60$$<br>a) Visa hur formeln följer ur sambandet tid = sträcka delat med hastighet.<br>b) Elin pendlar 30 km med medelhastigheten 60 km/h. Vilken medelhastighet skulle hon behöva hålla för att komma fram 6 minuter tidigare?<br>c) Elin påstår att hon kan spara 30 minuter om hon bara kör tillräckligt fort. Undersök påståendet med hjälp av ekvationen.`,
             answer: { value: 75, unit: 'km/h' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 75, unit: 'km/h' },
+                { del: 'c' },
+            ],
             solution: `**a)** Tiden för en sträcka är sträckan delad med hastigheten. Med hastigheten $h_1$ tar resan $\\dfrac{s}{h_1}$ timmar och med $h_2$ tar den $\\dfrac{s}{h_2}$ timmar. Tidsskillnaden i timmar är
 
 $$ \\frac{s}{h_1} - \\frac{s}{h_2} = \\left(\\frac{1}{h_1} - \\frac{1}{h_2}\\right) \\cdot s $$
@@ -22130,6 +22299,11 @@ Tolkning: resan tar 30 minuter i 60 km/h. Att spara 30 minuter skulle betyda att
             level: 3,
             question: `Betrakta uttrycket $\\dfrac{2x}{x + 3}$.<br>a) Kan uttrycket anta värdet 2? Ställ upp en ekvation och motivera ditt svar.<br>b) För vilket $x$ antar uttrycket värdet 1,9?<br>c) Elias påstår att uttrycket aldrig kan bli större än 2, eftersom täljaren $2x$ alltid är mindre än $2(x + 3)$. Visa att Elias har fel genom att bestämma ett $x$ som ger uttrycket värdet 3, och förklara var hans resonemang brister.`,
             answer: { value: 57, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 57, unit: '', etikett: '$x =$' },
+                { del: 'c', value: -9, unit: '', etikett: '$x =$' },
+            ],
             solution: `Vi har $(x + 3)$ i nämnaren, så $x \\neq -3$ i alla tre deluppgifterna.
 
 **a)** Vi undersöker om ekvationen $\\dfrac{2x}{x + 3} = 2$ har någon lösning. Täljaren är lika med produkten av kvoten och nämnaren:
@@ -22328,6 +22502,11 @@ Insikten är att välja $x$ som den andel som **båda** förhållandena nämner.
             level: 3,
             question: `Emma startar en löprunda och håller hastigheten 10 km/h. Tolv minuter senare startar Hanna från samma plats och springer samma väg med hastigheten 12 km/h.<br>a) Hur lång tid efter sin egen start hinner Hanna ikapp Emma?<br>b) Hur långt från startplatsen sker det?<br>c) Rundan är 10 km lång. Hinner Hanna ikapp Emma innan rundan är slut? Motivera med ditt svar i b).`,
             answer: { value: 1, unit: 'h' },
+            delsvar: [
+                { del: 'a', value: 1, unit: 'h' },
+                { del: 'b', value: 12, unit: 'km' },
+                { del: 'c' },
+            ],
             solution: `**1. Översätt.** Den avgörande insikten är att Emma och Hanna har sprungit **lika långt** i det ögonblick Hanna hinner ikapp. Sträckan är hastigheten gånger tiden, så vi behöver båda tiderna.
 
 Låt $t$ vara Hannas löptid i timmar när hon hinner ikapp. Emma startade 12 minuter tidigare, det vill säga $\\dfrac{12}{60} = 0{,}2$ timmar tidigare, så Emma har då sprungit i $(t + 0{,}2)$ timmar. Sträckorna är lika:
@@ -22362,6 +22541,11 @@ $$ t = 1 $$
             level: 3,
             question: `En tehandlare har två sorters te, ett som kostar 120 kr/kg och ett som kostar 200 kr/kg. Handlaren vill blanda dem till 10 kg te som ska säljas för 150 kr/kg, utan att tjäna eller förlora något på blandningen jämfört med att sälja sorterna var för sig.<br>a) Hur många kilogram av varje sort ska blandas?<br>b) Handlaren funderar på att i stället blanda till en sort för 100 kr/kg. Vad säger ekvationen om det? Tolka resultatet.`,
             answer: { value: 6.25, unit: 'kg', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 6.25, unit: 'kg', etikett: 'teet för 120 kr/kg', tol: 0.01 },
+                { del: 'a', value: 3.75, unit: 'kg', etikett: 'teet för 200 kr/kg', tol: 0.01 },
+                { del: 'b' },
+            ],
             solution: `**1. Översätt.** Låt $x$ vara mängden av det billiga teet i kilogram. Blandningen ska väga 10 kg, så mängden dyrt te är $(10 - x)$ kg. Priset för det te som går åt ska vara lika stort som priset för blandningen: 10 kg för 150 kr/kg kostar $10 \\cdot 150 = 1\\,500$ kr.
 
 $$ 120x + 200(10 - x) = 1\\,500 $$
@@ -22404,6 +22588,10 @@ Ekvationen ger $x = 12{,}5$ kg billigt te, men blandningen ska väga 10 kg, så 
             level: 3,
             question: `En kvadrat har sidan $x$ cm. Om den ena sidan förlängs med 4 cm och den andra förkortas med 2 cm får man en rektangel vars area är 12 cm² större än kvadratens area.<br>a) Bestäm $x$.<br>b) Visa att om den ena sidan förlängs med $a$ cm och den andra förkortas med $a$ cm, så blir arean alltid mindre än kvadratens, oavsett vilket $x$ kvadraten har.`,
             answer: { value: 10, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 10, unit: 'cm', etikett: '$x =$' },
+                { del: 'b' },
+            ],
             solution: `**a)** Kvadratens area är $x \\cdot x = x^2$. Rektangeln får sidorna $(x + 4)$ cm och $(x - 2)$ cm, så dess area är $(x + 4)(x - 2)$. Den ska vara 12 cm² större än kvadratens:
 
 $$ (x + 4)(x - 2) = x^2 + 12 $$
@@ -22478,6 +22666,10 @@ $$ x = 4 $$
             level: 3,
             question: `En idrottsförening ska hyra en buss till en cup. Bussen kostar 4 800 kr, och dessutom kostar mat 60 kr per person. Kostnaden delas lika mellan alla som åker med.<br>a) Teckna ett uttryck för kostnaden per person när $n$ personer åker med.<br>b) Hur många personer måste åka med för att kostnaden per person ska bli högst 200 kr?<br>c) Föreningen vill sätta priset till 60 kr per person. Visa med ett resonemang om uttrycket att det inte går, oavsett hur många som åker med.`,
             answer: { value: 35, unit: 'personer' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 35, unit: 'personer' },
+            ],
             solution: `**a)** Den totala kostnaden är den fasta busskostnaden plus maten för alla: $4\\,800 + 60n$ kr. Delad på $n$ personer blir kostnaden per person
 
 $$ \\frac{4\\,800 + 60n}{n} = \\frac{4\\,800}{n} + 60 $$
@@ -22598,6 +22790,11 @@ En sida kan inte vara negativ, så vi bortser från den negativa lösningen.
             level: 3,
             question: `Antalet medlemmar i en förening ökade med lika många procent två år i rad. Under tvåårsperioden ökade antalet totalt med 44 %.<br>a) Ställ upp en ekvation för den årliga förändringsfaktorn och bestäm den årliga ökningen i procent.<br>b) Ekvationen i a) har två lösningar. Förklara varför bara den ena duger som svar.<br>c) Antag i stället att den totala ökningen på 44 % skedde under tre år, med lika många procent varje år. Bestäm den årliga ökningen, och förklara varför ekvationen den här gången bara har en lösning.`,
             answer: { value: 20, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 20, unit: '%' },
+                { del: 'b' },
+                { del: 'c', value: 12.9, unit: '%', tol: 0.02 },
+            ],
             solution: `**a)** Kalla den årliga förändringsfaktorn $x$. Varje år multipliceras antalet medlemmar med $x$, så efter två år har antalet multiplicerats med $x \\cdot x = x^2$. En total ökning med 44 % betyder att antalet multiplicerats med $1{,}44$:
 
 $$ x^2 = 1{,}44 $$
@@ -22628,6 +22825,12 @@ Ekvationen har bara en lösning eftersom exponenten är udda. Ett negativt tal u
             level: 3,
             question: `Ett golv med arean $5{,}4\\ \\mathrm{m^2}$ täcks helt av 120 likadana rektangulära plattor. Varje platta är dubbelt så lång som den är bred.<br>a) Bestäm plattans bredd och längd.<br>b) Skriv en formel för plattans bredd $b$ när $n$ sådana plattor täcker arean $A$.<br>c) Ett annat rum har ett kvadratiskt golv som täcks helt av 32 sådana plattor. Hur lång är golvets sida? Visa också hur plattorna kan läggas.`,
             answer: { value: 15, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 15, unit: 'cm', etikett: 'bredd' },
+                { del: 'a', value: 30, unit: 'cm', etikett: 'längd' },
+                { del: 'b' },
+                { del: 'c', value: 120, unit: 'cm' },
+            ],
             solution: `**a)** Plattans mått är två obekanta, men de hänger ihop: är bredden $x$ cm så är längden $2x$ cm. Då räcker en obekant. Plattans area är
 
 $$ x \\cdot 2x = 2x^2 $$
@@ -22674,6 +22877,12 @@ Sidan är 120 cm. Plattorna går att lägga: $120 = 4 \\cdot 30$, så fyra plat
             level: 3,
             question: `Ekvationen $(x - 3)^2 = a$ innehåller ett tal $a$.<br>a) Lös ekvationen när $a = 25$.<br>b) För vilka värden på $a$ har ekvationen exakt en lösning, och för vilka värden saknar den lösning? Motivera.<br>c) För ett visst värde på $a$ är $x = 10$ en av lösningarna. Bestäm $a$ och den andra lösningen. Förklara sedan varför de två lösningarna alltid ligger lika långt från talet 3, hur $a$ än väljs.`,
             answer: { value: 8, unit: '' },
+            delsvar: [
+                { del: 'a', values: [8, -2], unit: '', etikett: '$x =$' },
+                { del: 'b' },
+                { del: 'c', value: 49, unit: '', etikett: '$a =$' },
+                { del: 'c', value: -4, unit: '', etikett: 'andra lösningen $x =$' },
+            ],
             solution: `**a)** Parentesen $(x - 3)$ är ett tal som i kvadrat blir 25. Det talet är 5 eller $-5$:
 
 $$ x - 3 = \\pm\\sqrt{25} $$
@@ -22712,6 +22921,11 @@ Lösningarna är $x = 3 + \\sqrt{a}$ och $x = 3 - \\sqrt{a}$. Den ena ligger $\\
             level: 3,
             question: `Lös ekvationen $(x + 2)^2 = (x - 4)^2$ på två sätt.<br>a) Utveckla båda kvadraterna och lös den ekvation som uppstår. Vad händer med $x^2$-termerna?<br>b) Dra roten ur båda led och lös ekvationen med hjälp av $\\pm$. Visa att det ena tecknet leder till en motsägelse.<br>c) Tolka lösningen på tallinjen. Använd tolkningen för att skriva ned lösningen till $(x + 7)^2 = (x - 13)^2$ utan att räkna, och kontrollera genom insättning.`,
             answer: { value: 1, unit: '' },
+            delsvar: [
+                { del: 'a', value: 1, unit: '', etikett: '$x =$' },
+                { del: 'b', value: 1, unit: '', etikett: '$x =$' },
+                { del: 'c', value: 3, unit: '', etikett: '$x =$' },
+            ],
             solution: `**a)** Varje term i den första parentesen multipliceras med varje term i den andra:
 
 $$ (x + 2)^2 = (x + 2)(x + 2) $$
@@ -22780,6 +22994,11 @@ För $(x + 7)^2 = (x - 13)^2$ ska $x$ ligga lika långt från $-7$ som från 13.
             level: 3,
             question: `En kub har volymen $216\\ \\mathrm{cm^3}$.<br>a) Bestäm kubens kantlängd.<br>b) Beräkna kubens begränsningsarea, alltså den sammanlagda arean av de sex sidoytorna. Vad lägger du märke till?<br>c) Visa att kuben i a) är den enda kub där volymens mätetal i $\\mathrm{cm^3}$ är lika med begränsningsareans mätetal i $\\mathrm{cm^2}$.`,
             answer: { value: 6, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 6, unit: 'cm' },
+                { del: 'b', value: 216, unit: 'cm²' },
+                { del: 'c' },
+            ],
             solution: `**a)** Kalla kantlängden $x$ cm. Kubens volym är $x \\cdot x \\cdot x = x^3$:
 
 $$ x^3 = 216 $$
@@ -22814,6 +23033,11 @@ Det finns alltså bara ett värde på $x$, och det är kuben i a). Skulle man vi
             level: 3,
             question: `Bromssträckan $s$ meter för en bil som bromsar på torr asfalt kan uppskattas med modellen $s = 0{,}006v^2$, där $v$ är hastigheten i km/h när bromsningen börjar.<br>a) Vid vilken hastighet blir bromssträckan 24 m?<br>b) Ekvationen i a) har också en negativ lösning. Har den någon betydelse i modellen, till skillnad från den negativa lösningen i en areauppgift? Resonera.<br>c) Vid 80 km/h är bromssträckan 38,4 m. Elin påstår att bromssträckan halveras om hastigheten halveras till 40 km/h. Bestäm den hastighet som faktiskt ger halva bromssträckan, och förklara Elins fel.`,
             answer: { value: 63.2, unit: 'km/h', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 63.2, unit: 'km/h', tol: 0.02 },
+                { del: 'b' },
+                { del: 'c', value: 56.6, unit: 'km/h', tol: 0.02 },
+            ],
             solution: `**a)** Sätter in $s = 24$:
 
 $$ 0{,}006v^2 = 24 $$
@@ -22852,6 +23076,12 @@ meter, alltså en fjärdedel av 38,4 m. Elins fel är att hon tänker sig broms
             level: 3,
             question: `En kvadrat har arean $50\\ \\mathrm{cm^2}$.<br>a) Kvadratens sida förlängs så att arean fördubblas. Bestäm den nya sidan och med vilken faktor sidan förlängdes.<br>b) Visa att faktorn i a) blir densamma vilken area kvadraten än har från början.<br>c) En kub ska få dubbelt så stor volym. Med vilken faktor ska kanten förlängas? Visa att det inte räcker att förlänga kanten med faktorn från a).`,
             answer: { value: 10, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 10, unit: 'cm', etikett: 'nya sidan' },
+                { del: 'a', value: 1.414, unit: '', etikett: 'faktor', tol: 0.01 },
+                { del: 'b' },
+                { del: 'c', value: 1.26, unit: '', etikett: 'faktor', tol: 0.01 },
+            ],
             solution: `**a)** Kalla den ursprungliga sidan $x$ cm:
 
 $$ x^2 = 50 $$
@@ -22980,6 +23210,11 @@ $$ x = 125 $$
             level: 3,
             question: `Ett sparkapital på 20 000 kr växte med samma räntesats varje år, och efter 6 år var det värt 26 000 kr.<br>a) Ställ upp en potensekvation för förändringsfaktorn och bestäm räntesatsen.<br>b) Anta i stället att kapitalet växte till 26 000 kr på bara 3 år. Bestäm räntesatsen, och förklara varför den inte är dubbelt så stor som i a).<br>c) Ett kapital $K$ kr växer på $t$ år till $S$ kr. Härled en formel för räntesatsen $p$ i procent, och kontrollera formeln mot a).`,
             answer: { value: 4.5, unit: '%', tol: 0.1 },
+            delsvar: [
+                { del: 'a', value: 4.47, unit: '%', tol: 0.03 },
+                { del: 'b', value: 9.14, unit: '%', tol: 0.02 },
+                { del: 'c' },
+            ],
             solution: `**a)** Kalla förändringsfaktorn $x$. Varje år multipliceras kapitalet med $x$, så efter 6 år har det multiplicerats med $x^6$:
 
 $$ 20\\,000 \\cdot x^6 = 26\\,000 $$
@@ -23042,6 +23277,11 @@ Kontroll mot a): $100 \\cdot \\left(1{,}3^{1/6} - 1\\right) = 100 \\cdot 0{,}044
             level: 3,
             question: `Keplers tredje lag säger att kvadraten på en planets omloppstid är proportionell mot kuben på dess medelavstånd till solen. Mäts tiden i år och avståndet i astronomiska enheter (1 AE är jordens medelavstånd till solen) blir sambandet $T^2 = r^3$.<br>a) Mars medelavstånd är 1,52 AE. Bestäm Mars omloppstid.<br>b) En asteroid har omloppstiden 5,0 år. Hur långt från solen är den?<br>c) Visa att $r = T^{2/3}$, och använd formeln för att kontrollera svaret i b).`,
             answer: { value: 1.87, unit: 'år', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 1.87, unit: 'år', tol: 0.02 },
+                { del: 'b', value: 2.92, unit: 'AE', tol: 0.02 },
+                { del: 'c' },
+            ],
             solution: `**a)** Sätter in $r = 1{,}52$:
 
 $$ T^2 = 1{,}52^3 $$
@@ -23088,6 +23328,12 @@ Kontroll av b): $r = 5{,}0^{2/3} = \\left(\\sqrt[3]{5{,}0}\\right)^2 \\approx 1{
             level: 3,
             question: `Ekvationerna $x^{3/2} = 8$ och $x^{2/3} = 4$ ser nästan likadana ut.<br>a) Lös båda ekvationerna.<br>b) Den ena har en lösning och den andra två. Förklara varför.<br>c) Amir löser $x^{3/2} = -8$ genom att kvadrera båda led och får $x = 4$. Kontrollera lösningen och förklara vad som gick fel.`,
             answer: { value: 4, unit: '' },
+            delsvar: [
+                { del: 'a', values: [4], unit: '', etikett: '$x^{3/2} = 8$ ger $x =$' },
+                { del: 'a', values: [8, -8], unit: '', etikett: '$x^{2/3} = 4$ ger $x =$' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
             solution: `**a)** I $x^{3/2} = 8$ upphöjer vi båda led till nämnaren 2, eftersom $\\left(x^{3/2}\\right)^2 = x^3$:
 
 $$ \\left(x^{3/2}\\right)^{\\boldsymbol{2}} = 8^{\\boldsymbol{2}} $$
@@ -23132,6 +23378,11 @@ Räkningen är rätt utförd, men kontrollen misslyckas: $4^{3/2} = 8$, inte $-8
             level: 3,
             question: `Lisa löser ekvationen $x^5 = 9x^3$ genom att dividera båda led med $x^3$. Hon får $x^2 = 9$ och svarar $x = \\pm 3$.<br>a) Kontrollera att $x = 3$ och $x = -3$ är lösningar, och visa att Lisa ändå har missat en lösning.<br>b) Lös ekvationen fullständigt genom att samla allt i ett led och bryta ut den gemensamma faktorn.<br>c) Hur många lösningar har $x^7 = 4x^5$ respektive $x^6 = 4x^5$? Motivera utan att lösa ekvationerna helt.`,
             answer: { value: 0, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', values: [0, 3, -3], unit: '', etikett: '$x =$' },
+                { del: 'c' },
+            ],
             solution: `**a)** Insättning av $x = 3$: $3^5 = 243$ och $9 \\cdot 3^3 = 9 \\cdot 27 = 243$. Insättning av $x = -3$: $(-3)^5 = -243$ och $9 \\cdot (-3)^3 = 9 \\cdot (-27) = -243$. Båda stämmer.
 
 Men pröva $x = 0$: $0^5 = 0$ och $9 \\cdot 0^3 = 0$. Det stämmer också. Lisa dividerade båda led med $x^3$, och det är bara tillåtet när $x^3 \\neq 0$, alltså när $x \\neq 0$. Just det värdet försvann ur lösningen.
@@ -23174,6 +23425,11 @@ $x^6 = 4x^5$ blir $x^5\\left(x - 4\\right) = 0$. Faktorn $x^5$ ger $x = 0$, och 
             level: 3,
             question: `Ekvationen $x^6 = a - 5$ innehåller ett tal $a$.<br>a) För vilka värden på $a$ har ekvationen två lösningar, en lösning respektive ingen lösning?<br>b) Ekvationen $x^n = -32$ har lösningen $x = -2$. Bestäm exponenten $n$, och förklara varför $n$ måste vara ett udda tal.<br>c) Ekvationen $x^n = 81$ har lösningarna $x = 3$ och $x = -3$. Bestäm $n$, och förklara varför $n$ måste vara ett jämnt tal.`,
             answer: { value: 5, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 5, unit: '', etikett: '$n =$' },
+                { del: 'c', value: 4, unit: '', etikett: '$n =$' },
+            ],
             solution: `**a)** Exponenten 6 är jämn, så antalet lösningar avgörs av tecknet på högerledet $a - 5$.
 
 Två lösningar när $a - 5 > 0$, det vill säga $a > 5$. Då är $x = \\pm\\sqrt[6]{a - 5}$.
@@ -23210,6 +23466,11 @@ Att $n$ måste vara jämnt följer av att $x = -3$ också är en lösning: $(-3)
             level: 3,
             question: `Belysningsstyrkan $E$ från en lampa avtar med kvadraten på avståndet $r$ enligt $E = \\dfrac{k}{r^2}$, där $k$ är en konstant som beror på lampan. På avståndet 2,0 m från en viss lampa är belysningsstyrkan 50 lux.<br>a) Bestäm konstanten $k$.<br>b) På vilket avstånd är belysningsstyrkan 8,0 lux?<br>c) Med vilken faktor ska avståndet ändras för att belysningsstyrkan ska bli en fjärdedel så stor? Visa att svaret inte beror på $k$.`,
             answer: { value: 5, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 200, unit: 'lux · m²', etikett: '$k =$' },
+                { del: 'b', value: 5, unit: 'm' },
+                { del: 'c', value: 2, unit: '', etikett: 'faktor' },
+            ],
             solution: `**a)** Sätter in $E = 50$ och $r = 2{,}0$:
 
 $$ 50 = \\frac{k}{2{,}0^2} $$
@@ -23272,6 +23533,11 @@ Avståndet ska fördubblas. I b) stämmer det: från 2,0 m till 4,0 m sjunker be
             level: 3,
             question: `Lös ekvationerna. Ange först vilka värden på $x$ som över huvud taget är tillåtna.<br>a) $x^{3/2} \\cdot x^{1/2} = 16$<br>b) $\\dfrac{x^5}{x^2} = 27$<br>c) Ekvationen i a) ger efter förenkling en jämn exponent, men har ändå bara en lösning. Ekvationen i b) ger en udda exponent. Förklara varför båda ekvationerna har exakt en lösning, av helt olika skäl.`,
             answer: { value: 4, unit: '' },
+            delsvar: [
+                { del: 'a', value: 4, unit: '', etikett: '$x =$' },
+                { del: 'b', value: 3, unit: '', etikett: '$x =$' },
+                { del: 'c' },
+            ],
             solution: `**a)** Potensen $x^{1/2} = \\sqrt{x}$ finns bara för $x \\geq 0$, så bara sådana $x$ är tillåtna. Potenslagen $a^m \\cdot a^n = a^{m+n}$ ger
 
 $$ x^{3/2} \\cdot x^{1/2} = x^{3/2 + 1/2} = x^{4/2} = x^2 $$
@@ -23404,6 +23670,11 @@ Enbart $x < 5$ räcker inte — till exempel är $x = -7 < 5$ men $(-7)^2 = 49 >
             level: 3,
             question: `Olikheter av andra graden.<br>a) Lös olikheten $-3x^2 + 5 \\geq -22$.<br>b) Lös olikheten $2x^2 - 8 > 0$.<br>c) Elin löser $x^2 > 4$ genom att dra roten ur båda led och svarar $x > 2$. Visa med ett exempel att svaret är ofullständigt, och förklara varför man i stället undersöker gränsfallet.`,
             answer: { value: 3, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
             solution: `**a)** Vi vill få $x^2$ ensamt. Subtraherar 5 från båda led:
 
 $$ -3x^2 + 5 \\mathbin{\\boldsymbol{-}}\\boldsymbol{5} \\geq -22 \\mathbin{\\boldsymbol{-}}\\boldsymbol{5} $$
@@ -23450,6 +23721,11 @@ Felet är att "dra roten ur" inte är en tillåten operation på en olikhet på 
             level: 3,
             question: `Talen $x$ och $y$ uppfyller $x \\leq 5$ och $y \\geq -2$.<br>a) Bestäm det största värde som uttrycket $3x - y^2$ kan ha.<br>b) Bestäm det minsta värde som uttrycket $x^2 + 2y$ kan ha.<br>c) Förklara varför uttrycket $3x - y^2$ inte har något minsta värde.`,
             answer: { value: 15, unit: '' },
+            delsvar: [
+                { del: 'a', value: 15, unit: '', etikett: 'största värdet' },
+                { del: 'b', value: -4, unit: '', etikett: 'minsta värdet' },
+                { del: 'c' },
+            ],
             solution: `**a)** Uttrycket är en differens, $3x - y^2$. Det blir så stort som möjligt när $3x$ är så stort som möjligt och $y^2$ så litet som möjligt.
 
 Eftersom $x \\leq 5$ är $3x \\leq 15$, med största värdet 15 för $x = 5$.
@@ -23484,6 +23760,11 @@ Kontroll: $x = 0$ och $y = -2$ ger $0 - 4 = -4$.
             level: 3,
             question: `En bussresa kan betalas på tre sätt. Enkelbiljett: 20 kr per resa. Rabattkort: 150 kr i månaden och därefter 5 kr per resa. Månadskort: 450 kr för obegränsat resande.<br>a) För hur många resor per månad är rabattkortet billigare än enkelbiljetter?<br>b) För hur många resor per månad är månadskortet billigare än rabattkortet?<br>c) Ange för varje antal resor vilket alternativ som är billigast, och förklara varför enkelbiljetter aldrig kan vara billigast när månadskortet slår rabattkortet.`,
             answer: { value: 10, unit: 'resor' },
+            delsvar: [
+                { del: 'a', value: 10, unit: 'resor', etikett: 'fler än' },
+                { del: 'b', value: 60, unit: 'resor', etikett: 'fler än' },
+                { del: 'c' },
+            ],
             solution: `**a)** Låt $x$ vara antalet resor i månaden. Enkelbiljetter kostar $20x$ kr och rabattkortet $150 + 5x$ kr. Rabattkortet är billigare när
 
 $$ 150 + 5x < 20x $$
@@ -23536,6 +23817,11 @@ Enkelbiljetter kan inte vara billigast när månadskortet slår rabattkortet, ef
             level: 3,
             question: `Olikheten $ax + 3 > 9$ innehåller ett tal $a$.<br>a) Lös olikheten när $a = 2$ och när $a = -2$.<br>b) Lös olikheten allmänt, dels för $a > 0$, dels för $a < 0$.<br>c) Vad händer med olikheten om $a = 0$? Har den några lösningar?`,
             answer: { value: 3, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
             solution: `**a)** Med $a = 2$ blir olikheten $2x + 3 > 9$. Subtraherar 3 från båda led:
 
 $$ 2x + 3 \\mathbin{\\boldsymbol{-}}\\boldsymbol{3} > 9 \\mathbin{\\boldsymbol{-}}\\boldsymbol{3} $$
@@ -23596,6 +23882,11 @@ Kontroll mot a): $a = 2$ ger $x > 3$ och $a = -2$ ger $x < \\dfrac{6}{-2} = -3$,
             level: 3,
             question: `I en triangel måste varje sida vara kortare än de två andra sidorna tillsammans, annars går sidorna inte ihop till en triangel. En triangel har sidorna 5 cm, 8 cm och $x$ cm.<br>a) Ställ upp de tre olikheter som sidorna måste uppfylla.<br>b) Lös olikheterna och ange alla möjliga värden på $x$.<br>c) Triangeln ska dessutom ha en omkrets som är mindre än 24 cm. Vilka värden på $x$ är då möjliga?`,
             answer: { value: 3, unit: 'cm' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
             solution: `**a)** Regeln ska gälla för varje sida. Sidan $x$ ska vara kortare än $5 + 8$, sidan 8 kortare än $5 + x$ och sidan 5 kortare än $8 + x$:
 
 $$ x < 5 + 8 \\qquad 8 < 5 + x \\qquad 5 < 8 + x $$
@@ -23642,6 +23933,11 @@ Tillsammans med b): $x$ ska vara större än 3 och mindre än både 13 och 11, o
             level: 3,
             question: `Kalle löser olikheten $\\dfrac{10}{x} > 2$ genom att multiplicera båda led med $x$. Han får $10 > 2x$ och svarar $x < 5$.<br>a) Visa med ett exempel att Kalles svar innehåller tal som inte löser olikheten.<br>b) Lös olikheten korrekt genom att behandla fallen $x > 0$ och $x < 0$ var för sig.<br>c) Lös på samma sätt olikheten $\\dfrac{10}{x} < 2$.`,
             answer: { value: 5, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
             solution: `**a)** Talet $x = -1$ uppfyller $x < 5$. Men $\\dfrac{10}{-1} = -10$, och $-10 > 2$ är falskt. Kalles svar innehåller alltså tal som inte är lösningar. Felet är att han multiplicerar båda led med $x$ utan att veta om $x$ är positivt eller negativt. Är $x$ negativt ska olikhetstecknet vändas, och det gjorde han inte. (Dessutom är $x = 0$ förbjudet, eftersom $x$ står i nämnaren.)
 
 **Svar:** $x = -1$ ger $-10 > 2$, som är falskt. Kalle multiplicerade med $x$ utan att veta tecknet på $x$.
@@ -23704,6 +24000,11 @@ Lösningen är de två strålarna $x < 0$ och $x > 5$. Kontroll: $x = -3$ ger $-
             level: 3,
             question: `Sara har skrivit tre prov och fått 62, 71 och 58 poäng av 100 möjliga på varje. Det återstår ett prov.<br>a) Hur många poäng måste Sara minst få på det fjärde provet för att medelvärdet av de fyra proven ska bli minst 65 poäng?<br>b) Kan Sara nå medelvärdet 75 poäng? Motivera med en olikhet.<br>c) Antag att Sara efter $n$ prov har medelvärdet $m$ poäng. Skriv en olikhet för vad hon minst måste få på nästa prov för att medelvärdet ska bli minst $M$, och lös ut poängen.`,
             answer: { value: 69, unit: 'poäng' },
+            delsvar: [
+                { del: 'a', value: 69, unit: 'poäng' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
             solution: `**a)** Medelvärdet är summan av poängen delad med antalet prov. Kalla poängen på det fjärde provet $x$:
 
 $$ \\frac{62 + 71 + 58 + x}{4} \\geq 65 $$
@@ -24153,6 +24454,10 @@ Rimligt? $875$ ligger närmare $925$ än $800$, så mer än hälften ska vara st
             level: 3,
             question: `I en klass är $60\\ \\%$ av eleverna tjejer. $25\\ \\%$ av tjejerna och $40\\ \\%$ av killarna spelar fotboll.<br>a) Hur många procent av klassen spelar fotboll?<br>b) Hur många procent av dem som spelar fotboll är tjejer? Avrunda till en decimal.`,
             answer: { value: 48.4, unit: '%', tol: 0.005 },
+            delsvar: [
+                { del: 'a', value: 31, unit: '%' },
+                { del: 'b', value: 48.4, unit: '%', tol: 0.005 },
+            ],
             solution: `**Insikten:** varje procentsats är en andel av ett eget hela. Skriv ut vad som är det hela innan du räknar: tjejerna, killarna, klassen eller fotbollsspelarna.
 
 **a)** Tjejerna är $60\\ \\%$ av klassen, så killarna är $40\\ \\%$.
@@ -24420,6 +24725,11 @@ Kontroll med $x = 100$: Moa har 125 kr och Nils 75 kr. Skillnaden är 50 kr, och
             level: 3,
             question: `Ett pris höjs med $p\\ \\%$. Senare sänks det nya priset så att det hamnar tillbaka på det ursprungliga.<br>a) Hur många procent sänks priset om $p = 25$?<br>b) Visa att sänkningen alltid är mindre än höjningen, oavsett hur stort $p$ är.<br>c) Hur stor måste höjningen ha varit om priset sedan sänktes med $50\\ \\%$ för att komma tillbaka?`,
             answer: { value: 100, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 20, unit: '%' },
+                { del: 'b' },
+                { del: 'c', value: 100, unit: '%' },
+            ],
             solution: `**Insikten:** höjningen och sänkningen har varsin förändringsfaktor, och tillsammans ska de ge faktorn 1 (oförändrat pris). Sänkningens faktor är alltså 1 delat med höjningens.
 
 **a)** Höjningen med $25\\ \\%$ har faktorn $1{,}25$. Sänkningen ska ta tillbaka priset, så dess faktor $f$ uppfyller
@@ -24677,6 +24987,10 @@ $$ 1{,}08 \\cdot 0{,}95 = 1{,}026 $$
             level: 3,
             question: `Antalet medlemmar i en förening ökar procentuellt lika mycket varje år. Under tre år ökar antalet med totalt $33{,}1\\ \\%$.<br>a) Med hur många procent ökar antalet varje år?<br>b) Efter hur många hela år, räknat från början av treårsperioden, har antalet medlemmar fördubblats om ökningen fortsätter i samma takt?`,
             answer: { value: 8, unit: 'år' },
+            delsvar: [
+                { del: 'a', value: 10, unit: '%' },
+                { del: 'b', value: 8, unit: 'år' },
+            ],
             solution: `**Insikten:** den totala förändringsfaktorn är den årliga faktorn multiplicerad med sig själv tre gånger. Den årliga faktorn är alltså en tredjeroten, inte en tredjedel av $33{,}1\\ \\%$.
 
 **a)** Låt den årliga förändringsfaktorn vara $a$. Den totala faktorn efter tre år är $1 + 0{,}331 = 1{,}331$, så
@@ -24705,6 +25019,10 @@ Efter 7 år saknas fortfarande en bit, men efter 8 år har antalet mer än förd
             level: 3,
             question: `En cylinderformad burk görs om. Radien ökas med $10\\ \\%$ och höjden minskas med $15\\ \\%$. Volymen är $\\pi r^2 h$.<br>a) Hur många procent ändras burkens volym?<br>b) Hur många procent skulle höjden i stället behöva minskas för att volymen ska vara oförändrad? Avrunda till en decimal.`,
             answer: { value: 17.4, unit: '%', tol: 0.005 },
+            delsvar: [
+                { del: 'a', value: 2.85, unit: '%', etikett: 'ökning', tol: 0.01 },
+                { del: 'b', value: 17.4, unit: '%', tol: 0.005 },
+            ],
             solution: `**Insikten:** radien står i kvadrat i volymformeln. En ökning av radien med $10\\ \\%$ ger därför faktorn $1{,}1$ TVÅ gånger i volymen, alltså faktorn $1{,}1^2 = 1{,}21$.
 
 **a)** Den nya volymen är
@@ -24739,6 +25057,10 @@ Faktorn $0{,}8264\\ldots$ motsvarar en minskning med $1 - 0{,}8264\\ldots = 0{,}
             level: 3,
             question: `En boll släpps från höjden $2{,}0$ m. Efter varje studs når bollen $75\\ \\%$ av höjden före studsen.<br>a) Efter hur många studsar når bollen för första gången lägre än $30$ cm?<br>b) En annan boll av samma sort släpps från en okänd höjd. Efter tredje studsen når den $54$ cm. Från vilken höjd släpptes den? Svara i cm.`,
             answer: { value: 128, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 7, unit: 'studsar' },
+                { del: 'b', value: 128, unit: 'cm' },
+            ],
             solution: `**Insikten:** varje studs är en procentuell förändring med samma faktor, $0{,}75$. Efter $n$ studsar är höjden alltså starthöjden gånger $0{,}75^n$.
 
 **a)** Starthöjden är $200$ cm. Vi söker det minsta $n$ där
@@ -24777,6 +25099,10 @@ Kontroll: $128 \\cdot 0{,}75 = 96$, $96 \\cdot 0{,}75 = 72$ och $72 \\cdot 0{,}7
             level: 3,
             question: `En aktie ökar i värde med $10\\ \\%$ per år i fem år och minskar sedan med $10\\ \\%$ per år i fem år.<br>a) Med hur många procent har värdet ändrats efter de tio åren? Avrunda till en decimal.<br>b) Spelar det någon roll om de fem minskningarna kommer först? Motivera.`,
             answer: { value: 4.9, unit: '%', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 4.9, unit: '%', etikett: 'minskning', tol: 0.01, ignoreSign: true },
+                { del: 'b' },
+            ],
             solution: `**Insikten:** tio förändringar i följd ger tio förändringsfaktorer som multipliceras. Fem par med en ökning och en minskning tar INTE ut varandra.
 
 **a)** Den totala förändringsfaktorn är
@@ -24805,6 +25131,11 @@ Under vägen ser det dock olika ut. Kommer ökningarna först är aktien efter f
             level: 3,
             question: `En tumregel säger att den tid det tar för ett belopp att fördubblas, räknat i år, är ungefär $72$ dividerat med den procentuella ökningen per år.<br>a) Skriv tumregeln som en formel för fördubblingstiden $T$ år när ökningen är $p\\ \\%$ per år.<br>b) Kontrollera tumregeln för $p = 8$.<br>c) Bestäm med en annan metod än tumregeln den procentuella ökningen per år som ger en fördubbling på exakt 8 år. Avrunda till två decimaler.`,
             answer: { value: 9.05, unit: '%', tol: 0.002 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 9.05, unit: '%', tol: 0.002 },
+            ],
             solution: `**Insikten:** tumregeln är en uppskattning. Den exakta metoden är att den totala förändringsfaktorn efter $T$ år ska vara 2.
 
 **a)** Fördubblingstiden är 72 dividerat med $p$:
@@ -25035,6 +25366,10 @@ Skillnaden är precis $4\\ \\%$ av den första behållningen: $0{,}04 \\cdot 60\
             level: 3,
             question: `Greta har $200\\,000$ kr på ett konto med räntan $3\\ \\%$. I slutet av varje år, efter att räntan lagts till, tar hon ut pengar.<br>a) Hur mycket kan hon ta ut varje år utan att behållningen någonsin minskar?<br>b) Hon tar i stället ut $15\\,000$ kr i slutet av varje år. Hur många hela uttag på $15\\,000$ kr kan hon göra?`,
             answer: { value: 17, unit: 'uttag' },
+            delsvar: [
+                { del: 'a', value: 6000, unit: 'kr' },
+                { del: 'b', value: 17, unit: 'uttag' },
+            ],
             solution: `**Insikten:** behållningen minskar bara om uttaget är större än räntan. Varje år gäller "förra behållningen gånger $1{,}03$, minus uttaget".
 
 **a)** Räntan första året är
@@ -25134,6 +25469,10 @@ Rimligt? Utan ränta hade hon behövt $\\dfrac{50\\,000}{5} = 10\\,000$ kr per g
             level: 3,
             question: `Hugo har pengar på ett konto med räntan $3\\ \\%$. Samtidigt stiger priserna i samhället med $5\\ \\%$ per år.<br>a) Med hur många procent minskar det Hugo kan köpa för pengarna under ett år? Avrunda till en decimal.<br>b) Med hur många procent har det han kan köpa minskat efter 10 år? Avrunda till en decimal.`,
             answer: { value: 17.5, unit: '%', tol: 0.005 },
+            delsvar: [
+                { del: 'a', value: 1.9, unit: '%', tol: 0.02, ignoreSign: true },
+                { del: 'b', value: 17.5, unit: '%', tol: 0.005, ignoreSign: true },
+            ],
             solution: `**Insikten:** det som avgör vad pengarna räcker till är kvoten mellan behållningen och priserna. Behållningen ökar med faktorn $1{,}03$ och priserna med faktorn $1{,}05$, så kvoten ändras med faktorn $\\dfrac{1{,}03}{1{,}05}$ varje år.
 
 **a)** Med behållningen $B$ kr och priset $P$ kr för en vara kan Hugo köpa $\\dfrac{B}{P}$ varor. Efter ett år kan han köpa
@@ -25242,6 +25581,11 @@ $$ 2\\ 500 + 540 = 3\\ 040\\ \\mathrm{kr} $$
             level: 3,
             question: `Ett lån på $240\\,000$ kr ska betalas tillbaka med rak amortering varje kvartal i 10 år. Årsräntan är $6\\ \\%$. Räntan betalas varje kvartal på den aktuella skulden.<br>a) Hur stor är räntan vid den första och vid den sista inbetalningen?<br>b) Bestäm den totala räntekostnaden för lånet utan att räkna ut varje inbetalning.`,
             answer: { value: 73800, unit: 'kr', tol: 0.001 },
+            delsvar: [
+                { del: 'a', value: 3600, unit: 'kr', etikett: 'första räntan', tol: 0.001 },
+                { del: 'a', value: 90, unit: 'kr', etikett: 'sista räntan', tol: 0.001 },
+                { del: 'b', value: 73800, unit: 'kr', tol: 0.001 },
+            ],
             solution: `**Insikten:** skulden minskar med lika mycket varje kvartal, så räntan minskar också med lika mycket varje kvartal. Räntorna bildar en jämn trappa, och summan av en jämn trappa är antalet steg gånger medelvärdet av första och sista steget.
 
 Ett år har 4 kvartal, så lånet betalas med $4 \\cdot 10 = 40$ inbetalningar. Amorteringen per kvartal är
@@ -25278,6 +25622,10 @@ Rimligt? Skulden är i genomsnitt ungefär halva lånet, $120\\,000$ kr, och $6\
             level: 3,
             question: `Nora tar ett sms-lån på $2\\,000$ kr. Lånet ska betalas tillbaka efter en månad, och månadsräntan är $15\\ \\%$. När månaden är slut har Nora inte råd att betala, så hon tar ett nytt sms-lån med samma villkor på hela det belopp hon är skyldig. Så fortsätter hon varje månad.<br>a) Hur stor är skulden efter ett halvår?<br>b) Efter hur många månader har skulden för första gången blivit mer än fem gånger så stor som det första lånet?`,
             answer: { value: 12, unit: 'månader' },
+            delsvar: [
+                { del: 'a', value: 4626, unit: 'kr', tol: 0.002 },
+                { del: 'b', value: 12, unit: 'månader' },
+            ],
             solution: `**Insikten:** varje nytt lån gäller hela den förra skulden, räntan inräknad. Skulden växer alltså med samma förändringsfaktor, $1{,}15$, varje månad, som ränta på ränta.
 
 **a)** Efter 6 månader är den totala förändringsfaktorn $1{,}15^6$:
@@ -25324,6 +25672,10 @@ Kontroll: den första räntan är $\\dfrac{0{,}042 \\cdot 180\\,000}{12} = 630$ 
             level: 3,
             question: `Ett lån betalas med rak amortering varje månad. Amorteringen är $2\\,500$ kr per månad. Den andra inbetalningen är $25$ kr mindre än den första, och den första inbetalningen är $4\\,500$ kr.<br>a) Vilken är lånets årsränta?<br>b) Hur stort är lånet?`,
             answer: { value: 200000, unit: 'kr', tol: 0.001 },
+            delsvar: [
+                { del: 'a', value: 12, unit: '%' },
+                { del: 'b', value: 200000, unit: 'kr', tol: 0.001 },
+            ],
             solution: `**Insikten:** mellan två inbetalningar har skulden minskat med en amortering. Skillnaden på 25 kr är alltså månadsräntan på $2\\,500$ kr, och då kan räntesatsen lösas ut. Därefter avslöjar den första inbetalningens ränta hur stor skulden var från början.
 
 **a)** Låt årsräntan i decimalform vara $r$. Räntan för en månad är $\\dfrac{r}{12}$ av skulden. Skulden har minskat med $2\\,500$ kr, så räntan har minskat med
@@ -25400,6 +25752,10 @@ Rimligt? Skulden är i genomsnitt ungefär halva lånet, $60\\,000$ kr. Fem år 
             level: 3,
             question: `Elias lånar $30\\,000$ kr. Räntan är $1\\ \\%$ per månad på den aktuella skulden. Varje månad betalar han $2\\,000$ kr, och av det går först räntan och sedan resten till amortering. Den sista inbetalningen är bara så stor att skulden blir 0.<br>a) Hur många inbetalningar behövs?<br>b) Hur stor blir den totala räntekostnaden? Avrunda till hela kronor.`,
             answer: { value: 2668, unit: 'kr', tol: 0.001 },
+            delsvar: [
+                { del: 'a', value: 17, unit: 'inbetalningar' },
+                { del: 'b', value: 2668, unit: 'kr', tol: 0.001 },
+            ],
             solution: `**Insikten:** här är inbetalningen fast, inte amorteringen. Räntan tar en del av varje inbetalning, och den delen krymper när skulden krymper, så amorteringen växer för varje månad. Varje månad gäller "skulden gånger $1{,}01$, minus $2\\,000$".
 
 **a)** I ett kalkylblad med $30\\,000$ i B2 och \`=B2*1,01-2000\` i B3, nedåt:
@@ -36978,6 +37334,10 @@ $$
             level: 2,
             question: `En cylindrisk konservburk utan lock ska tillverkas så att summan av höjden $h$ och radien $r$ är 15 cm.<br>a) Skriv burkens volym $V$ som funktion av enbart radien $r$.<br>b) I Geogebra hittas extrempunkten $B = (10, 1570.79633)$ på grafen till $V(r)$. Vilken radie ger störst volym?`,
             answer: { value: 10, unit: 'cm' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 10, unit: 'cm', etikett: '$r =$' },
+            ],
             solution: `Vi utnyttjar att $h + r = 15$, alltså $h = 15 - r$. Vi sätter in detta i volymformeln $V = \\pi r^2 h$:
 
 $$
@@ -36996,6 +37356,10 @@ $$
             level: 2,
             question: `Summan av två positiva tal är 24. Låt det ena talet vara $x$.<br>a) Skriv produkten $P$ av talen som funktion av $x$.<br>b) I Geogebra hittas extrempunkten $(12, 144)$ på grafen till $P(x)$. Vilken är den maximala produkten?`,
             answer: { value: 144, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 144, unit: '' },
+            ],
             solution: `Om det ena talet är $x$ är det andra talet $24 - x$, så produkten blir
 
 $$
@@ -37015,6 +37379,10 @@ $$
             level: 3,
             question: `En rektangulär pappskiva med måtten 24 cm × 15 cm ska användas för att tillverka en låda utan lock. I varje hörn klipps en kvadrat med sidan $x$ bort, och de fyra sidorna viks sedan upp.<br>a) Visa att lådans volym ges av $V(x) = x(24 - 2x)(15 - 2x)$, och ange en rimlig definitionsmängd för $x$.<br>b) I Geogebra hittas TVÅ extrempunkter på grafen till $V(x)$: $(3, 486)$ och $(10, -200)$. Vilket $x$-värde ger den låda som har störst volym, och varför gäller inte den andra punkten?`,
             answer: { value: 3, unit: 'cm' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 3, unit: 'cm', etikett: '$x =$' },
+            ],
             solution: `**a)** Lådans bottenyta får sidorna $(24 - 2x)$ och $(15 - 2x)$, eftersom en kvadrat med sidan $x$ klipps bort i varje hörn, och höjden blir $x$ när de fyra sidorna viks upp:
 
 $$

@@ -93,12 +93,25 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
      Affischbild: `media/video/harmonisk-svangning.jpg`. E-post kan inte
      spela video, så bilden är länken. Filmen visar hur cirkelrörelsen ger
      y = A · sin(ω · t), och hur hastigheten och accelerationen följer som
-     derivator, med vändlägen och jämviktsläge.
+     derivator, med vändlägen och jämviktsläge. Filmen ligger sedan
+     2026-10-14 även på YouTube (https://youtu.be/n5beqlo3Jcc, spellistan
+     Fysik nivå 2); länken till genomgången är fortfarande huvudlänken,
+     YouTube kan nämnas för den som vill dela filmen.
   2. **Simuleringen med cykelhjulet och fjädern** i samma genomgång: en
      lampa lyser på ett snurrande cykelhjul, stiftets skugga på väggen rör
      sig i takt med vikten i fjädern bredvid, och en graf ritar upp
      sinuskurvan. Kan visa vinkeln, dölja lampan och ändra periodtiden.
      `https://fysiklabbet.se/katalog.html?id=fy2-2.3&block=hjulprojektion`
+     **Simuleringen finns både i 2D och i 3D** (användarens önskemål
+     2026-10-14: skriv om att den finns i båda). 3D-versionen,
+     "Hjulet och fjädern i 3D", är ett rum man vrider fritt: lampan,
+     hjulet med stiftet, skuggorna på väggen, fjädern och grafen på
+     väggen i samma höjdskala. Lyft kameravyn **Från lampan**, där hjulet
+     syns från kanten så som ljuset ser det och stiftet bara rör sig upp
+     och ned i takt med vikten. Sidorna har en 3D/2D-växlare.
+     2D: `https://fysiklabbet.se/fysik2-hjul-och-fjader-app.html`
+     3D: `https://fysiklabbet.se/fysik2-hjul-och-fjader-3d-app.html`
+     Ta gärna en skärmdump av 3D-scenen som bild till punkten.
      (Samma genomgång fick också en simulering där graferna för läge,
      hastighet och acceleration ritas upp sida vid sida och tiden kan dras
      fram och tillbaka: `&block=svangningsgrafer`.)

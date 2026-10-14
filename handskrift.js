@@ -21734,39 +21734,95 @@
     stepEnd();
 
     /* ---- b) svängningstiden ---- */
+    /* Samma JÄMFÖRELSE som i a): talet framför t inne i sinus ringas in
+     * mot ω i grundformen (insättningsgest, se REGEL), och ω = 10 rad/s
+     * skrivs ut. Därefter formeln ω = 2π/T, T löses ut med båda led och
+     * värdet sätts in. */
     y += adv + 1.2 * F;
     var bF2 = bubble(140, bubbleTop(y - adv - 0.5 * F), bw, [
-      [['Perioden sitter i vinkel-']],
-      [['hastigheten. Jag löser ut ', 0], ['T', 1], [' ur', 0]],
-      [['sambandet mellan dem.']]
+      [['Perioden hänger ihop med vinkel-']],
+      [['hastigheten ', 0], ['ω', 1], ['. Den läser jag av', 0]],
+      [['med samma jämförelse som i a).']]
     ]);
     tanke(bF2);
-    placeString('b) Vinkelhastighet och period', padL, y,
-                s * 0.62, F * 0.62, acts);
+    placeString('b) Läser av ω genom att jämföra', padL, y, s * 0.62, F * 0.62, acts);
+    pause(300);
+    y += 1.9 * F;
+    var bW = bubble(140, bubbleTop(y - adv), bw, [
+      [['Talet framför ', 0], ['t', 1], [' inne i sinus står', 0]],
+      [['på vinkelhastighetens plats.']]
+    ]);
+    tanke(bW);
+    var ringsW = substRings(acts, [[xg2, xg3, yGiv, F], [xa2, xa3, yGen, F]]);
+    placeString('ω=10 rad/s', padL, y, s, F, acts);
+    fadeRings(acts, ringsW);
+    stepEnd();
+
+    y += adv + 1.2 * F;
+    var bFo = bubble(140, bubbleTop(y - adv - 0.5 * F), bw, [
+      [['Sambandet mellan vinkelhastig-']],
+      [['heten och perioden ', 0], ['T', 1], [':', 0]]
+    ]);
+    tanke(bFo);
+    placeString('Löser ut T ur vinkelhastigheten', padL, y, s * 0.62, F * 0.62, acts);
     pause(300);
     y += 2.1 * F;
     var xb = placeString('ω=', padL, y, s, F, acts);
+    fracH('2π', 'T', xb, y);
+    stepEnd();
+
+    /* T löses ut: multiplicera båda led med T, dividera med ω */
+    function fracHB(numS, denS, x0, yb) {
+      /* bråk där streck och nämnare är OPERATIONEN (blåpenna) */
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]), color: BLUE });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts, BLUE);
+      return x0 + w + 1.5;
+    }
+    y += adv + 1.3 * F;
+    var bM = bubble(140, bubbleTop(y - adv), bw, [
+      [['', 0], ['T', 1], [' står i nämnaren. Jag', 0]],
+      [['multiplicerar båda led med ', 0], ['T', 1], ['.', 0]]
+    ]);
+    tanke(bM);
+    xb = placeString('ω', padL, y, s, F, acts);
+    xb = placeString('·T', xb, y, s, F, acts, BLUE);
+    xb = placeString('=', xb, y, s, F, acts);
     xb = fracH('2π', 'T', xb, y);
-    xb = placeString('⟺T=', xb + 0.12 * F, y, s, F, acts);
+    placeString('·T', xb, y, s, F, acts, BLUE);
+    stepEnd();
+
+    y += adv + 0.8 * F;
+    var bM2 = bubble(140, bubbleTop(y - adv), bw, [
+      [['', 0], ['T', 1], [' i högerledet tar ut varandra.', 0]]
+    ]);
+    tanke(bM2);
+    placeString('ω·T=2π', padL, y, s, F, acts);
+    stepEnd();
+    y += adv + 1.3 * F;
+    var bD = bubble(140, bubbleTop(y - adv), bw, [
+      [['Dividerar båda led med ', 0], ['ω', 1], [' så att', 0]],
+      [['', 0], ['T', 1], [' står ensamt.', 0]]
+    ]);
+    tanke(bD);
+    xb = fracHB('ω·T', 'ω', padL, y);
+    xb = placeString('=', xb + 0.1 * F, y, s, F, acts);
+    fracHB('2π', 'ω', xb, y);
+    stepEnd();
+
+    y += adv + 1.3 * F;
+    xb = placeString('T=', padL, y, s, F, acts);
     fracH('2π', 'ω', xb, y);
     stepEnd();
 
-    /* ---- mätvärdesklammern DIREKT under formeln (se REGEL) ---- */
-    y += adv + 1.3 * F;
-    var bK2 = bubble(140, bubbleTop(y - adv), bw, [
-      [['Jämförelsen i a) gav också']],
-      [['vinkelhastigheten: talet']],
-      [['framför ', 0], ['t', 1], [' inne i sinus.', 0]]
-    ]);
-    tanke(bK2);
-    var klam2 = valueBracket(acts, ['ω=10 rad/s'], padL, y, s, F);
-    stepEnd();
-    y = klam2.yEnd;
-
     y += adv + 1.3 * F;
     var bI2 = bubble(140, bubbleTop(y - adv), bw, [
-      [['Nu sätter jag in värdet ur']],
-      [['klammern i formeln.']]
+      [['Nu sätter jag in ', 0], ['ω', 1], [' = 10 rad/s.', 0]]
     ]);
     tanke(bI2);
     var xi2 = placeString('T=', padL, y, s, F, acts);
@@ -21812,6 +21868,15 @@
     placeString('c) Derivera läget', padL, y, s * 0.62, F * 0.62, acts);
     pause(300);
     y += 1.7 * F;
+    placeString('y=0,15 sin(10t)', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv;
+    var bC1 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Deriverar: sin blir cos, och den']],
+      [['inre derivatan 10 hamnar framför.']]
+    ]);
+    tanke(bC1);
     placeString("v=y'=10·0,15 cos(10t)", padL, y, s, F, acts);
     stepEnd();
 

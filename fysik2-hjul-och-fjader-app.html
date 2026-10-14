@@ -43,6 +43,14 @@
         body.lab-sim .stor-sim input.minisim-slider::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #c95f26; border: 2px solid #f9f5ec; cursor: pointer; }
         .stor-sim .minisim-card:not(:fullscreen) .ms-kv-svg { max-width: none !important; width: 100%; }
         .stor-sim .minisim-controls, .stor-sim .minisim-slider-row { font-size: 15px; }
+        .dim-lankar { display: flex; gap: 2px; padding: 3px; border-radius: 999px; width: max-content;
+            margin: 0 auto 10px; background: rgba(243,238,228,0.92);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .dim-lankar a, .dim-lankar span { width: 44px; height: 28px; border-radius: 999px; display: flex;
+            align-items: center; justify-content: center; font: 600 12.5px Poppins, sans-serif;
+            color: var(--lab-ink, #0f1620); text-decoration: none; }
+        .dim-lankar a:hover { background: rgba(15,22,32,0.08); }
+        .dim-lankar .aktiv { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
         .sim-forklaring { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); max-width: 1040px; margin: 28px auto 0; }
         .sim-forklaring section { background: #fdfaf3; border: 1px solid #ddd3c0; border-radius: 6px; padding: 14px 16px; }
         .sim-forklaring h2 { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 16px; color: var(--lab-ink); margin: 0 0 6px; }
@@ -124,6 +132,10 @@
             </div>
             <h1 class="text-3xl md:text-4xl font-black tracking-tight" style="color: var(--lab-ink);">Hjulet och fjädern</h1>
             <p class="mt-2 mb-5" style="color: var(--lab-ink-soft); max-width: 860px;">En lampa lyser på ett cykelhjul som snurrar med jämn fart. Ett stift sitter på hjulet på avståndet <em>A</em> från navet, och stiftets skugga på väggen rör sig upp och ned i precis samma takt som vikten i fjädern bredvid. En harmonisk svängning är alltså projektionen av en cirkelrörelse på en linje. Grafen till höger ritar upp läget <em>y</em> mot tiden <em>t</em>, och kurvan blir en sinuskurva.</p>
+            <div class="dim-lankar" role="group" aria-label="Vy: 3D eller 2D">
+                <a href="fysik2-hjul-och-fjader-3d-app.html" title="Samma försök i 3D">3D</a>
+                <span class="aktiv" aria-current="true">2D</span>
+            </div>
             <div class="stor-sim">
                 <div class="lab-minisim" data-minisim-src="dHlwOiBoanVscHJvamVrdGlvbg=="></div>
             </div>

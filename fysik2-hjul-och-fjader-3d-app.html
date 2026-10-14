@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="sim-variant-av" content="fysik2-hjul-och-fjader-app.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hjulet och fjädern i 3D — Fysiklabbet</title>
+    <meta name="description" content="Ett cykelhjul med ett stift snurrar i ljuset från en lampa, och stiftets skugga på väggen rör sig upp och ned i exakt samma takt som en vikt i en fjäder. Vrid kameran fritt i 3D, se hjulet från lampans håll och följ hur grafen på väggen blir en sinuskurva: en harmonisk svängning är projektionen av en cirkelrörelse.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-hjul-och-fjader-3d-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Hjulet och fjädern i 3D — Fysik nivå 2">
+    <meta property="og:description" content="Ett cykelhjul med ett stift snurrar i ljuset från en lampa, och stiftets skugga på väggen rör sig upp och ned i exakt samma takt som en vikt i en fjäder. Vrid kameran fritt i 3D, se hjulet från lampans håll och följ hur grafen på väggen blir en sinuskurva: en harmonisk svängning är projektionen av en cirkelrörelse.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-hjul-och-fjader-3d-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hjulet och fjädern i 3D — Fysik nivå 2">
+    <meta name="twitter:description" content="Ett cykelhjul med ett stift snurrar i ljuset från en lampa, och stiftets skugga på väggen rör sig upp och ned i exakt samma takt som en vikt i en fjäder. Vrid kameran fritt i 3D, se hjulet från lampans håll och följ hur grafen på väggen blir en sinuskurva: en harmonisk svängning är projektionen av en cirkelrörelse.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>
+        var __q = new URLSearchParams(location.search);
+        if (__q.has('embed')) document.documentElement.classList.add('embed-mode');
+    </script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+        .fnum em { font-family: 'KaTeX_Math', 'Times New Roman', serif; font-style: italic; }
+        .fnum sub { font-style: normal; font-size: 12px; }
+        @media (max-width: 600px) {
+            .formula-card { flex-wrap: nowrap !important; overflow-x: auto;
+                            justify-content: flex-start;
+                            -webkit-overflow-scrolling: touch; }
+            .formula-card > * { flex-shrink: 0; }
+            .formula-card .fnum { font-size: 16px; }
+        }
+
+        /* Scenen: en mörk laborationsscen (laser eller elektronkanon i mörker).
+           Canvasen bor i .scene-stage med fast höjd; i fullskärm fyller den
+           ramen. Bakgrunden är en CSS-gradient bakom en genomskinlig
+           WebGL-canvas, så att djupet i rummet inte kostar en enda triangel. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.35);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.10);
+            user-select: none;
+            background: #071022;
+        }
+        .scene-stage {
+            position: relative; height: 540px;
+            background: radial-gradient(ellipse at 48% 30%, #16305f 0%, #0b1a3a 48%, #050b1c 100%);
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap:fullscreen .scene-stage, .scene-wrap:-webkit-full-screen .scene-stage {
+            position: absolute; inset: 0; height: auto;
+        }
+        @media (max-width: 600px) {
+            .scene-stage { height: 400px; }
+            /* Mobil fullskärm: scenen ligger kvar i flödet med en egen höjd,
+               så att sim-dock.js hittar den och lägger verktygen UNDER
+               scenen (en absolut stage hoppas över och verktygen skulle
+               då flöda in över bilden från toppen). */
+            .scene-wrap:fullscreen .scene-stage, .scene-wrap:-webkit-full-screen .scene-stage {
+                position: relative; inset: auto; height: 58vh;
+            }
+        }
+        .scene-wrap canvas { display: block; }
+
+        /* Vy-knappen: hemvyn efter fri rotation. Ligger UNDER fullskärmsknappen,
+           som äger det övre vänstra hörnet ensam. */
+        /* Växling 3D/planvy: en tvådelad knapp under fullskärmsknappen. */
+        .dim-switch {
+            position: absolute; top: 66px; left: 14px; z-index: 7;
+            display: flex; gap: 2px; padding: 3px; border-radius: 999px;
+            background: rgba(243,238,228,0.92);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+        }
+        .dim-switch button {
+            width: 36px; height: 26px; border-radius: 999px; border: none;
+            background: transparent; color: var(--lab-ink, #0f1620);
+            font: 600 12px Poppins, sans-serif; cursor: pointer; padding: 0;
+        }
+        .dim-switch button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .dim-switch button:not(.active):hover { background: rgba(15,22,32,0.08); }
+        @media (max-width: 600px) {
+            .dim-switch { top: 50px; left: 10px; padding: 2px; }
+            .dim-switch button { width: 32px; height: 24px; font-size: 11.5px; }
+        }
+        .vy-btn {
+            position: absolute; top: 108px; left: 14px; z-index: 7;
+            width: 40px; height: 40px; border-radius: 50%;
+            background: rgba(243,238,228,0.92);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            color: var(--lab-ink, #0f1620);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            transition: border-color 0.15s ease;
+        }
+        .vy-btn:hover { border-color: var(--lab-accent, #c8324a); }
+        @media (max-width: 600px) {
+            .vy-btn { top: 86px; width: 32px; height: 32px; }
+            /* I mobilens fullskärm ligger verktygsarket över scenen och rymmer
+               samma kameravyer, så den runda vy-knappen göms där (annars
+               hamnar den ovanpå arkets övre hörn). */
+            .scene-wrap:fullscreen .vy-btn, .scene-wrap:-webkit-full-screen .vy-btn { display: none; }
+        }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.72); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+        /* Avläsning uppe till vänster under knapparna: träffräknaren i
+           partikelläget. Ljus text på den mörka scenen, ingen ruta. */
+        .scene-info.si-diskret {
+            position: absolute; top: 116px; left: 16px; z-index: 5;
+            color: #dfe7f5; font-size: 13px; font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+            pointer-events: none; background: none; border: none; box-shadow: none;
+        }
+        .scene-info.si-diskret span { display: block; font-weight: 400; font-size: 11.5px; color: #aab7cf; }
+        @media (max-width: 600px) { .scene-info.si-diskret { top: 96px; left: 12px; } }
+
+        /* Inställningsrutan uppe till höger: kryssrutor och radioknappar i
+           båda lägena, glidare och styrknappar bara i fullskärm. Hopfällbar
+           via .st-hide/.st-show-btn (centrala klasser i styles-laborans-sim.css). */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 30px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 252px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-actions .btn-toggle { font-size: 13px; padding: 7px 10px; }
+        .scene-toggles .st-views { display: flex; gap: 5px; margin-top: 2px; }
+        .scene-toggles .st-views button { flex: 1; padding: 4px 6px; font-size: 11.5px; }
+
+        /* Samma verktygsval som ett KORT i sidopanelen (normalläget) */
+        .st-panel { display: flex; flex-wrap: wrap; gap: 6px 26px; }
+        .st-panel > div { display: flex; flex-direction: column; gap: 3px; min-width: 150px; }
+        .st-panel .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .st-panel .st-title.mt { margin-top: 7px; }
+        .st-panel label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .st-panel input[type="checkbox"], .st-panel input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .st-panel .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease; font-family: Poppins, sans-serif;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle:disabled { opacity: 0.45; cursor: default; }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-small { padding: 5px 10px; font-size: 12.5px; }
+        .view-grid { display: flex; gap: 6px; }
+        .view-grid button { flex: 1; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; }
+        .num-in { width: 60px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; color: var(--lab-accent, #c8324a); }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // ── Konstanter ──
+        // Världens enhet är decimeter. Hjulets radie är 30 cm (3,0 dm);
+        // stiftet sitter på radien A. Ljuset kommer från lampan till vänster
+        // och går parallellt med x-axeln, i hjulets plan, så att stiftets
+        // skugga på väggen har exakt samma höjd som stiftet: y = A · sin(ω · t).
+        const HX = -1.5, HY = 4.2, R = 3.0;     // hjulets nav och radie (dm)
+        const WALL_X = 6.0;                      // väggen
+        const PEG_Z0 = 0.12, PEG_Z1 = 0.95;      // stiftet sticker ut ur hjulet
+        const SPR_X = 5.15, SPR_Z = 2.7, SPR_TOP = 8.0;   // fjäderns fäste
+        const G_Z0 = 3.9, G_Z1 = 12.9, G_Y0 = 0.9, G_Y1 = 7.5;  // grafen på väggen
+        const T_MIN = 1, T_MAX = 4;              // periodtid (s)
+        const A_MIN = 0.10, A_MAX = 0.28;        // amplitud (m)
+        const DEG = Math.PI / 180;
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+
+        // ── Reglage-komponenter ──
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').trim();
+                if (norm === '' || norm === '-' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null) n = Math.max(min, n);
+                if (max != null) n = Math.min(max, n);
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt}
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => setTxt(e.target.value)}
+                           onBlur={() => { setEditing(false); commit(txt); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') { e.target.blur(); } }} />
+                    <span className="num-unit">{unit}</span>
+                </span>
+            );
+        };
+        const Slider = ({ label, sub, value, min, max, step, unit, onChange, decimals = 0 }) => (
+            <div className="p-3 rounded-xl glass-card mb-3">
+                <div className="flex justify-between items-baseline mb-2 gap-2">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
+                           dangerouslySetInnerHTML={{ __html: label }} />
+                    <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, decimals)} unit={unit} onCommit={onChange} />
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="w-full cursor-pointer" />
+                <div className="flex justify-between mt-1 text-xs font-mono" style={{ color: 'var(--lab-ink-muted)' }}>
+                    <span>{fmt(min, decimals)} {unit}</span>
+                    <span>{fmt(max, decimals)} {unit}</span>
+                </div>
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
+                             dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, decimals, unit }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, decimals)} unit={unit} onCommit={onChange} />
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        // Textetikett i scenen: en sprite med fast storlek på skärmen.
+        function labelSprite(text, color, px, opts = {}) {
+            const cv = document.createElement('canvas');
+            const ctx = cv.getContext('2d');
+            const font = (opts.italic ? 'italic ' : '') + (opts.weight || 500) + ' 64px ' + (opts.italic ? "'Times New Roman', serif" : 'Poppins, sans-serif');
+            ctx.font = font;
+            const w = Math.ceil(ctx.measureText(text).width) + 24;
+            cv.width = w; cv.height = 88;
+            ctx.font = font;
+            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'center';
+            ctx.shadowColor = 'rgba(0,0,0,0.65)';
+            ctx.shadowBlur = 6;
+            ctx.fillStyle = color;
+            ctx.fillText(text, w / 2, 46);
+            const tex = new THREE.CanvasTexture(cv);
+            tex.minFilter = THREE.LinearFilter;
+            const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false, sizeAttenuation: false });
+            const sp = new THREE.Sprite(mat);
+            const h = px / 1000;                 // höjd i skärmenheter (sätts om vid resize)
+            sp.userData = { aspect: w / 88, px };
+            sp.scale.set(h * w / 88, h, 1);
+            sp.renderOrder = 10;
+            return sp;
+        }
+
+        // ── 3D-scenen ──
+        const HjulScene = ({ stateRef, simRef, actionsRef }) => {
+            const mountRef = useRef(null);
+
+            useEffect(() => {
+                const mount = mountRef.current;
+                let width = mount.clientWidth, height = mount.clientHeight;
+
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 400);
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+                renderer.setSize(width, height);
+                renderer.setClearColor(0x000000, 0);
+                mount.appendChild(renderer.domElement);
+
+                const controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.08;
+                controls.minDistance = 6;
+                controls.maxDistance = 70;
+                controls.maxPolarAngle = Math.PI * 0.52;
+
+                const VIEWS = {
+                    snett: { pos: [-15, 11.5, 24], tgt: [1.6, 3.6, 3.6] },
+                    lampan: { pos: [-16, 10.2, 2.2], tgt: [WALL_X, 4.3, 2.6] },
+                    hjulet: { pos: [2.2, 4.6, 21], tgt: [2.2, 4.2, 0] },
+                };
+                const applyView = (which) => {
+                    const v = VIEWS[which] || VIEWS.snett;
+                    controls.enableDamping = false;
+                    camera.position.set(...v.pos);
+                    controls.target.set(...v.tgt);
+                    controls.update();
+                    controls.enableDamping = true;
+                };
+                applyView('snett');
+                actionsRef.current.setView = applyView;
+
+                // Ljus i rummet: svagt grundljus och ett kallt nyckelljus
+                scene.add(new THREE.AmbientLight(0xbfd0ff, 0.45));
+                const key = new THREE.DirectionalLight(0xffffff, 0.75);
+                key.position.set(-6, 16, 14);
+                scene.add(key);
+                const warm = new THREE.PointLight(0xffd58a, 0.9, 22);
+                warm.position.set(-6.4, 4.2, 0);
+                scene.add(warm);
+
+                // ── Golv (labbänken) ──
+                const floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 30),
+                    new THREE.MeshStandardMaterial({ color: 0x0f1d3c, roughness: 0.9, metalness: 0.05 }));
+                floor.rotation.x = -Math.PI / 2;
+                floor.position.set(1, 0, 3);
+                scene.add(floor);
+                const grid = new THREE.GridHelper(40, 40, 0x2a4373, 0x1a2c52);
+                grid.position.set(1, 0.005, 3);
+                grid.material.transparent = true; grid.material.opacity = 0.55;
+                scene.add(grid);
+
+                // ── Väggen ──
+                const wallMat = new THREE.MeshStandardMaterial({ color: 0x23365e, roughness: 0.95, metalness: 0 });
+                const wall = new THREE.Mesh(new THREE.BoxGeometry(0.3, 8.8, 19), wallMat);
+                wall.position.set(WALL_X + 0.15, 4.4, 4.0);
+                scene.add(wall);
+                const edgeMat = new THREE.LineBasicMaterial({ color: 0x6f9be0, transparent: true, opacity: 0.45 });
+                const wallEdge = new THREE.LineSegments(new THREE.EdgesGeometry(wall.geometry), edgeMat);
+                wallEdge.position.copy(wall.position);
+                scene.add(wallEdge);
+
+                // Ljusfläcken på väggen (där lampans ljus träffar)
+                const spotCv = document.createElement('canvas');
+                spotCv.width = spotCv.height = 256;
+                const sg = spotCv.getContext('2d');
+                const grd = sg.createRadialGradient(128, 128, 10, 128, 128, 128);
+                grd.addColorStop(0, 'rgba(255,226,160,0.55)');
+                grd.addColorStop(0.62, 'rgba(255,214,130,0.42)');
+                grd.addColorStop(1, 'rgba(255,200,110,0)');
+                sg.fillStyle = grd; sg.fillRect(0, 0, 256, 256);
+                const spot = new THREE.Mesh(new THREE.PlaneGeometry(10.5, 10.5),
+                    new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(spotCv), transparent: true, depthWrite: false }));
+                spot.rotation.y = -Math.PI / 2;
+                spot.position.set(WALL_X - 0.01, HY, 0.4);
+                spot.renderOrder = 1;
+                scene.add(spot);
+
+                // ── Lampan ──
+                const lamp = new THREE.Group();
+                const metal = new THREE.MeshStandardMaterial({ color: 0x3d434d, metalness: 0.6, roughness: 0.4 });
+                const housing = new THREE.Mesh(new THREE.CylinderGeometry(0.75, 0.42, 1.3, 32, 1, true), metal);
+                housing.rotation.z = -Math.PI / 2;
+                housing.position.set(-7.0, HY, 0);
+                const back = new THREE.Mesh(new THREE.CylinderGeometry(0.44, 0.44, 0.22, 32), metal);
+                back.rotation.z = -Math.PI / 2;
+                back.position.set(-7.72, HY, 0);
+                const lens = new THREE.Mesh(new THREE.CircleGeometry(0.74, 40),
+                    new THREE.MeshBasicMaterial({ color: 0xffe6a8 }));
+                lens.rotation.y = Math.PI / 2;
+                lens.position.set(-6.36, HY, 0);
+                const stand = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, HY - 0.4, 12), metal);
+                stand.position.set(-7.1, (HY - 0.4) / 2 + 0.06, 0);
+                const foot = new THREE.Mesh(new THREE.CylinderGeometry(0.75, 0.85, 0.12, 32), metal);
+                foot.position.set(-7.1, 0.06, 0);
+                lamp.add(housing, back, lens, stand, foot);
+                scene.add(lamp);
+
+                // Ljuskäglan: parallellt ljus från lampan till väggen
+                const beamLen = WALL_X - (-6.36);
+                const beam = new THREE.Mesh(new THREE.CylinderGeometry(4.9, 0.74, beamLen, 48, 1, true),
+                    new THREE.MeshBasicMaterial({ color: 0xffd36b, transparent: true, opacity: 0.075,
+                                                  side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending }));
+                beam.rotation.z = -Math.PI / 2;
+                beam.position.set(-6.36 + beamLen / 2, HY, 0.4);
+                scene.add(beam);
+
+                // ── Hjulet ──
+                const wheel = new THREE.Group();
+                wheel.position.set(HX, HY, 0);
+                const tire = new THREE.Mesh(new THREE.TorusGeometry(R, 0.17, 18, 120),
+                    new THREE.MeshStandardMaterial({ color: 0x1c1f25, roughness: 0.85 }));
+                const rim = new THREE.Mesh(new THREE.TorusGeometry(R - 0.22, 0.055, 10, 120),
+                    new THREE.MeshStandardMaterial({ color: 0xb9c2cf, metalness: 0.85, roughness: 0.3 }));
+                wheel.add(tire, rim);
+                const spokeMat = new THREE.MeshStandardMaterial({ color: 0xc9d0da, metalness: 0.8, roughness: 0.35 });
+                const spokes = new THREE.Group();
+                for (let k = 0; k < 24; k++) {
+                    const a = k * Math.PI / 12;
+                    const s = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, R - 0.45, 6), spokeMat);
+                    s.position.set(Math.cos(a) * (R - 0.45) / 2 + Math.cos(a) * 0.18, Math.sin(a) * (R - 0.45) / 2 + Math.sin(a) * 0.18, (k % 2 ? 0.05 : -0.05));
+                    s.rotation.z = a - Math.PI / 2;
+                    spokes.add(s);
+                }
+                const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.5, 24),
+                    new THREE.MeshStandardMaterial({ color: 0xd6d0c3, metalness: 0.6, roughness: 0.35 }));
+                hub.rotation.x = Math.PI / 2;
+                const rotor = new THREE.Group();
+                rotor.add(spokes, hub);
+                // Stiftet: en blå tapp som sticker ut ur hjulet på radien A
+                const pegMat = new THREE.MeshStandardMaterial({ color: 0x2563c9, roughness: 0.35, metalness: 0.2, emissive: 0x0b2766 });
+                const peg = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, PEG_Z1 - PEG_Z0, 20), pegMat);
+                peg.rotation.x = Math.PI / 2;
+                rotor.add(peg);
+                wheel.add(rotor);
+                scene.add(wheel);
+                // Axel och stativ bakom hjulet
+                const axle = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.9, 12), metal);
+                axle.rotation.x = Math.PI / 2;
+                axle.position.set(HX, HY, -0.45);
+                const post = new THREE.Mesh(new THREE.BoxGeometry(0.22, HY, 0.22), metal);
+                post.position.set(HX, HY / 2, -0.9);
+                const postFoot = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.12, 1.0), metal);
+                postFoot.position.set(HX, 0.06, -0.9);
+                scene.add(axle, post, postFoot);
+
+                // Vinkeln α på hjulets framsida
+                const angGroup = new THREE.Group();
+                scene.add(angGroup);
+                const lineMat = new THREE.LineBasicMaterial({ color: 0xf3eee4 });
+                const refLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]),
+                    new THREE.LineDashedMaterial({ color: 0xf3eee4, dashSize: 0.18, gapSize: 0.12 }));
+                const radLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3()]), lineMat);
+                const arcGeo = new THREE.BufferGeometry();
+                arcGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(3 * 121), 3));
+                const arc = new THREE.Line(arcGeo, new THREE.LineBasicMaterial({ color: 0xf59e0b }));
+                angGroup.add(refLine, radLine, arc);
+                const lblAlfa = labelSprite('α', '#f5b13d', 30, { italic: true });
+                const lblA = labelSprite('A', '#f3eee4', 30, { italic: true });
+                angGroup.add(lblAlfa, lblA);
+
+                // ── Skuggorna på väggen ──
+                // Ljuset går längs x, så skuggan av ett föremål hamnar på samma
+                // höjd y och samma z som föremålet. Hjulet ses från kanten och
+                // ger en lodrät stapel; stiftet, som sticker ut längs z, ger en
+                // vågrät stapel bredvid den.
+                const shMat = new THREE.MeshBasicMaterial({ color: 0x0a1020, transparent: true, opacity: 0.82, depthWrite: false });
+                const shGroup = new THREE.Group();
+                scene.add(shGroup);
+                const shPlane = (w, h) => {
+                    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), shMat);
+                    m.rotation.y = -Math.PI / 2;
+                    m.renderOrder = 2;
+                    shGroup.add(m);
+                    return m;
+                };
+                const shWheel = shPlane(0.36, 2 * R + 0.34);
+                shWheel.position.set(WALL_X - 0.02, HY, 0);
+                const shAxle = shPlane(0.9, 0.14);
+                shAxle.position.set(WALL_X - 0.02, HY, -0.45);
+                const shPeg = shPlane(PEG_Z1 - PEG_Z0, 0.3);
+                const shPegMat = new THREE.MeshBasicMaterial({ color: 0x050a16, transparent: true, opacity: 0.95, depthWrite: false });
+                shPeg.material = shPegMat;
+
+                // ── Fjädern och vikten ──
+                const arm = new THREE.Mesh(new THREE.BoxGeometry(WALL_X - SPR_X + 0.4, 0.14, 0.3), metal);
+                arm.position.set((WALL_X + SPR_X) / 2 - 0.2, SPR_TOP + 0.07, SPR_Z);
+                scene.add(arm);
+                const COILS = 12, SEG = 320;
+                const helixPts = [];
+                for (let i = 0; i <= SEG; i++) {
+                    const u = i / SEG;
+                    let x = 0, z = 0;
+                    if (u > 0.05 && u < 0.95) {
+                        const a = (u - 0.05) / 0.9 * COILS * 2 * Math.PI;
+                        x = 0.26 * Math.cos(a); z = 0.26 * Math.sin(a);
+                    }
+                    helixPts.push(new THREE.Vector3(x, -u, z));
+                }
+                const springGeo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(helixPts), 900, 0.028, 6, false);
+                const spring = new THREE.Mesh(springGeo, new THREE.MeshStandardMaterial({ color: 0xd5dbe3, metalness: 0.35, roughness: 0.45, emissive: 0x2a3446 }));
+                spring.position.set(SPR_X, SPR_TOP, SPR_Z);
+                scene.add(spring);
+                const MASS_H = 0.7;
+                const mass = new THREE.Mesh(new THREE.BoxGeometry(0.95, MASS_H, 0.95),
+                    new THREE.MeshStandardMaterial({ color: 0x6ba3d6, roughness: 0.45, metalness: 0.15 }));
+                scene.add(mass);
+                const massEdge = new THREE.LineSegments(new THREE.EdgesGeometry(mass.geometry),
+                    new THREE.LineBasicMaterial({ color: 0x2f6db0 }));
+                mass.add(massEdge);
+
+                // ── Grafen på väggen ──
+                // Samma höjdskala som scenen: jämviktsläget (navets höjd) är
+                // y = 0, och kurvan ritas där stiftet, skuggan och vikten är.
+                const GW = 1024, GH = Math.round(1024 * (G_Y1 - G_Y0) / (G_Z1 - G_Z0));
+                const gCv = document.createElement('canvas');
+                gCv.width = GW; gCv.height = GH;
+                const gctx = gCv.getContext('2d');
+                const gTex = new THREE.CanvasTexture(gCv);
+                gTex.anisotropy = 8;
+                const graph = new THREE.Mesh(new THREE.PlaneGeometry(G_Z1 - G_Z0, G_Y1 - G_Y0),
+                    new THREE.MeshBasicMaterial({ map: gTex }));
+                graph.rotation.y = -Math.PI / 2;
+                graph.position.set(WALL_X - 0.02, (G_Y0 + G_Y1) / 2, (G_Z0 + G_Z1) / 2);
+                scene.add(graph);
+                const gx = (z) => (z - G_Z0) / (G_Z1 - G_Z0) * GW;
+                const gy = (y) => (G_Y1 - y) / (G_Y1 - G_Y0) * GH;
+                const AX_Z = G_Z0 + 0.7, END_Z = G_Z1 - 0.5;
+                const drawGraph = (st, sim) => {
+                    const Adm = st.A * 10;
+                    gctx.fillStyle = '#f3eee4';
+                    gctx.fillRect(0, 0, GW, GH);
+                    gctx.strokeStyle = 'rgba(37,99,201,0.12)'; gctx.lineWidth = 1;
+                    for (let z = G_Z0; z <= G_Z1; z += 0.5) { gctx.beginPath(); gctx.moveTo(gx(z), 0); gctx.lineTo(gx(z), GH); gctx.stroke(); }
+                    for (let y = G_Y0; y <= G_Y1; y += 0.5) { gctx.beginPath(); gctx.moveTo(0, gy(y)); gctx.lineTo(GW, gy(y)); gctx.stroke(); }
+                    // nivålinjer för A och −A
+                    gctx.setLineDash([12, 9]); gctx.strokeStyle = '#9aa0a6'; gctx.lineWidth = 2;
+                    [HY + Adm, HY - Adm].forEach(y => { gctx.beginPath(); gctx.moveTo(gx(AX_Z), gy(y)); gctx.lineTo(gx(END_Z), gy(y)); gctx.stroke(); });
+                    gctx.setLineDash([]);
+                    // axlar, pilspets bara åt det positiva hållet
+                    gctx.strokeStyle = '#38bdf8'; gctx.fillStyle = '#38bdf8'; gctx.lineWidth = 4;
+                    gctx.beginPath(); gctx.moveTo(gx(AX_Z), gy(G_Y0 + 0.3)); gctx.lineTo(gx(AX_Z), gy(G_Y1 - 0.45)); gctx.stroke();
+                    gctx.beginPath(); gctx.moveTo(gx(AX_Z) - 12, gy(G_Y1 - 0.45)); gctx.lineTo(gx(AX_Z), gy(G_Y1 - 0.2)); gctx.lineTo(gx(AX_Z) + 12, gy(G_Y1 - 0.45)); gctx.fill();
+                    gctx.beginPath(); gctx.moveTo(gx(AX_Z), gy(HY)); gctx.lineTo(gx(END_Z), gy(HY)); gctx.stroke();
+                    gctx.beginPath(); gctx.moveTo(gx(END_Z), gy(HY) - 12); gctx.lineTo(gx(END_Z + 0.28), gy(HY)); gctx.lineTo(gx(END_Z), gy(HY) + 12); gctx.fill();
+                    gctx.fillStyle = '#1f2530';
+                    gctx.font = 'italic 44px "Times New Roman", serif';
+                    gctx.textAlign = 'right'; gctx.textBaseline = 'middle';
+                    gctx.fillText('y', gx(AX_Z) - 18, gy(G_Y1 - 0.4));
+                    gctx.fillText('A', gx(AX_Z) - 14, gy(HY + Adm));
+                    gctx.fillText('−A', gx(AX_Z) - 14, gy(HY - Adm));
+                    gctx.font = '40px Poppins, sans-serif';
+                    gctx.fillText('0', gx(AX_Z) - 14, gy(HY));
+                    gctx.font = 'italic 44px "Times New Roman", serif';
+                    gctx.textAlign = 'center';
+                    gctx.fillText('t', gx(END_Z + 0.1), gy(HY) + 44);
+                    // kurvan: tidsaxeln flyter med när kurvan når högerkanten
+                    const win = 2 * st.T;
+                    const t0 = Math.max(0, sim.t - win);
+                    const zOf = (t) => AX_Z + (t - t0) / win * (END_Z - 0.35 - AX_Z);
+                    const om = 2 * Math.PI / st.T;
+                    // tidsmärken vid varje halv period
+                    gctx.font = '34px Poppins, sans-serif'; gctx.fillStyle = '#4a5160';
+                    for (let k = Math.ceil(t0 / (st.T / 2) + 1e-6); k * st.T / 2 <= sim.t + 1e-6 && k < 400; k++) {
+                        const z = zOf(k * st.T / 2);
+                        gctx.strokeStyle = 'rgba(15,22,32,0.25)'; gctx.lineWidth = 2;
+                        gctx.beginPath(); gctx.moveTo(gx(z), gy(HY) - 10); gctx.lineTo(gx(z), gy(HY) + 10); gctx.stroke();
+                    }
+                    if (sim.t > 0) {
+                        gctx.strokeStyle = '#2563c9'; gctx.lineWidth = 6; gctx.lineJoin = 'round';
+                        gctx.beginPath();
+                        const N = 260;
+                        for (let i = 0; i <= N; i++) {
+                            const t = t0 + (sim.t - t0) * i / N;
+                            const y = HY + Adm * Math.sin(sim.phase0 + om * (t - sim.tRef) + sim.phaseRef);
+                            const X = gx(zOf(t)), Y = gy(y);
+                            if (i === 0) gctx.moveTo(X, Y); else gctx.lineTo(X, Y);
+                        }
+                        gctx.stroke();
+                    }
+                    gctx.fillStyle = '#2563c9';
+                    gctx.beginPath(); gctx.arc(gx(zOf(sim.t)), gy(HY + Adm * Math.sin(sim.alfa)), 11, 0, 2 * Math.PI); gctx.fill();
+                    // formeln uppe till höger
+                    gctx.font = 'italic 42px "Times New Roman", serif'; gctx.fillStyle = '#2563c9'; gctx.textAlign = 'right';
+                    gctx.fillText('y = A · sin(ω · t)', GW - 30, 46);
+                    gTex.needsUpdate = true;
+                    return zOf(sim.t);
+                };
+
+                // ── Höjdlinjen: stift → skugga → vikt → graf ──
+                const hGeo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()]);
+                const hLine = new THREE.Line(hGeo, new THREE.LineDashedMaterial({ color: 0x7fb3ff, dashSize: 0.22, gapSize: 0.14, transparent: true, opacity: 0.9 }));
+                scene.add(hLine);
+
+                // Etiketter
+                const lblLampa = labelSprite('Lampa', '#dfe7f5', 24);
+                lblLampa.position.set(-7.1, HY + 1.35, 0);
+                const lblVagg = labelSprite('Skuggan på väggen', '#dfe7f5', 22);
+                lblVagg.position.set(WALL_X - 0.3, HY + R + 0.85, -0.6);
+                const lblHjul = labelSprite('Stift', '#9cc2ff', 22);
+                scene.add(lblLampa, lblVagg, lblHjul);
+
+                // ── Uppdatering per bildruta ──
+                const pegWorld = new THREE.Vector3();
+                const update = () => {
+                    const st = stateRef.current, sim = simRef.current;
+                    const Adm = st.A * 10;
+                    const a = sim.alfa;
+                    rotor.rotation.z = a;
+                    peg.position.set(Adm, 0, (PEG_Z0 + PEG_Z1) / 2);
+                    // rotorns egen rotation flyttar stiftet; ekrarna snurrar med
+                    const py = HY + Adm * Math.sin(a), pxw = HX + Adm * Math.cos(a);
+                    pegWorld.set(pxw, py, (PEG_Z0 + PEG_Z1) / 2);
+                    lblHjul.position.set(pxw, py + 0.6, PEG_Z1 + 0.2);
+                    lblHjul.visible = st.show.etiketter;
+                    lblLampa.visible = st.show.etiketter && st.show.ljus;
+                    lblVagg.visible = st.show.etiketter && st.show.ljus;
+                    // skuggor (bara när lampan lyser)
+                    shGroup.visible = st.show.ljus;
+                    shPeg.position.set(WALL_X - 0.03, py, (PEG_Z0 + PEG_Z1) / 2);
+                    beam.visible = st.show.ljus;
+                    spot.visible = st.show.ljus;
+                    lens.material.color.setHex(st.show.ljus ? 0xffe6a8 : 0x59606b);
+                    warm.intensity = st.show.ljus ? 0.9 : 0;
+                    // fjädern och vikten på samma höjd som skuggan
+                    mass.position.set(SPR_X, py, SPR_Z);
+                    const L = SPR_TOP - (py + MASS_H / 2);
+                    spring.scale.set(1, Math.max(0.2, L), 1);
+                    // vinkeln
+                    angGroup.visible = st.show.vinkel;
+                    if (st.show.vinkel) {
+                        const zf = 0.16;
+                        const am = ((a % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+                        refLine.geometry.setFromPoints([new THREE.Vector3(HX, HY, zf), new THREE.Vector3(HX + R - 0.25, HY, zf)]);
+                        refLine.computeLineDistances();
+                        radLine.geometry.setFromPoints([new THREE.Vector3(HX, HY, zf), new THREE.Vector3(pxw, py, zf)]);
+                        const arr = arc.geometry.attributes.position.array;
+                        for (let i = 0; i <= 120; i++) {
+                            const u = am * i / 120;
+                            arr[3 * i] = HX + 0.85 * Math.cos(u); arr[3 * i + 1] = HY + 0.85 * Math.sin(u); arr[3 * i + 2] = zf;
+                        }
+                        arc.geometry.attributes.position.needsUpdate = true;
+                        arc.visible = am > 0.08;
+                        const b = am / 2;
+                        lblAlfa.position.set(HX + 1.35 * Math.cos(b), HY + 1.35 * Math.sin(b), zf + 0.05);
+                        lblAlfa.visible = am > 0.35;
+                        lblA.position.set(HX + 0.55 * Adm * Math.cos(a) - 0.35 * Math.sin(a), HY + 0.55 * Adm * Math.sin(a) + 0.35 * Math.cos(a), zf + 0.05);
+                    }
+                    // grafen
+                    graph.visible = st.show.graf;
+                    let zEnd = SPR_Z;
+                    if (st.show.graf) zEnd = drawGraph(st, sim);
+                    // höjdlinjen
+                    hLine.visible = st.show.linje;
+                    if (st.show.linje) {
+                        hGeo.setFromPoints([
+                            new THREE.Vector3(pxw + 0.15, py, (PEG_Z0 + PEG_Z1) / 2),
+                            new THREE.Vector3(WALL_X - 0.05, py, (PEG_Z0 + PEG_Z1) / 2),
+                            new THREE.Vector3(WALL_X - 0.05, py, zEnd),
+                        ]);
+                        hLine.computeLineDistances();
+                    }
+                };
+                actionsRef.current.redraw = update;
+
+                // Skala om etiketterna efter fönstrets höjd (fast storlek i px)
+                const sizeLabels = () => {
+                    [lblLampa, lblVagg, lblHjul, lblAlfa, lblA].forEach(sp => {
+                        const h = sp.userData.px / height * 1.0;
+                        sp.scale.set(h * sp.userData.aspect, h, 1);
+                    });
+                };
+                sizeLabels();
+
+                // ── Animation ──
+                let raf = null, last = 0, visible = true;
+                const tick = (now) => {
+                    raf = requestAnimationFrame(tick);
+                    if (!visible) { last = 0; return; }
+                    const dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
+                    last = now;
+                    const st = stateRef.current, sim = simRef.current;
+                    if (st.running) {
+                        const k = st.slow ? 0.25 : 1;
+                        sim.t += dt * k;
+                        sim.alfa += dt * k * 2 * Math.PI / st.T;
+                    }
+                    // kurvan räknas ur den aktuella fasen bakåt i tiden
+                    sim.phase0 = 0; sim.tRef = sim.t; sim.phaseRef = sim.alfa;
+                    update();
+                    controls.update();
+                    renderer.render(scene, camera);
+                };
+                raf = requestAnimationFrame(tick);
+                const io = new IntersectionObserver((e) => { visible = e[0].isIntersecting; }, { threshold: 0.02 });
+                io.observe(mount);
+
+                const onResize = () => {
+                    width = mount.clientWidth; height = mount.clientHeight;
+                    if (!width || !height) return;
+                    camera.aspect = width / height;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(width, height);
+                    sizeLabels();
+                };
+                const ro = new ResizeObserver(onResize);
+                ro.observe(mount);
+
+                return () => {
+                    cancelAnimationFrame(raf);
+                    io.disconnect(); ro.disconnect();
+                    controls.dispose();
+                    renderer.dispose();
+                    if (renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
+                };
+            }, []);
+
+            return <div ref={mountRef} style={{ position: 'absolute', inset: 0 }} />;
+        };
+
+        // ── Appen ──
+        const App = () => {
+            const [T, setT] = useState(2);
+            const [A, setA] = useState(0.24);
+            const [running, setRunning] = useState(true);
+            const [slow, setSlow] = useState(false);
+            const [show, setShow] = useState({ ljus: true, vinkel: true, graf: true, linje: true, etiketter: true });
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [ui, setUi] = useState({ t: 0, alfa: 0 });
+            const sceneWrapRef = useRef(null);
+
+            const stateRef = useRef({});
+            stateRef.current = { T, A, running, slow, show };
+            const simRef = useRef({ t: 0, alfa: 0, phase0: 0, tRef: 0, phaseRef: 0 });
+            const actionsRef = useRef({});
+
+            useEffect(() => {
+                const id = setInterval(() => {
+                    const s = simRef.current;
+                    setUi(u => (u.t === s.t && u.alfa === s.alfa) ? u : { t: s.t, alfa: s.alfa });
+                }, 120);
+                return () => clearInterval(id);
+            }, []);
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current);
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+            const tShow = (k) => setShow(s => ({ ...s, [k]: !s[k] }));
+            const reset = () => { simRef.current.t = 0; simRef.current.alfa = 0; setRunning(false); };
+
+            const VIEWS = ['snett', 'lampan', 'hjulet'];
+            const VIEW_NAMES = { snett: 'Snett framifrån', lampan: 'Från lampan', hjulet: 'Rakt mot hjulet' };
+            const [view, setViewState] = useState('snett');
+            const setView = (v) => { setViewState(v); if (actionsRef.current.setView) actionsRef.current.setView(v); };
+            const nextView = () => setView(VIEWS[(VIEWS.indexOf(view) + 1) % VIEWS.length]);
+
+            const om = 2 * Math.PI / T;
+            const am = ((ui.alfa % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+            const y = A * Math.sin(ui.alfa);
+
+            const Readout = ({ label, value, unit, accent }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-bold text-sm" style={{ color: accent ? 'var(--lab-accent)' : 'var(--lab-ink)' }}>
+                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+            );
+
+            const visaBlock = () => (
+                <React.Fragment>
+                    <div className="st-title">Visa</div>
+                    <label><input type="checkbox" checked={show.ljus} onChange={() => tShow('ljus')} /><span className="st-swatch" style={{ background: '#f2b632' }}></span><span>Lampans ljus och skuggor</span></label>
+                    <label><input type="checkbox" checked={show.vinkel} onChange={() => tShow('vinkel')} /><span className="st-swatch" style={{ background: '#f59e0b' }}></span><span>Vinkeln <em>α</em> och radien <em>A</em></span></label>
+                    <label><input type="checkbox" checked={show.graf} onChange={() => tShow('graf')} /><span className="st-swatch" style={{ background: '#2563c9' }}></span><span>Grafen på väggen</span></label>
+                    <label><input type="checkbox" checked={show.linje} onChange={() => tShow('linje')} /><span className="st-swatch" style={{ background: '#7fb3ff' }}></span><span>Höjdlinjen</span></label>
+                    <label><input type="checkbox" checked={show.etiketter} onChange={() => tShow('etiketter')} /><span>Etiketter</span></label>
+                </React.Fragment>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" />
+                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" />
+                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                <path d="M6 6l12 12M18 6L6 18" />
+                            </svg>
+                        </button>
+                        {visaBlock()}
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">
+                                    <StSlider label="Periodtid <em>T</em>" value={T} min={T_MIN} max={T_MAX} step={0.1} decimals={1} unit="s" onChange={setT} />
+                                    <StSlider label="Amplitud <em>A</em>" value={A} min={A_MIN} max={A_MAX} step={0.01} decimals={2} unit="m" onChange={setA} />
+                                </div>
+                                <label style={{ marginTop: 6 }}><input type="checkbox" checked={slow} onChange={() => setSlow(v => !v)} /><span>Ultrarapid</span></label>
+                                <div className="st-title mt">Kameravy</div>
+                                <div className="st-views">
+                                    <button className="btn-toggle" onClick={() => setView('snett')}>Snett</button>
+                                    <button className="btn-toggle" onClick={() => setView('lampan')}>Lampan</button>
+                                    <button className="btn-toggle" onClick={() => setView('hjulet')}>Hjulet</button>
+                                </div>
+                                <div className="st-actions">
+                                    <button className="btn-toggle" onClick={() => setRunning(r => !r)}>{running ? 'Paus' : 'Start'}</button>
+                                    <button className="btn-toggle" onClick={reset}>Börja om</button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Hjulet och fjädern
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Hjulet och fjädern i 3D</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            En lampa lyser på ett cykelhjul som snurrar med jämn fart. På hjulet sitter ett
+                            <strong> stift</strong>, och eftersom ljuset går rakt fram i hjulets plan hamnar
+                            stiftets skugga på väggen på exakt samma höjd som stiftet. Skuggan rör sig upp och
+                            ned i takt med <strong>vikten i fjädern</strong> bredvid, och grafen på väggen ritar
+                            upp höjden mot tiden: en sinuskurva. En harmonisk svängning är alltså
+                            projektionen av en cirkelrörelse. Byt kameravy till <strong>Från lampan</strong> och
+                            se hjulet från kanten, så som ljuset ser det: då rör sig stiftet bara upp och ned.
+                        </p>
+
+                        {/* Formelkort med ord-etiketter */}
+                        <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-8 gap-y-4 formula-card">
+                            <div className="flex items-end gap-3">
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Elongation</div>
+                                    <div className="fnum"><em>y</em></div>
+                                </div>
+                                <span className="fnum">=</span>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Amplitud</div>
+                                    <div className="fnum"><em>A</em></div>
+                                </div>
+                                <span className="fnum">⋅</span>
+                                <span className="fnum">sin(</span>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Vinkelhastighet</div>
+                                    <div className="fnum"><em>ω</em></div>
+                                </div>
+                                <span className="fnum">⋅</span>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Tid</div>
+                                    <div className="fnum"><em>t</em></div>
+                                </div>
+                                <span className="fnum">)</span>
+                            </div>
+                            <div className="text-sm" style={{ color: 'var(--lab-ink-soft)', maxWidth: 470 }}>
+                                Stiftet har vridits vinkeln <em>α</em> = <em>ω</em> · <em>t</em> från den vågräta radien,
+                                så dess höjd över navet är <em>A</em> · sin <em>α</em>. Med de aktuella värdena är
+                                <em> ω</em> = 2π/<em>T</em> = {fmt(om, 2)} rad/s och <em>A</em> = {fmt(A, 2)} m.
+                            </div>
+                        </div>
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-3/5 order-1">
+                                <div className={"scene-wrap" + (isFullscreen ? " is-fs" : "")} ref={sceneWrapRef}>
+                                    <div className="scene-stage">
+                                        <HjulScene stateRef={stateRef} simRef={simRef} actionsRef={actionsRef} />
+                                        <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                                title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                            {isFullscreen ? (
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                                                </svg>
+                                            ) : (
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                                                </svg>
+                                            )}
+                                        </button>
+                                        <div className="dim-switch" role="group" aria-label="Vy: 3D eller 2D">
+                                            <button className="active" aria-pressed="true" title="Scenen i 3D">3D</button>
+                                            <button onClick={() => { location.href = 'fysik2-hjul-och-fjader-app.html'; }}
+                                                    aria-pressed="false" title="Samma försök som plan figur">2D</button>
+                                        </div>
+                                        <button className="vy-btn" onClick={nextView} aria-label="Byt kameravy"
+                                                title={'Byt kameravy: nu ' + VIEW_NAMES[view].toLowerCase() + ', nästa ' + VIEW_NAMES[VIEWS[(VIEWS.indexOf(view) + 1) % VIEWS.length]].toLowerCase()}>
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M2 12h4"/><path d="M18 12h4"/><circle cx="12" cy="12" r="4"/>
+                                            </svg>
+                                        </button>
+                                        <div className="scene-hint">Dra för att vrida kameran · rulla för att zooma</div>
+
+                                        <div className="fs-quick">
+                                            <button className="fq-play" onClick={() => setRunning(r => !r)}
+                                                    aria-label={running ? 'Paus' : 'Start'} title={running ? 'Paus' : 'Start'}>
+                                                {running ? (
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                        <rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>
+                                                    </svg>
+                                                ) : (
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+                                                )}
+                                            </button>
+                                            <div className="fq-rows">
+                                                <div className="fq-row">
+                                                    <span className="fq-lbl">Periodtid</span>
+                                                    <input type="range" min={T_MIN} max={T_MAX} step={0.1} value={T}
+                                                           onChange={e => setT(parseFloat(e.target.value))} aria-label="Periodtid" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {sceneToggles()}
+                                </div>
+                            </div>
+
+                            <div className="lg:w-2/5 order-2">
+                                <div className="flex gap-2 mb-3">
+                                    <button className="btn-toggle flex-1" onClick={() => setRunning(r => !r)}>{running ? 'Paus' : 'Start'}</button>
+                                    <button className="btn-toggle flex-1" onClick={reset}>Börja om</button>
+                                </div>
+                                <Slider label="Periodtid (<em>T</em>)"
+                                        sub="Tiden för ett varv på hjulet, och därmed för en hel svängning av vikten."
+                                        value={T} min={T_MIN} max={T_MAX} step={0.1} unit="s" onChange={setT} decimals={1} />
+                                <Slider label="Amplitud (<em>A</em>)"
+                                        sub="Stiftets avstånd från navet. Det är också viktens största utslag från jämviktsläget."
+                                        value={A} min={A_MIN} max={A_MAX} step={0.01} unit="m" onChange={setA} decimals={2} />
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <label className="flex items-center gap-2 text-sm" style={{ color: 'var(--lab-ink)' }}>
+                                        <input type="checkbox" checked={slow} onChange={() => setSlow(v => !v)} style={{ accentColor: 'var(--lab-accent)' }} />
+                                        Ultrarapid (en fjärdedel av farten)
+                                    </label>
+                                </div>
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Kameravy</h3>
+                                    <div className="view-grid">
+                                        <button className={'btn-toggle btn-small' + (view === 'snett' ? ' active' : '')} onClick={() => setView('snett')}>Snett framifrån</button>
+                                        <button className={'btn-toggle btn-small' + (view === 'lampan' ? ' active' : '')} onClick={() => setView('lampan')}>Från lampan</button>
+                                        <button className={'btn-toggle btn-small' + (view === 'hjulet' ? ' active' : '')} onClick={() => setView('hjulet')}>Rakt mot hjulet</button>
+                                    </div>
+                                </div>
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Avläsningar</h3>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Readout label="Tid <em>t</em>" value={fmt(ui.t, 2)} unit="s" />
+                                        <Readout label="Vinkel <em>α</em> = <em>ω</em> · <em>t</em>" value={fmt(am / DEG, 0)} unit="°" />
+                                        <Readout label="Elongation <em>y</em> = <em>A</em> · sin <em>α</em>" value={fmt(y, 3)} unit="m" accent />
+                                        <Readout label="Vinkelhastighet <em>ω</em> = 2π/<em>T</em>" value={fmt(om, 2)} unit="rad/s" />
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-2 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Varför hamnar skuggan på samma höjd?</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Ljuset från lampan går vågrätt, i samma plan som hjulet. En ljusstråle som
+                                    passerar stiftet fortsätter därför rakt fram till väggen utan att byta höjd,
+                                    och skuggan hamnar precis i höjd med stiftet. Hjulet ses från kanten av ljuset
+                                    och blir en smal lodrät skugga, och stiftet, som sticker ut från hjulet, blir
+                                    en kort vågrät skugga som glider upp och ned längs den.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Från cirkel till sinuskurva</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Stiftet sitter på radien <em>A</em> och har vridits vinkeln <em>α</em> från den
+                                    vågräta radien, så höjden över navet är <em>y</em> = <em>A</em> · sin <em>α</em>.
+                                    Hjulet snurrar med vinkelhastigheten <em>ω</em>, så <em>α</em> = <em>ω</em> · <em>t</em>,
+                                    och därför blir <em>y</em> = <em>A</em> · sin(<em>ω</em> · <em>t</em>). Ett varv
+                                    är en hel svängning, och eftersom ett varv är 2π radianer blir <em>ω</em> = 2π/<em>T</em>.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4 md:col-span-2">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Prova själv</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Välj kameravyn <strong>Från lampan</strong>: hjulet syns från kanten och stiftet
+                                    rör sig bara rakt upp och ned, precis som vikten. Pausa när stiftet står längst upp
+                                    och längst ned. Där vänder vikten, och där är grafen som högst och lägst. Dra sedan
+                                    i amplituden och se att stiftet flyttas ut på hjulet samtidigt som vikten svänger
+                                    längre. Teorin finns i genomgången{' '}
+                                    <a className="underline" href="katalog.html?id=fy2-2.3">Harmonisk svängning</a>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

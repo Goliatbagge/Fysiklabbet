@@ -63,6 +63,13 @@
     }
     if (fileQ !== file) found = sok(fileQ);
     if (!found) found = sok(file);
+    // En VARIANT av en simulering (3D-versionen av en 2D-simulering, med en
+    // 3D/2D-växlare på sidan) står inte i katalogen. Den anger sin
+    // huvudsimulering i <meta name="sim-variant-av" content="…">, och raden
+    // visas då som för huvudsimuleringen, med den rutan markerad.
+    const variantMeta = document.querySelector('meta[name="sim-variant-av"]');
+    const variant = variantMeta ? (variantMeta.getAttribute('content') || '').toLowerCase() : '';
+    if (!found && variant) found = sok(variant);
     if (!found) return;
 
     const n = found.courseKey === 'Fysik nivå 1' ? '1' : '2';
@@ -127,7 +134,8 @@
 
         let mid = '';
         simHrefs.forEach((h, i) => {
-            const current = h.toLowerCase() === file || h.toLowerCase() === fileQ;
+            const current = h.toLowerCase() === file || h.toLowerCase() === fileQ ||
+                (!!variant && h.toLowerCase() === variant);
             // Med bara en simulering behålls den gamla etiketten "Simulering";
             // med två visas simuleringarnas egna namn så att de går att skilja åt.
             const title = simHrefs.length === 1

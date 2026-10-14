@@ -89,6 +89,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-kirchhoffs-lag.html',
     'fysik2-svangningar-jamforelse.html',
     'fysik2-hjul-och-fjader-app.html',
+    'fysik2-hjul-och-fjader-3d-app.html',
     'fysik2-svangningsgrafer-app.html',
     'fysik1-serie-parallell.html',
     'fysik1-elektriska-falt.html',

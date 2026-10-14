@@ -12025,11 +12025,27 @@
       [['Varje rad i tabellen är en']],
       [['punkt: x åt höger, y uppåt.']]
     ]);
+    /* Innan varje punkt prickas in ringas radens x- och y-värde in i
+     * värdetabellen med blåpennan, så att det syns varifrån
+     * koordinaterna kommer (användarkrav 2026-10-14). Ringarna tonar ut
+     * när punkten är satt. */
     xv.forEach(function (xval, idx) {
+      var base = TY + (idx + 2) * rowH - 8;
+      var sx = nm(xval), sy = nm(yv[idx]);
+      var cx = TX + colW / 2 - T.adv(sx, 0.6) / 2;
+      var cy = TX + colW * 1.5 - T.adv(sy, 0.6) / 2;
+      var rx = T.ring(cx, cx + T.adv(sx, 0.6), base,
+                      { ry: 0.48 * F, cy: base - 0.24 * F });
+      T.pause(220);
+      var ry = T.ring(cy, cy + T.adv(sy, 0.6), base,
+                      { ry: 0.48 * F, cy: base - 0.24 * F });
+      T.pause(240);
       var g = A.guides(xval, yv[idx]);
       T.pause(180);
       A.dot(xval, yv[idx]);
       g.forEach(function (st) { T.fade(st); });
+      T.fade(rx);
+      T.fade(ry);
       T.stepEnd();
     });
 
@@ -21908,8 +21924,12 @@
       [['rör sig en fjädervikt!']]
     ]);
     tanke(bR3);
-    var xeC = placeString('Svar: v=1,5 cos(10t) m/s', padL, y, s, F, acts);
+    var xeC = placeString('Svar: v=1,5 cos(10t)', padL, y, s, F, acts);
     underline(xeC, y);
+    /* enheten står utanför funktionsuttrycket: uppgiften ger storheterna
+     * som mätetal ("y meter, t sekunder") */
+    y += 1.5 * F;
+    placeString('där v är i m/s och t i s', padL, y, s * 0.62, F * 0.62, acts);
     stepEnd();
 
     /* ---- d) maximala farten ---- */
@@ -21998,8 +22018,10 @@
       [['i en svängning!']]
     ]);
     tanke(bR5);
-    var xeE = placeString('Svar: a=−15 sin(10t) m/s^2', padL, y, s, F, acts);
+    var xeE = placeString('Svar: a=−15 sin(10t)', padL, y, s, F, acts);
     underline(xeE, y);
+    y += 1.5 * F;
+    placeString('där a är i m/s^2 och t i s', padL, y, s * 0.62, F * 0.62, acts);
     stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };

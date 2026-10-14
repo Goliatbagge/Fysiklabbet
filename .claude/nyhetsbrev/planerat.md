@@ -80,3 +80,30 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   länka dit i stället; kontrollera det, gissa inte. E-post kan inte spela
   video, så bilden med spelknappen är länken. Uppmana gärna läsaren att
   visa filmen för kollegor och elever. Bocka av här när brevet är skrivet.
+
+- **MÅSTE MED i brevet 2026-10-18 (användarens önskemål 2026-10-14).**
+  Det har hänt mycket under veckan, men dessa tre ska lyftas under "Nytt på
+  Fysiklabbet", i den här ordningen:
+  1. **Filmen om harmonisk svängning**, "Varför en vikt i en fjäder rör sig
+     som en sinuskurva" (93 s). Inbäddad i genomgången Harmonisk svängning,
+     direkt under första demonstrationen:
+     `https://fysiklabbet.se/katalog.html?id=fy2-2.3&block=film-harmonisk-svangning`
+     Affischbild: `media/video/harmonisk-svangning.jpg`. E-post kan inte
+     spela video, så bilden är länken. Filmen visar hur cirkelrörelsen ger
+     y = A · sin(ω · t), och hur hastigheten och accelerationen följer som
+     derivator, med vändlägen och jämviktsläge.
+  2. **Simuleringen med cykelhjulet och fjädern** i samma genomgång: en
+     lampa lyser på ett snurrande cykelhjul, stiftets skugga på väggen rör
+     sig i takt med vikten i fjädern bredvid, och en graf ritar upp
+     sinuskurvan. Kan visa vinkeln, dölja lampan och ändra periodtiden.
+     `https://fysiklabbet.se/katalog.html?id=fy2-2.3&block=hjulprojektion`
+     (Samma genomgång fick också en simulering där graferna för läge,
+     hastighet och acceleration ritas upp sida vid sida och tiden kan dras
+     fram och tillbaka: `&block=svangningsgrafer`.)
+  3. **Krafter i hissen**, ny simulering till genomgången Accelerationens
+     riktning (lanserad 2026-10-12): en person på en kraftplatta i en hiss,
+     krafterna och accelerationen genom hela färden, plattans mätning som
+     graf, tankebubbla, nio lägen att frysa och ett Gissa först-läge.
+     `https://fysiklabbet.se/fysik1-hiss-app.html`
+  Ta egna skärmdumpar av hjulsimuleringen och hissen. Övrigt från veckan får
+  bli korta rader eller vänta. Bocka av här när brevet är skrivet.

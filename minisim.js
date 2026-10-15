@@ -11582,7 +11582,7 @@
         }
         nollstall();
         rita();
-        setSpelar(true);                         // startar av sig själv
+        setSpelar(false);                        // startar pausad
     }
 
     // ══════════════════════════════════════════════════════════════════════

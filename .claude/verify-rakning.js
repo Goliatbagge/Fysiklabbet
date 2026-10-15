@@ -358,7 +358,7 @@ for (const [id, list] of Object.entries(window.OVNINGAR || {})) {
 // stod facit på 5,12 · 10^-8 medan lösningen kom fram till 2,6 · 10^-8, så
 // en elev som räknat rätt fick fel av sidan.
 function svarstal(rad) {
-    const t = rad.replace(/\\\\/g, '\\').replace(/\{,\}/g, ',').replace(/\\[,;! ]| | /g, ' ')
+    const t = rad.replace(/&nbsp;/g, ' ').replace(/\\\\/g, '\\').replace(/\{,\}/g, ',').replace(/\\[,;! ]| | /g, ' ')
         .replace(/[⁻−]/g, '-').replace(/⁰/g, '0').replace(/¹/g, '1').replace(/²/g, '2').replace(/³/g, '3')
         .replace(/⁴/g, '4').replace(/⁵/g, '5').replace(/⁶/g, '6').replace(/⁷/g, '7').replace(/⁸/g, '8').replace(/⁹/g, '9');
     const out = [];

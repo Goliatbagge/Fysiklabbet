@@ -30796,23 +30796,348 @@ $$ \\frac{50}{500} = 0{,}10 = 10\\ \\% $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En enkät till 800 personer frågade "Bör kommunen bygga en ny simhall?". 360 svarade ja, 240 nej och 40 vet ej — resten svarade inte alls. Om hänsyn tas till bortfallet, mellan vilka värden kan andelen JA-sägare av alla 800 ligga? Ange den övre gränsen i procent.`,
-            answer: { value: 65, unit: '%' },
-            solution: `**Insikten:** bortfallet kan i värsta/bästa fall svara vad som helst — gränserna fås genom att låta ALLA i bortfallet svara åt samma håll.
+            question: `I en fabrik packas chokladaskar av fyra maskiner, A, B, C och D. Askarna hamnar på samma band i turordningen A, B, C, D, A, B, C, D och så vidare, och numreras 1, 2, 3 … i den ordning de kommer. Kvalitetskontrollen gör ett systematiskt urval: var 20:e ask (nummer 20, 40, 60 …) kontrolleras. Nästan inga fel hittas, och slutsatsen blir att alla fyra maskinerna fungerar bra.<br>a) Vilken maskin har packat ask nummer 20, 40 och 60? Hur stor andel av de kontrollerade askarna kommer från maskin A? Ange andelen i procent.<br>b) Kontrollen byter till var 6:e ask. Hur många av de fyra maskinerna blir då kontrollerade?<br>c) Vilka steglängder från 2 till 10 gör att alla fyra maskinerna blir kontrollerade? Förklara varför.`,
+            answer: { value: 2, unit: 'st' },
+            delsvar: [
+                { del: 'a', value: 0, unit: '%', etikett: 'andel från maskin A' },
+                { del: 'b', value: 2, unit: 'st', etikett: 'antal maskiner' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** ett systematiskt urval är inte slumpmässigt. Om listan har ett mönster som upprepas, och steglängden passar ihop med mönstret, hamnar urvalet på samma ställe i mönstret varje gång.
 
-Antal svarande: $360 + 240 + 40 = 640$. Bortfall: $800 - 640 = 160$ personer.
+**a)** Mönstret upprepas efter 4 askar. Vilken maskin en ask kommer från avgörs därför av resten när asknumret delas med 4:
 
-**Undre gränsen** (ingen i bortfallet säger ja):
+| Rest vid division med 4 | 1 | 2 | 3 | 0 |
+| --- | --- | --- | --- | --- |
+| Maskin | A | B | C | D |
 
-$$ \\frac{360}{800} = 0{,}45 = 45\\ \\% $$
+Talen 20, 40 och 60 är alla delbara med 4, så resten är 0 varje gång. Det gäller för varje multipel av 20, eftersom $20 = 5 \\cdot 4$.
 
-**Övre gränsen** (alla 160 i bortfallet säger ja):
+Alla kontrollerade askar kommer alltså från maskin D, och ingen från A, B eller C. Att nästan inga fel hittas säger bara något om maskin D.
 
-$$ \\frac{360 + 160}{800} = \\frac{520}{800} = 0{,}65 = 65\\ \\% $$
+**Svar:** Alla tre kommer från maskin D. Andelen från maskin A är 0&nbsp;%.
 
-**Svar:** Andelen ja-sägare ligger mellan 45 % och 65 % — övre gränsen är 65 %.
+**b)** Med steglängd 6 kontrolleras askarna 6, 12, 18, 24 … Resterna vid division med 4:
 
-**Generell slutsats:** ju större bortfall, desto bredare blir osäkerhetsintervallet — här hela 20 procentenheter. Det är därför stora bortfall gör undersökningar svårtolkade.`,
+| Ask | 6 | 12 | 18 | 24 |
+| --- | --- | --- | --- | --- |
+| Rest | 2 | 0 | 2 | 0 |
+| Maskin | B | D | B | D |
+
+Resterna växlar mellan 2 och 0, eftersom två steg om 6 är 12, som är delbart med 4. Bara B och D kontrolleras.
+
+**Svar:** 2 maskiner
+
+**c)** Vi prövar varje steglängd från 2 till 10:
+
+| Steglängd | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Kontrollerade maskiner | B, D | alla | D | alla | B, D | alla | D | alla | B, D |
+
+De udda steglängderna når alla maskiner. Ett jämnt steg flyttar alltid ett jämnt antal platser i mönstret, så urvalet fastnar på de jämna platserna B och D (eller bara på D, om steget är delbart med 4). Ett udda steg har ingen gemensam faktor med 4 och vandrar därför runt alla fyra platserna.
+
+**Svar:** Steglängderna 3, 5, 7 och 9, alltså de udda. De jämna steglängderna har en gemensam faktor med mönstrets längd 4 och hoppar över några maskiner.
+
+**Generell slutsats:** ett systematiskt urval kan ge ett grovt urvalsfel om listan har ett mönster. Det säkra är att slumpa urvalet, eller ordningen i listan, innan man väljer var *n*:te.`,
+        },
+        {
+            level: 3,
+            question: `En skola har två program, natur och samhälle. Samhällsprogrammet har 250 fler elever än naturprogrammet. Lina gör ett stratifierat urval efter program med 80 elever, och i hennes stickprov ingår 32 elever från naturprogrammet.<br>a) Hur stor andel av skolans elever går naturprogrammet? Ange svaret i procent.<br>b) Hur många elever går på varje program?<br>c) Hugo väljer i stället 40 elever från varje program. Vilket program blir överrepresenterat i hans urval, och med hur många elever jämfört med Linas urval?`,
+            answer: { value: 500, unit: 'st' },
+            delsvar: [
+                { del: 'a', value: 40, unit: '%', etikett: 'andel natur' },
+                { del: 'b', value: 500, unit: 'st', etikett: 'naturprogrammet' },
+                { del: 'b', value: 750, unit: 'st', etikett: 'samhällsprogrammet' },
+                { del: 'c', value: 8, unit: 'st', etikett: 'fler elever' },
+            ],
+            solution: `**Insikten:** ett stratifierat urval speglar populationen. Andelarna i stickprovet är därför samma som andelarna i hela skolan, och det ger en ekvation baklänges från urvalet till populationen.
+
+**a)** I ett stratifierat urval är andelen från ett program lika stor i stickprovet som i skolan:
+
+$$ \frac{32}{80} = 0{,}40 = 40\ \% $$
+
+**Svar:** 40&nbsp;%
+
+**b)** Kalla antalet elever på naturprogrammet $x$. Samhällsprogrammet har då $x + 250$ elever, och hela skolan har
+
+$$ x + (x + 250) = 2x + 250 $$
+
+Andelen natur av hela skolan är 0,40 enligt a):
+
+$$ \frac{x}{2x + 250} = 0{,}4 $$
+
+$$ \frac{x}{2x + 250} \mathbin{\boldsymbol{\cdot}} \boldsymbol{(2x + 250)} = 0{,}4 \mathbin{\boldsymbol{\cdot}} \boldsymbol{(2x + 250)} $$
+
+$$ x = 0{,}8x + 100 $$
+
+$$ x \mathbin{\boldsymbol{-}} \boldsymbol{0{,}8x} = 0{,}8x + 100 \mathbin{\boldsymbol{-}} \boldsymbol{0{,}8x} $$
+
+$$ 0{,}2x = 100 $$
+
+$$ \frac{0{,}2x}{\boldsymbol{0{,}2}} = \frac{100}{\boldsymbol{0{,}2}} $$
+
+$$ x = 500 $$
+
+Naturprogrammet har 500 elever och samhällsprogrammet $500 + 250 = 750$, alltså 1&nbsp;250 elever totalt.
+
+Kontroll: urvalet är $\dfrac{80}{1\,250} = 0{,}064$ av skolan. Samma andel av varje program ger $0{,}064 \cdot 500 = 32$ och $0{,}064 \cdot 750 = 48$, och $32 + 48 = 80$. Stämmer.
+
+**Svar:** 500 elever på naturprogrammet och 750 på samhällsprogrammet.
+
+**c)** Linas stratifierade urval har 32 från natur och 48 från samhälle. Hugo tar 40 från varje program, alltså
+
+$$ 40 - 32 = 8 $$
+
+elever för många från naturprogrammet och lika många för få från samhällsprogrammet. Svarar programmen olika på frågan som undersöks får naturprogrammets svar för stor vikt i Hugos resultat.
+
+**Svar:** Naturprogrammet är överrepresenterat, med 8 elever fler än i Linas urval.
+
+**Generell slutsats:** i ett stratifierat urval är stickprovet en förminskad bild av populationen. Känner man urvalet och ett samband mellan grupperna kan man därför räkna ut hur stora grupperna är.`,
+        },
+        {
+            level: 3,
+            question: `Elevrådet på en skola med 600 elever delade slumpmässigt in alla elever i två grupper om 300. Grupperna fick varsin version av samma fråga.<br>Grupp 1: "Ska skolan satsa mer pengar på idrott?" Där svarade 210 ja.<br>Grupp 2: "Ska skolan satsa mer pengar på idrott, även om det betyder mindre pengar till läromedel?" Där svarade 120 ja.<br>a) Beräkna andelen ja i varje grupp. Ange svaren i procent.<br>b) Förklara varför skillnaden mellan grupperna inte kan bero på urvalsfel. Vilken felkälla visar undersökningen?<br>c) Elevrådet slår ihop svaren och skriver: "En majoritet av eleverna vill satsa mer på idrott." Beräkna den sammanslagna andelen och granska påståendet.`,
+            answer: { value: 55, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 70, unit: '%', etikett: 'grupp 1' },
+                { del: 'a', value: 40, unit: '%', etikett: 'grupp 2' },
+                { del: 'b' },
+                { del: 'c', value: 55, unit: '%', etikett: 'sammanslagen andel' },
+            ],
+            solution: `**Insikten:** när två grupper lottas fram ur samma population blir de i stort sett likadana. Det enda som skiljer dem systematiskt är frågans formulering, så en stor skillnad i svaren visar hur mycket formuleringen påverkar.
+
+**a)** Andelen ja är antalet ja delat med antalet i gruppen:
+
+$$ \\text{Grupp 1:} \\quad \\frac{210}{300} = 0{,}70 = 70\\ \\% $$
+
+$$ \\text{Grupp 2:} \\quad \\frac{120}{300} = 0{,}40 = 40\\ \\% $$
+
+**Svar:** 70&nbsp;% i grupp 1 och 40&nbsp;% i grupp 2.
+
+**b)** Ett urvalsfel betyder att urvalet inte representerar populationen. Här är hela populationen med, och grupperna är lottade, så båda grupperna speglar skolan lika bra. Två lottade grupper om 300 elever skiljer sig inte med 30 procentenheter av en slump. Skillnaden måste komma av att frågorna är olika.
+
+Det är ett **mätfel**. Den första frågan nämner bara fördelen och leder den svarande mot ett ja. Den andra talar också om vad satsningen kostar.
+
+**Svar:** Grupperna är lottade och därför lika, så skillnaden beror på frågornas formulering. Det är ett mätfel orsakat av en ledande fråga.
+
+**c)** Sammanlagt svarade $210 + 120 = 330$ av 600 elever ja:
+
+$$ \\frac{330}{600} = 0{,}55 = 55\\ \\% $$
+
+Talet 55&nbsp;% är ett medelvärde av svaren på två olika frågor, och det beror helt på hur många som råkade få varje version. Hade alla fått fråga 1 hade svaret blivit 70&nbsp;%, hade alla fått fråga 2 hade det blivit 40&nbsp;%. Den enda slutsats undersökningen tillåter är att svaret beror på hur frågan ställs: när kostnaden nämns är det bara 40&nbsp;% som säger ja, alltså ingen majoritet.
+
+**Svar:** Den sammanslagna andelen är 55&nbsp;%, men den betyder ingenting, eftersom den blandar svar på två olika frågor. Påståendet håller inte.
+
+**Generell slutsats:** att lotta fram två grupper och ge dem olika versioner av en fråga är ett sätt att mäta hur ledande en formulering är. Svaren får då jämföras, men inte slås ihop.`,
+        },
+        {
+            level: 3,
+            question: `En app har laddats ner 10&nbsp;000 gånger, men bara 4&nbsp;000 personer använder den fortfarande. De övriga har tagit bort den. Företaget lägger en enkät i appen, och 800 användare svarar. Av dem är 720 nöjda med appen. I en annons skriver företaget: "9 av 10 som laddat ner vår app är nöjda."<br>a) Hur stor andel av de svarande är nöjda? Ange svaret i procent.<br>b) Vilken population representerar egentligen de svarande? Förklara varför annonsens påstående bygger på ett urvalsfel.<br>c) Anta att de 800 svarande är representativa för de 4&nbsp;000 som fortfarande använder appen, och att ingen av dem som tagit bort appen är nöjd. Hur stor andel av alla som laddat ner appen är då nöjda? Ange svaret i procent.`,
+            answer: { value: 36, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 90, unit: '%', etikett: 'andel nöjda bland de svarande' },
+                { del: 'b' },
+                { del: 'c', value: 36, unit: '%', etikett: 'andel nöjda av alla' },
+            ],
+            solution: `**Insikten:** enkäten når bara dem som är kvar i appen. De missnöjda har ofta redan tagit bort den, så de kan aldrig komma med i urvalet.
+
+**a)** Andelen nöjda bland de svarande är antalet nöjda delat med antalet svarande:
+
+$$ \\frac{720}{800} = 0{,}90 = 90\\ \\% $$
+
+**Svar:** 90&nbsp;%
+
+**b)** Enkäten ligger i appen, så bara de 4&nbsp;000 som fortfarande använder den kan svara. De svarande representerar alltså de nuvarande användarna, inte alla 10&nbsp;000 som laddat ner appen.
+
+De 6&nbsp;000 som tagit bort appen har troligen gjort det för att de inte var nöjda. Den gruppen svarar sannolikt helt annorlunda, men saknas helt i urvalet. Annonsen drar en slutsats om hela populationen från ett urval som systematiskt utesluter de missnöjda, och det är ett urvalsfel.
+
+**Svar:** De svarande representerar bara de nuvarande användarna. Alla som tagit bort appen, troligen de mest missnöjda, kan inte svara, så urvalet speglar inte alla som laddat ner appen.
+
+**c)** Om 90&nbsp;% av de 4&nbsp;000 nuvarande användarna är nöjda blir antalet nöjda
+
+$$ 0{,}90 \\cdot 4\\,000 = 3\\,600 $$
+
+Ingen av de 6&nbsp;000 som tagit bort appen räknas som nöjd. Andelen nöjda av alla som laddat ner appen blir då
+
+$$ \\frac{3\\,600}{10\\,000} = 0{,}36 = 36\\ \\% $$
+
+**Svar:** 36&nbsp;%
+
+**Generell slutsats:** samma 720 nöjda svar kan alltså motsvara 90&nbsp;% eller 36&nbsp;% beroende på vilken population man räknar mot. Fråga alltid: vilka kunde över huvud taget komma med i urvalet, och vilka föll bort innan undersökningen började?`,
+        },
+        {
+            level: 3,
+            question: `En skola har 300 elever i årskurs 1, 200 i årskurs 2 och 100 i årskurs 3.<br>a) Ett stratifierat urval med 60 elever ska göras efter årskurs. Hur många elever ska väljas från varje årskurs?<br>b) Skolan valde i stället 20 elever från varje årskurs och frågade "Är du nöjd med skolmaten?". I årskurs 1 svarade 15 ja, i årskurs 2 svarade 10 ja och i årskurs 3 svarade 4 ja. Hur stor andel av de 60 tillfrågade svarade ja? Avrunda till hel procent.<br>c) Uppskatta hur stor andel av alla 600 elever som är nöjda, med hänsyn till hur många elever det finns i varje årskurs. Ange svaret i procent. Förklara varför svaret skiljer sig från svaret i b).`,
+            answer: { value: 57.5, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 30, unit: 'st', etikett: 'årskurs 1' },
+                { del: 'a', value: 20, unit: 'st', etikett: 'årskurs 2' },
+                { del: 'a', value: 10, unit: 'st', etikett: 'årskurs 3' },
+                { del: 'b', value: 48, unit: '%', etikett: 'andel ja', tol: 0.02 },
+                { del: 'c', value: 57.5, unit: '%', etikett: 'andel nöjda' },
+            ],
+            solution: `**Insikten:** när grupperna i urvalet inte är lika stora som i populationen kan man inte bara slå ihop svaren. Varje grupps andel måste vägas efter hur stor gruppen är i populationen.
+
+**a)** Ett stratifierat urval ska spegla populationen. Årskurs 1 är $\\dfrac{300}{600} = 0{,}5$ av skolan, årskurs 2 är $\\dfrac{200}{600} = \\dfrac{1}{3}$ och årskurs 3 är $\\dfrac{100}{600} = \\dfrac{1}{6}$. Samma andelar av 60 elever:
+
+$$ 0{,}5 \\cdot 60 = 30 \\qquad \\frac{1}{3} \\cdot 60 = 20 \\qquad \\frac{1}{6} \\cdot 60 = 10 $$
+
+**Svar:** 30 elever från årskurs 1, 20 från årskurs 2 och 10 från årskurs 3.
+
+**b)** Sammanlagt svarade $15 + 10 + 4 = 29$ av 60 ja:
+
+$$ \\frac{29}{60} = 0{,}4833\\ldots \\approx 48\\ \\% $$
+
+**Svar:** 48&nbsp;%
+
+**c)** Först andelen nöjda i varje årskurs:
+
+$$ \\frac{15}{20} = 0{,}75 \\qquad \\frac{10}{20} = 0{,}50 \\qquad \\frac{4}{20} = 0{,}20 $$
+
+Om andelarna gäller hela årskursen blir antalet nöjda elever
+
+$$ 0{,}75 \\cdot 300 + 0{,}50 \\cdot 200 + 0{,}20 \\cdot 100 = 225 + 100 + 20 = 345 $$
+
+och andelen nöjda av alla 600
+
+$$ \\frac{345}{600} = 0{,}575 = 57{,}5\\ \\% $$
+
+I b) väger årskurs 3 lika tungt som årskurs 1, fast årskurs 3 bara har en tredjedel så många elever. Årskurs 3 är minst nöjd, så den får för stor vikt och drar ned resultatet. I c) väger varje årskurs efter sin storlek.
+
+**Svar:** Cirka 57,5&nbsp;%. Svaret i b) är för lågt, eftersom den minst nöjda årskursen är överrepresenterad i urvalet.
+
+**Generell slutsats:** ett urval med lika många från varje grupp ger en felaktig bild av helheten när grupperna är olika stora. Antingen gör man ett stratifierat urval från början, eller så väger man svaren i efterhand.`,
+        },
+        {
+            level: 3,
+            question: `En kommun skickar en enkät till 1&nbsp;200 invånare med frågan "Vill du att kommunen bygger fler cykelbanor?". Svarsalternativen är ja och nej. Bland dem som svarar säger 60&nbsp;% ja.<br>a) Anta att bortfallet är 300 personer. Mellan vilka värden kan andelen ja av alla 1&nbsp;200 ligga om hänsyn tas till bortfallet? Ange gränserna i procent.<br>b) Hur stort får bortfallet högst vara om kommunen säkert ska kunna säga att minst hälften av alla 1&nbsp;200 tillfrågade vill ha fler cykelbanor? Ange svaret i antal personer.<br>c) Andelen ja bland de svarande är $p$ och bortfallet är andelen $b$ av alla tillfrågade. Visa att slutsatsen i b) är säker när $b \\leq 1 - \\dfrac{0{,}5}{p}$, oavsett hur många som tillfrågades.`,
+            answer: { value: 200, unit: 'personer' },
+            delsvar: [
+                { del: 'a', value: 45, unit: '%', etikett: 'undre gräns' },
+                { del: 'a', value: 70, unit: '%', etikett: 'övre gräns' },
+                { del: 'b', value: 200, unit: 'personer', etikett: 'högsta bortfall' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** den säkra slutsatsen är den som håller även i värsta fall, alltså när ingen i bortfallet säger ja. Problemet vänds då: i stället för att räkna ut gränserna söker vi det bortfall där den undre gränsen blir precis 50&nbsp;%.
+
+**a)** Antalet som svarade är $1\\,200 - 300 = 900$, och 60&nbsp;% av dem säger ja:
+
+$$ 0{,}60 \\cdot 900 = 540 $$
+
+Den undre gränsen fås om ingen i bortfallet säger ja:
+
+$$ \\frac{540}{1\\,200} = 0{,}45 = 45\\ \\% $$
+
+Den övre gränsen fås om alla 300 i bortfallet säger ja:
+
+$$ \\frac{540 + 300}{1\\,200} = \\frac{840}{1\\,200} = 0{,}70 = 70\\ \\% $$
+
+**Svar:** Mellan 45&nbsp;% och 70&nbsp;%.
+
+**b)** Minst hälften av 1&nbsp;200 är 600 personer. Även i värsta fall, när ingen i bortfallet säger ja, måste alltså minst 600 av de svarande säga ja. Kalla antalet svarande $x$. Gränsfallet är
+
+$$ 0{,}6x = 600 $$
+
+$$ \\frac{0{,}6x}{\\boldsymbol{0{,}6}} = \\frac{600}{\\boldsymbol{0{,}6}} $$
+
+$$ x = 1\\,000 $$
+
+Minst 1&nbsp;000 personer måste alltså svara, och bortfallet får högst vara
+
+$$ 1\\,200 - 1\\,000 = 200 $$
+
+Kontroll: med 200 i bortfallet svarar 1&nbsp;000, och $0{,}6 \\cdot 1\\,000 = 600$, som är precis hälften av 1&nbsp;200.
+
+**Svar:** Högst 200 personer, vilket är cirka 16,7&nbsp;% av de tillfrågade.
+
+**c)** Kalla antalet tillfrågade $N$. Då svarar $(1 - b) \\cdot N$ personer, och av dem säger $p \\cdot (1 - b) \\cdot N$ ja. I värsta fall är det alla ja-svar, och de ska vara minst hälften av alla tillfrågade:
+
+$$ p \\cdot (1 - b) \\cdot N \\geq 0{,}5 \\cdot N $$
+
+Båda led delas med det positiva talet $N$, och olikhetstecknet behålls:
+
+$$ \\frac{p \\cdot (1 - b) \\cdot N}{\\boldsymbol{N}} \\geq \\frac{0{,}5 \\cdot N}{\\boldsymbol{N}} $$
+
+$$ p \\cdot (1 - b) \\geq 0{,}5 $$
+
+Andelen $p$ är också positiv, så även den kan vi dela med utan att vända olikhetstecknet:
+
+$$ \\frac{p \\cdot (1 - b)}{\\boldsymbol{p}} \\geq \\frac{0{,}5}{\\boldsymbol{p}} $$
+
+$$ 1 - b \\geq \\frac{0{,}5}{p} $$
+
+$$ 1 - b \\mathbin{\\boldsymbol{+}} \\boldsymbol{b} \\geq \\frac{0{,}5}{p} \\mathbin{\\boldsymbol{+}} \\boldsymbol{b} $$
+
+$$ 1 \\geq \\frac{0{,}5}{p} + b $$
+
+$$ 1 \\mathbin{\\boldsymbol{-}} \\boldsymbol{\\frac{0{,}5}{p}} \\geq \\frac{0{,}5}{p} + b \\mathbin{\\boldsymbol{-}} \\boldsymbol{\\frac{0{,}5}{p}} $$
+
+$$ 1 - \\frac{0{,}5}{p} \\geq b $$
+
+$N$ försvann i första steget, så villkoret gäller hur många som än tillfrågades. Kontroll med b): $p = 0{,}6$ ger $1 - \\dfrac{0{,}5}{0{,}6} = 0{,}1666\\ldots$, och $0{,}1666\\ldots \\cdot 1\\,200 = 200$.
+
+**Svar:** Slutsatsen är säker när $b \\leq 1 - \\dfrac{0{,}5}{p}$, och villkoret innehåller inte $N$.
+
+**Generell slutsats:** ju närmare 50&nbsp;% andelen ja bland de svarande ligger, desto mindre bortfall tål slutsatsen. Är $p = 0{,}5$ blir gränsen $b \\leq 0$: då krävs att alla svarar.`,
+        },
+        {
+            level: 3,
+            question: `En skola vill veta hur stor andel av eleverna som någon gång har fuskat på ett prov. Eftersom många inte svarar ärligt på en så känslig fråga används följande metod. Varje elev singlar en slant i hemlighet. Visar slanten krona svarar eleven ärligt på frågan "Har du någon gång fuskat på ett prov?". Visar den klave svarar eleven "Ja" oavsett. Ingen utom eleven själv vet hur slanten föll. 400 elever deltar och 260 svarar ja.<br>a) Vilken felkälla försöker metoden minska? Förklara varför metoden fungerar.<br>b) Uppskatta andelen av eleverna som har fuskat. Räkna med att slanten visar klave för hälften av eleverna. Ange svaret i procent.<br>c) Andelen ja-svar är $q$. Visa att uppskattningen av andelen som har fuskat blir $2q - 1$. Vad betyder det om $q$ blir mindre än $0{,}5$?`,
+            answer: { value: 30, unit: '%' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 30, unit: '%', etikett: 'andel som fuskat' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** ett enskilt ja avslöjar ingenting om eleven, eftersom det lika gärna kan komma från slanten. Men i en stor grupp vet vi ungefär hur många ja som slanten står för, och kan räkna bort dem.
+
+**a)** På en känslig fråga svarar många inte ärligt, av rädsla för vad svaret kan leda till. Svaren blir då felaktiga, och det är ett **mätfel** (inte ett urvalsfel, eftersom alla i urvalet faktiskt svarar).
+
+Med slanten kan ingen veta om ett ja är ärligt eller tvingat av klave. Eleven riskerar därför ingenting på att svara sanningsenligt, och har inget skäl att ljuga.
+
+**Svar:** Mätfel på grund av en känslig fråga. Eftersom ett ja kan komma från slanten avslöjar inget enskilt svar eleven, och därför kan alla svara ärligt.
+
+**b)** Hälften av de 400 eleverna, alltså 200, får klave och svarar ja oavsett. De övriga 200 får krona och svarar ärligt. Kalla antalet som svarar ja efter krona $x$:
+
+$$ 200 + x = 260 $$
+
+$$ 200 + x \\mathbin{\\boldsymbol{-}} \\boldsymbol{200} = 260 \\mathbin{\\boldsymbol{-}} \\boldsymbol{200} $$
+
+$$ x = 60 $$
+
+De 200 som fick krona är ett slumpmässigt urval av eleverna, eftersom slanten avgjorde vilka det blev. Andelen som har fuskat bland dem är
+
+$$ \\frac{60}{200} = 0{,}30 = 30\\ \\% $$
+
+och den andelen är vår uppskattning för alla elever.
+
+**Svar:** Cirka 30&nbsp;%
+
+**c)** Kalla antalet elever $N$ och andelen som har fuskat $p$. Hälften, $0{,}5N$, får klave och svarar ja. Den andra hälften, $0{,}5N$, får krona, och av dem svarar andelen $p$ ja, alltså $p \\cdot 0{,}5N$. Det totala antalet ja är $q \\cdot N$:
+
+$$ 0{,}5N + 0{,}5pN = qN $$
+
+Båda led delas med $N$:
+
+$$ \\frac{0{,}5N + 0{,}5pN}{\\boldsymbol{N}} = \\frac{qN}{\\boldsymbol{N}} $$
+
+$$ 0{,}5 + 0{,}5p = q $$
+
+$$ 0{,}5 + 0{,}5p \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}5} = q \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}5} $$
+
+$$ 0{,}5p = q - 0{,}5 $$
+
+$$ 0{,}5p \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{2} = (q - 0{,}5) \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{2} $$
+
+$$ p = 2q - 1 $$
+
+Kontroll med b): $q = \\dfrac{260}{400} = 0{,}65$ ger $p = 2 \\cdot 0{,}65 - 1 = 0{,}30$. Stämmer.
+
+Är $q < 0{,}5$ blir $2q - 1$ negativt, och en andel kan inte vara negativ. Det kan bara hända om färre än hälften fick klave av en slump, eller om några elever inte följde instruktionen. Uppskattningen är alltså osäker, och osäkerheten syns tydligast när den verkliga andelen är liten.
+
+**Svar:** $p = 2q - 1$. Om $q < 0{,}5$ blir uppskattningen negativ, vilket är omöjligt. Det visar att slumpen eller felaktiga svar har påverkat resultatet.
+
+**Generell slutsats:** genom att medvetet blanda in slump i varje enskilt svar skyddas den svarande, men gruppens andel går ändå att räkna fram. Priset är större osäkerhet: undersökningen behöver fler deltagare för att bli lika säker som en vanlig enkät med ärliga svar.`,
         },
     ],
 
@@ -30888,25 +31213,309 @@ Jämför med genomgångens exempel ($n = 100$ gav 9,6 %) — fyra gånger fler t
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `I genomgångens exempel gav $p = 60\\ \\%$ och $n = 100$ felmarginalen 9,6 %. Hur många personer måste tillfrågas (med samma $p$) för att felmarginalen ska bli högst 2,4 %?`,
-            answer: { value: 1600, unit: 'st' },
-            solution: `**Insikten:** felmarginalen skalar med $\\dfrac{1}{\\sqrt{n}}$ — för att fjärdedela $f$ krävs 16 gånger fler tillfrågade.
+            question: `Två undersökningar ställer samma fråga till 1&nbsp;000 slumpvis utvalda personer var. Undersökning A görs i en kommun med 20&nbsp;000 invånare och undersökning B i hela Sverige, med drygt 10 miljoner invånare. Båda får resultatet 40&nbsp;%. Vilket påstående stämmer enligt formeln för felmarginal?`,
+            choices: [
+                `B har mycket större felmarginal, eftersom 1&nbsp;000 personer är en mycket mindre del av Sveriges befolkning än av kommunens`,
+                `Felmarginalerna är lika stora, eftersom felmarginalen bara beror på andelen $p$ och stickprovets storlek $n$`,
+                `A har större felmarginal, eftersom en liten kommun ger ett mindre säkert resultat`,
+                `Det går inte att jämföra felmarginalerna utan att veta hur många invånare som har svarat ja`,
+            ],
+            correct: 1,
+            solution: `**Insikten:** befolkningens storlek finns inte med i formeln. Det som avgör hur säkert resultatet är, är hur många som tillfrågas, inte hur stor del av befolkningen de utgör.
 
-Sök $n$ så att
+Formeln för felmarginal innehåller bara två storheter, andelen $p$ i procent och stickprovets storlek $n$:
 
-$$ 1{,}96 \\cdot \\sqrt{\\frac{60 \\cdot 40}{n}} = 2{,}4 $$
+$$ f = 1{,}96 \\cdot \\sqrt{\\frac{p(100 - p)}{n}} $$
 
-Dividera med 1,96 och kvadrera båda led:
+Båda undersökningarna har $p = 40$ och $n = 1\\ 000$:
 
-$$ \\frac{2\\ 400}{n} = \\left(\\frac{2{,}4}{1{,}96}\\right)^2 = 1{,}4994\\ldots $$
+$$ f = 1{,}96 \\cdot \\sqrt{\\frac{40(100 - 40)}{1\\ 000}} = 1{,}96 \\cdot \\sqrt{2{,}4} = 3{,}036\\ldots \\approx 3{,}0 $$
 
-$$ n = \\frac{2\\ 400}{1{,}4994\\ldots} \\approx 1\\ 600 $$
+Båda får alltså felmarginalen 3,0 procentenheter. Det kan kännas fel, men tänk på en soppa: en sked räcker för att smaka av soppan, och det spelar ingen roll om kastrullen är liten eller stor, så länge soppan är väl omrörd. På samma sätt räcker 1&nbsp;000 slumpvis utvalda personer lika bra för ett helt land som för en kommun.
 
-Rimlighetskoll med skalningen: $\\dfrac{9{,}6}{2{,}4} = 4$, och $4^2 = 16$ gånger fler än 100 är just 1 600. Stämmer!
+**Svar:** Felmarginalerna är lika stora, eftersom felmarginalen bara beror på andelen $p$ och stickprovets storlek $n$.
 
-**Svar:** Cirka 1 600 personer.
+**Generell slutsats:** ett bra stickprov behöver vara slumpvis utvalt och tillräckligt stort, men det behöver inte vara en viss andel av befolkningen.`,
+        },
+        {
+            level: 3,
+            question: `I genomgångens exempel gav $p = 60\\ \\%$ och $n = 100$ felmarginalen 9,6 procentenheter. Andelen $p$ antas vara densamma i nya undersökningar.<br>a) Hur många personer måste tillfrågas för att felmarginalen ska bli en fjärdedel så stor?<br>b) Hur många personer måste minst tillfrågas för att felmarginalen ska bli högst 2,0 procentenheter?`,
+            answer: { value: 2305, unit: 'personer' },
+            delsvar: [
+                { del: 'a', value: 1600, unit: 'personer' },
+                { del: 'b', value: 2305, unit: 'personer', tol: 0.001 },
+            ],
+            solution: `**Insikten:** $n$ står under rottecknet i nämnaren. Felmarginalen minskar därför med kvadratroten ur stickprovets storlek, inte i samma takt som stickprovet växer.
 
-**Generell slutsats:** halverad felmarginal kräver fyrdubblat stickprov — precisionen är dyr, vilket är därför opinionsmätningar sällan har mer än några tusen svarande.`,
+**a)** Blir $n$ sexton gånger så stort blir $\\sqrt{n}$ fyra gånger så stort, eftersom $\\sqrt{16} = 4$. Då blir felmarginalen en fjärdedel så stor. Ett stickprov som är 16 gånger så stort som 100 personer är
+
+$$ 16 \\cdot 100 = 1\\ 600 $$
+
+Kontroll: $f = 1{,}96 \\cdot \\sqrt{\\frac{60 \\cdot 40}{1\\ 600}} = 1{,}96 \\cdot \\sqrt{1{,}5} = 2{,}40\\ldots$, och $\\dfrac{9{,}6}{4} = 2{,}4$. Stämmer.
+
+**Svar:** 1&nbsp;600 personer
+
+**b)** Vi tar först reda på vilket $n$ som ger felmarginalen exakt 2,0 procentenheter:
+
+$$ 1{,}96 \\cdot \\sqrt{\\frac{2\\ 400}{n}} = 2{,}0 $$
+
+$$ \\frac{1{,}96 \\cdot \\sqrt{\\dfrac{2\\ 400}{n}}}{\\boldsymbol{1{,}96}} = \\frac{2{,}0}{\\boldsymbol{1{,}96}} $$
+
+$$ \\sqrt{\\frac{2\\ 400}{n}} = 1{,}0204\\ldots $$
+
+Vi kvadrerar båda led för att bli av med rottecknet:
+
+$$ \\left(\\sqrt{\\frac{2\\ 400}{n}}\\right)^{\\boldsymbol{2}} = (1{,}0204\\ldots)^{\\boldsymbol{2}} $$
+
+$$ \\frac{2\\ 400}{n} = 1{,}0412\\ldots $$
+
+$$ \\frac{2\\ 400}{n} \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{n} = 1{,}0412\\ldots \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{n} $$
+
+$$ 2\\ 400 = 1{,}0412\\ldots \\cdot n $$
+
+$$ \\frac{2\\ 400}{\\boldsymbol{1{,}0412\\ldots}} = \\frac{1{,}0412\\ldots \\cdot n}{\\boldsymbol{1{,}0412\\ldots}} $$
+
+$$ 2\\ 304{,}96 = n $$
+
+Antalet personer måste vara ett heltal. Med 2&nbsp;304 personer blir felmarginalen en aning större än 2,0 ($f = 2{,}0004\\ldots$), eftersom ett mindre $n$ ger en större felmarginal. Vi måste alltså avrunda **uppåt**, och med 2&nbsp;305 personer blir $f = 1{,}99998\\ldots$, alltså högst 2,0 procentenheter.
+
+**Svar:** Minst 2&nbsp;305 personer
+
+**Generell slutsats:** för att halvera felmarginalen krävs fyra gånger så många tillfrågade, och för att fjärdedela den krävs sexton gånger så många. Precision är dyr, och därför har opinionsmätningar sällan mer än några tusen svarande. När ett minsta antal söks avrundas alltid uppåt.`,
+        },
+        {
+            level: 3,
+            question: `I en undersökning med 1&nbsp;000 slumpvis utvalda vuxna svarade 40&nbsp;% att de cyklar till jobbet minst en gång i veckan. Bland de 100 personerna i åldern 18 till 25 år var andelen 48&nbsp;%. En tidning skriver: ”Unga cyklar mer än genomsnittet. Skillnaden är 8 procentenheter, och undersökningens felmarginal är bara 3 procentenheter.”<br>a) Beräkna felmarginalen för hela undersökningen.<br>b) Beräkna felmarginalen för gruppen 18 till 25 år.<br>c) Granska tidningens slutsats. Är det statistiskt säkerställt att unga cyklar mer än genomsnittet?`,
+            answer: { value: 9.8, unit: 'procentenheter' },
+            delsvar: [
+                { del: 'a', value: 3.0, unit: 'procentenheter', tol: 0.02 },
+                { del: 'b', value: 9.8, unit: 'procentenheter', tol: 0.01 },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** felmarginalen gäller för det stickprov som resultatet bygger på. Resultatet för de unga bygger bara på 100 personer, inte på 1&nbsp;000, och har därför en mycket större felmarginal.
+
+**a)** Hela undersökningen har $p = 40$ och $n = 1\\ 000$:
+
+$$ f = 1{,}96 \\cdot \\sqrt{\\frac{40(100 - 40)}{1\\ 000}} = 1{,}96 \\cdot \\sqrt{2{,}4} = 3{,}036\\ldots \\approx 3{,}0 $$
+
+**Svar:** 3,0 procentenheter
+
+**b)** Gruppen 18 till 25 år har $p = 48$ och $n = 100$:
+
+$$ f = 1{,}96 \\cdot \\sqrt{\\frac{48(100 - 48)}{100}} = 1{,}96 \\cdot \\sqrt{24{,}96} = 9{,}792\\ldots \\approx 9{,}8 $$
+
+**Svar:** 9,8 procentenheter
+
+**c)** Tidningen använder felmarginalen för hela undersökningen på ett resultat som bara bygger på 100 personer. Det rätta konfidensintervallet för de unga är resultatet plus och minus felmarginalen från b):
+
+$$ \\left[\\begin{array}{l} \\text{Undre gräns} = 48\\ \\% - 9{,}8\\ \\% = 38{,}2\\ \\% \\\\ \\text{Övre gräns} = 48\\ \\% + 9{,}8\\ \\% = 57{,}8\\ \\% \\end{array}\\right. $$
+
+Genomsnittet 40&nbsp;% ligger inom intervallet 38,2&nbsp;% till 57,8&nbsp;%. Skillnaden på 8 procentenheter är mindre än felmarginalen 9,8 procentenheter, så den kan bero på slumpen i vilka unga som råkade bli tillfrågade.
+
+**Svar:** Nej. Resultatet för de unga har felmarginalen 9,8 procentenheter, och skillnaden på 8 procentenheter är mindre än så. Det är inte statistiskt säkerställt att unga cyklar mer än genomsnittet.
+
+**Generell slutsats:** när en undersökning delas upp i mindre grupper (ålder, kön, region) blir varje grupps felmarginal större än hela undersökningens. Det är en vanlig fälla i nyhetsrapportering.`,
+        },
+        {
+            level: 3,
+            question: `I en väljarundersökning med 1&nbsp;200 tillfrågade fick parti A 24&nbsp;% och parti B 21&nbsp;%. En tidning skriver: ”Parti A är nu större än parti B.”<br>a) Beräkna felmarginalen för vart och ett av partierna.<br>b) Är det statistiskt säkerställt att parti A är större än parti B? Motivera med konfidensintervallen.<br>c) Anta att felmarginalerna är desamma som i a). Hur många procentenheter måste skillnaden mellan partierna minst vara för att konfidensintervallen inte ska överlappa varandra?`,
+            answer: { value: 4.7, unit: 'procentenheter' },
+            delsvar: [
+                { del: 'a', value: 2.4, unit: 'procentenheter', etikett: 'parti A', tol: 0.02 },
+                { del: 'a', value: 2.3, unit: 'procentenheter', etikett: 'parti B', tol: 0.02 },
+                { del: 'b' },
+                { del: 'c', value: 4.7, unit: 'procentenheter', tol: 0.02 },
+            ],
+            solution: `**Insikten:** båda resultaten är osäkra. Det räcker inte att jämföra 24&nbsp;% med 21&nbsp;%, utan man måste jämföra de två intervallen där partiernas verkliga stöd kan ligga.
+
+**a)** Parti A har $p = 24$ och $n = 1\\ 200$:
+
+$$ f_A = 1{,}96 \\cdot \\sqrt{\\frac{24(100 - 24)}{1\\ 200}} = 1{,}96 \\cdot \\sqrt{1{,}52} = 2{,}416\\ldots \\approx 2{,}4 $$
+
+Parti B har $p = 21$ och $n = 1\\ 200$:
+
+$$ f_B = 1{,}96 \\cdot \\sqrt{\\frac{21(100 - 21)}{1\\ 200}} = 1{,}96 \\cdot \\sqrt{1{,}3825} = 2{,}304\\ldots \\approx 2{,}3 $$
+
+**Svar:** Parti A 2,4 procentenheter&emsp;&emsp;Parti B 2,3 procentenheter
+
+**b)** Konfidensintervallen är resultatet plus och minus felmarginalen:
+
+$$ \\left[\\begin{array}{l} \\text{Parti A:}\\ 24\\ \\% \\pm 2{,}4\\ \\%,\\ \\text{från } 21{,}6\\ \\% \\text{ till } 26{,}4\\ \\% \\\\ \\text{Parti B:}\\ 21\\ \\% \\pm 2{,}3\\ \\%,\\ \\text{från } 18{,}7\\ \\% \\text{ till } 23{,}3\\ \\% \\end{array}\\right. $$
+
+Intervallen överlappar mellan 21,6&nbsp;% och 23,3&nbsp;%. Det är möjligt att parti A egentligen har 22&nbsp;% och parti B 23&nbsp;%, och då är B större.
+
+**Svar:** Nej. Konfidensintervallen överlappar, så det är inte statistiskt säkerställt att parti A är större än parti B.
+
+**c)** Intervallen överlappar inte om det större partiets undre gräns ligger ovanför det mindre partiets övre gräns. Det större partiets intervall sträcker sig 2,4 procentenheter nedåt, och det mindre partiets intervall sträcker sig 2,3 procentenheter uppåt. Skillnaden mellan resultaten måste därför vara större än summan av felmarginalerna (vi räknar med de oavrundade värdena):
+
+$$ f_A + f_B = 2{,}416\\ldots + 2{,}304\\ldots = 4{,}72\\ldots \\approx 4{,}7 $$
+
+Dagens skillnad är bara $24 - 21 = 3$ procentenheter.
+
+**Svar:** Skillnaden måste vara minst 4,7 procentenheter.
+
+**Generell slutsats:** att två partier ligger ”nära varandra” betyder att skillnaden är mindre än summan av deras felmarginaler. Då går det inte att säga vilket av dem som är störst.`,
+        },
+        {
+            level: 3,
+            question: `En kommun med 18&nbsp;000 invånare skickade en enkät till 1&nbsp;200 slumpvis utvalda invånare, men bara 750 svarade. Av dem som svarade ville 44&nbsp;% ha fler cykelbanor.<br>a) Beräkna felmarginalen.<br>b) Mellan hur många av kommunens invånare ligger det verkliga antalet som vill ha fler cykelbanor? Avrunda till hela hundratal.<br>c) Vilket antagande om de 450 som inte svarade måste göras för att resultatet ska gå att lita på?`,
+            answer: { value: 3.6, unit: 'procentenheter' },
+            delsvar: [
+                { del: 'a', value: 3.6, unit: 'procentenheter', tol: 0.02 },
+                { del: 'b', value: 7300, unit: 'invånare', etikett: 'undre gräns', tol: 0.01 },
+                { del: 'b', value: 8600, unit: 'invånare', etikett: 'övre gräns', tol: 0.01 },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** stickprovets storlek $n$ är antalet som faktiskt **svarade**, inte antalet som fick enkäten. Felmarginalen är dessutom angiven i procentenheter och måste räknas om till antal invånare med hjälp av hela kommunens storlek.
+
+**a)** Med $p = 44$ och $n = 750$:
+
+$$ f = 1{,}96 \\cdot \\sqrt{\\frac{44(100 - 44)}{750}} = 1{,}96 \\cdot \\sqrt{3{,}2853\\ldots} = 3{,}552\\ldots \\approx 3{,}6 $$
+
+(Med $n = 1\\ 200$ hade man fått $f \\approx 2{,}8$, en felmarginal som ser säkrare ut än resultatet är.)
+
+**Svar:** 3,6 procentenheter
+
+**b)** Konfidensintervallet i procent är resultatet plus och minus felmarginalen. Vi räknar med det oavrundade värdet från a):
+
+$$ \\left[\\begin{array}{l} \\text{Undre gräns} = 44\\ \\% - 3{,}552\\ldots\\ \\% = 40{,}447\\ldots\\ \\% \\\\ \\text{Övre gräns} = 44\\ \\% + 3{,}552\\ldots\\ \\% = 47{,}552\\ldots\\ \\% \\end{array}\\right. $$
+
+Andelen gäller hela kommunen. Antalet invånare är andelen gånger antalet invånare i kommunen:
+
+$$ 0{,}40447\\ldots \\cdot 18\\ 000 = 7\\ 280{,}5\\ldots \\approx 7\\ 300 $$
+
+$$ 0{,}47552\\ldots \\cdot 18\\ 000 = 8\\ 559{,}4\\ldots \\approx 8\\ 600 $$
+
+**Svar:** Mellan cirka 7&nbsp;300 och 8&nbsp;600 invånare.
+
+**c)** Felmarginalen tar bara hänsyn till slumpen i vilka som blev tillfrågade. Den säger ingenting om de 450 som valde att inte svara. Om till exempel de som cyklar mycket var mer intresserade av att svara, blir resultatet systematiskt för högt, och det felet krymper inte hur många som än tillfrågas.
+
+**Svar:** Man måste anta att de som inte svarade i genomsnitt tycker likadant som de som svarade, alltså att bortfallet inte beror på vad man tycker i frågan.
+
+**Generell slutsats:** felmarginalen räknas på antalet svar, och den mäter bara slumpens osäkerhet. Ett snedvridet bortfall är ett annat slags fel som felmarginalen inte fångar.`,
+        },
+        {
+            level: 3,
+            question: `En rapport anger: ”Med 95&nbsp;% säkerhet ligger andelen som är nöjda med kollektivtrafiken mellan 31,8&nbsp;% och 40,2&nbsp;%.” Rapporten anger inte hur många som tillfrågades.<br>a) Vilket resultat $p$ fick undersökningen, och hur stor var felmarginalen?<br>b) Ungefär hur många personer tillfrågades?`,
+            answer: { value: 500, unit: 'personer' },
+            delsvar: [
+                { del: 'a', value: 36, unit: '%', etikett: '$p =$' },
+                { del: 'a', value: 4.2, unit: 'procentenheter', etikett: '$f =$' },
+                { del: 'b', value: 500, unit: 'personer', tol: 0.03 },
+            ],
+            solution: `**Insikten:** ett konfidensintervall är resultatet plus och minus felmarginalen. Resultatet ligger därför mitt i intervallet, och felmarginalen är halva intervallets bredd. När $p$ och $f$ är kända är $n$ den enda obekanta i formeln.
+
+**a)** Resultatet ligger mitt emellan gränserna:
+
+$$ p = \\frac{31{,}8 + 40{,}2}{2} = \\frac{72}{2} = 36 $$
+
+Felmarginalen är halva avståndet mellan gränserna:
+
+$$ f = \\frac{40{,}2 - 31{,}8}{2} = \\frac{8{,}4}{2} = 4{,}2 $$
+
+Kontroll: $36 - 4{,}2 = 31{,}8$ och $36 + 4{,}2 = 40{,}2$. Stämmer.
+
+**Svar:** Resultatet var 36&nbsp;% och felmarginalen 4,2 procentenheter.
+
+**b)** Vi sätter in $p = 36$ och $f = 4{,}2$ i formeln. Täljaren blir $36(100 - 36) = 36 \\cdot 64 = 2\\ 304$:
+
+$$ 1{,}96 \\cdot \\sqrt{\\frac{2\\ 304}{n}} = 4{,}2 $$
+
+$$ \\frac{1{,}96 \\cdot \\sqrt{\\dfrac{2\\ 304}{n}}}{\\boldsymbol{1{,}96}} = \\frac{4{,}2}{\\boldsymbol{1{,}96}} $$
+
+$$ \\sqrt{\\frac{2\\ 304}{n}} = 2{,}1428\\ldots $$
+
+Vi kvadrerar båda led för att bli av med rottecknet:
+
+$$ \\left(\\sqrt{\\frac{2\\ 304}{n}}\\right)^{\\boldsymbol{2}} = (2{,}1428\\ldots)^{\\boldsymbol{2}} $$
+
+$$ \\frac{2\\ 304}{n} = 4{,}5918\\ldots $$
+
+$$ \\frac{2\\ 304}{n} \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{n} = 4{,}5918\\ldots \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{n} $$
+
+$$ 2\\ 304 = 4{,}5918\\ldots \\cdot n $$
+
+$$ \\frac{2\\ 304}{\\boldsymbol{4{,}5918\\ldots}} = \\frac{4{,}5918\\ldots \\cdot n}{\\boldsymbol{4{,}5918\\ldots}} $$
+
+$$ 501{,}7\\ldots = n $$
+
+Gränserna i rapporten är avrundade till en decimal, så felmarginalen kan ha varit allt från ungefär 4,15 till 4,25 procentenheter. Det motsvarar mellan ungefär 490 och 510 personer, så svaret kan bara anges ungefärligt.
+
+Kontroll: med $n = 500$ blir $f = 1{,}96 \\cdot \\sqrt{\\frac{2\\ 304}{500}} = 4{,}20\\ldots$. Stämmer.
+
+**Svar:** Cirka 500 personer
+
+**Generell slutsats:** formeln för felmarginal binder ihop tre storheter, $f$, $p$ och $n$. Är två av dem kända går den tredje att räkna ut, och ett konfidensintervall ger både $p$ och $f$ på en gång.`,
+        },
+        {
+            level: 3,
+            question: `Ett opinionsinstitut ska fråga slumpvis utvalda personer om ett nytt förslag. Ingen vet i förväg hur stor andel som kommer att svara ja, men felmarginalen ska bli högst 3,0 procentenheter vad resultatet än blir.<br>a) Beräkna $p(100 - p)$ för $p = 10$, $30$, $50$, $70$ och $90$.<br>b) Visa att $p(100 - p) = 2\\ 500 - (p - 50)^2$, och förklara med hjälp av det varför felmarginalen blir störst när $p = 50\\ \\%$.<br>c) Hur många personer måste minst tillfrågas?`,
+            answer: { value: 1068, unit: 'personer' },
+            delsvar: [
+                { del: 'a', value: 2500, unit: '', etikett: '$p(100 - p)$ för $p = 50$' },
+                { del: 'b' },
+                { del: 'c', value: 1068, unit: 'personer', tol: 0.001 },
+            ],
+            solution: `**Insikten:** när resultatet är okänt måste stickprovet räcka även i det sämsta fallet. Det sämsta fallet är det $p$ som gör felmarginalen störst, och det är $p = 50\\ \\%$.
+
+**a)** Vi räknar ut produkten för varje värde:
+
+| $p$ | 10 | 30 | 50 | 70 | 90 |
+|---|---|---|---|---|---|
+| $100 - p$ | 90 | 70 | 50 | 30 | 10 |
+| $p(100 - p)$ | 900 | 2&nbsp;100 | 2&nbsp;500 | 2&nbsp;100 | 900 |
+
+Produkten är störst för $p = 50$ och lika stor för $p$ och $100 - p$ (till exempel 30 och 70).
+
+**Svar:** 900, 2&nbsp;100, 2&nbsp;500, 2&nbsp;100 och 900
+
+**b)** Vi utvecklar kvadraten i höger led. Kvadraten betyder att parentesen multipliceras med sig själv:
+
+$$ (p - 50)^2 = (p - 50)(p - 50) = p^2 - 50p - 50p + 2\\ 500 = p^2 - 100p + 2\\ 500 $$
+
+Höger led blir då
+
+$$ 2\\ 500 - (p - 50)^2 = 2\\ 500 - p^2 + 100p - 2\\ 500 = 100p - p^2 $$
+
+Vänster led, med parentesen multiplicerad in, är
+
+$$ p(100 - p) = 100p - p^2 $$
+
+Leden är lika, och därmed är likheten visad.
+
+En kvadrat kan aldrig vara negativ, så $(p - 50)^2 \\geq 0$. Från 2&nbsp;500 dras alltså alltid något som är 0 eller större. Störst blir $p(100 - p)$ när ingenting dras bort, det vill säga när $p - 50 = 0$, alltså $p = 50$. Då är $p(100 - p) = 2\\ 500$.
+
+I formeln $f = 1{,}96 \\cdot \\sqrt{\\frac{p(100 - p)}{n}}$ står $p(100 - p)$ i täljaren under rottecknet. Med samma $n$ blir felmarginalen därför störst när $p(100 - p)$ är störst.
+
+**Svar:** Eftersom $(p - 50)^2$ aldrig är negativ är $p(100 - p)$ som störst, 2&nbsp;500, när $p = 50$, och då blir också felmarginalen störst.
+
+**c)** Klarar stickprovet kravet när $p = 50$ klarar det kravet för alla andra resultat. Vi tar reda på vilket $n$ som ger felmarginalen exakt 3,0 när $p(100 - p) = 2\\ 500$:
+
+$$ 1{,}96 \\cdot \\sqrt{\\frac{2\\ 500}{n}} = 3{,}0 $$
+
+$$ \\frac{1{,}96 \\cdot \\sqrt{\\dfrac{2\\ 500}{n}}}{\\boldsymbol{1{,}96}} = \\frac{3{,}0}{\\boldsymbol{1{,}96}} $$
+
+$$ \\sqrt{\\frac{2\\ 500}{n}} = 1{,}5306\\ldots $$
+
+Vi kvadrerar båda led för att bli av med rottecknet:
+
+$$ \\left(\\sqrt{\\frac{2\\ 500}{n}}\\right)^{\\boldsymbol{2}} = (1{,}5306\\ldots)^{\\boldsymbol{2}} $$
+
+$$ \\frac{2\\ 500}{n} = 2{,}3427\\ldots $$
+
+$$ \\frac{2\\ 500}{n} \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{n} = 2{,}3427\\ldots \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{n} $$
+
+$$ 2\\ 500 = 2{,}3427\\ldots \\cdot n $$
+
+$$ \\frac{2\\ 500}{\\boldsymbol{2{,}3427\\ldots}} = \\frac{2{,}3427\\ldots \\cdot n}{\\boldsymbol{2{,}3427\\ldots}} $$
+
+$$ 1\\ 067{,}1\\ldots = n $$
+
+Ett mindre $n$ ger en större felmarginal, så vi avrundar **uppåt**. Kontroll: med 1&nbsp;067 personer blir $f = 3{,}0001\\ldots$, för mycket, och med 1&nbsp;068 personer blir $f = 2{,}9987\\ldots$.
+
+**Svar:** Minst 1&nbsp;068 personer
+
+**Generell slutsats:** när resultatet inte är känt i förväg planerar man stickprovet för $p = 50\\ \\%$. Det är därför många opinionsmätningar har drygt 1&nbsp;000 svarande och anger felmarginalen ”högst 3 procentenheter”.`,
         },
     ],
 
@@ -30988,23 +31597,283 @@ Skostorlek/ordförråd hos barn samvarierar (båda växer med åldern) men är e
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En studie visar stark positiv korrelation mellan antal brandbilar på plats och skadekostnaden vid bränder. Kalle drar slutsatsen: "Skicka färre brandbilar, så minskar skadorna!" Vad är felet i resonemanget?`,
+            question: `En studie visar stark positiv korrelation mellan antalet brandbilar på plats och skadekostnaden vid bränder. Kalle drar slutsatsen: ”Skicka färre brandbilar, så minskar skadorna!” Vad är felet i resonemanget?`,
             choices: [
                 `Korrelationen är negativ, inte positiv`,
-                `Korrelationen beror på en tredje variabel — brandens storlek styr både antalet brandbilar och skadorna`,
-                `Studien borde ha använt cirkeldiagram`,
-                `Inget fel — färre brandbilar ger mindre skador`,
+                `Korrelationen beror på en tredje variabel: brandens storlek styr både antalet brandbilar och skadorna`,
+                `Studien borde ha använt ett cirkeldiagram`,
+                `Inget fel, färre brandbilar ger mindre skador`,
             ],
             correct: 1,
-            solution: `**Insikten:** korrelation säger inget om RIKTNINGEN på ett orsakssamband — eller om det ens finns ett.
+            solution: `**Insikten:** en korrelation säger ingenting om åt vilket håll ett orsakssamband går, eller om det ens finns något orsakssamband.
 
-Den bakomliggande variabeln är brandens storlek: stora bränder får både fler brandbilar OCH större skador. Brandbilarna orsakar inte skadorna — de och skadorna har en gemensam orsak.
+Den bakomliggande variabeln är brandens storlek. En stor brand ger både fler brandbilar på plats och större skador. Brandbilarna orsakar alltså inte skadorna, utan brandbilarna och skadorna har en gemensam orsak.
 
-Kalles åtgärd skulle testa kausaliteten åt fel håll: att minska antalet brandbilar minskar inte branden, utan tvärtom riskerar att ÖKA skadorna.
+Kalles åtgärd bygger på ett orsakssamband som inte finns. Färre brandbilar gör inte branden mindre. Skadorna riskerar i stället att bli större, eftersom branden släcks långsammare.
 
-**Svar:** Brandens storlek är en tredje variabel som styr båda — skensamband, ingen kausalitet från brandbilar till skador.
+De andra alternativen håller inte: korrelationen beskrivs som positiv i studien, valet av diagram ändrar inte sambandet, och att färre brandbilar skulle minska skadorna är just den felaktiga slutsatsen.
 
-**Generell slutsats:** fråga alltid "kan en tredje variabel förklara båda?" innan en korrelation används för beslut. Korrelation ⇏ kausalitet.`,
+**Svar:** Brandens storlek är en tredje variabel som styr både antalet brandbilar och skadorna. Det är ett skensamband, ingen kausalitet från brandbilar till skador.
+
+**Generell slutsats:** fråga alltid om en tredje variabel kan förklara båda innan en korrelation används som underlag för ett beslut. Korrelation betyder inte kausalitet.`,
+        },
+        {
+            level: 3,
+            question: `En skola undersöker hur många timmar i veckan elever går på läxhjälp och vilket resultat de får på ett matematikprov. Elever som går mycket på läxhjälp har i genomsnitt lägre provresultat. Rektorn drar slutsatsen: ”Läxhjälpen sänker resultaten, vi lägger ned den.”<br>a) Är korrelationen mellan antalet timmar läxhjälp och provresultatet positiv eller negativ?<br>b) Ge en rimlig förklaring till sambandet där läxhjälpen inte alls sänker resultaten.<br>c) En lärare föreslår att man i stället jämför samma elevers provresultat före och efter att de började på läxhjälpen. Förklara varför den jämförelsen säger mer om läxhjälpens effekt.`,
+            solution: `**Insikten:** orsakssambandet kan gå åt motsatt håll mot det rektorn tror. Det kan vara de låga resultaten som leder till läxhjälp, inte läxhjälpen som leder till låga resultat.
+
+**a)** Fler timmar läxhjälp hänger ihop med lägre provresultat. När den ena variabeln ökar minskar alltså den andra, och punkterna i ett spridningsdiagram skulle ligga kring en linje med negativ lutning.
+
+**Svar:** Negativ korrelation.
+
+**b)** Elever som har svårt för matematiken söker sig till läxhjälpen, eller rekommenderas att gå dit av sina lärare. Eleverna hade alltså redan lägre resultat innan de började. Orsaken går då från låga resultat till många timmar läxhjälp, och inte tvärtom.
+
+**Svar:** Elever med svaga resultat är de som går på läxhjälp. De låga resultaten orsakar läxhjälpen, inte omvänt.
+
+**c)** I rektorns jämförelse ställs två olika grupper elever mot varandra, och grupperna skilde sig redan från början. Skillnaden i resultat säger därför mest om vilka elever som går på läxhjälp.
+
+Jämför man i stället samma elever före och efter är det eleven själv som är jämförelsen. Utgångsnivån är då densamma, och förbättras de som går på läxhjälpen mer än andra elever, talar det för att läxhjälpen faktiskt hjälper.
+
+**Svar:** Jämförelsen före och efter mäter förändringen hos samma elever, så den skillnad i utgångsläge som fanns mellan grupperna påverkar inte resultatet.
+
+**Generell slutsats:** när två variabler korrelerar finns tre möjligheter att pröva. Den första kan orsaka den andra, den andra kan orsaka den första, eller så kan en tredje variabel orsaka båda.`,
+        },
+        {
+            level: 3,
+            question: `Tabellen visar ett barns längd vid olika åldrar. Punkterna ligger nära en rät linje, och en trendlinje ritas genom punkterna $(2, 89)$ och $(10, 137)$, där *x* är åldern i år och *y* är längden i cm.
+
+| Ålder (år) | 2 | 4 | 6 | 8 | 10 |
+|---|---|---|---|---|---|
+| Längd (cm) | 88 | 102 | 112 | 126 | 138 |
+
+a) Bestäm trendlinjens ekvation.<br>b) Vilken längd förutsäger trendlinjen vid 8 års ålder respektive vid 30 års ålder?<br>c) Hur väl stämmer de två förutsägelserna? Förklara vad det säger om när en trendlinje kan användas.`,
+            answer: { value: 257, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 6, unit: '', etikett: '$k =$' },
+                { del: 'a', value: 77, unit: '', etikett: '$m =$' },
+                { del: 'b', value: 125, unit: 'cm', etikett: 'vid 8 år' },
+                { del: 'b', value: 257, unit: 'cm', etikett: 'vid 30 år' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** en trendlinje beskriver sambandet bara i det intervall där det finns mätvärden. Utanför intervallet vet vi ingenting om att sambandet fortsätter.
+
+**a)** Trendlinjen är en rät linje $y = kx + m$. Lutningen är förändringen i *y*-led delad med förändringen i *x*-led:
+
+$$ k = \\dfrac{\\Delta y}{\\Delta x} = \\dfrac{137 - 89}{10 - 2} = \\dfrac{48}{8} = 6 $$
+
+Så $y = 6x + m$. Vi sätter in punkten $(2, 89)$:
+
+$$ 89 = 6 \\cdot 2 + m $$
+
+$$ 89 = 12 + m $$
+
+$$ 89 \\mathbin{\\boldsymbol{-}} \\boldsymbol{12} = 12 + m \\mathbin{\\boldsymbol{-}} \\boldsymbol{12} $$
+
+$$ 77 = m $$
+
+Kontroll med den andra punkten: $6 \\cdot 10 + 77 = 60 + 77 = 137$. Stämmer.
+
+**Svar:** $y = 6x + 77$
+
+**b)** Vi sätter in åldern som *x* i trendlinjens ekvation:
+
+$$ y = 6 \\cdot 8 + 77 = 48 + 77 = 125 $$
+
+$$ y = 6 \\cdot 30 + 77 = 180 + 77 = 257 $$
+
+**Svar:** $125\\ \\mathrm{cm}$ vid 8 år och $257\\ \\mathrm{cm}$ vid 30 år.
+
+**c)** Vid 8 år mättes längden till $126\\ \\mathrm{cm}$, så förutsägelsen $125\\ \\mathrm{cm}$ stämmer mycket bra. Åldern 8 år ligger inom intervallet 2 till 10 år där vi har mätvärden.
+
+Förutsägelsen $257\\ \\mathrm{cm}$ vid 30 år är orimlig. Ingen vuxen blir så lång, och människor slutar växa i slutet av tonåren. Trendlinjen förutsätter att barnet fortsätter växa med $6\\ \\mathrm{cm}$ per år för alltid, men det gäller bara under uppväxten.
+
+**Svar:** Förutsägelsen vid 8 år stämmer bra, men den vid 30 år är orimlig. En trendlinje kan användas inom det intervall där mätvärdena finns, men inte långt utanför det.
+
+**Generell slutsats:** att förlänga en trendlinje långt utanför mätvärdena kallas att extrapolera. Det kräver att man vet att sambandet fortsätter på samma sätt, något som mätvärdena själva aldrig kan visa.`,
+        },
+        {
+            level: 3,
+            question: `Två datamängder A och B har samma *x*-värden.
+
+| *x* | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| *y* i A | 1,5 | 2 | 2,5 | 3 | 3,5 |
+| *y* i B | 4 | 12 | 7 | 18 | 14 |
+
+En trendlinje för B går genom punkterna $(1, 4)$ och $(5, 14)$. Lisa säger: ”B har den brantare trendlinjen, alltså har B den starkare korrelationen.”<br>a) Visa att alla punkterna i A ligger på samma räta linje och bestäm linjens lutning.<br>b) Bestäm lutningen för trendlinjen till B och granska Lisas påstående.<br>c) A:s *y*-värden räknas om till en enhet som är en tiondel så stor, så att alla *y*-värden blir tio gånger större. Vad händer med lutningen och med korrelationens styrka?`,
+            answer: { value: 0.5, unit: '' },
+            delsvar: [
+                { del: 'a', value: 0.5, unit: '', etikett: 'lutning för A' },
+                { del: 'b', value: 2.5, unit: '', etikett: 'lutning för B' },
+                { del: 'c', value: 5, unit: '', etikett: 'ny lutning för A' },
+            ],
+            solution: `**Insikten:** korrelationens styrka avgörs av hur nära punkterna ligger linjen, inte av hur brant linjen lutar.
+
+**a)** När *x* ökar med 1 ökar *y* i A varje gång med $0{,}5$: från $1{,}5$ till $2$, till $2{,}5$, till $3$ och till $3{,}5$. Lika stor ökning i varje steg betyder att punkterna ligger på en rät linje med lutningen
+
+$$ k = \\dfrac{\\Delta y}{\\Delta x} = \\dfrac{0{,}5}{1} = 0{,}5 $$
+
+Vi sätter in punkten $(1;\\ 1{,}5)$ i $y = 0{,}5x + m$:
+
+$$ 1{,}5 = 0{,}5 \\cdot 1 + m $$
+
+$$ 1{,}5 \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}5} = 0{,}5 + m \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}5} $$
+
+$$ 1 = m $$
+
+Kontroll med $x = 5$: $0{,}5 \\cdot 5 + 1 = 2{,}5 + 1 = 3{,}5$. Stämmer, och alla fem punkterna ligger på linjen $y = 0{,}5x + 1$.
+
+**Svar:** Punkterna ligger på $y = 0{,}5x + 1$, med lutningen $0{,}5$.
+
+**b)** Lutningen för trendlinjen till B:
+
+$$ k = \\dfrac{14 - 4}{5 - 1} = \\dfrac{10}{4} = 2{,}5 $$
+
+B:s linje är alltså brantare. Men B:s punkter hoppar upp och ned: *y* går från 4 till 12, sedan ned till 7, upp till 18 och ned till 14. Punkterna är tydligt spridda kring linjen, så B har en svag positiv korrelation. A:s punkter ligger exakt på en linje, och starkare än så kan en korrelation inte bli.
+
+**Svar:** Lutningen för B är $2{,}5$. Lisa har fel: A har den starkare korrelationen, eftersom alla punkterna ligger exakt på linjen. Att B:s linje är brantare säger ingenting om styrkan.
+
+**c)** Alla *y*-värden blir tio gånger större, så också varje ökning i *y*-led blir tio gånger större:
+
+$$ k = \\dfrac{5}{1} = 5 $$
+
+Punkterna ligger fortfarande exakt på en rät linje, nu $y = 5x + 10$. Korrelationen är alltså lika stark som förut.
+
+**Svar:** Lutningen blir $5$, tio gånger större, men korrelationen är lika stark som förut.
+
+**Generell slutsats:** lutningen beror på vilka enheter variablerna mäts i, men korrelationens styrka gör det inte. Därför kan lutningen aldrig användas för att jämföra hur starka två korrelationer är.`,
+        },
+        {
+            level: 3,
+            question: `På en åker prövas olika mängder gödsel *x* (kg) på lika stora rutor, och skörden *y* (kg) på varje ruta mäts.
+
+| Gödsel *x* (kg) | 1 | 3 | 5 | 7 | 9 |
+|---|---|---|---|---|---|
+| Skörd *y* (kg) | 9 | 21 | 25 | 21 | 9 |
+
+Den räta linje som passar punkterna bäst är vågrät, $y = 17$. Elin drar slutsatsen: ”Det finns ingen korrelation, alltså påverkar gödseln inte skörden.”<br>a) Beräkna lutningen för sträckan mellan $(1, 9)$ och $(5, 25)$ och för sträckan mellan $(5, 25)$ och $(9, 9)$.<br>b) Visa att alla punkterna uppfyller sambandet $y = 10x - x^2$.<br>c) Granska Elins slutsats.`,
+            answer: { value: 4, unit: '' },
+            delsvar: [
+                { del: 'a', value: 4, unit: '', etikett: 'från $x = 1$ till $x = 5$' },
+                { del: 'a', value: -4, unit: '', etikett: 'från $x = 5$ till $x = 9$' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** korrelation, som den beskrivs här, mäter hur väl punkterna följer en **rät** linje. Ett starkt samband som inte är linjärt kan därför se ut som ”ingen korrelation”.
+
+**a)** Lutningen är förändringen i *y*-led delad med förändringen i *x*-led:
+
+$$ k_1 = \\dfrac{25 - 9}{5 - 1} = \\dfrac{16}{4} = 4 $$
+
+$$ k_2 = \\dfrac{9 - 25}{9 - 5} = \\dfrac{-16}{4} = -4 $$
+
+**Svar:** Lutningen är $4$ från $x = 1$ till $x = 5$ och $-4$ från $x = 5$ till $x = 9$.
+
+**b)** Vi sätter in varje *x*-värde i $y = 10x - x^2$:
+
+| *x* | $10x - x^2$ | *y* |
+|---|---|---|
+| 1 | $10 - 1$ | 9 |
+| 3 | $30 - 9$ | 21 |
+| 5 | $50 - 25$ | 25 |
+| 7 | $70 - 49$ | 21 |
+| 9 | $90 - 81$ | 9 |
+
+Alla fem värdena stämmer med tabellen.
+
+**Svar:** Varje punkt uppfyller $y = 10x - x^2$, så skörden bestäms helt av gödselmängden.
+
+**c)** Punkterna ligger exakt på en kurva, så sambandet mellan gödsel och skörd är så starkt det kan bli. Det är bara inte linjärt. Upp till $5\\ \\mathrm{kg}$ ger mer gödsel större skörd, med lutningen $4$, och över $5\\ \\mathrm{kg}$ ger mer gödsel mindre skörd, med lutningen $-4$. Den stigande och den fallande halvan tar ut varandra, och därför blir den bästa räta linjen vågrät. Medelvärdet av skördarna är $\\dfrac{9 + 21 + 25 + 21 + 9}{5} = \\dfrac{85}{5} = 17$, vilket är just den vågräta linjen $y = 17$.
+
+**Svar:** Elin har fel. Gödseln påverkar skörden mycket, men sambandet är inte linjärt: skörden ökar upp till $5\\ \\mathrm{kg}$ gödsel och minskar sedan. Att ingen rät linje passar betyder inte att det saknas ett samband.
+
+**Generell slutsats:** titta alltid på spridningsdiagrammet innan du drar en slutsats av en trendlinje. ”Ingen korrelation” betyder ”inget linjärt samband”, inte ”inget samband alls”.`,
+        },
+        {
+            level: 3,
+            question: `En lärare vill veta om en ny metod för att plugga glosor ger bättre provresultat. Hon prövar två upplägg på två skolor med 60 elever var. I upplägg 1 väljer eleverna själva om de vill använda metoden. I upplägg 2 lottas hälften av eleverna till att använda metoden. Tabellen visar hur många poäng eleverna i genomsnitt ökade på ett glosprov.
+
+| | Använde metoden | Använde inte metoden |
+|---|---|---|
+| Upplägg 1: eleverna väljer själva | 12&nbsp;poäng | 4&nbsp;poäng |
+| Upplägg 2: lotten avgör | 7&nbsp;poäng | 5&nbsp;poäng |
+
+a) Hur många poäng mer ökade de som använde metoden, i upplägg 1 respektive i upplägg 2?<br>b) Förklara varför skillnaden blir så mycket större i upplägg 1.<br>c) Vilket upplägg ger bäst underlag för att avgöra om metoden orsakar en förbättring, och hur stor förbättring tyder det på?`,
+            answer: { value: 2, unit: 'poäng' },
+            delsvar: [
+                { del: 'a', value: 8, unit: 'poäng', etikett: 'upplägg 1' },
+                { del: 'a', value: 2, unit: 'poäng', etikett: 'upplägg 2' },
+                { del: 'b' },
+                { del: 'c', value: 2, unit: 'poäng', etikett: 'förbättring' },
+            ],
+            solution: `**Insikten:** när eleverna själva väljer skiljer sig grupperna åt redan från början. Lottning gör grupperna lika i genomsnitt, så att metoden blir den enda systematiska skillnaden mellan dem.
+
+**a)** Skillnaden är ökningen med metoden minus ökningen utan metoden:
+
+$$ 12 - 4 = 8 $$
+
+$$ 7 - 5 = 2 $$
+
+**Svar:** $8$ poäng mer i upplägg 1 och $2$ poäng mer i upplägg 2.
+
+**b)** I upplägg 1 är det troligen de mest motiverade eleverna som väljer att pröva en ny metod. Motiverade elever pluggar mer och skulle ha förbättrat sig mer även utan metoden. Motivationen är alltså en tredje variabel som påverkar både vem som använder metoden och hur mycket resultatet ökar. De $8$ poängen blandar ihop metodens effekt med motivationens.
+
+**Svar:** Eleverna som valde metoden skilde sig från de andra redan från början, till exempel genom att vara mer motiverade, och den skillnaden räknas in i de $8$ poängen.
+
+**c)** I upplägg 2 avgör lotten vem som använder metoden. Motiverade och omotiverade elever hamnar då i båda grupperna i ungefär samma utsträckning, och detsamma gäller förkunskaper och allt annat. Den enda systematiska skillnaden mellan grupperna är metoden, så skillnaden i resultat kan tillskrivas metoden.
+
+**Svar:** Upplägg 2. Det tyder på att metoden ger en förbättring på ungefär $2$ poäng.
+
+**Generell slutsats:** en korrelation i data där människor själva valt grupp kan nästan aldrig visa kausalitet. Att lotta vem som får behandlingen är det säkraste sättet att få bort tredje variabler.`,
+        },
+        {
+            level: 3,
+            question: `Två sjukhus behandlar 500 patienter var efter en viss typ av olycka. Patienterna delas in i lätta och svåra fall.
+
+| | Lätta fall | Varav överlevde | Svåra fall | Varav överlevde |
+|---|---|---|---|---|
+| Sjukhus A | 100 | 98 | 400 | 320 |
+| Sjukhus B | 400 | 388 | 100 | 70 |
+
+a) Beräkna hur stor andel av patienterna som överlevde på varje sjukhus totalt. Ange svaret i procent.<br>b) Beräkna hur stor andel som överlevde på varje sjukhus bland de lätta fallen och bland de svåra fallen. Ange svaren i procent.<br>c) En tidning skriver: ”Sjukhus B är bättre, där överlever fler.” Granska påståendet och förklara hur resultaten i a) och b) kan stämma samtidigt.`,
+            answer: { value: 83.6, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 83.6, unit: '%', etikett: 'sjukhus A' },
+                { del: 'a', value: 91.6, unit: '%', etikett: 'sjukhus B' },
+                { del: 'b', value: 98, unit: '%', etikett: 'A, lätta fall' },
+                { del: 'b', value: 80, unit: '%', etikett: 'A, svåra fall' },
+                { del: 'b', value: 97, unit: '%', etikett: 'B, lätta fall' },
+                { del: 'b', value: 70, unit: '%', etikett: 'B, svåra fall' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** hur svårt fallet är påverkar både vilket sjukhus patienten hamnar på och om patienten överlever. När grupperna slås ihop kan en sådan tredje variabel vända på slutsatsen.
+
+**a)** Andelen som överlevde är antalet som överlevde delat med antalet patienter.
+
+Sjukhus A:
+
+$$ \\dfrac{98 + 320}{500} = \\dfrac{418}{500} = 0{,}836 = 83{,}6\\ \\% $$
+
+Sjukhus B:
+
+$$ \\dfrac{388 + 70}{500} = \\dfrac{458}{500} = 0{,}916 = 91{,}6\\ \\% $$
+
+**Svar:** Sjukhus A $83{,}6\\ \\%$ och sjukhus B $91{,}6\\ \\%$.
+
+**b)** Samma samband, men nu för varje grupp för sig.
+
+| | Lätta fall | Svåra fall |
+|---|---|---|
+| Sjukhus A | $\\dfrac{98}{100} = 98\\ \\%$ | $\\dfrac{320}{400} = 80\\ \\%$ |
+| Sjukhus B | $\\dfrac{388}{400} = 97\\ \\%$ | $\\dfrac{70}{100} = 70\\ \\%$ |
+
+**Svar:** Lätta fall: A $98\\ \\%$ och B $97\\ \\%$. Svåra fall: A $80\\ \\%$ och B $70\\ \\%$.
+
+**c)** Sjukhus A har högre andel som överlever både bland de lätta och bland de svåra fallen. Ändå har B högre andel totalt. Förklaringen är att sjukhusen har helt olika patienter: på A är $400$ av $500$ patienter svåra fall, alltså $80\\ \\%$, medan det på B bara är $100$ av $500$, alltså $20\\ \\%$. Svåra fall överlever mer sällan oavsett sjukhus, så A:s totalsiffra dras ned av att A tar hand om de svåraste fallen.
+
+**Svar:** Påståendet håller inte. Sjukhus A är bättre för både lätta och svåra fall. B:s högre totalsiffra beror på att B mest har lätta fall, inte på att vården är bättre.
+
+**Generell slutsats:** att en sammanslagen jämförelse kan peka åt motsatt håll mot jämförelserna inom varje grupp kallas Simpsons paradox. Dela upp data efter den tredje variabeln innan du drar en slutsats om orsak.`,
         },
     ],
 
@@ -31088,29 +31957,285 @@ $$ P(\\text{inte gul}) = \\frac{12}{20} = 0{,}6 = 60\\ \\% $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Du singlar två mynt. Leia säger: "Det finns tre utfall — två kronor, två klavar eller en av varje — så sannolikheten för en av varje är $\\dfrac{1}{3}$." Vad är rätt sannolikhet för en krona och en klave?`,
+            question: `Du singlar två mynt. Leia säger: "Det finns tre utfall: två kronor, två klavar eller en av varje. Så sannolikheten för en av varje är $\\dfrac{1}{3}$." Vad är rätt sannolikhet för en krona och en klave?`,
             choices: [
-                `$\\dfrac{1}{3}$ — Leia har rätt`,
-                `$\\dfrac{1}{2}$ — utfallsrummet har fyra lika sannolika utfall, varav två ger en av varje`,
+                `$\\dfrac{1}{3}$, Leia har rätt`,
+                `$\\dfrac{1}{2}$, eftersom utfallsrummet har fyra lika sannolika utfall och två av dem ger en av varje`,
                 `$\\dfrac{1}{4}$`,
                 `$\\dfrac{2}{3}$`,
             ],
             correct: 1,
-            solution: `**Insikten:** den klassiska definitionen kräver att utfallen är LIKA SANNOLIKA — Leias tre "utfall" är det inte.
+            solution: `**Insikten:** den klassiska sannolikhetsdefinitionen kräver att utfallen är *lika sannolika*. Leias tre utfall är inte det.
 
 Rita utfallsrummet med mynten åtskilda (mynt 1, mynt 2):
 
 $$ (\\text{krona},\\ \\text{krona}) \\quad (\\text{krona},\\ \\text{klave}) \\quad (\\text{klave},\\ \\text{krona}) \\quad (\\text{klave},\\ \\text{klave}) $$
 
-Fyra lika sannolika utfall. "En av varje" täcks av två av dem:
+Det är fyra lika sannolika utfall. "En av varje" täcks av två av dem:
 
-$$ P(\\text{en av varje}) = \\frac{2}{4} = \\frac{1}{2} $$
+$$ P(\\text{en av varje}) = \\frac{\\text{antalet gynnsamma utfall}}{\\text{antalet möjliga utfall}} = \\frac{2}{4} = \\frac{1}{2} $$
 
-Leias fel: hon slog ihop (krona, klave) och (klave, krona) till ETT utfall, fast kombinationen är dubbelt så vanlig som till exempel två kronor.
+Leias fel är att hon slog ihop (krona, klave) och (klave, krona) till ett enda utfall, fast den kombinationen kan uppstå på två sätt och därför är dubbelt så vanlig som till exempel två kronor.
 
 **Svar:** $\\dfrac{1}{2}$
 
-**Generell slutsats:** klassiska definitionen fungerar bara med lika sannolika utfall — håll därför alltid isär föremålen (mynt 1/mynt 2, tärning 1/tärning 2) när utfallsrummet ritas, precis som i tärningstabellen.`,
+**Generell slutsats:** den klassiska definitionen fungerar bara med lika sannolika utfall. Håll därför alltid isär föremålen (mynt 1 och mynt 2, tärning 1 och tärning 2) när utfallsrummet ritas, precis som i tärningstabellen.`,
+        },
+        {
+            level: 3,
+            question: `Två tärningar kastas. Alex resonerar: "Varje tärning ger en sexa med sannolikheten $\\dfrac{1}{6}$, så sannolikheten för minst en sexa är $\\dfrac{1}{6} + \\dfrac{1}{6} = \\dfrac{1}{3}$."<br>a) Bestäm den rätta sannolikheten för minst en sexa med hjälp av utfallsrummet. Ange svaret i decimalform med två decimaler.<br>b) Förklara vad som är fel i Alex resonemang.<br>c) Med samma resonemang skulle sex tärningar ge sannolikheten $\\dfrac{6}{6} = 1$ för minst en sexa. Förklara varför det inte kan stämma.`,
+            answer: { value: 0.31, unit: '', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 0.31, unit: '', tol: 0.02, etikett: '$P(\\text{minst en sexa}) \\approx$' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** utfallet (6, 6) har en sexa på *båda* tärningarna. Den som lägger ihop "sexa på tärning 1" och "sexa på tärning 2" räknar det utfallet två gånger.
+
+**a)** Utfallsrummet för två tärningar har $6 \\cdot 6 = 36$ lika sannolika utfall. Vi räknar de utfall som har minst en sexa:
+
+- Tärning 1 visar sexa: (6, 1), (6, 2), (6, 3), (6, 4), (6, 5), (6, 6), alltså 6 utfall.
+- Tärning 2 visar sexa: (1, 6), (2, 6), (3, 6), (4, 6), (5, 6), (6, 6), alltså 6 utfall.
+- Utfallet (6, 6) står i båda listorna, så det ska bara räknas en gång.
+
+Antalet gynnsamma utfall är därför $6 + 6 - 1 = 11$:
+
+$$ P(\\text{minst en sexa}) = \\frac{\\text{antalet gynnsamma utfall}}{\\text{antalet möjliga utfall}} = \\frac{11}{36} \\approx 0{,}31 $$
+
+**Svar:** $\\dfrac{11}{36} \\approx 0{,}31$
+
+**b)** $\\dfrac{1}{6} + \\dfrac{1}{6} = \\dfrac{12}{36}$ motsvarar att räkna 6 + 6 = 12 gynnsamma utfall. Men (6, 6) finns med i båda sexorna, så Alex räknar det utfallet två gånger. Rätt antal är 11, inte 12.
+
+**Svar:** Alex räknar utfallet där båda tärningarna visar sexa två gånger.
+
+**c)** Sannolikheten 1 betyder att händelsen är säker. Men alla sex tärningarna kan visa något annat än sexa, till exempel en etta var. Minst en sexa är alltså inte säkert, och sannolikheten måste vara mindre än 1. Felet är detsamma som i b): ju fler tärningar, desto fler utfall med flera sexor, och alla dem räknas flera gånger. Med sju tärningar skulle resonemanget till och med ge $\\dfrac{7}{6}$, som är större än 1 och därför omöjligt som sannolikhet.
+
+**Svar:** Det är möjligt att ingen tärning visar sexa, så händelsen är inte säker. Utfall med flera sexor räknas flera gånger.
+
+**Generell slutsats:** sannolikheter för två händelser får bara adderas om händelserna inte kan inträffa samtidigt. Annars räknas de gemensamma utfallen dubbelt. Att räkna i utfallsrummet avslöjar felet.`,
+        },
+        {
+            level: 3,
+            question: `Två tärningar kastas och summan räknas. Ella vinner om summan blir 6, 7 eller 8. Noah vinner om summan blir 2, 3, 4, 10, 11 eller 12. Annars kastar de om. Noah tror att spelet gynnar honom, eftersom han har dubbelt så många summor som Ella.<br>a) Bestäm sannolikheten att Ella vinner ett kast och sannolikheten att Noah vinner ett kast. Ange svaren i decimalform med två decimaler.<br>b) Noah får lägga till en summa till sina så att spelet blir rättvist. Vilka summor kan han välja? (Det finns två.)`,
+            answer: { value: 5, unit: '' },
+            delsvar: [
+                { del: 'a', value: 0.44, unit: '', tol: 0.02, etikett: '$P(\\text{Ella vinner}) \\approx$' },
+                { del: 'a', value: 0.33, unit: '', tol: 0.02, etikett: '$P(\\text{Noah vinner}) \\approx$' },
+                { del: 'b', values: [5, 9], unit: '', etikett: 'summorna' },
+            ],
+            solution: `**Insikten:** det är antalet *utfall* som avgör sannolikheten, inte antalet *summor*. Summorna är inte lika sannolika: summan 7 kan fås på sex sätt, summan 12 bara på ett.
+
+Vi räknar i utfallsrummet för två tärningar (36 lika sannolika utfall) hur många utfall som ger varje summa:
+
+| Summa | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Antal utfall | 1 | 2 | 3 | 4 | 5 | 6 | 5 | 4 | 3 | 2 | 1 |
+
+**a)** Ella vinner på summorna 6, 7 och 8, som ger $5 + 6 + 5 = 16$ gynnsamma utfall:
+
+$$ P(\\text{Ella vinner}) = \\frac{\\text{antalet gynnsamma utfall}}{\\text{antalet möjliga utfall}} = \\frac{16}{36} \\approx 0{,}44 $$
+
+Noah vinner på summorna 2, 3, 4, 10, 11 och 12, som ger $1 + 2 + 3 + 3 + 2 + 1 = 12$ gynnsamma utfall:
+
+$$ P(\\text{Noah vinner}) = \\frac{12}{36} \\approx 0{,}33 $$
+
+Ellas tre summor ligger mitt i, där utfallen är flest. Noahs sex summor ligger i kanterna, där de är få.
+
+**Svar:** Ella $\\dfrac{16}{36} \\approx 0{,}44$, Noah $\\dfrac{12}{36} \\approx 0{,}33$
+
+**b)** Spelet är rättvist när båda har lika många gynnsamma utfall. Noah saknar $16 - 12 = 4$ utfall. De summor som ingen har ännu är 5 och 9, och båda ger just 4 utfall. Väljer Noah till exempel 5 får han $12 + 4 = 16$ utfall, lika många som Ella.
+
+**Svar:** 5 eller 9
+
+**Generell slutsats:** den klassiska definitionen räknar utfall, och de måste vara lika sannolika. Summorna av två tärningar är inte det, så de kan inte räknas som utfall.`,
+        },
+        {
+            level: 3,
+            question: `Ett mynt singlas flera gånger i rad.<br>a) Myntet singlas tre gånger. Bestäm sannolikheten för exakt två krona. Ange svaret i decimalform.<br>b) Bestäm sannolikheten för minst en krona när myntet singlas tre gånger. Ange svaret i decimalform.<br>c) Hur många gånger måste myntet minst singlas för att sannolikheten för minst en krona ska bli större än $0{,}99$?`,
+            answer: { value: 7, unit: 'gånger' },
+            delsvar: [
+                { del: 'a', value: 0.375, unit: '' },
+                { del: 'b', value: 0.875, unit: '' },
+                { del: 'c', value: 7, unit: 'gånger' },
+            ],
+            solution: `**Insikten:** utfallsrummet fördubblas för varje kast, men bara *ett* utfall saknar krona: klave varje gång. Det är lättare att räkna det enda ogynnsamma utfallet än alla de gynnsamma.
+
+**a)** Vi skriver upp utfallsrummet för tre kast, med kr för krona och kl för klave, i kastordning:
+
+$$ (\text{kr},\ \text{kr},\ \text{kr}) \quad (\text{kr},\ \text{kr},\ \text{kl}) \quad (\text{kr},\ \text{kl},\ \text{kr}) \quad (\text{kl},\ \text{kr},\ \text{kr}) $$
+
+$$ (\text{kr},\ \text{kl},\ \text{kl}) \quad (\text{kl},\ \text{kr},\ \text{kl}) \quad (\text{kl},\ \text{kl},\ \text{kr}) \quad (\text{kl},\ \text{kl},\ \text{kl}) $$
+
+Det är 8 lika sannolika utfall. Exakt två krona finns i (kr, kr, kl), (kr, kl, kr) och (kl, kr, kr), alltså 3 gynnsamma utfall:
+
+$$ P(\\text{exakt två krona}) = \\frac{\\text{antalet gynnsamma utfall}}{\\text{antalet möjliga utfall}} = \\frac{3}{8} = 0{,}375 $$
+
+**Svar:** $0{,}375$
+
+**b)** Alla utfall utom (kl, kl, kl) har minst en krona, alltså $8 - 1 = 7$ gynnsamma utfall:
+
+$$ P(\\text{minst en krona}) = \\frac{7}{8} = 0{,}875 $$
+
+**Svar:** $0{,}875$
+
+**c)** Varje nytt kast kan bli krona eller klave, så antalet utfall fördubblas för varje kast: 2, 4, 8, 16 och så vidare. Med $n$ kast finns $2^n$ lika sannolika utfall, och av dem saknar bara ett enda krona. Därför är
+
+$$ P(\\text{minst en krona}) = \\frac{2^n - 1}{2^n} = 1 - \\frac{1}{2^n} $$
+
+Sannolikheten är större än $0{,}99$ när $\\dfrac{1}{2^n}$ är mindre än $0{,}01$, alltså när $2^n$ är större än 100. Vi prövar:
+
+| $n$ | 5 | 6 | 7 |
+|---|---|---|---|
+| $2^n$ | 32 | 64 | 128 |
+
+Sex kast räcker inte, eftersom 64 är mindre än 100. Sju kast ger $P(\\text{minst en krona}) = \\dfrac{127}{128} \\approx 0{,}992$, som är större än $0{,}99$.
+
+**Svar:** 7 gånger
+
+**Generell slutsats:** när bara ett eller några få utfall är ogynnsamma är det enklast att räkna dem och dra bort från antalet möjliga utfall.`,
+        },
+        {
+            level: 3,
+            question: `I en påse finns bara röda och blå kulor. Sannolikheten att dra en röd kula är $\\dfrac{1}{3}$. När 5 röda kulor läggs i påsen blir sannolikheten att dra en röd kula $\\dfrac{1}{2}$.<br>a) Visa att det från början fanns dubbelt så många blå kulor som röda.<br>b) Hur många röda och hur många blå kulor fanns i påsen från början?`,
+            answer: { value: 5, unit: 'st' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 5, unit: 'st', etikett: 'röda' },
+                { del: 'b', value: 10, unit: 'st', etikett: 'blå' },
+            ],
+            solution: `**Insikten:** det finns två obekanta, antalet röda $r$ och antalet blå $b$, och två upplysningar som ger var sin ekvation. Antalet blå kulor ändras inte när de röda läggs till.
+
+**a)** Från början finns $r + b$ kulor, och $r$ av dem är röda:
+
+$$ P(\\text{röd}) = \\frac{\\text{antalet gynnsamma utfall}}{\\text{antalet möjliga utfall}} = \\frac{r}{r + b} = \\frac{1}{3} $$
+
+Att en tredjedel av kulorna är röda betyder att det totala antalet är tre gånger antalet röda:
+
+$$ r + b = 3r $$
+
+$$ r + b \\mathbin{\\boldsymbol{-}} \\boldsymbol{r} = 3r \\mathbin{\\boldsymbol{-}} \\boldsymbol{r} $$
+
+$$ b = 2r $$
+
+**Svar:** $b = 2r$, alltså dubbelt så många blå som röda.
+
+**b)** Efter tillägget finns $r + 5$ röda och fortfarande $b$ blå kulor. Sannolikheten $\\dfrac{1}{2}$ betyder att hälften av kulorna är röda, alltså att det finns lika många röda som blå:
+
+$$ r + 5 = b $$
+
+Från a) vet vi att $b = 2r$. Insatt i ekvationen ovan ger det
+
+$$ r + 5 = 2r $$
+
+$$ r + 5 \\mathbin{\\boldsymbol{-}} \\boldsymbol{r} = 2r \\mathbin{\\boldsymbol{-}} \\boldsymbol{r} $$
+
+$$ 5 = r $$
+
+Antalet blå är $b = 2r = 2 \\cdot 5 = 10$.
+
+Kontroll: från början $\\dfrac{5}{5 + 10} = \\dfrac{5}{15} = \\dfrac{1}{3}$. Efteråt $\\dfrac{5 + 5}{10 + 10} = \\dfrac{10}{20} = \\dfrac{1}{2}$. Båda stämmer.
+
+**Svar:** 5 röda och 10 blå kulor
+
+**Generell slutsats:** en känd sannolikhet säger bara något om *förhållandet* mellan antal, inte om antalen själva. För att bestämma två antal behövs två upplysningar, och då ger de två ekvationer.`,
+        },
+        {
+            level: 3,
+            question: `$n$ personer, bland dem Alva och Bo, sätter sig slumpmässigt på $n$ stolar som står i en rad. Ange svaren i a) och b) i decimalform med två decimaler.<br>a) Bestäm sannolikheten att Alva och Bo sitter bredvid varandra när $n = 3$.<br>b) Bestäm sannolikheten att Alva och Bo sitter bredvid varandra när $n = 4$.<br>c) Visa att sannolikheten att Alva och Bo sitter bredvid varandra är $\\dfrac{2}{n}$.`,
+            answer: { value: 0.5, unit: '' },
+            delsvar: [
+                { del: 'a', value: 0.67, unit: '', tol: 0.02 },
+                { del: 'b', value: 0.5, unit: '' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** det enda som avgör om Alva och Bo sitter bredvid varandra är *vilket par av stolar* de två får. Alla par är lika sannolika, så det räcker att räkna stolspar i stället för hela placeringar.
+
+**a)** Med tre personer, Alva (A), Bo (B) och en tredje person (C), finns sex lika sannolika placeringar:
+
+$$ \\text{ABC} \\quad \\text{ACB} \\quad \\text{BAC} \\quad \\text{BCA} \\quad \\text{CAB} \\quad \\text{CBA} $$
+
+Alva och Bo sitter bredvid varandra i ABC, BAC, CAB och CBA, alltså 4 gynnsamma utfall:
+
+$$ P(\\text{bredvid}) = \\frac{\\text{antalet gynnsamma utfall}}{\\text{antalet möjliga utfall}} = \\frac{4}{6} = \\frac{2}{3} \\approx 0{,}67 $$
+
+**Svar:** $\\dfrac{2}{3} \\approx 0{,}67$
+
+**b)** Med fyra personer finns många placeringar, men vi bryr oss bara om vilka två stolar Alva och Bo får. Numrera stolarna 1, 2, 3 och 4. De möjliga stolsparen är
+
+$$ \\{1, 2\\} \\quad \\{1, 3\\} \\quad \\{1, 4\\} \\quad \\{2, 3\\} \\quad \\{2, 4\\} \\quad \\{3, 4\\} $$
+
+alltså 6 lika sannolika par. Stolarna står bredvid varandra i $\\{1, 2\\}$, $\\{2, 3\\}$ och $\\{3, 4\\}$, alltså 3 gynnsamma par:
+
+$$ P(\\text{bredvid}) = \\frac{3}{6} = \\frac{1}{2} = 0{,}5 $$
+
+Samma metod ger svaret i a): av de tre stolsparen $\\{1, 2\\}$, $\\{1, 3\\}$ och $\\{2, 3\\}$ är två gynnsamma, och $\\dfrac{2}{3}$ stämmer.
+
+**Svar:** $0{,}5$
+
+**c)** *Antalet möjliga stolspar:* varje stol kan paras ihop med de $n - 1$ andra stolarna. Det ger $n(n - 1)$, men då har varje par räknats två gånger ($\\{1, 2\\}$ och $\\{2, 1\\}$ är samma par). Antalet par är därför $\\dfrac{n(n - 1)}{2}$.
+
+*Antalet gynnsamma stolspar:* i en rad med $n$ stolar finns $n - 1$ mellanrum mellan grannstolar, och varje mellanrum ger ett par grannstolar. Det ger $n - 1$ gynnsamma par.
+
+$$ P(\\text{bredvid}) = \\frac{n - 1}{\\dfrac{n(n - 1)}{2}} = \\frac{2(n - 1)}{n(n - 1)} = \\frac{2}{n} $$
+
+I sista steget förkortas bråket med $n - 1$. Kontroll: $n = 3$ ger $\\dfrac{2}{3}$ och $n = 4$ ger $\\dfrac{2}{4} = \\dfrac{1}{2}$, precis som i a) och b).
+
+**Svar:** Sannolikheten är $\\dfrac{2}{n}$.
+
+**Generell slutsats:** utfallsrummet kan ofta väljas smartare. Här räcker det att räkna stolspar i stället för hela placeringar, eftersom de övriga personernas platser inte påverkar händelsen.`,
+        },
+        {
+            level: 3,
+            question: `Två tärningar har vardera $n$ sidor, numrerade $1, 2, \\ldots, n$, och alla sidor är lika sannolika. Tärningarna kastas en gång.<br>a) Bestäm sannolikheten att den första tärningen visar ett större tal än den andra när $n = 6$. Ange svaret i decimalform med tre decimaler.<br>b) Visa att sannolikheten att den första tärningen visar ett större tal än den andra är $\\dfrac{n - 1}{2n}$.<br>c) Hur många sidor har tärningarna om sannolikheten att den första visar ett större tal än den andra är $0{,}45$?`,
+            answer: { value: 10, unit: 'sidor' },
+            delsvar: [
+                { del: 'a', value: 0.417, unit: '', tol: 0.01 },
+                { del: 'b' },
+                { del: 'c', value: 10, unit: 'sidor' },
+            ],
+            solution: `**Insikten:** symmetri. För varje utfall där den första tärningen visar störst finns ett spegelutfall där den andra visar störst, till exempel (5, 2) och (2, 5). När utfallen med lika tal tagits bort delas resten alltså exakt på mitten.
+
+**a)** Med $n = 6$ finns $6 \\cdot 6 = 36$ lika sannolika utfall. Sex av dem visar lika tal: (1, 1), (2, 2), …, (6, 6). Kvar blir $36 - 6 = 30$ utfall, och enligt symmetrin visar den första tärningen störst i hälften av dem, $\\dfrac{30}{2} = 15$:
+
+$$ P(\\text{första störst}) = \\frac{\\text{antalet gynnsamma utfall}}{\\text{antalet möjliga utfall}} = \\frac{15}{36} \\approx 0{,}417 $$
+
+Kontroll genom att räkna i utfallsrummet: visar den andra tärningen 1 kan den första visa 2–6 (5 utfall), visar den 2 kan den första visa 3–6 (4 utfall) och så vidare: $5 + 4 + 3 + 2 + 1 = 15$. Stämmer.
+
+**Svar:** $\\dfrac{15}{36} \\approx 0{,}417$
+
+**b)** Med $n$ sidor finns $n \\cdot n = n^2$ lika sannolika utfall. Av dem visar $n$ lika tal. Kvar blir $n^2 - n$ utfall, och den första tärningen visar störst i hälften av dem, $\\dfrac{n^2 - n}{2}$:
+
+$$ P(\\text{första störst}) = \\frac{\\dfrac{n^2 - n}{2}}{n^2} = \\frac{n^2 - n}{2n^2} = \\frac{n(n - 1)}{2n \\cdot n} = \\frac{n - 1}{2n} $$
+
+I sista steget förkortas bråket med $n$. Kontroll: $n = 6$ ger $\\dfrac{5}{12} = \\dfrac{15}{36}$, som i a).
+
+**Svar:** Sannolikheten är $\\dfrac{n - 1}{2n}$.
+
+**c)** Vi sätter uttrycket från b) lika med $0{,}45$ och löser ut $n$:
+
+$$ \\frac{n - 1}{2n} = 0{,}45 $$
+
+$$ \\frac{n - 1}{2n} \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{2n} = 0{,}45 \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{2n} $$
+
+$$ n - 1 = 0{,}9n $$
+
+$$ n - 1 \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}9n} = 0{,}9n \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}9n} $$
+
+$$ 0{,}1n - 1 = 0 $$
+
+$$ 0{,}1n - 1 \\mathbin{\\boldsymbol{+}} \\boldsymbol{1} = 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{1} $$
+
+$$ 0{,}1n = 1 $$
+
+$$ \\frac{0{,}1n}{\\boldsymbol{0{,}1}} = \\frac{1}{\\boldsymbol{0{,}1}} $$
+
+$$ n = 10 $$
+
+Kontroll: $\\dfrac{10 - 1}{2 \\cdot 10} = \\dfrac{9}{20} = 0{,}45$. Stämmer.
+
+**Svar:** 10 sidor
+
+**Generell slutsats:** sannolikheten $\\dfrac{n - 1}{2n}$ är alltid lite mindre än $\\dfrac{1}{2}$, eftersom utfallen med lika tal inte tillhör någon av de två. Ju fler sidor, desto mindre andel av utfallen visar lika tal, och desto närmare $\\dfrac{1}{2}$ kommer sannolikheten.`,
         },
     ],
 
@@ -31178,23 +32303,306 @@ $$ P(\\text{pojke}) = \\frac{2\\ 489}{4\\ 850} = 0{,}5132\\ldots \\approx 51{,}3
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Elvin kastar ett mynt 10 gånger och får 7 kronor. Han säger: "Myntet är skevt — sannolikheten för krona är 70 %!" Vad är den viktigaste invändningen?`,
+            question: `Elvin kastar ett mynt 10 gånger och får 7 kronor. Han säger: "Myntet är skevt, sannolikheten för krona är 70&nbsp;%!" Vad är den viktigaste invändningen?`,
             choices: [
-                `Han har rätt — relativ frekvens är alltid sannolikheten`,
-                `Mynt kan aldrig vara skeva`,
-                `10 kast är alldeles för få — den relativa frekvensen varierar kraftigt vid små försöksantal`,
-                `Sannolikheten för krona kan aldrig vara något annat än exakt 50 %`,
+                `Han har rätt, eftersom den relativa frekvensen alltid är lika med sannolikheten`,
+                `Ett mynt kan aldrig vara skevt`,
+                `10 kast är alldeles för få, eftersom den relativa frekvensen varierar kraftigt när antalet försök är litet`,
+                `Sannolikheten för krona kan aldrig vara något annat än exakt 50&nbsp;%`,
             ],
             correct: 2,
-            solution: `**Insikten:** relativ frekvens närmar sig sannolikheten först vid MÅNGA försök — små stickprov svänger vilt.
+            solution: `**Insikten:** den relativa frekvensen närmar sig sannolikheten först efter många försök. Efter få försök svänger den kraftigt av ren slump.
 
-Jämför med straffexemplet i genomgången: efter 1 straff var frekvensen 100 %, efter 5 straffar 40 %, och först efter många försök stabiliserades den kring 70 %. Med bara 10 myntkast är 7 kronor inget konstigt alls — det inträffar för ett ärligt mynt i drygt 11 % av serierna.
+Jämför med straffexemplet i genomgången: efter 1 straff var den relativa frekvensen 100&nbsp;%, efter 5 straffar 40&nbsp;%, och först efter många straffar stabiliserades den kring 70&nbsp;%.
 
-Vill Elvin påstå att myntet är skevt behöver han många fler kast (hundratals) — och gärna en jämförelse mot felmarginalen.
+Med bara 10 kast är 7 kronor inget konstigt alls. Ett ärligt mynt ger exakt 7 kronor i knappt 12&nbsp;% av alla serier om tio kast, och minst 7 kronor i ungefär 17&nbsp;% av dem.
 
-**Svar:** 10 kast är för få — frekvensen har inte hunnit stabilisera sig.
+Vill Elvin påstå att myntet är skevt behöver han kasta det betydligt fler gånger, hundratals kast, och se om den relativa frekvensen fortfarande ligger långt från 50&nbsp;%.
 
-**Generell slutsats:** "ju fler försök, desto mer exakt" är hela kärnan i experimentella sannolikheter. Enstaka avvikelser i små serier är slump, inte bevis.`,
+Påståendet att ett mynt aldrig kan vara skevt, eller att sannolikheten alltid är exakt 50&nbsp;%, stämmer inte heller: ett böjt eller ojämnt mynt kan mycket väl vara skevt. Det är just därför man gör försök.
+
+**Svar:** 10 kast är för få. Den relativa frekvensen har inte hunnit stabilisera sig.
+
+**Generell slutsats:** "ju fler försök, desto säkrare värde" är kärnan i experimentella sannolikheter. En avvikelse i en liten serie är oftast slump, inte bevis.`,
+        },
+        {
+            level: 3,
+            question: `Adam och Bea undersöker hur ofta en flaskkork landar med öppningen uppåt. Adam kastar korken 20 gånger och får öppningen uppåt i 60&nbsp;% av kasten. Bea kastar samma kork 180 gånger och får öppningen uppåt i 40&nbsp;% av kasten. Adam säger: "Medelvärdet av våra resultat är 50&nbsp;%, så sannolikheten är 50&nbsp;%."<br>a) Bestäm den bästa uppskattningen av sannolikheten med hjälp av alla kast. Ange svaret i procent.<br>b) Förklara vad som är fel i Adams resonemang.`,
+            answer: { value: 42, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 42, unit: '%', etikett: '$P(\\text{öppningen uppåt}) \\approx$' },
+                { del: 'b' },
+            ],
+            solution: `**Insikten:** en relativ frekvens räknas på antalet gånger händelsen inträffat och antalet försök. Två procentsatser får inte medelvärdesbildas när de bygger på olika många försök.
+
+**a)** Först antalet kast med öppningen uppåt för var och en. Antalet är andelen gånger antalet kast:
+
+$$ \\text{Adam: } 0{,}60 \\cdot 20 = 12 $$
+
+$$ \\text{Bea: } 0{,}40 \\cdot 180 = 72 $$
+
+Tillsammans har de gjort $20 + 180 = 200$ kast, och öppningen kom uppåt $12 + 72 = 84$ gånger. Relativ frekvens är antalet gånger händelsen inträffat delat med antalet försök:
+
+$$ \\frac{84}{200} = 0{,}42 = 42\\ \\% $$
+
+**Svar:** 42&nbsp;%
+
+**b)** Adam ger sina 20 kast lika stor vikt som Beas 180 kast. Men Beas serie är nio gånger så lång och därför mycket mer pålitlig. Ju fler försök, desto säkrare är den relativa frekvensen. Därför ska alla 200 kast räknas tillsammans, och då hamnar resultatet nära Beas 40&nbsp;%, inte mitt emellan.
+
+**Svar:** Medelvärdet behandlar de två serierna som lika viktiga fast Beas serie har nio gånger så många kast. Rätt är att lägga ihop alla kast och räkna den relativa frekvensen på totalen.
+
+**Generell slutsats:** experimentella resultat slås ihop genom att antalen läggs ihop, aldrig genom att procentsatserna medelvärdesbildas.`,
+        },
+        {
+            level: 3,
+            question: `Lisa kastar två vanliga tärningar 360 gånger och räknar ut summan av prickarna varje gång. Summan blir 7 i 61 av kasten. Lisa resonerar så här: "Summan kan bli 2, 3, 4, … , 12, alltså 11 olika summor. Sannolikheten för summan 7 är därför $\\dfrac{1}{11}$."<br>a) Bestäm den relativa frekvensen för summan 7 i Lisas försök. Ange svaret i procent med en decimal.<br>b) Visa att Lisas resonemang är fel, och bestäm den rätta sannolikheten för summan 7. Ange svaret i procent med en decimal.<br>c) Stämmer Lisas försök bäst med hennes egen sannolikhet eller med den du räknade fram i b)?`,
+            answer: { value: 16.7, unit: '%', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 16.9, unit: '%', tol: 0.01, etikett: 'relativ frekvens' },
+                { del: 'b', value: 16.7, unit: '%', tol: 0.01, etikett: '$P(\\text{summan } 7) \\approx$' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** den klassiska sannolikhetsdefinitionen kräver att utfallen är lika sannolika. De 11 summorna är det inte, precis som "träffas av en meteorit eller inte" inte är två lika sannolika utfall.
+
+**a)** Relativ frekvens är antalet gånger händelsen inträffat delat med antalet försök:
+
+$$ \\frac{61}{360} = 0{,}1694\\ldots \\approx 16{,}9\\ \\% $$
+
+**Svar:** 16,9&nbsp;%
+
+**b)** De lika sannolika utfallen är inte summorna utan kombinationerna av de två tärningarna. Tabellen visar summan för varje kombination. Raden är den första tärningen, kolumnen den andra:
+
+| + | 1 | 2 | 3 | 4 | 5 | 6 |
+| --- | --- | --- | --- | --- | --- | --- |
+| **1** | 2 | 3 | 4 | 5 | 6 | **7** |
+| **2** | 3 | 4 | 5 | 6 | **7** | 8 |
+| **3** | 4 | 5 | 6 | **7** | 8 | 9 |
+| **4** | 5 | 6 | **7** | 8 | 9 | 10 |
+| **5** | 6 | **7** | 8 | 9 | 10 | 11 |
+| **6** | **7** | 8 | 9 | 10 | 11 | 12 |
+
+Det finns $6 \\cdot 6 = 36$ lika sannolika kombinationer. Summan 7 förekommer i 6 av dem, men summan 2 bara i en (1 och 1). Summorna är alltså inte lika sannolika, och därför går det inte att räkna med $\\dfrac{1}{11}$.
+
+Sannolikheten är antalet gynnsamma utfall delat med antalet möjliga utfall:
+
+$$ P(\\text{summan } 7) = \\frac{6}{36} = \\frac{1}{6} = 0{,}1666\\ldots \\approx 16{,}7\\ \\% $$
+
+**Svar:** $P(\\text{summan } 7) = \\dfrac{1}{6}$, alltså cirka 16,7&nbsp;%
+
+**c)** Lisas egen sannolikhet är $\\dfrac{1}{11} \\approx 9{,}1\\ \\%$. Med den skulle summan 7 komma ungefär $360 \\cdot \\dfrac{1}{11} \\approx 33$ gånger. Med sannolikheten $\\dfrac{1}{6}$ skulle den komma ungefär $360 \\cdot \\dfrac{1}{6} = 60$ gånger. Lisa fick 61 gånger, och den relativa frekvensen 16,9&nbsp;% ligger mycket nära 16,7&nbsp;%.
+
+**Svar:** Försöket stämmer med sannolikheten $\\dfrac{1}{6}$ från b), inte med Lisas $\\dfrac{1}{11}$.
+
+**Generell slutsats:** ett försök kan avslöja ett felaktigt resonemang. När den relativa frekvensen efter många försök ligger långt från en uträknad sannolikhet ska man misstänka att utfallen inte var lika sannolika.`,
+        },
+        {
+            level: 3,
+            question: `En tidning skriver: "De flesta cyklister som får en skallskada bär hjälm." Under ett år fick 48 cyklister med hjälm och 32 cyklister utan hjälm en skallskada i en kommun. I kommunen cyklade 4&nbsp;000 personer med hjälm och 800 personer utan hjälm.<br>a) Bestäm den relativa frekvensen för skallskada bland cyklisterna med hjälm och bland cyklisterna utan hjälm. Ange svaren i procent.<br>b) Hur många gånger så stor var risken för skallskada utan hjälm som med hjälm?<br>c) Förklara varför tidningens påstående inte visar att hjälmen är farlig.`,
+            answer: { value: 3.3, unit: 'gånger', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 1.2, unit: '%', etikett: 'med hjälm' },
+                { del: 'a', value: 4, unit: '%', etikett: 'utan hjälm' },
+                { del: 'b', value: 3.3, unit: 'gånger', tol: 0.02 },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** antalet skadade säger ingenting om risken förrän det delas med antalet som cyklar. Det är de relativa frekvenserna som ska jämföras, inte antalen.
+
+**a)** Relativ frekvens är antalet gånger händelsen inträffat delat med antalet i gruppen.
+
+Med hjälm:
+
+$$ \\frac{48}{4\\,000} = 0{,}012 = 1{,}2\\ \\% $$
+
+Utan hjälm:
+
+$$ \\frac{32}{800} = 0{,}04 = 4\\ \\% $$
+
+**Svar:** Med hjälm 1,2&nbsp;%, utan hjälm 4&nbsp;%
+
+**b)** Vi jämför de två relativa frekvenserna genom att dela den ena med den andra:
+
+$$ \\frac{0{,}04}{0{,}012} = 3{,}333\\ldots \\approx 3{,}3 $$
+
+**Svar:** Ungefär 3,3 gånger så stor
+
+**c)** Fler skadade bär hjälm bara därför att mycket fler cyklister bär hjälm: 4&nbsp;000 mot 800, alltså fem gånger så många. Räknat per cyklist är risken för skallskada drygt tre gånger så stor utan hjälm.
+
+Siffrorna visar ett samband, men inte helt säkert att hjälmen är orsaken. De som cyklar utan hjälm kan också skilja sig på andra sätt, till exempel i hur fort eller var de cyklar. Men påståendet att hjälmen är farlig stöds i alla fall inte alls.
+
+**Svar:** Påståendet jämför antal i stället för andelar. Eftersom fem gånger så många cyklar med hjälm blir antalet skadade större där, fast risken per cyklist är mindre.
+
+**Generell slutsats:** jämför alltid relativa frekvenser när grupperna är olika stora. Ett stort antal i en stor grupp kan vara en liten andel.`,
+        },
+        {
+            level: 3,
+            question: `För att uppskatta hur många abborrar som finns i en liten sjö fångar en forskare 60 abborrar, märker dem och släpper tillbaka dem. En vecka senare fångar hon 80 abborrar, och 12 av dem är märkta.<br>a) Bestäm den relativa frekvensen för märkta abborrar i den andra fångsten. Ange svaret i procent.<br>b) Uppskatta hur många abborrar det finns i sjön.<br>c) Ange två antaganden som måste gälla för att uppskattningen ska vara rimlig.`,
+            answer: { value: 400, unit: 'st' },
+            delsvar: [
+                { del: 'a', value: 15, unit: '%', etikett: 'märkta' },
+                { del: 'b', value: 400, unit: 'st', etikett: 'antal abborrar' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** den andra fångsten är ett försök. Andelen märkta abborrar i fångsten är en experimentell uppskattning av andelen märkta abborrar i hela sjön, och den andelen är 60 delat med det okända totala antalet.
+
+**a)** Relativ frekvens är antalet märkta delat med antalet fångade:
+
+$$ \\frac{12}{80} = 0{,}15 = 15\\ \\% $$
+
+**Svar:** 15&nbsp;%
+
+**b)** Kalla antalet abborrar i sjön för $N$. Av dem är 60 märkta, så andelen märkta i sjön är $\\dfrac{60}{N}$. Den ska vara lika med andelen i fångsten:
+
+$$ \\frac{60}{N} = 0{,}15 $$
+
+$$ \\frac{60}{N} \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{N} = 0{,}15 \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{N} $$
+
+$$ 60 = 0{,}15N $$
+
+$$ \\frac{60}{\\boldsymbol{0{,}15}} = \\frac{0{,}15N}{\\boldsymbol{0{,}15}} $$
+
+$$ 400 = N $$
+
+Kontroll: 60 märkta av 400 abborrar är $\\dfrac{60}{400} = 0{,}15$, samma andel som i fångsten.
+
+Rimlighet: sjön måste ha minst $60 + 80 - 12 = 128$ olika abborrar, eftersom så många har fångats. 400 är fler än så.
+
+**Svar:** Ungefär 400 abborrar
+
+**c)** Till exempel:
+- De märkta abborrarna har hunnit blanda sig jämnt med de andra innan den andra fångsten.
+- Antalet abborrar i sjön är detsamma under veckan, alltså inga eller få som dött, fötts eller flyttat.
+- Märkta och omärkta abborrar är lika lätta att fånga, och inga märken har lossnat.
+
+**Svar:** Till exempel att de märkta abborrarna har blandats jämnt med de andra och att antalet abborrar inte ändrats under veckan.
+
+**Generell slutsats:** en experimentell sannolikhet kan användas baklänges. Är andelen känd ur ett försök och en del av helheten känd, kan helheten uppskattas.`,
+        },
+        {
+            level: 3,
+            question: `Nora har lagt ett antal straffar, och 70&nbsp;% av dem har blivit mål. Sedan gör hon mål på 10 straffar i rad, och den relativa frekvensen för mål blir då 75&nbsp;%.<br>a) Hur många straffar hade Nora lagt innan de 10 målen i rad?<br>b) Hur många ytterligare mål i rad krävs efter det för att den relativa frekvensen ska bli 80&nbsp;%?<br>c) Kan den relativa frekvensen någonsin bli 100&nbsp;% om Nora fortsätter att göra mål på varje straff? Motivera.`,
+            answer: { value: 50, unit: 'straffar' },
+            delsvar: [
+                { del: 'a', value: 50, unit: 'straffar' },
+                { del: 'b', value: 15, unit: 'mål' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** den relativa frekvensen är antalet mål delat med antalet straffar. Kallas det okända antalet för $n$ kan både före och efter skrivas med $n$, och då blir det en ekvation.
+
+**a)** Före: $n$ straffar och $0{,}7n$ mål. Efter: $n + 10$ straffar och $0{,}7n + 10$ mål. Antalet mål ska vara 75&nbsp;% av antalet straffar:
+
+$$ 0{,}7n + 10 = 0{,}75(n + 10) $$
+
+$$ 0{,}7n + 10 = 0{,}75n + 7{,}5 $$
+
+$$ 0{,}7n + 10 \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}7n} = 0{,}75n + 7{,}5 \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}7n} $$
+
+$$ 10 = 0{,}05n + 7{,}5 $$
+
+$$ 10 \\mathbin{\\boldsymbol{-}} \\boldsymbol{7{,}5} = 0{,}05n + 7{,}5 \\mathbin{\\boldsymbol{-}} \\boldsymbol{7{,}5} $$
+
+$$ 2{,}5 = 0{,}05n $$
+
+$$ \\frac{2{,}5}{\\boldsymbol{0{,}05}} = \\frac{0{,}05n}{\\boldsymbol{0{,}05}} $$
+
+$$ 50 = n $$
+
+Kontroll: före 50 straffar och $0{,}7 \\cdot 50 = 35$ mål. Efter 60 straffar och 45 mål, och $\\dfrac{45}{60} = 0{,}75 = 75\\ \\%$. Stämmer.
+
+**Svar:** 50 straffar
+
+**b)** Nu har Nora 45 mål på 60 straffar. Kalla antalet ytterligare mål i rad för $k$. Då blir antalet mål $45 + k$ och antalet straffar $60 + k$, och antalet mål ska vara 80&nbsp;% av antalet straffar:
+
+$$ 45 + k = 0{,}8(60 + k) $$
+
+$$ 45 + k = 48 + 0{,}8k $$
+
+$$ 45 + k \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}8k} = 48 + 0{,}8k \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}8k} $$
+
+$$ 45 + 0{,}2k = 48 $$
+
+$$ 45 + 0{,}2k \\mathbin{\\boldsymbol{-}} \\boldsymbol{45} = 48 \\mathbin{\\boldsymbol{-}} \\boldsymbol{45} $$
+
+$$ 0{,}2k = 3 $$
+
+$$ \\frac{0{,}2k}{\\boldsymbol{0{,}2}} = \\frac{3}{\\boldsymbol{0{,}2}} $$
+
+$$ k = 15 $$
+
+Kontroll: $\\dfrac{45 + 15}{60 + 15} = \\dfrac{60}{75} = 0{,}8 = 80\\ \\%$. Stämmer.
+
+**Svar:** 15 mål i rad
+
+**c)** Nora har 15 missar efter de 60 straffarna, eftersom $60 - 45 = 15$. Missarna försvinner aldrig. Efter $k$ nya mål är den relativa frekvensen
+
+$$ \\frac{45 + k}{60 + k} $$
+
+och nämnaren är alltid 15 större än täljaren. Bråket är därför alltid mindre än 1, alltså mindre än 100&nbsp;%. Det kommer närmare och närmare 100&nbsp;% ju fler mål hon gör, men når aldrig dit.
+
+**Svar:** Nej. De 15 missarna finns kvar, så antalet mål är alltid 15 mindre än antalet straffar.
+
+**Generell slutsats:** ju fler försök som redan gjorts, desto mer krävs för att flytta den relativa frekvensen. Det är samma sak som att den stabiliserar sig när antalet försök blir stort.`,
+        },
+        {
+            level: 3,
+            question: `En träningsapp visar den exakta relativa frekvensen för träffar, utan avrundning. Efter ett antal skott visar appen att Mira har träffat på 37,5&nbsp;% av sina skott.<br>a) Vilket är det minsta antal skott Mira kan ha skjutit?<br>b) Mira skjuter ett skott till, och nu visar appen 40&nbsp;%. Hur många skott har Mira skjutit totalt nu?`,
+            answer: { value: 25, unit: 'skott' },
+            delsvar: [
+                { del: 'a', value: 8, unit: 'skott' },
+                { del: 'b', value: 25, unit: 'skott' },
+            ],
+            solution: `**Insikten:** en exakt relativ frekvens är ett bråk, antalet träffar delat med antalet skott. Skrivs procentsatsen som ett förkortat bråk avslöjar nämnaren vilka antal skott som är möjliga.
+
+**a)** Skriv 37,5&nbsp;% som ett bråk och förkorta så långt det går:
+
+$$ 37{,}5\\ \\% = 0{,}375 = \\frac{375}{1\\,000} = \\frac{3}{8} $$
+
+Antalet träffar delat med antalet skott ska alltså bli $\\dfrac{3}{8}$. Det går bara om antalet skott är 8, 16, 24 och så vidare, med 3, 6, 9 … träffar. Med färre än 8 skott går $\\dfrac{3}{8}$ inte att få, eftersom bråket inte kan förkortas mer.
+
+**Svar:** 8 skott
+
+**b)** Före det nya skottet har Mira skjutit $8m$ skott och träffat $3m$ gånger, där $m$ är ett positivt heltal. Det nya skottet är antingen en träff eller en miss, så vi prövar båda.
+
+**Om det nya skottet var en miss** blir antalet träffar $3m$ och antalet skott $8m + 1$. Antalet träffar ska vara 40&nbsp;% av antalet skott:
+
+$$ 3m = 0{,}4(8m + 1) $$
+
+$$ 3m = 3{,}2m + 0{,}4 $$
+
+$$ 3m \\mathbin{\\boldsymbol{-}} \\boldsymbol{3{,}2m} = 3{,}2m + 0{,}4 \\mathbin{\\boldsymbol{-}} \\boldsymbol{3{,}2m} $$
+
+$$ -0{,}2m = 0{,}4 $$
+
+$$ \\frac{-0{,}2m}{\\boldsymbol{-0{,}2}} = \\frac{0{,}4}{\\boldsymbol{-0{,}2}} $$
+
+$$ m = -2 $$
+
+Ett negativt antal skott är omöjligt, så det nya skottet kan inte ha varit en miss. Det är också logiskt: en miss sänker den relativa frekvensen, men den steg från 37,5&nbsp;% till 40&nbsp;%.
+
+**Om det nya skottet var en träff** blir antalet träffar $3m + 1$ och antalet skott $8m + 1$:
+
+$$ 3m + 1 = 0{,}4(8m + 1) $$
+
+$$ 3m + 1 = 3{,}2m + 0{,}4 $$
+
+$$ 3m + 1 \\mathbin{\\boldsymbol{-}} \\boldsymbol{3m} = 3{,}2m + 0{,}4 \\mathbin{\\boldsymbol{-}} \\boldsymbol{3m} $$
+
+$$ 1 = 0{,}2m + 0{,}4 $$
+
+$$ 1 \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}4} = 0{,}2m + 0{,}4 \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}4} $$
+
+$$ 0{,}6 = 0{,}2m $$
+
+$$ \\frac{0{,}6}{\\boldsymbol{0{,}2}} = \\frac{0{,}2m}{\\boldsymbol{0{,}2}} $$
+
+$$ 3 = m $$
+
+Före det nya skottet hade Mira alltså skjutit $8 \\cdot 3 = 24$ skott med $3 \\cdot 3 = 9$ träffar. Nu har hon skjutit 25 skott med 10 träffar.
+
+Kontroll: $\\dfrac{9}{24} = 0{,}375 = 37{,}5\\ \\%$ och $\\dfrac{10}{25} = 0{,}4 = 40\\ \\%$. Stämmer.
+
+**Svar:** 25 skott
+
+**Generell slutsats:** en exakt relativ frekvens bestämmer inte antalet försök, bara vilka antal som är möjliga. En upplysning till, här att ett enda skott ändrade frekvensen från 37,5&nbsp;% till 40&nbsp;%, kan räcka för att bestämma antalet helt.`,
         },
     ],
 
@@ -31272,29 +32680,313 @@ $\\dfrac{1}{18}$ vore $3 \\cdot \\dfrac{1}{6} \\cdot \\dfrac{1}{6}$... sannolikh
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Ur en kortlek (52 kort, 4 ess) drar du två kort utan återläggning. Vad är sannolikheten att BÅDA är ess? Svara i bråkform.`,
-            choices: [
-                `$\\dfrac{2}{52}$`,
-                `$\\dfrac{1}{2\\ 652}$`,
-                `$\\dfrac{1}{221}$`,
-                `$\\dfrac{1}{169}$`,
+            question: `En vanlig tärning har visat en sexa i fem kast i rad. Kim säger: "Nu är det dags för något annat. Sannolikheten för en sexa i nästa kast måste vara mindre än vanligt."<br>a) Hur stor är sannolikheten att det sjätte kastet blir en sexa? Svara i decimalform med tre decimaler.<br>b) Innan det första kastet gjordes: hur stor var sannolikheten att alla sex kasten skulle bli sexor? Svara i bråkform.<br>c) Förklara varför svaren i a) och b) inte motsäger varandra, och vad som är fel i Kims resonemang.`,
+            answer: { value: 0.167, unit: '', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 0.167, unit: '', tol: 0.01, etikett: '$P(\\text{sexa}) \\approx$' },
+                { del: 'b', value: 0.0000214335, unit: '', tol: 0.01, etikett: '$P(\\text{sex sexor}) =$' },
+                { del: 'c' },
             ],
-            correct: 2,
-            solution: `**Insikten:** utan återläggning ändras BÅDE täljare och nämnare till andra dragningen.
+            solution: `**Insikten:** tärningen har inget minne. De fem kast som redan är gjorda är inte längre slump, de har hänt. Bara det kast som återstår är osäkert.
 
-Första kortet: $P(\\text{ess}) = \\dfrac{4}{52}$.
+**a)** Kasten är oberoende händelser: sannolikheten för en sexa påverkas inte av vad tärningen visat tidigare. Det sjätte kastet är ett vanligt kast med sex lika sannolika utfall, varav ett är gynnsamt:
 
-Andra kortet, givet att ett ess redan dragits: 3 ess kvar av 51 kort, $P = \\dfrac{3}{51}$.
+$$ P(\\text{sexa}) = \\frac{\\text{antal gynnsamma utfall}}{\\text{antal möjliga utfall}} = \\frac{1}{6} \\approx 0{,}167 $$
 
-Produktregeln:
+**Svar:** $\\dfrac{1}{6} \\approx 0{,}167$
 
-$$ \\frac{4}{52} \\cdot \\frac{3}{51} = \\frac{12}{2\\ 652} = \\frac{1}{221} $$
+**b)** Före det första kastet ska sex oberoende händelser alla inträffa. Produktregeln ger
 
-($\\dfrac{1}{169} = \\dfrac{4}{52} \\cdot \\dfrac{4}{52}$ vore svaret MED återläggning — skillnaden är just beroendet.)
+$$ P(\\text{sex sexor}) = \\frac{1}{6} \\cdot \\frac{1}{6} \\cdot \\frac{1}{6} \\cdot \\frac{1}{6} \\cdot \\frac{1}{6} \\cdot \\frac{1}{6} = \\left(\\frac{1}{6}\\right)^6 = \\frac{1}{46\\,656} $$
 
-**Svar:** $\\dfrac{1}{221}$
+**Svar:** $\\dfrac{1}{46\\,656}$
 
-**Generell slutsats:** fråga alltid "ändras förutsättningarna mellan händelserna?" — utan återläggning minskar både antalet gynnsamma och antalet möjliga utfall med varje dragning.`,
+**c)** Svaren beskriver två olika frågor. I b) är alla sex kasten osäkra, och då är det mycket osannolikt att alla blir sexor. I a) har fem av dem redan hänt. Produkten i b) kan skrivas
+
+$$ \\underbrace{\\left(\\frac{1}{6}\\right)^5}_{\\text{fem sexor (har hänt)}} \\cdot \\underbrace{\\frac{1}{6}}_{\\text{sjätte kastet}} $$
+
+och när de fem första faktorerna redan är ett faktum återstår bara den sista, $\\dfrac{1}{6}$.
+
+Kims fel är att tro att tärningen "minns" sexorna och kompenserar för dem. Jämför: före första kastet är sannolikheten för fem sexor följda av en etta
+
+$$ \\left(\\frac{1}{6}\\right)^5 \\cdot \\frac{1}{6} = \\frac{1}{46\\,656} $$
+
+alltså exakt lika stor som för sex sexor. Ett "något annat" i sista kastet är inte mer sannolikt än en sexa.
+
+**Svar:** a) gäller ett enda kast när fem redan är gjorda, b) gäller alla sex kasten innan något är gjort. Kasten är oberoende, så sannolikheten för en sexa är alltid $\\dfrac{1}{6}$ hur många sexor som än kommit innan.
+
+**Generell slutsats:** produktregeln räknar på det som ännu inte har hänt. Det som redan har hänt har sannolikheten 1 och ändrar inte oberoende händelser framåt.`,
+        },
+        {
+            level: 3,
+            question: `En armatur har tre lampor, och den räknas som felfri bara om alla tre lamporna håller hela garantitiden. Lamporna går sönder oberoende av varandra, och varje lampa håller garantitiden med sannolikheten $p$.<br>a) Hur stor är sannolikheten att armaturen är felfri om $p = 0{,}95$? Svara i procent med en decimal.<br>b) Tillverkaren vill att minst 90&nbsp;% av armaturerna ska vara felfria. Hur stor måste $p$ minst vara? Svara i procent med en decimal.<br>c) En större armatur har sex lampor och samma krav på 90&nbsp;%. Hur stor måste $p$ då minst vara? Svara i procent med en decimal.`,
+            answer: { value: 96.6, unit: '%', tol: 0.002 },
+            delsvar: [
+                { del: 'a', value: 85.7, unit: '%', tol: 0.002, etikett: 'felfri armatur' },
+                { del: 'b', value: 96.6, unit: '%', tol: 0.002, etikett: '$p \\geq$' },
+                { del: 'c', value: 98.3, unit: '%', tol: 0.002, etikett: '$p \\geq$' },
+            ],
+            solution: `**Insikten:** produktregeln kan läsas baklänges. När kravet gäller hela produkten, $p^3 \\geq 0{,}9$, blir den enskilda sannolikheten $p$ en obekant som löses ut med en rot.
+
+**a)** Armaturen är felfri när lampa 1 håller och lampa 2 håller och lampa 3 håller. Lamporna är oberoende, så produktregeln ger
+
+$$ P(\\text{felfri}) = 0{,}95 \\cdot 0{,}95 \\cdot 0{,}95 = 0{,}95^3 = 0{,}857375 \\approx 85{,}7\\ \\% $$
+
+Trots att varje lampa är bra blir ungefär var sjunde armatur felaktig.
+
+**Svar:** 85,7&nbsp;%
+
+**b)** Med sannolikheten $p$ för varje lampa blir $P(\\text{felfri}) = p^3$. Gränsen är där produkten är precis 0,9:
+
+$$ p^3 = 0{,}9 $$
+
+Vi drar tredjeroten ur båda led:
+
+$$ \\boldsymbol{\\sqrt[3]{p^3}} = \\boldsymbol{\\sqrt[3]{0{,}9}} $$
+
+$$ p = 0{,}96548\\ldots $$
+
+Avrundat nedåt till 96,5&nbsp;% räcker det inte, eftersom $0{,}965^3 \\approx 0{,}899 < 0{,}9$. Med 96,6&nbsp;% blir $0{,}966^3 \\approx 0{,}901$, som uppfyller kravet. Därför avrundas uppåt.
+
+**Svar:** $p$ måste vara minst 96,6&nbsp;%
+
+**c)** Med sex lampor blir $P(\\text{felfri}) = p^6$:
+
+$$ p^6 = 0{,}9 $$
+
+Vi drar sjätteroten ur båda led:
+
+$$ \\boldsymbol{\\sqrt[6]{p^6}} = \\boldsymbol{\\sqrt[6]{0{,}9}} $$
+
+$$ p = 0{,}98259\\ldots $$
+
+Kontroll: $0{,}983^6 \\approx 0{,}902$, som räcker, medan $0{,}982^6 \\approx 0{,}897$ inte gör det.
+
+**Svar:** $p$ måste vara minst 98,3&nbsp;%
+
+**Generell slutsats:** ju fler delar som alla måste fungera, desto pålitligare måste varje del vara. Varje ny faktor i produkten är mindre än 1 och drar ner helheten.`,
+        },
+        {
+            level: 3,
+            question: `En klass har 12 tjejer och 18 killar. Tre elever lottas till elevrådet, och samma elev kan inte lottas två gånger. Linus räknar ut sannolikheten att alla tre blir tjejer så här:
+
+$$ \\frac{12}{30} \\cdot \\frac{12}{30} \\cdot \\frac{12}{30} = 0{,}064 $$
+
+a) Vilket misstag gör Linus?<br>b) Beräkna sannolikheten korrekt. Svara i procent med en decimal.<br>c) Förklara varför Linus metod alltid ger ett för stort svar i en sådan här uppgift.`,
+            answer: { value: 5.4, unit: '%', tol: 0.01 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 5.4, unit: '%', tol: 0.01, etikett: '$P(\\text{tre tjejer}) \\approx$' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** en elev som redan är lottad kan inte lottas igen. Det är en dragning utan återläggning, alltså beroende händelser, och varje ny faktor måste räknas på den klass som finns kvar.
+
+**a)** Linus behandlar lottningarna som oberoende, som om den första eleven lades tillbaka i klassen innan nästa lottades. Han använder $\\dfrac{12}{30}$ i alla tre faktorerna.
+
+**Svar:** Linus räknar som om dragningarna vore oberoende (med återläggning), men de är beroende.
+
+**b)** Vid första lottningen är 12 av 30 elever tjejer. Har en tjej lottats finns 11 tjejer kvar av 29 elever, och efter två tjejer finns 10 kvar av 28:
+
+$$ P(\\text{tre tjejer}) = \\frac{12}{30} \\cdot \\frac{11}{29} \\cdot \\frac{10}{28} = \\frac{1\\,320}{24\\,360} = \\frac{11}{203} \\approx 0{,}0542 = 5{,}4\\ \\% $$
+
+**Svar:** 5,4&nbsp;%
+
+**c)** Jämför faktorerna två och två. Andelen tjejer bland de kvarvarande sjunker för varje tjej som lottas:
+
+$$ \\frac{11}{29} \\approx 0{,}379 < \\frac{12}{30} = 0{,}4 \\qquad \\frac{10}{28} \\approx 0{,}357 < \\frac{12}{30} = 0{,}4 $$
+
+När en tjej försvinner ur klassen tas en av 12 tjejer bort men bara en av 30 elever, så tjejerna minskar med en större andel än klassen gör. Linus faktorer är alltså lika stora eller större än de rätta, och hans produkt blir för stor (6,4&nbsp;% mot 5,4&nbsp;%).
+
+**Svar:** Varje dragen tjej minskar andelen tjejer bland dem som är kvar, så de rätta faktorerna blir mindre än $\\dfrac{12}{30}$. Linus multiplicerar med för stora faktorer.
+
+**Generell slutsats:** att dra något av samma sort flera gånger utan återläggning blir mindre sannolikt än med återläggning. Ställ alltid frågan: finns det som drogs kvar till nästa dragning?`,
+        },
+        {
+            level: 3,
+            question: `På en marknad får du välja påse i ett lotteri. Du drar två kulor ur påsen utan återläggning och vinner om båda är röda.
+
+| Påse | Röda kulor | Blå kulor |
+|---|---|---|
+| A | 3 | 2 |
+| B | 6 | 4 |
+| C | 60 | 40 |
+
+Alla påsar har 60&nbsp;% röda kulor.<br>a) Beräkna vinstchansen med påse A och med påse B. Svara i decimalform med tre decimaler.<br>b) Beräkna vinstchansen med påse C. Svara i decimalform med tre decimaler.<br>c) Förklara varför påsarna ger olika vinstchans fast andelen röda kulor är densamma, och vilket tal vinstchansen närmar sig om påsen görs mycket stor.`,
+            answer: { value: 0.358, unit: '', tol: 0.003 },
+            delsvar: [
+                { del: 'a', value: 0.3, unit: '', tol: 0.003, etikett: 'påse A' },
+                { del: 'a', value: 0.333, unit: '', tol: 0.003, etikett: 'påse B' },
+                { del: 'b', value: 0.358, unit: '', tol: 0.003, etikett: 'påse C' },
+                { del: 'c', value: 0.36, unit: '', tol: 0.003, etikett: 'gränsvärde' },
+            ],
+            solution: `**Insikten:** det är andra dragningen som skiljer påsarna åt. En dragen röd kula är en stor förlust i en liten påse men nästan ingenting i en stor.
+
+**a)** Produktregeln för beroende händelser: först sannolikheten för röd, sedan sannolikheten för röd igen bland de kulor som är kvar.
+
+Påse A: 3 röda av 5, sedan 2 röda av 4:
+
+$$ P(\\text{två röda}) = \\frac{3}{5} \\cdot \\frac{2}{4} = \\frac{6}{20} = 0{,}300 $$
+
+Påse B: 6 röda av 10, sedan 5 röda av 9:
+
+$$ P(\\text{två röda}) = \\frac{6}{10} \\cdot \\frac{5}{9} = \\frac{30}{90} = \\frac{1}{3} \\approx 0{,}333 $$
+
+**Svar:** Påse A: 0,300. Påse B: 0,333.
+
+**b)** Påse C: 60 röda av 100, sedan 59 röda av 99:
+
+$$ P(\\text{två röda}) = \\frac{60}{100} \\cdot \\frac{59}{99} = \\frac{3\\,540}{9\\,900} \\approx 0{,}358 $$
+
+**Svar:** 0,358
+
+**c)** Första faktorn är 0,6 i alla påsarna. Skillnaden ligger i andra faktorn, andelen röda bland de kulor som är kvar:
+
+| Påse | Andra faktorn |
+|---|---|
+| A | $\\dfrac{2}{4} = 0{,}5$ |
+| B | $\\dfrac{5}{9} \\approx 0{,}556$ |
+| C | $\\dfrac{59}{99} \\approx 0{,}596$ |
+
+I en liten påse sänker en dragen röd kula andelen röda mycket, i en stor påse nästan inte alls. Ju större påsen är, desto närmare 0,6 hamnar andra faktorn, och dragningen beter sig som med återläggning:
+
+$$ 0{,}6 \\cdot 0{,}6 = 0{,}36 $$
+
+**Svar:** Andra faktorn blir större ju fler kulor påsen har, eftersom en dragen kula då påverkar andelen mindre. Vinstchansen närmar sig 0,36.
+
+**Generell slutsats:** i en mycket stor mängd är dragning utan återläggning nästan oberoende. Därför går det att räkna med oberoende händelser när man till exempel väljer några personer ur en hel befolkning, men inte när man väljer ur en liten grupp.`,
+        },
+        {
+            level: 3,
+            question: `Anta att alla veckodagar är lika sannolika som födelsedag och att olika personers födelsedagar är oberoende av varandra.<br>a) Hur stor är sannolikheten att två personer är födda på olika veckodagar? Svara i decimalform med tre decimaler.<br>b) Hur stor är sannolikheten att fyra personer alla är födda på olika veckodagar? Svara i procent med en decimal.<br>c) Hur många personer behövs minst för att sannolikheten att alla är födda på olika veckodagar ska bli mindre än 50&nbsp;%?`,
+            answer: { value: 35.0, unit: '%', tol: 0.005 },
+            delsvar: [
+                { del: 'a', value: 0.857, unit: '', tol: 0.003, etikett: '$P(\\text{olika}) \\approx$' },
+                { del: 'b', value: 35.0, unit: '%', tol: 0.005, etikett: '$P(\\text{alla olika}) \\approx$' },
+                { del: 'c', value: 4, unit: 'personer' },
+            ],
+            solution: `**Insikten:** ta personerna en i taget. Den första får vara född vilken dag som helst, men varje ny person måste undvika alla dagar som redan är upptagna, så de gynnsamma dagarna blir färre för varje person.
+
+**a)** Den första personen kan vara född vilken veckodag som helst, sannolikheten är $\\dfrac{7}{7} = 1$. Den andra måste vara född någon av de 6 andra dagarna:
+
+$$ P(\\text{olika}) = \\frac{7}{7} \\cdot \\frac{6}{7} = \\frac{6}{7} \\approx 0{,}857 $$
+
+**Svar:** 0,857
+
+**b)** Den tredje personen har 5 lediga dagar kvar och den fjärde 4. Födelsedagarna är oberoende, så produktregeln ger
+
+$$ P(\\text{alla olika}) = \\frac{7}{7} \\cdot \\frac{6}{7} \\cdot \\frac{5}{7} \\cdot \\frac{4}{7} = \\frac{840}{2\\,401} \\approx 0{,}3499 = 35{,}0\\ \\% $$
+
+**Svar:** 35,0&nbsp;%
+
+**c)** Varje ny person lägger till en faktor. Vi multiplicerar en person i taget tills produkten blir mindre än 0,5:
+
+| Antal personer | Sannolikhet att alla har olika veckodagar |
+|---|---|
+| 2 | $\\dfrac{6}{7} \\approx 0{,}857$ |
+| 3 | $\\dfrac{6}{7} \\cdot \\dfrac{5}{7} = \\dfrac{30}{49} \\approx 0{,}612$ |
+| 4 | $\\dfrac{30}{49} \\cdot \\dfrac{4}{7} = \\dfrac{120}{343} \\approx 0{,}350$ |
+
+Med tre personer är sannolikheten fortfarande över 0,5, med fyra är den under.
+
+**Svar:** 4 personer
+
+**Generell slutsats:** fast händelserna är oberoende krymper faktorerna, eftersom villkoret "alla olika" blir svårare att uppfylla för varje ny person. Därför sjunker sannolikheten mycket snabbare än man tror. Med 365 dagar i stället för 7 ger samma räkning att det räcker med 23 personer för att sannolikheten att alla har olika födelsedag ska bli mindre än 50&nbsp;%.`,
+        },
+        {
+            level: 3,
+            question: `I en stad regnar det 40&nbsp;% av dagarna i oktober. Elsa vill veta sannolikheten att det regnar sju dagar i rad och räknar med att dagarna är oberoende av varandra.<br>a) Vilken sannolikhet får Elsa? Svara i procent med två decimaler.<br>b) En meteorolog påpekar att regniga dagar brukar komma i följd. En bättre modell är att det regnar den första dagen med sannolikheten 0,4, och att sannolikheten för regn är 0,7 varje dag efter en regnig dag. Beräkna sannolikheten för sju regndagar i rad med den modellen. Svara i procent med en decimal.<br>c) Hur många gånger större är svaret i b) än svaret i a)? Svara med ett heltal och förklara vilket antagande i Elsas räkning som är orimligt.`,
+            answer: { value: 4.7, unit: '%', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 0.16, unit: '%', tol: 0.03, etikett: 'Elsas modell' },
+                { del: 'b', value: 4.7, unit: '%', tol: 0.01, etikett: 'meteorologens modell' },
+                { del: 'c', value: 29, unit: 'gånger', tol: 0.02 },
+            ],
+            solution: `**Insikten:** produktregeln gäller i båda modellerna, men varje faktor ska vara sannolikheten för just det steget, givet det som redan hänt. Är dagarna beroende ändras faktorerna.
+
+**a)** Med oberoende dagar är faktorn 0,4 varje dag:
+
+$$ P(\\text{sju regndagar}) = 0{,}4^7 = 0{,}0016384 \\approx 0{,}16\\ \\% $$
+
+**Svar:** 0,16&nbsp;%
+
+**b)** Första dagen gäller sannolikheten 0,4. Var och en av de sex följande dagarna kommer efter en regnig dag, och då är sannolikheten för regn 0,7:
+
+$$ P(\\text{sju regndagar}) = 0{,}4 \\cdot 0{,}7 \\cdot 0{,}7 \\cdot 0{,}7 \\cdot 0{,}7 \\cdot 0{,}7 \\cdot 0{,}7 = 0{,}4 \\cdot 0{,}7^6 $$
+
+$$ 0{,}4 \\cdot 0{,}117649 = 0{,}0470596 \\approx 4{,}7\\ \\% $$
+
+**Svar:** 4,7&nbsp;%
+
+**c)** Kvoten mellan svaren:
+
+$$ \\frac{0{,}0470596}{0{,}0016384} \\approx 28{,}7 \\approx 29 $$
+
+Elsa antar att vädret en dag inte påverkas av vädret dagen innan. Men regn beror på väderlägen som ofta ligger kvar flera dagar, så en regnig dag gör nästa regniga dag mer sannolik. Hennes modell underskattar därför långa regnperioder kraftigt.
+
+**Svar:** Ungefär 29 gånger större. Elsa antar att dagarna är oberoende, men regnet en dag påverkar sannolikheten för regn nästa dag.
+
+**Generell slutsats:** produktregeln ger aldrig bättre svar än antagandena bakom faktorerna. Att räkna med oberoende händelser är ett antagande som måste prövas mot verkligheten, inte en självklarhet.`,
+        },
+        {
+            level: 3,
+            question: `Ella tränar basket och avslutar varje pass med ett straffkast och sedan ett trepoängskast. Kasten lyckas oberoende av varandra. Hennes statistik visar att båda kasten lyckas i 24&nbsp;% av passen, och att straffkastet lyckas men trepoängskastet missar i 56&nbsp;% av passen.<br>a) Hur stor är sannolikheten att straffkastet lyckas? Svara i decimalform.<br>b) Hur stor är sannolikheten att trepoängskastet lyckas? Svara i decimalform.<br>c) Hur stor är sannolikheten att hon missar båda kasten? Svara i decimalform.`,
+            answer: { value: 0.8, unit: '', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 0.8, unit: '', tol: 0.01, etikett: '$P(\\text{straff}) =$' },
+                { del: 'b', value: 0.3, unit: '', tol: 0.01, etikett: '$P(\\text{trepoäng}) =$' },
+                { del: 'c', value: 0.14, unit: '', tol: 0.01, etikett: '$P(\\text{båda missar}) =$' },
+            ],
+            solution: `**Insikten:** de enskilda sannolikheterna är inte givna, bara produkter av dem. Kalla dem $p$ och $q$, så ger produktregeln två ekvationer med två obekanta. Båda ekvationerna innehåller produkten $p \\cdot q$, och den är redan känd.
+
+**a)** Låt $p$ vara sannolikheten att straffkastet lyckas och $q$ sannolikheten att trepoängskastet lyckas. Sannolikheten att trepoängskastet missar är då $1 - q$, eftersom kastet antingen lyckas eller missar.
+
+Båda lyckas. Kasten är oberoende, så produktregeln ger
+
+$$ p \\cdot q = 0{,}24 \\tag{1} $$
+
+Straffkastet lyckas och trepoängskastet missar:
+
+$$ p \\cdot (1 - q) = 0{,}56 \\tag{2} $$
+
+Vi multiplicerar in $p$ i parentesen i (2):
+
+$$ p - p \\cdot q = 0{,}56 $$
+
+Enligt (1) är $p \\cdot q = 0{,}24$. Insatt ger det
+
+$$ p - 0{,}24 = 0{,}56 $$
+
+$$ p - 0{,}24 \\mathbin{\\boldsymbol{+}} \\boldsymbol{0{,}24} = 0{,}56 \\mathbin{\\boldsymbol{+}} \\boldsymbol{0{,}24} $$
+
+$$ p = 0{,}80 $$
+
+Det går också att se direkt: varje gång straffkastet lyckas blir trepoängskastet antingen lyckat eller missat, så $P(\\text{straff}) = 0{,}24 + 0{,}56 = 0{,}80$.
+
+**Svar:** 0,80
+
+**b)** Vi sätter in $p = 0{,}80$ i (1):
+
+$$ 0{,}80 \\cdot q = 0{,}24 $$
+
+$$ \\frac{0{,}80 \\cdot q}{\\boldsymbol{0{,}80}} = \\frac{0{,}24}{\\boldsymbol{0{,}80}} $$
+
+$$ q = 0{,}30 $$
+
+Kontroll i (2): $0{,}80 \\cdot (1 - 0{,}30) = 0{,}80 \\cdot 0{,}70 = 0{,}56$. Stämmer.
+
+**Svar:** 0,30
+
+**c)** Straffkastet missar med sannolikheten $1 - 0{,}80 = 0{,}20$ och trepoängskastet med $1 - 0{,}30 = 0{,}70$. Kasten är oberoende:
+
+$$ P(\\text{båda missar}) = 0{,}20 \\cdot 0{,}70 = 0{,}14 $$
+
+Kontroll: de fyra möjliga utfallen ska tillsammans ha sannolikheten 1. Det fjärde utfallet, straffet missar och trepoängaren lyckas, har sannolikheten $0{,}20 \\cdot 0{,}30 = 0{,}06$:
+
+$$ 0{,}24 + 0{,}56 + 0{,}06 + 0{,}14 = 1 $$
+
+**Svar:** 0,14
+
+**Generell slutsats:** produktregeln kan användas baklänges. Är produkterna kända blir de enskilda sannolikheterna obekanta i ett ekvationssystem, och en produkt som förekommer i båda ekvationerna kan ersättas med sitt kända värde.`,
         },
     ],
 
@@ -31376,33 +33068,320 @@ $$ \\frac{3}{10} \\cdot \\frac{6}{10} = \\frac{18}{100} = 18\\ \\% $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `I en låda ligger 5 svarta och 5 vita strumpor. Du drar två utan återläggning. Vad är sannolikheten att strumporna får OLIKA färg? Svara i bråkform.`,
-            choices: [
-                `$\\dfrac{5}{9}$`,
-                `$\\dfrac{1}{2}$`,
-                `$\\dfrac{25}{100}$`,
-                `$\\dfrac{4}{9}$`,
+            question: `Ett inbrottslarm har två sensorer som fungerar oberoende av varandra. Var och en upptäcker ett inbrott med sannolikheten $0{,}8$.<br>a) Hur stor är sannolikheten att minst en av sensorerna upptäcker inbrottet? Svara i decimalform.<br>b) Kim räknar $0{,}8 + 0{,}8 = 1{,}6$. Förklara varför det inte kan vara rätt.<br>c) Hur många sensorer behövs som minst för att sannolikheten att minst en upptäcker inbrottet ska vara minst $0{,}999$?`,
+            answer: { value: 5, unit: 'st' },
+            delsvar: [
+                { del: 'a', value: 0.96, unit: '' },
+                { del: 'b' },
+                { del: 'c', value: 5, unit: 'st', etikett: 'antal sensorer' },
             ],
-            correct: 0,
-            solution: `**Insikten:** "olika färg" täcks av TVÅ grenar i träddiagrammet — svart–vit och vit–svart — som ska adderas.
+            solution: `**Insikten:** "minst en" består av många grenar i träddiagrammet, men motsatsen, komplementhändelsen "ingen upptäcker", är en enda gren. Den grenen är lätt att räkna ut och dra bort från 1.
 
-Gren svart–vit:
+**a)** Varje sensor missar inbrottet med sannolikheten $1 - 0{,}8 = 0{,}2$. Grenen där båda missar får vi genom att multiplicera längs grenen:
 
-$$ \\frac{5}{10} \\cdot \\frac{5}{9} = \\frac{25}{90} $$
+$$ P(\\text{ingen upptäcker}) = 0{,}2 \\cdot 0{,}2 = 0{,}04 $$
 
-Gren vit–svart:
+Alla grenar tillsammans har sannolikheten 1, så
 
-$$ \\frac{5}{10} \\cdot \\frac{5}{9} = \\frac{25}{90} $$
+$$ P(\\text{minst en upptäcker}) = 1 - 0{,}04 = 0{,}96 $$
 
-Addera:
+**Svar:** $0{,}96$
 
-$$ \\frac{25}{90} + \\frac{25}{90} = \\frac{50}{90} = \\frac{5}{9} $$
+**b)** En sannolikhet kan aldrig vara större än 1, så $1{,}6$ är omöjligt. Felet är att grenen där **båda** sensorerna upptäcker inbrottet räknas två gånger: den ingår både i "sensor 1 upptäcker" och i "sensor 2 upptäcker". Addition fungerar bara för grenar som inte överlappar.
 
-(Notera att $\\dfrac{5}{9} > \\dfrac{1}{2}$ — olika färg är faktiskt VANLIGARE än lika färg utan återläggning, eftersom den första dragna strumpan lämnar färre av sin egen färg kvar.)
+**Svar:** Grenen där båda upptäcker inbrottet räknas två gånger, och en sannolikhet kan inte vara större än 1.
 
-**Svar:** $\\dfrac{5}{9}$
+**c)** Med $n$ sensorer finns bara en gren där ingen upptäcker inbrottet, och längs den multipliceras $0{,}2$ med sig själv $n$ gånger:
 
-**Generell slutsats:** rita trädet, ringa in ALLA gynnsamma grenar, multiplicera längs varje och addera. Intuitionen "50/50" luras när dragningarna är beroende.`,
+$$ P(\\text{minst en upptäcker}) = 1 - 0{,}2^n $$
+
+Vi vill ha $1 - 0{,}2^n \\geq 0{,}999$, alltså att $0{,}2^n$ är högst $0{,}001$. Vi prövar:
+
+| $n$ | $0{,}2^n$ | $1 - 0{,}2^n$ |
+|---|---|---|
+| 3 | $0{,}008$ | $0{,}992$ |
+| 4 | $0{,}0016$ | $0{,}9984$ |
+| 5 | $0{,}00032$ | $0{,}99968$ |
+
+Med fyra sensorer är $0{,}9984$ fortfarande för lite, men med fem är $0{,}99968 \\geq 0{,}999$.
+
+**Svar:** 5 sensorer
+
+**Generell slutsats:** när det står "minst en", räkna ut komplementhändelsen "ingen" och dra bort från 1. Sannolikheter för grenar som överlappar får inte adderas.`,
+        },
+        {
+            level: 3,
+            question: `En basketspelare skjuter två straffkast. Det första går i med sannolikheten $0{,}7$. Spelaren påverkas av hur det första kastet gick: efter en träff går det andra kastet i med sannolikheten $0{,}8$, efter en miss med sannolikheten $0{,}5$. Svara i decimalform.<br>a) Hur stor är sannolikheten att båda kasten går i?<br>b) Hur stor är sannolikheten att precis ett av kasten går i?<br>c) En elev räknar $2 \\cdot 0{,}7 \\cdot 0{,}3 = 0{,}42$ i b). Förklara vad eleven har missat.`,
+            answer: { value: 0.29, unit: '' },
+            delsvar: [
+                { del: 'a', value: 0.56, unit: '' },
+                { del: 'b', value: 0.29, unit: '' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** kasten är beroende av varandra. Sannolikheten på den andra nivån i träddiagrammet beror på vilken gren man kom ifrån, så de två grenarna "träff, miss" och "miss, träff" blir olika stora.
+
+Träddiagrammets fyra grenar (sannolikheterna multipliceras längs varje gren):
+
+| Första kastet | Andra kastet | Grenens sannolikhet |
+|---|---|---|
+| träff ($0{,}7$) | träff ($0{,}8$) | $0{,}7 \\cdot 0{,}8 = 0{,}56$ |
+| träff ($0{,}7$) | miss ($0{,}2$) | $0{,}7 \\cdot 0{,}2 = 0{,}14$ |
+| miss ($0{,}3$) | träff ($0{,}5$) | $0{,}3 \\cdot 0{,}5 = 0{,}15$ |
+| miss ($0{,}3$) | miss ($0{,}5$) | $0{,}3 \\cdot 0{,}5 = 0{,}15$ |
+
+Kontroll: $0{,}56 + 0{,}14 + 0{,}15 + 0{,}15 = 1$. Stämmer.
+
+**a)** Grenen träff, träff:
+
+$$ P(\\text{båda i}) = 0{,}7 \\cdot 0{,}8 = 0{,}56 $$
+
+**Svar:** $0{,}56$
+
+**b)** Precis ett kast i ges av två grenar, och de adderas:
+
+$$ P(\\text{precis ett i}) = 0{,}7 \\cdot 0{,}2 + 0{,}3 \\cdot 0{,}5 = 0{,}14 + 0{,}15 = 0{,}29 $$
+
+**Svar:** $0{,}29$
+
+**c)** Eleven har behandlat kasten som oberoende, alltid med sannolikheten $0{,}7$ för träff och $0{,}3$ för miss, och har därför räknat med två lika stora grenar. Men efter en träff är chansen att missa bara $0{,}2$, och efter en miss är chansen att träffa bara $0{,}5$. Varken $0{,}7 \\cdot 0{,}3$ eller $0{,}3 \\cdot 0{,}7$ finns som gren i trädet.
+
+**Svar:** Eleven har räknat som om kasten vore oberoende. Andra kastets sannolikheter beror på hur det första gick, så de två grenarna är olika stora.
+
+**Generell slutsats:** skriv alltid den sannolikhet som gäller just efter den gren man följer. Att multiplicera med 2 fungerar bara när de två grenarna verkligen är lika stora.`,
+        },
+        {
+            level: 3,
+            question: `Lag A vinner en match mot lag B med sannolikheten $0{,}6$, oberoende av tidigare matcher. Oavgjort förekommer inte. De två lagen ska göra upp om en titel och kan välja mellan två upplägg: en enda match, eller bäst av tre (det lag som först vinner två matcher tar titeln).<br>a) Hur stor är sannolikheten att lag A vinner titeln i bäst av tre? Svara i decimalform med tre decimaler.<br>b) Vilket upplägg bör det svagare laget B föredra? Motivera med beräkningar.`,
+            answer: { value: 0.648, unit: '' },
+            delsvar: [
+                { del: 'a', value: 0.648, unit: '' },
+                { del: 'b' },
+            ],
+            solution: `**Insikten:** i bäst av tre slutar trädet i förtid när ett lag har två vinster. Grenarna har därför olika längd, och lag A kan vinna på tre sätt: AA, ABA eller BAA.
+
+**a)** Sannolikheten för varje gren fås genom att multiplicera längs grenen. Grenarna där lag A vinner titeln:
+
+| Gren | Sannolikhet |
+|---|---|
+| AA (två matcher) | $0{,}6 \\cdot 0{,}6 = 0{,}36$ |
+| ABA | $0{,}6 \\cdot 0{,}4 \\cdot 0{,}6 = 0{,}144$ |
+| BAA | $0{,}4 \\cdot 0{,}6 \\cdot 0{,}6 = 0{,}144$ |
+
+Grenarna är olika utfall, så de adderas:
+
+$$ P(\\text{A vinner}) = 0{,}36 + 0{,}144 + 0{,}144 = 0{,}648 $$
+
+Rimlighet: ett lag som är bättre i varje enskild match bör tjäna på fler matcher, och $0{,}648$ är större än $0{,}6$.
+
+**Svar:** $0{,}648$
+
+**b)** På samma sätt vinner lag B titeln i bäst av tre med
+
+$$ P(\\text{B vinner}) = 0{,}4 \\cdot 0{,}4 + 0{,}4 \\cdot 0{,}6 \\cdot 0{,}4 + 0{,}6 \\cdot 0{,}4 \\cdot 0{,}4 = 0{,}16 + 0{,}096 + 0{,}096 = 0{,}352 $$
+
+Kontroll: $0{,}648 + 0{,}352 = 1$. Stämmer.
+
+I en enda match vinner lag B med sannolikheten $0{,}4$, vilket är mer än $0{,}352$.
+
+**Svar:** Lag B bör välja en enda match: där vinner laget med sannolikheten $0{,}4$, i bäst av tre bara med $0{,}352$.
+
+**Generell slutsats:** fler matcher minskar slumpens betydelse, och det gynnar det lag som är bättre i varje match. Det svagare laget har störst chans när allt avgörs på en gång.`,
+        },
+        {
+            level: 3,
+            question: `En sjukdom finns hos $2\\ \\%$ av befolkningen. Ett test ger positivt utslag hos $95\\ \\%$ av dem som har sjukdomen, men också hos $10\\ \\%$ av dem som är friska. En person väljs slumpmässigt och testas.<br>a) Hur stor är sannolikheten att testet ger positivt utslag? Svara i decimalform.<br>b) Hur stor andel av dem som får positivt utslag har sjukdomen? Svara i procent, avrundat till heltal.<br>c) En tidning skriver: "Testet hittar 95&nbsp;% av alla sjuka, så den som får positivt utslag är nästan säkert sjuk." Granska påståendet.`,
+            answer: { value: 16, unit: '%', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 0.117, unit: '' },
+                { del: 'b', value: 16, unit: '%', tol: 0.04 },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** de friska är så många fler än de sjuka att deras lilla andel felaktiga positiva utslag ändå blir många personer. Det syns tydligast om vi tänker oss 1&nbsp;000 testade personer och följer dem genom trädet.
+
+Träddiagrammet med 1&nbsp;000 personer:
+
+| Första nivån | Andra nivån | Antal personer |
+|---|---|---|
+| sjuk: $0{,}02 \\cdot 1\\,000 = 20$ | positivt: $0{,}95 \\cdot 20 = 19$ | 19 |
+| sjuk: 20 | negativt: $0{,}05 \\cdot 20 = 1$ | 1 |
+| frisk: $0{,}98 \\cdot 1\\,000 = 980$ | positivt: $0{,}10 \\cdot 980 = 98$ | 98 |
+| frisk: 980 | negativt: $0{,}90 \\cdot 980 = 882$ | 882 |
+
+**a)** Positivt utslag ges av två grenar, sjuk och positivt samt frisk och positivt. Vi multiplicerar längs varje gren och adderar:
+
+$$ P(\\text{positivt}) = 0{,}02 \\cdot 0{,}95 + 0{,}98 \\cdot 0{,}10 = 0{,}019 + 0{,}098 = 0{,}117 $$
+
+Det stämmer med tabellen: $19 + 98 = 117$ av 1&nbsp;000 personer.
+
+**Svar:** $0{,}117$
+
+**b)** Bland de 117 som får positivt utslag är 19 sjuka. Andelen är delen delad med det hela:
+
+$$ \\text{andel sjuka bland positiva} = \\frac{19}{117} = 0{,}1623\\ldots \\approx 16\\ \\% $$
+
+**Svar:** Cirka 16&nbsp;%
+
+**c)** Påståendet blandar ihop två olika andelar. Att testet hittar $95\\ \\%$ av de sjuka handlar om dem som **är sjuka**. Frågan om den som fått positivt utslag är sjuk handlar om dem som **fått positivt utslag**, och bland dem är bara cirka $16\\ \\%$ sjuka. Av de 117 positiva utslagen är 98 falska, eftersom $10\\ \\%$ av de många friska är fler personer än $95\\ \\%$ av de få sjuka.
+
+**Svar:** Påståendet stämmer inte. Bara cirka 16&nbsp;% av dem med positivt utslag är sjuka, eftersom de flesta positiva utslagen kommer från friska personer.
+
+**Generell slutsats:** fundera alltid på vilken grupp andelen räknas på. När en egenskap är ovanlig kan även ett bra test ge fler falska än äkta positiva utslag.`,
+        },
+        {
+            level: 3,
+            question: `I en påse finns 3 röda kulor och några blå. Två kulor dras utan återläggning. Totala antalet kulor i påsen är $N$.<br>a) Ställ upp ett uttryck i $N$ för sannolikheten att båda kulorna är röda.<br>b) Sannolikheten att båda är röda är $\\dfrac{1}{7}$. Hur många blå kulor finns i påsen?<br>c) Visa att sannolikheten att båda är röda aldrig kan vara $\\dfrac{1}{4}$, hur många blå kulor påsen än innehåller.`,
+            answer: { value: 4, unit: 'st' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 4, unit: 'st', etikett: 'blå kulor' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** det här är ett omvänt problem. Sannolikheten är känd och antalet kulor sökt, så vi uttrycker sannolikheten med $N$ och löser ut $N$. Eftersom $N$ måste vara ett heltal går ekvationen att lösa genom prövning.
+
+**a)** Första dragningen: 3 röda av $N$ kulor. Utan återläggning finns sedan 2 röda kvar av $N - 1$ kulor. Längs grenen röd, röd multipliceras sannolikheterna:
+
+$$ P(\\text{två röda}) = \\frac{3}{N} \\cdot \\frac{2}{N - 1} = \\frac{6}{N(N - 1)} $$
+
+**Svar:** $P(\\text{två röda}) = \\dfrac{6}{N(N - 1)}$
+
+**b)** Uttrycket ska vara lika med $\\dfrac{1}{7}$:
+
+$$ \\frac{6}{N(N - 1)} = \\frac{1}{7} $$
+
+$$ \\frac{6}{N(N - 1)} \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{7N(N - 1)} = \\frac{1}{7} \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{7N(N - 1)} $$
+
+$$ 42 = N(N - 1) $$
+
+Vi söker alltså två heltal som följer på varandra och har produkten 42. Vi prövar: $6 \\cdot 5 = 30$, $7 \\cdot 6 = 42$. Alltså är $N = 7$.
+
+Det betyder 7 kulor totalt, varav 3 röda, så antalet blå är $7 - 3 = 4$.
+
+Kontroll: $\\dfrac{3}{7} \\cdot \\dfrac{2}{6} = \\dfrac{6}{42} = \\dfrac{1}{7}$. Stämmer.
+
+**Svar:** 4 blå kulor
+
+**c)** På samma sätt skulle $\\dfrac{6}{N(N - 1)} = \\dfrac{1}{4}$ ge
+
+$$ N(N - 1) = 24 $$
+
+Produkten av två heltal som följer på varandra växer när $N$ växer:
+
+| $N$ | 4 | 5 | 6 |
+|---|---|---|---|
+| $N(N - 1)$ | 12 | 20 | 30 |
+
+Produkten hoppar från 20 till 30 och blir aldrig 24. Det finns alltså inget heltal $N$, och därmed inget antal blå kulor, som ger sannolikheten $\\dfrac{1}{4}$.
+
+**Svar:** Det krävs att $N(N - 1) = 24$, men två heltal som följer på varandra har aldrig produkten 24.
+
+**Generell slutsats:** ett träddiagram kan användas baklänges. Uttryck grenens sannolikhet med den okända storheten och ställ upp en ekvation. Att antalet måste vara ett heltal gör att vissa sannolikheter är omöjliga.`,
+        },
+        {
+            level: 3,
+            question: `Ett mynt är snedvridet så att sannolikheten för krona är $p$ i varje kast. Myntet kastas två gånger.<br>a) Hur stor är sannolikheten för en krona och en klave (i valfri ordning) om $p = 0{,}6$? Svara i decimalform.<br>b) Sannolikheten för två krona är $0{,}49$. Bestäm $p$.<br>c) Visa att sannolikheten för en krona och en klave aldrig kan bli större än $0{,}5$, hur myntet än är snedvridet.`,
+            answer: { value: 0.7, unit: '' },
+            delsvar: [
+                { del: 'a', value: 0.48, unit: '' },
+                { del: 'b', value: 0.7, unit: '', etikett: '$p =$' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** träddiagrammet går att räkna med bokstäver. Klave har sannolikheten $1 - p$, och "en krona och en klave" är två grenar som var och en ger $p(1 - p)$. Uttrycket $2p(1 - p)$ kan sedan undersökas för alla $p$ på en gång.
+
+Träddiagrammets grenar:
+
+| Gren | Sannolikhet |
+|---|---|
+| krona, krona | $p \\cdot p$ |
+| krona, klave | $p(1 - p)$ |
+| klave, krona | $(1 - p)p$ |
+| klave, klave | $(1 - p)(1 - p)$ |
+
+**a)** De två grenarna med en krona och en klave adderas:
+
+$$ P(\\text{olika}) = p(1 - p) + (1 - p)p = 2p(1 - p) $$
+
+Med $p = 0{,}6$:
+
+$$ P(\\text{olika}) = 2 \\cdot 0{,}6 \\cdot 0{,}4 = 0{,}48 $$
+
+**Svar:** $0{,}48$
+
+**b)** Grenen krona, krona ger
+
+$$ p \\cdot p = 0{,}49 $$
+
+$$ p^2 = 0{,}49 $$
+
+$$ p = \\pm\\sqrt{0{,}49} $$
+
+$$ p = \\pm 0{,}7 $$
+
+En sannolikhet kan inte vara negativ, så $p = 0{,}7$.
+
+**Svar:** $p = 0{,}7$
+
+**c)** Vi skriver $p$ som $0{,}5 + d$, där $d$ anger hur mycket myntet avviker från ett rättvist mynt. Då är $1 - p = 0{,}5 - d$, och
+
+$$ p(1 - p) = (0{,}5 + d)(0{,}5 - d) = 0{,}25 - 0{,}5d + 0{,}5d - d^2 = 0{,}25 - d^2 $$
+
+Sannolikheten för olika blir
+
+$$ P(\\text{olika}) = 2(0{,}25 - d^2) = 0{,}5 - 2d^2 $$
+
+Talet $d^2$ är aldrig negativt, så $0{,}5 - 2d^2$ är aldrig större än $0{,}5$. Det blir exakt $0{,}5$ bara när $d = 0$, alltså när myntet är rättvist.
+
+Kontroll med a): $p = 0{,}6$ ger $d = 0{,}1$ och $0{,}5 - 2 \\cdot 0{,}01 = 0{,}48$. Stämmer.
+
+**Svar:** $P(\\text{olika}) = 0{,}5 - 2d^2$, och eftersom $d^2 \\geq 0$ blir den aldrig större än $0{,}5$.
+
+**Generell slutsats:** med en bokstav i träddiagrammet gäller räkningen alla fall samtidigt, och då kan man visa att något alltid gäller, inte bara pröva enstaka värden.`,
+        },
+        {
+            level: 3,
+            question: `Ali och Bea turas om att dra en kula ur en påse med 2 vita och 3 svarta kulor, utan återläggning. Ali drar först. Den som först drar en vit kula vinner.<br>a) Hur många dragningar kan spelet som mest ta?<br>b) Hur stor är sannolikheten att Ali vinner? Svara i decimalform.<br>c) Påsen byts mot en med 1 vit och 3 svarta kulor. Visa att det då inte spelar någon roll vem som börjar.`,
+            answer: { value: 0.6, unit: '' },
+            delsvar: [
+                { del: 'a', value: 4, unit: 'st', etikett: 'dragningar' },
+                { del: 'b', value: 0.6, unit: '' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** trädet är inte fullt utbyggt. Varje gren slutar så fort en vit kula dras, och spelarna turas om, så Ali vinner på de udda dragningarna och Bea på de jämna.
+
+**a)** Det finns bara 3 svarta kulor. Har alla tre dragits återstår bara vita, så senast den fjärde dragningen är vit.
+
+**Svar:** 4 dragningar
+
+**b)** Varje gren slutar med att en vit kula dras. Sannolikheterna längs en gren multipliceras, och antalet kulor minskar med en för varje dragning:
+
+| Gren | Vem drar den vita? | Sannolikhet |
+|---|---|---|
+| V | Ali (dragning 1) | $\\dfrac{2}{5}$ |
+| S, V | Bea (dragning 2) | $\\dfrac{3}{5} \\cdot \\dfrac{2}{4} = \\dfrac{3}{10}$ |
+| S, S, V | Ali (dragning 3) | $\\dfrac{3}{5} \\cdot \\dfrac{2}{4} \\cdot \\dfrac{2}{3} = \\dfrac{1}{5}$ |
+| S, S, S, V | Bea (dragning 4) | $\\dfrac{3}{5} \\cdot \\dfrac{2}{4} \\cdot \\dfrac{1}{3} \\cdot \\dfrac{2}{2} = \\dfrac{1}{10}$ |
+
+Ali vinner på grenarna V och S, S, V, som adderas:
+
+$$ P(\\text{Ali vinner}) = \\frac{2}{5} + \\frac{1}{5} = \\frac{3}{5} = 0{,}6 $$
+
+Kontroll: Bea vinner med $\\dfrac{3}{10} + \\dfrac{1}{10} = \\dfrac{2}{5}$, och $\\dfrac{3}{5} + \\dfrac{2}{5} = 1$. Stämmer.
+
+**Svar:** $0{,}6$
+
+**c)** Med 1 vit och 3 svarta kulor blir grenarna:
+
+| Gren | Vem drar den vita? | Sannolikhet |
+|---|---|---|
+| V | Ali | $\\dfrac{1}{4}$ |
+| S, V | Bea | $\\dfrac{3}{4} \\cdot \\dfrac{1}{3} = \\dfrac{1}{4}$ |
+| S, S, V | Ali | $\\dfrac{3}{4} \\cdot \\dfrac{2}{3} \\cdot \\dfrac{1}{2} = \\dfrac{1}{4}$ |
+| S, S, S, V | Bea | $\\dfrac{3}{4} \\cdot \\dfrac{2}{3} \\cdot \\dfrac{1}{2} \\cdot \\dfrac{1}{1} = \\dfrac{1}{4}$ |
+
+Alla fyra grenar är lika sannolika: den vita kulan har samma chans att komma i varje dragning. Ali vinner med $\\dfrac{1}{4} + \\dfrac{1}{4} = \\dfrac{1}{2}$, och Bea likaså.
+
+**Svar:** Båda vinner med sannolikheten $\\dfrac{1}{2}$, så det spelar ingen roll vem som börjar.
+
+**Generell slutsats:** med en enda vit kula och ett jämnt antal kulor är spelet rättvist. Med två vita kulor kan den första vita komma tidigt, och då tjänar den som börjar på det.`,
         },
     ],
 
@@ -31482,25 +33461,283 @@ $$ P(\\text{minst en vinst}) = 1 - 0{,}729 = 0{,}271 = 27{,}1\\ \\% $$
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Hur många gånger måste du minst kasta en tärning för att sannolikheten att få minst en sexa ska överstiga 50 %?`,
+            question: `Du kastar en vanlig tärning flera gånger.<br>a) Hur många gånger måste du minst kasta för att sannolikheten att få minst en sexa ska överstiga 50&nbsp;%?<br>b) Hur många gånger måste du minst kasta för att sannolikheten ska överstiga 90&nbsp;%?`,
             answer: { value: 4, unit: 'kast' },
-            solution: `**Insikten:** "minst en sexa" angrips via komplementet "ingen sexa", och antalet kast testas systematiskt.
+            delsvar: [
+                { del: 'a', value: 4, unit: 'kast' },
+                { del: 'b', value: 13, unit: 'kast' },
+            ],
+            solution: `**Insikten:** "minst en sexa" angrips via komplementet "ingen sexa", och sedan prövas antalet kast systematiskt. Att räkna $3 \\cdot \\dfrac{1}{6} = \\dfrac{1}{2}$ är en fälla: sannolikheter för "minst en" får inte adderas.
 
-$P(\\text{ingen sexa på } n \\text{ kast}) = \\left(\\frac{5}{6}\\right)^n$, så
+Sannolikheten att inte få en sexa på ett kast är $\\dfrac{5}{6}$. Kasten påverkar inte varandra, så för $n$ kast gäller
+
+$$ P(\\text{ingen sexa}) = \\left(\\frac{5}{6}\\right)^n $$
+
+och med komplementhändelsen
 
 $$ P(\\text{minst en sexa}) = 1 - \\left(\\frac{5}{6}\\right)^n $$
 
-Testa:
+**a)** Vi prövar med räknaren:
 
-$$ n = 3: \\quad 1 - \\left(\\frac{5}{6}\\right)^3 = 1 - 0{,}5787\\ldots \\approx 42\\ \\% $$
+$$ n = 3: \\quad 1 - \\left(\\frac{5}{6}\\right)^3 = 1 - 0{,}5787\\ldots = 0{,}4212\\ldots \\approx 42\\ \\% $$
 
-$$ n = 4: \\quad 1 - \\left(\\frac{5}{6}\\right)^4 = 1 - 0{,}4822\\ldots \\approx 52\\ \\% $$
+$$ n = 4: \\quad 1 - \\left(\\frac{5}{6}\\right)^4 = 1 - 0{,}4822\\ldots = 0{,}5177\\ldots \\approx 52\\ \\% $$
 
-Efter 3 kast är chansen fortfarande under 50 %, efter 4 kast över.
+Efter 3 kast är chansen fortfarande under 50&nbsp;%, efter 4 kast över.
 
 **Svar:** 4 kast
 
-**Generell slutsats:** intuitionen säger ofta "3 kast räcker, för $3 \\cdot \\dfrac{1}{6} = \\dfrac{1}{2}$" — men sannolikheter får inte adderas så. Komplementmetoden ger det rätta svaret, precis som i födelsedagsparadoxen.`,
+**b)** Nu ska $P(\\text{ingen sexa})$ bli mindre än $1 - 0{,}90 = 0{,}10$. Varje nytt kast multiplicerar med $\\dfrac{5}{6}$, så vi fortsätter pröva:
+
+$$ n = 12: \\quad \\left(\\frac{5}{6}\\right)^{12} = 0{,}1121\\ldots \\quad \\text{ger} \\quad 1 - 0{,}1121\\ldots = 0{,}8878\\ldots \\approx 89\\ \\% $$
+
+$$ n = 13: \\quad \\left(\\frac{5}{6}\\right)^{13} = 0{,}0934\\ldots \\quad \\text{ger} \\quad 1 - 0{,}0934\\ldots = 0{,}9065\\ldots \\approx 91\\ \\% $$
+
+**Svar:** 13 kast
+
+**Generell slutsats:** för att gå från 50&nbsp;% till 90&nbsp;% krävs mer än tre gånger så många kast. Sannolikheten för "minst en" närmar sig 1 allt långsammare, eftersom komplementet bara krymper med samma faktor $\\dfrac{5}{6}$ för varje kast.`,
+        },
+        {
+            level: 3,
+            question: `Ett företag ska välja brandlarm till ett lager. Larmen fungerar oberoende av varandra.<br>Upplägg A: ett dyrt larm som går igång vid en brand med sannolikheten 95&nbsp;%.<br>Upplägg B: två billiga larm som går igång med sannolikheten 80&nbsp;% var.<br>Upplägg C: tre ännu billigare larm som går igång med sannolikheten 70&nbsp;% var.<br>Ange svaren i procent.<br>a) Hur stor är sannolikheten att minst ett larm går igång med upplägg B?<br>b) Hur stor är sannolikheten att minst ett larm går igång med upplägg C?<br>c) Beräkningen bygger på att larmen är oberoende. Förklara varför antagandet kan vara fel om alla larm drivs av samma elnät, och vad det betyder för jämförelsen.`,
+            answer: { value: 96, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 96, unit: '%', etikett: 'upplägg B' },
+                { del: 'b', value: 97.3, unit: '%', etikett: 'upplägg C', tol: 0.005 },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** att flera sämre larm kan slå ett bra syns först när man räknar på komplementet: alla larm måste fallera samtidigt för att ingen ska varna.
+
+**a)** Komplementhändelsen till "minst ett larm går igång" är "inget larm går igång". Ett billigt larm fallerar med sannolikheten $1 - 0{,}80 = 0{,}20$. Larmen är oberoende, så sannolikheterna multipliceras:
+
+$$ P(\\text{inget larm}) = 0{,}20 \\cdot 0{,}20 = 0{,}04 $$
+
+$$ P(\\text{minst ett larm}) = 1 - 0{,}04 = 0{,}96 = 96\\ \\% $$
+
+**Svar:** 96 %
+
+**b)** Ett av de billigaste larmen fallerar med sannolikheten $1 - 0{,}70 = 0{,}30$:
+
+$$ P(\\text{inget larm}) = 0{,}30 \\cdot 0{,}30 \\cdot 0{,}30 = 0{,}027 $$
+
+$$ P(\\text{minst ett larm}) = 1 - 0{,}027 = 0{,}973 = 97{,}3\\ \\% $$
+
+Upplägg C ger alltså högst sannolikhet, före B (96&nbsp;%) och A (95&nbsp;%).
+
+**Svar:** 97,3 %
+
+**c)** Att larmen är oberoende betyder att ett larm som fallerar inte gör det troligare att de andra också fallerar. Drivs alla larm av samma elnät kan ett strömavbrott slå ut alla på en gång. Då är sannolikheten att alla fallerar samtidigt större än $0{,}20 \\cdot 0{,}20$ eller $0{,}30 \\cdot 0{,}30 \\cdot 0{,}30$, och fördelen med flera larm krymper. I det värsta fallet, om larmen bara fallerar tillsammans, fungerar upplägg B som ett enda larm på 80&nbsp;% och C som ett enda på 70&nbsp;%. Då är upplägg A bäst.
+
+**Svar:** Ett gemensamt elnät gör att larmen kan fallera samtidigt, så de är inte oberoende. Sannolikheten att inget larm går igång blir då större än beräknat, och upplägg B och C kan bli sämre än A.
+
+**Generell slutsats:** flera reservsystem ger stor säkerhet bara om de kan fallera var för sig. Därför har till exempel flygplan flera system med olika strömkällor.`,
+        },
+        {
+            level: 3,
+            question: `Sara planterar frön av en sort där varje frö gror oberoende av de andra, med samma sannolikhet $p$. Om hon planterar tre frön är sannolikheten att minst ett gror 0,936.<br>a) Bestäm $p$.<br>b) Hur många frön måste Sara minst plantera för att sannolikheten att minst ett gror ska vara minst 99&nbsp;%?`,
+            answer: { value: 0.6, unit: '' },
+            delsvar: [
+                { del: 'a', value: 0.6, unit: '', etikett: '$p =$' },
+                { del: 'b', value: 6, unit: 'frön' },
+            ],
+            solution: `**Insikten:** uppgiften är omvänd. Sannolikheten för "minst ett" är känd, och komplementet "inget gror" leder baklänges till sannolikheten för ett enskilt frö.
+
+**a)** Komplementhändelsen till "minst ett frö gror" är "inget frö gror":
+
+$$ P(\\text{inget gror}) = 1 - 0{,}936 = 0{,}064 $$
+
+Ett frö gror inte med sannolikheten $1 - p$. Fröna är oberoende, så
+
+$$ (1 - p)^3 = 0{,}064 $$
+
+Vilket tal blir 0,064 när det upphöjs till 3? Vi prövar: $0{,}4 \\cdot 0{,}4 \\cdot 0{,}4 = 0{,}064$. Alltså är
+
+$$ 1 - p = 0{,}4 $$
+
+$$ 1 - p \\mathbin{\\boldsymbol{+}} \\boldsymbol{p} = 0{,}4 \\mathbin{\\boldsymbol{+}} \\boldsymbol{p} $$
+
+$$ 1 = 0{,}4 + p $$
+
+$$ 1 \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}4} = 0{,}4 + p \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}4} $$
+
+$$ 0{,}6 = p $$
+
+Kontroll: $1 - 0{,}4^3 = 1 - 0{,}064 = 0{,}936$. Stämmer.
+
+**Svar:** $p = 0{,}6$
+
+**b)** Med $n$ frön är $P(\\text{inget gror}) = 0{,}4^n$, och den ska vara högst $1 - 0{,}99 = 0{,}01$. Vi prövar:
+
+$$ n = 5: \\quad 0{,}4^5 = 0{,}01024 \\quad \\text{ger} \\quad 1 - 0{,}01024 = 0{,}98976 \\approx 98{,}98\\ \\% $$
+
+$$ n = 6: \\quad 0{,}4^6 = 0{,}004096 \\quad \\text{ger} \\quad 1 - 0{,}004096 = 0{,}995904 \\approx 99{,}59\\ \\% $$
+
+Fem frön ger nästan 99&nbsp;%, men inte riktigt. Det krävs sex.
+
+**Svar:** 6 frön
+
+**Generell slutsats:** sambandet $P(\\text{minst en}) = 1 - P(\\text{ingen})$ går att använda åt båda hållen. Känner man sannolikheten för "minst en" kan man räkna baklänges till sannolikheten för ett enskilt försök.`,
+        },
+        {
+            level: 3,
+            question: `I en påse finns 10 kulor, varav 3 är röda. Du drar 3 kulor utan att lägga tillbaka dem. Ali räknar sannolikheten att få minst en röd kula så här: $1 - 0{,}7^3 = 0{,}657$.<br>a) Förklara vad som är fel i Alis räkning.<br>b) Beräkna den rätta sannolikheten att få minst en röd kula. Ange svaret i procent med en decimal.`,
+            answer: { value: 70.8, unit: '%', tol: 0.005 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 70.8, unit: '%', tol: 0.005 },
+            ],
+            solution: `**Insikten:** komplementhändelsen är rätt vald, men dragningarna är beroende av varandra. Sannolikheten för en icke-röd kula ändras efter varje dragning.
+
+**a)** Ali använder komplementet "ingen röd kula" och räknar sannolikheten för en icke-röd kula som $\\dfrac{7}{10} = 0{,}7$ vid alla tre dragningarna. Det stämmer bara om kulorna läggs tillbaka. Här ligger den dragna kulan kvar utanför påsen, så vid andra dragningen finns bara 9 kulor kvar, varav 6 icke-röda.
+
+**Svar:** Ali behandlar dragningarna som oberoende. Utan återläggning ändras antalet kulor i påsen, så sannolikheten för en icke-röd kula är inte 0,7 vid varje dragning.
+
+**b)** Vi räknar sannolikheten för "ingen röd" dragning för dragning, som gynnsamma delat med möjliga:
+
+- Första kulan: 7 icke-röda av 10, alltså $\\dfrac{7}{10}$.
+- Andra kulan: 6 icke-röda av 9 kvar, alltså $\\dfrac{6}{9}$.
+- Tredje kulan: 5 icke-röda av 8 kvar, alltså $\\dfrac{5}{8}$.
+
+$$ P(\\text{ingen röd}) = \\frac{7}{10} \\cdot \\frac{6}{9} \\cdot \\frac{5}{8} = \\frac{210}{720} = \\frac{7}{24} = 0{,}2916\\ldots $$
+
+$$ P(\\text{minst en röd}) = 1 - 0{,}2916\\ldots = 0{,}7083\\ldots \\approx 70{,}8\\ \\% $$
+
+Rimlighet: utan återläggning blir det färre icke-röda kulor kvar för varje dragning, så det är svårare att undvika de röda. Därför ska svaret bli större än Alis 65,7&nbsp;%, och det blir det.
+
+**Svar:** 70,8 %
+
+**Generell slutsats:** komplementmetoden fungerar lika bra utan återläggning, men faktorerna i produkten ändras från dragning till dragning.`,
+        },
+        {
+            level: 3,
+            question: `Händelserna $A$ och $B$ är oberoende, med $P(A) = 0{,}3$ och $P(B) = 0{,}5$. Lina säger att sannolikheten att minst en av händelserna inträffar är $0{,}3 + 0{,}5 = 0{,}8$.<br>a) Beräkna sannolikheten att minst en av händelserna inträffar. Ange svaret i decimalform.<br>b) Låt $P(A) = a$ och $P(B) = b$. Visa att sannolikheten att minst en av händelserna inträffar är $a + b - a \\cdot b$.<br>c) Förklara med hjälp av b) varför Linas metod ger ett för stort svar.`,
+            answer: { value: 0.65, unit: '' },
+            delsvar: [
+                { del: 'a', value: 0.65, unit: '' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** komplementet till "minst en av $A$ och $B$" är "varken $A$ eller $B$". Den sannolikheten är en produkt, och när den skrivs ut syns exakt vad som saknas i Linas summa.
+
+**a)** $A$ inträffar inte med sannolikheten $1 - 0{,}3 = 0{,}7$ och $B$ inträffar inte med sannolikheten $1 - 0{,}5 = 0{,}5$. Händelserna är oberoende, så
+
+$$ P(\\text{varken } A \\text{ eller } B) = 0{,}7 \\cdot 0{,}5 = 0{,}35 $$
+
+$$ P(\\text{minst en}) = 1 - 0{,}35 = 0{,}65 $$
+
+**Svar:** 0,65
+
+**b)** På samma sätt som i a) är sannolikheten att ingen av händelserna inträffar $(1 - a)(1 - b)$, så
+
+$$ P(\\text{minst en}) = 1 - (1 - a)(1 - b) $$
+
+Vi multiplicerar ihop parenteserna, term för term:
+
+$$ (1 - a)(1 - b) = 1 - b - a + a \\cdot b $$
+
+Minustecknet framför parentesen byter tecken på alla termer:
+
+$$ 1 - (1 - b - a + a \\cdot b) = 1 - 1 + b + a - a \\cdot b = a + b - a \\cdot b $$
+
+Kontroll med talen från a): $0{,}3 + 0{,}5 - 0{,}3 \\cdot 0{,}5 = 0{,}8 - 0{,}15 = 0{,}65$. Stämmer.
+
+**Svar:** $P(\\text{minst en}) = 1 - (1 - a)(1 - b) = a + b - a \\cdot b$
+
+**c)** Lina räknar bara $a + b$ och glömmer termen $a \\cdot b$, som är sannolikheten att båda händelserna inträffar. De utfall där både $A$ och $B$ inträffar ingår både i $P(A)$ och i $P(B)$, så Lina räknar dem två gånger. Därför måste de dras bort en gång.
+
+**Svar:** Linas summa räknar de utfall där båda händelserna inträffar två gånger. Hon ska dra bort $a \\cdot b = 0{,}15$ en gång.
+
+**Generell slutsats:** att addera sannolikheter fungerar bara när händelserna inte kan inträffa samtidigt, till exempel att slå en etta eller en tvåa med en tärning. För "minst en" är komplementmetoden säkrast.`,
+        },
+        {
+            level: 3,
+            question: `Ett prov har 5 flervalsfrågor med 4 alternativ var, och på varje fråga är exakt ett alternativ rätt. Elin gissar på alla frågorna.<br>a) Ange komplementhändelsen till "Elin får minst två rätt".<br>b) Beräkna sannolikheten att Elin får minst två rätt. Ange svaret i procent med en decimal.`,
+            answer: { value: 36.7, unit: '%', tol: 0.005 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 36.7, unit: '%', tol: 0.005 },
+            ],
+            solution: `**Insikten:** komplementet till "minst två" är inte "ingen", utan "högst en". Det består av två delar: inga rätt och exakt ett rätt.
+
+**a)** Utfallen är 0, 1, 2, 3, 4 eller 5 rätt. "Minst två rätt" är 2, 3, 4 eller 5 rätt, så resten är 0 eller 1 rätt.
+
+**Svar:** Att Elin får högst ett rätt, alltså inga rätt eller exakt ett rätt.
+
+**b)** På varje fråga gissar Elin rätt med sannolikheten $\\dfrac{1}{4} = 0{,}25$ och fel med sannolikheten $0{,}75$. Frågorna är oberoende.
+
+*Inga rätt:* alla fem fel.
+
+$$ P(0 \\text{ rätt}) = 0{,}75^5 = 0{,}2373\\ldots $$
+
+*Exakt ett rätt:* en fråga rätt och fyra fel. Den rätta frågan kan vara fråga 1, 2, 3, 4 eller 5, alltså fem olika vägar i träddiagrammet. Varje väg har sannolikheten $0{,}25 \\cdot 0{,}75^4$:
+
+$$ P(1 \\text{ rätt}) = 5 \\cdot 0{,}25 \\cdot 0{,}75^4 = 5 \\cdot 0{,}25 \\cdot 0{,}3164\\ldots = 0{,}3955\\ldots $$
+
+Komplementhändelsen "högst ett rätt":
+
+$$ P(\\text{högst ett rätt}) = 0{,}2373\\ldots + 0{,}3955\\ldots = 0{,}6328\\ldots $$
+
+$$ P(\\text{minst två rätt}) = 1 - 0{,}6328\\ldots = 0{,}3671\\ldots \\approx 36{,}7\\ \\% $$
+
+Hade vi bara dragit bort "inga rätt" hade vi fått $1 - 0{,}2373\\ldots \\approx 76{,}3\\ \\%$, men det är sannolikheten för minst *ett* rätt.
+
+**Svar:** 36,7 %
+
+**Generell slutsats:** komplementet till "minst $k$" är "högst $k - 1$". Bara när $k = 1$ är komplementet den enda händelsen "ingen".`,
+        },
+        {
+            level: 3,
+            question: `En påse innehåller $n$ kulor, där $n \\geq 2$. En av kulorna är blå och resten är gula. Du drar två kulor utan att lägga tillbaka dem.<br>a) Visa att sannolikheten att få den blå kulan är $\\dfrac{2}{n}$.<br>b) Hur många kulor finns i påsen om sannolikheten att få den blå kulan är 0,25?<br>c) Du drar i stället $k$ kulor. Vad blir sannolikheten att få den blå kulan? Förklara varför.`,
+            answer: { value: 8, unit: 'kulor' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 8, unit: 'kulor' },
+                { del: 'c' },
+            ],
+            solution: `**Insikten:** att få den blå kulan är att få "minst en blå", och komplementet är "bara gula". När produkten för komplementet skrivs med $n$ stryker faktorerna varandra.
+
+**a)** Komplementhändelsen är att båda kulorna är gula. Det finns $n - 1$ gula kulor, och sannolikheten är gynnsamma delat med möjliga vid varje dragning:
+
+- Första kulan gul: $n - 1$ gula av $n$, alltså $\\dfrac{n - 1}{n}$.
+- Andra kulan gul: $n - 2$ gula av de $n - 1$ som är kvar, alltså $\\dfrac{n - 2}{n - 1}$.
+
+$$ P(\\text{två gula}) = \\frac{n - 1}{n} \\cdot \\frac{n - 2}{n - 1} = \\frac{n - 2}{n} $$
+
+Faktorn $n - 1$ finns både i täljaren och i nämnaren och kan strykas. Med komplementhändelsen:
+
+$$ P(\\text{den blå}) = 1 - \\frac{n - 2}{n} = \\frac{n}{n} - \\frac{n - 2}{n} = \\frac{n - (n - 2)}{n} = \\frac{2}{n} $$
+
+Kontroll med $n = 4$: $1 - \\dfrac{3}{4} \\cdot \\dfrac{2}{3} = 1 - \\dfrac{6}{12} = \\dfrac{1}{2} = \\dfrac{2}{4}$. Stämmer.
+
+**Svar:** $P(\\text{den blå}) = 1 - \\dfrac{n - 2}{n} = \\dfrac{2}{n}$
+
+**b)** Vi löser ekvationen
+
+$$ \\frac{2}{n} = 0{,}25 $$
+
+$$ \\frac{2}{n} \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{n} = 0{,}25 \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{n} $$
+
+$$ 2 = 0{,}25n $$
+
+$$ \\frac{2}{\\boldsymbol{0{,}25}} = \\frac{0{,}25n}{\\boldsymbol{0{,}25}} $$
+
+$$ 8 = n $$
+
+Kontroll: $1 - \\dfrac{7}{8} \\cdot \\dfrac{6}{7} = 1 - \\dfrac{6}{8} = \\dfrac{2}{8} = 0{,}25$. Stämmer.
+
+**Svar:** 8 kulor
+
+**c)** Med komplementet blir produkten för "bara gula"
+
+$$ \\frac{n - 1}{n} \\cdot \\frac{n - 2}{n - 1} \\cdot \\ldots \\cdot \\frac{n - k}{n - k + 1} = \\frac{n - k}{n} $$
+
+eftersom varje nämnare stryker täljaren i faktorn före. Då blir $P(\\text{den blå}) = 1 - \\dfrac{n - k}{n} = \\dfrac{k}{n}$.
+
+Det går också att se utan räkning. Tänk dig att alla $n$ kulor dras och läggs i en rad i den ordning de kom upp. Den blå kulan hamnar med lika stor sannolikhet på var och en av de $n$ platserna, och du får den om den ligger bland de $k$ första.
+
+**Svar:** $\\dfrac{k}{n}$, eftersom den blå kulan med lika stor sannolikhet kommer upp i var och en av de $n$ dragningarna, och du får den om den är bland de $k$ första.
+
+**Generell slutsats:** komplementmetoden gör en produkt med många faktorer enkel när faktorerna stryker varandra. Resultatet $\\dfrac{k}{n}$ säger att varje kula har samma chans att komma med, oavsett i vilken ordning dragningarna sker.`,
         },
     ],
 

@@ -22401,7 +22401,6 @@
      * 2026-10-15). Insättningen tar en egen rad. */
     var klam = valueBracket(acts, [
       'm=100 g=0,100 kg',
-      'Δl=9,0 cm=0,090 m',
       ['F=k·Δl ⟺ m·g=k·Δl ⟺ k=', { frac: ['m·g', 'Δl'] }],
       ['k=', { frac: ['0,100 kg·9,82 N/kg', '0,090 m'] }, '=10,911... N/m']
     ], padL, y, s, F, { rs: 0.7 });

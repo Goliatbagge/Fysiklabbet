@@ -11581,7 +11581,14 @@
     function buildStegkast(node, cfg) {
         var INK = '#1f2530', GREY = '#7c828c', BLA = '#2563c9', GRN = '#1e8449', ROD = '#c0392b';
         var RUTA = '#2563c9', AXEL = '#38bdf8';
-        var W = 600, H = 300, PL = 46, PR = 34, PT = 26, PB = 34;
+        // smal teorispalt (telefon): smalare ritfönster och större text, så
+        // att skaltal och etiketter går att läsa när scenen krymps
+        var smal = (node.clientWidth || 600) < 480;
+        // (på smal skärm börjar y-axeln under fullskärmsknappen, som täcker
+        // scenens övre vänstra hörn)
+        var W = smal ? 400 : 600, H = smal ? 380 : 300;
+        var PL = smal ? 50 : 46, PR = 34, PT = smal ? 104 : 26, PB = smal ? 40 : 34;
+        var FS = smal ? 18 : 13, FV = smal ? 21 : 15;
         var G = 9.82, MASSA = 0.057;
         var p = { dt: 0.1, alfa: 45, v0: 20, luft: false, k: 0.0012, vektorer: true };
         var bana = null, n = 0, spelar = false, klock = 0;
@@ -11639,7 +11646,7 @@
             ox = PL; oy = H - PB;
             var steg = [0.5, 1, 2, 5, 10, 20, 50];
             tick = steg[steg.length - 1];
-            for (var s = 0; s < steg.length; s++) if (steg[s] * skala >= 44) { tick = steg[s]; break; }
+            for (var s = 0; s < steg.length; s++) if (steg[s] * skala >= (smal ? 58 : 44)) { tick = steg[s]; break; }
         }
 
         // ── Ritning ───────────────────────────────────────────────────────
@@ -11649,20 +11656,21 @@
             // skalstreck och tal: talen står på sin plats, under axeln
             for (var tx = tick; X(tx) <= W - PR - 8; tx += tick) {
                 s += '<line x1="' + r1(X(tx)) + '" y1="' + oy + '" x2="' + r1(X(tx)) + '" y2="' + (oy + 5) + '" stroke="' + AXEL + '" stroke-width="1.4"/>';
-                s += lbl(X(tx), oy + 19, 'middle', fmt(tx, tick < 1 ? 1 : 0), 13, INK);
+                // inget skaltal där axelns etikett x (m) står
+                if (X(tx) + FS < xEnd - FS * 2.9) s += lbl(X(tx), oy + FS + 6, 'middle', fmt(tx, tick < 1 ? 1 : 0), FS, INK);
             }
             for (var ty = tick; Y(ty) >= PT + 8; ty += tick) {
                 s += '<line x1="' + (ox - 5) + '" y1="' + r1(Y(ty)) + '" x2="' + ox + '" y2="' + r1(Y(ty)) + '" stroke="' + AXEL + '" stroke-width="1.4"/>';
-                s += lbl(ox - 9, Y(ty) + 4.5, 'end', fmt(ty, tick < 1 ? 1 : 0), 13, INK);
+                s += lbl(ox - 9, Y(ty) + FS * 0.35, 'end', fmt(ty, tick < 1 ? 1 : 0), FS, INK);
             }
             // axlar, pilspets bara åt det positiva hållet
             s += '<line x1="' + ox + '" y1="' + oy + '" x2="' + (xEnd - 8) + '" y2="' + oy + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
                 '<polygon points="' + (xEnd - 8) + ',' + (oy - 4) + ' ' + xEnd + ',' + oy + ' ' + (xEnd - 8) + ',' + (oy + 4) + '" fill="' + AXEL + '"/>' +
                 '<line x1="' + ox + '" y1="' + oy + '" x2="' + ox + '" y2="' + (yTop + 8) + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
                 '<polygon points="' + (ox - 4) + ',' + (yTop + 8) + ' ' + ox + ',' + yTop + ' ' + (ox + 4) + ',' + (yTop + 8) + '" fill="' + AXEL + '"/>';
-            s += lbl(xEnd, oy + 19, 'end', it('x') + ' (m)', 13, INK);
-            s += lbl(ox + 9, yTop + 9, 'start', it('y') + ' (m)', 13, INK);
-            s += lbl(ox - 9, oy + 4.5, 'end', '0', 13, INK);
+            s += lbl(xEnd, oy + FS + 6, 'end', it('x') + ' (m)', FS, INK);
+            s += lbl(ox + 9, yTop + FS * 0.7, 'start', it('y') + ' (m)', FS, INK);
+            s += lbl(ox - 9, oy + FS * 0.35, 'end', '0', FS, INK);
 
             // kastparabeln utan luftmotstånd (exakt), tätt samplad
             var kp = [];
@@ -11693,10 +11701,13 @@
                 var uvx = cur.vx / v, uvy = -cur.vy / v;
                 var vs = [bx + 7 * uvx, by + 7 * uvy], vt = [vs[0] + Lv * uvx, vs[1] + Lv * uvy];
                 s += pil(vs[0], vs[1], vt[0], vt[1], GRN);
-                s += lbl(vt[0] + 8 * uvx + (uvx >= 0 ? 4 : -4), vt[1] + 8 * uvy + 5, uvx >= 0 ? 'start' : 'end', it('v'), 15, GRN);
+                // etiketten vid spetsen, förskjuten åt den sida av pilen som
+                // vetter bort från banan (banan böjer av nedåt)
+                var lx = vt[0] + 6 * uvx + 12 * uvy, ly = vt[1] + 6 * uvy - 12 * uvx;
+                s += lbl(lx, ly + FV * 0.35, 'middle', it('v'), FV, GRN);
                 var uax = cur.ax / aa, uay = -cur.ay / aa, at = [bx + La * uax, by + La * uay];
                 s += pil(bx, by, at[0], at[1], ROD);
-                s += lbl(at[0] + (uax >= 0 ? 6 : -6), at[1] + 14, uax >= 0 ? 'start' : 'end', it('a'), 15, ROD);
+                s += lbl(at[0] + (uax >= 0 ? 6 : -6), at[1] + 14, uax >= 0 ? 'start' : 'end', it('a'), FV, ROD);
             }
             s += '<circle cx="' + r1(bx) + '" cy="' + r1(by) + '" r="6" fill="#d9e36b" stroke="' + INK + '" stroke-width="1.3"/>';
             dyn.innerHTML = s;

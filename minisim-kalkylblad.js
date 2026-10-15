@@ -14,7 +14,9 @@
  *
  * Används i textlösningarna till Exempel 1 (scen: sparkonto, standard) och
  * Exempel 2 (scen: arligt) i ma1c-3.4 samt Exempel 1 c i ma1c-3.5 (scen:
- * billan, 63 rader som rullar, med SUM). Varje scen är en egen steglista
+ * billan, 63 rader som rullar, med SUM) samt kalkylbladet i fy2-1.9 (scen:
+ * kaststeg, kaströrelsen med stegmetoden, fem kolumner där fyllnadshandtaget
+ * kopierar fyra kolumner på en gång). Varje scen är en egen steglista
  * (SPARKONTO, ARLIGT nedan) byggd av samma primitiver (klicka, ringa in,
  * skriv, piltangenter, Enter, dra i fyllnadshandtaget, markera, formatera
  * som valuta). En ny uppgift får en egen steglista och ett eget scennamn.
@@ -39,6 +41,9 @@
     // telefonen, eftersom inbetalningarna i D är det som summeras
     var COLW_BILAN_BRED = [38, 72, 104, 90, 112, 80];
     var COLW_BILAN_SMAL = [24, 47, 56, 45, 68, 40];   // A–D = 240 px (bladet är 246 px på en 390 px-telefon)
+    // kaströrelsen (fy2-1.9): fem kolumner t, x, y, vx, vy som alla ska synas
+    var COLW_KAST_BRED = [38, 70, 76, 76, 92, 92];
+    var COLW_KAST_SMAL = [24, 42, 46, 46, 46, 46];    // 250 px, rubrikerna utan enhet för vx och vy
     var VIS = 13;         // synliga rader; ett längre blad rullar
     var RH = 23;          // radhöjd
     var HH = 23;          // höjd på kolumnrubrikerna
@@ -166,14 +171,15 @@
 
     function mount(node, cfg) {
         cfg = cfg || {};
-        var scen = ({ arligt: 1, 'sparkonto-b': 1, 'sparkonto-c': 1, billan: 1 })[cfg.scen] ? cfg.scen : 'sparkonto';
+        var scen = ({ arligt: 1, 'sparkonto-b': 1, 'sparkonto-c': 1, billan: 1, kaststeg: 1 })[cfg.scen] ? cfg.scen : 'sparkonto';
         injectCss();
         var smal = (node.clientWidth || 600) < 400;
 
         /* bladets geometri hör till instansen: flera blad på samma sida
          * kan ha olika kolumnbredd och olika antal rader */
-        var ROWS = scen === 'billan' ? 63 : VIS;
+        var ROWS = scen === 'billan' ? 63 : scen === 'kaststeg' ? 16 : VIS;
         var COLW = scen === 'billan' ? (smal ? COLW_BILAN_SMAL : COLW_BILAN_BRED)
+                 : scen === 'kaststeg' ? (smal ? COLW_KAST_SMAL : COLW_KAST_BRED)
                                      : (smal ? COLW_SMAL : COLW_BRED);
         var colX = [0];
         for (var ci = 0; ci < COLW.length; ci++) colX.push(colX[ci] + COLW[ci]);
@@ -200,7 +206,7 @@
         /* ---------- programfönstrets överdel ---------- */
         var top = el('div', 'kb-top', app);
         var title = el('div', 'kb-title', top);
-        title.innerHTML = '<svg width="16" height="20" viewBox="0 0 16 20"><path d="M10 0H2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6z" fill="#0f9d58"/><path d="M10 0v6h6z" fill="#87ceac"/><rect x="3.5" y="9" width="9" height="7" fill="none" stroke="#fff" stroke-width="1.2"/><path d="M3.5 11.5h9M3.5 14h9M7 9v7" stroke="#fff" stroke-width="1.2"/></svg><span>' + (({ arligt: 'Årligt sparande', billan: 'Billån' })[scen] || 'Sparkonto') + '</span>';
+        title.innerHTML = '<svg width="16" height="20" viewBox="0 0 16 20"><path d="M10 0H2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6z" fill="#0f9d58"/><path d="M10 0v6h6z" fill="#87ceac"/><rect x="3.5" y="9" width="9" height="7" fill="none" stroke="#fff" stroke-width="1.2"/><path d="M3.5 11.5h9M3.5 14h9M7 9v7" stroke="#fff" stroke-width="1.2"/></svg><span>' + (({ arligt: 'Årligt sparande', billan: 'Billån', kaststeg: 'Kaströrelse med stegmetoden' })[scen] || 'Sparkonto') + '</span>';
         var tool = el('div', 'kb-tool', top);
         tool.innerHTML =
             '<span class="kb-tb"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4L2 7l3 3"/><path d="M2 7h7.5a4 4 0 0 1 0 8H7"/></svg></span>' +
@@ -686,6 +692,12 @@
         }
         function fyll(borjan, slut, till) {
             var a = parseRef(borjan), s = parseRef(slut), t = parseRef(till), c = a.c;
+            // ett område över flera kolumner (B3:E3) fylls kolumn för kolumn
+            if (s.c !== a.c) {
+                for (var kc = Math.min(a.c, s.c); kc <= Math.max(a.c, s.c); kc++)
+                    fyll(refOf(kc, a.r), refOf(kc, s.r), refOf(kc, t.r));
+                return;
+            }
             var start = S.cells[borjan], sist = S.cells[slut];
             if (typeof start.raw === 'number' && s.r > a.r && typeof sist.raw === 'number') {
                 // talföljd ur två startvärden (0, 1 → 2, 3, …)
@@ -977,6 +989,80 @@
               } }
         ];
 
+        /* ---------- kaströrelsen med stegmetoden (fy2-1.9) ----------
+         * Samma kast som Exempel 1 i fy2-1.9: 8 m/s i x-led, 6 m/s i y-led,
+         * tidssteget 0,1 s. Varje rad är ett steg, och formlerna hämtar läget
+         * och hastigheten från raden ovanför (stegets början). */
+        var KH = smal ? ['t (s)', 'x (m)', 'y (m)', 'vx', 'vy']
+                      : ['t (s)', 'x (m)', 'y (m)', 'vx (m/s)', 'vy (m/s)'];
+        var KASTSTEG = [
+            { namn: 'Rubriker och startvärden',
+              text: 'Varje rad i bladet blir ett steg i tiden. Vi gör kolumner för tiden <em>t</em>, läget <em>x</em> och <em>y</em> och hastigheten <em>v</em><sub>x</sub> och <em>v</em><sub>y</sub>. I rad 2 skriver vi värdena vid starten: tiden 0, läget 0 (origo i utkastpunkten) och hastigheten 8 m/s i <em>x</em>-led och 6 m/s i <em>y</em>-led.',
+              kor: async function () {
+                  await klickaCell('A1'); await skriv(KH[0]); await tab();
+                  await skriv(KH[1]); await tab();
+                  await skriv(KH[2]); await tab();
+                  await skriv(KH[3]); await tab();
+                  await skriv(KH[4]); await enter();
+                  await klickaCell('A2'); await skriv('0'); await tab();
+                  await skriv('0'); await tab();
+                  await skriv('0'); await tab();
+                  await skriv('8'); await tab();
+                  await skriv('6'); await enter();
+              } },
+            { namn: 'Tiden ökar med ett tidssteg',
+              text: 'Tidssteget är Δ<em>t</em> = 0,1 s. I A3 skriver vi <code>=A2+0,1</code>: tiden i ett steg är tiden i steget före plus tidssteget. Sedan drar vi i fyllnadshandtaget ned till och med A16, så att tiden går från 0 till 1,4 s.',
+              kor: async function () {
+                  await rulla(1);
+                  await klickaCell('A3');
+                  await skriv('=A2+0,1', false, 200);
+                  await sleep(1400);
+                  await enter();
+                  await klickaCell('A3');
+                  await draHandtag('A16');
+                  await sleep(700);
+              } },
+            { namn: 'Det nya läget',
+              text: 'Det nya läget är det gamla läget plus hastigheten gånger tidssteget. I B3 skriver vi <code>=B2+D2*0,1</code> och i C3 <code>=C2+E2*0,1</code>. Formlerna hämtar läget och hastigheten från raden ovanför, alltså från stegets början. Det är precis <em>x</em><sub>n+1</sub> = <em>x</em><sub>n</sub> + <em>v</em><sub>x,n</sub> · Δ<em>t</em>.',
+              kor: async function () {
+                  await rulla(1);
+                  await klickaCell('B3');
+                  await skriv('=B2+D2*0,1', false, 200);
+                  await sleep(1800);
+                  await tab();
+                  await skriv('=C2+E2*0,1', false, 200);
+                  await sleep(1800);
+                  await enter();
+                  await sleep(600);
+              } },
+            { namn: 'Den nya hastigheten',
+              text: 'Hastigheten i <em>x</em>-led ändras inte, eftersom <em>a</em><sub>x</sub> = 0. Därför skriver vi bara <code>=D2</code> i D3. I <em>y</em>-led är accelerationen −9,82 m/s², så den nya hastigheten blir <code>=E2-9,82*0,1</code>, det vill säga <em>v</em><sub>y,n+1</sub> = <em>v</em><sub>y,n</sub> + <em>a</em><sub>y</sub> · Δ<em>t</em>.',
+              kor: async function () {
+                  await rulla(1);
+                  await klickaCell('D3');
+                  await skriv('=D2', false, 220);
+                  await sleep(1200);
+                  await tab();
+                  await skriv('=E2-9,82*0,1', false, 200);
+                  await sleep(2000);
+                  await enter();
+                  await sleep(600);
+              } },
+            { namn: 'Kopiera stegen nedåt och hitta landningen',
+              text: 'Vi markerar B3 till E3 och drar i fyllnadshandtaget ned till och med rad 16. Då räknas alla steg på en gång, eftersom varje rad hämtar sina värden från raden ovanför. I kolumn C ser vi att <em>y</em> fortfarande är positivt efter 1,3 s men negativt efter 1,4 s. Bollen landar alltså mellan de två stegen, ungefär 10,5 m från utkastpunkten.',
+              kor: async function () {
+                  await rulla(1);
+                  await draMarkera('B3', 'E3');
+                  await draHandtag('E16');
+                  await sleep(800);
+                  await ringaIn('C15', REFF[2], 1.15);
+                  await ringaIn('C16', REFF[3], 1.15);
+                  var undan = cellPunkt('A9');
+                  await flytta(undan.x, undan.y, 600);
+                  await sleep(800);
+              } }
+        ];
+
         /* ---------- b) och c) i Exempel 1: börjar i det färdiga bladet ---------- */
         async function andra(ref, text) {
             await ringaIn(ref, REFF[0], 1.15);
@@ -1023,7 +1109,8 @@
             'sparkonto-b': { steg: SPARKONTO_B, fore: function () { return fore([SPARKONTO]); } },
             'sparkonto-c': { steg: SPARKONTO_C, fore: function () { return fore([SPARKONTO, SPARKONTO_B]); } },
             arligt: { steg: ARLIGT },
-            billan: { steg: BILAN }
+            billan: { steg: BILAN },
+            kaststeg: { steg: KASTSTEG }
         };
         var SCEN = SCENER[scen];
         var STEG = SCEN.steg;

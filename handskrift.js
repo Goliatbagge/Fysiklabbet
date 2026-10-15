@@ -20716,6 +20716,521 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ---------------- scen: två steg för hand (fy2-1.9 Ex 1) ----------
+   * Stegmetoden (Eulers metod) på ett kast utan luftmotstånd: 8,0 m/s i
+   * x-led, 6,0 m/s i y-led, tidssteget 0,10 s. a) två steg, där läget
+   * räknas med hastigheten i stegets början och v_y ändras med a_y·Δt,
+   * b) samma läge exakt ur formlerna för kaströrelse och felet i y-led.
+   * Ingen figur: uppgiften har ingen, och lösningen är ren räkning (REGEL
+   * "RITA BARA AV DET SOM BEHÖVS"). Startvärdena samlas i en klammer
+   * direkt under rubriken, eftersom alla stegets formler använder dem.
+   * Siffrorna är identiska med textlösningen i fy2-1.9.md. */
+  function layoutStegtva(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function rubrik(txt, yy) { placeString(txt, padL, yy, s * 0.62, F * 0.62, acts); pause(300); }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    var y = 70;
+    var adv = 1.7 * F;
+    var bw = 292;
+
+    /* ================= a) två steg ================= */
+    var bA = bubble(90, 110, 250, [
+      [['a) Stegmetoden: nytt värde är']],
+      [['gammalt värde plus ändringen']],
+      [['under tidssteget.']]
+    ]);
+    tanke(bA);
+    rubrik('a) Två steg med stegmetoden', y);
+    y += 1.2 * F;
+
+    var bK = bubble(90, bubbleTop(y), 250, [
+      [['Origo i utkastpunkten. Utan']],
+      [['luftmotstånd är accelerationen']],
+      [['i x-led noll, så farten i x-led']],
+      [['ändras aldrig.']]
+    ]);
+    tanke(bK);
+    var klam = valueBracket(acts,
+      ['x_0=0', 'y_0=0', 'v_x=8,0 m/s', 'v_y_,_0=6,0 m/s',
+       'a_y=−g≈−9,82 m/s^2', 'Δt=0,10 s'], padL, y, s, F);
+    stepEnd();
+    y = klam.yEnd;
+
+    /* --- steg 1 --- */
+    y += adv + 0.4 * F;
+    var b1 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Steg 1. Det nya läget räknas']],
+      [['med hastigheten i stegets']],
+      [['början.']]
+    ]);
+    tanke(b1);
+    rubrik('Steg 1: till t=0,10 s', y);
+    y += 1.5 * F;
+    placeString('x_1=x_0+v_x·Δt', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    placeString('=0+8,0·0,10=0,80 m', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    placeString('y_1=y_0+v_y_,_0·Δt', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    placeString('=0+6,0·0,10=0,60 m', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv;
+    var bV = bubble(140, bubbleTop(y - adv), bw, [
+      [['Under steget har tyngd-']],
+      [['accelerationen bromsat bollen']],
+      [['i y-led. Ny hastighet:']]
+    ]);
+    tanke(bV);
+    placeString('v_y_,_1=v_y_,_0+a_y·Δt', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    placeString('=6,0+(−9,82)·0,10=5,018 m/s', padL, y, s, F, acts);
+    stepEnd();
+
+    /* --- steg 2 --- */
+    y += adv + 0.5 * F;
+    var b2 = bubble(140, bubbleTop(y - adv), bw, [
+      [['Steg 2. Samma räkning igen,']],
+      [['nu från värdena efter steg 1.']]
+    ]);
+    tanke(b2);
+    rubrik('Steg 2: till t=0,20 s', y);
+    y += 1.5 * F;
+    placeString('x_2=x_1+v_x·Δt', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    placeString('=0,80+8,0·0,10=1,60 m', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    placeString('y_2=y_1+v_y_,_1·Δt', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    placeString('=0,60+5,018·0,10', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    var xIns = placeString('=1,1018 m', padL, y, s, F, acts);
+    stepEnd();
+
+    var bAvr = bubble(140, bubbleTop(y), bw, [
+      [['Först nu avrundar jag. Två']],
+      [['värdesiffror: 1,1 m.']]
+    ]);
+    tanke(bAvr);
+    placeString('≈1,1 m', xIns, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var bR = bubble(120, bubbleTop(y - adv), bw, [
+      [['Bollen har flyttat 1,6 m framåt']],
+      [['och stigit drygt en meter på en']],
+      [['femtedels sekund. Rimligt!']]
+    ]);
+    tanke(bR);
+    var xe = placeString('Svar: x=1,6 m och y=1,1 m', padL, y, s, F, acts);
+    underline(xe, y);
+    stepEnd();
+
+    /* ================= b) exakt och felet ================= */
+    y += adv + 1.1 * F;
+    var bB = bubble(120, bubbleTop(y - adv), bw, [
+      [['b) Utan luftmotstånd finns']],
+      [['exakta formler. Hastighetens']],
+      [['komposanter är redan givna.']]
+    ]);
+    tanke(bB);
+    rubrik('b) Exakt läge med formlerna för kaströrelse', y);
+    y += 1.6 * F;
+    placeString('x=v_x·t=8,0·0,20=1,6 m', padL, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.4 * F;
+    var xt = placeString('y=v_y_,_0·t−', padL, y, s, F, acts);
+    fracH('g·t^2', '2', xt + 0.45 * F, y);
+    stepEnd();
+
+    y += adv + 0.6 * F;
+    var bKB = bubble(140, bubbleTop(y - adv), bw, [
+      [['Värdena i klammern.']]
+    ]);
+    tanke(bKB);
+    var klamB = valueBracket(acts,
+      ['v_y_,_0=6,0 m/s', 'g≈9,82 m/s^2', 't=0,20 s'], padL, y, s, F);
+    stepEnd();
+    y = klamB.yEnd;
+
+    y += adv + 1.4 * F;
+    xt = placeString('y=6,0·0,20−', padL, y, s, F, acts);
+    fracH('9,82·0,20^2', '2', xt + 0.45 * F, y);
+    stepEnd();
+    y += adv + 0.4 * F;
+    var xInsB = placeString('=1,0036 m', padL, y, s, F, acts);
+    stepEnd();
+    var bAvrB = bubble(140, bubbleTop(y), bw, [
+      [['Två värdesiffror: 1,0 m.']]
+    ]);
+    tanke(bAvrB);
+    placeString('≈1,0 m', xInsB, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.6 * F;
+    var bF = bubble(140, bubbleTop(y - adv), bw, [
+      [['Felet är skillnaden mellan']],
+      [['stegmetodens y och det exakta.']]
+    ]);
+    tanke(bF);
+    rubrik('Stegmetodens fel i y-led', y);
+    y += 1.5 * F;
+    var xInsF = placeString('1,1018−1,0036=0,0982 m', padL, y, s, F, acts);
+    stepEnd();
+    placeString('≈0,10 m', xInsF, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var bRB = bubble(120, bubbleTop(y - adv), bw, [
+      [['Stegmetoden räknar med farten']],
+      [['i stegets början, men bollen']],
+      [['bromsas hela tiden. Därför']],
+      [['hamnar den lite för högt.']]
+    ]);
+    tanke(bRB);
+    placeString('Svar: x=1,6 m och y=1,0 m.', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    var xeB = placeString('Stegmetoden ger y 0,10 m för högt.', padL, y, s, F, acts);
+    underline(xeB, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: tennisboll med luftmotstånd (fy2-1.9 Ex 2) ----
+   * En tennisboll (57 g) med hastigheten 24 m/s i x-led och 18 m/s i
+   * y-led, luftmotståndet F_luft = k·v² med k = 0,0012 kg/m. a) farten
+   * med Pythagoras och luftmotståndet, jämfört med tyngdkraften,
+   * b) accelerationen i x- och y-led ur a_x = −k·v·v_x/m och
+   * a_y = −g − k·v·v_y/m, c) hastigheten efter ett tidssteg 0,050 s med
+   * stegmetoden. Figuren: bollen med hastighetens komposanter (blå, från
+   * bollens kant) och den resulterande hastigheten, komposanternas
+   * parallellogram streckad. Siffrorna är identiska med textlösningen. */
+  function layoutStegluft(cfg, F) {
+    var s = F / 100;
+    var acts = [];
+    var padL = 30;
+
+    function pause(ms) { acts.push({ kind: 'pause', ms: ms }); }
+    function line(p1, p2, color) {
+      acts.push({ kind: 'stroke', pts: humanize([p1, p2]), color: color || null });
+    }
+    function dash(p1, p2, color) {
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+      var L = Math.hypot(dx, dy) || 1;
+      var n = Math.max(2, Math.round(L / 14));
+      for (var i = 0; i < n; i++) {
+        var t0 = i / n, t1 = t0 + 0.55 / n;
+        line([p1[0] + dx * t0, p1[1] + dy * t0],
+             [p1[0] + dx * t1, p1[1] + dy * t1], color);
+      }
+    }
+    function bubble(x, y, w, lines) {
+      return { bubble: 1, x: x, y: y, w: w, lines: lines, wins: [] };
+    }
+    var FIGB_Y = 330;
+    function figurBubble(w, lines) { return bubble(120, FIGB_Y, w, lines); }
+    function stepEnd() { pause(240); acts.push({ kind: 'lineEnd' }); pause(320); }
+    function tanke(b) {
+      acts.push({ kind: 'show', obj: b });
+      stepEnd();
+      acts.push({ kind: 'hide', obj: b });
+      pause(300);
+    }
+    function underline(xEnd, y) {
+      pause(220);
+      acts.push({ kind: 'stroke',
+        pts: underlinePts(padL - 2, xEnd - 0.10 * F, y, F) });
+    }
+    function arrowHead(tipX, tipY, fromX, fromY, len, color) {
+      var dx = tipX - fromX, dy = tipY - fromY;
+      var L = Math.hypot(dx, dy) || 1;
+      dx /= L; dy /= L;
+      var a = 28 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
+      line([tipX - (dx * ca - dy * sa) * len, tipY - (dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+      line([tipX - (dx * ca + dy * sa) * len, tipY - (-dx * sa + dy * ca) * len],
+           [tipX, tipY], color);
+    }
+    function arrow(p1, p2, color) {
+      line(p1, p2, color);
+      arrowHead(p2[0], p2[1], p1[0], p1[1], 10, color);
+    }
+    function fracH(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = stringAdvance(numS, s, F), dw = stringAdvance(denS, s, F);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      placeString(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, s, F, acts);
+      pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]) });
+      pause(130);
+      placeString(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, s, F, acts);
+      return x0 + w + 1.5;
+    }
+    function rubrik(txt, yy) { placeString(txt, padL, yy, s * 0.62, F * 0.62, acts); pause(300); }
+    function bubbleTop(prevBase) { return prevBase + 0.28 * F + 33; }
+
+    /* --- figuren: bollen och hastighetens komposanter, 4 px per m/s --- */
+    var bx = 160, by = 262, R = 7;
+    var vxL = 96, vyL = 72;                   /* 24 m/s och 18 m/s */
+    var b1 = figurBubble(270, [
+      [['Ritar bollen och hastigheten.']],
+      [['Komposanterna 24 m/s och']],
+      [['18 m/s ger farten med']],
+      [['Pythagoras sats.']]
+    ]);
+    tanke(b1);
+    (function () {                            /* bollen */
+      var c = [];
+      for (var i = 0; i <= 28; i++) c.push([bx + R * Math.cos(i / 28 * 2 * Math.PI), by + R * Math.sin(i / 28 * 2 * Math.PI)]);
+      acts.push({ kind: 'stroke', pts: c });
+    })();
+    pause(140);
+    arrow([bx + R, by], [bx + R + vxL, by], BLUE);
+    arrow([bx, by - R], [bx, by - R - vyL], BLUE);
+    pause(140);
+    dash([bx + R + vxL, by], [bx + R + vxL, by - R - vyL], BLUE);
+    dash([bx, by - R - vyL], [bx + R + vxL, by - R - vyL], BLUE);
+    pause(140);
+    arrow([bx + 0.8 * R, by - 0.6 * R], [bx + R + vxL, by - R - vyL], BLUE);
+    pause(160);
+    placeString('v_x=24 m/s', bx + 10, by + 34, s * 0.55, F * 0.55, acts, BLUE);
+    var wvy = stringAdvance('v_y=18 m/s', s * 0.55, F * 0.55);
+    placeString('v_y=18 m/s', bx - 12 - wvy, by - 40, s * 0.55, F * 0.55, acts, BLUE);
+    placeString('v', bx + R + vxL + 12, by - R - vyL + 8, s * 0.62, F * 0.62, acts, BLUE);
+    stepEnd();
+
+    var y = 410;
+    var adv = 1.7 * F;
+    var bw = 292;
+
+    /* ================= a) luftmotståndet ================= */
+    var bA = bubble(120, bubbleTop(344), bw, [
+      [['a) Luftmotståndet beror på']],
+      [['farten. Den räknar jag ut först.']]
+    ]);
+    tanke(bA);
+    rubrik('a) Farten och luftmotståndet', y);
+    y += 1.9 * F;
+    var xv = placeString('v=', padL, y, s, F, acts);
+    var cw = stringAdvance('v_x^2+v_y^2', s, F);
+    var xs = rootSign(acts, xv, y, cw, F, { yTop: y - 1.32 * F });
+    placeString('v_x^2+v_y^2', xs, y, s, F, acts);
+    stepEnd();
+    y += adv + 0.3 * F;
+    xv = placeString('=', padL, y, s, F, acts);
+    cw = stringAdvance('24^2+18^2', s, F);
+    xs = rootSign(acts, xv, y, cw, F, { yTop: y - 1.32 * F });
+    var xr = placeString('24^2+18^2', xs, y, s, F, acts);
+    placeString('=30 m/s', xr + 0.15 * F, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.4 * F;
+    placeString('F_l_u_f_t=k·v^2', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    var bKA = bubble(140, bubbleTop(y - adv), bw, [
+      [['Konstanten och farten i']],
+      [['klammern.']]
+    ]);
+    tanke(bKA);
+    var klamA = valueBracket(acts, ['k=0,0012 kg/m', 'v=30 m/s'], padL, y, s, F);
+    stepEnd();
+    y = klamA.yEnd;
+    y += adv + 0.9 * F;
+    var xInsA = placeString('F_l_u_f_t=0,0012·30^2=1,08 N', padL, y, s, F, acts);
+    stepEnd();
+    var bAvrA = bubble(140, bubbleTop(y), bw, [
+      [['Två värdesiffror: 1,1 N.']]
+    ]);
+    tanke(bAvrA);
+    placeString('≈1,1 N', xInsA, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.3 * F;
+    var bG = bubble(140, bubbleTop(y - adv), bw, [
+      [['Jämför med tyngdkraften.']],
+      [['Massan 57 g = 0,057 kg.']]
+    ]);
+    tanke(bG);
+    var xInsG = placeString('F_G=m·g=0,057·9,82=0,55974 N', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    placeString('≈0,56 N', padL + stringAdvance('F_G=m·g', s, F), y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var bRA = bubble(120, bubbleTop(y - adv), bw, [
+      [['1,08 delat med 0,56 är nästan 2.']],
+      [['Tennisbollen är snabb, så stort']],
+      [['luftmotstånd är rimligt.']]
+    ]);
+    tanke(bRA);
+    placeString('Svar: 1,1 N, nästan dubbelt så', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    var xeA = placeString('stort som tyngdkraften 0,56 N', padL, y, s, F, acts);
+    underline(xeA, y);
+    stepEnd();
+
+    /* ================= b) accelerationen ================= */
+    y += adv + 1.2 * F;
+    var bB = bubble(120, bubbleTop(y - adv), bw, [
+      [['b) Newtons andra lag i varje']],
+      [['led. Luftmotståndet är riktat']],
+      [['mot hastigheten.']]
+    ]);
+    tanke(bB);
+    rubrik('b) Accelerationen med luftmotstånd', y);
+    y += 2.0 * F;
+    var xa = placeString('a_x=−', padL, y, s, F, acts);
+    xa = fracH('k·v·v_x', 'm', xa + 0.45 * F, y);
+    placeString('   a_y=−g−', xa + 0.4 * F, y, s, F, acts);
+    fracH('k·v·v_y', 'm', xa + 0.4 * F + stringAdvance('   a_y=−g−', s, F) + 0.45 * F, y);
+    stepEnd();
+
+    y += adv + 0.7 * F;
+    var bKB = bubble(140, bubbleTop(y - adv), bw, [
+      [['Alla värden i klammern, massan']],
+      [['i kilogram.']]
+    ]);
+    tanke(bKB);
+    var klamB = valueBracket(acts,
+      ['k=0,0012 kg/m', 'v=30 m/s', 'v_x=24 m/s', 'v_y=18 m/s',
+       'm=57 g=0,057 kg', 'g≈9,82 m/s^2'], padL, y, s, F);
+    stepEnd();
+    y = klamB.yEnd;
+
+    y += adv + 1.5 * F;
+    xa = placeString('a_x=−', padL, y, s, F, acts);
+    fracH('0,0012·30·24', '0,057', xa + 0.45 * F, y);
+    stepEnd();
+    y += adv + 0.5 * F;
+    var xInsB = placeString('=−15,157... m/s^2', padL, y, s, F, acts);
+    stepEnd();
+    var bAvrB = bubble(140, bubbleTop(y), bw, [
+      [['Två värdesiffror: −15 m/s².']]
+    ]);
+    tanke(bAvrB);
+    placeString('≈−15 m/s^2', xInsB, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 1.5 * F;
+    xa = placeString('a_y=−9,82−', padL, y, s, F, acts);
+    fracH('0,0012·30·18', '0,057', xa + 0.45 * F, y);
+    stepEnd();
+    y += adv + 0.5 * F;
+    var xInsB2 = placeString('=−21,188... m/s^2', padL, y, s, F, acts);
+    stepEnd();
+    placeString('≈−21 m/s^2', xInsB2, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var bRB = bubble(120, bubbleTop(y - adv), bw, [
+      [['På väg upp drar luftmotståndet']],
+      [['också nedåt. Därför är accelera-']],
+      [['tionen i y-led mer negativ än']],
+      [['−9,82 m/s². Rimligt!']]
+    ]);
+    tanke(bRB);
+    var xeB = placeString('Svar: a_x=−15 m/s^2 och a_y=−21 m/s^2', padL, y, s, F, acts);
+    underline(xeB, y);
+    stepEnd();
+
+    /* ================= c) ett tidssteg ================= */
+    y += adv + 1.2 * F;
+    var bC = bubble(120, bubbleTop(y - adv), bw, [
+      [['c) Stegmetoden med accelera-']],
+      [['tionen i stegets början, alltså']],
+      [['den från b).']]
+    ]);
+    tanke(bC);
+    rubrik('c) Hastigheten efter ett tidssteg', y);
+    y += 1.6 * F;
+    placeString('v_x_,_1=v_x_,_0+a_x·Δt', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    var klamC = valueBracket(acts,
+      ['v_x_,_0=24 m/s', 'v_y_,_0=18 m/s', 'a_x=−15,157... m/s^2',
+       'a_y=−21,188... m/s^2', 'Δt=0,050 s'], padL, y, s, F);
+    stepEnd();
+    y = klamC.yEnd;
+    y += adv + 0.9 * F;
+    placeString('v_x_,_1=24+(−15,157...)·0,050', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    var xInsC = placeString('=23,242... m/s', padL, y, s, F, acts);
+    stepEnd();
+    placeString('≈23 m/s', xInsC, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.4 * F;
+    placeString('v_y_,_1=v_y_,_0+a_y·Δt', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    placeString('=18+(−21,188...)·0,050', padL, y, s, F, acts);
+    stepEnd();
+    y += adv;
+    var xInsC2 = placeString('=16,940... m/s', padL, y, s, F, acts);
+    stepEnd();
+    placeString('≈17 m/s', xInsC2, y, s, F, acts);
+    stepEnd();
+
+    y += adv + 0.9 * F;
+    var bRC = bubble(120, bubbleTop(y - adv), bw, [
+      [['Båda komposanterna har minskat']],
+      [['lite på en tjugondels sekund.']],
+      [['Rimligt!']]
+    ]);
+    tanke(bRC);
+    var xeC = placeString('Svar: v_x=23 m/s och v_y=17 m/s', padL, y, s, F, acts);
+    underline(xeC, y);
+    stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ---------------- scen: vikt i fjäder "Hookes lag" (fy2-2.1 Ex 1)
    * En vikt på 250 g förlänger en fjäder 8,0 cm; vikten dras sedan ned
    * 5,0 cm och släpps. a) fjäderkonstanten ur Hookes lag (kraften är
@@ -58011,6 +58526,7 @@
                    flygandekossan: layoutFlygandekossan,
                    kastboll: layoutKastboll, kasthojd: layoutKasthojd,
                    bordkula: layoutBordkula,
+                   stegtva: layoutStegtva, stegluft: layoutStegluft,
                    fjader: layoutFjader, fjaderenergi: layoutFjaderenergi,
                    dampning: layoutDampning,
                    'kopplade-fjadrar': layoutKoppladeFjadrar, harmonisk: layoutHarmonisk,

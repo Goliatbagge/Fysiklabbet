@@ -21,7 +21,8 @@
  *           gaffelbalans3d, dubbelkon, linjal, fodelsedag, talmangder,
  *           magnetpoler, magnetdelning, koniskpendel, kastvektorer,
  *           snettkast, skjutochslapp, kanonvagn, galton, kalkylblad,
- *           kopplade-fjadrar, lodlinje, hjulprojektion, svangningsgrafer
+ *           kopplade-fjadrar, lodlinje, hjulprojektion, svangningsgrafer,
+ *           periodtid (fy2-2.4: m, k och A mot periodtiden)
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -11217,8 +11218,231 @@
         rita();
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: periodtid
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.4 (Svängningstid i fjäder): en vikt svänger i en fjäder med
+    // periodtiden T = 2π · √(m/k). Tre glidare (massa, fjäderkonstant,
+    // amplitud) ändrar svängningen medan den pågår, och en graf ritar läget
+    // mot tiden. Mellan de två senaste topparna i grafen sitter en måttlinje
+    // med den UPPMÄTTA periodtiden: eleven ser att den ändras med m och k
+    // men står still när amplituden ändras. Fasen räknas fortlöpande, så
+    // svängningen hoppar aldrig när en glidare dras. Vikten ritas större ju
+    // tyngre den är och fjädern grövre ju styvare den är. Jämviktsläget
+    // hålls på samma höjd (den statiska förlängningen ritas inte).
+    var ptRaknare = 0;
+    function buildPeriodtid(node, cfg) {
+        var INK = '#1f2530', GREY = '#9aa0a6', BLA = '#2563c9', RUTA = '#2563c9', AXEL = '#38bdf8', MATT = '#0f8a7e';
+        var FX = 124, FTAK = 22, CY = 158, PXCM = 7;     // fjäder, tak, jämviktsläge, px per cm
+        var GX0 = 216, GX1 = 500, FONSTER = 4;          // grafens t-axel och tidsfönster (s)
+        var m = 0.100, k = 11, A = 5.0;                 // kg, N/m, cm
+        var fas = 0, tid = 0, spelar = false;
+        var hist = [], toppar = [];                     // [{t, y}] och topparnas tider
+        var id = 'ms-pt-rutnat-' + (++ptRaknare);
+
+        function T() { return 2 * Math.PI * Math.sqrt(m / k); }
+        function r1(v) { return Math.round(v * 10) / 10; }
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function lbl(x, y, anchor, inner, size, color) {
+            return '<text x="' + r1(x) + '" y="' + r1(y) + '" text-anchor="' + anchor + '" font-size="' +
+                (size || 15) + '" fill="' + (color || INK) + '">' + inner + '</text>';
+        }
+        function fmt(v, d) {
+            var s = v.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        }
+
+        // ── Fast bakgrund ────────────────────────────────────────────────
+        var bas = '<defs><pattern id="' + id + '" width="20" height="20" patternUnits="userSpaceOnUse">' +
+            '<path d="M 20 0 L 0 0 0 20" fill="none" stroke="' + RUTA + '" stroke-width="0.6" opacity="0.13"/></pattern></defs>' +
+            '<rect x="0" y="-10" width="620" height="330" fill="url(#' + id + ')"/>';
+        bas += '<line x1="' + (FX - 34) + '" y1="' + FTAK + '" x2="' + (FX + 34) + '" y2="' + FTAK + '" stroke="' + INK + '" stroke-width="1.8"/>';
+        for (var hx = FX - 30; hx <= FX + 32; hx += 8) {
+            bas += '<line x1="' + hx + '" y1="' + FTAK + '" x2="' + (hx - 7) + '" y2="' + (FTAK - 7) +
+                '" stroke="' + INK + '" stroke-width="1" stroke-linecap="round"/>';
+        }
+        bas += '<line x1="' + (FX - 40) + '" y1="' + CY + '" x2="' + (FX + 40) + '" y2="' + CY + '" stroke="' + GREY +
+            '" stroke-width="1" stroke-dasharray="5 4"/>';
+        // grafens axlar: pilspets bara åt det positiva hållet
+        bas += '<line x1="' + GX0 + '" y1="' + (CY + 84) + '" x2="' + GX0 + '" y2="' + (CY - 96) + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
+            '<polygon points="' + (GX0 - 4) + ',' + (CY - 96) + ' ' + GX0 + ',' + (CY - 106) + ' ' + (GX0 + 4) + ',' + (CY - 96) + '" fill="' + AXEL + '"/>' +
+            '<line x1="' + GX0 + '" y1="' + CY + '" x2="' + (GX1 + 4) + '" y2="' + CY + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
+            '<polygon points="' + (GX1 + 4) + ',' + (CY - 4) + ' ' + (GX1 + 14) + ',' + CY + ' ' + (GX1 + 4) + ',' + (CY + 4) + '" fill="' + AXEL + '"/>' +
+            lbl(GX0 - 8, CY - 92, 'end', it('y'), 15) +
+            lbl(GX1 + 14, CY + 20, 'end', it('t'), 15);
+
+        function fjader(yTopp) {
+            var y0 = FTAK, y1 = yTopp, led = 6, n = 10, spole = y1 - y0 - 2 * led;
+            var pts = [FX + ',' + y0, FX + ',' + (y0 + led)];
+            for (var i = 0; i < n * 2; i++) {
+                pts.push(r1(FX + (i % 2 ? -12 : 12)) + ',' + r1(y0 + led + spole * (i + 0.5) / (n * 2)));
+            }
+            pts.push(FX + ',' + r1(y1 - led), FX + ',' + r1(y1));
+            var bredd = 1.1 + (k - 5) / 35 * 2.4;          // styvare fjäder ritas grövre
+            return '<polyline points="' + pts.join(' ') + '" fill="none" stroke="#6f7680" stroke-width="' +
+                r1(bredd) + '" stroke-linejoin="round"/>';
+        }
+
+        function rita() {
+            var s = '';
+            var yPx = A * PXCM * Math.sin(fas);
+            var my = CY - yPx;
+            var sida = Math.max(20, Math.min(46, 30 * Math.cbrt(m / 0.1)));
+            s += fjader(my - sida / 2);
+            s += '<rect x="' + r1(FX - sida / 2) + '" y="' + r1(my - sida / 2) + '" width="' + r1(sida) + '" height="' + r1(sida) +
+                '" rx="3" fill="#6ba3d6" stroke="#2f6db0" stroke-width="1.5"/>';
+            // grafen: tidsfönstret flyter med när kurvan når högerkanten
+            var t0 = Math.max(0, tid - FONSTER);
+            function tx(t) { return GX0 + (t - t0) / FONSTER * (GX1 - GX0); }
+            var kurva = [];
+            for (var j = 0; j < hist.length; j++) {
+                if (hist[j].t < t0) continue;
+                kurva.push(r1(tx(hist[j].t)) + ',' + r1(CY - hist[j].y));
+            }
+            if (kurva.length > 1) {
+                s += '<polyline points="' + kurva.join(' ') + '" fill="none" stroke="' + BLA + '" stroke-width="2.2" stroke-linejoin="round"/>';
+            }
+            s += '<line x1="' + (FX + sida / 2 + 4) + '" y1="' + r1(my) + '" x2="' + r1(tx(tid)) + '" y2="' + r1(my) +
+                '" stroke="' + BLA + '" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/>';
+            s += '<circle cx="' + r1(tx(tid)) + '" cy="' + r1(my) + '" r="4" fill="' + BLA + '"/>';
+            // måttlinje mellan de två senaste topparna: den uppmätta periodtiden
+            var n = toppar.length;
+            if (n >= 2 && toppar[n - 2].t >= t0) {
+                var xa = tx(toppar[n - 2].t), xb = tx(toppar[n - 1].t);
+                var ya = CY - toppar[n - 2].y, yb = CY - toppar[n - 1].y;
+                var ym = CY - 84;
+                s += '<line x1="' + r1(xa) + '" y1="' + r1(ya - 5) + '" x2="' + r1(xa) + '" y2="' + (ym - 6) + '" stroke="' + MATT + '" stroke-width="1" stroke-dasharray="3 3"/>';
+                s += '<line x1="' + r1(xb) + '" y1="' + r1(yb - 5) + '" x2="' + r1(xb) + '" y2="' + (ym - 6) + '" stroke="' + MATT + '" stroke-width="1" stroke-dasharray="3 3"/>';
+                if (xb - xa > 16) {
+                    s += '<line x1="' + r1(xa + 7) + '" y1="' + ym + '" x2="' + r1(xb - 7) + '" y2="' + ym + '" stroke="' + MATT + '" stroke-width="1.6" stroke-linecap="butt"/>';
+                    s += '<polygon points="' + r1(xa) + ',' + ym + ' ' + r1(xa + 8) + ',' + (ym - 4) + ' ' + r1(xa + 8) + ',' + (ym + 4) + '" fill="' + MATT + '"/>';
+                    s += '<polygon points="' + r1(xb) + ',' + ym + ' ' + r1(xb - 8) + ',' + (ym - 4) + ' ' + r1(xb - 8) + ',' + (ym + 4) + '" fill="' + MATT + '"/>';
+                }
+                var mx = Math.max(GX0 + 50, Math.min(GX1 - 50, (xa + xb) / 2));
+                s += lbl(mx, ym - 9, 'middle', it('T') + ' = ' + fmt(toppar[n - 1].t - toppar[n - 2].t, 2) + ' s', 14, MATT);
+            }
+            dyn.innerHTML = s;
+            info.innerHTML = 'Periodtid enligt formeln: <em>T</em> = ' + fmt(T(), 2) + ' s';
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="40 10 480 240" width="620" height="310" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="En vikt svänger i en fjäder. En graf till höger ritar viktens läge y mot tiden t, ' +
+            'och en måttlinje mellan de två senaste topparna visar den uppmätta periodtiden T.">' +
+            bas + '<g class="ms-pt-dyn"></g></svg>';
+        var dyn = scene.querySelector('.ms-pt-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, 480 / 240, 250);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var startBtn = document.createElement('button');
+        startBtn.type = 'button';
+        startBtn.className = 'minisim-btn';
+        var omBtn = document.createElement('button');
+        omBtn.type = 'button';
+        omBtn.className = 'minisim-btn';
+        omBtn.textContent = 'Börja om';
+        controls.appendChild(startBtn);
+        controls.appendChild(omBtn);
+        card.appendChild(controls);
+
+        function glidare(namn, bet, min, max, steg, varde, visa, satt) {
+            var rad = document.createElement('div');
+            rad.className = 'minisim-slider-row';
+            var l = document.createElement('span');
+            l.className = 'minisim-slider-lbl';
+            l.innerHTML = namn + ' <em>' + bet + '</em>';
+            var sl = document.createElement('input');
+            sl.type = 'range';
+            sl.className = 'minisim-slider';
+            sl.min = String(min); sl.max = String(max); sl.step = String(steg); sl.value = String(varde);
+            sl.setAttribute('aria-label', namn);
+            var v = document.createElement('span');
+            v.className = 'minisim-slider-val';
+            v.textContent = visa(varde);
+            sl.addEventListener('input', function () {
+                var x = parseFloat(sl.value);
+                satt(x);
+                v.textContent = visa(x);
+                rita();
+            });
+            rad.appendChild(l); rad.appendChild(sl); rad.appendChild(v);
+            card.appendChild(rad);
+        }
+        glidare('Massa', 'm', 50, 1000, 50, 100,
+            function (x) { return fmt(x, 0) + ' g'; }, function (x) { m = x / 1000; });
+        glidare('Fjäderkonstant', 'k', 5, 40, 1, 11,
+            function (x) { return fmt(x, 0) + ' N/m'; }, function (x) { k = x; });
+        glidare('Amplitud', 'A', 1, 10, 0.5, 5,
+            function (x) { return fmt(x, 1) + ' cm'; }, function (x) { A = x; });
+
+        var info = document.createElement('div');
+        info.className = 'minisim-info';
+        info.style.marginTop = '6px';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        // ── Animation ─────────────────────────────────────────────────────
+        var raf = null, senast = 0, synlig = true;
+        function steg(nu) {
+            raf = null;
+            if (!spelar || !synlig) return;
+            var dt = senast ? Math.min(0.05, (nu - senast) / 1000) : 0;
+            senast = nu;
+            var fore = Math.floor((fas - Math.PI / 2) / (2 * Math.PI));
+            tid += dt;
+            fas += dt * 2 * Math.PI / T();
+            var efter = Math.floor((fas - Math.PI / 2) / (2 * Math.PI));
+            if (efter > fore) {
+                // toppens tidpunkt interpoleras inom tidssteget
+                var fasTopp = Math.PI / 2 + 2 * Math.PI * efter;
+                var tTopp = tid - (fas - fasTopp) / (2 * Math.PI / T());
+                toppar.push({ t: tTopp, y: A * PXCM });
+                if (toppar.length > 40) toppar.shift();
+            }
+            hist.push({ t: tid, y: A * PXCM * Math.sin(fas) });
+            while (hist.length && hist[0].t < tid - FONSTER - 0.5) hist.shift();
+            rita();
+            raf = requestAnimationFrame(steg);
+        }
+        function kor() { if (!raf && spelar && synlig) { senast = 0; raf = requestAnimationFrame(steg); } }
+        function setSpelar(v) {
+            spelar = v;
+            startBtn.textContent = spelar ? 'Pausa' : (tid > 0 ? 'Fortsätt' : 'Starta');
+            startBtn.classList.toggle('ms-primar', !spelar);
+            if (spelar) kor();
+        }
+        function nollstall() { fas = 0; tid = 0; hist = [{ t: 0, y: 0 }]; toppar = []; }
+        startBtn.addEventListener('click', function () { setSpelar(!spelar); });
+        omBtn.addEventListener('click', function () { nollstall(); setSpelar(false); rita(); });
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                synlig = entries[0].isIntersecting;
+                if (synlig) kor();
+            }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        nollstall();
+        rita();
+        setSpelar(true);                         // startar av sig själv
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   svangningsgrafer: buildSvangningsgrafer,
+                  periodtid: buildPeriodtid,
                   hjulprojektion: buildHjulprojektion,
                   'kopplade-fjadrar': buildKoppladeFjadrar,
                   cirkularrorelse: buildCirkularrorelse,

@@ -11289,6 +11289,7 @@
         var GX0 = 216, GX1 = 500, FONSTER = 4;          // grafens t-axel och tidsfönster (s)
         var m = 0.100, k = 11, A = 5.0;                 // kg, N/m, cm
         var fas = 0, tid = 0, spelar = false;
+        var drar = false, dragY = 0, dragits = false;                  // vikten hålls i handen (px, uppåt positiv)
         var hist = [], toppar = [];                     // [{t, y}] och topparnas tider
         var id = 'ms-pt-rutnat-' + (++ptRaknare);
 
@@ -11338,12 +11339,13 @@
 
         function rita() {
             var s = '';
-            var yPx = A * PXCM * Math.sin(fas);
+            var yPx = drar ? dragY : A * PXCM * Math.sin(fas);
             var my = CY - yPx;
             var sida = Math.max(20, Math.min(46, 30 * Math.cbrt(m / 0.1)));
             s += fjader(my - sida / 2);
             s += '<rect x="' + r1(FX - sida / 2) + '" y="' + r1(my - sida / 2) + '" width="' + r1(sida) + '" height="' + r1(sida) +
                 '" rx="3" fill="#6ba3d6" stroke="#2f6db0" stroke-width="1.5"/>';
+            if (!dragits) s += lbl(FX, CY + 88, 'middle', 'Dra i vikten', 13, '#4a5160');
             // grafen: tidsfönstret flyter med när kurvan når högerkanten
             var t0 = Math.max(0, tid - FONSTER);
             function tx(t) { return GX0 + (t - t0) / FONSTER * (GX1 - GX0); }
@@ -11393,7 +11395,9 @@
             'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
             'aria-label="En vikt svänger i en fjäder. En graf till höger ritar viktens läge y mot tiden t, ' +
             'och en måttlinje mellan de två senaste topparna visar den uppmätta periodtiden T.">' +
-            bas + '<g class="ms-pt-dyn"></g></svg>';
+            bas + '<g class="ms-pt-dyn"></g>' +
+            '<rect class="ms-pt-grepp" x="' + (FX - 44) + '" y="' + (FTAK + 4) + '" width="88" height="' + (CY + 96 - FTAK) +
+            '" fill="transparent" style="cursor:grab;touch-action:none"/></svg>';
         var dyn = scene.querySelector('.ms-pt-dyn');
         card.appendChild(scene);
         msFullskarm(card, scene, 480 / 240, 300);
@@ -11438,12 +11442,13 @@
             topp.appendChild(l); topp.appendChild(v);
             rad.appendChild(topp); rad.appendChild(sl);
             panel.appendChild(rad);
+            return { sl: sl, v: v, visa: visa };
         }
         glidare('Massa', 'm', 50, 1000, 50, 100,
             function (x) { return fmt(x, 0) + ' g'; }, function (x) { m = x / 1000; });
         glidare('Fjäderkonstant', 'k', 5, 40, 1, 11,
             function (x) { return fmt(x, 0) + ' N/m'; }, function (x) { k = x; });
-        glidare('Amplitud', 'A', 1, 10, 0.5, 5,
+        var aGlid = glidare('Amplitud', 'A', 1, 10, 0.5, 5,
             function (x) { return fmt(x, 1) + ' cm'; }, function (x) { A = x; });
 
         var info = document.createElement('div');
@@ -11459,6 +11464,15 @@
             if (!spelar || !synlig) return;
             var dt = senast ? Math.min(0.05, (nu - senast) / 1000) : 0;
             senast = nu;
+            if (drar) {
+                // vikten följer handen; grafen ritar handens rörelse
+                tid += dt;
+                hist.push({ t: tid, y: dragY });
+                while (hist.length && hist[0].t < tid - FONSTER - 0.5) hist.shift();
+                rita();
+                raf = requestAnimationFrame(steg);
+                return;
+            }
             var fore = Math.floor((fas - Math.PI / 2) / (2 * Math.PI));
             tid += dt;
             fas += dt * 2 * Math.PI / T();
@@ -11485,6 +11499,53 @@
         function nollstall() { fas = 0; tid = 0; hist = [{ t: 0, y: 0 }]; toppar = []; }
         startBtn.addEventListener('click', function () { setSpelar(!spelar); });
         omBtn.addEventListener('click', function () { nollstall(); setSpelar(false); rita(); });
+
+        // ── Dra vikten upp eller ned och släpp ────────────────────────────
+        // Medan vikten hålls följer den pekaren (högst 10 cm från jämvikts-
+        // läget). Släpps den startar svängningen från vila i vändläget:
+        // amplituden blir avståndet till jämviktsläget, och glidaren för
+        // amplituden följer med.
+        var svgEl = scene.querySelector('svg'), grepp = scene.querySelector('.ms-pt-grepp');
+        function yUrPekare(ev) {
+            var pt = svgEl.createSVGPoint();
+            pt.x = ev.clientX; pt.y = ev.clientY;
+            var mtx = svgEl.getScreenCTM();
+            if (!mtx) return dragY;
+            var y = CY - pt.matrixTransform(mtx.inverse()).y;
+            return Math.max(-10 * PXCM, Math.min(10 * PXCM, y));
+        }
+        grepp.addEventListener('pointerdown', function (ev) {
+            drar = true;
+            dragits = true;
+            dragY = yUrPekare(ev);
+            grepp.style.cursor = 'grabbing';
+            try { grepp.setPointerCapture(ev.pointerId); } catch (e) {}
+            toppar = [];
+            if (!spelar) setSpelar(true);
+            rita();
+            ev.preventDefault();
+        });
+        grepp.addEventListener('pointermove', function (ev) {
+            if (!drar) return;
+            dragY = yUrPekare(ev);
+            rita();
+        });
+        function slapp() {
+            if (!drar) return;
+            drar = false;
+            grepp.style.cursor = 'grab';
+            A = Math.abs(dragY) / PXCM;
+            var n = Math.floor((fas - Math.PI / 2) / (2 * Math.PI));
+            // vändläget: överst är fasen π/2, nederst 3π/2 (samma varv)
+            fas = Math.PI / 2 + 2 * Math.PI * n + (dragY >= 0 ? 0 : Math.PI);
+            if (dragY >= 0 && A > 0) toppar.push({ t: tid, y: A * PXCM });
+            var ag = Math.max(1, Math.min(10, Math.round(A * 2) / 2));
+            aGlid.sl.value = String(ag);
+            aGlid.v.textContent = aGlid.visa(Math.round(A * 10) / 10);
+            rita();
+        }
+        grepp.addEventListener('pointerup', slapp);
+        grepp.addEventListener('pointercancel', slapp);
         if ('IntersectionObserver' in window) {
             var io = new IntersectionObserver(function (entries) {
                 synlig = entries[0].isIntersecting;

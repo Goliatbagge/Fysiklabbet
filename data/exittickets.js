@@ -5841,6 +5841,73 @@ window.EXITTICKETS = {
   },
 ],
 
+'fy2-1.9': [
+  {
+    question: 'Varför behövs en numerisk metod för att räkna på ett kast **med** luftmotstånd?',
+    choices: [
+      'Luftmotståndet är så litet att det inte går att mäta',
+      'Luftmotståndet beror på farten, så accelerationen ändras hela tiden och formlerna för konstant acceleration gäller inte',
+      'Med luftmotstånd är hastigheten i *x*-led konstant, men inte i *y*-led',
+      'Formlerna för kaströrelse gäller bara för kast rakt uppåt',
+    ],
+    correct: 1,
+    why: [
+      'Luftmotståndet kan vara stort, för en badmintonboll till och med större än tyngdkraften. Problemet är inte storleken utan att det ändras under kastet.',
+      'Formlerna för kaströrelse kräver konstant acceleration. Luftmotståndet beror på farten, och farten ändras hela tiden, så accelerationen ändras också. Då räknar man i stället fram rörelsen i små tidssteg.',
+      'Det är tvärtom: med luftmotstånd bromsas bollen även i *x*-led, så hastigheten i *x*-led är inte längre konstant.',
+      'Formlerna för kaströrelse gäller för alla vinklar, men bara om accelerationen är konstant, alltså utan luftmotstånd.',
+    ],
+  },
+  {
+    question: 'Hur räknas läget i *y*-led ut i nästa steg med stegmetoden?',
+    choices: [
+      '$y_{n+1} = y_n + a_{y,n} \\cdot \\Delta t$',
+      '$y_{n+1} = v_{y,n} \\cdot \\Delta t$',
+      '$y_{n+1} = y_n \\cdot v_{y,n} \\cdot \\Delta t$',
+      '$y_{n+1} = y_n + v_{y,n} \\cdot \\Delta t$',
+    ],
+    correct: 3,
+    why: [
+      'Accelerationen gånger tidssteget är ändringen av **hastigheten**, inte av läget.',
+      'Här saknas det gamla läget. Hastigheten gånger tidssteget är bara **ändringen** av läget under steget.',
+      'Det nya läget ska vara det gamla läget **plus** ändringen, inte gånger.',
+      'Nytt värde = gammalt värde + ändringen. Läget ändras med hastigheten i stegets början gånger tidssteget, $\\Delta y = v_{y,n} \\cdot \\Delta t$.',
+    ],
+  },
+  {
+    question: 'En simulering med stegmetoden ger kastvidden 10,57 m med tidssteget 0,1 s. Den exakta kastvidden är 9,78 m. Ungefär vilken kastvidd ger simuleringen med tidssteget 0,05 s?',
+    choices: [
+      '10,2 m',
+      '10,6 m',
+      '9,8 m',
+      '11,4 m',
+    ],
+    correct: 0,
+    why: [
+      'Felet är 10,57 − 9,78 = 0,79 m. För stegmetoden halveras felet ungefär när tidssteget halveras, så felet blir cirka 0,40 m och kastvidden cirka 10,2 m.',
+      'Ett kortare tidssteg ger ett mindre fel, så resultatet ändras och kommer närmare det exakta värdet.',
+      'Felet minskar, men försvinner inte helt. Med halva tidssteget blir det ungefär hälften så stort.',
+      'Ett kortare tidssteg ger ett **mindre** fel, inte ett större. Kastvidden 11,4 m hör till tidssteget 0,2 s.',
+    ],
+  },
+  {
+    question: 'En boll med luftmotstånd är på väg **nedåt**, så att $v_y$ är negativ. Hur påverkar luftmotståndet accelerationen i *y*-led, $a_y = -g - \\dfrac{k \\cdot v \\cdot v_y}{m}$?',
+    choices: [
+      'Luftmotståndet gör accelerationen i *y*-led mer negativ, så bollen faller fortare',
+      'Luftmotståndet påverkar bara rörelsen i *x*-led',
+      'Termen $-\\dfrac{k \\cdot v \\cdot v_y}{m}$ blir positiv, så luftmotståndet bromsar fallet',
+      'Accelerationen blir exakt $-g$ eftersom luftmotståndet och tyngdkraften tar ut varandra',
+    ],
+    correct: 2,
+    why: [
+      'Det gäller på väg **upp**, när $v_y$ är positiv. På väg ned är luftmotståndet riktat uppåt, mot rörelsen.',
+      'Luftmotståndet är motriktat hastigheten och har därför en komposant i båda leden.',
+      'När $v_y$ är negativ blir $-\\dfrac{k \\cdot v \\cdot v_y}{m}$ positiv. Luftmotståndet är riktat uppåt, mot rörelsen, och bromsar fallet.',
+      'Accelerationen är bara $-g$ utan luftmotstånd. Tar luftmotståndet och tyngdkraften ut varandra blir accelerationen i stället noll.',
+    ],
+  },
+],
+
 // ── 13-fy2-ch2a.js ────────────────────────────────────────────
 
 'fy2-2.1': [

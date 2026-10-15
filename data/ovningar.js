@@ -15301,6 +15301,159 @@ Eftersom $4{,}5\\ \\mathrm{m} > 2{,}5\\ \\mathrm{m}$ går bollen över muren med
         },
     ],
 
+    'fy2-1.9': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En boll befinner sig i läget $x = 2{,}0\\ \\mathrm{m}$, $y = 1{,}5\\ \\mathrm{m}$ och har hastigheten $5{,}0\\ \\mathrm{m/s}$ i *x*-led och $3{,}0\\ \\mathrm{m/s}$ i *y*-led. Använd stegmetoden med tidssteget $\\Delta t = 0{,}10\\ \\mathrm{s}$. Hur högt befinner sig bollen efter ett steg, det vill säga vilket värde har *y*?`,
+            answer: { value: 1.8, unit: 'm' },
+            solution: `Stegmetoden: det nya läget är det gamla läget plus hastigheten gånger tidssteget.
+
+$$ x_{n+1} = x_n + v_{x,n} \\cdot \\Delta t \\qquad\\qquad y_{n+1} = y_n + v_{y,n} \\cdot \\Delta t $$
+
+$$
+\\left[ \\begin{array}{l}
+x_0 = 2{,}0\\ \\mathrm{m} \\\\
+y_0 = 1{,}5\\ \\mathrm{m} \\\\
+v_{x,0} = 5{,}0\\ \\mathrm{m/s} \\\\
+v_{y,0} = 3{,}0\\ \\mathrm{m/s} \\\\
+\\Delta t = 0{,}10\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ x_1 = 2{,}0 + 5{,}0 \\cdot 0{,}10 = 2{,}5\\ \\mathrm{m} $$
+
+$$ y_1 = 1{,}5 + 3{,}0 \\cdot 0{,}10 = 1{,}8\\ \\mathrm{m} $$
+
+**Svar:** Bollen befinner sig i $x = 2{,}5\\ \\mathrm{m}$ och $y = 1{,}8\\ \\mathrm{m}$.
+
+**Generell slutsats:** Läget ändras med hastigheten gånger tidssteget, $\\Delta x = v_x \\cdot \\Delta t$ och $\\Delta y = v_y \\cdot \\Delta t$. Stegmetoden använder hastigheten i stegets början.`,
+        },
+        {
+            level: 1,
+            question: `En boll är på väg uppåt med hastigheten $4{,}0\\ \\mathrm{m/s}$ i *y*-led. Luftmotståndet försummas. Vilken hastighet i *y*-led har bollen efter ett tidssteg $\\Delta t = 0{,}050\\ \\mathrm{s}$ enligt stegmetoden? ($g = 9{,}82\\ \\mathrm{m/s^2}$)`,
+            answer: { value: 3.5, unit: 'm/s' },
+            solution: `Den nya hastigheten är den gamla hastigheten plus accelerationen gånger tidssteget. Utan luftmotstånd är accelerationen i *y*-led $a_y = -g$.
+
+$$ v_{y,n+1} = v_{y,n} + a_y \\cdot \\Delta t $$
+
+$$
+\\left[ \\begin{array}{l}
+v_{y,0} = 4{,}0\\ \\mathrm{m/s} \\\\
+a_y = -g \\approx -9{,}82\\ \\mathrm{m/s^2} \\\\
+\\Delta t = 0{,}050\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ v_{y,1} = 4{,}0 + (-9{,}82) \\cdot 0{,}050 = 3{,}509\\ \\mathrm{m/s} \\approx 3{,}5\\ \\mathrm{m/s} $$
+
+**Svar:** Hastigheten i *y*-led är $3{,}5\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Utan luftmotstånd minskar hastigheten i *y*-led med $g \\cdot \\Delta t$ i varje steg, här med knappt $0{,}5\\ \\mathrm{m/s}$. Hastigheten i *x*-led ändras inte alls.`,
+        },
+        {
+            level: 1,
+            question: `Luftmotståndet på en fotboll kan beskrivas med $F_\\mathrm{luft} = k \\cdot v^2$, där $k = 0{,}0057\\ \\mathrm{kg/m}$. Hur stort är luftmotståndet när bollen har farten $25\\ \\mathrm{m/s}$?`,
+            answer: { value: 3.6, unit: 'N' },
+            solution: `Vi sätter in värdena i formeln för luftmotstånd.
+
+$$ F_\\mathrm{luft} = k \\cdot v^2 $$
+
+$$
+\\left[ \\begin{array}{l}
+k = 0{,}0057\\ \\mathrm{kg/m} \\\\
+v = 25\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ F_\\mathrm{luft} = 0{,}0057 \\cdot 25^2 = 3{,}5625\\ \\mathrm{N} \\approx 3{,}6\\ \\mathrm{N} $$
+
+**Svar:** Luftmotståndet är $3{,}6\\ \\mathrm{N}$.
+
+**Generell slutsats:** En fotboll väger ungefär $0{,}43\\ \\mathrm{kg}$, så tyngdkraften är cirka $4{,}2\\ \\mathrm{N}$. Vid $25\\ \\mathrm{m/s}$ är luftmotståndet alltså nästan lika stort som tyngdkraften, och då går det inte att bortse från det. Eftersom kraften växer med farten i kvadrat ger dubbla farten fyra gånger så stort luftmotstånd.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett kast ska simuleras med stegmetoden i ett kalkylblad. Kolumn A innehåller tiden *t*, B läget *x*, C läget *y*, D hastigheten $v_x$ och E hastigheten $v_y$. Startvärdena står i rad 2 och tidssteget är $0{,}05\\ \\mathrm{s}$. Vilken formel ska stå i cell C3?`,
+            choices: [
+                `\`=C2+D2*0,05\``,
+                `\`=B2+E2*0,05\``,
+                `\`=C2+E2*0,05\``,
+                `\`=C2*E2*0,05\``,
+            ],
+            correct: 2,
+            solution: `Kolumn C innehåller läget i *y*-led. Enligt stegmetoden är det nya läget det gamla läget plus hastigheten i *y*-led gånger tidssteget:
+
+$$ y_{n+1} = y_n + v_{y,n} \\cdot \\Delta t $$
+
+Det gamla läget står i C2 och hastigheten i *y*-led i stegets början står i E2. Formeln i C3 blir därför \`=C2+E2*0,05\`.
+
+Formeln med D2 använder hastigheten i *x*-led, som inte hör till läget i *y*-led. Formeln som börjar med B2 utgår från fel läge, och formeln med multiplikation i stället för addition ger ändringen gånger det gamla läget, vilket saknar mening.
+
+**Svar:** \`=C2+E2*0,05\`
+
+**Generell slutsats:** Varje formel i en rad hämtar sina värden från raden ovanför, alltså från stegets början. När formeln kopieras nedåt flyttar alla hänvisningar med en rad, och kalkylbladet räknar ett steg per rad.`,
+        },
+        {
+            level: 2,
+            question: `En badmintonboll med massan $5{,}0\\ \\mathrm{g}$ slås iväg med hastigheten $12\\ \\mathrm{m/s}$ i *x*-led och $16\\ \\mathrm{m/s}$ i *y*-led. Luftmotståndet är $F_\\mathrm{luft} = k \\cdot v^2$ med $k = 0{,}0011\\ \\mathrm{kg/m}$. Bestäm bollens acceleration i *y*-led i utslagsögonblicket. ($g = 9{,}82\\ \\mathrm{m/s^2}$)`,
+            answer: { value: -80, unit: 'm/s²' },
+            solution: `Accelerationen beror på farten, så vi räknar ut den först.
+
+$$ v = \\sqrt{v_x^2 + v_y^2} = \\sqrt{12^2 + 16^2} = 20\\ \\mathrm{m/s} $$
+
+Sedan använder vi formeln för accelerationen i *y*-led med luftmotstånd.
+
+$$ a_y = -g - \\frac{k \\cdot v \\cdot v_y}{m} $$
+
+$$
+\\left[ \\begin{array}{l}
+g \\approx 9{,}82\\ \\mathrm{m/s^2} \\\\
+k = 0{,}0011\\ \\mathrm{kg/m} \\\\
+v = 20\\ \\mathrm{m/s} \\\\
+v_y = 16\\ \\mathrm{m/s} \\\\
+m = 5{,}0\\ \\mathrm{g} = 0{,}0050\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ a_y = -9{,}82 - \\frac{0{,}0011 \\cdot 20 \\cdot 16}{0{,}0050} = -80{,}22\\ \\mathrm{m/s^2} \\approx -80\\ \\mathrm{m/s^2} $$
+
+**Svar:** Accelerationen i *y*-led är $-80\\ \\mathrm{m/s^2}$.
+
+**Generell slutsats:** Luftmotståndet ger här en acceleration som är sju gånger så stor som tyngdaccelerationen. Det är därför en badmintonboll tvärbromsar efter slaget och faller nästan rakt ned. I *x*-led blir accelerationen $a_x = -\\dfrac{0{,}0011 \\cdot 20 \\cdot 12}{0{,}0050} = -52{,}8\\ \\mathrm{m/s^2}$, så även farten framåt minskar snabbt.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Badmintonbollen i förra uppgiften ($m = 5{,}0\\ \\mathrm{g}$, $k = 0{,}0011\\ \\mathrm{kg/m}$) släpps från en hög läktare och faller rakt nedåt. En simulering med stegmetoden visar att farten först ökar men sedan närmar sig ett konstant värde. Förklara varför, och bestäm det värdet. ($g = 9{,}82\\ \\mathrm{m/s^2}$)`,
+            answer: { value: 6.7, unit: 'm/s' },
+            solution: `Bollen faller rakt nedåt, så $v_x = 0$ och $v_y$ är negativ. Farten är då $v = -v_y$, och formeln för accelerationen i *y*-led blir
+
+$$ a_y = -g - \\frac{k \\cdot v \\cdot v_y}{m} = -g + \\frac{k \\cdot v^2}{m} $$
+
+I början är farten liten, så $a_y \\approx -g$ och bollen ökar farten. Men luftmotståndet växer med farten i kvadrat, och den andra termen blir allt större. Till slut tar termerna ut varandra, $a_y = 0$, och då ändras hastigheten inte längre. Det är samma sak som att luftmotståndet är lika stort som tyngdkraften. Vi löser ut farten:
+
+$$ -g + \\frac{k \\cdot v^2}{m} = 0 \\quad\\Leftrightarrow\\quad v = \\sqrt{\\frac{m \\cdot g}{k}} $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 5{,}0\\ \\mathrm{g} = 0{,}0050\\ \\mathrm{kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{m/s^2} \\\\
+k = 0{,}0011\\ \\mathrm{kg/m}
+\\end{array} \\right]
+$$
+
+$$ v = \\sqrt{\\frac{0{,}0050 \\cdot 9{,}82}{0{,}0011}} = 6{,}681\\ \\mathrm{m/s} \\approx 6{,}7\\ \\mathrm{m/s} $$
+
+**Svar:** Luftmotståndet växer med farten tills det är lika stort som tyngdkraften. Då är accelerationen noll och farten blir konstant, ungefär $6{,}7\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Den konstanta farten kallas gränshastighet. Stegmetoden når den av sig själv: i varje steg blir ändringen $a_y \\cdot \\Delta t$ mindre, eftersom $a_y$ närmar sig noll. En tennisboll har en gränshastighet på drygt $20\\ \\mathrm{m/s}$, så i ett vanligt kast hinner den inte bromsas lika tydligt.`,
+        },
+    ],
+
     // ════════════════════════════════════════════════════════════════════
     // Fysik nivå 2 — Kapitel 2: Mekaniska vågor
     // ════════════════════════════════════════════════════════════════════

@@ -569,12 +569,39 @@
         '.ms-sk-legend i.ms-sk-streck{height:0;border-top:2px dashed #7c828c;}',
         '.minisim-slider-row.ms-sk-av{opacity:.45;}',
         '.ms-sk-tabwrap{margin-top:8px;overflow-x:auto;border:1px solid #ddd3c0;border-radius:4px;background:#fdfaf3;}',
-        '.ms-sk-tab{border-collapse:collapse;width:100%;font-family:' + FONT + ';font-size:12.5px;',
+        '.ms-sk-tab{border-collapse:collapse;width:100%;margin:0!important;font-family:' + FONT + ';font-size:12.5px;',
         '  font-variant-numeric:tabular-nums;color:#1f2530;font-style:normal;white-space:nowrap;}',
         '.ms-sk-tab th,.ms-sk-tab td{padding:4px 8px;text-align:right;border-bottom:1px solid #ece3d2;}',
         '.ms-sk-tab th{font-weight:600;color:#4a5160;background:#f3ecdd;}',
         '.ms-sk-tab tr.ms-sk-akt td{background:#e6eefb;font-weight:600;}',
         '.ms-sk-not{margin-top:6px;font-size:12.5px;}',
+        /* Fullskärm (typ: stegkast): kortet rymmer mycket mer än scenen
+           (reglage, tabell), så den vanliga kolumnen klämde ihop scenen.
+           Bred skärm: scenen så stor som höjden tillåter till vänster och
+           verktygen i en skrollbar panel till höger. Stående eller smal
+           skärm: scenen överst och panelen under, och kortet skrollar. */
+        '.minisim-card.ms-sk:fullscreen{flex-direction:row;align-items:center;justify-content:center;gap:20px;padding:16px;}',
+        '.minisim-card.ms-sk:-webkit-full-screen{flex-direction:row;align-items:center;justify-content:center;gap:20px;padding:16px;}',
+        '.minisim-card.ms-sk:fullscreen .minisim-scene{flex:0 0 auto;width:min(calc(100vw - 540px),calc((100vh - 40px)*var(--ms-asp,2)));}',
+        '.minisim-card.ms-sk:-webkit-full-screen .minisim-scene{flex:0 0 auto;width:min(calc(100vw - 540px),calc((100vh - 40px)*var(--ms-asp,2)));}',
+        '.minisim-card.ms-sk:fullscreen .ms-sk-panel{flex:0 0 480px;width:480px;max-height:calc(100vh - 32px);overflow-y:auto;padding-right:4px;}',
+        '.minisim-card.ms-sk:-webkit-full-screen .ms-sk-panel{flex:0 0 480px;width:480px;max-height:calc(100vh - 32px);overflow-y:auto;padding-right:4px;}',
+        '.minisim-card.ms-sk:fullscreen .ms-sk-panel .minisim-controls{width:auto;}',
+        '.minisim-card.ms-sk:-webkit-full-screen .ms-sk-panel .minisim-controls{width:auto;}',
+        '.minisim-card.ms-sk:fullscreen .ms-sk-panel .minisim-slider-row{width:auto;}',
+        '.minisim-card.ms-sk:-webkit-full-screen .ms-sk-panel .minisim-slider-row{width:auto;}',
+        '.minisim-card.ms-sk:fullscreen .ms-sk-panel .minisim-info{width:auto;}',
+        '.minisim-card.ms-sk:-webkit-full-screen .ms-sk-panel .minisim-info{width:auto;}',
+        '.minisim-card.ms-sk:fullscreen .ms-sk-tab th,.minisim-card.ms-sk:fullscreen .ms-sk-tab td{padding:4px 5px;}',
+        '.minisim-card.ms-sk:-webkit-full-screen .ms-sk-tab th,.minisim-card.ms-sk:-webkit-full-screen .ms-sk-tab td{padding:4px 5px;}',
+        '@media (max-width:900px),(orientation:portrait){',
+        '.minisim-card.ms-sk:fullscreen{flex-direction:column;align-items:stretch;justify-content:flex-start;overflow-y:auto;}',
+        '.minisim-card.ms-sk:-webkit-full-screen{flex-direction:column;align-items:stretch;justify-content:flex-start;overflow-y:auto;}',
+        '.minisim-card.ms-sk:fullscreen .minisim-scene{width:100%;flex:0 0 auto;}',
+        '.minisim-card.ms-sk:-webkit-full-screen .minisim-scene{width:100%;flex:0 0 auto;}',
+        '.minisim-card.ms-sk:fullscreen .ms-sk-panel{flex:0 0 auto;width:100%;max-height:none;overflow:visible;}',
+        '.minisim-card.ms-sk:-webkit-full-screen .ms-sk-panel{flex:0 0 auto;width:100%;max-height:none;overflow:visible;}',
+        '}',
         '.lab-minisim p{margin:0;}'
     ].join('\n');
 
@@ -11736,7 +11763,7 @@
 
         // ── DOM ───────────────────────────────────────────────────────────
         var card = document.createElement('div');
-        card.className = 'minisim-card ms-ljus ms-bred';
+        card.className = 'minisim-card ms-ljus ms-bred ms-sk';
         if (cfg.titel) {
             var tEl = document.createElement('div');
             tEl.className = 'minisim-title';
@@ -11757,6 +11784,11 @@
         var dyn = scene.querySelector('.ms-sk-dyn');
         card.appendChild(scene);
         msFullskarm(card, scene, W / H, 380);
+        // Allt under scenen ligger i en panel: i fullskärm hamnar den bredvid
+        // scenen (bred skärm) eller under den (stående skärm), se .ms-sk i CSS.
+        var panel = document.createElement('div');
+        panel.className = 'ms-sk-panel';
+        card.appendChild(panel);
 
         var legend = document.createElement('div');
         legend.className = 'ms-sk-legend';
@@ -11764,7 +11796,7 @@
             '<span><i class="ms-sk-streck"></i>Utan luftmotstånd, exakt</span>' +
             '<span><i style="background:' + GRN + '"></i>Hastighet <em>v</em></span>' +
             '<span><i style="background:' + ROD + '"></i>Acceleration <em>a</em></span>';
-        card.appendChild(legend);
+        panel.appendChild(legend);
 
         var controls = document.createElement('div');
         controls.className = 'minisim-controls';
@@ -11793,7 +11825,7 @@
         }
         kryss('Luftmotstånd', p.luft, function (v) { p.luft = v; kRad.classList.toggle('ms-sk-av', !v); kSl.disabled = !v; nyttKast(); });
         kryss('Visa vektorer', p.vektorer, function (v) { p.vektorer = v; rita(); });
-        card.appendChild(controls);
+        panel.appendChild(controls);
 
         function glidare(namnHtml, min, max, steg, varde, visa, satt) {
             var rad = document.createElement('div');
@@ -11819,7 +11851,7 @@
             par.style.cssText = 'display:flex;flex:1 1 170px;align-items:center;gap:10px;min-width:0;';
             par.appendChild(sl); par.appendChild(v);
             rad.appendChild(l); rad.appendChild(par);
-            card.appendChild(rad);
+            panel.appendChild(rad);
             return { rad: rad, sl: sl };
         }
         glidare('Tidssteg Δ<em>t</em>', 0.02, 0.5, 0.01, p.dt,
@@ -11837,7 +11869,7 @@
         var info = document.createElement('div');
         info.className = 'minisim-info ms-brod';
         info.style.marginTop = '8px';
-        card.appendChild(info);
+        panel.appendChild(info);
 
         var tabWrap = document.createElement('div');
         tabWrap.className = 'ms-sk-tabwrap';
@@ -11846,13 +11878,13 @@
             '<th><em>v</em><sub>y</sub> (m/s)</th><th><em>a</em><sub>x</sub> (m/s²)</th><th><em>a</em><sub>y</sub> (m/s²)</th>' +
             '</tr></thead><tbody></tbody></table>';
         var tbody = tabWrap.querySelector('tbody');
-        card.appendChild(tabWrap);
+        panel.appendChild(tabWrap);
         var not = document.createElement('div');
         not.className = 'minisim-info ms-brod ms-sk-not';
         not.innerHTML = 'Bollen är en tennisboll med massan 57 g. Med luftmotstånd är ' +
             '<em>a</em><sub>x</sub> = −<em>k</em> · <em>v</em> · <em>v</em><sub>x</sub> / <em>m</em> och ' +
             '<em>a</em><sub>y</sub> = −<em>g</em> − <em>k</em> · <em>v</em> · <em>v</em><sub>y</sub> / <em>m</em>.';
-        card.appendChild(not);
+        panel.appendChild(not);
         node.appendChild(card);
 
         // ── Uppspelning ───────────────────────────────────────────────────

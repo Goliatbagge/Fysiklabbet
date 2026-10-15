@@ -540,6 +540,18 @@
         '.minisim-card.ms-svgfs:fullscreen .minisim-info{width:min(92vw,640px);}',
         '.minisim-card.ms-svgfs:-webkit-full-screen .minisim-scene{width:min(100%,calc((100vh - var(--ms-fs-ctrl,220px))*var(--ms-asp,1.8)));}',
         '.minisim-card.ms-svgfs:-webkit-full-screen .ms-kv-svg{max-width:none!important;width:100%;height:auto;}',
+        /* periodtid: knapparna och glidarna ligger på scenens papper, under
+           figuren, så att reglage och svängning hör ihop. Smal skärm: en
+           glidare per rad. */
+        '.ms-pt-panel{display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:4px 18px;align-items:end;' +
+            'margin:2px 10px 4px;padding-top:8px;border-top:1px dashed rgba(31,37,48,0.18);font-family:' + FONT + ';}',
+        '.ms-pt-knappar{display:flex;gap:6px;}',
+        '.ms-pt-knappar .minisim-btn{padding:5px 12px;font-size:13px;}',
+        '.ms-pt-cell{display:flex;flex-direction:column;gap:2px;min-width:0;}',
+        '.ms-pt-topp{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:#4a5160;white-space:nowrap;}',
+        '.ms-pt-topp b{font-weight:500;color:#1f2530;}',
+        '.ms-pt-cell .minisim-slider{width:100%;flex:none;margin:6px 0 4px;}',
+        '@media (max-width:600px){.ms-pt-panel{grid-template-columns:minmax(0,1fr);gap:6px;}}',
         '.lab-minisim p{margin:0;}'
     ].join('\n');
 
@@ -10801,7 +10813,7 @@
             // höger om fullskärmsknappen (i 3D sitter den inne i iframen på 14,14)
             (tre ? tre3dScene : scene).appendChild(dimBtn);
             dimBtn.style.top = tre ? '14px' : '8px';
-            dimBtn.style.left = tre ? '66px' : '56px';
+            dimBtn.style.left = tre ? '60px' : '53px';
             dimBtn.textContent = tre ? '2D' : '3D';
             dimBtn.title = tre ? 'Tillbaka till den plana figuren' : 'Visa försöket i 3D';
             dimBtn.setAttribute('aria-pressed', tre ? 'true' : 'false');
@@ -10836,7 +10848,7 @@
         var dimBtn = document.createElement('button');
         dimBtn.type = 'button';
         dimBtn.className = 'minisim-fsbtn';
-        dimBtn.style.left = '56px';
+        dimBtn.style.left = '53px';
         dimBtn.style.font = '600 13px Poppins, system-ui, sans-serif';
         dimBtn.textContent = '3D';
         dimBtn.title = 'Visa försöket i 3D';
@@ -11361,10 +11373,14 @@
             bas + '<g class="ms-pt-dyn"></g></svg>';
         var dyn = scene.querySelector('.ms-pt-dyn');
         card.appendChild(scene);
-        msFullskarm(card, scene, 480 / 240, 250);
+        msFullskarm(card, scene, 480 / 240, 300);
 
+        // knappar och glidare i en panel PÅ scenen, under figuren
+        var panel = document.createElement('div');
+        panel.className = 'ms-pt-panel';
+        scene.appendChild(panel);
         var controls = document.createElement('div');
-        controls.className = 'minisim-controls';
+        controls.className = 'ms-pt-knappar';
         var startBtn = document.createElement('button');
         startBtn.type = 'button';
         startBtn.className = 'minisim-btn';
@@ -11374,21 +11390,21 @@
         omBtn.textContent = 'Börja om';
         controls.appendChild(startBtn);
         controls.appendChild(omBtn);
-        card.appendChild(controls);
+        panel.appendChild(controls);
 
         function glidare(namn, bet, min, max, steg, varde, visa, satt) {
             var rad = document.createElement('div');
-            rad.className = 'minisim-slider-row';
+            rad.className = 'ms-pt-cell';
+            var topp = document.createElement('div');
+            topp.className = 'ms-pt-topp';
             var l = document.createElement('span');
-            l.className = 'minisim-slider-lbl';
             l.innerHTML = namn + ' <em>' + bet + '</em>';
             var sl = document.createElement('input');
             sl.type = 'range';
             sl.className = 'minisim-slider';
             sl.min = String(min); sl.max = String(max); sl.step = String(steg); sl.value = String(varde);
             sl.setAttribute('aria-label', namn);
-            var v = document.createElement('span');
-            v.className = 'minisim-slider-val';
+            var v = document.createElement('b');
             v.textContent = visa(varde);
             sl.addEventListener('input', function () {
                 var x = parseFloat(sl.value);
@@ -11396,8 +11412,9 @@
                 v.textContent = visa(x);
                 rita();
             });
-            rad.appendChild(l); rad.appendChild(sl); rad.appendChild(v);
-            card.appendChild(rad);
+            topp.appendChild(l); topp.appendChild(v);
+            rad.appendChild(topp); rad.appendChild(sl);
+            panel.appendChild(rad);
         }
         glidare('Massa', 'm', 50, 1000, 50, 100,
             function (x) { return fmt(x, 0) + ' g'; }, function (x) { m = x / 1000; });

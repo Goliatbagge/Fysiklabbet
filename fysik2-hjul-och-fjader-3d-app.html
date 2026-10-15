@@ -38,12 +38,32 @@
     <script>
         var __q = new URLSearchParams(location.search);
         if (__q.has('embed')) document.documentElement.classList.add('embed-mode');
+        // mini-läge: sidan körs som 3D-vyn i minisimuleringen hjulprojektion
+        // i teorin (fy2-2.3), bara scenen visas och kortet styr med postMessage.
+        window.__MINI = __q.has('mini');
+        if (window.__MINI) document.documentElement.classList.add('mini-mode');
     </script>
     <style>
         html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
         html.embed-mode #fb-feedback-widget { display: none !important; }
         html.embed-mode .pt-6 { padding-top: 0.5rem; }
         html.embed-mode .min-h-screen { min-height: 0 !important; }
+        /* Mini-läge (?embed=1&mini=1): bara scenen, samma mönster som
+           gaffelbalansen. Kortets egna reglage styr sidan; i fullskärm (sidans
+           egen .fs-btn) visas inställningsrutan som i originalet. 2D-knappen
+           göms, eftersom kortet har en egen kryssruta för 3D-vyn. */
+        html.mini-mode .min-h-screen { padding: 0 !important; }
+        html.mini-mode .max-w-6xl { max-width: none; padding-top: 0 !important; }
+        html.mini-mode .max-w-6xl > :not(main) { display: none !important; }
+        html.mini-mode main > .order-2 { display: none !important; }
+        html.mini-mode main .order-1 > :not(.scene-wrap) { display: none !important; }
+        html.mini-mode .scene-stage { height: 100vh; }
+        html.mini-mode .scene-wrap { border-radius: 6px; border: none; }
+        html.mini-mode .scene-wrap:not(.is-fs) .scene-toggles,
+        html.mini-mode .scene-wrap:not(.is-fs) .st-show-btn,
+        html.mini-mode .scene-wrap:not(.is-fs) .fs-quick,
+        html.mini-mode .dim-switch { display: none !important; }
+        html.mini-mode .vy-btn { top: 66px; }
         .dark-container { background: transparent; }
         .glass-card {
             background: var(--lab-bg, #f3eee4);
@@ -888,6 +908,23 @@
             };
             const tShow = (k) => setShow(s => ({ ...s, [k]: !s[k] }));
             const reset = () => { simRef.current.t = 0; simRef.current.alfa = 0; setRunning(false); };
+
+            // Mini-läget: minisim-kortet i teorin styr sidan via postMessage
+            useEffect(() => {
+                if (!window.__MINI) return;
+                const onMsg = (e) => {
+                    const msg = e.data;
+                    if (!msg || !msg.fysikHjul) return;
+                    const v = msg.value;
+                    if (msg.fysikHjul === 'spela') setRunning(!!v);
+                    else if (msg.fysikHjul === 'reset') { simRef.current.t = 0; simRef.current.alfa = 0; setRunning(false); }
+                    else if (msg.fysikHjul === 'T') setT(Math.max(T_MIN, Math.min(T_MAX, +v || 2)));
+                    else if (msg.fysikHjul === 'visa' && v)
+                        setShow(s => ({ ...s, ljus: !!v.ljus, vinkel: !!v.vinkel, graf: !!v.graf }));
+                };
+                window.addEventListener('message', onMsg);
+                return () => window.removeEventListener('message', onMsg);
+            }, []);
 
             const VIEWS = ['snett', 'lampan', 'hjulet'];
             const VIEW_NAMES = { snett: 'Snett framifrån', lampan: 'Från lampan', hjulet: 'Rakt mot hjulet' };

@@ -52,7 +52,7 @@
  * räknas från den vågräta radien, så att y = A · sin(ω · t); en streckad
  * vågrät linje binder stift, skugga, vikt och grafens punkt till samma höjd.
  * Glidare för periodtiden, kryssrutor för vinkeln och grafen. Ren SVG i
- * laboranstemat, inget ljud. Kryssrutan "3D-vy" byter scenen mot den
+ * laboranstemat, inget ljud. Knappen "3D" (till höger om fullskärmsknappen) byter scenen mot den
  * färdiga 3D-simuleringen fysik2-hjul-och-fjader-3d-app.html i en iframe
  * (?embed=1&mini=1), som kortets reglage styr med postMessage.
  *
@@ -10797,6 +10797,14 @@
             scene.style.display = tre ? 'none' : '';
             if (tre3dScene) tre3dScene.style.display = tre ? '' : 'none';
             info.style.display = tre ? 'none' : '';
+            // Växlingsknappen följer med till den synliga scenen, alltid till
+            // höger om fullskärmsknappen (i 3D sitter den inne i iframen på 14,14)
+            (tre ? tre3dScene : scene).appendChild(dimBtn);
+            dimBtn.style.top = tre ? '14px' : '8px';
+            dimBtn.style.left = tre ? '66px' : '56px';
+            dimBtn.textContent = tre ? '2D' : '3D';
+            dimBtn.title = tre ? 'Tillbaka till den plana figuren' : 'Visa försöket i 3D';
+            dimBtn.setAttribute('aria-pressed', tre ? 'true' : 'false');
             if (tre) { sandaAllt(); } else { kor(); rita(); }
         }
 
@@ -10824,13 +10832,22 @@
         var vinkelCk = mkCheck('Visa vinkeln', true);
         var grafCk = mkCheck('Visa graf', true);
         var lampCk = mkCheck('Visa lampa', true);
-        var treCk = mkCheck('3D-vy', false);
+        // 3D-knappen uppe till vänster på scenen, till höger om fullskärmsknappen
+        var dimBtn = document.createElement('button');
+        dimBtn.type = 'button';
+        dimBtn.className = 'minisim-fsbtn';
+        dimBtn.style.left = '56px';
+        dimBtn.style.font = '600 13px Poppins, system-ui, sans-serif';
+        dimBtn.textContent = '3D';
+        dimBtn.title = 'Visa försöket i 3D';
+        dimBtn.setAttribute('aria-label', 'Växla mellan 3D och plan figur');
+        dimBtn.setAttribute('aria-pressed', 'false');
+        scene.appendChild(dimBtn);
         controls.appendChild(startBtn);
         controls.appendChild(omBtn);
         controls.appendChild(vinkelCk.label);
         controls.appendChild(grafCk.label);
         controls.appendChild(lampCk.label);
-        controls.appendChild(treCk.label);
         card.appendChild(controls);
 
         var sliderRow = document.createElement('div');
@@ -10898,7 +10915,7 @@
             sandaVisa();
         });
         grafCk.cb.addEventListener('change', function () { visaGraf = grafCk.cb.checked; rita(); sandaVisa(); });
-        treCk.cb.addEventListener('change', function () { bytVy(treCk.cb.checked); });
+        dimBtn.addEventListener('click', function () { bytVy(!tre); });
         slider.addEventListener('input', function () {
             T = parseFloat(slider.value);
             syncSlider();

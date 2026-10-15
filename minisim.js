@@ -50,8 +50,10 @@
  * sig upp och ned i takt med en vikt i en fjäder bredvid. Vinkeln α = ω · t
  * räknas från den vågräta radien, så att y = A · sin(ω · t); en streckad
  * vågrät linje binder stift, skugga, vikt och grafens punkt till samma höjd.
- * Glidare för periodtiden, kryssrutor för vinkeln och grafen. Ren SVG i
- * laboranstemat, inget ljud, ingen fullskärm.
+ * Glidare för periodtiden, kryssrutor för vinkeln och grafen samt "3D-vy",
+ * som visar samma uppställning i sned parallellprojektion (lampa, hjul på
+ * ställ, vägg med hjulets och stiftets skuggor, fjäder). Ren SVG i
+ * laboranstemat, inget ljud.
  *
  * ── typ: svangningsgrafer ────────────────────────────────────────────────
  * Andra demonstrationen i fy2-2.3: en vikt svänger i en fjäder (A = 0,10 m,
@@ -10591,9 +10593,44 @@
         var GX0 = 384, GX1 = 584, FONSTER = 6;   // grafens t-axel (px) och tidsfönster (s)
         var T = 2;                               // periodtid (s)
         var alfa = 0, tid = 0, spelar = false;
-        var visaVinkel = true, visaGraf = true;
+        var visaVinkel = true, visaGraf = true, tre = false, visaLampa = true;
         var hist = [];                           // [{t, y}] för grafen
         var id = 'ms-hp-rutnat-' + (++hpRaknare);
+        // 3D-vyn: samma uppställning i sned parallellprojektion (vridning ψ
+        // kring den lodräta axeln, lutning θ nedåt). Världen: X mot väggen
+        // (ljusets riktning), Y uppåt, Z mot betraktaren. Fjädern står så att
+        // vikten, stiftets skugga och grafens punkt får samma höjd på skärmen
+        // (samma djup w), så att den streckade höjdlinjen förblir vågrät.
+        var PSI = 28 * Math.PI / 180, TH = 14 * Math.PI / 180;
+        var PC = Math.cos(PSI), PS = Math.sin(PSI), TC = Math.cos(TH), TS = Math.sin(TH);
+        var S3 = 0.86, OX3 = 108, OY3 = 146, W3 = 170, PINZ = 14, XS3 = W3 + 95;
+        var ZS3 = PINZ + (XS3 - W3) * PS / PC, TAK3 = 116, GOLV3 = -116;
+        function P(X, Y, Z) {
+            var u = X * PC + Z * PS, w = -X * PS + Z * PC;
+            return [OX3 + S3 * u, OY3 - S3 * (Y * TC - w * TS)];
+        }
+        function pt(q) { return r1(q[0]) + ',' + r1(q[1]); }
+        function poly(arr, attr) { return '<polygon points="' + arr.map(pt).join(' ') + '" ' + attr + '/>'; }
+        function lin(a, b, attr) {
+            return '<line x1="' + r1(a[0]) + '" y1="' + r1(a[1]) + '" x2="' + r1(b[0]) + '" y2="' + r1(b[1]) + '" ' + attr + '/>';
+        }
+        function skal(arr) {                     // konvext hölje (monotona kedjan)
+            var q = arr.slice().sort(function (a, b) { return a[0] - b[0] || a[1] - b[1]; });
+            function kr(o, a, b) { return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]); }
+            var lo = [], hi = [];
+            q.forEach(function (p) { while (lo.length > 1 && kr(lo[lo.length - 2], lo[lo.length - 1], p) <= 0) lo.pop(); lo.push(p); });
+            q.slice().reverse().forEach(function (p) { while (hi.length > 1 && kr(hi[hi.length - 2], hi[hi.length - 1], p) <= 0) hi.pop(); hi.push(p); });
+            return lo.slice(0, -1).concat(hi.slice(0, -1));
+        }
+        function lada(x0, x1, y0, y1, z0, z1, fy, sid, topp, kant) {
+            // synliga sidor: −X (mot betraktaren), +Z och +Y
+            var k = 'stroke="' + kant + '" stroke-width="1.3" stroke-linejoin="round"';
+            return poly([P(x0, y0, z0), P(x0, y1, z0), P(x0, y1, z1), P(x0, y0, z1)], 'fill="' + sid + '" ' + k) +
+                poly([P(x0, y0, z1), P(x1, y0, z1), P(x1, y1, z1), P(x0, y1, z1)], 'fill="' + fy + '" ' + k) +
+                poly([P(x0, y1, z0), P(x1, y1, z0), P(x1, y1, z1), P(x0, y1, z1)], 'fill="' + topp + '" ' + k);
+        }
+        var G2 = { x0: GX0, x1: GX1, cy: CY, a: A };
+        var G3 = { x0: 424, x1: GX1, cy: P(W3, 0, PINZ)[1], a: A * TC * S3 };
 
         function r1(v) { return Math.round(v * 10) / 10; }
         function fmt(v, d) {
@@ -10616,7 +10653,7 @@
         bas += '<defs><linearGradient id="' + id + '-ljus" x1="0" y1="0" x2="1" y2="0">' +
             '<stop offset="0" stop-color="#f6c84c" stop-opacity="0.55"/>' +
             '<stop offset="1" stop-color="#f6c84c" stop-opacity="0.16"/></linearGradient></defs>';
-        bas += '<g class="ms-hp-lampa">';
+        bas += '<g class="ms-hp-2d"><g class="ms-hp-lampa">';
         bas += '<polygon points="-12,124 ' + (VX - 7) + ',44 ' + (VX - 7) + ',256 -12,176" fill="url(#' + id + '-ljus)"/>';
         bas += '<line x1="-26" y1="170" x2="-26" y2="252" stroke="#3d434d" stroke-width="3"/>' +
             '<rect x="-44" y="250" width="36" height="6" rx="2" fill="#3d434d"/>' +
@@ -10637,17 +10674,22 @@
             bas += '<line x1="' + hx + '" y1="' + FTAK + '" x2="' + (hx - 7) + '" y2="' + (FTAK - 7) +
                 '" stroke="' + INK + '" stroke-width="1" stroke-linecap="round"/>';
         }
+        bas += '</g>';
         // grafens axlar: pilspets bara åt det positiva hållet
-        var graf = '<line x1="' + GX0 + '" y1="250" x2="' + GX0 + '" y2="52" stroke="' + AXEL + '" stroke-width="1.6"/>' +
-            '<polygon points="' + (GX0 - 4) + ',52 ' + GX0 + ',42 ' + (GX0 + 4) + ',52" fill="' + AXEL + '"/>' +
-            '<line x1="' + GX0 + '" y1="' + CY + '" x2="' + (GX1 + 2) + '" y2="' + CY + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
-            '<polygon points="' + (GX1 + 2) + ',' + (CY - 4) + ' ' + (GX1 + 12) + ',' + CY + ' ' + (GX1 + 2) + ',' + (CY + 4) + '" fill="' + AXEL + '"/>' +
-            lbl(GX0 - 7, 50, 'end', it('y'), 15) +
-            lbl(GX1 + 12, CY + 20, 'end', it('t'), 15) +
-            lbl(GX0 - 6, CY - A + 5, 'end', it('A'), 14) +
-            lbl(GX0 - 6, CY + 5, 'end', '0', 14) +
-            lbl(GX0 - 6, CY + A + 5, 'end', '−' + it('A'), 14) +
-            lbl(GX1 + 10, 32, 'end', it('y') + ' = ' + it('A') + ' · sin(' + it('ω') + ' · ' + it('t') + ')', 14, BLA);
+        function grafAxlar(g) {
+            var x0 = g.x0, x1 = g.x1, cy = r1(g.cy), a = g.a, top = r1(g.cy - a - 18), bot = r1(g.cy + a + 20);
+            return '<line x1="' + x0 + '" y1="' + bot + '" x2="' + x0 + '" y2="' + top + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
+                '<polygon points="' + (x0 - 4) + ',' + top + ' ' + x0 + ',' + r1(top - 10) + ' ' + (x0 + 4) + ',' + top + '" fill="' + AXEL + '"/>' +
+                '<line x1="' + x0 + '" y1="' + cy + '" x2="' + (x1 + 2) + '" y2="' + cy + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
+                '<polygon points="' + (x1 + 2) + ',' + r1(cy - 4) + ' ' + (x1 + 12) + ',' + cy + ' ' + (x1 + 2) + ',' + r1(cy + 4) + '" fill="' + AXEL + '"/>' +
+                lbl(x0 - 7, top - 2, 'end', it('y'), 15) +
+                lbl(x1 + 12, g.cy + 20, 'end', it('t'), 15) +
+                lbl(x0 - 6, g.cy - a + 5, 'end', it('A'), 14) +
+                lbl(x0 - 6, g.cy + 5, 'end', '0', 14) +
+                lbl(x0 - 6, g.cy + a + 5, 'end', '−' + it('A'), 14) +
+                lbl(x1 + 10, 32, 'end', it('y') + ' = ' + it('A') + ' · sin(' + it('ω') + ' · ' + it('t') + ')', 14, BLA);
+        }
+        var graf = grafAxlar(G2);
 
         function fjader(yTopp) {
             // ledare, tio jämna varv, ledare
@@ -10662,8 +10704,125 @@
             return '<polyline points="' + pts.join(' ') + '" fill="none" stroke="#7c828c" stroke-width="1.6" stroke-linejoin="round"/>';
         }
 
+        function grafKurva(g) {
+            var s = '', t0 = Math.max(0, tid - FONSTER), kurva = [], k = g.a / A;
+            for (var j = 0; j < hist.length; j++) {
+                if (hist[j].t < t0) continue;
+                kurva.push(r1(g.x0 + (hist[j].t - t0) / FONSTER * (g.x1 - g.x0)) + ',' + r1(g.cy - hist[j].y * k));
+            }
+            if (kurva.length > 1) {
+                s += '<polyline points="' + kurva.join(' ') + '" fill="none" stroke="' + BLA + '" stroke-width="2.2" stroke-linejoin="round"/>';
+            }
+            return s;
+        }
+
+        function rita3d() {
+            var s = '', yv = A * Math.sin(alfa), xv = A * Math.cos(alfa);
+            var g = G3, t0 = Math.max(0, tid - FONSTER);
+            var gx = g.x0 + (tid - t0) / FONSTER * (g.x1 - g.x0);
+            var skugga = P(W3, yv, PINZ), gy = skugga[1];
+            // väggen (sidan mot hjulet) och det upplysta fältet på den
+            s += poly([P(W3, -112, -62), P(W3, 112, -62), P(W3, 112, 50), P(W3, -112, 50)],
+                'fill="#e3dccd" stroke="#b9ae97" stroke-width="1.2" stroke-linejoin="round"');
+            var fl = [P(W3, -92, -32), P(W3, 92, -32), P(W3, 92, 32), P(W3, -92, 32)];
+            if (visaLampa) s += poly(fl, 'fill="#f6c84c" fill-opacity="0.28"');
+            var vp = P(W3, -112, 50);
+            s += lbl(vp[0], vp[1] + 20, 'middle', 'Vägg', 13, '#6a7180');
+            // hjulets skugga: hjulet står kant mot ljuset, så skuggan blir ett
+            // smalt lodrätt band. Stiftet sticker ut och får en egen skugga.
+            s += poly([P(W3, -RIM - 3, -5), P(W3, RIM + 3, -5), P(W3, RIM + 3, 5), P(W3, -RIM - 3, 5)],
+                'fill="rgba(15,22,32,0.30)"');
+            s += lin(P(W3, yv, 0), P(W3, yv, PINZ), 'stroke="rgba(15,22,32,0.62)" stroke-width="3" stroke-linecap="round"');
+            s += '<ellipse cx="' + r1(skugga[0]) + '" cy="' + r1(gy) + '" rx="4.5" ry="7" fill="rgba(15,22,32,0.62)"/>';
+            // referenslinjer för A, 0 och −A i höjd med skuggan
+            [-1, 0, 1].forEach(function (k) {
+                var yy = r1(g.cy - k * g.a);
+                s += '<line x1="' + r1(skugga[0] + 14) + '" y1="' + yy + '" x2="' + g.x1 + '" y2="' + yy +
+                    '" stroke="' + GREY + '" stroke-width="1" stroke-dasharray="5 4" opacity="0.8"/>';
+            });
+            // fjäderns tak, fjädern och vikten
+            s += lada(XS3 - 28, XS3 + 28, TAK3, TAK3 + 6, ZS3 - 22, ZS3 + 22, '#cfc6b4', '#bdb39e', '#ddd5c4', '#8f8670');
+            var mTopp = yv + MH / 2, sp = [], n = 10, led = 6, L = TAK3 - mTopp - 2 * led;
+            sp.push(P(XS3, TAK3, ZS3), P(XS3, TAK3 - led, ZS3));
+            for (var i = 0; i < n * 2; i++) sp.push(P(XS3 + (i % 2 ? -11 : 11), TAK3 - led - L * (i + 0.5) / (n * 2), ZS3));
+            sp.push(P(XS3, mTopp + led, ZS3), P(XS3, mTopp, ZS3));
+            s += '<polyline points="' + sp.map(pt).join(' ') + '" fill="none" stroke="#7c828c" stroke-width="1.6" stroke-linejoin="round"/>';
+            s += lada(XS3 - MW / 2, XS3 + MW / 2, yv - MH / 2, yv + MH / 2, ZS3 - 12, ZS3 + 12, '#6ba3d6', '#5590c8', '#8cbbe3', '#2f6db0');
+            // lampans ljuskägla mot väggen
+            var lx = -150;
+            if (visaLampa) {
+                var kon = skal([P(lx + 14, -16, -14), P(lx + 14, 16, -14), P(lx + 14, 16, 14), P(lx + 14, -16, 14)].concat(fl));
+                s += poly(kon, 'fill="#f6c84c" fill-opacity="0.16"');
+            }
+            // hjulets ställ bakom hjulet
+            s += lin(P(0, 0, -24), P(0, GOLV3, -24), 'stroke="#3d434d" stroke-width="4"');
+            s += poly([P(-46, GOLV3, -44), P(46, GOLV3, -44), P(46, GOLV3, -4), P(-46, GOLV3, -4)],
+                'fill="#5b626d" stroke="#2b2f36" stroke-width="1.2" stroke-linejoin="round"');
+            s += lin(P(0, 0, -24), P(0, 0, 10), 'stroke="#3d434d" stroke-width="4" stroke-linecap="round"');
+            // hjulet: bakre däckkant, ekrar, främre däckkant, nav
+            function ring(r, z) {
+                var q = [];
+                for (var i = 0; i < 72; i++) { var v = i / 72 * 2 * Math.PI; q.push(P(r * Math.cos(v), r * Math.sin(v), z)); }
+                return '<polygon points="' + q.map(pt).join(' ') + '" fill="none" ';
+            }
+            s += ring(RIM, -4) + 'stroke="#2b2f36" stroke-width="6"/>';
+            for (var k2 = 0; k2 < 16; k2++) {
+                var v = alfa + k2 * Math.PI / 8;
+                s += lin(P(9 * Math.cos(v), 9 * Math.sin(v), 0), P((RIM - 8) * Math.cos(v), (RIM - 8) * Math.sin(v), 0),
+                    'stroke="#a9afb8" stroke-width="1"');
+            }
+            s += ring(RIM - 7, 0) + 'stroke="#8b929c" stroke-width="2"/>';
+            s += ring(RIM, 4) + 'stroke="#2b2f36" stroke-width="6"/>';
+            var nav = P(0, 0, 0);
+            s += '<ellipse cx="' + r1(nav[0]) + '" cy="' + r1(nav[1]) + '" rx="' + r1(S3 * (9 * PC + 1)) + '" ry="' + r1(9 * S3) + '" fill="#d6d0c3" stroke="' + INK + '" stroke-width="1.4"/>';
+            // vinkeln α och radien A i hjulets plan
+            if (visaVinkel) {
+                var am = ((alfa % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+                s += lin(P(0, 0, 0), P(A, 0, 0), 'stroke="' + INK + '" stroke-width="1.2" stroke-dasharray="3 3"');
+                s += lin(P(0, 0, 0), P(xv, yv, 0), 'stroke="' + INK + '" stroke-width="2"');
+                if (am > 0.12) {
+                    var bq = [], N = Math.max(4, Math.ceil(am / 0.08));
+                    for (var j = 0; j <= N; j++) { var a = am * j / N; bq.push(P(26 * Math.cos(a), 26 * Math.sin(a), 0)); }
+                    s += '<polyline points="' + bq.map(pt).join(' ') + '" fill="none" stroke="' + INK + '" stroke-width="1.4"/>';
+                    if (am > 0.4) {
+                        var bl = P(40 * Math.cos(am / 2), 40 * Math.sin(am / 2), 0);
+                        s += lbl(bl[0], bl[1] + 5, 'middle', it('α'), 15);
+                    }
+                }
+                var al = P(0.62 * xv - 11 * Math.sin(alfa), 0.62 * yv + 11 * Math.cos(alfa), 0);
+                s += lbl(al[0], al[1] + 5, 'middle', it('A'), 14);
+            }
+            // ljusstrålen förbi stiftet till skuggan, sedan höjdlinjen till grafen
+            var huvud = P(xv, yv, PINZ);
+            s += lin(huvud, skugga, 'stroke="' + BLA + '" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.85"');
+            s += lin([skugga[0] + 6, gy], [visaGraf ? gx : P(XS3, 0, ZS3)[0], gy], 'stroke="' + BLA + '" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.85"');
+            // stiftet sticker ut ur hjulet mot betraktaren
+            s += lin(P(xv, yv, 0), huvud, 'stroke="#163f86" stroke-width="3" stroke-linecap="round"');
+            s += '<circle cx="' + r1(huvud[0]) + '" cy="' + r1(huvud[1]) + '" r="6.5" fill="' + BLA + '" stroke="#163f86" stroke-width="1.4"/>';
+            // lampan: lådan med baksidan mot betraktaren, på ett stativ
+            if (visaLampa) {
+                s += lin(P(lx, -18, 0), P(lx, GOLV3, 0), 'stroke="#3d434d" stroke-width="3"');
+                s += poly([P(lx - 18, GOLV3, -12), P(lx + 18, GOLV3, -12), P(lx + 18, GOLV3, 12), P(lx - 18, GOLV3, 12)], 'fill="#3d434d"');
+                s += lada(lx - 16, lx + 14, -18, 18, -16, 16, '#4a515c', '#3d434d', '#5b626d', '#2b2f36');
+                var lp = P(lx, GOLV3, 12);
+                s += lbl(lp[0] + 30, lp[1] + 4, 'start', 'Lampa', 13, '#6a7180');
+            }
+            if (visaGraf) {
+                s += grafAxlar(g) + grafKurva(g);
+                s += '<circle cx="' + r1(gx) + '" cy="' + r1(gy) + '" r="4" fill="' + BLA + '"/>';
+            }
+            return s;
+        }
+
         function rita() {
             var s = '';
+            bas2d.style.display = tre ? 'none' : '';
+            if (tre) {
+                dyn.innerHTML = rita3d();
+                grafLager.style.display = 'none';
+                skrivInfo();
+                return;
+            }
             var yv = A * Math.sin(alfa);            // elongation i px, uppåt positiv
             var yy = CY - yv;                        // skärmkoordinat
             var px = HX + A * Math.cos(alfa);
@@ -10717,18 +10876,14 @@
                 '" rx="3" fill="#6ba3d6" stroke="#2f6db0" stroke-width="1.5"/>';
             // grafen
             if (visaGraf) {
-                var t0 = Math.max(0, tid - FONSTER), kurva = [];
-                for (var j = 0; j < hist.length; j++) {
-                    if (hist[j].t < t0) continue;
-                    kurva.push(r1(GX0 + (hist[j].t - t0) / FONSTER * (GX1 - GX0)) + ',' + r1(CY - hist[j].y));
-                }
-                if (kurva.length > 1) {
-                    s += '<polyline points="' + kurva.join(' ') + '" fill="none" stroke="' + BLA + '" stroke-width="2.2" stroke-linejoin="round"/>';
-                }
+                s += grafKurva(G2);
                 s += '<circle cx="' + r1(gx) + '" cy="' + r1(gy) + '" r="4" fill="' + BLA + '"/>';
             }
             dyn.innerHTML = s;
             grafLager.style.display = visaGraf ? '' : 'none';
+            skrivInfo();
+        }
+        function skrivInfo() {
             var grader = Math.round((((alfa % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI)) * 180 / Math.PI) % 360;
             info.textContent = 'ω = 2π/T = ' + fmt(2 * Math.PI / T, 2) + ' rad/s,  α = ω · t = ' + grader + '°,  y = ' +
                 fmt(Math.sin(alfa), 2) + ' · A';
@@ -10755,6 +10910,7 @@
         var dyn = scene.querySelector('.ms-hp-dyn');
         var grafLager = scene.querySelector('.ms-hp-graf');
         var lampLager = scene.querySelector('.ms-hp-lampa');
+        var bas2d = scene.querySelector('.ms-hp-2d');
         card.appendChild(scene);
         msFullskarm(card, scene, 648 / 274, 200);
 
@@ -10782,11 +10938,13 @@
         var vinkelCk = mkCheck('Visa vinkeln', true);
         var grafCk = mkCheck('Visa graf', true);
         var lampCk = mkCheck('Visa lampa', true);
+        var treCk = mkCheck('3D-vy', false);
         controls.appendChild(startBtn);
         controls.appendChild(omBtn);
         controls.appendChild(vinkelCk.label);
         controls.appendChild(grafCk.label);
         controls.appendChild(lampCk.label);
+        controls.appendChild(treCk.label);
         card.appendChild(controls);
 
         var sliderRow = document.createElement('div');
@@ -10847,8 +11005,11 @@
         });
         vinkelCk.cb.addEventListener('change', function () { visaVinkel = vinkelCk.cb.checked; rita(); });
         lampCk.cb.addEventListener('change', function () {
-            lampLager.style.display = lampCk.cb.checked ? '' : 'none';
+            visaLampa = lampCk.cb.checked;
+            lampLager.style.display = visaLampa ? '' : 'none';
+            rita();
         });
+        treCk.cb.addEventListener('change', function () { tre = treCk.cb.checked; rita(); });
         grafCk.cb.addEventListener('change', function () { visaGraf = grafCk.cb.checked; rita(); });
         slider.addEventListener('input', function () {
             T = parseFloat(slider.value);

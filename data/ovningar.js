@@ -30854,7 +30854,7 @@ De udda steglängderna når alla maskiner. Ett jämnt steg flyttar alltid ett j�
 
 **a)** I ett stratifierat urval är andelen från ett program lika stor i stickprovet som i skolan:
 
-$$ \frac{32}{80} = 0{,}40 = 40\ \% $$
+$$ \\frac{32}{80} = 0{,}40 = 40\\ \\% $$
 
 **Svar:** 40&nbsp;%
 
@@ -30864,23 +30864,23 @@ $$ x + (x + 250) = 2x + 250 $$
 
 Andelen natur av hela skolan är 0,40 enligt a):
 
-$$ \frac{x}{2x + 250} = 0{,}4 $$
+$$ \\frac{x}{2x + 250} = 0{,}4 $$
 
-$$ \frac{x}{2x + 250} \mathbin{\boldsymbol{\cdot}} \boldsymbol{(2x + 250)} = 0{,}4 \mathbin{\boldsymbol{\cdot}} \boldsymbol{(2x + 250)} $$
+$$ \\frac{x}{2x + 250} \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{(2x + 250)} = 0{,}4 \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{(2x + 250)} $$
 
 $$ x = 0{,}8x + 100 $$
 
-$$ x \mathbin{\boldsymbol{-}} \boldsymbol{0{,}8x} = 0{,}8x + 100 \mathbin{\boldsymbol{-}} \boldsymbol{0{,}8x} $$
+$$ x \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}8x} = 0{,}8x + 100 \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}8x} $$
 
 $$ 0{,}2x = 100 $$
 
-$$ \frac{0{,}2x}{\boldsymbol{0{,}2}} = \frac{100}{\boldsymbol{0{,}2}} $$
+$$ \\frac{0{,}2x}{\\boldsymbol{0{,}2}} = \\frac{100}{\\boldsymbol{0{,}2}} $$
 
 $$ x = 500 $$
 
 Naturprogrammet har 500 elever och samhällsprogrammet $500 + 250 = 750$, alltså 1&nbsp;250 elever totalt.
 
-Kontroll: urvalet är $\dfrac{80}{1\,250} = 0{,}064$ av skolan. Samma andel av varje program ger $0{,}064 \cdot 500 = 32$ och $0{,}064 \cdot 750 = 48$, och $32 + 48 = 80$. Stämmer.
+Kontroll: urvalet är $\\dfrac{80}{1\\,250} = 0{,}064$ av skolan. Samma andel av varje program ger $0{,}064 \\cdot 500 = 32$ och $0{,}064 \\cdot 750 = 48$, och $32 + 48 = 80$. Stämmer.
 
 **Svar:** 500 elever på naturprogrammet och 750 på samhällsprogrammet.
 

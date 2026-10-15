@@ -103,6 +103,68 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-15-robotar-som-hittar-takten",
+    date: "2026-10-15",
+    title: "Ett material av små robotar hittar en gemensam takt av sig självt",
+    deck: "Forskare i Amsterdam har byggt ett material av 37 små robotceller som var och en bara känner av sina grannar. Efter en knuff börjar cellerna skaka var för sig, men inom några sekunder har skakningarna vuxit ihop till en enda stor svängning som håller takten av sig själv.",
+    category: "Mekanik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-15-robotar-som-hittar-takten.jpg",
+    imageAlt: "Ett platt bikakemönster av grå sexkantiga celler med kopparspolar och små kretskort ligger på en glasskiva på ett labbord. Ena kanten av mönstret böjer sig uppåt i en våg.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["mekanik", "svängningar", "vågor", "synkronisering", "tidskristall", "metamaterial", "rörelsemängd", "newtons tredje lag", "robotik"],
+    sources: [
+      { name: "Phys.org: Robotic 'time crystal' organizes itself into a single rhythm despite random disturbances (14 oktober 2026, pressmaterial från University of Birmingham)", url: "https://phys.org/news/2026-10-robotic-crystal-rhythm-random-disturbances.html" },
+      { name: "arXiv: förtrycket i fulltext", url: "https://arxiv.org/abs/2508.20052" }
+    ],
+    research: {
+      citation: "J. Veenstra, J. Binysh, V. Seinen, R. Naber, D. Robledo-Poisson, A. Hunt, W. van Saarloos, A. Souslov och C. Coulais, ”Wave coarsening drives time crystallization in mechatronic metamaterials”, Nature (2026), DOI 10.1038/s41586-026-11163-6.",
+      url: "https://www.nature.com/articles/s41586-026-11163-6"
+    },
+    larare: {
+      moment: [
+        { label: "Newtons tredje lag", href: "katalog.html?id=fy1-3.3" },
+        { label: "Rörelsemängdens bevarande", href: "katalog.html?id=fy1-4.8" },
+        { label: "Harmonisk svängning", href: "katalog.html?id=fy2-2.3" },
+        { label: "Pulser, vågor och utbredningshastighet", href: "katalog.html?id=fy2-2.7" }
+      ],
+      fragor: [
+        "Cellerna i materialet påverkar varandra olika mycket åt olika håll. Varför bryter det ändå inte mot Newtons tredje lag, och varifrån kommer energin som håller svängningen igång?",
+        "När forskarna tog bort det hala teflonskiktet under materialet stannade förgrovningen på en viss våglängd. Förklara med rörelsemängdens bevarande varför friktionen mot underlaget ändrar förloppet.",
+        "En kraftig vind fick Tacomabron att svänga i en enda stor rörelse 1940. Vad har den händelsen gemensamt med robotmaterialet, och vad skiljer dem åt?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'En sommarkväll i Sydostasien kan tusentals eldflugor i ett träd börja blinka i exakt samma takt. Ingen eldfluga dirigerar de andra. Var och en ser bara sina närmaste grannar och justerar sig lite efter dem, och ändå blir resultatet en enda gemensam rytm. Sådan synkronisering finns överallt i naturen, och nu har forskare visat att den kan uppstå på ett helt nytt sätt i ett material byggt av små robotar.' },
+      { type: 'p', html: 'Studien publicerades i tidskriften <em>Nature</em> den 14 oktober 2026. Bakom den står fysiker och ingenjörer under ledning av Corentin Coulais vid Amsterdams universitet, med kollegor i Birmingham, Lyon, Delft, Leiden och Cambridge.' },
+
+      { type: 'h2', text: 'Celler som känner av sina grannar' },
+      { type: 'p', html: 'Materialet består av 3D-skrivna sexkanter med sidan 2&nbsp;centimeter, sammanfogade tre och tre till 37 celler i ett bikakemönster. Inuti varje sexkant sitter en liten elektromagnetisk motor: en järnkärna med neodymmagneter i ändarna och en kopparspole runt kärnan. När ström går genom spolen påverkas den av en kraft från magnetfältet och trycker isär eller drar ihop sexkanten. En hallgivare, som mäter magnetfältets styrka, känner av hur mycket sexkanten är hoptryckt, och ett litet kretskort på varje cell bestämmer hur motorerna ska svara.' },
+      { type: 'p', html: 'Det speciella är regeln som kretskorten följer. Trycks en sexkant ihop, trycks grannen medurs också ihop, medan grannen moturs i stället dras ut. Regeln gäller oavsett vilken sexkant man börjar med. Påverkan är alltså inte ömsesidig: att A påverkar B på ett visst sätt betyder inte att B påverkar A på samma sätt. Forskarna kallar det en icke-reciprok växelverkan.' },
+      { type: 'p', html: 'Det betyder inte att Newtons tredje lag är bruten. Inuti varje motor trycker spolen och kärnan på varandra med lika stora och motsatt riktade krafter, precis som lagen kräver. Den ojämna påverkan kommer från elektroniken, som hela tiden tillför energi utifrån. Därför bevaras också materialets rörelsemängd: det kan inte skjuta sig självt framåt eller börja snurra, utan energin går åt till att deformera det.' },
+
+      { type: 'h2', text: 'Från surr till en enda svängning' },
+      { type: 'p', html: 'Forskarna lade materialet på en glasskiva behandlad med teflon för att friktionen mot underlaget skulle bli så liten som möjligt, och slog på regeln. Efter en lätt knuff började varje cell svänga med omkring 30&nbsp;svängningar per sekund, alltså med en period på ungefär 0,03&nbsp;sekunder. Men svängningarna stannade inte där. Små vågor drog runt längs materialet, åt ett enda håll, och efterhand tog allt längre vågor över. Inom sex sekunder svängde hela materialet i takt, med en stabil frekvens.' },
+      { type: 'p', html: 'Det är detta forskarna kallar vågförgrovning. Under förloppet växer tre saker samtidigt: våglängden, perioden och amplituden. Förgrovning är känd från många andra håll, till exempel när små oljedroppar i en vinägrett slås ihop till allt större, eller när små magnetiserade områden i en metall växer ihop. Men där strävar systemet mot vila. Här matas energi hela tiden in, och slutet är i stället en rörelse som aldrig upphör.' },
+      { type: 'p', html: 'Ett tillstånd där ett material av sig självt svänger i en jämn takt, utan att något utifrån slår takten, kallas en tidskristall. En vanlig kristall upprepar samma mönster i rummet, och tidskristallen upprepar samma rörelse i tiden.' },
+
+      { type: 'h2', text: 'En ring av motorer som till slut blir en pannkaka' },
+      { type: 'p', html: 'För att pröva om fenomenet var allmänt byggde forskarna också en helt annan sorts material: en ring av 24 små motorer, var och en ungefär 5&nbsp;centimeter bred och med massan 0,2&nbsp;kg, förbundna med plastarmar och gummiband. Ringen svävade på ett lufthockeyliknande bord så att den rörde sig nästan utan friktion. Även här växte vågorna. Först dominerade en våg med sex toppar runt ringen, sedan tog en med fem över, sedan en med fyra, och så vidare tills ringen bara långsamt böljade i sin enklaste form. Forskarna beskriver den som en pannkaka.' },
+      { type: 'p', html: 'Teorin förklarar varför de långa vågorna vinner. När amplituden växer flyttas den våglängd som förstärks mest mot allt längre vågor. När den längre vågen sedan växer ökar amplituden ännu mer, och förloppet upprepas. Kedjan fortsätter tills våglängden är lika stor som hela materialet.' },
+      { type: 'quote', html: 'Som musiker som efterhand hittar samma takt kan de enskilda delarna i ett aktivt material organisera sina rörelser tills hela strukturen rör sig tillsammans.', cite: 'Jack Binysh, University of Birmingham, en av studiens två huvudförfattare (i översättning)' },
+
+      { type: 'h2', text: 'Friktionen sätter stopp' },
+      { type: 'p', html: 'När forskarna tog bort teflonskiktet hände något nytt. Med friktion mot glaset kan materialet utbyta rörelsemängd med underlaget, och då slutade förgrovningen på en viss våglängd i stället för att fortsätta till en enda svängning. I datorsimuleringar med 5&nbsp;813 celler fick forskarna dessutom fram vågor som löper längs materialets kanter, var och en åt ett bestämt håll. De liknar elektronernas kantströmmar i kvant-halleffekten, men här är det rörelser i ett mekaniskt material.' },
+      { type: 'p', html: 'Forskarna tror att idén kan användas inom robotik, för mjuka robotar som ska ändra form eller förflytta sig genom att delarna samordnar sina rörelser utan någon central styrning, ungefär som eldflugorna.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Den första kända beskrivningen av synkronisering kommer från Christiaan Huygens. År 1665 märkte han att två pendelur som hängde i samma bjälke efter en stund svängde i takt med varandra. Små rörelser i bjälken förde över svängningarna från det ena uret till det andra.',
+        'Uttrycket tidskristall myntades 2012 av nobelpristagaren Frank Wilczek, som först tänkte sig ett kvantsystem som svänger i sitt lägsta energitillstånd. Det visade sig vara omöjligt, men varianter som hålls igång med energi utifrån har sedan dess byggts av joner, atomer, ljus och nu robotar.',
+        'Det tvådimensionella materialet filmades underifrån, genom glaset, med en kamera som tog 300 bilder per sekund. Det räcker för att följa varje cells svängning, som tar ungefär 0,03&nbsp;sekunder.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-14-asteroiden-som-snurrar-pa-fyra-minuter",
     date: "2026-10-14",
     title: "En asteroid stor som en stadsdel snurrar ett varv på fyra minuter",

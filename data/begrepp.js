@@ -1482,7 +1482,32 @@ window.BEGREPP = [
     body: [
       { type: 'p', html: 'En vanlig kristall är materia som ordnat sig i ett mönster som upprepar sig i <em>rummet</em>: atom, mellanrum, atom, mellanrum. 2012 ställde nobelpristagaren Frank Wilczek en till synes enkel fråga: kan materia i stället ordna sig i ett mönster som upprepar sig i <em>tiden</em> — ett tillstånd som spontant börjar ticka, om och om igen, utan att förbruka energi? Idén verkade först strida mot termodynamiken, och i sin ursprungliga form visade den sig mycket riktigt vara omöjlig.' },
       { type: 'p', html: 'Men en variant överlevde granskningen. Om ett kvantsystem knuffas i jämn takt utifrån — till exempel av laserpulser — kan det välja att svara i en <em>annan</em> takt än knuffarna, typiskt varannan puls, och hålla fast vid sin egen rytm hur länge som helst utan att värmas upp. Systemet har då spontant brutit tidens upprepningsmönster, precis som en kristall bryter rummets likformighet. De första tidskristallerna skapades 2016–2017 i kedjor av infångade joner och i diamantdefekter, och senare har de även körts på kvantdatorer.' },
+      { type: 'p', html: 'Senare har begreppet vidgats till system som får energi hela tiden, till exempel från elektronik eller ljus, men inte får någon takt utifrån. De börjar ändå svänga i en egen, stabil rytm, ungefär som ett hjärta som slår av sig självt. Sådana tidskristaller har byggts av kalla atomer, av nanostrukturer som belyses med laser och av material sammansatta av små robotar.' },
       { type: 'p', html: 'Tidskristaller är än så länge grundforskning, men deras envisa, störningståliga tickande gör dem intressanta som byggstenar i precisionsklockor och som robusta minnen i kvantteknik.' }
+    ]
+  },
+  {
+    id: 'icke-reciprok',
+    term: 'Icke-reciprok',
+    former: ['icke-reciprok', 'icke-reciproka', 'icke-reciprokt', 'icke-reciprocitet', 'icke-reciprociteten'],
+    kort: 'Säger att en påverkan inte är densamma åt båda hållen: att A påverkar B på ett visst sätt betyder inte att B påverkar A på samma sätt.',
+    relaterade: ['metamaterial', 'tidskristall'],
+    body: [
+      { type: 'p', html: 'Det mesta i vardagen är reciprokt, alltså ömsesidigt. Hör du mig genom en vägg hör jag dig lika bra tillbaka. Spänner du en fjäder mellan två klossar drar den lika mycket i båda. Reciprok kommer från latinets <em>reciprocus</em>, som betyder ”som går fram och tillbaka på samma sätt”.' },
+      { type: 'p', html: 'En icke-reciprok förbindelse fungerar olika åt olika håll. Ett exempel ur tekniken är den optiska isolatorn, som med hjälp av ett magnetfält släpper igenom laserljus åt ena hållet men stoppar ljus som reflekteras tillbaka. Forskare bygger också material där delarna är kopplade så att en knuff från vänster ger en annan reaktion än en knuff från höger. Ofta krävs då elektronik, magnetfält eller en annan energikälla som håller asymmetrin igång.' },
+      { type: 'p', html: 'Icke-reciprocitet bryter inte mot Newtons tredje lag. Krafterna mellan två föremål som verkligen trycker på varandra är fortfarande lika stora och motsatt riktade. Det ojämna ligger i hur systemet reagerar, och den reaktionen kan styras av en sensor och en motor eller av ljus som bara går igenom en komponent åt ett håll. Sådana material kan leda vågor åt ett enda håll eller börja svänga av sig själva.' }
+    ]
+  },
+  {
+    id: 'forgrovning',
+    term: 'Förgrovning',
+    former: ['förgrovning', 'förgrovningen', 'vågförgrovning', 'vågförgrovningen'],
+    kort: 'När ett mönster av många små områden med tiden växer ihop till färre och större, som när små oljedroppar slås ihop till stora.',
+    relaterade: ['tidskristall'],
+    body: [
+      { type: 'p', html: 'Skaka en flaska vinägrett så blir oljan små droppar i vinägern. Låt den stå, så slås dropparna ihop till allt större, tills oljan ligger som ett lager överst. Mönstret blir alltså grövre med tiden. Fysiker kallar det förgrovning.' },
+      { type: 'p', html: 'Samma sak händer på många håll. I en metall som kyls växer små kristallkorn ihop till större, i ett magnetiskt material slås små områden med samma magnetiseringsriktning ihop, och i skum spricker de små bubblorna medan de stora växer. Drivkraften är nästan alltid att gränsytorna mellan områdena kostar energi, så systemet strävar efter så få gränser som möjligt och närmar sig ett viloläge.' },
+      { type: 'p', html: 'I material som hela tiden får energi tillförd kan förgrovning ske även med rörelser. Där kallas den vågförgrovning: små, snabba vågor ger efterhand plats åt allt längre och långsammare vågor med större utslag, tills hela materialet svänger i takt. Till skillnad från vinägretten slutar förloppet inte i vila utan i en rörelse som fortsätter så länge energin räcker.' }
     ]
   },
 {

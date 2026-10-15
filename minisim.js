@@ -22,7 +22,8 @@
  *           magnetpoler, magnetdelning, koniskpendel, kastvektorer,
  *           snettkast, skjutochslapp, kanonvagn, galton, kalkylblad,
  *           kopplade-fjadrar, lodlinje, hjulprojektion, svangningsgrafer,
- *           periodtid (fy2-2.4: m, k och A mot periodtiden)
+ *           periodtid (fy2-2.4: m, k och A mot periodtiden),
+ *           stegkast (fy2-1.9: kaströrelsen med stegmetoden)
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -44,6 +45,14 @@
  * pappersbakgrund med ett blått kollegieblocks-rutnät, som om simuleringen
  * låg ritad på ett anteckningsblock (kortklass ms-ljus + drawPaper()).
  * Tomteblosset är UNDANTAGET: det kräver mörker för ljuseffekten.
+ *
+ * ── typ: stegkast ────────────────────────────────────────────────────────
+ * Simuleringen i fy2-1.9 (Numerisk simulering av kaströrelse): kastet
+ * räknas med stegmetoden (Eulers metod), ett tidssteg i taget, med eller
+ * utan luftmotstånd (tennisboll, F_luft = k · v²). Blå punkter och raka
+ * sträckor för stegen, grå streckad kastparabel utan luftmotstånd som
+ * jämförelse, hastighet (grön) och acceleration (röd) i aktuell punkt och
+ * en tabell med de senaste stegen. Glidare för tidssteg, vinkel, fart och k.
  *
  * ── typ: hjulprojektion ──────────────────────────────────────────────────
  * Demonstrationen ur fy2-2.3 (Harmonisk svängning): ett stift på ett
@@ -543,15 +552,29 @@
         /* periodtid: knapparna och glidarna ligger på scenens papper, under
            figuren, så att reglage och svängning hör ihop. Smal skärm: en
            glidare per rad. */
-        '.ms-pt-panel{display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:4px 18px;align-items:end;' +
+        '.ms-pt-panel{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1.3fr) minmax(0,1fr);gap:4px 16px;align-items:end;' +
             'margin:2px 10px 4px;padding-top:8px;border-top:1px dashed rgba(31,37,48,0.18);font-family:' + FONT + ';}',
-        '.ms-pt-knappar{display:flex;gap:6px;}',
+        '.ms-pt-knappar{display:flex;flex-direction:column;gap:4px;}',
         '.ms-pt-knappar .minisim-btn{padding:5px 12px;font-size:13px;}',
         '.ms-pt-cell{display:flex;flex-direction:column;gap:2px;min-width:0;}',
         '.ms-pt-topp{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:#4a5160;white-space:nowrap;}',
         '.ms-pt-topp b{font-weight:500;color:#1f2530;}',
         '.ms-pt-cell .minisim-slider{width:100%;flex:none;margin:6px 0 4px;}',
-        '@media (max-width:600px){.ms-pt-panel{grid-template-columns:minmax(0,1fr);gap:6px;}}',
+        '@media (max-width:600px){.ms-pt-panel{grid-template-columns:minmax(0,1fr);gap:6px;}.ms-pt-knappar{flex-direction:row;}}',
+        /* typ: stegkast — teckenförklaring och stegtabell under scenen */
+        '.ms-sk-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px;font-family:' + FONT + ';',
+        '  font-size:13px;color:#4a5160;font-style:normal;}',
+        '.ms-sk-legend span{display:inline-flex;align-items:center;gap:6px;}',
+        '.ms-sk-legend i{display:inline-block;width:18px;height:3px;border-radius:1px;}',
+        '.ms-sk-legend i.ms-sk-streck{height:0;border-top:2px dashed #7c828c;}',
+        '.minisim-slider-row.ms-sk-av{opacity:.45;}',
+        '.ms-sk-tabwrap{margin-top:8px;overflow-x:auto;border:1px solid #ddd3c0;border-radius:4px;background:#fdfaf3;}',
+        '.ms-sk-tab{border-collapse:collapse;width:100%;font-family:' + FONT + ';font-size:12.5px;',
+        '  font-variant-numeric:tabular-nums;color:#1f2530;font-style:normal;white-space:nowrap;}',
+        '.ms-sk-tab th,.ms-sk-tab td{padding:4px 8px;text-align:right;border-bottom:1px solid #ece3d2;}',
+        '.ms-sk-tab th{font-weight:600;color:#4a5160;background:#f3ecdd;}',
+        '.ms-sk-tab tr.ms-sk-akt td{background:#e6eefb;font-weight:600;}',
+        '.ms-sk-not{margin-top:6px;font-size:12.5px;}',
         '.lab-minisim p{margin:0;}'
     ].join('\n');
 
@@ -11474,7 +11497,343 @@
         setSpelar(true);                         // startar av sig själv
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: stegkast
+    // ══════════════════════════════════════════════════════════════════════
+    // Simuleringen i fy2-1.9 (Numerisk simulering av kaströrelse): kastet
+    // räknas med stegmetoden (Eulers metod) precis som i genomgångens
+    // formelruta: läget i nästa steg räknas med hastigheten i stegets
+    // början, hastigheten med accelerationen i stegets början. Med
+    // luftmotstånd (tennisboll, m = 57 g, F_luft = k·v²) är
+    //   a_x = −k·v·v_x/m,  a_y = −g − k·v·v_y/m.
+    // Varje steg ritas som en blå punkt med en rak sträcka till nästa; den
+    // grå streckade kurvan är den exakta kastparabeln utan luftmotstånd, så
+    // att felet och luftmotståndets verkan syns direkt. I den aktuella
+    // punkten visas hastigheten (grön, från bollens kant) och accelerationen
+    // (röd, från tyngdpunkten). En tabell under scenen visar de senaste
+    // stegen som raderna i ett kalkylblad. "Ta ett steg" stegar ett
+    // tidssteg i taget, "Kör" spelar upp kastet i verklig tid. Glidare för
+    // tidssteget, utkastvinkeln, utgångsfarten och luftmotståndets konstant.
+    // Skalan (lika i båda led) väljs om när parametrarna ändras, så att både
+    // den simulerade banan och kastparabeln ryms. Ren SVG i laboranstemat.
+    var skRaknare = 0;
+    function buildStegkast(node, cfg) {
+        var INK = '#1f2530', GREY = '#7c828c', BLA = '#2563c9', GRN = '#1e8449', ROD = '#c0392b';
+        var RUTA = '#2563c9', AXEL = '#38bdf8';
+        var W = 600, H = 300, PL = 46, PR = 34, PT = 26, PB = 34;
+        var G = 9.82, MASSA = 0.057;
+        var p = { dt: 0.1, alfa: 45, v0: 20, luft: false, k: 0.0012, vektorer: true };
+        var bana = null, n = 0, spelar = false, klock = 0;
+        var skala = 1, ox = PL, oy = H - PB, tick = 1;
+        var id = 'ms-sk-rutnat-' + (++skRaknare);
+
+        function r1(v) { return Math.round(v * 10) / 10; }
+        function fmt(v, d) {
+            var s = v.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        }
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function lbl(x, y, anchor, inner, size, color) {
+            return '<text x="' + r1(x) + '" y="' + r1(y) + '" text-anchor="' + anchor + '" font-size="' +
+                (size || 14) + '" fill="' + (color || INK) + '">' + inner + '</text>';
+        }
+        function pil(x1, y1, x2, y2, col, w) {
+            var dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy);
+            if (L < 4) return '';
+            var ux = dx / L, uy = dy / L, h = Math.min(10, L * 0.6), hw = h * 0.5;
+            var bx = x2 - ux * h, by = y2 - uy * h;
+            return '<line x1="' + r1(x1) + '" y1="' + r1(y1) + '" x2="' + r1(bx) + '" y2="' + r1(by) +
+                '" stroke="' + col + '" stroke-width="' + (w || 2.6) + '" stroke-linecap="butt"/>' +
+                '<polygon points="' + r1(bx - uy * hw) + ',' + r1(by + ux * hw) + ' ' + r1(x2) + ',' + r1(y2) + ' ' +
+                r1(bx + uy * hw) + ',' + r1(by - ux * hw) + '" fill="' + col + '"/>';
+        }
+        function X(x) { return ox + x * skala; }
+        function Y(y) { return oy - y * skala; }
+
+        // ── Fysiken: hela kastet med stegmetoden ─────────────────────────
+        function rakna() {
+            var a = p.alfa * Math.PI / 180;
+            var vx = p.v0 * Math.cos(a), vy = p.v0 * Math.sin(a), x = 0, y = 0, t = 0;
+            var km = p.luft ? p.k / MASSA : 0;
+            var pts = [], ymax = 0;
+            for (var i = 0; i < 6000; i++) {
+                var v = Math.hypot(vx, vy);
+                var ax = -km * v * vx, ay = -G - km * v * vy;
+                pts.push({ t: t, x: x, y: y, vx: vx, vy: vy, ax: ax, ay: ay });
+                if (i > 0 && y < 0) break;
+                ymax = Math.max(ymax, y);
+                var nx = x + vx * p.dt, ny = y + vy * p.dt;
+                vx += ax * p.dt; vy += ay * p.dt;
+                x = nx; y = ny; t += p.dt;
+            }
+            var L = pts.length, A = pts[L - 2], B = pts[L - 1];
+            var f = A.y / (A.y - B.y);
+            var T = 2 * p.v0 * Math.sin(a) / G;
+            bana = { pts: pts, landX: A.x + f * (B.x - A.x), ymax: ymax,
+                     exX: p.v0 * Math.cos(a) * T, exY: Math.pow(p.v0 * Math.sin(a), 2) / (2 * G), exT: T };
+            // skalan: lika i båda led, så att båda banorna ryms
+            var xm = Math.max(bana.exX, bana.landX, 1), ym = Math.max(bana.exY, bana.ymax, 0.5);
+            skala = Math.min((W - PL - PR) / xm, (H - PT - PB) / ym);
+            ox = PL; oy = H - PB;
+            var steg = [0.5, 1, 2, 5, 10, 20, 50];
+            tick = steg[steg.length - 1];
+            for (var s = 0; s < steg.length; s++) if (steg[s] * skala >= 44) { tick = steg[s]; break; }
+        }
+
+        // ── Ritning ───────────────────────────────────────────────────────
+        function rita() {
+            var s = '';
+            var xEnd = W - PR + 14, yTop = PT - 14;
+            // skalstreck och tal: talen står på sin plats, under axeln
+            for (var tx = tick; X(tx) <= W - PR - 8; tx += tick) {
+                s += '<line x1="' + r1(X(tx)) + '" y1="' + oy + '" x2="' + r1(X(tx)) + '" y2="' + (oy + 5) + '" stroke="' + AXEL + '" stroke-width="1.4"/>';
+                s += lbl(X(tx), oy + 19, 'middle', fmt(tx, tick < 1 ? 1 : 0), 13, INK);
+            }
+            for (var ty = tick; Y(ty) >= PT + 8; ty += tick) {
+                s += '<line x1="' + (ox - 5) + '" y1="' + r1(Y(ty)) + '" x2="' + ox + '" y2="' + r1(Y(ty)) + '" stroke="' + AXEL + '" stroke-width="1.4"/>';
+                s += lbl(ox - 9, Y(ty) + 4.5, 'end', fmt(ty, tick < 1 ? 1 : 0), 13, INK);
+            }
+            // axlar, pilspets bara åt det positiva hållet
+            s += '<line x1="' + ox + '" y1="' + oy + '" x2="' + (xEnd - 8) + '" y2="' + oy + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
+                '<polygon points="' + (xEnd - 8) + ',' + (oy - 4) + ' ' + xEnd + ',' + oy + ' ' + (xEnd - 8) + ',' + (oy + 4) + '" fill="' + AXEL + '"/>' +
+                '<line x1="' + ox + '" y1="' + oy + '" x2="' + ox + '" y2="' + (yTop + 8) + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
+                '<polygon points="' + (ox - 4) + ',' + (yTop + 8) + ' ' + ox + ',' + yTop + ' ' + (ox + 4) + ',' + (yTop + 8) + '" fill="' + AXEL + '"/>';
+            s += lbl(xEnd, oy + 19, 'end', it('x') + ' (m)', 13, INK);
+            s += lbl(ox + 9, yTop + 9, 'start', it('y') + ' (m)', 13, INK);
+            s += lbl(ox - 9, oy + 4.5, 'end', '0', 13, INK);
+
+            // kastparabeln utan luftmotstånd (exakt), tätt samplad
+            var kp = [];
+            var a = p.alfa * Math.PI / 180;
+            for (var i = 0; i <= 120; i++) {
+                var t = bana.exT * i / 120;
+                kp.push(r1(X(p.v0 * Math.cos(a) * t)) + ',' + r1(Y(p.v0 * Math.sin(a) * t - G * t * t / 2)));
+            }
+            s += '<polyline points="' + kp.join(' ') + '" fill="none" stroke="' + GREY + '" stroke-width="1.5" stroke-dasharray="5 4"/>';
+
+            // stegmetoden: en rak sträcka per steg
+            var P = bana.pts, L = P.length, landat = n >= L - 1;
+            for (var j = 1; j <= n; j++) {
+                var x2 = P[j].x, y2 = P[j].y;
+                if (y2 < 0) { var f = P[j - 1].y / (P[j - 1].y - y2); x2 = P[j - 1].x + f * (x2 - P[j - 1].x); y2 = 0; }
+                s += '<line x1="' + r1(X(P[j - 1].x)) + '" y1="' + r1(Y(P[j - 1].y)) + '" x2="' + r1(X(x2)) + '" y2="' + r1(Y(y2)) +
+                    '" stroke="' + BLA + '" stroke-width="2.2" stroke-linecap="round"/>';
+            }
+            var pr = n > 60 ? 1.7 : n > 25 ? 2.4 : 3.2;
+            for (j = 0; j <= Math.min(n, L - 2); j++) {
+                s += '<circle cx="' + r1(X(P[j].x)) + '" cy="' + r1(Y(P[j].y)) + '" r="' + pr + '" fill="' + BLA + '"/>';
+            }
+            // bollen
+            var bx = landat ? X(bana.landX) : X(P[n].x), by = landat ? Y(0) - 6 : Y(P[n].y);
+            if (p.vektorer && !landat) {
+                var cur = P[n], v = Math.hypot(cur.vx, cur.vy), aa = Math.hypot(cur.ax, cur.ay);
+                var Lv = Math.min(120, 3.2 * v), La = Math.min(120, 3.6 * aa);
+                var uvx = cur.vx / v, uvy = -cur.vy / v;
+                var vs = [bx + 7 * uvx, by + 7 * uvy], vt = [vs[0] + Lv * uvx, vs[1] + Lv * uvy];
+                s += pil(vs[0], vs[1], vt[0], vt[1], GRN);
+                s += lbl(vt[0] + 8 * uvx + (uvx >= 0 ? 4 : -4), vt[1] + 8 * uvy + 5, uvx >= 0 ? 'start' : 'end', it('v'), 15, GRN);
+                var uax = cur.ax / aa, uay = -cur.ay / aa, at = [bx + La * uax, by + La * uay];
+                s += pil(bx, by, at[0], at[1], ROD);
+                s += lbl(at[0] + (uax >= 0 ? 6 : -6), at[1] + 14, uax >= 0 ? 'start' : 'end', it('a'), 15, ROD);
+            }
+            s += '<circle cx="' + r1(bx) + '" cy="' + r1(by) + '" r="6" fill="#d9e36b" stroke="' + INK + '" stroke-width="1.3"/>';
+            dyn.innerHTML = s;
+
+            // tabellen: de senaste stegen
+            var rader = '';
+            for (j = Math.max(0, n - 4); j <= n; j++) {
+                var q = P[j];
+                rader += '<tr' + (j === n ? ' class="ms-sk-akt"' : '') + '><td>' + j + '</td><td>' + fmt(q.t, 2) + '</td><td>' +
+                    fmt(q.x, 2) + '</td><td>' + fmt(q.y, 2) + '</td><td>' + fmt(q.vx, 2) + '</td><td>' + fmt(q.vy, 2) +
+                    '</td><td>' + fmt(q.ax, 2) + '</td><td>' + fmt(q.ay, 2) + '</td></tr>';
+            }
+            tbody.innerHTML = rader;
+
+            if (landat) {
+                info.innerHTML = 'Bollen landar mellan steg ' + (L - 2) + ' och ' + (L - 1) + '. Kastvidd ungefär ' +
+                    fmt(bana.landX, 2) + ' m. Utan luftmotstånd, exakt: ' + fmt(bana.exX, 2) + ' m.';
+            } else {
+                info.innerHTML = 'Steg ' + n + ', <em>t</em> = ' + fmt(P[n].t, 2) + ' s. Utan luftmotstånd är kastvidden exakt ' +
+                    fmt(bana.exX, 2) + ' m.';
+            }
+            stegBtn.disabled = landat;
+            korBtn.textContent = spelar ? 'Pausa' : landat ? 'Kör igen' : (n > 0 ? 'Fortsätt' : 'Kör');
+            korBtn.classList.toggle('ms-primar', !spelar);
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="En kaströrelse räknad med stegmetoden. Blå punkter med raka sträckor visar bollens läge i varje ' +
+            'tidssteg, och en grå streckad kurva visar kastparabeln utan luftmotstånd. I bollens aktuella läge visar en grön ' +
+            'pil hastigheten och en röd pil accelerationen.">' +
+            '<defs><pattern id="' + id + '" width="20" height="20" patternUnits="userSpaceOnUse">' +
+            '<path d="M 20 0 L 0 0 0 20" fill="none" stroke="' + RUTA + '" stroke-width="0.6" opacity="0.13"/></pattern></defs>' +
+            '<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="url(#' + id + ')"/>' +
+            '<g class="ms-sk-dyn"></g></svg>';
+        var dyn = scene.querySelector('.ms-sk-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, W / H, 380);
+
+        var legend = document.createElement('div');
+        legend.className = 'ms-sk-legend';
+        legend.innerHTML = '<span><i style="background:' + BLA + '"></i>Stegmetoden</span>' +
+            '<span><i class="ms-sk-streck"></i>Utan luftmotstånd, exakt</span>' +
+            '<span><i style="background:' + GRN + '"></i>Hastighet <em>v</em></span>' +
+            '<span><i style="background:' + ROD + '"></i>Acceleration <em>a</em></span>';
+        card.appendChild(legend);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        function knapp(txt) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'minisim-btn';
+            b.textContent = txt;
+            controls.appendChild(b);
+            return b;
+        }
+        var korBtn = knapp('Kör');
+        var stegBtn = knapp('Ta ett steg');
+        var omBtn = knapp('Börja om');
+        function kryss(txt, varde, satt) {
+            var l = document.createElement('label');
+            l.className = 'minisim-check';
+            var inp = document.createElement('input');
+            inp.type = 'checkbox';
+            inp.checked = varde;
+            inp.addEventListener('change', function () { satt(inp.checked); });
+            l.appendChild(inp);
+            l.appendChild(document.createTextNode(txt));
+            controls.appendChild(l);
+            return inp;
+        }
+        kryss('Luftmotstånd', p.luft, function (v) { p.luft = v; kRad.classList.toggle('ms-sk-av', !v); kSl.disabled = !v; nyttKast(); });
+        kryss('Visa vektorer', p.vektorer, function (v) { p.vektorer = v; rita(); });
+        card.appendChild(controls);
+
+        function glidare(namnHtml, min, max, steg, varde, visa, satt) {
+            var rad = document.createElement('div');
+            rad.className = 'minisim-slider-row';
+            var l = document.createElement('span');
+            l.className = 'minisim-slider-lbl';
+            l.innerHTML = namnHtml;
+            var sl = document.createElement('input');
+            sl.type = 'range';
+            sl.className = 'minisim-slider';
+            sl.min = String(min); sl.max = String(max); sl.step = String(steg); sl.value = String(varde);
+            sl.setAttribute('aria-label', l.textContent);
+            var v = document.createElement('span');
+            v.className = 'minisim-slider-val';
+            v.textContent = visa(varde);
+            sl.addEventListener('input', function () {
+                var x = parseFloat(sl.value);
+                satt(x);
+                v.textContent = visa(x);
+                nyttKast();
+            });
+            var par = document.createElement('span');
+            par.style.cssText = 'display:flex;flex:1 1 170px;align-items:center;gap:10px;min-width:0;';
+            par.appendChild(sl); par.appendChild(v);
+            rad.appendChild(l); rad.appendChild(par);
+            card.appendChild(rad);
+            return { rad: rad, sl: sl };
+        }
+        glidare('Tidssteg Δ<em>t</em>', 0.02, 0.5, 0.01, p.dt,
+            function (x) { return fmt(x, 2) + ' s'; }, function (x) { p.dt = x; });
+        glidare('Utkastvinkel <em>α</em>', 10, 80, 1, p.alfa,
+            function (x) { return fmt(x, 0) + '°'; }, function (x) { p.alfa = x; });
+        glidare('Utgångsfart <em>v</em><sub>0</sub>', 5, 35, 1, p.v0,
+            function (x) { return fmt(x, 0) + ' m/s'; }, function (x) { p.v0 = x; });
+        var kG = glidare('Luftmotståndets konstant <em>k</em>', 0.0002, 0.004, 0.0001, p.k,
+            function (x) { return fmt(x, 4) + ' kg/m'; }, function (x) { p.k = x; });
+        var kRad = kG.rad, kSl = kG.sl;
+        kRad.classList.add('ms-sk-av');
+        kSl.disabled = true;
+
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '8px';
+        card.appendChild(info);
+
+        var tabWrap = document.createElement('div');
+        tabWrap.className = 'ms-sk-tabwrap';
+        tabWrap.innerHTML = '<table class="ms-sk-tab"><thead><tr><th><em>n</em></th><th><em>t</em> (s)</th>' +
+            '<th><em>x</em> (m)</th><th><em>y</em> (m)</th><th><em>v</em><sub>x</sub> (m/s)</th>' +
+            '<th><em>v</em><sub>y</sub> (m/s)</th><th><em>a</em><sub>x</sub> (m/s²)</th><th><em>a</em><sub>y</sub> (m/s²)</th>' +
+            '</tr></thead><tbody></tbody></table>';
+        var tbody = tabWrap.querySelector('tbody');
+        card.appendChild(tabWrap);
+        var not = document.createElement('div');
+        not.className = 'minisim-info ms-brod ms-sk-not';
+        not.innerHTML = 'Bollen är en tennisboll med massan 57 g. Med luftmotstånd är ' +
+            '<em>a</em><sub>x</sub> = −<em>k</em> · <em>v</em> · <em>v</em><sub>x</sub> / <em>m</em> och ' +
+            '<em>a</em><sub>y</sub> = −<em>g</em> − <em>k</em> · <em>v</em> · <em>v</em><sub>y</sub> / <em>m</em>.';
+        card.appendChild(not);
+        node.appendChild(card);
+
+        // ── Uppspelning ───────────────────────────────────────────────────
+        var raf = null, senast = 0, synlig = true;
+        function sista() { return bana.pts.length - 1; }
+        function nyttKast() {
+            // tiden står kvar där den var; stegnumret räknas om för det nya tidssteget
+            var tNu = bana ? bana.pts[n].t : 0;
+            rakna();
+            n = Math.min(sista(), Math.floor(tNu / p.dt + 1e-9));
+            klock = n * p.dt;
+            if (n >= sista()) spelar = false;
+            rita();
+        }
+        function ruta(nu) {
+            raf = null;
+            if (!spelar || !synlig) return;
+            var d = senast ? Math.min(0.05, (nu - senast) / 1000) : 0;
+            senast = nu;
+            klock += d;
+            n = Math.min(sista(), Math.floor(klock / p.dt + 1e-9));
+            if (n >= sista()) spelar = false;
+            rita();
+            if (spelar) raf = requestAnimationFrame(ruta);
+        }
+        function kor() { if (!raf && spelar && synlig) { senast = 0; raf = requestAnimationFrame(ruta); } }
+        korBtn.addEventListener('click', function () {
+            if (spelar) { spelar = false; rita(); return; }
+            if (n >= sista()) { n = 0; klock = 0; }
+            spelar = true;
+            rita();
+            kor();
+        });
+        stegBtn.addEventListener('click', function () {
+            spelar = false;
+            n = Math.min(sista(), n + 1);
+            klock = n * p.dt;
+            rita();
+        });
+        omBtn.addEventListener('click', function () { spelar = false; n = 0; klock = 0; rita(); });
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                synlig = entries[0].isIntersecting;
+                if (synlig) kor();
+            }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        rakna();
+        rita();
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
+                  stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
                   periodtid: buildPeriodtid,
                   hjulprojektion: buildHjulprojektion,

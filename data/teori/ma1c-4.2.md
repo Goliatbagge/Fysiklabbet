@@ -32,7 +32,7 @@ där $k$ kallas proportionalitetskonstant.
 :::
 
 ::: formel "Proportionalitet som graf"
-Grafen till en proportionalitet går alltid genom origo.
+Grafen till en proportionalitet är alltid en rät linje som går genom origo.
 :::
 
 Ur formeln följer att proportionalitetskonstanten kan beräknas
@@ -139,7 +139,7 @@ Endast graf A uppfyller kriterierna för en proportionalitet.
 :::
 
 ::: sampunkt "Grafen"
-- **Går alltid genom origo.** Det är det säkraste kännetecknet.
+- **En rät linje som alltid går genom origo.**
 - Är $m \neq 0$ är sambandet linjärt men **inte** proportionellt.
 - Större $k$ ger brantare linje. Negativt $k$ ger en linje som lutar
   nedåt.

@@ -22390,15 +22390,20 @@
     y += adv + 1.5 * F;
     var bK = bubble(140, bubbleTop(y - adv), bw, [
       [['Fjäderkonstanten är inte given.']],
-      [['Den räknas ut direkt i klammern']],
-      [['med Hookes lag: kraften på']],
-      [['fjädern är viktens tyngd.']]
+      [['Jag tar fram den ur Hookes lag,']],
+      [['F = k·Δl. Kraften som drar ut']],
+      [['fjädern är viktens tyngd, m·g.']]
     ]);
     tanke(bK);
+    /* Hookes lag skrivs först som den står i formelsamlingen och
+     * omformas steg för steg (⟺) till k = m·g/Δl — ingen formel som
+     * eleven inte känner igen får användas direkt (användarkrav
+     * 2026-10-15). Insättningen tar en egen rad. */
     var klam = valueBracket(acts, [
       'm=100 g=0,100 kg',
-      ['k=', { frac: ['m·g', 'Δl'] }, '=',
-       { frac: ['0,100 kg·9,82 N/kg', '0,090 m'] }, '=10,911... N/m']
+      'Δl=9,0 cm=0,090 m',
+      ['F=k·Δl ⟺ m·g=k·Δl ⟺ k=', { frac: ['m·g', 'Δl'] }],
+      ['k=', { frac: ['0,100 kg·9,82 N/kg', '0,090 m'] }, '=10,911... N/m']
     ], padL, y, s, F, { rs: 0.7 });
     stepEnd();
     y = klam.yEnd;

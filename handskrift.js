@@ -12815,7 +12815,10 @@
     xx = T.fracH('6-2', '4-2', xx, y);
     xx = T.str('=', xx, y);
     xx = T.fracH('4', '2', xx, y);
-    T.str('=2', xx, y);
+    xx = T.str('=2', xx, y);
+    T.stepEnd();
+
+    T.str('Stämmer', xx + 1.2 * F, y);
     T.stepEnd();
 
     y += 3.0 * F;

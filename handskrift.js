@@ -99,6 +99,16 @@
  * in, hjälplinjer eller mått ska läggas till, eller figuren behövs för
  * att resonemanget ska gå att följa. Referens: layoutProportionalitet.
  *
+ * REGEL (UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN, användarkrav
+ * 2026-10-16): när en graf eller ett koordinatsystem redan är GIVET i
+ * uppgiften och behövs i lösningen (för att läsa av, ringa in, rita ett
+ * trappsteg) ska pennen INTE lägga tid på att rita av det. Rita det inom
+ * forritad(T, function () { A.axes(); A.ticks(…); A.graphKM(…); }) — då
+ * står det färdigt på arket från början, och första klicksteget är
+ * lösningens första egna steg (inget T.stepEnd() efter figuren). Det som
+ * eleven själv ritar (en graf uppgiften ber om, punkter, hjälplinjer,
+ * trappsteg) ritas som vanligt av pennan. Referens: layoutLinjensekv.
+ *
  * REGEL (figurscener, t.ex. hage/gungbrada): i de handritade DIAGRAMMEN
  * (till skillnad från algebra-raderna) ritas grundscenen — streckgubbar,
  * bräda/vägg/hage-linjer, skraffering — alltid i grafit. Alla
@@ -5750,6 +5760,15 @@
    * hamna). Bubblan är 268 bred och börjar på x=120, alltså långt från
    * arkets övre högra hörn där inställningsrutan ligger.
    * ================================================================== */
+  /* FÖRRITAT: allt som fn() lägger i aktlistan står färdigt på arket från
+   * början, utan penna. För uppgiftens egen figur (koordinatsystem + given
+   * graf), se REGEL (UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN). */
+  function forritad(T, fn) {
+    var i0 = T.acts.length;
+    fn();
+    for (var i = i0; i < T.acts.length; i++) T.acts[i].fore = 1;
+  }
+
   function mkTanke(T) {
     return function (yb, rader, dyn) {
       T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
@@ -11493,15 +11512,14 @@
               p1[1] + (p2[1] - p1[1]) * ((i + 1) / n)]]) });
         }
       }
-      /* opt.pilar: en liten pilspets mitt på varje steg, i stegets
+      /* opt.pilar: en liten pilspets i änden av varje steg, i stegets
        * riktning (åt höger/vänster, uppåt/nedåt), så att det syns att
        * trappan går 1 steg åt sidan och k steg UPP eller NED */
       function pil(p1, p2) {
-        var mx = (p1[0] + p2[0]) / 2, my = (p1[1] + p2[1]) / 2;
         var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
         var L = Math.sqrt(dx * dx + dy * dy) || 1, ux = dx / L, uy = dy / L;
         var h = 7, b = 4.5;
-        var tx = mx + ux * h / 2, ty = my + uy * h / 2;
+        var tx = p2[0], ty = p2[1];
         acts.push({ kind: 'stroke', color: BLUE, pts: humanize(
           [[tx - ux * h - uy * b, ty - uy * h + ux * b], [tx, ty],
            [tx - ux * h + uy * b, ty - uy * h - ux * b]]) });
@@ -12283,27 +12301,30 @@
 
     var A = mkAxes(T, F, { ox: padL + 200, oy: 268, u: 30,
                            xmin: -4, xmax: 4, ymin: -4, ymax: 6 });
-    A.axes();
-    A.ticks(heltal(-4, 4), heltal(-4, 6), [-4, -2, 2, 4], [-4, -2, 2, 4, 6]);
-    T.pause(150);
-    A.graphKM(2, 3, null, -3.5, 1.6);
-    T.stepEnd();
+    /* grafen är given i uppgiften: den står färdig från början (REGEL
+     * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      A.axes();
+      A.ticks(heltal(-4, 4), heltal(-4, 6), [-4, -2, 2, 4], [-4, -2, 2, 4, 6]);
+      A.graphKM(2, 3, null, -3.5, 1.6);
+    });
 
-    tanke(410, [
+    /* koordinatsystemets nedersta bläck (skalstreckstalet −4) ligger på
+     * y≈440, så m och k skrivs under det */
+    y = 500;
+    tanke(y, [
       [['m är där linjen skär']],
-      [['y-axeln. Jag följer linjen']],
-      [['till x=0 och läser av.']]
+      [['y-axeln. Jag ringar in']],
+      [['skärningen och läser av.']]
     ], 0);
-    var g = A.guides(0, 3);
+    T.acts.push({ kind: 'stroke', pts: ringPts(A.X(0), A.Y(3), 11, 11),
+                  color: BLUE });
     T.pause(200);
-    A.dot(0, 3);
-    /* m-etiketten till VÄNSTER om y-axeln: till höger krockar den med
-     * lutningstrappans mått som ritas i nästa steg */
-    A.tag(0, 3, 'm=3', -74, -10, BLUE);
-    g.forEach(function (st) { T.fade(st); });
+    T.str('m=3', padL, y);
     T.stepEnd();
 
-    tanke(410, [
+    y += 2.4 * F;
+    tanke(y, [
       [['k är hur mycket linjen går']],
       [['UPP när jag går ETT steg åt']],
       [['höger. Jag ritar trappsteget.']]
@@ -12311,9 +12332,6 @@
     A.stair(0, 3, 1, 5, '1', '2', { pilar: true });
     T.stepEnd();
 
-    /* koordinatsystemets nedersta bläck (skalstreckstalet −4) ligger på
-     * y≈440 — rubriken måste börja under det */
-    y = 500;
     T.str('k=2', padL, y);
     T.stepEnd();
 
@@ -59140,7 +59158,7 @@
       penRamps = [{ t0: 0, t1: 260, a0: 0, a1: 1 }];
       strokes.forEach(function (a) {
         a._t0 = Infinity; a._t1 = Infinity;
-        a.fade0 = null; a.fade1 = null;
+        a.fade0 = null; a.fade1 = null; a._fore = 0;
         a.path.removeAttribute('opacity');
       });
       objs.forEach(function (o) { o.wins.length = 0; });
@@ -59169,7 +59187,19 @@
         penHidden = false;
       }
 
+      var foreFadeOk = true;   /* inget har ritats ännu: förritade tal tonas bort direkt */
       actsArr.forEach(function (a) {
+        /* FÖRRITAT (fore): uppgiftens egen figur står färdig på arket från
+         * början. Strecken får tiden −1, och pennan rör sig aldrig dit;
+         * linjalen, pauserna och pennlyften i den delen hoppas över. */
+        if (a.fore) {
+          if (a.kind === 'stroke') { a._fore = 1; }
+          return;
+        }
+        if (a.kind === 'fade' && a.ref && a.ref.fore && foreFadeOk) {
+          a.ref.fade0 = -2; a.ref.fade1 = -1; return;
+        }
+        if (a.kind === 'stroke') foreFadeOk = false;
         if (a.kind === 'lineEnd') {
           /* pennan tonar bort vid steggränsen så att den inte skymmer det
            * nyskrivna medan man läser — men bara om något faktiskt skrevs
@@ -59264,9 +59294,10 @@
         if (bev.type === 'draw') upcoming = bev.a.color || null;
         bev.penCol = upcoming;
       }
-      startPos = strokes.length
-        ? [strokes[0].pts[0][0], strokes[0].pts[0][1]] : [W / 2, H / 2];
-      /* koppla drawtider till strecken */
+      var forsta = strokes.filter(function (a) { return !a._fore; })[0];
+      startPos = forsta ? [forsta.pts[0][0], forsta.pts[0][1]] : [W / 2, H / 2];
+      /* koppla drawtider till strecken; förritade streck är klara från start */
+      strokes.forEach(function (a) { if (a._fore) { a._t0 = -2; a._t1 = -1; } });
       events.forEach(function (ev) {
         if (ev.type === 'draw') { ev.a._t0 = ev.t0; ev.a._t1 = ev.t1; }
       });

@@ -13299,8 +13299,13 @@
       [['Nu har jag både k och m och']],
       [['kan skriva ekvationen.']]
     ]);
-    y += 4.0 * F;
-    T.str('k och m insatta i y=kx+m ger', padL, y - 2.0 * F, null, 0.62);
+    /* rubriken säger exakt vilka värden som sätts in, med bråket som
+     * litet bråk i rubrikens storlek (fracSup sänkt till rubrikens rad) */
+    y += 4.8 * F;
+    var yr = y - 2.7 * F;
+    var xr = T.str('k=−', padL, yr, null, 0.62);
+    xr = T.fracSup('1', '2', xr, yr + 0.57 * F);
+    T.str(' och m=3 i y=kx+m ger', xr + 0.08 * F, yr, null, 0.62);
     xe = T.str('Svar: y=−', padL, y);
     xe = T.fracH('1', '2', xe, y);
     xe = T.str('x+3', xe, y);

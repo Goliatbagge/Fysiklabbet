@@ -26,6 +26,10 @@
   var V = HK.verktyg;
   var physTools = V.physTools, valueBracket = V.valueBracket, BLUE = V.BLUE;
   var rootSign = V.rootSign;
+  /* uppgiftens figur står färdig från början, se REGEL UPPGIFTENS FIGUR
+   * STÅR FÄRDIG FRÅN BÖRJAN i handskrift.js: bara grundscenen som redan
+   * finns i uppgiftens figur förritas, kraftpilarna ritar pennan */
+  var forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('ov-fy1-3.1-u' + nr, fn); }
 
@@ -342,7 +346,9 @@
       [['krafterna, vinkelräta mot']],
       [['varandra och skalenliga.']]
     ], 300));
-    T.rect(ox - 14, oy - 14, ox + 14, oy + 14);
+    forritad(T, function () {
+      T.rect(ox - 14, oy - 14, ox + 14, oy + 14);
+    });
     T.dot(ox, oy);
     T.pause(150);
     T.arrow([ox, oy], [ox + 12 * K, oy], BLUE);
@@ -423,8 +429,9 @@
       [['Ritar repet som drar i lådan']],
       [['med 80 N, 30° över vågrätt.']]
     ], 310));
-    T.rect(ox - 28, oy - 14, ox, oy + 14);
-    T.pause(150);
+    forritad(T, function () {
+      T.rect(ox - 28, oy - 14, ox, oy + 14);
+    });
     T.arrow([ox, oy], [tipX, tipY], BLUE);
     T.lbl('F=80 N', tipX - 96, tipY - 6, BLUE);
     T.pause(150);
@@ -505,11 +512,12 @@
     var t2 = [ox + L * Math.cos(v), oy + L * Math.sin(v)];
 
     T.tanke(T.figurBubble(292, [
-      [['Ritar släden uppifrån och']],
-      [['färdriktningen åt höger.']]
+      [['Släden är sedd uppifrån. Jag']],
+      [['ritar färdriktningen åt höger.']]
     ], 320));
-    T.rect(ox - 70, oy - 20, ox, oy + 20);
-    T.pause(150);
+    forritad(T, function () {
+      T.rect(ox - 70, oy - 20, ox, oy + 20);
+    });
     T.dash([ox, oy], [ox + 210, oy]);
     T.stepEnd();
 
@@ -707,10 +715,11 @@
       [['kända krafterna, skalenligt.']],
       [['Norr är uppåt.']]
     ], 320));
-    T.arrow([90, 200], [90, 156]);                     /* väderstreck */
-    T.lbl('N', 84, 146);
-    T.pause(150);
-    T.rect(ox - 14, oy - 14, ox + 14, oy + 14);
+    forritad(T, function () {
+      T.arrow([90, 200], [90, 156]);                   /* väderstreck */
+      T.lbl('N', 84, 146);
+      T.rect(ox - 14, oy - 14, ox + 14, oy + 14);
+    });
     T.dot(ox, oy);
     T.pause(150);
     T.arrow([ox, oy], r1, BLUE);
@@ -811,22 +820,17 @@
     var ux = dx / Ld, uy = dy / Ld;                   /* mot bilen: (ux, -uy) */
     var LS = 90, LF = 2 * LS * uy;                    /* jämvikt i figuren */
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar trädet, bilen och repet']],
-      [['uppifrån. Repets knyck är']],
-      [['överdrivet i figuren.']]
-    ], 360));
-    T.circle(xT - 18, yR, 18);
-    T.rect(xB, 158, xB + 56, 202);
-    T.pause(150);
-    T.dash([xT, yR], [xB, yR]);
-    T.pause(150);
-    T.line([xT, yR], [xM, yM]);
-    T.line([xM, yM], [xB, yR]);
-    T.pause(150);
-    bage(T, xT, yR, 50, -Math.atan2(dy, dx) * 180 / Math.PI, 0);
-    T.lbl('5,0°', xT + 60, yR + 20, BLUE, 0.45);
-    T.stepEnd();
+    /* trädet, bilen, repet och vinkeln står i uppgiftens figur: de står
+     * färdiga från början (repets knyck är överdrivet, som i uppgiften) */
+    forritad(T, function () {
+      T.circle(xT - 18, yR, 18);
+      T.rect(xB, 158, xB + 56, 202);
+      T.dash([xT, yR], [xB, yR]);
+      T.line([xT, yR], [xM, yM]);
+      T.line([xM, yM], [xB, yR]);
+      bage(T, xT, yR, 50, -Math.atan2(dy, dx) * 180 / Math.PI, 0);
+      T.lbl('5,0°', xT + 60, yR + 20, BLUE, 0.45);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Tre krafter verkar på repets']],

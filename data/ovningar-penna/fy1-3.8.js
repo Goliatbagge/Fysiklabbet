@@ -33,6 +33,9 @@
   if (!HK || !HK.registrera) return;
   var V = HK.verktyg;
   var physTools = V.physTools, valueBracket = V.valueBracket, BLUE = V.BLUE;
+  /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR STÅR
+   * FÄRDIG FRÅN BÖRJAN i handskrift.js); kraftfigurerna ritar pennan */
+  var forritad = V.forritad;
   var trigKvot = V.trigKvot, vinkelBage = V.vinkelBage;
   var substRings = V.substRings, fadeRings = V.fadeRings;
   var RAD = Math.PI / 180;
@@ -86,33 +89,24 @@
     var adv = 1.7 * F, bw = 292;
     var K = [180, 230], yT = K[1] - 100 * Math.tan(30 * RAD);
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar lampan som hänger i de']],
-      [['två repen från taket.']]
-    ], 318));
-    tak(T, 50, 310, yT);
-    T.line([80, yT], K);
-    T.line([280, yT], K);
-    T.line(K, [K[0], K[1] + 22]);
-    T.pause(120);
-    T.line([K[0] - 10, K[1] + 22], [K[0] + 10, K[1] + 22]);   /* lampskärmen */
-    T.line([K[0] - 10, K[1] + 22], [K[0] - 28, K[1] + 48]);
-    T.line([K[0] + 10, K[1] + 22], [K[0] + 28, K[1] + 48]);
-    T.line([K[0] - 28, K[1] + 48], [K[0] + 28, K[1] + 48]);
-    T.stepEnd();
-
-    T.tanke(T.figurBubble(292, [
-      [['Skriver in massan och repens']],
-      [['vinklar mot det vågräta.']]
-    ], 318));
-    T.dash([K[0] - 80, K[1]], [K[0] + 80, K[1]]);
-    bage(T, K, 30, 28, -1);
-    bage(T, K, 30, 28, 1);
-    T.lbl('30°', K[0] - 88, K[1] - 6, BLUE);
-    T.lbl('30°', K[0] + 50, K[1] - 6, BLUE);
-    T.pause(150);
-    T.lbl('m=2,0 kg', K[0] + 38, K[1] + 44, BLUE);
-    T.stepEnd();
+    /* lampan i repen, vinklarna och massan står i uppgiftens figur: de
+     * står färdiga från början, kraftfiguren ritar pennan */
+    forritad(T, function () {
+      tak(T, 50, 310, yT);
+      T.line([80, yT], K);
+      T.line([280, yT], K);
+      T.line(K, [K[0], K[1] + 22]);
+      T.line([K[0] - 10, K[1] + 22], [K[0] + 10, K[1] + 22]); /* lampskärmen */
+      T.line([K[0] - 10, K[1] + 22], [K[0] - 28, K[1] + 48]);
+      T.line([K[0] + 10, K[1] + 22], [K[0] + 28, K[1] + 48]);
+      T.line([K[0] - 28, K[1] + 48], [K[0] + 28, K[1] + 48]);
+      T.dash([K[0] - 80, K[1]], [K[0] + 80, K[1]]);
+      bage(T, K, 30, 28, -1);
+      bage(T, K, 30, 28, 1);
+      T.lbl('30°', K[0] - 88, K[1] - 6, BLUE);
+      T.lbl('30°', K[0] + 50, K[1] - 6, BLUE);
+      T.lbl('m=2,0 kg', K[0] + 38, K[1] + 44, BLUE);
+    });
 
     /* kraftfiguren: 5 px/N → F_G och F_S 98,2 px */
     var P = [530, 300], k = 5;
@@ -338,7 +332,9 @@
     ], 342));
     T.line([80, yG], [420, yG]);
     T.hatch([420, yG], [80, yG], 26);
-    T.rect(140, yG - 70, 220, yG);
+    forritad(T, function () {                     /* lådan i uppgiftens figur */
+      T.rect(140, yG - 70, 220, yG);
+    });
     var P = [220, yG - 35];
     /* 4 px/N: F_S 160 px, F_x 145,0 px, F_y 67,6 px */
     var tip = snett(P, 25, 160, 1);
@@ -432,45 +428,34 @@
     var yT = 190, xA = 70, xB = 390, yG = 330;
     var K = [(xA + xB) / 2, yT + 160 * Math.tan(8 * RAD)];
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar tvättlinan mellan']],
-      [['stolparna, med jackan mitt på.']]
-    ], 372));
-    T.line([40, yG], [420, yG]);
-    T.hatch([420, yG], [40, yG], 28);
-    T.rect(xA - 4, yT, xA + 4, yG);
-    T.rect(xB - 4, yT, xB + 4, yG);
-    T.pause(120);
-    T.line([xA, yT], K);
-    T.line([xB, yT], K);
-    T.pause(120);
-    T.line(K, [K[0], K[1] + 10]);                               /* galgen */
-    T.line([K[0] - 24, K[1] + 24], [K[0], K[1] + 10]);
-    T.line([K[0], K[1] + 10], [K[0] + 24, K[1] + 24]);
-    T.line([K[0] - 24, K[1] + 24], [K[0] + 24, K[1] + 24]);
-    T.pause(100);
-    T.line([K[0] - 24, K[1] + 24], [K[0] - 34, K[1] + 58]);     /* jackan */
-    T.line([K[0] - 34, K[1] + 58], [K[0] - 26, K[1] + 60]);
-    T.line([K[0] - 22, K[1] + 36], [K[0] - 20, K[1] + 80]);
-    T.line([K[0] + 24, K[1] + 24], [K[0] + 34, K[1] + 58]);
-    T.line([K[0] + 34, K[1] + 58], [K[0] + 26, K[1] + 60]);
-    T.line([K[0] + 22, K[1] + 36], [K[0] + 20, K[1] + 80]);
-    T.line([K[0] - 20, K[1] + 80], [K[0] + 20, K[1] + 80]);
-    T.line([K[0], K[1] + 24], [K[0], K[1] + 80]);
-    T.stepEnd();
-
-    T.tanke(T.figurBubble(292, [
-      [['Skriver in massan och linans']],
-      [['vinkel mot det vågräta.']]
-    ], 372));
-    T.dash([K[0] - 96, K[1]], [K[0] + 96, K[1]]);
-    bage(T, K, 8, 70, -1);
-    bage(T, K, 8, 70, 1);
-    T.lbl('8,0°', K[0] - 120, K[1] + 18, BLUE);
-    T.lbl('8,0°', K[0] + 76, K[1] + 18, BLUE);
-    T.pause(150);
-    T.lbl('m=1,5 kg', K[0] + 44, K[1] + 74, BLUE);
-    T.stepEnd();
+    /* tvättlinan, jackan, vinklarna och massan står i uppgiftens figur:
+     * de står färdiga från början, kraftfiguren ritar pennan */
+    forritad(T, function () {
+      T.line([40, yG], [420, yG]);
+      T.hatch([420, yG], [40, yG], 28);
+      T.rect(xA - 4, yT, xA + 4, yG);
+      T.rect(xB - 4, yT, xB + 4, yG);
+      T.line([xA, yT], K);
+      T.line([xB, yT], K);
+      T.line(K, [K[0], K[1] + 10]);                             /* galgen */
+      T.line([K[0] - 24, K[1] + 24], [K[0], K[1] + 10]);
+      T.line([K[0], K[1] + 10], [K[0] + 24, K[1] + 24]);
+      T.line([K[0] - 24, K[1] + 24], [K[0] + 24, K[1] + 24]);
+      T.line([K[0] - 24, K[1] + 24], [K[0] - 34, K[1] + 58]);   /* jackan */
+      T.line([K[0] - 34, K[1] + 58], [K[0] - 26, K[1] + 60]);
+      T.line([K[0] - 22, K[1] + 36], [K[0] - 20, K[1] + 80]);
+      T.line([K[0] + 24, K[1] + 24], [K[0] + 34, K[1] + 58]);
+      T.line([K[0] + 34, K[1] + 58], [K[0] + 26, K[1] + 60]);
+      T.line([K[0] + 22, K[1] + 36], [K[0] + 20, K[1] + 80]);
+      T.line([K[0] - 20, K[1] + 80], [K[0] + 20, K[1] + 80]);
+      T.line([K[0], K[1] + 24], [K[0], K[1] + 80]);
+      T.dash([K[0] - 96, K[1]], [K[0] + 96, K[1]]);
+      bage(T, K, 8, 70, -1);
+      bage(T, K, 8, 70, 1);
+      T.lbl('8,0°', K[0] - 120, K[1] + 18, BLUE);
+      T.lbl('8,0°', K[0] + 76, K[1] + 18, BLUE);
+      T.lbl('m=1,5 kg', K[0] + 44, K[1] + 74, BLUE);
+    });
 
     /* kraftfiguren: 2 px/N → F_G 29,5 px, F_S 105,8 px */
     var P = [560, 330], k = 2;
@@ -553,45 +538,38 @@
     var yT = 200, xA = 80, xB = 380, yG = 336;
     var K = [(xA + xB) / 2, yT + 37.5];
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar vajern mellan stolparna']],
-      [['med lyktan mitt på.']]
-    ], 378));
-    T.line([50, yG], [420, yG]);
-    T.hatch([420, yG], [50, yG], 28);
-    T.rect(xA - 4, yT, xA + 4, yG);
-    T.rect(xB - 4, yT, xB + 4, yG);
-    T.pause(120);
-    T.line([xA, yT], K);
-    T.line([xB, yT], K);
-    T.line(K, [K[0], K[1] + 14]);
-    T.pause(100);
-    T.line([K[0] - 12, K[1] + 14], [K[0] + 12, K[1] + 14]);     /* lyktan */
-    T.line([K[0] - 12, K[1] + 14], [K[0] - 8, K[1] + 40]);
-    T.line([K[0] + 12, K[1] + 14], [K[0] + 8, K[1] + 40]);
-    T.line([K[0] - 8, K[1] + 40], [K[0] + 8, K[1] + 40]);
-    T.stepEnd();
+    /* vajern, lyktan, måtten och massan står i uppgiftens figur: de står
+     * färdiga från början. Vinkeln α finns inte där, den ritar pennan. */
+    forritad(T, function () {
+      T.line([50, yG], [420, yG]);
+      T.hatch([420, yG], [50, yG], 28);
+      T.rect(xA - 4, yT, xA + 4, yG);
+      T.rect(xB - 4, yT, xB + 4, yG);
+      T.line([xA, yT], K);
+      T.line([xB, yT], K);
+      T.line(K, [K[0], K[1] + 14]);
+      T.line([K[0] - 12, K[1] + 14], [K[0] + 12, K[1] + 14]);   /* lyktan */
+      T.line([K[0] - 12, K[1] + 14], [K[0] - 8, K[1] + 40]);
+      T.line([K[0] + 12, K[1] + 14], [K[0] + 8, K[1] + 40]);
+      T.line([K[0] - 8, K[1] + 40], [K[0] + 8, K[1] + 40]);
+      T.dblArrow([xA + 6, yT - 22], [xB - 6, yT - 22], BLUE);
+      T.line([xA, yT - 6], [xA, yT - 30]);
+      T.line([xB, yT - 6], [xB, yT - 30]);
+      T.lbl('4,0 m', (xA + xB) / 2 - 29, yT - 30, BLUE);
+      T.dash([xA + 8, yT], [xB - 8, yT]);
+      T.dash([K[0] + 8, K[1]], [xB + 34, K[1]]);
+      T.dash([xB + 8, yT], [xB + 34, yT]);
+      T.dblArrow([xB + 26, yT + 3], [xB + 26, K[1] - 3], BLUE);
+      T.lbl('0,50 m', xB + 36, K[1] - 9, BLUE);
+      T.lbl('m=3,0 kg', K[0] + 22, K[1] + 36, BLUE);
+    });
 
     T.tanke(T.figurBubble(292, [
-      [['Skriver in massan och måtten.']],
       [['Vinkeln α mot det vågräta']],
       [['är okänd.']]
     ], 378));
-    T.dblArrow([xA + 6, yT - 22], [xB - 6, yT - 22], BLUE);
-    T.line([xA, yT - 6], [xA, yT - 30]);
-    T.line([xB, yT - 6], [xB, yT - 30]);
-    T.lbl('4,0 m', (xA + xB) / 2 - 29, yT - 30, BLUE);
-    T.pause(150);
-    T.dash([xA + 8, yT], [xB - 8, yT]);
-    T.dash([K[0] + 8, K[1]], [xB + 34, K[1]]);
-    T.dash([xB + 8, yT], [xB + 34, yT]);
-    T.dblArrow([xB + 26, yT + 3], [xB + 26, K[1] - 3], BLUE);
-    T.lbl('0,50 m', xB + 36, K[1] - 9, BLUE);
-    T.pause(150);
     bage(T, K, 14.036, 92, 1);
     T.lbl('α', K[0] + 72, K[1] - 4, BLUE);
-    T.pause(150);
-    T.lbl('m=3,0 kg', K[0] + 22, K[1] + 36, BLUE);
     T.stepEnd();
 
     T.tanke(T.figurBubble(292, [
@@ -719,33 +697,23 @@
     var K = [190, 250], yT = 180;
     var xA = K[0] - 70 / Math.tan(60 * RAD), xB = K[0] + 70 / Math.tan(30 * RAD);
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar lådan som hänger i de']],
-      [['två repen. Repen lutar olika']],
-      [['mycket.']]
-    ], 336));
-    tak(T, 60, 340, yT);
-    T.line([xA, yT], K);
-    T.line([xB, yT], K);
-    T.line(K, [K[0], K[1] + 18]);
-    T.rect(K[0] - 24, K[1] + 18, K[0] + 24, K[1] + 52);
-    T.pause(120);
-    T.lbl('rep 1', xA - 80, yT + 22);
-    T.lbl('rep 2', xB + 8, yT + 22);
-    T.stepEnd();
-
-    T.tanke(T.figurBubble(292, [
-      [['Skriver in massan och repens']],
-      [['vinklar mot det vågräta.']]
-    ], 336));
-    T.dash([K[0] - 80, K[1]], [K[0] + 80, K[1]]);
-    bage(T, K, 60, 28, -1);
-    bage(T, K, 30, 28, 1);
-    T.lbl('60°', K[0] - 76, K[1] - 6, BLUE);
-    T.lbl('30°', K[0] + 50, K[1] - 6, BLUE);
-    T.pause(150);
-    T.lbl('m=10 kg', K[0] + 34, K[1] + 46, BLUE);
-    T.stepEnd();
+    /* lådan i repen, vinklarna och massan står i uppgiftens figur: de
+     * står färdiga från början, kraftfiguren ritar pennan */
+    forritad(T, function () {
+      tak(T, 60, 340, yT);
+      T.line([xA, yT], K);
+      T.line([xB, yT], K);
+      T.line(K, [K[0], K[1] + 18]);
+      T.rect(K[0] - 24, K[1] + 18, K[0] + 24, K[1] + 52);
+      T.lbl('rep 1', xA - 80, yT + 22);
+      T.lbl('rep 2', xB + 8, yT + 22);
+      T.dash([K[0] - 80, K[1]], [K[0] + 80, K[1]]);
+      bage(T, K, 60, 28, -1);
+      bage(T, K, 30, 28, 1);
+      T.lbl('60°', K[0] - 76, K[1] - 6, BLUE);
+      T.lbl('30°', K[0] + 50, K[1] - 6, BLUE);
+      T.lbl('m=10 kg', K[0] + 34, K[1] + 46, BLUE);
+    });
 
     /* kraftfiguren: 1,2 px/N → F_G 117,8, F_1 102,0, F_2 58,9 px */
     var P = [560, 330], k = 1.2;

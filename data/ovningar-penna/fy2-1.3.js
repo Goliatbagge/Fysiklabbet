@@ -28,6 +28,9 @@
   if (!HK || !HK.registrera) return;
   var V = HK.verktyg;
   var physTools = V.physTools, valueBracket = V.valueBracket, BLUE = V.BLUE;
+  /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR STÅR
+   * FÄRDIG FRÅN BÖRJAN i handskrift.js) */
+  var forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('ov-fy2-1.3-u' + nr, fn); }
 
@@ -385,22 +388,17 @@
     var Pv = [372, yG], c = 0.8, s = 0.6;                /* tan α = 0,75 */
     function R(x, y) { return [Pv[0] + x * c - y * s, Pv[1] + x * s + y * c]; }
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar lådan upprätt med sina']],
-      [['mått. Den tippas kring nedre']],
-      [['högra kanten.']]
-    ], 335));
-    T.line([40, yG], [440, yG]);
-    T.rect(x0, yG - h, x0 + b, yG);
-    T.dot(x0 + b / 2, yG - h / 2);
-    T.dot(x0 + b, yG);
-    T.pause(150);
-    T.dblArrow([x0, yG + 16], [x0 + b, yG + 16], BLUE);
-    T.lbl('b=0,60 m', x0 + b / 2 - T.lblW('b=0,60 m') / 2, yG + 40, BLUE);
-    T.pause(150);
-    T.dblArrow([x0 + b + 16, yG - h], [x0 + b + 16, yG], BLUE);
-    T.lbl('h=0,80 m', x0 + b + 24, yG - h / 2 + 6, BLUE);
-    T.stepEnd();
+    /* uppgiftens figur: står färdig från början, pennan ritar krafterna */
+    forritad(T, function () {
+      T.line([40, yG], [440, yG]);
+      T.rect(x0, yG - h, x0 + b, yG);
+      T.dot(x0 + b / 2, yG - h / 2);
+      T.dot(x0 + b, yG);
+      T.dblArrow([x0, yG + 16], [x0 + b, yG + 16], BLUE);
+      T.lbl('b=0,60 m', x0 + b / 2 - T.lblW('b=0,60 m') / 2, yG + 40, BLUE);
+      T.dblArrow([x0 + b + 16, yG - h], [x0 + b + 16, yG], BLUE);
+      T.lbl('h=0,80 m', x0 + b + 24, yG - h / 2 + 6, BLUE);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Vid gränsen står tyngdpunkten']],
@@ -496,21 +494,17 @@
     function R(x, y) { return [Pv[0] + x * c - y * s, Pv[1] + x * s + y * c]; }
     var LL = R(-b, 0), UL = R(-b, -h), UR = R(0, -h), G = R(-b / 2, -h / 2);
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar lådan upprätt. Bredden är']],
-      [['given, höjden h är det jag söker.']]
-    ], 350));
-    T.line([36, yG], [440, yG]);
-    T.rect(x0, yG - h, x0 + b, yG);
-    T.dot(x0 + b / 2, yG - h / 2);
-    T.dot(x0 + b, yG);
-    T.pause(150);
-    T.dblArrow([x0, yG + 16], [x0 + b, yG + 16], BLUE);
-    T.lbl('b=0,40 m', x0 + b / 2 - T.lblW('b=0,40 m') / 2, yG + 40, BLUE);
-    T.pause(150);
-    T.dblArrow([x0 + b + 16, yG - h], [x0 + b + 16, yG], BLUE);
-    T.lbl('h', x0 + b + 26, yG - h / 2 + 6, BLUE);
-    T.stepEnd();
+    /* uppgiftens figur: står färdig från början, pennan ritar krafterna */
+    forritad(T, function () {
+      T.line([36, yG], [440, yG]);
+      T.rect(x0, yG - h, x0 + b, yG);
+      T.dot(x0 + b / 2, yG - h / 2);
+      T.dot(x0 + b, yG);
+      T.dblArrow([x0, yG + 16], [x0 + b, yG + 16], BLUE);
+      T.lbl('b=0,40 m', x0 + b / 2 - T.lblW('b=0,40 m') / 2, yG + 40, BLUE);
+      T.dblArrow([x0 + b + 16, yG - h], [x0 + b + 16, yG], BLUE);
+      T.lbl('h', x0 + b + 26, yG - h / 2 + 6, BLUE);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Lutad 25° ska den vara precis']],
@@ -614,30 +608,23 @@
     var ekvOp = V.mkEkvOp(T, false), multIn = V.mkMultIn(T),
         samla = V.mkSamla(T);
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar bordet och brädan som']],
-      [['sticker ut över kanten. Vikten']],
-      [['står på den inre änden.']]
-    ], 400));
-    T.line([30, yB], [xE, yB]);                          /* bordsskivan */
-    T.line([30, yB + 8], [xE, yB + 8]);
-    T.line([xE, yB], [xE, yB + 8]);
-    T.line([44, yB + 8], [44, 300]);                     /* benen */
-    T.line([xE - 22, yB + 8], [xE - 22, 300]);
-    T.pause(150);
-    T.rect(xL, yB - 9, xR, yB);                          /* brädan */
-    T.rect(xTV - 8, yB - 31, xTV + 8, yB - 9);           /* vikten */
-    T.pause(150);
-    T.dblArrow([xL, yB - 42], [xR, yB - 42], BLUE);
-    T.lbl('1,2 m', (xL + xR) / 2 + 20, yB - 52, BLUE);
-    T.pause(150);
-    T.dblArrow([xE, yD], [xR, yD], BLUE);
-    T.dash([xR, yB + 3], [xR, yD - 4]);
-    T.lbl('d', xR + 8, yD + 6, BLUE);
-    T.pause(150);
-    T.lbl('m_V=1,2 kg', 40, yB - 62, BLUE);
-    T.lbl('m_B=2,4 kg', 272, yB + 26, BLUE);
-    T.stepEnd();
+    /* uppgiftens figur: står färdig från början, pennan ritar krafterna */
+    forritad(T, function () {
+      T.line([30, yB], [xE, yB]);                          /* bordsskivan */
+      T.line([30, yB + 8], [xE, yB + 8]);
+      T.line([xE, yB], [xE, yB + 8]);
+      T.line([44, yB + 8], [44, 300]);                     /* benen */
+      T.line([xE - 22, yB + 8], [xE - 22, 300]);
+      T.rect(xL, yB - 9, xR, yB);                          /* brädan */
+      T.rect(xTV - 8, yB - 31, xTV + 8, yB - 9);           /* vikten */
+      T.dblArrow([xL, yB - 42], [xR, yB - 42], BLUE);
+      T.lbl('1,2 m', (xL + xR) / 2 + 20, yB - 52, BLUE);
+      T.dblArrow([xE, yD], [xR, yD], BLUE);
+      T.dash([xR, yB + 3], [xR, yD - 4]);
+      T.lbl('d', xR + 8, yD + 6, BLUE);
+      T.lbl('m_V=1,2 kg', 40, yB - 62, BLUE);
+      T.lbl('m_B=2,4 kg', 272, yB + 26, BLUE);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Precis när brädan börjar tippa']],

@@ -31,6 +31,9 @@
   if (!HK || !HK.registrera) return;
   var V = HK.verktyg;
   var physTools = V.physTools, valueBracket = V.valueBracket, BLUE = V.BLUE;
+  /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR STÅR
+   * FÄRDIG FRÅN BÖRJAN i handskrift.js); kraftpilarna ritar pennan */
+  var forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('ov-fy1-3.7-u' + nr, fn); }
 
@@ -156,12 +159,8 @@
     var T = physTools(F), padL = T.padL;
     var adv = 1.7 * F, bw = 292;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar planet med lådan på och']],
-      [['vinkeln 30°.']]
-    ], 356));
-    var G = plan(T, F, 30);
-    T.stepEnd();
+    var G;   /* planet med lådan är uppgiftens figur: färdigt från början */
+    forritad(T, function () { G = plan(T, F, 30); });
 
     T.tanke(T.figurBubble(292, [
       [['Tyngdkraften pekar rakt nedåt.']],
@@ -355,13 +354,10 @@
     var T = physTools(F), padL = T.padL;
     var adv = 1.7 * F, bw = 292;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar backen som ett lutande']],
-      [['plan med vinkeln 15°.']],
-      [['Skidåkaren ritas som en låda.']]
-    ], 400));
-    var G = plan(T, F, 15, { w: 24, h: 24, lucka: true });
-    T.stepEnd();
+    var G;   /* backen med åkaren är uppgiftens figur: färdig från början */
+    forritad(T, function () {
+      G = plan(T, F, 15, { w: 24, h: 24, lucka: true });
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Tyngdkraften delas upp i en del']],
@@ -613,12 +609,8 @@
     var T = physTools(F), padL = T.padL;
     var adv = 1.7 * F, bw = 292;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar planet med kälken som en']],
-      [['låda. Vinkeln är 22°.']]
-    ], 370));
-    var G = plan(T, F, 22);
-    T.stepEnd();
+    var G;   /* planet med kälken är uppgiftens figur: färdigt från början */
+    forritad(T, function () { G = plan(T, F, 22); });
 
     T.tanke(T.figurBubble(292, [
       [['Tyngdkraften delas upp. Normal-']],
@@ -1003,12 +995,8 @@
     var T = physTools(F), padL = T.padL;
     var adv = 1.7 * F, bw = 292;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar planet med lådan.']],
-      [['Vinkeln är 31°.']]
-    ], 356));
-    var G = plan(T, F, 31);
-    T.stepEnd();
+    var G;   /* planet med lådan är uppgiftens figur: färdigt från början */
+    forritad(T, function () { G = plan(T, F, 31); });
 
     T.tanke(T.figurBubble(292, [
       [['Tyngdkraften delas upp. Friktionen']],
@@ -1148,8 +1136,8 @@
       [['Ritar planet med klossen som']],
       [['glider uppför. Vinkeln är 28°.']]
     ], 370));
-    var G = plan(T, F, 28, { h: 36 });
-    T.pause(150);
+    var G;   /* planet med klossen är uppgiftens figur: färdigt från början */
+    forritad(T, function () { G = plan(T, F, 28, { h: 36 }); });
     var v0 = G.P(G.w, G.h / 2), v1 = G.P(G.w + 36, G.h / 2);
     T.arrow(v0, v1, BLUE);
     T.lbl('v_0=5,0 m/s', v0[0] - 4, v1[1] - 22, BLUE);

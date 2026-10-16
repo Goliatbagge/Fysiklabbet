@@ -29,6 +29,9 @@
   if (!HK || !HK.registrera) return;
   var V = HK.verktyg;
   var physTools = V.physTools, valueBracket = V.valueBracket, BLUE = V.BLUE;
+  /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR STÅR
+   * FÄRDIG FRÅN BÖRJAN i handskrift.js) */
+  var forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('ov-fy2-1.2-u' + nr, fn); }
 
@@ -418,32 +421,26 @@
     var yT = 150, yB = 160, gY = 220;
     var xA = 80, xB = 320, xG = 240, xR = 400;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar plankan på stöden A och B.']],
-      [['A sitter vid vänstra änden.']]
-    ], 332));
-    brada(T, xA, xR, yT, yB);
-    T.pause(120);
-    stod(T, xA, yB, gY);
-    stod(T, xB, yB, gY);
-    T.pause(120);
-    mark(T, 46, 420, gY);
-    T.lbl('A', xA - 40, 206);
-    T.lbl('B', xB + 26, 206);
-    T.pause(120);
-    T.lbl('m=30 kg', 124, 138, BLUE);
-    T.pause(150);
-    var i0 = T.acts.length;                     /* givna mått: tonas ut sedan */
-    T.dash([xB, gY + 14], [xB, 256]);
-    T.dash([xR, gY + 14], [xR, 284]);
-    T.dash([xA, gY + 14], [xA, 284]);
-    T.dblArrow([xB, 252], [xR, 252], BLUE);
-    T.lbl('1,0 m', xR + 8, 257, BLUE);
-    T.pause(150);
-    T.dblArrow([xA, 280], [xR, 280], BLUE);
-    T.lbl('4,0 m', 222, 300, BLUE);
-    var givna = strokesSince(T, i0);
-    T.stepEnd();
+    var givna;
+    /* uppgiftens figur: står färdig från början, pennan ritar krafter och hävarmar */
+    forritad(T, function () {
+      brada(T, xA, xR, yT, yB);
+      stod(T, xA, yB, gY);
+      stod(T, xB, yB, gY);
+      mark(T, 46, 420, gY);
+      T.lbl('A', xA - 40, 206);
+      T.lbl('B', xB + 26, 206);
+      T.lbl('m=30 kg', 124, 138, BLUE);
+      var i0 = T.acts.length;                     /* givna mått: tonas ut sedan */
+      T.dash([xB, gY + 14], [xB, 256]);
+      T.dash([xR, gY + 14], [xR, 284]);
+      T.dash([xA, gY + 14], [xA, 284]);
+      T.dblArrow([xB, 252], [xR, 252], BLUE);
+      T.lbl('1,0 m', xR + 8, 257, BLUE);
+      T.dblArrow([xA, 280], [xR, 280], BLUE);
+      T.lbl('4,0 m', 222, 300, BLUE);
+      givna = strokesSince(T, i0);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Tyngdkraften verkar mitt på']],
@@ -559,33 +556,26 @@
     var yT = 150, yB = 160, gY = 230;
     var xV = 80, xP = 160, xG = 240, xH = 400;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar brädan på bockarna i']],
-      [['ändarna och personen 1,0 m']],
-      [['från vänstra änden.']]
-    ], 450));
-    brada(T, xV, xH, yT, yB);
-    T.pause(120);
-    bock(T, xV, yB, gY);
-    bock(T, xH, yB, gY);
-    T.pause(120);
-    mark(T, 40, 440, gY);
-    T.pause(120);
-    gubbe(T, xP, yT);
-    T.lbl('m_p_e_r_s_o_n=60 kg', 100, 78, BLUE);
-    T.lbl('m_b_r_ä_d_a=15 kg', 190, 140, BLUE);
-    T.pause(150);
-    var i0 = T.acts.length;
-    T.dash([xV, gY + 12], [xV, 294]);
-    T.dash([xP, gY + 12], [xP, 260]);
-    T.dash([xH, gY + 12], [xH, 294]);
-    T.dblArrow([xV, 256], [xP, 256], BLUE);
-    T.lbl('1,0 m', xP + 8, 261, BLUE);
-    T.pause(150);
-    T.dblArrow([xV, 290], [xH, 290], BLUE);
-    T.lbl('4,0 m', 222, 310, BLUE);
-    var givna = strokesSince(T, i0);
-    T.stepEnd();
+    var givna;
+    /* uppgiftens figur: står färdig från början, pennan ritar krafter och hävarmar */
+    forritad(T, function () {
+      brada(T, xV, xH, yT, yB);
+      bock(T, xV, yB, gY);
+      bock(T, xH, yB, gY);
+      mark(T, 40, 440, gY);
+      gubbe(T, xP, yT);
+      T.lbl('m_p_e_r_s_o_n=60 kg', 100, 78, BLUE);
+      T.lbl('m_b_r_ä_d_a=15 kg', 190, 140, BLUE);
+      var i0 = T.acts.length;
+      T.dash([xV, gY + 12], [xV, 294]);
+      T.dash([xP, gY + 12], [xP, 260]);
+      T.dash([xH, gY + 12], [xH, 294]);
+      T.dblArrow([xV, 256], [xP, 256], BLUE);
+      T.lbl('1,0 m', xP + 8, 261, BLUE);
+      T.dblArrow([xV, 290], [xH, 290], BLUE);
+      T.lbl('4,0 m', 222, 310, BLUE);
+      givna = strokesSince(T, i0);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Två tyngdkrafter nedåt och en']],
@@ -723,36 +713,31 @@
     var xL = 40, xP = 160, xG = 280, xQ = 360, xR = 520;
     var xD = xQ + 80 / 3;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar brädan på bockarna P och Q']],
-      [['och personen en bit förbi Q.']]
-    ], 380));
-    brada(T, xL, xR, yT, yB);
-    T.pause(120);
-    bock(T, xP, yB, gY);
-    bock(T, xQ, yB, gY);
-    T.pause(120);
-    mark(T, 30, 530, gY);
-    T.lbl('P', xP - 26, 140);
-    T.lbl('Q', xQ - 18, 140);
-    T.pause(120);
-    gubbe(T, xD, yT);
-    T.lbl('m_b_r_ä_d_a=20 kg', 184, 140, BLUE);
-    T.lbl('m_p_e_r_s_o_n=60 kg', 404, 222, BLUE);
-    T.pause(150);
-    var i0 = T.acts.length;
-    T.dash([xL, gY + 12], [xL, 270]);
-    T.dash([xP, gY + 12], [xP, 270]);
-    T.dash([xQ, gY + 12], [xQ, 270]);
-    T.dash([xR, gY + 12], [xR, 270]);
-    T.dblArrow([xL, 266], [xP, 266], BLUE);
-    T.lbl('1,5 m', 82, 288, BLUE);
-    T.dblArrow([xP, 266], [xQ, 266], BLUE);
-    T.lbl('2,5 m', 242, 288, BLUE);
-    T.dblArrow([xQ, 266], [xR, 266], BLUE);
-    T.lbl('2,0 m', 422, 288, BLUE);
-    var givna = strokesSince(T, i0);
-    T.stepEnd();
+    var givna;
+    /* uppgiftens figur: står färdig från början, pennan ritar krafter och hävarmar */
+    forritad(T, function () {
+      brada(T, xL, xR, yT, yB);
+      bock(T, xP, yB, gY);
+      bock(T, xQ, yB, gY);
+      mark(T, 30, 530, gY);
+      T.lbl('P', xP - 26, 140);
+      T.lbl('Q', xQ - 18, 140);
+      gubbe(T, xD, yT);
+      T.lbl('m_b_r_ä_d_a=20 kg', 184, 140, BLUE);
+      T.lbl('m_p_e_r_s_o_n=60 kg', 404, 222, BLUE);
+      var i0 = T.acts.length;
+      T.dash([xL, gY + 12], [xL, 270]);
+      T.dash([xP, gY + 12], [xP, 270]);
+      T.dash([xQ, gY + 12], [xQ, 270]);
+      T.dash([xR, gY + 12], [xR, 270]);
+      T.dblArrow([xL, 266], [xP, 266], BLUE);
+      T.lbl('1,5 m', 82, 288, BLUE);
+      T.dblArrow([xP, 266], [xQ, 266], BLUE);
+      T.lbl('2,5 m', 242, 288, BLUE);
+      T.dblArrow([xQ, 266], [xR, 266], BLUE);
+      T.lbl('2,0 m', 422, 288, BLUE);
+      givna = strokesSince(T, i0);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['När brädan börjar tippa lyfter']],

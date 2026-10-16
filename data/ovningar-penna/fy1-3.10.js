@@ -29,6 +29,9 @@
   if (!HK || !HK.registrera) return;
   var V = HK.verktyg;
   var physTools = V.physTools, valueBracket = V.valueBracket, BLUE = V.BLUE;
+  /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR STÅR
+   * FÄRDIG FRÅN BÖRJAN i handskrift.js); kraftpilarna ritar pennan */
+  var forritad = V.forritad;
   var humanize = V.humanize, mkMultIn = V.mkMultIn, mkSamla = V.mkSamla;
 
   function reg(nr, fn) { HK.registrera('ov-fy1-3.10-u' + nr, fn); }
@@ -193,15 +196,12 @@
     var T = physTools(F), padL = T.padL;
     var adv = 1.7 * F, bw = 292;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar trissan i taket och de två']],
-      [['lika tunga vikterna.']]
-    ], 420));
-    var A = atwood(T);
-    T.pause(150);
-    lblV(T, 'm=2,0 kg', A.L.x0 - 10, A.L.cy + 6, BLUE);
-    T.lbl('m=2,0 kg', A.R.x1 + 10, A.R.cy + 6, BLUE);
-    T.stepEnd();
+    var A;   /* trissan med vikterna är uppgiftens figur: färdig från början */
+    forritad(T, function () {
+      A = atwood(T);
+      lblV(T, 'm=2,0 kg', A.L.x0 - 10, A.L.cy + 6, BLUE);
+      T.lbl('m=2,0 kg', A.R.x1 + 10, A.R.cy + 6, BLUE);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Krafterna på den vänstra vikten:']],
@@ -273,15 +273,12 @@
     var T = physTools(F), padL = T.padL;
     var adv = 1.7 * F, bw = 292;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar trissan och vikterna.']],
-      [['Den tyngre hänger till vänster.']]
-    ], 420));
-    var A = atwood(T);
-    T.pause(150);
-    lblV(T, 'm_3=3,0 kg', A.L.x0 - 10, A.L.cy + 6, BLUE);
-    T.lbl('m_2=2,0 kg', A.R.x1 + 10, A.R.cy + 6, BLUE);
-    T.stepEnd();
+    var A;   /* trissan med vikterna är uppgiftens figur: färdig från början */
+    forritad(T, function () {
+      A = atwood(T);
+      lblV(T, 'm_3=3,0 kg', A.L.x0 - 10, A.L.cy + 6, BLUE);
+      T.lbl('m_2=2,0 kg', A.R.x1 + 10, A.R.cy + 6, BLUE);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Tyngdkrafterna drar båda nedåt.']],
@@ -360,15 +357,12 @@
     var T = physTools(F), padL = T.padL;
     var adv = 1.7 * F, bw = 292;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar trissan och vikterna.']],
-      [['Den tyngre hänger till vänster.']]
-    ], 400));
-    var A = atwood(T);
-    T.pause(150);
-    lblV(T, 'm_3=3,0 kg', A.L.x0 - 10, A.L.cy + 6, BLUE);
-    T.lbl('m_2=2,0 kg', A.R.x1 + 10, A.R.cy + 6, BLUE);
-    T.stepEnd();
+    var A;   /* trissan med vikterna är uppgiftens figur: färdig från början */
+    forritad(T, function () {
+      A = atwood(T);
+      lblV(T, 'm_3=3,0 kg', A.L.x0 - 10, A.L.cy + 6, BLUE);
+      T.lbl('m_2=2,0 kg', A.R.x1 + 10, A.R.cy + 6, BLUE);
+    });
 
     /* frikroppsfigur för 2-kilosvikten, skalenligt 3 px/N:
      * F_S 23,568 N ger 71 px, F_G2 19,64 N ger 59 px */
@@ -453,19 +447,17 @@
     var bcx = (bx0 + bx1) / 2, bcy = (bTop + b.yT) / 2;
     var hcx = (b.hx0 + b.hx1) / 2, hcy = (b.hTop + b.hBot) / 2;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar lådan på bordet, trissan']],
-      [['vid kanten och vikten som']],
-      [['hänger i snöret.']]
-    ], 420));
-    var P = bord(T, ropeY);
-    T.rect(bx0, bTop, bx1, b.yT);
-    bordSnore(T, bx1, ropeY, P.pcy);
-    T.pause(150);
-    lblV(T, 'm_1=3,0 kg', bx0 - 6, bTop - 8, BLUE);
-    T.lbl('m_2=2,0 kg', b.hx1 + 10, hcy + 6, BLUE);
-    T.lbl('µ=0,20', 156, b.yT + 96, BLUE);
-    T.stepEnd();
+    /* bordet, lådan, trissan och vikten är uppgiftens figur: de står
+     * färdiga från början, med de givna värdena */
+    var P;
+    forritad(T, function () {
+      P = bord(T, ropeY);
+      T.rect(bx0, bTop, bx1, b.yT);
+      bordSnore(T, bx1, ropeY, P.pcy);
+      lblV(T, 'm_1=3,0 kg', bx0 - 6, bTop - 8, BLUE);
+      T.lbl('m_2=2,0 kg', b.hx1 + 10, hcy + 6, BLUE);
+      T.lbl('µ=0,20', 156, b.yT + 96, BLUE);
+    });
 
     /* skalenligt 3 px/N: F_N = F_G1 29,46 N ger 88 px, F_f 5,892 N ger
      * 18 px och F_G2 19,64 N ger 59 px */
@@ -620,20 +612,18 @@
     var hcx = (b.hx0 + b.hx1) / 2, hcy = (b.hTop + b.hBot) / 2;
     var multIn = mkMultIn(T), samla = mkSamla(T);
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar vagnen på bordet, trissan']],
-      [['vid kanten och vikten som']],
-      [['hänger i snöret.']]
-    ], 420));
-    var P = bord(T, ropeY);
-    T.rect(vx0, vTop, vx1, vBot);                     /* vagnen */
-    T.circle(178, b.yT - 8, 8);
-    T.circle(222, b.yT - 8, 8);
-    bordSnore(T, vx1, ropeY, P.pcy);
-    T.pause(150);
-    lblV(T, 'm_v_a_g_n=3,0 kg', vx0 - 6, vTop - 8, BLUE);
-    T.lbl('m', b.hx1 + 10, hcy + 6, BLUE);
-    T.stepEnd();
+    /* bordet, vagnen, trissan och vikten är uppgiftens figur: de står
+     * färdiga från början */
+    var P;
+    forritad(T, function () {
+      P = bord(T, ropeY);
+      T.rect(vx0, vTop, vx1, vBot);                   /* vagnen */
+      T.circle(178, b.yT - 8, 8);
+      T.circle(222, b.yT - 8, 8);
+      bordSnore(T, vx1, ropeY, P.pcy);
+      lblV(T, 'm_v_a_g_n=3,0 kg', vx0 - 6, vTop - 8, BLUE);
+      T.lbl('m', b.hx1 + 10, hcy + 6, BLUE);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Vagnen ska accelerera med']],

@@ -12347,7 +12347,7 @@
     T.stepEnd();
 
     y += 2.6 * F;
-    T.str('y=2x+3', padL + 30, y);
+    T.str('y=2x+3', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;

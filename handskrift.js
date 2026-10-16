@@ -12450,15 +12450,22 @@
     ], 0);
     y = 150;
     T.str('Punkterna', padL, y - 1.6 * F, null, 0.62);
-    var xp0 = padL;
-    var xp1 = T.str('(x_1, y_1)=(−6, −1)', padL, y);
+    /* båda punkterna på en rad, beteckningarna i blått under varje
+     * koordinat i nästa steg */
+    var yp = y, xp0 = padL, cols = [];
+    function koord(t) { var x0 = xx; xx = T.str(t, xx, yp); cols.push([x0, xx]); }
+    xx = T.str('(', padL, yp); koord('−6'); xx = T.str(', ', xx, yp);
+    koord('−1'); xx = T.str(')  och  (', xx, yp); koord('2');
+    xx = T.str(', ', xx, yp); koord('3'); xx = T.str(')', xx, yp);
+    var xp1 = xx;
     T.stepEnd();
 
-    y += 2.6 * F;
-    var xq0 = padL;
-    var xq1 = T.str('(x_2, y_2)=(2, 3)', padL, y);
-    var yq = y;
+    ['x_1', 'y_1', 'x_2', 'y_2'].forEach(function (t, i) {
+      var w = T.adv(t, 0.62), c = (cols[i][0] + cols[i][1]) / 2;
+      T.str(t, c - w / 2, yp + 1.15 * F, BLUE, 0.62);
+    });
     T.stepEnd();
+    y += 1.6 * F;
 
     tanke(y, [
       [['Riktningskoefficienten är']],
@@ -12478,8 +12485,7 @@
       [['blir det två minustecken']],
       [['efter varandra.']]
     ], 1.05);
-    var rings = substRings(acts, [[xp0, xp1, y - 6.4 * F, F],
-                                  [xq0, xq1, yq, F], [xf0, xf1, y, F]]);
+    var rings = substRings(acts, [[xp0, xp1, yp, F], [xf0, xf1, y, F]]);
     y += 3.8 * F;
     xx = T.str('=', padL + 30, y);
     xx = T.fracH('3-(−1)', '2-(−6)', xx, y);

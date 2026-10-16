@@ -162,7 +162,7 @@
       [['räta linjens ekvation.']]
     ], 1.05);
     y += 3.3 * F;
-    var e0 = padL, e1 = T.str('y=kx+m', padL, y);
+    var e0 = padL + 30, e1 = T.str('y=kx+m', padL + 30, y);
     var yE = y;
     T.stepEnd();
 
@@ -1481,7 +1481,7 @@
       [['räta linjens ekvation.']]
     ], 1.05);
     y += 3.4 * F;
-    T.str('y=kx+m', padL, y);
+    T.str('y=kx+m', padL + 30, y);
     T.stepEnd();
 
     y += 2.3 * F;
@@ -2191,7 +2191,7 @@
       [['skrivas med bara A.']]
     ]);
     y += 2.6 * F;
-    T.str('A+B+C=180°', padL, y);
+    T.str('A+B+C=180°', padL + 30, y);
     T.stepEnd();
 
     y += 2.2 * F;
@@ -2351,7 +2351,7 @@
       [['faktor a sex gånger.']]
     ]);
     y += 2.6 * F;
-    T.str('230 000·a^6=157 000', padL, y);
+    T.str('230 000·a^6=157 000', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [

@@ -669,8 +669,8 @@
     T.pause(300);
     y += 1.8 * F;
     var wM = T.adv('M');
-    var nMot = note(padL + wM / 2, y + 0.78 * F, 'moturs');
-    var xEq = T.str('M↺', padL, y);
+    var nMot = note(padL + 30 + wM / 2, y + 0.78 * F, 'moturs');
+    var xEq = T.str('M↺', padL + 30, y);
     T.acts.push({ kind: 'show', obj: nMot });
     T.pause(320);
     var xM2 = T.str('=', xEq, y);
@@ -688,7 +688,7 @@
       [['tyngd medurs. Normalkraften går']],
       [['genom kanten och saknar moment.']]
     ]));
-    T.str('F_V·l_V=F_B·l_B', padL, y);
+    T.str('F_V·l_V=F_B·l_B', padL + 30, y);
     T.stepEnd();
 
     y += adv + 0.9 * F;
@@ -696,10 +696,10 @@
       [['Tyngdkrafterna är m·g, och']],
       [['hävarmarna tar jag ur figuren.']]
     ]));
-    var xg1 = padL + T.adv('m_V·');
-    var xg2 = padL + T.adv('m_V·g·(1,2-d)=m_B·');
+    var xg1 = padL + 30 + T.adv('m_V·');
+    var xg2 = padL + 30 + T.adv('m_V·g·(1,2-d)=m_B·');
     var wg = T.adv('g') - 1.5;
-    T.str('m_V·g·(1,2-d)=m_B·g·(d-0,60)', padL, y);
+    T.str('m_V·g·(1,2-d)=m_B·g·(d-0,60)', padL + 30, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y), bw, [
@@ -722,7 +722,7 @@
       [['Nu sätter jag in massorna ur']],
       [['klammern.']]
     ]));
-    var yK = y, xx = padL, xs = {};
+    var yK = y, xx = padL + 30, xs = {};
     xs.a0 = xx; xx = T.str('1,2', xx, yK); xs.a1 = xx;
     xx = T.str('·(', xx, yK); xs.b0 = xx;
     xx = T.str('1,2', xx, yK); xs.b1 = xx; xs.c0 = xx;
@@ -741,11 +741,11 @@
       [['parenteserna.']]
     ]));
     var yArc = yK - 0.95 * F, p = {};
-    xx = multIn(padL, y, yArc, [
+    xx = multIn(padL + 30, y, yArc, [
       { fran: [xs.a0, xs.a1], till: [xs.b0, xs.b1], skriv: '1,44', hojd: 24 },
       { fran: [xs.a0, xs.a1], till: [xs.c0, xs.c1], skriv: '-1,2d', hojd: 34, dx: 4 }
     ]);
-    p.l = [padL, xx];
+    p.l = [padL + 30, xx];
     xx = T.str('=', xx, y);
     xx = multIn(xx, y, yArc, [
       { fran: [xs.d0, xs.d1], till: [xs.e0, xs.e1], skriv: '2,4d', hojd: 24 },

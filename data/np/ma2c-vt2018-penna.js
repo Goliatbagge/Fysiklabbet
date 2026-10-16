@@ -664,8 +664,9 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
 
-    y = 118;
-    T.str('lg 3^a-lg 3^b=8·lg 3', padL, y);
+    /* raden når x>420: den läggs under mobilzonen (y<150) */
+    y = 162;
+    T.str('lg 3^a-lg 3^b=8·lg 3', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1608,7 +1609,7 @@
 
     /* båda led-raden efter första raden är bred: under mobilzonen (y<210) */
     y = 174;
-    T.str('x^2+cx+3=c', padL, y);
+    T.str('x^2+cx+3=c', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2043,7 +2044,7 @@
       [['den gamla och har k=3.']]
     ]);
     y += 2.6 * F;
-    xx = T.str('y=3', padL, y);
+    xx = T.str('y=3', padL + 30, y);
     var v0 = xx; xx = T.str('x', xx, y); var v1 = xx;
     T.str('+m', xx, y);
     var yF = y;
@@ -2287,7 +2288,7 @@
     /* väggen vid första raden når x>420: raden läggs under mobilzonen (y<210) */
     y = 236;
     T.str('Skärning: kurvorna har samma y', padL, y - 1.45 * F, null, 0.62);
-    T.str('−4x(x-2)=x-2', padL, y);
+    T.str('−4x(x-2)=x-2', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2375,8 +2376,8 @@
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
     /* väggen står tätt efter den bredaste raden: annars når "/10^7" in i
      * stega-pilens band (x>696) */
-    var xw = padL + T.adv('5,44·10^7·0,98^x=4,374·10^7') + 0.25 * F;
-    var xw2 = padL + T.adv('x·lg 0,98=lg 0,80404...') + 0.5 * F;
+    var xw = padL + 30 + T.adv('5,44·10^7·0,98^x=4,374·10^7') + 0.25 * F;
+    var xw2 = padL + 30 + T.adv('x·lg 0,98=lg 0,80404...') + 0.5 * F;
 
     /* raderna är breda: de läggs under mobilzonen (x>420, y<210) */
     y = 246;
@@ -2392,14 +2393,14 @@
     ]);
     y += 3.6 * F;
     T.str('x = antal år efter 2014, faktorn 0,98 per år', padL, y - 1.45 * F, null, 0.62);
-    T.str('5,44·10^7·0,98^x=4,374·10^7', padL, y);
+    T.str('5,44·10^7·0,98^x=4,374·10^7', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
       [['10^7 finns i båda led, så jag']],
       [['dividerar båda led med 10^7.']]
     ]);
-    y = ekvOp(y, '/10^7', xw, '5,44·10^7·0,98^x=4,374·10^7', { x0: padL, dy: 3.2, dyRes: 3.1 });
+    y = ekvOp(y, '/10^7', xw, '5,44·10^7·0,98^x=4,374·10^7', { dy: 3.2, dyRes: 3.1 });
     T.str('5,44·0,98^x=4,374', padL + 30, y);
     T.stepEnd();
 
@@ -2418,7 +2419,7 @@
       [['logaritmerar båda led.']]
     ], 1.05);
     y += 3.4 * F;
-    T.str('lg 0,98^x=lg 0,80404...', padL, y);
+    T.str('lg 0,98^x=lg 0,80404...', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2426,7 +2427,7 @@
       [['plockar ned x som en faktor.']]
     ]);
     y += 2.6 * F;
-    T.str('x·lg 0,98=lg 0,80404...', padL, y);
+    T.str('x·lg 0,98=lg 0,80404...', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2659,7 +2660,7 @@
       [['höjden.']]
     ], 1.05);
     y += 3.4 * F;
-    xx = T.str('y=a·', padL, y);
+    xx = T.str('y=a·', padL + 30, y);
     var v0 = xx; xx = T.str('x', xx, y); var v1 = xx;
     xx = T.str('(', xx, y);
     var w0 = xx; xx = T.str('x', xx, y); var w1 = xx;

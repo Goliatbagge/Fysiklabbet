@@ -2783,7 +2783,7 @@
     y += 3.6 * F;
     rubrik(T, 'Längden med formeln, från svansen till nosen', padL, y);
     y += 3.0 * F;
-    xx = T.str('L=', padL, y);
+    xx = T.str('L=', padL + 30, y);
     xx = integral(T, F, xx, y, '0', '40') + 0.3 * F;
     /* rottecknet över hela integranden: 1 + (5/3 · cos x/3)^2 */
     var wInnan = T.adv('1+') + 0.24 * F + T.fracW('5', '3') + 1.5 + T.adv(' cos') +

@@ -151,7 +151,7 @@
     ]);
     var ringar = substRings(acts, [[v0, v1, yV, F], [e0, e1, yE, F]]);
     y += 2.4 * F;
-    T.str('|3·2-7|=|6-7|=|-1|', padL, y);
+    T.str('|3·2-7|=|6-7|=|-1|', padL + 30, y);
     fadeRings(acts, ringar);
     T.stepEnd();
 
@@ -1314,7 +1314,7 @@
       [['dess ekvation.']]
     ]);
     y += 2.8 * F;
-    T.str('y-a^3=3a^2(x-a)', padL, y);
+    T.str('y-a^3=3a^2(x-a)', padL + 30, y);
     T.stepEnd();
 
     y += 2.3 * F;
@@ -1800,7 +1800,7 @@
       [['vinkel är lika stor.']]
     ], 1.05);
     y += 3.2 * F;
-    xx = T.fracH('AB', 'sin 39°', padL, y);
+    xx = T.fracH('AB', 'sin 39°', padL + 30, y);
     xx = T.str('=', xx, y);
     T.fracH('7,7', 'sin 35°', xx, y);
     T.stepEnd();
@@ -1817,15 +1817,15 @@
       [['kända. Då är det cosinussatsen.']]
     ], 1.05);
     y += 3.6 * F;
-    T.str('BD^2=AB^2+AD^2-2·AB·AD·cos 106°', padL, y);
+    T.str('BD^2=AB^2+AD^2-2·AB·AD·cos 106°', padL + 30, y);
     T.stepEnd();
 
     y += 2.5 * F;
-    T.str('=8,447...^2+5,0^2', padL + 40, y);
+    T.str('=8,447...^2+5,0^2', padL + 70, y);
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('-2·8,447...·5,0·cos 106°', padL + 40, y);
+    T.str('-2·8,447...·5,0·cos 106°', padL + 70, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -1909,7 +1909,7 @@
       [['att dividera med ln 2.']]
     ], 1.05);
     y += 3.6 * F;
-    xx = T.str('2^x=', padL, y);
+    xx = T.str('2^x=', padL + 30, y);
     T.fracH('7', '6·ln 2', xx, y);
     T.stepEnd();
 

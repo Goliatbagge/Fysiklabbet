@@ -202,10 +202,10 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg;
-    var xwA = padL + T.adv('4x^3=32') + 0.9 * F;
+    var xwA = padL + 30 + T.adv('4x^3=32') + 0.9 * F;
 
     y = 210;
-    T.str('4x^3=32', padL, y);
+    T.str('4x^3=32', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -460,7 +460,7 @@
     /* väggens streck sträcker sig 1,25·F över raden i bråkläget — första
      * raden läggs så att det håller sig under inställningsrutans hörn */
     y = 258;
-    xx = T.fracH('3x+1', '4', padL, y);
+    xx = T.fracH('3x+1', '4', padL + 30, y);
     xx = T.str('-', xx, y);
     xx = T.fracH('2x+3', '3', xx, y);
     T.str('=2', xx, y);

@@ -2201,8 +2201,9 @@
     var vagg = !!cfg.vagg;
     var xw = padL + 30 + T.adv('2,11x-5=73,96') + 0.9 * F;
 
-    y = 118;
-    xx = T.rot('2,11x-5', padL, y);
+    /* kvadreringsraden når x>420: den läggs under mobilzonen (y<210) */
+    y = 172;
+    xx = T.rot('2,11x-5', padL + 30, y);
     T.str('=8,6', xx, y);
     T.stepEnd();
 
@@ -2214,7 +2215,7 @@
       [['8,6^2=73,96.']]
     ]);
     y += 2.5 * F;
-    xx = T.str('(', padL, y, BLUE);
+    xx = T.str('(', padL + 30, y, BLUE);
     xx = T.rot('2,11x-5', xx, y);
     xx = T.str(')^2', xx, y, BLUE);
     xx = T.str('=', xx, y);
@@ -2589,7 +2590,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('−0,14x^2+3,92x=0', padL, y);
+    T.str('−0,14x^2+3,92x=0', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2794,13 +2795,13 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg;
-    var xw1 = padL + T.adv('1411·a^1^2=2967') + 0.9 * F;
-    var xw2 = padL + T.adv('1411·1,06389...^t=5000') + 0.9 * F;
+    var xw1 = padL + 30 + T.adv('1411·a^1^2=2967') + 0.9 * F;
+    var xw2 = padL + 30 + T.adv('1411·1,06389...^t=5000') + 0.9 * F;
 
     /* ---- förändringsfaktorn ---- */
     y = 248;
     T.str('a = årlig förändringsfaktor', padL, y - 1.45 * F, null, 0.62);
-    T.str('1411·a^1^2=2967', padL, y);
+    T.str('1411·a^1^2=2967', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2855,7 +2856,7 @@
     ], 1.05);
     y += 3.6 * F;
     T.str('t = år efter början av 2006', padL, y - 1.45 * F, null, 0.62);
-    T.str('1411·1,06389...^t=5000', padL, y);
+    T.str('1411·1,06389...^t=5000', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [

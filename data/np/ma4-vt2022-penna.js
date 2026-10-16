@@ -475,7 +475,7 @@
     var tanke = mkTanke(T);
 
     y = 125;
-    T.str('z=e^2^+^i^π', padL, y);
+    T.str('z=e^2^+^i^π', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2094,7 +2094,7 @@
     T.stepEnd();
 
     y += 4.2 * F;
-    xx = T.fracH('a+b', '2', padL, y);
+    xx = T.fracH('a+b', '2', padL + 30, y);
     xx = T.str('=4', xx, y);
     T.stepEnd();
 
@@ -2186,7 +2186,7 @@
     T.stepEnd();
 
     y = y3 + 4.2 * F;
-    xx = T.fracH('a-b', '4', padL, y);
+    xx = T.fracH('a-b', '4', padL + 30, y);
     xx = T.str('=3', xx, y);
     T.stepEnd();
 
@@ -2312,7 +2312,7 @@
     T.str('Fall 1: samma punkt', padL, y, null, 0.62);
     T.pause(200);
     y += 2.0 * F;
-    xx = T.str('v-40°=v+n·360°', padL, y);
+    xx = T.str('v-40°=v+n·360°', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2336,7 +2336,7 @@
     T.str('Fall 2: spegelbilden, 180° minus vinkeln', padL, y, null, 0.62);
     T.pause(200);
     y += 2.0 * F;
-    xx = T.str('v-40°=180°-v+n·360°', padL, y);
+    xx = T.str('v-40°=180°-v+n·360°', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2465,7 +2465,7 @@
     ]);
     y += 4.3 * F;
     T.str('f(x)=g(x)', padL, y - 1.6 * F, null, 0.62);
-    xx = T.str('3ln x+3=(ln x)^2+2ln x+3', padL, y);
+    xx = T.str('3ln x+3=(ln x)^2+2ln x+3', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [

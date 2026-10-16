@@ -854,7 +854,7 @@
     var xwA = padL + 30 + T.adv('7x=10') + 0.9 * F;
 
     y = 238;
-    var e0 = padL, e1 = T.str('8x-y=10', padL, y), yE = y;
+    var e0 = padL + 30, e1 = T.str('8x-y=10', padL + 30, y), yE = y;
     T.stepEnd();
 
     tanke(y, [
@@ -1111,7 +1111,7 @@
     var tanke = mkTanke(T);
 
     y = 182;
-    T.str('((√3)^x)^4=3^6', padL, y);
+    T.str('((√3)^x)^4=3^6', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2134,7 +2134,7 @@
 
     var ringar = substRings(acts, [[v0, v1, yV, F], [e0, e1, yE, F]]);
     y += 2.4 * F;
-    T.str('52 500=100x+50(650-x)', padL, y);
+    T.str('52 500=100x+50(650-x)', padL + 30, y);
     fadeRings(acts, ringar);
     T.stepEnd();
 

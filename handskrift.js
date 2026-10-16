@@ -55468,13 +55468,15 @@
     var tanke = mkTanke(T);
     var G = mkTrigGraf(T, F, { ox: padL + 190, oy: 260, ux: 44, uy: 13 });
 
-    G.axlar(-2.4, 4.4, -9.4, 4.4, 'x', 'y');
-    G.kurva(function (v) { return 2 * (v + 1) * (v - 3); }, -1.9, 3.9);
-    G.punkt(-1, 0, BLUE);
-    G.punkt(3, 0, BLUE);
-    G.punkt(1, -8, BLUE);
-    T.str('(1, -8)', G.X(1) + 12, G.Y(-8) + 0.2 * F, BLUE, 0.5);
-    T.stepEnd();
+    /* uppgiftens graf står färdig från början */
+    forritad(T, function () {
+      G.axlar(-2.4, 4.4, -9.4, 4.4, 'x', 'y');
+      G.kurva(function (v) { return 2 * (v + 1) * (v - 3); }, -1.9, 3.9);
+      G.punkt(-1, 0, BLUE);
+      G.punkt(3, 0, BLUE);
+      G.punkt(1, -8, BLUE);
+      T.str('(1, -8)', G.X(1) + 12, G.Y(-8) + 0.2 * F, BLUE, 0.5);
+    });
 
     tanke(G.oy + 9.4 * 13, [
       [['Nollställena ger faktorerna.']],
@@ -55652,15 +55654,15 @@
     T.str('a) x^2-4x+5=2', padL, y);
     T.stepEnd();
 
-    G.axlar(-0.6, 4.6, -0.6, 5.4, 'x', 'y');
-    G.kurva(function (v) { return v * v - 4 * v + 5; }, 0.2, 3.8);
-    T.pause(200);
-    G.vagrat(2, -0.4, 4.4);
-    T.str('y=2', G.X(4.0), G.Y(2) - 0.4 * F, BLUE, 0.5);
-    T.pause(200);
-    G.punkt(1, 2, BLUE);
-    G.punkt(3, 2, BLUE);
-    T.stepEnd();
+    /* uppgiftens graf står färdig från början */
+    forritad(T, function () {
+      G.axlar(-0.6, 4.6, -0.6, 5.4, 'x', 'y');
+      G.kurva(function (v) { return v * v - 4 * v + 5; }, 0.2, 3.8);
+      G.vagrat(2, -0.4, 4.4);
+      T.str('y=2', G.X(4.0), G.Y(2) - 0.4 * F, BLUE, 0.5);
+      G.punkt(1, 2, BLUE);
+      G.punkt(3, 2, BLUE);
+    });
 
     tanke(G.oy + 1.6 * F, [
       [['Vänsterledet och högerledet']],
@@ -55702,17 +55704,17 @@
     T.str('x^2+6x+6 mot 1', padL, y, null, 0.9);
     T.stepEnd();
 
-    G.axlar(-6.6, 1.4, -4.4, 4.4, 'x', 'y');
-    G.kurva(function (v) { return v * v + 6 * v + 6; }, -6.4, 0.4);
-    T.pause(200);
-    G.vagrat(1, -6.4, 1.2);
-    T.str('y=1', G.X(0.6), G.Y(1) - 0.4 * F, BLUE, 0.5);
-    T.pause(200);
-    G.punkt(-5, 1, BLUE);
-    G.punkt(-1, 1, BLUE);
-    T.str('-5', G.X(-5) - 14, G.oy + 1.05 * F, BLUE, 0.5);
-    T.str('-1', G.X(-1) + 6, G.oy + 1.05 * F, BLUE, 0.5);
-    T.stepEnd();
+    /* uppgiftens graf (med skärningarna) står färdig från början */
+    forritad(T, function () {
+      G.axlar(-6.6, 1.4, -4.4, 4.4, 'x', 'y');
+      G.kurva(function (v) { return v * v + 6 * v + 6; }, -6.4, 0.4);
+      G.vagrat(1, -6.4, 1.2);
+      T.str('y=1', G.X(0.6), G.Y(1) - 0.4 * F, BLUE, 0.5);
+      G.punkt(-5, 1, BLUE);
+      G.punkt(-1, 1, BLUE);
+      T.str('-5', G.X(-5) - 14, G.oy + 1.05 * F, BLUE, 0.5);
+      T.str('-1', G.X(-1) + 6, G.oy + 1.05 * F, BLUE, 0.5);
+    });
 
     tanke(G.oy + 4.4 * 24 + 0.6 * F, [
       [['Skärningarna ger gränserna:']],
@@ -55813,22 +55815,21 @@
 
     /* figuren: mur och hage */
     var x0 = padL + 60, x1 = padL + 300, yT = 175, yB = 285, i;
-    T.line([x0 - 26, yT], [x1 + 26, yT]);
-    for (i = 0; i <= 12; i++) {
-      T.line([x0 - 22 + i * 20, yT], [x0 - 30 + i * 20, yT - 11]);
-    }
-    T.pause(160);
-    T.str('Mur', x0 - 24, yT - 0.55 * F, null, 0.55);
-    T.pause(200);
-    T.line([x0, yT], [x0, yB]);
-    T.line([x0, yB], [x1, yB]);
-    T.line([x1, yB], [x1, yT]);
-    T.pause(200);
-    T.str('x', x0 - 0.75 * F, (yT + yB) / 2 + 0.2 * F, BLUE, 0.62);
-    T.str('x', x1 + 0.28 * F, (yT + yB) / 2 + 0.2 * F, BLUE, 0.62);
-    T.str('52-2x', (x0 + x1) / 2 - T.adv('52-2x', 0.62) / 2, yB + 0.95 * F,
-          BLUE, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
+      T.line([x0 - 26, yT], [x1 + 26, yT]);
+      for (i = 0; i <= 12; i++) {
+        T.line([x0 - 22 + i * 20, yT], [x0 - 30 + i * 20, yT - 11]);
+      }
+      T.str('Mur', x0 - 24, yT - 0.55 * F, null, 0.55);
+      T.line([x0, yT], [x0, yB]);
+      T.line([x0, yB], [x1, yB]);
+      T.line([x1, yB], [x1, yT]);
+      T.str('x', x0 - 0.75 * F, (yT + yB) / 2 + 0.2 * F, BLUE, 0.62);
+      T.str('x', x1 + 0.28 * F, (yT + yB) / 2 + 0.2 * F, BLUE, 0.62);
+      T.str('52-2x', (x0 + x1) / 2 - T.adv('52-2x', 0.62) / 2, yB + 0.95 * F,
+            BLUE, 0.62);
+    });
 
     tanke(yB + 1.0 * F, [
       [['52 meter stängsel räcker till']],
@@ -55876,18 +55877,17 @@
     var tanke = mkTanke(T);
 
     var yA = 200, yB = 300, x0 = padL + 40, x1 = padL + 360;
-    T.line([x0, yA], [x1, yA]);
-    T.line([x0, yB], [x1, yB]);
-    T.pause(180);
-    T.str('L_1', x1 + 10, yA + 0.2 * F, null, 0.6);
-    T.str('L_2', x1 + 10, yB + 0.2 * F, null, 0.6);
-    T.pause(200);
-    /* transversalen */
-    T.line([padL + 100, yB + 70], [padL + 260, yA - 70]);
-    T.pause(200);
-    T.str('x', padL + 196, yA - 12, BLUE, 0.62);
-    T.str('72°', padL + 128, yB + 24, BLUE, 0.55);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
+      T.line([x0, yA], [x1, yA]);
+      T.line([x0, yB], [x1, yB]);
+      T.str('L_1', x1 + 10, yA + 0.2 * F, null, 0.6);
+      T.str('L_2', x1 + 10, yB + 0.2 * F, null, 0.6);
+      /* transversalen */
+      T.line([padL + 100, yB + 70], [padL + 260, yA - 70]);
+      T.str('x', padL + 196, yA - 12, BLUE, 0.62);
+      T.str('72°', padL + 128, yB + 24, BLUE, 0.55);
+    });
 
     tanke(yB + 80, [
       [['Vinklarna ligger på var sin']],
@@ -56162,15 +56162,15 @@
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
 
     var A = [padL + 190, 170], B = [padL + 300, 300], C = [padL + 70, 300];
-    T.line(A, B); T.line(B, C); T.line(C, A);
-    T.pause(180);
-    T.line(B, [padL + 400, 300]);
-    T.pause(180);
-    T.str('a', A[0] - 6, A[1] + 1.1 * F, null, 0.62);
-    T.str('c', C[0] + 18, C[1] - 10, null, 0.62);
-    T.str('b', B[0] - 34, B[1] - 10, null, 0.62);
-    T.str('x', B[0] + 20, B[1] - 10, BLUE, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
+      T.line(A, B); T.line(B, C); T.line(C, A);
+      T.line(B, [padL + 400, 300]);
+      T.str('a', A[0] - 6, A[1] + 1.1 * F, null, 0.62);
+      T.str('c', C[0] + 18, C[1] - 10, null, 0.62);
+      T.str('b', B[0] - 34, B[1] - 10, null, 0.62);
+      T.str('x', B[0] + 20, B[1] - 10, BLUE, 0.62);
+    });
 
     tanke(320, [
       [['Jag skriver upp de samband jag']],
@@ -56312,14 +56312,15 @@
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
 
     var A = [padL + 120, 300], B = [padL + 120, 180], C = [padL + 320, 300];
-    T.line(A, B); T.line(B, C); T.line(C, A);
-    ratVinkel(T, A, [1, 0], [0, -1]);
-    T.pause(180);
-    T.str('9 cm', A[0] - T.adv('9 cm', 0.62) - 12,
-          (A[1] + B[1]) / 2 + 0.2 * F, BLUE, 0.62);
-    T.str('15 cm', (B[0] + C[0]) / 2 - 4, (B[1] + C[1]) / 2 - 16, BLUE, 0.62);
-    T.str('x', (A[0] + C[0]) / 2 - 6, C[1] + 0.95 * F, BLUE, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
+      T.line(A, B); T.line(B, C); T.line(C, A);
+      ratVinkel(T, A, [1, 0], [0, -1]);
+      T.str('9 cm', A[0] - T.adv('9 cm', 0.62) - 12,
+            (A[1] + B[1]) / 2 + 0.2 * F, BLUE, 0.62);
+      T.str('15 cm', (B[0] + C[0]) / 2 - 4, (B[1] + C[1]) / 2 - 16, BLUE, 0.62);
+      T.str('x', (A[0] + C[0]) / 2 - 6, C[1] + 0.95 * F, BLUE, 0.62);
+    });
 
     tanke(340, [
       [['15 cm ligger mitt emot den']],
@@ -56710,15 +56711,15 @@
     /* triangel med transversal */
     var A = [padL + 180, 160], B = [padL + 60, 320], C = [padL + 340, 320];
     var D = [padL + 140, 213], E = [padL + 233, 213];
-    T.line(A, B); T.line(B, C); T.line(C, A);
-    T.pause(180);
-    T.line(D, E);
-    T.pause(180);
-    T.str('4', (A[0] + D[0]) / 2 - 20, (A[1] + D[1]) / 2, BLUE, 0.6);
-    T.str('8', (D[0] + B[0]) / 2 - 22, (D[1] + B[1]) / 2, BLUE, 0.6);
-    T.str('x', (A[0] + E[0]) / 2 + 12, (A[1] + E[1]) / 2, BLUE, 0.6);
-    T.str('10', (E[0] + C[0]) / 2 + 12, (E[1] + C[1]) / 2, BLUE, 0.6);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
+      T.line(A, B); T.line(B, C); T.line(C, A);
+      T.line(D, E);
+      T.str('4', (A[0] + D[0]) / 2 - 20, (A[1] + D[1]) / 2, BLUE, 0.6);
+      T.str('8', (D[0] + B[0]) / 2 - 22, (D[1] + B[1]) / 2, BLUE, 0.6);
+      T.str('x', (A[0] + E[0]) / 2 + 12, (A[1] + E[1]) / 2, BLUE, 0.6);
+      T.str('10', (E[0] + C[0]) / 2 + 12, (E[1] + C[1]) / 2, BLUE, 0.6);
+    });
 
     tanke(340, [
       [['Transversalen är parallell med']],
@@ -56781,16 +56782,16 @@
 
     var A = [padL + 60, 300], B = [padL + 230, 160], C = [padL + 330, 300];
     var D = [padL + 227, 300];
-    T.line(A, B); T.line(B, C); T.line(C, A);
-    T.pause(180);
-    T.line(A, B);
-    T.line(A, D);
-    T.pause(180);
-    T.str('3', (A[0] + D[0]) / 2 - 6, A[1] + 0.95 * F, BLUE, 0.6);
-    T.str('5', (D[0] + C[0]) / 2 - 6, A[1] + 0.95 * F, BLUE, 0.6);
-    T.str('9', (A[0] + B[0]) / 2 - 24, (A[1] + B[1]) / 2, BLUE, 0.6);
-    T.str('x', (B[0] + C[0]) / 2 + 12, (B[1] + C[1]) / 2, BLUE, 0.6);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
+      T.line(A, B); T.line(B, C); T.line(C, A);
+      T.line(A, B);
+      T.line(A, D);
+      T.str('3', (A[0] + D[0]) / 2 - 6, A[1] + 0.95 * F, BLUE, 0.6);
+      T.str('5', (D[0] + C[0]) / 2 - 6, A[1] + 0.95 * F, BLUE, 0.6);
+      T.str('9', (A[0] + B[0]) / 2 - 24, (A[1] + B[1]) / 2, BLUE, 0.6);
+      T.str('x', (B[0] + C[0]) / 2 + 12, (B[1] + C[1]) / 2, BLUE, 0.6);
+    });
 
     tanke(320, [
       [['Bisektrisen delar motstående']],
@@ -56949,27 +56950,26 @@
 
     /* cirkel med diameter, korda och radie */
     var cx = padL + 180, cy = 260, r = 100, i, a, pts = [];
-    for (i = 0; i <= 44; i++) {
-      a = -Math.PI * 2 * (i / 44);
-      pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
-    }
-    acts.push({ kind: 'stroke', pts: pts });
-    T.pause(200);
     var top = [cx, cy - r], bot = [cx, cy + r];
     var P = [cx + Math.cos(-0.6) * r, cy + Math.sin(-0.6) * r];
-    /* streckad diameter */
-    for (i = 0; i < 9; i += 2) {
-      acts.push({ kind: 'stroke', pts: humanize(
-        [[cx, cy - r + (2 * r) * (i / 9)], [cx, cy - r + (2 * r) * ((i + 1) / 9)]]) });
-    }
-    T.pause(180);
-    T.line(top, P);
-    T.line([cx, cy], P);
-    T.pause(200);
-    T.str('x', cx + 16, cy - r + 0.9 * F, BLUE, 0.6);
-    T.str('23°', P[0] - 62, P[1] + 0.75 * F, BLUE, 0.55);
-    T.str('y', cx + 22, cy + 0.2 * F, BLUE, 0.6);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
+      for (i = 0; i <= 44; i++) {
+        a = -Math.PI * 2 * (i / 44);
+        pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+      /* streckad diameter */
+      for (i = 0; i < 9; i += 2) {
+        acts.push({ kind: 'stroke', pts: humanize(
+          [[cx, cy - r + (2 * r) * (i / 9)], [cx, cy - r + (2 * r) * ((i + 1) / 9)]]) });
+      }
+      T.line(top, P);
+      T.line([cx, cy], P);
+      T.str('x', cx + 16, cy - r + 0.9 * F, BLUE, 0.6);
+      T.str('23°', P[0] - 62, P[1] + 0.75 * F, BLUE, 0.55);
+      T.str('y', cx + 22, cy + 0.2 * F, BLUE, 0.6);
+    });
 
     tanke(cy + r + 0.6 * F, [
       [['Två av triangelns sidor är']],
@@ -57002,28 +57002,28 @@
     var tanke = mkTanke(T);
 
     var cx = padL + 150, cy = 260, r = 80, i, a, pts = [];
-    for (i = 0; i <= 44; i++) {
-      a = -Math.PI * 2 * (i / 44);
-      pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
-    }
-    acts.push({ kind: 'stroke', pts: pts });
-    T.pause(200);
     /* tangeringspunkt B vid vinkeln -50° från P, A på förlängningen */
     var aB = -0.87;
     var B = [cx + Math.cos(aB) * r, cy + Math.sin(aB) * r];
     var A = [cx + 290, cy - 12];
-    T.line([cx, cy], B);
-    T.line([cx, cy], A);
-    T.line(B, A);
-    ratVinkel(T, B, [Math.cos(aB + Math.PI), Math.sin(aB + Math.PI)],
-              [(A[0] - B[0]) / 200, (A[1] - B[1]) / 200], 14);
-    T.pause(200);
-    T.str('P', cx - 22, cy + 0.2 * F, null, 0.6);
-    T.str('B', B[0] - 4, B[1] - 0.4 * F, null, 0.6);
-    T.str('A', A[0] + 10, A[1] + 0.2 * F, null, 0.6);
-    T.str('50°', cx + 24, cy - 10, BLUE, 0.55);
-    T.str('v', A[0] - 76, A[1] + 0.25 * F, BLUE, 0.6);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
+      for (i = 0; i <= 44; i++) {
+        a = -Math.PI * 2 * (i / 44);
+        pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+      T.line([cx, cy], B);
+      T.line([cx, cy], A);
+      T.line(B, A);
+      ratVinkel(T, B, [Math.cos(aB + Math.PI), Math.sin(aB + Math.PI)],
+                [(A[0] - B[0]) / 200, (A[1] - B[1]) / 200], 14);
+      T.str('P', cx - 22, cy + 0.2 * F, null, 0.6);
+      T.str('B', B[0] - 4, B[1] - 0.4 * F, null, 0.6);
+      T.str('A', A[0] + 10, A[1] + 0.2 * F, null, 0.6);
+      T.str('50°', cx + 24, cy - 10, BLUE, 0.55);
+      T.str('v', A[0] - 76, A[1] + 0.25 * F, BLUE, 0.6);
+    });
 
     tanke(cy + r + 0.6 * F, [
       [['En tangent är alltid vinkelrät']],
@@ -57059,25 +57059,25 @@
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
 
     var cx = padL + 180, cy = 260, r = 100, i, a, pts = [];
-    for (i = 0; i <= 44; i++) {
-      a = -Math.PI * 2 * (i / 44);
-      pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
-    }
-    acts.push({ kind: 'stroke', pts: pts });
-    T.pause(200);
     /* två kordor som skär varandra */
     var P1 = [cx + Math.cos(2.5) * r, cy + Math.sin(2.5) * r];
     var P2 = [cx + Math.cos(-0.5) * r, cy + Math.sin(-0.5) * r];
     var P3 = [cx + Math.cos(1.2) * r, cy + Math.sin(1.2) * r];
     var P4 = [cx + Math.cos(-1.9) * r, cy + Math.sin(-1.9) * r];
-    T.line(P1, P2);
-    T.line(P3, P4);
-    T.pause(200);
-    T.str('x', (P1[0] + cx) / 2 - 10, (P1[1] + cy) / 2, BLUE, 0.6);
-    T.str('10', (P2[0] + cx) / 2, (P2[1] + cy) / 2 + 0.9 * F, BLUE, 0.6);
-    T.str('18', (P3[0] + cx) / 2 + 8, (P3[1] + cy) / 2, BLUE, 0.6);
-    T.str('20', (P4[0] + cx) / 2 - 26, (P4[1] + cy) / 2, BLUE, 0.6);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
+      for (i = 0; i <= 44; i++) {
+        a = -Math.PI * 2 * (i / 44);
+        pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+      T.line(P1, P2);
+      T.line(P3, P4);
+      T.str('x', (P1[0] + cx) / 2 - 10, (P1[1] + cy) / 2, BLUE, 0.6);
+      T.str('10', (P2[0] + cx) / 2, (P2[1] + cy) / 2 + 0.9 * F, BLUE, 0.6);
+      T.str('18', (P3[0] + cx) / 2 + 8, (P3[1] + cy) / 2, BLUE, 0.6);
+      T.str('20', (P4[0] + cx) / 2 - 26, (P4[1] + cy) / 2, BLUE, 0.6);
+    });
 
     tanke(cy + r + 0.6 * F, [
       [['Kordasatsen: produkten av']],
@@ -57109,22 +57109,22 @@
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
 
     var cx = padL + 180, cy = 260, r = 100, i, a, pts = [];
-    for (i = 0; i <= 44; i++) {
-      a = -Math.PI * 2 * (i / 44);
-      pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
-    }
-    acts.push({ kind: 'stroke', pts: pts });
-    T.pause(200);
     var vink = [-1.9, -0.4, 1.0, 2.6], p = [];
     for (i = 0; i < 4; i++) {
       p.push([cx + Math.cos(vink[i]) * r, cy + Math.sin(vink[i]) * r]);
     }
-    for (i = 0; i < 4; i++) T.line(p[i], p[(i + 1) % 4]);
-    T.pause(200);
-    T.str('115°', p[0][0] - 20, p[0][1] + 1.0 * F, BLUE, 0.55);
-    T.str('x', p[2][0] + 4, p[2][1] - 0.5 * F, BLUE, 0.6);
-    T.str('M', cx - 8, cy + 0.2 * F, null, 0.55);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
+      for (i = 0; i <= 44; i++) {
+        a = -Math.PI * 2 * (i / 44);
+        pts.push([cx + Math.cos(a) * r, cy + Math.sin(a) * r]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+      for (i = 0; i < 4; i++) T.line(p[i], p[(i + 1) % 4]);
+      T.str('115°', p[0][0] - 20, p[0][1] + 1.0 * F, BLUE, 0.55);
+      T.str('x', p[2][0] + 4, p[2][1] - 0.5 * F, BLUE, 0.6);
+      T.str('M', cx - 8, cy + 0.2 * F, null, 0.55);
+    });
 
     tanke(cy + r + 0.6 * F, [
       [['I en fyrhörning inskriven i en']],

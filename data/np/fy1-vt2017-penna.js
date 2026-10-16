@@ -24,7 +24,8 @@
   if (!HK || !HK.registrera) return;
   var V = HK.verktyg;
   var physTools = V.physTools, valueBracket = V.valueBracket, nuklid = V.nuklid,
-      mkAxes = V.mkAxes, kretsResistor = V.kretsResistor, BLUE = V.BLUE;
+      mkAxes = V.mkAxes, kretsResistor = V.kretsResistor, BLUE = V.BLUE,
+      forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('fy1-vt2017-u' + nr, fn); }
 
@@ -61,10 +62,8 @@
     var T = physTools(F), acts = T.acts, padL = T.padL, y, xe;
     var cx = 190, rx = 60, ry = 13, yT = 90, yB = 200;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar cylindern på plattan, som i']],
-      [['uppgiften, och skriver in måtten.']]
-    ], 300));
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
     ellips(T, cx, yT, rx, ry, 0, 2 * Math.PI);
     T.line([cx - rx, yT], [cx - rx, yB]);
     T.line([cx + rx, yT], [cx + rx, yB]);
@@ -80,7 +79,7 @@
     T.lbl('d=50 cm', cx - 40, yT - 34, BLUE);
     T.pause(140);
     T.lbl('m=80 kg', cx + rx + 18, 150, BLUE);
-    T.stepEnd();
+    });
 
     y = 340;
     bub(T, 250, [
@@ -134,10 +133,8 @@
     var x0 = 70, x1 = 270, yV = 90, yS = 165, yA = 240;
     var gA = (x1 - x0 - 26 - 54) / 3, xA = x0 + gA + 13, xR = xA + 13 + gA + 27;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar krets A: tre grenar mellan']],
-      [['samma två ledningar.']]
-    ], 300));
+    /* krets A ur uppgiftens figur står färdig från början */
+    forritad(T, function () {
     T.line([x0, yV], [x0, yA]);
     T.line([x1, yV], [x1, yA]);
     T.line([x0, yV], [157, yV]); T.line([183, yV], [x1, yV]);
@@ -152,7 +149,7 @@
     kretsResistor(T, xR, yA, 54, 22);
     T.lbl('R', xR - 6, yA + 7);
     T.line([xR + 27, yA], [x1, yA]);
-    T.stepEnd();
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Voltmetern ligger i en egen gren']],
@@ -365,11 +362,8 @@
     var T = physTools(F), acts = T.acts, padL = T.padL, y, xe;
     var sy = 160;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar rymdskeppet på väg mot']],
-      [['stjärnan och ljuset som kommer']],
-      [['emot det.']]
-    ], 300));
+    /* rymdskeppet, stjärnan och v ur uppgiftens figur står färdiga */
+    forritad(T, function () {
     T.line([60, sy - 18], [150, sy - 18]);
     T.line([60, sy + 18], [150, sy + 18]);
     T.line([150, sy - 18], [180, sy]);
@@ -382,7 +376,12 @@
     T.pause(140);
     T.arrow([186, sy], [246, sy], BLUE);
     T.lbl('v', 210, sy - 10, BLUE);
-    T.pause(140);
+    });
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar ljuset från stjärnan som']],
+      [['kommer emot rymdskeppet.']]
+    ], 300));
     T.arrow([360, sy - 50], [200, sy - 50], BLUE);
     T.arrow([360, sy + 50], [200, sy + 50], BLUE);
     T.lbl('c', 276, sy - 60, BLUE);
@@ -457,11 +456,8 @@
       acts.push({ kind: 'stroke', pts: pts, color: color || null });
     }
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar bollens lägen med fjädern']],
-      [['nertill. Avstånden växer nedåt,']],
-      [['bollen bromsas på väg upp.']]
-    ], 330));
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
     T.line([bx - 40, yBase], [bx + 40, yBase]);
     T.hatch([bx - 40, yBase], [bx + 40, yBase], 6);
     T.line([bx - 15, yY], [bx - 15, yBase]);
@@ -472,7 +468,7 @@
     T.lbl('Z', bx - 44, yZ + 6);
     T.lbl('Y', bx - 44, yY + 6);
     T.lbl('X', bx - 44, yX + 6);
-    T.stepEnd();
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Mellan Y och Z har bollen lämnat']],
@@ -553,10 +549,8 @@
     function X(i) { return ox + i * k; }
     function Y(u) { return oy - u * k; }
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar diagrammet med de fem']],
-      [['mätpunkterna, spänning mot ström.']]
-    ], 310));
+    /* uppgiftens diagram står färdigt från början */
+    forritad(T, function () {
     T.line([ox - 10, oy], [ox + 300, oy]);
     T.line([ox + 290, oy - 5], [ox + 300, oy]); T.line([ox + 290, oy + 5], [ox + 300, oy]);
     T.line([ox, oy + 10], [ox, oy - 210]);
@@ -573,7 +567,7 @@
       T.lbl(n, x - 5, yy + 22);
       T.pause(80);
     });
-    T.stepEnd();
+    });
 
     y = 400;
     bub(T, 310, [
@@ -627,16 +621,14 @@
     var G = mkAxes(T, F, { ox: 90, oy: 270, u: 27, xmin: 0, xmax: 6, ymin: 0, ymax: 10,
                           ysc: 2, xlab: 't', ylab: 'v' });
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar v-t-grafen: från 2 m/s vid']],
-      [['start till 8 m/s efter 6 s.']]
-    ], 330));
+    /* uppgiftens v-t-graf står färdig från början */
+    forritad(T, function () {
     G.axes();
     G.ticks([1, 2, 3, 4, 5, 6], [2, 4, 6, 8, 10]);
     T.lbl('m/s', G.X(0) - 58, G.Y(10) - 16);
     T.lbl('s', G.X(6) + 42, G.Y(0) + 30);
     G.rule([G.X(0), G.Y(2)], [G.X(6), G.Y(8)], BLUE);
-    T.stepEnd();
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Sträckan är arean under grafen.']],
@@ -902,7 +894,8 @@
   if (!HK || !HK.registrera) return;
   var V = HK.verktyg;
   var physTools = V.physTools, valueBracket = V.valueBracket, rotFrac = V.rotFrac,
-      kretsBatteri = V.kretsBatteri, kretsResistor = V.kretsResistor, BLUE = V.BLUE;
+      kretsBatteri = V.kretsBatteri, kretsResistor = V.kretsResistor, BLUE = V.BLUE,
+      forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('fy1-vt2017-u' + nr, fn); }
 
@@ -952,15 +945,13 @@
     var adv = 1.7 * F, bw = 292;
     var xL = 110, xN = 270, xR = 380, yT = 110, yB = 250;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar krets I: 150 Ω till vänster']],
-      [['upptill, sedan 470 Ω och 220 Ω']],
-      [['från samma knutpunkt.']]
-    ], 330));
+    /* krets I ur uppgiftens figur står färdig från början */
+    var gap, yA, yBat;
+    forritad(T, function () {
     /* vänster ledare: amperemeter (diameter 28) och batteri (plattor 12
      * isär), tre lika mellanrum: (140 − 28 − 12)/3 */
-    var gap = ((yB - yT) - 28 - 12) / 3;
-    var yA = yT + gap + 14, yBat = yA + 14 + gap + 6;
+    gap = ((yB - yT) - 28 - 12) / 3;
+    yA = yT + gap + 14; yBat = yA + 14 + gap + 6;
     T.line([xL, yT], [xL, yA - 14]);
     T.circle(xL, yA, 14);
     T.lbl('A', xL - T.lblW('A') / 2, yA + 6);
@@ -984,7 +975,7 @@
     T.line([xN, 207], [xN, yB]);
     T.dot(xN, yT);
     T.dot(xN, yB);
-    T.stepEnd();
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Skriver in resistanserna. ', 0], ['R', 1]],
@@ -1120,11 +1111,8 @@
     var adv = 1.7 * F, bw = 292;
     var tx = 230, yTab = 300, R = 22, yLo = yTab - R, yUp = yLo - 130;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar stativet, tråden och de två']],
-      [['kulorna. Den nedre vilar mot']],
-      [['bordet.']]
-    ], 345));
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
     T.line([150, yTab], [380, yTab]);
     T.hatch([380, yTab], [150, yTab], 12);
     T.pause(140);
@@ -1135,7 +1123,7 @@
     T.line([tx, yUp + R], [tx, yLo - R]);
     T.circle(tx, yUp, R);
     T.circle(tx, yLo, R);
-    T.stepEnd();
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Skriver in massan och avståndet']],
@@ -1756,11 +1744,8 @@
     var adv = 1.7 * F, bw = 292;
     var yG = 290;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar marken, den kalla luftens']],
-      [['front och den varma luften som']],
-      [['glider upp från A till B.']]
-    ], 330));
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
     T.line([50, yG], [420, yG]);
     T.line([300, yG], [380, 150]);
     T.hatch([380, 150], [300, yG], 7, null, 10);
@@ -1773,7 +1758,7 @@
     T.str('B', 294, 204, null, 0.62);
     T.pause(140);
     T.arrow([212, 250], [272, 236]);
-    T.stepEnd();
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Skriver in hur tryck och tempera-']],
@@ -1899,17 +1884,15 @@
     var adv = 1.7 * F, bw = 292;
     var yC = 170, yG = 300, i;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar molnet med den negativa']],
-      [['undersidan och marken under.']]
-    ], 350));
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
     moln(T, 130, 400, yC, 30, 5);
     T.pause(140);
     T.line([90, yG], [430, yG]);
     T.hatch([430, yG], [90, yG], 13, null, 8);
     T.pause(140);
     for (i = 0; i < 5; i++) T.str('-', 160 + i * 52, yC + 20, null, 0.6);
-    T.stepEnd();
+    });
 
     /* ---- a) ---- */
     T.tanke(T.figurBubble(292, [
@@ -2450,11 +2433,8 @@
     function Tfit(t) { return -2.58736334 + 38.3112042 * Math.exp(-0.001893188 * t); }
     var t30 = 85.4737, k30 = -0.0616940;
 
-    /* ---- steg 1: rita av diagrammet ---- */
-    T.tanke(T.figurBubble(292, [
-      [['Ritar av diagrammet med']],
-      [['mätpunkterna.']]
-    ], 480));
+    /* ---- uppgiftens diagram med mätpunkterna står färdigt från början ---- */
+    V.forritad(T, function () {
     V.linjalPil(T.acts, [ox, oy], [ox + 168 * kx, oy]);       /* axlar med linjal */
     V.linjalPil(T.acts, [ox, oy], [ox, oy - 43 * ky]);
     T.lbl('t (min)', ox + 168 * kx + 12, oy + 6);
@@ -2474,7 +2454,7 @@
     });
     T.pause(140);
     pkt.forEach(function (p) { var q = P(p[0], p[1]); T.dot(q[0], q[1]); T.pause(60); });
-    T.stepEnd();
+    });
 
     /* ---- steg 2: jämn kurva och 30 °C ---- */
     T.tanke(T.figurBubble(292, [

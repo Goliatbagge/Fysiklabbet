@@ -12398,7 +12398,7 @@
       [['Sedan lodrätt: tre steg NER,']],
       [['alltså −3.']]
     ], 0);
-    A.stair(4, 5, 9, 2, '5', '−3');
+    A.stair(4, 5, 9, 2, 'Δx=5', 'Δy=−3');
     T.stepEnd();
 
     /* koordinatsystemets nedersta bläck ligger på y≈340 */

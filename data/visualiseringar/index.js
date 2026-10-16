@@ -574,10 +574,10 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Zooma från en atom till Vintergatan och se att tiopotensen bara är en position på skalan — a·10ⁿ är talet gånger zoomnivån.',
         fil: 'data/visualiseringar/ma1c-1.9.js'
     },
-    'ma1c-4.9': {
+    'ma1c-4.10': {
         titel: 'Vad går in, vad kommer ut?',
         beskrivning: 'Dra i x-bandet och se värdemängden följa på y-axeln — gissa innan du kollar, och hitta fällan när toppen ligger mitt i intervallet.',
-        fil: 'data/visualiseringar/ma1c-4.9.js'
+        fil: 'data/visualiseringar/ma1c-4.10.js'
     },
     'ma2c-4.2': {
         titel: 'Vinkelsummans promenad',

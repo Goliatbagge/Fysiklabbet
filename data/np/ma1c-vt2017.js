@@ -352,7 +352,7 @@ window.NP_PROV['ma1c-vt2017'] = {
 
         {
             nr: 11, del: 'B', poang: [1, 1, 1], omrade: 'Funktioner — definitions- och värdemängd',
-            genomgangar: ['ma1c-4.9', 'ma1c-4.7'],
+            genomgangar: ['ma1c-4.10', 'ma1c-4.8'],
             endastSvar: false,
             fraga: 'Rita en möjlig graf till funktionen $f$ i koordinatsystemet. För funktionen $f$ gäller att:\n\n' +
                 '- Definitionsmängden är $-5 \\leq x \\leq 6$\n' +

@@ -1,5 +1,5 @@
-/* ma1c-4.9.js — visualisering: "Vad går in, vad kommer ut?" (definitions-
- * mängd och värdemängd). Hör till ma1c-4.9.
+/* ma1c-4.10.js — visualisering: "Vad går in, vad kommer ut?" (definitions-
+ * mängd och värdemängd). Hör till ma1c-4.10.
  *
  * Kärninsikt: definitionsmängden är vilka x som får MATAS IN, värde-
  * mängden är vilka y som KOMMER UT — två olika frågor på två olika
@@ -927,5 +927,5 @@
 
     window.VISUALISERINGAR = window.VISUALISERINGAR || {};
     var api = { mount: mount };
-    window.VISUALISERINGAR['ma1c-4.9'] = api;
+    window.VISUALISERINGAR['ma1c-4.10'] = api;
 })();

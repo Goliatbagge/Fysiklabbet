@@ -366,11 +366,12 @@ window.KATALOG = {
               { num: '4.4', title: 'Från graf till ekvation', description: 'k är lutningen och m är skärningen med *y*-axeln — trappstegsmetoden ger k = Δy/Δx.', href: null, icon: null, keywords: ['räta linjer','räta linjens ekvation','k-värde','m-värde','lutning','riktningskoefficient','y-intercept','trappstegsmetoden','delta'] },
               { num: '4.5', title: 'Räta linjens ekvation', description: 'Tvåpunktsformeln k = (y₂ − y₁)/(x₂ − x₁) — och m ur en känd punkt.', href: null, icon: null, keywords: ['räta linjer','räta linjens ekvation','rle','riktningskoefficient','tvåpunktsformeln','k-värde','m-värde'] },
               { num: '4.6', title: 'Parallella och vertikala linjer samt räta linjens ekvation i allmän form', description: 'Samma *k*-värde ger parallella linjer, x = a beskriver lodräta — och ax + by + c = 0 klarar alla.', href: null, icon: null, keywords: ['räta linjer','parallella linjer','vertikal linje','lodrät linje','allmän form','k-form'] },
-              { num: '4.7', title: 'Funktion och funktionsvärde', description: 'Varje x ger exakt ett y — funktionsmaskinen, f(x)-skrivsättet och avläsning ur grafer.', href: null, icon: null, keywords: ['funktioner','funktion','funktionsvärde','f(x)','beroende variabel','oberoende variabel','linjär funktion','funktionsmaskin'] },
-              { num: '4.8', title: 'Ekvationslösning med grafritande hjälpmedel', description: 'Rita y = VL och y = HL i GeoGebra — skärningspunktens *x*-koordinat är lösningen.', href: null, icon: null, keywords: ['funktioner','grafisk lösning','geogebra','skärningspunkt','ekvationslösning','olikhet','grafritande'] },
-              { num: '4.9', title: 'Definitionsmängd och värdemängd', description: 'Tillåtna *x*- och *y*-värden — med ifyllda och tomma ringar i grafens ändpunkter.', href: null, icon: null, keywords: ['funktioner','definitionsmängd','värdemängd','intervall','ifylld ring','tom ring','ändpunkt'] },
-              { num: '4.10', title: 'Exponentialfunktioner', description: 'y = C·aˣ — variabeln i exponenten, med tillväxt när a > 1 och avtagande när a < 1.', href: null, icon: null, keywords: ['funktioner','exponentialfunktion','exponentialfunktioner','exponentiell','tillväxt','avtagande','förändringsfaktor','ränta på ränta','sönderfall'] },
-              { num: '4.11', title: 'Potensfunktioner', description: 'f(x) = C·xᵃ — variabeln i basen, från parabler och hyperblar till rotkurvor.', href: null, icon: null, keywords: ['funktioner','potensfunktion','potensfunktioner','parabel','hyperbel','rotfunktion','funktion i funktion','sammansatt funktion'] },
+              { num: '4.7', title: 'Vinkelräta linjer', overkurs: true, description: 'Två linjer som skär varandra i rät vinkel har k-värden vars produkt är −1. Vrid lutningstrappan ett kvarts varv och se varför, och bestäm ekvationen för en vinkelrät linje genom en given punkt.', href: null, icon: null, keywords: ['räta linjer','vinkelrät','vinkelräta linjer','rät vinkel','90 grader','normal','lutning','k-värde','riktningskoefficient','produkten minus ett','negativ invers','överkurs'] },
+              { num: '4.8', title: 'Funktion och funktionsvärde', description: 'Varje x ger exakt ett y — funktionsmaskinen, f(x)-skrivsättet och avläsning ur grafer.', href: null, icon: null, keywords: ['funktioner','funktion','funktionsvärde','f(x)','beroende variabel','oberoende variabel','linjär funktion','funktionsmaskin'] },
+              { num: '4.9', title: 'Ekvationslösning med grafritande hjälpmedel', description: 'Rita y = VL och y = HL i GeoGebra — skärningspunktens *x*-koordinat är lösningen.', href: null, icon: null, keywords: ['funktioner','grafisk lösning','geogebra','skärningspunkt','ekvationslösning','olikhet','grafritande'] },
+              { num: '4.10', title: 'Definitionsmängd och värdemängd', description: 'Tillåtna *x*- och *y*-värden — med ifyllda och tomma ringar i grafens ändpunkter.', href: null, icon: null, keywords: ['funktioner','definitionsmängd','värdemängd','intervall','ifylld ring','tom ring','ändpunkt'] },
+              { num: '4.11', title: 'Exponentialfunktioner', description: 'y = C·aˣ — variabeln i exponenten, med tillväxt när a > 1 och avtagande när a < 1.', href: null, icon: null, keywords: ['funktioner','exponentialfunktion','exponentialfunktioner','exponentiell','tillväxt','avtagande','förändringsfaktor','ränta på ränta','sönderfall'] },
+              { num: '4.12', title: 'Potensfunktioner', description: 'f(x) = C·xᵃ — variabeln i basen, från parabler och hyperblar till rotkurvor.', href: null, icon: null, keywords: ['funktioner','potensfunktion','potensfunktioner','parabel','hyperbel','rotfunktion','funktion i funktion','sammansatt funktion'] },
               { num: '4.S', title: 'Sammanfattning', description: 'Räta linjens ekvation, funktionsbegreppet och exponentialfunktioner — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','räta linjer','funktioner','k-värde','m-värde','exponentialfunktion','potensfunktion'] },
             ],
           },
@@ -790,7 +791,8 @@ window.KATALOG = {
 //                         exit tickets under ma1b-id).
 //
 // Skillnader mot 1c (2026-08-14): trigonometri + vektorer (kap 6) och
-// "Parallella och vertikala linjer samt allmän form" (1c 4.6) utgår;
+// "Parallella och vertikala linjer samt allmän form" (1c 4.6) och
+// "Vinkelräta linjer" (1c 4.7, överkurs, tillagd 2026-10-16) utgår;
 // "KPI och index" (3.4) och "Tolka och granska tabeller och diagram" (5.1)
 // tillkommer. Kapitel 3/4/5 får egna sammanfattningar.
 // ═══════════════════════════════════════════════════════════════════════
@@ -824,8 +826,8 @@ window.MA1B_ALIAS = {};
       sektioner: ['3.1', '3.2', '3.3', NYA.kpi, '3.4', '3.5',
                   { fran: '3.S', egenTeori: true }] },
     { kapitel: 'Räta linjer och funktioner',
-      sektioner: ['4.1', '4.2', '4.3', '4.4', '4.5', '4.7', '4.8', '4.9',
-                  '4.10', '4.11', { fran: '4.S', egenTeori: true }] },
+      sektioner: ['4.1', '4.2', '4.3', '4.4', '4.5', '4.8', '4.9', '4.10',
+                  '4.11', '4.12', { fran: '4.S', egenTeori: true }] },
     { kapitel: 'Statistik och sannolikhetslära',
       intro: 'Att dra slutsatser av data — vi börjar med att tolka och granska tabeller och diagram, och går vidare till undersökningar, urval och felkällor, felmarginaler och skillnaden mellan korrelation och kausalitet. Sedan sannolikhetslärans grunder: den klassiska definitionen, experiment, produktregeln, träddiagram och komplementhändelser.',
       sektioner: [NYA.tolkaDiagram, '5.1', '5.2', '5.3', '5.4', '5.5',

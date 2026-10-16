@@ -1,168 +1,166 @@
 ---
 id: ma1c-4.11
-title: Potensfunktioner
+title: Exponentialfunktioner
 course: Matematik nivå 1c
 chapter: Räta linjer och funktioner
 chapterNumber: 4
 section: '4.11'
 ---
 
-# Potensfunktioner
+# Exponentialfunktioner
 
-Funktioner med en term där den beroende variabeln, oftast $x$, är *i
-basen* kallas **potensfunktioner**. $f(x) = 5x^3$ och $g(x) = x^{-2}$ är
-exempel på potensfunktioner. Skilj potensfunktioner från
-exponentialfunktioner där den oberoende variabeln är i exponenten.
+**Exponentialfunktioner** är funktioner där den oberoende variabeln,
+till exempel $x$, är i **exponenten**.
 
-::: formel "Potensfunktioner — generellt"
-$$
-f(x) = Cx^a
-$$
+::: exempel "Exempel 1 — Kapital som växer"
+**Ett kapital på 25 000 kr ökar varje år med 2 %. Ange en formel för
+kapitalet $K$ kr efter $x$ år.**
 
-där $C$ och $a$ är konstanter.
+::: handskrift
+typ: kapitalvaxer
 :::
 
-::: formel "Exponentialfunktioner — generellt"
-$$
-f(x) = Ca^x
-$$
+::: textlosning
+Förändringsfaktorn för en ökning med 2 % är 1,02. Efter
 
-där $C$ och $a$ är konstanter.
+| Tid | Kapital (kr) |
+| --- | --- |
+| 0 år | $25\,000$ |
+| 1 år | $25\,000 \cdot 1{,}02$ |
+| 2 år | $25\,000 \cdot 1{,}02^2$ |
+| 3 år | $25\,000 \cdot 1{,}02^3$ |
+| $x$ år | $25\,000 \cdot 1{,}02^x$ |
+
+så $K(x) = 25\,000 \cdot 1{,}02^x$.
+
+**Svar:** $K(x) = 25\,000 \cdot 1{,}02^x$
+:::
 :::
 
-## Grafen till potensfunktioner
+::: formel "Exponentiell förändring"
+Om man ska ställa upp en formel för en exponentiell förändring (något som
+ökar/minskar med en viss procent med tiden) gäller:
 
-Grafen till en potensfunktion kan se väldigt olika ut, beroende på om
-exponenten $a$ är udda/jämn, positiv/negativ eller ett heltal/bråk. Vi
-kommer att utreda dem noggrannare på senare nivåer. Nedan ser du några
-exempel.
+$$
+y = Ca^x
+$$
+
+där
+
+- $y$ = värdet efter en viss tid
+- $C$ = ursprungliga värdet
+- $a$ = förändringsfaktorn
+- $x$ = tid
+:::
+
+::: exempel "Exempel 2 — Tolka en exponentialfunktion"
+**En bils värde $V$ efter $t$ år ges av funktionen
+$V(t) = 180\,000 \cdot 0{,}85^t$. Vad står 180 000 respektive 0,85
+för?**
+
+::: handskrift
+typ: tolkaexp
+:::
+
+::: textlosning
+Jämför med formeln $y = Ca^x$ ovan: 180 000 motsvarar $C$ (det
+ursprungliga värdet) och 0,85 motsvarar $a$ (förändringsfaktorn).
+
+**Svar:** Bilens nyvärde (ursprungliga värde) är 180 000 kr och värdet
+minskar varje år med 15 % (förändringsfaktorn är 0,85).
+:::
+:::
+
+## Exponentialfunktioners utseende
 
 ::: figur
-<svg viewBox="-26 -20 218 160" width="296" height="217" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till y lika med x i kvadrat: en parabel med botten i origo, symmetrisk kring y-axeln."><line x1="13.6" y1="0.0" x2="13.6" y2="115.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="47.6" y1="0.0" x2="47.6" y2="115.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="81.6" y1="0.0" x2="81.6" y2="115.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="115.6" y1="0.0" x2="115.6" y2="115.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="149.6" y1="0.0" x2="149.6" y2="115.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="115.6" x2="170.0" y2="115.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="81.6" x2="170.0" y2="81.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="47.6" x2="170.0" y2="47.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="13.6" x2="170.0" y2="13.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="115.6" x2="178.0" y2="115.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="186.0,115.6 176.0,111.1 176.0,120.1" fill="#1f2530"/><line x1="81.6" y1="115.6" x2="81.6" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="81.6,-16.0 77.1,-6.0 86.1,-6.0" fill="#1f2530"/><text x="184.0" y="133.6" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="90.6" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="13.6" y="131.6" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="47.6" y="131.6" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="115.6" y="131.6" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="149.6" y="131.6" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="75.6" y="85.6" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="75.6" y="51.6" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="75.6" y="17.6" font-size="12" text-anchor="end" fill="#1f2530">3</text><path d="M18.7,0.0 L20.0,3.8 L21.2,8.4 L22.5,12.8 L23.7,17.1 L25.0,21.3 L26.2,25.5 L27.5,29.5 L28.8,33.5 L30.0,37.4 L31.3,41.1 L32.5,44.8 L33.8,48.4 L35.1,51.9 L36.3,55.3 L37.6,58.6 L38.8,61.8 L40.1,64.9 L41.3,67.9 L42.6,70.9 L43.9,73.7 L45.1,76.5 L46.4,79.1 L47.6,81.7 L48.9,84.1 L50.1,86.5 L51.4,88.8 L52.7,91.0 L53.9,93.1 L55.2,95.1 L56.4,97.0 L57.7,98.8 L59.0,100.5 L60.2,102.1 L61.5,103.7 L62.7,105.1 L64.0,106.5 L65.2,107.7 L66.5,108.9 L67.8,110.0 L69.0,110.9 L70.3,111.8 L71.5,112.6 L72.8,113.3 L74.1,113.9 L75.3,114.4 L76.6,114.9 L77.8,115.2 L79.1,115.4 L80.3,115.6 L81.6,115.6 L82.9,115.6 L84.1,115.4 L85.4,115.2 L86.6,114.9 L87.9,114.4 L89.1,113.9 L90.4,113.3 L91.7,112.6 L92.9,111.8 L94.2,110.9 L95.4,110.0 L96.7,108.9 L98.0,107.7 L99.2,106.5 L100.5,105.1 L101.7,103.7 L103.0,102.1 L104.2,100.5 L105.5,98.8 L106.8,97.0 L108.0,95.1 L109.3,93.1 L110.5,91.0 L111.8,88.8 L113.0,86.5 L114.3,84.1 L115.6,81.7 L116.8,79.1 L118.1,76.5 L119.3,73.7 L120.6,70.9 L121.9,67.9 L123.1,64.9 L124.4,61.8 L125.6,58.6 L126.9,55.3 L128.1,51.9 L129.4,48.4 L130.7,44.8 L131.9,41.1 L133.2,37.4 L134.4,33.5 L135.7,29.5 L137.0,25.5 L138.2,21.3 L139.5,17.1 L140.7,12.8 L142.0,8.4 L143.2,3.8 L144.5,0.0" fill="none" stroke="#4a7d3a" stroke-width="2"/></svg>
+<svg viewBox="-26 -20 240 208" width="326" height="282" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till en exponentiell ökning: kurvan ligger nära noll till vänster, passerar 0 komma 1 och stiger allt brantare åt höger."><line x1="2.6" y1="0.0" x2="2.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="28.6" y1="0.0" x2="28.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="54.6" y1="0.0" x2="54.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="80.6" y1="0.0" x2="80.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="106.6" y1="0.0" x2="106.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="132.6" y1="0.0" x2="132.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="158.6" y1="0.0" x2="158.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="184.6" y1="0.0" x2="184.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="163.8" x2="192.4" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="137.8" x2="192.4" y2="137.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="111.8" x2="192.4" y2="111.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="85.8" x2="192.4" y2="85.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="59.8" x2="192.4" y2="59.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="33.8" x2="192.4" y2="33.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="7.8" x2="192.4" y2="7.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="163.8" x2="200.4" y2="163.8" stroke="#1f2530" stroke-width="1.6"/><polygon points="208.4,163.8 198.4,159.3 198.4,168.3" fill="#1f2530"/><line x1="80.6" y1="163.8" x2="80.6" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="80.6,-16.0 76.1,-6.0 85.1,-6.0" fill="#1f2530"/><text x="206.4" y="181.8" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="89.6" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="2.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">−3</text><text x="28.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="54.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="106.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="132.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="158.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="184.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="74.6" y="141.8" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="74.6" y="115.8" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="74.6" y="89.8" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="74.6" y="63.8" font-size="12" text-anchor="end" fill="#1f2530">4</text><text x="74.6" y="37.8" font-size="12" text-anchor="end" fill="#1f2530">5</text><text x="74.6" y="11.8" font-size="12" text-anchor="end" fill="#1f2530">6</text><path d="M1.3,157.6 L2.8,157.4 L4.3,157.3 L5.9,157.1 L7.4,156.9 L8.9,156.7 L10.4,156.5 L11.9,156.3 L13.4,156.1 L15.0,155.9 L16.5,155.6 L18.0,155.4 L19.5,155.2 L21.0,154.9 L22.5,154.7 L24.1,154.4 L25.6,154.2 L27.1,153.9 L28.6,153.6 L30.1,153.4 L31.6,153.1 L33.2,152.8 L34.7,152.5 L36.2,152.2 L37.7,151.8 L39.2,151.5 L40.7,151.2 L42.3,150.8 L43.8,150.4 L45.3,150.1 L46.8,149.7 L48.3,149.3 L49.8,148.9 L51.4,148.5 L52.9,148.1 L54.4,147.6 L55.9,147.2 L57.4,146.7 L58.9,146.2 L60.5,145.7 L62.0,145.2 L63.5,144.7 L65.0,144.2 L66.5,143.6 L68.0,143.1 L69.6,142.5 L71.1,141.9 L72.6,141.3 L74.1,140.7 L75.6,140.0 L77.1,139.4 L78.7,138.7 L80.2,138.0 L81.7,137.3 L83.2,136.5 L84.7,135.8 L86.2,135.0 L87.8,134.2 L89.3,133.4 L90.8,132.5 L92.3,131.7 L93.8,130.8 L95.3,129.9 L96.9,128.9 L98.4,128.0 L99.9,127.0 L101.4,125.9 L102.9,124.9 L104.4,123.8 L106.0,122.7 L107.5,121.5 L109.0,120.4 L110.5,119.2 L112.0,117.9 L113.5,116.6 L115.1,115.3 L116.6,114.0 L118.1,112.6 L119.6,111.2 L121.1,109.7 L122.6,108.2 L124.2,106.7 L125.7,105.1 L127.2,103.4 L128.7,101.8 L130.2,100.0 L131.7,98.3 L133.2,96.5 L134.8,94.6 L136.3,92.7 L137.8,90.7 L139.3,88.6 L140.8,86.6 L142.3,84.4 L143.9,82.2 L145.4,79.9 L146.9,77.6 L148.4,75.2 L149.9,72.7 L151.5,70.2 L153.0,67.6 L154.5,64.9 L156.0,62.2 L157.5,59.4 L159.0,56.5 L160.6,53.5 L162.1,50.4 L163.6,47.3 L165.1,44.0 L166.6,40.7 L168.1,37.3 L169.7,33.8 L171.2,30.1 L172.7,26.4 L174.2,22.6 L175.7,18.7 L177.2,14.7 L178.8,10.5 L180.3,6.2 L181.8,1.9 L183.3,0.0" fill="none" stroke="#4a7d3a" stroke-width="2"/></svg>
 
-$y = x^2$
+**Exponentiell ökning:** $y = Ca^x$ där $a > 1$. Kan till exempel beskriva
+befolkningstillväxt.
 :::
 
 ::: figur
-<svg viewBox="-26 -20 218 157" width="296" height="213" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till y lika med x upphöjt till 3: en kurva som kommer nerifrån vänster, planar ut genom origo och stiger brant uppåt till höger."><line x1="13.6" y1="0.0" x2="13.6" y2="132.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="47.6" y1="0.0" x2="47.6" y2="132.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="81.6" y1="0.0" x2="81.6" y2="132.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="115.6" y1="0.0" x2="115.6" y2="132.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="149.6" y1="0.0" x2="149.6" y2="132.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="108.8" x2="170.0" y2="108.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="74.8" x2="170.0" y2="74.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="40.8" x2="170.0" y2="40.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="6.8" x2="170.0" y2="6.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="74.8" x2="178.0" y2="74.8" stroke="#1f2530" stroke-width="1.6"/><polygon points="186.0,74.8 176.0,70.3 176.0,79.3" fill="#1f2530"/><line x1="81.6" y1="132.6" x2="81.6" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="81.6,-16.0 77.1,-6.0 86.1,-6.0" fill="#1f2530"/><text x="184.0" y="92.8" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="90.6" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="13.6" y="90.8" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="47.6" y="90.8" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="115.6" y="90.8" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="149.6" y="90.8" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="75.6" y="112.8" font-size="12" text-anchor="end" fill="#1f2530">−1</text><text x="75.6" y="44.8" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="75.6" y="10.8" font-size="12" text-anchor="end" fill="#1f2530">2</text><path d="M40.8,132.6 L41.6,130.0 L42.5,126.5 L43.3,123.2 L44.2,120.1 L45.0,117.0 L45.9,114.2 L46.8,111.4 L47.6,108.8 L48.4,106.3 L49.3,104.0 L50.2,101.7 L51.0,99.6 L51.8,97.6 L52.7,95.7 L53.5,93.9 L54.4,92.2 L55.2,90.6 L56.1,89.1 L56.9,87.8 L57.8,86.5 L58.7,85.3 L59.5,84.1 L60.3,83.1 L61.2,82.1 L62.0,81.3 L62.9,80.5 L63.8,79.7 L64.6,79.1 L65.4,78.4 L66.3,77.9 L67.2,77.4 L68.0,77.0 L68.8,76.6 L69.7,76.3 L70.6,76.0 L71.4,75.7 L72.2,75.5 L73.1,75.3 L73.9,75.2 L74.8,75.1 L75.6,75.0 L76.5,74.9 L77.3,74.9 L78.2,74.8 L79.1,74.8 L79.9,74.8 L80.8,74.8 L81.6,74.8 L82.4,74.8 L83.3,74.8 L84.1,74.8 L85.0,74.8 L85.8,74.7 L86.7,74.7 L87.6,74.6 L88.4,74.5 L89.2,74.4 L90.1,74.3 L90.9,74.1 L91.8,73.9 L92.6,73.6 L93.5,73.3 L94.3,73.0 L95.2,72.6 L96.1,72.2 L96.9,71.7 L97.8,71.2 L98.6,70.6 L99.4,69.9 L100.3,69.1 L101.1,68.3 L102.0,67.5 L102.8,66.5 L103.7,65.5 L104.6,64.3 L105.4,63.1 L106.2,61.8 L107.1,60.5 L107.9,59.0 L108.8,57.4 L109.6,55.7 L110.5,53.9 L111.4,52.0 L112.2,50.0 L113.1,47.9 L113.9,45.6 L114.8,43.3 L115.6,40.8 L116.4,38.2 L117.3,35.4 L118.1,32.6 L119.0,29.5 L119.9,26.4 L120.7,23.1 L121.6,19.6 L122.4,16.0 L123.2,12.3 L124.1,8.4 L124.9,4.3 L125.8,0.1" fill="none" stroke="#1f2530" stroke-width="2"/></svg>
+<svg viewBox="-26 -20 240 208" width="326" height="282" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till en exponentiell minskning: kurvan kommer brant uppifrån till vänster, passerar 0 komma 1 och planar ut mot noll åt höger."><line x1="2.6" y1="0.0" x2="2.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="28.6" y1="0.0" x2="28.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="54.6" y1="0.0" x2="54.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="80.6" y1="0.0" x2="80.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="106.6" y1="0.0" x2="106.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="132.6" y1="0.0" x2="132.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="158.6" y1="0.0" x2="158.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="184.6" y1="0.0" x2="184.6" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="163.8" x2="192.4" y2="163.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="137.8" x2="192.4" y2="137.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="111.8" x2="192.4" y2="111.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="85.8" x2="192.4" y2="85.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="59.8" x2="192.4" y2="59.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="33.8" x2="192.4" y2="33.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="7.8" x2="192.4" y2="7.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="163.8" x2="200.4" y2="163.8" stroke="#1f2530" stroke-width="1.6"/><polygon points="208.4,163.8 198.4,159.3 198.4,168.3" fill="#1f2530"/><line x1="80.6" y1="163.8" x2="80.6" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="80.6,-16.0 76.1,-6.0 85.1,-6.0" fill="#1f2530"/><text x="206.4" y="181.8" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="89.6" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="2.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">−3</text><text x="28.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="54.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="106.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="132.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="158.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="184.6" y="179.8" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="74.6" y="141.8" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="74.6" y="115.8" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="74.6" y="89.8" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="74.6" y="63.8" font-size="12" text-anchor="end" fill="#1f2530">4</text><text x="74.6" y="37.8" font-size="12" text-anchor="end" fill="#1f2530">5</text><text x="74.6" y="11.8" font-size="12" text-anchor="end" fill="#1f2530">6</text><path d="M1.3,54.8 L2.9,57.8 L4.5,60.8 L6.0,63.7 L7.6,66.6 L9.2,69.3 L10.8,72.0 L12.4,74.5 L14.0,77.1 L15.5,79.5 L17.1,81.9 L18.7,84.2 L20.3,86.4 L21.9,88.6 L23.4,90.7 L25.0,92.8 L26.6,94.8 L28.2,96.7 L29.8,98.6 L31.4,100.5 L32.9,102.3 L34.5,104.0 L36.1,105.7 L37.7,107.3 L39.3,108.9 L40.8,110.5 L42.4,112.0 L44.0,113.4 L45.6,114.8 L47.2,116.2 L48.8,117.6 L50.3,118.9 L51.9,120.1 L53.5,121.4 L55.1,122.6 L56.7,123.7 L58.2,124.8 L59.8,125.9 L61.4,127.0 L63.0,128.1 L64.6,129.1 L66.1,130.0 L67.7,131.0 L69.3,131.9 L70.9,132.8 L72.5,133.7 L74.1,134.5 L75.6,135.4 L77.2,136.2 L78.8,136.9 L80.4,137.7 L82.0,138.4 L83.5,139.1 L85.1,139.8 L86.7,140.5 L88.3,141.2 L89.9,141.8 L91.5,142.4 L93.0,143.0 L94.6,143.6 L96.2,144.2 L97.8,144.7 L99.4,145.3 L100.9,145.8 L102.5,146.3 L104.1,146.8 L105.7,147.3 L107.3,147.7 L108.9,148.2 L110.4,148.6 L112.0,149.1 L113.6,149.5 L115.2,149.9 L116.8,150.3 L118.3,150.7 L119.9,151.0 L121.5,151.4 L123.1,151.7 L124.7,152.1 L126.3,152.4 L127.8,152.7 L129.4,153.0 L131.0,153.3 L132.6,153.6 L134.2,153.9 L135.7,154.2 L137.3,154.5 L138.9,154.7 L140.5,155.0 L142.1,155.2 L143.7,155.5 L145.2,155.7 L146.8,155.9 L148.4,156.2 L150.0,156.4 L151.6,156.6 L153.1,156.8 L154.7,157.0 L156.3,157.2 L157.9,157.4 L159.5,157.6 L161.0,157.7 L162.6,157.9 L164.2,158.1 L165.8,158.2 L167.4,158.4 L169.0,158.5 L170.5,158.7 L172.1,158.8 L173.7,159.0 L175.3,159.1 L176.9,159.2 L178.4,159.4 L180.0,159.5 L181.6,159.6 L183.2,159.7 L184.8,159.8 L186.4,160.0 L187.9,160.1 L189.5,160.2 L191.1,160.3" fill="none" stroke="#4a7d3a" stroke-width="2"/></svg>
 
-$y = x^3$
+**Exponentiell minskning:** $y = Ca^x$ där $0 < a < 1$. Kan till exempel
+beskriva radioaktivt sönderfall.
 :::
 
-::: figur
-<svg viewBox="-26 -20 255 193" width="346" height="262" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till y lika med 1 genom x: en hyperbel med två grenar, en i tredje kvadranten och en i första, som närmar sig axlarna utan att röra dem."><line x1="13.2" y1="0.0" x2="13.2" y2="162.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="57.2" y1="0.0" x2="57.2" y2="162.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="101.2" y1="0.0" x2="101.2" y2="162.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="145.2" y1="0.0" x2="145.2" y2="162.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="189.2" y1="0.0" x2="189.2" y2="162.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="145.2" x2="206.8" y2="145.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="101.2" x2="206.8" y2="101.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="57.2" x2="206.8" y2="57.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="13.2" x2="206.8" y2="13.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="101.2" x2="214.8" y2="101.2" stroke="#1f2530" stroke-width="1.6"/><polygon points="222.8,101.2 212.8,96.7 212.8,105.7" fill="#1f2530"/><line x1="101.2" y1="162.8" x2="101.2" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="101.2,-16.0 96.7,-6.0 105.7,-6.0" fill="#1f2530"/><text x="220.8" y="119.2" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="110.2" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="13.2" y="117.2" font-size="12" text-anchor="middle" fill="#1f2530">−4</text><text x="57.2" y="117.2" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="145.2" y="117.2" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="189.2" y="117.2" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="95.2" y="149.2" font-size="12" text-anchor="end" fill="#1f2530">−2</text><text x="95.2" y="61.2" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="95.2" y="17.2" font-size="12" text-anchor="end" fill="#1f2530">4</text><path d="M2.2,106.1 L3.4,106.1 L4.5,106.2 L5.7,106.3 L6.9,106.3 L8.1,106.4 L9.2,106.5 L10.4,106.5 L11.6,106.6 L12.7,106.7 L13.9,106.7 L15.1,106.8 L16.3,106.9 L17.4,107.0 L18.6,107.1 L19.8,107.1 L20.9,107.2 L22.1,107.3 L23.3,107.4 L24.5,107.5 L25.6,107.6 L26.8,107.7 L28.0,107.8 L29.1,107.9 L30.3,108.0 L31.5,108.1 L32.7,108.3 L33.8,108.4 L35.0,108.5 L36.2,108.6 L37.3,108.8 L38.5,108.9 L39.7,109.1 L40.9,109.2 L42.0,109.4 L43.2,109.5 L44.4,109.7 L45.5,109.9 L46.7,110.1 L47.9,110.3 L49.1,110.5 L50.2,110.7 L51.4,110.9 L52.6,111.2 L53.7,111.4 L54.9,111.7 L56.1,111.9 L57.3,112.2 L58.4,112.5 L59.6,112.8 L60.8,113.2 L61.9,113.5 L63.1,113.9 L64.3,114.3 L65.5,114.7 L66.6,115.2 L67.8,115.7 L69.0,116.2 L70.1,116.8 L71.3,117.4 L72.5,118.1 L73.7,118.8 L74.8,119.6 L76.0,120.4 L77.2,121.3 L78.3,122.4 L79.5,123.5 L80.7,124.8 L81.9,126.2 L83.0,127.8 L84.2,129.7 L85.4,131.8 L86.5,134.2 L87.7,137.1 L88.9,140.5 L90.1,144.7 L91.2,149.8 L92.4,156.2 L93.6,162.8" fill="none" stroke="#2563c9" stroke-width="2"/><path d="M106.3,5.5 L107.5,23.9 L108.7,36.4 L109.9,45.3 L111.1,52.1 L112.3,57.5 L113.5,61.8 L114.7,65.3 L115.9,68.2 L117.1,70.7 L118.3,72.9 L119.5,74.7 L120.7,76.4 L121.9,77.8 L123.1,79.1 L124.3,80.2 L125.5,81.3 L126.7,82.2 L127.9,83.1 L129.1,83.8 L130.3,84.6 L131.5,85.2 L132.7,85.8 L133.9,86.4 L135.1,86.9 L136.3,87.4 L137.5,87.9 L138.7,88.3 L139.9,88.7 L141.1,89.1 L142.3,89.4 L143.5,89.8 L144.7,90.1 L145.9,90.4 L147.1,90.7 L148.3,90.9 L149.5,91.2 L150.7,91.4 L151.9,91.7 L153.1,91.9 L154.3,92.1 L155.5,92.3 L156.7,92.5 L157.9,92.7 L159.1,92.8 L160.3,93.0 L161.5,93.2 L162.7,93.3 L163.9,93.5 L165.1,93.6 L166.3,93.8 L167.5,93.9 L168.8,94.0 L170.0,94.2 L171.2,94.3 L172.4,94.4 L173.6,94.5 L174.8,94.6 L176.0,94.7 L177.2,94.8 L178.4,94.9 L179.6,95.0 L180.8,95.1 L182.0,95.2 L183.2,95.3 L184.4,95.4 L185.6,95.5 L186.8,95.5 L188.0,95.6 L189.2,95.7 L190.4,95.8 L191.6,95.8 L192.8,95.9 L194.0,96.0 L195.2,96.1 L196.4,96.1 L197.6,96.2 L198.8,96.2 L200.0,96.3 L201.2,96.4 L202.4,96.4" fill="none" stroke="#2563c9" stroke-width="2"/></svg>
-
-$y = x^{-1} = \dfrac{1}{x}$
-:::
-
-::: figur
-<svg viewBox="-26 -20 228 174" width="309" height="236" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till y lika med roten ur x: en kurva som startar i origo och stiger allt flackare åt höger. Den finns bara för x större än eller lika med 0."><line x1="4.0" y1="0.0" x2="4.0" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="44.0" y1="0.0" x2="44.0" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="84.0" y1="0.0" x2="84.0" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="124.0" y1="0.0" x2="124.0" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="164.0" y1="0.0" x2="164.0" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="136.0" x2="180.0" y2="136.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="96.0" x2="180.0" y2="96.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="56.0" x2="180.0" y2="56.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="16.0" x2="180.0" y2="16.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="96.0" x2="188.0" y2="96.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="196.0,96.0 186.0,91.5 186.0,100.5" fill="#1f2530"/><line x1="44.0" y1="144.0" x2="44.0" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="44.0,-16.0 39.5,-6.0 48.5,-6.0" fill="#1f2530"/><text x="194.0" y="114.0" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="53.0" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="4.0" y="112.0" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="84.0" y="112.0" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="124.0" y="112.0" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="164.0" y="112.0" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="38.0" y="140.0" font-size="12" text-anchor="end" fill="#1f2530">−1</text><text x="38.0" y="60.0" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="38.0" y="20.0" font-size="12" text-anchor="end" fill="#1f2530">2</text><path d="M44.0,96.0 L45.7,87.9 L47.3,84.5 L49.0,81.9 L50.6,79.8 L52.3,77.8 L53.9,76.1 L55.5,74.5 L57.2,73.0 L58.8,71.6 L60.5,70.3 L62.1,69.1 L63.8,67.9 L65.5,66.7 L67.1,65.6 L68.8,64.5 L70.4,63.5 L72.0,62.5 L73.7,61.5 L75.3,60.6 L77.0,59.7 L78.7,58.8 L80.3,57.9 L82.0,57.0 L83.6,56.2 L85.2,55.4 L86.9,54.6 L88.6,53.8 L90.2,53.0 L91.8,52.3 L93.5,51.5 L95.2,50.8 L96.8,50.0 L98.4,49.3 L100.1,48.6 L101.8,47.9 L103.4,47.3 L105.0,46.6 L106.7,45.9 L108.4,45.3 L110.0,44.6 L111.6,44.0 L113.3,43.4 L115.0,42.7 L116.6,42.1 L118.2,41.5 L119.9,40.9 L121.6,40.3 L123.2,39.7 L124.8,39.1 L126.5,38.6 L128.2,38.0 L129.8,37.4 L131.4,36.9 L133.1,36.3 L134.8,35.8 L136.4,35.2 L138.1,34.7 L139.7,34.1 L141.3,33.6 L143.0,33.1 L144.7,32.5 L146.3,32.0 L147.9,31.5 L149.6,31.0 L151.2,30.5 L152.9,30.0 L154.6,29.5 L156.2,29.0 L157.8,28.5 L159.5,28.0 L161.2,27.5 L162.8,27.1 L164.4,26.6 L166.1,26.1 L167.8,25.6 L169.4,25.2 L171.1,24.7 L172.7,24.3 L174.4,23.8 L176.0,23.3" fill="none" stroke="#c8324a" stroke-width="2"/><circle cx="44.0" cy="96.0" r="3" fill="#c8324a"/></svg>
-
-$y = x^{1/2} = \sqrt{x}$
-:::
-
-Undersök själv: prova olika värden på exponenten $a$ (till exempel 2, 3 eller
-−1) och konstanten $C$ och se hur grafens form ändras. Startläget visar
-$y = x^2$.
+Undersök själv hur $C$ och $a$ formar exponentialfunktionen. Den röda
+pricken visar skärningen med *y*-axeln — den ligger alltid i höjd med $C$,
+eftersom $y = C \cdot a^0 = C$ när $x = 0$. Prova värden på
+förändringsfaktorn $a$ både över och under 1.
 
 ::: graf
-titel: y = Cx^a
-uttryck: C*x^a
-ekvation: y = {C}x^{{a}}
-C: 1, -3, 3, 0.5
-a: 2, -2, 3, 1
+titel: y = C \cdot a^x
+uttryck: C*a^x
+ekvation: y = {C} \cdot {a}^x
+C: 1, 0.5, 4, 0.5
+a: 1.5, 0.2, 2.5, 0.1
 x: -4, 4
-y: -2, 6
+y: -1, 7
 :::
 
-::: exempel "Exempel 1 — Funktionsvärde och ekvation"
-**Låt $f(x) = x^4$.<br>a) Bestäm $f(2)$.&emsp;&emsp;b) Lös ekvationen $f(x) = 2$**
+::: exempel "Exempel 3 — Vilken funktion är uppritad?"
+**Vilken funktion är uppritad: $f(x) = 3^x$ eller $g(x) = 2^x$?**
+
+::: figur
+<svg viewBox="-26 -20 219 195" width="297" height="265" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En exponentialkurva som passerar 0 komma 1 och 1 komma 2 och stiger brant: grafen till g av x lika med 2 upphöjt till x."><line x1="3.0" y1="0.0" x2="3.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="33.0" y1="0.0" x2="33.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="63.0" y1="0.0" x2="63.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="93.0" y1="0.0" x2="93.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="123.0" y1="0.0" x2="123.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="153.0" y1="0.0" x2="153.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="151.2" x2="171.0" y2="151.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="123.2" x2="171.0" y2="123.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="95.2" x2="171.0" y2="95.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="67.2" x2="171.0" y2="67.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="39.2" x2="171.0" y2="39.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="11.2" x2="171.0" y2="11.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="151.2" x2="179.0" y2="151.2" stroke="#1f2530" stroke-width="1.6"/><polygon points="187.0,151.2 177.0,146.7 177.0,155.7" fill="#1f2530"/><line x1="93.0" y1="151.2" x2="93.0" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="93.0,-16.0 88.5,-6.0 97.5,-6.0" fill="#1f2530"/><text x="185.0" y="169.2" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="102.0" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="3.0" y="167.2" font-size="12" text-anchor="middle" fill="#1f2530">−3</text><text x="33.0" y="167.2" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="63.0" y="167.2" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="123.0" y="167.2" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="153.0" y="167.2" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="87.0" y="127.2" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="87.0" y="99.2" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="87.0" y="71.2" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="87.0" y="43.2" font-size="12" text-anchor="end" fill="#1f2530">4</text><text x="87.0" y="15.2" font-size="12" text-anchor="end" fill="#1f2530">5</text><path d="M1.5,147.8 L2.9,147.7 L4.2,147.6 L5.6,147.5 L7.0,147.4 L8.4,147.2 L9.7,147.1 L11.1,147.0 L12.5,146.8 L13.8,146.7 L15.2,146.6 L16.6,146.4 L17.9,146.3 L19.3,146.1 L20.7,145.9 L22.1,145.8 L23.4,145.6 L24.8,145.4 L26.2,145.2 L27.5,145.0 L28.9,144.8 L30.3,144.6 L31.6,144.4 L33.0,144.2 L34.4,144.0 L35.8,143.7 L37.1,143.5 L38.5,143.3 L39.9,143.0 L41.2,142.7 L42.6,142.5 L44.0,142.2 L45.3,141.9 L46.7,141.6 L48.1,141.3 L49.5,141.0 L50.8,140.6 L52.2,140.3 L53.6,139.9 L54.9,139.6 L56.3,139.2 L57.7,138.8 L59.0,138.4 L60.4,138.0 L61.8,137.6 L63.2,137.2 L64.5,136.7 L65.9,136.2 L67.3,135.8 L68.6,135.3 L70.0,134.7 L71.4,134.2 L72.7,133.7 L74.1,133.1 L75.5,132.5 L76.9,131.9 L78.2,131.3 L79.6,130.7 L81.0,130.0 L82.3,129.3 L83.7,128.6 L85.1,127.9 L86.4,127.1 L87.8,126.4 L89.2,125.6 L90.6,124.7 L91.9,123.9 L93.3,123.0 L94.7,122.1 L96.0,121.2 L97.4,120.2 L98.8,119.2 L100.1,118.2 L101.5,117.1 L102.9,116.0 L104.3,114.9 L105.6,113.7 L107.0,112.5 L108.4,111.3 L109.7,110.0 L111.1,108.7 L112.5,107.3 L113.8,105.9 L115.2,104.4 L116.6,102.9 L118.0,101.4 L119.3,99.8 L120.7,98.1 L122.1,96.4 L123.4,94.6 L124.8,92.8 L126.2,90.9 L127.5,89.0 L128.9,87.0 L130.3,84.9 L131.7,82.8 L133.0,80.6 L134.4,78.3 L135.8,76.0 L137.1,73.6 L138.5,71.1 L139.9,68.5 L141.2,65.8 L142.6,63.1 L144.0,60.3 L145.4,57.3 L146.7,54.3 L148.1,51.2 L149.5,48.0 L150.8,44.7 L152.2,41.3 L153.6,37.7 L154.9,34.1 L156.3,30.3 L157.7,26.4 L159.1,22.4 L160.4,18.3 L161.8,14.0 L163.2,9.6 L164.5,5.0 L165.9,0.3" fill="none" stroke="#2563c9" stroke-width="2"/></svg>
+:::
 
 ::: handskrift
-typ: potensfunktion
+typ: vilkenexp
 :::
 
 ::: textlosning
-**a)** Vi sätter in $x = 2$ i funktionsuttrycket och beräknar värdet:
+Testar att beräkna några punkter på $f(x) = 3^x$:
 
-$$
-f(2) = 2^4 = 16
-$$
+$f(0) = 3^0 = 1$, så (0, 1) ska vara på kurvan (stämmer).
 
-**Svar:** 16
+$f(1) = 3^1 = 3$, så (1, 3) ska vara på kurvan (stämmer ej!).
 
-**b)** Vi sätter funktionsuttrycket lika med 2 och löser ekvationen:
+Slutsats: $f(x) = 3^x$ är INTE uppritad.
 
-$$
-x^4 = 2
-$$
+Testar att beräkna några punkter på $g(x) = 2^x$:
 
-$$
-x = \pm\sqrt[4]{2}
-$$
+$g(0) = 2^0 = 1$, så (0, 1) ska vara på kurvan (stämmer).
 
-(± eftersom exponenten är jämn.)
+$g(1) = 2^1 = 2$, så (1, 2) ska vara på kurvan (stämmer).
 
-**Svar:** $x = \pm\sqrt[4]{2}$
-:::
-:::
+Slutsats: $g(x) = 2^x$ är uppritad!
 
-::: exempel "Exempel 2 — Funktion i funktion"
-**Låt $f(x) = x^{1/2}$ och $g(x) = 4x^2$. Bestäm $f(g(2))$.**
-
-::: handskrift
-typ: funktionifunktion
-:::
-
-::: textlosning
-Nu har vi en funktion i en funktion. Då räknar vi "inifrån och ut". Vi
-beräknar alltså först den inre funktionen, alltså $g(2)$:
-
-$$
-g(2) = 4 \cdot 2^2 = 4 \cdot 4 = 16
-$$
-
-Därefter kan vi ersätta $g(2)$ i den yttre funktionen med 16:
-
-$$
-f(g(2)) = f(16) = 16^{1/2} = \sqrt{16} = 4
-$$
-
-**Svar:** 4
+**Svar:** $g(x) = 2^x$
 :::
 :::
 
 ::: sammanfattning "Sammanfattning"
 
-::: sampunkt "Potensfunktion"
-- Variabeln står **i basen**: $f(x) = Cx^{a}$.
-- Exempel: $f(x) = 5x^{3}$ och $g(x) = x^{-2}$.
+::: sampunkt "Exponentialfunktion"
+- Den oberoende variabeln står **i exponenten**.
+- $y = C a^{x}$
+- $C$ är **ursprungsvärdet**, $a$ är **förändringsfaktorn** och $x$ är
+  tiden.
 :::
 
-::: sampunkt "Skilj dem åt"
-- **Potensfunktion**: $Cx^{a}$, variabeln i **basen**.
-- **Exponentialfunktion**: $Ca^{x}$, variabeln i **exponenten**.
-- Titta på var $x$ står. Det är hela skillnaden.
+::: sampunkt "Ställa upp formeln"
+- $C$ är startvärdet, $a$ räknas fram ur den procentuella förändringen.
+- $+2\ \%$ per år ger $a = 1{,}02$, alltså
+  $K(x) = 25\,000 \cdot 1{,}02^{x}$.
 :::
 
-::: sampunkt "Graferna ser olika ut"
-- $y = x^{2}$: parabel, symmetrisk kring $y$-axeln.
-- $y = x^{3}$: stiger genom origo, med olika tecken på var sida.
-- $y = x^{-1} = \dfrac{1}{x}$: hyperbel, odefinierad i $x = 0$.
-- $y = x^{1/2} = \sqrt{x}$: bara för $x \geq 0$.
-- Formen beror på om exponenten är udda eller jämn, positiv eller negativ,
-  heltal eller bråk.
+::: sampunkt "Tolka en färdig funktion"
+- $V(t) = 180\,000 \cdot 0{,}85^{t}$: nyvärdet är
+  $180\,000$ kr och värdet **minskar med 15 %** per år.
+- Dra bort 1 från faktorn för att få den procentuella förändringen.
 :::
 
-::: sampunkt "Räkna med dem"
-- Funktionsvärde: sätt in värdet i basen. $f(x) = x^{4}$ ger
-  $f(2) = 16$.
-- Ekvation: $x^{4} = 2$ har lösningarna
-  $x = \pm\sqrt[4]{2}$, eftersom exponenten är **jämn**.
-:::
-
-::: sampunkt "Funktion i funktion"
-- $f(g(2))$ räknas **inifrån och ut**.
-- Räkna först ut $g(2)$, sätt sedan in det svaret i $f$.
+::: sampunkt "Grafens utseende"
+- $a > 1$: **exponentiell ökning**, till exempel befolkningstillväxt.
+- $0 < a < 1$: **exponentiell minskning**, till exempel radioaktivt
+  sönderfall.
+- Grafen skär $y$-axeln i $C$, eftersom
+  $C \cdot a^{0} = C$.
+- Kurvan närmar sig $x$-axeln men **når den aldrig**.
 :::
 :::

@@ -204,7 +204,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 7, del: 'B', poang: [0, 2, 0], omrade: 'Funktioner — avläsa graf',
-            genomgangar: ['ma1c-4.7', 'ma1c-4.8'],
+            genomgangar: ['ma1c-4.8', 'ma1c-4.9'],
             endastSvar: true,
             fraga: 'I figuren visas grafen till funktionen $y = f(x)$.\n\n' +
                 '**a)** Bestäm $f(2)$ med hjälp av grafen.\n\n' +
@@ -372,7 +372,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 13, del: 'B', poang: [0, 0, 1], omrade: 'Funktioner — beteckning',
-            genomgangar: ['ma1c-4.7'],
+            genomgangar: ['ma1c-4.8'],
             endastSvar: true,
             fraga: 'En istapp har volymen $V(t)$ cm³, där $t$ är tiden i minuter efter klockan 08.00. ' +
                 'Klockan 09.00 har istappen volymen $21$ cm³. Använd funktionen $V(t)$ och skriv detta ' +
@@ -831,7 +831,7 @@ window.NP_PROV['ma1c-ht2016'] = {
 
         {
             nr: 24, del: 'D', poang: [1, 1, 1], omrade: 'Linjära modeller — funktion',
-            genomgangar: ['ma1c-4.1', 'ma1c-4.9'],
+            genomgangar: ['ma1c-4.1', 'ma1c-4.10'],
             endastSvar: false,
             fraga: 'Kalles klass ska samla in pengar till klasskassan och vill ordna ett skoldisco. ' +
                 'De har hittat en lokal att hyra som kostar $500$ kr och en DJ med musikanläggning som ' +

@@ -231,7 +231,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 6, del: 'B', poang: [1, 1, 0], omrade: 'Funktioner — avläsa graf',
-            genomgangar: ['ma1c-4.7', 'ma1c-4.8'],
+            genomgangar: ['ma1c-4.8', 'ma1c-4.9'],
             endastSvar: true,
             fraga: 'Nedan visas grafen till funktionen $y = f(x)$\n\n' +
                 '**a)** Bestäm $f(2)$\n\n' +
@@ -304,7 +304,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 8, del: 'B', poang: [0, 2, 0], omrade: 'Matematiska modeller',
-            genomgangar: ['ma1c-4.1', 'ma1c-4.10', 'ma1c-4.11'],
+            genomgangar: ['ma1c-4.1', 'ma1c-4.11', 'ma1c-4.12'],
             endastSvar: true,
             fraga: 'Nedan presenteras fyra olika situationer. Ange för varje situation ' +
                 'om den kan beskrivas med en linjär modell, exponentiell modell eller potensmodell.\n\n' +
@@ -452,7 +452,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 13, del: 'B', poang: [0, 0, 1], omrade: 'Funktioner — sammansatt',
-            genomgangar: ['ma1c-4.7'],
+            genomgangar: ['ma1c-4.8'],
             endastSvar: true,
             fraga: '$f(x) = 2x - 4$ och $g(x) = 3x + 1$\n\nBestäm $f(g(2))$',
             figur: null,
@@ -531,7 +531,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 16, del: 'B', poang: [0, 0, 1], omrade: 'Funktioner — grafisk olikhet',
-            genomgangar: ['ma1c-2.11', 'ma1c-4.7'],
+            genomgangar: ['ma1c-2.11', 'ma1c-4.8'],
             endastSvar: true,
             fraga: 'Skugga det område i koordinatsystemet där $f(x) \\leq y \\leq g(x)$',
             figur: 'u16',
@@ -568,7 +568,7 @@ window.NP_PROV['ma1c-vt2022'] = {
         // ================= DELPROV C =================
         {
             nr: 17, del: 'C', poang: [3, 2, 4], omrade: 'Exponentiell modell — Koch-kurvan',
-            genomgangar: ['ma1c-2.13', 'ma1c-3.2', 'ma1c-4.10'],
+            genomgangar: ['ma1c-2.13', 'ma1c-3.2', 'ma1c-4.11'],
             endastSvar: false,
             fraga: 'För att konstruera ett mönster som liknar snöflingor kan man göra som ' +
                 'den svenska matematikern Helge von Koch. Utgå från en liksidig triangel med sidan 3, se bild.\n\n' +
@@ -761,7 +761,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 21, del: 'C', poang: [0, 2, 1], omrade: 'Funktioner — definitionsmängd',
-            genomgangar: ['ma1c-4.9', 'ma1c-2.12'],
+            genomgangar: ['ma1c-4.10', 'ma1c-2.12'],
             endastSvar: false,
             fraga: 'Ali går på naturbruksprogrammet och ska markera ett $20\\ \\text{m}^2$ stort område ' +
                 'att odla på. Området ska ha formen av en triangel med basen $b$ meter och höjden $h$ meter. ' +
@@ -810,7 +810,7 @@ window.NP_PROV['ma1c-vt2022'] = {
         // ================= DELPROV D =================
         {
             nr: 22, del: 'D', poang: [2, 0, 0], omrade: 'Exponentialfunktion — ränta',
-            genomgangar: ['ma1c-3.4', 'ma1c-3.2', 'ma1c-4.10'],
+            genomgangar: ['ma1c-3.4', 'ma1c-3.2', 'ma1c-4.11'],
             endastSvar: true,
             fraga: 'Stina har satt in pengar på ett bankkonto med fast årsränta. Följande funktion ' +
                 'kan användas för att beräkna hur mycket pengar, i kronor, som finns på bankkontot:\n\n' +
@@ -995,7 +995,7 @@ window.NP_PROV['ma1c-vt2022'] = {
 
         {
             nr: 26, del: 'D', poang: [0, 2, 0], omrade: 'Potensmodell — jämförelse',
-            genomgangar: ['ma1c-4.11', 'ma1c-3.1'],
+            genomgangar: ['ma1c-4.12', 'ma1c-3.1'],
             endastSvar: false,
             fraga: 'Energibehovet hos hundar kan beräknas med två olika formler.\n\n' +
                 '$$\\text{Formel 1:} \\quad y_1 = 70x^{0{,}75}$$\n\n' +

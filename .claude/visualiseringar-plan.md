@@ -145,7 +145,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   jämför linjär (utan ränta) mot exponentiell; dra räntesats och månadsspar
   och se sluttiden/slutbeloppet live. Prediktionsmoment: "dubbla räntan —
   dubblas slutbeloppet?" (nej, mer!).
-- [x] **Definitions- och värdemängd som highlight** (ma1c-4.9). Dra ett
+- [x] **Definitions- och värdemängd som highlight** (ma1c-4.10). Dra ett
   intervall på x-axeln → motsvarande y-intervall lyser på kurvan och
   y-axeln; testa funktion med lucka (1/x). Missuppfattning: blandar ihop
   vilken mängd som hör till vilken axel.
@@ -229,7 +229,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   triangelns/månghörningens rand och vrider sig vid varje hörn; efter ett
   varv har den vridit sig exakt 360° → yttervinkelsumman; inre vinkelsumma
   (n−2)·180° faller ut. Dra hörnen fritt — summan står still.
-- [x] **Likformighetens tre exponenter** (ma2c-4.7–4.8, ma1c-4.11).
+- [x] **Likformighetens tre exponenter** (ma2c-4.7–4.8, ma1c-4.12).
   Skalfaktorglidare k: längd ×k, area ×k², volym ×k³ som tre separerande
   kurvor. Prediktion: "dubbla sidan — hur många småfigurer ryms?" → figuren
   fylls med exakt k² kopior. Missuppfattning: area skalar linjärt.

@@ -28971,6 +28971,156 @@ $k = -0{,}6$ skiljer sig från $-0{,}75$, så linjerna är inte parallella. Båd
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
+            question: `Vilket $k$-värde har en linje som är vinkelrät mot $y = 4x - 1$?`,
+            choices: [
+                `$4$`,
+                `$-4$`,
+                `$-\\dfrac{1}{4}$`,
+                `$\\dfrac{1}{4}$`,
+            ],
+            correct: 2,
+            solution: `Linjen $y = 4x - 1$ har $k_1 = 4$. För vinkelräta linjer gäller $k_2 = -\\dfrac{1}{k_1}$: vänd bråket $\\dfrac{4}{1}$ upp och ned och byt tecken.
+
+$$ k_2 = -\\frac{1}{4} $$
+
+Kontroll: $4 \\cdot \\left(-\\dfrac{1}{4}\\right) = -1$.
+
+**Svar:** $k = -\\dfrac{1}{4}$`,
+        },
+        {
+            level: 1,
+            question: `Vilket par av linjer är vinkelräta?`,
+            choices: [
+                `$y = 2x + 1$ och $y = 2x - 3$`,
+                `$y = 5x$ och $y = -5x$`,
+                `$y = \\dfrac{1}{2}x + 1$ och $y = 2x$`,
+                `$y = 3x + 2$ och $y = -\\dfrac{1}{3}x + 4$`,
+            ],
+            correct: 3,
+            solution: `Linjerna är vinkelräta när produkten av $k$-värdena är $-1$. Vi prövar varje par:
+
+- $2 \\cdot 2 = 4$: samma $k$-värde, linjerna är parallella.
+- $5 \\cdot (-5) = -25$: inte vinkelräta.
+- $\\dfrac{1}{2} \\cdot 2 = 1$: inte vinkelräta.
+- $3 \\cdot \\left(-\\dfrac{1}{3}\\right) = -1$: vinkelräta.
+
+**Svar:** $y = 3x + 2$ och $y = -\\dfrac{1}{3}x + 4$`,
+        },
+        {
+            level: 1,
+            question: `Linjerna $y = kx + 2$ och $y = 2x - 5$ är vinkelräta. Bestäm $k$.`,
+            answer: { value: -0.5, unit: '' },
+            solution: `Produkten av $k$-värdena är $-1$:
+
+$$ k \\cdot 2 = -1 $$
+
+Dividerar båda led med 2:
+
+$$ \\frac{k \\cdot 2}{2} = \\frac{-1}{2} $$
+
+$$ k = -\\frac{1}{2} $$
+
+**Svar:** $k = -\\dfrac{1}{2} = -0{,}5$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm ekvationen för den linje som är vinkelrät mot $y = 3x - 2$ och går genom punkten (6, 4).`,
+            choices: [
+                `$y = 3x - 14$`,
+                `$y = -\\dfrac{1}{3}x + 6$`,
+                `$y = -\\dfrac{1}{3}x + 2$`,
+                `$y = -3x + 22$`,
+            ],
+            correct: 1,
+            solution: `Den givna linjen har $k_1 = 3$. Den vinkelräta linjen har
+
+$$ k_2 = -\\frac{1}{3} $$
+
+eftersom $3 \\cdot \\left(-\\dfrac{1}{3}\\right) = -1$. Insättning i RLE ger $y = -\\dfrac{1}{3}x + m$. Att (6, 4) ligger på linjen ger
+
+$$ 4 = -\\frac{1}{3} \\cdot 6 + m $$
+
+$$ 4 = -2 + m $$
+
+Adderar 2 till båda led:
+
+$$ 4 + 2 = -2 + m + 2 $$
+
+$$ 6 = m $$
+
+**Svar:** $y = -\\dfrac{1}{3}x + 6$`,
+        },
+        {
+            level: 2,
+            question: `Linjen $L$ har ekvationen $2x - 3y + 6 = 0$. Bestäm $k$-värdet för en linje som är vinkelrät mot $L$.`,
+            answer: { value: -1.5, unit: '' },
+            solution: `Först behövs $L$:s $k$-värde, så vi löser ut $y$. Subtraherar $2x$ och 6 från båda led:
+
+$$ 2x - 3y + 6 - 2x - 6 = 0 - 2x - 6 $$
+
+$$ -3y = -2x - 6 $$
+
+Dividerar båda led med $-3$:
+
+$$ \\frac{-3y}{-3} = \\frac{-2x}{-3} + \\frac{-6}{-3} $$
+
+$$ y = \\frac{2}{3}x + 2 $$
+
+Alltså är $k_1 = \\dfrac{2}{3}$. Den vinkelräta linjen får vi genom att vända bråket och byta tecken:
+
+$$ k_2 = -\\frac{3}{2} $$
+
+Kontroll: $\\dfrac{2}{3} \\cdot \\left(-\\dfrac{3}{2}\\right) = -1$.
+
+**Svar:** $k = -\\dfrac{3}{2} = -1{,}5$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Punkterna A(1, 2), B(5, 4) och C($a$, 8) är hörn i en triangel som har en rät vinkel vid B. Bestäm $a$.`,
+            answer: { value: 3, unit: '' },
+            solution: `**Insikten:** vinkeln vid B är rät när sidorna AB och BC är vinkelräta, alltså när produkten av deras $k$-värden är $-1$.
+
+Sidan AB har
+
+$$ k_\\mathrm{AB} = \\frac{4 - 2}{5 - 1} = \\frac{2}{4} = \\frac{1}{2} $$
+
+Då ska BC ha $k$-värdet $-2$, eftersom $\\dfrac{1}{2} \\cdot (-2) = -1$. Med formeln $k = \\dfrac{y_2 - y_1}{x_2 - x_1}$ och B som punkt 1 får sidan BC
+
+$$ k_\\mathrm{BC} = \\frac{8 - 4}{a - 5} = \\frac{4}{a - 5} $$
+
+Det ska vara $-2$:
+
+$$ \\frac{4}{a - 5} = -2 $$
+
+Multiplicerar båda led med $(a - 5)$:
+
+$$ \\frac{4}{a - 5} \\cdot (a - 5) = -2 \\cdot (a - 5) $$
+
+$$ 4 = -2a + 10 $$
+
+Subtraherar 10 från båda led:
+
+$$ 4 - 10 = -2a + 10 - 10 $$
+
+$$ -6 = -2a $$
+
+Dividerar båda led med $-2$:
+
+$$ \\frac{-6}{-2} = \\frac{-2a}{-2} $$
+
+$$ 3 = a $$
+
+Kontroll: C = (3, 8) ger $k_\\mathrm{BC} = \\dfrac{8 - 4}{3 - 5} = \\dfrac{4}{-2} = -2$, och $\\dfrac{1}{2} \\cdot (-2) = -1$. Stämmer.
+
+**Svar:** $a = 3$`,
+        },
+    ],
+    'ma1c-4.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
             question: `Låt $f(x) = 3x + 4$. Beräkna $f(6)$.`,
             answer: { value: 22, unit: '' },
             solution: `Ersätt $x$ med 6:
@@ -29359,7 +29509,7 @@ Rimligt? Under den första kvarten sjunker temperaturen från $T(0) = 90$ till c
         },
     ],
 
-    'ma1c-4.8': [
+    'ma1c-4.9': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
@@ -29675,7 +29825,7 @@ Kontroll: med $a = 3$ är ekvationen $3x - 3 = 7 - 2x$. Insättning av $x = 2$ g
         },
     ],
 
-    'ma1c-4.9': [
+    'ma1c-4.10': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
@@ -30029,7 +30179,7 @@ Kontroll med $y = -4$: formeln ger $x = 3 + \\dfrac{12}{-4} = 3 - 3 = 0$, och my
         },
     ],
 
-    'ma1c-4.10': [
+    'ma1c-4.11': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
@@ -30439,7 +30589,7 @@ $$ \\frac{9 \\cdot 1}{2} = 4{,}5 $$
         },
     ],
 
-    'ma1c-4.11': [
+    'ma1c-4.12': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,

@@ -3183,14 +3183,19 @@
               [x + d * 0.45, yBot - (yBot - ym) * 0.36],
               [x + d, yBot]];
     }
-    function parenFracW(numS, denS, expS) {
-      return 0.27 * F + fracW(numS, denS) + 0.30 * F +
+    /* pre: valfri sträng mellan vänsterparentesen och bråket, till
+     * exempel ett minustecken: (−1/3) skrivs parenFrac('1', '3', null,
+     * x, y, '−') (REGEL MINUS FÖRE BRÅK ger luften efter minuset). */
+    function parenFracW(numS, denS, expS, pre) {
+      return 0.27 * F + (pre ? adv(pre) : 0) + fracW(numS, denS) + 0.30 * F +
              (expS ? adv(expS, 0.62) : 0) + 0.10 * F;
     }
-    function parenFrac(numS, denS, expS, x0, yb) {
+    function parenFrac(numS, denS, expS, x0, yb, pre) {
       acts.push({ kind: 'stroke', pts: parenPts(x0 + 0.04 * F, yb, false) });
       pause(130);
-      var xr = fracH(numS, denS, x0 + 0.27 * F, yb);
+      var xf = x0 + 0.27 * F;
+      if (pre) xf = str(pre, xf, yb);
+      var xr = fracH(numS, denS, xf, yb);
       pause(130);
       acts.push({ kind: 'stroke', pts: parenPts(xr + 0.21 * F, yb, true) });
       var xe = xr + 0.27 * F;
@@ -13116,7 +13121,328 @@
     return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: beräkna funktionsvärden (ma1c-4.7 ex 1) -----
+  /* ---------------- scen: är linjerna vinkelräta? (ma1c-4.7 ex 1) -----
+   * a) y = 3x + 1 och y = −x/3 + 5, b) y = 4x − 2 och y = −4x + 1.
+   * k-värdena avläses och multipliceras; produkten −1 avgör. */
+  function layoutVinkelkoll(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var x0 = padL + 30;
+
+    /* ---- a) ---- */
+    tanke(20, [
+      [['k-värdet är talet framför x.']],
+      [['Jag läser av det i båda']],
+      [['ekvationerna.']]
+    ], 0);
+    y = 160;
+    T.str('a) Linjernas lutning', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('k_1=3  och  k_2=−', x0, y);
+    T.fracH('1', '3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vinkelräta linjer har k-värden']],
+      [['vars produkt är −1. Jag']],
+      [['multiplicerar dem.']]
+    ], 1.05);
+    y += 4.0 * F;
+    T.str('Produkten', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('k_1·k_2=3', x0, y);
+    xx = T.mul(xx, y);
+    xx = T.parenFrac('1', '3', null, xx, y, '−');
+    T.stepEnd();
+
+    tanke(y, [
+      [['3 gånger en tredjedel är 1,']],
+      [['och minustecknet följer med.']]
+    ], 1.05);
+    T.str('=−1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Produkten är −1, alltså är']],
+      [['linjerna vinkelräta.']]
+    ], 1.05);
+    y += 3.4 * F;
+    xe = T.str('Svar: Ja, linjerna är vinkelräta', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Samma sak här: först']],
+      [['k-värdena.']]
+    ], 0.3);
+    y += 4.4 * F;
+    T.str('b) Linjernas lutning', padL, y - 1.6 * F, null, 0.62);
+    T.str('k_1=4  och  k_2=−4', x0, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('Produkten', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('k_1·k_2=4·(−4)', x0, y);
+    T.stepEnd();
+
+    xx = T.str('=−16', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['−16 är inte −1. Linjerna lutar']],
+      [['åt olika håll, men de skär']],
+      [['inte varandra i rät vinkel.']]
+    ]);
+    y += 3.0 * F;
+    xe = T.str('Svar: Nej, linjerna är inte vinkelräta', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: vinkelrät linje genom en punkt (ma1c-4.7 ex 2)
+   * Vinkelrät mot y = 2x + 3 genom (4, 1). k₂ ur k₁ · k₂ = −1 (division
+   * med 2 i båda led), sedan m ur punkten som i 4.5 exempel 2. */
+  function layoutVinkelratlinje(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet) */
+    var vagg = !!cfg.vagg;
+    var ekvOp = mkEkvOp(T, vagg);
+    var x0 = padL + 30;
+    function xwFor(rad) { return x0 + T.adv(rad) + 0.9 * F; }
+
+    tanke(20, [
+      [['Den sökta linjen ska stå']],
+      [['vinkelrätt mot y=2x+3. Då är']],
+      [['produkten av k-värdena −1.']]
+    ], 0);
+    y = 160;
+    T.str('Vinkelräta linjer', padL, y - 1.6 * F, null, 0.62);
+    T.str('k_1·k_2=−1', x0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Den givna linjen har k_1=2.']],
+      [['Jag sätter in det och löser']],
+      [['ut k_2.']]
+    ]);
+    y += 3.6 * F;
+    T.str('k_1=2 ger', padL, y - 1.6 * F, null, 0.62);
+    T.str('2·k_2=−1', x0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar båda led med 2.']]
+    ]);
+    y = ekvOp(y, '/2', xwFor('2·k_2=−1'), '2·k_2=−1',
+              { dyRes: 3.4, dyVagg: 3.2 });
+    xx = T.str('k_2=−', x0, y);
+    T.fracH('1', '2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu vet jag lutningen. m får']],
+      [['jag ur punkten (4, 1).']]
+    ], 1.05);
+    y += 4.0 * F;
+    T.str('RLE med k=k_2', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('y=−', x0, y);
+    xx = T.fracH('1', '2', xx, y);
+    T.str('x+m', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Punkten (4, 1) ligger PÅ']],
+      [['linjen, så x=4 och y=1 måste']],
+      [['passa i ekvationen.']]
+    ], 1.05);
+    /* x och y i blått under punktens koordinater, så att det syns
+     * varifrån värdena i raden under kommer */
+    y += 5.6 * F;
+    var yh = y - 3.2 * F, HS = 0.62, LS = 0.66;
+    T.str('Punkten (4, 1) ger', padL, yh, null, HS);
+    function underKoord(fore, koord, lbl) {
+      var c = padL + T.adv(fore, HS) + T.adv(koord, HS) / 2;
+      T.str(lbl, c - T.adv(lbl, LS) / 2, yh + 0.95 * F, BLUE, LS);
+    }
+    T.pause(250);
+    underKoord('Punkten (', '4', 'x');
+    T.pause(150);
+    underKoord('Punkten (4, ', '1', 'y');
+    T.pause(300);
+    xx = T.str('1=−', x0, y);
+    xx = T.fracH('1', '2', xx, y);
+    T.str('·4+m', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En halv gånger 4 är 2.']]
+    ], 1.05);
+    y += 3.0 * F;
+    T.str('1=−2+m', x0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Adderar 2 till båda led, så']],
+      [['att m blir ensamt.']]
+    ]);
+    y = ekvOp(y, '+2', xwFor('1=−2+m'), '1=−2+m');
+    T.str('3=m', x0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu har jag både k och m och']],
+      [['kan skriva ekvationen.']]
+    ]);
+    y += 4.0 * F;
+    T.str('k och m insatta i y=kx+m ger', padL, y - 2.0 * F, null, 0.62);
+    xe = T.str('Svar: y=−', padL, y);
+    xe = T.fracH('1', '2', xe, y);
+    xe = T.str('x+3', xe, y);
+    T.underline(xe, y + 0.85 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: rät vinkel i en triangel (ma1c-4.7 ex 3) -----
+   * A(3, 1), B(7, 3), C(1, 5). k för AB och AC med insättning värde för
+   * värde (ring i punktraden, sedan skrivs värdet), och produkten −1 visar
+   * att vinkeln vid A är rät. "Visa att": ingen svarsrad. */
+  function layoutVinkeltriangel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx;
+    var tanke = mkTanke(T);
+    var x0 = padL + 30;
+
+    tanke(20, [
+      [['Vinkeln vid A är rät om']],
+      [['sidorna AB och AC är']],
+      [['vinkelräta. Jag behöver']],
+      [['deras k-värden.']]
+    ], 0);
+    y = 186;
+    T.str('Hörnen', padL, y - 1.6 * F, null, 0.62);
+    /* punktraden: kolumnerna för varje koordinat sparas för ringarna */
+    var yp = y, cols = {};
+    function koord(namn, t) { var c0 = xx; xx = T.str(t, xx, yp); cols[namn] = [c0, xx]; }
+    xx = T.str('A(', padL, yp); koord('xA', '3'); xx = T.str(', ', xx, yp);
+    koord('yA', '1'); xx = T.str(')   B(', xx, yp); koord('xB', '7');
+    xx = T.str(', ', xx, yp); koord('yB', '3'); xx = T.str(')   C(', xx, yp);
+    koord('xC', '1'); xx = T.str(', ', xx, yp); koord('yC', '5');
+    T.str(')', xx, yp);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Riktningskoefficienten är']],
+      [['skillnaden i y delat med']],
+      [['skillnaden i x.']]
+    ]);
+    y += 3.8 * F;
+    T.str('Riktningskoefficient', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('k=', padL, y);
+    T.fracH('y_2-y_1', 'x_2-x_1', xx, y);
+    T.stepEnd();
+
+    function sattIn(namn, t, x, yb) {
+      var st = T.ring(cols[namn][0], cols[namn][1], yp);
+      T.pause(380);
+      var xe2 = T.str(t, x, yb);
+      T.pause(200);
+      T.fade(st);
+      T.pause(160);
+      return xe2;
+    }
+    /* insättning i k-formeln: y₂ med minustecknet, y₁, x₂ med
+     * minustecknet, x₁ (REGEL 3q i CLAUDE.md) */
+    function insattning(xs, p1, p2, numS, denS, yb) {
+      var ybar = yb - 0.34 * F;
+      var fw = Math.max(T.adv(numS), T.adv(denS)) + 0.3 * F;
+      var parts = numS.split('-'), dparts = denS.split('-');
+      var xn = xs + (fw - T.adv(numS)) / 2, yn = ybar - 0.14 * F;
+      xn = sattIn('y' + p2, parts[0] + '-', xn, yn);
+      sattIn('y' + p1, parts[1], xn, yn);
+      T.line([xs, ybar], [xs + fw, ybar]);
+      T.pause(130);
+      var xd = xs + (fw - T.adv(denS)) / 2, yd = ybar + 1.04 * F;
+      xd = sattIn('x' + p2, dparts[0] + '-', xd, yd);
+      sattIn('x' + p1, dparts[1], xd, yd);
+      return xs + fw + 1.5;
+    }
+
+    /* ---- sidan AB ---- */
+    tanke(y, [
+      [['Sidan AB: A är punkt 1 och']],
+      [['B punkt 2. Jag sätter in']],
+      [['koordinaterna, en i taget.']]
+    ], 1.05);
+    y += 4.2 * F;
+    T.str('Sidan AB', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('k_A_B=', x0, y);
+    xx = insattning(xx, 'A', 'B', '3-1', '7-3', y);
+    T.stepEnd();
+
+    xx = T.str('=', xx, y);
+    xx = T.fracH('2', '4', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Bråket går att förkorta']],
+      [['med 2.']]
+    ], 1.05);
+    xx = T.str('=', xx, y);
+    T.fracH('1', '2', xx, y);
+    T.stepEnd();
+
+    /* ---- sidan AC ---- */
+    tanke(y, [
+      [['Sidan AC: A är punkt 1 och']],
+      [['C punkt 2.']]
+    ], 1.05);
+    y += 4.2 * F;
+    T.str('Sidan AC', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('k_A_C=', x0, y);
+    xx = insattning(xx, 'A', 'C', '5-1', '1-3', y);
+    T.stepEnd();
+
+    xx = T.str('=', xx, y);
+    xx = T.fracH('4', '−2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['4 delat med −2 är −2.']]
+    ], 1.05);
+    T.str('=−2', xx, y);
+    T.stepEnd();
+
+    /* ---- produkten ---- */
+    tanke(y, [
+      [['Är produkten av k-värdena −1?']]
+    ], 1.05);
+    y += 4.2 * F;
+    T.str('Produkten', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('k_A_B·k_A_C=', x0, y);
+    xx = T.fracH('1', '2', xx, y);
+    xx = T.str('·(−2)', xx, y);
+    T.stepEnd();
+
+    xx = T.str('=−1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Produkten är −1. Sidorna AB']],
+      [['och AC är alltså vinkelräta.']]
+    ], 1.05);
+    y += 3.6 * F;
+    xx = T.str('Vinkeln vid A är rät', padL, y);
+    T.underline(xx, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: beräkna funktionsvärden (ma1c-4.8 ex 1) -----
    * f(x) = 5x − 3 med a) f(4), b) f(−2), c) f(3a) och d) f(7) − f(6).
    * Genomgående: det som står inom parentesen ersätter VARJE x. */
   function layoutFunktionsvarde(cfg, F) {
@@ -13220,7 +13546,7 @@
     return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: är graferna funktioner (ma1c-4.7 ex 2) ------
+  /* ---------------- scen: är graferna funktioner (ma1c-4.8 ex 2) ------
    * Pennan gör lodrätta streck genom graferna — "pennprovet". Skär
    * strecket kurvan mer än en gång ger ett x-värde flera y-värden, och
    * då är det ingen funktion. */
@@ -13307,7 +13633,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: läs av funktionsvärden (ma1c-4.7 ex 3) ------
+  /* ---------------- scen: läs av funktionsvärden (ma1c-4.8 ex 3) ------
    * a) f(2), b) f(0) och c) f(x) = 0 ur en uppritad tredjegradskurva.
    * a) och b) går LODRÄTT (x in, y ut) medan c) går VÅGRÄTT (y in, x
    * ut) — den vändningen är hela poängen. */
@@ -13400,7 +13726,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: grafisk ekvationslösning (ma1c-4.8 ex 1) ----
+  /* ---------------- scen: grafisk ekvationslösning (ma1c-4.9 ex 1) ----
    * 3x − 5 = −x + 3. Vänsterled och högerled ritas som var sin linje;
    * lösningen är skärningspunktens x-koordinat. */
   function layoutGrafiskekv(cfg, F) {
@@ -13459,7 +13785,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: grafisk olikhetslösning (ma1c-4.8 ex 2) -----
+  /* ---------------- scen: grafisk olikhetslösning (ma1c-4.9 ex 2) -----
    * −2x + 5 < x − 4. Skärningspunkten ger GRÄNSEN; sedan avgör man på
    * vilken SIDA om den olikheten stämmer, genom att se vilken linje som
    * ligger underst. */
@@ -13528,7 +13854,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: musiktjänsten (ma1c-4.9 ex 1) ---------------
+  /* ---------------- scen: musiktjänsten (ma1c-4.10 ex 1) ---------------
    * y = 50x med definitionsmängd 0 ≤ x ≤ 12. Värdemängden fås genom att
    * sätta in ÄNDPUNKTERNA i definitionsmängden — inte genom att gissa. */
   function layoutMusiktjanst(cfg, F) {
@@ -13582,7 +13908,7 @@
     return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: mängder ur en graf (ma1c-4.9 ex 2) ----------
+  /* ---------------- scen: mängder ur en graf (ma1c-4.10 ex 2) ----------
    * Grafen börjar i en ÖPPEN ring (värdet ingår inte, <) och slutar i
    * en IFYLLD (värdet ingår, ≤). Pennan vandrar med "pennprovet":
    * lodrätt för definitionsmängden, vågrätt för värdemängden. */
@@ -13669,7 +13995,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: kapital som växer (ma1c-4.10 ex 1) ----------
+  /* ---------------- scen: kapital som växer (ma1c-4.11 ex 1) ----------
    * 25 000 kr med 2 % ökning per år. Tabellen visar hur antalet
    * multiplikationer blir EXPONENTEN, och den sista raden generaliserar
    * mönstret till x år. */
@@ -13872,7 +14198,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: potensfunktion (ma1c-4.11 ex 1) -------------
+  /* ---------------- scen: potensfunktion (ma1c-4.12 ex 1) -------------
    * f(x) = x⁴ med a) f(2) och b) ekvationen f(x) = 2. Exponenten är
    * JÄMN, så ekvationen har två lösningar och roten får ±. */
   function layoutPotensfunktion(cfg, F) {
@@ -13934,7 +14260,7 @@
     return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: funktion i funktion (ma1c-4.11 ex 2) --------
+  /* ---------------- scen: funktion i funktion (ma1c-4.12 ex 2) --------
    * f(g(2)) räknas INIFRÅN OCH UT: först g(2), sedan f av det svaret. */
   function layoutFunktionifunktion(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
@@ -58728,6 +59054,9 @@
                    parallell: layoutParallell,
                    allmanform: layoutAllmanform,
                    vertikallinje: layoutVertikallinje,
+                   vinkelkoll: layoutVinkelkoll,
+                   vinkelratlinje: layoutVinkelratlinje,
+                   vinkeltriangel: layoutVinkeltriangel,
                    funktionsvarde: layoutFunktionsvarde,
                    arfunktion: layoutArfunktion,
                    lasavgraf: layoutLasavgraf,

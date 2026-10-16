@@ -185,11 +185,12 @@ eq.
 | ma1c-4.4 | 3.09 | Från graf till ekvation | ☑ | ☑ | ☑ | ☑ |
 | ma1c-4.5 | 3.10 | Räta linjens ekvation | ☑ | ☑ | ☑ | ☑ |
 | ma1c-4.6 | 3.11 | Parallella och vertikala linjer samt allmän form | ☑ | ☑ | ☑ | ☑ |
-| ma1c-4.7 | 3.12 | Funktion och funktionsvärde | ☑ | ☑ | ☑ | ☑ |
-| ma1c-4.8 | 3.13 | Ekvationslösning med grafritande hjälpmedel | ☑ | ☑ | ☑ | ☑ |
-| ma1c-4.9 | 3.14 | Definitionsmängd och värdemängd | ☑ | ☑ | ☑ | ☑ |
-| ma1c-4.10 | 3.15 | Exponentialfunktioner | ☑ | ☑ | ☑ | ☑ |
-| ma1c-4.11 | 3.16 | Potensfunktioner | ☑ | ☑ | ☑ | ☑ |
+| ma1c-4.7 | – | Vinkelräta linjer (överkurs, ingen PDF) | ☑ | ☑ | ☑ | ☑ |
+| ma1c-4.8 | 3.12 | Funktion och funktionsvärde | ☑ | ☑ | ☑ | ☑ |
+| ma1c-4.9 | 3.13 | Ekvationslösning med grafritande hjälpmedel | ☑ | ☑ | ☑ | ☑ |
+| ma1c-4.10 | 3.14 | Definitionsmängd och värdemängd | ☑ | ☑ | ☑ | ☑ |
+| ma1c-4.11 | 3.15 | Exponentialfunktioner | ☑ | ☑ | ☑ | ☑ |
+| ma1c-4.12 | 3.16 | Potensfunktioner | ☑ | ☑ | ☑ | ☑ |
 
 ### Kapitel 5 — Statistik och sannolikhetslära
 | id | PDF | Titel | T | Ö | E | K |

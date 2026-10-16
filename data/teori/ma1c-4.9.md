@@ -1,128 +1,134 @@
 ---
 id: ma1c-4.9
-title: Definitionsmängd och värdemängd
+title: Ekvationslösning med grafritande hjälpmedel
 course: Matematik nivå 1c
 chapter: Räta linjer och funktioner
 chapterNumber: 4
 section: '4.9'
 ---
 
-# Definitionsmängd och värdemängd
+# Ekvationslösning med grafritande hjälpmedel
 
-Möjliga värden på den
+Vi kan lösa ekvationer med hjälp av grafer med grafritande hjälpmedel,
+till exempel GeoGebra. Vi gör då en **grafisk lösning**.
 
-- **oberoende variabeln**, oftast $x$, kallas **definitionsmängd**
-- **beroende variabeln**, oftast $y$, kallas **värdemängd**.
+::: formel "Lösa ekvationer med grafritande hjälpmedel"
+Vi har en ekvation VL = HL.
 
-När vi anger definitions- och värdemängd utifrån en graf är det viktigt
-att titta på hur grafens ändpunkter är markerade. En
+1. Rita upp ekvationerna $y = \mathrm{VL}$ och $y = \mathrm{HL}$ i
+   GeoGebra.
+2. Ta fram skärningspunkten och läs av dess *x*-koordinat. Detta är
+   lösningen!
+:::
 
-- **ifylld ring** betyder att ändpunkten *ingår* i intervallet (markeras
-  med ≤ eller ≥)
-- **tom ring** betyder att ändpunkten *inte* ingår i intervallet (markeras
-  med < eller >).
-
-::: exempel "Exempel 1 — Musiktjänsten"
-**En musiktjänst kostar 50 kr/månad. Erbjudandet gäller max 1 år.
-Kostnaden $y$ kr för $x$ månader kan då skrivas $y = 50x$. Bestäm
-funktionens<br>a) definitionsmängd&emsp;&emsp;b) värdemängd.**
+::: exempel "Exempel 1 — Grafisk lösning av en ekvation"
+**Lös med grafritande hjälpmedel ekvationen $3x - 5 = -x + 3$.**
 
 ::: handskrift
-typ: musiktjanst
+typ: grafiskekv
 :::
 
 ::: textlosning
-**a)** Antalet månader vi betalar detta pris för tjänsten $x$ kan variera
-från minst 0 till högst 12 månader. (Vi kan inte betala för tjänsten ett
-negativt antal månader och priset gäller endast i 12 månader.)
+VL = $3x - 5$ och HL = $-x + 3$.
 
-**Svar:** $0 \leq x \leq 12$
-
-**b)** I a-uppgiften fick vi att definitionsmängden var
-$0 \leq x \leq 12$. Det *minsta* värdet på $y$ (kostnaden) får vi då
-$x = 0$, det vill säga då vi inte köper musiktjänsten alls:
-
-$$
-y(0) = 50 \cdot 0 = 0\ \mathrm{kr}
-$$
-
-Det *största* värdet på $y$ får vi då $x = 12$:
-
-$$
-y(12) = 50 \cdot 12 = 600\ \mathrm{kr}
-$$
-
-Så värdet på $y$ kan vara mellan 0 och 600 kr.
-
-**Svar:** $0 \leq y \leq 600$
-:::
-:::
-
-::: exempel "Exempel 2 — Ur en graf"
-**Bestäm definitions- och värdemängd till nedanstående funktion.**
+Vi öppnar GeoGebra och ritar $y = 3x - 5$ och $y = -x + 3$. Vi får
+nedanstående grafer:
 
 ::: figur
-<svg viewBox="-26 -20 224 211" width="304" height="286" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En kurvbåge som börjar med en tom ring i punkten minus 1 komma 3, stiger till en topp i 0 komma 4 och faller till en ifylld punkt i 2 komma 0."><line x1="25.2" y1="0.0" x2="25.2" y2="182.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="67.2" y1="0.0" x2="67.2" y2="182.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="109.2" y1="0.0" x2="109.2" y2="182.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="151.2" y1="0.0" x2="151.2" y2="182.4" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="163.2" x2="176.4" y2="163.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="131.2" x2="176.4" y2="131.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="99.2" x2="176.4" y2="99.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="67.2" x2="176.4" y2="67.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="35.2" x2="176.4" y2="35.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="3.2" x2="176.4" y2="3.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="163.2" x2="184.4" y2="163.2" stroke="#1f2530" stroke-width="1.6"/><polygon points="192.4,163.2 182.4,158.7 182.4,167.7" fill="#1f2530"/><line x1="67.2" y1="182.4" x2="67.2" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="67.2,-16.0 62.7,-6.0 71.7,-6.0" fill="#1f2530"/><text x="190.4" y="181.2" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="76.2" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="25.2" y="179.2" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="109.2" y="179.2" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="151.2" y="179.2" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="61.2" y="135.2" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="61.2" y="103.2" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="61.2" y="71.2" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="61.2" y="39.2" font-size="12" text-anchor="end" fill="#1f2530">4</text><text x="61.2" y="7.2" font-size="12" text-anchor="end" fill="#1f2530">5</text><path d="M25.2,67.2 L26.5,65.3 L27.7,63.5 L29.0,61.7 L30.2,60.0 L31.5,58.3 L32.8,56.7 L34.0,55.2 L35.3,53.7 L36.5,52.3 L37.8,50.9 L39.1,49.6 L40.3,48.3 L41.6,47.1 L42.8,46.0 L44.1,44.9 L45.4,43.9 L46.6,42.9 L47.9,42.0 L49.1,41.1 L50.4,40.3 L51.7,39.6 L52.9,38.9 L54.2,38.3 L55.4,37.7 L56.7,37.2 L58.0,36.7 L59.2,36.4 L60.5,36.0 L61.7,35.7 L63.0,35.5 L64.3,35.4 L65.5,35.3 L66.8,35.2 L68.0,35.2 L69.3,35.3 L70.6,35.4 L71.8,35.6 L73.1,35.8 L74.3,36.1 L75.6,36.5 L76.9,36.9 L78.1,37.4 L79.4,37.9 L80.6,38.5 L81.9,39.1 L83.2,39.8 L84.4,40.6 L85.7,41.4 L86.9,42.3 L88.2,43.2 L89.5,44.2 L90.7,45.2 L92.0,46.3 L93.2,47.5 L94.5,48.7 L95.8,50.0 L97.0,51.3 L98.3,52.7 L99.5,54.2 L100.8,55.7 L102.1,57.2 L103.3,58.9 L104.6,60.5 L105.8,62.3 L107.1,64.1 L108.4,65.9 L109.6,67.8 L110.9,69.8 L112.1,71.8 L113.4,73.9 L114.7,76.1 L115.9,78.3 L117.2,80.5 L118.4,82.8 L119.7,85.2 L121.0,87.6 L122.2,90.1 L123.5,92.7 L124.7,95.3 L126.0,97.9 L127.3,100.6 L128.5,103.4 L129.8,106.2 L131.0,109.1 L132.3,112.1 L133.6,115.1 L134.8,118.1 L136.1,121.3 L137.3,124.4 L138.6,127.7 L139.9,131.0 L141.1,134.3 L142.4,137.7 L143.6,141.2 L144.9,144.7 L146.2,148.3 L147.4,151.9 L148.7,155.6 L149.9,159.4 L151.2,163.2" fill="none" stroke="#2563c9" stroke-width="2.2"/><circle cx="25.2" cy="67.2" r="5" fill="#f7f2e8" stroke="#2563c9" stroke-width="2"/><circle cx="151.2" cy="163.2" r="5" fill="#2563c9"/></svg>
+<svg viewBox="-26 -20 219 204" width="297" height="277" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Två räta linjer i ett koordinatsystem: den gröna y lika med 3x minus 5 stiger brant, den röda y lika med minus x plus 3 faller. De korsas nära punkten 2 komma 1."><line x1="3.0" y1="0.0" x2="3.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="33.0" y1="0.0" x2="33.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="63.0" y1="0.0" x2="63.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="93.0" y1="0.0" x2="93.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="123.0" y1="0.0" x2="123.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="153.0" y1="0.0" x2="153.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="156.8" x2="171.0" y2="156.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="128.8" x2="171.0" y2="128.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="100.8" x2="171.0" y2="100.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="72.8" x2="171.0" y2="72.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="44.8" x2="171.0" y2="44.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="16.8" x2="171.0" y2="16.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="128.8" x2="179.0" y2="128.8" stroke="#1f2530" stroke-width="1.6"/><polygon points="187.0,128.8 177.0,124.3 177.0,133.3" fill="#1f2530"/><line x1="33.0" y1="173.6" x2="33.0" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="33.0,-16.0 28.5,-6.0 37.5,-6.0" fill="#1f2530"/><text x="185.0" y="146.8" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="42.0" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="3.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="63.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="93.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="123.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="153.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="27.0" y="160.8" font-size="12" text-anchor="end" fill="#1f2530">−1</text><text x="27.0" y="104.8" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="27.0" y="76.8" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="27.0" y="48.8" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="27.0" y="20.8" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="67.0" y1="173.6" x2="129.0" y2="0.0" stroke="#4a7d3a" stroke-width="2"/><line x1="0.0" y1="14.0" x2="171.0" y2="173.6" stroke="#c8324a" stroke-width="2"/></svg>
+
+Grön linje: $y = 3x - 5$. Röd linje: $y = -x + 3$.
 :::
 
+Vi tar fram skärningspunkten med verktyget *Skärning mellan två objekt*
+(eller verktyget *Punkt*) och klickar på linjerna. Skärningspunkten
+markeras och vi kan läsa av dess koordinater:
+
+::: figur
+<svg viewBox="-26 -20 219 204" width="297" height="277" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Samma linjer med skärningspunkten 2 komma 1 markerad: lösningen till ekvationen är x lika med 2."><line x1="3.0" y1="0.0" x2="3.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="33.0" y1="0.0" x2="33.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="63.0" y1="0.0" x2="63.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="93.0" y1="0.0" x2="93.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="123.0" y1="0.0" x2="123.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="153.0" y1="0.0" x2="153.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="156.8" x2="171.0" y2="156.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="128.8" x2="171.0" y2="128.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="100.8" x2="171.0" y2="100.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="72.8" x2="171.0" y2="72.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="44.8" x2="171.0" y2="44.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="16.8" x2="171.0" y2="16.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="128.8" x2="179.0" y2="128.8" stroke="#1f2530" stroke-width="1.6"/><polygon points="187.0,128.8 177.0,124.3 177.0,133.3" fill="#1f2530"/><line x1="33.0" y1="173.6" x2="33.0" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="33.0,-16.0 28.5,-6.0 37.5,-6.0" fill="#1f2530"/><text x="185.0" y="146.8" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="42.0" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="3.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="63.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="93.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="123.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="153.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="27.0" y="160.8" font-size="12" text-anchor="end" fill="#1f2530">−1</text><text x="27.0" y="104.8" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="27.0" y="76.8" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="27.0" y="48.8" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="27.0" y="20.8" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="67.0" y1="173.6" x2="129.0" y2="0.0" stroke="#4a7d3a" stroke-width="2"/><line x1="0.0" y1="14.0" x2="171.0" y2="173.6" stroke="#c8324a" stroke-width="2"/><circle cx="93.0" cy="100.8" r="3.8" fill="#2563c9"/><text x="102.0" y="93.8" font-size="13" text-anchor="start" fill="#2563c9">(2, 1)</text></svg>
+:::
+
+Vi ser att skärningspunktens *x*-koordinat är 2, så lösningen är $x = 2$.
+
+**Svar:** $x = 2$
+:::
+:::
+
+::: exempel "Exempel 2 — Grafisk lösning av en olikhet"
+**Lös olikheten $-2x + 5 < x - 4$.**
+
 ::: handskrift
-typ: mangderurgraf
+typ: grafiskolikhet
 :::
 
 ::: textlosning
-Vi börjar med att bestämma definitionsmängden som står för tillåtna
-*x*-värden. Vi tittar var grafen börjar på *x*-axeln (håll till exempel en penna
-lodrätt och vandra från vänster till höger och stanna när du stöter på
-grafen). Grafen startar vid $x = -1$. Ringen är inte ifylld, vilket
-medför att $x > -1$.
+Vi gör på motsvarande sätt som med en ekvation och ritar upp graferna
+$y = -2x + 5$ och $y = x - 4$ (vi sätter "$y$ =" före vänster och höger
+led). Vi markerar därefter skärningspunkten:
 
-Titta sedan var grafen slutar på *x*-axeln (håll pennan lodrät och vandra
-från höger till vänster och stanna när du stöter på grafen). Grafen
-slutar vid $x = 2$. Ringen är ifylld, vilket medför att $x \leq 2$.
+::: figur
+<svg viewBox="-26 -20 264 204" width="358" height="277" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Den röda linjen y lika med minus 2x plus 5 och den gröna linjen y lika med x minus 4 skär varandra i punkten 3 komma minus 1, som är markerad."><line x1="18.0" y1="0.0" x2="18.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="48.0" y1="0.0" x2="48.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="78.0" y1="0.0" x2="78.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="108.0" y1="0.0" x2="108.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="138.0" y1="0.0" x2="138.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="168.0" y1="0.0" x2="168.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="198.0" y1="0.0" x2="198.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="171.6" x2="216.0" y2="171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="145.6" x2="216.0" y2="145.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="119.6" x2="216.0" y2="119.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="93.6" x2="216.0" y2="93.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="67.6" x2="216.0" y2="67.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="41.6" x2="216.0" y2="41.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="15.6" x2="216.0" y2="15.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="93.6" x2="224.0" y2="93.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="232.0,93.6 222.0,89.1 222.0,98.1" fill="#1f2530"/><line x1="18.0" y1="174.2" x2="18.0" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="18.0,-16.0 13.5,-6.0 22.5,-6.0" fill="#1f2530"/><text x="230.0" y="111.6" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="27.0" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="48.0" y="109.6" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="78.0" y="109.6" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="108.0" y="109.6" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="138.0" y="109.6" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="168.0" y="109.6" font-size="12" text-anchor="middle" fill="#1f2530">5</text><text x="198.0" y="109.6" font-size="12" text-anchor="middle" fill="#1f2530">6</text><text x="12.0" y="175.6" font-size="12" text-anchor="end" fill="#1f2530">−3</text><text x="12.0" y="149.6" font-size="12" text-anchor="end" fill="#1f2530">−2</text><text x="12.0" y="123.6" font-size="12" text-anchor="end" fill="#1f2530">−1</text><text x="12.0" y="71.6" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="12.0" y="45.6" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="12.0" y="19.6" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="39.0" y1="0.0" x2="139.5" y2="174.2" stroke="#c8324a" stroke-width="2"/><line x1="45.0" y1="174.2" x2="216.0" y2="26.0" stroke="#4a7d3a" stroke-width="2"/><circle cx="108.0" cy="119.6" r="3.8" fill="#2563c9"/></svg>
 
-**Definitionsmängden är alltså $-1 < x \leq 2$.**
-
-Vi bestämmer nu värdemängden som står för tillåtna *y-värden*. Vi tittar
-var grafen börjar på *y*-axeln (håll pennan vågrätt och vandra nerifrån och
-upp och stanna när du stöter på grafen). Grafen startar vid $y = 0$.
-Punkten där är ifylld, vilket medför att $y \geq 0$.
-
-Titta var grafen slutar på *y*-axeln (håll pennan vågrät och vandra
-uppifrån och ned och stanna när du stöter på grafen). Grafen slutar vid
-$y = 4$ (toppen ligger på kurvan), vilket medför att $y \leq 4$.
-
-**Värdemängden är alltså $0 \leq y \leq 4$.**
-
-**Svar:** Definitionsmängd: $-1 < x \leq 2$ och värdemängd:
-$0 \leq y \leq 4$
+Röd linje: $y = -2x + 5$. Grön linje: $y = x - 4$. Skärningspunkten
+ligger i (3, −1).
 :::
+
+Vi ska nu avgöra när $-2x + 5$ är MINDRE ÄN $x - 4$.
+
+$-2x + 5$ är MINDRE ÄN $x - 4$ när linjen $y = -2x + 5$ ligger *under*
+linjen $y = x - 4$. Det gör den *till höger* om skärningspunkten, det vill säga
+när $x > 3$.
+
+**Svar:** $x > 3$
+:::
+:::
+
+::: härledning "GeoGebra — Tips"
+**Decimaltal**
+
+Decimaltal i GeoGebra skrivs med punkt (.) istället för decimalkomma (,).
+Om du ska rita upp linjen $y = 7{,}5x + 3$ i GeoGebra ska du alltså
+skriva `y = 7.5x + 3`. Observera skillnaden: **7,5 skrivs 7.5**.
+
+**Variabler**
+
+I grafiska lösningar "förstår" GeoGebra bara variablerna $x$ och $y$. Om
+vi till exempel vill skriva in ekvationen $y = 13t + 5$ behöver vi byta ut
+variabeln $t$ mot $x$ och skriva in det vänstra ledet som $y = 13x + 5$:
+**$y = 13t + 5$ skrivs `y = 13x + 5`**.
 :::
 
 ::: sammanfattning "Sammanfattning"
 
-::: sampunkt "De två mängderna"
-- **Definitionsmängd**: alla möjliga värden på den **oberoende**
-  variabeln, oftast $x$.
-- **Värdemängd**: alla möjliga värden på den **beroende** variabeln,
-  oftast $y$.
+::: sampunkt "Grafisk lösning"
+1. Rita $y = \mathrm{VL}$ och $y = \mathrm{HL}$ som varsin graf.
+2. Ta fram **skärningspunkten**.
+3. Skärningspunktens **$x$-koordinat** är lösningen.
 :::
 
-::: sampunkt "Ur ett sammanhang"
-- Verkligheten sätter gränserna. En musiktjänst för högst ett år ger
-  $0 \leq x \leq 12$.
-- Räkna ut motsvarande $y$-värden i ändpunkterna för att få värdemängden,
-  här $0 \leq y \leq 600$.
+::: sampunkt "Olikheter grafiskt"
+- Rita båda leden på samma sätt.
+- Avläs **vilket intervall** där den ena grafen ligger över eller under
+  den andra.
+- $-2x + 5 < x - 4$ har skärningen i $x = 3$, och svaret blir
+  $x > 3$.
 :::
 
-::: sampunkt "Ur en graf: titta på ringarna"
-- **Ifylld ring**: ändpunkten **ingår**. Skriv $\leq$ eller $\geq$.
-- **Tom ring**: ändpunkten ingår **inte**. Skriv $<$ eller $>$.
+::: sampunkt "GeoGebra: decimaltal"
+- Skriv **punkt** i stället för decimalkomma.
+- $y = 7{,}5x + 3$ skrivs `y = 7.5x + 3`.
 :::
 
-::: sampunkt "Så läser du av"
-- Definitionsmängden läses av i **sidled**, alltså hur långt grafen
-  sträcker sig åt vänster och höger.
-- Värdemängden läses av i **höjdled**, alltså hur lågt och hur högt grafen
-  når.
+::: sampunkt "GeoGebra: variabler"
+- Programmet förstår bara $x$ och $y$ i grafiska lösningar.
+- $y = 13t + 5$ måste skrivas `y = 13x + 5`.
+- Kom ihåg att **tolka tillbaka** svaret till den ursprungliga variabeln.
+:::
+
+::: sampunkt "Redovisning"
+- Skriv alltid ut **vad du gjorde**: vilka grafer du ritade och var de
+  skar varandra.
+- En avläst skärningspunkt är ett fullgott svar, men motiveringen måste
+  finnas.
 :::
 :::

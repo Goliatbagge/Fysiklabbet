@@ -387,7 +387,7 @@ window.NP_PROV['ma2c-vt2018'] = {
 
         {
             nr: 8, del: 'B', poang: [0, 0, 1], omrade: 'Exponentialfunktion: byte av tidsenhet',
-            genomgangar: ['ma2c-5.5', 'ma1c-3.3', 'ma1c-4.10'],
+            genomgangar: ['ma2c-5.5', 'ma1c-3.3', 'ma1c-4.11'],
             endastSvar: true,
             fraga: 'Emil "HeatoN" Christensen, en känd e-sportare, köpte i början av år 2017 ' +
                 'en speldator för 32 997 kr. Han räknar med att den procentuella minskningen ' +
@@ -576,7 +576,7 @@ window.NP_PROV['ma2c-vt2018'] = {
 
         {
             nr: 12, del: 'C', poang: [0, 2, 0], omrade: 'Räta linjen: bestäm funktionen',
-            genomgangar: ['ma1c-4.5', 'ma1c-4.7'],
+            genomgangar: ['ma1c-4.5', 'ma1c-4.8'],
             fraga: 'För funktionen $f$, där $y = f(x)$, gäller att\n\n' +
                 '* grafen till $f$ är en rät linje med riktningskoefficienten $4$\n' +
                 '* $f(6) = 9$\n\n' +

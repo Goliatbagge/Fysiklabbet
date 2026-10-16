@@ -3631,15 +3631,19 @@
                                                     e.preventDefault();
                                                     pickSection(s.num);
                                                 }}>
-                                                <span className="lab-section-item-num">{s.num}{s.fordjupning ? '*' : ''}</span>
+                                                <span className="lab-section-item-num">{s.num}{(s.fordjupning || s.overkurs) ? '*' : ''}</span>
                                                 <span className="lab-section-item-title">{emTitle(s.title)}</span>
                                                 <span className="lab-section-item-arrow">
                                                     {section === s.num ? '●' : '→'}
                                                 </span>
                                             </a>
                                         ))}
-                                        {sections.some(s => s.fordjupning) && (
-                                            <div className="lab-sections-fotnot">* Fördjupning</div>
+                                        {sections.some(s => s.fordjupning || s.overkurs) && (
+                                            <div className="lab-sections-fotnot">
+                                                {'* ' + [sections.some(s => s.fordjupning) && 'Fördjupning',
+                                                         sections.some(s => s.overkurs) && 'Överkurs']
+                                                        .filter(Boolean).join(', ')}
+                                            </div>
                                         )}
                                         <div className="lab-sections-aside-foot" />
                                     </aside>
@@ -3649,14 +3653,14 @@
                                             <React.Fragment>
                                                 <div className="lab-section-content-head">
                                                     <span className="lab-mono-label">
-                                                        Kapitel {chapterNumber} · {(chapter || '').toUpperCase()} · Avsnitt {activeSection.num}{activeSection.fordjupning ? ' · Fördjupning' : ''}
+                                                        Kapitel {chapterNumber} · {(chapter || '').toUpperCase()} · Avsnitt {activeSection.num}{activeSection.fordjupning ? ' · Fördjupning' : activeSection.overkurs ? ' · Överkurs' : ''}
                                                     </span>
                                                     <span className="lab-mono-label">
                                                         {sectionIdx + 1} / {sections.length}
                                                     </span>
                                                 </div>
                                                 <h2 className="lab-section-title">
-                                                    <span className="lab-section-title-num">{activeSection.num}{activeSection.fordjupning ? '*' : ''}</span>
+                                                    <span className="lab-section-title-num">{activeSection.num}{(activeSection.fordjupning || activeSection.overkurs) ? '*' : ''}</span>
                                                     {emTitle(activeSection.title)}
                                                 </h2>
 

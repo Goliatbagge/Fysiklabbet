@@ -802,7 +802,7 @@ när en genomgång byggs om från en ny PDF i `Genomgångar/`):
 identiska med nivå 1c och lagras bara EN gång, i ma1c-filerna.** Kursen
 byggs programmatiskt av `MA1B_SPEC` i slutet av `data/katalog.js`, som
 också genererar aliaskartan `window.MA1B_ALIAS` (`ma1b-id → ma1c-id`,
-t.ex. `ma1b-4.6 → ma1c-4.7` — numreringen SKILJER sig där avsnitt
+t.ex. `ma1b-4.6 → ma1c-4.8` — numreringen SKILJER sig där avsnitt
 tagits bort eller lagts till). Sidorna (`katalog.html`) speglar teori,
 övningar, exit tickets och visualiseringar via kartan vid sidladdning.
 
@@ -820,8 +820,9 @@ tagits bort eller lagts till). Sidorna (`katalog.html`) speglar teori,
   gemensamt kapitelinnehåll i `ma1c-3.S`/`4.S`/`5.S` ska samma ändring
   göras i ma1b-versionen (en kommentar i filerna påminner).
 - **Skillnaderna mot 1c** (styrs helt av `MA1B_SPEC`): kapitel 6
-  (Trigonometri + vektorer) och 1c-avsnittet 4.6 (Parallella och
-  vertikala linjer samt allmän form) ingår inte; 3.4 KPI och index samt
+  (Trigonometri + vektorer) och 1c-avsnitten 4.6 (Parallella och
+  vertikala linjer samt allmän form) och 4.7 (Vinkelräta linjer, överkurs)
+  ingår inte; 3.4 KPI och index samt
   5.1 Tolka och granska tabeller och diagram är egna 1b-avsnitt;
   efterföljande avsnitt är omnumrerade.
 - **Nytt/borttaget avsnitt i 1b?** Redigera ENDAST `MA1B_SPEC` (ordning,

@@ -829,10 +829,10 @@
                             {' · '}
                             KAPITEL {meta.chapterNumber} · {chapterLabel}
                             {' · '}
-                            AVSNITT {meta.num}{meta.fordjupning ? ' · FÖRDJUPNING' : ''}
+                            AVSNITT {meta.num}{meta.fordjupning ? ' · FÖRDJUPNING' : meta.overkurs ? ' · ÖVERKURS' : ''}
                         </div>
                         <h1 className="lab-article-title">
-                            <span className="lab-article-title-num">{meta.num}{meta.fordjupning ? '*' : ''}</span>
+                            <span className="lab-article-title-num">{meta.num}{(meta.fordjupning || meta.overkurs) ? '*' : ''}</span>
                             {emTitle(meta.title)}
                         </h1>
                         {meta.description && (
@@ -868,11 +868,11 @@
                         {' · '}
                         KAPITEL {meta.chapterNumber} · {chapterLabel}
                         {' · '}
-                        AVSNITT {meta.num}{meta.fordjupning ? ' · FÖRDJUPNING' : ''}
+                        AVSNITT {meta.num}{meta.fordjupning ? ' · FÖRDJUPNING' : meta.overkurs ? ' · ÖVERKURS' : ''}
                     </div>
 
                     <h1 className="lab-article-title">
-                        <span className="lab-article-title-num">{meta.num}{meta.fordjupning ? '*' : ''}</span>
+                        <span className="lab-article-title-num">{meta.num}{(meta.fordjupning || meta.overkurs) ? '*' : ''}</span>
                         {emTitle(fm.title || meta.title)}
                     </h1>
 

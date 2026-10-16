@@ -23,7 +23,8 @@
  *           snettkast, skjutochslapp, kanonvagn, galton, kalkylblad,
  *           kopplade-fjadrar, lodlinje, hjulprojektion, svangningsgrafer,
  *           periodtid (fy2-2.4: m, k och A mot periodtiden),
- *           stegkast (fy2-1.9: kaströrelsen med stegmetoden)
+ *           stegkast (fy2-1.9: kaströrelsen med stegmetoden),
+ *           vinkelrata (ma1c-4.7: lutningstrappan vrids ett kvarts varv)
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -11936,6 +11937,301 @@
         rita();
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: vinkelrata
+    // ══════════════════════════════════════════════════════════════════════
+    // ma1c-4.7 (Vinkelräta linjer, överkurs): en blå linje genom punkten
+    // P = (3, 2) med lutningstrappan 1 steg åt höger och k₁ steg upp. Samma
+    // trappa vriden ett kvarts varv moturs kring P ligger på den gröna,
+    // vinkelräta linjen: 1 steg upp och k₁ steg åt vänster, så att
+    // k₂ = −1/k₁. Eleven väljer k₁ med glidaren eller genom att dra i den
+    // blå linjen; "Vrid trappan 90°" låter en kopia av den blå trappan
+    // svänga över till den gröna linjen. k₁ = 0 visar undantaget: den gröna
+    // linjen blir lodrät och saknar k-värde. Etiketterna vid trappornas
+    // steg vrids med trappan, så att de aldrig hamnar på den andra linjen.
+    function buildVinkelrata(node, cfg) {
+        var INK = '#1f2530', BLA = '#2563c9', GRON = '#3f7a2e', ORANGE = '#b8531f';
+        var GRID = 'rgba(31,37,48,0.15)';
+        var U = 40, XMIN = -1, XMAX = 7, YMIN = -2, YMAX = 6, PX = 3, PY = 2;
+        // k₁-värden som glidaren stegar mellan (täljare, nämnare). Listan är
+        // sluten under k → −1/k, så att även k₂ alltid är ett "snällt" bråk.
+        var KV = [[-3, 1], [-2, 1], [-3, 2], [-1, 1], [-2, 3], [-1, 2], [-1, 3], [0, 1],
+                  [1, 3], [1, 2], [2, 3], [1, 1], [3, 2], [2, 1], [3, 1]];
+        var ix = 13;                 // k₁ = 2 från början
+        var visaTrappor = true, visaGron = true;
+        var vrid = -1;               // −1: ingen vridning pågår, annars 0…1
+        var rafId = 0;
+
+        function X(x) { return (x - XMIN) * U; }
+        function Y(y) { return (YMAX - y) * U; }
+        function r1(v) { return Math.round(v * 10) / 10; }
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function minus(s) { return String(s).replace('-', '−'); }
+        function kVal(i) { return KV[i][0] / KV[i][1]; }
+        function ln(x1, y1, x2, y2, col, w, extra) {
+            return '<line x1="' + r1(x1) + '" y1="' + r1(y1) + '" x2="' + r1(x2) + '" y2="' + r1(y2) +
+                '" stroke="' + col + '" stroke-width="' + w + '"' + (extra || '') + '/>';
+        }
+        // Bråk i SVG: täljare över nämnare med rakt streck, centrerat i (cx, cy)
+        function svgTal(n, d, cx, cy, col, fs) {
+            if (d === 1) {
+                return '<text x="' + r1(cx) + '" y="' + r1(cy + fs * 0.36) + '" font-size="' + fs +
+                    '" text-anchor="middle" fill="' + col + '">' + n + '</text>';
+            }
+            var f = fs * 0.82, w = f * 0.62 + 6;
+            return '<text x="' + r1(cx) + '" y="' + r1(cy - 3) + '" font-size="' + f + '" text-anchor="middle" fill="' + col + '">' + n + '</text>' +
+                ln(cx - w / 2, cy, cx + w / 2, cy, col, 1.3) +
+                '<text x="' + r1(cx) + '" y="' + r1(cy + f * 0.78 + 2) + '" font-size="' + f + '" text-anchor="middle" fill="' + col + '">' + d + '</text>';
+        }
+        // HTML-bråk för avläsningen
+        function htmlTal(n, d, neg) {
+            var t = neg ? '−' : '';
+            if (d === 1) return t + n;
+            return t + '<span style="display:inline-flex;flex-direction:column;align-items:center;' +
+                'vertical-align:middle;line-height:1.05;font-size:0.92em;margin:0 1px">' +
+                '<span style="padding:0 2px">' + n + '</span>' +
+                '<span style="border-top:1.5px solid currentColor;padding:0 2px">' + d + '</span></span>';
+        }
+
+        // ── Fast bakgrund: rutnät, axlar, skalvärden ───────────────────────
+        var bas = '', x, y;
+        for (x = XMIN; x <= XMAX; x++) bas += ln(X(x), Y(YMAX), X(x), Y(YMIN), GRID, 1);
+        for (y = YMIN; y <= YMAX; y++) bas += ln(X(XMIN), Y(y), X(XMAX), Y(y), GRID, 1);
+        bas += ln(X(XMIN), Y(0), X(XMAX) + 6, Y(0), INK, 1.6) +
+            '<polygon points="' + (X(XMAX) + 16) + ',' + Y(0) + ' ' + (X(XMAX) + 6) + ',' + (Y(0) - 4.5) + ' ' +
+            (X(XMAX) + 6) + ',' + (Y(0) + 4.5) + '" fill="' + INK + '"/>';
+        bas += ln(X(0), Y(YMIN), X(0), Y(YMAX) - 6, INK, 1.6) +
+            '<polygon points="' + X(0) + ',' + (Y(YMAX) - 16) + ' ' + (X(0) - 4.5) + ',' + (Y(YMAX) - 6) + ' ' +
+            (X(0) + 4.5) + ',' + (Y(YMAX) - 6) + '" fill="' + INK + '"/>';
+        bas += '<text x="' + (X(XMAX) + 14) + '" y="' + (Y(0) + 19) + '" font-size="15" text-anchor="end" fill="' + INK + '">' + it('x') + '</text>';
+        bas += '<text x="' + (X(0) + 9) + '" y="' + (Y(YMAX) - 6) + '" font-size="15" fill="' + INK + '">' + it('y') + '</text>';
+        for (x = XMIN; x <= XMAX - 1; x++) {
+            if (x === 0) continue;
+            bas += '<text x="' + X(x) + '" y="' + (Y(0) + 16) + '" font-size="12" text-anchor="middle" fill="' + INK + '">' + minus(x) + '</text>';
+        }
+        for (y = YMIN; y <= YMAX - 1; y++) {
+            if (y === 0) continue;
+            bas += '<text x="' + (X(0) - 6) + '" y="' + (Y(y) + 4) + '" font-size="12" text-anchor="end" fill="' + INK + '">' + minus(y) + '</text>';
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var W = X(XMAX) + 22, H = Y(YMIN);
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="-22 -24 ' + (W + 22) + ' ' + (H + 30) + '" width="593" height="' +
+            Math.round(593 * (H + 30) / (W + 22)) + '" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="Ett koordinatsystem med en blå linje och en grön linje som skär varandra i rät vinkel i punkten (3, 2). ' +
+            'Den blå linjens trappsteg går 1 steg åt höger och k1 steg upp. Samma trappsteg vridet ett kvarts varv ligger på den gröna linjen: ' +
+            '1 steg upp och k1 steg åt vänster.">' +
+            '<defs><clipPath id="ms-vr-klipp-' + (++vrRaknare) + '"><rect x="' + X(XMIN) + '" y="' + Y(YMAX) + '" width="' +
+            (X(XMAX) - X(XMIN)) + '" height="' + (Y(YMIN) - Y(YMAX)) + '"/></clipPath></defs>' +
+            bas + '<g class="ms-vr-dyn"></g>' +
+            '<rect x="' + X(XMIN) + '" y="' + Y(YMAX) + '" width="' + (X(XMAX) - X(XMIN)) + '" height="' + (Y(YMIN) - Y(YMAX)) +
+            '" fill="transparent" class="ms-vr-drag" style="cursor:grab;touch-action:pan-y"/></svg>';
+        var klippId = 'ms-vr-klipp-' + vrRaknare;
+        var dyn = scene.querySelector('.ms-vr-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, (W + 22) / (H + 30), 200);
+
+        var info = document.createElement('div');
+        info.className = 'minisim-info';
+        info.style.fontSize = '15px';
+        info.style.lineHeight = '1.9';
+        info.style.color = INK;
+        card.appendChild(info);
+
+        var rad = document.createElement('div');
+        rad.className = 'minisim-slider-row';
+        var sLbl = document.createElement('span');
+        sLbl.className = 'minisim-slider-lbl';
+        sLbl.textContent = 'Blå linjens lutning';
+        var slider = document.createElement('input');
+        slider.type = 'range';
+        slider.className = 'minisim-slider';
+        slider.min = '0';
+        slider.max = String(KV.length - 1);
+        slider.step = '1';
+        slider.value = String(ix);
+        slider.setAttribute('aria-label', 'Den blå linjens riktningskoefficient k1');
+        var sVal = document.createElement('span');
+        sVal.className = 'minisim-slider-val';
+        rad.appendChild(sLbl);
+        rad.appendChild(slider);
+        rad.appendChild(sVal);
+        card.appendChild(rad);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var vridBtn = document.createElement('button');
+        vridBtn.type = 'button';
+        vridBtn.className = 'minisim-btn ms-primar';
+        vridBtn.textContent = 'Vrid trappan 90°';
+        controls.appendChild(vridBtn);
+        function mkCheck(txt, on) {
+            var l = document.createElement('label');
+            l.className = 'minisim-check';
+            var cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.checked = on;
+            l.appendChild(cb);
+            l.appendChild(document.createTextNode(txt));
+            controls.appendChild(l);
+            return cb;
+        }
+        var trCb = mkCheck('Visa trappstegen', true);
+        var grCb = mkCheck('Visa den vinkelräta linjen', true);
+        card.appendChild(controls);
+        node.appendChild(card);
+
+        // ── Ritning ───────────────────────────────────────────────────────
+        // Linjen genom P i riktningen (dx, dy), klippt till rutnätet
+        function linje(dx, dy, col, w, extra) {
+            var L = 30 / Math.hypot(dx, dy);
+            return ln(X(PX - dx * L), Y(PY - dy * L), X(PX + dx * L), Y(PY + dy * L), col, w,
+                (extra || '') + ' clip-path="url(#' + klippId + ')"');
+        }
+        // Trappan i lokala koordinater (a = steget längs, b = steget upp),
+        // vriden vinkeln v (rad, moturs) kring P. Etiketterna vrids med.
+        function rot(p, v) {
+            var c = Math.cos(v), s = Math.sin(v);
+            return [PX + p[0] * c - p[1] * s, PY + p[0] * s + p[1] * c];
+        }
+        function trappa(k, v, col, fill, etiketter) {
+            var n = KV[ix][0], d = KV[ix][1];
+            var a = rot([1, 0], v), b = rot([1, k], v), o = [PX, PY];
+            var s = '';
+            if (fill && k !== 0) {
+                s += '<polygon points="' + r1(X(o[0])) + ',' + r1(Y(o[1])) + ' ' + r1(X(a[0])) + ',' + r1(Y(a[1])) + ' ' +
+                    r1(X(b[0])) + ',' + r1(Y(b[1])) + '" fill="' + fill + '"/>';
+            }
+            var dash = ' stroke-dasharray="6 4" stroke-linecap="butt"';
+            s += ln(X(o[0]), Y(o[1]), X(a[0]), Y(a[1]), col, 2.2, dash);
+            if (k !== 0) s += ln(X(a[0]), Y(a[1]), X(b[0]), Y(b[1]), col, 2.2, dash);
+            if (!etiketter) return s;
+            // "1" vid steget längs: på andra sidan om stegets mitt än trappan
+            // när trappan är smal (|k| < 1), annars inne i trappan.
+            var sida = k >= 0 ? 1 : -1;
+            var inne = Math.abs(k) >= 1;
+            var e1 = rot([0.55, (inne ? 0.28 : -0.4) * sida], v);
+            s += svgTal(1, 1, X(e1[0]), Y(e1[1]), col, 16);
+            if (k !== 0) {
+                // |k| vid steget upp: utanför trappan, på den sida som vänder bort från P
+                // en flack trappa: etiketten sänks så att den går fri från linjen
+                var e2 = rot([1 + (d === 1 ? 0.26 : 0.34), k / 2 - (inne ? 0 : 0.3 * sida)], v);
+                s += svgTal(Math.abs(n), d, X(e2[0]), Y(e2[1]), col, 16);
+            }
+            return s;
+        }
+        // Rät vinkel-markering i P mellan riktningarna (1, k) och (−k, 1)
+        function ratVinkel(k) {
+            var L = Math.hypot(1, k), ux = 1 / L, uy = k / L, vx = -k / L, vy = 1 / L, m = 0.3;
+            var p1 = [PX + ux * m, PY + uy * m], p2 = [p1[0] + vx * m, p1[1] + vy * m], p3 = [PX + vx * m, PY + vy * m];
+            return '<polyline points="' + r1(X(p1[0])) + ',' + r1(Y(p1[1])) + ' ' + r1(X(p2[0])) + ',' + r1(Y(p2[1])) + ' ' +
+                r1(X(p3[0])) + ',' + r1(Y(p3[1])) + '" fill="none" stroke="' + INK + '" stroke-width="1.5"/>';
+        }
+
+        function rita() {
+            var k = kVal(ix), n = KV[ix][0], d = KV[ix][1];
+            var s = '';
+            var visG = grCb.checked, visT = trCb.checked;
+            if (visG) s += linje(-k, 1, GRON, 2.4);
+            s += linje(1, k, BLA, 2.4);
+            if (visT) {
+                s += trappa(k, 0, BLA, 'rgba(37,99,201,0.12)', true);
+                if (visG && vrid < 0) s += trappa(k, Math.PI / 2, GRON, 'rgba(63,122,46,0.14)', true);
+            }
+            if (vrid >= 0) {
+                // kopian av den blå trappan svänger över till den gröna linjen
+                var e = vrid < 0.5 ? 2 * vrid * vrid : 1 - Math.pow(-2 * vrid + 2, 2) / 2;
+                s += trappa(k, e * Math.PI / 2, ORANGE, 'rgba(184,83,31,0.14)', vrid > 0.98);
+            }
+            if (visG) s += ratVinkel(k);
+            s += '<circle cx="' + X(PX) + '" cy="' + Y(PY) + '" r="3.6" fill="' + INK + '"/>';
+            dyn.innerHTML = s;
+
+            // avläsningen
+            var k1 = htmlTal(Math.abs(n), d, n < 0);
+            sVal.innerHTML = '<em>k</em>₁ = ' + k1;
+            var txt = '<span style="color:' + BLA + ';font-weight:600">Blå linje: <em>k</em>₁ = ' + k1 + '</span>';
+            if (n === 0) {
+                txt += '&emsp;<span style="color:' + GRON + ';font-weight:600">Grön linje: lodrät, saknar <em>k</em>-värde</span>' +
+                    '<br><span style="color:#4a5160">En vågrät och en lodrät linje är vinkelräta, men produktregeln går inte att använda här.</span>';
+            } else {
+                // k₂ = −d/n
+                var k2 = htmlTal(d, Math.abs(n), n > 0);
+                txt += '&emsp;<span style="color:' + GRON + ';font-weight:600">Grön linje: <em>k</em>₂ = ' + k2 + '</span>' +
+                    '<br><em>k</em>₁ · <em>k</em>₂ = ' + (n < 0 ? '(' + k1 + ')' : k1) + ' · ' + (n > 0 ? '(' + k2 + ')' : k2) +
+                    ' = <strong>−1</strong>';
+            }
+            info.innerHTML = txt;
+        }
+
+        function animera() {
+            var t0 = 0, DUR = 1300;
+            cancelAnimationFrame(rafId);
+            function steg(ts) {
+                if (!t0) t0 = ts;
+                vrid = Math.min(1, (ts - t0) / DUR);
+                rita();
+                if (vrid < 1) { rafId = requestAnimationFrame(steg); return; }
+                setTimeout(function () { vrid = -1; rita(); }, 900);
+            }
+            rafId = requestAnimationFrame(steg);
+        }
+        vridBtn.addEventListener('click', function () {
+            if (!trCb.checked) trCb.checked = true;
+            animera();
+        });
+        slider.addEventListener('input', function () { ix = +slider.value; vrid = -1; rita(); });
+        trCb.addEventListener('change', rita);
+        grCb.addEventListener('change', rita);
+
+        // Dra i den blå linjen: närmaste k i listan efter vinkeln från P
+        var svgEl = scene.querySelector('svg'), dragYta = scene.querySelector('.ms-vr-drag'), drar = false;
+        function svgPunkt(e) {
+            var pt = svgEl.createSVGPoint();
+            pt.x = e.clientX; pt.y = e.clientY;
+            var m = svgEl.getScreenCTM();
+            return m ? pt.matrixTransform(m.inverse()) : null;
+        }
+        function fran(e) {
+            var p = svgPunkt(e);
+            if (!p) return;
+            var dx = p.x / U + XMIN - PX, dy = YMAX - p.y / U - PY;
+            if (Math.hypot(dx, dy) < 0.3) return;
+            if (dx < 0) { dx = -dx; dy = -dy; }
+            var vinkel = Math.atan2(dy, dx), bast = ix, minD = 9;
+            for (var i = 0; i < KV.length; i++) {
+                var dv = Math.abs(Math.atan(kVal(i)) - vinkel);
+                if (dv < minD) { minD = dv; bast = i; }
+            }
+            if (bast !== ix) { ix = bast; slider.value = String(ix); vrid = -1; rita(); }
+        }
+        dragYta.addEventListener('pointerdown', function (e) {
+            drar = true;
+            dragYta.style.cursor = 'grabbing';
+            if (dragYta.setPointerCapture) dragYta.setPointerCapture(e.pointerId);
+            fran(e);
+        });
+        dragYta.addEventListener('pointermove', function (e) { if (drar) fran(e); });
+        function slapp() { drar = false; dragYta.style.cursor = 'grab'; }
+        dragYta.addEventListener('pointerup', slapp);
+        dragYta.addEventListener('pointercancel', slapp);
+
+        // Test-handtag för skärmdumpsskript
+        card._set = function (i, v) { ix = i; slider.value = String(i); vrid = v == null ? -1 : v; rita(); };
+        rita();
+    }
+    var vrRaknare = 0;
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
@@ -11957,7 +12253,8 @@
                   fodelsedag: buildFodelsedag, talmangder: buildTalmangder,
                   magnetpoler: buildMagnetpoler, magnetdelning: buildMagnetdelning,
                   galton: buildGalton, kalkylblad: buildKalkylblad,
-                  lodlinje: buildLodlinje };
+                  lodlinje: buildLodlinje,
+                  vinkelrata: buildVinkelrata };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

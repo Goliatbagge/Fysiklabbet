@@ -12257,6 +12257,71 @@ window.EXITTICKETS = {
 
 'ma1c-4.7': [
   {
+    question: 'Två linjer är vinkelräta. Vad gäller för deras *k*-värden?',
+    choices: [
+      '$k_1 = k_2$',
+      '$k_1 \\cdot k_2 = -1$',
+      '$k_1 + k_2 = 0$',
+      '$k_1 \\cdot k_2 = 1$',
+    ],
+    correct: 1,
+    why: [
+      'Samma *k*-värde betyder samma lutning, alltså parallella linjer.',
+      'Lutningstrappan vriden ett kvarts varv byter plats på stegen och tecken på det ena, så produkten blir alltid −1.',
+      'Då är linjerna bara spegelbilder av varandra, som $y = 2x$ och $y = -2x$. De är inte vinkelräta.',
+      'Tecknet stämmer inte: den ena vinkelräta linjen lutar uppåt och den andra nedåt.',
+    ],
+  },
+  {
+    question: 'En linje har $k = \\dfrac{3}{4}$. Vilket *k*-värde har en linje som är vinkelrät mot den?',
+    choices: [
+      '$\\dfrac{4}{3}$',
+      '$-\\dfrac{3}{4}$',
+      '$-\\dfrac{4}{3}$',
+      '$\\dfrac{3}{4}$',
+    ],
+    correct: 2,
+    why: [
+      'Bråket är vänt, men tecknet måste också bytas.',
+      'Tecknet är bytt, men bråket måste också vändas.',
+      'Vänd bråket och byt tecken: $\\dfrac{3}{4} \\cdot \\left(-\\dfrac{4}{3}\\right) = -1$.',
+      'Samma *k*-värde ger en parallell linje.',
+    ],
+  },
+  {
+    question: 'Är linjerna $y = 2x$ och $y = -2x$ vinkelräta?',
+    choices: [
+      'Ja, de lutar åt olika håll',
+      'Nej, produkten av *k*-värdena är $-4$',
+      'Ja, produkten av *k*-värdena är $-1$',
+    ],
+    correct: 1,
+    why: [
+      'Att lutningarna har olika tecken räcker inte. Produkten måste dessutom vara −1.',
+      '$2 \\cdot (-2) = -4$, inte −1. Linjerna skär varandra, men inte i rät vinkel.',
+      'Räkna efter: $2 \\cdot (-2) = -4$.',
+    ],
+  },
+  {
+    question: 'Linjerna $y = 3$ och $x = 2$ är vinkelräta. Varför går det inte att använda $k_1 \\cdot k_2 = -1$ på dem?',
+    choices: [
+      'Den lodräta linjen $x = 2$ saknar *k*-värde',
+      'Linjerna är inte vinkelräta',
+      'Linjerna är parallella',
+      'Båda linjerna har $k = 0$',
+    ],
+    correct: 0,
+    why: [
+      'En lodrät linje har ingen sträcka åt höger att räkna lutning på, och den vågräta linjen har $k = 0$. Regeln gäller bara när båda linjerna lutar.',
+      'En vågrät och en lodrät linje skär varandra i rät vinkel, så de är vinkelräta.',
+      'Den ena är vågrät och den andra lodrät, så de skär varandra.',
+      'Bara den vågräta linjen $y = 3$ har $k = 0$. Den lodräta har inget *k*-värde.',
+    ],
+  },
+],
+
+'ma1c-4.8': [
+  {
     question: 'Vad krävs för att ett samband mellan $x$ och $y$ ska vara en **funktion**?',
     choices: [
       'Varje tillåtet *x*-värde ger exakt ett *y*-värde',
@@ -12338,7 +12403,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'ma1c-4.8': [
+'ma1c-4.9': [
   {
     question: 'Vad kallas det att lösa en ekvation med hjälp av grafer i till exempel GeoGebra?',
     choices: [
@@ -12405,7 +12470,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'ma1c-4.9': [
+'ma1c-4.10': [
   {
     question: 'Vad kallas mängden av möjliga värden på den beroende variabeln $y$?',
     choices: [
@@ -12472,7 +12537,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'ma1c-4.10': [
+'ma1c-4.11': [
   {
     question: 'Var sitter variabeln i en exponentialfunktion?',
     choices: [
@@ -12555,7 +12620,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'ma1c-4.11': [
+'ma1c-4.12': [
   {
     question: 'Var sitter variabeln i en potensfunktion?',
     choices: [

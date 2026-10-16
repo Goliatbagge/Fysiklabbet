@@ -563,6 +563,16 @@ Så här bygger du scenen:
    prickas in, hjälplinjer eller mått läggs till, eller figuren behövs för
    att resonemanget ska gå att följa (användarkrav 2026-10-14, referens:
    `layoutProportionalitet`, `ma1c-4.2` exempel 2).
+3p. **Uppgiftens figur står färdig från början.** En graf, ett
+   koordinatsystem eller en annan figur som redan är GIVEN i uppgiften
+   ritas inte av pennan: den läggs i `forritad(T, function () { … })`
+   (`HANDSKRIFT.verktyg.forritad` i prov- och övningsfilerna) och står på
+   arket redan innan första klicket, utan något `T.stepEnd()` efter sig.
+   Pennan ritar bara det lösningen själv tillför (ringar, trappsteg,
+   hjälplinjer, kraftpilar, avläsningar, en graf som uppgiften ber om).
+   Avläsningspunkter väljs bland dem som syns tydligt i uppgiftens figur,
+   aldrig punkter som bara finns i en avritning (användarkrav 2026-10-16,
+   referens `layoutLinjensekv` och `layoutRiktkoeff`, `ma1c-4.4`).
 3n. **Skalvärdena står på sin plats och tonas bort när grafen ritas.** Ett
    tal på axeln flyttas aldrig i sidled eller nedåt för att gå fri från en
    graf som ritas senare: när koordinatsystemet ritas står varje tal där

@@ -12588,8 +12588,20 @@
       [['passa i ekvationen. Då kan m']],
       [['räknas ut.']]
     ]);
-    y += 3.6 * F;
-    T.str('Punkten (4, −3) ger', padL, y - 1.6 * F, null, 0.62);
+    /* x och y i blått under punktens koordinater, så att det syns
+     * varifrån värdena i raden under kommer */
+    y += 5.0 * F;
+    var yh = y - 2.7 * F, HS = 0.62, LS = 0.66;
+    T.str('Punkten (4, −3) ger', padL, yh, null, HS);
+    function underKoord(fore, koord, lbl) {
+      var c = padL + T.adv(fore, HS) + T.adv(koord, HS) / 2;
+      T.str(lbl, c - T.adv(lbl, LS) / 2, yh + 0.95 * F, BLUE, LS);
+    }
+    T.pause(250);
+    underKoord('Punkten (', '4', 'x');
+    T.pause(150);
+    underKoord('Punkten (4, ', '−3', 'y');
+    T.pause(300);
     T.str('−3=2·4+m', padL, y);
     T.stepEnd();
 

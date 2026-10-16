@@ -113,7 +113,7 @@
   });
 
   /* ---- Uppgift 2: vilket funktionsuttryck hör till grafen? ----
-   * Linjen ritas av först (samma fönster som provets figur), sedan läses
+   * Linjen står färdig (samma fönster som provets figur), och sedan läses
    * m av vid y-axeln och k med ett trappsteg. */
   reg(2, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
@@ -121,12 +121,13 @@
     var A = mkAxes(T, F, { ox: padL + 128, oy: 222, u: 27,
                            xmin: -4, xmax: 5, ymin: -3, ymax: 6 });
 
-    /* ---- steg 1: rita av koordinatsystemet och linjen ---- */
-    A.axes();
-    A.ticks(V.heltal(-4, 5), V.heltal(-3, 6), [-2, 2, 4], [-2, 2, 4, 6]);
-    T.pause(200);
-    A.graphKM(-2, 3, null, -1.5, 3);
-    T.stepEnd();
+    /* ---- uppgiftens koordinatsystem och linje, färdiga från början ---- */
+    V.forritad(T, function () {
+      A.axes();
+      A.ticks(V.heltal(-4, 5), V.heltal(-3, 6), [-2, 2, 4], [-2, 2, 4, 6]);
+      T.pause(200);
+      A.graphKM(-2, 3, null, -1.5, 3);
+    });
 
     tanke(316, [
       [['m är y-värdet där linjen']],
@@ -261,7 +262,7 @@
 
   /* ---- Uppgift 6: avläsning ur en graf ----
    * a) f(2) läses av rakt upp från x=2, b) f(x)=14 löses genom att dra
-   * linjen y=14 och se var den skär kurvan. Kurvan ritas i samma fönster
+   * linjen y=14 och se var den skär kurvan. Kurvan står i samma fönster
    * som provets figur (x från −16 till 17, y från −5 till 16). */
   reg(6, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
@@ -272,20 +273,21 @@
     var A = mkAxes(T, F, { ox: padL + 240, oy: 405, u: 27, xsc: 2, ysc: 2,
                            xmin: -16, xmax: 17, ymin: -5, ymax: 16 });
 
-    /* ---- steg 1: rita av grafen ---- */
-    A.axes();
-    A.ticks(V.heltal(-16, 16, 2), V.heltal(-4, 16, 2),
-            [-12, -8, -4, 4, 8, 12, 16], [4, 8, 12, 16]);
-    T.pause(220);
-    /* kurvan: strecket ritas som en mjuk kurva genom punkterna
-     * (pathFrom är en Catmull-Rom-spline, så ett fåtal punkter räcker) */
-    var kurva = [[-15.8, -5.0], [-13, 1.5], [-11, 5.0], [-9, 9.0],
-                 [-7, 12.0], [-5, 11.6], [-3, 10.6], [0, 9.2], [2, 8.0],
-                 [5, 6.5], [7, 5.6], [9, 5.0], [11, 6.0], [12, 6.8],
-                 [14, 10.0], [16, 14.0], [17.2, 17.0]];
-    acts.push({ kind: 'stroke',
-                pts: kurva.map(function (p) { return [A.X(p[0]), A.Y(p[1])]; }), color: BLUE });
-    T.stepEnd();
+    /* ---- uppgiftens graf, färdig från början ---- */
+    V.forritad(T, function () {
+      A.axes();
+      A.ticks(V.heltal(-16, 16, 2), V.heltal(-4, 16, 2),
+              [-12, -8, -4, 4, 8, 12, 16], [4, 8, 12, 16]);
+      T.pause(220);
+      /* kurvan: strecket ritas som en mjuk kurva genom punkterna
+       * (pathFrom är en Catmull-Rom-spline, så ett fåtal punkter räcker) */
+      var kurva = [[-15.8, -5.0], [-13, 1.5], [-11, 5.0], [-9, 9.0],
+                   [-7, 12.0], [-5, 11.6], [-3, 10.6], [0, 9.2], [2, 8.0],
+                   [5, 6.5], [7, 5.6], [9, 5.0], [11, 6.0], [12, 6.8],
+                   [14, 10.0], [16, 14.0], [17.2, 17.0]];
+      acts.push({ kind: 'stroke',
+                  pts: kurva.map(function (p) { return [A.X(p[0]), A.Y(p[1])]; }), color: BLUE });
+    });
 
     /* ---- a) f(2) ---- */
     /* bubblan läggs UNDER hela figuren (y-axeln når ned till 486) */
@@ -641,20 +643,21 @@
     /* rät vinkel i A (nere till vänster), 20° i B (nere till höger) */
     var A = [padL + 30, 300], B = [padL + 330, 300], C = [padL + 30, 191];
 
-    /* ---- steg 1: rita av triangeln ---- */
-    T.line(A, B); T.pause(140);
-    T.line(B, C); T.pause(140);
-    T.line(C, A); T.pause(180);
-    V.ratVinkel(T, A, [1, 0], [0, -1], 15);
-    T.pause(160);
-    /* vinkelns inre ligger OVANFÖR basen, och y växer nedåt i scenen —
-     * bågen går därför från -π (mot A) till -(π-0,349) (mot C) */
-    V.vinkelBage(T, B, -Math.PI, -(Math.PI - 0.349), 46);
-    /* 20° är en spetsig vinkel: kilen är bara 0,35·r hög, så talet läggs
-     * långt ut på bisektrisen där kilen hunnit bli bred nog (~40 px vid
-     * r=118) — annars hamnar det ovanpå basen eller hypotenusan */
-    T.str('20°', B[0] - 118 - T.adv('20°', 0.62) / 2, B[1] - 9, null, 0.62);
-    T.stepEnd();
+    /* ---- uppgiftens triangel, färdig från början ---- */
+    V.forritad(T, function () {
+      T.line(A, B); T.pause(140);
+      T.line(B, C); T.pause(140);
+      T.line(C, A); T.pause(180);
+      V.ratVinkel(T, A, [1, 0], [0, -1], 15);
+      T.pause(160);
+      /* vinkelns inre ligger OVANFÖR basen, och y växer nedåt i scenen —
+       * bågen går därför från -π (mot A) till -(π-0,349) (mot C) */
+      V.vinkelBage(T, B, -Math.PI, -(Math.PI - 0.349), 46);
+      /* 20° är en spetsig vinkel: kilen är bara 0,35·r hög, så talet läggs
+       * långt ut på bisektrisen där kilen hunnit bli bred nog (~40 px vid
+       * r=118) — annars hamnar det ovanpå basen eller hypotenusan */
+      T.str('20°', B[0] - 118 - T.adv('20°', 0.62) / 2, B[1] - 9, null, 0.62);
+    });
 
     tanke(330, [
       [['Vinkelsumman i en triangel är']],
@@ -1180,22 +1183,23 @@
     function f(x) { return -x + 7; }
     function g(x) { return (x - 2) * (x - 2) - 1; }
 
-    /* ---- steg 1: rita av figuren ---- */
-    A.axes();
-    /* x-talen står på sin plats; de som parabeln går genom (1, 2 och 3)
-     * tonas bort när den ritas (tonaSkalvarden i handskrift.js) */
-    A.ticks(V.heltal(0, 5), V.heltal(-1, 9), V.heltal(1, 5),
-            [2, 4, 6, 8]);
-    T.pause(200);
-    A.rule([A.X(-0.5), A.Y(f(-0.5))], [A.X(5.6), A.Y(f(5.6))], BLUE);
-    /* etiketten i den fria ytan mellan linjen och parabeln */
-    T.str('f(x)', A.X(0.45), A.Y(4.4), null, 0.62);
-    T.pause(220);
-    var par = [];
-    for (i = -0.5; i <= 5.15; i += 0.25) par.push([A.X(i), A.Y(g(i))]);
-    acts.push({ kind: 'stroke', pts: par, color: BLUE });
-    T.str('g(x)', A.X(4.2) - T.adv('g(x)', 0.62), A.Y(8.6), null, 0.62);
-    T.stepEnd();
+    /* ---- uppgiftens figur, färdig från början ---- */
+    V.forritad(T, function () {
+      A.axes();
+      /* x-talen står på sin plats; de som parabeln går genom (1, 2 och 3)
+       * tonas bort när den ritas (tonaSkalvarden i handskrift.js) */
+      A.ticks(V.heltal(0, 5), V.heltal(-1, 9), V.heltal(1, 5),
+              [2, 4, 6, 8]);
+      T.pause(200);
+      A.rule([A.X(-0.5), A.Y(f(-0.5))], [A.X(5.6), A.Y(f(5.6))], BLUE);
+      /* etiketten i den fria ytan mellan linjen och parabeln */
+      T.str('f(x)', A.X(0.45), A.Y(4.4), null, 0.62);
+      T.pause(220);
+      var par = [];
+      for (i = -0.5; i <= 5.15; i += 0.25) par.push([A.X(i), A.Y(g(i))]);
+      acts.push({ kind: 'stroke', pts: par, color: BLUE });
+      T.str('g(x)', A.X(4.2) - T.adv('g(x)', 0.62), A.Y(8.6), null, 0.62);
+    });
 
     tanke(500, [
       [['Den dubbla olikheten säger att']],
@@ -1745,11 +1749,14 @@
                        padL + 30 + T.adv('b·h=40')) + 0.9 * F;
     var xwB = padL + 30 + T.fracW('40', 'h') + T.adv('≥1') + 0.9 * F;
 
-    /* ---- figuren: triangel med bas b och höjd h ---- */
+    /* ---- figuren: triangeln, b och arean står färdiga som i uppgiften;
+     * pennan ritar höjden h ---- */
     var P = [padL + 30, 300], Q = [padL + 320, 300], R = [padL + 200, 180];
-    T.line(P, Q); T.pause(140);
-    T.line(Q, R); T.pause(140);
-    T.line(R, P); T.pause(180);
+    V.forritad(T, function () {
+      T.line(P, Q); T.pause(140);
+      T.line(Q, R); T.pause(140);
+      T.line(R, P); T.pause(180);
+    });
     /* höjden: streckad lodrät hjälplinje */
     for (i = 0; i < 8; i++) {
       if (i % 2) continue;
@@ -1759,11 +1766,15 @@
     V.ratVinkel(T, [R[0], P[1]], [1, 0], [0, -1], 12);
     T.pause(160);
     /* beteckningar och värden i figuren skrivs med blåpennan */
-    T.str('b', (P[0] + Q[0]) / 2, P[1] + 0.95 * F, BLUE, 0.62);
+    V.forritad(T, function () {
+      T.str('b', (P[0] + Q[0]) / 2, P[1] + 0.95 * F, BLUE, 0.62);
+    });
     T.pause(140);
     T.str('h', R[0] + 10, (R[1] + P[1]) / 2, BLUE, 0.62);
     T.pause(140);
-    T.str('Area 20 m^2', P[0] + 30, P[1] - 22, BLUE, 0.62);
+    V.forritad(T, function () {
+      T.str('Area 20 m^2', P[0] + 30, P[1] - 22, BLUE, 0.62);
+    });
     T.stepEnd();
 
     tanke(330, [
@@ -1962,25 +1973,30 @@
     var A = [padL + 250, 170], B = [padL + 250, 390];
     var C = [B[0] - 220 * Math.tan(10 * Math.PI / 180), 390];
 
-    /* ---- steg 1: rita figuren ---- */
+    /* ---- uppgiftens figur står färdig; pennan lägger till det
+     * vågräta avståndet, den räta vinkeln och beteckningarna L och d */
     /* markytan */
-    T.line([padL + 60, 170], [padL + 330, 170]);
-    T.pause(140);
-    /* lodlinjen (djupet) */
-    T.line(A, B); T.pause(140);
-    /* borrhålet */
-    T.line(A, C); T.pause(140);
+    V.forritad(T, function () {
+      T.line([padL + 60, 170], [padL + 330, 170]);
+      T.pause(140);
+      /* lodlinjen (djupet) */
+      T.line(A, B); T.pause(140);
+      /* borrhålet */
+      T.line(A, C); T.pause(140);
+    });
     /* det vågräta avståndet */
     T.line(C, B); T.pause(160);
     V.ratVinkel(T, B, [-1, 0], [0, -1], 13);
     T.pause(160);
-    V.vinkelBage(T, A, Math.PI / 2, Math.PI / 2 + 0.1745, 74);
-    /* kilen är bara 10° bred — gradtalet får inte plats inuti den, så
-     * det läggs tätt intill bågens yttre ände, utanför borrhålslinjen */
-    T.str('10,0°', A[0] - 26 - T.adv('10,0°', 0.62), A[1] + 84, null, 0.62);
-    T.pause(200);
-    /* givna mått och sökta beteckningar skrivs med blåpennan */
-    T.str('125 m', B[0] + 12, (A[1] + B[1]) / 2, BLUE, 0.62);
+    V.forritad(T, function () {
+      V.vinkelBage(T, A, Math.PI / 2, Math.PI / 2 + 0.1745, 74);
+      /* kilen är bara 10° bred — gradtalet får inte plats inuti den, så
+       * det läggs tätt intill bågens yttre ände, utanför borrhålslinjen */
+      T.str('10,0°', A[0] - 26 - T.adv('10,0°', 0.62), A[1] + 84, null, 0.62);
+      T.pause(200);
+      /* givna mått och sökta beteckningar skrivs med blåpennan */
+      T.str('125 m', B[0] + 12, (A[1] + B[1]) / 2, BLUE, 0.62);
+    });
     T.pause(140);
     T.str('L', (A[0] + C[0]) / 2 - 26, (A[1] + C[1]) / 2, BLUE, 0.62);
     T.pause(140);
@@ -2801,24 +2817,25 @@
     var tanke = mkTanke(T);
     var cx = padL + 220, cy = 290, rr = 88, RR = rr * Math.SQRT2;
 
-    /* ---- steg 1: rita figuren ---- */
-    acts.push({ kind: 'stroke', pts: V.ringPts(cx, cy, RR, RR) });
-    T.pause(200);
-    T.line([cx - rr, cy - rr], [cx + rr, cy - rr]); T.pause(120);
-    T.line([cx + rr, cy - rr], [cx + rr, cy + rr]); T.pause(120);
-    T.line([cx + rr, cy + rr], [cx - rr, cy + rr]); T.pause(120);
-    T.line([cx - rr, cy + rr], [cx - rr, cy - rr]); T.pause(160);
-    acts.push({ kind: 'stroke', pts: V.ringPts(cx, cy, rr, rr) });
-    T.pause(220);
-    /* skuggningen mellan cirklarna: korta radiella streck */
-    for (i = 0; i < 24; i++) {
-      var a = i * Math.PI / 12 + 0.13;
-      acts.push({ kind: 'stroke', color: BLUE, pts: V.humanize([
-        [cx + Math.cos(a) * (rr + 7), cy + Math.sin(a) * (rr + 7)],
-        [cx + Math.cos(a) * (RR - 5), cy + Math.sin(a) * (RR - 5)]]) });
-      T.pause(50);
-    }
-    T.stepEnd();
+    /* ---- uppgiftens figur, färdig från början ---- */
+    V.forritad(T, function () {
+      acts.push({ kind: 'stroke', pts: V.ringPts(cx, cy, RR, RR) });
+      T.pause(200);
+      T.line([cx - rr, cy - rr], [cx + rr, cy - rr]); T.pause(120);
+      T.line([cx + rr, cy - rr], [cx + rr, cy + rr]); T.pause(120);
+      T.line([cx + rr, cy + rr], [cx - rr, cy + rr]); T.pause(120);
+      T.line([cx - rr, cy + rr], [cx - rr, cy - rr]); T.pause(160);
+      acts.push({ kind: 'stroke', pts: V.ringPts(cx, cy, rr, rr) });
+      T.pause(220);
+      /* skuggningen mellan cirklarna: korta radiella streck */
+      for (i = 0; i < 24; i++) {
+        var a = i * Math.PI / 12 + 0.13;
+        acts.push({ kind: 'stroke', color: BLUE, pts: V.humanize([
+          [cx + Math.cos(a) * (rr + 7), cy + Math.sin(a) * (rr + 7)],
+          [cx + Math.cos(a) * (RR - 5), cy + Math.sin(a) * (RR - 5)]]) });
+        T.pause(50);
+      }
+    });
 
     tanke(cy + RR + 20, [
       [['Lilla cirkeln nuddar kvadratens']],

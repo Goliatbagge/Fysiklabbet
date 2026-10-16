@@ -16189,15 +16189,14 @@
     var tanke = mkTanke(T), V = vekVerktyg(T, F);
     var E = 30;                                   /* px per längdenhet */
 
-    /* uppgiftens vektorer */
-    var A = [padL + 130, 120];
-    figurPil(T, A, [A[0] - 3 * E, A[1]]);
-    V.lbl('u', A[0] - 1.5 * E - 6, A[1] - 14);
-    T.pause(180);
-    var B = [padL + 60, 172];
-    figurPil(T, B, [B[0] + 8 * E, B[1]]);
-    V.lbl('v', B[0] + 4 * E - 6, B[1] + 34);
-    T.stepEnd();
+    /* uppgiftens vektorer står färdiga från början */
+    var A = [padL + 130, 120], B = [padL + 60, 172];
+    forritad(T, function () {
+      figurPil(T, A, [A[0] - 3 * E, A[1]]);
+      V.lbl('u', A[0] - 1.5 * E - 6, A[1] - 14);
+      figurPil(T, B, [B[0] + 8 * E, B[1]]);
+      V.lbl('v', B[0] + 4 * E - 6, B[1] + 34);
+    });
 
     tanke(206, [
       [['Vektorer adderas spets mot']],
@@ -16256,12 +16255,13 @@
     var O = [padL + 80, 320];
     var P1 = [O[0], O[1] - 6 * k], P2 = [O[0] + 8 * k, O[1]];
 
-    figurPil(T, O, P1, BLUE);
-    V.lbl('F_1=6,0 N', O[0] - 50, P1[1] - 22, BLUE);
-    T.pause(200);
-    figurPil(T, O, P2, BLUE);
-    V.lbl('F_2=8,0 N', O[0] + 60, O[1] + 34, BLUE);
-    T.stepEnd();
+    /* uppgiftens två krafter står färdiga från början */
+    forritad(T, function () {
+      figurPil(T, O, P1, BLUE);
+      V.lbl('F_1=6,0 N', O[0] - 50, P1[1] - 22, BLUE);
+      figurPil(T, O, P2, BLUE);
+      V.lbl('F_2=8,0 N', O[0] + 60, O[1] + 34, BLUE);
+    });
 
     tanke(354, [
       [['Resultanten ersätter de två']],
@@ -16325,14 +16325,14 @@
     var E = 28, u = [3 * E, -2 * E], v = [2 * E, 3 * E];
     function add(p, d) { return [p[0] + d[0], p[1] + d[1]]; }
 
-    /* uppgiftens vektorer */
+    /* uppgiftens vektorer står färdiga från början */
     var G1 = [padL + 60, 150], G2 = [padL + 220, 100];
-    figurPil(T, G1, add(G1, u));
-    V.lbl('u', G1[0] + 50, G1[1] - 4);
-    T.pause(180);
-    figurPil(T, G2, add(G2, v));
-    V.lbl('v', G2[0] + 50, G2[1] + 50);
-    T.stepEnd();
+    forritad(T, function () {
+      figurPil(T, G1, add(G1, u));
+      V.lbl('u', G1[0] + 50, G1[1] - 4);
+      figurPil(T, G2, add(G2, v));
+      V.lbl('v', G2[0] + 50, G2[1] + 50);
+    });
 
     /* a) polygonmetoden */
     y = 230;
@@ -16414,13 +16414,14 @@
     function add(p, d) { return [p[0] + d[0], p[1] + d[1]]; }
     function mul(d, k) { return [d[0] * k, d[1] * k]; }
 
+    /* uppgiftens vektorer står färdiga från början */
     var G1 = [padL + 60, 140], G2 = [padL + 210, 90];
-    figurPil(T, G1, add(G1, u));
-    V.lbl('u', G1[0] + 22, G1[1] + 26);
-    T.pause(180);
-    figurPil(T, G2, add(G2, v));
-    V.lbl('v', G2[0] - 4, G2[1] + 40);
-    T.stepEnd();
+    forritad(T, function () {
+      figurPil(T, G1, add(G1, u));
+      V.lbl('u', G1[0] + 22, G1[1] + 26);
+      figurPil(T, G2, add(G2, v));
+      V.lbl('v', G2[0] - 4, G2[1] + 40);
+    });
 
     tanke(176, [
       [['3u är tre gånger så lång som']],
@@ -16479,13 +16480,14 @@
     function add(p, d) { return [p[0] + d[0], p[1] + d[1]]; }
     function neg(d) { return [-d[0], -d[1]]; }
 
+    /* uppgiftens vektorer står färdiga från början */
     var G1 = [padL + 60, 150], G2 = [padL + 220, 100];
-    figurPil(T, G1, add(G1, u));
-    V.lbl('u', G1[0] + 50, G1[1] - 4);
-    T.pause(180);
-    figurPil(T, G2, add(G2, v));
-    V.lbl('v', G2[0] + 50, G2[1] + 50);
-    T.stepEnd();
+    forritad(T, function () {
+      figurPil(T, G1, add(G1, u));
+      V.lbl('u', G1[0] + 50, G1[1] - 4);
+      figurPil(T, G2, add(G2, v));
+      V.lbl('v', G2[0] + 50, G2[1] + 50);
+    });
 
     tanke(190, [
       [['Att dra bort v är samma sak']],
@@ -40602,18 +40604,18 @@
     var tanke = mkTanke(T);
 
     var A = [padL + 130, 300], B = [padL + 130, 170], C = [padL + 320, 300];
-    T.line(A, C); T.line(C, B); T.line(B, A);
-    ratVinkel(T, A, [1, 0], [0, -1]);
-    T.pause(150);
-    T.str('6,1 cm', A[0] - T.adv('6,1 cm', 0.62) - 10,
-          (A[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
-    T.str('a', (C[0] + B[0]) / 2 + 6, (C[1] + B[1]) / 2 - 10, null, 0.62);
-    T.pause(140);
-    /* mätetalet läggs i vinkelns kil, utanför bågen och långt nog in
-     * för att kilen ska vara bredare än texten (se Geometrifigurer) */
-    vinkelBage(T, C, -Math.PI, Math.atan2(B[1] - C[1], B[0] - C[0]), 34);
-    T.str('41°', C[0] - 55 - T.adv('41°', 0.55), C[1] - 9, null, 0.55);
-    T.stepEnd();
+    /* uppgiftens triangel står färdig från början */
+    forritad(T, function () {
+      T.line(A, C); T.line(C, B); T.line(B, A);
+      ratVinkel(T, A, [1, 0], [0, -1]);
+      T.str('6,1 cm', A[0] - T.adv('6,1 cm', 0.62) - 10,
+            (A[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
+      T.str('a', (C[0] + B[0]) / 2 + 6, (C[1] + B[1]) / 2 - 10, null, 0.62);
+      /* mätetalet läggs i vinkelns kil, utanför bågen och långt nog in
+       * för att kilen ska vara bredare än texten (se Geometrifigurer) */
+      vinkelBage(T, C, -Math.PI, Math.atan2(B[1] - C[1], B[0] - C[0]), 34);
+      T.str('41°', C[0] - 55 - T.adv('41°', 0.55), C[1] - 9, null, 0.55);
+    });
 
     tanke(360, [
       [['Vinkeln 41° har 6,1 cm som']],
@@ -40675,17 +40677,17 @@
     var tanke = mkTanke(T);
 
     var A = [padL + 130, 300], B = [padL + 130, 160], C = [padL + 285, 300];
-    T.line(A, C); T.line(C, B); T.line(B, A);
-    ratVinkel(T, A, [1, 0], [0, -1]);
-    T.pause(150);
-    T.str('2,3 mm', A[0] - T.adv('2,3 mm', 0.62) - 10,
-          (A[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
-    T.str('1,8 mm', (A[0] + C[0]) / 2 - T.adv('1,8 mm', 0.62) / 2,
-          C[1] + 0.95 * F, null, 0.62);
-    T.pause(140);
-    vinkelBage(T, C, -Math.PI, Math.atan2(B[1] - C[1], B[0] - C[0]), 32);
-    T.str('v', C[0] - 50 - T.adv('v', 0.62), C[1] - 9, null, 0.62);
-    T.stepEnd();
+    /* uppgiftens triangel står färdig från början */
+    forritad(T, function () {
+      T.line(A, C); T.line(C, B); T.line(B, A);
+      ratVinkel(T, A, [1, 0], [0, -1]);
+      T.str('2,3 mm', A[0] - T.adv('2,3 mm', 0.62) - 10,
+            (A[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
+      T.str('1,8 mm', (A[0] + C[0]) / 2 - T.adv('1,8 mm', 0.62) / 2,
+            C[1] + 0.95 * F, null, 0.62);
+      vinkelBage(T, C, -Math.PI, Math.atan2(B[1] - C[1], B[0] - C[0]), 32);
+      T.str('v', C[0] - 50 - T.adv('v', 0.62), C[1] - 9, null, 0.62);
+    });
 
     tanke(360, [
       [['Till vinkeln v hör 2,3 mm som']],
@@ -40819,14 +40821,15 @@
     var tanke = mkTanke(T);
     var C = mkCirkel(T, F, { ox: padL + 170, oy: 246, u: 88 });
 
-    C.axlar();
-    C.cirkel();
-    T.stepEnd();
+    /* uppgiftens figur står färdig: cirkeln, vinkeln v och punkten */
+    forritad(T, function () {
+      C.axlar();
+      C.cirkel();
+      C.radie(59.3, 38);
+      T.str('v', C.ox + 58, C.oy - 14, null, 0.62);
+      C.punkt(0.51, 0.86);
+    });
 
-    C.radie(59.3, 38);
-    T.str('v', C.ox + 58, C.oy - 14, null, 0.62);
-    T.pause(160);
-    C.punkt(0.51, 0.86);
     C.hjalp(0.51, 0.86);
     T.str('(0,51; 0,86)', C.X(0.51) + 12, C.Y(0.86) - 12, BLUE, 0.5);
     T.stepEnd();
@@ -44703,24 +44706,22 @@
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
 
-    /* ---- figuren: mur upptill, hage under ---- */
+    /* ---- uppgiftens figur, färdig från början: mur upptill, hage under */
     var x0 = padL + 60, x1 = padL + 300, yT = 200, yB = 320, i;
-    T.line([x0 - 26, yT], [x1 + 26, yT]);
-    for (i = 0; i <= 12; i++) {
-      T.line([x0 - 22 + i * 20, yT], [x0 - 30 + i * 20, yT - 11]);
-    }
-    T.pause(160);
-    T.str('Mur', x0 - 24, yT - 0.55 * F, null, 0.55);
-    T.pause(200);
-    T.line([x0, yT], [x0, yB]);
-    T.line([x0, yB], [x1, yB]);
-    T.line([x1, yB], [x1, yT]);
-    T.pause(200);
-    T.str('x', x0 - 0.75 * F, (yT + yB) / 2 + 0.2 * F, BLUE, 0.62);
-    T.str('x', x1 + 0.28 * F, (yT + yB) / 2 + 0.2 * F, BLUE, 0.62);
-    T.str('60-2x', (x0 + x1) / 2 - T.adv('60-2x', 0.62) / 2, yB + 0.95 * F,
-          BLUE, 0.62);
-    T.stepEnd();
+    forritad(T, function () {
+      T.line([x0 - 26, yT], [x1 + 26, yT]);
+      for (i = 0; i <= 12; i++) {
+        T.line([x0 - 22 + i * 20, yT], [x0 - 30 + i * 20, yT - 11]);
+      }
+      T.str('Mur', x0 - 24, yT - 0.55 * F, null, 0.55);
+      T.line([x0, yT], [x0, yB]);
+      T.line([x0, yB], [x1, yB]);
+      T.line([x1, yB], [x1, yT]);
+      T.str('x', x0 - 0.75 * F, (yT + yB) / 2 + 0.2 * F, BLUE, 0.62);
+      T.str('x', x1 + 0.28 * F, (yT + yB) / 2 + 0.2 * F, BLUE, 0.62);
+      T.str('60-2x', (x0 + x1) / 2 - T.adv('60-2x', 0.62) / 2, yB + 0.95 * F,
+            BLUE, 0.62);
+    });
 
     tanke(yB + 1.0 * F, [
       [['Stängslet räcker till 60 m.']],
@@ -45382,15 +45383,14 @@
     var tanke = mkTanke(T);
     var G = mkTrigGraf(T, F, { ox: padL + 180, oy: 268, ux: 34, uy: 20 });
 
-    G.axlar(-4, 7, -6, 6, 'x', 'y');
-    T.stepEnd();
-
-    /* kurvan y = -x+1 + 1/(x-2), tätt samplad på var sin sida om
-     * asymptoten */
+    /* uppgiftens graf står färdig: kurvan y = -x+1 + 1/(x-2), tätt
+     * samplad på var sin sida om asymptoten */
     function fk(v) { return -v + 1 + 1 / (v - 2); }
-    G.kurva(fk, -4, 1.75);
-    G.kurva(fk, 2.3, 7);
-    T.stepEnd();
+    forritad(T, function () {
+      G.axlar(-4, 7, -6, 6, 'x', 'y');
+      G.kurva(fk, -4, 1.75);
+      G.kurva(fk, 2.3, 7);
+    });
 
     G.lodrat(2, -6, 6);
     T.str('x=2', G.X(2) + 8, G.Y(-5), BLUE, 0.5);
@@ -48575,11 +48575,13 @@
     var tanke = mkTanke(T);
     var G = mkTrigGraf(T, F, { ox: padL + 200, oy: 250, ux: 26, uy: 26 });
 
-    G.axlar(-4.4, 4.4, -3.4, 4.4, 'Re', 'Im');
-    G.punkt(-3, 2, BLUE);
-    visare(T, [G.ox, G.oy], [G.X(-3), G.Y(2)]);
-    T.str('z=-3+2i', G.X(-3) - 100, G.Y(2) - 8, BLUE, 0.5);
-    T.stepEnd();
+    /* uppgiftens talplan med visaren z står färdigt från början */
+    forritad(T, function () {
+      G.axlar(-4.4, 4.4, -3.4, 4.4, 'Re', 'Im');
+      G.punkt(-3, 2, BLUE);
+      visare(T, [G.ox, G.oy], [G.X(-3), G.Y(2)]);
+      T.str('z=-3+2i', G.X(-3) - 100, G.Y(2) - 8, BLUE, 0.5);
+    });
 
     tanke(G.oy + 3.4 * 26, [
       [['Att dividera med i vrider']],
@@ -50176,17 +50178,17 @@
     var tanke = mkTanke(T);
     var G = mkTrigGraf(T, F, { ox: padL + 60, oy: 300, ux: 52, uy: 60 });
 
-    G.axlar(-0.3, 4.6, -0.3, 2.4, 'x', 'y');
-    T.str('år', G.X(4.6) - 4, G.oy + 1.7 * F, null, 0.5);
-    T.str('dm', G.ox + 10, G.Y(2.4) + 0.95 * F, null, 0.5);
-    T.stepEnd();
-
-    G.kurva(function (v) { return 1.9 * (1 - Math.exp(-0.42 * v)); }, 0, 4.4);
-    T.stepEnd();
+    /* uppgiftens figur (diagram, kurva och sekant) står färdig */
+    forritad(T, function () {
+      G.axlar(-0.3, 4.6, -0.3, 2.4, 'x', 'y');
+      T.str('år', G.X(4.6) - 4, G.oy + 1.7 * F, null, 0.5);
+      T.str('dm', G.ox + 10, G.Y(2.4) + 0.95 * F, null, 0.5);
+      G.kurva(function (v) { return 1.9 * (1 - Math.exp(-0.42 * v)); }, 0, 4.4);
+      T.line([G.X(0), G.Y(0)], [G.X(2.9), G.Y(2.03)], BLUE);
+    });
 
     G.punkt(0, 0, BLUE);
     G.punkt(2, 1.4, BLUE);
-    T.line([G.X(0), G.Y(0)], [G.X(2.9), G.Y(2.03)], BLUE);
     T.str('(2; 1,4)', G.X(2) + 10, G.Y(1.4) + 0.9 * F, BLUE, 0.5);
     T.stepEnd();
 
@@ -50276,16 +50278,16 @@
     var tanke = mkTanke(T);
     var G = mkTrigGraf(T, F, { ox: padL + 60, oy: 300, ux: 52, uy: 60 });
 
-    G.axlar(-0.3, 4.6, -0.3, 2.4, 'x', 'y');
-    T.str('år', G.X(4.6) - 4, G.oy + 1.7 * F, null, 0.5);
-    T.str('dm', G.ox + 10, G.Y(2.4) + 0.95 * F, null, 0.5);
-    T.stepEnd();
+    /* uppgiftens figur (diagram, kurva och tangent) står färdig;
+     * tangenten i (2; 1,4) har lutningen 0,35 */
+    forritad(T, function () {
+      G.axlar(-0.3, 4.6, -0.3, 2.4, 'x', 'y');
+      T.str('år', G.X(4.6) - 4, G.oy + 1.7 * F, null, 0.5);
+      T.str('dm', G.ox + 10, G.Y(2.4) + 0.95 * F, null, 0.5);
+      G.kurva(function (v) { return 1.9 * (1 - Math.exp(-0.42 * v)); }, 0, 4.4);
+      T.line([G.X(0), G.Y(0.7)], [G.X(4.2), G.Y(2.17)], BLUE);
+    });
 
-    G.kurva(function (v) { return 1.9 * (1 - Math.exp(-0.42 * v)); }, 0, 4.4);
-    T.stepEnd();
-
-    /* tangenten i (2; 1,4): lutning 0,35 */
-    T.line([G.X(0), G.Y(0.7)], [G.X(4.2), G.Y(2.17)], BLUE);
     G.punkt(0, 0.7, BLUE);
     G.punkt(2, 1.4, BLUE);
     T.str('(0; 0,7)', G.X(0) + 8, G.Y(0.7) + 1.0 * F, BLUE, 0.5);
@@ -50572,14 +50574,13 @@
     var tanke = mkTanke(T);
     var G = mkTrigGraf(T, F, { ox: padL + 230, oy: 250, ux: 32, uy: 26 });
 
-    G.axlar(-6.4, 4.4, -3.4, 3.4, 'x', 'y');
-    T.stepEnd();
-
-    /* hörn vid x=-4, hopp vid x=0 */
-    G.kurva(function (v) { return -v - 2; }, -6.2, -4);
-    G.kurva(function (v) { return 0.5 * v + 4; }, -4, -0.06);
-    G.kurva(function (v) { return 0.4 * v + 1; }, 0.06, 4.2);
-    T.stepEnd();
+    /* uppgiftens graf står färdig: hörn vid x=-4, hopp vid x=0 */
+    forritad(T, function () {
+      G.axlar(-6.4, 4.4, -3.4, 3.4, 'x', 'y');
+      G.kurva(function (v) { return -v - 2; }, -6.2, -4);
+      G.kurva(function (v) { return 0.5 * v + 4; }, -4, -0.06);
+      G.kurva(function (v) { return 0.4 * v + 1; }, 0.06, 4.2);
+    });
 
     G.punkt(-4, 2, BLUE);
     T.str('hörn', G.X(-4) - 46, G.Y(2) - 0.6 * F, BLUE, 0.5);
@@ -51503,10 +51504,11 @@
     var tanke = mkTanke(T);
     var G = mkTrigGraf(T, F, { ox: padL + 150, oy: 240, ux: 44, uy: 34 });
 
-    G.axlar(-2.4, 4.4, -2.4, 3.2, 'x', 'y');
-    G.kurva(function (v) { return -0.5 * (v + 1) * (v - 3); }, -2.2, 4.2);
-    T.str('f(x)', G.X(3.6), G.Y(-1.4), null, 0.5);
-    T.pause(200);
+    forritad(T, function () {
+      G.axlar(-2.4, 4.4, -2.4, 3.2, 'x', 'y');
+      G.kurva(function (v) { return -0.5 * (v + 1) * (v - 3); }, -2.2, 4.2);
+      T.str('f(x)', G.X(3.6), G.Y(-1.4), null, 0.5);
+    });
     G.punkt(1, 2, BLUE);
     T.str('(1, 2)', G.X(1) + 10, G.Y(2) - 0.4 * F, BLUE, 0.5);
     T.stepEnd();
@@ -51550,10 +51552,11 @@
     var tanke = mkTanke(T);
     var G = mkTrigGraf(T, F, { ox: padL + 200, oy: 240, ux: 54, uy: 44 });
 
-    G.axlar(-2.4, 2.6, -2.2, 2.2, 'x', 'y');
-    G.kurva(function (v) { return (-v * v * v + 3 * v) / 2; }, -2.1, 2.1);
-    T.str('g(x)', G.X(2.0), G.Y(-1.6), null, 0.5);
-    T.pause(200);
+    forritad(T, function () {
+      G.axlar(-2.4, 2.6, -2.2, 2.2, 'x', 'y');
+      G.kurva(function (v) { return (-v * v * v + 3 * v) / 2; }, -2.1, 2.1);
+      T.str('g(x)', G.X(2.0), G.Y(-1.6), null, 0.5);
+    });
     G.punkt(-1, -1, BLUE);
     G.punkt(1, 1, BLUE);
     T.stepEnd();
@@ -51600,10 +51603,11 @@
     var tanke = mkTanke(T), tabell = mkTeckentabell(T, F);
     var G = mkTrigGraf(T, F, { ox: padL + 120, oy: 230, ux: 38, uy: 26 });
 
-    G.axlar(-2.4, 6.4, -2.6, 3.6, 'x', 'y');
-    G.kurva(function (v) { return -(v + 1) * (v - 5) / 3; }, -2.2, 6.2);
-    T.str('f′(x)', G.X(5.6), G.Y(-1.6), null, 0.5);
-    T.pause(200);
+    forritad(T, function () {
+      G.axlar(-2.4, 6.4, -2.6, 3.6, 'x', 'y');
+      G.kurva(function (v) { return -(v + 1) * (v - 5) / 3; }, -2.2, 6.2);
+      T.str('f′(x)', G.X(5.6), G.Y(-1.6), null, 0.5);
+    });
     G.punkt(-1, 0, BLUE);
     G.punkt(5, 0, BLUE);
     T.stepEnd();
@@ -53339,14 +53343,15 @@
     var tanke = mkTanke(T);
 
     var A = [padL + 90, 320], B = [padL + 330, 300], C = [padL + 150, 180];
-    ritaTriangel(T, F, A, B, C, ['A', 'B', 'C']);
-    T.str('8 cm', (A[0] + B[0]) / 2 - 30, 345, BLUE, 0.6);
-    T.str('11 cm', (A[0] + C[0]) / 2 - 76, (A[1] + C[1]) / 2, BLUE, 0.6);
-    T.pause(200);
-    vinkelBage(T, A, Math.atan2(B[1] - A[1], B[0] - A[0]),
-               Math.atan2(C[1] - A[1], C[0] - A[0]), 34);
-    T.str('80°', A[0] + 22, A[1] - 26, null, 0.55);
-    T.stepEnd();
+    /* uppgiftens triangel står färdig från början */
+    forritad(T, function () {
+      ritaTriangel(T, F, A, B, C, ['A', 'B', 'C']);
+      T.str('8 cm', (A[0] + B[0]) / 2 - 30, 345, BLUE, 0.6);
+      T.str('11 cm', (A[0] + C[0]) / 2 - 76, (A[1] + C[1]) / 2, BLUE, 0.6);
+      vinkelBage(T, A, Math.atan2(B[1] - A[1], B[0] - A[0]),
+                 Math.atan2(C[1] - A[1], C[0] - A[0]), 34);
+      T.str('80°', A[0] + 22, A[1] - 26, null, 0.55);
+    });
 
     tanke(380, [
       [['Areasatsen kräver två sidor']],
@@ -53442,17 +53447,17 @@
     var tanke = mkTanke(T);
 
     var B = [padL + 80, 320], C = [padL + 360, 320], A = [padL + 250, 180];
-    ritaTriangel(T, F, A, B, C, ['A', 'B', 'C']);
-    T.str('24 cm', (A[0] + C[0]) / 2 + 14, (A[1] + C[1]) / 2, BLUE, 0.6);
-    T.pause(200);
-    vinkelBage(T, B, Math.atan2(C[1] - B[1], C[0] - B[0]),
-               Math.atan2(A[1] - B[1], A[0] - B[0]), 34);
-    T.str('30°', B[0] + 40, B[1] - 10, null, 0.55);
-    T.pause(200);
-    vinkelBage(T, C, Math.atan2(A[1] - C[1], A[0] - C[0]),
-               Math.atan2(B[1] - C[1], B[0] - C[0]), 30);
-    T.str('70°', C[0] - 74, C[1] - 14, null, 0.55);
-    T.stepEnd();
+    /* uppgiftens triangel står färdig från början */
+    forritad(T, function () {
+      ritaTriangel(T, F, A, B, C, ['A', 'B', 'C']);
+      T.str('24 cm', (A[0] + C[0]) / 2 + 14, (A[1] + C[1]) / 2, BLUE, 0.6);
+      vinkelBage(T, B, Math.atan2(C[1] - B[1], C[0] - B[0]),
+                 Math.atan2(A[1] - B[1], A[0] - B[0]), 34);
+      T.str('30°', B[0] + 40, B[1] - 10, null, 0.55);
+      vinkelBage(T, C, Math.atan2(A[1] - C[1], A[0] - C[0]),
+                 Math.atan2(B[1] - C[1], B[0] - C[0]), 30);
+      T.str('70°', C[0] - 74, C[1] - 14, null, 0.55);
+    });
 
     tanke(360, [
       [['Sinussatsen parar ihop varje']],
@@ -53540,14 +53545,15 @@
     var tanke = mkTanke(T);
 
     var C = [padL + 110, 310], A = [padL + 330, 320], B = [padL + 250, 175];
-    ritaTriangel(T, F, A, B, C, ['A', 'B', 'C']);
-    T.str('19 cm', (A[0] + B[0]) / 2 + 12, (A[1] + B[1]) / 2, BLUE, 0.6);
-    T.str('17 cm', (B[0] + C[0]) / 2 - 90, (B[1] + C[1]) / 2 - 6, BLUE, 0.6);
-    T.pause(200);
-    vinkelBage(T, C, Math.atan2(A[1] - C[1], A[0] - C[0]),
-               Math.atan2(B[1] - C[1], B[0] - C[0]), 34);
-    T.str('34°', C[0] + 26, C[1] - 24, null, 0.55);
-    T.stepEnd();
+    /* uppgiftens triangel står färdig från början */
+    forritad(T, function () {
+      ritaTriangel(T, F, A, B, C, ['A', 'B', 'C']);
+      T.str('19 cm', (A[0] + B[0]) / 2 + 12, (A[1] + B[1]) / 2, BLUE, 0.6);
+      T.str('17 cm', (B[0] + C[0]) / 2 - 90, (B[1] + C[1]) / 2 - 6, BLUE, 0.6);
+      vinkelBage(T, C, Math.atan2(A[1] - C[1], A[0] - C[0]),
+                 Math.atan2(B[1] - C[1], B[0] - C[0]), 34);
+      T.str('34°', C[0] + 26, C[1] - 24, null, 0.55);
+    });
 
     tanke(360, [
       [['Två sidor och vinkeln mellan']],
@@ -53669,27 +53675,26 @@
 
     var B = [padL + 60, 330], Cp = [padL + 360, 330];
     var D = [padL + 360, 230], A = [padL + 360, 170];
-    T.line(B, Cp); T.line(Cp, A); T.line(B, A); T.line(B, D);
-    ratVinkel(T, Cp, [-1, 0], [0, -1]);
-    T.pause(180);
-    T.str('B', B[0] - 26, B[1] + 0.2 * F, null, 0.6);
-    T.str('C', Cp[0] + 12, Cp[1] + 0.2 * F, null, 0.6);
-    T.str('D', D[0] + 12, D[1] + 0.2 * F, null, 0.6);
-    T.str('A', A[0] + 12, A[1] + 0.2 * F, null, 0.6);
-    T.pause(200);
-    T.str('11 m', A[0] + 14, (A[1] + D[1]) / 2 + 0.2 * F, BLUE, 0.55);
     /* båda höjdvinklarna mäts från marken, så bågarna ritas med olika
      * radie från B och etiketten läggs strax utanför sin egen båge */
     var aD = Math.atan2(D[1] - B[1], D[0] - B[0]);
     var aA = Math.atan2(A[1] - B[1], A[0] - B[0]);
-    vinkelBage(T, B, 0, aD, 62);
-    T.str('25°', B[0] + Math.cos(aD / 2) * 74,
-          B[1] + Math.sin(aD / 2) * 74 + 0.2 * F, null, 0.5);
-    T.pause(200);
-    vinkelBage(T, B, 0, aA, 112);
-    T.str('32°', B[0] + Math.cos(aA / 2) * 126,
-          B[1] + Math.sin(aA / 2) * 126 + 0.2 * F, null, 0.5);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början */
+    forritad(T, function () {
+      T.line(B, Cp); T.line(Cp, A); T.line(B, A); T.line(B, D);
+      ratVinkel(T, Cp, [-1, 0], [0, -1]);
+      T.str('B', B[0] - 26, B[1] + 0.2 * F, null, 0.6);
+      T.str('C', Cp[0] + 12, Cp[1] + 0.2 * F, null, 0.6);
+      T.str('D', D[0] + 12, D[1] + 0.2 * F, null, 0.6);
+      T.str('A', A[0] + 12, A[1] + 0.2 * F, null, 0.6);
+      T.str('11 m', A[0] + 14, (A[1] + D[1]) / 2 + 0.2 * F, BLUE, 0.55);
+      vinkelBage(T, B, 0, aD, 62);
+      T.str('25°', B[0] + Math.cos(aD / 2) * 74,
+            B[1] + Math.sin(aD / 2) * 74 + 0.2 * F, null, 0.5);
+      vinkelBage(T, B, 0, aA, 112);
+      T.str('32°', B[0] + Math.cos(aA / 2) * 126,
+            B[1] + Math.sin(aA / 2) * 126 + 0.2 * F, null, 0.5);
+    });
 
     tanke(360, [
       [['Den enda kända sidan är']],

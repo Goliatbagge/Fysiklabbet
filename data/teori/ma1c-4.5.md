@@ -9,8 +9,8 @@ section: '4.5'
 
 # Räta linjens ekvation
 
-Sedan tidigare har vi tagit fram räta linjens ekvation i k-form. Räta
-linjens ekvation förkortas ibland RLE.
+Sedan tidigare har vi tagit fram räta linjens ekvation i k-form. **R**äta
+**l**injens **e**kvation förkortas ibland RLE.
 
 ::: formel "Räta linjens ekvation (i k-form)"
 $$

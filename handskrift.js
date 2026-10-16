@@ -60202,6 +60202,7 @@
     verktyg: {
       mathTools: mathTools, physTools: physTools,
       mkTanke: mkTanke, mkArc: mkArc, mkMultIn: mkMultIn, mkAxes: mkAxes,
+      forritad: forritad,
       linjalStreck: linjalStreck, linjalPil: linjalPil,
       mkEkvOp: mkEkvOp, mkSamla: mkSamla,
       diagram: diagram, trigKvot: trigKvot, vinkelBage: vinkelBage,

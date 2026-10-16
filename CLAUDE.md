@@ -1171,6 +1171,17 @@ användaren påpekat (2026-08-25).
    `node .claude/verify-pres-inbaddning.js <avsnitt>` när du lagt in en
    ny inbäddning.
 
+8. **En hänvisning till en formel längre upp skrivs ut på nytt.** Står
+   det "Insättning av dessa i (1) ger …" har formel (1) för länge sedan
+   skrollats bort i presentationsläget, och eleven ser inte vad som
+   sätts in i vad. Skriv därför alltid ut formeln där den används:
+   "Insättning av dessa i (1), $k = \dfrac{\Delta y}{\Delta x}$, ger …"
+   (användarkrav 2026-10-16, `ma1c-4.5`). Gäller varje numrerad
+   ekvation, "formeln ovan", "sambandet från förra avsnittet" och
+   liknande, i teori, exempel, textlösningar och övningarnas lösningar.
+   Ledordet är pedagogiskt: eleven ska hela tiden kunna följa med utan
+   att leta.
+
 **Granska i skärmdump på en låg skärm (t.ex. 1290×730), inte bara i DOM:en**
 — felet syns bara i renderingen. Skriptet
 `%TEMP%\pptr-test\pres-alla.js` stegar igenom ett avsnitts alla steg och

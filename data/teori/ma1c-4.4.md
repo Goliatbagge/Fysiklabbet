@@ -34,7 +34,7 @@ Vi ser att linjen
 - $y = 2x$ skär *y*-axeln vid $y = 0$
 - $y = 2x + 1$ skär *y*-axeln vid $y = 1$
 
-$m$-värdet motsvarar alltså linjens **skärning med *y*-axeln**! Skärningen
+$m$-värdet motsvarar alltså linjens **skärning med *y*-axeln**. Skärningen
 med *y*-axeln kallas också ***y*-intercept** och motsvarar i linjära modeller
 "startvärdet".
 

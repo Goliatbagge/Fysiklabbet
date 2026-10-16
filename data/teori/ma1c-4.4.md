@@ -56,7 +56,7 @@ Vi ser att linjen
 - $y = 3x + 1$ har lutningen **3** (den går 3 steg *uppåt* för varje steg åt höger)
 - $y = -2x + 1$ har lutningen **−2** (den går 2 steg *nedåt* för varje steg åt höger)
 
-$k$-värdet motsvarar alltså linjens **lutning**! Linjens lutning kallas
+$k$-värdet motsvarar alltså linjens **lutning**. Linjens lutning kallas
 också **riktningskoefficient** och motsvarar i linjära modeller
 förändringshastigheten.
 

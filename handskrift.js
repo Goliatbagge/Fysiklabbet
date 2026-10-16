@@ -11493,9 +11493,24 @@
               p1[1] + (p2[1] - p1[1]) * ((i + 1) / n)]]) });
         }
       }
+      /* opt.pilar: en liten pilspets mitt på varje steg, i stegets
+       * riktning (åt höger/vänster, uppåt/nedåt), så att det syns att
+       * trappan går 1 steg åt sidan och k steg UPP eller NED */
+      function pil(p1, p2) {
+        var mx = (p1[0] + p2[0]) / 2, my = (p1[1] + p2[1]) / 2;
+        var dx = p2[0] - p1[0], dy = p2[1] - p1[1];
+        var L = Math.sqrt(dx * dx + dy * dy) || 1, ux = dx / L, uy = dy / L;
+        var h = 7, b = 4.5;
+        var tx = mx + ux * h / 2, ty = my + uy * h / 2;
+        acts.push({ kind: 'stroke', color: BLUE, pts: humanize(
+          [[tx - ux * h - uy * b, ty - uy * h + ux * b], [tx, ty],
+           [tx - ux * h + uy * b, ty - uy * h - ux * b]]) });
+      }
       dash([X(x1), Y(y1)], [X(x2), Y(y1)]);
+      if (opt.pilar) pil([X(x1), Y(y1)], [X(x2), Y(y1)]);
       T.pause(180);
       dash([X(x2), Y(y1)], [X(x2), Y(y2)]);
+      if (opt.pilar) pil([X(x2), Y(y1)], [X(x2), Y(y2)]);
       T.pause(180);
       if (dxTxt) {
         var wx = T.adv(dxTxt, 0.5);
@@ -12293,15 +12308,13 @@
       [['UPP när jag går ETT steg åt']],
       [['höger. Jag ritar trappsteget.']]
     ], 0);
-    A.stair(0, 3, 1, 5, '1', '2');
+    A.stair(0, 3, 1, 5, '1', '2', { pilar: true });
     T.stepEnd();
 
     /* koordinatsystemets nedersta bläck (skalstreckstalet −4) ligger på
      * y≈440 — rubriken måste börja under det */
-    y = 520;
-    T.str('Riktningskoefficient', padL, y - 2.0 * F, null, 0.62);
-    xe = T.fracH('2', '1', padL, y);
-    T.str('=2', xe, y);
+    y = 500;
+    T.str('k=2', padL, y);
     T.stepEnd();
 
     tanke(y, [

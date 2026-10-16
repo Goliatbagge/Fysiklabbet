@@ -12560,15 +12560,16 @@
       [['stoppas in.']]
     ], 0);
     y = 116;
-    T.str('Räta linjens ekvation', padL, y - 1.6 * F, null, 0.62);
+    T.str('RLE', padL, y - 1.6 * F, null, 0.62);
     T.str('y=kx+m', padL, y);
     T.stepEnd();
 
     tanke(y, [
       [['k är given: 2. Kvar är m.']]
     ]);
-    y += 2.6 * F;
-    T.str('y=2x+m', padL + 30, y);
+    y += 3.6 * F;
+    T.str('k=2 ger', padL, y - 1.6 * F, null, 0.62);
+    T.str('y=2x+m', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -12610,11 +12611,7 @@
       [['kan skriva ekvationen.']]
     ]);
     y += 3.6 * F;
-    T.str('k=2 och m=−11 ger', padL, y - 1.6 * F, null, 0.62);
-    T.str('y=2x-11', padL, y);
-    T.stepEnd();
-
-    y += 2.4 * F;
+    T.str('k=2 och m=−11 i y=kx+m ger', padL, y - 1.6 * F, null, 0.62);
     xe = T.str('Svar: y=2x-11', padL, y);
     T.underline(xe, y);
     T.stepEnd();

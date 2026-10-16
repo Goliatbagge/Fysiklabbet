@@ -12620,6 +12620,171 @@
              ekvval: 1 };
   }
 
+  /* ---------------- scen: bestäm a ur given lutning (4.5 ex 3) -------
+   * Punkterna (a, 2) och (4, 3a), k = 2. Koordinaterna sätts in i
+   * k-formeln en i taget (ring i punktraden, sedan skrivs värdet), och
+   * ekvationen löses genom att båda led multipliceras med nämnaren (4 − a).
+   * Kontroll med a = 2 före svaret. */
+  function layoutAvariabel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet) */
+    var vagg = !!cfg.vagg;
+    var ekvOp = mkEkvOp(T, vagg);
+    var x0 = padL + 30;
+    function xwFor(rad) { return x0 + T.adv(rad) + 0.9 * F; }
+
+    tanke(20, [
+      [['Jag döper punkterna först,']],
+      [['precis som när koordinaterna']],
+      [['är vanliga tal.']]
+    ], 0);
+    y = 150;
+    T.str('Punkterna', padL, y - 1.6 * F, null, 0.62);
+    var yp = y, cols = [];
+    function koord(t) { var c0 = xx; xx = T.str(t, xx, yp); cols.push([c0, xx]); }
+    xx = T.str('(', padL, yp); koord('a'); xx = T.str(', ', xx, yp);
+    koord('2'); xx = T.str(')  och  (', xx, yp); koord('4');
+    xx = T.str(', ', xx, yp); koord('3a'); xx = T.str(')', xx, yp);
+    T.stepEnd();
+
+    ['x_1', 'y_1', 'x_2', 'y_2'].forEach(function (t, i) {
+      var w = T.adv(t, 0.62), c = (cols[i][0] + cols[i][1]) / 2;
+      T.str(t, c - w / 2, yp + 1.15 * F, BLUE, 0.62);
+    });
+    T.stepEnd();
+    y += 1.6 * F;
+
+    tanke(y, [
+      [['Riktningskoefficienten är']],
+      [['skillnaden i y delat med']],
+      [['skillnaden i x.']]
+    ]);
+    y += 3.8 * F;
+    T.str('Riktningskoefficient', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('k=', padL, y);
+    T.fracH('y_2-y_1', 'x_2-x_1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['k ska vara 2. Jag sätter in']],
+      [['k=2 och koordinaterna. Då får']],
+      [['jag en ekvation med a.']]
+    ], 1.05);
+    /* insättningen värde för värde: ring i punktraden, sedan skrivs
+     * värdet in, i ordningen y_2, y_1, x_2, x_1 */
+    y += 4.6 * F;
+    T.str('Sätter in k=2 och koordinaterna', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('2=', x0, y);
+    var numS = '3a-2', denS = '4-a';
+    var ybar = y - 0.34 * F;
+    var fw = Math.max(T.adv(numS), T.adv(denS)) + 0.3 * F;
+    function sattIn(i, t, x, yb) {
+      var st = T.ring(cols[i][0], cols[i][1], yp);
+      T.pause(380);
+      var xe2 = T.str(t, x, yb);
+      T.pause(200);
+      T.fade(st);
+      T.pause(160);
+      return xe2;
+    }
+    var xn = xx + (fw - T.adv(numS)) / 2, yn = ybar - 0.14 * F;
+    xn = sattIn(3, '3a', xn, yn);
+    sattIn(1, '-2', xn, yn);
+    T.line([xx, ybar], [xx + fw, ybar]);
+    T.pause(130);
+    var xd = xx + (fw - T.adv(denS)) / 2, yd = ybar + 1.04 * F;
+    xd = sattIn(2, '4', xd, yd);
+    sattIn(0, '-a', xd, yd);
+    var xw1 = xx + fw + 0.9 * F;
+    T.stepEnd();
+
+    tanke(y, [
+      [['a står i nämnaren. Jag']],
+      [['multiplicerar båda led med']],
+      [['(4-a). Nämnaren får inte vara']],
+      [['0, så a kan inte vara 4.']]
+    ], 1.05);
+    y = ekvOp(y, '·(4-a)', xw1, function (yb) {
+      var x2 = T.str('2', x0, yb);
+      x2 = T.str('·(4-a)', x2, yb, BLUE);
+      x2 = T.str('=', x2, yb);
+      x2 = T.fracH(numS, denS, x2, yb);
+      T.str('·(4-a)', x2, yb, BLUE);
+    }, { dy: 3.0, dyRes: 3.8, dyVagg: 3.8, vopt: { h0: 1.25, h1: 1.15 } });
+    tanke(y, [
+      [['I högerledet tar (4-a) i']],
+      [['täljaren och nämnaren ut']],
+      [['varandra.']]
+    ], 1.05);
+    var yk = y;
+    var f0 = x0; xx = T.str('2', x0, y); var f1 = xx;
+    xx = T.str('(', xx, y);
+    var t0 = xx; xx = T.str('4', xx, y); var t1 = xx;
+    var u0 = xx; xx = T.str('-a', xx, y); var u1 = xx;
+    T.str(')=3a-2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['2 multipliceras med varje']],
+      [['term i parentesen.']]
+    ], 1.05);
+    y += 2.3 * F;
+    var multIn = mkMultIn(T);
+    xx = multIn(x0, y, yk - 0.95 * F, [
+      { fran: [f0, f1], till: [t0, t1], skriv: '8', hojd: 24 },
+      { fran: [f0, f1], till: [u0, u1], skriv: '-2a', hojd: 40, dx: 4 }
+    ]);
+    T.str('=3a-2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag samlar a-termerna i']],
+      [['högerledet: adderar 2a till']],
+      [['båda led.']]
+    ], 1.05);
+    y = ekvOp(y, '+2a', xwFor('8-2a=3a-2'), '8-2a=3a-2');
+    T.str('8=5a-2', x0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Adderar 2 till båda led.']]
+    ], 1.05);
+    y = ekvOp(y, '+2', xwFor('8=5a-2'), '8=5a-2');
+    T.str('10=5a', x0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar båda led med 5.']]
+    ], 1.05);
+    y = ekvOp(y, '/5', xwFor('10=5a'), '10=5a');
+    T.str('2=a', x0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag kontrollerar: med a=2 blir']],
+      [['punkterna (2, 2) och (4, 6).']],
+      [['Ger de k=2?']]
+    ], 1.05);
+    y += 4.0 * F;
+    T.str('Kontroll: a=2 ger punkterna (2, 2) och (4, 6)', padL, y - 2.0 * F,
+          null, 0.62);
+    xx = T.str('k=', padL, y);
+    xx = T.fracH('6-2', '4-2', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('4', '2', xx, y);
+    T.str('=2', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: a=2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL,
+             ekvval: 1 };
+  }
+
   /* ---------------- scen: parallell linje + allmän form (4.6 ex 1) ----
    * a) parallell linje genom en punkt (samma k, nytt m),
    * b) samma linje skriven i allmän form (allt på ena sidan). */
@@ -58474,6 +58639,7 @@
                    riktkoeff: layoutRiktkoeff,
                    tvapunkter: layoutTvapunkter,
                    punktlutning: layoutPunktlutning,
+                   avariabel: layoutAvariabel,
                    parallell: layoutParallell,
                    allmanform: layoutAllmanform,
                    vertikallinje: layoutVertikallinje,

@@ -145,6 +145,81 @@ Insättning av $k = 2$ och $m = -11$ i RLE ger $y = 2x - 11$.
 :::
 :::
 
+::: exempel "Exempel 3 — Bestäm a ur riktningskoefficienten"
+**En rät linje går genom punkterna $(a, 2)$ och $(4, 3a)$ och har
+riktningskoefficienten 2. Bestäm $a$.**
+
+::: handskrift
+typ: avariabel
+:::
+
+::: textlosning
+Koordinaterna innehåller den okända variabeln $a$, men vi gör precis som
+förut. Vi kallar punkterna $(x_1, y_1) = (a, 2)$ och
+$(x_2, y_2) = (4, 3a)$ och sätter in $k = 2$ och koordinaterna i formeln
+för riktningskoefficienten:
+
+$$
+2 = \frac{3a - 2}{4 - a}
+$$
+
+Nämnaren får inte vara 0, så $a$ kan inte vara 4. Vi multiplicerar båda
+led med $(4 - a)$:
+
+$$
+2 \cdot (4 - a) = \frac{3a - 2}{4 - a} \cdot (4 - a)
+$$
+
+$$
+2(4 - a) = 3a - 2
+$$
+
+$$
+8 - 2a = 3a - 2
+$$
+
+Adderar $2a$ till båda led:
+
+$$
+8 - 2a + 2a = 3a - 2 + 2a
+$$
+
+$$
+8 = 5a - 2
+$$
+
+Adderar 2 till båda led:
+
+$$
+8 + 2 = 5a - 2 + 2
+$$
+
+$$
+10 = 5a
+$$
+
+Dividerar båda led med 5:
+
+$$
+\frac{10}{5} = \frac{5a}{5}
+$$
+
+$$
+2 = a
+$$
+
+**Kontroll:** Med $a = 2$ blir punkterna (2, 2) och (4, 6), och
+
+$$
+k = \frac{6 - 2}{4 - 2} = \frac{4}{2} = 2
+$$
+
+vilket stämmer.
+
+**Svar:** $a = 2$
+:::
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Räta linjens ekvation"

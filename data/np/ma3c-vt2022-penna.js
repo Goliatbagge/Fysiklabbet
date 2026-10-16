@@ -22,7 +22,7 @@
   var mathTools = V.mathTools, mkTanke = V.mkTanke, mkMultIn = V.mkMultIn,
       mkAxes = V.mkAxes, substRings = V.substRings, fadeRings = V.fadeRings,
       humanize = V.humanize, expFrac = V.expFrac, bigParen = V.bigParen,
-      BLUE = V.BLUE;
+      BLUE = V.BLUE, forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('ma3c-vt2022-u' + nr, fn); }
 
@@ -609,13 +609,17 @@
                            xmin: -2, xmax: 4, ymin: -1, ymax: 6 });
     function f(x) { return -x * x + 2 * x + 4; }
 
-    A.axes();
-    A.ticks(V.heltal(-2, 4), V.heltal(-1, 6), [-1, 1, 2, 3], [2, 4, 6]);
-    T.pause(200);
-    var kurva = [];
-    for (i = -1.05; i <= 3.45; i += 0.15) kurva.push([A.X(i), A.Y(f(i))]);
-    acts.push({ kind: 'stroke', pts: kurva });
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var kurva;
+    forritad(T, function () {
+      A.axes();
+      A.ticks(V.heltal(-2, 4), V.heltal(-1, 6), [-1, 1, 2, 3], [2, 4, 6]);
+      T.pause(200);
+      kurva = [];
+      for (i = -1.05; i <= 3.45; i += 0.15) kurva.push([A.X(i), A.Y(f(i))]);
+      acts.push({ kind: 'stroke', pts: kurva });
+    });
 
     tanke(420, [
       [['Derivatan i en punkt är']],
@@ -667,25 +671,28 @@
     var P = [cx + Math.cos(a1) * r, cy - Math.sin(a1) * r];
     var Q = [cx - Math.cos(a1) * r, cy + Math.sin(a1) * r];
 
-    /* ---- steg 1: rita av enhetscirkeln ---- */
-    T.line([cx - r - 34, cy], [cx + r + 34, cy]);
-    T.line([cx + r + 25, cy - 5], [cx + r + 35, cy]);
-    T.line([cx + r + 25, cy + 5], [cx + r + 35, cy]);
-    T.pause(140);
-    T.line([cx, cy + r + 34], [cx, cy - r - 34]);
-    T.line([cx - 5, cy - r - 25], [cx, cy - r - 35]);
-    T.line([cx + 5, cy - r - 25], [cx, cy - r - 35]);
-    T.pause(160);
-    acts.push({ kind: 'stroke', pts: V.ringPts(cx, cy, r, r) });
-    T.pause(200);
-    T.line([cx, cy], P);
-    T.pause(140);
-    V.vinkelBage(T, [cx, cy], -a1, 0, 42);
-    T.str('50°', cx + 52, cy - 22, null, 0.62);
-    T.pause(160);
-    acts.push({ kind: 'stroke', pts: V.dotPts(P[0], P[1]) });
-    T.str('(0,64; 0,77)', P[0] + 12, P[1] - 10, BLUE, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      /* ---- steg 1: rita av enhetscirkeln ---- */
+      T.line([cx - r - 34, cy], [cx + r + 34, cy]);
+      T.line([cx + r + 25, cy - 5], [cx + r + 35, cy]);
+      T.line([cx + r + 25, cy + 5], [cx + r + 35, cy]);
+      T.pause(140);
+      T.line([cx, cy + r + 34], [cx, cy - r - 34]);
+      T.line([cx - 5, cy - r - 25], [cx, cy - r - 35]);
+      T.line([cx + 5, cy - r - 25], [cx, cy - r - 35]);
+      T.pause(160);
+      acts.push({ kind: 'stroke', pts: V.ringPts(cx, cy, r, r) });
+      T.pause(200);
+      T.line([cx, cy], P);
+      T.pause(140);
+      V.vinkelBage(T, [cx, cy], -a1, 0, 42);
+      T.str('50°', cx + 52, cy - 22, null, 0.62);
+      T.pause(160);
+      acts.push({ kind: 'stroke', pts: V.dotPts(P[0], P[1]) });
+      T.str('(0,64; 0,77)', P[0] + 12, P[1] - 10, BLUE, 0.62);
+    });
 
     /* ---- a) ---- */
     tanke(cy + r + 50, [
@@ -743,13 +750,17 @@
                            xmin: -3, xmax: 4, ymin: -3, ymax: 4 });
     function f(x) { return 0.35 * (x * x * x - 3 * x) + 1; }
 
-    A.axes();
-    A.ticks(V.heltal(-3, 4), V.heltal(-3, 4), [-2, 2, 3], [-2, 2]);
-    T.pause(200);
-    var kurva = [];
-    for (i = -2.5; i <= 2.5; i += 0.2) kurva.push([A.X(i), A.Y(f(i))]);
-    acts.push({ kind: 'stroke', pts: kurva, color: BLUE });
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var kurva;
+    forritad(T, function () {
+      A.axes();
+      A.ticks(V.heltal(-3, 4), V.heltal(-3, 4), [-2, 2, 3], [-2, 2]);
+      T.pause(200);
+      kurva = [];
+      for (i = -2.5; i <= 2.5; i += 0.2) kurva.push([A.X(i), A.Y(f(i))]);
+      acts.push({ kind: 'stroke', pts: kurva, color: BLUE });
+    });
 
     tanke(400, [
       [['Där f har en topp eller en dal']],
@@ -814,13 +825,18 @@
                            xmin: -2, xmax: 4, ymin: -2, ymax: 4 });
     function p(x) { return 0.3 * (x * x * x - 4.5 * x * x) + 3; }
 
-    A.axes();
-    A.ticks(V.heltal(-2, 4), V.heltal(-2, 4), [-1, 1, 2, 3, 4], [2, 4]);
-    T.pause(200);
-    var kurva = [];
-    for (i = -1.2; i <= 4.1; i += 0.15) kurva.push([A.X(i), A.Y(p(i))]);
-    acts.push({ kind: 'stroke', pts: kurva, color: BLUE });
-    T.pause(160);
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var kurva;
+    forritad(T, function () {
+      A.axes();
+      A.ticks(V.heltal(-2, 4), V.heltal(-2, 4), [-1, 1, 2, 3, 4], [2, 4]);
+      T.pause(200);
+      kurva = [];
+      for (i = -1.2; i <= 4.1; i += 0.15) kurva.push([A.X(i), A.Y(p(i))]);
+      acts.push({ kind: 'stroke', pts: kurva, color: BLUE });
+      T.pause(160);
+    });
     A.dot(0, p(0), BLUE);
     T.pause(120);
     A.dot(3, p(3), BLUE);
@@ -884,13 +900,17 @@
                            xmin: -2, xmax: 3, ymin: -1, ymax: 5 });
     function f(x) { return 1.0714 * x * x * x - 1.9286 * x * x + 3; }
 
-    A.axes();
-    A.ticks(V.heltal(-2, 3), V.heltal(-1, 5), [-1, 1, 2, 3], [1, 3, 5]);
-    T.pause(200);
-    var kurva = [];
-    for (i = -1.15; i <= 2.15; i += 0.12) kurva.push([A.X(i), A.Y(f(i))]);
-    acts.push({ kind: 'stroke', pts: kurva, color: BLUE });
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var kurva;
+    forritad(T, function () {
+      A.axes();
+      A.ticks(V.heltal(-2, 3), V.heltal(-1, 5), [-1, 1, 2, 3], [1, 3, 5]);
+      T.pause(200);
+      kurva = [];
+      for (i = -1.15; i <= 2.15; i += 0.12) kurva.push([A.X(i), A.Y(f(i))]);
+      acts.push({ kind: 'stroke', pts: kurva, color: BLUE });
+    });
 
     tanke(430, [
       [['Integralen av en DERIVATA går']],
@@ -1052,25 +1072,29 @@
     function g(x) { return 5 + 4 * x - x * x; }
     var xwA = padL + 30 + T.adv('6+4,5p=24') + 0.9 * F;
 
-    /* ---- steg 1: figuren ---- */
-    A.axes();
-    A.ticks(V.heltal(0, 4), V.heltal(0, 10, 2), V.heltal(1, 4), [2, 4, 6, 8, 10]);
-    T.pause(200);
-    var kurva = [];
-    for (i = -0.4; i <= 4.4; i += 0.15) kurva.push([A.X(i), A.Y(g(i))]);
-    acts.push({ kind: 'stroke', pts: kurva, color: BLUE });
-    T.pause(160);
-    T.str('g', A.X(4.1), A.Y(g(4.1)) - 14, null, 0.62);
-    T.pause(140);
-    /* linjen x=3 och skuggningen mellan kurvan och x-axeln */
-    T.line([A.X(3), A.Y(-1)], [A.X(3), A.Y(g(3) + 0.6)]);
-    T.pause(160);
-    for (i = 0.12; i <= 2.94; i += 0.16) {
-      acts.push({ kind: 'stroke', color: BLUE,
-        pts: V.humanize([[A.X(i), A.Y(0)], [A.X(i), A.Y(g(i))]]) });
-      T.pause(40);
-    }
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var kurva;
+    forritad(T, function () {
+      /* ---- steg 1: figuren ---- */
+      A.axes();
+      A.ticks(V.heltal(0, 4), V.heltal(0, 10, 2), V.heltal(1, 4), [2, 4, 6, 8, 10]);
+      T.pause(200);
+      kurva = [];
+      for (i = -0.4; i <= 4.4; i += 0.15) kurva.push([A.X(i), A.Y(g(i))]);
+      acts.push({ kind: 'stroke', pts: kurva, color: BLUE });
+      T.pause(160);
+      T.str('g', A.X(4.1), A.Y(g(4.1)) - 14, null, 0.62);
+      T.pause(140);
+      /* linjen x=3 och skuggningen mellan kurvan och x-axeln */
+      T.line([A.X(3), A.Y(-1)], [A.X(3), A.Y(g(3) + 0.6)]);
+      T.pause(160);
+      for (i = 0.12; i <= 2.94; i += 0.16) {
+        acts.push({ kind: 'stroke', color: BLUE,
+          pts: V.humanize([[A.X(i), A.Y(0)], [A.X(i), A.Y(g(i))]]) });
+        T.pause(40);
+      }
+    });
 
     tanke(420, [
       [['Arean under en kurva är']],
@@ -1253,23 +1277,27 @@
                            xmin: -0.4, xmax: 2.2, ymin: -1, ymax: 7 });
     var a = 1.732;
 
-    /* ---- steg 1: figuren ---- */
-    A.axes();
-    A.ticks([0.5, 1, 1.5, 2], V.heltal(0, 6, 2), [1, 2], [2, 4, 6]);
-    T.pause(200);
-    var kurva = [];
-    for (i = -0.35; i <= 1.95; i += 0.08) {
-      kurva.push([A.X(i), A.Y(i * i * i)]);
-    }
-    acts.push({ kind: 'stroke', pts: kurva });
-    T.pause(160);
-    /* tangenten y=3a^2x-2a^3 och linjen x=a */
-    A.graphKM(3 * a * a, -2 * a * a * a, BLUE, 2 * a / 3 - 0.15, 1.95);
-    T.pause(140);
-    T.line([A.X(a), A.Y(-0.6)], [A.X(a), A.Y(a * a * a + 0.4)]);
-    T.pause(160);
-    T.str('a', A.X(a) - 6, A.Y(0) + 0.95 * F, BLUE, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var kurva;
+    forritad(T, function () {
+      /* ---- steg 1: figuren ---- */
+      A.axes();
+      A.ticks([0.5, 1, 1.5, 2], V.heltal(0, 6, 2), [1, 2], [2, 4, 6]);
+      T.pause(200);
+      kurva = [];
+      for (i = -0.35; i <= 1.95; i += 0.08) {
+        kurva.push([A.X(i), A.Y(i * i * i)]);
+      }
+      acts.push({ kind: 'stroke', pts: kurva });
+      T.pause(160);
+      /* tangenten y=3a^2x-2a^3 och linjen x=a */
+      A.graphKM(3 * a * a, -2 * a * a * a, BLUE, 2 * a / 3 - 0.15, 1.95);
+      T.pause(140);
+      T.line([A.X(a), A.Y(-0.6)], [A.X(a), A.Y(a * a * a + 0.4)]);
+      T.pause(160);
+      T.str('a', A.X(a) - 6, A.Y(0) + 0.95 * F, BLUE, 0.62);
+    });
 
     tanke(430, [
       [['Tangentens lutning i punkten är']],
@@ -1408,19 +1436,22 @@
     /* triangeln i provfigurens orientering */
     var A = [padL + 20, 250], B = [padL + 130, 300], C = [padL + 350, 150];
 
-    T.line(A, B); T.pause(130);
-    T.line(B, C); T.pause(130);
-    T.line(C, A); T.pause(160);
-    V.vinkelBage(T, A, -0.42, 0.42, 34);
-    T.str('42°', A[0] + 48, A[1] + 8, null, 0.62);
-    T.pause(150);
-    V.vinkelBage(T, B, -0.42 - Math.PI, -0.6, 26);
-    T.str('120°', B[0] - 10, B[1] - 34, null, 0.62);
-    T.pause(150);
-    T.str('6,6', (A[0] + C[0]) / 2 - 20, (A[1] + C[1]) / 2 - 14, BLUE, 0.62);
-    T.pause(140);
-    T.str('5,1', (B[0] + C[0]) / 2 + 10, (B[1] + C[1]) / 2 + 16, BLUE, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      T.line(A, B); T.pause(130);
+      T.line(B, C); T.pause(130);
+      T.line(C, A); T.pause(160);
+      V.vinkelBage(T, A, -0.42, 0.42, 34);
+      T.str('42°', A[0] + 48, A[1] + 8, null, 0.62);
+      T.pause(150);
+      V.vinkelBage(T, B, -0.42 - Math.PI, -0.6, 26);
+      T.str('120°', B[0] - 10, B[1] - 34, null, 0.62);
+      T.pause(150);
+      T.str('6,6', (A[0] + C[0]) / 2 - 20, (A[1] + C[1]) / 2 - 14, BLUE, 0.62);
+      T.pause(140);
+      T.str('5,1', (B[0] + C[0]) / 2 + 10, (B[1] + C[1]) / 2 + 16, BLUE, 0.62);
+    });
 
     tanke(340, [
       [['Areasatsen behöver de två']],
@@ -1729,26 +1760,29 @@
     var A = [padL + 120, 170], B = [padL + 30, 350], C = [padL + 350, 195];
     var D = [A[0] + (C[0] - A[0]) * 0.65, A[1] + (C[1] - A[1]) * 0.65];
 
-    /* ---- steg 1: figuren ---- */
-    T.line(A, B); T.pause(120);
-    T.line(B, C); T.pause(120);
-    T.line(C, A); T.pause(120);
-    T.line(B, D); T.pause(160);
-    T.str('A', A[0] - 22, A[1] - 4, null, 0.62);
-    T.str('B', B[0] - 24, B[1] + 14, null, 0.62);
-    T.str('C', C[0] + 8, C[1] + 6, null, 0.62);
-    T.str('D', D[0] + 4, D[1] - 12, null, 0.62);
-    T.pause(160);
-    V.vinkelBage(T, A, 1.107, 2.36, 30);
-    T.str('106°', A[0] - 16, A[1] + 60, null, 0.62);
-    T.pause(150);
-    V.vinkelBage(T, C, Math.PI + 0.25, Math.PI + 0.93, 34);
-    T.str('39°', C[0] - 72, C[1] + 40, null, 0.62);
-    T.pause(160);
-    T.str('5,0', (A[0] + D[0]) / 2 - 8, (A[1] + D[1]) / 2 - 12, BLUE, 0.62);
-    T.pause(140);
-    T.str('2,7', (D[0] + C[0]) / 2 - 8, (D[1] + C[1]) / 2 - 22, BLUE, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      /* ---- steg 1: figuren ---- */
+      T.line(A, B); T.pause(120);
+      T.line(B, C); T.pause(120);
+      T.line(C, A); T.pause(120);
+      T.line(B, D); T.pause(160);
+      T.str('A', A[0] - 22, A[1] - 4, null, 0.62);
+      T.str('B', B[0] - 24, B[1] + 14, null, 0.62);
+      T.str('C', C[0] + 8, C[1] + 6, null, 0.62);
+      T.str('D', D[0] + 4, D[1] - 12, null, 0.62);
+      T.pause(160);
+      V.vinkelBage(T, A, 1.107, 2.36, 30);
+      T.str('106°', A[0] - 16, A[1] + 60, null, 0.62);
+      T.pause(150);
+      V.vinkelBage(T, C, Math.PI + 0.25, Math.PI + 0.93, 34);
+      T.str('39°', C[0] - 72, C[1] + 40, null, 0.62);
+      T.pause(160);
+      T.str('5,0', (A[0] + D[0]) / 2 - 8, (A[1] + D[1]) / 2 - 12, BLUE, 0.62);
+      T.pause(140);
+      T.str('2,7', (D[0] + C[0]) / 2 - 8, (D[1] + C[1]) / 2 - 22, BLUE, 0.62);
+    });
 
     tanke(400, [
       [['Sidan AC är 5,0+2,7=7,7. I den']],
@@ -1827,19 +1861,23 @@
                            xmin: -2, xmax: 3, ymin: -0.5, ymax: 5 });
     function f(x) { return Math.pow(2, x); }
 
-    A.axes();
-    A.ticks(V.heltal(-2, 3), V.heltal(1, 5), [-1, 1, 2, 3], [1, 2, 3, 4]);
-    T.pause(200);
-    var kurva = [];
-    for (i = -2; i <= 2.25; i += 0.12) kurva.push([A.X(i), A.Y(f(i))]);
-    acts.push({ kind: 'stroke', pts: kurva });
-    T.pause(160);
-    A.dot(-1, 0.5, BLUE);
-    T.pause(120);
-    A.dot(2, 4, BLUE);
-    T.pause(140);
-    A.linjal([A.X(-1), A.Y(0.5)], [A.X(2), A.Y(4)], BLUE);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var kurva;
+    forritad(T, function () {
+      A.axes();
+      A.ticks(V.heltal(-2, 3), V.heltal(1, 5), [-1, 1, 2, 3], [1, 2, 3, 4]);
+      T.pause(200);
+      kurva = [];
+      for (i = -2; i <= 2.25; i += 0.12) kurva.push([A.X(i), A.Y(f(i))]);
+      acts.push({ kind: 'stroke', pts: kurva });
+      T.pause(160);
+      A.dot(-1, 0.5, BLUE);
+      T.pause(120);
+      A.dot(2, 4, BLUE);
+      T.pause(140);
+      A.linjal([A.X(-1), A.Y(0.5)], [A.X(2), A.Y(4)], BLUE);
+    });
 
     tanke(420, [
       [['Sekantens lutning är precis']],
@@ -2039,17 +2077,21 @@
     var tanke = mkTanke(T);
     var Lx = padL + 90, Rx = padL + 290, Ty = 150, By = 390;
 
-    /* ---- steg 1: figuren ---- */
-    T.line([Lx, Ty], [Rx, Ty]); T.pause(110);
-    T.line([Rx, Ty], [Rx, By]); T.pause(110);
-    T.line([Rx, By], [Lx, By]); T.pause(110);
-    T.line([Lx, By], [Lx, Ty]); T.pause(160);
-    /* guldtråden mellan punkterna 8 mm in från var sitt hörn */
-    T.line([Lx, Ty + 62], [Rx, By - 62]);
-    T.pause(180);
-    T.str('8', Lx - 22, Ty + 34, BLUE, 0.62);
-    T.pause(120);
-    T.str('8', Rx + 10, By - 34, BLUE, 0.62);
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      /* ---- steg 1: figuren ---- */
+      T.line([Lx, Ty], [Rx, Ty]); T.pause(110);
+      T.line([Rx, Ty], [Rx, By]); T.pause(110);
+      T.line([Rx, By], [Lx, By]); T.pause(110);
+      T.line([Lx, By], [Lx, Ty]); T.pause(160);
+      /* guldtråden mellan punkterna 8 mm in från var sitt hörn */
+      T.line([Lx, Ty + 62], [Rx, By - 62]);
+      T.pause(180);
+      T.str('8', Lx - 22, Ty + 34, BLUE, 0.62);
+      T.pause(120);
+      T.str('8', Rx + 10, By - 34, BLUE, 0.62);
+    });
     T.pause(140);
     T.str('x', Rx + 12, (Ty + By) / 2, BLUE, 0.62);
     T.pause(120);

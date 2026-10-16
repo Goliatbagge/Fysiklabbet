@@ -765,7 +765,10 @@
             // animationsloop
             useEffect(() => {
                 if (!running) { lastRef.current = null; return; }
-                const PXPM = 58;                        // px per meter (animationsskala)
+                // px per meter. Skalan följer föremålen: en 1 kg-låda (84 px) motsvarar
+                // då ca 40 cm och planet (540 px) 2,7 m. Med 58 px/m blev lådan
+                // 1,5 m stor och fallet vid 90° såg ut att gå för långsamt.
+                const PXPM = 200;
                 const step = (ts) => {
                     if (lastRef.current == null) lastRef.current = ts;
                     const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
@@ -794,7 +797,7 @@
                         nv = nv + aP * PXPM * dt;
                         if (nv < 0) nv = 0;
                     }
-                    if (nv > 1400) nv = 1400;
+                    if (nv > 4000) nv = 4000;
                     let nt = tRef.current - (nv / LHYP) * dt;
                     const footT = (30 + (Math.min(m, 14) - 1) * 1.1 + 10) / LHYP;
                     if (nt <= footT) { nt = footT; nv = 0; }

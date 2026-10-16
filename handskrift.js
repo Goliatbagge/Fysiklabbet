@@ -55700,10 +55700,6 @@
     var tanke = mkTanke(T);
     var G = mkTrigGraf(T, F, { ox: padL + 290, oy: 320, ux: 42, uy: 24 });
 
-    y = 150;
-    T.str('x^2+6x+6 mot 1', padL, y, null, 0.9);
-    T.stepEnd();
-
     /* uppgiftens graf (med skärningarna) står färdig från början */
     forritad(T, function () {
       G.axlar(-6.6, 1.4, -4.4, 4.4, 'x', 'y');

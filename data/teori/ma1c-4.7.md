@@ -18,7 +18,7 @@ en kurva.
 :::
 
 Två linjer som skär varandra i **rät vinkel**, alltså 90°, kallas
-**vinkelräta**. Rutorna på ett rutat papper, spröjsen i ett fönster och två
+**vinkelräta**. Rutorna på ett rutat papper, hörnen på en mobilskärm och två
 gator som korsar varandra rakt är exempel på vinkelräta linjer.
 
 I förra avsnittet såg vi att parallella linjer har samma *k*-värde. Även

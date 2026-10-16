@@ -342,9 +342,9 @@
     var ox = 200, oy = 220;
 
     T.tanke(T.figurBubble(292, [
-      [['Ritar föremålet och de två']],
-      [['krafterna, vinkelräta mot']],
-      [['varandra och skalenliga.']]
+      [['Jag ritar de två krafterna,']],
+      [['vinkelräta mot varandra']],
+      [['och skalenliga.']]
     ], 300));
     forritad(T, function () {
       T.rect(ox - 14, oy - 14, ox + 14, oy + 14);
@@ -711,8 +711,9 @@
     var r12 = [ox + 50 * K, oy - 30 * K], r3 = [ox - 50 * K, oy + 30 * K];
 
     T.tanke(T.figurBubble(292, [
-      [['Ritar lådan uppifrån med de två']],
-      [['kända krafterna, skalenligt.']],
+      [['Lådan är sedd uppifrån. Jag']],
+      [['ritar de två kända krafterna']],
+      [['skalenligt.']],
       [['Norr är uppåt.']]
     ], 320));
     forritad(T, function () {

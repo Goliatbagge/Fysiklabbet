@@ -12365,39 +12365,42 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
 
-    /* linjen går genom (−3, 3) och (2, 0): k = −3/5 */
-    var A = mkAxes(T, F, { ox: padL + 200, oy: 250, u: 30,
-                           xmin: -4, xmax: 4, ymin: -3, ymax: 4 });
-    A.axes();
-    A.ticks(heltal(-4, 4), heltal(-3, 4), [-4, -2, 2, 4], [-2, 2, 4]);
-    T.pause(150);
-    A.graphKM(-0.6, 1.2, null, -4.2, 4.2);
-    T.stepEnd();
+    /* uppgiftens figur: linjen y = 7,4 − 0,6x i samma fönster som i
+     * uppgiften (x från −1 till 10, y från 0 till 8). Den står färdig från
+     * början (REGEL UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN). Punkterna
+     * väljs bland dem som SYNS i uppgiftens figur, (4, 5) och (9, 2): en
+     * avritad graf är aldrig exakt, så man läser bara av punkter där
+     * linjen tydligt går genom ett rutnätshörn i originalet. */
+    var A = mkAxes(T, F, { ox: padL + 54, oy: 297, u: 27,
+                           xmin: -1, xmax: 10, ymin: 0, ymax: 8 });
+    forritad(T, function () {
+      A.axes();
+      A.ticks(heltal(-1, 10), heltal(0, 8), [-1, 2, 4, 6, 8, 10], [2, 4, 6, 8]);
+      A.graphKM(-0.6, 7.4, null, -1, 10.4);
+    });
 
-    tanke(375, [
+    tanke(400, [
       [['k syns inte direkt här. Då']],
-      [['väljer jag två punkter som']],
-      [['är lätta att läsa av, och']],
-      [['ritar ett trappsteg mellan']],
-      [['dem.']]
+      [['väljer jag två punkter där']],
+      [['linjen går genom ett hörn i']],
+      [['rutnätet i figuren, och ritar']],
+      [['ett trappsteg mellan dem.']]
     ], 0);
-    A.dot(-3, 3);
+    A.dot(4, 5);
     T.pause(220);
-    A.dot(2, 0);
+    A.dot(9, 2);
     T.stepEnd();
 
-    tanke(375, [
-      [['Först vågrätt: från x=−3 till']],
-      [['x=2 är fem steg åt höger.']],
+    tanke(400, [
+      [['Först vågrätt: från x=4 till']],
+      [['x=9 är fem steg åt höger.']],
       [['Sedan lodrätt: tre steg NER,']],
       [['alltså −3.']]
     ], 0);
-    /* måttet 5 hamnar mitt på y-axeln och ovanpå tvåans skalstreckstal
-     * om det inte flyttas åt vänster */
-    A.stair(-3, 3, 2, 0, '5', '−3', { dxOff: [44, 0] });
+    A.stair(4, 5, 9, 2, '5', '−3');
     T.stepEnd();
 
-    /* koordinatsystemets nedersta bläck ligger på y≈355 */
+    /* koordinatsystemets nedersta bläck ligger på y≈340 */
     y = 440;
     T.str('Riktningskoefficient', padL, y - 2.0 * F, null, 0.62);
     xx = T.str('k=', padL, y);

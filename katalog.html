@@ -1645,9 +1645,25 @@
                 // framklickad, men skrollningen får inte trycka upp den ur
                 // bild — den blir därför KONTEXT till stycket och räknas in
                 // när steget placeras på duken.
-                if (el.tagName === 'P' && prevTop && !prevTop.block &&
-                    prevTop.el.classList.contains('lab-block-figur')) {
-                    steps.push({ el, block: null, context: [prevTop.el] });
+                // Figuren kan också ha tänts som tvilling till stycket före
+                // ("Vi ritar upp graferna …" + figuren, ma1c-4.4); då är den
+                // sista tvillingen kontexten.
+                const prevSist = prevTop && !prevTop.block &&
+                    (prevTop.twins && prevTop.twins.length ? prevTop.twins[prevTop.twins.length - 1] : prevTop.el);
+                if (el.tagName === 'P' && prevSist &&
+                    prevSist.classList.contains('lab-block-figur')) {
+                    steps.push({ el, block: null, context: [prevSist] });
+                    continue;
+                }
+                // En lista som FORTSÄTTER stycket före ("Vi ser att linjen"
+                // + punkterna, ma1c-4.4) är samma mening: de tänds samtidigt.
+                // Som eget steg sköt listan upp figuren som stycket
+                // resonerar om ur bild (påpekat 2026-10-16). Stycket bär
+                // figuren som kontext, så hela klumpen placeras ihop.
+                if ((el.tagName === 'UL' || el.tagName === 'OL') &&
+                    prevTop && !prevTop.block && prevTop.el.tagName === 'P' &&
+                    !/[.!?]\s*$/.test(prevTop.el.textContent || '')) {
+                    (prevTop.twins || (prevTop.twins = [])).push(el);
                     continue;
                 }
                 steps.push({ el, block: null });
@@ -2226,6 +2242,18 @@
                         if (cBot - cTop <= oh * 0.94) { rTop = cTop; rBot = cBot; }
                     }
                     const rH = rBot - rTop;
+                    // Ryms inte figur + text: lägg textens underkant strax
+                    // ovanför kontrollisten, så att så mycket som möjligt
+                    // av figuren syns ovanför ("Vi ser att linjen …" i
+                    // ma1c-4.4 sköt annars upp linjerna ur bild).
+                    if (ctx.length && rTop === oTop && rBot === oBot) {
+                        const listen0 = overlay.querySelector('.lab-pres-bar');
+                        const ledigt0 = (listen0 ? listen0.getBoundingClientRect().top - overlay.getBoundingClientRect().top : oh) - 16;
+                        if (rH <= ledigt0 - 24) {
+                            overlay.scrollTo({ top: Math.max(0, overlay.scrollTop + oBot - ledigt0), behavior: 'smooth' });
+                            return;
+                        }
+                    }
                     // Ryms inte hela steget: lägg dess ÖVERKANT högt upp i
                     // rutan. Ett steg får aldrig skrollas så att dess början
                     // hamnar ovanför överkanten — man ska alltid kunna börja

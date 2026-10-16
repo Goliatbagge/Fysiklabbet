@@ -29,7 +29,6 @@ Grön linje: $y = 2x - 1$. Blå linje: $y = 2x$. Röd linje: $y = 2x + 1$. Peka 
 :::
 
 Vi ser att linjen
-
 - $y = 2x - 1$ skär *y*-axeln vid $y = -1$
 - $y = 2x$ skär *y*-axeln vid $y = 0$
 - $y = 2x + 1$ skär *y*-axeln vid $y = 1$
@@ -51,7 +50,6 @@ $y = -2x + 1$. Alla tre skär *y*-axeln i (0, 1). Peka eller tryck på en linje 
 :::
 
 Vi ser att linjen
-
 - $y = 2x + 1$ har lutningen **2** (den går 2 steg *uppåt* för varje steg åt höger)
 - $y = 3x + 1$ har lutningen **3** (den går 3 steg *uppåt* för varje steg åt höger)
 - $y = -2x + 1$ har lutningen **−2** (den går 2 steg *nedåt* för varje steg åt höger)

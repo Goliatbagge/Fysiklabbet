@@ -2036,6 +2036,13 @@ button.lab-card-disabled { pointer-events: none; }
     padding-left: 24px;
 }
 
+/* Ett stycke som inleder en lista ("Vi ser att linjen" + punkterna) hör
+   ihop med den: ingen styckesluft emellan (påpekat 2026-10-16, ma1c-4.4). */
+.lab-article-body p:has(+ ul),
+.lab-article-body p:has(+ ol) {
+    margin-bottom: 4px;
+}
+
 .lab-article-body li { margin-bottom: 6px; }
 
 .lab-article-body a {

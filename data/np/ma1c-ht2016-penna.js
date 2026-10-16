@@ -330,18 +330,19 @@
 
   /* ---- Uppgift 7: avläsning ur grafen ----
    * a) höjden vid x=2, b) var grafen har höjden 2. Grafen är en fallande
-   * rät linje genom (0, 6) och (10, 1). */
+   * rät linje genom (0, 5) och (10, 0), som i provets figur u7. Den står
+   * färdig från början (forritad); pennan ritar bara avläsningarna. */
   reg(7, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
     var tanke = mkTanke(T);
     var A = mkAxes(T, F, { ox: padL + 40, oy: 300, u: 30, xsc: 2, ysc: 1,
                            xmin: 0, xmax: 11, ymin: 0, ymax: 6.5 });
 
-    A.axes();
-    A.ticks(V.heltal(2, 10, 2), V.heltal(1, 6), V.heltal(2, 10, 2), [2, 4, 6]);
-    T.pause(200);
-    A.rule([A.X(0), A.Y(6)], [A.X(10), A.Y(1)], BLUE);
-    T.stepEnd();
+    V.forritad(T, function () {
+      A.axes();
+      A.ticks(V.heltal(2, 10, 2), V.heltal(1, 6), V.heltal(2, 10, 2), [2, 4, 6]);
+      A.rule([A.X(0), A.Y(5)], [A.X(10), A.Y(0)], BLUE);
+    });
 
     /* ---- a) ---- */
     tanke(360, [
@@ -350,9 +351,9 @@
       [['till linjen, och sedan vågrätt']],
       [['in till y-axeln.']]
     ], 0);
-    A.guides(2, 5);
+    A.guides(2, 4);
     T.pause(160);
-    A.dot(2, 5, BLUE);
+    A.dot(2, 4, BLUE);
     T.pause(200);
     y = 470;
     T.str('a) f(2)=4', padL, y);
@@ -624,19 +625,20 @@
     var tanke = mkTanke(T);
     var tx = padL + 60, ty = 150, cw = 130, ch = 52;
 
-    /* ---- steg 1: rita av tabellen ---- */
-    for (i = 0; i <= 2; i++) T.line([tx, ty + i * ch], [tx + 3 * cw, ty + i * ch]);
-    for (i = 0; i <= 3; i++) T.line([tx + i * cw, ty], [tx + i * cw, ty + 2 * ch]);
-    T.pause(160);
-    ['x', 'xy', 'xy^2'].forEach(function (t, j) {
-      T.str(t, tx + j * cw + cw / 2 - T.adv(t, 0.7) / 2, ty + 0.66 * ch, null, 0.7);
-      T.pause(120);
+    /* ---- uppgiftens tabell, färdig från början ---- */
+    V.forritad(T, function () {
+      for (i = 0; i <= 2; i++) T.line([tx, ty + i * ch], [tx + 3 * cw, ty + i * ch]);
+      for (i = 0; i <= 3; i++) T.line([tx + i * cw, ty], [tx + i * cw, ty + 2 * ch]);
+      T.pause(160);
+      ['x', 'xy', 'xy^2'].forEach(function (t, j) {
+        T.str(t, tx + j * cw + cw / 2 - T.adv(t, 0.7) / 2, ty + 0.66 * ch, null, 0.7);
+        T.pause(120);
+      });
+      ['2', '-10', '?'].forEach(function (t, j) {
+        T.str(t, tx + j * cw + cw / 2 - T.adv(t, 0.7) / 2, ty + 1.66 * ch, null, 0.7);
+        T.pause(120);
+      });
     });
-    ['2', '-10', '?'].forEach(function (t, j) {
-      T.str(t, tx + j * cw + cw / 2 - T.adv(t, 0.7) / 2, ty + 1.66 * ch, null, 0.7);
-      T.pause(120);
-    });
-    T.stepEnd();
 
     tanke(ty + 2 * ch + 20, [
       [['Jag känner x och xy. Ur dem kan']],
@@ -757,24 +759,26 @@
   reg(15, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, r;
     var tanke = mkTanke(T);
-    /* figuren är inte skalenlig i provet; här ritas den skalenligt */
+    /* figuren är inte skalenlig i provet; här ritas den skalenligt och
+     * står färdig från början */
     var A = [padL + 60, 320], B = [padL + 160, 320], C = [padL + 60, 45];
 
-    T.line(A, B); T.pause(130);
-    T.line(B, C); T.pause(130);
-    T.line(C, A); T.pause(160);
-    V.ratVinkel(T, A, [1, 0], [0, -1], 14);
-    T.pause(160);
-    V.vinkelBage(T, C, Math.PI / 2, Math.PI / 2 - 0.349, 44);
-    T.str('20°', C[0] + 16, C[1] + 76, null, 0.62);
-    T.pause(160);
-    V.vinkelBage(T, B, -Math.PI, -(Math.PI - 1.222), 30);
-    T.str('70°', B[0] - 74, B[1] - 22, null, 0.62);
-    T.pause(180);
-    T.str('a', A[0] - 26, (A[1] + C[1]) / 2, BLUE, 0.62);
-    T.pause(140);
-    T.str('2', (B[0] + C[0]) / 2 + 12, (B[1] + C[1]) / 2, BLUE, 0.62);
-    T.stepEnd();
+    V.forritad(T, function () {
+      T.line(A, B); T.pause(130);
+      T.line(B, C); T.pause(130);
+      T.line(C, A); T.pause(160);
+      V.ratVinkel(T, A, [1, 0], [0, -1], 14);
+      T.pause(160);
+      V.vinkelBage(T, C, Math.PI / 2, Math.PI / 2 - 0.349, 44);
+      T.str('20°', C[0] + 16, C[1] + 76, null, 0.62);
+      T.pause(160);
+      V.vinkelBage(T, B, -Math.PI, -(Math.PI - 1.222), 30);
+      T.str('70°', B[0] - 74, B[1] - 22, null, 0.62);
+      T.pause(180);
+      T.str('a', A[0] - 26, (A[1] + C[1]) / 2, BLUE, 0.62);
+      T.pause(140);
+      T.str('2', (B[0] + C[0]) / 2 + 12, (B[1] + C[1]) / 2, BLUE, 0.62);
+    });
 
     tanke(360, [
       [['Sidan a ligger INTILL 20°-']],
@@ -1158,7 +1162,7 @@
 
   /* ---- Uppgift 20: det missvisande mejldiagrammet ----
    * a) 82 % av avläst värde, b) x-axeln är inte ekvidistant, c) hur
-   * kurvan skulle ändras. Diagrammet ritas av som i provet, med de
+   * kurvan skulle ändras. Diagrammet står färdigt som i provet, med de
    * ojämna årtalen jämnt fördelade. */
   reg(20, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, i;
@@ -1169,35 +1173,36 @@
     function X(i) { return gx + i * (gw / 5); }
     function Y(v) { return gy - v * (gh / 200); }
 
-    /* ---- steg 1: rita av diagrammet ---- */
-    T.line([gx, gy], [gx + gw + 26, gy]);
-    axelPil(T, gx + gw + 26, gy, 'hoger');
-    T.pause(140);
-    T.line([gx, gy], [gx, gy - gh - 26]);
-    axelPil(T, gx, gy - gh - 26, 'upp');
-    T.pause(160);
-    for (i = 0; i <= 4; i++) {
-      var v = i * 50;
-      T.line([gx - 5, Y(v)], [gx + 5, Y(v)]);
-      T.str(String(v), gx - 12 - T.adv(String(v), 0.5), Y(v) + 0.16 * F,
-            null, 0.5);
-      T.pause(80);
-    }
-    T.pause(140);
-    for (i = 0; i < 6; i++) {
-      T.str(String(ar[i]), X(i) - T.adv('2002', 0.5) / 2, gy + 0.85 * F,
-            null, 0.5);
-      T.pause(80);
-    }
-    T.pause(140);
-    acts.push({ kind: 'stroke', pts: ar.map(function (a, k) {
-      return [X(k), Y(vd[k])]; }) });
-    for (i = 0; i < 6; i++) {
-      acts.push({ kind: 'stroke', pts: V.dotPts(X(i), Y(vd[i])) });
-      T.pause(60);
-    }
-    T.str('miljarder mejl', gx + 10, gy - gh - 12, null, 0.55);
-    T.stepEnd();
+    /* ---- uppgiftens diagram, färdigt från början ---- */
+    V.forritad(T, function () {
+      T.line([gx, gy], [gx + gw + 26, gy]);
+      axelPil(T, gx + gw + 26, gy, 'hoger');
+      T.pause(140);
+      T.line([gx, gy], [gx, gy - gh - 26]);
+      axelPil(T, gx, gy - gh - 26, 'upp');
+      T.pause(160);
+      for (i = 0; i <= 4; i++) {
+        var v = i * 50;
+        T.line([gx - 5, Y(v)], [gx + 5, Y(v)]);
+        T.str(String(v), gx - 12 - T.adv(String(v), 0.5), Y(v) + 0.16 * F,
+              null, 0.5);
+        T.pause(80);
+      }
+      T.pause(140);
+      for (i = 0; i < 6; i++) {
+        T.str(String(ar[i]), X(i) - T.adv('2002', 0.5) / 2, gy + 0.85 * F,
+              null, 0.5);
+        T.pause(80);
+      }
+      T.pause(140);
+      acts.push({ kind: 'stroke', pts: ar.map(function (a, k) {
+        return [X(k), Y(vd[k])]; }) });
+      for (i = 0; i < 6; i++) {
+        acts.push({ kind: 'stroke', pts: V.dotPts(X(i), Y(vd[i])) });
+        T.pause(60);
+      }
+      T.str('miljarder mejl', gx + 10, gy - gh - 12, null, 0.55);
+    });
 
     /* ---- a) ---- */
     tanke(gy + 60, [
@@ -1270,24 +1275,25 @@
     var Lx = padL + 60, Rx = padL + 360, By = 300, Ty = By - 100;
     var Mx = (Lx + Rx) / 2;
 
-    /* ---- steg 1: taket ---- */
-    T.line([Lx, By], [Mx, Ty]); T.pause(130);
-    T.line([Mx, Ty], [Rx, By]); T.pause(130);
-    T.line([Lx, By], [Rx, By]); T.pause(150);
-    var i;
-    for (i = 0; i < 8; i++) {
-      if (i % 2) continue;
-      T.line([Mx, Ty + (By - Ty) * (i / 8)], [Mx, Ty + (By - Ty) * ((i + 1) / 8)]);
-    }
-    V.ratVinkel(T, [Mx, By], [1, 0], [0, -1], 12);
-    T.pause(160);
-    V.vinkelBage(T, [Rx, By], -Math.PI, -(Math.PI - 0.588), 44);
-    T.str('v', Rx - 74, By - 16, null, 0.62);
-    T.pause(180);
-    T.str('1', Mx + 12, (Ty + By) / 2, BLUE, 0.62);
-    T.pause(140);
-    T.str('3', Mx - 8, By + 0.95 * F, BLUE, 0.62);
-    T.stepEnd();
+    /* ---- uppgiftens figur (taket), färdig från början ---- */
+    V.forritad(T, function () {
+      T.line([Lx, By], [Mx, Ty]); T.pause(130);
+      T.line([Mx, Ty], [Rx, By]); T.pause(130);
+      T.line([Lx, By], [Rx, By]); T.pause(150);
+      var i;
+      for (i = 0; i < 8; i++) {
+        if (i % 2) continue;
+        T.line([Mx, Ty + (By - Ty) * (i / 8)], [Mx, Ty + (By - Ty) * ((i + 1) / 8)]);
+      }
+      V.ratVinkel(T, [Mx, By], [1, 0], [0, -1], 12);
+      T.pause(160);
+      V.vinkelBage(T, [Rx, By], -Math.PI, -(Math.PI - 0.588), 44);
+      T.str('v', Rx - 74, By - 16, null, 0.62);
+      T.pause(180);
+      T.str('1', Mx + 12, (Ty + By) / 2, BLUE, 0.62);
+      T.pause(140);
+      T.str('3', Mx - 8, By + 0.95 * F, BLUE, 0.62);
+    });
 
     /* ---- a) ---- */
     tanke(By + 60, [
@@ -1609,22 +1615,23 @@
     var M = [m[0] + rr, m[1]], P = [m[0], m[1] - rr];
     var RR = rr * Math.SQRT2;
 
-    /* ---- steg 1: figuren ---- */
-    acts.push({ kind: 'stroke', pts: V.ringPts(m[0], m[1], rr, rr) });
-    T.pause(200);
-    acts.push({ kind: 'stroke', pts: V.ringPts(M[0], M[1], RR, RR) });
-    T.pause(220);
-    T.str('m', m[0] - 24, m[1] + 6, null, 0.62);
-    T.pause(120);
-    T.str('M', M[0] + 8, M[1] + 22, null, 0.62);
-    T.pause(120);
-    T.str('P', P[0] - 22, P[1] - 6, null, 0.62);
-    T.pause(160);
-    T.line(m, M); T.pause(120);
-    T.line(m, P); T.pause(120);
-    T.line(M, P); T.pause(150);
-    V.ratVinkel(T, m, [1, 0], [0, -1], 13);
-    T.stepEnd();
+    /* ---- uppgiftens figur, färdig från början ---- */
+    V.forritad(T, function () {
+      acts.push({ kind: 'stroke', pts: V.ringPts(m[0], m[1], rr, rr) });
+      T.pause(200);
+      acts.push({ kind: 'stroke', pts: V.ringPts(M[0], M[1], RR, RR) });
+      T.pause(220);
+      T.str('m', m[0] - 24, m[1] + 6, null, 0.62);
+      T.pause(120);
+      T.str('M', M[0] + 8, M[1] + 22, null, 0.62);
+      T.pause(120);
+      T.str('P', P[0] - 22, P[1] - 6, null, 0.62);
+      T.pause(160);
+      T.line(m, M); T.pause(120);
+      T.line(m, P); T.pause(120);
+      T.line(M, P); T.pause(150);
+      V.ratVinkel(T, m, [1, 0], [0, -1], 13);
+    });
 
     tanke(m[1] + RR + 30, [
       [['M ligger PÅ lilla cirkeln, så']],
@@ -1769,31 +1776,32 @@
                  [1995, 76], [1997, 74], [2000, 55], [2004, 49], [2007, 55],
                  [2009, 63], [2011, 79]];
 
-    /* ---- steg 1: rita av diagrammet ---- */
-    T.line([gx, gy], [gx + gw + 24, gy]);
-    axelPil(T, gx + gw + 24, gy, 'hoger');
-    T.pause(140);
-    T.line([gx, gy], [gx, gy - gh - 24]);
-    axelPil(T, gx, gy - gh - 24, 'upp');
-    T.pause(160);
-    for (i = 0; i <= 4; i++) {
-      var v = i * 20;
-      T.line([gx - 5, Y(v)], [gx + 5, Y(v)]);
-      T.str(String(v), gx - 12 - T.adv(String(v), 0.5), Y(v) + 0.16 * F,
-            null, 0.5);
-      T.pause(70);
-    }
-    T.pause(120);
-    [1930, 1950, 1970, 1990, 2010].forEach(function (a) {
-      T.line([X(a), gy - 5], [X(a), gy + 5]);
-      T.str(String(a), X(a) - T.adv('1930', 0.5) / 2, gy + 0.85 * F, null, 0.5);
-      T.pause(70);
+    /* ---- uppgiftens diagram, färdigt från början ---- */
+    V.forritad(T, function () {
+      T.line([gx, gy], [gx + gw + 24, gy]);
+      axelPil(T, gx + gw + 24, gy, 'hoger');
+      T.pause(140);
+      T.line([gx, gy], [gx, gy - gh - 24]);
+      axelPil(T, gx, gy - gh - 24, 'upp');
+      T.pause(160);
+      for (i = 0; i <= 4; i++) {
+        var v = i * 20;
+        T.line([gx - 5, Y(v)], [gx + 5, Y(v)]);
+        T.str(String(v), gx - 12 - T.adv(String(v), 0.5), Y(v) + 0.16 * F,
+              null, 0.5);
+        T.pause(70);
+      }
+      T.pause(120);
+      [1930, 1950, 1970, 1990, 2010].forEach(function (a) {
+        T.line([X(a), gy - 5], [X(a), gy + 5]);
+        T.str(String(a), X(a) - T.adv('1930', 0.5) / 2, gy + 0.85 * F, null, 0.5);
+        T.pause(70);
+      });
+      T.pause(140);
+      acts.push({ kind: 'stroke',
+                  pts: kurva.map(function (p) { return [X(p[0]), Y(p[1])]; }) });
+      T.str('kr/kg', gx + 10, gy - gh - 10, null, 0.55);
     });
-    T.pause(140);
-    acts.push({ kind: 'stroke',
-                pts: kurva.map(function (p) { return [X(p[0]), Y(p[1])]; }) });
-    T.str('kr/kg', gx + 10, gy - gh - 10, null, 0.55);
-    T.stepEnd();
 
     tanke(gy + 50, [
       [['Index 330 betyder att priset']],

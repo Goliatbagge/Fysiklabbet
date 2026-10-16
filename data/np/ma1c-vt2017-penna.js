@@ -567,11 +567,12 @@
                            xmin: -30, xmax: 45, ymin: -50, ymax: 125,
                            xlab: 'C', ylab: 'F' });
 
-    /* ---- steg 1: rita av koordinatsystemet ---- */
-    A.axes();
-    A.ticks(V.heltal(-30, 40, 10), V.heltal(-50, 125, 25),
-            [-20, 20, 40], [-25, 25, 50, 75, 100, 125]);
-    T.stepEnd();
+    /* ---- uppgiftens koordinatsystem, färdigt från början ---- */
+    V.forritad(T, function () {
+      A.axes();
+      A.ticks(V.heltal(-30, 40, 10), V.heltal(-50, 125, 25),
+              [-20, 20, 40], [-25, 25, 50, 75, 100, 125]);
+    });
 
     tanke(430, [
       [['Sambandet är linjärt, alltså en']],
@@ -638,12 +639,13 @@
                            xmin: -3, xmax: 5, ymin: -20, ymax: 2,
                            xlab: 't', ylab: 'y' });
 
-    A.axes();
-    /* skalsiffran 2 utelämnas: trappstegets mått "2 min" står just där */
-    A.ticks(V.heltal(-3, 5), V.heltal(-20, 0, 5), [-2, 4], [-5, -10, -15, -20]);
-    T.pause(200);
-    A.rule([A.X(0), A.Y(-6)], [A.X(4), A.Y(-18)], BLUE);
-    T.stepEnd();
+    V.forritad(T, function () {
+      A.axes();
+      /* skalsiffran 2 utelämnas: trappstegets mått "2 min" står just där */
+      A.ticks(V.heltal(-3, 5), V.heltal(-20, 0, 5), [-2, 4], [-5, -10, -15, -20]);
+      T.pause(200);
+      A.rule([A.X(0), A.Y(-6)], [A.X(4), A.Y(-18)], BLUE);
+    });
 
     tanke(400, [
       [['Grafen börjar på -6 m: där']],
@@ -691,27 +693,28 @@
     var x0 = padL + 40, yTart = 260, dx = 78;
     var tand = [true, true, false, false, true, false];
 
-    /* ---- steg 1: rita tårtan med ljusen ---- */
-    T.line([x0 - 24, yTart], [x0 + 5 * dx + 24, yTart]);
-    T.pause(120);
-    T.line([x0 - 24, yTart], [x0 - 24, yTart + 46]);
-    T.line([x0 + 5 * dx + 24, yTart], [x0 + 5 * dx + 24, yTart + 46]);
-    T.line([x0 - 24, yTart + 46], [x0 + 5 * dx + 24, yTart + 46]);
-    T.pause(180);
-    for (i = 0; i < 6; i++) {
-      var cx = x0 + i * dx;
-      T.line([cx - 5, yTart], [cx - 5, yTart - 44]);
-      T.line([cx + 5, yTart], [cx + 5, yTart - 44]);
-      T.line([cx - 5, yTart - 44], [cx + 5, yTart - 44]);
-      if (tand[i]) {
-        /* låga: en liten droppe ovanför veken */
-        acts.push({ kind: 'stroke', pts: humanize([
-          [cx, yTart - 48], [cx + 7, yTart - 60], [cx, yTart - 74],
-          [cx - 7, yTart - 60], [cx, yTart - 48]]) });
-      }
+    /* ---- uppgiftens tårta med ljusen, färdig från början ---- */
+    V.forritad(T, function () {
+      T.line([x0 - 24, yTart], [x0 + 5 * dx + 24, yTart]);
       T.pause(120);
-    }
-    T.stepEnd();
+      T.line([x0 - 24, yTart], [x0 - 24, yTart + 46]);
+      T.line([x0 + 5 * dx + 24, yTart], [x0 + 5 * dx + 24, yTart + 46]);
+      T.line([x0 - 24, yTart + 46], [x0 + 5 * dx + 24, yTart + 46]);
+      T.pause(180);
+      for (i = 0; i < 6; i++) {
+        var cx = x0 + i * dx;
+        T.line([cx - 5, yTart], [cx - 5, yTart - 44]);
+        T.line([cx + 5, yTart], [cx + 5, yTart - 44]);
+        T.line([cx - 5, yTart - 44], [cx + 5, yTart - 44]);
+        if (tand[i]) {
+          /* låga: en liten droppe ovanför veken */
+          acts.push({ kind: 'stroke', pts: humanize([
+            [cx, yTart - 48], [cx + 7, yTart - 60], [cx, yTart - 74],
+            [cx - 7, yTart - 60], [cx, yTart - 48]]) });
+        }
+        T.pause(120);
+      }
+    });
 
     tanke(yTart + 60, [
       [['Sex ljus är sex binära siffror.']],
@@ -771,9 +774,10 @@
       }
     }
 
-    A.axes();
-    A.ticks(V.heltal(-6, 7), V.heltal(-4, 5), [-5, -3, 3, 6], [-2, 2, 4]);
-    T.stepEnd();
+    V.forritad(T, function () {
+      A.axes();
+      A.ticks(V.heltal(-6, 7), V.heltal(-4, 5), [-5, -3, 3, 6], [-2, 2, 4]);
+    });
 
     tanke(430, [
       [['Definitionsmängden -5≤x≤6 säger']],
@@ -1003,25 +1007,26 @@
       return x1;
     }
 
-    /* ---- steg 1: rutnätet och de givna vektorerna ---- */
-    for (i = 0; i <= 6; i++) {
-      T.line(P(i, 0), P(i, 4));
-      T.pause(40);
-    }
-    for (i = 0; i <= 4; i++) {
-      T.line(P(0, i), P(6, i));
-      T.pause(40);
-    }
-    T.pause(160);
-    figurPil(T, P(0, 1), P(4, 3));
-    T.str('u', P(2, 2)[0] - 8, P(2, 2)[1] - 10, null, 0.62);
-    vecPil(T, F, P(2, 2)[0] - 8, P(2, 2)[0] + 6, P(2, 2)[1] - 10, null, 0.62);
-    T.pause(200);
-    figurPil(T, P(0, 0), P(4, 0));
-    T.str('w', P(2, 0)[0] - 8, P(2, 0)[1] + 0.85 * F, null, 0.62);
-    vecPil(T, F, P(2, 0)[0] - 8, P(2, 0)[0] + 8, P(2, 0)[1] + 0.85 * F,
-           null, 0.62);
-    T.stepEnd();
+    /* ---- rutnätet och de givna vektorerna, färdiga från början ---- */
+    V.forritad(T, function () {
+      for (i = 0; i <= 6; i++) {
+        T.line(P(i, 0), P(i, 4));
+        T.pause(40);
+      }
+      for (i = 0; i <= 4; i++) {
+        T.line(P(0, i), P(6, i));
+        T.pause(40);
+      }
+      T.pause(160);
+      figurPil(T, P(0, 1), P(4, 3));
+      T.str('u', P(2, 2)[0] - 8, P(2, 2)[1] - 10, null, 0.62);
+      vecPil(T, F, P(2, 2)[0] - 8, P(2, 2)[0] + 6, P(2, 2)[1] - 10, null, 0.62);
+      T.pause(200);
+      figurPil(T, P(0, 0), P(4, 0));
+      T.str('w', P(2, 0)[0] - 8, P(2, 0)[1] + 0.85 * F, null, 0.62);
+      vecPil(T, F, P(2, 0)[0] - 8, P(2, 0)[0] + 8, P(2, 0)[1] + 0.85 * F,
+             null, 0.62);
+    });
 
     tanke(gy + 40, [
       [['Först löser jag ut v ur']],
@@ -1383,25 +1388,29 @@
     var O = [padL + 40, 300], B = [padL + 340, 300];
     var C = [B[0], B[1] - 300 * Math.tan(20 * Math.PI / 180)];
 
-    /* ---- steg 1: figuren ---- */
-    T.line([padL + 20, 340], [padL + 380, 340]);      /* marken */
-    T.pause(140);
-    T.line([B[0], 340], [C[0], C[1]]);                /* trädstammen */
-    T.pause(140);
-    T.line(O, [O[0], 340]);                           /* Petra */
-    T.pause(140);
-    T.line(O, B); T.pause(120);
-    T.line(O, C); T.pause(160);
-    V.ratVinkel(T, B, [-1, 0], [0, -1], 13);
-    T.pause(140);
-    V.vinkelBage(T, O, -0.349, 0, 60);
-    T.str('20°', O[0] + 68, O[1] - 12, null, 0.62);
-    T.pause(180);
-    T.str('30 m', (O[0] + B[0]) / 2 - 24, O[1] + 0.95 * F, BLUE, 0.62);
-    T.pause(140);
+    /* ---- uppgiftens figur, färdig från början (h är lösningens) ---- */
+    V.forritad(T, function () {
+      T.line([padL + 20, 340], [padL + 380, 340]);      /* marken */
+      T.pause(140);
+      T.line([B[0], 340], [C[0], C[1]]);                /* trädstammen */
+      T.pause(140);
+      T.line(O, [O[0], 340]);                           /* Petra */
+      T.pause(140);
+      T.line(O, B); T.pause(120);
+      T.line(O, C); T.pause(160);
+      V.ratVinkel(T, B, [-1, 0], [0, -1], 13);
+      T.pause(140);
+      V.vinkelBage(T, O, -0.349, 0, 60);
+      T.str('20°', O[0] + 68, O[1] - 12, null, 0.62);
+      T.pause(180);
+      T.str('30 m', (O[0] + B[0]) / 2 - 24, O[1] + 0.95 * F, BLUE, 0.62);
+      T.pause(140);
+    });
     T.str('h', B[0] + 12, (O[1] + C[1]) / 2, BLUE, 0.62);
     T.pause(140);
-    T.str('1,6 m', O[0] - 4, 328, BLUE, 0.62);
+    V.forritad(T, function () {
+      T.str('1,6 m', O[0] - 4, 328, BLUE, 0.62);
+    });
     T.stepEnd();
 
     tanke(370, [
@@ -1569,7 +1578,7 @@
 
   /* ---- Uppgift 19: elevantalet i gymnasieskolan ----
    * Allt bygger på avläsningar ur diagrammet, så svaren blir intervall.
-   * Kurvan ritas av på fri hand i samma fönster som provets figur. */
+   * Kurvan står färdig från början, i samma fönster som provets figur. */
   reg(19, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
@@ -1579,25 +1588,26 @@
                            xlab: 'r', ylab: 'e' });
     function ar(v) { return A.X(v - 1996); }
 
-    A.axes();
-    A.ticks(V.heltal(0, 28, 4), V.heltal(0, 400, 50),
-            [4, 8, 12, 16, 20, 24, 28], [100, 200, 300, 400]);
-    T.pause(200);
-    /* kurvan 1996–2015 (uppmätt) och prognosen 2016–2024 */
-    var matt = [[1996, 305], [1999, 300], [2001, 310], [2003, 320],
-                [2005, 350], [2007, 380], [2009, 390], [2011, 375],
-                [2013, 325], [2015, 300]];
-    acts.push({ kind: 'stroke', pts: matt.map(function (p) {
-      return [ar(p[0]), A.Y(p[1])]; }) });
-    T.pause(220);
-    var prog = [[2015, 300], [2017, 305], [2019, 325], [2021, 345],
-                [2023, 365], [2024, 372]];
-    acts.push({ kind: 'stroke', color: BLUE, pts: prog.map(function (p) {
-      return [ar(p[0]), A.Y(p[1])]; }) });
-    T.pause(160);
-    T.str('år', A.X(30) - 10, A.Y(0) + 1.6 * F, null, 0.55);
-    T.str('tusen elever', A.X(0) + 8, A.Y(400) - 6, null, 0.55);
-    T.stepEnd();
+    V.forritad(T, function () {
+      A.axes();
+      A.ticks(V.heltal(0, 28, 4), V.heltal(0, 400, 50),
+              [4, 8, 12, 16, 20, 24, 28], [100, 200, 300, 400]);
+      T.pause(200);
+      /* kurvan 1996–2015 (uppmätt) och prognosen 2016–2024 */
+      var matt = [[1996, 305], [1999, 300], [2001, 310], [2003, 320],
+                  [2005, 350], [2007, 380], [2009, 390], [2011, 375],
+                  [2013, 325], [2015, 300]];
+      acts.push({ kind: 'stroke', pts: matt.map(function (p) {
+        return [ar(p[0]), A.Y(p[1])]; }) });
+      T.pause(220);
+      var prog = [[2015, 300], [2017, 305], [2019, 325], [2021, 345],
+                  [2023, 365], [2024, 372]];
+      acts.push({ kind: 'stroke', color: BLUE, pts: prog.map(function (p) {
+        return [ar(p[0]), A.Y(p[1])]; }) });
+      T.pause(160);
+      T.str('år', A.X(30) - 10, A.Y(0) + 1.6 * F, null, 0.55);
+      T.str('tusen elever', A.X(0) + 8, A.Y(400) - 6, null, 0.55);
+    });
 
     /* ---- a) ---- */
     tanke(430, [
@@ -1873,7 +1883,7 @@
   });
 
   /* ---- Uppgift 21: vilken elevlösning är ett bevis? ----
-   * Figuren ritas först, och Saras resonemang skrivs ut — det är det som
+   * Figuren står färdig från början, och Saras resonemang skrivs ut — det är det som
    * gäller för ALLA trianglar. */
   reg(21, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
@@ -1881,23 +1891,24 @@
     var A = [padL + 30, 300], B = [padL + 140, 190], C = [padL + 260, 300];
     var D = [padL + 360, 300];
 
-    /* ---- steg 1: figuren ---- */
-    T.line(A, B); T.pause(130);
-    T.line(B, C); T.pause(130);
-    T.line(C, A); T.pause(130);
-    T.line(C, D); T.pause(160);
-    V.vinkelBage(T, A, -0.785, 0, 30);
-    T.str('a', A[0] + 44, A[1] - 14, null, 0.62);
-    T.pause(160);
-    V.vinkelBage(T, B, 0.735, 2.31, 26);
-    T.str('b', B[0] - 4, B[1] + 52, null, 0.62);
-    T.pause(160);
-    V.vinkelBage(T, C, Math.PI, Math.PI + 0.735, 24);
-    T.str('x', C[0] - 44, C[1] - 12, null, 0.62);
-    T.pause(160);
-    V.vinkelBage(T, C, -0.735, 0, 30);
-    T.str('c', C[0] + 34, C[1] - 26, null, 0.62);
-    T.stepEnd();
+    /* ---- uppgiftens figur, färdig från början ---- */
+    V.forritad(T, function () {
+      T.line(A, B); T.pause(130);
+      T.line(B, C); T.pause(130);
+      T.line(C, A); T.pause(130);
+      T.line(C, D); T.pause(160);
+      V.vinkelBage(T, A, -0.785, 0, 30);
+      T.str('a', A[0] + 44, A[1] - 14, null, 0.62);
+      T.pause(160);
+      V.vinkelBage(T, B, 0.735, 2.31, 26);
+      T.str('b', B[0] - 4, B[1] + 52, null, 0.62);
+      T.pause(160);
+      V.vinkelBage(T, C, Math.PI, Math.PI + 0.735, 24);
+      T.str('x', C[0] - 44, C[1] - 12, null, 0.62);
+      T.pause(160);
+      V.vinkelBage(T, C, -0.735, 0, 30);
+      T.str('c', C[0] + 34, C[1] - 26, null, 0.62);
+    });
 
     tanke(340, [
       [['Ett bevis måste gälla för ALLA']],
@@ -2211,17 +2222,21 @@
     var cx = padL + 110, cy = 230, rr = 70;
     var P = [cx, cy + rr], Q = [cx + 300, cy + rr], R = [cx, cy];
 
-    acts.push({ kind: 'stroke', pts: V.ringPts(cx, cy, rr, rr) });
-    T.pause(220);
-    T.line(P, Q); T.pause(140);
-    T.line(Q, R); T.pause(140);
-    T.line(R, P); T.pause(160);
-    V.ratVinkel(T, P, [1, 0], [0, -1], 13);
-    T.pause(160);
+    V.forritad(T, function () {
+      acts.push({ kind: 'stroke', pts: V.ringPts(cx, cy, rr, rr) });
+      T.pause(220);
+      T.line(P, Q); T.pause(140);
+      T.line(Q, R); T.pause(140);
+      T.line(R, P); T.pause(160);
+      V.ratVinkel(T, P, [1, 0], [0, -1], 13);
+      T.pause(160);
+    });
     T.str('r', cx + 26, cy - 8, BLUE, 0.62);
     T.line([cx, cy], [cx + rr, cy]);
     T.pause(180);
-    T.str('basen', (P[0] + Q[0]) / 2 - 26, P[1] + 0.95 * F, null, 0.62);
+    V.forritad(T, function () {
+      T.str('basen', (P[0] + Q[0]) / 2 - 26, P[1] + 0.95 * F, null, 0.62);
+    });
     T.stepEnd();
 
     tanke(cy + rr + 40, [
@@ -2289,21 +2304,22 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, i;
     var tanke = mkTanke(T);
 
-    /* ---- steg 1: skissen ---- */
+    /* ---- uppgiftens skiss, färdig från början ---- */
     var mx = padL + 200, ybot = 320, dh = 26, w = 100;
-    for (i = 0; i < 7; i++) {
-      var b = w * Math.pow(0.8, i);
-      T.line([mx - b, ybot - i * dh], [mx + b, ybot - i * dh]);
-      T.pause(70);
-    }
-    T.line([mx - w, ybot], [mx - w * Math.pow(0.8, 6), ybot - 6 * dh]);
-    T.pause(120);
-    T.line([mx + w, ybot], [mx + w * Math.pow(0.8, 6), ybot - 6 * dh]);
-    T.pause(180);
-    T.str('2,0 m', mx - 26, ybot + 0.95 * F, BLUE, 0.62);
-    T.pause(140);
-    T.str('25 cm', mx + w + 16, ybot - 12, BLUE, 0.62);
-    T.stepEnd();
+    V.forritad(T, function () {
+      for (i = 0; i < 7; i++) {
+        var b = w * Math.pow(0.8, i);
+        T.line([mx - b, ybot - i * dh], [mx + b, ybot - i * dh]);
+        T.pause(70);
+      }
+      T.line([mx - w, ybot], [mx - w * Math.pow(0.8, 6), ybot - 6 * dh]);
+      T.pause(120);
+      T.line([mx + w, ybot], [mx + w * Math.pow(0.8, 6), ybot - 6 * dh]);
+      T.pause(180);
+      T.str('2,0 m', mx - 26, ybot + 0.95 * F, BLUE, 0.62);
+      T.pause(140);
+      T.str('25 cm', mx + w + 16, ybot - 12, BLUE, 0.62);
+    });
 
     tanke(ybot + 50, [
       [['Varje pinne är 20 % kortare än']],

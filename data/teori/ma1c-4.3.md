@@ -77,12 +77,12 @@ x: -6, 6
 y: -6, 6
 :::
 
-Testa att låta $m$ vara oförändrad medan du drar i $k$: linjen vrider sig
-kring samma punkt på $y$-axeln. Ändrar du i stället $m$ flyttas hela linjen
-rakt upp eller ner. Den röda pricken visar var linjen skär $y$-axeln. Den
-ligger alltid i höjd med värdet på $m$. Det streckade trappsteget visar
-lutningen: går vi **ett steg åt höger** längs linjen, så går vi samtidigt
-**$k$ steg uppåt eller nedåt**. Du kan också dra i rutnätet för att flytta
+Vi ser att när $m$ är oförändrad och bara $k$ ändras, vrider sig linjen
+kring samma punkt på $y$-axeln. Ändras i stället $m$ flyttas hela linjen
+rakt upp eller ner. Den röda pricken visar var linjen skär $y$-axeln, och vi
+ser att den alltid ligger i höjd med värdet på $m$. Det streckade
+trappsteget visar lutningen: går vi **ett steg åt höger** längs linjen, så
+går vi samtidigt **$k$ steg uppåt eller nedåt**. Du kan också dra i rutnätet för att flytta
 dig i koordinatsystemet och zooma med mushjulet (eller knapparna uppe till
 höger).
 

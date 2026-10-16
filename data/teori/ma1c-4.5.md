@@ -223,8 +223,8 @@ vilket stämmer.
 
 ::: sammanfattning "Sammanfattning"
 
-::: sampunkt "Räta linjens ekvation"
-- $y = kx + m$, ibland förkortat RLE.
+::: sampunkt "Räta linjens ekvation (RLE)"
+- $y = kx + m$
 - $k$ är lutningen, $m$ är skärningen med *y*-axeln.
 :::
 

@@ -18,7 +18,13 @@ y = kx + m
 $$
 :::
 
-$k$-värdet motsvarar linjens lutning. Sedan tidigare har vi
+$k$-värdet motsvarar linjens lutning. För att beskriva lutningen används
+den grekiska bokstaven $\Delta$, som uttalas "delta" och betyder
+*förändring*. $\Delta y$ läses "delta *y*" och betyder förändringen i
+*y*-led, alltså hur mycket *y* ändras. På samma sätt betyder $\Delta x$
+förändringen i *x*-led.
+
+Sedan tidigare har vi
 
 $$
 k = \frac{\text{trappstegets höjd}}{\text{trappstegets längd}}

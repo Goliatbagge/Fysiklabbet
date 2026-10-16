@@ -83,6 +83,12 @@ k = \frac{\text{trappstegets höjd}}{\text{trappstegets längd}}
 = \frac{\text{förändring i } y\text{-led}}{\text{förändring i } x\text{-led}}
 = \frac{\Delta y}{\Delta x}
 $$
+
+::: figur
+<svg viewBox="12 4 240 186" width="305" height="236" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En rät linje genom två punkter. En streckad vågrät hjälplinje visar förändringen i x-led, Δx, och en streckad lodrät hjälplinje visar förändringen i y-led, Δy."><line x1="30" y1="175" x2="236" y2="175" stroke="#1f2530" stroke-width="1.6"/><polygon points="246,175 236,170.5 236,179.5" fill="#1f2530"/><line x1="30" y1="175" x2="30" y2="20" stroke="#1f2530" stroke-width="1.6"/><polygon points="30,10 25.5,20 34.5,20" fill="#1f2530"/><text x="244" y="168" font-size="15" text-anchor="end" fill="#1f2530" font-style="italic">x</text><text x="38" y="20" font-size="15" text-anchor="start" fill="#1f2530" font-style="italic">y</text><line x1="46" y1="157" x2="226" y2="29.5" stroke="#4a7d3a" stroke-width="2.2"/><line x1="70" y1="140" x2="190" y2="140" stroke="#1f2530" stroke-width="1.4" stroke-dasharray="5 4"/><line x1="190" y1="140" x2="190" y2="55" stroke="#1f2530" stroke-width="1.4" stroke-dasharray="5 4"/><circle cx="70" cy="140" r="3.6" fill="#1f2530"/><circle cx="190" cy="55" r="3.6" fill="#1f2530"/><text x="130" y="159" font-size="15" text-anchor="middle" fill="#1f2530">Δ<tspan font-style="italic">x</tspan></text><text x="198" y="102.5" font-size="15" text-anchor="start" fill="#1f2530">Δ<tspan font-style="italic">y</tspan></text></svg>
+
+Två punkter på linjen. Den streckade vågräta sträckan är förändringen i *x*-led, $\Delta x$, och den lodräta är förändringen i *y*-led, $\Delta y$.
+:::
 :::
 
 Figurerna ovan visade tre linjer i taget. Undersök i stället själv genom

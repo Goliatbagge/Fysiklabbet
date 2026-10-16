@@ -29,6 +29,9 @@
   if (!HK || !HK.registrera) return;
   var V = HK.verktyg;
   var physTools = V.physTools, valueBracket = V.valueBracket, BLUE = V.BLUE;
+  /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR STÅR
+   * FÄRDIG FRÅN BÖRJAN i handskrift.js) */
+  var forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('ov-fy2-1.1-u' + nr, fn); }
 
@@ -96,16 +99,14 @@
     var adv = 1.7 * F, bw = 292;
     var pX = 130, pY = 190, gX = 330;          /* mutter, greppet */
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar skiftnyckeln. Pricken i']],
-      [['muttern är vridningspunkten.']]
-    ], 300));
-    T.circle(pX, pY, 16);
-    T.dot(pX, pY);
-    T.line([pX + 16, pY - 8], [gX + 44, pY - 8]);       /* skaftet */
-    T.line([pX + 16, pY + 8], [gX + 44, pY + 8]);
-    T.line([gX + 44, pY - 8], [gX + 44, pY + 8]);
-    T.stepEnd();
+    /* uppgiftens figur: står färdig från början, pennan ritar krafter och hävarmar */
+    forritad(T, function () {
+      T.circle(pX, pY, 16);
+      T.dot(pX, pY);
+      T.line([pX + 16, pY - 8], [gX + 44, pY - 8]);       /* skaftet */
+      T.line([pX + 16, pY + 8], [gX + 44, pY + 8]);
+      T.line([gX + 44, pY - 8], [gX + 44, pY + 8]);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Kraften drar rakt nedåt,']],
@@ -263,33 +264,28 @@
     var adv = 1.7 * F, bw = 292;
     var pY = 150, pB = 158, pivX = 260, bX = 110, vX = 310, dimY = 266;
 
-    T.tanke(T.figurBubble(272, [
-      [['Ritar en figur. Pricken är']],
-      [['vridningspunkten.']]
-    ], 310));
-    T.rect(70, pY, 400, pB);                               /* brädan */
-    T.pause(120);
-    T.line([pivX, pB], [pivX - 22, pB + 44]);              /* stödet */
-    T.line([pivX - 22, pB + 44], [pivX + 22, pB + 44]);
-    T.line([pivX + 22, pB + 44], [pivX, pB]);
-    T.dot(pivX, pY + 4);
-    T.pause(180);
-    T.circle(bX, 109, 10);                                 /* barnet */
-    T.line([bX, 119], [bX, 148]);
-    T.line([bX, 126], [bX + 12, 146]);
-    T.line([bX, 147], [bX + 14, 147]);
-    T.line([bX + 14, 147], [bX + 15, 163]);
-    var wB = T.lblW('m_B=25 kg');
-    T.lbl('m_B=25 kg', bX - wB / 2, 88, BLUE);
-    T.pause(150);
-    T.circle(vX, 96, 13);                                  /* den vuxne */
-    T.line([vX, 109], [vX, 148]);
-    T.line([vX, 118], [vX - 15, 146]);
-    T.line([vX, 147], [vX - 18, 147]);
-    T.line([vX - 18, 147], [vX - 19, 168]);
-    var wV = T.lblW('m_V=75 kg');
-    T.lbl('m_V=75 kg', vX - wV / 2, 72, BLUE);
-    T.stepEnd();
+    /* uppgiftens figur: står färdig från början, pennan ritar krafter och hävarmar */
+    forritad(T, function () {
+      T.rect(70, pY, 400, pB);                               /* brädan */
+      T.line([pivX, pB], [pivX - 22, pB + 44]);              /* stödet */
+      T.line([pivX - 22, pB + 44], [pivX + 22, pB + 44]);
+      T.line([pivX + 22, pB + 44], [pivX, pB]);
+      T.dot(pivX, pY + 4);
+      T.circle(bX, 109, 10);                                 /* barnet */
+      T.line([bX, 119], [bX, 148]);
+      T.line([bX, 126], [bX + 12, 146]);
+      T.line([bX, 147], [bX + 14, 147]);
+      T.line([bX + 14, 147], [bX + 15, 163]);
+      var wB = T.lblW('m_B=25 kg');
+      T.lbl('m_B=25 kg', bX - wB / 2, 88, BLUE);
+      T.circle(vX, 96, 13);                                  /* den vuxne */
+      T.line([vX, 109], [vX, 148]);
+      T.line([vX, 118], [vX - 15, 146]);
+      T.line([vX, 147], [vX - 18, 147]);
+      T.line([vX - 18, 147], [vX - 19, 168]);
+      var wV = T.lblW('m_V=75 kg');
+      T.lbl('m_V=75 kg', vX - wV / 2, 72, BLUE);
+    });
 
     T.tanke(T.figurBubble(272, [
       [['Tyngdkrafterna vrider brädan åt']],
@@ -412,23 +408,18 @@
     var tX = pX + Lp * Math.cos(a), tY = pY - Lp * Math.sin(a);
     var dimY = 286;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar armen. Pricken i den']],
-      [['nedre änden är vridningspunkten.']]
-    ], 330));
-    T.dash([pX + 8, pY], [tX + 20, pY]);                  /* vågrät referens */
-    T.pause(120);
-    T.line([pX, pY], [tX, tY]);                            /* armen */
-    T.circle(pX, pY, 7);
-    T.dot(pX, pY);
-    T.pause(150);
-    vinkelbage(T, pX, pY, 30, 0, 35);
-    T.lbl('35°', pX + 44, pY - 6, BLUE);
-    T.pause(150);
-    var wLa = T.lblW('L=0,80 m');
-    var mX = (pX + tX) / 2 - Math.sin(a) * 22, mY = (pY + tY) / 2 - Math.cos(a) * 22;
-    T.lbl('L=0,80 m', mX - wLa, mY, BLUE);
-    T.stepEnd();
+    /* uppgiftens figur: står färdig från början, pennan ritar krafter och hävarmar */
+    forritad(T, function () {
+      T.dash([pX + 8, pY], [tX + 20, pY]);                  /* vågrät referens */
+      T.line([pX, pY], [tX, tY]);                            /* armen */
+      T.circle(pX, pY, 7);
+      T.dot(pX, pY);
+      vinkelbage(T, pX, pY, 30, 0, 35);
+      T.lbl('35°', pX + 44, pY - 6, BLUE);
+      var wLa = T.lblW('L=0,80 m');
+      var mX = (pX + tX) / 2 - Math.sin(a) * 22, mY = (pY + tY) / 2 - Math.cos(a) * 22;
+      T.lbl('L=0,80 m', mX - wLa, mY, BLUE);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Kraften 120 N drar lodrätt']],
@@ -522,32 +513,26 @@
     var sX = 210, gX = 250, vX = 150;
     var dim1 = 252, dim2 = 304;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar plankan på stödet med']],
-      [['vikten. Pricken vid stödet är']],
-      [['vridningspunkten.']]
-    ], 372));
-    T.rect(xL, pT, xR, pB);                               /* plankan */
-    T.pause(120);
-    T.line([sX, pB], [sX - 22, pB + 40]);                 /* stödet */
-    T.line([sX - 22, pB + 40], [sX + 22, pB + 40]);
-    T.line([sX + 22, pB + 40], [sX, pB]);
-    T.dot(sX, pT + 5);
-    T.pause(150);
-    T.rect(vX - 18, pT - 28, vX + 18, pT);                /* vikten */
-    var wMv = T.lblW('m_V=8,0 kg');
-    T.lbl('m_V=8,0 kg', sX - 14 - wMv, pT - 38, BLUE);
-    T.lbl('m_P=12 kg', 300, pT - 12, BLUE);
-    T.pause(150);
-    T.dash([xL, pB + 4], [xL, dim2 + 4]);                 /* givna mått */
-    T.dash([xR, pB + 4], [xR, dim2 + 4]);
-    T.dash([sX, pB + 44], [sX, dim2 + 4]);
-    T.dblArrow([xL, dim2], [sX, dim2], BLUE);
-    T.dblArrow([sX, dim2], [xR, dim2], BLUE);
-    var w15 = T.lblW('1,5 m'), w25 = T.lblW('2,5 m');
-    T.lbl('1,5 m', (xL + sX) / 2 - w15 / 2, dim2 + 24, BLUE);
-    T.lbl('2,5 m', (sX + xR) / 2 - w25 / 2, dim2 + 24, BLUE);
-    T.stepEnd();
+    /* uppgiftens figur: står färdig från början, pennan ritar krafter och hävarmar */
+    forritad(T, function () {
+      T.rect(xL, pT, xR, pB);                               /* plankan */
+      T.line([sX, pB], [sX - 22, pB + 40]);                 /* stödet */
+      T.line([sX - 22, pB + 40], [sX + 22, pB + 40]);
+      T.line([sX + 22, pB + 40], [sX, pB]);
+      T.dot(sX, pT + 5);
+      T.rect(vX - 18, pT - 28, vX + 18, pT);                /* vikten */
+      var wMv = T.lblW('m_V=8,0 kg');
+      T.lbl('m_V=8,0 kg', sX - 14 - wMv, pT - 38, BLUE);
+      T.lbl('m_P=12 kg', 300, pT - 12, BLUE);
+      T.dash([xL, pB + 4], [xL, dim2 + 4]);                 /* givna mått */
+      T.dash([xR, pB + 4], [xR, dim2 + 4]);
+      T.dash([sX, pB + 44], [sX, dim2 + 4]);
+      T.dblArrow([xL, dim2], [sX, dim2], BLUE);
+      T.dblArrow([sX, dim2], [xR, dim2], BLUE);
+      var w15 = T.lblW('1,5 m'), w25 = T.lblW('2,5 m');
+      T.lbl('1,5 m', (xL + sX) / 2 - w15 / 2, dim2 + 24, BLUE);
+      T.lbl('2,5 m', (sX + xR) / 2 - w25 / 2, dim2 + 24, BLUE);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Plankans tyngdkraft angriper i']],
@@ -680,24 +665,20 @@
     var kG = 147.3 * 0.5, kF = 34.34 * 0.5;
     var dimX = 124, dimY = 350;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar stegen mot väggen. Pricken']],
-      [['vid foten blir vridningspunkten.']]
-    ], 392));
-    T.line([150, gY], [tX, gY]);                           /* marken */
-    T.hatch([tX, gY], [150, gY], 9);
-    T.line([tX, tY - 18], [tX, gY]);                       /* väggen */
-    T.hatch([tX, tY - 18], [tX, gY], 11);
-    T.pause(150);
-    T.line([fX, gY], [tX, tY]);                            /* stegen */
-    T.dot(fX, gY);
-    T.pause(150);
-    vinkelbage(T, fX, gY, 48, 0, 65);
-    T.lbl('65°', mX + 9, gY - 7, BLUE);
-    var wLs = T.lblW('L=5,0 m');
-    T.lbl('L=5,0 m', mX - Math.sin(a) * 22 - wLs, mY - Math.cos(a) * 22, BLUE);
-    T.lbl('m=15 kg', tX + 22, mY, BLUE);
-    T.stepEnd();
+    /* uppgiftens figur: står färdig från början, pennan ritar krafter och hävarmar */
+    forritad(T, function () {
+      T.line([150, gY], [tX, gY]);                           /* marken */
+      T.hatch([tX, gY], [150, gY], 9);
+      T.line([tX, tY - 18], [tX, gY]);                       /* väggen */
+      T.hatch([tX, tY - 18], [tX, gY], 11);
+      T.line([fX, gY], [tX, tY]);                            /* stegen */
+      T.dot(fX, gY);
+      vinkelbage(T, fX, gY, 48, 0, 65);
+      T.lbl('65°', mX + 9, gY - 7, BLUE);
+      var wLs = T.lblW('L=5,0 m');
+      T.lbl('L=5,0 m', mX - Math.sin(a) * 22 - wLs, mY - Math.cos(a) * 22, BLUE);
+      T.lbl('m=15 kg', tX + 22, mY, BLUE);
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Fyra krafter: tyngdkraften mitt']],

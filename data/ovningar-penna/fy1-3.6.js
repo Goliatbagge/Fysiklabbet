@@ -25,6 +25,9 @@
   if (!HK || !HK.registrera) return;
   var V = HK.verktyg;
   var physTools = V.physTools, valueBracket = V.valueBracket, BLUE = V.BLUE;
+  /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR STÅR
+   * FÄRDIG FRÅN BÖRJAN i handskrift.js) */
+  var forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('ov-fy1-3.6-u' + nr, fn); }
 
@@ -827,12 +830,10 @@
     var adv = 1.7 * F, bw = 292;
     var yG = 250;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar lådan på golvet och']],
-      [['snöret som drar snett uppåt.']]
-    ], 440));
-    var L = golvLada(T, 100, 410, yG, 210, 280, 50);
-    T.stepEnd();
+    /* lådan på golvet står i uppgiftens figur: den står färdig från
+     * början, kraftpilarna ritar pennan */
+    var L;
+    forritad(T, function () { L = golvLada(T, 100, 410, yG, 210, 280, 50); });
 
     /* skalenligt 1,5 px/N: F 90, F_G 176,8, F_N 138,7, F_f 41,6 */
     var a = 25 * Math.PI / 180;

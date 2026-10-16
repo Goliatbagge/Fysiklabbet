@@ -27,6 +27,9 @@
   if (!HK || !HK.registrera) return;
   var V = HK.verktyg;
   var physTools = V.physTools, valueBracket = V.valueBracket, BLUE = V.BLUE;
+  /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR STÅR
+   * FÄRDIG FRÅN BÖRJAN i handskrift.js) */
+  var forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('ov-fy1-3.2-u' + nr, fn); }
 
@@ -647,29 +650,24 @@
     var ox = 120, oy = 262, sx = 20, sy = 11;
     function P(t, v) { return [ox + t * sx, oy - v * sy]; }
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar av grafen: hastigheten']],
-      [['ökar jämnt i 8 s och är sedan']],
-      [['konstant.']]
-    ], 330));
-    T.arrow([ox, oy], [ox + 13 * sx, oy]);
-    T.arrow([ox, oy], [ox, oy - 13.2 * sy]);
-    var i;
-    for (i = 2; i <= 12; i += 2) {
-      T.line([ox + i * sx, oy - 3], [ox + i * sx, oy + 3]);
-      T.line([ox - 3, oy - i * sy], [ox + 3, oy - i * sy]);
-    }
-    T.lbl('t (s)', ox + 13 * sx - 10, oy - 10);
-    T.lbl('v (m/s)', ox + 8, oy - 13.2 * sy + 6);
-    T.pause(120);
-    for (i = 0; i <= 12; i += 4) {
-      T.lbl(String(i), ox + i * sx - (i < 10 ? 4 : 8), oy + 22, null, 0.45);
-    }
-    T.lbl('10', ox - 26, oy - 10 * sy + 5, null, 0.45);
-    T.pause(150);
-    T.line(P(0, 0), P(8, 10));
-    T.line(P(8, 10), P(12, 10));
-    T.stepEnd();
+    /* v–t-grafen är given i uppgiften: den står färdig från början */
+    forritad(T, function () {
+      T.arrow([ox, oy], [ox + 13 * sx, oy]);
+      T.arrow([ox, oy], [ox, oy - 13.2 * sy]);
+      var i;
+      for (i = 2; i <= 12; i += 2) {
+        T.line([ox + i * sx, oy - 3], [ox + i * sx, oy + 3]);
+        T.line([ox - 3, oy - i * sy], [ox + 3, oy - i * sy]);
+      }
+      T.lbl('t (s)', ox + 13 * sx - 10, oy - 10);
+      T.lbl('v (m/s)', ox + 8, oy - 13.2 * sy + 6);
+      for (i = 0; i <= 12; i += 4) {
+        T.lbl(String(i), ox + i * sx - (i < 10 ? 4 : 8), oy + 22, null, 0.45);
+      }
+      T.lbl('10', ox - 26, oy - 10 * sy + 5, null, 0.45);
+      T.line(P(0, 0), P(8, 10));
+      T.line(P(8, 10), P(12, 10));
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Läser av ändringen i hastighet']],
@@ -954,24 +952,21 @@
     var adv = 1.7 * F, bw = 292;
     var yG = 250, h0 = 96, h1 = 196, c0 = 236, c1 = 336, yl = yG - 30;
 
-    T.tanke(T.figurBubble(292, [
-      [['Ritar bilen som drar husvagnen']],
-      [['med bogserlinan.']]
-    ], 320));
-    T.line([80, yG], [410, yG]);
-    T.hatch([410, yG], [80, yG], 13);
-    T.rect(h0, yG - 64, h1, yG - 16);                     /* husvagnen */
-    T.circle((h0 + h1) / 2, yG - 8, 8);
-    T.pause(120);
-    T.rect(c0, yG - 44, c1, yG - 16);                     /* bilen */
-    T.line([c0 + 24, yG - 44], [c0 + 34, yG - 62]);
-    T.line([c1 - 20, yG - 44], [c1 - 30, yG - 62]);
-    T.line([c0 + 34, yG - 62], [c1 - 30, yG - 62]);
-    T.circle(c0 + 22, yG - 8, 8);
-    T.circle(c1 - 22, yG - 8, 8);
-    T.pause(120);
-    T.line([h1, yl], [c0, yl]);                           /* linan */
-    T.stepEnd();
+    /* bilen, husvagnen och linan står i uppgiftens figur: de står
+     * färdiga från början */
+    forritad(T, function () {
+      T.line([80, yG], [410, yG]);
+      T.hatch([410, yG], [80, yG], 13);
+      T.rect(h0, yG - 64, h1, yG - 16);                   /* husvagnen */
+      T.circle((h0 + h1) / 2, yG - 8, 8);
+      T.rect(c0, yG - 44, c1, yG - 16);                   /* bilen */
+      T.line([c0 + 24, yG - 44], [c0 + 34, yG - 62]);
+      T.line([c1 - 20, yG - 44], [c1 - 30, yG - 62]);
+      T.line([c0 + 34, yG - 62], [c1 - 30, yG - 62]);
+      T.circle(c0 + 22, yG - 8, 8);
+      T.circle(c1 - 22, yG - 8, 8);
+      T.line([h1, yl], [c0, yl]);                         /* linan */
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Linan drar husvagnen framåt med']],

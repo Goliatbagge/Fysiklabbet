@@ -12673,20 +12673,17 @@
     y += 3.8 * F;
     T.str('Riktningskoefficient', padL, y - 2.0 * F, null, 0.62);
     xx = T.str('k=', padL, y);
-    T.fracH('y_2-y_1', 'x_2-x_1', xx, y);
+    var xk = T.fracH('y_2-y_1', 'x_2-x_1', xx, y);
     T.stepEnd();
 
     tanke(y, [
-      [['k ska vara 2. Jag sätter in']],
-      [['k=2 och koordinaterna. Då får']],
-      [['jag en ekvation med a.']]
+      [['Jag sätter in koordinaterna,']],
+      [['en i taget.']]
     ], 1.05);
-    /* insättningen värde för värde: ring i punktraden, sedan skrivs
-     * värdet in: y_2 med minustecknet efter, y_1, x_2 med minustecknet,
-     * x_1 */
-    y += 4.6 * F;
-    T.str('Sätter in k=2 och koordinaterna', padL, y - 2.0 * F, null, 0.62);
-    xx = T.str('2=', x0, y);
+    /* insättningen värde för värde, på samma rad som formeln: ring i
+     * punktraden, sedan skrivs värdet in: y_2 med minustecknet efter,
+     * y_1, x_2 med minustecknet, x_1 */
+    xx = T.str('=', xk, y);
     var numS = '3a-2', denS = '4-a';
     var ybar = y - 0.34 * F;
     var fw = Math.max(T.adv(numS), T.adv(denS)) + 0.3 * F;
@@ -12707,7 +12704,17 @@
     var xd = xx + (fw - T.adv(denS)) / 2, yd = ybar + 1.04 * F;
     xd = sattIn(2, '4-', xd, yd);
     sattIn(0, 'a', xd, yd);
-    var xw1 = xx + fw + 0.9 * F;
+    T.stepEnd();
+
+    tanke(y, [
+      [['k ska vara 2. Då får jag en']],
+      [['ekvation med a.']]
+    ], 1.05);
+    y += 4.6 * F;
+    T.str('k=2 ger', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('2=', x0, y);
+    xx = T.fracH(numS, denS, xx, y);
+    var xw1 = xx + 0.9 * F;
     T.stepEnd();
 
     tanke(y, [

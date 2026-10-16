@@ -151,8 +151,14 @@ typ: avariabel
 ::: textlosning
 Koordinaterna innehåller den okända variabeln $a$, men vi gör precis som
 förut. Vi kallar punkterna $(x_1, y_1) = (a, 2)$ och
-$(x_2, y_2) = (4, 3a)$ och sätter in $k = 2$ och koordinaterna i formeln
-för riktningskoefficienten:
+$(x_2, y_2) = (4, 3a)$ och sätter in koordinaterna i formeln för
+riktningskoefficienten:
+
+$$
+k = \frac{y_2 - y_1}{x_2 - x_1} = \frac{3a - 2}{4 - a}
+$$
+
+Riktningskoefficienten ska vara 2, så $k = 2$ ger
 
 $$
 2 = \frac{3a - 2}{4 - a}

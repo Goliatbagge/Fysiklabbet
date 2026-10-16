@@ -21,7 +21,7 @@
   var V = HK.verktyg;
   var physTools = V.physTools, mathTools = V.mathTools, mkTanke = V.mkTanke,
       mkAxes = V.mkAxes, valueBracket = V.valueBracket, rotFrac = V.rotFrac,
-      humanize = V.humanize, BLUE = V.BLUE;
+      humanize = V.humanize, BLUE = V.BLUE, forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('fy2-vt2016-u' + nr, fn); }
 
@@ -116,13 +116,9 @@
     var tanke = mkTanke(T);
     var ax0 = padL + 60, ax1 = padL + 500, ay = 250;
 
-    /* ---- steg 1: skissa spektrumet ---- */
-    T.tanke(T.figurBubble(292, [
-      [['Ritar våglängdsskalan med de två']],
-      [['kalciumlinjerna där de SKA ligga,']],
-      [['och de uppmätta linjerna en bit']],
-      [['åt höger.']]
-    ], 300));
+    /* ---- uppgiftens spektrum (skalan, Ca K, Ca H och de uppmätta
+     * linjerna) står färdigt från början ---- */
+    forritad(T, function () {
     T.line([ax0, ay], [ax1 + 20, ay]);
     T.line([ax1 + 12, ay - 5], [ax1 + 22, ay]);
     T.line([ax1 + 12, ay + 5], [ax1 + 22, ay]);
@@ -140,6 +136,12 @@
       T.dash([x, ay - 60], [x, ay]);
       T.pause(120);
     }
+    });
+
+    T.tanke(T.figurBubble(292, [
+      [['De uppmätta linjerna ligger en']],
+      [['bit åt höger om kalciumlinjerna.']]
+    ], 300));
     T.arrow([ax0 + 70, ay - 80], [ax0 + 200, ay - 80], BLUE);
     T.lbl('rödförskjutning', ax0 + 92, ay - 90, BLUE);
     T.stepEnd();
@@ -670,36 +672,39 @@
     var T = physTools(F), acts = T.acts, padL = T.padL, y, xx, xe, i;
     var adv = 1.7 * F, bw = 292;
 
-    /* ---- steg 1: figuren ---- */
-    T.tanke(T.figurBubble(292, [
-      [['Ritar pipan, sluten i ena änden,']],
-      [['och strängen som är fäst i båda.']]
-    ], 360));
+    /* ---- uppgiftens pipa och sträng med längderna står färdiga ---- */
     var px0 = padL + 60, px1 = padL + 260, py = 230;
-    T.line([px0, py - 40], [px1, py - 40]);
-    T.line([px0, py + 40], [px1, py + 40]);
-    T.line([px0, py - 40], [px0, py + 40]);
-    T.pause(160);
+    var sx0 = padL + 380, sx1 = padL + 600, sy = 230;
+    forritad(T, function () {
+      T.line([px0, py - 40], [px1, py - 40]);
+      T.line([px0, py + 40], [px1, py + 40]);
+      T.line([px0, py - 40], [px0, py + 40]);
+      T.lbl('L=0,80 m', px0 + 40, py + 0.95 * F + 40, BLUE);
+      T.line([sx0, sy - 50], [sx0, sy + 50]);
+      T.line([sx1, sy - 50], [sx1, sy + 50]);
+      T.line([sx0, sy], [sx1, sy]);
+      T.lbl('L=60,5 cm', sx0 + 40, sy + 0.95 * F + 50, BLUE);
+    });
+
+    /* ---- steg 1: grundtonen i pipan och på strängen ---- */
+    T.tanke(T.figurBubble(292, [
+      [['Ritar grundtonen i pipan, sluten i']],
+      [['ena änden, och på strängen som']],
+      [['är fäst i båda.']]
+    ], 360));
     var vag = [];
     for (i = 0; i <= 24; i++) {
       var u = i / 24;
       vag.push([px0 + (px1 - px0) * u, py - 30 * Math.sin(u * Math.PI / 2)]);
     }
     acts.push({ kind: 'stroke', pts: vag, color: BLUE });
-    T.lbl('L=0,80 m', px0 + 40, py + 0.95 * F + 40, BLUE);
     T.pause(160);
-    var sx0 = padL + 380, sx1 = padL + 600, sy = 230;
-    T.line([sx0, sy - 50], [sx0, sy + 50]);
-    T.line([sx1, sy - 50], [sx1, sy + 50]);
-    T.line([sx0, sy], [sx1, sy]);
-    T.pause(140);
     var vag2 = [];
     for (i = 0; i <= 24; i++) {
       var u2 = i / 24;
       vag2.push([sx0 + (sx1 - sx0) * u2, sy - 34 * Math.sin(u2 * Math.PI)]);
     }
     acts.push({ kind: 'stroke', pts: vag2, color: BLUE });
-    T.lbl('L=60,5 cm', sx0 + 40, sy + 0.95 * F + 50, BLUE);
     T.stepEnd();
 
     y = 400;
@@ -783,12 +788,9 @@
     var T = physTools(F), acts = T.acts, padL = T.padL, y, xx, xe, i;
     var adv = 1.7 * F, bw = 292;
 
-    /* ---- steg 1: figuren ---- */
-    T.tanke(T.figurBubble(292, [
-      [['Ritar transformatorn: två spolar']],
-      [['på samma järnkärna med ok.']]
-    ], 300));
+    /* ---- uppgiftens transformator står färdig från början ---- */
     var kx0 = padL + 130, kx1 = padL + 360, ky0 = 120, ky1 = 250;
+    forritad(T, function () {
     T.rect(kx0, ky0, kx1, ky1);
     T.rect(kx0 + 34, ky0 + 34, kx1 - 34, ky1 - 34);
     T.pause(160);
@@ -806,7 +808,7 @@
     T.pause(120);
     T.lbl('N_2', kx1 + 20, ky0 + 100, BLUE);
     T.lbl('U_2', kx1 + 20, ky0 + 130, BLUE);
-    T.stepEnd();
+    });
 
     y = 350;
     T.tanke(T.bubble(120, T.bubbleTop(300), bw, [
@@ -1006,19 +1008,21 @@
     var B = [O[0] + R * Math.sin(aB), O[1] + R * Math.cos(aB)];
     var N = [O[0], O[1] + R];
 
-    /* ---- steg 1: figuren ---- */
-    T.tanke(T.figurBubble(292, [
-      [['Ritar svängningen: repet fäst i']],
-      [['taket, figuren i läge B och i']],
-      [['det nedersta läget.']]
-    ], 400));
+    /* ---- uppgiftens figur (repet och läge B) står färdig ---- */
+    forritad(T, function () {
     T.hatch([O[0] - 70, O[1]], [O[0] + 70, O[1]], 8);
     T.line([O[0] - 70, O[1]], [O[0] + 70, O[1]]);
     T.pause(160);
     T.line(O, B);
     T.circle(B[0], B[1] + 16, 16);
     T.lbl('B', B[0] + 26, B[1] + 10);
-    T.pause(160);
+    });
+
+    /* ---- steg 1: det nedersta läget ---- */
+    T.tanke(T.figurBubble(292, [
+      [['Ritar figuren också i det']],
+      [['nedersta läget.']]
+    ], 400));
     T.dash(O, N);
     T.circle(N[0], N[1] + 16, 16);
     T.lbl('nedersta läget', N[0] - 40, N[1] + 60);
@@ -1105,12 +1109,8 @@
     var bw = 292;
     var cx = padL + 250, cy = 320, L = 160;
 
-    /* ---- steg 1: figuren ---- */
-    T.tanke(T.figurBubble(292, [
-      [['Ritar de två ledarna, vinkelräta']],
-      [['mot varandra, med sina']],
-      [['strömriktningar.']]
-    ], 520));
+    /* ---- uppgiftens figur står färdig från början ---- */
+    forritad(T, function () {
     T.line([cx - L, cy], [cx + L, cy]);
     T.arrow([cx + L - 60, cy], [cx + L - 10, cy], BLUE);
     T.lbl('I', cx + L - 34, cy - 12, BLUE);
@@ -1118,7 +1118,7 @@
     T.line([cx, cy + L], [cx, cy - L]);
     T.arrow([cx, cy - L + 60], [cx, cy - L + 10], BLUE);
     T.lbl('I', cx + 12, cy - L + 36, BLUE);
-    T.stepEnd();
+    });
 
     T.tanke(T.figurBubble(292, [
       [['Högerhandsregeln på den vågräta']],
@@ -1202,12 +1202,8 @@
     var adv = 1.7 * F, bw = 292;
     var cx = padL + 250, cy = 250, R = 130;
 
-    /* ---- steg 1: figuren ---- */
-    T.tanke(T.figurBubble(292, [
-      [['Ritar halvcirkeln med den plana']],
-      [['ytan uppåt. Alla strålar möts i']],
-      [['medelpunkten.']]
-    ], 430));
+    /* ---- uppgiftens figur står färdig från början ---- */
+    forritad(T, function () {
     T.line([cx - R, cy], [cx + R, cy]);
     var bage = [];
     for (i = 0; i <= 24; i++) {
@@ -1218,13 +1214,6 @@
     T.pause(180);
     T.dash([cx, cy + 60], [cx, cy - 120]);
     T.lbl('normal', cx + 8, cy - 126);
-    T.stepEnd();
-
-    T.tanke(T.figurBubble(292, [
-      [['De tre strålarna kommer nedifrån,']],
-      [['genom materialet, med olika']],
-      [['vinklar mot normalen.']]
-    ], 430));
     [[60, 'A'], [45, 'B'], [26, 'C']].forEach(function (p) {
       var ang = p[0] * Math.PI / 180;
       var px = cx - R * Math.sin(ang), py = cy + R * Math.cos(ang);
@@ -1238,7 +1227,7 @@
     T.lbl('D', cx + 150 * Math.sin(ut) + 10, cy - 150 * Math.cos(ut), BLUE);
     T.pause(140);
     T.lbl('38,3°', cx + 22, cy - 96, BLUE);
-    T.stepEnd();
+    });
 
     /* ---- a) ---- */
     y = 480;
@@ -1332,12 +1321,8 @@
     var ox = padL + 90, oy = 300, W = 460, H = 190;
     function X(nm) { return ox + (nm - 300) / 800 * W; }
 
-    /* ---- steg 1: rita av spektrumet ---- */
-    T.tanke(T.figurBubble(292, [
-      [['Ritar av spektrumet: en bred']],
-      [['kurva med en topp, och några']],
-      [['smala dippar.']]
-    ], 400));
+    /* ---- uppgiftens spektrum står färdigt från början ---- */
+    forritad(T, function () {
     T.line([ox, oy], [ox + W + 24, oy]);
     T.line([ox + W + 16, oy - 5], [ox + W + 26, oy]);
     T.line([ox + W + 16, oy + 5], [ox + W + 26, oy]);
@@ -1361,7 +1346,7 @@
       kurva.push([X(i), oy - H * Math.max(0.02, v)]);
     }
     acts.push({ kind: 'stroke', pts: kurva });
-    T.stepEnd();
+    });
 
     /* ---- a) ---- */
     T.tanke(T.figurBubble(292, [
@@ -1453,11 +1438,8 @@
     var adv = 1.7 * F, bw = 292;
     var tx = padL + 80, ty = 130, vy = 300, bx = padL + 480;
 
-    /* ---- steg 1: figuren ---- */
-    T.tanke(T.figurBubble(292, [
-      [['Ritar hopptornet, vattenytan och']],
-      [['banan för ett vågrätt uthopp.']]
-    ], 420));
+    /* ---- uppgiftens figur står färdig från början ---- */
+    forritad(T, function () {
     T.line([tx, ty], [tx, vy]);
     T.line([tx - 40, ty], [tx, ty]);
     T.pause(140);
@@ -1481,7 +1463,7 @@
     T.pause(140);
     T.dblArrow([tx, vy + 26], [bx, vy + 26], BLUE);
     T.lbl('12 m', (tx + bx) / 2 - 20, vy + 22, BLUE);
-    T.stepEnd();
+    });
 
     y = 480;
     T.tanke(T.bubble(120, T.bubbleTop(420), bw, [
@@ -1663,13 +1645,9 @@
     var adv = 1.7 * F, bw = 292;
     var fx0 = padL + 120, fx1 = padL + 360, fy = 250;
 
-    /* ---- steg 1: figuren ---- */
-    T.tanke(T.figurBubble(292, [
-      [['Ritar hastighetsfiltret: två']],
-      [['plattor med ett elektriskt fält']],
-      [['och ett magnetfält in i']],
-      [['papperet.']]
-    ], 470));
+    /* ---- uppgiftens figur står färdig från början ---- */
+    var bcx = fx1 + 90, bcy = fy, br = 90;
+    forritad(T, function () {
     T.line([fx0, fy - 60], [fx1, fy - 60]);
     T.line([fx0, fy + 60], [fx1, fy + 60]);
     T.pause(160);
@@ -1687,7 +1665,6 @@
     T.lbl('B_1', fx0 + 200, fy - 30);
     T.pause(160);
     /* halvcirkelbanan i det andra fältet */
-    var bcx = fx1 + 90, bcy = fy, br = 90;
     var halv = [];
     for (i = 0; i <= 20; i++) {
       var a = -Math.PI / 2 + Math.PI * (i / 20);
@@ -1696,7 +1673,7 @@
     acts.push({ kind: 'stroke', pts: halv, color: BLUE });
     T.lbl('r', bcx + br + 10, bcy, BLUE);
     T.lbl('B_2', bcx - 30, bcy + 30);
-    T.stepEnd();
+    });
 
     /* ---- hastighetsfiltret ---- */
     y = 450;
@@ -1804,12 +1781,8 @@
     function X(t) { return ox + t / 3.0 * W; }
     function Y(f) { return oy - (f - 1.5) / 2.2 * H; }
 
-    /* ---- steg 1: rita av grafen ---- */
-    T.tanke(T.figurBubble(292, [
-      [['Ritar av kraftdiagrammet: kraften']],
-      [['i fjädern svänger mellan två']],
-      [['värden.']]
-    ], 440));
+    /* ---- uppgiftens kraftdiagram står färdigt från början ---- */
+    forritad(T, function () {
     T.line([ox, oy], [ox + W + 24, oy]);
     T.line([ox + W + 16, oy - 5], [ox + W + 26, oy]);
     T.line([ox + W + 16, oy + 5], [ox + W + 26, oy]);
@@ -1839,7 +1812,7 @@
       kurva.push([X(t), Y(2.6 + 0.7 * Math.sin(2 * Math.PI * t / 1.35))]);
     }
     acts.push({ kind: 'stroke', pts: kurva });
-    T.stepEnd();
+    });
 
     /* ---- a) ---- */
     T.tanke(T.figurBubble(292, [
@@ -1963,12 +1936,8 @@
     var adv = 1.7 * F, bw = 292;
     var px0 = padL + 200, px1 = padL + 380, py = 250, d = 90;
 
-    /* ---- steg 1: figuren ---- */
-    T.tanke(T.figurBubble(292, [
-      [['Ritar plattorna och elektronens']],
-      [['bana: rakt fram, sedan avlänkad']],
-      [['nedåt i fältet.']]
-    ], 470));
+    /* ---- uppgiftens figur står färdig från början ---- */
+    forritad(T, function () {
     T.line([px0, py - d / 2], [px1, py - d / 2]);
     T.line([px0, py + d / 2], [px1, py + d / 2]);
     T.pause(160);
@@ -1992,7 +1961,7 @@
     T.pause(140);
     T.dblArrow([px0 - 34, py - d / 2 + 6], [px0 - 34, py + d / 2 - 6], BLUE);
     T.lbl('d=4,0 cm', px0 - 150, py + 42, BLUE);
-    T.stepEnd();
+    });
 
     /* ---- tiden ---- */
     y = 480;

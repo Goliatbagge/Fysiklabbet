@@ -56,7 +56,8 @@ $$
 \Delta x = x_2 - x_1
 $$
 
-Insättning av dessa i (1) ger formeln för riktningskoefficienten.
+Insättning av dessa i (1), $k = \dfrac{\Delta y}{\Delta x}$, ger formeln
+för riktningskoefficienten.
 
 ::: formel "Riktningskoefficient"
 $$

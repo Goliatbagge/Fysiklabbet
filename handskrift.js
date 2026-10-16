@@ -12433,16 +12433,16 @@
     xx = T.str('k=', padL, y);
     xx = T.fracH('Δy', 'Δx', xx, y);
     xx = T.str('=', xx, y);
-    T.fracH('−3', '5', xx, y);
+    xx = T.fracH('−3', '5', xx, y);
     T.stepEnd();
 
+    /* omskrivningen fortsätter på samma rad: … = −3/5 = −3/5 */
     tanke(y, [
       [['Minustecknet hör till hela']],
       [['bråket, så det kan skrivas']],
       [['framför bråkstrecket.']]
     ], 1.05);
-    y += 3.8 * F;
-    xx = T.str('=-', padL + 30, y);
+    xx = T.str('=-', xx, y);
     T.fracH('3', '5', xx, y);
     T.stepEnd();
 

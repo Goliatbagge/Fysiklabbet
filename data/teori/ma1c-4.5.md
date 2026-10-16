@@ -143,7 +143,7 @@ Insättning av $k = 2$ och $m = -11$ i RLE ger $y = 2x - 11$.
 
 ::: sampunkt "Räta linjens ekvation"
 - $y = kx + m$, ibland förkortat RLE.
-- $k$ är lutningen, $m$ är $y$-skärningen.
+- $k$ är lutningen, $m$ är skärningen med *y*-axeln.
 :::
 
 ::: sampunkt "k ur två punkter"

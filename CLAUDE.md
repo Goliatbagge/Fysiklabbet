@@ -573,6 +573,14 @@ Så här bygger du scenen:
    Avläsningspunkter väljs bland dem som syns tydligt i uppgiftens figur,
    aldrig punkter som bara finns i en avritning (användarkrav 2026-10-16,
    referens `layoutLinjensekv` och `layoutRiktkoeff`, `ma1c-4.4`).
+3q. **Insättning i formeln för k: ringa in, skriv, ett värde i taget.**
+   Insättningen skrivs på samma rad som `k = (y₂ − y₁)/(x₂ − x₁)`, efter
+   ett likhetstecken. Pennan ringar in *y*₂ i punktraden och skriver det
+   värdet TILLSAMMANS med minustecknet efter (`3−`), ringar sedan in *y*₁
+   och skriver det i stället för *y*₁ (`(−1)`), och gör likadant i
+   nämnaren med *x*₂ och *x*₁ (användarkrav 2026-10-16, referens
+   `layoutTvapunkter` och `layoutAvariabel`, `ma1c-4.5`). Punkterna står
+   på en rad med *x*₁, *y*₁, *x*₂, *y*₂ i blått under koordinaterna.
 3n. **Skalvärdena står på sin plats och tonas bort när grafen ritas.** Ett
    tal på axeln flyttas aldrig i sidled eller nedåt för att gå fri från en
    graf som ritas senare: när koordinatsystemet ritas står varje tal där

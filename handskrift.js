@@ -12484,7 +12484,7 @@
     y += 3.8 * F;
     T.str('Riktningskoefficient', padL, y - 2.0 * F, null, 0.62);
     xx = T.str('k=', padL, y);
-    T.fracH('y_2-y_1', 'x_2-x_1', xx, y);
+    var xk = T.fracH('y_2-y_1', 'x_2-x_1', xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -12493,10 +12493,10 @@
       [['blir det två minustecken']],
       [['efter varandra.']]
     ], 1.05);
-    /* insättningen värde för värde: pennan ringar in koordinaten i
-     * punktraden och skriver sedan in den, i ordningen y_2, y_1, x_2, x_1 */
-    y += 3.8 * F;
-    xx = T.str('=', padL + 30, y);
+    /* insättningen värde för värde, på samma rad som formeln: pennan
+     * ringar in koordinaten i punktraden och skriver sedan in den. Ordningen
+     * är y_2 (med minustecknet efter), y_1, x_2 (med minustecknet), x_1. */
+    xx = T.str('=', xk, y);
     var numS = '3-(−1)', denS = '2-(−6)';
     var ybar = y - 0.34 * F;
     var fw = Math.max(T.adv(numS), T.adv(denS)) + 0.3 * F;
@@ -12510,13 +12510,13 @@
       return xe2;
     }
     var xn = xx + (fw - T.adv(numS)) / 2, yn = ybar - 0.14 * F;
-    xn = sattIn(3, '3', xn, yn);
-    sattIn(1, '-(−1)', xn, yn);
+    xn = sattIn(3, '3-', xn, yn);
+    sattIn(1, '(−1)', xn, yn);
     T.line([xx, ybar], [xx + fw, ybar]);
     T.pause(130);
     var xd = xx + (fw - T.adv(denS)) / 2, yd = ybar + 1.04 * F;
-    xd = sattIn(2, '2', xd, yd);
-    sattIn(0, '-(−6)', xd, yd);
+    xd = sattIn(2, '2-', xd, yd);
+    sattIn(0, '(−6)', xd, yd);
     xx = xx + fw + 1.5;
     T.stepEnd();
 
@@ -12524,7 +12524,8 @@
       [['Minus framför ett negativt']],
       [['tal blir plus.']]
     ], 1.05);
-    xx = T.str('=', xx, y);
+    y += 3.8 * F;
+    xx = T.str('=', padL + 30, y);
     xx = T.fracH('3+1', '2+6', xx, y);
     T.stepEnd();
 
@@ -12681,7 +12682,8 @@
       [['jag en ekvation med a.']]
     ], 1.05);
     /* insättningen värde för värde: ring i punktraden, sedan skrivs
-     * värdet in, i ordningen y_2, y_1, x_2, x_1 */
+     * värdet in: y_2 med minustecknet efter, y_1, x_2 med minustecknet,
+     * x_1 */
     y += 4.6 * F;
     T.str('Sätter in k=2 och koordinaterna', padL, y - 2.0 * F, null, 0.62);
     xx = T.str('2=', x0, y);
@@ -12698,13 +12700,13 @@
       return xe2;
     }
     var xn = xx + (fw - T.adv(numS)) / 2, yn = ybar - 0.14 * F;
-    xn = sattIn(3, '3a', xn, yn);
-    sattIn(1, '-2', xn, yn);
+    xn = sattIn(3, '3a-', xn, yn);
+    sattIn(1, '2', xn, yn);
     T.line([xx, ybar], [xx + fw, ybar]);
     T.pause(130);
     var xd = xx + (fw - T.adv(denS)) / 2, yd = ybar + 1.04 * F;
-    xd = sattIn(2, '4', xd, yd);
-    sattIn(0, '-a', xd, yd);
+    xd = sattIn(2, '4-', xd, yd);
+    sattIn(0, 'a', xd, yd);
     var xw1 = xx + fw + 0.9 * F;
     T.stepEnd();
 

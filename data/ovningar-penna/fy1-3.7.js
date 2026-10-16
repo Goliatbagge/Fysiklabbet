@@ -1133,8 +1133,8 @@
     var adv = 1.7 * F, bw = 292;
 
     T.tanke(T.figurBubble(292, [
-      [['Ritar planet med klossen som']],
-      [['glider uppför. Vinkeln är 28°.']]
+      [['Klossen glider uppför planet.']],
+      [['Jag ritar starthastigheten.']]
     ], 370));
     var G;   /* planet med klossen är uppgiftens figur: färdigt från början */
     forritad(T, function () { G = plan(T, F, 28, { h: 36 }); });

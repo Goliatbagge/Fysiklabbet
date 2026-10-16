@@ -327,7 +327,7 @@
     var yG = 300;
 
     T.tanke(T.figurBubble(292, [
-      [['Ritar lådan på golvet och']],
+      [['Ritar golvet under lådan och']],
       [['repet som drar snett uppåt.']]
     ], 342));
     T.line([80, yG], [420, yG]);

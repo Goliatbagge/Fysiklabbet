@@ -581,6 +581,15 @@ Så här bygger du scenen:
    nämnaren med *x*₂ och *x*₁ (användarkrav 2026-10-16, referens
    `layoutTvapunkter` och `layoutAvariabel`, `ma1c-4.5`). Punkterna står
    på en rad med *x*₁, *y*₁, *x*₂, *y*₂ i blått under koordinaterna.
+3r. **En ekvation som skrivs om rad för rad börjar på samma x varje rad.**
+   `−3 = 2 · 4 + m` och raden under, `−3 = 8 + m`, ska stå rakt under
+   varandra. Tidigare stod kedjans första rad på `padL` och resten på
+   `padL + 30` (som `mkEkvOp` använder som standard), så att raden under
+   såg förskjuten ut (påpekat 2026-10-16, `ma1c-4.5` exempel 2, sedan
+   rättat i alla scener). Lägg kedjans första rad på samma x som resten,
+   oftast `padL + 30`. Indrag är bara rätt för en rad som FORTSÄTTER
+   uttrycket ovanför och börjar med `=` eller `≈`. Rubriker och svarsrader
+   står som förut på `padL`.
 3n. **Skalvärdena står på sin plats och tonas bort när grafen ritas.** Ett
    tal på axeln flyttas aldrig i sidled eller nedåt för att gå fri från en
    graf som ritas senare: när koordinatsystemet ritas står varje tal där

@@ -9179,7 +9179,7 @@
                       padL + 30 + T.adv('x=5±6')) + 0.9 * F;
 
     y = 74;
-    T.str('(x-5)^2=36', padL, y);
+    T.str('(x-5)^2=36', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -12562,7 +12562,7 @@
     var tanke = mkTanke(T);
     /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet) */
     var vagg = !!cfg.vagg;
-    var xw = padL + 30 + T.adv('−3=8+m') + 0.9 * F;
+    var xw = padL + T.adv('−3=8+m') + 0.9 * F;
 
     tanke(20, [
       [['Allt börjar i räta linjens']],
@@ -12606,7 +12606,7 @@
     T.stepEnd();
 
     y += 2.6 * F;
-    T.str('−3=8+m', padL + 30, y);
+    T.str('−3=8+m', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -12619,13 +12619,13 @@
       y += 2.6 * F;
     } else {
       y += 2.6 * F;
-      T.str('−3', padL + 30, y);
-      var xs1 = T.str('-8', padL + 30 + T.adv('−3'), y, BLUE);
+      T.str('−3', padL, y);
+      var xs1 = T.str('-8', padL + T.adv('−3'), y, BLUE);
       T.str('=8+m-8', xs1, y);
       T.stepEnd();
       y += 2.6 * F;
     }
-    T.str('−11=m', padL + 30, y);
+    T.str('−11=m', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -12823,7 +12823,7 @@
     var tanke = mkTanke(T);
     /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet) */
     var vagg = !!cfg.vagg;
-    var xwA = padL + 30 + T.adv('2=3+m') + 0.9 * F;
+    var xwA = padL + T.adv('2=3+m') + 0.9 * F;
     var xwB = padL + T.adv('y=3x-5') + 0.9 * F;
 
     /* ---- a) ---- */
@@ -12848,7 +12848,7 @@
     T.stepEnd();
 
     y += 2.6 * F;
-    T.str('2=3+m', padL + 30, y);
+    T.str('2=3+m', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -12860,13 +12860,13 @@
       y += 2.6 * F;
     } else {
       y += 2.6 * F;
-      T.str('2', padL + 30, y);
-      var xs1 = T.str('-3', padL + 30 + T.adv('2'), y, BLUE);
+      T.str('2', padL, y);
+      var xs1 = T.str('-3', padL + T.adv('2'), y, BLUE);
       T.str('=3+m-3', xs1, y);
       T.stepEnd();
       y += 2.6 * F;
     }
-    T.str('−1=m', padL + 30, y);
+    T.str('−1=m', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -12896,14 +12896,14 @@
       y += 2.6 * F;
     } else {
       y += 2.6 * F;
-      T.str('y', padL + 30, y);
-      var xs2 = T.str('-y', padL + 30 + T.adv('y'), y, BLUE);
+      T.str('y', padL, y);
+      var xs2 = T.str('-y', padL + T.adv('y'), y, BLUE);
       T.str('=3x-5', xs2, y);
       T.str('-y', xs2 + T.adv('=3x-5'), y, BLUE);
       T.stepEnd();
       y += 2.6 * F;
     }
-    T.str('0=3x-5-y', padL + 30, y);
+    T.str('0=3x-5-y', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -13852,7 +13852,7 @@
     ], 0.5);
     y += 4.5 * F;
     T.str('b) f(x)=2 ger', padL, y - 1.6 * F, null, 0.62);
-    T.str('x^4=2', padL, y);
+    T.str('x^4=2', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -14176,13 +14176,13 @@
       [['delat med 100 blir 24.']]
     ], 1.05);
     y += 4.2 * F;
-    xx = T.str('f=1,96·', padL + 30, y);
+    xx = T.str('f=1,96·', padL, y);
     xx = T.rot('24', xx, y);
     T.str('=9,601...', xx, y);
     T.stepEnd();
 
     y += 2.8 * F;
-    xe = T.str('≈9,6 %', padL + 60, y);
+    xe = T.str('≈9,6 %', padL + 30, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -15979,7 +15979,7 @@
     ], 0);
     y = 430;
     T.str('a) Pythagoras sats', padL, y - 1.6 * F, null, 0.62);
-    T.str('c^2=4^2+3^2', padL, y);
+    T.str('c^2=4^2+3^2', padL + 30, y);
     T.stepEnd();
 
     y += 2.6 * F;
@@ -41240,7 +41240,7 @@
     T.str('Första lösningen', padL, y, null, 0.62);
     T.pause(200);
     y += 2.0 * F;
-    xx = T.str('4x=-17,457...°+n·360°', padL, y);
+    xx = T.str('4x=-17,457...°+n·360°', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -41269,7 +41269,7 @@
     T.str('Andra lösningen', padL, y, null, 0.62);
     T.pause(200);
     y += 2.0 * F;
-    xx = T.str('4x=180°-(-17,457...°)+n·360°', padL, y);
+    xx = T.str('4x=180°-(-17,457...°)+n·360°', padL + 30, y);
     T.stepEnd();
 
     y += 2.6 * F;
@@ -41322,7 +41322,7 @@
     T.str('Fall 1', padL, y, null, 0.62);
     T.pause(200);
     y += 2.0 * F;
-    xx = T.str('3x+30°=60°+n·360°', padL, y);
+    xx = T.str('3x+30°=60°+n·360°', padL + 30, y);
     T.stepEnd();
 
     y = ekvOp(y, '-30°', xx + 0.6 * F, '3x+30°=60°+n·360°');
@@ -41339,11 +41339,11 @@
     T.str('Fall 2', padL, y, null, 0.62);
     T.pause(200);
     y += 2.0 * F;
-    xx = T.str('3x+30°=180°-60°+n·360°', padL, y);
+    xx = T.str('3x+30°=180°-60°+n·360°', padL + 30, y);
     T.stepEnd();
 
     y += 2.6 * F;
-    xx = T.str('3x+30°=120°+n·360°', padL, y);
+    xx = T.str('3x+30°=120°+n·360°', padL + 30, y);
     T.stepEnd();
 
     y = ekvOp(y, '-30°', xx + 0.6 * F, '3x+30°=120°+n·360°');
@@ -41417,7 +41417,7 @@
 
     /* ---- faktor 1 ---- */
     y += 4.4 * F;
-    xx = T.str('sin 2x=0', padL, y);
+    xx = T.str('sin 2x=0', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -41456,7 +41456,7 @@
 
     /* ---- faktor 2 ---- */
     y += 3.4 * F;
-    xx = T.str('cos 3x=0', padL, y);
+    xx = T.str('cos 3x=0', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -41499,7 +41499,7 @@
     /* scenen har ekvationsväljare, så inställningsrutans mobilzon når
      * ned till y=210 — första raden läggs under den */
     y = 246;
-    xx = T.str('4cos x-5sin x=0', padL, y);
+    xx = T.str('4cos x-5sin x=0', padL + 30, y);
     T.stepEnd();
 
     tanke(y, [
@@ -41546,7 +41546,7 @@
       [['360°.']]
     ], 1.05);
     y += 4.6 * F;
-    xx = T.str('x=tan^-^1(0,8)+n·180°', padL, y);
+    xx = T.str('x=tan^-^1(0,8)+n·180°', padL + 30, y);
     T.stepEnd();
 
     y += 2.6 * F;

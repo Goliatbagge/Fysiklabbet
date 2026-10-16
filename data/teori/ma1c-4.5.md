@@ -91,16 +91,53 @@ $$
 :::
 :::
 
+## Enpunktsform
+
+Känner vi riktningskoefficienten $k$ och en punkt $(x_1, y_1)$ på linjen
+kan vi skriva linjens ekvation direkt, utan att först räkna ut $m$. Den
+formen kallas **enpunktsform**.
+
+::: formel "Räta linjens ekvation på enpunktsform"
+$$
+y - y_1 = k(x - x_1)
+$$
+
+där $k$ är linjens riktningskoefficient och $(x_1, y_1)$ är en punkt på
+linjen.
+
+::: härledning "Härledning — enpunktsform"
+Låt $(x, y)$ vara en punkt på linjen, vilken som helst. Riktningskoefficienten
+mellan den och den kända punkten $(x_1, y_1)$ är
+
+$$
+k = \frac{y - y_1}{x - x_1}
+$$
+
+Vi multiplicerar båda led med $(x - x_1)$:
+
+$$
+k(x - x_1) = y - y_1
+$$
+
+Byter vi plats på leden får vi enpunktsformen, $y - y_1 = k(x - x_1)$.
+:::
+:::
+
+Enpunktsformen är bra när uppgiften ger en punkt och lutningen. Vi sätter
+bara in tre tal och har ekvationen klar, utan någon ekvation att lösa för
+$m$. Ger uppgiften i stället två punkter räknar vi först ut $k$ och sätter
+sedan in en av punkterna. Behöver vi linjen på *k*-form, $y = kx + m$, löser
+vi ut $y$ ur enpunktsformen.
+
 ::: exempel "Exempel 2 — Bestäm ekvationen ur punkt och lutning"
-**Bestäm ekvationen för den räta linjen som går genom punkten (4, −3) och
-har riktningskoefficienten 2.**
+**En rät linje går genom punkten (4, −3) och har riktningskoefficienten 2.<br>a) Bestäm linjens ekvation på *k*-form.<br>b) Skriv linjens ekvation på enpunktsform.**
 
 ::: handskrift
 typ: punktlutning
 :::
 
 ::: textlosning
-Vi ställer upp räta linjens ekvation:
+**a)** Vi ställer upp räta linjens ekvation:
 
 $$
 y = kx + m
@@ -137,6 +174,27 @@ $$
 Insättning av $k = 2$ och $m = -11$ i RLE ger $y = 2x - 11$.
 
 **Svar:** $y = 2x - 11$
+
+**b)** Vi ställer upp enpunktsformen:
+
+$$
+y - y_1 = k(x - x_1)
+$$
+
+Punkten är $(x_1, y_1) = (4, -3)$ och $k = 2$. Insättning i
+$y - y_1 = k(x - x_1)$ ger
+
+$$
+y - (-3) = 2(x - 4)
+$$
+
+Minus framför ett negativt tal blir plus:
+
+$$
+y + 3 = 2(x - 4)
+$$
+
+**Svar:** $y + 3 = 2(x - 4)$
 :::
 :::
 
@@ -248,5 +306,11 @@ vilket stämmer.
 1. Räkna ut $k$ med formeln.
 2. Sätt in en av punkterna och lös ut $m$.
 3. Kontrollera med den **andra** punkten.
+:::
+
+::: sampunkt "Enpunktsform"
+- $y - y_1 = k(x - x_1)$
+- Punkt och lutning ger ekvationen direkt, utan att $m$ räknas ut.
+- Punkten $(4, -3)$ med $k = 2$ ger $y + 3 = 2(x - 4)$.
 :::
 :::

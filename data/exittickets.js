@@ -12170,6 +12170,22 @@ window.EXITTICKETS = {
       '$-3 = 2 \\cdot 4 + m$ ger $m = -11$ — punkten ligger på linjen, så koordinaterna uppfyller ekvationen.',
     ],
   },
+  {
+    question: 'En linje har $k = 2$ och går genom (4, −3). Vilken ekvation är linjen skriven på enpunktsform?',
+    choices: [
+      '$y - 3 = 2(x + 4)$',
+      '$y + 4 = 2(x - 3)$',
+      '$y + 3 = 2(x - 4)$',
+      '$y - 3 = 2(x - 4)$',
+    ],
+    correct: 2,
+    why: [
+      'Här har tecknen bytts i båda parenteserna. Punkten $(4, -3)$ ger $x - 4$ och $y - (-3)$.',
+      'Här har koordinaterna bytt plats. $x_1 = 4$ hör ihop med $x$ och $y_1 = -3$ med $y$.',
+      'Insättning i $y - y_1 = k(x - x_1)$ ger $y - (-3) = 2(x - 4)$, alltså $y + 3 = 2(x - 4)$.',
+      'Minus framför $-3$ blir plus. $y - (-3)$ är $y + 3$, inte $y - 3$.',
+    ],
+  },
 ],
 
 'ma1c-4.6': [

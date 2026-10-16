@@ -12582,7 +12582,7 @@
       [['stoppas in.']]
     ], 0);
     y = 116;
-    T.str('RLE', padL, y - 1.6 * F, null, 0.62);
+    T.str('a) RLE', padL, y - 1.6 * F, null, 0.62);
     T.str('y=kx+m', padL, y);
     T.stepEnd();
 
@@ -12605,9 +12605,10 @@
     y += 5.0 * F;
     var yh = y - 2.7 * F, HS = 0.62, LS = 0.66;
     T.str('Punkten (4, −3) ger', padL, yh, null, HS);
-    function underKoord(fore, koord, lbl) {
+    function underKoord(fore, koord, lbl, yy) {
+      yy = yy == null ? yh : yy;
       var c = padL + T.adv(fore, HS) + T.adv(koord, HS) / 2;
-      T.str(lbl, c - T.adv(lbl, LS) / 2, yh + 0.95 * F, BLUE, LS);
+      T.str(lbl, c - T.adv(lbl, LS) / 2, yy + 0.95 * F, BLUE, LS);
     }
     T.pause(250);
     underKoord('Punkten (', '4', 'x');
@@ -12647,6 +12648,45 @@
     y += 3.6 * F;
     T.str('k=2 och m=−11 i y=kx+m ger', padL, y - 1.6 * F, null, 0.62);
     xe = T.str('Svar: y=2x-11', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) enpunktsform: punkten och k sätts in direkt ---- */
+    tanke(y, [
+      [['På enpunktsform sätts punkten']],
+      [['och k in direkt. Då behövs']],
+      [['inget m.']]
+    ]);
+    y += 4.4 * F;
+    T.str('b) Enpunktsform', padL, y - 1.6 * F, null, 0.62);
+    T.str('y-y_1=k(x-x_1)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Punkten (4, −3) är (x_1, y_1)']],
+      [['och k=2.']]
+    ], 1.05);
+    y += 5.0 * F;
+    var yh2 = y - 2.7 * F;
+    T.str('Punkten (4, −3) och k=2 ger', padL, yh2, null, HS);
+    T.pause(250);
+    underKoord('Punkten (', '4', 'x_1', yh2);
+    T.pause(150);
+    underKoord('Punkten (4, ', '−3', 'y_1', yh2);
+    T.pause(300);
+    T.str('y-(−3)=2(x-4)', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Minus framför ett negativt']],
+      [['tal blir plus.']]
+    ], 1.05);
+    y += 2.6 * F;
+    T.str('y+3=2(x-4)', padL, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: y+3=2(x-4)', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

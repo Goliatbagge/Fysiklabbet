@@ -6420,20 +6420,18 @@
 
     /* ---- figuren ---- */
     var fx = padL + 40, fy = 56, fw = 300, fh = 130;
-    tanke(15, [
-      [['Först ritar jag']],
-      [['rektangeln och sätter ut']],
-      [['de mått som är givna.']]
-    ], 0);
-    T.line([fx, fy], [fx + fw, fy]);
-    T.line([fx + fw, fy], [fx + fw, fy + fh]);
-    T.line([fx + fw, fy + fh], [fx, fy + fh]);
-    T.line([fx, fy + fh], [fx, fy]);
-    T.pause(200);
-    T.str('x', fx + fw + 14, fy + fh / 2 + 0.2 * F, BLUE, 0.62);
+    /* rektangeln med de givna måtten är uppgiftens figur: den står färdig
+     * från början (REGEL UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
     var wB = T.adv('2x+3', 0.62);
-    T.str('2x+3', fx + fw / 2 - wB / 2, fy + fh + 0.9 * F, BLUE, 0.62);
-    T.stepEnd();
+    forritad(T, function () {
+      T.line([fx, fy], [fx + fw, fy]);
+      T.line([fx + fw, fy], [fx + fw, fy + fh]);
+      T.line([fx + fw, fy + fh], [fx, fy + fh]);
+      T.line([fx, fy + fh], [fx, fy]);
+      T.pause(200);
+      T.str('x', fx + fw + 14, fy + fh / 2 + 0.2 * F, BLUE, 0.62);
+      T.str('2x+3', fx + fw / 2 - wB / 2, fy + fh + 0.9 * F, BLUE, 0.62);
+    });
 
     tanke(fy + fh + 0.9 * F, [
       [['Motstående sidor i en']],
@@ -10307,23 +10305,26 @@
     var start = [padL + 16, padL + 150, padL + 296];
     var antalRad = [3, 5, 7], antalUpp = [1, 2, 3];
     var centrum = [];
-    for (var f = 0; f < 3; f++) {
-      var bredd = (antalRad[f] - 1) * d;
-      var x0 = start[f];
-      for (var k = 0; k < antalRad[f]; k++) {
-        acts.push({ kind: 'stroke', pts: dotPts(x0 + k * d, gy) });
+    /* figurerna är givna i uppgiften: de står färdiga från början (REGEL
+     * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      for (var f = 0; f < 3; f++) {
+        var bredd = (antalRad[f] - 1) * d;
+        var x0 = start[f];
+        for (var k = 0; k < antalRad[f]; k++) {
+          acts.push({ kind: 'stroke', pts: dotPts(x0 + k * d, gy) });
+        }
+        var cx = x0 + bredd / 2;
+        for (var k2 = 1; k2 <= antalUpp[f]; k2++) {
+          acts.push({ kind: 'stroke', pts: dotPts(cx, gy - k2 * d) });
+        }
+        var lbl = 'Figur ' + (f + 1);
+        var wl = T.adv(lbl, 0.55);
+        T.str(lbl, cx - wl / 2, gy + 1.05 * F, null, 0.55);
+        centrum.push(cx);
+        T.pause(200);
       }
-      var cx = x0 + bredd / 2;
-      for (var k2 = 1; k2 <= antalUpp[f]; k2++) {
-        acts.push({ kind: 'stroke', pts: dotPts(cx, gy - k2 * d) });
-      }
-      var lbl = 'Figur ' + (f + 1);
-      var wl = T.adv(lbl, 0.55);
-      T.str(lbl, cx - wl / 2, gy + 1.05 * F, null, 0.55);
-      centrum.push(cx);
-      T.pause(200);
-    }
-    T.stepEnd();
+    });
 
     /* ---- antalen ----
      * 4,2·F ned: +3-bågarnas etiketter ritas ~62 px ovanför raden och
@@ -12797,11 +12798,14 @@
 
     var A = mkAxes(T, F, { ox: padL + 190, oy: 250, u: 32,
                            xmin: -3, xmax: 4, ymin: -3, ymax: 3 });
-    A.axes();
-    A.ticks(heltal(-3, 4), heltal(-3, 3), [-2, 2, 3, 4], [-2, 2]);
-    T.pause(150);
-    A.linjal([A.X(3), A.Y(-3.3)], [A.X(3), A.Y(3.3)], BLUE);
-    T.stepEnd();
+    /* linjen är given i uppgiften: den står färdig från början (REGEL
+     * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      A.axes();
+      A.ticks(heltal(-3, 4), heltal(-3, 3), [-2, 2, 3, 4], [-2, 2]);
+      T.pause(150);
+      A.linjal([A.X(3), A.Y(-3.3)], [A.X(3), A.Y(3.3)], BLUE);
+    });
 
     tanke(360, [
       [['Linjen är lodrät. Jag']],
@@ -12963,20 +12967,23 @@
                            xmin: -3, xmax: 3, ymin: -3, ymax: 3 });
     var Ff = mkAxes(T, F, { ox: padL + 420, oy: 300, u: 26,
                             xmin: -3, xmax: 3, ymin: -3, ymax: 3 });
-    G.axes();
-    Ff.axes();
-    T.str('g(x)', G.X(-2.6), G.Y(3.4), null, 0.62);
-    T.str('f(x)', Ff.X(-2.6), Ff.Y(3.4), null, 0.62);
-    T.pause(150);
-    /* g: lodrät linje vid x=−2 */
-    G.rule([G.X(-2), G.Y(-3.2)], [G.X(-2), G.Y(3.2)]);
-    /* f: liggande parabel (öppnar åt höger) */
-    var pts = [], t;
-    for (t = -2.6; t <= 2.6001; t += 0.4) {
-      pts.push([Ff.X(0.42 * t * t - 2.4), Ff.Y(t)]);
-    }
-    acts.push({ kind: 'stroke', pts: humanize(pts) });
-    T.stepEnd();
+    /* graferna är givna i uppgiften: de står färdiga från början (REGEL
+     * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      G.axes();
+      Ff.axes();
+      T.str('g(x)', G.X(-2.6), G.Y(3.4), null, 0.62);
+      T.str('f(x)', Ff.X(-2.6), Ff.Y(3.4), null, 0.62);
+      T.pause(150);
+      /* g: lodrät linje vid x=−2 */
+      G.rule([G.X(-2), G.Y(-3.2)], [G.X(-2), G.Y(3.2)]);
+      /* f: liggande parabel (öppnar åt höger) */
+      var pts = [], t;
+      for (t = -2.6; t <= 2.6001; t += 0.4) {
+        pts.push([Ff.X(0.42 * t * t - 2.4), Ff.Y(t)]);
+      }
+      acts.push({ kind: 'stroke', pts: humanize(pts) });
+    });
 
     tankeUnder([
       [['Kravet: varje x-värde får ge']],
@@ -13040,21 +13047,24 @@
     function fv(x) { return (x + 1) * (x - 1) * (x - 3) / 1; }
     var A = mkAxes(T, F, { ox: padL + 150, oy: 230, u: 26,
                            xmin: -2, xmax: 4, ymin: -4, ymax: 4 });
-    A.axes();
-    /* Kurvan är nästan lodrät där den skär x-axeln, så den går rakt genom
-     * siffrorna −1, 1 och 3 strax nedanför axeln. De flyttas i sidled, och
-     * −2 utgår helt för att ge −1 plats (etiketter aldrig på en linje). */
-    A.ticks(heltal(-2, 4), heltal(-4, 4), [-1, 1, 2, 3, 4], [-4, -2, 2, 4],
-            { x: { '-1': -24, 1: -14, 3: 14 } });
-    T.pause(150);
-    var pts = [], t;
-    /* ⚠️ kurvan KLIPPS till fönstret: tredjegradaren rusar till y≈−10
-     * strax utanför och skulle annars ritas rakt igenom svarsraderna
-     * längre ned på arket. −1,37 och 3,37 är där |f(x)| når 4. */
-    for (t = -1.37; t <= 3.3701; t += 0.2) pts.push([A.X(t), A.Y(fv(t))]);
-    acts.push({ kind: 'stroke', pts: humanize(pts), color: BLUE });
-    T.str('f', A.X(3.4), A.Y(3.4), null, 0.62);
-    T.stepEnd();
+    /* grafen är given i uppgiften: den står färdig från början (REGEL
+     * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      A.axes();
+      /* Kurvan är nästan lodrät där den skär x-axeln, så den går rakt genom
+       * siffrorna −1, 1 och 3 strax nedanför axeln. De flyttas i sidled, och
+       * −2 utgår helt för att ge −1 plats (etiketter aldrig på en linje). */
+      A.ticks(heltal(-2, 4), heltal(-4, 4), [-1, 1, 2, 3, 4], [-4, -2, 2, 4],
+              { x: { '-1': -24, 1: -14, 3: 14 } });
+      T.pause(150);
+      var pts = [], t;
+      /* ⚠️ kurvan KLIPPS till fönstret: tredjegradaren rusar till y≈−10
+       * strax utanför och skulle annars ritas rakt igenom svarsraderna
+       * längre ned på arket. −1,37 och 3,37 är där |f(x)| når 4. */
+      for (t = -1.37; t <= 3.3701; t += 0.2) pts.push([A.X(t), A.Y(fv(t))]);
+      acts.push({ kind: 'stroke', pts: humanize(pts), color: BLUE });
+      T.str('f', A.X(3.4), A.Y(3.4), null, 0.62);
+    });
 
     /* ---- a) f(2) ---- */
     /* Kurvan upptar x 115–306 och y 104–347. Graffasens bubblor läggs
@@ -13314,21 +13324,24 @@
     function fv(x) { return 4 - 4 * (x - 0.5) * (x - 0.5) / 2.25; }
     var A = mkAxes(T, F, { ox: padL + 190, oy: 260, u: 32,
                            xmin: -2, xmax: 3, ymin: -1, ymax: 5 });
-    A.axes();
-    /* de blå lodräta pennlinjerna dras vid x=−1 och x=2 och skulle annars
-     * ligga rakt över dessa två skalstreckstal */
-    A.ticks(heltal(-2, 3), heltal(-1, 5), [-2, -1, 1, 2, 3], [1, 2, 3, 4, 5],
-            { x: { '-1': -13, 2: 13 } });
-    T.pause(150);
-    var pts = [], t;
-    for (t = -1; t <= 2.0001; t += 0.15) pts.push([A.X(t), A.Y(fv(t))]);
-    acts.push({ kind: 'stroke', pts: humanize(pts), color: BLUE });
-    T.pause(180);
-    /* öppen ring i vänsteränden, ifylld punkt i högeränden */
-    acts.push({ kind: 'stroke', pts: ringPts(A.X(-1), A.Y(0), 4.5, 4.5) });
-    T.pause(150);
-    A.dot(2, fv(2));
-    T.stepEnd();
+    /* grafen är given i uppgiften: den står färdig från början (REGEL
+     * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      A.axes();
+      /* de blå lodräta pennlinjerna dras vid x=−1 och x=2 och skulle annars
+       * ligga rakt över dessa två skalstreckstal */
+      A.ticks(heltal(-2, 3), heltal(-1, 5), [-2, -1, 1, 2, 3], [1, 2, 3, 4, 5],
+              { x: { '-1': -13, 2: 13 } });
+      T.pause(150);
+      var pts = [], t;
+      for (t = -1; t <= 2.0001; t += 0.15) pts.push([A.X(t), A.Y(fv(t))]);
+      acts.push({ kind: 'stroke', pts: humanize(pts), color: BLUE });
+      T.pause(180);
+      /* öppen ring i vänsteränden, ifylld punkt i högeränden */
+      acts.push({ kind: 'stroke', pts: ringPts(A.X(-1), A.Y(0), 4.5, 4.5) });
+      T.pause(150);
+      A.dot(2, fv(2));
+    });
 
     tanke(390, [
       [['Definitionsmängden är de']],
@@ -13519,13 +13532,16 @@
 
     var A = mkAxes(T, F, { ox: padL + 130, oy: 250, u: 30,
                            xmin: -2, xmax: 3, ymin: -1, ymax: 5 });
-    A.axes();
-    A.ticks(heltal(-2, 3), heltal(-1, 5), [-2, -1, 1, 2, 3], [1, 2, 3, 4, 5]);
-    T.pause(150);
-    var pts = [], t;
-    for (t = -2; t <= 2.3001; t += 0.2) pts.push([A.X(t), A.Y(Math.pow(2, t))]);
-    acts.push({ kind: 'stroke', pts: humanize(pts), color: BLUE });
-    T.stepEnd();
+    /* grafen är given i uppgiften: den står färdig från början (REGEL
+     * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      A.axes();
+      A.ticks(heltal(-2, 3), heltal(-1, 5), [-2, -1, 1, 2, 3], [1, 2, 3, 4, 5]);
+      T.pause(150);
+      var pts = [], t;
+      for (t = -2; t <= 2.3001; t += 0.2) pts.push([A.X(t), A.Y(Math.pow(2, t))]);
+      acts.push({ kind: 'stroke', pts: humanize(pts), color: BLUE });
+    });
 
     tanke(360, [
       [['Båda funktionerna går genom']],
@@ -15070,17 +15086,20 @@
 
     /* triangeln: rät vinkel i C, u vid A (nedre vänster), v vid B (topp) */
     var A = [padL + 60, 330], C = [padL + 240, 330], B = [padL + 240, 195];
-    T.line(A, C); T.line(C, B); T.line(B, A);
-    ratVinkel(T, C, [-1, 0], [0, -1]);
-    T.pause(160);
-    T.str('3', (A[0] + C[0]) / 2 - 8, C[1] + 0.85 * F, null, 0.62);
-    T.str('4', C[0] + 14, (C[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
-    T.pause(140);
-    vinkelBage(T, A, -0.62, 0, 34);
-    T.str('u', A[0] + 40, A[1] - 8, null, 0.62);
-    vinkelBage(T, B, Math.PI / 2, Math.PI / 2 + 0.93, 32);
-    T.str('v', B[0] - 30, B[1] + 58, null, 0.62);
-    T.stepEnd();
+    /* triangeln är given i uppgiften: den står färdig från början (REGEL
+     * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      T.line(A, C); T.line(C, B); T.line(B, A);
+      ratVinkel(T, C, [-1, 0], [0, -1]);
+      T.pause(160);
+      T.str('3', (A[0] + C[0]) / 2 - 8, C[1] + 0.85 * F, null, 0.62);
+      T.str('4', C[0] + 14, (C[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
+      T.pause(140);
+      vinkelBage(T, A, -0.62, 0, 34);
+      T.str('u', A[0] + 40, A[1] - 8, null, 0.62);
+      vinkelBage(T, B, Math.PI / 2, Math.PI / 2 + 0.93, 32);
+      T.str('v', B[0] - 30, B[1] + 58, null, 0.62);
+    });
 
     /* ---- a) tan u ---- */
     tanke(400, [
@@ -15186,15 +15205,18 @@
 
     /* ---- a) x i täljaren ---- */
     var A = [padL + 60, 300], C = [padL + 250, 300], B = [padL + 250, 190];
-    T.line(A, C); T.line(C, B); T.line(B, A);
-    ratVinkel(T, C, [-1, 0], [0, -1]);
-    T.pause(150);
-    T.str('a)', padL, 170, null, 0.62);
-    T.str('1,3 m', (A[0] + C[0]) / 2 - 30, C[1] + 0.85 * F, null, 0.62);
-    T.str('x', C[0] + 14, (C[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
-    vinkelBage(T, A, -0.53, 0, 30);
-    T.str('30°', A[0] + 36, A[1] - 7, null, 0.55);
-    T.stepEnd();
+    /* trianglarna i a) och b) är givna i uppgiften: de står färdiga från
+     * början (REGEL UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      T.line(A, C); T.line(C, B); T.line(B, A);
+      ratVinkel(T, C, [-1, 0], [0, -1]);
+      T.pause(150);
+      T.str('a)', padL, 170, null, 0.62);
+      T.str('1,3 m', (A[0] + C[0]) / 2 - 30, C[1] + 0.85 * F, null, 0.62);
+      T.str('x', C[0] + 14, (C[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
+      vinkelBage(T, A, -0.53, 0, 30);
+      T.str('30°', A[0] + 36, A[1] - 7, null, 0.55);
+    });
 
     tanke(360, [
       [['Vinkeln 30° har x som']],
@@ -15251,15 +15273,17 @@
     y += 4.5 * F;
     var A2 = [padL + 60, y + 130], C2 = [padL + 290, y + 130],
         B2 = [padL + 290, y + 40];
-    T.str('b)', padL, y, null, 0.62);
-    T.line(A2, C2); T.line(C2, B2); T.line(B2, A2);
-    ratVinkel(T, C2, [-1, 0], [0, -1]);
-    T.pause(150);
-    T.str('x', (A2[0] + C2[0]) / 2 - 8, C2[1] + 0.85 * F, null, 0.62);
-    T.str('5,0', C2[0] + 14, (C2[1] + B2[1]) / 2 + 0.2 * F, null, 0.62);
-    vinkelBage(T, A2, -0.37, 0, 40);
-    T.str('22°', A2[0] + 59, A2[1] - 7, null, 0.55);
-    T.stepEnd();
+    var yB = y;
+    forritad(T, function () {
+      T.str('b)', padL, yB, null, 0.62);
+      T.line(A2, C2); T.line(C2, B2); T.line(B2, A2);
+      ratVinkel(T, C2, [-1, 0], [0, -1]);
+      T.pause(150);
+      T.str('x', (A2[0] + C2[0]) / 2 - 8, C2[1] + 0.85 * F, null, 0.62);
+      T.str('5,0', C2[0] + 14, (C2[1] + B2[1]) / 2 + 0.2 * F, null, 0.62);
+      vinkelBage(T, A2, -0.37, 0, 40);
+      T.str('22°', A2[0] + 59, A2[1] - 7, null, 0.55);
+    });
 
     y = C2[1] + 3.4 * F;
     r = trigKvot(T, F, { fn: 'tan 22°=', x: padL, y: y,
@@ -15309,18 +15333,21 @@
     var tanke = mkTanke(T);
 
     var A = [padL + 60, 320], C = [padL + 240, 320], B = [padL + 240, 185];
-    T.line(A, C); T.line(C, B); T.line(B, A);
-    ratVinkel(T, C, [-1, 0], [0, -1]);
-    T.pause(160);
-    T.str('3', (A[0] + C[0]) / 2 - 8, C[1] + 0.85 * F, null, 0.62);
-    T.str('4', C[0] + 14, (C[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
-    T.str('5', (A[0] + B[0]) / 2 - 30, (A[1] + B[1]) / 2 - 12, null, 0.62);
-    T.pause(140);
-    vinkelBage(T, A, -0.62, 0, 34);
-    T.str('u', A[0] + 40, A[1] - 8, null, 0.62);
-    vinkelBage(T, B, Math.PI / 2, Math.PI / 2 + 0.93, 32);
-    T.str('v', B[0] - 30, B[1] + 58, null, 0.62);
-    T.stepEnd();
+    /* triangeln är given i uppgiften: den står färdig från början (REGEL
+     * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      T.line(A, C); T.line(C, B); T.line(B, A);
+      ratVinkel(T, C, [-1, 0], [0, -1]);
+      T.pause(160);
+      T.str('3', (A[0] + C[0]) / 2 - 8, C[1] + 0.85 * F, null, 0.62);
+      T.str('4', C[0] + 14, (C[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
+      T.str('5', (A[0] + B[0]) / 2 - 30, (A[1] + B[1]) / 2 - 12, null, 0.62);
+      T.pause(140);
+      vinkelBage(T, A, -0.62, 0, 34);
+      T.str('u', A[0] + 40, A[1] - 8, null, 0.62);
+      vinkelBage(T, B, Math.PI / 2, Math.PI / 2 + 0.93, 32);
+      T.str('v', B[0] - 30, B[1] + 58, null, 0.62);
+    });
 
     var svepMotU = [[C[0] + 5, C[1] - 6], [B[0] + 5, B[1] + 6]];
     var svepNarU = [[A[0] + 6, A[1] + 6], [C[0] - 6, C[1] + 6]];
@@ -15395,14 +15422,17 @@
     var tanke = mkTanke(T);
 
     var A = [padL + 60, 300], C = [padL + 250, 300], B = [padL + 250, 180];
-    T.line(A, C); T.line(C, B); T.line(B, A);
-    ratVinkel(T, C, [-1, 0], [0, -1]);
-    T.pause(150);
-    T.str('6,1 cm', C[0] + 14, (C[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
-    T.str('a', (A[0] + B[0]) / 2 - 34, (A[1] + B[1]) / 2 - 12, null, 0.62);
-    vinkelBage(T, A, -0.56, 0, 32);
-    T.str('41°', A[0] + 38, A[1] - 7, null, 0.55);
-    T.stepEnd();
+    /* triangeln är given i uppgiften: den står färdig från början (REGEL
+     * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      T.line(A, C); T.line(C, B); T.line(B, A);
+      ratVinkel(T, C, [-1, 0], [0, -1]);
+      T.pause(150);
+      T.str('6,1 cm', C[0] + 14, (C[1] + B[1]) / 2 + 0.2 * F, null, 0.62);
+      T.str('a', (A[0] + B[0]) / 2 - 34, (A[1] + B[1]) / 2 - 12, null, 0.62);
+      vinkelBage(T, A, -0.56, 0, 32);
+      T.str('41°', A[0] + 38, A[1] - 7, null, 0.55);
+    });
 
     tanke(360, [
       [['Jag har vinkeln och dess']],
@@ -15460,13 +15490,16 @@
     /* trubbig triangel: bas 12 längs botten, sidan 14 upp åt höger */
     var A = [padL + 70, 300], Bp = [padL + 310, 300];
     var Cp = [padL + 240, 160];
-    T.line(A, Bp); T.line(Bp, Cp); T.line(Cp, A);
-    T.pause(150);
-    T.str('12', (A[0] + Bp[0]) / 2 - 12, Bp[1] + 0.85 * F, null, 0.62);
-    T.str('14', (Bp[0] + Cp[0]) / 2 + 14, (Bp[1] + Cp[1]) / 2, null, 0.62);
-    vinkelBage(T, Bp, Math.PI, Math.PI + 1.10, 32);
-    T.str('42°', Bp[0] - 62, Bp[1] - 14, null, 0.55);
-    T.stepEnd();
+    /* triangeln är given i uppgiften: den står färdig från början (REGEL
+     * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      T.line(A, Bp); T.line(Bp, Cp); T.line(Cp, A);
+      T.pause(150);
+      T.str('12', (A[0] + Bp[0]) / 2 - 12, Bp[1] + 0.85 * F, null, 0.62);
+      T.str('14', (Bp[0] + Cp[0]) / 2 + 14, (Bp[1] + Cp[1]) / 2, null, 0.62);
+      vinkelBage(T, Bp, Math.PI, Math.PI + 1.10, 32);
+      T.str('42°', Bp[0] - 62, Bp[1] - 14, null, 0.55);
+    });
 
     tanke(376, [
       [['Areaformeln behöver basen och']],
@@ -15811,15 +15844,18 @@
      * pilen 1,05·F ovanför baslinjen, så en etikett strax under en
      * vektor får sin pil rakt ovanpå vektorn. */
     var yLbl = 320;
-    for (i = 0; i < 4; i++) {
-      figurPil(T, vek[i][0], vek[i][1]);
-      var mx = (vek[i][0][0] + vek[i][1][0]) / 2;
-      var xv = T.str('v', mx - 14, yLbl, null, 0.62);
-      T.str('_' + (i + 1), xv - 4, yLbl, null, 0.62);
-      vecPil(T, F, mx - 14, xv - 2, yLbl, null, 0.68);
-      T.pause(180);
-    }
-    T.stepEnd();
+    /* vektorerna är givna i uppgiften: de står färdiga från början (REGEL
+     * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      for (i = 0; i < 4; i++) {
+        figurPil(T, vek[i][0], vek[i][1]);
+        var mx = (vek[i][0][0] + vek[i][1][0]) / 2;
+        var xv = T.str('v', mx - 14, yLbl, null, 0.62);
+        T.str('_' + (i + 1), xv - 4, yLbl, null, 0.62);
+        vecPil(T, F, mx - 14, xv - 2, yLbl, null, 0.68);
+        T.pause(180);
+      }
+    });
 
     tanke(352, [
       [['Två vektorer är SAMMA vektor']],
@@ -15868,13 +15904,16 @@
 
     var A = mkAxes(T, F, { ox: padL + 90, oy: 290, u: 26,
                            xmin: -1, xmax: 9, ymin: -1, ymax: 5 });
-    A.axes();
-    A.ticks(heltal(-1, 9), heltal(-1, 5), [2, 4, 6, 8], [2, 4]);
-    T.pause(150);
-    figurPil(T, [A.X(0), A.Y(0)], [A.X(8), A.Y(4)]);
-    T.str('A', A.X(0) - 32, A.Y(0) - 10, null, 0.62);
-    T.str('B', A.X(8) + 8, A.Y(4) - 8, null, 0.62);
-    T.stepEnd();
+    /* vektorn i rutnätet är given i uppgiften: den står färdig från början
+     * (REGEL UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      A.axes();
+      A.ticks(heltal(-1, 9), heltal(-1, 5), [2, 4, 6, 8], [2, 4]);
+      T.pause(150);
+      figurPil(T, [A.X(0), A.Y(0)], [A.X(8), A.Y(4)]);
+      T.str('A', A.X(0) - 32, A.Y(0) - 10, null, 0.62);
+      T.str('B', A.X(8) + 8, A.Y(4) - 8, null, 0.62);
+    });
 
     tanke(A.Y(-1) + 1.4 * F, [
       [['Jag bildar en rätvinklig']],

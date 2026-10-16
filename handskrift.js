@@ -12297,7 +12297,7 @@
    * Linjen är given, k och m ska läsas AV grafen: m i skärningen med
    * y-axeln, k som "ett steg åt höger, k steg upp". */
   function layoutLinjensekv(cfg, F) {
-    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
 
     var A = mkAxes(T, F, { ox: padL + 200, oy: 268, u: 30,
@@ -12330,10 +12330,19 @@
       [['UPP när jag går ETT steg åt']],
       [['höger. Jag ritar trappsteget.']]
     ], 0);
-    A.stair(0, 3, 1, 5, '1', '2', { pilar: true });
+    /* Δx-etiketten knuffas åt höger (så långt stair() tillåter), annars
+     * hamnar den på grafen och y-axeln där steget börjar */
+    A.stair(0, 3, 1, 5, 'Δx=1', 'Δy=2', { pilar: true, dxOff: [40, 0] });
     T.stepEnd();
 
-    T.str('k=2', padL, y);
+    /* k skrivs som kvoten Δy/Δx med trappstegets värden, så att
+     * kopplingen till formelrutan (k = Δy/Δx) syns */
+    y += 1.0 * F;
+    xx = T.str('k=', padL, y);
+    xx = T.fracH('Δy', 'Δx', xx, y);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('2', '1', xx, y);
+    T.str('=2', xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -12341,7 +12350,7 @@
       [['De sätts in i räta linjens']],
       [['ekvation.']]
     ], 1.05);
-    y += 3.6 * F;
+    y += 4.2 * F;
     T.str('Räta linjens ekvation', padL, y - 1.6 * F, null, 0.62);
     T.str('y=kx+m', padL, y);
     T.stepEnd();

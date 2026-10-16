@@ -50,6 +50,13 @@ const REGLER = [
                   '(Substantivet förråd berörs inte.)',
     },
     {
+        namn: 'grafen-mäter',
+        niva: 'fel',
+        monster: /\b(grafen|graferna|diagrammet|kurvan|figuren|tabellen)\s+(mäter|mätte|räknar|beräknar)\b/gi,
+        rattelse: 'En graf mäter ingenting, den visar. Skriv "grafen visar …", ' +
+                  'eller låt simuleringen/eleven vara den som mäter (påpekat 2026-10-16).',
+    },
+    {
         namn: 'rymdtid',
         niva: 'fel',
         monster: /\brymdtid(en|ens|er)?\b/gi,

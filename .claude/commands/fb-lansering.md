@@ -43,6 +43,11 @@ avsluta.
   **inga emojis, inga hashtags**, decimalkomma, gemener i rubriker,
   INTE "på gymnasienivå".
 - Beskriv vad man kan GÖRA i det nya ("dra i reglaget och se …").
+- **Ge inte döda ting en handling.** En graf, ett diagram eller en kurva
+  mäter ingenting, den *visar*: "grafen visar hur lång tid varje
+  svängning tar", aldrig "grafen mäter …" (påpekat 2026-10-16, rättat
+  för hand i inlägget om periodtiden). Kör texten genom
+  `node .claude/verify-sprak.js` om du är osäker.
 - **Ingen länk i inläggstexten** (sedan 2026-09-05, samma beslut som i
   nyhetsjobbet: Facebook stryper räckvidden för inlägg med utlänk, även
   en ren text-URL). Länken till rätt sida på sajten

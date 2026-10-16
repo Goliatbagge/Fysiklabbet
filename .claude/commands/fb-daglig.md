@@ -74,6 +74,9 @@ bort hela raden om även `ig:` redan är postad. Rör aldrig `ig:`-fältet.
   invände mot båda sakerna i myoniuminlägget 2026-09-16.
 - **Inga emojis, inga hashtags.** Svensk typografi: decimalkomma,
   gemener i rubriker, tankstreck sparsamt.
+- **Ge inte döda ting en handling eller ett uppsåt**: en graf *visar*,
+  den mäter inte; ett brus *avslöjar*, det förråder inte (påpekat
+  2026-10-16 och 2026-08-18).
 - **Ingen länk i inläggstexten.** Länken till artikeln läggs i stället
   som inläggets FÖRSTA KOMMENTAR (steg 3). Avsluta texten med
   hänvisningen till Fysiklabbet och gärna en halv mening om att länken

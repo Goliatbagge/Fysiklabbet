@@ -75,7 +75,9 @@ kan beräknas med "trappstegsmetoden" där man ritar ett trappsteg mellan
 två valfria punkter på linjen och tänker att man går *åt höger*.
 Trappstegets höjd motsvarar då förändringen i *y*-led, vilket skrivs
 $\Delta y$, och trappstegets längd motsvarar förändringen i *x*-led, vilket
-skrivs $\Delta x$.
+skrivs $\Delta x$. Den grekiska bokstaven $\Delta$ uttalas "delta" och
+betyder *förändring*. $\Delta y$ läses alltså "delta *y*" och betyder hur
+mycket *y* ändras.
 
 ::: formel "Beräkna linjens lutning (*k*-värde)"
 $$

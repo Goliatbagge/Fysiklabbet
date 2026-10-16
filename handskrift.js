@@ -12474,9 +12474,8 @@
     ]);
     y += 3.8 * F;
     T.str('Riktningskoefficient', padL, y - 2.0 * F, null, 0.62);
-    var xf0 = padL;
     xx = T.str('k=', padL, y);
-    var xf1 = T.fracH('y_2-y_1', 'x_2-x_1', xx, y);
+    T.fracH('y_2-y_1', 'x_2-x_1', xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -12485,11 +12484,31 @@
       [['blir det två minustecken']],
       [['efter varandra.']]
     ], 1.05);
-    var rings = substRings(acts, [[xp0, xp1, yp, F], [xf0, xf1, y, F]]);
+    /* insättningen värde för värde: pennan ringar in koordinaten i
+     * punktraden och skriver sedan in den, i ordningen y_2, y_1, x_2, x_1 */
     y += 3.8 * F;
     xx = T.str('=', padL + 30, y);
-    xx = T.fracH('3-(−1)', '2-(−6)', xx, y);
-    fadeRings(acts, rings);
+    var numS = '3-(−1)', denS = '2-(−6)';
+    var ybar = y - 0.34 * F;
+    var fw = Math.max(T.adv(numS), T.adv(denS)) + 0.3 * F;
+    function sattIn(i, t, x, yb) {
+      var st = T.ring(cols[i][0], cols[i][1], yp);
+      T.pause(380);
+      var xe2 = T.str(t, x, yb);
+      T.pause(200);
+      T.fade(st);
+      T.pause(160);
+      return xe2;
+    }
+    var xn = xx + (fw - T.adv(numS)) / 2, yn = ybar - 0.14 * F;
+    xn = sattIn(3, '3', xn, yn);
+    sattIn(1, '-(−1)', xn, yn);
+    T.line([xx, ybar], [xx + fw, ybar]);
+    T.pause(130);
+    var xd = xx + (fw - T.adv(denS)) / 2, yd = ybar + 1.04 * F;
+    xd = sattIn(2, '2', xd, yd);
+    sattIn(0, '-(−6)', xd, yd);
+    xx = xx + fw + 1.5;
     T.stepEnd();
 
     tanke(y, [

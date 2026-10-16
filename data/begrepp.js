@@ -1415,6 +1415,30 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'josephsonovergang',
+    term: 'Josephsonövergång',
+    former: ['josephsonövergång', 'josephsonövergången', 'josephsonövergångar', 'josephsonövergångarna', 'josephsoneffekten', 'josephsoneffekt'],
+    kort: 'En tunn barriär mellan två områden av en supraledare eller en supraflytande vätska, där kvantvågen precis kan läcka igenom. Den gör en osynlig kvantfas mätbar.',
+    relaterade: ['supraledare', 'superfluid', 'squid', 'kvantmekanik'],
+    body: [
+      { type: 'p', html: 'Tänk dig två bassänger med vatten och en vägg emellan. Är väggen tät händer ingenting, och är den borta flyter vattnet fritt. En josephsonövergång är något mittemellan: en vägg som är så tunn, eller har så små hål, att det som finns på ena sidan precis kan sippra igenom till den andra. I en supraledare är det elektronpar som sipprar igenom ett isolerande skikt som bara är några nanometer tjockt. I supraflytande helium är det heliumatomer som tar sig genom hål som är omkring en nanometer stora.' },
+      { type: 'p', html: 'Det som gör övergången speciell är kvantmekaniken. I en supraledare och i en supraflytande vätska beter sig alla partiklar som en enda gemensam våg. Vågen har en fas, ett läge i sin svängning, och fasen kan vara olika på de två sidorna om barriären. Brittiske fysikern Brian Josephson visade 1962 att strömmen genom barriären bestäms av just den fasskillnaden. Ett tal som annars är helt omöjligt att se blir på så sätt en ström eller en svängning som går att mäta.' },
+      { type: 'p', html: 'Josephsonövergångar finns i världens känsligaste magnetfältsmätare och i de supraledande kvantbitar som många kvantdatorer bygger på. De används också för att definiera spänningsenheten volt. I supraflytande helium kan samma idé användas för att mäta rotation, eftersom fasskillnaden ändras när en ring av vätskan vrids.' }
+    ]
+  },
+  {
+    id: 'sagnaceffekten',
+    term: 'Sagnaceffekten',
+    former: ['sagnaceffekten', 'sagnaceffekt', 'sagnacfas', 'sagnacfasen', 'ringlaser', 'ringlasern', 'ringlasrar', 'ringlasrarna', 'ringlasergyroskop'],
+    kort: 'När ljus eller andra vågor skickas åt båda hållen runt en ring som roterar kommer de fram vid olika tidpunkter. Skillnaden avslöjar hur snabbt ringen vrids.',
+    relaterade: ['interferens', 'interferometer', 'relativitetsteori'],
+    body: [
+      { type: 'p', html: 'Föreställ dig två löpare som springer lika fort åt var sitt håll runt en karusell, med start och mål på samma ställe på karusellen. Står karusellen stilla kommer de i mål samtidigt. Snurrar den har målet flyttat sig en bit under loppet: den som springer med rotationen får springa lite längre, och den som springer mot rotationen kommer fram först.' },
+      { type: 'p', html: 'Precis så gör ljus. Delar man en ljusstråle i två och skickar delarna åt var sitt håll runt en ring som roterar, får de en liten skillnad i gångväg när de möts igen. Skillnaden syns som en förskjutning i interferensmönstret, och den är proportionell mot ringens vinkelhastighet och mot den area ringen omsluter. Den franske fysikern Georges Sagnac visade effekten 1913.' },
+      { type: 'p', html: 'Ringlasergyroskop som bygger på sagnaceffekten finns i flygplan och fartyg, där de håller reda på hur farkosten vrider sig utan några rörliga delar. De största ringlasrarna, med flera meter långa sidor, är så känsliga att de mäter små variationer i jordens egen rotation. Samma effekt finns också för materievågor, till exempel atomer eller supraflytande helium, och då blir den mycket större eftersom atomerna har massa.' }
+    ]
+  },
+  {
     id: 'magnetometer',
     term: 'Magnetometer',
     former: ['magnetometer', 'magnetometern', 'magnetometrar', 'magnetometrarna', 'magnetometri', 'magnetfältsmätare', 'magnetfältsmätaren'],

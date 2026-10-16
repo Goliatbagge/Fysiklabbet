@@ -103,6 +103,71 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-16-helium-som-kanner-rumtiden",
+    date: "2026-10-16",
+    title: "En ring av supraflytande helium kan känna hur jorden drar med sig rumtiden",
+    deck: "Fysiker i Berkeley, Wien och Pasadena har räknat fram ett sätt att mäta ramsläpning, den effekt där jordens rotation drar med sig rumtiden, på ett labbord i stället för med satelliter. Instrumentet är en ring av supraflytande helium nedkyld till en hundradels grad över den absoluta nollpunkten. Det är ännu inte byggt, men enligt beräkningarna kan det slå alla tidigare mätningar.",
+    category: "Relativitetsteori",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-16-helium-som-kanner-rumtiden.jpg",
+    imageAlt: "En blank kula av kvartsglas på en tunn glasstav framför ett stort svartvitt foto av Albert Einsteins ansikte. Genom kulan syns Einsteins ansikte upp och ned.",
+    imageCredit: "Foto: NASA (public domain)",
+    tags: ["relativitetsteori", "allmänna relativitetsteorin", "ramsläpning", "rumtid", "gravitation", "rotation", "vinkelhastighet", "superfluid", "helium", "josephsonövergång", "sagnaceffekten", "interferens", "kvantfysik", "gyroskop"],
+    sources: [
+      { name: "Phys.org: Quantum sensor could measure how Earth drags spacetime (15 oktober 2026, Ingrid Fadelli)", url: "https://phys.org/news/2026-10-quantum-sensor-earth-spacetime.html" },
+      { name: "arXiv: förtrycket i fulltext", url: "https://arxiv.org/abs/2510.20772" }
+    ],
+    research: {
+      citation: "K.-I. Ellers, M. Christodoulou, K. C. Schwab och K. B. Whaley, ”Quantum Sensing of Gravitational Frame Dragging with a Superfluid 4He Gyrometer”, Physical Review Letters 137, 121404 (2026), DOI 10.1103/q3v9-rjm9.",
+      url: "https://doi.org/10.1103/q3v9-rjm9"
+    },
+    larare: {
+      moment: [
+        { label: "Gravitationslagen", href: "katalog.html?id=fy1-3.5" },
+        { label: "Relativitetsteori", href: "katalog.html?id=fy1-8.1" },
+        { label: "Period, frekvens, radianer och vinkelhastighet", href: "katalog.html?id=fy2-1.4" },
+        { label: "Diffraktion och interferens", href: "katalog.html?id=fy2-2.14" }
+      ],
+      fragor: [
+        "Jorden roterar ett varv per dygn. Räkna ut jordens vinkelhastighet i rad/s och jämför med ramsläpningens vinkelhastighet i artikeln. Hur många gånger större är den vanliga rotationen?",
+        "Instrumentet ska vara så känsligt att det märker en rotation på ett varv per fyra miljarder år. Räkna ut vilken vinkelhastighet det motsvarar och jämför med svaret ovan.",
+        "Varför måste heliumringen vridas så att jordaxeln ligger i ringens plan, och varför räcker det inte att bara räkna bort den vanliga rotationen i efterhand?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Snurra en kula i en burk sirap, så drar kulan med sig sirapen närmast sig. Enligt Einsteins allmänna relativitetsteori gör jorden något liknande med rumtiden runt sig: när planeten roterar släpar den med sig själva referensramen, alltså de riktningar man mäter vinklar och rotationer mot. Effekten kallas ramsläpning och förutsades av de österrikiska fysikerna Josef Lense och Hans Thirring redan 1918. Den är så svag att det tog mer än åttio år innan någon kunde mäta den.' },
+      { type: 'p', html: 'Nu föreslår fyra fysiker ett sätt att mäta den i ett vanligt laboratorium, med en ring av helium som kylts så långt att den blivit supraflytande. Förslaget publicerades i <em>Physical Review Letters</em> den 17 september 2026. Bakom det står Kai-Isaak Ellers och Birgitta Whaley vid University of California, Berkeley, Marios Christodoulou vid Österrikiska vetenskapsakademiens institut för kvantoptik och kvantinformation i Wien och Keith Schwab vid Caltech i Pasadena. Det är en teoretisk studie: instrumentet är inte byggt, och en avgörande del av det finns ännu inte.' },
+
+      { type: 'h2', text: 'En effekt på fyra tiomiljarddelar' },
+      { type: 'p', html: 'Jorden snurrar ett varv per dygn, med vinkelhastigheten $\\omega \\approx 7{,}3 \\cdot 10^{-5}\\ \\mathrm{rad/s}$. Ramsläpningen vid Berkeleys breddgrad ger enligt studien som mest en extra vridning på $2{,}9 \\cdot 10^{-14}\\ \\mathrm{rad/s}$. Det är ungefär fyra tiomiljarddelar av jordens egen rotation.' },
+      { type: 'p', html: 'Hittills har effekten bara mätts från rymden. Satelliterna LAGEOS visade den 2004 med en noggrannhet på omkring 20&nbsp;procent, och 2019 kom mätningen ned till 2&nbsp;procent när satelliten LARES lades till. Båda bygger på att man följer banorna under många varv och har en noggrann modell av jordens tyngdkraftsfält. Satelliten Gravity Probe B, som sköts upp 2004, mätte i stället effekten direkt med fyra gyroskop av kvartsglas, några av de mest perfekt runda föremål som tillverkats. Resultatet kom 2011, med en noggrannhet på omkring 18&nbsp;procent. Den största felkällan var små elektriska ojämnheter i kulorna som gav vridmoment på dem, något som upptäcktes först efter uppskjutningen.' },
+
+      { type: 'h2', text: 'En ring av friktionsfri vätska' },
+      { type: 'p', html: 'Under 2,17&nbsp;K blir helium supraflytande. Vätskan förlorar all inre friktion, och atomerna beter sig som en enda gemensam kvantvåg. Vågen har en fas, ett läge i sin svängning, och när man följer vätskan ett helt varv runt en sluten slinga måste fasen komma tillbaka till samma värde. Det gör vätskan extremt känslig för om slingan roterar.' },
+      { type: 'p', html: 'Instrumentet i förslaget är ett kopparrör med diametern 2&nbsp;cm, böjt till en ring med radien 10&nbsp;cm och fyllt med helium vid ungefär 10&nbsp;mK, en hundradels grad över den absoluta nollpunkten. Ringen bryts av en vägg med en josephsonövergång: ett membran med hål som bara är omkring en nanometer stora, där heliumet kan tränga igenom men bara svagt. Bredvid sitter ett rörligt membran. Tillsammans bildar delarna en resonator, ungefär som en flaska man blåser över, som svänger med omkring 101&nbsp;Hz.' },
+      { type: 'p', html: 'När ringen roterar uppstår en liten fasskillnad mellan heliumet på de två sidorna av josephsonövergången. Fasskillnaden ändrar hur lätt heliumet svänger fram och tillbaka genom hålen, och därmed resonatorns frekvens. Det är den frekvensändringen forskarna vill mäta.' },
+      { type: 'quote', html: 'Den experimentella signaturen är en kvantmekanisk fasskillnad som uppstår över josephsonövergången när apparaten roterar.', cite: 'Kai-Isaak Ellers, University of California, Berkeley, till Phys.org (i översättning)' },
+
+      { type: 'h2', text: 'Samma knep som i flygplanens gyroskop' },
+      { type: 'p', html: 'Principen är densamma som i sagnaceffekten, som används i ringlasergyroskop i flygplan. Skickar man ljus åt båda hållen runt en ring som roterar får strålarna en liten fasskillnad när de möts igen. I heliumringen är det i stället atomernas kvantvåg som får en fasskillnad, och den är enligt studien $\\Delta \\varphi = \\dfrac{2 m}{\\hbar} \\cdot \\Omega \\cdot A$ när rotationsaxeln går vinkelrätt genom ringens plan. Här är $m$ en heliumatoms massa, $\\Omega$ vinkelhastigheten, $A$ ringens area och $\\hbar$ den reducerade planckkonstanten. Faktorn $m$ gör att tunga atomer ger en mycket större fasskillnad än ljus i en lika stor ring, och därför räcker en liten ring: arean är bara 0,03&nbsp;m², medan de bästa ringlasrarna behöver mer än 10&nbsp;m².' },
+      { type: 'p', html: 'Problemet är att instrumentet känner av all rotation, och jordens vanliga rotation ger en signal som är omkring 5&nbsp;·&nbsp;10<sup>10</sup> gånger större än ramsläpningen. Forskarnas lösning är att vrida ringen så att jordaxeln ligger i ringens plan. Då ger den vanliga rotationen ingen signal alls, medan ramsläpningen, som har en annan riktning, fortfarande syns. Vinkeln måste då hållas rätt på bättre än en nanoradian, ungefär samma precision som Gravity Probe B krävde när satelliten riktades mot en ledstjärna.' },
+
+      { type: 'h2', text: 'Ett varv på fyra miljarder år' },
+      { type: 'p', html: 'Det som avgör känsligheten är det termiska bruset, de slumpmässiga rörelser som alltid finns i ett material med en temperatur. Vid 10&nbsp;mK är heliumet så kallt att bruset i stället domineras av förlusterna i det rörliga membranet. Med ett membran av god men inte extrem kvalitet räknar forskarna med att ramsläpningen kan mätas med en noggrannhet på 0,2&nbsp;procent på 35 minuter. Med de bästa kristallmaterial som finns krymper tiden till under en sekund. Instrumentet skulle då märka en rotation på ett enda varv per fyra miljarder år.' },
+      { type: 'p', html: 'Bruset blir då mindre än en hundradel av bruset i den bästa ringlasern hittills, och i bästa fall omkring en fyrtiotusendel. Jämfört med de supraflytande gyroskop som byggts tidigare är det en förbättring med en faktor mellan tiotals miljoner och ett par miljarder. Fasskillnaden kan också översättas till tid. Två klockor som färdas åt var sitt håll runt ringen skulle visa olika tid när de möts, och skillnaden som instrumentet kan upptäcka är omkring 10<sup>−35</sup>&nbsp;sekunder.' },
+
+      { type: 'h2', text: 'Det som återstår' },
+      { type: 'p', html: 'Det svåraste är själva josephsonövergången. För att den ska fungera långt under 2,17&nbsp;K måste hålen vara bara någon nanometer stora, för små för vanlig tillverkning. Forskarna sätter sitt hopp till nya tvådimensionella material med inbyggda porer i rätt storlek, och i Keith Schwabs laboratorium på Caltech försöker man nu ta fram sådana övergångar som fungerar vid några tusendels kelvin. Dessutom måste vibrationer från omgivningen dämpas, med samma sorts teknik som gravitationsvågsdetektorn LIGO använder.' },
+      { type: 'p', html: 'Lyckas det blir det första gången en effekt från den allmänna relativitetsteorin mäts i ett kvantsystem som är så stort att man kan hålla det i handen. Forskarna påpekar också att en mätning på jorden, med helt andra felkällor än satelliternas, skulle vara en oberoende kontroll av de resultat som redan finns.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Kvartskulorna till Gravity Probe B är bland de rundaste föremål som människor tillverkat. Enligt NASA avviker de från en perfekt sfär med högst omkring 40 atomlager.',
+        'Supraflytande helium upptäcktes 1937. Vid 10&nbsp;mK är heliumet kallt även med supraflytande mått mätt: temperaturen är bara en tvåhundradel av den temperatur där vätskan blir supraflytande.',
+        'Ramsläpningen och den så kallade geodetiska effekten, att rumtiden kröks av jordens massa även utan rotation, påverkar båda instrumentet. Effekterna beror på olika vinklar mot jordaxeln, vilket i princip gör det möjligt att skilja dem åt genom att mäta i flera olika lägen.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-15-robotar-som-hittar-takten",
     date: "2026-10-15",
     title: "Ett material av små robotar hittar en gemensam takt av sig självt",

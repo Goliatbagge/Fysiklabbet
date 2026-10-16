@@ -16,6 +16,12 @@ Format per post:
   Källa (Phys.org 2026-10-07): https://phys.org/news/2026-10-levitating-glass-sphere-entangled-room.html
   (tillagd 2026-10-08)
 
+- **Ny spektroskopimetod jämför kärnornas storlek mellan tunga grundämnen** — kärnfysik (senast 2026-10-08). Originalet ej kontrollerat. Källa (Phys.org 2026-10-16): https://phys.org/news/2026-10-spectroscopy-method-enables-comparisons-nuclear.html
+  (tillagd 2026-10-16)
+
+- **Sällsynta B-sönderfall antyder avvikelser från standardmodellen (CMS och LHCb, ICHEP 2026)** — b → s μ⁺μ⁻, sex sönderfallskanaler hos CMS och vinkelstorheten P5′ hos LHCb; inget av resultaten är signifikant. Partikelfysik (senast 2026-10-02). OBS: konferensresultat, kontrollera att CMS-/LHCb-noterna eller arXiv-förtryck finns. Källa (Phys.org 2026-10-14): https://phys.org/news/2026-10-rare-particle-decays-hint-deviations.html
+  (tillagd 2026-10-16)
+
 - **Gyroskop på ett chip mäter rotation nästan lika långsam som jordens** — integrerat Brillouin-ringlasergyroskop i kiselnitrid (ring ~24 mm, Q > 163 miljoner) som mäter 37 grader/timme, nära jordens 15 grader/timme; Sagnaceffekten. Ingång: rotation, interferens, ljusets hastighet. Optics Letters 51, 5854 (2026), DOI 10.1364/ol.589952 (Ge, …, Blumenthal, Vahala). OBS 2026-10-15: BETALVÄGG (Optica) och inget arXiv-förtryck hittat, så originalet kunde inte läsas; försök via Caltech-arkivet (authors.library.caltech.edu) eller UCSB. Källa (Phys.org 2026-10-14): https://phys.org/news/2026-10-chip-scale-gyroscope-rotation-unprecedented.html
   (tillagd 2026-10-15)
 

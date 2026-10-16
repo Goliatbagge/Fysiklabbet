@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Thu, 15 Oct 2026 15:24:30 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 01:27:51 GMT</lastBuildDate>
+    <item>
+      <title>En ring av supraflytande helium kan känna hur jorden drar med sig rumtiden</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-16-helium-som-kanner-rumtiden</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-16-helium-som-kanner-rumtiden</guid>
+      <pubDate>Fri, 16 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Relativitetsteori</category>
+      <description>Fysiker i Berkeley, Wien och Pasadena har räknat fram ett sätt att mäta ramsläpning, den effekt där jordens rotation drar med sig rumtiden, på ett labbord i stället för med satelliter. Instrumentet är en ring av supraflytande helium nedkyld till en hundradels grad över den absoluta nollpunkten. Det är ännu inte byggt, men enligt beräkningarna kan det slå alla tidigare mätningar.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-16-helium-som-kanner-rumtiden.jpg" length="170727" type="image/jpeg"/>
+    </item>
     <item>
       <title>Ett material av små robotar hittar en gemensam takt av sig självt</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-15-robotar-som-hittar-takten</link>
@@ -177,15 +186,6 @@
       <category>Kvantfysik</category>
       <description>En aluminiumlåda på 9,8 kilogram har blivit den första kvantprocessor som arbetat ute i rymden. Hälften av ljusdetektorerna gick sönder redan under uppskjutningen, men under åtta månader 510 kilometer över jordytan lyckades den ändå få två enskilda fotoner att interferera med varandra.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-29-kvantdatorn-i-omloppsbana.jpg" length="217589" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>92 antiprotoner åkte lastbil och överlevde en månad i fällan</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-28-antiprotoner-pa-lastbil</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-28-antiprotoner-pa-lastbil</guid>
-      <pubDate>Mon, 28 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Partikelfysik</category>
-      <description>Antimateria har aldrig tidigare transporterats på väg. I mars körde ett forskarlag vid CERN 92 antiprotoner åtta kilometer runt området i en flyttbar magnetfälla, utan att tappa en enda. Fällan höll dem sedan kvar i över en månad, i ett vakuum så tomt att luften i ett rum innehåller ungefär femhundra miljarder miljarder gånger fler molekyler.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-28-antiprotoner-pa-lastbil.jpg" length="479251" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

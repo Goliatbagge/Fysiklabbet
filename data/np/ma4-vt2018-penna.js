@@ -28,7 +28,7 @@
   var V = HK.verktyg;
   var mathTools = V.mathTools, mkTanke = V.mkTanke, mkAxes = V.mkAxes,
       mkEkvOp = V.mkEkvOp, mkMultIn = V.mkMultIn, humanize = V.humanize,
-      BLUE = V.BLUE;
+      BLUE = V.BLUE, forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('ma4-vt2018-u' + nr, fn); }
 
@@ -150,21 +150,25 @@
                            xmin: -4.5, xmax: 4.5, ymin: -2.5, ymax: 3.5 });
     ox = A.ox; oy = A.oy; u = A.u;   /* rutnätssnäppt av mkAxes */
 
-    /* ---- steg 1: grafen av ---- */
-    A.axes();
-    /* "2" på y-axeln lyfts över grafens vågräta del, som går rakt genom
-     * talets vanliga läge. −4, −2 och 4 knuffas till den sida där grafen
-     * ligger ovanför axeln, −3 åt vänster bort från gränslinjen i steg 2. */
-    A.ticks(V.heltal(-4, 4), V.heltal(-2, 3), [-4, -3, -2, -1, 1, 2, 3, 4], [-2, -1, 1, 2, 3],
-            { x: { '-4': -11, '-3': -12, '-2': 11, '4': -11 }, y: { '2': [0, -13] } });
-    T.pause(200);
-    var P = [[-4.5, 1], [-3, -2], [-1, 2], [2, 2], [4.35, -0.35]];
-    for (var i = 1; i < P.length; i++) {
-      T.line([A.X(P[i - 1][0]), A.Y(P[i - 1][1])], [A.X(P[i][0]), A.Y(P[i][1])], BLUE);
-      T.pause(80);
-    }
-    T.str('y=f(x)', A.X(0.6), A.Y(2.9), null, 0.5);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var P, i;
+    forritad(T, function () {
+      /* ---- steg 1: grafen av ---- */
+      A.axes();
+      /* "2" på y-axeln lyfts över grafens vågräta del, som går rakt genom
+       * talets vanliga läge. −4, −2 och 4 knuffas till den sida där grafen
+       * ligger ovanför axeln, −3 åt vänster bort från gränslinjen i steg 2. */
+      A.ticks(V.heltal(-4, 4), V.heltal(-2, 3), [-4, -3, -2, -1, 1, 2, 3, 4], [-2, -1, 1, 2, 3],
+              { x: { '-4': -11, '-3': -12, '-2': 11, '4': -11 }, y: { '2': [0, -13] } });
+      T.pause(200);
+      P = [[-4.5, 1], [-3, -2], [-1, 2], [2, 2], [4.35, -0.35]];
+      for (i = 1; i < P.length; i++) {
+        T.line([A.X(P[i - 1][0]), A.Y(P[i - 1][1])], [A.X(P[i][0]), A.Y(P[i][1])], BLUE);
+        T.pause(80);
+      }
+      T.str('y=f(x)', A.X(0.6), A.Y(2.9), null, 0.5);
+    });
 
     /* ---- steg 2: tre områden med tecken ---- */
     var figB = oy + 2.5 * u + 30;
@@ -775,17 +779,21 @@
     /* egna axlar: beteckningarna Re och Im är två tecken, och mkAxes
      * axes() skriver bara en glyf */
     var xr = A.X(5) + 0.85 * u, yt = A.Y(5) - 0.85 * u;
-    V.linjalStreck(T.acts, [A.X(-5) - 0.5 * u, oy], [xr, oy]);   /* axlar med linjal */
-    T.line([xr - 9, oy - 5], [xr + 1, oy]);
-    T.line([xr - 9, oy + 5], [xr + 1, oy]);
-    T.pause(140);
-    V.linjalStreck(T.acts, [ox, A.Y(-5) + 0.5 * u], [ox, yt]);
-    T.line([ox - 5, yt + 9], [ox, yt - 1]);
-    T.line([ox + 5, yt + 9], [ox, yt - 1]);
-    T.pause(140);
-    T.str('Re', xr - 14, oy + 0.95 * F, null, 0.5);
-    T.str('Im', ox + 10, yt + 8, null, 0.5);
-    A.ticks(V.heltal(-5, 5), V.heltal(-5, 5), [-4, -2, 2, 4], [-4, -2, 2, 4]);
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      V.linjalStreck(T.acts, [A.X(-5) - 0.5 * u, oy], [xr, oy]);   /* axlar med linjal */
+      T.line([xr - 9, oy - 5], [xr + 1, oy]);
+      T.line([xr - 9, oy + 5], [xr + 1, oy]);
+      T.pause(140);
+      V.linjalStreck(T.acts, [ox, A.Y(-5) + 0.5 * u], [ox, yt]);
+      T.line([ox - 5, yt + 9], [ox, yt - 1]);
+      T.line([ox + 5, yt + 9], [ox, yt - 1]);
+      T.pause(140);
+      T.str('Re', xr - 14, oy + 0.95 * F, null, 0.5);
+      T.str('Im', ox + 10, yt + 8, null, 0.5);
+      A.ticks(V.heltal(-5, 5), V.heltal(-5, 5), [-4, -2, 2, 4], [-4, -2, 2, 4]);
+    });
     T.pause(160);
     A.linjal([A.X(-5.3), A.Y(-5.3)], [A.X(5.3), A.Y(5.3)], BLUE);
     T.pause(140);
@@ -2310,7 +2318,8 @@
   var V = HK.verktyg;
   var mathTools = V.mathTools, mkTanke = V.mkTanke, mkAxes = V.mkAxes,
       mkEkvOp = V.mkEkvOp, substRings = V.substRings, fadeRings = V.fadeRings,
-      humanize = V.humanize, BLUE = V.BLUE, PAPER_W = V.PAPER_W;
+      humanize = V.humanize, BLUE = V.BLUE, PAPER_W = V.PAPER_W,
+      forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('ma4-vt2018-u' + nr, fn); }
 
@@ -2634,17 +2643,20 @@
     var A = mkAxes(T, F, { ox: padL + 70, oy: 300, u: 85, xsc: 1, ysc: 1,
                            xmin: 0, xmax: 2.1, ymin: -0.3, ymax: 2.1 });
 
-    /* ---- figuren ---- */
-    A.axes();
-    T.pause(120);
-    kurva(A, acts, f, -0.3, 2.4, BLUE, 70);
-    T.pause(140);
-    kurva(A, acts, g, 0.95, 1.6, BLUE, 50);
-    T.pause(140);
-    skugga(T, A, acts, f, function (x) { return x < 1 ? 0 : g(x); }, 0, a, 0.08);
-    T.str('f', A.X(2.25), A.Y(f(2.25)) - 12, null, 0.62);
-    T.str('g', A.X(1.64) + 8, A.Y(2.05), null, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      /* ---- figuren ---- */
+      A.axes();
+      T.pause(120);
+      kurva(A, acts, f, -0.3, 2.4, BLUE, 70);
+      T.pause(140);
+      kurva(A, acts, g, 0.95, 1.6, BLUE, 50);
+      T.pause(140);
+      skugga(T, A, acts, f, function (x) { return x < 1 ? 0 : g(x); }, 0, a, 0.08);
+      T.str('f', A.X(2.25), A.Y(f(2.25)) - 12, null, 0.62);
+      T.str('g', A.X(1.64) + 8, A.Y(2.05), null, 0.62);
+    });
 
     tanke(A.Y(-0.3) + 40, [
       [['Området slutar där kurvorna']],
@@ -2825,28 +2837,32 @@
     function unit(a, b) { var d = Math.hypot(b[0] - a[0], b[1] - a[1]); return [(b[0] - a[0]) / d, (b[1] - a[1]) / d]; }
     function lbl(s, x, yb, col) { return T.str(s, x - T.adv(s, 0.62) / 2, yb, col || null, 0.62); }
 
-    /* ---- figuren: två rätvinkliga trianglar, måtten i blått ---- */
-    T.line(Tp, Qp); T.line(Qp, Rp); T.line(Rp, Tp);
-    T.pause(120);
-    T.line(Tp, Lp); T.line(Lp, Pp);
-    T.pause(120);
-    V.ratVinkel(T, Lp, unit(Lp, Tp), unit(Lp, Pp), 8);
-    V.ratVinkel(T, Rp, unit(Rp, Tp), unit(Rp, Qp), 8);
-    var sa = function (q) { return Math.atan2(q[1] - Tp[1], q[0] - Tp[0]); };
-    var aR = sa(Rp), aQ = sa(Qp), aL = sa(Lp);
-    V.vinkelBage(T, Tp, aR, aQ, 22);
-    V.vinkelBage(T, Tp, aQ, aL, 27);
-    var bu = (aQ + aL) / 2, bv = (aR + aQ) / 2;
-    var pu = [Tp[0] + 54 * Math.cos(bu), Tp[1] + 54 * Math.sin(bu)];
-    var pv = [Tp[0] + 40 * Math.cos(bv), Tp[1] + 40 * Math.sin(bv)];
-    lbl('u', pu[0], pu[1] + 6);
-    lbl('v', pv[0], pv[1] + 6);
-    T.pause(120);
-    lbl('8', (Tp[0] + Lp[0]) / 2 - 8, (Tp[1] + Lp[1]) / 2 - 6, BLUE);
-    lbl('4', (Lp[0] + Pp[0]) / 2 - 12, (Lp[1] + Pp[1]) / 2 + 8, BLUE);
-    lbl('8', Rp[0] + 12, (Tp[1] + Rp[1]) / 2 + 6, BLUE);
-    lbl('6', (Qp[0] + Rp[0]) / 2, Rp[1] + 20, BLUE);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var sa, aR, aQ, aL, bu, bv, pu, pv;
+    forritad(T, function () {
+      /* ---- figuren: två rätvinkliga trianglar, måtten i blått ---- */
+      T.line(Tp, Qp); T.line(Qp, Rp); T.line(Rp, Tp);
+      T.pause(120);
+      T.line(Tp, Lp); T.line(Lp, Pp);
+      T.pause(120);
+      V.ratVinkel(T, Lp, unit(Lp, Tp), unit(Lp, Pp), 8);
+      V.ratVinkel(T, Rp, unit(Rp, Tp), unit(Rp, Qp), 8);
+      sa = function (q) { return Math.atan2(q[1] - Tp[1], q[0] - Tp[0]); };
+      aR = sa(Rp), aQ = sa(Qp), aL = sa(Lp);
+      V.vinkelBage(T, Tp, aR, aQ, 22);
+      V.vinkelBage(T, Tp, aQ, aL, 27);
+      bu = (aQ + aL) / 2, bv = (aR + aQ) / 2;
+      pu = [Tp[0] + 54 * Math.cos(bu), Tp[1] + 54 * Math.sin(bu)];
+      pv = [Tp[0] + 40 * Math.cos(bv), Tp[1] + 40 * Math.sin(bv)];
+      lbl('u', pu[0], pu[1] + 6);
+      lbl('v', pv[0], pv[1] + 6);
+      T.pause(120);
+      lbl('8', (Tp[0] + Lp[0]) / 2 - 8, (Tp[1] + Lp[1]) / 2 - 6, BLUE);
+      lbl('4', (Lp[0] + Pp[0]) / 2 - 12, (Lp[1] + Pp[1]) / 2 + 8, BLUE);
+      lbl('8', Rp[0] + 12, (Tp[1] + Rp[1]) / 2 + 6, BLUE);
+      lbl('6', (Qp[0] + Rp[0]) / 2, Rp[1] + 20, BLUE);
+    });
 
     tanke(oy + 20, [
       [['u och v sitter i var sin rätvinklig']],
@@ -3333,22 +3349,26 @@
     /* ---- figuren: vägg, skivans mitt O, strålen och triangeln ---- */
     var yw = 70, O = [200, 270], Lpx = O[1] - yw, al = 0.42;
     var S = [O[0] + Lpx * Math.tan(al), yw];
-    T.line([60, yw], [390, yw]);
-    T.str('vägg', 64, yw - 10, null, 0.55);
-    T.pause(120);
-    acts.push({ kind: 'stroke', pts: V.dotPts(O[0], O[1]) });
-    streckad(T, O, [O[0], yw], null, 13);
-    T.pause(120);
-    T.line(O, S);
-    acts.push({ kind: 'stroke', pts: V.dotPts(S[0], S[1]) });
-    V.ratVinkel(T, [O[0], yw], [1, 0], [0, 1], 9);
-    var aMid = V.vinkelBage(T, O, -Math.PI / 2, -Math.PI / 2 + al, 46);
-    var pA = [O[0] + 62 * Math.cos(aMid - 0.06), O[1] + 62 * Math.sin(aMid - 0.06)];
-    T.str('α', pA[0] - 7, pA[1] + 5, null, 0.62);
-    T.pause(120);
-    T.str('L', O[0] - 22, (O[1] + yw) / 2 + 6, BLUE, 0.62);
-    T.str('x', (O[0] + S[0]) / 2 - 5, yw - 8, BLUE, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var aMid, pA;
+    forritad(T, function () {
+      T.line([60, yw], [390, yw]);
+      T.str('vägg', 64, yw - 10, null, 0.55);
+      T.pause(120);
+      acts.push({ kind: 'stroke', pts: V.dotPts(O[0], O[1]) });
+      streckad(T, O, [O[0], yw], null, 13);
+      T.pause(120);
+      T.line(O, S);
+      acts.push({ kind: 'stroke', pts: V.dotPts(S[0], S[1]) });
+      V.ratVinkel(T, [O[0], yw], [1, 0], [0, 1], 9);
+      aMid = V.vinkelBage(T, O, -Math.PI / 2, -Math.PI / 2 + al, 46);
+      pA = [O[0] + 62 * Math.cos(aMid - 0.06), O[1] + 62 * Math.sin(aMid - 0.06)];
+      T.str('α', pA[0] - 7, pA[1] + 5, null, 0.62);
+      T.pause(120);
+      T.str('L', O[0] - 22, (O[1] + yw) / 2 + 6, BLUE, 0.62);
+      T.str('x', (O[0] + S[0]) / 2 - 5, yw - 8, BLUE, 0.62);
+    });
 
     tanke(O[1] + 16, [
       [['Mitten, startpunkten och ljuspunkten']],

@@ -28,7 +28,8 @@
   var V = HK.verktyg;
   var mathTools = V.mathTools, mkTanke = V.mkTanke, mkAxes = V.mkAxes,
       mkEkvOp = V.mkEkvOp, substRings = V.substRings, fadeRings = V.fadeRings,
-      humanize = V.humanize, BLUE = V.BLUE, PAPER_W = V.PAPER_W;
+      humanize = V.humanize, BLUE = V.BLUE, PAPER_W = V.PAPER_W,
+      forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('ma4-vt2022-u' + nr, fn); }
 
@@ -223,18 +224,22 @@
     var rutor = [];
     for (n = 1; n <= 13; n++) rutor.push(n * Q);
 
-    /* ---- steg 1: figuren av ---- */
-    A.axes();
-    A.ticks(rutor, [-1, 1], [], [-1, 1]);
-    T.pause(200);
-    var kurva = [];
-    for (v = -0.85; v <= 21.1; v += 0.06) kurva.push([A.X(v), A.Y(Math.sin(v))]);
-    acts.push({ kind: 'stroke', pts: kurva });
-    T.pause(160);
-    A.dot(6 * Math.PI, 0);
-    /* P rakt ovanför punkten: snett ovanför låg etiketten på sin(x/2) */
-    T.str('P', A.X(6 * Math.PI) - T.adv('P', 0.62) / 2, oy - 0.9 * F, null, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var kurva;
+    forritad(T, function () {
+      /* ---- steg 1: figuren av ---- */
+      A.axes();
+      A.ticks(rutor, [-1, 1], [], [-1, 1]);
+      T.pause(200);
+      kurva = [];
+      for (v = -0.85; v <= 21.1; v += 0.06) kurva.push([A.X(v), A.Y(Math.sin(v))]);
+      acts.push({ kind: 'stroke', pts: kurva });
+      T.pause(160);
+      A.dot(6 * Math.PI, 0);
+      /* P rakt ovanför punkten: snett ovanför låg etiketten på sin(x/2) */
+      T.str('P', A.X(6 * Math.PI) - T.adv('P', 0.62) / 2, oy - 0.9 * F, null, 0.62);
+    });
 
     /* ---- a) ---- */
     tanke(oy + 92, [
@@ -346,10 +351,14 @@
       [['Nu ritar jag in asymptoterna']],
       [['som streckade linjer.']]
     ]);
-    A.axes();
-    /* y-axelns "1" utelämnas: kurvan passerar strax intill (y = 1 vid
-     * x = −1), och etiketter får aldrig ligga på en linje */
-    A.ticks(V.heltal(-6, 7), V.heltal(-6, 7), [1], []);
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      A.axes();
+      /* y-axelns "1" utelämnas: kurvan passerar strax intill (y = 1 vid
+       * x = −1), och etiketter får aldrig ligga på en linje */
+      A.ticks(V.heltal(-6, 7), V.heltal(-6, 7), [1], []);
+    });
     T.pause(200);
     streckad(T, [A.X(-2), A.Y(-6.4)], [A.X(-2), A.Y(7.4)], BLUE, 21);
     T.pause(120);
@@ -515,37 +524,40 @@
     function Y(b) { return oy - b * u; }
     var xw = padL + 30 + T.adv('x=y-2') + 0.9 * F;
 
-    /* ---- steg 1: talplanet, z₁ och z₂ ---- */
-    T.line([X(-5.5), oy], [X(5.5) + 8, oy]);
-    T.line([X(5.5) - 1, oy - 5], [X(5.5) + 9, oy]);
-    T.line([X(5.5) - 1, oy + 5], [X(5.5) + 9, oy]);
-    T.pause(120);
-    T.line([ox, Y(-5.5)], [ox, Y(5.5) - 8]);
-    T.line([ox - 5, Y(5.5) + 1], [ox, Y(5.5) - 9]);
-    T.line([ox + 5, Y(5.5) + 1], [ox, Y(5.5) - 9]);
-    T.pause(120);
-    T.str('Re', X(5.5) + 2, oy + 0.85 * F, null, 0.5);
-    T.str('Im', ox - 10 - T.adv('Im', 0.5), Y(5.5) - 2, null, 0.5);
-    for (v = -5; v <= 5; v++) {
-      if (!v) continue;
-      var t = (v < 0 ? '−' : '') + Math.abs(v), w = T.adv(t, 0.42);
-      T.line([X(v), oy - 4], [X(v), oy + 4]);
-      /* "−2" knuffas åt höger: linjen i c) går under axeln till vänster
-       * om −2. y-axelns "−1" utelämnas, den krockar med x-axelns "−1". */
-      /* x-axelns "−4" utelämnas: konjugatets speglingslinje i a) går där */
-      if (v !== -4) T.str(t, X(v) - w / 2 + (v === -2 ? 6 : (v === -3 ? -6 : -2)), oy + 0.8 * F, null, 0.42);
-      T.line([ox - 4, Y(v)], [ox + 4, Y(v)]);
-      /* y-axelns "2" utelämnas också: linjen i c) går genom (0, 2) och
-       * tangerade talet. Punkten får i stället etiketten 2i i c). */
-      if (v !== -1 && v !== 2) T.str(t, ox - 9 - w, Y(v) + 0.16 * F, null, 0.42);
-      T.pause(50);
-    }
-    T.pause(160);
-    acts.push({ kind: 'stroke', pts: V.dotPts(X(-4), Y(3)) });
-    T.str('z_1', X(-4) + 6, Y(3) - 7, null, 0.62);
-    acts.push({ kind: 'stroke', pts: V.dotPts(X(3), Y(-2)) });
-    T.str('z_2', X(3) + 6, Y(-2) - 7, null, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      /* ---- steg 1: talplanet, z₁ och z₂ ---- */
+      T.line([X(-5.5), oy], [X(5.5) + 8, oy]);
+      T.line([X(5.5) - 1, oy - 5], [X(5.5) + 9, oy]);
+      T.line([X(5.5) - 1, oy + 5], [X(5.5) + 9, oy]);
+      T.pause(120);
+      T.line([ox, Y(-5.5)], [ox, Y(5.5) - 8]);
+      T.line([ox - 5, Y(5.5) + 1], [ox, Y(5.5) - 9]);
+      T.line([ox + 5, Y(5.5) + 1], [ox, Y(5.5) - 9]);
+      T.pause(120);
+      T.str('Re', X(5.5) + 2, oy + 0.85 * F, null, 0.5);
+      T.str('Im', ox - 10 - T.adv('Im', 0.5), Y(5.5) - 2, null, 0.5);
+      for (v = -5; v <= 5; v++) {
+        if (!v) continue;
+        var t = (v < 0 ? '−' : '') + Math.abs(v), w = T.adv(t, 0.42);
+        T.line([X(v), oy - 4], [X(v), oy + 4]);
+        /* "−2" knuffas åt höger: linjen i c) går under axeln till vänster
+         * om −2. y-axelns "−1" utelämnas, den krockar med x-axelns "−1". */
+        /* x-axelns "−4" utelämnas: konjugatets speglingslinje i a) går där */
+        if (v !== -4) T.str(t, X(v) - w / 2 + (v === -2 ? 6 : (v === -3 ? -6 : -2)), oy + 0.8 * F, null, 0.42);
+        T.line([ox - 4, Y(v)], [ox + 4, Y(v)]);
+        /* y-axelns "2" utelämnas också: linjen i c) går genom (0, 2) och
+         * tangerade talet. Punkten får i stället etiketten 2i i c). */
+        if (v !== -1 && v !== 2) T.str(t, ox - 9 - w, Y(v) + 0.16 * F, null, 0.42);
+        T.pause(50);
+      }
+      T.pause(160);
+      acts.push({ kind: 'stroke', pts: V.dotPts(X(-4), Y(3)) });
+      T.str('z_1', X(-4) + 6, Y(3) - 7, null, 0.62);
+      acts.push({ kind: 'stroke', pts: V.dotPts(X(3), Y(-2)) });
+      T.str('z_2', X(3) + 6, Y(-2) - 7, null, 0.62);
+    });
 
     /* ---- a) ---- */
     var figB = oy + 5.5 * u + 18;
@@ -2557,7 +2569,7 @@
   var V = HK.verktyg;
   var mathTools = V.mathTools, mkTanke = V.mkTanke, mkAxes = V.mkAxes,
       mkEkvOp = V.mkEkvOp, substRings = V.substRings, fadeRings = V.fadeRings,
-      BLUE = V.BLUE;
+      BLUE = V.BLUE, forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('ma4-vt2022-u' + nr, fn); }
 
@@ -2787,12 +2799,16 @@
     var A = mkAxes(T, F, { ox: padL + 60, oy: 300, u: 80, xsc: 1, ysc: 1,
                            xmin: 0, xmax: 2, ymin: -0.6, ymax: 1.9 });
 
-    /* ---- figuren ---- */
-    A.axes();
-    T.pause(120);
-    kurva(A, acts, f, 0.74, 1.74, BLUE, 70);
-    T.pause(140);
-    skugga(T, A, acts, f, function () { return 0; }, a, b, 0.07);
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      /* ---- figuren ---- */
+      A.axes();
+      T.pause(120);
+      kurva(A, acts, f, 0.74, 1.74, BLUE, 70);
+      T.pause(140);
+      skugga(T, A, acts, f, function () { return 0; }, a, b, 0.07);
+    });
     T.str('a', A.X(a) - 22, A.Y(0) + 24, BLUE, 0.62);
     T.str('b', A.X(b) + 6, A.Y(0) + 24, BLUE, 0.62);
     T.stepEnd();

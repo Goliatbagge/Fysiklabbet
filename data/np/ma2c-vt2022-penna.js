@@ -29,7 +29,7 @@
       fadeRings = V.fadeRings, humanize = V.humanize, expFrac = V.expFrac,
       bigParen = V.bigParen, vinkelBage = V.vinkelBage, ratVinkel = V.ratVinkel,
       trigKvot = V.trigKvot, valueBracket = V.valueBracket, tusen = V.tusen,
-      BLUE = V.BLUE;
+      BLUE = V.BLUE, forritad = V.forritad;
 
   function reg(nr, fn) { HK.registrera('ma2c-vt2022-u' + nr, fn); }
 
@@ -199,24 +199,27 @@
     /* f(x) = −0,5x² + 1,5x + 2 går genom de tre punkterna */
     function f(x) { return -0.5 * x * x + 1.5 * x + 2; }
 
-    /* steg 1: axlarna (negativa y-tal utelämnas — de krockar med x-talen
-     * strax under origo, se mkAxes) */
-    ax.axes();
-    ax.ticks([-2, -1, 1, 2, 3, 4, 5], [-3, -2, -1, 1, 2, 3, 4],
-             [-2, -1, 1, 2, 3, 4, 5], [1, 2, 3, 4], { x: { '-1': [-6, 6] } });
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var pts;
+    forritad(T, function () {
+      /* steg 1: axlarna (negativa y-tal utelämnas — de krockar med x-talen
+       * strax under origo, se mkAxes) */
+      ax.axes();
+      ax.ticks([-2, -1, 1, 2, 3, 4, 5], [-3, -2, -1, 1, 2, 3, 4],
+               [-2, -1, 1, 2, 3, 4, 5], [1, 2, 3, 4], { x: { '-1': [-6, 6] } });
 
-    /* steg 2: grafen (samplad ur funktionen) och punkterna */
-    var pts = [];
-    for (i = -1.8; i <= 4.8 + 1e-9; i += 0.2) pts.push([ax.X(i), ax.Y(f(i))]);
-    acts.push({ kind: 'stroke', pts: pts, color: BLUE });
-    T.pause(200);
-    ax.dot(-1, 0); ax.tag(-1, 0, 'D', -24, -10);
-    T.pause(120);
-    ax.dot(0, 2);  ax.tag(0, 2, 'E', 9, -8);     /* till höger om axeln: y-talen 2 och 3 står till vänster */
-    T.pause(120);
-    ax.dot(4, 0);  ax.tag(4, 0, 'F', 8, -10);
-    T.stepEnd();
+      /* steg 2: grafen (samplad ur funktionen) och punkterna */
+      pts = [];
+      for (i = -1.8; i <= 4.8 + 1e-9; i += 0.2) pts.push([ax.X(i), ax.Y(f(i))]);
+      acts.push({ kind: 'stroke', pts: pts, color: BLUE });
+      T.pause(200);
+      ax.dot(-1, 0); ax.tag(-1, 0, 'D', -24, -10);
+      T.pause(120);
+      ax.dot(0, 2);  ax.tag(0, 2, 'E', 9, -8);     /* till höger om axeln: y-talen 2 och 3 står till vänster */
+      T.pause(120);
+      ax.dot(4, 0);  ax.tag(4, 0, 'F', 8, -10);
+    });
 
     /* ---- a) ---- */
     figurBubble(268, [
@@ -334,24 +337,28 @@
     var FIGB_Y = 312;
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
 
-    /* steg 1: axeln med skalstreck och tal, sedan kurvan */
-    T.line([X(2) - 10, oy], [X(15) + 20, oy]);
-    T.line([X(15) + 11, oy - 5], [X(15) + 21, oy]);
-    T.line([X(15) + 11, oy + 5], [X(15) + 21, oy]);
-    T.pause(120);
-    for (i = 2; i <= 15; i++) {
-      T.line([X(i), oy - 4], [X(i), oy + 4]);
-      var t = String(i), w = T.adv(t, 0.45);
-      T.str(t, X(i) - w / 2, oy + 0.83 * F, null, 0.45);
-      T.pause(50);
-    }
-    T.pause(200);
-    var pts = [], x;
-    for (x = 3.5; x <= 14.5 + 1e-9; x += 0.25) {
-      pts.push([X(x), oy - 2 - H * Math.exp(-(x - 9) * (x - 9) / 8)]);
-    }
-    acts.push({ kind: 'stroke', pts: pts });
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var pts, x;
+    forritad(T, function () {
+      /* steg 1: axeln med skalstreck och tal, sedan kurvan */
+      T.line([X(2) - 10, oy], [X(15) + 20, oy]);
+      T.line([X(15) + 11, oy - 5], [X(15) + 21, oy]);
+      T.line([X(15) + 11, oy + 5], [X(15) + 21, oy]);
+      T.pause(120);
+      for (i = 2; i <= 15; i++) {
+        T.line([X(i), oy - 4], [X(i), oy + 4]);
+        var t = String(i), w = T.adv(t, 0.45);
+        T.str(t, X(i) - w / 2, oy + 0.83 * F, null, 0.45);
+        T.pause(50);
+      }
+      T.pause(200);
+      pts = [];
+      for (x = 3.5; x <= 14.5 + 1e-9; x += 0.25) {
+        pts.push([X(x), oy - 2 - H * Math.exp(-(x - 9) * (x - 9) / 8)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    });
 
     /* ---- a) ---- */
     figurBubble(268, [
@@ -879,15 +886,19 @@
     var FIGB_Y = 242;
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
 
-    /* steg 1: hagen, med sidan x under */
-    T.line([hx, hy], [hx + hw, hy]);
-    T.line([hx + hw, hy], [hx + hw, hy + hh]);
-    T.line([hx + hw, hy + hh], [hx, hy + hh]);
-    T.line([hx, hy + hh], [hx, hy]);
-    T.pause(200);
-    var wx = T.adv('x', 0.62);
-    T.str('x', hx + hw / 2 - wx / 2, hy + hh + 0.85 * F, BLUE, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var wx;
+    forritad(T, function () {
+      /* steg 1: hagen, med sidan x under */
+      T.line([hx, hy], [hx + hw, hy]);
+      T.line([hx + hw, hy], [hx + hw, hy + hh]);
+      T.line([hx + hw, hy + hh], [hx, hy + hh]);
+      T.line([hx, hy + hh], [hx, hy]);
+      T.pause(200);
+      wx = T.adv('x', 0.62);
+      T.str('x', hx + hw / 2 - wx / 2, hy + hh + 0.85 * F, BLUE, 0.62);
+    });
 
     figurBubble(268, [
       [['Staketet går runt hela hagen,']],
@@ -1319,23 +1330,27 @@
     var FIGB_Y = 300;
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
 
-    /* steg 1: triangeln, bisektriserna, hörnen och de givna vinklarna */
-    T.line(A, B); T.pause(120);
-    T.line(B, C); T.pause(120);
-    T.line(C, A); T.pause(160);
-    T.line(A, D); T.pause(120);
-    T.line(B, D); T.pause(160);
-    T.str('A', A[0] - 20, A[1] + 22, null, 0.62);
-    T.str('B', B[0] + 2, B[1] + 22, null, 0.62);
-    T.str('C', C[0] - 22, C[1] - 4, null, 0.62);
-    T.str('D', D[0] - 6, D[1] - 10, null, 0.62);
-    T.pause(160);
-    var mD = bage(T, D, A, B, 22);
-    radLabel(T, F, '125°', D, mD, 42);
-    T.pause(120);
-    var mC = bage(T, C, A, B, 20);
-    radLabel(T, F, 'v', C, mC, 34);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var mD, mC;
+    forritad(T, function () {
+      /* steg 1: triangeln, bisektriserna, hörnen och de givna vinklarna */
+      T.line(A, B); T.pause(120);
+      T.line(B, C); T.pause(120);
+      T.line(C, A); T.pause(160);
+      T.line(A, D); T.pause(120);
+      T.line(B, D); T.pause(160);
+      T.str('A', A[0] - 20, A[1] + 22, null, 0.62);
+      T.str('B', B[0] + 2, B[1] + 22, null, 0.62);
+      T.str('C', C[0] - 22, C[1] - 4, null, 0.62);
+      T.str('D', D[0] - 6, D[1] - 10, null, 0.62);
+      T.pause(160);
+      mD = bage(T, D, A, B, 22);
+      radLabel(T, F, '125°', D, mD, 42);
+      T.pause(120);
+      mC = bage(T, C, A, B, 20);
+      radLabel(T, F, 'v', C, mC, 34);
+    });
 
     /* steg 2: de halva vinklarna i blått */
     figurBubble(268, [
@@ -2095,43 +2110,46 @@
     var FIGB_Y = 318;                       /* bubblor under figuren */
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
 
-    /* steg 1: cirkeln, medelpunkten och de tre punkterna */
-    cirkel(T, cx, cy, r, 44);
-    T.pause(200);
-    punkt(T, M);
-    T.str('M', cx + 12, cy + 8, null, 0.62);   /* till höger om M, i punktens höjd: vinkeletiketten vid C ligger rakt ovanför */
-    T.pause(120);
-    punkt(T, C); T.str('C', C[0] - 6, C[1] - 12, null, 0.62);
-    T.pause(120);
-    punkt(T, A); T.str('A', A[0] - 28, A[1] + 16, null, 0.62);
-    T.pause(120);
-    punkt(T, B); T.str('B', B[0] + 10, B[1] + 8, null, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var aCB, aCA, bisC, wV, lx, ly, v0, aMB, aMA, bisM, wv;
+    forritad(T, function () {
+      /* steg 1: cirkeln, medelpunkten och de tre punkterna */
+      cirkel(T, cx, cy, r, 44);
+      T.pause(200);
+      punkt(T, M);
+      T.str('M', cx + 12, cy + 8, null, 0.62);   /* till höger om M, i punktens höjd: vinkeletiketten vid C ligger rakt ovanför */
+      T.pause(120);
+      punkt(T, C); T.str('C', C[0] - 6, C[1] - 12, null, 0.62);
+      T.pause(120);
+      punkt(T, A); T.str('A', A[0] - 28, A[1] + 16, null, 0.62);
+      T.pause(120);
+      punkt(T, B); T.str('B', B[0] + 10, B[1] + 8, null, 0.62);
 
-    /* steg 2: kordorna, radierna och vinklarna. Bågarna spänner hela
-     * vinkeln, ben till ben, med hörnet som medelpunkt; gradtalet står
-     * på bisektrisen strax utanför bågen. */
-    T.line(C, A); T.pause(140);
-    T.line(C, B); T.pause(160);
-    T.line(M, A); T.pause(140);
-    T.line(M, B); T.pause(200);
-    var aCB = ang(C, B), aCA = ang(C, A);          /* båda i (0, π) */
-    var bisC = vinkelBage(T, C, aCB, aCA, 30);
-    T.pause(120);
-    /* etiketten längre in i kilen (r = 80) och något mindre, så att den
-     * ryms mellan kordorna utan att ligga på någon av dem */
-    var wV = T.adv('52,3°', 0.55);
-    var lx = C[0] + Math.cos(bisC) * 80 - wV / 2;
-    var ly = C[1] + Math.sin(bisC) * 80 + 0.25 * F;
-    var v0 = T.str('52,3°', lx, ly, BLUE, 0.55);
-    T.pause(200);
-    var aMB = ang(M, B), aMA = ang(M, A);
-    var bisM = vinkelBage(T, M, aMB, aMA, 24);
-    T.pause(120);
-    var wv = T.adv('v', 0.62);
-    T.str('v', M[0] + Math.cos(bisM) * 42 - wv / 2,
-          M[1] + Math.sin(bisM) * 42 + 0.28 * F, BLUE, 0.62);
-    T.stepEnd();
+      /* steg 2: kordorna, radierna och vinklarna. Bågarna spänner hela
+       * vinkeln, ben till ben, med hörnet som medelpunkt; gradtalet står
+       * på bisektrisen strax utanför bågen. */
+      T.line(C, A); T.pause(140);
+      T.line(C, B); T.pause(160);
+      T.line(M, A); T.pause(140);
+      T.line(M, B); T.pause(200);
+      aCB = ang(C, B), aCA = ang(C, A); /* båda i (0, π) */
+      bisC = vinkelBage(T, C, aCB, aCA, 30);
+      T.pause(120);
+      /* etiketten längre in i kilen (r = 80) och något mindre, så att den
+       * ryms mellan kordorna utan att ligga på någon av dem */
+      wV = T.adv('52,3°', 0.55);
+      lx = C[0] + Math.cos(bisC) * 80 - wV / 2;
+      ly = C[1] + Math.sin(bisC) * 80 + 0.25 * F;
+      v0 = T.str('52,3°', lx, ly, BLUE, 0.55);
+      T.pause(200);
+      aMB = ang(M, B), aMA = ang(M, A);
+      bisM = vinkelBage(T, M, aMB, aMA, 24);
+      T.pause(120);
+      wv = T.adv('v', 0.62);
+      T.str('v', M[0] + Math.cos(bisM) * 42 - wv / 2,
+            M[1] + Math.sin(bisM) * 42 + 0.28 * F, BLUE, 0.62);
+    });
 
     /* steg 3: satsen */
     figurBubble(268, [
@@ -2404,38 +2422,41 @@
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
     function ang(from, to) { return Math.atan2(to[1] - from[1], to[0] - from[0]); }
 
-    /* steg 1: triangeln ABC med givna mått */
-    T.line(B, A); T.pause(120);
-    T.line(A, C); T.pause(120);
-    T.line(C, B); T.pause(160);
-    ratVinkel(T, B, [1, 0], [0, -1], 10);
-    T.pause(120);
-    vinkelBage(T, C, Math.PI, ang(C, A) + 2 * Math.PI, 22);
-    T.pause(160);
-    T.str('A', A[0] - 7, A[1] - 10, null, 0.62);
-    T.str('B', B[0] - 24, B[1] + 20, null, 0.62);
-    T.str('C', C[0] + 10, C[1] + 20, null, 0.62);
-    T.pause(160);
-    var w56 = T.adv('5,6', 0.62);
-    T.str('5,6', B[0] - 10 - w56, (A[1] + B[1]) / 2 + 0.25 * F, BLUE, 0.62);
-    var w18 = T.adv('1,8', 0.62);
-    T.str('1,8', (B[0] + C[0]) / 2 - w18 / 2, by + 20, BLUE, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var w56, w18;
+    forritad(T, function () {
+      /* steg 1: triangeln ABC med givna mått */
+      T.line(B, A); T.pause(120);
+      T.line(A, C); T.pause(120);
+      T.line(C, B); T.pause(160);
+      ratVinkel(T, B, [1, 0], [0, -1], 10);
+      T.pause(120);
+      vinkelBage(T, C, Math.PI, ang(C, A) + 2 * Math.PI, 22);
+      T.pause(160);
+      T.str('A', A[0] - 7, A[1] - 10, null, 0.62);
+      T.str('B', B[0] - 24, B[1] + 20, null, 0.62);
+      T.str('C', C[0] + 10, C[1] + 20, null, 0.62);
+      T.pause(160);
+      w56 = T.adv('5,6', 0.62);
+      T.str('5,6', B[0] - 10 - w56, (A[1] + B[1]) / 2 + 0.25 * F, BLUE, 0.62);
+      w18 = T.adv('1,8', 0.62);
+      T.str('1,8', (B[0] + C[0]) / 2 - w18 / 2, by + 20, BLUE, 0.62);
 
-    /* steg 2: triangeln DEF */
-    T.line(E, D); T.pause(120);
-    T.line(D, Fp); T.pause(120);
-    T.line(Fp, E); T.pause(160);
-    ratVinkel(T, E, [1, 0], [0, -1], 10);
-    T.pause(120);
-    vinkelBage(T, Fp, Math.PI, ang(Fp, D) + 2 * Math.PI, 22);
-    T.pause(160);
-    T.str('D', D[0] - 7, D[1] - 10, null, 0.62);
-    T.str('E', E[0] - 22, E[1] + 20, null, 0.62);
-    T.str('F', Fp[0] + 8, Fp[1] + 20, null, 0.62);
-    T.pause(120);
-    T.str('(cm)', Fp[0] + 40, D[1] + 6, BLUE, 0.55);
-    T.stepEnd();
+      /* steg 2: triangeln DEF */
+      T.line(E, D); T.pause(120);
+      T.line(D, Fp); T.pause(120);
+      T.line(Fp, E); T.pause(160);
+      ratVinkel(T, E, [1, 0], [0, -1], 10);
+      T.pause(120);
+      vinkelBage(T, Fp, Math.PI, ang(Fp, D) + 2 * Math.PI, 22);
+      T.pause(160);
+      T.str('D', D[0] - 7, D[1] - 10, null, 0.62);
+      T.str('E', E[0] - 22, E[1] + 20, null, 0.62);
+      T.str('F', Fp[0] + 8, Fp[1] + 20, null, 0.62);
+      T.pause(120);
+      T.str('(cm)', Fp[0] + 40, D[1] + 6, BLUE, 0.55);
+    });
 
     /* steg 3: arean av ABC */
     figurBubble(268, [
@@ -2534,18 +2555,21 @@
     var FIGB_Y = 320;
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
 
-    /* steg 1: axelkorset */
-    ax.axes();
-    T.str('(m)', ax.X(28) + 4, ax.Y(26), null, 0.5);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var pts;
+    forritad(T, function () {
+      /* steg 1: axelkorset */
+      ax.axes();
+      T.str('(m)', ax.X(28) + 4, ax.Y(26), null, 0.5);
 
-    /* steg 2: parabeln, samplad ur funktionen, med sin etikett */
-    var pts = [];
-    for (i = 0; i <= 28 + 1e-9; i += 0.5) pts.push([ax.X(i), ax.Y(f(i))]);
-    acts.push({ kind: 'stroke', pts: pts, color: BLUE });
-    T.pause(200);
-    T.str('y=f(x)', ax.X(25) + 14, ax.Y(15), null, 0.5);
-    T.stepEnd();
+      /* steg 2: parabeln, samplad ur funktionen, med sin etikett */
+      pts = [];
+      for (i = 0; i <= 28 + 1e-9; i += 0.5) pts.push([ax.X(i), ax.Y(f(i))]);
+      acts.push({ kind: 'stroke', pts: pts, color: BLUE });
+      T.pause(200);
+      T.str('y=f(x)', ax.X(25) + 14, ax.Y(15), null, 0.5);
+    });
 
     /* steg 3: funktionen skrivs av i segment (x-gränserna behövs för
      * ringarna vid insättningen av 14) */
@@ -2925,36 +2949,40 @@
     var FIGB_Y = 345;                        /* bubblor under figuren */
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
 
-    /* steg 1: cirkeln (samplad polylinje), punkterna, sträckorna och de
-     * tre markerade vinklarna */
-    var pts = [];
-    for (i = 0; i <= 48; i++) pts.push(pt(-100 + 360 * i / 48));
-    acts.push({ kind: 'stroke', pts: pts });
-    T.pause(200);
-    T.line([C[0] - 2, C[1]], [C[0] + 2, C[1] + 1]);
-    T.str('M', C[0] + 8, C[1] - 6, null, 0.62);
-    T.pause(120);
-    T.str('R', R[0] - T.adv('R', 0.62) / 2, R[1] - 8, null, 0.62);
-    T.str('P', P[0] - T.adv('P', 0.62) - 6, P[1] + 8, null, 0.62);
-    T.str('Q', Q[0] + 8, Q[1] + 8, null, 0.62);
-    T.pause(160);
-    T.line(P, C); T.pause(120);
-    T.line(C, Q); T.pause(120);
-    T.line(P, R); T.pause(120);
-    T.line(R, Q); T.pause(200);
-    var mP = bage4(T, P, C, R, 24);
-    radLabel4(T, F, 'a', P, mP, 40);
-    T.pause(120);
-    var mQ = bage4(T, Q, C, R, 24);
-    radLabel4(T, F, 'b', Q, mQ, 40);
-    T.pause(120);
-    bage4(T, R, P, Q, 22);
-    /* c-etiketten läggs på P-sidan om den kommande hjälplinjen MR, som
-     * annars skulle gå rakt genom den */
-    var mRa = (ang4(R, P) + ang4(R, C)) / 2;     /* bisektris i vinkeln MRP */
-    var mRb = (ang4(R, C) + ang4(R, Q)) / 2;     /* bisektris i vinkeln MRQ */
-    radLabel4(T, F, 'c', R, mRa, 38);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    var pts, mP, mQ, mRa, mRb;
+    forritad(T, function () {
+      /* steg 1: cirkeln (samplad polylinje), punkterna, sträckorna och de
+       * tre markerade vinklarna */
+      pts = [];
+      for (i = 0; i <= 48; i++) pts.push(pt(-100 + 360 * i / 48));
+      acts.push({ kind: 'stroke', pts: pts });
+      T.pause(200);
+      T.line([C[0] - 2, C[1]], [C[0] + 2, C[1] + 1]);
+      T.str('M', C[0] + 8, C[1] - 6, null, 0.62);
+      T.pause(120);
+      T.str('R', R[0] - T.adv('R', 0.62) / 2, R[1] - 8, null, 0.62);
+      T.str('P', P[0] - T.adv('P', 0.62) - 6, P[1] + 8, null, 0.62);
+      T.str('Q', Q[0] + 8, Q[1] + 8, null, 0.62);
+      T.pause(160);
+      T.line(P, C); T.pause(120);
+      T.line(C, Q); T.pause(120);
+      T.line(P, R); T.pause(120);
+      T.line(R, Q); T.pause(200);
+      mP = bage4(T, P, C, R, 24);
+      radLabel4(T, F, 'a', P, mP, 40);
+      T.pause(120);
+      mQ = bage4(T, Q, C, R, 24);
+      radLabel4(T, F, 'b', Q, mQ, 40);
+      T.pause(120);
+      bage4(T, R, P, Q, 22);
+      /* c-etiketten läggs på P-sidan om den kommande hjälplinjen MR, som
+       * annars skulle gå rakt genom den */
+      mRa = (ang4(R, P) + ang4(R, C)) / 2; /* bisektris i vinkeln MRP */
+      mRb = (ang4(R, C) + ang4(R, Q)) / 2; /* bisektris i vinkeln MRQ */
+      radLabel4(T, F, 'c', R, mRa, 38);
+    });
 
     /* steg 2: hjälplinjen MR i blått */
     figurBubble(268, [
@@ -3502,28 +3530,31 @@
     var FIGB_Y = 300;
     function figurBubble(w, lines) { T.tanke(T.bubble(120, FIGB_Y, w, lines)); }
 
-    /* steg 1: rektangeln, förlängningen, hörnen och P, Q */
-    T.line(D, C); T.pause(120);
-    T.line(C, B); T.pause(120);
-    T.line(B, A); T.pause(120);
-    T.line(A, D); T.pause(160);
-    T.line(D, Q); T.pause(120);
-    T.line(B, Q); T.pause(160);
-    ratVinkel(T, C, [-1, 0], [0, 1], 13);
-    T.pause(100);
-    ratVinkel(T, B, [-1, 0], [0, -1], 13);
-    T.pause(160);
-    T.str('D', D[0] - 20, D[1] - 6, null, 0.62);
-    T.str('C', C[0] + 6, C[1] - 6, null, 0.62);
-    T.str('A', A[0] - 20, A[1] + 22, null, 0.62);
-    T.str('B', B[0] - 8, B[1] + 22, null, 0.62);
-    T.str('P', P[0] + 8, P[1] - 5, null, 0.62);
-    T.str('Q', Q[0] + 7, Q[1] + 8, null, 0.62);
-    T.pause(200);
-    /* givna mått i blått, till höger om BC */
-    T.str('a', B[0] + 8, (B[1] + P[1]) / 2 + 5, BLUE, 0.62);
-    T.str('3a', C[0] + 8, (C[1] + P[1]) / 2 + 5, BLUE, 0.62);
-    T.stepEnd();
+    /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
+     * STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      /* steg 1: rektangeln, förlängningen, hörnen och P, Q */
+      T.line(D, C); T.pause(120);
+      T.line(C, B); T.pause(120);
+      T.line(B, A); T.pause(120);
+      T.line(A, D); T.pause(160);
+      T.line(D, Q); T.pause(120);
+      T.line(B, Q); T.pause(160);
+      ratVinkel(T, C, [-1, 0], [0, 1], 13);
+      T.pause(100);
+      ratVinkel(T, B, [-1, 0], [0, -1], 13);
+      T.pause(160);
+      T.str('D', D[0] - 20, D[1] - 6, null, 0.62);
+      T.str('C', C[0] + 6, C[1] - 6, null, 0.62);
+      T.str('A', A[0] - 20, A[1] + 22, null, 0.62);
+      T.str('B', B[0] - 8, B[1] + 22, null, 0.62);
+      T.str('P', P[0] + 8, P[1] - 5, null, 0.62);
+      T.str('Q', Q[0] + 7, Q[1] + 8, null, 0.62);
+      T.pause(200);
+      /* givna mått i blått, till höger om BC */
+      T.str('a', B[0] + 8, (B[1] + P[1]) / 2 + 5, BLUE, 0.62);
+      T.str('3a', C[0] + 8, (C[1] + P[1]) / 2 + 5, BLUE, 0.62);
+    });
 
     /* steg 2: likformigheten — vertikalvinklarna vid P markeras i blått */
     figurBubble(268, [

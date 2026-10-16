@@ -3071,8 +3071,20 @@
      * xw = väggens x (samma för alla rader i en deluppgift, räknas ut ur
      * radbredderna), yb = radens baslinje. opt.h0/h1 = väggens höjd över/
      * under baslinjen i F (bråkrader behöver ~1,25/1,15). */
+    /* VÄGGARNA RAKT UNDER VARANDRA (användarkrav 2026-10-16): ligger
+     * väggen på en rad strax ovanför längre till höger flyttas den nya
+     * väggen dit, så länge operationen ändå ryms före pilzonen. En vägg
+     * som räknats ut ur en kortare rad hamnar annars till vänster om den
+     * ovanför, och strecken bildar en trappa. opt.fri stänger av det. */
+    var sistaVagg = null;
     function vaggOp(opS, xw, yb, opt) {
       opt = opt || {};
+      if (!opt.fri && sistaVagg && yb > sistaVagg.y &&
+          yb - sistaVagg.y < 4.6 * F && xw < sistaVagg.x &&
+          sistaVagg.x + 0.45 * F + adv(opS) <= PAPER_W - 40) {
+        xw = sistaVagg.x;
+      }
+      sistaVagg = { x: xw, y: yb };
       var h0 = (opt.h0 == null ? 1.05 : opt.h0) * F;
       var h1 = (opt.h1 == null ? 0.30 : opt.h1) * F;
       pause(220);

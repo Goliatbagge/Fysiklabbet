@@ -682,6 +682,14 @@ Så här bygger du scenen:
    "EKVATIONSOPERATIONEN SKRIVS ALLTID UT" och "EN EKVATION SKRIVS PÅ EN RAD" i
    filhuvudet (felet hände 2026-09-07: 12x² ringades in i båda led i
    stället för att −12x² skrevs ut).
+   **Väggarna ligger rakt under varandra** så långt det går (användarkrav
+   2026-10-16, `ma1c-4.5` exempel 3): en vägg på en kortare rad flyttas
+   åt höger till väggen på raden strax ovanför, i stället för att
+   strecken bildar en trappa. Det sköts centralt av `vaggOp()` i
+   `mathTools` (gäller alla scener, även prov och övningar) så länge
+   operationen ryms före pilzonen; `opt.fri` stänger av det. Räknar en
+   scen ut väggarnas x själv, välj hellre ETT gemensamt x för hela
+   deluppgiften (den bredaste raden).
 
 ## Varje deluppgift avslutas med "Svar:"
 

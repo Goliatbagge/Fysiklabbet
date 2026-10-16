@@ -153,7 +153,8 @@ Produkten är $-1$, alltså är linjerna vinkelräta.
 **b)** Här är $k_1 = 4$ och $k_2 = -4$. Vi multiplicerar *k*-värdena:
 
 $$
-k_1 \cdot k_2 = 4 \cdot (-4) = -16
+k_1 \cdot k_2 = 4 \cdot (-4) = -16 
+eq -1
 $$
 
 Produkten är inte $-1$. Linjerna lutar åt olika håll, men de skär inte

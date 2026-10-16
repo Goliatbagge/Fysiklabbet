@@ -13187,6 +13187,10 @@
     xx = T.str('=−16', xx, y);
     T.stepEnd();
 
+    /* jämförelsen med −1 skrivs ut, så att slutsatsen syns i raden */
+    T.str('≠−1', xx + 0.2 * F, y);
+    T.stepEnd();
+
     tanke(y, [
       [['−16 är inte −1. Linjerna lutar']],
       [['åt olika håll, men de skär']],

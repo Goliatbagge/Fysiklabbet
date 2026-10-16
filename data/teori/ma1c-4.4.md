@@ -11,7 +11,7 @@ section: '4.4'
 
 Vi kan nu konstatera att alla räta linjer kan beskrivas som en ekvation på
 formen $y = kx + m$ där $k$ och $m$ är konstanter (tal). Denna ekvation
-kallas **räta linjens ekvation**.
+kallas **räta linjens ekvation i *k*-form**.
 
 Vi ska nu undersöka hur vi kan hitta värdena på $k$ och $m$ utifrån en
 graf.

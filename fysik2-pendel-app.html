@@ -745,11 +745,17 @@
         renderer.domElement.addEventListener('mouseup', onMouseUp);
 
         // Animation
-        function animate() {
+        // Verklig tid mellan bildrutorna. Ett fast steg på 1/60 s fick
+        // pendeln att svänga dubbelt så fort på en skärm med 120 Hz.
+        let lastFrameMs = null;
+        function animate(nowMs) {
             requestAnimationFrame(animate);
+            const realDelta = (lastFrameMs == null || nowMs == null) ? 0
+                : Math.min(Math.max(nowMs - lastFrameMs, 0) / 1000, 0.05);
+            lastFrameMs = nowMs == null ? null : nowMs;
 
             if (simulationState === 'running') {
-                const delta = 1/60;
+                const delta = realDelta;
                 timeRef += delta;
                 timer = timeRef;
 

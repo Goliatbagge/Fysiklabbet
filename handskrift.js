@@ -55860,6 +55860,53 @@
     return y + 4.4 * F;
   }
 
+  /* EKVATIONER I KOLUMNER (önskemål 2026-10-17): termerna skrivs
+   * högerjusterade i varsin kolumn, så att x:en, y:na, likhetstecknen och
+   * högerleden står rakt under varandra. rows = rader med lika många
+   * celler, till exempel [['2x', '+3y', '=', '24'], ['-2x', '-2y', '=',
+   * '-20']]; en tom cell lämnas tom. Returnerar cellernas x-lägen per rad. */
+  function kolumnBredder(T, rows) {
+    var w = [];
+    rows.forEach(function (r) {
+      r.forEach(function (c, i) { w[i] = Math.max(w[i] || 0, c ? T.adv(c) : 0); });
+    });
+    return w;
+  }
+  function kolumnRad(T, F, x0, y, row, w) {
+    var gap = 0.3 * F, x = x0, pos = [];
+    row.forEach(function (c, i) {
+      var xs = x + w[i] - (c ? T.adv(c) : 0);
+      if (c) T.str(c, xs, y);
+      pos.push(xs);
+      x += w[i] + gap;
+    });
+    return pos;
+  }
+  /* systemet skrivs om med klammer och kolumner */
+  function kolumnSystem(T, F, x0, y, rows) {
+    var xx = systemKlammer(T, F, x0, y - 1.0 * F, y + 3.0 * F);
+    var w = kolumnBredder(T, rows);
+    kolumnRad(T, F, xx, y, rows[0], w);
+    T.pause(240);
+    kolumnRad(T, F, xx, y + 2.4 * F, rows[1], w);
+  }
+  /* ledvis addition: ekvationerna staplas (utan plustecken), streck
+   * under, och summan i samma kolumner. Returnerar summaradens y och
+   * cellernas x-lägen. */
+  function kolumnAddition(T, F, x0, y, rows, summa) {
+    var alla = rows.concat([summa]), w = kolumnBredder(T, alla), bredd = 0;
+    w.forEach(function (v) { bredd += v + 0.3 * F; });
+    kolumnRad(T, F, x0, y, rows[0], w);
+    T.pause(240);
+    kolumnRad(T, F, x0, y + 2.2 * F, rows[1], w);
+    T.pause(240);
+    T.acts.push({ kind: 'stroke', pts: humanize(
+      [[x0 - 6, y + 3.0 * F], [x0 + bredd, y + 3.0 * F]]) });
+    T.pause(240);
+    var pos = kolumnRad(T, F, x0, y + 4.4 * F, summa, w);
+    return { y: y + 4.4 * F, pos: pos };
+  }
+
   /* torrsvep längs en sträcka i figuren (pekgest utan bläck) */
   function svepa(T, p0, p1) {
     T.acts.push({ kind: 'sweep', pts: humanize([p0, p1]) });
@@ -56137,10 +56184,8 @@
     T.stepEnd();
 
     y += 6.2 * F;
-    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
-    T.str('-3x-6y=-24', xx, y);
-    T.pause(240);
-    T.str('3x+y=9', xx, y + 2.4 * F);
+    kolumnSystem(T, F, padL, y, [['-3x', '-6y', '=', '-24'],
+                                 ['3x', '+y', '=', '9']]);
     T.stepEnd();
 
     tanke(y + 2.4 * F, [
@@ -56148,7 +56193,9 @@
       [['ledvis.']]
     ]);
     y += 6.4 * F;
-    y = additionsblock(T, F, padL + 20, y, '-3x-6y=-24', '3x+y=9', '-5y=-15');
+    y = kolumnAddition(T, F, padL + 20, y, [['-3x', '-6y', '=', '-24'],
+                                            ['3x', '+y', '=', '9']],
+                       ['', '-5y', '=', '-15']).y;
     T.stepEnd();
 
     y = ekvOp(y, '/(-5)', padL + 330, '-5y=-15',
@@ -56492,10 +56539,8 @@
     T.stepEnd();
 
     y += 6.2 * F;
-    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
-    T.str('2x+3y=24', xx, y);
-    T.pause(240);
-    T.str('-2x-2y=-20', xx, y + 2.4 * F);
+    kolumnSystem(T, F, padL, y, [['2x', '+3y', '=', '24'],
+                                 ['-2x', '-2y', '=', '-20']]);
     T.stepEnd();
 
     tanke(y + 2.4 * F, [
@@ -56503,8 +56548,11 @@
       [['ledvis.']]
     ]);
     y += 6.4 * F;
-    y = additionsblock(T, F, padL + 20, y, '2x+3y=24', '-2x-2y=-20', 'y=4');
-    var xY4 = padL + 20 + 1.15 * F + T.adv('y='), yY4 = y;
+    var sum4 = kolumnAddition(T, F, padL + 20, y, [['2x', '+3y', '=', '24'],
+                                                   ['-2x', '-2y', '=', '-20']],
+                              ['', 'y', '=', '4']);
+    y = sum4.y;
+    var xY4 = sum4.pos[3], yY4 = y;
     T.stepEnd();
 
     tanke(y, [
@@ -56671,10 +56719,8 @@
     T.stepEnd();
 
     y += 6.2 * F;
-    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
-    T.str('30x+50y=300', xx, y);
-    T.pause(240);
-    T.str('-30x-30y=-240', xx, y + 2.4 * F);
+    kolumnSystem(T, F, padL, y, [['30x', '+50y', '=', '300'],
+                                 ['-30x', '-30y', '=', '-240']]);
     T.stepEnd();
 
     tanke(y + 2.4 * F, [
@@ -56682,7 +56728,9 @@
       [['ledvis.']]
     ]);
     y += 6.4 * F;
-    y = additionsblock(T, F, padL + 20, y, '30x+50y=300', '-30x-30y=-240', '20y=60');
+    y = kolumnAddition(T, F, padL + 20, y, [['30x', '+50y', '=', '300'],
+                                            ['-30x', '-30y', '=', '-240']],
+                       ['', '20y', '=', '60']).y;
     T.stepEnd();
 
     y = ekvOp(y, '/20', padL + 360, '20y=60',

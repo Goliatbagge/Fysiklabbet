@@ -226,25 +226,33 @@ Vi löser ekvationssystemet med additionsmetoden.
 
 $$
 \begin{cases}
-x + 2y = 8 & (1) \\
-3x + y = 9 & (2)
+x + 2y = 8 \\
+3x + y = 9
 \end{cases}
 $$
 
-Vi multiplicerar ekvation (1) med 3, så att båda ekvationerna får termen
-$3x$: $3x + 6y = 24$. Sedan subtraherar vi (2) ledvis, så att $x$-termerna
-tar ut varandra.
+Vi multiplicerar den första ekvationen med $-3$, så att den får termen
+$-3x$, och skriver upp systemet igen.
+
+$$
+\begin{cases}
+-3x - 6y = -24 \\
+3x + y = 9
+\end{cases}
+$$
+
+Nu adderar vi ekvationerna ledvis, så att $x$-termerna tar ut varandra.
 
 $$
 \begin{aligned}
-(3x + 6y) - (3x + y) &= 24 - 9 \\
-5y &= 15 \\
+-5y &= -15 \\
 y &= 3
 \end{aligned}
 $$
 
-Vi sätter in $y = 3$ i (1), $x + 2y = 8$: $x + 2 \cdot 3 = 8$, som ger
-$x = 8 - 6 = 2$. Den fjärde hörnpunkten är $(2, 3)$.
+Vi sätter in $y = 3$ i den första ekvationen, $x + 2y = 8$:
+$x + 2 \cdot 3 = 8$, som ger $x = 8 - 6 = 2$. Den fjärde hörnpunkten är
+$(2, 3)$.
 
 **Svar:** $(0, 0)$, $(3, 0)$, $(2, 3)$ och $(0, 4)$
 :::

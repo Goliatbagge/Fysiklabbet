@@ -56116,32 +56116,42 @@
       [['löser ekvationssystemet.']]
     ]);
     y += 3.4 * F;
+    /* ADDITIONSMETODEN (önskemål 2026-10-17): faktorn skrivs i blått
+     * till höger om ekvationen, hela systemet skrivs om, och sedan
+     * ADDERAS ekvationerna ledvis. Inga etiketter (1)/(2) behövs. */
     xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
     var xE1 = xx;
     var x1e = T.str('x+2y=8', xx, y);
-    T.str('(1)', x1e + 1.2 * F, y, null, 0.62);
     var yE1 = y;
     T.pause(240);
-    xx = T.str('3x+y=9', xx, y + 2.4 * F);
-    T.str('(2)', xx + 1.2 * F, y + 2.4 * F, null, 0.62);
+    T.str('3x+y=9', xx, y + 2.4 * F);
     T.stepEnd();
 
     tanke(y + 2.4 * F, [
-      [['Gånger 3 i (1) ger termen 3x i']],
-      [['båda. Subtraherar jag sedan (2)']],
-      [['tar x-termerna ut varandra.']]
+      [['Gånger -3 i den första ekvationen']],
+      [['ger termen -3x. Adderar jag sedan']],
+      [['ekvationerna tar x-termerna ut']],
+      [['varandra.']]
+    ]);
+    T.str('·(-3)', x1e + 1.0 * F, y, BLUE);
+    T.stepEnd();
+
+    y += 6.2 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    T.str('-3x-6y=-24', xx, y);
+    T.pause(240);
+    T.str('3x+y=9', xx, y + 2.4 * F);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['Nu adderar jag ekvationerna']],
+      [['ledvis.']]
     ]);
     y += 6.4 * F;
-    T.str('(1)·3:', padL, y, null, 0.62);
-    T.pause(220);
-    T.str('3x+6y=24', padL + 100, y);
+    y = additionsblock(T, F, padL + 20, y, '-3x-6y=-24', '3x+y=9', '-5y=-15');
     T.stepEnd();
 
-    y += 3.0 * F;
-    y = ledvisBlock(T, F, padL + 20, y, '3x+6y=24', '3x+y=9', '5y=15', '−');
-    T.stepEnd();
-
-    y = ekvOp(y, '/5', padL + 330, '5y=15',
+    y = ekvOp(y, '/(-5)', padL + 330, '-5y=-15',
               { dyRes: 3.0, dyVagg: 2.4 });
     var xY3 = T.str('y=', X0, y);
     var xY3e = T.str('3', xY3, y);
@@ -56149,7 +56159,8 @@
     T.stepEnd();
 
     tanke(y, [
-      [['Jag sätter in y=3 i (1).']]
+      [['Jag sätter in y=3 i den första']],
+      [['ekvationen.']]
     ]);
     y += 2.8 * F;
     var ra = T.ring(xY3, xY3e, yY3);
@@ -56462,34 +56473,43 @@
       [['sneda linjerna.']]
     ]));
     y = yFig + 3.2 * F;
+    /* additionsmetoden: faktorn i blått, systemet skrivs om, ledvis
+     * addition (önskemål 2026-10-17) */
     xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
-    var x1e = T.str('2x+3y=24', xx, y);
-    T.str('(1)', x1e + 1.2 * F, y, null, 0.62);
+    T.str('2x+3y=24', xx, y);
     T.pause(240);
     var xE2 = xx;
     var x2e = T.str('x+y=10', xx, y + 2.4 * F);
-    T.str('(2)', x2e + 1.2 * F, y + 2.4 * F, null, 0.62);
     var yE2 = y + 2.4 * F;
     T.stepEnd();
 
     tanke(y + 2.4 * F, [
-      [['Gånger 2 i (2) ger 2x i båda.']],
-      [['Subtraherar jag den från (1)']],
-      [['försvinner x.']]
+      [['Gånger -2 i den andra ekvationen']],
+      [['ger termen -2x. Adderar jag sedan']],
+      [['ekvationerna försvinner x.']]
     ]);
-    y += 6.4 * F;
-    T.str('(2)·2:', padL, y, null, 0.62);
-    T.pause(220);
-    T.str('2x+2y=20', padL + 100, y);
+    T.str('·(-2)', x2e + 1.0 * F, yE2, BLUE);
     T.stepEnd();
 
-    y += 3.0 * F;
-    y = ledvisBlock(T, F, padL + 20, y, '2x+3y=24', '2x+2y=20', 'y=4', '−');
+    y += 6.2 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    T.str('2x+3y=24', xx, y);
+    T.pause(240);
+    T.str('-2x-2y=-20', xx, y + 2.4 * F);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['Nu adderar jag ekvationerna']],
+      [['ledvis.']]
+    ]);
+    y += 6.4 * F;
+    y = additionsblock(T, F, padL + 20, y, '2x+3y=24', '-2x-2y=-20', 'y=4');
     var xY4 = padL + 20 + 1.15 * F + T.adv('y='), yY4 = y;
     T.stepEnd();
 
     tanke(y, [
-      [['Jag sätter in y=4 i (2).']]
+      [['Jag sätter in y=4 i den andra']],
+      [['ekvationen.']]
     ]);
     y += 2.8 * F;
     var ra = T.ring(xY4, xY4 + T.adv('4'), yY4);
@@ -56632,29 +56652,37 @@
       [['skärningen mellan linjerna.']]
     ]));
     y = yFig + 3.2 * F;
+    /* additionsmetoden: faktorn i blått, systemet skrivs om, ledvis
+     * addition (önskemål 2026-10-17) */
     xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
-    var x1e = T.str('30x+50y=300', xx, y);
-    T.str('(1)', x1e + 1.2 * F, y, null, 0.62);
+    T.str('30x+50y=300', xx, y);
     T.pause(240);
     var xE2 = xx;
     var x2e = T.str('x+y=8', xx, y + 2.4 * F);
-    T.str('(2)', x2e + 1.2 * F, y + 2.4 * F, null, 0.62);
     var yE2 = y + 2.4 * F;
     T.stepEnd();
 
     tanke(y + 2.4 * F, [
-      [['Gånger 30 i (2) ger 30x i båda.']],
-      [['Sedan subtraherar jag den från']],
-      [['(1).']]
+      [['Gånger -30 i den andra ekvationen']],
+      [['ger termen -30x. Adderar jag sedan']],
+      [['ekvationerna försvinner x.']]
     ]);
-    y += 6.4 * F;
-    T.str('(2)·30:', padL, y, null, 0.62);
-    T.pause(220);
-    T.str('30x+30y=240', padL + 100, y);
+    T.str('·(-30)', x2e + 1.0 * F, yE2, BLUE);
     T.stepEnd();
 
-    y += 3.0 * F;
-    y = ledvisBlock(T, F, padL + 20, y, '30x+50y=300', '30x+30y=240', '20y=60', '−');
+    y += 6.2 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    T.str('30x+50y=300', xx, y);
+    T.pause(240);
+    T.str('-30x-30y=-240', xx, y + 2.4 * F);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['Nu adderar jag ekvationerna']],
+      [['ledvis.']]
+    ]);
+    y += 6.4 * F;
+    y = additionsblock(T, F, padL + 20, y, '30x+50y=300', '-30x-30y=-240', '20y=60');
     T.stepEnd();
 
     y = ekvOp(y, '/20', padL + 360, '20y=60',
@@ -56665,7 +56693,8 @@
     T.stepEnd();
 
     tanke(y, [
-      [['Jag sätter in y=3 i (2).']]
+      [['Jag sätter in y=3 i den andra']],
+      [['ekvationen.']]
     ]);
     y += 2.8 * F;
     var ra = T.ring(xY, xYe, yY);

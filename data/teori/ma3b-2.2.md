@@ -178,23 +178,26 @@ hörnet är skärningspunkten mellan de sneda linjerna.
 
 $$
 \begin{cases}
-2x + 3y = 24 & (1) \\
-x + y = 10 & (2)
+2x + 3y = 24 \\
+x + y = 10
 \end{cases}
 $$
 
-Vi multiplicerar (2) med 2, $2x + 2y = 20$, och subtraherar den från (1)
-ledvis.
+Vi multiplicerar den andra ekvationen med $-2$, så att den får termen
+$-2x$, och skriver upp systemet igen.
 
 $$
-\begin{aligned}
-(2x + 3y) - (2x + 2y) &= 24 - 20 \\
-y &= 4
-\end{aligned}
+\begin{cases}
+2x + 3y = 24 \\
+-2x - 2y = -20
+\end{cases}
 $$
 
-Insättning i (2), $x + y = 10$, ger $x + 4 = 10$, alltså $x = 6$. Det
-fjärde hörnet är $(6, 4)$.
+Nu adderar vi ekvationerna ledvis, och $x$-termerna tar ut varandra:
+$y = 4$.
+
+Insättning i den andra ekvationen, $x + y = 10$, ger $x + 4 = 10$, alltså
+$x = 6$. Det fjärde hörnet är $(6, 4)$.
 
 Vi beräknar vinsten $V = 400x + 500y$ i varje hörn.
 
@@ -261,24 +264,32 @@ skärningspunkten mellan linjerna.
 
 $$
 \begin{cases}
-30x + 50y = 300 & (1) \\
-x + y = 8 & (2)
+30x + 50y = 300 \\
+x + y = 8
 \end{cases}
 $$
 
-Vi multiplicerar (2) med 30, $30x + 30y = 240$, och subtraherar den från (1)
-ledvis.
+Vi multiplicerar den andra ekvationen med $-30$, så att den får termen
+$-30x$, och skriver upp systemet igen.
+
+$$
+\begin{cases}
+30x + 50y = 300 \\
+-30x - 30y = -240
+\end{cases}
+$$
+
+Nu adderar vi ekvationerna ledvis, så att $x$-termerna tar ut varandra.
 
 $$
 \begin{aligned}
-(30x + 50y) - (30x + 30y) &= 300 - 240 \\
 20y &= 60 \\
 y &= 3
 \end{aligned}
 $$
 
-Insättning i (2), $x + y = 8$, ger $x + 3 = 8$, alltså $x = 5$. Det tredje
-hörnet är $(5, 3)$.
+Insättning i den andra ekvationen, $x + y = 8$, ger $x + 3 = 8$, alltså
+$x = 5$. Det tredje hörnet är $(5, 3)$.
 
 | Hörnpunkt | $K = 2\,000x + 4\,000y$ |
 | --- | --- |

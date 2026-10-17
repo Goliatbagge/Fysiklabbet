@@ -12,6 +12,9 @@ Format:
 ```
 
 ## 2026-10-18 — "Fysiklabbet i film, och en snabbsnurrande asteroid"
+- Status: SCHEMALAGD i EmailOctopus 2026-10-17 som "Nyhetsbrev nr 10 - 2026-10-18",
+  söndag 2026-10-18 kl 06.00 (Europe/Amsterdam = svensk tid), 33 prenumeranter.
+  Testmejl skickat från EmailOctopus efter rättelserna samma dag.
 - Status: UTKAST skrivet lördag 2026-10-17 (före 08.00-deadline, molnsession).
   Tänkt utskick söndag 2026-10-18 kl 06.00 svensk tid. **Kampanjen är INTE
   upplagd i EmailOctopus** (molnet saknar Chrome): kör `/brev-till-octopus`

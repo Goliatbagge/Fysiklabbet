@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>How long does it take to double your money? — Fysiklabbet</title>
+<meta name="description" content="Explore compound interest step by step: guess first, experiment with deposit and interest rate, answer directly on the page and find your own rule for the doubling time. Upper secondary mathematics.">
+<link rel="canonical" href="https://fysiklabbet.se/utkast/doubling.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!--
+  doubling.html: ENGELSK VERSION, GENERERAD. Redigera inte den här filen.
+  Ändra i fordubbling.html och kör node .claude/oversatt-fordubbling-en.js.
+
+  fordubbling.html: interaktiv undersökning till Matematik nivå 1c, avsnitt 3.4
+  (Sparande och ränteberäkningar). Samma uppgifter som elevbladet
+  "Hur lång tid tar det att fördubbla pengarna?", byggd som en följd av
+  helskärmssteg i stället för ett rullande blad.
+
+  Upplägg:
+  - SKARMAR (nedan i skriptet) styr ordningen. Varje skärm är en
+    <section class="skarm"> med data-skarm. Bara en visas i taget.
+  - Skärmar med data-bank="ja" har en .bank-plats; Räntelabbet (#bank)
+    flyttas dit när skärmen visas, så att Räntelabbets tillstånd följer med.
+    data-forbered ställer in Räntelabbet första gången eleven kommer till skärmen
+    ("belopp,ränta,mål,år,vy").
+  - Gissa först: skärm 1 låser gissningarna. Räntelabbet är låst tills dess.
+  - Rättning direkt där det finns ett entydigt svar. Resonemangsfrågor får en
+    jämförelsetext som låses upp först när eleven har skrivit något.
+  - Allt sparas i localStorage (nyckeln fysiklabbet.fordubbling.v1),
+    inklusive vilken skärm eleven står på. Inget lämnar datorn.
+  - Mobil (≤ 900 px): en växel "Uppgiften | Räntelabbet" ger varje vy hela skärmen.
+
+  Matematiken: beloppet efter n år är K · f^n med f = 1 + r/100. Första hela
+  år då målet m · K nås är minsta n med f^n ≥ m, oberoende av K.
+  Tabell 4 frågar efter första hela året (6 % ger 12 år). Tabell 6, 8, 14 och
+  fråga 11 frågar efter tiden med en decimal, som eleverna hittar med steget
+  0,1 år i kalkylarket. Exakt tid t = ln(m)/ln(f); rättningen godtar |svar - t| ≤ 0,1.
+  Fördubbling: 1 % 69,7; 2 % 35,0; 3 % 23,4; 4 % 17,7; 5 % 14,2; 6 % 11,9;
+  8 % 9,0; 9 % 8,0; 10 % 7,3; 24 % 3,2. Tredubbling: 3 % 37,2; 6 % 18,9.
+  Med hela år spretar räntesats · tid (72, 75, 72, 80, 81, 80) eftersom
+  avrundningen uppåt multipliceras med räntan. Med en decimal hamnar alla
+  nära 70 till 73, och mönstret syns.
+-->
+<style>
+:root {
+  --bg: #f3eee4;
+  --bg2: #ebe4d4;
+  --panel: #fffdf9;
+  --ink: #0f1620;
+  --soft: #3f4a5c;
+  --muted: #69655c;
+  --line: rgba(15, 22, 32, 0.10);
+  --line2: rgba(15, 22, 32, 0.20);
+  --accent: #c8324a;
+  --accent-soft: rgba(200, 50, 74, 0.08);
+  --blue: #1c3d6b;
+  --blue-mid: #3d6aa8;
+  --blue-bar: #6f93c4;
+  --blue-soft: rgba(28, 61, 107, 0.09);
+  --green: #2f6b4f;
+  --green-soft: rgba(47, 107, 79, 0.11);
+  --shadow: 0 1px 2px rgba(15, 22, 32, 0.05), 0 18px 40px -22px rgba(15, 22, 32, 0.35);
+  --sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --serif: "Instrument Serif", Georgia, serif;
+  --topp-h: 58px;
+  --fot-h: 68px;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
+html, body { margin: 0; height: 100%; }
+body {
+  background:
+    radial-gradient(1100px 600px at 8% -10%, rgba(200, 50, 74, 0.07), transparent 60%),
+    radial-gradient(1000px 700px at 105% 10%, rgba(28, 61, 107, 0.08), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+button, input, select, textarea { font-family: inherit; font-size: inherit; color: inherit; }
+.app { height: 100dvh; display: grid; grid-template-rows: var(--topp-h) minmax(0, 1fr) var(--fot-h); }
+
+/* ---------- Toppen ---------- */
+.topp { display: flex; align-items: center; gap: 18px; padding: 0 22px; padding-top: env(safe-area-inset-top, 0px); border-bottom: 1px solid var(--line); background: rgba(243, 238, 228, 0.85); backdrop-filter: blur(6px); }
+.logo { display: flex; align-items: center; gap: 8px; color: var(--ink); text-decoration: none; font-family: var(--serif); font-size: 22px; flex-shrink: 0; }
+.logo svg { color: var(--ink); }
+.spar { flex: 1; min-width: 0; display: flex; gap: 6px; align-items: center; justify-content: center; }
+.spar button { flex: 1; max-width: 150px; min-width: 0; border: 0; background: none; padding: 6px 0 0; cursor: pointer; text-align: left; color: var(--muted); }
+.spar button .stapel { display: block; height: 4px; border-radius: 2px; background: var(--line2); overflow: hidden; }
+.spar button .stapel i { display: block; height: 100%; width: 0; background: var(--blue); transition: width .35s ease; }
+.spar button .etikett { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.spar button.aktiv .etikett { color: var(--ink); }
+.spar button:focus-visible { outline: 2px solid var(--blue-mid); outline-offset: 3px; }
+.topp-hoger { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+.ikonknapp { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line2); background: var(--panel); border-radius: 8px; padding: 7px 10px; cursor: pointer; font-size: 13px; color: var(--soft); }
+.ikonknapp:hover { border-color: var(--ink); color: var(--ink); }
+@media (max-width: 900px) {
+  .topp { gap: 10px; padding: 0 12px; }
+  .logo span { display: none; }
+  .spar button .etikett { display: none; }
+  .spar { gap: 4px; }
+  .helskarm-knapp .txt { display: none; }
+}
+
+/* ---------- Scenen ---------- */
+.scen { position: relative; min-height: 0; overflow: hidden; }
+.skarm { position: absolute; inset: 0; display: none; overflow-y: auto; overflow-x: hidden; padding: clamp(18px, 4vh, 48px) clamp(16px, 4vw, 56px) 32px; }
+.skarm.aktiv { display: block; animation: in .45s cubic-bezier(.2,.7,.2,1) both; }
+.skarm.aktiv.bakat { animation-name: in-bakat; }
+@keyframes in { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+@keyframes in-bakat { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .skarm.aktiv { animation: none; } * { transition: none !important; } }
+
+.inre { max-width: 1240px; margin: 0 auto; min-height: 100%; display: flex; flex-direction: column; justify-content: center; }
+.skarm[data-bank=ja] .inre { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 540px); gap: clamp(20px, 3vw, 44px); align-items: center; }
+.uppgift { min-width: 0; }
+.bank-plats { min-width: 0; }
+
+.delmarke { font-family: var(--mono); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+.delmarke span { color: var(--muted); }
+.skarm h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(36px, 5vw, 64px); line-height: 1.02; margin: 0 0 14px; letter-spacing: -0.01em; text-wrap: balance; }
+.skarm h2 em { color: var(--accent); }
+.prompt { font-size: clamp(17px, 1.6vw, 21px); line-height: 1.55; color: var(--soft); max-width: 640px; margin: 0 0 26px; text-wrap: pretty; }
+.fraga { margin: 0 0 22px; }
+.fraga .q { font-size: clamp(17px, 1.5vw, 20px); line-height: 1.5; margin: 0 0 12px; display: flex; gap: 14px; align-items: baseline; }
+.fraga .q .qn { font-family: var(--mono); font-size: 13px; color: var(--blue); background: var(--blue-soft); border-radius: 999px; padding: 2px 9px; flex-shrink: 0; }
+.svar-rad { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; font-size: 17px; }
+.stort-tal { width: 140px; padding: 12px 14px; font-size: 26px; text-align: right; border: 1.5px solid var(--line2); border-radius: 10px; background: #fff; font-variant-numeric: tabular-nums; }
+.svar-rad input[type=text] { padding: 10px 12px; border: 1.5px solid var(--line2); border-radius: 8px; background: #fff; font-variant-numeric: tabular-nums; }
+textarea { width: 100%; min-height: 96px; padding: 12px 14px; border: 1.5px solid var(--line2); border-radius: 10px; background: #fff; line-height: 1.55; resize: vertical; font-size: 16px; }
+.val { display: flex; flex-wrap: wrap; gap: 10px; }
+.val label { display: inline-flex; gap: 10px; align-items: center; padding: 12px 18px; border: 1.5px solid var(--line2); border-radius: 12px; background: #fff; cursor: pointer; font-size: 17px; transition: border-color .15s, background .15s; }
+.val input { accent-color: var(--blue); width: 18px; height: 18px; }
+.val label:has(input:checked) { border-color: var(--blue); background: var(--blue-soft); }
+input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible, .val label:focus-within { outline: 2px solid var(--blue-mid); outline-offset: 2px; }
+input:disabled, textarea:disabled { background: var(--bg2); color: var(--soft); }
+.val label:has(input:disabled) { cursor: default; opacity: .85; }
+
+.knapp { border: 1.5px solid var(--line2); background: #fff; color: var(--ink); padding: 10px 16px; border-radius: 10px; cursor: pointer; font-weight: 500; }
+.knapp:hover { border-color: var(--ink); }
+.knapp.prim { background: var(--blue); border-color: var(--blue); color: #fff; }
+.knapp.prim:hover { background: #142e52; }
+.knapp:disabled { opacity: .45; cursor: default; }
+.tabell-wrap { overflow-x: auto; }
+table.svar { border-collapse: separate; border-spacing: 0; font-variant-numeric: tabular-nums; min-width: 340px; background: #fff; border: 1.5px solid var(--line2); border-radius: 12px; overflow: hidden; }
+table.svar th, table.svar td { padding: 10px 16px; text-align: right; border-bottom: 1px solid var(--line); font-size: 17px; }
+table.svar tr:last-child td { border-bottom: 0; }
+table.svar th { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; background: var(--bg); text-align: right; }
+table.svar td input { width: 90px; padding: 8px 10px; border: 1.5px solid var(--line2); border-radius: 8px; text-align: right; font-size: 17px; }
+table.svar td.auto { color: var(--blue); font-weight: 600; min-width: 70px; }
+td.ratt input, input.ratt { border-color: var(--green) !important; background: var(--green-soft) !important; }
+td.fel input, input.fel { border-color: var(--accent) !important; background: var(--accent-soft) !important; }
+.kontroll { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.aterkoppling { margin-top: 14px; padding: 12px 16px; border-radius: 10px; line-height: 1.55; font-size: 16px; max-width: 640px; }
+.aterkoppling:empty { display: none; }
+.aterkoppling.bra { background: var(--green-soft); color: #1f4a36; }
+.aterkoppling.nastan { background: var(--accent-soft); color: #7a1d2d; }
+.aterkoppling.info { background: var(--blue-soft); color: var(--blue); }
+details.hjalp { margin-top: 12px; max-width: 640px; }
+details.hjalp summary { cursor: pointer; color: var(--blue); font-weight: 500; }
+details.hjalp > div { margin-top: 8px; padding: 12px 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; line-height: 1.6; color: var(--soft); }
+.formel { font-family: var(--mono); font-size: .92em; white-space: nowrap; }
+.koppling { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--green); border-radius: 12px; padding: 16px 20px; margin: 0 0 26px; max-width: 640px; box-shadow: var(--shadow); }
+.koppling-rubrik { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--green); }
+.koppling-formel { font-family: var(--serif); font-size: clamp(30px, 3.4vw, 42px); margin: 6px 0 4px; }
+.koppling-formel b { font-weight: 400; }
+.koppling-formel span { color: var(--green); }
+.koppling-text { margin: 0; color: var(--soft); line-height: 1.55; font-size: 17px; }
+.steg-lista { margin: -4px 0 16px; padding-left: 1.3em; color: var(--soft); line-height: 1.6; font-size: 16px; max-width: 640px; }
+.forberedd { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; color: var(--blue); background: var(--blue-soft); border-radius: 999px; padding: 5px 12px; margin: -8px 0 20px; }
+.forberedd svg { flex-shrink: 0; }
+
+/* ---------- Startskärmen ---------- */
+.start .inre { align-items: flex-start; }
+.start h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(46px, 8vw, 104px); line-height: .96; margin: 0 0 22px; letter-spacing: -0.02em; max-width: 1000px; text-wrap: balance; }
+.start h1 em { color: var(--accent); }
+.start .prompt { max-width: 680px; }
+.start-rad { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 6px; }
+.start-rad input { width: 280px; max-width: 80vw; padding: 13px 16px; border: 1.5px solid var(--line2); border-radius: 12px; background: #fff; font-size: 17px; }
+.start-rad .knapp.prim { padding: 13px 22px; font-size: 17px; }
+.start-fakta { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 34px; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.start-dekor { position: absolute; right: clamp(16px, 4vw, 56px); bottom: 24px; width: min(40vw, 560px); opacity: .9; pointer-events: none; }
+@media (max-width: 900px) { .start-dekor { display: none; } }
+
+/* ---------- Sammanfattning ---------- */
+.kort-rad { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 6px 0 28px; }
+.kort { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; box-shadow: var(--shadow); }
+.kort .rubrik { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.kort .varde { font-family: var(--serif); font-size: 44px; line-height: 1.05; margin: 8px 0 4px; }
+.kort .varde small { font-family: var(--sans); font-size: 16px; color: var(--muted); }
+.kort p { margin: 0; color: var(--soft); line-height: 1.5; font-size: 15px; }
+.slut { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.bekrafta { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; color: var(--accent); }
+.bekrafta[hidden] { display: none; }
+.statusrad { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+/* ---------- Räntelabbet ---------- */
+.bank { background: var(--panel); border: 1px solid var(--line2); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; position: relative; }
+.bank-huvud { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px; background: var(--blue); color: #fff; }
+.bank-huvud h3 { margin: 0; font-family: var(--mono); font-weight: 500; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
+.bank-huvud .avlast-kort { font-family: var(--mono); font-size: 12px; opacity: .85; }
+.bank-kropp { padding: 14px 16px 16px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.bank-kropp > * { min-width: 0; }
+.forsok { display: flex; flex-wrap: wrap; gap: 6px; }
+.forsok button { font-size: 13px; padding: 6px 11px; border: 1px solid var(--line2); border-radius: 999px; background: var(--bg); cursor: pointer; }
+.forsok button:hover { border-color: var(--blue); color: var(--blue); }
+.reglage { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px 12px; align-items: center; font-size: 14px; }
+.reglage label { color: var(--soft); }
+.reglage input[type=range] { width: 100%; accent-color: var(--blue); }
+.reglage input[type=number] { width: 100px; padding: 6px 8px; border: 1px solid var(--line2); border-radius: 6px; text-align: right; font-variant-numeric: tabular-nums; }
+.reglage select { padding: 6px 8px; border: 1px solid var(--line2); border-radius: 6px; background: #fff; grid-column: span 2; }
+.reglage .mal-rad { grid-column: span 2; }
+table.svar td input.kort-tal { width: 70px; }
+.reglage > span { white-space: nowrap; }
+.enhet { color: var(--muted); font-size: 13px; }
+.kedja { background: var(--bg); border-radius: 10px; padding: 10px 12px; font-size: 14px; color: var(--soft); line-height: 1.6; transition: box-shadow .3s; }
+.kedja .kedja-rubrik { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--green); margin-bottom: 2px; }
+.kedja.lyft { box-shadow: 0 0 0 2px var(--green); }
+.skarm[data-lyft=kedja] .bank-kropp .kedja { order: -1; }
+.kedja .rad { font-family: var(--mono); font-size: 13px; color: var(--ink); white-space: nowrap; overflow-x: auto; }
+.kedja .rad .f { color: var(--blue); }
+.kedja .rad .p { color: var(--green); font-weight: 600; }
+.diagram-wrap svg { width: 100%; height: auto; display: block; touch-action: pan-y; }
+.avlasning { font-family: var(--mono); font-size: 13px; color: var(--ink); background: var(--bg); border-radius: 8px; padding: 8px 10px; min-height: 36px; }
+.flikar { display: flex; gap: 6px; }
+.flikar button { padding: 6px 12px; font-size: 13px; border: 1px solid var(--line2); border-radius: 8px; background: #fff; cursor: pointer; }
+.flikar button[aria-pressed=true] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.kalkyl { border: 1px solid var(--line2); border-radius: 8px; overflow: hidden; font-variant-numeric: tabular-nums; }
+.formelrad { display: flex; border-bottom: 1px solid var(--line2); font-family: var(--mono); font-size: 13px; }
+.formelrad .ref { padding: 6px 10px; background: var(--bg); border-right: 1px solid var(--line2); min-width: 52px; text-align: center; }
+.formelrad .fx { padding: 6px 10px; color: var(--soft); font-style: italic; border-right: 1px solid var(--line2); }
+.formelrad .inne { padding: 6px 10px; flex: 1; white-space: nowrap; overflow-x: auto; }
+.kalkyl-rulla { max-height: 290px; overflow-y: auto; }
+.kalkyl-steg { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; padding: 8px 10px; border-bottom: 1px solid var(--line2); background: var(--bg); font-size: 13px; color: var(--soft); }
+.kalkyl-steg button { padding: 4px 10px; font-size: 13px; border: 1px solid var(--line2); border-radius: 6px; background: #fff; cursor: pointer; }
+.kalkyl-steg button[aria-pressed=true] { background: var(--blue); color: #fff; border-color: var(--blue); }
+.kalkyl-steg input { width: 64px; padding: 4px 6px; border: 1px solid var(--line2); border-radius: 6px; text-align: right; font-variant-numeric: tabular-nums; }
+.kalkyl-steg .mal-info { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.bank-notis { font-size: 14px; line-height: 1.5; color: #7a1d2d; background: var(--accent-soft); border-radius: 8px; padding: 8px 10px; }
+.kalkyl table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.kalkyl th, .kalkyl td { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 4px 10px; }
+.kalkyl thead th { position: sticky; top: 0; background: var(--bg2); font-family: var(--mono); font-weight: 500; color: var(--muted); z-index: 1; }
+.kalkyl td.radnr { background: var(--bg); color: var(--muted); font-family: var(--mono); text-align: center; width: 44px; }
+.kalkyl td.tal { text-align: right; }
+.kalkyl tr.vald td { background: var(--blue-soft); }
+.kalkyl tbody tr { cursor: pointer; }
+.las-overlagg { position: absolute; inset: 44px 0 0 0; background: rgba(243, 238, 228, 0.95); display: flex; align-items: center; justify-content: center; padding: 30px; text-align: center; z-index: 5; }
+.las-overlagg h4 { font-family: var(--serif); font-weight: 400; font-size: 32px; margin: 0 0 8px; }
+.las-overlagg p { color: var(--soft); line-height: 1.55; margin: 0 0 14px; }
+.las-overlagg[hidden] { display: none; }
+
+/* ---------- Foten ---------- */
+.fot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 22px; padding-bottom: env(safe-area-inset-bottom, 0px); border-top: 1px solid var(--line); background: rgba(243, 238, 228, 0.9); backdrop-filter: blur(6px); }
+.fot .mitt { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.vaxel { display: none; border: 1.5px solid var(--line2); border-radius: 10px; overflow: hidden; }
+.vaxel button { border: 0; background: #fff; padding: 8px 12px; font-size: 14px; cursor: pointer; }
+.vaxel button[aria-pressed=true] { background: var(--ink); color: #fff; }
+.fot .knapp { min-width: 110px; }
+.fot .knapp.prim { display: inline-flex; gap: 8px; align-items: center; justify-content: center; }
+
+/* ---------- Mobil ---------- */
+@media (max-width: 900px) {
+  :root { --fot-h: 64px; }
+  .skarm { padding: 18px 16px 24px; }
+  .skarm[data-bank=ja] .inre { display: block; }
+  .inre { justify-content: flex-start; }
+  .skarm[data-bank=ja][data-vy=uppgift] .bank-plats { display: none; }
+  .skarm[data-bank=ja][data-vy=bank] .uppgift { display: none; }
+  .vaxel.syns { display: inline-flex; }
+  .fot { padding: 0 10px; }
+  .fot .knapp { min-width: 0; padding: 10px 12px; }
+  .fot .mitt .raknare { display: none; }
+  .stort-tal { width: 120px; font-size: 22px; }
+  table.svar th, table.svar td { padding: 8px 10px; font-size: 16px; }
+  table.svar td input { width: 72px; }
+  .reglage { grid-template-columns: auto auto; justify-content: start; }
+  .reglage input[type=range] { display: none; }
+  .reglage select, .reglage .mal-rad { grid-column: auto; }
+  .forsok { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
+  .forsok button { white-space: nowrap; }
+  .bank-kropp .flikar { order: 1; } .bank-kropp .diagram-wrap, .bank-kropp .kalkyl { order: 2; } .bank-kropp .bank-notis { order: 2; } .bank-kropp .avlasning { order: 3; }
+  .bank-kropp .forsok { order: 4; } .bank-kropp .reglage { order: 5; } .bank-kropp .kedja { order: 6; }
+  .skarm[data-lyft=kedja] .bank-kropp .kedja { order: 0; }
+}
+
+/* ---------- Utskrift: alla skärmar under varandra ---------- */
+@media print {
+  html, body { height: auto; overflow: visible; background: #fff; }
+  .app { display: block; height: auto; }
+  .topp, .fot, .bank-plats, .kontroll, details.hjalp, .start-dekor, .slut .knapp, .forberedd { display: none !important; }
+  .scen { overflow: visible; }
+  .skarm { display: block !important; position: static; overflow: visible; animation: none !important; padding: 12px 0; break-inside: avoid; }
+  .skarm[data-bank=ja] .inre { display: block; }
+  .skarm h2 { font-size: 30px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- TOPPEN -->
+  <header class="topp">
+    <a class="logo" href="../katalog.html?id=ma1c-3.4" title="Fysiklabbet">
+      <svg width="30" height="30" viewBox="0 0 36 36" aria-hidden="true">
+        <g transform="rotate(-24 18 18)">
+          <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+          <circle cx="28.04" cy="13.54" r="1.9" fill="#c8324a" />
+        </g>
+        <circle cx="18" cy="18" r="2.8" fill="#c8324a" />
+      </svg>
+      <span>Fysiklabbet</span>
+    </a>
+    <nav class="spar" id="spar" aria-label="Parts"></nav>
+    <div class="topp-hoger">
+      <button class="ikonknapp helskarm-knapp" type="button" id="helskarm" aria-label="Full screen">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9"/></svg>
+        <span class="txt">Full screen</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- SCENEN -->
+  <main class="scen" id="scen">
+
+    <!-- 0 START -->
+    <section class="skarm start" data-skarm="start" data-del="Start">
+      <div class="inre">
+        <p class="delmarke">Mathematics <span>· Savings and compound interest · Investigation</span></p>
+        <h1>How long does it take to <em>double</em> your money?</h1>
+        <p class="prompt">You put money in a savings account, and it grows with compound interest. Find out how long it takes before the amount has doubled, and whether there is a rule that lets you work it out in your head.</p>
+        <div class="start-rad">
+          <label for="namn" class="statusrad" style="width:100%">Who is working together?</label>
+          <input id="namn" type="text" autocomplete="off" placeholder="Your names">
+          <button class="knapp prim" type="button" data-gaTill="gissa">Start</button>
+        </div>
+        <div class="start-fakta"><span>Work in pairs</span><span>About 60 minutes</span><span>Answers are saved in the browser</span></div>
+      </div>
+      <svg class="start-dekor" viewBox="0 0 620 360" aria-hidden="true">
+        <line x1="20" y1="330" x2="600" y2="330" stroke="rgba(15,22,32,.25)" stroke-width="1.2"/>
+        <line x1="20" y1="172" x2="600" y2="172" stroke="#c8324a" stroke-width="1.6" stroke-dasharray="6 5"/>
+        <g id="dekor-staplar"></g>
+      </svg>
+    </section>
+
+    <!-- 1 GISSA FÖRST -->
+    <section class="skarm" data-skarm="gissa" data-del="Guess">
+      <div class="inre">
+        <p class="delmarke">Part 1 <span>· Guess first · 5 min</span></p>
+        <h2>What do you think?</h2>
+        <p class="prompt">Answer without any tools. There are no wrong guesses. When you move on, your guesses are locked and the Interest Lab opens.</p>
+        <div class="fraga">
+          <p class="q"><span class="qn">1</span><span>You deposit 10,000&nbsp;kr at 6&nbsp;% interest per year. How many years does it take before you have 20,000&nbsp;kr?</span></p>
+          <div class="svar-rad"><input id="g1" class="stort-tal" type="text" inputmode="decimal" data-spara aria-label="Guess in years"><span>years</span></div>
+          <textarea id="g1t" data-spara placeholder="How did you think?" aria-label="How did you think?" style="margin-top:12px;max-width:640px;min-height:70px"></textarea>
+        </div>
+        <div class="fraga">
+          <p class="q"><span class="qn">2</span><span>If you deposit 50,000&nbsp;kr instead, at the same rate, how long does it take to double?</span></p>
+          <div class="val" role="radiogroup" aria-label="Question 2">
+            <label><input type="radio" name="g2" value="longer" data-spara> Longer</label>
+            <label><input type="radio" name="g2" value="shorter" data-spara> Shorter</label>
+            <label><input type="radio" name="g2" value="the same time" data-spara> The same time</label>
+          </div>
+        </div>
+        <div class="fraga">
+          <p class="q"><span class="qn">3</span><span>If the rate is 12&nbsp;% instead, how long does it take compared with 6&nbsp;%?</span></p>
+          <div class="val" role="radiogroup" aria-label="Question 3">
+            <label><input type="radio" name="g3" value="half the time" data-spara> Half the time</label>
+            <label><input type="radio" name="g3" value="more than half the time" data-spara> More than half the time</label>
+            <label><input type="radio" name="g3" value="less than half the time" data-spara> Less than half the time</label>
+          </div>
+        </div>
+        <div class="aterkoppling info" id="las-text" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- 2 SAMMA RÄNTA, OLIKA BELOPP -->
+    <section class="skarm" data-skarm="belopp" data-del="Explore" data-bank="ja" data-forbered="10000,6,2,20,diagram">
+      <div class="inre">
+        <div class="uppgift">
+          <p class="delmarke">Part 2 <span>· Explore in the Interest Lab</span></p>
+          <h2>Same rate, <em>different</em> deposits</h2>
+          <p class="prompt">Set the deposit in the Interest Lab and find the first year in which the bars reach the dashed line, that is, double the deposit.</p>
+          <div class="forberedd"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 7.5 5.5 11 12 3"/></svg>The Interest Lab is set up: 10,000&nbsp;kr and 6&nbsp;%</div>
+          <div class="fraga">
+            <p class="q"><span class="qn">4</span><span>Fill in the table.</span></p>
+            <div class="tabell-wrap">
+              <table class="svar" id="t4">
+                <thead><tr><th>Deposit</th><th>Interest rate</th><th>Doubled after</th></tr></thead>
+                <tbody>
+                  <tr data-k="10000" data-r="6"><td>10,000&nbsp;kr</td><td>6&nbsp;%</td><td><input type="text" inputmode="numeric" aria-label="10,000 kr, 6 %, years" data-spara id="t4a"></td></tr>
+                  <tr data-k="50000" data-r="6"><td>50,000&nbsp;kr</td><td>6&nbsp;%</td><td><input type="text" inputmode="numeric" aria-label="50,000 kr, 6 %, years" data-spara id="t4b"></td></tr>
+                  <tr data-k="5000" data-r="6"><td>5,000&nbsp;kr</td><td>6&nbsp;%</td><td><input type="text" inputmode="numeric" aria-label="5,000 kr, 6 %, years" data-spara id="t4c"></td></tr>
+                  <tr data-k="100000" data-r="6"><td>100,000&nbsp;kr</td><td>6&nbsp;%</td><td><input type="text" inputmode="numeric" aria-label="100,000 kr, 6 %, years" data-spara id="t4d"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="kontroll"><button class="knapp" type="button" data-kontrollera="t4">Check</button></div>
+            <div class="aterkoppling" id="t4-svar" aria-live="polite"></div>
+          </div>
+        </div>
+        <div class="bank-plats"></div>
+      </div>
+    </section>
+
+    <!-- 3 VARFÖR? -->
+    <section class="skarm" data-skarm="varfor" data-del="Explore" data-bank="ja" data-lyft="kedja" data-forbered="10000,6,2,12,diagram">
+      <div class="inre">
+        <div class="uppgift">
+          <p class="delmarke">Part 2 <span>· Explain</span></p>
+          <h2><em>Why</em> doesn't the deposit matter?</h2>
+          <p class="prompt">Look at the box marked in green in the Interest Lab, <b>How many times larger?</b> Every year the amount is multiplied by the growth factor 1.06. After 12 years it has been multiplied by 1.06 twelve times, and the box shows what that gives.</p>
+          <p class="prompt" style="margin-bottom:8px">Now change the deposit in the Interest Lab several times. Look at the box after each change:</p>
+          <ul class="prompt" style="padding-left:1.2em">
+            <li>Does the number 2.0122 change, that is, how many times larger the amount has become?</li>
+            <li>Do the kronor on the line <b>Amount</b> at the bottom of the box change?</li>
+            <li>Has the amount doubled after 12 years, no matter how much you deposited?</li>
+          </ul>
+          <div class="forberedd"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 7.5 5.5 11 12 3"/></svg>The Interest Lab is set up: 6&nbsp;% and 12 years</div>
+          <div class="fraga">
+            <p class="q"><span class="qn">5</span><span>What do you notice? Use the growth factor to explain why.</span></p>
+            <textarea id="q5" data-spara placeholder="Write your explanation" aria-label="Question 5"></textarea>
+            <details class="hjalp"><summary>Hint</summary><div>If you deposit <i>K</i> kronor, what is the amount after <i>n</i> years? What should it equal when the amount has doubled?</div></details>
+            <details class="hjalp" data-kraver="q5"><summary>Compare with an explanation</summary><div>After <i>n</i> years the amount is <span class="formel">K · 1.06<sup>n</sup></span>. The amount has doubled when <span class="formel">K · 1.06<sup>n</sup> = 2K</span>. Divide both sides by <i>K</i>: <span class="formel">1.06<sup>n</sup> = 2</span>. The deposit <i>K</i> has disappeared from the equation, so the doubling time depends only on the growth factor, that is, on the interest rate.</div></details>
+          </div>
+        </div>
+        <div class="bank-plats"></div>
+      </div>
+    </section>
+
+    <!-- 4 OLIKA RÄNTOR -->
+    <section class="skarm" data-skarm="rantor" data-del="Explore" data-bank="ja" data-forbered="10000,4,2,30,kalkyl">
+      <div class="inre">
+        <div class="uppgift">
+          <p class="delmarke">Part 2 <span>· Explore in the Interest Lab</span></p>
+          <h2>Same deposit, <em>different</em> rates</h2>
+          <p class="prompt">Whole years are not enough now. Find the time to one decimal place.</p>
+          <ol class="prompt" style="padding-left:1.2em;margin-top:-12px">
+            <li>Set the interest rate and find the first whole year in which the amount reaches the target.</li>
+            <li>Click that row and choose the step <b>0.1 years</b>. The spreadsheet then shows tenths of a year around the row. The arrows ‹ and › move one year at a time.</li>
+            <li>Find the first tenth in which the amount reaches the target.</li>
+          </ol>
+          <div class="forberedd"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 7.5 5.5 11 12 3"/></svg>The Interest Lab shows the spreadsheet at 4&nbsp;%</div>
+          <div class="fraga">
+            <p class="q"><span class="qn">6</span><span>Fill in the table.</span></p>
+            <div class="tabell-wrap">
+              <table class="svar" id="t6">
+                <thead><tr><th>Interest rate (%)</th><th>Doubling time (years, one decimal)</th><th>Rate · time</th></tr></thead>
+                <tbody>
+                  <tr data-r="4"><td>4</td><td><input type="text" inputmode="decimal" aria-label="4 %, years" data-spara id="t6a"></td><td class="auto"></td></tr>
+                  <tr data-r="5"><td>5</td><td><input type="text" inputmode="decimal" aria-label="5 %, years" data-spara id="t6b"></td><td class="auto"></td></tr>
+                  <tr data-r="6"><td>6</td><td><input type="text" inputmode="decimal" aria-label="6 %, years" data-spara id="t6c"></td><td class="auto"></td></tr>
+                  <tr data-r="8"><td>8</td><td><input type="text" inputmode="decimal" aria-label="8 %, years" data-spara id="t6d"></td><td class="auto"></td></tr>
+                  <tr data-r="9"><td>9</td><td><input type="text" inputmode="decimal" aria-label="9 %, years" data-spara id="t6e"></td><td class="auto"></td></tr>
+                  <tr data-r="10"><td>10</td><td><input type="text" inputmode="decimal" aria-label="10 %, years" data-spara id="t6f"></td><td class="auto"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="kontroll"><button class="knapp" type="button" data-kontrollera="t6">Check</button></div>
+            <div class="aterkoppling" id="t6-svar" aria-live="polite"></div>
+            <div class="svar-rad" style="margin-top:20px">
+              <label for="q6n">Rate · time ends up close to the whole number</label>
+              <input id="q6n" class="stort-tal" type="text" inputmode="numeric" data-spara>
+              <button class="knapp" type="button" id="q6nk">Check</button>
+            </div>
+            <div class="aterkoppling" id="q6n-svar" aria-live="polite"></div>
+          </div>
+        </div>
+        <div class="bank-plats"></div>
+      </div>
+    </section>
+
+    <!-- 5 LÅGA RÄNTOR -->
+    <section class="skarm" data-skarm="laga" data-del="Spreadsheet" data-bank="ja" data-forbered="10000,2,2,80,kalkyl">
+      <div class="inre">
+        <div class="uppgift">
+          <p class="delmarke">Part 3 <span>· Low rates in the spreadsheet</span></p>
+          <h2>When it takes a <em>long</em> time</h2>
+          <p class="prompt">At low rates it takes many years. Click a row in the spreadsheet to see the formula: each row is the row above times the growth factor. If the target is not reached, increase <b>Show years</b>.</p>
+          <div class="forberedd"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 7.5 5.5 11 12 3"/></svg>The Interest Lab is set up: spreadsheet, 2&nbsp;% and 80&nbsp;years</div>
+          <div class="fraga">
+            <p class="q"><span class="qn">7</span><span>Write the expression for the amount after <i>n</i> years if you deposit <i>K</i> kronor at 2&nbsp;% interest.</span></p>
+            <div class="svar-rad"><label for="q7u">Amount =</label><input id="q7u" type="text" data-spara style="width:220px" placeholder="for example K · …"></div>
+            <details class="hjalp" data-kraver="q7u"><summary>Compare</summary><div>The growth factor is 1.02, so the amount after <i>n</i> years is <span class="formel">K · 1.02<sup>n</sup></span>.</div></details>
+          </div>
+          <div class="fraga">
+            <p class="q"><span class="qn">8</span><span>Fill in the table.</span></p>
+            <div class="tabell-wrap">
+              <table class="svar" id="t8">
+                <thead><tr><th>Interest rate (%)</th><th>Doubling time (years, one decimal)</th><th>Rate · time</th></tr></thead>
+                <tbody>
+                  <tr data-r="1"><td>1</td><td><input type="text" inputmode="decimal" aria-label="1 %, years" data-spara id="t8a"></td><td class="auto"></td></tr>
+                  <tr data-r="2"><td>2</td><td><input type="text" inputmode="decimal" aria-label="2 %, years" data-spara id="t8b"></td><td class="auto"></td></tr>
+                  <tr data-r="3"><td>3</td><td><input type="text" inputmode="decimal" aria-label="3 %, years" data-spara id="t8c"></td><td class="auto"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="kontroll"><button class="knapp" type="button" data-kontrollera="t8">Check</button></div>
+            <div class="aterkoppling" id="t8-svar" aria-live="polite"></div>
+          </div>
+        </div>
+        <div class="bank-plats"></div>
+      </div>
+    </section>
+
+    <!-- 6 MÖNSTRET -->
+    <section class="skarm" data-skarm="monster" data-del="Spreadsheet">
+      <div class="inre">
+        <p class="delmarke">Part 3 <span>· The pattern</span></p>
+        <h2>Can you see the <em>number</em>?</h2>
+        <p class="prompt">Here is your column <b>rate · time</b> from all your measurements so far.</p>
+        <div class="kort-rad" id="monster-kort"></div>
+        <div class="fraga">
+          <p class="q"><span class="qn">9</span><span>Include all measurements, also the low rates. Which whole number does <b>rate · time</b> end up close to?</span></p>
+          <div class="svar-rad"><span>About</span><input id="q9" class="stort-tal" type="text" inputmode="numeric" data-spara aria-label="The number"><button class="knapp" type="button" id="q9k">Check</button></div>
+          <div class="aterkoppling" id="q9-svar" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 REGELN -->
+    <section class="skarm" data-skarm="regel" data-del="Rule" data-bank="ja" data-forbered="10000,24,2,10,kalkyl">
+      <div class="inre">
+        <div class="uppgift">
+          <p class="delmarke">Part 4 <span>· Formulate a rule · 10 min</span></p>
+          <h2>Your <em>own</em> rule</h2>
+          <div class="koppling">
+            <div class="koppling-rubrik">This is what you found on the previous page</div>
+            <p class="koppling-formel"><b>rate · doubling time</b> ≈ <span id="kopp-tal">72</span></p>
+            <p class="koppling-text">But you want to be able to work out the <b>doubling time</b>. How do you get the doubling time on its own? What should you do with the interest rate?</p>
+          </div>
+          <div class="fraga">
+            <p class="q"><span class="qn">10</span><span>Write your rule.</span></p>
+            <div class="svar-rad"><span>Doubling time ≈</span><input id="q10" class="stort-tal" type="text" inputmode="numeric" data-spara aria-label="The number in the rule"><span>/ interest rate</span></div>
+            <div class="aterkoppling" id="q10-prov" aria-live="polite"></div>
+            <details class="hjalp"><summary>Hint</summary><div>Think of an example. If 6 · doubling time = 72, how do you work out the doubling time? Do the same with any interest rate.</div></details>
+            <details class="hjalp" data-kraver="q10" data-min="2"><summary>Why 72?</summary><div>Your values for rate · time lie between about 70 and 73. People usually choose 72 because it can be divided evenly by 2, 3, 4, 6, 8, 9 and 12. That makes it easy to calculate in your head: 72 / 6 = 12 years.</div></details>
+          </div>
+          <div class="fraga">
+            <p class="q"><span class="qn">11</span><span>Test your rule at 24&nbsp;% interest. You need the time to one decimal place, just like in Part 2.</span></p>
+            <ol class="steg-lista">
+              <li>Set 24&nbsp;% in the Interest Lab, for example with the button <b>High rate: 24&nbsp;%</b>.</li>
+              <li>Choose <b>Spreadsheet</b> and find the first whole year in which the amount reaches the target. Click that row.</li>
+              <li>Choose the step <b>0.1 years</b> and find the first tenth in which the target is reached.</li>
+            </ol>
+            <div class="svar-rad">
+              <span>The rule says</span><strong id="q11regel">–</strong><span>years.</span>
+              <label for="q11">The Interest Lab shows</label><input id="q11" type="text" inputmode="decimal" data-spara placeholder="_._" style="width:90px;text-align:right"><span>years <b>(one decimal)</b></span>
+              <button class="knapp" type="button" id="q11k">Check</button>
+            </div>
+            <div class="aterkoppling" id="q11-svar" aria-live="polite"></div>
+            <textarea id="q11t" data-spara placeholder="When does the rule work well, and when does it work less well?" aria-label="When does the rule work well?" style="margin-top:14px"></textarea>
+            <details class="hjalp" data-kraver="q11t"><summary>Compare</summary><div>The rule works well for low rates, about 2 to 10&nbsp;%. There rate · time lies between 70 and 73. At 24&nbsp;% the rule says 3 years, but it takes 3.2 years, so rate · time is 77. The higher the rate, the worse the rule fits.</div></details>
+          </div>
+        </div>
+        <div class="bank-plats"></div>
+      </div>
+    </section>
+
+    <!-- 8 EKVATIONER -->
+    <section class="skarm" data-skarm="ekvationer" data-del="Equations" data-bank="ja" data-forbered="10000,6,2,15,kalkyl">
+      <div class="inre">
+        <div class="uppgift">
+          <p class="delmarke">Part 5 <span>· From interest to equations · 10 min</span></p>
+          <h2>Equations you cannot solve <em>by hand</em></h2>
+          <p class="prompt">The equation <span class="formel">1.06<sup>x</sup> = 2</span> asks the same question that you have explored: how many times <i>x</i> do you have to multiply by the growth factor 1.06 to get 2?</p>
+          <div class="fraga">
+            <p class="q"><span class="qn">12</span><span>First try to solve <span class="formel">1.06<sup>x</sup> = 2</span> with the methods you have learned so far. What happens?</span></p>
+            <textarea id="q12" data-spara aria-label="Question 12" style="min-height:70px"></textarea>
+          </div>
+          <div class="fraga">
+            <p class="q"><span class="qn">13</span><span>Use the Interest Lab to find an approximate value of <i>x</i> to one decimal place. First translate each equation: which interest rate and which target should you set?</span></p>
+            <div class="tabell-wrap">
+              <table class="svar" id="t13">
+                <thead><tr><th>Equation</th><th>Interest rate (%)</th><th>Target (times the deposit)</th><th>x ≈ (one decimal)</th></tr></thead>
+                <tbody>
+                  <tr data-r="6" data-mal="2" data-f="1.06" data-ekv="1.06^x = 2"><td><span class="formel">1.06<sup>x</sup> = 2</span></td><td><input type="text" inputmode="decimal" aria-label="Interest rate for 1.06 to the power of x = 2" data-spara id="t13ar" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="Target for 1.06 to the power of x = 2" data-spara id="t13am" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="x for 1.06 to the power of x = 2" data-spara id="t13a" data-x></td></tr>
+                  <tr data-r="3" data-mal="5" data-f="1.03" data-ekv="1.03^x = 5"><td><span class="formel">1.03<sup>x</sup> = 5</span></td><td><input type="text" inputmode="decimal" aria-label="Interest rate for 1.03 to the power of x = 5" data-spara id="t13br" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="Target for 1.03 to the power of x = 5" data-spara id="t13bm" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="x for 1.03 to the power of x = 5" data-spara id="t13b" data-x></td></tr>
+                  <tr data-r="25" data-mal="10" data-f="1.25" data-ekv="1.25^x = 10"><td><span class="formel">1.25<sup>x</sup> = 10</span></td><td><input type="text" inputmode="decimal" aria-label="Interest rate for 1.25 to the power of x = 10" data-spara id="t13cr" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="Target for 1.25 to the power of x = 10" data-spara id="t13cm" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="x for 1.25 to the power of x = 10" data-spara id="t13c" data-x></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <details class="hjalp"><summary>Hint</summary><div>The growth factor 1.06 means the interest rate 6&nbsp;%. Equal to 2 means that the amount has been multiplied by 2, so the target is 2 times the deposit. Type the target in the box <b>Target</b> in the Interest Lab. Do not forget to zoom in with the step 0.1 years.</div></details>
+            <div class="kontroll"><button class="knapp" type="button" data-kontrollera="t13">Check</button></div>
+            <div class="aterkoppling" id="t13-svar" aria-live="polite"></div>
+          </div>
+        </div>
+        <div class="bank-plats"></div>
+      </div>
+    </section>
+
+    <!-- 9 REFLEKTERA -->
+    <section class="skarm" data-skarm="reflektera" data-del="Reflect">
+      <div class="inre" style="max-width:820px">
+        <p class="delmarke">Part 6 <span>· Reflect · 5 min</span></p>
+        <h2>What did the <em>tool</em> do, and what did you do?</h2>
+        <div class="fraga">
+          <p class="q"><span class="qn">14</span><span>What could you do with the Interest Lab that you could not have done by hand?</span></p>
+          <textarea id="q12v" data-spara aria-label="Question 14"></textarea>
+        </div>
+        <div class="fraga">
+          <p class="q"><span class="qn">15</span><span>What did the Interest Lab <b>not</b> help you with? What did you need to understand yourselves?</span></p>
+          <textarea id="q13" data-spara aria-label="Question 15"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 UTMANING -->
+    <section class="skarm" data-skarm="utmaning" data-del="Challenge" data-bank="ja" data-forbered="10000,3,3,50,kalkyl">
+      <div class="inre">
+        <div class="uppgift">
+          <p class="delmarke">Challenge</p>
+          <h2><em>Triple</em> your money</h2>
+          <div class="forberedd"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 7.5 5.5 11 12 3"/></svg>The Interest Lab's target is now three times the deposit</div>
+          <div class="fraga">
+            <p class="q"><span class="qn">16</span><span>How long does it take to triple your money?</span></p>
+            <div class="tabell-wrap">
+              <table class="svar" id="t14">
+                <thead><tr><th>Interest rate (%)</th><th>Tripling time (years, one decimal)</th><th>Rate · time</th></tr></thead>
+                <tbody>
+                  <tr data-r="3" data-mal="3"><td>3</td><td><input type="text" inputmode="decimal" aria-label="3 %, years to triple" data-spara id="t14a"></td><td class="auto"></td></tr>
+                  <tr data-r="6" data-mal="3"><td>6</td><td><input type="text" inputmode="decimal" aria-label="6 %, years to triple" data-spara id="t14b"></td><td class="auto"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="kontroll"><button class="knapp" type="button" data-kontrollera="t14">Check</button></div>
+            <div class="aterkoppling" id="t14-svar" aria-live="polite"></div>
+          </div>
+          <div class="fraga">
+            <p class="q"><span class="qn">17</span><span>Is there a tripling rule in the same way? Which number should it contain?</span></p>
+            <textarea id="q15" data-spara aria-label="Question 17"></textarea>
+          </div>
+        </div>
+        <div class="bank-plats"></div>
+      </div>
+    </section>
+
+    <!-- 11 KLART -->
+    <section class="skarm" data-skarm="klart" data-del="Done">
+      <div class="inre">
+        <p class="delmarke">Done</p>
+        <h2>This is what you <em>found</em></h2>
+        <div class="kort-rad" id="resultat-kort"></div>
+        <p class="prompt">Your answers stay in this browser. Nothing has been sent anywhere. Copy your answers and paste them where your teacher wants them, or print the page.</p>
+        <div class="slut">
+          <button class="knapp prim" type="button" id="kopiera">Copy my answers</button>
+          <button class="knapp" type="button" id="skriv-ut">Print</button>
+          <button class="knapp" type="button" id="borja-om">Start again</button>
+          <span class="bekrafta" id="borja-om-fraga" hidden>Delete all answers? <button class="knapp" type="button" id="borja-om-ja">Yes, delete</button><button class="knapp" type="button" id="borja-om-nej">Cancel</button></span>
+          <span class="statusrad" id="kopiera-status" aria-live="polite"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- LABORATIONSBÄNKEN (flyttas till aktuell .bank-plats) -->
+    <div class="bank" id="bank" hidden>
+      <div class="bank-huvud">
+        <h3>Interest Lab</h3>
+        <span class="avlast-kort" id="bank-sammanfattning"></span>
+      </div>
+      <div class="bank-kropp">
+        <div class="forsok" aria-label="Ready-made experiments">
+          <button type="button" data-forsok="10000,6,2,20">10,000&nbsp;kr, 6&nbsp;%</button>
+          <button type="button" data-forsok="50000,6,2,20">50,000&nbsp;kr, 6&nbsp;%</button>
+          <button type="button" data-forsok="10000,12,2,20">Double the rate: 12&nbsp;%</button>
+          <button type="button" data-forsok="10000,2,2,80">Low rate: 2&nbsp;%</button>
+          <button type="button" data-forsok="10000,24,2,10">High rate: 24&nbsp;%</button>
+        </div>
+        <div class="reglage">
+          <label for="b-k">Deposit</label>
+          <input id="b-k-r" type="range" min="1000" max="100000" step="1000" aria-label="Deposit, slider">
+          <span><input id="b-k" type="number" min="1" max="10000000" step="1"> <span class="enhet">kr</span></span>
+          <label for="b-r">Interest rate</label>
+          <input id="b-r-r" type="range" min="0.5" max="30" step="0.5" aria-label="Interest rate, slider">
+          <span><input id="b-r" type="number" min="0.1" max="100" step="0.1"> <span class="enhet">%</span></span>
+          <label for="b-n">Show years</label>
+          <input id="b-n-r" type="range" min="1" max="150" step="1" aria-label="Number of years shown, slider">
+          <span><input id="b-n" type="number" min="1" max="150" step="1"> <span class="enhet">years</span></span>
+          <label for="b-m">Target</label>
+          <span class="mal-rad"><input id="b-m" type="number" min="1.1" max="1000" step="0.1"> <span class="enhet">times the deposit</span></span>
+        </div>
+        <div class="flikar" role="group" aria-label="View">
+          <button type="button" id="vy-diagram" aria-pressed="true">Diagram</button>
+          <button type="button" id="vy-kalkyl" aria-pressed="false">Spreadsheet</button>
+        </div>
+        <div class="bank-notis" id="bank-notis" hidden></div>
+        <div class="diagram-wrap" id="diagram-wrap">
+          <svg id="diagram" viewBox="0 0 520 300" role="img" aria-label="Bar chart of the amount year by year"></svg>
+        </div>
+        <div class="kalkyl" id="kalkyl" hidden>
+          <div class="kalkyl-steg">
+            <span>Step</span>
+            <button type="button" data-steg="1" aria-pressed="true">1 year</button>
+            <button type="button" data-steg="0.1" aria-pressed="false">0.1 years</button>
+            <span id="fran-wrap" hidden><button type="button" data-flytta="-1" aria-label="One year earlier">‹</button> <label>from year <input id="b-fran" type="number" min="0" max="149" step="1"></label> <button type="button" data-flytta="1" aria-label="One year later">›</button></span>
+            <span class="mal-info" id="kalkyl-mal"></span>
+          </div>
+          <div class="formelrad"><span class="ref" id="fx-ref">B3</span><span class="fx">fx</span><span class="inne" id="fx-inne"></span></div>
+          <div class="kalkyl-rulla" id="kalkyl-rulla">
+            <table><thead><tr><th></th><th>A: Year</th><th>B: Amount (kr)</th></tr></thead><tbody id="kalkyl-kropp"></tbody></table>
+          </div>
+        </div>
+        <div class="avlasning" id="avlasning" aria-live="polite"></div>
+        <div class="kedja" id="kedja" aria-live="polite"></div>
+      </div>
+      <div class="las-overlagg" id="las-overlagg">
+        <div><h4>Guess first</h4><p>The Interest Lab opens when you have answered Part 1.</p><button class="knapp prim" type="button" data-gaTill="gissa">To Part 1</button></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOTEN -->
+  <footer class="fot">
+    <button class="knapp" type="button" id="tillbaka">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M9 2 4 7l5 5"/></svg> Back
+    </button>
+    <div class="mitt">
+      <div class="vaxel" id="vaxel" role="group" aria-label="Show">
+        <button type="button" data-vy="uppgift" aria-pressed="true">Task</button>
+        <button type="button" data-vy="bank" aria-pressed="false">Interest Lab</button>
+      </div>
+      <span class="raknare" id="raknare"></span>
+    </div>
+    <button class="knapp prim" type="button" id="nasta">
+      <span id="nasta-txt">Next</span>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 2l5 5-5 5"/></svg>
+    </button>
+  </footer>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var NYCKEL = 'fysiklabbet.doubling.v1';
+  function $(id) { return document.getElementById(id); }
+
+  /* ---------- Formatering (svensk) ---------- */
+  function fmtNum(n, d) {
+    var s = n.toFixed(d);
+    if (parseFloat(s) === 0) return '0';
+    var delar = s.split('.');
+    var heltal = delar[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return delar.length > 1 ? heltal + '.' + delar[1] : heltal;
+  }
+  function fmtKort(n) { return fmtNum(n, 2).replace(/\.00$/, ''); }
+  function fmtEn(n) { return fmtNum(n, 1).replace(/\.0$/, ''); }
+  function exaktTid(r, mal) { return Math.log(mal) / Math.log(1 + r / 100); }
+  function lasTal(str) {
+    if (str == null) return NaN;
+    var t = String(str).replace(/[\s ]/g, '').replace(',', '.');
+    return t === '' ? NaN : Number(t);
+  }
+
+  /* ---------- Matematiken ---------- */
+  function forsta(r, mal) {
+    var f = 1 + r / 100, p = 1, n = 0;
+    while (p < mal - 1e-12 && n < 2000) { p *= f; n++; }
+    return n;
+  }
+
+  /* ---------- Sparat tillstånd ---------- */
+  var svar = {};
+  try { svar = JSON.parse(localStorage.getItem(NYCKEL) || '{}') || {}; } catch (e) { svar = {}; }
+  function spara() { try { localStorage.setItem(NYCKEL, JSON.stringify(svar)); } catch (e) {} }
+
+  [].slice.call(document.querySelectorAll('[data-spara]')).forEach(function (el) {
+    var key = el.type === 'radio' ? el.name : el.id;
+    if (el.type === 'radio') { if (svar[key] === el.value) el.checked = true; }
+    else if (svar[key] != null) el.value = svar[key];
+    el.addEventListener(el.type === 'radio' ? 'change' : 'input', function () {
+      svar[key] = el.value; spara(); uppdateraAllt();
+    });
+  });
+  var namn = $('namn');
+  if (svar.namn) namn.value = svar.namn;
+  namn.addEventListener('input', function () { svar.namn = namn.value; spara(); });
+
+  /* ---------- Skärmarna ---------- */
+  var skarmar = [].slice.call(document.querySelectorAll('.skarm'));
+  var ordning = skarmar.map(function (s) { return s.dataset.skarm; });
+  var delar = [];
+  skarmar.forEach(function (s, i) {
+    var d = s.dataset.del;
+    if (!delar.length || delar[delar.length - 1].namn !== d) delar.push({ namn: d, forsta: i, sista: i });
+    else delar[delar.length - 1].sista = i;
+  });
+  var nu = Math.max(0, ordning.indexOf(svar.skarm || 'start'));
+  var mobil = window.matchMedia('(max-width: 900px)');
+
+  // Stegraden överst: en stapel per del, fylls efter hur långt eleven har kommit i delen.
+  var spar = $('spar');
+  delar.forEach(function (d, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.innerHTML = '<span class="stapel"><i></i></span><span class="etikett">' + d.namn + '</span>';
+    b.setAttribute('aria-label', d.namn);
+    b.addEventListener('click', function () { visa(d.forsta); });
+    spar.appendChild(b);
+    d.knapp = b;
+  });
+  function ritaSpar() {
+    delar.forEach(function (d) {
+      var antal = d.sista - d.forsta + 1;
+      var klara = Math.min(antal, Math.max(0, nu - d.forsta + 1));
+      d.knapp.querySelector('i').style.width = (klara / antal * 100) + '%';
+      d.knapp.classList.toggle('aktiv', nu >= d.forsta && nu <= d.sista);
+      d.knapp.setAttribute('aria-current', nu >= d.forsta && nu <= d.sista ? 'step' : 'false');
+    });
+  }
+
+  var forstaVisning = true;
+  function visa(i, riktning) {
+    if (i < 0 || i >= skarmar.length) return;
+    var bakat = riktning === -1 || (riktning == null && i < nu);
+    skarmar.forEach(function (s) { s.classList.remove('aktiv', 'bakat'); });
+    nu = i;
+    var s = skarmar[i];
+    s.classList.add('aktiv');
+    if (bakat) s.classList.add('bakat');
+    s.scrollTop = 0;
+    svar.skarm = s.dataset.skarm; spara();
+
+    // Räntelabbet flyttas till skärmens plats, och förbereds första gången.
+    var plats = s.querySelector('.bank-plats');
+    if (plats) {
+      plats.appendChild($('bank'));
+      $('bank').hidden = false;
+      if (s.dataset.forbered && !(svar.forberett || {})[s.dataset.skarm]) {
+        var v = s.dataset.forbered.split(',');
+        satBank(Number(v[0]), Number(v[1]), Number(v[2]), Number(v[3]), v[4]);
+        svar.forberett = svar.forberett || {}; svar.forberett[s.dataset.skarm] = true; spara();
+      }
+      $('kedja').classList.toggle('lyft', s.dataset.lyft === 'kedja');
+      s.dataset.vy = s.dataset.vy || 'uppgift';
+      ritaBank();
+    }
+    $('vaxel').classList.toggle('syns', !!plats);
+    satVaxel(plats ? s.dataset.vy : 'uppgift');
+
+    $('tillbaka').disabled = i === 0;
+    $('raknare').textContent = (i + 1) + ' / ' + skarmar.length;
+    $('nasta').hidden = i === skarmar.length - 1;
+    $('nasta-txt').textContent = s.dataset.skarm === 'start' ? 'Start' : s.dataset.skarm === 'gissa' && !svar.last ? 'Lock my guesses' : 'Next';
+    if (s.dataset.skarm === 'monster') ritaMonster();
+    if (s.dataset.skarm === 'klart') ritaResultat();
+    if (s.dataset.skarm === 'gissa') visaLasText();
+    ritaSpar();
+    // Fokus flyttas till rubriken vid stegbyte (för skärmläsare), men inte när sidan laddas.
+    var h = s.querySelector('h1, h2'); if (h && !forstaVisning) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+    forstaVisning = false;
+  }
+  function satVaxel(vy) {
+    var s = skarmar[nu];
+    if (s.dataset.bank === 'ja') s.dataset.vy = vy;
+    [].slice.call($('vaxel').querySelectorAll('button')).forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.vy === vy)); });
+    if (vy === 'bank') ritaBank();
+  }
+  $('vaxel').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) satVaxel(b.dataset.vy); });
+
+  function nasta() {
+    var s = skarmar[nu];
+    if (s.dataset.skarm === 'gissa' && !svar.last) {
+      if (!gissningarKlara()) { visaLasText(true); return; }
+      svar.last = true; spara(); lasGissningar(true);
+    }
+    visa(nu + 1, 1);
+  }
+  $('nasta').addEventListener('click', nasta);
+  $('tillbaka').addEventListener('click', function () { visa(nu - 1, -1); });
+  document.querySelectorAll('[data-gaTill]').forEach(function (b) {
+    b.addEventListener('click', function () { visa(ordning.indexOf(b.dataset.gatill || b.getAttribute('data-gaTill'))); });
+  });
+  document.addEventListener('keydown', function (e) {
+    var t = e.target.tagName;
+    if (t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT') return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); nasta(); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); visa(nu - 1, -1); }
+  });
+
+  $('helskarm').addEventListener('click', function () {
+    var d = document;
+    if (d.fullscreenElement) { d.exitFullscreen && d.exitFullscreen(); return; }
+    var el = d.documentElement;
+    var p = el.requestFullscreen ? el.requestFullscreen() : null;
+    if (p && p.catch) p.catch(function () {});
+  });
+
+  /* ---------- Del 1: gissa först ---------- */
+  function gissningarKlara() {
+    return !isNaN(lasTal($('g1').value)) && !!document.querySelector('input[name=g2]:checked') && !!document.querySelector('input[name=g3]:checked');
+  }
+  function lasGissningar(last) {
+    ['g1', 'g1t'].forEach(function (id) { $(id).disabled = last; });
+    document.querySelectorAll('input[name=g2], input[name=g3]').forEach(function (el) { el.disabled = last; });
+    $('las-overlagg').hidden = last;
+  }
+  function visaLasText(paminn) {
+    var ut = $('las-text');
+    ut.className = 'aterkoppling ' + (paminn ? 'nastan' : 'info');
+    if (svar.last) ut.textContent = 'Your guesses are locked. You will see them again on the last page, next to what you found.';
+    else ut.textContent = paminn ? 'Answer questions 1, 2 and 3 before you move on.' : 'When you move on, your guesses are locked.';
+  }
+
+  /* ---------- Tabeller ---------- */
+  function autoKolumn(tabellId) {
+    document.querySelectorAll('#' + tabellId + ' tbody tr').forEach(function (tr) {
+      var cell = tr.querySelector('td.auto');
+      if (!cell) return;
+      var t = lasTal(tr.querySelector('input').value), r = Number(tr.dataset.r);
+      cell.textContent = isNaN(t) ? '' : fmtEn(r * t);
+    });
+  }
+  function kontrolleraTabell(tabellId) {
+    var rader = [].slice.call(document.querySelectorAll('#' + tabellId + ' tbody tr'));
+    var inputVal = function (tr) { return tr.querySelector('input[data-x]') || tr.querySelector('input'); };
+    var alla = true, tomma = 0, felRad = null, helaAr = false, decimal = tabellId !== 't4';
+    rader.forEach(function (tr) {
+      var td = inputVal(tr).parentNode;
+      var v = lasTal(inputVal(tr).value);
+      var r = Number(tr.dataset.r), mal = Number(tr.dataset.mal || 2);
+      td.classList.remove('ratt', 'fel');
+      if (isNaN(v)) { tomma++; alla = false; return; }
+      var ok = decimal ? Math.abs(v - exaktTid(r, mal)) <= 0.1 + 1e-9 : v === forsta(r, mal);
+      if (tr.dataset.ekv) {
+        var ir = tr.querySelector('input[id$="r"]'), im = tr.querySelector('input[id$="m"]');
+        [[ir, r], [im, mal]].forEach(function (p) {
+          var pv = lasTal(p[0].value);
+          p[0].classList.remove('ratt', 'fel');
+          if (!isNaN(pv)) p[0].classList.add(pv === p[1] ? 'ratt' : 'fel');
+          if (isNaN(pv) || pv !== p[1]) { alla = false; if (!felRad) felRad = tr; }
+        });
+      }
+      if (ok) td.classList.add('ratt');
+      else {
+        td.classList.add('fel'); alla = false; if (!felRad) felRad = tr;
+        if (decimal && v === forsta(r, mal)) helaAr = true;
+      }
+    });
+    var ut = $(tabellId + '-svar');
+    ut.className = 'aterkoppling';
+    if (alla) {
+      ut.classList.add('bra');
+      ut.textContent = {
+        t4: 'Correct. Every deposit doubles during year 12. The deposit does not matter. On the next page you explain why.',
+        t6: 'Correct. Look at the column rate · time and type the whole number below.',
+        t8: 'Correct. Notice 2 %: after 35 years the amount is 1.9999 times the deposit, so the doubling happens just after 35 years.',
+        t14: 'Correct. Compare rate · time with the doubling. Which number do you end up close to now?',
+        t13: 'Correct. You have found approximate solutions to three equations that you cannot solve exactly with the methods you know today. Later you will learn logarithms, which give exact answers.'
+      }[tabellId];
+      svar[tabellId + 'ok'] = true; spara();
+    } else if (felRad && felRad.dataset.ekv) {
+      ut.classList.add('nastan');
+      ut.textContent = 'Not quite on the red row. Translate ' + felRad.dataset.ekv.replace('^', ' to the power of ') + ': which interest rate gives the growth factor ' + felRad.dataset.f + ', and which target means = ' + felRad.dataset.mal + '? Set them in the Interest Lab and zoom in with the step 0.1 years.';
+    } else if (helaAr) {
+      ut.classList.add('nastan');
+      ut.textContent = 'The red one is the first whole year. Click that row in the spreadsheet, choose the step 0.1 years and find the tenth in which the target is reached.';
+    } else if (felRad) {
+      ut.classList.add('nastan');
+      var k = felRad.dataset.k ? Number(felRad.dataset.k) : 10000, mal = Number(felRad.dataset.mal || 2);
+      ut.textContent = 'Not quite on the red row. Set ' + fmtKort(k) + ' kr and ' + felRad.dataset.r + ' % in the Interest Lab, and look for the first ' + (decimal ? 'year' : 'whole year') + ' in which the amount is at least ' + fmtKort(k * mal) + ' kr.' + (decimal ? ' Then zoom in with the step 0.1 years.' : ' The spreadsheet helps.');
+    } else {
+      ut.classList.add('info');
+      ut.textContent = 'Fill in ' + (tomma === 1 ? 'the empty box' : 'the empty boxes') + ' first.';
+    }
+  }
+  document.querySelectorAll('[data-kontrollera]').forEach(function (b) {
+    b.addEventListener('click', function () { kontrolleraTabell(b.dataset.kontrollera); });
+  });
+
+  /* ---------- Fråga 9 och 11 ---------- */
+  $('q6nk').addEventListener('click', function () {
+    var v = lasTal($('q6n').value), ut = $('q6n-svar');
+    ut.className = 'aterkoppling';
+    if (isNaN(v)) { ut.classList.add('info'); ut.textContent = 'Type a whole number first.'; return; }
+    if (v >= 70 && v <= 73) { ut.classList.add('bra'); ut.textContent = 'Yes, they all end up between about 70 and 73. Does that hold for low rates too? You find out in the next part.'; }
+    else { ut.classList.add('nastan'); ut.textContent = 'Look at the column rate · time again. Fill in every row and check the table first.'; }
+  });
+  $('q9k').addEventListener('click', function () {
+    var v = lasTal($('q9').value), ut = $('q9-svar');
+    ut.className = 'aterkoppling';
+    if (isNaN(v)) { ut.classList.add('info'); ut.textContent = 'Type a number first.'; return; }
+    if (v >= 69 && v <= 76) { ut.classList.add('bra'); ut.textContent = 'Yes. Rate · time ends up between about 70 and 73. The rule based on this is called the rule of 72.'; }
+    else { ut.classList.add('nastan'); ut.textContent = 'Look at the cards above again. Which number are most of them close to?'; }
+  });
+  function regelVarde() {
+    var c = lasTal($('q10').value);
+    $('q11regel').textContent = isNaN(c) || c <= 0 ? '–' : fmtKort(c / 24);
+    // Kopplingen till förra sidan: elevens eget tal från fråga 9 (eller från fråga 6).
+    var k = lasTal($('q9').value); if (isNaN(k)) k = lasTal($('q6n').value);
+    $('kopp-tal').textContent = isNaN(k) ? '___' : fmtKort(k);
+    // Provräkning: regeln vid 6 % jämförs med elevens egen mätning.
+    var ut = $('q10-prov');
+    if (isNaN(c) || c <= 0) { ut.className = 'aterkoppling'; ut.textContent = ''; return; }
+    var matt = lasTal($('t6c').value); if (isNaN(matt)) matt = Math.round(exaktTid(6, 2) * 10) / 10;
+    var regel = c / 6, nara = Math.abs(regel - matt) <= 0.6;
+    ut.className = 'aterkoppling ' + (nara ? 'bra' : 'nastan');
+    ut.textContent = 'Try the rule at 6 %: ' + fmtKort(c) + ' / 6 = ' + fmtKort(regel) + ' years. In the table you got ' + fmtEn(matt) + ' years. ' +
+      (nara ? 'That fits well.' : 'That does not fit. Look at the number in the box above and think about the hint.');
+  }
+  $('q11k').addEventListener('click', function () {
+    var v = lasTal($('q11').value), ut = $('q11-svar');
+    ut.className = 'aterkoppling';
+    if (isNaN(v)) { ut.classList.add('info'); ut.textContent = 'Type what the Interest Lab shows first.'; return; }
+    if (Math.abs(v - exaktTid(24, 2)) <= 0.1 + 1e-9) { ut.classList.add('bra'); ut.textContent = 'Correct, it takes about 3.2 years. Rate · time is 24 · 3.2 ≈ 77, some way from 72.'; svar.q11ok = true; spara(); }
+    else if (v === forsta(24, 2)) { ut.classList.add('nastan'); ut.textContent = '4 is the first whole year. Click the row for year 4, choose the step 0.1 years and find the tenth.'; }
+    else { ut.classList.add('nastan'); ut.textContent = 'Not quite. Look in the spreadsheet for the first year in which the amount reaches 20,000 kr, then zoom in with the step 0.1 years.'; }
+  });
+
+  /* ---------- Jämförelsetexter visas när eleven har skrivit ---------- */
+  function uppdateraJamforelser() {
+    document.querySelectorAll('details[data-kraver]').forEach(function (d) {
+      var el = $(d.dataset.kraver);
+      var ok = el && el.value.trim().length >= (d.dataset.min ? Number(d.dataset.min) : el.tagName === 'TEXTAREA' ? 15 : 3);
+      d.hidden = !ok;
+      if (!ok) d.open = false;
+    });
+  }
+  function uppdateraAllt() {
+    ['t6', 't8', 't14'].forEach(autoKolumn);
+    regelVarde(); uppdateraJamforelser();
+    if (skarmar[nu] && skarmar[nu].dataset.skarm === 'gissa') {
+      $('nasta-txt').textContent = svar.last ? 'Next' : 'Lock my guesses';
+    }
+  }
+
+  /* ---------- Mönsterskärmen ---------- */
+  function ritaMonster() {
+    var kort = [];
+    [['t6a', 4], ['t6b', 5], ['t6c', 6], ['t6d', 8], ['t6e', 9], ['t6f', 10], ['t8a', 1], ['t8b', 2], ['t8c', 3]].forEach(function (p) {
+      var t = lasTal($(p[0]).value);
+      if (!isNaN(t)) kort.push({ r: p[1], t: t });
+    });
+    kort.sort(function (a, b) { return a.r - b.r; });
+    $('monster-kort').innerHTML = kort.length ? kort.map(function (k) {
+      return '<div class="kort"><div class="rubrik">' + k.r + ' % · ' + fmtEn(k.t) + ' years</div><div class="varde">' + fmtEn(k.r * k.t) + '</div><p><b>rate · time</b></p></div>';
+    }).join('') : '<div class="kort"><p>Fill in the tables in Parts 2 and 3 first, and the results are collected here.</p></div>';
+  }
+
+  /* ---------- Resultatskärmen ---------- */
+  function ritaResultat() {
+    var g = lasTal(svar.g1), c = lasTal($('q10').value), b = lasTal($('q11').value);
+    var kort = [];
+    kort.push('<div class="kort"><div class="rubrik">Your guess, 6&nbsp;%</div><div class="varde">' + (isNaN(g) ? '–' : fmtKort(g)) + ' <small>years</small></div><p>It takes ' + fmtEn(exaktTid(6, 2)) + ' years to double the money, that is, during year 12.</p></div>');
+    kort.push('<div class="kort"><div class="rubrik">Does the deposit matter?</div><div class="varde">No</div><p>You guessed ' + (svar.g2 || 'nothing') + '. Every deposit doubles during year 12 at 6&nbsp;%.</p></div>');
+    kort.push('<div class="kort"><div class="rubrik">Your rule</div><div class="varde">' + (isNaN(c) ? '–' : fmtKort(c)) + ' <small>/ interest rate</small></div><p>The rule of 72: doubling time ≈ 72 / interest rate.</p></div>');
+    kort.push('<div class="kort"><div class="rubrik">The test at 24&nbsp;%</div><div class="varde">' + (isNaN(b) ? '–' : fmtKort(b)) + ' <small>years</small></div><p>The rule says 3 years, but it takes 3.2 years. The rule fits best for low rates.</p></div>');
+    $('resultat-kort').innerHTML = kort.join('');
+  }
+
+  /* ---------- Räntelabbet ---------- */
+  var bank = { k: 10000, r: 6, n: 20, mal: 2, vald: null, vy: 'diagram', steg: 1, fran: 0 };
+  if (svar.bank) { try { Object.assign(bank, svar.bank); bank.vald = null; } catch (e) {} }
+  var par = [['b-k', 'b-k-r', 'k', 1, 10000000], ['b-r', 'b-r-r', 'r', 0.1, 100], ['b-n', 'b-n-r', 'n', 1, 150]];
+  function synkaReglage() {
+    par.forEach(function (p) { $(p[0]).value = bank[p[2]]; $(p[1]).value = bank[p[2]]; });
+    $('b-m').value = String(bank.mal);
+  }
+  par.forEach(function (p) {
+    var tal = $(p[0]), reg = $(p[1]);
+    reg.addEventListener('input', function () { bank[p[2]] = Number(reg.value); tal.value = reg.value; bank.vald = null; ritaBank(); });
+    tal.addEventListener('change', function () {
+      var v = lasTal(tal.value);
+      if (isNaN(v)) { tal.value = bank[p[2]]; return; }
+      v = Math.min(p[4], Math.max(p[3], v));
+      if (p[2] === 'n') v = Math.round(v);
+      bank[p[2]] = v; tal.value = v; reg.value = v; bank.vald = null; ritaBank();
+    });
+  });
+  $('b-m').addEventListener('change', function () {
+    var v = lasTal($('b-m').value);
+    if (isNaN(v) || v <= 1) { $('b-m').value = bank.mal; return; }
+    bank.mal = Math.min(1000, v); $('b-m').value = bank.mal; bank.vald = null; ritaBank();
+  });
+  function satBank(k, r, mal, n, vy) {
+    bank.k = k; bank.r = r; bank.mal = mal; bank.n = n; bank.vald = null; bank.steg = 1;
+    if (vy) bank.vy = vy;
+    synkaReglage(); satVyKnappar();
+  }
+  document.querySelectorAll('[data-forsok]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var v = b.dataset.forsok.split(',').map(Number);
+      satBank(v[0], v[1], v[2], v[3]); ritaBank();
+    });
+  });
+  // Steget 0,1 år: kalkylarket visar tiondels år, från ett helt år och två år framåt.
+  document.querySelectorAll('[data-steg]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var ny = Number(b.dataset.steg);
+      if (ny === bank.steg) return;
+      // Zooma in runt den markerade raden, annars runt den rad som syns mitt i kalkylarket.
+      if (ny < 1) {
+        var ar = bank.vald;
+        if (ar == null) {
+          var rulla = $('kalkyl-rulla'), rad = rulla.querySelector('tbody tr'), huvud = rulla.querySelector('thead');
+          ar = rad ? Math.floor((rulla.scrollTop + rulla.clientHeight / 2 - huvud.offsetHeight) / rad.offsetHeight) : 0;
+        }
+        bank.fran = Math.min(149, Math.max(0, ar - 1));
+      }
+      bank.steg = ny; bank.vald = null; ritaBank();
+    });
+  });
+  document.querySelectorAll('[data-flytta]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      bank.fran = Math.min(149, Math.max(0, bank.fran + Number(b.dataset.flytta)));
+      bank.vald = null; ritaBank();
+    });
+  });
+  $('b-fran').addEventListener('change', function () {
+    var v = Math.round(lasTal($('b-fran').value));
+    if (!isNaN(v)) bank.fran = Math.min(149, Math.max(0, v));
+    bank.vald = null; ritaBank();
+  });
+  function satVyKnappar() {
+    $('vy-diagram').setAttribute('aria-pressed', String(bank.vy === 'diagram'));
+    $('vy-kalkyl').setAttribute('aria-pressed', String(bank.vy === 'kalkyl'));
+    $('diagram-wrap').hidden = bank.vy !== 'diagram';
+    $('kalkyl').hidden = bank.vy !== 'kalkyl';
+  }
+  $('vy-diagram').addEventListener('click', function () { bank.vy = 'diagram'; satVyKnappar(); ritaBank(); });
+  $('vy-kalkyl').addEventListener('click', function () { bank.vy = 'kalkyl'; satVyKnappar(); ritaBank(); });
+
+  function belopp() {
+    var f = 1 + bank.r / 100, v = [bank.k];
+    for (var i = 1; i <= bank.n; i++) v.push(v[i - 1] * f);
+    return v;
+  }
+  function faktorText() {
+    var s = (1 + bank.r / 100).toFixed(4).replace(/0+$/, '').replace(/\.$/, '');
+    if (s.indexOf('.') < 0) s += '.0';
+    return s;
+  }
+  function ritaKedja() {
+    var fs = faktorText(), p = Math.pow(1 + bank.r / 100, bank.n), ff = '<span class="f">' + fs + '</span>';
+    var kedja = bank.n <= 3 ? new Array(bank.n + 1).join(ff + ' · ').replace(/ · $/, '') : ff + ' · ' + ff + ' · … · ' + ff + ' (' + bank.n + ' factors)';
+    $('kedja').innerHTML = '<span class="kedja-rubrik">How many times larger?</span>Growth factor <b>' + fs + '</b>. After ' + bank.n + ' years the amount has been multiplied by<div class="rad">' + kedja + ' = <span class="p">' + fmtNum(p, 4) + '</span></div>Amount: ' + fmtKort(bank.k) + ' kr · ' + fmtNum(p, 4) + ' = ' + fmtNum(bank.k * p, 2) + ' kr';
+  }
+  function svgEl(tag, attr, text) {
+    var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var a in attr) el.setAttribute(a, attr[a]);
+    if (text != null) el.textContent = text;
+    return el;
+  }
+  function trevligtSteg(max) {
+    var grov = max / 5, p = Math.pow(10, Math.floor(Math.log10(grov))), m = grov / p;
+    return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10) * p;
+  }
+  function ritaDiagram(v) {
+    var el = $('diagram');
+    while (el.firstChild) el.removeChild(el.firstChild);
+    // Smal panel: mindre rityta i viewBox-enheter, så att texten blir läsbar.
+    var bredd = el.parentNode.clientWidth;
+    var smal = bredd > 0 && bredd < 440;
+    var W = smal ? 360 : 520, H = smal ? 250 : 300, L = smal ? 60 : 70, R = 12, T = 26, B = 34;
+    el.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var PW = W - L - R, PH = H - T - B, mal = bank.k * bank.mal;
+    var max = Math.max(v[v.length - 1], mal) * 1.08, steg = trevligtSteg(max), topp = Math.ceil(max / steg) * steg;
+    var y = function (x) { return T + PH - (x / topp) * PH; };
+    for (var t = 0; t <= topp + 1e-9; t += steg) {
+      el.appendChild(svgEl('line', { x1: L, x2: L + PW, y1: y(t), y2: y(t), stroke: 'rgba(15,22,32,0.08)' }));
+      el.appendChild(svgEl('text', { x: L - 8, y: y(t) + 4, 'text-anchor': 'end', 'font-size': 11, fill: '#69655c', 'font-family': 'JetBrains Mono, monospace' }, fmtKort(t)));
+    }
+    var N = v.length, kol = PW / N, bw = Math.max(2, Math.min(28, kol * 0.7)), etikettVar = Math.max(1, Math.ceil(N / 12));
+    v.forEach(function (b, i) {
+      var cx = L + kol * (i + 0.5);
+      el.appendChild(svgEl('rect', { x: cx - bw / 2, y: y(b), width: bw, height: Math.max(0, y(0) - y(b)), rx: 1.5, fill: bank.vald === i ? '#1c3d6b' : '#6f93c4' }));
+      el.appendChild(svgEl('rect', { x: L + kol * i, y: T, width: kol, height: PH, fill: 'transparent', 'data-i': i, style: 'cursor:pointer' }));
+      if (i % etikettVar === 0) el.appendChild(svgEl('text', { x: cx, y: H - 14, 'text-anchor': 'middle', 'font-size': 11, fill: '#69655c', 'font-family': 'JetBrains Mono, monospace' }, String(i)));
+    });
+    el.appendChild(svgEl('line', { x1: L, x2: L + PW, y1: y(0), y2: y(0), stroke: '#3f4a5c', 'stroke-width': 1.2 }));
+    el.appendChild(svgEl('line', { x1: L, x2: L + PW, y1: y(mal), y2: y(mal), stroke: '#c8324a', 'stroke-width': 1.6, 'stroke-dasharray': '6 5' }));
+    el.appendChild(svgEl('text', { x: L + 6, y: y(mal) - 6, 'font-size': 12, fill: '#c8324a', 'font-family': 'DM Sans, sans-serif', 'font-weight': 600 }, (bank.mal === 2 ? 'double the deposit' : bank.mal === 3 ? 'three times the deposit' : fmtKort(bank.mal) + ' times the deposit') + ': ' + fmtKort(mal) + ' kr'));
+    el.appendChild(svgEl('text', { x: L + PW, y: H - 2, 'text-anchor': 'end', 'font-size': 11, fill: '#69655c', 'font-family': 'DM Sans, sans-serif' }, 'year'));
+    el.appendChild(svgEl('text', { x: 4, y: 12, 'font-size': 11, fill: '#69655c', 'font-family': 'DM Sans, sans-serif' }, 'kr'));
+  }
+  function valjAr(i, v, ar) {
+    bank.vald = i;
+    var a = ar == null ? String(i) : fmtNum(ar, 1);
+    $('avlasning').textContent = 'Year ' + a + ': ' + fmtNum(v[i], 2) + ' kr, that is, ' + fmtNum(v[i] / bank.k, 4) + ' times the deposit.';
+  }
+  function tiondelar() {
+    var f = 1 + bank.r / 100, rader = [];
+    for (var j = 0; j <= 20; j++) { var t = bank.fran + j / 10; rader.push({ t: t, b: bank.k * Math.pow(f, t) }); }
+    return rader;
+  }
+  function diagramPek(e, alltid) {
+    var i = e.target.getAttribute && e.target.getAttribute('data-i');
+    if (i == null || (!alltid && e.pointerType === 'touch')) return;
+    var v = belopp(); valjAr(Number(i), v); ritaDiagram(v);
+  }
+  $('diagram').addEventListener('pointermove', function (e) { diagramPek(e, false); });
+  $('diagram').addEventListener('click', function (e) { diagramPek(e, true); });
+
+  function ritaKalkyl(v) {
+    var kropp = $('kalkyl-kropp'), fin = bank.steg < 1;
+    kropp.innerHTML = '';
+    document.querySelectorAll('[data-steg]').forEach(function (b) { b.setAttribute('aria-pressed', String(Number(b.dataset.steg) === bank.steg)); });
+    $('fran-wrap').hidden = !fin;
+    $('b-fran').value = bank.fran;
+    $('kalkyl-mal').textContent = 'Target: ' + fmtKort(bank.k * bank.mal) + ' kr';
+    if (fin) {
+      var rader = tiondelar(), bv = rader.map(function (x) { return x.b; });
+      rader.forEach(function (x, j) {
+        var tr = document.createElement('tr');
+        if (bank.vald === j) tr.className = 'vald';
+        tr.innerHTML = '<td class="radnr">' + (j + 2) + '</td><td class="tal">' + fmtNum(x.t, 1) + '</td><td class="tal">' + fmtNum(x.b, 2) + '</td>';
+        tr.addEventListener('click', function () {
+          valjAr(j, bv, x.t); visaFormelFin(j, x.t);
+          kropp.querySelectorAll('tr.vald').forEach(function (r) { r.classList.remove('vald'); });
+          tr.classList.add('vald');
+        });
+        kropp.appendChild(tr);
+      });
+      var vj = bank.vald == null ? 0 : bank.vald;
+      visaFormelFin(vj, rader[vj].t);
+      $('kalkyl-rulla').scrollTop = 0;
+      return;
+    }
+    v.forEach(function (b, i) {
+      var tr = document.createElement('tr');
+      if (bank.vald === i) tr.className = 'vald';
+      tr.innerHTML = '<td class="radnr">' + (i + 2) + '</td><td class="tal">' + i + '</td><td class="tal">' + fmtNum(b, 2) + '</td>';
+      tr.addEventListener('click', function () {
+        valjAr(i, v); visaFormel(i);
+        kropp.querySelectorAll('tr.vald').forEach(function (r) { r.classList.remove('vald'); });
+        tr.classList.add('vald');
+      });
+      kropp.appendChild(tr);
+    });
+    visaFormel(bank.vald == null ? Math.min(1, v.length - 1) : bank.vald);
+  }
+  function visaFormelFin(j, t) {
+    $('fx-ref').textContent = 'B' + (j + 2);
+    $('fx-inne').textContent = '= ' + bank.k + ' · ' + faktorText() + '^A' + (j + 2) + '   (A' + (j + 2) + ' = ' + fmtNum(t, 1) + ')';
+  }
+  function visaFormel(i) {
+    $('fx-ref').textContent = 'B' + (i + 2);
+    $('fx-inne').textContent = i === 0 ? String(bank.k) : '= B' + (i + 1) + ' · ' + faktorText();
+  }
+  function ritaBank() {
+    if ($('bank').hidden) return;
+    var v = belopp();
+    ritaKedja();
+    if (bank.vy === 'diagram') ritaDiagram(v); else ritaKalkyl(v);
+    if (bank.vald == null) $('avlasning').textContent = bank.vy === 'diagram' ? 'Point at or tap a bar to read the amount.'
+      : bank.steg < 1 ? 'Tenths of a year from year ' + bank.fran + ' to ' + (bank.fran + 2) + '. Find the first row in which the amount reaches the target.'
+      : 'Click a row to see the formula. Then click the step 0.1 years to see tenths around the row.';
+    // Når beloppet inte målet inom de år som visas säger Räntelabbet det, i stället för att eleven letar förgäves.
+    var notis = $('bank-notis'), behov = forsta(bank.r, bank.mal);
+    var fin = bank.vy === 'kalkyl' && bank.steg < 1, x = exaktTid(bank.r, bank.mal);
+    notis.hidden = false;
+    if (fin && x > bank.fran + 2) notis.textContent = 'The amount does not reach the target before year ' + (bank.fran + 2) + '. Go to later years with the arrow ›, or type another year.';
+    else if (fin && x < bank.fran) notis.textContent = 'The amount has already reached the target at year ' + bank.fran + '. Go to earlier years with the arrow ‹, or type another year.';
+    else if (!fin && behov > bank.n) notis.textContent = 'The amount does not reach the target within ' + bank.n + ' years. Increase Show years' + (behov > 150 ? ', or choose a higher rate.' : '.');
+    else notis.hidden = true;
+    $('bank-sammanfattning').textContent = fmtKort(bank.k) + ' kr · ' + fmtKort(bank.r) + ' %';
+    svar.bank = { k: bank.k, r: bank.r, n: bank.n, mal: bank.mal, vy: bank.vy, steg: bank.steg, fran: bank.fran }; spara();
+  }
+  window.addEventListener('resize', function () { ritaBank(); });
+
+  /* ---------- Startskärmens dekor: staplar som växer mot den streckade linjen ---------- */
+  (function () {
+    var g = $('dekor-staplar'); if (!g) return;
+    for (var i = 0; i <= 14; i++) {
+      var h = 80 * Math.pow(1.06, i * 0.86 + 0.0);
+      var x = 30 + i * 38, top = 330 - h;
+      g.appendChild(svgEl('rect', { x: x, y: top, width: 26, height: h, rx: 2, fill: h >= 158 ? '#1c3d6b' : '#6f93c4', opacity: 0.9 }));
+    }
+  })();
+
+  /* ---------- Slut: kopiera, skriv ut, börja om ---------- */
+  function textSammanstallning() {
+    var rad = ['How long does it take to double your money?', 'Names: ' + (namn.value || ''), ''];
+    rad.push('Question 1 (guess): ' + ($('g1').value || '') + ' years. ' + ($('g1t').value || ''));
+    rad.push('Question 2: ' + (svar.g2 || '') + '. Question 3: ' + (svar.g3 || ''));
+    function tab(id, rubrik) {
+      rad.push(rubrik);
+      document.querySelectorAll('#' + id + ' tbody tr').forEach(function (tr) {
+        var c = tr.querySelectorAll('td');
+        if (tr.dataset.ekv) { rad.push('  ' + tr.dataset.ekv + ': interest rate ' + ($(tr.querySelector('input').id).value || '') + ' %, target ' + (tr.querySelectorAll('input')[1].value || '') + ', x ≈ ' + (tr.querySelector('input[data-x]').value || '')); return; }
+        rad.push('  ' + c[0].textContent.replace(/ /g, ' ') + (tr.dataset.k ? ', ' + c[1].textContent.replace(/ /g, ' ') : ' %') + ': ' + (tr.querySelector('input').value || '') + ' years');
+      });
+    }
+    tab('t4', 'Question 4');
+    rad.push('Question 5: ' + $('q5').value);
+    tab('t6', 'Question 6');
+    rad.push('  Rate · time ends up close to: ' + $('q6n').value);
+    rad.push('Question 7: Amount = ' + $('q7u').value);
+    tab('t8', 'Question 8');
+    rad.push('Question 9: about ' + $('q9').value);
+    rad.push('Question 10: Doubling time ≈ ' + $('q10').value + ' / interest rate');
+    rad.push('Question 11: The Interest Lab shows ' + $('q11').value + ' years at 24 %. ' + $('q11t').value);
+    rad.push('Question 12: ' + $('q12').value);
+    tab('t13', 'Question 13 (equations)');
+    rad.push('Question 14: ' + $('q12v').value);
+    rad.push('Question 15: ' + $('q13').value);
+    tab('t14', 'Question 16 (tripling)');
+    rad.push('Question 17: ' + $('q15').value);
+    return rad.join('\n');
+  }
+  $('kopiera').addEventListener('click', function () {
+    var text = textSammanstallning(), st = $('kopiera-status');
+    function klart() { st.textContent = 'Your answers have been copied.'; }
+    function reserv() {
+      var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); klart(); } catch (e) { st.textContent = 'Copying failed. Print the page instead.'; }
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(klart, reserv);
+    else reserv();
+  });
+  $('skriv-ut').addEventListener('click', function () { window.print(); });
+  $('borja-om').addEventListener('click', function () { $('borja-om-fraga').hidden = false; });
+  $('borja-om-nej').addEventListener('click', function () { $('borja-om-fraga').hidden = true; });
+  $('borja-om-ja').addEventListener('click', function () {
+    try { localStorage.removeItem(NYCKEL); } catch (e) {}
+    location.reload();
+  });
+
+  /* ---------- Start ---------- */
+  synkaReglage(); satVyKnappar();
+  lasGissningar(!!svar.last);
+  uppdateraAllt();
+  visa(nu, 1);
+})();
+</script>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

@@ -297,7 +297,7 @@ window.NP_PROV['ma3c-vt2018'] = {
 
         {
             nr: 6, del: 'B', poang: [0, 1, 0], omrade: 'Rationella uttryck: när ett uttryck inte är definierat',
-            genomgangar: ['ma3c-1.1'],
+            genomgangar: ['ma3c-1.3'],
             endastSvar: true,
             fraga: 'Ge ett exempel på ett uttryck som inte är definierat för $x = 7$ och $x = -5$',
             figur: null,
@@ -326,7 +326,7 @@ window.NP_PROV['ma3c-vt2018'] = {
 
         {
             nr: 7, del: 'B', poang: [1, 0, 1], omrade: 'Rationella uttryck och potenser: förenkla',
-            genomgangar: ['ma3c-1.1', 'ma1c-1.8', 'ma2c-2.1'],
+            genomgangar: ['ma3c-1.3', 'ma1c-1.8', 'ma2c-2.1'],
             endastSvar: true,
             fraga: 'Förenkla så långt som möjligt.<br>' +
                 '**a)**&nbsp;$\\dfrac{3x + 18}{x + 6}$&emsp;&emsp;' +
@@ -1379,7 +1379,7 @@ window.NP_PROV['ma3c-vt2018'] = {
 
         {
             nr: 27, del: 'D', poang: [0, 1, 2], omrade: 'Rationella funktioner och gränsvärden',
-            genomgangar: ['ma3c-1.4', 'ma3c-1.1'],
+            genomgangar: ['ma3c-1.6', 'ma3c-1.3'],
             fraga: 'Ett företag väver mönstrade band i olika längder. Mycket korta band kan vara ' +
                 'dyrare än längre band att tillverka eftersom vävmaskinen måste ställas om för ' +
                 'varje nytt band.\n\n' +
@@ -1532,3 +1532,5 @@ window.NP_PROV['ma3c-vt2018'] = {
         }
     );
 })();
+
+if (window.I18N) window.I18N.overlay('np/ma3c-vt2018');

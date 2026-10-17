@@ -31,7 +31,7 @@ const UNDANTAG = new Set([
     'ma1c-4.2:Exempel 1: Tanka mopeden',
     'ma2c-2.1:Exempel 1 — Utveckla med kvadreringsreglerna',
     'ma2c-6.3:Exempel 1 — Släktmiddagen i Geogebra',
-    'ma3c-1.4:Exempel 2 — Förkorta uttrycket',
+    'ma3c-1.6:Exempel 2 — Förkorta uttrycket',
     'ma3c-2.1:Exempel 1 — Sekantens lutning som förändringshastighet',
     'ma3c-2.4:Exempel 2 — Beräkna derivata med Geogebra',
     'ma3c-6.6:Exempel 2 — Bestäm en vinkel med sinussatsen',

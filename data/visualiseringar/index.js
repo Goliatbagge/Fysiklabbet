@@ -14,15 +14,15 @@
  * Masterlista över planerade visualiseringar: .claude/visualiseringar-plan.md
  */
 window.VISUALISERINGAR_INDEX = {
-    'ma3c-1.1': {
+    'ma3c-1.3': {
         titel: 'Rationella uttryckets hål',
         beskrivning: 'Dra mot hålet i (x²−1)/(x−1) och zooma — gränsvärdet finns fast funktionsvärdet saknas.',
-        fil: 'data/visualiseringar/ma3c-1.4.js'
+        fil: 'data/visualiseringar/ma3c-1.6.js'
     },
-    'ma3c-1.4': {
+    'ma3c-1.6': {
         titel: 'Rationella uttryckets hål',
         beskrivning: 'Dra mot hålet i (x²−1)/(x−1) och zooma — gränsvärdet finns fast funktionsvärdet saknas.',
-        fil: 'data/visualiseringar/ma3c-1.4.js'
+        fil: 'data/visualiseringar/ma3c-1.6.js'
     },
     'ma3c-2.1': {
         titel: 'Sekanten blir tangent',

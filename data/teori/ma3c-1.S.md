@@ -9,8 +9,10 @@ section: '1.S'
 
 # Sammanfattning — Rationella uttryck och gränsvärden
 
-Det här kapitlet handlade om rationella uttryck — bråk där täljare och
-nämnare är polynom — och om gränsvärden. Du har övat på att förkorta,
+Det här kapitlet började med polynom: deras grad och värde, hur de
+multipliceras och faktoriseras, och hur polynomekvationer löses. Sedan
+handlade det om rationella uttryck, bråk där täljare och nämnare är
+polynom, och om gränsvärden. Du har övat på att förkorta,
 förlänga, addera, subtrahera, multiplicera och dividera rationella uttryck
 genom att faktorisera, bland annat med en ny metod: faktorisering med hjälp
 av polynomets nollställen. Du har också löst ekvationer som innehåller
@@ -21,8 +23,16 @@ problem.
 
 ## Begrepp att kunna
 
-- **polynom**: ett uttryck där alla variabeltermer har positiva
-  heltalsexponenter.
+- **polynom**: en summa av termer $a \cdot x^n$, där $n$ är ett heltal
+  som är noll eller positivt, till exempel $5x^3 - 2x^2 + x - 7$.
+- **grad**: den högsta exponenten i ett polynom.
+- **koefficient**: talet framför en $x$-term. **Konstantterm**: termen
+  utan $x$.
+- **faktorisera**: skriva ett uttryck som en produkt.
+- **polynomekvation**: en ekvation med ett polynom i ena ledet och noll i
+  det andra. En ekvation av grad $n$ har högst $n$ reella lösningar.
+- **polynomfunktion**: en funktion $y = p(x)$ där $p(x)$ är ett polynom.
+  Grafen är kontinuerlig, en kurva utan hopp eller hål.
 - **rationellt uttryck**: ett uttryck med ett polynom i täljaren och ett
   polynom i nämnaren, till exempel $\dfrac{5x^2 - 5x}{3x - 3}$.
 - **förlänga**: multiplicera både täljare och nämnare med samma tal eller
@@ -56,6 +66,21 @@ problem.
 ## Formler
 
 ::: formel "Kapitlets formler och regler"
+**Multiplikation av polynom**
+
+$
+(a + b)(c + d + e) = ac + ad + ae + bc + bd + be
+$
+
+Varje term multipliceras med varje term. Produktens grad är summan av
+graderna.
+
+**Ekvationen $x^n = a$**
+
+- $n$ udda: $x = \sqrt[n]{a}$
+- $n$ jämnt och $a > 0$: $x = \pm \sqrt[n]{a}$
+- $n$ jämnt och $a < 0$: ingen reell lösning
+
 **Faktorisera med hjälp av nollställen**
 
 $$
@@ -110,6 +135,14 @@ utläses "gränsvärdet av $f(x)$ då $x$ går mot $a$ är $L$".
 
 ## Viktiga samband och metoder
 
+- Värdet av ett polynom: sätt in värdet inom parentes på varje ställe där
+  $x$ står. $p(0)$ är alltid konstanttermen.
+- Saknar en polynomekvation konstantterm: bryt ut $x$ och använd
+  nollproduktmetoden. Glöm inte lösningen $x = 0$.
+- Innehåller en fjärdegradsekvation bara $x^4$, $x^2$ och en konstant: inför
+  $t = x^2$, lös andragradsekvationen i $t$ och gå tillbaka med $x^2 = t$.
+- Faktorn $(x - a)$ i ett polynom ger nollstället $x = a$, och tvärtom.
+  Nollställena syns där grafen skär $x$-axeln.
 - Faktorisera i den här ordningen: 1) bryt ut gemensam faktor,
   2) kvadreringsreglerna eller konjugatregeln baklänges, 3) bestäm
   nollställena och skriv $p(x) = k(x - x_1)(x - x_2)\ldots(x - x_n)$.
@@ -145,6 +178,14 @@ utläses "gränsvärdet av $f(x)$ då $x$ går mot $a$ är $L$".
 
 ## Inför provet
 
+- Kan du avgöra om ett uttryck är ett polynom och ange dess grad?
+- Kan du beräkna värdet av ett polynom, även för negativa $x$?
+- Kan du multiplicera polynom och veta vilken grad produkten får?
+- Kan du lösa ekvationer som $x^3 = 64$ och $x^4 = 81$, och vet du när det
+  finns två lösningar?
+- Kan du lösa en polynomekvation genom att bryta ut $x$ eller byta
+  variabel?
+- Kan du skriva ett polynom med givna nollställen i faktorform?
 - Kan du förklara skillnaden mellan ett polynom och ett rationellt uttryck?
 - Kan du de tre metoderna för att faktorisera ett uttryck (bryta ut,
   kvadrerings-/konjugatregeln, nollställen) och vet du i vilken ordning du

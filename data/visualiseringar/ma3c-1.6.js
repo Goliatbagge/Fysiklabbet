@@ -1,22 +1,22 @@
-/* ma3c-1.4.js — visualisering: "Rationella uttryckets hål" (gränsvärden och
- * hål i rationella uttryck). Hör till ma3c-1.1 (förkortning/förlängning av
- * rationella uttryck) och ma3c-1.4 (gränsvärden).
+/* ma3c-1.6.js — visualisering: "Rationella uttryckets hål" (gränsvärden och
+ * hål i rationella uttryck). Hör till ma3c-1.3 (förkortning/förlängning av
+ * rationella uttryck) och ma3c-1.6 (gränsvärden).
  *
- * Huvudexemplet är f(x) = (x² − 1)/(x − 1) — exakt Exempel 2 i ma3c-1.4:
+ * Huvudexemplet är f(x) = (x² − 1)/(x − 1) — exakt Exempel 2 i ma3c-1.6:
  * grafen är linjen y = x + 1 med ett punkterat hål i (1, 2). f(1) saknas
  * (division med 0), men gränsvärdet finns och är 2. Ett andra exempel,
- * (5x² − 5x)/(3x − 3) = 5x/3 (från ma3c-1.1 Exempel 4b), generaliserar
+ * (5x² − 5x)/(3x − 3) = 5x/3 (från ma3c-1.3 Exempel 4b), generaliserar
  * insikten i steg 4.
  *
  * Fyra steg (lager):
  *   1. Hålet         — dragbar x-markör, live-avläsning f(x), tabell som
  *                       byggs (manuellt eller via "Fyll tabellen") precis
- *                       som ma3c-1.4 Exempel 2a.
+ *                       som ma3c-1.6 Exempel 2a.
  *   2. Zooma på hålet — zoomglidare ×1 → ×100 mot (1, 2); linjen förblir
  *                       spikrak, hålet finns kvar, lim-notation.
  *   3. Faktorisera    — knappen visar faktoriseringen steg för steg med
- *                       den gemensamma faktorn färgmarkerad (ma3c-1.4
- *                       Exempel 2b / ma3c-1.1 Exempel 4).
+ *                       den gemensamma faktorn färgmarkerad (ma3c-1.6
+ *                       Exempel 2b / ma3c-1.3 Exempel 4).
  *   4. Ett hål till   — samma verktyg för ett andra uttryck, för att
  *                       generalisera insikten.
  *
@@ -833,6 +833,6 @@
 
     window.VISUALISERINGAR = window.VISUALISERINGAR || {};
     var api = { mount: mount };
-    window.VISUALISERINGAR['ma3c-1.1'] = api;
-    window.VISUALISERINGAR['ma3c-1.4'] = api;
+    window.VISUALISERINGAR['ma3c-1.3'] = api;
+    window.VISUALISERINGAR['ma3c-1.6'] = api;
 })();

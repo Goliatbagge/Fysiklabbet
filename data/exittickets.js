@@ -17338,6 +17338,174 @@ window.EXITTICKETS = {
 // ═══════════════════════════════════════════════════════════════════════
 'ma3c-1.1': [
   {
+    question: 'Vilken grad har polynomet $3x^2 - x^4 + 7$?',
+    choices: [
+      '2',
+      '3',
+      '4',
+      '7',
+    ],
+    correct: 2,
+    why: [
+      'Exponenten 2 hör till den första termen, men den är inte den högsta. Ordningen på termerna spelar ingen roll.',
+      'Talet 3 är en koefficient, inte en exponent.',
+      'Graden är den högsta exponenten, och termen $-x^4$ har exponenten 4.',
+      'Talet 7 är konstanttermen. Den påverkar inte graden.',
+    ],
+  },
+  {
+    question: 'Vilket av uttrycken är ett polynom?',
+    choices: [
+      '$5x^3 - x + 2$',
+      '$\\dfrac{2}{x} + 1$',
+      '$\\sqrt{x} - 4$',
+      '$2^x + 3$',
+    ],
+    correct: 0,
+    why: [
+      'Alla exponenter (3, 1 och 0) är heltal som är noll eller positiva, så uttrycket är ett polynom av grad 3.',
+      '$\\dfrac{2}{x} = 2x^{-1}$ har en negativ exponent, och då är det inget polynom.',
+      '$\\sqrt{x} = x^{\\frac{1}{2}}$ har en exponent som inte är ett heltal.',
+      'Här står $x$ i exponenten. Ett polynom har tal som exponenter, inte variabler.',
+    ],
+  },
+  {
+    question: 'Polynomet $p(x) = x^2 - 3x + 5$ är givet. Vad är $p(0)$?',
+    choices: [
+      '0',
+      '$-3$',
+      '2',
+      '5',
+    ],
+    correct: 3,
+    why: [
+      'Det är bara termerna med $x$ som blir noll när $x = 0$. Konstanttermen blir kvar.',
+      'Koefficienten $-3$ multipliceras med $x = 0$ och försvinner.',
+      'Värdet 2 är summan av koefficienterna och konstanttermen ($1 - 3 + 5$), alltså $p(1)$.',
+      'Med $x = 0$ blir $0^2 - 3 \\cdot 0 + 5 = 5$. Värdet för $x = 0$ är alltid konstanttermen.',
+    ],
+  },
+  {
+    question: 'Ett polynom av grad 2 multipliceras med ett polynom av grad 3. Vilken grad får produkten?',
+    choices: [
+      '6',
+      '5',
+      '3',
+      '1',
+    ],
+    correct: 1,
+    why: [
+      'Graderna multipliceras inte. Exponenter adderas när potenser med samma bas multipliceras: $x^2 \\cdot x^3 = x^5$.',
+      'Den högsta termen i produkten är produkten av de högsta termerna, och $x^2 \\cdot x^3 = x^{2 + 3} = x^5$.',
+      'Produkten blir högre än båda polynomens grader, eftersom exponenterna adderas.',
+      'Det är skillnaden mellan graderna. Vid multiplikation adderas de.',
+    ],
+  },
+  {
+    question: 'Vad blir $x^3 - 4x$ faktoriserat så långt som möjligt?',
+    choices: [
+      '$x(x^2 - 4)$',
+      '$x(x - 2)^2$',
+      '$x(x + 2)(x - 2)$',
+      '$(x^2 + 2)(x - 2)$',
+    ],
+    correct: 2,
+    why: [
+      'Utbrytningen är rätt, men parentesen $x^2 - 4$ kan faktoriseras vidare med konjugatregeln.',
+      '$(x - 2)^2 = x^2 - 4x + 4$, inte $x^2 - 4$.',
+      'Först bryts $x$ ut, sedan ger konjugatregeln $x^2 - 4 = (x + 2)(x - 2)$.',
+      'Utvecklas uttrycket blir det $x^3 - 2x^2 + 2x - 4$, alltså ett annat polynom.',
+    ],
+  },
+],
+
+
+'ma3c-1.2': [
+  {
+    question: 'Hur många reella lösningar kan en tredjegradsekvation högst ha?',
+    choices: [
+      '2',
+      '3',
+      '4',
+      'Hur många som helst',
+    ],
+    correct: 1,
+    why: [
+      'Två lösningar är högsta antalet för en andragradsekvation.',
+      'En polynomekvation av grad $n$ har högst $n$ reella lösningar, alltså högst 3 här.',
+      'Fyra lösningar kan bara en ekvation av grad 4 eller högre ha.',
+      'Antalet lösningar begränsas av graden. Grafen till en tredjegradsfunktion kan skära $x$-axeln högst tre gånger.',
+    ],
+  },
+  {
+    question: 'Vilka är lösningarna till ekvationen $x^4 = 81$?',
+    choices: [
+      '$x = 3$',
+      '$x = \\pm 9$',
+      '$x = \\pm 3$',
+      'Ekvationen saknar reell lösning',
+    ],
+    correct: 2,
+    why: [
+      'Exponenten är jämn, så även $-3$ är en lösning: $(-3)^4 = 81$.',
+      '$9^4 = 6\\,561$. Talet 9 är kvadratroten ur 81, men här behövs fjärderoten.',
+      'Både $3^4 = 81$ och $(-3)^4 = 81$, så $x = \\pm \\sqrt[4]{81} = \\pm 3$.',
+      'Högerledet är positivt, och då har ekvationen två lösningar.',
+    ],
+  },
+  {
+    question: 'Varför saknar ekvationen $x^4 = -16$ reell lösning?',
+    choices: [
+      'Ett tal upphöjt till 4 kan aldrig bli negativt',
+      'Fjärderoten ur 16 är inget heltal',
+      'En fjärdegradsekvation har alltid fyra lösningar',
+      'Man får inte dra roten ur båda leden',
+    ],
+    correct: 0,
+    why: [
+      'Med jämn exponent blir både positiva och negativa tal positiva, eller noll. Inget reellt tal upphöjt till 4 blir $-16$.',
+      'Fjärderoten ur 16 är 2, ett heltal. Problemet är minustecknet.',
+      'En fjärdegradsekvation har **högst** fyra lösningar. Den kan ha färre, eller inga alls.',
+      'Att dra roten ur båda leden är just metoden för ekvationer på formen $x^n = a$.',
+    ],
+  },
+  {
+    question: 'Polynomet $p(x)$ har nollstället $x = 4$. Vilken faktor finns då i $p(x)$?',
+    choices: [
+      '$(x + 4)$',
+      '$4x$',
+      '$(4 + x^2)$',
+      '$(x - 4)$',
+    ],
+    correct: 3,
+    why: [
+      'Faktorn $(x + 4)$ blir noll när $x = -4$, alltså ger den nollstället $-4$.',
+      'Faktorn $4x$ blir noll när $x = 0$.',
+      '$4 + x^2$ är alltid positivt och blir aldrig noll.',
+      'Faktorn $(x - 4)$ blir noll just när $x = 4$. Varje nollställe $a$ ger en faktor $(x - a)$.',
+    ],
+  },
+  {
+    question: 'Vad är ett lämpligt första steg för att lösa $x^4 - 13x^2 + 36 = 0$?',
+    choices: [
+      'Bryt ut $x$ ur alla termer',
+      'Inför $t = x^2$ och lös en andragradsekvation i $t$',
+      'Dra fjärderoten ur båda leden',
+      'Dividera båda leden med 13',
+    ],
+    correct: 1,
+    why: [
+      'Konstanttermen 36 saknar $x$, så $x$ kan inte brytas ut.',
+      'Med $t = x^2$ blir $x^4 = t^2$, och ekvationen blir $t^2 - 13t + 36 = 0$. Sedan går man tillbaka med $x^2 = t$.',
+      'Det fungerar bara när ekvationen har formen $x^4 = a$, med en enda potens av $x$.',
+      'Divisionen gör inte ekvationen lättare. Det är potenserna $x^4$ och $x^2$ som ska hanteras.',
+    ],
+  },
+],
+
+
+'ma3c-1.3': [
+  {
     question: 'Vad är ett rationellt uttryck?',
     choices: [
       'Ett uttryck med ett polynom i täljaren och ett polynom i nämnaren',
@@ -17420,7 +17588,7 @@ window.EXITTICKETS = {
 ],
 
 
-'ma3c-1.2': [
+'ma3c-1.4': [
   {
     question: 'Vad krävs för att man ska kunna addera eller subtrahera två rationella uttryck direkt (utan att göra dem liknämniga)?',
     choices: [
@@ -17503,7 +17671,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'ma3c-1.3': [
+'ma3c-1.5': [
   {
     question: 'Hur multiplicerar man två rationella uttryck $\\dfrac{a}{b}$ och $\\dfrac{c}{d}$?',
     choices: [
@@ -17586,7 +17754,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'ma3c-1.4': [
+'ma3c-1.6': [
   {
     question: 'Vad är ett gränsvärde?',
     choices: [
@@ -17669,7 +17837,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'ma3c-1.5': [
+'ma3c-1.7': [
   {
     question: 'Vad kännetecknar ett symbolhanterande hjälpmedel?',
     choices: [
@@ -25279,3 +25447,6 @@ window.EXITTICKETS = {
   },
 ],
 };
+
+// Engelsk översättning (data/en/exittickets.js) läggs ovanpå när sidan visas på engelska.
+if (window.I18N) window.I18N.overlay('exittickets');

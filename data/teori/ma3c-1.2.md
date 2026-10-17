@@ -1,215 +1,305 @@
 ---
 id: ma3c-1.2
-title: Addition och subtraktion av rationella uttryck
+title: Polynomekvationer
 course: Matematik fortsättning nivå 1c
 chapter: Rationella uttryck och gränsvärden
 chapterNumber: 1
 section: '1.2'
 ---
 
-# Addition och subtraktion av rationella uttryck
+# Polynomekvationer
 
-För att addera och subtrahera rationella uttryck krävs (precis som för
-bråk) att de har **samma nämnare**. I det här avsnittet löser vi också
-ekvationer som innehåller rationella uttryck.
+En ekvation där ena ledet är ett polynom och det andra ledet är noll, till
+exempel
 
-::: tips "Lösa ekvationer med rationella uttryck"
-Kontrollera först för vilka värden på $x$ som nämnaren eller nämnarna blir
-lika med noll. För dessa värden är ekvationen inte definierad, så de är
-inte tillåtna som lösningar. Lös sedan ekvationen med någon av metoderna:
+$$
+x^3 - 2x^2 - 15x = 0
+$$
 
-1. **Multiplicera med minsta gemensamma nämnaren (MGN).** Multiplicera
-   båda leden med MGN (eller en annan gemensam nämnare). Förkorta sedan
-   och lös som vanligt.
-2. **Gör liknämnigt.** Förläng termerna så att de får samma nämnare. Slå
-   sedan ihop dem på ett enda divisionsstreck och utnyttja att
-   $\text{täljare} = \text{kvot} \cdot \text{nämnare}$ (eller motsvarande).
+kallas en **polynomekvation**. Ekvationens grad är polynomets grad, så
+ekvationen ovan är en tredjegradsekvation. Lösningarna kallas ofta
+**rötter**. Andragradsekvationer kan du redan lösa med nollproduktmetoden och
+*pq*-formeln. I det här avsnittet löser vi ekvationer av högre grad genom att
+återföra dem på sådant vi redan kan.
+
+::: formel "Antal lösningar"
+En polynomekvation av grad $n$ har **högst** $n$ reella lösningar.
 :::
 
-## Addera och subtrahera rationella uttryck
+## Enkla polynomekvationer
 
-Har termerna redan samma nämnare adderar eller subtraherar vi bara
-täljarna — nämnaren förblir densamma. Har de olika nämnare måste vi först
-göra dem liknämniga, precis som för vanliga bråk: vi förlänger varje term
-med den andra termens nämnare.
+En ekvation som bara innehåller en potens av $x$ och en konstant kan skrivas
+om till formen $x^n = a$. Den löses genom att vi tar $n$:te roten ur båda
+leden. Om exponenten är jämn ger både ett positivt och ett negativt tal
+samma potens, till exempel $3^4 = 81$ och $(-3)^4 = 81$, och då finns två
+lösningar.
 
-::: exempel "Exempel 1 — Förenkla"
-**Förenkla**
+::: formel "Ekvationen $x^n = a$"
+- $n$ udda: en lösning, $x = \sqrt[n]{a}$.
+- $n$ jämnt och $a > 0$: två lösningar, $x = \pm \sqrt[n]{a}$.
+- $n$ jämnt och $a < 0$: ingen reell lösning.
+:::
+
+::: exempel "Exempel 1 — Enkla polynomekvationer"
+**Lös ekvationerna.<br>a)&nbsp;$x^3 = 64$&emsp;&emsp;b)&nbsp;$2x^4 = 162$&emsp;&emsp;c)&nbsp;$x^3 + 8 = 0$**
 
 ::: handskrift
-typ: forenklarationella
+typ: enklapolyekv
 :::
 
 ::: textlosning
-$$
-\text{a)}\ \frac{5x^2}{x - 2} + \frac{7}{x - 2} \qquad
-\text{b)}\ \frac{8x}{x + 3} - \frac{5x - 9}{x}
-$$
-
-**a)** Här har båda termerna samma nämnare, så täljarna adderas.
+**a)** Exponenten 3 är udda, så det finns en lösning. Vi tar tredjeroten ur
+båda leden.
 
 $$
-\frac{5x^2}{x - 2} + \frac{7}{x - 2} = \frac{5x^2 + 7}{x - 2}
+\begin{aligned}
+x^3 &= 64 \\
+x &= \sqrt[3]{64} \\
+x &= 4
+\end{aligned}
 $$
 
-**Svar:** $\dfrac{5x^2 + 7}{x - 2}$
+**Svar:** $x = 4$
 
-**b)** Här har termerna olika nämnare. För att få samma nämnare förlänger
-vi den första termen med nämnaren i den andra termen, $x$, och den andra
-termen med nämnaren i den första termen, $(x + 3)$.
-
-$$
-\frac{8x}{x + 3} - \frac{5x - 9}{x} = \frac{8x \cdot x}{(x + 3) \cdot x} - \frac{(5x - 9)(x + 3)}{x \cdot (x + 3)} = \frac{8x^2}{x(x + 3)} - \frac{(5x - 9)(x + 3)}{x(x + 3)}
-$$
-
-Nu har båda termerna samma nämnare $x(x + 3)$, och vi kan subtrahera
-täljarna på ett gemensamt divisionsstreck.
+**b)** Först divideras båda leden med 2. Exponenten 4 är jämn och högerledet
+positivt, så det finns två lösningar.
 
 $$
-\frac{8x^2 - (5x - 9)(x + 3)}{x(x + 3)} = \frac{8x^2 - (5x^2 + 15x - 9x - 27)}{x(x + 3)} = \frac{8x^2 - 5x^2 - 15x + 9x + 27}{x(x + 3)} = \frac{3x^2 - 6x + 27}{x(x + 3)} = \frac{3(x^2 - 2x + 9)}{x(x + 3)}
+\begin{aligned}
+2x^4 &= 162 \\
+\frac{2x^4}{2} &= \frac{162}{2} \\
+x^4 &= 81 \\
+x &= \pm \sqrt[4]{81} \\
+x &= \pm 3
+\end{aligned}
 $$
 
-Vi undersöker om $(x^2 - 2x + 9)$ kan faktoriseras mer genom att bestämma
-dess nollställen.
+**Svar:** $x_1 = -3$ och $x_2 = 3$
+
+**c)** Först subtraheras 8 från båda leden. Exponenten 3 är udda, så
+tredjeroten ur ett negativt tal går bra: $(-2)^3 = -8$.
 
 $$
-x^2 - 2x + 9 = 0
+\begin{aligned}
+x^3 + 8 &= 0 \\
+x^3 + 8 - 8 &= 0 - 8 \\
+x^3 &= -8 \\
+x &= \sqrt[3]{-8} \\
+x &= -2
+\end{aligned}
 $$
 
-$pq$-formeln ger
-
-$$
-x = 1 \pm \sqrt{1^2 - 9} = 1 \pm \sqrt{-8}
-$$
-
-Uttrycket under rottecknet är negativt, så andragradsekvationen saknar
-reella rötter. $(x^2 - 2x + 9)$ kan alltså inte faktoriseras mer.
-
-**Svar:** $\dfrac{3(x^2 - 2x + 9)}{x(x + 3)}$
+**Svar:** $x = -2$
 :::
 :::
 
-## Lös ekvationer med rationella uttryck
+## Mer om polynomekvationer
 
-När en ekvation innehåller rationella uttryck börjar vi alltid med att
-kontrollera vilka $x$-värden som gör någon nämnare lika med noll — dessa
-värden får aldrig vara med i svaret. Sedan löser vi ekvationen med metod 1
-eller metod 2 från rutan ovan.
+Saknar polynomekvationen konstantterm finns $x$ i varje term. Då kan $x$
+brytas ut, och vänsterledet blir en produkt. Enligt **nollproduktmetoden**
+är en produkt noll bara om någon av faktorerna är noll, så ekvationen delas
+upp i två enklare ekvationer.
 
-::: exempel "Exempel 2 — Lös ekvationerna"
-**Lös ekvationerna**
+::: exempel "Exempel 2 — Bryt ut x"
+**Lös ekvationen $x^3 - 2x^2 - 15x = 0$.**
 
 ::: handskrift
-typ: rationellaekvationer
+typ: brytutpolyekv
 :::
 
 ::: textlosning
-$$
-\text{a)}\ \frac{x}{2} - \frac{x}{8} = 24 \qquad
-\text{b)}\ \frac{1}{3} + \frac{2}{x - 3} = 1 \qquad
-\text{c)}\ \frac{x}{x - 1} = \frac{2x}{x^2 - 1}
-$$
-
-**a)** Ingen nämnare innehåller $x$, så ekvationen är definierad för alla
-$x$.
-
-*Metod 1: Multiplicera med MGN.* Här är MGN $= 8$. Vi multiplicerar båda
-leden med 8.
+Alla termer innehåller $x$, så vi bryter ut $x$.
 
 $$
-\frac{x}{2} - \frac{x}{8} = 24 \quad\Rightarrow\quad \frac{x \cdot 8}{2} - \frac{x \cdot 8}{8} = 24 \cdot 8 \quad\Rightarrow\quad 4x - x = 192 \quad\Rightarrow\quad 3x = 192 \quad\Rightarrow\quad x = 64
+x(x^2 - 2x - 15) = 0
 $$
 
-**Svar:** $x = 64$
-
-*Metod 2: Göra liknämnigt.* Vi förlänger den första termen med 4 för att
-få samma nämnare.
+Nollproduktmetoden ger $x_1 = 0$ eller $x^2 - 2x - 15 = 0$. Den andra
+ekvationen löser vi med *pq*-formeln.
 
 $$
-\frac{x}{2} - \frac{x}{8} = 24 \quad\Rightarrow\quad \frac{4x}{8} - \frac{x}{8} = 24 \quad\Rightarrow\quad \frac{4x - x}{8} = 24 \quad\Rightarrow\quad \frac{3x}{8} = 24
+\begin{aligned}
+x &= 1 \pm \sqrt{1 + 15} \\
+x &= 1 \pm \sqrt{16} \\
+x &= 1 \pm 4
+\end{aligned}
 $$
 
-$$
-3x = 24 \cdot 8 = 192 \quad\Rightarrow\quad x = \frac{192}{3} = 64
-$$
+vilket ger $x_2 = 1 - 4 = -3$ och $x_3 = 1 + 4 = 5$.
 
-**Svar:** $x = 64$
+**Svar:** $x_1 = 0$, $x_2 = -3$ och $x_3 = 5$
+:::
+:::
 
-**b)** Nämnaren $(x - 3)$ gör att ekvationen inte är definierad för
-$x = 3$, så $x \neq 3$. Vi multiplicerar båda leden med MGN
-$= 3(x - 3)$.
+En fjärdegradsekvation som bara innehåller $x^4$, $x^2$ och en konstant kan
+lösas genom att vi **byter variabel**. Vi inför $t = x^2$, så att $x^4 = t^2$.
+Då blir ekvationen en andragradsekvation i $t$. När $t$ är bestämt går vi
+tillbaka till $x$ med $x^2 = t$.
 
-$$
-\frac{1 \cdot 3(x - 3)}{3} + \frac{2 \cdot 3(x - 3)}{x - 3} = 1 \cdot 3(x - 3)
-$$
+::: exempel "Exempel 3 — Byt variabel"
+**Lös ekvationen $x^4 - 10x^2 + 9 = 0$.**
 
-$$
-(x - 3) + 2 \cdot 3 = 3(x - 3) \quad\Rightarrow\quad x - 3 + 6 = 3x - 9 \quad\Rightarrow\quad x + 3 = 3x - 9
-$$
+::: handskrift
+typ: bytvariabel
+:::
 
-$$
-3 = 2x - 9 \quad\Rightarrow\quad 12 = 2x \quad\Rightarrow\quad x = 6
-$$
-
-**Svar:** $x = 6$
-
-**c)** Vi undersöker för vilka $x$ som nämnarna blir noll.
+::: textlosning
+Vi inför $t = x^2$. Då är $x^4 = (x^2)^2 = t^2$, och ekvationen blir
 
 $$
-x - 1 = 0 \iff x = 1 \qquad\qquad x^2 - 1 = 0 \iff x = \pm 1
+t^2 - 10t + 9 = 0
 $$
 
-Så $x \neq 1$ och $x \neq -1$. Vi faktoriserar täljare och nämnare så
-långt det går — $(x^2 - 1)$ är en konjugat och faktoriseras som
-$(x + 1)(x - 1)$.
+*pq*-formeln ger
 
 $$
-\frac{x}{x - 1} = \frac{2x}{(x + 1)(x - 1)}
+\begin{aligned}
+t &= 5 \pm \sqrt{25 - 9} \\
+t &= 5 \pm \sqrt{16} \\
+t &= 5 \pm 4
+\end{aligned}
 $$
 
-Vi multiplicerar båda leden med MGN $= (x + 1)(x - 1)$.
+vilket ger $t_1 = 1$ och $t_2 = 9$. Vi går tillbaka till $x$ med $x^2 = t$.
 
 $$
-\frac{x(x + 1)(x - 1)}{x - 1} = \frac{2x(x + 1)(x - 1)}{(x + 1)(x - 1)} \quad\Rightarrow\quad x(x + 1) = 2x
+\begin{aligned}
+x^2 &= 1 & \qquad x^2 &= 9 \\
+x &= \pm \sqrt{1} & \qquad x &= \pm \sqrt{9} \\
+x &= \pm 1 & \qquad x &= \pm 3
+\end{aligned}
 $$
 
-Vi utvecklar och gör högerledet lika med noll.
+Ekvationen har fyra lösningar, lika många som graden.
+
+**Svar:** $x_1 = -3$, $x_2 = -1$, $x_3 = 1$ och $x_4 = 3$
+:::
+:::
+
+## Grafen till en polynomfunktion
+
+En funktion $y = p(x)$, där $p(x)$ är ett polynom, kallas en
+**polynomfunktion**. Grafen till en polynomfunktion är en sammanhängande
+kurva utan hopp eller hål. Den kan ritas utan att pennan lyfts från
+papperet, och vi säger att funktionen är **kontinuerlig**.
+
+Lösningarna till ekvationen $p(x) = 0$ är de $x$-värden där grafen skär
+eller tangerar $x$-axeln. De kallas polynomets **nollställen**. Eftersom
+ekvationen har högst lika många lösningar som graden kan en
+tredjegradsfunktion skära $x$-axeln högst tre gånger.
+
+I grafritaren nedan är polynomfunktionen skriven som en produkt av tre
+faktorer. Dra i *p*, *q* och *r* och se var grafen skär $x$-axeln. Dra
+sedan i *a* och se att nollställena ligger kvar.
+
+::: graf
+titel: y = a(x - p)(x - q)(x - r)
+uttryck: a*(x-p)*(x-q)*(x-r)
+ekvation: y = {a}(x - {p})(x - {q})(x - {r})
+a: 0.25, -1, 1, 0.25
+p: -3, -5, 5, 1
+q: 1, -5, 5, 1
+r: 4, -5, 5, 1
+x: -6, 6
+y: -6, 6
+:::
+
+## Faktorer och nollställen
+
+Grafritaren visar sambandet som gör polynom så användbara: **varje faktor
+$(x - a)$ i polynomet ger nollstället $x = a$**, eftersom faktorn blir noll
+just där. Det gäller också omvänt. Om $p(a) = 0$ så är $(x - a)$ en faktor i
+polynomet. Kan vi alla nollställen kan vi alltså faktorisera polynomet.
+
+::: formel "Faktorisera med nollställen"
+Ett polynom av grad 3 med nollställena $x_1$, $x_2$ och $x_3$ kan skrivas
 
 $$
-x^2 + x = 2x \quad\Rightarrow\quad x^2 - x = 0 \quad\Rightarrow\quad x(x - 1) = 0
+p(x) = k(x - x_1)(x - x_2)(x - x_3)
 $$
 
-Nollproduktmetoden ger $x_1 = 0$ och $x_2 = 1$. Eftersom $x \neq 1$
-förkastar vi lösningen $x_2 = 1$.
+där $k$ är koefficienten framför $x$-termen med högst grad. På samma sätt
+ger ett polynom av grad $n$ med $n$ nollställen $n$ faktorer.
+:::
 
-**Svar:** $x = 0$
+::: exempel "Exempel 4 — Faktorer och nollställen"
+**a) Faktorisera $p(x) = 3x^2 - 6x - 24$ med hjälp av nollställena.<br>b) Ett tredjegradspolynom $p(x)$ har nollställena $-2$, $1$ och $4$, och $p(0) = 16$. Bestäm $p(x)$.**
+
+::: handskrift
+typ: faktornollstalle
+:::
+
+::: textlosning
+**a)** Nollställena är lösningarna till $3x^2 - 6x - 24 = 0$. Vi dividerar
+båda leden med 3 och använder *pq*-formeln.
+
+$$
+\begin{aligned}
+3x^2 - 6x - 24 &= 0 \\
+\frac{3x^2 - 6x - 24}{3} &= \frac{0}{3} \\
+x^2 - 2x - 8 &= 0 \\
+x &= 1 \pm \sqrt{1 + 8} \\
+x &= 1 \pm \sqrt{9} \\
+x &= 1 \pm 3
+\end{aligned}
+$$
+
+Nollställena är $x_1 = -2$ och $x_2 = 4$. Koefficienten framför $x^2$ är 3,
+så $k = 3$.
+
+$$
+p(x) = 3(x - (-2))(x - 4) = 3(x + 2)(x - 4)
+$$
+
+**Svar:** $p(x) = 3(x + 2)(x - 4)$
+
+**b)** Nollställena ger faktorerna $(x + 2)$, $(x - 1)$ och $(x - 4)$, men
+$k$ är okänt.
+
+$$
+p(x) = k(x + 2)(x - 1)(x - 4)
+$$
+
+Vi bestämmer $k$ med villkoret $p(0) = 16$ och sätter in $x = 0$.
+
+$$
+\begin{aligned}
+p(0) = k(0 + 2)(0 - 1)(0 - 4) &= 16 \\
+8k &= 16 \\
+\frac{8k}{8} &= \frac{16}{8} \\
+k &= 2
+\end{aligned}
+$$
+
+**Svar:** $p(x) = 2(x + 2)(x - 1)(x - 4)$
 :::
 :::
 
 ::: sammanfattning "Sammanfattning"
 
-::: sampunkt "Samma nämnare krävs"
-- Har termerna **samma nämnare** adderas eller subtraheras bara täljarna, nämnaren behålls.
-- Har de olika nämnare måste de först göras liknämniga.
-- Förläng varje term med den andra termens nämnare, precis som för bråk.
+::: sampunkt "Polynomekvationer"
+- En polynomekvation har ett polynom i ena ledet och noll i det andra.
+- En ekvation av grad $n$ har **högst** $n$ reella lösningar.
+- Grafen till en polynomfunktion är kontinuerlig: en kurva utan hopp eller hål.
 :::
 
-::: sampunkt "Räknefällor"
-- Sätt **parentes** runt hela täljaren som subtraheras, så att alla tecken byts.
-- Förenkla svaret genom att faktorisera täljaren till slut.
-- Saknar ett andragradsuttryck reella nollställen kan det inte faktoriseras mer. Uttrycket under rottecknet är då negativt.
+::: sampunkt "Ekvationen $x^n = a$"
+- $n$ udda: $x = \sqrt[n]{a}$, till exempel $x^3 = -8$ ger $x = -2$.
+- $n$ jämnt, $a > 0$: $x = \pm \sqrt[n]{a}$, till exempel $x^4 = 81$ ger $x = \pm 3$.
+- $n$ jämnt, $a < 0$: ingen reell lösning.
 :::
 
-::: sampunkt "Definitionsmängd först"
-- Kontrollera alltid vilka $x$-värden som gör en nämnare lika med noll.
-- För de värdena är ekvationen inte definierad, så de är inte tillåtna lösningar.
-- Dyker ett förbjudet värde upp som lösning måste det **förkastas**.
+::: sampunkt "Bryt ut eller byt variabel"
+- Saknas konstantterm: bryt ut $x$ och använd nollproduktmetoden.
+- $x(x^2 - 2x - 15) = 0$ ger $x = 0$ eller $x^2 - 2x - 15 = 0$.
+- Bara $x^4$, $x^2$ och konstant: inför $t = x^2$ och lös i $t$.
+- Gå sedan tillbaka med $x^2 = t$.
 :::
 
-::: sampunkt "Två metoder att lösa ekvationen"
-1. **Multiplicera med MGN:** multiplicera båda led med minsta gemensamma nämnaren, förkorta och lös som vanligt.
-2. **Gör liknämnigt:** förläng till samma nämnare, slå ihop på ett divisionsstreck och utnyttja att täljaren är kvot gånger nämnare.
-- Faktorisera nämnarna innan MGN bestäms. $x^2 - 1$ är en konjugat och blir $(x + 1)(x - 1)$.
+::: sampunkt "Faktorer och nollställen"
+- Faktorn $(x - a)$ ger nollstället $x = a$, och tvärtom.
+- $p(x) = k(x - x_1)(x - x_2)(x - x_3)$, där $k$ är koefficienten för högsta graden.
+- Nollställena syns där grafen skär $x$-axeln.
 :::
 
 :::

@@ -1277,6 +1277,14 @@
    * privat BMP-tecken med egen glyf innan strängen skrivs eller mäts. */
   var ICKE_BMP = { '𝔼': '' };   /* 𝔼 → dubbel-E */
   function tillBmp(str) {
+    /* Engelska (i18n.js): hela strängen slås upp i ordlistan
+     * (data/en/handskrift*.js) och decimalkomma blir decimalpunkt. Görs
+     * här eftersom ALL text — skrivning och mätning — passerar tillBmp, så
+     * att layouten räknas på den engelska texten. Enstaka tecken hoppas över
+     * (placeGlyph anropar per tecken). */
+    if (str != null && str.length > 1 && window.I18N && window.I18N.en) {
+      str = window.I18N.tal(window.I18N.t(str));
+    }
     if (str == null || !/[\uD800-\uDBFF]/.test(str)) return str;
     return String(str).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function (p) {
       return ICKE_BMP[p] || p;
@@ -50510,7 +50518,823 @@
     return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
   }
 
-  /* ---------------- scen: förläng ett bråk (ma3c-1.1 ex 1) -----------
+  /* Liten grå rubrik (0,62·F) med BINDESTRECK i ett ord ("pq-formeln"):
+   * '-' är en operatorglyf och får luft på båda sidor, så "pq-formeln"
+   * skrevs som "pq − formeln". Delarna skrivs i stället var för sig med
+   * ett kort streck emellan, utan luft. */
+  function rubrikBindestreck(T, delar, x, yb) {
+    var F = T.s * 100, sc = 0.62, f = F * sc;
+    delar.forEach(function (d, i) {
+      if (i) {
+        T.line([x + 0.04 * f, yb - 0.34 * f], [x + 0.30 * f, yb - 0.34 * f]);
+        x += 0.38 * f;
+      }
+      x = T.str(d, x, yb, null, sc);
+    });
+    return x;
+  }
+
+  /* ---------------- scen: polynom eller inte (ma3c-1.1 ex 1) -----------
+   * Fyra uttryck. I c) och d) skrivs termen om som en potens, så att
+   * eleven ser VILKEN exponent som gör att uttrycket inte är ett polynom. */
+  function layoutPolynomgrad(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- a) ---- */
+    y = 150;
+    T.str('a) 3x^4-2x+5', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Alla exponenter är heltal som']],
+      [['är noll eller positiva. Den']],
+      [['högsta exponenten är 4.']]
+    ]);
+    y += 2.4 * F;
+    xe = T.str('Svar: Polynom av grad 4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.2 * F;
+    xx = T.str('b) 7-x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag vänder på termerna. Ett']],
+      [['ensamt ', 0], ['x', 1], [' betyder ', 0], ['x', 1], [' upphöjt till 1.']]
+    ]);
+    T.str('=-x+7=-1·x^1+7', xx, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: Polynom av grad 1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    y += 3.6 * F;
+    xx = T.str('c) ', padL, y);
+    xx = T.fracH('4', 'x', xx, y);
+    xx = T.str('+x^2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x', 1], [' står i en nämnare. Jag skriver']],
+      [['om bråket som en potens.']]
+    ], 1.05);
+    T.str('=4x^-^1+x^2', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten −1 är negativ. Då']],
+      [['är det inget polynom.']]
+    ], 1.05);
+    y += 2.9 * F;
+    xe = T.str('Svar: Inte ett polynom', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- d) ---- */
+    y += 3.4 * F;
+    xx = T.str('d) ', padL, y);
+    xx = T.rot('x', xx, y);
+    xx = T.str('+1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Roten ur ', 0], ['x', 1], [' är detsamma som ', 0], ['x', 1]],
+      [['upphöjt till en halv.']]
+    ]);
+    xx = T.str('=x', xx, y);
+    xx = T.fracSup('1', '2', xx, y);
+    T.str('+1', xx + 0.1 * F, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En halv är inget heltal. Då är']],
+      [['det inget polynom.']]
+    ]);
+    y += 2.4 * F;
+    xe = T.str('Svar: Inte ett polynom', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: värdet av ett polynom (ma3c-1.1 ex 2) -------
+   * p(x) = 2x³ − 5x + 4 i x = 2, −1 och 0. Värdet sätts in på BÅDA
+   * ställena där x står, så båda x-en ringas in (REGEL INSÄTTNING). */
+  function layoutPolynomvarde(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var xq = padL + 30, xEq, rings, v0, v1;
+
+    var yP = 96;
+    var xp = T.str('p(x)=2', padL, yP);
+    var xA0 = xp; xp = T.str('x', xp, yP); var xA1 = xp;
+    xp = T.str('^3-5', xp, yP);
+    var xB0 = xp; xp = T.str('x', xp, yP); var xB1 = xp;
+    T.str('+4', xp, yP);
+    T.stepEnd();
+
+    /* ---- a) p(2) ---- */
+    y = yP + 2.6 * F;
+    xx = T.str('a) p(', padL, y);
+    v0 = xx; xx = T.str('2', xx, y); v1 = xx;
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag sätter in 2 på båda']],
+      [['ställena där ', 0], ['x', 1], [' står.']]
+    ]);
+    rings = substRings(acts, [[v0, v1, y, F], [xA0, xA1, yP, F],
+                              [xB0, xB1, yP, F]]);
+    y += 2.3 * F;
+    xEq = T.str('p(2)', xq, y);
+    T.str('=2·2^3-5·2+4', xEq, y);
+    fadeRings(acts, rings);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Potensen först: 2 upphöjt till']],
+      [['3 är 8. Sedan multiplikationerna.']]
+    ]);
+    y += 2.2 * F;
+    T.str('=2·8-10+4', xEq, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('=16-10+4=10', xEq, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: p(2)=10', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) p(−1) ---- */
+    y += 3.2 * F;
+    xx = T.str('b) p(', padL, y);
+    v0 = xx; xx = T.str('-1', xx, y); v1 = xx;
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu är värdet negativt. Jag']],
+      [['sätter −1 inom parentes, så att']],
+      [['minustecknet följer med.']]
+    ]);
+    rings = substRings(acts, [[v0, v1, y, F], [xA0, xA1, yP, F],
+                              [xB0, xB1, yP, F]]);
+    y += 2.3 * F;
+    xEq = T.str('p(-1)', xq, y);
+    T.str('=2·(-1)^3-5·(-1)+4', xEq, y);
+    fadeRings(acts, rings);
+    T.stepEnd();
+
+    tanke(y, [
+      [['(−1)·(−1)·(−1) är −1, och']],
+      [['minus gånger minus blir plus.']]
+    ]);
+    y += 2.2 * F;
+    T.str('=2·(-1)+5+4', xEq, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('=-2+5+4=7', xEq, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: p(-1)=7', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) p(0) ---- */
+    y += 3.2 * F;
+    xx = T.str('c) p(', padL, y);
+    v0 = xx; xx = T.str('0', xx, y); v1 = xx;
+    T.str(')', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Med 0 insatt blir alla termer']],
+      [['med ', 0], ['x', 1], [' noll. Bara konstanttermen']],
+      [['blir kvar.']]
+    ]);
+    rings = substRings(acts, [[v0, v1, y, F], [xA0, xA1, yP, F],
+                              [xB0, xB1, yP, F]]);
+    y += 2.3 * F;
+    xEq = T.str('p(0)', xq, y);
+    T.str('=2·0^3-5·0+4', xEq, y);
+    fadeRings(acts, rings);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('=0-0+4=4', xEq, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: p(0)=4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: multiplicera polynom (ma3c-1.1 ex 3) --------
+   * (2x − 3)(x² + 4x − 1): sex produkter. Bågarna från 2x ritas ovanför
+   * raden och bågarna från −3 underifrån (REGEL BÅGARNA FRÅN ANDRA TERMEN
+   * RITAS UNDERIFRÅN). Produkterna skrivs uträknade direkt, annars ryms
+   * inte raden; sedan ringas likadana termer in och slås ihop. */
+  function layoutMultpolynom(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var multIn = mkMultIn(T), samla = mkSamla(T);
+
+    /* ---- a) ---- */
+    y = 190;
+    var xa = T.str('a) (', padL, y);
+    var c1 = xa; xa = T.str('2x', xa, y);  var c1b = xa;
+    var c2 = xa; xa = T.str('-3', xa, y);  var c2b = xa;
+    xa = T.str(')(', xa, y);
+    var d1 = xa; xa = T.str('x^2', xa, y); var d1b = xa;
+    xa = T.str('+', xa, y);
+    var d2 = xa; xa = T.str('4x', xa, y);  var d2b = xa;
+    var d3 = xa; xa = T.str('-1', xa, y);  var d3b = xa;
+    T.str(')', xa, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Varje term i första parentesen']],
+      [['gånger varje term i den andra.']],
+      [['Det blir sex produkter, och jag']],
+      [['räknar ut var och en direkt.']]
+    ]);
+    var yArc = y - 0.95 * F;
+    y += 3.1 * F;
+    var yM = y;
+    xx = T.str('=', padL + 30, y);
+    var delar = [
+      { fran: [c1, c1b], till: [d1, d1b], skriv: '2x^3', hojd: 24 },
+      { fran: [c1, c1b], till: [d2, d2b], skriv: '+8x^2', hojd: 40, dx: 3 },
+      { fran: [c1, c1b], till: [d3, d3b], skriv: '-2x', hojd: 56, dx: 6 },
+      { fran: [c2, c2b], till: [d1, d1b], skriv: '-3x^2', hojd: 18,
+        under: true },
+      { fran: [c2, c2b], till: [d2, d2b], skriv: '-12x', hojd: 32, dx: 3,
+        under: true },
+      { fran: [c2, c2b], till: [d3, d3b], skriv: '+3', hojd: 46, dx: 6,
+        under: true }
+    ];
+    multIn(xx, y, yArc, delar);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu slår jag ihop likadana']],
+      [['termer.']]
+    ]);
+    /* en positiv term ringas utan sitt plustecken (REGEL SAMLA) */
+    var pl = T.adv('+');
+    y += 2.3 * F;
+    samla(padL + 30, y, [
+      { skriv: '=2x^3' },
+      { ringar: [[delar[1].x0 + pl, delar[1].x1, yM],
+                 [delar[3].x0, delar[3].x1, yM]], skriv: '+5x^2' },
+      { ringar: [[delar[2].x0, delar[2].x1, yM],
+                 [delar[4].x0, delar[4].x1, yM]], skriv: '-14x' },
+      { skriv: '+3' }
+    ]);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: 2x^3+5x^2-14x+3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Graden är den högsta']],
+      [['exponenten. Den termen kommer']],
+      [['från 2', 0], ['x', 1], [' gånger ', 0], ['x', 1], [' upphöjt till 2.']]
+    ]);
+    y += 3.2 * F;
+    T.str('b) 2x·x^2=2x^3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Graderna adderas: 2', 0], ['x', 1], [' har grad 1']],
+      [['och ', 0], ['x', 1], [' upphöjt till 2 har grad 2.']]
+    ]);
+    y += 2.3 * F;
+    T.str('Grad: 1+2=3', padL + 30, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: Grad 3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: faktorisera polynom (ma3c-1.1 ex 4) ---------
+   * Bryt ut först (parentesen stängs sist, term för term), pröva sedan
+   * konjugatregeln eller kvadreringsregeln på parentesen. Regeln poppar
+   * upp som blå not ovanför raden där den används (REGELNOT). */
+  function layoutFaktoriserapolynom(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, xEq, not;
+    var tanke = mkTanke(T);
+    /* regelnoten ovanför raden, men aldrig in i pilzonen */
+    function notX(t, x0) {
+      return Math.min(x0 + 2 * F, PAPER_W - 44 - T.adv(t, 0.7));
+    }
+
+    /* ---- a) ---- */
+    y = 182;
+    xx = T.str('a) 6x^3-9x^2', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['6 och 9 är delbara med 3, och']],
+      [['båda termerna har ', 0], ['x', 1], [' upphöjt till']],
+      [['minst 2. Jag bryter ut 3', 0], ['x', 1], ['².']]
+    ]);
+    xx = T.str('=3x^2(', xx, y);
+    T.stepEnd();
+    xx = T.str('2x', xx, y);
+    T.stepEnd();
+    T.str('-3)', xx, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: 3x^2(2x-3)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.2 * F;
+    xx = T.str('b) x^3-16x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda termerna har ett ', 0], ['x', 1], ['. Jag']],
+      [['bryter ut ', 0], ['x', 1], [' först.']]
+    ]);
+    xEq = xx;
+    xx = T.str('=x(', xx, y);
+    T.stepEnd();
+    xx = T.str('x^2', xx, y);
+    T.stepEnd();
+    T.str('-16)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['16 är 4 i kvadrat. Parentesen']],
+      [['är en skillnad mellan två']],
+      [['kvadrater.']]
+    ]);
+    y += 2.9 * F;
+    not = regelNotT(T, F, 'a^2-b^2=(a+b)(a-b)', notX('a^2-b^2=(a+b)(a-b)', xEq), y - 1.35 * F);
+    T.str('=x(x+4)(x-4)', xEq, y);
+    T.stepEnd();
+    regelNotGom(T, not);
+
+    y += 2.4 * F;
+    xe = T.str('Svar: x(x+4)(x-4)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    y += 3.2 * F;
+    xx = T.str('c) 2x^3+12x^2+18x', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Alla tal är delbara med 2 och']],
+      [['alla termer har ett ', 0], ['x', 1], ['. Jag']],
+      [['bryter ut 2', 0], ['x', 1], ['.']]
+    ]);
+    /* raden blir för lång för arket: utbrytningen börjar på ny rad */
+    y += 2.4 * F;
+    xEq = padL + 30;
+    xx = T.str('=2x(', xEq, y);
+    T.stepEnd();
+    xx = T.str('x^2', xx, y);
+    T.stepEnd();
+    xx = T.str('+6x', xx, y);
+    T.stepEnd();
+    T.str('+9)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['9 är 3 i kvadrat och 6', 0], ['x', 1], [' är']],
+      [['2·3·', 0], ['x', 1], ['. Parentesen är en']],
+      [['kvadrat på en summa.']]
+    ]);
+    y += 2.9 * F;
+    not = regelNotT(T, F, '(a+b)^2=a^2+2ab+b^2', notX('(a+b)^2=a^2+2ab+b^2', xEq), y - 1.35 * F);
+    T.str('=2x(x+3)^2', xEq, y);
+    T.stepEnd();
+    regelNotGom(T, not);
+
+    y += 2.4 * F;
+    xe = T.str('Svar: 2x(x+3)^2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: enkla polynomekvationer (ma3c-1.2 ex 1) -----
+   * x³ = 64, 2x⁴ = 162 och x³ + 8 = 0. Potensen görs ensam (båda led
+   * eller väggen), roten skrivs som egen rad och värdet på nästa. */
+  function layoutEnklapolyekv(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var xc = padL + 30;
+
+    /* ---- a) ---- */
+    y = 110;
+    T.str('a) x^3=64', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 3 är udda. Då finns']],
+      [['en lösning: tredjeroten ur 64.']]
+    ]);
+    y += 2.6 * F;
+    xx = T.str('x=', xc, y);
+    T.rot('64', xx, y, 3);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vilket tal gånger sig självt tre']],
+      [['gånger blir 64? 4·4·4=64.']]
+    ]);
+    y += 2.4 * F;
+    T.str('x=4', xc, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: x=4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.2 * F;
+    xx = T.str('b) 2x^4=162', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först ska potensen stå ensam.']],
+      [['Jag dividerar båda led med 2.']]
+    ]);
+    y = ekvOp(y, '/2', xx + 0.6 * F, '2x^4=162', { dyRes: 3.0, dyVagg: 2.4 });
+    T.str('x^4=81', xc, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 4 är jämn. Både 3']],
+      [['och −3 upphöjt till 4 blir 81,']],
+      [['så det finns två lösningar.']]
+    ]);
+    y += 2.6 * F;
+    xx = T.str('x=±', xc, y);
+    T.rot('81', xx, y, 4);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('x=±3', xc, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: x_1=-3 och x_2=3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    y += 3.2 * F;
+    xx = T.str('c) x^3+8=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först ska potensen stå ensam.']],
+      [['Jag subtraherar 8 från båda led.']]
+    ]);
+    y = ekvOp(y, '-8', xx + 0.6 * F, 'x^3+8=0');
+    T.str('x^3=-8', xc, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 3 är udda, så']],
+      [['tredjeroten ur ett negativt tal']],
+      [['går bra.']]
+    ]);
+    y += 2.6 * F;
+    xx = T.str('x=', xc, y);
+    T.rot('-8', xx, y, 3);
+    T.stepEnd();
+
+    tanke(y, [
+      [['(−2)·(−2)·(−2)=−8.']]
+    ]);
+    y += 2.4 * F;
+    T.str('x=-2', xc, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: x=-2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: bryt ut x (ma3c-1.2 ex 2) --------------------
+   * x³ − 2x² − 15x = 0. x bryts ut (parentesen stängs sist), sedan
+   * nollproduktmetoden och pq-formeln på andragradsfaktorn. */
+  function layoutBrytutpolyekv(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var xc = padL + 30;
+
+    y = 110;
+    T.str('x^3-2x^2-15x=0', xc, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Alla termer har ett ', 0], ['x', 1], ['. Jag bryter']],
+      [['ut ', 0], ['x', 1], [', så blir vänsterledet en']],
+      [['produkt.']]
+    ]);
+    y += 2.6 * F;
+    xx = T.str('x(', xc, y);
+    T.stepEnd();
+    xx = T.str('x^2', xx, y);
+    T.stepEnd();
+    xx = T.str('-2x', xx, y);
+    T.stepEnd();
+    xx = T.str('-15)', xx, y);
+    T.str('=0', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En produkt är noll bara om']],
+      [['någon av faktorerna är noll.']]
+    ]);
+    y += 2.6 * F;
+    xx = T.str('x_1=0', xc, y);
+    xx = T.str('eller', xx + 0.6 * F, y, null, 0.62);
+    T.str('x^2-2x-15=0', xx + 0.6 * F, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Andra ekvationen löser jag med']],
+      [['pq', 1], ['-formeln. Här är ', 0], ['p', 1], ['=−2 och ', 0], ['q', 1], ['=−15.']]
+    ]);
+    y += 2.2 * F;
+    rubrikBindestreck(T, ['Löser andra ekvationen med pq', 'formeln'], padL, y);
+    y += 2.0 * F;
+    xx = T.str('x=1±', xc, y);
+    T.rot('1+15', xx, y);
+    T.stepEnd();
+
+    y += 2.5 * F;
+    xx = T.str('x=1±', xc, y);
+    T.rot('16', xx, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('x=1±4', xc, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('x_2=1-4=-3', xc, y);
+    T.pause(300);
+    T.str('x_3=1+4=5', xc + 340, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: x_1=0, x_2=-3 och x_3=5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: byt variabel (ma3c-1.2 ex 3) -----------------
+   * x⁴ − 10x² + 9 = 0 med t = x². Andragradsekvationen i t löses med
+   * pq-formeln, och de två t-värdena ger var sin kolumn tillbaka till x. */
+  function layoutBytvariabel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var xc = padL + 30, xh = padL + 330;
+
+    y = 110;
+    T.str('x^4-10x^2+9=0', xc, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x', 1], [' upphöjt till 4 är (', 0], ['x', 1], ['²)². Med']],
+      [['t', 1], ['=', 0], ['x', 1], ['² blir det en andragrads-']],
+      [['ekvation i ', 0], ['t', 1], ['.']]
+    ]);
+    y += 2.2 * F;
+    T.str('Byter variabel: t=x^2 ger x^4=t^2', padL, y, null, 0.62);
+    y += 2.0 * F;
+    T.str('t^2-10t+9=0', xc, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['pq', 1], ['-formeln med ', 0], ['p', 1], ['=−10 och ', 0], ['q', 1], ['=9.']]
+    ]);
+    y += 2.2 * F;
+    rubrikBindestreck(T, ['Löser med pq', 'formeln'], padL, y);
+    y += 2.0 * F;
+    xx = T.str('t=5±', xc, y);
+    T.rot('25-9', xx, y);
+    T.stepEnd();
+
+    y += 2.5 * F;
+    xx = T.str('t=5±', xc, y);
+    T.rot('16', xx, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('t=5±4', xc, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('t_1=1', xc, y);
+    T.pause(300);
+    T.str('t_2=9', xh, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu går jag tillbaka till ', 0], ['x', 1], ['. Varje']],
+      [['t', 1], ['-värde ger en egen ekvation.']]
+    ]);
+    y += 2.6 * F;
+    T.str('x^2=1', xc, y);
+    T.pause(300);
+    T.str('x^2=9', xh, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('x=±', xc, y);
+    T.rot('1', xx, y);
+    T.pause(300);
+    xx = T.str('x=±', xh, y);
+    T.rot('9', xx, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('x=±1', xc, y);
+    T.pause(300);
+    T.str('x=±3', xh, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: x_1=-3, x_2=-1, x_3=1 och x_4=3', padL, y, null, 0.9);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: faktorer och nollställen (ma3c-1.2 ex 4) ----
+   * a) Nollställena ur pq-formeln ger faktorerna, k = 3.
+   * b) Nollställena ger faktorerna men inte k; villkoret p(0) = 16 sätts
+   *    in (ringar) och ger en ekvation för k. */
+  function layoutFaktornollstalle(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, rings;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var xc = padL + 30;
+
+    /* ---- a) ---- */
+    y = 190;
+    T.str('a) Söker nollställena: p(x)=0', padL, y, null, 0.62);
+    y += 2.0 * F;
+    xx = T.str('3x^2-6x-24=0', xc, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['pq', 1], ['-formeln kräver att ', 0], ['x', 1], ['² står']],
+      [['ensamt. Jag dividerar båda led']],
+      [['med 3.']]
+    ]);
+    y = ekvOp(y, '/3', xx + 0.6 * F, '3x^2-6x-24=0',
+              { dyRes: 3.0, dyVagg: 2.4 });
+    T.str('x^2-2x-8=0', xc, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    rubrikBindestreck(T, ['Löser med pq', 'formeln, p=-2 och q=-8'], padL, y);
+    y += 2.0 * F;
+    xx = T.str('x=1±', xc, y);
+    T.rot('1+8', xx, y);
+    T.stepEnd();
+
+    y += 2.5 * F;
+    xx = T.str('x=1±', xc, y);
+    T.rot('9', xx, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('x=1±3', xc, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('x_1=-2', xc, y);
+    T.pause(300);
+    T.str('x_2=4', xc + 270, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nollstället −2 ger faktorn (', 0], ['x', 1], ['+2)']],
+      [['och 4 ger (', 0], ['x', 1], ['−4). Talet framför']],
+      [['x', 1], ['² är 3, alltså ', 0], ['k', 1], ['=3.']]
+    ]);
+    y += 2.6 * F;
+    xx = T.str('p(x)=3(x-(-2))(x-4)', xc, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('=3(x+2)(x-4)', xc + T.adv('p(x)'), y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: p(x)=3(x+2)(x-4)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Varje nollställe ger en faktor.']],
+      [['Talet ', 0], ['k', 1], [' framför vet jag inte än.']]
+    ]);
+    y += 3.4 * F;
+    var yK = y;
+    xx = T.str('b) p(x)=k(', padL, y);
+    var X1 = xx; xx = T.str('x', xx, y); var X1b = xx;
+    xx = T.str('+2)(', xx, y);
+    var X2 = xx; xx = T.str('x', xx, y); var X2b = xx;
+    xx = T.str('-1)(', xx, y);
+    var X3 = xx; xx = T.str('x', xx, y); var X3b = xx;
+    xx = T.str('-4)', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Villkoret ', 0], ['p', 1], ['(0)=16 bestämmer ', 0], ['k', 1], ['.']],
+      [['Jag sätter in 0 där ', 0], ['x', 1], [' står.']]
+    ]);
+    y += 2.2 * F;
+    var xr = T.str('Sätter in villkoret p(', padL, y, null, 0.62);
+    var v0 = xr; xr = T.str('0', xr, y, null, 0.62); var v1 = xr;
+    T.str(')=16', xr, y, null, 0.62);
+    T.pause(200);
+    rings = substRings(acts, [[v0, v1, y, 0.62 * F], [X1, X1b, yK, F],
+                              [X2, X2b, yK, F], [X3, X3b, yK, F]]);
+    y += 2.1 * F;
+    xx = T.str('k(0+2)(0-1)(0-4)=16', xc, y);
+    fadeRings(acts, rings);
+    T.stepEnd();
+
+    tanke(y, [
+      [['2·(−1)·(−4)=8.']]
+    ]);
+    y += 2.3 * F;
+    xx = T.str('8k=16', xc, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/8', xx + 0.6 * F, '8k=16', { dyRes: 3.0, dyVagg: 2.4 });
+    var xk = T.str('k=', xc, y);
+    var k0 = xk; xk = T.str('2', xk, y); var k1 = xk;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag sätter in ', 0], ['k', 1], ['=2 i uttrycket']],
+      [['för ', 0], ['p', 1], ['(', 0], ['x', 1], [').']]
+    ]);
+    var kx0 = padL + T.adv('b) p(x)='), kx1 = kx0 + T.adv('k');
+    rings = substRings(acts, [[k0, k1, y, F], [kx0, kx1, yK, F]]);
+    y += 2.3 * F;
+    xe = T.str('Svar: p(x)=2(x+2)(x-1)(x-4)', padL, y);
+    fadeRings(acts, rings);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: förläng ett bråk (ma3c-1.3 ex 1) -----------
    * Förlängningen skrivs i två drag (se REGEL FÖRKORTNING OCH
    * FÖRLÄNGNING): först bråket som det står, sedan operationen i båda
    * leden av bråkstrecket. */
@@ -50551,7 +51375,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 5.6 * F, padL: padL };
   }
 
-  /* ---------------- scen: förkorta ett bråk (ma3c-1.1 ex 2) ----------
+  /* ---------------- scen: förkorta ett bråk (ma3c-1.3 ex 2) ----------
    * Två vägar: dela med den största gemensamma delaren, eller
    * primtalsfaktorisera och stryka gemensamma faktorer. */
   function layoutForkortafjorton(cfg, F) {
@@ -50740,7 +51564,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: förenkla rationella uttryck (ma3c-1.2 ex 1) -
+  /* ---------------- scen: förenkla rationella uttryck (ma3c-1.4 ex 1) -
    * Samma nämnare i a); i b) görs termerna liknämniga genom att varje
    * term förlängs med den andras nämnare. */
   function layoutForenklarationella(cfg, F) {
@@ -50839,7 +51663,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 2.4 * F, padL: padL };
   }
 
-  /* ---------------- scen: rationella ekvationer (ma3c-1.2 ex 2) ------
+  /* ---------------- scen: rationella ekvationer (ma3c-1.4 ex 2) ------
    * Multiplikation med MGN röjer undan nämnarna. Står x i en nämnare
    * måste lösningarna prövas mot definitionsmängden till sist. */
   function layoutRationellaekvationer(cfg, F) {
@@ -51175,7 +51999,7 @@
              ekvval: 1 };
   }
 
-  /* ---------------- scen: sätt in värdet direkt (ma3c-1.4 ex 1) ------ */
+  /* ---------------- scen: sätt in värdet direkt (ma3c-1.6 ex 1) ------ */
   function layoutGranssattain(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T), lim = mkLim(T, F);
@@ -51209,7 +52033,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 5.2 * F, padL: padL };
   }
 
-  /* ---------------- scen: förkorta uttrycket (ma3c-1.4 ex 2) ---------
+  /* ---------------- scen: förkorta uttrycket (ma3c-1.6 ex 2) ---------
    * Insättning ger 0/0. Tabellerna visar vad uttrycket närmar sig, och
    * förkortningen visar varför. */
   function layoutGransforkorta(cfg, F) {
@@ -51288,7 +52112,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: gränsvärde saknas (ma3c-1.4 ex 3) ----------
+  /* ---------------- scen: gränsvärde saknas (ma3c-1.6 ex 3) ----------
    * Olika värden underifrån och ovanifrån betyder att gränsvärdet
    * saknas. */
   function layoutGranssaknas(cfg, F) {
@@ -51340,7 +52164,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: oändlighet i nämnaren (ma3c-1.4 ex 4) ------ */
+  /* ---------------- scen: oändlighet i nämnaren (ma3c-1.6 ex 4) ------ */
   function layoutGransoandlig(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T), lim = mkLim(T, F);
@@ -51366,7 +52190,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
   }
 
-  /* ---------------- scen: oändlighet i båda leden (ma3c-1.4 ex 5) ----
+  /* ---------------- scen: oändlighet i båda leden (ma3c-1.6 ex 5) ----
    * När både täljare och nämnare växer är det de högsta termerna som
    * bestämmer kvoten. */
   function layoutGransbadaoandliga(cfg, F) {
@@ -51408,7 +52232,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: utveckla med CAS (ma3c-1.5 ex 1) -----------
+  /* ---------------- scen: utveckla med CAS (ma3c-1.7 ex 1) -----------
    * Pennan skriver ned kommandot och svaret, precis som man antecknar
    * vad verktyget gjorde. */
   function layoutCasutveckla(cfg, F) {
@@ -51443,7 +52267,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 4.6 * F, padL: padL };
   }
 
-  /* ---------------- scen: faktorisera med CAS (ma3c-1.5 ex 2) -------- */
+  /* ---------------- scen: faktorisera med CAS (ma3c-1.7 ex 2) -------- */
   function layoutCasfaktorisera(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
@@ -51532,7 +52356,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 4.6 * F, padL: padL };
   }
 
-  /* ---------------- scen: funktionsvärde med CAS (ma3c-1.5 ex 4) ----- */
+  /* ---------------- scen: funktionsvärde med CAS (ma3c-1.7 ex 4) ----- */
   function layoutCasfunktion(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
@@ -51573,7 +52397,7 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: gränsvärde med CAS (ma3c-1.5 ex 5) --------- */
+  /* ---------------- scen: gränsvärde med CAS (ma3c-1.7 ex 5) --------- */
   function layoutCasgransvarde(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T), lim = mkLim(T, F);
@@ -62228,6 +63052,13 @@
                    forkortafjorton: layoutForkortafjorton,
                    forlangrationellt: layoutForlangrationellt,
                    forkortarationella: layoutForkortarationella,
+                   /* Ma3c 1.1–1.2 */
+                   polynomgrad: layoutPolynomgrad, polynomvarde: layoutPolynomvarde,
+                   multpolynom: layoutMultpolynom,
+                   faktoriserapolynom: layoutFaktoriserapolynom,
+                   enklapolyekv: layoutEnklapolyekv, brytutpolyekv: layoutBrytutpolyekv,
+                   bytvariabel: layoutBytvariabel,
+                   faktornollstalle: layoutFaktornollstalle,
                    forenklarationella: layoutForenklarationella,
                    rationellaekvationer: layoutRationellaekvationer,
                    multrationella: layoutMultrationella,
@@ -62430,7 +63261,7 @@
     var W = paperW, H = paperH + 1.9 * F;   /* extra luft under sista raden */
 
     var wrap = document.createElement('div');
-    wrap.className = 'hk-wrap';
+    wrap.className = 'hk-wrap i18n-ja';
     var paperDiv = document.createElement('div');
     paperDiv.className = 'hk-paper';
     paperDiv.title = 'Klicka för nästa steg';
@@ -63519,7 +64350,7 @@
     var wrapEl = div.querySelector('.hk-wrap');
     if (!wrapEl) return;
     var row = document.createElement('div');
-    row.className = 'hk-vyval';
+    row.className = 'hk-vyval i18n-ja';
     row.setAttribute('role', 'group');
     row.setAttribute('aria-label', 'Välj hur lösningen visas');
     var lbl = document.createElement('span');
@@ -63656,3 +64487,7 @@
     }
   };
 })();
+
+// Engelska: pennlösningarnas text översätts av ordlistorna i data/en/handskrift/*.js
+// (nycklarna = de svenska strängarna, se tillBmp och .claude/i18n/handskrift-strangar.js).
+if (window.I18N) window.I18N.overlay('handskrift');

@@ -279,7 +279,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 7, del: 'B', poang: [1, 1, 1], omrade: 'Algebra — förenkling',
-            genomgangar: ['ma3c-1.1', 'ma2c-2.1'],
+            genomgangar: ['ma3c-1.3', 'ma2c-2.1'],
             endastSvar: true,
             fraga: 'Förenkla uttrycken så långt som möjligt.<br>' +
                 '**a)** $\\dfrac{5x^3 - x^6}{x^3}$<br>' +
@@ -656,7 +656,7 @@ window.NP_PROV['ma3c-vt2022'] = {
 
         {
             nr: 17, del: 'C', poang: [0, 1, 3], omrade: 'Derivatans definition',
-            genomgangar: ['ma3c-2.3', 'ma3c-1.2'],
+            genomgangar: ['ma3c-2.3', 'ma3c-1.4'],
             fraga: 'Funktionen $f$ ges av $f(x) = \\dfrac{5}{a^2 x}$ där $x \\neq 0$ och $a \\neq 0$\n\n' +
                 'Bestäm $f\'(x)$ med hjälp av derivatans definition.',
             figur: null,
@@ -1171,3 +1171,5 @@ window.NP_PROV['ma3c-vt2022'] = {
         },
     ],
 };
+
+if (window.I18N) window.I18N.overlay('np/ma3c-vt2022');

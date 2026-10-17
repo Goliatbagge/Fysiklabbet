@@ -1,237 +1,215 @@
 ---
 id: ma3c-1.4
-title: Gränsvärden
+title: Addition och subtraktion av rationella uttryck
 course: Matematik fortsättning nivå 1c
 chapter: Rationella uttryck och gränsvärden
 chapterNumber: 1
 section: '1.4'
 ---
 
-# Gränsvärden
+# Addition och subtraktion av rationella uttryck
 
-::: härledning "Introduktion — gränsvärde"
-Vi undersöker värdet hos uttrycket $\dfrac{1}{x}$ när $x$ blir större och
-större.
+För att addera och subtrahera rationella uttryck krävs (precis som för
+bråk) att de har **samma nämnare**. I det här avsnittet löser vi också
+ekvationer som innehåller rationella uttryck.
 
-$$
-\frac{1}{10} = 0{,}1 \qquad \frac{1}{100} = 0{,}01 \qquad
-\frac{1}{1000} = 0{,}001 \qquad \frac{1}{10\,000} = 0{,}0001
-$$
+::: tips "Lösa ekvationer med rationella uttryck"
+Kontrollera först för vilka värden på $x$ som nämnaren eller nämnarna blir
+lika med noll. För dessa värden är ekvationen inte definierad, så de är
+inte tillåtna som lösningar. Lös sedan ekvationen med någon av metoderna:
 
-Vi ser att när $x$ ökar, kommer värdet av $\dfrac{1}{x}$ närmare och närmare
-0. Talet 0 är den gräns som värdet går mot — men det når aldrig fram dit.
-Vi säger att **gränsvärdet är 0**.
+1. **Multiplicera med minsta gemensamma nämnaren (MGN).** Multiplicera
+   båda leden med MGN (eller en annan gemensam nämnare). Förkorta sedan
+   och lös som vanligt.
+2. **Gör liknämnigt.** Förläng termerna så att de får samma nämnare. Slå
+   sedan ihop dem på ett enda divisionsstreck och utnyttja att
+   $\text{täljare} = \text{kvot} \cdot \text{nämnare}$ (eller motsvarande).
 :::
 
-Ett värde som ett uttryck närmar sig kallas **gränsvärde**. I exemplet ovan
-gäller alltså att gränsvärdet när $x$ går mot oändligheten ($\infty$) för
-$\dfrac{1}{x}$ är lika med 0. Detta skrivs
+## Addera och subtrahera rationella uttryck
 
-$$
-\lim_{x \to \infty} \frac{1}{x} = 0
-$$
+Har termerna redan samma nämnare adderar eller subtraherar vi bara
+täljarna — nämnaren förblir densamma. Har de olika nämnare måste vi först
+göra dem liknämniga, precis som för vanliga bråk: vi förlänger varje term
+med den andra termens nämnare.
 
-Beteckningen $\lim_{x \to \infty}$ utläses "limes då $x$ går mot
-oändligheten" eller "gränsvärdet då $x$ går mot oändligheten" (ordet kommer
-av det latinska *limes*, som betyder just "gräns" — jämför med engelskans
-*limit*).
-
-Gränsvärden kan bestämmas med olika metoder beroende på hur uttrycket ser ut
-och på om variabeln går mot ett tal eller mot en oändlighet.
-
-## Gränsvärde då variabeln går mot ett tal
-
-::: tips "Bestämma gränsvärde då variabeln går mot ett tal"
-1. **Metod 1:** Sätt in det värde som $x$ går mot direkt och beräkna.
-2. **Metod 2:** Faktorisera och förkorta uttrycket, och sätt sedan in
-   värdet som $x$ går mot.
-3. **Metod 3:** Gör två tabeller och närma dig värdet som $x$ går mot
-   underifrån ("från vänster") respektive ovanifrån ("från höger"). Går de
-   mot samma gränsvärde är det uttryckets gränsvärde. Går de mot olika
-   värden saknas gränsvärde.
-
-Metoderna är sorterade efter hur effektiva de är. Fungerar inte metod 1, gå
-vidare till metod 2. Fungerar inte metod 2, gå vidare till metod 3.
-:::
-
-::: exempel "Exempel 1 — Sätta in värdet direkt"
-**Bestäm $\displaystyle\lim_{x \to 2} (x + 5)$.**
+::: exempel "Exempel 1 — Förenkla"
+**Förenkla**
 
 ::: handskrift
-typ: granssattain
+typ: forenklarationella
 :::
 
 ::: textlosning
-Uttrycket $x + 5$ är definierat för alla $x$, så metod 1 fungerar: vi sätter
-in $x = 2$ direkt (samtidigt som limes-beteckningen tas bort) och beräknar.
-
 $$
-\lim_{x \to 2} (x + 5) = 2 + 5 = 7
+\text{a)}\ \frac{5x^2}{x - 2} + \frac{7}{x - 2} \qquad
+\text{b)}\ \frac{8x}{x + 3} - \frac{5x - 9}{x}
 $$
 
-**Svar:** $7$
+**a)** Här har båda termerna samma nämnare, så täljarna adderas.
+
+$$
+\frac{5x^2}{x - 2} + \frac{7}{x - 2} = \frac{5x^2 + 7}{x - 2}
+$$
+
+**Svar:** $\dfrac{5x^2 + 7}{x - 2}$
+
+**b)** Här har termerna olika nämnare. För att få samma nämnare förlänger
+vi den första termen med nämnaren i den andra termen, $x$, och den andra
+termen med nämnaren i den första termen, $(x + 3)$.
+
+$$
+\frac{8x}{x + 3} - \frac{5x - 9}{x} = \frac{8x \cdot x}{(x + 3) \cdot x} - \frac{(5x - 9)(x + 3)}{x \cdot (x + 3)} = \frac{8x^2}{x(x + 3)} - \frac{(5x - 9)(x + 3)}{x(x + 3)}
+$$
+
+Nu har båda termerna samma nämnare $x(x + 3)$, och vi kan subtrahera
+täljarna på ett gemensamt divisionsstreck.
+
+$$
+\frac{8x^2 - (5x - 9)(x + 3)}{x(x + 3)} = \frac{8x^2 - (5x^2 + 15x - 9x - 27)}{x(x + 3)} = \frac{8x^2 - 5x^2 - 15x + 9x + 27}{x(x + 3)} = \frac{3x^2 - 6x + 27}{x(x + 3)} = \frac{3(x^2 - 2x + 9)}{x(x + 3)}
+$$
+
+Vi undersöker om $(x^2 - 2x + 9)$ kan faktoriseras mer genom att bestämma
+dess nollställen.
+
+$$
+x^2 - 2x + 9 = 0
+$$
+
+$pq$-formeln ger
+
+$$
+x = 1 \pm \sqrt{1^2 - 9} = 1 \pm \sqrt{-8}
+$$
+
+Uttrycket under rottecknet är negativt, så andragradsekvationen saknar
+reella rötter. $(x^2 - 2x + 9)$ kan alltså inte faktoriseras mer.
+
+**Svar:** $\dfrac{3(x^2 - 2x + 9)}{x(x + 3)}$
 :::
 :::
 
-::: exempel "Exempel 2 — Förkorta uttrycket"
-**Bestäm $\displaystyle\lim_{x \to 1} \frac{x^2 - 1}{x - 1}$ a) med tabeller
-b) genom att förkorta uttrycket.**
+## Lös ekvationer med rationella uttryck
+
+När en ekvation innehåller rationella uttryck börjar vi alltid med att
+kontrollera vilka $x$-värden som gör någon nämnare lika med noll — dessa
+värden får aldrig vara med i svaret. Sedan löser vi ekvationen med metod 1
+eller metod 2 från rutan ovan.
+
+::: exempel "Exempel 2 — Lös ekvationerna"
+**Lös ekvationerna**
 
 ::: handskrift
-typ: gransforkorta
+typ: rationellaekvationer
 :::
 
 ::: textlosning
-Metod 1 fungerar inte: sätter vi in $x = 1$ får vi $\dfrac{0}{0}$, och
-uttrycket är inte definierat där.
-
-**a)** Vi gör två tabeller och närmar oss värdet 1 underifrån respektive
-ovanifrån.
-
-| Underifrån $x$ | $\dfrac{x^2 - 1}{x - 1}$ | Ovanifrån $x$ | $\dfrac{x^2 - 1}{x - 1}$ |
-| --- | --- | --- | --- |
-| 0,9 | 1,9 | 1,1 | 2,1 |
-| 0,99 | 1,99 | 1,01 | 2,01 |
-| 0,999 | 1,999 | 1,001 | 2,001 |
-
-Både underifrån och ovanifrån närmar sig uttrycket värdet 2 när $x$ går mot
-1, så
-
 $$
-\lim_{x \to 1} \frac{x^2 - 1}{x - 1} = 2
+\text{a)}\ \frac{x}{2} - \frac{x}{8} = 24 \qquad
+\text{b)}\ \frac{1}{3} + \frac{2}{x - 3} = 1 \qquad
+\text{c)}\ \frac{x}{x - 1} = \frac{2x}{x^2 - 1}
 $$
 
-**b)** Vi faktoriserar täljaren med konjugatregeln och förkortar bort den
-gemensamma faktorn $(x - 1)$.
+**a)** Ingen nämnare innehåller $x$, så ekvationen är definierad för alla
+$x$.
+
+*Metod 1: Multiplicera med MGN.* Här är MGN $= 8$. Vi multiplicerar båda
+leden med 8.
 
 $$
-\lim_{x \to 1} \frac{x^2 - 1}{x - 1} = \lim_{x \to 1} \frac{(x + 1)(x - 1)}{x - 1} = \lim_{x \to 1} (x + 1)
+\frac{x}{2} - \frac{x}{8} = 24 \quad\Rightarrow\quad \frac{x \cdot 8}{2} - \frac{x \cdot 8}{8} = 24 \cdot 8 \quad\Rightarrow\quad 4x - x = 192 \quad\Rightarrow\quad 3x = 192 \quad\Rightarrow\quad x = 64
 $$
 
-Nu är uttrycket definierat vid $x = 1$, så vi sätter in värdet (samtidigt
-som limes-beteckningen tas bort) och beräknar.
+**Svar:** $x = 64$
+
+*Metod 2: Göra liknämnigt.* Vi förlänger den första termen med 4 för att
+få samma nämnare.
 
 $$
-\lim_{x \to 1} (x + 1) = 1 + 1 = 2
+\frac{x}{2} - \frac{x}{8} = 24 \quad\Rightarrow\quad \frac{4x}{8} - \frac{x}{8} = 24 \quad\Rightarrow\quad \frac{4x - x}{8} = 24 \quad\Rightarrow\quad \frac{3x}{8} = 24
 $$
 
-**Svar:** $2$
-:::
-:::
-
-::: exempel "Exempel 3 — Gränsvärde saknas"
-**Bestäm $\displaystyle\lim_{x \to 3} \frac{x + 1}{x - 3}$.**
-
-::: handskrift
-typ: granssaknas
-:::
-
-::: textlosning
-Metod 1 fungerar inte eftersom nämnaren blir 0 vid $x = 3$. Vi kan inte
-heller förkorta uttrycket enligt metod 2 — varken täljaren eller nämnaren
-går att faktorisera. Då återstår metod 3: två tabeller där $x$ närmar sig 3
-underifrån respektive ovanifrån.
-
-| Underifrån $x$ | $\dfrac{x + 1}{x - 3}$ | Ovanifrån $x$ | $\dfrac{x + 1}{x - 3}$ |
-| --- | --- | --- | --- |
-| 2,9 | −39 | 3,1 | 41 |
-| 2,99 | −399 | 3,01 | 401 |
-| 2,999 | −3999 | 3,001 | 4001 |
-
-Underifrån växer uttrycket mot $-\infty$, medan det ovanifrån växer mot
-$+\infty$. Eftersom vi får **olika** gränsvärden underifrån och ovanifrån
-saknas gränsvärde.
-
-**Svar:** Gränsvärde saknas.
-:::
-:::
-
-## Gränsvärde då variabeln går mot en oändlighet
-
-Går enbart täljaren i ett uttryck mot en oändlighet är täljaren alltid
-oändligt mycket större än nämnaren, hur stor nämnaren än är — gränsvärdet
-blir då en oändlighet. Går i stället enbart nämnaren mot en oändlighet blir
-nämnaren oändligt mycket större än täljaren, och kvoten går mot 0. Går
-**både** täljaren och nämnaren mot en oändlighet måste uttrycket först
-förenklas: konstanttermer kan strykas eftersom de försvinner i jämförelse
-med en oändlighet (att hälla en tesked vatten i havet gör fortfarande havet
-"oändligt" mycket större). Därefter kan uttrycket förkortas och
-gränsvärdet bestämmas.
-
-::: tips "Bestämma gränsvärde då variabeln går mot en oändlighet"
-Om en variabel $x$ går mot
-
-- den positiva oändligheten skrivs det $x \to \infty$ eller $x \to +\infty$
-- den negativa oändligheten skrivs det $x \to -\infty$
-
-Ett uttryck med en oändlighet
-
-- enbart i täljaren ger en oändlighet som gränsvärde
-- enbart i nämnaren ger 0 som gränsvärde
-- i både täljaren och nämnaren förenklas genom att konstanttermer stryks.
-  Därefter görs en förkortning och gränsvärdet kan bestämmas.
-:::
-
-::: exempel "Exempel 4 — Oändlighet i nämnaren"
-**Bestäm $\displaystyle\lim_{x \to \infty} \frac{5}{x}$.**
-
-::: handskrift
-typ: gransoandlig
-:::
-
-::: textlosning
-Vi har ett gränsvärde med en oändlighet enbart i nämnaren. Gränsvärdet blir
-då 0.
-
-**Svar:** $0$
-:::
-:::
-
-::: exempel "Exempel 5 — Oändlighet i både täljare och nämnare"
-**Bestäm $\displaystyle\lim_{x \to \infty} \frac{3x + 2}{x - 1}$.**
-
-::: handskrift
-typ: gransbadaoandliga
-:::
-
-::: textlosning
-Vi har ett gränsvärde med oändligheter i både täljaren och nämnaren. Vi
-stryker konstanttermerna, förkortar och beräknar.
-
 $$
-\lim_{x \to \infty} \frac{3x + 2}{x - 1} = \lim_{x \to \infty} \frac{3x}{x} = \lim_{x \to \infty} 3 = 3
+3x = 24 \cdot 8 = 192 \quad\Rightarrow\quad x = \frac{192}{3} = 64
 $$
 
-**Svar:** $3$
+**Svar:** $x = 64$
+
+**b)** Nämnaren $(x - 3)$ gör att ekvationen inte är definierad för
+$x = 3$, så $x \neq 3$. Vi multiplicerar båda leden med MGN
+$= 3(x - 3)$.
+
+$$
+\frac{1 \cdot 3(x - 3)}{3} + \frac{2 \cdot 3(x - 3)}{x - 3} = 1 \cdot 3(x - 3)
+$$
+
+$$
+(x - 3) + 2 \cdot 3 = 3(x - 3) \quad\Rightarrow\quad x - 3 + 6 = 3x - 9 \quad\Rightarrow\quad x + 3 = 3x - 9
+$$
+
+$$
+3 = 2x - 9 \quad\Rightarrow\quad 12 = 2x \quad\Rightarrow\quad x = 6
+$$
+
+**Svar:** $x = 6$
+
+**c)** Vi undersöker för vilka $x$ som nämnarna blir noll.
+
+$$
+x - 1 = 0 \iff x = 1 \qquad\qquad x^2 - 1 = 0 \iff x = \pm 1
+$$
+
+Så $x \neq 1$ och $x \neq -1$. Vi faktoriserar täljare och nämnare så
+långt det går — $(x^2 - 1)$ är en konjugat och faktoriseras som
+$(x + 1)(x - 1)$.
+
+$$
+\frac{x}{x - 1} = \frac{2x}{(x + 1)(x - 1)}
+$$
+
+Vi multiplicerar båda leden med MGN $= (x + 1)(x - 1)$.
+
+$$
+\frac{x(x + 1)(x - 1)}{x - 1} = \frac{2x(x + 1)(x - 1)}{(x + 1)(x - 1)} \quad\Rightarrow\quad x(x + 1) = 2x
+$$
+
+Vi utvecklar och gör högerledet lika med noll.
+
+$$
+x^2 + x = 2x \quad\Rightarrow\quad x^2 - x = 0 \quad\Rightarrow\quad x(x - 1) = 0
+$$
+
+Nollproduktmetoden ger $x_1 = 0$ och $x_2 = 1$. Eftersom $x \neq 1$
+förkastar vi lösningen $x_2 = 1$.
+
+**Svar:** $x = 0$
 :::
 :::
 
 ::: sammanfattning "Sammanfattning"
 
-::: sampunkt "Gränsvärde"
-- Ett **gränsvärde** är det värde ett uttryck närmar sig, utan att nödvändigtvis nå det.
-- Skrivs $\lim_{x \to a} f(x)$ och utläses "limes då $x$ går mot $a$".
-- $\lim_{x \to \infty} \dfrac{1}{x} = 0$, eftersom $\dfrac{1}{x}$ blir hur litet som helst.
+::: sampunkt "Samma nämnare krävs"
+- Har termerna **samma nämnare** adderas eller subtraheras bara täljarna, nämnaren behålls.
+- Har de olika nämnare måste de först göras liknämniga.
+- Förläng varje term med den andra termens nämnare, precis som för bråk.
 :::
 
-::: sampunkt "Variabeln går mot ett tal"
-1. Sätt in värdet direkt och beräkna.
-2. Fungerar det inte: faktorisera, förkorta och sätt sedan in värdet.
-3. Fungerar inte heller det: gör två tabeller och närma dig värdet underifrån och ovanifrån.
-- Metoderna prövas i denna ordning. Ta bort limes-beteckningen i samma steg som värdet sätts in.
+::: sampunkt "Räknefällor"
+- Sätt **parentes** runt hela täljaren som subtraheras, så att alla tecken byts.
+- Förenkla svaret genom att faktorisera täljaren till slut.
+- Saknar ett andragradsuttryck reella nollställen kan det inte faktoriseras mer. Uttrycket under rottecknet är då negativt.
 :::
 
-::: sampunkt "När gränsvärde saknas"
-- Ger tabellerna **olika** värden underifrån och ovanifrån saknas gränsvärde.
-- $\dfrac{x + 1}{x - 3}$ går mot $-\infty$ underifrån och mot $+\infty$ ovanifrån vid $x = 3$, alltså saknas gränsvärde.
-- Formen $\dfrac{0}{0}$ betyder inte att gränsvärdet saknas, bara att metod 1 inte duger.
+::: sampunkt "Definitionsmängd först"
+- Kontrollera alltid vilka $x$-värden som gör en nämnare lika med noll.
+- För de värdena är ekvationen inte definierad, så de är inte tillåtna lösningar.
+- Dyker ett förbjudet värde upp som lösning måste det **förkastas**.
 :::
 
-::: sampunkt "Variabeln går mot en oändlighet"
-- Oändlighet enbart i **täljaren** ger en oändlighet som gränsvärde.
-- Oändlighet enbart i **nämnaren** ger gränsvärdet 0.
-- Oändlighet i **båda**: stryk konstanttermerna, förkorta och beräkna.
-- $\lim_{x \to \infty} \dfrac{3x + 2}{x - 1} = \lim_{x \to \infty} \dfrac{3x}{x} = 3$.
+::: sampunkt "Två metoder att lösa ekvationen"
+1. **Multiplicera med MGN:** multiplicera båda led med minsta gemensamma nämnaren, förkorta och lös som vanligt.
+2. **Gör liknämnigt:** förläng till samma nämnare, slå ihop på ett divisionsstreck och utnyttja att täljaren är kvot gånger nämnare.
+- Faktorisera nämnarna innan MGN bestäms. $x^2 - 1$ är en konjugat och blir $(x + 1)(x - 1)$.
 :::
 
 :::

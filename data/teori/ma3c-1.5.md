@@ -1,208 +1,208 @@
 ---
 id: ma3c-1.5
-title: Symbolhanterande hjälpmedel
+title: Multiplikation och division av rationella uttryck
 course: Matematik fortsättning nivå 1c
 chapter: Rationella uttryck och gränsvärden
 chapterNumber: 1
 section: '1.5'
 ---
 
-# Symbolhanterande hjälpmedel
+# Multiplikation och division av rationella uttryck
 
-En räknare som inte bara kan hantera numeriska beräkningar (beräkningar med
-tal), utan också kan hantera algebraiska uttryck (bokstavsuttryck),
-kallas **symbolhanterande hjälpmedel**. Geogebra är ett exempel på ett
-sådant hjälpmedel.
+För multiplikation och division av rationella uttryck gäller samma regler
+som för multiplikation och division av bråk — skillnaden är att täljare och
+nämnare nu är polynom. Precis som vid förkortning behöver vi ofta
+**faktorisera** först för att kunna förenkla resultatet så långt som
+möjligt.
 
-Symbolhanterande hjälpmedel kan till exempel användas för att förenkla uttryck,
-faktorisera uttryck, lösa ekvationer och bestämma gränsvärden.
+::: formel "Multiplikation av rationella uttryck"
+Vid multiplikation av två rationella uttryck multipliceras täljarna med
+varandra och nämnarna med varandra:
 
-::: tips "Kommandon i Geogebra"
-| Uppgift | Kommando i Geogebra |
-| --- | --- |
-| Förenkla uttryck | Förenkla( Funktion ) |
-| Faktorisera uttryck | Faktorisera( Polynom ) |
-| Lösa ekvationer numeriskt (skriver ut decimaler) | NLös( Ekvation ) |
-| Lösa ekvationer exakt (skriver ut symboler) | Lös( Ekvation ) |
-| Bestämma funktionsvärde | Definiera $f(x) = \ldots$ och skriv sedan till exempel $f(3)$ |
-| Beräkna gränsvärde | Gränsvärde( Funktion, Värde ) |
+$$
+\frac{a}{b} \cdot \frac{c}{d} = \frac{a \cdot c}{b \cdot d}
+$$
+
+Faktorisera gärna täljare och nämnare **innan** du multiplicerar ihop dem —
+det gör det lättare att se vilka faktorer som senare kan förkortas bort.
 :::
 
-::: exempel "Exempel 1 — Förenkla ett uttryck"
-**Förenkla $(x + 3)(x - 1)(x + 5)$ med symbolhanterande hjälpmedel.**
+::: exempel "Exempel 1 — Multiplikation av rationella uttryck"
+**Förenkla<br>a)&nbsp;$\dfrac{3}{8-x}\cdot\dfrac{x^2+5}{6}$&emsp;&emsp;b)&nbsp;$\dfrac{3x+6}{x-2}\cdot\dfrac{x^2-4}{3}$**
 
 ::: handskrift
-typ: casutveckla
+typ: multrationella
 :::
 
 ::: textlosning
-Kommandot *Utveckla* är nära besläktat med *Förenkla* i tabellen ovan — det
-multiplicerar ut parenteserna och skriver om uttrycket i utvecklad
-(expanderad) form. I Geogebras inmatningsfält skriver vi "utv" och väljer
-*Utveckla( Uttryck )* i menyn *Utveckla*. Vi skriver in uttrycket och slår
-Enter.
+**a)** Vi multiplicerar täljare med täljare och nämnare med nämnare:
 
 $$
-\begin{aligned}
-&\text{Utveckla}\big((x + 3)(x - 1)(x + 5)\big) \\
-&\rightarrow\ x^3 + 7x^2 + 7x - 15
-\end{aligned}
+\frac{3}{8-x}\cdot\frac{x^2+5}{6} = \frac{3(x^2+5)}{6(8-x)}
 $$
 
-**Svar:** $x^3 + 7x^2 + 7x - 15$
+Förkortar med 3:
+
+$$
+\frac{3(x^2+5)}{6(8-x)} = \frac{x^2+5}{2(8-x)} = \frac{x^2+5}{16-2x}
+$$
+
+**Svar:** $\dfrac{x^2+5}{2(8-x)} = \dfrac{x^2+5}{16-2x}$
+
+**b)** Vi faktoriserar täljare och nämnare så långt det går, multiplicerar
+ihop dem och förkortar därefter med lika dana faktorer. Täljaren $3x+6$
+bryts ut till $3(x+2)$, och nämnaren $x^2-4$ är en konjugat:
+$x^2-4=(x+2)(x-2)$.
+
+$$
+\frac{3x+6}{x-2}\cdot\frac{x^2-4}{3} = \frac{3(x+2)}{x-2}\cdot\frac{(x+2)(x-2)}{3}
+= \frac{3(x+2)(x+2)(x-2)}{3(x-2)}
+$$
+
+Förkortar med $3(x-2)$:
+
+$$
+\frac{3(x+2)(x+2)(x-2)}{3(x-2)} = (x+2)(x+2) = (x+2)^2 = x^2+4x+4
+$$
+
+**Svar:** $(x+2)^2 = x^2+4x+4$
 :::
 :::
 
-::: exempel "Exempel 2 — Faktorisera ett uttryck"
-**Faktorisera $x^3 + 7x^2 + 7x - 15$ med symbolhanterande hjälpmedel.**
+## Division av rationella uttryck
+
+::: formel "Division av rationella uttryck"
+Vid division med ett rationellt uttryck byter man ut det stora
+divisionstecknet mot multiplikation, samtidigt som man **inverterar**
+(byter plats på täljare och nämnare i) uttrycket i nämnaren. Sedan
+förenklas det som vanligt:
+
+$$
+\frac{a}{b} \Big/ \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}
+$$
+:::
+
+::: exempel "Exempel 2 — Division av rationella uttryck"
+**Förenkla $\dfrac{3x}{x+7} \Big/ \dfrac{5x}{x-2}$.**
 
 ::: handskrift
-typ: casfaktorisera
+typ: divrationella
 :::
 
 ::: textlosning
-I Geogebras inmatningsfält skriver vi "fakt" och väljer
-*Faktorisera( Polynom )* i menyn *Faktorisera*. Vi definierar en funktion med
-uttrycket i kommandot och slår Enter.
+Vi byter ut divisionstecknet mot multiplikation och inverterar uttrycket i
+nämnaren:
 
 $$
-\begin{aligned}
-&f(x) = \text{Faktorisera}(x^3 + 7x^2 + 7x - 15) \\
-&=\ (x - 1)(x + 3)(x + 5)
-\end{aligned}
+\frac{3x}{x+7}\cdot\frac{x-2}{5x} = \frac{3x(x-2)}{5x(x+7)}
 $$
 
-**Svar:** $(x - 1)(x + 3)(x + 5)$
+Förkortar med $x$:
+
+$$
+\frac{3x(x-2)}{5x(x+7)} = \frac{3(x-2)}{5(x+7)} = \frac{3x-6}{5x+35}
+$$
+
+**Svar:** $\dfrac{3(x-2)}{5(x+7)} = \dfrac{3x-6}{5x+35}$
 :::
 :::
 
-::: exempel "Exempel 3 — Lös en tredjegradsekvation"
-**Lös ekvationen $x^3 - x^2 - 3x + 3 = 0$ med symbolhanterande hjälpmedel.
-Svara<br>a) med två decimaler&emsp;&emsp;b) exakt.**
+## Ekvationer med rationella uttryck
+
+Multiplikations- och divisionsreglerna används också när vi löser
+**ekvationer** som innehåller rationella uttryck. Ett viktigt förbehåll:
+eftersom division med noll inte är definierad måste vi alltid utesluta de
+värden på $x$ som gör någon nämnare i ekvationen lika med noll.
+
+::: exempel "Exempel 3 — Lös en ekvation med rationella uttryck"
+**Lös ekvationen $\dfrac{x-2}{x-3} = \dfrac{x+7}{x}$.**
 
 ::: handskrift
-typ: castredjegrad
+typ: rationellkorsvis
 :::
 
 ::: textlosning
-**a)** I Geogebras inmatningsfält skriver vi "nlös" och väljer
-*NLös( Ekvation )* i menyn *NLös*. Vi skriver in ekvationen och slår Enter.
+Eftersom ingen nämnare får vara noll måste $x \neq 3$ och $x \neq 0$.
+
+**Alternativ 1: Multiplicera med MGN**
+
+Vi multiplicerar båda leden med minsta gemensamma nämnaren,
+$MGN = x(x-3)$, och förkortar:
+
+$$
+\frac{x(x-3)(x-2)}{x-3} = \frac{x(x-3)(x+7)}{x}
+\qquad \Longrightarrow \qquad
+x(x-2) = (x-3)(x+7)
+$$
+
+**Alternativ 2: Korsvis multiplikation**
+
+Eftersom ekvationen har formen $\dfrac{a}{b}=\dfrac{c}{d}$ kan vi
+multiplicera korsvis, $a \cdot d = c \cdot b$, vilket ger samma ekvation
+direkt:
+
+$$
+x(x-2) = (x-3)(x+7)
+$$
+
+Båda alternativen leder alltså till samma andragradsekvation. Vi utvecklar
+högerledet:
+
+$$
+x^2 - 2x = x^2 + 4x - 21
+$$
+
+Vi subtraherar $x^2$ från båda led, samlar $x$-termerna på samma sida och
+löser ut $x$:
 
 $$
 \begin{aligned}
-&l_1 = \text{NLös}(x^3 - x^2 - 3x + 3 = 0) \\
-&\approx\ \{x = -1{,}73205,\ x = 1,\ x = 1{,}73205\}
+-2x &= 4x - 21 \\
+-2x - 4x &= -21 \\
+-6x &= -21 \\
+x &= \frac{-21}{-6} = \frac{21}{6} = \frac{7}{2}
 \end{aligned}
 $$
 
-**Svar:** $x_1 \approx -1{,}73$, $x_2 = 1$ och $x_3 \approx 1{,}73$
+Lösningen $x = \dfrac{7}{2}$ är varken 3 eller 0, så den är giltig.
 
-**b)** I stället skriver vi "lös" och väljer *Lös( Ekvation )* i menyn *Lös*.
-
-$$
-\begin{aligned}
-&l_1 = \text{Lös}(x^3 - x^2 - 3x + 3 = 0) \\
-&=\ \{x = -\sqrt{3},\ x = 1,\ x = \sqrt{3}\}
-\end{aligned}
-$$
-
-**Svar:** $x_1 = -\sqrt{3}$, $x_2 = 1$ och $x_3 = \sqrt{3}$
+**Svar:** $x = \dfrac{7}{2}$
 :::
 :::
 
-Observera att man i Geogebra enkelt kan växla mellan exakt och ungefärlig
-form med knapparna "$=$" och "$\approx$" utan att skriva om hela
-kommandot.
-
-::: exempel "Exempel 4 — Funktionsvärde och ekvationslösning"
-**Funktionen $f(x) = x^3 - 4x^2$ är given. Med symbolhanterande hjälpmedel,
-bestäm<br>a) $f(7)$&emsp;&emsp;b) lösningen till $f(x) = 7$.**
-
-::: handskrift
-typ: casfunktion
-:::
-
-::: textlosning
-**a)** Vi definierar funktionen genom att skriva $f(x) = x^3 - 4x^2$ i
-Geogebras inmatningsfält. Därefter skriver vi $f(7)$ på raden under och får
-vårt värde.
-
-$$
-\begin{aligned}
-&f(x) = x^3 - 4x^2 \\[2pt]
-&f(7) \\[2pt]
-&=\ 147
-\end{aligned}
-$$
-
-**Svar:** $147$
-
-**b)** Vi definierar funktionen precis som i a). På raden under väljer vi
-kommandot *Lös( Ekvation )* och skriver $f(x) = 7$ (eller bara $f = 7$) i
-parentesen.
-
-$$
-\begin{aligned}
-&\text{Lös}(f = 7) \\
-&=\ \{x = 4{,}36705\}
-\end{aligned}
-$$
-
-**Svar:** $x \approx 4{,}37$
-:::
-:::
-
-::: exempel "Exempel 5 — Gränsvärde"
-**Bestäm $\displaystyle\lim_{x \to \infty} \frac{3x + 2}{x - 1}$ med
-symbolhanterande hjälpmedel.**
-
-::: handskrift
-typ: casgransvarde
-:::
-
-::: textlosning
-I Geogebras inmatningsfält skriver vi "grän" och väljer
-*Gränsvärde( Funktion, Värde )* i menyn *Gränsvärde*. Vi skriver in
-uttrycket och det värde som variabeln går mot, och slår Enter.
-
-$$
-\begin{aligned}
-&\text{Gränsvärde}\!\left(\frac{3x + 2}{x - 1},\ \infty\right) \\
-&\rightarrow\ 3
-\end{aligned}
-$$
-
-Oändlighetstecknet $\infty$ hittar du bland tangentbordets specialtecken,
-eller genom att skriva "infinity".
-
-**Svar:** $3$
-:::
+::: tips "Sammanfattning"
+1. Multiplikation: täljare gånger täljare, nämnare gånger nämnare.
+2. Division: byt ut divisionstecknet mot multiplikation och invertera
+   uttrycket i nämnaren.
+3. Faktorisera täljare och nämnare innan du förenklar — då syns vilka
+   faktorer som kan förkortas bort.
+4. Uteslut alltid de värden på $x$ som gör någon nämnare i ekvationen lika
+   med noll.
 :::
 
 ::: sammanfattning "Sammanfattning"
 
-::: sampunkt "Vad hjälpmedlet gör"
-- Ett **symbolhanterande hjälpmedel** räknar inte bara med tal utan också med bokstavsuttryck.
-- Geogebra är ett sådant verktyg och klarar förenkling, faktorisering, ekvationer och gränsvärden.
+::: sampunkt "Multiplikation"
+- Täljare gånger täljare, nämnare gånger nämnare: $\dfrac{a}{b} \cdot \dfrac{c}{d} = \dfrac{a \cdot c}{b \cdot d}$.
+- **Faktorisera först**, sedan multiplicera. Då syns direkt vilka faktorer som kan förkortas bort.
 :::
 
-::: sampunkt "Kommandon"
-- Utveckla( Uttryck ) och Förenkla( Funktion ) skriver om uttrycket.
-- Faktorisera( Polynom ) ger faktorerna.
-- Gränsvärde( Funktion, Värde ) ger gränsvärdet. Skriv "infinity" för $\infty$.
+::: sampunkt "Division"
+- Byt divisionstecknet mot multiplikation och **invertera** uttrycket i nämnaren: $\dfrac{a}{b} \Big/ \dfrac{c}{d} = \dfrac{a}{b} \cdot \dfrac{d}{c}$.
+- Förenkla därefter som vid multiplikation.
+- $\dfrac{3x}{x+7} \Big/ \dfrac{5x}{x-2} = \dfrac{3(x-2)}{5(x+7)}$.
 :::
 
-::: sampunkt "Exakt eller närmevärde"
-- **Lös( Ekvation )** ger **exakt** svar med symboler, till exempel $x = \sqrt{3}$.
-- **NLös( Ekvation )** ger ett **numeriskt** svar med decimaler.
-- Knapparna $=$ och $\approx$ växlar mellan formerna utan att kommandot skrivs om.
+::: sampunkt "Ekvationer"
+- Uteslut först alla $x$ som gör någon nämnare lika med noll.
+- Multiplicera båda led med MGN och förkorta.
+- Har ekvationen formen $\dfrac{a}{b} = \dfrac{c}{d}$ går det snabbare att **multiplicera korsvis**: $a \cdot d = c \cdot b$.
+- Kontrollera till sist att lösningen inte är ett förbjudet värde.
 :::
 
-::: sampunkt "Funktioner"
-- Definiera funktionen på en egen rad, till exempel $f(x) = x^3 - 4x^2$.
-- Skriv sedan $f(7)$ för funktionsvärdet.
-- Skriv Lös($f = 7$) för att lösa ekvationen $f(x) = 7$.
-- Avrunda själv till lämpligt antal decimaler i svaret.
+::: sampunkt "Svarsform"
+- Svara gärna i både faktoriserad och utvecklad form.
+- Faktoriserad form visar tydligast att inget mer går att förkorta.
 :::
 
 :::

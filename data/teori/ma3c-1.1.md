@@ -1,223 +1,277 @@
 ---
 id: ma3c-1.1
-title: Förkortning och förlängning av rationella uttryck
+title: Polynom
 course: Matematik fortsättning nivå 1c
 chapter: Rationella uttryck och gränsvärden
 chapterNumber: 1
 section: '1.1'
 ---
 
-# Förkortning och förlängning av rationella uttryck
+# Polynom
 
-Ett uttryck där alla variabeltermer har positiva heltalsexponenter kallas
-**polynom**. Ett uttryck med ett polynom i täljare och nämnare kallas
-**rationellt uttryck**.
-
-$$
-\frac{5x^2 - 5x}{3x - 3} \qquad \text{och} \qquad \frac{x + 3}{8}
-$$
-
-är exempel på rationella uttryck.
-
-Vi förkortar och förlänger rationella uttryck enligt samma princip som för
-bråk. Kom ihåg att vid förkortning och förlängning av bråk eller rationella
-uttryck så **ändras inte** storleken på uttrycket.
-
-När vi förkortar rationella uttryck gör vi det genom att **faktorisera** för
-att hitta gemensamma faktorer. Sedan tidigare har vi två metoder för att
-faktorisera polynom:
-
-1. Bryta ut gemensam faktor.
-2. Kvadreringsreglerna eller konjugatregeln baklänges.
-
-Det finns en tredje metod för att faktorisera vilket polynomuttryck som
-helst — genom att bestämma polynomets **nollställen**! I Matematik nivå 2c
-konstaterade vi att ett polynom $p(x)$ med nollställena $x_1, x_2, \ldots,
-x_n$ kunde skrivas enligt $p(x) = k(x - x_1)(x - x_2)\ldots(x - x_n)$. Detta
-är en faktorisering.
-
-::: formel "Faktorisera med nollställen"
-Ett polynom $p(x)$ av grad $n$ med nollställena $x_1, x_2, \ldots, x_n$ kan
-faktoriseras enligt
+Ett **polynom** är en summa av termer där varje term är ett tal multiplicerat
+med $x$ upphöjt till ett heltal som är noll eller positivt. Uttrycket
 
 $$
-p(x) = k(x - x_1)(x - x_2)\ldots(x - x_n)
+5x^3 - 2x^2 + x - 7
 $$
 
-där $k$ är koefficienten framför $x$-termen med högst grad (exponent).
+är ett polynom med fyra termer. Talen framför $x$-termerna, här 5, −2 och 1,
+kallas **koefficienter**. Termen utan $x$, här −7, kallas **konstantterm**.
+Den högsta exponenten bland termerna kallas polynomets **grad**, så polynomet
+ovan har grad 3.
+
+::: formel "Polynom och grad"
+Ett polynom är en summa av termer av formen
+
+$$
+a \cdot x^n
+$$
+
+där
+
+- $a$ = koefficient (ett tal)
+- $n$ = exponent (ett heltal som är noll eller positivt)
+
+Polynomets **grad** är den högsta exponenten bland termerna med en
+koefficient skild från noll.
 :::
 
-I uppgifter där vi ska faktorisera uttryck, till exempel när vi ska förenkla
-rationella uttryck, har vi nu tre metoder.
+Polynom av låg grad känner du redan igen. Ett förstagradspolynom som
+$2x + 3$ ger en rät linje, och ett andragradspolynom som $x^2 - 4x + 1$ ger en
+parabel. Polynom av grad 3 kallas tredjegradspolynom, polynom av grad 4
+fjärdegradspolynom och så vidare.
 
-::: tips "Faktorisera"
-1. Bryt ut gemensam faktor.
-2. Kvadreringsreglerna eller konjugatregeln baklänges.
-3. Med hjälp av nollställen.
-:::
+Ett uttryck där $x$ står i en nämnare, under ett rottecken eller i en
+exponent är **inte** ett polynom. Till exempel är $\dfrac{1}{x} = x^{-1}$ och
+$\sqrt{x} = x^{\frac{1}{2}}$, och varken $-1$ eller $\dfrac{1}{2}$ är ett heltal
+som är noll eller positivt.
 
-## Förläng och förkorta
-
-Vi repeterar först principen med några exempel med bråk. Därefter går vi
-över till rationella uttryck. Att **förlänga** innebär att multiplicera både
-täljare och nämnare med samma tal eller uttryck. Att **förkorta** innebär
-att dividera både täljare och nämnare med en gemensam faktor.
-
-::: exempel "Exempel 1 — Förläng ett bråk"
-**Förläng $\dfrac{3}{4}$ med 5.**
+::: exempel "Exempel 1 — Polynom eller inte?"
+**Avgör om uttrycket är ett polynom. Ange i så fall polynomets grad.<br>a)&nbsp;$3x^4 - 2x + 5$&emsp;&emsp;b)&nbsp;$7 - x$&emsp;&emsp;c)&nbsp;$\dfrac{4}{x} + x^2$&emsp;&emsp;d)&nbsp;$\sqrt{x} + 1$**
 
 ::: handskrift
-typ: forlangfem
+typ: polynomgrad
 :::
 
 ::: textlosning
-Vi multiplicerar både täljare och nämnare med 5.
+**a)** Alla exponenter är heltal som är noll eller positiva. Den högsta
+exponenten är 4.
 
-$$
-\frac{3}{4} = \frac{3 \cdot 5}{4 \cdot 5} = \frac{15}{20}
-$$
+**Svar:** Ett polynom av grad 4
 
-**Svar:** $\dfrac{15}{20}$
+**b)** Vi kan skriva $7 - x = -x + 7 = -1 \cdot x^1 + 7$. Den högsta
+exponenten är 1.
+
+**Svar:** Ett polynom av grad 1
+
+**c)** Termen $\dfrac{4}{x}$ kan skrivas $4x^{-1}$. Exponenten $-1$ är
+negativ.
+
+**Svar:** Inte ett polynom
+
+**d)** Termen $\sqrt{x}$ kan skrivas $x^{\frac{1}{2}}$. Exponenten
+$\dfrac{1}{2}$ är inget heltal.
+
+**Svar:** Inte ett polynom
 :::
 :::
 
-::: exempel "Exempel 2 — Förkorta ett bråk"
-**Förkorta $\dfrac{14}{21}$.**
+## Värdet av ett polynom
+
+Ett polynom betecknas ofta $p(x)$, på samma sätt som en funktion. Värdet av
+polynomet för ett visst $x$ får vi genom att sätta in värdet på varje ställe
+där $x$ står. Står $x$ upphöjt till något sätter vi värdet inom parentes,
+så att även ett minustecken upphöjs.
+
+::: exempel "Exempel 2 — Värdet av ett polynom"
+**Polynomet $p(x) = 2x^3 - 5x + 4$ är givet. Beräkna<br>a)&nbsp;$p(2)$&emsp;&emsp;b)&nbsp;$p(-1)$&emsp;&emsp;c)&nbsp;$p(0)$**
 
 ::: handskrift
-typ: forkortafjorton
+typ: polynomvarde
 :::
 
 ::: textlosning
-Vi ska försöka hitta gemensamma delare till 14 och 21. Vid mindre tal kan vi
-ganska lätt hitta en gemensam delare (i detta fall 7). Alternativt kan vi
-primtalsfaktorisera täljare och nämnare och därefter förkorta med gemensamma
-faktorer, vilket är lämpligt för större tal.
-
-*Alternativ 1:* Vi ser att största gemensamma delaren till 14 och 21 är 7
-och förkortar med den.
+**a)** Vi sätter in $x = 2$ på båda ställena där $x$ står.
 
 $$
-\frac{14}{21} = \frac{14/7}{21/7} = \frac{2}{3}
+p(2) = 2 \cdot 2^3 - 5 \cdot 2 + 4 = 2 \cdot 8 - 10 + 4 = 16 - 10 + 4 = 10
 $$
 
-*Alternativ 2:* Med primtalsfaktorisering.
+**Svar:** $p(2) = 10$
+
+**b)** Vi sätter in $x = -1$ inom parentes.
 
 $$
-\frac{14}{21} = \frac{2 \cdot 7}{3 \cdot 7} = \frac{2}{3}
+p(-1) = 2 \cdot (-1)^3 - 5 \cdot (-1) + 4 = 2 \cdot (-1) + 5 + 4 = -2 + 5 + 4 = 7
 $$
 
-**Svar:** $\dfrac{2}{3}$
+**Svar:** $p(-1) = 7$
+
+**c)** Alla termer med $x$ blir noll, och bara konstanttermen blir kvar.
+
+$$
+p(0) = 2 \cdot 0^3 - 5 \cdot 0 + 4 = 4
+$$
+
+**Svar:** $p(0) = 4$
 :::
 :::
 
-::: exempel "Exempel 3 — Förläng ett rationellt uttryck"
-**Förläng $\dfrac{x + 3}{8}$ med $(x - 2)$. Svara i faktoriserad form och i
-utvecklad form.**
+Lägg märke till c): värdet av ett polynom för $x = 0$ är alltid lika med
+konstanttermen.
+
+## Multiplikation av polynom
+
+När två polynom multipliceras ska **varje term i det ena polynomet
+multipliceras med varje term i det andra**. Har det ena polynomet två termer
+och det andra tre blir det alltså $2 \cdot 3 = 6$ produkter, som sedan
+förenklas genom att likadana termer slås ihop.
+
+::: formel "Multiplikation av polynom"
+Varje term i den första parentesen multipliceras med varje term i den andra:
+
+$$
+(a + b)(c + d + e) = ac + ad + ae + bc + bd + be
+$$
+
+Graden för produkten är summan av polynomens grader.
+:::
+
+Att graderna adderas beror på att den högsta termen i produkten är produkten
+av de båda högsta termerna, och vid multiplikation av potenser med samma bas
+adderas exponenterna: $x^2 \cdot x^3 = x^{2 + 3} = x^5$.
+
+Kvadreringsreglerna och konjugatregeln är specialfall av multiplikationen
+ovan. De är bra att kunna utantill, eftersom de används baklänges när vi
+faktoriserar.
+
+::: formel "Kvadreringsreglerna och konjugatregeln"
+$$
+(a + b)^2 = a^2 + 2ab + b^2
+$$
+
+$$
+(a - b)^2 = a^2 - 2ab + b^2
+$$
+
+$$
+(a + b)(a - b) = a^2 - b^2
+$$
+:::
+
+::: exempel "Exempel 3 — Multiplicera polynom"
+**Polynomen $2x - 3$ och $x^2 + 4x - 1$ multipliceras med varandra.<br>a) Utveckla och förenkla produkten $(2x - 3)(x^2 + 4x - 1)$.<br>b) Vilken grad har produkten?**
 
 ::: handskrift
-typ: forlangrationellt
+typ: multpolynom
 :::
 
 ::: textlosning
-Vi multiplicerar täljare och nämnare med $(x - 2)$.
-
-$$
-\frac{x + 3}{8} = \frac{(x + 3)(x - 2)}{8(x - 2)} = \frac{x^2 + x - 6}{8x - 16}
-$$
-
-**Svar:** $\dfrac{(x + 3)(x - 2)}{8(x - 2)}$ (faktoriserad form) eller
-$\dfrac{x^2 + x - 6}{8x - 16}$ (utvecklad form)
-:::
-:::
-
-::: exempel "Exempel 4 — Förkorta rationella uttryck"
-**Förkorta**
-
-::: handskrift
-typ: forkortarationella
-:::
-
-::: textlosning
-$$
-\text{a)}\ \frac{35x^3}{30x^5} \qquad
-\text{b)}\ \frac{5x^2 - 5x}{3x - 3} \qquad
-\text{c)}\ \frac{x^2 - 8x + 7}{x - 1}
-$$
-
-**a)** Detta uttryck har en enda term i både täljare och nämnare, så vi
-skriver ut samtliga faktorer för att se vilka förkortningar som är möjliga.
-
-$$
-\frac{35x^3}{30x^5} = \frac{7 \cdot 5 \cdot x \cdot x \cdot x}{5 \cdot 3 \cdot 2 \cdot x \cdot x \cdot x \cdot x \cdot x} = \frac{7}{3 \cdot 2 \cdot x \cdot x} = \frac{7}{6x^2}
-$$
-
-**b)** Detta uttryck har flera termer i täljare och nämnare. Vi utnyttjar
-samma princip som för bråken: vi skriver om täljare och nämnare som
-multiplikationer, det vill säga vi **faktoriserar** dem. Vi bryter ut största
-gemensamma faktorn i täljaren respektive nämnaren och förkortar sedan.
-
-$$
-\frac{5x^2 - 5x}{3x - 3} = \frac{5x(x - 1)}{3(x - 1)} = \frac{5x}{3}
-$$
-
-**c)** Nämnaren $x - 1$ kan inte faktoriseras mer. Täljaren kan inte
-faktoriseras med metod 1 eller 2, så vi bestämmer dess nollställen genom att
-sätta uttrycket lika med noll och lösa ekvationen.
-
-$$
-x^2 - 8x + 7 = 0
-$$
-
-Vi använder $pq$-formeln och får
+**a)** Varje term i den första parentesen multipliceras med varje term i den
+andra. Det blir sex produkter.
 
 $$
 \begin{aligned}
-x &= 4 \pm \sqrt{4^2 - 7} \\
-x &= 4 \pm \sqrt{9} \\
-x &= 4 \pm 3
+(2x - 3)(x^2 + 4x - 1) &= 2x \cdot x^2 + 2x \cdot 4x + 2x \cdot (-1) - 3 \cdot x^2 - 3 \cdot 4x - 3 \cdot (-1) \\
+&= 2x^3 + 8x^2 - 2x - 3x^2 - 12x + 3 \\
+&= 2x^3 + 5x^2 - 14x + 3
 \end{aligned}
 $$
 
-vilket ger $x_1 = 4 - 3 = 1$ och $x_2 = 4 + 3 = 7$. Täljaren har alltså
-nollställena 1 och 7 och kan då faktoriseras som $(x - 1)(x - 7)$.
+**Svar:** $2x^3 + 5x^2 - 14x + 3$
 
-Detta ger
+**b)** Den högsta exponenten i produkten är 3. Det stämmer med att graderna
+adderas: $2x - 3$ har grad 1 och $x^2 + 4x - 1$ har grad 2, och $1 + 2 = 3$.
+
+**Svar:** Grad 3
+:::
+:::
+
+## Faktorisering av polynom
+
+Att **faktorisera** ett polynom betyder att skriva det som en produkt. Det är
+multiplikationen baklänges. Vi har två metoder sedan tidigare:
+
+1. Bryta ut en gemensam faktor, till exempel $6x^2 + 4x = 2x(3x + 2)$.
+2. Använda kvadreringsreglerna eller konjugatregeln baklänges, till exempel
+   $x^2 - 9 = (x + 3)(x - 3)$.
+
+Ofta behöver båda metoderna användas efter varandra. Bryt då alltid ut först,
+och se sedan efter om det som står kvar i parentesen kan faktoriseras vidare.
+I nästa avsnitt kommer en tredje metod, där polynomet faktoriseras med hjälp
+av sina nollställen.
+
+::: tips "Faktorisera i två steg"
+1. Bryt ut den största gemensamma faktorn.
+2. Pröva kvadreringsreglerna eller konjugatregeln på det som står kvar i
+   parentesen.
+:::
+
+::: exempel "Exempel 4 — Faktorisera polynom"
+**Faktorisera så långt som möjligt.<br>a)&nbsp;$6x^3 - 9x^2$&emsp;&emsp;b)&nbsp;$x^3 - 16x$&emsp;&emsp;c)&nbsp;$2x^3 + 12x^2 + 18x$**
+
+::: handskrift
+typ: faktoriserapolynom
+:::
+
+::: textlosning
+**a)** Båda termerna innehåller faktorn 3 och faktorn $x^2$. Vi bryter ut
+$3x^2$.
 
 $$
-\frac{x^2 - 8x + 7}{x - 1} = \frac{(x - 1)(x - 7)}{(x - 1)} = x - 7
+6x^3 - 9x^2 = 3x^2(2x - 3)
 $$
 
-**Svar:** $x - 7$
+**Svar:** $3x^2(2x - 3)$
+
+**b)** Vi bryter först ut $x$. Det som blir kvar, $x^2 - 16 = x^2 - 4^2$,
+faktoriseras med konjugatregeln baklänges.
+
+$$
+x^3 - 16x = x(x^2 - 16) = x(x + 4)(x - 4)
+$$
+
+**Svar:** $x(x + 4)(x - 4)$
+
+**c)** Vi bryter först ut $2x$. Det som blir kvar, $x^2 + 6x + 9$, är
+$x^2 + 2 \cdot 3 \cdot x + 3^2$, så första kvadreringsregeln ger
+$(x + 3)^2$.
+
+$$
+2x^3 + 12x^2 + 18x = 2x(x^2 + 6x + 9) = 2x(x + 3)^2
+$$
+
+**Svar:** $2x(x + 3)^2$
 :::
 :::
 
 ::: sammanfattning "Sammanfattning"
 
-::: sampunkt "Begrepp"
-- **Polynom:** uttryck där alla variabeltermer har positiva heltalsexponenter.
-- **Rationellt uttryck:** ett polynom i täljaren och ett i nämnaren, till exempel $\dfrac{5x^2 - 5x}{3x - 3}$.
-- Förkortning och förlängning ändrar **inte** uttryckets värde.
+::: sampunkt "Polynom"
+- En summa av termer $a \cdot x^n$, där $n$ är ett heltal som är noll eller positivt.
+- **Koefficient:** talet framför $x$-termen. **Konstantterm:** termen utan $x$.
+- **Grad:** den högsta exponenten. $5x^3 - 2x^2 + x - 7$ har grad 3.
+- $\dfrac{4}{x}$ och $\sqrt{x}$ ger inget polynom: exponenterna $-1$ och $\dfrac{1}{2}$.
 :::
 
-::: sampunkt "Tre sätt att faktorisera"
-1. Bryt ut gemensam faktor.
-2. Kvadreringsreglerna eller konjugatregeln baklänges.
-3. Med hjälp av nollställen.
-- Ett polynom $p(x)$ av grad $n$ med nollställena $x_1, x_2, \ldots, x_n$ kan skrivas $p(x) = k(x - x_1)(x - x_2)\ldots(x - x_n)$, där $k$ är koefficienten framför termen med högst grad.
+::: sampunkt "Värdet av ett polynom"
+- Sätt in värdet på varje ställe där $x$ står, inom parentes.
+- $p(x) = 2x^3 - 5x + 4$ ger $p(-1) = 2 \cdot (-1)^3 - 5 \cdot (-1) + 4 = 7$.
+- $p(0)$ är alltid lika med konstanttermen.
 :::
 
-::: sampunkt "Förlänga och förkorta"
-- **Förlänga:** multiplicera täljare och nämnare med samma tal eller uttryck.
-- **Förkorta:** dividera täljare och nämnare med en gemensam faktor.
-- Har uttrycket bara en term i täljare och nämnare: skriv ut alla faktorer och stryk de gemensamma.
+::: sampunkt "Multiplikation"
+- Varje term i ena polynomet multipliceras med varje term i det andra.
+- Slå sedan ihop likadana termer.
+- Produktens grad är summan av graderna.
 :::
 
-::: sampunkt "Arbetsgång vid förkortning"
-1. Faktorisera täljaren och nämnaren så långt det går.
-2. Stryk de faktorer som finns i både täljare och nämnare.
-- $\dfrac{5x^2 - 5x}{3x - 3} = \dfrac{5x(x - 1)}{3(x - 1)} = \dfrac{5x}{3}$.
-- Går inget att bryta ut: bestäm nollställena. $x^2 - 8x + 7$ har nollställena 1 och 7, alltså $(x - 1)(x - 7)$.
+::: sampunkt "Faktorisering"
+- Faktorisera: skriv polynomet som en produkt.
+- Bryt först ut största gemensamma faktorn.
+- Pröva sedan kvadreringsreglerna eller konjugatregeln baklänges.
+- $x^3 - 16x = x(x^2 - 16) = x(x + 4)(x - 4)$
 :::
 
 :::

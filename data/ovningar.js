@@ -39156,6 +39156,337 @@ Vid val av modell hjälper kännetecknen (går kurvan genom origo?) och $r^2$-v�
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
+            question: `Vilken grad har polynomet $p(x) = 4x^2 - 7x^5 + 3x - 1$?`,
+            choices: [
+                `$2$`,
+                `$5$`,
+                `$4$`,
+                `$3$`,
+            ],
+            correct: 1,
+            solution: `Graden är den högsta exponenten bland termerna, oavsett i vilken ordning termerna står. Termen $-7x^5$ har exponenten 5, och ingen annan term har högre exponent.
+
+Koefficienten framför termen, här $-7$, påverkar inte graden.
+
+**Svar:** Grad 5`,
+        },
+        {
+            level: 1,
+            question: `Polynomet $p(x) = x^3 - 2x + 6$ är givet. Beräkna $p(-2)$.`,
+            choices: [
+                `$-6$`,
+                `$18$`,
+                `$10$`,
+                `$2$`,
+            ],
+            correct: 3,
+            solution: `Vi sätter in $x = -2$ inom parentes på båda ställena där $x$ står.
+
+$$
+p(-2) = (-2)^3 - 2 \\cdot (-2) + 6 = -8 + 4 + 6 = 2
+$$
+
+Parentesen behövs: $(-2)^3 = (-2) \\cdot (-2) \\cdot (-2) = -8$, och $-2 \\cdot (-2) = +4$.
+
+**Svar:** $p(-2) = 2$`,
+        },
+        {
+            level: 1,
+            question: `Utveckla och förenkla $(x + 2)(x^2 - 3x + 1)$.`,
+            choices: [
+                `$x^3 - x^2 - 5x + 2$`,
+                `$x^3 - 5x^2 - 5x + 2$`,
+                `$x^3 - x^2 + 7x + 2$`,
+                `$x^3 + 2x^2 + 1$`,
+            ],
+            correct: 0,
+            solution: `Varje term i den första parentesen multipliceras med varje term i den andra. Det blir sex produkter.
+
+$$
+\\begin{aligned}
+(x + 2)(x^2 - 3x + 1) &= x \\cdot x^2 + x \\cdot (-3x) + x \\cdot 1 + 2 \\cdot x^2 + 2 \\cdot (-3x) + 2 \\cdot 1 \\\\
+&= x^3 - 3x^2 + x + 2x^2 - 6x + 2 \\\\
+&= x^3 - x^2 - 5x + 2
+\\end{aligned}
+$$
+
+Till sist slås likadana termer ihop: $-3x^2 + 2x^2 = -x^2$ och $x - 6x = -5x$.
+
+**Svar:** $x^3 - x^2 - 5x + 2$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Faktorisera $5x^3 - 20x$ så långt som möjligt.`,
+            choices: [
+                `$5x(x^2 - 4)$`,
+                `$5(x^3 - 4x)$`,
+                `$5x(x + 2)(x - 2)$`,
+                `$5x(x - 2)^2$`,
+            ],
+            correct: 2,
+            solution: `Vi bryter först ut den största gemensamma faktorn. Både 5 och 20 är delbara med 5, och båda termerna innehåller $x$, så vi bryter ut $5x$.
+
+$$
+5x^3 - 20x = 5x(x^2 - 4)
+$$
+
+Parentesen $x^2 - 4 = x^2 - 2^2$ kan faktoriseras vidare med konjugatregeln baklänges.
+
+$$
+5x(x^2 - 4) = 5x(x + 2)(x - 2)
+$$
+
+**Svar:** $5x(x + 2)(x - 2)$`,
+        },
+        {
+            level: 2,
+            question: `För polynomet $p(x) = 2x^3 + ax - 5$ gäller att $p(2) = 15$. Bestäm konstanten $a$.`,
+            choices: [
+                `$a = 7$`,
+                `$a = 4$`,
+                `$a = -2$`,
+                `$a = 2$`,
+            ],
+            correct: 3,
+            solution: `Vi sätter in $x = 2$ i polynomet och sätter uttrycket lika med 15.
+
+$$
+\\begin{aligned}
+2 \\cdot 2^3 + a \\cdot 2 - 5 &= 15 \\\\
+16 + 2a - 5 &= 15 \\\\
+11 + 2a &= 15 \\\\
+11 + 2a - 11 &= 15 - 11 \\\\
+2a &= 4 \\\\
+\\frac{2a}{2} &= \\frac{4}{2} \\\\
+a &= 2
+\\end{aligned}
+$$
+
+Kontroll: $p(2) = 16 + 4 - 5 = 15$.
+
+**Svar:** $a = 2$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Bestäm konstanterna $a$ och $b$ så att
+$$
+(x + a)(x^2 + bx + 3) = x^3 + 5x^2 + 9x + 6
+$$
+gäller för alla $x$.`,
+            choices: [
+                `$a = 3$ och $b = 2$`,
+                `$a = 2$ och $b = 3$`,
+                `$a = 6$ och $b = -1$`,
+                `$a = 2$ och $b = 5$`,
+            ],
+            correct: 1,
+            solution: `Vi utvecklar vänsterledet och samlar termerna efter grad.
+
+$$
+\\begin{aligned}
+(x + a)(x^2 + bx + 3) &= x^3 + bx^2 + 3x + ax^2 + abx + 3a \\\\
+&= x^3 + (a + b)x^2 + (3 + ab)x + 3a
+\\end{aligned}
+$$
+
+Två polynom är lika för alla $x$ bara om koefficienterna för varje grad är lika. Vi jämför med högerledet $x^3 + 5x^2 + 9x + 6$.
+
+Konstanttermerna ger $3a = 6$, alltså $a = 2$.
+
+$x^2$-termerna ger $a + b = 5$, alltså $2 + b = 5$ och $b = 3$.
+
+Vi kontrollerar med $x$-termerna: $3 + ab = 3 + 2 \\cdot 3 = 9$, vilket stämmer.
+
+**Svar:** $a = 2$ och $b = 3$`,
+        },
+    ],
+
+    'ma3c-1.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Lös ekvationen $x^3 = 125$.`,
+            choices: [
+                `$x_1 = -5$ och $x_2 = 5$`,
+                `$x = 25$`,
+                `$x = 5$`,
+                `$x \\approx 41{,}7$`,
+            ],
+            correct: 2,
+            solution: `Exponenten 3 är udda, så ekvationen har en lösning. Vi tar tredjeroten ur båda leden.
+
+$$
+\\begin{aligned}
+x^3 &= 125 \\\\
+x &= \\sqrt[3]{125} \\\\
+x &= 5
+\\end{aligned}
+$$
+
+Kontroll: $5 \\cdot 5 \\cdot 5 = 125$. Talet $-5$ är ingen lösning, eftersom $(-5)^3 = -125$.
+
+**Svar:** $x = 5$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $x^4 = 16$.`,
+            choices: [
+                `$x_1 = -2$ och $x_2 = 2$`,
+                `$x = 2$`,
+                `$x = 4$`,
+                `$x_1 = -4$ och $x_2 = 4$`,
+            ],
+            correct: 0,
+            solution: `Exponenten 4 är jämn och högerledet positivt, så ekvationen har två lösningar.
+
+$$
+\\begin{aligned}
+x^4 &= 16 \\\\
+x &= \\pm \\sqrt[4]{16} \\\\
+x &= \\pm 2
+\\end{aligned}
+$$
+
+Både $2^4 = 16$ och $(-2)^4 = 16$.
+
+**Svar:** $x_1 = -2$ och $x_2 = 2$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $x^3 - 9x = 0$.`,
+            choices: [
+                `$x = 3$`,
+                `$x_1 = -3$ och $x_2 = 3$`,
+                `$x = 0$`,
+                `$x_1 = 0$, $x_2 = -3$ och $x_3 = 3$`,
+            ],
+            correct: 3,
+            solution: `Båda termerna innehåller $x$, så vi bryter ut $x$.
+
+$$
+x(x^2 - 9) = 0
+$$
+
+Nollproduktmetoden ger $x_1 = 0$ eller $x^2 - 9 = 0$. Den andra ekvationen löser vi så här.
+
+$$
+\\begin{aligned}
+x^2 - 9 &= 0 \\\\
+x^2 - 9 + 9 &= 0 + 9 \\\\
+x^2 &= 9 \\\\
+x &= \\pm \\sqrt{9} \\\\
+x &= \\pm 3
+\\end{aligned}
+$$
+
+En tredjegradsekvation kan ha högst tre lösningar, och här finns alla tre.
+
+**Svar:** $x_1 = 0$, $x_2 = -3$ och $x_3 = 3$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $x^3 + 2x^2 - 8x = 0$.`,
+            choices: [
+                `$x_1 = -2$ och $x_2 = 4$`,
+                `$x_1 = 0$, $x_2 = -2$ och $x_3 = 4$`,
+                `$x_1 = 0$, $x_2 = -4$ och $x_3 = 2$`,
+                `$x_1 = -4$ och $x_2 = 2$`,
+            ],
+            correct: 2,
+            solution: `Alla termer innehåller $x$, så vi bryter ut $x$.
+
+$$
+x(x^2 + 2x - 8) = 0
+$$
+
+Nollproduktmetoden ger $x_1 = 0$ eller $x^2 + 2x - 8 = 0$. Den andra ekvationen löser vi med *pq*-formeln, där $p = 2$ och $q = -8$.
+
+$$
+\\begin{aligned}
+x &= -1 \\pm \\sqrt{1 + 8} \\\\
+x &= -1 \\pm \\sqrt{9} \\\\
+x &= -1 \\pm 3
+\\end{aligned}
+$$
+
+Det ger $x_2 = -1 - 3 = -4$ och $x_3 = -1 + 3 = 2$. Lösningen $x = 0$ får inte glömmas bort när $x$ bryts ut.
+
+**Svar:** $x_1 = 0$, $x_2 = -4$ och $x_3 = 2$`,
+        },
+        {
+            level: 2,
+            question: `Polynomet $p(x)$ har grad 3 och nollställena $-1$, $2$ och $5$. Koefficienten framför $x^3$ är 2. Vilket uttryck är $p(x)$?`,
+            choices: [
+                `$p(x) = 2(x - 1)(x + 2)(x + 5)$`,
+                `$p(x) = 2(x + 1)(x - 2)(x - 5)$`,
+                `$p(x) = (x + 1)(x - 2)(x - 5)$`,
+                `$p(x) = 2x(x + 1)(x - 2)(x - 5)$`,
+            ],
+            correct: 1,
+            solution: `Varje nollställe $a$ ger en faktor $(x - a)$. Nollstället $-1$ ger alltså $(x - (-1)) = (x + 1)$, nollstället 2 ger $(x - 2)$ och nollstället 5 ger $(x - 5)$.
+
+Framför faktorerna står koefficienten för den högsta graden, $k = 2$.
+
+$$
+p(x) = 2(x + 1)(x - 2)(x - 5)
+$$
+
+Kontroll: $p(2) = 2 \\cdot 3 \\cdot 0 \\cdot (-3) = 0$. Ett uttryck med en extra faktor $x$ blir ett polynom av grad 4 med nollstället 0.
+
+**Svar:** $p(x) = 2(x + 1)(x - 2)(x - 5)$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Lös ekvationen $x^4 - 5x^2 - 36 = 0$.`,
+            choices: [
+                `$x_1 = -3$ och $x_2 = 3$`,
+                `$x_1 = -3$, $x_2 = -2$, $x_3 = 2$ och $x_4 = 3$`,
+                `$x_1 = -4$ och $x_2 = 9$`,
+                `$x_1 = -2$ och $x_2 = 2$`,
+            ],
+            correct: 0,
+            solution: `Ekvationen innehåller bara $x^4$, $x^2$ och en konstant. Vi inför $t = x^2$, så att $x^4 = t^2$.
+
+$$
+t^2 - 5t - 36 = 0
+$$
+
+*pq*-formeln med $p = -5$ och $q = -36$ ger
+
+$$
+\\begin{aligned}
+t &= 2{,}5 \\pm \\sqrt{6{,}25 + 36} \\\\
+t &= 2{,}5 \\pm \\sqrt{42{,}25} \\\\
+t &= 2{,}5 \\pm 6{,}5
+\\end{aligned}
+$$
+
+alltså $t_1 = 2{,}5 - 6{,}5 = -4$ och $t_2 = 2{,}5 + 6{,}5 = 9$. Vi går tillbaka till $x$ med $x^2 = t$.
+
+$x^2 = -4$ saknar reell lösning, eftersom en kvadrat aldrig är negativ.
+
+$$
+\\begin{aligned}
+x^2 &= 9 \\\\
+x &= \\pm \\sqrt{9} \\\\
+x &= \\pm 3
+\\end{aligned}
+$$
+
+En fjärdegradsekvation har högst fyra lösningar, men här finns bara två reella.
+
+**Svar:** $x_1 = -3$ och $x_2 = 3$`,
+        },
+    ],
+
+    'ma3c-1.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
             question: `Förkorta uttrycket så långt som möjligt.
 $$
 \\frac{12x^4}{8x^2}
@@ -39285,7 +39616,7 @@ Den gemensamma faktorn $(x + 2)$ förkortas bort. Observera att man **inte** få
         },
     ],
 
-    'ma3c-1.2': [
+    'ma3c-1.4': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
@@ -39424,7 +39755,7 @@ $(x - 3)$.
         },
     ],
 
-    'ma3c-1.3': [
+    'ma3c-1.5': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
@@ -39578,7 +39909,7 @@ $$
         },
     ],
 
-    'ma3c-1.4': [
+    'ma3c-1.6': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
@@ -39700,7 +40031,7 @@ $$
         },
     ],
 
-    'ma3c-1.5': [
+    'ma3c-1.7': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
@@ -51339,3 +51670,6 @@ Kontroll: $3(2,\\ -1) + 2(1,\\ 3) = (6,\\ -3) + (2,\\ 6) = (8,\\ 3)$.
         },
     ],
 };
+
+// Engelsk översättning (data/en/ovningar.js) läggs ovanpå när sidan visas på engelska.
+if (window.I18N) window.I18N.overlay('ovningar');

@@ -15,9 +15,10 @@
   23–25 oktober 2026: skola och styrdokument, undervisning och bedömning,
   matematik, digitala verktyg och AI, projektet och seminariet.
 
-  Flashcards med enkel Leitner-repetition: varje ord ligger i låda 0–3.
-  "Kunde" flyttar upp ordet en låda, "Kunde inte" flyttar det till låda 0.
-  Nästa kort väljs viktat mot låga lådor. Allt sparas i localStorage
+  Flashcards i rundor: runda 1 går igenom alla ord i valt urval en gång, i
+  blandad ordning. Runda 2 tar bara de ord som missades i runda 1, runda 3 de
+  som missades i runda 2, och så vidare tills alla är klara. Ett ord kommer
+  alltså aldrig tillbaka förrän rundan är slut. Allt sparas i localStorage
   (nyckeln fysiklabbet.ordlista-hki.v1). Uttal via webbläsarens talsyntes (en-GB).
 -->
 <style>
@@ -42,7 +43,7 @@ h1 em { color: var(--accent); }
 .framsteg { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
 .framsteg .stapel { flex: 1; height: 8px; border-radius: 4px; background: var(--line2); overflow: hidden; display: flex; }
 .framsteg .stapel i { display: block; height: 100%; transition: width .4s; }
-.framsteg .stapel i.l3 { background: var(--green); } .framsteg .stapel i.l2 { background: #6c9b83; } .framsteg .stapel i.l1 { background: #b9cbb9; }
+.framsteg .stapel i.l3 { background: var(--green); } .framsteg .stapel i.l2 { background: #6c9b83; } .framsteg .stapel i.l1 { background: rgba(200,50,74,.35); }
 .reglage { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .chip { border: 1px solid var(--line2); background: var(--panel); border-radius: 999px; padding: 6px 12px; font-size: 13px; }
 .chip[aria-pressed=true] { background: var(--ink); color: #fff; border-color: var(--ink); }
@@ -84,7 +85,11 @@ h1 em { color: var(--accent); }
 .lista td:nth-child(2) { font-weight: 600; }
 .lista td small { display: block; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 2px; }
 .lista td .lador { margin-left: 6px; vertical-align: middle; }
-.klart { text-align: center; padding: 40px 20px; }
+.klart { text-align: center; padding: 40px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); }
+.klart p { color: var(--soft); line-height: 1.55; margin: 0 0 20px; }
+.runda { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.runda b { color: var(--blue); font-weight: 500; }
+.runda .ny { color: var(--accent); }
 .klart h2 { font-family: var(--serif); font-weight: 400; font-size: 40px; margin: 0 0 8px; }
 footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
 footer button { background: none; border: 0; color: var(--muted); text-decoration: underline; padding: 0; }
@@ -100,7 +105,7 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
     <h1>Ordlista inför <em>Helsingfors</em></h1>
   </header>
 
-  <div class="framsteg" aria-live="polite"><span id="kan">0 / 100</span><span class="stapel" aria-hidden="true"><i class="l3" id="s3"></i><i class="l2" id="s2"></i><i class="l1" id="s1"></i></span><span>kan</span></div>
+  <div class="framsteg" aria-live="polite"><span id="kan">0 / 100</span><span class="stapel" aria-hidden="true"><i class="l3" id="s3"></i><i class="l2" id="s2"></i><i class="l1" id="s1"></i></span><span>klara</span></div>
 
   <div class="reglage" id="kategorier" role="group" aria-label="Kategorier"></div>
   <div class="reglage">
@@ -115,6 +120,12 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
   </div>
 
   <main class="scen" id="scen">
+    <div class="runda" id="runda" aria-live="polite"></div>
+    <div class="klart" id="klart" hidden>
+      <h2 id="klart-rubrik">Alla klara!</h2>
+      <p id="klart-text"></p>
+      <button type="button" class="ja" id="ny-genomgang" style="padding:14px 22px;border-radius:14px;font-weight:600;border:1.5px solid">Ny genomgång</button>
+    </div>
     <button class="kort" id="kort" type="button" aria-label="Vänd kortet">
       <div class="sida fram">
         <div class="topp"><span id="f-kat"></span><span class="lador" id="f-lador"></span></div>
@@ -141,7 +152,7 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
 
   <footer>
     <span id="status"></span>
-    <span><button type="button" id="nollstall">Börja om</button><span class="bekrafta" id="bekrafta" hidden> Nollställa allt? <button type="button" id="ja-nollstall">Ja</button><button type="button" id="nej-nollstall">Avbryt</button></span></span>
+    <span><button type="button" id="nollstall">Börja om</button><span class="bekrafta" id="bekrafta" hidden> Börja om från runda 1? <button type="button" id="ja-nollstall">Ja</button><button type="button" id="nej-nollstall">Avbryt</button></span></span>
   </footer>
 </div>
 
@@ -277,7 +288,7 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
     var b = document.createElement('button');
     b.type = 'button'; b.className = 'chip'; b.dataset.kat = k;
     b.textContent = k === 'Alla' ? 'Alla (' + ORD.length + ')' : k + ' (' + ORD.filter(function (o) { return o[2] === k; }).length + ')';
-    b.addEventListener('click', function () { st.kat = k; spara(); nuvarande = null; ritaAllt(); nastaKort(); });
+    b.addEventListener('click', function () { if (st.kat !== k) { st.kat = k; nyGenomgang(); } nuvarande = null; ritaAllt(); nastaKort(); });
     kat.appendChild(b);
   });
 
@@ -286,15 +297,21 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
     ORD.forEach(function (o, i) { if (st.kat === 'Alla' || o[2] === st.kat) ut.push(i); });
     return ut;
   }
-  // Leitner: låda 0 väger 8, låda 1 väger 4, låda 2 väger 2, låda 3 väger 1. Samma kort två gånger i rad undviks.
-  var nuvarande = null, senaste = [];
-  function valjKort() {
-    var u = urval(), vikter = u.map(function (i) { return senaste.indexOf(i) >= 0 && u.length > 4 ? 0 : [8, 4, 2, 1][lada(i)]; });
-    var summa = vikter.reduce(function (a, b) { return a + b; }, 0);
-    if (!summa) return u[Math.floor(Math.random() * u.length)];
-    var x = Math.random() * summa;
-    for (var j = 0; j < u.length; j++) { x -= vikter[j]; if (x <= 0) return u[j]; }
-    return u[u.length - 1];
+  // Rundor: kön innehåller rundans ord i blandad ordning. Missade ord samlas till nästa runda.
+  var nuvarande = null;
+  function blanda(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function nyGenomgang() {
+    var u = urval();
+    st.cykel = { kat: st.kat, runda: 1, ko: blanda(u), missade: [], klara: [], antal: u.length, rundstorlek: u.length };
+    spara();
+  }
+  function cykelGiltig() {
+    var c = st.cykel;
+    return c && c.kat === st.kat && Array.isArray(c.ko) && Array.isArray(c.missade);
   }
   function ladorHtml(i) { var s = ''; for (var k = 1; k <= 3; k++) s += '<i class="' + (lada(i) >= k ? 'p' : '') + '"></i>'; return s; }
 
@@ -314,8 +331,15 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
   }
   function nastaKort() {
     if (st.lage !== 'kort') return;
-    var i = valjKort();
-    senaste.push(i); if (senaste.length > 3) senaste.shift();
+    if (!cykelGiltig()) nyGenomgang();
+    var c = st.cykel;
+    if (!c.ko.length && c.missade.length) {
+      c.runda++; c.ko = blanda(c.missade); c.missade = []; c.rundstorlek = c.ko.length; spara();
+    }
+    ritaRunda();
+    if (!c.ko.length) { visaKlart(); return; }
+    $('klart').hidden = true; $('kort').hidden = false; document.querySelector('.knappar').hidden = false; $('lyssna').hidden = !('speechSynthesis' in window);
+    var i = c.ko[0];
     // Låt kortet vända tillbaka innan nästa ord visas, så att baksidan inte syns.
     if ($('kort').classList.contains('vand')) { $('kort').classList.remove('vand'); setTimeout(function () { visaKort(i); }, 280); }
     else visaKort(i);
@@ -329,9 +353,27 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
   }
   function svara(kunde) {
     if (nuvarande == null || !$('kort').classList.contains('vand')) return;
-    st.lador[nuvarande] = kunde ? Math.min(3, lada(nuvarande) + 1) : 0;
-    spara(); ritaFramsteg(); nastaKort();
+    var c = st.cykel, i = c.ko.shift();
+    if (kunde) { if (c.klara.indexOf(i) < 0) c.klara.push(i); }
+    else c.missade.push(i);
+    st.lador[i] = kunde ? Math.min(3, lada(i) + 1) : 0;
+    spara(); nastaKort(); ritaFramsteg();
   }
+  function ritaRunda() {
+    var c = st.cykel, gjort = c.rundstorlek - c.ko.length;
+    $('runda').innerHTML = '<span><b>Runda ' + c.runda + '</b>' + (c.runda > 1 ? ' · <span class="ny">' + (c.rundstorlek === 1 ? 'ordet du missade' : 'de ' + c.rundstorlek + ' du missade') + '</span>' : '') + '</span><span>' +
+      Math.min(gjort + 1, c.rundstorlek) + ' av ' + c.rundstorlek + (c.missade.length ? ' · ' + c.missade.length + ' till nästa runda' : '') + '</span>';
+  }
+  function visaKlart() {
+    var c = st.cykel;
+    nuvarande = null;
+    $('kort').hidden = true; document.querySelector('.knappar').hidden = true; $('lyssna').hidden = true;
+    $('klart').hidden = false;
+    $('runda').innerHTML = '<span><b>Klart</b></span><span>' + c.antal + ' av ' + c.antal + '</span>';
+    $('klart-rubrik').textContent = 'Alla ' + c.antal + ' ord klara!';
+    $('klart-text').textContent = c.runda === 1 ? 'Alla rätt på första rundan.' : 'Det tog ' + c.runda + ' rundor. Kör en ny genomgång i morgon, så sitter orden ännu bättre.';
+  }
+  $('ny-genomgang').addEventListener('click', function () { nyGenomgang(); ritaFramsteg(); nastaKort(); });
   $('kort').addEventListener('click', vand);
   $('vand').addEventListener('click', vand);
   $('ja').addEventListener('click', function () { svara(true); });
@@ -365,14 +407,15 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
     tala($('kort').classList.contains('vand') || st.riktning === 'en' ? o[1] : o[1]);
   });
 
+  // Stapeln: klara ord i den här genomgången (grönt) och ord som väntar på nästa runda (ljust).
   function ritaFramsteg() {
-    var u = urval(), n = [0, 0, 0, 0];
-    u.forEach(function (i) { n[lada(i)]++; });
-    $('kan').textContent = n[3] + ' / ' + u.length;
-    $('s3').style.width = (n[3] / u.length * 100) + '%';
-    $('s2').style.width = (n[2] / u.length * 100) + '%';
-    $('s1').style.width = (n[1] / u.length * 100) + '%';
-    $('status').textContent = 'Säkra: ' + n[3] + ' · På väg: ' + (n[1] + n[2]) + ' · Nya eller missade: ' + n[0];
+    if (!cykelGiltig()) nyGenomgang();
+    var c = st.cykel, klara = c.klara.length, missade = c.missade.length;
+    $('kan').textContent = klara + ' / ' + c.antal;
+    $('s3').style.width = (klara / c.antal * 100) + '%';
+    $('s2').style.width = '0%';
+    $('s1').style.width = (missade / c.antal * 100) + '%';
+    $('status').textContent = 'Klara: ' + klara + ' · Kvar i rundan: ' + c.ko.length + ' · Till nästa runda: ' + missade;
   }
   function ritaLista() {
     var html = '';
@@ -404,7 +447,7 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
   });
   $('nollstall').addEventListener('click', function () { $('bekrafta').hidden = false; });
   $('nej-nollstall').addEventListener('click', function () { $('bekrafta').hidden = true; });
-  $('ja-nollstall').addEventListener('click', function () { st.lador = {}; spara(); $('bekrafta').hidden = true; ritaAllt(); nastaKort(); });
+  $('ja-nollstall').addEventListener('click', function () { st.lador = {}; nyGenomgang(); $('bekrafta').hidden = true; ritaAllt(); nastaKort(); });
 
   ritaAllt();
   nastaKort();

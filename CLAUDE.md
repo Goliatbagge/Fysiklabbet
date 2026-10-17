@@ -1381,11 +1381,13 @@ layoutreglerna och kretsberäkningen beskrivs i filhuvudet och i sektionerna
 i `kopplingsschema.js`; läs dem innan du ändrar något.
 
 - **Menyvalet Resurser** (infört 2026-09-30, hette tidigare Verktyg) ligger
-  efter Nationella prov i huvudmenyn. Det är en rullgardin med två grupper,
+  efter Nationella prov i huvudmenyn. Det är en rullgardin med tre grupper,
   byggda som Ämne-menyns grupper (`.lab-nav-dd-grupp`): **Verktyg**
-  (Kopplingsschema, Sannolikhetskalkylator, Sammanfattningar,
-  Slumpa grupper) och **Övningsblad** (Fysik, Matematik, som går till
-  `ovningsblad.html#fysik`/`#matematik`). Menyn finns på fjorton sidor:
+  (Rita kopplingsschema, Sannolikhetskalkylator, Slumpa grupper),
+  **Övningsblad** (Fysik, Matematik, som går till
+  `ovningsblad.html#fysik`/`#matematik`) och **Sammanfattningar** (Fysik,
+  Matematik, som går till `sammanfattningar.html?amne=fysik`/`?amne=matematik`;
+  valrutan visar då bara det ämnets kurser). Menyn finns på fjorton sidor:
   `avsnitt`, `begrepp`, `index`, `katalog`, `kontakt`, `nyheter`,
   `nyhetsbrev`, `om`, `simuleringar`, `np`, `kopplingsschema`,
   `sannolikhetskalkylator`, `slumpa-grupper` och `ovningsblad` (samt

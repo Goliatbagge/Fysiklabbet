@@ -44662,6 +44662,468 @@ vilket ger $x_1 = 8$ och $x_2 = -15$. Eftersom en sidlängd inte kan vara negati
 **Svar:** $x = 8$ cm`,
         },
     ],
+    // ═══════════ Matematik fortsättning nivå 1b (Ma3b), kapitel 6: 6.1–6.3 ═══════════
+    'ma3b-6.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En talföljd ges av den slutna formeln $a_n = 6n - 4$. Bestäm $a_{15}$.`,
+            answer: { value: 86, unit: '' },
+            solution: `Vi sätter in $n = 15$ i formeln.
+
+$$
+a_{15} = 6 \\cdot 15 - 4 = 90 - 4 = 86
+$$
+
+**Svar:** $a_{15} = 86$`,
+        },
+        {
+            level: 1,
+            question: `Vilken av talföljderna är geometrisk?`,
+            choices: [
+                `$2,\\ 5,\\ 8,\\ 11,\\ \\ldots$`,
+                `$1,\\ 4,\\ 9,\\ 16,\\ \\ldots$`,
+                `$4,\\ 12,\\ 36,\\ 108,\\ \\ldots$`,
+                `$3,\\ 6,\\ 10,\\ 15,\\ \\ldots$`,
+            ],
+            correct: 2,
+            solution: `I en geometrisk talföljd multipliceras varje element med samma kvot. I talföljden $4, 12, 36, 108, \\ldots$ är
+
+$$
+\\frac{12}{4} = 3 \\qquad \\frac{36}{12} = 3 \\qquad \\frac{108}{36} = 3
+$$
+
+så kvoten är 3 hela tiden. Talföljden $2, 5, 8, 11, \\ldots$ är aritmetisk (samma tal, 3, läggs till varje gång), och de två andra är varken aritmetiska eller geometriska.
+
+**Svar:** $4,\\ 12,\\ 36,\\ 108,\\ \\ldots$`,
+        },
+        {
+            level: 1,
+            question: `En talföljd ges rekursivt av $a_1 = 5$ och $a_{n+1} = a_n - 3$. Bestäm $a_4$.`,
+            answer: { value: -4, unit: '' },
+            solution: `Varje element är det föregående minus 3. Vi räknar fram element för element.
+
+$$
+a_2 = a_1 - 3 = 5 - 3 = 2
+$$
+
+$$
+a_3 = a_2 - 3 = 2 - 3 = -1
+$$
+
+$$
+a_4 = a_3 - 3 = -1 - 3 = -4
+$$
+
+**Svar:** $a_4 = -4$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett bageri bakar 1 200 bullar första veckan i en kampanj och ökar sedan med 150 bullar varje vecka. Vilken vecka bakar bageriet för första gången fler än 3 000 bullar?`,
+            answer: { value: 14, unit: '' },
+            solution: `Antalet bullar ökar med samma tal varje vecka, så det bildar en aritmetisk talföljd med $a_1 = 1\\,200$ och differensen $d = 150$. Insättning i formeln för en aritmetisk talföljd, $a_n = a_1 + (n - 1) \\cdot d$, ger
+
+$$
+a_n = 1\\,200 + (n - 1) \\cdot 150 = 1\\,200 + 150n - 150 = 150n + 1\\,050
+$$
+
+Vi tar reda på när antalet är exakt 3 000.
+
+$$
+150n + 1\\,050 = 3\\,000
+$$
+
+$$
+150n = 1\\,950
+$$
+
+$$
+n = 13
+$$
+
+Vecka 13 bakas alltså exakt 3 000 bullar, inte fler. Veckan efter bakas $150 \\cdot 14 + 1\\,050 = 3\\,150$ bullar.
+
+**Svar:** Vecka 14`,
+        },
+        {
+            level: 2,
+            question: `Figurerna nedan är byggda av stickor, och mönstret fortsätter på samma sätt.
+
+<svg viewBox="10 16 280 82" width="409" height="120" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tre figurer av stickor som ser ut som hus i rad. Figur 1 är ett hus av sex stickor, figur 2 två hus som delar en vägg, av elva stickor, och figur 3 tre hus i rad av sexton stickor."><line x1="16" y1="70" x2="16" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="16" y1="70" x2="46" y2="70" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="16" y1="40" x2="46" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="46" y1="70" x2="46" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="16" y1="40" x2="31" y2="22" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="31" y1="22" x2="46" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><text x="31" y="92" font-size="13" text-anchor="middle" fill="#1f2530">Figur 1</text><line x1="86" y1="70" x2="86" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="86" y1="70" x2="116" y2="70" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="86" y1="40" x2="116" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="116" y1="70" x2="116" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="86" y1="40" x2="101" y2="22" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="101" y1="22" x2="116" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="116" y1="70" x2="146" y2="70" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="116" y1="40" x2="146" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="146" y1="70" x2="146" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="116" y1="40" x2="131" y2="22" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="131" y1="22" x2="146" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><text x="116" y="92" font-size="13" text-anchor="middle" fill="#1f2530">Figur 2</text><line x1="186" y1="70" x2="186" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="186" y1="70" x2="216" y2="70" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="186" y1="40" x2="216" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="216" y1="70" x2="216" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="186" y1="40" x2="201" y2="22" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="201" y1="22" x2="216" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="216" y1="70" x2="246" y2="70" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="216" y1="40" x2="246" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="246" y1="70" x2="246" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="216" y1="40" x2="231" y2="22" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="231" y1="22" x2="246" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="246" y1="70" x2="276" y2="70" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="246" y1="40" x2="276" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="276" y1="70" x2="276" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="246" y1="40" x2="261" y2="22" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="261" y1="22" x2="276" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><text x="231" y="92" font-size="13" text-anchor="middle" fill="#1f2530">Figur 3</text></svg>
+
+Går det att bygga en figur i mönstret av exakt 186 stickor? Ange i så fall vilket nummer figuren har.`,
+            answer: { value: 37, unit: '' },
+            solution: `Vi räknar stickorna: figur 1 har 6, figur 2 har 11 och figur 3 har 16 stickor. Varje nytt hus delar en vägg med det förra och behöver 5 nya stickor, så talföljden är aritmetisk med $a_1 = 6$ och $d = 5$.
+
+$$
+a_n = 6 + (n - 1) \\cdot 5 = 6 + 5n - 5 = 5n + 1
+$$
+
+Vi undersöker om det finns ett heltal $n$ som ger 186 stickor.
+
+$$
+5n + 1 = 186
+$$
+
+$$
+5n = 185
+$$
+
+$$
+n = 37
+$$
+
+Det blev ett heltal, så 186 är ett element i talföljden.
+
+**Svar:** Ja, figur 37 har exakt 186 stickor.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `I en aritmetisk talföljd är $a_4 = 19$ och $a_{10} = 43$. Vilket är det första elementet i talföljden som är större än 500?`,
+            answer: { value: 503, unit: '' },
+            solution: `Från $a_4$ till $a_{10}$ är det $10 - 4 = 6$ steg, och i varje steg läggs differensen $d$ till.
+
+$$
+a_{10} = a_4 + 6d
+$$
+
+$$
+43 = 19 + 6d
+$$
+
+$$
+24 = 6d
+$$
+
+$$
+d = 4
+$$
+
+Det första elementet ligger tre steg före $a_4$.
+
+$$
+a_1 = a_4 - 3d = 19 - 3 \\cdot 4 = 7
+$$
+
+Formeln för en aritmetisk talföljd, $a_n = a_1 + (n - 1) \\cdot d$, ger
+
+$$
+a_n = 7 + (n - 1) \\cdot 4 = 4n + 3
+$$
+
+Vi tar reda på när elementet är exakt 500.
+
+$$
+4n + 3 = 500
+$$
+
+$$
+4n = 497
+$$
+
+$$
+n = 124{,}25
+$$
+
+Ordningsnumret måste vara ett heltal, så det första element som är större än 500 är $a_{125}$.
+
+$$
+a_{125} = 4 \\cdot 125 + 3 = 503
+$$
+
+**Svar:** 503 (element nummer 125)`,
+        },
+    ],
+    'ma3b-6.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Talföljden $5,\\ 15,\\ 45,\\ \\ldots$ är geometrisk. Bestäm $a_7$.`,
+            answer: { value: 3645, unit: '' },
+            solution: `Kvoten är
+
+$$
+k = \\frac{a_2}{a_1} = \\frac{15}{5} = 3
+$$
+
+Med $a_1 = 5$ och $k = 3$ ger formeln $a_n = a_1 \\cdot k^{n-1}$
+
+$$
+a_7 = 5 \\cdot 3^{7-1} = 5 \\cdot 3^6 = 5 \\cdot 729 = 3\\,645
+$$
+
+**Svar:** $a_7 = 3\\,645$`,
+        },
+        {
+            level: 1,
+            question: `En geometrisk talföljd har det första elementet $a_1 = 2$ och kvoten $k = 4$. Vilken formel ger det $n$:te elementet?`,
+            choices: [
+                `$a_n = 2 \\cdot 4^{n-1}$`,
+                `$a_n = 2 \\cdot 4^{n}$`,
+                `$a_n = 4 \\cdot 2^{n-1}$`,
+                `$a_n = 2 + 4(n - 1)$`,
+            ],
+            correct: 0,
+            solution: `Formeln för en geometrisk talföljd är $a_n = a_1 \\cdot k^{n-1}$. Med $a_1 = 2$ och $k = 4$ blir den $a_n = 2 \\cdot 4^{n-1}$. Kontroll: $n = 1$ ger $2 \\cdot 4^0 = 2$, vilket är det första elementet. Formeln med exponenten $n$ ger i stället $a_1 = 8$, och $2 + 4(n - 1)$ beskriver en aritmetisk talföljd.
+
+**Svar:** $a_n = 2 \\cdot 4^{n-1}$`,
+        },
+        {
+            level: 1,
+            question: `Talföljden $64,\\ 32,\\ 16,\\ 8,\\ \\ldots$ är geometrisk. Bestäm $a_{10}$.`,
+            answer: { value: 0.125, unit: '' },
+            solution: `Kvoten är
+
+$$
+k = \\frac{32}{64} = 0{,}5
+$$
+
+Kvoten är mindre än 1, så elementen avtar. Formeln $a_n = a_1 \\cdot k^{n-1}$ ger
+
+$$
+a_{10} = 64 \\cdot 0{,}5^{9} = 64 \\cdot 0{,}001\\,953\\,125 = 0{,}125
+$$
+
+**Svar:** $a_{10} = 0{,}125$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en geometrisk talföljd är $a_3 = 20$ och $a_6 = 160$. Bestäm $a_1$.`,
+            answer: { value: 5, unit: '' },
+            solution: `Från $a_3$ till $a_6$ är det tre steg, så
+
+$$
+a_6 = a_3 \\cdot k^3
+$$
+
+$$
+160 = 20 \\cdot k^3
+$$
+
+$$
+8 = k^3
+$$
+
+$$
+k = \\sqrt[3]{8} = 2
+$$
+
+Det första elementet ligger två steg före $a_3$, så vi dividerar med $k^2$.
+
+$$
+a_1 = \\frac{a_3}{k^2} = \\frac{20}{2^2} = \\frac{20}{4} = 5
+$$
+
+**Svar:** $a_1 = 5$`,
+        },
+        {
+            level: 2,
+            question: `En ort har 4 500 invånare år 1, och antalet invånare ökar med 2 % per år. Vilket år blir antalet invånare för första gången större än 6 000?`,
+            answer: { value: 16, unit: '' },
+            solution: `Antalet invånare bildar en geometrisk talföljd med $a_1 = 4\\,500$ och kvoten $k = 1{,}02$, som är förändringsfaktorn för en ökning med 2 %.
+
+$$
+a_n = 4\\,500 \\cdot 1{,}02^{n-1}
+$$
+
+Vi tar först reda på när antalet är exakt 6 000.
+
+$$
+4\\,500 \\cdot 1{,}02^{n-1} = 6\\,000
+$$
+
+$$
+1{,}02^{n-1} = 1{,}333\\ldots
+$$
+
+$$
+\\lg 1{,}02^{n-1} = \\lg 1{,}333\\ldots
+$$
+
+$$
+(n - 1) \\cdot \\lg 1{,}02 = \\lg 1{,}333\\ldots
+$$
+
+$$
+n - 1 = \\frac{\\lg 1{,}333\\ldots}{\\lg 1{,}02} = 14{,}527\\ldots
+$$
+
+$$
+n = 15{,}527\\ldots
+$$
+
+År 15 är antalet $4\\,500 \\cdot 1{,}02^{14} \\approx 5\\,938$, och år 16 är det $4\\,500 \\cdot 1{,}02^{15} \\approx 6\\,056$.
+
+**Svar:** År 16`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `I en geometrisk talföljd är $a_2 = -6$ och $a_4 = -54$. Det första elementet $a_1$ är positivt. Bestäm $a_6$.`,
+            answer: { value: -486, unit: '' },
+            solution: `Från $a_2$ till $a_4$ är det två steg, så
+
+$$
+a_4 = a_2 \\cdot k^2
+$$
+
+$$
+-54 = -6 \\cdot k^2
+$$
+
+$$
+9 = k^2
+$$
+
+$$
+k = \\pm\\sqrt{9}
+$$
+
+$$
+k = \\pm 3
+$$
+
+Båda kvoterna ger $a_2 = -6$ och $a_4 = -54$. Vilken som gäller avgörs av villkoret att $a_1$ är positivt.
+
+- $k = 3$ ger $a_1 = \\dfrac{a_2}{k} = \\dfrac{-6}{3} = -2$, som är negativt.
+- $k = -3$ ger $a_1 = \\dfrac{-6}{-3} = 2$, som är positivt.
+
+Alltså är $k = -3$ och $a_1 = 2$, och elementen växlar tecken: $2, -6, 18, -54, \\ldots$
+
+$$
+a_6 = 2 \\cdot (-3)^{5} = 2 \\cdot (-243) = -486
+$$
+
+**Svar:** $a_6 = -486$`,
+        },
+    ],
+    'ma3b-6.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ett belopp på 50 000 kr betalas ut om 5 år. Bestäm beloppets nuvärde om vi räknar med räntan 4 %.`,
+            answer: { value: 41096, unit: 'kr' },
+            solution: `Förändringsfaktorn för räntan 4 % är 1,04. Formeln för nuvärdet, $N = \\dfrac{B}{\\text{förändringsfaktor}^{\\,n}}$, ger
+
+$$
+N = \\frac{50\\,000}{1{,}04^5} = 41\\,096{,}355\\ldots \\approx 41\\,096
+$$
+
+**Svar:** Cirka 41 096 kr`,
+        },
+        {
+            level: 1,
+            question: `Hur påverkas nuvärdet av ett belopp som betalas ut om 10 år om räntan vi räknar med höjs?`,
+            choices: [
+                `Nuvärdet ökar`,
+                `Nuvärdet minskar`,
+                `Nuvärdet påverkas inte av räntan`,
+                `Det beror på hur stort beloppet är`,
+            ],
+            correct: 1,
+            solution: `Nuvärdet är $N = \\dfrac{B}{\\text{förändringsfaktor}^{\\,n}}$. Höjs räntan blir förändringsfaktorn större, och då blir nämnaren större och kvoten mindre. Med hög ränta växer pengar snabbt på ett konto, så det behövs ett mindre belopp i dag för att nå samma belopp om 10 år. Det gäller oavsett hur stort beloppet är.
+
+**Svar:** Nuvärdet minskar`,
+        },
+        {
+            level: 1,
+            question: `Du sätter in 20 000 kr på ett konto med räntan 3 %. Vad är slutvärdet efter 8 år?`,
+            answer: { value: 25335, unit: 'kr' },
+            solution: `Förändringsfaktorn är 1,03. Formeln för slutvärdet, $B = N \\cdot \\text{förändringsfaktor}^{\\,n}$, ger
+
+$$
+B = 20\\,000 \\cdot 1{,}03^8 = 25\\,335{,}401\\ldots \\approx 25\\,335
+$$
+
+**Svar:** Cirka 25 335 kr`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Du får välja mellan 70 000 kr om 2 år och 80 000 kr om 4 år. Vilket alternativ är mest värt om vi räknar med räntan 3,5 %?`,
+            choices: [
+                `70 000 kr om 2 år`,
+                `Båda är lika mycket värda`,
+                `Det går inte att avgöra utan att veta beloppet i dag`,
+                `80 000 kr om 4 år`,
+            ],
+            correct: 3,
+            solution: `Beloppen betalas ut vid olika tidpunkter, så vi räknar om båda till nuvärden. Förändringsfaktorn är 1,035.
+
+$$
+N_1 = \\frac{70\\,000}{1{,}035^2} = 65\\,345{,}749\\ldots \\approx 65\\,346
+$$
+
+$$
+N_2 = \\frac{80\\,000}{1{,}035^4} = 69\\,715{,}378\\ldots \\approx 69\\,715
+$$
+
+Nuvärdet av 80 000 kr om 4 år är störst.
+
+**Svar:** 80 000 kr om 4 år`,
+        },
+        {
+            level: 2,
+            question: `Ett företag ska få 100 000 kr om 1 år, 150 000 kr om 2 år och 200 000 kr om 3 år. Vad är betalningarna värda i dag om företaget räknar med räntan 6 %?`,
+            answer: { value: 395763, unit: 'kr' },
+            solution: `Vi räknar ut nuvärdet av varje betalning för sig. Förändringsfaktorn är 1,06, och exponenten är antalet år till betalningen.
+
+$$
+\\frac{100\\,000}{1{,}06} = 94\\,339{,}622\\ldots
+$$
+
+$$
+\\frac{150\\,000}{1{,}06^2} = 133\\,499{,}466\\ldots
+$$
+
+$$
+\\frac{200\\,000}{1{,}06^3} = 167\\,923{,}856\\ldots
+$$
+
+Betalningarnas nuvärde är summan av de tre nuvärdena.
+
+$$
+N = 94\\,339{,}622\\ldots + 133\\,499{,}466\\ldots + 167\\,923{,}856\\ldots = 395\\,762{,}945\\ldots \\approx 395\\,763
+$$
+
+**Svar:** Cirka 395 763 kr`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Vid vilken ränta är 120 000 kr som betalas ut om 4 år lika mycket värt som 100 000 kr i dag? Svara i procent med en decimal.`,
+            answer: { value: 4.7, unit: '%' },
+            solution: `De två alternativen är lika mycket värda när nuvärdet av 120 000 kr är 100 000 kr. Vi kallar förändringsfaktorn $x$.
+
+$$
+\\frac{120\\,000}{x^4} = 100\\,000
+$$
+
+Vi multiplicerar båda led med $x^4$ och dividerar sedan båda led med 100 000.
+
+$$
+120\\,000 = 100\\,000 \\cdot x^4
+$$
+
+$$
+1{,}2 = x^4
+$$
+
+Förändringsfaktorn är positiv, så
+
+$$
+x = \\sqrt[4]{1{,}2} = 1{,}046\\,63\\ldots
+$$
+
+Förändringsfaktorn 1,046 63… motsvarar räntan $0{,}046\\,63\\ldots \\approx 4{,}7\\ \\%$. Kontroll: $\\dfrac{120\\,000}{1{,}046\\,63^4} \\approx 100\\,000$.
+
+**Svar:** Cirka 4,7 %`,
+        },
+    ],
+
     // ═══════════ Matematik fortsättning nivå 1b (Ma3b): 6.4–6.5 ═══════════
     'ma3b-6.4': [
         // ── Nivå 1 ───────────────────────────────────────────────────

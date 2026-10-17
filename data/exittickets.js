@@ -20658,6 +20658,254 @@ window.EXITTICKETS = {
   },
 ],
 
+// ═══════════ Matematik fortsättning nivå 1b (Ma3b), kapitel 6: 6.1–6.3 ═══════════
+'ma3b-6.1': [
+  {
+    question: 'I talföljden $3,\\ 7,\\ 11,\\ 15,\\ \\ldots$, vad betyder $a_3$?',
+    choices: [
+      'Det tredje elementet, alltså 11',
+      'Det första elementet gånger 3, alltså 9',
+      'Summan av de tre första elementen, alltså 21',
+      'Talet 3 upphöjt till elementets nummer',
+    ],
+    correct: 0,
+    why: [
+      'Indexet 3 är elementets ordningsnummer. Det tredje talet i talföljden är 11.',
+      'Indexet anger vilket element det gäller, inte att något ska multipliceras med 3.',
+      'En summa av element skrivs inte så. $a_3$ är bara ett enda element, det tredje.',
+      'Indexet är ett ordningsnummer och har inget med potenser att göra.',
+    ],
+  },
+  {
+    question: 'En talföljd ges av $a_n = 5n - 2$. Vad är $a_{10}$?',
+    choices: [
+      '$50$',
+      '$52$',
+      '$48$',
+      '$43$',
+    ],
+    correct: 2,
+    why: [
+      'Det är bara $5 \\cdot 10$. Glöm inte att dra bort 2.',
+      'Termen 2 ska dras bort, inte läggas till: $5 \\cdot 10 - 2$.',
+      'Insättning av $n = 10$ ger $a_{10} = 5 \\cdot 10 - 2 = 48$.',
+      'Så blir det om man räknar $5 \\cdot (10 - 1) - 2$. Formeln är sluten, så $n = 10$ sätts in direkt.',
+    ],
+  },
+  {
+    question: 'Talföljden ges rekursivt av $a_1 = 4$ och $a_{n+1} = 3 \\cdot a_n$. Vad är $a_3$?',
+    choices: [
+      '$12$',
+      '$10$',
+      '$64$',
+      '$36$',
+    ],
+    correct: 3,
+    why: [
+      'Det är $a_2 = 3 \\cdot 4 = 12$. Ett steg till behövs för att nå $a_3$.',
+      'Så blir det om man lägger till 3 varje gång. Formeln säger att elementet ska multipliceras med 3.',
+      'Det är $4^3$. Formeln multiplicerar med 3 i varje steg, den upphöjer inte.',
+      'Varje element är det föregående gånger 3: $a_2 = 3 \\cdot 4 = 12$ och $a_3 = 3 \\cdot 12 = 36$.',
+    ],
+  },
+  {
+    question: 'Vilken typ av talföljd är $20,\\ 17,\\ 14,\\ 11,\\ \\ldots$?',
+    choices: [
+      'Geometrisk med kvoten $-3$',
+      'Aritmetisk med differensen $-3$',
+      'Geometrisk med kvoten $\\dfrac{17}{20}$',
+      'Varken aritmetisk eller geometrisk',
+    ],
+    correct: 1,
+    why: [
+      'En kvot på $-3$ skulle ge $20, -60, 180, \\ldots$ med växlande tecken. Här minskar elementen med 3 varje gång.',
+      'Samma tal, $-3$, läggs till varje gång: $17 - 20 = 14 - 17 = 11 - 14 = -3$.',
+      'Kvoten $\\dfrac{14}{17}$ är inte lika med $\\dfrac{17}{20}$, så kvoten är inte konstant.',
+      'Differensen är konstant, $-3$, så talföljden är aritmetisk.',
+    ],
+  },
+  {
+    question: 'Antalet stickor i figur $n$ i ett mönster är $a_n = 2n + 1$. Går det att bygga en figur av exakt 60 stickor?',
+    choices: [
+      'Ja, figur 30',
+      'Ja, figur 29',
+      'Nej, eftersom $2n + 1 = 60$ ger $n = 29{,}5$, som inte är ett heltal',
+      'Nej, eftersom 60 är större än alla element i talföljden',
+    ],
+    correct: 2,
+    why: [
+      'Figur 30 har $2 \\cdot 30 + 1 = 61$ stickor.',
+      'Figur 29 har $2 \\cdot 29 + 1 = 59$ stickor.',
+      'Ordningsnumret måste vara ett heltal. Antalet stickor är alltid udda, så 60 kan aldrig förekomma.',
+      'Talföljden växer hela tiden, så den passerar 60. Men den hoppar från 59 till 61.',
+    ],
+  },
+],
+'ma3b-6.2': [
+  {
+    question: 'Vad är kvoten $k$ i den geometriska talföljden $2,\\ 10,\\ 50,\\ 250,\\ \\ldots$?',
+    choices: [
+      '$8$',
+      '$5$',
+      '$\\dfrac{1}{5}$',
+      '$2$',
+    ],
+    correct: 1,
+    why: [
+      'Det är differensen mellan de två första elementen. I en geometrisk talföljd ska man dividera.',
+      'Kvoten är $k = \\dfrac{a_2}{a_1} = \\dfrac{10}{2} = 5$, och $\\dfrac{50}{10} = 5$ också.',
+      'Det är $\\dfrac{a_1}{a_2}$. Kvoten fås när ett element divideras med elementet före.',
+      'Det är det första elementet, inte kvoten.',
+    ],
+  },
+  {
+    question: 'En geometrisk talföljd har $a_1 = 3$ och $k = 2$. Vad är $a_5$?',
+    choices: [
+      '$96$',
+      '$30$',
+      '$11$',
+      '$48$',
+    ],
+    correct: 3,
+    why: [
+      'Det är $3 \\cdot 2^5$. Exponenten ska vara $n - 1 = 4$, eftersom det första elementet inte har multiplicerats med $k$.',
+      'Det är $3 \\cdot 2 \\cdot 5$. Kvoten ska upphöjas till $n - 1$, inte multipliceras med $n$.',
+      'Så blir det i en aritmetisk talföljd med differensen 2. Här ska man multiplicera.',
+      '$a_5 = a_1 \\cdot k^{5-1} = 3 \\cdot 2^4 = 3 \\cdot 16 = 48$.',
+    ],
+  },
+  {
+    question: 'I en geometrisk talföljd är $a_2 = 5$ och $a_5 = 40$. Vilken ekvation ger kvoten $k$?',
+    choices: [
+      '$40 = 5 \\cdot k^3$',
+      '$40 = 5 \\cdot k^5$',
+      '$40 = 5 + 3k$',
+      '$40 = 5 \\cdot k^4$',
+    ],
+    correct: 0,
+    why: [
+      'Från $a_2$ till $a_5$ är det $5 - 2 = 3$ steg, så $a_5 = a_2 \\cdot k^3$. Det ger $k^3 = 8$ och $k = 2$.',
+      'Exponenten ska vara antalet steg mellan elementen, $5 - 2 = 3$, inte ordningsnumret 5.',
+      'Det gäller en aritmetisk talföljd. I en geometrisk talföljd multipliceras elementen med kvoten.',
+      'Exponenten 4 gäller steget från $a_1$ till $a_5$. Här startar vi i $a_2$.',
+    ],
+  },
+  {
+    question: 'En lön på 30 000 kr år 1 höjs med 2 % per år. Vilket uttryck ger lönen år $n$?',
+    choices: [
+      '$30\\,000 \\cdot 1{,}02^{n}$',
+      '$30\\,000 \\cdot 0{,}02^{n-1}$',
+      '$30\\,000 \\cdot 1{,}02^{n-1}$',
+      '$30\\,000 + 0{,}02(n - 1)$',
+    ],
+    correct: 2,
+    why: [
+      'Med exponenten $n$ blir lönen år 1 redan $30\\,000 \\cdot 1{,}02$, men år 1 har lönen inte höjts än.',
+      'Kvoten ska vara förändringsfaktorn 1,02, inte 0,02. Med 0,02 skulle lönen krympa till nästan ingenting.',
+      'Kvoten är förändringsfaktorn 1,02, och år $n$ har lönen höjts $n - 1$ gånger.',
+      'Så ökar inte en procentuell förändring. Lönen multipliceras med 1,02 varje år.',
+    ],
+  },
+  {
+    question: 'Hur beter sig en geometrisk talföljd med $a_1 = 100$ och kvoten $k = 0{,}5$?',
+    choices: [
+      'Elementen växer allt snabbare',
+      'Elementen växlar mellan positiva och negativa tal',
+      'Elementen minskar med 0,5 varje gång',
+      'Elementen halveras varje gång och närmar sig 0',
+    ],
+    correct: 3,
+    why: [
+      'Elementen växer bara om kvoten är större än 1.',
+      'Tecknet växlar bara om kvoten är negativ.',
+      'Kvoten multipliceras, den dras inte bort. Talföljden blir $100, 50, 25, \\ldots$',
+      'Varje element multipliceras med 0,5: $100, 50, 25, 12{,}5, \\ldots$ Elementen blir aldrig 0.',
+    ],
+  },
+],
+'ma3b-6.3': [
+  {
+    question: 'Varför är 10 000 kr om fem år värt mindre än 10 000 kr i dag?',
+    choices: [
+      'Pengar man har i dag kan sättas in och växa med ränta',
+      'Sedlar slits och förlorar i värde',
+      'Ett framtida belopp är alltid värt exakt hälften',
+      'Det är det inte, beloppen är lika mycket värda',
+    ],
+    correct: 0,
+    why: [
+      'Sätter man in 10 000 kr i dag har de om fem år vuxit till mer än 10 000 kr. Därför är samma belopp i framtiden värt mindre.',
+      'Nuvärdet handlar om räntan, inte om sedlarnas skick.',
+      'Hur mycket mindre det är värt beror på räntan och tiden. Det finns ingen fast andel.',
+      'Med ränta växer pengarna, så pengar i dag är värda mer än samma belopp senare.',
+    ],
+  },
+  {
+    question: 'Vilket uttryck ger nuvärdet av 60 000 kr som betalas ut om 3 år, vid räntan 5 %?',
+    choices: [
+      '$60\\,000 \\cdot 1{,}05^3$',
+      '$\\dfrac{60\\,000}{1{,}05^3}$',
+      '$\\dfrac{60\\,000}{1{,}05 \\cdot 3}$',
+      '$60\\,000 \\cdot 0{,}95^3$',
+    ],
+    correct: 1,
+    why: [
+      'Det är slutvärdet om 60 000 kr sätts in i dag. Nuvärdet fås genom att dividera.',
+      'Nuvärdet är beloppet dividerat med förändringsfaktorn upphöjd till antalet år.',
+      'Förändringsfaktorn ska upphöjas till 3, inte multipliceras med 3.',
+      'Att multiplicera med 0,95 är en minskning med 5 % per år. Det är inte samma sak som att dividera med 1,05.',
+    ],
+  },
+  {
+    question: 'Nuvärdet av 50 000 kr om 4 år är cirka 42 700 kr vid räntan 4 %. Vad händer med nuvärdet om räntan i stället är 2 %?',
+    choices: [
+      'Det minskar',
+      'Det blir oförändrat',
+      'Det halveras',
+      'Det ökar',
+    ],
+    correct: 3,
+    why: [
+      'Lägre ränta ger en mindre förändringsfaktor i nämnaren, och då blir kvoten större.',
+      'Nuvärdet beror på räntan, eftersom förändringsfaktorn står i nämnaren.',
+      'Räntan halveras, men nuvärdet ändras inte i samma proportion.',
+      'Med lägre ränta växer pengarna långsammare, så det behövs mer pengar i dag: $\\dfrac{50\\,000}{1{,}02^4} \\approx 46\\,192$ kr.',
+    ],
+  },
+  {
+    question: 'Du kan få 100 000 kr nu eller 110 000 kr om 2 år. Räntan är 6 %. Vilket är mest värt?',
+    choices: [
+      '110 000 kr om 2 år, eftersom beloppet är större',
+      '100 000 kr nu, eftersom nuvärdet av 110 000 kr är cirka 97 900 kr',
+      'De är lika mycket värda',
+      '110 000 kr om 2 år, eftersom nuvärdet är cirka 123 600 kr',
+    ],
+    correct: 1,
+    why: [
+      'Belopp vid olika tidpunkter kan inte jämföras direkt. De måste räknas om till nuvärden först.',
+      '$\\dfrac{110\\,000}{1{,}06^2} \\approx 97\\,900$ kr, som är mindre än 100 000 kr.',
+      'Nuvärdet av 110 000 kr är cirka 97 900 kr, inte 100 000 kr.',
+      'Det är slutvärdet $110\\,000 \\cdot 1{,}06^2$. Nuvärdet fås genom att dividera, inte multiplicera.',
+    ],
+  },
+  {
+    question: 'En vinst betalas ut som 20 000 kr om 1 år och 20 000 kr om 2 år. Hur räknar man ut vinstens nuvärde vid räntan 3 %?',
+    choices: [
+      '$\\dfrac{40\\,000}{1{,}03^2}$',
+      '$\\dfrac{40\\,000}{1{,}03}$',
+      '$\\dfrac{20\\,000}{1{,}03} + \\dfrac{20\\,000}{1{,}03^2}$',
+      '$20\\,000 \\cdot 1{,}03 + 20\\,000 \\cdot 1{,}03^2$',
+    ],
+    correct: 2,
+    why: [
+      'Den första utbetalningen kommer redan efter 1 år, så den ska bara divideras med $1{,}03$.',
+      'Den andra utbetalningen kommer efter 2 år och ska divideras med $1{,}03^2$.',
+      'Varje utbetalning divideras med förändringsfaktorn upphöjd till antalet år tills just den betalas ut, och sedan adderas nuvärdena.',
+      'Det är slutvärden. Nuvärden fås genom att dividera med förändringsfaktorn.',
+    ],
+  },
+],
+
 // ═══════════ Matematik fortsättning nivå 1b (Ma3b): 6.4–6.5 ═══════════
 'ma3b-6.4': [
   {

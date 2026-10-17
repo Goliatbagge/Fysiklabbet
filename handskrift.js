@@ -10437,6 +10437,821 @@
     return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  // ── Ma3b 6.1–6.3 Talföljder, geometriska talföljder och nuvärde ──────
+  /* Gemensam hjälpare: en talföljd på en rad med differens- eller
+   * kvotbågar mellan grannarna. tal = ['5','15',…], etiketter = ['+10',…]
+   * (null = inga bågar). Returnerar { mitt: [x-mittpunkter], xs: [[x0,x1]],
+   * slut: x efter raden }. Bågarnas etiketter når ~62 px ovanför raden. */
+  function m3bTalrad(T, tal, y, x0, gap, avslut) {
+    var F = T.s * 100, mitt = [], xs = [], xt = x0;
+    tal.forEach(function (t, i) {
+      /* 'a_1=3': bågen och ringen gäller värdet efter likhetstecknet */
+      var e = t.lastIndexOf('=');
+      if (e >= 0) xt = T.str(t.slice(0, e + 1), xt, y);
+      var a = xt;
+      xt = T.str(e >= 0 ? t.slice(e + 1) : t, xt, y);
+      mitt.push((a + xt) / 2);
+      xs.push([a, xt]);
+      if (i < tal.length - 1) xt = T.str(',', xt, y) + gap;
+    });
+    if (avslut) xt = T.str(',' + avslut, xt, y);
+    return { mitt: mitt, xs: xs, slut: xt };
+  }
+  function m3bBagar(T, rad, y, etiketter) {
+    var F = T.s * 100, arc = mkArc(T), yArc = y - 0.95 * F;
+    for (var i = 0; i < etiketter.length; i++) {
+      arc(rad.mitt[i] + 3, rad.mitt[i + 1] - 3, yArc, 28, BLUE);
+      var w = T.adv(etiketter[i], 0.55);
+      T.str(etiketter[i], (rad.mitt[i] + rad.mitt[i + 1]) / 2 - w / 2,
+            yArc - 32, BLUE, 0.55);
+      T.pause(200);
+    }
+  }
+
+  /* ---------------- scen: element ur en formel (ma3b-6.1 ex 1) ---------
+   * a) sluten formel: sätt in n = 1 … 4. b) rekursiv formel: varje
+   * element ur det föregående. Vid den rekursiva insättningen ringas
+   * föregående element in där det står och sedan beteckningen i formeln
+   * (REGEL INSÄTTNING). */
+  function layoutTalfoljdelement(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    /* ---- a) ---- */
+    y = 110;
+    T.str('a) a_n=n^2+1', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Formeln är sluten. Jag']],
+      [['sätter in '], ['n', 1], [' = 1, 2, 3 och 4.']]
+    ]);
+    var rader = [['1', '2'], ['2', '5'], ['3', '10'], ['4', '17']];
+    rader.forEach(function (r, i) {
+      y += (i ? 2.1 : 2.4) * F;
+      T.str('a_' + r[0] + '=' + r[0] + '^2+1=' + r[1], padL + 30, y);
+      T.stepEnd();
+    });
+
+    y += 2.3 * F;
+    xe = T.str('Svar: 2, 5, 10 och 17', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 3.0 * F;
+    xx = T.str('b) a_1=', padL, y);
+    var vx0 = xx;
+    xx = T.str('2', xx, y);
+    var vx1 = xx;
+    T.str(' och a_n_+_1=2·a_n+1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Formeln är rekursiv. Nästa']],
+      [['element är det föregående']],
+      [['gånger 2, plus 1.']]
+    ]);
+    /* föregående element: [x0, x1, baslinje] för talet som ska ringas */
+    var prev = [vx0, vx1, y];
+    var varden = [['2', '1', '2', '5'], ['3', '2', '5', '11'], ['4', '3', '11', '23']];
+    varden.forEach(function (v, i) {
+      y += (i ? 2.1 : 2.4) * F;
+      xx = T.str('a_' + v[0] + '=2·', padL + 30, y);
+      var bx0 = xx;
+      xx = T.str('a_' + v[1], xx, y);
+      var bx1 = xx;
+      xx = T.str('+1=', xx, y);
+      T.stepEnd();
+      var r1 = T.ring(prev[0], prev[1], prev[2]);
+      T.pause(260);
+      var r2 = T.ring(bx0, bx1, y);
+      T.pause(220);
+      xx = T.str('2·' + v[2] + '+1', xx, y);
+      var rx0 = T.str('=', xx, y);
+      var rx1 = T.str(v[3], rx0, y);
+      T.pause(240);
+      T.fade(r1); T.fade(r2);
+      prev = [rx0, rx1, y];
+      T.stepEnd();
+    });
+
+    tanke(y, [
+      [['Samma början som i a), men']],
+      [['sedan går talföljderna isär.']]
+    ]);
+    y += 2.3 * F;
+    xe = T.str('Svar: 2, 5, 11 och 23', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: stickmönstret (ma3b-6.1 ex 2) ----------------
+   * Figuren står i uppgiften och ritas inte av (REGEL RITA BARA AV DET
+   * SOM BEHÖVS). Antalen skrivs som en talföljd, differensen visas med
+   * bågar, formeln för en aritmetisk talföljd sätts in och förenklas.
+   * c) löses som ekvation i båda redovisningslägena. */
+  function layoutStickmonster(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), multIn = mkMultIn(T), samla = mkSamla(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    /* ---- a) ---- */
+    tanke(20, [
+      [['Först räknar jag stickorna']],
+      [['i varje figur.']]
+    ], 0);
+    y = 170;
+    var rad = m3bTalrad(T, ['a_1=3', 'a_2=5', 'a_3=7'], y, padL + 20, 22);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Hur många stickor kommer']],
+      [['till för varje ny figur?']]
+    ]);
+    m3bBagar(T, rad, y, ['+2', '+2']);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma tal läggs till varje']],
+      [['gång. Talföljden är']],
+      [['aritmetisk med '], ['d', 1], [' = 2.']]
+    ]);
+    y += 2.4 * F;
+    xx = T.str('a_1=', padL, y);
+    var a1x0 = xx; xx = T.str('3', xx, y); var a1x1 = xx;
+    xx = T.str(' och d=', xx, y);
+    var dx0 = xx; xx = T.str('2', xx, y); var dx1 = xx;
+    var yv = y;
+    y += 3.4 * F;
+    T.str('Aritmetisk talföljd', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('a_n=', padL, y);
+    var fa0 = xx; xx = T.str('a_1', xx, y); var fa1 = xx;
+    xx = T.str('+(n-1)·', xx, y);
+    var fd0 = xx; xx = T.str('d', xx, y); var fd1 = xx;
+    T.stepEnd();
+
+    /* insättning: värdena och sedan beteckningarna ringas in */
+    var r1 = T.ring(a1x0, a1x1, yv); T.pause(240);
+    var r2 = T.ring(fa0, fa1, y); T.pause(300);
+    var r3 = T.ring(dx0, dx1, yv); T.pause(240);
+    var r4 = T.ring(fd0, fd1, y); T.pause(220);
+    xx = T.str('=3+(', xx, y);
+    var n0 = xx; xx = T.str('n', xx, y); var n1 = xx;
+    var m0 = xx; xx = T.str('-1', xx, y); var m1 = xx;
+    xx = T.str(')·', xx, y);
+    var f0 = xx; xx = T.str('2', xx, y); var f1 = xx;
+    T.pause(240);
+    [r1, r2, r3, r4].forEach(function (r) { T.fade(r); });
+    T.stepEnd();
+
+    tanke(y, [
+      [['2:an multipliceras in i']],
+      [['parentesen, med varje term.']]
+    ]);
+    var ySrc = y;
+    y += 2.3 * F;
+    xx = T.str('=3+', padL + 30, y);
+    var c30 = padL + 30 + T.adv('=');
+    var c31 = c30 + T.adv('3');
+    var del = [
+      { fran: [f0, f1], till: [n0, n1], skriv: '2n', hojd: 40 },
+      { fran: [f0, f1], till: [m0, m1], skriv: '-2', hojd: 22, dx: -4 }
+    ];
+    xx = multIn(xx, y, ySrc - 0.95 * F, del);
+    T.stepEnd();
+
+    tanke(y, [
+      [['3 och −2 slås ihop till 1.']]
+    ]);
+    var yForra = y;
+    y += 2.2 * F;
+    xx = T.str('=', padL + 30, y);
+    samla(xx, y, [
+      { skriv: '2n' },
+      { ringar: [[c30, c31, yForra], [del[1].x0, del[1].x1, yForra]], skriv: '+1' }
+    ]);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: a_n=2n+1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Figur 50 betyder '], ['n', 1], [' = 50.']]
+    ]);
+    y += 3.0 * F;
+    T.str('b) a_5_0=2·50+1=101', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: 101 stickor', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    tanke(y, [
+      [['100 stickor räcker om det']],
+      [['finns ett heltal '], ['n', 1], [' som ger']],
+      [['a', 1], ['n', 1], [' = 100.']]
+    ]);
+    y += 3.0 * F;
+    var xc = padL + 44;
+    T.str('c)', padL, y);
+    xx = T.str('2n+1=100', xc, y);
+    var xw = xx + 0.6 * F;
+    T.stepEnd();
+
+    y = ekvOp(y, '-1', xw, '2n+1=100', { x0: xc });
+    T.str('2n=99', xc, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/2', xw, '2n=99', { x0: xc });
+    T.str('n=49,5', xc, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ordningsnumret måste vara']],
+      [['ett heltal. Figur 49 har 99']],
+      [['stickor och figur 50 har 101.']]
+    ]);
+    y += 2.4 * F;
+    xe = T.str('Svar: Nej, det går inte', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: vilken sorts talföljd? (ma3b-6.1 ex 3) -------
+   * Differenserna visas med blå bågar mellan grannarna. Är de inte lika
+   * prövas kvoterna, skrivna som bråk med rakt divisionsstreck. */
+  function layoutVilkentalfoljd(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    function kvoter(par, yb) {
+      var x = padL + 30;
+      par.forEach(function (p) {
+        x = T.fracH(p[0], p[1], x, yb);
+        x = T.str('=' + p[2], x, yb) + 1.0 * F;
+        T.pause(200);
+      });
+    }
+
+    /* ---- a) ---- */
+    y = 170;
+    T.str('a)', padL, y);
+    var rad = m3bTalrad(T, ['5', '15', '45', '135'], y, padL + 54, 26, ' ...');
+    T.stepEnd();
+
+    tanke(y, [
+      [['Läggs samma tal till varje']],
+      [['gång? Jag tittar på']],
+      [['differenserna.']]
+    ]);
+    m3bBagar(T, rad, y, ['+10', '+30', '+90']);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Differenserna är olika. Då']],
+      [['prövar jag kvoterna.']]
+    ]);
+    y += 3.0 * F;
+    kvoter([['15', '5', '3'], ['45', '15', '3'], ['135', '45', '3']], y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvoten är 3 hela tiden.']]
+    ], 1.05);
+    y += 2.6 * F;
+    xe = T.str('Svar: Geometrisk, k=3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 4.0 * F;
+    T.str('b)', padL, y);
+    rad = m3bTalrad(T, ['7', '4', '1', '−2'], y, padL + 54, 30, ' ...');
+    T.stepEnd();
+
+    m3bBagar(T, rad, y, ['−3', '−3', '−3']);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma tal läggs till varje']],
+      [['gång, fast talet är negativt.']]
+    ]);
+    y += 2.4 * F;
+    xe = T.str('Svar: Aritmetisk, d=−3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    y += 4.0 * F;
+    T.str('c)', padL, y);
+    rad = m3bTalrad(T, ['1', '4', '9', '16'], y, padL + 54, 30, ' ...');
+    T.stepEnd();
+
+    m3bBagar(T, rad, y, ['+3', '+5', '+7']);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Differenserna är olika.']],
+      [['Jag prövar kvoterna.']]
+    ]);
+    y += 3.0 * F;
+    kvoter([['4', '1', '4'], ['9', '4', '2,25']], y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvoterna är inte heller lika.']]
+    ], 1.05);
+    y += 2.6 * F;
+    xe = T.str('Svar: Ingetdera', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 620, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: bestäm ett element (ma3b-6.2 ex 1) ----------- */
+  function layoutGeomelement(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    y = 150;
+    var rad = m3bTalrad(T, ['3', '6', '12', '24'], y, padL + 20, 30, ' ...');
+    T.stepEnd();
+
+    /* ---- a) ---- */
+    tanke(y, [
+      [['Kvoten får jag om jag']],
+      [['dividerar ett element med']],
+      [['elementet före.']]
+    ]);
+    y += 3.3 * F;
+    xx = T.str('a) k=', padL, y);
+    xx = T.fracH('a_2', 'a_1', xx, y);
+    T.stepEnd();
+
+    var r1 = T.ring(rad.xs[1][0], rad.xs[1][1], 150); T.pause(240);
+    var r2 = T.ring(rad.xs[0][0], rad.xs[0][1], 150); T.pause(220);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('6', '3', xx, y);
+    T.pause(200);
+    T.fade(r1); T.fade(r2);
+    var kx0 = T.str('=', xx, y);
+    var kx1 = T.str('2', kx0, y);
+    var yk = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu sätter jag in '], ['a', 1], ['₁ = 3 och']],
+      [['k', 1], [' = 2 i formeln för det']],
+      [['n', 1], [':te elementet.']]
+    ], 1.05);
+    y += 4.0 * F;
+    T.str('Det n:te elementet', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('a_n=', padL + 30, y);
+    var fa0 = xx; xx = T.str('a_1', xx, y); var fa1 = xx;
+    xx = T.str('·', xx, y);
+    var fk0 = xx; xx = T.str('k', xx, y); var fk1 = xx;
+    xx = T.str('^n^-^1', xx, y);
+    T.stepEnd();
+
+    var q1 = T.ring(rad.xs[0][0], rad.xs[0][1], 150); T.pause(240);
+    var q2 = T.ring(fa0, fa1, y); T.pause(300);
+    var q3 = T.ring(kx0 + 0.1 * F, kx1, yk); T.pause(240);
+    var q4 = T.ring(fk0, fk1, y); T.pause(220);
+    T.str('=3·2^n^-^1', xx, y);
+    T.pause(240);
+    [q1, q2, q3, q4].forEach(function (r) { T.fade(r); });
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: a_n=3·2^n^-^1', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Jag sätter in '], ['n', 1], [' = 10.']],
+      [['Exponenten blir 10 − 1 = 9.']]
+    ]);
+    y += 3.2 * F;
+    xx = T.str('b) a_1_0=3·2^1^0^-^1', padL, y);
+    T.stepEnd();
+
+    xx = T.str('=3·2^9', xx, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xx = T.str('=3·512', padL + 30, y);
+    T.stepEnd();
+
+    T.str('=1 536', xx, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: a_1_0=1 536', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: kvoten ur två element (ma3b-6.2 ex 2) --------
+   * a_5 = a_2 · k³ ger en ekvation i k (båda redovisningslägena);
+   * tredjeroten skrivs som egen rad (jämför REGEL ROTEN UR BÅDA LED). */
+  function layoutGeomkvot(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    y = 120;
+    xx = T.str('a_2=', padL, y);
+    var v12a = xx; xx = T.str('12', xx, y); var v12b = xx;
+    xx = T.str(' och a_5=', xx, y);
+    var v32a = xx; xx = T.str('324', xx, y); var v32b = xx;
+    var yg = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Från '], ['a', 1], ['₂ till '], ['a', 1], ['₅ är det tre']],
+      [['steg. Jag multiplicerar']],
+      [['med '], ['k', 1], [' tre gånger.']]
+    ]);
+    y += 2.5 * F;
+    xx = T.str('a_5', padL + 30, y);
+    var f5b = xx;
+    xx = T.str('=', xx, y);
+    var f2a = xx; xx = T.str('a_2', xx, y); var f2b = xx;
+    T.str('·k^3', xx, y);
+    T.stepEnd();
+
+    var r1 = T.ring(v32a, v32b, yg); T.pause(240);
+    var r2 = T.ring(padL + 30, f5b, y); T.pause(300);
+    var r3 = T.ring(v12a, v12b, yg); T.pause(240);
+    var r4 = T.ring(f2a, f2b, y); T.pause(220);
+    y += 2.4 * F;
+    xx = T.str('324=12·k^3', padL + 30, y);
+    var xw = xx + 0.6 * F;
+    T.pause(240);
+    [r1, r2, r3, r4].forEach(function (r) { T.fade(r); });
+    T.stepEnd();
+
+    y = ekvOp(y, '/12', xw, '324=12·k^3');
+    T.str('27=k^3', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vilket tal blir 27 upphöjt']],
+      [['till 3? Det är tredjeroten']],
+      [['ur 27.']]
+    ]);
+    y += 2.5 * F;
+    xx = T.str('k=', padL + 30, y);
+    T.rot('27', xx, y, 3);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    var kx0 = T.str('k=', padL + 30, y);
+    var kx1 = T.str('3', kx0, y);
+    var yk = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['a', 1], ['₁ står ett steg före '], ['a', 1], ['₂.']],
+      [['Då dividerar jag med kvoten.']]
+    ]);
+    y += 3.2 * F;
+    xx = T.str('a_1=', padL + 30, y);
+    xx = T.fracH('a_2', 'k', xx, y);
+    T.stepEnd();
+
+    var q1 = T.ring(v12a, v12b, yg); T.pause(240);
+    var q2 = T.ring(kx0, kx1, yk); T.pause(220);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('12', '3', xx, y);
+    T.pause(200);
+    T.fade(q1); T.fade(q2);
+    T.str('=4', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag kontrollerar med '], ['a', 1], ['₅.']]
+    ], 1.05);
+    y += 2.8 * F;
+    T.str('Kontroll: a_5=4·3^4=4·81=324', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: k=3 och a_1=4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: lönen som växer (ma3b-6.2 ex 3) --------------
+   * Lönerna är en geometrisk talföljd med förändringsfaktorn som kvot.
+   * b) löses med lg: logaritmerad rad FÖRST, sedan logaritmlagen (REGEL
+   * LOGARITMERA BÅDA LED I TVÅ RADER), med regelnot för lagen. */
+  function layoutGeomlon(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    tanke(20, [
+      [['En höjning med 3 % ger']],
+      [['förändringsfaktorn 1,03. Den']],
+      [['är talföljdens kvot.']]
+    ], 0);
+    y = 240;
+    T.str('a_1=28 000 och k=1,03', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('a_n=28 000·1,03^n^-^1', padL + 30, y);
+    T.stepEnd();
+
+    /* ---- a) ---- */
+    tanke(y, [
+      [['År 8 har lönen höjts 7']],
+      [['gånger, så exponenten är 7.']]
+    ]);
+    y += 3.0 * F;
+    xx = T.str('a) a_8=28 000·1,03^7', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xx = T.str('=34 436,468...', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Pengar avrundas till hela']],
+      [['kronor.']]
+    ]);
+    T.str('≈34 436', xx, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: Cirka 34 436 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Först tar jag reda på när']],
+      [['lönen är exakt 40 000 kr.']]
+    ]);
+    y += 3.0 * F;
+    var xc = padL + 44;
+    T.str('b)', padL, y);
+    /* bred rad: skrivs en aning mindre så att väggen ryms (REGEL EN
+     * EKVATION SKRIVS PÅ EN RAD) */
+    xx = T.str('28 000·1,03^n^-^1=40 000', xc, y, null, 0.9);
+    var xw = xx + 0.6 * F;
+    T.stepEnd();
+
+    y = ekvOp(y, '/28 000', xw, '28 000·1,03^n^-^1=40 000',
+              { x0: xc, dyRes: 3.2, vopt: { h0: 1.15 } });
+    T.str('1,03^n^-^1=1,428...', xc, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['n', 1], [' står i exponenten. Jag']],
+      [['logaritmerar båda led.']]
+    ]);
+    y += 2.5 * F;
+    T.str('lg 1,03^n^-^1=lg 1,428...', xc, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    var not = regelNotT(T, F, 'lg a^x=x·lg a', 430, y - 1.4 * F);
+    xx = T.str('(n-1)·lg 1,03=lg 1,428...', xc, y, null, 0.9);
+    var xw2 = xx + 0.6 * F;
+    T.stepEnd();
+    regelNotGom(T, not);
+
+    y = ekvOp(y, '/lg 1,03', Math.min(xw2, 540), function (yb) {
+      var x = T.fracH('(n-1)·lg 1,03', 'lg 1,03', xc, yb, null, BLUE);
+      x = T.str('=', x, yb);
+      T.fracH('lg 1,428...', 'lg 1,03', x, yb, null, BLUE);
+    }, { x0: xc, dy: 3.1, dyRes: 3.2, dyVagg: 3.0 });
+    xx = T.str('n-1=', xc, y);
+    xx = T.fracH('lg 1,428...', 'lg 1,03', xx, y);
+    xx = T.str('=12,066...', xx, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+1', xx + 0.6 * F, 'n-1=12,066...',
+              { x0: xc, dy: 3.0, dyVagg: 2.9, vopt: { h0: 1.25, h1: 1.15 } });
+    T.str('n=13,066...', xc, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Lönen höjs bara en gång per']],
+      [['år. Jag kontrollerar år 13']],
+      [['och år 14.']]
+    ]);
+    y += 2.5 * F;
+    T.str('a_1_3=28 000·1,03^1^2≈39 921', xc, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    T.str('a_1_4=28 000·1,03^1^3≈41 119', xc, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: År 14', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: arvet (ma3b-6.3 ex 1) ------------------------
+   * Nuvärdesformeln skrivs med ordet förändringsfaktor, som i teorin. */
+  function layoutNuvardearv(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    tanke(20, [
+      [['Arvet betalas ut om 6 år.']],
+      [['Jag söker vad det är värt']],
+      [['i dag, alltså nuvärdet.']]
+    ], 0);
+    y = 210;
+    T.str('Nuvärde', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('N=', padL, y);
+    xx = T.fracH('B', 'förändringsfaktor^n', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Räntan 3 % ger förändrings-']],
+      [['faktorn 1,03, och '], ['n', 1], [' = 6.']]
+    ], 1.05);
+    xx = T.str('=', xx, y);
+    xx = T.fracH('200 000', '1,03^6', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('=167 496,851...', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Pengar avrundas till hela']],
+      [['kronor.']]
+    ]);
+    T.str('≈167 497', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: arvet är värt']],
+      [['mindre i dag än när det']],
+      [['betalas ut om 6 år.']]
+    ]);
+    y += 2.4 * F;
+    xe = T.str('Svar: Cirka 167 497 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: nu eller senare? (ma3b-6.3 ex 2) ------------- */
+  function layoutNuellersenare(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    function del(bokstav, ff, varde, avrundat, yb) {
+      var x = T.str(bokstav + ') N=', padL, yb);
+      x = T.fracH('120 000', ff + '^4', x, yb);
+      x = T.str('=' + varde, x, yb);
+      T.stepEnd();
+      if (x + T.adv('≈' + avrundat) < PAPER_W - 40) {
+        T.str('≈' + avrundat, x, yb);
+        T.stepEnd();
+        return yb;
+      }
+      yb += 2.7 * F;
+      T.str('≈' + avrundat, padL + 30, yb);
+      T.stepEnd();
+      return yb;
+    }
+
+    tanke(20, [
+      [['Jag räknar om 120 000 kr']],
+      [['till ett nuvärde och jämför']],
+      [['med 100 000 kr i dag.']]
+    ], 0);
+
+    /* ---- a) ---- */
+    y = 210;
+    y = del('a', '1,04', '102 576,502...', '102 577', y);
+
+    tanke(y, [
+      [['102 577 kr är mer än']],
+      [['100 000 kr.']]
+    ], 1.05);
+    y += 2.8 * F;
+    xe = T.str('Svar: 120 000 kr om 4 år', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Nu är räntan högre. Då är']],
+      [['framtida pengar värda']],
+      [['mindre i dag.']]
+    ]);
+    y += 3.6 * F;
+    y = del('b', '1,06', '95 051,239...', '95 051', y);
+
+    tanke(y, [
+      [['95 051 kr är mindre än']],
+      [['100 000 kr.']]
+    ], 1.05);
+    y += 2.8 * F;
+    xe = T.str('Svar: 100 000 kr nu', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: vinsten i delar (ma3b-6.3 ex 3) --------------
+   * Tre nuvärden, sedan summan. Varje nuvärde ringas in när det förs
+   * över till summan (REGEL INSÄTTNING). */
+  function layoutNuvardeflera(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+
+    tanke(20, [
+      [['Varje utbetalning får sitt']],
+      [['eget nuvärde. Exponenten är']],
+      [['antalet år till utbetalningen.']]
+    ], 0);
+    y = 210;
+    var nuv = [['1,05', '47 619,047...'], ['1,05^2', '45 351,473...'],
+               ['1,05^3', '43 191,879...']];
+    var lagen = [];
+    nuv.forEach(function (n, i) {
+      if (i) y += 3.2 * F;
+      xx = T.fracH('50 000', n[0], padL + 30, y);
+      var x0 = T.str('=', xx, y);
+      var x1 = T.str(n[1], x0, y);
+      lagen.push([x0, x1, y]);
+      T.stepEnd();
+    });
+
+    tanke(y, [
+      [['Vinstens nuvärde är summan']],
+      [['av de tre nuvärdena.']]
+    ], 1.05);
+    y += 3.0 * F;
+    /* summan ryms inte på en rad: den bryts före ett plustecken, och
+     * fortsättningsraden börjar med operatorn (som i REGEL AVRUNDNING) */
+    var termer = ['47 619,047...', '+45 351,473...', '+43 191,879...'];
+    xx = T.str('N=', padL, y);
+    termer.forEach(function (t, i) {
+      if (i === 2) { y += 2.3 * F; xx = padL + 30; }
+      var r = T.ring(lagen[i][0] + 0.1 * F, lagen[i][1], lagen[i][2]);
+      T.pause(240);
+      xx = T.str(t, xx, y);
+      T.pause(200);
+      T.fade(r);
+    });
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xx = T.str('=136 162,401...', padL + 30, y);
+    T.stepEnd();
+
+    T.str('≈136 162', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: mindre än 150 000']],
+      [['kr, eftersom alla pengarna']],
+      [['kommer först senare.']]
+    ]);
+    y += 2.4 * F;
+    xe = T.str('Svar: Cirka 136 162 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   /* ==================================================================
    * MATEMATIK NIVÅ 1C — KAPITEL 3, PROCENTUELLA FÖRÄNDRINGAR
    * ------------------------------------------------------------------
@@ -59826,6 +60641,16 @@
                    hyrbil: layoutHyrbil,
                    slutenformel: layoutSlutenformel,
                    prickmonster: layoutPrickmonster,
+                   /* ma3b kapitel 6 — Geometrisk summa (6.1–6.3) */
+                   talfoljdelement: layoutTalfoljdelement,
+                   stickmonster: layoutStickmonster,
+                   vilkentalfoljd: layoutVilkentalfoljd,
+                   geomelement: layoutGeomelement,
+                   geomkvot: layoutGeomkvot,
+                   geomlon: layoutGeomlon,
+                   nuvardearv: layoutNuvardearv,
+                   nuellersenare: layoutNuellersenare,
+                   nuvardeflera: layoutNuvardeflera,
                    /* ma1c kapitel 3 — Procentuella förändringar */
                    andelpromille: layoutAndelpromille,
                    andeldelen: layoutAndeldelen,

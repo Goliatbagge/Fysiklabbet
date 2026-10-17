@@ -18167,6 +18167,90 @@ window.EXITTICKETS = {
   },
 ],
 
+// Matematik fortsättning nivå 1b: egen version av ma3c-2.5 utan absolutbelopp.
+'ma3b-2.7': [
+  {
+    question: 'Vad innebär det att en funktion är kontinuerlig i en punkt?',
+    choices: [
+      'Funktionen har ett maximum där',
+      'Derivatan är noll där',
+      'Grafen hänger ihop där, den kan ritas utan att lyfta pennan',
+      'Funktionen är alltid positiv där',
+    ],
+    correct: 2,
+    why: [
+      'Kontinuitet handlar om att grafen hänger ihop, inte om extrempunkter.',
+      'En derivata lika med noll beskriver en vågrät tangent, inte kontinuitet.',
+      'En kontinuerlig graf hänger ihop i punkten, utan hopp eller språng.',
+      'En funktion kan vara kontinuerlig även om den är negativ. Tecknet på funktionsvärdet spelar ingen roll.',
+    ],
+  },
+  {
+    question: 'För vilket värde på $x$ är funktionen $f(x) = \\dfrac{3}{x - 1}$ inte deriverbar?',
+    choices: [
+      '$x = 3$',
+      '$x = 1$',
+      '$x = 0$',
+      '$x = -1$',
+    ],
+    correct: 1,
+    why: [
+      'Talet 3 står i täljaren. Det är nämnaren som inte får bli 0.',
+      'För $x = 1$ blir nämnaren $1 - 1 = 0$. Där är funktionen inte definierad, grafen har ett språng och derivatan saknas.',
+      'För $x = 0$ är $f(0) = \\dfrac{3}{-1} = -3$, så funktionen är definierad och deriverbar där.',
+      'För $x = -1$ blir nämnaren $-2$, inte 0. Funktionen är definierad och deriverbar där.',
+    ],
+  },
+  {
+    question: 'Vilket av följande är INTE ett skäl till att en funktion saknar derivata i en punkt?',
+    choices: [
+      'Funktionen är deriverbar och kontinuerlig i punkten',
+      'Funktionen är inte definierad där (till exempel ett språng)',
+      'Funktionen är diskontinuerlig där (till exempel ett hopp)',
+      'Funktionen har en hörnpunkt där',
+    ],
+    correct: 0,
+    why: [
+      'Om funktionen redan är deriverbar i punkten finns derivatan förstås där. Det är motsatsen till ett skäl att sakna derivata.',
+      'En funktion som inte är definierad i en punkt kan inte heller ha en derivata där.',
+      'En diskontinuerlig funktion (till exempel med ett hopp) kan inte ha en väldefinierad derivata i den punkten.',
+      'I en hörnpunkt är lutningen olika från vänster och höger, så derivatan saknar ett entydigt värde.',
+    ],
+  },
+  {
+    question: 'En graf består av linjen $y = -x$ till vänster om origo och linjen $y = x$ till höger om origo. Varför är funktionen inte deriverbar i $x = 0$?',
+    choices: [
+      'Eftersom funktionsvärdet är 0 i $x = 0$',
+      'Eftersom funktionen inte är definierad i $x = 0$',
+      'Eftersom grafen har ett hopp i $x = 0$',
+      'Eftersom lutningen är $-1$ från vänster och $1$ från höger, så gränsvärdena är olika',
+    ],
+    correct: 3,
+    why: [
+      'Att funktionsvärdet är 0 säger bara var grafen går. Det säger inget om varför derivatan saknas.',
+      'Båda linjerna går genom origo, så funktionen är definierad i $x = 0$ med värdet 0.',
+      'Linjerna möts i origo, så grafen hänger ihop. Den har ett hörn, inget hopp.',
+      'Vänster- och högergränsvärdet för lutningen skiljer sig åt, så det finns ingen entydig tangent i hörnpunkten.',
+    ],
+  },
+  {
+    question: 'En funktions graf har en öppen ring i punkten $(2, 5)$ och en fylld prick i punkten $(2, 3)$. Vad kan vi dra för slutsats?',
+    choices: [
+      'Funktionen är deriverbar i $x = 2$',
+      'Funktionen är kontinuerlig men inte deriverbar i $x = 2$',
+      'Funktionen har ett hopp i $x = 2$ och är varken kontinuerlig eller deriverbar där',
+      'Funktionen är inte definierad i $x = 2$',
+    ],
+    correct: 2,
+    why: [
+      'Deriverbarhet kräver kontinuitet, och en funktion med ett hopp är inte kontinuerlig i punkten.',
+      'Ett hopp innebär att grafen inte hänger ihop, så funktionen är inte ens kontinuerlig i $x = 2$.',
+      'Den öppna ringen visar att grafen närmar sig 5 från ena hållet medan funktionsvärdet (fylld prick) är 3. Grafen hänger inte ihop, det är ett hopp. Då är funktionen varken kontinuerlig eller deriverbar i punkten.',
+      'Den fyllda pricken vid $(2, 3)$ visar tvärtom att funktionen är definierad i $x = 2$, med värdet 3.',
+    ],
+  },
+],
+
 'ma3c-3.1': [
   {
     question: 'Vilken deriveringsregel gäller för $f(x) = x^n$?',

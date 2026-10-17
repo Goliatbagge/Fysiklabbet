@@ -51181,6 +51181,48 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: där nämnaren blir noll (ma3b-2.7 ex 2) -----
+   * f(x)=5/(x-3) är inte definierad där nämnaren är 0. Ekvationen x-3=0
+   * löses i det valda redovisningsläget (Båda led eller Väggen). */
+  function layoutEjdefinierad(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var xw = padL + 30 + T.adv('x-3=0') + 16;
+
+    y = 186;
+    xx = T.str('f(x)=', padL, y);
+    T.fracH('5', 'x-3', xx, y);
+    T.stepEnd();
+
+    tanke(y + 0.6 * F, [
+      [['Division med 0 är inte']],
+      [['definierad. Jag tar reda på']],
+      [['när nämnaren blir 0.']]
+    ]);
+    y += 5.4 * F;
+    T.str('Nämnaren får inte vara 0', padL, y - 1.45 * F, null, 0.62);
+    T.str('x-3=0', padL + 30, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+3', xw, 'x-3=0');
+    T.str('x=3', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I x=3 är f inte definierad.']],
+      [['Grafen har ett språng där, så']],
+      [['f är inte deriverbar i x=3.']]
+    ]);
+    y += 4.8 * F;
+    xe = T.str('Svar: x=3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
   /* ---------------- scen: deriveringsreglerna (ma3c-3.1 ex 1) --------
    * Sex deluppgifter som var för sig visar en regel: potensregeln,
    * faktorn framför, konstanten, förstagradstermen och bråket. */
@@ -59434,6 +59476,7 @@
                    absolutbelopp: layoutAbsolutbelopp,
                    absolutekvation: layoutAbsolutekvation,
                    deriverbarhet: layoutDeriverbarhet,
+                   ejdefinierad: layoutEjdefinierad,
                    derivregler: layoutDerivregler,
                    derivvarde: layoutDerivvarde,
                    derivtermvis: layoutDerivtermvis,

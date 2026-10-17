@@ -40503,6 +40503,147 @@ $$
         },
     ],
 
+    // Matematik fortsättning nivå 1b: egen version av ma3c-2.5 utan
+    // absolutbelopp (ingår inte i nivå 1b). Uppgift 3, 5 och 6 är samma
+    // som i ma3c-2.5; ändras de där ska samma ändring göras här.
+    'ma3b-2.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Grafen till funktionen $f$ består av två räta linjer: $y = 2x + 1$ för $x \\le 1$ och $y = -x + 4$ för $x > 1$. Grafen hänger ihop i $x = 1$. Är $f$ deriverbar i $x = 1$?`,
+            choices: [
+                `Ja, eftersom grafen hänger ihop i $x = 1$`,
+                `Ja, eftersom båda linjerna går genom punkten $(1, 3)$`,
+                `Nej, eftersom lutningen är $2$ till vänster och $-1$ till höger om $x = 1$`,
+                `Nej, eftersom funktionen inte är definierad i $x = 1$`,
+            ],
+            correct: 2,
+            solution: `Grafen hänger ihop, eftersom båda linjerna ger samma värde i $x = 1$:
+
+$$
+2 \\cdot 1 + 1 = 3 \\qquad \\text{och} \\qquad -1 + 4 = 3
+$$
+
+Lutningen är linjernas $k$-värden. Till vänster om $x = 1$ är lutningen $2$ och till höger är den $-1$. Lutningarna är olika, så grafen har ett hörn i $(1, 3)$ och det finns ingen entydig tangent där.
+
+**Svar:** Nej, $f$ är inte deriverbar i $x = 1$, eftersom lutningen är $2$ till vänster och $-1$ till höger.`,
+        },
+        {
+            level: 1,
+            question: `Vilket påstående om en funktion vars graf har en hörnpunkt i $x = a$ stämmer?`,
+            choices: [
+                `Funktionen är varken kontinuerlig eller deriverbar i $x = a$`,
+                `Funktionen är kontinuerlig i $x = a$ men inte deriverbar där`,
+                `Funktionen är deriverbar men inte kontinuerlig i $x = a$`,
+                `Funktionen saknar värde i $x = a$`,
+            ],
+            correct: 1,
+            solution: `En hörnpunkt uppstår när grafen hänger ihop (funktionen är definierad och kontinuerlig där), men lutningen från vänster skiljer sig från lutningen från höger. Gränsvärdet för derivatan blir då olika beroende på från vilket håll man närmar sig punkten, så derivatan saknar ett entydigt värde. Funktionen är alltså kontinuerlig men inte deriverbar i hörnpunkten.
+
+**Svar:** Funktionen är kontinuerlig i $x = a$ men inte deriverbar där`,
+        },
+        {
+            level: 1,
+            question: `För vilket värde på $x$ är funktionen $f(x) = \\dfrac{7}{x + 4}$ inte deriverbar?`,
+            choices: [
+                `$x = 4$`,
+                `$x = 0$`,
+                `$x = 7$`,
+                `$x = -4$`,
+            ],
+            correct: 3,
+            solution: `Division med 0 är inte definierad, så funktionen är inte definierad där nämnaren är 0.
+
+$$
+x + 4 = 0
+$$
+
+Vi subtraherar 4 från båda led och får $x = -4$. Där har grafen ett språng (en lodrät asymptot), och därför är $f$ inte deriverbar i $x = -4$.
+
+**Svar:** $x = -4$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En parkering kostar 20 kr för varje påbörjad timme. Kostnaden är $K(t)$ kronor när bilen står parkerad i $t$ timmar, där $0 < t \\le 4$.<br>a) Bestäm $K(0{,}5)$, $K(1)$ och $K(1{,}5)$.<br>b) För vilka värden på $t$ är $K$ inte deriverbar?`,
+            choices: [
+                `a) $20$, $20$ och $40$ kr&emsp;&emsp;b) $t = 1$, $t = 2$ och $t = 3$`,
+                `a) $10$, $20$ och $30$ kr&emsp;&emsp;b) $K$ är deriverbar för alla $t$`,
+                `a) $20$, $40$ och $40$ kr&emsp;&emsp;b) $t = 1$, $t = 2$ och $t = 3$`,
+                `a) $20$, $20$ och $40$ kr&emsp;&emsp;b) $t = 0{,}5$, $t = 1{,}5$ och $t = 2{,}5$`,
+            ],
+            correct: 0,
+            solution: `**a)** En halvtimme är en påbörjad timme, så $K(0{,}5) = 20$. Exakt en timme är också en påbörjad timme, så $K(1) = 20$. Efter en och en halv timme har den andra timmen påbörjats, så $K(1{,}5) = 2 \\cdot 20 = 40$.
+
+**Svar:** $K(0{,}5) = 20$ kr, $K(1) = 20$ kr och $K(1{,}5) = 40$ kr
+
+**b)** Kostnaden står still under varje timme och hoppar upp 20 kr precis när en ny timme påbörjas, alltså direkt efter $t = 1$, $t = 2$ och $t = 3$. Grafen ser ut som en trappa och har ett hopp vid vart och ett av dessa värden. En funktion är inte deriverbar där den har ett hopp. Mellan hoppen är grafen vågrät, och där är derivatan 0.
+
+**Svar:** $K$ är inte deriverbar för $t = 1$, $t = 2$ och $t = 3$`,
+        },
+        {
+            level: 2,
+            question: `Funktionen $f$ definieras enligt
+$$
+f(x) = \\begin{cases} x^2 & x \\le 2 \\\\ 4x - 4 & x > 2 \\end{cases}
+$$
+Är $f$ deriverbar i $x = 2$?`,
+            choices: [
+                `Nej, eftersom grafen har en hörnpunkt i $x = 2$`,
+                `Nej, eftersom funktionen är diskontinuerlig i $x = 2$`,
+                `Det går inte att avgöra utan att rita grafen`,
+                `Ja, eftersom både funktionsvärdet och derivatan är lika från båda hållen`,
+            ],
+            correct: 3,
+            solution: `Vi kontrollerar först att funktionen är kontinuerlig i $x = 2$ genom att jämföra funktionsvärdena från båda grenarna.
+
+$$
+2^2 = 4 \\qquad \\text{och} \\qquad 4 \\cdot 2 - 4 = 4
+$$
+
+Värdena är lika, så $f$ är kontinuerlig i $x = 2$. Vi kontrollerar sedan derivatan från båda hållen. För $x \\le 2$ är $f'(x) = 2x$, så $f'(2) = 2 \\cdot 2 = 4$. För $x > 2$ är $f'(x) = 4$ (konstant lutning), så gränsvärdet där också är 4. Derivatan är alltså lika från båda hållen, och $f$ är deriverbar i $x = 2$ trots att den är sammansatt av två olika uttryck.
+
+**Svar:** Ja, $f$ är deriverbar i $x = 2$ eftersom både funktionsvärdet och derivatan är lika ($f(2) = 4$ och $f'(2) = 4$) från båda hållen.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Funktionen $f$ definieras enligt
+$$
+f(x) = \\begin{cases} x^2 + 1 & x \\le 1 \\\\ ax + b & x > 1 \\end{cases}
+$$
+Bestäm $a$ och $b$ så att $f$ är deriverbar för alla reella tal $x$.`,
+            choices: [
+                `$a = 2$ och $b = 2$`,
+                `$a = 1$ och $b = 1$`,
+                `$a = 2$ och $b = 0$`,
+                `$a = 0$ och $b = 2$`,
+            ],
+            correct: 2,
+            solution: `För att $f$ ska vara deriverbar i brytpunkten $x = 1$ krävs **två** villkor: funktionen måste vara kontinuerlig där, och derivatan måste vara lika från båda hållen. Det räcker inte med bara ett av villkoren. Vi måste ställa upp båda och lösa dem tillsammans.
+
+**Kontinuitet i $x = 1$:** funktionsvärdena från de två grenarna måste vara lika.
+
+$$
+1^2 + 1 = a \\cdot 1 + b \\quad \\Rightarrow \\quad a + b = 2
+$$
+
+**Lika derivata i $x = 1$:** för $x \\le 1$ är $f'(x) = 2x$, så $f'(1) = 2$. För $x > 1$ är $f'(x) = a$ (konstant lutning). Dessa måste vara lika.
+
+$$
+a = 2
+$$
+
+Vi sätter in $a = 2$ i kontinuitetsvillkoret $a + b = 2$:
+
+$$
+2 + b = 2 \\quad \\Rightarrow \\quad b = 0
+$$
+
+**Svar:** $a = 2$ och $b = 0$`,
+        },
+    ],
+
     'ma3c-3.1': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {

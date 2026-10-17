@@ -15,14 +15,14 @@ const warnings = [];
 
 let W;
 try {
-    W = loadWindowScript('C:/claude/Fysiklabbet/data/exittickets.js');
+    W = loadWindowScript(require('path').join(__dirname, '..', 'data', 'exittickets.js'));
 } catch (e) {
     console.error('SYNTAXFEL i exittickets.js:', e.message);
     process.exit(1);
 }
 const ET = W.EXITTICKETS || {};
 
-const WK = loadWindowScript('C:/claude/Fysiklabbet/data/katalog.js');
+const WK = loadWindowScript(require('path').join(__dirname, '..', 'data', 'katalog.js'));
 const sections = [];
 for (const subj of Object.values(WK.KATALOG)) {
     for (const [courseName, course] of Object.entries(subj.courses || {})) {
@@ -31,6 +31,7 @@ for (const subj of Object.values(WK.KATALOG)) {
                    : courseName === 'Matematik nivå 1c' ? 'ma1c'
                    : courseName === 'Matematik nivå 2b' ? 'ma2b'
                    : courseName === 'Matematik nivå 2c' ? 'ma2c'
+                   : courseName === 'Matematik fortsättning nivå 1b' ? 'ma3b'
                    : courseName === 'Matematik fortsättning nivå 1c' ? 'ma3c'
                    : courseName === 'Matematik fortsättning nivå 2' ? 'ma4'
                    : courseName === 'Matematik specialisering' ? 'maspec' : 'fy1';
@@ -50,7 +51,7 @@ for (const subj of Object.values(WK.KATALOG)) {
 // aliasade avsnitt (WK.MA1B_ALIAS/WK.MA2B_ALIAS, b-id → c-id) täcks av
 // c-posten och ska INTE ha någon egen post i exittickets.js.
 // Kraftmomentet i Fysik nivå 1 delas på samma sätt med nivå 2 (WK.FY1_ALIAS).
-const ALIAS = { ...(WK.MA1B_ALIAS || {}), ...(WK.MA2B_ALIAS || {}), ...(WK.FY1_ALIAS || {}) };
+const ALIAS = { ...(WK.MA1B_ALIAS || {}), ...(WK.MA2B_ALIAS || {}), ...(WK.MA3B_ALIAS || {}), ...(WK.FY1_ALIAS || {}) };
 for (const id of sections) {
     const cid = ALIAS[id] || id;
     if (!ET[cid] || !Array.isArray(ET[cid]) || ET[cid].length === 0) {

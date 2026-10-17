@@ -593,7 +593,7 @@
         // de inbäddade simuleringarna i genomgångarna räknas inte.
         const FAKTA = (() => {
             const runda = n => n >= 50 ? (Math.floor(n / 10) * 10) + '+' : String(n);
-            const alias = Object.assign({}, window.MA1B_ALIAS, window.MA2B_ALIAS, window.FY1_ALIAS);
+            const alias = Object.assign({}, window.MA1B_ALIAS, window.MA2B_ALIAS, window.MA3B_ALIAS, window.FY1_ALIAS);
             const kod = window.SOK_COURSE_CODE;
             const genomgangar = kod ? KATALOG.filter(a => !alias[kod(a.course) + '-' + a.num] && !/S$/.test(a.num)).length : 0;
             const simsidor = new Set((window.SOK_INDEX || [])
@@ -609,6 +609,7 @@
         })();
 
         const UPDATES = [
+            { date: '2026-10-17', href: 'katalog.html?id=ma3b', title: 'Ny nivå: Matematik fortsättning nivå 1b', text: 'Matematik – fortsättning får nivå 1b, för dig som läser samhällsvetenskap eller ekonomi. Nivån delar genomgångarna om rationella uttryck, gränsvärden, derivata, extremvärden och integraler med nivå 1c. Det som skiljer är linjär optimering i kapitel 2 och ett helt nytt kapitel om geometrisk summa, med talföljder, nuvärde, sparande och annuitetslån. Varje nytt avsnitt har exempel med pennlösningar, övningar i tre nivåer och en exit ticket.' },
             { date: '2026-10-16', href: 'katalog.html?id=ma1c-4.7&block=varfor-blir-produkten-1', title: 'Simulering: vrid lutningstrappan ett kvarts varv', text: 'Välj lutningen på en linje och tryck på knappen: trappsteget svänger 90 grader och lägger sig på den vinkelräta linjen. Stegen byter plats och det ena byter tecken, och därför blir produkten av k-värdena alltid −1. Ställ linjen vågrätt så ser du undantaget.' },
             { date: '2026-10-16', href: 'katalog.html?id=ma1c-4.7', title: 'Ny genomgång i Matematik nivå 1c: vinkelräta linjer (överkurs)', text: 'Två linjer som skär varandra i rät vinkel har k-värden vars produkt är −1. Genomgången visar varför, med figurer och en simulering, och går igenom hur man avgör om två linjer är vinkelräta, bestämmer en vinkelrät linje genom en punkt och visar att en triangel har en rät vinkel.' },
             { date: '2026-10-15', href: 'katalog.html?id=fy2-1.9&block=prova-sjalv', title: 'Simulering: kastet räknat steg för steg', text: 'Varje tidssteg blir en punkt på banan, och bredvid står den exakta kastparabeln som jämförelse. Ta ett steg i taget och följ hur hastigheten och accelerationen ändras, eller låt kastet köra. Gör tidssteget längre och se felet växa, eller slå på luftmotståndet så blir tennisbollens kast kortare, lägre och osymmetriskt. En tabell under banan visar värdena i varje steg.' },
@@ -761,6 +762,7 @@
                                             <svg className="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
                                         </button>
                                         <div className="lab-nav-dd-undermeny">
+                                            <a href="katalog.html#ma3b">Nivå 1b</a>
                                             <a href="katalog.html#ma3c">Nivå 1c</a>
                                             <a href="katalog.html#ma4">Nivå 2</a>
                                         </div>
@@ -1127,6 +1129,7 @@
                                     <h3>Matematik – fortsättning</h3>
                                     <p>Derivator och integraler, trigonometri och komplexa tal.</p>
                                     <div className="ns-nivaer">
+                                        <Niva href="katalog.html?id=ma3b" namn="Nivå 1b" kurs="Matematik fortsättning nivå 1b" />
                                         <Niva href="katalog.html?id=ma3c" namn="Nivå 1c" kurs="Matematik fortsättning nivå 1c" />
                                         <Niva href="katalog.html?id=ma4" namn="Nivå 2" kurs="Matematik fortsättning nivå 2" />
                                     </div>

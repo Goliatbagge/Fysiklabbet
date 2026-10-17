@@ -82,6 +82,7 @@
                                     <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
                                 </button>
                                 <div class="lab-nav-dd-undermeny">
+                                    <a href="katalog.html#ma3b">Nivå 1b</a>
                                     <a href="katalog.html#ma3c">Nivå 1c</a>
                                     <a href="katalog.html#ma4">Nivå 2</a>
                                 </div>
@@ -203,7 +204,7 @@
         // avsnitts id är kurskod + nummer (fy1-3.S).
         var KOD = { 'Fysik nivå 1': 'fy1', 'Fysik nivå 2': 'fy2', 'Matematik nivå 1b': 'ma1b',
             'Matematik nivå 1c': 'ma1c', 'Matematik nivå 2b': 'ma2b', 'Matematik nivå 2c': 'ma2c',
-            'Matematik fortsättning nivå 1c': 'ma3c', 'Matematik fortsättning nivå 2': 'ma4' };
+            'Matematik fortsättning nivå 1b': 'ma3b', 'Matematik fortsättning nivå 1c': 'ma3c', 'Matematik fortsättning nivå 2': 'ma4' };
         flat = flat.map(function (a) { return Object.assign({ id: KOD[a.course] + '-' + a.num }, a); });
         var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
         var em = function (s) { return esc(s).replace(/\*([^*]+)\*/g, '<em>$1</em>'); };

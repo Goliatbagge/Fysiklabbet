@@ -30,6 +30,7 @@
     if (courseName === 'Matematik nivå 1c') return 'ma1c';
     if (courseName === 'Matematik nivå 2b') return 'ma2b';
     if (courseName === 'Matematik nivå 2c') return 'ma2c';
+    if (courseName === 'Matematik fortsättning nivå 1b') return 'ma3b';
     if (courseName === 'Matematik fortsättning nivå 1c') return 'ma3c';
     if (courseName === 'Matematik fortsättning nivå 2') return 'ma4';
     if (courseName === 'Matematik specialisering') return 'maspec';

@@ -628,6 +628,10 @@ window.KATALOG = {
           },
         },
       },
+      // Matematik fortsättning nivå 1b (Ma3b) är HÄRLEDD ur nivå 1c och byggs
+      // längst ned i filen (sök på MA3B_SPEC). Platshållaren här styr bara
+      // ordningen i kurslistan.
+      'Matematik fortsättning nivå 1b': {},
       // Matematik fortsättning nivå 2 (Ma4) byggs ut avsnitt för avsnitt
       // från den samlade genomgångs-PDF:en i Genomgångar/Matematik
       // fortsättning nivå 2/ — se .claude/matematik-4-plan.md för plan,
@@ -972,6 +976,164 @@ window.MA2B_ALIAS = {};
         'Du lär dig: ekvationssystem, andragradsekvationer och logaritmer',
         'Du tränar på: algebraiska metoder, geometriska bevis och problemlösning',
         'Du möter: andragradsfunktioner, normalfördelning och regression',
+      ],
+    },
+    chapters,
+  };
+})();
+
+// ═══════════════════════════════════════════════════════════════════════
+// Matematik fortsättning nivå 1b (Ma3b) — HÄRLEDD ur nivå 1c (Ma3c).
+//
+// Samma mekanism som 1b/1c och 2b/2c ovan: katalogposterna kopieras härifrån
+// vid sidladdning, och innehållet (teori-md, övningar, exit tickets,
+// visualiseringar) slås upp via aliaskartan window.MA3B_ALIAS
+// (ma3b-id → ma3c-id). En ändring i ett delat ma3c-avsnitt slår alltså
+// automatiskt igenom i ma3b — redigera ALDRIG delade ma3b-avsnitt separat.
+//
+// MA3B_SPEC följer MA2B_SPEC-formatet, med två tillägg för kapitel:
+//   • namn:  — kapitlets namn i 3b när det skiljer sig från 3c-kapitlets
+//              (kapitel: anger då fortfarande KÄLLkapitlet i 3c).
+//   • kapitel: null — ett helt eget 3b-kapitel utan källa i 3c (namn:,
+//              intro: och sektioner: med bara egna avsnitt krävs).
+//
+// Skillnader mot 3c (2026-10-17, efter ämnesplanen för Gy25 och
+// innehållsförteckningarna i Origo 3b/3c): 3b har "Metoder för linjär
+// optimering" och "Begreppet geometrisk summa" i stället för 3c:s
+// absolutbelopp och trigonometri. Kapitel 2 inleds därför med två egna
+// avsnitt om linjär optimering, 3c:s "Deriverbarhet och absolutbelopp"
+// (2.5) ersätts av ett eget avsnitt utan absolutbelopp, och kapitel 6
+// (trigonometri) ersätts av ett eget kapitel om geometrisk summa. Kapitel
+// 2 får en egen sammanfattning. Kapitel 1, 3, 4 och 5 delas rakt av.
+// ═══════════════════════════════════════════════════════════════════════
+window.MA3B_ALIAS = {};
+(function () {
+  const ma3c = window.KATALOG['Matematik'].courses['Matematik fortsättning nivå 1c'];
+  const kopia = (o) => JSON.parse(JSON.stringify(o));
+
+  // Avsnitt som bara finns i 3b — teori i data/teori/ma3b-<num>.md,
+  // övningar/exit tickets under ma3b-id i data/ovningar.js/exittickets.js.
+  const NYA = {
+    olikheter: {
+      title: 'Olikheter och system av olikheter',
+      description: 'Repetera räta linjens ekvation och ekvationssystem, och beskriv områden i koordinatsystemet med olikheter. En linje delar planet i två halvplan.',
+      href: null, icon: null,
+      keywords: ['linjär optimering','olikheter','olikhet med två variabler','system av olikheter','halvplan','område','räta linjens ekvation','ekvationssystem','skärningspunkt','koordinatsystem','skugga'],
+    },
+    linjarOptimering: {
+      title: 'Linjär optimering',
+      description: 'Bivillkor ger ett tillåtet område, och målfunktionens största eller minsta värde finns alltid i ett av områdets hörn.',
+      href: null, icon: null,
+      keywords: ['linjär optimering','optimering','målfunktion','bivillkor','tillåtet område','hörnpunkt','hörnpunktsmetoden','nivålinje','största värde','minsta värde','vinst','olikheter'],
+    },
+    deriverbarhet: {
+      title: 'Kontinuitet och deriverbarhet',
+      description: 'Kontinuerliga och diskontinuerliga funktioner, och varför en funktion inte är deriverbar i en hörnpunkt eller där grafen gör ett hopp.',
+      href: null, icon: null,
+      keywords: ['derivata','deriverbarhet','villkor för deriverbarhet','kontinuerlig','diskontinuerlig','hörnpunkt','hörn','tangent','språng'],
+    },
+    talfoljder: {
+      title: 'Talföljder och mönster',
+      description: 'En talföljd är tal i en bestämd ordning. Beskriv den med en formel för det n:te elementet, och känn igen aritmetiska och geometriska mönster.',
+      href: null, icon: null,
+      keywords: ['geometrisk summa','talföljd','talföljder','mönster','element','an','formel för n:te elementet','aritmetisk talföljd','differens','rekursiv'],
+    },
+    geometriskaTalfoljder: {
+      title: 'Geometriska talföljder',
+      description: 'Varje element är det föregående gånger kvoten k. Det n:te elementet ges av aₙ = a₁ · kⁿ⁻¹, och tillväxt i procent bildar en geometrisk talföljd.',
+      href: null, icon: null,
+      keywords: ['geometrisk summa','geometrisk talföljd','kvot','förändringsfaktor','exponentiell tillväxt','an = a1 k^(n-1)','procentuell förändring','ränta på ränta'],
+    },
+    nuvarde: {
+      title: 'Nuvärde',
+      description: 'Vad är en framtida summa värd i dag? Dela det framtida beloppet med förändringsfaktorn upphöjd till antalet år.',
+      href: null, icon: null,
+      keywords: ['geometrisk summa','nuvärde','slutvärde','ränta','ränta på ränta','diskontera','förändringsfaktor','privatekonomi','sparande'],
+    },
+    geometriskSumma: {
+      title: 'Geometrisk summa',
+      description: 'Summan av de n första elementen i en geometrisk talföljd ges av sₙ = a₁(kⁿ − 1)/(k − 1), som används vid regelbundet sparande.',
+      href: null, icon: null,
+      keywords: ['geometrisk summa','summaformel','geometrisk talföljd','kvot','sparande','månadssparande','insättningar','slutvärde','privatekonomi'],
+    },
+    annuitetslan: {
+      title: 'Annuitetslån',
+      description: 'Med ett annuitetslån betalar man lika mycket varje gång. Beloppet bestäms med en geometrisk summa av alla betalningarnas nuvärden.',
+      href: null, icon: null,
+      keywords: ['geometrisk summa','annuitetslån','annuitet','lån','amortering','ränta','rak amortering','nuvärde','bolån','privatekonomi'],
+    },
+    sammanfattning6: {
+      title: 'Sammanfattning',
+      description: 'Talföljder, geometrisk summa, nuvärde och annuitetslån: kapitlets begrepp, formler och metoder komprimerat inför provet.',
+      href: null, icon: null, num: '6.S',
+      keywords: ['sammanfattning','repetition','prov','provkoll','formler','geometrisk summa','geometrisk talföljd','nuvärde','annuitetslån'],
+    },
+  };
+
+  const MA3B_SPEC = [
+    { kapitel: 'Rationella uttryck och gränsvärden', sektioner: 'alla' },
+    { kapitel: 'Derivatan', namn: 'Linjär optimering och derivatan',
+      intro: 'Kapitlet börjar med linjär optimering: olikheter med två variabler beskriver områden i koordinatsystemet, och målfunktionens största eller minsta värde finns i ett av områdets hörn. Sedan närmar vi oss derivatan stegvis, med sekantens medellutning, tangentens lutning i en punkt och derivatans definition som ett gränsvärde, och avslutar med när en funktion är deriverbar.',
+      sektioner: [NYA.olikheter, NYA.linjarOptimering, '2.1', '2.2', '2.3', '2.4',
+                  NYA.deriverbarhet,
+                  { fran: '2.S', egenTeori: true,
+                    description: 'Linjär optimering, sekant, tangent och derivatans definition: kapitlets begrepp, formler och metoder komprimerat inför provet.',
+                    keywords: ['sammanfattning','repetition','prov','provkoll','formler','linjär optimering','derivata','derivatans definition','sekant','tangent'] }] },
+    { kapitel: 'Deriveringsregler', sektioner: 'alla' },
+    { kapitel: 'Kurvor och extremvärden', sektioner: 'alla' },
+    { kapitel: 'Integraler', sektioner: 'alla' },
+    { kapitel: null, namn: 'Geometrisk summa',
+      intro: 'Talföljder är tal i en bestämd ordning. I en geometrisk talföljd multipliceras varje element med samma kvot, precis som ett belopp som växer med samma procentsats varje år. Vi bestämmer element och summor i geometriska talföljder och använder dem i privatekonomin: nuvärde, regelbundet sparande och annuitetslån.',
+      sektioner: [NYA.talfoljder, NYA.geometriskaTalfoljder, NYA.nuvarde,
+                  NYA.geometriskSumma, NYA.annuitetslan, NYA.sammanfattning6] },
+  ];
+
+  const chapters = {};
+  MA3B_SPEC.forEach((kap, ki) => {
+    const src = kap.kapitel ? ma3c.chapters[kap.kapitel] : null;
+    if (kap.kapitel && !src) throw new Error('MA3B_SPEC: kapitlet "' + kap.kapitel + '" finns inte i 3c');
+    const nr = ki + 1;
+    const items = kap.sektioner === 'alla'
+      ? src.sections.map((s) => String(s.num))
+      : kap.sektioner;
+    let lopnr = 0;
+    const sections = items.map((item) => {
+      const spec = (typeof item === 'string') ? { fran: item } : item;
+      let sec;
+      if (spec.fran) {
+        const srcSec = src.sections.find((s) => String(s.num) === spec.fran);
+        if (!srcSec) throw new Error('MA3B_SPEC: hittar inte 3c-avsnittet ' + spec.fran);
+        sec = kopia(srcSec);
+        if (spec.description) sec.description = spec.description;
+        if (spec.keywords) sec.keywords = kopia(spec.keywords);
+      } else {
+        sec = kopia(spec);
+      }
+      // Specialavsnitt (K.S sammanfattning, K.E enhetskoll) behåller sin
+      // bokstav; övriga numreras löpande efter positionen i listan.
+      const kalla = spec.fran || spec.num;
+      const suffix = kalla && /\.(S|E)$/.test(kalla) ? kalla.split('.')[1] : null;
+      sec.num = suffix ? nr + '.' + suffix : nr + '.' + (++lopnr);
+      if (spec.fran && !spec.egenTeori) {
+        window.MA3B_ALIAS['ma3b-' + sec.num] = 'ma3c-' + spec.fran;
+      }
+      return sec;
+    });
+    chapters[kap.namn || kap.kapitel] = { number: nr, intro: kap.intro || src.intro, sections };
+  });
+
+  window.KATALOG['Matematik'].courses['Matematik fortsättning nivå 1b'] = {
+    label: 'Matematik fortsättning nivå 1b',
+    intro: {
+      tagline: 'Matematikens tredje nivå för dig som läser samhällsvetenskap eller ekonomi: derivata, integraler och geometrisk summa.',
+      paragraphs: [
+        'Matematik fortsättning nivå 1b (Ma3b) tar dig vidare in i analysen och riktar sig framför allt till Samhällsvetenskapsprogrammet och Ekonomiprogrammet. Vi börjar med rationella uttryck och gränsvärden. Linjär optimering visar hur man hittar det bästa valet när resurserna är begränsade, och sedan introduceras derivatan som en kurvas lutning i en punkt, först grafiskt med sekanter och tangenter, sedan via definitionen och de deriveringsregler som gör räknandet snabbt. Med derivatan undersöker vi funktioners grafer och löser extremvärdesproblem, och med integralerna beräknar vi areor och totala förändringar. Nivån avslutas med geometriska talföljder och summor, som används i privatekonomin för nuvärde, sparande och annuitetslån.',
+        'Fokus ligger på att förstå varför metoderna fungerar, inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+      ],
+      bullets: [
+        'Du lär dig: derivator, integraler och geometriska summor',
+        'Du tränar på: deriveringsregler, extremvärdesproblem och linjär optimering',
+        'Du möter: gränsvärden, nuvärde och annuitetslån',
       ],
     },
     chapters,

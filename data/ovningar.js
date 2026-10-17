@@ -40503,6 +40503,147 @@ $$
         },
     ],
 
+    // Matematik fortsättning nivå 1b: egen version av ma3c-2.5 utan
+    // absolutbelopp (ingår inte i nivå 1b). Uppgift 3, 5 och 6 är samma
+    // som i ma3c-2.5; ändras de där ska samma ändring göras här.
+    'ma3b-2.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Grafen till funktionen $f$ består av två räta linjer: $y = 2x + 1$ för $x \\le 1$ och $y = -x + 4$ för $x > 1$. Grafen hänger ihop i $x = 1$. Är $f$ deriverbar i $x = 1$?`,
+            choices: [
+                `Ja, eftersom grafen hänger ihop i $x = 1$`,
+                `Ja, eftersom båda linjerna går genom punkten $(1, 3)$`,
+                `Nej, eftersom lutningen är $2$ till vänster och $-1$ till höger om $x = 1$`,
+                `Nej, eftersom funktionen inte är definierad i $x = 1$`,
+            ],
+            correct: 2,
+            solution: `Grafen hänger ihop, eftersom båda linjerna ger samma värde i $x = 1$:
+
+$$
+2 \\cdot 1 + 1 = 3 \\qquad \\text{och} \\qquad -1 + 4 = 3
+$$
+
+Lutningen är linjernas $k$-värden. Till vänster om $x = 1$ är lutningen $2$ och till höger är den $-1$. Lutningarna är olika, så grafen har ett hörn i $(1, 3)$ och det finns ingen entydig tangent där.
+
+**Svar:** Nej, $f$ är inte deriverbar i $x = 1$, eftersom lutningen är $2$ till vänster och $-1$ till höger.`,
+        },
+        {
+            level: 1,
+            question: `Vilket påstående om en funktion vars graf har en hörnpunkt i $x = a$ stämmer?`,
+            choices: [
+                `Funktionen är varken kontinuerlig eller deriverbar i $x = a$`,
+                `Funktionen är kontinuerlig i $x = a$ men inte deriverbar där`,
+                `Funktionen är deriverbar men inte kontinuerlig i $x = a$`,
+                `Funktionen saknar värde i $x = a$`,
+            ],
+            correct: 1,
+            solution: `En hörnpunkt uppstår när grafen hänger ihop (funktionen är definierad och kontinuerlig där), men lutningen från vänster skiljer sig från lutningen från höger. Gränsvärdet för derivatan blir då olika beroende på från vilket håll man närmar sig punkten, så derivatan saknar ett entydigt värde. Funktionen är alltså kontinuerlig men inte deriverbar i hörnpunkten.
+
+**Svar:** Funktionen är kontinuerlig i $x = a$ men inte deriverbar där`,
+        },
+        {
+            level: 1,
+            question: `För vilket värde på $x$ är funktionen $f(x) = \\dfrac{7}{x + 4}$ inte deriverbar?`,
+            choices: [
+                `$x = 4$`,
+                `$x = 0$`,
+                `$x = 7$`,
+                `$x = -4$`,
+            ],
+            correct: 3,
+            solution: `Division med 0 är inte definierad, så funktionen är inte definierad där nämnaren är 0.
+
+$$
+x + 4 = 0
+$$
+
+Vi subtraherar 4 från båda led och får $x = -4$. Där har grafen ett språng (en lodrät asymptot), och därför är $f$ inte deriverbar i $x = -4$.
+
+**Svar:** $x = -4$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En parkering kostar 20 kr för varje påbörjad timme. Kostnaden är $K(t)$ kronor när bilen står parkerad i $t$ timmar, där $0 < t \\le 4$.<br>a) Bestäm $K(0{,}5)$, $K(1)$ och $K(1{,}5)$.<br>b) För vilka värden på $t$ är $K$ inte deriverbar?`,
+            choices: [
+                `a) $20$, $20$ och $40$ kr&emsp;&emsp;b) $t = 1$, $t = 2$ och $t = 3$`,
+                `a) $10$, $20$ och $30$ kr&emsp;&emsp;b) $K$ är deriverbar för alla $t$`,
+                `a) $20$, $40$ och $40$ kr&emsp;&emsp;b) $t = 1$, $t = 2$ och $t = 3$`,
+                `a) $20$, $20$ och $40$ kr&emsp;&emsp;b) $t = 0{,}5$, $t = 1{,}5$ och $t = 2{,}5$`,
+            ],
+            correct: 0,
+            solution: `**a)** En halvtimme är en påbörjad timme, så $K(0{,}5) = 20$. Exakt en timme är också en påbörjad timme, så $K(1) = 20$. Efter en och en halv timme har den andra timmen påbörjats, så $K(1{,}5) = 2 \\cdot 20 = 40$.
+
+**Svar:** $K(0{,}5) = 20$ kr, $K(1) = 20$ kr och $K(1{,}5) = 40$ kr
+
+**b)** Kostnaden står still under varje timme och hoppar upp 20 kr precis när en ny timme påbörjas, alltså direkt efter $t = 1$, $t = 2$ och $t = 3$. Grafen ser ut som en trappa och har ett hopp vid vart och ett av dessa värden. En funktion är inte deriverbar där den har ett hopp. Mellan hoppen är grafen vågrät, och där är derivatan 0.
+
+**Svar:** $K$ är inte deriverbar för $t = 1$, $t = 2$ och $t = 3$`,
+        },
+        {
+            level: 2,
+            question: `Funktionen $f$ definieras enligt
+$$
+f(x) = \\begin{cases} x^2 & x \\le 2 \\\\ 4x - 4 & x > 2 \\end{cases}
+$$
+Är $f$ deriverbar i $x = 2$?`,
+            choices: [
+                `Nej, eftersom grafen har en hörnpunkt i $x = 2$`,
+                `Nej, eftersom funktionen är diskontinuerlig i $x = 2$`,
+                `Det går inte att avgöra utan att rita grafen`,
+                `Ja, eftersom både funktionsvärdet och derivatan är lika från båda hållen`,
+            ],
+            correct: 3,
+            solution: `Vi kontrollerar först att funktionen är kontinuerlig i $x = 2$ genom att jämföra funktionsvärdena från båda grenarna.
+
+$$
+2^2 = 4 \\qquad \\text{och} \\qquad 4 \\cdot 2 - 4 = 4
+$$
+
+Värdena är lika, så $f$ är kontinuerlig i $x = 2$. Vi kontrollerar sedan derivatan från båda hållen. För $x \\le 2$ är $f'(x) = 2x$, så $f'(2) = 2 \\cdot 2 = 4$. För $x > 2$ är $f'(x) = 4$ (konstant lutning), så gränsvärdet där också är 4. Derivatan är alltså lika från båda hållen, och $f$ är deriverbar i $x = 2$ trots att den är sammansatt av två olika uttryck.
+
+**Svar:** Ja, $f$ är deriverbar i $x = 2$ eftersom både funktionsvärdet och derivatan är lika ($f(2) = 4$ och $f'(2) = 4$) från båda hållen.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Funktionen $f$ definieras enligt
+$$
+f(x) = \\begin{cases} x^2 + 1 & x \\le 1 \\\\ ax + b & x > 1 \\end{cases}
+$$
+Bestäm $a$ och $b$ så att $f$ är deriverbar för alla reella tal $x$.`,
+            choices: [
+                `$a = 2$ och $b = 2$`,
+                `$a = 1$ och $b = 1$`,
+                `$a = 2$ och $b = 0$`,
+                `$a = 0$ och $b = 2$`,
+            ],
+            correct: 2,
+            solution: `För att $f$ ska vara deriverbar i brytpunkten $x = 1$ krävs **två** villkor: funktionen måste vara kontinuerlig där, och derivatan måste vara lika från båda hållen. Det räcker inte med bara ett av villkoren. Vi måste ställa upp båda och lösa dem tillsammans.
+
+**Kontinuitet i $x = 1$:** funktionsvärdena från de två grenarna måste vara lika.
+
+$$
+1^2 + 1 = a \\cdot 1 + b \\quad \\Rightarrow \\quad a + b = 2
+$$
+
+**Lika derivata i $x = 1$:** för $x \\le 1$ är $f'(x) = 2x$, så $f'(1) = 2$. För $x > 1$ är $f'(x) = a$ (konstant lutning). Dessa måste vara lika.
+
+$$
+a = 2
+$$
+
+Vi sätter in $a = 2$ i kontinuitetsvillkoret $a + b = 2$:
+
+$$
+2 + b = 2 \\quad \\Rightarrow \\quad b = 0
+$$
+
+**Svar:** $a = 2$ och $b = 0$`,
+        },
+    ],
+
     'ma3c-3.1': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
@@ -44519,6 +44660,1035 @@ $$
 vilket ger $x_1 = 8$ och $x_2 = -15$. Eftersom en sidlängd inte kan vara negativ förkastar vi $x_2$.
 
 **Svar:** $x = 8$ cm`,
+        },
+    ],
+    // ── Ma3b: linjär optimering (egna avsnitt i Matematik fortsättning nivå 1b) ──
+    'ma3b-2.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Figuren visar en streckad rät linje och ett skuggat område. Vilken olikhet beskriver det skuggade området?
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="-63 -158 168 221" width="228" height="300" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En streckad rät linje som stiger brant genom punkterna 0 komma 1 och 2 komma 5. Området ovanför och till vänster om linjen är skuggat."><line x1="-48" y1="60" x2="-48" y2="-132" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-24" y1="60" x2="-24" y2="-132" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="24" y1="60" x2="24" y2="-132" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="48" y1="60" x2="48" y2="-132" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="72" y1="60" x2="72" y2="-132" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="48" x2="84" y2="48" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="24" x2="84" y2="24" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="-24" x2="84" y2="-24" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="-48" x2="84" y2="-48" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="-72" x2="84" y2="-72" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="-96" x2="84" y2="-96" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="-120" x2="84" y2="-120" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><polygon points="-60,60 -42,60 51.6,-127.2 -60,-127.2" fill="rgba(37,99,201,0.16)" stroke="none"/><line x1="-60" y1="0" x2="94" y2="0" stroke="#1f2530" stroke-width="1.6"/><polygon points="102,0 92,-4.5 92,4.5" fill="#1f2530"/><line x1="0" y1="60" x2="0" y2="-142" stroke="#1f2530" stroke-width="1.6"/><polygon points="0,-150 -4.5,-140 4.5,-140" fill="#1f2530"/><text x="100" y="19" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9" y="-144" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="-48" y1="-3.5" x2="-48" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="-48" y="16" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><line x1="-24" y1="-3.5" x2="-24" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><line x1="24" y1="-3.5" x2="24" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="24" y="16" font-size="12" text-anchor="middle" fill="#1f2530">1</text><line x1="48" y1="-3.5" x2="48" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="48" y="16" font-size="12" text-anchor="middle" fill="#1f2530">2</text><line x1="72" y1="-3.5" x2="72" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="72" y="16" font-size="12" text-anchor="middle" fill="#1f2530">3</text><line x1="-3.5" y1="48" x2="3.5" y2="48" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="52" font-size="12" text-anchor="end" fill="#1f2530">−2</text><line x1="-3.5" y1="24" x2="3.5" y2="24" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="28" font-size="12" text-anchor="end" fill="#1f2530">−1</text><line x1="-3.5" y1="-24" x2="3.5" y2="-24" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-20" font-size="12" text-anchor="end" fill="#1f2530">1</text><line x1="-3.5" y1="-48" x2="3.5" y2="-48" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-44" font-size="12" text-anchor="end" fill="#1f2530">2</text><line x1="-3.5" y1="-72" x2="3.5" y2="-72" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-68" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="-3.5" y1="-96" x2="3.5" y2="-96" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-92" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="-3.5" y1="-120" x2="3.5" y2="-120" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-116" font-size="12" text-anchor="end" fill="#1f2530">5</text><line x1="-42" y1="60" x2="51.6" y2="-127.2" stroke="#2563c9" stroke-width="2" stroke-dasharray="7 5"/></svg>`,
+            choices: [
+                `$y < 2x + 1$`,
+                `$y \\geq 2x + 1$`,
+                `$y > 2x + 1$`,
+                `$y \\leq 2x + 1$`,
+            ],
+            correct: 2,
+            solution: `Linjen skär *y*-axeln i 1, så $m = 1$. Ett steg åt höger ger två steg uppåt, så $k = 2$. Linjens ekvation är $y = 2x + 1$.
+
+Området ligger **ovanför** linjen, så $y$ är större än $2x + 1$. Linjen är **streckad**, så den hör inte till området, och tecknet ska vara $>$ (inte $\\geq$).
+
+**Svar:** $y > 2x + 1$`,
+        },
+        {
+            level: 1,
+            question: `Vilket alternativ är linjen $4x + 2y = 10$ skriven på formen $y = kx + m$?`,
+            choices: [
+                `$y = -4x + 10$`,
+                `$y = -2x + 5$`,
+                `$y = 2x + 5$`,
+                `$y = -2x + 10$`,
+            ],
+            correct: 1,
+            solution: `Vi löser ut $y$. Först subtraherar vi $4x$ från båda led, sedan dividerar vi båda led med 2.
+
+$$
+\\begin{aligned}
+4x + 2y &= 10 \\\\
+2y &= -4x + 10 \\\\
+y &= -2x + 5
+\\end{aligned}
+$$
+
+Båda termerna i högerledet ska delas med 2, inte bara den ena.
+
+**Svar:** $y = -2x + 5$`,
+        },
+        {
+            level: 1,
+            question: `Vilka av punkterna $A = (1, 1)$, $B = (3, 1)$ och $C = (0, 5)$ ligger i området $2x + y < 6$?`,
+            choices: [
+                `Bara $A$`,
+                `$A$ och $B$`,
+                `Alla tre`,
+                `$A$ och $C$`,
+            ],
+            correct: 3,
+            solution: `Vi sätter in varje punkt i olikheten.
+
+- $A$: $2 \\cdot 1 + 1 = 3$, och $3 < 6$ stämmer.
+- $B$: $2 \\cdot 3 + 1 = 7$, och $7 < 6$ stämmer inte.
+- $C$: $2 \\cdot 0 + 5 = 5$, och $5 < 6$ stämmer.
+
+**Svar:** $A$ och $C$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett område begränsas bland annat av linjerna $x + y = 9$ och $2x - y = 3$. Bestäm områdets hörnpunkt där linjerna skär varandra.`,
+            solution: `Hörnpunkten ligger på båda linjerna, så vi löser ekvationssystemet
+
+$$
+\\begin{cases}
+x + y = 9 & (1) \\\\
+2x - y = 3 & (2)
+\\end{cases}
+$$
+
+Termerna $y$ och $-y$ tar ut varandra om ekvationerna adderas ledvis.
+
+$$
+\\begin{aligned}
+(x + y) + (2x - y) &= 9 + 3 \\\\
+3x &= 12 \\\\
+x &= 4
+\\end{aligned}
+$$
+
+Insättning i (1), $x + y = 9$, ger $4 + y = 9$, alltså $y = 5$.
+
+Kontroll i (2): $2 \\cdot 4 - 5 = 3$. Det stämmer.
+
+**Svar:** $(4, 5)$`,
+        },
+        {
+            level: 2,
+            question: `Bestäm de olikheter som beskriver det skuggade området i figuren. Alla gränslinjer hör till området.
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="-22 -198 241 224" width="327" height="304" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Ett skuggat område i första kvadranten som begränsas av axlarna, en lodrät linje och en lutande linje. Hörnen är 0 komma 0, 6 komma 0, 6 komma 3 och 0 komma 6."><line x1="26" y1="18.2" x2="26" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="52" y1="18.2" x2="52" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="78" y1="18.2" x2="78" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="104" y1="18.2" x2="104" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="130" y1="18.2" x2="130" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="156" y1="18.2" x2="156" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="182" y1="18.2" x2="182" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-26" x2="197.6" y2="-26" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-52" x2="197.6" y2="-52" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-78" x2="197.6" y2="-78" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-104" x2="197.6" y2="-104" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-130" x2="197.6" y2="-130" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-156" x2="197.6" y2="-156" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><polygon points="0,0 156,0 156,-78 0,-156" fill="rgba(37,99,201,0.16)" stroke="none"/><line x1="-18.2" y1="0" x2="207.6" y2="0" stroke="#1f2530" stroke-width="1.6"/><polygon points="215.6,0 205.6,-4.5 205.6,4.5" fill="#1f2530"/><line x1="0" y1="18.2" x2="0" y2="-181.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="0,-189.6 -4.5,-179.6 4.5,-179.6" fill="#1f2530"/><text x="213.6" y="19" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9" y="-183.6" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="26" y1="-3.5" x2="26" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="26" y="16" font-size="12" text-anchor="middle" fill="#1f2530">1</text><line x1="52" y1="-3.5" x2="52" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="52" y="16" font-size="12" text-anchor="middle" fill="#1f2530">2</text><line x1="78" y1="-3.5" x2="78" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="78" y="16" font-size="12" text-anchor="middle" fill="#1f2530">3</text><line x1="104" y1="-3.5" x2="104" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="104" y="16" font-size="12" text-anchor="middle" fill="#1f2530">4</text><line x1="130" y1="-3.5" x2="130" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="130" y="16" font-size="12" text-anchor="middle" fill="#1f2530">5</text><line x1="156" y1="-3.5" x2="156" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="156" y="16" font-size="12" text-anchor="middle" fill="#1f2530">6</text><line x1="182" y1="-3.5" x2="182" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="182" y="16" font-size="12" text-anchor="middle" fill="#1f2530">7</text><line x1="-3.5" y1="-26" x2="3.5" y2="-26" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-22" font-size="12" text-anchor="end" fill="#1f2530">1</text><line x1="-3.5" y1="-52" x2="3.5" y2="-52" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-48" font-size="12" text-anchor="end" fill="#1f2530">2</text><line x1="-3.5" y1="-78" x2="3.5" y2="-78" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-74" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="-3.5" y1="-104" x2="3.5" y2="-104" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-100" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="-3.5" y1="-130" x2="3.5" y2="-130" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-126" font-size="12" text-anchor="end" fill="#1f2530">5</text><line x1="-3.5" y1="-156" x2="3.5" y2="-156" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-152" font-size="12" text-anchor="end" fill="#1f2530">6</text><line x1="156" y1="10.4" x2="156" y2="-169" stroke="#1f2530" stroke-width="2"/><line x1="-10.4" y1="-161.2" x2="195" y2="-58.5" stroke="#1f2530" stroke-width="2"/></svg>`,
+            solution: `Området ligger i första kvadranten, så $x \\geq 0$ och $y \\geq 0$.
+
+Den lodräta linjen går genom 6 på *x*-axeln och har ekvationen $x = 6$. Området ligger till vänster om den: $x \\leq 6$.
+
+Den lutande linjen skär *y*-axeln i 6, så $m = 6$. Den går också genom $(6, 3)$: sex steg åt höger ger tre steg nedåt, så $k = \\dfrac{-3}{6} = -0{,}5$. Linjen är $y = -0{,}5x + 6$, och området ligger under den.
+
+Alla linjer hör till området, så tecknen är $\\leq$ och $\\geq$.
+
+**Svar:**
+$\\begin{cases} x \\geq 0 \\\\ y \\geq 0 \\\\ x \\leq 6 \\\\ y \\leq -0{,}5x + 6 \\end{cases}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ett område beskrivs av olikheterna $x \\geq 0$, $y \\geq 0$, $y \\leq -x + 6$ och $y \\geq x - 2$. Rita området och bestäm dess area.`,
+            answer: { value: 14, unit: 'areaenheter' },
+            solution: `Linjen $y = -x + 6$ går genom $(0, 6)$ och $(6, 0)$, och området ligger under den. Linjen $y = x - 2$ går genom $(2, 0)$ och $(4, 2)$, och området ligger ovanför den. Med $x \\geq 0$ och $y \\geq 0$ hamnar området i första kvadranten.
+
+De två sneda linjerna skär varandra där $-x + 6 = x - 2$, det vill säga $8 = 2x$, alltså $x = 4$ och $y = -4 + 6 = 2$.
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="-38 -201 234 227" width="318" height="308" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Området som begränsas av axlarna och linjerna y lika med minus x plus 6 och y lika med x minus 2, med hörnen 0 komma 0, 2 komma 0, 4 komma 2 och 0 komma 6."><line x1="26" y1="18.2" x2="26" y2="-174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="52" y1="18.2" x2="52" y2="-174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="78" y1="18.2" x2="78" y2="-174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="104" y1="18.2" x2="104" y2="-174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="130" y1="18.2" x2="130" y2="-174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="156" y1="18.2" x2="156" y2="-174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-26" x2="174.2" y2="-26" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-52" x2="174.2" y2="-52" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-78" x2="174.2" y2="-78" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-104" x2="174.2" y2="-104" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-130" x2="174.2" y2="-130" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-156" x2="174.2" y2="-156" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><polygon points="0,0 52,0 104,-52 0,-156" fill="rgba(37,99,201,0.16)" stroke="none"/><line x1="-18.2" y1="0" x2="184.2" y2="0" stroke="#1f2530" stroke-width="1.6"/><polygon points="192.2,0 182.2,-4.5 182.2,4.5" fill="#1f2530"/><line x1="0" y1="18.2" x2="0" y2="-184.2" stroke="#1f2530" stroke-width="1.6"/><polygon points="0,-192.2 -4.5,-182.2 4.5,-182.2" fill="#1f2530"/><text x="190.2" y="19" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9" y="-186.2" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="26" y1="-3.5" x2="26" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="26" y="16" font-size="12" text-anchor="middle" fill="#1f2530">1</text><line x1="52" y1="-3.5" x2="52" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="52" y="16" font-size="12" text-anchor="middle" fill="#1f2530">2</text><line x1="78" y1="-3.5" x2="78" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="78" y="16" font-size="12" text-anchor="middle" fill="#1f2530">3</text><line x1="104" y1="-3.5" x2="104" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="104" y="16" font-size="12" text-anchor="middle" fill="#1f2530">4</text><line x1="130" y1="-3.5" x2="130" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="130" y="16" font-size="12" text-anchor="middle" fill="#1f2530">5</text><line x1="156" y1="-3.5" x2="156" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="156" y="16" font-size="12" text-anchor="middle" fill="#1f2530">6</text><line x1="-3.5" y1="-26" x2="3.5" y2="-26" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-22" font-size="12" text-anchor="end" fill="#1f2530">1</text><line x1="-3.5" y1="-52" x2="3.5" y2="-52" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-48" font-size="12" text-anchor="end" fill="#1f2530">2</text><line x1="-3.5" y1="-78" x2="3.5" y2="-78" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-74" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="-3.5" y1="-104" x2="3.5" y2="-104" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-100" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="-3.5" y1="-130" x2="3.5" y2="-130" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-126" font-size="12" text-anchor="end" fill="#1f2530">5</text><line x1="-3.5" y1="-156" x2="3.5" y2="-156" stroke="#1f2530" stroke-width="1.2"/><line x1="-10.4" y1="-166.4" x2="166.4" y2="10.4" stroke="#2563c9" stroke-width="2"/><text x="46.5" y="-119.3" font-size="13" text-anchor="middle" fill="#2563c9" transform="rotate(45 46.5 -119.3)"><tspan font-style="italic">y</tspan> = −<tspan font-style="italic">x</tspan> + 6</text><line x1="41.6" y1="10.4" x2="171.6" y2="-119.6" stroke="#4a7d3a" stroke-width="2"/><text x="154.8" y="-79.2" font-size="13" text-anchor="middle" fill="#4a7d3a" transform="rotate(-45 154.8 -79.2)"><tspan font-style="italic">y</tspan> = <tspan font-style="italic">x</tspan> − 2</text><circle cx="0" cy="0" r="3.6" fill="#c8324a"/><text x="-6" y="15" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 0)</text><circle cx="52" cy="0" r="3.6" fill="#c8324a"/><text x="46" y="-6" font-size="12.5" text-anchor="end" fill="#c8324a">(2, 0)</text><circle cx="104" cy="-52" r="3.6" fill="#c8324a"/><text x="113" y="-48" font-size="12.5" text-anchor="start" fill="#c8324a">(4, 2)</text><circle cx="0" cy="-156" r="3.6" fill="#c8324a"/><text x="-7" y="-152" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 6)</text></svg>
+
+Området är en fyrhörning med hörnen $(0, 0)$, $(2, 0)$, $(4, 2)$ och $(0, 6)$. Vi delar den längs sträckan från $(0, 0)$ till $(4, 2)$ i två trianglar.
+
+Triangeln med hörnen $(0, 0)$, $(2, 0)$ och $(4, 2)$ har basen 2 längs *x*-axeln och höjden 2:
+
+$$
+\\dfrac{2 \\cdot 2}{2} = 2
+$$
+
+Triangeln med hörnen $(0, 0)$, $(4, 2)$ och $(0, 6)$ har basen 6 längs *y*-axeln och höjden 4, avståndet från *y*-axeln ut till $(4, 2)$:
+
+$$
+\\dfrac{6 \\cdot 4}{2} = 12
+$$
+
+Hela arean är $2 + 12 = 14$ areaenheter.
+
+**Svar:** 14 areaenheter`,
+        },
+    ],
+
+    'ma3b-2.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ett tillåtet område har hörnpunkterna $(0, 0)$, $(4, 0)$, $(3, 2)$ och $(0, 3)$. Vilket är det största värdet av $z = 3x + y$ i området?`,
+            choices: [
+                `$11$`,
+                `$3$`,
+                `$12$`,
+                `$9$`,
+            ],
+            correct: 2,
+            solution: `Enligt hörnpunktsmetoden räcker det att beräkna $z$ i hörnen.
+
+| Hörnpunkt | $z = 3x + y$ |
+| --- | --- |
+| $(0, 0)$ | $3 \\cdot 0 + 0 = 0$ |
+| $(4, 0)$ | $3 \\cdot 4 + 0 = 12$ |
+| $(3, 2)$ | $3 \\cdot 3 + 2 = 11$ |
+| $(0, 3)$ | $3 \\cdot 0 + 3 = 3$ |
+
+**Svar:** $12$`,
+        },
+        {
+            level: 1,
+            question: `Ett tillåtet område har hörnpunkterna $(0, 0)$, $(6, 0)$, $(4, 3)$ och $(0, 5)$. Bestäm det största värdet av målfunktionen $V = 50x + 80y$.`,
+            answer: { value: 440, unit: '' },
+            solution: `Vi beräknar $V$ i varje hörnpunkt.
+
+| Hörnpunkt | $V = 50x + 80y$ |
+| --- | --- |
+| $(0, 0)$ | $50 \\cdot 0 + 80 \\cdot 0 = 0$ |
+| $(6, 0)$ | $50 \\cdot 6 + 80 \\cdot 0 = 300$ |
+| $(4, 3)$ | $50 \\cdot 4 + 80 \\cdot 3 = 440$ |
+| $(0, 5)$ | $50 \\cdot 0 + 80 \\cdot 5 = 400$ |
+
+**Svar:** $440$`,
+        },
+        {
+            level: 1,
+            question: `En snickare tillverkar $x$ stolar och $y$ bord per vecka och har högst 24 timmar för snickeri. Det ger villkoret $2x + 3y \\leq 24$. Vad kallas ett sådant villkor i linjär optimering?`,
+            choices: [
+                `Målfunktion`,
+                `Bivillkor`,
+                `Nivålinje`,
+                `Hörnpunkt`,
+            ],
+            correct: 1,
+            solution: `En begränsning som skrivs som en olikhet kallas ett **bivillkor**. Bivillkoren tillsammans ger det tillåtna området. Målfunktionen är i stället den storhet som ska bli så stor eller så liten som möjligt, till exempel vinsten.
+
+**Svar:** Bivillkor`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett bageri bakar limpor och baguetter. Ugnen rymmer högst 120 bröd per dag. En limpa kräver 2 hg mjöl och en baguette 1 hg mjöl, och bageriet har 160 hg mjöl per dag. Vinsten är 15 kr per limpa och 10 kr per baguette. Hur stor kan vinsten bli som mest per dag?`,
+            answer: { value: 1400, unit: 'kr' },
+            solution: `Vi låter $x$ vara antalet limpor och $y$ antalet baguetter per dag.
+
+$$
+\\begin{cases}
+x \\geq 0 \\\\
+y \\geq 0 \\\\
+x + y \\leq 120 \\\\
+2x + y \\leq 160
+\\end{cases}
+$$
+
+Målfunktionen är vinsten i kronor, $V = 15x + 10y$.
+
+Linjen $x + y = 120$ går genom $(0, 120)$ och $(120, 0)$. Linjen $2x + y = 160$ går genom $(0, 160)$ och $(80, 0)$. Origo uppfyller båda olikheterna, så området ligger under båda linjerna.
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="-51 -250 254 276" width="345" height="375" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Det tillåtna området för bageriet med hörnen 0 komma 0, 80 komma 0, 40 komma 80 och 0 komma 120."><line x1="26" y1="18.2" x2="26" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="52" y1="18.2" x2="52" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="78" y1="18.2" x2="78" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="104" y1="18.2" x2="104" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="130" y1="18.2" x2="130" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="156" y1="18.2" x2="156" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="182" y1="18.2" x2="182" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-26" x2="182" y2="-26" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-52" x2="182" y2="-52" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-78" x2="182" y2="-78" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-104" x2="182" y2="-104" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-130" x2="182" y2="-130" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-156" x2="182" y2="-156" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-182" x2="182" y2="-182" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-208" x2="182" y2="-208" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><polygon points="0,0 104,0 52,-104 0,-156" fill="rgba(37,99,201,0.16)" stroke="none"/><line x1="-18.2" y1="0" x2="192" y2="0" stroke="#1f2530" stroke-width="1.6"/><polygon points="200,0 190,-4.5 190,4.5" fill="#1f2530"/><line x1="0" y1="18.2" x2="0" y2="-233.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="0,-241.6 -4.5,-231.6 4.5,-231.6" fill="#1f2530"/><text x="198" y="19" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9" y="-235.6" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="26" y1="-3.5" x2="26" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="26" y="16" font-size="12" text-anchor="middle" fill="#1f2530">20</text><line x1="52" y1="-3.5" x2="52" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="52" y="16" font-size="12" text-anchor="middle" fill="#1f2530">40</text><line x1="78" y1="-3.5" x2="78" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="78" y="16" font-size="12" text-anchor="middle" fill="#1f2530">60</text><line x1="104" y1="-3.5" x2="104" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="104" y="16" font-size="12" text-anchor="middle" fill="#1f2530">80</text><line x1="130" y1="-3.5" x2="130" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="130" y="16" font-size="12" text-anchor="middle" fill="#1f2530">100</text><line x1="156" y1="-3.5" x2="156" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="156" y="16" font-size="12" text-anchor="middle" fill="#1f2530">120</text><line x1="-3.5" y1="-26" x2="3.5" y2="-26" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-22" font-size="12" text-anchor="end" fill="#1f2530">20</text><line x1="-3.5" y1="-52" x2="3.5" y2="-52" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-48" font-size="12" text-anchor="end" fill="#1f2530">40</text><line x1="-3.5" y1="-78" x2="3.5" y2="-78" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-74" font-size="12" text-anchor="end" fill="#1f2530">60</text><line x1="-3.5" y1="-104" x2="3.5" y2="-104" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-100" font-size="12" text-anchor="end" fill="#1f2530">80</text><line x1="-3.5" y1="-130" x2="3.5" y2="-130" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-126" font-size="12" text-anchor="end" fill="#1f2530">100</text><line x1="-3.5" y1="-156" x2="3.5" y2="-156" stroke="#1f2530" stroke-width="1.2"/><line x1="-3.5" y1="-182" x2="3.5" y2="-182" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-178" font-size="12" text-anchor="end" fill="#1f2530">140</text><line x1="-3.5" y1="-208" x2="3.5" y2="-208" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-204" font-size="12" text-anchor="end" fill="#1f2530">160</text><line x1="-10.4" y1="-166.4" x2="159.1" y2="3.1" stroke="#2563c9" stroke-width="2"/><text x="124.5" y="-41.3" font-size="13" text-anchor="middle" fill="#2563c9" transform="rotate(45 124.5 -41.3)"><tspan font-style="italic">x</tspan> + <tspan font-style="italic">y</tspan> = 120</text><line x1="-6.5" y1="-221" x2="105.6" y2="3.1" stroke="#4a7d3a" stroke-width="2"/><text x="29.7" y="-164.3" font-size="13" text-anchor="middle" fill="#4a7d3a" transform="rotate(63.4 29.7 -164.3)">2<tspan font-style="italic">x</tspan> + <tspan font-style="italic">y</tspan> = 160</text><circle cx="0" cy="0" r="3.6" fill="#c8324a"/><text x="-6" y="15" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 0)</text><circle cx="104" cy="0" r="3.6" fill="#c8324a"/><text x="95" y="-6" font-size="12.5" text-anchor="end" fill="#c8324a">(80, 0)</text><circle cx="52" cy="-104" r="3.6" fill="#c8324a"/><text x="61" y="-100" font-size="12.5" text-anchor="start" fill="#c8324a">(40, 80)</text><circle cx="0" cy="-156" r="3.6" fill="#c8324a"/><text x="-7" y="-152" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 120)</text></svg>
+
+Skärningspunkten: vi subtraherar $x + y = 120$ från $2x + y = 160$ ledvis och får $x = 40$. Då är $y = 120 - 40 = 80$.
+
+| Hörnpunkt | $V = 15x + 10y$ |
+| --- | --- |
+| $(0, 0)$ | $15 \\cdot 0 + 10 \\cdot 0 = 0$ |
+| $(80, 0)$ | $15 \\cdot 80 + 10 \\cdot 0 = 1\\,200$ |
+| $(40, 80)$ | $15 \\cdot 40 + 10 \\cdot 80 = 1\\,400$ |
+| $(0, 120)$ | $15 \\cdot 0 + 10 \\cdot 120 = 1\\,200$ |
+
+Störst vinst ger 40 limpor och 80 baguetter.
+
+**Svar:** $1\\,400$ kr`,
+        },
+        {
+            level: 2,
+            question: `En hästägare blandar två fodersorter. Ett kilo av sort A innehåller 1 enhet protein och 1 enhet vitaminer. Ett kilo av sort B innehåller 1 enhet protein och 3 enheter vitaminer. Blandningen ska innehålla minst 6 enheter protein och minst 12 enheter vitaminer. Sort A kostar 30 kr/kg och sort B 50 kr/kg. Vad kostar den billigaste blandningen?`,
+            answer: { value: 240, unit: 'kr' },
+            solution: `Vi låter $x$ vara antalet kilo av sort A och $y$ antalet kilo av sort B.
+
+$$
+\\begin{cases}
+x \\geq 0 \\\\
+y \\geq 0 \\\\
+x + y \\geq 6 \\\\
+x + 3y \\geq 12
+\\end{cases}
+$$
+
+Kostnaden ska minimeras: $K = 30x + 50y$.
+
+Origo uppfyller inte $x + y \\geq 6$, så området ligger **ovanför** linjerna. Det fortsätter obegränsat uppåt och åt höger, men det minsta värdet finns ändå i ett hörn.
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="-38 -211 371 237" width="504" height="322" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Det tillåtna området för foderblandningen ligger ovanför båda linjerna x plus y lika med 6 och x plus 3y lika med 12 och fortsätter obegränsat uppåt och åt höger. Hörnen är 0 komma 6, 3 komma 3 och 12 komma 0."><line x1="24" y1="16.8" x2="24" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="48" y1="16.8" x2="48" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="72" y1="16.8" x2="72" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="96" y1="16.8" x2="96" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="120" y1="16.8" x2="120" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="144" y1="16.8" x2="144" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="168" y1="16.8" x2="168" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="192" y1="16.8" x2="192" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="216" y1="16.8" x2="216" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="240" y1="16.8" x2="240" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="264" y1="16.8" x2="264" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="288" y1="16.8" x2="288" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="312" y1="16.8" x2="312" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-24" x2="312" y2="-24" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-48" x2="312" y2="-48" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-72" x2="312" y2="-72" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-96" x2="312" y2="-96" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-120" x2="312" y2="-120" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-144" x2="312" y2="-144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-168" x2="312" y2="-168" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><polygon points="288,0 309.6,0 309.6,-182.4 0,-182.4 0,-144 72,-72" fill="rgba(37,99,201,0.16)" stroke="none"/><line x1="-16.8" y1="0" x2="322" y2="0" stroke="#1f2530" stroke-width="1.6"/><polygon points="330,0 320,-4.5 320,4.5" fill="#1f2530"/><line x1="0" y1="16.8" x2="0" y2="-194.8" stroke="#1f2530" stroke-width="1.6"/><polygon points="0,-202.8 -4.5,-192.8 4.5,-192.8" fill="#1f2530"/><text x="328" y="19" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9" y="-196.8" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="24" y1="-3.5" x2="24" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="24" y="16" font-size="12" text-anchor="middle" fill="#1f2530">1</text><line x1="48" y1="-3.5" x2="48" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="48" y="16" font-size="12" text-anchor="middle" fill="#1f2530">2</text><line x1="72" y1="-3.5" x2="72" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="72" y="16" font-size="12" text-anchor="middle" fill="#1f2530">3</text><line x1="96" y1="-3.5" x2="96" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="96" y="16" font-size="12" text-anchor="middle" fill="#1f2530">4</text><line x1="120" y1="-3.5" x2="120" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="120" y="16" font-size="12" text-anchor="middle" fill="#1f2530">5</text><line x1="144" y1="-3.5" x2="144" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="144" y="16" font-size="12" text-anchor="middle" fill="#1f2530">6</text><line x1="168" y1="-3.5" x2="168" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="168" y="16" font-size="12" text-anchor="middle" fill="#1f2530">7</text><line x1="192" y1="-3.5" x2="192" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="192" y="16" font-size="12" text-anchor="middle" fill="#1f2530">8</text><line x1="216" y1="-3.5" x2="216" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="216" y="16" font-size="12" text-anchor="middle" fill="#1f2530">9</text><line x1="240" y1="-3.5" x2="240" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="240" y="16" font-size="12" text-anchor="middle" fill="#1f2530">10</text><line x1="264" y1="-3.5" x2="264" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><line x1="288" y1="-3.5" x2="288" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><line x1="-3.5" y1="-24" x2="3.5" y2="-24" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-20" font-size="12" text-anchor="end" fill="#1f2530">1</text><line x1="-3.5" y1="-48" x2="3.5" y2="-48" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-44" font-size="12" text-anchor="end" fill="#1f2530">2</text><line x1="-3.5" y1="-72" x2="3.5" y2="-72" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-68" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="-3.5" y1="-96" x2="3.5" y2="-96" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-92" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="-3.5" y1="-120" x2="3.5" y2="-120" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-116" font-size="12" text-anchor="end" fill="#1f2530">5</text><line x1="-3.5" y1="-144" x2="3.5" y2="-144" stroke="#1f2530" stroke-width="1.2"/><line x1="-3.5" y1="-168" x2="3.5" y2="-168" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-164" font-size="12" text-anchor="end" fill="#1f2530">7</text><line x1="-9.6" y1="-153.6" x2="153.6" y2="9.6" stroke="#2563c9" stroke-width="2"/><text x="19.7" y="-96.5" font-size="13" text-anchor="middle" fill="#2563c9" transform="rotate(45 19.7 -96.5)"><tspan font-style="italic">x</tspan> + <tspan font-style="italic">y</tspan> = 6</text><line x1="-9.6" y1="-99.2" x2="296.6" y2="2.9" stroke="#4a7d3a" stroke-width="2"/><text x="199" y="-37" font-size="13" text-anchor="middle" fill="#4a7d3a" transform="rotate(18.4 199 -37)"><tspan font-style="italic">x</tspan> + 3<tspan font-style="italic">y</tspan> = 12</text><circle cx="0" cy="-144" r="3.6" fill="#c8324a"/><text x="-7" y="-140" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 6)</text><circle cx="72" cy="-72" r="3.6" fill="#c8324a"/><text x="64" y="-55" font-size="12.5" text-anchor="end" fill="#c8324a">(3, 3)</text><circle cx="288" cy="0" r="3.6" fill="#c8324a"/><text x="295" y="17" font-size="12.5" text-anchor="middle" fill="#c8324a">(12, 0)</text></svg>
+
+Skärningspunkten: vi subtraherar $x + y = 6$ från $x + 3y = 12$ ledvis och får $2y = 6$, alltså $y = 3$ och $x = 6 - 3 = 3$.
+
+| Hörnpunkt | $K = 30x + 50y$ |
+| --- | --- |
+| $(0, 6)$ | $30 \\cdot 0 + 50 \\cdot 6 = 300$ |
+| $(3, 3)$ | $30 \\cdot 3 + 50 \\cdot 3 = 240$ |
+| $(12, 0)$ | $30 \\cdot 12 + 50 \\cdot 0 = 360$ |
+
+Lägst kostnad ger 3 kg av varje sort.
+
+**Svar:** $240$ kr`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Figuren visar ett tillåtet område med hörnpunkterna $(0, 0)$, $(6, 0)$, $(4, 3)$ och $(0, 5)$. Målfunktionen är $V = ax + 2y$, där $a$ är en positiv konstant. För vilka värden på $a$ antar $V$ sitt största värde i hörnet $(4, 3)$?
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="-38 -198 257 224" width="349" height="304" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Ett skuggat område med hörnen 0 komma 0, 6 komma 0, 4 komma 3 och 0 komma 5."><line x1="26" y1="18.2" x2="26" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="52" y1="18.2" x2="52" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="78" y1="18.2" x2="78" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="104" y1="18.2" x2="104" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="130" y1="18.2" x2="130" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="156" y1="18.2" x2="156" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="182" y1="18.2" x2="182" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-26" x2="197.6" y2="-26" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-52" x2="197.6" y2="-52" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-78" x2="197.6" y2="-78" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-104" x2="197.6" y2="-104" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-130" x2="197.6" y2="-130" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-156" x2="197.6" y2="-156" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><polygon points="0,0 156,0 104,-78 0,-130" fill="rgba(37,99,201,0.16)" stroke="none"/><line x1="-18.2" y1="0" x2="207.6" y2="0" stroke="#1f2530" stroke-width="1.6"/><polygon points="215.6,0 205.6,-4.5 205.6,4.5" fill="#1f2530"/><line x1="0" y1="18.2" x2="0" y2="-181.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="0,-189.6 -4.5,-179.6 4.5,-179.6" fill="#1f2530"/><text x="213.6" y="19" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9" y="-183.6" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="26" y1="-3.5" x2="26" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="26" y="16" font-size="12" text-anchor="middle" fill="#1f2530">1</text><line x1="52" y1="-3.5" x2="52" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="52" y="16" font-size="12" text-anchor="middle" fill="#1f2530">2</text><line x1="78" y1="-3.5" x2="78" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="78" y="16" font-size="12" text-anchor="middle" fill="#1f2530">3</text><line x1="104" y1="-3.5" x2="104" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="104" y="16" font-size="12" text-anchor="middle" fill="#1f2530">4</text><line x1="130" y1="-3.5" x2="130" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="130" y="16" font-size="12" text-anchor="middle" fill="#1f2530">5</text><line x1="156" y1="-3.5" x2="156" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><line x1="182" y1="-3.5" x2="182" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="182" y="16" font-size="12" text-anchor="middle" fill="#1f2530">7</text><line x1="-3.5" y1="-26" x2="3.5" y2="-26" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-22" font-size="12" text-anchor="end" fill="#1f2530">1</text><line x1="-3.5" y1="-52" x2="3.5" y2="-52" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-48" font-size="12" text-anchor="end" fill="#1f2530">2</text><line x1="-3.5" y1="-78" x2="3.5" y2="-78" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-74" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="-3.5" y1="-104" x2="3.5" y2="-104" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-100" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="-3.5" y1="-130" x2="3.5" y2="-130" stroke="#1f2530" stroke-width="1.2"/><line x1="-3.5" y1="-156" x2="3.5" y2="-156" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-152" font-size="12" text-anchor="end" fill="#1f2530">6</text><line x1="78" y1="-117" x2="161.2" y2="7.8" stroke="#1f2530" stroke-width="2"/><line x1="-10.4" y1="-135.2" x2="156" y2="-52" stroke="#1f2530" stroke-width="2"/><circle cx="0" cy="0" r="3.6" fill="#c8324a"/><text x="-6" y="15" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 0)</text><circle cx="156" cy="0" r="3.6" fill="#c8324a"/><text x="148" y="-6" font-size="12.5" text-anchor="end" fill="#c8324a">(6, 0)</text><circle cx="104" cy="-78" r="3.6" fill="#c8324a"/><text x="112" y="-83" font-size="12.5" text-anchor="start" fill="#c8324a">(4, 3)</text><circle cx="0" cy="-130" r="3.6" fill="#c8324a"/><text x="-7" y="-126" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 5)</text></svg>`,
+            solution: `I de fyra hörnen är
+
+| Hörnpunkt | $V = ax + 2y$ |
+| --- | --- |
+| $(0, 0)$ | $0$ |
+| $(6, 0)$ | $6a$ |
+| $(4, 3)$ | $4a + 6$ |
+| $(0, 5)$ | $10$ |
+
+För att $(4, 3)$ ska ge det största värdet måste $4a + 6$ vara minst lika stort som värdet i grannhörnen. Origo ger 0 och spelar ingen roll, eftersom $a$ är positivt.
+
+$$
+\\begin{aligned}
+4a + 6 &\\geq 6a \\\\
+6 &\\geq 2a \\\\
+a &\\leq 3
+\\end{aligned}
+$$
+
+$$
+\\begin{aligned}
+4a + 6 &\\geq 10 \\\\
+4a &\\geq 4 \\\\
+a &\\geq 1
+\\end{aligned}
+$$
+
+Tolkning: för $a = 3$ är nivålinjen parallell med kanten mellan $(6, 0)$ och $(4, 3)$, och för $a = 1$ med kanten mellan $(4, 3)$ och $(0, 5)$. Däremellan nuddar den sista nivålinjen området bara i hörnet $(4, 3)$.
+
+**Svar:** $1 \\leq a \\leq 3$`,
+        },
+    ],
+    // ═══════════ Matematik fortsättning nivå 1b (Ma3b), kapitel 6: 6.1–6.3 ═══════════
+    'ma3b-6.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En talföljd ges av den slutna formeln $a_n = 6n - 4$. Bestäm $a_{15}$.`,
+            answer: { value: 86, unit: '' },
+            solution: `Vi sätter in $n = 15$ i formeln.
+
+$$
+a_{15} = 6 \\cdot 15 - 4 = 90 - 4 = 86
+$$
+
+**Svar:** $a_{15} = 86$`,
+        },
+        {
+            level: 1,
+            question: `Vilken av talföljderna är geometrisk?`,
+            choices: [
+                `$2,\\ 5,\\ 8,\\ 11,\\ \\ldots$`,
+                `$1,\\ 4,\\ 9,\\ 16,\\ \\ldots$`,
+                `$4,\\ 12,\\ 36,\\ 108,\\ \\ldots$`,
+                `$3,\\ 6,\\ 10,\\ 15,\\ \\ldots$`,
+            ],
+            correct: 2,
+            solution: `I en geometrisk talföljd multipliceras varje element med samma kvot. I talföljden $4, 12, 36, 108, \\ldots$ är
+
+$$
+\\frac{12}{4} = 3 \\qquad \\frac{36}{12} = 3 \\qquad \\frac{108}{36} = 3
+$$
+
+så kvoten är 3 hela tiden. Talföljden $2, 5, 8, 11, \\ldots$ är aritmetisk (samma tal, 3, läggs till varje gång), och de två andra är varken aritmetiska eller geometriska.
+
+**Svar:** $4,\\ 12,\\ 36,\\ 108,\\ \\ldots$`,
+        },
+        {
+            level: 1,
+            question: `En talföljd ges rekursivt av $a_1 = 5$ och $a_{n+1} = a_n - 3$. Bestäm $a_4$.`,
+            answer: { value: -4, unit: '' },
+            solution: `Varje element är det föregående minus 3. Vi räknar fram element för element.
+
+$$
+a_2 = a_1 - 3 = 5 - 3 = 2
+$$
+
+$$
+a_3 = a_2 - 3 = 2 - 3 = -1
+$$
+
+$$
+a_4 = a_3 - 3 = -1 - 3 = -4
+$$
+
+**Svar:** $a_4 = -4$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett bageri bakar 1 200 bullar första veckan i en kampanj och ökar sedan med 150 bullar varje vecka. Vilken vecka bakar bageriet för första gången fler än 3 000 bullar?`,
+            answer: { value: 14, unit: '' },
+            solution: `Antalet bullar ökar med samma tal varje vecka, så det bildar en aritmetisk talföljd med $a_1 = 1\\,200$ och differensen $d = 150$. Insättning i formeln för en aritmetisk talföljd, $a_n = a_1 + (n - 1) \\cdot d$, ger
+
+$$
+a_n = 1\\,200 + (n - 1) \\cdot 150 = 1\\,200 + 150n - 150 = 150n + 1\\,050
+$$
+
+Vi tar reda på när antalet är exakt 3 000.
+
+$$
+150n + 1\\,050 = 3\\,000
+$$
+
+$$
+150n = 1\\,950
+$$
+
+$$
+n = 13
+$$
+
+Vecka 13 bakas alltså exakt 3 000 bullar, inte fler. Veckan efter bakas $150 \\cdot 14 + 1\\,050 = 3\\,150$ bullar.
+
+**Svar:** Vecka 14`,
+        },
+        {
+            level: 2,
+            question: `Figurerna nedan är byggda av stickor, och mönstret fortsätter på samma sätt.
+
+<svg viewBox="10 16 280 82" width="409" height="120" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tre figurer av stickor som ser ut som hus i rad. Figur 1 är ett hus av sex stickor, figur 2 två hus som delar en vägg, av elva stickor, och figur 3 tre hus i rad av sexton stickor."><line x1="16" y1="70" x2="16" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="16" y1="70" x2="46" y2="70" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="16" y1="40" x2="46" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="46" y1="70" x2="46" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="16" y1="40" x2="31" y2="22" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="31" y1="22" x2="46" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><text x="31" y="92" font-size="13" text-anchor="middle" fill="#1f2530">Figur 1</text><line x1="86" y1="70" x2="86" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="86" y1="70" x2="116" y2="70" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="86" y1="40" x2="116" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="116" y1="70" x2="116" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="86" y1="40" x2="101" y2="22" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="101" y1="22" x2="116" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="116" y1="70" x2="146" y2="70" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="116" y1="40" x2="146" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="146" y1="70" x2="146" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="116" y1="40" x2="131" y2="22" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="131" y1="22" x2="146" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><text x="116" y="92" font-size="13" text-anchor="middle" fill="#1f2530">Figur 2</text><line x1="186" y1="70" x2="186" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="186" y1="70" x2="216" y2="70" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="186" y1="40" x2="216" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="216" y1="70" x2="216" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="186" y1="40" x2="201" y2="22" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="201" y1="22" x2="216" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="216" y1="70" x2="246" y2="70" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="216" y1="40" x2="246" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="246" y1="70" x2="246" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="216" y1="40" x2="231" y2="22" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="231" y1="22" x2="246" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="246" y1="70" x2="276" y2="70" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="246" y1="40" x2="276" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="276" y1="70" x2="276" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="246" y1="40" x2="261" y2="22" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><line x1="261" y1="22" x2="276" y2="40" stroke="#1f2530" stroke-width="3" stroke-linecap="round"/><text x="231" y="92" font-size="13" text-anchor="middle" fill="#1f2530">Figur 3</text></svg>
+
+Går det att bygga en figur i mönstret av exakt 186 stickor? Ange i så fall vilket nummer figuren har.`,
+            answer: { value: 37, unit: '' },
+            solution: `Vi räknar stickorna: figur 1 har 6, figur 2 har 11 och figur 3 har 16 stickor. Varje nytt hus delar en vägg med det förra och behöver 5 nya stickor, så talföljden är aritmetisk med $a_1 = 6$ och $d = 5$.
+
+$$
+a_n = 6 + (n - 1) \\cdot 5 = 6 + 5n - 5 = 5n + 1
+$$
+
+Vi undersöker om det finns ett heltal $n$ som ger 186 stickor.
+
+$$
+5n + 1 = 186
+$$
+
+$$
+5n = 185
+$$
+
+$$
+n = 37
+$$
+
+Det blev ett heltal, så 186 är ett element i talföljden.
+
+**Svar:** Ja, figur 37 har exakt 186 stickor.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `I en aritmetisk talföljd är $a_4 = 19$ och $a_{10} = 43$. Vilket är det första elementet i talföljden som är större än 500?`,
+            answer: { value: 503, unit: '' },
+            solution: `Från $a_4$ till $a_{10}$ är det $10 - 4 = 6$ steg, och i varje steg läggs differensen $d$ till.
+
+$$
+a_{10} = a_4 + 6d
+$$
+
+$$
+43 = 19 + 6d
+$$
+
+$$
+24 = 6d
+$$
+
+$$
+d = 4
+$$
+
+Det första elementet ligger tre steg före $a_4$.
+
+$$
+a_1 = a_4 - 3d = 19 - 3 \\cdot 4 = 7
+$$
+
+Formeln för en aritmetisk talföljd, $a_n = a_1 + (n - 1) \\cdot d$, ger
+
+$$
+a_n = 7 + (n - 1) \\cdot 4 = 4n + 3
+$$
+
+Vi tar reda på när elementet är exakt 500.
+
+$$
+4n + 3 = 500
+$$
+
+$$
+4n = 497
+$$
+
+$$
+n = 124{,}25
+$$
+
+Ordningsnumret måste vara ett heltal, så det första element som är större än 500 är $a_{125}$.
+
+$$
+a_{125} = 4 \\cdot 125 + 3 = 503
+$$
+
+**Svar:** 503 (element nummer 125)`,
+        },
+    ],
+    'ma3b-6.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Talföljden $5,\\ 15,\\ 45,\\ \\ldots$ är geometrisk. Bestäm $a_7$.`,
+            answer: { value: 3645, unit: '' },
+            solution: `Kvoten är
+
+$$
+k = \\frac{a_2}{a_1} = \\frac{15}{5} = 3
+$$
+
+Med $a_1 = 5$ och $k = 3$ ger formeln $a_n = a_1 \\cdot k^{n-1}$
+
+$$
+a_7 = 5 \\cdot 3^{7-1} = 5 \\cdot 3^6 = 5 \\cdot 729 = 3\\,645
+$$
+
+**Svar:** $a_7 = 3\\,645$`,
+        },
+        {
+            level: 1,
+            question: `En geometrisk talföljd har det första elementet $a_1 = 2$ och kvoten $k = 4$. Vilken formel ger det $n$:te elementet?`,
+            choices: [
+                `$a_n = 2 \\cdot 4^{n-1}$`,
+                `$a_n = 2 \\cdot 4^{n}$`,
+                `$a_n = 4 \\cdot 2^{n-1}$`,
+                `$a_n = 2 + 4(n - 1)$`,
+            ],
+            correct: 0,
+            solution: `Formeln för en geometrisk talföljd är $a_n = a_1 \\cdot k^{n-1}$. Med $a_1 = 2$ och $k = 4$ blir den $a_n = 2 \\cdot 4^{n-1}$. Kontroll: $n = 1$ ger $2 \\cdot 4^0 = 2$, vilket är det första elementet. Formeln med exponenten $n$ ger i stället $a_1 = 8$, och $2 + 4(n - 1)$ beskriver en aritmetisk talföljd.
+
+**Svar:** $a_n = 2 \\cdot 4^{n-1}$`,
+        },
+        {
+            level: 1,
+            question: `Talföljden $64,\\ 32,\\ 16,\\ 8,\\ \\ldots$ är geometrisk. Bestäm $a_{10}$.`,
+            answer: { value: 0.125, unit: '' },
+            solution: `Kvoten är
+
+$$
+k = \\frac{32}{64} = 0{,}5
+$$
+
+Kvoten är mindre än 1, så elementen avtar. Formeln $a_n = a_1 \\cdot k^{n-1}$ ger
+
+$$
+a_{10} = 64 \\cdot 0{,}5^{9} = 64 \\cdot 0{,}001\\,953\\,125 = 0{,}125
+$$
+
+**Svar:** $a_{10} = 0{,}125$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en geometrisk talföljd är $a_3 = 20$ och $a_6 = 160$. Bestäm $a_1$.`,
+            answer: { value: 5, unit: '' },
+            solution: `Från $a_3$ till $a_6$ är det tre steg, så
+
+$$
+a_6 = a_3 \\cdot k^3
+$$
+
+$$
+160 = 20 \\cdot k^3
+$$
+
+$$
+8 = k^3
+$$
+
+$$
+k = \\sqrt[3]{8} = 2
+$$
+
+Det första elementet ligger två steg före $a_3$, så vi dividerar med $k^2$.
+
+$$
+a_1 = \\frac{a_3}{k^2} = \\frac{20}{2^2} = \\frac{20}{4} = 5
+$$
+
+**Svar:** $a_1 = 5$`,
+        },
+        {
+            level: 2,
+            question: `En ort har 4 500 invånare år 1, och antalet invånare ökar med 2 % per år. Vilket år blir antalet invånare för första gången större än 6 000?`,
+            answer: { value: 16, unit: '' },
+            solution: `Antalet invånare bildar en geometrisk talföljd med $a_1 = 4\\,500$ och kvoten $k = 1{,}02$, som är förändringsfaktorn för en ökning med 2 %.
+
+$$
+a_n = 4\\,500 \\cdot 1{,}02^{n-1}
+$$
+
+Vi tar först reda på när antalet är exakt 6 000.
+
+$$
+4\\,500 \\cdot 1{,}02^{n-1} = 6\\,000
+$$
+
+$$
+1{,}02^{n-1} = 1{,}333\\ldots
+$$
+
+$$
+\\lg 1{,}02^{n-1} = \\lg 1{,}333\\ldots
+$$
+
+$$
+(n - 1) \\cdot \\lg 1{,}02 = \\lg 1{,}333\\ldots
+$$
+
+$$
+n - 1 = \\frac{\\lg 1{,}333\\ldots}{\\lg 1{,}02} = 14{,}527\\ldots
+$$
+
+$$
+n = 15{,}527\\ldots
+$$
+
+År 15 är antalet $4\\,500 \\cdot 1{,}02^{14} \\approx 5\\,938$, och år 16 är det $4\\,500 \\cdot 1{,}02^{15} \\approx 6\\,056$.
+
+**Svar:** År 16`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `I en geometrisk talföljd är $a_2 = -6$ och $a_4 = -54$. Det första elementet $a_1$ är positivt. Bestäm $a_6$.`,
+            answer: { value: -486, unit: '' },
+            solution: `Från $a_2$ till $a_4$ är det två steg, så
+
+$$
+a_4 = a_2 \\cdot k^2
+$$
+
+$$
+-54 = -6 \\cdot k^2
+$$
+
+$$
+9 = k^2
+$$
+
+$$
+k = \\pm\\sqrt{9}
+$$
+
+$$
+k = \\pm 3
+$$
+
+Båda kvoterna ger $a_2 = -6$ och $a_4 = -54$. Vilken som gäller avgörs av villkoret att $a_1$ är positivt.
+
+- $k = 3$ ger $a_1 = \\dfrac{a_2}{k} = \\dfrac{-6}{3} = -2$, som är negativt.
+- $k = -3$ ger $a_1 = \\dfrac{-6}{-3} = 2$, som är positivt.
+
+Alltså är $k = -3$ och $a_1 = 2$, och elementen växlar tecken: $2, -6, 18, -54, \\ldots$
+
+$$
+a_6 = 2 \\cdot (-3)^{5} = 2 \\cdot (-243) = -486
+$$
+
+**Svar:** $a_6 = -486$`,
+        },
+    ],
+    'ma3b-6.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ett belopp på 50 000 kr betalas ut om 5 år. Bestäm beloppets nuvärde om vi räknar med räntan 4 %.`,
+            answer: { value: 41096, unit: 'kr' },
+            solution: `Förändringsfaktorn för räntan 4 % är 1,04. Formeln för nuvärdet, $N = \\dfrac{B}{\\text{förändringsfaktor}^{\\,n}}$, ger
+
+$$
+N = \\frac{50\\,000}{1{,}04^5} = 41\\,096{,}355\\ldots \\approx 41\\,096
+$$
+
+**Svar:** Cirka 41 096 kr`,
+        },
+        {
+            level: 1,
+            question: `Hur påverkas nuvärdet av ett belopp som betalas ut om 10 år om räntan vi räknar med höjs?`,
+            choices: [
+                `Nuvärdet ökar`,
+                `Nuvärdet minskar`,
+                `Nuvärdet påverkas inte av räntan`,
+                `Det beror på hur stort beloppet är`,
+            ],
+            correct: 1,
+            solution: `Nuvärdet är $N = \\dfrac{B}{\\text{förändringsfaktor}^{\\,n}}$. Höjs räntan blir förändringsfaktorn större, och då blir nämnaren större och kvoten mindre. Med hög ränta växer pengar snabbt på ett konto, så det behövs ett mindre belopp i dag för att nå samma belopp om 10 år. Det gäller oavsett hur stort beloppet är.
+
+**Svar:** Nuvärdet minskar`,
+        },
+        {
+            level: 1,
+            question: `Du sätter in 20 000 kr på ett konto med räntan 3 %. Vad är slutvärdet efter 8 år?`,
+            answer: { value: 25335, unit: 'kr' },
+            solution: `Förändringsfaktorn är 1,03. Formeln för slutvärdet, $B = N \\cdot \\text{förändringsfaktor}^{\\,n}$, ger
+
+$$
+B = 20\\,000 \\cdot 1{,}03^8 = 25\\,335{,}401\\ldots \\approx 25\\,335
+$$
+
+**Svar:** Cirka 25 335 kr`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Du får välja mellan 70 000 kr om 2 år och 80 000 kr om 4 år. Vilket alternativ är mest värt om vi räknar med räntan 3,5 %?`,
+            choices: [
+                `70 000 kr om 2 år`,
+                `Båda är lika mycket värda`,
+                `Det går inte att avgöra utan att veta beloppet i dag`,
+                `80 000 kr om 4 år`,
+            ],
+            correct: 3,
+            solution: `Beloppen betalas ut vid olika tidpunkter, så vi räknar om båda till nuvärden. Förändringsfaktorn är 1,035.
+
+$$
+N_1 = \\frac{70\\,000}{1{,}035^2} = 65\\,345{,}749\\ldots \\approx 65\\,346
+$$
+
+$$
+N_2 = \\frac{80\\,000}{1{,}035^4} = 69\\,715{,}378\\ldots \\approx 69\\,715
+$$
+
+Nuvärdet av 80 000 kr om 4 år är störst.
+
+**Svar:** 80 000 kr om 4 år`,
+        },
+        {
+            level: 2,
+            question: `Ett företag ska få 100 000 kr om 1 år, 150 000 kr om 2 år och 200 000 kr om 3 år. Vad är betalningarna värda i dag om företaget räknar med räntan 6 %?`,
+            answer: { value: 395763, unit: 'kr' },
+            solution: `Vi räknar ut nuvärdet av varje betalning för sig. Förändringsfaktorn är 1,06, och exponenten är antalet år till betalningen.
+
+$$
+\\frac{100\\,000}{1{,}06} = 94\\,339{,}622\\ldots
+$$
+
+$$
+\\frac{150\\,000}{1{,}06^2} = 133\\,499{,}466\\ldots
+$$
+
+$$
+\\frac{200\\,000}{1{,}06^3} = 167\\,923{,}856\\ldots
+$$
+
+Betalningarnas nuvärde är summan av de tre nuvärdena.
+
+$$
+N = 94\\,339{,}622\\ldots + 133\\,499{,}466\\ldots + 167\\,923{,}856\\ldots = 395\\,762{,}945\\ldots \\approx 395\\,763
+$$
+
+**Svar:** Cirka 395 763 kr`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Vid vilken ränta är 120 000 kr som betalas ut om 4 år lika mycket värt som 100 000 kr i dag? Svara i procent med en decimal.`,
+            answer: { value: 4.7, unit: '%' },
+            solution: `De två alternativen är lika mycket värda när nuvärdet av 120 000 kr är 100 000 kr. Vi kallar förändringsfaktorn $x$.
+
+$$
+\\frac{120\\,000}{x^4} = 100\\,000
+$$
+
+Vi multiplicerar båda led med $x^4$ och dividerar sedan båda led med 100 000.
+
+$$
+120\\,000 = 100\\,000 \\cdot x^4
+$$
+
+$$
+1{,}2 = x^4
+$$
+
+Förändringsfaktorn är positiv, så
+
+$$
+x = \\sqrt[4]{1{,}2} = 1{,}046\\,63\\ldots
+$$
+
+Förändringsfaktorn 1,046 63… motsvarar räntan $0{,}046\\,63\\ldots \\approx 4{,}7\\ \\%$. Kontroll: $\\dfrac{120\\,000}{1{,}046\\,63^4} \\approx 100\\,000$.
+
+**Svar:** Cirka 4,7 %`,
+        },
+    ],
+
+    // ═══════════ Matematik fortsättning nivå 1b (Ma3b): 6.4–6.5 ═══════════
+    'ma3b-6.4': [
+        // ── Nivå 1 ───────────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Bestäm summan $4 + 8 + 16 + \\ldots + 4 \\cdot 2^{7}$.`,
+            choices: [
+                `$508$`,
+                `$512$`,
+                `$1\\,020$`,
+                `$2\\,044$`,
+            ],
+            correct: 2,
+            solution: `Första termen är $a_1 = 4$ och kvoten är $k = \\dfrac{8}{4} = 2$. Den sista termen $4 \\cdot 2^7$ har exponenten $n - 1 = 7$, så summan har $n = 8$ termer.
+
+Insättning i $s_n = \\dfrac{a_1(k^n - 1)}{k - 1}$ ger
+
+$$
+s_8 = \\frac{4(2^8 - 1)}{2 - 1} = \\frac{4 \\cdot 255}{1} = 1\\,020
+$$
+
+Den som räknar med $n = 7$ (exponenten i stället för exponenten plus 1) får 508, vilket är fel.
+
+**Svar:** $1\\,020$`,
+        },
+        {
+            level: 1,
+            question: `Bestäm summan av de 6 första elementen i den geometriska talföljden $5,\\ 15,\\ 45,\\ \\ldots$`,
+            answer: { value: 1820, unit: '' },
+            solution: `Första elementet är $a_1 = 5$ och kvoten är $k = \\dfrac{15}{5} = 3$. Vi ska summera $n = 6$ element.
+
+Insättning i $s_n = \\dfrac{a_1(k^n - 1)}{k - 1}$ ger
+
+$$
+s_6 = \\frac{5(3^6 - 1)}{3 - 1} = \\frac{5 \\cdot 728}{2} = 1\\,820
+$$
+
+**Svar:** $1\\,820$`,
+        },
+        {
+            level: 1,
+            question: `Summan $7 + 14 + 28 + \\ldots + 7 \\cdot 2^{11}$ är en geometrisk summa. Vilken kvot $k$ och hur många termer $n$ har den?`,
+            choices: [
+                `$k = 2$ och $n = 12$`,
+                `$k = 2$ och $n = 11$`,
+                `$k = 7$ och $n = 12$`,
+                `$k = 14$ och $n = 11$`,
+            ],
+            correct: 0,
+            solution: `Kvoten får vi genom att dividera en term med termen före:
+
+$$
+k = \\frac{14}{7} = 2
+$$
+
+Den sista termen är $a_1 \\cdot k^{n-1} = 7 \\cdot 2^{11}$, så $n - 1 = 11$. Antalet termer är exponenten plus 1:
+
+$$
+n = 11 + 1 = 12
+$$
+
+**Svar:** $k = 2$ och $n = 12$`,
+        },
+        // ── Nivå 2 ───────────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ahmed sätter in 2&nbsp;000&nbsp;kr på ett sparkonto i slutet av varje år. Räntan är 3&nbsp;%. Hur mycket finns på kontot direkt efter den femtonde insättningen?`,
+            answer: { value: 37197.83, unit: 'kr' },
+            solution: `Den sista insättningen har inte hunnit växa, den näst sista har vuxit ett år och så vidare. Behållningen är summan
+
+$$
+2\\,000 + 2\\,000 \\cdot 1{,}03 + 2\\,000 \\cdot 1{,}03^2 + \\ldots + 2\\,000 \\cdot 1{,}03^{14}
+$$
+
+Det är en geometrisk summa med $a_1 = 2\\,000$, kvoten $k = 1{,}03$ (förändringsfaktorn) och $n = 15$ termer, en för varje insättning. Insättning i $s_n = \\dfrac{a_1(k^n - 1)}{k - 1}$ ger
+
+$$
+s_{15} = \\frac{2\\,000(1{,}03^{15} - 1)}{1{,}03 - 1} = 37\\,197{,}827\\ldots \\approx 37\\,197{,}83
+$$
+
+**Svar:** $37\\,197{,}83$ kr`,
+        },
+        {
+            level: 2,
+            question: `Sara sätter in 10&nbsp;000&nbsp;kr på ett sparkonto i **början** av varje år i 8&nbsp;år. Räntan är 4&nbsp;%. Hur mycket finns på kontot i slutet av det åttonde året?`,
+            choices: [
+                `$82\\,142$ kr`,
+                `$83\\,200$ kr`,
+                `$92\\,142$ kr`,
+                `$95\\,828$ kr`,
+            ],
+            correct: 3,
+            solution: `Insättningarna görs i början av året, så även den sista insättningen hinner växa ett år innan behållningen räknas ut i slutet av år 8. Den har då vuxit till
+
+$$
+10\\,000 \\cdot 1{,}04 = 10\\,400
+$$
+
+Alla de andra insättningarna har vuxit ett år mer. Behållningen är en geometrisk summa med $a_1 = 10\\,400$, $k = 1{,}04$ och $n = 8$:
+
+$$
+s_8 = \\frac{10\\,400(1{,}04^8 - 1)}{1{,}04 - 1} = 95\\,827{,}953\\ldots \\approx 95\\,828
+$$
+
+Med $a_1 = 10\\,000$ får man 92 142 kr. Det är behållningen om insättningarna görs i slutet av varje år, vilket inte är fallet här.
+
+**Svar:** $95\\,828$ kr`,
+        },
+        // ── Nivå 3 ───────────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Kim sätter in 3&nbsp;000&nbsp;kr på ett sparkonto i början av varje år i 10&nbsp;år. Räntan är 2,5&nbsp;% hela tiden. Efter den tionde insättningen gör Kim inga fler insättningar, men pengarna står kvar på kontot. Hur mycket finns på kontot fem år efter den sista insättningen? Svara i hela kronor.`,
+            answer: { value: 38027, unit: 'kr' },
+            solution: `Vi delar upp tiden i två delar.
+
+**Fram till den sista insättningen.** Direkt efter den tionde insättningen har den sista insättningen inte vuxit alls, och den första har vuxit i 9 år. Behållningen är en geometrisk summa med $a_1 = 3\\,000$, $k = 1{,}025$ och $n = 10$:
+
+$$
+s_{10} = \\frac{3\\,000(1{,}025^{10} - 1)}{1{,}025 - 1} = 33\\,610{,}145\\ldots
+$$
+
+**De fem åren efteråt.** Hela beloppet växer nu med ränta i fem år, utan nya insättningar. Det multipliceras alltså med förändringsfaktorn fem gånger:
+
+$$
+33\\,610{,}145\\ldots \\cdot 1{,}025^5 = 38\\,026{,}794\\ldots \\approx 38\\,027
+$$
+
+Fällan i uppgiften är att räkna som om alla pengar växer lika länge. Det gör de inte: varje insättning växer olika länge fram till den sista insättningen, men därefter växer hela behållningen lika länge.
+
+**Svar:** $38\\,027$ kr`,
+        },
+    ],
+
+    'ma3b-6.5': [
+        // ── Nivå 1 ───────────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad kännetecknar ett annuitetslån?`,
+            choices: [
+                `Man amorterar lika mycket varje gång, så betalningarna blir mindre och mindre.`,
+                `Man betalar lika mycket varje gång, och betalningen består av ränta och amortering.`,
+                `Man betalar bara ränta under lånetiden och hela lånet på en gång i slutet.`,
+                `Räntan är lika stor varje gång, eftersom den räknas på det ursprungliga lånebeloppet.`,
+            ],
+            correct: 1,
+            solution: `Med ett annuitetslån är betalningen, annuiteten, lika stor varje gång. Den består av ränta och amortering. Skulden minskar för varje betalning, så räntedelen blir mindre och amorteringsdelen större.
+
+Lika stor amortering varje gång är **rak amortering**, inte annuitetslån.
+
+**Svar:** Man betalar lika mycket varje gång, och betalningen består av ränta och amortering.`,
+        },
+        {
+            level: 1,
+            question: `Ett annuitetslån på 50&nbsp;000&nbsp;kr har räntan 4&nbsp;% och betalas tillbaka med en betalning i slutet av varje år i 5&nbsp;år. Hur stor är annuiteten? Svara i hela kronor.`,
+            answer: { value: 11231, unit: 'kr' },
+            solution: `Vi använder formeln för annuiteten:
+
+$$
+A = \\frac{G \\cdot k^n \\cdot (k - 1)}{k^n - 1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+G = 50\\,000 \\\\
+k = 1{,}04 \\\\
+n = 5
+\\end{array} \\right]
+$$
+
+$$
+A = \\frac{50\\,000 \\cdot 1{,}04^5 \\cdot (1{,}04 - 1)}{1{,}04^5 - 1} = 11\\,231{,}355\\ldots \\approx 11\\,231
+$$
+
+**Svar:** $11\\,231$ kr`,
+        },
+        {
+            level: 1,
+            question: `Ett annuitetslån på 100&nbsp;000&nbsp;kr betalas tillbaka med 12&nbsp;000&nbsp;kr per år i 10&nbsp;år. Hur mycket betalar man i ränta totalt?`,
+            choices: [
+                `$2\\,000$ kr`,
+                `$12\\,000$ kr`,
+                `$120\\,000$ kr`,
+                `$20\\,000$ kr`,
+            ],
+            correct: 3,
+            solution: `Totalt betalar man
+
+$$
+10 \\cdot 12\\,000 = 120\\,000
+$$
+
+Av det är 100 000 kr själva lånet. Resten är ränta:
+
+$$
+120\\,000 - 100\\,000 = 20\\,000
+$$
+
+**Svar:** $20\\,000$ kr`,
+        },
+        // ── Nivå 2 ───────────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Emil lånar 80&nbsp;000&nbsp;kr till en motorcykel. Lånet är ett annuitetslån med årsräntan 4,8&nbsp;% och betalas tillbaka med en betalning i slutet av varje månad i 3&nbsp;år. Månadsräntan räknas som årsräntan delad med 12. Hur stor är månadsbetalningen? Svara i hela kronor.`,
+            answer: { value: 2390, unit: 'kr' },
+            solution: `Betalningarna görs varje månad, så vi räknar med månadsränta:
+
+$$
+\\frac{4{,}8\\ \\%}{12} = 0{,}4\\ \\%
+$$
+
+Förändringsfaktorn för en månad är $k = 1{,}004$, och antalet betalningar är $n = 3 \\cdot 12 = 36$. Insättning i formeln för annuiteten, $A = \\dfrac{G \\cdot k^n \\cdot (k - 1)}{k^n - 1}$, ger
+
+$$
+A = \\frac{80\\,000 \\cdot 1{,}004^{36} \\cdot (1{,}004 - 1)}{1{,}004^{36} - 1} = 2\\,390{,}494\\ldots \\approx 2\\,390
+$$
+
+**Svar:** $2\\,390$ kr`,
+        },
+        {
+            level: 2,
+            question: `Ett annuitetslån på 200&nbsp;000&nbsp;kr har räntan 5&nbsp;% och betalas tillbaka med en betalning i slutet av varje år i 10&nbsp;år. Annuiteten är 25&nbsp;901&nbsp;kr. Hur mycket av den första betalningen är amortering?`,
+            choices: [
+                `$15\\,901$ kr`,
+                `$10\\,000$ kr`,
+                `$20\\,000$ kr`,
+                `$25\\,901$ kr`,
+            ],
+            correct: 0,
+            solution: `Vid den första betalningen är skulden hela lånebeloppet. Räntan är 5 % av skulden:
+
+$$
+0{,}05 \\cdot 200\\,000 = 10\\,000
+$$
+
+Resten av annuiteten är amortering:
+
+$$
+25\\,901 - 10\\,000 = 15\\,901
+$$
+
+20 000 kr hade amorteringen varit med rak amortering, där lånet delas lika på de tio åren.
+
+**Svar:** $15\\,901$ kr`,
+        },
+        // ── Nivå 3 ───────────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ett annuitetslån på 100&nbsp;000&nbsp;kr har räntan 6&nbsp;% och betalas tillbaka med en betalning i slutet av varje år i 5&nbsp;år. Hur stor är skulden direkt efter den andra betalningen? Svara i hela kronor.`,
+            answer: { value: 63456, unit: 'kr' },
+            solution: `Först bestämmer vi annuiteten med $A = \\dfrac{G \\cdot k^n \\cdot (k - 1)}{k^n - 1}$, där $G = 100\\,000$, $k = 1{,}06$ och $n = 5$:
+
+$$
+A = \\frac{100\\,000 \\cdot 1{,}06^5 \\cdot (1{,}06 - 1)}{1{,}06^5 - 1} = 23\\,739{,}640\\ldots
+$$
+
+Direkt efter den andra betalningen återstår tre betalningar. Skulden är då lika med summan av de tre återstående betalningarnas nuvärden, av samma skäl som lånebeloppet är summan av alla betalningarnas nuvärden. De görs om 1, 2 och 3 år:
+
+$$
+23\\,739{,}640\\ldots \\cdot \\left( \\frac{1}{1{,}06} + \\frac{1}{1{,}06^2} + \\frac{1}{1{,}06^3} \\right) = 63\\,456{,}341\\ldots \\approx 63\\,456
+$$
+
+Vi kan kontrollera genom att följa skulden år för år. Varje år växer skulden med räntan och minskar med annuiteten:
+
+$$
+(100\\,000 \\cdot 1{,}06 - 23\\,739{,}640\\ldots) \\cdot 1{,}06 - 23\\,739{,}640\\ldots = 63\\,456{,}341\\ldots
+$$
+
+**Svar:** $63\\,456$ kr`,
         },
     ],
     // ═══════════════════ Matematik fortsättning nivå 2 (Ma4) ═══════════════════

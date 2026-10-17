@@ -18167,6 +18167,90 @@ window.EXITTICKETS = {
   },
 ],
 
+// Matematik fortsättning nivå 1b: egen version av ma3c-2.5 utan absolutbelopp.
+'ma3b-2.7': [
+  {
+    question: 'Vad innebär det att en funktion är kontinuerlig i en punkt?',
+    choices: [
+      'Funktionen har ett maximum där',
+      'Derivatan är noll där',
+      'Grafen hänger ihop där, den kan ritas utan att lyfta pennan',
+      'Funktionen är alltid positiv där',
+    ],
+    correct: 2,
+    why: [
+      'Kontinuitet handlar om att grafen hänger ihop, inte om extrempunkter.',
+      'En derivata lika med noll beskriver en vågrät tangent, inte kontinuitet.',
+      'En kontinuerlig graf hänger ihop i punkten, utan hopp eller språng.',
+      'En funktion kan vara kontinuerlig även om den är negativ. Tecknet på funktionsvärdet spelar ingen roll.',
+    ],
+  },
+  {
+    question: 'För vilket värde på $x$ är funktionen $f(x) = \\dfrac{3}{x - 1}$ inte deriverbar?',
+    choices: [
+      '$x = 3$',
+      '$x = 1$',
+      '$x = 0$',
+      '$x = -1$',
+    ],
+    correct: 1,
+    why: [
+      'Talet 3 står i täljaren. Det är nämnaren som inte får bli 0.',
+      'För $x = 1$ blir nämnaren $1 - 1 = 0$. Där är funktionen inte definierad, grafen har ett språng och derivatan saknas.',
+      'För $x = 0$ är $f(0) = \\dfrac{3}{-1} = -3$, så funktionen är definierad och deriverbar där.',
+      'För $x = -1$ blir nämnaren $-2$, inte 0. Funktionen är definierad och deriverbar där.',
+    ],
+  },
+  {
+    question: 'Vilket av följande är INTE ett skäl till att en funktion saknar derivata i en punkt?',
+    choices: [
+      'Funktionen är deriverbar och kontinuerlig i punkten',
+      'Funktionen är inte definierad där (till exempel ett språng)',
+      'Funktionen är diskontinuerlig där (till exempel ett hopp)',
+      'Funktionen har en hörnpunkt där',
+    ],
+    correct: 0,
+    why: [
+      'Om funktionen redan är deriverbar i punkten finns derivatan förstås där. Det är motsatsen till ett skäl att sakna derivata.',
+      'En funktion som inte är definierad i en punkt kan inte heller ha en derivata där.',
+      'En diskontinuerlig funktion (till exempel med ett hopp) kan inte ha en väldefinierad derivata i den punkten.',
+      'I en hörnpunkt är lutningen olika från vänster och höger, så derivatan saknar ett entydigt värde.',
+    ],
+  },
+  {
+    question: 'En graf består av linjen $y = -x$ till vänster om origo och linjen $y = x$ till höger om origo. Varför är funktionen inte deriverbar i $x = 0$?',
+    choices: [
+      'Eftersom funktionsvärdet är 0 i $x = 0$',
+      'Eftersom funktionen inte är definierad i $x = 0$',
+      'Eftersom grafen har ett hopp i $x = 0$',
+      'Eftersom lutningen är $-1$ från vänster och $1$ från höger, så gränsvärdena är olika',
+    ],
+    correct: 3,
+    why: [
+      'Att funktionsvärdet är 0 säger bara var grafen går. Det säger inget om varför derivatan saknas.',
+      'Båda linjerna går genom origo, så funktionen är definierad i $x = 0$ med värdet 0.',
+      'Linjerna möts i origo, så grafen hänger ihop. Den har ett hörn, inget hopp.',
+      'Vänster- och högergränsvärdet för lutningen skiljer sig åt, så det finns ingen entydig tangent i hörnpunkten.',
+    ],
+  },
+  {
+    question: 'En funktions graf har en öppen ring i punkten $(2, 5)$ och en fylld prick i punkten $(2, 3)$. Vad kan vi dra för slutsats?',
+    choices: [
+      'Funktionen är deriverbar i $x = 2$',
+      'Funktionen är kontinuerlig men inte deriverbar i $x = 2$',
+      'Funktionen har ett hopp i $x = 2$ och är varken kontinuerlig eller deriverbar där',
+      'Funktionen är inte definierad i $x = 2$',
+    ],
+    correct: 2,
+    why: [
+      'Deriverbarhet kräver kontinuitet, och en funktion med ett hopp är inte kontinuerlig i punkten.',
+      'Ett hopp innebär att grafen inte hänger ihop, så funktionen är inte ens kontinuerlig i $x = 2$.',
+      'Den öppna ringen visar att grafen närmar sig 5 från ena hållet medan funktionsvärdet (fylld prick) är 3. Grafen hänger inte ihop, det är ett hopp. Då är funktionen varken kontinuerlig eller deriverbar i punkten.',
+      'Den fyllda pricken vid $(2, 3)$ visar tvärtom att funktionen är definierad i $x = 2$, med värdet 3.',
+    ],
+  },
+],
+
 'ma3c-3.1': [
   {
     question: 'Vilken deriveringsregel gäller för $f(x) = x^n$?',
@@ -20570,6 +20654,573 @@ window.EXITTICKETS = {
       'Produkttermen ska innehålla just de två sidor som INTE är $a$, det vill säga $b$ och $c$ — inte $a$ och $b$.',
       'Tecknet mellan $b^2$ och $c^2$ ska vara plus, inte minus — cosinussatsen är en summa av kvadraterna minus dubbla produkttermen.',
       'Vänsterledet får inte förekomma igen i högerledet ($a^2$ på båda sidor är fel) — högerledet ska bestå av de två andra sidornas kvadrater.',
+    ],
+  },
+],
+
+// ═══════════ Matematik fortsättning nivå 1b (Ma3b): linjär optimering ═══════════
+'ma3b-2.1': [
+  {
+    question: 'Vilket område beskriver olikheten $y < 3x - 2$?',
+    choices: [
+      'Halvplanet ovanför linjen $y = 3x - 2$',
+      'Halvplanet under linjen $y = 3x - 2$, där linjen själv hör till området',
+      'Halvplanet under linjen $y = 3x - 2$, där linjen själv inte hör till området',
+      'Bara de punkter som ligger på linjen $y = 3x - 2$',
+    ],
+    correct: 2,
+    why: [
+      'Ovanför linjen är $y$ större än $3x - 2$. Det skulle beskrivas av $y > 3x - 2$.',
+      'Linjen hör bara till området vid $\\leq$ eller $\\geq$. Tecknet $<$ utesluter linjen.',
+      'Mindre än betyder under linjen, och vid $<$ hör linjen inte till området. Den ritas streckad.',
+      'Punkterna på linjen uppfyller $y = 3x - 2$, alltså en likhet. En olikhet beskriver ett helt halvplan.',
+    ],
+  },
+  {
+    question: 'Hur ritas gränslinjen till olikheten $y \\geq -x + 4$?',
+    choices: [
+      'Heldragen, eftersom linjen hör till området',
+      'Streckad, eftersom linjen inte hör till området',
+      'Streckad, eftersom $k$ är negativt',
+      'Den ritas inte alls, bara området skuggas',
+    ],
+    correct: 0,
+    why: [
+      'Vid $\\geq$ ingår likheten, så punkterna på linjen hör till området. Därför ritas linjen heldragen.',
+      'Linjen ritas streckad bara vid $<$ och $>$. Här står $\\geq$.',
+      'Om linjen ritas streckad eller heldragen beror på olikhetstecknet, inte på lutningen.',
+      'Gränslinjen behövs för att visa var området slutar, och om kanten hör till området eller inte.',
+    ],
+  },
+  {
+    question: 'Ett område beskrivs av $2x - 3y > 6$. Ligger origo $(0, 0)$ i området?',
+    choices: [
+      'Ja, eftersom origo alltid ligger i området',
+      'Ja, eftersom $2 \\cdot 0 - 3 \\cdot 0 = 0$',
+      'Det går inte att avgöra utan att rita figuren',
+      'Nej, eftersom $0 > 6$ inte stämmer',
+    ],
+    correct: 3,
+    why: [
+      'Origo är bara en bekväm testpunkt. Den kan ligga både i och utanför området.',
+      'Vänsterledet blir 0, men det räcker inte. Det ska också vara större än 6, och det är det inte.',
+      'Det går att avgöra genom att sätta in punkten i olikheten. Det är just det testpunkten är till för.',
+      'Insättning ger $0 > 6$, som inte stämmer. Origo ligger alltså inte i området, och området ligger på den andra sidan av linjen.',
+    ],
+  },
+  {
+    question: 'Vad är en hörnpunkt till ett område som beskrivs av ett system av olikheter?',
+    choices: [
+      'Den punkt i området som ligger närmast origo',
+      'En skärningspunkt mellan två av gränslinjerna',
+      'En punkt där en gränslinje skär *y*-axeln',
+      'Den punkt som ligger mitt i området',
+    ],
+    correct: 1,
+    why: [
+      'Origo kan vara en hörnpunkt, men det finns i regel fler hörn, och närheten till origo avgör inte saken.',
+      'I ett hörn möts två gränslinjer. Hörnet beräknas därför med ett ekvationssystem av linjernas ekvationer.',
+      'En skärning med *y*-axeln är ett hörn bara om *y*-axeln själv är en gränslinje, till exempel vid $x \\geq 0$.',
+      'Mittpunkten ligger inne i området. Hörnen ligger i kanten, där två gränslinjer möts.',
+    ],
+  },
+  {
+    question: 'Vad betyder villkoren $x \\geq 0$ och $y \\geq 0$ tillsammans?',
+    choices: [
+      'Området ligger under *x*-axeln',
+      'Området består bara av origo',
+      'Området ligger i första kvadranten, till höger om *y*-axeln och ovanför *x*-axeln',
+      'Området ligger mellan linjerna $y = x$ och $y = -x$',
+    ],
+    correct: 2,
+    why: [
+      'Under *x*-axeln är $y$ negativt, men villkoret säger att $y$ är minst 0.',
+      'Origo uppfyller villkoren, men det gör också alla andra punkter där båda koordinaterna är positiva.',
+      'Båda koordinaterna får vara 0 eller positiva. Det är första kvadranten, och i praktiska problem betyder det att antalen inte kan vara negativa.',
+      'Linjerna $y = x$ och $y = -x$ har inget med villkoren att göra. Gränserna är axlarna själva.',
+    ],
+  },
+],
+
+'ma3b-2.2': [
+  {
+    question: 'Vad kallas i linjär optimering den funktion som ska bli så stor eller så liten som möjligt, till exempel vinsten $V = 400x + 500y$?',
+    choices: [
+      'Bivillkor',
+      'Nivålinje',
+      'Tillåtet område',
+      'Målfunktion',
+    ],
+    correct: 3,
+    why: [
+      'Bivillkoren är begränsningarna, skrivna som olikheter. Det är inte dem vi maximerar.',
+      'En nivålinje är de punkter där målfunktionen har ett bestämt värde, inte själva funktionen.',
+      'Det tillåtna området är alla punkter där bivillkoren gäller. Där letar vi efter det bästa värdet.',
+      'Målfunktionen är den storhet som ska optimeras, till exempel vinst eller kostnad.',
+    ],
+  },
+  {
+    question: 'Var antar målfunktionen sitt största värde när det tillåtna området är begränsat?',
+    choices: [
+      'I någon av områdets hörnpunkter',
+      'Alltid i origo',
+      'I områdets mittpunkt',
+      'Där en gränslinje skär *x*-axeln',
+    ],
+    correct: 0,
+    why: [
+      'Det är hörnpunktsmetoden: den sista punkt som en nivålinje nuddar när den flyttas parallellt är ett hörn.',
+      'I origo är både $x$ och $y$ noll. Där blir en vinst oftast minst, inte störst.',
+      'Mittpunkten ligger inne i området. En nivålinje som går genom den skär fortfarande området, så det finns bättre punkter.',
+      'En sådan punkt kan vara ett hörn, men den är inte alltid den bästa. Alla hörn måste jämföras.',
+    ],
+  },
+  {
+    question: 'En möbelsnickare har högst 10 timmar för målning per vecka. En stol tar 1 timme och ett bord 1 timme att måla. Hur skrivs bivillkoret om $x$ är antalet stolar och $y$ antalet bord?',
+    choices: [
+      '$x + y \\geq 10$',
+      '$x + y \\leq 10$',
+      '$x + y = 10$',
+      '$10x + 10y \\leq 1$',
+    ],
+    correct: 1,
+    why: [
+      'Högst 10 timmar betyder att tiden får vara 10 eller mindre, inte minst 10.',
+      'Målningen tar $x + y$ timmar, och den tiden får vara högst 10 timmar.',
+      'Snickaren måste inte använda exakt 10 timmar. Det räcker att tiden inte överstiger 10 timmar.',
+      'Varje stol och bord tar 1 timme, så tiden är $1 \\cdot x + 1 \\cdot y$. Talet 10 är gränsen, inte tiden per möbel.',
+    ],
+  },
+  {
+    question: 'Vad gäller för nivålinjerna $2x + 3y = z$ för olika värden på $z$?',
+    choices: [
+      'De skär alla varandra i origo',
+      'De är lodräta',
+      'De är parallella och flyttas längre upp åt höger när $z$ ökar',
+      'Deras lutning ökar när $z$ ökar',
+    ],
+    correct: 2,
+    why: [
+      'Bara nivålinjen $z = 0$ går genom origo. De andra är förskjutna.',
+      'Löser man ut $y$ blir $y = \\dfrac{z - 2x}{3}$. Det är en lutande linje, inte en lodrät.',
+      'Lutningen är alltid $-\\dfrac{2}{3}$, och det är bara skärningen med *y*-axeln, $\\dfrac{z}{3}$, som ändras. Linjerna är därför parallella.',
+      'Lutningen beror bara på koefficienterna 2 och 3, inte på $z$.',
+    ],
+  },
+  {
+    question: 'Målfunktionen ger exakt samma största värde i två hörn som ligger intill varandra. Vad gäller då?',
+    choices: [
+      'Uppgiften saknar lösning',
+      'Alla punkter på kanten mellan de två hörnen ger samma största värde',
+      'Man ska välja hörnet som ligger närmast origo',
+      'Det största värdet finns i stället i mitten av området',
+    ],
+    correct: 1,
+    why: [
+      'Det finns tvärtom många lösningar, eftersom flera punkter ger samma bästa värde.',
+      'Nivålinjen är då parallell med kanten mellan hörnen, så hela kanten ger samma värde. Måste svaret vara heltal kan flera punkter på kanten vara lika bra.',
+      'Båda hörnen ger lika mycket, så det finns ingen anledning att föredra det ena. Även punkterna emellan ger samma värde.',
+      'Inne i området är målfunktionen mindre än vid kanten. Det största värdet finns i kanten.',
+    ],
+  },
+],
+
+// ═══════════ Matematik fortsättning nivå 1b (Ma3b), kapitel 6: 6.1–6.3 ═══════════
+'ma3b-6.1': [
+  {
+    question: 'I talföljden $3,\\ 7,\\ 11,\\ 15,\\ \\ldots$, vad betyder $a_3$?',
+    choices: [
+      'Det tredje elementet, alltså 11',
+      'Det första elementet gånger 3, alltså 9',
+      'Summan av de tre första elementen, alltså 21',
+      'Talet 3 upphöjt till elementets nummer',
+    ],
+    correct: 0,
+    why: [
+      'Indexet 3 är elementets ordningsnummer. Det tredje talet i talföljden är 11.',
+      'Indexet anger vilket element det gäller, inte att något ska multipliceras med 3.',
+      'En summa av element skrivs inte så. $a_3$ är bara ett enda element, det tredje.',
+      'Indexet är ett ordningsnummer och har inget med potenser att göra.',
+    ],
+  },
+  {
+    question: 'En talföljd ges av $a_n = 5n - 2$. Vad är $a_{10}$?',
+    choices: [
+      '$50$',
+      '$52$',
+      '$48$',
+      '$43$',
+    ],
+    correct: 2,
+    why: [
+      'Det är bara $5 \\cdot 10$. Glöm inte att dra bort 2.',
+      'Termen 2 ska dras bort, inte läggas till: $5 \\cdot 10 - 2$.',
+      'Insättning av $n = 10$ ger $a_{10} = 5 \\cdot 10 - 2 = 48$.',
+      'Så blir det om man räknar $5 \\cdot (10 - 1) - 2$. Formeln är sluten, så $n = 10$ sätts in direkt.',
+    ],
+  },
+  {
+    question: 'Talföljden ges rekursivt av $a_1 = 4$ och $a_{n+1} = 3 \\cdot a_n$. Vad är $a_3$?',
+    choices: [
+      '$12$',
+      '$10$',
+      '$64$',
+      '$36$',
+    ],
+    correct: 3,
+    why: [
+      'Det är $a_2 = 3 \\cdot 4 = 12$. Ett steg till behövs för att nå $a_3$.',
+      'Så blir det om man lägger till 3 varje gång. Formeln säger att elementet ska multipliceras med 3.',
+      'Det är $4^3$. Formeln multiplicerar med 3 i varje steg, den upphöjer inte.',
+      'Varje element är det föregående gånger 3: $a_2 = 3 \\cdot 4 = 12$ och $a_3 = 3 \\cdot 12 = 36$.',
+    ],
+  },
+  {
+    question: 'Vilken typ av talföljd är $20,\\ 17,\\ 14,\\ 11,\\ \\ldots$?',
+    choices: [
+      'Geometrisk med kvoten $-3$',
+      'Aritmetisk med differensen $-3$',
+      'Geometrisk med kvoten $\\dfrac{17}{20}$',
+      'Varken aritmetisk eller geometrisk',
+    ],
+    correct: 1,
+    why: [
+      'En kvot på $-3$ skulle ge $20, -60, 180, \\ldots$ med växlande tecken. Här minskar elementen med 3 varje gång.',
+      'Samma tal, $-3$, läggs till varje gång: $17 - 20 = 14 - 17 = 11 - 14 = -3$.',
+      'Kvoten $\\dfrac{14}{17}$ är inte lika med $\\dfrac{17}{20}$, så kvoten är inte konstant.',
+      'Differensen är konstant, $-3$, så talföljden är aritmetisk.',
+    ],
+  },
+  {
+    question: 'Antalet stickor i figur $n$ i ett mönster är $a_n = 2n + 1$. Går det att bygga en figur av exakt 60 stickor?',
+    choices: [
+      'Ja, figur 30',
+      'Ja, figur 29',
+      'Nej, eftersom $2n + 1 = 60$ ger $n = 29{,}5$, som inte är ett heltal',
+      'Nej, eftersom 60 är större än alla element i talföljden',
+    ],
+    correct: 2,
+    why: [
+      'Figur 30 har $2 \\cdot 30 + 1 = 61$ stickor.',
+      'Figur 29 har $2 \\cdot 29 + 1 = 59$ stickor.',
+      'Ordningsnumret måste vara ett heltal. Antalet stickor är alltid udda, så 60 kan aldrig förekomma.',
+      'Talföljden växer hela tiden, så den passerar 60. Men den hoppar från 59 till 61.',
+    ],
+  },
+],
+'ma3b-6.2': [
+  {
+    question: 'Vad är kvoten $k$ i den geometriska talföljden $2,\\ 10,\\ 50,\\ 250,\\ \\ldots$?',
+    choices: [
+      '$8$',
+      '$5$',
+      '$\\dfrac{1}{5}$',
+      '$2$',
+    ],
+    correct: 1,
+    why: [
+      'Det är differensen mellan de två första elementen. I en geometrisk talföljd ska man dividera.',
+      'Kvoten är $k = \\dfrac{a_2}{a_1} = \\dfrac{10}{2} = 5$, och $\\dfrac{50}{10} = 5$ också.',
+      'Det är $\\dfrac{a_1}{a_2}$. Kvoten fås när ett element divideras med elementet före.',
+      'Det är det första elementet, inte kvoten.',
+    ],
+  },
+  {
+    question: 'En geometrisk talföljd har $a_1 = 3$ och $k = 2$. Vad är $a_5$?',
+    choices: [
+      '$96$',
+      '$30$',
+      '$11$',
+      '$48$',
+    ],
+    correct: 3,
+    why: [
+      'Det är $3 \\cdot 2^5$. Exponenten ska vara $n - 1 = 4$, eftersom det första elementet inte har multiplicerats med $k$.',
+      'Det är $3 \\cdot 2 \\cdot 5$. Kvoten ska upphöjas till $n - 1$, inte multipliceras med $n$.',
+      'Så blir det i en aritmetisk talföljd med differensen 2. Här ska man multiplicera.',
+      '$a_5 = a_1 \\cdot k^{5-1} = 3 \\cdot 2^4 = 3 \\cdot 16 = 48$.',
+    ],
+  },
+  {
+    question: 'I en geometrisk talföljd är $a_2 = 5$ och $a_5 = 40$. Vilken ekvation ger kvoten $k$?',
+    choices: [
+      '$40 = 5 \\cdot k^3$',
+      '$40 = 5 \\cdot k^5$',
+      '$40 = 5 + 3k$',
+      '$40 = 5 \\cdot k^4$',
+    ],
+    correct: 0,
+    why: [
+      'Från $a_2$ till $a_5$ är det $5 - 2 = 3$ steg, så $a_5 = a_2 \\cdot k^3$. Det ger $k^3 = 8$ och $k = 2$.',
+      'Exponenten ska vara antalet steg mellan elementen, $5 - 2 = 3$, inte ordningsnumret 5.',
+      'Det gäller en aritmetisk talföljd. I en geometrisk talföljd multipliceras elementen med kvoten.',
+      'Exponenten 4 gäller steget från $a_1$ till $a_5$. Här startar vi i $a_2$.',
+    ],
+  },
+  {
+    question: 'En lön på 30 000 kr år 1 höjs med 2 % per år. Vilket uttryck ger lönen år $n$?',
+    choices: [
+      '$30\\,000 \\cdot 1{,}02^{n}$',
+      '$30\\,000 \\cdot 0{,}02^{n-1}$',
+      '$30\\,000 \\cdot 1{,}02^{n-1}$',
+      '$30\\,000 + 0{,}02(n - 1)$',
+    ],
+    correct: 2,
+    why: [
+      'Med exponenten $n$ blir lönen år 1 redan $30\\,000 \\cdot 1{,}02$, men år 1 har lönen inte höjts än.',
+      'Kvoten ska vara förändringsfaktorn 1,02, inte 0,02. Med 0,02 skulle lönen krympa till nästan ingenting.',
+      'Kvoten är förändringsfaktorn 1,02, och år $n$ har lönen höjts $n - 1$ gånger.',
+      'Så ökar inte en procentuell förändring. Lönen multipliceras med 1,02 varje år.',
+    ],
+  },
+  {
+    question: 'Hur beter sig en geometrisk talföljd med $a_1 = 100$ och kvoten $k = 0{,}5$?',
+    choices: [
+      'Elementen växer allt snabbare',
+      'Elementen växlar mellan positiva och negativa tal',
+      'Elementen minskar med 0,5 varje gång',
+      'Elementen halveras varje gång och närmar sig 0',
+    ],
+    correct: 3,
+    why: [
+      'Elementen växer bara om kvoten är större än 1.',
+      'Tecknet växlar bara om kvoten är negativ.',
+      'Kvoten multipliceras, den dras inte bort. Talföljden blir $100, 50, 25, \\ldots$',
+      'Varje element multipliceras med 0,5: $100, 50, 25, 12{,}5, \\ldots$ Elementen blir aldrig 0.',
+    ],
+  },
+],
+'ma3b-6.3': [
+  {
+    question: 'Varför är 10 000 kr om fem år värt mindre än 10 000 kr i dag?',
+    choices: [
+      'Pengar man har i dag kan sättas in och växa med ränta',
+      'Sedlar slits och förlorar i värde',
+      'Ett framtida belopp är alltid värt exakt hälften',
+      'Det är det inte, beloppen är lika mycket värda',
+    ],
+    correct: 0,
+    why: [
+      'Sätter man in 10 000 kr i dag har de om fem år vuxit till mer än 10 000 kr. Därför är samma belopp i framtiden värt mindre.',
+      'Nuvärdet handlar om räntan, inte om sedlarnas skick.',
+      'Hur mycket mindre det är värt beror på räntan och tiden. Det finns ingen fast andel.',
+      'Med ränta växer pengarna, så pengar i dag är värda mer än samma belopp senare.',
+    ],
+  },
+  {
+    question: 'Vilket uttryck ger nuvärdet av 60 000 kr som betalas ut om 3 år, vid räntan 5 %?',
+    choices: [
+      '$60\\,000 \\cdot 1{,}05^3$',
+      '$\\dfrac{60\\,000}{1{,}05^3}$',
+      '$\\dfrac{60\\,000}{1{,}05 \\cdot 3}$',
+      '$60\\,000 \\cdot 0{,}95^3$',
+    ],
+    correct: 1,
+    why: [
+      'Det är slutvärdet om 60 000 kr sätts in i dag. Nuvärdet fås genom att dividera.',
+      'Nuvärdet är beloppet dividerat med förändringsfaktorn upphöjd till antalet år.',
+      'Förändringsfaktorn ska upphöjas till 3, inte multipliceras med 3.',
+      'Att multiplicera med 0,95 är en minskning med 5 % per år. Det är inte samma sak som att dividera med 1,05.',
+    ],
+  },
+  {
+    question: 'Nuvärdet av 50 000 kr om 4 år är cirka 42 700 kr vid räntan 4 %. Vad händer med nuvärdet om räntan i stället är 2 %?',
+    choices: [
+      'Det minskar',
+      'Det blir oförändrat',
+      'Det halveras',
+      'Det ökar',
+    ],
+    correct: 3,
+    why: [
+      'Lägre ränta ger en mindre förändringsfaktor i nämnaren, och då blir kvoten större.',
+      'Nuvärdet beror på räntan, eftersom förändringsfaktorn står i nämnaren.',
+      'Räntan halveras, men nuvärdet ändras inte i samma proportion.',
+      'Med lägre ränta växer pengarna långsammare, så det behövs mer pengar i dag: $\\dfrac{50\\,000}{1{,}02^4} \\approx 46\\,192$ kr.',
+    ],
+  },
+  {
+    question: 'Du kan få 100 000 kr nu eller 110 000 kr om 2 år. Räntan är 6 %. Vilket är mest värt?',
+    choices: [
+      '110 000 kr om 2 år, eftersom beloppet är större',
+      '100 000 kr nu, eftersom nuvärdet av 110 000 kr är cirka 97 900 kr',
+      'De är lika mycket värda',
+      '110 000 kr om 2 år, eftersom nuvärdet är cirka 123 600 kr',
+    ],
+    correct: 1,
+    why: [
+      'Belopp vid olika tidpunkter kan inte jämföras direkt. De måste räknas om till nuvärden först.',
+      '$\\dfrac{110\\,000}{1{,}06^2} \\approx 97\\,900$ kr, som är mindre än 100 000 kr.',
+      'Nuvärdet av 110 000 kr är cirka 97 900 kr, inte 100 000 kr.',
+      'Det är slutvärdet $110\\,000 \\cdot 1{,}06^2$. Nuvärdet fås genom att dividera, inte multiplicera.',
+    ],
+  },
+  {
+    question: 'En vinst betalas ut som 20 000 kr om 1 år och 20 000 kr om 2 år. Hur räknar man ut vinstens nuvärde vid räntan 3 %?',
+    choices: [
+      '$\\dfrac{40\\,000}{1{,}03^2}$',
+      '$\\dfrac{40\\,000}{1{,}03}$',
+      '$\\dfrac{20\\,000}{1{,}03} + \\dfrac{20\\,000}{1{,}03^2}$',
+      '$20\\,000 \\cdot 1{,}03 + 20\\,000 \\cdot 1{,}03^2$',
+    ],
+    correct: 2,
+    why: [
+      'Den första utbetalningen kommer redan efter 1 år, så den ska bara divideras med $1{,}03$.',
+      'Den andra utbetalningen kommer efter 2 år och ska divideras med $1{,}03^2$.',
+      'Varje utbetalning divideras med förändringsfaktorn upphöjd till antalet år tills just den betalas ut, och sedan adderas nuvärdena.',
+      'Det är slutvärden. Nuvärden fås genom att dividera med förändringsfaktorn.',
+    ],
+  },
+],
+
+// ═══════════ Matematik fortsättning nivå 1b (Ma3b): 6.4–6.5 ═══════════
+'ma3b-6.4': [
+  {
+    question: 'Vilken formel ger summan $s_n$ av de $n$ första elementen i en geometrisk talföljd med första elementet $a_1$ och kvoten $k$?',
+    choices: [
+      '$s_n = a_1 \\cdot k^{n-1}$',
+      '$s_n = \\dfrac{a_1(k^n - 1)}{k - 1}$',
+      '$s_n = \\dfrac{n(a_1 + k)}{2}$',
+      '$s_n = \\dfrac{a_1(k - 1)}{k^n - 1}$',
+    ],
+    correct: 1,
+    why: [
+      'Det är formeln för det $n$:te elementet, alltså bara den sista termen, inte summan av alla termer.',
+      'Formeln härleds genom att summan multipliceras med $k$ och den ursprungliga summan dras ifrån. Nästan alla termer tar då ut varandra.',
+      'Medelvärdet av första och sista termen gånger antalet termer fungerar för en aritmetisk summa, inte för en geometrisk.',
+      'Täljare och nämnare har bytt plats. Summan ska växa när $n$ växer, men med den här formeln krymper den.',
+    ],
+  },
+  {
+    question: 'Hur många termer har summan $3 + 6 + 12 + \\ldots + 3 \\cdot 2^{9}$?',
+    choices: ['9', '11', '10', '12'],
+    correct: 2,
+    why: [
+      'Exponenten 9 är $n - 1$, inte $n$. Den första termen $3 = 3 \\cdot 2^0$ har exponenten 0, så antalet termer är en mer än den största exponenten.',
+      'Exponenterna går från 0 till 9. Det är tio exponenter, inte elva.',
+      'Den sista termen är $a_1 \\cdot k^{n-1}$, så $n - 1 = 9$ och $n = 10$. Exponenterna 0, 1, 2, …, 9 är tio stycken.',
+      'Varken 2 eller 3 räknas som extra termer. Exponenterna går från 0 till 9, alltså tio termer.',
+    ],
+  },
+  {
+    question: 'Bestäm summan $2 + 6 + 18 + 54 + 162$.',
+    choices: ['$242$', '$162$', '$484$', '$240$'],
+    correct: 0,
+    why: [
+      'Med $a_1 = 2$, $k = 3$ och $n = 5$ blir $s_5 = \\dfrac{2(3^5 - 1)}{3 - 1} = \\dfrac{2 \\cdot 242}{2} = 242$. Kontroll: $2 + 6 + 18 + 54 + 162 = 242$.',
+      'Det är den sista termen, inte summan av alla fem termer.',
+      'Du har glömt att dividera med $k - 1 = 2$ i formeln.',
+      'Räkna om: $2 + 6 + 18 + 54 + 162 = 242$. Formeln ger samma sak, $\\dfrac{2(243 - 1)}{2} = 242$.',
+    ],
+  },
+  {
+    question: 'Du sätter in 1 000 kr i slutet av varje år på ett konto med räntan 2 %. Vilket uttryck ger behållningen direkt efter den sjätte insättningen?',
+    choices: [
+      '$1\\,000 \\cdot 1{,}02^6$',
+      '$\\dfrac{1\\,000(1{,}02^5 - 1)}{1{,}02 - 1}$',
+      '$6 \\cdot 1\\,000 \\cdot 1{,}02$',
+      '$\\dfrac{1\\,000(1{,}02^6 - 1)}{1{,}02 - 1}$',
+    ],
+    correct: 3,
+    why: [
+      'Det är vad EN insättning växer till på sex år. Här görs sex insättningar som växer olika länge.',
+      'Antalet termer ska vara lika med antalet insättningar, alltså 6, inte 5.',
+      'Insättningarna växer olika länge: den sista inte alls och den första i fem år. Därför kan man inte bara multiplicera med 6.',
+      'Behållningen är en geometrisk summa med $a_1 = 1\\,000$ (den sista insättningen har inte vuxit), $k = 1{,}02$ och $n = 6$ termer, en per insättning.',
+    ],
+  },
+  {
+    question: 'Lisa sätter in 1 000 kr i **början** av varje år på ett konto med räntan 2 %. Hon vill veta behållningen i slutet av det sjätte året. Vad blir första termen $a_1$ i den geometriska summan?',
+    choices: ['$1\\,000$', '$1\\,020$', '$1\\,000 \\cdot 1{,}02^6$', '$6\\,000$'],
+    correct: 1,
+    why: [
+      'Det gäller när den sista insättningen görs samma dag som behållningen räknas ut. Här görs den i början av år 6 och hinner växa ett år.',
+      'Den sista insättningen görs i början av år 6 och växer i ett år fram till slutet av året: $1\\,000 \\cdot 1{,}02 = 1\\,020$.',
+      'Så mycket har den FÖRSTA insättningen vuxit till, och den är den sista termen i summan, inte den första.',
+      'Det är summan av insättningarna utan ränta, inte en term i den geometriska summan.',
+    ],
+  },
+],
+
+'ma3b-6.5': [
+  {
+    question: 'Vad är en annuitet?',
+    choices: [
+      'Den del av betalningen som är ränta',
+      'Det belopp som amorteras varje gång vid rak amortering',
+      'Det lika stora belopp som betalas varje gång på ett annuitetslån',
+      'Den totala räntan under hela lånetiden',
+    ],
+    correct: 2,
+    why: [
+      'Räntedelen är bara en del av annuiteten, och den blir mindre för varje betalning.',
+      'Lika stor amortering varje gång är rak amortering. Annuiteten är hela betalningen, ränta plus amortering.',
+      'Annuiteten är hela betalningen, ränta plus amortering, och den är lika stor varje gång.',
+      'Den totala räntan är antalet betalningar gånger annuiteten minus lånebeloppet, inte annuiteten själv.',
+    ],
+  },
+  {
+    question: 'Hur förändras räntedelen och amorteringsdelen i annuiteten under lånetiden?',
+    choices: [
+      'Räntedelen minskar och amorteringsdelen ökar',
+      'Båda delarna är lika stora hela tiden',
+      'Räntedelen ökar och amorteringsdelen minskar',
+      'Amorteringen är lika stor varje gång, så räntedelen är också konstant',
+    ],
+    correct: 0,
+    why: [
+      'Skulden minskar för varje betalning, så räntan, som räknas på skulden, blir mindre. Eftersom annuiteten är lika stor går en allt större del till amortering.',
+      'Räntan räknas på den skuld som är kvar. Skulden minskar, så räntedelen kan inte vara konstant.',
+      'Det är tvärtom. Skulden är störst i början, så räntedelen är störst vid den första betalningen.',
+      'Lika stor amortering varje gång är rak amortering. Med annuitetslån är det hela betalningen som är lika stor.',
+    ],
+  },
+  {
+    question: 'Ett annuitetslån har lånebeloppet $G$, förändringsfaktorn $k$ per år och $n$ årliga betalningar på $A$ kr. Vilken likhet bygger formeln för annuiteten på?',
+    choices: [
+      '$G = n \\cdot A$',
+      '$G \\cdot k = A$',
+      '$G = A \\cdot k + A \\cdot k^2 + \\ldots + A \\cdot k^n$',
+      '$G = \\dfrac{A}{k} + \\dfrac{A}{k^2} + \\ldots + \\dfrac{A}{k^n}$',
+    ],
+    correct: 3,
+    why: [
+      'Då skulle lånet vara räntefritt. Med ränta måste summan av betalningarna vara större än lånebeloppet.',
+      'Det skulle betyda att hela lånet betalas med en enda betalning efter ett år.',
+      'Här har betalningarna fått ränta åt fel håll. En betalning i framtiden är värd MINDRE i dag, så den ska delas med $k$, inte multipliceras.',
+      'Lånebeloppet är lika med summan av betalningarnas nuvärden. En betalning om ett år har nuvärdet $\\dfrac{A}{k}$, om två år $\\dfrac{A}{k^2}$ och så vidare.',
+    ],
+  },
+  {
+    question: 'Ett annuitetslån har årsräntan 6 % och betalas med en betalning i slutet av varje månad i 5 år. Månadsräntan räknas som årsräntan delad med 12. Vilka värden på $k$ och $n$ ska sättas in i formeln för annuiteten?',
+    choices: [
+      '$k = 1{,}06$ och $n = 5$',
+      '$k = 1{,}005$ och $n = 60$',
+      '$k = 1{,}06$ och $n = 60$',
+      '$k = 1{,}5$ och $n = 60$',
+    ],
+    correct: 1,
+    why: [
+      'Det gäller en betalning per år. Här betalar man varje månad, så både räntan och antalet betalningar ska räknas per månad.',
+      'Månadsräntan är $\\dfrac{6\\ \\%}{12} = 0{,}5\\ \\%$, vilket ger $k = 1{,}005$. På fem år görs $5 \\cdot 12 = 60$ betalningar.',
+      'Antalet betalningar stämmer, men räntan ska också vara per månad. 6 % är årsräntan.',
+      '0,5 % skrivs 0,005 i decimalform, så förändringsfaktorn blir 1,005 och inte 1,5.',
+    ],
+  },
+  {
+    question: 'Samma lån på 120 000 kr med räntan 6 % betalas tillbaka på fem år, en gång som annuitetslån och en gång med rak amortering. Vilket påstående stämmer?',
+    choices: [
+      'Lånen kostar exakt lika mycket i ränta',
+      'Annuitetslånet ger mindre ränta totalt',
+      'Med rak amortering är alla betalningar lika stora',
+      'Rak amortering ger lite mindre ränta totalt, men större betalningar i början',
+    ],
+    correct: 3,
+    why: [
+      'Skulden minskar olika snabbt med de två lånetyperna, så räntan räknas på olika stora skulder och blir olika stor.',
+      'Det är tvärtom. Med annuitetslån amorteras det lite i början, så skulden och därmed räntan är större längre.',
+      'Med rak amortering är amorteringen lika stor, men räntan minskar. Därför blir betalningarna mindre och mindre.',
+      'Med rak amortering minskar skulden snabbare i början, så det blir mindre skuld att betala ränta på. I gengäld är de första betalningarna större.',
     ],
   },
 ],

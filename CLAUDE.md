@@ -851,6 +851,31 @@ ovan gäller likadant, med 2b:s egna fakta:
   `description`/`keywords` (används för 2.S, vars 2c-beskrivning nämner
   rotekvationer).
 
+**Matematik fortsättning nivå 1b (Ma3b, kurskod `ma3b`) är på samma sätt
+HÄRLEDD ur Matematik fortsättning nivå 1c (`ma3c`)** (`MA3B_SPEC` +
+`window.MA3B_ALIAS` i `data/katalog.js`, infört 2026-10-17). Alla regler
+ovan gäller likadant, med 3b:s egna fakta:
+
+- **Skillnaderna mot 3c** följer ämnesplanen för Gy25: nivå 1b har "Metoder
+  för linjär optimering" och "Begreppet geometrisk summa" i stället för
+  1c:s absolutbelopp och trigonometri (samma skillnad som mellan Origo 3b
+  och Origo 3c). Kapitel 1, 3, 4 och 5 delas rakt av (`'alla'`).
+- **Egna 3b-avsnitt** (egen md, egna övningar och exit tickets under
+  ma3b-id): `ma3b-2.1` Olikheter och system av olikheter, `ma3b-2.2`
+  Linjär optimering, `ma3b-2.7` Kontinuitet och deriverbarhet (ma3c-2.5
+  utan absolutbelopp, scenen `deriverbarhet` delas), hela kapitel 6
+  Geometrisk summa (`ma3b-6.1`–`6.5` och `6.S`) samt sammanfattningen
+  `ma3b-2.S`. Kapitel 2 heter "Linjär optimering och derivatan" i 3b.
+- **Manuella synkställen:** ändras kontinuitet/deriverbarhet i `ma3c-2.5`
+  (teori eller övning 3, 5, 6) ska `ma3b-2.7` följa med, och ändras
+  gemensamt innehåll i `ma3c-2.S` ska `ma3b-2.S` följa med (kommentarer i
+  filerna påminner).
+- **Spec-formatet har två tillägg** för kapitel: `namn:` (kapitlets namn i
+  3b när det skiljer sig från källkapitlets) och `kapitel: null` för ett
+  helt eget kapitel utan källa i 3c.
+- Nämn aldrig absolutbelopp eller trigonometri i de delade kapitel 1–5 utan
+  att tänka på att 3b-elever också läser dem.
+
 ## ⚠️ Kraftmomentet delas mellan Fysik nivå 2 och Fysik nivå 1
 
 Med Gy25 flyttade kraftmomentet till Fysik nivå 1, men elever som läser den

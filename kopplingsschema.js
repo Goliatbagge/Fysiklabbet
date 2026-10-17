@@ -1982,7 +1982,9 @@ hitG.addEventListener('pointerdown', e => {
   const t = e.target.closest('.hit');
   if (!t || e.button > 0) return;
   e.stopPropagation();
-  if (t.dataset.kind === 'arrow') { select({ kind: 'arrow', id: t.dataset.id }, e.pointerType !== 'touch'); return; }
+  // preventDefault: annars flyttar musens mousedown fokus från värdefältet
+  // direkt efter att det öppnats, och fältet stängs innan det syns.
+  if (t.dataset.kind === 'arrow') { e.preventDefault(); select({ kind: 'arrow', id: t.dataset.id }, e.pointerType !== 'touch'); return; }
   drag = { mode: 'move', id: t.dataset.id, sx: e.clientX, sy: e.clientY, moving: false, wasSel: sel && sel.id === t.dataset.id, touch: e.pointerType === 'touch' };
   sheetEl.setPointerCapture && e.pointerId != null && sheetEl.setPointerCapture(e.pointerId);
 });
@@ -2122,7 +2124,14 @@ function positionInline() {
   let tx;
   if (horiz) { y += (g.lsy < 0 ? -1 : 1) * (inf.hl + GAP_H + LH / 2); tx = 'translate(-50%, -50%)'; }
   else { x += (g.lsx < 0 ? -1 : 1) * (inf.hl + GAP_V); tx = g.lsx < 0 ? 'translate(-100%, -50%)' : 'translate(0, -50%)'; }
-  ieEl.style.left = (cam.tx + k * x) + 'px';
+  // Fältet hålls innanför ritytan, även när etiketten ligger nära kanten.
+  const w = ieEl.offsetWidth, W = ieEl.offsetParent ? ieEl.offsetParent.clientWidth : 0;
+  let lx = cam.tx + k * x;
+  if (w && W) {
+    const shift = tx.startsWith('translate(-100%') ? w : tx.startsWith('translate(-50%') ? w / 2 : 0;
+    lx = clamp(lx - shift, 6, Math.max(6, W - w - 6)) + shift;
+  }
+  ieEl.style.left = lx + 'px';
   ieEl.style.top = (cam.ty + k * y) + 'px';
   ieEl.style.transform = tx;
 }

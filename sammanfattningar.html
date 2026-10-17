@@ -579,7 +579,7 @@ body.laborans { overflow: hidden; }
         $('starta').disabled = !val.length;
     }
     function oppnaVal() {
-        kursSel.value = valdKurs || KURSER[0].kod;
+        kursSel.value = valdKurs || kursSel.options[0].value;
         ritaKapitellista(kursSel.value, valdKurs ? valdaKap : []);
         $('valBakgrund').hidden = false;
         const forsta = $('kapitellista').querySelector('input');
@@ -672,6 +672,7 @@ body.laborans { overflow: hidden; }
     // Adressen speglar valet, så att den går att dela eller bokmärka.
     function skrivAdress() {
         const p = new URLSearchParams();
+        if (amne) p.set('amne', amne);
         if (valdKurs) { p.set('kurs', valdKurs); p.set('kap', valdaKap.join(',')); }
         p.set('tid', tidSel.value);
         history.replaceState(null, '', location.pathname + '?' + p.toString().replace(/%2C/g, ','));
@@ -736,6 +737,18 @@ body.laborans { overflow: hidden; }
         const kapParam = (params.get('kap') || '').split(',').map(s => s.trim()).filter(s => finns.includes(s));
         valdKurs = kursParam.kod;
         valdaKap = kapParam.length ? kapParam : finns;   // inget kapitel angivet: hela kursen
+    }
+
+    // ?amne=fysik eller ?amne=matematik (från Resurser > Sammanfattningar i
+    // menyn): valrutan visar bara det ämnets kurser. Matematik omfattar även
+    // fortsättningskurserna (ma3c, ma4). Står en kurs från ett annat ämne i
+    // adressen vinner kursen, och listan lämnas hel.
+    const AMNEN = { fysik: 'fy', matematik: 'ma' };
+    let amne = AMNEN[params.get('amne')] ? params.get('amne') : null;
+    if (amne && valdKurs && !valdKurs.startsWith(AMNEN[amne])) amne = null;
+    if (amne) {
+        [...kursSel.options].forEach(o => { if (!o.value.startsWith(AMNEN[amne])) o.remove(); });
+        if (!kursSel.options.length) { amne = null; for (const k of KURSER) { const o = document.createElement('option'); o.value = k.kod; o.textContent = k.namn; kursSel.appendChild(o); } }
     }
 
     uppdateraFsIkon();

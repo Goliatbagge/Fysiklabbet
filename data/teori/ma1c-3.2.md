@@ -124,21 +124,21 @@ typ: jamforbutik
 
 ::: textlosning
 **a)** Vi löser uppgiften med förändringsfaktor. Vi *jämför med butik A*,
-vars pris (18 kr) då motsvarar "gamla värdet" i formeln:
+så A:s pris (18 kr) står i nämnaren. Det fungerar som "gamla värdet" i
+formeln:
 
 $$
-\text{förändringsfaktor} = \frac{\text{nya värdet}}{\text{gamla värdet}}
+\text{förändringsfaktor} = \frac{\text{pris B}}{\text{pris A}}
 = \frac{22}{18} = 1{,}222\ldots \approx 1{,}22 = 122\ \%
 \ \Longrightarrow\ 22\ \%\ \text{dyrare}
 $$
 
 **Svar:** 22 % dyrare.
 
-**b)** Vi *jämför med butik B*, vars pris (22 kr) då motsvarar "gamla
-värdet" i formeln:
+**b)** Nu *jämför vi med butik B*, så B:s pris (22 kr) står i nämnaren:
 
 $$
-\text{förändringsfaktor} = \frac{\text{nya värdet}}{\text{gamla värdet}}
+\text{förändringsfaktor} = \frac{\text{pris A}}{\text{pris B}}
 = \frac{18}{22} = 0{,}818\ldots \approx 0{,}82 = 82\ \%
 \ \Longrightarrow\ 18\ \%\ \text{billigare}
 $$

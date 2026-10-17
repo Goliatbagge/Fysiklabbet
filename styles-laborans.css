@@ -673,6 +673,9 @@ body.laborans a:not(.lab-tab-3):not(.lab-section-item):not(.lab-btn):not(.artike
     box-shadow: 0 18px 40px -12px rgba(15, 22, 32, 0.28);
 }
 .lab-nav-dd-menu { top: calc(100% + 6px); }
+/* Kort meny utan undergrupper (Nationella prov: Fysik, Matematik): bara så
+   bred som innehållet. */
+.lab-nav-dd-menu--kort { min-width: 0; width: max-content; }
 .lab-nav .lab-nav-dd-menu a,
 .lab-nav-dd-grupp-trigger { border-radius: 9px; padding: 9px 14px; }
 
@@ -733,6 +736,9 @@ body.lab-sim.bg-gray-950 .lab-nav > a.active { background: #e9edf3; color: var(-
     .lab-header .lab-nav { gap: 2px 0; font-size: 13px; margin-left: -10px; }
     .lab-nav > a, .lab-nav-dd-trigger { padding: 7px 10px; }
     .lab-search--in-header .lab-search-results { width: 100%; }
+    /* Den korta menyn högerjusteras mot sin knapp, som ofta står sist på
+       raden: vänsterjusterad hamnade den utanför skärmkanten. */
+    .lab-nav-dd-menu.lab-nav-dd-menu--kort { left: auto; right: 0; }
 
     /* Undermenyerna (Fysik > Nivå 1 …) fälls ut NEDÅT som ett dragspel.
        Åt höger hamnade de utanför skärmkanten på en smal telefon. */

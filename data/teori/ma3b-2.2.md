@@ -86,12 +86,18 @@ fortfarande nuddar området är $z = 12$, och den nuddar bara hörnet
 $(3, 2)$.
 :::
 
-Tänk dig att nivålinjen flyttas parallellt uppåt. Så länge den skär
-området finns det tillåtna punkter med just det värdet på $z$. Den sista
-punkten som linjen lämnar är ett hörn, och där är $z$ som störst. På samma
-sätt är det minsta värdet den första punkt som linjen når, och även det är
-ett hörn. I grafen nedan kan du själv dra i $z$ och se nivålinjen
-$y = \dfrac{z - 2x}{3}$ flytta sig över området.
+Alla punkter på en nivålinje ger samma värde på $z$. Går linjen genom det
+skuggade området finns det alltså tillåtna punkter som ger just det värdet.
+Går linjen helt utanför området kan $z$ inte få det värdet.
+
+**Undersök i grafen nedan.** Glidaren ändrar värdet på $z$, och linjen är
+nivålinjen $2x + 3y = z$, omskriven till $y = \dfrac{z - 2x}{3}$.
+
+1. Dra glidaren till $z = 0$. Vilken punkt i området nuddar linjen?
+2. Öka $z$ lite i taget. Se hur linjen flyttas parallellt uppåt åt höger,
+   och att den hela tiden går genom området.
+3. Leta upp det **största** värdet på $z$ där linjen fortfarande nuddar
+   området. Vilken punkt nuddar den då?
 
 ::: graf
 titel: 2x + 3y = z
@@ -104,6 +110,12 @@ skärning: nej
 x: -0.8, 9
 y: -0.8, 6
 :::
+
+Vid $z = 0$ nuddar linjen bara hörnet $(0, 0)$, så det minsta värdet är 0.
+Vid $z = 12$ nuddar linjen bara hörnet $(3, 2)$, och ökar du $z$ ännu mer
+hamnar linjen helt utanför området. Det största värdet är alltså 12. Både
+det största och det minsta värdet finns i ett hörn, precis som
+hörnpunktsmetoden säger.
 
 ::: tips "Arbetsgång vid linjär optimering"
 1. Inför variabler och skriv vad de står för.

@@ -59008,6 +59008,759 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  // ── Ma3b 6.4 Geometrisk summa och 6.5 Annuitetslån ──────────────────
+  /* Gemensamt för scenerna: summaformeln s_n = a_1(k^n − 1)/(k − 1) och
+   * annuitetsformeln A = G·k^n·(k − 1)/(k^n − 1) skrivs först, värdena
+   * samlas i en klammer direkt under formeln och sätts sedan in (REGEL
+   * MÄTVÄRDESKLAMMER: inga ringar). */
+  function geoKlammer(T, F, rader, x0, yTop) {
+    return valueBracket(T.acts, rader, x0, yTop, T.s, F);
+  }
+  /* hög parentes kring en rad med bråk (samma form som parenPts i
+   * mathTools): x = bågens yttersta punkt */
+  function geoParentes(T, F, x, yb, hoger) {
+    var yTop = yb - 1.42 * F, yBot = yb + 1.06 * F, ym = (yTop + yBot) / 2;
+    var d = (hoger ? -1 : 1) * 0.17 * F;
+    T.acts.push({ kind: 'stroke', pts: [[x + d, yTop],
+      [x + d * 0.45, yTop + (ym - yTop) * 0.36],
+      [x + d * 0.04, ym - (ym - yTop) * 0.22], [x, ym],
+      [x + d * 0.04, ym + (yBot - ym) * 0.22],
+      [x + d * 0.45, yBot - (yBot - ym) * 0.36], [x + d, yBot]] });
+  }
+
+  /* bråk i mindre skrift (sc < 1) för en ekvationsrad som annars inte
+   * ryms före pilzonen; samma skrivordning som fracH */
+  function geoFracSc(T, F, numS, denS, x0, yb, sc, dcol) {
+    var f = F * sc, ybar = yb - 0.34 * f;
+    var nw = T.adv(numS, sc), dw = T.adv(denS, sc);
+    var w = Math.max(nw, dw) + 0.3 * f;
+    T.str(numS, x0 + (w - nw) / 2, ybar - 0.14 * f, null, sc);
+    T.pause(130);
+    T.acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]),
+                  color: dcol || null });
+    T.pause(130);
+    var dsink = denS.indexOf('^') >= 0 ? 0.20 * f : 0;
+    T.str(denS, x0 + (w - dw) / 2, ybar + 1.04 * f + dsink, dcol || null, sc);
+    return x0 + w + 1.5;
+  }
+
+  /* ---------------- scen: bestäm summan (ma3b-6.4 ex 1) -------------
+   * a) 3 + 6 + … + 3·2^9: antalet termer är exponenten plus 1.
+   * b) de 8 första elementen i 200, 100, 50, …: kvoten 0,5 < 1, så både
+   *    täljare och nämnare blir negativa. */
+  function layoutGeosumma(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, kl;
+    var tanke = mkTanke(T);
+
+    /* ---- a) ---- */
+    tanke(20, [
+      [['Varje term är den förra gånger']],
+      [['2. Summan är geometrisk, så']],
+      [['jag använder summaformeln.']]
+    ], 0);
+    y = 132;
+    T.str('a) Geometrisk summa', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('s_n=', padL, y);
+    T.fracH('a_1(k^n-1)', 'k-1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Första termen är 3, och kvoten']],
+      [['får jag om jag delar 6 med 3.']],
+      [['Sista termen har exponenten']],
+      [['n', 1], [' − 1 = 9, så '], ['n', 1], [' är 9 + 1.']]
+    ], 1.05);
+    y += 3.6 * F;
+    kl = geoKlammer(T, F, [
+      'a_1=3',
+      ['k=', { frac: ['6', '3'] }, '=2'],
+      'n=9+1=10'
+    ], padL + 20, y);
+    T.stepEnd();
+
+    y = kl.yEnd + 2.9 * F;
+    xx = T.str('s_1_0=', padL, y);
+    xx = T.fracH('3(2^1^0-1)', '2-1', xx, y);
+    T.stepEnd();
+
+    xx = T.str('=', xx, y);
+    xx = T.fracH('3·1 023', '1', xx, y);
+    T.stepEnd();
+
+    T.str('=3 069', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: sista termen är']],
+      [['3 · 512 = 1 536, och summan är']],
+      [['ungefär dubbelt så stor.']]
+    ], 1.05);
+    y += 3.3 * F;
+    xe = T.str('Svar: 3 069', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Samma formel. Nu halveras']],
+      [['talföljden varje gång, så']],
+      [['kvoten är 100 delat med 200.']]
+    ], 0.5);
+    y += 4.4 * F;
+    T.str('b) Samma formel, nya värden', padL, y - 1.7 * F, null, 0.62);
+    kl = geoKlammer(T, F, [
+      'a_1=200',
+      ['k=', { frac: ['100', '200'] }, '=0,5'],
+      'n=8'
+    ], padL + 20, y);
+    T.stepEnd();
+
+    y = kl.yEnd + 2.9 * F;
+    xx = T.str('s_8=', padL, y);
+    xx = T.fracH('200(0,5^8-1)', '0,5-1', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('−199,21875', '−0,5', xx, y);
+    T.stepEnd();
+
+    T.str('=398,4375', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Täljare och nämnare är båda']],
+      [['negativa, så summan blir']],
+      [['positiv. Rimligt: 200 + 100 +']],
+      [['50 + … närmar sig 400.']]
+    ], 1.05);
+    y += 3.3 * F;
+    xe = T.str('Svar: 398,4375', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: hur många termer? (ma3b-6.4 ex 2) ---------
+   * 5 + 15 + 45 + … + 98 415. Sista termen a_1·k^(n−1) sätts lika med
+   * 98 415, och exponentialekvationen löses med lg (båda led i två rader,
+   * REGEL LOGARITMERA BÅDA LED). Stödjer Båda led/Väggen. */
+  function layoutGeotermer(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, kl;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    /* ---- a) ---- */
+    tanke(20, [
+      [['Första termen är 5. Kvoten är']],
+      [['15 delat med 5, alltså 3.']]
+    ], 0);
+    y = 124;
+    T.str('a) Första term och kvot', padL, y - 1.6 * F, null, 0.62);
+    T.str('a_1=5,  k=3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Sista termen i talföljden ska']],
+      [['vara 98 415.']]
+    ]);
+    y += 4.2 * F;
+    T.str('Sista termen är 98 415', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('5·3^n^-^1=98 415', padL + 30, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/5', xx + 0.6 * F, '5·3^n^-^1=98 415');
+    xx = T.str('3^n^-^1=19 683', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Den obekanta står i exponenten.']],
+      [['Jag logaritmerar båda led.']]
+    ]);
+    y += 4.0 * F;
+    T.str('Logaritmerar båda led', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('lg 3^n^-^1=lg 19 683', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Logaritmlagen flyttar ned']],
+      [['exponenten framför lg 3.']]
+    ]);
+    y += 4.0 * F;
+    xx = T.str('(n-1)·lg 3=lg 19 683', padL + 30, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/lg 3', xx + 0.6 * F, '(n-1)·lg 3=lg 19 683',
+              { dyRes: 3.2, dyVagg: 3.0 });
+    xx = T.str('n-1=', padL + 30, y);
+    xx = T.fracH('lg 19 683', 'lg 3', xx, y);
+    xx = T.str('=9', xx, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+1', xx + 0.6 * F, 'n-1=9',
+              { dy: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+    xx = T.str('n=10', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: 5 · 19 683 = 98 415.']],
+      [['Det stämmer.']]
+    ]);
+    y += 3.6 * F;
+    xe = T.str('Svar: 10 termer', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Nu vet jag '], ['a', 1], ['₁, '], ['k', 1], [' och '], ['n', 1], ['. Summa-']],
+      [['formeln ger summan.']]
+    ], 0.5);
+    y += 4.4 * F;
+    T.str('b) Geometrisk summa', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('s_n=', padL, y);
+    T.fracH('a_1(k^n-1)', 'k-1', xx, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    kl = geoKlammer(T, F, ['a_1=5', 'k=3', 'n=10'], padL + 20, y);
+    T.stepEnd();
+
+    y = kl.yEnd + 2.9 * F;
+    xx = T.str('s_1_0=', padL, y);
+    xx = T.fracH('5(3^1^0-1)', '3-1', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('=', padL + 30, y);
+    xx = T.fracH('5·59 048', '2', xx, y);
+    T.stepEnd();
+
+    T.str('=147 620', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: 147 620', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: sparkontot (ma3b-6.4 ex 3) -----------------
+   * 5 000 kr i slutet av varje år, 2,8 %. a) Behållningen direkt efter
+   * tionde insättningen. b) Insättningarna i början av året: varje
+   * insättning växer ett år till, så a_1 = 5 000·1,028. */
+  function layoutGeosparkonto(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, kl;
+    var tanke = mkTanke(T);
+
+    /* ---- a) ---- */
+    tanke(20, [
+      [['Varje insättning växer olika']],
+      [['länge. Den sista har inte']],
+      [['hunnit växa alls.']]
+    ], 0);
+    y = 182;
+    T.str('a) Sista insättningen först', padL, y - 1.6 * F, null, 0.62);
+    T.str('5 000+5 000·1,028+...+5 000·1,028^9', padL, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det är en geometrisk summa.']],
+      [['Kvoten är förändrings-']],
+      [['faktorn 1,028.']]
+    ]);
+    y += 4.4 * F;
+    T.str('Geometrisk summa', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('s_n=', padL, y);
+    T.fracH('a_1(k^n-1)', 'k-1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En term per insättning, alltså']],
+      [['10 termer. Den sista insätt-']],
+      [['ningen har inte vuxit: 5 000.']]
+    ], 1.05);
+    y += 3.0 * F;
+    kl = geoKlammer(T, F, ['a_1=5 000', 'k=1,028', 'n=10'], padL + 20, y);
+    T.stepEnd();
+
+    y = kl.yEnd + 2.9 * F;
+    xx = T.str('s_1_0=', padL, y);
+    xx = T.fracH('5 000(1,028^1^0-1)', '1,028-1', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    xx = T.str('=56 794,242...', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Pengar på ett konto anges i']],
+      [['kronor och ören.']]
+    ]);
+    T.str('≈56 794,24', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: insättningarna är']],
+      [['50 000 kr, och räntan har lagt']],
+      [['till drygt 6 000 kr.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: 56 794,24 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Nu sätts varje insättning in ett']],
+      [['år tidigare. Den sista hinner']],
+      [['växa ett år.']]
+    ], 0.5);
+    y += 4.4 * F;
+    T.str('b) Sista insättningen efter ett år', padL, y - 1.6 * F, null, 0.62);
+    T.str('a_1=5 000·1,028=5 140', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kvoten och antalet termer är']],
+      [['desamma som i a).']]
+    ]);
+    y += 3.6 * F;
+    xx = T.str('s_1_0=', padL, y);
+    xx = T.fracH('5 140(1,028^1^0-1)', '1,028-1', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    xx = T.str('=58 384,481...', padL + 30, y);
+    T.stepEnd();
+
+    T.str('≈58 384,48', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: mer än i a), eftersom']],
+      [['pengarna har vuxit ett år']],
+      [['längre.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: 58 384,48 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: hur länge måste Elin spara? (6.4 ex 4) -----
+   * 5 000(1,028^n − 1)/(1,028 − 1) = 100 000 löses för n med lg.
+   * Stödjer Båda led/Väggen. Svaret avrundas UPPÅT till ett heltal. */
+  function layoutGeospartid(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    tanke(20, [
+      [['Efter '], ['n', 1], [' insättningar är']],
+      [['behållningen en geometrisk']],
+      [['summa med '], ['n', 1], [' termer.']]
+    ], 0);
+    /* Bråkraderna är breda: de skrivs något mindre (REGEL EN EKVATION
+     * SKRIVS PÅ EN RAD), så att väggen och operationen ryms före
+     * pilzonen. */
+    var SC = 0.86;
+    y = 246;
+    T.str('Behållningen ska bli 100 000 kr', padL, y - 2.1 * F, null, 0.62);
+    xx = geoFracSc(T, F, '5 000(1,028^n-1)', '1,028-1', padL + 30, y, SC);
+    xx = T.str('=100 000', xx, y, null, SC);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nämnaren är 1,028 − 1 = 0,028.']]
+    ], 1.05);
+    y += 3.6 * F;
+    xx = geoFracSc(T, F, '5 000(1,028^n-1)', '0,028', padL + 30, y, SC);
+    xx = T.str('=100 000', xx, y, null, SC);
+    T.stepEnd();
+
+    y = ekvOp(y, '·0,028', xx + 0.4 * F, function (yb) {
+      var sc = EKV_MIN_SC;
+      var x = geoFracSc(T, F, '5 000(1,028^n-1)', '0,028', padL, yb, sc);
+      x = T.str('·0,028', x, yb, BLUE, sc);
+      x = T.str('=100 000', x, yb, null, sc);
+      T.str('·0,028', x, yb, BLUE, sc);
+    }, { dy: 3.2, dyRes: 2.9, dyVagg: 2.6, vopt: { h0: 1.15, h1: 1.05 } });
+    xx = T.str('5 000(1,028^n-1)=2 800', padL + 30, y, null, 0.9);
+    T.stepEnd();
+
+    y = ekvOp(y, '/5 000', xx + 0.5 * F, '5 000(1,028^n-1)=2 800',
+              { vopt: { fri: true } });
+    xx = T.str('1,028^n-1=0,56', padL + 30, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+1', xx + 0.6 * F, '1,028^n-1=0,56');
+    xx = T.str('1,028^n=1,56', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Den obekanta står i exponenten.']],
+      [['Jag logaritmerar båda led.']]
+    ]);
+    y += 4.0 * F;
+    T.str('Logaritmerar båda led', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('lg 1,028^n=lg 1,56', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Logaritmlagen flyttar ned']],
+      [['exponenten.']]
+    ]);
+    y += 4.0 * F;
+    xx = T.str('n·lg 1,028=lg 1,56', padL + 30, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/lg 1,028', xx + 0.6 * F, 'n·lg 1,028=lg 1,56',
+              { dyRes: 3.2, dyVagg: 3.0 });
+    xx = T.str('n=', padL + 30, y);
+    xx = T.fracH('lg 1,56', 'lg 1,028', xx, y);
+    T.str('=16,10...', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Antalet insättningar är ett']],
+      [['heltal. Efter 16 räcker det inte']],
+      [['riktigt, så jag kontrollerar.']]
+    ], 1.05);
+    y += 4.1 * F;
+    T.str('Kontroll med summaformeln', padL, y - 1.6 * F, null, 0.62);
+    T.str('s_1_6≈99 209,  s_1_7≈106 987', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Först efter 17 insättningar är']],
+      [['behållningen minst 100 000 kr.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: 17 insättningar', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: lånet som en summa av nuvärden (6.5 ex 1) --
+   * 30 000 = A/1,05 + A/1,05² + A/1,05³. A bryts ut (parentesen stängs
+   * sist, ett led per klick), parentesen räknas ut och båda led delas.
+   * Stödjer Båda led/Väggen. */
+  function layoutAnnuitetnuvarde(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+
+    tanke(20, [
+      [['Varje betalning är värd mindre']],
+      [['i dag. Lånet är lika med']],
+      [['summan av nuvärdena.']]
+    ], 0);
+    y = 270;
+    T.str('Lånet = summan av nuvärdena', padL, y - 2.1 * F, null, 0.62);
+    xx = T.str('30 000=', padL + 30, y);
+    xx = T.fracH('A', '1,05', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('A', '1,05^2', xx, y);
+    xx = T.str('+', xx, y);
+    xx = T.fracH('A', '1,05^3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [[''], ['A', 1], [' finns i varje term. Jag']],
+      [['bryter ut '], ['A', 1], ['.']]
+    ], 1.05);
+    y += 4.5 * F;
+    T.str('Bryter ut A', padL, y - 2.1 * F, null, 0.62);
+    xx = T.str('30 000=A', padL + 30, y);
+    geoParentes(T, F, xx + 0.06 * F, y, false);
+    xx += 0.30 * F;
+    T.stepEnd();
+
+    xx = T.fracH('1', '1,05', xx, y);
+    T.stepEnd();
+
+    xx = T.str('+', xx, y);
+    xx = T.fracH('1', '1,05^2', xx, y);
+    T.stepEnd();
+
+    xx = T.str('+', xx, y);
+    xx = T.fracH('1', '1,05^3', xx, y);
+    T.pause(130);
+    geoParentes(T, F, xx + 0.22 * F, y, true);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Parentesen är bara ett tal. Jag']],
+      [['räknar ut det.']]
+    ], 1.05);
+    y += 3.4 * F;
+    xx = T.str('30 000=A·2,7232...', padL + 30, y, null, 0.9);
+    T.stepEnd();
+
+    y = ekvOp(y, '/2,7232...', xx + 0.6 * F, '30 000=A·2,7232...',
+              { dyRes: 3.2, dyVagg: 3.0 });
+    xx = T.str('A=', padL + 30, y);
+    xx = T.fracH('30 000', '2,7232...', xx, y);
+    T.str('=11 016,256...', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Hela kronor räcker för en']],
+      [['betalning.']]
+    ], 1.05);
+    y += 2.9 * F;
+    T.str('≈11 016', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: tre betalningar blir']],
+      [['33 048 kr, lite mer än lånet.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: Cirka 11 016 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: billånet (ma3b-6.5 ex 2) -------------------
+   * a) annuiteten med formeln, b) total kostnad och total ränta,
+   * c) jämförelse med rak amortering. */
+  function layoutAnnuitetbil(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, kl;
+    var tanke = mkTanke(T);
+
+    /* ---- a) ---- */
+    tanke(20, [
+      [['Ett annuitetslån: jag använder']],
+      [['formeln för annuiteten.']]
+    ], 0);
+    y = 132;
+    T.str('a) Annuitet', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('A=', padL, y);
+    T.fracH('G·k^n·(k-1)', 'k^n-1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Räntan 6 % ger förändrings-']],
+      [['faktorn 1,06. Fem betalningar,']],
+      [['en per år, ger '], ['n', 1], [' = 5.']]
+    ], 1.05);
+    y += 3.0 * F;
+    kl = geoKlammer(T, F, ['G=120 000', 'k=1,06', 'n=5'], padL + 20, y);
+    T.stepEnd();
+
+    y = kl.yEnd + 2.9 * F;
+    xx = T.str('A=', padL, y);
+    xx = T.fracH('120 000·1,06^5·(1,06-1)', '1,06^5-1', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('=28 487,568...', padL + 30, y);
+    T.stepEnd();
+
+    T.str('≈28 488', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: 120 000 kr delat på fem']],
+      [['år är 24 000 kr, och räntan']],
+      [['lägger till lite.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: Cirka 28 488 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['Sami betalar annuiteten fem']],
+      [['gånger.']]
+    ], 0.5);
+    y += 3.8 * F;
+    T.str('b) Totalt betalt', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('5·28 487,568...=142 437,840...', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    T.str('≈142 438', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Allt utöver själva lånet är']],
+      [['ränta.']]
+    ]);
+    y += 3.6 * F;
+    T.str('Ränta', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('142 437,840...-120 000', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('=22 437,840...', padL + 30, y);
+    T.stepEnd();
+
+    T.str('≈22 438', xx, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('Svar: 142 438 kr, varav 22 438 kr ränta', padL, y, null, 0.84);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    tanke(y, [
+      [['Rak amortering: lika stor']],
+      [['amortering varje år.']]
+    ], 0.5);
+    y += 4.4 * F;
+    T.str('c) Amortering per år', padL, y - 2.0 * F, null, 0.62);
+    xx = T.fracH('120 000', '5', padL, y);
+    T.str('=24 000', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Räntan är 6 % av skulden, och']],
+      [['skulden minskar med 24 000 kr']],
+      [['varje år.']]
+    ], 1.05);
+    y += 3.0 * F;
+    var rader = [
+      ['År 1', '0,06·120 000=7 200'],
+      ['År 2', '0,06·96 000=5 760'],
+      ['År 3', '0,06·72 000=4 320'],
+      ['År 4', '0,06·48 000=2 880'],
+      ['År 5', '0,06·24 000=1 440']
+    ];
+    rader.forEach(function (r, i) {
+      if (i) { y += 1.6 * F; T.pause(180); }
+      T.str(r[0], padL, y, null, 0.62);
+      T.str(r[1], padL + 80, y, null, 0.86);
+    });
+    T.stepEnd();
+
+    y += 3.1 * F;
+    T.str('Total ränta', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('7 200+5 760+4 320+2 880+1 440', padL, y, null, 0.86);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('=21 600', padL + 30, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: lite mindre ränta än']],
+      [['med annuitet. Skulden minskar']],
+      [['fortare i början.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: 21 600 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: månadsbetalningar (ma3b-6.5 ex 3) ----------
+   * Månadsräntan 6 %/12 = 0,5 % ger k = 1,005, och n = 60 månader. */
+  function layoutAnnuitetmanad(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, kl;
+    var tanke = mkTanke(T);
+
+    /* ---- a) ---- */
+    tanke(20, [
+      [['Betalningarna görs varje']],
+      [['månad, så jag räknar med']],
+      [['månadsräntan.']]
+    ], 0);
+    y = 132;
+    T.str('a) Månadsränta', padL, y - 2.0 * F, null, 0.62);
+    xx = T.fracH('6 %', '12', padL, y);
+    T.str('=0,5 %', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Formeln för annuiteten, med']],
+      [['månaden som period.']]
+    ], 1.05);
+    y += 4.3 * F;
+    T.str('Annuitet', padL, y - 2.0 * F, null, 0.62);
+    xx = T.str('A=', padL, y);
+    T.fracH('G·k^n·(k-1)', 'k^n-1', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['0,5 % ger förändringsfaktorn']],
+      [['1,005. Fem år är 5 · 12 = 60']],
+      [['månader.']]
+    ], 1.05);
+    y += 3.0 * F;
+    kl = geoKlammer(T, F, ['G=200 000', 'k=1,005', 'n=5·12=60'], padL + 20, y);
+    T.stepEnd();
+
+    y = kl.yEnd + 2.9 * F;
+    xx = T.str('A=', padL, y);
+    xx = T.fracH('200 000·1,005^6^0·(1,005-1)', '1,005^6^0-1', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xx = T.str('=3 866,560...', padL + 30, y);
+    T.stepEnd();
+
+    T.str('≈3 867', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: 200 000 kr delat på 60']],
+      [['månader är 3 333 kr, och räntan']],
+      [['lägger till lite.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: Cirka 3 867 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['60 betalningar. Allt utöver']],
+      [['själva lånet är ränta.']]
+    ], 0.5);
+    y += 3.8 * F;
+    T.str('b) Totalt betalt', padL, y - 1.6 * F, null, 0.62);
+    T.str('60·3 866,560...=231 993,618...', padL, y);
+    T.stepEnd();
+
+    y += 3.5 * F;
+    T.str('Ränta', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('231 993,618...-200 000', padL, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xx = T.str('=31 993,618...', padL + 30, y);
+    T.stepEnd();
+
+    T.str('≈31 994', xx, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('Svar: Cirka 31 994 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   var SCENES = { linjegraf: layoutLinjegraf, hage: layoutHage,
                    talmangd: layoutTalmangd, olikhet: layoutOlikhet,
                    negadd: layoutNegadd, negmult: layoutNegmult,
@@ -59613,7 +60366,13 @@
                    normalgeogebra: layoutNormalgeogebra,
                    regressionglass: layoutRegressionglass,
                    regressionbefolkning: layoutRegressionbefolkning,
-                   forenklalogaritm: layoutForenklalogaritm };
+                   forenklalogaritm: layoutForenklalogaritm,
+                   /* Ma3b 6.4–6.5 */
+                   geosumma: layoutGeosumma, geotermer: layoutGeotermer,
+                   geosparkonto: layoutGeosparkonto, geospartid: layoutGeospartid,
+                   annuitetnuvarde: layoutAnnuitetnuvarde,
+                   annuitetbil: layoutAnnuitetbil,
+                   annuitetmanad: layoutAnnuitetmanad };
 
   /* ---------------- mount ---------------- */
   function mount(container, spec, opts) {

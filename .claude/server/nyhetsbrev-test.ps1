@@ -81,7 +81,9 @@ $ut = & $claude --chrome -p "/nyhetsbrev-testmejl $($info.datum)" --allowedTools
 Logga $ut.Trim()
 . (Join-Path $PSScriptRoot 'some-notis.ps1')
 if (LarmaVidInloggningsfel 'Nyhetsbrevets testmejl' $ut $logDir) { Logga 'LARM: inloggningsfel.' }
-if ($ut -match 'TESTMEJL SKICKAT') {
+# -cmatch, inte -match: -match bryr sig inte om skiftläge, och "inget
+# testmejl skickat" i en felrapport räknades som lyckat (2026-10-17).
+if ($ut -cmatch '(?m)^TESTMEJL SKICKAT' -and $ut -cnotmatch '(?m)^FEL:') {
     Set-Content -Path $markor -Value (Get-Date -Format 's') -Encoding utf8
     Logga '--- testmejl skickat ---'
     exit 0

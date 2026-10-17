@@ -1,20 +1,22 @@
 ﻿# Skickar testmejlet med veckans nyhetsbrevsutkast till användaren på
 # lördagsmorgonen (stående önskemål 2026-10-17). Utkastet skrivs av
 # molnroutinen "Nyhetsbrevsutkast — lördag morgon" (deadline 08.00), som
-# saknar Gmail — därför sker utskicket här, på datorn.
+# saknar Chrome — därför sker testet här, på datorn.
 #
-# 1. node .claude/nyhetsbrev/testmejl.js hämtar söndagens utkast ur
-#    origin/main och gör om det till ett testmejl i %TEMP%.
-#    Saknas utkastet: nytt försök var tionde minut, högst sex gånger.
-# 2. En headless Claude-session (/nyhetsbrev-testmejl) skickar det med
-#    Gmail-kopplingen till användarens egen adress.
+# 1. node .claude/nyhetsbrev/testmejl.js kontrollerar att söndagens utkast
+#    finns på origin/main. Saknas det: nytt försök var tionde minut, högst
+#    sex gånger.
+# 2. En headless Claude-session med Chrome (/nyhetsbrev-testmejl) lägger upp
+#    kampanjen i EmailOctopus och trycker på "Send as test". Den schemalägger
+#    aldrig. (Gmail-kopplingen prövades först men tar bort alla bilder.)
 #
 # Körs av den schemalagda uppgiften "Fysiklabbet nyhetsbrev testmejl"
 # (lördagar 08:15), se installera-nyhetsbrev-test-task.ps1.
 # Ett testmejl per utkast: en markörfil i logg-mappen hindrar dubbletter.
 #
-# Behörigheter: sessionen får ENDAST Gmail-verktyget send_message,
-# ToolSearch och Read.
+# Behörigheter: sessionen får ENDAST webbläsarverktygen, läsning, de
+# kontroller brev-till-octopus kör (verifieraren, curl, grep, git log) och
+# skrivning i nyhetsbrevsloggen. Ingen generell bypass.
 
 $ErrorActionPreference = 'Continue'
 $repo   = 'C:\claude\Fysiklabbet'
@@ -44,6 +46,13 @@ $markor = Join-Path $logDir "nyhetsbrev-test-$($info.datum).skickat"
 if (Test-Path $markor) { Logga "Testmejl för $($info.datum) redan skickat - gör ingenting."; exit 0 }
 Logga "Utkast $($info.datum): $($info.amne)"
 
+# Chrome måste vara igång för att Claude-in-Chrome-utökningen ska svara.
+if (-not (Get-Process chrome -ErrorAction SilentlyContinue)) {
+    Logga 'Chrome kör inte - startar (minimerat).'
+    Start-Process 'chrome.exe' -WindowStyle Minimized
+    Start-Sleep -Seconds 20
+}
+
 # Rör inte Telegram-kanalen (se fb-daglig.ps1).
 $env:TELEGRAM_STATE_DIR = Join-Path $env:TEMP 'telegram-ingen-kanal'
 
@@ -54,14 +63,25 @@ if (-not (Test-Path $claude)) {
 }
 
 $verktyg = @(
-    'mcp__claude_ai_Gmail__send_message'
+    'mcp__claude-in-chrome__*'
     'ToolSearch'
     'Read'
+    'Grep'
+    'Glob'
+    'Edit(.claude/nyhetsbrev/logg.md)'
+    'Bash(node .claude/verify-nyhetsbrev.js:*)'
+    'Bash(curl:*)'
+    'Bash(grep:*)'
+    'Bash(git log:*)'
 ) -join ','
 
-$ut = & $claude -p '/nyhetsbrev-testmejl' --allowedTools $verktyg 2>&1 | Out-String
+# --chrome är obligatoriskt: utan flaggan får en headless session aldrig
+# Chrome-verktygen, oavsett --allowedTools.
+$ut = & $claude --chrome -p "/nyhetsbrev-testmejl $($info.datum)" --allowedTools $verktyg 2>&1 | Out-String
 Logga $ut.Trim()
-if ($ut -match 'SKICKAT\s+\S+') {
+. (Join-Path $PSScriptRoot 'some-notis.ps1')
+if (LarmaVidInloggningsfel 'Nyhetsbrevets testmejl' $ut $logDir) { Logga 'LARM: inloggningsfel.' }
+if ($ut -match 'TESTMEJL SKICKAT') {
     Set-Content -Path $markor -Value (Get-Date -Format 's') -Encoding utf8
     Logga '--- testmejl skickat ---'
     exit 0

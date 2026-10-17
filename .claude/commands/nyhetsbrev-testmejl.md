@@ -1,19 +1,24 @@
-# Skicka testmejlet med veckans nyhetsbrev
+# Lägg upp veckans nyhetsbrev i EmailOctopus och skicka testmejlet
 
-Körs headless av `.claude/server/nyhetsbrev-test.ps1` på lördagsmorgonen
-(användarens stående önskemål 2026-10-17: det första testmejlet ska komma
-automatiskt, utan att hen behöver be om det). Skriptet har redan kört
-`node .claude/nyhetsbrev/testmejl.js`, som lagt det färdiga brevet i en fil.
+Körs headless (`claude --chrome -p`) av `.claude/server/nyhetsbrev-test.ps1`
+på lördagsmorgonen. Användarens stående önskemål (2026-10-17): det första
+testmejlet ska komma automatiskt, utan att hen behöver be om det, och det
+ska skickas från EmailOctopus i Chrome. Gmail-kopplingen duger inte: den tar
+bort alla `<img>` ur HTML:en, så brevet kom fram utan bilder.
 
-1. Läs `%TEMP%\nyhetsbrev-test.json` (sökvägen står i `$ARGUMENTS` om den
-   skickats med). Den innehåller `amne` och `fil`.
-2. Läs hela HTML-filen `fil`. Ändra ingenting i den.
-3. Ladda Gmail-verktyget med ToolSearch
-   (`select:mcp__claude_ai_Gmail__send_message`) och skicka EN gång:
-   - `to`: `["sam.skoglund83@gmail.com"]` (aldrig någon annan adress)
-   - `subject`: `amne` ur json-filen
-   - `htmlBody`: hela filens innehåll
-4. Svara med en enda rad: `SKICKAT <meddelande-id>` om det gick, annars
-   `FEL: <orsak>`.
+Skriptet har redan kontrollerat att söndagens utkast finns på main.
+`$ARGUMENTS` är utkastets datum (ÅÅÅÅ-MM-DD).
 
-Skicka aldrig något via EmailOctopus, och committa ingenting.
+1. Kör hela flödet i `.claude/commands/brev-till-octopus.md` för utkastet
+   `$ARGUMENTS`: förutsättningarna, Setup-, Design- och Content-stegen.
+   Finns redan en kampanj för samma datum i kampanjlistan: uppdatera dess
+   innehåll i stället för att skapa en ny.
+2. Gå till Content-stegets **Preview & test**, klicka **Send as test** och
+   **Send** i dialogen (mottagaren är förifylld med kontots adress).
+   Kontrollera bekräftelsen "Sent!".
+3. **Schemalägg ALDRIG** och tryck aldrig på Schedule eller Send i
+   Send-steget. Det riktiga utskicket är användarens.
+4. Är Chrome utloggad från EmailOctopus: stanna på inloggningssidan, fyll
+   aldrig i något, och rapportera det.
+5. Stäng flikarna du öppnat. Avsluta med EN rad: `TESTMEJL SKICKAT
+   <kampanjnamn>` om det gick, annars `FEL: <orsak>`.

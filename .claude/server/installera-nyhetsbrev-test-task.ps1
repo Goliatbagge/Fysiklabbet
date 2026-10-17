@@ -1,7 +1,7 @@
 ﻿# Registrerar den schemalagda uppgiften "Fysiklabbet nyhetsbrev testmejl":
 # kör nyhetsbrev-test.ps1 varje lördag 08:15, efter molnroutinens deadline
-# 08.00 för veckans utkast. Endast när användaren är inloggad (claude -p
-# behöver kontots Gmail-koppling). StartWhenAvailable: är datorn avstängd
+# 08.00 för veckans utkast. Endast när användaren är inloggad (Chrome med
+# Claude-utökningen krävs, inloggad på emailoctopus.com). StartWhenAvailable: är datorn avstängd
 # eller i viloläge tas körningen igen när den vaknar.
 # Kör en gång per maskin. -Avinstallera tar bort uppgiften.
 

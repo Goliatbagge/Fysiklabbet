@@ -72,7 +72,7 @@
   // Verktyg för lärare: egna sidor, inte avsnitt i katalogen. Läggs först, så
   // att en sökning på "kopplingsschema" visar verktyget överst.
   const VERKTYG = [
-    { title: 'Kopplingsschema', href: 'kopplingsschema.html',
+    { title: 'Rita kopplingsschema', href: 'kopplingsschema.html',
       description: 'Rita kopplingsscheman som i läroboken och kopiera bilden till ditt dokument.',
       kw: ['kopplingsschema', 'kopplingsscheman', 'rita kopplingsschema', 'skapa kopplingsschema',
            'kretsschema', 'elektrisk krets', 'krets', 'ellära', 'elektricitet', 'resistor', 'lampa',

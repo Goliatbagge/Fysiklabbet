@@ -44521,6 +44521,276 @@ vilket ger $x_1 = 8$ och $x_2 = -15$. Eftersom en sidlängd inte kan vara negati
 **Svar:** $x = 8$ cm`,
         },
     ],
+    // ═══════════ Matematik fortsättning nivå 1b (Ma3b): 6.4–6.5 ═══════════
+    'ma3b-6.4': [
+        // ── Nivå 1 ───────────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Bestäm summan $4 + 8 + 16 + \\ldots + 4 \\cdot 2^{7}$.`,
+            choices: [
+                `$508$`,
+                `$512$`,
+                `$1\\,020$`,
+                `$2\\,044$`,
+            ],
+            correct: 2,
+            solution: `Första termen är $a_1 = 4$ och kvoten är $k = \\dfrac{8}{4} = 2$. Den sista termen $4 \\cdot 2^7$ har exponenten $n - 1 = 7$, så summan har $n = 8$ termer.
+
+Insättning i $s_n = \\dfrac{a_1(k^n - 1)}{k - 1}$ ger
+
+$$
+s_8 = \\frac{4(2^8 - 1)}{2 - 1} = \\frac{4 \\cdot 255}{1} = 1\\,020
+$$
+
+Den som räknar med $n = 7$ (exponenten i stället för exponenten plus 1) får 508, vilket är fel.
+
+**Svar:** $1\\,020$`,
+        },
+        {
+            level: 1,
+            question: `Bestäm summan av de 6 första elementen i den geometriska talföljden $5,\\ 15,\\ 45,\\ \\ldots$`,
+            answer: { value: 1820, unit: '' },
+            solution: `Första elementet är $a_1 = 5$ och kvoten är $k = \\dfrac{15}{5} = 3$. Vi ska summera $n = 6$ element.
+
+Insättning i $s_n = \\dfrac{a_1(k^n - 1)}{k - 1}$ ger
+
+$$
+s_6 = \\frac{5(3^6 - 1)}{3 - 1} = \\frac{5 \\cdot 728}{2} = 1\\,820
+$$
+
+**Svar:** $1\\,820$`,
+        },
+        {
+            level: 1,
+            question: `Summan $7 + 14 + 28 + \\ldots + 7 \\cdot 2^{11}$ är en geometrisk summa. Vilken kvot $k$ och hur många termer $n$ har den?`,
+            choices: [
+                `$k = 2$ och $n = 12$`,
+                `$k = 2$ och $n = 11$`,
+                `$k = 7$ och $n = 12$`,
+                `$k = 14$ och $n = 11$`,
+            ],
+            correct: 0,
+            solution: `Kvoten får vi genom att dividera en term med termen före:
+
+$$
+k = \\frac{14}{7} = 2
+$$
+
+Den sista termen är $a_1 \\cdot k^{n-1} = 7 \\cdot 2^{11}$, så $n - 1 = 11$. Antalet termer är exponenten plus 1:
+
+$$
+n = 11 + 1 = 12
+$$
+
+**Svar:** $k = 2$ och $n = 12$`,
+        },
+        // ── Nivå 2 ───────────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ahmed sätter in 2&nbsp;000&nbsp;kr på ett sparkonto i slutet av varje år. Räntan är 3&nbsp;%. Hur mycket finns på kontot direkt efter den femtonde insättningen?`,
+            answer: { value: 37197.83, unit: 'kr' },
+            solution: `Den sista insättningen har inte hunnit växa, den näst sista har vuxit ett år och så vidare. Behållningen är summan
+
+$$
+2\\,000 + 2\\,000 \\cdot 1{,}03 + 2\\,000 \\cdot 1{,}03^2 + \\ldots + 2\\,000 \\cdot 1{,}03^{14}
+$$
+
+Det är en geometrisk summa med $a_1 = 2\\,000$, kvoten $k = 1{,}03$ (förändringsfaktorn) och $n = 15$ termer, en för varje insättning. Insättning i $s_n = \\dfrac{a_1(k^n - 1)}{k - 1}$ ger
+
+$$
+s_{15} = \\frac{2\\,000(1{,}03^{15} - 1)}{1{,}03 - 1} = 37\\,197{,}827\\ldots \\approx 37\\,197{,}83
+$$
+
+**Svar:** $37\\,197{,}83$ kr`,
+        },
+        {
+            level: 2,
+            question: `Sara sätter in 10&nbsp;000&nbsp;kr på ett sparkonto i **början** av varje år i 8&nbsp;år. Räntan är 4&nbsp;%. Hur mycket finns på kontot i slutet av det åttonde året?`,
+            choices: [
+                `$82\\,142$ kr`,
+                `$83\\,200$ kr`,
+                `$92\\,142$ kr`,
+                `$95\\,828$ kr`,
+            ],
+            correct: 3,
+            solution: `Insättningarna görs i början av året, så även den sista insättningen hinner växa ett år innan behållningen räknas ut i slutet av år 8. Den har då vuxit till
+
+$$
+10\\,000 \\cdot 1{,}04 = 10\\,400
+$$
+
+Alla de andra insättningarna har vuxit ett år mer. Behållningen är en geometrisk summa med $a_1 = 10\\,400$, $k = 1{,}04$ och $n = 8$:
+
+$$
+s_8 = \\frac{10\\,400(1{,}04^8 - 1)}{1{,}04 - 1} = 95\\,827{,}953\\ldots \\approx 95\\,828
+$$
+
+Med $a_1 = 10\\,000$ får man 92 142 kr. Det är behållningen om insättningarna görs i slutet av varje år, vilket inte är fallet här.
+
+**Svar:** $95\\,828$ kr`,
+        },
+        // ── Nivå 3 ───────────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Kim sätter in 3&nbsp;000&nbsp;kr på ett sparkonto i början av varje år i 10&nbsp;år. Räntan är 2,5&nbsp;% hela tiden. Efter den tionde insättningen gör Kim inga fler insättningar, men pengarna står kvar på kontot. Hur mycket finns på kontot fem år efter den sista insättningen? Svara i hela kronor.`,
+            answer: { value: 38027, unit: 'kr' },
+            solution: `Vi delar upp tiden i två delar.
+
+**Fram till den sista insättningen.** Direkt efter den tionde insättningen har den sista insättningen inte vuxit alls, och den första har vuxit i 9 år. Behållningen är en geometrisk summa med $a_1 = 3\\,000$, $k = 1{,}025$ och $n = 10$:
+
+$$
+s_{10} = \\frac{3\\,000(1{,}025^{10} - 1)}{1{,}025 - 1} = 33\\,610{,}145\\ldots
+$$
+
+**De fem åren efteråt.** Hela beloppet växer nu med ränta i fem år, utan nya insättningar. Det multipliceras alltså med förändringsfaktorn fem gånger:
+
+$$
+33\\,610{,}145\\ldots \\cdot 1{,}025^5 = 38\\,026{,}794\\ldots \\approx 38\\,027
+$$
+
+Fällan i uppgiften är att räkna som om alla pengar växer lika länge. Det gör de inte: varje insättning växer olika länge fram till den sista insättningen, men därefter växer hela behållningen lika länge.
+
+**Svar:** $38\\,027$ kr`,
+        },
+    ],
+
+    'ma3b-6.5': [
+        // ── Nivå 1 ───────────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad kännetecknar ett annuitetslån?`,
+            choices: [
+                `Man amorterar lika mycket varje gång, så betalningarna blir mindre och mindre.`,
+                `Man betalar lika mycket varje gång, och betalningen består av ränta och amortering.`,
+                `Man betalar bara ränta under lånetiden och hela lånet på en gång i slutet.`,
+                `Räntan är lika stor varje gång, eftersom den räknas på det ursprungliga lånebeloppet.`,
+            ],
+            correct: 1,
+            solution: `Med ett annuitetslån är betalningen, annuiteten, lika stor varje gång. Den består av ränta och amortering. Skulden minskar för varje betalning, så räntedelen blir mindre och amorteringsdelen större.
+
+Lika stor amortering varje gång är **rak amortering**, inte annuitetslån.
+
+**Svar:** Man betalar lika mycket varje gång, och betalningen består av ränta och amortering.`,
+        },
+        {
+            level: 1,
+            question: `Ett annuitetslån på 50&nbsp;000&nbsp;kr har räntan 4&nbsp;% och betalas tillbaka med en betalning i slutet av varje år i 5&nbsp;år. Hur stor är annuiteten? Svara i hela kronor.`,
+            answer: { value: 11231, unit: 'kr' },
+            solution: `Vi använder formeln för annuiteten:
+
+$$
+A = \\frac{G \\cdot k^n \\cdot (k - 1)}{k^n - 1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+G = 50\\,000 \\\\
+k = 1{,}04 \\\\
+n = 5
+\\end{array} \\right]
+$$
+
+$$
+A = \\frac{50\\,000 \\cdot 1{,}04^5 \\cdot (1{,}04 - 1)}{1{,}04^5 - 1} = 11\\,231{,}355\\ldots \\approx 11\\,231
+$$
+
+**Svar:** $11\\,231$ kr`,
+        },
+        {
+            level: 1,
+            question: `Ett annuitetslån på 100&nbsp;000&nbsp;kr betalas tillbaka med 12&nbsp;000&nbsp;kr per år i 10&nbsp;år. Hur mycket betalar man i ränta totalt?`,
+            choices: [
+                `$2\\,000$ kr`,
+                `$12\\,000$ kr`,
+                `$120\\,000$ kr`,
+                `$20\\,000$ kr`,
+            ],
+            correct: 3,
+            solution: `Totalt betalar man
+
+$$
+10 \\cdot 12\\,000 = 120\\,000
+$$
+
+Av det är 100 000 kr själva lånet. Resten är ränta:
+
+$$
+120\\,000 - 100\\,000 = 20\\,000
+$$
+
+**Svar:** $20\\,000$ kr`,
+        },
+        // ── Nivå 2 ───────────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Emil lånar 80&nbsp;000&nbsp;kr till en motorcykel. Lånet är ett annuitetslån med årsräntan 4,8&nbsp;% och betalas tillbaka med en betalning i slutet av varje månad i 3&nbsp;år. Månadsräntan räknas som årsräntan delad med 12. Hur stor är månadsbetalningen? Svara i hela kronor.`,
+            answer: { value: 2390, unit: 'kr' },
+            solution: `Betalningarna görs varje månad, så vi räknar med månadsränta:
+
+$$
+\\frac{4{,}8\\ \\%}{12} = 0{,}4\\ \\%
+$$
+
+Förändringsfaktorn för en månad är $k = 1{,}004$, och antalet betalningar är $n = 3 \\cdot 12 = 36$. Insättning i formeln för annuiteten, $A = \\dfrac{G \\cdot k^n \\cdot (k - 1)}{k^n - 1}$, ger
+
+$$
+A = \\frac{80\\,000 \\cdot 1{,}004^{36} \\cdot (1{,}004 - 1)}{1{,}004^{36} - 1} = 2\\,390{,}494\\ldots \\approx 2\\,390
+$$
+
+**Svar:** $2\\,390$ kr`,
+        },
+        {
+            level: 2,
+            question: `Ett annuitetslån på 200&nbsp;000&nbsp;kr har räntan 5&nbsp;% och betalas tillbaka med en betalning i slutet av varje år i 10&nbsp;år. Annuiteten är 25&nbsp;901&nbsp;kr. Hur mycket av den första betalningen är amortering?`,
+            choices: [
+                `$15\\,901$ kr`,
+                `$10\\,000$ kr`,
+                `$20\\,000$ kr`,
+                `$25\\,901$ kr`,
+            ],
+            correct: 0,
+            solution: `Vid den första betalningen är skulden hela lånebeloppet. Räntan är 5 % av skulden:
+
+$$
+0{,}05 \\cdot 200\\,000 = 10\\,000
+$$
+
+Resten av annuiteten är amortering:
+
+$$
+25\\,901 - 10\\,000 = 15\\,901
+$$
+
+20 000 kr hade amorteringen varit med rak amortering, där lånet delas lika på de tio åren.
+
+**Svar:** $15\\,901$ kr`,
+        },
+        // ── Nivå 3 ───────────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ett annuitetslån på 100&nbsp;000&nbsp;kr har räntan 6&nbsp;% och betalas tillbaka med en betalning i slutet av varje år i 5&nbsp;år. Hur stor är skulden direkt efter den andra betalningen? Svara i hela kronor.`,
+            answer: { value: 63456, unit: 'kr' },
+            solution: `Först bestämmer vi annuiteten med $A = \\dfrac{G \\cdot k^n \\cdot (k - 1)}{k^n - 1}$, där $G = 100\\,000$, $k = 1{,}06$ och $n = 5$:
+
+$$
+A = \\frac{100\\,000 \\cdot 1{,}06^5 \\cdot (1{,}06 - 1)}{1{,}06^5 - 1} = 23\\,739{,}640\\ldots
+$$
+
+Direkt efter den andra betalningen återstår tre betalningar. Skulden är då lika med summan av de tre återstående betalningarnas nuvärden, av samma skäl som lånebeloppet är summan av alla betalningarnas nuvärden. De görs om 1, 2 och 3 år:
+
+$$
+23\\,739{,}640\\ldots \\cdot \\left( \\frac{1}{1{,}06} + \\frac{1}{1{,}06^2} + \\frac{1}{1{,}06^3} \\right) = 63\\,456{,}341\\ldots \\approx 63\\,456
+$$
+
+Vi kan kontrollera genom att följa skulden år för år. Varje år växer skulden med räntan och minskar med annuiteten:
+
+$$
+(100\\,000 \\cdot 1{,}06 - 23\\,739{,}640\\ldots) \\cdot 1{,}06 - 23\\,739{,}640\\ldots = 63\\,456{,}341\\ldots
+$$
+
+**Svar:** $63\\,456$ kr`,
+        },
+    ],
     // ═══════════════════ Matematik fortsättning nivå 2 (Ma4) ═══════════════════
     'ma4-1.1': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────

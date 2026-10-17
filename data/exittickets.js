@@ -20574,6 +20574,158 @@ window.EXITTICKETS = {
   },
 ],
 
+// ═══════════ Matematik fortsättning nivå 1b (Ma3b): 6.4–6.5 ═══════════
+'ma3b-6.4': [
+  {
+    question: 'Vilken formel ger summan $s_n$ av de $n$ första elementen i en geometrisk talföljd med första elementet $a_1$ och kvoten $k$?',
+    choices: [
+      '$s_n = a_1 \\cdot k^{n-1}$',
+      '$s_n = \\dfrac{a_1(k^n - 1)}{k - 1}$',
+      '$s_n = \\dfrac{n(a_1 + k)}{2}$',
+      '$s_n = \\dfrac{a_1(k - 1)}{k^n - 1}$',
+    ],
+    correct: 1,
+    why: [
+      'Det är formeln för det $n$:te elementet, alltså bara den sista termen, inte summan av alla termer.',
+      'Formeln härleds genom att summan multipliceras med $k$ och den ursprungliga summan dras ifrån. Nästan alla termer tar då ut varandra.',
+      'Medelvärdet av första och sista termen gånger antalet termer fungerar för en aritmetisk summa, inte för en geometrisk.',
+      'Täljare och nämnare har bytt plats. Summan ska växa när $n$ växer, men med den här formeln krymper den.',
+    ],
+  },
+  {
+    question: 'Hur många termer har summan $3 + 6 + 12 + \\ldots + 3 \\cdot 2^{9}$?',
+    choices: ['9', '11', '10', '12'],
+    correct: 2,
+    why: [
+      'Exponenten 9 är $n - 1$, inte $n$. Den första termen $3 = 3 \\cdot 2^0$ har exponenten 0, så antalet termer är en mer än den största exponenten.',
+      'Exponenterna går från 0 till 9. Det är tio exponenter, inte elva.',
+      'Den sista termen är $a_1 \\cdot k^{n-1}$, så $n - 1 = 9$ och $n = 10$. Exponenterna 0, 1, 2, …, 9 är tio stycken.',
+      'Varken 2 eller 3 räknas som extra termer. Exponenterna går från 0 till 9, alltså tio termer.',
+    ],
+  },
+  {
+    question: 'Bestäm summan $2 + 6 + 18 + 54 + 162$.',
+    choices: ['$242$', '$162$', '$484$', '$240$'],
+    correct: 0,
+    why: [
+      'Med $a_1 = 2$, $k = 3$ och $n = 5$ blir $s_5 = \\dfrac{2(3^5 - 1)}{3 - 1} = \\dfrac{2 \\cdot 242}{2} = 242$. Kontroll: $2 + 6 + 18 + 54 + 162 = 242$.',
+      'Det är den sista termen, inte summan av alla fem termer.',
+      'Du har glömt att dividera med $k - 1 = 2$ i formeln.',
+      'Räkna om: $2 + 6 + 18 + 54 + 162 = 242$. Formeln ger samma sak, $\\dfrac{2(243 - 1)}{2} = 242$.',
+    ],
+  },
+  {
+    question: 'Du sätter in 1 000 kr i slutet av varje år på ett konto med räntan 2 %. Vilket uttryck ger behållningen direkt efter den sjätte insättningen?',
+    choices: [
+      '$1\\,000 \\cdot 1{,}02^6$',
+      '$\\dfrac{1\\,000(1{,}02^5 - 1)}{1{,}02 - 1}$',
+      '$6 \\cdot 1\\,000 \\cdot 1{,}02$',
+      '$\\dfrac{1\\,000(1{,}02^6 - 1)}{1{,}02 - 1}$',
+    ],
+    correct: 3,
+    why: [
+      'Det är vad EN insättning växer till på sex år. Här görs sex insättningar som växer olika länge.',
+      'Antalet termer ska vara lika med antalet insättningar, alltså 6, inte 5.',
+      'Insättningarna växer olika länge: den sista inte alls och den första i fem år. Därför kan man inte bara multiplicera med 6.',
+      'Behållningen är en geometrisk summa med $a_1 = 1\\,000$ (den sista insättningen har inte vuxit), $k = 1{,}02$ och $n = 6$ termer, en per insättning.',
+    ],
+  },
+  {
+    question: 'Lisa sätter in 1 000 kr i **början** av varje år på ett konto med räntan 2 %. Hon vill veta behållningen i slutet av det sjätte året. Vad blir första termen $a_1$ i den geometriska summan?',
+    choices: ['$1\\,000$', '$1\\,020$', '$1\\,000 \\cdot 1{,}02^6$', '$6\\,000$'],
+    correct: 1,
+    why: [
+      'Det gäller när den sista insättningen görs samma dag som behållningen räknas ut. Här görs den i början av år 6 och hinner växa ett år.',
+      'Den sista insättningen görs i början av år 6 och växer i ett år fram till slutet av året: $1\\,000 \\cdot 1{,}02 = 1\\,020$.',
+      'Så mycket har den FÖRSTA insättningen vuxit till, och den är den sista termen i summan, inte den första.',
+      'Det är summan av insättningarna utan ränta, inte en term i den geometriska summan.',
+    ],
+  },
+],
+
+'ma3b-6.5': [
+  {
+    question: 'Vad är en annuitet?',
+    choices: [
+      'Den del av betalningen som är ränta',
+      'Det belopp som amorteras varje gång vid rak amortering',
+      'Det lika stora belopp som betalas varje gång på ett annuitetslån',
+      'Den totala räntan under hela lånetiden',
+    ],
+    correct: 2,
+    why: [
+      'Räntedelen är bara en del av annuiteten, och den blir mindre för varje betalning.',
+      'Lika stor amortering varje gång är rak amortering. Annuiteten är hela betalningen, ränta plus amortering.',
+      'Annuiteten är hela betalningen, ränta plus amortering, och den är lika stor varje gång.',
+      'Den totala räntan är antalet betalningar gånger annuiteten minus lånebeloppet, inte annuiteten själv.',
+    ],
+  },
+  {
+    question: 'Hur förändras räntedelen och amorteringsdelen i annuiteten under lånetiden?',
+    choices: [
+      'Räntedelen minskar och amorteringsdelen ökar',
+      'Båda delarna är lika stora hela tiden',
+      'Räntedelen ökar och amorteringsdelen minskar',
+      'Amorteringen är lika stor varje gång, så räntedelen är också konstant',
+    ],
+    correct: 0,
+    why: [
+      'Skulden minskar för varje betalning, så räntan, som räknas på skulden, blir mindre. Eftersom annuiteten är lika stor går en allt större del till amortering.',
+      'Räntan räknas på den skuld som är kvar. Skulden minskar, så räntedelen kan inte vara konstant.',
+      'Det är tvärtom. Skulden är störst i början, så räntedelen är störst vid den första betalningen.',
+      'Lika stor amortering varje gång är rak amortering. Med annuitetslån är det hela betalningen som är lika stor.',
+    ],
+  },
+  {
+    question: 'Ett annuitetslån har lånebeloppet $G$, förändringsfaktorn $k$ per år och $n$ årliga betalningar på $A$ kr. Vilken likhet bygger formeln för annuiteten på?',
+    choices: [
+      '$G = n \\cdot A$',
+      '$G \\cdot k = A$',
+      '$G = A \\cdot k + A \\cdot k^2 + \\ldots + A \\cdot k^n$',
+      '$G = \\dfrac{A}{k} + \\dfrac{A}{k^2} + \\ldots + \\dfrac{A}{k^n}$',
+    ],
+    correct: 3,
+    why: [
+      'Då skulle lånet vara räntefritt. Med ränta måste summan av betalningarna vara större än lånebeloppet.',
+      'Det skulle betyda att hela lånet betalas med en enda betalning efter ett år.',
+      'Här har betalningarna fått ränta åt fel håll. En betalning i framtiden är värd MINDRE i dag, så den ska delas med $k$, inte multipliceras.',
+      'Lånebeloppet är lika med summan av betalningarnas nuvärden. En betalning om ett år har nuvärdet $\\dfrac{A}{k}$, om två år $\\dfrac{A}{k^2}$ och så vidare.',
+    ],
+  },
+  {
+    question: 'Ett annuitetslån har årsräntan 6 % och betalas med en betalning i slutet av varje månad i 5 år. Månadsräntan räknas som årsräntan delad med 12. Vilka värden på $k$ och $n$ ska sättas in i formeln för annuiteten?',
+    choices: [
+      '$k = 1{,}06$ och $n = 5$',
+      '$k = 1{,}005$ och $n = 60$',
+      '$k = 1{,}06$ och $n = 60$',
+      '$k = 1{,}5$ och $n = 60$',
+    ],
+    correct: 1,
+    why: [
+      'Det gäller en betalning per år. Här betalar man varje månad, så både räntan och antalet betalningar ska räknas per månad.',
+      'Månadsräntan är $\\dfrac{6\\ \\%}{12} = 0{,}5\\ \\%$, vilket ger $k = 1{,}005$. På fem år görs $5 \\cdot 12 = 60$ betalningar.',
+      'Antalet betalningar stämmer, men räntan ska också vara per månad. 6 % är årsräntan.',
+      '0,5 % skrivs 0,005 i decimalform, så förändringsfaktorn blir 1,005 och inte 1,5.',
+    ],
+  },
+  {
+    question: 'Samma lån på 120 000 kr med räntan 6 % betalas tillbaka på fem år, en gång som annuitetslån och en gång med rak amortering. Vilket påstående stämmer?',
+    choices: [
+      'Lånen kostar exakt lika mycket i ränta',
+      'Annuitetslånet ger mindre ränta totalt',
+      'Med rak amortering är alla betalningar lika stora',
+      'Rak amortering ger lite mindre ränta totalt, men större betalningar i början',
+    ],
+    correct: 3,
+    why: [
+      'Skulden minskar olika snabbt med de två lånetyperna, så räntan räknas på olika stora skulder och blir olika stor.',
+      'Det är tvärtom. Med annuitetslån amorteras det lite i början, så skulden och därmed räntan är större längre.',
+      'Med rak amortering är amorteringen lika stor, men räntan minskar. Därför blir betalningarna mindre och mindre.',
+      'Med rak amortering minskar skulden snabbare i början, så det blir mindre skuld att betala ränta på. I gengäld är de första betalningarna större.',
+    ],
+  },
+],
+
 // ═══════════════════ Matematik fortsättning nivå 2 (Ma4) ═══════════════════
 'ma4-1.1': [
   {

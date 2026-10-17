@@ -61,6 +61,30 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'steril-neutrino',
+    term: 'Steril neutrino',
+    former: ['steril neutrino', 'sterila neutrinon', 'sterila neutriner', 'sterila neutrinerna'],
+    kort: 'En tänkt fjärde sorts neutrino som inte påverkas av någon av naturens krafter utom tyngdkraften. Den har föreslagits för att förklara flera mätningar där neutriner tycks försvinna, men har aldrig hittats.',
+    relaterade: ['neutrino', 'neutrinooscillation', 'svag-vaxelverkan', 'standardmodellen'],
+    body: [
+      { type: 'p', html: 'De tre kända sorterna av neutriner, elektron-, myon- och tauneutrinon, märks bara genom den svaga växelverkan. Det är skälet till att de går rakt genom jorden nästan utan att stöta i något. En steril neutrino skulle vara ännu mer tillbakadragen: den skulle inte påverkas av den svaga växelverkan heller, utan bara av tyngdkraften. Ordet <em>steril</em> betyder här just att den inte reagerar med något.' },
+      { type: 'p', html: 'Varför tro på en partikel som inte går att se? Jo, neutriner kan byta sort under färden. Om en vanlig neutrino ibland byter till den sterila sorten ser det ut som om den försvinner. Flera experiment har fått just ett sådant underskott, bland annat detektorer med gallium som fått omkring en femtedel för lite neutriner från starka strålkällor. Det är som att räkna fotgängare vid en grind och märka att några verkar gå upp i rök på vägen: antingen räknar man fel, eller så finns det en dörr man inte ser.' },
+      { type: 'p', html: 'Problemet är att andra mätningar, som borde se samma försvinnande, inte gör det. Experiment vid kärnreaktorer, mätningar på solens neutriner, acceleratorexperimentet MicroBooNE och KATRIN, som väger neutrinon, talar alla emot de sterila neutriner som skulle behövas. Därför letar många fysiker nu efter förklaringar inom den kända fysiken i stället, till exempel bättre beräkningar av hur atomkärnor fångar neutriner.' }
+    ]
+  },
+  {
+    id: 'elektroninfangning',
+    term: 'Elektroninfångning',
+    former: ['elektroninfångning', 'elektroninfångningen', 'elektroninfångningar', 'elektroninfångningarna'],
+    kort: 'Ett radioaktivt sönderfall där atomkärnan fångar en av atomens egna elektroner. En proton i kärnan blir då en neutron, och en neutrino skickas ut.',
+    relaterade: ['betasonderfall', 'neutrino', 'isotop', 'halveringstid', 'svag-vaxelverkan'],
+    body: [
+      { type: 'p', html: 'En atomkärna med för många protoner jämfört med neutroner kan bli stabilare genom att göra om en proton till en neutron. Ett sätt är att skicka ut en positron. Ett annat är att helt enkelt ta en elektron från atomens eget elektronmoln, oftast från det innersta skalet, som ligger närmast kärnan. Elektronen och protonen blir en neutron, och det som blir över skickas ut som en neutrino.' },
+      { type: 'p', html: 'Atomen byter då grundämne: antalet protoner minskar med ett. Germanium-71 blir till exempel gallium-71, och krom-51 blir vanadin-51. Eftersom en elektron försvunnit ur det innersta skalet uppstår ett hål där, och när en elektron längre ut faller ner och fyller det skickas röntgenstrålning ut. Den strålningen är ofta det enda som syns av sönderfallet, eftersom neutrinon försvinner nästan utan spår.' },
+      { type: 'p', html: 'Neutrinon från en elektroninfångning får alltid samma energi för ett visst ämne, eftersom bara två delar bildas, den nya atomen och neutrinon, och då kan energin bara fördelas på ett sätt. Därför används ämnen som krom-51 och argon-37 som neutrinokällor när detektorer ska kontrolleras: man vet exakt vilken energi neutrinerna har och, genom att mäta källans styrka, hur många de är.' }
+    ]
+  },
+  {
     id: 'ljuskurva',
     term: 'Ljuskurva',
     former: ['ljuskurva', 'ljuskurvan', 'ljuskurvor', 'ljuskurvorna'],

@@ -103,6 +103,70 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-17-galliumgatan",
+    date: "2026-10-17",
+    title: "Galliumgåtan kan ha en lösning som inte kräver några nya partiklar",
+    deck: "I mer än trettio år har experiment med gallium fångat omkring 20 procent färre neutriner än teorin förutsäger. Fysiker i Italien visar nu att underskottet kan försvinna om man slutar förenkla hur elektronen och atomkärnan samverkar i reaktionen, utan att någon ny sorts neutrino behövs.",
+    category: "Partikelfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-17-galliumgatan.jpg",
+    imageAlt: "En underjordisk hall med välvt tak där en rad gröna kemiska reaktorer med röda motorer på toppen står numrerade bredvid varandra. Till höger syns ställningar med glaskolvar och slangar.",
+    imageCredit: "Foto: Konstantin Malanchev (CC BY 2.0), via Wikimedia Commons",
+    tags: ["partikelfysik", "neutriner", "galliumanomalin", "gallium", "germanium", "elektroninfångning", "steril neutrino", "kärnfysik", "halveringstid", "svag växelverkan"],
+    sources: [
+      { name: "Phys.org: Solving the gallium anomaly: New calculation may explain neutrino shortfall without invoking new particles (16 oktober 2026, David Appell)", url: "https://phys.org/news/2026-10-gallium-anomaly-neutrino-shortfall-invoking.html" },
+      { name: "arXiv: förtrycket i fulltext", url: "https://arxiv.org/abs/2512.20560" },
+      { name: "arXiv: Results from the Baksan Experiment on Sterile Transitions (BEST)", url: "https://arxiv.org/abs/2109.11482" },
+      { name: "arXiv: S. R. Elliott, V. Gavrin och W. Haxton, The Gallium Anomaly (översiktsartikel)", url: "https://arxiv.org/abs/2306.03299" }
+    ],
+    research: {
+      citation: "M. Cadeddu, N. Cargioli, F. Dordei, L. Ferro, C. Giunti och M. Pitzalis, ”Possible Solution to the Gallium Anomaly Moving beyond the Leptonic Wave-Function Factorization”, Physical Review Letters 137, 131805 (2026)",
+      url: "https://doi.org/10.1103/5pvf-mcr1"
+    },
+    larare: {
+      moment: [
+        { label: "Atomkärnan", href: "katalog.html?id=fy1-9.1" },
+        { label: "Radioaktivt sönderfall", href: "katalog.html?id=fy1-9.3" },
+        { label: "Aktivitet och halveringstid", href: "katalog.html?id=fy1-9.4" }
+      ],
+      fragor: [
+        "Germanium-71 har halveringstiden 11,465 dygn. Hur stor andel av de germaniumatomer som bildats i detektorn finns kvar efter 30 dygn? Vad betyder det för hur ofta forskarna måste plocka ut och räkna atomerna?",
+        "Strålkällan av krom-51 har halveringstiden knappt en månad. Varför går det att veta så exakt hur många neutriner källan skickar ut, och varför gör det underskottet så svårt att bortförklara?",
+        "Forskarna ändrade ett antagande i teorin i stället för att införa en ny partikel. Vad bör krävas innan man drar slutsatsen att en avvikelse mellan mätning och teori beror på ny fysik?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Neutriner passerar genom nästan allt. Varje sekund passerar omkring 60&nbsp;miljarder neutriner från solen genom varje kvadratcentimeter av din kropp utan att lämna ett spår, och för att alls fånga några behövs tiotals ton av ett ämne som är bra på att ta emot dem. Ett sådant ämne är gallium. När en elektronneutrino träffar en kärna av gallium-71 kan en neutron i kärnan omvandlas till en proton. Kärnan blir då germanium-71, och en elektron skickas ut: $\\nu_e + {}^{71}\\mathrm{Ga} \\rightarrow {}^{71}\\mathrm{Ge} + e^-$. Germaniumatomerna plockas sedan ut kemiskt och räknas en och en när de sönderfaller.' },
+      { type: 'p', html: 'Problemet är att räkningen aldrig gått ihop. I mer än trettio år har galliumexperimenten fångat omkring 20&nbsp;procent färre neutriner än teorin förutsäger. Fenomenet kallas galliumanomalin. Nu visar sex fysiker vid Italiens institut för kärnfysik (INFN) i Cagliari och Turin och vid universitetet i Cagliari att underskottet kan försvinna utan någon ny partikel. Studien publicerades i <em>Physical Review Letters</em>.' },
+
+      { type: 'h2', text: 'Kalibreringen som inte stämde' },
+      { type: 'p', html: 'Galliumdetektorerna byggdes på 1990-talet för att mäta neutriner från solen: GALLEX i Gran Sasso i Italien och SAGE i Baksan i Kaukasus. För att kontrollera dem placerade forskarna starka konstgjorda strålkällor av krom-51 och argon-37 i detektorerna. Båda ämnena sönderfaller genom att kärnan fångar en av atomens egna elektroner, och då skickas en neutrino ut med en bestämd energi. Eftersom källans styrka kan mätas noggrant var det en kontroll med känt facit. Ändå bildades för lite germanium, i alla fyra försöken.' },
+      { type: 'p', html: 'För att ta reda på om det var ett mätfel byggdes experimentet BEST i Baksan. En kromkälla placerades i mitten av två galliumvolymer, en inre och en yttre, och resultatet kom 2022. I den inre volymen bildades 79&nbsp;procent av det germanium som teorin förutsäger, i den yttre 77&nbsp;procent. Underskottet bekräftades, och det var lika stort på båda avstånden från källan. I en tidigare genomgång av samma italienska grupp blev avvikelsen 4,7 eller 5,5 standardavvikelser, beroende på hur stort bidrag man räknar med från kärnans exciterade tillstånd. Fem standardavvikelser är den gräns partikelfysiker brukar kräva för att tala om en upptäckt.' },
+
+      { type: 'h2', text: 'Den sterila neutrinon som inte syns någon annanstans' },
+      { type: 'p', html: 'Den populäraste förklaringen har varit en fjärde sorts neutrino, en steril neutrino, som inte ens påverkas av den svaga växelverkan. Om elektronneutrinerna hann byta till den sorten på väg genom detektorn skulle de bli osynliga för galliumet. Men andra experiment som borde se samma sak gör det inte: mätningar vid kärnreaktorer, solneutrinerna, acceleratorexperimentet MicroBooNE och KATRIN, som väger neutrinon. Enligt studien talar de resultaten i dag starkt emot sterila neutriner.' },
+      { type: 'quote', html: 'Jag var aldrig helt övertygad om att sterila neutriner var den enda möjliga förklaringen.', cite: 'Matteo Cadeddu, INFN, till Phys.org (i översättning)' },
+
+      { type: 'h2', text: 'Ett antagande som ingen längre såg' },
+      { type: 'p', html: 'Hur sannolik neutrinoinfångningen är går inte att räkna ut direkt, så fysikerna har länge använt en genväg. Germanium-71 är radioaktivt och sönderfaller tillbaka till gallium-71 genom elektroninfångning: kärnan fångar en av atomens innersta elektroner, en proton blir en neutron och en neutrino skickas ut. Halveringstiden för det sönderfallet är uppmätt mycket noggrant, till 11,465&nbsp;dygn. Eftersom processen är neutrinoinfångningen baklänges har man antagit att samma kärndel styr båda, så att halveringstiden direkt bestämmer hur ofta galliumkärnor fångar neutriner.' },
+      { type: 'p', html: 'Genvägen bygger på att elektronens kvantvåg är ungefär konstant inne i den lilla kärnan. Då kan elektronens del och kärnans del räknas var för sig och multipliceras ihop. Gruppen i Cagliari slopade den förenklingen. De räknade ut elektronens våg inne i kärnan med den relativistiska kvantmekanikens diracekvation och tog med hur den varierar från punkt till punkt inne i kärnan. Dessutom är de två processerna inte riktigt varandras spegelbild: vid elektroninfångningen sitter elektronen bunden i atomen, vid neutrinoinfångningen flyger den iväg.' },
+      { type: 'quote', html: 'Någon gång börjar man ifrågasätta saker som är så självklara att man normalt inte längre märker att de är antaganden.', cite: 'Matteo Cadeddu, INFN, till Phys.org (i översättning)' },
+
+      { type: 'h2', text: 'Det avgörande är var i kärnan omvandlingen sker' },
+      { type: 'p', html: 'Utan förenklingen räcker det inte att känna halveringstiden. Man måste också veta hur neutronens omvandling till proton är fördelad i kärnan, det fysikerna kallar övergångstätheten. Den går ännu inte att räkna ut från grunden, så forskarna prövade fyra olika former och anpassade dem så att de stämde med både germaniumets halveringstid och galliummätningarna.' },
+      { type: 'p', html: 'En enkel form med en enda topp löste ingenting. Men former som byter tecken, där bidragen från olika delar av kärnan delvis tar ut varandra, gav exakt rätt halveringstid och samtidigt en neutrinoinfångning som var omkring 20&nbsp;procent lägre än tidigare beräkningar. Det är just vad experimenten mätt. För kromkällan blev den beräknade sannolikheten, uttryckt som en träffyta, $4{,}44 \\cdot 10^{-45}\\ \\mathrm{cm^2}$, mot uppmätta $(4{,}44 \\pm 0{,}33) \\cdot 10^{-45}\\ \\mathrm{cm^2}$.' },
+
+      { type: 'h2', text: 'En möjlig lösning, inte en bevisad' },
+      { type: 'p', html: 'Studiens titel säger ”möjlig lösning”, och forskarna är noga med förbehållet. Att räkna med elektronens verkliga våg är nödvändigt men inte tillräckligt: underskottet försvinner bara om övergångstätheten verkligen har den form som anpassningen pekar ut. Det har ingen ännu visat. Forskarna uppmanar därför kärnfysiker att bestämma övergångstätheten, både med beräkningar och med experiment. Visar den sig ha rätt form är galliumgåtan löst utan ny fysik. Gör den inte det är frågan öppen igen.' },
+
+      { type: 'fact', title: 'Visste du?', items: [
+        'Gallium är en metall som smälter vid 29,8&nbsp;°C, så den kan smälta i handen. I Baksan förvaras omkring 60&nbsp;ton flytande gallium i stora kemiska reaktorer under ett berg.',
+        'I BEST mättes att omkring 55&nbsp;germaniumatomer per dygn bildades i varje galliumvolym. Forskarna letar alltså upp några tiotal atomer bland tiotals ton metall.',
+        'Tvärsnittet av en galliumkärna är omkring hundra miljarder miljarder gånger större än den beräknade träffytan på några gånger 10<sup>−45</sup>&nbsp;cm². Det är därför det behövs så mycket gallium och så starka källor.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-16-helium-som-kanner-rumtiden",
     date: "2026-10-16",
     title: "En ring av supraflytande helium kan känna hur jorden drar med sig rumtiden",

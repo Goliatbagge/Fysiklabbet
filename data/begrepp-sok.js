@@ -10,6 +10,8 @@
  */
 window.BEGREPP_LATT = true;
 window.BEGREPP = [
+  {"id":"steril-neutrino","term":"Steril neutrino","kort":"En tänkt fjärde sorts neutrino som inte påverkas av någon av naturens krafter utom tyngdkraften. Den har föreslagits för att förklara flera mätningar där neutriner tycks försvinna, men har aldrig hittats.","former":["steril neutrino","sterila neutrinon","sterila neutriner","sterila neutrinerna"]},
+  {"id":"elektroninfangning","term":"Elektroninfångning","kort":"Ett radioaktivt sönderfall där atomkärnan fångar en av atomens egna elektroner. En proton i kärnan blir då en neutron, och en neutrino skickas ut.","former":["elektroninfångning","elektroninfångningen","elektroninfångningar","elektroninfångningarna"]},
   {"id":"ljuskurva","term":"Ljuskurva","kort":"Ett diagram över hur ljusstyrkan hos en himlakropp ändras med tiden. Ur kurvans upprepningar kan man räkna ut till exempel hur fort en asteroid roterar.","former":["ljuskurva","ljuskurvan","ljuskurvor","ljuskurvorna"]},
   {"id":"rotationsbarriaren","term":"Rotationsbarriären","kort":"Den gräns på ungefär ett varv per 2,2 timmar som asteroider större än omkring 150 meter nästan aldrig roterar fortare än. Snurrar en lös grushög fortare slits den sönder.","former":["rotationsbarriären","rotationsbarriär","rotationsbarriärer"]},
   {"id":"yorp-effekten","term":"YORP-effekten","kort":"En liten vridande verkan från solljuset som under miljontals år kan få små asteroider att rotera fortare eller långsammare.","former":["yorp-effekten","yorp-effekt","yorp"]},

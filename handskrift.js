@@ -55754,6 +55754,1061 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
              ekvval: 1 };
   }
+  /* ==================================================================
+   * ── Ma3b 2.1–2.2 Linjär optimering ──
+   * Olikheter med två variabler, system av olikheter och hörnpunkts-
+   * metoden (ma3b-2.1, ma3b-2.2). Koordinatsystemen ritas med mkAxes(),
+   * gränslinjerna med linjal (streckade med linjalStreckad) och det
+   * tillåtna området skuggas med skuggaOmrade().
+   * ================================================================== */
+
+  /* STRECKAD LINJE MED LINJAL: som linjalStreck, men pennan drar korta
+   * streck längs linjalens kant (gränslinjen till en olikhet med < eller
+   * >, som inte hör till området). */
+  function linjalStreckad(acts, p0, p1, col) {
+    var lin = { ruler: 1, lagg: 1, x1: p0[0], y1: p0[1], x2: p1[0], y2: p1[1],
+                wins: [] };
+    acts.push({ kind: 'pause', ms: 150 });
+    acts.push({ kind: 'show', obj: lin });
+    acts.push({ kind: 'pause', ms: 1000 });
+    var dx = p1[0] - p0[0], dy = p1[1] - p0[1], L = Math.hypot(dx, dy) || 1;
+    var STR = 11, GAP = 7, t = 0;
+    while (t < L) {
+      var t1 = Math.min(L, t + STR);
+      acts.push({ kind: 'stroke', color: col || null, fart: 2.5,
+                  pts: [[p0[0] + dx * t / L, p0[1] + dy * t / L],
+                        [p0[0] + dx * t1 / L, p0[1] + dy * t1 / L]] });
+      t = t1 + GAP;
+    }
+    acts.push({ kind: 'pause', ms: 450 });
+    acts.push({ kind: 'hide', obj: lin });
+    acts.push({ kind: 'pause', ms: LAGG_PAUS });
+  }
+
+  /* SKUGGA ETT OMRÅDE: täta, tunna snedstreck i blått inom området som
+   * beskrivs av olikheterna villkor = [[a, b, c, '<='|'>='], …] (i
+   * koordinatsystemets enheter: a·x + b·y ≤ c) och ramen [x0, x1, y0, y1].
+   * Området klipps fram ur ramen halvplan för halvplan (Sutherland–
+   * Hodgman), och strecken ritas snabbt (fart) och ljust (sw, op), så att
+   * skuggningen inte tar över bilden eller tiden. Strecken märks ax: 1 så
+   * att tonaSkalvarden() aldrig räknar dem som en graf. */
+  function skuggaOmrade(T, A, villkor, ram) {
+    var poly = [[ram[0], ram[2]], [ram[1], ram[2]], [ram[1], ram[3]], [ram[0], ram[3]]];
+    villkor.forEach(function (v) {
+      var a = v[0], b = v[1], c = v[2];
+      if (v[3] === '>=') { a = -a; b = -b; c = -c; }
+      var ut = [];
+      for (var i = 0; i < poly.length; i++) {
+        var P = poly[i], Q = poly[(i + 1) % poly.length];
+        var pi = a * P[0] + b * P[1] <= c + 1e-9, qi = a * Q[0] + b * Q[1] <= c + 1e-9;
+        if (pi) ut.push(P);
+        if (pi !== qi) {
+          var t = (c - a * P[0] - b * P[1]) / (a * (Q[0] - P[0]) + b * (Q[1] - P[1]));
+          ut.push([P[0] + t * (Q[0] - P[0]), P[1] + t * (Q[1] - P[1])]);
+        }
+      }
+      poly = ut;
+    });
+    var pts = poly.map(function (p) { return [A.X(p[0]), A.Y(p[1])]; });
+    if (pts.length < 3) return;
+    /* streck längs linjerna x + y = k (på arket: snett uppåt åt höger) */
+    var kmin = Infinity, kmax = -Infinity;
+    pts.forEach(function (p) { kmin = Math.min(kmin, p[0] + p[1]); kmax = Math.max(kmax, p[0] + p[1]); });
+    var D = 11;
+    for (var k = kmin + D / 2; k < kmax; k += D) {
+      var hit = [];
+      for (var i = 0; i < pts.length; i++) {
+        var P = pts[i], Q = pts[(i + 1) % pts.length];
+        var fp = P[0] + P[1] - k, fq = Q[0] + Q[1] - k;
+        if ((fp <= 0 && fq > 0) || (fp > 0 && fq <= 0)) {
+          var s = fp / (fp - fq);
+          hit.push([P[0] + s * (Q[0] - P[0]), P[1] + s * (Q[1] - P[1])]);
+        }
+      }
+      if (hit.length < 2) continue;
+      hit.sort(function (u, v) { return u[0] - v[0]; });
+      var h0 = hit[0], h1 = hit[hit.length - 1];
+      if (Math.hypot(h1[0] - h0[0], h1[1] - h0[1]) < 6) continue;
+      /* en pixel in från kanten, så att strecken inte sticker ut */
+      var len = Math.hypot(h1[0] - h0[0], h1[1] - h0[1]);
+      var ex = (h1[0] - h0[0]) / len * 1.5, ey = (h1[1] - h0[1]) / len * 1.5;
+      T.acts.push({ kind: 'stroke', color: BLUE, sw: 0.55, op: 0.45, fart: 8, ax: 1,
+                    pts: [[h0[0] + ex, h0[1] + ey], [h1[0] - ex, h1[1] - ey]] });
+    }
+  }
+
+  /* LEDVIS ADDITION ELLER SUBTRAKTION av två ekvationer, uppställd som
+   * en räkneuppställning (samma utseende som additionsblock, men med
+   * valfritt tecken framför den nedre raden). */
+  function ledvisBlock(T, F, x0, y, rad1, rad2, resultat, tecken) {
+    var w;
+    T.str(rad1, x0 + 1.15 * F, y);
+    T.pause(240);
+    T.str(tecken || '+', x0, y + 2.2 * F);
+    T.str(rad2, x0 + 1.15 * F, y + 2.2 * F);
+    T.pause(240);
+    w = Math.max(T.adv(rad1), T.adv(rad2), T.adv(resultat)) + 1.5 * F;
+    T.acts.push({ kind: 'stroke', pts: humanize(
+      [[x0 - 4, y + 3.0 * F], [x0 + w, y + 3.0 * F]]) });
+    T.pause(240);
+    T.str(resultat, x0 + 1.15 * F, y + 4.4 * F);
+    return y + 4.4 * F;
+  }
+
+  /* torrsvep längs en sträcka i figuren (pekgest utan bläck) */
+  function svepa(T, p0, p1) {
+    T.acts.push({ kind: 'sweep', pts: humanize([p0, p1]) });
+    T.pause(200);
+  }
+
+  /* ---------------- scen: skärningspunkt (ma3b-2.1 ex 1) --------------
+   * a) 2x + y = 10 skrivs om till y = −2x + 10. b) Båda linjerna på
+   * formen y = kx + m; i skärningspunkten är y lika, så högerleden sätts
+   * lika med varandra. */
+  function layoutOptskarning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var X0 = padL + 30, XW = padL + 300;
+
+    y = 236;
+    T.str('a) Löser ut y', padL, y, null, 0.62);
+    y += 1.9 * F;
+    xx = T.str('2x+y=10', X0, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-2x', XW, '2x+y=10');
+    var yH1 = y;
+    var xH1 = T.str('y=', X0, y);
+    var xH1e = T.str('−2x+10', xH1, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: y=−2x+10', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('b) Skriver även den andra linjen på formen y=kx+m', padL, y, null, 0.62);
+    y += 1.9 * F;
+    T.str('x+y=7', X0, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-x', XW, 'x+y=7');
+    var yH2 = y;
+    var xH2 = T.str('y=', X0, y);
+    var xH2e = T.str('−x+7', xH2, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['I skärningspunkten har båda']],
+      [['linjerna samma y. Därför sätter']],
+      [['jag högerleden lika med varandra.']]
+    ]);
+    y += 3.4 * F;
+    /* ringarna kring de två högerleden, där de står */
+    var rh1 = T.ring(xH1, xH1e, yH1);
+    T.pause(280);
+    var rh2 = T.ring(xH2, xH2e, yH2);
+    T.pause(260);
+    T.str('Sätter högerleden lika', padL, y - 1.6 * F, null, 0.62);
+    T.str('−2x+10=−x+7', X0, y);
+    T.pause(220);
+    T.fade(rh1); T.fade(rh2);
+    T.stepEnd();
+
+    y = ekvOp(y, '+2x', XW, '−2x+10=−x+7');
+    T.str('10=x+7', X0, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-7', XW, '10=x+7');
+    var xTre = T.str('3', X0, y);
+    T.str('=x', xTre, y);
+    var yTre = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu sätter jag in x=3 i']],
+      [['y=−x+7 för att få y.']]
+    ]);
+    y += 2.8 * F;
+    var ra = T.ring(X0, xTre, yTre);
+    T.pause(260);
+    var rb = T.ring(xH2 + T.adv('−'), xH2 + T.adv('−x'), yH2);
+    T.pause(260);
+    T.str('y=−3+7=4', X0, y);
+    T.pause(200);
+    T.fade(ra); T.fade(rb);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('Kontroll i 2x+y=10', padL, y - 1.6 * F, null, 0.62);
+    T.str('2·3+4=10', X0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det stämmer, så punkten ligger']],
+      [['på båda linjerna.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: (3, 4)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: rita en olikhet (ma3b-2.1 ex 2) -------------
+   * x + 2y < 6 skrivs om till y < −0,5x + 3. Gränslinjen ritas streckad
+   * (tecknet <), testpunkten origo avgör sidan och området skuggas.
+   * Ritningsuppgift: ingen svarsrad. */
+  function layoutOpthalvplan(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var X0 = padL + 30, XW = padL + 300;
+
+    y = 76;
+    T.str('Löser ut y ur olikheten', padL, y, null, 0.62);
+    y += 1.9 * F;
+    T.str('x+2y<6', X0, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-x', XW, 'x+2y<6');
+    T.str('2y<−x+6', X0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag delar båda led med 2. Det är']],
+      [['ett positivt tal, så tecknet']],
+      [['behåller sin riktning.']]
+    ]);
+    y = ekvOp(y, '/2', XW, '2y<−x+6',
+              { dyRes: 3.0, dyVagg: 2.4 });
+    T.str('y<−0,5x+3', X0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Gränslinjen är y=−0,5x+3. Den']],
+      [['skär y-axeln i 3 och går ett']],
+      [['steg ned för två steg åt höger.']]
+    ]);
+    var A = mkAxes(T, F, { ox: padL + 78, oy: y + 300, u: 54,
+                           xmin: -1, xmax: 7, ymin: -1, ymax: 4 });
+    A.axes();
+    A.ticks(heltal(-1, 7), heltal(-1, 4));
+    T.stepEnd();
+
+    A.dot(0, 3, BLUE);
+    T.pause(200);
+    A.stair(0, 3, 2, 2, '2', '1');
+    T.pause(200);
+    A.dot(2, 2, BLUE);
+    T.stepEnd();
+
+    var yFig = A.Y(-1) + 1.4 * F;
+    T.tanke(T.bubble(120, yFig + 33, 268, [
+      [['Tecknet är <, så linjen hör inte']],
+      [['till området. Den ritas streckad.']]
+    ]));
+    linjalStreckad(acts, [A.X(-1), A.Y(3.5)], [A.X(7), A.Y(-0.5)], BLUE);
+    T.str('x+2y=6', A.X(4.3), A.Y(1.15) - 6, BLUE, 0.5);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, yFig + 33, 268, [
+      [['Jag prövar med origo, som inte']],
+      [['ligger på linjen.']]
+    ]));
+    A.dot(0, 0);
+    y = yFig + 1.0 * F;
+    T.str('Testpunkt (0, 0):', padL, y, null, 0.62);
+    T.str('0+2·0=0<6', padL + 215, y, null, 0.8);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, y + 0.28 * F + 33, 268, [
+      [['Det stämmer, så origo ligger i']],
+      [['området. Jag skuggar den sida av']],
+      [['linjen där origo ligger.']]
+    ]));
+    skuggaOmrade(T, A, [[1, 2, 6, '<=']], [-1, 7, -1, 4]);
+    T.stepEnd();
+
+    /* "Rita": lösningen slutar när området är skuggat (ingen svarsrad) */
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: område och hörnpunkter (ma3b-2.1 ex 3) ------
+   * x ≥ 0, y ≥ 0, x + 2y ≤ 8, 3x + y ≤ 9. Linjerna ritas genom sina
+   * skärningspunkter med axlarna; det fjärde hörnet beräknas med
+   * additionsmetoden (multiplicera (1) med 3, subtrahera (2)). */
+  function layoutOptsystem(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var X0 = padL + 30;
+
+    tanke(20, [
+      [['a) Jag ritar varje linje genom']],
+      [['punkterna där den skär axlarna:']],
+      [['sätt x=0, sedan y=0.']]
+    ], 0);
+    y = 290;
+    T.str('a) Gränslinjernas skärning med axlarna', padL, y - 1.7 * F, null, 0.62);
+    T.str('x+2y=8:', X0, y, null, 0.8);
+    T.str('x=0 ger y=4,  y=0 ger x=8', X0 + 175, y, null, 0.8);
+    T.stepEnd();
+
+    y += 2.0 * F;
+    T.str('3x+y=9:', X0, y, null, 0.8);
+    T.str('x=0 ger y=9,  y=0 ger x=3', X0 + 175, y, null, 0.8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Alla tecken är ≤ eller ≥, så alla']],
+      [['gränslinjer ritas heldragna.']]
+    ]);
+    var A = mkAxes(T, F, { ox: padL + 51, oy: y + 560, u: 54,
+                           xmin: 0, xmax: 8, ymin: 0, ymax: 9 });
+    A.axes();
+    A.ticks(heltal(1, 8), heltal(1, 9));
+    T.stepEnd();
+
+    A.dot(0, 4, BLUE); A.dot(8, 0, BLUE);
+    T.pause(200);
+    A.linjal([A.X(-0.3), A.Y(4.15)], [A.X(8.4), A.Y(-0.2)], BLUE);
+    T.str('x+2y=8', A.X(5.2), A.Y(1.4) - 8, BLUE, 0.5);
+    T.stepEnd();
+
+    A.dot(0, 9, BLUE); A.dot(3, 0, BLUE);
+    T.pause(200);
+    A.linjal([A.X(-0.1), A.Y(9.3)], [A.X(3.1), A.Y(-0.3)], BLUE);
+    T.str('3x+y=9', A.X(1.15), A.Y(6.6), BLUE, 0.5);
+    T.stepEnd();
+
+    var yFig = A.Y(0) + 1.4 * F;
+    T.tanke(T.bubble(120, yFig + 33, 268, [
+      [['Origo uppfyller båda: 0≤8 och']],
+      [['0≤9. Med x≥0 och y≥0 ligger']],
+      [['området i första kvadranten.']]
+    ]));
+    skuggaOmrade(T, A, [[1, 2, 8, '<='], [3, 1, 9, '<='], [1, 0, 0, '>='], [0, 1, 0, '>=']],
+                 [0, 8, 0, 9]);
+    T.stepEnd();
+
+    y = yFig + 2.6 * F;
+    T.str('b) Tre hörn ligger på axlarna', padL, y - 1.6 * F, null, 0.62);
+    A.dot(0, 0); A.dot(3, 0); A.dot(0, 4);
+    A.tag(3, 0, '(3, 0)', 8, -10);
+    A.tag(0, 4, '(0, 4)', 10, -12);
+    T.str('(0, 0), (3, 0), (0, 4)', X0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det fjärde hörnet är skärningen']],
+      [['mellan de sneda linjerna. Jag']],
+      [['löser ekvationssystemet.']]
+    ]);
+    y += 3.4 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    var xE1 = xx;
+    var x1e = T.str('x+2y=8', xx, y);
+    T.str('(1)', x1e + 1.2 * F, y, null, 0.62);
+    var yE1 = y;
+    T.pause(240);
+    xx = T.str('3x+y=9', xx, y + 2.4 * F);
+    T.str('(2)', xx + 1.2 * F, y + 2.4 * F, null, 0.62);
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['Gånger 3 i (1) ger termen 3x i']],
+      [['båda. Subtraherar jag sedan (2)']],
+      [['tar x-termerna ut varandra.']]
+    ]);
+    y += 6.4 * F;
+    T.str('(1)·3:', padL, y, null, 0.62);
+    T.pause(220);
+    T.str('3x+6y=24', padL + 100, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    y = ledvisBlock(T, F, padL + 20, y, '3x+6y=24', '3x+y=9', '5y=15', '−');
+    T.stepEnd();
+
+    y = ekvOp(y, '/5', padL + 330, '5y=15',
+              { dyRes: 3.0, dyVagg: 2.4 });
+    var xY3 = T.str('y=', X0, y);
+    var xY3e = T.str('3', xY3, y);
+    var yY3 = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag sätter in y=3 i (1).']]
+    ]);
+    y += 2.8 * F;
+    var ra = T.ring(xY3, xY3e, yY3);
+    T.pause(260);
+    var yPos = xE1 + T.adv('x+2');
+    var rb = T.ring(yPos, yPos + T.adv('y'), yE1);
+    T.pause(260);
+    T.str('x+2·3=8', X0, y);
+    T.pause(200);
+    T.fade(ra); T.fade(rb);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    T.str('x+6=8', X0, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '-6', padL + 330, 'x+6=8');
+    T.str('x=2', X0, y);
+    A.dot(2, 3);
+    A.tag(2, 3, '(2, 3)', 12, -8);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt: punkten (2, 3) ligger']],
+      [['precis där linjerna korsar']],
+      [['varandra i figuren.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: (0, 0), (3, 0), (2, 3) och (0, 4)', padL, y, null, 0.86);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: bestäm olikheterna (ma3b-2.1 ex 4) ----------
+   * Figuren är given (förritad). Varje gränslinje sveps med pennan,
+   * dess ekvation bestäms och sidan avgörs; den sneda linjens k och m
+   * läses av med ett trappsteg. */
+  function layoutOptbestamolikheter(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var X0 = padL + 30;
+    var A = mkAxes(T, F, { ox: padL + 105, oy: 460, u: 54,
+                           xmin: -1, xmax: 6, ymin: -1, ymax: 5 });
+    forritad(T, function () {
+      A.axes();
+      A.ticks(heltal(-1, 6), heltal(-1, 5));
+      A.rule([A.X(1), A.Y(-1.4)], [A.X(1), A.Y(5.4)]);
+      A.rule([A.X(0), A.Y(4)], [A.X(6.3), A.Y(4)]);
+      var p0 = [A.X(-0.4), A.Y(-1.4)], p1 = [A.X(6.3), A.Y(5.3)];
+      var dx = p1[0] - p0[0], dy = p1[1] - p0[1], L = Math.hypot(dx, dy), t = 0;
+      while (t < L) {
+        var t1 = Math.min(L, t + 11);
+        acts.push({ kind: 'stroke', pts: [[p0[0] + dx * t / L, p0[1] + dy * t / L],
+                                           [p0[0] + dx * t1 / L, p0[1] + dy * t1 / L]] });
+        t = t1 + 7;
+      }
+      skuggaOmrade(T, A, [[1, 0, 1, '>='], [0, 1, 4, '<='], [-1, 1, -1, '>=']],
+                   [-1, 6, -1, 5]);
+    });
+    var yFig = A.Y(-1) + 1.4 * F;
+    function bub(rader) { T.tanke(T.bubble(120, yFig + 33, 268, rader)); }
+
+    bub([
+      [['Den lodräta linjen går genom 1']],
+      [['på x-axeln. Den är heldragen,']],
+      [['och området ligger till höger.']]
+    ]);
+    svepa(T, [A.X(1), A.Y(5.2)], [A.X(1), A.Y(-1.2)]);
+    y = yFig + 2.4 * F;
+    T.str('Lodräta linjen x=1, heldragen, området till höger', padL, y - 1.6 * F, null, 0.62);
+    T.str('x≥1', X0, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, y + 0.28 * F + 33, 268, [
+      [['Den vågräta linjen går genom 4']],
+      [['på y-axeln. Den är heldragen,']],
+      [['och området ligger under den.']]
+    ]));
+    svepa(T, [A.X(0), A.Y(4)], [A.X(6.2), A.Y(4)]);
+    y += 2.8 * F;
+    T.str('Vågräta linjen y=4, heldragen, området under', padL, y - 1.6 * F, null, 0.62);
+    T.str('y≤4', X0, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, y + 0.28 * F + 33, 268, [
+      [['Den sneda linjen skär y-axeln i']],
+      [['−1. Ett steg åt höger ger ett']],
+      [['steg uppåt, så k=1.']]
+    ]));
+    A.dot(0, -1, BLUE);
+    T.pause(200);
+    A.stair(0, -1, 1, 0, '1', '1');
+    T.pause(200);
+    y += 2.8 * F;
+    T.str('Sneda linjen: m=−1 och k=1', padL, y - 1.6 * F, null, 0.62);
+    T.str('y=x−1', X0, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, y + 0.28 * F + 33, 268, [
+      [['Den är streckad, så linjen hör']],
+      [['inte till området, och området']],
+      [['ligger ovanför den.']]
+    ]));
+    y += 2.8 * F;
+    T.str('Streckad, området ovanför', padL, y - 1.6 * F, null, 0.62);
+    T.str('y>x−1', X0, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, y + 0.28 * F + 33, 268, [
+      [['Kontroll med punkten (2, 2), som']],
+      [['ligger inne i området.']]
+    ]));
+    A.dot(2, 2);
+    y += 2.8 * F;
+    T.str('Kontroll med (2, 2)', padL, y - 1.6 * F, null, 0.62);
+    T.str('2≥1,   2≤4,   2>2−1', X0, y);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    xx = T.str('Svar:', padL, y);
+    xx = systemKlammer(T, F, xx + 0.4 * F, y - 1.0 * F, y + 5.4 * F);
+    T.str('x≥1', xx, y);
+    T.pause(200);
+    T.str('y≤4', xx, y + 2.2 * F);
+    T.pause(200);
+    T.str('y>x−1', xx, y + 4.4 * F);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 5.4 * F, padL: padL };
+  }
+
+  /* HÖRNPUNKTSTABELL: för varje hörn ringas dess koordinater in i
+   * figuren och målfunktionen i rubrikraden (REGEL INSÄTTNING), och
+   * raden "(x, y):  V=400·x+500·y=…" skrivs. Ett klicksteg per hörn.
+   * horn = [{ p: [x, y], tag: [x0, x1, yb] (taggens läge i figuren),
+   * rad: '400·6+500·4=4 400' }]. fx = [x0, x1, yb] för målfunktionen.
+   * Returnerar y för sista raden och raderna med värdenas x-gränser. */
+  function hornTabell(T, F, y0, fx, horn, xRad) {
+    var y = y0, ut = [];
+    horn.forEach(function (h, i) {
+      if (i) y += 2.2 * F;
+      var r1 = T.ring(h.tag[0], h.tag[1], h.tag[2], { ry: 0.42 * F, cy: h.tag[2] - 0.2 * F });
+      T.pause(240);
+      var r2 = T.ring(fx[0], fx[1], fx[2]);
+      T.pause(240);
+      var xp = T.str('(' + h.p[0] + ', ' + h.p[1] + '):', T.padL, y, null, 0.8);
+      var xs = T.str(h.rad, xRad, y, null, 0.8);
+      var xv = xs - T.adv(h.varde, 0.8);
+      ut.push({ y: y, x0: xv, x1: xs });
+      T.pause(200);
+      T.fade(r1); T.fade(r2);
+      T.stepEnd();
+    });
+    return { y: y, rader: ut };
+  }
+
+  /* ---------------- scen: största och minsta värde (ma3b-2.2 ex 1) ----
+   * Området och hörnen är givna (förritade). z = 2x + 3y beräknas i varje
+   * hörn; det största och det minsta värdet ringas in. */
+  function layoutOpthorn(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var A = mkAxes(T, F, { ox: padL + 105, oy: 340, u: 54,
+                           xmin: 0, xmax: 6, ymin: 0, ymax: 5 });
+    var tags = {};
+    function tagg(x, y, txt, dx, dy) {
+      var x0 = A.X(x) + dx, yb = A.Y(y) + dy;
+      var x1 = A.tag(x, y, txt, dx, dy, '#c8324a');
+      tags[x + ',' + y] = [x0, x1, yb];
+    }
+    forritad(T, function () {
+      A.axes();
+      A.ticks(heltal(1, 6), heltal(1, 5));
+      skuggaOmrade(T, A, [[1, 1, 5, '<='], [1, 3, 9, '<='], [1, 0, 0, '>='], [0, 1, 0, '>=']],
+                   [0, 6, 0, 5]);
+      A.rule([A.X(-0.3), A.Y(5.3)], [A.X(5.4), A.Y(-0.4)], BLUE);
+      A.rule([A.X(-0.3), A.Y(3.1)], [A.X(6.4), A.Y(0.87)], BLUE);
+      [[0, 0], [5, 0], [3, 2], [0, 3]].forEach(function (p) { A.dot(p[0], p[1], '#c8324a'); });
+      tagg(0, 0, '(0, 0)', -50, 24);
+      tagg(5, 0, '(5, 0)', 8, -10);
+      tagg(3, 2, '(3, 2)', 10, -10);
+      tagg(0, 3, '(0, 3)', 10, -12);
+    });
+
+    var yFig = A.Y(0) + 1.6 * F;
+    T.tanke(T.bubble(120, yFig + 33, 268, [
+      [['Det största och det minsta värdet']],
+      [['finns i något av hörnen. Jag']],
+      [['räknar ut z i alla fyra.']]
+    ]));
+    y = yFig + 1.4 * F;
+    var fx0 = padL;
+    var fx1 = T.str('z=2x+3y', padL, y);
+    var fxR = [fx0, fx1, y];
+    T.stepEnd();
+
+    var X2 = padL + 140;
+    var tab = hornTabell(T, F, y + 2.4 * F, fxR, [
+      { p: [0, 0], tag: tags['0,0'], rad: 'z=2·0+3·0=0', varde: '0' },
+      { p: [5, 0], tag: tags['5,0'], rad: 'z=2·5+3·0=10', varde: '10' },
+      { p: [3, 2], tag: tags['3,2'], rad: 'z=2·3+3·2=12', varde: '12' },
+      { p: [0, 3], tag: tags['0,3'], rad: 'z=2·0+3·3=9', varde: '9' }
+    ], X2);
+    y = tab.y;
+
+    T.tanke(T.bubble(120, y + 0.28 * F + 33, 268, [
+      [['Jag jämför: störst är 12 i (3, 2)']],
+      [['och minst är 0 i origo.']]
+    ]));
+    var rMax = T.ring(tab.rader[2].x0, tab.rader[2].x1, tab.rader[2].y);
+    T.pause(300);
+    var rMin = T.ring(tab.rader[0].x0, tab.rader[0].x1, tab.rader[0].y);
+    T.pause(300);
+    y += 2.8 * F;
+    T.str('Svar: Största värdet är 12', padL, y);
+    y += 2.0 * F;
+    xe = T.str('och minsta värdet är 0', padL + 30, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: störst vinst (ma3b-2.2 ex 2) ----------------
+   * Möbelsnickaren: a) variabler, bivillkor och målfunktion; b) området
+   * ritas, det fjärde hörnet beräknas (2·(2) subtraheras från (1)) och
+   * vinsten jämförs i hörnen. */
+  function layoutOptmobler(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var X0 = padL + 30;
+
+    y = 236;
+    T.str('a) Inför variabler', padL, y, null, 0.62);
+    y += 1.7 * F;
+    T.str('x = antal stolar per vecka', X0, y, null, 0.8);
+    T.pause(240);
+    T.str('y = antal bord per vecka', X0, y + 1.5 * F, null, 0.8);
+    y += 1.5 * F;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Stolarna tar 2x timmar och borden']],
+      [['3y timmar snickeri, högst 24 h.']],
+      [['Målningen tar x+y timmar, högst']],
+      [['10 h. Antal kan inte vara negativa.']]
+    ], 0.3);
+    y += 3.4 * F;
+    T.str('Bivillkor', padL, y - 1.6 * F, null, 0.62);
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 7.6 * F);
+    T.str('x≥0', xx, y);
+    T.pause(200);
+    T.str('y≥0', xx, y + 2.2 * F);
+    T.pause(200);
+    var yB1 = y + 4.4 * F;
+    var xB1 = T.str('2x+3y≤24', xx, yB1);
+    T.str('(snickeri)', xB1 + 0.6 * F, yB1, null, 0.6);
+    T.pause(200);
+    var xB2 = T.str('x+y≤10', xx, y + 6.6 * F);
+    T.str('(målning)', xB2 + 0.6 * F, y + 6.6 * F, null, 0.6);
+    var xK = xx;
+    T.stepEnd();
+
+    y += 10.6 * F;
+    T.str('Målfunktion: vinsten i kronor', padL, y - 1.6 * F, null, 0.62);
+    var xV0 = X0;
+    var xV1 = T.str('V=400x+500y', X0, y);
+    var yV = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['b) Jag ritar linjerna genom']],
+      [['deras skärningspunkter med']],
+      [['axlarna: 2x+3y=24 genom (0, 8)']],
+      [['och (12, 0), x+y=10 genom (0, 10)']],
+      [['och (10, 0).']]
+    ]);
+    var A = mkAxes(T, F, { ox: padL + 78, oy: y + 400, u: 27,
+                           xmin: 0, xmax: 12, ymin: 0, ymax: 10 });
+    A.axes();
+    A.ticks(heltal(1, 12), heltal(1, 10), [2, 4, 6, 8, 12], [2, 4, 6, 10]);
+    T.stepEnd();
+
+    A.dot(0, 8, BLUE); A.dot(12, 0, BLUE);
+    T.pause(200);
+    A.linjal([A.X(-0.3), A.Y(8.2)], [A.X(12.4), A.Y(-0.27)], BLUE);
+    T.pause(200);
+    A.dot(0, 10, BLUE); A.dot(10, 0, BLUE);
+    T.pause(200);
+    A.linjal([A.X(-0.3), A.Y(10.3)], [A.X(10.3), A.Y(-0.3)], BLUE);
+    T.str('2x+3y=24', A.X(8.4), A.Y(3.0) - 4, BLUE, 0.5);
+    T.str('x+y=10', A.X(3.6), A.Y(7.2), BLUE, 0.5);
+    T.stepEnd();
+
+    var yFig = A.Y(0) + 1.4 * F;
+    T.tanke(T.bubble(120, yFig + 33, 268, [
+      [['Origo uppfyller båda olikheterna,']],
+      [['så området ligger under båda']],
+      [['linjerna i första kvadranten.']]
+    ]));
+    skuggaOmrade(T, A, [[2, 3, 24, '<='], [1, 1, 10, '<='], [1, 0, 0, '>='], [0, 1, 0, '>=']],
+                 [0, 12, 0, 10]);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, yFig + 33, 268, [
+      [['Tre hörn ligger på axlarna. Det']],
+      [['fjärde är skärningen mellan de']],
+      [['sneda linjerna.']]
+    ]));
+    y = yFig + 3.2 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    var x1e = T.str('2x+3y=24', xx, y);
+    T.str('(1)', x1e + 1.2 * F, y, null, 0.62);
+    T.pause(240);
+    var xE2 = xx;
+    var x2e = T.str('x+y=10', xx, y + 2.4 * F);
+    T.str('(2)', x2e + 1.2 * F, y + 2.4 * F, null, 0.62);
+    var yE2 = y + 2.4 * F;
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['Gånger 2 i (2) ger 2x i båda.']],
+      [['Subtraherar jag den från (1)']],
+      [['försvinner x.']]
+    ]);
+    y += 6.4 * F;
+    T.str('(2)·2:', padL, y, null, 0.62);
+    T.pause(220);
+    T.str('2x+2y=20', padL + 100, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    y = ledvisBlock(T, F, padL + 20, y, '2x+3y=24', '2x+2y=20', 'y=4', '−');
+    var xY4 = padL + 20 + 1.15 * F + T.adv('y='), yY4 = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag sätter in y=4 i (2).']]
+    ]);
+    y += 2.8 * F;
+    var ra = T.ring(xY4, xY4 + T.adv('4'), yY4);
+    T.pause(260);
+    var yp = xE2 + T.adv('x+');
+    var rb = T.ring(yp, yp + T.adv('y'), yE2);
+    T.pause(260);
+    T.str('x+4=10', X0, y);
+    T.pause(200);
+    T.fade(ra); T.fade(rb);
+    T.stepEnd();
+
+    y = ekvOp(y, '-4', padL + 330, 'x+4=10');
+    T.str('x=6', X0, y);
+    T.stepEnd();
+
+    /* hörnen märks i figuren */
+    var tags = {};
+    function tagg(x, yy, txt, dx, dy) {
+      var x0 = A.X(x) + dx, yb = A.Y(yy) + dy;
+      var x1 = A.tag(x, yy, txt, dx, dy, '#c8324a');
+      tags[x + ',' + yy] = [x0, x1, yb];
+    }
+    [[0, 0], [10, 0], [6, 4], [0, 8]].forEach(function (p) { A.dot(p[0], p[1], '#c8324a'); });
+    tagg(0, 0, '(0, 0)', -50, 24);
+    tagg(10, 0, '(10, 0)', -24, 24);
+    tagg(6, 4, '(6, 4)', -70, 26);
+    tagg(0, 8, '(0, 8)', -64, 5);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, y + 0.28 * F + 33, 268, [
+      [['Nu räknar jag ut vinsten i varje']],
+      [['hörn.']]
+    ]));
+    var tab = hornTabell(T, F, y + 2.8 * F, [xV0, xV1, yV], [
+      { p: [0, 0], tag: tags['0,0'], rad: 'V=400·0+500·0=0', varde: '0' },
+      { p: [10, 0], tag: tags['10,0'], rad: 'V=400·10+500·0=4 000', varde: '4 000' },
+      { p: [6, 4], tag: tags['6,4'], rad: 'V=400·6+500·4=4 400', varde: '4 400' },
+      { p: [0, 8], tag: tags['0,8'], rad: 'V=400·0+500·8=4 000', varde: '4 000' }
+    ], padL + 118);
+    y = tab.y;
+
+    T.tanke(T.bubble(120, y + 0.28 * F + 33, 268, [
+      [['Störst är 4 400 kr i (6, 4).']],
+      [['Rimligt: där används både']],
+      [['snickeri- och målningstiden fullt.']]
+    ]));
+    var rMax = T.ring(tab.rader[2].x0, tab.rader[2].x1, tab.rader[2].y);
+    T.pause(300);
+    y += 2.8 * F;
+    T.str('Svar: 6 stolar och 4 bord,', padL, y);
+    y += 2.0 * F;
+    xe = T.str('vinsten blir 4 400 kr per vecka', padL + 30, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: lägsta kostnad (ma3b-2.2 ex 3) --------------
+   * Bussarna: bivillkoret 30x + 50y ≥ 300 ger området OVANFÖR linjen
+   * (testpunkten origo stämmer inte). Tredje hörnet med 30·(2) − (1). */
+  function layoutOptbussar(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var X0 = padL + 30;
+
+    y = 236;
+    T.str('Inför variabler', padL, y, null, 0.62);
+    y += 1.7 * F;
+    T.str('x = antal små bussar', X0, y, null, 0.8);
+    T.pause(240);
+    T.str('y = antal stora bussar', X0, y + 1.5 * F, null, 0.8);
+    y += 1.5 * F;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Platserna 30x+50y måste räcka']],
+      [['till minst 300 personer, och']],
+      [['högst 8 bussar kan hyras.']]
+    ], 0.3);
+    y += 3.4 * F;
+    T.str('Bivillkor', padL, y - 1.6 * F, null, 0.62);
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 7.6 * F);
+    T.str('x≥0', xx, y);
+    T.pause(200);
+    T.str('y≥0', xx, y + 2.2 * F);
+    T.pause(200);
+    var xB1 = T.str('30x+50y≥300', xx, y + 4.4 * F);
+    T.str('(platser)', xB1 + 0.6 * F, y + 4.4 * F, null, 0.6);
+    T.pause(200);
+    var xB2 = T.str('x+y≤8', xx, y + 6.6 * F);
+    T.str('(förare)', xB2 + 0.6 * F, y + 6.6 * F, null, 0.6);
+    T.stepEnd();
+
+    y += 10.6 * F;
+    T.str('Målfunktion: kostnaden i kronor (minimeras)', padL, y - 1.6 * F, null, 0.62);
+    var xK0 = X0;
+    var xK1 = T.str('K=2 000x+4 000y', X0, y);
+    var yK = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['30x+50y=300 går genom (0, 6)']],
+      [['och (10, 0). x+y=8 går genom']],
+      [['(0, 8) och (8, 0).']]
+    ]);
+    var A = mkAxes(T, F, { ox: padL + 51, oy: y + 560, u: 54,
+                           xmin: 0, xmax: 10, ymin: 0, ymax: 8 });
+    A.axes();
+    A.ticks(heltal(1, 10), heltal(1, 8), [2, 4, 6, 8, 10], [2, 4]);
+    T.stepEnd();
+
+    A.dot(0, 6, BLUE); A.dot(10, 0, BLUE);
+    T.pause(200);
+    A.linjal([A.X(-0.3), A.Y(6.18)], [A.X(10.4), A.Y(-0.24)], BLUE);
+    T.pause(200);
+    A.dot(0, 8, BLUE); A.dot(8, 0, BLUE);
+    T.pause(200);
+    A.linjal([A.X(-0.3), A.Y(8.3)], [A.X(8.3), A.Y(-0.3)], BLUE);
+    T.str('30x+50y=300', A.X(6.6), A.Y(2.6) - 4, BLUE, 0.5);
+    T.str('x+y=8', A.X(3.0), A.Y(5.7), BLUE, 0.5);
+    T.stepEnd();
+
+    var yFig = A.Y(0) + 1.4 * F;
+    T.tanke(T.bubble(120, yFig + 33, 268, [
+      [['Origo: 0≥300 stämmer inte. Alltså']],
+      [['ligger området OVANFÖR den första']],
+      [['linjen, men under x+y=8.']]
+    ]));
+    skuggaOmrade(T, A, [[30, 50, 300, '>='], [1, 1, 8, '<='], [1, 0, 0, '>='], [0, 1, 0, '>=']],
+                 [0, 10, 0, 8]);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, yFig + 33, 268, [
+      [['Två hörn ligger på y-axeln:']],
+      [['(0, 6) och (0, 8). Det tredje är']],
+      [['skärningen mellan linjerna.']]
+    ]));
+    y = yFig + 3.2 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 3.0 * F);
+    var x1e = T.str('30x+50y=300', xx, y);
+    T.str('(1)', x1e + 1.2 * F, y, null, 0.62);
+    T.pause(240);
+    var xE2 = xx;
+    var x2e = T.str('x+y=8', xx, y + 2.4 * F);
+    T.str('(2)', x2e + 1.2 * F, y + 2.4 * F, null, 0.62);
+    var yE2 = y + 2.4 * F;
+    T.stepEnd();
+
+    tanke(y + 2.4 * F, [
+      [['Gånger 30 i (2) ger 30x i båda.']],
+      [['Sedan subtraherar jag den från']],
+      [['(1).']]
+    ]);
+    y += 6.4 * F;
+    T.str('(2)·30:', padL, y, null, 0.62);
+    T.pause(220);
+    T.str('30x+30y=240', padL + 100, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    y = ledvisBlock(T, F, padL + 20, y, '30x+50y=300', '30x+30y=240', '20y=60', '−');
+    T.stepEnd();
+
+    y = ekvOp(y, '/20', padL + 360, '20y=60',
+              { dyRes: 3.0, dyVagg: 2.4 });
+    var xY = T.str('y=', X0, y);
+    var xYe = T.str('3', xY, y);
+    var yY = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag sätter in y=3 i (2).']]
+    ]);
+    y += 2.8 * F;
+    var ra = T.ring(xY, xYe, yY);
+    T.pause(260);
+    var yp = xE2 + T.adv('x+');
+    var rb = T.ring(yp, yp + T.adv('y'), yE2);
+    T.pause(260);
+    T.str('x+3=8', X0, y);
+    T.pause(200);
+    T.fade(ra); T.fade(rb);
+    T.stepEnd();
+
+    y = ekvOp(y, '-3', padL + 330, 'x+3=8');
+    T.str('x=5', X0, y);
+    T.stepEnd();
+
+    var tags = {};
+    function tagg(x, yy, txt, dx, dy) {
+      var x0 = A.X(x) + dx, yb = A.Y(yy) + dy;
+      var x1 = A.tag(x, yy, txt, dx, dy, '#c8324a');
+      tags[x + ',' + yy] = [x0, x1, yb];
+    }
+    [[0, 6], [0, 8], [5, 3]].forEach(function (p) { A.dot(p[0], p[1], '#c8324a'); });
+    tagg(0, 6, '(0, 6)', 10, -14);
+    tagg(0, 8, '(0, 8)', 10, -10);
+    tagg(5, 3, '(5, 3)', -72, 26);
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, y + 0.28 * F + 33, 268, [
+      [['Nu räknar jag ut kostnaden i']],
+      [['varje hörn.']]
+    ]));
+    var tab = hornTabell(T, F, y + 2.8 * F, [xK0, xK1, yK], [
+      { p: [0, 6], tag: tags['0,6'], rad: 'K=2 000·0+4 000·6=24 000', varde: '24 000' },
+      { p: [0, 8], tag: tags['0,8'], rad: 'K=2 000·0+4 000·8=32 000', varde: '32 000' },
+      { p: [5, 3], tag: tags['5,3'], rad: 'K=2 000·5+4 000·3=22 000', varde: '22 000' }
+    ], padL + 118);
+    y = tab.y;
+
+    T.tanke(T.bubble(120, y + 0.28 * F + 33, 268, [
+      [['Lägst är 22 000 kr i (5, 3). Små']],
+      [['bussar är billigare per plats, så']],
+      [['det är rimligt att ta så många']],
+      [['som förarna räcker till.']]
+    ]));
+    T.ring(tab.rader[2].x0, tab.rader[2].x1, tab.rader[2].y);
+    T.pause(300);
+    y += 2.8 * F;
+    T.str('Svar: 5 små och 3 stora bussar,', padL, y);
+    y += 2.0 * F;
+    xe = T.str('som kostar 22 000 kr', padL + 30, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: två hörn ger samma vinst (ma3b-2.2 ex 4) ----
+   * V = 400x + 600y ger 4 800 kr i både (6, 4) och (0, 8). Hela kanten
+   * 2x + 3y = 24 emellan är lika bra; heltalspunkterna söks med
+   * y = (24 − 2x)/3. */
+  function layoutOptkant(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T);
+    var X0 = padL + 30, X2 = padL + 140;
+
+    y = 76;
+    T.str('Målfunktion med det nya priset', padL, y, null, 0.62);
+    y += 1.9 * F;
+    var xV1 = T.str('V=400x+600y', X0, y);
+    var yV = y;
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag räknar ut vinsten i de fyra']],
+      [['hörnen, som är givna.']]
+    ]);
+    var rader = [
+      ['(0, 0):', 'V=400·0+600·0=0', '0'],
+      ['(10, 0):', 'V=400·10+600·0=4 000', '4 000'],
+      ['(6, 4):', 'V=400·6+600·4=4 800', '4 800'],
+      ['(0, 8):', 'V=400·0+600·8=4 800', '4 800']
+    ];
+    var pos = [];
+    rader.forEach(function (r, i) {
+      y += (i ? 2.2 : 2.6) * F;
+      T.str(r[0], padL, y, null, 0.8);
+      var xs = T.str(r[1], X2, y, null, 0.9);
+      pos.push([xs - T.adv(r[2], 0.9), xs, y]);
+      T.stepEnd();
+    });
+
+    tanke(y, [
+      [['Två hörn ger samma största']],
+      [['vinst, 4 800 kr.']]
+    ]);
+    var r1 = T.ring(pos[2][0], pos[2][1], pos[2][2]);
+    T.pause(280);
+    var r2 = T.ring(pos[3][0], pos[3][1], pos[3][2]);
+    T.pause(280);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Då ger hela kanten mellan (6, 4)']],
+      [['och (0, 8) samma vinst. Kanten']],
+      [['ligger på linjen 2x+3y=24.']]
+    ]);
+    T.fade(r1); T.fade(r2);
+    y += 3.8 * F;
+    T.str('Kanten mellan (6, 4) och (0, 8)', padL, y - 1.6 * F, null, 0.62);
+    T.str('2x+3y=24', X0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Antalet måste vara heltal. Jag']],
+      [['löser ut y och prövar x från 0']],
+      [['till 6.']]
+    ]);
+    y += 3.6 * F;
+    var xx = T.str('y=', X0, y);
+    T.fracH('24−2x', '3', xx, y);
+    T.stepEnd();
+
+    var prov = [['x=0:', 'y=8'], ['x=3:', 'y=6'], ['x=6:', 'y=4']];
+    y += 1.4 * F;
+    prov.forEach(function (p) {
+      y += 2.2 * F;
+      T.str(p[0], X0, y, null, 0.9);
+      T.str(p[1], X0 + 110, y, null, 0.9);
+      T.stepEnd();
+    });
+
+    tanke(y, [
+      [['För x=1, 2, 4 och 5 blir y inget']],
+      [['heltal. Kontroll av (3, 6):']],
+      [['400·3+600·6=4 800.']]
+    ]);
+    y += 2.8 * F;
+    T.str('Svar: 4 800 kr med 0 stolar och 8 bord,', padL, y, null, 0.8);
+    y += 1.8 * F;
+    xe = T.str('3 stolar och 6 bord eller 6 stolar och 4 bord', padL, y, null, 0.8);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
 
   /* ---------------- scen: kvadreringsreglerna (ma2c-2.1 ex 1) -------
    * Mittentermen är den DUBBLA produkten — det är den som glöms bort. */
@@ -56183,7 +57238,7 @@
     T.stepEnd();
 
     y = ekvOp(y, '/3', xx + 0.6 * F, '3x^2-15x+18=0',
-              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+              { dyRes: 3.0, dyVagg: 2.4 });
     xx = T.str('x^2-5x+6=0', padL + 20, y);
     T.stepEnd();
 
@@ -56782,7 +57837,7 @@
     T.stepEnd();
 
     y = ekvOp(y, '/3', xx + 0.6 * F, '3x^2-12x+9=0',
-              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+              { dyRes: 3.0, dyVagg: 2.4 });
     xx = T.str('x^2-4x+3=0', padL + 20, y);
     T.stepEnd();
 
@@ -58513,7 +59568,7 @@
     T.stepEnd();
 
     y = ekvOp(y, '/10', xx + 0.6 * F, '10x=360',
-              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+              { dyRes: 3.0, dyVagg: 2.4 });
     xe = T.str('x=36 mm', padL + 20, y);
     T.underline(xe, y);
     T.stepEnd();
@@ -58906,7 +59961,7 @@
     T.stepEnd();
 
     y = ekvOp(y, '/5', xx + 0.6 * F, '10^2^,^7=5x',
-              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+              { dyRes: 3.0, dyVagg: 2.4 });
     xx = T.str('x=', padL + 20, y);
     xx = T.fracH('10^2^,^7', '5', xx, y);
     xe = T.str('≈100,24', xx, y);
@@ -59085,7 +60140,7 @@
     T.stepEnd();
 
     y = ekvOp(y, '/2', xx + 0.6 * F, '100=2x',
-              { dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
+              { dyRes: 3.0, dyVagg: 2.4 });
     xe = T.str('x=50', padL + 20, y);
     T.underline(xe, y);
     T.stepEnd();
@@ -61117,6 +62172,15 @@
                    multbadasystem: layoutMultbadasystem,
                    korochhons: layoutKorochhons,
                    summadifferens: layoutSummadifferens,
+                   /* Ma3b 2.1–2.2 linjär optimering */
+                   optskarning: layoutOptskarning,
+                   opthalvplan: layoutOpthalvplan,
+                   optsystem: layoutOptsystem,
+                   optbestamolikheter: layoutOptbestamolikheter,
+                   opthorn: layoutOpthorn,
+                   optmobler: layoutOptmobler,
+                   optbussar: layoutOptbussar,
+                   optkant: layoutOptkant,
                    kvadreringsregler: layoutKvadreringsregler,
                    konjugatregeln: layoutKonjugatregeln,
                    faktorisera2c: layoutFaktorisera2c,
@@ -61286,6 +62350,9 @@
       if (a.kind !== 'stroke') return;
       var attrs = { d: pathFrom(a.pts) };
       if (a.color) attrs.stroke = a.color;
+      /* tunnare/ljusare streck (skuggning av ett område, skuggaOmrade) */
+      if (a.sw) attrs['stroke-width'] = F * 0.062 * a.sw;
+      if (a.op) attrs['stroke-opacity'] = a.op;
       a.path = el('path', attrs, inkG);
       strokes.push(a);
     });
@@ -61470,7 +62537,9 @@
             t += mdur;
           }
         }
-        var dur = Math.max(55, a.len / DRAW);
+        /* a.fart > 1 ritar strecket snabbare (skuggningens täta streck) */
+        var dur = a.fart ? Math.max(18, a.len / (DRAW * a.fart))
+                         : Math.max(55, a.len / DRAW);
         events.push({ type: 'draw', t0: t, t1: t + dur, a: a });
         t += dur;
         pen = end;

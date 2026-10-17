@@ -20658,6 +20658,173 @@ window.EXITTICKETS = {
   },
 ],
 
+// ═══════════ Matematik fortsättning nivå 1b (Ma3b): linjär optimering ═══════════
+'ma3b-2.1': [
+  {
+    question: 'Vilket område beskriver olikheten $y < 3x - 2$?',
+    choices: [
+      'Halvplanet ovanför linjen $y = 3x - 2$',
+      'Halvplanet under linjen $y = 3x - 2$, där linjen själv hör till området',
+      'Halvplanet under linjen $y = 3x - 2$, där linjen själv inte hör till området',
+      'Bara de punkter som ligger på linjen $y = 3x - 2$',
+    ],
+    correct: 2,
+    why: [
+      'Ovanför linjen är $y$ större än $3x - 2$. Det skulle beskrivas av $y > 3x - 2$.',
+      'Linjen hör bara till området vid $\\leq$ eller $\\geq$. Tecknet $<$ utesluter linjen.',
+      'Mindre än betyder under linjen, och vid $<$ hör linjen inte till området. Den ritas streckad.',
+      'Punkterna på linjen uppfyller $y = 3x - 2$, alltså en likhet. En olikhet beskriver ett helt halvplan.',
+    ],
+  },
+  {
+    question: 'Hur ritas gränslinjen till olikheten $y \\geq -x + 4$?',
+    choices: [
+      'Heldragen, eftersom linjen hör till området',
+      'Streckad, eftersom linjen inte hör till området',
+      'Streckad, eftersom $k$ är negativt',
+      'Den ritas inte alls, bara området skuggas',
+    ],
+    correct: 0,
+    why: [
+      'Vid $\\geq$ ingår likheten, så punkterna på linjen hör till området. Därför ritas linjen heldragen.',
+      'Linjen ritas streckad bara vid $<$ och $>$. Här står $\\geq$.',
+      'Om linjen ritas streckad eller heldragen beror på olikhetstecknet, inte på lutningen.',
+      'Gränslinjen behövs för att visa var området slutar, och om kanten hör till området eller inte.',
+    ],
+  },
+  {
+    question: 'Ett område beskrivs av $2x - 3y > 6$. Ligger origo $(0, 0)$ i området?',
+    choices: [
+      'Ja, eftersom origo alltid ligger i området',
+      'Ja, eftersom $2 \\cdot 0 - 3 \\cdot 0 = 0$',
+      'Det går inte att avgöra utan att rita figuren',
+      'Nej, eftersom $0 > 6$ inte stämmer',
+    ],
+    correct: 3,
+    why: [
+      'Origo är bara en bekväm testpunkt. Den kan ligga både i och utanför området.',
+      'Vänsterledet blir 0, men det räcker inte. Det ska också vara större än 6, och det är det inte.',
+      'Det går att avgöra genom att sätta in punkten i olikheten. Det är just det testpunkten är till för.',
+      'Insättning ger $0 > 6$, som inte stämmer. Origo ligger alltså inte i området, och området ligger på den andra sidan av linjen.',
+    ],
+  },
+  {
+    question: 'Vad är en hörnpunkt till ett område som beskrivs av ett system av olikheter?',
+    choices: [
+      'Den punkt i området som ligger närmast origo',
+      'En skärningspunkt mellan två av gränslinjerna',
+      'En punkt där en gränslinje skär *y*-axeln',
+      'Den punkt som ligger mitt i området',
+    ],
+    correct: 1,
+    why: [
+      'Origo kan vara en hörnpunkt, men det finns i regel fler hörn, och närheten till origo avgör inte saken.',
+      'I ett hörn möts två gränslinjer. Hörnet beräknas därför med ett ekvationssystem av linjernas ekvationer.',
+      'En skärning med *y*-axeln är ett hörn bara om *y*-axeln själv är en gränslinje, till exempel vid $x \\geq 0$.',
+      'Mittpunkten ligger inne i området. Hörnen ligger i kanten, där två gränslinjer möts.',
+    ],
+  },
+  {
+    question: 'Vad betyder villkoren $x \\geq 0$ och $y \\geq 0$ tillsammans?',
+    choices: [
+      'Området ligger under *x*-axeln',
+      'Området består bara av origo',
+      'Området ligger i första kvadranten, till höger om *y*-axeln och ovanför *x*-axeln',
+      'Området ligger mellan linjerna $y = x$ och $y = -x$',
+    ],
+    correct: 2,
+    why: [
+      'Under *x*-axeln är $y$ negativt, men villkoret säger att $y$ är minst 0.',
+      'Origo uppfyller villkoren, men det gör också alla andra punkter där båda koordinaterna är positiva.',
+      'Båda koordinaterna får vara 0 eller positiva. Det är första kvadranten, och i praktiska problem betyder det att antalen inte kan vara negativa.',
+      'Linjerna $y = x$ och $y = -x$ har inget med villkoren att göra. Gränserna är axlarna själva.',
+    ],
+  },
+],
+
+'ma3b-2.2': [
+  {
+    question: 'Vad kallas i linjär optimering den funktion som ska bli så stor eller så liten som möjligt, till exempel vinsten $V = 400x + 500y$?',
+    choices: [
+      'Bivillkor',
+      'Nivålinje',
+      'Tillåtet område',
+      'Målfunktion',
+    ],
+    correct: 3,
+    why: [
+      'Bivillkoren är begränsningarna, skrivna som olikheter. Det är inte dem vi maximerar.',
+      'En nivålinje är de punkter där målfunktionen har ett bestämt värde, inte själva funktionen.',
+      'Det tillåtna området är alla punkter där bivillkoren gäller. Där letar vi efter det bästa värdet.',
+      'Målfunktionen är den storhet som ska optimeras, till exempel vinst eller kostnad.',
+    ],
+  },
+  {
+    question: 'Var antar målfunktionen sitt största värde när det tillåtna området är begränsat?',
+    choices: [
+      'I någon av områdets hörnpunkter',
+      'Alltid i origo',
+      'I områdets mittpunkt',
+      'Där en gränslinje skär *x*-axeln',
+    ],
+    correct: 0,
+    why: [
+      'Det är hörnpunktsmetoden: den sista punkt som en nivålinje nuddar när den flyttas parallellt är ett hörn.',
+      'I origo är både $x$ och $y$ noll. Där blir en vinst oftast minst, inte störst.',
+      'Mittpunkten ligger inne i området. En nivålinje som går genom den skär fortfarande området, så det finns bättre punkter.',
+      'En sådan punkt kan vara ett hörn, men den är inte alltid den bästa. Alla hörn måste jämföras.',
+    ],
+  },
+  {
+    question: 'En möbelsnickare har högst 10 timmar för målning per vecka. En stol tar 1 timme och ett bord 1 timme att måla. Hur skrivs bivillkoret om $x$ är antalet stolar och $y$ antalet bord?',
+    choices: [
+      '$x + y \\geq 10$',
+      '$x + y \\leq 10$',
+      '$x + y = 10$',
+      '$10x + 10y \\leq 1$',
+    ],
+    correct: 1,
+    why: [
+      'Högst 10 timmar betyder att tiden får vara 10 eller mindre, inte minst 10.',
+      'Målningen tar $x + y$ timmar, och den tiden får vara högst 10 timmar.',
+      'Snickaren måste inte använda exakt 10 timmar. Det räcker att tiden inte överstiger 10 timmar.',
+      'Varje stol och bord tar 1 timme, så tiden är $1 \\cdot x + 1 \\cdot y$. Talet 10 är gränsen, inte tiden per möbel.',
+    ],
+  },
+  {
+    question: 'Vad gäller för nivålinjerna $2x + 3y = z$ för olika värden på $z$?',
+    choices: [
+      'De skär alla varandra i origo',
+      'De är lodräta',
+      'De är parallella och flyttas längre upp åt höger när $z$ ökar',
+      'Deras lutning ökar när $z$ ökar',
+    ],
+    correct: 2,
+    why: [
+      'Bara nivålinjen $z = 0$ går genom origo. De andra är förskjutna.',
+      'Löser man ut $y$ blir $y = \\dfrac{z - 2x}{3}$. Det är en lutande linje, inte en lodrät.',
+      'Lutningen är alltid $-\\dfrac{2}{3}$, och det är bara skärningen med *y*-axeln, $\\dfrac{z}{3}$, som ändras. Linjerna är därför parallella.',
+      'Lutningen beror bara på koefficienterna 2 och 3, inte på $z$.',
+    ],
+  },
+  {
+    question: 'Målfunktionen ger exakt samma största värde i två hörn som ligger intill varandra. Vad gäller då?',
+    choices: [
+      'Uppgiften saknar lösning',
+      'Alla punkter på kanten mellan de två hörnen ger samma största värde',
+      'Man ska välja hörnet som ligger närmast origo',
+      'Det största värdet finns i stället i mitten av området',
+    ],
+    correct: 1,
+    why: [
+      'Det finns tvärtom många lösningar, eftersom flera punkter ger samma bästa värde.',
+      'Nivålinjen är då parallell med kanten mellan hörnen, så hela kanten ger samma värde. Måste svaret vara heltal kan flera punkter på kanten vara lika bra.',
+      'Båda hörnen ger lika mycket, så det finns ingen anledning att föredra det ena. Även punkterna emellan ger samma värde.',
+      'Inne i området är målfunktionen mindre än vid kanten. Det största värdet finns i kanten.',
+    ],
+  },
+],
+
 // ═══════════ Matematik fortsättning nivå 1b (Ma3b), kapitel 6: 6.1–6.3 ═══════════
 'ma3b-6.1': [
   {

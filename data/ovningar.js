@@ -44662,6 +44662,303 @@ vilket ger $x_1 = 8$ och $x_2 = -15$. Eftersom en sidlängd inte kan vara negati
 **Svar:** $x = 8$ cm`,
         },
     ],
+    // ── Ma3b: linjär optimering (egna avsnitt i Matematik fortsättning nivå 1b) ──
+    'ma3b-2.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Figuren visar en streckad rät linje och ett skuggat område. Vilken olikhet beskriver det skuggade området?
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="-63 -158 168 221" width="228" height="300" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En streckad rät linje som stiger brant genom punkterna 0 komma 1 och 2 komma 5. Området ovanför och till vänster om linjen är skuggat."><line x1="-48" y1="60" x2="-48" y2="-132" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-24" y1="60" x2="-24" y2="-132" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="24" y1="60" x2="24" y2="-132" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="48" y1="60" x2="48" y2="-132" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="72" y1="60" x2="72" y2="-132" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="48" x2="84" y2="48" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="24" x2="84" y2="24" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="-24" x2="84" y2="-24" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="-48" x2="84" y2="-48" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="-72" x2="84" y2="-72" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="-96" x2="84" y2="-96" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-60" y1="-120" x2="84" y2="-120" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><polygon points="-60,60 -42,60 51.6,-127.2 -60,-127.2" fill="rgba(37,99,201,0.16)" stroke="none"/><line x1="-60" y1="0" x2="94" y2="0" stroke="#1f2530" stroke-width="1.6"/><polygon points="102,0 92,-4.5 92,4.5" fill="#1f2530"/><line x1="0" y1="60" x2="0" y2="-142" stroke="#1f2530" stroke-width="1.6"/><polygon points="0,-150 -4.5,-140 4.5,-140" fill="#1f2530"/><text x="100" y="19" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9" y="-144" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="-48" y1="-3.5" x2="-48" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="-48" y="16" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><line x1="-24" y1="-3.5" x2="-24" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><line x1="24" y1="-3.5" x2="24" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="24" y="16" font-size="12" text-anchor="middle" fill="#1f2530">1</text><line x1="48" y1="-3.5" x2="48" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="48" y="16" font-size="12" text-anchor="middle" fill="#1f2530">2</text><line x1="72" y1="-3.5" x2="72" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="72" y="16" font-size="12" text-anchor="middle" fill="#1f2530">3</text><line x1="-3.5" y1="48" x2="3.5" y2="48" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="52" font-size="12" text-anchor="end" fill="#1f2530">−2</text><line x1="-3.5" y1="24" x2="3.5" y2="24" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="28" font-size="12" text-anchor="end" fill="#1f2530">−1</text><line x1="-3.5" y1="-24" x2="3.5" y2="-24" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-20" font-size="12" text-anchor="end" fill="#1f2530">1</text><line x1="-3.5" y1="-48" x2="3.5" y2="-48" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-44" font-size="12" text-anchor="end" fill="#1f2530">2</text><line x1="-3.5" y1="-72" x2="3.5" y2="-72" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-68" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="-3.5" y1="-96" x2="3.5" y2="-96" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-92" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="-3.5" y1="-120" x2="3.5" y2="-120" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-116" font-size="12" text-anchor="end" fill="#1f2530">5</text><line x1="-42" y1="60" x2="51.6" y2="-127.2" stroke="#2563c9" stroke-width="2" stroke-dasharray="7 5"/></svg>`,
+            choices: [
+                `$y < 2x + 1$`,
+                `$y \\geq 2x + 1$`,
+                `$y > 2x + 1$`,
+                `$y \\leq 2x + 1$`,
+            ],
+            correct: 2,
+            solution: `Linjen skär *y*-axeln i 1, så $m = 1$. Ett steg åt höger ger två steg uppåt, så $k = 2$. Linjens ekvation är $y = 2x + 1$.
+
+Området ligger **ovanför** linjen, så $y$ är större än $2x + 1$. Linjen är **streckad**, så den hör inte till området, och tecknet ska vara $>$ (inte $\\geq$).
+
+**Svar:** $y > 2x + 1$`,
+        },
+        {
+            level: 1,
+            question: `Vilket alternativ är linjen $4x + 2y = 10$ skriven på formen $y = kx + m$?`,
+            choices: [
+                `$y = -4x + 10$`,
+                `$y = -2x + 5$`,
+                `$y = 2x + 5$`,
+                `$y = -2x + 10$`,
+            ],
+            correct: 1,
+            solution: `Vi löser ut $y$. Först subtraherar vi $4x$ från båda led, sedan dividerar vi båda led med 2.
+
+$$
+\\begin{aligned}
+4x + 2y &= 10 \\\\
+2y &= -4x + 10 \\\\
+y &= -2x + 5
+\\end{aligned}
+$$
+
+Båda termerna i högerledet ska delas med 2, inte bara den ena.
+
+**Svar:** $y = -2x + 5$`,
+        },
+        {
+            level: 1,
+            question: `Vilka av punkterna $A = (1, 1)$, $B = (3, 1)$ och $C = (0, 5)$ ligger i området $2x + y < 6$?`,
+            choices: [
+                `Bara $A$`,
+                `$A$ och $B$`,
+                `Alla tre`,
+                `$A$ och $C$`,
+            ],
+            correct: 3,
+            solution: `Vi sätter in varje punkt i olikheten.
+
+- $A$: $2 \\cdot 1 + 1 = 3$, och $3 < 6$ stämmer.
+- $B$: $2 \\cdot 3 + 1 = 7$, och $7 < 6$ stämmer inte.
+- $C$: $2 \\cdot 0 + 5 = 5$, och $5 < 6$ stämmer.
+
+**Svar:** $A$ och $C$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett område begränsas bland annat av linjerna $x + y = 9$ och $2x - y = 3$. Bestäm områdets hörnpunkt där linjerna skär varandra.`,
+            solution: `Hörnpunkten ligger på båda linjerna, så vi löser ekvationssystemet
+
+$$
+\\begin{cases}
+x + y = 9 & (1) \\\\
+2x - y = 3 & (2)
+\\end{cases}
+$$
+
+Termerna $y$ och $-y$ tar ut varandra om ekvationerna adderas ledvis.
+
+$$
+\\begin{aligned}
+(x + y) + (2x - y) &= 9 + 3 \\\\
+3x &= 12 \\\\
+x &= 4
+\\end{aligned}
+$$
+
+Insättning i (1), $x + y = 9$, ger $4 + y = 9$, alltså $y = 5$.
+
+Kontroll i (2): $2 \\cdot 4 - 5 = 3$. Det stämmer.
+
+**Svar:** $(4, 5)$`,
+        },
+        {
+            level: 2,
+            question: `Bestäm de olikheter som beskriver det skuggade området i figuren. Alla gränslinjer hör till området.
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="-22 -198 241 224" width="327" height="304" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Ett skuggat område i första kvadranten som begränsas av axlarna, en lodrät linje och en lutande linje. Hörnen är 0 komma 0, 6 komma 0, 6 komma 3 och 0 komma 6."><line x1="26" y1="18.2" x2="26" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="52" y1="18.2" x2="52" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="78" y1="18.2" x2="78" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="104" y1="18.2" x2="104" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="130" y1="18.2" x2="130" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="156" y1="18.2" x2="156" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="182" y1="18.2" x2="182" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-26" x2="197.6" y2="-26" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-52" x2="197.6" y2="-52" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-78" x2="197.6" y2="-78" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-104" x2="197.6" y2="-104" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-130" x2="197.6" y2="-130" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-156" x2="197.6" y2="-156" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><polygon points="0,0 156,0 156,-78 0,-156" fill="rgba(37,99,201,0.16)" stroke="none"/><line x1="-18.2" y1="0" x2="207.6" y2="0" stroke="#1f2530" stroke-width="1.6"/><polygon points="215.6,0 205.6,-4.5 205.6,4.5" fill="#1f2530"/><line x1="0" y1="18.2" x2="0" y2="-181.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="0,-189.6 -4.5,-179.6 4.5,-179.6" fill="#1f2530"/><text x="213.6" y="19" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9" y="-183.6" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="26" y1="-3.5" x2="26" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="26" y="16" font-size="12" text-anchor="middle" fill="#1f2530">1</text><line x1="52" y1="-3.5" x2="52" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="52" y="16" font-size="12" text-anchor="middle" fill="#1f2530">2</text><line x1="78" y1="-3.5" x2="78" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="78" y="16" font-size="12" text-anchor="middle" fill="#1f2530">3</text><line x1="104" y1="-3.5" x2="104" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="104" y="16" font-size="12" text-anchor="middle" fill="#1f2530">4</text><line x1="130" y1="-3.5" x2="130" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="130" y="16" font-size="12" text-anchor="middle" fill="#1f2530">5</text><line x1="156" y1="-3.5" x2="156" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="156" y="16" font-size="12" text-anchor="middle" fill="#1f2530">6</text><line x1="182" y1="-3.5" x2="182" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="182" y="16" font-size="12" text-anchor="middle" fill="#1f2530">7</text><line x1="-3.5" y1="-26" x2="3.5" y2="-26" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-22" font-size="12" text-anchor="end" fill="#1f2530">1</text><line x1="-3.5" y1="-52" x2="3.5" y2="-52" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-48" font-size="12" text-anchor="end" fill="#1f2530">2</text><line x1="-3.5" y1="-78" x2="3.5" y2="-78" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-74" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="-3.5" y1="-104" x2="3.5" y2="-104" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-100" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="-3.5" y1="-130" x2="3.5" y2="-130" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-126" font-size="12" text-anchor="end" fill="#1f2530">5</text><line x1="-3.5" y1="-156" x2="3.5" y2="-156" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-152" font-size="12" text-anchor="end" fill="#1f2530">6</text><line x1="156" y1="10.4" x2="156" y2="-169" stroke="#1f2530" stroke-width="2"/><line x1="-10.4" y1="-161.2" x2="195" y2="-58.5" stroke="#1f2530" stroke-width="2"/></svg>`,
+            solution: `Området ligger i första kvadranten, så $x \\geq 0$ och $y \\geq 0$.
+
+Den lodräta linjen går genom 6 på *x*-axeln och har ekvationen $x = 6$. Området ligger till vänster om den: $x \\leq 6$.
+
+Den lutande linjen skär *y*-axeln i 6, så $m = 6$. Den går också genom $(6, 3)$: sex steg åt höger ger tre steg nedåt, så $k = \\dfrac{-3}{6} = -0{,}5$. Linjen är $y = -0{,}5x + 6$, och området ligger under den.
+
+Alla linjer hör till området, så tecknen är $\\leq$ och $\\geq$.
+
+**Svar:**
+$\\begin{cases} x \\geq 0 \\\\ y \\geq 0 \\\\ x \\leq 6 \\\\ y \\leq -0{,}5x + 6 \\end{cases}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ett område beskrivs av olikheterna $x \\geq 0$, $y \\geq 0$, $y \\leq -x + 6$ och $y \\geq x - 2$. Rita området och bestäm dess area.`,
+            answer: { value: 14, unit: 'areaenheter' },
+            solution: `Linjen $y = -x + 6$ går genom $(0, 6)$ och $(6, 0)$, och området ligger under den. Linjen $y = x - 2$ går genom $(2, 0)$ och $(4, 2)$, och området ligger ovanför den. Med $x \\geq 0$ och $y \\geq 0$ hamnar området i första kvadranten.
+
+De två sneda linjerna skär varandra där $-x + 6 = x - 2$, det vill säga $8 = 2x$, alltså $x = 4$ och $y = -4 + 6 = 2$.
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="-38 -201 234 227" width="318" height="308" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Området som begränsas av axlarna och linjerna y lika med minus x plus 6 och y lika med x minus 2, med hörnen 0 komma 0, 2 komma 0, 4 komma 2 och 0 komma 6."><line x1="26" y1="18.2" x2="26" y2="-174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="52" y1="18.2" x2="52" y2="-174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="78" y1="18.2" x2="78" y2="-174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="104" y1="18.2" x2="104" y2="-174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="130" y1="18.2" x2="130" y2="-174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="156" y1="18.2" x2="156" y2="-174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-26" x2="174.2" y2="-26" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-52" x2="174.2" y2="-52" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-78" x2="174.2" y2="-78" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-104" x2="174.2" y2="-104" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-130" x2="174.2" y2="-130" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-156" x2="174.2" y2="-156" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><polygon points="0,0 52,0 104,-52 0,-156" fill="rgba(37,99,201,0.16)" stroke="none"/><line x1="-18.2" y1="0" x2="184.2" y2="0" stroke="#1f2530" stroke-width="1.6"/><polygon points="192.2,0 182.2,-4.5 182.2,4.5" fill="#1f2530"/><line x1="0" y1="18.2" x2="0" y2="-184.2" stroke="#1f2530" stroke-width="1.6"/><polygon points="0,-192.2 -4.5,-182.2 4.5,-182.2" fill="#1f2530"/><text x="190.2" y="19" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9" y="-186.2" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="26" y1="-3.5" x2="26" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="26" y="16" font-size="12" text-anchor="middle" fill="#1f2530">1</text><line x1="52" y1="-3.5" x2="52" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="52" y="16" font-size="12" text-anchor="middle" fill="#1f2530">2</text><line x1="78" y1="-3.5" x2="78" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="78" y="16" font-size="12" text-anchor="middle" fill="#1f2530">3</text><line x1="104" y1="-3.5" x2="104" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="104" y="16" font-size="12" text-anchor="middle" fill="#1f2530">4</text><line x1="130" y1="-3.5" x2="130" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="130" y="16" font-size="12" text-anchor="middle" fill="#1f2530">5</text><line x1="156" y1="-3.5" x2="156" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="156" y="16" font-size="12" text-anchor="middle" fill="#1f2530">6</text><line x1="-3.5" y1="-26" x2="3.5" y2="-26" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-22" font-size="12" text-anchor="end" fill="#1f2530">1</text><line x1="-3.5" y1="-52" x2="3.5" y2="-52" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-48" font-size="12" text-anchor="end" fill="#1f2530">2</text><line x1="-3.5" y1="-78" x2="3.5" y2="-78" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-74" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="-3.5" y1="-104" x2="3.5" y2="-104" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-100" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="-3.5" y1="-130" x2="3.5" y2="-130" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-126" font-size="12" text-anchor="end" fill="#1f2530">5</text><line x1="-3.5" y1="-156" x2="3.5" y2="-156" stroke="#1f2530" stroke-width="1.2"/><line x1="-10.4" y1="-166.4" x2="166.4" y2="10.4" stroke="#2563c9" stroke-width="2"/><text x="46.5" y="-119.3" font-size="13" text-anchor="middle" fill="#2563c9" transform="rotate(45 46.5 -119.3)"><tspan font-style="italic">y</tspan> = −<tspan font-style="italic">x</tspan> + 6</text><line x1="41.6" y1="10.4" x2="171.6" y2="-119.6" stroke="#4a7d3a" stroke-width="2"/><text x="154.8" y="-79.2" font-size="13" text-anchor="middle" fill="#4a7d3a" transform="rotate(-45 154.8 -79.2)"><tspan font-style="italic">y</tspan> = <tspan font-style="italic">x</tspan> − 2</text><circle cx="0" cy="0" r="3.6" fill="#c8324a"/><text x="-6" y="15" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 0)</text><circle cx="52" cy="0" r="3.6" fill="#c8324a"/><text x="46" y="-6" font-size="12.5" text-anchor="end" fill="#c8324a">(2, 0)</text><circle cx="104" cy="-52" r="3.6" fill="#c8324a"/><text x="113" y="-48" font-size="12.5" text-anchor="start" fill="#c8324a">(4, 2)</text><circle cx="0" cy="-156" r="3.6" fill="#c8324a"/><text x="-7" y="-152" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 6)</text></svg>
+
+Området är en fyrhörning med hörnen $(0, 0)$, $(2, 0)$, $(4, 2)$ och $(0, 6)$. Vi delar den längs sträckan från $(0, 0)$ till $(4, 2)$ i två trianglar.
+
+Triangeln med hörnen $(0, 0)$, $(2, 0)$ och $(4, 2)$ har basen 2 längs *x*-axeln och höjden 2:
+
+$$
+\\dfrac{2 \\cdot 2}{2} = 2
+$$
+
+Triangeln med hörnen $(0, 0)$, $(4, 2)$ och $(0, 6)$ har basen 6 längs *y*-axeln och höjden 4, avståndet från *y*-axeln ut till $(4, 2)$:
+
+$$
+\\dfrac{6 \\cdot 4}{2} = 12
+$$
+
+Hela arean är $2 + 12 = 14$ areaenheter.
+
+**Svar:** 14 areaenheter`,
+        },
+    ],
+
+    'ma3b-2.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ett tillåtet område har hörnpunkterna $(0, 0)$, $(4, 0)$, $(3, 2)$ och $(0, 3)$. Vilket är det största värdet av $z = 3x + y$ i området?`,
+            choices: [
+                `$11$`,
+                `$3$`,
+                `$12$`,
+                `$9$`,
+            ],
+            correct: 2,
+            solution: `Enligt hörnpunktsmetoden räcker det att beräkna $z$ i hörnen.
+
+| Hörnpunkt | $z = 3x + y$ |
+| --- | --- |
+| $(0, 0)$ | $3 \\cdot 0 + 0 = 0$ |
+| $(4, 0)$ | $3 \\cdot 4 + 0 = 12$ |
+| $(3, 2)$ | $3 \\cdot 3 + 2 = 11$ |
+| $(0, 3)$ | $3 \\cdot 0 + 3 = 3$ |
+
+**Svar:** $12$`,
+        },
+        {
+            level: 1,
+            question: `Ett tillåtet område har hörnpunkterna $(0, 0)$, $(6, 0)$, $(4, 3)$ och $(0, 5)$. Bestäm det största värdet av målfunktionen $V = 50x + 80y$.`,
+            answer: { value: 440, unit: '' },
+            solution: `Vi beräknar $V$ i varje hörnpunkt.
+
+| Hörnpunkt | $V = 50x + 80y$ |
+| --- | --- |
+| $(0, 0)$ | $50 \\cdot 0 + 80 \\cdot 0 = 0$ |
+| $(6, 0)$ | $50 \\cdot 6 + 80 \\cdot 0 = 300$ |
+| $(4, 3)$ | $50 \\cdot 4 + 80 \\cdot 3 = 440$ |
+| $(0, 5)$ | $50 \\cdot 0 + 80 \\cdot 5 = 400$ |
+
+**Svar:** $440$`,
+        },
+        {
+            level: 1,
+            question: `En snickare tillverkar $x$ stolar och $y$ bord per vecka och har högst 24 timmar för snickeri. Det ger villkoret $2x + 3y \\leq 24$. Vad kallas ett sådant villkor i linjär optimering?`,
+            choices: [
+                `Målfunktion`,
+                `Bivillkor`,
+                `Nivålinje`,
+                `Hörnpunkt`,
+            ],
+            correct: 1,
+            solution: `En begränsning som skrivs som en olikhet kallas ett **bivillkor**. Bivillkoren tillsammans ger det tillåtna området. Målfunktionen är i stället den storhet som ska bli så stor eller så liten som möjligt, till exempel vinsten.
+
+**Svar:** Bivillkor`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett bageri bakar limpor och baguetter. Ugnen rymmer högst 120 bröd per dag. En limpa kräver 2 hg mjöl och en baguette 1 hg mjöl, och bageriet har 160 hg mjöl per dag. Vinsten är 15 kr per limpa och 10 kr per baguette. Hur stor kan vinsten bli som mest per dag?`,
+            answer: { value: 1400, unit: 'kr' },
+            solution: `Vi låter $x$ vara antalet limpor och $y$ antalet baguetter per dag.
+
+$$
+\\begin{cases}
+x \\geq 0 \\\\
+y \\geq 0 \\\\
+x + y \\leq 120 \\\\
+2x + y \\leq 160
+\\end{cases}
+$$
+
+Målfunktionen är vinsten i kronor, $V = 15x + 10y$.
+
+Linjen $x + y = 120$ går genom $(0, 120)$ och $(120, 0)$. Linjen $2x + y = 160$ går genom $(0, 160)$ och $(80, 0)$. Origo uppfyller båda olikheterna, så området ligger under båda linjerna.
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="-51 -250 254 276" width="345" height="375" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Det tillåtna området för bageriet med hörnen 0 komma 0, 80 komma 0, 40 komma 80 och 0 komma 120."><line x1="26" y1="18.2" x2="26" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="52" y1="18.2" x2="52" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="78" y1="18.2" x2="78" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="104" y1="18.2" x2="104" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="130" y1="18.2" x2="130" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="156" y1="18.2" x2="156" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="182" y1="18.2" x2="182" y2="-223.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-26" x2="182" y2="-26" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-52" x2="182" y2="-52" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-78" x2="182" y2="-78" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-104" x2="182" y2="-104" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-130" x2="182" y2="-130" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-156" x2="182" y2="-156" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-182" x2="182" y2="-182" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-208" x2="182" y2="-208" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><polygon points="0,0 104,0 52,-104 0,-156" fill="rgba(37,99,201,0.16)" stroke="none"/><line x1="-18.2" y1="0" x2="192" y2="0" stroke="#1f2530" stroke-width="1.6"/><polygon points="200,0 190,-4.5 190,4.5" fill="#1f2530"/><line x1="0" y1="18.2" x2="0" y2="-233.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="0,-241.6 -4.5,-231.6 4.5,-231.6" fill="#1f2530"/><text x="198" y="19" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9" y="-235.6" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="26" y1="-3.5" x2="26" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="26" y="16" font-size="12" text-anchor="middle" fill="#1f2530">20</text><line x1="52" y1="-3.5" x2="52" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="52" y="16" font-size="12" text-anchor="middle" fill="#1f2530">40</text><line x1="78" y1="-3.5" x2="78" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="78" y="16" font-size="12" text-anchor="middle" fill="#1f2530">60</text><line x1="104" y1="-3.5" x2="104" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="104" y="16" font-size="12" text-anchor="middle" fill="#1f2530">80</text><line x1="130" y1="-3.5" x2="130" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="130" y="16" font-size="12" text-anchor="middle" fill="#1f2530">100</text><line x1="156" y1="-3.5" x2="156" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="156" y="16" font-size="12" text-anchor="middle" fill="#1f2530">120</text><line x1="-3.5" y1="-26" x2="3.5" y2="-26" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-22" font-size="12" text-anchor="end" fill="#1f2530">20</text><line x1="-3.5" y1="-52" x2="3.5" y2="-52" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-48" font-size="12" text-anchor="end" fill="#1f2530">40</text><line x1="-3.5" y1="-78" x2="3.5" y2="-78" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-74" font-size="12" text-anchor="end" fill="#1f2530">60</text><line x1="-3.5" y1="-104" x2="3.5" y2="-104" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-100" font-size="12" text-anchor="end" fill="#1f2530">80</text><line x1="-3.5" y1="-130" x2="3.5" y2="-130" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-126" font-size="12" text-anchor="end" fill="#1f2530">100</text><line x1="-3.5" y1="-156" x2="3.5" y2="-156" stroke="#1f2530" stroke-width="1.2"/><line x1="-3.5" y1="-182" x2="3.5" y2="-182" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-178" font-size="12" text-anchor="end" fill="#1f2530">140</text><line x1="-3.5" y1="-208" x2="3.5" y2="-208" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-204" font-size="12" text-anchor="end" fill="#1f2530">160</text><line x1="-10.4" y1="-166.4" x2="159.1" y2="3.1" stroke="#2563c9" stroke-width="2"/><text x="124.5" y="-41.3" font-size="13" text-anchor="middle" fill="#2563c9" transform="rotate(45 124.5 -41.3)"><tspan font-style="italic">x</tspan> + <tspan font-style="italic">y</tspan> = 120</text><line x1="-6.5" y1="-221" x2="105.6" y2="3.1" stroke="#4a7d3a" stroke-width="2"/><text x="29.7" y="-164.3" font-size="13" text-anchor="middle" fill="#4a7d3a" transform="rotate(63.4 29.7 -164.3)">2<tspan font-style="italic">x</tspan> + <tspan font-style="italic">y</tspan> = 160</text><circle cx="0" cy="0" r="3.6" fill="#c8324a"/><text x="-6" y="15" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 0)</text><circle cx="104" cy="0" r="3.6" fill="#c8324a"/><text x="95" y="-6" font-size="12.5" text-anchor="end" fill="#c8324a">(80, 0)</text><circle cx="52" cy="-104" r="3.6" fill="#c8324a"/><text x="61" y="-100" font-size="12.5" text-anchor="start" fill="#c8324a">(40, 80)</text><circle cx="0" cy="-156" r="3.6" fill="#c8324a"/><text x="-7" y="-152" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 120)</text></svg>
+
+Skärningspunkten: vi subtraherar $x + y = 120$ från $2x + y = 160$ ledvis och får $x = 40$. Då är $y = 120 - 40 = 80$.
+
+| Hörnpunkt | $V = 15x + 10y$ |
+| --- | --- |
+| $(0, 0)$ | $15 \\cdot 0 + 10 \\cdot 0 = 0$ |
+| $(80, 0)$ | $15 \\cdot 80 + 10 \\cdot 0 = 1\\,200$ |
+| $(40, 80)$ | $15 \\cdot 40 + 10 \\cdot 80 = 1\\,400$ |
+| $(0, 120)$ | $15 \\cdot 0 + 10 \\cdot 120 = 1\\,200$ |
+
+Störst vinst ger 40 limpor och 80 baguetter.
+
+**Svar:** $1\\,400$ kr`,
+        },
+        {
+            level: 2,
+            question: `En hästägare blandar två fodersorter. Ett kilo av sort A innehåller 1 enhet protein och 1 enhet vitaminer. Ett kilo av sort B innehåller 1 enhet protein och 3 enheter vitaminer. Blandningen ska innehålla minst 6 enheter protein och minst 12 enheter vitaminer. Sort A kostar 30 kr/kg och sort B 50 kr/kg. Vad kostar den billigaste blandningen?`,
+            answer: { value: 240, unit: 'kr' },
+            solution: `Vi låter $x$ vara antalet kilo av sort A och $y$ antalet kilo av sort B.
+
+$$
+\\begin{cases}
+x \\geq 0 \\\\
+y \\geq 0 \\\\
+x + y \\geq 6 \\\\
+x + 3y \\geq 12
+\\end{cases}
+$$
+
+Kostnaden ska minimeras: $K = 30x + 50y$.
+
+Origo uppfyller inte $x + y \\geq 6$, så området ligger **ovanför** linjerna. Det fortsätter obegränsat uppåt och åt höger, men det minsta värdet finns ändå i ett hörn.
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="-38 -211 371 237" width="504" height="322" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Det tillåtna området för foderblandningen ligger ovanför båda linjerna x plus y lika med 6 och x plus 3y lika med 12 och fortsätter obegränsat uppåt och åt höger. Hörnen är 0 komma 6, 3 komma 3 och 12 komma 0."><line x1="24" y1="16.8" x2="24" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="48" y1="16.8" x2="48" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="72" y1="16.8" x2="72" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="96" y1="16.8" x2="96" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="120" y1="16.8" x2="120" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="144" y1="16.8" x2="144" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="168" y1="16.8" x2="168" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="192" y1="16.8" x2="192" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="216" y1="16.8" x2="216" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="240" y1="16.8" x2="240" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="264" y1="16.8" x2="264" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="288" y1="16.8" x2="288" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="312" y1="16.8" x2="312" y2="-184.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-24" x2="312" y2="-24" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-48" x2="312" y2="-48" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-72" x2="312" y2="-72" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-96" x2="312" y2="-96" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-120" x2="312" y2="-120" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-144" x2="312" y2="-144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-16.8" y1="-168" x2="312" y2="-168" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><polygon points="288,0 309.6,0 309.6,-182.4 0,-182.4 0,-144 72,-72" fill="rgba(37,99,201,0.16)" stroke="none"/><line x1="-16.8" y1="0" x2="322" y2="0" stroke="#1f2530" stroke-width="1.6"/><polygon points="330,0 320,-4.5 320,4.5" fill="#1f2530"/><line x1="0" y1="16.8" x2="0" y2="-194.8" stroke="#1f2530" stroke-width="1.6"/><polygon points="0,-202.8 -4.5,-192.8 4.5,-192.8" fill="#1f2530"/><text x="328" y="19" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9" y="-196.8" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="24" y1="-3.5" x2="24" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="24" y="16" font-size="12" text-anchor="middle" fill="#1f2530">1</text><line x1="48" y1="-3.5" x2="48" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="48" y="16" font-size="12" text-anchor="middle" fill="#1f2530">2</text><line x1="72" y1="-3.5" x2="72" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="72" y="16" font-size="12" text-anchor="middle" fill="#1f2530">3</text><line x1="96" y1="-3.5" x2="96" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="96" y="16" font-size="12" text-anchor="middle" fill="#1f2530">4</text><line x1="120" y1="-3.5" x2="120" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="120" y="16" font-size="12" text-anchor="middle" fill="#1f2530">5</text><line x1="144" y1="-3.5" x2="144" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="144" y="16" font-size="12" text-anchor="middle" fill="#1f2530">6</text><line x1="168" y1="-3.5" x2="168" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="168" y="16" font-size="12" text-anchor="middle" fill="#1f2530">7</text><line x1="192" y1="-3.5" x2="192" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="192" y="16" font-size="12" text-anchor="middle" fill="#1f2530">8</text><line x1="216" y1="-3.5" x2="216" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="216" y="16" font-size="12" text-anchor="middle" fill="#1f2530">9</text><line x1="240" y1="-3.5" x2="240" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="240" y="16" font-size="12" text-anchor="middle" fill="#1f2530">10</text><line x1="264" y1="-3.5" x2="264" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><line x1="288" y1="-3.5" x2="288" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><line x1="-3.5" y1="-24" x2="3.5" y2="-24" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-20" font-size="12" text-anchor="end" fill="#1f2530">1</text><line x1="-3.5" y1="-48" x2="3.5" y2="-48" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-44" font-size="12" text-anchor="end" fill="#1f2530">2</text><line x1="-3.5" y1="-72" x2="3.5" y2="-72" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-68" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="-3.5" y1="-96" x2="3.5" y2="-96" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-92" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="-3.5" y1="-120" x2="3.5" y2="-120" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-116" font-size="12" text-anchor="end" fill="#1f2530">5</text><line x1="-3.5" y1="-144" x2="3.5" y2="-144" stroke="#1f2530" stroke-width="1.2"/><line x1="-3.5" y1="-168" x2="3.5" y2="-168" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-164" font-size="12" text-anchor="end" fill="#1f2530">7</text><line x1="-9.6" y1="-153.6" x2="153.6" y2="9.6" stroke="#2563c9" stroke-width="2"/><text x="19.7" y="-96.5" font-size="13" text-anchor="middle" fill="#2563c9" transform="rotate(45 19.7 -96.5)"><tspan font-style="italic">x</tspan> + <tspan font-style="italic">y</tspan> = 6</text><line x1="-9.6" y1="-99.2" x2="296.6" y2="2.9" stroke="#4a7d3a" stroke-width="2"/><text x="199" y="-37" font-size="13" text-anchor="middle" fill="#4a7d3a" transform="rotate(18.4 199 -37)"><tspan font-style="italic">x</tspan> + 3<tspan font-style="italic">y</tspan> = 12</text><circle cx="0" cy="-144" r="3.6" fill="#c8324a"/><text x="-7" y="-140" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 6)</text><circle cx="72" cy="-72" r="3.6" fill="#c8324a"/><text x="64" y="-55" font-size="12.5" text-anchor="end" fill="#c8324a">(3, 3)</text><circle cx="288" cy="0" r="3.6" fill="#c8324a"/><text x="295" y="17" font-size="12.5" text-anchor="middle" fill="#c8324a">(12, 0)</text></svg>
+
+Skärningspunkten: vi subtraherar $x + y = 6$ från $x + 3y = 12$ ledvis och får $2y = 6$, alltså $y = 3$ och $x = 6 - 3 = 3$.
+
+| Hörnpunkt | $K = 30x + 50y$ |
+| --- | --- |
+| $(0, 6)$ | $30 \\cdot 0 + 50 \\cdot 6 = 300$ |
+| $(3, 3)$ | $30 \\cdot 3 + 50 \\cdot 3 = 240$ |
+| $(12, 0)$ | $30 \\cdot 12 + 50 \\cdot 0 = 360$ |
+
+Lägst kostnad ger 3 kg av varje sort.
+
+**Svar:** $240$ kr`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Figuren visar ett tillåtet område med hörnpunkterna $(0, 0)$, $(6, 0)$, $(4, 3)$ och $(0, 5)$. Målfunktionen är $V = ax + 2y$, där $a$ är en positiv konstant. För vilka värden på $a$ antar $V$ sitt största värde i hörnet $(4, 3)$?
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="-38 -198 257 224" width="349" height="304" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Ett skuggat område med hörnen 0 komma 0, 6 komma 0, 4 komma 3 och 0 komma 5."><line x1="26" y1="18.2" x2="26" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="52" y1="18.2" x2="52" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="78" y1="18.2" x2="78" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="104" y1="18.2" x2="104" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="130" y1="18.2" x2="130" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="156" y1="18.2" x2="156" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="182" y1="18.2" x2="182" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-26" x2="197.6" y2="-26" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-52" x2="197.6" y2="-52" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-78" x2="197.6" y2="-78" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-104" x2="197.6" y2="-104" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-130" x2="197.6" y2="-130" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-156" x2="197.6" y2="-156" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><polygon points="0,0 156,0 104,-78 0,-130" fill="rgba(37,99,201,0.16)" stroke="none"/><line x1="-18.2" y1="0" x2="207.6" y2="0" stroke="#1f2530" stroke-width="1.6"/><polygon points="215.6,0 205.6,-4.5 205.6,4.5" fill="#1f2530"/><line x1="0" y1="18.2" x2="0" y2="-181.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="0,-189.6 -4.5,-179.6 4.5,-179.6" fill="#1f2530"/><text x="213.6" y="19" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9" y="-183.6" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="26" y1="-3.5" x2="26" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="26" y="16" font-size="12" text-anchor="middle" fill="#1f2530">1</text><line x1="52" y1="-3.5" x2="52" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="52" y="16" font-size="12" text-anchor="middle" fill="#1f2530">2</text><line x1="78" y1="-3.5" x2="78" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="78" y="16" font-size="12" text-anchor="middle" fill="#1f2530">3</text><line x1="104" y1="-3.5" x2="104" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="104" y="16" font-size="12" text-anchor="middle" fill="#1f2530">4</text><line x1="130" y1="-3.5" x2="130" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="130" y="16" font-size="12" text-anchor="middle" fill="#1f2530">5</text><line x1="156" y1="-3.5" x2="156" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><line x1="182" y1="-3.5" x2="182" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="182" y="16" font-size="12" text-anchor="middle" fill="#1f2530">7</text><line x1="-3.5" y1="-26" x2="3.5" y2="-26" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-22" font-size="12" text-anchor="end" fill="#1f2530">1</text><line x1="-3.5" y1="-52" x2="3.5" y2="-52" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-48" font-size="12" text-anchor="end" fill="#1f2530">2</text><line x1="-3.5" y1="-78" x2="3.5" y2="-78" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-74" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="-3.5" y1="-104" x2="3.5" y2="-104" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-100" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="-3.5" y1="-130" x2="3.5" y2="-130" stroke="#1f2530" stroke-width="1.2"/><line x1="-3.5" y1="-156" x2="3.5" y2="-156" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-152" font-size="12" text-anchor="end" fill="#1f2530">6</text><line x1="78" y1="-117" x2="161.2" y2="7.8" stroke="#1f2530" stroke-width="2"/><line x1="-10.4" y1="-135.2" x2="156" y2="-52" stroke="#1f2530" stroke-width="2"/><circle cx="0" cy="0" r="3.6" fill="#c8324a"/><text x="-6" y="15" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 0)</text><circle cx="156" cy="0" r="3.6" fill="#c8324a"/><text x="148" y="-6" font-size="12.5" text-anchor="end" fill="#c8324a">(6, 0)</text><circle cx="104" cy="-78" r="3.6" fill="#c8324a"/><text x="112" y="-83" font-size="12.5" text-anchor="start" fill="#c8324a">(4, 3)</text><circle cx="0" cy="-130" r="3.6" fill="#c8324a"/><text x="-7" y="-126" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 5)</text></svg>`,
+            solution: `I de fyra hörnen är
+
+| Hörnpunkt | $V = ax + 2y$ |
+| --- | --- |
+| $(0, 0)$ | $0$ |
+| $(6, 0)$ | $6a$ |
+| $(4, 3)$ | $4a + 6$ |
+| $(0, 5)$ | $10$ |
+
+För att $(4, 3)$ ska ge det största värdet måste $4a + 6$ vara minst lika stort som värdet i grannhörnen. Origo ger 0 och spelar ingen roll, eftersom $a$ är positivt.
+
+$$
+\\begin{aligned}
+4a + 6 &\\geq 6a \\\\
+6 &\\geq 2a \\\\
+a &\\leq 3
+\\end{aligned}
+$$
+
+$$
+\\begin{aligned}
+4a + 6 &\\geq 10 \\\\
+4a &\\geq 4 \\\\
+a &\\geq 1
+\\end{aligned}
+$$
+
+Tolkning: för $a = 3$ är nivålinjen parallell med kanten mellan $(6, 0)$ och $(4, 3)$, och för $a = 1$ med kanten mellan $(4, 3)$ och $(0, 5)$. Däremellan nuddar den sista nivålinjen området bara i hörnet $(4, 3)$.
+
+**Svar:** $1 \\leq a \\leq 3$`,
+        },
+    ],
     // ═══════════ Matematik fortsättning nivå 1b (Ma3b), kapitel 6: 6.1–6.3 ═══════════
     'ma3b-6.1': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Ordlista inför Helsingfors</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!--
+  ordlista-helsingfors.html: privat övningssida (inte länkad från sajten, noindex).
+  100 svensk-engelska ord och fraser inför Nordplus-seminariet NGGN + AI i Esbo
+  23–25 oktober 2026: skola och styrdokument, undervisning och bedömning,
+  matematik, digitala verktyg och AI, projektet och seminariet.
+
+  Flashcards med enkel Leitner-repetition: varje ord ligger i låda 0–3.
+  "Kunde" flyttar upp ordet en låda, "Kunde inte" flyttar det till låda 0.
+  Nästa kort väljs viktat mot låga lådor. Allt sparas i localStorage
+  (nyckeln fysiklabbet.ordlista-hki.v1). Uttal via webbläsarens talsyntes (en-GB).
+-->
+<style>
+:root {
+  --bg: #f3eee4; --bg2: #ebe4d4; --panel: #fffdf9; --ink: #0f1620; --soft: #3f4a5c; --muted: #69655c;
+  --line: rgba(15,22,32,.10); --line2: rgba(15,22,32,.20);
+  --accent: #c8324a; --accent-soft: rgba(200,50,74,.09); --blue: #1c3d6b; --blue-soft: rgba(28,61,107,.09);
+  --green: #2f6b4f; --green-soft: rgba(47,107,79,.12);
+  --shadow: 0 1px 2px rgba(15,22,32,.05), 0 24px 50px -26px rgba(15,22,32,.4);
+  --sans: "DM Sans", system-ui, sans-serif; --serif: "Instrument Serif", Georgia, serif; --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body { background: radial-gradient(900px 500px at 0% -10%, rgba(200,50,74,.07), transparent 60%), radial-gradient(900px 600px at 110% 0%, rgba(28,61,107,.08), transparent 60%), var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; min-height: 100dvh; }
+button { font-family: inherit; font-size: inherit; color: inherit; cursor: pointer; }
+.wrap { max-width: 760px; margin: 0 auto; padding: max(18px, env(safe-area-inset-top)) 16px max(28px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 18px; min-height: 100dvh; }
+header .over { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px; }
+header .over span { color: var(--muted); }
+h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(38px, 8vw, 58px); line-height: 1; margin: 0; letter-spacing: -.01em; }
+h1 em { color: var(--accent); }
+.framsteg { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.framsteg .stapel { flex: 1; height: 8px; border-radius: 4px; background: var(--line2); overflow: hidden; display: flex; }
+.framsteg .stapel i { display: block; height: 100%; transition: width .4s; }
+.framsteg .stapel i.l3 { background: var(--green); } .framsteg .stapel i.l2 { background: #6c9b83; } .framsteg .stapel i.l1 { background: #b9cbb9; }
+.reglage { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chip { border: 1px solid var(--line2); background: var(--panel); border-radius: 999px; padding: 6px 12px; font-size: 13px; }
+.chip[aria-pressed=true] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.vaxel { display: inline-flex; border: 1px solid var(--line2); border-radius: 10px; overflow: hidden; margin-left: auto; }
+.vaxel button { border: 0; background: var(--panel); padding: 7px 12px; font-size: 13px; }
+.vaxel button[aria-pressed=true] { background: var(--blue); color: #fff; }
+
+/* Kortet */
+.scen { perspective: 1400px; flex: 1; display: flex; flex-direction: column; gap: 14px; min-height: 360px; }
+.kort { position: relative; flex: 1; min-height: 300px; border: 0; padding: 0; background: none; text-align: left; transform-style: preserve-3d; transition: transform .55s cubic-bezier(.2,.7,.2,1); }
+.kort.vand { transform: rotateY(180deg); }
+.sida { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--panel); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); padding: 26px 26px 22px; display: flex; flex-direction: column; }
+.sida.bak { transform: rotateY(180deg); background: linear-gradient(180deg, #fffdf9, #f8f4ec); }
+.sida .topp { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.lador { display: inline-flex; gap: 4px; }
+.lador i { width: 8px; height: 8px; border-radius: 2px; background: var(--line2); }
+.lador i.p { background: var(--green); }
+.ordet { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+.ordet .huvud { font-family: var(--serif); font-size: clamp(38px, 9vw, 64px); line-height: 1.02; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.ordet .not { color: var(--soft); font-size: 16px; line-height: 1.5; }
+.ordet .exempel { font-size: 17px; line-height: 1.55; color: var(--soft); border-left: 3px solid var(--accent); padding-left: 12px; font-style: italic; }
+.ordet .exempel b { color: var(--ink); font-style: normal; }
+.sida .tips { font-size: 13px; color: var(--muted); }
+.lyssna { align-self: flex-start; display: inline-flex; gap: 8px; align-items: center; border: 1px solid var(--line2); background: #fff; border-radius: 999px; padding: 7px 12px; font-size: 13px; }
+.knappar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.knappar button { border-radius: 14px; padding: 15px; font-size: 16px; font-weight: 600; border: 1.5px solid; }
+.nej { background: var(--accent-soft); border-color: rgba(200,50,74,.4) !important; color: #7a1d2d; }
+.ja { background: var(--green-soft); border-color: rgba(47,107,79,.45) !important; color: #1f4a36; }
+.vand-knapp { grid-column: 1 / -1; background: var(--blue); border-color: var(--blue) !important; color: #fff; }
+.kbd { font-family: var(--mono); font-size: 11px; opacity: .65; font-weight: 400; margin-left: 6px; }
+
+/* Lista */
+.lista { display: flex; flex-direction: column; gap: 18px; }
+.lista h2 { font-family: var(--serif); font-weight: 400; font-size: 28px; margin: 6px 0 0; }
+.lista table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.lista td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.45; font-size: 15px; }
+.lista tr:last-child td { border-bottom: 0; }
+.lista td:first-child { width: 42%; color: var(--soft); }
+.lista td:nth-child(2) { font-weight: 600; }
+.lista td small { display: block; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 2px; }
+.lista td .lador { margin-left: 6px; vertical-align: middle; }
+.klart { text-align: center; padding: 40px 20px; }
+.klart h2 { font-family: var(--serif); font-weight: 400; font-size: 40px; margin: 0 0 8px; }
+footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+footer button { background: none; border: 0; color: var(--muted); text-decoration: underline; padding: 0; }
+.bekrafta { color: var(--accent); }
+.bekrafta button { margin-left: 8px; color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .kort { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="over">NGGN + AI · Esbo 23–25 okt <span>· 100 ord</span></p>
+    <h1>Ordlista inför <em>Helsingfors</em></h1>
+  </header>
+
+  <div class="framsteg" aria-live="polite"><span id="kan">0 / 100</span><span class="stapel" aria-hidden="true"><i class="l3" id="s3"></i><i class="l2" id="s2"></i><i class="l1" id="s1"></i></span><span>kan</span></div>
+
+  <div class="reglage" id="kategorier" role="group" aria-label="Kategorier"></div>
+  <div class="reglage">
+    <div class="vaxel" role="group" aria-label="Riktning" style="margin-left:0">
+      <button type="button" data-riktning="sv" aria-pressed="true">Svenska → engelska</button>
+      <button type="button" data-riktning="en" aria-pressed="false">Engelska → svenska</button>
+    </div>
+    <div class="vaxel" role="group" aria-label="Läge">
+      <button type="button" data-lage="kort" aria-pressed="true">Kort</button>
+      <button type="button" data-lage="lista" aria-pressed="false">Lista</button>
+    </div>
+  </div>
+
+  <main class="scen" id="scen">
+    <button class="kort" id="kort" type="button" aria-label="Vänd kortet">
+      <div class="sida fram">
+        <div class="topp"><span id="f-kat"></span><span class="lador" id="f-lador"></span></div>
+        <div class="ordet"><div class="huvud" id="f-ord"></div><div class="not" id="f-not"></div></div>
+        <div class="tips">Säg ordet högt, och använd det gärna i en mening. Tryck för att vända.</div>
+      </div>
+      <div class="sida bak">
+        <div class="topp"><span id="b-kat"></span><span class="lador" id="b-lador"></span></div>
+        <div class="ordet"><div class="huvud" id="b-ord"></div><div class="not" id="b-not"></div><div class="exempel" id="b-ex"></div></div>
+      </div>
+    </button>
+    <div class="knappar">
+      <button type="button" class="vand-knapp" id="vand">Vänd kortet<span class="kbd">mellanslag</span></button>
+      <button type="button" class="nej" id="nej" hidden>Kunde inte<span class="kbd">←</span></button>
+      <button type="button" class="ja" id="ja" hidden>Kunde<span class="kbd">→</span></button>
+    </div>
+    <button type="button" class="lyssna" id="lyssna">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M2 5h2.5L8 2v10L4.5 9H2z"/><path d="M10 4.5a3.5 3.5 0 0 1 0 5M11.5 3a5.5 5.5 0 0 1 0 8"/></svg>
+      Lyssna på engelskan
+    </button>
+  </main>
+
+  <section class="lista" id="lista" hidden></section>
+
+  <footer>
+    <span id="status"></span>
+    <span><button type="button" id="nollstall">Börja om</button><span class="bekrafta" id="bekrafta" hidden> Nollställa allt? <button type="button" id="ja-nollstall">Ja</button><button type="button" id="nej-nollstall">Avbryt</button></span></span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  // [svenska, engelska, kategori, exempelmening, anmärkning]
+  var ORD = [
+    // Skola och styrdokument
+    ['gymnasieskola', 'upper secondary school', 'Skolan', 'I teach mathematics and physics at an <b>upper secondary school</b> in Falköping.'],
+    ['grundskola', 'compulsory school', 'Skolan', 'In Sweden, <b>compulsory school</b> covers years 1 to 9.', 'Även: comprehensive school.'],
+    ['högstadiet', 'lower secondary school', 'Skolan', 'Students start algebra seriously in <b>lower secondary school</b>.', 'Årskurs 7–9.'],
+    ['gymnasieprogram', 'national programme', 'Skolan', 'The Natural Science Programme is one of 18 <b>national programmes</b>.', 'Brittisk stavning: programme.'],
+    ['högskoleförberedande program', 'higher education preparatory programme', 'Skolan', 'Mathematics 1c is taught on <b>higher education preparatory programmes</b>.'],
+    ['yrkesprogram', 'vocational programme', 'Skolan', 'Students on <b>vocational programmes</b> usually take Mathematics 1a.'],
+    ['ämne', 'subject', 'Skolan', 'Mathematics is a core <b>subject</b> in every programme.'],
+    ['kurs', 'course', 'Skolan', 'The <b>course</b> Mathematics 1c is worth 100 credits.'],
+    ['gymnasiepoäng', 'upper secondary credits', 'Skolan', 'A full programme is 2,500 <b>credits</b>.'],
+    ['läroplan', 'curriculum', 'Skolan', 'Our <b>curriculum</b> mentions digital tools, but not AI.', 'Plural: curricula.'],
+    ['ämnesplan', 'subject syllabus', 'Skolan', 'The <b>subject syllabus</b> for mathematics lists the aims and the core content.'],
+    ['centralt innehåll', 'core content', 'Skolan', 'Spreadsheets for interest calculations are part of the <b>core content</b>.'],
+    ['styrdokument', 'steering documents', 'Skolan', 'The national <b>steering documents</b> say very little about AI.', 'Även: policy documents.'],
+    ['Skolverket', 'the Swedish National Agency for Education', 'Skolan', '<b>The Swedish National Agency for Education</b> writes the syllabuses and the national tests.'],
+    ['rektor', 'principal', 'Skolan', 'Our <b>principal</b> supports teachers who try new tools.', 'Brittiskt: head teacher.'],
+    ['huvudman', 'education provider', 'Skolan', 'The municipality is the <b>education provider</b> for most public schools.', 'Även: school organiser.'],
+    ['kommun', 'municipality', 'Skolan', 'Each <b>municipality</b> decides which devices the students get.'],
+    ['friskola', 'independent school', 'Skolan', 'About a quarter of upper secondary students attend an <b>independent school</b>.', 'Även: free school.'],
+    ['läsår', 'school year', 'Skolan', 'The Swedish <b>school year</b> starts in August.', 'Även: academic year.'],
+    ['termin', 'term', 'Skolan', 'We have two <b>terms</b>: autumn and spring.', 'Även: semester (amerikanskt).'],
+
+    // Undervisning
+    ['undervisning', 'teaching', 'Undervisning', 'Good <b>teaching</b> starts with what the students already know.', 'Formellt: instruction.'],
+    ['lärande', 'learning', 'Undervisning', 'The tool should support <b>learning</b>, not replace it.'],
+    ['lektion', 'lesson', 'Undervisning', 'I tried this example in a sixty-minute <b>lesson</b>.'],
+    ['lektionsplanering', 'lesson plan', 'Undervisning', 'I can share the <b>lesson plan</b> and the worksheet.'],
+    ['övningsblad', 'worksheet', 'Undervisning', 'The students answer directly on the interactive <b>worksheet</b>.'],
+    ['läromedel', 'teaching materials', 'Undervisning', 'Fysiklabbet is a free collection of digital <b>teaching materials</b>.', 'Lärobok: textbook.'],
+    ['lärandemål', 'learning objective', 'Undervisning', 'The <b>learning objective</b> is to understand the growth factor.'],
+    ['begreppsförståelse', 'conceptual understanding', 'Undervisning', 'Calculating is easy for the tool; <b>conceptual understanding</b> is still our job.'],
+    ['problemlösning', 'problem solving', 'Undervisning', '<b>Problem solving</b> is one of the aims in the Swedish syllabus.'],
+    ['resonemang', 'reasoning', 'Undervisning', 'I want to see their <b>reasoning</b>, not only the answer.'],
+    ['fördjupat lärande', 'deeper learning', 'Undervisning', 'The project title is about technology for <b>deeper learning</b>.'],
+    ['undersökande arbetssätt', 'inquiry-based learning', 'Undervisning', 'The doubling task is a short piece of <b>inquiry-based learning</b>.'],
+    ['elevers handlingsutrymme', 'student agency', 'Undervisning', 'With the simulation, <b>student agency</b> increases: they decide what to test.'],
+    ['elevengagemang', 'student engagement', 'Undervisning', '<b>Student engagement</b> was much higher than with the textbook.'],
+    ['arbeta i par', 'work in pairs', 'Undervisning', 'The students <b>work in pairs</b> and discuss before they write.'],
+    ['helklassgenomgång', 'whole-class discussion', 'Undervisning', 'We ended with a short <b>whole-class discussion</b> about the 72 rule.'],
+    ['ledtråd', 'hint', 'Undervisning', 'The page gives a <b>hint</b> when the answer is wrong.'],
+    ['missuppfattning', 'misconception', 'Undervisning', 'A common <b>misconception</b> is that a larger deposit doubles faster.'],
+    ['förkunskaper', 'prior knowledge', 'Undervisning', 'The task only requires <b>prior knowledge</b> of percentages.'],
+    ['anpassning', 'adaptation', 'Undervisning', 'Small <b>adaptations</b> make the task accessible to more students.', 'Differentiering: differentiation.'],
+
+    // Bedömning
+    ['bedömning', 'assessment', 'Bedömning', '<b>Assessment</b> is getting harder now that AI can write the answers.'],
+    ['formativ bedömning', 'formative assessment', 'Bedömning', 'Instant feedback on the page is a kind of <b>formative assessment</b>.'],
+    ['summativ bedömning', 'summative assessment', 'Bedömning', 'The national test is a <b>summative assessment</b>.'],
+    ['betyg', 'grade', 'Bedömning', 'Swedish <b>grades</b> go from A to F.'],
+    ['betygsätta', 'to grade', 'Bedömning', 'Teachers <b>grade</b> their own students in Sweden.'],
+    ['betygskriterier', 'grading criteria', 'Bedömning', 'The <b>grading criteria</b> describe reasoning and communication.', 'Äldre: knowledge requirements.'],
+    ['nationellt prov', 'national test', 'Bedömning', 'The <b>national tests</b> have gone back to paper.'],
+    ['prov', 'test', 'Bedömning', 'We have a written <b>test</b> at the end of each chapter.', 'Större skrivning: exam.'],
+    ['inlämningsuppgift', 'assignment', 'Bedömning', 'Home <b>assignments</b> are difficult to assess when students use AI.'],
+    ['återkoppling', 'feedback', 'Bedömning', 'The students get <b>feedback</b> as soon as they press Check.', 'Oräknebart: some feedback, inte a feedback.'],
+    ['likvärdighet', 'equity', 'Bedömning', 'Free tools are important for <b>equity</b> between schools.', 'Även: fairness.'],
+    ['fusk', 'cheating', 'Bedömning', 'We worry about <b>cheating</b> with chatbots.', 'Formellt: academic dishonesty.'],
+
+    // Matematik
+    ['ränta', 'interest', 'Matematik', 'The money grows with <b>interest</b> every year.', 'Oräknebart: interest, inte interests.'],
+    ['räntesats', 'interest rate', 'Matematik', 'At an <b>interest rate</b> of 6 %, the money doubles in about 12 years.'],
+    ['ränta på ränta', 'compound interest', 'Matematik', 'The topic is <b>compound interest</b> in Mathematics 1c.'],
+    ['insatt belopp', 'initial deposit', 'Matematik', 'The <b>initial deposit</b> does not affect the doubling time.', 'Även: the amount deposited.'],
+    ['sätta in pengar', 'to deposit money', 'Matematik', 'You <b>deposit</b> 10,000 kronor in a savings account.'],
+    ['sparkonto', 'savings account', 'Matematik', 'The money is in a <b>savings account</b> for twenty years.'],
+    ['amortering', 'repayment', 'Matematik', 'Spreadsheets are used to calculate interest and <b>repayment</b> of loans.', 'Även: amortisation.'],
+    ['förändringsfaktor', 'growth factor', 'Matematik', 'The <b>growth factor</b> for 6 % is 1.06.', 'Vid minskning: decay factor. Även: multiplier.'],
+    ['procentuell förändring', 'percentage change', 'Matematik', 'A <b>percentage change</b> of minus 20 % gives the factor 0.8.'],
+    ['procentenhet', 'percentage point', 'Matematik', 'The rate went up by two <b>percentage points</b>, from 4 % to 6 %.'],
+    ['fördubblingstid', 'doubling time', 'Matematik', 'The <b>doubling time</b> is roughly 72 divided by the interest rate.'],
+    ['72-regeln', 'the rule of 72', 'Matematik', 'The students discover <b>the rule of 72</b> on their own.'],
+    ['exponentiell tillväxt', 'exponential growth', 'Matematik', '<b>Exponential growth</b> feels slow at first and then very fast.'],
+    ['potens', 'power', 'Matematik', '1.06 to the <b>power</b> of 12 is about 2.', 'Läs: "one point oh six to the power of twelve".'],
+    ['exponent', 'exponent', 'Matematik', 'The unknown is in the <b>exponent</b>.'],
+    ['bas', 'base', 'Matematik', 'In 1.06 to the x, the <b>base</b> is 1.06.'],
+    ['ekvation', 'equation', 'Matematik', 'They cannot solve the <b>equation</b> 1.06 to the x equals 2 by hand.'],
+    ['lösa en ekvation', 'to solve an equation', 'Matematik', 'The spreadsheet lets them <b>solve the equation</b> numerically.'],
+    ['närmevärde', 'approximation', 'Matematik', 'They find an <b>approximation</b> to one decimal place.', 'Även: approximate value.'],
+    ['avrunda', 'to round', 'Matematik', '<b>Round</b> the answer to one decimal place.', 'Avrunda uppåt: round up.'],
+    ['en decimal', 'one decimal place', 'Matematik', 'Give the time to <b>one decimal place</b>.'],
+    ['decimalkomma', 'decimal comma', 'Matematik', 'In Sweden we write a <b>decimal comma</b>, not a decimal point.'],
+    ['heltal', 'whole number', 'Matematik', 'Which <b>whole number</b> is the product close to?', 'Även: integer.'],
+    ['funktion', 'function', 'Matematik', 'The amount is a <b>function</b> of time.'],
+    ['graf', 'graph', 'Matematik', 'The <b>graph</b> curves upwards.'],
+    ['lutning', 'slope', 'Matematik', 'The <b>slope</b> of the line is the rate of change.', 'Brittiskt även: gradient.'],
+    ['logaritm', 'logarithm', 'Matematik', 'In Mathematics 2 they learn <b>logarithms</b>, which give the exact answer.'],
+
+    // Digitala verktyg och AI
+    ['digitala verktyg', 'digital tools', 'Digitalt och AI', 'Our curriculum says students should use <b>digital tools</b> every year.'],
+    ['kalkylark', 'spreadsheet', 'Digitalt och AI', 'Each row in the <b>spreadsheet</b> is the row above times the growth factor.'],
+    ['formel', 'formula', 'Digitalt och AI', 'Click a cell to see the <b>formula</b>.', 'Plural: formulas eller formulae.'],
+    ['symbolhanterande verktyg', 'computer algebra system', 'Digitalt och AI', 'GeoGebra includes a <b>computer algebra system</b>, CAS.'],
+    ['datalogiskt tänkande', 'computational thinking', 'Digitalt och AI', 'Programming is the Swedish route to <b>computational thinking</b>.'],
+    ['programmering', 'programming', 'Digitalt och AI', '<b>Programming</b> in Python is part of the mathematics syllabus.', 'Även: coding.'],
+    ['generativ AI', 'generative AI', 'Digitalt och AI', 'I use <b>generative AI</b> to build my teaching materials.'],
+    ['språkmodell', 'large language model', 'Digitalt och AI', 'A <b>large language model</b> predicts text; it does not check the maths.', 'Förkortning: LLM.'],
+    ['AI-agent', 'AI agent', 'Digitalt och AI', 'An <b>AI agent</b> can edit files and run code, not just chat.'],
+    ['simulering', 'simulation', 'Digitalt och AI', 'The <b>simulation</b> lets students change one variable at a time.'],
+    ['källkritik', 'source criticism', 'Digitalt och AI', 'Students need <b>source criticism</b> when they ask a chatbot.', 'Även: critical evaluation of sources.'],
+    ['digital kompetens', 'digital competence', 'Digitalt och AI', '<b>Digital competence</b> is one of the key goals of the curriculum.'],
+
+    // Projektet och seminariet
+    ['läroplansjämförelse', 'curriculum comparison', 'Projektet', 'Our <b>curriculum comparison</b> covers upper secondary school.'],
+    ['mervärde', 'added value', 'Projektet', 'What is the <b>added value</b> of the tool in this lesson?'],
+    ['fallgrop', 'pitfall', 'Projektet', 'One <b>pitfall</b> is that students copy numbers without thinking.'],
+    ['pilotera', 'to pilot', 'Projektet', 'Each country will <b>pilot</b> two or three resources from another partner.'],
+    ['sprida resultaten', 'to disseminate the results', 'Projektet', 'We will <b>disseminate the results</b> at local workshops.'],
+    ['fortbildning', 'professional development', 'Projektet', 'The framework is for teacher <b>professional development</b> workshops.', 'Förkortning: CPD (continuing professional development).'],
+    ['lärarutbildning', 'teacher education', 'Projektet', 'Several partners work in <b>teacher education</b>.', 'Även: teacher training.'],
+    ['ansökan', 'application', 'Projektet', 'The <b>application</b> was submitted in February.'],
+    ['ersättning för utlägg', 'reimbursement', 'Projektet', 'I keep the receipts for the <b>reimbursement</b>.']
+  ];
+
+  var NYCKEL = 'fysiklabbet.ordlista-hki.v1';
+  function $(id) { return document.getElementById(id); }
+  var st = { lador: {}, riktning: 'sv', lage: 'kort', kat: 'Alla' };
+  try { var sparat = JSON.parse(localStorage.getItem(NYCKEL) || 'null'); if (sparat) st = Object.assign(st, sparat); } catch (e) {}
+  function spara() { try { localStorage.setItem(NYCKEL, JSON.stringify(st)); } catch (e) {} }
+  function lada(i) { return st.lador[i] || 0; }
+
+  var kategorier = ['Alla'];
+  ORD.forEach(function (o) { if (kategorier.indexOf(o[2]) < 0) kategorier.push(o[2]); });
+  var kat = $('kategorier');
+  kategorier.forEach(function (k) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.dataset.kat = k;
+    b.textContent = k === 'Alla' ? 'Alla (' + ORD.length + ')' : k + ' (' + ORD.filter(function (o) { return o[2] === k; }).length + ')';
+    b.addEventListener('click', function () { st.kat = k; spara(); nuvarande = null; ritaAllt(); nastaKort(); });
+    kat.appendChild(b);
+  });
+
+  function urval() {
+    var ut = [];
+    ORD.forEach(function (o, i) { if (st.kat === 'Alla' || o[2] === st.kat) ut.push(i); });
+    return ut;
+  }
+  // Leitner: låda 0 väger 8, låda 1 väger 4, låda 2 väger 2, låda 3 väger 1. Samma kort två gånger i rad undviks.
+  var nuvarande = null, senaste = [];
+  function valjKort() {
+    var u = urval(), vikter = u.map(function (i) { return senaste.indexOf(i) >= 0 && u.length > 4 ? 0 : [8, 4, 2, 1][lada(i)]; });
+    var summa = vikter.reduce(function (a, b) { return a + b; }, 0);
+    if (!summa) return u[Math.floor(Math.random() * u.length)];
+    var x = Math.random() * summa;
+    for (var j = 0; j < u.length; j++) { x -= vikter[j]; if (x <= 0) return u[j]; }
+    return u[u.length - 1];
+  }
+  function ladorHtml(i) { var s = ''; for (var k = 1; k <= 3; k++) s += '<i class="' + (lada(i) >= k ? 'p' : '') + '"></i>'; return s; }
+
+  function visaKort(i) {
+    nuvarande = i;
+    var o = ORD[i], sv = st.riktning === 'sv';
+    $('kort').classList.remove('vand');
+    $('f-kat').textContent = o[2] + (sv ? ' · svenska' : ' · engelska');
+    $('b-kat').textContent = o[2] + (sv ? ' · engelska' : ' · svenska');
+    $('f-lador').innerHTML = $('b-lador').innerHTML = ladorHtml(i);
+    $('f-ord').textContent = sv ? o[0] : o[1];
+    $('f-not').textContent = '';
+    $('b-ord').textContent = sv ? o[1] : o[0];
+    $('b-not').textContent = o[4] || '';
+    $('b-ex').innerHTML = o[3] || '';
+    $('vand').hidden = false; $('nej').hidden = true; $('ja').hidden = true;
+  }
+  function nastaKort() {
+    if (st.lage !== 'kort') return;
+    var i = valjKort();
+    senaste.push(i); if (senaste.length > 3) senaste.shift();
+    // Låt kortet vända tillbaka innan nästa ord visas, så att baksidan inte syns.
+    if ($('kort').classList.contains('vand')) { $('kort').classList.remove('vand'); setTimeout(function () { visaKort(i); }, 280); }
+    else visaKort(i);
+  }
+  function vand() {
+    if (nuvarande == null) return;
+    var v = !$('kort').classList.contains('vand');
+    $('kort').classList.toggle('vand', v);
+    $('vand').hidden = v; $('nej').hidden = !v; $('ja').hidden = !v;
+    if (v && st.riktning === 'sv') tala(ORD[nuvarande][1]);
+  }
+  function svara(kunde) {
+    if (nuvarande == null || !$('kort').classList.contains('vand')) return;
+    st.lador[nuvarande] = kunde ? Math.min(3, lada(nuvarande) + 1) : 0;
+    spara(); ritaFramsteg(); nastaKort();
+  }
+  $('kort').addEventListener('click', vand);
+  $('vand').addEventListener('click', vand);
+  $('ja').addEventListener('click', function () { svara(true); });
+  $('nej').addEventListener('click', function () { svara(false); });
+  document.addEventListener('keydown', function (e) {
+    if (st.lage !== 'kort') return;
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); if (!$('kort').classList.contains('vand')) vand(); }
+    else if (e.key === 'ArrowRight') svara(true);
+    else if (e.key === 'ArrowLeft') svara(false);
+  });
+
+  // Uttal: webbläsarens talsyntes, brittisk engelska om den finns.
+  var rost = null;
+  function hittaRost() {
+    if (!('speechSynthesis' in window)) return;
+    var r = speechSynthesis.getVoices();
+    rost = r.filter(function (v) { return /en-GB/i.test(v.lang); })[0] || r.filter(function (v) { return /^en/i.test(v.lang); })[0] || null;
+  }
+  if ('speechSynthesis' in window) { hittaRost(); speechSynthesis.onvoiceschanged = hittaRost; }
+  else $('lyssna').hidden = true;
+  function tala(text) {
+    if (!('speechSynthesis' in window) || !st.ljud) return;
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text); u.lang = 'en-GB'; if (rost) u.voice = rost; u.rate = 0.92;
+    speechSynthesis.speak(u);
+  }
+  $('lyssna').addEventListener('click', function () {
+    if (nuvarande == null) return;
+    st.ljud = true; spara();
+    var o = ORD[nuvarande];
+    tala($('kort').classList.contains('vand') || st.riktning === 'en' ? o[1] : o[1]);
+  });
+
+  function ritaFramsteg() {
+    var u = urval(), n = [0, 0, 0, 0];
+    u.forEach(function (i) { n[lada(i)]++; });
+    $('kan').textContent = n[3] + ' / ' + u.length;
+    $('s3').style.width = (n[3] / u.length * 100) + '%';
+    $('s2').style.width = (n[2] / u.length * 100) + '%';
+    $('s1').style.width = (n[1] / u.length * 100) + '%';
+    $('status').textContent = 'Säkra: ' + n[3] + ' · På väg: ' + (n[1] + n[2]) + ' · Nya eller missade: ' + n[0];
+  }
+  function ritaLista() {
+    var html = '';
+    kategorier.slice(1).forEach(function (k) {
+      if (st.kat !== 'Alla' && st.kat !== k) return;
+      html += '<h2>' + k + '</h2><div style="overflow-x:auto"><table>';
+      ORD.forEach(function (o, i) {
+        if (o[2] !== k) return;
+        html += '<tr><td>' + o[0] + '</td><td>' + o[1] + '<span class="lador">' + ladorHtml(i) + '</span>' + (o[4] ? '<small>' + o[4] + '</small>' : '') + '</td></tr>';
+      });
+      html += '</table></div>';
+    });
+    $('lista').innerHTML = html;
+  }
+  function ritaAllt() {
+    [].forEach.call(kat.children, function (b) { b.setAttribute('aria-pressed', String(b.dataset.kat === st.kat)); });
+    document.querySelectorAll('[data-riktning]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.riktning === st.riktning)); });
+    document.querySelectorAll('[data-lage]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lage === st.lage)); });
+    $('scen').hidden = st.lage !== 'kort';
+    $('lista').hidden = st.lage !== 'lista';
+    if (st.lage === 'lista') ritaLista();
+    ritaFramsteg();
+  }
+  document.querySelectorAll('[data-riktning]').forEach(function (b) {
+    b.addEventListener('click', function () { st.riktning = b.dataset.riktning; spara(); ritaAllt(); if (nuvarande != null) visaKort(nuvarande); });
+  });
+  document.querySelectorAll('[data-lage]').forEach(function (b) {
+    b.addEventListener('click', function () { st.lage = b.dataset.lage; spara(); ritaAllt(); if (st.lage === 'kort') nastaKort(); });
+  });
+  $('nollstall').addEventListener('click', function () { $('bekrafta').hidden = false; });
+  $('nej-nollstall').addEventListener('click', function () { $('bekrafta').hidden = true; });
+  $('ja-nollstall').addEventListener('click', function () { st.lador = {}; spara(); $('bekrafta').hidden = true; ritaAllt(); nastaKort(); });
+
+  ritaAllt();
+  nastaKort();
+})();
+</script>
+</body>
+</html>

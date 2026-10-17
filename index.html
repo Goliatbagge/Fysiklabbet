@@ -593,7 +593,7 @@
         // de inbäddade simuleringarna i genomgångarna räknas inte.
         const FAKTA = (() => {
             const runda = n => n >= 50 ? (Math.floor(n / 10) * 10) + '+' : String(n);
-            const alias = Object.assign({}, window.MA1B_ALIAS, window.MA2B_ALIAS, window.FY1_ALIAS);
+            const alias = Object.assign({}, window.MA1B_ALIAS, window.MA2B_ALIAS, window.MA3B_ALIAS, window.FY1_ALIAS);
             const kod = window.SOK_COURSE_CODE;
             const genomgangar = kod ? KATALOG.filter(a => !alias[kod(a.course) + '-' + a.num] && !/S$/.test(a.num)).length : 0;
             const simsidor = new Set((window.SOK_INDEX || [])
@@ -1111,6 +1111,7 @@
                                     <h3>Matematik – fortsättning</h3>
                                     <p>Derivator och integraler, trigonometri och komplexa tal.</p>
                                     <div className="ns-nivaer">
+                                        <Niva href="katalog.html?id=ma3b" namn="Nivå 1b" kurs="Matematik fortsättning nivå 1b" />
                                         <Niva href="katalog.html?id=ma3c" namn="Nivå 1c" kurs="Matematik fortsättning nivå 1c" />
                                         <Niva href="katalog.html?id=ma4" namn="Nivå 2" kurs="Matematik fortsättning nivå 2" />
                                     </div>

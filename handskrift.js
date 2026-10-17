@@ -62402,6 +62402,13 @@
       a.path.setAttribute('stroke-dasharray', (a.len + 2) + ' ' + (a.len + 2));
       a.path.setAttribute('stroke-dashoffset', a.len + 2);
     });
+    /* överkanten på den FÖRRITADE figuren (uppgiftens figur, se forritad):
+     * followPen() låter den synas nedanför uppgiftspanelen på första
+     * steget i helskärm */
+    var foreTop = Infinity;
+    strokes.forEach(function (a) {
+      if (a.fore && a.pts) a.pts.forEach(function (p) { if (p[1] < foreTop) foreTop = p[1]; });
+    });
 
     /* ---------------- tidslinje ----------------
      * Byggs om när tankeläget växlas: "Utan tankar" använder en filtrerad
@@ -63190,14 +63197,30 @@
       var fri = vh - ph;
       var maxScroll = Math.max(0, wrap.scrollHeight - vh);
       function clampT(t) { return Math.max(0, Math.min(t, maxScroll)); }
+      /* Första steget: uppgiftens förritade figur står redan på arket men
+       * pennan siktar på raden UNDER den, så figurens övre del hamnade
+       * bakom den fastnålade uppgiftspanelen (påpekat 2026-10-17, ma3b-2.2
+       * exempel 1). Rulla då högst så långt att figurens överkant syns
+       * under panelen, så länge pennan ändå ryms i den fria ytan. */
+      var forsta = foreTop < Infinity &&
+                   !(boundaries.length && tNow > boundaries[0] + 1);
+      function sikta(andel) {
+        var tg = py - (ph + andel * fri);
+        if (forsta) {
+          var figT = foreTop * sc + off - ph - 16;
+          if (figT < tg) tg = Math.max(figT, py - (ph + 0.9 * fri));
+        }
+        return clampT(tg);
+      }
       if (instant) {
-        scrollTarget = clampT(py - (ph + 0.45 * fri));
+        scrollTarget = sikta(0.45);
         wrap.scrollTop = scrollTarget;
         return;
       }
       var onScreen = py - wrap.scrollTop;
-      if (onScreen > ph + 0.72 * fri || onScreen < ph + 0.12 * fri) {
-        scrollTarget = clampT(py - (ph + 0.40 * fri));
+      if (forsta ? (onScreen > ph + 0.9 * fri || onScreen < ph + 0.12 * fri)
+                 : (onScreen > ph + 0.72 * fri || onScreen < ph + 0.12 * fri)) {
+        scrollTarget = sikta(0.40);
       }
       if (scrollTarget != null && Math.abs(scrollTarget - wrap.scrollTop) > 1) {
         var d = scrollTarget - wrap.scrollTop;

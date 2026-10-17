@@ -10766,22 +10766,25 @@
     /* ---- a) jämför med butik A ---- */
     tanke(20, [
       [['Vi jämför MED butik A, så']],
-      [['A:s pris 18 kr är det gamla']],
-      [['värdet och B:s 22 kr det']],
-      [['nya.']]
+      [['A:s pris står i nämnaren.']],
+      [['Det fungerar som gamla']],
+      [['värdet.']]
     ], 0);
-    /* Formeln i förkortad form på egen rad, värdena på nästa: hela kedjan
-     * ff = nya/gamla = 22/18 = 1,222... ≈ 1,22 = 122 % ryms inte på en rad. */
+    /* En jämförelse har inget nytt och gammalt värde, så bråket skrivs
+     * med priserna själva: det vi jämför MED står i nämnaren. Raden bryts
+     * efter insättningen, hela kedjan ryms inte på en rad. */
     y = 185;
     T.str('a) Jämför med butik A', padL, y - 2.0 * F, null, 0.62);
     xx = T.str('ff=', padL, y);
-    T.fracH('nya', 'gamla', xx, y);
+    xx = T.fracH('pris B', 'pris A', xx, y);
+    T.stepEnd();
+
+    xx = T.str('=', xx, y);
+    T.fracH('22', '18', xx, y);
     T.stepEnd();
 
     y += 3.6 * F;
-    xx = T.str('ff=', padL, y);
-    xx = T.fracH('22', '18', xx, y);
-    T.stepEnd();
+    xx = padL + 30;
 
     tanke(y, [
       [['Divisionen går inte jämnt']],
@@ -10807,19 +10810,21 @@
     /* ---- b) jämför med butik B ---- */
     tanke(y, [
       [['Nu jämför vi MED butik B,']],
-      [['så nu är 22 kr det gamla']],
-      [['värdet i stället.']]
+      [['så nu står B:s pris i']],
+      [['nämnaren i stället.']]
     ], 0.5);
     y += 4.5 * F;
     T.str('b) Jämför med butik B', padL, y - 2.0 * F, null, 0.62);
     xx = T.str('ff=', padL, y);
-    T.fracH('nya', 'gamla', xx, y);
+    xx = T.fracH('pris A', 'pris B', xx, y);
+    T.stepEnd();
+
+    xx = T.str('=', xx, y);
+    T.fracH('18', '22', xx, y);
     T.stepEnd();
 
     y += 3.6 * F;
-    xx = T.str('ff=', padL, y);
-    xx = T.fracH('18', '22', xx, y);
-    T.stepEnd();
+    xx = padL + 30;
 
     xx = T.str('=0,818...', xx, y);
     T.stepEnd();

@@ -55882,31 +55882,29 @@
     });
     return pos;
   }
-  /* systemet skrivs om med klammer och kolumner */
-  function kolumnSystem(T, F, x0, y, rows) {
+  /* systemet skrivs om med klammer och kolumner; summaraden (som
+   * kolumnSumma skriver i nästa steg) räknas in i kolumnbredderna */
+  function kolumnSystem(T, F, x0, y, rows, summa) {
     var xx = systemKlammer(T, F, x0, y - 1.0 * F, y + 3.0 * F);
-    var w = kolumnBredder(T, rows);
+    var w = kolumnBredder(T, summa ? rows.concat([summa]) : rows);
     kolumnRad(T, F, xx, y, rows[0], w);
     T.pause(240);
     kolumnRad(T, F, xx, y + 2.4 * F, rows[1], w);
+    return { x: xx, w: w, y: y + 2.4 * F };
   }
-  /* ledvis addition: ekvationerna staplas (utan plustecken), streck
-   * under, och summan i samma kolumner. Returnerar summaradens y och
-   * cellernas x-lägen. */
-  function kolumnAddition(T, F, x0, y, rows, summa) {
-    var alla = rows.concat([summa]), w = kolumnBredder(T, alla), bredd = 0;
-    w.forEach(function (v) { bredd += v + 0.3 * F; });
-    kolumnRad(T, F, x0, y, rows[0], w);
-    T.pause(240);
-    kolumnRad(T, F, x0, y + 2.2 * F, rows[1], w);
-    T.pause(240);
+  /* ledvis addition DIREKT under det omskrivna systemet (önskemål
+   * 2026-10-17: att skriva ekvationerna en gång till blev kaka på kaka):
+   * streck under systemet och summan i samma kolumner. */
+  function kolumnSumma(T, F, sys, summa) {
+    var bredd = 0;
+    sys.w.forEach(function (v) { bredd += v + 0.3 * F; });
     T.acts.push({ kind: 'stroke', pts: humanize(
-      [[x0 - 6, y + 3.0 * F], [x0 + bredd, y + 3.0 * F]]) });
+      [[sys.x + 4, sys.y + 0.9 * F], [sys.x + bredd, sys.y + 0.9 * F]]) });
     T.pause(240);
-    var pos = kolumnRad(T, F, x0, y + 4.4 * F, summa, w);
-    return { y: y + 4.4 * F, pos: pos };
+    var y = sys.y + 2.4 * F;
+    var pos = kolumnRad(T, F, sys.x, y, summa, sys.w);
+    return { y: y, pos: pos };
   }
-
   /* torrsvep längs en sträcka i figuren (pekgest utan bläck) */
   function svepa(T, p0, p1) {
     T.acts.push({ kind: 'sweep', pts: humanize([p0, p1]) });
@@ -56184,18 +56182,12 @@
     T.stepEnd();
 
     y += 6.2 * F;
-    kolumnSystem(T, F, padL, y, [['-3x', '-6y', '=', '-24'],
-                                 ['3x', '+y', '=', '9']]);
+    var sys = kolumnSystem(T, F, padL, y, [['-3x', '-6y', '=', '-24'],
+                                 ['3x', '+y', '=', '9']],
+                           ['', '-5y', '=', '-15']);
     T.stepEnd();
 
-    tanke(y + 2.4 * F, [
-      [['Nu adderar jag ekvationerna']],
-      [['ledvis.']]
-    ]);
-    y += 6.4 * F;
-    y = kolumnAddition(T, F, padL + 20, y, [['-3x', '-6y', '=', '-24'],
-                                            ['3x', '+y', '=', '9']],
-                       ['', '-5y', '=', '-15']).y;
+    y = kolumnSumma(T, F, sys, ['', '-5y', '=', '-15']).y;
     T.stepEnd();
 
     y = ekvOp(y, '/(-5)', padL + 330, '-5y=-15',
@@ -56539,18 +56531,12 @@
     T.stepEnd();
 
     y += 6.2 * F;
-    kolumnSystem(T, F, padL, y, [['2x', '+3y', '=', '24'],
-                                 ['-2x', '-2y', '=', '-20']]);
+    var sys = kolumnSystem(T, F, padL, y, [['2x', '+3y', '=', '24'],
+                                 ['-2x', '-2y', '=', '-20']],
+                           ['', 'y', '=', '4']);
     T.stepEnd();
 
-    tanke(y + 2.4 * F, [
-      [['Nu adderar jag ekvationerna']],
-      [['ledvis.']]
-    ]);
-    y += 6.4 * F;
-    var sum4 = kolumnAddition(T, F, padL + 20, y, [['2x', '+3y', '=', '24'],
-                                                   ['-2x', '-2y', '=', '-20']],
-                              ['', 'y', '=', '4']);
+    var sum4 = kolumnSumma(T, F, sys, ['', 'y', '=', '4']);
     y = sum4.y;
     var xY4 = sum4.pos[3], yY4 = y;
     T.stepEnd();
@@ -56719,18 +56705,12 @@
     T.stepEnd();
 
     y += 6.2 * F;
-    kolumnSystem(T, F, padL, y, [['30x', '+50y', '=', '300'],
-                                 ['-30x', '-30y', '=', '-240']]);
+    var sys = kolumnSystem(T, F, padL, y, [['30x', '+50y', '=', '300'],
+                                 ['-30x', '-30y', '=', '-240']],
+                           ['', '20y', '=', '60']);
     T.stepEnd();
 
-    tanke(y + 2.4 * F, [
-      [['Nu adderar jag ekvationerna']],
-      [['ledvis.']]
-    ]);
-    y += 6.4 * F;
-    y = kolumnAddition(T, F, padL + 20, y, [['30x', '+50y', '=', '300'],
-                                            ['-30x', '-30y', '=', '-240']],
-                       ['', '20y', '=', '60']).y;
+    y = kolumnSumma(T, F, sys, ['', '20y', '=', '60']).y;
     T.stepEnd();
 
     y = ekvOp(y, '/20', padL + 360, '20y=60',

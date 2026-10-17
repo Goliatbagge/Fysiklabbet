@@ -668,6 +668,14 @@
  * svarsrader rättades 2026-09-20 och verify-handskrift.js ger fel på
  * 'Svar: ' följt av ett ord med liten bokstav.
  *
+ * REGEL (SVARETS ANDRA RAD BÖRJAR VID VÄNSTERKANTEN, användarkrav
+ * 2026-10-17): ryms svaret inte på en rad fortsätter det på nästa rad
+ * vid padL, precis där "Svar:" börjar. Aldrig padL + 30, aldrig ett
+ * hängande indrag under ordet efter "Svar:". ("som kostar 22 000 kr"
+ * stod indraget i ma3b-2.2, och samma indrag fanns i sju svar till, i
+ * ma3b-2.2 och i NP Ma 4.) verify-handskrift.js ger fel på en T.str()
+ * på en ny rad efter 'Svar:' som inte skrivs på padL.
+ *
  * REGEL (LOGARITMERA BÅDA LED I TVÅ RADER, användarkrav 2026-09-20):
  * när en exponentialekvation löses genom att båda led logaritmeras skrivs
  * FÖRST raden där logaritmen tas av båda led, "lg 8^x = lg 15", som eget
@@ -56463,7 +56471,7 @@
     y += 2.8 * F;
     T.str('Svar: Största värdet är 12', padL, y);
     y += 2.0 * F;
-    xe = T.str('och minsta värdet är 0', padL + 30, y);
+    xe = T.str('och minsta värdet är 0', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -56642,7 +56650,7 @@
     y += 2.8 * F;
     T.str('Svar: 6 stolar och 4 bord,', padL, y);
     y += 2.0 * F;
-    xe = T.str('vinsten blir 4 400 kr per vecka', padL + 30, y);
+    xe = T.str('vinsten blir 4 400 kr per vecka', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -56819,7 +56827,7 @@
     y += 2.8 * F;
     T.str('Svar: 5 små och 3 stora bussar,', padL, y);
     y += 2.0 * F;
-    xe = T.str('som kostar 22 000 kr', padL + 30, y);
+    xe = T.str('som kostar 22 000 kr', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

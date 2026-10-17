@@ -526,6 +526,39 @@ for (const typ of valda) {
   }
 }
 
+/* SVARETS ANDRA RAD BÖRJAR VID VÄNSTERKANTEN (användarkrav 2026-10-17):
+ * räcker inte svaret till en rad fortsätter det på nästa rad vid padL,
+ * precis som "Svar:", aldrig indraget (felet hände i ma3b-2.2: "som
+ * kostar 22 000 kr" stod på padL + 30). Källkodsgranskning: en T.str()
+ * inom de närmaste raderna efter en 'Svar:'-sträng, före stepEnd, ska
+ * skrivas på padL. */
+{
+  const filer = [path.join(ROOT, 'handskrift.js'), ...pennaFiler()];
+  const indrag = [];
+  for (const f of filer) {
+    const rader = fs.readFileSync(f, 'utf8').split(/\r?\n/);
+    rader.forEach((rad, i) => {
+      if (/^\s*(\/\*|\*|\/\/)/.test(rad) || !/['"]Svar:/.test(rad)) return;
+      let nyRad = false;
+      for (let k = i + 1; k < Math.min(rader.length, i + 6); k++) {
+        if (/stepEnd|return \{/.test(rader[k])) break;
+        if (/\by\s*\+=/.test(rader[k])) nyRad = true;            /* raden under */
+        /* ett x som är padL + något eller ett fast tal är ett indrag; ett
+         * x ur en tidigare sträng (xe, xe2) fortsätter samma rad */
+        if (nyRad && /T\.str\(\s*['"][^'"]*['"],\s*(padL\s*\+|X[0-9A-Z]*\s*[,+]|[0-9])/.test(rader[k])) {
+          indrag.push(path.basename(f) + ':' + (k + 1) + ': ' + rader[k].trim().slice(0, 70));
+        }
+      }
+    });
+  }
+  if (indrag.length) {
+    felTot += indrag.length;
+    console.log('\n\x1b[31mFEL\x1b[0m  svarets andra rad är indragen ' +
+                '(skriv den på padL, som "Svar:"):');
+    indrag.slice(0, 12).forEach(r => console.log('      - ' + r));
+  }
+}
+
 /* EKVATIONSOPERATIONEN SKRIVS ALLTID UT (se REGEL i handskrift.js
  * filhuvud, 2026-09-07). Två genvägar som bara syns i uppspelningen:
  *   a) ett väggsteg på en rad — `if (vagg) T.vaggOp(…)` följt av

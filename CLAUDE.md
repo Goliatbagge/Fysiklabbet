@@ -629,6 +629,12 @@ Så här bygger du scenen:
    skiftläge (`Svar: x = 9`). Gäller pennscener, provens `svar`/`delsvar`
    och teorins `::: textlosning`; `verify-handskrift.js` ger fel på
    `'Svar: '` följt av ett ord med liten bokstav.
+3s. **Svarets andra rad börjar vid vänsterkanten.** Ryms svaret inte på
+   en rad fortsätter det på nästa rad på `padL`, där "Svar:" börjar,
+   aldrig indraget (`padL + 30`) och aldrig med ett hängande indrag
+   under ordet efter "Svar:" (användarkrav 2026-10-17: "som kostar
+   22 000 kr" stod indraget i `ma3b-2.2`, och sju svar till hade samma
+   indrag). `verify-handskrift.js` ger fel på en indragen svarsrad.
 3a. **Logaritmera båda led i två rader.** När en exponentialekvation
    löses med logaritmer skrivs först raden där båda led logaritmeras,
    `lg 8^x = lg 15`, som eget klicksteg, och först därefter raden där

@@ -1336,7 +1336,7 @@
     y += 4.0 * F;
     xe = T.str('Svar: x=15°+n·90°', padL, y);
     y += 2.3 * F;
-    xe2 = T.str('och x=30°+n·90°', padL + T.adv('Svar: '), y);
+    xe2 = T.str('och x=30°+n·90°', padL, y);
     T.str('(n heltal)', xe2 + 0.5 * F, y, null, 0.62);
     T.underline(Math.max(xe, xe2), y);
     T.stepEnd();
@@ -3203,7 +3203,7 @@
     y += 3.0 * F;
     T.str('Svar: A=2,6;  B≈1,6;', padL, y);
     y += 2.0 * F;
-    xe = T.str('C≈-0,8;  D=3,9', padL + 84, y);
+    xe = T.str('C≈-0,8;  D=3,9', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

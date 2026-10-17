@@ -698,7 +698,7 @@
     y += 2.6 * F;
     T.str('Svar: f(x)+g(x): D   f(x)·g(x): C', padL, y);
     y += 2.1 * F;
-    xe = T.str('f(g(x)): B   g(f(x)): A', padL + 1.9 * F, y);
+    xe = T.str('f(g(x)): B   g(f(x)): A', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -806,7 +806,7 @@
     y = oy + 5.5 * u + 2.4 * F;
     T.str('Svar: Linjerna y=x och y=-x', padL, y);
     y += 2.1 * F;
-    xe = T.str('(Im z=Re z och Im z=-Re z)', padL + 1.9 * F, y);
+    xe = T.str('(Im z=Re z och Im z=-Re z)', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1033,7 +1033,7 @@
     y += 4.0 * F;
     xe = T.str('Svar: x=15°+n·180°', padL, y);
     y += 2.3 * F;
-    xe2 = T.str('och x=75°+n·180°', padL + T.adv('Svar: '), y);
+    xe2 = T.str('och x=75°+n·180°', padL, y);
     T.str('(n heltal)', xe2 + 0.5 * F, y, null, 0.62);
     T.underline(Math.max(xe, xe2), y);
     T.stepEnd();

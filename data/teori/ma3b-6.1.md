@@ -19,8 +19,8 @@ använda dem för att räkna på sparande och lån.
 
 En **talföljd** är tal som står i en bestämd ordning. Talen kallas
 talföljdens **element**. Elementen betecknas $a_1, a_2, a_3, \ldots$ där
-talet $n$ i $a_n$ är elementets **ordningsnummer**, ibland kallat index.
-Det $n$:te elementet skrivs alltså $a_n$. I talföljden
+talet $n$ i $a_{\mathit{n}}$ är elementets **ordningsnummer**, ibland kallat index.
+Det $n$:te elementet skrivs alltså $a_{\mathit{n}}$. I talföljden
 
 $$
 3,\ 7,\ 11,\ 15,\ 19,\ \ldots
@@ -34,15 +34,15 @@ talföljden fortsätter på samma sätt.
 En talföljd kan beskrivas med en formel på två sätt.
 
 - En **sluten formel** räknar ut ett element direkt ur ordningsnumret. Med
-  $a_n = 4n - 1$ blir $a_{100} = 4 \cdot 100 - 1 = 399$, utan att vi behöver
+  $a_{\mathit{n}} = 4n - 1$ blir $a_{100} = 4 \cdot 100 - 1 = 399$, utan att vi behöver
   räkna ut de 99 elementen före.
 - En **rekursiv formel** talar om hur varje element fås ur det föregående.
-  Talföljden ovan kan beskrivas med $a_1 = 3$ och $a_{n+1} = a_n + 4$: börja
+  Talföljden ovan kan beskrivas med $a_1 = 3$ och $a_{\mathit{n}+1} = a_{\mathit{n}} + 4$: börja
   med 3 och lägg till 4 varje gång. För att få $a_{100}$ måste vi då räkna
   oss fram element för element.
 
 ::: exempel "Exempel 1 — Element ur en formel"
-**Bestäm de fyra första elementen i talföljden som ges av<br>a)&nbsp;$a_n = n^2 + 1$&emsp;&emsp;b)&nbsp;$a_1 = 2$ och $a_{n+1} = 2 \cdot a_n + 1$**
+**Bestäm de fyra första elementen i talföljden som ges av<br>a)&nbsp;$a_{\mathit{n}} = n^2 + 1$&emsp;&emsp;b)&nbsp;$a_1 = 2$ och $a_{\mathit{n}+1} = 2 \cdot a_{\mathit{n}} + 1$**
 
 ::: handskrift
 typ: talfoljdelement
@@ -93,12 +93,12 @@ $$
 
 ::: formel "Aritmetisk talföljd"
 $$
-a_n = a_1 + (n - 1) \cdot d
+a_{\mathit{n}} = a_1 + (n - 1) \cdot d
 $$
 
 där
 
-- $a_n$ = element nummer $n$
+- $a_{\mathit{n}}$ = element nummer $n$
 - $a_1$ = första element
 - $d$ = differens
 - $n$ = ordningsnummer
@@ -111,11 +111,11 @@ $$
 a_2 = a_1 + d \qquad a_3 = a_1 + 2d \qquad a_4 = a_1 + 3d
 $$
 
-Från $a_1$ till $a_n$ är det $n - 1$ steg, så differensen läggs till
+Från $a_1$ till $a_{\mathit{n}}$ är det $n - 1$ steg, så differensen läggs till
 $n - 1$ gånger:
 
 $$
-a_n = a_1 + (n - 1) \cdot d
+a_{\mathit{n}} = a_1 + (n - 1) \cdot d
 $$
 :::
 :::
@@ -149,13 +149,13 @@ $$
 Antalet ökar med 2 för varje ny figur, eftersom varje ny triangel lånar en
 sticka av den förra och bara behöver två nya. Talföljden är alltså
 aritmetisk med $a_1 = 3$ och $d = 2$. Insättning i formeln för en
-aritmetisk talföljd, $a_n = a_1 + (n - 1) \cdot d$, ger
+aritmetisk talföljd, $a_{\mathit{n}} = a_1 + (n - 1) \cdot d$, ger
 
 $$
-a_n = 3 + (n - 1) \cdot 2 = 3 + 2n - 2 = 2n + 1
+a_{\mathit{n}} = 3 + (n - 1) \cdot 2 = 3 + 2n - 2 = 2n + 1
 $$
 
-**Svar:** $a_n = 2n + 1$
+**Svar:** $a_{\mathit{n}} = 2n + 1$
 
 **b)** Vi sätter in $n = 50$ i formeln från a).
 
@@ -166,7 +166,7 @@ $$
 **Svar:** 101 stickor
 
 **c)** Om 100 stickor räcker till en figur finns det ett heltal $n$ som
-ger $a_n = 100$. Vi löser ekvationen.
+ger $a_{\mathit{n}} = 100$. Vi löser ekvationen.
 
 $$
 2n + 1 = 100
@@ -204,9 +204,9 @@ resten av kapitlet. I nästa avsnitt tar vi fram en formel för deras
 element.
 
 ::: tips "Så känner du igen talföljden"
-- **Aritmetisk:** differensen $a_{n+1} - a_n$ är densamma hela tiden.
+- **Aritmetisk:** differensen $a_{\mathit{n}+1} - a_{\mathit{n}}$ är densamma hela tiden.
   Samma tal **läggs till** varje gång.
-- **Geometrisk:** kvoten $\dfrac{a_{n+1}}{a_n}$ är densamma hela tiden.
+- **Geometrisk:** kvoten $\dfrac{a_{\mathit{n}+1}}{a_{\mathit{n}}}$ är densamma hela tiden.
   Varje element **multipliceras** med samma tal.
 - Är varken differensen eller kvoten konstant är talföljden ingetdera.
 :::
@@ -242,7 +242,7 @@ $$
 $$
 
 som inte heller är lika. Elementen är kvadraterna $1^2, 2^2, 3^2, 4^2$, så
-talföljden ges av $a_n = n^2$, men den är varken aritmetisk eller
+talföljden ges av $a_{\mathit{n}} = n^2$, men den är varken aritmetisk eller
 geometrisk.
 
 **Svar:** Ingetdera
@@ -268,7 +268,7 @@ for n in range(1, 11):
 - `a = a * 3` räknar fram nästa element: det föregående gånger kvoten.
 
 Varje varv i loopen gör alltså precis det som den rekursiva formeln
-$a_{n+1} = 3 \cdot a_n$ säger. Byts `a * 3` mot `a + 4` på sista raden blir
+$a_{\mathit{n}+1} = 3 \cdot a_{\mathit{n}}$ säger. Byts `a * 3` mot `a + 4` på sista raden blir
 talföljden i stället aritmetisk med differensen 4.
 :::
 
@@ -276,20 +276,20 @@ talföljden i stället aritmetisk med differensen 4.
 
 ::: sampunkt "Talföljd"
 - Tal i en **bestämd ordning**. Talen kallas **element**.
-- $a_n$ är element nummer $n$, där $n$ är **ordningsnumret**.
+- $a_{\mathit{n}}$ är element nummer $n$, där $n$ är **ordningsnumret**.
 - I $3, 7, 11, \ldots$ är $a_1 = 3$ och $a_3 = 11$.
 :::
 
 ::: sampunkt "Två sorters formler"
-- **Sluten:** ger elementet direkt, $a_n = 4n - 1$.
-- **Rekursiv:** ger elementet ur det föregående, $a_{n+1} = a_n + 4$
+- **Sluten:** ger elementet direkt, $a_{\mathit{n}} = 4n - 1$.
+- **Rekursiv:** ger elementet ur det föregående, $a_{\mathit{n}+1} = a_{\mathit{n}} + 4$
   med $a_1 = 3$.
 :::
 
 ::: sampunkt "Aritmetisk talföljd"
 - Samma tal $d$ **läggs till** varje gång.
-- $a_n = a_1 + (n - 1) \cdot d$
-- Ingår 100? Lös $a_n = 100$. Blir $n$ inget heltal ingår talet inte.
+- $a_{\mathit{n}} = a_1 + (n - 1) \cdot d$
+- Ingår 100? Lös $a_{\mathit{n}} = 100$. Blir $n$ inget heltal ingår talet inte.
 :::
 
 ::: sampunkt "Geometrisk talföljd"

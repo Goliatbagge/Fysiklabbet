@@ -189,7 +189,7 @@ ligger i framtiden är vinsten värd mindre än så i dag.
 Nuvärdena $\dfrac{50\,000}{1{,}05}$, $\dfrac{50\,000}{1{,}05^2}$ och
 $\dfrac{50\,000}{1{,}05^3}$ bildar en geometrisk talföljd, där varje
 element är det föregående dividerat med 1,05. Kvoten är alltså
-$k = \dfrac{1}{1{,}05}$. Med många utbetalningar blir det mödosamt att
+$\dfrac{1}{1{,}05}$. Med många utbetalningar blir det mödosamt att
 räkna ut varje nuvärde för sig. I nästa avsnitt tar vi fram en formel för
 summan av en geometrisk talföljd, och med den går det att räkna ut nuvärdet
 av till exempel 20 års utbetalningar på en rad.
@@ -214,6 +214,6 @@ av till exempel 20 års utbetalningar på en rad.
 
 ::: sampunkt "Flera utbetalningar"
 - Räkna ut **varje** utbetalnings nuvärde och addera.
-- Nuvärdena bildar en geometrisk talföljd med $k = \dfrac{1}{\text{förändringsfaktor}}$.
+- Nuvärdena bildar en geometrisk talföljd med kvoten $\dfrac{1}{\text{förändringsfaktor}}$.
 :::
 :::

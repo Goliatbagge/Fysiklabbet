@@ -16,7 +16,7 @@ tillsammans**. Sätter du in pengar på ett sparkonto varje år är det just
 summan av alla insättningarna, med ränta, som står på kontot till slut.
 
 En summa av elementen i en geometrisk talföljd kallas en **geometrisk
-summa**. Summan av de $n$ första elementen betecknas $s_n$.
+summa**. Summan av de $n$ första elementen betecknas $s_{\mathit{n}}$.
 
 ::: kuriosa "Schackbrädet och riskornen"
 Enligt en gammal berättelse fick schackspelets uppfinnare önska sig en
@@ -38,12 +38,12 @@ hundratals gånger mer ris än vad hela världen skördar på ett år.
 Summan av de $n$ första elementen i en geometrisk talföljd är
 
 $$
-s_n = a_1 + a_1 \cdot k + a_1 \cdot k^2 + \ldots + a_1 \cdot k^{n-1} = \frac{a_1(k^n - 1)}{k - 1}
+s_{\mathit{n}} = a_1 + a_1 \cdot k + a_1 \cdot k^2 + \ldots + a_1 \cdot k^{n-1} = \frac{a_1(k^n - 1)}{k - 1}
 $$
 
 där
 
-- $s_n$ = summa av de $n$ första elementen
+- $s_{\mathit{n}}$ = summa av de $n$ första elementen
 - $a_1$ = första element
 - $k$ = kvot ($k \neq 1$)
 - $n$ = antal termer
@@ -52,36 +52,36 @@ där
 Vi skriver ut summan, term för term:
 
 $$
-s_n = a_1 + a_1 k + a_1 k^2 + \ldots + a_1 k^{n-1} \tag{1}
+s_{\mathit{n}} = a_1 + a_1 k + a_1 k^2 + \ldots + a_1 k^{n-1} \tag{1}
 $$
 
 Vi multiplicerar båda led med kvoten $k$. Varje term flyttar då ett steg
 uppåt i talföljden:
 
 $$
-k \cdot s_n = a_1 k + a_1 k^2 + \ldots + a_1 k^{n-1} + a_1 k^n \tag{2}
+k \cdot s_{\mathit{n}} = a_1 k + a_1 k^2 + \ldots + a_1 k^{n-1} + a_1 k^n \tag{2}
 $$
 
 Nästan alla termer finns i båda summorna. Bara $a_1$ i (1) och
 $a_1 k^n$ i (2) saknar en partner. Därför försvinner alla de andra
 termerna när vi subtraherar (1),
-$s_n = a_1 + a_1 k + \ldots + a_1 k^{n-1}$, från (2):
+$s_{\mathit{n}} = a_1 + a_1 k + \ldots + a_1 k^{n-1}$, från (2):
 
 $$
-k \cdot s_n - s_n = a_1 k^n - a_1
+k \cdot s_{\mathit{n}} - s_{\mathit{n}} = a_1 k^n - a_1
 $$
 
-Vi bryter ut $s_n$ i vänsterledet och $a_1$ i högerledet:
+Vi bryter ut $s_{\mathit{n}}$ i vänsterledet och $a_1$ i högerledet:
 
 $$
-s_n(k - 1) = a_1(k^n - 1)
+s_{\mathit{n}}(k - 1) = a_1(k^n - 1)
 $$
 
 Till sist dividerar vi båda led med $k - 1$. Det går eftersom
 $k \neq 1$, och då är $k - 1 \neq 0$:
 
 $$
-s_n = \frac{a_1(k^n - 1)}{k - 1}
+s_{\mathit{n}} = \frac{a_1(k^n - 1)}{k - 1}
 $$
 :::
 :::
@@ -110,9 +110,9 @@ typ: geosumma
 
 ::: textlosning
 **a)** Första termen är $a_1 = 3$. Kvoten är $k = \dfrac{6}{3} = 2$.
-Den sista termen $3 \cdot 2^9$ är $a_n = a_1 \cdot k^{n-1}$, så
+Den sista termen $3 \cdot 2^9$ är $a_{\mathit{n}} = a_1 \cdot k^{n-1}$, så
 $n - 1 = 9$. Summan har alltså $n = 10$ termer. Insättning i
-$s_n = \dfrac{a_1(k^n - 1)}{k - 1}$ ger
+$s_{\mathit{n}} = \dfrac{a_1(k^n - 1)}{k - 1}$ ger
 
 $$
 s_{10} = \frac{3(2^{10} - 1)}{2 - 1} = \frac{3 \cdot 1\,023}{1} = 3\,069
@@ -143,7 +143,7 @@ typ: geotermer
 
 ::: textlosning
 **a)** Första termen är $a_1 = 5$ och kvoten är $k = \dfrac{15}{5} = 3$.
-Den sista termen är $a_n = 5 \cdot 3^{n-1}$, och den ska vara 98 415:
+Den sista termen är $a_{\mathit{n}} = 5 \cdot 3^{n-1}$, och den ska vara 98 415:
 
 $$
 5 \cdot 3^{n-1} = 98\,415
@@ -181,7 +181,7 @@ $$
 **Svar:** 10 termer
 
 **b)** Nu vet vi att $a_1 = 5$, $k = 3$ och $n = 10$. Insättning i
-$s_n = \dfrac{a_1(k^n - 1)}{k - 1}$ ger
+$s_{\mathit{n}} = \dfrac{a_1(k^n - 1)}{k - 1}$ ger
 
 $$
 s_{10} = \frac{5(3^{10} - 1)}{3 - 1} = \frac{5 \cdot 59\,048}{2} = 147\,620
@@ -246,7 +246,7 @@ $$
 $$
 
 Det är en geometrisk summa med $a_1 = 5\,000$, $k = 1{,}028$ och
-$n = 10$. Insättning i $s_n = \dfrac{a_1(k^n - 1)}{k - 1}$ ger
+$n = 10$. Insättning i $s_{\mathit{n}} = \dfrac{a_1(k^n - 1)}{k - 1}$ ger
 
 $$
 s_{10} = \frac{5\,000(1{,}028^{10} - 1)}{1{,}028 - 1} = 56\,794{,}242\ldots \approx 56\,794{,}24
@@ -352,9 +352,9 @@ $$
 
 ::: sampunkt "Geometrisk summa"
 - Summan av elementen i en geometrisk talföljd.
-- $s_n$ är summan av de $n$ första elementen.
+- $s_{\mathit{n}}$ är summan av de $n$ första elementen.
 - Formeln gäller för alla kvoter utom $k = 1$:
-  $s_n = \dfrac{a_1(k^n - 1)}{k - 1}$.
+  $s_{\mathit{n}} = \dfrac{a_1(k^n - 1)}{k - 1}$.
 :::
 
 ::: sampunkt "Hitta $a_1$, $k$ och $n$"

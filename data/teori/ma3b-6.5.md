@@ -90,7 +90,7 @@ $$
 
 Varje term är den föregående gånger $k$. Det är alltså en geometrisk
 summa med första termen $a_1 = \dfrac{A}{k^n}$, kvoten $k$ och $n$
-termer. Formeln $s_n = \dfrac{a_1(k^n - 1)}{k - 1}$ ger
+termer. Formeln $s_{\mathit{n}} = \dfrac{a_1(k^n - 1)}{k - 1}$ ger
 
 $$
 G = \frac{A}{k^n} \cdot \frac{k^n - 1}{k - 1}

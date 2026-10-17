@@ -34,17 +34,17 @@ alltså samma tal som förändringsfaktorn.
 
 ## Formel för det *n*:te elementet
 
-För att komma från $a_1$ till $a_n$ multiplicerar vi med kvoten en gång för
+För att komma från $a_1$ till $a_{\mathit{n}}$ multiplicerar vi med kvoten en gång för
 varje steg. Det ger en sluten formel för elementen.
 
 ::: formel "Det $n$:te elementet i en geometrisk talföljd"
 $$
-a_n = a_1 \cdot k^{n-1}
+a_{\mathit{n}} = a_1 \cdot k^{n-1}
 $$
 
 där
 
-- $a_n$ = element nummer $n$
+- $a_{\mathit{n}}$ = element nummer $n$
 - $a_1$ = första element
 - $k$ = kvot
 - $n$ = ordningsnummer
@@ -65,11 +65,11 @@ a_4 = a_3 \cdot k = a_1 \cdot k^2 \cdot k = a_1 \cdot k^3
 $$
 
 Exponenten är hela tiden ett mindre än ordningsnumret, eftersom det första
-elementet inte har multiplicerats med $k$ någon gång. Från $a_1$ till $a_n$
+elementet inte har multiplicerats med $k$ någon gång. Från $a_1$ till $a_{\mathit{n}}$
 är det $n - 1$ steg, så
 
 $$
-a_n = a_1 \cdot k^{n-1}
+a_{\mathit{n}} = a_1 \cdot k^{n-1}
 $$
 :::
 :::
@@ -92,7 +92,7 @@ De blå punkterna har $a_1 = 1$ och $k = 1{,}5$. De röda har $a_1 = 8$ och $k =
   blir talföljden $1, -2, 4, -8, 16, \ldots$
 
 ::: exempel "Exempel 1 — Bestäm ett element"
-**Talföljden $3,\ 6,\ 12,\ 24,\ \ldots$ är geometrisk.<br>a) Bestäm en sluten formel för $a_n$.<br>b) Bestäm $a_{10}$.**
+**Talföljden $3,\ 6,\ 12,\ 24,\ \ldots$ är geometrisk.<br>a) Bestäm en sluten formel för $a_{\mathit{n}}$.<br>b) Bestäm $a_{10}$.**
 
 ::: handskrift
 typ: geomelement
@@ -106,13 +106,13 @@ $$
 k = \frac{a_2}{a_1} = \frac{6}{3} = 2
 $$
 
-Med $a_1 = 3$ och $k = 2$ ger formeln $a_n = a_1 \cdot k^{n-1}$
+Med $a_1 = 3$ och $k = 2$ ger formeln $a_{\mathit{n}} = a_1 \cdot k^{n-1}$
 
 $$
-a_n = 3 \cdot 2^{n-1}
+a_{\mathit{n}} = 3 \cdot 2^{n-1}
 $$
 
-**Svar:** $a_n = 3 \cdot 2^{n-1}$
+**Svar:** $a_{\mathit{n}} = 3 \cdot 2^{n-1}$
 
 **b)** Vi sätter in $n = 10$ i formeln från a).
 
@@ -189,7 +189,7 @@ $$
 28\,000,\ 28\,000 \cdot 1{,}03,\ 28\,000 \cdot 1{,}03^2,\ \ldots
 $$
 
-Lönen år $n$ är alltså $a_n = 28\,000 \cdot 1{,}03^{n-1}$. Lägg märke till
+Lönen år $n$ är alltså $a_{\mathit{n}} = 28\,000 \cdot 1{,}03^{n-1}$. Lägg märke till
 exponenten: första årets lön har inte höjts någon gång, så lönen år 8 har
 höjts 7 gånger.
 
@@ -209,7 +209,7 @@ typ: geomlon
 kvoten $k = 1{,}03$, som är förändringsfaktorn för en ökning med 3 %.
 
 $$
-a_n = 28\,000 \cdot 1{,}03^{n-1}
+a_{\mathit{n}} = 28\,000 \cdot 1{,}03^{n-1}
 $$
 
 År 8 har lönen höjts 7 gånger.
@@ -271,8 +271,8 @@ $28\,000 \cdot 1{,}03^{12} \approx 39\,921$ kr, alltså fortfarande under
 :::
 
 ::: sampunkt "Det $n$:te elementet"
-- $a_n = a_1 \cdot k^{n-1}$
-- Exponenten är $n - 1$: från $a_1$ till $a_n$ är det $n - 1$ steg.
+- $a_{\mathit{n}} = a_1 \cdot k^{n-1}$
+- Exponenten är $n - 1$: från $a_1$ till $a_{\mathit{n}}$ är det $n - 1$ steg.
 - $a_{10} = 3 \cdot 2^9 = 1\,536$
 :::
 

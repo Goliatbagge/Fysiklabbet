@@ -40,6 +40,12 @@
  *   x:        startfönster i x-led "min, max" (valfritt, standard -6, 6).
  *   y:        startfönster i y-led "min, max" (valfritt, standard -6, 6).
  *   <param>:  "värde, min, max[, steg]" — en glidare per parameter.
+ *   område:   skuggad polygon som står still medan kurvan ändras, med
+ *             hörnen som "x y" åtskilda av semikolon: "0 0; 5 0; 3 2; 0 3"
+ *             (valfritt; för linjär optimering, där nivålinjen flyttas
+ *             över det tillåtna området, ma3b-2.2).
+ *   hörn:     ja — områdets hörn markeras med prickar och koordinater.
+ *   skärning: nej — ingen röd prick i y-skärningen (standard ja).
  *
  * Widgeten är ren vanilla-JS (ingen React) och matchar Laborans-papperstemat.
  */
@@ -197,7 +203,8 @@
     function parseConfig(text) {
         var cfg = {
             title: null, expr: null, eq: null, triangle: false,
-            params: [], x: [-6, 6], y: [-6, 6]
+            params: [], x: [-6, 6], y: [-6, 6],
+            area: null, corners: false, intercept: true
         };
         var lines = text.split('\n');
         for (var i = 0; i < lines.length; i++) {
@@ -211,6 +218,14 @@
             else if (key === 'uttryck') cfg.expr = val;
             else if (key === 'ekvation') cfg.eq = val;
             else if (key === 'lutningstriangel') cfg.triangle = /^(ja|1|true)$/i.test(val);
+            else if (key === 'område') {
+                cfg.area = val.split(';').map(function (pt) {
+                    var q = pt.trim().split(/\s+/);
+                    return [num(q[0]), num(q[1])];
+                }).filter(function (q) { return isFinite(q[0]) && isFinite(q[1]); });
+            }
+            else if (key === 'hörn') cfg.corners = /^(ja|1|true)$/i.test(val);
+            else if (key === 'skärning') cfg.intercept = !/^(nej|0|false)$/i.test(val);
             else if (key === 'x') { var xp = val.split(','); cfg.x = [num(xp[0]), num(xp[1])]; }
             else if (key === 'y') { var yp = val.split(','); cfg.y = [num(yp[0]), num(yp[1])]; }
             else {
@@ -261,6 +276,8 @@
         accent: '#c8324a',
         tri: '#1c3d6b',
         tick: '#5b6472',
+        area: 'rgba(37,99,201,0.16)',
+        areaEdge: 'rgba(31,37,48,0.55)',
         track: 'rgba(15,22,32,0.22)'
     };
     var GEO = { W: 500, H: 400, l: 40, r: 30, t: 22, b: 32 };
@@ -458,6 +475,14 @@
             var gClip = svgEl('g', { 'clip-path': 'url(#' + clipId + ')' });
             svg.appendChild(gClip);
 
+            // Området (linjär optimering): skuggad polygon under kurvan
+            if (cfg.area && cfg.area.length > 2) {
+                gClip.appendChild(svgEl('polygon', {
+                    points: cfg.area.map(function (q) { return xToPx(q[0]).toFixed(1) + ',' + yToPx(q[1]).toFixed(1); }).join(' '),
+                    fill: COL.area, stroke: COL.areaEdge, 'stroke-width': 1.4, 'stroke-linejoin': 'round'
+                }));
+            }
+
             // Trappsteget (under kurvan i z-ordning): från y-skärningen
             // 1 steg åt höger, sedan Δy upp/ner. För en rät linje är Δy = k.
             if (showTri) {
@@ -502,11 +527,37 @@
                 'stroke-linejoin': 'round', 'stroke-linecap': 'round'
             }));
 
+            // Områdets hörn med koordinater (ovanpå kurvan)
+            if (cfg.area && cfg.corners) {
+                var mx = 0, my = 0;
+                cfg.area.forEach(function (q) { mx += q[0]; my += q[1]; });
+                mx /= cfg.area.length; my /= cfg.area.length;
+                cfg.area.forEach(function (q) {
+                    var hx = xToPx(q[0]), hy = yToPx(q[1]);
+                    gClip.appendChild(svgEl('circle', { cx: hx, cy: hy, r: 3.6, fill: COL.accent }));
+                    // etiketten läggs UTANFÖR området, bort från dess mittpunkt
+                    var ux = q[0] - mx, uy = q[1] - my, ul = Math.hypot(ux, uy) || 1;
+                    ux /= ul; uy /= ul;
+                    var lx = hx + ux * 12, ly = hy - uy * 12 + 4;
+                    var anc = ux > 0.3 ? 'start' : (ux < -0.3 ? 'end' : 'middle');
+                    // hörn på en axel: etiketten ovanför/till höger, så att
+                    // den inte hamnar bland axelns tal
+                    var paX = Math.abs(q[1]) < 1e-9, paY = Math.abs(q[0]) < 1e-9;
+                    if (paX && paY) { lx = hx - 6; ly = hy + 16; anc = 'end'; }
+                    else if (paX || paY) { lx = hx + 7; ly = hy - 7; anc = 'start'; }
+                    svg.appendChild(svgText({
+                        x: lx, y: ly, 'font-size': 11.5,
+                        'text-anchor': anc,
+                        fill: COL.accent
+                    }, '(' + fmtDisp(q[0], 2) + (q[0] % 1 || q[1] % 1 ? '; ' : ', ') + fmtDisp(q[1], 2) + ')'));
+                });
+            }
+
             // Markera y-skärning (x = 0)
             scope.x = 0;
             var yInt;
             try { yInt = fn(scope); } catch (e) { yInt = NaN; }
-            if (isFinite(yInt)) {
+            if (cfg.intercept && isFinite(yInt)) {
                 gClip.appendChild(svgEl('circle', { cx: xToPx(0), cy: yToPx(yInt), r: 3.8, fill: COL.accent }));
             }
 

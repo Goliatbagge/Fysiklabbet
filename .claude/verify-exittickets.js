@@ -15,14 +15,14 @@ const warnings = [];
 
 let W;
 try {
-    W = loadWindowScript('C:/claude/Fysiklabbet/data/exittickets.js');
+    W = loadWindowScript(require('path').join(__dirname, '..', 'data', 'exittickets.js'));
 } catch (e) {
     console.error('SYNTAXFEL i exittickets.js:', e.message);
     process.exit(1);
 }
 const ET = W.EXITTICKETS || {};
 
-const WK = loadWindowScript('C:/claude/Fysiklabbet/data/katalog.js');
+const WK = loadWindowScript(require('path').join(__dirname, '..', 'data', 'katalog.js'));
 const sections = [];
 for (const subj of Object.values(WK.KATALOG)) {
     for (const [courseName, course] of Object.entries(subj.courses || {})) {

@@ -342,6 +342,7 @@ const KURSKOD = {
   'Matematik nivå 1c': 'ma1c',
   'Matematik nivå 2b': 'ma2b',
   'Matematik nivå 2c': 'ma2c',
+  'Matematik fortsättning nivå 1b': 'ma3b',
   'Matematik fortsättning nivå 1c': 'ma3c',
   'Matematik fortsättning nivå 2': 'ma4',
 };

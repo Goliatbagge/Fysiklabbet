@@ -64,10 +64,12 @@
         const MA1B_ALIAS = window.MA1B_ALIAS || {};
         // Matematik nivå 2b delar innehåll med 2c på samma sätt (MA2B_SPEC).
         const MA2B_ALIAS = window.MA2B_ALIAS || {};
+        // Matematik fortsättning nivå 1b delar innehåll med 1c (MA3B_SPEC).
+        const MA3B_ALIAS = window.MA3B_ALIAS || {};
         // Kraftmomentet delas mellan Fysik nivå 2 och nivå 1 (Gy25) på samma
         // sätt: fy1-3.11 → fy2-1.1 osv. (FY1_ALIAS i data/katalog.js).
         const FY1_ALIAS = window.FY1_ALIAS || {};
-        for (const [bId, cId] of Object.entries({ ...MA1B_ALIAS, ...MA2B_ALIAS, ...FY1_ALIAS })) {
+        for (const [bId, cId] of Object.entries({ ...MA1B_ALIAS, ...MA2B_ALIAS, ...MA3B_ALIAS, ...FY1_ALIAS })) {
             if (TEORI[bId] === undefined && TEORI[cId] !== undefined) TEORI[bId] = TEORI[cId];
             if (OVNINGAR[bId] === undefined && OVNINGAR[cId] !== undefined) OVNINGAR[bId] = OVNINGAR[cId];
             if (EXITTICKETS[bId] === undefined && EXITTICKETS[cId] !== undefined) EXITTICKETS[bId] = EXITTICKETS[cId];
@@ -620,6 +622,7 @@
             if (courseName === 'Matematik nivå 1c') return 'ma1c';
             if (courseName === 'Matematik nivå 2b') return 'ma2b';
             if (courseName === 'Matematik nivå 2c') return 'ma2c';
+            if (courseName === 'Matematik fortsättning nivå 1b') return 'ma3b';
             if (courseName === 'Matematik fortsättning nivå 1c') return 'ma3c';
             if (courseName === 'Matematik fortsättning nivå 2') return 'ma4';
             // Dold kurs under uppbyggnad — nås bara via ?id=maspec-… (se
@@ -701,7 +704,7 @@
                             <a href="index.html">Start</a>
                             <div className="lab-nav-dd" ref={ddRef}
                                  onPointerDown={oppnaDd} onMouseLeave={oppnaDd}>
-                                <button type="button" className="lab-nav-dd-trigger" aria-haspopup="true">
+                                <button type="button" className="lab-nav-dd-trigger aktiv" aria-haspopup="true">
                                     Ämne
                                     <svg className="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
                                 </button>
@@ -734,6 +737,7 @@
                                             <svg className="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
                                         </button>
                                         <div className="lab-nav-dd-undermeny">
+                                            <a href="katalog.html?id=ma3b">Nivå 1b</a>
                                             <a href="katalog.html?id=ma3c">Nivå 1c</a>
                                             <a href="katalog.html?id=ma4">Nivå 2</a>
                                         </div>
@@ -844,7 +848,7 @@
                     <div className="lab-search-input-wrap">
                         <span className="lab-search-icon" aria-hidden="true">⌕</span>
                         <input type="text" value={query} className="lab-search-input"
-                            placeholder="sök — till exempel coulomb, pendel, magnetfält, ljus…"
+                            placeholder="Sök på Fysiklabbet"
                             autoComplete="off" aria-label="Sök på Fysiklabbet"
                             onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
                             onFocus={() => { if (query.trim()) setOpen(true); }}
@@ -3244,6 +3248,7 @@
                     const mod = (window.VISUALISERINGAR || {})[id]
                         || (window.VISUALISERINGAR || {})[MA1B_ALIAS[id]]
                         || (window.VISUALISERINGAR || {})[MA2B_ALIAS[id]]
+                        || (window.VISUALISERINGAR || {})[MA3B_ALIAS[id]]
                         || (window.VISUALISERINGAR || {})[FY1_ALIAS[id]];
                     if (mod && mod.mount) {
                         instance = mod.mount(hostRef.current);
@@ -3955,6 +3960,7 @@
             ma1c: ['Matematik', 'Matematik nivå 1c'],
             ma2b: ['Matematik', 'Matematik nivå 2b'],
             ma2c: ['Matematik', 'Matematik nivå 2c'],
+            ma3b: ['Matematik', 'Matematik fortsättning nivå 1b'],
             ma3c: ['Matematik', 'Matematik fortsättning nivå 1c'],
             ma4: ['Matematik', 'Matematik fortsättning nivå 2'],
             maspec: ['Matematik', 'Matematik specialisering'],   // dold kurs
@@ -3975,7 +3981,7 @@
             // befintliga länkar ändrar beteende.
             const hash = (window.location.hash || '').replace(/^#/, '')
                 || (params.get('id') || '');
-            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2b|ma2c|ma3c|ma4|maspec)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning|ovningsblad|sammanfattning))?$/);
+            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2b|ma2c|ma3b|ma3c|ma4|maspec)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning|ovningsblad|sammanfattning))?$/);
             if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
                 out.subject = HASH_COURSES[m[1]][0];
             }

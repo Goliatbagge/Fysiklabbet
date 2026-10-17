@@ -43,6 +43,7 @@
         // Delade avsnitt (Matematik 1b/2b ur 1c/2c, kraftmomentet i Fysik
         // nivå 1 ur nivå 2): slå upp teorin under ägarens id.
         const ALIAS = { ...(window.MA1B_ALIAS || {}), ...(window.MA2B_ALIAS || {}),
+                        ...(window.MA3B_ALIAS || {}),
                         ...(window.FY1_ALIAS || {}) };
         for (const [aId, srcId] of Object.entries(ALIAS)) {
             if (TEORI[aId] === undefined && TEORI[srcId] !== undefined) TEORI[aId] = TEORI[srcId];
@@ -640,7 +641,7 @@
                         <nav className="lab-nav" aria-label="Huvudnavigation">
                             <a href="index.html">Start</a>
                             <div className="lab-nav-dd">
-                                <button type="button" className="lab-nav-dd-trigger" aria-haspopup="true">
+                                <button type="button" className="lab-nav-dd-trigger aktiv" aria-haspopup="true">
                                     Ämne
                                     <svg className="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
                                 </button>
@@ -673,6 +674,7 @@
                                             <svg className="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
                                         </button>
                                         <div className="lab-nav-dd-undermeny">
+                                            <a href="katalog.html#ma3b">Nivå 1b</a>
                                             <a href="katalog.html#ma3c">Nivå 1c</a>
                                             <a href="katalog.html#ma4">Nivå 2</a>
                                         </div>

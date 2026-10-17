@@ -438,6 +438,24 @@
  * layoutLosolikhet (olikhetstecken), layoutOkandsida (funktionsform med
  * bråk i raden).
  *
+ * ⚠️ REGEL (VÄGGEN HAMNAR ALDRIG PÅ BLÄCK, användarkrav 2026-10-17):
+ * väggstrecket och operationen efter det ska stå TILL HÖGER om allt som
+ * redan står på raden, med luft emellan. Räkna väggens x ur den rad som
+ * FAKTISKT står på arket (dess sista tecken + ~0,6·F), aldrig ur ett
+ * hårdkodat padL + 360 eller ur en kortare variant av raden. Felet har
+ * hänt: i ma3b-2.2 exempel 3 skrevs "/20" rakt över "60" när raden
+ * flyttats i en senare ändring men väggens x stod kvar, och i NP Ma 2c
+ * VT 2018 uppgift 25 räknades x ur "4,5=−33,0625a" fast raden var hela
+ * kedjan "4,5=a·5,75·(−5,75)=−33,0625a". Tre skydd:
+ *   1. vaggOp() flyttar själv väggen till höger om bläck på raden
+ *      (väggstrecken ovanför, märkta vagg: 1, får stå rakt över).
+ *   2. verify-handskrift.js ger fel om väggen eller operationen korsar
+ *      redan skrivet bläck.
+ *   3. Ryms väggen inte före pilzonen: låt steget behålla ledformen,
+ *      mkEkvOp(T, false) (se EKVATIONSREDOVISNING).
+ * ÄNDRAS EN RAD som har en vägg (nya kolumner, längre uttryck, flyttat
+ * x): granska scenen i läget Väggen i skärmdump, inte bara Båda led.
+ *
  * ⚠️ REGEL (EN EKVATION SKRIVS PÅ EN RAD, användarkrav 2026-09-08): en
  * ekvation får inte delas upp på flera rader annat än i extremfall.
  * Vänsterled, relationstecken och högerled hör ihop; bryts raden mitt i
@@ -3079,6 +3097,34 @@
     var sistaVagg = null;
     function vaggOp(opS, xw, yb, opt) {
       opt = opt || {};
+      /* VÄGGEN HAMNAR ALDRIG PÅ BLÄCK (se REGEL i filhuvudet): ligger
+       * redan skrivet bläck på raden där strecket eller operationen
+       * skulle hamna, flyttas väggen till höger om det. Felet hände
+       * 2026-10-17 i ma3b-2.2 exempel 3: väggens x var hårdkodat i
+       * scenen, raden flyttades i en senare ändring, och "/20" skrevs
+       * rakt över "60". Scenen ska ändå räkna ut x ur raden; det här är
+       * skyddsnätet. */
+      (function () {
+        var y0 = yb - 1.0 * F, y1 = yb + 0.25 * F, varv = 0, flyttad = true;
+        while (flyttad && varv++ < 30) {
+          flyttad = false;
+          var s0 = xw - 0.2 * F, s1 = xw + 0.45 * F + adv(opS) + 0.2 * F, mx = -Infinity;
+          for (var i = 0; i < acts.length; i++) {
+            var a = acts[i];
+            /* väggstrecken på raderna ovanför får stå rakt över (vagg) */
+            if (a.kind !== 'stroke' || a.vagg || !a.pts || !a.pts.length) continue;
+            var ax0 = Infinity, ax1 = -Infinity, ay0 = Infinity, ay1 = -Infinity;
+            for (var j = 0; j < a.pts.length; j++) {
+              var q = a.pts[j];
+              if (q[0] < ax0) ax0 = q[0]; if (q[0] > ax1) ax1 = q[0];
+              if (q[1] < ay0) ay0 = q[1]; if (q[1] > ay1) ay1 = q[1];
+            }
+            if (ay1 < y0 || ay0 > y1 || ax1 < s0 || ax0 > s1) continue;
+            if (ax1 > mx) mx = ax1;
+          }
+          if (mx > -Infinity) { xw = mx + 0.5 * F; flyttad = true; }
+        }
+      })();
       if (!opt.fri && sistaVagg && yb > sistaVagg.y &&
           yb - sistaVagg.y < 4.6 * F && xw < sistaVagg.x &&
           sistaVagg.x + 0.45 * F + adv(opS) <= PAPER_W - 40) {
@@ -3088,7 +3134,7 @@
       var h0 = (opt.h0 == null ? 1.05 : opt.h0) * F;
       var h1 = (opt.h1 == null ? 0.30 : opt.h1) * F;
       pause(220);
-      acts.push({ kind: 'stroke',
+      acts.push({ kind: 'stroke', vagg: 1,
         pts: humanize([[xw, yb - h0], [xw, yb + h1]]), color: BLUE });
       pause(200);
       str(opS, xw + 0.45 * F, yb, BLUE);

@@ -195,6 +195,40 @@ function granska(HK, typ, cfg) {
   /* bläck som ritats FÖRE varje tidpunkt — byggs upp medan vi går */
   const hittills = nyBox();
 
+  /* VÄGGEN PÅ BLÄCK (REGEL: VÄGGEN HAMNAR ALDRIG PÅ BLÄCK i handskrift.js):
+   * väggstrecket (vagg: 1) får inte korsa något annat streck som redan
+   * står på arket. vaggOp() flyttar väggen själv; den här kontrollen
+   * fångar väggar som byggs förbi den. Felet hände 2026-10-17: "/20"
+   * skrevs rakt över "60" i ma3b-2.2 exempel 3. */
+  {
+    const fore = [];
+    for (let i = 0; i < L.acts.length; i++) {
+      const a = L.acts[i];
+      if (a.kind !== 'stroke' || !a.pts || !a.pts.length) continue;
+      if (a.vagg) {
+        /* strecket + operationen som skrivs i blått direkt efter det */
+        const wb = nyBox(); bboxAvPunkter(a.pts, wb);
+        for (let j = i + 1; j < L.acts.length; j++) {
+          const b = L.acts[j];
+          if (b.kind === 'pause') continue;
+          if (b.kind !== 'stroke' || b.vagg || b.color !== a.color) break;
+          bboxAvPunkter(b.pts, wb);
+        }
+        wb.x0 -= 2; wb.x1 += 2;
+        for (const b of fore) {
+          if (overlappar(wb, b)) {
+            fel.push('väggen korsar redan skrivet bläck vid x=' +
+                     ((wb.x0 + wb.x1) / 2).toFixed(0) + ', y=' + wb.y1.toFixed(0));
+            break;
+          }
+        }
+        continue;
+      }
+      const bb = nyBox(); bboxAvPunkter(a.pts, bb);
+      fore.push(bb);
+    }
+  }
+
   for (const a of L.acts) {
     if (a.kind === 'stroke') {
       bboxAvPunkter(a.pts, total);

@@ -2695,7 +2695,12 @@
       [['−33,0625. a blir negativt, som']],
       [['det ska med en maximipunkt.']]
     ]);
-    y = ekvOp(y, '/(−33,0625)', xw, '4,5=−33,0625a');
+    /* Raden är hela kedjan 4,5=a·5,75·(−5,75)=−33,0625a och slutar nära
+     * pilzonen: väggen och "/(−33,0625)" ryms inte till höger om den.
+     * Steget behåller därför ledformen i båda lägena (se EKVATIONS-
+     * REDOVISNING i handskrift.js). Tidigare hamnade väggen mitt i raden
+     * (2026-10-17). */
+    y = mkEkvOp(T, false)(y, '/(−33,0625)', xw, '4,5=−33,0625a');
     T.str('a=−0,13611...', padL + 30, y);
     T.stepEnd();
 

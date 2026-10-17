@@ -690,6 +690,15 @@ Så här bygger du scenen:
    operationen ryms före pilzonen; `opt.fri` stänger av det. Räknar en
    scen ut väggarnas x själv, välj hellre ETT gemensamt x för hela
    deluppgiften (den bredaste raden).
+   **⛔ Väggen hamnar ALDRIG på bläck** (användarkrav 2026-10-17: "/20"
+   skrevs rakt över "60" i `ma3b-2.2` exempel 3, sedan raden flyttats
+   men väggens hårdkodade x stått kvar). Räkna väggens x ur raden som
+   faktiskt står på arket, aldrig ur ett fast `padL + 360` eller en
+   kortare variant av raden. `vaggOp()` flyttar själv väggen till höger
+   om bläck på raden, och `verify-handskrift.js` ger fel om strecket
+   eller operationen korsar bläck. **Ändras en rad som har en vägg,
+   granska scenen i läget Väggen i skärmdump**, inte bara i Båda led.
+   Se REGEL "VÄGGEN HAMNAR ALDRIG PÅ BLÄCK" i filhuvudet.
 
 ## Varje deluppgift avslutas med "Svar:"
 

@@ -56733,7 +56733,29 @@
     var tanke = mkTanke(T);
     var X0 = padL + 30, X2 = padL + 140;
 
-    y = 76;
+    /* Uppgiftens område står färdigt (samma som i exempel 2). Kanten
+     * mellan (6, 4) och (0, 8) dras i rött i kantsteget, och heltals-
+     * punkterna prickas in när de prövas, så att eleven SER vad "hela
+     * kanten" betyder (önskemål 2026-10-17). */
+    var A = mkAxes(T, F, { ox: padL + 78, oy: 378, u: 27,
+                           xmin: 0, xmax: 12, ymin: 0, ymax: 10 });
+    forritad(T, function () {
+      A.axes();
+      A.ticks(heltal(1, 12), heltal(1, 10), [2, 4, 6, 8, 12], [2, 4, 6, 10]);
+      skuggaOmrade(T, A, [[2, 3, 24, '<='], [1, 1, 10, '<='], [1, 0, 0, '>='], [0, 1, 0, '>=']],
+                   [0, 12, 0, 10]);
+      A.rule([A.X(-0.3), A.Y(8.2)], [A.X(12.4), A.Y(-0.27)], BLUE);
+      A.rule([A.X(-0.3), A.Y(10.3)], [A.X(10.3), A.Y(-0.3)], BLUE);
+      T.str('2x+3y=24', A.X(8.4), A.Y(3.0) - 4, BLUE, 0.5);
+      T.str('x+y=10', A.X(3.6), A.Y(7.2), BLUE, 0.5);
+      [[0, 0], [10, 0], [6, 4], [0, 8]].forEach(function (p) { A.dot(p[0], p[1], '#c8324a'); });
+      A.tag(0, 0, '(0, 0)', -50, 24, '#c8324a');
+      A.tag(10, 0, '(10, 0)', -24, 24, '#c8324a');
+      A.tag(6, 4, '(6, 4)', -70, 26, '#c8324a');
+      A.tag(0, 8, '(0, 8)', -64, 5, '#c8324a');
+    });
+
+    y = A.Y(0) + 3.4 * F;
     T.str('Målfunktion med det nya priset', padL, y, null, 0.62);
     y += 1.9 * F;
     var xV1 = T.str('V=400x+600y', X0, y);
@@ -56775,6 +56797,8 @@
       [['ligger på linjen 2x+3y=24.']]
     ]);
     T.fade(r1); T.fade(r2);
+    A.linjal([A.X(6), A.Y(4)], [A.X(0), A.Y(8)], '#c8324a');
+    T.pause(240);
     y += 3.8 * F;
     T.str('Kanten mellan (6, 4) och (0, 8)', padL, y - 1.6 * F, null, 0.62);
     T.str('2x+3y=24', X0, y);
@@ -56790,12 +56814,15 @@
     T.fracH('24−2x', '3', xx, y);
     T.stepEnd();
 
-    var prov = [['x=0:', 'y=8'], ['x=3:', 'y=6'], ['x=6:', 'y=4']];
+    var prov = [['x=0:', 'y=8', 0, 8], ['x=3:', 'y=6', 3, 6], ['x=6:', 'y=4', 6, 4]];
     y += 1.4 * F;
     prov.forEach(function (p) {
       y += 2.2 * F;
       T.str(p[0], X0, y, null, 0.9);
       T.str(p[1], X0 + 110, y, null, 0.9);
+      T.pause(200);
+      A.dot(p[2], p[3], BLUE);    /* heltalspunkten på kanten */
+      if (p[2] === 3) A.tag(3, 6, '(3, 6)', -66, 30, BLUE);
       T.stepEnd();
     });
 

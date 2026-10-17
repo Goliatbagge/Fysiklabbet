@@ -11,6 +11,36 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-10-18 — "Fysiklabbet i film, och en snabbsnurrande asteroid"
+- Status: UTKAST skrivet lördag 2026-10-17 (före 08.00-deadline, molnsession).
+  Tänkt utskick söndag 2026-10-18 kl 06.00 svensk tid. **Kampanjen är INTE
+  upplagd i EmailOctopus** (molnet saknar Chrome): kör `/brev-till-octopus`
+  lokalt, testskicka och schemalägg (tidszonen default:ar till London).
+  Bilderna i nyheter/brev/ pushades till main i den här körningen.
+- Brevperiod 2026-10-11 till 2026-10-17: sju artiklar, alla länkade (dagens
+  nyhet 2026-10-17, galliumgåtan, ingår). `verify-nyhetsbrev.js` och
+  `verify-sprak.js` utan fel (längdvarning ~856 ord: fem obligatoriska
+  sajtpunkter ur planerat.md).
+- Nyheter: 2026-10-14-asteroiden-som-snurrar-pa-fyra-minuter (hjälte),
+  2026-10-15-robotar-som-hittar-takten och 2026-10-17-galliumgatan
+  (miniatyrer). Läs även: helium/ramsläpning (10-16), magnetfältet (10-13),
+  mjölk (10-12, förra brevets teaser, infriad), maskin som glömmer (10-11).
+- Nytt på sajten (alla obligatoriska enligt planerat.md): presentationsfilmen
+  (YouTube-länk, affisch med spelknapp), filmen om harmonisk svängning,
+  Hjulet och fjädern (2D+3D, samt svängningsgraferna som rad), Krafter i
+  hissen, Slumpa grupper. Bortvalt: ma1c-4.5/4.7, pennlösningsfixar, plan
+  pendel, lutande plan.
+- Bilder: nyheter/brev/2026-10-18-{asteroid-hero,robotar-thumb,gallium-thumb,
+  harmonisk-svangning,hjul-3d,hiss,slumpa-grupper}.jpg (+ presentationsfilm.jpg
+  som redan låg i repot). Skärmdumparna är tagna i Chromium med lokalt
+  installerade React/Babel/three (CDN spärrade); Tailwind-layouten avviker
+  men scenerna är oförändrade. Slumpa grupper med påhittade namn.
+- Veckans tips: utelämnat (brevet redan långt). tips.md orörd.
+- Teaser: glaskulan i Florens ur ko.md ([BREVTEASER], redan överst, ej
+  publicerad: kontrollerat mot data/nyheter.js).
+- Att bocka av i planerat.md (committades inte i den här körningen): filmen,
+  de tre MÅSTE-punkterna och Slumpa grupper är nu nämnda 2026-10-18.
+
 ## 2026-10-11 — "Ett ur där själva atomkärnan håller takten"
 - Status: UTKAST skrivet lördag 2026-10-10 (före 08.00-deadline, schemalagd
   molnroutine). Tänkt utskick söndag 2026-10-11 kl 06.00 svensk tid.

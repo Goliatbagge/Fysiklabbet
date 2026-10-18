@@ -3747,7 +3747,7 @@ $$
 
 **Svar:** a) Ca 37° motströms (öster om rakt nord). b) 67 s.
 
-**Generell slutsats:** Detta är en *kompenseringsproblem* — om simmaren istället simmade rakt mot norra stranden skulle hon driva med strömmen och hamna nedströms. Tiden för rakt-över-simning är då kortare ($t = 80/1{,}5 \\approx 53$ s) men resultatet är inte rakt över.`,
+**Generell slutsats:** Detta är ett *kompensationsproblem* — om simmaren istället simmade rakt mot norra stranden skulle hon driva med strömmen och hamna nedströms. Tiden för rakt-över-simning är då kortare ($t = 80/1{,}5 \\approx 53$ s) men resultatet är inte rakt över.`,
         },
     ],
 
@@ -4190,7 +4190,7 @@ $$
 \\frac{g \\cdot t^{2}}{2} - \\frac{g \\cdot (t - 1)^{2}}{2} = 40
 $$
 
-Multiplicera bort tvåan och faktorisera:
+Bryt ut den gemensamma faktorn $\\dfrac{g}{2}$:
 
 $$
 \\frac{g}{2} \\bigl[ t^{2} - (t - 1)^{2} \\bigr] = 40
@@ -4868,7 +4868,7 @@ Det är 180 km/h.
 
 **Svar:** a) Polisen hinner ifatt efter 12,5 s. b) Polisbilen har då hastigheten 50 m/s (180 km/h).
 
-**Generell slutsats:** Notera att polisens *slutfart* vid mötet är **dubbelt så stor** som bilens fart. Det är ingen tillfällighet — när en bil med konstant fart $v_0$ träffas av en uppifrån-accelererande bil från vila, händer mötet just när polisens medelhastighet är lika med bilens fart. Eftersom polisen har $v_0 = 0$ och hela tiden ökar är medelhastigheten exakt halva slutfarten, så slutfarten är $2 v_0$.`,
+**Generell slutsats:** Notera att polisens *slutfart* vid mötet är **dubbelt så stor** som bilens fart. Det är ingen tillfällighet — när en bil med konstant fart $v_0$ hinns upp av en bil som startar från vila och accelererar likformigt, sker mötet just när polisens medelhastighet är lika med bilens fart. Eftersom polisen har $v_0 = 0$ och hela tiden ökar är medelhastigheten exakt halva slutfarten, så slutfarten är $2 v_0$.`,
         },
     ],
 
@@ -6257,7 +6257,7 @@ Massan och accelerationerna har två värdesiffror, så svaren avrundas till tv�
 
 **Svar:** a) 690 N, b) 810 N, c) 600 N.
 
-**Generell slutsats:** Vågens utslag $F_N = m(g + a)$ kallas ofta för *skenbar vikt* (apparent weight). När en hiss i fritt fall (*a* = −*g*) skulle vågen visa noll — eftersom då accelererar både person och våg lika fort nedåt, ingen normalkraft behövs. Detta är samma fenomen som astronauter upplever i kretsande rymdfarkoster.`,
+**Generell slutsats:** Vågens utslag $F_N = m(g + a)$ kallas ofta för *skenbar vikt* (apparent weight). Om hissen faller fritt ($a = -g$) visar vågen noll, eftersom person och våg då accelererar lika fort nedåt och ingen normalkraft behövs. Detta är samma fenomen som astronauter upplever i kretsande rymdfarkoster.`,
         },
         {
             level: 3,
@@ -7193,7 +7193,7 @@ $$
 
 **Svar:** Friktionstalet är cirka 0,53.
 
-**Generell slutsats:** En låda som glider med konstant hastighet på ett lutande plan ger en mycket enkel metod att mäta friktionstalet: $\\mu = \\tan\\alpha$ där $\\alpha$ är den minsta vinkel där lådan börjar glida av sig själv. Detta är *gränsvinkeln* för glidning och kallas **friktionsvinkeln**.`,
+**Generell slutsats:** En låda som glider med konstant hastighet på ett lutande plan ger en mycket enkel metod att mäta friktionstalet: $\\mu = \\tan\\alpha$, där $\\alpha$ är den lutning där lådan glider med konstant hastighet. Den vinkel där en låda i vila börjar glida av sig själv ger i stället vilofriktionstalet, som oftast är något större.`,
         },
         {
             level: 2,
@@ -8204,27 +8204,15 @@ $$
         },
         {
             level: 3,
-            question: `En **likformig kedja** (en kedja där massan är jämnt fördelad längs hela längden) med längden 2,0 m och total massa 4,0 kg ligger hopvikt på ett bord. Vilket arbete krävs för att lyfta upp **hela kedjan** så att den hänger lodrätt från bordsskivan? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+            question: `En **likformig kedja** (en kedja där massan är jämnt fördelad längs hela längden) med längden 2,0 m och total massa 4,0 kg hänger lodrätt ned från kanten på ett bord, med den övre änden vid bordskanten. Vilket arbete krävs för att dra upp **hela kedjan** så att den ligger på bordet? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
 *Tips: betänk var kedjans **tyngdpunkt** hamnar.*`,
             answer: { value: 39.3, unit: 'J', tol: 0.05 },
             solution: `Arbetet att lyfta ett föremål motsvarar att flytta dess **tyngdpunkt** mot tyngdkraften.
 
-Innan: hela kedjan ligger på bordet (höjd 0 över bordsytan).
+Innan: kedjan hänger lodrätt från bordskanten. Eftersom massan är jämnt fördelad ligger tyngdpunkten mitt på kedjan, alltså halva längden under bordsytan: $\\dfrac{2{,}0}{2} = 1{,}0\\ \\mathrm{m}$ under bordet.
 
-Efter: kedjan hänger lodrätt från bordskanten. Tyngdpunkten är då på halva längden ned, alltså $h_\\text{tp} = -1{,}0\\ \\mathrm{m}$ under bordet — eller sett från utgångspunkten har tyngdpunkten *sänkts* med 1,0 m... vänta, det är fel riktning. Låt oss tänka om.
-
-Innan: tyngdpunkt ligger på bordet (vi sätter $h = 0$).
-
-Efter: kedjan hänger lodrätt nedanför bordskanten. Tyngdpunkten är då 1,0 m **under** bordet (halvvägs ner): $h = -1{,}0$ m.
-
-Tyngdpunkten har alltså *sänkts* med 1,0 m — det betyder att kedjan **förlorar** lägesenergi när den hänger ned. Inget arbete krävs; tvärtom *frigörs* energi.
-
-**Omformulering av frågan**: troligen menades att kedjan ska *hängas upp* så att den ligger ihopvikt högre upp, men om den ska *släppas att hänga* från bordet (samma höjd vid bordskanten, halvvägs ner under bordet) frigörs energi. Vi tolkar uppgiften som följande: vi vill bestämma **det arbete som krävs för att rulla upp en kedja som hänger från ett bord och dra upp den till bordsnivå**.
-
-Innan: kedjan hänger lodrätt — tyngdpunkt 1,0 m under bordet.
-
-Efter: hela kedjan ligger på bordet — tyngdpunkt vid bordsytan.
+Efter: hela kedjan ligger på bordet, och tyngdpunkten är i höjd med bordsytan.
 
 Tyngdpunkten lyfts 1,0 m. Arbete:
 
@@ -8232,7 +8220,7 @@ $$
 W = m g \\Delta h = 4{,}0 \\cdot 9{,}82 \\cdot 1{,}0 \\approx 39{,}3\\ \\mathrm{J}
 $$
 
-**Svar:** Ca 39 J.
+**Svar:** Cirka 39 J.
 
 **Generell slutsats:** För att hitta lägesenergi (eller arbete vid lyft) av ett *utbrett* föremål — kedja, stege, vatten i en cylinder — räknar man som om hela massan satt i föremålets **tyngdpunkt**. Detta är samma trick som används i exempel om att lyfta vatten ur en brunn eller att räkna gravitationsenergi för en stång som faller över.`,
         },
@@ -8786,7 +8774,7 @@ $$
 
 a) Beräkna passagerarens rörelsemängd före krocken.
 
-b) En **utan** airbag stannas passageraren av krocken på 0,10 s. Hur stor blir den genomsnittliga kraften på honom?
+b) **Utan** airbag stannas passageraren av krocken på 0,10 s. Hur stor blir den genomsnittliga kraften på honom?
 
 c) **Med** airbag förlängs stopptiden till 0,40 s. Hur stor blir då den genomsnittliga kraften?
 
@@ -8924,7 +8912,7 @@ Impulsens *storlek* är 4,2 Ns (riktad åt vänster — vägg pushar bollen bak�
             question: `En **liten kula** med massan 0,050 kg avfyras horisontellt med farten 320 m/s in i en stillastående **träblock** med massan 2,0 kg som hänger fritt i ett snöre (ballistisk pendel). Kulan fastnar i blocket och båda svänger upp tillsammans.
 
 Hur högt (vertikalt) svänger blocket + kula upp innan det stannar? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och bortse från friktion i upphängningen.`,
-            answer: { value: 3.18, unit: 'm', tol: 0.05 },
+            answer: { value: 3.10, unit: 'm', tol: 0.05 },
             solution: `Tvådelat problem: **(I)** rörelsemängdens bevarande vid krocken, **(II)** energiprincipen för svingen uppåt.
 
 **Steg I — gemensam fart direkt efter krocken.** Inelastisk stöt:
@@ -8937,7 +8925,7 @@ $$
 v_g = \\frac{0{,}050 \\cdot 320}{0{,}050 + 2{,}0} = \\frac{16}{2{,}050} \\approx 7{,}80\\ \\mathrm{m/s}
 $$
 
-**Steg II — hur högt svinger blocket + kula?** Energi­principen: rörelseenergin direkt efter krocken omvandlas helt till lägesenergi i toppen.
+**Steg II — hur högt svänger blocket + kula?** Energi­principen: rörelseenergin direkt efter krocken omvandlas helt till lägesenergi i toppen.
 
 $$
 \\frac{(m_k + m_b) v_g^{2}}{2} = (m_k + m_b) g h \\quad\\Leftrightarrow\\quad h = \\frac{v_g^{2}}{2 g}
@@ -8949,9 +8937,7 @@ $$
 h = \\frac{7{,}80^{2}}{2 \\cdot 9{,}82} \\approx \\frac{60{,}9}{19{,}64} \\approx 3{,}10\\ \\mathrm{m}
 $$
 
-Vänta — låt oss räkna noggrannare: $v_g = 16/2{,}050 = 7{,}8049\\ldots$ m/s. Då blir $v_g^{2} = 60{,}9$ och $h \\approx 3{,}10$ m. Det stämmer.
-
-**Svar:** Blocket + kula svingar upp ca 3,2 m vertikalt.
+**Svar:** Blocket och kulan svänger upp cirka 3,1 m vertikalt.
 
 **Generell slutsats:** Detta är en **ballistisk pendel** — historisk metod att mäta projektilers fart. Genom att mäta upphöjningen $h$ kan man räkna baklänges:
 
@@ -9069,9 +9055,9 @@ a) Hur stor är den genomsnittliga friktionskraften (rullnings­motstånd) som v
 b) Hur stor är friktionstalet, om vi gör den (något grova) approximationen att normalkraften under hela åket är lika med $m g \\cos\\beta$, där $\\beta$ är banans medellutning och $\\sin\\beta = h/L$?
 
 *Ange friktionskraften från (a) som ditt numeriska svar i N.*`,
-            answer: { value: 27.8, unit: 'N', tol: 0.05 },
+            answer: { value: 27.9, unit: 'N', tol: 0.05 },
             delsvar: [
-                { del: 'a', value: 27.8, unit: 'N', tol: 0.05 },
+                { del: 'a', value: 27.9, unit: 'N', tol: 0.05 },
                 { del: 'b', value: 0.034, unit: '', tol: 0.05 },
             ],
             solution: `**a) Friktionskraft.** Energiprincipen med friktion:
@@ -9104,7 +9090,7 @@ $$
 
 **Svar:** a) Friktionskraften är ca 28 N. b) Friktionstalet är ca 0,034.
 
-**Generell slutsats:** Detta är ett realistiskt rullningsmotstånd för cykeldäck mot asfalt (0,003–0,008 i ideala fall, något högre vid lägre tryck eller grov yta). Lägg märke till att luftmotståndet i verkligheten också spelar in och oftast dominerar vid höga farter — vid 14 m/s är det förmodligen den **större** kraften.`,
+**Generell slutsats:** Värdet är flera gånger större än det typiska rullningsmotståndet för cykeldäck mot asfalt, som ligger kring 0,003–0,008. Förklaringen är att uppgiften bortser från luftmotståndet. I verkligheten står luftmotståndet för en stor del av energiförlusten, och vid 14 m/s är det förmodligen den **större** kraften. Den beräknade friktionskraften rymmer alltså i praktiken båda förlusterna.`,
         },
     ],
 
@@ -9401,7 +9387,7 @@ $$
 
 **Svar:** Ca 3,2 N.
 
-**Generell slutsats:** Trumhinnan känner alltså av en kraft motsvarande tyngden av ett halvt hekto vid bara 5 m djup. Det är därför man behöver "klämma näsan" för att utjämna trycket när man dyker.`,
+**Generell slutsats:** Trumhinnan känner alltså av en kraft motsvarande tyngden av drygt tre hekto vid bara 5 m djup. Det är därför man behöver "klämma näsan" för att utjämna trycket när man dyker.`,
         },
         {
             level: 2,
@@ -9509,7 +9495,7 @@ $$
 
 **Svar:** Alternativ A — 101 300 Pa och 1,013 bar.
 
-**Generell slutsats:** Lufttrycket vid havsytan brukar avrundas till $1\ \mathrm{atm} = 101\,325\ \mathrm{Pa} \approx 1\ \mathrm{bar} = 100\ \mathrm{kPa}$. Skillnaden mellan atm och bar är bara ca 1 %, så man kan ofta använda dem som likvärdiga i grova uppskattningar.`,
+**Generell slutsats:** Lufttrycket vid havsytan brukar avrundas till $1\\ \\mathrm{atm} = 101\\,325\\ \\mathrm{Pa} \\approx 1\\ \\mathrm{bar} = 100\\ \\mathrm{kPa}$. Skillnaden mellan atm och bar är bara ca 1 %, så man kan ofta använda dem som likvärdiga i grova uppskattningar.`,
         },
         {
             level: 1,
@@ -10675,7 +10661,7 @@ $$ 28{,}7 = 0{,}875\\,T \\quad\\Leftrightarrow\\quad T \\approx 32{,}8\\ ^{\\cir
 
 **Svar:** Ca 33 °C.
 
-**Generell slutsats:** Trots att kopparbiten är 175 grader varmare än vattnet och nästan dubbelt så heta blir vattnet bara ca 8 grader varmare. Det beror på att vattnets specifika värmekapacitet är ca 11 gånger högre än kopparets — vatten "behöver" mycket mer energi för att värmas. Det är därför vatten är så bra som kylvätska, värmeöverförare i element och temperaturreglerare i havet.`,
+**Generell slutsats:** Trots att kopparbiten är 175 grader varmare än vattnet blir vattnet bara ca 8 grader varmare. Det beror på att vattnets specifika värmekapacitet är ca 11 gånger högre än kopparets — vatten "behöver" mycket mer energi för att värmas. Det är därför vatten är så bra som kylvätska, värmeöverförare i element och temperaturreglerare i havet.`,
         },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
@@ -10942,7 +10928,7 @@ $$ E = 100 \\cdot 28\\,800 = 2\\,880\\,000\\ \\mathrm{J} = 2{,}88\\ \\mathrm{MJ}
 
 **Svar:** 2,88 MJ.
 
-**Generell slutsats:** Det motsvarar ungefär energin i 100 g choklad (ca 2,5 MJ) eller fyra bananer. Det är därför vi behöver äta — kroppen måste ständigt fylla på energi för att kompensera för värmeavgivningen.`,
+**Generell slutsats:** Det motsvarar ungefär energin i 125 g choklad (cirka 2,3 MJ per 100 g) eller sju bananer. Det är därför vi behöver äta — kroppen måste ständigt fylla på energi för att kompensera för värmeavgivningen.`,
         },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
@@ -11672,7 +11658,7 @@ ${makeCircuit({
             answer: { value: 0.35, unit: 'A' },
             solution: `Vid förgreningspunkten gäller **Kirchhoffs första lag**: summan av strömmarna in i punkten är lika med summan av strömmarna ut.
 
-Hela strömmen *I* från batteliet delar upp sig i $I_1$ och $I_2$:
+Hela strömmen *I* från batteriet delar upp sig i $I_1$ och $I_2$:
 
 $$ I = I_1 + I_2 \\quad\\Leftrightarrow\\quad I_2 = I - I_1 $$
 
@@ -11794,7 +11780,7 @@ Vi delar upp arean i en triangel (0–4 s) och en rektangel (4–10 s):
 
 $$
 \\left[ \\begin{array}{l}
-\\text{Triangel: } \\tfrac{1}{2} \\cdot 4{,}0 \\cdot 2{,}0 = 4{,}0\\ \\mathrm{C} \\\\
+\\text{Triangel: } \\dfrac{1}{2} \\cdot 4{,}0 \\cdot 2{,}0 = 4{,}0\\ \\mathrm{C} \\\\
 \\text{Rektangel: } 6{,}0 \\cdot 2{,}0 = 12\\ \\mathrm{C}
 \\end{array} \\right]
 $$
@@ -13211,7 +13197,7 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
 
 **Svar:** Alternativ A.
 
-**Generell slutsats:** Samma fenomen kallas också **Sankt Elmseld** och kan ses som ett svagt blått sken kring masttoppar och åskledarspetsar vid åskväder. Det är en urladdning av fotoner, inte samma sak som en åskblixt.`,
+**Generell slutsats:** Samma fenomen kallas också **Sankt Elmseld** och kan ses som ett svagt blått sken kring masttoppar och åskledarspetsar vid åskväder. Det är en koronaurladdning, där luften kring spetsen joniseras och sänder ut ljus. Det är inte samma sak som en åskblixt.`,
         },
         {
             level: 2,
@@ -13474,7 +13460,7 @@ $$ E = 1{,}0 \\cdot 10^{-3} \\cdot (2{,}998 \\cdot 10^8)^2 = 9{,}0 \\cdot 10^{13
 
 **Svar:** Energin är ungefär $9{,}0 \\cdot 10^{13}\\ \\mathrm{J}$.
 
-**Generell slutsats:** Eftersom $c^2$ är ett enormt tal motsvarar även en pytteliten massa en gigantisk energi — $9 \\cdot 10^{13}\\ \\mathrm{J}$ räcker för att försörja ett villahushåll med el i flera tusen år. Det är denna princip som ligger bakom kärnkraft och solens energiproduktion.`,
+**Generell slutsats:** Eftersom $c^2$ är ett enormt tal motsvarar även en pytteliten massa en gigantisk energi — $9 \\cdot 10^{13}\\ \\mathrm{J}$ räcker för att försörja ett eluppvärmt villahushåll (cirka 25 000 kWh per år) med el i ungefär tusen år. Det är denna princip som ligger bakom kärnkraft och solens energiproduktion.`,
         },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
@@ -13594,7 +13580,7 @@ $$ N = A - Z = 238 - 92 = 146 $$
 
 **Svar:** Alternativ A.
 
-**Generell slutsats:** Väte har t.ex. tre isotoper: protium ($^1\\mathrm{H}$, 0 neutroner), deuterium ($^2\\mathrm{H}$, 1 neutron) och tritium ($^3\\mathrm{H}$, 2 neutroner) — alla med $Z = 1$.`,
+**Generell slutsats:** Väte har till exempel tre isotoper: protium ($^1\\mathrm{H}$, 0 neutroner), deuterium ($^2\\mathrm{H}$, 1 neutron) och tritium ($^3\\mathrm{H}$, 2 neutroner) — alla med $Z = 1$.`,
         },
 
         // ── Nivå 2 (C) ───────────────────────────────────────────────
@@ -13975,7 +13961,7 @@ $$ T_{1/2} = \\frac{8{,}0 \\cdot \\lg 0{,}5}{\\lg 0{,}280} = \\frac{8{,}0 \\cdot
 
 **Svar:** Halveringstiden är ungefär $4{,}4$ timmar.
 
-**Generell slutsats:** När den obekanta storheten sitter i exponenten räcker det inte med insättning — man måste logaritmera. Rimlighetskontroll: aktiviteten gick från 5000 till 1400 Bq (drygt en tredjedel kvar) på 8 timmar, vilket är knappt två halveringstider ($0{,}5^{1{,}8} \\approx 0{,}29$) — stämmer med $T_{1/2} \\approx 4{,}4\\ \\mathrm{h}$.`,
+**Generell slutsats:** När den obekanta storheten sitter i exponenten räcker det inte med insättning — man måste logaritmera. Rimlighetskontroll: aktiviteten gick från 5000 till 1400 Bq (knappt en tredjedel kvar) på 8 timmar, vilket är knappt två halveringstider ($0{,}5^{1{,}8} \\approx 0{,}29$) — stämmer med $T_{1/2} \\approx 4{,}4\\ \\mathrm{h}$.`,
         },
         {
             level: 3,
@@ -16064,7 +16050,7 @@ $$ m = \\frac{0{,}30}{2{,}25 - 1} = \\frac{0{,}30}{1{,}25} = 0{,}24\\ \\mathrm{k
 
 **Svar:** Den ursprungliga massan är $0{,}24\\ \\mathrm{kg}$ (= $240\\ \\mathrm{g}$).
 
-**Generell slutsats:** Den centrala insikten är att kvoten $T_2/T_1$ eliminerar fjäderkonstanten — vi behöver aldrig veta *k* för att lösa massan. Sådana **kvotresonemang** är typiska för A-nivå: bilda förhållandet innan insättning så att de obekanta stryks.`,
+**Generell slutsats:** Den centrala insikten är att kvoten $T_2/T_1$ eliminerar fjäderkonstanten — vi behöver aldrig veta *k* för att lösa massan. Sådana **kvotresonemang** är typiska för avancerad nivå: bilda förhållandet innan insättning så att de obekanta stryks.`,
         },
     ],
 
@@ -17368,6 +17354,8 @@ $$
 
 $$ d_\\text{min} = \\frac{340 \\cdot 0{,}0015}{2} = 0{,}255\\ \\mathrm{m} $$
 
+Pulstakten, $80$ pulser per sekund, påverkar inte det kortaste avståndet. Den sätter i stället en övre gräns: ekot bör hinna tillbaka innan nästa puls skickas ut, alltså inom $\\dfrac{1}{80}\\ \\mathrm{s} = 12{,}5\\ \\mathrm{ms}$. Det motsvarar avståndet $\\dfrac{340 \\cdot 0{,}0125}{2} \\approx 2{,}1\\ \\mathrm{m}$.
+
 **Svar:** Det kortaste avståndet fladdermusen kan upptäcka är ungefär $26\\ \\mathrm{cm}$.
 
 **Generell slutsats:** Det är därför fladdermöss förkortar sina pulser kraftigt när de närmar sig bytet — sista millisekunderna av jakten skickar de upp till $200$ pulser per sekund med pulslängd ner mot $0{,}3\\ \\mathrm{ms}$ för att kunna lösa upp avstånd ner mot $5\\ \\mathrm{cm}$. Samma princip — pulsbredd sätter ekoavstånds-upplösningen — gäller i radar och ekosounder.`,
@@ -17564,7 +17552,7 @@ För nodlinjerna (destruktiv interferens) skulle $\\Delta s$ vara ett halvt anta
             answer: { value: 0.60, unit: 'm' },
             solution: `För destruktiv interferens gäller
 
-$$ \\Delta s = \\left(n + \\tfrac{1}{2}\\right)\\cdot\\lambda $$
+$$ \\Delta s = \\left(n + \\frac{1}{2}\\right)\\cdot\\lambda $$
 
 För 0:e nodlinjen är $n = 0$:
 
@@ -17646,7 +17634,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{2{,}0} = 170\\ \\mathrm{Hz} $$
 
 **Svar:** Tonens frekvens är $170\\ \\mathrm{Hz}$.
 
-**Generell slutsats:** Samma struktur som N2#1 (Pythagoras + interferens) men där frekvensen är okänd istället för linje-ordning. Att kunna växla mellan dessa är typiskt för C-nivå.`,
+**Generell slutsats:** Samma struktur som föregående uppgift (Pythagoras + interferens) men där frekvensen är okänd istället för linje-ordning. Att kunna växla mellan dessa är typiskt för mellannivå.`,
         },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
@@ -17668,7 +17656,7 @@ $$ \\Delta s = AL - BL = 13{,}0 - 12{,}0 = 1{,}0\\ \\mathrm{m} $$
 
 **Steg 2 — våglängd ur nodlinje-villkoret.** För 1:a nodlinjen ($n = 1$):
 
-$$ \\Delta s = \\left(1 + \\tfrac{1}{2}\\right)\\lambda = \\frac{3\\lambda}{2} \\quad\\Leftrightarrow\\quad \\lambda = \\frac{2\\Delta s}{3} $$
+$$ \\Delta s = \\left(1 + \\frac{1}{2}\\right)\\lambda = \\frac{3\\lambda}{2} \\quad\\Leftrightarrow\\quad \\lambda = \\frac{2\\Delta s}{3} $$
 
 $$ \\lambda = \\frac{2 \\cdot 1{,}0}{3} = \\frac{2}{3}\\ \\mathrm{m} \\approx 0{,}667\\ \\mathrm{m} $$
 
@@ -18322,7 +18310,7 @@ $$ F = 2{,}0\\cdot 10^{-7} \\cdot \\frac{5{,}0 \\cdot 5{,}0 \\cdot 1{,}0}{0{,}02
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En rak ledare med längden $20\\ \\mathrm{cm}$ och massan $5{,}0\\ \\mathrm{g}$ ligger horisontellt över två parallella skenor i ett magnetfält $B$ riktat lodrätt nedåt. När strömmen $I = 2{,}5\\ \\mathrm{A}$ släpps på *svävar ledaren* (den magnetiska kraften balanserar tyngdkraften). Bestäm magnetfältets flödestäthet $B$. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            question: `En rak ledare med längden $20\\ \\mathrm{cm}$ och massan $5{,}0\\ \\mathrm{g}$ ligger horisontellt över två parallella skenor i ett vågrätt magnetfält $B$ som är vinkelrätt mot ledaren. När strömmen $I = 2{,}5\\ \\mathrm{A}$ släpps på *svävar ledaren* (den magnetiska kraften balanserar tyngdkraften). Bestäm magnetfältets flödestäthet $B$. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 0.098, unit: 'T' },
             solution: `**Insikten är att ledaren svävar när den magnetiska kraften $F = BIl$ är *exakt lika med* tyngdkraften $F_G = mg$**, riktade åt motsatta håll.
 
@@ -18344,7 +18332,7 @@ $$ B = \\frac{0{,}0050 \\cdot 9{,}82}{2{,}5 \\cdot 0{,}20} = \\frac{0{,}0491}{0{
 
 **Svar:** Magnetfältet är ungefär $98\\ \\mathrm{mT}$.
 
-**Generell slutsats:** Kraftbalans-uppgifter kräver att man identifierar *alla* krafter som verkar på objektet (här tyngd nedåt + magnetisk kraft uppåt) och sätter dem lika när systemet är i jämvikt. Detta är en standardgenre för A-nivå.`,
+**Generell slutsats:** Kraftbalans-uppgifter kräver att man identifierar *alla* krafter som verkar på objektet (här tyngd nedåt + magnetisk kraft uppåt) och sätter dem lika när systemet är i jämvikt. Lägg också märke till fältets riktning: kraften $F = BIl$ är vinkelrät mot både ledaren och fältet, så för att kraften ska kunna peka uppåt måste fältet vara vågrätt och vinkelrätt mot ledaren.`,
         },
     ],
 
@@ -18355,14 +18343,14 @@ $$ B = \\frac{0{,}0050 \\cdot 9{,}82}{2{,}5 \\cdot 0{,}20} = \\frac{0{,}0491}{0{
             question: `Var ligger jordens **norra magnetiska pol** i förhållande till den geografiska nordpolen?`,
             choices: [
                 'På exakt samma plats som geografiska nordpolen.',
-                'Ungefär $1\\,000\\ \\mathrm{km}$ söder om geografiska nordpolen, i Kanada.',
+                'Knappt $500\\ \\mathrm{km}$ från geografiska nordpolen, i Norra ishavet på väg mot Sibirien.',
                 'På sydpolen (geografiskt).',
                 'Den finns inte — jorden har ingen norra magnetisk pol.',
             ],
             correct: 1,
-            solution: `Jordens norra magnetiska pol ligger inte vid den geografiska nordpolen utan i **norra Kanada** — ungefär $1\\,000$–$1\\,500\\ \\mathrm{km}$ söder om geografiska polen. Avvikelsen kallas **deklination** och justeras av navigatörer.
+            solution: `Jordens norra magnetiska pol ligger inte vid den geografiska nordpolen. När den hittades år 1831 låg den i **norra Kanada**, men sedan dess har den vandrat över **Norra ishavet mot Sibirien**. I dag ligger den knappt $500\\ \\mathrm{km}$ från geografiska nordpolen. Vinkelavvikelsen mellan magnetisk och geografisk nordriktning kallas **deklination**, och navigatörer justerar kompassen efter den.
 
-De magnetiska polerna **rör sig över tid** — ungefär $0{,}5^\\circ$ västerut på $10$ år — och kan till och med byta plats helt (senast för $786\\,000$ år sedan).`,
+De magnetiska polerna **rör sig över tid** och kan till och med byta plats helt (senast för $786\\,000$ år sedan).`,
         },
         {
             level: 1,
@@ -18421,7 +18409,7 @@ $$ B_\\text{jv} = 50 \\cdot \\sin 71^\\circ = 50 \\cdot 0{,}946 \\approx 47{,}3\
 
 **Svar:** Horisontalkomposanten är ungefär $16\\ \\mathrm{\\mu T}$ och vertikalkomposanten ungefär $47\\ \\mathrm{\\mu T}$. (Vertikalkomposanten anges i svarsfältet.)
 
-**Generell slutsats:** På norra halvklotet dominerar vertikalkomposanten — det är därför "magnetisk dykning" är så stor här, och man behöver vridkomposanten extra noga vid t.ex. luftfart-navigering.`,
+**Generell slutsats:** I Sverige är vertikalkomposanten ungefär tre gånger så stor som horisontalkomposanten. Det är bara horisontalkomposanten som vrider en kompassnål, så ju närmare en magnetisk pol man kommer, desto svagare blir kompassens riktkraft.`,
         },
         {
             level: 2,
@@ -19123,7 +19111,7 @@ $$ \\frac{m}{q} = \\frac{0{,}050^2 \\cdot 0{,}064^2}{2 \\cdot 200} = \\frac{0{,}
 
 **Svar:** Massa-till-laddning-förhållandet är ungefär $2{,}6\\cdot 10^{-8}\\ \\mathrm{kg/C}$.
 
-**Generell slutsats:** Detta är den **e/m-bestämning** som Thomson använde för att upptäcka elektronen 1897. Genom att kombinera acceleration-i-fält och cirkelrörelse-i-fält kan man bestämma laddade partiklars *kvot* mellan massa och laddning — utan att veta något av dem separat. Klassisk A-nivå-kombination av två fysikprinciper.`,
+**Generell slutsats:** Genom att kombinera acceleration i ett elektriskt fält och cirkelrörelse i ett magnetfält kan man bestämma laddade partiklars *kvot* mellan massa och laddning, utan att veta något av dem separat. Det är principen bakom masspektrometern. Thomson bestämde elektronens kvot 1897 med en liknande idé, men han använde korsade elektriska och magnetiska fält. Elektronens kvot är cirka $5{,}7\\cdot 10^{-12}\\ \\mathrm{kg/C}$, alltså mycket mindre än jonens här.`,
         },
     ],
 
@@ -19166,11 +19154,11 @@ Den mekaniska energin omvandlas till elektrisk energi i form av strömmarna, som
             choices: [
                 'Det måste vara av icke-magnetisk plast.',
                 'Det måste vara av aluminium specifikt.',
-                'Det måste vara av ferromagnetiskt material (till exempel järn eller stål) så att virvelströmmar kan induceras.',
+                'Det måste vara av ferromagnetiskt material (till exempel järn eller stål) så att uppvärmningen blir effektiv.',
                 'Det måste vara genomskinligt så ljus kommer fram.',
             ],
             correct: 2,
-            solution: `Induktionshällar fungerar genom att inducera virvelströmmar i kokkärlets botten. För att det ska fungera bra behöver materialet vara **ferromagnetiskt** — typiskt järn eller stål — så att magnetfältet kopplas in i metallen och kan inducera kraftiga strömmar.
+            solution: `Induktionshällar fungerar genom att inducera virvelströmmar i kokkärlets botten. Virvelströmmar induceras i alla ledande material, men för att uppvärmningen ska bli effektiv behöver materialet vara **ferromagnetiskt**, typiskt järn eller stål. I ett ferromagnetiskt material koncentreras magnetfältet i metallen och strömmarna samlas i ett tunt skikt närmast hällen, där resistansen blir stor. Då blir värmeutvecklingen kraftig.
 
 **Rena aluminiumkastruller fungerar dåligt** på induktionshällar (för låg motståndsförlust), medan stålbottnade kastruller fungerar bra. Det är därför moderna kastruller ofta har en stålbotten gjuten i botten.
 
@@ -19278,15 +19266,13 @@ $$ B = \\frac{U}{v\\cdot d} = \\frac{2{,}0\\cdot 10^{-6}}{8{,}0\\cdot 10^{-4} \\
         // ── Nivå 2 (C) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En Hallsensor används för att mäta ett okänt magnetfält. Sensorns interna driftshastighet och bredd är inställda så att $v\\cdot d = 1{,}0\\cdot 10^{-5}\\ \\mathrm{m^2/s}$. Sensorn visar Hallspänningen $1{,}5\\ \\mathrm{mV}$. Bestäm magnetfältets flödestäthet.`,
-            answer: { value: 150, unit: 'T' },
-            solution: `$$ B = \\frac{U}{v\\cdot d} = \\frac{1{,}5\\cdot 10^{-3}}{1{,}0\\cdot 10^{-5}} = 150\\ \\mathrm{T} $$
+            question: `En Hallsensor används för att mäta ett okänt magnetfält. Sensorns interna driftshastighet och bredd är inställda så att $v\\cdot d = 1{,}0\\cdot 10^{-5}\\ \\mathrm{m^2/s}$. Sensorn visar Hallspänningen $1{,}5\\ \\mathrm{\\mu V}$. Bestäm magnetfältets flödestäthet.`,
+            answer: { value: 0.15, unit: 'T' },
+            solution: `$$ B = \\frac{U}{v\\cdot d} = \\frac{1{,}5\\cdot 10^{-6}}{1{,}0\\cdot 10^{-5}} = 0{,}15\\ \\mathrm{T} $$
 
-**Svar:** Magnetfältet är $150\\ \\mathrm{T}$.
+**Svar:** Magnetfältet är $0{,}15\\ \\mathrm{T}$.
 
-(Notera: detta är ett extremt starkt fält — i verkligheten används sensorer med högre $v\\cdot d$-produkt för att kunna mäta mindre fält. Värdet här är hypotetiskt för räkneövning.)
-
-**Generell slutsats:** Halleffekten används också i mycket vardagliga sammanhang — t.ex. för att mäta varvtal i bilars och cyklars hjul, för att detektera när en kompass-app vrids, och i moderna smartphones där en Hallsensor används för att veta när luckan på en mobilväska stängs.`,
+**Generell slutsats:** Halleffekten används också i mycket vardagliga sammanhang — till exempel för att mäta varvtal i bilars och cyklars hjul, och i moderna smartphones där en Hallsensor används för att veta när luckan på ett mobilfodral stängs.`,
         },
         {
             level: 2,
@@ -19888,14 +19874,14 @@ $$ \\lambda = \\frac{h}{mv} = \\frac{6{,}626\\cdot 10^{-34}}{1{,}673\\cdot 10^{-
         {
             level: 3,
             question: `En elektron och en proton accelereras båda från vila genom **samma** spänning $U$. Visa att de Broglie-våglängden kan skrivas $\\lambda = \\dfrac{h}{\\sqrt{2mQU}}$, och bestäm hur många gånger längre elektronens våglängd är än protonens. Räkna med $m_\\mathrm{p}/m_\\mathrm{e} = 1\\,836$.`,
-            answer: { value: 42.9, unit: 'ggr', tol: 0.03 },
+            answer: { value: 42.85, unit: 'ggr', tol: 0.03 },
             solution: `**Härledning.** Hastigheten ur energiomvandlingen $(QU = \\dfrac{mv^2}{2})$ är $v = \\sqrt{2QU/m}$. Sätt in i $\\lambda = h/(mv)$:
 
 $$ \\lambda = \\frac{h}{m\\sqrt{\\dfrac{2QU}{m}}} = \\frac{h}{\\sqrt{m^2\\cdot \\dfrac{2QU}{m}}} = \\frac{h}{\\sqrt{2mQU}} \\quad\\text{vsv.} $$
 
 **Insikten:** elektron och proton har samma laddningsstorlek $Q$ och samma $U$ — de stryks i kvoten. Kvar blir bara massberoendet $\\lambda \\propto 1/\\sqrt{m}$:
 
-$$ \\frac{\\lambda_\\mathrm{e}}{\\lambda_\\mathrm{p}} = \\sqrt{\\frac{m_\\mathrm{p}}{m_\\mathrm{e}}} = \\sqrt{1\\,836} = 42{,}8 $$
+$$ \\frac{\\lambda_\\mathrm{e}}{\\lambda_\\mathrm{p}} = \\sqrt{\\frac{m_\\mathrm{p}}{m_\\mathrm{e}}} = \\sqrt{1\\,836} = 42{,}85 $$
 
 **Svar:** Elektronens de Broglie-våglängd är ungefär $43$ gånger längre än protonens.
 

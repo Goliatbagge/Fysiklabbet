@@ -31,12 +31,12 @@ Peka eller tryck på en kurva eller det skuggade området så visas vad delen ä
 :::
 
 Arean under $f(x)$, det vill säga mellan kurvan och *x*-axeln, ges av integralen
-$\int_a^b f(x)\, dx$ (den blå arean i figuren, om vi också räknar med arean
-under $g(x)$). Arean under $g(x)$ ges på motsvarande sätt av
-$\int_a^b g(x)\, dx$ (den rosa arean).
+$\int_a^b f(x)\, dx$. Den arean rymmer både den röda arean $A$ i figuren och
+hela området under $g(x)$. Arean under $g(x)$ ges på motsvarande sätt av
+$\int_a^b g(x)\, dx$.
 
-Om vi subtraherar den undre arean (rosa) från den övre arean (blå) blir
-kvar precis den röda arean $A$ mellan kurvorna:
+Om vi subtraherar den undre arean (under $g(x)$) från den övre arean (under
+$f(x)$) blir kvar precis den röda arean $A$ mellan kurvorna:
 
 $$
 A = \int_a^b f(x)\, dx - \int_a^b g(x)\, dx = \int_a^b \big(f(x) - g(x)\big)\, dx \qquad \text{vsv.}

@@ -70,7 +70,7 @@ const MARGINAL = 2;       /* tillåten överskjutning i px (pennbredd) */
  * precis på gränsen kan slå om mellan körningar. Får du "städad" på en
  * scen: kör om ett par gånger innan du tar bort den ur listan. */
 const TIDIGARE_GRANSKADE = new Set([
-  'brada', 'dampning', 'decimaler', 'faktorisera', 'felmarginal', 'fjader',
+  'brada', 'dampning', 'decimaler', 'faktorisera', 'fjader',
   'fjaderenergi', 'grundpotens', 'harmonisk', 'karusell', 'kasthojd',
   'lpskiva', 'mgn', 'olikanamnare', 'olikhet', 'periodfjader',
   'potensforenkla', 'prefix', 'prioritering', 'samnamnare', 'sekundpendel',
@@ -92,6 +92,27 @@ function loadHandskrift() {
     createElementNS: () => ({ setAttribute: noop, appendChild: noop, style: {} }),
     head: { appendChild: noop },
   };
+  /* EN=1: granska den ENGELSKA layouten — samma scener med strängarna ur
+   * data/en/handskrift/*.js (som i webbläsaren via i18n.js), eftersom en
+   * engelsk rad kan vara längre än den svenska. */
+  if (process.env.EN) {
+    const dict = {};
+    const norm = (s) => String(s).replace(/\s+/g, ' ').trim();
+    win.I18N = {
+      en: true, lang: 'en',
+      add: (o) => { for (const k in o) dict[norm(k)] = o[k]; },
+      t: (s) => (dict[norm(s)] != null ? dict[norm(s)] : s),
+      tal: (s) => String(s).replace(/(\d),(\d)/g, '$1.$2'),
+      overlay() {}, addHtml() {},
+    };
+    const enDir = path.join(ROOT, 'data', 'en', 'handskrift');
+    if (fs.existsSync(enDir)) {
+      for (const f of fs.readdirSync(enDir).filter(n => n.endsWith('.js'))) {
+        // eslint-disable-next-line no-new-func
+        new Function('I18N', fs.readFileSync(path.join(enDir, f), 'utf8'))(win.I18N);
+      }
+    }
+  }
   const src = fs.readFileSync(path.join(ROOT, 'handskrift.js'), 'utf8');
   // eslint-disable-next-line no-new-func
   new Function('window', 'document', 'requestAnimationFrame', src)(

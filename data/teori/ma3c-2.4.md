@@ -106,7 +106,7 @@ som att "klockan 11.00 ökar temperaturen med 3 °C/h".
 ::: sampunkt "Tolka i ord"
 - $s(2) = 120$ betyder att bilen har färdats $120\ \mathrm{km}$ efter 2 timmar.
 - $s'(2) = 90$ betyder att bilen kör med hastigheten $90\ \mathrm{km/h}$ vid tidpunkten 2 timmar.
-- Räknas tiden från en klockslag ska svaret gärna översättas dit, till exempel klockan 11.00.
+- Räknas tiden från ett klockslag ska svaret gärna översättas dit, till exempel klockan 11.00.
 :::
 
 ::: sampunkt "Derivata i Geogebra"

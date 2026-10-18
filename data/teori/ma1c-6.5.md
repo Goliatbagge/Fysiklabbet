@@ -10,7 +10,7 @@ section: '6.5'
 # Vektorer och skalärer
 
 En egenskap som på något sätt kan mätas kallas **storhet**. Exempel på
-storheter är sträcka, hastighet, vikt, volym och temperatur. Det finns
+storheter är sträcka, hastighet, massa, volym och temperatur. Det finns
 två typer av storheter: vektorer och skalärer.
 
 En storhet som anges med
@@ -18,7 +18,7 @@ En storhet som anges med
 - storlek och riktning kallas **vektor**. Exempel på vektorer är
   hastighet, kraft och acceleration.
 - endast storlek (ingen riktning) kallas **skalär**. Exempel på skalärer
-  är vikt, tid och temperatur.
+  är massa, tid och temperatur.
 
 Vi representerar vektorer med pilar där pilens längd motsvarar vektorns
 storlek och pilen motsvarar vektorns riktning. För att beteckna en vektor
@@ -113,7 +113,7 @@ Den negativa lösningen kan bortses.
 ::: sampunkt "Vektor och skalär"
 - **Vektor**: har både **storlek och riktning**. Hastighet, kraft,
   acceleration.
-- **Skalär**: har bara **storlek**. Vikt, tid, temperatur.
+- **Skalär**: har bara **storlek**. Massa, tid, temperatur.
 :::
 
 ::: sampunkt "Så ritas de"

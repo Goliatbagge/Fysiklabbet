@@ -134,10 +134,10 @@ typ: enhetscirkelekv
 
 ::: textlosning
 **a)** Eftersom sinus motsvarar $y$-koordinaten drar vi en vågrät linje vid
-$y = 0{,}4$. Linjen skär enhetscirkeln vid ungefär $20^\circ$ och
-$160^\circ$.
+$y = 0{,}4$. Linjen skär enhetscirkeln vid ungefär $24^\circ$ och
+$156^\circ$.
 
-**Svar:** $20^\circ$ och $160^\circ$
+**Svar:** $v \approx 24^\circ$ och $v \approx 156^\circ$
 
 **b)** Eftersom cosinus motsvarar $x$-koordinaten drar vi en lodrät linje
 vid $x = 1{,}5$. Linjen hamnar helt utanför enhetscirkeln (radien är ju bara

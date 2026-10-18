@@ -52,10 +52,10 @@ $$
 :::
 
 ::: formel "… i formelbladet"
-Längden $|\vec{u}|$ för vektor $\vec{u} = (a_x,\ a_y)$ är
+Längden $|\vec{u}|$ för vektor $\vec{u} = (u_x,\ u_y)$ är
 
 $$
-|\vec{u}| = \sqrt{a_x^2 + a_y^2}
+|\vec{u}| = \sqrt{u_x^2 + u_y^2}
 $$
 :::
 
@@ -87,7 +87,7 @@ $$
 ::: sampunkt "Längden"
 - $|\vec{u}| = \sqrt{a^2 + b^2}$
 - I formelbladet står det
-  $|\vec{u}| = \sqrt{a_x^2 + a_y^2}$. Samma sak.
+  $|\vec{u}| = \sqrt{u_x^2 + u_y^2}$. Samma sak.
 - Det är bara Pythagoras sats med koordinaterna som kateter.
 :::
 

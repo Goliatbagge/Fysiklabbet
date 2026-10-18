@@ -118,46 +118,46 @@ $$
 $$
 
 ::: härledning "Bevis — Bisektrissatsen"
-Vi ritar en godtycklig triangel $ABC$ och ritar in en bisektris $AD$
-(där $D$ ligger på sidan $BC$). Vi vill visa att
-$\dfrac{CD}{BD} = \dfrac{AC}{AB}$.
+Vi ritar en godtycklig triangel $ABC$ och ritar in en bisektris $CD$
+(där $D$ ligger på sidan $AB$). Vi vill visa att
+$\dfrac{AD}{BD} = \dfrac{AC}{BC}$.
 
-Vi förlänger bisektrisen till en punkt $P$, så att sträckorna $AB$ och
-$BP$ blir lika långa och bildar då en likbent triangel $\triangle ABP$.
+Vi förlänger bisektrisen till en punkt $P$, så att sträckorna $CB$ och
+$BP$ blir lika långa och bildar då en likbent triangel $\triangle CBP$.
 
 ::: figur
-<svg viewBox="0 4 236 136" width="374" height="215" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="Triangeln A B C med bisektrisen från A genom punkten D på sidan B C, förlängd till punkten P så att B P är lika lång som A B."><polygon points="12,78 108,28 98,117" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="12" y1="78" x2="102.7" y2="75.5" stroke="#1f2530" stroke-width="1.4"/><line x1="102.7" y1="75.5" x2="206.6" y2="72.7" stroke="#1f2530" stroke-width="1.2" stroke-dasharray="6 5"/><line x1="108" y1="28" x2="206.6" y2="72.7" stroke="#1f2530" stroke-width="1.4"/><text x="6" y="82" font-size="12" text-anchor="middle" fill="#1f2530">A</text><text x="110" y="18" font-size="12" text-anchor="middle" fill="#1f2530">B</text><text x="98" y="131" font-size="12" text-anchor="middle" fill="#1f2530">C</text><text x="107" y="90" font-size="12" text-anchor="start" fill="#1f2530">D</text><text x="212" y="77" font-size="12" text-anchor="start" fill="#1f2530">P</text><line x1="57.9" y1="49" x2="62.1" y2="57" stroke="#1f2530" stroke-width="1.3"/><line x1="159.2" y1="46.3" x2="155.4" y2="54.5" stroke="#1f2530" stroke-width="1.3"/></svg>
+<svg viewBox="0 4 236 136" width="374" height="215" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="Triangeln A B C med bisektrisen från C genom punkten D på sidan A B, förlängd till punkten P så att B P är lika lång som C B."><polygon points="12,78 108,28 98,117" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="12" y1="78" x2="102.7" y2="75.5" stroke="#1f2530" stroke-width="1.4"/><line x1="102.7" y1="75.5" x2="206.6" y2="72.7" stroke="#1f2530" stroke-width="1.2" stroke-dasharray="6 5"/><line x1="108" y1="28" x2="206.6" y2="72.7" stroke="#1f2530" stroke-width="1.4"/><text x="6" y="82" font-size="12" text-anchor="middle" fill="#1f2530">C</text><text x="110" y="18" font-size="12" text-anchor="middle" fill="#1f2530">B</text><text x="98" y="131" font-size="12" text-anchor="middle" fill="#1f2530">A</text><text x="107" y="90" font-size="12" text-anchor="start" fill="#1f2530">D</text><text x="212" y="77" font-size="12" text-anchor="start" fill="#1f2530">P</text><line x1="57.9" y1="49" x2="62.1" y2="57" stroke="#1f2530" stroke-width="1.3"/><line x1="159.2" y1="46.3" x2="155.4" y2="54.5" stroke="#1f2530" stroke-width="1.3"/></svg>
 :::
 
-Vi studerar $\triangle ACD$ och $\triangle BDP$:
+Vi studerar $\triangle CAD$ och $\triangle BDP$:
 
-$\angle BAD = \angle BPD$ (basvinklar i likbent triangel
-$\triangle ABP$)
+$\angle BCD = \angle BPD$ (basvinklar i likbent triangel
+$\triangle CBP$)
 
-$\angle BAD = \angle CAD$ (per definition eftersom $AP$ är en bisektris
+$\angle BCD = \angle ACD$ (per definition eftersom $CP$ är en bisektris
 som delar dem lika)
 
 Alltså gäller
 
 $$
-\angle BPD = \angle CAD
+\angle BPD = \angle ACD
 $$
 
 $$
 \angle BDP = \angle ADC \quad \text{(vertikalvinklar)}
 $$
 
-$\triangle ACD$ och $\triangle BDP$ har alltså två lika vinklar och är
+$\triangle CAD$ och $\triangle BDP$ har alltså två lika vinklar och är
 likformiga. Vi ställer upp sidförhållandena:
 
 $$
-\frac{CD}{BD} = \frac{AC}{BP}
+\frac{AD}{BD} = \frac{AC}{BP}
 $$
 
-Eftersom $BP = AB$ kan vi ersätta $BP$ med $AB$, vilket ger
+Eftersom $BP = BC$ kan vi ersätta $BP$ med $BC$, vilket ger
 
 $$
-\frac{CD}{BD} = \frac{AC}{AB}
+\frac{AD}{BD} = \frac{AC}{BC}
 $$
 
 v.s.b.

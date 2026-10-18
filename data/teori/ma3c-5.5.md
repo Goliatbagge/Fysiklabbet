@@ -60,15 +60,15 @@ typ: casintegral
 **a)** I Geogebras standardläge skriver vi "Integral" och väljer
 *Integral( Funktion, Från x-värde, Till x-värde )* i menyn *Integral*. I
 inmatningsfältet skriver vi sedan "Integral$(x^2 - 4, 1, 5)$" och får
-$x \approx 25{,}3$.
+$\displaystyle\int_1^5 (x^2 - 4)\, dx \approx 25{,}3$.
 
-**Svar:** $x \approx 25{,}3$
+**Svar:** $\displaystyle\int_1^5 (x^2 - 4)\, dx \approx 25{,}3$
 
 **b)** Vi byter till Geogebras CAS-läge. I inmatningsfältet skriver vi
 sedan, precis som i a-uppgiften, "Integral$(x^2 - 4, 1, 5)$" och får
 
 $$
-x = \frac{76}{3}
+\int_1^5 (x^2 - 4)\, dx = \frac{76}{3}
 $$
 
 **Svar:** $\dfrac{76}{3}$

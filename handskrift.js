@@ -15432,8 +15432,8 @@
     tanke(y, [
       [['60 av 100 svarade ja, alltså']],
       [['p=60 procent och n=100.']]
-    ], 1.05);
-    y += 4.2 * F;
+    ], 1.3);
+    y += 4.45 * F;
     T.str('p=60 och n=100', padL, y);
     T.stepEnd();
 
@@ -15446,19 +15446,19 @@
       [['Innanför parentesen först:']],
       [['100-60=40. Sedan 60·40=2 400,']],
       [['delat med 100 blir 24.']]
-    ], 1.05);
-    y += 4.2 * F;
+    ], 1.3);
+    y += 4.45 * F;
     xx = T.str('f=1,96·', padL, y);
     xx = T.rot('24', xx, y);
     T.str('=9,601...', xx, y);
     T.stepEnd();
 
     y += 2.8 * F;
-    xe = T.str('≈9,6 %', padL + 30, y);
+    xe = T.str('≈9,6', padL + 30, y);
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: 9,6 %', padL, y);
+    xe = T.str('Svar: 9,6 procentenheter', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -15470,21 +15470,21 @@
     ], 0.5);
     y += 4.5 * F;
     T.str('b) Konfidensintervall', padL, y - 1.6 * F, null, 0.62);
-    T.str('60 %±9,6 %', padL, y);
+    T.str('60 % ± 9,6 procentenheter', padL, y);
     T.stepEnd();
 
     y += 2.6 * F;
-    T.str('Undre: 60 %-9,6 %=50,4 %', padL, y, null, 0.72);
+    T.str('Undre: 60-9,6=50,4 %', padL, y, null, 0.72);
     T.stepEnd();
 
     y += 1.9 * F;
-    T.str('Övre: 60 %+9,6 %=69,6 %', padL, y, null, 0.72);
+    T.str('Övre: 60+9,6=69,6 %', padL, y, null, 0.72);
     T.stepEnd();
 
     tanke(y, [
-      [['Det betyder att det är 95 %']],
-      [['chans att det sanna värdet']],
-      [['ligger i det intervallet.']]
+      [['Metoden fångar det sanna']],
+      [['värdet i 95 % av alla']],
+      [['undersökningar.']]
     ], 0.3);
     y += 2.8 * F;
     xe = T.str('Svar: Mellan 50,4 % och 69,6 %', padL, y);
@@ -15520,7 +15520,7 @@
     xe = T.str('Svar: Nej, inte statistiskt', padL, y);
     T.stepEnd();
     y += 2.2 * F;
-    xe = T.str('säkerställd', padL + 30, y);
+    xe = T.str('säkerställd', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -34157,20 +34157,20 @@
       [['rörelseenergi som försvinner.']],
       [['Det är arbetssatsen.']]
     ]));
-    T.str('Arbetet är rörelseenergins ändring', padL, y, null, 0.62);
+    T.str('Arbetet är rörelseenergins minskning', padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
-    T.str('W=ΔE_k', padL, y);
+    T.str('W=E_k_f_ö_r_e-E_k_e_f_t_e_r', padL, y);
     T.stepEnd();
 
     y += adv + 1.9 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
-      [['Jag skriver ut båda sidorna:']],
-      [['arbetet som kraft gånger']],
-      [['sträcka, ändringen som efter']],
-      [['minus före.']]
+      [['Arbetet skriver jag som kraft']],
+      [['gånger sträcka. Minskningen är']],
+      [['energin före minus energin']],
+      [['efter.']]
     ]));
-    T.str('F_s·s=E_k_e_f_t_e_r-E_k_f_ö_r_e', padL, y);
+    T.str('F_s·s=E_k_f_ö_r_e-E_k_e_f_t_e_r', padL, y);
     T.stepEnd();
 
     y += adv + 2.0 * F;
@@ -34179,7 +34179,7 @@
       [['genom att dividera med']],
       [['sträckan.']]
     ]));
-    T.fracH('E_k_e_f_t_e_r-E_k_f_ö_r_e', 's', T.str('F_s=', padL, y), y);
+    T.fracH('E_k_f_ö_r_e-E_k_e_f_t_e_r', 's', T.str('F_s=', padL, y), y);
     T.stepEnd();
 
     y += adv + 2.4 * F;
@@ -48039,7 +48039,7 @@
       [['avrundas till lika många.']]
     ]);
     y += 4.6 * F;
-    xe = T.str('Svar: E≈140 J', padL, y);
+    xe = T.str('Svar: E≈138 J', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -55505,7 +55505,7 @@
       [['ställen.']]
     ], 0);
     y = C.oy + 1.35 * C.u + 3.2 * F;
-    xe = T.str('a) v≈20° och v≈160°', padL, y);
+    xe = T.str('a) v≈24° och v≈156°', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -60394,7 +60394,10 @@
     /* cirkel med diameter, korda och radie */
     var cx = padL + 180, cy = 260, r = 100, i, a, pts = [];
     var top = [cx, cy - r], bot = [cx, cy + r];
-    var P = [cx + Math.cos(-0.6) * r, cy + Math.sin(-0.6) * r];
+    /* skalenligt: x = 23° vid toppen ger y = 46° mellan radien och
+       den nedre halvan av diametern, alltså P 44° under vågrätt */
+    var P = [cx + Math.cos(44 * Math.PI / 180) * r,
+             cy + Math.sin(44 * Math.PI / 180) * r];
     /* uppgiftens figur står färdig från början */
     forritad(T, function () {
       for (i = 0; i <= 44; i++) {
@@ -60409,9 +60412,9 @@
       }
       T.line(top, P);
       T.line([cx, cy], P);
-      T.str('x', cx + 16, cy - r + 0.9 * F, BLUE, 0.6);
-      T.str('23°', P[0] - 62, P[1] + 0.75 * F, BLUE, 0.55);
-      T.str('y', cx + 22, cy + 0.2 * F, BLUE, 0.6);
+      T.str('x', cx + 5, cy - 36, BLUE, 0.6);
+      T.str('23°', cx + 12, cy + 2, BLUE, 0.4);
+      T.str('y', cx + 9, cy + 38, BLUE, 0.6);
     });
 
     tanke(cy + r + 0.6 * F, [
@@ -60444,11 +60447,16 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
 
-    var cx = padL + 150, cy = 260, r = 80, i, a, pts = [];
-    /* tangeringspunkt B vid vinkeln -50° från P, A på förlängningen */
-    var aB = -0.87;
+    var cx = padL + 190, cy = 260, r = 80, i, a, pts = [];
+    /* skalenligt som teorifiguren: PA åt 195°, PB åt 145° (50° vid P),
+       |PA| = r/cos 50° så att vinkeln vid B blir rät och v = 40° */
+    var aA = 195 * Math.PI / 180, aB = 145 * Math.PI / 180;
+    var dPA = r / Math.cos(50 * Math.PI / 180);
     var B = [cx + Math.cos(aB) * r, cy + Math.sin(aB) * r];
-    var A = [cx + 290, cy - 12];
+    var A = [cx + Math.cos(aA) * dPA, cy + Math.sin(aA) * dPA];
+    var lAB = Math.hypot(B[0] - A[0], B[1] - A[1]);
+    var uAB = [(B[0] - A[0]) / lAB, (B[1] - A[1]) / lAB];
+    var Bf = [B[0] + uAB[0] * 46, B[1] + uAB[1] * 46];
     /* uppgiftens figur står färdig från början */
     forritad(T, function () {
       for (i = 0; i <= 44; i++) {
@@ -60458,14 +60466,14 @@
       acts.push({ kind: 'stroke', pts: pts });
       T.line([cx, cy], B);
       T.line([cx, cy], A);
-      T.line(B, A);
+      T.line(A, Bf);
       ratVinkel(T, B, [Math.cos(aB + Math.PI), Math.sin(aB + Math.PI)],
-                [(A[0] - B[0]) / 200, (A[1] - B[1]) / 200], 14);
-      T.str('P', cx - 22, cy + 0.2 * F, null, 0.6);
-      T.str('B', B[0] - 4, B[1] - 0.4 * F, null, 0.6);
-      T.str('A', A[0] + 10, A[1] + 0.2 * F, null, 0.6);
-      T.str('50°', cx + 24, cy - 10, BLUE, 0.55);
-      T.str('v', A[0] - 76, A[1] + 0.25 * F, BLUE, 0.6);
+                [-uAB[0], -uAB[1]], 14);
+      T.str('P', cx + 8, cy - 4, null, 0.6);
+      T.str('B', B[0] - 26, B[1] + 0.7 * F, null, 0.6);
+      T.str('A', A[0] - 24, A[1] + 0.2 * F, null, 0.6);
+      T.str('50°', cx - 50, cy + 11, BLUE, 0.55);
+      T.str('v', A[0] + 18, A[1] + 21, BLUE, 0.5);
     });
 
     tanke(cy + r + 0.6 * F, [
@@ -60502,11 +60510,13 @@
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
 
     var cx = padL + 180, cy = 260, r = 100, i, a, pts = [];
-    /* två kordor som skär varandra */
-    var P1 = [cx + Math.cos(2.5) * r, cy + Math.sin(2.5) * r];
-    var P2 = [cx + Math.cos(-0.5) * r, cy + Math.sin(-0.5) * r];
-    var P3 = [cx + Math.cos(1.2) * r, cy + Math.sin(1.2) * r];
-    var P4 = [cx + Math.cos(-1.9) * r, cy + Math.sin(-1.9) * r];
+    /* två kordor som skär varandra, skalenligt som teorifiguren:
+       x = 36 och 10 på den sneda kordan, 18 och 20 på den vågräta */
+    var k = r / 72;
+    var P1 = [cx + 53.8 * k, cy - 47.9 * k];   /* x-delens ände   */
+    var P2 = [cx - 18.8 * k, cy + 69.5 * k];   /* 10-delens ände  */
+    var P3 = [cx - 57 * k, cy + 44 * k];       /* 18-delens ände  */
+    var P4 = [cx + 57 * k, cy + 44 * k];       /* 20-delens ände  */
     /* uppgiftens figur står färdig från början */
     forritad(T, function () {
       for (i = 0; i <= 44; i++) {
@@ -60516,10 +60526,10 @@
       acts.push({ kind: 'stroke', pts: pts });
       T.line(P1, P2);
       T.line(P3, P4);
-      T.str('x', (P1[0] + cx) / 2 - 10, (P1[1] + cy) / 2, BLUE, 0.6);
-      T.str('10', (P2[0] + cx) / 2, (P2[1] + cy) / 2 + 0.9 * F, BLUE, 0.6);
-      T.str('18', (P3[0] + cx) / 2 + 8, (P3[1] + cy) / 2, BLUE, 0.6);
-      T.str('20', (P4[0] + cx) / 2 - 26, (P4[1] + cy) / 2, BLUE, 0.6);
+      T.str('x', cx + 40, cy + 9, BLUE, 0.6);
+      T.str('10', cx - 45, cy + 87, BLUE, 0.5);
+      T.str('18', cx - 52, cy + 52, BLUE, 0.6);
+      T.str('20', cx + 26, cy + 52, BLUE, 0.6);
     });
 
     tanke(cy + r + 0.6 * F, [

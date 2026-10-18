@@ -63,7 +63,7 @@ Vid jämförelser motsvarar det vi JÄMFÖR MED det gamla värdet.
 :::
 
 ::: exempel "Exempel 1 — Prissänkning"
-**En begagnad bil kostar 72 000 kr för sedan sänkas i pris med 8 %.
+**En begagnad bil kostar 72 000 kr och sänks sedan i pris med 8 %.
 Vilket blir det nya priset? Lös med förändringsfaktor.**
 
 ::: handskrift

@@ -41,7 +41,7 @@ skalär — både grafiskt och i koordinatform.
   temperatur.
 - **vektor**: en storhet som anges med både storlek och riktning, till exempel
   hastighet, kraft och acceleration; betecknas $\vec{u}$.
-- **skalär**: en storhet som endast anges med storlek, till exempel vikt, tid
+- **skalär**: en storhet som endast anges med storlek, till exempel massa, tid
   och temperatur.
 - **vektorns längd (belopp) ($|\vec{u}|$)**: vektorns storlek, beräknas
   med Pythagoras sats eller ur koordinatformen.

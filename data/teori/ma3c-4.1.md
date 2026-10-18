@@ -174,7 +174,7 @@ $f'(x)$ skär $x$-axeln. Det sker vid $x = -1$ och $x = 5$.
 ::: sampunkt "Två sätt att avgöra"
 1. Titta på lutningen direkt i grafen till $f(x)$: uppförsbacke eller nedförsbacke sett från vänster till höger.
 2. Titta på **tecknet** i grafen till $f'(x)$: ovanför $x$-axeln betyder växande $f(x)$.
-- Håll isär graferna. En **nollpunkt** hos $f'(x)$ är en **extrempunkt** hos $f(x)$.
+- Håll isär graferna. Ett **nollställe** till $f'(x)$ ger en vågrät tangent hos $f(x)$, och en **extrempunkt** om $f'(x)$ byter tecken där.
 :::
 
 ::: sampunkt "Teckentabell"

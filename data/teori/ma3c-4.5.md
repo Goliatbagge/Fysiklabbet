@@ -19,14 +19,14 @@ Om
   "glad mun") där $x = a$,
 - $f''(a) < 0$ är kurvan **konkav**, det vill säga den "böjer av nedåt" (är en
   "sur mun") där $x = a$,
-- $f''(a) = 0$ har vi en **inflexionspunkt** (övergången mellan konvex och
-  konkav) där $x = a$.
+- $f''(a) = 0$ och andraderivatan byter tecken där har vi en
+  **inflexionspunkt** (övergången mellan konvex och konkav) där $x = a$.
 :::
 
 Andraderivatans tecken kan vi utnyttja för att bestämma karaktären hos
-lokala extrempunkter! En lokal minimipunkt ligger alltid på en "glad mun",
-så där måste andraderivatan vara positiv. En lokal maximipunkt ligger
-alltid på en "sur mun", så där måste andraderivatan vara negativ.
+lokala extrempunkter! Är $f'(a) = 0$ och kurvan en "glad mun" där, alltså
+$f''(a) > 0$, är punkten en lokal minimipunkt. Är kurvan i stället en "sur
+mun" där, alltså $f''(a) < 0$, är punkten en lokal maximipunkt.
 
 För att bestämma karaktären hos extrempunkter behöver vi alltså **inte**
 göra teckenstudier med en teckentabell — vi kan göra det snabbare med

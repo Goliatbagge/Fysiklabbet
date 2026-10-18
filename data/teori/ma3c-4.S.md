@@ -88,7 +88,7 @@ f''(a) < 0 \quad \Rightarrow \quad \text{kurvan är konkav vid } x = a
 $$
 
 $$
-f''(a) = 0 \quad \Rightarrow \quad x = a \text{ är en inflexionspunkt}
+f''(a) = 0 \text{ och } f'' \text{ byter tecken} \quad \Rightarrow \quad x = a \text{ är en inflexionspunkt}
 $$
 
 **Andraderivatametoden — extrempunktens karaktär**
@@ -133,8 +133,8 @@ där
 - Kurvkonstruktion: rita en jämn kurva genom ändpunkter, extrempunkter
   och inflexionspunkter. Kurvans stigning eller sjunkning mellan
   punkterna ges av tecknet på $f'(x)$ i teckentabellen.
-- En inflexionspunkt ligger alltid mitt emellan två närliggande
-  extrempunkter till samma funktion (symmetri) — ett genvägsknep när
+- För ett tredjegradspolynom ligger inflexionspunkten mitt emellan de två
+  extrempunkterna (symmetri). Det är ett genvägsknep när
   extrempunkternas $x$-koordinater redan är kända.
 - Andraderivatan $f''(x)$ kan tolkas som derivatan av $f'(x)$: en
   inflexionspunkt hos $f(x)$ svarar mot en extrempunkt hos $f'(x)$.
@@ -219,7 +219,7 @@ med inflexionspunkten mitt emellan:
 - Vet du vad andraderivatan $f''(x)$ beskriver, och kan du avgöra om en
   kurva är konvex eller konkav utifrån dess tecken?
 - Kan du bestämma en inflexionspunkts koordinater, och vet du att den
-  ligger mitt emellan två närliggande extrempunkter?
+  ligger mitt emellan de två extrempunkterna för ett tredjegradspolynom?
 - Kan du använda andraderivatametoden för att avgöra en extrempunkts
   karaktär utan teckentabell, och vet du när metoden inte räcker till
   ($f''(a) = 0$)?

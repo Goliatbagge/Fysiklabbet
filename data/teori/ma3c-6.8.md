@@ -71,8 +71,8 @@ typ: flaggstangkulle
 
 ::: textlosning
 Låt $A$ vara flaggstångens topp, $D$ kullens topp (flaggstångens fot) och
-$C$ foten av lodlinjen från $A$ och $D$ ner till marken, rakt under $B$
-sett i höjdled. Vinkeln vid $C$ är rät.
+$C$ foten av lodlinjen från $A$ och $D$ ner till marken, rakt under $D$
+och i samma höjd som $B$. Vinkeln vid $C$ är rät.
 
 Den enda kända **sidan** är $AD = 11$ m, och den tillhör triangeln $ABD$.
 Vi börjar därför med att ta reda på två vinklar i den triangeln.

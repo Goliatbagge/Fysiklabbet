@@ -232,6 +232,6 @@ ansiktsdel så framhävs dess rad i ordningen bredvid.
 - Kan du tolka en rationell exponent som en rot, till exempel
   $a^{1/n} = \sqrt[n]{a}$?
 - Kan du skriva tal i grundpotensform och växla mellan tiopotenser och
-  prefix (t, G, M, k, d, c, m, µ, n, p)?
+  prefix (T, G, M, k, d, c, m, µ, n, p)?
 - Kan du prioriteringsreglerna och räkna uttryck med flera räknesätt i
   rätt ordning, inklusive "osynliga parenteser" i bråk?

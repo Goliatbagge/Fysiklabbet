@@ -236,7 +236,7 @@ window.EXITTICKETS = {
     why: [
       '$18\\ \\mathrm{km/h} / 3{,}6 = 5{,}0\\ \\mathrm{m/s}$.',
       'Det är tio gånger för litet — kontrollera decimalplaceringen i divisionen $18/3{,}6$.',
-      'Det är tio gånger för stort — troligen har talet multiplicerats istället för att divideras.',
+      'Det är tio gånger för stort. Kontrollera decimalplaceringen i divisionen $18/3{,}6$.',
       'Det är resultatet av att multiplicera med 3,6 istället för att dividera — fel räkneriktning för km/h till m/s.',
     ],
   },
@@ -252,7 +252,7 @@ window.EXITTICKETS = {
     why: [
       'Det är resultatet av att dela med 3,6 istället för att multiplicera — fel räkneriktning för m/s till km/h.',
       '$15\\ \\mathrm{m/s} \\cdot 3{,}6 = 54\\ \\mathrm{km/h}$.',
-      'Det är tio gånger för stort — kontrollera decimalplaceringen i multiplikationen $15 \\cdot 3{,}6$.',
+      'Det är $15 \\cdot 10$. Omvandlingsfaktorn mellan m/s och km/h är 3,6, inte 10.',
       'Talet i m/s kan inte vara samma tal som i km/h — enheterna motsvarar olika stora "steg", så omvandlingsfaktorn 3,6 måste räknas in.',
     ],
   },
@@ -261,7 +261,7 @@ window.EXITTICKETS = {
     choices: [
       'Ingen skillnad — orden betyder exakt samma sak',
       'Fart mäts i km/h och hastighet mäts alltid i m/s',
-      'Fart är en skalär storhet (bara storlek), medan hastighet är en vektorstorlek (storlek och riktning)',
+      'Fart är en skalär storhet (bara storlek), medan hastighet är en vektorstorhet (storlek och riktning)',
       'Hastighet används bara för fordon, fart används för allt annat',
     ],
     correct: 2,
@@ -957,8 +957,8 @@ window.EXITTICKETS = {
     why: [
       '50 m fås om man råkar dela fel — kontrollera uträkningen: $0 - 20^2 = 2\\cdot(-2{,}0)\\cdot s$.',
       '$v^2-v_0^2=2as \\Rightarrow 0-20^2 = 2\\cdot(-2{,}0)\\cdot s \\Rightarrow -400=-4{,}0\\,s \\Rightarrow s=100\\ \\mathrm{m}$.',
-      '200 m fås om man glömmer kvadrera hastigheten: $v_0^2 = 20^2 = 400$, inte bara $20 \\cdot 2$.',
-      '10 m stämmer inte med uträkningen — kontrollera att du kvadrerar $v_0$ (får 400) innan du delar med $2a$.',
+      '200 m fås om man glömmer faktorn 2 i $2as$: $400/2{,}0 = 200$. Rätt är $400/4{,}0 = 100$.',
+      '10 m fås om man glömmer kvadrera hastigheten: $20/2{,}0 = 10$. Kvadrera $v_0$ (det ger 400) innan du delar med $2a$.',
     ],
   },
 ],
@@ -1812,7 +1812,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Detta är för litet — kontrollera att du delat den resulterande kraften med HELA systemets massa ($4{,}0\\ \\mathrm{kg}$), inte med en enskild vikt.',
+      'Detta är för litet. $2{,}0$ är skillnaden mellan massorna i kilogram, inte en acceleration. Den resulterande kraften $20\\ \\mathrm{N}$ ska delas med hela systemets massa, $4{,}0\\ \\mathrm{kg}$.',
       'Resulterande kraft: $F_\\mathrm{R} = (3{,}0 - 1{,}0) \\cdot 10 = 20\\ \\mathrm{N}$. Total massa: $m_\\text{tot} = 3{,}0 + 1{,}0 = 4{,}0\\ \\mathrm{kg}$. Det ger $a = \\dfrac{20}{4{,}0} = 5{,}0\\ \\mathrm{m/s^2}$.',
       'Detta motsvarar tyngdfaktorn $g$, inte systemets acceleration.',
       'Detta är den resulterande kraften i newton, inte accelerationen — den ska delas med systemets totala massa.',
@@ -2003,7 +2003,7 @@ window.EXITTICKETS = {
     choices: ['≈49 J', '≈98 J', '≈10 J', '≈500 J'],
     correct: 1,
     why: [
-      'Detta är ungefär halva det korrekta värdet — tyngdfaktorn *g* har inte räknats med fullt ut.',
+      'Detta är ungefär halva det korrekta värdet: $g \\cdot h = 9{,}82 \\cdot 5{,}0 \\approx 49$. Massan $m = 2{,}0\\ \\mathrm{kg}$ har inte multiplicerats in.',
       'Insättning i $E_\\mathrm{p} = m \\cdot g \\cdot h$ ger $2{,}0 \\cdot 9{,}82 \\cdot 5{,}0 \\approx 98\\ \\mathrm{J}$.',
       'Detta motsvarar bara $m \\cdot h$ utan att tyngdfaktorn *g* räknats med alls.',
       'Detta är för stort — kontrollera att alla tre faktorer (*m*, *g* och *h*) multiplicerats en gång var, inte fler.',
@@ -2523,7 +2523,7 @@ window.EXITTICKETS = {
     why: [
       'Det är bara den ena vagnens hastighet FÖRE kollisionen. Eftersom den nu måste dra med sig dubbelt så stor massa blir sluthastigheten lägre.',
       '$v = \\dfrac{m_\\mathrm{A} v_\\mathrm{A} + m_\\mathrm{B} v_\\mathrm{B}}{m_\\mathrm{A} + m_\\mathrm{B}} = \\dfrac{2{,}0 \\cdot 4{,}0 + 2{,}0 \\cdot 0}{2{,}0 + 2{,}0} = 2{,}0$ m/s.',
-      'Att bara halvera hastigheten utan att räkna med massorna korrekt ger detta för låga värde.',
+      'Det är en fjärdedel av starthastigheten, alltså för lågt. Rörelsemängden $2{,}0 \\cdot 4{,}0 = 8{,}0\\ \\mathrm{kg \\cdot m/s}$ fördelas på den dubbla massan $4{,}0\\ \\mathrm{kg}$, så hastigheten halveras till $2{,}0\\ \\mathrm{m/s}$.',
       'Att fördubbla hastigheten strider mot rörelsemängdens bevarande. Massan ökar när vagnarna hakar i varandra, så hastigheten måste MINSKA, inte öka.',
     ],
   },
@@ -2790,9 +2790,9 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Normalt lufttryck vid havsnivå, 1 atm, motsvarar 101 300 Pa enligt tabellen i genomgången.',
-      'Det här är alldeles för lågt — en faktor 100 mindre än det verkliga värdet.',
+      'Det här är alldeles för lågt, en faktor 100 mindre än det verkliga värdet. En vanlig felkälla är att läsa 1 013 hPa (hektopascal, som väderrapporter ofta använder) som 1 013 Pa.',
       'Det här är fortfarande alldeles för lågt — en faktor 10 mindre än det verkliga värdet.',
-      'Det här är en tiopotens för högt — en vanlig felkälla är att blanda ihop hPa (hektopascal, som väderrapporter ofta använder) med Pa.',
+      'Det här är en tiopotens för högt. 1 atm är ungefär 101 300 Pa, inte 1 013 000 Pa.',
     ],
   },
   {
@@ -3083,7 +3083,7 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       'Just poängen med Pascals princip är att tryckökningen sprider sig genom hela vätskan, inte bara lokalt.',
-      'Vätskor är i praktiken oböjliga (svåra att pressa ihop), så tryckökningen dämpas inte bort på vägen.',
+      'Vätskor är i praktiken inkompressibla (svåra att pressa ihop), så tryckökningen dämpas inte bort på vägen.',
       'Att trycket ökar med djupet beror på vätskans egen tyngd ($\\rho \\cdot g \\cdot h$) — det är en annan effekt än den tryckökning Pascals princip beskriver, som läggs till lika överallt.',
       'En yttre tryckökning på en innesluten vätska fortplantas lika stor i hela vätskan, vilket utnyttjas i hydrauliska domkrafter.',
     ],
@@ -3296,8 +3296,8 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Med $E = c \\cdot m \\cdot \\Delta T = 2{,}0 \\cdot 5{,}0 \\cdot 10 = 100\\ \\mathrm{kJ}$ blir svaret 100 kJ.',
-      'Det motsvarar bara $c \\cdot \\Delta T$ utan att multiplicera med massan — massan måste också vägas in.',
-      'Det motsvarar $c \\cdot m$ utan att multiplicera med temperaturändringen $\\Delta T = 10\\ \\mathrm{K}$.',
+      'Det motsvarar bara $c \\cdot m = 2{,}0 \\cdot 5{,}0$ utan att multiplicera med temperaturändringen $\\Delta T = 10\\ \\mathrm{K}$.',
+      'Det motsvarar $m \\cdot \\Delta T = 5{,}0 \\cdot 10$ utan att multiplicera med den specifika värmekapaciteten $c$.',
       'Det motsvarar att räkna med $\\Delta T = 30\\ \\mathrm{K}$ (sluttemperaturen) istället för temperaturändringen $10\\ \\mathrm{K}$.',
     ],
   },
@@ -4067,7 +4067,7 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       'Det är skillnaden mellan resistorerna (15 − 10), men vid seriekoppling ska resistanserna adderas, inte subtraheras.',
-      'Det stämmer med parallellformeln för två andra resistorvärden, men här ska resistanserna summeras direkt eftersom kopplingen är seriell.',
+      'Det är ersättningsresistansen om just dessa resistorer parallellkopplas, $\\dfrac{10 \\cdot 15}{10 + 15} = 6{,}0\\ \\Omega$. Här är kopplingen seriell, så resistanserna ska summeras.',
       'Det är produkten av resistorerna (10 · 15), men vid seriekoppling ska resistanserna adderas, inte multipliceras.',
       'Vid seriekoppling summeras resistanserna: $R_\\text{tot} = 10 + 15 = 25\\ \\Omega$.',
     ],
@@ -4245,10 +4245,10 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Detta vore resultatet om man av misstag dividerade strömmen med spänningen istället för att multiplicera dem — det ger enligt Ohms lag en resistans, inte en effekt.',
+      'Detta vore resultatet om man av misstag dividerade strömmen med spänningen istället för att multiplicera dem.',
       'Detta vore resultatet om man av misstag adderade spänning och ström istället för att multiplicera dem.',
       'Med $P = U \\cdot I = 10 \\cdot 2{,}0 = 20\\ \\mathrm{W}$ stämmer detta svar.',
-      'Detta vore resultatet om man av misstag dividerade spänningen med strömmen.',
+      'Detta vore resultatet om man av misstag dividerade spänningen med strömmen. Det ger enligt Ohms lag lampans resistans, inte effekten.',
     ],
   },
 ],
@@ -4344,8 +4344,8 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Detta vore resultatet om man av misstag glömde kvadrera avståndet *r* i nämnaren.',
-      'Detta vore resultatet om man av misstag inte delade med $r^2$ alls.',
+      'Detta vore resultatet om man räknade $0{,}30^2$ som $0{,}9$ i stället för $0{,}09$: $9/0{,}9 = 10$.',
+      'Detta är nio gånger för stort. Räkna steg för steg: $k \\cdot Q = 9{,}0$ och $r^2 = 0{,}09$, så $\\mathbb{E} = 9{,}0/0{,}09 = 100\\ \\mathrm{N/C}$.',
       'Med $\\mathbb{E} = k \\cdot Q/r^2 = 9{,}0 \\cdot 10^9 \\cdot 1{,}0 \\cdot 10^{-9} / 0{,}30^2 = 9/0{,}09 = 100\\ \\mathrm{N/C}$ stämmer detta svar.',
       'Detta vore resultatet om man av misstag använde avståndet *r* direkt istället för avståndet i kvadrat i nämnaren.',
     ],
@@ -4609,7 +4609,7 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Induktion är ett annat fenomen som handlar om hur laddningar omfördelar sig utan direkt kontakt, inte urladdning från en spets.',
+      'Induktion är ett annat fenomen: en spänning induceras när magnetfältet genom en ledare ändras. Det har inget med urladdning från en spets att göra.',
       'Kortslutning innebär en oavsiktlig lågresistiv väg för strömmen, inte en urladdning från en spetsig ledare till luften.',
       'Jordning handlar om att ansluta en ledare till marken för att hålla potentialen på 0 V, inte om urladdning till luftmolekyler.',
       'Fenomenet där en spetsig laddad ledare orsakar urladdning till luftmolekyler kallas spetsurladdning, även känt som Sankt Elmseld.',
@@ -4823,7 +4823,7 @@ window.EXITTICKETS = {
     why: [
       '$10{,}00000\\ \\mathrm{u}$ är kärnans egen massa, inte skillnaden mot beståndsdelarna.',
       '$20{,}10000\\ \\mathrm{u}$ fås om man adderar massorna i stället för att subtrahera dem.',
-      '$1{,}0000\\ \\mathrm{u}$ är hundra gånger för stort — kontrollera subtraktionen igen.',
+      '$1{,}0000\\ \\mathrm{u}$ är tio gånger för stort. Kontrollera subtraktionen igen.',
       'Massdefekten är skillnaden mellan beståndsdelarnas sammanlagda massa och kärnans massa: $10{,}10000 - 10{,}00000 = 0{,}10000\\ \\mathrm{u}$.',
     ],
   },
@@ -4848,7 +4848,7 @@ window.EXITTICKETS = {
     why: [
       'Neutriner saknar laddning — det är precis tvärtom mot påståendet, och de växelverkar mycket sällan med materia.',
       'Neutriner ($\\nu$) är oladdade, har ytterst liten massa och passerar nästan alltid rakt igenom materia utan att växelverka.',
-      'Neutrinons massa är ytterst liten, ungefär en tusendel av elektronens massa — långt mindre än en protons massa.',
+      'Neutrinons massa är ytterst liten, mindre än en miljondel av elektronens massa — långt mindre än en protons massa.',
       'Neutriner bildas vid betasönderfall (både β⁻ och β⁺), inte vid gammasönderfall.',
     ],
   },
@@ -4882,7 +4882,7 @@ window.EXITTICKETS = {
       'Nukleonantalet ökar inte vid betasönderfall — det är oförändrat eftersom en nukleon bara omvandlas till en annan sort.',
       'Antalet nukleoner minskar inte vid betasönderfall — en neutron omvandlas till en proton (eller tvärtom), men den finns fortfarande kvar i kärnan.',
       'Vid betasönderfall omfördelas nukleonerna (en neutron blir proton eller vice versa) men det totala antalet nukleoner (masstalet $A$) förblir konstant.',
-      'En minskning med 2 nukleoner är typiskt för alfasönderfall, inte betasönderfall.',
+      'Vid alfasönderfall minskar nukleonantalet med 4 och protonantalet med 2. Vid betasönderfall är nukleonantalet oförändrat.',
     ],
   },
   {
@@ -4951,7 +4951,7 @@ window.EXITTICKETS = {
       '400 är antalet kärnor som återstår efter EN halveringstid (1 dygn), inte efter två.',
       '100 skulle vara antalet efter tre halveringstider (3 dygn), inte två.',
       'Efter två halveringstider (2 dygn) har antalet halverats två gånger: $800 \\to 400 \\to 200$ kärnor.',
-      'Antalet kärnor går aldrig till exakt noll inom ändlig tid enligt sönderfallslagen — det halveras stegvis i all oändlighet.',
+      'Efter två halveringstider återstår i genomsnitt en fjärdedel av kärnorna, alltså 200. Antalet halveras ungefär en gång per halveringstid, så det tar många halveringstider innan i stort sett alla kärnor har sönderfallit.',
     ],
   },
   {
@@ -4970,7 +4970,7 @@ window.EXITTICKETS = {
 'fy1-9.5': [
   {
     question: 'Vilket samband och vilken enhet gäller för absorberad dos $D$?',
-    choices: ['$D = E \\cdot m$, enhet Sv', '$D = \\dfrac{E}{m}$, enhet Gy', '$D = \\dfrac{m}{E}$, enhet Gy', '$D = D \\cdot Q$, enhet Sv'],
+    choices: ['$D = E \\cdot m$, enhet Sv', '$D = \\dfrac{E}{m}$, enhet Gy', '$D = \\dfrac{m}{E}$, enhet Gy', '$H = D \\cdot Q$, enhet Sv'],
     correct: 1,
     why: [
       'Absorberad dos är en kvot (energi per massa), inte en produkt, och enheten är Gy, inte Sv.',
@@ -5344,7 +5344,7 @@ window.EXITTICKETS = {
       'Detta är frekvensens värde, inte perioden — perioden ges av $1/f$.',
       '$T = \\dfrac{1}{f} = \\dfrac{1}{5{,}0} = 0{,}20\\ \\mathrm{s}$.',
       'Detta fås om man av misstag delar frekvensen med 2 istället för att beräkna $1/f$.',
-      'Detta fås om man förväxlar $1/f$ med $10/f$ eller liknande felräkning.',
+      'Detta fås om man multiplicerar frekvensen med 10, $10 \\cdot 5{,}0 = 50$, i stället för att beräkna $1/f$.',
     ],
   },
   {
@@ -5442,7 +5442,7 @@ window.EXITTICKETS = {
     why: [
       'Detta fås om man av misstag delar $v$ med $r$ istället för att använda $v^2/r$.',
       'Detta är $v^2$ utan att dela med radien.',
-      'Detta fås om man förväxlar formeln och beräknar $r/v^2$.',
+      'Detta fås om man förväxlar formeln och beräknar $\\dfrac{r}{v} = \\dfrac{2{,}0}{4{,}0} = 0{,}50$.',
       '$a_\\mathrm{C} = \\dfrac{v^2}{r} = \\dfrac{4{,}0^2}{2{,}0} = \\dfrac{16}{2{,}0} = 8{,}0\\ \\mathrm{m/s^2}$.',
     ],
   },
@@ -5488,7 +5488,7 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Detta fås om man av misstag beräknar $m \\cdot v / r^2$ eller liknande felaktig kombination.',
+      'Detta är bara massans mätetal. Farten och radien har inte räknats med: $F_\\mathrm{C} = \\dfrac{m \\cdot v^2}{r}$.',
       'Detta är $v^2$ utan att multiplicera med massan och dela med radien.',
       '$F_\\mathrm{C} = \\dfrac{m \\cdot v^2}{r} = \\dfrac{0{,}50 \\cdot 2{,}0^2}{1{,}0} = \\dfrac{2{,}0}{1{,}0} = 2{,}0\\ \\mathrm{N}$.',
       'Detta fås om man glömmer att kvadrera farten $v$.',
@@ -5656,7 +5656,7 @@ window.EXITTICKETS = {
     why: [
       'α mäts inte mot den horisontella banan, utan mot den lodräta (vertikala) linjen från upphängningspunkten.',
       'Enligt genomgången är α utslagsvinkeln mot vertikalplanet — vinkeln mellan tråden och den lodräta linjen.',
-      'Denna vinkel råkar sammanfalla med α i figuren, men α definieras mot tråden/vertikalplanet, inte som vinkeln mellan just dessa två kraftvektorer.',
+      'Tyngdkraften pekar rakt nedåt och spännkraften längs tråden upp mot upphängningspunkten, så vinkeln mellan dem är $180^\\circ - \\alpha$, inte α. Utslagsvinkeln α mäts mellan tråden och den lodräta linjen.',
       'Det beskrivna är snarare relaterat till vinkelhastigheten, inte till utslagsvinkeln α.',
     ],
   },
@@ -6039,8 +6039,8 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       'Detta fås om man glömmer att kvadrera amplituden — men $A^2$ måste räknas ut innan multiplikationen med *k*.',
-      'Detta fås om man glömmer att dela med 2 i formeln.',
-      'Detta fås om man råkar kvadrera 0,020 istället för 0,20 — kontrollera decimalplaceringen på amplituden.',
+      'Detta fås om man varken kvadrerar amplituden eller delar med 2: $10 \\cdot 0{,}20 = 2{,}0$.',
+      'Det är tio gånger för litet. Kontrollera decimalerna: $0{,}20^{2} = 0{,}040$, och $\\dfrac{10 \\cdot 0{,}040}{2} = 0{,}20$.',
       'Med $E = \\dfrac{k \\cdot A^{2}}{2} = \\dfrac{10 \\cdot 0{,}20^{2}}{2} = 0{,}20$ J stämmer uträkningen.',
     ],
   },
@@ -6350,7 +6350,7 @@ window.EXITTICKETS = {
       'Interferens är ett annat vågfenomen — när två eller flera vågor möts och samverkar — inte kopplat till att en enskild svängning förstärks vid rätt frekvens.',
       'Dämpning är motsatsen — en process där amplituden minskar på grund av energiförluster.',
       'Övertoner handlar om ytterligare svängningsmönster med högre frekvenser, inte om förstärkning vid egenfrekvensen.',
-      'Resonans uppstår när energi tillförs i takt med systemets egenfrekvens, vilket gör att amplituden växer mer och mer — klassiska exempel är en gunga som puttas i rätt takt, eller Tacoma-bron 1940.',
+      'Resonans uppstår när energi tillförs i takt med systemets egenfrekvens, vilket gör att amplituden växer mer och mer — ett klassiskt exempel är en gunga som puttas i rätt takt.',
     ],
   },
 ],
@@ -6472,7 +6472,7 @@ window.EXITTICKETS = {
     why: [
       'Det vore resultatet om båda elongationerna hade samma tecken; här är den ena negativ.',
       'Det vore resultatet om man tog skillnaden med fel tecken — superpositionsprincipen adderar elongationerna direkt, med sina tecken.',
-      'Det värdet motsvarar en multiplikation av talen, inte den summa som superpositionsprincipen beskriver.',
+      'En multiplikation ger $3{,}0 \\cdot (-2{,}0) = -6{,}0$, och multiplikation är inte heller rätt räknesätt. Superpositionsprincipen adderar elongationerna med sina tecken.',
       'Superpositionsprincipen säger att resulterande elongationen är summan av de enskilda elongationerna: $3{,}0 + (-2{,}0) = 1{,}0\\ \\mathrm{cm}$.',
     ],
   },
@@ -6598,7 +6598,7 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'Det sambandet gäller för grundtonen i en halvöppen pipa, inte i en öppen pipa.',
-      'Det sambandet gäller för första övertonen (två bukar) i en öppen pipa, inte för grundtonen.',
+      'Det sambandet gäller för första övertonen (tre bukar och två noder) i en öppen pipa, inte för grundtonen.',
       'En öppen pipas grundton har en buk i varje ände och en nod i mitten, vilket motsvarar en halv våglängd över pipans längd: $l = \\dfrac{\\lambda}{2}$.',
       'Pipans längd i grundtonen är kortare än en hel våglängd — det skulle kräva fler bukar för en så lång pipa i förhållande till λ.',
     ],
@@ -6608,9 +6608,9 @@ window.EXITTICKETS = {
     choices: ['$0{,}50\\ \\mathrm{m}$', '$0{,}25\\ \\mathrm{m}$', '$1{,}0\\ \\mathrm{m}$', '$2{,}0\\ \\mathrm{m}$'],
     correct: 3,
     why: [
-      'Det är pipans längd, inte den sökta våglängden.',
+      'Det är pipans längd, vilket man får om faktorn 4 i formeln glöms bort.',
       'Det fås om man förväxlar $l$ och λ direkt utan att lösa ut λ ur formeln.',
-      'Det stämmer inte med insättningen — det motsvarar att man glömt faktorn 4 i nämnaren.',
+      'Det fås med sambandet för en öppen pipa, $l = \\dfrac{\\lambda}{2}$. För en halvöppen pipa i grundtonen gäller $l = \\dfrac{\\lambda}{4}$.',
       'Med $n=1$ blir $l = \\dfrac{\\lambda}{4}$, så $\\lambda = 4 \\cdot l = 4 \\cdot 0{,}50 = 2{,}0\\ \\mathrm{m}$.',
     ],
   },
@@ -6679,7 +6679,7 @@ window.EXITTICKETS = {
     why: [
       'Det är effekten $P$, inte den sökta intensiteten — arean i nämnaren gör att faktorerna $4\\pi$ tar ut varandra.',
       'Med $P = 4\\pi\\ \\mathrm{W}$ och $r = 1{,}0\\ \\mathrm{m}$ blir $I = \\dfrac{4\\pi}{4\\pi \\cdot 1{,}0^{2}} = 1{,}0\\ \\mathrm{W/m^{2}}$.',
-      'Det skulle bara stämma om man glömt att $4\\pi$ i täljare och nämnare tar ut varandra och istället bara delat med 4.',
+      'Det fås om man bara låter $\\pi$ ta ut varandra och glömmer att faktorn 4 också finns i både täljaren och nämnaren. Hela $4\\pi$ tar ut varandra, så $I = 1{,}0\\ \\mathrm{W/m^{2}}$.',
       'Det fås om man av misstag multiplicerar $P$ och arean istället för att dela dem.',
     ],
   },
@@ -6886,7 +6886,7 @@ window.EXITTICKETS = {
     why: [
       'Det är själva vägskillnaden $\\Delta s$, inte den sökta våglängden.',
       'Det fås om man förväxlar $\\Delta s$ och λ och delar fel väg.',
-      'Det skulle motsvara $\\Delta s = 2\\lambda$, vilket inte stämmer med villkoret för en nodlinje.',
+      'Det skulle motsvara $\\Delta s = \\dfrac{\\lambda}{4}$, men den nollte nodlinjen kräver $\\Delta s = \\dfrac{\\lambda}{2}$.',
       'Med $n=0$ blir $\\Delta s = \\dfrac{1}{2}\\lambda$, så $\\lambda = 2 \\cdot \\Delta s = 2 \\cdot 1{,}5 = 3{,}0\\ \\mathrm{m}$.',
     ],
   },
@@ -7069,7 +7069,7 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       'Detta motsvarar en beräkning där avståndet av misstag sattes till 1,0 m i stället för 0,10 m.',
-      'Detta är hundra gånger för stort — en vanlig felkälla är att avrunda tiopotenserna fel vid uträkningen.',
+      'Detta är tio gånger för stort. En vanlig felkälla är att hantera tiopotenserna fel i uträkningen.',
       'Detta är hundra gånger för litet jämfört med det korrekta svaret.',
       '$B = k \\cdot \\dfrac{I}{d} = 2 \\cdot 10^{-7} \\cdot \\dfrac{5{,}0}{0{,}10} = 1{,}0 \\cdot 10^{-5}\\ \\mathrm{T} = 10\\ \\mathrm{\\mu T}$.',
     ],
@@ -7369,7 +7369,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Jonisering av atmosfären hör ihop med norrsken, inte med ursprunget till själva jordmagnetiska fältet.',
-      'I jordens inre finns smält metall full av laddningar som virvlar på grund av det höga trycket, och detta bildar det jordmagnetiska fältet.',
+      'I jordens yttre kärna finns smält metall full av laddningar. Den strömmar runt eftersom kärnan är varmare längst in (konvektion), och jordens rotation ordnar rörelsen så att strömmarna bildar det jordmagnetiska fältet.',
       'Det är jordens rotation kring sin egen axel som bidrar till virvelrörelsen i jordens inre, inte rörelsen runt solen.',
       'Månens gravitation orsakar tidvatten, men det är inte förklaringen till det jordmagnetiska fältets uppkomst.',
     ],
@@ -7384,7 +7384,7 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Den norra magnetiska polen ligger nära den geografiska nordpolen (i norra Kanada), inte vid sydpolen.',
+      'Den norra magnetiska polen ligger nära den geografiska nordpolen (i dag i Norra ishavet, på väg mot Sibirien), inte vid sydpolen.',
       'Vem som upptäckte polen har ingen betydelse för vilken typ av magnetisk pol den är.',
       'Beteckningen har en tydlig fysikalisk grund — den följer av hur olika poler attraherar varandra.',
       'Eftersom olika poler attraherar varandra, och en kompassnåls nordända pekar mot den norra magnetiska polen, måste den polen egentligen vara en sydända.',
@@ -7450,7 +7450,7 @@ window.EXITTICKETS = {
     why: [
       'Atmosfärens tjocklek varierar inte på det sätt som skulle förklara norrskenet mellan poler och ekvator.',
       'Jordens avstånd till solen är i praktiken detsamma oavsett var på jorden man befinner sig, det förklarar inte skillnaden mellan poler och ekvator.',
-      'Nära polerna är fältets riktning ungefär parallell med de inkommande laddade partiklarnas rörelse, vilket gör att den magnetiska kraften inte avböjer dem lika effektivt — de tar sig då ner i atmosfären och joniserar syre, vilket ger norrsken.',
+      'Nära polerna är fältets riktning ungefär parallell med de inkommande laddade partiklarnas rörelse, vilket gör att den magnetiska kraften inte avböjer dem lika effektivt — de tar sig då ner i atmosfären och exciterar syre- och kväveatomer, som sänder ut ljus när de återgår till grundtillståndet: norrsken.',
       'Fältet stöter inte bort partiklarna helt vid polerna — tvärtom är skyddet där sämre, vilket är just anledningen till att norrsken syns där.',
     ],
   },
@@ -7516,9 +7516,9 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       'När $F_\\mathrm{e} = F_\\mathrm{m}$ är nettokraften på elektronerna noll, så de accelererar inte vidare.',
-      'Elektronerna byter inte riktning — de slutar helt enkelt röra sig tvärs över ledaren när krafterna balanserar varandra.',
+      'Elektronerna byter inte riktning — de slutar helt enkelt röra sig längs ledaren när krafterna balanserar varandra.',
       'Ledaren förlorar ingen laddning totalt sett — det är bara en omfördelning av elektroner mellan ledarens ändar som ger upphov till spänningen.',
-      'När den elektriska kraften blir lika stor som den magnetiska kraften uppstår kraftjämvikt, och elektronrörelsen tvärs över ledaren upphör.',
+      'När den elektriska kraften blir lika stor som den magnetiska kraften uppstår kraftjämvikt, och elektronrörelsen längs ledaren upphör.',
     ],
   },
   {
@@ -7532,7 +7532,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Spänningen blir inte densamma — just riktningen på rörelsen relativt ledaren avgör om en spänning alls induceras.',
-      'Rör sig ledaren längs sin egen riktning fördelas ingen kraft tvärs över ledaren, så elektronerna samlas inte vid ena änden — därför blir den inducerade spänningen 0 V.',
+      'Rör sig ledaren i sin egen längdriktning blir den magnetiska kraften på elektronerna vinkelrät mot ledaren. Ingen kraft verkar längs ledaren, så elektronerna samlas inte vid ena änden, och den inducerade spänningen blir 0 V.',
       'Spänningen är inte alltid maximal — i det här specialfallet blir den i stället noll.',
       'Rörelseriktningen har stor betydelse: rör sig ledaren parallellt med sig själv induceras ingen spänning alls, oavsett fältstyrka.',
     ],
@@ -7850,7 +7850,7 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Primärspolen är den spole som ansluts till den ingående spänningen, till exempel vägguttagets 230 V.',
-      'Sekundärspolen är i stället den spole som inducerar den nya spänningen och kopplas till apparaten som ska drivas.',
+      'Sekundärspolen är i stället den spole där den nya spänningen induceras och kopplas till apparaten som ska drivas.',
       'Järnkärnan binder ihop spolarna magnetiskt men är själv ingen spole och ansluts inte till spänningskällan.',
       'Hela poängen med en transformator är att spänningen först induceras via primärspolen, inte att den kopplas förbi den.',
     ],
@@ -7996,10 +7996,10 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Täljare och nämnare är omvända jämfört med det korrekta uttrycket.',
+      'Här har $v$ och $q \\cdot B$ bytt plats jämfört med det korrekta uttrycket $m = \\dfrac{q \\cdot B \\cdot r}{v}$.',
       'Här multipliceras alla storheter, men hastigheten $v$ ska stå i nämnaren, inte som en faktor i täljaren.',
       'Masspektrometerns formel för massan är $m = \\dfrac{q \\cdot B \\cdot r}{v}$.',
-      'Här har $B$ och $r$ bytt plats jämfört med det korrekta uttrycket.',
+      'Här har $v$ bytt plats med $B$ och $r$ jämfört med det korrekta uttrycket $m = \\dfrac{q \\cdot B \\cdot r}{v}$.',
     ],
   },
   {
@@ -8058,14 +8058,14 @@ window.EXITTICKETS = {
     choices: [
       'Uppvärmning av kärnan i en transformator, vilket slösar energi',
       'Induktionsspisen, som värmer upp kokkärlets botten med hjälp av virvelströmmar',
-      'Uppvärmning av motorlindningar i en elmotor, vilket sänker verkningsgraden',
+      'Uppvärmning av järnkärnan i en elmotor, vilket sänker verkningsgraden',
       'Störningar i elektroniska mätinstrument orsakade av yttre magnetfält',
     ],
     correct: 1,
     why: [
       'Virvelströmmar i en transformatorkärna är en oönskad energiförlust, inte en avsedd tillämpning.',
       'Induktionsspisen är ett exempel på en önskad tillämpning — virvelströmmar i kokkärlets botten ger just den värme man vill åstadkomma.',
-      'Virvelströmmar i en elmotors lindningar är en oönskad förlust som sänker verkningsgraden.',
+      'Virvelströmmar i en elmotors järnkärna är en oönskad förlust som sänker verkningsgraden.',
       'Störningar i mätinstrument är en oönskad bieffekt, inte en avsiktlig användning.',
     ],
   },
@@ -8075,14 +8075,14 @@ window.EXITTICKETS = {
       'Magnetiska material leder värme bättre och blir därför varmare',
       'Induktionshällen kräver en magnetisk kastrull för att inte själv bli varm',
       'Icke-magnetiska kastruller smälter av den höga frekvensen',
-      'Metallen måste kunna "känna av" det snabbt växlande magnetfältet så att virvelströmmar induceras i kokkärlets botten',
+      'Metallen måste kunna "känna av" det snabbt växlande magnetfältet så att kraftiga virvelströmmar induceras i kokkärlets botten',
     ],
     correct: 3,
     why: [
       'Värmeledningsförmåga hos metallen är inte skälet — det handlar om att fältet ska kunna inducera strömmar i materialet.',
       'Det är tvärtom hällens funktion att kastrullens botten själv blir varm genom virvelströmmarna — inte hällen.',
-      'Frekvensen (omkring 50 kHz) är inte tillräckligt hög för att smälta metall; problemet med en icke-magnetisk kastrull är i stället att den inte induceras alls.',
-      'För att virvelströmmar (och därmed värme) ska induceras måste kokkärlets material vara magnetiskt så att det påverkas av det snabbt växlande magnetfältet.',
+      'Frekvensen (omkring 50 kHz) är inte tillräckligt hög för att smälta metall; problemet med en icke-magnetisk kastrull är i stället att den värms upp för lite.',
+      'Virvelströmmar induceras i alla metaller, men i ett magnetiskt material samlas det växlande fältet och strömmarna koncentreras till ett tunt skikt i botten, så att de ger mycket värme. Hysteresen bidrar också. I en kastrull av till exempel aluminium blir uppvärmningen för svag.',
     ],
   },
   {
@@ -8300,7 +8300,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vad kallas avståndet mellan varje spalt i ett gitter?',
+    question: 'Vad är gitterkonstanten?',
     choices: [
       'Antalet spalter i gittret.',
       'Avståndet mellan varje spalt i gittret.',
@@ -8320,7 +8320,7 @@ window.EXITTICKETS = {
     choices: ['500 nm', '2000 nm', '1000 nm', '0,5 nm'],
     correct: 2,
     why: [
-      'Detta är hälften av rätt svar — kontrollera att du multiplicerar *d* med $\\sin\\alpha$ och inte glömmer en faktor.',
+      'Detta är hälften av rätt svar, som om man multiplicerat med $\\sin 30^\\circ = 0{,}5$ två gånger. Med $n = 1$ blir $\\lambda = d \\cdot \\sin 30^\\circ = 2{,}0 \\cdot 10^{-6} \\cdot 0{,}5 = 1{,}0 \\cdot 10^{-6}\\ \\mathrm{m}$.',
       'Detta fås om man glömmer att multiplicera med $\\sin 30^\\circ = 0{,}5$ och bara använder *d* rakt av.',
       'Ur gitterformeln $\\lambda = \\dfrac{d \\cdot \\sin\\alpha_n}{n} = \\dfrac{2{,}0 \\cdot 10^{-6} \\cdot 0{,}5}{1} = 1{,}0 \\cdot 10^{-6}$ m $= 1000$ nm.',
       'Här har enhetsomvandlingen från meter till nanometer blivit fel (en faktor $10^{9}$ för liten).',
@@ -8357,7 +8357,7 @@ window.EXITTICKETS = {
     why: [
       'Det är tvärtom enligt genomgången — de hänger ihop positivt, inte negativt.',
       'De är tvärtom kopplade till varandra: god absorption innebär också god emission.',
-      'En yta som är bra på att absorbera strålning är också bra på att sända ut den, precis som med värmeledningsförmåga.',
+      'En yta som är bra på att absorbera strålning är också bra på att sända ut den.',
       'Det är tvärtom — matta, mörka ytor har störst strålningsförmåga, inte blanka och ljusa.',
     ],
   },
@@ -8478,12 +8478,12 @@ window.EXITTICKETS = {
   },
   {
     question: 'En ljusstråle går från luft ($n_1 = 1{,}0$) till vatten ($n_2 = 1{,}33$) med en infallsvinkel så att $\\sin i = 0{,}665$. Vad blir $\\sin b$?',
-    choices: ['0,886', '1,33', '0,332', '0,5'],
+    choices: ['0,884', '1,33', '0,332', '0,5'],
     correct: 3,
     why: [
       'Detta fås om man råkar multiplicera $n_2$ med $\\sin i$ istället för att dela med $n_2$.',
       '$\\sin b$ kan aldrig bli större än 1, så detta svar är inte fysikaliskt rimligt.',
-      'Detta är hälften av rätt svar — kontrollera uträkningen $\\dfrac{1{,}0 \\cdot 0{,}665}{1{,}33}$ igen.',
+      'Detta är hälften av $\\sin i$, som om man delat med 2 i stället för med $n_2 = 1{,}33$. Rätt är $\\dfrac{1{,}0 \\cdot 0{,}665}{1{,}33} = 0{,}5$.',
       'Ur Snells lag: $\\sin b = \\dfrac{n_1 \\cdot \\sin i}{n_2} = \\dfrac{1{,}0 \\cdot 0{,}665}{1{,}33} = 0{,}5$.',
     ],
   },
@@ -8523,7 +8523,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vad kallas den energi som krävs för att en elektron ska kunna lämna en metallyta?',
+    question: 'Vad är utträdesarbetet?',
     choices: [
       'Den energi en elektron får efter att ha lämnat metallytan.',
       'Den energi som krävs för att en elektron ska kunna lämna metallytan.',
@@ -8980,7 +8980,7 @@ window.EXITTICKETS = {
       'Stjärnornas egenrörelse är inte orsaken — problemet är att mäta den lilla parallaxvinkeln exakt.',
       'Ljusets restid påverkar inte mätningen av parallax — det handlar om vinkelupplösning, inte om ljuset hinner fram.',
       'Tvärtom — parallaxvinkeln blir mindre ju längre bort stjärnan är, och det är just de mycket små vinklarna som blir svåra att mäta.',
-      'Atmosfären suddar ut bilden så att de allra minsta vinklarna inte går att mäta tillförlitligt; därför räcker markbaserad parallax bara till ungefär 100 ljusår, medan satelliter som Gaia når mycket längre.',
+      'Atmosfären suddar ut bilden så att de allra minsta vinklarna inte går att mäta tillförlitligt; därför räcker markbaserad parallax bara till ungefär 100 parsec (cirka 300 ljusår), medan satelliter som Gaia når mycket längre.',
     ],
   },
 ],
@@ -9028,7 +9028,7 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Siffrorna är omkastade — den siderisk månaden (mot fixstjärnorna) är den kortare av de två, 27,3 dygn.',
+      'Siffrorna är omkastade — den sideriska månaden (mot fixstjärnorna) är den kortare av de två, 27,3 dygn.',
       'De är inte lika långa — den synodiska månaden (29,5 dygn) är längre eftersom jorden rört sig vidare runt solen under tiden.',
       'Eftersom jorden förflyttat sig längs sin bana under månens varv måste månen gå lite mer än ett fullt varv för att hamna i samma position relativt solen — därför blir den synodiska månaden (29,5 dygn) längre än den sideriska (27,3 dygn).',
       '29,5 dygn är inte dubbelt så mycket som 27,3 dygn — skillnaden beror på jordens rörelse runt solen, inte en enkel faktor 2.',
@@ -9054,14 +9054,14 @@ window.EXITTICKETS = {
     question: 'Vad krävs för att en solförmörkelse ska kunna inträffa?',
     choices: [
       'Fullmåne, med jorden liggande mitt emellan solen och månen',
-      'Att månens omloppsbana och jordens bana runt solen är exakt parallella',
+      'Att månens omloppsbana och jordens bana runt solen ligger i exakt samma plan',
       'Nymåne, med månen mellan jorden och solen, och nästan exakt på linjen sol–jord',
       'Att månen just då befinner sig i sitt tredje kvarter',
     ],
     correct: 2,
     why: [
       'Det beskriver förutsättningen för en månförmörkelse, inte en solförmörkelse.',
-      'Tvärtom — månens bana lutar omkring 5° mot jordens bana runt solen; vore banorna exakt parallella skulle förmörkelser i stället inträffa varje månad.',
+      'Tvärtom — månens bana lutar omkring 5° mot jordens bana runt solen; låg banorna i exakt samma plan skulle förmörkelser i stället inträffa varje månad.',
       'Vid en solförmörkelse ligger månen mellan jorden och solen (nymåne) och kastar sin skugga på jorden, vilket bara händer när alla tre ligger nästan exakt på en rät linje.',
       'Tredje kvarteret är en helt annan fas (halvmåne på väg mot nymåne) och ger ingen förmörkelse.',
     ],
@@ -9122,14 +9122,14 @@ window.EXITTICKETS = {
     choices: [
       'Ljusets brytning i vattendroppar i luften, på samma sätt som i en regnbåge',
       'Att solens egen yttemperatur faktiskt ändras mellan dag och natt',
-      'Rayleighspridning av solljus i atmosfären, som sprider kort- (blått) ljus mycket mer än långvågigt (rött) ljus',
+      'Rayleighspridning av solljus i atmosfären, som sprider kortvågigt (blått) ljus mycket mer än långvågigt (rött) ljus',
       'Ozonlagrets absorption av rött ljus högt uppe i atmosfären',
     ],
     correct: 2,
     why: [
       'Brytning i vattendroppar skapar regnbågar, ett annat fenomen än den ständiga himmelsfärgen.',
       'Solens egen yttemperatur, och därmed dess spektrum, ändras inte under dagen — det är i stället ljusets väg genom atmosfären som förändras.',
-      'Rayleighspridningen gör att korta våglängder (blått) sprids åt alla håll så att himlen blir blå, medan enbart det röda ljuset slipper igenom obrutet vid solnedgång.',
+      'Rayleighspridningen gör att korta våglängder (blått) sprids åt alla håll så att himlen blir blå, medan enbart det röda ljuset slipper igenom ospritt vid solnedgång.',
       'Ozonlagret absorberar främst ultraviolett strålning, inte det som ger himlen dess blå färg.',
     ],
   },
@@ -9385,14 +9385,14 @@ window.EXITTICKETS = {
       'Att stjärnan står fullständigt stilla någonstans i rymden',
       'Att stjärnan alltid innehåller precis lika mycket väte som helium',
       'Att stjärnans temperatur hela tiden är konstant lika med 10 miljoner kelvin',
-      'Att strålningstrycket utåt från fusionen exakt balanserar gravitationens dragning inåt',
+      'Att trycket utåt (gastryck och strålningstryck, som hålls uppe av fusionen) exakt balanserar gravitationens dragning inåt',
     ],
     correct: 3,
     why: [
       'Jämvikten handlar om krafter inuti stjärnan, inte om att stjärnan är stillastående i rymden — stjärnor rör sig runt galaxens centrum som alla andra himlakroppar.',
       'Andelen väte respektive helium ändras gradvis under stjärnans liv — jämvikten handlar i stället om en kraftbalans, inte om ämnenas proportioner.',
       'Temperaturen omkring 10 miljoner kelvin gäller ungefär i kärnan när fusionen startar, men jämvikten avser balansen mellan tryck och gravitation, inte ett bestämt temperaturvärde.',
-      'Så länge trycket utåt från fusionen exakt balanserar gravitationen inåt slutar stjärnan att krympa — det är denna hydrostatiska jämvikt som håller solen stabil i omkring 10 miljarder år.',
+      'Så länge gastrycket och strålningstrycket utåt, som fusionens värme håller uppe, exakt balanserar gravitationen inåt slutar stjärnan att krympa — det är denna hydrostatiska jämvikt som håller solen stabil i omkring 10 miljarder år.',
     ],
   },
   {
@@ -14953,7 +14953,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      '4 är halva avståndet mellan nollställena — men symmetrilinjen är medelvärdet, inte avståndet.',
+      '4 är avståndet mellan nollställena, $7 - 3 = 4$. Symmetrilinjen ligger mitt emellan dem, vid medelvärdet.',
       'Symmetrilinjen ligger mitt emellan nollställena: $(3 + 7)/2 = 5$.',
       '21 är produkten av nollställena, inte medelvärdet.',
       '10 är summan av nollställena — den ska halveras.',
@@ -17685,7 +17685,7 @@ window.EXITTICKETS = {
       'Precis — täljarna multipliceras med varandra och nämnarna med varandra, precis som vid multiplikation av vanliga bråk.',
       'Nämnaren $d$ måste också vara med i resultatet, annars blir uttrycket inte likvärdigt med det ursprungliga.',
       'Det är divisionens invertering, inte multiplikation — här ska ingenting inverteras.',
-      'Så adderar man bråk med gemensam nämnare — det är inte multiplikationsregeln.',
+      'Så räknar man inte med bråk, varken vid addition eller multiplikation. Vid multiplikation multipliceras täljarna med varandra och nämnarna med varandra.',
     ],
   },
   {
@@ -18579,7 +18579,7 @@ window.EXITTICKETS = {
     why: [
       'Ett teckenfel har smugit sig in — $4 \\cdot 1 - 3 = 1$, inte $-1$.',
       'Termen $-3x$ ger derivatan $-3$; den försvinner inte när $x = 1$ sätts in.',
-      'Det är koefficienten framför $x^2$ i derivatan, inte derivatans värde i punkten $x = 1$.',
+      'Det är koefficienten framför $x^2$ i $f(x)$, inte derivatans värde i punkten $x = 1$.',
       'Derivatan är $f\'(x) = 4x - 3$, så $f\'(1) = 4 \\cdot 1 - 3 = 1$.',
     ],
   },
@@ -18696,7 +18696,7 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       '$e$ är ett bestämt tal (en konstant, $\\approx 2{,}72$), precis som $\\pi$ — det är $x$ som är variabeln.',
-      'Det är en annan egenskap (och stämmer förresten inte för $e$) — det handlar inte om varför derivatan blir sig själv.',
+      'Det stämmer inte: de enda tal som är sin egen kvadrat är 0 och 1. Det skulle dessutom inte förklara varför derivatan av $e^x$ blir $e^x$.',
       'Tvärtom varierar $k$-värdet med basen $a$; det är bara för basen $e$ som $k = 1$.',
       'Derivatan av $a^x$ är $a^x \\cdot k$ där $k$ beror på basen $a$. Just för $a = e$ blir $k = 1$, så derivatan blir exakt $e^x$.',
     ],
@@ -19925,7 +19925,7 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Positiv andraderivata betyder att kurvan är konvex (en "glad mun") i punkten, så en kritisk punkt där blir en minimipunkt.',
-      'En terrasspunkt uppstår när $f\'\'(a) = 0$, inte när andraderivatan är positiv.',
+      'En terrasspunkt kräver att derivatan inte byter tecken kring $x = a$, och då är $f\'\'(a) = 0$. Här är $f\'\'(a) > 0$, så punkten är en minimipunkt.',
       'En sådan punkt kräver $f\'\'(a) = 0$ och att derivatan inte byter tecken — det stämmer inte med $f\'\'(a) > 0$.',
       'En maximipunkt kräver i stället $f\'\'(a) < 0$ — kurvan konkav (en "sur mun").',
     ],
@@ -20362,34 +20362,34 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Räknaren ger $v_1$ som lösning till ekvationen $\\sin v = a$. Hur bestäms den andra lösningen $v_2$ i intervallet $0\^\circ$–$360\^\circ$?',
+    question: 'Räknaren ger $v_1$ som lösning till ekvationen $\\sin v = a$. Hur bestäms den andra lösningen $v_2$ i intervallet $0^\\circ$–$360^\\circ$?',
     choices: [
-      '$v_2 = 90\^\circ - v_1$',
-      '$v_2 = v_1 + 180\^\circ$',
-      '$v_2 = 360\^\circ - v_1$',
-      '$v_2 = 180\^\circ - v_1$',
+      '$v_2 = 90^\\circ - v_1$',
+      '$v_2 = v_1 + 180^\\circ$',
+      '$v_2 = 360^\\circ - v_1$',
+      '$v_2 = 180^\\circ - v_1$',
     ],
     correct: 3,
     why: [
       'Detta samband stämmer inte för vare sig sinus eller cosinus.',
-      'Att lägga till $180\^\circ$ ger en vinkel utanför intervallet $0\^\circ$–$360\^\circ$ för de flesta $v_1$, och ger dessutom fel värde på sinus (motsatt tecken).',
+      'Att lägga till $180^\\circ$ ger en vinkel i motsatt kvadrant, där sinus har motsatt tecken. Sinus har samma värde i första och andra kvadranten, därför gäller $v_2 = 180^\\circ - v_1$.',
       'Det sambandet gäller för cosinusekvationer, inte för sinusekvationer.',
-      'För sinusekvationer gäller sambandet $v_2 = 180\^\circ - v_1$, eftersom sinus har samma värde i första och andra kvadranten.',
+      'För sinusekvationer gäller sambandet $v_2 = 180^\\circ - v_1$, eftersom sinus har samma värde i första och andra kvadranten.',
     ],
   },
   {
-    question: 'Räknaren ger $v_1$ som lösning till ekvationen $\\cos v = a$. Hur bestäms den andra lösningen $v_2$ i intervallet $0\^\circ$–$360\^\circ$?',
+    question: 'Räknaren ger $v_1$ som lösning till ekvationen $\\cos v = a$. Hur bestäms den andra lösningen $v_2$ i intervallet $0^\\circ$–$360^\\circ$?',
     choices: [
       '$v_2 = 2v_1$',
-      '$v_2 = 360\^\circ - v_1$',
-      '$v_2 = v_1 - 360\^\circ$',
-      '$v_2 = 180\^\circ - v_1$',
+      '$v_2 = 360^\\circ - v_1$',
+      '$v_2 = v_1 - 360^\\circ$',
+      '$v_2 = 180^\\circ - v_1$',
     ],
     correct: 1,
     why: [
       'Det finns inget samband som säger att $v_2$ är dubbelt så stort som $v_1$.',
-      'För cosinusekvationer gäller sambandet $v_2 = 360\^\circ - v_1$, eftersom cosinus har samma värde speglat kring $x$-axeln.',
-      'Det ger ett negativt tal för alla lösningar $v_1$ i intervallet $0\^\circ$–$360\^\circ$, vilket hamnar utanför intervallet.',
+      'För cosinusekvationer gäller sambandet $v_2 = 360^\\circ - v_1$, eftersom cosinus har samma värde speglat kring $x$-axeln.',
+      'Det ger ett negativt tal för alla lösningar $v_1$ i intervallet $0^\\circ$–$360^\\circ$, vilket hamnar utanför intervallet.',
       'Det sambandet gäller för sinusekvationer, inte för cosinusekvationer.',
     ],
   },
@@ -20639,7 +20639,7 @@ window.EXITTICKETS = {
       'Den trubbiga lösningen $150^\\circ$ är lika giltig — sinus är positivt för både spetsiga och trubbiga vinklar.',
       'Den spetsiga lösningen $30^\\circ$ är lika giltig som den trubbiga.',
       'Rätt — $\\sin C = 0{,}5$ ger $C \\approx 30^\\circ$ eller $C \\approx 150^\\circ$, och till skillnad från sinussatsen finns här ingen vinkelsumma som utesluter någon av dem.',
-      'Ekvationen $\\sin C = 0{,}5$ har en lösning i intervallet $0^\\circ$ till $180^\\circ$.',
+      'Ekvationen $\\sin C = 0{,}5$ har två lösningar mellan $0^\\circ$ och $180^\\circ$, så vinkeln kan bestämmas.',
     ],
   },
   {
@@ -20804,7 +20804,7 @@ window.EXITTICKETS = {
     why: [
       'Beräkningarna är ungefär lika omfattande för båda satserna — fördelen med cosinussatsen ligger i entydigheten, inte enkelheten.',
       'Både sinussatsen och cosinussatsen gäller för godtyckliga trianglar, inte bara rätvinkliga.',
-      'Cosinus är en-till-en-funktion mellan $0^\\circ$ och $180^\\circ$, medan sinus ger samma värde för en spetsig och dess trubbiga komplementvinkel — sinussatsen kan därför ge en falsk lösning som måste kontrolleras och förkastas.',
+      'Cosinus är en-till-en-funktion mellan $0^\\circ$ och $180^\\circ$, medan sinus ger samma värde för en spetsig och dess trubbiga supplementvinkel — sinussatsen kan därför ge en falsk lösning som måste kontrolleras och förkastas.',
       'Cosinussatsen kräver tvärtom att man känner sidorna (och/eller vinklar) i triangeln — den kan inte användas helt utan information.',
     ],
   },
@@ -22490,7 +22490,7 @@ window.EXITTICKETS = {
       'Största värdet är amplituden $\\sqrt{a^2 + b^2}$, inte summan av koefficienterna.',
       '$\\dfrac{b}{a}$ är $\\tan v$ (fasförskjutningen), inte det största värdet.',
       '$a^2 + b^2$ är amplituden i kvadrat — man måste dra roten för att få det största värdet.',
-      'Funktionen är en oförskjuten sinuskurva $c\\sin(x+v)$, så dess största värde är amplituden $c = \\sqrt{a^2 + b^2}$.',
+      'Funktionen är en förskjuten sinuskurva $c\\sin(x+v)$, så dess största värde är amplituden $c = \\sqrt{a^2 + b^2}$.',
     ],
   },
   {
@@ -23191,7 +23191,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Det är $\\dfrac{1}{\\cos x}$, vilket är $\\dfrac{1}{\\cos x}$ (sekant), inte $\\tan x$.',
+      'Det är $\\dfrac{1}{\\cos x}$ (sekant), inte $\\tan x$.',
       'Just det — $\\tan x = \\dfrac{\\sin x}{\\cos x}$, en kvot som kvotregeln kan tillämpas på.',
       'Tangens är en kvot, inte en produkt, av sinus och cosinus.',
       'Det är $\\dfrac{1}{\\tan x} = \\cot x$, alltså det omvända förhållandet.',
@@ -23330,7 +23330,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vanja har 60 m stängsel och bygger en rektangulär hage mot en mur (ingen stängsel längs muren). Med sidan $x$ mot muren, vilket uttryck beskriver arean?',
+    question: 'Vanja har 60 m stängsel och bygger en rektangulär hage mot en mur (ingen stängsel längs muren). Låt $x$ vara längden av var och en av de två sidor som går ut från muren. Vilket uttryck beskriver arean?',
     choices: [
       '$A(x) = 2x(60 - x)$',
       '$A(x) = 60x$',
@@ -23342,7 +23342,7 @@ window.EXITTICKETS = {
       'Faktorn $2$ framför är fel; det är den tredje sidan som är $60 - 2x$, medan höjden är $x$.',
       'Det tar inte hänsyn till att den andra sidan varierar med $x$ — arean är bas gånger höjd, inte bara $60x$.',
       'Det skulle gälla om bara en sida hade längden $x$; här är det två sidor, så $2x$ går åt.',
-      'Precis — de två sidorna mot muren tar $2x$ av stängslet, så den tredje sidan blir $60 - 2x$ och arean $x(60 - 2x)$.',
+      'Precis — de två sidorna som går ut från muren tar $2x$ av stängslet, så den tredje sidan blir $60 - 2x$ och arean $x(60 - 2x)$.',
     ],
   },
   {
@@ -23801,7 +23801,7 @@ window.EXITTICKETS = {
     why: [
       'Precis — eftersom $D(\\sin x) = \\cos x$ är $\\sin x$ en primitiv funktion till $\\cos x$.',
       '$-\\cos x$ är en primitiv funktion till $\\sin x$, inte till $\\cos x$.',
-      '$-\\sin x$ är i stället en primitiv funktion till $\\cos x$ endast om man deriverat fel; $D(-\\sin x) = -\\cos x$.',
+      'Eftersom $D(-\\sin x) = -\\cos x$ är $-\\sin x$ en primitiv funktion till $-\\cos x$, inte till $\\cos x$.',
       '$\\cos x$ är funktionen själv; dess derivata är $-\\sin x$, inte $\\cos x$.',
     ],
   },
@@ -25048,7 +25048,7 @@ window.EXITTICKETS = {
       'Just det — beloppet upphöjs till exponenten: $2^5 = 32$.',
       'Beloppet är $2$ för $z$ självt, men för $z^5$ blir det $2^5 = 32$.',
       'Beloppet multipliceras inte med $n$; det upphöjs till $n$, så det blir $2^5 = 32$.',
-      'Det är argumentet $5\\cdot 25^\\circ = 125^\\circ$ som blandas ihop med beloppet; beloppet är $2^5 = 32$.',
+      '25 kommer från argumentet $25^\\circ$, som blandas ihop med beloppet. Beloppet är $2^5 = 32$.',
     ],
   },
   {

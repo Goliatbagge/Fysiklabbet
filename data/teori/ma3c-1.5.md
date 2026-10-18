@@ -50,8 +50,9 @@ $$
 **Svar:** $\dfrac{x^2+5}{2(8-x)} = \dfrac{x^2+5}{16-2x}$
 
 **b)** Vi faktoriserar täljare och nämnare så långt det går, multiplicerar
-ihop dem och förkortar därefter med lika dana faktorer. Täljaren $3x+6$
-bryts ut till $3(x+2)$, och nämnaren $x^2-4$ är en konjugat:
+ihop dem och förkortar därefter med likadana faktorer. Täljaren $3x+6$ i
+första bråket bryts ut till $3(x+2)$, och täljaren $x^2-4$ i andra bråket
+faktoriseras med konjugatregeln:
 $x^2-4=(x+2)(x-2)$.
 
 $$

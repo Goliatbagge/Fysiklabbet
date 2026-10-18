@@ -12,8 +12,8 @@ section: '5.3'
 Vi vet sedan tidigare hur vi beräknar arean av enkla geometriska figurer,
 som rektanglar och trianglar. Men hur beräknar vi arean under grafen till
 en godtycklig funktion — en area som ofta har en böjd, oregelbunden rand?
-Betrakta till exempel arean under grafen till $f(x) = x^2$ mellan $x = 1$
-och $x = 3$. Vi ritar upp grafen och markerar det sökta området, se
+Betrakta arean under grafen till en funktion $f(x)$ mellan $x = a$ och
+$x = b$. Vi ritar upp grafen och markerar det sökta området, se
 figuren nedan.
 
 ::: figur

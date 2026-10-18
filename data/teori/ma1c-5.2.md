@@ -11,8 +11,8 @@ section: '5.2'
 
 Hur osäkert ett resultat är kallas **felmarginal**. Den anger hur mycket
 resultaten från en statistisk undersökning kan förväntas variera om
-undersökningen skulle upprepas under liknande förhållanden och anges ofta
-i procent. Ett vanligt sätt att ange felmarginal är att ett resultat i
+undersökningen skulle upprepas under liknande förhållanden och anges i
+procentenheter. Ett vanligt sätt att ange felmarginal är att ett resultat i
 95 % av fallen ska ligga inom felmarginalen.
 
 Det intervall som resultatet med felmarginal ger kallas
@@ -33,10 +33,11 @@ där
 - $n$ = stickprovets storlek
 :::
 
-Sannolikheten för att en statistisk förändring har skett kallas
-**signifikans**. Om en förändring är större än felmarginalen kan vi med
-95 % säkerhet säga att det har skett en förändring. Förändringen är då
-"signifikant" eller "statistiskt säkerställd".
+En förändring mellan två undersökningar kallas **signifikant** eller
+"statistiskt säkerställd" om den är så stor att den knappast kan förklaras
+av slumpen i vilka som råkade väljas ut. Som tumregel gäller: är
+förändringen större än felmarginalen kan vi med 95 % säkerhet säga att det
+har skett en verklig förändring.
 
 ::: exempel "Exempel 1 — Favoritämnet"
 **En stickprovsundersökning gjordes bland Sveriges gymnasieelever för att
@@ -47,8 +48,8 @@ a) Beräkna felmarginalen.<br>
 b) Beräkna konfidensintervallet.<br>
 c) Undersökningen upprepades efter tre år. Av 100 tillfrågade svarade då
 52 att de har matematik som favoritämne. Är förändringen statistiskt
-säkerställd, det vill säga är det säkert att det har skett en minskning av andelen
-som har matematik som favoritämne?**
+säkerställd, det vill säga kan vi med 95 % säkerhet säga att andelen som har
+matematik som favoritämne har minskat?**
 
 ::: handskrift
 typ: felmarginal
@@ -71,32 +72,36 @@ $$
 Insättning av värdena ovan i formeln för felmarginal ger
 
 $$
-f = 1{,}96 \cdot \sqrt{\frac{60(100 - 60)}{100}} = 9{,}601\ldots\ \% \approx 9{,}6\ \%
+f = 1{,}96 \cdot \sqrt{\frac{60(100 - 60)}{100}} = 9{,}601\ldots \approx 9{,}6
 $$
 
-**Svar:** 9,6 %
+Felmarginalen räknas i procentenheter, eftersom $p$ sattes in i procent.
+
+**Svar:** 9,6 procentenheter
 
 **b)** Konfidensintervallet fås genom att ta resultatet ± felmarginalen,
-det vill säga $60\ \% \pm 9{,}6\ \%$:
+det vill säga 60 % plus och minus 9,6 procentenheter:
 
 $$
 \left[\begin{array}{l}
-\text{Undre gräns} = 60\ \% - 9{,}6\ \% = 50{,}4\ \% \\
-\text{Övre gräns} = 60\ \% + 9{,}6\ \% = 69{,}6\ \%
+\text{Undre gräns} = 60 - 9{,}6 = 50{,}4\ \% \\
+\text{Övre gräns} = 60 + 9{,}6 = 69{,}6\ \%
 \end{array}\right.
 $$
 
-**Svar:** Mellan 50,4 % och 69,6 %. (Det är alltså 95 % chans att det
-verkliga resultatet ligger mellan dessa värden.)
+**Svar:** Mellan 50,4 % och 69,6 %. (Intervallet är beräknat med en metod
+som fångar den verkliga andelen i 95 % av alla undersökningar. Därför säger
+vi att andelen med 95 % säkerhet ligger mellan dessa värden.)
 
-**c)** Den nya andelen positiva är
+**c)** Den nya andelen som har matematik som favoritämne är
 
 $$
 \frac{52}{100} = 0{,}52 = 52\ \%
 $$
 
 Detta ligger inom felmarginalen från föregående undersökning (52 % ligger
-mellan 50,4 % och 69,6 %).
+mellan 50,4 % och 69,6 %). Minskningen kan alltså bero på slumpen i
+urvalet.
 
 **Svar:** Nej, förändringen är inte statistiskt säkerställd.
 :::
@@ -120,11 +125,11 @@ mellan 50,4 % och 69,6 %).
 
 ::: sampunkt "Konfidensintervall"
 - Resultatet **plus och minus** felmarginalen.
-- 60 % med felmarginalen 9,6 ger intervallet 50,4 % till 69,6 %.
+- 60 % med felmarginalen 9,6 procentenheter ger intervallet 50,4 % till 69,6 %.
 :::
 
 ::: sampunkt "Signifikans"
-- Sannolikheten att en verklig förändring har skett.
+- En förändring är **signifikant** om den är för stor för att förklaras av slumpen i urvalet.
 - Är förändringen **större än felmarginalen** är den **statistiskt
   säkerställd**, alltså signifikant.
 - Ligger den nya andelen **inom** det gamla konfidensintervallet går det

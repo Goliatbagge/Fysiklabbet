@@ -316,6 +316,7 @@ window.BEGREPP_LATT = true;
 window.BEGREPP = [
 ${rader}
 ];
+if (window.I18N) window.I18N.overlay('begrepp-sok');
 `;
 }
 
@@ -511,6 +512,9 @@ function build() {
     const idx = buildBegreppIndex(begrepp);
     fs.writeFileSync(path.join(ROOT, 'data', 'begrepp-sok.js'), idx, 'utf8');
     const helSize = fs.statSync(path.join(ROOT, 'data', 'begrepp.js')).size;
+    // Engelska: samma lätta index ur data/en/begrepp/ (se "Engelska" i CLAUDE.md).
+    const enIdx = path.join(ROOT, '.claude', 'i18n', 'bygg-begrepp-sok.js');
+    if (fs.existsSync(enIdx)) require(enIdx);
     console.log(`data/begrepp-sok.js: ${begrepp.length} begrepp, ` +
       `${Math.round(idx.length / 1024)} kB (hela ordlistan: ${Math.round(helSize / 1024)} kB)`);
   }

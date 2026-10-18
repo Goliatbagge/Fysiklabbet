@@ -11,8 +11,8 @@ section: '4.4'
 
 Derivatan av derivatan kallas **andraderivatan**, skrivs $f''(x)$ och
 utläses "$f$ bis av $x$". Andraderivatan beskriver hur derivatan (eller
-lutningen) ändras. En punkt där lutningen inte ändras kallas
-**inflexionspunkt**.
+lutningen) ändras. En punkt där kurvan byter från konvex till konkav,
+eller tvärtom, kallas **inflexionspunkt**.
 
 ## Konvex och konkav kurva
 
@@ -151,8 +151,8 @@ $$
 
 ::: exempel "Exempel 2 — Inflexionspunkt från grafen till $f(x)$ eller $f'(x)$"
 **Ange $x$-koordinaten för inflexionspunkten till funktionen $f(x)$.<br>
-a) Grafen till $y = f(x)$ har extrempunkter där $x = -1$ och
-$x = 1$.<br>b) Grafen till $y = f'(x)$ har en extrempunkt
+a) $f(x)$ är ett tredjegradspolynom, och grafen till $y = f(x)$ har
+extrempunkter där $x = -1$ och $x = 1$.<br>b) Grafen till $y = f'(x)$ har en extrempunkt
 (minimum) där $x = 1$.**
 
 ::: handskrift
@@ -161,8 +161,9 @@ typ: inflexionurgraf
 
 ::: textlosning
 **a)** Inflexionspunkten för funktionen $f(x)$ ges av när grafen till
-$f(x)$ växlar mellan att vara konvex och konkav (i "mungipan"). På grund
-av symmetrin ligger den alltid mitt emellan två extrempunkter.
+$f(x)$ växlar mellan att vara konvex och konkav (i "mungipan"). Grafen
+till ett tredjegradspolynom är symmetrisk kring inflexionspunkten, så den
+ligger mitt emellan de två extrempunkterna.
 
 Vi har extrempunkter där $x = -1$ och $x = 1$. Alltså ligger
 inflexionspunkten mitt emellan dessa, det vill säga då $x = 0$.
@@ -191,7 +192,7 @@ Grafen till $f'(x)$ har en extrempunkt (minimum) där $x = 1$.
 ::: sampunkt "Konvex och konkav"
 - $f''(x) > 0$: lutningen ökar, kurvan böjer uppåt och är **konvex**, som en glad mun.
 - $f''(x) < 0$: lutningen minskar, kurvan böjer nedåt och är **konkav**, som en sur mun.
-- $f''(x) = 0$: kurvans lutning ändras inte. Punkten är en **inflexionspunkt**.
+- $f''(x) = 0$ och byter tecken: kurvan går från konvex till konkav eller tvärtom. Punkten är en **inflexionspunkt**.
 :::
 
 ::: sampunkt "Bestämma inflexionspunkten"
@@ -202,7 +203,7 @@ Grafen till $f'(x)$ har en extrempunkt (minimum) där $x = 1$.
 :::
 
 ::: sampunkt "Läsa ur en graf"
-- Grafen till $f(x)$: inflexionspunkten ligger mitt emellan två extrempunkter.
+- Grafen till ett tredjegradspolynom: inflexionspunkten ligger mitt emellan de två extrempunkterna.
 - Grafen till $f'(x)$: inflexionspunkten ligger i $f'(x)$:s **egen extrempunkt**, eftersom lutningen är 0 där.
 - Funktionen är konvex i de intervall där $f''(x) > 0$.
 :::

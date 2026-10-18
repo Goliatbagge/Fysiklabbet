@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!--
   ordlista-helsingfors.html: privat övningssida (inte länkad från sajten, noindex).
-  100 svensk-engelska ord och fraser inför Nordplus-seminariet NGGN + AI i Esbo
+  101 svensk-engelska ord och fraser inför Nordplus-seminariet NGGN + AI i Esbo
   23–25 oktober 2026: skola och styrdokument, undervisning och bedömning,
   matematik, digitala verktyg och AI, projektet och seminariet.
 
@@ -101,7 +101,7 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
 <body>
 <div class="wrap">
   <header>
-    <p class="over">NGGN + AI · Esbo 23–25 okt <span>· 100 ord</span></p>
+    <p class="over">NGGN + AI · Esbo 23–25 okt <span>· 101 ord</span></p>
     <h1>Ordlista inför <em>Helsingfors</em></h1>
   </header>
 
@@ -271,7 +271,10 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
     ['fortbildning', 'professional development', 'Projektet', 'The framework is for teacher <b>professional development</b> workshops.', 'Förkortning: CPD (continuing professional development).'],
     ['lärarutbildning', 'teacher education', 'Projektet', 'Several partners work in <b>teacher education</b>.', 'Även: teacher training.'],
     ['ansökan', 'application', 'Projektet', 'The <b>application</b> was submitted in February.'],
-    ['ersättning för utlägg', 'reimbursement', 'Projektet', 'I keep the receipts for the <b>reimbursement</b>.']
+    ['ersättning för utlägg', 'reimbursement', 'Projektet', 'I keep the receipts for the <b>reimbursement</b>.'],
+
+    // Tillagda senare: läggs alltid sist, så att sparade lådor och rundor behåller sina index.
+    ['huvudräkning', 'mental arithmetic', 'Matematik', 'With the rule of 72, students can solve the equation by <b>mental arithmetic</b>.', 'Även: mental maths. Räkna i huvudet: work it out in your head.']
   ];
 
   var NYCKEL = 'fysiklabbet.ordlista-hki.v1';
@@ -311,7 +314,11 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
   }
   function cykelGiltig() {
     var c = st.cykel;
-    return c && c.kat === st.kat && Array.isArray(c.ko) && Array.isArray(c.missade);
+    if (!(c && c.kat === st.kat && Array.isArray(c.ko) && Array.isArray(c.missade))) return false;
+    // Ord som har lagts till i listan efter att genomgången startade läggs sist i den pågående rundan.
+    var finns = c.ko.concat(c.missade, c.klara), nya = urval().filter(function (i) { return finns.indexOf(i) < 0; });
+    if (nya.length) { c.ko = c.ko.concat(blanda(nya)); c.antal += nya.length; c.rundstorlek += nya.length; spara(); }
+    return true;
   }
   function ladorHtml(i) { var s = ''; for (var k = 1; k <= 3; k++) s += '<i class="' + (lada(i) >= k ? 'p' : '') + '"></i>'; return s; }
 

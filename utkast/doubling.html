@@ -217,7 +217,7 @@ details.hjalp > div { margin-top: 8px; padding: 12px 16px; background: var(--pan
 .reglage { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px 12px; align-items: center; font-size: 14px; }
 .reglage label { color: var(--soft); }
 .reglage input[type=range] { width: 100%; accent-color: var(--blue); }
-.reglage input[type=number] { width: 100px; padding: 6px 8px; border: 1px solid var(--line2); border-radius: 6px; text-align: right; font-variant-numeric: tabular-nums; }
+.reglage input[type=number], .reglage input[inputmode=decimal] { width: 100px; padding: 6px 8px; border: 1px solid var(--line2); border-radius: 6px; text-align: right; font-variant-numeric: tabular-nums; }
 .reglage select { padding: 6px 8px; border: 1px solid var(--line2); border-radius: 6px; background: #fff; grid-column: span 2; }
 .reglage .mal-rad { grid-column: span 2; }
 table.svar td input.kort-tal { width: 70px; }
@@ -702,12 +702,12 @@ table.svar td input.kort-tal { width: 70px; }
           <span><input id="b-k" type="number" min="1" max="10000000" step="1"> <span class="enhet">kr</span></span>
           <label for="b-r">Interest rate</label>
           <input id="b-r-r" type="range" min="0.5" max="30" step="0.5" aria-label="Interest rate, slider">
-          <span><input id="b-r" type="number" min="0.1" max="100" step="0.1"> <span class="enhet">%</span></span>
+          <span><input id="b-r" type="text" inputmode="decimal" autocomplete="off"> <span class="enhet">%</span></span>
           <label for="b-n">Show years</label>
           <input id="b-n-r" type="range" min="1" max="150" step="1" aria-label="Number of years shown, slider">
           <span><input id="b-n" type="number" min="1" max="150" step="1"> <span class="enhet">years</span></span>
           <label for="b-m">Target</label>
-          <span class="mal-rad"><input id="b-m" type="number" min="1.1" max="1000" step="0.1"> <span class="enhet">times the deposit</span></span>
+          <span class="mal-rad"><input id="b-m" type="text" inputmode="decimal" autocomplete="off"> <span class="enhet">times the deposit</span></span>
         </div>
         <div class="flikar" role="group" aria-label="View">
           <button type="button" id="vy-diagram" aria-pressed="true">Diagram</button>

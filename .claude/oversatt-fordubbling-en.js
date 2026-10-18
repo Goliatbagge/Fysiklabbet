@@ -32,6 +32,14 @@ const PAR = [
 
   fordubbling.html:`],
 
+  // ---------- decimalpunkt ----------
+  // Sifferrutor (type="number") visar webbläsarens decimaltecken, alltså
+  // komma i en svensk webbläsare. De två rutorna med decimaler blir textrutor
+  // på engelska, så att talen alltid skrivs med punkt (lasTal läser båda).
+  [R`.reglage input[type=number] {`, R`.reglage input[type=number], .reglage input[inputmode=decimal] {`],
+  [R`<input id="b-r" type="number" min="0.1" max="100" step="0.1">`, R`<input id="b-r" type="text" inputmode="decimal" autocomplete="off">`],
+  [R`<input id="b-m" type="number" min="1.1" max="1000" step="0.1">`, R`<input id="b-m" type="text" inputmode="decimal" autocomplete="off">`],
+
   // ---------- toppen ----------
   [R`title="Till genomgången 3.4 på Fysiklabbet"`, R`title="Fysiklabbet"`],
   [R`aria-label="Delar"`, R`aria-label="Parts"`],

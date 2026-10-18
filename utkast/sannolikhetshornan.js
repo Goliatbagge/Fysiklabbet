@@ -1640,17 +1640,60 @@ const Urna = (() => {
       await tillbaka(ute);
     } finally { busy = false; onAndring(); }
   }
+  // Skakningen blandar på riktigt: under 1,6 s får kulorna en ny stöt var
+  // 0,12:e sekund, med en virvel runt urnans axel som byter riktning, ett
+  // lyft och en slumpad del. Med urnans tyngdkraft (240) lyfte den gamla
+  // engångsstöten på 10–24 enheter/s kulorna bara 0,2–1 enhet, så de
+  // skakades till men bytte aldrig plats. Lyftet hålls under halsen, så att
+  // ingen kula syns genom glaset ovanför fysikens raka väggar.
+  let skakar = false;
   async function skaka() {
-    if (busy) return;
+    if (busy || skakar) return;
+    skakar = true;
     Ljud.init();
-    for (const k of i_urna()) if (k.body) { k.body.wakeUp(); k.body.velocity.set((rnd() - .5) * 12, 10 + rnd() * 14, (rnd() - .5) * 12); }
-    aktiv = true; wake();
-    await tween(1.0, (e, k) => { const d = (1 - k); glasGrp.rotation.z = Math.sin(k * 34) * .07 * d; glasGrp.rotation.x = Math.sin(k * 27 + 1) * .05 * d; });
-    glasGrp.rotation.set(0, 0, 0);
+    const T = 1.6, steg = 0.12;
+    let nasta = 0, varv = rsign();
+    // Väck kulorna direkt: tweenens första anrop kan hoppas över en bildruta,
+    // och under den hann steget se en urna där alla sov och stänga av fysiken.
+    for (const kula of i_urna()) if (kula.body) kula.body.wakeUp();
+    aktiv = true; lugn = 0; wake();
+    await tween(T, (e, k) => {
+      const t = k * T, d = 1 - Math.pow(k, 3);
+      // glaset gungar och vrids, avtagande mot slutet
+      glasGrp.rotation.z = Math.sin(t * 22) * .16 * d;
+      glasGrp.rotation.x = Math.sin(t * 17 + 1) * .12 * d;
+      glasGrp.rotation.y = Math.sin(t * 9) * .2 * d;
+      glasGrp.position.x = Math.sin(t * 22 + .6) * .2 * d;
+      // osynligt tak under halsen: kulor som knuffas upp av andra kulor
+      // vänder innan de syns genom glaset ovanför de raka fysikväggarna
+      for (const kula of i_urna()) {
+        const b = kula.body; if (!b) continue;
+        if (b.position.y > 5.2 && b.velocity.y > 0) b.velocity.y *= -0.35;
+        if (b.position.y > 5.6) b.position.y = 5.6;
+      }
+      while (t >= nasta && nasta < T - .25) {
+        if (Math.floor(nasta / .5) % 2) varv = -varv;
+        const styrka = 1 - nasta / T * .6;
+        aktiv = true; lugn = 0;
+        for (const kula of i_urna()) {
+          const b = kula.body; if (!b) continue;
+          b.wakeUp();
+          const dx = b.position.x - C.x, dz = b.position.z - C.z, r = Math.hypot(dx, dz) || 1;
+          const tx = -dz / r * varv, tz = dx / r * varv;
+          const vy = Math.min(32, 22 + rnd() * 10) * styrka * clamp((5.2 - b.position.y) / 3, 0, 1);
+          b.velocity.set(tx * 11 * styrka + (rnd() - .5) * 9 - dx * .9, vy, tz * 11 * styrka + (rnd() - .5) * 9 - dz * .9);
+          b.angularVelocity.set((rnd() - .5) * 20, (rnd() - .5) * 20, (rnd() - .5) * 20);
+        }
+        nasta += steg;
+      }
+    });
+    glasGrp.rotation.set(0, 0, 0); glasGrp.position.set(0, 0, 0);
+    skakar = false;
   }
   return {
     setInnehall, dra, laggTillbaka, skaka,
-    get busy() { return busy; },
+    get busy() { return busy || skakar; },
+    kulpos: () => kulor.filter(k => k.body).map(k => ({ x: k.body.position.x, y: k.body.position.y, z: k.body.position.z })),
     iUrnan: () => i_urna().map(k => k.farg).concat(kulor.filter(k => k.state === 'vald' || k.state === 'lyft').map(k => k.farg)),
     utanfor: () => kulor.filter(k => k.state === 'bricka' || k.state === 'ute' || k.state === 'flyg').length,
     set onKula(f) { onKula = f; }, set onAndring(f) { onAndring = f; },
@@ -1886,6 +1929,12 @@ const HJULMALLAR = {
   lika: () => Array.from({ length: 6 }, (_, i) => ({ text: String(i + 1), farg: HJULFARGER[i], w: 1 })),
   olika: () => [{ text: 'Röd', farg: '#c8324a', w: 3 }, { text: 'Blå', farg: '#2457a6', w: 2 }, { text: 'Gul', farg: '#f0bf2c', w: 1 }],
   vinst: () => Array.from({ length: 10 }, (_, i) => i % 5 === 0 ? { text: 'Vinst', farg: '#e2ae2e', w: 1 } : { text: 'Nit', farg: i % 2 ? '#1f5e8f' : '#2b3a55', w: 1 }),
+  // varannan sektor vinst: sannolikheten en halv
+  varannan: () => Array.from({ length: 8 }, (_, i) => i % 2 === 0 ? { text: 'Vinst', farg: '#e2ae2e', w: 1 } : { text: 'Nit', farg: '#2b3a55', w: 1 }),
+  // tolv lika stora sektorer, en vinst: sannolikheten en tolftedel
+  tolfte: () => Array.from({ length: 12 }, (_, i) => i === 0 ? { text: 'Vinst', farg: '#e2ae2e', w: 1 } : { text: 'Nit', farg: i % 2 ? '#1f5e8f' : '#2b3a55', w: 1 }),
+  // en liten vinstsektor mot en stor nitsektor: samma chans som ovan, men i en enda sektor
+  storvinst: () => [{ text: 'Vinst', farg: '#e2ae2e', w: 1 }, { text: 'Nit', farg: '#2b3a55', w: 11 }],
   tolv: () => Array.from({ length: 12 }, (_, i) => ({ text: String(i + 1), farg: i % 2 ? '#1f2127' : '#c8324a', w: 1 })),
 };
 const ALLA_VALORER = Array.from({ length: 13 }, (_, i) => i + 1);
@@ -2126,7 +2175,8 @@ function renderSettings() {
       <p class="note">Totalt ${tot} ${tot === 1 ? 'kula' : 'kulor'}, högst 60.</p></div>
       <div class="grp"><div class="grp-h"><span class="eyebrow">Dragning</span></div>
       <div class="row"><b>Kulor per dragning</b>${stepper('u-antal', U.antal, 1, 10)}</div>
-      ${tgl('u-ater', U.ater, 'Lägg tillbaka kulorna före nästa dragning')}
+      <div class="seg" style="margin:10px 0 2px" role="group" aria-label="Återläggning"><button type="button" data-act="u-ater" data-v="ja" aria-pressed="${U.ater}">Med återläggning</button><button type="button" data-act="u-ater" data-v="nej" aria-pressed="${!U.ater}">Utan återläggning</button></div>
+      <p class="note">${U.ater ? 'Kulorna läggs tillbaka i urnan före nästa dragning, så sannolikheterna är desamma varje gång.' : 'Dragna kulor stannar utanför urnan, så sannolikheterna ändras för varje dragning.'}</p>
       <div class="btns"><button type="button" class="btn" data-act="u-skaka">Skaka urnan</button><button type="button" class="btn" data-act="u-tillbaka">Lägg tillbaka alla</button></div></div>`;
   } else {
     const S = ST.hjul.sektorer, W = S.reduce((a, s) => a + s.w, 0);
@@ -2135,7 +2185,7 @@ function renderSettings() {
       <div class="btns"><button type="button" class="btn" data-act="h-ny" ${S.length >= 24 ? 'disabled' : ''}>Lägg till sektor</button></div>
       <p class="note">Talet till höger är sektorns storlek. En sektor med storleken 2 är dubbelt så stor som en med storleken 1. Hjulet är ${W} ${W === 1 ? 'del' : 'delar'} runt.</p></div>
       <div class="grp"><div class="grp-h"><span class="eyebrow">Färdiga hjul</span></div>
-      <div class="btns"><button type="button" class="btn liten" data-act="h-mall" data-v="lika">Sex lika stora</button><button type="button" class="btn liten" data-act="h-mall" data-v="olika">Olika stora</button><button type="button" class="btn liten" data-act="h-mall" data-v="vinst">Vinst eller nit</button><button type="button" class="btn liten" data-act="h-mall" data-v="tolv">Tolv sektorer</button></div>
+      <div class="btns"><button type="button" class="btn liten" data-act="h-mall" data-v="lika">Sex lika stora</button><button type="button" class="btn liten" data-act="h-mall" data-v="olika">Olika stora</button><button type="button" class="btn liten" data-act="h-mall" data-v="vinst">Vinst eller nit</button><button type="button" class="btn liten" data-act="h-mall" data-v="varannan">Varannan vinst</button><button type="button" class="btn liten" data-act="h-mall" data-v="tolfte">En vinst av tolv</button><button type="button" class="btn liten" data-act="h-mall" data-v="storvinst">Liten vinstsektor</button><button type="button" class="btn liten" data-act="h-mall" data-v="tolv">Tolv sektorer</button></div>
       <p class="note">Snurra med knappen, eller ta tag i hjulet och dra.</p></div>`;
   }
   settingsEl.innerHTML = h;
@@ -2411,7 +2461,7 @@ function handling(act, el) {
     case 'u-bort': ST.urna.innehall = ST.urna.innehall.filter(y => y.key !== k); if (!ST.urna.innehall.some(y => y.n > 0)) ST.urna.innehall[0].n = 1; urnaAndrad(); break;
     case 'u-ny': { const tot = ST.urna.innehall.reduce((a, y) => a + y.n, 0); ST.urna.innehall.push({ key: k, n: tot + 3 <= 60 ? 3 : Math.max(0, 60 - tot) }); Ljud.init(); urnaAndrad(); break; }
     case 'u-antal': ST.urna.antal = clamp(ST.urna.antal + d, 1, 10); spara(); renderSettings(); uppdateraKnapp(); break;
-    case 'u-ater': ST.urna.ater = el.checked; spara(); renderNasta(); uppdateraKnapp(); break;
+    case 'u-ater': if (Urna.busy) return; ST.urna.ater = el.dataset.v === 'ja'; spara(); renderSettings(); renderNasta(); uppdateraKnapp(); break;
     case 'u-skaka': Urna.skaka(); break;
     case 'u-tillbaka': Ljud.init(); doljUtfall(); Urna.laggTillbaka().then(uppdateraKnapp); break;
     case 'h-w': ST.hjul.sektorer[i].w = clamp(ST.hjul.sektorer[i].w + d, 1, 12); hjulAndrat(); break;

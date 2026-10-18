@@ -169,30 +169,52 @@ const PAR = [
 
   // ---------- ekvationer ----------
   [R`data-del="Ekvationer"`, R`data-del="Equations"`],
-  [R`<p class="delmarke">Del 5 <span>· Från ränta till ekvationer · 10 min</span></p>`, R`<p class="delmarke">Part 5 <span>· From interest to equations · 10 min</span></p>`],
-  [R`<h2>Ekvationer ni inte kan lösa <em>för hand</em></h2>`, R`<h2>Equations you cannot solve <em>by hand</em></h2>`],
+  [R`<p class="delmarke">Del 5 <span>· Från ränta till ekvationer · 15 min</span></p>`, R`<p class="delmarke">Part 5 <span>· From interest to equations · 15 min</span></p>`],
+  [R`<h2>Svåra ekvationer <em>i huvudet</em></h2>`, R`<h2>Hard equations <em>in your head</em></h2>`],
+  [R`<div class="koppling-rubrik">Ett verktyg ni redan har</div>`, R`<div class="koppling-rubrik">A tool you already have</div>`],
+  [R`1,06<sup>x</sup> = 2 &nbsp;⇒&nbsp; x ≈ 72 / 6 = <span>12</span>`, R`1.06<sup>x</sup> = 2 &nbsp;⇒&nbsp; x ≈ 72 / 6 = <span>12</span>`],
+  [R`<p class="koppling-text">Förändringsfaktorn 1,06 betyder räntan 6&nbsp;%, och <b>= 2</b> betyder en fördubbling. Då ger 72-regeln svaret i huvudet. Räntelabbet visar 11,9, så huvudräkningen kommer mycket nära.</p>`,
+   R`<p class="koppling-text">The growth factor 1.06 means the interest rate 6&nbsp;%, and <b>= 2</b> means doubling. So the rule of 72 gives the answer in your head. The Interest Lab shows 11.9, so mental arithmetic gets very close.</p>`],
+  [R`<span>Lös ekvationerna i huvudet med 72-regeln. Kontrollera sedan i Räntelabbet och skriv svaret med en decimal.</span>`, R`<span>Solve the equations in your head with the rule of 72. Then check in the Interest Lab and write the answer to one decimal place.</span>`],
+  [R`<th>Ekvation</th><th>I huvudet: x ≈</th><th>Räntelabbet: x ≈ (en decimal)</th>`, R`<th>Equation</th><th>In your head: x ≈</th><th>Interest Lab: x ≈ (one decimal)</th>`],
+  [R`<th>Ekvation</th><th>Antal fördubblingar</th><th>I huvudet: x ≈</th><th>Räntelabbet: x ≈ (en decimal)</th>`, R`<th>Equation</th><th>Number of doublings</th><th>In your head: x ≈</th><th>Interest Lab: x ≈ (one decimal)</th>`],
+  [R`data-f="1,02" data-ekv="1,02^x = 2"><td><span class="formel">1,02<sup>x</sup> = 2</span>`, R`data-f="1.02" data-ekv="1.02^x = 2"><td><span class="formel">1.02<sup>x</sup> = 2</span>`],
+  [R`data-f="1,08" data-ekv="1,08^x = 2"><td><span class="formel">1,08<sup>x</sup> = 2</span>`, R`data-f="1.08" data-ekv="1.08^x = 2"><td><span class="formel">1.08<sup>x</sup> = 2</span>`],
+  [R`data-f="1,09" data-ekv="1,09^x = 2"><td><span class="formel">1,09<sup>x</sup> = 2</span>`, R`data-f="1.09" data-ekv="1.09^x = 2"><td><span class="formel">1.09<sup>x</sup> = 2</span>`],
+  [R`data-f="1,08" data-ekv="1,08^x = 4"><td><span class="formel">1,08<sup>x</sup> = 4</span>`, R`data-f="1.08" data-ekv="1.08^x = 4"><td><span class="formel">1.08<sup>x</sup> = 4</span>`],
+  [R`data-f="1,08" data-ekv="1,08^x = 16"><td><span class="formel">1,08<sup>x</sup> = 16</span>`, R`data-f="1.08" data-ekv="1.08^x = 16"><td><span class="formel">1.08<sup>x</sup> = 16</span>`],
+  [R`aria-label="1,02 upphöjt till x = 2, i huvudet"`, R`aria-label="1.02 to the power of x = 2, in your head"`],
+  [R`aria-label="1,02 upphöjt till x = 2, Räntelabbet"`, R`aria-label="1.02 to the power of x = 2, Interest Lab"`],
+  [R`aria-label="1,08 upphöjt till x = 2, i huvudet"`, R`aria-label="1.08 to the power of x = 2, in your head"`],
+  [R`aria-label="1,08 upphöjt till x = 2, Räntelabbet"`, R`aria-label="1.08 to the power of x = 2, Interest Lab"`],
+  [R`aria-label="1,09 upphöjt till x = 2, i huvudet"`, R`aria-label="1.09 to the power of x = 2, in your head"`],
+  [R`aria-label="1,09 upphöjt till x = 2, Räntelabbet"`, R`aria-label="1.09 to the power of x = 2, Interest Lab"`],
+  [R`aria-label="1,08 upphöjt till x = 4, antal fördubblingar"`, R`aria-label="1.08 to the power of x = 4, number of doublings"`],
+  [R`aria-label="1,08 upphöjt till x = 4, i huvudet"`, R`aria-label="1.08 to the power of x = 4, in your head"`],
+  [R`aria-label="1,08 upphöjt till x = 4, Räntelabbet"`, R`aria-label="1.08 to the power of x = 4, Interest Lab"`],
+  [R`aria-label="1,08 upphöjt till x = 16, antal fördubblingar"`, R`aria-label="1.08 to the power of x = 16, number of doublings"`],
+  [R`aria-label="1,08 upphöjt till x = 16, i huvudet"`, R`aria-label="1.08 to the power of x = 16, in your head"`],
+  [R`aria-label="1,08 upphöjt till x = 16, Räntelabbet"`, R`aria-label="1.08 to the power of x = 16, Interest Lab"`],
+  [R`data-etikett="i huvudet x ≈"`, R`data-etikett="in your head x ≈"`],
+  [R`data-etikett="Räntelabbet x ≈"`, R`data-etikett="Interest Lab x ≈"`],
+  [R`data-etikett="fördubblingar"`, R`data-etikett="doublings"`],
+  [R`<summary>Ledtråd</summary><div>Vilken räntesats ger förändringsfaktorn 1,02? Dela sedan 72 med räntesatsen. I Räntelabbet ställer ni in samma räntesats och målet 2 gånger insättningen, och zoomar in med steget 0,1 år.</div>`,
+   R`<summary>Hint</summary><div>Which interest rate gives the growth factor 1.02? Then divide 72 by the interest rate. In the Interest Lab you set the same interest rate and the target 2 times the deposit, and zoom in with the step 0.1 years.</div>`],
+  [R`<span>Bygg vidare. Nu ska beloppet bli 4 och 16 gånger så stort. Hur många fördubblingar är det? Lös ekvationerna i huvudet och kontrollera i Räntelabbet.</span>`,
+   R`<span>Take it further. Now the amount should become 4 and 16 times as large. How many doublings is that? Solve the equations in your head and check in the Interest Lab.</span>`],
+  [R`<summary>Ledtråd</summary><div>Om man dubblar 1 får man 2, och dubblar man igen får man 4. Hur många gånger ska man dubbla för att få 16? Varje fördubbling vid 8&nbsp;% tar ungefär 72 / 8 år.</div>`,
+   R`<summary>Hint</summary><div>If you double 1 you get 2, and if you double again you get 4. How many times do you have to double to get 16? Each doubling at 8&nbsp;% takes about 72 / 8 years.</div>`],
   [R`<p class="prompt">Ekvationen <span class="formel">1,06<sup>x</sup> = 2</span> ställer samma fråga som ni har undersökt: hur många gånger <i>x</i> ska man multiplicera med förändringsfaktorn 1,06 för att få 2?</p>`,
    R`<p class="prompt">The equation <span class="formel">1.06<sup>x</sup> = 2</span> asks the same question that you have explored: how many times <i>x</i> do you have to multiply by the growth factor 1.06 to get 2?</p>`],
   [R`<span>Försök först lösa <span class="formel">1,06<sup>x</sup> = 2</span> med de metoder ni har lärt er hittills. Vad händer?</span>`, R`<span>First try to solve <span class="formel">1.06<sup>x</sup> = 2</span> with the methods you have learned so far. What happens?</span>`],
   [R`aria-label="Fråga 12"`, R`aria-label="Question 12"`],
-  [R`<span>Använd Räntelabbet och hitta ett närmevärde till <i>x</i> med en decimal. Översätt först varje ekvation: vilken räntesats och vilket mål ska ni ställa in?</span>`,
-   R`<span>Use the Interest Lab to find an approximate value of <i>x</i> to one decimal place. First translate each equation: which interest rate and which target should you set?</span>`],
-  [R`<th>Ekvation</th><th>Räntesats (%)</th><th>Mål (gånger insättningen)</th><th>x ≈ (en decimal)</th>`, R`<th>Equation</th><th>Interest rate (%)</th><th>Target (times the deposit)</th><th>x ≈ (one decimal)</th>`],
-  [R`data-f="1,06" data-ekv="1,06^x = 2"><td><span class="formel">1,06<sup>x</sup> = 2</span></td><td><input type="text" inputmode="decimal" aria-label="Räntesats för 1,06 upphöjt till x = 2" data-spara id="t13ar" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="Mål för 1,06 upphöjt till x = 2" data-spara id="t13am" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="x för 1,06 upphöjt till x = 2"`,
-   R`data-f="1.06" data-ekv="1.06^x = 2"><td><span class="formel">1.06<sup>x</sup> = 2</span></td><td><input type="text" inputmode="decimal" aria-label="Interest rate for 1.06 to the power of x = 2" data-spara id="t13ar" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="Target for 1.06 to the power of x = 2" data-spara id="t13am" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="x for 1.06 to the power of x = 2"`],
-  [R`data-f="1,03" data-ekv="1,03^x = 5"><td><span class="formel">1,03<sup>x</sup> = 5</span></td><td><input type="text" inputmode="decimal" aria-label="Räntesats för 1,03 upphöjt till x = 5" data-spara id="t13br" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="Mål för 1,03 upphöjt till x = 5" data-spara id="t13bm" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="x för 1,03 upphöjt till x = 5"`,
-   R`data-f="1.03" data-ekv="1.03^x = 5"><td><span class="formel">1.03<sup>x</sup> = 5</span></td><td><input type="text" inputmode="decimal" aria-label="Interest rate for 1.03 to the power of x = 5" data-spara id="t13br" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="Target for 1.03 to the power of x = 5" data-spara id="t13bm" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="x for 1.03 to the power of x = 5"`],
-  [R`data-f="1,25" data-ekv="1,25^x = 10"><td><span class="formel">1,25<sup>x</sup> = 10</span></td><td><input type="text" inputmode="decimal" aria-label="Räntesats för 1,25 upphöjt till x = 10" data-spara id="t13cr" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="Mål för 1,25 upphöjt till x = 10" data-spara id="t13cm" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="x för 1,25 upphöjt till x = 10"`,
-   R`data-f="1.25" data-ekv="1.25^x = 10"><td><span class="formel">1.25<sup>x</sup> = 10</span></td><td><input type="text" inputmode="decimal" aria-label="Interest rate for 1.25 to the power of x = 10" data-spara id="t13cr" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="Target for 1.25 to the power of x = 10" data-spara id="t13cm" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="x for 1.25 to the power of x = 10"`],
-  [R`<summary>Ledtråd</summary><div>Förändringsfaktorn 1,06 betyder räntan 6&nbsp;%. Att något ska bli 2 betyder att beloppet ska ha multiplicerats med 2, alltså målet 2 gånger insättningen. Skriv målet i rutan <b>Mål</b> i Räntelabbet. Glöm inte att zooma in med steget 0,1 år.</div>`,
-   R`<summary>Hint</summary><div>The growth factor 1.06 means the interest rate 6&nbsp;%. Equal to 2 means that the amount has been multiplied by 2, so the target is 2 times the deposit. Type the target in the box <b>Target</b> in the Interest Lab. Do not forget to zoom in with the step 0.1 years.</div>`],
 
   // ---------- reflektera ----------
   [R`data-del="Reflektera"`, R`data-del="Reflect"`],
   [R`<p class="delmarke">Del 6 <span>· Reflektera · 5 min</span></p>`, R`<p class="delmarke">Part 6 <span>· Reflect · 5 min</span></p>`],
   [R`<h2>Vad gjorde <em>verktyget</em>, och vad gjorde ni?</h2>`, R`<h2>What did the <em>tool</em> do, and what did you do?</h2>`],
   [R`<span>Vad kunde ni göra med Räntelabbet som ni inte hade kunnat göra för hand?</span>`, R`<span>What could you do with the Interest Lab that you could not have done by hand?</span>`],
-  [R`aria-label="Fråga 14"`, R`aria-label="Question 14"`],
+  [R`aria-label="Fråga 16"`, R`aria-label="Question 16"`],
   [R`<span>Vad hjälpte Räntelabbet <b>inte</b> med? Vad behövde ni förstå själva?</span>`, R`<span>What did the Interest Lab <b>not</b> help you with? What did you need to understand yourselves?</span>`],
   [R`aria-label="Fråga 15"`, R`aria-label="Question 15"`],
 
@@ -203,7 +225,7 @@ const PAR = [
   [R`Räntelabbets mål är nu tredubbla beloppet</div>`, R`The Interest Lab's target is now three times the deposit</div>`],
   [R`<span>Hur lång tid tar det att tredubbla pengarna?</span>`, R`<span>How long does it take to triple your money?</span>`],
   [R`<span>Finns det en tredubblingsregel på samma sätt? Vilket tal ska stå i den?</span>`, R`<span>Is there a tripling rule in the same way? Which number should it contain?</span>`],
-  [R`aria-label="Fråga 17"`, R`aria-label="Question 17"`],
+  [R`aria-label="Fråga 18"`, R`aria-label="Question 18"`],
 
   // ---------- klart ----------
   [R`data-del="Klart"`, R`data-del="Done"`],
@@ -274,15 +296,23 @@ const PAR = [
   [R`t4: 'Rätt. Alla belopp fördubblas under år 12. Startbeloppet spelar ingen roll. På nästa sida förklarar ni varför.',
         t6: 'Rätt. Titta på kolumnen räntesats · tid och skriv in heltalet nedan.',
         t8: 'Rätt. Lägg märke till 2 %: efter 35 år är beloppet 1,9999 gånger insättningen, så fördubblingen sker precis efter 35 år.',
-        t14: 'Rätt. Jämför räntesats · tid med fördubblingen. Vilket tal hamnar ni nära nu?',
-        t13: 'Rätt. Ni har hittat närmevärden till tre ekvationer som ni inte kan lösa exakt med de metoder ni kan i dag. I Matematik 2 lär ni er logaritmer, som ger exakta svar.'`,
+        t14: 'Rätt. Jämför räntesats · tid med fördubblingen. Vilket tal hamnar ni nära nu?'`,
    R`t4: 'Correct. Every deposit doubles during year 12. The deposit does not matter. On the next page you explain why.',
         t6: 'Correct. Look at the column rate · time and type the whole number below.',
         t8: 'Correct. Notice 2 %: after 35 years the amount is 1.9999 times the deposit, so the doubling happens just after 35 years.',
-        t14: 'Correct. Compare rate · time with the doubling. Which number do you end up close to now?',
-        t13: 'Correct. You have found approximate solutions to three equations that you cannot solve exactly with the methods you know today. Later you will learn logarithms, which give exact answers.'`],
-  [R`ut.textContent = 'Inte riktigt på den röda raden. Översätt ' + felRad.dataset.ekv.replace('^', ' upphöjt till ') + ': vilken räntesats ger förändringsfaktorn ' + felRad.dataset.f + ', och vilket mål betyder = ' + felRad.dataset.mal + '? Ställ in dem i Räntelabbet och zooma in med steget 0,1 år.';`,
-   R`ut.textContent = 'Not quite on the red row. Translate ' + felRad.dataset.ekv.replace('^', ' to the power of ') + ': which interest rate gives the growth factor ' + felRad.dataset.f + ', and which target means = ' + felRad.dataset.mal + '? Set them in the Interest Lab and zoom in with the step 0.1 years.';`],
+        t14: 'Correct. Compare rate · time with the doubling. Which number do you end up close to now?'`],
+  [R`? 'Rätt. 72-regeln ger 36, 9 och 8 i huvudet, och Räntelabbet visar ungefär 35,0, 9,0 och 8,0. Huvudräkningen kommer nära, särskilt vid låga räntor.'
+        : 'Rätt. 4 är två fördubblingar och 16 är fyra. Varje fördubbling tar ungefär 9 år, så x ≈ 2 · 9 = 18 och x ≈ 4 · 9 = 36. Räntelabbet visar 18,0 och 36,0. I Matematik 2 lär ni er logaritmer, som ger exakta svar.';`,
+   R`? 'Correct. The rule of 72 gives 36, 9 and 8 in your head, and the Interest Lab shows about 35.0, 9.0 and 8.0. Mental arithmetic gets close, especially at low rates.'
+        : 'Correct. 4 is two doublings and 16 is four. Each doubling takes about 9 years, so x ≈ 2 · 9 = 18 and x ≈ 4 · 9 = 36. The Interest Lab shows 18.0 and 36.0. Later you will learn logarithms, which give exact answers.';`],
+  [R`? 'Hur många gånger ska man dubbla 1 för att få ' + mal + '? Prova: 1, 2, 4, …'
+        : felTyp === 'h'
+        ? 'Inte riktigt i huvudräkningen på den röda raden. Vilken räntesats ger förändringsfaktorn ' + f + '? Använd sedan 72-regeln: x ≈ 72 / räntesatsen' + (felRad.dataset.fordubblingar ? ', för varje fördubbling.' : '.')
+        : 'Inte riktigt i Räntelabbet på den röda raden. Ställ in räntan ' + r + ' % och målet ' + mal + ' gånger insättningen, och zooma in med steget 0,1 år.';`,
+   R`? 'How many times do you have to double 1 to get ' + mal + '? Try: 1, 2, 4, …'
+        : felTyp === 'h'
+        ? 'Not quite in the mental arithmetic on the red row. Which interest rate gives the growth factor ' + f + '? Then use the rule of 72: x ≈ 72 / interest rate' + (felRad.dataset.fordubblingar ? ', for each doubling.' : '.')
+        : 'Not quite in the Interest Lab on the red row. Set the interest rate ' + r + ' % and the target ' + mal + ' times the deposit, and zoom in with the step 0.1 years.';`],
   [R`ut.textContent = 'Det röda är det första hela året. Klicka på den raden i kalkylarket, välj steget 0,1 år och leta upp tiondelen då målet nås.';`,
    R`ut.textContent = 'The red one is the first whole year. Click that row in the spreadsheet, choose the step 0.1 years and find the tenth in which the target is reached.';`],
   [R`ut.textContent = 'Inte riktigt på den röda raden. Ställ in ' + fmtKort(k) + ' kr och ' + felRad.dataset.r + ' % i Räntelabbet, och leta efter det första ' + (decimal ? 'året' : 'hela året') + ' då beloppet är minst ' + fmtKort(k * mal) + ' kr.' + (decimal ? ' Zooma sedan in med steget 0,1 år.' : ' Kalkylarket hjälper.');`,
@@ -342,8 +372,6 @@ const PAR = [
    R`var rad = ['How long does it take to double your money?', 'Names: ' + (namn.value || ''), ''];
     rad.push('Question 1 (guess): ' + ($('g1').value || '') + ' years. ' + ($('g1t').value || ''));
     rad.push('Question 2: ' + (svar.g2 || '') + '. Question 3: ' + (svar.g3 || ''));`],
-  [R`rad.push('  ' + tr.dataset.ekv + ': räntesats ' + ($(tr.querySelector('input').id).value || '') + ' %, mål ' + (tr.querySelectorAll('input')[1].value || '') + ', x ≈ '`,
-   R`rad.push('  ' + tr.dataset.ekv + ': interest rate ' + ($(tr.querySelector('input').id).value || '') + ' %, target ' + (tr.querySelectorAll('input')[1].value || '') + ', x ≈ '`],
   [R`(tr.querySelector('input').value || '') + ' år');`, R`(tr.querySelector('input').value || '') + ' years');`],
   [R`tab('t4', 'Fråga 4');
     rad.push('Fråga 5: ' + $('q5').value);
@@ -355,11 +383,12 @@ const PAR = [
     rad.push('Fråga 10: Fördubblingstiden ≈ ' + $('q10').value + ' / räntesatsen');
     rad.push('Fråga 11: Räntelabbet visar ' + $('q11').value + ' år vid 24 %. ' + $('q11t').value);
     rad.push('Fråga 12: ' + $('q12').value);
-    tab('t13', 'Fråga 13 (ekvationer)');
-    rad.push('Fråga 14: ' + $('q12v').value);
-    rad.push('Fråga 15: ' + $('q13').value);
-    tab('t14', 'Fråga 16 (tredubbling)');
-    rad.push('Fråga 17: ' + $('q15').value);`,
+    tab('t13', 'Fråga 13 (ekvationer med 72-regeln)');
+    tab('t13p', 'Fråga 14 (fyra och sexton gånger så stort)');
+    rad.push('Fråga 15: ' + $('q12v').value);
+    rad.push('Fråga 16: ' + $('q13').value);
+    tab('t14', 'Fråga 17 (tredubbling)');
+    rad.push('Fråga 18: ' + $('q15').value);`,
    R`tab('t4', 'Question 4');
     rad.push('Question 5: ' + $('q5').value);
     tab('t6', 'Question 6');
@@ -370,11 +399,12 @@ const PAR = [
     rad.push('Question 10: Doubling time ≈ ' + $('q10').value + ' / interest rate');
     rad.push('Question 11: The Interest Lab shows ' + $('q11').value + ' years at 24 %. ' + $('q11t').value);
     rad.push('Question 12: ' + $('q12').value);
-    tab('t13', 'Question 13 (equations)');
-    rad.push('Question 14: ' + $('q12v').value);
-    rad.push('Question 15: ' + $('q13').value);
-    tab('t14', 'Question 16 (tripling)');
-    rad.push('Question 17: ' + $('q15').value);`],
+    tab('t13', 'Question 13 (equations with the rule of 72)');
+    tab('t13p', 'Question 14 (four and sixteen times as large)');
+    rad.push('Question 15: ' + $('q12v').value);
+    rad.push('Question 16: ' + $('q13').value);
+    tab('t14', 'Question 17 (tripling)');
+    rad.push('Question 18: ' + $('q15').value);`],
   [R`function klart() { st.textContent = 'Svaren är kopierade.'; }`, R`function klart() { st.textContent = 'Your answers have been copied.'; }`],
   [R`st.textContent = 'Kopieringen misslyckades. Skriv ut sidan i stället.';`, R`st.textContent = 'Copying failed. Print the page instead.';`],
 ];

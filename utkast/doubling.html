@@ -568,31 +568,51 @@ table.svar td input.kort-tal { width: 70px; }
     </section>
 
     <!-- 8 EKVATIONER -->
-    <section class="skarm" data-skarm="ekvationer" data-del="Equations" data-bank="ja" data-forbered="10000,6,2,15,kalkyl">
+    <section class="skarm" data-skarm="ekvationer" data-del="Equations" data-bank="ja" data-forbered="10000,8,2,40,kalkyl">
       <div class="inre">
         <div class="uppgift">
-          <p class="delmarke">Part 5 <span>· From interest to equations · 10 min</span></p>
-          <h2>Equations you cannot solve <em>by hand</em></h2>
+          <p class="delmarke">Part 5 <span>· From interest to equations · 15 min</span></p>
+          <h2>Hard equations <em>in your head</em></h2>
           <p class="prompt">The equation <span class="formel">1.06<sup>x</sup> = 2</span> asks the same question that you have explored: how many times <i>x</i> do you have to multiply by the growth factor 1.06 to get 2?</p>
           <div class="fraga">
             <p class="q"><span class="qn">12</span><span>First try to solve <span class="formel">1.06<sup>x</sup> = 2</span> with the methods you have learned so far. What happens?</span></p>
             <textarea id="q12" data-spara aria-label="Question 12" style="min-height:70px"></textarea>
           </div>
+          <div class="koppling">
+            <div class="koppling-rubrik">A tool you already have</div>
+            <p class="koppling-formel">1.06<sup>x</sup> = 2 &nbsp;⇒&nbsp; x ≈ 72 / 6 = <span>12</span></p>
+            <p class="koppling-text">The growth factor 1.06 means the interest rate 6&nbsp;%, and <b>= 2</b> means doubling. So the rule of 72 gives the answer in your head. The Interest Lab shows 11.9, so mental arithmetic gets very close.</p>
+          </div>
           <div class="fraga">
-            <p class="q"><span class="qn">13</span><span>Use the Interest Lab to find an approximate value of <i>x</i> to one decimal place. First translate each equation: which interest rate and which target should you set?</span></p>
+            <p class="q"><span class="qn">13</span><span>Solve the equations in your head with the rule of 72. Then check in the Interest Lab and write the answer to one decimal place.</span></p>
             <div class="tabell-wrap">
               <table class="svar" id="t13">
-                <thead><tr><th>Equation</th><th>Interest rate (%)</th><th>Target (times the deposit)</th><th>x ≈ (one decimal)</th></tr></thead>
+                <thead><tr><th>Equation</th><th>In your head: x ≈</th><th>Interest Lab: x ≈ (one decimal)</th></tr></thead>
                 <tbody>
-                  <tr data-r="6" data-mal="2" data-f="1.06" data-ekv="1.06^x = 2"><td><span class="formel">1.06<sup>x</sup> = 2</span></td><td><input type="text" inputmode="decimal" aria-label="Interest rate for 1.06 to the power of x = 2" data-spara id="t13ar" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="Target for 1.06 to the power of x = 2" data-spara id="t13am" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="x for 1.06 to the power of x = 2" data-spara id="t13a" data-x></td></tr>
-                  <tr data-r="3" data-mal="5" data-f="1.03" data-ekv="1.03^x = 5"><td><span class="formel">1.03<sup>x</sup> = 5</span></td><td><input type="text" inputmode="decimal" aria-label="Interest rate for 1.03 to the power of x = 5" data-spara id="t13br" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="Target for 1.03 to the power of x = 5" data-spara id="t13bm" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="x for 1.03 to the power of x = 5" data-spara id="t13b" data-x></td></tr>
-                  <tr data-r="25" data-mal="10" data-f="1.25" data-ekv="1.25^x = 10"><td><span class="formel">1.25<sup>x</sup> = 10</span></td><td><input type="text" inputmode="decimal" aria-label="Interest rate for 1.25 to the power of x = 10" data-spara id="t13cr" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="Target for 1.25 to the power of x = 10" data-spara id="t13cm" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="x for 1.25 to the power of x = 10" data-spara id="t13c" data-x></td></tr>
+                  <tr data-r="2" data-mal="2" data-huvud="36" data-f="1.02" data-ekv="1.02^x = 2"><td><span class="formel">1.02<sup>x</sup> = 2</span></td><td><input type="text" inputmode="decimal" aria-label="1.02 to the power of x = 2, in your head" data-spara id="t13ah" data-h data-etikett="in your head x ≈"></td><td><input type="text" inputmode="decimal" aria-label="1.02 to the power of x = 2, Interest Lab" data-spara id="t13a" data-x data-etikett="Interest Lab x ≈"></td></tr>
+                  <tr data-r="8" data-mal="2" data-huvud="9" data-f="1.08" data-ekv="1.08^x = 2"><td><span class="formel">1.08<sup>x</sup> = 2</span></td><td><input type="text" inputmode="decimal" aria-label="1.08 to the power of x = 2, in your head" data-spara id="t13bh" data-h data-etikett="in your head x ≈"></td><td><input type="text" inputmode="decimal" aria-label="1.08 to the power of x = 2, Interest Lab" data-spara id="t13b" data-x data-etikett="Interest Lab x ≈"></td></tr>
+                  <tr data-r="9" data-mal="2" data-huvud="8" data-f="1.09" data-ekv="1.09^x = 2"><td><span class="formel">1.09<sup>x</sup> = 2</span></td><td><input type="text" inputmode="decimal" aria-label="1.09 to the power of x = 2, in your head" data-spara id="t13ch" data-h data-etikett="in your head x ≈"></td><td><input type="text" inputmode="decimal" aria-label="1.09 to the power of x = 2, Interest Lab" data-spara id="t13c" data-x data-etikett="Interest Lab x ≈"></td></tr>
                 </tbody>
               </table>
             </div>
-            <details class="hjalp"><summary>Hint</summary><div>The growth factor 1.06 means the interest rate 6&nbsp;%. Equal to 2 means that the amount has been multiplied by 2, so the target is 2 times the deposit. Type the target in the box <b>Target</b> in the Interest Lab. Do not forget to zoom in with the step 0.1 years.</div></details>
+            <details class="hjalp"><summary>Hint</summary><div>Which interest rate gives the growth factor 1.02? Then divide 72 by the interest rate. In the Interest Lab you set the same interest rate and the target 2 times the deposit, and zoom in with the step 0.1 years.</div></details>
             <div class="kontroll"><button class="knapp" type="button" data-kontrollera="t13">Check</button></div>
             <div class="aterkoppling" id="t13-svar" aria-live="polite"></div>
+          </div>
+          <div class="fraga">
+            <p class="q"><span class="qn">14</span><span>Take it further. Now the amount should become 4 and 16 times as large. How many doublings is that? Solve the equations in your head and check in the Interest Lab.</span></p>
+            <div class="tabell-wrap">
+              <table class="svar" id="t13p">
+                <thead><tr><th>Equation</th><th>Number of doublings</th><th>In your head: x ≈</th><th>Interest Lab: x ≈ (one decimal)</th></tr></thead>
+                <tbody>
+                  <tr data-r="8" data-mal="4" data-huvud="18" data-fordubblingar="2" data-f="1.08" data-ekv="1.08^x = 4"><td><span class="formel">1.08<sup>x</sup> = 4</span></td><td><input type="text" inputmode="numeric" aria-label="1.08 to the power of x = 4, number of doublings" data-spara id="t13dn" data-n data-etikett="doublings" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="1.08 to the power of x = 4, in your head" data-spara id="t13dh" data-h data-etikett="in your head x ≈"></td><td><input type="text" inputmode="decimal" aria-label="1.08 to the power of x = 4, Interest Lab" data-spara id="t13d" data-x data-etikett="Interest Lab x ≈"></td></tr>
+                  <tr data-r="8" data-mal="16" data-huvud="36" data-fordubblingar="4" data-f="1.08" data-ekv="1.08^x = 16"><td><span class="formel">1.08<sup>x</sup> = 16</span></td><td><input type="text" inputmode="numeric" aria-label="1.08 to the power of x = 16, number of doublings" data-spara id="t13en" data-n data-etikett="doublings" class="kort-tal"></td><td><input type="text" inputmode="decimal" aria-label="1.08 to the power of x = 16, in your head" data-spara id="t13eh" data-h data-etikett="in your head x ≈"></td><td><input type="text" inputmode="decimal" aria-label="1.08 to the power of x = 16, Interest Lab" data-spara id="t13e" data-x data-etikett="Interest Lab x ≈"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <details class="hjalp"><summary>Hint</summary><div>If you double 1 you get 2, and if you double again you get 4. How many times do you have to double to get 16? Each doubling at 8&nbsp;% takes about 72 / 8 years.</div></details>
+            <div class="kontroll"><button class="knapp" type="button" data-kontrollera="t13p">Check</button></div>
+            <div class="aterkoppling" id="t13p-svar" aria-live="polite"></div>
           </div>
         </div>
         <div class="bank-plats"></div>
@@ -605,12 +625,12 @@ table.svar td input.kort-tal { width: 70px; }
         <p class="delmarke">Part 6 <span>· Reflect · 5 min</span></p>
         <h2>What did the <em>tool</em> do, and what did you do?</h2>
         <div class="fraga">
-          <p class="q"><span class="qn">14</span><span>What could you do with the Interest Lab that you could not have done by hand?</span></p>
-          <textarea id="q12v" data-spara aria-label="Question 14"></textarea>
+          <p class="q"><span class="qn">15</span><span>What could you do with the Interest Lab that you could not have done by hand?</span></p>
+          <textarea id="q12v" data-spara aria-label="Question 15"></textarea>
         </div>
         <div class="fraga">
-          <p class="q"><span class="qn">15</span><span>What did the Interest Lab <b>not</b> help you with? What did you need to understand yourselves?</span></p>
-          <textarea id="q13" data-spara aria-label="Question 15"></textarea>
+          <p class="q"><span class="qn">16</span><span>What did the Interest Lab <b>not</b> help you with? What did you need to understand yourselves?</span></p>
+          <textarea id="q13" data-spara aria-label="Question 16"></textarea>
         </div>
       </div>
     </section>
@@ -623,7 +643,7 @@ table.svar td input.kort-tal { width: 70px; }
           <h2><em>Triple</em> your money</h2>
           <div class="forberedd"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 7.5 5.5 11 12 3"/></svg>The Interest Lab's target is now three times the deposit</div>
           <div class="fraga">
-            <p class="q"><span class="qn">16</span><span>How long does it take to triple your money?</span></p>
+            <p class="q"><span class="qn">17</span><span>How long does it take to triple your money?</span></p>
             <div class="tabell-wrap">
               <table class="svar" id="t14">
                 <thead><tr><th>Interest rate (%)</th><th>Tripling time (years, one decimal)</th><th>Rate · time</th></tr></thead>
@@ -637,8 +657,8 @@ table.svar td input.kort-tal { width: 70px; }
             <div class="aterkoppling" id="t14-svar" aria-live="polite"></div>
           </div>
           <div class="fraga">
-            <p class="q"><span class="qn">17</span><span>Is there a tripling rule in the same way? Which number should it contain?</span></p>
-            <textarea id="q15" data-spara aria-label="Question 17"></textarea>
+            <p class="q"><span class="qn">18</span><span>Is there a tripling rule in the same way? Which number should it contain?</span></p>
+            <textarea id="q15" data-spara aria-label="Question 18"></textarea>
           </div>
         </div>
         <div class="bank-plats"></div>
@@ -931,15 +951,6 @@ table.svar td input.kort-tal { width: 70px; }
       td.classList.remove('ratt', 'fel');
       if (isNaN(v)) { tomma++; alla = false; return; }
       var ok = decimal ? Math.abs(v - exaktTid(r, mal)) <= 0.1 + 1e-9 : v === forsta(r, mal);
-      if (tr.dataset.ekv) {
-        var ir = tr.querySelector('input[id$="r"]'), im = tr.querySelector('input[id$="m"]');
-        [[ir, r], [im, mal]].forEach(function (p) {
-          var pv = lasTal(p[0].value);
-          p[0].classList.remove('ratt', 'fel');
-          if (!isNaN(pv)) p[0].classList.add(pv === p[1] ? 'ratt' : 'fel');
-          if (isNaN(pv) || pv !== p[1]) { alla = false; if (!felRad) felRad = tr; }
-        });
-      }
       if (ok) td.classList.add('ratt');
       else {
         td.classList.add('fel'); alla = false; if (!felRad) felRad = tr;
@@ -954,13 +965,9 @@ table.svar td input.kort-tal { width: 70px; }
         t4: 'Correct. Every deposit doubles during year 12. The deposit does not matter. On the next page you explain why.',
         t6: 'Correct. Look at the column rate · time and type the whole number below.',
         t8: 'Correct. Notice 2 %: after 35 years the amount is 1.9999 times the deposit, so the doubling happens just after 35 years.',
-        t14: 'Correct. Compare rate · time with the doubling. Which number do you end up close to now?',
-        t13: 'Correct. You have found approximate solutions to three equations that you cannot solve exactly with the methods you know today. Later you will learn logarithms, which give exact answers.'
+        t14: 'Correct. Compare rate · time with the doubling. Which number do you end up close to now?'
       }[tabellId];
       svar[tabellId + 'ok'] = true; spara();
-    } else if (felRad && felRad.dataset.ekv) {
-      ut.classList.add('nastan');
-      ut.textContent = 'Not quite on the red row. Translate ' + felRad.dataset.ekv.replace('^', ' to the power of ') + ': which interest rate gives the growth factor ' + felRad.dataset.f + ', and which target means = ' + felRad.dataset.mal + '? Set them in the Interest Lab and zoom in with the step 0.1 years.';
     } else if (helaAr) {
       ut.classList.add('nastan');
       ut.textContent = 'The red one is the first whole year. Click that row in the spreadsheet, choose the step 0.1 years and find the tenth in which the target is reached.';
@@ -974,8 +981,50 @@ table.svar td input.kort-tal { width: 70px; }
     }
   }
   document.querySelectorAll('[data-kontrollera]').forEach(function (b) {
-    b.addEventListener('click', function () { kontrolleraTabell(b.dataset.kontrollera); });
+    b.addEventListener('click', function () {
+      var id = b.dataset.kontrollera;
+      if (id === 't13' || id === 't13p') kontrolleraEkvationer(id); else kontrolleraTabell(id);
+    });
   });
+
+  /* ---------- Ekvationer: huvudräkning med 72-regeln och kontroll i Räntelabbet ---------- */
+  // Varje rad har data-r, data-mal och data-huvud (72-regelns svar), och ibland
+  // data-fordubblingar. Huvudräkningen godtas inom 0,5, Räntelabbet inom 0,1 från exakt x.
+  function kontrolleraEkvationer(tabellId) {
+    var alla = true, tomma = 0, felRad = null, felTyp = '';
+    document.querySelectorAll('#' + tabellId + ' tbody tr').forEach(function (tr) {
+      var r = Number(tr.dataset.r), mal = Number(tr.dataset.mal);
+      [['n', Number(tr.dataset.fordubblingar), 0], ['h', Number(tr.dataset.huvud), 0.5], ['x', exaktTid(r, mal), 0.1]].forEach(function (p) {
+        var inp = tr.querySelector('input[data-' + p[0] + ']');
+        if (!inp) return;
+        inp.classList.remove('ratt', 'fel');
+        var v = lasTal(inp.value);
+        if (isNaN(v)) { tomma++; alla = false; return; }
+        if (Math.abs(v - p[1]) <= p[2] + 1e-9) inp.classList.add('ratt');
+        else { inp.classList.add('fel'); alla = false; if (!felRad) { felRad = tr; felTyp = p[0]; } }
+      });
+    });
+    var ut = $(tabellId + '-svar');
+    ut.className = 'aterkoppling';
+    if (alla) {
+      ut.classList.add('bra');
+      ut.textContent = tabellId === 't13'
+        ? 'Correct. The rule of 72 gives 36, 9 and 8 in your head, and the Interest Lab shows about 35.0, 9.0 and 8.0. Mental arithmetic gets close, especially at low rates.'
+        : 'Correct. 4 is two doublings and 16 is four. Each doubling takes about 9 years, so x ≈ 2 · 9 = 18 and x ≈ 4 · 9 = 36. The Interest Lab shows 18.0 and 36.0. Later you will learn logarithms, which give exact answers.';
+      svar[tabellId + 'ok'] = true; spara();
+    } else if (felRad) {
+      ut.classList.add('nastan');
+      var f = felRad.dataset.f, mal = felRad.dataset.mal, r = felRad.dataset.r;
+      ut.textContent = felTyp === 'n'
+        ? 'How many times do you have to double 1 to get ' + mal + '? Try: 1, 2, 4, …'
+        : felTyp === 'h'
+        ? 'Not quite in the mental arithmetic on the red row. Which interest rate gives the growth factor ' + f + '? Then use the rule of 72: x ≈ 72 / interest rate' + (felRad.dataset.fordubblingar ? ', for each doubling.' : '.')
+        : 'Not quite in the Interest Lab on the red row. Set the interest rate ' + r + ' % and the target ' + mal + ' times the deposit, and zoom in with the step 0.1 years.';
+    } else {
+      ut.classList.add('info');
+      ut.textContent = 'Fill in ' + (tomma === 1 ? 'the empty box' : 'the empty boxes') + ' first.';
+    }
+  }
 
   /* ---------- Fråga 9 och 11 ---------- */
   $('q6nk').addEventListener('click', function () {
@@ -1286,7 +1335,7 @@ table.svar td input.kort-tal { width: 70px; }
       rad.push(rubrik);
       document.querySelectorAll('#' + id + ' tbody tr').forEach(function (tr) {
         var c = tr.querySelectorAll('td');
-        if (tr.dataset.ekv) { rad.push('  ' + tr.dataset.ekv + ': interest rate ' + ($(tr.querySelector('input').id).value || '') + ' %, target ' + (tr.querySelectorAll('input')[1].value || '') + ', x ≈ ' + (tr.querySelector('input[data-x]').value || '')); return; }
+        if (tr.dataset.ekv) { rad.push('  ' + tr.dataset.ekv + ': ' + [].map.call(tr.querySelectorAll('input'), function (inp) { return inp.dataset.etikett + ' ' + (inp.value || ''); }).join(', ')); return; }
         rad.push('  ' + c[0].textContent.replace(/ /g, ' ') + (tr.dataset.k ? ', ' + c[1].textContent.replace(/ /g, ' ') : ' %') + ': ' + (tr.querySelector('input').value || '') + ' years');
       });
     }
@@ -1300,11 +1349,12 @@ table.svar td input.kort-tal { width: 70px; }
     rad.push('Question 10: Doubling time ≈ ' + $('q10').value + ' / interest rate');
     rad.push('Question 11: The Interest Lab shows ' + $('q11').value + ' years at 24 %. ' + $('q11t').value);
     rad.push('Question 12: ' + $('q12').value);
-    tab('t13', 'Question 13 (equations)');
-    rad.push('Question 14: ' + $('q12v').value);
-    rad.push('Question 15: ' + $('q13').value);
-    tab('t14', 'Question 16 (tripling)');
-    rad.push('Question 17: ' + $('q15').value);
+    tab('t13', 'Question 13 (equations with the rule of 72)');
+    tab('t13p', 'Question 14 (four and sixteen times as large)');
+    rad.push('Question 15: ' + $('q12v').value);
+    rad.push('Question 16: ' + $('q13').value);
+    tab('t14', 'Question 17 (tripling)');
+    rad.push('Question 18: ' + $('q15').value);
     return rad.join('\n');
   }
   $('kopiera').addEventListener('click', function () {

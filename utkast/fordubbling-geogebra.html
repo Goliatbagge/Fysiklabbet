@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Fördubbla pengarna i GeoGebra — Fysiklabbet</title>
+<meta name="description" content="Fördubblingstiden som skärningspunkt i GeoGebra: dra i räntan, jämför med 72-regeln och se när regeln slår fel. Komplement till undersökningen Hur lång tid tar det att fördubbla pengarna?">
+<link rel="canonical" href="https://fysiklabbet.se/utkast/fordubbling-geogebra.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!--
+  fordubbling-geogebra.html: GeoGebra-delen till fördubblingsövningen
+  (fordubbling.html / doubling.html). Två appletar och ett kort elevavsnitt.
+
+  SV/EN: ALL synlig text står i TEXT nedan, på båda språken. Ändra båda
+  samtidigt. Den engelska sidan doubling-geogebra.html genereras med
+  node .claude/bygg-doubling-geogebra.js och redigeras aldrig för hand.
+
+  Applet 1: f(x) = K·(1 + r/100)^x och linjen y = 2K. Skärningspunkten S har
+  x-koordinaten T = ln 2 / ln(1 + r/100), fördubblingstiden. R = (72/r, 2K)
+  är 72-regelns gissning. "Fler fördubblingar" visar 4K och 8K vid 2T och 3T.
+  Applet 2: h(x) = x · ln 2 / ln(1 + x/100), alltså räntesats · fördubblingstid.
+  Kurvan skär y = 72 vid knappt 8 %; där stämmer regeln exakt.
+  Kontrollvärden: T(6 %) = 11,90; T(8 %) = 9,01; T(1 %) = 69,66; h(25) = 77,6.
+
+  Allt (reglage, kryssrutor, objekt) ligger inne i GeoGebra, så filen som
+  laddas ner med knappen fungerar fristående och kan läggas i en GeoGebra-bok.
+-->
+<style>
+:root {
+  --bg: #f3eee4;
+  --panel: #fffdf9;
+  --ink: #0f1620;
+  --soft: #3f4a5c;
+  --muted: #69655c;
+  --line: rgba(15, 22, 32, 0.10);
+  --line2: rgba(15, 22, 32, 0.20);
+  --accent: #c8324a;
+  --blue: #1c3d6b;
+  --blue-mid: #3d6aa8;
+  --blue-soft: rgba(28, 61, 107, 0.09);
+  --green: #2f6b4f;
+  --green-soft: rgba(47, 107, 79, 0.11);
+  --shadow: 0 1px 2px rgba(15, 22, 32, 0.05), 0 18px 40px -22px rgba(15, 22, 32, 0.35);
+  --sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --serif: "Instrument Serif", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background:
+    radial-gradient(1100px 600px at 8% -10%, rgba(200, 50, 74, 0.07), transparent 60%),
+    radial-gradient(1000px 700px at 105% 10%, rgba(28, 61, 107, 0.08), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+}
+button, textarea { font-family: inherit; font-size: inherit; color: inherit; }
+.topp { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.logo { color: var(--ink); text-decoration: none; font-family: var(--serif); font-size: 22px; }
+.topp nav { display: flex; gap: 14px; font-size: 14px; }
+.topp nav a { color: var(--soft); }
+main { max-width: 980px; margin: 0 auto; padding: clamp(20px, 4vw, 48px) 16px 64px; }
+.delmarke { font-family: var(--mono); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+.delmarke span { color: var(--muted); }
+h1, h2 { font-family: var(--serif); font-weight: 400; line-height: 1.04; letter-spacing: -0.01em; text-wrap: balance; margin: 0 0 14px; }
+h1 { font-size: clamp(38px, 6vw, 66px); }
+h2 { font-size: clamp(30px, 4vw, 44px); margin-top: 48px; }
+h1 em, h2 em { color: var(--accent); }
+.prompt { font-size: clamp(17px, 1.6vw, 20px); color: var(--soft); max-width: 680px; margin: 0 0 22px; text-wrap: pretty; }
+.kort { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 14px; }
+.applet { width: 100%; min-height: 380px; border-radius: 10px; overflow: hidden; }
+.avlast { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 12px; }
+.avlast div { background: var(--blue-soft); border-radius: 10px; padding: 8px 12px; }
+.avlast b { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.avlast span { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.avlast .varn span { color: var(--accent); }
+.reglage { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px 24px; margin-top: 12px; }
+.reglage label { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; font-size: 15px; color: var(--soft); }
+.reglage label output { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink); }
+.reglage input[type=range] { grid-column: 1 / -1; width: 100%; accent-color: var(--blue); }
+.kryss { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 10px; font-size: 15px; }
+.kryss label { display: flex; gap: 8px; align-items: center; cursor: pointer; }
+.kryss input { width: 18px; height: 18px; accent-color: var(--blue); }
+.knapprad { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px; }
+.knapp { border: 1.5px solid var(--line2); background: #fff; color: var(--ink); padding: 9px 15px; border-radius: 10px; cursor: pointer; font-weight: 500; }
+.knapp:hover { border-color: var(--ink); }
+.statusrad { font-size: 14px; color: var(--muted); }
+.fraga { margin: 0 0 26px; }
+.fraga .q { font-size: clamp(17px, 1.5vw, 19px); margin: 0 0 10px; display: flex; gap: 14px; align-items: baseline; }
+.fraga .qn { font-family: var(--mono); font-size: 13px; color: var(--blue); background: var(--blue-soft); border-radius: 999px; padding: 2px 9px; flex-shrink: 0; }
+textarea { width: 100%; min-height: 80px; padding: 10px 12px; border: 1.5px solid var(--line2); border-radius: 10px; background: #fff; resize: vertical; }
+textarea:focus { outline: 2px solid var(--blue-mid); outline-offset: 1px; border-color: transparent; }
+details { margin-top: 40px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 12px 18px; }
+details summary { cursor: pointer; font-weight: 600; }
+details li { margin-bottom: 8px; }
+.notis { font-size: 14px; color: var(--muted); margin-top: 8px; }
+@media print {
+  .topp nav, .knapprad, .applet, .avlast { display: none; }
+  details { display: block; }
+}
+</style>
+</head>
+<body>
+<header class="topp">
+  <a class="logo" href="../index.html">Fysiklabbet</a>
+  <nav>
+    <a id="lank-ovning" href="fordubbling.html" data-t="lankOvning"></a>
+    <a id="lank-sprak" href="doubling-geogebra.html" data-t="lankSprak"></a>
+  </nav>
+</header>
+<main>
+  <p class="delmarke" data-t="delmarke"></p>
+  <h1 data-t="rubrik"></h1>
+  <p class="prompt" data-t="intro"></p>
+
+  <section class="kort" aria-labelledby="rubrik-1">
+    <h2 id="rubrik-1" style="margin-top:4px;font-size:clamp(24px,3vw,32px)" data-t="applet1Rubrik"></h2>
+    <div class="applet" id="ggb-1"></div>
+    <div class="reglage">
+      <label><span data-t="avInsattning"></span><output id="ut-k"></output><input type="range" id="in-k" min="1000" max="100000" step="1000" value="10000"></label>
+      <label><span data-t="avRanta"></span><output id="ut-r"></output><input type="range" id="in-r" min="1" max="25" step="0.5" value="6"></label>
+    </div>
+    <div class="kryss">
+      <label><input type="checkbox" id="in-ar"><span data-t="gVisaAr"></span></label>
+      <label><input type="checkbox" id="in-72"><span data-t="gVisa72"></span></label>
+      <label><input type="checkbox" id="in-fler"><span data-t="gVisaFler"></span></label>
+    </div>
+    <div class="avlast" aria-live="polite">
+      <div><b data-t="avRanta"></b><span id="av-r">–</span></div>
+      <div><b data-t="avTid"></b><span id="av-t">–</span></div>
+      <div><b data-t="avHela"></b><span id="av-hela">–</span></div>
+      <div><b data-t="av72"></b><span id="av-72">–</span></div>
+      <div id="av-fel-ruta"><b data-t="avFel"></b><span id="av-fel">–</span></div>
+    </div>
+    <div class="knapprad">
+      <button class="knapp" type="button" id="ladda-1" data-t="laddaNer"></button>
+      <span class="statusrad" id="status-1"></span>
+    </div>
+  </section>
+
+  <h2 data-t="elevRubrik"></h2>
+  <p class="prompt" data-t="elevIntro"></p>
+  <div id="fragor"></div>
+
+  <section class="kort" aria-labelledby="rubrik-2" style="margin-bottom:26px">
+    <h2 id="rubrik-2" style="margin-top:4px;font-size:clamp(24px,3vw,32px)" data-t="applet2Rubrik"></h2>
+    <p class="notis" data-t="applet2Notis" style="margin-top:0"></p>
+    <div class="applet" id="ggb-2"></div>
+    <div class="reglage">
+      <label><span data-t="avRanta"></span><output id="ut-r2"></output><input type="range" id="in-r2" min="1" max="25" step="0.5" value="6"></label>
+    </div>
+    <div class="knapprad">
+      <button class="knapp" type="button" id="ladda-2" data-t="laddaNer"></button>
+      <span class="statusrad" id="status-2"></span>
+    </div>
+  </section>
+  <div id="fragor-2"></div>
+
+  <div class="knapprad">
+    <button class="knapp" type="button" id="kopiera" data-t="kopiera"></button>
+    <button class="knapp" type="button" id="skriv-ut" data-t="skrivUt"></button>
+    <span class="statusrad" id="kopiera-status" aria-live="polite"></span>
+  </div>
+
+  <details>
+    <summary data-t="lararRubrik"></summary>
+    <div data-t="lararText"></div>
+  </details>
+</main>
+
+<script src="https://www.geogebra.org/apps/deployggb.js"></script>
+<script>
+(function () {
+  var SPRAK = document.documentElement.lang === 'en' ? 'en' : 'sv';
+
+  // All synlig text, på båda språken. Ändra alltid båda.
+  var TEXT = {
+    lankOvning: { sv: 'Till hela övningen', en: 'Back to the full investigation' },
+    lankSprak: { sv: 'English', en: 'Svenska' },
+    delmarke: { sv: 'Matematik nivå 1c <span>· 3.4 Sparande och ränteberäkningar · GeoGebra</span>', en: 'Mathematics <span>· Savings and compound interest · GeoGebra</span>' },
+    rubrik: { sv: 'Fördubblingen som en <em>skärningspunkt</em>', en: 'Doubling as a <em>point of intersection</em>' },
+    intro: {
+      sv: 'I Räntelabbet räknade ni år för år. Här ser ni samma sak som en graf: beloppet växer längs kurvan, och pengarna har fördubblats där kurvan skär den streckade linjen. Dra i reglagen och jämför med 72-regeln.',
+      en: 'In the Interest Lab you worked year by year. Here you see the same thing as a graph: the amount grows along the curve, and the money has doubled where the curve crosses the dashed line. Drag the sliders and compare with the rule of 72.'
+    },
+    applet1Rubrik: { sv: 'Beloppet år för år', en: 'The amount year by year' },
+    avRanta: { sv: 'Räntesats', en: 'Interest rate' },
+    avInsattning: { sv: 'Insättning', en: 'Deposit' },
+    avTid: { sv: 'Fördubblingstid', en: 'Doubling time' },
+    avHela: { sv: 'Första hela året', en: 'First whole year' },
+    av72: { sv: '72-regeln', en: 'Rule of 72' },
+    avFel: { sv: 'Regeln slår fel med', en: 'The rule is off by' },
+    ar: { sv: 'år', en: 'years' },
+    laddaNer: { sv: 'Ladda ner GeoGebra-filen (.ggb)', en: 'Download the GeoGebra file (.ggb)' },
+    laddar: { sv: 'GeoGebra laddas …', en: 'Loading GeoGebra …' },
+    ingenGgb: { sv: 'GeoGebra kunde inte laddas. Kontrollera nätverket och ladda om sidan.', en: 'GeoGebra could not be loaded. Check your connection and reload the page.' },
+    // Inne i GeoGebra
+    gK: { sv: 'Insättning (kr)', en: 'Deposit (kr)' },
+    gR: { sv: 'Räntesats (%)', en: 'Interest rate (%)' },
+    gVisaAr: { sv: 'Visa beloppet vid varje årsskifte', en: 'Show the amount at the end of each year' },
+    gVisa72: { sv: 'Visa 72-regeln', en: 'Show the rule of 72' },
+    gVisaFler: { sv: 'Visa fler fördubblingar', en: 'Show more doublings' },
+    gS: { sv: 'fördubblat', en: 'doubled' },
+    gR72: { sv: '72-regeln', en: 'rule of 72' },
+    gXaxel: { sv: 'år', en: 'years' },
+    gYaxel: { sv: 'kr', en: 'kr' },
+    gX2: { sv: 'räntesats (%)', en: 'interest rate (%)' },
+    gY2: { sv: 'räntesats · tid', en: 'rate · time' },
+    gP: { sv: 'räntesats · fördubblingstid', en: 'rate · doubling time' },
+    applet2Rubrik: { sv: 'Hur bra är <em>72-regeln</em>?', en: 'How good is the <em>rule of 72</em>?' },
+    applet2Notis: {
+      sv: 'Kurvan visar räntesats · fördubblingstid för varje räntesats. Om 72-regeln stämde exakt skulle kurvan ligga på den streckade linjen. Räntereglaget är kopplat till grafen ovan.',
+      en: 'The curve shows interest rate · doubling time for every interest rate. If the rule of 72 were exact, the curve would lie on the dashed line. The rate slider is linked to the graph above.'
+    },
+    elevRubrik: { sv: 'Undersök i <em>GeoGebra</em>', en: 'Explore in <em>GeoGebra</em>' },
+    elevIntro: { sv: 'Arbeta i par. Skriv svaren i rutorna. De sparas i webbläsaren.', en: 'Work in pairs. Write your answers in the boxes. They are saved in the browser.' },
+    kopiera: { sv: 'Kopiera mina svar', en: 'Copy my answers' },
+    skrivUt: { sv: 'Skriv ut', en: 'Print' },
+    kopierat: { sv: 'Svaren är kopierade.', en: 'Your answers have been copied.' },
+    kopieraFel: { sv: 'Kopieringen misslyckades. Skriv ut sidan i stället.', en: 'Copying failed. Print the page instead.' },
+    fraga: { sv: 'Fråga', en: 'Question' },
+    lararRubrik: { sv: 'För läraren: syfte, svar och fallgropar', en: 'For the teacher: purpose, answers and pitfalls' },
+    lararText: {
+      sv: '<p>Avsnittet tar 20–25 minuter och passar efter Del 3 i <a href="fordubbling.html">huvudövningen</a>, när eleverna har sett mönstret men innan de formulerar regeln. Det kan också användas fristående.</p>' +
+        '<ol>' +
+        '<li><b>6 %:</b> 11,9 år. Det stämmer med Räntelabbet med en decimal. Kurvan är kontinuerlig, men räntan betalas en gång per år, så på kontot finns 20&nbsp;000&nbsp;kr först efter 12 hela år. Det är sidans viktigaste fallgrop: grafen ritar mellan årsskiftena, och verkligheten gör det inte.</li>' +
+        '<li><b>Insättningen:</b> grafen ser likadan ut, bara skalan på y-axeln ändras, och skärningspunkten ligger kvar. K·1,06<sup>x</sup> = 2K ger 1,06<sup>x</sup> = 2, och K försvinner.</li>' +
+        '<li><b>Fler fördubblingar:</b> 4 gånger efter 2T ≈ 23,8 år och 8 gånger efter 3T ≈ 35,7 år. Alltså är x ≈ 3 · 12 = 36 en lösning till 1,06<sup>x</sup> = 8 i huvudet. Avstånden mellan fördubblingarna är lika långa.</li>' +
+        '<li><b>72-regeln</b> träffar nästan exakt runt 6–10 %. Vid låga räntor ger den lite för lång tid (1 %: 72 mot 69,7 år), vid höga för kort (25 %: 2,9 mot 3,1 år).</li>' +
+        '<li><b>Kurvan</b> skär 72 vid knappt 8 %. När räntan går mot noll närmar sig produkten 100 · ln 2 ≈ 69,3, därför använder en del 70-regeln vid låga räntor. Ingen elev behöver logaritmen här; det räcker att se att kurvan inte är vågrät.</li>' +
+        '<li><b>Reflektionen</b> är kärnan i projektets fråga om teknikens mervärde. GeoGebra visar sambandet och att skärningspunkten flyttar sig när räntan ändras; kalkylarket visar beloppet som det faktiskt står på kontot. Ett bra svar nämner både vad verktyget gör åt eleven och vad eleven själv måste förstå.</li>' +
+        '</ol>' +
+        '<p>GeoGebra-filerna kan laddas ner med knapparna under appletarna och läggas i en GeoGebra-bok. Reglage och kryssrutor finns inne i filerna. Texten i filerna är på det språk sidan visas på.</p>',
+      en: '<p>The section takes 20–25 minutes and fits after Part 3 of the <a href="doubling.html">main investigation</a>, when students have seen the pattern but before they state the rule. It can also be used on its own.</p>' +
+        '<ol>' +
+        '<li><b>6 %:</b> 11.9 years. This matches the Interest Lab to one decimal place. The curve is continuous, but interest is paid once a year, so the account holds 20,000&nbsp;kr only after 12 whole years. This is the key pitfall of the page: the graph draws between the year ends, and reality does not.</li>' +
+        '<li><b>The deposit:</b> the graph looks the same, only the scale on the y-axis changes, and the point of intersection stays put. K·1.06<sup>x</sup> = 2K gives 1.06<sup>x</sup> = 2, and K disappears.</li>' +
+        '<li><b>More doublings:</b> 4 times after 2T ≈ 23.8 years and 8 times after 3T ≈ 35.7 years. So x ≈ 3 · 12 = 36 solves 1.06<sup>x</sup> = 8 in your head. The gaps between the doublings are equal.</li>' +
+        '<li><b>The rule of 72</b> is almost exact around 6–10 %. At low rates it gives slightly too long a time (1 %: 72 against 69.7 years), at high rates too short (25 %: 2.9 against 3.1 years).</li>' +
+        '<li><b>The curve</b> crosses 72 just below 8 %. As the rate approaches zero, the product approaches 100 · ln 2 ≈ 69.3, which is why some people use a rule of 70 for low rates. No student needs the logarithm here; it is enough to see that the curve is not horizontal.</li>' +
+        '<li><b>The reflection</b> is the heart of the project question about the added value of technology. GeoGebra shows the relationship and how the point of intersection moves when the rate changes; the spreadsheet shows the amount as it actually stands in the account. A good answer names both what the tool does for the student and what the student must understand themselves.</li>' +
+        '</ol>' +
+        '<p>The GeoGebra files can be downloaded with the buttons below the applets and added to a GeoGebra Book. Sliders and checkboxes are inside the files. The text in the files is in the language the page is shown in.</p>'
+    }
+  };
+
+  var FRAGOR = [
+    { id: 'g1', sv: 'Ställ in räntesatsen på 6 %. Efter hur många år har pengarna fördubblats enligt grafen? Jämför med vad ni fick i Räntelabbet. Slå sedan på <i>Visa beloppet vid varje årsskifte</i>. När finns pengarna faktiskt på kontot, och varför skiljer det sig?',
+      en: 'Set the interest rate to 6 %. After how many years has the money doubled according to the graph? Compare with what you found in the Interest Lab. Then turn on <i>Show the amount at the end of each year</i>. When is the money actually in the account, and why is there a difference?' },
+    { id: 'g2', sv: 'Ändra insättningen men behåll räntan. Vad händer med grafen, och vad händer med fördubblingstiden? Förklara varför.',
+      en: 'Change the deposit but keep the rate. What happens to the graph, and what happens to the doubling time? Explain why.' },
+    { id: 'g3', sv: 'Slå på <i>Visa fler fördubblingar</i>. Hur lång tid tar det att få fyra gånger och åtta gånger pengarna vid 6 %? Använd det för att lösa 1,06<sup>x</sup> = 8 i huvudet.',
+      en: 'Turn on <i>Show more doublings</i>. How long does it take to get four times and eight times the money at 6 %? Use this to solve 1.06<sup>x</sup> = 8 in your head.' },
+    { id: 'g4', sv: 'Slå på <i>Visa 72-regeln</i> och dra i räntan från 1 % till 25 %. Vid vilka räntor hamnar den ihåliga punkten nästan på skärningspunkten? Åt vilket håll slår regeln fel vid låga och vid höga räntor?',
+      en: 'Turn on <i>Show the rule of 72</i> and drag the rate from 1 % to 25 %. At which rates does the hollow point land almost on the point of intersection? In which direction is the rule wrong at low and at high rates?' }
+  ];
+  var FRAGOR2 = [
+    { id: 'g5', sv: 'Vid vilken räntesats stämmer 72-regeln exakt? Vilket tal närmar sig kurvan när räntan blir mycket låg, och vilket tal skulle ni använda i regeln då?',
+      en: 'At which interest rate is the rule of 72 exact? Which number does the curve approach when the rate becomes very low, and which number would you use in the rule then?' },
+    { id: 'g6', sv: 'Ni har nu arbetat med kalkylark, Räntelabbet och GeoGebra. Vad visade GeoGebra som de andra inte visade, och vad visade kalkylarket bättre? Vad var ni tvungna att förstå själva?',
+      en: 'You have now worked with a spreadsheet, the Interest Lab and GeoGebra. What did GeoGebra show that the others did not, and what did the spreadsheet show better? What did you have to understand yourselves?' }
+  ];
+
+  function t(nyckel) { return TEXT[nyckel][SPRAK]; }
+  function tal(x, d) {
+    return x.toLocaleString(SPRAK === 'sv' ? 'sv-SE' : 'en-GB', { minimumFractionDigits: d, maximumFractionDigits: d });
+  }
+
+  document.querySelectorAll('[data-t]').forEach(function (el) { el.innerHTML = t(el.getAttribute('data-t')); });
+  if (SPRAK === 'en') {
+    document.getElementById('lank-ovning').href = 'doubling.html';
+    document.getElementById('lank-sprak').href = 'fordubbling-geogebra.html';
+  }
+
+  // ---------- Frågorna ----------
+  var LAGRING = 'fordubbling-geogebra-' + SPRAK;
+  var sparat = {};
+  try { sparat = JSON.parse(localStorage.getItem(LAGRING) || '{}'); } catch (e) { sparat = {}; }
+  function spara() { try { localStorage.setItem(LAGRING, JSON.stringify(sparat)); } catch (e) {} }
+  var nr = 0;
+  function byggFragor(lista, behallare) {
+    lista.forEach(function (f) {
+      nr++;
+      var div = document.createElement('div');
+      div.className = 'fraga';
+      div.innerHTML = '<p class="q"><span class="qn">' + nr + '</span><span>' + f[SPRAK] + '</span></p>' +
+        '<textarea id="' + f.id + '" aria-label="' + t('fraga') + ' ' + nr + '"></textarea>';
+      behallare.appendChild(div);
+      var ta = div.querySelector('textarea');
+      ta.value = sparat[f.id] || '';
+      ta.addEventListener('input', function () { sparat[f.id] = ta.value; spara(); });
+    });
+  }
+  byggFragor(FRAGOR, document.getElementById('fragor'));
+  byggFragor(FRAGOR2, document.getElementById('fragor-2'));
+
+  document.getElementById('kopiera').addEventListener('click', function () {
+    var rader = [document.title, ''];
+    FRAGOR.concat(FRAGOR2).forEach(function (f, i) {
+      rader.push(t('fraga') + ' ' + (i + 1) + ': ' + (document.getElementById(f.id).value || ''));
+    });
+    var st = document.getElementById('kopiera-status');
+    var text = rader.join('\n');
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(function () { st.textContent = t('kopierat'); }, function () { st.textContent = t('kopieraFel'); });
+    } else { st.textContent = t('kopieraFel'); }
+  });
+  document.getElementById('skriv-ut').addEventListener('click', function () { window.print(); });
+
+  // ---------- GeoGebra ----------
+  var api1 = null, api2 = null;
+
+  function storlek(id) {
+    // GeoGebra sätter en fast bredd på behållaren, så mät kortet runt den.
+    var kort = document.getElementById(id).parentElement;
+    var w = Math.max(280, kort.clientWidth - 28);
+    return { w: w, h: w < 560 ? 380 : 460 };
+  }
+
+  function stil(api, namn, farg, tjocklek, streckad) {
+    api.setColor(namn, farg[0], farg[1], farg[2]);
+    if (tjocklek) api.setLineThickness(namn, tjocklek);
+    if (streckad) api.setLineStyle(namn, 1);
+  }
+  var BLA = [28, 61, 107], ROD = [200, 50, 74], GRON = [47, 107, 79], GRA = [105, 101, 92];
+
+  function rubrikObjekt(api, namn, text) {
+    api.setCaption(namn, text);
+    api.setLabelStyle(namn, 3);
+    api.setLabelVisible(namn, true);
+  }
+
+  function bygg1(api) {
+    var c = [
+      'K = Slider(1000, 100000, 1000, 1, 180, false, true, false, false)',
+      'r = Slider(1, 25, 0.5, 1, 180, false, true, false, false)',
+      'visaÅr = Checkbox()',
+      'visa72 = Checkbox()',
+      'visaFler = Checkbox()',
+      'f(x) = If(x >= 0, K (1 + r / 100)^x)',
+      'T = ln(2) / ln(1 + r / 100)',
+      'd: y = 2K',
+      'S = (T, 2K)',
+      'v = Segment((T, 0), S)',
+      'år = Sequence((n, K (1 + r / 100)^n), n, 0, 160)',
+      'R = (72 / r, 2K)',
+      'd4: y = 4K',
+      'd8: y = 8K',
+      'S4 = (2T, 4K)',
+      'S8 = (3T, 8K)',
+      'v4 = Segment((2T, 0), S4)',
+      'v8 = Segment((3T, 0), S8)'
+    ];
+    c.forEach(function (k) { api.evalCommand(k); });
+    api.setValue('K', 10000);
+    api.setValue('r', 6);
+    api.setValue('visaÅr', 0);
+    api.setValue('visa72', 0);
+    api.setValue('visaFler', 0);
+    api.setVisible('T', false);
+
+    ['år'].forEach(function (n) { api.evalCommand('SetConditionToShowObject(' + n + ', visaÅr)'); });
+    api.evalCommand('SetConditionToShowObject(R, visa72)');
+    ['d4', 'd8', 'S4', 'S8', 'v4', 'v8'].forEach(function (n) { api.evalCommand('SetConditionToShowObject(' + n + ', visaFler)'); });
+
+    stil(api, 'f', BLA, 6);
+    stil(api, 'd', ROD, 4, true);
+    stil(api, 'd4', ROD, 2, true);
+    stil(api, 'd8', ROD, 2, true);
+    stil(api, 'v', GRA, 3, true);
+    stil(api, 'v4', GRA, 2, true);
+    stil(api, 'v8', GRA, 2, true);
+    stil(api, 'S', ROD); api.setPointSize('S', 6);
+    stil(api, 'S4', ROD); api.setPointSize('S4', 5);
+    stil(api, 'S8', ROD); api.setPointSize('S8', 5);
+    stil(api, 'år', BLA); api.setPointSize('år', 3);
+    stil(api, 'R', GRON); api.setPointSize('R', 6); api.setPointStyle('R', 2);
+    ['f', 'v', 'v4', 'v8', 'år', 'T'].forEach(function (n) { api.setLabelVisible(n, false); });
+    ['S', 'S4', 'S8', 'R', 'år', 'f', 'd', 'd4', 'd8', 'v', 'v4', 'v8'].forEach(function (n) { api.setFixed(n, true, false); });
+
+    rubrikObjekt(api, 'K', t('gK'));
+    rubrikObjekt(api, 'r', t('gR'));
+    api.setLabelStyle('K', 9);
+    api.setLabelStyle('r', 9);
+    rubrikObjekt(api, 'visaÅr', t('gVisaAr'));
+    rubrikObjekt(api, 'visa72', t('gVisa72'));
+    rubrikObjekt(api, 'visaFler', t('gVisaFler'));
+    // Linjen y = 2K får ingen etikett: den krockar med y-axelns tal.
+    rubrikObjekt(api, 'S', t('gS'));
+    rubrikObjekt(api, 'R', t('gR72'));
+    rubrikObjekt(api, 'S4', '4K');
+    rubrikObjekt(api, 'S8', '8K');
+    api.setLabelVisible('d', false);
+    api.setLabelVisible('d4', false);
+    api.setLabelVisible('d8', false);
+
+    api.evalCommand('SetCoords(K, 40, 30)');
+    api.evalCommand('SetCoords(r, 40, 68)');
+    api.evalCommand('SetCoords(visaÅr, 30, 86)');
+    api.evalCommand('SetCoords(visa72, 30, 114)');
+    api.evalCommand('SetCoords(visaFler, 30, 142)');
+
+    api.setAxisLabels(1, t('gXaxel'), t('gYaxel'));
+    api.setGridVisible(true);
+    api.setRounding('1');
+    api.setPerspective('G');
+    // På sidan styrs allt av HTML-reglagen under grafen. GeoGebras egna
+    // reglage visas bara i den nedladdade filen (se laddaNer).
+    REGLAGE1.forEach(function (n) { api.setVisible(n, false); });
+    uppdatera();
+  }
+
+  function bygg2(api) {
+    var c = [
+      'r = Slider(1, 25, 0.5, 1, 180, false, true, false, false)',
+      'h(x) = If(0 < x <= 25, x ln(2) / ln(1 + x / 100))',
+      'g: y = 72',
+      'P = (r, h(r))'
+    ];
+    c.forEach(function (k) { api.evalCommand(k); });
+    stil(api, 'h', BLA, 6);
+    stil(api, 'g', ROD, 4, true);
+    stil(api, 'P', ROD); api.setPointSize('P', 6);
+    api.setFixed('P', true, false);
+    api.setFixed('h', true, false);
+    api.setFixed('g', true, false);
+    api.setLabelVisible('h', false);
+    rubrikObjekt(api, 'r', t('gR'));
+    api.setLabelStyle('r', 9);
+    rubrikObjekt(api, 'g', '72');
+    api.setCaption('P', '%y');
+    api.setLabelStyle('P', 3);
+    api.setLabelVisible('P', true);
+    api.evalCommand('SetCoords(r, 40, 30)');
+    api.setAxisLabels(1, t('gX2'), t('gY2'));
+    api.setGridVisible(true);
+    api.setRounding('1');
+    api.setPerspective('G');
+    api.setVisible('r', false);
+    uppdatera();
+  }
+
+  // ---------- Läget och HTML-reglagen ----------
+  var REGLAGE1 = ['K', 'r', 'visaÅr', 'visa72', 'visaFler'];
+  var lage = { K: 10000, r: 6, ar: false, r72: false, fler: false };
+  var $ = function (id) { return document.getElementById(id); };
+
+  function vy1(medPlats) {
+    var T = Math.log(2) / Math.log(1 + lage.r / 100);
+    var xmax = Math.max(8, (lage.fler ? 3.25 : 1.6) * Math.max(T, 72 / lage.r));
+    // medPlats: lämna plats överst till vänster för GeoGebras egna reglage.
+    var ymax = (lage.fler ? (medPlats ? 12 : 8.8) : (medPlats ? 3.4 : 2.6)) * lage.K;
+    api1.setCoordSystem(-0.07 * xmax, xmax, -0.08 * ymax, ymax);
+  }
+  var VY2 = [-1.5, 26.5, 66.8, 79.5];
+
+  function uppdatera() {
+    var K = lage.K, r = lage.r;
+    var T = Math.log(2) / Math.log(1 + r / 100);
+    var regel = 72 / r, fel = regel - T;
+    $('ut-k').textContent = tal(K, 0) + ' kr';
+    $('ut-r').textContent = $('ut-r2').textContent = tal(r, 1) + ' %';
+    $('av-r').textContent = tal(r, 1) + ' %';
+    $('av-t').textContent = tal(T, 1) + ' ' + t('ar');
+    $('av-hela').textContent = Math.ceil(T - 1e-9) + ' ' + t('ar');
+    $('av-72').textContent = tal(regel, 1) + ' ' + t('ar');
+    $('av-fel').textContent = (fel > 0.05 ? '+' : '') + tal(fel, 1) + ' ' + t('ar');
+    $('av-fel-ruta').className = Math.abs(fel) >= 0.15 ? 'varn' : '';
+    if (api1) {
+      api1.setValue('K', K);
+      api1.setValue('r', r);
+      api1.setValue('visaÅr', lage.ar ? 1 : 0);
+      api1.setValue('visa72', lage.r72 ? 1 : 0);
+      api1.setValue('visaFler', lage.fler ? 1 : 0);
+      vy1(false);
+    }
+    if (api2) {
+      api2.setValue('r', r);
+      api2.setCoordSystem(VY2[0], VY2[1], VY2[2], VY2[3]);
+    }
+  }
+
+  $('in-k').addEventListener('input', function () { lage.K = +this.value; uppdatera(); });
+  [$('in-r'), $('in-r2')].forEach(function (el) {
+    el.addEventListener('input', function () {
+      lage.r = +this.value;
+      $('in-r').value = $('in-r2').value = this.value;
+      uppdatera();
+    });
+  });
+  $('in-ar').addEventListener('change', function () { lage.ar = this.checked; uppdatera(); });
+  $('in-72').addEventListener('change', function () { lage.r72 = this.checked; uppdatera(); });
+  $('in-fler').addEventListener('change', function () { lage.fler = this.checked; uppdatera(); });
+  [['in-k', 'gK'], ['in-r', 'gR'], ['in-r2', 'gR']].forEach(function (p) { $(p[0]).setAttribute('aria-label', t(p[1])); });
+  uppdatera();
+
+  function starta(id, bygg, satt) {
+    var s = storlek(id);
+    var app = new GGBApplet({
+      appName: 'classic',
+      id: id.replace('-', ''),
+      width: s.w,
+      height: s.h,
+      language: SPRAK,
+      showToolBar: false,
+      showAlgebraInput: false,
+      showMenuBar: false,
+      showResetIcon: false,
+      enableRightClick: false,
+      enableShiftDragZoom: true,
+      showZoomButtons: true,
+      showFullscreenButton: true,
+      borderColor: '#FFFDF9',
+      appletOnLoad: function (api) { satt(api); bygg(api); }
+    }, true);
+    app.inject(id);
+  }
+
+  function laddaNer(api, filnamn, statusId) {
+    var st = document.getElementById(statusId);
+    if (!api) { st.textContent = t('laddar'); return; }
+    // Den nedladdade filen ska fungera fristående: visa GeoGebras egna
+    // reglage och lämna plats för dem, spara, och återställ sedan sidan.
+    var reglage = api === api1 ? REGLAGE1 : ['r'];
+    reglage.forEach(function (n) { api.setVisible(n, true); });
+    if (api === api1) vy1(true); else api.setCoordSystem(VY2[0], VY2[1], VY2[2], VY2[3] + 3);
+    api.getBase64(function (b64) {
+      reglage.forEach(function (n) { api.setVisible(n, false); });
+      uppdatera();
+      var bin = atob(b64), u8 = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([u8], { type: 'application/vnd.geogebra.file' }));
+      a.download = filnamn;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+    });
+  }
+  var FIL = SPRAK === 'sv' ? ['fordubbling-graf.ggb', 'fordubbling-72-regeln.ggb'] : ['doubling-graph.ggb', 'doubling-rule-of-72.ggb'];
+  document.getElementById('ladda-1').addEventListener('click', function () { laddaNer(api1, FIL[0], 'status-1'); });
+  document.getElementById('ladda-2').addEventListener('click', function () { laddaNer(api2, FIL[1], 'status-2'); });
+
+  if (typeof GGBApplet !== 'function') {
+    document.getElementById('ggb-1').textContent = t('ingenGgb');
+    document.getElementById('ggb-2').textContent = t('ingenGgb');
+    return;
+  }
+  starta('ggb-1', bygg1, function (a) { api1 = a; });
+  starta('ggb-2', bygg2, function (a) { api2 = a; });
+
+  var vantar = null;
+  window.addEventListener('resize', function () {
+    clearTimeout(vantar);
+    vantar = setTimeout(function () {
+      if (api1) { var s1 = storlek('ggb-1'); api1.setSize(s1.w, s1.h); }
+      if (api2) { var s2 = storlek('ggb-2'); api2.setSize(s2.w, s2.h); }
+      uppdatera();
+    }, 200);
+  });
+})();
+</script>
+</body>
+</html>

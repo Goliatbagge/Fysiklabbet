@@ -55,6 +55,12 @@
         const EXITTICKETS = window.EXITTICKETS || {};
         const OVNINGSBLAD = window.OVNINGSBLAD || {};
         const VIS_INDEX = window.VISUALISERINGAR_INDEX || {};
+        // Undersökningar: fristående interaktiva lektionspass (helskärmssteg
+        // där eleverna laborerar, svarar och får respons), en per avsnitt.
+        // Kortet "Undersökning" visas BARA där det finns en (inget "Kommer snart").
+        const UNDERSOKNINGAR = {
+            'ma1c-3.4': { href: 'utkast/fordubbling.html', hrefEn: 'utkast/doubling.html', meta: 'Fördubbla pengarna · 60 min' },
+        };
 
         // Matematik nivå 1b delar innehåll med 1c (se MA1B_SPEC i
         // data/katalog.js): spegla teori, övningar, exit tickets och
@@ -75,6 +81,7 @@
             if (EXITTICKETS[bId] === undefined && EXITTICKETS[cId] !== undefined) EXITTICKETS[bId] = EXITTICKETS[cId];
             if (OVNINGSBLAD[bId] === undefined && OVNINGSBLAD[cId] !== undefined) OVNINGSBLAD[bId] = OVNINGSBLAD[cId];
             if (VIS_INDEX[bId] === undefined && VIS_INDEX[cId] !== undefined) VIS_INDEX[bId] = VIS_INDEX[cId];
+            if (UNDERSOKNINGAR[bId] === undefined && UNDERSOKNINGAR[cId] !== undefined) UNDERSOKNINGAR[bId] = UNDERSOKNINGAR[cId];
         }
 
         // --- Skydda math-block ($$..$$ och $..$) från markdown-parsern.
@@ -3362,6 +3369,7 @@
             // visualisering (inget "Kommer snart" — de flesta avsnitt ska
             // inte ha något kort alls).
             const vis = tid ? VIS_INDEX[tid] : null;
+            const undersokning = tid ? UNDERSOKNINGAR[tid] : null;
             // Fördjupning-kortet renderas BARA när avsnittets md-fil har minst
             // ett ::: fördjupning-block (inget "Kommer snart" — de flesta
             // avsnitt ska inte ha kortet alls).
@@ -3736,6 +3744,14 @@
                                                             <div className="lab-card-title">Visualisering</div>
                                                             <div className="lab-card-meta">{vis.titel}</div>
                                                         </button>
+                                                    )}
+                                                    {undersokning && (
+                                                        <a className="lab-card lab-card-clickable"
+                                                            href={(document.documentElement.lang === 'en' && undersokning.hrefEn) || undersokning.href}>
+                                                            <div className="lab-card-tag">Laborera</div>
+                                                            <div className="lab-card-title">Undersökning</div>
+                                                            <div className="lab-card-meta">{undersokning.meta}</div>
+                                                        </a>
                                                     )}
                                                     {harFordjupning && (
                                                         <button type="button"

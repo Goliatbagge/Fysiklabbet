@@ -39307,27 +39307,27 @@ Vi kontrollerar med $x$-termerna: $3 + ab = 3 + 2 \\cdot 3 = 9$, vilket stämmer
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `Lös ekvationen $x^3 = 125$.`,
+            question: `Lös ekvationen $x^5 = 243$.`,
             choices: [
-                `$x_1 = -5$ och $x_2 = 5$`,
-                `$x = 25$`,
-                `$x = 5$`,
-                `$x \\approx 41{,}7$`,
+                `$x_1 = -3$ och $x_2 = 3$`,
+                `$x = 48{,}6$`,
+                `$x = 3$`,
+                `$x \\approx 15{,}6$`,
             ],
             correct: 2,
-            solution: `Exponenten 3 är udda, så ekvationen har en lösning. Vi tar tredjeroten ur båda leden.
+            solution: `Exponenten 5 är udda, så ekvationen har en lösning. Vi tar femteroten ur båda leden.
 
 $$
 \\begin{aligned}
-x^3 &= 125 \\\\
-x &= \\sqrt[3]{125} \\\\
-x &= 5
+x^5 &= 243 \\\\
+x &= \\sqrt[5]{243} \\\\
+x &= 3
 \\end{aligned}
 $$
 
-Kontroll: $5 \\cdot 5 \\cdot 5 = 125$. Talet $-5$ är ingen lösning, eftersom $(-5)^3 = -125$.
+Kontroll: $3 \\cdot 3 \\cdot 3 \\cdot 3 \\cdot 3 = 243$. Talet $-3$ är ingen lösning, eftersom $(-3)^5 = -243$.
 
-**Svar:** $x = 5$`,
+**Svar:** $x = 3$`,
         },
         {
             level: 1,

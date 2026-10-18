@@ -50949,7 +50949,7 @@
   }
 
   /* ---------------- scen: enkla polynomekvationer (ma3c-1.2 ex 1) -----
-   * x³ = 64, 2x⁴ = 162 och x³ + 8 = 0. Potensen görs ensam (båda led
+   * x⁵ = 32, 2x⁴ = 162 och x³ + 8 = 0. Potensen görs ensam (båda led
    * eller väggen), roten skrivs som egen rad och värdet på nästa. */
   function layoutEnklapolyekv(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
@@ -50959,28 +50959,29 @@
 
     /* ---- a) ---- */
     y = 110;
-    T.str('a) x^3=64', padL, y);
+    T.str('a) x^5=32', padL, y);
     T.stepEnd();
 
     tanke(y, [
-      [['Exponenten 3 är udda. Då finns']],
-      [['en lösning: tredjeroten ur 64.']]
+      [['Exponenten 5 är udda. Då finns']],
+      [['en lösning: femteroten ur 32.']]
     ]);
     y += 2.6 * F;
     xx = T.str('x=', xc, y);
-    T.rot('64', xx, y, 3);
+    T.rot('32', xx, y, 5);
     T.stepEnd();
 
     tanke(y, [
-      [['Vilket tal gånger sig självt tre']],
-      [['gånger blir 64? 4·4·4=64.']]
+      [['Vilket tal multiplicerat med sig']],
+      [['självt fem gånger blir 32?']],
+      [['2·2·2·2·2=32.']]
     ]);
     y += 2.4 * F;
-    T.str('x=4', xc, y);
+    T.str('x=2', xc, y);
     T.stepEnd();
 
     y += 2.2 * F;
-    xe = T.str('Svar: x=4', padL, y);
+    xe = T.str('Svar: x=2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

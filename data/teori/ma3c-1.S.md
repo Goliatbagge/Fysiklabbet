@@ -33,6 +33,8 @@ problem.
   det andra. En ekvation av grad $n$ har högst $n$ reella lösningar.
 - **polynomfunktion**: en funktion $y = p(x)$ där $p(x)$ är ett polynom.
   Grafen är kontinuerlig, en kurva utan hopp eller hål.
+- **faktorsatsen**: om $p(a) = 0$ så är $(x - a)$ en faktor i polynomet
+  $p(x)$.
 - **rationellt uttryck**: ett uttryck med ett polynom i täljaren och ett
   polynom i nämnaren, till exempel $\dfrac{5x^2 - 5x}{3x - 3}$.
 - **förlänga**: multiplicera både täljare och nämnare med samma tal eller

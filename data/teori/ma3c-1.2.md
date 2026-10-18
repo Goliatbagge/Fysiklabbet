@@ -28,7 +28,9 @@ En polynomekvation av grad $n$ har **högst** $n$ reella lösningar.
 
 ## Enkla polynomekvationer
 
-En ekvation som bara innehåller en potens av $x$ och en konstant kan skrivas
+I Matematik nivå 1c löste vi enkla andra- och tredjegradsekvationer som
+$x^2 = 9$ och $x^3 = -27$. Samma metod fungerar för alla exponenter. En
+ekvation som bara innehåller en potens av $x$ och en konstant kan skrivas
 om till formen $x^n = a$. Den löses genom att vi tar $n$:te roten ur båda
 leden. Om exponenten är jämn ger både ett positivt och ett negativt tal
 samma potens, till exempel $3^4 = 81$ och $(-3)^4 = 81$, och då finns två
@@ -41,25 +43,27 @@ lösningar.
 :::
 
 ::: exempel "Exempel 1 — Enkla polynomekvationer"
-**Lös ekvationerna.<br>a)&nbsp;$x^3 = 64$&emsp;&emsp;b)&nbsp;$2x^4 = 162$&emsp;&emsp;c)&nbsp;$x^3 + 8 = 0$**
+**Lös ekvationerna.<br>a)&nbsp;$x^5 = 32$&emsp;&emsp;b)&nbsp;$2x^4 = 162$&emsp;&emsp;c)&nbsp;$x^3 + 8 = 0$**
 
 ::: handskrift
 typ: enklapolyekv
 :::
 
 ::: textlosning
-**a)** Exponenten 3 är udda, så det finns en lösning. Vi tar tredjeroten ur
+**a)** Exponenten 5 är udda, så det finns en lösning. Vi tar femteroten ur
 båda leden.
 
 $$
 \begin{aligned}
-x^3 &= 64 \\
-x &= \sqrt[3]{64} \\
-x &= 4
+x^5 &= 32 \\
+x &= \sqrt[5]{32} \\
+x &= 2
 \end{aligned}
 $$
 
-**Svar:** $x = 4$
+Kontroll: $2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 = 32$.
+
+**Svar:** $x = 2$
 
 **b)** Först divideras båda leden med 2. Exponenten 4 är jämn och högerledet
 positivt, så det finns två lösningar.
@@ -208,8 +212,15 @@ y: -6, 6
 
 Grafritaren visar sambandet som gör polynom så användbara: **varje faktor
 $(x - a)$ i polynomet ger nollstället $x = a$**, eftersom faktorn blir noll
-just där. Det gäller också omvänt. Om $p(a) = 0$ så är $(x - a)$ en faktor i
-polynomet. Kan vi alla nollställen kan vi alltså faktorisera polynomet.
+just där. Det gäller också omvänt, och det omvända sambandet har ett eget
+namn: **faktorsatsen**.
+
+::: formel "Faktorsatsen"
+Om $x = a$ är ett nollställe till polynomet $p(x)$, det vill säga om
+$p(a) = 0$, så är $(x - a)$ en faktor i polynomet.
+:::
+
+Kan vi alla nollställen kan vi alltså faktorisera hela polynomet.
 
 ::: formel "Faktorisera med nollställen"
 Ett polynom av grad 3 med nollställena $x_1$, $x_2$ och $x_3$ kan skrivas
@@ -297,7 +308,7 @@ $$
 :::
 
 ::: sampunkt "Faktorer och nollställen"
-- Faktorn $(x - a)$ ger nollstället $x = a$, och tvärtom.
+- **Faktorsatsen:** är $p(a) = 0$ så är $(x - a)$ en faktor, och tvärtom.
 - $p(x) = k(x - x_1)(x - x_2)(x - x_3)$, där $k$ är koefficienten för högsta graden.
 - Nollställena syns där grafen skär $x$-axeln.
 :::

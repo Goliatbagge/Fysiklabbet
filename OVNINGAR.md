@@ -14,12 +14,12 @@ window.OVNINGAR = {
 
 ## Nivåer
 
-- **Nivå 1** — Grundläggande (E-nivå). Bara SI-omvandling och insättning i
+- **Nivå 1** — Grund. Bara SI-omvandling och insättning i
   en formel (eventuellt efter omformning). Exempel: omvandla minuter → timmar
   och räkna $v = s/t$.
-- **Nivå 2** — Medel (C-nivå). Lösningen kräver kombination av två (eller
+- **Nivå 2** — Mellan. Lösningen kräver kombination av två (eller
   flera) formler i flera steg. Inte alldeles för rätt fram.
-- **Nivå 3** — Avancerad (A-nivå). Tre eller fler formler/koncept måste
+- **Nivå 3** — Avancerad. Tre eller fler formler/koncept måste
   kombineras i längre kedjor, eller så krävs trigonometri/vinklar,
   ekvationssystem med två obekanta, algebraisk härledning av en formel,
   modelleringsantaganden, eller ett klassiskt fall där den "uppenbara"
@@ -122,13 +122,13 @@ N3 = konceptuell/strukturell insikt, INTE beräkningstyngd; digitala hjälpmedel
 gör log/andragrad/inversering rutin. Men *genrerna* skiljer sig p.g.a.
 innehållet. Konkretiserat för Fysik 2:
 
-- **Nivå 1 (E):** En formel, direkt insättning (ev. efter omvandling eller
+- **Nivå 1 (Grund):** En formel, direkt insättning (ev. efter omvandling eller
   omformning). T.ex. $\omega = 2\pi/T$, $F = mv^2/r$ (med km/h → m/s),
   $M = F\cdot l$, $v = f\lambda$, pendelns/fjäderns period, $I = P/A$,
   decibel ur formel, $\mathbb{E} = U/d$, $F = BIl$. Även ren begrepps-
   identifikation (centripetalkraftens riktning, "vilka påståenden stämmer").
 
-- **Nivå 2 (C):** 2–3 formler/steg i följd; inte självklart vilka. T.ex.
+- **Nivå 2 (Mellan):** 2–3 formler/steg i följd; inte självklart vilka. T.ex.
   centripetalacceleration på ekvatorn ($T \to \omega \to a$), kaströrelse
   "klarar han ravinen?" (jämför falltid och horisontell sträcka),
   momentjämvikt "välter plankan?", växelströmsreaktans + ström,
@@ -137,7 +137,7 @@ innehållet. Konkretiserat för Fysik 2:
   våg i rör. **En *kort/standard* härledning är N2** (t.ex. visa att
   kastbanan är en parabel är ★★☆ i boken — inte ★★★).
 
-- **Nivå 3 (A):** kräver en *insikt/struktur* innan räkningen. Fysik 2-genrer:
+- **Nivå 3 (Avancerad):** kräver en *insikt/struktur* innan räkningen. Fysik 2-genrer:
   - **Jämviktssystem med moment OCH kraft samtidigt:** stege mot vägg utan
     väggfriktion, bom/lykta i wire med vinkel, flaggstång (flera ekvationer).
   - **Kombinera ≥2 huvudprinciper:** gravitation + cirkelrörelse

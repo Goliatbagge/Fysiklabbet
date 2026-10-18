@@ -12626,10 +12626,10 @@
     y = 165;
     T.str('Förändringsfaktor 2010 → 2023', padL, y - 2.1 * F, null, 0.62);
     xx = T.str('ff=', padL, y);
-    xx = T.fracH('391,3', '303,5', xx, y);
+    xx = T.fracH('403,7', '303,5', xx, y);
     T.stepEnd();
 
-    T.str('=1,2892...', xx, y);
+    T.str('=1,3301...', xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -12641,10 +12641,10 @@
     y += 3.8 * F;
     T.str('Lönen i 2023 års penningvärde', padL, y - 2.1 * F, null, 0.62);
     xx = T.str('21 500·', padL, y);
-    xx = T.fracH('391,3', '303,5', xx, y);
+    xx = T.fracH('403,7', '303,5', xx, y);
     T.stepEnd();
 
-    T.str('=27 719,7...', xx, y);
+    T.str('=28 598,1...', xx, y);
     T.stepEnd();
 
     tanke(y, [
@@ -12655,11 +12655,11 @@
     /* Avrundningen radbryts FÖRE ledet (börjar med operatorn) — på samma
      * rad hade den nått in i högerpilens zon vid arkkanten. */
     y += 2.6 * F;
-    T.str('≈27 700', padL + 30, y);
+    T.str('≈28 600', padL + 30, y);
     T.stepEnd();
 
     y += 3.0 * F;
-    xe = T.str('Svar: Ca 27 700 kr', padL, y);
+    xe = T.str('Svar: Cirka 28 600 kr', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -33318,6 +33318,408 @@
       [['— rimligt!']]
     ]));
     T.underline(T.str('Svar: 2,1 m/s^2', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ================= scener: sneda spännkrafter (fy1-3.8) ============
+   * Uppgiftens figur (snörena, föremålet, vinklarna mot taket och
+   * massan) står färdig från början. Pennan ritar kraftfiguren bredvid,
+   * med skalenliga pilar: tyngdkraften nedåt från punkten och
+   * spännkrafterna längs snörena. Vinkeln vid föremålet är densamma som
+   * mot taket, eftersom det vågräta strecket genom punkten är parallellt
+   * med taket. */
+  var SN_RAD = Math.PI / 180;
+  /* punkten längs en riktning som lutar deg grader mot det vågräta,
+   * uppåt åt vänster (sida -1) eller uppåt åt höger (sida 1) */
+  function snSnett(P, deg, len, sida) {
+    return [P[0] + sida * len * Math.cos(deg * SN_RAD),
+            P[1] - len * Math.sin(deg * SN_RAD)];
+  }
+  /* vinkelbåge vid hörnet c mellan det vågräta och ett ben som lutar deg
+   * grader UPPÅT åt sidan sida (vid föremålet) */
+  function snBageUpp(T, c, deg, r, sida) {
+    if (sida < 0) vinkelBage(T, c, Math.PI, Math.PI + deg * SN_RAD, r);
+    else vinkelBage(T, c, -deg * SN_RAD, 0, r);
+  }
+  /* vinkelbåge vid taket: mellan taket och ett snöre som går NEDÅT åt
+   * sidan sida */
+  function snBageTak(T, c, deg, r, sida) {
+    if (sida > 0) vinkelBage(T, c, 0, deg * SN_RAD, r);
+    else vinkelBage(T, c, Math.PI - deg * SN_RAD, Math.PI, r);
+  }
+  function snTak(T, x0, x1, y) {
+    T.line([x0, y], [x1, y]);
+    T.hatch([x0, y], [x1, y], Math.round((x1 - x0) / 13));
+  }
+  /* avrundningen fortsätter på raden så långt arket räcker, annars på en
+   * ny rad som börjar med ≈ (pilzonen, se filhuvudet) */
+  function snAvr(T, F, xIns, y, txt) {
+    if (xIns + T.adv(txt) < PAPER_W - 44) { T.str(txt, xIns, y); return y; }
+    y += 2.4 * F;
+    T.str(txt, T.padL + 24, y);
+    return y;
+  }
+  /* bråk där streck och nämnare skrivs i BLÅTT: division i båda led */
+  function snFracB(T, F, numS, denS, x0, yb) {
+    var ybar = yb - 0.34 * F;
+    var nw = T.adv(numS), dw = T.adv(denS);
+    var w = Math.max(nw, dw) + 0.3 * F;
+    T.str(numS, x0 + (w - nw) / 2, ybar - 0.14 * F);
+    T.pause(130);
+    T.line([x0, ybar], [x0 + w, ybar], BLUE);
+    T.pause(130);
+    T.str(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, BLUE);
+    return x0 + w + 1.5;
+  }
+
+  /* ---------------- scen: lampan i två lika snören (fy1-3.8 Ex 1) -----
+   * Symmetriskt fall, 40° mot taket. Skisstekniken ur genomgången:
+   * båda spännkrafterna slutar på en streckad linje halva tyngdkraften
+   * ovanför punkten. 3,2 px/N: F_G 125,7 px, F_S 97,8 px. */
+  function layoutLampasnoren(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var K = [200, 250], yT = 150;
+    var dx = (K[1] - yT) / Math.tan(40 * SN_RAD);
+    var C1 = [K[0] - dx, yT], C2 = [K[0] + dx, yT];
+
+    forritad(T, function () {
+      snTak(T, 50, 350, yT);
+      T.line(C1, K);
+      T.line(C2, K);
+      T.line(K, [K[0], K[1] + 14]);
+      T.line([K[0] - 10, K[1] + 14], [K[0] + 10, K[1] + 14]); /* lampskärmen */
+      T.line([K[0] - 10, K[1] + 14], [K[0] - 28, K[1] + 40]);
+      T.line([K[0] + 10, K[1] + 14], [K[0] + 28, K[1] + 40]);
+      T.line([K[0] - 28, K[1] + 40], [K[0] + 28, K[1] + 40]);
+      snBageTak(T, C1, 40, 34, 1);
+      snBageTak(T, C2, 40, 34, -1);
+      T.lbl('40°', C1[0] + 42, C1[1] + 30, BLUE);
+      T.lbl('40°', C2[0] - 72, C2[1] + 30, BLUE);
+      T.lbl('m=4,0 kg', K[0] + 38, K[1] + 38, BLUE);
+    });
+
+    var P = [530, 300], k = 3.2;
+    var FS = 30.5544 * k, FGl = 39.28 * k;
+    var R = snSnett(P, 40, FS, 1), L = snSnett(P, 40, FS, -1);
+    T.tanke(T.figurBubble(292, [
+      [['Ritar krafterna på lampan']],
+      [['bredvid. Tyngdkraften nedåt,']],
+      [['spännkrafterna längs snörena.']]
+    ], 318));
+    T.dot(P[0], P[1]);
+    T.arrow(P, [P[0], P[1] + FGl], BLUE);
+    T.lbl('F_G', P[0] + 9, P[1] + FGl - 4, BLUE);
+    T.pause(150);
+    T.arrow(P, R, BLUE);
+    T.lbl('F_S', R[0] - 6, R[1] - 14, BLUE);
+    T.pause(150);
+    T.arrow(P, L, BLUE);
+    T.lbl('F_S', L[0] - 18, L[1] - 14, BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Snörena lutar lika mycket, så de']],
+      [['lodräta delarna bär halva F_G']],
+      [['var. Pilarna slutar på den']],
+      [['streckade linjen.']]
+    ], 318));
+    T.dash([L[0] - 14, R[1]], [R[0] + 14, R[1]]);
+    T.pause(150);
+    T.dash([P[0] - 90, P[1]], [P[0] + 100, P[1]]);
+    T.dashArrow([R[0], P[1]], R, BLUE);
+    T.lbl('F_y', R[0] + 8, P[1] - 14, BLUE);
+    T.pause(150);
+    snBageUpp(T, P, 40, 26, 1);
+    T.lbl('40°', P[0] + 30, P[1] - 4, BLUE);
+    T.stepEnd();
+
+    /* ---- komposanten ---- */
+    var y = 456;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv - 0.4 * F), bw, [
+      [['Strecket genom lampan är parallellt']],
+      [['med taket, så vinkeln är 40° även']],
+      [['här. Den lodräta delen står mittemot']],
+      [['vinkeln. Det är sinus.']]
+    ]));
+    T.str('Lodrät komposant ur krafttriangeln', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var r = trigKvot(T, F, { fn: 'sin 40°=', x: padL, y: y,
+      ring: [P[0] + 44, P[1] - 12, 30, 17],
+      num: { txt: 'F_y', ord: 'motstående katet',
+             svep: [[R[0] + 4, P[1] - 4], [R[0] + 4, R[1] + 6]] },
+      den: { txt: 'F_S', ord: 'hypotenusan',
+             svep: [[P[0] + 4, P[1] - 8], [R[0] - 4, R[1] - 2]] } });
+    T.fade(r.ring);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y, 1.05), bw, [
+      [['Multiplicerar båda led med F_S,']],
+      [['så att komposanten blir ensam.']]
+    ]));
+    T.str('⟺F_y=F_S·sin 40°', r.x + 0.3 * F, y);
+    T.stepEnd();
+
+    /* ---- jämvikt i lodled ---- */
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv - 0.4 * F), bw, [
+      [['Lampan hänger stilla. Två lika']],
+      [['stora komposanter F_S·sin 40°']],
+      [['bär tillsammans tyngdkraften.']]
+    ]));
+    T.str('Jämvikt i lodled: två komposanter bär F_G', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    T.fracH('F_G', '2·sin 40°', T.str('2·F_S·sin 40°=F_G⟺F_S=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Tyngdkraften är inte given.']],
+      [['Den räknar jag ut ur massan']],
+      [['i klammern.']]
+    ]));
+    var klam = valueBracket(acts, ['F_G=m·g=4,0 kg·9,82 N/kg=39,28 N'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in F_G ur klammern.']]
+    ]));
+    var xIns = T.str('=30,554... N',
+          T.fracH('39,28', '2·sin 40°', T.str('F_S=', padL, y), y) +
+          0.15 * F, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.9 * F), bw, [
+      [['Först nu avrundar jag. Massan']],
+      [['har två värdesiffror.']]
+    ]));
+    y = snAvr(T, F, xIns, y, '≈31 N');
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Varje snöre bär halva tyngden,']],
+      [['19,64 N, med sin lodräta del.']],
+      [['Snörena lutar, så spännkraften']],
+      [['blir större. Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 31 N', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: lådan i två olika snören (fy1-3.8 Ex 2) -----
+   * Osymmetriskt fall, 50° och 30° mot taket. Spännkrafterna delas upp
+   * i komposanter: de vågräta är lika långa, de lodräta tillsammans lika
+   * långa som F_G. Sedan ekvationssystemet ur (1) x-led och (2) y-led,
+   * som i textlösningen. 3,2 px/N: F_G 157,1, F_S1 138,2, F_S2 102,6 px. */
+  function layoutLadasnoren(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var K = [190, 250], yT = 170;
+    var C1 = [K[0] - (K[1] - yT) / Math.tan(50 * SN_RAD), yT];
+    var C2 = [K[0] + (K[1] - yT) / Math.tan(30 * SN_RAD), yT];
+
+    forritad(T, function () {
+      snTak(T, 60, 360, yT);
+      T.line(C1, K);
+      T.line(C2, K);
+      T.line(K, [K[0], K[1] + 18]);
+      T.rect(K[0] - 24, K[1] + 18, K[0] + 24, K[1] + 52);
+      T.lbl('snöre 1', 52, yT + 40);
+      T.lbl('snöre 2', 262, yT + 64);
+      snBageTak(T, C1, 50, 30, 1);
+      snBageTak(T, C2, 30, 34, -1);
+      T.lbl('50°', C1[0] + 38, C1[1] + 31, BLUE);
+      T.lbl('30°', C2[0] - 80, C2[1] + 24, BLUE);
+      T.lbl('m=5,0 kg', K[0] + 32, K[1] + 46, BLUE);
+    });
+
+    var P = [560, 330], k = 3.2;
+    var T1 = snSnett(P, 50, 43.1778 * k, -1), T2 = snSnett(P, 30, 32.0477 * k, 1);
+    var A1 = [T1[0], P[1]], B2 = [T2[0], P[1]];
+    T.tanke(T.figurBubble(292, [
+      [['Ritar krafterna på lådan']],
+      [['bredvid. Tyngdkraften nedåt,']],
+      [['spännkrafterna längs snörena.']]
+    ], 336));
+    T.dot(P[0], P[1]);
+    T.arrow(P, [P[0], P[1] + 49.1 * k], BLUE);
+    T.lbl('F_G', P[0] + 9, P[1] + 49.1 * k - 4, BLUE);
+    T.pause(150);
+    T.arrow(P, T1, BLUE);
+    T.lbl('F_S_1', T1[0] - 50, T1[1] + 4, BLUE);
+    T.pause(150);
+    T.arrow(P, T2, BLUE);
+    T.lbl('F_S_2', T2[0] + 6, T2[1] - 8, BLUE);
+    T.pause(150);
+    snBageUpp(T, P, 50, 24, -1);
+    snBageUpp(T, P, 30, 30, 1);
+    T.lbl('50°', P[0] - 62, P[1] - 5, BLUE);
+    T.lbl('30°', P[0] + 38, P[1] - 5, BLUE);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Delar upp spännkrafterna. De']],
+      [['vågräta delarna är lika långa,']],
+      [['de lodräta är tillsammans lika']],
+      [['långa som F_G.']]
+    ], 336));
+    T.dashArrow(P, A1, BLUE);
+    T.dashArrow(A1, T1, BLUE);
+    T.pause(150);
+    T.dashArrow(P, B2, BLUE);
+    T.dashArrow(B2, T2, BLUE);
+    T.stepEnd();
+
+    /* ---- ekvationssystemet ---- */
+    var y = 520;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv - 0.4 * F), bw, [
+      [['Lådan står still i sidled. De']],
+      [['vågräta komposanterna ligger']],
+      [['intill vinklarna och fås med']],
+      [['cosinus.']]
+    ]));
+    T.str('Jämvikt vågrätt: vågräta komposanter lika stora',
+          padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    T.str('F_S_1·cos 50°=F_S_2·cos 30°', padL, y);
+    T.str('(1)', 620, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['De lodräta komposanterna står']],
+      [['mittemot vinklarna och bär']],
+      [['tillsammans hela tyngden.']]
+    ]));
+    T.str('Jämvikt lodrätt: lodräta komposanter bär F_G',
+          padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    var y2 = y;
+    var x2a = T.str('F_S_1', padL, y);
+    var x2b = T.str('·sin 50°+F_S_2·sin 30°=', x2a, y);
+    var x2c = T.str('F_G', x2b, y);
+    T.str('(2)', 620, y, null, 0.62);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Tyngdkraften räknar jag ut']],
+      [['direkt.']]
+    ]));
+    var yG = y;
+    var xg0 = padL + T.adv('F_G=m·g=5,0·9,82=');
+    var xg1 = T.str('F_G=m·g=5,0·9,82=49,1 N', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Ur (1) löser jag ut F_S_1 genom']],
+      [['att dela båda led med cos 50°.']]
+    ]));
+    T.str('Löser ut F_S_1 ur (1)', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var y1 = y;
+    var xr = T.fracH('cos 30°', 'cos 50°', T.str('F_S_1=F_S_2·', padL, y), y);
+    var x1a = T.str('=', xr + 0.1 * F, y);
+    var x1m = T.str('1,347...·', x1a, y);
+    var x1b = T.str('F_S_2', x1m, y);
+    T.stepEnd();
+
+    /* insättning i (2): F_S1 och F_G ersätts */
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in F_S_1 och F_G i (2).']],
+      [['Då finns bara F_S_2 kvar.']]
+    ]));
+    var ringar = substRings(acts, [
+      [x1a, x1b, y1, F], [padL, x2a, y2, F],
+      [xg0, xg1, yG, F], [x2b, x2c, y2, F]
+    ]);
+    T.str('1,347...·F_S_2·sin 50°+F_S_2·sin 30°=49,1', padL, y, null, 0.9);
+    fadeRings(acts, ringar);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['1,347... gånger sin 50° blir']],
+      [['1,032..., och sin 30° är 0,5.']]
+    ]));
+    var yS = y;
+    var xs1 = T.str('1,032...·F_S_2', padL, y);
+    var xs2 = T.str('+', xs1, y);
+    var xs3 = T.str('0,5·F_S_2', xs2, y);
+    T.str('=49,1', xs3, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Slår ihop termerna med F_S_2.']]
+    ]));
+    mkSamla(T)(padL, y, [
+      { ringar: [[padL, xs1, yS], [xs2, xs3, yS]], skriv: '1,532...·F_S_2' },
+      { skriv: '=49,1' }
+    ]);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Delar båda led med 1,532..., så']],
+      [['att F_S_2 blir ensamt.']]
+    ]));
+    var xd = snFracB(T, F, '1,532...·F_S_2', '1,532...', padL, y);
+    snFracB(T, F, '49,1', '1,532...', T.str('=', xd + 0.1 * F, y) + 0.1 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    var y9 = y;
+    var x9a = padL + T.adv('F_S_2=');
+    var x9b = T.str('F_S_2=32,047... N', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in F_S_2 i uttrycket']],
+      [['för F_S_1.']]
+    ]));
+    ringar = substRings(acts, [[x9a, x9b, y9, F], [x1m, x1b, y1, F]]);
+    var xIns = T.str('F_S_1=1,347...·32,047...=43,177... N', padL, y);
+    fadeRings(acts, ringar);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 0.9 * F), bw, [
+      [['Först nu avrundar jag. Massan']],
+      [['har två värdesiffror.']]
+    ]));
+    y = snAvr(T, F, xIns, y, '≈43 N');
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['F_S_2 avrundar jag på samma sätt.']]
+    ]));
+    T.str('F_S_2=32,047... N≈32 N', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Det branta snöre 1 bär mest, och']],
+      [['båda är mindre än tyngden 49,1 N.']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: F_S_1≈43 N och F_S_2≈32 N', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -62861,6 +63263,8 @@
                    bokhylla: layoutBokhylla,
                    lutandeplan: layoutLutandeplan,
                    elviralada: layoutElviralada,
+                   lampasnoren: layoutLampasnoren,
+                   ladasnoren: layoutLadasnoren,
                    bollrakt: layoutBollrakt,
                    hissen: layoutHissen,
                    trissor: layoutTrissor,

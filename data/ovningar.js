@@ -2,9 +2,11 @@
 //   window.OVNINGAR[id] = [{ level, question, solution, answer? }, ...]
 //
 // Nivåer:
-//   1 = Grundläggande (E-nivå). Bara SI-omvandling + insättning i formel.
-//   2 = Medelnivå (C-nivå). Kombination av två eller flera formler.
-//   3 = Avancerad (A-nivå). Komplexa flerstegsproblem, generella lösningar.
+//   1 = Grund. Bara SI-omvandling + insättning i formel.
+//   2 = Mellan. Kombination av två eller flera formler.
+//   3 = Avancerad. Komplexa flerstegsproblem, generella lösningar.
+//   (Nivåerna märks aldrig med betygsbokstäverna E, C och A: betyg sätts
+//   på en avslutad kurs, inte på enskilda uppgifter.)
 //
 // Per avsnitt: 3+2+1 (3 st Nivå 1, 2 st Nivå 2, 1 st Nivå 3). För korta
 // avsnitt får principen frångås. Minst en uppgift per formel i avsnittet.
@@ -2938,7 +2940,7 @@ function makeGratingScreen(opts) {
 
 window.OVNINGAR = {
     'fy1-2.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En cyklist cyklar 12 km på 30 min. Beräkna cyklistens medelfart i km/h.`,
@@ -2997,7 +2999,7 @@ $$ t = \\frac{270}{90} = 3{,}0\\ \\mathrm{h} $$
 **Svar:** Resan tar 3,0 timmar.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Tom cyklar 5,0 km på 20 minuter. Sedan promenerar han 2,0 km på 30 minuter. Vilken är hans medelfart i km/h under hela sträckan?`,
@@ -3049,7 +3051,7 @@ $$ v_\\mathrm{m} = \\frac{s_\\mathrm{tot}}{t_\\mathrm{tot}} = \\frac{110}{1{,}30
 **Svar:** Medelfarten är ca 85 km/h. Observera att medelfarten **inte** är genomsnittet av 100 och 60 km/h (= 80 km/h), eftersom hon spenderar olika lång tid på de två sträckorna.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En person springer 100 m på en löparbana i 5,0 m/s. När hon vänder och springer tillbaka samma 100 m är hon tröttare och har medelfarten 4,0 m/s. Vilken är medelfarten under hela sträckan (fram och tillbaka)? Ange svaret i m/s.
@@ -3162,7 +3164,7 @@ Det är just därför fysik fungerar: vi kan förutsäga vad som händer utan at
     // prefix och tiopotenser, v_m = s/t (i exempel 2).
     // ═══════════════════════════════════════════════════════════════════
     'fy1-1.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `I meningen *"sträckan är 2 500 meter"* — vad är **mätetalet**?`,
@@ -3227,7 +3229,7 @@ $$
 **Svar:** 8,9.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En cyklist rullar 1,8 km på 5,5 minuter. Beräkna medelfarten i m/s med **korrekt antal värdesiffror**.`,
@@ -3358,7 +3360,7 @@ Men nu kommer **fällan**: hur skriver vi 150 så att det entydigt har just 3 v�
     // Formler: ρ = m/V samt enhetsomvandling g/cm³ ↔ kg/m³.
     // ═══════════════════════════════════════════════════════════════════
     'fy1-5.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En kub av järn har volymen $1{,}0 \\cdot 10^{-3}\\ \\mathrm{m^3}$ (alltså 1,0 liter) och massan 7,87 kg. Beräkna järnets densitet i kg/m³.`,
@@ -3426,7 +3428,7 @@ $$
 **Svar:** 2 700 kg/m³.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En kub av koppar har sidan 5,00 cm. Kopparns densitet är 8 960 kg/m³. Beräkna kubens massa i kg.`,
@@ -3525,7 +3527,7 @@ Eftersom densitet är en *materialegenskap* som inte beror på föremålets stor
 **Generell slutsats:** Densitetsmätning via vattenförträngning är en icke-förstörande metod att avgöra om ett föremål är av det material det utger sig för att vara — historiskt sett samma metod som ska ha avslöjat Arkimedes "guld-i-kronan"-fall.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En liten kub är gjuten av en legering av **guld** ($\\rho_\\text{guld} = 19{,}3\\ \\mathrm{g/cm^3}$) och **silver** ($\\rho_\\text{silver} = 10{,}5\\ \\mathrm{g/cm^3}$). Kuben har sidan 2,0 cm och den totala massan 130 g. Beräkna hur många **procent av kubens massa** som är guld. Bortse från att volymen kan ändras något vid själva legeringen.`,
@@ -3591,7 +3593,7 @@ $$
     // vektorer (v² = v₁² + v₂²).
     // ═══════════════════════════════════════════════════════════════════
     'fy1-2.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken av följande storheter är en **vektor**?`,
@@ -3656,7 +3658,7 @@ $$
 **Svar:** 20,8 m/s i tågets riktning.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En båt kan ros med farten 3,0 m/s rakt över en bred kanal. Vattnet i kanalen forsar fram med 4,0 m/s längs kanalen. Vilken är båtens **resulterande fart** relativt marken?`,
@@ -3704,7 +3706,7 @@ $$
 **Svar:** Den resulterande farten är ca 257 km/h. Notera att riktningen avviker något åt öster — planet "driver" alltså ur sin kurs om piloten inte korrigerar.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En simmare vill ta sig **rakt över** en 80 m bred flod, från södra till norra stranden. Hennes egen fart i stilla vatten är 1,5 m/s. Strömmen forsar västerut med 0,90 m/s.
@@ -3757,7 +3759,7 @@ $$
     // tangent=momentan).
     // ═══════════════════════════════════════════════════════════════════
     'fy1-2.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ett föremål rör sig med konstant hastighet enligt *s-t*-diagrammet nedan. Avläs lämpliga punkter och beräkna hastigheten i m/s.
@@ -3832,7 +3834,7 @@ $$
 **Svar:** Förflyttningen är 163 km (avrundat till 3 vs).`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bertil cyklar från affären till sitt hem. Vid *t*₁ = 0 är han vid läget *s*₁ = 6,0 km (affären). Vid *t*₂ = 25 min är han vid läget *s*₂ = 0 (hemma). Vad är hans **medelhastighet** mellan dessa tidpunkter, angiven i m/s?`,
@@ -3937,7 +3939,7 @@ $$
 **Generell slutsats:** För en konvex *s-t*-graf (accelererande rörelse) ligger medelhastigheten över ett *senare* intervall alltid närmare momentanhastigheten vid slutet. För att uppskatta momentanhastigheten ännu bättre kan man välja allt kortare intervall runt punkten — eller rita ut en tangent och mäta dess lutning.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Anna börjar cykla från en startpunkt med den konstanta farten 4,0 m/s i en rak linje. **30 sekunder senare** börjar Beata cykla samma resa från samma startpunkt med den konstanta farten 6,0 m/s.
@@ -3997,7 +3999,7 @@ $$
     // Formler: a = Δv/Δt, v = v₀ + a·t, g ≈ 9,82 m/s² i Sverige.
     // ═══════════════════════════════════════════════════════════════════
     'fy1-2.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En bil accelererar från 0 till 25 m/s på 8,0 s. Vilken är dess medelacceleration?`,
@@ -4072,7 +4074,7 @@ $$
 **Svar:** 8,2 m/s.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En bil färdas i 90 km/h och måste bromsa till 30 km/h. Bromsen ger den konstanta retardationen 5,0 m/s². Hur lång tid tar inbromsningen?`,
@@ -4165,7 +4167,7 @@ I praktiken är det näst intill omöjligt att hålla *exakt* konstant accelerat
 **Generell slutsats:** Detta är en klassisk källa till missförstånd — *medel* över ett intervall säger något om summan av rörelsen, inte om vad som hände vid någon specifik tidpunkt.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En sten släpps från en hög klippa och faller fritt mot marken. **Under den sista sekunden** av sin fallrörelse hinner stenen falla 40 m.
@@ -4224,7 +4226,7 @@ $$
     // sträcka (alla positiva).
     // ═══════════════════════════════════════════════════════════════════
     'fy1-2.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Avläs föremålets konstanta acceleration ur *v-t*-diagrammet nedan.
@@ -4315,7 +4317,7 @@ $$
 **Svar:** Förflyttningen är 72 m.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett föremål startar från vila och accelererar konstant enligt *v-t*-diagrammet nedan. Beräkna föremålets förflyttning under intervallet 0–8 s.
@@ -4455,7 +4457,7 @@ $$
 **Generell slutsats:** En boll som kastas rakt uppåt och fångas på samma höjd är ett typexempel på rörelsen ovan — den fysiska *förflyttningen* är noll, men *sträckan* (uppåt + nedåt) är skild från noll. När man räknar med energi eller bränsleförbrukning är det ofta sträckan som spelar roll, inte förflyttningen.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En cyklist tränar på en rak bana enligt nedanstående *v-t*-diagram.
@@ -4530,7 +4532,7 @@ $$
     // Kort avsnitt — färre övningar.
     // ═══════════════════════════════════════════════════════════════════
     'fy1-2.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ett föremål har konstant acceleration enligt *a-t*-diagrammet nedan. Hur stor är hastighetsändringen Δ*v* under intervallet 0–5 s?
@@ -4587,7 +4589,7 @@ Formellt: från $a = \\Delta v / \\Delta t$ följer $\\Delta v = a \\cdot \\Delt
 **Svar:** Hastighetsändringen Δ*v*.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett föremål har begynnelsehastigheten *v*₀ = 6,0 m/s och accelererar enligt *a-t*-diagrammet nedan. Vilken är dess sluthastighet vid *t* = 7,0 s?
@@ -4636,7 +4638,7 @@ $$
     // specialfall (fritt fall, v₀ = 0).
     // ═══════════════════════════════════════════════════════════════════
     'fy1-2.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En bil rullar med 12 m/s och accelererar konstant med 2,5 m/s² i 6,0 sekunder. Hur långt rullar bilen under denna tid? Använd $s = v_0 t + \\dfrac{1}{2} a t^{2}$.`,
@@ -4713,7 +4715,7 @@ $$
 **Generell slutsats:** Den enkla formeln $v_m = (v_0 + v)/2$ gäller **bara** vid **konstant** acceleration — annars måste man räkna med integraler eller arean i ett *v-t*-diagram.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Du gör en linjals-mätning av din reaktionstid (se exemplet i teorin): en kompis håller en linjal lodrätt, släpper utan förvarning och du nyper ihop fingrarna. Linjalen har fallit 18,5 cm när du fångar den. Vilken är din reaktionstid? Använd $g = 9{,}82\\ \\mathrm{m/s^2}$.`,
@@ -4819,7 +4821,7 @@ $$
 **Generell slutsats:** Reaktionssträckan är **proportionell mot farten** (linjär), men bromssträckan är **proportionell mot fartens kvadrat** ($s = v_0^{2}/(2|a|)$). Dubblas hastigheten *fyrdubblas* bromssträckan — det är därför hastighet på landsväg och motorväg är så viktiga säkerhetsfaktorer.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En bil färdas med den konstanta hastigheten 25 m/s (90 km/h) längs en raksträcka. När bilen passerar en stillastående polisbil på vägkanten ger sig polisen direkt iväg med konstant acceleration 4,0 m/s² (i samma riktning som den fortkörande bilen).
@@ -4935,7 +4937,7 @@ $$
     // Formel: v² − v₀² = 2as. Konstant acceleration, en dimension.
     // ═══════════════════════════════════════════════════════════════════
     'fy1-2.9': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En bil rullar med 20 m/s och accelererar konstant med 3,0 m/s² över en sträcka på 50 m. Beräkna bilens sluthastighet med Torricellis ekvation.`,
@@ -5011,7 +5013,7 @@ $$
 **Svar:** Stenen träffar marken med ca 15,4 m/s (≈ 55 km/h).`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En bil körs i 90 km/h och vill bromsa till 50 km/h. Den konstanta retardationen är 4,0 m/s². Hur lång **sträcka** krävs?`,
@@ -5105,7 +5107,7 @@ Eftersom vi söker farten (storleken) är svaret 16,3 m/s. Tecknet är negativt
 **Generell slutsats:** Detta är en typisk fälla — om man slarvar med tecken (t.ex. sätter $s = +2{,}0$ m för markens läge) får man fel svar. Torricellis ekvation kräver att man håller koll på förflyttningens riktning. Notera också att ekvationen gav två rötter ($\\pm 16{,}3$) — den positiva motsvarar farten *uppåt* (matematiskt giltig, men inte den fysikaliska situationen här), den negativa motsvarar slutfarten nedåt.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Från toppen av en 50 m hög lodrät klippa **släpps** en boll *A* (begynnelsehastighet 0). I samma ögonblick **kastas** en annan boll *B* rakt uppåt från marken **direkt nedanför klippan** med begynnelsehastigheten 25 m/s.
@@ -5167,7 +5169,7 @@ $$
     // sin/cos för komposanter.
     // ═══════════════════════════════════════════════════════════════════
     'fy1-3.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             penna: 'ov-fy1-3.1-u1',
@@ -5255,7 +5257,7 @@ När bussen bromsar verkar bromskraften på **bussen**, inte direkt på passager
 **Svar:** Alternativ D.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             penna: 'ov-fy1-3.1-u6',
@@ -5362,7 +5364,7 @@ $$
 **Generell slutsats:** Detta är skillnaden mellan att **skjuta** och att **dra** ett föremål med ett snett handtag: när man skjuter pressar $F \\sin \\alpha$ föremålet mot marken (ökar normalkraften och därmed friktionen), men när man drar lyfter samma komposant i stället föremålet (minskar friktionen). Därför är det lättare att dra en kälke än att skjuta den.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             penna: 'ov-fy1-3.1-u10',
@@ -5437,7 +5439,7 @@ $$
     // Formel: F_R = m · a
     // ═══════════════════════════════════════════════════════════════════
     'fy1-3.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             penna: 'ov-fy1-3.2-u1',
@@ -5586,7 +5588,7 @@ Dubbel massa ger alltså halv acceleration.
 **Svar:** Alternativ C (1,0 m/s²).`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             penna: 'ov-fy1-3.2-u7',
@@ -5704,7 +5706,7 @@ Tiden $2{,}3\\ \\mathrm{s}$ har två värdesiffror, så svaret avrundas till tv�
 **Svar:** 290 N, riktad bakåt, motsatt rörelseriktningen (bromsande).`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             penna: 'ov-fy1-3.2-u11',
@@ -5916,7 +5918,7 @@ $$
 **Generell slutsats:** Den som puttar puttas alltid tillbaka. Eftersom krafterna är lika stora är accelerationerna omvänt proportionella mot massorna: $a_\\text{Astrid}/a_\\text{Bo} = m_\\text{Bo}/m_\\text{Astrid}$. Den lättare personen glider alltid iväg fortast.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En astronaut med massan 90 kg (inklusive dräkt) svävar stilla 15 m från rymdstationens luftsluss — utan säkerhetslina. För att ta sig tillbaka kastar hon sin verktygslåda (4,0 kg) rakt **bort** från stationen. Under kastet, som varar 0,40 s, verkar hon på lådan med den genomsnittliga kraften 54 N.
@@ -5970,7 +5972,7 @@ alltså cirka 5 cm av de 15 m. Räknar man med accelerationsfasen blir den tot
     // F_N olika vid acceleration uppåt/nedåt (hisseffekt).
     // ═══════════════════════════════════════════════════════════════════
     'fy1-3.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             penna: 'ov-fy1-3.4-u1',
@@ -6072,7 +6074,7 @@ $$
 **Svar:** Alternativ C.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             penna: 'ov-fy1-3.4-u7',
@@ -6197,7 +6199,7 @@ Accelerationen har två värdesiffror, så svaret avrundas till två värdesiffr
 **Generell slutsats:** Vajern belastas alltid som mest i början av lyftet (accelerationsfasen). När containern sedan höjs med **konstant** fart är spännkraften bara $m g \\approx 23{,}6\\ \\mathrm{kN}$ — det är därför lyftanordningar dimensioneras med marginal för just accelerationen.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             penna: 'ov-fy1-3.4-u11',
@@ -6332,7 +6334,7 @@ Massan och sträckorna har två värdesiffror, så svaren avrundas till två vä
     // Formel: F = G · m1 · m2 / r²
     // ═══════════════════════════════════════════════════════════════════
     'fy1-3.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             penna: 'ov-fy1-3.5-u1',
@@ -6513,7 +6515,7 @@ Kraften minskar alltså till en fjärdedel, inte till hälften.
 **Generell slutsats:** Detta kallas den **omvända kvadratlagen**: dubbla avståndet → 1/4 av kraften, tredubbla → 1/9, tiodubbla → 1/100. Samma matematiska form dyker upp igen i ellärans Coulomblag och för ljusintensitet från en punktkälla.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             penna: 'ov-fy1-3.5-u7',
@@ -6652,7 +6654,7 @@ Båda krafterna har tiopotensen $10^{-8}$, så vi jämför talen framför: $7{,}
 **Generell slutsats:** Avståndet i kvadrat i nämnaren gör kraften från avlägsna föremål mycket liten: Mars enorma massa räcker inte på $5{,}6 \\cdot 10^{10}\\ \\mathrm{m}$ avstånd. Om planeterna verkligen styrde våra liv via gravitationen skulle barnmorskan ha större inflytande än Mars. Ett fint exempel på hur en enkel beräkning kan granska ett påstående.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             penna: 'ov-fy1-3.5-u10',
@@ -6752,7 +6754,7 @@ Svaret avrundas till tre värdesiffror, som *G* och Mars massa.
     // Formel: F_f = μ · F_N
     // ═══════════════════════════════════════════════════════════════════
     'fy1-3.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             penna: 'ov-fy1-3.6-u1',
@@ -6847,7 +6849,7 @@ $$
 **Svar:** Alternativ B.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             penna: 'ov-fy1-3.6-u6',
@@ -6967,7 +6969,7 @@ $$
 **Generell slutsats:** Isens extremt låga friktionstal är hela förutsättningen för curling: stenen "minns" sin fart i tiotals meter. Sopningen framför stenen sänker $\\mu$ ytterligare en aning — det räcker för att förlänga glidsträckan flera meter och styra stenen.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             penna: 'ov-fy1-3.6-u10',
@@ -7074,7 +7076,7 @@ $$
     // (vinkelrätt mot planet, = F_N). Friktion: F_f = μ·F_N = μ·m·g·cos α.
     // ═══════════════════════════════════════════════════════════════════
     'fy1-3.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En låda med massan 4,0 kg ligger på ett plan enligt figuren. Beräkna tyngdkraftens komposant $F_1$ **nedför planet**. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
@@ -7169,7 +7171,7 @@ Alternativ A blandar ihop tyngdkraften (som mycket riktigt är oförändrad) med
 **Svar:** Alternativ D.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En 6,0 kg tung låda glider med **konstant hastighet** nedför ett lutande plan som lutar 28° mot horisontalplanet. Beräkna friktionstalet *μ* mellan låda och plan.`,
@@ -7288,7 +7290,7 @@ $$
 **Generell slutsats:** En till synes blygsam backe (12°) och lång glidsträcka räcker alltså för rejäl fart. Jämför gärna med det friktionsfria fallet: utan friktion hade accelerationen varit $g \\sin 12^{\\circ} \\approx 2{,}0\\ \\mathrm{m/s^2}$ — snöns friktion "äter" nästan halva accelerationen.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Elvira placerar en låda med massan 6,0 kg på ett plan enligt figuren. Friktionstalet mellan låda och plan är 0,35.
@@ -7573,50 +7575,50 @@ ${makeHangingRopes({ angL: 60, angR: 30, mass: '10 kg', ropeLabels: ['rep 1', 'r
                 { del: 'a', value: 85, unit: 'N', tol: 0.03 },
                 { del: 'b', value: 49.1, unit: 'N', tol: 0.03 },
             ],
-            solution: `Repen lutar olika mycket, så de bär **inte** halva tyngden var. Vi kallar spännkrafterna $F_1$ och $F_2$ och ställer upp ett villkor i varje led.
+            solution: `Repen lutar olika mycket, så de bär **inte** halva tyngden var. Vi kallar spännkrafterna $F_\\mathrm{S1}$ och $F_\\mathrm{S2}$ och ställer upp ett villkor i varje led.
 
 **Vågrätt:** lådan står still i sidled, så de vågräta komposanterna tar ut varandra. Den vågräta komposanten ligger intill vinkeln och fås med cosinus:
 
 $$
-F_1 \\cdot \\cos 60^{\\circ} = F_2 \\cdot \\cos 30^{\\circ} \\tag{1}
+F_\\mathrm{S1} \\cdot \\cos 60^{\\circ} = F_\\mathrm{S2} \\cdot \\cos 30^{\\circ} \\tag{1}
 $$
 
 **Lodrätt:** de lodräta komposanterna (sinus, mittemot vinkeln) bär tillsammans tyngden:
 
 $$
-F_1 \\cdot \\sin 60^{\\circ} + F_2 \\cdot \\sin 30^{\\circ} = m \\cdot g = 10 \\cdot 9{,}82 = 98{,}2\\ \\mathrm{N} \\tag{2}
+F_\\mathrm{S1} \\cdot \\sin 60^{\\circ} + F_\\mathrm{S2} \\cdot \\sin 30^{\\circ} = m \\cdot g = 10 \\cdot 9{,}82 = 98{,}2\\ \\mathrm{N} \\tag{2}
 $$
 
-Ur (1) löser vi ut $F_1$:
+Ur (1) löser vi ut $F_\\mathrm{S1}$:
 
 $$
-F_1 = F_2 \\cdot \\frac{\\cos 30^{\\circ}}{\\cos 60^{\\circ}} = 1{,}732\\ldots \\cdot F_2
+F_\\mathrm{S1} = F_\\mathrm{S2} \\cdot \\frac{\\cos 30^{\\circ}}{\\cos 60^{\\circ}} = 1{,}732\\ldots \\cdot F_\\mathrm{S2}
 $$
 
-$F_1 = 1{,}732\\ldots \\cdot F_2$ insatt i (2) ger
+$F_\\mathrm{S1} = 1{,}732\\ldots \\cdot F_\\mathrm{S2}$ insatt i (2), $F_\\mathrm{S1} \\cdot \\sin 60^{\\circ} + F_\\mathrm{S2} \\cdot \\sin 30^{\\circ} = 98{,}2$, ger
 
 $$
-1{,}732\\ldots \\cdot F_2 \\cdot \\sin 60^{\\circ} + F_2 \\cdot \\sin 30^{\\circ} = 98{,}2
+1{,}732\\ldots \\cdot F_\\mathrm{S2} \\cdot \\sin 60^{\\circ} + F_\\mathrm{S2} \\cdot \\sin 30^{\\circ} = 98{,}2
 $$
 
 där $1{,}732\\ldots \\cdot \\sin 60^{\\circ}$ blir precis 1,5 och $\\sin 30^{\\circ} = 0{,}5$:
 
 $$
-1{,}5 \\cdot F_2 + 0{,}5 \\cdot F_2 = 98{,}2
+1{,}5 \\cdot F_\\mathrm{S2} + 0{,}5 \\cdot F_\\mathrm{S2} = 98{,}2
 $$
 
 $$
-2{,}0 \\cdot F_2 = 98{,}2
+2{,}0 \\cdot F_\\mathrm{S2} = 98{,}2
 $$
 
 $$
-F_2 = 49{,}1\\ \\mathrm{N}
+F_\\mathrm{S2} = 49{,}1\\ \\mathrm{N}
 $$
 
 och därmed
 
 $$
-F_1 = 1{,}732\\ldots \\cdot 49{,}1 = 85{,}043\\ldots\\ \\mathrm{N}
+F_\\mathrm{S1} = 1{,}732\\ldots \\cdot 49{,}1 = 85{,}043\\ldots\\ \\mathrm{N}
 $$
 
 **a)** **Svar:** Spännkraften i rep 1 är cirka 85 N.
@@ -9099,7 +9101,7 @@ $$
     // Formel: p = F / A  (kraft per areaenhet, enhet Pa = N/m²).
     // ═══════════════════════════════════════════════════════════════════
     'fy1-5.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En skidåkare med massan 70 kg står på två skidor med vardera arean 1 500 cm². Hur stort tryck utövar skidåkaren mot snön? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
@@ -9168,7 +9170,7 @@ $$
 **Svar:** Stenens tyngd är 30 N (motsvarar ca 3,1 kg).`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett paintballgevär arbetar med övertrycket 1,9 MPa. Pipan är cirkelrund med radien 6,0 mm. Hur stor kraft krävs det att hålla för pipan med ett finger för att gasen inte ska ta sig ut?`,
@@ -9234,7 +9236,7 @@ $$
 **Generell slutsats:** Det är därför stilettklackar kan ge bestående märken i parkettgolv medan en panservagn på samma golv (om det orkade hålla för tyngden) inte gör det. Liten kontaktyta ger stort tryck — det är också därför skidor och snöskor fungerar.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Tre kuber av stål (densitet 7 850 kg/m³) ställs på ett bord. Kuberna har kantlängderna 4,0 cm, 8,0 cm respektive 16 cm.
@@ -9285,7 +9287,7 @@ $$
     // Formel: p = ρ · g · h
     // ═══════════════════════════════════════════════════════════════════
     'fy1-5.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Olov dyker till djupet 4,0 m i en sjö. Vilket vätsketryck verkar då på honom? Räkna med vattnets densitet 998 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$.
@@ -9355,7 +9357,7 @@ $$
 **Generell slutsats:** En tumregel: i havet ökar vätsketrycket med ungefär 1 atm (≈ 100 kPa) per 10 m djup. På 100 m djup har man alltså ca 10 atm vätsketryck — det är gränsen för vad ett tränat sportdykarsystem klarar.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Mira dyker i en sjö och vill veta hur stor kraft som vätsketrycket utövar på hennes ena trumhinna (area 65 mm²) när hon befinner sig på djupet 5,0 m. Räkna med vattnets densitet 998 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$.`,
@@ -9422,7 +9424,7 @@ $$
 **Generell slutsats:** Detta är hur ett **U-rör** kan användas som densitometer — du behöver bara mäta två pelarhöjder. Notera att enheten för *h* inte behöver vara meter; så länge båda sidor använder samma enhet (cm) får man rätt förhållande.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ett flerbostadshus försörjs med vatten från ett vattentorn där vattenytan i tornet ligger 30 m över marken. Hyresgästerna upplever olika hårt vattentryck i sina kranar beroende på vilken våning de bor på.
@@ -9477,7 +9479,7 @@ $$
     // Formel: p = p_0 + ρ · g · h
     // ═══════════════════════════════════════════════════════════════════
     'fy1-5.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vid normal havsnivå är lufttrycket 101,3 kPa. Hur många pascal (Pa) motsvarar det? Hur många bar?`,
@@ -9535,7 +9537,7 @@ $$
 **Svar:** Vätsketrycket är 51 kPa.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En vinterstorm gör att lufttrycket utanför ditt fönster sjunker till 92 kPa, medan trycket inomhus fortfarande är 101 kPa (normalt lufttryck). Hur stor är den nettokraft som trycker fönstret utåt? Fönstret är 1,2 m brett och 1,5 m högt.`,
@@ -9579,7 +9581,7 @@ $$
 **Generell slutsats:** Det är därför korkar i kolsyrade flaskor (champagne, ölflaskor i höghöjd-flygplan) kan fara iväg med stor fart om man inte öppnar dem kontrollerat. Med en hastighet på ca 12–15 m/s utgör en lös kork en faktisk skaderisk för ögat.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Marianergraven är det djupaste stället i havet, ca 11 km djupt. Beräkna **det totala trycket** vid bottnen om havsvattnets medeldensitet är 1 030 kg/m³ och lufttrycket vid ytan är 101 kPa.
@@ -9645,7 +9647,7 @@ $$
     // Formel: F_L = ρ · g · V  (ρ är vätskans densitet, V undanträngd volym).
     // ═══════════════════════════════════════════════════════════════════
     'fy1-5.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En sten med volymen 5,0 liter sänks helt ner i vatten. Hur stor lyftkraft påverkar stenen från vattnet? Räkna med vattnets densitet 998 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$.`,
@@ -9718,7 +9720,7 @@ Det visar att hela volymen är under vattnet — kuben är alltså helt nedsänk
 **Svar:** Alternativ A — hela volymen är under vattnet.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En aluminiumkub med kantlängden 10 cm sänks ned helt i vatten. Vilken är den **resulterande kraft** som krävs för att hålla kuben i ro (alltså inte låta den sjunka)? Aluminium har densiteten 2 700 kg/m³ och vatten 998 kg/m³. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
@@ -9795,7 +9797,7 @@ $$
 **Generell slutsats:** Den enkla regeln "drag-kraft + lyftkraft = tyngdkraft" är användbar i alla *konstant hastighet*-problem under vatten. Glöm inte att använda vattnets densitet i lyftkraftsformeln, inte föremålets!`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ett isberg flyter i havet. Hur stor andel (i procent) av isbergets volym ligger **under** vattenytan? Räkna med isens densitet 920 kg/m³ och havsvattnets densitet 1 028 kg/m³.`,
@@ -9823,7 +9825,7 @@ $$
     // Arkimedes princip för gaser. Luftens densitet 1,293 kg/m³.
     // ═══════════════════════════════════════════════════════════════════
     'fy1-5.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En väderballong undantränger 2,0 m³ luft. Hur stor lyftkraft från luften verkar på ballongen? Räkna med luftens densitet 1,293 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$.`,
@@ -9881,7 +9883,7 @@ $$
 **Svar:** Alternativ C — heliumet stiger.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Algot håller i en heliumballong med snöre. Ballongen rymmer 11 liter helium och själva ballonghöljet väger 4,0 g. Hur stor är **spännkraften** i snöret? Räkna med $\\rho_\\mathrm{luft} = 1{,}293\\ \\mathrm{kg/m^3}$, $\\rho_\\mathrm{He} = 0{,}178\\ \\mathrm{kg/m^3}$ och $g = 9{,}82\\ \\mathrm{N/kg}$.`,
@@ -9955,7 +9957,7 @@ $$
 **Generell slutsats:** Den effektiva "lyftande densiteten" hos en gas är skillnaden mellan luftens och gasens densitet, $\\rho_\\mathrm{luft} - \\rho_\\mathrm{gas}$. För helium är detta ca 1,1 kg/m³ — alltså lyfter 1 m³ helium ungefär 1,1 kg. För varmluft är skillnaden mycket mindre (ca 0,3 kg/m³), vilket är därför varmluftsballonger måste vara så enorma.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En varmluftballong har volymen 2 500 m³. Själva ballongtyget, korgen och brännaren väger tillsammans 350 kg. Den omgivande kalla luften har densiteten 1,293 kg/m³.
@@ -10005,7 +10007,7 @@ $$
     // Formel: p_1·V_1/T_1 = p_2·V_2/T_2  (T i K).  T_K = T_C + 273.
     // ═══════════════════════════════════════════════════════════════════
     'fy1-5.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Omvandla temperaturen 25 °C till kelvin.`,
@@ -10071,7 +10073,7 @@ $$
 **Generell slutsats:** En vanlig fälla är att räkna $p_2 = 200 \\cdot 80/20 = 800$ kPa (i celsius), vilket ger fel svar. **Alltid** kelvin i ideala gaslagen!`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En cykelpump har inre volymen 0,40 liter vid handtaget uppe. När du trycker ner handtaget komprimeras luften till 0,10 liter. Vid utgångsläget är trycket 1,0 atm och temperaturen 20 °C. Pumpningen sker så snabbt att lufttemperaturen ökar till 60 °C. Vilket är trycket vid det komprimerade läget?`,
@@ -10131,7 +10133,7 @@ $$
 **Generell slutsats:** Det är därför heliumballonger som släpps upp ofta **spricker** på hög höjd — det yttre trycket sjunker snabbare än temperaturen, och ballonghöljet klarar inte expansionen. Väderballonger är specialdesignade för att kunna expandera flera gånger om innan de spricker.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En cylindrisk dykarklocka (öppen i botten, stängd i toppen) har den invändiga höjden 2,0 m och fylls helt med luft vid normalt lufttryck 101 kPa och temperaturen 20 °C. Klockan sänks lodrätt ner i en sjö så att klockans **topp** befinner sig på djupet 8,0 m. Vattnet är 20 °C i hela sjön.
@@ -10223,7 +10225,7 @@ Kontrollkontroll: $p_2 V_2 = 188\\,500 \\cdot (2{,}0 - 0{,}93) \\approx 188\\,50
     // Formel: F_1/A_1 = F_2/A_2  (i en hydraulisk press fortplantas trycket).
     // ═══════════════════════════════════════════════════════════════════
     'fy1-5.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `I en hydraulisk press trycks den lilla kolven ner med kraften 80 N. Den lilla kolven har arean 5,0 cm² och den stora kolven 50 cm². Vilken kraft lyfter den stora kolven?`,
@@ -10279,7 +10281,7 @@ $$
 **Generell slutsats:** En klassisk fälla är att svara 8 (= förhållandet mellan diametrarna). Men det är **areorna** som spelar roll, och cirkelarean växer med kvadraten av diametern — alltså är kraftförstärkningen $(d_2/d_1)^{2}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bilden visar en principskiss av en hydraulisk domkraft. Den lilla kolven har arean 3,5 cm² och den stora 52 cm². Hur stor kraft måste tryckas på den lilla kolven för att kunna lyfta en bil med massan 1 200 kg? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
@@ -10339,7 +10341,7 @@ $$
 **Generell slutsats:** Det finns ingen "gratis" kraftförstärkning. Vad du vinner i kraft förlorar du i sträcka — produkten $F \\cdot s$ (= arbetet) är densamma på båda sidor. Kontroll: $F_1 s_1 = 120 \\cdot 0{,}20 = 24$ J och $F_2 s_2 = 3\\,000 \\cdot 0{,}0080 = 24$ J. ✓ Detta är **mekanikens gyllene regel**.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En hydraulisk pump kopplas till en lyftkolv via en slang fylld med olja (densitet 870 kg/m³). Den lilla kolven (vid pumpen) har arean 5,0 cm². Den stora lyftkolven har arean 200 cm² och sitter **3,0 m högre upp** än den lilla. Hur stor kraft måste tryckas på den lilla kolven för att kunna lyfta en last på 1 500 kg? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
@@ -10405,7 +10407,7 @@ $$
     // atomernas medelrörelseenergi — celsius är det inte.
     // ═══════════════════════════════════════════════════════════════════
     'fy1-6.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Omvandla temperaturen 25 °C till kelvin.`,
@@ -10447,7 +10449,7 @@ $$ T_K = T_C + 273 = -18 + 273 = 255\\ \\mathrm{K} $$
 **Generell slutsats:** "Kyla" finns inte som ett fysikaliskt fenomen — bara värmeöverföring i olika riktning. Hur kallt något känns beror lika mycket på materialets värmeledningsförmåga som på dess faktiska temperatur.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Tre kärl A, B och C innehåller olika gaser med temperaturerna 27 °C, 127 °C och 327 °C. I vilket kärl är atomernas medelrörelseenergi exakt **dubbelt** så stor som i kärl A?`,
@@ -10491,7 +10493,7 @@ Vi söker det kärl där $T = 2 \\cdot T_A = 2 \\cdot 300 = 600\\ \\mathrm{K}$. 
 **Generell slutsats:** Att ett material *känns* kallt betyder att det leder värme effektivt. Samma egenskap som gör aluminium "kall mot handen" gör att det också smälter is snabbare. Plast känns "varm" men är en sämre värmeöverförare.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En patient har feber och kroppstemperaturen 42,2 °C. En frisk människa har 37,0 °C. Hur många procent högre medelrörelseenergi har molekylerna i patientens kropp jämfört med molekylerna i en frisk människas kropp?`,
@@ -10523,7 +10525,7 @@ $$
     // Formler: E = c · m · ΔT  och  E_avg = E_upp.  Värmetabell behövs.
     // ═══════════════════════════════════════════════════════════════════
     'fy1-6.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Hur mycket energi går åt för att värma 0,50 kg vatten från 20 °C till 90 °C? Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$. Ange svaret i kJ.`,
@@ -10598,7 +10600,7 @@ $$ t = \\frac{4\\,180 \\cdot 0{,}40 \\cdot 80}{2\\,200} = \\frac{133\\,760}{2\\,
 **Svar:** Ca 61 s (drygt en minut).`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Du blandar 0,30 kg vatten med temperaturen 80 °C med 0,50 kg vatten med temperaturen 20 °C i en isolerad behållare. Vilken sluttemperatur får blandningen? Bortse från energiförluster till omgivningen. Ange svaret i °C.`,
@@ -10664,7 +10666,7 @@ $$ 28{,}7 = 0{,}875\\,T \\quad\\Leftrightarrow\\quad T \\approx 32{,}8\\ ^{\\cir
 **Generell slutsats:** Trots att kopparbiten är 175 grader varmare än vattnet blir vattnet bara ca 8 grader varmare. Det beror på att vattnets specifika värmekapacitet är ca 11 gånger högre än kopparets — vatten "behöver" mycket mer energi för att värmas. Det är därför vatten är så bra som kylvätska, värmeöverförare i element och temperaturreglerare i havet.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En kalorimeter (isolerad behållare) är gjord av aluminium med massan 200 g. I kalorimetern finns 300 g vatten med temperaturen 20,0 °C. Du värmer ett okänt metallföremål ($m = 150\\ \\mathrm{g}$) till 200 °C och släpper det i kalorimetern. När blandningen är i jämvikt har vatten + kalorimeter + metallföremål samma temperatur, 28,5 °C. Bestäm metallens specifika värmekapacitet. Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och $c_\\mathrm{Al} = 0{,}90\\ \\mathrm{kJ/(kg \\cdot K)}$. Bortse från energiförluster till omgivningen. Ange svaret i kJ/(kg·K).`,
@@ -10706,7 +10708,7 @@ $$ c_x = \\frac{4{,}18 \\cdot 0{,}300 \\cdot 8{,}5 + 0{,}90 \\cdot 0{,}200 \\cdo
     //               c_is = 2,2 kJ/(kg·K), c_vatten = 4,18 kJ/(kg·K).
     // ═══════════════════════════════════════════════════════════════════
     'fy1-6.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Hur mycket energi går åt för att smälta 0,50 kg is som redan ligger vid 0 °C? Räkna med $l_s = 334\\ \\mathrm{kJ/kg}$ för is. Ange svaret i kJ.`,
@@ -10775,7 +10777,7 @@ $$ E = 2\\,260 \\cdot 0{,}20 = 452\\ \\mathrm{kJ} $$
 **Generell slutsats:** Frost på fönsterrutor en kall morgon bildas genom deposition — vattenånga i luften går direkt till is utan att först bli vatten. Det omvända (sublimering) ser man när torris (fast CO₂) övergår direkt till gas vid rumstemperatur.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Du tar 1,0 kg is med temperaturen −10 °C ur frysen. Hur mycket energi behövs för att (1) värma isen till 0 °C och (2) sedan smälta hela mängden? Räkna med $c_\\mathrm{is} = 2{,}2\\ \\mathrm{kJ/(kg \\cdot K)}$ och $l_s = 334\\ \\mathrm{kJ/kg}$. Ange totala energin i kJ.`,
@@ -10831,7 +10833,7 @@ $$ E = E_1 + E_2 = 66{,}88 + 452 \\approx 519\\ \\mathrm{kJ} $$
 **Generell slutsats:** Förångningen står för 87 % av den totala energin. Det är därför det går mycket fortare att värma en kastrull med vatten från 20 °C till 100 °C än att sedan koka bort vattnet — fasövergången slukar mycket mer energi än temperaturändringen.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Du häller 0,80 kg vatten med temperaturen 70 °C i en isolerad termos. Du tillsätter sedan en mängd isbitar (0 °C) tills sluttemperaturen, när all is smält, blir 25 °C. Hur många gram is behövde du? Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och $l_s = 334\\ \\mathrm{kJ/kg}$. Bortse från energiförluster till omgivningen. Ange svaret i gram.`,
@@ -10874,7 +10876,7 @@ $$ m_\\mathrm{is} = \\frac{4{,}18 \\cdot 0{,}80 \\cdot 45}{334 + 4{,}18 \\cdot 2
     // konvektion (vind). Inga nya formler — kombinerar med 6.2 och 6.3.
     // ═══════════════════════════════════════════════════════════════════
     'fy1-6.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Varför kyler svettning ner kroppen när det är varmt?`,
@@ -10931,7 +10933,7 @@ $$ E = 100 \\cdot 28\\,800 = 2\\,880\\,000\\ \\mathrm{J} = 2{,}88\\ \\mathrm{MJ}
 **Generell slutsats:** Det motsvarar ungefär energin i 125 g choklad (cirka 2,3 MJ per 100 g) eller sju bananer. Det är därför vi behöver äta — kroppen måste ständigt fylla på energi för att kompensera för värmeavgivningen.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I en bastu är lufttemperaturen 80 °C. När du blåser kraftigt på din arm där upplever du det **inte** som svalt, utan som extremt **varmt**. Varför?`,
@@ -10982,7 +10984,7 @@ $$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
     // Begreppsavsnitt utan formler. Flerval om huvudsatserna 0–3.
     // ═══════════════════════════════════════════════════════════════════
     'fy1-6.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken av termodynamikens huvudsatser säger att **energi inte kan skapas eller förstöras, bara omvandlas**?`,
@@ -11032,7 +11034,7 @@ $$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
 **Generell slutsats:** I moderna laboratorier har man nått temperaturer på under en miljarddels kelvin (10⁻⁹ K) — kallare än något annat någonstans i det observerbara universum. Det är en konsekvens av tredje huvudsatsen att 0 K inte kan nås i ett ändligt antal steg, men man kan komma så nära man vill.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Du tar ut en kall läskburk (4 °C) ur kylen och ställer den på köksbordet, där rumsluften är 22 °C. Efter ett tag har läskburken samma temperatur som rummet. Vilken huvudsats beskriver mest direkt denna utjämning?`,
@@ -11068,7 +11070,7 @@ $$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
     ],
 
     'fy1-7.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken typ av koppling visas i schemat?
@@ -11164,7 +11166,7 @@ $$ U_3 = 9{,}0 - 2{,}5 - 3{,}0 = 3{,}5\\ \\mathrm{V} $$
 **Svar:** $U_3 = 3{,}5\\ \\mathrm{V}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I kretsen nedan delar strömmen från batteriet upp sig i två parallella grenar med resistorerna $R_1$ och $R_2$. Strömmen genom $R_1$ är $I_1 = 0{,}40\\ \\mathrm{A}$ och strömmen genom $R_2$ är $I_2 = 0{,}30\\ \\mathrm{A}$. Hur stor är strömmen $I_3$ genom $R_3$?
@@ -11230,7 +11232,7 @@ När lampa 3 går sönder bryts enbart den grenens ledning. Lampornas 1 och 2 sp
 **Generell slutsats:** Detta är den fundamentala skillnaden mot seriekoppling, där en trasig lampa släcker hela kretsen. Eluttagen i ett hem är parallellkopplade just därför — om en lampa går sönder ska inte hela rummets belysning slockna. Den totala strömmen från batteriet minskar dock, eftersom en gren har försvunnit.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Fyra likadana lampor är kopplade enligt schemat: lampa 1 sitter ensam i den övre grenen, lamporna 2, 3 och 4 sitter i serie i den undre grenen. Båda grenarna är direkt kopplade mellan batteriets poler.
@@ -11271,7 +11273,7 @@ Lampa 1 får alltså tre gånger så stark ström som lamporna 2, 3 och 4. Efter
     ],
 
     'fy1-7.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Stav A är negativt laddad och stav B är positivt laddad. Vad händer när de närmas varandra?`,
@@ -11327,7 +11329,7 @@ $$ n = \\frac{4{,}0 \\cdot 10^{-9}}{1{,}602 \\cdot 10^{-19}} = 2{,}50 \\cdot 10^
 **Svar:** Kulan har cirka $2{,}5 \\cdot 10^{10}$ överskottselektroner (25 miljarder).`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Två lika stora metallkulor har laddningarna $Q_1 = +6{,}0\\ \\mathrm{nC}$ och $Q_2 = -2{,}0\\ \\mathrm{nC}$. Kulorna får vidröra varandra och skiljs sedan åt. Hur stor laddning har varje kula efteråt?`,
@@ -11377,7 +11379,7 @@ $$ Q = 3{,}0 \\cdot 10^{10} \\cdot 1{,}602 \\cdot 10^{-19} = 4{,}806 \\cdot 10^{
 **Generell slutsats:** Detta är omvändningen av $n = Q/q_e$. Tecknet på laddningen avgörs av om föremålet har överskott (negativ) eller underskott (positiv) av elektroner.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Två lika stora metallkulor har laddningarna $Q_1 = +5{,}0\\ \\mathrm{nC}$ och $Q_2 = -3{,}0\\ \\mathrm{nC}$. De får vidröra varandra och skiljs sedan åt. Hur många elektroner har då flyttat från den ena kulan till den andra? Elementarladdningen är $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
@@ -11433,7 +11435,7 @@ vilket ger $x = 8$ eller $x = -2$.
     ],
 
     'fy1-7.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Två små laddade kulor har laddningarna $Q_1 = 8{,}0\\ \\mathrm{nC}$ och $Q_2 = 5{,}0\\ \\mathrm{nC}$ och placeras $20\\ \\mathrm{cm}$ från varandra. Hur stor är den elektriska kraften mellan dem? Coulombs konstant är $k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$.`,
@@ -11505,7 +11507,7 @@ Det syns också direkt i Coulombs lag: i uttrycket $F = k \\cdot Q_1 \\cdot Q_2 
 **Generell slutsats:** Samma princip som i gravitationen: jorden drar i dig med samma kraft som du drar i jorden, trots den enorma masskillnaden. En större laddning ger inte en större kraft på "den andra parten".`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Två laddade kulor påverkar varandra med en viss elektrisk kraft. Avståndet mellan dem fördubblas samtidigt som den ena kulans laddning tredubblas. Hur många gånger så stor blir den nya kraften jämfört med den ursprungliga?`,
@@ -11551,7 +11553,7 @@ $$ a = \\frac{F}{m} = \\frac{4{,}32 \\cdot 10^{-3}}{0{,}50 \\cdot 10^{-3}} = 8{,
 **Generell slutsats:** Den elektriska kraften driver rörelsen, men accelerationen beror också på massan. Glöm inte att massan i gram måste bli kilogram ($0{,}50\\ \\mathrm{g} = 0{,}50 \\cdot 10^{-3}\\ \\mathrm{kg}$).`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Tre laddningar sitter på en rät linje. I mitten sitter $Q_2 = +4{,}0\\ \\mathrm{nC}$. På avståndet $2{,}0\\ \\mathrm{cm}$ till vänster om den sitter $Q_1 = +6{,}0\\ \\mathrm{nC}$, och på avståndet $3{,}0\\ \\mathrm{cm}$ till höger sitter $Q_3 = -5{,}0\\ \\mathrm{nC}$. Bestäm storleken på den resulterande elektriska kraften på mittladdningen $Q_2$.`,
@@ -11597,7 +11599,7 @@ $$ d - x = 1{,}5x \\quad\\Rightarrow\\quad d = 2{,}5x \\quad\\Rightarrow\\quad x
     ],
 
     'fy1-7.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En laddning på $Q = 12\\ \\mathrm{C}$ passerar ett tvärsnitt i en ledare under tiden $t = 4{,}0\\ \\mathrm{s}$. Hur stor är strömmen genom ledaren?`,
@@ -11679,7 +11681,7 @@ $$ I_2 = 0{,}90 - 0{,}55 = 0{,}35\\ \\mathrm{A} $$
 **Generell slutsats:** Strömmen kan aldrig "försvinna" eller "fastna" i en förgrening — allt som går in måste komma ut. Grenströmmarna adderas till huvudströmmen.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett uppladdningsbart batteri är märkt $2{,}0\\ \\mathrm{Ah}$ (amperetimmar). Det driver en lampa som drar strömmen $0{,}25\\ \\mathrm{A}$. Hur länge räcker batteriet innan det är urladdat? Svara i timmar.`,
@@ -11729,7 +11731,7 @@ $$ n = \\frac{0{,}50}{1{,}602 \\cdot 10^{-19}} = 3{,}12 \\cdot 10^{18}\\ \\text{
 **Generell slutsats:** Även en ganska blygsam ström motsvarar ett enormt antal elektroner per sekund — laddningen hos en enda elektron är extremt liten.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett uppladdningsbart batteri är märkt $2{,}4\\ \\mathrm{Ah}$. Det laddas ur helt på exakt ett dygn med konstant ström. Hur många elektroner passerar i genomsnitt genom kretsen varje sekund? ($1\\ \\mathrm{Ah} = 3\\,600\\ \\mathrm{C}$, $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)`,
@@ -11798,7 +11800,7 @@ $$ n = \\frac{Q}{q_e} = \\frac{16}{1{,}602 \\cdot 10^{-19}} = 9{,}99 \\cdot 10^{
     ],
 
     'fy1-7.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En laddning $Q = 2{,}0\\ \\mathrm{C}$ förs genom spänningen $U = 12\\ \\mathrm{V}$. Hur stor elektrisk energi omsätts?`,
@@ -11868,7 +11870,7 @@ $$ Q = \\frac{4{,}5}{9{,}0} = 0{,}50\\ \\mathrm{C} $$
 **Svar:** Laddningen var $0{,}50\\ \\mathrm{C}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Vilken hastighet får en elektron som accelereras från vila genom spänningen $U = 200\\ \\mathrm{V}$? Elektronens massa är $m = 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}$ och dess laddning $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
@@ -11924,7 +11926,7 @@ $$ U = \\frac{9{,}11 \\cdot 10^{-31} \\cdot (3{,}0 \\cdot 10^6)^2}{2 \\cdot 1{,}
 **Generell slutsats:** Detta är omvändningen av föregående uppgift. Glöm inte att kvadrera *hela* hastigheten inklusive tiopotensen: $(3{,}0 \\cdot 10^6)^2 = 9{,}0 \\cdot 10^{12}$.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En elektron och en proton accelereras båda från vila genom **samma** spänning. Hur många gånger så snabb blir elektronen jämfört med protonen? Elektronens massa är $m_e = 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}$ och protonens $m_p = 1{,}673 \\cdot 10^{-27}\\ \\mathrm{kg}$. (Partiklarna har lika stor laddning, fast med olika tecken.)`,
@@ -11948,7 +11950,7 @@ $$ \\frac{v_e}{v_p} = \\sqrt{\\frac{1{,}673 \\cdot 10^{-27}}{9{,}11 \\cdot 10^{-
     ],
 
     'fy1-7.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En resistor med resistansen $R = 220\\ \\mathrm{\\Omega}$ genomflyts av strömmen $I = 0{,}050\\ \\mathrm{A}$. Hur stor är spänningen över resistorn?`,
@@ -12018,7 +12020,7 @@ $$ I = \\frac{12}{50} = 0{,}24\\ \\mathrm{A} $$
 **Generell slutsats:** Ohms lag kan lösas ut åt tre håll — $U = R \\cdot I$, $R = U/I$ och $I = U/R$. Vilken form du behöver beror på vad som efterfrågas.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En kopparledare är $25\\ \\mathrm{m}$ lång och har tvärsnittsarean $1{,}5\\ \\mathrm{mm^2}$. Kopparens resistivitet är $\\rho = 1{,}7 \\cdot 10^{-8}\\ \\mathrm{\\Omega \\cdot m}$. Bestäm ledarens resistans.`,
@@ -12071,7 +12073,7 @@ $$ I = \\frac{U}{R} = \\frac{1{,}5}{55} = 0{,}0273\\ \\mathrm{A} \\approx 27\\ \
 **Generell slutsats:** Uppgiften kräver två formler i följd: först $R = \\rho l / A$ för att hitta trådens resistans, sedan Ohms lag för strömmen. Nikrom har hög resistivitet — därför används det just i värmetrådar.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En värmetråd av nikrom ska ha resistansen $R = 24\\ \\mathrm{\\Omega}$. Tråden har en cirkulär tvärsnittsyta med diametern $d = 0{,}40\\ \\mathrm{mm}$, och nikromens resistivitet är $\\rho = 1{,}1 \\cdot 10^{-6}\\ \\mathrm{\\Omega \\cdot m}$. Hur lång måste tråden vara?`,
@@ -12119,7 +12121,7 @@ $$ R_\\text{ny} = 9 \\cdot 5{,}0 = 45\\ \\mathrm{\\Omega} $$
     ],
 
     'fy1-7.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Tre resistorer seriekopplas enligt schemat. Bestäm kretsens ersättningsresistans $R_\\mathrm{tot}$.
@@ -12203,7 +12205,7 @@ $$ R_\\mathrm{tot} = 15\\ \\mathrm{\\Omega} $$
 **Generell slutsats:** Glöm inte sista steget — formeln ger $1/R_\\mathrm{tot}$, så du måste invertera till slut för att få $R_\\mathrm{tot}$. En vanlig miss är att svara $1/15\\ \\mathrm{\\Omega}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En okänd resistor parallellkopplas med en $30\\ \\mathrm{\\Omega}$-resistor. Tillsammans ger de ersättningsresistansen $12\\ \\mathrm{\\Omega}$. Hur stor är den okända resistorn?
@@ -12263,7 +12265,7 @@ $$ I = \\frac{U}{R_\\mathrm{tot}} = \\frac{12}{60} = 0{,}20\\ \\mathrm{A} $$
 **Generell slutsats:** Två steg: bestäm först totalresistansen, använd sedan Ohms lag på *hela* kretsen. I en seriekoppling är denna ström dessutom densamma genom båda resistorerna.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två resistorer ger tillsammans ersättningsresistansen $40\\ \\mathrm{\\Omega}$ när de seriekopplas, men bara $7{,}5\\ \\mathrm{\\Omega}$ när de parallellkopplas. Hur stora är de två resistanserna?`,
@@ -12295,7 +12297,7 @@ vilket ger $x = 30$ eller $x = 10$.
     ],
 
     'fy1-7.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Studera kopplingsschemat. Vilka resistorer är parallellkopplade?
@@ -12363,7 +12365,7 @@ $$ R_\\mathrm{tot} = R_1 + R_{2,3} = 4{,}0 + 4{,}0 = 8{,}0\\ \\mathrm{\\Omega} $
 **Generell slutsats:** När parallelldelen väl är ihopklumpad blir hela kretsen en ren seriekoppling: $R_1$ i serie med ersättningsresistansen.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm huvudströmmen *I* som går ut från batteriet i kretsen nedan.
@@ -12423,7 +12425,7 @@ $$ U_{2,3} = U - U_1 = 24 - 12 = 12\\ \\mathrm{V} $$
 **Generell slutsats:** Spänningen "förbrukas" längs vägen. Det som inte faller över $R_1$ blir kvar över parallelldelen. Denna spänning ligger dessutom över *både* $R_2$ och $R_3$, eftersom parallellkopplade komponenter har samma spänning.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm strömmen $I_3$ genom resistorn $R_3$ i kretsen nedan.
@@ -12493,7 +12495,7 @@ $$ U_{PQ} = |4{,}5 - 9{,}6| = 5{,}1\\ \\mathrm{V} $$
     ],
 
     'fy1-7.9': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En apparat drar strömmen $I = 2{,}0\\ \\mathrm{A}$ vid spänningen $U = 230\\ \\mathrm{V}$. Vilken elektrisk effekt har apparaten?`,
@@ -12565,7 +12567,7 @@ $$ P = 8{,}0 \\cdot 0{,}50^2 = 8{,}0 \\cdot 0{,}25 = 2{,}0\\ \\mathrm{W} $$
 **Generell slutsats:** Glöm inte att strömmen ska kvadreras: $0{,}50^2 = 0{,}25$, inte $0{,}50$. Det är en vanlig miss.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En glödlampa är märkt $60\\ \\mathrm{W}$ och ansluts till spänningen $230\\ \\mathrm{V}$. Hur stor ström drar lampan?`,
@@ -12615,7 +12617,7 @@ $$ E = 2\\,000 \\cdot 300 = 600\\,000\\ \\mathrm{J} = 600\\ \\mathrm{kJ} $$
 **Generell slutsats:** Effekt (W) säger hur snabbt energi omsätts; energi (J) är effekt gånger tid. Både effekt och tid måste vara i SI-enheter (W och s) för att svaret ska bli i joule.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En värmeslinga av nikrom är $5{,}0\\ \\mathrm{m}$ lång och har tvärsnittsarean $0{,}50\\ \\mathrm{mm^2}$. Slingan kopplas till spänningen $230\\ \\mathrm{V}$. Vilken effekt utvecklas i slingan? Nikromens resistivitet är $\\rho = 1{,}1 \\cdot 10^{-6}\\ \\mathrm{\\Omega \\cdot m}$.`,
@@ -12664,7 +12666,7 @@ $$ t = \\frac{Q}{P} = \\frac{5{,}02 \\cdot 10^5}{1\\,889} = 266\\ \\mathrm{s} \\
     ],
 
     'fy1-7.10': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `På en laddning $Q = 5{,}0\\ \\mathrm{nC}$ som befinner sig i ett elektriskt fält verkar den elektriska kraften $F = 2{,}0 \\cdot 10^{-4}\\ \\mathrm{N}$. Hur stark är den elektriska fältstyrkan i punkten?`,
@@ -12739,7 +12741,7 @@ $$ \\mathbb{E} = 8{,}99 \\cdot 10^9 \\cdot \\frac{15 \\cdot 10^{-9}}{0{,}10^2} =
 **Generell slutsats:** Notera likheten med Coulombs lag — men här ingår bara *en* laddning, eftersom fältstyrkan beskriver fältet i punkten innan någon andra laddning placerats där.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Fältstyrkan $5{,}0\\ \\mathrm{cm}$ från medelpunkten på en laddad kula är $1{,}8 \\cdot 10^5\\ \\mathrm{N/C}$. Hur stor är kulans laddning?`,
@@ -12782,7 +12784,7 @@ $$ F = \\mathbb{E} \\cdot q = 2{,}81 \\cdot 10^4 \\cdot 3{,}0 \\cdot 10^{-9} = 8
 **Generell slutsats:** Att räkna fältstyrka först och sedan kraft ger samma svar som Coulombs lag direkt ($F = k Q q / r^2$) — men "fält-tänket" är kraftfullt när flera laddningar bidrar, eftersom man då adderar fält i stället för att para ihop alla laddningar.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Två laddningar ligger på en rät linje. Punkten P ligger mellan dem. På avståndet $3{,}0\\ \\mathrm{cm}$ till vänster om P sitter $Q_1 = +9{,}0\\ \\mathrm{nC}$, och på avståndet $2{,}0\\ \\mathrm{cm}$ till höger om P sitter $Q_2 = -4{,}0\\ \\mathrm{nC}$. Bestäm den resulterande elektriska fältstyrkan i P.`,
@@ -12824,7 +12826,7 @@ $$ \\mathbb{E} = \\sqrt{\\mathbb{E}_1^2 + \\mathbb{E}_2^2} = \\mathbb{E}_1 \\cdo
     ],
 
     'fy1-7.11': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Mellan två parallella plattor på avståndet $d = 2{,}0\\ \\mathrm{cm}$ ligger spänningen $U = 100\\ \\mathrm{V}$. Hur stark är den elektriska fältstyrkan mellan plattorna?`,
@@ -12894,7 +12896,7 @@ $$ d = \\frac{600}{2{,}0 \\cdot 10^4} = 0{,}030\\ \\mathrm{m} = 3{,}0\\ \\mathrm
 **Svar:** Plattavståndet är $3{,}0\\ \\mathrm{cm}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Mellan två plattor på avståndet $4{,}0\\ \\mathrm{cm}$ ligger spänningen $200\\ \\mathrm{V}$. En liten laddning $Q = 5{,}0\\ \\mathrm{nC}$ placeras i fältet mellan plattorna. Hur stor elektrisk kraft verkar på laddningen?`,
@@ -12928,7 +12930,7 @@ $$ U = \\mathbb{E} \\cdot d = 1{,}5 \\cdot 10^4 \\cdot 0{,}050 = 750\\ \\mathrm{
 **Generell slutsats:** Uppgiften använder två olika uttryck för samma fältstyrka: $\\mathbb{E} = F/Q$ (definitionen) och $\\mathbb{E} = U/d$ (mellan plattor). Genom att räkna ut $\\mathbb{E}$ från det ena kan man ta sig vidare till det andra.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En elektron befinner sig mellan två plattor som sitter $2{,}0\\ \\mathrm{cm}$ från varandra med spänningen $500\\ \\mathrm{V}$. Elektronen släpps från vila vid den negativa plattan. Vilken hastighet har den när den når den positiva plattan? ($q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$, $m_e = 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}$)`,
@@ -12975,7 +12977,7 @@ $$ y = \\frac{1}{2} a t^2 = \\frac{1}{2} \\cdot 7{,}03 \\cdot 10^{14} \\cdot (3{
     ],
 
     'fy1-7.12': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `I en krets är potentialen i punkt A $V_A = +12\\ \\mathrm{V}$ och i punkt B $V_B = -4{,}0\\ \\mathrm{V}$. Hur stor är spänningen mellan punkterna A och B?`,
@@ -13031,7 +13033,7 @@ $$ V_+ = 0 + U = 0 + 9{,}0 = +9{,}0\\ \\mathrm{V} $$
 **Generell slutsats:** Att gå från minus till plus *inuti* batteriet höjer potentialen — det är batteriet som "pumpar upp" laddningarna till högre elektrisk potential.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I en krets är punkt B jordad, så att $V_B = 0$. Punkt A ligger på andra sidan av en $3{,}0\\ \\mathrm{\\Omega}$-resistor som genomflyts av strömmen $4{,}0\\ \\mathrm{A}$. När man potentialvandrar från B till A går man **mot** strömmens riktning. Bestäm potentialen $V_A$.`,
@@ -13076,7 +13078,7 @@ $$ 9{,}0 - 6{,}0 \\, I = 0 \\quad\\Leftrightarrow\\quad I = \\frac{9{,}0}{6{,}0}
 **Generell slutsats:** När två batterier motverkar varandra är det *nettospänningen* ($12 - 3{,}0 = 9{,}0\\ \\mathrm{V}$) som driver strömmen genom den totala resistansen. Kirchhoffs andra lag ger detta automatiskt om man håller koll på tecknen.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Tre punkter A, B och C ligger längs en krets. Punkt B är jordad ($V_B = 0$). Från B till A potentialvandrar man genom en $4{,}0\\ \\mathrm{\\Omega}$-resistor **mot** strömmen $2{,}5\\ \\mathrm{A}$. Från B till C potentialvandrar man genom en $8{,}0\\ \\mathrm{\\Omega}$-resistor **med** samma ström $2{,}5\\ \\mathrm{A}$. Bestäm spänningen mellan punkt A och punkt C.`,
@@ -13132,7 +13134,7 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
     ],
 
     'fy1-7.13': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En Faradays bur (ett slutet metallhölje) placeras i ett yttre elektriskt fält. Vad gäller för det resulterande elektriska fältet **inuti** buren?`,
@@ -13182,7 +13184,7 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
 **Generell slutsats:** Det är just därför inget fält uppstår inuti buren: laddningen sitter ytterst, och dess bidrag inuti tar ut varandra. Hänger man föremål på burens insida påverkas de inte, medan föremål på utsidan stöts ut av fältet.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Vad menas med **spetsurladdning**?`,
@@ -13216,7 +13218,7 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
 **Generell slutsats:** Samma princip används medvetet i avskärmade rum för känsliga mätningar och i skyddspåsar för kontaktlösa bankkort. Det är fälten utifrån som stängs ute — inte något som händer *med* själva telefonen.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Hur kommer det sig, rent fysikaliskt, att det resulterande elektriska fältet inuti en Faradays bur blir noll?`,
@@ -13236,7 +13238,7 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
     ],
 
     'fy1-7.14': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Två horisontella plattor sitter $5{,}0\\ \\mathrm{mm}$ från varandra och över dem ligger spänningen $1{,}0\\ \\mathrm{kV}$. Hur stark är den elektriska fältstyrkan mellan plattorna?`,
@@ -13303,7 +13305,7 @@ $$ n = \\frac{Q}{q_e} = \\frac{4{,}8 \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}} =
 **Generell slutsats:** Svaret blir (nästan) ett heltal — det var precis det Millikan upptäckte. Laddningen är alltid en hel multipel av elementarladdningen $1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$, aldrig något "mitt emellan".`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Mellan två horisontella plattor $4{,}0\\ \\mathrm{mm}$ från varandra läggs spänningen $1{,}5\\ \\mathrm{kV}$. En oljedroppe med massan $m = 1{,}8 \\cdot 10^{-14}\\ \\mathrm{kg}$ svävar i jämvikt mellan plattorna. Bestäm droppens laddning. ($g = 9{,}82\\ \\mathrm{N/kg}$)`,
@@ -13351,7 +13353,7 @@ $$ n = \\frac{Q}{q_e} = \\frac{3{,}2 \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}} =
 **Generell slutsats:** Att svaret hamnar så nära ett heltal är inget sammanträffande — det är hela poängen med försöket. Droppens laddning *måste* vara ett helt antal elementarladdningar.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Mellan två horisontella plattor $6{,}0\\ \\mathrm{mm}$ från varandra svävar en oljedroppe med massan $m = 3{,}3 \\cdot 10^{-15}\\ \\mathrm{kg}$ i jämvikt. Droppen har 2 överskottselektroner. Vilken spänning ligger över plattorna? ($g = 9{,}82\\ \\mathrm{N/kg}$, $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)`,
@@ -13403,7 +13405,7 @@ $$ r = \\sqrt[3]{\\frac{3 \\cdot 4{,}08 \\cdot 10^{-14}}{4\\pi \\cdot 900}} = \\
     ],
 
     'fy1-8.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Två rymdskepp närmar sig varandra, vardera med farten $0{,}60c$. Det ena skeppet skickar en ljuspuls mot det andra. Med vilken hastighet uppmäter det mottagande skeppet ljuspulsen?`,
@@ -13463,7 +13465,7 @@ $$ E = 1{,}0 \\cdot 10^{-3} \\cdot (2{,}998 \\cdot 10^8)^2 = 9{,}0 \\cdot 10^{13
 **Generell slutsats:** Eftersom $c^2$ är ett enormt tal motsvarar även en pytteliten massa en gigantisk energi — $9 \\cdot 10^{13}\\ \\mathrm{J}$ räcker för att försörja ett eluppvärmt villahushåll (cirka 25 000 kWh per år) med el i ungefär tusen år. Det är denna princip som ligger bakom kärnkraft och solens energiproduktion.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En rymdfarkost är $120\\ \\mathrm{m}$ lång när den mäts i vila. Hur lång är farkosten sett från jorden när den passerar med farten $0{,}80c$? ($c \\approx 2{,}998 \\cdot 10^8\\ \\mathrm{m/s}$)`,
@@ -13511,7 +13513,7 @@ $$ m = \\frac{1{,}67 \\cdot 10^{-27}}{\\sqrt{1 - 0{,}64}} = \\frac{1{,}67 \\cdot
 **Generell slutsats:** Att massan ökar med farten är just därför inget föremål med vilomassa kan nå $c$: ju närmare $c$, desto större massa och desto mer kraft krävs för att accelerera vidare — vid $v = c$ skulle massan bli oändlig. Effekten är bekräftad i partikelacceleratorer.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En myon skapas högt uppe i atmosfären och rör sig rakt nedåt mot marken med farten $0{,}995c$. Myonens medellivslängd är $t_0 = 2{,}2\\ \\mathrm{\\mu s}$ (egentid, mätt i myonens eget system). Hur långt hinner myonen i **markens** referensram innan den i genomsnitt sönderfaller? ($c \\approx 2{,}998 \\cdot 10^8\\ \\mathrm{m/s}$)`,
@@ -13537,7 +13539,7 @@ $$ d = v \\cdot t = 0{,}995 \\cdot 2{,}998 \\cdot 10^8 \\cdot 2{,}2 \\cdot 10^{-
     ],
 
     'fy1-9.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Protonerna i en atomkärna är positivt laddade och borde repellera varandra. Vilken kraft håller ändå ihop kärnan?`,
@@ -13583,7 +13585,7 @@ $$ N = A - Z = 238 - 92 = 146 $$
 **Generell slutsats:** Väte har till exempel tre isotoper: protium ($^1\\mathrm{H}$, 0 neutroner), deuterium ($^2\\mathrm{H}$, 1 neutron) och tritium ($^3\\mathrm{H}$, 2 neutroner) — alla med $Z = 1$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En atomkärna innehåller 26 protoner och 30 neutroner. Vilket masstal har kärnan?`,
@@ -13619,7 +13621,7 @@ $$ Q = 26 \\cdot 1{,}602 \\cdot 10^{-19} = 4{,}2 \\cdot 10^{-18}\\ \\mathrm{C} $
 **Generell slutsats:** Neutronerna bidrar inte — de är oladdade. Det är atomnumret *Z* (protonantalet) som ensamt bestämmer kärnans laddning.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två protoner i en atomkärna befinner sig $2{,}0\\ \\mathrm{fm}$ ($2{,}0 \\cdot 10^{-15}\\ \\mathrm{m}$) från varandra. Hur stor är den elektriska frånstötningen mellan dem? ($k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$, $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)`,
@@ -13646,7 +13648,7 @@ $$ F = 8{,}99 \\cdot 10^9 \\cdot \\frac{(1{,}602 \\cdot 10^{-19})^2}{(2{,}0 \\cd
     ],
 
     'fy1-9.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Kärnan i Helium-3 har massdefekten $\\Delta m = 0{,}00829\\ \\mathrm{u}$. Beräkna kärnans bindningsenergi. Svara i MeV. ($1\\ \\mathrm{u} = 931{,}49\\ \\mathrm{MeV}$)`,
@@ -13684,7 +13686,7 @@ $$ E = \\Delta m \\cdot c^2 = 5{,}0 \\cdot 10^{-30} \\cdot (2{,}998 \\cdot 10^8)
 **Generell slutsats:** Detta är samma sak som föregående uppgift fast utan genvägen — när massdefekten redan står i kg använder man $E = \\Delta m c^2$ direkt. Omvandlar man svaret till MeV får man $\\approx 2{,}8\\ \\mathrm{MeV}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Kärnan i Helium-4 består av 2 protoner och 2 neutroner. Beräkna kärnans bindningsenergi i MeV.
@@ -13725,7 +13727,7 @@ $$ \\frac{E}{A} = \\frac{492}{56} = 8{,}79\\ \\mathrm{MeV/nukleon} $$
 **Generell slutsats:** Bindningsenergi *per nukleon* är ett bättre mått på hur stabil en kärna är än den totala bindningsenergin. Den når sitt maximum (ca $8{,}8\\ \\mathrm{MeV}$) just kring järn ($A = 56$) — därför frigör både fusion av lätta kärnor och fission av tunga kärnor energi: båda rör sig "mot järn".`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Solen strålar ut energi med effekten $P = 3{,}8 \\cdot 10^{26}\\ \\mathrm{W}$. Hur stor massa omvandlas till energi i solen varje sekund? ($c \\approx 2{,}998 \\cdot 10^8\\ \\mathrm{m/s}$)`,
@@ -13745,7 +13747,7 @@ $$ m = \\frac{E}{c^2} = \\frac{3{,}8 \\cdot 10^{26}}{(2{,}998 \\cdot 10^8)^2} = 
     ],
 
     'fy1-9.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vid vilket sönderfall sänder kärnan ut en heliumkärna ($_2^4\\mathrm{He}$)?`,
@@ -13795,7 +13797,7 @@ $$ _Z^A\\mathrm{X} \\rightarrow {_{Z+1}^{A}}\\mathrm{Y} + {_{-1}^{0}}\\mathrm{e}
 **Generell slutsats:** Vid β⁺-sönderfall är det tvärtom: en proton blir en neutron, så atomnumret *minskar* med 1.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Natrium-22 har atomnumret $Z = 11$ och β⁺-sönderfaller. Vilket **atomnummer** har dotterkärnan?`,
@@ -13837,7 +13839,7 @@ $$ E = 0{,}00523 \\cdot 931{,}49 = 4{,}87\\ \\mathrm{MeV} \\approx 4{,}9\\ \\mat
 **Generell slutsats:** Vid α- och γ-sönderfall kan man räkna med atommassorna direkt eftersom antalet elektroner balanserar (här 88 på vänster sida = 86 + 2 på höger). Vid β-sönderfall ändras elektronantalet, och då måste man vara mer noggrann med elektronmassorna.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Uran-238 ($Z = 92$) sönderfaller i en lång kedja av α- och β⁻-sönderfall och slutar till sist som den stabila kärnan bly-206 ($Z = 82$). Hur många α-sönderfall och hur många β⁻-sönderfall sker totalt i hela kedjan?`,
@@ -13863,7 +13865,7 @@ $$ -16 + n_\\beta = -10 \\quad\\Rightarrow\\quad n_\\beta = 6 $$
     ],
 
     'fy1-9.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ett radioaktivt preparat har aktiviteten $800\\ \\mathrm{Bq}$ och halveringstiden $8{,}0$ dagar. Hur stor är aktiviteten efter $24$ dagar?`,
@@ -13901,7 +13903,7 @@ $$ \\frac{N}{N_0} = 0{,}5^{4} = 0{,}0625 = 6{,}25\\ \\% $$
 **Generell slutsats:** Halveringarna ger $100 \\to 50 \\to 25 \\to 12{,}5 \\to 6{,}25\\ \\%$. Redan efter 10 halveringstider återstår bara en tusendel ($0{,}5^{10} \\approx 0{,}001$) — det är därför kol-14-metoden tar slut kring 50 000 år.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett preparat med Cesium-137 ($T_{1/2} = 30\\ \\mathrm{år}$) har i dag aktiviteten $2{,}0\\ \\mathrm{MBq}$. Hur stor är aktiviteten om $50$ år?`,
@@ -13938,7 +13940,7 @@ $$ N = \\frac{A}{\\lambda} = \\frac{1{,}0 \\cdot 10^6}{2{,}0 \\cdot 10^{-8}} = 5
 **Generell slutsats:** Aktiviteten ($10^6$ sönderfall per sekund) känns hög, men eftersom varje enskild kärna sönderfaller så sällan ($\\lambda$ är pyttelitet) krävs det enormt många kärnor för att ge den aktiviteten.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett radioaktivt prov har aktiviteten $5\\,000\\ \\mathrm{Bq}$. Exakt $8{,}0$ timmar senare har aktiviteten sjunkit till $1\\,400\\ \\mathrm{Bq}$. Bestäm provets halveringstid.`,
@@ -13986,7 +13988,7 @@ $$ m = \\frac{N}{N_\\mathrm{A}} \\cdot M = \\frac{1{,}92 \\cdot 10^{18}}{6{,}022
     ],
 
     'fy1-9.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En kroppsvävnad med massan $2{,}0\\ \\mathrm{kg}$ absorberar strålningsenergin $0{,}80\\ \\mathrm{J}$. Beräkna den absorberade dosen.`,
@@ -14028,7 +14030,7 @@ $$ H = D \\cdot Q = 0{,}20 \\cdot 20 = 4{,}0\\ \\mathrm{Sv} $$
 **Generell slutsats:** Genomträngligheten ökar i ordningen α < β < γ. β stoppas av tunn metall, medan γ kräver tjockt bly.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En person med massan $70\\ \\mathrm{kg}$ får den absorberade dosen $2{,}0\\ \\mathrm{mGy}$. Hur mycket strålningsenergi har personen absorberat totalt?`,
@@ -14064,7 +14066,7 @@ $$ H = D \\cdot Q \\quad\\Leftrightarrow\\quad D = \\frac{H}{Q} = \\frac{8{,}0\\
 **Generell slutsats:** Eftersom $Q = 20$ för α räcker en liten absorberad dos (Gy) för att ge en relativt stor ekvivalent dos (Sv). Hade det varit γ-strålning ($Q = 1$) hade absorberad och ekvivalent dos haft samma mätetal.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En person (massa $60\\ \\mathrm{kg}$) får i sig ett α-preparat med aktiviteten $5\\,000\\ \\mathrm{Bq}$. Varje α-partikel har energin $5{,}0\\ \\mathrm{MeV}$, och all energi absorberas i kroppen. Hur stor **ekvivalent dos** får personen under en timme? ($Q = 20$ för α, $1\\ \\mathrm{eV} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{J}$)`,
@@ -14094,7 +14096,7 @@ $$ H = D \\cdot Q = 2{,}4 \\cdot 10^{-7} \\cdot 20 = 4{,}8 \\cdot 10^{-6}\\ \\ma
     ],
 
     'fy2-1.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             penna: 'ov-fy2-1.1-u1',
@@ -14180,7 +14182,7 @@ $$ l_\\mathrm{V} = \\frac{25 \\cdot 2{,}4}{75} = 0{,}80\\ \\mathrm{m} $$
 **Generell slutsats:** Den tyngre måste sitta närmare vridpunkten — kortare hävarm kompenserar för större tyngd så att momenten balanserar.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             penna: 'ov-fy2-1.1-u4',
@@ -14245,7 +14247,7 @@ $$ l_\\mathrm{V} = \\frac{12 \\cdot 0{,}5}{8{,}0} = 0{,}75\\ \\mathrm{m} $$
 **Generell slutsats:** En jämntjock plankas hela tyngd kan tänkas verka i tyngdpunkten (mitten). Att hitta tyngdpunktens läge relativt vridpunkten är ofta första steget i momentuppgifter med utbredda kroppar.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             penna: 'ov-fy2-1.1-u6',
@@ -14289,7 +14291,7 @@ $$ F_f = F_\\mathrm{V} = 34{,}343\\ldots\\ \\mathrm{N} \\approx 34\\ \\mathrm{N}
     ],
 
     'fy2-1.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             penna: 'ov-fy2-1.2-u1',
@@ -14348,7 +14350,7 @@ Massan $24\\ \\mathrm{kg}$ har två värdesiffror, så svaret avrundas till två
 **Generell slutsats:** Symmetri ger lika fördelning. Flyttas tyngdpunkten (eller en last) mot det ena stödet tar det stödet en större del av tyngden — ju närmare tyngdpunkten, desto större kraft.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             penna: 'ov-fy2-1.2-u4',
@@ -14406,7 +14408,7 @@ Alla mätvärden har två värdesiffror, så svaret avrundas till två värdesif
 **Generell slutsats:** Med flera tyngdkrafter på samma bräda får varje kraft sitt eget moment med sin egen hävarm: momentlagen blir en summa i varje led. Kontrollera gärna med kraftjämvikt: $F_\\mathrm{H} = (589{,}2 + 147{,}3) - 515{,}55 \\approx 220\\ \\mathrm{N}$, och mycket riktigt bär den vänstra bocken mest eftersom personen står närmast den.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             penna: 'ov-fy2-1.2-u6',
@@ -14441,7 +14443,7 @@ $$ d = \\frac{20 \\cdot 1{,}0}{60} = 0{,}333\\ldots\\ \\mathrm{m} \\approx 0{,}3
     ],
 
     'fy2-1.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             penna: 'ov-fy2-1.3-u1',
@@ -14494,7 +14496,7 @@ $$ d = \\frac{20 \\cdot 1{,}0}{60} = 0{,}333\\ldots\\ \\mathrm{m} \\approx 0{,}3
 **Generell slutsats:** Tyngdpunkt under stödpunkten ger alltid stabil jämvikt. Det är samma princip som gör att en hängande lampa eller en gunga aldrig kan välta, bara pendla tillbaka. Lindansarens tunga, nedböjda balansstång utnyttjar samma sak.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             penna: 'ov-fy2-1.3-u4',
@@ -14546,7 +14548,7 @@ $$ h = \\frac{0{,}40}{\\tan 25^\\circ} = 0{,}8578...\\ \\mathrm{m} \\approx 0{,}
 **Generell slutsats:** Formeln kan läsas åt båda hållen: en given form ger en vältningsvinkel, och ett krav på vältningsvinkel ger en största tillåten höjd (eller minsta bredd). Lastbilsflak, bokhyllor och husvagnar dimensioneras med precis den här sortens räkning.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             penna: 'ov-fy2-1.3-u6',
@@ -14594,7 +14596,7 @@ $$ 0{,}80 = d \\quad\\Leftrightarrow\\quad d = 0{,}80\\ \\mathrm{m} $$
     ],
 
     'fy2-1.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ett hjul snurrar med frekvensen $5{,}0\\ \\mathrm{Hz}$. Beräkna periodtiden (tiden för ett varv).`,
@@ -14638,7 +14640,7 @@ $$ v = \\omega \\cdot r = 12 \\cdot 0{,}25 = 3{,}0\\ \\mathrm{m/s} $$
 **Generell slutsats:** Alla punkter på hjulet har samma *vinkelhastighet* ω, men *farten* växer med avståndet till centrum — ytterkanten rör sig snabbast.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En LP-skiva snurrar med $45$ varv per minut. Vilken fart har en punkt $12\\ \\mathrm{cm}$ från skivans centrum?`,
@@ -14678,7 +14680,7 @@ $$ r = \\frac{7\\,800 \\cdot 5\\,400}{2\\pi} = 6{,}7 \\cdot 10^6\\ \\mathrm{m} $
 **Generell slutsats:** Det avgörande är att omvandla alla storheter till SI-enheter (km/s → m/s, min → s) innan insättning. Svaret stämmer med en låg satellitbana — jordens radie är ca $6{,}4 \\cdot 10^6\\ \\mathrm{m}$, så satelliten är några hundra km upp.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `På en analog klocka pekar minutvisaren och timvisaren åt exakt samma håll klockan 12:00. Hur lång tid tar det innan de pekar åt samma håll igen? Svara i minuter.
@@ -14706,7 +14708,7 @@ $$ t = \\frac{1\\ \\text{varv}}{\\omega_\\text{rel}} = \\frac{720}{11} = 65{,}5\
     ],
 
     'fy2-1.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En bil tar en kurva med radien $50\\ \\mathrm{m}$ i farten $20\\ \\mathrm{m/s}$. Hur stor är centripetalaccelerationen?
@@ -14798,7 +14800,7 @@ $$ mg = \\frac{mv^2}{r} \\quad\\Leftrightarrow\\quad v = \\sqrt{gr} = \\sqrt{9{,
 **Generell slutsats:** $v = \\sqrt{gr}$ är den klassiska villkorsfarten i toppen av en loop — går vagnen långsammare faller den inåt och tappar banan.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En bil som väger $1\\,200\\ \\mathrm{kg}$ kör över ett backkrön med krökningsradien $60\\ \\mathrm{m}$ i farten $72\\ \\mathrm{km/h}$. Hur stor är normalkraften från vägen på bilen i krönets högsta punkt? ($g = 9{,}82\\ \\mathrm{N/kg}$)
@@ -14842,7 +14844,7 @@ $$ v = \\sqrt{\\mu \\cdot g \\cdot r} = \\sqrt{0{,}50 \\cdot 9{,}82 \\cdot 90} =
 **Generell slutsats:** Maxfarten beror *inte* på bilens massa (den stryks bort) — bara på friktionstalet och radien. Halt väglag (lågt μ) eller tvär kurva (litet *r*) sänker maxfarten.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `För att bilar ska klara en kurva även på halt underlag **doseras** vägen — vägbanan lutas in mot kurvans centrum. Vilken doseringsvinkel ska en kurva med radien $110\\ \\mathrm{m}$ ha för att en bil i farten $90\\ \\mathrm{km/h}$ ska klara den helt utan friktion? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
@@ -14872,7 +14874,7 @@ $$ \\tan\\alpha = \\frac{25^2}{110 \\cdot 9{,}82} = \\frac{625}{1\\,080} = 0{,}5
     ],
 
     'fy2-1.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En gunga släpps från vila och faller så att tyngdpunkten sjunker $1{,}5\\ \\mathrm{m}$ tills den når banans lägsta punkt. Vilken fart har gungan där? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
@@ -14932,7 +14934,7 @@ $$ v = \\sqrt{\\frac{G \\cdot m_j}{r}} = \\sqrt{\\frac{6{,}67 \\cdot 10^{-11} \\
 **Generell slutsats:** Farten beror inte på satellitens egen massa: den stryks ur ekvationen. Ju lägre bana (mindre *r*), desto **högre** fart krävs.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En person som väger $70\\ \\mathrm{kg}$ gungar i en gunga med $4{,}0\\ \\mathrm{m}$ långa rep. Hon släpps från vila från en höjd $1{,}2\\ \\mathrm{m}$ över banans lägsta punkt. Hur stor är den totala spännkraften i repen i lägsta punkten? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
@@ -15006,7 +15008,7 @@ $$ h = r - r_j = 42\\,240 - 6\\,378 = 35\\,862\\ \\mathrm{km} \\approx 35\\,900\
 **Generell slutsats:** Perioden bestämmer banradien entydigt: det finns bara **en** höjd där ett varv tar precis ett dygn, och alla geostationära satelliter trängs därför i samma ring över ekvatorn. Räknar man med stjärndygnet 23 h 56 min (jordens verkliga rotationstid) blir svaret $35\\,786\\ \\mathrm{km}$.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En pendelkula som väger $200\\ \\mathrm{g}$ hänger i en $1{,}2\\ \\mathrm{m}$ lång tråd. Kulan dras ut i sidled till vinkeln α mot lodlinjen och släpps. Tråden tål en spännkraft på högst $3{,}0\\ \\mathrm{N}$. Vilken är den största vinkeln α man kan släppa kulan ifrån utan att tråden brister? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
@@ -15034,7 +15036,7 @@ $$ \\alpha = \\arccos(0{,}736) = 43^\\circ $$
     ],
 
     'fy2-1.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En konisk pendel har trådlängden $1{,}5\\ \\mathrm{m}$, och tråden bildar vinkeln $25^\\circ$ mot vertikalen. Beräkna periodtiden. ($g = 9{,}82\\ \\mathrm{m/s^2}$)
@@ -15095,7 +15097,7 @@ $$ f = \\frac{1}{T} = \\frac{1}{2{,}0} = 0{,}50\\ \\mathrm{Hz} $$
 **Generell slutsats:** Sambandet $f = 1/T$ gäller för all periodisk rörelse — pendlar, rotation och vågor.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En konisk pendel har trådlängden $2{,}0\\ \\mathrm{m}$ och tråden bildar vinkeln $40^\\circ$ mot vertikalen. Bestäm farten hos pendelvikten i cirkelbanan. ($g = 9{,}82\\ \\mathrm{m/s^2}$)
@@ -15143,7 +15145,7 @@ $$ \\cos\\alpha = \\frac{9{,}82 \\cdot 1{,}8^2}{4\\pi^2 \\cdot 1{,}0} = 0{,}806 
 **Generell slutsats:** Här satt den okända vinkeln inuti en cosinus. Man löser ut $\\cos\\alpha$ algebraiskt först och tar sedan $\\arccos$ — rutinmässigt med räknare.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En konisk pendel har trådlängden $1{,}5\\ \\mathrm{m}$. Vid vilken periodtid blir spännkraften i tråden **exakt dubbelt så stor** som tyngdkraften på pendelvikten? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
@@ -15169,7 +15171,7 @@ $$ T = 2\\pi\\sqrt{\\frac{l\\cos\\alpha}{g}} = 2\\pi\\sqrt{\\frac{1{,}5 \\cdot 0
     ],
 
     'fy2-1.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En boll sparkas från marken med utgångsfarten $18\\ \\mathrm{m/s}$ och vinkeln $30^\\circ$ mot horisontalplanet. Hur lång blir kastvidden? (Bortse från luftmotstånd, $g = 9{,}82\\ \\mathrm{m/s^2}$.)
@@ -15217,7 +15219,7 @@ $$ x = v_0 \\cdot t = 4{,}0 \\cdot 1{,}43 = 5{,}7\\ \\mathrm{m} $$
 **Generell slutsats:** Rörelsen i *x*-led och *y*-led är oberoende av varandra. Falltiden bestäms helt av höjden — den vågräta farten påverkar bara *hur långt* han hinner under den tiden.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En boll kastas vågrätt med farten $12\\ \\mathrm{m/s}$ från höjden $8{,}0\\ \\mathrm{m}$. Med vilken fart träffar den marken? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
@@ -15263,7 +15265,7 @@ $$ x = v_0 \\cdot t \\quad\\Leftrightarrow\\quad v_0 = \\frac{x}{t} = \\frac{15}
 **Generell slutsats:** Höjden bestämmer "hur lång tid stenen har på sig"; därefter ger den önskade vågräta sträckan den fart som krävs. Två oberoende rörelser kopplas ihop via den gemensamma tiden.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En fotbollsspelare sparkar bollen från marken med utgångsfarten $20\\ \\mathrm{m/s}$ och vinkeln $35^\\circ$. På avståndet $30\\ \\mathrm{m}$ står en $2{,}5\\ \\mathrm{m}$ hög mur. Hur högt över marken befinner sig bollen när den når muren — och går den över? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
@@ -15288,7 +15290,7 @@ Eftersom $4{,}5\\ \\mathrm{m} > 2{,}5\\ \\mathrm{m}$ går bollen över muren med
     ],
 
     'fy2-1.9': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En boll befinner sig i läget $x = 2{,}0\\ \\mathrm{m}$, $y = 1{,}5\\ \\mathrm{m}$ och har hastigheten $5{,}0\\ \\mathrm{m/s}$ i *x*-led och $3{,}0\\ \\mathrm{m/s}$ i *y*-led. Använd stegmetoden med tidssteget $\\Delta t = 0{,}10\\ \\mathrm{s}$. Hur högt befinner sig bollen efter ett steg, det vill säga vilket värde har *y*?`,
@@ -15359,7 +15361,7 @@ $$ F_\\mathrm{luft} = 0{,}0057 \\cdot 25^2 = 3{,}5625\\ \\mathrm{N} \\approx 3{,
 **Generell slutsats:** En fotboll väger ungefär $0{,}43\\ \\mathrm{kg}$, så tyngdkraften är cirka $4{,}2\\ \\mathrm{N}$. Vid $25\\ \\mathrm{m/s}$ är luftmotståndet alltså nästan lika stort som tyngdkraften, och då går det inte att bortse från det. Eftersom kraften växer med farten i kvadrat ger dubbla farten fyra gånger så stort luftmotstånd.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett kast ska simuleras med stegmetoden i ett kalkylblad. Kolumn A innehåller tiden *t*, B läget *x*, C läget *y*, D hastigheten $v_x$ och E hastigheten $v_y$. Startvärdena står i rad 2 och tidssteget är $0{,}05\\ \\mathrm{s}$. Vilken formel ska stå i cell C3?`,
@@ -15411,7 +15413,7 @@ $$ a_y = -9{,}82 - \\frac{0{,}0011 \\cdot 20 \\cdot 16}{0{,}0050} = -80{,}22\\ \
 **Generell slutsats:** Luftmotståndet ger här en acceleration som är sju gånger så stor som tyngdaccelerationen. Det är därför en badmintonboll tvärbromsar efter slaget och faller nästan rakt ned. I *x*-led blir accelerationen $a_x = -\\dfrac{0{,}0011 \\cdot 20 \\cdot 12}{0{,}0050} = -52{,}8\\ \\mathrm{m/s^2}$, så även farten framåt minskar snabbt.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Badmintonbollen i förra uppgiften ($m = 5{,}0\\ \\mathrm{g}$, $k = 0{,}0011\\ \\mathrm{kg/m}$) släpps från en hög läktare och faller rakt nedåt. En simulering med stegmetoden visar att farten först ökar men sedan närmar sig ett konstant värde. Förklara varför, och bestäm det värdet. ($g = 9{,}82\\ \\mathrm{m/s^2}$)`,
@@ -15445,7 +15447,7 @@ $$ v = \\sqrt{\\frac{0{,}0050 \\cdot 9{,}82}{0{,}0011}} = 6{,}681\\ \\mathrm{m/s
     // ════════════════════════════════════════════════════════════════════
 
     'fy2-2.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En spiralfjäder med fjäderkonstanten $85\\ \\mathrm{N/m}$ dras ut $12\\ \\mathrm{cm}$. Hur stor kraft drar man i?`,
@@ -15511,7 +15513,7 @@ $$ \\Delta l = \\frac{24}{150} = 0{,}16\\ \\mathrm{m} = 16\\ \\mathrm{cm} $$
 **Svar:** Fjädern dras ut $0{,}16\\ \\mathrm{m}$ (= $16\\ \\mathrm{cm}$).`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En vikt med massan $320\\ \\mathrm{g}$ hängs i en spiralfjäder. Fjädern förlängs då $6{,}5\\ \\mathrm{cm}$. Bestäm fjäderkonstanten. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
@@ -15567,7 +15569,7 @@ $$ a = \\frac{-25 \\cdot (-0{,}10)}{0{,}40} = \\frac{2{,}5}{0{,}40} = 6{,}25\\ \
 **Generell slutsats:** I formeln $F_R = -k\\cdot y$ är tyngdkraften redan inräknad i jämviktsläget — vi räknar bara med fjäderns *extra* kraft utöver det som balanserar tyngden. Det är därför accelerationen i det undre vändläget *inte* är $g$ utan beror på *k* och utslaget.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En vikt med massan $0{,}50\\ \\mathrm{kg}$ hängs i en spiralfjäder och drar då ner den $8{,}0\\ \\mathrm{cm}$. Sedan tas vikten ner och hängs i stället i två likadana fjädrar **parallellt** (sida vid sida, så att de delar lasten). Hur mycket dras de två fjädrarna ner? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
@@ -15616,7 +15618,7 @@ $$ \\Delta l_2 = \\frac{0{,}080}{2} = 0{,}040\\ \\mathrm{m} = 4{,}0\\ \\mathrm{c
     ],
 
     'fy2-2.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En fjäder med fjäderkonstanten $120\\ \\mathrm{N/m}$ dras ut $15\\ \\mathrm{cm}$ från jämviktsläget och hålls stilla. Hur stor är den potentiella energin, räknad från jämviktsläget?`,
@@ -15702,7 +15704,7 @@ $$ k_\\mathrm{R} = 3 \\cdot 45 = 135\\ \\mathrm{N/m} $$
 **Rimlighet:** Parallellkopplingen är styvare än en ensam fjäder, och 135 N/m är större än 45 N/m.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En vikt med massan $0{,}30\\ \\mathrm{kg}$ hängs i en fjäder med fjäderkonstanten $48\\ \\mathrm{N/m}$. Vikten dras $12\\ \\mathrm{cm}$ under jämviktsläget och släpps. Hur stor fart har vikten när den passerar jämviktsläget?
@@ -15819,7 +15821,7 @@ $$ \\Delta l = \\frac{6{,}0}{25} = 0{,}24\\ \\mathrm{m} $$
 **Generell slutsats:** I serie bär varje fjäder hela vikten och förlängs lika mycket som ensam. Två likadana fjädrar ger därför dubbel förlängning.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En pilbåge spänns $32\\ \\mathrm{cm}$ med en spännkraft på $180\\ \\mathrm{N}$. Pilen skjuts vågrätt från höjden $1{,}6\\ \\mathrm{m}$ ovanför marken och landar $24\\ \\mathrm{m}$ bort. Bestäm pilens massa. Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$ och bortse från luftmotstånd.
@@ -15863,7 +15865,7 @@ $$ m = \\frac{2 \\cdot 28{,}8}{42{,}02^2} = \\frac{57{,}6}{1766} \\approx 0{,}03
     ],
 
     'fy2-2.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Diagrammet visar elongationen *y* för en harmonisk svängning som funktion av tiden *t*. Avläs svängningens amplitud.
@@ -15927,7 +15929,7 @@ $$ a_{\\max} = 20^2 \\cdot 0{,}050 = 400 \\cdot 0{,}050 = 20\\ \\mathrm{m/s^2} $
 **Generell slutsats:** Maximala accelerationen uppnås i vändlägena (kurvans toppar och bottnar), där den resulterande kraften är som störst. I jämviktsläget är accelerationen 0.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En vikt med massan $0{,}25\\ \\mathrm{kg}$ hänger i en fjäder med fjäderkonstanten $64\\ \\mathrm{N/m}$ och får utföra en harmonisk svängning med amplituden $5{,}0\\ \\mathrm{cm}$. Bestäm svängningens periodtid.
@@ -15990,7 +15992,7 @@ $$ v \\approx 0{,}96 \\cdot 0{,}6967 \\approx 0{,}67\\ \\mathrm{m/s} $$
 **Generell slutsats:** Glöm inte att räknaren ska stå i radianmod när argumentet är $\\omega t$. Maxfarten är $v_{\\max} = \\omega A = 0{,}96\\ \\mathrm{m/s}$ — vår fart $0{,}67\\ \\mathrm{m/s}$ ligger rimligt en bit under det.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En fjäder med okänd massa *m* hängs upp. När fjädern sätts i svängning utför den $24$ hela svängningar på $30\\ \\mathrm{s}$ (övre kurvan). När en extra vikt på $0{,}30\\ \\mathrm{kg}$ läggs till utför den $16$ svängningar på samma tid (nedre, streckad kurva). Bestäm den ursprungliga massan *m*.
@@ -16055,7 +16057,7 @@ $$ m = \\frac{0{,}30}{2{,}25 - 1} = \\frac{0{,}30}{1{,}25} = 0{,}24\\ \\mathrm{k
     ],
 
     'fy2-2.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En vikt med massan $0{,}50\\ \\mathrm{kg}$ hängs i en fjäder med fjäderkonstanten $80\\ \\mathrm{N/m}$ och får utföra en harmonisk svängning. Beräkna periodtiden.
@@ -16125,7 +16127,7 @@ $$ k = \\frac{4\\pi^2 \\cdot 0{,}40}{1{,}2^2} = \\frac{15{,}79}{1{,}44} \\approx
 **Svar:** Fjäderkonstanten är ungefär $11\\ \\mathrm{N/m}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En vikt med massan $200\\ \\mathrm{g}$ drar ner en fjäder $5{,}0\\ \\mathrm{cm}$. Vikten byts mot en ny vikt med massan $500\\ \\mathrm{g}$, som sätts i svängning. Bestäm periodtiden för den nya svängningen. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
@@ -16183,7 +16185,7 @@ $$ k = \\frac{4\\pi^2 \\cdot 0{,}45}{0{,}80^2} = \\frac{17{,}77}{0{,}64} \\appro
 **Generell slutsats:** Att läsa av en period från en sinuskurva är en grundfärdighet. Räkna från en topp till nästa (eller från en nollgenomgång i samma riktning till nästa) — inte från en topp till nästa botten, vilket bara är en halv period.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två likadana fjädrar, var och en med fjäderkonstanten $k = 96\\ \\mathrm{N/m}$, kopplas i **serie**: den ena hänger från taket och den andra i den, och slutligen en vikt på $0{,}50\\ \\mathrm{kg}$ längst ner. Bestäm periodtiden om vikten sätts i svängning.
@@ -16216,7 +16218,7 @@ $$ T = 2\\pi\\sqrt{\\frac{m}{k_\\mathrm{R}}} = 2\\pi\\sqrt{\\frac{0{,}50}{48}} =
     ],
 
     'fy2-2.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En matematisk pendel har pendellängden $2{,}0\\ \\mathrm{m}$. Bestäm periodtiden. Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.
@@ -16288,7 +16290,7 @@ $$ g = \\frac{4\\pi^2 \\cdot 0{,}30}{1{,}20^2} = \\frac{11{,}84}{1{,}44} \\appro
 **Generell slutsats:** En matematisk pendel är ett enkelt instrument för att mäta tyngdaccelerationen — perioden ger *g* direkt eftersom pendellängden lätt mäts med måttband.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En matematisk pendel har pendellängden $0{,}80\\ \\mathrm{m}$. Hur lång ska pendeln vara för att periodtiden ska **fördubblas**?
@@ -16337,7 +16339,7 @@ $$ T_\\text{Mars} = 2{,}00 \\cdot \\sqrt{\\frac{9{,}82}{3{,}71}} = 2{,}00 \\cdot
 **Generell slutsats:** Lägre tyngdacceleration ger längre periodtid — pendeln "faller långsammare" tillbaka mot lodlinjen. Det är därför mekaniska pendelklockor från jorden går *för långsamt* på Mars eller Månen.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En pendelklocka är kalibrerad för jordens tyngdacceleration ($g = 9{,}82\\ \\mathrm{m/s^2}$). Klockan tas med till en främmande planet. När exakt $24$ timmar har gått enligt en korrekt atomur visar pendelklockan att $14$ h $45$ min har gått. Bestäm tyngdaccelerationen på planeten.
@@ -16377,7 +16379,7 @@ $$ g_\\text{planet} = 9{,}82 \\cdot \\left(\\frac{14{,}75}{24{,}00}\\right)^2 = 
     ],
 
     'fy2-2.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En svängning har periodtiden $0{,}025\\ \\mathrm{s}$. Bestäm frekvensen.`,
@@ -16436,7 +16438,7 @@ $$ T = \\frac{1}{440} = 0{,}002273\\ldots\\ \\mathrm{s} \\approx 2{,}3\\ \\mathr
 **Generell slutsats:** Resonans = matchande frekvens + rätt fas (energi tillförs när systemet är på väg åt rätt håll). Klassiska exempel: gungan som puttas i takt, vinglaset som spricker när tonen träffar rätt frekvens, Tacoma-bron som slets sönder av vinden.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En fjäderpendel har fjäderkonstanten $200\\ \\mathrm{N/m}$ och en vikt med massan $0{,}50\\ \\mathrm{kg}$. Bestäm systemets egenfrekvens.
@@ -16479,7 +16481,7 @@ $$ f = \\frac{1}{2\\pi}\\sqrt{\\frac{200}{0{,}50}} = \\frac{\\sqrt{400}}{2\\pi} 
 **Generell slutsats:** Resonansen är vad som *förstärker* en svag yttre påverkan till en stor effekt. Utan matchning av frekvensen kan man ropa hur högt som helst utan att glaset bryts.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En personbil med massan $1{,}5\\ \\mathrm{ton}$ vilar på en fjädring vars sammanlagda fjäderkonstant är $1{,}0\\cdot 10^5\\ \\mathrm{N/m}$. Bilen kör över en väg där jämna rufflor i asfalten ligger på avståndet $4{,}5\\ \\mathrm{m}$. Vid vilken hastighet uppstår resonans i fjädringen? Ange svaret i km/h.
@@ -16519,7 +16521,7 @@ $$ v = 4{,}5 \\cdot 1{,}30 = 5{,}85\\ \\mathrm{m/s} = 21\\ \\mathrm{km/h} $$
     ],
 
     'fy2-2.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En vågrörelse har frekvensen $2{,}0\\ \\mathrm{Hz}$ och våglängden $1{,}5\\ \\mathrm{m}$. Beräkna vågens utbredningshastighet.
@@ -16598,7 +16600,7 @@ $$ f = \\frac{2{,}0}{0{,}40} = 5{,}0\\ \\mathrm{Hz} $$
 **Svar:** Frekvensen är $5{,}0\\ \\mathrm{Hz}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En vattenvåg har periodtiden $0{,}25\\ \\mathrm{s}$ och våglängden $2{,}0\\ \\mathrm{m}$. Bestäm vågens utbredningshastighet.`,
@@ -16665,7 +16667,7 @@ $$ f = \\frac{6{,}0}{0{,}50} = 12\\ \\mathrm{Hz} $$
 **Generell slutsats:** Ett $y$-$x$-diagram (våg i ett ögonblick längs en sträng) visar våglängden direkt; ett $y$-$t$-diagram (en punkts läge mot tiden) visar periodtiden. Båda används för att beräkna hastighet via $v = f\\cdot\\lambda$.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Vid en jordbävning registrerar en seismograf två typer av vågor — P-vågor (longitudinella, $5{,}8\\ \\mathrm{km/s}$) och S-vågor (transversella, $3{,}4\\ \\mathrm{km/s}$) — som båda färdas radiellt från epicentrum. Seismografen upptäcker att S-vågorna anländer $12\\ \\mathrm{s}$ efter P-vågorna. Hur långt bort ligger jordbävningens epicentrum?`,
@@ -16698,7 +16700,7 @@ $$ d = \\frac{12 \\cdot 3\\,400 \\cdot 5\\,800}{5\\,800 - 3\\,400} = \\frac{2{,}
     ],
 
     'fy2-2.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ett vågberg rör sig på ett snöre mot en **fast ände** (snöret är fast fäst i en vägg). Vad händer med vågen när den reflekteras?`,
@@ -16742,7 +16744,7 @@ $$ d = \\frac{12 \\cdot 3\\,400 \\cdot 5\\,800}{5\\,800 - 3\\,400} = \\frac{2{,}
 **Generell slutsats:** Vid mötet kan pulserna förstärka varandra (om båda är vågberg eller båda vågdalar) eller delvis ta ut varandra (vågberg + vågdal). Det är hela grunden för **interferens** — som vi möter i 2.14.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Två triangulära pulser möts på en sträng. Båda har formen av en likbent triangel med höjden $5{,}0\\ \\mathrm{cm}$ och samma bredd. Den ena är ett **vågberg**, den andra en **vågdal**. Vad är strängens läge när pulserna **exakt överlappar** varandra?`,
@@ -16779,7 +16781,7 @@ Det är som om det tunnare mediet beter sig som en "lös ände" från det tätar
 **Generell slutsats:** Det motsatta fallet — tunnare till tätare — ger förkortad transmission och **omvänd** reflexion (likt en fast ände). Båda fenomen sker samtidigt; pulsen splittras i en transmitterad och en reflekterad del.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två likadana triangulära pulser rör sig mot varandra på ett snöre med farten $2{,}0\\ \\mathrm{m/s}$ vardera. Båda har höjden $8{,}0\\ \\mathrm{cm}$ och en bas på $0{,}40\\ \\mathrm{m}$, men den ena är ett **vågberg** och den andra en **vågdal**. Vid tiden $t = 0$ är pulsernas centrum $1{,}2\\ \\mathrm{m}$ från varandra. Vid vilken tidpunkt är hela snöret **helt platt** (pulserna har tagit ut varandra fullständigt)?`,
@@ -16801,7 +16803,7 @@ $$ t = \\frac{d}{v_\\text{rel}} = \\frac{1{,}2}{4{,}0} = 0{,}30\\ \\mathrm{s} $$
     ],
 
     'fy2-2.9': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En sträng med fasta ändar har längden $0{,}60\\ \\mathrm{m}$ och svänger i sin **grundton** (en buk). Beräkna vågens våglängd i strängen.
@@ -16860,7 +16862,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{300}{2{,}0} = 150\\ \\mathrm{Hz} $$
 **Svar:** Frekvensen är $150\\ \\mathrm{Hz}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En sträng med längden $0{,}50\\ \\mathrm{m}$ har våghastigheten $160\\ \\mathrm{m/s}$. Beräkna **grundtonens frekvens**.
@@ -16902,7 +16904,7 @@ $$
 **Generell slutsats:** Den så kallade **övertonsserien** $f_n = n\\cdot f_1$ är grunden för all stränginstrument-musik — det är blandningen av grundtonen och övertonerna som ger varje instrument sin karakteristiska klang.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En gitarrsträng med längden $0{,}65\\ \\mathrm{m}$ svänger i sin **tredje överton** (fyra bukar) vid frekvensen $660\\ \\mathrm{Hz}$. Gitarristen sätter sedan fingret precis halvvägs upp på strängen — den effektiva längden blir då $0{,}325\\ \\mathrm{m}$ — och spelar **grundtonen** för den förkortade strängen. Vilken frekvens har den nya grundtonen? (Strängens spänning och därmed våghastigheten är oförändrad.)`,
@@ -16928,7 +16930,7 @@ $$ f_2 = \\frac{v}{\\lambda_2} = \\frac{214{,}5}{0{,}65} = 330\\ \\mathrm{Hz} $$
     ],
 
     'fy2-2.10': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En **öppen pipa** har längden $0{,}40\\ \\mathrm{m}$. Beräkna grundtonens frekvens. Räkna med ljudets hastighet $v = 340\\ \\mathrm{m/s}$ i luft.
@@ -17000,7 +17002,7 @@ $$ l = \\frac{340}{2 \\cdot 300} = 0{,}5667\\ldots\\ \\mathrm{m} \\approx 0{,}57
 **Svar:** Pipan ska vara ungefär $0{,}57\\ \\mathrm{m}$ lång.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En halvöppen pipa har längden $0{,}18\\ \\mathrm{m}$. Beräkna frekvensen för **första övertonen**. Räkna med $v = 340\\ \\mathrm{m/s}$.
@@ -17050,7 +17052,7 @@ $$ f_h = \\frac{425}{2} = 212{,}5\\ \\mathrm{Hz} \\approx 213\\ \\mathrm{Hz} $$
 **Generell slutsats:** Det är därför man kan göra en orgelpipa kompaktare genom att stänga ena änden — man får en lägre ton från en kortare pipa. Det kostar dock i ljudkaraktär (bara udda övertoner uppstår).`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ett klassiskt resonansexperiment används för att bestämma ljudets hastighet i luft. Ett provrör med vatten ställs lodrätt och en stämgaffel med frekvensen $440\\ \\mathrm{Hz}$ hålls strax ovanför öppningen. När vattennivån sänks ändras pipans effektiva längd. Resonans (förstärkt ton) uppstår när luftpelarens längd är $18{,}5\\ \\mathrm{cm}$, och igen vid $57{,}0\\ \\mathrm{cm}$. Bestäm ljudets hastighet i luft.`,
@@ -17087,7 +17089,7 @@ $$ v = f \\cdot \\lambda = 440 \\cdot 0{,}770 = 338{,}8\\ \\mathrm{m/s} $$
     ],
 
     'fy2-2.11': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En ljudvåg överför effekten $2{,}0\\ \\mathrm{W}$ jämnt fördelat över arean $10\\ \\mathrm{m^2}$. Beräkna ljudintensiteten.`,
@@ -17149,7 +17151,7 @@ $$ I = 10^{-12} \\cdot 10^{60/10} = 10^{-12} \\cdot 10^{6} = 10^{-6}\\ \\mathrm{
 **Svar:** Intensiteten är $1{,}0\\cdot 10^{-6}\\ \\mathrm{W/m^2}$ (= $1{,}0\\ \\mathrm{\\mu W/m^2}$).`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En högtalare strålar ut effekten $8{,}0\\ \\mathrm{W}$ jämnt i alla riktningar (punktkälla). Beräkna ljudintensiteten på avståndet $5{,}0\\ \\mathrm{m}$ från högtalaren.
@@ -17202,7 +17204,7 @@ $$ L_2 = L_1 + \\Delta L = 70 - 6{,}02 \\approx 64\\ \\mathrm{dB} $$
 **Generell slutsats:** Tumregeln "$-6\\ \\mathrm{dB}$ vid fördubblat avstånd" gäller för en punktkälla i öppen omgivning. Inomhus eller mot väggar (där ljudet reflekteras) är dämpningen mindre.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två högtalare *A* och *B* står sida vid sida och spelar olika ljud (okorrelerade). Bara *A* är på: ljudnivån mäts till $65\\ \\mathrm{dB}$. Bara *B* är på: $70\\ \\mathrm{dB}$. Vilken ljudnivå mäts när **båda är på samtidigt**?`,
@@ -17232,7 +17234,7 @@ $$ L_\\text{tot} = 10\\cdot\\lg\\!\\left(\\frac{I_\\text{tot}}{I_0}\\right) = 10
     ],
 
     'fy2-2.12': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En fladdermus skickar ut ultraljud med frekvensen $25\\ \\mathrm{kHz}$. Beräkna ljudvågens våglängd i luft. Räkna med $v = 340\\ \\mathrm{m/s}$.`,
@@ -17289,7 +17291,7 @@ När ambulansen sedan har passerat och rör sig **från** dig, sker det motsatta
 **Generell slutsats:** Detta är **dopplereffekten** — en ändring i upplevd frekvens som beror på relativ rörelse mellan källa och mottagare. Den fungerar för ljud, vatten- och ljusvågor (där den används för att mäta hastigheter på avlägsna galaxer — *rödförskjutning*).`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En fladdermus skickar ut en ultraljudspuls och tar emot ekot från en mal $12\\ \\mathrm{ms}$ senare. Hur långt från fladdermusen är malen? Räkna med ljudets hastighet $v = 340\\ \\mathrm{m/s}$.`,
@@ -17331,7 +17333,7 @@ Dessutom förstärker **hörselgångens resonans** (ett rör stängt i ena ände
 **Generell slutsats:** Mänsklig hörsel är **inte** linjär — vi uppfattar olika frekvenser olika starkt även när ljudnivån (i dB) är densamma. Det är därför hörlurar och ljudsystem ofta är "EQ-tunade" till att kompensera.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En fladdermus jagar genom att skicka ut korta ultraljudspulser $80$ gånger per sekund. Varje puls är $1{,}5\\ \\mathrm{ms}$ lång. För att fladdermusen ska kunna "höra" ekot tydligt måste det komma tillbaka **efter** att den aktuella pulsen avslutats (annars överlagras eko och puls). Vad är det **kortaste avståndet** en fladdermus kan upptäcka? Räkna med $v = 340\\ \\mathrm{m/s}$.`,
@@ -17363,7 +17365,7 @@ Pulstakten, $80$ pulser per sekund, påverkar inte det kortaste avståndet. Den 
     ],
 
     'fy2-2.13': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En vattenvåg träffar en klippa med infallsvinkeln $35^\\circ$ mot ytans normal. Vilken är reflexionsvinkeln?
@@ -17448,7 +17450,7 @@ $$ b = \\sin^{-1}(0{,}8240) \\approx 55{,}5^\\circ $$
 **Generell slutsats:** Vågen påskyndas (längre våglängd) och bryts **från** normalen — vinkeln ökar.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En vattenvåg går från djupt till grunt vatten. Våglängden i djupt vatten är $8{,}0\\ \\mathrm{m}$. Infallsvinkeln är $60^\\circ$ och brytningsvinkeln är $30^\\circ$. Beräkna våglängden i det grunda vattnet.
@@ -17497,7 +17499,7 @@ $$ b = \\sin^{-1}(0{,}3536) \\approx 20{,}7^\\circ $$
 **Generell slutsats:** När vågen bromsas (här halveras hastigheten) bryts den mot normalen — typiskt fall som händer när vågor närmar sig strandkanten.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Vattenvågor går från **grunt** vatten ($v_1 = 3{,}0\\ \\mathrm{m/s}$) till **djupt** vatten ($v_2 = 8{,}0\\ \\mathrm{m/s}$). Vid vilken infallsvinkel uppstår **totalreflexion**, så att inga vågor transmitteras till det djupa vattnet?
@@ -17529,7 +17531,7 @@ $$ i_\\text{kritisk} = \\sin^{-1}(0{,}375) \\approx 22{,}0^\\circ $$
     ],
 
     'fy2-2.14': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En punkt i ett interferensmönster har vägskillnaden $\\Delta s = 2\\lambda$ till två koherenta vågkällor. På vilken linje ligger punkten?`,
@@ -17579,7 +17581,7 @@ I dubbelspaltsförsöket samverkar båda — först diffrakterar vågen genom va
 **Generell slutsats:** Båda fenomen är karakteristiska för **vågor**. De avslöjar att något är en våg — t.ex. visade dubbelspaltsförsök 1801 att ljus är en vågrörelse, och 1927 att även elektroner är vågor.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Två högtalare *A* och *B* står $4{,}0\\ \\mathrm{m}$ från varandra och spelar samma ton ($340\\ \\mathrm{Hz}$) i fas. En lyssnare står $3{,}0\\ \\mathrm{m}$ från *B* på en linje vinkelrätt mot $AB$ (alltså rakt fram från *B*). På vilken linje står lyssnaren? Räkna med $v = 340\\ \\mathrm{m/s}$.
@@ -17637,7 +17639,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{2{,}0} = 170\\ \\mathrm{Hz} $$
 **Generell slutsats:** Samma struktur som föregående uppgift (Pythagoras + interferens) men där frekvensen är okänd istället för linje-ordning. Att kunna växla mellan dessa är typiskt för mellannivå.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två högtalare *A* och *B* står $5{,}0\\ \\mathrm{m}$ från varandra och spelar samma ton i fas. En lyssnare står $12{,}0\\ \\mathrm{m}$ från *B* på en linje vinkelrätt mot $AB$ (rakt fram från *B*). Lyssnaren upplever att hen står på **1:a nodlinjen**. Bestäm tonens frekvens. Räkna med $v = 340\\ \\mathrm{m/s}$.
@@ -17675,7 +17677,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{2/3} = 340 \\cdot \\frac{3}{2} = 510\\ 
     // ════════════════════════════════════════════════════════════════════
 
     'fy2-3.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad menas med en **permanentmagnet**?`,
@@ -17717,7 +17719,7 @@ Magneter som bara fungerar med tillförd ström kallas **elektromagneter** (se 3
             solution: `**Magnetpoler uppträder alltid parvis.** När en magnet delas bildas två nya, kortare magneter — vardera med en nordända och en sydända. Man kan **aldrig** skapa en magnet med endast en pol (en så kallad *magnetisk monopol*) — det är en grundläggande egenskap hos magnetism.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Hur ritas magnetiska fältlinjer kring en stavmagnet?`,
@@ -17747,7 +17749,7 @@ Att fältlinjerna alltid är slutna kurvor (inte avbrytas vid någon pol) är en
 **Generell slutsats:** Det är därför man inte vill korsa fältlinjer i en figur — en överlappning skulle innebära att fältet har två olika riktningar samtidigt vid samma punkt, vilket är fysiskt omöjligt.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En kompassnåls nordända pekar mot jordens geografiska nordpol. Vilken sorts **magnetisk** pol har jorden alltså i norr?`,
@@ -17770,7 +17772,7 @@ Namnet nordända betyder "den ända som pekar norrut", inte att ändan själv sk
     ],
 
     'fy2-3.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En lång rak ledare för strömmen $3{,}5\\ \\mathrm{A}$. Beräkna den magnetiska flödestätheten $2{,}0\\ \\mathrm{cm}$ från ledaren. Räkna med $k = 2{,}0\\cdot 10^{-7}\\ \\mathrm{T\\cdot m/A}$.
@@ -17845,7 +17847,7 @@ $$ d = \\frac{2{,}0\\cdot 10^{-7} \\cdot 8{,}0}{1{,}0\\cdot 10^{-4}} = 0{,}016\\
 **Svar:** Avståndet är $1{,}6\\ \\mathrm{cm}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En lång rak ledare står vinkelrätt mot pappret med strömmen $2{,}5\\ \\mathrm{A}$ **in i planet**. En punkt P ligger $4{,}0\\ \\mathrm{cm}$ rakt åt höger om ledaren. Bestäm magnetfältets storlek och riktning i punkten P. Räkna med $k = 2{,}0\\cdot 10^{-7}\\ \\mathrm{T\\cdot m/A}$.
@@ -17885,7 +17887,7 @@ $$ B = B_1 + B_2 = 2{,}67\\cdot 10^{-5} + 2{,}00\\cdot 10^{-5} = 4{,}67\\cdot 10
 **Generell slutsats:** Två parallella strömmar med samma riktning ger fält som *motverkar* vid mittpunkten; två med motsatta riktningar ger fält som *samverkar*. Tumregeln är avgörande för att avgöra vilket fall vi har.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två parallella ledare $\\ell_1$ och $\\ell_2$ står $12\\ \\mathrm{cm}$ från varandra. Båda för ström **i samma riktning**: $\\ell_1$ har strömmen $6{,}0\\ \\mathrm{A}$ och $\\ell_2$ har $2{,}0\\ \\mathrm{A}$. På vilket avstånd från $\\ell_1$ (på linjen mellan ledarna) blir den totala magnetiska flödestätheten **noll**?`,
@@ -17919,7 +17921,7 @@ $$ x = \\frac{6{,}0 \\cdot 0{,}12}{6{,}0 + 2{,}0} = \\frac{0{,}72}{8{,}0} = 0{,}
     ],
 
     'fy2-3.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En lång rak spole (solenoid) har $500$ varv och längden $10\\ \\mathrm{cm}$. Strömmen är $2{,}0\\ \\mathrm{A}$. Beräkna den magnetiska flödestätheten inne i spolen. Räkna med $\\mu_0 = 4\\pi\\cdot 10^{-7}\\ \\mathrm{T\\cdot m/A}$.`,
@@ -17989,7 +17991,7 @@ $$ I = \\frac{0{,}025 \\cdot 0{,}050}{4\\pi\\cdot 10^{-7} \\cdot 300} = \\frac{1
 **Svar:** Strömmen ska vara ungefär $3{,}3\\ \\mathrm{A}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En tråd lindas till en spole med $1\\,200$ varv på ett underlag som är $25\\ \\mathrm{cm}$ långt. Spolen ansluts till en strömkälla. Vid vilken ström blir magnetfältet inne i spolen lika starkt som jordens magnetfält vid ekvatorn ($30\\ \\mathrm{\\mu T}$)?`,
@@ -18042,7 +18044,7 @@ $$ B_2 = 0{,}030 \\cdot \\frac{5{,}0}{2{,}0} = 0{,}075\\ \\mathrm{T} = 75\\ \\ma
 **Generell slutsats:** Linjärt samband mellan $B$ och $I$ för en spole gör det till en enkel **proportionalitetsuppgift** — bildning av kvot stryker $\\mu_0$, $n$ och $l$.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En spole har $n$ varv över längden $l$ och får magnetfältet $B = 50\\ \\mathrm{mT}$. Spolen **stretas ut** så att längden fördubblas (utan att lägga till varv), och strömmen **halveras** samtidigt. Hur stort blir det nya magnetfältet?`,
@@ -18076,7 +18078,7 @@ $$ B_2 = \\frac{B_1}{4} = \\frac{50}{4} = 12{,}5\\ \\mathrm{mT} $$
     ],
 
     'fy2-3.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En proton med hastigheten $3{,}0\\cdot 10^6\\ \\mathrm{m/s}$ rör sig vinkelrätt mot ett magnetfält med flödestätheten $0{,}50\\ \\mathrm{T}$. Beräkna den magnetiska kraften på protonen. Räkna med $q = 1{,}602\\cdot 10^{-19}\\ \\mathrm{C}$.
@@ -18132,7 +18134,7 @@ $$ B = \\frac{F}{q\\cdot v} = \\frac{4{,}0\\cdot 10^{-13}}{1{,}602\\cdot 10^{-19
 **Svar:** Magnetfältet är ungefär $0{,}50\\ \\mathrm{T}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En elektron rör sig **nedåt** med hastigheten $4{,}0\\cdot 10^6\\ \\mathrm{m/s}$ i ett magnetfält $B = 0{,}25\\ \\mathrm{T}$ som är riktat **in i pappret**. Bestäm den magnetiska kraftens storlek och riktning på elektronen. Räkna med $q = 1{,}602\\cdot 10^{-19}\\ \\mathrm{C}$.
@@ -18182,7 +18184,7 @@ $$ v = \\frac{1{,}602\\cdot 10^{-19} \\cdot 0{,}40 \\cdot 0{,}035}{1{,}673\\cdot
 **Generell slutsats:** En laddad partikel i ett magnetfält rör sig i en cirkelbana (om den initialt är vinkelrätt mot fältet) eftersom den magnetiska kraften alltid är vinkelrät mot hastigheten. Banradien är $r = mv/(qB)$.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En **elektron** och en **proton** accelereras genom samma spänning $U$ och kommer sedan in i samma magnetfält $B$ vinkelrätt. Båda får cirkelbanor i fältet. Bestäm förhållandet mellan banradierna $r_\\text{p}/r_\\text{e}$, om $m_\\text{p}/m_\\text{e} = 1\\,836$.`,
@@ -18214,7 +18216,7 @@ $$ \\frac{r_\\text{p}}{r_\\text{e}} = \\sqrt{\\frac{m_\\text{p}}{m_\\text{e}}} =
     ],
 
     'fy2-3.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En rak ledare med längden $30\\ \\mathrm{cm}$ ligger vinkelrätt mot ett magnetfält med $B = 0{,}50\\ \\mathrm{T}$. Strömmen genom ledaren är $4{,}0\\ \\mathrm{A}$. Bestäm den magnetiska kraften på ledaren.
@@ -18259,7 +18261,7 @@ $$ B = \\frac{F}{I\\cdot l} = \\frac{0{,}50}{2{,}5 \\cdot 0{,}25} = 0{,}80\\ \\m
 **Svar:** Magnetfältet är $0{,}80\\ \\mathrm{T}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En rak ledare med längden $15\\ \\mathrm{cm}$ ligger horisontellt mellan polerna på en U-formad magnet. Magnetfältet i gapet är $0{,}60\\ \\mathrm{T}$ riktat från nordändan (vänster) till sydändan (höger). Strömmen i ledaren är $2{,}5\\ \\mathrm{A}$ riktad **ut ur planet** (mot läsaren). Bestäm den magnetiska kraftens storlek och riktning.
@@ -18307,7 +18309,7 @@ $$ F = 2{,}0\\cdot 10^{-7} \\cdot \\frac{5{,}0 \\cdot 5{,}0 \\cdot 1{,}0}{0{,}02
 **Generell slutsats:** Parallella strömmar **i samma riktning** attraherar varandra; parallella strömmar **i motsatt riktning** repellerar. Detta är motsatt till hur elektriska laddningar beter sig — som är ett ovanligt mönster värt att komma ihåg.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En rak ledare med längden $20\\ \\mathrm{cm}$ och massan $5{,}0\\ \\mathrm{g}$ ligger horisontellt över två parallella skenor i ett vågrätt magnetfält $B$ som är vinkelrätt mot ledaren. När strömmen $I = 2{,}5\\ \\mathrm{A}$ släpps på *svävar ledaren* (den magnetiska kraften balanserar tyngdkraften). Bestäm magnetfältets flödestäthet $B$. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
@@ -18337,7 +18339,7 @@ $$ B = \\frac{0{,}0050 \\cdot 9{,}82}{2{,}5 \\cdot 0{,}20} = \\frac{0{,}0491}{0{
     ],
 
     'fy2-3.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Var ligger jordens **norra magnetiska pol** i förhållande till den geografiska nordpolen?`,
@@ -18386,7 +18388,7 @@ De magnetiska polerna **rör sig över tid** och kan till och med byta plats hel
 **Generell slutsats:** En kompass på det norra halvklotet vill alltså egentligen peka *snett ned* — det är därför kompassnålar ofta balanseras med en motvikt så att de ändå håller sig horisontella.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I Sverige är jordmagnetiska fältets totala flödestäthet $B_j = 50\\ \\mathrm{\\mu T}$ och inklinationen $i = 71^\\circ$. Beräkna fältets **horisontal-** respektive **vertikalkomposant**.`,
@@ -18440,7 +18442,7 @@ $$ B_\\text{jh} = \\frac{1{,}5\\cdot 10^{-5}}{\\tan 30^\\circ} = \\frac{1{,}5\\c
 **Generell slutsats:** Detta är hur man **mäter** jordens magnetfält i praktiken — använd en känd störning (ledare med känd ström) som ger en känd vridning hos kompassen, och räkna baklänges.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En kompassnål i Sverige (där $i = 71^\\circ$) är balanserad horisontellt. När man tar med kompassen till **ekvatorn** (där $i = 0^\\circ$) ändras motverkan från fältets vertikalkomposant. Räkna med att jordmagnetiska fältets totala flödestäthet är ungefär densamma på båda platser ($B_j = 50\\ \\mathrm{\\mu T}$). Med vilken faktor ändras den vridande horisontalkomposanten på kompassen från Sverige till ekvatorn?`,
@@ -18466,7 +18468,7 @@ $$ \\frac{B_\\text{jh,\\text{ek}}}{B_\\text{jh,\\text{S}}} = \\frac{\\cos 0^\\ci
     ],
 
     'fy2-3.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En rak ledare med längden $25\\ \\mathrm{cm}$ rör sig med hastigheten $2{,}0\\ \\mathrm{m/s}$ vinkelrätt mot ett magnetfält $B = 0{,}50\\ \\mathrm{T}$. Beräkna den inducerade spänningen.`,
@@ -18509,7 +18511,7 @@ $$ B = \\frac{e}{l\\cdot v} = \\frac{0{,}15}{0{,}20 \\cdot 5{,}0} = 0{,}15\\ \\m
 **Svar:** Magnetfältet är $0{,}15\\ \\mathrm{T}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En rak ledare med längden $30\\ \\mathrm{cm}$ rör sig med hastigheten $4{,}0\\ \\mathrm{m/s}$ i ett magnetfält $B = 0{,}20\\ \\mathrm{T}$. Magnetfältet är riktat **in i pappret**, ledaren ligger horisontellt och rör sig **uppåt**. Bestäm den inducerade spänningen och avgör vilken ände av ledaren som blir **positiv**.
@@ -18554,7 +18556,7 @@ $$ v = \\frac{1{,}5}{0{,}15 \\cdot 0{,}80} = \\frac{1{,}5}{0{,}12} = 12{,}5\\ \\
 **Svar:** Hastigheten måste vara $12{,}5\\ \\mathrm{m/s}$.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En rak ledare med längden $0{,}40\\ \\mathrm{m}$ släpps från vila och faller fritt i ett horisontellt magnetfält $B = 0{,}50\\ \\mathrm{T}$ (vinkelrätt mot fallrörelsen och vinkelrätt mot ledarens längdaxel). Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$. Bestäm den inducerade spänningen $1{,}5\\ \\mathrm{s}$ efter att ledaren släppts.`,
@@ -18576,7 +18578,7 @@ $$ e = l\\cdot v\\cdot B = 0{,}40 \\cdot 14{,}73 \\cdot 0{,}50 = 2{,}946\\ \\mat
     ],
 
     'fy2-3.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En inducerad spänning på $1{,}2\\ \\mathrm{V}$ driver en ström genom en krets med resistansen $3{,}0\\ \\mathrm{\\Omega}$. Hur stor är den inducerade strömmen?`,
@@ -18620,7 +18622,7 @@ $$ I = \\frac{e}{R} = \\frac{0{,}24}{0{,}60} = 0{,}40\\ \\mathrm{A} $$
 Minustecknet i induktionslagen ($e = -\\Delta\\Phi/\\Delta t$) är matematiskt uttryck för Lenz lag.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En metallstav med längden $15\\ \\mathrm{cm}$ dras med hastigheten $2{,}5\\ \\mathrm{m/s}$ på två parallella skenor i ett magnetfält $B = 0{,}80\\ \\mathrm{T}$ (vinkelrätt mot stavens rörelse och vinkelrätt mot fältet). Resistansen i hela kretsen är $0{,}75\\ \\mathrm{\\Omega}$. Bestäm den **magnetiska kraften på staven**.`,
@@ -18658,7 +18660,7 @@ Med tumregeln för spole (fingrar = strömriktning, tumme = magnetfältets riktn
 **Generell slutsats:** Detta repellerar magneten och gör att man måste anstränga sig att hålla den i rörelse — energiprincipen i praktiken. Om Lenz lag inte gällde skulle slingan attrahera magneten, vilket skulle accelerera den och ge mer ström, som accelererar mer... = gratis energi, vilket inte existerar.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En metallstav med längden $20\\ \\mathrm{cm}$ och massan $50\\ \\mathrm{g}$ släpps från vila och faller utan friktion längs två parallella vertikala skenor i ett horisontellt magnetfält $B = 1{,}2\\ \\mathrm{T}$. Skenorna är förbundna med ett motstånd $R = 0{,}40\\ \\mathrm{\\Omega}$. Vilken **terminalhastighet** uppnår staven (då accelerationen blir noll)? Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.`,
@@ -18701,7 +18703,7 @@ $$ v_t = \\frac{0{,}050 \\cdot 9{,}82 \\cdot 0{,}40}{1{,}2^2 \\cdot 0{,}20^2} = 
     ],
 
     'fy2-3.9': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En slinga med arean $0{,}20\\ \\mathrm{m^2}$ ligger vinkelrätt mot ett magnetfält $B = 0{,}30\\ \\mathrm{T}$. Beräkna det magnetiska flödet genom slingan.`,
@@ -18733,7 +18735,7 @@ $$ |e| = N\\cdot\\left|\\frac{\\Delta\\Phi}{\\Delta t}\\right| = 200 \\cdot 0{,}
 **Svar:** Den inducerade spänningen är $2{,}0\\ \\mathrm{V}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Det magnetiska flödet genom en slinga varierar enligt diagrammet. Bestäm den inducerade spänningen vid (a) $t = 1{,}0\\ \\mathrm{s}$ och (b) $t = 4{,}0\\ \\mathrm{s}$.
@@ -18787,7 +18789,7 @@ $$ |e| = N\\cdot\\frac{|\\Delta\\Phi|}{\\Delta t} = 150 \\cdot \\frac{3{,}142\\c
 **Generell slutsats:** I en spole multipliceras den inducerade spänningen med antalet varv $N$ — det är hela poängen med spolar i induktiva tillämpningar (t.ex. transformatorer och generatorer).`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En kvadratisk slinga med sidan $0{,}10\\ \\mathrm{m}$ dras med konstant hastighet $v = 2{,}0\\ \\mathrm{m/s}$ ut ur ett magnetfält $B = 0{,}50\\ \\mathrm{T}$ (in i pappret). Slingan har resistansen $R = 0{,}20\\ \\mathrm{\\Omega}$. Beräkna **effekten** som omvandlas i slingan medan den fortfarande delvis är i fältet.`,
@@ -18815,7 +18817,7 @@ $$ P = e\\cdot I = 0{,}10 \\cdot 0{,}50 = 0{,}050\\ \\mathrm{W} = 50\\ \\mathrm{
     ],
 
     'fy2-3.10': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Det svenska elnätet har **effektiv** spänning $U = 230\\ \\mathrm{V}$. Vilken är **toppspänningen** $\\hat{u}$?`,
@@ -18849,7 +18851,7 @@ $$ u = 325\\sin(100\\pi \\cdot 5{,}0\\cdot 10^{-3}) = 325\\sin(0{,}5\\pi) = 325\
 **Generell slutsats:** Vid $t = T/4$ (en kvarts period) når spänningen sitt toppvärde — det är då rotationsslingan i generatorn är optimalt orienterad för maximal flödesändring.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En växelströmsgenerator har toppspänningen $\\hat{u} = 170\\ \\mathrm{V}$ och frekvensen $f = 60\\ \\mathrm{Hz}$. (a) Skriv uttrycket för $u(t)$. (b) Vilket är effektivvärdet?
@@ -18889,7 +18891,7 @@ $$ \\hat{u} = B\\cdot A\\cdot\\omega = 0{,}40 \\cdot (0{,}10)^2 \\cdot 100\\pi =
 **Generell slutsats:** En enkel en-varvs-slinga ger låg spänning. För praktiska generatorer ökas spänningen genom att (i) använda **många varv** (multiplicerar $\\hat{u}$ med $N$), (ii) öka magnetfältet $B$, eller (iii) snurra snabbare. Industri-generatorer använder ofta hundratals varv och starka elektromagneter.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En glödlampa har en resistans på $230\\ \\mathrm{\\Omega}$ och är ansluten till det svenska elnätet ($U = 230\\ \\mathrm{V}$ effektivt, $f = 50\\ \\mathrm{Hz}$). Bestäm (a) toppströmmen $\\hat{\\imath}$ genom lampan, och (b) den **maximala effekten** under en period.`,
@@ -18915,7 +18917,7 @@ $$ P_{\\max} = \\hat{u}\\cdot\\hat{\\imath} = 325 \\cdot 1{,}41 \\approx 460\\ \
     ],
 
     'fy2-3.11': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En transformators primärspole har $1\\,500$ varv och sekundärspolen $300$ varv. Om primärspänningen är $230\\ \\mathrm{V}$, vilken är sekundärspänningen?`,
@@ -18947,7 +18949,7 @@ $$ \\frac{N_1}{N_2} = \\frac{I_2}{I_1} \\quad\\Leftrightarrow\\quad I_2 = I_1\\c
 **Generell slutsats:** När spänningen *upptransformeras* (faktor $10$) blir strömmen samtidigt en tiondel så stor — eftersom effekten $P = UI$ bevaras enligt energiprincipen.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En mobilladdare är en transformator som transformerar $230\\ \\mathrm{V}$ till $5{,}0\\ \\mathrm{V}$. Laddaren levererar strömmen $2{,}0\\ \\mathrm{A}$ vid utgången. Bestäm strömmen genom primärspolen (förutsatt $100\\,\\%$ verkningsgrad).`,
@@ -18978,10 +18980,10 @@ $$ I_1 = I_2\\cdot\\frac{N_2}{N_1} = 5{,}0 \\cdot \\frac{200}{800} = 1{,}25\\ \\
 
 **Svar:** Primärströmmen är $1{,}25\\ \\mathrm{A}$.
 
-**Generell slutsats:** Tre principer kombinerade — spänningsförhållande, Ohms lag, strömförhållande. Klassisk C-nivå-uppgift.`,
+**Generell slutsats:** Tre principer kombinerade — spänningsförhållande, Ohms lag, strömförhållande. En klassisk uppgift på mellannivå.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Elnätet i Sverige transporterar effekt $50\\ \\mathrm{MW}$ till en ort med spänningen $400\\ \\mathrm{kV}$. Ledningarna har den totala resistansen $5{,}0\\ \\mathrm{\\Omega}$. Beräkna **effektförlusten** i ledningarna. Jämför med vad effektförlusten skulle blivit om spänningen istället varit $20\\ \\mathrm{kV}$.`,
@@ -19009,7 +19011,7 @@ $$ P'_\\text{förlust} = (2\\,500)^2 \\cdot 5{,}0 = 31{,}25\\ \\mathrm{MW} $$
     ],
 
     'fy2-3.12': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En hastighetsväljare har elektriskt fält $\\mathbb{E} = 2{,}0\\cdot 10^4\\ \\mathrm{V/m}$ och magnetfält $B = 0{,}010\\ \\mathrm{T}$. Vilken hastighet har de partiklar som passerar rakt igenom?`,
@@ -19043,7 +19045,7 @@ $$ r = \\frac{m\\cdot v}{q\\cdot B} = \\frac{3{,}3\\cdot 10^{-26} \\cdot 2{,}0\\
 **Svar:** Cirkelbanans radie är ungefär $14\\ \\mathrm{cm}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En jon med laddningen $q = 1{,}602\\cdot 10^{-19}\\ \\mathrm{C}$ filtreras ut av en hastighetsväljare med $\\mathbb{E} = 1{,}5\\cdot 10^4\\ \\mathrm{V/m}$ och $B = 0{,}10\\ \\mathrm{T}$. Den kommer sedan in i ett rent magnetfält $B = 0{,}10\\ \\mathrm{T}$ där den följer en cirkelbana med radien $r = 3{,}1\\ \\mathrm{cm}$. Bestäm jonens massa.`,
@@ -19075,7 +19077,7 @@ $$ \\Delta r = \\frac{3{,}3\\cdot 10^{-27} \\cdot 1{,}0\\cdot 10^5}{4{,}005\\cdo
 **Generell slutsats:** Masspektrometri är så känslig att den kan särskilja isotoper som skiljer sig med bara *en* atommassenhet. Detta används praktiskt vid t.ex. åldersbestämning av arkeologiska fynd (kol-14-metoden).`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En jon med laddningen $q$ accelereras från vila genom potentialskillnaden $U = 200\\ \\mathrm{V}$ och kommer sedan in i ett magnetfält $B = 0{,}050\\ \\mathrm{T}$ vinkelrätt. Den följer en cirkelbana med radien $r = 0{,}064\\ \\mathrm{m}$. Bestäm jonens massa-till-laddning-förhållande $m/q$.`,
@@ -19116,7 +19118,7 @@ $$ \\frac{m}{q} = \\frac{0{,}050^2 \\cdot 0{,}064^2}{2 \\cdot 200} = \\frac{0{,}
     ],
 
     'fy2-3.13': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad är en **virvelström**?`,
@@ -19165,7 +19167,7 @@ Den mekaniska energin omvandlas till elektrisk energi i form av strömmarna, som
 **Generell slutsats:** Skillnaden gentemot en vanlig glaskeramikhäll: ingen direkt värmekontakt — energin överförs *trådlöst* via magnetfältet, och värmen genereras *inuti* kärlets botten genom virvelströmmar.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Två aluminiumplattor med samma yttre dimensioner (samma längd, bredd och tjocklek) släpps från samma höjd i ett magnetfält. Den ena har **inga spår** och den andra har **slitsar** (snitt tvärs igenom) som skär av virvelströmsbanorna. Vilken faller långsammare?`,
@@ -19199,7 +19201,7 @@ Den inducerade strömmen i ringen skapar ett eget magnetfält **motriktat** spol
 **Demonstration "Thomsons ring":** Ett klassiskt försök som tydligt visar Lenz lag i praktiken. Om ringen har en *skåra* (så strömmen inte kan gå runt) händer inget. Och en *plastring* påverkas inte alls (kan inte leda ström).`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En kvadratisk aluminiumplatta med sidan $20\\ \\mathrm{cm}$, tjockleken $5{,}0\\ \\mathrm{mm}$ och resistivitet $\\rho_\\text{Al} = 2{,}65\\cdot 10^{-8}\\ \\mathrm{\\Omega\\cdot m}$ dras med hastigheten $0{,}50\\ \\mathrm{m/s}$ vinkelrätt ut ur ett magnetfält $B = 0{,}80\\ \\mathrm{T}$. Bara den kant ($l = 20\\ \\mathrm{cm}$) som korsar fältgränsen inducerar ström. Uppskatta den dragande kraften som krävs för att hålla konstant fart, om resistansen i den kortslutande virvelströms-banan är $R \\approx 5{,}3\\cdot 10^{-6}\\ \\mathrm{\\Omega}$.`,
@@ -19225,7 +19227,7 @@ $$ F = B\\cdot I\\cdot l = 0{,}80 \\cdot 1{,}51\\cdot 10^4 \\cdot 0{,}20 \\appro
     ],
 
     'fy2-3.14': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad är **Halleffekten**?`,
@@ -19263,7 +19265,7 @@ $$ B = \\frac{U}{v\\cdot d} = \\frac{2{,}0\\cdot 10^{-6}}{8{,}0\\cdot 10^{-4} \\
 **Generell slutsats:** Detta är hur en **magnetfältsmätare** (Halleffekt-sensor) fungerar — den mäter Hallspänningen och räknar ut $B$ från sambandet $B = U/(vd)$ där $v$ och $d$ är kalibrerade i mätinstrumentet.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En Hallsensor används för att mäta ett okänt magnetfält. Sensorns interna driftshastighet och bredd är inställda så att $v\\cdot d = 1{,}0\\cdot 10^{-5}\\ \\mathrm{m^2/s}$. Sensorn visar Hallspänningen $1{,}5\\ \\mathrm{\\mu V}$. Bestäm magnetfältets flödestäthet.`,
@@ -19297,7 +19299,7 @@ $$ vB = \\frac{U}{d} \\quad\\Leftrightarrow\\quad U = v\\cdot d\\cdot B $$
 **Generell slutsats:** Härledningen är ett klassiskt exempel på *två fundamentala principer* som kombineras: kraftbalans (jämvikt) + elektrostatik ($\\mathbb{E} = U/d$ från Fysik nivå 1). Att se den röda tråden mellan nivåerna är en kärnkompetens på Fysik nivå 2-nivå.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En tunn metallremsa med bredd $d = 10\\ \\mathrm{mm}$ och tvärsnittsarea $A = 2{,}0\\cdot 10^{-7}\\ \\mathrm{m^2}$ för strömmen $I = 5{,}0\\ \\mathrm{A}$ i ett magnetfält $B = 0{,}80\\ \\mathrm{T}$ vinkelrätt mot strömmen. Den uppmätta Hallspänningen är $U = 8{,}0\\ \\mathrm{\\mu V}$. Bestäm **driftshastigheten** för elektronerna i remsan, och visa att svaret är mycket lägre än elektronernas termiska hastighet (typ $10^5\\ \\mathrm{m/s}$ vid rumstemperatur).`,
@@ -19319,7 +19321,7 @@ $$ U = v\\cdot d\\cdot B \\quad\\Leftrightarrow\\quad v = \\frac{U}{d\\cdot B} =
     // ════════════════════════════════════════════════════════════════
 
     'fy2-4.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Grönt ljus har våglängden $\\lambda = 550\\ \\mathrm{nm}$. Beräkna ljusets frekvens. Räkna med $c = 2{,}998\\cdot 10^{8}\\ \\mathrm{m/s}$.`,
@@ -19360,7 +19362,7 @@ $$ f = \\frac{c}{\\lambda} \\quad\\Leftrightarrow\\quad \\lambda = \\frac{c}{f} 
 **Svar:** Våglängden är $3{,}0\\ \\mathrm{m}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En punktformig ljuskälla strålar jämnt åt alla håll. På avståndet $4{,}0\\ \\mathrm{m}$ är ljusintensiteten $1{,}5\\ \\mathrm{W/m^2}$. Beräkna ljusintensiteten på avståndet $12\\ \\mathrm{m}$.`,
@@ -19397,7 +19399,7 @@ $$ r = \\sqrt{\\frac{5{,}0\\cdot 10^{4}}{4\\pi \\cdot 1{,}0\\cdot 10^{-6}}} = \\
 **Svar:** På ungefär $63\\ \\mathrm{km}$.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två stjärnor ser **exakt lika ljusstarka** ut från jorden. Stjärna B ligger $3{,}0$ gånger så långt bort som stjärna A. Hur många gånger större är stjärna B:s utstrålade effekt jämfört med stjärna A:s?`,
@@ -19419,7 +19421,7 @@ $$ \\frac{P_\\mathrm{B}}{P_\\mathrm{A}} = \\frac{r_\\mathrm{B}^2}{r_\\mathrm{A}^
     ],
 
     'fy2-4.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ett gitter med 500 linjer/mm belyses vinkelrätt med monokromatiskt ljus med våglängden $\\lambda = 600\\ \\mathrm{nm}$. Beräkna avböjningsvinkeln till första ordningens maximum $(n = 1)$.`,
@@ -19453,7 +19455,7 @@ $$ n\\lambda = d\\sin\\alpha_n \\quad\\Leftrightarrow\\quad d = \\frac{n\\lambda
 **Svar:** Gitterkonstanten är $2{,}07\\ \\mathrm{\\mu m}$ (vilket motsvarar ungefär $480$ linjer/mm).`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Monokromatiskt ljus träffar ett gitter med 200 linjer/mm. På en skärm ligger första ordningens ljusmax $21\\ \\mathrm{cm}$ från centralmax. Skärmen står $2{,}0\\ \\mathrm{m}$ bakom gittret. Beräkna ljusets våglängd.
@@ -19489,7 +19491,7 @@ Eftersom $n$ måste vara ett heltal är den högsta möjliga ordningen $n = 3$.
 **Generell slutsats:** Det går inte att få hur många maxima som helst — villkoret $\\sin\\alpha \\leq 1$ sätter en övre gräns. Bråkdelen $0{,}16$ "räcker inte" till en fjärde ordning, så den kastas.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `I ett gitterspektrum kan ljus av olika våglängd och ordning hamna på **exakt samma plats** (samma avböjningsvinkel). Andra ordningens linje för rött ljus med $\\lambda = 660\\ \\mathrm{nm}$ sammanfaller med en linje av kortare våglängd i tredje ordningen. Vilken våglängd har det ljuset?`,
@@ -19509,7 +19511,7 @@ $$ \\lambda_2 = \\frac{n_1 \\lambda_1}{n_2} = \\frac{2 \\cdot 660}{3} = 440\\ \\
     ],
 
     'fy2-4.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En glödtråd håller temperaturen $T = 2\\,500\\ \\mathrm{K}$ och strålar som en svart kropp. Vid vilken våglängd är emittansen störst? Räkna med Wiens konstant $2{,}8978\\cdot 10^{-3}\\ \\mathrm{m\\cdot K}$.`,
@@ -19541,7 +19543,7 @@ $$ P = M \\cdot A = 460 \\cdot 0{,}020 = 9{,}2\\ \\mathrm{W} $$
 **Svar:** Plattan strålar ut $9{,}2\\ \\mathrm{W}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En glödtråd kan ses som en svart kropp med temperaturen $T = 2\\,800\\ \\mathrm{K}$ och total yta $A = 8{,}0\\cdot 10^{-5}\\ \\mathrm{m^2}$. Beräkna den effekt som tråden strålar ut.`,
@@ -19575,7 +19577,7 @@ $$ M = \\sigma T^4 = 5{,}67\\cdot 10^{-8} \\cdot (6\\,037)^4 = 7{,}53\\cdot 10^{
 **Generell slutsats:** Toppvåglängden ger temperaturen (Wien), temperaturen ger emittansen (Stefan–Boltzmann). Två svartkroppslagar i kedja — färgen på en stjärna avslöjar alltså både hur het och hur intensiv den är.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två svarta kroppar har **samma yta**. Kropp A har sin toppvåglängd vid $600\\ \\mathrm{nm}$, kropp B vid $400\\ \\mathrm{nm}$. Hur många gånger större emittans har kropp B jämfört med kropp A?`,
@@ -19597,7 +19599,7 @@ $$ \\frac{M_\\mathrm{B}}{M_\\mathrm{A}} = \\left(\\frac{T_\\mathrm{B}}{T_\\mathr
     ],
 
     'fy2-4.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Brytningsindex för diamant är $n = 2{,}42$. Beräkna ljusets hastighet i diamant. Räkna med $c = 2{,}998\\cdot 10^{8}\\ \\mathrm{m/s}$.`,
@@ -19637,7 +19639,7 @@ $$ b = \\sin^{-1}(0{,}665) = 41{,}7^\\circ $$
 **Svar:** Brytningsvinkeln är ungefär $42^\\circ$. Strålen bryts **från** normalen $(b > i)$ eftersom den går från ett tätare till ett tunnare medium.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ljusets hastighet i ett glas är $v = 2{,}00\\cdot 10^{8}\\ \\mathrm{m/s}$. En stråle träffar glaset från luft med infallsvinkeln $i = 55^\\circ$. Beräkna brytningsvinkeln $b$ i glaset.
@@ -19673,7 +19675,7 @@ $$ v = \\frac{c}{n_2} = \\frac{2{,}998\\cdot 10^{8}}{1{,}34} = 2{,}25\\cdot 10^{
 **Svar:** Ljusets hastighet i vätskan är ungefär $2{,}25\\cdot 10^{8}\\ \\mathrm{m/s}$.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En ljusstråle går från luft $(n = 1{,}00)$ genom ett lager glas $(n = 1{,}52)$ och vidare ner i vatten $(n = 1{,}33)$. Infallsvinkeln i luften är $i = 40^\\circ$. Bestäm brytningsvinkeln $b$ i vattnet — och förklara varför glasets brytningsindex inte påverkar svaret.
@@ -19701,7 +19703,7 @@ $$ \\sin b = \\frac{n_\\mathrm{luft}\\sin i}{n_\\mathrm{vatten}} = \\frac{1{,}00
     ],
 
     'fy2-4.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna energin hos en foton med våglängden $\\lambda = 500\\ \\mathrm{nm}$. Svara i elektronvolt. Räkna med $h = 6{,}626\\cdot 10^{-34}\\ \\mathrm{Js}$, $c = 2{,}998\\cdot 10^{8}\\ \\mathrm{m/s}$ och $1\\ \\mathrm{eV} = 1{,}602\\cdot 10^{-19}\\ \\mathrm{J}$.`,
@@ -19737,7 +19739,7 @@ $$ hf = W_\\mathrm{u} + E_\\mathrm{k} \\quad\\Leftrightarrow\\quad E_\\mathrm{k}
 **Svar:** Elektronens rörelseenergi är $1{,}7\\ \\mathrm{eV}$.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ljus med våglängden $\\lambda = 400\\ \\mathrm{nm}$ träffar en metallyta med utträdesarbetet $W_\\mathrm{u} = 2{,}0\\ \\mathrm{eV}$. Beräkna hastigheten hos den utslagna elektronen. Elektronens massa är $m = 9{,}11\\cdot 10^{-31}\\ \\mathrm{kg}$.`,
@@ -19778,7 +19780,7 @@ $$ \\lambda = \\frac{1{,}986\\cdot 10^{-25}}{3{,}68\\cdot 10^{-19}} = 5{,}39\\cd
 **Svar:** Gränsvåglängden är $539\\ \\mathrm{nm}$. Ljus med *längre* våglängd (lägre energi) kan inte slå loss några elektroner — oavsett hur starkt det lyser.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `I ett experiment belyses samma metall med två olika våglängder. Med $\\lambda_1 = 400\\ \\mathrm{nm}$ får de utslagna elektronerna rörelseenergin $1{,}10\\ \\mathrm{eV}$, med $\\lambda_2 = 300\\ \\mathrm{nm}$ blir rörelseenergin $2{,}13\\ \\mathrm{eV}$. Bestäm **Plancks konstant** enbart ur dessa mätdata.`,
@@ -19806,7 +19808,7 @@ $$ h = \\frac{1{,}65\\cdot 10^{-19}}{(9{,}99 - 7{,}50)\\cdot 10^{14}} = \\frac{1
     ],
 
     'fy2-4.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna de Broglie-våglängden för en elektron som rör sig med hastigheten $v = 1{,}0\\cdot 10^{6}\\ \\mathrm{m/s}$. Elektronens massa är $m = 9{,}11\\cdot 10^{-31}\\ \\mathrm{kg}$, och $h = 6{,}626\\cdot 10^{-34}\\ \\mathrm{Js}$.`,
@@ -19838,7 +19840,7 @@ $$ \\lambda = \\frac{h}{mv} \\quad\\Leftrightarrow\\quad v = \\frac{h}{m\\lambda
 **Svar:** Neutronens hastighet är ungefär $3\\,960\\ \\mathrm{m/s}$. Långsamma ("termiska") neutroner används just därför att deras våglängd matchar atomavstånd i kristaller.`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En elektron accelereras från vila genom spänningen $U = 100\\ \\mathrm{V}$. Beräkna elektronens de Broglie-våglängd. Räkna med $m = 9{,}11\\cdot 10^{-31}\\ \\mathrm{kg}$ och $Q = 1{,}602\\cdot 10^{-19}\\ \\mathrm{C}$.`,
@@ -19870,7 +19872,7 @@ $$ \\lambda = \\frac{h}{mv} = \\frac{6{,}626\\cdot 10^{-34}}{1{,}673\\cdot 10^{-
 **Svar:** Protonens de Broglie-våglängd är ungefär $0{,}905\\ \\mathrm{pm}$ — mycket kortare än elektronens vid samma spänning, eftersom protonen är så mycket tyngre.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En elektron och en proton accelereras båda från vila genom **samma** spänning $U$. Visa att de Broglie-våglängden kan skrivas $\\lambda = \\dfrac{h}{\\sqrt{2mQU}}$, och bestäm hur många gånger längre elektronens våglängd är än protonens. Räkna med $m_\\mathrm{p}/m_\\mathrm{e} = 1\\,836$.`,
@@ -19890,7 +19892,7 @@ $$ \\frac{\\lambda_\\mathrm{e}}{\\lambda_\\mathrm{p}} = \\sqrt{\\frac{m_\\mathrm
     ],
 
     'fy2-4.7': [
-        // ── Nivå 1 (E) — begreppsfrågor (flerval) ────────────────────
+        // ── Nivå 1 (Grund) — begreppsfrågor (flerval) ────────────────────
         {
             level: 1,
             question: `Vilken av följande ljuskällor ger ett **kontinuerligt spektrum** (alla våglängder)?`,
@@ -19934,7 +19936,7 @@ $$ \\frac{\\lambda_\\mathrm{e}}{\\lambda_\\mathrm{p}} = \\sqrt{\\frac{m_\\mathrm
 **Svar:** Som mörka (svarta) linjer i ett annars kontinuerligt färgband.`,
         },
 
-        // ── Nivå 2 (C) — begreppsfrågor (flerval) ────────────────────
+        // ── Nivå 2 (Mellan) — begreppsfrågor (flerval) ────────────────────
         {
             level: 2,
             question: `I solljusets spektrum finns mörka linjer vid **exakt samma våglängder** som väte sänder ut i sitt emissionsspektrum. Vilken slutsats är riktig?`,
@@ -19964,7 +19966,7 @@ $$ \\frac{\\lambda_\\mathrm{e}}{\\lambda_\\mathrm{p}} = \\sqrt{\\frac{m_\\mathrm
 **Svar:** En foton tas bara upp om dess energi exakt motsvarar ett energihopp i atomen.`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Vätgas belyses och ljuset skickas genom ett gitter med 600 linjer/mm. En av vätets spektrallinjer ger första ordningens maximum vid vinkeln $23{,}2^\\circ$. Beräkna linjens våglängd och avgör vilken **serie** (Lyman, Balmer eller Paschen) övergången tillhör.`,
@@ -19982,7 +19984,7 @@ $$ \\lambda = \\frac{d\\sin\\alpha_1}{n} = \\frac{1{,}667\\cdot 10^{-6}\\cdot\\s
     ],
 
     'fy2-4.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Väteatomens energinivåer ges av $E_n = -\\dfrac{13{,}6}{n^2}\\ \\mathrm{eV}$. Beräkna energin på nivå $n = 4$.`,
@@ -20014,7 +20016,7 @@ $$ \\Delta E = E_\\infty - E_2 = 0 - (-3{,}40) = 3{,}40\\ \\mathrm{eV} $$
 **Svar:** Det krävs $3{,}40\\ \\mathrm{eV}$. (Från grundtillståndet $n = 1$ skulle det däremot krävas hela $13{,}6\\ \\mathrm{eV}$.)`,
         },
 
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En väteatom deexciteras från $n = 4$ till $n = 2$. Beräkna våglängden på det utsända ljuset och ange färg.
@@ -20052,7 +20054,7 @@ $$ E_3 - E_1 = (-1{,}51) - (-13{,}6) = 12{,}09\\ \\mathrm{eV} \\;\\checkmark $$
 **Generell slutsats:** Man räknar baklänges — fotonens energi jämförs med nivåskillnaderna tills den matchar. UV-linjer från väte tillhör Lyman-serien (slutar i $n = 1$); synliga linjer tillhör Balmer-serien (slutar i $n = 2$).`,
         },
 
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En väteatom exciteras till $n = 4$. När den deexciteras kan den ta olika "vägar" ner. Hur många **olika våglängder** kan atomen totalt sända ut, och vilken är den **kortaste** av dem?
@@ -20082,7 +20084,7 @@ $$ \\lambda = \\frac{hc}{E} = \\frac{6{,}626\\cdot 10^{-34}\\cdot 2{,}998\\cdot 
     // ════════════════════════════════════════════════════════════════
 
     'ma1c-1.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna $12 - (-9)$.`,
@@ -20121,7 +20123,7 @@ $$ (-8) \\cdot (-6) = 48 $$
 
 **Svar:** $-4$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna $\\dfrac{-36}{-4} + 5 \\cdot (-3)$.`,
@@ -20161,7 +20163,7 @@ $$ 9 + (-15) = 9 - 15 = -6 $$
 
 **Svar:** "Alla rationella tal är heltal" är falskt.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Talen $a$ och $b$ är båda **negativa** heltal och $a < b$. Vilka av följande uttryck är då **säkert positiva**?<br>a)&nbsp;$a \\cdot b$&emsp;&emsp;b)&nbsp;$a + b$&emsp;&emsp;c)&nbsp;$a - b$&emsp;&emsp;d)&nbsp;$b - a$`,
@@ -20189,7 +20191,7 @@ $$ 9 + (-15) = 9 - 15 = -6 $$
     ],
 
     'ma1c-1.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Förkorta $\\dfrac{12}{18}$ så långt det går.`,
@@ -20238,7 +20240,7 @@ $$ \\frac{3}{5} = \\frac{3 \\cdot 4}{5 \\cdot 4} = \\frac{12}{20} $$
 
 **Svar:** Nämnare`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Vilket bråk är störst: $\\dfrac{5}{8}$ eller $\\dfrac{7}{11}$?`,
@@ -20274,7 +20276,7 @@ De tre första är alltså förlängningar av $\\dfrac{3}{4}$ (med 2, 3 respekti
 
 **Svar:** $\\dfrac{6}{8}$, $\\dfrac{9}{12}$ och $\\dfrac{12}{16}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Vilket av följande bråk ligger **mellan** $\\dfrac{1}{3}$ och $\\dfrac{1}{2}$?`,
@@ -20300,7 +20302,7 @@ Kontroll av de övriga: $\\dfrac{1}{4} = \\dfrac{3}{12}$ är för litet, $\\dfra
     ],
 
     'ma1c-1.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna $\\dfrac{2}{9} + \\dfrac{5}{9}$.`,
@@ -20351,7 +20353,7 @@ $$ 2\\frac{3}{4} = \\frac{2 \\cdot 4 + 3}{4} = \\frac{11}{4} $$
 
 **Svar:** $\\dfrac{11}{4}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna $\\dfrac{3}{4} + \\dfrac{5}{6}$. Svara i enklaste bråkform.`,
@@ -20399,7 +20401,7 @@ Kontroll: $120 = 20 \\cdot 6 = 24 \\cdot 5$, så 120 är delbart med båda nämn
 
 **Svar:** MGN = 120`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Beräkna $\\dfrac{5}{6} + \\dfrac{3}{8} - \\dfrac{7}{12}$. Svara i enklaste bråkform.`,
@@ -20457,7 +20459,7 @@ $$ \\frac{7}{36} - \\frac{5}{54} = \\frac{7 \\cdot 3}{36 \\cdot 3} - \\frac{5 \\
     ],
 
     'ma1c-1.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna $\\dfrac{2}{3} \\cdot \\dfrac{5}{7}$.`,
@@ -20508,7 +20510,7 @@ $$ \\frac{3}{4} \\Big/ \\frac{5}{2} = \\frac{3}{4} \\cdot \\frac{2}{5} = \\frac{
 
 **Svar:** $\\dfrac{3}{10}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Hur mycket är $\\dfrac{3}{8}$ av 96 kr?`,
@@ -20545,7 +20547,7 @@ $\\dfrac{40}{360}$ är samma värde men inte förkortat — och betydligt lätta
 
 **Svar:** $\\dfrac{1}{9}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Emma äter $\\dfrac{1}{4}$ av en tårta. Sedan äter Noah $\\dfrac{2}{3}$ av det som är **kvar**. Hur stor del av hela tårtan är kvar därefter?`,
@@ -20575,7 +20577,7 @@ $$ \\frac{3}{4} - \\frac{1}{2} = \\frac{3}{4} - \\frac{2}{4} = \\frac{1}{4} $$
     ],
 
     'ma1c-1.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Avrunda 3,276 till tiondelar.`,
@@ -20614,7 +20616,7 @@ $$ 3{,}276 \\approx 3{,}3 $$
 
 **Svar:** 3 värdesiffror`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En rektangulär trädgårdsplatta är $32{,}6\\ \\mathrm{cm}$ × $18\\ \\mathrm{cm}$. Beräkna plattans area och svara med korrekt antal värdesiffror.`,
@@ -20649,7 +20651,7 @@ $$ 6{,}72 \\approx 6{,}7 $$
 
 **Svar:** 6,7`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Talet 7,4498 ska avrundas till **en decimal**. Amir avrundar i två steg: först till två decimaler (7,45) och sedan till en decimal (7,5). Vilket påstående stämmer?`,
@@ -20675,7 +20677,7 @@ Amirs tvåstegsmetod ger 7,45 → 7,5 — men 7,4498 ligger närmare 7,4 än 7,5
     ],
 
     'ma1c-1.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna $2^5$.`,
@@ -20722,7 +20724,7 @@ Exponenterna ska **inte** multipliceras — det görs bara vid "potens av potens
 
 **Svar:** $x^7$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna $-6^2 + (-2)^3$.`,
@@ -20759,7 +20761,7 @@ $$ n = 6 $$
 
 **Svar:** $n = 6$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Förenkla $\\dfrac{4^{3x}}{2^x + 2^x}$ så långt som möjligt. Svara som EN potens med basen 2.`,
@@ -20791,7 +20793,7 @@ $$ \\frac{2^{6x}}{2^{1+x}} = 2^{6x - (1+x)} = 2^{6x - 1 - x} = 2^{5x-1} $$
     ],
 
     'ma1c-1.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna $12^0$.`,
@@ -20838,7 +20840,7 @@ $$ \\frac{1}{7^4} = 7^{-4} $$
 
 **Svar:** $7^{-4}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna $\\left(\\dfrac{2}{5}\\right)^{-2}$.`,
@@ -20871,7 +20873,7 @@ $$ 1 + 0{,}5 + 0{,}25 = 1{,}75 $$
 
 **Svar:** 1,75`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ella påstår: "$4^{-3}$ är ett negativt tal, eftersom exponenten är negativ." Vilket påstående är korrekt?`,
@@ -20899,7 +20901,7 @@ $$ 4^2 = 16 \\quad\\to\\quad 4^1 = 4 \\quad\\to\\quad 4^0 = 1 \\quad\\to\\quad 4
     ],
 
     'ma1c-1.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna $81^{1/2}$ utan räknare.`,
@@ -20936,7 +20938,7 @@ $$ \\sqrt[4]{13} = 13^{1/4} $$
 
 **Svar:** $13^{1/4}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna $16^{3/4}$ utan räknare.`,
@@ -20967,7 +20969,7 @@ $$ \\frac{x^{5/2}}{x^2} = x^{5/2 - 2} = x^{5/2 - 4/2} = x^{1/2} = \\sqrt{x} $$
 
 **Svar:** $\\sqrt{x}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Vilket av talen är störst: $2^{30}$, $4^{16}$ eller $8^{11}$?`,
@@ -20997,7 +20999,7 @@ Störst är alltså $2^{33} = 8^{11}$.
     ],
 
     'ma1c-1.9': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Skriv 63 000 i grundpotensform.`,
@@ -21042,7 +21044,7 @@ $$ 6{,}5\\ \\mathrm{km} = 6{,}5 \\cdot 10^3\\ \\mathrm{m} = 6\\ 500\\ \\mathrm{m
 
 **Svar:** 6 500 m`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Skriv 0,0000039 s med lämpligt prefix.`,
@@ -21081,7 +21083,7 @@ $$ 4{,}5 \\cdot 10^7\\ \\mathrm{W} = 45 \\cdot 10^6\\ \\mathrm{W} = 45\\ \\mathr
 
 **Svar:** 45 MW`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En lagringsserver rymmer 1,8 TB. En musikfil är i genomsnitt 9,0 MB. Hur många musikfiler får plats på servern?`,
@@ -21099,7 +21101,7 @@ $$ \\text{antal filer} = \\frac{1{,}8 \\cdot 10^{12}\\ \\mathrm{B}}{9{,}0 \\cdot
     ],
 
     'ma1c-1.10': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna $7 + 3 \\cdot 4$.`,
@@ -21138,7 +21140,7 @@ Summa hör till addition, differens till subtraktion och kvot till division.
 
 **Svar:** Produkt`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna $4 \\cdot 6 - (9 - 2 \\cdot 3)^2$.`,
@@ -21163,7 +21165,7 @@ $$ \\frac{24}{10 - 2 \\cdot 3} = \\frac{24}{10 - 6} = \\frac{24}{4} = 6 $$
 
 **Svar:** 6`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Sätt ut EN parentes i uttrycket $12 - 4 \\cdot 2 + 6$ så att uttryckets värde blir 22. Vilken placering är rätt?`,
@@ -21194,7 +21196,7 @@ $$ (12 - 4 \\cdot 2) + 6 = 4 + 6 = 10 \\quad \\text{(samma sak — ordningen var
 
     // Kort praktiskt avsnitt — reducerat antal övningar (2 N1 + 1 N2).
     'ma1c-1.11': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Använd räknaren och beräkna $\\sqrt[3]{85}$. Avrunda till två decimaler.`,
@@ -21223,7 +21225,7 @@ $$ 6{,}1\\mathrm{E}9 = 6{,}1 \\cdot 10^9 = 6\\ 100\\ 000\\ 000 $$
 
 **Svar:** 6 100 000 000`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Nadia ska beräkna $\\dfrac{480}{4 \\cdot 6}$ och skriver \`480/4*6\` på räknaren, som svarar 720. Det korrekta svaret är 20. Vad blev fel?`,
@@ -21247,7 +21249,7 @@ $$ 480/(4 \\cdot 6) = \\frac{480}{24} = 20 $$
     ],
 
     'ma1c-2.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `I uttrycket $75 + 40x$ — vad kallas talet 40?`,
@@ -21290,7 +21292,7 @@ $5(p + 65)$ vore fem biljetter OCH fem popcorn, eftersom femman multipliceras in
 
 **Svar:** $5p + 65$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna värdet av $14 - 5x$ när $x = -3$.`,
@@ -21321,7 +21323,7 @@ Selmas ålder $x$ är ett stickspår — den påverkar inte kostnaden. Att välj
 
 **Svar:** $250 + 20y$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Elsa är $x$ år. Hennes mamma är 4 gånger så gammal som Elsa var för 3 år sedan, och hennes pappa är 2 år äldre än mamman. Vilket uttryck beskriver pappans ålder, förenklat så långt som möjligt?`,
@@ -21353,7 +21355,7 @@ $$ 4(x - 3) + 2 = 4x - 12 + 2 = 4x - 10 $$
     ],
 
     'ma1c-2.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Förenkla $7x + 4y - 3x + 2y$.`,
@@ -21408,7 +21410,7 @@ $$ 6x^2 + 2x - 4x^2 = 2x^2 + 2x $$
 
 **Svar:** $2x^2 + 2x$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Förenkla $15a - (4 + 6a - 9b)$.`,
@@ -21449,7 +21451,7 @@ $7x - 4$ är bara halva omkretsen, och $10x^2 - 8x$ är arean ($2x \\cdot (5x - 
 
 **Svar:** $14x - 8$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Uttrycket $a - (b - (a - b))$ ska förenklas. Vilket är det förenklade uttrycket?`,
@@ -21477,7 +21479,7 @@ $$ a - (2b - a) = a - 2b + a = 2a - 2b $$
     ],
 
     'ma1c-2.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Utveckla $5(2x + 3)$.`,
@@ -21530,7 +21532,7 @@ $$ 4(3x - 2) + 5 = 12x - 8 + 5 = 12x - 3 $$
 
 **Svar:** $12x - 3$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Utveckla och förenkla $(2x - 3)(4x + 1)$.`,
@@ -21567,7 +21569,7 @@ $$ 7 - x^2 - 2x + 8 = 15 - x^2 - 2x $$
 
 **Svar:** $15 - x^2 - 2x$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Utveckla och förenkla $(2x - 1)(x + 3) - (x - 2)(2x + 5)$. Vilket värde har det förenklade uttrycket för $x = 10$?`,
@@ -21597,7 +21599,7 @@ Det förenklade uttrycket ger $4 \\cdot 10 + 7 = 47$. Stämmer.
     ],
 
     'ma1c-2.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Faktorisera $6x + 9$ så långt som möjligt.`,
@@ -21650,7 +21652,7 @@ $2(6x - 4)$ är en korrekt faktorisering men inte "så långt som möjligt" — 
 
 **Svar:** $4(3x - 2)$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Faktorisera $4(x - 1) + x(x - 1)$ så långt som möjligt.`,
@@ -21687,7 +21689,7 @@ $$ 10a^2b + 15ab^2 = 5ab(2a + 3b) $$
 
 **Svar:** $5ab(2a + 3b)$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Summan av fem på varandra följande heltal är alltid delbar med ett visst tal. Teckna talen med en variabel, förenkla summan och faktorisera den. Vilket är det största tal som summan alltid är delbar med?`,
@@ -21713,7 +21715,7 @@ Delbar med 10 är den däremot inte alltid: för $n = 1$ blir summan $1 + 2 + 3 
     ],
 
     'ma1c-2.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Lös ekvationen $x + 19 = 45$.`,
@@ -21750,7 +21752,7 @@ $$ x = 40 $$
 
 **Svar:** $x = 40$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $5x - 13 = 22$.`,
@@ -21787,7 +21789,7 @@ $$ x = 8 $$
 
 **Svar:** $x = 8$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ekvationen $\\dfrac{2x}{5} - 7 = -4$ har lösningen $x = \\dfrac{15}{2}$. Simon löste den så här:<br>Steg 1: $\\dfrac{2x}{5} = 3$&emsp;&emsp;Steg 2: $2x = \\dfrac{3}{5}$&emsp;&emsp;Steg 3: $x = \\dfrac{3}{10}$<br>I vilket steg gjorde Simon fel, och varför?`,
@@ -21819,7 +21821,7 @@ $$ x = \\frac{15}{2} $$
     ],
 
     'ma1c-2.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Lös ekvationen $7x = 3x + 20$.`,
@@ -21868,7 +21870,7 @@ $$ x = 6 $$
 
 **Svar:** Ekvationen saknar lösning.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $40 - 3(2x - 4) = 10x$.`,
@@ -21933,7 +21935,7 @@ Variabeln försvann, och kvar står en sann likhet. Ekvationen stämmer vilket v
 
 **Svar:** Ekvationen har oändligt många lösningar. Varje tal $x$ är en lösning.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `För vilket värde på talet $a$ saknar ekvationen $ax + 5 = 6x - 7$ lösning?`,
@@ -21991,7 +21993,7 @@ $$ 7x - 4 = 0 \\qquad 7x = 4 \\qquad x = \\frac{4}{7} \\approx 0{,}57 $$
     ],
 
     'ma1c-2.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Lös ekvationen $\\dfrac{84}{2x} = 6$.`,
@@ -22038,7 +22040,7 @@ $$ x = 6 $$
 
 **Svar:** Division med 0 är inte definierat — nämnaren får aldrig bli 0.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $\\dfrac{x}{2} + \\dfrac{1}{3} = \\dfrac{3}{4}$. Svara i decimalform.`,
@@ -22073,7 +22075,7 @@ $$ x = \\frac{7}{5} = 1{,}4 $$
 
 **Svar:** $x = 1{,}4$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         // Sju uppgifter av "riktig" läroboksmodell (inga flerval), skrivna
         // 2026-09-16 med Origo 1c nivå 3 och A-poängsuppgifterna i NP Ma 1c
         // som förebild: parametrar, struktur som måste genomskådas, modell-
@@ -22494,7 +22496,7 @@ Elias har rätt i att $2x < 2(x + 3)$ för alla $x$. Men slutsatsen "då är br�
     ],
 
     'ma1c-2.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad är FÖRSTA steget i metoden för problemlösning med ekvationer?`,
@@ -22541,7 +22543,7 @@ $$ x + (x + 5) = 31 $$
 
 **Svar:** $x + (x + 5) = 31$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Tre syskon delar på 2 700 kr. Mellanbarnet får dubbelt så mycket som yngsta barnet, och äldsta barnet får 200 kr mer än mellanbarnet. Hur mycket får yngsta barnet?`,
@@ -22582,7 +22584,7 @@ $$ x = 12 $$
 
 **Svar:** 12 cm`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Farfar är i dag 6 gånger så gammal som sitt barnbarn. Om 8 år är han 4 gånger så gammal som barnbarnet. Hur gammalt är barnbarnet i dag?`,
@@ -22846,7 +22848,7 @@ Täljaren är lika med produkten av kvoten och nämnaren: $4\\,800 = 0 \\cdot n 
     ],
 
     'ma1c-2.9': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Lös ekvationen $x^2 = 81$. Vilket är svaret?`,
@@ -22891,7 +22893,7 @@ $$ x = \\sqrt[3]{125} = 5 $$
 
 **Svar:** Ekvationen saknar reella lösningar.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $5x^2 - 7 = 118$. Ange den positiva lösningen.`,
@@ -22924,7 +22926,7 @@ En sida kan inte vara negativ, så vi bortser från den negativa lösningen.
 
 **Svar:** 25 m`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Antalet medlemmar i en förening ökade med lika många procent två år i rad. Under tvåårsperioden ökade antalet totalt med 44 %.<br>a) Ställ upp en ekvation för den årliga förändringsfaktorn och bestäm den årliga ökningen i procent.<br>b) Ekvationen i a) har två lösningar. Förklara varför bara den ena duger som svar.<br>c) Antag i stället att den totala ökningen på 44 % skedde under tre år, med lika många procent varje år. Bestäm den årliga ökningen, och förklara varför ekvationen den här gången bara har en lösning.`,
@@ -23274,7 +23276,7 @@ Kanten ska förlängas med cirka 26 %. Förlänger man i stället med faktorn $
     ],
 
     'ma1c-2.10': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Lös ekvationen $x^7 = 30$. Avrunda till två decimaler.`,
@@ -23317,7 +23319,7 @@ $$ x = \\pm\\sqrt[8]{200} $$
 
 **Svar:** Ingen lösning.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $5x^6 - 12 = 28$. Ange den positiva lösningen avrundad till två decimaler.`,
@@ -23344,7 +23346,7 @@ $$ x = 125 $$
 
 **Svar:** $x = 125$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ett sparkapital på 20 000 kr växte med samma räntesats varje år, och efter 6 år var det värt 26 000 kr.<br>a) Ställ upp en potensekvation för förändringsfaktorn och bestäm räntesatsen.<br>b) Anta i stället att kapitalet växte till 26 000 kr på bara 3 år. Bestäm räntesatsen, och förklara varför den inte är dubbelt så stor som i a).<br>c) Ett kapital $K$ kr växer på $t$ år till $S$ kr. Härled en formel för räntesatsen $p$ i procent, och kontrollera formeln mot a).`,
@@ -23712,7 +23714,7 @@ I b) ger den förenklade ekvationen $x^3 = 27$ bara en lösning från början, e
     ],
 
     'ma1c-2.11': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Lös olikheten $4x + 3 < 19$.`,
@@ -23761,7 +23763,7 @@ Addition och subtraktion (även av negativa tal) påverkar inte tecknet.
 
 **Svar:** Vid multiplikation eller division med ett negativt tal.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös olikheten $5(4 - x) \\leq 45$. Vilket är svaret?`,
@@ -23804,7 +23806,7 @@ Enbart $x < 5$ räcker inte — till exempel är $x = -7 < 5$ men $(-7)^2 = 49 >
 
 **Svar:** $-5 < x < 5$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Olikheter av andra graden.<br>a) Lös olikheten $-3x^2 + 5 \\geq -22$.<br>b) Lös olikheten $2x^2 - 8 > 0$.<br>c) Elin löser $x^2 > 4$ genom att dra roten ur båda led och svarar $x > 2$. Visa med ett exempel att svaret är ofullständigt, och förklara varför man i stället undersöker gränsfallet.`,
@@ -24209,7 +24211,7 @@ Formeln kan skrivas om: $x \\geq M + n(M - m)$. Hon måste alltså nå målet $M
     ],
 
     'ma1c-2.12': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Använd formeln $v = \\dfrac{s}{t}$ för att beräkna hastigheten när $s = 240\\ \\mathrm{km}$ och $t = 3$ timmar. Svara i km/h.`,
@@ -24246,7 +24248,7 @@ $$ K = 45 + 12 \\cdot 8 = 45 + 96 = 141\\ \\mathrm{kr} $$
 
 **Svar:** 141 kr`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Kostnaden för ett gymkort är $K = 3\\ 000 + 250x$ kr, där $x$ är antalet månader. Hur många månader räcker 9 500 kr till?`,
@@ -24279,7 +24281,7 @@ Glöms mil→km-omvandlingen blir svaret tio gånger för litet.
 
 **Svar:** 5 timmar`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två biluthyrare har olika prismodeller för ett år: Firma A tar $H_\\mathrm{A} = 21\\ 000 + 2{,}5m$ kr och firma B tar $H_\\mathrm{B} = 12\\ 000 + 4{,}0m$ kr, där $m$ är antalet kilometer. Vid vilken körsträcka kostar firmorna lika mycket?`,
@@ -24309,7 +24311,7 @@ $$ m = 6\\ 000 $$
     ],
 
     'ma1c-2.13': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Talföljden 5, 8, 11, 14, … har den slutna formeln $a_n = 3n + 2$. Beräkna $a_5$.`,
@@ -24350,7 +24352,7 @@ $$ a_5 = 3 \\cdot 5 + 2 = 15 + 2 = 17 $$
 
 **Svar:** $4n$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ange en sluten formel för talföljden 2, 9, 16, 23, …`,
@@ -24387,7 +24389,7 @@ $$ n = 25 $$
 
 **Svar:** Figur 25`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ett prickmönster har 7 prickar i figur 2 och 13 prickar i figur 5. Antalet prickar följer en formel av typen $a_n = kn + m$. Hur många prickar finns i figur 100?`,
@@ -24419,7 +24421,7 @@ $$ a_{100} = 2 \\cdot 100 + 3 = 203 $$
     // ════════════════════════════════════════════════════════════════
 
     'ma1c-3.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Skriv 1 ‰ i decimalform.`,
@@ -24462,7 +24464,7 @@ Decimalformen 0,25 motsvarar 25 %.
 
 **Svar:** 25 %`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Hur många promille är 84 g av 24 kg?`,
@@ -24489,7 +24491,7 @@ $$ \\text{hela} = \\frac{2{,}0}{0{,}000\\ 008} = 250\\ 000\\ \\text{gram} = 250\
 
 **Svar:** 250 kg (250 liter vatten)`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `$15\\ \\%$ av talet $a$ är lika med $b$. Skriv $40\\ \\%$ av $6a$ uttryckt i $b$. Förenkla så långt som möjligt.`,
@@ -24699,7 +24701,7 @@ Kontroll med 1 000 elever: 150 cyklister blir 180, och skolan krymper till 800 e
     ],
 
     'ma1c-3.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken förändringsfaktor motsvarar en ökning med 35 %?`,
@@ -24744,7 +24746,7 @@ $$ \\text{nya värdet} = 0{,}75 \\cdot 1\\ 200 = 900\\ \\mathrm{kr} $$
 
 **Svar:** 900 kr`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En hyra höjs från 6 500 kr till 6 891 kr. Hur många procent höjdes hyran?`,
@@ -24787,7 +24789,7 @@ Lägg märke till att det är fel att dra bort 15 % av 5 520 kr. Höjningen räk
 
 **Svar:** 4 800 kr`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Talet $x$ ligger någonstans mellan talen $24$ och $36$. Talet $x$ är $p\\ \\%$ större än $24$ och $p\\ \\%$ mindre än $36$. Bestäm $x$.`,
@@ -25041,7 +25043,7 @@ Kontroll: en sänkning hade gett $0{,}92 \\cdot 750 = 690$ kr, och $810 - 690 = 
     ],
 
     'ma1c-3.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ett pris höjs först med 10 % och sedan med 20 %. Vilken är den totala förändringsfaktorn?`,
@@ -25092,7 +25094,7 @@ $1{,}03 \\cdot 5 = 5{,}15$ vore en femdubbling plus 15 % — orimligt för 3 % r
 
 **Svar:** $1{,}03^5$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Nadia sätter in 45 000 kr på ett konto med årsräntan 3,2 %. Hur mycket finns på kontot efter 10 år? Avrunda till hela kronor.`,
@@ -25121,7 +25123,7 @@ $$ 1{,}08 \\cdot 0{,}95 = 1{,}026 $$
 
 **Svar:** + 2,6 %`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Antalet medlemmar i en förening ökar procentuellt lika mycket varje år. Under tre år ökar antalet med totalt $33{,}1\\ \\%$.<br>a) Med hur många procent ökar antalet varje år?<br>b) Efter hur många hela år, räknat från början av treårsperioden, har antalet medlemmar fördubblats om ökningen fortsätter i samma takt?`,
@@ -25352,7 +25354,7 @@ Kontroll med fondernas värden: efter 14 år är A värd $58\\,744$ kr och B $59
     ],
 
     'ma1c-3.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad kallas beloppet som finns på ett sparkonto?`,
@@ -25393,7 +25395,7 @@ Dollartecknet används för något annat: att "låsa" en cellreferens (till exem
 
 **Svar:** Ett likhetstecken, =`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I ett kalkylblad står startbeloppet i B2 och förändringsfaktorn i B12. Cell B3 innehåller \`=B2*B12\` och ska kopieras nedåt med fyllnadshandtaget. Hur ska formeln skrivas för att fungera korrekt?`,
@@ -25422,7 +25424,7 @@ $$ 60\\ 000 \\cdot 1{,}024^6 = 60\\ 000 \\cdot 1{,}1528\\ldots = 69\\ 166{,}0\\l
 
 **Svar:** 69 166 kr`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Joel sätter in $10\\,000$ kr i slutet av varje år på ett konto med räntan $4\\ \\%$. Direkt efter vilken insättning är behållningen för första gången större än $100\\,000$ kr?`,
@@ -25639,7 +25641,7 @@ Kontroll med påhittade tal: $10\\,000$ kr växer till $10\\,000 \\cdot 1{,}03^{
     ],
 
     'ma1c-3.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad kallas det att betala tillbaka själva lånebeloppet?`,
@@ -25678,7 +25680,7 @@ $$ \\frac{3\\ 000}{12} = 250\\ \\mathrm{kr} $$
 
 **Svar:** 250 kr`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Hugo lånar 120 000 kr med rak amortering på 4 år och årsräntan 5,4 %. Hur mycket ska han betala totalt vid FÖRSTA inbetalningen (månadsvis)?`,
@@ -25715,7 +25717,7 @@ $$ 2\\ 500 + 540 = 3\\ 040\\ \\mathrm{kr} $$
 
 **Svar:** \`=(B2*0,048)/12\``,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ett lån på $240\\,000$ kr ska betalas tillbaka med rak amortering varje kvartal i 10 år. Årsräntan är $6\\ \\%$. Räntan betalas varje kvartal på den aktuella skulden.<br>a) Hur stor är räntan vid den första och vid den sista inbetalningen?<br>b) Bestäm den totala räntekostnaden för lånet utan att räkna ut varje inbetalning.`,
@@ -25969,7 +25971,7 @@ Den lägre räntan i bank B sparar $6\\,250 - 5\\,729{,}17 = 520{,}83$ kr, men a
     // ════════════════════════════════════════════════════════════════
 
     'ma1b-3.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Priset på en vara har indextalet 132, med 2015 som basår. Vad betyder det?`,
@@ -25998,21 +26000,21 @@ $$ \\text{index} = \\frac{715}{550} \\cdot 100 = 1{,}30 \\cdot 100 = 130 $$
         },
         {
             level: 1,
-            question: `KPI var 337,0 år 2020, med 1980 som basår. Vad säger det om prisnivån?`,
+            question: `KPI var 335,9 år 2020, med 1980 som basår. Vad säger det om prisnivån?`,
             choices: [
-                `Priserna ökade med 337 kr mellan 1980 och 2020`,
-                `Prisnivån år 2020 var 237 % högre än år 1980`,
-                `Prisnivån år 2020 var 37 % högre än år 1980`,
-                `Prisnivån år 2020 var 337 % högre än år 1980`,
+                `Priserna ökade med 335,9 kr mellan 1980 och 2020`,
+                `Prisnivån år 2020 var 235,9 % högre än år 1980`,
+                `Prisnivån år 2020 var 35,9 % högre än år 1980`,
+                `Prisnivån år 2020 var 335,9 % högre än år 1980`,
             ],
             correct: 1,
-            solution: `Basåret 1980 har index 100. Indextalet 337,0 ligger $337 - 100 = 237$ enheter över basåret, så prisnivån var 237 % högre — det som kostade 100 kr år 1980 kostade i genomsnitt 337 kr år 2020.
+            solution: `Basåret 1980 har index 100. Indextalet 335,9 ligger $335{,}9 - 100 = 235{,}9$ enheter över basåret, så prisnivån var 235,9 % högre. Det som kostade 100 kr år 1980 kostade alltså i genomsnitt knappt 336 kr år 2020.
 
 Den vanligaste felläsningen är att ta hela indextalet som procentuell ökning — men de första 100 enheterna är basårets egen nivå.
 
-**Svar:** Prisnivån år 2020 var 237 % högre än år 1980.`,
+**Svar:** Prisnivån år 2020 var 235,9 % högre än år 1980.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En chokladkaka kostar 65 kr i år, och prisets indextal är 125. Vad kostade chokladkakan under basåret?`,
@@ -26027,19 +26029,19 @@ $$ x = \\frac{65}{1{,}25} = 52\\ \\mathrm{kr} $$
         },
         {
             level: 2,
-            question: `En bok kostade 249 kr år 2010, när KPI var 303,5. Vad motsvarar det priset i 2023 års penningvärde, när KPI var 391,3? Avrunda till hela kronor.`,
-            answer: { value: 321, unit: 'kr', tol: 0.005 },
+            question: `En bok kostade 249 kr år 2010, när KPI var 303,5. Vad motsvarar det priset i 2023 års penningvärde, när KPI var 403,7? Avrunda till hela kronor.`,
+            answer: { value: 331, unit: 'kr', tol: 0.005 },
             solution: `Kvoten mellan årens indextal är förändringsfaktorn mellan åren:
 
-$$ 249 \\cdot \\frac{391{,}3}{303{,}5} = 249 \\cdot 1{,}2892\\ldots = 321{,}0\\ldots \\approx 321\\ \\mathrm{kr} $$
+$$ 249 \\cdot \\frac{403{,}7}{303{,}5} = 249 \\cdot 1{,}3301\\ldots = 331{,}2\\ldots \\approx 331\\ \\mathrm{kr} $$
 
-**Svar:** Ungefär 321 kr`,
+**Svar:** Ungefär 331 kr`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Linneas månadslön höjdes från 28 000 kr år 2020 till 30 000 kr år 2023. Under samma tid steg KPI från 337,0 till 391,3. Med hur många procent minskade hennes köpkraft (reallön)? Avrunda till tiondels procent.`,
-            answer: { value: 7.7, unit: '%', tol: 0.02 },
+            question: `Linneas månadslön höjdes från 28 000 kr år 2020 till 30 000 kr år 2023. Under samma tid steg KPI från 335,9 till 403,7. Med hur många procent minskade hennes köpkraft (reallön)? Avrunda till tiondels procent.`,
+            answer: { value: 10.9, unit: '%', tol: 0.02 },
             solution: `**Insikten:** lönen ska jämföras med prisnivån — köpkraften ändras med kvoten mellan lönens och prisernas förändringsfaktorer.
 
 Lönens förändringsfaktor:
@@ -26048,22 +26050,22 @@ $$ \\frac{30\\ 000}{28\\ 000} = 1{,}0714\\ldots $$
 
 Prisnivåns förändringsfaktor:
 
-$$ \\frac{391{,}3}{337{,}0} = 1{,}1611\\ldots $$
+$$ \\frac{403{,}7}{335{,}9} = 1{,}2018\\ldots $$
 
 Reallönens förändringsfaktor är kvoten:
 
-$$ \\frac{1{,}0714\\ldots}{1{,}1611\\ldots} = 0{,}9227\\ldots $$
+$$ \\frac{1{,}0714\\ldots}{1{,}2018\\ldots} = 0{,}8914\\ldots $$
 
-Faktorn 0,923 ligger under 1 — köpkraften minskade med $1 - 0{,}9227\\ldots = 0{,}0772\\ldots \\approx 7{,}7\\ \\%$.
+Faktorn 0,891 ligger under 1 — köpkraften minskade med $1 - 0{,}8914\\ldots = 0{,}1085\\ldots \\approx 10{,}9\\ \\%$.
 
-**Svar:** Ungefär 7,7 %.
+**Svar:** Ungefär 10,9 %.
 
 **Generell slutsats:** en lönehöjning i kronor kan ändå vara en sänkning i köpkraft — det är kvoten mot prisutvecklingen som avgör. Höjs priserna snabbare än lönen sjunker reallönen.`,
         },
     ],
 
     'ma1b-5.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken diagramtyp passar bäst för att visa hur en aktiekurs har ändrats dag för dag under ett år?`,
@@ -26105,7 +26107,7 @@ $$ 100 - 40 = 60 $$
 
 **Svar:** 60 fler besökare`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I ett cirkeldiagram över en enkät med 450 svarande motsvarar sektorn för "nej" 81 personer. Hur många procent av cirkeln upptar nej-sektorn?`,
@@ -26134,7 +26136,7 @@ alltså en ökning med cirka 6 %. Diagrammet är inte "fel ritat" — en avhugge
 
 **Svar:** Den verkliga ökningen är cirka 6 %, men staplarna får den att se ut som en fyrdubbling.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `I en enkät svarade 60 % av de 300 tillfrågade eleverna på Åskolan ja, och 40 % av de 700 tillfrågade på Bäckskolan. En rubrik påstår: "I snitt svarade hälften ja." Hur många procent av samtliga tillfrågade svarade egentligen ja?`,
@@ -26160,7 +26162,7 @@ $$ \\frac{460}{1\\ 000} = 0{,}46 = 46\\ \\% $$
     // ════════════════════════════════════════════════════════════════
 
     'ma1c-4.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad kallas skärningspunkten mellan *x*-axeln och *y*-axeln?`,
@@ -26205,7 +26207,7 @@ $$ y = 30 + 5x $$
 
 **Svar:** $y = 30 + 5x$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Den linjära modellen $y = 500 + 400x$ beskriver kostnaden hos en bilverkstad. Vad betyder talet 400 i modellen?`,
@@ -26230,7 +26232,7 @@ $$ y = 200 + 150 \\cdot 6 = 200 + 900 = 1\\ 100 $$
 
 **Svar:** $y = 1\\ 100$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Punkten $A = (a, b)$ ligger i första kvadranten. Punkten $B$ fås när $A$ speglas i *x*-axeln, och punkten $C$ fås när $A$ speglas i *y*-axeln.<br>a) Ange koordinaterna för $B$ och $C$ uttryckta i $a$ och $b$.<br>b) Visa att triangeln $ABC$ har arean $2ab$.<br>c) Punkten $A$ ligger på linjen $y = 2x$, och triangeln $ABC$ har arean 16 areaenheter. Bestäm koordinaterna för $A$.`,
@@ -26594,7 +26596,7 @@ Upp till 11 km stämmer modellen bra, cirka $-56$ °C mot verklighetens cirka 
     ],
 
     'ma1c-4.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilka två krav ska en graf uppfylla för att visa en proportionalitet?`,
@@ -26637,7 +26639,7 @@ $$ k = \\frac{y}{x} = \\frac{84}{12} = 7 $$
 
 **Svar:** $k = 7$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Vilken av följande värdetabeller visar en proportionalitet?`,
@@ -26672,7 +26674,7 @@ $$ y = 0{,}07 \\cdot 850 = 59{,}5\\ \\text{liter} $$
 
 **Svar:** 59,5 liter`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Storheterna $y_1$ och $y_2$ är båda proportionella mot $x$, med proportionalitetskonstanterna $a$ respektive $b$, där $a$ och $b$ är positiva.<br>a) Visa att summan $y_1 + y_2$ också är proportionell mot $x$.<br>b) Är produkten $y_1 \\cdot y_2$ proportionell mot $x$?<br>c) Är kvoten $\\dfrac{y_1}{y_2}$ proportionell mot $x$?`,
@@ -27002,7 +27004,7 @@ Rimligt? När Noah startar har Ella ett försprång på $18 \\cdot \\dfrac{1}{3}
     ],
 
     'ma1c-4.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Du ska rita grafen till $y = -2x + 3$ och gör en värdetabell. Vilket *y*-värde hör till $x = -2$?`,
@@ -27043,7 +27045,7 @@ Raden ger koordinaten (−2, 7).
 
 **Svar:** Förbinda punkterna med en rät linje.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Du ska rita grafen till $y = 3x - 4$ för $x$ från −2 till 2. Vilka intervall måste axlarna minst täcka?`,
@@ -27068,7 +27070,7 @@ $$ a = -2 \\cdot 5 + 3 = -10 + 3 = -7 $$
 
 **Svar:** $a = -7$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Linjen $y = -3x + 20$ är given.<br>a) Bestäm talet $a$ så att punkten $(a,\\ 2a + 5)$ ligger på linjen. Vilken punkt är det?<br>b) Finns det en punkt på linjen där *x*-koordinaten och *y*-koordinaten är lika stora men har olika tecken? Bestäm den i så fall.`,
@@ -27471,7 +27473,7 @@ Lägg märke till att kilometerpriset sänks med mer än 20 %, från 12 kr til
     ],
 
     'ma1c-4.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad motsvarar $m$-värdet i räta linjens ekvation $y = kx + m$?`,
@@ -27512,7 +27514,7 @@ $$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{8 - 5}{1 - 0} = \\frac{3}{1} = 3 $$
 
 **Svar:** $k = 3$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En linje går genom punkterna (2, 11) och (6, 3). Bestäm linjens riktningskoefficient.`,
@@ -27541,7 +27543,7 @@ $$ y = -\\frac{1}{2} \\cdot 8 + 7 = -4 + 7 = 3 $$
 
 **Svar:** $y = 3$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Linjen i figuren skär *y*-axeln mellan två rutlinjer, så $m$-värdet kan inte läsas av exakt.<br>a) Bestäm linjens ekvation exakt.<br>b) Bestäm exakt var linjen skär *x*-axeln.
@@ -27936,7 +27938,7 @@ Rimligt? Båda modellerna ger 44 miljoner kronor år 2021, men den exponentiella
     ],
 
     'ma1c-4.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna riktningskoefficienten för linjen genom punkterna (1, 2) och (5, 14).`,
@@ -27975,7 +27977,7 @@ $$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{y_2 - y_1}{x_2 - x_1} $$
 
 **Svar:** $k = \\dfrac{y_2 - y_1}{x_2 - x_1}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna riktningskoefficienten för linjen genom (−4, 5) och (2, −7).`,
@@ -28002,7 +28004,7 @@ $$ m = 11 $$
 
 **Svar:** $m = 11$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En rät linje går genom punkterna $(2, a)$ och $(a, 8)$.<br>a) Bestäm $a$ så att linjens riktningskoefficient blir 3.<br>b) För vilket värde på $a$ saknar linjen riktningskoefficient? Förklara varför.`,
@@ -28414,7 +28416,7 @@ kronor. Ett negativt värde är omöjligt. Den procentuella modellen ger $240\\,
     ],
 
     'ma1c-4.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken av följande linjer är parallell med $y = 4x + 2$?`,
@@ -28467,7 +28469,7 @@ Skifta led: $2x - y + 7 = 0$.
 
 **Svar:** $2x - y + 7 = 0$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ange $k$-värdet för linjen $4x + 2y - 10 = 0$.`,
@@ -28502,7 +28504,7 @@ $$ 1 = -6 + m \\qquad m = 7 $$
 
 **Svar:** $y = -2x + 7$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En linje beskrivs av $(a - 1)x + (a + 2)y + 5 = 0$, där $a$ är en konstant. Bestäm $a$ så att linjen blir<br>a) vertikal&emsp;&emsp;b) vågrät<br>c) parallell med linjen $y = 2x + 7$`,
@@ -28954,7 +28956,7 @@ $k = -0{,}6$ skiljer sig från $-0{,}75$, så linjerna är inte parallella. Båd
     ],
 
     'ma1c-4.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilket $k$-värde har en linje som är vinkelrät mot $y = 4x - 1$?`,
@@ -29008,7 +29010,7 @@ $$ k = -\\frac{1}{2} $$
 
 **Svar:** $k = -\\dfrac{1}{2} = -0{,}5$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm ekvationen för den linje som är vinkelrät mot $y = 3x - 2$ och går genom punkten (6, 4).`,
@@ -29061,7 +29063,7 @@ Kontroll: $\\dfrac{2}{3} \\cdot \\left(-\\dfrac{3}{2}\\right) = -1$.
 
 **Svar:** $k = -\\dfrac{3}{2} = -1{,}5$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Punkterna A(1, 2), B(5, 4) och C($a$, 8) är hörn i en triangel som har en rät vinkel vid B. Bestäm $a$.`,
@@ -29104,7 +29106,7 @@ Kontroll: C = (3, 8) ger $k_\\mathrm{BC} = \\dfrac{8 - 4}{3 - 5} = \\dfrac{4}{-2
         },
     ],
     'ma1c-4.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Låt $f(x) = 3x + 4$. Beräkna $f(6)$.`,
@@ -29139,7 +29141,7 @@ $$ g(-3) = 10 - 2 \\cdot (-3) = 10 + 6 = 16 $$
 
 **Svar:** $g(-3) = 16$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Låt $f(x) = 5x - 3$. Vilket uttryck är $f(2a)$?`,
@@ -29172,7 +29174,7 @@ $$ f(5) - f(3) = 21 - 13 = 8 $$
 
 **Svar:** 8`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `$f$ är en linjär funktion där $f(2) = 7$ och $f(5) = -2$.<br>a) Bestäm $f(x)$.<br>b) Lös ekvationen $f(x) = x$ och förklara vad lösningen betyder för grafen.`,
@@ -29496,7 +29498,7 @@ Rimligt? Under den första kvarten sjunker temperaturen från $T(0) = 90$ till c
     ],
 
     'ma1c-4.9': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vid grafisk lösning av ekvationen $2x - 1 = x + 4$ ritas två linjer. Vad ger lösningen?`,
@@ -29537,7 +29539,7 @@ Kontroll: $3 \\cdot 2 - 5 = 1$ och $-2 + 3 = 1$ — båda led lika.
 
 **Svar:** 7.5`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Du ska lösa $s = 90t - 30$ och $s = 60t + 45$ grafiskt i GeoGebra. Vad måste du göra med ekvationerna först?`,
@@ -29572,7 +29574,7 @@ $$ x < 3 $$
 
 **Svar:** $x < 3$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `a) Lös ekvationen $2^x = x + 3$ med grafritande hjälpmedel. Svara med två decimaler.<br>b) Förklara med hjälp av graferna varför ekvationen $2^x = x$ saknar lösning.`,
@@ -29812,7 +29814,7 @@ Kontroll: med $a = 3$ är ekvationen $3x - 3 = 7 - 2x$. Insättning av $x = 2$ g
     ],
 
     'ma1c-4.10': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad kallas mängden av möjliga värden på den oberoende variabeln $x$?`,
@@ -29859,7 +29861,7 @@ $$ 0 \\leq x \\leq 8 $$
 
 **Svar:** $0 \\leq x \\leq 8$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Funktionen $y = 50x$ har definitionsmängden $0 \\leq x \\leq 12$. Vilken är värdemängden?`,
@@ -29894,7 +29896,7 @@ $$ -3 < x \\leq 5 $$
 
 **Svar:** $-3 < x \\leq 5$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En hage ska ha formen av en rektangel med arean $48\\ \\mathrm{m^2}$. Hagens bredd är $x$ m och dess längd är $y$ m. Båda sidorna ska vara minst $4\\ \\mathrm{m}$, och längden ska vara minst lika stor som bredden.<br>a) Skriv $y$ som en funktion av $x$.<br>b) Bestäm funktionens definitionsmängd. Svara exakt och med en decimal.<br>c) Bestäm funktionens värdemängd.`,
@@ -30166,7 +30168,7 @@ Kontroll med $y = -4$: formeln ger $x = 3 + \\dfrac{12}{-4} = 3 - 3 = 0$, och my
     ],
 
     'ma1c-4.11': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad kännetecknar en exponentialfunktion?`,
@@ -30211,7 +30213,7 @@ $$ K(x) = 8\\ 000 \\cdot 1{,}03^x $$
 
 **Svar:** Det ursprungliga värdet`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Antalet bakterier i en odling ges av $N(t) = 500 \\cdot 1{,}12^t$ där $t$ är tiden i timmar. Vad beskriver funktionen?`,
@@ -30236,7 +30238,7 @@ $$ V(5) = 240\\ 000 \\cdot 0{,}80^5 = 240\\ 000 \\cdot 0{,}32768 = 78\\ 643{,}2 
 
 **Svar:** cirka 78 600 kr`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Grafen visar en del av funktionen $y = C \\cdot a^x$. Den del av grafen som ligger närmast *y*-axeln är bortklippt.${makeDiagram({
@@ -30576,7 +30578,7 @@ $$ \\frac{9 \\cdot 1}{2} = 4{,}5 $$
     ],
 
     'ma1c-4.12': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken av följande är en potensfunktion?`,
@@ -30617,7 +30619,7 @@ $$ f(3) = 3^4 = 81 $$
 
 **Svar:** Variabeln är basen i potensfunktionen och exponenten i exponentialfunktionen.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Låt $f(x) = x^6$. Lös ekvationen $f(x) = 40$. Ange den positiva lösningen med två decimaler.`,
@@ -30648,7 +30650,7 @@ $$ x = \\pm\\sqrt[6]{40} = \\pm 40^{1/6} = \\pm 1{,}849\\ldots \\approx \\pm 1{,
 
 **Svar:** En hyperbel med två grenar.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Grafen visar en del av potensfunktionen $f(x) = C \\cdot x^a$ för $x \\geq 2$.${makeDiagram({
@@ -31018,7 +31020,7 @@ Kontroll: rektangeln har arean $4 \\cdot 0{,}5 = 2$. Stämmer.
     // ════════════════════════════════════════════════════════════════
 
     'ma1c-5.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad kallas det när man samlar in data från en HEL population?`,
@@ -31061,7 +31063,7 @@ Kontroll: rektangeln har arean $4 \\cdot 0{,}5 = 2$. Stämmer.
 
 **Svar:** "Vad tycker du om matematik?"`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I en skola är 60 % av eleverna tjejer. Hamid gör ett stratifierat urval med 50 elever för en enkät om idrottsvanor. Hur många tjejer ska ingå i stickprovet?`,
@@ -31082,7 +31084,7 @@ $$ \\frac{50}{500} = 0{,}10 = 10\\ \\% $$
 
 **Svar:** 10 %`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `I en fabrik packas chokladaskar av fyra maskiner, A, B, C och D. Askarna hamnar på samma band i turordningen A, B, C, D, A, B, C, D och så vidare, och numreras 1, 2, 3 … i den ordning de kommer. Kvalitetskontrollen gör ett systematiskt urval: var 20:e ask (nummer 20, 40, 60 …) kontrolleras. Nästan inga fel hittas, och slutsatsen blir att alla fyra maskinerna fungerar bra.<br>a) Vilken maskin har packat ask nummer 20, 40 och 60? Hur stor andel av de kontrollerade askarna kommer från maskin A? Ange andelen i procent.<br>b) Kontrollen byter till var 6:e ask. Hur många av de fyra maskinerna blir då kontrollerade?<br>c) Vilka steglängder från 2 till 10 gör att alla fyra maskinerna blir kontrollerade? Förklara varför.`,
@@ -31431,7 +31433,7 @@ Kontroll med b): $q = \\dfrac{260}{400} = 0{,}65$ ger $p = 2 \\cdot 0{,}65 - 1 =
     ],
 
     'ma1c-5.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad kallas intervallet som fås när resultatet av en undersökning anges tillsammans med sin felmarginal?`,
@@ -31472,7 +31474,7 @@ $$ f = 1{,}96 \\cdot \\sqrt{\\frac{50(100 - 50)}{100}} = 1{,}96 \\cdot \\sqrt{25
 
 **Svar:** 9,8 %`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I en undersökning med 400 tillfrågade svarade 60 % ja. Beräkna felmarginalen. Avrunda till en decimal.`,
@@ -31499,7 +31501,7 @@ Jämför med genomgångens exempel ($n = 100$ gav 9,6 %) — fyra gånger fler t
 
 **Svar:** Nej — förändringen är inte statistiskt säkerställd.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två undersökningar ställer samma fråga till 1&nbsp;000 slumpvis utvalda personer var. Undersökning A görs i en kommun med 20&nbsp;000 invånare och undersökning B i hela Sverige, med drygt 10 miljoner invånare. Båda får resultatet 40&nbsp;%. Vilket påstående stämmer enligt formeln för felmarginal?`,
@@ -31809,7 +31811,7 @@ Ett mindre $n$ ger en större felmarginal, så vi avrundar **uppåt**. Kontroll:
     ],
 
     'ma1c-5.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilket diagram används för att undersöka om det finns en korrelation mellan två variabler?`,
@@ -31852,7 +31854,7 @@ Ett mindre $n$ ger en större felmarginal, så vi avrundar **uppåt**. Kontroll:
 
 **Svar:** Ett orsakssamband mellan två variabler.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Antalet sålda glassar och antalet drunkningsolyckor samvarierar starkt över året. Vad är den bästa tolkningen?`,
@@ -31883,7 +31885,7 @@ Skostorlek/ordförråd hos barn samvarierar (båda växer med åldern) men är e
 
 **Svar:** Antal träningstimmar och kondition.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En studie visar stark positiv korrelation mellan antalet brandbilar på plats och skadekostnaden vid bränder. Kalle drar slutsatsen: ”Skicka färre brandbilar, så minskar skadorna!” Vad är felet i resonemanget?`,
@@ -32167,7 +32169,7 @@ $$ \\dfrac{388 + 70}{500} = \\dfrac{458}{500} = 0{,}916 = 91{,}6\\ \\% $$
     ],
 
     'ma1c-5.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad är sannolikheten att slå en sexa med en vanlig tärning? Svara i bråkform.`,
@@ -32214,7 +32216,7 @@ $$ P(\\text{ess}) = \\frac{4}{52} = \\frac{1}{13} $$
 
 **Svar:** $\\dfrac{1}{13}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Du kastar två tärningar. Vad är sannolikheten att summan blir exakt 7? Svara i bråkform.`,
@@ -32243,7 +32245,7 @@ $$ P(\\text{inte gul}) = \\frac{12}{20} = 0{,}6 = 60\\ \\% $$
 
 **Svar:** 60 %`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Du singlar två mynt. Leia säger: "Det finns tre utfall: två kronor, två klavar eller en av varje. Så sannolikheten för en av varje är $\\dfrac{1}{3}$." Vad är rätt sannolikhet för en krona och en klave?`,
@@ -32529,7 +32531,7 @@ Kontroll: $\\dfrac{10 - 1}{2 \\cdot 10} = \\dfrac{9}{20} = 0{,}45$. Stämmer.
     ],
 
     'ma1c-5.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ett häftstift landade med spetsen uppåt i 132 av 200 kast. Vad är den relativa frekvensen för "spets uppåt" i procent?`,
@@ -32568,7 +32570,7 @@ $$ \\frac{132}{200} = 0{,}66 = 66\\ \\% $$
 
 **Svar:** Den blir mer exakt.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En basketspelare satte 87 av 120 frikast under en säsong. Vad är sannolikheten (i procent, en decimal) att nästa frikast går i?`,
@@ -32589,7 +32591,7 @@ $$ P(\\text{pojke}) = \\frac{2\\ 489}{4\\ 850} = 0{,}5132\\ldots \\approx 51{,}3
 
 **Svar:** cirka 51,3 %`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Elvin kastar ett mynt 10 gånger och får 7 kronor. Han säger: "Myntet är skevt, sannolikheten för krona är 70&nbsp;%!" Vad är den viktigaste invändningen?`,
@@ -32896,7 +32898,7 @@ Kontroll: $\\dfrac{9}{24} = 0{,}375 = 37{,}5\\ \\%$ och $\\dfrac{10}{25} = 0{,}4
     ],
 
     'ma1c-5.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad är sannolikheten att få krona två gånger i rad vid slantsingling? Svara i bråkform.`,
@@ -32937,7 +32939,7 @@ $$ 0{,}2 \\cdot 0{,}2 = 0{,}04 = 4\\ \\% $$
 
 **Svar:** 0,04 (4 %)`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I en påse ligger 5 gröna och 3 gula karameller. Du tar två karameller utan återläggning. Vad är sannolikheten att båda är gröna? Svara i procent, avrundat till heltal.`,
@@ -32966,7 +32968,7 @@ $\\dfrac{1}{18}$ vore $3 \\cdot \\dfrac{1}{6} \\cdot \\dfrac{1}{6}$... sannolikh
 
 **Svar:** $\\dfrac{1}{216}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En vanlig tärning har visat en sexa i fem kast i rad. Kim säger: "Nu är det dags för något annat. Sannolikheten för en sexa i nästa kast måste vara mindre än vanligt."<br>a) Hur stor är sannolikheten att det sjätte kastet blir en sexa? Svara i decimalform med tre decimaler.<br>b) Innan det första kastet gjordes: hur stor var sannolikheten att alla sex kasten skulle bli sexor? Svara i bråkform.<br>c) Förklara varför svaren i a) och b) inte motsäger varandra, och vad som är fel i Kims resonemang.`,
@@ -33280,7 +33282,7 @@ $$ 0{,}24 + 0{,}56 + 0{,}06 + 0{,}14 = 1 $$
     ],
 
     'ma1c-5.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Hur beräknas sannolikheten för EN kombination (en gren) i ett träddiagram?`,
@@ -33325,7 +33327,7 @@ $$ P(\\text{svart efter svart}) = \\frac{6}{9} $$
 
 **Svar:** Multiplicera längs varje gren och addera grenarna.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I en påse finns 4 röda och 6 blå kulor. Du drar två kulor utan återläggning. Använd ett träddiagram och beräkna sannolikheten för två röda. Svara i bråkform.`,
@@ -33354,7 +33356,7 @@ $$ \\frac{3}{10} \\cdot \\frac{6}{10} = \\frac{18}{100} = 18\\ \\% $$
 
 **Svar:** 18 %`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ett inbrottslarm har två sensorer som fungerar oberoende av varandra. Var och en upptäcker ett inbrott med sannolikheten $0{,}8$.<br>a) Hur stor är sannolikheten att minst en av sensorerna upptäcker inbrottet? Svara i decimalform.<br>b) Kim räknar $0{,}8 + 0{,}8 = 1{,}6$. Förklara varför det inte kan vara rätt.<br>c) Hur många sensorer behövs som minst för att sannolikheten att minst en upptäcker inbrottet ska vara minst $0{,}999$?`,
@@ -33675,7 +33677,7 @@ Alla fyra grenar är lika sannolika: den vita kulan har samma chans att komma i 
     ],
 
     'ma1c-5.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad är komplementhändelsen till "att slå en sexa" med en tärning?`,
@@ -33714,7 +33716,7 @@ $$ P(\\text{inte i tid}) = 1 - 0{,}85 = 0{,}15 $$
 
 **Svar:** Uppgifter med "minst en" eller "åtminstone en".`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Vad är sannolikheten att få minst en krona när du singlar tre mynt? Svara i bråkform.`,
@@ -33747,7 +33749,7 @@ $$ P(\\text{minst en vinst}) = 1 - 0{,}729 = 0{,}271 = 27{,}1\\ \\% $$
 
 **Svar:** 27,1 %`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Du kastar en vanlig tärning flera gånger.<br>a) Hur många gånger måste du minst kasta för att sannolikheten att få minst en sexa ska överstiga 50&nbsp;%?<br>b) Hur många gånger måste du minst kasta för att sannolikheten ska överstiga 90&nbsp;%?`,
@@ -34035,7 +34037,7 @@ Det går också att se utan räkning. Tänk dig att alla $n$ kulor dras och läg
     // ════════════════════════════════════════════════════════════════
 
     'ma1c-6.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad kallas den längsta sidan i en rätvinklig triangel?`,
@@ -34072,7 +34074,7 @@ Det går också att se utan räkning. Tänk dig att alla $n$ kulor dras och läg
 
 **Svar:** 0,75`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I en rätvinklig triangel är vinkeln 35° och den närliggande kateten 4,0 m. Beräkna den motstående kateten. Svara i meter med en decimal.`,
@@ -34097,7 +34099,7 @@ $$ x = \\frac{5{,}0}{\\tan 22°} = \\frac{5{,}0}{0{,}4040\\ldots} = 12{,}37\\ldo
 
 **Svar:** 12 l.e.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ett 4,2 m högt träd står på plan mark. Solen står så att trädets skugga är 6,0 m lång. Senare på dagen har skuggan vuxit till 9,5 m. Hur många grader har solens höjdvinkel SJUNKIT mellan mätningarna? Avrunda till heltal.`,
@@ -34123,7 +34125,7 @@ $$ v_1 - v_2 \\approx 35{,}0° - 23{,}9° = 11{,}1° \\approx 11° $$
     ],
 
     'ma1c-6.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `I en rätvinklig triangel är motstående katet 4 cm och hypotenusan 5 cm till vinkeln $u$. Beräkna sin $u$.`,
@@ -34162,7 +34164,7 @@ $$ v_1 - v_2 \\approx 35{,}0° - 23{,}9° = 11{,}1° \\approx 11° $$
 
 **Svar:** Kateten är alltid kortare än hypotenusan.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I en rätvinklig triangel är vinkeln 41° och dess motstående katet 6,1 cm. Beräkna hypotenusan. Svara i cm med en decimal.`,
@@ -34187,7 +34189,7 @@ $$ x = 12 \\cdot \\cos 28° = 12 \\cdot 0{,}8829\\ldots = 10{,}59\\ldots \\appro
 
 **Svar:** 10,6 m`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En triangel (ej rätvinklig) har sidorna 9,0 och 15 med vinkeln 38° mellan dem. Beräkna triangelns area. Avrunda till heltal.`,
@@ -34209,7 +34211,7 @@ $$ A = \\frac{b \\cdot h}{2} = \\frac{15 \\cdot 9{,}0 \\cdot \\sin 38°}{2} = \\
     ],
 
     'ma1c-6.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm vinkeln $v$ om $\\tan v = 1$. Svara i grader.`,
@@ -34246,7 +34248,7 @@ $$ v = \\tan^{-1}(1) = 45° $$
 
 **Svar:** 60°`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I en rätvinklig triangel är motstående katet 7,0 cm och närliggande katet 4,0 cm till vinkeln $v$. Bestäm $v$. Svara i grader, avrundat till heltal.`,
@@ -34271,7 +34273,7 @@ $$ v = \\sin^{-1}(0{,}8666\\ldots) = 60{,}07\\ldots° \\approx 60° $$
 
 **Svar:** cirka 60°`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `I en rätvinklig triangel är katetrarna 5,0 cm och 12 cm. Bestäm triangelns MINSTA vinkel. Svara i grader, avrundat till heltal.`,
@@ -34293,7 +34295,7 @@ Kontroll: den andra spetsiga vinkeln är $\\tan^{-1}(12/5{,}0) \\approx 67°$, o
     ],
 
     'ma1c-6.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad säger Pythagoras sats för en rätvinklig triangel med katetrarna $a$ och $b$ och hypotenusan $c$?`,
@@ -34336,7 +34338,7 @@ $$ c = \\sqrt{100} = 10 $$
 
 **Svar:** Hypotenusan`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna längden av sträckan mellan punkterna (1, 2) och (7, 10).`,
@@ -34363,7 +34365,7 @@ $$ v = \\tan^{-1}(0{,}6) = 30{,}96\\ldots° \\approx 31° $$
 
 **Svar:** cirka 31°`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Triangeln med hörnen A(−3, 1), B(5, 1) och C(5, 7) är rätvinklig. Bestäm vinkeln vid hörn A. Svara i grader, avrundat till heltal.`,
@@ -34385,7 +34387,7 @@ Kontroll: hypotenusan $AC = \\sqrt{8^2 + 6^2} = 10$ och vinkeln vid C blir $\\ta
     ],
 
     'ma1c-6.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad skiljer en vektor från en skalär?`,
@@ -34428,7 +34430,7 @@ Kontroll: hypotenusan $AC = \\sqrt{8^2 + 6^2} = 10$ och vinkeln vid C blir $\\ta
 
 **Svar:** Samma storlek och samma riktning.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En vektor går 6 rutor åt höger och 8 rutor uppåt. Beräkna vektorns längd (1 ruta = 1 l.e.).`,
@@ -34457,7 +34459,7 @@ $$ |\\vec{u}| = \\sqrt{100} = 10 $$
 
 **Svar:** 3 rutor åt vänster och 1 ruta nedåt.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Fyra vektorer ritas i ett rutnät: $\\vec{a}$ går (4, 1), $\\vec{b}$ går (−4, −1), $\\vec{c}$ går (8, 2) och $\\vec{d}$ går (4, 2). Vilket påstående stämmer?`,
@@ -34483,7 +34485,7 @@ $\\vec{d}$: lutning $\\dfrac{2}{4} = \\dfrac{1}{2} \\neq \\dfrac{1}{4}$ — INTE
     ],
 
     'ma1c-6.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad händer när vektorn $\\vec{w}$ multipliceras med 3?`,
@@ -34528,7 +34530,7 @@ $\\vec{d}$: lutning $\\dfrac{2}{4} = \\dfrac{1}{2} \\neq \\dfrac{1}{4}$ — INTE
 
 **Svar:** Resultant`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beskriv polygonmetoden för att addera $\\vec{u}$ och $\\vec{v}$.`,
@@ -34555,7 +34557,7 @@ $$ |\\vec{w}| = 5 + 3 = 8\\ \\text{rutor} $$
 
 **Svar:** 8 rutor`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `$\\vec{u}$ pekar 6 rutor åt höger och $\\vec{v}$ pekar 8 rutor uppåt. Hur lång blir resultanten $\\vec{w} = \\vec{u} + \\vec{v}$?`,
@@ -34577,7 +34579,7 @@ Observera att $|\\vec{w}| \\neq |\\vec{u}| + |\\vec{v}| = 14$ — längder adder
     ],
 
     'ma1c-6.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Hur skrivs subtraktionen $\\vec{u} - \\vec{v}$ om som en addition?`,
@@ -34624,7 +34626,7 @@ Sedan används polygonmetoden som vanligt.
 
 **Svar:** Rita den motsatta vektorn $-\\vec{v}$.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `$\\vec{u}$ pekar 7 rutor åt höger och $\\vec{v}$ pekar 3 rutor åt höger. Hur lång blir $\\vec{w} = \\vec{u} - \\vec{v}$ och åt vilket håll pekar den?`,
@@ -34655,7 +34657,7 @@ $$ |\\vec{w}|^2 = 4^2 + 3^2 = 25 \\qquad |\\vec{w}| = 5\\ \\text{rutor} $$
 
 **Svar:** 5 rutor`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två vektorer är lika långa: $|\\vec{u}| = |\\vec{v}| = 6$. Vad gäller för $\\vec{w} = \\vec{u} - \\vec{v}$ om $\\vec{u}$ och $\\vec{v}$ har SAMMA riktning?`,
@@ -34681,7 +34683,7 @@ $$ \\vec{w} = \\vec{u} - \\vec{u} = \\vec{0} \\qquad |\\vec{w}| = 0 $$
     ],
 
     'ma1c-6.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna längden av vektorn $\\vec{u} = (3,\\ 4)$.`,
@@ -34724,7 +34726,7 @@ $$ |\\vec{u}| = \\sqrt{a^2 + b^2} $$
 
 **Svar:** $\\overrightarrow{AB} = (8,\\ 4)$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm längden av vektorn $\\vec{v} = (11,\\ -5)$. Avrunda till två decimaler.`,
@@ -34753,7 +34755,7 @@ Störst är 85 — vektorn $(6,\\ 7)$ med längden $\\sqrt{85} \\approx 9{,}2$.
 
 **Svar:** $(6,\\ 7)$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Vektorn $\\vec{u} = (a,\\ 8)$ har längden 17. Bestäm det positiva värdet på $a$.`,
@@ -34789,7 +34791,7 @@ Kontroll: $\\sqrt{15^2 + 8^2} = \\sqrt{225 + 64} = \\sqrt{289} = 17$. Stämmer!
     // Skärningspunkten = lösningen; antal lösningar via k- och m-värden.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-1.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Två linjer är uppritade i koordinatsystemet nedan. Vilken är lösningen till ekvationssystemet som linjerna bildar?
@@ -34853,7 +34855,7 @@ $$`,
 
 **Svar:** 0 lösningar (linjerna är parallella)`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Hur många lösningar har ekvationssystemet
@@ -34901,7 +34903,7 @@ Kontroll: $a = 3$ ger linjerna $y = 3x - 1$ och $y = 3x + 4$ — parallella, ing
 
 **Svar:** $a = 3$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Linjerna $y = x + 1$, $y = 3 - x$ och $y = kx + 5$ skär varandra i **en och samma punkt**. Bestäm $k$.`,
@@ -34933,7 +34935,7 @@ Kontroll: $y = -3x + 5$ ger $y = -3 + 5 = 2$ vid $x = 1$. Stämmer!
     // Lös ut en variabel, byt ut den i den andra ekvationen.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-1.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Lös ekvationssystemet
@@ -35003,7 +35005,7 @@ $$ 3(2y + 1) + y = 17 $$
 
 **Svar:** $3(2y + 1) + y = 17$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationssystemet
@@ -35056,7 +35058,7 @@ $$ a = 12 - 4 = 8 $$
 
 **Svar:** $a = 8$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `För vilket värde på $c$ har ekvationssystemet
@@ -35091,7 +35093,7 @@ Om $c \\neq 10$ blir ekvationen en motsägelse (till exempel $10 = 7$) — då s
     // Addera ekvationerna ledvis så att en variabel elimineras.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-1.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Lös ekvationssystemet
@@ -35161,7 +35163,7 @@ $$ 8x = 16 $$
 
 **Svar:** $y$-termerna elimineras — kvar blir $8x = 16$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationssystemet
@@ -35218,7 +35220,7 @@ $$ -y = -4 \\iff y = 4 $$
 
 **Svar:** $y = 4$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ekvationssystemet
@@ -35258,7 +35260,7 @@ Kontroll i den undre ursprungsekvationen: $2 \\cdot 5 \\cdot 1 - 1 \\cdot 2 = 10
     // Definiera variabler → ställ upp systemet → lös → tolka.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-1.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Två tal har summan 25 och differensen 9. Bestäm det största talet.`,
@@ -35321,7 +35323,7 @@ $$ 60v = 300 \\iff v = 5 $$
 
 **Svar:** $x + y = 7$ och $x = y + 3$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I en hage finns kaniner och fasaner. Djuren har tillsammans 35 huvuden och 94 ben. Hur många kaniner finns i hagen?`,
@@ -35374,7 +35376,7 @@ Kontroll: om 20 år är Anna 60 och sonen 30 — dubbelt så gammal. Stämmer!
 
 **Svar:** Anna är 40 år.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En handlare blandar kaffe som kostar 80 kr/kg med kaffe som kostar 120 kr/kg. Blandningen ska väga 10 kg och kosta 95 kr/kg. Hur många kilogram av det dyrare kaffet ska handlaren ta? Svara i kg.`,
@@ -35409,7 +35411,7 @@ Rimlighet: 95 kr/kg ligger närmare 80 än 120, så det ska vara mindre än häl
     // (a±b)² = a² ± 2ab + b²; (a+b)(a−b) = a² − b².
     // ─────────────────────────────────────────────────────────────────
     'ma2c-2.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Utveckla $(x + 5)^2$.`,
@@ -35464,7 +35466,7 @@ Observera att sista termen är **plus** 9 — $(-3)^2$ är positivt.
 
 **Svar:** $x^2 - 6x + 9$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Utveckla $(2x + 3)^2$.`,
@@ -35497,7 +35499,7 @@ $$ (5 - 2x)(5 + 2x) = 5^2 - (2x)^2 = 25 - 4x^2 $$
 
 **Svar:** $25 - 4x^2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Beräkna $41^2 - 39^2$ **utan räknare** genom att utnyttja konjugatregeln.`,
@@ -35519,7 +35521,7 @@ Det som ser ut som ett tungt räknestycke blir en enkel huvudräkning.
     // Bryt ut + kvadrerings-/konjugatregeln baklänges; förkorta rationella uttryck.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-2.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Faktorisera $x^2 - 25$.`,
@@ -35572,7 +35574,7 @@ Alternativen $3(2x^2 + 3x)$ och $x(6x + 9)$ är inte färdigfaktoriserade — pa
 
 **Svar:** $3x(2x + 3)$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Faktorisera $2x^2 - 18$ så långt som möjligt.`,
@@ -35613,7 +35615,7 @@ $$ \\frac{(x + 4)(x - 4)}{3(x + 4)} = \\frac{x - 4}{3} $$
 
 **Svar:** $\\dfrac{x - 4}{3}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Förkorta $\\dfrac{x^2 - 6x + 9}{x^2 - 9}$ så långt som möjligt.`,
@@ -35649,7 +35651,7 @@ $$ \\frac{(x - 3)^2}{(x + 3)(x - 3)} = \\frac{x - 3}{x + 3} $$
     // HL = 0, faktorisera VL, sätt varje faktor = 0.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-2.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ekvationen $x^2 - 7x = 0$ har två lösningar. Ange den lösning som **inte** är 0.`,
@@ -35700,7 +35702,7 @@ Observera teckenbytet — faktorn $(x + 2)$ blir 0 när $x = -2$, inte $+2$.
 
 **Svar:** Minst en av faktorerna måste vara lika med 0.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ekvationen $5x^2 = 30x$ har två lösningar. Ange den lösning som **inte** är 0.`,
@@ -35739,7 +35741,7 @@ Snabbkontroll: $x = 4$ gör första faktorn 0, $x = -6$ gör andra faktorn 0.
 
 **Svar:** $(x - 4)(x + 6) = 0$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ange den **största** lösningen till ekvationen $x^3 = 16x$.`,
@@ -35771,7 +35773,7 @@ Den största är 4.
     // x² + px + q = 0 ⟹ x = −p/2 ± √((p/2)² − q).
     // ─────────────────────────────────────────────────────────────────
     'ma2c-2.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ekvationen $x^2 + 2x - 8 = 0$ har två lösningar. Ange den **största**.`,
@@ -35814,7 +35816,7 @@ $$ x_1 = -3 \\qquad x_2 = 5 $$
 
 **Svar:** $x = 5$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ekvationen $3x^2 - 15x + 18 = 0$ har två lösningar. Ange den **minsta**.`,
@@ -35847,7 +35849,7 @@ $$ x_1 = -3 \\qquad x_2 = 8 $$
 
 **Svar:** $x = 8$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ekvationen $x^2 + px + 12 = 0$ har lösningen $x = 2$. Bestäm ekvationens **andra** lösning.`,
@@ -35877,7 +35879,7 @@ Den andra lösningen är 6.
     // ax² + bx + c = 0 ⟹ x = −b/2a ± √(b²−4ac)/2a.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-2.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilka värden har $a$, $b$ och $c$ i ekvationen $3x^2 - 5x + 2 = 0$?`,
@@ -35926,7 +35928,7 @@ Båda formlerna ger samma lösningar och båda kräver att ena ledet är 0.
 
 **Svar:** Koefficienten framför $x^2$-termen behöver inte divideras bort först.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $3x^2 + 5x - 2 = 0$ med *abc*-formeln och ange den **minsta** lösningen.`,
@@ -35955,7 +35957,7 @@ $$ x_1 = -0{,}6 \\qquad x_2 = 1 $$
 
 **Svar:** $x = 1$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `För vilka värden på $c$ saknar ekvationen $2x^2 + 4x + c = 0$ lösningar? Ange det **minsta heltal** $c$ som gör att lösningar saknas.`,
@@ -35983,7 +35985,7 @@ Ekvationen saknar alltså lösningar för alla $c > 2$. Det minsta heltalet stö
     // Diskriminantens tecken: positiv → 2, noll → 1, negativ → 0.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-2.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Hur många lösningar har ekvationen $x^2 + 6x + 10 = 0$?`,
@@ -36024,7 +36026,7 @@ Att diskriminanten är 0 betyder inte att lösningen är 0 — lösningen är $-
 
 **Svar:** Ekvationen har exakt en lösning (dubbelrot).`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Hur många lösningar har ekvationen $2x^2 + 4x + 2 = 0$?`,
@@ -36055,7 +36057,7 @@ $$ 25 - a = 0 \\iff a = 25 $$
 
 **Svar:** $a = 25$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ekvationen $x^2 + 6x + q = 0$ har **två** lösningar. Ange det största heltal $q$ som är möjligt.`,
@@ -36083,7 +36085,7 @@ Största heltalet mindre än 9 är 8.
     // Tolka → ställ upp → lös → tolka svaret (bortse orimliga rötter).
     // ─────────────────────────────────────────────────────────────────
     'ma2c-2.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Produkten av två på varandra följande positiva heltal är 72. Vilket är det **mindre** talet?`,
@@ -36142,7 +36144,7 @@ $$ (x + 3)^2 = 49 $$
 
 **Svar:** $(x + 3)^2 = 49$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Två positiva tal har differensen 5 och produkten 84. Ange det **större** talet.`,
@@ -36188,7 +36190,7 @@ En sträcka kan inte vara negativ, så $s = 15$ cm.
 
 **Svar:** 15 cm`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En rektangel har omkretsen 46 cm och arean $120$ cm². Bestäm den **längre** sidan. Svara i cm.`,
@@ -36228,7 +36230,7 @@ Kontroll: $2(8 + 15) = 46$ och $8 \\cdot 15 = 120$. Stämmer!
     // Kvadrera båda led; kontrollera alltid — falska rötter kan uppstå.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-2.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Lös ekvationen $\\sqrt{x} = 5$.`,
@@ -36271,7 +36273,7 @@ Kontroll: $\\sqrt{39 - 3} = \\sqrt{36} = 6$. Stämmer!
 
 **Svar:** Kvadreringen kan skapa falska rötter som inte uppfyller den ursprungliga ekvationen.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $\\sqrt{2x + 1} = x - 1$. (Ekvationen har exakt en giltig lösning.)`,
@@ -36312,7 +36314,7 @@ Kontroll: $9 - \\sqrt{9} - 6 = 9 - 3 - 6 = 0$. Stämmer!
 
 **Svar:** $x = 9$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Lös ekvationen $\\sqrt{x + 7} + x = 5$. (Ekvationen har exakt en giltig lösning.)`,
@@ -36346,7 +36348,7 @@ Kontroll $x = 9$: $\\mathrm{VL} = \\sqrt{16} + 9 = 13 \\neq 5$. Falsk rot!
     // Parabel, extrempunkt, karaktär, symmetrilinje, nollställen.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-3.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Funktionen $f(x) = 3x^2 - 5x + 1$ har en **positiv** $x^2$-term. Vad gäller för grafen?`,
@@ -36383,7 +36385,7 @@ Kontroll $x = 9$: $\\mathrm{VL} = \\sqrt{16} + 9 = 13 \\neq 5$. Falsk rot!
 
 **Svar:** $x_s = 2$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En andragradsfunktion har nollställena $x = -2$ och $x = 6$. Ange symmetrilinjens $x$-värde.`,
@@ -36410,7 +36412,7 @@ Konstanttermens tecken påverkar inte karaktären, alla parabler har en symmetri
 
 **Svar:** Grafen har en maximipunkt, och funktionen har därmed ett största värde.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En andragradsfunktion har symmetrilinjen $x_s = 3$ och ett nollställe i $x = -1$. Ange funktionens **andra** nollställe.`,
@@ -36436,7 +36438,7 @@ Kontroll: medelvärdet av $-1$ och $7$ är $\\dfrac{-1 + 7}{2} = 3 = x_s$. Stäm
     // Nollställen, symmetrilinje och extrempunkt algebraiskt.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-3.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm det **största** nollstället till $f(x) = x^2 - 9$.`,
@@ -36475,7 +36477,7 @@ Konstanttermen är grafens skärning med *y*-axeln, medelvärdet av nollställen
 
 **Svar:** Sätt in symmetrilinjens $x$-koordinat i funktionsuttrycket.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm det **minsta värdet** av funktionen $f(x) = x^2 - 4x + 1$.`,
@@ -36506,7 +36508,7 @@ $$ x_s = -4 $$
 
 **Svar:** $x_s = -4$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Funktionen $f(x) = x^2 + px + 11$ har det minsta värdet 2. Bestäm det **positiva** värde på $p$ som är möjligt.`,
@@ -36534,7 +36536,7 @@ Kontroll: $f(x) = x^2 + 6x + 11$ har $x_s = -3$ och $f(-3) = 9 - 18 + 11 = 2$. S
     // Faktorform k(x−x₁)(x−x₂) och utvecklad form via tre punkter.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-3.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En andragradsfunktion har nollställena $x = 2$ och $x = 5$. Hur skrivs funktionen i faktorform?`,
@@ -36581,7 +36583,7 @@ $$ k = -2 $$
 
 **Svar:** När nollställena är okända eller saknas.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En parabel har nollställena $x = 1$ och $x = 5$ och går genom punkten (3, −8). Bestäm koefficienten $k$ i faktorformen $f(x) = k(x - 1)(x - 5)$.`,
@@ -36620,7 +36622,7 @@ $$ 2a = 4 \\iff a = 2 $$
 
 **Svar:** $a = 2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En boll kastas från marken och landar 6 meter bort. Kastbanans högsta höjd är $4{,}5$ meter. Banan beskrivs av $h(x) = kx(x - 6)$, där $x$ är avståndet i meter. Bestäm $k$.`,
@@ -36646,7 +36648,7 @@ Rimlighet: $k$ är negativ — banan är en "sur mun" med maximipunkt. Stämmer 
     // Skärningar ger lösningar; under/över ger olikhetsintervall.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-3.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ekvationen VL = HL ska lösas grafiskt. Man ritar $y = \\mathrm{VL}$ och $y = \\mathrm{HL}$. Var hittar man lösningarna?`,
@@ -36683,7 +36685,7 @@ Rimlighet: $k$ är negativ — banan är en "sur mun" med maximipunkt. Stämmer 
 
 **Svar:** $x_1 = 1$ och $x_2 = 4$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Olikheten $f(x) < g(x)$ löses grafiskt. Graferna skär varandra vid $x = -2$ och $x = 3$, och grafen till $f$ ligger **under** grafen till $g$ mellan skärningarna. Vilken är lösningen?`,
@@ -36712,7 +36714,7 @@ Den positiva gränsen är $x = 3$.
 
 **Svar:** 3`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Lös olikheten $x^2 + 2x - 8 > 0$.`,
@@ -36746,7 +36748,7 @@ $$ x < -4 \\quad \\text{och} \\quad x > 2 $$
     // Extrempunkt, nollställen och skärningar i tillämpningar.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-3.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En raket har höjden $h(t) = 30t - 5t^2$ meter efter $t$ sekunder. Hur lång tid tar det innan raketen landar? Svara i sekunder.`,
@@ -36785,7 +36787,7 @@ Grafiskt: verktyget *Extrempunkt* i Geogebra.
 
 **Svar:** Extrempunkt`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Raketen med $h(t) = 30t - 5t^2$ når höjden 25 meter två gånger. Efter hur många sekunder sker det **första** gången?`,
@@ -36818,7 +36820,7 @@ Grafiskt: verktyget *Extrempunkt* ger maximipunkten (10, 200).
 
 **Svar:** $200$ m² (måtten blir $20 \\times 10$ m)`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Summan av två tal är 20. Hur stor kan talens **produkt** som mest bli?`,
@@ -36844,7 +36846,7 @@ Den största produkten fås alltså när talen är lika ($10 + 10 = 20$).
     // Vinkeltyper, transversal, likbelägna/vertikal-/alternat-/sidovinklar.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-4.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En vinkel är 137°. Vad kallas en sådan vinkel?`,
@@ -36887,7 +36889,7 @@ $$ v = 180° - 68° = 112° $$
 
 **Svar:** 112°`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Två parallella linjer skärs av en transversal. En av vinklarna är 74°. Hur stor är dess **alternatvinkel**? Svara i grader.`,
@@ -36908,7 +36910,7 @@ $$ v = 180° - 124° = 56° \\quad \\text{(sidovinklar)} $$
 
 **Svar:** 56°`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Tre vinklar bildar tillsammans en rak vinkel. Den andra vinkeln är dubbelt så stor som den första, och den tredje är tre gånger så stor som den första. Bestäm den **största** vinkeln. Svara i grader.`,
@@ -36932,7 +36934,7 @@ Vinklarna är 30°, 60° och 90° — den största är $3v = 90°$.
     // Vinkelsummor, triangeltyper.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-4.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Två vinklar i en triangel är 63° och 48°. Bestäm den tredje vinkeln. Svara i grader.`,
@@ -36969,7 +36971,7 @@ $$ v = 360° - 90° - 110° - 75° = 85° $$
 
 **Svar:** 85°`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En likbent triangel har toppvinkeln 40°. Bestäm en av basvinklarna. Svara i grader.`,
@@ -36994,7 +36996,7 @@ $$ 4 \\cdot 180° = 720° $$
 
 **Svar:** 720°`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Vinklarna i en triangel är $v$, $v + 30°$ och $2v + 10°$. Bestäm den **största** vinkeln. Svara i grader.`,
@@ -37018,7 +37020,7 @@ Kontroll: $35 + 65 + 80 = 180$. Stämmer!
     // A ⟹ B respektive A ⟺ B; motexempel.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-4.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad betyder symbolen ⟹?`,
@@ -37065,7 +37067,7 @@ Omvändningen $x^2 = 16 \\implies x = 4$ gäller **inte**: ekvationen $x^2 = 16$
 
 **Svar:** Implikationen gäller, men inte omvändningen.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Vilket logiskt tecken ska stå mellan påståendena?<br>*Triangeln är liksidig* ____ *Triangelns alla vinklar är 60°*`,
@@ -37096,7 +37098,7 @@ $$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
 
 **Svar:** Omvändningen gäller inte (motexempel: vattenspridare).`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Avgör vilka av implikationerna som gäller:<br>(1) $x^3 = 8 \\implies x = 2$&emsp;&emsp;(2) $x^2 = 9 \\implies x = 3$`,
@@ -37122,7 +37124,7 @@ $$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
     // Axiom, definition, sats; 2k, 2k+1; n, n+1, n+2.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-4.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad kallas ett påstående som är **bevisat**?`,
@@ -37167,7 +37169,7 @@ $$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
 
 **Svar:** En grundsats som gäller utan bevis.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Hur tecknas tre på varandra följande heltal i ett bevis?`,
@@ -37200,7 +37202,7 @@ Fällan i alternativet med $2k + 1$ två gånger: det visar bara fallet där tal
 
 **Svar:** $(2k + 1) + (2m + 1) = 2(k + m + 1)$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Visa att summan av **fem** på varandra följande heltal alltid är delbar med 5. Vilket resonemang fullbordar beviset?`,
@@ -37228,7 +37230,7 @@ Uttrycket har faktorn 5, och $\\dfrac{5(n+2)}{5} = n + 2$ är ett heltal — sum
     // a² + b² = c²; omvändningen avgör rätvinklighet.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-4.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En rätvinklig triangel har kateterna 6 cm och 8 cm. Bestäm hypotenusan. Svara i cm.`,
@@ -37269,7 +37271,7 @@ $$ b = \\sqrt{144} = 12 $$
 
 **Svar:** Den längsta sidan, mitt emot den räta vinkeln.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Sidorna i en triangel är 7 cm, 24 cm och 25 cm. Är triangeln rätvinklig?`,
@@ -37302,7 +37304,7 @@ $$ h = \\sqrt{16} = 4{,}0 $$
 
 **Svar:** 4,0 m`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En likbent triangel har basen 16 cm och benen 17 cm. Bestäm triangelns höjd mot basen. Svara i cm.`,
@@ -37322,7 +37324,7 @@ $$ h = \\sqrt{225} = 15 $$
     // Avståndsformeln och mittpunktsformeln.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-4.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm avståndet mellan punkterna (1, 2) och (4, 6). Svara i längdenheter.`,
@@ -37365,7 +37367,7 @@ $$ d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} $$
 
 **Svar:** Pythagoras sats`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm avståndet mellan punkterna (−2, 5) och (4, −3). Svara i längdenheter.`,
@@ -37392,7 +37394,7 @@ $$ (x_m, y_m) = \\left( \\frac{-3 + 7}{2},\\ \\frac{-5 + (-1)}{2} \\right) = \\l
 
 **Svar:** (2, −3)`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Punkten $(5, y)$ ligger på avståndet 13 l.e. från punkten (0, 1), och $y > 0$. Bestäm $y$.`,
@@ -37420,7 +37422,7 @@ Villkoret $y > 0$ ger $y = 13$.
     // Vinklar OCH sidförhållanden; ekvation eller skalfaktor.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-4.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad krävs för att två månghörningar (med fler än tre hörn) ska vara likformiga?`,
@@ -37461,7 +37463,7 @@ $$ x = \\frac{10}{4} \\cdot 6 = 15 $$
 
 **Svar:** 15 cm`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En rektangel har sidorna 4 cm och 6 cm, en annan har sidorna 6 cm och 9 cm. Är rektanglarna likformiga?`,
@@ -37490,7 +37492,7 @@ $$ O = 12 \\cdot 2{,}5 = 30 $$
 
 **Svar:** 30 cm`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två rektanglar har alla vinklar lika stora (90°). Är de därmed **säkert** likformiga?`,
@@ -37514,7 +37516,7 @@ Motexempel: en kvadrat ($1 \\times 1$) och en avlång rektangel ($1 \\times 5$) 
     // ETT villkor räcker; tecknet ~; skugg-uppgifter.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-4.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad räcker det att kontrollera för att avgöra om två **trianglar** är likformiga?`,
@@ -37551,7 +37553,7 @@ $$ v = 180° - 35° - 80° = 65° $$
 
 **Svar:** 65°`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En 1,5 meter hög pinne kastar en 2 meter lång skugga. Samtidigt kastar ett träd en 12 meter lång skugga. Hur högt är trädet? Svara i meter.`,
@@ -37576,7 +37578,7 @@ $$ EF = 7{,}5 \\cdot \\frac{8}{5} = 12 $$
 
 **Svar:** $EF = 12$ cm`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En lyktstolpe är 2,4 meter hög. En person som är 1,8 meter lång står 4,0 meter från stolpen. Hur lång blir personens skugga (räknat från personen och bort från stolpen)? Svara i meter.`,
@@ -37604,7 +37606,7 @@ $$ 0{,}6s = 7{,}2 \\iff s = 12 $$
     // Topptriangelsatsen, transversalsatsen, bisektrissatsen.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-4.9': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En parallelltransversal delar en triangels vänstra sida i delarna $AD = 3$ och $DB = 6$, och den högra sidans övre del är $AE = 4$. Bestäm $EC$ (den högra sidans nedre del).`,
@@ -37643,7 +37645,7 @@ $$ \\frac{4}{12} = \\frac{5}{BC} \\iff BC = \\frac{5 \\cdot 12}{4} = 15 $$
 
 **Svar:** $BC = 15$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En parallelltransversal delar en triangels sidor så att $AD = 6$, $DB = x$, $AE = 9$ och $EC = 12$. Bestäm $x$.`,
@@ -37672,7 +37674,7 @@ $$ x = \\frac{6}{4} \\cdot 10 = 15 $$
 
 **Svar:** 15 cm`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `I en triangel är parallelltransversalen $DE = 6$ cm och basen $BC = 10$ cm. Sidans nedre del är $DB = 4$ cm. Bestäm sidans övre del $AD$. Svara i cm.`,
@@ -37700,7 +37702,7 @@ Kontroll: $\\dfrac{6}{10} = 0{,}6$ och $\\dfrac{6}{6+4} = 0{,}6$. Stämmer!
     // SVS, SSS, VSV; kongruent = likformig + lika stor.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-4.10': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad betyder det att två figurer är **kongruenta**?`,
@@ -37741,7 +37743,7 @@ $$ v = 180° - 48° - 102° = 30° $$
 
 **Svar:** 30°`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Vad kräver kongruensvillkoret **SVS**?`,
@@ -37772,7 +37774,7 @@ $$ v = 180° - 48° - 102° = 30° $$
 
 **Svar:** Nej — bara likformiga.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Trianglarna $ABC$ och $DEF$ har $AB = DE$, $BC = EF$ och $\\angle A = \\angle D$. Är trianglarna **säkert** kongruenta?`,
@@ -37796,7 +37798,7 @@ Kombinationen sida-sida-vinkel (SSV) är inte ett kongruensvillkor: det kan finn
     // y = 2x; följdsatser; tangent mot radie; likbenta radie-trianglar.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-4.11': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En medelpunktsvinkel är 84°. Hur stor är randvinkeln på samma cirkelbåge? Svara i grader.`,
@@ -37831,7 +37833,7 @@ $$ y = 2 \\cdot 28° = 56° \\quad \\text{(randvinkelsatsen)} $$
 
 **Svar:** 90°`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Två randvinklar står på samma cirkelbåge. Den ena är 37°. Hur stor är den andra? Svara i grader.`,
@@ -37856,7 +37858,7 @@ $$ v = 180° - 90° - 62° = 28° \\quad \\text{(vinkelsumma i triangel)} $$
 
 **Svar:** 28°`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En randvinkel är $x$ och medelpunktsvinkeln på **samma** cirkelbåge är $(3x - 34°)$. Bestäm $x$. Svara i grader.`,
@@ -37878,7 +37880,7 @@ Kontroll: randvinkeln 34° ger medelpunktsvinkeln 68°, och $3 \\cdot 34° - 34�
     // a·b = c·d; motstående vinklar 180°.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-4.12': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Två kordor skär varandra. Den ena delas i delarna 4 och 9, den andra i delarna 6 och $x$. Bestäm $x$.`,
@@ -37915,7 +37917,7 @@ $$ v = 180° - 98° = 82° \\quad \\text{(motstående vinklar i inskriven fyrhö
 
 **Svar:** Produkterna av delsträckorna är lika.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Två kordor skär varandra. Den ena delas i delarna $x$ och 8, den andra i delarna 5 och 12. Bestäm $x$.`,
@@ -37942,7 +37944,7 @@ $$ 3x = 150° \\iff x = 50° $$
 
 **Svar:** $x = 50°$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två kordor skär varandra. Den ena delas i delarna 3 och 12. Den andra delas **mitt itu** i två lika delar. Bestäm längden av en sådan del.`,
@@ -37964,7 +37966,7 @@ En sträcka är positiv, så $y = 6$ (hela kordan är 12).
     // Variabeln i basen (potens) vs exponenten (exponential).
     // ─────────────────────────────────────────────────────────────────
     'ma2c-5.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Lös potensekvationen $x^5 = 100$. Svara med två decimaler.`,
@@ -38005,7 +38007,7 @@ Den positiva lösningen är $x \\approx 2{,}66$.
 
 **Svar:** $x \\approx 2{,}66$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett fondkonto växer från 8 000 kr till 12 000 kr på 4 år. Hur stor genomsnittlig årlig ökning i procent motsvarar det? Svara med en decimal.`,
@@ -38038,7 +38040,7 @@ Förändringsfaktorn 1,107 motsvarar en ökning med cirka 10,7 %.
 
 **Svar:** Både positivt och negativt tal ger positivt resultat vid jämn upphöjning.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Mängden av ett ämne minskar med samma faktor varje år. Efter 6 år återstår 40 % av ursprungsmängden. Hur stor är den **årliga procentuella minskningen**? Svara i procent med en decimal.`,
@@ -38064,7 +38066,7 @@ Förändringsfaktorn 0,858 motsvarar en minskning med $1 - 0{,}858 = 0{,}142 \\a
     // lg a = tians exponent; a = 10^lg a.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-5.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm $\\lg 1\\,000$ utan räknare.`,
@@ -38097,7 +38099,7 @@ $$ \\lg 0{,}001 = -3 $$
 
 **Svar:** Mellan 2 och 3.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm $\\lg \\sqrt{1\\,000}$ utan räknare.`,
@@ -38120,7 +38122,7 @@ $$ 10^{\\lg 7} = 7 $$
 
 **Svar:** 7`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Beräkna utan räknare $10^{\\lg 4} \\cdot \\lg 10^5 - \\lg 0{,}1$.`,
@@ -38146,7 +38148,7 @@ $$ 4 \\cdot 5 - (-1) = 20 + 1 = 21 $$
     // Skriv om till basen 10; logaritmform ⟺ potensform.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-5.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Lös ekvationen $10^x = 1\\,000$.`,
@@ -38177,7 +38179,7 @@ $$ x = \\lg 47 \\approx 1{,}67 $$
 
 **Svar:** $x = \\lg 47 \\approx 1{,}67$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $3^x = 20$. Svara med två decimaler.`,
@@ -38208,7 +38210,7 @@ $$ x = \\frac{10^{3{,}2}}{4} = \\frac{1\\,584{,}89\\ldots}{4} \\approx 396{,}2 $
 
 **Svar:** $x \\approx 396{,}2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Lös ekvationen $7 \\cdot 2^{3x} + 5 = 61$ **exakt**.`,
@@ -38234,7 +38236,7 @@ Kontroll: $7 \\cdot 2^3 + 5 = 56 + 5 = 61$. Stämmer!
     // lg x + lg y = lg xy; lg x − lg y = lg(x/y); lg x^p = p·lg x.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-5.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna $\\lg 5 + \\lg 2$ utan räknare.`,
@@ -38273,7 +38275,7 @@ så $\\lg x^3 = 3 \\cdot \\lg x$.
 
 **Svar:** $3 \\cdot \\lg x$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $2^x = 10$ med tredje logaritmlagen. Svara med två decimaler.`,
@@ -38302,7 +38304,7 @@ $$ x = 21 $$
 
 **Svar:** $x = 21$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Lös ekvationen $3 \\lg 2 + \\lg 5 = \\lg 4x$.`,
@@ -38330,7 +38332,7 @@ $$ 40 = 4x \\iff x = 10 $$
     // y = C·a^x + logaritmering ger tiden.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-5.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `I modellen $y = C \\cdot a^x$ — vad står $a$ för?`,
@@ -38373,7 +38375,7 @@ $$ \\lg 1{,}2 = x \\cdot \\lg 1{,}023 \\iff x = \\frac{\\lg 1{,}2}{\\lg 1{,}023}
 
 **Svar:** Logaritmera och multiplicera ner exponenten.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett kapital växer med 5 % per år. Efter hur många år har det **fördubblats**? Svara med en decimal.`,
@@ -38410,7 +38412,7 @@ $$ x = \\frac{\\lg(100/240)}{\\lg 0{,}85} \\approx 5{,}4 $$
 
 **Svar:** Efter cirka 5,4 år.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En bakteriekultur växer med 8 % per timme. Hur lång tid tar det innan kulturen har vuxit med **50 %**? Svara i timmar med en decimal.`,
@@ -38436,7 +38438,7 @@ $$ x = \\frac{\\lg 1{,}5}{\\lg 1{,}08} = 5{,}268\\ldots \\approx 5{,}3 $$
     // a^x = b ⟺ x = log_a b.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-5.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm $\\log_2 32$ utan räknare.`,
@@ -38467,7 +38469,7 @@ $$ x = \\frac{\\lg 1{,}5}{\\lg 1{,}08} = 5{,}268\\ldots \\approx 5{,}3 $$
 
 **Svar:** $x = \\log_a b$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Vilket uttryck är lösningen till $4^x = 9$?`,
@@ -38496,7 +38498,7 @@ $$ \\log_2 \\frac{1}{8} = -3 $$
 
 **Svar:** −3`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Beräkna utan räknare $2^{\\log_2 5} + 3^{\\log_3 4}$.`,
@@ -38518,7 +38520,7 @@ $$ 5 + 4 = 9 $$
     // Medelvärde, median, typvärde, frekvens, klassmitt.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-6.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna medelvärdet av talen 4, 7, 9, 12 och 8.`,
@@ -38553,7 +38555,7 @@ $$ 3,\\ 5,\\ \\mathbf{7},\\ 9,\\ 12 $$
 
 **Svar:** Det värde som förekommer flest gånger.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm medianen av talen 4, 6, 10 och 14.`,
@@ -38582,7 +38584,7 @@ $$ \\text{medianen} = \\frac{6 + 10}{2} = 8 $$
 
 **Svar:** Vid sned fördelning med utstickande värden.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En klassindelad frekvenstabell visar: $0 \\leq x < 10$ har frekvensen 3, $10 \\leq x < 20$ har frekvensen 5 och $20 \\leq x < 30$ har frekvensen 2. Beräkna medelvärdet.`,
@@ -38600,7 +38602,7 @@ $$ \\text{medelvärdet} = \\frac{3 \\cdot 5 + 5 \\cdot 15 + 2 \\cdot 25}{3 + 5 +
     // Variationsbredd, kvartiler, kvartilavstånd, percentiler.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-6.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm variationsbredden för talen 12, 17, 9, 25 och 14.`,
@@ -38633,7 +38635,7 @@ $$ \\text{medelvärdet} = \\frac{3 \\cdot 5 + 5 \\cdot 15 + 2 \\cdot 25}{3 + 5 +
 
 **Svar:** 36 år`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Hur stor andel av värdena innehåller varje del av ett lådagram ("vänster pinne", vänstra lådan, högra lådan och "höger pinne")?`,
@@ -38658,7 +38660,7 @@ $$ 100\\ \\% - 90\\ \\% = 10\\ \\% $$
 
 **Svar:** 10 %`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `I ett lådagram är "höger pinne" mycket lång medan vänstra delen av lådan är mycket kort. Vad säger det om datamängden?`,
@@ -38682,7 +38684,7 @@ En lång höger pinne betyder att den översta fjärdedelen är utspridd över e
     // Envariabelanalys, Visa statistik, Percentil, frekvenskolumn.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-6.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad betyder **Q1** i Geogebras statistiktabell?`,
@@ -38727,7 +38729,7 @@ En lång höger pinne betyder att den översta fjärdedelen är utspridd över e
 
 **Svar:** Värdet som 90 % av värdena är mindre än.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En frekvenstabell över antal syskon visar frekvenserna 17, 68, 51, 26, 9, 2 och 4. Hur många elever ingår i undersökningen?`,
@@ -38754,7 +38756,7 @@ $$ 17 + 68 + 51 + 26 + 9 + 2 + 4 = 177 $$
 
 **Svar:** För att slippa mata in alla enskilda värden.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Antal syskon i en grupp: värdet 0 har frekvensen 2, värdet 1 har frekvensen 5, värdet 2 har frekvensen 2 och värdet 3 har frekvensen 1. Beräkna medelvärdet.`,
@@ -38772,7 +38774,7 @@ $$ \\text{medelvärdet} = \\frac{0 \\cdot 2 + 1 \\cdot 5 + 2 \\cdot 2 + 3 \\cdot
     // Genomsnittlig avvikelse från medelvärdet; σ vs s.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-6.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad beskriver **standardavvikelsen**?`,
@@ -38811,7 +38813,7 @@ $$ \\text{medelvärdet} = \\frac{0 \\cdot 2 + 1 \\cdot 5 + 2 \\cdot 2 + 3 \\cdot
 
 **Svar:** 0`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Datamängderna A: 16, 17, 17, 17, 18 och B: 2, 4, 12, 24, 43 har båda medelvärdet 17. Vilken har störst standardavvikelse, och varför?`,
@@ -38840,7 +38842,7 @@ $$ \\sigma = 15{,}13 \\approx 15{,}1 $$
 
 **Svar:** 15,1`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Alla värden i en datamängd ökas med 10. Vad händer med medelvärdet och standardavvikelsen?`,
@@ -38866,7 +38868,7 @@ Exempel: 1, 2, 3 (medel 2) → 11, 12, 13 (medel 12). Avvikelserna är −1, 0, 
     // 34,1/13,6/2,3 %-intervallen; sannolikhetskalkylatorn.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-6.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Hur stor andel av ett normalfördelat material ligger inom **en standardavvikelse** från medelvärdet (mellan $\\mu - \\sigma$ och $\\mu + \\sigma$)? Svara i procent med en decimal.`,
@@ -38901,7 +38903,7 @@ $$ 13{,}6\\ \\% + 2{,}3\\ \\% = 15{,}9\\ \\% $$
 
 **Svar:** Medelvärde respektive standardavvikelse.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Mäns längd är normalfördelad med $\\mu = 181$ cm och $\\sigma = 8$ cm. Hur stor andel är mellan 165 cm och 197 cm? Svara i procent med en decimal.`,
@@ -38928,7 +38930,7 @@ $$ 13{,}6 + 34{,}1 + 34{,}1 + 13{,}6 = 95{,}4\\ \\% $$
 
 **Svar:** Öppet åt vänster.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `IQ är normalfördelat med $\\mu = 100$ och $\\sigma = 15$. Hur stor andel av befolkningen har IQ över 130? Svara i procent med en decimal.`,
@@ -38948,7 +38950,7 @@ $$ 130 = 100 + 2 \\cdot 15 = \\mu + 2\\sigma $$
     // Regressionslinje, korrelationskoefficient r, prognoser.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-6.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad betyder det att korrelationskoefficienten $r = -1$?`,
@@ -38987,7 +38989,7 @@ $$ y = 270 \\cdot 25 + 2\\,500 = 6\\,750 + 2\\,500 = 9\\,250 $$
 
 **Svar:** 9 250 kr`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En regressionsanalys ger $r = 0{,}97$. Hur beskrivs korrelationen?`,
@@ -39016,7 +39018,7 @@ $$ x = \\frac{6\\,600}{270} = 24{,}4\\ldots $$
 
 **Svar:** cirka 24,4 °C`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Glassmodellen $y = 270x + 2\\,500$ ger en **negativ** försäljning för temperaturer under cirka −9 °C. Vad illustrerar detta?`,
@@ -39040,7 +39042,7 @@ Modellen är alltså inte "fel", men dess giltighetsområde är begränsat, och 
     // Linjär/exponentiell/potens/polynom; r² avgör bäst anpassning.
     // ─────────────────────────────────────────────────────────────────
     'ma2c-6.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilket är kännetecknet för en **exponentiell** modell $y = Ca^x$ (med $a > 1$)?`,
@@ -39085,7 +39087,7 @@ Modellen är alltså inte "fel", men dess giltighetsområde är begränsat, och 
 
 **Svar:** Mellan 0 och 1.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Två regressionsmodeller för samma data ger $r^2 = 0{,}954$ (linjär) och $r^2 = 0{,}9933$ (exponentiell). Vilken modell är bäst anpassad?`,
@@ -39116,7 +39118,7 @@ Modellen är alltså inte "fel", men dess giltighetsområde är begränsat, och 
 
 **Svar:** Exponentiell modell.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Varför kan det vara svårt att skilja en potensmodell från en polynommodell utifrån ett spridningsdiagram?`,
@@ -39139,7 +39141,7 @@ Vid val av modell hjälper kännetecknen (går kurvan genom origo?) och $r^2$-v�
     // Matematik fortsättning nivå 1c (Ma3c)
     // ═══════════════════════════════════════════════════════════════════
     'ma3c-1.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken grad har polynomet $p(x) = 4x^2 - 7x^5 + 3x - 1$?`,
@@ -39200,7 +39202,7 @@ Till sist slås likadana termer ihop: $-3x^2 + 2x^2 = -x^2$ och $x - 6x = -5x$.
 
 **Svar:** $x^3 - x^2 - 5x + 2$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Faktorisera $5x^3 - 20x$ så långt som möjligt.`,
@@ -39253,7 +39255,7 @@ Kontroll: $p(2) = 16 + 4 - 5 = 15$.
 
 **Svar:** $a = 2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Bestäm konstanterna $a$ och $b$ så att
@@ -39290,7 +39292,7 @@ Vi kontrollerar med $x$-termerna: $3 + ab = 3 + 2 \\cdot 3 = 9$, vilket stämmer
     ],
 
     'ma3c-1.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Lös ekvationen $x^5 = 243$.`,
@@ -39371,7 +39373,7 @@ En tredjegradsekvation kan ha högst tre lösningar, och här finns alla tre.
 
 **Svar:** $x_1 = 0$, $x_2 = -3$ och $x_3 = 3$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $x^3 + 2x^2 - 8x = 0$.`,
@@ -39424,7 +39426,7 @@ Kontroll: $p(2) = 2 \\cdot 3 \\cdot 0 \\cdot (-3) = 0$. Ett uttryck med en extra
 
 **Svar:** $p(x) = 2(x + 1)(x - 2)(x - 5)$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Lös ekvationen $x^4 - 5x^2 - 36 = 0$.`,
@@ -39470,7 +39472,7 @@ En fjärdegradsekvation har högst fyra lösningar, men här finns bara två ree
     ],
 
     'ma3c-1.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Förkorta uttrycket så långt som möjligt.
@@ -39530,7 +39532,7 @@ $$
 
 **Svar:** $2x - 3$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Förkorta $\\dfrac{4x^2 - 8x}{2x - 4}$ så långt som möjligt.`,
@@ -39569,7 +39571,7 @@ $$
 
 **Svar:** $x - 3$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Förkorta $\\dfrac{x^2 - x - 6}{x^2 - 4}$ så långt som möjligt.`,
@@ -39603,7 +39605,7 @@ Den gemensamma faktorn $(x + 2)$ förkortas bort. Observera att man **inte** få
     ],
 
     'ma3c-1.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Förenkla $\\dfrac{4x}{x + 5} + \\dfrac{9}{x + 5}$.`,
@@ -39662,7 +39664,7 @@ $$
 
 **Svar:** $x = 18$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Skriv $\\dfrac{3}{x} + \\dfrac{2}{x + 1}$ som ett enda bråk.`,
@@ -39704,7 +39706,7 @@ Lösningen $x = 5$ är skild från 1, så den är tillåten.
 
 **Svar:** $x = 5$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Lös ekvationen $\\dfrac{x}{x - 3} = \\dfrac{6x}{x^2 - 9}$.`,
@@ -39742,7 +39744,7 @@ $(x - 3)$.
     ],
 
     'ma3c-1.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Förenkla $\\dfrac{2}{x} \\cdot \\dfrac{x^2}{6}$.`,
@@ -39809,7 +39811,7 @@ $$
 
 **Svar:** $\\dfrac{3}{2}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Förenkla $\\dfrac{x^2-4}{5}\\cdot\\dfrac{10}{x+2}$ så långt som möjligt.`,
@@ -39856,7 +39858,7 @@ $$
 
 **Svar:** $2x$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Förenkla $\\dfrac{x^2+2x-3}{x^2-9} \\Big/ \\dfrac{x-1}{x+5}$ så långt som möjligt.`,
@@ -39896,7 +39898,7 @@ $$
     ],
 
     'ma3c-1.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm $\\displaystyle\\lim_{x \\to 3} (2x - 4)$.`,
@@ -39947,7 +39949,7 @@ $$
 
 **Svar:** $4$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm $\\displaystyle\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$.`,
@@ -39984,7 +39986,7 @@ $$
 
 **Svar:** $2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Bestäm det värde på konstanten $a$ som gör att gränsvärdet
@@ -40018,7 +40020,7 @@ $$
     ],
 
     'ma3c-1.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilket kommando i Geogebra faktoriserar ett polynom?`,
@@ -40061,7 +40063,7 @@ $$
 
 **Svar:** Det kan hantera algebraiska uttryck, inte bara tal.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $x^3 - 6x^2 + 11x - 6 = 0$ exakt med symbolhanterande hjälpmedel. Ange lösningarna i storleksordning.`,
@@ -40094,7 +40096,7 @@ $$
 
 **Svar:** $2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En elev skriver in $\\text{Gränsvärde}\\!\\left(\\dfrac{x^2 - 9}{x - 3},\\ 3\\right)$ i ett symbolhanterande hjälpmedel och får svaret 6 — trots att uttrycket $\\dfrac{x^2 - 9}{x - 3}$ inte är definierat för $x = 3$ (nämnaren blir 0). Bestäm gränsvärdet för hand genom att först förkorta uttrycket, och ange svaret.`,
@@ -40118,7 +40120,7 @@ Detta är precis vad räknaren svarar — den hanterar den "borttagbara" luckan 
     ],
 
     'ma3c-2.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna sekantens lutning genom punkterna $(1, 3)$ och $(4, 12)$.`,
@@ -40173,7 +40175,7 @@ $$
 
 **Svar:** $k = 8$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En bils sträcka $s$ meter efter $t$ sekunder ges av $s(t) = t^2 + 2t$. Beräkna medelhastigheten (sekantens lutning) mellan $t = 2$ och $t = 5$, och ange enheten.`,
@@ -40216,7 +40218,7 @@ $$
 
 **Svar:** $a = 2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Bestäm ett allmänt uttryck för ändringskvoten (sekantens lutning) för $f(x) = x^2$ mellan $x$ och $x + h$, uttryckt i $x$ och $h$.`,
@@ -40244,7 +40246,7 @@ $$
     ],
 
     'ma3c-2.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En tangent till en kurva i punkten $(2, 5)$ går även genom punkten $(6, 13)$. Beräkna tangentens lutning $k$.`,
@@ -40295,7 +40297,7 @@ $$
 
 **Svar:** m/s`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En tangent till grafen $y = f(x)$ i punkten där $x = 3$ går genom punkterna $(1, 2)$ och $(3, 8)$.<br>a) Beräkna tangentens lutning $k$ i punkten.<br>b) Avgör om funktionen växer eller avtar där.`,
@@ -40336,7 +40338,7 @@ Enheten blir "enheten på $y$-axeln" per "enheten på $x$-axeln", det vill säga
 
 **Svar:** $8{,}0$ m/s`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Tangenten till en kurva i punkten där $x = 1$ går genom punkterna $(0, 2)$ och $(1, 5)$. Tangenten i punkten där $x = 4$ är parallell med den förstnämnda tangenten och går genom punkterna $(4, 10)$ och $(a, 22)$. Bestäm $a$.`,
@@ -40368,7 +40370,7 @@ $$
     ],
 
     'ma3c-2.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Använd derivatans definition för att bestämma $f'(3)$ om $f(x) = x^2$.`,
@@ -40447,7 +40449,7 @@ $$
 
 **Svar:** $f'(1) = 6$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Funktionen $f(x) = x^2 - 3x$ är given.<br>
@@ -40513,7 +40515,7 @@ $$
 
 **Svar:** $f'(2) = -\\dfrac{1}{4}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Använd derivatans definition för att bestämma en generell formel för $f'(x)$ om $f(x) = x^3$.`,
@@ -40553,7 +40555,7 @@ $$
     ],
 
     'ma3c-2.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En bakteriekultur beskrivs av funktionen $N(t)$, där $N$ är antal individer och $t$ är tiden i timmar. Vad betyder $N'(3) = 240$?`,
@@ -40604,7 +40606,7 @@ Enheten för derivatan är "enheten för funktionen" ($\\text{°C}$) per "enhete
 
 **Svar:** °C/min`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett företags intäkt ges av $I(x) = 5x^2 - 3x$ (kr), där $x$ är antal sålda produkter. Bestäm $I'(10)$ med digitala hjälpmedel och tolka svaret.`,
@@ -40645,7 +40647,7 @@ Enheten på derivatan är m/min. Eftersom $h'(5)$ är **negativ** minskar höjde
 
 **Svar:** $h'(5) = -2$ m/min — draken sjunker`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En funktion har formen $f(x) = ax^2 + bx$. Grafen visar att $f(2) = 10$ och att tangenten till grafen i punkten $x = 2$ har lutningen 7. Bestäm $a$ och $b$.`,
@@ -40679,7 +40681,7 @@ Insatt i $2a + b = 5$ ger $b = 5 - 2 = 3$. Kontroll: $f(x) = x^2 + 3x$ ger $f(2)
     ],
 
     'ma3c-2.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna $|x^2 - 20|$ för $x = 3$.`,
@@ -40732,7 +40734,7 @@ vilket ger $x_1 = 7$ respektive $x_2 = -17$.
 
 **Svar:** Funktionen är kontinuerlig i $x = a$ men inte deriverbar där`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $|2x - 3| = 9$.`,
@@ -40781,7 +40783,7 @@ Värdena är lika, så $f$ är kontinuerlig i $x = 2$. Vi kontrollerar sedan der
 
 **Svar:** Ja, $f$ är deriverbar i $x = 2$ eftersom både funktionsvärdet och derivatan är lika ($f(2) = 4$ och $f'(2) = 4$) från båda hållen.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Funktionen $f$ definieras enligt
@@ -40824,7 +40826,7 @@ $$
     // absolutbelopp (ingår inte i nivå 1b). Uppgift 3, 5 och 6 är samma
     // som i ma3c-2.5; ändras de där ska samma ändring göras här.
     'ma3b-2.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Grafen till funktionen $f$ består av två räta linjer: $y = 2x + 1$ för $x \\le 1$ och $y = -x + 4$ för $x > 1$. Grafen hänger ihop i $x = 1$. Är $f$ deriverbar i $x = 1$?`,
@@ -40879,7 +40881,7 @@ Vi subtraherar 4 från båda led och får $x = -4$. Där har grafen ett språng 
 
 **Svar:** $x = -4$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En parkering kostar 20 kr för varje påbörjad timme. Kostnaden är $K(t)$ kronor när bilen står parkerad i $t$ timmar, där $0 < t \\le 4$.<br>a) Bestäm $K(0{,}5)$, $K(1)$ och $K(1{,}5)$.<br>b) För vilka värden på $t$ är $K$ inte deriverbar?`,
@@ -40922,7 +40924,7 @@ Värdena är lika, så $f$ är kontinuerlig i $x = 2$. Vi kontrollerar sedan der
 
 **Svar:** Ja, $f$ är deriverbar i $x = 2$ eftersom både funktionsvärdet och derivatan är lika ($f(2) = 4$ och $f'(2) = 4$) från båda hållen.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Funktionen $f$ definieras enligt
@@ -40962,7 +40964,7 @@ $$
     ],
 
     'ma3c-3.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Derivera $f(x) = x^6$.`,
@@ -41013,7 +41015,7 @@ $$
 
 **Svar:** $f'(x) = 0$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Derivera $f(x) = \\dfrac{x^4}{2}$.`,
@@ -41054,7 +41056,7 @@ $$
 
 **Svar:** $f'(-2) = -12$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Funktionen $f(x) = ax^n$, där $a$ och $n$ är positiva heltal, har derivatan $f'(x) = 20x^3$. Bestäm $a$ och $n$.`,
@@ -41082,7 +41084,7 @@ Kontroll: $f(x) = 5x^4$ ger $f'(x) = 4 \\cdot 5x^3 = 20x^3$, vilket stämmer.
     ],
 
     'ma3c-3.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Derivera funktionen.
@@ -41146,7 +41148,7 @@ $$
 
 **Svar:** $f'(x) = -6x + 7$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Derivera funktionen.
@@ -41196,7 +41198,7 @@ $$
 
 **Svar:** $f'(2) = 12$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Funktionen $f(x) = ax^2 + bx + 1$ har $f'(2) = 9$ och $f'(-1) = -3$. Bestäm konstanterna $a$ och $b$.`,
@@ -41239,7 +41241,7 @@ $$
     ],
 
     'ma3c-3.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Derivera $f(x) = \\dfrac{4}{x}$.`,
@@ -41306,7 +41308,7 @@ $$
 
 **Svar:** $f'(x) = -\\dfrac{3}{x^4}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Derivera $f(x) = \\dfrac{6x - 8}{x}$.`,
@@ -41353,7 +41355,7 @@ $$
 
 **Svar:** $f'(x) = \\dfrac{5x\\sqrt{x}}{2}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Bestäm de $x$-värden ($x \\neq 0$) för vilka $f'(x) = 0$, om
@@ -41386,7 +41388,7 @@ Detta ger två lösningar, eftersom både $2^2 = 4$ och $(-2)^2 = 4$.
     ],
 
     'ma3c-3.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Derivera $f(x) = 4e^x$.`,
@@ -41441,7 +41443,7 @@ $$
 
 **Svar:** $f'(0) = 5$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Funktionen är $f(x) = \\dfrac{2x^3}{3} + 4e^x$. Bestäm $f'(1)$. Avrunda till en decimal.`,
@@ -41478,7 +41480,7 @@ $$
 
 **Svar:** tangentens lutning är $\\approx -2{,}8$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En funktion har formen $f(x) = ae^x + b$. Grafen visar att kurvan skär $y$-axeln i punkten $(0,\\ 10)$, och att tangenten till kurvan i punkten $x = 0$ har lutningen 6. Bestäm $a$ och $b$.`,
@@ -41514,7 +41516,7 @@ Med $a = 6$ ger detta $b = 10 - 6 = 4$.
     ],
 
     'ma3c-3.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Derivera $f(x) = e^{6x}$.`,
@@ -41569,7 +41571,7 @@ $$
 
 **Svar:** $f'(x) = 4e^x$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Derivera $f(x) = 3 \\cdot 8^{2x}$.`,
@@ -41606,7 +41608,7 @@ $$
 
 **Svar:** $f'(x) = 5e^{x/4}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Funktionen $f(x) = 5^x$ har i en viss punkt derivatan $f'(x) = 25\\ln 5$. Bestäm $x$-koordinaten för den punkten.`,
@@ -41634,7 +41636,7 @@ $$
     ],
 
     'ma3c-3.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm ekvationen för tangenten i punkten där $x = 2$ på kurvan $y = x^2 - 3x + 1$.`,
@@ -41724,7 +41726,7 @@ g/dygn.
 **Svar:** Efter 10 dygn minskar mängden radioaktivt ämne med cirka 7,7
 g/dygn.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Antalet bakterier ges av $B(t) = e^{kt} + 40$, där $t$ är tiden i timmar. Efter 10 timmar finns 500 bakterier. Bestäm konstanten $k$.`,
@@ -41793,7 +41795,7 @@ $$
 
 **Svar:** $y = 6x + 3$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Tangenten till kurvan $y = x^2 + bx + c$ i punkten där $x = 2$ har ekvationen $y = 3x - 1$. Bestäm konstanterna $b$ och $c$.`,
@@ -41842,7 +41844,7 @@ tangeringspunkten ligger på kurvan hade $c$ förblivit obestämd.
     ],
 
     'ma3c-3.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilket Geogebra-kommando använder du om du vill lösa en ekvation **exakt**, det vill säga få svaret i symboler i stället för decimaltal?`,
@@ -41895,7 +41897,7 @@ $$
 
 **Svar:** $f'(t) = 2e^{0{,}05t}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En insättning på 5 000 kr växer med förändringsfaktorn 1,04 per år, vilket motsvarar modellen $y = 5000 \\cdot 1{,}04^x$. Skriv om modellen på formen $y = Ce^{kx}$ och använd den för att beräkna insättningens värde efter 10 år. Svara i kr, avrundat till heltal.`,
@@ -41944,7 +41946,7 @@ $$
 
 **Svar:** Efter cirka 2,7 timmar.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Antalet besökare på en webbplats ökar enligt modellen $V(t) = 500e^{0{,}065t}$, där $t$ är tiden i månader efter lanseringen. Efter hur många månader har antalet besökare ökat med 50 % jämfört med lanseringen? Svara avrundat till en decimal, i månader.`,
@@ -41980,7 +41982,7 @@ $$
     ],
 
     'ma3c-5.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ange en primitiv funktion till $f(x) = x^4$.`,
@@ -42037,7 +42039,7 @@ $$
 
 **Svar:** $F(x) = \\dfrac{e^{5x}}{5}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm samtliga primitiva funktioner till $f(x) = 6x^2 - 4x$.`,
@@ -42086,7 +42088,7 @@ $$
 
 **Svar:** $F(x) = 3e^{3x} + 5x$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En primitiv funktion $F(x)$ till $f(x) = 6x - 4$ uppfyller $F(0) = 7$. Bestäm $F(x)$.`,
@@ -42120,7 +42122,7 @@ $$
     ],
 
     'ma3c-5.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm den primitiva funktionen $F(x)$ till $f(x) = 4x^3$ som uppfyller villkoret $F(1) = 2$.`,
@@ -42201,7 +42203,7 @@ $$
 
 **Svar:** $F(x) = 3x^2 - 2x + 2$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Accelerationen för en bil är $a(t) = 4t$ m/s², och begynnelsehastigheten är $v(0) = 3$ m/s. Beräkna hastigheten $v(2)$, det vill säga hastigheten efter 2 sekunder.`,
@@ -42254,7 +42256,7 @@ $$
 
 **Svar:** $F(-1) = 9$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En primitiv funktion $F(x)$ till $f(x) = 6x + a$, där $a$ är en konstant, uppfyller villkoren<br>$F(0) = 5$&emsp;&emsp;$F(2) = 21$.<br>Bestäm konstanterna $a$ och $C$.`,
@@ -42302,7 +42304,7 @@ $$
     ],
 
     'ma3c-5.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Grafen till $f(x) = x^2 + 2$ är ritad i ett koordinatsystem. Det skuggade området begränsas av grafen, $x$-axeln, linjen $x = 0$ och linjen $x = 3$. Vilken integral beskriver det skuggade områdets area?`,
@@ -42347,7 +42349,7 @@ $$
 
 **Svar:** $16$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Grafen till den räta linjen $f(x) = x + 1$ bildar tillsammans med $x$-axeln, linjen $x = 2$ och linjen $x = 5$ ett skuggat område. Beräkna $\\displaystyle\\int_2^5 (x + 1)\\, dx$ genom att dela in området i en rektangel och en triangel.`,
@@ -42374,7 +42376,7 @@ Eftersom triangeln ligger **under** $x$-axeln blir integralens värde arean med 
 
 **Svar:** $-8$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Grafen till en funktion $f$ bildar tillsammans med $x$-axeln två områden mellan $x = 0$ och $x = 7$: en triangel **ovanför** $x$-axeln mellan $x = 0$ och $x = 4$ med basen $4$ och höjden $6$, och en triangel **under** $x$-axeln mellan $x = 4$ och $x = 7$ med basen $3$ och höjden $8$. Beräkna $\\displaystyle\\int_0^7 f(x)\\, dx$.`,
@@ -42398,7 +42400,7 @@ De båda bidragen tar alltså ut varandra exakt, trots att den sammanlagda arean
     ],
 
     'ma3c-5.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna $\\displaystyle\\int_0^3 4x\\, dx$ med hjälp av en primitiv funktion.`,
@@ -42435,7 +42437,7 @@ $$
 
 **Svar:** $3$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna $\\displaystyle\\int_1^3 (2x - 5)\\, dx$ med hjälp av en primitiv funktion.`,
@@ -42466,7 +42468,7 @@ $$
 
 **Svar:** $0$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Bestäm det tal $k > 1$ som uppfyller $\\displaystyle\\int_1^k (2x - 1)\\, dx = 20$.`,
@@ -42502,7 +42504,7 @@ vilket ger $k = 5$ eller $k = -4$. Eftersom villkoret är $k > 1$ förkastar vi 
     ],
 
     'ma3c-5.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ett digitalt hjälpmedel (till exempel Geogebra) ger en primitiv funktion till $f(x) = 4x^3 - 2x$. Vilket svar ger verktyget?`,
@@ -42559,7 +42561,7 @@ $$
 
 **Svar:** $\\approx 4{,}67$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett digitalt hjälpmedel visar att en primitiv funktion till $f(x) = 6x^2 + kx$ är
@@ -42620,7 +42622,7 @@ $$
 
 **Svar:** $a = 4$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ett digitalt hjälpmedel visar att
@@ -42662,7 +42664,7 @@ vilket stämmer. Eftersom uttrycket $a^3 + 2a$ växer hela tiden när $a > 0$ (b
     ],
 
     'ma3c-5.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna arean mellan kurvorna $y = 2x + 5$ (övre funktion) och $y = x + 1$ (undre funktion) för $0 \\leq x \\leq 3$.`,
@@ -42707,7 +42709,7 @@ $$
 
 **Svar:** $A = 9\\ \\text{a.e.}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Kurvorna $y = x + 4$ och $y = x^2 - 2$ skär varandra i två punkter. Bestäm arean mellan kurvorna i intervallet mellan skärningspunkterna.`,
@@ -42756,7 +42758,7 @@ $$
 
 **Svar:** $A = \\dfrac{64}{3}\\ \\text{a.e.} \\approx 21{,}33\\ \\text{a.e.}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Kurvan $y = kx$ (där $k > 0$) och kurvan $y = x^2$ skär varandra i origo och i ytterligare en punkt. Bestäm konstanten $k$ så att arean mellan kurvorna blir exakt 36 a.e.`,
@@ -42784,7 +42786,7 @@ $$
     ],
 
     'ma3c-5.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En tank fylls med vatten med hastigheten $r(t)$ liter/minut, där $t$ är tiden i minuter. Vad står $\\displaystyle\\int_0^{20} r(t)\\, dt$ för?`,
@@ -42835,7 +42837,7 @@ $$
 
 **Svar:** $s = 32$ m`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Hastigheten för en cyklist ges av $v(t) = 20 - 20e^{-0,5t}$ (m/s), där $t$ är tiden i sekunder. Hur långt cyklar cyklisten mellan $t = 2,0$ s och $t = 6,0$ s? Avrunda till närmaste heltal meter.`,
@@ -42874,7 +42876,7 @@ $$
 
 **Svar:** Kassaflödet mellan månad 6 och månad 12 är 85 000 kr.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ett företags marginalkostnad ges av $K'(x) = 6x + 10$ (kr per tillverkad enhet), där $x$ är antalet tillverkade enheter. Den fasta kostnaden, det vill säga kostnaden vid $x = 0$ innan någon enhet tillverkats, är 500 kr. Bestäm den totala kostnaden för att tillverka 20 enheter.`,
@@ -42902,7 +42904,7 @@ $$
     ],
 
     'ma3c-4.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En funktion $f(x)$ har $f'(2) = 5$. Är $f(x)$ växande eller avtagande vid $x = 2$?`,
@@ -42957,7 +42959,7 @@ ${makeDiagram({
 
 **Svar:** Funktionen avtar i hela intervallet, utan några delar där den växer eller är konstant.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Grafen nedan visar derivatan $f'(x)$ till en funktion $f(x)$.<br>I vilket eller vilka intervall är $f(x)$ avtagande?
@@ -43016,7 +43018,7 @@ $$
 
 **Svar:** $-3 < x < 2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En funktion $f(x)$ har en derivata $f'(x)$ som endast är noll vid $x = -1$ och $x = 4$ — och som byter tecken vid vart och ett av dessa nollställen (den passerar rakt igenom $x$-axeln, den planar inte ut). Det är känt att $f(x)$ är strängt avtagande för $x < -1$. I vilket intervall är $f(x)$ strängt växande?`,
@@ -43042,7 +43044,7 @@ $f(x)$ är alltså strängt växande i mellanintervallet.
     ],
 
     'ma3c-4.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm $x$-koordinaten för extrempunkten till funktionen $f(x) = x^2 - 6x + 8$ genom att lösa $f'(x) = 0$.`,
@@ -43101,7 +43103,7 @@ vilket ger $x = 0$ eller $x = 1$.
 
 **Svar:** Maximipunkt`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm koordinaterna för extrempunkten till funktionen $f(x) = x^2 - 8x + 10$.`,
@@ -43160,7 +43162,7 @@ Koefficienten framför $x^2$-termen är $-1$, alltså negativ, vilket ger en max
 
 **Svar:** $(1, 6)$, maximipunkt`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Funktionen $f(x) = x^3 + ax^2 + b$ har en lokal extrempunkt i punkten $(2, 6)$. Bestäm konstanterna $a$ och $b$.`,
@@ -43206,7 +43208,7 @@ Observera att $b$ inte kan bestämmas ur derivatan (konstanttermen försvinner v
     ],
 
     'ma3c-4.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Funktionen $f(x) = x^2 - 6x + 5$ är definierad på intervallet $0 \\leq x \\leq 5$. Beräkna funktionens värde i intervallets båda ändpunkter.`,
@@ -43265,7 +43267,7 @@ $$
 
 **Svar:** Maximipunkt`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Funktionen $f(x) = -x^2 + 4x$ är definierad på intervallet $0 \\leq x \\leq 5$. Bestäm funktionens största värde i intervallet.`,
@@ -43316,7 +43318,7 @@ Derivatan går från $+$ till $-$ vid $x = -1$, det vill säga funktionen växer
 
 **Svar:** Maximipunkt`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Funktionen $f(x) = x^3 + ax + b$ har en minimipunkt vid $x = 2$, och funktionens värde där är $-20$. Bestäm konstanterna $a$ och $b$.`,
@@ -43354,7 +43356,7 @@ $$
     ],
 
     'ma3c-4.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm andraderivatan $f''(x)$ till funktionen $f(x) = x^3 - 3x^2 + 2$.`,
@@ -43423,7 +43425,7 @@ $$
 
 **Svar:** $f''(x) = 12x^2 - 24x$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Andraderivatan till en funktion $f(x)$ är $f''(x) = 6x - 6$. För vilka $x$ är funktionen konkav?`,
@@ -43482,7 +43484,7 @@ $$
 
 **Svar:** $x = 2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En tredjegradsfunktion $f(x) = x^3 + ax^2 + bx + c$ har en inflexionspunkt i $(1, 2)$, och grafen går genom origo. Bestäm $a$ och $b$.`,
@@ -43530,7 +43532,7 @@ $$
     ],
 
     'ma3c-4.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Funktionen $f(x) = x^3 - 12x$ har $f'(x) = 3x^2 - 12$, med $f'(2) = 0$. Avgör extrempunktens karaktär vid $x = 2$ med andraderivatan.`,
@@ -43601,7 +43603,7 @@ Andraderivatan är negativ, vilket ger en lokal **maximipunkt**.
 
 **Svar:** Maximipunkt, eftersom $f''(2) = -6 < 0$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Funktionen $f(x) = x^3 - 3x^2 - 9x + 5$ har extrempunkter vid $x = -1$ och $x = 3$. Bestäm den lokala extrempunktens koordinater och karaktär vid $x = 3$.`,
@@ -43652,7 +43654,7 @@ När $g''(4) = 0$ ger andraderivatan **ingen** information om karaktären: punkt
 
 **Svar:** Ett teckenstudium (teckentabell) krävs — andraderivatan räcker inte när $g''(4) = 0$.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Funktionen $f(x) = x^3 + ax^2 + bx$ har en lokal maximipunkt i $(1, 2)$. Bestäm konstanterna $a$ och $b$.`,
@@ -43692,7 +43694,7 @@ Insatt i (1): $-4 + b = 1 \\Rightarrow b = 5$.
     ],
 
     'ma3c-4.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Arean (i kvadratmeter) hos en rektangel ges av funktionen
@@ -43765,7 +43767,7 @@ $$
 
 **Svar:** $x = 20$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En rektangulär rabatt ska anläggas utmed en husvägg (den sidan behöver inget kantstöd). Det finns totalt 48 meter kantstöd till de tre övriga sidorna, där de två lika långa sidorna är $x$ meter. Vilken är den maximala area rabatten kan få?`,
@@ -43828,7 +43830,7 @@ $$
 
 **Svar:** $625\\ \\mathrm{m}^2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En lantbrukare ska hägna in en rektangulär hage utmed en rak å (sidan mot ån behöver inget stängsel). Det finns totalt 32 meter stängsel. Mitt i den sida som är parallell med ån ska en grind på 8 meter sättas in — grinden kräver inget stängsel. Bestäm hagens maximala area.`,
@@ -43872,7 +43874,7 @@ Observera att grindens 8 meter **inte** ska räknas som stängsel — det är de
     ],
 
     'ma3c-4.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En rektangel ska ha omkretsen 60 cm. Om ena sidan är $x$ cm, vilket uttryck ger rektangelns area $A$ som funktion av $x$?`,
@@ -43921,7 +43923,7 @@ $$
 
 **Svar:** 72 km/h`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En cylindrisk konservburk utan lock ska tillverkas så att summan av höjden $h$ och radien $r$ är 15 cm.<br>a) Skriv burkens volym $V$ som funktion av enbart radien $r$.<br>b) I Geogebra hittas extrempunkten $B = (10, 1570.79633)$ på grafen till $V(r)$. Vilken radie ger störst volym?`,
@@ -43966,7 +43968,7 @@ $$
 
 **Svar:** 144`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En rektangulär pappskiva med måtten 24 cm × 15 cm ska användas för att tillverka en låda utan lock. I varje hörn klipps en kvadrat med sidan $x$ bort, och de fyra sidorna viks sedan upp.<br>a) Visa att lådans volym ges av $V(x) = x(24 - 2x)(15 - 2x)$, och ange en rimlig definitionsmängd för $x$.<br>b) I Geogebra hittas TVÅ extrempunkter på grafen till $V(x)$: $(3, 486)$ och $(10, -200)$. Vilket $x$-värde ger den låda som har störst volym, och varför gäller inte den andra punkten?`,
@@ -43990,7 +43992,7 @@ Både $(24 - 2x) > 0$ och $(15 - 2x) > 0$ måste gälla (annars går det inte at
     ],
 
     'ma3c-6.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Hur definieras $\\sin v$ i en rätvinklig triangel?`,
@@ -44029,7 +44031,7 @@ $$
 
 **Svar:** 7,1 m`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En flaggstång är 6,0 m hög och solens höjdvinkel är 52°.<br>a) Bestäm skuggans längd.<br>b) Bestäm avståndet mellan flaggstångens topp och skuggans yttersta punkt (hypotenusan). Avrunda båda svaren till en decimal.`,
@@ -44080,7 +44082,7 @@ Observera att $\\tan^{-1}$ av kvoten mellan de två katetrarna INTE ger hypotenu
 
 **Svar:** 31°; 4,1 m`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En rätvinklig triangel har hypotenusan $c$ och en av de spetsiga vinklarna $v$. Vilket uttryck, skrivet enbart med $c$ och $v$, ger triangelns area?`,
@@ -44114,7 +44116,7 @@ De felaktiga alternativen har antingen glömt att kvadrera $c$ (bara EN faktor $
     ],
 
     'ma3c-6.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Punkten $(0{,}6;\\ 0{,}8)$ på enhetscirkeln motsvarar vinkeln $v$. Vad är $\\cos v$?`,
@@ -44163,7 +44165,7 @@ $$
 
 **Svar:** $70^\\circ$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Punkten $(0{,}6;\\ 0{,}8)$ på enhetscirkeln motsvarar vinkeln $v$. Beräkna $\\tan v$.`,
@@ -44194,7 +44196,7 @@ $$
 
 **Svar:** $-0{,}4$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Bestäm $\\sin(-390^\\circ)$ exakt, givet att $\\sin 30^\\circ = 0{,}5$.`,
@@ -44222,7 +44224,7 @@ $$
     ],
 
     'ma3c-6.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm $\\cos 0\^\circ$ med hjälp av enhetscirkeln.`,
@@ -44273,7 +44275,7 @@ $$
 
 **Svar:** $\\cos v = -2$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $3\\sin v = 1{,}5$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$.`,
@@ -44336,7 +44338,7 @@ $$
 
 **Svar:** $v_1 \\approx 53{,}1\^\circ$ och $v_2 \\approx 306{,}9\^\circ$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En vinkel $v$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$ uppfyller $\\sin v = 0{,}6$ och ligger i andra kvadranten (mellan $90\^\circ$ och $180\^\circ$). Bestäm $v$, avrundat till en decimal.`,
@@ -44368,7 +44370,7 @@ lösning som söks — inte $v_1$, trots att det är den räknaren visar direkt.
     ],
 
     'ma3c-6.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Lös ekvationen $\\tan v = 3$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$. Ange båda lösningarna avrundade till en decimal.`,
@@ -44439,7 +44441,7 @@ $$
 
 **Svar:** $v_1 \\approx 116{,}6\^\circ$ och $v_2 \\approx 296{,}6\^\circ$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $3\\tan v + 1 = 13$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$. Ange båda lösningarna avrundade till en decimal.`,
@@ -44500,7 +44502,7 @@ Kontroll: $-101{,}3\^\circ$ ligger i intervallet $[-180\^\circ,\\ 180\^\circ]$.
 
 **Svar:** $v_1 \\approx 78{,}7\^\circ$ och $v_2 \\approx -101{,}3\^\circ$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Lös ekvationen $\\tan(2v) = 1$ i intervallet $0\^\circ \\leq v \\leq 360\^\circ$.`,
@@ -44533,7 +44535,7 @@ $$
     ],
 
     'ma3c-6.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `I en triangel $ABC$ är vinkeln $A = 50^\\circ$, vinkeln $B = 60^\\circ$ och sidan $a = 8$ cm (sidan mitt emot $A$). Bestäm sidan $b$.`,
@@ -44572,7 +44574,7 @@ $$
 
 **Svar:** $b \\approx 15{,}0$ cm`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I en triangel $ABC$ är $A = 95^\\circ$, $C = 35^\\circ$ och sidan $a = 12$ cm. Bestäm sidan $c$.`,
@@ -44601,7 +44603,7 @@ $$
 
 **Svar:** $A \\approx 33{,}1^\\circ$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `I en triangel $ABC$ är sidan $a = 9$ cm, sidan $b = 12$ cm och vinkeln $A = 35^\\circ$. Bestäm vinkeln $B$. Hur många giltiga trianglar finns det?`,
@@ -44637,7 +44639,7 @@ Båda fallen lämnar plats för den tredje vinkeln, så det finns **två** trian
     ],
 
     'ma3c-6.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna arean av en triangel $ABC$ där sidan $a = 6{,}0$ cm, sidan $b = 9{,}0$ cm och vinkeln $C = 50^\\circ$ (mellanliggande vinkel till $a$ och $b$).`,
@@ -44680,7 +44682,7 @@ $$
 
 **Svar:** $T \\approx 18{,}8$ cm²`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En triangel har arean $T = 15$ cm². Sidan $a = 5{,}0$ cm, och vinkeln $C = 40^\\circ$ är mellanliggande vinkel till sidorna $a$ och $b$. Bestäm sidan $b$.`,
@@ -44705,7 +44707,7 @@ $$
 
 **Svar:** $T \\approx 32{,}2$ cm²`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En parallellogram har två sidor med längderna $8{,}0$ cm och $5{,}0$ cm, och vinkeln mellan dem är $65^\\circ$. Bestäm parallellogrammens area.<br>(Tips: en diagonal delar parallellogrammen i två kongruenta trianglar.)`,
@@ -44727,7 +44729,7 @@ $$
     ],
 
     'ma3c-6.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `I en triangel $ABC$ är sidorna $a$ och $b$ kända, samt den mellanliggande vinkeln $C$. Vilken sats är lämpligast för att bestämma sidan $c$?`,
@@ -44770,7 +44772,7 @@ $$
 
 **Svar:** $c = 7{,}0$ cm`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En triangel $ABC$ har sidorna $a = 6$ cm och $b = 9$ cm samt den mellanliggande vinkeln $C = 55^\\circ$. Bestäm vinkeln $A$.`,
@@ -44817,7 +44819,7 @@ $$
 
 **Svar:** $T \\approx 68{,}1$ cm²`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ett fyrtorn (18 meter högt) står på toppen av en klippa. Från en båt är höjdvinkeln till fyrtornets topp $40^\\circ$, samtidigt som höjdvinkeln till klippans topp (tornets fot) är $28^\\circ$. Hur hög är klippan?`,
@@ -44847,7 +44849,7 @@ $$
     ],
 
     'ma3c-6.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En triangel $ABC$ har sidorna $a = 8,0$ cm och $b = 6,0$ cm, med vinkeln $C = 50^\\circ$ mellan dem. Bestäm sidan $c$.`,
@@ -44894,7 +44896,7 @@ $$
 
 **Svar:** Alla tre sidor är kända, men ingen vinkel.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En triangel $ABC$ har sidorna $a = 10$ cm och $b = 14$ cm, med vinkeln $C = 65^\\circ$ mellan dem. Bestäm vinkeln $A$.`,
@@ -44945,7 +44947,7 @@ $$
 
 **Svar:** Den största vinkeln är $\\approx 108^\\circ$.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En triangel har sidorna $x$ och $x + 7$, med en mellanliggande vinkel på $60^\\circ$. Den tredje sidan, mitt emot den mellanliggande vinkeln, är 13 cm. Bestäm $x$.`,
@@ -44981,7 +44983,7 @@ vilket ger $x_1 = 8$ och $x_2 = -15$. Eftersom en sidlängd inte kan vara negati
     ],
     // ── Ma3b: linjär optimering (egna avsnitt i Matematik fortsättning nivå 1b) ──
     'ma3b-2.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Figuren visar en streckad rät linje och ett skuggat område. Vilken olikhet beskriver det skuggade området?
@@ -45042,7 +45044,7 @@ Båda termerna i högerledet ska delas med 2, inte bara den ena.
 
 **Svar:** $A$ och $C$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett område begränsas bland annat av linjerna $x + y = 9$ och $2x - y = 3$. Bestäm områdets hörnpunkt där linjerna skär varandra.`,
@@ -45087,7 +45089,7 @@ Alla linjer hör till området, så tecknen är $\\leq$ och $\\geq$.
 **Svar:**
 $\\begin{cases} x \\geq 0 \\\\ y \\geq 0 \\\\ x \\leq 6 \\\\ y \\leq -0{,}5x + 6 \\end{cases}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ett område beskrivs av olikheterna $x \\geq 0$, $y \\geq 0$, $y \\leq -x + 6$ och $y \\geq x - 2$. Rita området och bestäm dess area.`,
@@ -45119,7 +45121,7 @@ Hela arean är $2 + 12 = 14$ areaenheter.
     ],
 
     'ma3b-2.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ett tillåtet område har hörnpunkterna $(0, 0)$, $(4, 0)$, $(3, 2)$ och $(0, 3)$. Vilket är det största värdet av $z = 3x + y$ i området?`,
@@ -45170,7 +45172,7 @@ Hela arean är $2 + 12 = 14$ areaenheter.
 
 **Svar:** Bivillkor`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett bageri bakar limpor och baguetter. Ugnen rymmer högst 120 bröd per dag. En limpa kräver 2 hg mjöl och en baguette 1 hg mjöl, och bageriet har 160 hg mjöl per dag. Vinsten är 15 kr per limpa och 10 kr per baguette. Hur stor kan vinsten bli som mest per dag?`,
@@ -45238,7 +45240,7 @@ Lägst kostnad ger 3 kg av varje sort.
 
 **Svar:** $240$ kr`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Figuren visar ett tillåtet område med hörnpunkterna $(0, 0)$, $(6, 0)$, $(4, 3)$ och $(0, 5)$. Målfunktionen är $V = ax + 2y$, där $a$ är en positiv konstant. För vilka värden på $a$ antar $V$ sitt största värde i hörnet $(4, 3)$?
@@ -45278,7 +45280,7 @@ Tolkning: för $a = 3$ är nivålinjen parallell med kanten mellan $(6, 0)$ och 
     ],
     // ═══════════ Matematik fortsättning nivå 1b (Ma3b), kapitel 6: 6.1–6.3 ═══════════
     'ma3b-6.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En talföljd ges av den slutna formeln $a_n = 6n - 4$. Bestäm $a_{15}$.`,
@@ -45331,7 +45333,7 @@ $$
 
 **Svar:** $a_4 = -4$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ett bageri bakar 1 200 bullar första veckan i en kampanj och ökar sedan med 150 bullar varje vecka. Vilken vecka bakar bageriet för första gången fler än 3 000 bullar?`,
@@ -45392,7 +45394,7 @@ Det blev ett heltal, så 186 är ett element i talföljden.
 
 **Svar:** Ja, figur 37 har exakt 186 stickor.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `I en aritmetisk talföljd är $a_4 = 19$ och $a_{10} = 43$. Vilket är det första elementet i talföljden som är större än 500?`,
@@ -45451,7 +45453,7 @@ $$
         },
     ],
     'ma3b-6.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Talföljden $5,\\ 15,\\ 45,\\ \\ldots$ är geometrisk. Bestäm $a_7$.`,
@@ -45502,7 +45504,7 @@ $$
 
 **Svar:** $a_{10} = 0{,}125$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `I en geometrisk talföljd är $a_3 = 20$ och $a_6 = 160$. Bestäm $a_1$.`,
@@ -45573,7 +45575,7 @@ $$
 
 **Svar:** År 16`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `I en geometrisk talföljd är $a_2 = -6$ och $a_4 = -54$. Det första elementet $a_1$ är positivt. Bestäm $a_6$.`,
@@ -45615,7 +45617,7 @@ $$
         },
     ],
     'ma3b-6.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ett belopp på 50 000 kr betalas ut om 5 år. Bestäm beloppets nuvärde om vi räknar med räntan 4 %.`,
@@ -45654,7 +45656,7 @@ $$
 
 **Svar:** Cirka 25 335 kr`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Du får välja mellan 70 000 kr om 2 år och 80 000 kr om 4 år. Vilket alternativ är mest värt om vi räknar med räntan 3,5 %?`,
@@ -45705,7 +45707,7 @@ $$
 
 **Svar:** Cirka 395 763 kr`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Vid vilken ränta är 120 000 kr som betalas ut om 4 år lika mycket värt som 100 000 kr i dag? Svara i procent med en decimal.`,
@@ -46010,7 +46012,7 @@ $$
     ],
     // ═══════════════════ Matematik fortsättning nivå 2 (Ma4) ═══════════════════
     'ma4-1.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Hur definieras $\\cos v$ i en rätvinklig triangel?`,
@@ -46049,7 +46051,7 @@ $$
 
 **Svar:** 34°`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En stege lutar mot en vägg. Stegen är 5,0 m lång och når 4,3 m upp på väggen.<br>a) Bestäm stegens lutningsvinkel $v$ mot marken (avrunda till heltal).<br>b) Bestäm avståndet från väggen till stegens fot (avrunda till en decimal).`,
@@ -46098,7 +46100,7 @@ $$
 
 **Svar:** 16,9 m; 18,5 m`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `I en rätvinklig triangel är den motstående kateten till vinkeln $v$ dubbelt så lång som den närliggande kateten. Vilket är det exakta värdet av $\\sin v$?`,
@@ -46129,7 +46131,7 @@ De felaktiga alternativen förväxlar $\\sin v$ med $\\cos v$ (som är $\\dfrac{
         },
     ],
 'ma4-1.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `På enhetscirkeln (radie 1, medelpunkt i origo) svarar en vinkel $v$ mot en punkt $(x, y)$ på randen. Vad motsvarar $\\sin v$?`,
@@ -46170,7 +46172,7 @@ $$
 
 **Svar:** 1,33`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En punkt på enhetscirkeln svarar mot vinkeln $v$ och har $y$-koordinaten $0{,}77$.<br>a) Bestäm $\\sin(v + 360^\\circ)$.&emsp;&emsp;b) Bestäm $\\sin(-v)$.`,
@@ -46205,7 +46207,7 @@ $$
 
 **Svar:** 0,96`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En punkt på enhetscirkeln ligger i första kvadranten och har lika stora $x$- och $y$-koordinater. Bestäm punktens exakta koordinat och vinkeln $v$.`,
@@ -46232,7 +46234,7 @@ Alternativet $\\left(\\dfrac{1}{2}, \\dfrac{1}{2}\\right)$ ligger inte på cirke
         },
     ],
 'ma4-1.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Om $v$ är en lösning till $\\tan x = a$, vilket uttryck ger samtliga lösningar?`,
@@ -46277,7 +46279,7 @@ $$
 
 **Svar:** $x = \\pm 60^\\circ + n \\cdot 360^\\circ$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $\\sin x = 0{,}6$ och ange samtliga lösningar. Svara med en decimal.`,
@@ -46330,7 +46332,7 @@ Notera att $n \\cdot 360^\\circ$ blir $n \\cdot 180^\\circ$ efter divisionen —
 
 **Svar:** $x \\approx \\pm 33{,}2^\\circ + n \\cdot 180^\\circ$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Hur många lösningar har ekvationen $\\cos 3x = 0{,}6$ i intervallet $0^\\circ \\leq x \\leq 360^\\circ$?`,
@@ -46355,7 +46357,7 @@ Perioden för $x$ är alltså $\\dfrac{360^\\circ}{3} = 120^\\circ$. När $x$ l�
         },
     ],
 'ma4-1.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ekvationen $\\cos x \\cdot \\sin x = 0$ ska lösas. Vad säger nollproduktmetoden?`,
@@ -46406,7 +46408,7 @@ $$
 
 **Svar:** $\\tan x = \\dfrac{1}{3}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $\\cos x \\cdot (2\\sin x - 1) = 0$ i intervallet $0^\\circ \\le x < 360^\\circ$.`,
@@ -46441,7 +46443,7 @@ I intervallet $0^\\circ \\le x < 360^\\circ$ ger $n = 0, 1, 2, 3$ lösningarna $
 
 **Svar:** 4 lösningar`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Lös ekvationen $\\sin(2x) = \\cos(2x)$ och ange samtliga lösningar.`,
@@ -46476,7 +46478,7 @@ Fällan är att glömma dela periodtermen med 2 (ger fel period $180^\\circ$) el
         },
     ],
 'ma4-1.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Ett helt varv ($360^\\circ$) motsvarar hur många radianer?`,
@@ -46521,7 +46523,7 @@ $$
 
 **Svar:** $\\dfrac{\\pi}{6}$ rad`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Omvandla $1{,}5$ rad till grader. Avrunda till hela grader.`,
@@ -46552,7 +46554,7 @@ $$
 
 **Svar:** $x = \\dfrac{\\pi}{3} + n \\cdot 2\\pi$ och $x = -\\dfrac{\\pi}{3} + n \\cdot 2\\pi$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Lös ekvationen $2\\cos x + \\sqrt{3} = 0$. Svara exakt i radianer (alla lösningar).`,
@@ -46583,7 +46585,7 @@ Perioden är $2\\pi$. De felaktiga alternativen glömmer minustecknet, använder
         },
     ],
 'ma4-1.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Använd komplementvinklar. Vad är $\\sin 70^\\circ$ lika med?`,
@@ -46632,7 +46634,7 @@ $$
 
 **Svar:** $\\approx 0{,}42$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Det är känt att $\\sin 50^\\circ \\approx 0{,}77$. Bestäm<br>a)&nbsp;$\\sin(-50^\\circ)$&emsp;&emsp;b)&nbsp;$\\sin 130^\\circ$`,
@@ -46681,7 +46683,7 @@ $$
 
 **Svar:** $-\\dfrac{1}{2}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Förenkla uttrycket $\\dfrac{\\sin(v + 90^\\circ)}{\\cos(v + 180^\\circ)}$ så långt som möjligt.`,
@@ -46708,7 +46710,7 @@ Faktorn $\\cos v$ förkortas bort och kvar blir $-1$, oberoende av $v$. De felak
         },
     ],
 'ma4-1.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad säger trigonometriska ettan för en godtycklig vinkel $v$?`,
@@ -46759,7 +46761,7 @@ $$
 
 **Svar:** $\\cos^2 v$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Vinkeln $v$ ligger i tredje kvadranten och $\\cos v = -0{,}28$. Bestäm $\\sin v$.`,
@@ -46808,7 +46810,7 @@ I fjärde kvadranten är $\\cos v$ ($x$-koordinaten) positiv, så vi väljer plu
 
 **Svar:** $\\cos v = \\dfrac{12}{13}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `För en vinkel $v$ gäller att $\\sin v \\cdot \\cos v = 0{,}3$. Bestäm värdet av $(\\sin v + \\cos v)^2$.`,
@@ -46839,7 +46841,7 @@ De felaktiga alternativen glömmer korstermen $2\\sin v\\cos v$, missar faktorn 
         },
     ],
 'ma4-1.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilket uttryck är lika med $\\cos(u + v)$?`,
@@ -46884,7 +46886,7 @@ $$
 
 **Svar:** 0,96`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm det exakta värdet av $\\cos 15^\\circ$ genom att skriva $15^\\circ = 45^\\circ - 30^\\circ$.`,
@@ -46925,7 +46927,7 @@ $$
 
 **Svar:** $\\sqrt{3}\\,\\sin x$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En spetsig vinkel $v$ uppfyller $\\sin v + \\cos v = \\dfrac{7}{5}$. Bestäm det exakta värdet av $\\sin 2v$.`,
@@ -46954,7 +46956,7 @@ Alternativet $\\dfrac{49}{25}$ är kvadraten innan man dragit bort ettan.
         },
     ],
 'ma4-1.9': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilket samband gäller för dubbla vinkeln av sinus?`,
@@ -46997,7 +46999,7 @@ Alternativet $\\dfrac{49}{25}$ är kvadraten innan man dragit bort ettan.
 
 **Svar:** $\\sin x = 0$ och $2\\cos x - 1 = 0$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $2\\sin x\\cos x = \\dfrac{1}{2}$ och ange den allmänna lösningen i radianer.`,
@@ -47048,7 +47050,7 @@ Dividera inte bort $\\sin x$ — då tappar man Fall 1-lösningarna.
 
 **Svar:** $x = n\\cdot 180^\\circ$ och $x = \\pm 60^\\circ + n\\cdot 360^\\circ$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Lös ekvationen $\\cos 2x + \\sin x = 0$ och svara i grader.`,
@@ -47089,7 +47091,7 @@ $$
         },
     ],
 'ma4-1.10': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad är perioden för sinusfunktionen $y = \\sin x$?`,
@@ -47130,7 +47132,7 @@ $$
 
 **Svar:** 156,4°`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Skärningspunkterna mellan $y = \\sin x$ och $y = 0{,}4$ ger inom ett varv $x_1 \\approx 23{,}6^\\circ$ och $x_2 \\approx 156{,}4^\\circ$. Vilket uttryck beskriver **samtliga** lösningar till $\\sin x = 0{,}4$?`,
@@ -47159,7 +47161,7 @@ $$
 
 **Svar:** 383,6°`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `För vilka värden på $k$ har ekvationen $\\sin x = k$ **exakt en** lösning inom ett varv, $0^\\circ \\leq x < 360^\\circ$?`,
@@ -47181,7 +47183,7 @@ För $k = 0$ blir det tvärtom två lösningar ($x = 0^\\circ$ och $x = 180^\\ci
         },
     ],
 'ma4-1.11': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken är amplituden för funktionen $y = 4 \\sin x$?`,
@@ -47230,7 +47232,7 @@ $$
 
 **Svar:** Amplituden är 3.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm amplituden och perioden (i grader) för funktionen $y = 8 \\sin 4x$.`,
@@ -47279,7 +47281,7 @@ $$
 
 **Svar:** Amplituden är 10 och perioden 720°.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En funktion $y = A \\sin Bx$ med $A > 0$ och $B > 0$ har största värdet 4 och gör exakt två hela svängningar (perioder) på intervallet $0^\\circ \\le x \\le 360^\\circ$. Bestäm $A$ och $B$.`,
@@ -47310,7 +47312,7 @@ De felaktiga alternativen vänder på period-sambandet ($B = \\dfrac{1}{2}$ ger 
         },
     ],
 'ma4-1.12': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Hur förskjuts grafen till $y = \\sin x + 4$ jämfört med $y = \\sin x$?`,
@@ -47357,7 +47359,7 @@ $$
 
 **Svar:** $y = \\sin (x + 20^\\circ) - 3$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beskriv hur grafen till $y = \\sin (x + 90^\\circ) + 1$ ser ut jämfört med $y = \\sin x$.`,
@@ -47390,7 +47392,7 @@ $$
 
 **Svar:** $y = \\sin (x + 25^\\circ) - 4$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Grafen till $y = \\sin (x + C) + D$ har sitt största värde 4, och detta maximum inträffar för $x = 20^\\circ$. Bestäm $C$ och $D$ (välj $0^\\circ \\le C < 360^\\circ$).`,
@@ -47421,7 +47423,7 @@ De felaktiga alternativen glömmer att sinus egen amplitud är 1 (så $D \\ne 4$
         },
     ],
 'ma4-1.13': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken är perioden för funktionen $y = \\tan x$?`,
@@ -47462,7 +47464,7 @@ $$
 
 **Svar:** Eftersom $\\tan x = \\dfrac{\\sin x}{\\cos x}$ inte är definierad där $\\cos x = 0$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ange perioden för funktionen $y = 2\\tan\\dfrac{x}{5}$.`,
@@ -47495,7 +47497,7 @@ $$
 
 **Svar:** $\\dfrac{\\pi}{4}$ åt höger och $1$ nedåt`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `För vilka värden på $x$ är funktionen $y = \\tan 3x$ inte definierad?`,
@@ -47526,7 +47528,7 @@ Fällan är att glömma dividera $n \\cdot \\pi$ med $3$ (ger $\\dfrac{\\pi}{6} 
         },
     ],
 'ma4-1.14': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm amplituden till funktionen $y = 3 \\sin x + 4 \\cos x$.`,
@@ -47573,7 +47575,7 @@ Det minsta värdet är det negativa värdet av amplituden, alltså $-c$.
 
 **Svar:** $-10$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm $a$ så att funktionen $y = a \\sin x + 8 \\cos x$ får amplituden 10.`,
@@ -47618,7 +47620,7 @@ Det största värdet är lika med amplituden.
 
 **Svar:** $\\sqrt{13}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Låt $f(x) = 8 \\sin\\!\\left(x + \\dfrac{\\pi}{3}\\right)$. Skriv $f(x)$ på formen $a \\sin x + b \\cos x$ där $a, b > 0$.`,
@@ -47659,7 +47661,7 @@ Då blir $b = 4\\sqrt{3}$, alltså $f(x) = 4 \\sin x + 4\\sqrt{3}\\,\\cos x$.
         },
     ],
 'ma4-1.15': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En harmonisk svängning beskrivs av $y = A \\sin Bt$ (radianer). Hur beräknas periodtiden $T$?`,
@@ -47700,7 +47702,7 @@ Amplituden är alltid positiv — minustecknet speglar bara grafen i $x$-axeln.
 
 **Svar:** 5`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En harmonisk svängning har periodtiden $T = 0{,}50\\ \\mathrm{s}$. Bestäm konstanten $B$ i modellen $y = A \\sin Bt$ (radianer). Avrunda till en decimal.`,
@@ -47735,7 +47737,7 @@ $$
 
 **Svar:** $A = 4$ och $D = 22$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Tidvattnet vid en hamn modelleras med $h(t) = A \\sin(Bt + C) + D$, där $t$ är tiden i timmar (radianer). Perioden är 12 timmar och det första högvattnet (max) efter $t = 0$ inträffar vid $t = 2$ timmar. Bestäm fasförskjutningskonstanten $C$ exakt.`,
@@ -47770,7 +47772,7 @@ Fällan är att sätta argumentet till $0$ i stället för $\\dfrac{\\pi}{2}$ vi
         },
     ],
 'ma4-2.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Bestäm derivatan $f'(x)$ då $f(x) = x^5$.`,
@@ -47829,7 +47831,7 @@ $$
 
 **Svar:** $f''(x) = 12x^2$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Derivera $f(x) = 3\\sqrt{x}$.`,
@@ -47870,7 +47872,7 @@ $$
 
 **Svar:** $f''(0) = 4$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `För funktionen $f(x) = e^{kx}$ gäller att $f''(x) = 25\\,f(x)$ för alla $x$, och att $f$ är växande. Bestäm konstanten $k$.`,
@@ -47899,7 +47901,7 @@ Här sitter fällan: $k^2 = 25$ ger både $k = 5$ och $k = -5$. Men $f$ ska vara
         },
     ],
 'ma4-2.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad motsvarar derivatan i en punkt grafiskt?`,
@@ -47940,7 +47942,7 @@ $$
 
 **Svar:** liter/minut`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm ekvationen för tangenten till kurvan $y = x^2 - 2x + 1$ i punkten där $x = 2$.`,
@@ -47977,7 +47979,7 @@ $$
 
 **Svar:** $20\\ \\mathrm{m/s}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Den räta linjen $y = 4x + m$ är tangent till kurvan $y = x^2$. Bestäm $m$.`,
@@ -48004,7 +48006,7 @@ $$
         },
     ],
 'ma4-2.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilket uttryck ger derivatan av en sammansatt funktion $y = f(g(x))$ enligt kedjeregeln?`,
@@ -48053,7 +48055,7 @@ $$
 
 **Svar:** $y'(0) = 2$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Derivera $y = \\sqrt{x^2 + 1}$.`,
@@ -48084,7 +48086,7 @@ $$
 
 **Svar:** $y'(2) = 16$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Kurvan $y = (x^2 - 4x)^3$ har vågräta tangenter i tre punkter. Bestäm samtliga $x$-värden där tangenten är vågrät.`,
@@ -48117,7 +48119,7 @@ Glömmer man den kvadrerade inre faktorn får man bara $x = 2$; struntar man i d
         },
     ],
 'ma4-2.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Kedjeregeln på Leibniz form säger att om $y = f(z)$ och $z = g(x)$ så gäller ...`,
@@ -48162,7 +48164,7 @@ $$
 
 **Svar:** $\\approx 62{,}8\\ \\mathrm{m^2/s}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `En klotformad ballong blåses upp så att radien växer med hastigheten $0{,}5\\ \\mathrm{cm/s}$. Hur snabbt ökar volymen i det ögonblick då radien är $10\\ \\mathrm{cm}$? Volymen för ett klot är $V(r) = \\dfrac{4\\pi r^3}{3}$. Svara i $\\mathrm{cm^3/s}$ (avrunda till heltal).`,
@@ -48189,7 +48191,7 @@ $$
 
 **Svar:** $\\approx 0{,}32\\ \\mathrm{cm/s}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En cirkelformad oljefläck har en area som växer med den konstanta hastigheten $8\\pi\\ \\mathrm{m^2/s}$. Hur snabbt växer radien i det ögonblick då arean är $16\\pi\\ \\mathrm{m^2}$?`,
@@ -48214,7 +48216,7 @@ $$
         },
     ],
 'ma4-2.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken är derivatan av $f(x) = \\sin x$ (vinkeln i radianer)?`,
@@ -48263,7 +48265,7 @@ $$
 
 **Svar:** $f'(0) = 3$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Derivera $f(x) = -5\\cos\\dfrac{x}{3}$.`,
@@ -48300,7 +48302,7 @@ $$
 
 **Svar:** Lutningen är $8$.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Kurvan $y = \\sin x + \\cos x$ har en horisontell tangent för ett värde på $x$ i intervallet $0 \\leq x \\leq \\dfrac{\\pi}{2}$. Bestäm detta $x$ (i radianer).`,
@@ -48327,7 +48329,7 @@ I intervallet $0 \\leq x \\leq \\dfrac{\\pi}{2}$ ger $\\tan x = 1$ lösningen $x
         },
     ],
 'ma4-2.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad är $D(\\ln x)$ för $x > 0$?`,
@@ -48382,7 +48384,7 @@ $$
 
 **Svar:** $\\dfrac{5}{x}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Derivera $y = \\ln t^4$ med avseende på $t$.`,
@@ -48419,7 +48421,7 @@ $$
 
 **Svar:** $\\cos x\\cdot e^{\\sin x}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Derivera $y = \\ln(3x - 4)^2$ och förenkla svaret så långt som möjligt.`,
@@ -48450,7 +48452,7 @@ Alternativet $\\dfrac{6(3x - 4)}{(3x - 4)^2}$ är rätt men oförkortat.
         },
     ],
 'ma4-2.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Om $y = f(x)\\cdot g(x)$, vilket uttryck är derivatan $y'$?`,
@@ -48495,7 +48497,7 @@ $$
 
 **Svar:** 1`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Kurvan $y = \\dfrac{x}{x^2 + 1}$ har en viss lutning i punkten där $x = 2$. Beräkna $y'(2)$.`,
@@ -48532,7 +48534,7 @@ $$
 
 **Svar:** $\\dfrac{1 - \\ln x}{x^2}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Kurvan $y = x\\,e^{x}$ har en horisontell tangent i exakt en punkt. Bestäm punktens koordinater.`,
@@ -48565,7 +48567,7 @@ $$
         },
     ],
 'ma4-2.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Du har definierat en funktion $f$ i Geogebra. Vilket kommando ger derivatans värde i punkten $x = 3$?`,
@@ -48606,7 +48608,7 @@ $$
 
 **Svar:** 6`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `För en dammnivå $N(t)$ (i meter, $t$ i månader) ger Geogebra $N'(4) \\approx -1{,}7$. Hur tolkas värdet?`,
@@ -48633,7 +48635,7 @@ $$
 
 **Svar:** $x = 3$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Funktionen $f(x) = x\\,e^{-x}$ har en maximipunkt. Löser du $f'(x) = 0$ för hand — vilket $x$-värde får du?`,
@@ -48662,7 +48664,7 @@ Fällan är att stanna vid "$e^{-x} \\neq 0$" och tro att ekvationen saknar lös
         },
     ],
 'ma4-2.9': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En deriverbar funktion har $f'(a) = 0$ och $f''(a) > 0$. Vilken typ av punkt är $x = a$?`,
@@ -48705,7 +48707,7 @@ $$
 
 **Svar:** $x = 15\\ \\mathrm{m}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm det lokala minimivärdet för funktionen $f(x) = x^3 - 12x$.`,
@@ -48738,7 +48740,7 @@ Det största av dessa är $0$. Fällan är att $x = 2$ ger en *minimi*punkt, så
 
 **Svar:** Det största värdet är $0$ (vid $x = 0$).`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Talet 12 ska delas i två positiva tal $x$ och $12 - x$ så att produkten $P = x^2(12 - x)$ blir så stor som möjligt. Bestäm det största värdet av produkten.`,
@@ -48771,7 +48773,7 @@ Alternativet $216$ är fällan att dela lika ($x = 6$ ger $6^2\\cdot 6 = 216$), 
         },
     ],
 'ma4-2.10': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `I ett extremvärdesproblem ritar man upp grafen till funktionen som ska optimeras. Vad läser man sedan av med verktyget för extrempunkter?`,
@@ -48810,7 +48812,7 @@ $$
 
 **Svar:** ca 17,4 mg/liter`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `För samma läkemedel som ovan vill man veta när koncentrationen ökar som snabbast. Man deriverar $K(t)$ och GeoGebra ger derivatans maximipunkt som $A = (0{,}62;\\ 3{,}83)$. Ange den maximala ökningstakten avrundad till en decimal (mg/liter per timme).`,
@@ -48837,7 +48839,7 @@ $$
 
 **Svar:** $x = 2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Modellen $K(t) = 5t^{1{,}4}\\cdot e^{-0{,}25t} + 1{,}5\\cos(0{,}8t) + 3$ gäller endast för $t \\geq 0$. När den snabbaste ökningstakten söks studeras derivatans graf $K'(t)$, som svänger och har flera lokala maxima. Hjälpmedlet visar en extrempunkt även vid ett litet negativt $t$-värde. Varför ska man ändå välja maximipunkten vid $t = 0{,}62$?`,
@@ -48856,7 +48858,7 @@ Fällan i alternativ 4 är att blanda ihop de två frågorna: funktionens $K(t)$
         },
     ],
 'ma4-2.11': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `I en teckentabell växlar derivatan tecken från $-$ till $+$ vid $x = 2$. Vilken karaktär har punkten där $x = 2$?`,
@@ -48901,7 +48903,7 @@ $$
 
 **Svar:** 0`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Funktionen $f(x) = (x - 1)^2 e^x$ har en lokal maximipunkt vid $x = -1$. Beräkna maximipunktens $y$-koordinat med två decimaler.`,
@@ -48928,7 +48930,7 @@ $$
 
 **Svar:** En terrasspunkt i $x = 0$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Funktionen $f(x) = (x - 1)^2 e^x$ studeras i det slutna intervallet $-2 \\le x \\le 2$. Den har en lokal maximipunkt i $(-1;\\ 1{,}47)$. Bestäm funktionens **största värde** i intervallet.`,
@@ -48956,7 +48958,7 @@ Det största av dessa värden är $f(2) \\approx 7{,}39$. Alternativet $1{,}47$ 
         },
     ],
 'ma4-2.12': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Var har funktionen $f(x) = \\dfrac{3}{x - 5}$ sin vertikala asymptot?`,
@@ -48999,7 +49001,7 @@ $$
 
 **Svar:** $y = 5$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm den horisontella asymptoten till $f(x) = \\dfrac{2x + 1}{x - 4}$.`,
@@ -49040,7 +49042,7 @@ Funktionen har alltså två vertikala asymptoter.
 
 **Svar:** $x = 3$ och $x = -3$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Bestäm den vertikala asymptoten till $f(x) = \\dfrac{x^2 - 4}{x - 2}$.`,
@@ -49069,7 +49071,7 @@ Funktionen är alltså den räta linjen $y = x + 2$ (med ett hål i punkten $x =
         },
     ],
 'ma4-2.13': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `När har en rationell funktion en sned asymptot?`,
@@ -49112,7 +49114,7 @@ Funktionen är alltså den räta linjen $y = x + 2$ (med ett hål i punkten $x =
 
 **Svar:** $\\dfrac{2}{x-5}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm den sneda asymptoten till $y = \\dfrac{2x^2 - 4x + 3}{x}$.`,
@@ -49167,7 +49169,7 @@ Resttermen $\\dfrac{3}{x-1} \\to 0$ då $x \\to \\pm\\infty$, så den sneda asym
 
 **Svar:** $y = x - 2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Kurvan $y = \\dfrac{x^2 + bx + 7}{x + 1}$ har den sneda asymptoten $y = x + 4$. Bestäm konstanten $b$.`,
@@ -49210,7 +49212,7 @@ Resten blir då $8 - b = 3 \\neq 0$, så asymptoten är genuint sned. Talet $7$ 
         },
     ],
 'ma4-2.14': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken lodrät (vertikal) asymptot har funktionen $f(x) = \\dfrac{x^2 + 1}{x}$?`,
@@ -49257,7 +49259,7 @@ $$
 
 **Svar:** 2,5`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Bestäm den sneda asymptoten till $g(x) = \\dfrac{2x^2 + 1}{x}$.`,
@@ -49294,7 +49296,7 @@ Med $f(-1) = \\dfrac{(-1)^2 + 1}{-1} = -2$ ligger maximipunkten i $(-1,\\ -2)$.
 
 **Svar:** En maximipunkt`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Funktionen $f(x) = \\dfrac{x^2 + k}{x}$ (med $k > 0$) har en extrempunkt då $x = 3$. Bestäm konstanten $k$.`,
@@ -49321,7 +49323,7 @@ $$
         },
     ],
 'ma4-3.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken är en primitiv funktion till $f(x) = \\cos x$?`,
@@ -49366,7 +49368,7 @@ $$
 
 **Svar:** 4`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ange samtliga primitiva funktioner till $f(x) = \\dfrac{2}{x} + \\sin x$.`,
@@ -49409,7 +49411,7 @@ $$
 
 **Svar:** $F(x) = \\dfrac{x^2}{2} + 3x + C$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En partikel rör sig så att accelerationen är $a(t) = 6t$. Vid tiden $t = 0$ är hastigheten $v(0) = 4$ och sträckan $s(0) = 1$. Bestäm $s(2)$.`,
@@ -49440,7 +49442,7 @@ $$
         },
     ],
 'ma4-3.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vad motsvarar $\\displaystyle\\int_a^b f(x)\\,dx$ grafiskt när $f(x) > 0$ i hela intervallet?`,
@@ -49479,7 +49481,7 @@ $$
 
 **Svar:** $9$ a.e.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna $\\displaystyle\\int_0^{\\pi} \\sin x\\,dx$.`,
@@ -49508,7 +49510,7 @@ $$
 
 **Svar:** $\\dfrac{16}{3} \\approx 5{,}33$ a.e.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Kurvan $y = x^3 - x$ avgränsar tillsammans med $x$-axeln ett område mellan $x = -1$ och $x = 1$. Beräkna områdets totala area.`,
@@ -49533,7 +49535,7 @@ $$
         },
     ],
 'ma4-3.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilket uttryck är lika med $\\int_a^b 3f(x)\\,dx$?`,
@@ -49576,7 +49578,7 @@ $$
 
 **Svar:** 7`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna $\\int_1^2 \\bigl(6x^2 - 2\\bigr)\\,dx$ genom att dela integralen ledvis.`,
@@ -49621,7 +49623,7 @@ $$
 
 **Svar:** $-4\\ln 2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Det gäller att $\\int_2^6 f(x)\\,dx = 20$, $\\int_2^4 f(x)\\,dx = 7$ och $\\int_4^6 g(x)\\,dx = 3$. Bestäm $\\int_4^6 \\bigl(f(x) - 2g(x)\\bigr)\\,dx$.`,
@@ -49650,7 +49652,7 @@ Fällan $19$ fås om man adderar i stället för att subtrahera $2g$; $10$ om ma
         },
     ],
 'ma4-3.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilket uttryck ger arean mellan två kurvor där $f(x)$ ligger ovanför $g(x)$ i intervallet $a \\le x \\le b$?`,
@@ -49699,7 +49701,7 @@ $$
 
 **Svar:** $A = 36$ a.e.`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna arean av området som begränsas av linjen $y = x + 2$ och parabeln $y = x^2$.`,
@@ -49740,7 +49742,7 @@ $$
 
 **Svar:** $\\dfrac{4}{3}$ a.e.`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Beräkna den totala arean av området som begränsas av kurvan $y = x^3$ och linjen $y = x$.`,
@@ -49765,7 +49767,7 @@ Alternativet $0$ är den vanliga fällan.
         },
     ],
 'ma4-3.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En graf visar en hastighet på $y$-axeln (enhet m/s) och tiden på $x$-axeln (enhet s). Vilken storhet, och i vilken enhet, ger arean under grafen?`,
@@ -49818,7 +49820,7 @@ Enheten blir $\\mathrm{W}\\cdot \\mathrm{s} = \\mathrm{J}$, alltså energi i jou
 
 **Svar:** $E = \\int_{t_1}^{t_2} P(t)\\,dt$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Effekten i en resistor ges av $P(t) = 6t^2$ (W). Hur stor energi omvandlas under de första två sekunderna?`,
@@ -49847,7 +49849,7 @@ $$
 
 **Svar:** $28\\ \\mathrm{m}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Vatten rinner in i en tank med flödet $q(t) = 6t$ (liter/minut). Vid $t = 0$ innehåller tanken redan 5 liter. Vid vilken tidpunkt innehåller tanken 32 liter?`,
@@ -49878,7 +49880,7 @@ $$
         },
     ],
 'ma4-3.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Arean under en täthetsfunktion $f(x)$ mellan $x = a$ och $x = b$ är lika med vad?`,
@@ -49929,7 +49931,7 @@ $$
 
 **Svar:** $0{,}125$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Funktionen $f(x) = k\\cdot x$ är definierad i intervallet $0 \\leq x \\leq 5$. Bestäm konstanten $k$ så att $f(x)$ är en täthetsfunktion.`,
@@ -49958,7 +49960,7 @@ $$
 
 **Svar:** $0{,}4$ (det vill säga $40\\ \\%$)`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Funktionen $f(t) = k\\cdot e^{-0{,}0005t}$ är definierad för $t \\geq 0$. Bestäm konstanten $k$ så att $f(t)$ blir en täthetsfunktion.`,
@@ -49991,7 +49993,7 @@ Alternativet $2000$ är vad man får om man glömmer att invertera på slutet.
         },
     ],
 'ma4-3.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En kurva $y = f(x)$ roterar runt $x$-axeln i intervallet $a \\leq x \\leq b$. Vilken formel ger rotationskroppens volym?`,
@@ -50036,7 +50038,7 @@ $$
 
 **Svar:** $k = 2$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Kurvan $y = x^2 - 4x$ och $x$-axeln begränsar ett område som roterar runt $x$-axeln. Vilka integrationsgränser ska användas?`,
@@ -50077,7 +50079,7 @@ Kontroll med konvolymen $\\dfrac{\\pi r^2 h}{3} = \\dfrac{\\pi\\cdot 2^2\\cdot 2
 
 **Svar:** $\\dfrac{8\\pi}{3}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Området mellan kurvan $y = \\sqrt{x}$ och $x$-axeln, från $x = 0$ till $x = b$, roterar runt $x$-axeln. För vilket värde på $b$ blir rotationskroppens volym exakt $8\\pi$?`,
@@ -50106,7 +50108,7 @@ $$
         },
     ],
 'ma4-3.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken formel ger volymen då kurvan $y = f(x)$ roterar kring $y$-axeln i intervallet $a \\leq y \\leq b$?`,
@@ -50151,7 +50153,7 @@ $$
 
 **Svar:** $12\\pi\\ \\text{v.e.} \\approx 37{,}7\\ \\text{v.e.}$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Kurvan $y = x^2$ roterar kring $y$-axeln i intervallet $0 \\leq y \\leq 4$. Bestäm volymen exakt.`,
@@ -50188,7 +50190,7 @@ $$
 
 **Svar:** $\\dfrac{\\pi}{5}$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Området i första kvadranten som begränsas av kurvorna $y = x^2$ och $y = x$ roterar kring $y$-axeln. Beräkna volymen exakt.`,
@@ -50215,7 +50217,7 @@ $$
         },
     ],
 'ma4-4.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilket värde har $i^2$?`,
@@ -50264,7 +50266,7 @@ $$
 
 **Svar:** $24$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $x^2 = -64$.`,
@@ -50306,7 +50308,7 @@ $$
 
 **Svar:** $x_1 = -9 - 7i$ och $x_2 = -9 + 7i$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Lös ekvationen $x^2 + 6x + 34 = 0$.`,
@@ -50337,7 +50339,7 @@ $$
         },
     ],
 'ma4-4.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna $(3 + 5i) + (2 - 8i)$.`,
@@ -50392,7 +50394,7 @@ $$
 
 **Svar:** $7 + i$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Skriv $\\dfrac{4 + 2i}{1 - i}$ på formen $a + bi$.`,
@@ -50435,7 +50437,7 @@ $$
 
 **Svar:** $z = 2 + 4i$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `För vilket reellt tal $a$ blir $\\dfrac{a + i}{2 - i}$ ett reellt tal?`,
@@ -50464,7 +50466,7 @@ $$
         },
     ],
 'ma4-4.3': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `En andragradsekvation med reella koefficienter har en negativ diskriminant. Vad gäller för rötterna?`,
@@ -50511,7 +50513,7 @@ Rötterna är alltså $\\pm 4i$, så $b = 4$.
 
 **Svar:** $b = 4$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $z^2 - 4iz - 5 = 0$ (observera att koefficienterna är komplexa).`,
@@ -50549,7 +50551,7 @@ Alltså $a = 10$.
 
 **Svar:** $a = 10$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En andragradsekvation $x^2 + px + q = 0$ med reella koefficienter har roten $2 + 5i$. Bestäm $p$ och $q$.`,
@@ -50578,7 +50580,7 @@ alltså $x^2 - 4x + 29 = 0$. Jämförelse med $x^2 + px + q = 0$ ger $p = -4$ oc
         },
     ],
 'ma4-4.4': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Polynomet $p(x)$ har nollstället $x = 3$. Vilken faktor måste då $p(x)$ ha enligt faktorsatsen?`,
@@ -50625,7 +50627,7 @@ Den största av dessa är $x = 3$.
 
 **Svar:** $x = 3$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Lös ekvationen $x^3 - 7x^2 + 10x = 0$ och ange den största roten.`,
@@ -50660,7 +50662,7 @@ vilket ger $x = -1$ och $x = -5$.
 
 **Svar:** $x = -1$ och $x = -5$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Ekvationen $x^3 - x^2 + x - 1 = 0$ har den reella roten $x = 1$. Bestäm ekvationens övriga (komplexa) rötter.`,
@@ -50699,7 +50701,7 @@ De icke-reella rötterna bildar ett konjugerat par.
         },
     ],
 'ma4-4.5': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilket komplext tal motsvarar punkten med realdel $3$ och imaginärdel $-2$ i det komplexa talplanet?`,
@@ -50746,7 +50748,7 @@ $$
 
 **Svar:** På Im-axeln, $4$ steg ner`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Låt $z = 3 + 2i$ och $w = -2 - 4i$. Beräkna $z + w$.`,
@@ -50783,7 +50785,7 @@ $$
 
 **Svar:** $z - w = 5 + 6i$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Två komplexa tal $z$ och $w$ uppfyller $z + w = 1 + i$ och $z - w = 5 + 3i$. Bestäm $z$.`,
@@ -50812,7 +50814,7 @@ Alternativet $6 + 4i$ är $2z$ innan man delat med $2$, och $-2 - i$ är $w$ (f�
         },
     ],
 'ma4-4.6': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna absolutbeloppet $|z|$ för $z = 3 + 4i$.`,
@@ -50855,7 +50857,7 @@ $$
 
 **Svar:** 2`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ange $z = 2(\\cos 120^\\circ + i\\sin 120^\\circ)$ på formen $a + bi$.`,
@@ -50902,7 +50904,7 @@ $$
 
 **Svar:** $135^\\circ$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Talet $z$ ligger på cirkeln $|z + (-3 - 2i)| = 2$. Vilket är det minsta möjliga värdet av $|z|$?`,
@@ -50937,7 +50939,7 @@ Alternativet $\\sqrt{13} + 2$ är i stället det **största** värdet av $|z|$.
         },
     ],
 'ma4-4.7': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Beräkna produkten $z\\cdot w$ i polär form, där $z = 2(\\cos 20^\\circ + i\\sin 20^\\circ)$ och $w = 3(\\cos 50^\\circ + i\\sin 50^\\circ)$.`,
@@ -50982,7 +50984,7 @@ $$
 
 **Svar:** 4`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna $z_1\\cdot z_2$ och skriv svaret med ett argument mellan $0^\\circ$ och $360^\\circ$, där $z_1 = 5(\\cos 300^\\circ + i\\sin 300^\\circ)$ och $z_2 = 4(\\cos 100^\\circ + i\\sin 100^\\circ)$.`,
@@ -51027,7 +51029,7 @@ Geometriskt är $2 + 5i$ visaren för $5 - 2i$ vriden $90^\\circ$ moturs.
 
 **Svar:** $2 + 5i$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Multiplikation med ett komplext tal $w$ vrider varje visare $60^\\circ$ moturs och gör den tre gånger så lång. Bestäm $w$ skrivet på formen $a + bi$.`,
@@ -51056,7 +51058,7 @@ Alternativet $\\dfrac{1}{2} + \\dfrac{\\sqrt{3}}{2}i$ är $w$ utan skalningen me
         },
     ],
 'ma4-4.8': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Enligt de Moivres formel är $\\bigl(r(\\cos v + i\\sin v)\\bigr)^n$ lika med vilket uttryck?`,
@@ -51095,7 +51097,7 @@ $$
 
 **Svar:** $90^\\circ$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Beräkna $z^3$ för $z = 2(\\cos 30^\\circ + i\\sin 30^\\circ)$ och ange svaret på formen $a + bi$.`,
@@ -51140,7 +51142,7 @@ Fällan är att välja $-1$, som i stället svarar mot argumentet $180^\\circ$.
 
 **Svar:** $1$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Talet $z = 1 + i$ ska upphöjas till $z^8$. Skriv först $z$ i polär form och använd sedan de Moivres formel. Vad blir $z^8$?`,
@@ -51171,7 +51173,7 @@ Här är $(\\sqrt{2})^8 = 2^4 = 16$ och $8\\cdot 45^\\circ = 360^\\circ$, som pe
         },
     ],
 'ma4-4.9': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Hur många lösningar har ekvationen $z^6 = w$, där $n = 6$ och $w \\neq 0$?`,
@@ -51216,7 +51218,7 @@ $$
 
 **Svar:** $90^\\circ$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Ekvationen $z^3 = 8$ löses i polär form. Vilka argument $v$ får de tre lösningarna?`,
@@ -51249,7 +51251,7 @@ $$
 
 **Svar:** $v = 30^\\circ$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `En av lösningarna till en ekvation $z^3 = w$ är $z_1 = 2(\\cos 20^\\circ + i\\sin 20^\\circ)$. Bestäm de två övriga lösningarna i polär form.`,
@@ -51274,7 +51276,7 @@ Alternativet med radien $6$ är fällan: man kubar $r$ i stället för att behå
         },
     ],
 'ma4-4.10': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilket samband är **Eulers formel**?`,
@@ -51319,7 +51321,7 @@ $$
 
 **Svar:** $z = 3i$`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Skriv $z = 2e^{i\\frac{\\pi}{3}}$ på formen $a + bi$.`,
@@ -51356,7 +51358,7 @@ $$
 
 **Svar:** $z = -e^2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Bestäm en lösning till ekvationen $e^z = 2i$.`,
@@ -51390,7 +51392,7 @@ $$
     ],
     // ── Matematik specialisering — kapitel 4 Vektorer ──────────────────
     'maspec-4.1': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `Vilken av följande storheter är vektoriell?`,
@@ -51433,7 +51435,7 @@ riktad åt samma håll som $\\vec{v}$.
 
 **Svar:** 12 rutor åt vänster och 6 rutor nedåt`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Två krafter verkar på en kropp och är vinkelräta mot varandra. Den ena har storleken $5{,}0\\ \\mathrm{N}$ och den andra $12\\ \\mathrm{N}$. Bestäm resultantens storlek.`,
@@ -51470,7 +51472,7 @@ Läggs $-\\vec{v}$ i spetsen på $\\vec{u}$ går vi sammanlagt $4 + 2 = 6$ rutor
 
 **Svar:** 6 rutor åt höger och 2 rutor nedåt`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Vektorerna $\\vec{u}$ och $\\vec{v}$ har längderna $|\\vec{u}| = 5$ och $|\\vec{v}| = 7$. När de ritas från samma punkt är vinkeln mellan dem $60^\\circ$. Bestäm längderna av $\\vec{u} + \\vec{v}$ och $\\vec{u} - \\vec{v}$.`,
@@ -51511,7 +51513,7 @@ Rimlighet: summan ska vara kortare än $5 + 7 = 12$ (vektorerna drar inte åt ex
         },
     ],
     'maspec-4.2': [
-        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
             question: `I en ON-bas gäller $\\vec{w} = 3\\vec{e}_x - 2\\vec{e}_y$. Vilka koordinater har $\\vec{w}$?`,
@@ -51558,7 +51560,7 @@ Tecknet på $-8$ spelar ingen roll eftersom talet kvadreras.
 
 **Svar:** 10`,
         },
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
             question: `Punkterna $A = (2,\\ -3)$ och $B = (-1,\\ 5)$ är givna. Bestäm koordinaterna för $\\overrightarrow{AB}$ och beräkna $|\\overrightarrow{AB}|$.`,
@@ -51609,7 +51611,7 @@ Kontroll: $(4,\\ 1) + 2(1,\\ 1) = (6,\\ 3) = 3 \\cdot (2,\\ 1)$.
 
 **Svar:** $t = 2$`,
         },
-        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
             question: `Vektorerna $\\vec{u} = (2,\\ -1)$, $\\vec{v} = (1,\\ 3)$ och $\\vec{w} = (8,\\ 3)$ är givna. Bestäm talen $s$ och $t$ så att $s\\vec{u} + t\\vec{v} = \\vec{w}$.`,

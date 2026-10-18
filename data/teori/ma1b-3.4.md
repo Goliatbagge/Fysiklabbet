@@ -69,12 +69,16 @@ räcker till mindre, eftersom samma varor kostar mer.
 | 1990 | 207,8 |
 | 2000 | 260,7 |
 | 2010 | 303,5 |
-| 2020 | 337,0 |
-| 2023 | 391,3 |
+| 2020 | 335,9 |
+| 2023 | 403,7 |
 
-Tabellen läses så här: år 2023 var den allmänna prisnivån 291 % högre än
-år 1980 — det som kostade 100 kr år 1980 kostade i genomsnitt drygt
-391 kr år 2023.
+Källa: SCB, Statistikdatabasen, tabellen "Konsumentprisindex (KPI)
+fastställda årsmedeltal, totalt, 1980=100". Värdena är avrundade till en
+decimal.
+
+Tabellen läses så här: år 2023 var den allmänna prisnivån cirka 304 %
+högre än år 1980. Det som kostade 100 kr år 1980 kostade alltså i
+genomsnitt knappt 404 kr år 2023.
 
 Med KPI kan vi räkna om ett belopp från ett års penningvärde till ett
 annat. Kvoten mellan de två årens indextal är förändringsfaktorn mellan
@@ -89,7 +93,7 @@ $$
 
 ::: exempel "Exempel 2 — Räkna om med KPI"
 **En anställd hade månadslönen 21 500 kr år 2010. Vad motsvarar den
-lönen i 2023 års penningvärde? KPI var 303,5 år 2010 och 391,3 år
+lönen i 2023 års penningvärde? KPI var 303,5 år 2010 och 403,7 år
 2023.**
 
 ::: handskrift
@@ -100,18 +104,18 @@ typ: kpiomrakning
 Förändringsfaktorn mellan åren är kvoten mellan indextalen:
 
 $$
-\frac{391{,}3}{303{,}5} = 1{,}2892\ldots
+\frac{403{,}7}{303{,}5} = 1{,}3301\ldots
 $$
 
-Prisnivån var alltså cirka 29 % högre år 2023 än år 2010. Lönen räknas
+Prisnivån var alltså cirka 33 % högre år 2023 än år 2010. Lönen räknas
 om med samma faktor:
 
 $$
-21\,500 \cdot \frac{391{,}3}{303{,}5} = 27\,719{,}7\ldots\ \mathrm{kr}
-\approx 27\,700\ \mathrm{kr}
+21\,500 \cdot \frac{403{,}7}{303{,}5} = 28\,598{,}1\ldots\ \mathrm{kr}
+\approx 28\,600\ \mathrm{kr}
 $$
 
-**Svar:** Ungefär 27 700 kr i månaden.
+**Svar:** Ungefär 28 600 kr i månaden.
 :::
 :::
 

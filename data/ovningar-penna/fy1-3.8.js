@@ -690,7 +690,7 @@
 
   /* ---- Uppgift 6: lådan i två olika sneda rep, 60° och 30° ----
    * Ekvationssystemet ur jämvikt i sidled (1) och lodled (2), som i
-   * textlösningen. F_2 räknas fram först och sätts sedan in i F_1. */
+   * textlösningen. F_S2 räknas fram först och sätts sedan in i F_S1. */
   reg(6, function (cfg, F) {
     var T = physTools(F), padL = T.padL;
     var adv = 1.7 * F, bw = 292;
@@ -715,7 +715,7 @@
       T.lbl('m=10 kg', K[0] + 34, K[1] + 46, BLUE);
     });
 
-    /* kraftfiguren: 1,2 px/N → F_G 117,8, F_1 102,0, F_2 58,9 px */
+    /* kraftfiguren: 1,2 px/N → F_G 117,8, F_S1 102,0, F_S2 58,9 px */
     var P = [560, 330], k = 1.2;
     var T1 = snett(P, 60, 85.04 * k, -1), T2 = snett(P, 30, 49.1 * k, 1);
     var S = [P[0], P[1] - 98.2 * k];
@@ -741,10 +741,10 @@
     T.dash(T2, S);
     T.pause(150);
     T.arrow(P, T1, BLUE);
-    T.lbl('F_1', T1[0] - 34, T1[1] + 4, BLUE);
+    T.lbl('F_S_1', T1[0] - 46, T1[1] + 4, BLUE);
     T.pause(150);
     T.arrow(P, T2, BLUE);
-    T.lbl('F_2', T2[0] + 8, T2[1] + 10, BLUE);
+    T.lbl('F_S_2', T2[0] + 8, T2[1] + 10, BLUE);
     T.stepEnd();
 
     /* ---- ekvationssystemet ---- */
@@ -759,7 +759,7 @@
           padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
-    T.str('F_1·cos 60°=F_2·cos 30°', padL, y);
+    T.str('F_S_1·cos 60°=F_S_2·cos 30°', padL, y);
     T.str('(1)', 620, y, null, 0.62);
     T.stepEnd();
 
@@ -774,8 +774,8 @@
     T.pause(300);
     y += 2.1 * F;
     var y2 = y;
-    var x2a = T.str('F_1', padL, y);
-    var x2b = T.str('·sin 60°+F_2·sin 30°=', x2a, y);
+    var x2a = T.str('F_S_1', padL, y);
+    var x2b = T.str('·sin 60°+F_S_2·sin 30°=', x2a, y);
     var x2c = T.str('F_G', x2b, y);
     T.str('(2)', 620, y, null, 0.62);
     T.stepEnd();
@@ -792,30 +792,30 @@
 
     y += adv + 1.6 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
-      [['Ur (1) löser jag ut F_1 genom']],
+      [['Ur (1) löser jag ut F_S_1 genom']],
       [['att dela båda led med cos 60°.']]
     ]));
-    T.str('Löser ut F_1 ur (1)', padL, y, null, 0.62);
+    T.str('Löser ut F_S_1 ur (1)', padL, y, null, 0.62);
     T.pause(300);
     y += 2.5 * F;
     var y1 = y;
-    var xr = T.fracH('cos 30°', 'cos 60°', T.str('F_1=F_2·', padL, y), y);
+    var xr = T.fracH('cos 30°', 'cos 60°', T.str('F_S_1=F_S_2·', padL, y), y);
     var x1a = T.str('=', xr + 0.1 * F, y);
     var x1m = T.str('1,732...·', x1a, y);
-    var x1b = T.str('F_2', x1m, y);
+    var x1b = T.str('F_S_2', x1m, y);
     T.stepEnd();
 
-    /* insättning i (2): F_1 och F_G ersätts */
+    /* insättning i (2): F_S1 och F_G ersätts */
     y += adv + 2.4 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
-      [['Nu sätter jag in F_1 och F_G i (2).']],
-      [['Då finns bara F_2 kvar.']]
+      [['Nu sätter jag in F_S_1 och F_G i (2).']],
+      [['Då finns bara F_S_2 kvar.']]
     ]));
     var ringar = substRings(T.acts, [
       [x1a, x1b, y1, F], [padL, x2a, y2, F],
       [xg0, xg1, yG, F], [x2b, x2c, y2, F]
     ]);
-    T.str('1,732...·F_2·sin 60°+F_2·sin 30°=98,2', padL, y, null, 0.92);
+    T.str('1,732...·F_S_2·sin 60°+F_S_2·sin 30°=98,2', padL, y, null, 0.92);
     fadeRings(T.acts, ringar);
     T.stepEnd();
 
@@ -825,18 +825,18 @@
       [['precis 1,5, och sin 30° är 0,5.']]
     ]));
     var yS = y;
-    var xs1 = T.str('1,5·F_2', padL, y);
+    var xs1 = T.str('1,5·F_S_2', padL, y);
     var xs2 = T.str('+', xs1, y);
-    var xs3 = T.str('0,5·F_2', xs2, y);
+    var xs3 = T.str('0,5·F_S_2', xs2, y);
     T.str('=98,2', xs3, y);
     T.stepEnd();
 
     y += adv + 1.2 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
-      [['Slår ihop termerna med F_2.']]
+      [['Slår ihop termerna med F_S_2.']]
     ]));
     V.mkSamla(T)(padL, y, [
-      { ringar: [[padL, xs1, yS], [xs2, xs3, yS]], skriv: '2,0·F_2' },
+      { ringar: [[padL, xs1, yS], [xs2, xs3, yS]], skriv: '2,0·F_S_2' },
       { skriv: '=98,2' }
     ]);
     T.stepEnd();
@@ -844,29 +844,29 @@
     y += adv + 2.2 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
       [['Delar båda led med 2,0, så att']],
-      [['F_2 blir ensamt.']]
+      [['F_S_2 blir ensamt.']]
     ]));
-    var xd = fracB(T, F, '2,0·F_2', '2,0', padL, y);
+    var xd = fracB(T, F, '2,0·F_S_2', '2,0', padL, y);
     fracB(T, F, '98,2', '2,0', T.str('=', xd + 0.1 * F, y) + 0.1 * F, y);
     T.stepEnd();
 
     y += adv + 1.9 * F;
     var y9 = y;
-    var x9a = padL + T.adv('F_2=');
-    var x9b = T.str('F_2=49,1 N', padL, y);
+    var x9a = padL + T.adv('F_S_2=');
+    var x9b = T.str('F_S_2=49,1 N', padL, y);
     T.stepEnd();
 
-    /* ---- a) F_1 ---- */
+    /* ---- a) F_S1 ---- */
     y += adv + 1.2 * F;
     T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
-      [['Nu sätter jag in F_2 i uttrycket']],
-      [['för F_1.']]
+      [['Nu sätter jag in F_S_2 i uttrycket']],
+      [['för F_S_1.']]
     ]));
     T.str('a) Spännkraften i rep 1', padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
     ringar = substRings(T.acts, [[x9a, x9b, y9, F], [x1m, x1b, y1, F]]);
-    var xIns = T.str('F_1=1,732...·49,1=85,043... N', padL, y);
+    var xIns = T.str('F_S_1=1,732...·49,1=85,043... N', padL, y);
     fadeRings(T.acts, ringar);
     T.stepEnd();
 
@@ -886,17 +886,17 @@
     T.underline(T.str('Svar: 85 N', padL, y), y);
     T.stepEnd();
 
-    /* ---- b) F_2 ---- */
+    /* ---- b) F_S2 ---- */
     y += adv + 2.0 * F;
     T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
-      [['F_2 har jag redan räknat ut.']],
+      [['F_S_2 har jag redan räknat ut.']],
       [['Det återstår att avrunda till']],
       [['två värdesiffror.']]
     ]));
     T.str('b) Spännkraften i rep 2', padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
-    T.str('F_2=49,1 N≈49 N', padL, y);
+    T.str('F_S_2=49,1 N≈49 N', padL, y);
     T.stepEnd();
 
     y += adv + 1.2 * F;

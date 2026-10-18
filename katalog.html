@@ -1050,8 +1050,8 @@
                 const el = kids[i];
                 if (el.classList && el.classList.contains('lab-block-title')) continue;
                 if (el.tagName === 'P') {
-                    if (/^där/i.test(el.textContent.trim())) return true;
-                    if (/där$/i.test(el.textContent.trim())) return true;
+                    if (/^där\b/i.test(el.textContent.trim())) return true;
+                    if (/\bdär$/i.test(el.textContent.trim())) return true;
                 }
                 break;
             }
@@ -1108,7 +1108,7 @@
                     el.firstElementChild.tagName === 'STRONG' &&
                     el.textContent.trim() === el.firstElementChild.textContent.trim());
                 const darP = Array.from(box.children).filter(el =>
-                    el.tagName === 'P' && /^där/i.test(el.textContent.trim()) &&
+                    el.tagName === 'P' && /^där\b/i.test(el.textContent.trim()) &&
                     el.textContent.trim().toLowerCase() !== 'där');
                 if (darP.length > 1) return;
                 // Flera rubriker är ett samlingsblock bara om formelgrupperna

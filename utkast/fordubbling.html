@@ -190,6 +190,16 @@ details.hjalp > div { margin-top: 8px; padding: 12px 16px; background: var(--pan
 @media (max-width: 900px) { .start-dekor { display: none; } }
 
 /* ---------- Sammanfattning ---------- */
+.regelgraf { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: 14px 16px; max-width: 760px; margin: 0 0 26px; }
+.regelgraf svg { width: 100%; height: auto; display: block; }
+.regelgraf-reglage { display: flex; align-items: center; gap: 12px; margin-top: 8px; font-size: 15px; color: var(--soft); }
+.regelgraf-reglage input { flex: 1; accent-color: var(--blue); }
+.regelgraf-reglage output { font-weight: 600; color: var(--ink); min-width: 64px; text-align: right; font-variant-numeric: tabular-nums; }
+.regelgraf-tal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+.regelgraf-tal div { background: var(--blue-soft); border-radius: 10px; padding: 8px 12px; }
+.regelgraf-tal b { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.regelgraf-tal span { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+@media (max-width: 520px) { .regelgraf-tal { grid-template-columns: 1fr; } }
 .kort-rad { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 6px 0 28px; }
 .kort { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; box-shadow: var(--shadow); }
 .kort .rubrik { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
@@ -564,6 +574,33 @@ table.svar td input.kort-tal { width: 70px; }
       </div>
     </section>
 
+    <!-- 7b HUR BRA ÄR REGELN -->
+    <section class="skarm" data-skarm="hurbra" data-del="Regel">
+      <div class="inre">
+        <p class="delmarke">Del 4 <span>· Hur bra är regeln? · 5 min</span></p>
+        <h2>Hur bra är <em>72-regeln</em>?</h2>
+        <p class="prompt">Kurvan visar räntesats · fördubblingstid för alla räntesatser från 1 till 25&nbsp;%. Om 72-regeln stämde exakt skulle kurvan ligga på den streckade linjen. Ringarna är era egna mätningar.</p>
+        <div class="regelgraf">
+          <svg id="regel-graf" viewBox="0 0 640 300" role="img" aria-label="Diagram över räntesats gånger fördubblingstid för olika räntesatser"></svg>
+          <div class="regelgraf-reglage">
+            <label for="rg-r">Räntesats</label>
+            <input type="range" id="rg-r" min="1" max="25" step="0.5" value="6">
+            <output id="rg-r-ut" for="rg-r"></output>
+          </div>
+          <div class="regelgraf-tal" aria-live="polite">
+            <div><b>Fördubblingstid</b><span id="rg-t"></span></div>
+            <div><b>72-regeln</b><span id="rg-72"></span></div>
+            <div><b>Räntesats · tid</b><span id="rg-p"></span></div>
+          </div>
+        </div>
+        <div class="fraga">
+          <p class="q"><span class="qn">11b</span><span>Dra i reglaget. Vid vilken räntesats stämmer 72-regeln exakt? Ger regeln för lång eller för kort tid vid låga räntor, och vid höga?</span></p>
+          <textarea id="q11b" data-spara aria-label="Fråga 11b"></textarea>
+          <details class="hjalp" data-kraver="q11b"><summary>Jämför</summary><div>Kurvan skär 72 vid knappt 8&nbsp;%. Där stämmer regeln exakt. Vid lägre räntor ligger kurvan under 72, så regeln ger lite för lång tid (1&nbsp;%: 72 år, men det tar 69,7 år). Vid högre räntor ligger kurvan över 72, så regeln ger för kort tid (24&nbsp;%: 3 år, men det tar 3,2 år). När räntan går mot noll närmar sig kurvan ungefär 69,3. Därför räknar en del med 70 i stället för 72 när räntan är låg.</div></details>
+        </div>
+      </div>
+    </section>
+
     <!-- 8 EKVATIONER -->
     <section class="skarm" data-skarm="ekvationer" data-del="Ekvationer" data-bank="ja" data-forbered="10000,8,2,40,kalkyl">
       <div class="inre">
@@ -869,6 +906,7 @@ table.svar td input.kort-tal { width: 70px; }
     $('nasta').hidden = i === skarmar.length - 1;
     $('nasta-txt').textContent = s.dataset.skarm === 'start' ? 'Börja' : s.dataset.skarm === 'gissa' && !svar.last ? 'Lås gissningarna' : 'Nästa';
     if (s.dataset.skarm === 'monster') ritaMonster();
+    if (s.dataset.skarm === 'hurbra') ritaRegelGraf();
     if (s.dataset.skarm === 'klart') ritaResultat();
     if (s.dataset.skarm === 'gissa') visaLasText();
     ritaSpar();
@@ -1091,6 +1129,56 @@ table.svar td input.kort-tal { width: 70px; }
       return '<div class="kort"><div class="rubrik">' + k.r + ' % · ' + fmtEn(k.t) + ' år</div><div class="varde">' + fmtEn(k.r * k.t) + '</div><p><b>räntesats · tid</b></p></div>';
     }).join('') : '<div class="kort"><p>Fyll i tabellerna i del 2 och 3 först, så samlas resultaten här.</p></div>';
   }
+
+  /* ---------- Hur bra är 72-regeln? ---------- */
+  // Kurvan h(r) = r · ln 2 / ln(1 + r/100), alltså räntesats · exakt
+  // fördubblingstid. Den skär 72 vid knappt 8 % och går mot 100 · ln 2 ≈ 69,3
+  // när r går mot 0. Ringarna är elevernas egna värden från tabell 6, 8 och fråga 11.
+  function ritaRegelGraf() {
+    var NS = 'http://www.w3.org/2000/svg', svg = $('regel-graf');
+    var V = 48, H = 624, T = 14, B = 258, YMIN = 66, YMAX = 80, XMAX = 25;
+    function px(r) { return V + (H - V) * r / XMAX; }
+    function py(y) { return B - (B - T) * (y - YMIN) / (YMAX - YMIN); }
+    function h(r) { return r * Math.log(2) / Math.log(1 + r / 100); }
+    function el(namn, attr, text) {
+      var e = document.createElementNS(NS, namn);
+      for (var k in attr) e.setAttribute(k, attr[k]);
+      if (text != null) e.textContent = text;
+      svg.appendChild(e); return e;
+    }
+    svg.innerHTML = '';
+    for (var y = YMIN; y <= YMAX; y += 2) {
+      el('line', { x1: V, x2: H, y1: py(y), y2: py(y), stroke: 'rgba(15,22,32,.08)' });
+      el('text', { x: V - 8, y: py(y) + 4, 'text-anchor': 'end', 'font-size': 12, fill: '#69655c', 'font-family': 'JetBrains Mono, monospace' }, String(y));
+    }
+    for (var x = 0; x <= XMAX; x += 5) {
+      el('line', { x1: px(x), x2: px(x), y1: T, y2: B, stroke: 'rgba(15,22,32,.08)' });
+      el('text', { x: px(x), y: B + 18, 'text-anchor': 'middle', 'font-size': 12, fill: '#69655c', 'font-family': 'JetBrains Mono, monospace' }, String(x));
+    }
+    el('line', { x1: V, x2: H, y1: B, y2: B, stroke: 'rgba(15,22,32,.35)' });
+    el('line', { x1: V, x2: V, y1: T, y2: B, stroke: 'rgba(15,22,32,.35)' });
+    el('text', { x: H, y: B + 36, 'text-anchor': 'end', 'font-size': 13, fill: '#3f4a5c' }, 'räntesats (%)');
+    el('text', { x: V + 6, y: T + 12, 'font-size': 13, fill: '#3f4a5c' }, 'räntesats · tid');
+    el('line', { x1: V, x2: H, y1: py(72), y2: py(72), stroke: '#c8324a', 'stroke-width': 2, 'stroke-dasharray': '7 5' });
+    el('text', { x: H - 4, y: py(72) - 6, 'text-anchor': 'end', 'font-size': 13, fill: '#c8324a' }, '72');
+    var pts = [];
+    for (var r = 0.25; r <= XMAX + 1e-9; r += 0.25) pts.push(px(r).toFixed(1) + ',' + py(h(r)).toFixed(1));
+    el('polyline', { points: pts.join(' '), fill: 'none', stroke: '#1c3d6b', 'stroke-width': 3, 'stroke-linejoin': 'round' });
+    [['t6a', 4], ['t6b', 5], ['t6c', 6], ['t6d', 8], ['t6e', 9], ['t6f', 10], ['t8a', 1], ['t8b', 2], ['t8c', 3], ['q11', 24]].forEach(function (p) {
+      var t = lasTal($(p[0]).value), v = p[1] * t;
+      if (isNaN(t) || v < YMIN || v > YMAX) return;
+      el('circle', { cx: px(p[1]), cy: py(v), r: 6, fill: 'none', stroke: '#2f6b4f', 'stroke-width': 2.2 });
+    });
+    var rv = Number($('rg-r').value), hv = h(rv);
+    el('line', { x1: px(rv), x2: px(rv), y1: py(hv), y2: B, stroke: '#69655c', 'stroke-dasharray': '4 4' });
+    el('circle', { cx: px(rv), cy: py(hv), r: 7, fill: '#c8324a', stroke: '#fff', 'stroke-width': 2 });
+    var tid = exaktTid(rv, 2);
+    $('rg-r-ut').textContent = fmtNum(rv, 1) + ' %';
+    $('rg-t').textContent = fmtNum(tid, 1) + ' år';
+    $('rg-72').textContent = fmtNum(72 / rv, 1) + ' år';
+    $('rg-p').textContent = fmtNum(hv, 1);
+  }
+  $('rg-r').addEventListener('input', ritaRegelGraf);
 
   /* ---------- Resultatskärmen ---------- */
   function ritaResultat() {
@@ -1345,6 +1433,7 @@ table.svar td input.kort-tal { width: 70px; }
     rad.push('Fråga 9: ungefär ' + $('q9').value);
     rad.push('Fråga 10: Fördubblingstiden ≈ ' + $('q10').value + ' / räntesatsen');
     rad.push('Fråga 11: Räntelabbet visar ' + $('q11').value + ' år vid 24 %. ' + $('q11t').value);
+    rad.push('Fråga 11b: ' + $('q11b').value);
     rad.push('Fråga 12: ' + $('q12').value);
     tab('t13', 'Fråga 13 (ekvationer med 72-regeln)');
     tab('t13p', 'Fråga 14 (fyra och sexton gånger så stort)');

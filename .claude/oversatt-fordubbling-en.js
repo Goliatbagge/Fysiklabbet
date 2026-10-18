@@ -40,6 +40,27 @@ const PAR = [
   [R`<input id="b-r" type="number" min="0.1" max="100" step="0.1">`, R`<input id="b-r" type="text" inputmode="decimal" autocomplete="off">`],
   [R`<input id="b-m" type="number" min="1.1" max="1000" step="0.1">`, R`<input id="b-m" type="text" inputmode="decimal" autocomplete="off">`],
 
+  // ---------- hur bra är 72-regeln (körs först, före de korta paren) ----------
+  [R`<p class="delmarke">Del 4 <span>· Hur bra är regeln? · 5 min</span></p>`, R`<p class="delmarke">Part 4 <span>· How good is the rule? · 5 min</span></p>`],
+  [R`<h2>Hur bra är <em>72-regeln</em>?</h2>`, R`<h2>How good is the <em>rule of 72</em>?</h2>`],
+  [R`<p class="prompt">Kurvan visar räntesats · fördubblingstid för alla räntesatser från 1 till 25&nbsp;%. Om 72-regeln stämde exakt skulle kurvan ligga på den streckade linjen. Ringarna är era egna mätningar.</p>`,
+   R`<p class="prompt">The curve shows interest rate · doubling time for every interest rate from 1 to 25&nbsp;%. If the rule of 72 were exact, the curve would lie on the dashed line. The rings are your own measurements.</p>`],
+  [R`aria-label="Diagram över räntesats gånger fördubblingstid för olika räntesatser"`, R`aria-label="Graph of interest rate times doubling time for different interest rates"`],
+  [R`<label for="rg-r">Räntesats</label>`, R`<label for="rg-r">Interest rate</label>`],
+  [R`<div><b>Fördubblingstid</b><span id="rg-t"></span></div>`, R`<div><b>Doubling time</b><span id="rg-t"></span></div>`],
+  [R`<div><b>72-regeln</b><span id="rg-72"></span></div>`, R`<div><b>Rule of 72</b><span id="rg-72"></span></div>`],
+  [R`<div><b>Räntesats · tid</b><span id="rg-p"></span></div>`, R`<div><b>Rate · time</b><span id="rg-p"></span></div>`],
+  [R`<span>Dra i reglaget. Vid vilken räntesats stämmer 72-regeln exakt? Ger regeln för lång eller för kort tid vid låga räntor, och vid höga?</span>`,
+   R`<span>Drag the slider. At which interest rate is the rule of 72 exact? Does the rule give too long or too short a time at low rates, and at high rates?</span>`],
+  [R`aria-label="Fråga 11b"`, R`aria-label="Question 11b"`],
+  [R`data-kraver="q11b"><summary>Jämför</summary>`, R`data-kraver="q11b"><summary>Compare</summary>`],
+  [R`<div>Kurvan skär 72 vid knappt 8&nbsp;%. Där stämmer regeln exakt. Vid lägre räntor ligger kurvan under 72, så regeln ger lite för lång tid (1&nbsp;%: 72 år, men det tar 69,7 år). Vid högre räntor ligger kurvan över 72, så regeln ger för kort tid (24&nbsp;%: 3 år, men det tar 3,2 år). När räntan går mot noll närmar sig kurvan ungefär 69,3. Därför räknar en del med 70 i stället för 72 när räntan är låg.</div>`,
+   R`<div>The curve crosses 72 just below 8&nbsp;%. That is where the rule is exact. At lower rates the curve lies below 72, so the rule gives slightly too long a time (1&nbsp;%: 72 years, but it takes 69.7 years). At higher rates the curve lies above 72, so the rule gives too short a time (24&nbsp;%: 3 years, but it takes 3.2 years). As the rate approaches zero, the curve approaches about 69.3. That is why some people use 70 instead of 72 when the rate is low.</div>`],
+  [R`'räntesats (%)');`, R`'interest rate (%)');`],
+  [R`'räntesats · tid');`, R`'rate · time');`],
+  [R`$('rg-t').textContent = fmtNum(tid, 1) + ' år';`, R`$('rg-t').textContent = fmtNum(tid, 1) + ' years';`],
+  [R`$('rg-72').textContent = fmtNum(72 / rv, 1) + ' år';`, R`$('rg-72').textContent = fmtNum(72 / rv, 1) + ' years';`],
+
   // ---------- toppen ----------
   [R`title="Till genomgången 3.4 på Fysiklabbet"`, R`title="Fysiklabbet"`],
   [R`aria-label="Delar"`, R`aria-label="Parts"`],
@@ -390,6 +411,7 @@ const PAR = [
     rad.push('Fråga 9: ungefär ' + $('q9').value);
     rad.push('Fråga 10: Fördubblingstiden ≈ ' + $('q10').value + ' / räntesatsen');
     rad.push('Fråga 11: Räntelabbet visar ' + $('q11').value + ' år vid 24 %. ' + $('q11t').value);
+    rad.push('Fråga 11b: ' + $('q11b').value);
     rad.push('Fråga 12: ' + $('q12').value);
     tab('t13', 'Fråga 13 (ekvationer med 72-regeln)');
     tab('t13p', 'Fråga 14 (fyra och sexton gånger så stort)');
@@ -406,6 +428,7 @@ const PAR = [
     rad.push('Question 9: about ' + $('q9').value);
     rad.push('Question 10: Doubling time ≈ ' + $('q10').value + ' / interest rate');
     rad.push('Question 11: The Interest Lab shows ' + $('q11').value + ' years at 24 %. ' + $('q11t').value);
+    rad.push('Question 11b: ' + $('q11b').value);
     rad.push('Question 12: ' + $('q12').value);
     tab('t13', 'Question 13 (equations with the rule of 72)');
     tab('t13p', 'Question 14 (four and sixteen times as large)');

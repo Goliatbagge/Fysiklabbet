@@ -35,6 +35,8 @@ const PAR = [
   // ---------- toppen ----------
   [R`title="Till genomgången 3.4 på Fysiklabbet"`, R`title="Fysiklabbet"`],
   [R`aria-label="Delar"`, R`aria-label="Parts"`],
+  [R`href="doubling.html" hreflang="en" lang="en" title="English version" aria-label="English version">`, R`href="fordubbling.html" hreflang="sv" lang="sv" title="Svensk version" aria-label="Svensk version">`],
+  [R`<span class="txt">English</span></a>`, R`<span class="txt">Svenska</span></a>`],
   [R`aria-label="Helskärm"`, R`aria-label="Full screen"`],
   [R`<span class="txt">Helskärm</span>`, R`<span class="txt">Full screen</span>`],
 

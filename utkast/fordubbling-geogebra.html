@@ -65,7 +65,7 @@ button, textarea { font-family: inherit; font-size: inherit; color: inherit; }
 .topp { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
 .logo { color: var(--ink); text-decoration: none; font-family: var(--serif); font-size: 22px; }
 .topp nav { display: flex; gap: 14px; font-size: 14px; }
-.topp nav a { color: var(--soft); }
+.topp nav a { color: var(--soft); display: inline-flex; align-items: center; gap: 5px; }
 main { max-width: 980px; margin: 0 auto; padding: clamp(20px, 4vw, 48px) 16px 64px; }
 .delmarke { font-family: var(--mono); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
 .delmarke span { color: var(--muted); }
@@ -112,7 +112,7 @@ details li { margin-bottom: 8px; }
   <a class="logo" href="../index.html">Fysiklabbet</a>
   <nav>
     <a id="lank-ovning" href="fordubbling.html" data-t="lankOvning"></a>
-    <a id="lank-sprak" href="doubling-geogebra.html" data-t="lankSprak"></a>
+    <a id="lank-sprak" href="doubling-geogebra.html"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="8" cy="8" r="6.6"/><ellipse cx="8" cy="8" rx="2.8" ry="6.6"/><path d="M1.6 8h12.8M2.6 4.6h10.8M2.6 11.4h10.8"/></svg> <span data-t="lankSprak"></span></a>
   </nav>
 </header>
 <main>

@@ -12,12 +12,15 @@ Format per post:
 
 ## Kö
 
-- **Svävande glaskula sammanflätad med ljus i rumstemperatur** **[BREVTEASER]** (nominerad 2026-10-12) — en optiskt levitierad nanosfär vars rörelse sammanflätas med ljus utan kylning till nära absoluta nollpunkten. Ingång: strålningstryck, optisk pincett. Science, DOI 10.1126/science.aeh1375 (Marin m.fl., Florens); förtrycket finns öppet på arXiv: https://arxiv.org/abs/2602.03456 (kontrollerat 2026-10-12). En 100 nm glaskula i optisk pincett, två lasrar. OBS: kvantfysik publicerades 2026-10-09.
+- **Svävande glaskula sammanflätad med ljus i rumstemperatur** **[BREVTEASER — teasad i brevet 2026-10-18, publiceras TIDIGAST måndag 2026-10-19, senast lördag 2026-10-24]** (nominerad 2026-10-12) — en optiskt levitierad nanosfär vars rörelse sammanflätas med ljus utan kylning till nära absoluta nollpunkten. Ingång: strålningstryck, optisk pincett. Science, DOI 10.1126/science.aeh1375 (Marin m.fl., Florens); förtrycket finns öppet på arXiv: https://arxiv.org/abs/2602.03456 (kontrollerat 2026-10-12). En 100 nm glaskula i optisk pincett, två lasrar. OBS: kvantfysik publicerades 2026-10-09.
   Källa (Phys.org 2026-10-07): https://phys.org/news/2026-10-levitating-glass-sphere-entangled-room.html
   (tillagd 2026-10-08)
 
-- **Rekordintensiva attosekundpulser av hård röntgen vid European XFEL** — ~300 as, fläck 180 × 330 nm, >10^20 W/cm², förstärkt spontan emission i kopparfolie. Optica, DOI 10.1364/OPTICA.613284 (Inoue, Yan, Madsen). Optik/atomfysik. Originalet ej kontrollerat. Källa (Phys.org 2026-10-17): https://phys.org/news/2026-10-world-intensity-attosecond-hard-ray.html
-  (tillagd 2026-10-17)
+- **Rensning av magiska tillstånd minskar felen 40 gånger i första hårdvarutestet** — kvantdatorer (kvantfysik senast 2026-10-09). Originalet ej kontrollerat. Källa (Phys.org 2026-10-17): https://phys.org/news/2026-10-quantum-magic-state-cleanup-errors.html
+  (tillagd 2026-10-18)
+
+- **Ljus och ljud starkt kopplade i en optisk fiber (”en motorväg i stället för en racerbana”)** — optik/akustik, Brillouinspridning. Originalet ej kontrollerat. Källa (Phys.org 2026-10-16): https://phys.org/news/2026-10-highway-racetrack-strong-coupling-optical.html
+  (tillagd 2026-10-18)
 
 - **Infrarött ljus löser problemet med spegelbeläggningen i gravitationsvågsdetektorer** — vänta några dagar efter relativitetsteorin 2026-10-16. Originalet ej kontrollerat. Källa (Phys.org 2026-10-17): https://phys.org/news/2026-10-infrared-mirror-coating-obstacle-gravitational.html
   (tillagd 2026-10-17)

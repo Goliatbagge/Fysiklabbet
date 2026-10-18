@@ -103,6 +103,65 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-18-rontgenblixtar-pa-attosekunder",
+    date: "2026-10-18",
+    title: "Röntgenblixtar på 300 attosekunder slår rekord i intensitet",
+    deck: "Vid röntgenlasern European XFEL utanför Hamburg har forskare samlat röntgenpulser som varar omkring 300 attosekunder i en fläck så liten att ett hårstrå är flera hundra gånger bredare. Intensiteten blev omkring sju gånger högre än vad någon tidigare nått med så korta pulser av hård röntgenstrålning, och en kopparfolie fick visa att värdet stämmer.",
+    category: "Atomfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-18-rontgenblixtar-pa-attosekunder.jpg",
+    imageAlt: "Ett experimentrum fullt av utrustning: ett långt metallrör löper snett genom bilden mot en vägg täckt av kablar i rött, blått och grönt, mätinstrument och en gul robotarm.",
+    imageCredit: "Foto: Olaf Kosinsky (CC BY-SA 3.0 DE), via Wikimedia Commons",
+    tags: ["atomfysik", "röntgenstrålning", "attosekund", "frielektronlaser", "undulator", "intensitet", "effekt", "fotonenergi", "stimulerad emission", "elektronskal", "optik", "european xfel"],
+    sources: [
+      { name: "European XFEL: World-record intensity in short, energetic X-ray pulses (16 oktober 2026)", url: "https://www.xfel.eu/news_and_events/news/index_eng.html?openDirectAnchor=3103" },
+      { name: "Phys.org: World-record intensity in attosecond hard-X-ray pulses could unlock closer study of electrons in atoms and molecules (16 oktober 2026)", url: "https://phys.org/news/2026-10-world-intensity-attosecond-hard-ray.html" },
+      { name: "arXiv: förtrycket i fulltext", url: "https://arxiv.org/abs/2607.26505" }
+    ],
+    research: {
+      citation: "I. Inoue, U. Boesenberg, R. Rysov m.fl. (44 författare), ”Generation of high-fluence and high-intensity hard x-ray attosecond pulses at European XFEL”, Optica (2026)",
+      url: "https://doi.org/10.1364/OPTICA.613284"
+    },
+    larare: {
+      moment: [
+        { label: "Effekt", href: "katalog.html?id=fy1-4.5" },
+        { label: "Elektromagnetiska vågor och ljus", href: "katalog.html?id=fy2-4.1" },
+        { label: "Bohrs atommodell och energinivåer", href: "katalog.html?id=fy2-4.8" }
+      ],
+      fragor: [
+        "En puls med energin 45 mikrojoule varar 300 attosekunder. Vilken effekt motsvarar det under pulsen, och varför kan en så liten energimängd ändå göra så stor verkan?",
+        "Forskarna mätte inte pulsens längd direkt utan räknade fram den ur bredden på spektrumet. Vilket antagande krävs då, och hur skulle resultatet påverkas om antagandet inte stämmer?",
+        "Kopparfolien visade att intensiteten var tillräckligt hög genom att signalen slutade öka. Varför kan det vara ett starkare bevis än att bara räkna fram intensiteten ur energi, tid och area?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Elektronerna i en atom rör sig på attosekunder, alltså miljarddels miljarddels sekunder. Den som vill se vad de gör behöver därför en ljusblixt som är lika kort. För att blixten ska avbilda atomer behöver den dessutom ha en våglängd i samma storlek som atomerna själva, och det betyder hård röntgenstrålning. Att få båda sakerna samtidigt, och tillräckligt mycket ljus i varje blixt, är ett av de svåraste målen inom röntgenfysiken.' },
+      { type: 'p', html: 'Nu har en internationell forskargrupp vid röntgenlasern European XFEL i Schenefeld utanför Hamburg tagit ett stort kliv. De har fått fram röntgenpulser som varar omkring 300&nbsp;attosekunder och samlat dem i en fläck som bara är 180 gånger 330&nbsp;nanometer. Där blev intensiteten omkring 2&nbsp;·&nbsp;10<sup>20</sup>&nbsp;watt per kvadratcentimeter. Resultatet publiceras i tidskriften <em>Optica</em>, och försöket gjordes i april 2026.' },
+      { type: 'quote', html: 'Det här är världsrekord i intensitet och fluens för en attosekundpuls av hård röntgenstrålning.', cite: 'Ichiro Inoue, Tokyos universitet, studiens försteförfattare' },
+      { type: 'h2', text: 'Elektroner som slingrar sig fram' },
+      { type: 'p', html: 'European XFEL är en frielektronlaser. Elektroner accelereras till energin 14&nbsp;GeV, mycket nära ljusets hastighet, och skickas in i en undulator: en lång rad magneter där polerna växlar riktning. Magnetfältet tvingar elektronerna att slingra sig fram i sicksack, och varje gång de böjs av sänder de ut röntgenstrålning.' },
+      { type: 'image', src: 'nyheter/bilder/2026-10-18-rontgenblixtar-pa-attosekunder-2.jpg', alt: 'En lång, blank metallbalk står på högkant i en verkstadshall, fastspänd med gula band och träreglar. På balken sitter en gul varningsskylt för starkt magnetfält.', caption: 'En av undulatorerna till European XFEL innan den monterades i tunneln. Inuti sitter magneter vars poler växlar riktning längs hela balken.', credit: 'Foto: Dirtsc (CC BY-SA 3.0), via Wikimedia Commons' },
+      { type: 'p', html: 'Vanligtvis varar pulserna några femtosekunder, tusentals attosekunder. Här kördes acceleratorn i stället i ett läge där en mycket kort skiva av elektronklungan får en särskilt hög ström och står för nästan all strålning. Fotonerna hade energin 10&nbsp;keV, vilket motsvarar våglängden $\\lambda = \\dfrac{h \\cdot c}{E} \\approx 0{,}12\\ \\mathrm{nm}$, ungefär lika stort som en atom.' },
+      { type: 'p', html: 'Pulsens längd gick inte att klocka direkt. Forskarna mätte i stället spektrumet för varje puls och valde ut de pulser som bara hade en enda topp, 13,7&nbsp;procent av 74&nbsp;000 pulser. En kort puls måste nämligen innehålla ett visst spann av fotonenergier, och ju kortare pulsen är, desto bredare blir spannet. Spektrumet var omkring 6&nbsp;eV brett, och med antagandet att pulsen är så kort som den bredden tillåter blir längden ungefär 300&nbsp;attosekunder.' },
+      { type: 'h2', text: 'Fyra studsar mot två speglar' },
+      { type: 'p', html: 'Röntgenstrålning går inte att samla med en vanlig lins, eftersom nästan allt material släpper igenom den rakt fram. I stället används speglar som strålningen bara snuddar vid, i en mycket flack vinkel. Gruppen använde ett spegelsystem från Japan med två extremt noggrant slipade speglar, där varje puls studsar fyra gånger: två gånger mot spegeln som fokuserar i höjdled och två gånger mot den som fokuserar i sidled.' },
+      { type: 'p', html: 'I fokus hade pulserna i genomsnitt energin 45&nbsp;mikrojoule. Det låter lite, men energin levereras på bara 300&nbsp;attosekunder. Effekten under pulsen blir därför ungefär $P = \\dfrac{E}{t} = \\dfrac{45 \\cdot 10^{-6}\\ \\mathrm{J}}{300 \\cdot 10^{-18}\\ \\mathrm{s}} = 1{,}5 \\cdot 10^{11}\\ \\mathrm{W}$, alltså 150&nbsp;gigawatt. Delas effekten med fläckens area, $I = \\dfrac{P}{A}$, blir intensiteten omkring 2,5&nbsp;·&nbsp;10<sup>20</sup>&nbsp;watt per kvadratcentimeter. Både pulsen och fläcken är starkast i mitten och svagare ut mot kanterna, och när forskarna tar hänsyn till det landar toppintensiteten något lägre, på 2,1&nbsp;·&nbsp;10<sup>20</sup>&nbsp;W/cm². Det är omkring sju gånger mer än det tidigare bästa värdet för attosekundpulser av hård röntgenstrålning, som låg på 3&nbsp;·&nbsp;10<sup>19</sup>&nbsp;W/cm².' },
+      { type: 'h2', text: 'Kopparfolien som bekräftade värdet' },
+      { type: 'p', html: 'En uträknad intensitet är bara så bra som mätningarna av energi, tid och fläckstorlek bakom den. Forskarna ville därför se intensiteten verka på riktigt, och riktade pulserna mot en 20&nbsp;mikrometer tunn kopparfolie. Röntgenstrålningen slår ut elektroner ur kopparatomernas innersta skal. När en annan elektron sedan faller ner och fyller luckan skickas en ny röntgenfoton ut, med en energi som är typisk för koppar.' },
+      { type: 'p', html: 'Vanligtvis sker det åt alla håll. Men om tillräckligt många atomer får en lucka på en gång, kan en foton som passerar en sådan atom få den att sända ut en likadan foton i samma riktning. Signalen förstärks lavinartat framåt, ungefär som i en laser. Fenomenet kallas förstärkt spontan emission, och det startar först vid omkring 10<sup>19</sup>&nbsp;W/cm².' },
+      { type: 'quote', html: 'Det är nästan magiskt att se det hända. Vanlig fluorescens går åt alla håll, oavsett vilken riktning den inkommande strålen har. Men när tröskeln för förstärkt spontan emission passeras ser man ljuskäglan börja dra ihop sig i framåtriktningen.', cite: 'Anders Madsen, gruppledare vid instrumentet MID där försöket gjordes' },
+      { type: 'p', html: 'Det avgörande var vad som hände när pulserna blev ännu starkare. Upp till ungefär 20&nbsp;mikrojoule växte signalen exponentiellt, men över 50&nbsp;mikrojoule slutade den att öka. En trolig förklaring är att pulsen då hinner slå ut en inre elektron ur i stort sett varje kopparatom i fläcken innan atomerna hunnit sända ut sina fotoner, så att det inte finns fler atomer att förstärka med. Forskarna räknade ut att en sådan mättnad borde inträffa vid omkring 1,7&nbsp;·&nbsp;10<sup>20</sup>&nbsp;W/cm². Pulserna på 50&nbsp;mikrojoule motsvarar 2,3&nbsp;·&nbsp;10<sup>20</sup>&nbsp;W/cm², så de två värdena stämmer väl överens.' },
+      { type: 'h2', text: 'Att hinna före skadan' },
+      { type: 'p', html: 'Så intensiva röntgenblixtar förstör det de träffar. Poängen med attosekundpulser är att mätningen kan vara klar innan elektronerna i provet hunnit reagera, och därmed innan skadan uppstått. Det kan ge skarpare bilder av molekyler och kristaller, och öppnar för försök där röntgenstrålningen inte bara iakttar elektronerna utan också styr dem, till exempel i en kemisk reaktion.' },
+      { type: 'p', html: 'Spegelsystemet i försöket var lånat från Japan. European XFEL räknar med att få ett eget i början av 2027, och då kan fler forskargrupper börja använda de korta och intensiva pulserna.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'På 300&nbsp;attosekunder hinner ljuset bara omkring 90&nbsp;nanometer. Pulsen är alltså kortare än fokusfläcken är bred.',
+        'Anläggningen är ungefär 3,4&nbsp;kilometer lång, och i det här försöket hade röntgenpulserna nästan en kilometer kvar att färdas från undulatorn till experimentstationen.',
+        'Studien har 44&nbsp;författare från bland annat Japan, Tyskland och USA.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-17-galliumgatan",
     date: "2026-10-17",
     title: "Galliumgåtan kan ha en lösning som inte kräver några nya partiklar",
@@ -7893,3 +7952,6 @@ const NYHETER_ALL = [
   // publiceringsdagen (utelämnat → midnatt, som tidigare).
   window.NYHETER = NYHETER_ALL.filter((a) => (a.date + 'T' + (a.time || '00:00')) <= nowStamp);
 })();
+
+// Engelsk översättning (data/en/nyheter.js) läggs ovanpå när sidan visas på engelska.
+if (window.I18N) window.I18N.overlay('nyheter');

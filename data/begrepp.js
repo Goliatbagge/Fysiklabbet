@@ -548,7 +548,7 @@ window.BEGREPP = [
   {
     id: 'frielektronlaser',
     term: 'Frielektronlaser',
-    former: ['frielektronlaser', 'frielektronlasern', 'frielektronlasrar', 'frielektronlasrarna'],
+    former: ['frielektronlaser', 'frielektronlasern', 'frielektronlasrar', 'frielektronlasrarna', 'röntgenlaser', 'röntgenlasern', 'röntgenlasrar', 'röntgenlasrarna'],
     kort: 'En anläggning som gör laserliknande röntgenstrålning av en stråle fria elektroner i stället för av ett material. Elektronerna tvingas slingra fram genom en rad magneter och strålar då ifrån sig.',
     relaterade: ['laser', 'partikelaccelerator', 'foton'],
     body: [
@@ -4064,5 +4064,32 @@ window.BEGREPP = [
       { type: 'p', html: 'Brownsk rörelse finns överallt där små partiklar svävar i en vätska, till exempel fettdropparna i mjölk. Den är skälet till att en droppe bläck så småningom sprider sig i ett glas vatten även utan omrörning, och den sätter en gräns för hur stilla mycket små föremål kan hållas. Mätningar av rörelsen används för att bestämma hur stora partiklarna i en vätska är: små partiklar vandrar snabbare än stora.' }
     ]
   },
+  {
+    id: 'undulator',
+    term: 'Undulator',
+    former: ['undulator', 'undulatorn', 'undulatorer', 'undulatorerna'],
+    kort: 'En lång rad magneter med omväxlande riktning som tvingar en stråle snabba elektroner att slingra sig fram. Varje sväng får elektronerna att sända ut strålning, oftast röntgenstrålning.',
+    relaterade: ['frielektronlaser', 'partikelaccelerator', 'foton'],
+    body: [
+      { type: 'p', html: 'Tänk dig en slalombana för elektroner. En undulator är en rad magneter där nord- och sydändar växlar om varannan gång, ofta flera meter lång. En elektron som susar igenom känner av en magnetisk kraft som pekar åt ena hållet, sedan åt andra hållet, och så vidare. Den följer därför en flack sicksackbana i stället för en rak linje. Namnet kommer från latinets <em>unda</em>, våg.' },
+      { type: 'p', html: 'En laddning som byter riktning har en acceleration, och en laddning med acceleration sänder ut elektromagnetisk strålning. Det är samma princip som får elektronerna i en radioantenn att skicka ut radiovågor. I en undulator rör sig elektronerna nästan med ljusets hastighet, och då trycks strålningen ihop till mycket korta våglängder och samlas i en smal kägla rakt framåt. Med elektroner på några miljarder elektronvolt hamnar våglängden i röntgenområdet, ungefär lika lång som en atom är bred.' },
+      { type: 'p', html: 'Undulatorer sitter i synkrotronljuskällor, som MAX&nbsp;IV i Lund, och i frielektronlasrar. I en frielektronlaser är undulatorn så lång att elektronerna hinner påverkas av sin egen strålning och börjar röra sig i takt. Då förstärks strålningen kraftigt, och resultatet blir röntgenblixtar som är miljarder gånger ljusstarkare än från ett vanligt röntgenrör.' }
+    ]
+  },
+  {
+    id: 'forstarkt-spontan-emission',
+    term: 'Förstärkt spontan emission',
+    former: ['förstärkt spontan emission', 'förstärkta spontana emissionen', 'stimulerad emission', 'stimulerade emissionen'],
+    kort: 'När ljus från en atom får andra atomer att sända ut likadant ljus i samma riktning, så att signalen växer lavinartat. Det är samma förstärkning som i en laser, men utan speglar.',
+    relaterade: ['laser', 'exciterat-tillstand', 'foton'],
+    body: [
+      { type: 'p', html: 'En atom som fått extra energi, en exciterad atom, gör sig förr eller senare av med den genom att sända ut en foton. Oftast sker det spontant, vid en slumpmässig tidpunkt och i en slumpmässig riktning. En glödlampa eller ett lysrör lyser på det sättet: miljarder atomer som var för sig skickar ut ljus åt alla håll.' },
+      { type: 'p', html: 'Men om en foton med precis rätt energi passerar en exciterad atom kan den få atomen att sända ut sin foton genast, med samma energi och i samma riktning. Det kallas stimulerad emission, och Albert Einstein förutsade fenomenet redan 1917. Nu finns det två likadana fotoner i stället för en. Om det finns många exciterade atomer längs vägen kan varje foton ge upphov till fler, och ljuset förstärks som en lavin. Det kräver att fler atomer är exciterade än i grundtillståndet, annars äts fotonerna upp av atomer som tar upp dem i stället.' },
+      { type: 'p', html: 'I en laser studsar ljuset fram och tillbaka mellan två speglar för att hinna förstärkas många gånger. Förstärkt spontan emission är samma lavin men i en enda passage, utan speglar. Den startar med några slumpvis utsända fotoner och kräver därför en mycket stor andel exciterade atomer på en gång. För röntgenstrålning går det bara att nå med extremt intensiva pulser, och därför används fenomenet för att kontrollera hur starka sådana pulser verkligen är.' }
+    ]
+  },
 ];
 
+
+// Engelsk översättning (data/en/begrepp.js) läggs ovanpå när sidan visas på engelska.
+if (window.I18N) window.I18N.overlay('begrepp');

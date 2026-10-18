@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sat, 17 Oct 2026 01:30:07 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 18 Oct 2026 02:42:17 GMT</lastBuildDate>
+    <item>
+      <title>Röntgenblixtar på 300 attosekunder slår rekord i intensitet</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-18-rontgenblixtar-pa-attosekunder</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-18-rontgenblixtar-pa-attosekunder</guid>
+      <pubDate>Sun, 18 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Atomfysik</category>
+      <description>Vid röntgenlasern European XFEL utanför Hamburg har forskare samlat röntgenpulser som varar omkring 300 attosekunder i en fläck så liten att ett hårstrå är flera hundra gånger bredare. Intensiteten blev omkring sju gånger högre än vad någon tidigare nått med så korta pulser av hård röntgenstrålning, och en kopparfolie fick visa att värdet stämmer.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-18-rontgenblixtar-pa-attosekunder.jpg" length="378544" type="image/jpeg"/>
+    </item>
     <item>
       <title>Galliumgåtan kan ha en lösning som inte kräver några nya partiklar</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-17-galliumgatan</link>
@@ -177,15 +186,6 @@
       <category>Geofysik</category>
       <description>Ett dygn är inte lika långt från årtionde till årtionde: det kan bli några millisekunder längre och sedan kortare igen. Två geofysiker vid University of Alberta drar nu i Nature slutsatsen att den främsta orsaken är gravitationen mellan jordens fasta inre kärna och ojämnt fördelad massa i manteln.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-01-dragkampen-som-andrar-dygnet.jpg" length="572282" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Kristallen som ska leda ström utan motstånd vid 43 °C — nu pekas två skandiumatomer ut som förklaringen</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-09-30-rumstempererad-supraledare-under-tryck</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-09-30-rumstempererad-supraledare-under-tryck</guid>
-      <pubDate>Wed, 30 Sep 2026 04:00:00 GMT</pubDate>
-      <category>Materialfysik</category>
-      <description>En burliknande kristall av lantan, skandium och väte beräknas tappa allt elektriskt motstånd vid 43 °C, långt över rumstemperatur. Haken är trycket: 167 GPa, ungefär 1,6 miljoner gånger lufttrycket vid havsytan. En ny studie i Physical Review B förklarar vad skandiumet gör för nytta, och varför just dess 3d-elektroner är avgörande.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-09-30-rumstempererad-supraledare-under-tryck.jpg" length="285745" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

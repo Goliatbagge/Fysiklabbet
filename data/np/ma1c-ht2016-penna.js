@@ -75,7 +75,7 @@
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg;
     var xwA = Math.max(padL + T.adv('2x+1>5'),
-                       padL + 30 + T.adv('2x>4')) + 0.9 * F;
+                       padL + T.adv('2x>4')) + 0.9 * F;
 
     y = 210;
     T.str('2x+1>5', padL, y);
@@ -93,14 +93,14 @@
       y += 2.1 * F;
     } else {
       y += 2.4 * F;
-      xx = T.str('2x+1', padL + 30, y);
+      xx = T.str('2x+1', padL, y);
       xx = T.str('-1', xx, y, BLUE);
       xx = T.str('>5', xx, y);
       T.str('-1', xx, y, BLUE);
       T.stepEnd();
       y += 2.2 * F;
     }
-    T.str('2x>4', padL + 30, y);
+    T.str('2x>4', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -114,13 +114,13 @@
       y += 3.0 * F;
     } else {
       y += 3.2 * F;
-      xx = T.fracH('2x', '2', padL + 30, y);
+      xx = T.fracH('2x', '2', padL, y);
       xx = T.str('>', xx, y);
       T.fracH('4', '2', xx, y);
       T.stepEnd();
       y += 3.2 * F;
     }
-    T.str('x>2', padL + 30, y);
+    T.str('x>2', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -134,7 +134,7 @@
     T.stepEnd();
 
     y += 2.2 * F;
-    T.str('2 är inte >2', padL + 30, y);
+    T.str('2 är inte >2', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
@@ -163,11 +163,11 @@
       [['Spanien.']]
     ]);
     y += 2.8 * F;
-    T.str('Sverige ⇒ Europa', padL + 30, y);
+    T.str('Sverige ⇒ Europa', padL, y);
     T.stepEnd();
 
     y += 2.2 * F;
-    T.str('gäller bara åt ett håll', padL + 60, y, null, 0.7);
+    T.str('gäller bara åt ett håll', padL, y, null, 0.7);
     T.stepEnd();
 
     tanke(y, [
@@ -180,7 +180,7 @@
     T.stepEnd();
 
     y += 2.2 * F;
-    T.str('kvadrat medför rektangel', padL + 60, y, null, 0.7);
+    T.str('kvadrat medför rektangel', padL, y, null, 0.7);
     T.stepEnd();
 
     tanke(y, [
@@ -202,10 +202,10 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg;
-    var xwA = padL + 30 + T.adv('4x^3=32') + 0.9 * F;
+    var xwA = padL + T.adv('4x^3=32') + 0.9 * F;
 
     y = 210;
-    T.str('4x^3=32', padL + 30, y);
+    T.str('4x^3=32', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -219,13 +219,13 @@
       y += 3.0 * F;
     } else {
       y += 3.2 * F;
-      xx = T.fracH('4x^3', '4', padL + 30, y);
+      xx = T.fracH('4x^3', '4', padL, y);
       xx = T.str('=', xx, y);
       T.fracH('32', '4', xx, y);
       T.stepEnd();
       y += 3.2 * F;
     }
-    T.str('x^3=8', padL + 30, y);
+    T.str('x^3=8', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -234,7 +234,7 @@
       [['dra kubikroten.']]
     ]);
     y += 2.6 * F;
-    xx = T.str('x=', padL + 30, y);
+    xx = T.str('x=', padL, y);
     xx = T.rot('8', xx, y, 3);
     T.str('=2', xx, y);
     T.stepEnd();
@@ -277,7 +277,7 @@
       [['vänster.']]
     ], 1.05);
     y += 3.4 * F;
-    T.str('=0,000393', padL + 30, y);
+    T.str('=0,000393', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
@@ -313,11 +313,11 @@
       [['allt upphöjt till noll är 1.']]
     ]);
     y += 2.6 * F;
-    T.str('=1·49+1·7+3·1', padL + 30, y);
+    T.str('=1·49+1·7+3·1', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('=49+7+3=59', padL + 30, y);
+    T.str('=49+7+3=59', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
@@ -430,7 +430,7 @@
     T.stepEnd();
 
     y += 3.4 * F;
-    xx = T.str('=1-', padL + 30, y);
+    xx = T.str('=1-', padL, y);
     T.fracH('1', 'B+1', xx, y);
     T.stepEnd();
 
@@ -454,13 +454,13 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T), multIn = mkMultIn(T);
     var vagg = !!cfg.vagg;
-    var xwA = Math.max(padL + 30 + T.adv('9x+3-8x-12=24'),
-                       padL + 30 + T.adv('x-9=24')) + 0.9 * F;
+    var xwA = Math.max(padL + T.adv('9x+3-8x-12=24'),
+                       padL + T.adv('x-9=24')) + 0.9 * F;
 
     /* väggens streck sträcker sig 1,25·F över raden i bråkläget — första
      * raden läggs så att det håller sig under inställningsrutans hörn */
     y = 258;
-    xx = T.fracH('3x+1', '4', padL + 30, y);
+    xx = T.fracH('3x+1', '4', padL, y);
     xx = T.str('-', xx, y);
     xx = T.fracH('2x+3', '3', xx, y);
     T.str('=2', xx, y);
@@ -478,7 +478,7 @@
       y += 3.2 * F;
     } else {
       y += 3.4 * F;
-      xx = T.fracH('3x+1', '4', padL + 30, y);
+      xx = T.fracH('3x+1', '4', padL, y);
       xx = T.str('·12', xx, y, BLUE);
       xx = T.str('-', xx, y);
       xx = T.fracH('2x+3', '3', xx, y);
@@ -488,7 +488,7 @@
       T.stepEnd();
       y += 3.4 * F;
     }
-    var g0 = padL + 30; xx = T.str('3', padL + 30, y); var g1 = xx;
+    var g0 = padL; xx = T.str('3', padL, y); var g1 = xx;
     xx = T.str('(', xx, y);
     var s1 = xx; xx = T.str('3x', xx, y); var s1b = xx;
     var s2 = xx; xx = T.str('+1', xx, y); var s2b = xx;
@@ -507,8 +507,8 @@
       [['jag den första parentesen.']]
     ]);
     y += 3.0 * F;
-    xx = T.str('', padL + 30, y);
-    xx = multIn(padL + 30, y, yK - 0.95 * F, [
+    xx = T.str('', padL, y);
+    xx = multIn(padL, y, yK - 0.95 * F, [
       { fran: [g0, g1], till: [s1, s1b], skriv: '9x', hojd: 26 },
       { fran: [g0, g1], till: [s2, s2b], skriv: '+3', hojd: 46, dx: 4 }
     ]);
@@ -524,7 +524,7 @@
       [['9x-8x=x och 3-12=-9.']]
     ]);
     y += 2.5 * F;
-    T.str('x-9=24', padL + 30, y);
+    T.str('x-9=24', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -537,14 +537,14 @@
       y += 2.1 * F;
     } else {
       y += 2.4 * F;
-      xx = T.str('x-9', padL + 30, y);
+      xx = T.str('x-9', padL, y);
       xx = T.str('+9', xx, y, BLUE);
       xx = T.str('=24', xx, y);
       T.str('+9', xx, y, BLUE);
       T.stepEnd();
       y += 2.2 * F;
     }
-    T.str('x=33', padL + 30, y);
+    T.str('x=33', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -649,7 +649,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('y=-5', padL + 30, y);
+    T.str('y=-5', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -698,7 +698,7 @@
       [['när t är 60.']]
     ]);
     y += 2.6 * F;
-    T.str('V(60)=21', padL + 30, y);
+    T.str('V(60)=21', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
@@ -728,7 +728,7 @@
       [['det som stod under.']]
     ]);
     y += 2.8 * F;
-    xx = T.str('=(', padL + 30, y);
+    xx = T.str('=(', padL, y);
     xx = T.rot('a^6', xx, y);
     T.str(')^2=a^6', xx, y);
     T.stepEnd();
@@ -806,7 +806,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('=1,88 l.e.', padL + 30, y);
+    T.str('=1,88 l.e.', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -861,11 +861,11 @@
       [['vara lika.']]
     ]);
     y += 2.6 * F;
-    T.str('8=2n+4', padL + 30, y);
+    T.str('8=2n+4', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('2n=4 ⟹ n=2', padL + 30, y);
+    T.str('2n=4 ⟹ n=2', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -959,7 +959,7 @@
     xe = T.str('Svar II: 0,1 för träff och 0,9', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    xe = T.str('för miss i varje kast', padL + 30, y);
+    xe = T.str('för miss i varje kast', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -975,16 +975,16 @@
     T.stepEnd();
 
     y += 2.2 * F;
-    T.str('kast 1: 4-1=+3', padL + 40, y);
+    T.str('kast 1: 4-1=+3', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('kast 2: 4-2=+2', padL + 40, y);
+    T.str('kast 2: 4-2=+2', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('kast 3: 4-3=+1', padL + 40, y);
+    T.str('kast 3: 4-3=+1', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('kast 4: 4-4=0', padL + 40, y);
+    T.str('kast 4: 4-4=0', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1023,10 +1023,10 @@
     T.str('V. kast 1: 0,1', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('kast 2: 0,9·0,1=0,09', padL + 40, y);
+    T.str('kast 2: 0,9·0,1=0,09', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('kast 3: 0,9·0,9·0,1=0,081', padL + 40, y);
+    T.str('kast 3: 0,9·0,9·0,1=0,081', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -1217,7 +1217,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('0,82·190=155,8≈156', padL + 30, y);
+    T.str('0,82·190=155,8≈156', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
@@ -1237,14 +1237,14 @@
     T.stepEnd();
 
     y += 2.2 * F;
-    T.str('2007 till 2010: 3 år', padL + 40, y);
+    T.str('2007 till 2010: 3 år', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
     xe = T.str('Svar: Årtalen ligger lika', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    xe = T.str('tätt fast åren inte gör det', padL + 30, y);
+    xe = T.str('tätt fast åren inte gör det', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1259,7 +1259,7 @@
     xe = T.str('Svar: Kurvan blir mindre', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    xe = T.str('brant på slutet', padL + 30, y);
+    xe = T.str('brant på slutet', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1344,7 +1344,7 @@
     T.stepEnd();
 
     y += 3.4 * F;
-    T.str('v=53,13...°≈53°', padL + 30, y);
+    T.str('v=53,13...°≈53°', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1371,7 +1371,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg;
-    var xwA = padL + 30 + T.adv('0,6x=27') + 0.9 * F;
+    var xwA = padL + T.adv('0,6x=27') + 0.9 * F;
 
     y = 210;
     T.str('x=priset år 2013', padL, y);
@@ -1384,7 +1384,7 @@
       [['års pris.']]
     ]);
     y += 2.8 * F;
-    T.str('0,6x=27', padL + 30, y);
+    T.str('0,6x=27', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1397,13 +1397,13 @@
       y += 3.0 * F;
     } else {
       y += 3.2 * F;
-      xx = T.fracH('0,6x', '0,6', padL + 30, y);
+      xx = T.fracH('0,6x', '0,6', padL, y);
       xx = T.str('=', xx, y);
       T.fracH('27', '0,6', xx, y);
       T.stepEnd();
       y += 3.2 * F;
     }
-    xx = T.str('x=', padL + 30, y);
+    xx = T.str('x=', padL, y);
     xx = T.fracH('27', '0,6', xx, y);
     T.str('=45', xx, y);
     T.stepEnd();
@@ -1461,7 +1461,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('≈0,006=0,6 %', padL + 30, y);
+    T.str('≈0,006=0,6 %', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1499,7 +1499,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('vinst=5 000-2 000=3 000 kr', padL + 30, y);
+    T.str('vinst=5 000-2 000=3 000 kr', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
@@ -1519,7 +1519,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('Kontroll: V(100)=5 000-2 000=3 000', padL + 30, y, null, 0.7);
+    T.str('Kontroll: V(100)=5 000-2 000=3 000', padL, y, null, 0.7);
     T.stepEnd();
 
     y += 2.3 * F;
@@ -1539,7 +1539,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('V(200)=10 000-2 000=8 000', padL + 30, y);
+    T.str('V(200)=10 000-2 000=8 000', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1584,11 +1584,11 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('=1 000·8,9161...', padL + 30, y);
+    T.str('=1 000·8,9161...', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('=8 916,1...≈8 916 kr', padL + 30, y);
+    T.str('=8 916,1...≈8 916 kr', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1725,7 +1725,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('(4, 3)+(2, 4)=(6, 7)', padL + 40, y);
+    T.str('(4, 3)+(2, 4)=(6, 7)', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1741,7 +1741,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('(1, 2)+(5, 5)=(6, 7)', padL + 40, y);
+    T.str('(1, 2)+(5, 5)=(6, 7)', padL, y);
     T.stepEnd();
 
     tanke(y, [

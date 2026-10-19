@@ -41,7 +41,7 @@
   function avr(T, F, xIns, y, txt) {
     if (xIns + T.adv(txt) < HK.PAPER_W - 44) { T.str(txt, xIns, y); return y; }
     y += 2.4 * F;
-    T.str(txt, T.padL + 24, y);
+    T.str(txt, T.padL, y);
     return y;
   }
   function slut(T, y) {

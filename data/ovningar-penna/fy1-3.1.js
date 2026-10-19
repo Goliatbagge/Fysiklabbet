@@ -242,7 +242,7 @@
     T.str('F_R=F_l_y_f_t-F_G', padL, y);
     T.pause(200);
     y += adv + 0.4 * F;
-    T.str('=8 400-7 900=500 N', padL + 24, y);
+    T.str('=8 400-7 900=500 N', padL, y);
     T.stepEnd();
 
     y += adv + 1.2 * F;
@@ -401,7 +401,7 @@
     T.stepEnd();
 
     y += adv + 1.4 * F;
-    x = T.str('=', padL + 24, y);
+    x = T.str('=', padL, y);
     x = rot(T, F, '400', x, y);
     T.str('=20 N', x, y);
     T.stepEnd();
@@ -578,7 +578,7 @@
     T.stepEnd();
 
     y += adv + 0.9 * F;
-    var xIns = T.str('=1 631,35... N', padL + 24, y);
+    var xIns = T.str('=1 631,35... N', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y), bw, [
@@ -783,7 +783,7 @@
     T.stepEnd();
 
     y += adv + 1.4 * F;
-    x = T.str('=', padL + 24, y);
+    x = T.str('=', padL, y);
     x = rot(T, F, '3 400', x, y);
     var xIns = T.str('=58,309... N', x, y);
     T.stepEnd();
@@ -886,7 +886,7 @@
       T.str('≈1,7 kN', xIns + 0.15 * F, y);
     } else {
       y += 2.4 * F;
-      T.str('≈1,7 kN', padL + 24, y);
+      T.str('≈1,7 kN', padL, y);
     }
     T.stepEnd();
 

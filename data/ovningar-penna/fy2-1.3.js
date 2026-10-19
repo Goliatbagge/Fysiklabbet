@@ -44,7 +44,7 @@
   function avr(T, F, xIns, y, txt) {
     if (xIns + T.adv(txt) < HK.PAPER_W - 44) { T.str(txt, xIns, y); return y; }
     y += 2.4 * F;
-    T.str(txt, T.padL + 24, y);
+    T.str(txt, T.padL, y);
     return y;
   }
   function slut(T, y) {
@@ -557,7 +557,7 @@
       [['att h blir ensam kvar.']]
     ]));
     y += 2.5 * F;
-    T.fracH('b', 'tan α', T.str('⟺h=', padL + 24, y), y);
+    T.fracH('b', 'tan α', T.str('⟺h=', padL, y), y);
     T.stepEnd();
 
     y += adv + 2.2 * F;
@@ -669,8 +669,8 @@
     T.pause(300);
     y += 1.8 * F;
     var wM = T.adv('M');
-    var nMot = note(padL + 30 + wM / 2, y + 0.78 * F, 'moturs');
-    var xEq = T.str('M↺', padL + 30, y);
+    var nMot = note(padL + wM / 2, y + 0.78 * F, 'moturs');
+    var xEq = T.str('M↺', padL, y);
     T.acts.push({ kind: 'show', obj: nMot });
     T.pause(320);
     var xM2 = T.str('=', xEq, y);
@@ -688,7 +688,7 @@
       [['tyngd medurs. Normalkraften går']],
       [['genom kanten och saknar moment.']]
     ]));
-    T.str('F_V·l_V=F_B·l_B', padL + 30, y);
+    T.str('F_V·l_V=F_B·l_B', padL, y);
     T.stepEnd();
 
     y += adv + 0.9 * F;
@@ -696,10 +696,10 @@
       [['Tyngdkrafterna är m·g, och']],
       [['hävarmarna tar jag ur figuren.']]
     ]));
-    var xg1 = padL + 30 + T.adv('m_V·');
-    var xg2 = padL + 30 + T.adv('m_V·g·(1,2-d)=m_B·');
+    var xg1 = padL + T.adv('m_V·');
+    var xg2 = padL + T.adv('m_V·g·(1,2-d)=m_B·');
     var wg = T.adv('g') - 1.5;
-    T.str('m_V·g·(1,2-d)=m_B·g·(d-0,60)', padL + 30, y);
+    T.str('m_V·g·(1,2-d)=m_B·g·(d-0,60)', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y), bw, [
@@ -722,7 +722,7 @@
       [['Nu sätter jag in massorna ur']],
       [['klammern.']]
     ]));
-    var yK = y, xx = padL + 30, xs = {};
+    var yK = y, xx = padL, xs = {};
     xs.a0 = xx; xx = T.str('1,2', xx, yK); xs.a1 = xx;
     xx = T.str('·(', xx, yK); xs.b0 = xx;
     xx = T.str('1,2', xx, yK); xs.b1 = xx; xs.c0 = xx;
@@ -741,11 +741,11 @@
       [['parenteserna.']]
     ]));
     var yArc = yK - 0.95 * F, p = {};
-    xx = multIn(padL + 30, y, yArc, [
+    xx = multIn(padL, y, yArc, [
       { fran: [xs.a0, xs.a1], till: [xs.b0, xs.b1], skriv: '1,44', hojd: 24 },
       { fran: [xs.a0, xs.a1], till: [xs.c0, xs.c1], skriv: '-1,2d', hojd: 34, dx: 4 }
     ]);
-    p.l = [padL + 30, xx];
+    p.l = [padL, xx];
     xx = T.str('=', xx, y);
     xx = multIn(xx, y, yArc, [
       { fran: [xs.d0, xs.d1], till: [xs.e0, xs.e1], skriv: '2,4d', hojd: 24 },
@@ -760,7 +760,7 @@
       [['d bara står i högerledet.']]
     ]));
     y = ekvOp(y, '+1,2d', 0, function (yb) {
-      var g = segRad(T, padL + 30, yb, [['1,44'], ['-1,2d'], ['+1,2d', 1],
+      var g = segRad(T, padL, yb, [['1,44'], ['-1,2d'], ['+1,2d', 1],
                      ['='], ['2,4d'], ['-1,44'], ['+1,2d', 1]]);
       t.b0 = g[1][0]; t.b1 = g[1][1]; t.c0 = g[2][0]; t.c1 = g[2][1];
       t.d0 = g[4][0]; t.d1 = g[4][1]; t.f0 = g[6][0]; t.f1 = g[6][1];
@@ -769,7 +769,7 @@
       [['−1,2d och +1,2d tar ut varandra.']],
       [['2,4d och 1,2d blir 3,6d.']]
     ]));
-    xx = samla(padL + 30, y, [
+    xx = samla(padL, y, [
       { skriv: '1,44' },
       { ringar: [[t.b0, t.b1, yOp], [t.c0, t.c1, yOp]], skriv: '' },
       { skriv: '=' },
@@ -786,7 +786,7 @@
       [['d-termen blir ensam.']]
     ]));
     y = ekvOp(y, '+1,44', 0, function (yb) {
-      var g = segRad(T, padL + 30, yb, [['1,44'], ['+1,44', 1], ['=3,6d'],
+      var g = segRad(T, padL, yb, [['1,44'], ['+1,44', 1], ['=3,6d'],
                      ['-1,44'], ['+1,44', 1]]);
       t.a0 = g[0][0]; t.a1 = g[0][1]; t.b0 = g[1][0]; t.b1 = g[1][1];
       t.c0 = g[3][0]; t.c1 = g[3][1]; t.d0 = g[4][0]; t.d1 = g[4][1];
@@ -795,7 +795,7 @@
       [['1,44 och 1,44 blir 2,88, och']],
       [['−1,44 och +1,44 tar ut varandra.']]
     ]));
-    samla(padL + 30, y, [
+    samla(padL, y, [
       { ringar: [[t.a0, t.a1, yOp], [t.b0, t.b1, yOp]], skriv: '2,88' },
       { skriv: '=3,6d' },
       { ringar: [[t.c0, t.c1, yOp], [t.d0, t.d1, yOp]], skriv: '' }
@@ -807,7 +807,7 @@
       [['d blir ensam kvar.']]
     ]));
     y = ekvOp(y, '/3,6', 0, '2,88=3,6d');
-    T.str('0,80=d⟺d=0,80 m', padL + 30, y);
+    T.str('0,80=d⟺d=0,80 m', padL, y);
     T.stepEnd();
 
     y += adv + 1.2 * F;

@@ -62,7 +62,7 @@
    * indrag (pilzonen, se handskrift.js) */
   function plats(T, F, x, y, w) {
     if (x + w < HK.PAPER_W - 44) return [x, y];
-    return [T.padL + 24, y + 2.6 * F];
+    return [T.padL, y + 2.6 * F];
   }
 
   /* a = Δv/Δt = (v − v_0)/Δt med rubrik: returnerar baslinjen */
@@ -137,7 +137,7 @@
           padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
-    T.str('v: -20 m/s blir -10 m/s blir 0', padL + 20, y);
+    T.str('v: -20 m/s blir -10 m/s blir 0', padL, y);
     T.stepEnd();
 
     y += adv + 1.2 * F;
@@ -145,7 +145,7 @@
       [['−10 är större än −20, och 0 är']],
       [['större än −10. Hastigheten ökar.']]
     ]));
-    T.str('hastigheten ökar ⇒ a>0', padL + 20, y);
+    T.str('hastigheten ökar ⇒ a>0', padL, y);
     T.stepEnd();
 
     y += adv + 1.2 * F;
@@ -205,13 +205,13 @@
     T.str('Hastigheten kring vändläget', padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
-    T.str('strax före: v>0', padL + 20, y);
+    T.str('strax före: v>0', padL, y);
     T.stepEnd();
     y += 1.6 * F;
-    T.str('i vändläget: v=0', padL + 20, y);
+    T.str('i vändläget: v=0', padL, y);
     T.stepEnd();
     y += 1.6 * F;
-    T.str('strax efter: v<0', padL + 20, y);
+    T.str('strax efter: v<0', padL, y);
     T.stepEnd();
 
     y += adv + 1.2 * F;
@@ -220,7 +220,7 @@
       [['negativ: hastigheten minskar']],
       [['även i vändläget.']]
     ]));
-    T.str('hastigheten minskar ⇒ a<0', padL + 20, y);
+    T.str('hastigheten minskar ⇒ a<0', padL, y);
     T.stepEnd();
 
     /* ---- värdet ---- */
@@ -430,10 +430,10 @@
       T.str(f[0], padL, y, null, 0.62);
       T.pause(300);
       y += 1.9 * F;
-      T.str(f[1], padL + 20, y);
+      T.str(f[1], padL, y);
       T.stepEnd();
       y += 1.6 * F;
-      T.str(f[2], padL + 20, y);
+      T.str(f[2], padL, y);
       T.stepEnd();
     });
 

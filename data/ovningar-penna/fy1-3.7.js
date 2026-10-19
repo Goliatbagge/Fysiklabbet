@@ -141,7 +141,7 @@
   function avr(T, F, xIns, y, txt) {
     if (xIns + T.adv(txt) < HK.PAPER_W - 44) { T.str(txt, xIns, y); return y; }
     y += 2.4 * F;
-    T.str(txt, T.padL + 24, y);
+    T.str(txt, T.padL, y);
     return y;
   }
   function slut(T, y) {
@@ -791,7 +791,7 @@
     T.stepEnd();
 
     y += adv + 0.9 * F;
-    var xIns = T.str('=22,78...°', padL + 24, y);
+    var xIns = T.str('=22,78...°', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
@@ -905,7 +905,7 @@
     T.stepEnd();
 
     y += adv + 0.9 * F;
-    var xIns = T.str('=1,081... m/s^2', padL + 24, y);
+    var xIns = T.str('=1,081... m/s^2', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
@@ -1028,7 +1028,7 @@
     T.stepEnd();
 
     y += adv + 0.9 * F;
-    var x1 = T.str('=30,346... N', padL + 24, y);
+    var x1 = T.str('=30,346... N', padL, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;
@@ -1045,11 +1045,11 @@
     T.stepEnd();
 
     y += adv + 0.9 * F;
-    T.str('=0,35·6,0·9,82·cos 31°', padL + 24, y);
+    T.str('=0,35·6,0·9,82·cos 31°', padL, y);
     T.stepEnd();
 
     y += adv + 0.9 * F;
-    T.str('=17,676... N', padL + 24, y);
+    T.str('=17,676... N', padL, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;

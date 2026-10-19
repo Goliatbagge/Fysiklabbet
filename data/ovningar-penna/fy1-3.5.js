@@ -50,7 +50,7 @@
   function avr(T, F, xIns, y, txt) {
     if (xIns + T.adv(txt) < HK.PAPER_W - 44) { T.str(txt, xIns, y); return y; }
     y += 2.4 * F;
-    T.str(txt, T.padL + 24, y);
+    T.str(txt, T.padL, y);
     return y;
   }
   function slut(T, y) {
@@ -142,7 +142,7 @@
       [['Räknar ut bråket först: 40']],
       [['delat med 0,25 är 160.']]
     ]));
-    var xIns = T.str('=' + GINS + '160=1,0672·10^−^8 N', padL + 24, y);
+    var xIns = T.str('=' + GINS + '160=1,0672·10^−^8 N', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
@@ -237,7 +237,7 @@
       [['Räknar ut bråket först:']],
       [['250 000 delat med 10 000 är 25.']]
     ]));
-    var xIns = T.str('=' + GINS + '25=1,6675·10^−^9 N', padL + 24, y);
+    var xIns = T.str('=' + GINS + '25=1,6675·10^−^9 N', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
@@ -387,7 +387,7 @@
     T.stepEnd();
 
     y += adv + 1.9 * F;
-    var xIns = T.str('=1,9855...·10^2^0 N', padL + 24, y);
+    var xIns = T.str('=1,9855...·10^2^0 N', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
@@ -479,7 +479,7 @@
     T.stepEnd();
 
     y += adv + 1.9 * F;
-    var xIns = T.str('=150,075 N', padL + 24, y);
+    var xIns = T.str('=150,075 N', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
@@ -658,7 +658,7 @@
     T.stepEnd();
 
     y += adv + 2.0 * F;
-    var xIns = T.str('=6,122... kg', padL + 24, y);
+    var xIns = T.str('=6,122... kg', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
@@ -765,7 +765,7 @@
     T.stepEnd();
 
     y += adv + 2.0 * F;
-    var xIns = T.str('=1,6698...·10^7 m', padL + 24, y);
+    var xIns = T.str('=1,6698...·10^7 m', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
@@ -852,7 +852,7 @@
     T.stepEnd();
 
     y += adv + 1.9 * F;
-    var xIns = T.str('=7,4704·10^−^8 N', padL + 24, y);
+    var xIns = T.str('=7,4704·10^−^8 N', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
@@ -897,7 +897,7 @@
     T.stepEnd();
 
     y += adv + 1.9 * F;
-    xIns = T.str('=4,779...·10^−^8 N', padL + 24, y);
+    xIns = T.str('=4,779...·10^−^8 N', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
@@ -1178,7 +1178,7 @@
     T.stepEnd();
 
     y += adv + 1.9 * F;
-    var xIns = T.str('=3,7109... N/kg', padL + 24, y);
+    var xIns = T.str('=3,7109... N/kg', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [

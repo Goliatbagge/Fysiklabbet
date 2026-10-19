@@ -419,8 +419,8 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T), multIn = mkMultIn(T), samla = mkSamla(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xwB = padL + 30 + T.adv('x^2-25=x^2+10x+25') + 0.9 * F;
-    var xwC = padL + 30 + T.adv('x^2-1=−5') + 0.9 * F;
+    var xwB = padL + T.adv('x^2-25=x^2+10x+25') + 0.9 * F;
+    var xwC = padL + T.adv('x^2-1=−5') + 0.9 * F;
 
     /* ---- a) 8^x = 15 ---- */
     y = 118;
@@ -432,7 +432,7 @@
       [['logaritmerar båda led.']]
     ]);
     y += 2.6 * F;
-    T.str('lg 8^x=lg 15', padL + 30, y);
+    T.str('lg 8^x=lg 15', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -441,7 +441,7 @@
       [['en faktor.']]
     ]);
     y += 2.6 * F;
-    T.str('x·lg 8=lg 15', padL + 30, y);
+    T.str('x·lg 8=lg 15', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -450,7 +450,7 @@
       [['kvoten lämnas som den är.']]
     ]);
     y += 3.4 * F;
-    xx = T.str('x=', padL + 30, y);
+    xx = T.str('x=', padL, y);
     fracLift(T, F, 'lg 15', 'lg 8', xx, y);
     T.stepEnd();
 
@@ -476,7 +476,7 @@
      * KLICKSTEG) */
     y += 3.6 * F;
     var nK = regelNot(T, F, 'Konjugatregeln: (a+b)(a-b)=a^2-b^2', padL, y - 1.45 * F);
-    xx = T.str('x^2-25', padL + 30, y);
+    xx = T.str('x^2-25', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -496,7 +496,7 @@
       [['så försvinner kvadrattermen.']]
     ]);
     y = ekvOp(y, '-x^2', xwB, 'x^2-25=x^2+10x+25');
-    T.str('−25=10x+25', padL + 30, y);
+    T.str('−25=10x+25', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -504,7 +504,7 @@
       [['subtraherar 25 från båda led.']]
     ]);
     y = ekvOp(y, '-25', xwB, '−25=10x+25');
-    T.str('−50=10x', padL + 30, y);
+    T.str('−50=10x', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -512,7 +512,7 @@
       [['dividerar båda led med 10.']]
     ]);
     y = ekvOp(y, '/10', xwB, '−50=10x');
-    T.str('x=−5', padL + 30, y);
+    T.str('x=−5', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -535,7 +535,7 @@
       [['definierad så att i^2=−1.']]
     ]);
     y += 2.4 * F;
-    T.str('x^2-1=−5', padL + 30, y);
+    T.str('x^2-1=−5', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -543,7 +543,7 @@
       [['så jag adderar 1 till båda led.']]
     ]);
     y = ekvOp(y, '+1', xwC, 'x^2-1=−5');
-    T.str('x^2=−4', padL + 30, y);
+    T.str('x^2=−4', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -553,7 +553,7 @@
       [['lösningar.']]
     ]);
     y += 2.6 * F;
-    xx = T.str('x=±', padL + 30, y);
+    xx = T.str('x=±', padL, y);
     xx = T.rot('−4', xx + 0.08 * F, y);
     T.str('=±2i', xx, y);
     T.stepEnd();
@@ -627,7 +627,7 @@
       [['Kvar blir bara x^2.']]
     ]);
     y += 2.6 * F;
-    samla(padL + 30, y, [
+    samla(padL, y, [
       { skriv: 'x^2' },
       { ringar: [[b0 + T.adv('+'), b1, yS], [e0, e1, yS]], skriv: '' },
       { ringar: [[c0 + T.adv('+'), c1, yS], [d0, d1, yS]], skriv: '' },
@@ -640,12 +640,12 @@
       [['har kvadraten 9, så det blir ±.']]
     ]);
     y += 2.6 * F;
-    xx = T.str('x=±', padL + 30, y);
+    xx = T.str('x=±', padL, y);
     T.rot('9', xx + 0.08 * F, y);
     T.stepEnd();
 
     y += 2.5 * F;
-    T.str('x=±3', padL + 30, y);
+    T.str('x=±3', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -666,7 +666,7 @@
 
     /* raden når x>420: den läggs under mobilzonen (y<150) */
     y = 162;
-    T.str('lg 3^a-lg 3^b=8·lg 3', padL + 30, y);
+    T.str('lg 3^a-lg 3^b=8·lg 3', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -676,7 +676,7 @@
     ]);
     y += 3.6 * F;
     var nL = regelNot(T, F, 'Logaritmlagen: lg x^n=n·lg x', padL, y - 1.45 * F);
-    T.str('a·lg 3-b·lg 3=8·lg 3', padL + 30, y);
+    T.str('a·lg 3-b·lg 3=8·lg 3', padL, y);
     regelGom(T, nL);
     T.stepEnd();
 
@@ -687,7 +687,7 @@
     ]);
     y += 2.4 * F;
     var yJ = y;
-    var g0 = padL + 30; xx = T.str('(a-b)', g0, y); var g1 = xx;
+    var g0 = padL; xx = T.str('(a-b)', g0, y); var g1 = xx;
     xx = T.str('·lg 3=', xx, y);
     var h0 = xx; xx = T.str('8', xx, y); var h1 = xx;
     T.str('·lg 3', xx, y);
@@ -703,7 +703,7 @@
     ]);
     var ringJ = substRings(acts, [[g0, g1, yJ, F], [h0, h1, yJ, F]]);
     y += 2.4 * F;
-    T.str('a-b=8', padL + 30, y);
+    T.str('a-b=8', padL, y);
     fadeRings(acts, ringJ);
     T.stepEnd();
 
@@ -738,7 +738,7 @@
       [['lg x=3 betyder x=10^3.']]
     ]);
     y += 2.6 * F;
-    T.str('lg 10=1 och lg 1000=3', padL + 30, y);
+    T.str('lg 10=1 och lg 1000=3', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -748,7 +748,7 @@
       [['och 1000. Gränserna ingår inte.']]
     ]);
     y += 2.6 * F;
-    T.str('10<x<1000', padL + 30, y);
+    T.str('10<x<1000', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -774,7 +774,7 @@
       var xx = T.str(pre + 'x^−', x, yb);
       return T.fracSup('1', '2', xx, yb);
     }
-    var xw = padL + 30 + potW('9·') + T.adv('=3') + 0.9 * F;
+    var xw = padL + potW('9·') + T.adv('=3') + 0.9 * F;
 
     /* första raden är bred: den läggs under mobilzonen (x>420, y<210) */
     y = 236;
@@ -790,7 +790,7 @@
       [['2y+3y+4y=9y.']]
     ]);
     y += 2.6 * F;
-    xx = pot('9·', padL + 30, y);
+    xx = pot('9·', padL, y);
     T.str('=3', xx, y);
     T.stepEnd();
 
@@ -800,11 +800,11 @@
     ]);
     y = ekvOp(y, '/9', xw, function (yb) {
       var num = { w: potW('9·'), draw: function (x, yy) { pot('9·', x, yy); } };
-      var x2 = fracCustom(T, F, num, '9', padL + 30, yb, BLUE);
+      var x2 = fracCustom(T, F, num, '9', padL, yb, BLUE);
       x2 = T.str('=', x2, yb);
       T.fracH('3', '9', x2, yb, null, BLUE);
     }, { dy: 3.0, dyRes: 2.9, vopt: { h0: 1.25, h1: 1.15 } });
-    xx = pot('', padL + 30, y);
+    xx = pot('', padL, y);
     xx = T.str('=', xx, y);
     T.fracH('1', '3', xx, y);
     T.stepEnd();
@@ -820,7 +820,7 @@
     y += 3.8 * F;
     var denP = { w: T.adv('x^') + T.fracSupW('1', '2'), sink: 0.34,
                  draw: function (x, yy) { T.fracSup('1', '2', T.str('x^', x, yy), yy); } };
-    xx = fracCustom(T, F, '1', denP, padL + 30, y);
+    xx = fracCustom(T, F, '1', denP, padL, y);
     xx = T.str('=', xx, y);
     T.fracH('1', '3', xx, y);
     T.stepEnd();
@@ -831,7 +831,7 @@
     ], 1.2);
     y += 3.8 * F;
     var den = { w: T.rotW('x'), draw: function (x, yy) { T.rot('x', x, yy); } };
-    xx = fracCustom(T, F, '1', den, padL + 30, y);
+    xx = fracCustom(T, F, '1', den, padL, y);
     xx = T.str('=', xx, y);
     T.fracH('1', '3', xx, y);
     T.stepEnd();
@@ -841,7 +841,7 @@
       [['precis när nämnarna är lika.']]
     ], 1.05);
     y += 3.4 * F;
-    xx = T.rot('x', padL + 30, y);
+    xx = T.rot('x', padL, y);
     T.str('=3', xx, y);
     T.stepEnd();
 
@@ -850,7 +850,7 @@
       [['roten: 3^2=9.']]
     ]);
     y += 2.6 * F;
-    T.str('x=3^2=9', padL + 30, y);
+    T.str('x=3^2=9', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -938,7 +938,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = padL + 30 + T.adv('−2y=6Bx-6') + 0.9 * F;
+    var xw = padL + T.adv('−2y=6Bx-6') + 0.9 * F;
 
     y = 240;
     var y1 = y, y2 = y + 2.2 * F, xs = sysX(F, padL + 12);
@@ -957,7 +957,7 @@
     ]);
     y += 3.2 * F;
     T.str('Löser ut y ur första ekvationen', padL, y - 1.45 * F, null, 0.62);
-    T.str('3y-2Ax=9', padL + 30, y);
+    T.str('3y-2Ax=9', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -965,7 +965,7 @@
       [['så jag adderar 2Ax till båda led.']]
     ]);
     y = ekvOp(y, '+2Ax', xw, '3y-2Ax=9');
-    T.str('3y=2Ax+9', padL + 30, y);
+    T.str('3y=2Ax+9', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -973,7 +973,7 @@
       [['dividerar båda led med 3.']]
     ]);
     y = ekvOp(y, '/3', xw, '3y=2Ax+9');
-    xx = T.str('y=', padL + 30, y);
+    xx = T.str('y=', padL, y);
     xx = T.fracH('2A', '3', xx, y);
     T.str('x+3', xx, y);
     T.stepEnd();
@@ -985,11 +985,11 @@
     ], 1.05);
     y += 4.4 * F;
     T.str('Löser ut y ur andra ekvationen', padL, y - 1.45 * F, null, 0.62);
-    T.str('6-2y=6Bx', padL + 30, y);
+    T.str('6-2y=6Bx', padL, y);
     T.stepEnd();
 
     y = ekvOp(y, '-6', xw, '6-2y=6Bx');
-    T.str('−2y=6Bx-6', padL + 30, y);
+    T.str('−2y=6Bx-6', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -998,7 +998,7 @@
       [['Tecknen byts.']]
     ]);
     y = ekvOp(y, '/(−2)', xw, '−2y=6Bx-6');
-    T.str('y=−3Bx+3', padL + 30, y);
+    T.str('y=−3Bx+3', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1007,7 +1007,7 @@
     ]);
     y += 3.6 * F;
     T.str('Samma linje kräver samma k', padL, y - 1.45 * F, null, 0.62);
-    xx = T.fracH('2A', '3', padL + 30, y);
+    xx = T.fracH('2A', '3', padL, y);
     T.str('=−3B', xx, y);
     T.stepEnd();
 
@@ -1016,12 +1016,12 @@
       [['multiplicerar båda led med 3.']]
     ], 1.05);
     y = ekvOp(y, '·3', xw, function (yb) {
-      var x2 = T.fracH('2A', '3', padL + 30, yb);
+      var x2 = T.fracH('2A', '3', padL, yb);
       x2 = T.str('·3', x2, yb, BLUE);
       x2 = T.str('=−3B', x2, yb);
       T.str('·3', x2, yb, BLUE);
     }, { dy: 3.0, dyRes: 2.6, vopt: { h0: 1.25, h1: 1.15 } });
-    T.str('2A=−9B', padL + 30, y);
+    T.str('2A=−9B', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -1066,7 +1066,7 @@
       [['konstanten.']]
     ], 1.2);
     y += 3.6 * F;
-    xx = T.str('p=', padL + 30, y);
+    xx = T.str('p=', padL, y);
     var p0 = xx; xx = T.str('10', xx, y); var p1 = xx;
     xx = T.str(', q=', xx, y);
     var q0 = xx; xx = T.str('16', xx, y); var q1 = xx;
@@ -1090,7 +1090,7 @@
       [['Under roten står 25-16.']]
     ], 1.2);
     y += 3.6 * F;
-    xx = T.str('=−5±', padL + 30, y);
+    xx = T.str('=−5±', padL, y);
     xx = T.rot('25-16', xx + 0.08 * F, y);
     T.stepEnd();
 
@@ -1109,11 +1109,11 @@
       [['och minustecknet den andra.']]
     ]);
     y += 2.6 * F;
-    T.str('x_1=−5+3=−2', padL + 30, y);
+    T.str('x_1=−5+3=−2', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('x_2=−5-3=−8', padL + 30, y);
+    T.str('x_2=−5-3=−8', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1140,8 +1140,8 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T), multIn = mkMultIn(T), samla = mkSamla(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = padL + 30 + T.adv('105=85+z') + 0.9 * F;
-    var xw2 = padL + 30 + T.adv('5x+25=105') + 0.9 * F;
+    var xw = padL + T.adv('105=85+z') + 0.9 * F;
+    var xw2 = padL + T.adv('5x+25=105') + 0.9 * F;
 
     /* ---- a) ---- (raderna är breda: under mobilzonen x>420, y<210) */
     y = 236;
@@ -1183,11 +1183,11 @@
       [['z. Jag adderar z till båda led.']]
     ]);
     y += 3.0 * F;
-    T.str('105-z=85', padL + 30, y);
+    T.str('105-z=85', padL, y);
     T.stepEnd();
 
     y = ekvOp(y, '+z', xw, '105-z=85');
-    T.str('105=85+z', padL + 30, y);
+    T.str('105=85+z', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1195,7 +1195,7 @@
       [['båda led.']]
     ]);
     y = ekvOp(y, '-85', xw, '105=85+z');
-    xx = T.str('z=', padL + 30, y);
+    xx = T.str('z=', padL, y);
     var z0 = xx; xx = T.str('20', xx, y); var z1 = xx;
     var yZ = y;
     T.stepEnd();
@@ -1206,11 +1206,11 @@
       [['jag ut y: x adderas till båda led.']]
     ]);
     y += 3.0 * F;
-    T.str('y-x=2', padL + 30, y);
+    T.str('y-x=2', padL, y);
     T.stepEnd();
 
     y = ekvOp(y, '+x', xw, 'y-x=2');
-    xx = T.str('y=', padL + 30, y);
+    xx = T.str('y=', padL, y);
     var v0 = xx; xx = T.str('x+2', xx, y); var v1 = xx;
     var yV = y;
     T.stepEnd();
@@ -1225,7 +1225,7 @@
                                    [ey0, ey1, y2, F], [ez0, ez1, y2, F]]);
     y += 3.6 * F;
     var yK = y;
-    xx = T.str('2,5x+', padL + 30, y);
+    xx = T.str('2,5x+', padL, y);
     var f0 = xx; xx = T.str('2,5', xx, y); var f1 = xx;
     xx = T.str('(', xx, y);
     var t0 = xx; xx = T.str('x', xx, y); var t1 = xx;
@@ -1241,7 +1241,7 @@
     ]);
     y += 2.6 * F;
     var yS = y;
-    var a0 = padL + 30; xx = T.str('2,5x', a0, y); var a1 = xx;
+    var a0 = padL; xx = T.str('2,5x', a0, y); var a1 = xx;
     var delar = [
       { fran: [f0, f1], till: [t0, t1], skriv: '+2,5x', hojd: 26, dx: -3 },
       { fran: [f0, f1], till: [u0, u1], skriv: '+5', hojd: 42, dx: 3 }
@@ -1256,7 +1256,7 @@
       [['och 5+20=25.']]
     ]);
     y += 2.6 * F;
-    xx = samla(padL + 30, y, [
+    xx = samla(padL, y, [
       { ringar: [[a0, a1, yS], [delar[0].x0 + T.adv('+'), delar[0].x1, yS]], skriv: '5x' },
       { ringar: [[delar[1].x0 + T.adv('+'), delar[1].x1, yS], [c0 + T.adv('+'), c1, yS]], skriv: '+25' },
       { skriv: '=105' }
@@ -1268,7 +1268,7 @@
       [['jag subtraherar 25 från båda led.']]
     ]);
     y = ekvOp(y, '-25', xw2, '5x+25=105');
-    T.str('5x=80', padL + 30, y);
+    T.str('5x=80', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1276,7 +1276,7 @@
       [['dividerar båda led med 5.']]
     ]);
     y = ekvOp(y, '/5', xw2, '5x=80');
-    xx = T.str('x=', padL + 30, y);
+    xx = T.str('x=', padL, y);
     var w0 = xx; xx = T.str('16', xx, y); var w1 = xx;
     var yX = y;
     T.stepEnd();
@@ -1287,7 +1287,7 @@
     ]);
     var ringar2 = substRings(acts, [[w0, w1, yX, F], [v0, v0 + T.adv('x'), yV, F]]);
     y += 2.6 * F;
-    T.str('y=16+2=18', padL + 30, y);
+    T.str('y=16+2=18', padL, y);
     fadeRings(acts, ringar2);
     T.stepEnd();
 
@@ -1318,7 +1318,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = padL + 30 + T.adv('9=24+m') + 0.9 * F;
+    var xw = padL + T.adv('9=24+m') + 0.9 * F;
 
     y = 118;
     T.str('Rät linje med k=4', padL, y - 1.45 * F, null, 0.62);
@@ -1336,7 +1336,7 @@
       [['x=6 och f(x)=9.']]
     ]);
     y += 2.6 * F;
-    xx = T.str('f(', padL + 30, y);
+    xx = T.str('f(', padL, y);
     var s0 = xx; xx = T.str('6', xx, y); var s1 = xx;
     xx = T.str(')=', xx, y);
     var r0 = xx; xx = T.str('9', xx, y); var r1 = xx;
@@ -1345,12 +1345,12 @@
 
     var ringar = substRings(acts, [[s0, s1, yS, F], [r0, r1, yS, F], [v0, v1, yF, F], [w0, w1, yF, F]]);
     y += 2.6 * F;
-    T.str('9=4·6+m', padL + 30, y);
+    T.str('9=4·6+m', padL, y);
     fadeRings(acts, ringar);
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('9=24+m', padL + 30, y);
+    T.str('9=24+m', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1358,7 +1358,7 @@
       [['subtraherar 24 från båda led.']]
     ]);
     y = ekvOp(y, '-24', xw, '9=24+m');
-    T.str('m=9-24=−15', padL + 30, y);
+    T.str('m=9-24=−15', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1433,7 +1433,7 @@
       [['blir bara konstanten 2.']]
     ]);
     y += 2.6 * F;
-    samla(padL + 30, y, [
+    samla(padL, y, [
       { ringar: [[delar[0].x0, delar[0].x1, yS], [delar[3].x0, delar[3].x1, yS]], skriv: '=x^2' },
       { ringar: [[delar[1].x0 + T.adv('+'), delar[1].x1, yS], [delar[4].x0, delar[4].x1, yS]], skriv: '' },
       { skriv: '+2' }
@@ -1475,7 +1475,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = padL + 30 + T.adv('−12=4+3m') + 0.9 * F;
+    var xw = padL + T.adv('−12=4+3m') + 0.9 * F;
 
     /* andra raden är bred: den ska ligga under mobilzonen (x>420, y<210) */
     y = 140;
@@ -1502,7 +1502,7 @@
       [['vara lika.']]
     ], 1.05);
     y += 3.6 * F;
-    xx = T.str('2a=', padL + 30, y);
+    xx = T.str('2a=', padL, y);
     T.fracH('4', '3', xx, y);
     T.stepEnd();
 
@@ -1511,13 +1511,13 @@
       [['multiplicerar båda led med 3.']]
     ], 1.05);
     y = ekvOp(y, '·3', xw, function (yb) {
-      var x2 = T.str('2a', padL + 30, yb);
+      var x2 = T.str('2a', padL, yb);
       x2 = T.str('·3', x2, yb, BLUE);
       x2 = T.str('=', x2, yb);
       x2 = T.fracH('4', '3', x2, yb);
       T.str('·3', x2, yb, BLUE);
     }, { dy: 3.0, dyRes: 2.6, vopt: { h0: 1.25, h1: 1.15 } });
-    T.str('6a=4', padL + 30, y);
+    T.str('6a=4', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1526,7 +1526,7 @@
       [['förkortar 4/6 med 2.']]
     ]);
     y = ekvOp(y, '/6', xw, '6a=4');
-    xx = T.str('a=', padL + 30, y);
+    xx = T.str('a=', padL, y);
     xx = T.fracOp('4', '6', '/2', xx, y);
     xx = T.str('=', xx, y);
     T.fracH('2', '3', xx, y);
@@ -1539,7 +1539,7 @@
     ], 1.05);
     y += 4.4 * F;
     T.str('Sätter in punkten (1, −4) i y=kx+m', padL, y - 1.45 * F, null, 0.62);
-    xx = T.str('−4=', padL + 30, y);
+    xx = T.str('−4=', padL, y);
     xx = T.fracH('4', '3', xx, y);
     T.str('·1+m', xx, y);
     T.stepEnd();
@@ -1549,7 +1549,7 @@
       [['multipliceras med 3.']]
     ], 1.05);
     y = ekvOp(y, '·3', xw, function (yb) {
-      var x2 = T.str('−4', padL + 30, yb);
+      var x2 = T.str('−4', padL, yb);
       x2 = T.str('·3', x2, yb, BLUE);
       x2 = T.str('=', x2, yb);
       x2 = storParen(T, F, x2 + 0.05 * F, yb, false, BLUE);
@@ -1558,7 +1558,7 @@
       x2 = storParen(T, F, x2 + 0.12 * F, yb, true, BLUE);
       T.str('·3', x2, yb, BLUE);
     }, { dy: 3.0, dyRes: 2.6, vopt: { h0: 1.25, h1: 1.15 } });
-    T.str('−12=4+3m', padL + 30, y);
+    T.str('−12=4+3m', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1566,7 +1566,7 @@
       [['subtraherar 4 från båda led.']]
     ]);
     y = ekvOp(y, '-4', xw, '−12=4+3m');
-    T.str('−16=3m', padL + 30, y);
+    T.str('−16=3m', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1574,7 +1574,7 @@
       [['dividerar båda led med 3.']]
     ]);
     y = ekvOp(y, '/3', xw, '−16=3m');
-    xx = T.str('m=−', padL + 30, y);
+    xx = T.str('m=−', padL, y);
     T.fracH('16', '3', xx + 0.16 * F, y);   /* luft: minus och bråkstreck ligger i samma höjd */
     T.stepEnd();
 
@@ -1604,12 +1604,12 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = padL + 30 + T.adv('x^2+cx+3=c') + 0.9 * F;
-    var xw2 = padL + 30 + T.fracW('c^2', '4') + T.adv('-3+c<0') + 0.9 * F;
+    var xw = padL + T.adv('x^2+cx+3=c') + 0.9 * F;
+    var xw2 = padL + T.fracW('c^2', '4') + T.adv('-3+c<0') + 0.9 * F;
 
     /* båda led-raden efter första raden är bred: under mobilzonen (y<210) */
     y = 174;
-    T.str('x^2+cx+3=c', padL + 30, y);
+    T.str('x^2+cx+3=c', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1618,7 +1618,7 @@
       [['från båda led.']]
     ]);
     y = ekvOp(y, '-c', xw, 'x^2+cx+3=c');
-    T.str('x^2+cx+3-c=0', padL + 30, y);
+    T.str('x^2+cx+3-c=0', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1641,7 +1641,7 @@
     ], 1.2);
     y += 4.4 * F;
     T.str('Reella rötter saknas om talet under roten är negativt', padL, y - 1.9 * F, null, 0.62);
-    xx = T.parenFrac('c', '2', '2', padL + 30, y);
+    xx = T.parenFrac('c', '2', '2', padL, y);
     T.str('-(3-c)<0', xx, y);
     T.stepEnd();
 
@@ -1651,7 +1651,7 @@
       [['på 3 och −c.']]
     ], 1.2);
     y += 3.6 * F;
-    xx = T.fracH('c^2', '4', padL + 30, y);
+    xx = T.fracH('c^2', '4', padL, y);
     T.str('-3+c<0', xx, y);
     T.stepEnd();
 
@@ -1662,7 +1662,7 @@
       [['behåller riktningen.']]
     ], 1.05);
     y = ekvOp(y, '·4', xw2, function (yb) {
-      var x2 = storParen(T, F, padL + 30, yb, false, BLUE);
+      var x2 = storParen(T, F, padL, yb, false, BLUE);
       x2 = T.fracH('c^2', '4', x2, yb);
       x2 = T.str('-3+c', x2, yb);
       x2 = storParen(T, F, x2 + 0.12 * F, yb, true, BLUE);
@@ -1670,11 +1670,11 @@
       x2 = T.str('<0', x2, yb);
       T.str('·4', x2, yb, BLUE);
     }, { dy: 3.0, dyRes: 2.6, vopt: { h0: 1.25, h1: 1.15 } });
-    T.str('c^2-12+4c<0', padL + 30, y);
+    T.str('c^2-12+4c<0', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('c^2+4c-12<0', padL + 30, y);
+    T.str('c^2+4c-12<0', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1685,13 +1685,13 @@
     ]);
     y += 3.6 * F;
     T.str('Nollställen till c^2+4c-12', padL, y - 1.45 * F, null, 0.62);
-    xx = T.str('c=−2±', padL + 30, y);
+    xx = T.str('c=−2±', padL, y);
     xx = T.rot('4+12', xx + 0.08 * F, y);
     T.str('=−2±4', xx, y);
     T.stepEnd();
 
     y += 2.5 * F;
-    T.str('c_1=−6 och c_2=2', padL + 30, y);
+    T.str('c_1=−6 och c_2=2', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1702,7 +1702,7 @@
       [['ger −12<0.']]
     ]);
     y += 2.6 * F;
-    T.str('−6<c<2', padL + 30, y);
+    T.str('−6<c<2', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -1740,7 +1740,7 @@
     y += 2.4 * F;
     T.str('f(0,5)=(−0,30...)^8', padL, y);
     y += 2.2 * F;
-    T.str('≈0,0001<0,5=g(0,5)', padL + 30, y);
+    T.str('≈0,0001<0,5=g(0,5)', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -1801,7 +1801,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = padL + 30 + T.fracW('x', '13,2') + T.adv('=') + T.fracW('1,70', '2,10') + 0.9 * F;
+    var xw = padL + T.fracW('x', '13,2') + T.adv('=') + T.fracW('1,70', '2,10') + 0.9 * F;
     var gy = 262, px = 104, mx = 166, tx = 344, eyeH = 40, treeH = 128;
     var eye = [px, gy - eyeH], top = [tx, gy - treeH], M = [mx, gy];
     var FIGB_Y = 350;
@@ -1853,7 +1853,7 @@
     ]);
     y = 430;
     T.str('Likformiga trianglar: höjd genom bas är lika', padL, y - 1.45 * F, null, 0.62);
-    xx = T.fracH('x', '13,2', padL + 30, y);
+    xx = T.fracH('x', '13,2', padL, y);
     xx = T.str('=', xx, y);
     T.fracH('1,70', '2,10', xx, y);
     T.stepEnd();
@@ -1863,13 +1863,13 @@
       [['multiplicerar båda led med 13,2.']]
     ], 1.05);
     y = ekvOp(y, '·13,2', xw, function (yb) {
-      var x2 = T.fracH('x', '13,2', padL + 30, yb);
+      var x2 = T.fracH('x', '13,2', padL, yb);
       x2 = T.str('·13,2', x2, yb, BLUE);
       x2 = T.str('=', x2, yb);
       x2 = T.fracH('1,70', '2,10', x2, yb);
       T.str('·13,2', x2, yb, BLUE);
     }, { dy: 3.0, dyRes: 3.2, vopt: { h0: 1.25, h1: 1.15 } });
-    xx = T.str('x=', padL + 30, y);
+    xx = T.str('x=', padL, y);
     xx = T.fracH('1,70·13,2', '2,10', xx, y);
     xx = T.str('=10,685...', xx, y);
     T.stepEnd();
@@ -1959,7 +1959,7 @@
     ]);
     y += 4.4 * F;
     T.str('Andelen ovanför µ+2σ', padL, y - 2.1 * F, null, 0.62);
-    xx = T.fracH('100 %-95,4 %', '2', padL + 30, y);
+    xx = T.fracH('100 %-95,4 %', '2', padL, y);
     T.str('=2,3 %', xx, y);
     T.pause(200);
     dashLine(T, [X(1.7), oy - 40], [X(1.7), oy - 6], 7, BLUE);
@@ -1999,7 +1999,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = padL + 30 + T.adv('−4=6+m') + 0.9 * F;
+    var xw = padL + T.adv('−4=6+m') + 0.9 * F;
     var ax = mkAxes(T, F, { ox: 200, oy: 212, u: 20,
                             xmin: -4, xmax: 4, ymin: -4, ymax: 4 });
     var FIGB_Y = 366;
@@ -2044,7 +2044,7 @@
       [['den gamla och har k=3.']]
     ]);
     y += 2.6 * F;
-    xx = T.str('y=3', padL + 30, y);
+    xx = T.str('y=3', padL, y);
     var v0 = xx; xx = T.str('x', xx, y); var v1 = xx;
     T.str('+m', xx, y);
     var yF = y;
@@ -2058,12 +2058,12 @@
     var ringar = substRings(acts, [[ax.X(2) + 8, ax.X(2) + 8 + T.adv('(2, −4)', 0.5), ax.Y(-4) + 6, 0.5 * F],
                                    [v0, v1, yF, F]]);
     y += 2.6 * F;
-    T.str('−4=3·2+m', padL + 30, y);
+    T.str('−4=3·2+m', padL, y);
     fadeRings(acts, ringar);
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('−4=6+m', padL + 30, y);
+    T.str('−4=6+m', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2071,7 +2071,7 @@
       [['subtraherar 6 från båda led.']]
     ]);
     y = ekvOp(y, '-6', xw, '−4=6+m');
-    T.str('m=−10', padL + 30, y);
+    T.str('m=−10', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2080,7 +2080,7 @@
       [['3·3-10=−1. Stämmer.']]
     ]);
     y += 2.6 * F;
-    T.str('y=3x-10', padL + 30, y);
+    T.str('y=3x-10', padL, y);
     T.pause(300);
     ax.linjal([ax.X(2), ax.Y(-4)], [ax.X(4.4), ax.Y(3.2)], BLUE);
     T.stepEnd();
@@ -2282,13 +2282,13 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = padL + 30 + T.adv('−4x(x-2)=x-2') + 0.9 * F;
-    var xw2 = padL + 30 + T.adv('−4x-1=0') + 0.9 * F;
+    var xw = padL + T.adv('−4x(x-2)=x-2') + 0.9 * F;
+    var xw2 = padL + T.adv('−4x-1=0') + 0.9 * F;
 
     /* väggen vid första raden når x>420: raden läggs under mobilzonen (y<210) */
     y = 236;
     T.str('Skärning: kurvorna har samma y', padL, y - 1.45 * F, null, 0.62);
-    T.str('−4x(x-2)=x-2', padL + 30, y);
+    T.str('−4x(x-2)=x-2', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2297,7 +2297,7 @@
       [['(x-2) från båda led.']]
     ]);
     y = ekvOp(y, '-(x-2)', xw, '−4x(x-2)=x-2');
-    T.str('−4x(x-2)-(x-2)=0', padL + 30, y);
+    T.str('−4x(x-2)-(x-2)=0', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2306,7 +2306,7 @@
       [['försvinner lösningen x=2.']]
     ]);
     y += 2.6 * F;
-    xx = T.str('(x-2)(', padL + 30, y);
+    xx = T.str('(x-2)(', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2325,11 +2325,11 @@
       [['är noll.']]
     ]);
     y += 2.6 * F;
-    T.str('x-2=0 ⟺ x_1=2', padL + 30, y);
+    T.str('x-2=0 ⟺ x_1=2', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('−4x-1=0', padL + 30, y);
+    T.str('−4x-1=0', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2337,7 +2337,7 @@
       [['så jag adderar 1 till båda led.']]
     ]);
     y = ekvOp(y, '+1', xw2, '−4x-1=0');
-    T.str('−4x=1', padL + 30, y);
+    T.str('−4x=1', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2345,7 +2345,7 @@
       [['dividerar båda led med −4.']]
     ]);
     y = ekvOp(y, '/(−4)', xw2, '−4x=1');
-    xx = T.str('x_2=−', padL + 30, y);
+    xx = T.str('x_2=−', padL, y);
     xx = T.fracH('1', '4', xx + 0.16 * F, y);
     T.str('=−0,25', xx, y);
     T.stepEnd();
@@ -2376,8 +2376,8 @@
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
     /* väggen står tätt efter den bredaste raden: annars når "/10^7" in i
      * stega-pilens band (x>696) */
-    var xw = padL + 30 + T.adv('5,44·10^7·0,98^x=4,374·10^7') + 0.25 * F;
-    var xw2 = padL + 30 + T.adv('x·lg 0,98=lg 0,80404...') + 0.5 * F;
+    var xw = padL + T.adv('5,44·10^7·0,98^x=4,374·10^7') + 0.25 * F;
+    var xw2 = padL + T.adv('x·lg 0,98=lg 0,80404...') + 0.5 * F;
 
     /* raderna är breda: de läggs under mobilzonen (x>420, y<210) */
     y = 246;
@@ -2393,7 +2393,7 @@
     ]);
     y += 3.6 * F;
     T.str('x = antal år efter 2014, faktorn 0,98 per år', padL, y - 1.45 * F, null, 0.62);
-    T.str('5,44·10^7·0,98^x=4,374·10^7', padL + 30, y);
+    T.str('5,44·10^7·0,98^x=4,374·10^7', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2401,15 +2401,15 @@
       [['dividerar båda led med 10^7.']]
     ]);
     y = ekvOp(y, '/10^7', xw, '5,44·10^7·0,98^x=4,374·10^7', { dy: 3.2, dyRes: 3.1 });
-    T.str('5,44·0,98^x=4,374', padL + 30, y);
+    T.str('5,44·0,98^x=4,374', padL, y);
     T.stepEnd();
 
     tanke(y, [
       [['Potensen ska stå ensam: jag']],
       [['dividerar båda led med 5,44.']]
     ]);
-    y = ekvOp(y, '/5,44', padL + 30 + T.adv('5,44·0,98^x=4,374') + 0.9 * F, '5,44·0,98^x=4,374');
-    xx = T.str('0,98^x=', padL + 30, y);
+    y = ekvOp(y, '/5,44', padL + T.adv('5,44·0,98^x=4,374') + 0.9 * F, '5,44·0,98^x=4,374');
+    xx = T.str('0,98^x=', padL, y);
     xx = T.fracH('4,374', '5,44', xx, y);
     T.str('=0,80404...', xx, y);
     T.stepEnd();
@@ -2419,7 +2419,7 @@
       [['logaritmerar båda led.']]
     ], 1.05);
     y += 3.4 * F;
-    T.str('lg 0,98^x=lg 0,80404...', padL + 30, y);
+    T.str('lg 0,98^x=lg 0,80404...', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2427,7 +2427,7 @@
       [['plockar ned x som en faktor.']]
     ]);
     y += 2.6 * F;
-    T.str('x·lg 0,98=lg 0,80404...', padL + 30, y);
+    T.str('x·lg 0,98=lg 0,80404...', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2436,7 +2436,7 @@
       [['negativa, så kvoten blir positiv.']]
     ]);
     y = ekvOp(y, '/lg 0,98', xw2, 'x·lg 0,98=lg 0,80404...');
-    xx = T.str('x=', padL + 30, y);
+    xx = T.str('x=', padL, y);
     xx = fracLift(T, F, 'lg 0,80404...', 'lg 0,98', xx, y);
     xx = T.str('=10,79...', xx, y);
     T.stepEnd();
@@ -2472,7 +2472,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = padL + 30 + T.adv('−0,24x+41=0') + 0.9 * F;
+    var xw = padL + T.adv('−0,24x+41=0') + 0.9 * F;
 
     /* ---- a) ---- (punktraderna är breda: under mobilzonen x>420, y<210) */
     y = 144;
@@ -2540,7 +2540,7 @@
       [['subtraherar 41 från båda led.']]
     ]);
     y = ekvOp(y, '-41', xw, '−0,24x+41=0');
-    T.str('−0,24x=−41', padL + 30, y);
+    T.str('−0,24x=−41', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2548,7 +2548,7 @@
       [['dividerar båda led med −0,24.']]
     ]);
     y = ekvOp(y, '/(−0,24)', xw, '−0,24x=−41');
-    xx = T.str('x=', padL + 30, y);
+    xx = T.str('x=', padL, y);
     xx = T.fracH('41', '0,24', xx, y);
     T.str('≈170', xx, y);
     T.stepEnd();
@@ -2591,7 +2591,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, i;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = padL + 30 + T.adv('4,5=−33,0625a') + 0.9 * F;
+    var xw = padL + T.adv('4,5=−33,0625a') + 0.9 * F;
     var ox = padL + 58, oy = 240, u = 22, bw = 11.5, bh = 4.5;
     function X(v) { return ox + v * u; }
     function Y(v) { return oy - v * u; }
@@ -2660,7 +2660,7 @@
       [['höjden.']]
     ], 1.05);
     y += 3.4 * F;
-    xx = T.str('y=a·', padL + 30, y);
+    xx = T.str('y=a·', padL, y);
     var v0 = xx; xx = T.str('x', xx, y); var v1 = xx;
     xx = T.str('(', xx, y);
     var w0 = xx; xx = T.str('x', xx, y); var w1 = xx;
@@ -2677,7 +2677,7 @@
     var ringar = substRings(acts, [[lx, lx + T.adv('(5,75; 4,5)', 0.5), Y(bh) - 6, 0.5 * F],
                                    [v0, v1, yF, F], [w0, w1, yF, F]]);
     y += 2.6 * F;
-    T.str('4,5=a·5,75·(5,75-11,5)', padL + 30, y);
+    T.str('4,5=a·5,75·(5,75-11,5)', padL, y);
     fadeRings(acts, ringar);
     T.stepEnd();
 
@@ -2686,7 +2686,7 @@
       [['5,75·(−5,75)=−33,0625.']]
     ]);
     y += 2.4 * F;
-    T.str('4,5=a·5,75·(−5,75)=−33,0625a', padL + 30, y);
+    T.str('4,5=a·5,75·(−5,75)=−33,0625a', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2701,7 +2701,7 @@
      * REDOVISNING i handskrift.js). Tidigare hamnade väggen mitt i raden
      * (2026-10-17). */
     y = mkEkvOp(T, false)(y, '/(−33,0625)', xw, '4,5=−33,0625a');
-    T.str('a=−0,13611...', padL + 30, y);
+    T.str('a=−0,13611...', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2738,7 +2738,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = padL + 30 + T.fracW('b', '7-h') + T.adv('=') + T.fracW('9', '7') + 0.9 * F;
+    var xw = padL + T.fracW('b', '7-h') + T.adv('=') + T.fracW('9', '7') + 0.9 * F;
     var k = 24, by = 250;
     var B = [padL + 82, by], C = [padL + 82 + 9 * k, by], A = [padL + 82 + 2.4 * k, by - 7 * k];
     var hr = 2.2, yTop = by - hr * k, t = hr / 7;
@@ -2794,7 +2794,7 @@
     ]);
     y += 3.8 * F;
     T.str('Likformiga trianglar: bas genom höjd är lika', padL, y - 1.9 * F, null, 0.62);
-    xx = T.fracH('b', '7-h', padL + 30, y);
+    xx = T.fracH('b', '7-h', padL, y);
     xx = T.str('=', xx, y);
     T.fracH('9', '7', xx, y);
     T.stepEnd();
@@ -2804,13 +2804,13 @@
       [['multiplicerar båda led med (7-h).']]
     ], 1.05);
     y = ekvOp(y, '·(7-h)', xw, function (yb) {
-      var x2 = T.fracH('b', '7-h', padL + 30, yb);
+      var x2 = T.fracH('b', '7-h', padL, yb);
       x2 = T.str('·(7-h)', x2, yb, BLUE);
       x2 = T.str('=', x2, yb);
       x2 = T.fracH('9', '7', x2, yb);
       T.str('·(7-h)', x2, yb, BLUE);
     }, { dy: 3.0, dyRes: 3.2, vopt: { h0: 1.25, h1: 1.15 } });
-    xx = T.str('b=', padL + 30, y);
+    xx = T.str('b=', padL, y);
     xx = T.fracH('9', '7', xx, y);
     T.str('(7-h)', xx, y);
     T.stepEnd();
@@ -2837,7 +2837,7 @@
       [['−h·h=−h^2.']]
     ], 1.05);
     y += 3.4 * F;
-    xx = T.str('=', padL + 30, y);
+    xx = T.str('=', padL, y);
     xx = T.fracH('9', '7', xx, y);
     xx = T.str('(', xx, y);
     var multIn = mkMultIn(T);
@@ -2856,7 +2856,7 @@
     ], 1.05);
     y += 3.8 * F;
     T.str('Största arean: h på symmetrilinjen', padL, y - 1.9 * F, null, 0.62);
-    xx = T.str('h=', padL + 30, y);
+    xx = T.str('h=', padL, y);
     xx = T.fracH('0+7', '2', xx, y);
     T.str('=3,5', xx, y);
     T.stepEnd();
@@ -2866,7 +2866,7 @@
       [['9/7·3,5=4,5, halva basen.']]
     ], 1.05);
     y += 3.6 * F;
-    xx = T.str('b=', padL + 30, y);
+    xx = T.str('b=', padL, y);
     xx = T.fracH('9', '7', xx, y);
     T.str('·(7-3,5)=4,5', xx, y);
     T.stepEnd();

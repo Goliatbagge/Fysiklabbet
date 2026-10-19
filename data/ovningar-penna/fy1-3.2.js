@@ -38,7 +38,7 @@
   function avr(T, F, xIns, y, txt) {
     if (xIns + T.adv(txt) < HK.PAPER_W - 44) { T.str(txt, xIns, y); return y; }
     y += 2.4 * F;
-    T.str(txt, T.padL + 24, y);
+    T.str(txt, T.padL, y);
     return y;
   }
   function slut(T, y) {
@@ -628,7 +628,7 @@
     T.stepEnd();
 
     y += 2.1 * F;
-    T.str('=2,5 kN', padL + 30, y);
+    T.str('=2,5 kN', padL, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;
@@ -1058,7 +1058,7 @@
     nuSatter(T, F, y, bw);
     T.str('F=(1 300+900)·1,222...', padL, y);
     y += 2.1 * F;
-    xIns = T.str('=2 688,8... N', padL + 30, y);
+    xIns = T.str('=2 688,8... N', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.3 * F), bw, [
@@ -1069,7 +1069,7 @@
     T.stepEnd();
 
     y += 2.1 * F;
-    T.str('=2,7 kN', padL + 30, y);
+    T.str('=2,7 kN', padL, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;

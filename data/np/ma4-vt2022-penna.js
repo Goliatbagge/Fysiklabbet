@@ -95,7 +95,7 @@
       [['derivatan.']]
     ]);
     y += 2.7 * F;
-    xx = T.str('f’(x)=cos 5x·5', padL + 30, y);
+    xx = T.str('f’(x)=cos 5x·5', padL, y);
     T.stepEnd();
 
     T.str('=5cos 5x', xx + 0.3 * F, y);
@@ -118,7 +118,7 @@
       [['inre derivatan, som är 5.']]
     ]);
     y += 2.7 * F;
-    xx = T.str('g’(x)=10(5x+2)^9·5', padL + 30, y);
+    xx = T.str('g’(x)=10(5x+2)^9·5', padL, y);
     T.stepEnd();
 
     T.str('=50(5x+2)^9', xx + 0.3 * F, y);
@@ -142,7 +142,7 @@
       [['derivata.']]
     ]);
     y += 2.7 * F;
-    T.str('h’(x)=7x^6·e^x+x^7·e^x', padL + 30, y);
+    T.str('h’(x)=7x^6·e^x+x^7·e^x', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
@@ -402,7 +402,7 @@
 
     /* raden når x > 420 och gränsen sticker upp 1,7·F: läggs under y = 150 */
     y = 210;
-    xx = T.str('∫_0', padL + 24, y);
+    xx = T.str('∫_0', padL + 12, y);
     xx = ovreGrans(T, F, xx, y, 'π', '2', '∫');
     var yE = y, xs0 = xx + 0.3 * F;
     var xs1 = T.str('(sin^2 x+cos^2 x', xs0, y);
@@ -416,7 +416,7 @@
     ]);
     var ring = substRings(acts, [[xs0 + 0.3 * F, xs1, yE, F]]);
     y += 3.0 * F;
-    xx = T.str('=', padL + 24, y);
+    xx = T.str('=', padL, y);
     xx = T.str('∫_0', xx + 0.45 * F, y);
     xx = ovreGrans(T, F, xx, y, 'π', '2', '∫');
     T.str('(1+sin x) dx', xx + 0.3 * F, y);
@@ -428,7 +428,7 @@
       [['och till sin x är den −cos x.']]
     ]);
     y += 3.0 * F;
-    xx = T.str('=[x-cos x]_0', padL + 24, y);
+    xx = T.str('=[x-cos x]_0', padL, y);
     ovreGrans(T, F, xx, y, 'π', '2', ']');
     T.stepEnd();
 
@@ -437,7 +437,7 @@
       [['gränsen.']]
     ]);
     y += 3.0 * F;
-    xx = T.str('=(', padL + 24, y);
+    xx = T.str('=(', padL, y);
     xx = T.fracH('π', '2', xx, y);
     xx = T.str('-cos ', xx, y);
     xx = T.fracH('π', '2', xx, y);
@@ -449,13 +449,13 @@
       [['och cos 0=1.']]
     ], 1.05);
     y += 3.4 * F;
-    xx = T.str('=(', padL + 24, y);
+    xx = T.str('=(', padL, y);
     xx = T.fracH('π', '2', xx, y);
     xx = T.str('-0)-(0-1)', xx, y);
     T.stepEnd();
 
     y += 3.2 * F;
-    xx = T.str('=', padL + 24, y);
+    xx = T.str('=', padL, y);
     xx = T.fracH('π', '2', xx, y);
     T.str('+1', xx, y);
     T.stepEnd();
@@ -475,7 +475,7 @@
     var tanke = mkTanke(T);
 
     y = 125;
-    T.str('z=e^2^+^i^π', padL + 30, y);
+    T.str('z=e^2^+^i^π', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -484,7 +484,7 @@
       [['med samma bas.']]
     ]);
     y += 2.7 * F;
-    xx = T.str('z=e^2·e^i^π', padL + 30, y);
+    xx = T.str('z=e^2·e^i^π', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -500,7 +500,7 @@
       [['inte avståndet.']]
     ]);
     y += 2.7 * F;
-    T.str('|z|=|-e^2|=e^2', padL + 30, y);
+    T.str('|z|=|-e^2|=e^2', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -522,7 +522,7 @@
     var u = 30, ox = padL + 190, oy = 215;
     function X(a) { return ox + a * u; }
     function Y(b) { return oy - b * u; }
-    var xw = padL + 30 + T.adv('x=y-2') + 0.9 * F;
+    var xw = padL + T.adv('x=y-2') + 0.9 * F;
 
     /* uppgiftens figur står färdig från början (REGEL UPPGIFTENS FIGUR
      * STÅR FÄRDIG FRÅN BÖRJAN) */
@@ -575,10 +575,10 @@
       [['reella axeln.']]
     ]);
     y += 2.7 * F;
-    xx = T.str('z_1=-4-3i', padL + 30, y);
+    xx = T.str('z_1=-4-3i', padL, y);
     /* konjugatstrecket över z */
-    acts.push({ kind: 'stroke', pts: humanize([[padL + 30 + 0.22 * F, y - 0.74 * F],
-                                               [padL + 30 + 0.68 * F, y - 0.76 * F]]) });
+    acts.push({ kind: 'stroke', pts: humanize([[padL + 0.22 * F, y - 0.74 * F],
+                                               [padL + 0.68 * F, y - 0.76 * F]]) });
     T.pause(160);
     streckad(T, [X(-4), Y(3) + 6], [X(-4), Y(-3) - 6], BLUE, 13);
     acts.push({ kind: 'stroke', pts: V.dotPts(X(-4), Y(-3)), color: BLUE });
@@ -624,7 +624,7 @@
       [['45° är en fjärdedels π.']]
     ]);
     y += 3.0 * F;
-    xx = T.str('arg(z_2-1)=-', padL + 30, y);
+    xx = T.str('arg(z_2-1)=-', padL, y);
     T.fracH('π', '4', xx, y);
     T.stepEnd();
 
@@ -649,7 +649,7 @@
       [['ihop var för sig.']]
     ]);
     y += 2.7 * F;
-    T.str('z+z_2=(x+3)+(y-2)i', padL + 30, y);
+    T.str('z+z_2=(x+3)+(y-2)i', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -658,7 +658,7 @@
     ]);
     y += 3.7 * F;
     T.str('Realdelen av z ska vara lika med imaginärdelen av z+z_2', padL, y - 1.9 * F, null, 0.62);
-    T.str('x=y-2', padL + 30, y);
+    T.str('x=y-2', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -666,7 +666,7 @@
       [['att y står ensamt.']]
     ]);
     y = ekvOp(y, '+2', xw, 'x=y-2');
-    xx = T.str('x+2=y', padL + 30, y);
+    xx = T.str('x+2=y', padL, y);
     T.stepEnd();
 
     T.str('⟺ y=x+2', xx + 0.4 * F, y);
@@ -704,7 +704,7 @@
     T.str('h(x)=x^2', padL, y + 2.0 * F);
     y += 2.0 * F;
     y += 3.0 * F;
-    xx = T.str('∫_0', padL + 24, y);
+    xx = T.str('∫_0', padL + 12, y);
     xx = ovreTal(T, F, xx, y, 'π');
     passa(T, '(g’(x)·h(x)+g(x)·h’(x)) dx', xx + 0.2 * F, y);
     T.stepEnd();
@@ -732,7 +732,7 @@
       [['först.']]
     ]);
     y += 2.9 * F;
-    T.str('=[x^2·cos x]_0^π', padL + 30, y);
+    T.str('=[x^2·cos x]_0^π', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -741,11 +741,11 @@
       [['gränsen blir produkten 0.']]
     ]);
     y += 2.9 * F;
-    xx = T.str('=π^2·cos π-0^2·cos 0', padL + 30, y);
+    xx = T.str('=π^2·cos π-0^2·cos 0', padL, y);
     T.stepEnd();
 
     y += 2.5 * F;
-    T.str('=π^2·(-1)-0=-π^2', padL + 30, y);
+    T.str('=π^2·(-1)-0=-π^2', padL, y);
     T.stepEnd();
 
     y += 2.5 * F;
@@ -763,19 +763,19 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var xw = padL + 30 + T.adv('10v=0°+n·360°') + 0.9 * F;
+    var xw = padL + T.adv('10v=0°+n·360°') + 0.9 * F;
 
     /* väggens "+1" hamnar till höger om x = 420: raden läggs under
      * ekvval-scenernas förbjudna hörn (y < 210) */
     y = 242;
-    T.str('z^1^0-1=0', padL + 30, y);
+    T.str('z^1^0-1=0', padL, y);
     T.stepEnd();
 
     tanke(y, [
       [['Jag adderar 1 i båda led.']]
     ]);
     y = ekvOp(y, '+1', xw, 'z^1^0-1=0');
-    T.str('z^1^0=1', padL + 30, y);
+    T.str('z^1^0=1', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -785,7 +785,7 @@
       [['och argumentet 0°.']]
     ]);
     y += 2.8 * F;
-    T.str('r^1^0(cos 10v+i sin 10v)=1(cos 0°+i sin 0°)', padL + 30, y, null, 0.76);
+    T.str('r^1^0(cos 10v+i sin 10v)=1(cos 0°+i sin 0°)', padL, y, null, 0.76);
     T.stepEnd();
 
     tanke(y, [
@@ -793,7 +793,7 @@
       [['positivt.']]
     ]);
     y += 2.7 * F;
-    T.str('r^1^0=1  ⟹  r=1', padL + 30, y);
+    T.str('r^1^0=1  ⟹  r=1', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -801,14 +801,14 @@
       [['hela varv: n·360°.']]
     ]);
     y += 2.7 * F;
-    T.str('10v=0°+n·360°', padL + 30, y);
+    T.str('10v=0°+n·360°', padL, y);
     T.stepEnd();
 
     tanke(y, [
       [['Jag dividerar båda led med 10.']]
     ]);
     y = ekvOp(y, '/10', xw, '10v=0°+n·360°');
-    T.str('v=n·36°', padL + 30, y);
+    T.str('v=n·36°', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -817,7 +817,7 @@
       [['utanför den reella axeln.']]
     ]);
     y += 2.7 * F;
-    T.str('n=1: z=cos 36°+i sin 36°', padL + 30, y);
+    T.str('n=1: z=cos 36°+i sin 36°', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -890,14 +890,14 @@
     ]);
     y += 4.3 * F;
     T.str('Löser ut x, eftersom radien ska uttryckas i y', padL, y - 2.15 * F, null, 0.62);
-    xx = T.str('y=x', padL + 30, y);
+    xx = T.str('y=x', padL, y);
     T.fracSup('1', '4', xx, y);
     T.stepEnd();
 
     /* upphöjningen skrivs likadant i båda redovisningslägena: 4:an i blått
      * i båda led */
     y += 2.8 * F;
-    xx = T.str('y', padL + 30, y);
+    xx = T.str('y', padL, y);
     xx = T.str('^4', xx, y, BLUE);
     xx = T.str('=(x', xx, y);
     xx = T.fracSup('1', '4', xx, y);
@@ -910,7 +910,7 @@
       [['högerledet blir bara x.']]
     ]);
     y += 2.8 * F;
-    xx = T.str('y^4=x', padL + 30, y);
+    xx = T.str('y^4=x', padL, y);
     T.stepEnd();
 
     T.str('⟺ x=y^4', xx + 0.4 * F, y);
@@ -922,11 +922,11 @@
       [['multipliceras, 4·2=8.']]
     ]);
     y += 2.8 * F;
-    T.str('x^2=(y^4)^2=y^8', padL + 30, y);
+    T.str('x^2=(y^4)^2=y^8', padL, y);
     T.stepEnd();
 
     y += 2.8 * F;
-    xx = T.str('V=π', padL + 30, y);
+    xx = T.str('V=π', padL, y);
     xx = T.str('∫_0', xx + 0.45 * F, y);
     xx = ovreTal(T, F, xx, y, '2');
     T.str('y^8 dy', xx + 0.2 * F, y);
@@ -1093,7 +1093,7 @@
     ], 1.05);
     y += 6.6 * F;
     T.str('Förlänger med nämnarens konjugat', padL, y - 4.1 * F, null, 0.62);
-    xx = T.str('=', padL + 20, y);
+    xx = T.str('=', padL, y);
     /* täljarens delar i fracOp:s läge (samma uträkning som i fracOp) */
     var w0 = Math.max(T.adv('(8+6i)'), T.adv('(1+2i)')) + 0.3 * F;
     var xNum = xx + (w0 - T.adv('(8+6i)')) / 2, yNum = y - 0.48 * F;
@@ -1111,7 +1111,7 @@
     ], 1.05);
     y += 6.6 * F;
     T.str('Multiplicerar ut täljaren och nämnaren', padL, y - 3.4 * F, null, 0.62);
-    xx = T.str('=', padL + 20, y);
+    xx = T.str('=', padL, y);
     var D = [
       { fran: P8, till: P1, skriv: '8', hojd: 20 },
       { fran: P8, till: P2i, skriv: '-16i', hojd: 32, dx: 3, dx2: 4 },
@@ -1130,7 +1130,7 @@
       [['konjugat. Konjugatregeln ger den']],
       [['direkt.']]
     ], 1.3);
-    not = regelNot(T, F, '(a+b)(a-b)=a^2-b^2', padL + 30, y + 2.9 * F);
+    not = regelNot(T, F, '(a+b)(a-b)=a^2-b^2', padL, y + 2.9 * F);
     T.str(denS3, xx + (wD3 - T.adv(denS3)) / 2, ybar3 + 1.04 * F + 0.2 * F);
     regelGom(T, not);
     xx += wD3 + 1.5;
@@ -1143,7 +1143,7 @@
     ], 1.3);
     var y3n = y - 0.48 * F;
     y += 5.4 * F;
-    xx = T.str('=', padL + 20, y);
+    xx = T.str('=', padL, y);
     xx = fracCB(T, F, T.adv('8-10i-12i^2'), function (x, yn) {
       x = T.str('8', x, yn);
       var r1 = T.ring(D[1].x0, D[1].x1, y3n);
@@ -1175,7 +1175,7 @@
     ], 1.3);
     var p5 = R5.num.pos, y5n = R5.yNum;
     y4 += 5.0 * F;
-    xx = T.str('=', padL + 20, y4);
+    xx = T.str('=', padL, y4);
     xx = fracCB(T, F, T.adv('20-10i'), function (x, yn) {
       var r1 = T.ring(p5[0][0], p5[0][1], y5n);
       T.pause(260);
@@ -1227,14 +1227,14 @@
 
     function delaMed4(hl) {
       return function (yb) {
-        var x = T.fracH('4x', '4', padL + 30, yb, null, BLUE);
+        var x = T.fracH('4x', '4', padL, yb, null, BLUE);
         x = T.str('=', x, yb);
         T.fracH(hl + '+n·360°', '4', x, yb, null, BLUE);
       };
     }
     /* uppdelningen i två bråk är en egen rad, sedan förenklingen */
     function delaUpp(yb, hl, svar) {
-      var x = T.str('x=', padL + 30, yb);
+      var x = T.str('x=', padL, yb);
       x = T.fracH(hl, '4', x, yb);
       x = T.str('+', x, yb);
       T.fracH('n·360°', '4', x, yb);
@@ -1244,7 +1244,7 @@
         [['delat med 4 är 90°.']]
       ], 1.05);
       yb += 3.0 * F;
-      T.str(svar, padL + 30, yb);
+      T.str(svar, padL, yb);
       T.stepEnd();
       return yb;
     }
@@ -1409,7 +1409,7 @@
       [['den.']]
     ], 1.05);
     var y4 = y3 + 4.6 * F;
-    xx = T.str('=', padL + 40, y4);
+    xx = T.str('=', padL, y4);
     var R4 = fracSegs(T, F, [['a+bi'], ['-a', BLUE], ['+bi', BLUE]], [['2i']], xx, y4);
     xx = R4.x;
     T.stepEnd();
@@ -1443,7 +1443,7 @@
       [['den.']]
     ], 1.05);
     var y4b = y4 + 4.6 * F;
-    xx = T.str('=', padL + 40, y4b);
+    xx = T.str('=', padL, y4b);
     xx = T.fracOp('2bi', '2i', '/(2i)', xx, y4b);
     T.stepEnd();
 
@@ -1763,7 +1763,7 @@
       [['och det andra med cos x-sin x.']]
     ], 1.05);
     var y2 = y + 5.6 * F;
-    xx = T.str('=', padL + 20, y2);
+    xx = T.str('=', padL, y2);
     var R2 = fracSegs(T, F,
       [['sin x'], ['(cos x+sin x)', BLUE], ['+sin x'], ['(cos x-sin x)', BLUE]],
       [['(cos x-sin x)(cos x+sin x)']], xx, y2, SC);
@@ -1792,7 +1792,7 @@
     ];
     var numW3 = segsW(T, TERM.map(function (t) { return [t.skriv]; }), SC);
     var denS3 = 'cos^2x-sin^2x';
-    xx = T.str('=', padL + 20, y3);
+    xx = T.str('=', padL, y3);
     var yNum3;
     xx = fracCB(T, F, numW3, function (x, yn) {
       yNum3 = yn;
@@ -1804,7 +1804,7 @@
         T.pause(200);
       });
     }, T.adv(denS3, SC), function (x, yd) {
-      not = regelNot(T, F, '(a-b)(a+b)=a^2-b^2', padL + 30, y3 + 2.6 * F);
+      not = regelNot(T, F, '(a-b)(a+b)=a^2-b^2', padL, y3 + 2.6 * F);
       T.str(denS3, x, yd, null, SC);
       regelGom(T, not);
     }, xx, y3, SC, true);
@@ -1817,7 +1817,7 @@
     ], 1.2);
     var y4 = y3 + 5.0 * F;
     var plusW = T.adv('+', SC);
-    xx = T.str('=', padL + 20, y4);
+    xx = T.str('=', padL, y4);
     xx = fracCB(T, F, T.adv('2sin x cos x'), function (x, yn) {
       var r1 = T.ring(TERM[0].x0, TERM[0].x1, yNum3);
       T.pause(260);
@@ -1848,14 +1848,14 @@
     xx = T.str('=', xx, y4);
     var wD = Math.max(T.adv('sin 2x'), T.adv('cos 2x')) + 0.3 * F;
     var ybar = y4 - 0.34 * F;
-    not = regelNot(T, F, 'sin 2v=2sin v cos v', padL + 30, y4 + 2.7 * F);
+    not = regelNot(T, F, 'sin 2v=2sin v cos v', padL, y4 + 2.7 * F);
     T.str('sin 2x', xx + (wD - T.adv('sin 2x')) / 2, ybar - 0.14 * F);
     T.pause(130);
     acts.push({ kind: 'stroke', pts: humanize([[xx, ybar], [xx + wD, ybar]]) });
     T.stepEnd();
     regelGom(T, not);
 
-    not = regelNot(T, F, 'cos 2v=cos^2v-sin^2v', padL + 30, y4 + 2.7 * F);
+    not = regelNot(T, F, 'cos 2v=cos^2v-sin^2v', padL, y4 + 2.7 * F);
     T.str('cos 2x', xx + (wD - T.adv('cos 2x')) / 2, ybar + 1.04 * F);
     regelGom(T, not);
     xx += wD + 1.5;
@@ -1937,7 +1937,7 @@
     T.stepEnd();
 
     var y4b = y4 + 4.2 * F;
-    xx = T.str('=±', padL + 60, y4b);
+    xx = T.str('=±', padL, y4b);
     T.fracH('1', '3', xx, y4b);
     T.stepEnd();
 
@@ -1951,7 +1951,7 @@
     T.stepEnd();
 
     var y5b = y5 + 4.2 * F;
-    xx = T.str('=±', padL + 60, y5b);
+    xx = T.str('=±', padL, y5b);
     rot8genom3(T, F, xx, y5b);
     T.stepEnd();
 
@@ -2013,7 +2013,7 @@
       [['bråket.']]
     ], 1.9);
     var y8 = y7 + 5.2 * F;
-    xx = T.str('=', padL + 60, y8);
+    xx = T.str('=', padL, y8);
     xx = rot8genom3(T, F, xx, y8);
     xx = T.mul(xx, y8);
     xx = T.fracH('3', '-1', xx, y8);
@@ -2053,7 +2053,7 @@
     /* gånger i båda led för ett bråk = tal: VL·k = HL·k, k i blått */
     function ganger(num, den, hl, k) {
       return function (yb) {
-        var x = T.fracH(num, den, padL + 30, yb);
+        var x = T.fracH(num, den, padL, yb);
         x = T.str('·' + k, x, yb, BLUE);
         x = T.str('=' + hl, x, yb);
         T.str('·' + k, x, yb, BLUE);
@@ -2094,7 +2094,7 @@
     T.stepEnd();
 
     y += 4.2 * F;
-    xx = T.fracH('a+b', '2', padL + 30, y);
+    xx = T.fracH('a+b', '2', padL, y);
     xx = T.str('=4', xx, y);
     T.stepEnd();
 
@@ -2102,8 +2102,8 @@
       [['Jag multiplicerar båda led med 2.']]
     ], 1.05);
     y = ekvOp(y, '·2', xx + 0.6 * F, ganger('a+b', '2', '4', '2'), OPTB);
-    var e1y = y, e1x0 = padL + 30;
-    var e1x1 = T.str('a+b=8', padL + 30, y);
+    var e1y = y, e1x0 = padL;
+    var e1x1 = T.str('a+b=8', padL, y);
     T.stepEnd();
 
     /* ---- derivatan med kvotregeln ---- */
@@ -2186,7 +2186,7 @@
     T.stepEnd();
 
     y = y3 + 4.2 * F;
-    xx = T.fracH('a-b', '4', padL + 30, y);
+    xx = T.fracH('a-b', '4', padL, y);
     xx = T.str('=3', xx, y);
     T.stepEnd();
 
@@ -2194,7 +2194,7 @@
       [['Jag multiplicerar båda led med 4.']]
     ], 1.05);
     y = ekvOp(y, '·4', xx + 0.6 * F, ganger('a-b', '4', '3', '4'), OPTB);
-    T.str('a-b=12', padL + 30, y);
+    T.str('a-b=12', padL, y);
     T.stepEnd();
 
     /* ---- ekvationssystemet ---- */
@@ -2282,7 +2282,7 @@
     xx = T.str('sin v cos 40°', padL, y, null, SCB);
     T.str('-cos v sin 40°', xx, y, BLUE, SCB);
     y += 2.1 * F;
-    xx = T.str('=sin v+cos v sin 40°', padL + 30, y, null, SCB);
+    xx = T.str('=sin v+cos v sin 40°', padL, y, null, SCB);
     T.str('-cos v sin 40°', xx, y, BLUE, SCB);
     T.stepEnd();
 
@@ -2312,14 +2312,14 @@
     T.str('Fall 1: samma punkt', padL, y, null, 0.62);
     T.pause(200);
     y += 2.0 * F;
-    xx = T.str('v-40°=v+n·360°', padL + 30, y);
+    xx = T.str('v-40°=v+n·360°', padL, y);
     T.stepEnd();
 
     tanke(y, [
       [['Jag subtraherar v från båda led.']]
     ]);
     y = ekvOp(y, '-v', xx + 0.6 * F, 'v-40°=v+n·360°');
-    T.str('-40°=n·360°', padL + 30, y);
+    T.str('-40°=n·360°', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2328,7 +2328,7 @@
       [['Aldrig -40°.']]
     ]);
     y += 2.4 * F;
-    T.str('Inga lösningar i fall 1', padL + 30, y, null, 0.62);
+    T.str('Inga lösningar i fall 1', padL, y, null, 0.62);
     T.stepEnd();
 
     /* ---- fall 2 ---- */
@@ -2336,21 +2336,21 @@
     T.str('Fall 2: spegelbilden, 180° minus vinkeln', padL, y, null, 0.62);
     T.pause(200);
     y += 2.0 * F;
-    xx = T.str('v-40°=180°-v+n·360°', padL + 30, y);
+    xx = T.str('v-40°=180°-v+n·360°', padL, y);
     T.stepEnd();
 
     tanke(y, [
       [['Jag adderar v till båda led.']]
     ]);
     y = ekvOp(y, '+v', xx + 0.6 * F, 'v-40°=180°-v+n·360°');
-    xx = T.str('2v-40°=180°+n·360°', padL + 30, y);
+    xx = T.str('2v-40°=180°+n·360°', padL, y);
     T.stepEnd();
 
     tanke(y, [
       [['Jag adderar 40° till båda led.']]
     ]);
     y = ekvOp(y, '+40°', xx + 0.6 * F, '2v-40°=180°+n·360°');
-    xx = T.str('2v=220°+n·360°', padL + 30, y);
+    xx = T.str('2v=220°+n·360°', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2358,17 +2358,17 @@
       [['Perioden delas också med 2.']]
     ]);
     y = ekvOp(y, '/2', xx + 0.6 * F, function (yb) {
-      var x = T.fracH('2v', '2', padL + 30, yb, null, BLUE);
+      var x = T.fracH('2v', '2', padL, yb, null, BLUE);
       x = T.str('=', x, yb);
       T.fracH('220°+n·360°', '2', x, yb, null, BLUE);
     }, { dy: 3.2, dyRes: 3.0, dyVagg: 3.0, vopt: { h0: 1.25, h1: 1.15 } });
-    xx = T.str('v=', padL + 30, y);
+    xx = T.str('v=', padL, y);
     xx = T.fracH('220°', '2', xx, y);
     xx = T.str('+', xx, y);
     T.fracH('n·360°', '2', xx, y);
     T.stepEnd();
     y += 3.0 * F;
-    T.str('v=110°+n·180°', padL + 30, y);
+    T.str('v=110°+n·180°', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2376,7 +2376,7 @@
       [['Jag prövar n närmast intervallet.']]
     ]);
     y += 2.8 * F;
-    T.str('n=-1: v=-70°', padL + 40, y, null, 0.8);
+    T.str('n=-1: v=-70°', padL, y, null, 0.8);
     T.pause(300);
     T.str('n=0: v=110°', padL + 400, y, null, 0.8);
     T.stepEnd();
@@ -2428,7 +2428,7 @@
       [['3x·1/x är 3.']]
     ], 1.05);
     y += 3.4 * F;
-    T.str('=3ln x+3', padL + 60, y);
+    T.str('=3ln x+3', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2446,7 +2446,7 @@
       [['derivatan 1/x.']]
     ]);
     y += 3.2 * F;
-    xx = T.str('+x·2ln x·', padL + 60, y);
+    xx = T.str('+x·2ln x·', padL, y);
     xx = T.fracH('1', 'x', xx, y);
     T.str('+3', xx, y);
     T.stepEnd();
@@ -2456,7 +2456,7 @@
       [['blir 2ln x.']]
     ], 1.05);
     y += 3.4 * F;
-    T.str('=(ln x)^2+2ln x+3', padL + 60, y);
+    T.str('=(ln x)^2+2ln x+3', padL, y);
     T.stepEnd();
 
     /* ---- ekvationen ---- */
@@ -2465,14 +2465,14 @@
     ]);
     y += 4.3 * F;
     T.str('f(x)=g(x)', padL, y - 1.6 * F, null, 0.62);
-    xx = T.str('3ln x+3=(ln x)^2+2ln x+3', padL + 30, y);
+    xx = T.str('3ln x+3=(ln x)^2+2ln x+3', padL, y);
     T.stepEnd();
 
     tanke(y, [
       [['Jag subtraherar 3 från båda led.']]
     ]);
     y = ekvOp(y, '-3', xx + 0.6 * F, '3ln x+3=(ln x)^2+2ln x+3');
-    xx = T.str('3ln x=(ln x)^2+2ln x', padL + 30, y);
+    xx = T.str('3ln x=(ln x)^2+2ln x', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2480,7 +2480,7 @@
       [['led.']]
     ]);
     y = ekvOp(y, '-3ln x', xx + 0.6 * F, '3ln x=(ln x)^2+2ln x');
-    T.str('0=(ln x)^2-ln x', padL + 30, y);
+    T.str('0=(ln x)^2-ln x', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2488,7 +2488,7 @@
       [['Jag bryter ut den.']]
     ]);
     y += 2.8 * F;
-    xx = T.str('0=ln x(', padL + 30, y);
+    xx = T.str('0=ln x(', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2510,7 +2510,7 @@
       [['av faktorerna är noll.']]
     ]);
     y += 2.8 * F;
-    T.str('ln x=0', padL + 30, y);
+    T.str('ln x=0', padL, y);
     T.pause(300);
     xx = T.str('ln x-1=0', padL + 300, y);
     var yF = y;
@@ -2528,7 +2528,7 @@
       [['ln x=c betyder att x=e^c.']]
     ]);
     y += 2.8 * F;
-    T.str('x=e^0=1', padL + 30, y);
+    T.str('x=e^0=1', padL, y);
     T.pause(300);
     T.str('x=e^1=e', padL + 300, y);
     T.stepEnd();
@@ -2611,7 +2611,7 @@
       [['alltså på grader.']]
     ]);
     y += 2.6 * F;
-    T.str('sin 90°=1  ⇒  grader', padL + 30, y);
+    T.str('sin 90°=1  ⇒  grader', padL, y);
     T.stepEnd();
 
     y += 2.6 * F;
@@ -2623,7 +2623,7 @@
       [['i grader men 2π i radianer.']]
     ]);
     y += 2.6 * F;
-    T.str('2π≈6,28  ⇒  radianer', padL + 30, y);
+    T.str('2π≈6,28  ⇒  radianer', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2648,13 +2648,13 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var ekvOp = mkEkvOp(T, !!cfg.vagg);
-    var x0 = padL + 30;
+    var x0 = padL;
     var xw = x0 + T.adv('6,1731+1,9k=13') + 0.9 * F;
 
     y = 230;
     rubrik(T, 'Arean mellan kurvorna: övre minus undre', padL, y);
     y += 2.0 * F;
-    T.str('∫_0^1^,^9 (4x^3+k-3x^2) dx=13', padL + 24, y);
+    T.str('∫_0^1^,^9 (4x^3+k-3x^2) dx=13', padL + 12, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2663,7 +2663,7 @@
       [['ger kx.']]
     ]);
     y += 2.9 * F;
-    T.str('[x^4+kx-x^3]_0^1^,^9=13', padL + 24, y);
+    T.str('[x^4+kx-x^3]_0^1^,^9=13', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2730,7 +2730,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('=390 sin 2,94+230=308,08...', padL + 30, y);
+    T.str('=390 sin 2,94+230=308,08...', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2738,7 +2738,7 @@
       [['värdesiffror.']]
     ]);
     y += 2.6 * F;
-    T.str('≈310', padL + 30, y);
+    T.str('≈310', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
@@ -2762,7 +2762,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('=101,4 cos(0,26x-2,0)', padL + 30, y);
+    T.str('=101,4 cos(0,26x-2,0)', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2774,7 +2774,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('=-44,94...≈-45', padL + 30, y);
+    T.str('=-44,94...≈-45', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2833,7 +2833,7 @@
       [['av π·y²·dx.']]
     ]);
     y += 2.9 * F;
-    T.str('V=π ∫_a^b (9x-x^4-7)^2 dx', padL + 24, y);
+    T.str('V=π ∫_a^b (9x-x^4-7)^2 dx', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2842,11 +2842,11 @@
       [['avrunda dem.']]
     ], 0.6);
     y += 2.8 * F;
-    T.str('=π·1,5502...=4,8703...', padL + 30, y);
+    T.str('=π·1,5502...=4,8703...', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('≈4,87', padL + 30, y);
+    T.str('≈4,87', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2882,7 +2882,7 @@
     y = 170;
     rubrik(T, 'Högst 5 minuter sen: arean under f från 0 till 5', padL, y);
     y += 2.1 * F;
-    T.str('P(0≤t≤5)= ∫_0^5 f(t) dt', padL + 24, y);
+    T.str('P(0≤t≤5)= ∫_0^5 f(t) dt', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2918,7 +2918,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('=1-e^-^0^,^2^5=0,2211...', padL + 30, y);
+    T.str('=1-e^-^0^,^2^5=0,2211...', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2944,7 +2944,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var ekvOp = mkEkvOp(T, !!cfg.vagg);
-    var x0 = padL + 30, xb = padL;
+    var x0 = padL, xb = padL;
     var xw = xb + T.adv('11 sin(0,11x-0,89)+28=36') + 0.9 * F;
     var xw2 = x0 + T.adv('0,11x-0,89=0,8143...') + 0.9 * F;
 
@@ -2959,7 +2959,7 @@
       [['x≈22,4, inom dygnet.']]
     ]);
     y += 2.6 * F;
-    T.str('v_m_a_x=11·1+28=39', padL + 30, y);
+    T.str('v_m_a_x=11·1+28=39', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
@@ -3077,7 +3077,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('=19 595,52 MJ/h', padL + 140, y);
+    T.str('=19 595,52 MJ/h', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -3089,11 +3089,11 @@
     y += 2.9 * F;
     rubrik(T, 'Energi: integral av produktionen per timme', padL, y);
     y += 2.3 * F;
-    T.str('E= ∫_0^1^5^,^4^9^4 0,42·v(x)^3 dx', padL + 24, y);
+    T.str('E= ∫_0^1^5^,^4^9^4 0,42·v(x)^3 dx', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('+19 595,52·(24-15,494...)', padL + 60, y);
+    T.str('+19 595,52·(24-15,494...)', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -3102,11 +3102,11 @@
       [['gränsen 15,494...']]
     ]);
     y += 2.6 * F;
-    T.str('=150 958,5...+166 679,5...', padL + 30, y);
+    T.str('=150 958,5...+166 679,5...', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('=317 638...≈320 000', padL + 30, y);
+    T.str('=317 638...≈320 000', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -3183,7 +3183,7 @@
     T.stepEnd();
 
     y += 2.6 * F;
-    T.str('⟺  C=-4,25π+n·2π', padL + 30, y);
+    T.str('⟺  C=-4,25π+n·2π', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -3217,7 +3217,7 @@
     var vagg = !!cfg.vagg;
     var ekvOp = mkEkvOp(T, vagg);
     var multIn = V.mkMultIn(T);
-    var x0 = padL + 30;
+    var x0 = padL;
     function f(x) { return 7 * x - x * x - 10; }
     var A = mkAxes(T, F, { ox: padL + 40, oy: 230, u: 54, xsc: 1, ysc: 2,
                            xmin: 0, xmax: 7, ymin: -6, ymax: 3 });

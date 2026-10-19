@@ -34,6 +34,8 @@
  *      Källkodsgranskning; skriv "v_t_o_t".
  *   7. TECKEN UTAN GLYF — en bokstav som saknas i GLYPHS ritas inte alls
  *      men tar plats ("FÖRSTÄRKS" blev "FÖRST RKS").
+ *   8. RADERNA BÖRJAR VID padL — en ny rad som börjar en bit in utan
+ *      bläck till vänster om sig är ett indrag (se indragnaRader).
  *
  * Bubblornas höjd räknas som i buildBubble(): rader·24 + 18.
  *
@@ -113,7 +115,14 @@ function loadHandskrift() {
       }
     }
   }
-  const src = fs.readFileSync(path.join(ROOT, 'handskrift.js'), 'utf8');
+  /* RADERNA BÖRJAR VID padL: varje verktygslåda som mathTools() lämnar ut
+   * får sina skrivfunktioner inkopplade i radstartRegister (se
+   * radstartKroka nedan) — så syns VAR scenkoden lade varje sträng. */
+  const src = fs.readFileSync(path.join(ROOT, 'handskrift.js'), 'utf8')
+    .replace('function mathTools(F) {',
+             'function mathTools(F) { return window.__kroka(mathTools0(F)); }\n' +
+             '  function mathTools0(F) {');
+  win.__kroka = radstartKroka;
   // eslint-disable-next-line no-new-func
   new Function('window', 'document', 'requestAnimationFrame', src)(
     win, doc, noop);
@@ -127,6 +136,106 @@ function loadHandskrift() {
                  fs.readFileSync(f, 'utf8'))(win, doc, noop);
   }
   return win.HANDSKRIFT;
+}
+
+/* RADERNA BÖRJAR VID padL (REGEL ALLA RADER BÖRJAR VID VÄNSTERKANTEN i
+ * handskrift.js, användarkrav 2026-10-19). Scenkodens anrop av T.str,
+ * T.fracH, T.fracOp och T.fracSeg registreras med x, baslinje, skala och
+ * vilka akter anropet ritade. Anrop INIFRÅN verktygslådan (bråkets täljare,
+ * nämnare …) går till de lokala funktionerna och syns inte här. */
+const XARG = { str: [1, 2, 4], fracH: [2, 3], fracOp: [3, 4], fracSeg: [2, 3] };
+let radstartRegister = null;
+function radstartKroka(T) {
+  for (const fn of Object.keys(XARG)) {
+    const f = T[fn];
+    if (typeof f !== 'function') continue;
+    const [ix, iy, isc] = XARG[fn];
+    T[fn] = function () {
+      const i0 = T.acts.length;
+      const r = f.apply(this, arguments);
+      if (radstartRegister) {
+        radstartRegister.push({ fn, t: fn === 'str' ? String(arguments[0]) : '',
+          x: arguments[ix], y: arguments[iy],
+          sc: isc != null && arguments[isc] != null ? arguments[isc] : 1,
+          acts: T.acts, i0, i1: T.acts.length, padL: T.padL });
+      }
+      return r;
+    };
+  }
+  return T;
+}
+/* en ny rad som börjar en bit in från padL utan att något bläck står till
+ * vänster om den på samma höjd. Etiketter som "a)" eller "x:" före raden,
+ * en figur bredvid och en kolumn till höger har bläck till vänster och
+ * släpps igenom; likaså små etiketter (skala < 0,85) och rader längre in än
+ * padL + 160 (kolumner, figurtext). En integral med undre gräns skrivs på
+ * padL + 12: gränsen hänger ut till vänster om tecknet. */
+/* indrag med en verklig funktion, per scen: de exakta strängarna som får
+ * börja en bit in. Lägg bara till något här när indraget BEHÖVS. */
+const RADINDRAG_UNDANTAG = {
+  /* uppställd addition: plustecknet står i en egen kolumn vid padL och
+   * båda ekvationerna och summan står under varandra till höger om det */
+  additionsmetoden: ['-2x+5y=6', '2x=18'],
+  multbadasystem: ['10x+35y=40', '17y=34'],
+  multiplicerasystem: ['10x+8y=60', '12x=48'],
+  summadifferens: ['x+y=19', '2x=24'],
+  /* blåringen kring 4·4 sticker ut till vänster om texten; vid padL
+   * hamnade den i vänsterpilens band (kommentaren i layoutPotensskriv) */
+  potensskriv: ['4·4=16', '4·4'],
+  /* polynomdivision i trappa: minustecknet framför en produkt som dras
+   * bort står i sin kolumn under dividenden (se CLAUDE.md, "Polynomdivision") */
+  polynomdivision: ['-'],
+  'ma4-vt2018-u17': ['-'],
+  'ma4-vt2022-u14': ['-'],
+};
+function indragnaRader(reg, FSIZE) {
+  const ut = [];
+  const box = (acts, i0, i1) => {
+    const b = nyBox();
+    for (let i = i0; i < i1; i++) {
+      const a = acts[i];
+      if (a.kind === 'stroke' && a.pts && !a.vagg) bboxAvPunkter(a.pts, b);
+    }
+    return b;
+  };
+  for (const r of reg) {
+    if (typeof r.x !== 'number' || r.sc < 0.85) continue;
+    const d = r.x - r.padL;
+    if (d <= 12 || d > 160) continue;
+    if (/^∫_/.test(r.t)) continue;
+    const egen = box(r.acts, r.i0, r.i1);
+    if (!isFinite(egen.x0)) continue;
+    /* en täljare eller nämnare som skrivs för sig ("Δs" över "Δt" efter
+     * "v=") står en halv radhöjd ovanför eller nedanför det som står till
+     * vänster om den (en stor täljare ännu mer) — räkna det som samma rad */
+    const tat = { x0: egen.x0, x1: egen.x1, y0: egen.y0, y1: egen.y1 };
+    egen.y0 -= 0.7 * FSIZE; egen.y1 += 0.7 * FSIZE;
+    const h = egen.y1 - egen.y0;
+    let vanster = false;
+    for (let i = 0; i < r.acts.length && !vanster; i++) {
+      if (i >= r.i0 && i < r.i1) continue;
+      const b = box(r.acts, i, i + 1);
+      if (!isFinite(b.x0) || b.x0 > egen.x0 - 2) continue;   /* börjar till vänster */
+      /* ett bråkstreck som börjar till vänster och löper under (eller
+       * över) strängen: strängen är täljare/nämnare i ett stort bråk */
+      if (b.y1 - b.y0 < 0.3 * FSIZE && b.x1 > (tat.x0 + tat.x1) / 2 &&
+          Math.min(Math.abs(b.y0 - tat.y1), Math.abs(tat.y0 - b.y1)) < 1.6 * FSIZE) {
+        vanster = true;
+        break;
+      }
+      /* samma höjd: strecket ligger mitt för raden (ett likhetstecken är
+       * bara ett par px högt) eller överlappar den till stor del */
+      const mitt = (b.y0 + b.y1) / 2;
+      const ov = Math.min(b.y1, egen.y1) - Math.max(b.y0, egen.y0);
+      if ((mitt > egen.y0 && mitt < egen.y1) ||
+          ov > 0.4 * Math.min(h, b.y1 - b.y0)) vanster = true;
+    }
+    if (!vanster) {
+      ut.push('raden börjar på padL + ' + d.toFixed(0) + ' i stället för padL: ' +
+              (r.t || r.fn + '(…)').slice(0, 40) + ' (y=' + Number(r.y).toFixed(0) + ')');
+    }
+  }
+  return ut;
 }
 
 /* data/np/<prov>-penna.js — en fil per nationellt prov — och
@@ -200,12 +309,19 @@ function granska(HK, typ, cfg) {
   const fel = [];
   const varn = [];
   let L;
+  radstartRegister = [];
   try {
     L = HK.scen(typ, undefined, cfg);
   } catch (e) {
+    radstartRegister = null;
     return { fel: ['scenen kraschade: ' + e.message], varn: [] };
   }
+  const radstarter = radstartRegister;
+  radstartRegister = null;
   if (!L) return { fel: ['scenen finns inte i registret'], varn: [] };
+  const undantag = RADINDRAG_UNDANTAG[typ] || [];
+  fel.push(...indragnaRader(radstarter, HK.FSIZE)
+    .filter(f => !undantag.some(t => f.includes(': ' + t + ' (y='))));
 
   const W = HK.PAPER_W;
   const zonX = W - ZON_X;

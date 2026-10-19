@@ -49,7 +49,7 @@
   function avr(T, F, xIns, y, txt) {
     if (xIns + T.adv(txt) < HK.PAPER_W - 44) { T.str(txt, xIns, y); return y; }
     y += 2.4 * F;
-    T.str(txt, T.padL + 24, y);
+    T.str(txt, T.padL, y);
     return y;
   }
   function slut(T, y) {
@@ -910,7 +910,7 @@
     T.stepEnd();
 
     y += adv + 0.9 * F;
-    T.str('=92,482... N', padL + 24, y);
+    T.str('=92,482... N', padL, y);
     T.stepEnd();
 
     /* ---- accelerationen ---- */
@@ -953,7 +953,7 @@
     T.stepEnd();
 
     y += adv + 1.9 * F;
-    var xIns = T.str('=2,219... m/s^2', padL + 24, y);
+    var xIns = T.str('=2,219... m/s^2', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 0.9 * F), bw, [

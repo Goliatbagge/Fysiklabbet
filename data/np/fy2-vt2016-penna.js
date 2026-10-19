@@ -156,7 +156,7 @@
     T.str('Rödförskjutning ⟹ stjärnan', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('avlägsnar sig  (alternativ C)', padL + 40, y);
+    T.str('avlägsnar sig  (alternativ C)', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -173,7 +173,7 @@
     T.stepEnd();
 
     y += 3.4 * F;
-    T.str('⟹ hastigheten  (alternativ B)', padL + 30, y);
+    T.str('⟹ hastigheten  (alternativ B)', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -202,7 +202,7 @@
     T.stepEnd();
 
     y += 2.5 * F;
-    var xx = T.str('ε=-', padL + 30, y);
+    var xx = T.str('ε=-', padL, y);
     T.fracH('ΔΦ', 'Δt', xx, y);
     T.stepEnd();
 
@@ -216,28 +216,28 @@
     T.str('A: konstant likström', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('konstant fält, ingen ström', padL + 50, y, null, 0.7);
+    T.str('konstant fält, ingen ström', padL, y, null, 0.7);
     T.stepEnd();
 
     y += 2.4 * F;
     T.str('B: magnet FALLER genom ringen', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('flödet ändras, ström induceras', padL + 50, y, null, 0.7);
+    T.str('flödet ändras, ström induceras', padL, y, null, 0.7);
     T.stepEnd();
 
     y += 2.4 * F;
     T.str('C: magnet står stilla i ringen', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('konstant fält, ingen ström', padL + 50, y, null, 0.7);
+    T.str('konstant fält, ingen ström', padL, y, null, 0.7);
     T.stepEnd();
 
     y += 2.4 * F;
     T.str('D: laddning står stilla', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('inget magnetfält alls', padL + 50, y, null, 0.7);
+    T.str('inget magnetfält alls', padL, y, null, 0.7);
     T.stepEnd();
 
     tanke(y, [
@@ -301,10 +301,10 @@
     T.stepEnd();
 
     y += 2.2 * F;
-    T.str('inducerade strömmar (virvel-', padL + 40, y);
+    T.str('inducerade strömmar (virvel-', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('strömmar) i kastrullens botten', padL + 40, y);
+    T.str('strömmar) i kastrullens botten', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), 292, [
@@ -318,14 +318,14 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('P=R·I^2 ⟹ värme', padL + 40, y);
+    T.str('P=R·I^2 ⟹ värme', padL, y);
     T.stepEnd();
 
     y += 2.5 * F;
     xe = T.str('Svar: Strömmar induceras och', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    xe = T.str('resistansen ger värmen', padL + 30, y);
+    xe = T.str('resistansen ger värmen', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -368,10 +368,10 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('Mät l med linjal, från', padL + 40, y);
+    T.str('Mät l med linjal, från', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('upphängning till kulans mitt.', padL + 40, y);
+    T.str('upphängning till kulans mitt.', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), 292, [
@@ -384,17 +384,17 @@
     T.str('2. Sätt pendeln i svängning med', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('små utslag. Ta tiden för minst', padL + 40, y);
+    T.str('små utslag. Ta tiden för minst', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('10 svängningar och dela med 10.', padL + 40, y);
+    T.str('10 svängningar och dela med 10.', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
     T.str('3. Upprepa med flera längder l', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('och för in värdena i en tabell.', padL + 40, y);
+    T.str('och för in värdena i en tabell.', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), 292, [
@@ -424,7 +424,7 @@
     T.str('4. Beräkna g för varje mätning', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('och ta medelvärdet.', padL + 40, y);
+    T.str('och ta medelvärdet.', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -500,7 +500,7 @@
     T.stepEnd();
 
     y += adv + 1.6 * F;
-    T.str('=6,626·10^−^1^9 J', padL + 30, y);
+    T.str('=6,626·10^−^1^9 J', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -536,7 +536,7 @@
     T.stepEnd();
 
     y += adv + 2.0 * F;
-    T.str('=9,939·10^−^1^9 J', padL + 30, y);
+    T.str('=9,939·10^−^1^9 J', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -544,11 +544,11 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('=(9,939-6,626)·10^−^1^9 J', padL + 30, y);
+    T.str('=(9,939-6,626)·10^−^1^9 J', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('=3,313·10^−^1^9 J', padL + 30, y);
+    T.str('=3,313·10^−^1^9 J', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -602,7 +602,7 @@
     T.stepEnd();
 
     y += adv + 1.6 * F;
-    T.str('=4,408...·10^6 m/s', padL + 30, y);
+    T.str('=4,408...·10^6 m/s', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -618,12 +618,12 @@
     T.stepEnd();
 
     y += adv + 2.2 * F;
-    xx = T.str('=', padL + 30, y);
+    xx = T.str('=', padL, y);
     xx = T.fracH('9,11·10^−^3^1·(4,408...·10^6)^2', '2', xx, y);
     T.stepEnd();
 
     y += adv + 2.0 * F;
-    T.str('=8,851...·10^−^1^8 J', padL + 30, y);
+    T.str('=8,851...·10^−^1^8 J', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -835,7 +835,7 @@
     T.stepEnd();
 
     y += adv + 1.2 * F;
-    xx = T.str('U_2=230·', padL + 40, y);
+    xx = T.str('U_2=230·', padL, y);
     xx = T.fracH('10', '500', xx, y);
     T.str('V=4,6 V', xx, y);
     T.stepEnd();
@@ -845,7 +845,7 @@
     T.stepEnd();
 
     y += adv + 1.2 * F;
-    xx = T.str('U_2=230·', padL + 40, y);
+    xx = T.str('U_2=230·', padL, y);
     xx = T.fracH('50', '1 000', xx, y);
     T.str('V=11,5 V', xx, y);
     T.stepEnd();
@@ -859,7 +859,7 @@
     xe = T.str('Svar: 500 och 10 varv, eller', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    xe = T.str('1 000 och 50 varv', padL + 30, y);
+    xe = T.str('1 000 och 50 varv', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -873,17 +873,17 @@
     T.str('b) Järnkärnan med ok leder det', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('magnetiska flödet i en sluten', padL + 40, y);
+    T.str('magnetiska flödet i en sluten', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('bana genom BÅDA spolarna.', padL + 40, y);
+    T.str('bana genom BÅDA spolarna.', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
     xe = T.str('Svar: Kärnan håller ihop', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    xe = T.str('flödet och minskar förlusterna', padL + 30, y);
+    xe = T.str('flödet och minskar förlusterna', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -930,10 +930,10 @@
     T.str('1. Koppla båda högtalarna till', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('tongeneratorn, i fas. Välj en', padL + 40, y);
+    T.str('tongeneratorn, i fas. Välj en', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('frekvens, till exempel f=500 Hz.', padL + 40, y);
+    T.str('frekvens, till exempel f=500 Hz.', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), 292, [
@@ -946,26 +946,26 @@
     T.str('2. Flytta den bakre högtalaren', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('tills mikrofonen visar minimum:', padL + 40, y);
+    T.str('tills mikrofonen visar minimum:', padL, y);
     T.stepEnd();
 
     y += 2.3 * F;
-    var xx = T.str('Δs_1=', padL + 40, y);
+    var xx = T.str('Δs_1=', padL, y);
     T.fracH('λ', '2', xx, y);
     T.stepEnd();
 
     y += 3.2 * F;
-    T.str('Flytta vidare till maximum:', padL + 40, y);
+    T.str('Flytta vidare till maximum:', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('Δs_2=λ, och så vidare.', padL + 40, y);
+    T.str('Δs_2=λ, och så vidare.', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
     T.str('3. Mät avstånden med måttband', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('och för in dem i en tabell.', padL + 40, y);
+    T.str('och för in dem i en tabell.', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), 292, [
@@ -983,10 +983,10 @@
     T.str('4. Beräkna v för varje mätning', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('och ta medelvärdet. Upprepa', padL + 40, y);
+    T.str('och ta medelvärdet. Upprepa', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('gärna med andra frekvenser.', padL + 40, y);
+    T.str('gärna med andra frekvenser.', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -1060,7 +1060,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('F_S=F_G·cos α < F_G', padL + 40, y);
+    T.str('F_S=F_G·cos α < F_G', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -1074,12 +1074,12 @@
     T.stepEnd();
 
     y += 2.6 * F;
-    xx = T.str('F_S-F_G=', padL + 40, y);
+    xx = T.str('F_S-F_G=', padL, y);
     xx = T.fracH('m·v^2', 'r', xx, y);
     T.stepEnd();
 
     y += 3.2 * F;
-    xx = T.str('⟺ F_S=F_G+', padL + 40, y);
+    xx = T.str('⟺ F_S=F_G+', padL, y);
     xx = T.fracH('m·v^2', 'r', xx, y);
     T.str(' > F_G', xx, y);
     T.stepEnd();
@@ -1094,7 +1094,7 @@
     xe = T.str('Svar: Repet borde brista i det', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    xe = T.str('nedersta läget, inte i B', padL + 30, y);
+    xe = T.str('nedersta läget, inte i B', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1160,14 +1160,14 @@
     T.str('Vågrät ledare: B ut ovanför,', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('in nedanför', padL + 40, y);
+    T.str('in nedanför', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
     T.str('Lodrät ledare: B in till höger,', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('ut till vänster', padL + 40, y);
+    T.str('ut till vänster', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -1180,14 +1180,14 @@
     T.str('Motriktade fält: uppe till höger', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('och nere till vänster', padL + 40, y);
+    T.str('och nere till vänster', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
     xe = T.str('Svar: Längs diagonalen genom', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    xe = T.str('skärningspunkten (linjen y=x)', padL + 30, y);
+    xe = T.str('skärningspunkten (linjen y=x)', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1295,7 +1295,7 @@
     T.stepEnd();
 
     y += adv + 1.8 * F;
-    T.str('=2,122...·10^8 m/s', padL + 30, y);
+    T.str('=2,122...·10^8 m/s', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -1365,7 +1365,7 @@
     T.stepEnd();
 
     y += adv + 1.4 * F;
-    xx = T.str('⟺ T=', padL + 30, y);
+    xx = T.str('⟺ T=', padL, y);
     T.fracH('2,898·10^−^3', 'λ_m_a_x', xx, y);
     T.stepEnd();
 
@@ -1409,21 +1409,21 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('656, 486, 434 och 410 nm', padL + 40, y);
+    T.str('656, 486, 434 och 410 nm', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
     T.str('Dippar syns vid just dessa', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('våglängder i diagrammet.', padL + 40, y);
+    T.str('våglängder i diagrammet.', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
     xe = T.str('Svar: Absorptionslinjerna', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    xe = T.str('visar att det finns väte', padL + 30, y);
+    xe = T.str('visar att det finns väte', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1508,7 +1508,7 @@
     T.stepEnd();
 
     y += adv + 1.8 * F;
-    T.str('=11,89... m/s ≈12 m/s', padL + 30, y);
+    T.str('=11,89... m/s ≈12 m/s', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -1521,7 +1521,7 @@
     xe = T.str('Svar: Nej, det krävs 12 m/s,', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    xe = T.str('ingen risk att nå kanten', padL + 30, y);
+    xe = T.str('ingen risk att nå kanten', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1616,7 +1616,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('1 170, 1 320 och 10 500 nm', padL + 40, y);
+    T.str('1 170, 1 320 och 10 500 nm', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -1629,7 +1629,7 @@
     xe = T.str('Svar: De ligger i infrarött', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    xe = T.str('och syns inte för ögat', padL + 30, y);
+    xe = T.str('och syns inte för ögat', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -1744,7 +1744,7 @@
     T.stepEnd();
 
     y += adv + 1.8 * F;
-    T.str('=6,279...·10^−^2^6 kg', padL + 30, y);
+    T.str('=6,279...·10^−^2^6 kg', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -1900,7 +1900,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xx = T.str('⟺ A=', padL + 30, y);
+    xx = T.str('⟺ A=', padL, y);
     T.fracH('F_R', 'm·ω^2', xx, y);
     T.stepEnd();
 
@@ -1911,7 +1911,7 @@
     T.stepEnd();
 
     y += adv + 1.8 * F;
-    T.str('=0,1220... m', padL + 30, y);
+    T.str('=0,1220... m', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -2023,7 +2023,7 @@
     T.stepEnd();
 
     y += adv + 2.0 * F;
-    T.str('=2,635...·10^1^6 m/s^2', padL + 30, y);
+    T.str('=2,635...·10^1^6 m/s^2', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -2031,7 +2031,7 @@
     T.stepEnd();
 
     y += 2.3 * F;
-    T.str('=2,401...·10^−^1^4 N', padL + 30, y);
+    T.str('=2,401...·10^−^1^4 N', padL, y);
     T.stepEnd();
 
     /* ---- spänningen ---- */
@@ -2065,7 +2065,7 @@
     T.stepEnd();
 
     y += adv + 1.8 * F;
-    T.str('=5 995... V=5,995... kV', padL + 30, y);
+    T.str('=5 995... V=5,995... kV', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [

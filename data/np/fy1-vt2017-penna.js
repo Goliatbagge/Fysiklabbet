@@ -246,7 +246,7 @@
     T.str('Svar: Lufttryck, vindhastighet', padL, y);
     T.stepEnd();
     y += 2.0 * F;
-    xe = T.str('och luftfuktighet', padL + 1.6 * F, y);
+    xe = T.str('och luftfuktighet', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -287,10 +287,10 @@
     T.str('Masstal: 243+48=A+3·1', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('291=A+3', padL + 3.2 * F, y);
+    T.str('291=A+3', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('A=291−3=288', padL + 3.2 * F, y);
+    T.str('A=291−3=288', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -301,10 +301,10 @@
     T.str('Atomnummer: 95+20=Z+3·0', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('115=Z+0', padL + 3.2 * F, y);
+    T.str('115=Z+0', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('Z=115', padL + 3.2 * F, y);
+    T.str('Z=115', padL, y);
     T.stepEnd();
 
     y += 3.0 * F;
@@ -347,10 +347,10 @@
     T.str('Svar: Den tid det tar för hälften', padL, y);
     T.stepEnd();
     y += 2.0 * F;
-    xe = T.str('av de radioaktiva kärnorna', padL + 1.6 * F, y);
+    xe = T.str('av de radioaktiva kärnorna', padL, y);
     T.stepEnd();
     y += 2.0 * F;
-    xe = T.str('att sönderfalla', padL + 1.6 * F, y);
+    xe = T.str('att sönderfalla', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -433,10 +433,10 @@
     T.str('Svar: Nej. Astronauten åldras bara', padL, y);
     T.stepEnd();
     y += 2.0 * F;
-    xe = T.str('egentiden, som är mycket kortare', padL + 1.6 * F, y);
+    xe = T.str('egentiden, som är mycket kortare', padL, y);
     T.stepEnd();
     y += 2.0 * F;
-    xe = T.str('än en livstid på jorden', padL + 1.6 * F, y);
+    xe = T.str('än en livstid på jorden', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -736,10 +736,10 @@
     T.str('2. Läs av vattnet i mätglaset: V_1.', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('Sänk ned klumpen helt: V_2.', padL + 40, y);
+    T.str('Sänk ned klumpen helt: V_2.', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('Volymen: V=V_2−V_1', padL + 40, y);
+    T.str('Volymen: V=V_2−V_1', padL, y);
     T.stepEnd();
 
     y += 3.4 * F;
@@ -763,10 +763,10 @@
     T.str('4. Jämför ρ med tabellen i', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('formelsamlingen. Upprepa och', padL + 40, y);
+    T.str('formelsamlingen. Upprepa och', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('använd medelvärdet.', padL + 40, y);
+    T.str('använd medelvärdet.', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -840,7 +840,7 @@
     T.str('E_n=0,90·1,00·10^5·9,82·30', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('=26 514 000 J', padL + 1.6 * F, y);
+    T.str('=26 514 000 J', padL, y);
     T.stepEnd();
 
     y += 3.0 * F;
@@ -858,7 +858,7 @@
       [['värdesiffror, så svaret får två.']]
     ], 1.05);
     y += 2.6 * F;
-    T.str('≈7,4 kWh', padL + 1.6 * F, y);
+    T.str('≈7,4 kWh', padL, y);
     T.stepEnd();
 
     y += 3.0 * F;
@@ -1079,7 +1079,7 @@
     T.stepEnd();
 
     y += 2.2 * F;
-    xx = T.str('=299,855... Ω', padL + 52, y);
+    xx = T.str('=299,855... Ω', padL, y);
     T.stepEnd();
 
     bub(T, y, [
@@ -1206,7 +1206,7 @@
     T.stepEnd();
 
     y += adv + 1.9 * F;
-    xx = T.str('=3,398...·10^−^8 C', padL + 30, y);
+    xx = T.str('=3,398...·10^−^8 C', padL, y);
     T.stepEnd();
 
     y += 2.1 * F;
@@ -1214,7 +1214,7 @@
       [['Massan och avståndet har två']],
       [['värdesiffror, så svaret får två.']]
     ]);
-    T.str('≈3,4·10^−^8 C=34 nC', padL + 30, y);
+    T.str('≈3,4·10^−^8 C=34 nC', padL, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;
@@ -1262,7 +1262,7 @@
     y += 2.0 * F;
     T.str('F_N=F_G+F_e', padL, y);
     y += 2.0 * F;
-    T.str('=2·F_G', padL + 52, y);
+    T.str('=2·F_G', padL, y);
     T.stepEnd();
 
     y += adv + 3.4 * F;
@@ -1533,7 +1533,7 @@
       [['Friktionstalet och farten har två']],
       [['värdesiffror. Svaret får två.']]
     ], 1.1);
-    T.str('≈160 m', padL + 30, y);
+    T.str('≈160 m', padL, y);
     T.stepEnd();
 
     y += adv + 1.6 * F;
@@ -1720,7 +1720,7 @@
       [['siffra, och svaret är känsligt för']],
       [['vinkeln. En värdesiffra räcker.']]
     ], 1.1);
-    T.str('≈300 m', padL + 30, y);
+    T.str('≈300 m', padL, y);
     T.stepEnd();
 
     y += adv + 1.6 * F;
@@ -1858,13 +1858,13 @@
     ]);
     T.str('b) Luften stiger:', padL, y, null, 0.62);
     y += 1.6 * F;
-    T.str('trycket sjunker, luften expanderar och kyls av', padL + 20, y, null, 0.62);
+    T.str('trycket sjunker, luften expanderar och kyls av', padL, y, null, 0.62);
     T.stepEnd();
 
     y += 1.6 * F;
-    T.str('kall luft rymmer mindre vattenånga', padL + 20, y, null, 0.62);
+    T.str('kall luft rymmer mindre vattenånga', padL, y, null, 0.62);
     y += 1.6 * F;
-    T.str('⇒ ångan kondenserar till små droppar = moln', padL + 20, y, null, 0.62);
+    T.str('⇒ ångan kondenserar till små droppar = moln', padL, y, null, 0.62);
     T.stepEnd();
 
     y += adv + 1.2 * F;
@@ -1967,7 +1967,7 @@
       [['Två värdesiffror, som fältstyrkan']],
       [['och avståndet.']]
     ]);
-    T.str('≈4,7 MV', padL + 30, y);
+    T.str('≈4,7 MV', padL, y);
     T.stepEnd();
 
     y += adv + 1.4 * F;
@@ -2043,7 +2043,7 @@
     T.stepEnd();
 
     y += adv + 2.0 * F;
-    xx = T.str('=2,265...·10^2^9', padL + 30, y);
+    xx = T.str('=2,265...·10^2^9', padL, y);
     T.stepEnd();
 
     bub(T, y, [
@@ -2188,7 +2188,7 @@
     T.str('Boll A: Δp_A=m·v_2−m·v_1', padL, y);
     T.stepEnd();
     y += 2.3 * F;
-    T.str('v_2<0 ⟹ |Δp_A|=m·(v_1+|v_2|)', padL + 40, y);
+    T.str('v_2<0 ⟹ |Δp_A|=m·(v_1+|v_2|)', padL, y);
     T.stepEnd();
 
     /* ---- steg 4: boll B ---- */
@@ -2200,7 +2200,7 @@
     T.str('Boll B: Δp_B=m·0−m·v_1=−m·v_1', padL, y);
     T.stepEnd();
     y += 2.3 * F;
-    T.str('|Δp_A|>|Δp_B|', padL + 40, y);
+    T.str('|Δp_A|>|Δp_B|', padL, y);
     T.stepEnd();
 
     /* ---- steg 5: kontakttiden ---- */
@@ -2311,7 +2311,7 @@
     T.str('1. Väg den tomma ballongen', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('med snöret: m_B.', padL + 40, y);
+    T.str('med snöret: m_B.', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -2323,7 +2323,7 @@
     T.str('2. Fyll med helium. Mät omkretsen O', padL, y);
     T.stepEnd();
     y += 2.4 * F;
-    xe = T.str('med måttbandet: r=', padL + 40, y);
+    xe = T.str('med måttbandet: r=', padL, y);
     xe = T.fracH('O', '2π', xe, y);
     xe = T.str(', V_B=', xe + 0.1 * F, y);
     T.fracH('4πr^3', '3', xe, y);
@@ -2339,7 +2339,7 @@
     T.str('3. Häng på vikter tills ballongen', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('svävar. Väg lasten: m_L.', padL + 40, y);
+    T.str('svävar. Väg lasten: m_L.', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -2351,10 +2351,10 @@
     T.str('4. Upprepa för minst fem olika', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('volymer. Skriv in V_B och m_L i', padL + 40, y);
+    T.str('volymer. Skriv in V_B och m_L i', padL, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('en tabell.', padL + 40, y);
+    T.str('en tabell.', padL, y);
     T.stepEnd();
 
     /* ---- steg 4: diagrammet ---- */
@@ -2399,10 +2399,10 @@
     T.str('6. Jämför lutningen med', padL, y);
     T.stepEnd();
     y += 2.2 * F;
-    T.str('ρ_l_u_f_t−ρ_H_e≈1,29−0,18=1,11 kg/m^3', padL + 40, y);
+    T.str('ρ_l_u_f_t−ρ_H_e≈1,29−0,18=1,11 kg/m^3', padL, y);
     T.stepEnd();
     y += 2.4 * F;
-    T.str('och skärningen med −m_B.', padL + 40, y);
+    T.str('och skärningen med −m_B.', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -2524,7 +2524,7 @@
       [['Massan 12 kg och avläsningen 9,9']],
       [['har två värdesiffror.']]
     ]));
-    T.str('≈52 W', padL + 30, y);
+    T.str('≈52 W', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -2626,7 +2626,7 @@
       [['meter.']]
     ]));
     y += adv + 2.6 * F;
-    xe = T.str('=', padL + 62, y);
+    xe = T.str('=', padL, y);
     xe = T.fracH('kg', 'm·s', xe, y);
     T.str('⟹ D', xe + 0.3 * F, y);
     T.stepEnd();
@@ -2724,7 +2724,7 @@
     expFrac(T, F, '8', '6,0058', xe, y);
     T.stepEnd();
     y += adv + 0.9 * F;
-    T.str('=1 906 582,17... Bq', padL + 30, y);
+    T.str('=1 906 582,17... Bq', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -2745,7 +2745,7 @@
     T.stepEnd();
 
     y += adv + 1.6 * F;
-    T.str('=4 939,33... ml', padL + 30, y);
+    T.str('=4 939,33... ml', padL, y);
     T.stepEnd();
 
     y += adv + 1.0 * F;
@@ -2753,7 +2753,7 @@
       [['0,10 ml och 48 MBq/ml har två']],
       [['värdesiffror.']]
     ]));
-    T.str('≈4 900 ml=4,9 liter', padL + 30, y);
+    T.str('≈4 900 ml=4,9 liter', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [
@@ -2787,7 +2787,7 @@
       [['delad med den.']]
     ]));
     y += adv + 2.6 * F;
-    xe = T.str('=', padL + 62, y);
+    xe = T.str('=', padL, y);
     T.fracH('A_0−A', 'λ', xe, y);
     T.stepEnd();
 
@@ -2806,7 +2806,7 @@
     T.stepEnd();
 
     y += adv + 1.6 * F;
-    T.str('=9,0252...·10^1^0', padL + 62, y);
+    T.str('=9,0252...·10^1^0', padL, y);
     T.stepEnd();
 
     /* energin som kroppen tar upp */
@@ -2838,10 +2838,10 @@
     T.str('E=0,90·9,0252...·10^1^0', padL, y);
     T.stepEnd();
     y += 2.2 * F;
-    T.str('·2,2428·10^−^1^4 J', padL + 62, y);
+    T.str('·2,2428·10^−^1^4 J', padL, y);
     T.stepEnd();
     y += 2.2 * F;
-    T.str('=1,8217...·10^−^3 J', padL + 62, y);
+    T.str('=1,8217...·10^−^3 J', padL, y);
     T.stepEnd();
 
     /* dosen */
@@ -2870,7 +2870,7 @@
     T.stepEnd();
 
     y += adv + 1.6 * F;
-    T.str('=2,4290...·10^−^5 Gy', padL + 30, y);
+    T.str('=2,4290...·10^−^5 Gy', padL, y);
     T.stepEnd();
 
     y += adv + 1.0 * F;
@@ -2878,7 +2878,7 @@
       [['75 kg och 90 % har två']],
       [['värdesiffror.']]
     ]));
-    T.str('≈24·10^−^6 Gy=24 µGy', padL + 30, y);
+    T.str('≈24·10^−^6 Gy=24 µGy', padL, y);
     T.stepEnd();
 
     T.tanke(T.bubble(120, T.bubbleTop(y), bw, [

@@ -200,7 +200,7 @@
       [['Rektangeln: 1·2=2.']]
     ], 0);
     y = figB + 80;
-    xi = padL + 40;
+    xi = padL;
     xx = T.str('∫', xi, y);
     undreGrans(T, F, xi, y, '-3');
     xx = ovreTal(T, F, xx, y, '0');
@@ -238,7 +238,7 @@
       [['vinkeln är argumentet.']]
     ], 1.05);
     y += 3.4 * F;
-    xx = T.str('|z|=2   arg z=', padL + 30, y);
+    xx = T.str('|z|=2   arg z=', padL, y);
     T.fracH('π', '6', xx, y);
     T.stepEnd();
 
@@ -248,7 +248,7 @@
       [['argumentet med 5.']]
     ], 1.05);
     y += 3.4 * F;
-    xx = T.str('arg(z^5)=5·', padL + 30, y);
+    xx = T.str('arg(z^5)=5·', padL, y);
     xx = T.fracH('π', '6', xx, y);
     T.stepEnd();
 
@@ -285,7 +285,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xx = T.str('=cos 30°', padL + 30, y);
+    xx = T.str('=cos 30°', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -315,7 +315,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    xx = T.str('=-sin 30°', padL + 30, y);
+    xx = T.str('=-sin 30°', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -348,7 +348,7 @@
       [['självt: |x|=x.']]
     ]);
     y += 2.6 * F;
-    T.str('x≥0:  y=x·x=x^2', padL + 30, y);
+    T.str('x≥0:  y=x·x=x^2', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -356,7 +356,7 @@
       [['omvänt tecken: |x|=−x.']]
     ]);
     y += 2.6 * F;
-    T.str('x<0:  y=x·(-x)=-x^2', padL + 30, y);
+    T.str('x<0:  y=x·(-x)=-x^2', padL, y);
     T.stepEnd();
 
     /* skiss: höger halva böjer uppåt, vänster halva nedåt */
@@ -404,15 +404,15 @@
     ], 0.1);
     y += 3.3 * F;
     T.str('Vertikala asymptoter, där nämnaren är noll', padL, y - 1.45 * F, null, 0.62);
-    T.str('A, D: x=0', padL + 30, y);
+    T.str('A, D: x=0', padL, y);
     T.stepEnd();
 
     y += 2.1 * F;
-    T.str('E: x=1 och x=-1', padL + 30, y);
+    T.str('E: x=1 och x=-1', padL, y);
     T.stepEnd();
 
     y += 2.1 * F;
-    T.str('B, C: x=1', padL + 30, y);
+    T.str('B, C: x=1', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -421,7 +421,7 @@
     ]);
     y += 3.9 * F;
     T.str('Horisontella asymptoter: vad y går mot då x går mot ±∞', padL, y - 1.75 * F, null, 0.62);
-    xx = T.str('B: y=', padL + 30, y);
+    xx = T.str('B: y=', padL, y);
     xx = T.fracH('1', 'x-1', xx, y);
     T.str('→0', xx + 0.2 * F, y);
     T.stepEnd();
@@ -431,14 +431,14 @@
       [['nämnaren syns i den: x=(x−1)+1.']]
     ], 1.05);
     y += 3.4 * F;
-    xx = T.str('C: y=', padL + 30, y);
+    xx = T.str('C: y=', padL, y);
     xx = T.fracH('x', 'x-1', xx, y);
     xx = T.str('=', xx, y);
     xx = T.fracH('(x-1)+1', 'x-1', xx, y);
     T.stepEnd();
 
     y += 3.2 * F;
-    xx = T.str('=1+', padL + 30 + T.adv('C: y'), y);
+    xx = T.str('=1+', padL, y);
     xx = T.fracH('1', 'x-1', xx, y);
     T.str('→1', xx + 0.2 * F, y);
     T.stepEnd();
@@ -458,7 +458,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg), multIn = mkMultIn(T);
-    var x0 = padL + 30;
+    var x0 = padL;
     var xw1 = x0 + T.adv('z-3=a(1-i)') + 0.9 * F;
     var xw2 = x0 + T.adv('3+a>0') + 0.9 * F;
 
@@ -562,7 +562,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var x0 = padL + 30;
+    var x0 = padL;
     var xw = x0 + T.adv('sin 10x=2sin 5x cos 5x') + 0.9 * F;
 
     y = 122;
@@ -641,7 +641,7 @@
   reg(9, function (cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
-    var x0 = padL + 30;
+    var x0 = padL;
 
     y = 185;
     xx = T.str('f(x)=', padL, y);
@@ -712,7 +712,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, v;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var x0 = padL + 30;
+    var x0 = padL;
     var xw = x0 + T.adv('2|x|=2|y|') + 0.9 * F;
 
     /* ekvval: raderna når x > 420, så skriften börjar under y = 210 */
@@ -929,13 +929,13 @@
 
     function delaMed2(hl) {
       return function (yb) {
-        var x = T.fracH('2x', '2', padL + 30, yb, null, BLUE);
+        var x = T.fracH('2x', '2', padL, yb, null, BLUE);
         x = T.str('=', x, yb);
         T.fracH(hl + '+n·360°', '2', x, yb, null, BLUE);
       };
     }
     function delaUpp(yb, hl, halv, svar) {
-      var x = T.str('x=', padL + 30, yb);
+      var x = T.str('x=', padL, yb);
       x = T.fracH(hl, '2', x, yb);
       x = T.str('+', x, yb);
       T.fracH('n·360°', '2', x, yb);
@@ -945,7 +945,7 @@
         [['360° delat med 2 är 180°.']]
       ], 1.05);
       yb += 3.0 * F;
-      T.str(svar, padL + 30, yb);
+      T.str(svar, padL, yb);
       T.stepEnd();
       return yb;
     }
@@ -1065,7 +1065,7 @@
     ], 1.05);
     y += 6.6 * F;
     T.str('Förlänger med nämnarens konjugat', padL, y - 4.1 * F, null, 0.62);
-    xx = T.str('=', padL + 20, y);
+    xx = T.str('=', padL, y);
     var w0 = Math.max(T.adv('(2+i)'), T.adv('(3-i)')) + 0.3 * F;
     var xNum = xx + (w0 - T.adv('(2+i)')) / 2, yNum = y - 0.48 * F;
     function iv(pre, del) { var a = xNum + T.adv(pre); return [a, a + T.adv(del)]; }
@@ -1082,7 +1082,7 @@
     ], 1.05);
     y += 6.6 * F;
     T.str('Multiplicerar ut täljaren och nämnaren', padL, y - 3.4 * F, null, 0.62);
-    xx = T.str('=', padL + 20, y);
+    xx = T.str('=', padL, y);
     var D = [
       { fran: P2, till: P3, skriv: '6', hojd: 20 },
       { fran: P2, till: Pi2, skriv: '+2i', hojd: 32, dx: 3, dx2: 4 },
@@ -1101,7 +1101,7 @@
       [['konjugat. Konjugatregeln ger den']],
       [['direkt.']]
     ], 1.3);
-    not = regelNot(T, F, '(a-b)(a+b)=a^2-b^2', padL + 30, y + 2.9 * F);
+    not = regelNot(T, F, '(a-b)(a+b)=a^2-b^2', padL, y + 2.9 * F);
     T.str(denS3, xx + (wD3 - T.adv(denS3)) / 2, ybar3 + 1.04 * F + 0.2 * F);
     regelGom(T, not);
     xx += wD3 + 1.5;
@@ -1114,7 +1114,7 @@
     ], 1.3);
     var y3n = y - 0.48 * F;
     y += 5.4 * F;
-    xx = T.str('=', padL + 20, y);
+    xx = T.str('=', padL, y);
     xx = fracCB(T, F, T.adv('6+5i+i^2'), function (x, yn) {
       x = T.str('6', x, yn);
       var r1 = T.ring(D[1].x0 + T.adv('+'), D[1].x1, y3n);
@@ -1146,7 +1146,7 @@
     ], 1.3);
     var p5 = R5.num.pos, y5n = R5.yNum;
     y4 += 5.0 * F;
-    xx = T.str('=', padL + 20, y4);
+    xx = T.str('=', padL, y4);
     xx = fracCB(T, F, T.adv('5+5i'), function (x, yn) {
       var r1 = T.ring(p5[0][0], p5[0][1], y5n);
       T.pause(260);
@@ -1299,7 +1299,7 @@
       [['kan tas bort utan teckenbyte.']]
     ]);
     var y2 = y + 2.8 * F;
-    xx = T.str('=', padL + 60, y2);
+    xx = T.str('=', padL, y2);
     var S = segs(T, [['a'], ['+bi'], ['+a'], ['-bi']], xx, y2);
     xx = S.x;
     T.stepEnd();
@@ -1355,7 +1355,7 @@
     ]);
     var y3 = y + 2.8 * F;
     not = regelNot(T, F, '(p+q)(p-q)=p^2-q^2', padL + 300, y3 + 2.2 * F);
-    xx = T.str('=a^2-(bi)^2', padL + 60, y3);
+    xx = T.str('=a^2-(bi)^2', padL, y3);
     regelGom(T, not);
     T.stepEnd();
 
@@ -1477,7 +1477,7 @@
       [['riska ettan.']]
     ], 1.05);
     var y2 = y + 4.4 * F;
-    xx = T.str('=', padL + 20, y2);
+    xx = T.str('=', padL, y2);
     var NUM1 = 'sin^2v+cos^2v', NUM2 = '-2sin v cos v', DEN = 'sin v-cos v';
     var numW = T.adv(NUM1, SC) + T.adv(NUM2, SC);
     var wB = Math.max(numW, T.adv(DEN, SC)) + 0.3 * F * SC;
@@ -1506,7 +1506,7 @@
       [['dubbla produkten står i mitten.']]
     ], 1.1);
     var y3 = y2 + 4.4 * F;
-    xx = T.str('=', padL + 20, y3);
+    xx = T.str('=', padL, y3);
     T.fracH('sin^2v-2sin v cos v+cos^2v', 'sin v-cos v', xx, y3, null, null);
     T.stepEnd();
 
@@ -1517,7 +1517,7 @@
     ], 1.1);
     var y4 = y3 + 4.4 * F;
     not = regelNot(T, F, '(p-q)^2=p^2-2pq+q^2', padL + 360, y4 + 3.0 * F);
-    xx = T.str('=', padL + 20, y4);
+    xx = T.str('=', padL, y4);
     xx = T.fracH('(sin v-cos v)^2', 'sin v-cos v', xx, y4);
     regelGom(T, not);
     T.stepEnd();
@@ -1529,12 +1529,12 @@
       [['förkortar bort den.']]
     ], 1.1);
     var y5 = y4 + 4.4 * F;
-    xx = T.str('=', padL + 20, y5);
+    xx = T.str('=', padL, y5);
     T.fracOp('(sin v-cos v)^2', 'sin v-cos v', '/(sin v-cos v)', xx, y5);
     T.stepEnd();
 
     var y6 = y5 + 3.2 * F;
-    T.str('=sin v-cos v', padL + 20, y6);
+    T.str('=sin v-cos v', padL, y6);
     T.stepEnd();
 
     tanke(y6, [
@@ -1743,7 +1743,7 @@
       [['så att m står ensamt.']]
     ], 1.05);
     y = minusFemTredjedelar(y, xx + 0.6 * F, function (yb) {
-      var x = T.str('3', padL + 30, yb);
+      var x = T.str('3', padL, yb);
       x = T.str('-', x, yb, BLUE);
       x = T.fracH('5', '3', x, yb, BLUE);
       x = T.str('=', x, yb);
@@ -1752,7 +1752,7 @@
       x = T.str('-', x, yb, BLUE);
       T.fracH('5', '3', x, yb, BLUE);
     });
-    xx = T.str('3-', padL + 30, y);
+    xx = T.str('3-', padL, y);
     xx = T.fracH('5', '3', xx, y);
     T.str('=m', xx, y);
     T.stepEnd();
@@ -1762,14 +1762,14 @@
       [['nämnare.']]
     ], 1.05);
     y += 3.8 * F;
-    xx = T.fracH('9', '3', padL + 30, y);
+    xx = T.fracH('9', '3', padL, y);
     xx = T.str('-', xx, y);
     xx = T.fracH('5', '3', xx, y);
     T.str('=m', xx, y);
     T.stepEnd();
 
     y += 3.8 * F;
-    xx = T.str('m=', padL + 30, y);
+    xx = T.str('m=', padL, y);
     T.fracH('4', '3', xx, y);
     T.stepEnd();
 
@@ -2030,7 +2030,7 @@
       [['x+x=2x och -1-1=-2.']]
     ]);
     y += 2.6 * F;
-    xx = T.str('=2x-2', padL + 60, y);
+    xx = T.str('=2x-2', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2077,7 +2077,7 @@
       [['byter tecken på båda termerna.']]
     ]);
     var y2 = y + 2.6 * F;
-    xx = T.str('=', padL + 60, y2);
+    xx = T.str('=', padL, y2);
     var S = segs(T, [['-x', BLUE], ['+1', BLUE], ['+x'], ['-1']], xx, y2);
     xx = S.x;
     T.stepEnd();
@@ -2165,7 +2165,7 @@
       [['2a·0=0 och cos 0=1.']]
     ]);
     y += 2.4 * F;
-    T.str('=-6+3b', padL + 60, y);
+    T.str('=-6+3b', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2259,7 +2259,7 @@
       [['Jag bryter ut den.']]
     ]);
     y += 2.6 * F;
-    xx = T.str('=6(', padL + 60, y);
+    xx = T.str('=6(', padL, y);
     T.stepEnd();
 
     xx = T.str('cos 3x', xx, y);
@@ -2481,7 +2481,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var ekvOp = mkEkvOp(T, !!cfg.vagg);
-    var x0 = padL + 30;
+    var x0 = padL;
     var xw = x0 + T.fracW('πx', '12') + T.adv('=') + T.fracW('π', '2') + 0.9 * F;
 
     /* ---- a) ---- */
@@ -2566,7 +2566,7 @@
     T.stepEnd();
 
     y += 3.0 * F;
-    xx = T.str('=', padL + 60, y);
+    xx = T.str('=', padL, y);
     xx = T.fracH('15π', '12', xx, y);
     xx = T.str(' cos', xx, y);
     T.parenFrac('πx', '12', null, xx + 0.2 * F, y);
@@ -2576,7 +2576,7 @@
       [['Förkorta 15π/12 med 3.']]
     ], 1.05);
     y += 3.1 * F;
-    xx = T.str('=', padL + 60, y);
+    xx = T.str('=', padL, y);
     xx = T.fracOp('15π', '12', '/3', xx, y);
     xx = T.str('=', xx, y);
     xx = T.fracH('5π', '4', xx, y);
@@ -2603,7 +2603,7 @@
       [['cos π/4 är √2/2.']]
     ], 1.05);
     y += 3.4 * F;
-    xx = T.str('=', padL + 60, y);
+    xx = T.str('=', padL, y);
     xx = T.fracH('5π', '4', xx, y);
     xx = T.mul(xx, y);
     xx = fracDelar(T, F, [{ r: '2' }], [{ s: '2' }], xx, y).x;
@@ -2616,7 +2616,7 @@
       [['f(x)=20+15sin(πx/12), sedan f’(3).']]
     ], 1.05);
     y += 3.0 * F;
-    T.str('=2,776...≈2,8', padL + 60, y);
+    T.str('=2,776...≈2,8', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2707,7 +2707,7 @@
     T.stepEnd();
 
     y += 3.0 * F;
-    xx = T.str('=4 sin', padL + 60, y);
+    xx = T.str('=4 sin', padL, y);
     xx = T.fracH('a', '2', xx + 0.2 * F, y);
     T.str('-4 sin 0=2,5215...', xx, y);
     T.stepEnd();
@@ -2729,7 +2729,7 @@
       [['Minst tre värdesiffror.']]
     ]);
     y += 2.6 * F;
-    T.str('≈2,22', padL + 60, y);
+    T.str('≈2,22', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2783,7 +2783,7 @@
     y += 3.6 * F;
     rubrik(T, 'Längden med formeln, från svansen till nosen', padL, y);
     y += 3.0 * F;
-    xx = T.str('L=', padL + 30, y);
+    xx = T.str('L=', padL, y);
     xx = integral(T, F, xx, y, '0', '40') + 0.3 * F;
     /* rottecknet över hela integranden: 1 + (5/3 · cos x/3)^2 */
     var wInnan = T.adv('1+') + 0.24 * F + T.fracW('5', '3') + 1.5 + T.adv(' cos') +
@@ -2805,7 +2805,7 @@
       [['räknar den med Integral.']]
     ], 1.4);
     y += 3.6 * F;
-    T.str('L=61,088...≈61', padL + 30, y);
+    T.str('L=61,088...≈61', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -2962,7 +2962,7 @@
       [['termerna kan läggas ihop.']]
     ], 1.3);
     y += 3.6 * F;
-    xx = T.str('=', padL + 120, y);
+    xx = T.str('=', padL, y);
     xx = fracDelar(T, F, [{ s: '32' }], [{ s: '10' }, { r: '80' }], xx, y).x;
     xx = T.str('+', xx, y);
     xx = fracDelar(T, F, [{ s: '48' }], [{ s: '10' }, { r: '80' }], xx, y).x;
@@ -2976,7 +2976,7 @@
       [['nämnare.']]
     ], 1.3);
     y += 3.7 * F;
-    xx = T.str('=', padL + 120, y);
+    xx = T.str('=', padL, y);
     var fr = fracDelar(T, F, [{ r: '80' }, { s: '·' }, { r: '80' }],
                        [{ s: '10' }, { r: '80' }], xx, y);
     T.pause(300);
@@ -3034,7 +3034,7 @@
       [['15/6 är 2,5 och 7/7 är 1.']]
     ], 1.05);
     y += 3.3 * F;
-    xx = T.str('=', padL + 60, y);
+    xx = T.str('=', padL, y);
     T.fracH('2,5t^6-t^7', '32', xx, y);
     T.stepEnd();
 
@@ -3060,7 +3060,7 @@
       [['28,4765625−17,0859375=11,390625.']]
     ], 1.05);
     y += 3.0 * F;
-    xx = T.str('=', padL + 100, y);
+    xx = T.str('=', padL, y);
     xx = T.fracH('11,390625', '32', xx, y);
     var rF = del(T, '=0,3559...', xx, y);
     T.stepEnd();
@@ -3097,7 +3097,7 @@
     var vagg = !!cfg.vagg;
     var ekvOp = mkEkvOp(T, vagg);
     var samla = V.mkSamla(T);
-    var x0 = padL + 30;
+    var x0 = padL;
     var xw = x0 + T.adv('x^2-4=5') + 0.9 * F;
     function f(x) { return x * x - 4; }
     var A = mkAxes(T, F, { ox: padL + 200, oy: 265, u: 30, xsc: 1, ysc: 2,
@@ -3170,7 +3170,7 @@
       [['tecken på båda termerna.']]
     ]);
     y += 2.7 * F;
-    var xr = T.str('=', x0 + T.adv('r'), y);
+    var xr = T.str('=', x0, y);
     var r5 = del(T, '5', xr, y);
     var rx2 = del(T, '-x^2', r5[1], y, BLUE);
     var r4 = del(T, '+4', rx2[1], y, BLUE);
@@ -3180,7 +3180,7 @@
       [['Slå ihop 5 och 4.']]
     ]);
     y += 2.4 * F;
-    xx = T.str('=', x0 + T.adv('r'), y);
+    xx = T.str('=', x0, y);
     samla(xx, y, [
       { ringar: [[r5[0], r5[1], y - 2.4 * F], [r4[0] + 0.3 * F, r4[1], y - 2.4 * F]], skriv: '9' },
       { skriv: '-x^2' }
@@ -3228,15 +3228,15 @@
     y += 3.1 * F;
     T.str('V=π((243-162+48,6)', padL, y);
     y += 2.4 * F;
-    T.str('-(-243+162-48,6))', padL + 90, y);
+    T.str('-(-243+162-48,6))', padL, y);
     T.stepEnd();
 
     y += 2.5 * F;
-    T.str('=π(129,6+129,6)=259,2π', padL + 60, y);
+    T.str('=π(129,6+129,6)=259,2π', padL, y);
     T.stepEnd();
 
     y += 2.5 * F;
-    T.str('=814,30...≈814', padL + 60, y);
+    T.str('=814,30...≈814', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -3303,7 +3303,7 @@
       [['Multiplicera in 2 i parentesen.']]
     ]);
     y += 2.4 * F;
-    xx = T.str('=', padL + T.adv('h’’(x)') + 0.1 * F, y);
+    xx = T.str('=', padL, y);
     multIn(xx, y, yKalla - 0.95 * F, [
       { fran: f2, till: t1, skriv: '2f’(x)·f’(x)', hojd: 20 },
       { fran: f2, till: t2, skriv: '+2f(x)·f’’(x)', hojd: 30 }
@@ -3323,7 +3323,7 @@
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('=18-4=14', padL + T.adv('h’’(0)') + 0.1 * F, y);
+    T.str('=18-4=14', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -3344,7 +3344,7 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var ekvOp = mkEkvOp(T, !!cfg.vagg);
-    var x0 = padL + 30;
+    var x0 = padL;
 
     /* ---- figuren: vägg, skivans mitt O, strålen och triangeln ---- */
     var yw = 70, O = [200, 270], Lpx = O[1] - yw, al = 0.42;
@@ -3419,7 +3419,7 @@
     T.stepEnd();
 
     y += 3.0 * F;
-    xx = T.str('=', x0 + T.fracW('dx', 'dt') + 1.5, y);
+    xx = T.str('=', x0, y);
     T.fracH('CL', 'cos^2(Ct)', xx, y);
     T.stepEnd();
 

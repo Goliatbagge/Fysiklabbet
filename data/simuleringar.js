@@ -114,7 +114,7 @@ window.SIM_NAMES = {
       kw: ['vågor', 'svängning', 'harmonisk svängning', 'läge', 'elongation', 'hastighet', 'acceleration', 'graf', 'grafer', 'derivata', 'fjäder', 'fjäderpendel', 'vändläge', 'jämviktsläge', 'sinus', 'cosinus', 'amplitud', 'periodtid'] },
   ],
   'fysik2-hookes-lag-app.html?lage=kopplade': 'Kopplade fjädrar',
-  'fysik2-pendel-app.html': 'Plan pendel (matematisk)',
+  'fysik2-pendel-app.html': 'Plan matematisk pendel',
   'fysik2-resonans-app.html': 'Resonans (driven svängning)',
   'fysik2-staende-vag-app.html': 'Stående våg i sträng',
   'fysik2-vagsimulator.html': 'Vågsimulator',

@@ -53,7 +53,7 @@
     "Elever per grupp eller antal grupper",
     "Villkor: elever som ska arbeta tillsammans eller hållas isär",
     "Flytta och byt elever mellan grupperna",
-    "Storskärmsläge för projektorn",
+    "Fullskärmsläge för projektorn",
     "Spara grupper och klasslistor som fil, utan konto",
     "Kopiera grupperna som text eller skriv ut dem"
    ],
@@ -329,6 +329,10 @@ select:focus, .inp:focus, textarea:focus { border-color: var(--blue); box-shadow
 .ark.fs .namn li { font-size: 1em; line-height: 1.25; padding: .35em .6em; gap: .45em; border-radius: .3em; }
 .ark.fs .namn li::before { width: .28em; height: .28em; }
 .ark.fs .varning, .ark.fs .tips { display: none; }
+.ark-h-tom { justify-content: flex-end; }
+.ark.fs .ark-tom { flex: 1; min-height: 0; }
+.ark.fs .ark-tom h3 { font-size: clamp(30px, 5vh, 60px); }
+.ark.fs .ark-tom p { font-size: clamp(15px, 2.2vh, 24px); }
 
 /* Dialog för klasslistan */
 dialog { border: 0; border-radius: 18px; padding: 0; width: min(520px, calc(100vw - 32px)); background: var(--panel); color: var(--ink); box-shadow: 0 30px 70px -20px rgba(15, 22, 32, .55); }
@@ -581,7 +585,7 @@ dialog::backdrop { background: rgba(15, 22, 32, .38); backdrop-filter: blur(2px)
 
 <!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
      webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
-<script src="slumpa-grupper.js?v=202610132000"></script>
+<script src="slumpa-grupper.js?v=202610191200"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

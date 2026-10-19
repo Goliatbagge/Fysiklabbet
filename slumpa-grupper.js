@@ -512,10 +512,17 @@
     A.innerHTML = '';
     const l = lista();
     if (!S.grupper || !S.grupper.length) {
+      // Fullskärmen går att öppna redan innan grupperna slumpats, så att
+      // läraren kan ställa i ordning projektorn först och slumpa inför klassen.
+      A.append(h('div', { class: 'ark-h ark-h-tom' }, h('div', { class: 'ark-knappar' }, iStorskarm()
+        ? [narvarande().length >= 2 ? h('button', { class: 'ghost', type: 'button', title: 'Slumpa grupper', html: IK.slump.replace('width="20" height="20"', 'width="16" height="16"') + '<span>Slumpa grupper</span>', onclick: slumpa }) : null,
+           h('button', { class: 'ghost', type: 'button', title: 'Tillbaka till vanlig vy', html: IK.skarmUt + '<span>Avsluta</span>', onclick: storskarm })]
+        : h('button', { class: 'ghost', type: 'button', title: 'Visa på hela skärmen', html: IK.skarm + '<span>Fullskärm</span>', onclick: storskarm }))));
       A.append(h('div', { class: 'ark-tom' }, h('div', null,
         h('div', { html: IK.grupper }),
         h('h3', { text: l ? 'Redo att slumpa' : 'Inga grupper än' }),
-        h('p', { text: l ? 'Välj gruppstorlek till höger och tryck på Slumpa grupper. Grupperna visas här.' : 'Skapa en klasslista till vänster, eller öppna en fil som du sparat tidigare.' }))));
+        h('p', { text: !l ? 'Skapa en klasslista till vänster, eller öppna en fil som du sparat tidigare.'
+          : iStorskarm() ? 'Tryck på Slumpa grupper uppe till höger.' : 'Välj gruppstorlek till höger och tryck på Slumpa grupper. Grupperna visas här.' }))));
       return;
     }
     const antal = S.grupper.reduce((s, g) => s + g.elever.length, 0);
@@ -525,7 +532,7 @@
       h('div', { class: 'ark-knappar' }, iStorskarm()
         ? [h('button', { class: 'ghost', type: 'button', title: 'Slumpa nya grupper', html: IK.slump.replace('width="20" height="20"', 'width="16" height="16"') + '<span>Slumpa om</span>', onclick: slumpa }),
            h('button', { class: 'ghost', type: 'button', title: 'Tillbaka till vanlig vy', html: IK.skarmUt + '<span>Avsluta</span>', onclick: storskarm })]
-        : [h('button', { class: 'ghost', type: 'button', title: 'Visa grupperna på hela skärmen', html: IK.skarm + '<span>Storskärm</span>', onclick: storskarm }),
+        : [h('button', { class: 'ghost', type: 'button', title: 'Visa grupperna på hela skärmen', html: IK.skarm + '<span>Fullskärm</span>', onclick: storskarm }),
            h('button', { class: 'ghost', type: 'button', title: 'Ta bort grupperna', text: 'Rensa', onclick: () => { S.grupper = null; S.varningar = []; spara(); ritaArk(); ritaHoger(); } })])));
     if (S.varningar.length && !snurrGrupper) A.append(h('div', { class: 'varning', role: 'note' }, S.varningar.map(v => h('p', { text: v }))));
 
@@ -699,7 +706,7 @@
       f = Math.max(12, Math.floor(f * 0.96));
     }
   }
-  function bytteStorskarm() { A.classList.toggle('fs', iStorskarm()); vald = null; if (S.grupper) ritaArk(); }
+  function bytteStorskarm() { A.classList.toggle('fs', iStorskarm()); vald = null; ritaArk(); }
   document.addEventListener('fullscreenchange', bytteStorskarm);
   document.addEventListener('webkitfullscreenchange', bytteStorskarm);
   let fsTimer;

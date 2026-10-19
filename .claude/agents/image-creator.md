@@ -2,7 +2,7 @@
 name: image-creator
 description: AI image generation specialist. Use proactively when the user wants to create images, generate pictures, make AI art, edit photos, or transform images. Handles both text-to-image and image-to-image workflows.
 tools: Bash, Read, Write, Glob
-model: sonnet
+model: opus
 skills: gemini-imagegen
 ---
 

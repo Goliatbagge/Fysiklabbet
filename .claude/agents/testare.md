@@ -2,7 +2,7 @@
 name: testare
 description: QA-agent för testning av simuleringar. Använd proaktivt efter skapande eller modifiering av simuleringar.
 tools: Read, Bash, Glob, Grep
-model: haiku
+model: opus
 ---
 
 Du är en QA-testare för Fysiklabbet-projektet.

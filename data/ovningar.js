@@ -16241,7 +16241,7 @@ $$ T = 2\\pi\\sqrt{\\frac{2{,}0}{9{,}82}} = 2\\pi\\cdot 0{,}4514 \\approx 2{,}84
 
 **Svar:** Periodtiden är ungefär $2{,}8\\ \\mathrm{s}$.
 
-**Generell slutsats:** Pendelns massa spelar ingen roll — bara längden och tyngdaccelerationen.`,
+**Generell slutsats:** Pendelns massa spelar ingen roll, bara längden och tyngdaccelerationen gör det.`,
         },
         {
             level: 1,
@@ -16287,7 +16287,7 @@ $$ g = \\frac{4\\pi^2 \\cdot 0{,}30}{1{,}20^2} = \\frac{11{,}84}{1{,}44} \\appro
 
 **Svar:** Tyngdaccelerationen på planeten är ungefär $8{,}2\\ \\mathrm{m/s^2}$.
 
-**Generell slutsats:** En matematisk pendel är ett enkelt instrument för att mäta tyngdaccelerationen — perioden ger *g* direkt eftersom pendellängden lätt mäts med måttband.`,
+**Generell slutsats:** En matematisk pendel är ett enkelt instrument för att mäta tyngdaccelerationen: perioden ger *g* direkt eftersom pendellängden lätt mäts med måttband.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -16309,7 +16309,7 @@ $$ l_2 = 4 \\cdot 0{,}80 = 3{,}20\\ \\mathrm{m} $$
 
 **Svar:** Pendeln ska vara $3{,}20\\ \\mathrm{m}$ lång.
 
-**Generell slutsats:** På grund av rotuttrycket växer periodtiden **långsammare** än längden — för att fördubbla *T* krävs en fyrdubbling av *l*. Detta gäller alla rörelser där *T* ∝ √*l*.`,
+**Generell slutsats:** På grund av rotuttrycket växer periodtiden **långsammare** än längden. För att fördubbla *T* krävs en fyrdubbling av *l*. Detta gäller alla rörelser där *T* ∝ √*l*.`,
         },
         {
             level: 2,
@@ -16336,7 +16336,7 @@ $$ T_\\text{Mars} = 2{,}00 \\cdot \\sqrt{\\frac{9{,}82}{3{,}71}} = 2{,}00 \\cdot
 
 **Svar:** Periodtiden på Mars är ungefär $3{,}3\\ \\mathrm{s}$.
 
-**Generell slutsats:** Lägre tyngdacceleration ger längre periodtid — pendeln "faller långsammare" tillbaka mot lodlinjen. Det är därför mekaniska pendelklockor från jorden går *för långsamt* på Mars eller Månen.`,
+**Generell slutsats:** Lägre tyngdacceleration ger längre periodtid, eftersom pendeln "faller långsammare" tillbaka mot lodlinjen. Det är därför mekaniska pendelklockor från jorden går *för långsamt* på Mars eller Månen.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -16348,11 +16348,11 @@ ${makeSwing({ angle: 12, ropeLabel: null, angleLabel: null })}`,
             answer: { value: 3.71, unit: 'm/s²' },
             solution: `**Insikten är att en pendelklocka räknar antalet pendelslag, inte tid direkt.** Klockans visare visar tid genom att tro att varje slag tar den tid som motsvarar perioden *på jorden*. Om planetens *g* är lägre, går pendeln långsammare och klockan visar därför mindre tid än vad som faktiskt gått.
 
-**Steg 1 — koppla klockans avläsning till periodtiderna.** Under den verkliga tiden $t_\\text{verklig} = 24$ h gör pendeln $n = t_\\text{verklig}/T_\\text{planet}$ svängningar. Klockan tolkar varje svängning som om perioden vore $T_\\text{jord}$, så klockan visar
+**Steg 1: koppla klockans avläsning till periodtiderna.** Under den verkliga tiden $t_\\text{verklig} = 24$ h gör pendeln $n = t_\\text{verklig}/T_\\text{planet}$ svängningar. Klockan tolkar varje svängning som om perioden vore $T_\\text{jord}$, så klockan visar
 
 $$ t_\\text{klocka} = n \\cdot T_\\text{jord} = t_\\text{verklig} \\cdot \\frac{T_\\text{jord}}{T_\\text{planet}} $$
 
-**Steg 2 — bilda kvoten av perioderna.** Pendellängden är densamma, så
+**Steg 2: bilda kvoten av perioderna.** Pendellängden är densamma, så
 
 $$ \\frac{T_\\text{jord}}{T_\\text{planet}} = \\sqrt{\\frac{g_\\text{planet}}{g_\\text{jord}}} $$
 
@@ -16360,7 +16360,7 @@ Eliminera *l*:
 
 $$ \\frac{t_\\text{klocka}}{t_\\text{verklig}} = \\sqrt{\\frac{g_\\text{planet}}{g_\\text{jord}}} \\quad\\Leftrightarrow\\quad g_\\text{planet} = g_\\text{jord} \\cdot \\left(\\frac{t_\\text{klocka}}{t_\\text{verklig}}\\right)^2 $$
 
-**Steg 3 — sätt in värden.**
+**Steg 3: sätt in värden.**
 
 $$
 \\left[ \\begin{array}{l}
@@ -16374,7 +16374,7 @@ $$ g_\\text{planet} = 9{,}82 \\cdot \\left(\\frac{14{,}75}{24{,}00}\\right)^2 = 
 
 **Svar:** Tyngdaccelerationen på planeten är ungefär $3{,}71\\ \\mathrm{m/s^2}$ (det stämmer med Mars värde).
 
-**Generell slutsats:** Insikten är att koppla *klockans avläsning* till *antalet pendelslag* — pendelklockor mäter inte tid på samma sätt som atomur. Pendellängden *l* stryks ur ekvationen, så vi behöver aldrig veta vilken pendel som används. Detta är ett klassiskt kvotresonemang.`,
+**Generell slutsats:** Insikten är att koppla *klockans avläsning* till *antalet pendelslag*. Pendelklockor mäter inte tid på samma sätt som atomur. Pendellängden *l* stryks ur ekvationen, så vi behöver aldrig veta vilken pendel som används. Detta är ett klassiskt kvotresonemang.`,
         },
     ],
 

@@ -6246,10 +6246,10 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Massan påverkar inte periodtiden alls — en tung och en lätt pendelkula med samma längd svänger lika snabbt.',
-      'Massan förekommer inte i formeln för periodtiden — den tar ut sig i härledningen, och pendellängden måste också vara med.',
-      'Vid små utslag är periodtiden oberoende av utslagsvinkeln — det är en förutsättning för att formeln ska gälla.',
-      'Enligt $T = 2\\pi \\sqrt{\\dfrac{l}{g}}$ beror periodtiden bara på pendellängden *l* och tyngdaccelerationen *g* — inte på massan.',
+      'Massan påverkar inte periodtiden alls. En tung och en lätt pendelkula med samma längd svänger lika snabbt.',
+      'Massan förekommer inte i formeln för periodtiden. Den tar ut sig i härledningen, och pendellängden måste också vara med.',
+      'Vid små utslag är periodtiden oberoende av utslagsvinkeln. Det är en förutsättning för att formeln ska gälla.',
+      'Enligt $T = 2\\pi \\sqrt{\\dfrac{l}{g}}$ beror periodtiden bara på pendellängden *l* och tyngdaccelerationen *g*, inte på massan.',
     ],
   },
   {
@@ -6258,9 +6258,9 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Periodtiden för en matematisk pendel vid små utslag ges av $T = 2\\pi \\sqrt{\\dfrac{l}{g}}$.',
-      'Bråket under rottecknet är omvänt — pendellängden ska stå i täljaren, tyngdaccelerationen i nämnaren.',
+      'Bråket under rottecknet är omvänt: pendellängden ska stå i täljaren, tyngdaccelerationen i nämnaren.',
       'Rottecknet saknas i detta uttryck.',
-      'I detta uttryck står *l* och *g* som en produkt under rottecknet, i nämnaren — det stämmer inte med den korrekta formeln.',
+      'I detta uttryck står *l* och *g* som en produkt under rottecknet, i nämnaren. Det stämmer inte med den korrekta formeln.',
     ],
   },
   {
@@ -6273,7 +6273,7 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Golvet har ingenting med pendelns upphängning att göra — längden mäts från fästpunkten.',
+      'Golvet har ingenting med pendelns upphängning att göra. Längden mäts från fästpunkten.',
       'Det är hela längden till kulans tyngdpunkt som räknas, inte bara till snörets mittpunkt.',
       'Pendellängden räknas från fästpunkten (upphängningen) till den pendlande kroppens tyngdpunkt.',
       'Det beskriver istället svängningens amplitud (utslag), inte pendelns längd.',
@@ -6289,7 +6289,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Snörets massa antas vara försumbar oavsett vinkel — det är ett separat villkor, inte kopplat till vinkelns storlek.',
+      'Snörets massa antas vara försumbar oavsett vinkel. Det är ett separat villkor, inte kopplat till vinkelns storlek.',
       'Härledningen bygger på att sträckan *d* nästan är lika lång som bågen *y*, vilket bara stämmer vid små vinklar. Vid större vinklar slutar den återförande kraften vara proportionell mot utslaget, och svängningen är inte längre harmonisk.',
       'Tyngdaccelerationen *g* är konstant och beror inte på pendelns utslagsvinkel.',
       'Massan hos pendeln ändras inte av utslagsvinkeln.',
@@ -6301,9 +6301,9 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'Detta är resultatet av $\\sqrt{l/g}$ ($\\sqrt{0{,}25} = 0{,}50$), men faktorn $2\\pi$ saknas.',
-      'Detta stämmer inte med uträkningen — kontrollera att du tagit roten ur $l/g$ innan du multiplicerar med $2\\pi$.',
+      'Detta stämmer inte med uträkningen. Kontrollera att du tagit roten ur $l/g$ innan du multiplicerar med $2\\pi$.',
       'Med $T = 2\\pi \\sqrt{\\dfrac{2{,}45}{9{,}82}} = 2\\pi \\sqrt{0{,}25} = 2\\pi \\cdot 0{,}50 \\approx 3{,}1$ s stämmer uträkningen.',
-      'Detta är dubbelt så stort som rätt svar — kontrollera om du råkat multiplicera med $4\\pi$ istället för $2\\pi$.',
+      'Detta är dubbelt så stort som rätt svar. Kontrollera om du råkat multiplicera med $4\\pi$ istället för $2\\pi$.',
     ],
   },
 ],

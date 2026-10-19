@@ -45,6 +45,19 @@
                 color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
         .fnum { color: var(--lab-ink); font-size: 19px; }
         .fnum sub { font-size: 0.68em; }
+        /* Rottecken över ett bråk: tecknet ritas som EN sammanhängande linje
+           (krok, nedstreck, långt uppstreck) som sträcks till bråkets höjd
+           och går ihop med strecket ovanför. Ordetiketterna står utanför
+           roten, över täljaren och under nämnaren. */
+        .rb { display: inline-grid; grid-template-columns: auto auto; align-items: stretch; }
+        .rb-lbl { grid-column: 2; text-align: center; }
+        .rb-lbl.topp { grid-row: 1; margin-bottom: 4px; }
+        .rb-lbl.botten { grid-row: 3; margin-top: 4px; }
+        .rb-cell { grid-column: 1; grid-row: 2; position: relative; width: 17px; }
+        .rb-tecken { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; }
+        .rb-rad { grid-column: 2; grid-row: 2; border-top: 2px solid currentColor;
+                  padding: 4px 6px 3px 4px; display: flex; flex-direction: column; align-items: center; }
+        .rb-streck { align-self: stretch; border-top: 2px solid currentColor; margin: 3px 0; }
 
         /* Formelkortet: roten har ett lodrätt rotmärke och ett överstreck
            som spänner över hela bråket. */
@@ -836,6 +849,22 @@
                 <span className="flbl" style={bottomLabel ? null : { visibility: 'hidden' }}>{bottomLabel || 'x'}</span>
             </div>
         );
+// Bråk under ett rottecken, med valfria ordetiketter utanför roten.
+        const RotBrak = ({ topLabel, top, bottom, bottomLabel }) => (
+            <span className="rb">
+                {topLabel && <span className="flbl rb-lbl topp">{topLabel}</span>}
+                <span className="rb-cell"><svg className="rb-tecken" viewBox="0 0 17 100" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M1 62 L5 57 L9.5 98 L16 1 L17 1" fill="none" stroke="currentColor" strokeWidth="2"
+                          strokeLinejoin="round" strokeLinecap="butt" vectorEffect="non-scaling-stroke" />
+                </svg></span>
+                <span className="rb-rad">
+                    <span className="fnum">{top}</span>
+                    <span className="rb-streck"></span>
+                    <span className="fnum">{bottom}</span>
+                </span>
+                {bottomLabel && <span className="flbl rb-lbl botten">{bottomLabel}</span>}
+            </span>
+        );
         const FormulaCard = React.memo(({ l, g, T, gissa }) => (
             <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-3 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
                 <span className="fk-grupp">
@@ -843,23 +872,13 @@
                 <span className="fnum">=</span>
                 <Vbl label="&nbsp;">2π</Vbl>
                 <span className="fnum">·</span>
-                <span className="rot">
-                    <span className="rot-sign fnum">√</span>
-                    <span className="rot-inner">
-                        <Frac topLabel="Pendellängd" top={<em>l</em>} bottomLabel="Tyngdacceleration" bottom={<em>g</em>} />
-                    </span>
-                </span>
+                <RotBrak topLabel="Pendellängd" top={<em>l</em>} bottom={<em>g</em>} bottomLabel="Tyngdacceleration" />
                 </span>
                 <span className="fk-grupp">
                 <span className="fnum">=</span>
                 <Vbl label="&nbsp;">2π</Vbl>
                 <span className="fnum">·</span>
-                <span className="rot">
-                    <span className="rot-sign fnum">√</span>
-                    <span className="rot-inner">
-                        <Frac top={<span>{fmtL(l)}&nbsp;m</span>} bottom={<span>{gissa ? '?' : fmt(g, 2)}&nbsp;m/s²</span>} />
-                    </span>
-                </span>
+                <RotBrak top={<span>{fmtL(l)}&nbsp;m</span>} bottom={<span>{gissa ? '?' : fmt(g, 2)}&nbsp;m/s²</span>} />
                 <span className="fnum">=</span>
                 <Vbl label="&nbsp;"><b>{gissa ? '?' : fmt(T, 2) + ' s'}</b></Vbl>
                 </span>

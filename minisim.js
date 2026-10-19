@@ -23,6 +23,7 @@
  *           snettkast, skjutochslapp, kanonvagn, galton, kalkylblad,
  *           kopplade-fjadrar, lodlinje, hjulprojektion, svangningsgrafer,
  *           periodtid (fy2-2.4: m, k och A mot periodtiden),
+ *           pendelperiod (fy2-2.5: l, m, g och α mot pendelns periodtid),
  *           stegkast (fy2-1.9: kaströrelsen med stegmetoden),
  *           vinkelrata (ma1c-4.7: lutningstrappan vrids ett kvarts varv)
  *   titel:  liten rubrik ovanför scenen (valfritt).
@@ -561,6 +562,8 @@
         '.ms-pt-topp{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:#4a5160;white-space:nowrap;}',
         '.ms-pt-topp b{font-weight:500;color:#1f2530;}',
         '.ms-pt-cell .minisim-slider{width:100%;flex:none;margin:6px 0 4px;}',
+        '.ms-pp-panel{grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);gap:4px 20px;}',
+        '.ms-pp-panel .ms-pt-knappar{grid-row:span 2;align-self:center;}',
         '@media (max-width:600px){.ms-pt-panel{grid-template-columns:minmax(0,1fr);gap:6px;}.ms-pt-knappar{flex-direction:row;}}',
         /* typ: stegkast — teckenförklaring och stegtabell under scenen */
         '.ms-sk-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px;font-family:' + FONT + ';',
@@ -11587,6 +11590,348 @@
     }
 
     // ══════════════════════════════════════════════════════════════════════
+    //  typ: pendelperiod
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.5 (Plan matematisk pendel): en kula i ett snöre svänger, och en
+    // graf till höger ritar utslagsvinkeln α mot tiden. Mellan de två senaste
+    // vändlägena åt höger sitter en måttlinje med den UPPMÄTTA periodtiden,
+    // och raden under scenen visar vad formeln T = 2π · √(l/g) ger. Fyra
+    // glidare: pendellängd l, massa m, plats (tyngdaccelerationen g) och
+    // utslagsvinkel α. Rörelsen räknas EXAKT (α'' = −(g/l) · sin α, RK4),
+    // inte med småvinkelapproximationen, så att eleven ser att massan aldrig
+    // spelar roll, att T följer √l och 1/√g, och att den uppmätta periodtiden
+    // börjar dra ifrån formelns värde när utslaget blir stort. Samma upplägg
+    // och panel som typen periodtid (fy2-2.4). Kulan går att dra ut och
+    // släppa. Längden ritas i fast skala, så att längre pendlar syns längre.
+    var ppRaknare = 0;
+    function buildPendelperiod(node, cfg) {
+        var INK = '#1f2530', GREY = '#9aa0a6', BLA = '#2563c9', RUTA = '#2563c9', AXEL = '#38bdf8', MATT = '#0f8a7e';
+        // Bred skärm: pendeln till vänster och grafen till höger. Smalt kort
+        // (telefon): pendeln överst och grafen under, så att båda blir stora.
+        var PY = 24, PXM = 85, PXGRAD = 1.25;           // tak, px per meter, px per grad
+        var PX, GX0, GX1, CY, VBW, VBH, smal = null;
+        var PLATSER = [
+            { namn: 'Månen', g: 1.62 }, { namn: 'Mars', g: 3.71 },
+            { namn: 'Jorden', g: 9.82 }, { namn: 'Jupiter', g: 24.8 }
+        ];
+        var l = 1.0, m = 0.2, plats = 2, amp = 10;      // m, kg, index, grader
+        var th = amp * Math.PI / 180, om = 0;            // vinkel (rad) och vinkelhastighet
+        var tid = 0, spelar = false, fonster = 6;
+        var drar = false, dragits = false;
+        var hist = [], toppar = [];
+        var id = 'ms-pp-rutnat-' + (++ppRaknare);
+
+        function g() { return PLATSER[plats].g; }
+        function Tformel() { return 2 * Math.PI * Math.sqrt(l / g()); }
+        function r1(v) { return Math.round(v * 10) / 10; }
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function lbl(x, y, anchor, inner, size, color) {
+            return '<text x="' + r1(x) + '" y="' + r1(y) + '" text-anchor="' + anchor + '" font-size="' +
+                (size || 15) + '" fill="' + (color || INK) + '">' + inner + '</text>';
+        }
+        function fmt(v, d) {
+            var s = v.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        }
+        function nyttFonster() {
+            // tidsfönstret rymmer ungefär två och en halv period
+            fonster = Math.max(4, Math.min(18, Math.ceil(Tformel() * 2.6)));
+        }
+
+        // ── Fast bakgrund (byggs om när layouten byts) ────────────────────
+        function basSvg() {
+        var bas = '<defs><pattern id="' + id + '" width="20" height="20" patternUnits="userSpaceOnUse">' +
+            '<path d="M 20 0 L 0 0 0 20" fill="none" stroke="' + RUTA + '" stroke-width="0.6" opacity="0.13"/></pattern></defs>' +
+            '<rect x="-10" y="-10" width="' + (VBW + 20) + '" height="' + (VBH + 20) + '" fill="url(#' + id + ')"/>';
+        bas += '<line x1="' + (PX - 36) + '" y1="' + PY + '" x2="' + (PX + 36) + '" y2="' + PY + '" stroke="' + INK + '" stroke-width="1.8"/>';
+        for (var hx = PX - 32; hx <= PX + 34; hx += 8) {
+            bas += '<line x1="' + hx + '" y1="' + PY + '" x2="' + (hx - 7) + '" y2="' + (PY - 7) +
+                '" stroke="' + INK + '" stroke-width="1" stroke-linecap="round"/>';
+        }
+        // grafens axlar: pilspets bara åt det positiva hållet
+        bas += '<line x1="' + GX0 + '" y1="' + (CY + 86) + '" x2="' + GX0 + '" y2="' + (CY - 92) + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
+            '<polygon points="' + (GX0 - 4) + ',' + (CY - 92) + ' ' + GX0 + ',' + (CY - 102) + ' ' + (GX0 + 4) + ',' + (CY - 92) + '" fill="' + AXEL + '"/>' +
+            '<line x1="' + GX0 + '" y1="' + CY + '" x2="' + (GX1 + 4) + '" y2="' + CY + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
+            '<polygon points="' + (GX1 + 4) + ',' + (CY - 4) + ' ' + (GX1 + 14) + ',' + CY + ' ' + (GX1 + 4) + ',' + (CY + 4) + '" fill="' + AXEL + '"/>' +
+            lbl(GX0 - 8, CY - 88, 'end', it('α'), 15) +
+            lbl(GX1 + 14, CY + 20, 'end', it('t'), 15);
+        return bas;
+        }
+
+        function rita() {
+            var s = '';
+            var L = l * PXM;
+            var a = amp * Math.PI / 180;
+            // lodlinjen och den streckade banan mellan vändlägena
+            s += '<line x1="' + PX + '" y1="' + PY + '" x2="' + PX + '" y2="' + r1(PY + L + 16) +
+                '" stroke="' + GREY + '" stroke-width="1" stroke-dasharray="5 4"/>';
+            var bana = [];
+            for (var i = 0; i <= 40; i++) {
+                var v = -a + (i / 40) * 2 * a;
+                bana.push(r1(PX + L * Math.sin(v)) + ',' + r1(PY + L * Math.cos(v)));
+            }
+            s += '<polyline points="' + bana.join(' ') + '" fill="none" stroke="' + GREY + '" stroke-width="1.2" stroke-dasharray="2 3"/>';
+            // snöre och kula; kulan ritas större ju tyngre den är
+            var bx = PX + L * Math.sin(th), by = PY + L * Math.cos(th);
+            var r = Math.max(6, Math.min(15, 9 * Math.cbrt(m / 0.2)));
+            s += '<line x1="' + PX + '" y1="' + PY + '" x2="' + r1(bx) + '" y2="' + r1(by) + '" stroke="' + INK + '" stroke-width="1.5"/>';
+            s += '<circle cx="' + PX + '" cy="' + PY + '" r="2.4" fill="' + INK + '"/>';
+            s += '<circle cx="' + r1(bx) + '" cy="' + r1(by) + '" r="' + r1(r) + '" fill="#6ba3d6" stroke="#2f6db0" stroke-width="1.5"/>';
+            // pendellängden: etikett mitt på snöret, på den sida som är fri
+            var sida = th >= 0 ? -1 : 1;
+            s += lbl(PX + L / 2 * Math.sin(th) + sida * 10, PY + L / 2 * Math.cos(th) + 5, sida < 0 ? 'end' : 'start', it('l'), 15);
+            if (!dragits) s += lbl(PX + 46, PY + 5, 'start', 'Dra i kulan', 13, '#4a5160');
+            // grafen: tidsfönstret flyter med när kurvan når högerkanten
+            var t0 = Math.max(0, tid - fonster);
+            function tx(t) { return GX0 + (t - t0) / fonster * (GX1 - GX0); }
+            function ty(rad) { return CY - rad * 180 / Math.PI * PXGRAD; }
+            var kurva = [];
+            for (var j = 0; j < hist.length; j++) {
+                if (hist[j].t < t0) continue;
+                kurva.push(r1(tx(hist[j].t)) + ',' + r1(ty(hist[j].a)));
+            }
+            if (kurva.length > 1) {
+                s += '<polyline points="' + kurva.join(' ') + '" fill="none" stroke="' + BLA + '" stroke-width="2.2" stroke-linejoin="round"/>';
+            }
+            s += '<circle cx="' + r1(tx(tid)) + '" cy="' + r1(ty(th)) + '" r="4" fill="' + BLA + '"/>';
+            // måttlinje mellan de två senaste vändlägena åt höger
+            var n = toppar.length;
+            if (n >= 2 && toppar[n - 2].t >= t0) {
+                var xa = tx(toppar[n - 2].t), xb = tx(toppar[n - 1].t);
+                var ya = ty(toppar[n - 2].a), yb = ty(toppar[n - 1].a);
+                var ym = CY - 86;
+                s += '<line x1="' + r1(xa) + '" y1="' + r1(ya - 5) + '" x2="' + r1(xa) + '" y2="' + (ym - 6) + '" stroke="' + MATT + '" stroke-width="1" stroke-dasharray="3 3"/>';
+                s += '<line x1="' + r1(xb) + '" y1="' + r1(yb - 5) + '" x2="' + r1(xb) + '" y2="' + (ym - 6) + '" stroke="' + MATT + '" stroke-width="1" stroke-dasharray="3 3"/>';
+                if (xb - xa > 16) {
+                    s += '<line x1="' + r1(xa + 7) + '" y1="' + ym + '" x2="' + r1(xb - 7) + '" y2="' + ym + '" stroke="' + MATT + '" stroke-width="1.6" stroke-linecap="butt"/>';
+                    s += '<polygon points="' + r1(xa) + ',' + ym + ' ' + r1(xa + 8) + ',' + (ym - 4) + ' ' + r1(xa + 8) + ',' + (ym + 4) + '" fill="' + MATT + '"/>';
+                    s += '<polygon points="' + r1(xb) + ',' + ym + ' ' + r1(xb - 8) + ',' + (ym - 4) + ' ' + r1(xb - 8) + ',' + (ym + 4) + '" fill="' + MATT + '"/>';
+                }
+                var mx = Math.max(GX0 + 62, Math.min(GX1 - 62, (xa + xb) / 2));
+                s += lbl(mx, ym - 9, 'middle', 'Uppmätt ' + it('T') + ' = ' + fmt(toppar[n - 1].t - toppar[n - 2].t, 2) + ' s', 14, MATT);
+            }
+            dyn.innerHTML = s;
+            info.innerHTML = 'Periodtid enligt formeln: <em>T</em> = 2π · √(<em>l</em>/<em>g</em>) = ' + fmt(Tformel(), 2) + ' s';
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="En kula i ett snöre svänger fram och tillbaka. En graf till höger ritar utslagsvinkeln ' +
+            'mot tiden, och en måttlinje mellan de två senaste vändlägena visar den uppmätta periodtiden T.">' +
+            '<g class="ms-pp-bas"></g><g class="ms-pp-dyn"></g>' +
+            '<rect class="ms-pp-grepp" fill="transparent" style="cursor:grab;touch-action:none"/></svg>';
+        var dyn = scene.querySelector('.ms-pp-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, 620 / 250, 300);
+        var svgRot = scene.querySelector('svg');
+        function lagUt() {
+            var nySmal = card.clientWidth > 0 && card.clientWidth < 480;
+            if (nySmal === smal) return;
+            smal = nySmal;
+            if (smal) { PX = 180; GX0 = 40; GX1 = 324; CY = 318; VBW = 360; VBH = 418; }
+            else { PX = 172; GX0 = 356; GX1 = 590; CY = 124; VBW = 620; VBH = 250; }
+            svgRot.setAttribute('viewBox', '0 0 ' + VBW + ' ' + VBH);
+            svgRot.setAttribute('width', String(VBW));
+            svgRot.setAttribute('height', String(VBH));
+            card.style.setProperty('--ms-asp', String(VBW / VBH));
+            scene.querySelector('.ms-pp-bas').innerHTML = basSvg();
+            var gr = scene.querySelector('.ms-pp-grepp');
+            gr.setAttribute('x', '0'); gr.setAttribute('y', String(PY + 4));
+            gr.setAttribute('width', String(smal ? VBW : GX0 - 20));
+            gr.setAttribute('height', String(smal ? 206 : 246 - PY));
+            if (dyn.innerHTML) rita();
+        }
+
+        var panel = document.createElement('div');
+        panel.className = 'ms-pt-panel ms-pp-panel';
+        scene.appendChild(panel);
+        var controls = document.createElement('div');
+        controls.className = 'ms-pt-knappar';
+        var startBtn = document.createElement('button');
+        startBtn.type = 'button';
+        startBtn.className = 'minisim-btn';
+        var omBtn = document.createElement('button');
+        omBtn.type = 'button';
+        omBtn.className = 'minisim-btn';
+        omBtn.textContent = 'Börja om';
+        controls.appendChild(startBtn);
+        controls.appendChild(omBtn);
+        panel.appendChild(controls);
+
+        function glidare(namn, bet, min, max, steg, varde, visa, satt) {
+            var rad = document.createElement('div');
+            rad.className = 'ms-pt-cell';
+            var topp = document.createElement('div');
+            topp.className = 'ms-pt-topp';
+            var lb = document.createElement('span');
+            lb.innerHTML = namn + (bet ? ' <em>' + bet + '</em>' : '');
+            var sl = document.createElement('input');
+            sl.type = 'range';
+            sl.className = 'minisim-slider';
+            sl.min = String(min); sl.max = String(max); sl.step = String(steg); sl.value = String(varde);
+            sl.setAttribute('aria-label', namn);
+            var v = document.createElement('b');
+            v.textContent = visa(varde);
+            sl.addEventListener('input', function () {
+                var x = parseFloat(sl.value);
+                satt(x);
+                v.textContent = visa(x);
+                rita();
+            });
+            topp.appendChild(lb); topp.appendChild(v);
+            rad.appendChild(topp); rad.appendChild(sl);
+            panel.appendChild(rad);
+            return { sl: sl, v: v, visa: visa };
+        }
+        // Byts l eller g mitt i svängningen behålls vinkeln, och vinkel-
+        // hastigheten skalas med √(g/l), så att utslaget blir detsamma.
+        function bytFrekvens(fn) {
+            var w0 = Math.sqrt(g() / l);
+            fn();
+            om *= Math.sqrt(g() / l) / w0;
+            toppar = [];
+            nyttFonster();
+        }
+        glidare('Pendellängd', 'l', 0.2, 2, 0.05, l,
+            function (x) { return fmt(x, 2) + ' m'; }, function (x) { bytFrekvens(function () { l = x; }); });
+        glidare('Massa', 'm', 50, 1000, 50, m * 1000,
+            function (x) { return fmt(x, 0) + ' g'; }, function (x) { m = x / 1000; });
+        glidare('Plats', '', 0, 3, 1, plats,
+            function (x) { var p = PLATSER[x]; return p.namn + ', ' + fmt(p.g, 2) + ' m/s²'; },
+            function (x) { bytFrekvens(function () { plats = x; }); });
+        var aGlid = glidare('Utslag', 'α', 2, 60, 1, amp,
+            function (x) { return fmt(x, 0) + '°'; },
+            function (x) { amp = x; slappIVandlage(); });
+
+        var info = document.createElement('div');
+        info.className = 'minisim-info';
+        info.style.marginTop = '6px';
+        info.style.whiteSpace = 'normal';
+        card.appendChild(info);
+        node.appendChild(card);
+        lagUt();
+        if ('ResizeObserver' in window) new ResizeObserver(lagUt).observe(card);
+
+        // ── Fysik: α'' = −(g/l) · sin α, ett RK4-steg ─────────────────────
+        function acc(a) { return -g() / l * Math.sin(a); }
+        function rk4(h) {
+            var k1a = om, k1o = acc(th);
+            var k2a = om + h / 2 * k1o, k2o = acc(th + h / 2 * k1a);
+            var k3a = om + h / 2 * k2o, k3o = acc(th + h / 2 * k2a);
+            var k4a = om + h * k3o, k4o = acc(th + h * k3a);
+            th += h / 6 * (k1a + 2 * k2a + 2 * k3a + k4a);
+            om += h / 6 * (k1o + 2 * k2o + 2 * k3o + k4o);
+        }
+        // Kulan släpps från vila i det högra vändläget (eller vänstra om den
+        // drogs ut åt vänster). Ett vändläge åt höger är en topp i grafen.
+        function slappIVandlage(vinkel) {
+            th = vinkel != null ? vinkel : amp * Math.PI / 180;
+            om = 0;
+            toppar = th > 0 ? [{ t: tid, a: th }] : [];
+        }
+
+        // ── Animation ─────────────────────────────────────────────────────
+        var raf = null, senast = 0, synlig = true;
+        function steg(nu) {
+            raf = null;
+            if (!spelar || !synlig) return;
+            var dt = senast ? Math.min(0.05, (nu - senast) / 1000) : 0;
+            senast = nu;
+            tid += dt;
+            if (!drar && dt > 0) {
+                var n = Math.max(1, Math.ceil(dt / 0.002)), h = dt / n;
+                for (var i = 0; i < n; i++) {
+                    var omFore = om;
+                    rk4(h);
+                    if (omFore > 0 && om <= 0) {
+                        // vändläge åt höger: tidpunkten interpoleras inom delsteget
+                        var f = omFore / (omFore - om);
+                        toppar.push({ t: tid - dt + (i + f) * h, a: th });
+                        if (toppar.length > 40) toppar.shift();
+                    }
+                }
+            }
+            hist.push({ t: tid, a: th });
+            while (hist.length && hist[0].t < tid - 18.5) hist.shift();
+            rita();
+            raf = requestAnimationFrame(steg);
+        }
+        function kor() { if (!raf && spelar && synlig) { senast = 0; raf = requestAnimationFrame(steg); } }
+        function setSpelar(v) {
+            spelar = v;
+            startBtn.textContent = spelar ? 'Pausa' : (tid > 0 ? 'Fortsätt' : 'Starta');
+            startBtn.classList.toggle('ms-primar', !spelar);
+            if (spelar) kor();
+        }
+        function nollstall() { tid = 0; slappIVandlage(); hist = [{ t: 0, a: th }]; nyttFonster(); }
+        startBtn.addEventListener('click', function () { setSpelar(!spelar); });
+        omBtn.addEventListener('click', function () { nollstall(); setSpelar(false); rita(); });
+
+        // ── Dra ut kulan och släpp ────────────────────────────────────────
+        var svgEl = scene.querySelector('svg'), grepp = scene.querySelector('.ms-pp-grepp');
+        function vinkelUrPekare(ev) {
+            var pt = svgEl.createSVGPoint();
+            pt.x = ev.clientX; pt.y = ev.clientY;
+            var mtx = svgEl.getScreenCTM();
+            if (!mtx) return th;
+            var p = pt.matrixTransform(mtx.inverse());
+            var v = Math.atan2(p.x - PX, Math.max(1, p.y - PY));
+            return Math.max(-60, Math.min(60, v * 180 / Math.PI)) * Math.PI / 180;
+        }
+        grepp.addEventListener('pointerdown', function (ev) {
+            drar = true;
+            dragits = true;
+            th = vinkelUrPekare(ev);
+            om = 0;
+            grepp.style.cursor = 'grabbing';
+            try { grepp.setPointerCapture(ev.pointerId); } catch (e) {}
+            toppar = [];
+            if (!spelar) setSpelar(true);
+            rita();
+            ev.preventDefault();
+        });
+        grepp.addEventListener('pointermove', function (ev) {
+            if (!drar) return;
+            th = vinkelUrPekare(ev);
+            rita();
+        });
+        function slapp() {
+            if (!drar) return;
+            drar = false;
+            grepp.style.cursor = 'grab';
+            amp = Math.max(2, Math.round(Math.abs(th) * 180 / Math.PI));
+            aGlid.sl.value = String(amp);
+            aGlid.v.textContent = aGlid.visa(amp);
+            slappIVandlage(th);
+            rita();
+        }
+        grepp.addEventListener('pointerup', slapp);
+        grepp.addEventListener('pointercancel', slapp);
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                synlig = entries[0].isIntersecting;
+                if (synlig) kor();
+            }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        nollstall();
+        rita();
+        setSpelar(false);                        // startar pausad
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
     //  typ: stegkast
     // ══════════════════════════════════════════════════════════════════════
     // Simuleringen i fy2-1.9 (Numerisk simulering av kaströrelse): kastet
@@ -12236,6 +12581,7 @@
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
                   periodtid: buildPeriodtid,
+                  pendelperiod: buildPendelperiod,
                   hjulprojektion: buildHjulprojektion,
                   'kopplade-fjadrar': buildKoppladeFjadrar,
                   cirkularrorelse: buildCirkularrorelse,

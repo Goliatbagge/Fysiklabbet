@@ -103,6 +103,64 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-19-glaskulan-och-ljuset",
+    date: "2026-10-19",
+    title: "Svävande glaskula sammanflätad med ljus i rumstemperatur",
+    deck: "En glaskula som bara är 100 nanometer bred, upphängd i laserljus i ett vakuum, har fått sin rörelse kvantsammanflätad med ljuset som lämnar den. Forskare i Florens klarade det utan att kyla apparaten till nära absoluta nollpunkten, något som tidigare krävts i liknande försök.",
+    category: "Kvantfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-19-glaskulan-och-ljuset.jpg",
+    imageAlt: "Genom ett runt fönster i en vakuumkammare syns en metallhållare upplyst i rött laserljus. Mitt i bilden, mellan två kopparelektroder, lyser en pytteliten ljuspunkt: en glaskula som svävar i en laserstråle.",
+    imageCredit: "Foto: Bjschellenberg (CC BY-SA 4.0), via Wikimedia Commons",
+    tags: ["kvantfysik", "kvantsammanflätning", "optomekanik", "optisk pincett", "strålningstryck", "laserkylning", "harmonisk svängning", "kavitet", "rumstemperatur", "vakuum", "nanopartikel"],
+    sources: [
+      { name: "Phys.org: Levitating glass sphere becomes entangled with light at room temperature (7 oktober 2026)", url: "https://phys.org/news/2026-10-levitating-glass-sphere-entangled-room.html" },
+      { name: "ScienceAlert: Physicists quantum-entangled a levitating speck of glass with light at room temperature (2 oktober 2026)", url: "https://www.sciencealert.com/physicists-quantum-entangled-a-levitating-speck-of-glass-with-light-at-room-temperature" },
+      { name: "arXiv: förtrycket i fulltext", url: "https://arxiv.org/abs/2602.03456" }
+    ],
+    research: {
+      citation: "Q. Deplano, A. Pontin, F. Marino och F. Marin, ”Stationary entanglement of a levitated oscillator with an optical field”, Science 394, 113–117 (2026)",
+      url: "https://doi.org/10.1126/science.aeh1375"
+    },
+    larare: {
+      moment: [
+        { label: "Harmonisk svängning", href: "katalog.html?id=fy2-2.3" },
+        { label: "Rörelsemängd och impuls", href: "katalog.html?id=fy1-4.7" },
+        { label: "Fotoelektrisk effekt", href: "katalog.html?id=fy2-4.5" }
+      ],
+      fragor: [
+        "Glaskulan hålls uppe av laserljus. Hur kan ljus, som saknar massa, ändå utöva en kraft på ett föremål?",
+        "Samma sorts laserljus kan antingen kyla eller värma kulans svängning beroende på vilken frekvens det har. Hur hänger det ihop med att en foton kan ta energi från eller lämna energi till kulan?",
+        "Forskarna såg inte sammanflätningen i en enda mätning, utan först när de räknat samman tusentals mätningar. Varför räcker det inte att se ett samband mellan kulan och ljuset för att kunna kalla det kvantfysik?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Kvantsammanflätning brukar beskrivas med små saker: två fotoner, två atomer, två elektroner. Deras egenskaper hänger då ihop så tätt att de inte längre går att beskriva var för sig. Ju större och tyngre ett föremål är, desto svårare blir det att få se sådant, eftersom omgivningen hela tiden stör. Varje luftmolekyl som krockar med föremålet och varje värmeskakning suddar ut de sköra kvantsambanden.' },
+      { type: 'p', html: 'Nu har fyra forskare i Florens sammanflätat rörelsen hos en glaskula med ljus. Kulan är av kiseldioxid och bara 100&nbsp;nanometer i diameter, ungefär lika stor som ett virus, men den innehåller ändå tiotals miljoner atomer. Det som sammanflätades var inte någon enskild atom utan hela kulans fram- och tillbakarörelse. Resultatet publiceras i tidskriften <em>Science</em>.' },
+      { type: 'quote', html: 'Jag har alltid fascinerats av möjligheten att se kvanteffekter i makroskopiska system.', cite: 'Francesco Marin, Florens universitet, till ScienceAlert' },
+      { type: 'h2', text: 'En kula som hänger i ljus' },
+      { type: 'p', html: 'Kulan sitter inte fast i någonting. Den hålls i en optisk pincett, en laserstråle som fokuserats till en mycket smal punkt. Ljus har rörelsemängd, och när det böjs av eller sprids mot kulan uppstår en kraft som drar kulan mot strålens smalaste och ljusaste del. Där kan den svänga fram och tillbaka ungefär som en vikt i en fjäder, med omkring 100&nbsp;000 svängningar per sekund. Allt sker i ett vakuum där trycket är omkring 3,5&nbsp;·&nbsp;10<sup>−8</sup>&nbsp;millibar, så att nästan inga luftmolekyler finns kvar att krocka med.' },
+      { type: 'p', html: 'Pincetten sitter mitt emellan två speglar som vänder mot varandra, en så kallad kavitet. Ljus som sprids från kulan fångas upp mellan speglarna och studsar fram och tillbaka. På så sätt kopplas kulans rörelse till ljuset i kaviteten: kulans läge påverkar ljuset, och ljuset påverkar kulan.' },
+      { type: 'h2', text: 'En laser som kyler och en som sammanflätar' },
+      { type: 'p', html: 'När laserljus sprids mot en kula som svänger kan en foton antingen ta med sig lite av svängningens energi eller lämna lite energi kvar. Vilket som händer oftast går att styra med frekvensen. Ligger laserns frekvens en aning under kavitetens resonansfrekvens, gynnas de fotoner som tar energi från kulan. Rörelsen dämpas då, och svängningen kyls. Ligger frekvensen i stället en aning över, gynnas de fotoner som lämnar energi. Då skapas en foton och ett svängningskvantum i kulan samtidigt, i par, och det är just det parvisa skapandet som gör att ljuset och rörelsen blir sammanflätade.' },
+      { type: 'p', html: 'Problemet är att det andra fallet också värmer kulan, så att den till slut skakar ur pincetten. Lösningen blev att låta två lasrar med våglängden 1&nbsp;064&nbsp;nanometer göra var sitt jobb. De leds genom samma optiska fiber och bildar tillsammans pincetten, men har lite olika frekvens. Den ena ligger under en av kavitetens resonanser och kyler hela tiden kulan, medan den andra ligger över en annan resonans och skapar sammanflätningen.' },
+      { type: 'quote', html: 'Laboratoriet runt omkring har alltså rumstemperatur, men just den svängning vi studerar har en mycket lägre effektiv temperatur.', cite: 'Francesco Marin, till ScienceAlert' },
+      { type: 'h2', text: 'Beviset finns i ljuset som lämnar speglarna' },
+      { type: 'p', html: 'Att kulans rörelse och ljuset hänger ihop är i sig inget märkligt. Även två helt vanliga föremål kan röra sig i takt. Det som skiljer kvantsammanflätning från ett vanligt samband är hur starkt sambandet är. Kvantmekaniken ger en gräns: är sambandet tillräckligt starkt, starkare än vad något vanligt samband kan bli, måste systemen vara sammanflätade.' },
+      { type: 'p', html: 'Forskarna mätte på ljuset som lämnar kaviteten och kunde ur det räkna fram både kulans rörelse och ljusets egenskaper. Mätningarna delades upp i bitar på 10&nbsp;millisekunder, och varje skattning byggde på omkring 2&nbsp;000 sådana bitar efter varandra, alltså ungefär 20&nbsp;sekunder mätdata. Sammanflätningen anges med ett tal som är 1 för två helt oberoende system och mindre än 1 om de är sammanflätade. Forskarna fick som bäst $\\nu_{-} = 0{,}918$, med en statistisk osäkerhet på 0,029. Talet ligger alltså under gränsen, även om marginalen inte är stor.' },
+      { type: 'p', html: 'Sammanflätningen fanns kvar i ljuset som färdats bort från kulan. Det är det som gör resultatet intressant: kvantsambandet kan skickas vidare genom rummet. Sammanflätningen höll också i sig när forskarna ändrade laserns frekvens över ett spann på mer än 40&nbsp;kilohertz, så den kräver ingen extremt fin inställning.' },
+      { type: 'p', html: 'Forskarna bedömer dessutom att det uppmätta värdet är försiktigt räknat. Under de 20&nbsp;sekunderna driver försöket en aning, och då blandas lite olika tillstånd ihop, vilket gör att sammanflätningen ser svagare ut än den är. Deras teoretiska modell, anpassad efter samma mätningar, ger i stället 0,884.' },
+      { type: 'h2', text: 'Vad det kan användas till' },
+      { type: 'p', html: 'Liknande sammanflätning mellan rörelse och ljus eller mikrovågor har tidigare bara visats med korta pulser och i apparater som kylts till nära absoluta nollpunkten. Här är både sammanflätningen bestående och apparaten varm. Forskarna ser framför sig kvantnätverk där svängande föremål fungerar som minnen och ljus för informationen vidare mellan dem. Nästa steg kan vara att fånga flera kulor i samma kavitet och sammanfläta dem med varandra genom ljuset.' },
+      { type: 'p', html: 'På längre sikt hoppas forskarna kunna försätta allt tyngre föremål i kvanttillstånd. Det kan en dag göra det möjligt att pröva om gravitationen själv följer kvantmekanikens lagar, en av fysikens stora öppna frågor.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'Glaskulan väger ungefär en femtogram, en miljondels miljarddels gram. Det är ändå många miljoner gånger mer än en enskild atom.',
+        'Fotot överst är från ett liknande försök vid Groningens universitet i Nederländerna, där en glaskula på 103&nbsp;nanometer hålls i en optisk pincett. Kulan syns som den lilla ljuspunkten mitt i bilden.',
+        'Optiska pincetter används också inom biologin, där de kan hålla fast och flytta enskilda celler och bakterier. Arthur Ashkin fick Nobelpriset i fysik 2018 för uppfinningen.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-18-rontgenblixtar-pa-attosekunder",
     date: "2026-10-18",
     title: "Röntgenblixtar på 300 attosekunder slår rekord i intensitet",

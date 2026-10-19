@@ -12,9 +12,8 @@ Format per post:
 
 ## Kö
 
-- **Svävande glaskula sammanflätad med ljus i rumstemperatur** **[BREVTEASER — teasad i brevet 2026-10-18, publiceras TIDIGAST måndag 2026-10-19, senast lördag 2026-10-24]** (nominerad 2026-10-12) — en optiskt levitierad nanosfär vars rörelse sammanflätas med ljus utan kylning till nära absoluta nollpunkten. Ingång: strålningstryck, optisk pincett. Science, DOI 10.1126/science.aeh1375 (Marin m.fl., Florens); förtrycket finns öppet på arXiv: https://arxiv.org/abs/2602.03456 (kontrollerat 2026-10-12). En 100 nm glaskula i optisk pincett, två lasrar. OBS: kvantfysik publicerades 2026-10-09.
-  Källa (Phys.org 2026-10-07): https://phys.org/news/2026-10-levitating-glass-sphere-entangled-room.html
-  (tillagd 2026-10-08)
+- **Minne i ett mikrofluidikchip: fibrer som minns hur vattnet flöt** **[BREVTEASER]** (nominerad 2026-10-19; originalet öppet, CC BY 4.0, publicerat 2026-10-09, sidan svarar 200) — Yale (Pahlavan, Rajput), ”Fluidic Hysterons and Memory in Flow Networks”, Physical Review X 2026, DOI 10.1103/hh4n-pw7w (PRX är öppen, CC BY). Ingång: hysteres, strömning. Strömningslära publicerades 2026-10-07. Källa (Phys.org 2026-10-14): https://phys.org/news/2026-10-memory-chip.html
+  (tillagd 2026-10-15)
 
 - **Rensning av magiska tillstånd minskar felen 40 gånger i första hårdvarutestet** — kvantdatorer (kvantfysik senast 2026-10-09). Originalet ej kontrollerat. Källa (Phys.org 2026-10-17): https://phys.org/news/2026-10-quantum-magic-state-cleanup-errors.html
   (tillagd 2026-10-18)
@@ -35,9 +34,6 @@ Format per post:
   (tillagd 2026-10-16)
 
 - **Gyroskop på ett chip mäter rotation nästan lika långsam som jordens** — integrerat Brillouin-ringlasergyroskop i kiselnitrid (ring ~24 mm, Q > 163 miljoner) som mäter 37 grader/timme, nära jordens 15 grader/timme; Sagnaceffekten. Ingång: rotation, interferens, ljusets hastighet. Optics Letters 51, 5854 (2026), DOI 10.1364/ol.589952 (Ge, …, Blumenthal, Vahala). OBS 2026-10-15: BETALVÄGG (Optica) och inget arXiv-förtryck hittat, så originalet kunde inte läsas; försök via Caltech-arkivet (authors.library.caltech.edu) eller UCSB. Källa (Phys.org 2026-10-14): https://phys.org/news/2026-10-chip-scale-gyroscope-rotation-unprecedented.html
-  (tillagd 2026-10-15)
-
-- **Minne i ett mikrofluidikchip: fibrer som minns hur vattnet flöt** — Yale (Pahlavan, Rajput), ”Fluidic Hysterons and Memory in Flow Networks”, Physical Review X 2026, DOI 10.1103/hh4n-pw7w (PRX är öppen, CC BY). Ingång: hysteres, strömning. Strömningslära publicerades 2026-10-07. Källa (Phys.org 2026-10-14): https://phys.org/news/2026-10-memory-chip.html
   (tillagd 2026-10-15)
 
 - **Webb ser en supernova i det tidiga universum bara dagar efter explosionen** — transienten AT 2026abck i en galax vid rödförskjutning 5,017. Ingång: ljusets gångtid, rödförskjutning. OBS: astronomi publicerades 2026-10-14, vänta. Originalet ej kontrollerat. Källa (Phys.org 2026-10-13): https://phys.org/news/2026-10-webb-early-universe-supernova-days.html

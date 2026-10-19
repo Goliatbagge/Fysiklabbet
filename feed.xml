@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sun, 18 Oct 2026 02:42:17 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 19 Oct 2026 01:27:47 GMT</lastBuildDate>
+    <item>
+      <title>Svävande glaskula sammanflätad med ljus i rumstemperatur</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-19-glaskulan-och-ljuset</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-19-glaskulan-och-ljuset</guid>
+      <pubDate>Mon, 19 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Kvantfysik</category>
+      <description>En glaskula som bara är 100 nanometer bred, upphängd i laserljus i ett vakuum, har fått sin rörelse kvantsammanflätad med ljuset som lämnar den. Forskare i Florens klarade det utan att kyla apparaten till nära absoluta nollpunkten, något som tidigare krävts i liknande försök.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-19-glaskulan-och-ljuset.jpg" length="220736" type="image/jpeg"/>
+    </item>
     <item>
       <title>Röntgenblixtar på 300 attosekunder slår rekord i intensitet</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-18-rontgenblixtar-pa-attosekunder</link>
@@ -177,15 +186,6 @@
       <category>Partikelfysik</category>
       <description>Myoner från rymden används redan för att se in i pyramider och vulkaner, men de kommer få och när de själva vill. Vid ett laserlabb i Rumänien har forskare nu skapat egna myoner med en laserpuls och avbildat ett blyblock 23 meter bort.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-02-myoner-ur-en-laser.jpg" length="250789" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Dragkampen 5 000 kilometer ner som gör dygnet längre och kortare</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-01-dragkampen-som-andrar-dygnet</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-01-dragkampen-som-andrar-dygnet</guid>
-      <pubDate>Thu, 01 Oct 2026 04:00:00 GMT</pubDate>
-      <category>Geofysik</category>
-      <description>Ett dygn är inte lika långt från årtionde till årtionde: det kan bli några millisekunder längre och sedan kortare igen. Två geofysiker vid University of Alberta drar nu i Nature slutsatsen att den främsta orsaken är gravitationen mellan jordens fasta inre kärna och ojämnt fördelad massa i manteln.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-01-dragkampen-som-andrar-dygnet.jpg" length="572282" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

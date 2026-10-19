@@ -821,6 +821,18 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'optisk-pincett',
+    term: 'Optisk pincett',
+    former: ['optisk pincett', 'optiska pincetten', 'optiska pincetter', 'optiska pincetterna', 'optisk fälla', 'optiska fällan', 'optiska fällor', 'laserpincett', 'laserpincetten', 'laserpincetter'],
+    kort: 'En laserstråle som fokuserats så skarpt att den kan hålla fast och flytta på mycket små föremål, som glaskulor, celler eller bakterier, utan att något rör vid dem.',
+    relaterade: ['laser', 'foton', 'rorelsemangd', 'kavitet'],
+    body: [
+      { type: 'p', html: 'En optisk pincett är en laserstråle som fokuserats med en lins till en mycket smal punkt. Ett litet genomskinligt föremål i närheten, till exempel en glaskula som är så liten att ett hårstrå är ungefär tusen gånger bredare, dras in mot den punkten och stannar där. Föremålet hålls alltså fast av ljus. Flyttar man strålen följer föremålet med, precis som om man höll det med en pincett.' },
+      { type: 'p', html: 'Att ljus kan hålla i något beror på att ljus har rörelsemängd. När ljuset bryts i kulan ändrar det riktning, och då ändras också ljusets rörelsemängd. Enligt Newtons tredje lag får kulan då en lika stor rörelsemängd åt andra hållet, alltså en kraft. Eftersom strålen är ljusast i mitten blir krafterna sammantaget riktade in mot den ljusaste punkten. Kulan beter sig nästan som en vikt i en fjäder: knuffas den ur läge dras den tillbaka och svänger fram och tillbaka kring mitten.' },
+      { type: 'p', html: 'Krafterna är mycket små, omkring en biljondels newton, men för en cell eller en nanopartikel räcker det gott. Inom biologin används optiska pincetter för att flytta celler och för att mäta hur hårt enskilda proteiner drar. Inom fysiken används de i vakuum, där en kula som svävar i ljuset nästan inte störs av omgivningen. Då kan man kyla kulans svängning med laserljus och studera hur ett föremål med miljontals atomer börjar bete sig enligt kvantmekaniken. Amerikanen Arthur Ashkin fick Nobelpriset i fysik 2018 för att ha uppfunnit den optiska pincetten.' }
+    ]
+  },
+  {
     id: 'kavitet',
     term: 'Kavitet',
     former: ['kavitet', 'kaviteten', 'kaviteter', 'kaviteterna', 'mörk kavitet', 'resonator', 'resonatorn', 'ringresonator', 'ringresonatorn', 'terahertzresonator', 'terahertzresonatorn', 'spegelkavitet', 'spegelkaviteten', 'mekanisk resonator', 'mekaniska resonatorn', 'mekaniska resonatorer'],

@@ -12,11 +12,14 @@ section: '4.6'
 ## Parallella och vertikala linjer
 
 Om två linjer har samma lutning kallas de **parallella**. Parallella
-linjer har alltså *samma* *k*-värde.
+linjer har alltså *samma* *k*-värde. Linjerna $y = 2x + 1$ och
+$y = 2x - 3$ är till exempel parallella, eftersom båda har $k = 2$.
 
 En linje som är lodrät kallas **vertikal**. Vertikala linjer kan inte
 beskrivas med räta linjens ekvation i k-form, utan beskrivs utifrån var
-den ligger i *x*-led.
+den ligger i *x*-led. Den lodräta linjen genom (4, 1) och (4, 5)
+beskrivs till exempel av $x = 4$, eftersom alla dess punkter har
+*x*-koordinaten 4.
 
 ::: formel "Vertikala linjens ekvation"
 $$
@@ -30,7 +33,8 @@ där $a$ är linjens läge i *x*-led.
 
 *Alla* räta linjer kan beskrivas med **räta linjens ekvation i allmän
 form**. I allmän form samlas alla termer i linjens ekvation i ena ledet
-och det andra ledet blir då 0.
+och det andra ledet blir då 0. Linjen $y = 2x + 1$ skrivs till exempel
+$2x - y + 1 = 0$ i allmän form.
 
 ::: formel "Räta linjens ekvation i allmän form"
 $$

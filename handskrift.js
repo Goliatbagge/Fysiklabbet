@@ -24856,8 +24856,8 @@
       var pts = [];
       for (var i = 0; i <= 28; i++) {
         var a = -vin + (i / 28) * 2 * vin;
-        pts.push([px + Math.sin(a) * (PL + 16) + rnd(-0.8, 0.8),
-                  py + Math.cos(a) * (PL + 16) + rnd(-0.8, 0.8)]);
+        pts.push([px + Math.sin(a) * PL + rnd(-0.8, 0.8),
+                  py + Math.cos(a) * PL + rnd(-0.8, 0.8)]);
       }
       dashPts(pts);
     })();

@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan matematisk pendel — Fysiklabbet</title>
-    <meta name="description" content="Hur pendelns period beror på längd och tyngdfaktor.">
+    <meta name="description" content="Mät pendelns periodtid med en ljusgrind, lägg mätpunkterna i ett diagram och läs av tyngdaccelerationen ur lutningen. Prova olika längder, massor och utslag, flytta pendeln till Månen eller gissa vilken okänd planet den hänger på.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik2-pendel-app.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Plan matematisk pendel — Fysik nivå 2">
-    <meta property="og:description" content="Hur pendelns period beror på längd och tyngdfaktor.">
+    <meta property="og:description" content="Mät pendelns periodtid med en ljusgrind, lägg mätpunkterna i ett diagram och läs av tyngdaccelerationen ur lutningen. Prova olika längder, massor och utslag, flytta pendeln till Månen eller gissa vilken okänd planet den hänger på.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik2-pendel-app.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Plan matematisk pendel — Fysik nivå 2">
-    <meta name="twitter:description" content="Hur pendelns period beror på längd och tyngdfaktor.">
+    <meta name="twitter:description" content="Mät pendelns periodtid med en ljusgrind, lägg mätpunkterna i ett diagram och läs av tyngdaccelerationen ur lutningen. Prova olika längder, massor och utslag, flytta pendeln till Månen eller gissa vilken okänd planet den hänger på.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>window.__CB = String(Date.now());</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
@@ -29,220 +29,182 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Import map to resolve "three" -->
-    <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-      }
-    }
-    </script>
-
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .dark-container {
-            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
-        }
-
+        body { font-family: 'Poppins', sans-serif; }
+        .dark-container { background: transparent; }
         .glass-card {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(200, 50, 74, 0.15);
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+        .fnum sub { font-size: 0.68em; }
+
+        /* Formelkortet: roten har ett lodrätt rotmärke och ett överstreck
+           som spänner över hela bråket. */
+        .rot { display: inline-flex; align-items: stretch; }
+        .rot-sign { font-size: 26px; line-height: 1; align-self: flex-end;
+                    margin-right: -1px; transform: scaleY(1.65); transform-origin: bottom;
+                    padding-bottom: 6px; }
+        .rot-inner { border-top: 2px solid currentColor; padding: 2px 4px 0 4px; }
+        /* Formelkortet bryts mellan den allmänna formeln och insättningen,
+           aldrig mitt i en av dem. */
+        .fk-grupp { display: inline-flex; align-items: center; gap: 0.75rem; flex-wrap: nowrap; }
+        @media (max-width: 600px) {
+            .formula-card { justify-content: flex-start; }
+            .formula-card .fnum { font-size: 16px; }
+            .fk-grupp { gap: 0.5rem; }
         }
 
-        .glow-text {
-            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
-        }
+        .sl-wrap { position: relative; display: flex; align-items: center; flex: 1; }
+        .sl-wrap > input[type="range"] { width: 100%; }
+        .scene-toggles .st-slider .sl-wrap { flex: none; width: 100%; }
 
-        #canvas-container {
-            width: 100%;
-            height: 100%;
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 76px; }
+        .num-in { width: 52px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* Scenen har egen proportion (700 x 540) och fyller sin ruta. */
+        .scene-wrap {
             position: relative;
-        }
-        #canvas-container canvas {
-            display: block;
-        }
-
-        /* Slider styling - dark theme */
-        input[type="range"] {
-            -webkit-appearance: none;
-            appearance: none;
-            background: transparent;
-            height: 20px;
-            cursor: pointer;
             width: 100%;
-        }
-        input[type="range"]::-webkit-slider-runnable-track {
-            background: rgba(15, 22, 32, 0.35);
-            border-radius: 4px;
-            height: 6px;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #38bdf8;
-            margin-top: -7px;
-            cursor: pointer;
-            transition: background 0.2s, box-shadow 0.2s;
-        }
-        input[type="range"]::-webkit-slider-thumb:hover {
-            background: #7dd3fc;
-            box-shadow: 0 0 8px rgba(200, 50, 74, 0.5);
-        }
-        input[type="range"]::-moz-range-track {
-            background: rgba(15, 22, 32, 0.35);
-            border-radius: 4px;
-            height: 6px;
-            border: none;
-        }
-        input[type="range"]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #38bdf8;
-            cursor: pointer;
-            border: none;
-            transition: background 0.2s, box-shadow 0.2s;
-        }
-        input[type="range"]::-moz-range-thumb:hover {
-            background: #7dd3fc;
-            box-shadow: 0 0 8px rgba(200, 50, 74, 0.5);
-        }
-        input[type="range"]:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-        input[type="range"]:disabled::-webkit-slider-thumb {
-            background: #475569;
-            cursor: not-allowed;
-        }
-        input[type="range"]:disabled::-moz-range-thumb {
-            background: #475569;
-            cursor: not-allowed;
-        }
-
-        /* Canvas overlay buttons */
-        .canvas-btn {
-            padding: 0.5rem 1rem;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            border-radius: 0.5rem;
-            border: 1px solid rgba(15, 22, 32, 0.28);
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(8px);
-            color: #e2e8f0;
-            transition: all 0.2s;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-        }
-        .canvas-btn:hover:not(:disabled) {
-            background: rgba(30, 41, 59, 0.95);
-            border-color: rgba(200, 50, 74, 0.35);
-        }
-        .canvas-btn:disabled {
-            opacity: 0.45;
-            cursor: not-allowed;
-        }
-        .canvas-btn-orange {
-            border-color: rgba(251, 146, 60, 0.35);
-            color: #fb923c;
-        }
-        .canvas-btn-orange:hover:not(:disabled) {
-            background: rgba(251, 146, 60, 0.12);
-            border-color: rgba(251, 146, 60, 0.6);
-        }
-        .canvas-btn-red {
-            border-color: rgba(248, 113, 113, 0.35);
-            color: #f87171;
-        }
-        .canvas-btn-red:hover:not(:disabled) {
-            background: rgba(248, 113, 113, 0.12);
-            border-color: rgba(248, 113, 113, 0.6);
-        }
-        .canvas-btn-cyan {
-            border-color: rgba(200, 50, 74, 0.35);
-            color: #38bdf8;
-        }
-        .canvas-btn-cyan:hover:not(:disabled) {
-            background: rgba(200, 50, 74, 0.12);
-            border-color: rgba(200, 50, 74, 0.6);
-        }
-        .canvas-btn-yellow {
-            border-color: rgba(234, 179, 8, 0.4);
-            color: #eab308;
-            cursor: not-allowed;
-            opacity: 0.75;
-        }
-        .canvas-btn-green {
-            border-color: rgba(74, 222, 128, 0.4);
-            color: #4ade80;
-            cursor: not-allowed;
-            opacity: 0.85;
-        }
-
-        /* Fullskärmsläge: scenen är #canvas-container. Styrknapparna och (i
-           fullskärm) glidarna bor i den hopfällbara inställningsrutan uppe
-           till höger — bottenpanelen .fs-controls låg ovanpå scenen och
-           skymde kulan vid lång tråd (placeringsregeln 2026-08-31).
-           Hopfällbarheten (.st-hide/.st-show-btn) och reglageraderna
-           (.st-slider) är centrala klasser i styles-laborans-sim.css; basen
-           för rutan definieras här eftersom sidan inte använder .scene-wrap. */
-        #canvas-container {
+            height: auto;
+            aspect-ratio: 700 / 540;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
             user-select: none;
-            -webkit-user-select: none;
+            background: #f3eee4;
         }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0; aspect-ratio: auto;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        /* Bred fullskärm: mätpanelerna står till vänster, scenen till höger. */
+        .scene-wrap.is-fs.fs-bred > svg.pend-scen { margin-left: 372px; width: calc(100% - 372px); }
+        .fs-vanster {
+            position: absolute; left: 14px; top: 66px; bottom: 14px; width: 346px;
+            z-index: 5; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
+            padding-right: 2px;
+        }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500; max-width: 80%;
+        }
+
         .scene-toggles {
-            position: absolute; top: 14px; right: 14px; z-index: 10;
+            position: absolute; top: 14px; right: 14px; z-index: 6;
             background: rgba(246,242,234,0.94);
             backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
             border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
             border-radius: 10px; padding: 9px 13px;
             display: flex; flex-direction: column; gap: 3px;
             box-shadow: 0 2px 8px rgba(15,22,32,0.12);
-            width: 252px;
+            max-width: 252px;
         }
         .scene-toggles .st-title {
             font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
             color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
         }
-        .scene-toggles .st-val { font-weight: 600; color: var(--lab-ink, #0f1620); white-space: nowrap; }
-        .scene-toggles .st-actions { display: flex; gap: 8px; }
-        .scene-toggles .st-actions .canvas-btn { flex: 1; }
-        /* Glidarna visas BARA i fullskärm — i normalläget bor de i höger-
-           spalten (aldrig dubblerade). Ren CSS-gate, ingen JS behövs. */
-        #st-reglage { display: none; }
-        #canvas-container:fullscreen #st-reglage,
-        #canvas-container:-webkit-full-screen #st-reglage { display: block; }
-        #canvas-container:fullscreen .scene-toggles,
-        #canvas-container:-webkit-full-screen .scene-toggles {
-            max-height: calc(100vh - 28px); overflow-y: auto;
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
         }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles select {
+            font-size: 13px; padding: 4px 6px; border-radius: 6px; width: 100%;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-panels { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
 
-        /* Mobil: rutan får inte täcka breadcrumb/titel — flytta ned den
-           under titelblocket, i scenens tomma övre yta (sidan använder inte
-           .scene-wrap, så sektion 8-docken gäller inte här). */
-        @media (max-width: 600px) {
-            .scene-toggles {
-                top: 9rem;
-                right: auto;
-                left: 1rem;
-            }
-            .canvas-btn {
-                padding: 0.35rem 0.7rem;
-                font-size: 0.85rem;
-            }
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease; font-size: 14px;
         }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-prim { background: var(--lab-accent, #c8324a); color: #fff; border-color: var(--lab-accent, #c8324a); }
+        .btn-prim:hover:not(:disabled) { filter: brightness(1.08); }
+
+        .seg { display: grid; gap: 1px; border-radius: 9px; overflow: hidden;
+               border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+               background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .seg button {
+            padding: 8px 6px; font-weight: 600; cursor: pointer; font-size: 13px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+        }
+        .seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .seg button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .forsok { display: flex; flex-direction: column; gap: 6px; }
+        .forsok button {
+            text-align: left; padding: 7px 11px; border-radius: 8px; cursor: pointer;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            font-weight: 600; font-size: 13.5px; transition: all 0.15s ease;
+        }
+        .forsok button:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .forsok button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); border-color: var(--lab-ink, #0f1620); }
+        .forsok button:disabled { opacity: 0.45; cursor: not-allowed; }
+        .anm { font-size: 12.5px; line-height: 1.45; color: var(--lab-ink-soft, #3a4151); }
+
+        /* Tidtagaren: en LCD-ruta som på en riktig ljusgrindsdosa. */
+        .lcd { background: #1c2b22; border-radius: 8px; padding: 8px 12px 6px;
+               border: 2px solid #38453c; box-shadow: inset 0 2px 6px rgba(0,0,0,0.5); }
+        .lcd-big { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 30px;
+                   color: #b6f2a0; letter-spacing: 0.04em; line-height: 1.1; text-align: right; }
+        .lcd-sub { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8fc47e;
+                   display: flex; justify-content: space-between; gap: 8px; }
+        .rd { text-align: center; }
+        .rd b { display: block; font-size: 16px; font-weight: 700; color: var(--lab-ink); }
+        .rd span { font-size: 11.5px; color: var(--lab-ink-muted, #5a6170); }
+        .txt-in { width: 86px; padding: 4px 8px; border-radius: 6px; font-size: 14px; text-align: right;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4); font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+        .svar-ok { border-left: 4px solid #2f8f4e; padding-left: 10px; }
+        .svar-fel { border-left: 4px solid #c8324a; padding-left: 10px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
     </style>
 </head>
 <body class="lab-sim">
-        <div class="lab-topbar lab-topbar--on-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
         <div class="lab-topbar-inner">
             <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
@@ -311,936 +273,1142 @@
         </div>
     </div>
 
-    <main class="min-h-screen w-full dark-container text-slate-100 flex flex-col lg:flex-row">
-        <div id="canvas-container" class="flex-grow min-h-[600px] w-full lg:w-1/2 relative" style="background: var(--lab-bg);">
-            <div class="absolute top-4 left-16 z-10 p-2">
-                <div class="breadcrumb mb-2" style="font-size: 0.75rem;">
-                    <a href="index.html">Hem</a> / <a href="fysik2.html">Fysik nivå 2</a> / Plan matematisk pendel
-                </div>
-                <h1 class="text-2xl md:text-4xl font-bold tracking-tight" style="background: linear-gradient(90deg, #38bdf8, #7dd3fc, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(200, 50, 74, 0.4));">Plan matematisk pendel</h1>
-            </div>
-            <!-- Inställningsrutan uppe till höger: styrknapparna alltid, och i
-                 fullskärm även glidarna (#st-reglage, CSS-gatad ovan). -->
-            <div id="scene-toggles" class="scene-toggles">
-                <button id="st-hide" class="st-hide" aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-                </button>
-                <div class="st-title">Rörelse</div>
-                <div class="st-actions">
-                    <button id="canvas-pause-button" class="canvas-btn canvas-btn-orange" disabled>
-                        Pausa
-                    </button>
-                    <button id="canvas-abort-button" class="canvas-btn canvas-btn-red" disabled>
-                        Återställ
-                    </button>
-                </div>
-                <button id="canvas-timing-button" class="canvas-btn canvas-btn-cyan" disabled style="margin-top: 6px;">
-                    Ta tiden för 10 pendlingar
-                </button>
-                <div id="st-reglage">
-                    <div class="st-title" style="margin-top: 9px;">Reglage</div>
-                    <div class="st-sliders" id="st-sliders">
-                        <div class="st-slider">
-                            <div class="st-slider-top">
-                                <span>Trådlängd <em>l</em></span>
-                                <span class="st-val" id="fs-length-value">1,50 m</span>
-                            </div>
-                            <input id="fs-length-slider" type="range" min="0.5" max="5" step="0.1" value="1.5">
-                        </div>
-                        <div class="st-slider">
-                            <div class="st-slider-top">
-                                <span>Tyngdfaktor <em>g</em></span>
-                                <span class="st-val" id="fs-gravity-value">9,81 m/s²</span>
-                            </div>
-                            <input id="fs-gravity-slider" type="range" min="1" max="25" step="0.1" value="9.81">
-                        </div>
-                        <div class="st-slider">
-                            <div class="st-slider-top">
-                                <span>Massa <em>m</em></span>
-                                <span class="st-val" id="fs-mass-value">150 g</span>
-                            </div>
-                            <input id="fs-mass-slider" type="range" min="10" max="300" step="5" value="150">
-                        </div>
-                        <div class="st-slider">
-                            <div class="st-slider-top">
-                                <span>Startvinkel <em>α</em></span>
-                                <span class="st-val" id="fs-angle-value">0°</span>
-                            </div>
-                            <input id="fs-angle-slider" type="range" min="0" max="25" step="1" value="0">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button id="st-show-btn" class="st-show-btn" style="display: none; z-index: 10;" aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="8" x2="20" y2="8"/><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none"/><line x1="4" y1="16" x2="20" y2="16"/><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none"/></svg>
-            </button>
-            <button id="fs-btn" class="fs-btn" aria-label="Fullskärm" title="Fullskärm">
-                <svg id="fs-icon-expand" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
-                </svg>
-                <svg id="fs-icon-compress" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-                    <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
-                </svg>
-            </button>
-        </div>
-        <div class="w-full lg:w-1/2 p-6 md:p-8 flex flex-col space-y-8 overflow-y-auto"
-             id="controls-container"
-             style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border-left: 1px solid rgba(200, 50, 74, 0.15);">
-        </div>
-    </main>
+    <div id="root"></div>
 
-    <footer class="footer">
-        <p>&copy; 2025 Fysiklabbet. Skapad av Sam Skoglund.</p>
-    </footer>
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useReducer } = React;
 
-    <script type="module">
-        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
-        import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+        const DEG = Math.PI / 180;
 
-        const celestialBodies = [
-            { name: 'Solen', gravity: 274.0, gradient: 'linear-gradient(45deg, #fef08a, #f97316)' },
-            { name: 'Merkurius', gravity: 3.7, gradient: 'linear-gradient(45deg, #e5e5e5, #a3a3a3)' },
-            { name: 'Venus', gravity: 8.87, gradient: 'linear-gradient(45deg, #fef3c7, #f59e0b)' },
-            { name: 'Jorden', gravity: 9.81, gradient: 'linear-gradient(45deg, #22c55e, #3b82f6)' },
-            { name: 'Månen', gravity: 1.62, gradient: 'linear-gradient(45deg, #f5f5f5, #a3a3a3)' },
-            { name: 'Mars', gravity: 3.72, gradient: 'linear-gradient(45deg, #fb923c, #ef4444)' },
-            { name: 'Jupiter', gravity: 24.79, gradient: 'linear-gradient(45deg, #fcd34d, #d97706, #f5f5f5)' },
-            { name: 'Saturnus', gravity: 10.44, gradient: 'linear-gradient(45deg, #fde68a, #ca8a04)' },
-            { name: 'Uranus', gravity: 8.69, gradient: 'linear-gradient(45deg, #7dd3fc, #0ea5e9)' },
-            { name: 'Neptunus', gravity: 11.15, gradient: 'linear-gradient(45deg, #3b82f6, #1e3a8a)' },
+        // ── Formatering: decimalkomma, exakt noll utan decimaler ──
+        const fmt = (num, decimals = 1) => {
+            if (num === null || num === undefined || !isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',');
+        };
+        // Pendellängden skrivs med tre decimaler bara när den behövs (0,995 m).
+        const fmtT = (x) => x.toFixed(2).replace('.', ',');
+        const fmtL = (l) => Math.abs(l * 100 - Math.round(l * 100)) > 1e-6 ? fmt(l, 3) : fmt(l, 2);
+
+        // ── Platser och okända planeter ──
+        const PLATSER = [
+            { id: 'mon',     namn: 'Månen',   g: 1.62 },
+            { id: 'mars',    namn: 'Mars',    g: 3.71 },
+            { id: 'jorden',  namn: 'Jorden',  g: 9.82 },
+            { id: 'jupiter', namn: 'Jupiter', g: 24.8 },
+            { id: 'valfri',  namn: 'Valfri',  g: 9.82 },
+        ];
+        const OKANDA = [
+            { namn: 'Pluto',   g: 0.62 },
+            { namn: 'Månen',   g: 1.62 },
+            { namn: 'Mars',    g: 3.71 },
+            { namn: 'Jorden',  g: 9.82 },
+            { namn: 'Jupiter', g: 24.8 },
         ];
 
-        // State
-        let params = {
-            length: 1.5,
-            gravity: 9.81,
-            mass: 0.15,
-            initialAngle: 0,
-            damping: 0.05,
+        // ── Scenens geometri (viewBox-enheter) ──
+        const VBH = 540;
+        const PX = 350, PY = 62;           // upphängningspunkten
+        const S = 185;                     // skala: bildpunkter per meter
+        const BENCH = 486;                 // labbänkens översida
+        const LMIN = 0.2, LMAX = 2.0;
+        const A0MAX = 70;
+        const MMIN = 20, MMAX = 500;
+
+        const COL = {
+            tyngd: '#d33a3a',   // tyngdkraften F_G
+            spann: '#2f6fd0',   // spännkraften F_S
+            ink:   '#0f1620',
+            punkt: '#2563c9',
+            fit:   '#7c3aed',
         };
 
-        let simulationState = 'idle'; // 'idle', 'running', 'paused', 'finished'
-        let timer = 0;
-        let swingCount = 0;
-        let measuredPeriod = null;
-        let timeRef = 0;
-        let swingCountRef = 0;
-        let timingActive = false; // Whether we're actively timing 10 swings
-        let timingStartTime = 0;
-        let timingStartSwing = 0;
-        let previousAngle = 0;
-        let waitingForTurningPoint = false;
+        // ── Fysiken: exakt, α'' = −(g/l)·sin α, RK4 ──
+        const acc = (th, g, l) => -(g / l) * Math.sin(th);
+        const rk4 = (th, om, g, l, h) => {
+            const k1t = om,                  k1o = acc(th, g, l);
+            const k2t = om + 0.5 * h * k1o,  k2o = acc(th + 0.5 * h * k1t, g, l);
+            const k3t = om + 0.5 * h * k2o,  k3o = acc(th + 0.5 * h * k2t, g, l);
+            const k4t = om + h * k3o,        k4o = acc(th + h * k3t, g, l);
+            return [th + (h / 6) * (k1t + 2 * k2t + 2 * k3t + k4t),
+                    om + (h / 6) * (k1o + 2 * k2o + 2 * k3o + k4o)];
+        };
+        const nyMatning = () => ({ fas: 'idle', n: 0, t0: 0, dir: 0 });
+        const nySim = () => ({ th: 0, om: 0, t: 0, thB: 0, omB: 0, flash: -1, meas: nyMatning(), tid: 0 });
 
-        // Three.js setup
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xf3eee4);
-
-        const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 100);
-        camera.position.set(0, 1.5, 5.0);
-
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.shadowMap.enabled = true;
-        container.appendChild(renderer.domElement);
-
-        const controls = new OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.05;
-
-        // Lights - adjusted for dark scene
-        const ambientLight = new THREE.AmbientLight(0x8ab4d0, 0.5);
-        scene.add(ambientLight);
-
-        const directionalLight = new THREE.DirectionalLight(0xc8e0ff, 1.2);
-        directionalLight.position.set(8, 6, 5);
-        directionalLight.castShadow = true;
-        directionalLight.shadow.mapSize.width = 2048;
-        directionalLight.shadow.mapSize.height = 2048;
-        scene.add(directionalLight);
-
-        // Subtle fill light from below/back for depth
-        const fillLight = new THREE.DirectionalLight(0x1a3a5c, 0.4);
-        fillLight.position.set(-4, -2, -3);
-        scene.add(fillLight);
-
-        // Floor - dark tile/concrete look
-        const floorGeometry = new THREE.PlaneGeometry(20, 20);
-        const floorMaterial = new THREE.MeshStandardMaterial({ color: 0x0d1a2e, roughness: 0.9, metalness: 0.05 });
-        const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-        floor.rotation.x = -Math.PI / 2;
-        floor.position.y = -0.5;
-        floor.receiveShadow = true;
-        scene.add(floor);
-
-        // Lab stand
-        const standMaterial = new THREE.MeshStandardMaterial({ color: 0x9ab4cc, metalness: 0.75, roughness: 0.25 });
-
-        const VERTICAL_OFFSET = 1.0;
-        const PIVOT_Z_OFFSET = 0.4;
-        const verticalRodPositionX = -0.4;
-
-        function createLabStand(pendulumLength) {
-            const standGroup = new THREE.Group();
-            const PIVOT_Y = pendulumLength + VERTICAL_OFFSET;
-            const verticalRodHeight = PIVOT_Y + 0.5;
-
-            // Base
-            const baseGeometry = new THREE.BoxGeometry(1, 0.1, 1);
-            const base = new THREE.Mesh(baseGeometry, standMaterial);
-            base.position.set(verticalRodPositionX, -0.5 + 0.05, 0);
-            base.castShadow = true;
-            base.receiveShadow = true;
-            standGroup.add(base);
-
-            // Vertical rod
-            const verticalRodGeometry = new THREE.CylinderGeometry(0.04, 0.04, verticalRodHeight, 16);
-            const verticalRod = new THREE.Mesh(verticalRodGeometry, standMaterial);
-            verticalRod.position.set(verticalRodPositionX, -0.5 + verticalRodHeight / 2, 0);
-            verticalRod.castShadow = true;
-            standGroup.add(verticalRod);
-
-            // Clamp 1
-            const clamp1Geometry = new THREE.BoxGeometry(0.12, 0.15, 0.12);
-            const clamp1 = new THREE.Mesh(clamp1Geometry, standMaterial);
-            clamp1.position.set(verticalRodPositionX, PIVOT_Y, 0);
-            clamp1.castShadow = true;
-            standGroup.add(clamp1);
-
-            // Horizontal rod 1
-            const horizontalRod1Geometry = new THREE.CylinderGeometry(0.04, 0.04, Math.abs(verticalRodPositionX), 16);
-            const horizontalRod1 = new THREE.Mesh(horizontalRod1Geometry, standMaterial);
-            horizontalRod1.position.set(verticalRodPositionX / 2, PIVOT_Y, 0);
-            horizontalRod1.rotation.z = Math.PI / 2;
-            horizontalRod1.castShadow = true;
-            standGroup.add(horizontalRod1);
-
-            // Clamp 2
-            const clamp2Geometry = new THREE.BoxGeometry(0.12, 0.12, 0.15);
-            const clamp2 = new THREE.Mesh(clamp2Geometry, standMaterial);
-            clamp2.position.set(0, PIVOT_Y, 0);
-            clamp2.castShadow = true;
-            standGroup.add(clamp2);
-
-            // Horizontal rod 2
-            const horizontalRod2Geometry = new THREE.CylinderGeometry(0.04, 0.04, PIVOT_Z_OFFSET, 16);
-            const horizontalRod2 = new THREE.Mesh(horizontalRod2Geometry, standMaterial);
-            horizontalRod2.position.set(0, PIVOT_Y, PIVOT_Z_OFFSET / 2);
-            horizontalRod2.rotation.x = Math.PI / 2;
-            horizontalRod2.castShadow = true;
-            standGroup.add(horizontalRod2);
-
-            return standGroup;
-        }
-
-        let labStand = createLabStand(params.length);
-        scene.add(labStand);
-
-        // Pendulum
-        const pendulumGroup = new THREE.Group();
-
-        function createPendulum(length, mass) {
-            // Clear existing pendulum
-            while(pendulumGroup.children.length > 0) {
-                pendulumGroup.remove(pendulumGroup.children[0]);
-            }
-
-            const PIVOT_Y = length + VERTICAL_OFFSET;
-            pendulumGroup.position.set(0, PIVOT_Y, PIVOT_Z_OFFSET);
-
-            // Pivot
-            const pivotGeometry = new THREE.SphereGeometry(0.05, 16, 16);
-            const pivotMaterial = new THREE.MeshStandardMaterial({ color: 0xb0c8e0, metalness: 0.6 });
-            const pivot = new THREE.Mesh(pivotGeometry, pivotMaterial);
-            pendulumGroup.add(pivot);
-
-            // String
-            const stringGeometry = new THREE.CylinderGeometry(0.01, 0.01, length, 8);
-            const stringMaterial = new THREE.MeshStandardMaterial({ color: 0xd0e4f0 });
-            const string = new THREE.Mesh(stringGeometry, stringMaterial);
-            string.position.y = -length / 2;
-            string.castShadow = true;
-            pendulumGroup.add(string);
-
-            // Bob
-            const bobRadius = 0.18 * Math.cbrt(mass);
-            const bobHeight = bobRadius * 3.5;
-            const bobGeometry = new THREE.CylinderGeometry(bobRadius, bobRadius, bobHeight, 32);
-            const bobMaterial = new THREE.MeshStandardMaterial({ color: 0x90c0e0, metalness: 0.5, roughness: 0.3 });
-            const bob = new THREE.Mesh(bobGeometry, bobMaterial);
-            bob.position.y = -length - bobHeight / 2;
-            bob.castShadow = true;
-            pendulumGroup.add(bob);
-
-            return bob;
-        }
-
-        const bob = createPendulum(params.length, params.mass);
-        scene.add(pendulumGroup);
-
-        // Visual aids for angle
-        const angleVisualsGroup = new THREE.Group();
-        scene.add(angleVisualsGroup);
-
-        function updateAngleVisuals() {
-            // Clear previous visuals
-            while(angleVisualsGroup.children.length > 0) {
-                angleVisualsGroup.remove(angleVisualsGroup.children[0]);
-            }
-
-            if (Math.abs(params.initialAngle) > 0.1 && simulationState === 'idle') {
-                const PIVOT_Y = params.length + VERTICAL_OFFSET;
-
-                // Dashed vertical line (plumb line)
-                const lineMaterial = new THREE.LineDashedMaterial({
-                    color: 0x4a6a8a,
-                    dashSize: 0.1,
-                    gapSize: 0.05,
-                });
-                const lineGeometry = new THREE.BufferGeometry().setFromPoints([
-                    new THREE.Vector3(0, PIVOT_Y, PIVOT_Z_OFFSET),
-                    new THREE.Vector3(0, PIVOT_Y - params.length - 0.3, PIVOT_Z_OFFSET)
-                ]);
-                const plumbLine = new THREE.Line(lineGeometry, lineMaterial);
-                plumbLine.computeLineDistances();
-                angleVisualsGroup.add(plumbLine);
-
-                // Angle arc - from vertical line to pendulum string
-                const angleRad = (params.initialAngle * Math.PI) / 180;
-                const arcRadius = params.length * 0.25;
-                const arcPoints = [];
-                const steps = 20;
-
-                // Arc goes from vertical (0) to the pendulum angle
-                for (let i = 0; i <= steps; i++) {
-                    const t = i / steps;
-                    const angle = angleRad * t; // 0 to angleRad
-                    arcPoints.push(new THREE.Vector3(
-                        Math.sin(angle) * arcRadius,
-                        PIVOT_Y - Math.cos(angle) * arcRadius,
-                        PIVOT_Z_OFFSET
-                    ));
+        // Stegar fram pendlarna dt sekunder. Ljusgrinden fångar varje passage
+        // av jämviktsläget och interpolerar tidpunkten mellan två delsteg.
+        const framat = (sim, P, dt) => {
+            const H = 1 / 400;
+            let rem = dt;
+            while (rem > 1e-9) {
+                const h = Math.min(H, rem);
+                rem -= h;
+                const th0 = sim.th;
+                const r = rk4(sim.th, sim.om, P.g, P.l, h);
+                sim.th = r[0]; sim.om = r[1];
+                if ((th0 < 0 && sim.th >= 0) || (th0 > 0 && sim.th <= 0)) {
+                    const f = th0 / (th0 - sim.th);
+                    const tc = sim.t + f * h;
+                    const dir = sim.om >= 0 ? 1 : -1;
+                    sim.flash = performance.now();
+                    const m = sim.meas;
+                    if (m.fas === 'armed') {
+                        m.fas = 'running'; m.t0 = tc; m.dir = dir; m.n = 0;
+                    } else if (m.fas === 'running' && dir === m.dir) {
+                        m.n += 1;
+                        if (m.n >= 10) {
+                            m.fas = 'done';
+                            m.T10 = Math.round((tc - m.t0) * 100) / 100;   // ljusgrindens tidsupplösning: 0,01 s
+                            m.snap = { l: P.l, g: P.g, a0: P.a0 };
+                            m.added = false;
+                        }
+                    }
                 }
+                sim.t += h;
+                if (P.ghost) {
+                    const rb = rk4(sim.thB, sim.omB, P.g, P.ghost.l, h);
+                    sim.thB = rb[0]; sim.omB = rb[1];
+                }
+            }
+        };
 
-                const arcGeometry = new THREE.BufferGeometry().setFromPoints(arcPoints);
-                const arcMaterial = new THREE.LineBasicMaterial({ color: 0x38bdf8, linewidth: 2 });
-                const arc = new THREE.Line(arcGeometry, arcMaterial);
-                angleVisualsGroup.add(arc);
+        // ── Färdiga försök ──
+        const FORSOK = [
+            { id: 'massa', namn: 'Samma längd, olika massa',
+              set: { l: 1.0, a0: 10, m: 100, plats: 'jorden' }, ghost: { l: 1.0, m: 400, a0: 10 },
+              text: 'A har massan 100 g och B massan 400 g, men längd och utslag är lika. Pendlarna svänger i takt: massan ingår inte i <em>T</em> = 2π√(<em>l</em>/<em>g</em>).' },
+            { id: 'langd', namn: 'Fyrdubbla längden',
+              set: { l: 0.5, a0: 10, m: 100, plats: 'jorden' }, ghost: { l: 2.0, m: 100, a0: 10 },
+              text: 'B är fyra gånger så lång som A (2,00 m mot 0,50 m) och behöver dubbelt så lång tid för en svängning. <em>T</em> växer som √<em>l</em>.' },
+            { id: 'sekund', namn: 'Sekundpendeln',
+              set: { l: 0.995, a0: 5, m: 100, plats: 'jorden' }, ghost: null,
+              text: 'Med <em>l</em> = 0,995 m blir <em>T</em> = 2,00 s. Ljusgrinden slås ut en gång per sekund, varje gång pendeln passerar jämviktsläget.' },
+            { id: 'stort', namn: 'Stort utslag (formeln slutar gälla)',
+              set: { l: 1.0, a0: 60, m: 100, plats: 'jorden' }, ghost: { l: 1.0, m: 100, a0: 5 },
+              text: 'A släpps från 60° och B från 5°, båda med <em>l</em> = 1,00 m. A hänger efter: formeln gäller bara för små utslag, och vid 60° är perioden cirka 7 % längre.' },
+            { id: 'manen', namn: 'Pendeln på Månen',
+              set: { l: 1.0, a0: 10, m: 100, plats: 'mon' }, ghost: null,
+              text: 'På Månen är <em>g</em> = 1,62 m/s². Samma pendel behöver ungefär 2,5 gånger så lång tid: <em>T</em> = 4,94 s.' },
+        ];
 
-                // Angle text using canvas texture
-                const canvas = document.createElement('canvas');
-                canvas.width = 128;
-                canvas.height = 64;
-                const context = canvas.getContext('2d');
-                context.fillStyle = '#0f1620';
-                context.font = 'Bold 28px Poppins, Arial, sans-serif';
-                context.textAlign = 'center';
-                context.textBaseline = 'middle';
-                const angleText = Math.round(params.initialAngle) + '°';
-                context.fillText(angleText, 64, 32);
-
-                const texture = new THREE.CanvasTexture(canvas);
-                const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
-                const sprite = new THREE.Sprite(spriteMaterial);
-
-                // Position text closer to arc and higher up
-                const textAngle = angleRad / 2;
-                const textRadius = arcRadius * 1.15;  // Closer to arc
-                sprite.position.set(
-                    Math.sin(textAngle) * textRadius,
-                    PIVOT_Y - Math.cos(textAngle) * textRadius,  // Higher up
-                    PIVOT_Z_OFFSET
+        // ── SVG-pil: en sammanhängande polygon ──
+        const Arrow = ({ x1, y1, x2, y2, color, width = 5, head = 15, dashed = false, opacity = 1 }) => {
+            const ang = Math.atan2(y2 - y1, x2 - x1);
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 1) return null;
+            if (dashed) {
+                // streckad komponent: tunt streckat skaft med hel spets
+                const hd = Math.min(head * 0.8, len * 0.8);
+                const ux = Math.cos(ang), uy = Math.sin(ang);
+                const bx = x2 - hd * Math.cos(0.42) * ux, by = y2 - hd * Math.cos(0.42) * uy;
+                const hh = hd * Math.sin(0.42);
+                return (
+                    <g opacity={opacity}>
+                        <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth="2.6"
+                              strokeDasharray="6 4" strokeLinecap="butt" />
+                        <polygon points={`${x2},${y2} ${bx - uy * hh},${by + ux * hh} ${bx + uy * hh},${by - ux * hh}`} fill={color} />
+                    </g>
                 );
-                sprite.scale.set(0.35, 0.175, 1);
-                angleVisualsGroup.add(sprite);
             }
-        }
+            const hw = 0.42;
+            const hd = Math.max(10, Math.min(head, len * 0.9));
+            const ux = Math.cos(ang), uy = Math.sin(ang);
+            const nx = -uy, ny = ux;
+            const hh = hd * Math.sin(hw);
+            const bd = hd * Math.cos(hw);
+            const bx = x2 - bd * ux, by = y2 - bd * uy;
+            const w = Math.min(width, hh * 1.25) / 2;
+            const P = (px, py) => `${px.toFixed(2)},${py.toFixed(2)}`;
+            const pts = [
+                P(x1 + nx * w, y1 + ny * w), P(bx + nx * w, by + ny * w), P(bx + nx * hh, by + ny * hh),
+                P(x2, y2),
+                P(bx - nx * hh, by - ny * hh), P(bx - nx * w, by - ny * w), P(x1 - nx * w, y1 - ny * w),
+            ].join(' ');
+            return <polygon points={pts} fill={color} opacity={opacity} />;
+        };
 
-        // Update camera target
-        function updateCameraTarget() {
-            const PIVOT_Y = params.length + VERTICAL_OFFSET;
-            controls.target.set(0, PIVOT_Y - params.length / 2, 0);
-            controls.update();
-        }
-        updateCameraTarget();
+        // Kraftetikett: symbol (kursiv) + index + resten, startar vid pilspetsen.
+        const KraftEtikett = ({ x, y, anchor, color, sym, sub, rest }) => (
+            <text x={x} y={y} textAnchor={anchor} fontSize="17" fontWeight="700" fill={color}>
+                <tspan fontStyle="italic">{sym}</tspan>
+                <tspan dy="4" fontSize="12" fontWeight="700">{sub}</tspan>
+                <tspan dy="-4">{rest}</tspan>
+            </text>
+        );
 
-        // Mouse interaction for dragging pendulum
-        const raycaster = new THREE.Raycaster();
-        const mouse = new THREE.Vector2();
-        let isDragging = false;
+        // Kula med massbunden radie.
+        const bobRadie = (m) => 11 + 11 * Math.cbrt(Math.max(0, (m - MMIN) / (MMAX - MMIN)));
 
-        function onMouseMove(event) {
-            const rect = renderer.domElement.getBoundingClientRect();
-            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+        // ═══════════════════════════════════════════════
+        //  SCENEN: labbstativ, pendel, gradskiva, ljusgrind
+        // ═══════════════════════════════════════════════
+        const Scen = ({ svgRef, sim, P, show, compact, gissa, onDragStart, onDragMove, onDragEnd, vb }) => {
+            const { l, m, g, a0, ghost } = P;
+            const th = sim.th;
+            const rA = bobRadie(m);
+            const bx = PX + l * S * Math.sin(th), by = PY + l * S * Math.cos(th);
+            const restY = PY + l * S;
+            const flashOn = performance.now() - sim.flash < 220;
+            const x0 = vb.x, x1 = vb.x + vb.w;
 
-            if (isDragging && simulationState === 'idle') {
-                raycaster.setFromCamera(mouse, camera);
-
-                // Calculate angle based on mouse position
-                const pivotY = params.length + VERTICAL_OFFSET;
-                const pivotPos = new THREE.Vector3(0, pivotY, PIVOT_Z_OFFSET);
-
-                // Project mouse ray onto a plane at the pendulum's Z position
-                const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), -PIVOT_Z_OFFSET);
-                const intersection = new THREE.Vector3();
-                raycaster.ray.intersectPlane(plane, intersection);
-
-                if (intersection) {
-                    // Calculate angle from pivot to intersection point
-                    const dx = intersection.x - pivotPos.x;
-                    const dy = intersection.y - pivotPos.y;
-                    const angle = Math.atan2(dx, -dy); // Negative dy because y is up
-
-                    // Limit angle to ±25 degrees
-                    const angleDeg = (angle * 180) / Math.PI;
-                    params.initialAngle = Math.max(-25, Math.min(25, angleDeg));
-
-                    // Update slider position
-                    const angleSlider = document.getElementById('angle-slider');
-                    if (angleSlider) angleSlider.value = params.initialAngle;
-
-                    updateAngleVisuals();
-                    updateValueDisplays();
-                }
+            // protraktorns gradering
+            const ticks = [];
+            for (let a = -90; a <= 90; a += 5) {
+                const big = a % 10 === 0, r0 = 74, r1 = big ? 64 : 69;
+                const sx = Math.sin(a * DEG), sy = Math.cos(a * DEG);
+                ticks.push(<line key={a} x1={PX + r0 * sx} y1={PY + r0 * sy} x2={PX + r1 * sx} y2={PY + r1 * sy}
+                                 stroke="#3a4151" strokeWidth={big ? 1.2 : 0.8} />);
             }
-        }
+            const prLbl = [-60, -30, 0, 30, 60].map((a) => (
+                <text key={a} x={PX + 53 * Math.sin(a * DEG)} y={PY + 53 * Math.cos(a * DEG) + 4}
+                      textAnchor="middle" fontSize="11" fill="#3a4151">{a === 0 ? '0' : Math.abs(a)}</text>
+            ));
+            const a0x = PX + 82 * Math.sin(P.sgn * a0 * DEG), a0y = PY + 82 * Math.cos(P.sgn * a0 * DEG);
 
-        function onMouseDown(event) {
-            const rect = renderer.domElement.getBoundingClientRect();
-            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
-            if (simulationState === 'idle') {
-                raycaster.setFromCamera(mouse, camera);
-                const intersects = raycaster.intersectObject(bob, true);
-
-                if (intersects.length > 0) {
-                    isDragging = true;
-                    controls.enabled = false; // Disable orbit controls while dragging
-                }
-            }
-        }
-
-        function onMouseUp() {
-            if (isDragging && params.initialAngle >= 0.5 && simulationState === 'idle') {
-                // Auto-start simulation when releasing after drag
-                simulationState = 'running';
-                timer = 0;
-                timeRef = 0;
-                swingCount = 0;
-                swingCountRef = 0;
-                measuredPeriod = null;
-                timingActive = false;
-                waitingForTurningPoint = false;
-                previousAngle = 0;
-                updateAngleVisuals(); // Clear angle visuals when starting
-                renderUI();
-            }
-            isDragging = false;
-            controls.enabled = true;
-        }
-
-        renderer.domElement.addEventListener('mousemove', onMouseMove);
-        renderer.domElement.addEventListener('mousedown', onMouseDown);
-        renderer.domElement.addEventListener('mouseup', onMouseUp);
-
-        // Animation
-        // Verklig tid mellan bildrutorna. Ett fast steg på 1/60 s fick
-        // pendeln att svänga dubbelt så fort på en skärm med 120 Hz.
-        let lastFrameMs = null;
-        function animate(nowMs) {
-            requestAnimationFrame(animate);
-            const realDelta = (lastFrameMs == null || nowMs == null) ? 0
-                : Math.min(Math.max(nowMs - lastFrameMs, 0) / 1000, 0.05);
-            lastFrameMs = nowMs == null ? null : nowMs;
-
-            if (simulationState === 'running') {
-                const delta = realDelta;
-                timeRef += delta;
-                timer = timeRef;
-
-                const initialAngleRad = (params.initialAngle * Math.PI) / 180;
-                const omega = Math.sqrt(params.gravity / params.length);
-                const angle = initialAngleRad * Math.exp(-params.damping * timeRef) * Math.cos(omega * timeRef);
-
-                pendulumGroup.rotation.z = angle;
-
-                // Detect turning points (angle changes sign)
-                if (waitingForTurningPoint && previousAngle * angle < 0) {
-                    // We've hit a turning point
-                    waitingForTurningPoint = false;
-                    timingActive = true;
-                    timingStartTime = timeRef;
-                    timingStartSwing = Math.floor((omega * timeRef) / (2 * Math.PI));
-                    renderUI();
-                }
-
-                // Count swings if timing is active
-                if (timingActive) {
-                    const currentSwings = Math.floor((omega * timeRef) / (2 * Math.PI));
-                    const swingsSinceTiming = currentSwings - timingStartSwing;
-
-                    if (swingsSinceTiming >= 10) {
-                        // Completed 10 swings
-                        const elapsedTime = timeRef - timingStartTime;
-                        measuredPeriod = elapsedTime / 10;
-                        timingActive = false;
-                        renderUI();
-                    }
-                }
-
-                previousAngle = angle;
-                renderUI();
-            } else if (simulationState === 'paused') {
-                // When paused, keep current angle - do nothing
-            } else {
-                const initialAngleRad = (params.initialAngle * Math.PI) / 180;
-                pendulumGroup.rotation.z = initialAngleRad;
-                updateAngleVisuals();
+            // linjal (vänster sida): 0 vid upphängningen
+            const rx = compact ? x0 + 10 : 56;
+            const rulerTicks = [];
+            for (let i = 0; i <= 41; i++) {
+                const v = i * 0.05, yy = PY + v * S;
+                const maj = i % 10 === 0, mid = i % 2 === 0;
+                rulerTicks.push(<line key={i} x1={rx + 26} y1={yy} x2={rx + 26 - (maj ? 15 : mid ? 10 : 6)} y2={yy}
+                                      stroke="#5b4a12" strokeWidth={maj ? 1.4 : 0.9} />);
+                if (maj) rulerTicks.push(
+                    <text key={'t' + i} x={rx + 8} y={yy + 4} fontSize="12" textAnchor="middle" fill="#5b4a12"
+                          fontWeight="600">{i === 0 ? '0' : fmt(v, 1) + ''}</text>);
             }
 
-            controls.update();
-            renderer.render(scene, camera);
-        }
+            // krafter
+            let krafter = null;
+            if (show.krafter) {
+                const mk = m / 1000;
+                const FG = mk * g;
+                const sc = 100 / (FG * (3 - 2 * Math.cos(Math.max(a0, 5) * DEG)));     // bildpunkter per newton
+                const ur = { x: Math.sin(th), y: Math.cos(th) };
+                const ut = { x: Math.cos(th), y: -Math.sin(th) };
+                const FS = mk * (g * Math.cos(th) + l * sim.om * sim.om);
+                const F1 = -FG * Math.sin(th);                 // tangentiell komposant (mot jämviktsläget)
+                const Fr = FG * Math.cos(th);                  // komposant längs snöret, utåt
+                const cx = bx, cy = by;
+                const tipG = { x: cx, y: cy + FG * sc };
+                const tipS = { x: cx - ur.x * FS * sc, y: cy - ur.y * FS * sc };
+                const tipR = { x: cx + ur.x * Fr * sc, y: cy + ur.y * Fr * sc };
+                const tipT = { x: cx + ut.x * F1 * sc, y: cy + ut.y * F1 * sc };
+                const vis = (v) => !gissa ? ' = ' + fmt(v, 2) + ' N' : '';
+                const sidT = F1 >= 0 ? 1 : -1;
+                krafter = (
+                    <g>
+                        {/* parallellogrammets hjälplinjer */}
+                        <line x1={tipG.x} y1={tipG.y} x2={tipR.x} y2={tipR.y} stroke={COL.tyngd} strokeWidth="1.2" strokeDasharray="3 4" opacity="0.6" />
+                        <line x1={tipG.x} y1={tipG.y} x2={tipT.x} y2={tipT.y} stroke={COL.tyngd} strokeWidth="1.2" strokeDasharray="3 4" opacity="0.6" />
+                        <Arrow x1={cx} y1={cy} x2={tipS.x} y2={tipS.y} color={COL.spann} width={5} head={15} />
+                        <Arrow x1={cx} y1={cy} x2={tipG.x} y2={tipG.y} color={COL.tyngd} width={5} head={15} />
+                        {Fr * sc > 6 && <Arrow x1={cx} y1={cy} x2={tipR.x} y2={tipR.y} color={COL.tyngd} dashed head={13} />}
+                        {Math.abs(F1) * sc > 6 && <Arrow x1={cx} y1={cy} x2={tipT.x} y2={tipT.y} color={COL.tyngd} dashed head={13} />}
+                        <circle cx={cx} cy={cy} r="3" fill={COL.tyngd} />
+                        <KraftEtikett x={tipG.x + 10} y={tipG.y + 12} anchor="start" color={COL.tyngd} sym="F" sub="G" rest={vis(FG)} />
+                        {FS * sc > 8 && <KraftEtikett x={tipS.x + 14} y={tipS.y - 4} anchor="start" color={COL.spann} sym="F" sub="S" rest={vis(FS)} />}
+                        {Math.abs(F1) * sc > 14 && (
+                            <KraftEtikett x={tipT.x + sidT * 8} y={tipT.y + 18} anchor={sidT > 0 ? 'start' : 'end'}
+                                          color={COL.tyngd} sym="F" sub="1" rest={gissa ? '' : ' = ' + fmt(Math.abs(F1), 2) + ' N'} />
+                        )}
+                    </g>
+                );
+            }
 
-        animate();
+            // jämförelsependel B
+            let ghostEl = null;
+            if (ghost && show.ghost) {
+                const gx = PX + ghost.l * S * Math.sin(sim.thB), gy = PY + ghost.l * S * Math.cos(sim.thB);
+                const rB = bobRadie(ghost.m);
+                ghostEl = (
+                    <g>
+                        <line x1={PX} y1={PY} x2={gx} y2={gy} stroke="#2f6fd0" strokeWidth="1.8" opacity="0.85" />
+                        <circle cx={gx} cy={gy} r={rB} fill="url(#bobB)" stroke="#2a4f8a" strokeWidth="1.4" />
+                        <circle cx={gx} cy={gy} r="2" fill="#0f1620" />
+                    </g>
+                );
+            }
 
-        // Window resize
-        window.addEventListener('resize', () => {
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-        });
+            const lcdTid = sim.meas.fas === 'running' ? (sim.t - sim.meas.t0)
+                         : sim.meas.fas === 'done' ? sim.meas.T10 : 0;
 
-        // Controls UI - separated into render and event setup
-        function renderUI() {
-            const period = 2 * Math.PI * Math.sqrt(params.length / params.gravity);
-            const isIdle = simulationState === 'idle';
+            return (
+                <svg ref={svgRef} className="pend-scen" viewBox={`${vb.x} 0 ${vb.w} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                     style={{ fontFamily: "'Poppins', sans-serif" }}>
+                    <defs>
+                        <pattern id="rutor" width="27" height="27" patternUnits="userSpaceOnUse">
+                            <path d="M27 0H0V27" fill="none" stroke="rgba(60,110,180,0.13)" strokeWidth="1" />
+                        </pattern>
+                        <linearGradient id="papper" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#f7f2e8" /><stop offset="1" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <radialGradient id="bobA" cx="0.35" cy="0.3" r="0.8">
+                            <stop offset="0" stopColor="#e6ebf2" /><stop offset="0.45" stopColor="#8f9cb0" /><stop offset="1" stopColor="#434d5d" />
+                        </radialGradient>
+                        <radialGradient id="bobB" cx="0.35" cy="0.3" r="0.8">
+                            <stop offset="0" stopColor="#dbe8fa" /><stop offset="0.5" stopColor="#7ea4dc" /><stop offset="1" stopColor="#35598f" />
+                        </radialGradient>
+                        <linearGradient id="stal" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0" stopColor="#6c7686" /><stop offset="0.35" stopColor="#c9d0db" /><stop offset="1" stopColor="#5a6373" />
+                        </linearGradient>
+                        <linearGradient id="tra" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#c99b63" /><stop offset="1" stopColor="#a87a45" />
+                        </linearGradient>
+                    </defs>
 
-            const controlsHTML = `
-                <div class="space-y-6">
-                    <h2 class="text-xl font-bold text-slate-100 pb-2" style="border-bottom: 2px solid rgba(200, 50, 74, 0.4);">Kontrollpanel</h2>
+                    <rect x={x0 - 400} y="0" width={vb.w + 800} height={BENCH} fill="url(#papper)" />
+                    <rect x={x0 - 400} y="0" width={vb.w + 800} height={BENCH} fill="url(#rutor)" />
 
-                    <div class="w-full">
-                        <div class="flex justify-between items-center mb-1">
-                            <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Trådlängd (<em>l</em>)</label>
-                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
-                                  style="${isIdle ? 'background: rgba(200, 50, 74, 0.12); border: 1px solid rgba(200, 50, 74, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
-                                ${params.length.toFixed(2).replace('.', ',')} m
-                            </span>
-                        </div>
-                        <input id="length-slider" type="range" min="0.5" max="5" step="0.1" value="${params.length}" ${!isIdle ? 'disabled' : ''}>
-                    </div>
+                    {/* labbänken */}
+                    <rect x={x0 - 400} y={BENCH} width={vb.w + 800} height={VBH - BENCH + 10} fill="url(#tra)" />
+                    <line x1={x0 - 400} y1={BENCH} x2={x0 + vb.w + 400} y2={BENCH} stroke="#6b4a22" strokeWidth="3" />
+                    {[0, 1, 2, 3, 4, 5].map((i) => (
+                        <path key={i} d={`M${x0 - 20 + i * 170} ${BENCH + 12 + (i % 3) * 7} q 60 -6 130 0`} stroke="#8f6633" strokeWidth="1" fill="none" opacity="0.6" />
+                    ))}
 
-                    <div>
-                        <div class="w-full">
-                            <div class="flex justify-between items-center mb-1">
-                                <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Tyngdfaktor (<em>g</em>)</label>
-                                <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
-                                      style="${isIdle ? 'background: rgba(200, 50, 74, 0.12); border: 1px solid rgba(200, 50, 74, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
-                                    ${params.gravity.toFixed(2).replace('.', ',')} m/s²
-                                </span>
-                            </div>
-                            <input id="gravity-slider" type="range" min="1" max="25" step="0.1" value="${params.gravity}" ${!isIdle ? 'disabled' : ''}>
-                        </div>
-                        <div class="mt-4">
-                            <label class="text-sm font-medium mb-2 block ${isIdle ? 'text-slate-200' : 'text-slate-500'}">Eller välj en himlakropp:</label>
-                            <div class="flex flex-wrap justify-center gap-3">
-                                ${celestialBodies.map(body => {
-                                    const isSelected = Math.abs(params.gravity - body.gravity) < 0.01;
-                                    return `
-                                        <div class="flex flex-col items-center">
-                                            <button data-gravity="${body.gravity}" class="celestial-button p-1 rounded-full transition-all duration-200 focus:outline-none ${!isIdle ? 'opacity-40 cursor-not-allowed' : 'hover:scale-105'}"
-                                                style="${isSelected
-                                                    ? 'background: rgba(200, 50, 74, 0.15); box-shadow: 0 0 0 2px #38bdf8, 0 0 12px rgba(200, 50, 74, 0.3); outline-offset: 2px;'
-                                                    : 'background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(15, 22, 32, 0.21);;'}"
-                                                ${!isIdle ? 'disabled' : ''} title="${body.name} (g = ${body.gravity.toFixed(2).replace('.', ',')} m/s²)">
-                                                <div class="w-10 h-10 rounded-full" style="background-image: ${body.gradient}"></div>
-                                            </button>
-                                            <span class="text-xs mt-1 ${isIdle ? 'text-slate-200' : 'text-slate-500'}">${body.name}</span>
-                                        </div>
-                                    `;
-                                }).join('')}
-                            </div>
-                        </div>
-                    </div>
+                    {/* stativ */}
+                    {!compact && (
+                        <g>
+                            <rect x="4" y={BENCH - 12} width="96" height="12" rx="3" fill="#434d5d" />
+                            <rect x="22" y="36" width="12" height={BENCH - 46} fill="url(#stal)" />
+                        </g>
+                    )}
+                    <rect x={compact ? x0 - 10 : 28} y="42" width={PX + 18 - (compact ? x0 - 10 : 28)} height="9" rx="2" fill="url(#stal)" />
+                    {!compact && <rect x="16" y="34" width="24" height="24" rx="3" fill="#434d5d" />}
+                    {/* klämma och upphängning */}
+                    <rect x={PX - 10} y="46" width="20" height="14" rx="2" fill="#434d5d" />
+                    <circle cx={PX} cy={PY} r="3.5" fill="#0f1620" />
 
-                    <div class="w-full">
-                        <div class="flex justify-between items-center mb-1">
-                            <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Massa (<em>m</em>)</label>
-                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
-                                  style="${isIdle ? 'background: rgba(200, 50, 74, 0.12); border: 1px solid rgba(200, 50, 74, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
-                                ${(params.mass * 1000).toFixed(0)} g
-                            </span>
-                        </div>
-                        <input id="mass-slider" type="range" min="10" max="300" step="5" value="${params.mass * 1000}" ${!isIdle ? 'disabled' : ''}>
-                    </div>
+                    {/* linjal (måttband) med avläsning vid kulans tyngdpunkt */}
+                    <rect x={rx} y={PY - 6} width="26" height={2.05 * S + 12} rx="2" fill="#e8c35c" stroke="#8a6d15" strokeWidth="1" />
+                    {rulerTicks}
+                    <line x1={rx + 26} y1={PY} x2={PX - 8} y2={PY} stroke="#5a6170" strokeWidth="1" strokeDasharray="2 5" opacity="0.7" />
+                    <line x1={rx + 26} y1={restY} x2={PX - rA - 10} y2={restY} stroke="#5a6170" strokeWidth="1" strokeDasharray="2 5" opacity="0.7" />
+                    <polygon points={`${rx + 26},${restY} ${rx + 36},${restY - 6} ${rx + 36},${restY + 6}`} fill="#c8324a" />
+                    <text x={rx + 42} y={restY - 8} fontSize="15" fontWeight="700" fill="#0f1620">
+                        <tspan fontStyle="italic">l</tspan> = {fmtL(l)} m
+                    </text>
 
-                    <div class="w-full">
-                        <div class="flex justify-between items-center mb-1">
-                            <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Startvinkel (<em>α</em>)</label>
-                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
-                                  style="${isIdle ? 'background: rgba(200, 50, 74, 0.12); border: 1px solid rgba(200, 50, 74, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
-                                ${Math.round(params.initialAngle)}°
-                            </span>
-                        </div>
-                        <input id="angle-slider" type="range" min="0" max="25" step="1" value="${params.initialAngle}" ${!isIdle ? 'disabled' : ''}>
-                    </div>
+                    {/* gradskiva */}
+                    <path d={`M ${PX - 74} ${PY} A 74 74 0 0 0 ${PX + 74} ${PY} Z`} fill="#fbf7ee" fillOpacity="0.72" stroke="#3a4151" strokeWidth="1.2" />
+                    {ticks}{prLbl}
+                    <line x1={PX} y1={PY} x2={PX} y2={PY + 26} stroke="#9aa3b2" strokeWidth="1" strokeDasharray="3 3" />
+                    <circle cx={a0x} cy={a0y} r="3.5" fill="#c8324a" />
+                    <text x={PX - 90} y={PY + 20} textAnchor="end" fontSize="15" fontWeight="700" fill="#0f1620">
+                        <tspan fontStyle="italic">α</tspan> = {fmt(Math.abs(th) / DEG, 1)}°
+                    </text>
 
-                    <div class="w-full">
-                        <div class="flex justify-between items-center mb-1">
-                            <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Dämpning</label>
-                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
-                                  style="${isIdle ? 'background: rgba(200, 50, 74, 0.12); border: 1px solid rgba(200, 50, 74, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
-                                ${params.damping.toFixed(2).replace('.', ',')}
-                            </span>
-                        </div>
-                        <input id="damping-slider" type="range" min="0" max="0.5" step="0.01" value="${params.damping}" ${!isIdle ? 'disabled' : ''}>
-                    </div>
+                    {/* ljusgrinden: sitter bakom kulan vid jämviktsläget */}
+                    <rect x={PX - 1} y={restY - 14} width="3" height={BENCH - restY + 14} fill="#6c7686" />
+                    <rect x={PX - 20} y={restY - 28} width="40" height="56" rx="6" fill="#3b4250" stroke="#1f2430" strokeWidth="1.2" />
+                    <circle cx={PX + 11} cy={restY - 19} r="4.2" fill={flashOn ? '#ff3b3b' : '#6a2a2a'} />
+                    <circle cx={PX} cy={restY} r="2.4" fill="#ff5a5a" opacity="0.9" />
+                    <text x={PX + 8} y={restY + 46} textAnchor="start" fontSize="14" fill="#3a4151">Ljusgrind</text>
 
-                    <div class="p-4 rounded-lg text-center space-y-2"
-                         style="background: rgba(200, 50, 74, 0.08); border: 1px solid rgba(200, 50, 74, 0.2);">
-                        <h3 class="text-lg font-semibold text-cyan-300">Mätning</h3>
-                        ${simulationState === 'idle' ? '<p class="text-sm text-slate-300">Dra pendeln och släpp för att starta.</p>' : ''}
-                        ${simulationState === 'running' && !waitingForTurningPoint && !timingActive ? '<p class="text-sm text-slate-300">Tryck på "Ta tiden" för att mäta perioden.</p>' : ''}
-                        ${waitingForTurningPoint ? '<p class="text-sm font-semibold" style="color: #fb923c;">Väntar på nästa vändläge...</p>' : ''}
-                        ${timingActive ? `
-                            <div class="space-y-2">
-                                <p class="text-sm font-semibold" style="color: #4ade80;">Tidtagning pågår!</p>
-                                <div>
-                                    <p class="text-sm text-slate-300">Svängningar sedan start</p>
-                                    <p class="text-3xl font-mono font-bold text-slate-100">${Math.floor((Math.sqrt(params.gravity / params.length) * timeRef) / (2 * Math.PI)) - timingStartSwing} / 10</p>
-                                </div>
-                            </div>
-                        ` : ''}
-                        ${measuredPeriod !== null && !timingActive ? `
-                            <div class="pt-3" style="border-top: 1px solid rgba(200, 50, 74, 0.2);">
-                                <p class="text-sm text-slate-300">Uppmätt period (<em>T</em>)</p>
-                                <p class="text-3xl font-mono font-bold" style="color: #4ade80;">${measuredPeriod.toFixed(3).replace('.', ',')} s</p>
-                            </div>
-                        ` : ''}
-                    </div>
+                    {/* tidtagare på bänken */}
+                    {!compact && (
+                        <g>
+                            <text x="560" y={BENCH - 49} textAnchor="middle" fontSize="12" fill="#3a4151">Tidtagare</text>
+                            <rect x="476" y={BENCH - 42} width="168" height="40" rx="6" fill="#1c2b22" stroke="#38453c" strokeWidth="2" />
+                            <text x="632" y={BENCH - 14} textAnchor="end" fontSize="24" fontWeight="700" fill="#b6f2a0"
+                                  style={{ fontFamily: "'JetBrains Mono', monospace" }}>{fmtT(lcdTid)} s</text>
+                        </g>
+                    )}
 
-                    <div class="flex items-center justify-center space-x-4 pt-4">
-                        <button id="start-button" ${!isIdle || params.initialAngle < 0.5 ? 'disabled' : ''}
-                            class="px-6 py-2 font-semibold text-slate-900 rounded-lg transition-all duration-200 focus:outline-none w-32"
-                            style="${!isIdle || params.initialAngle < 0.5
-                                ? 'background: rgba(200, 50, 74, 0.25); color: rgba(15, 22, 32, 0.70); cursor: not-allowed; border: 1px solid rgba(200, 50, 74, 0.15);'
-                                : 'background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: #0f172a; cursor: pointer; border: none; box-shadow: 0 0 16px rgba(200, 50, 74, 0.3);'}">
-                            Starta
-                        </button>
-                        <button id="reset-button"
-                            class="px-6 py-2 font-semibold text-slate-300 rounded-lg transition-all duration-200 focus:outline-none w-32"
-                            style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(15, 22, 32, 0.28); cursor: pointer;">
-                            Återställ
-                        </button>
-                    </div>
-                </div>
+                    {/* jämförelsependel (bakom A) */}
+                    {ghostEl}
 
-                <div class="space-y-4 p-6 rounded-lg" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(200, 50, 74, 0.12);">
-                    <h2 class="text-xl font-bold text-slate-100 pb-2" style="border-bottom: 2px solid rgba(200, 50, 74, 0.4);">Information</h2>
-                    <div class="text-center">
-                        <p class="text-sm text-slate-300">Beräknad period (<em>T</em>)</p>
-                        <p class="text-4xl font-mono font-bold my-2 period-display" style="color: #38bdf8; text-shadow: 0 0 12px rgba(200, 50, 74, 0.4);">${period.toFixed(3).replace('.', ',')} s</p>
-                        <p class="text-sm font-mono text-slate-400">T = 2π · √(<em>l</em>/<em>g</em>)</p>
-                    </div>
-                    <div class="pt-4 text-sm text-slate-200 leading-relaxed space-y-2">
-                        <p>
-                            <strong style="color: #38bdf8;">Observera:</strong> Perioden – tiden för en komplett svängning fram och tillbaka – beror <strong class="font-semibold text-white">endast</strong> på pendelns <span style="color: #4ade80;">längd (<em>l</em>)</span> och den lokala <span style="color: #4ade80;">tyngdfaktorn (<em>g</em>)</span>.
-                        </p>
-                        <p>
-                            Prova att ändra <span style="color: #f87171;">massan (<em>m</em>)</span> och <span style="color: #f87171;">startvinkeln (<em>α</em>)</span>. Du kommer se att perioden förblir oförändrad. Detta är en fundamental egenskap hos en enkel pendel (för små vinklar).
-                        </p>
-                        <p>
-                            <strong style="color: #38bdf8;">Dämpning</strong> simulerar luftmotstånd och gör att svängningarna gradvis minskar i storlek, precis som i verkligheten.
-                        </p>
-                    </div>
-                </div>
-            `;
+                    {/* pendel A: snöret går ända till tyngdpunkten */}
+                    <line x1={PX} y1={PY} x2={bx} y2={by} stroke="#2a2f3a" strokeWidth="2" />
+                    <circle cx={bx} cy={by} r={rA} fill="url(#bobA)" stroke="#2a2f3a" strokeWidth="1.4" />
+                    <circle cx={bx} cy={by} r="2.6" fill="#0f1620" />
+                    {krafter}
 
-            document.getElementById('controls-container').innerHTML = controlsHTML;
+                    {/* etiketter för A och B */}
+                    {ghost && show.ghost && (
+                        <g fontSize="14" fill="#0f1620">
+                            <text x={x0 + (compact ? 52 : 100)} y="20" fontWeight="700">
+                                A: <tspan fontStyle="italic">l</tspan> = {fmtL(l)} m, <tspan fontStyle="italic">m</tspan> = {m} g, <tspan fontStyle="italic">α</tspan> = {a0}°
+                            </text>
+                            <text x={x0 + (compact ? 52 : 100)} y="37" fontWeight="700" fill="#2a4f8a">
+                                B: <tspan fontStyle="italic">l</tspan> = {fmtL(ghost.l)} m, <tspan fontStyle="italic">m</tspan> = {ghost.m} g, <tspan fontStyle="italic">α</tspan> = {ghost.a0}°
+                            </text>
+                        </g>
+                    )}
 
-            // Update canvas control buttons
-            const canvasPauseButton = document.getElementById('canvas-pause-button');
-            const canvasAbortButton = document.getElementById('canvas-abort-button');
-            const canvasTimingButton = document.getElementById('canvas-timing-button');
+                    {/* grepp: osynlig träffyta över kulan */}
+                    <circle cx={bx} cy={by} r={rA + 16} fill="transparent" style={{ cursor: 'grab' }}
+                            onPointerDown={onDragStart} onPointerMove={onDragMove}
+                            onPointerUp={onDragEnd} onPointerCancel={onDragEnd} />
+                </svg>
+            );
+        };
 
-            if (canvasPauseButton && canvasAbortButton && canvasTimingButton) {
-                if (simulationState === 'running' || simulationState === 'paused') {
-                    // Active state - enabled
-                    canvasPauseButton.disabled = false;
-                    canvasAbortButton.disabled = false;
-                    canvasPauseButton.className = 'canvas-btn canvas-btn-orange';
-                    canvasAbortButton.className = 'canvas-btn canvas-btn-red';
+        // ═══════════════════════════════════════════════
+        //  DIAGRAMMET: mätserien
+        // ═══════════════════════════════════════════════
+        const tickStep = (max) => {
+            const raw = max / 5, e = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / e;
+            return e * (f <= 1.4 ? 1 : f <= 3.5 ? 2 : f <= 7 ? 5 : 10);
+        };
 
-                    // Update pause button text
-                    if (simulationState === 'running') {
-                        canvasPauseButton.textContent = 'Pausa';
-                    } else if (simulationState === 'paused') {
-                        canvasPauseButton.textContent = 'Fortsätt';
-                    }
+        const Diagram = React.memo(({ pts, mode, g, visaKurva, curL, gissa, onMode, onClear }) => {
+            const W = 380, H = 300, L = 58, R = 372, T0 = 16, B = 244;
+            const t2 = mode === 'T2';
+            const val = (p) => t2 ? p.T * p.T : p.T;
+            let ymaxDat = pts.reduce((a, p) => Math.max(a, val(p)), 0);
+            let ymaxFormel = (!gissa && g) ? (t2 ? 4 * Math.PI * Math.PI * LMAX / g : 2 * Math.PI * Math.sqrt(LMAX / g)) : 0;
+            let ymaxRaw = Math.max(ymaxDat * 1.18, ymaxFormel * 1.04, t2 ? 4 : 2);
+            if (gissa) ymaxRaw = Math.max(ymaxDat * 1.35, t2 ? 4 : 2);
+            const step = tickStep(ymaxRaw);
+            const ymax = Math.ceil(ymaxRaw / step - 1e-9) * step;
+            const X = (l) => L + (R - L) * l / LMAX;
+            const Y = (v) => B - (B - T0) * v / ymax;
+            const yt = [];
+            for (let v = 0; v <= ymax + 1e-9; v += step) yt.push(v);
+            const xt = [0, 0.5, 1, 1.5, 2];
+            const decY = step < 1 ? (step < 0.1 ? 2 : 1) : 0;
 
-                    // Timing button - enabled when running and not already timing
-                    if (simulationState === 'running' && !waitingForTurningPoint && !timingActive) {
-                        canvasTimingButton.disabled = false;
-                        canvasTimingButton.className = 'canvas-btn canvas-btn-cyan';
-                        canvasTimingButton.textContent = 'Ta tiden för 10 pendlingar';
-                    } else if (waitingForTurningPoint) {
-                        canvasTimingButton.disabled = true;
-                        canvasTimingButton.className = 'canvas-btn canvas-btn-yellow';
-                        canvasTimingButton.textContent = 'Väntar på vändläge...';
-                    } else if (timingActive) {
-                        canvasTimingButton.disabled = true;
-                        canvasTimingButton.className = 'canvas-btn canvas-btn-green';
-                        canvasTimingButton.textContent = 'Tidtagning pågår...';
-                    } else {
-                        canvasTimingButton.disabled = true;
-                        canvasTimingButton.className = 'canvas-btn canvas-btn-cyan';
-                        canvasTimingButton.textContent = 'Ta tiden för 10 pendlingar';
-                    }
+            // anpassad rät linje T² = k·l genom origo
+            let k = null;
+            if (pts.length >= 1) {
+                let sl = 0, sll = 0;
+                pts.forEach((p) => { sl += p.l * p.T * p.T; sll += p.l * p.l; });
+                k = sl / sll;
+            }
+            const kurva = [];
+            if (visaKurva && g && !gissa) {
+                if (t2) {
+                    const kk = 4 * Math.PI * Math.PI / g;
+                    const lEnd = Math.min(LMAX, ymax / kk);
+                    kurva.push(`${X(0)},${Y(0)}`, `${X(lEnd)},${Y(kk * lEnd)}`);
                 } else {
-                    // Inactive state - disabled
-                    canvasPauseButton.disabled = true;
-                    canvasAbortButton.disabled = true;
-                    canvasTimingButton.disabled = true;
-                    canvasPauseButton.className = 'canvas-btn canvas-btn-orange';
-                    canvasAbortButton.className = 'canvas-btn canvas-btn-red';
-                    canvasTimingButton.className = 'canvas-btn canvas-btn-cyan';
-                    canvasPauseButton.textContent = 'Pausa';
-                    canvasTimingButton.textContent = 'Ta tiden för 10 pendlingar';
+                    for (let l = 0; l <= LMAX + 1e-9; l += 0.04) {
+                        const T = 2 * Math.PI * Math.sqrt(l / g);
+                        if (T > ymax) break;
+                        kurva.push(`${X(l).toFixed(1)},${Y(T).toFixed(1)}`);
+                    }
                 }
             }
-
-            syncFsControls();
-        }
-
-        // Fast value update - directly update DOM without re-rendering
-        function updateValueDisplays() {
-            const container = document.getElementById('controls-container');
-
-            // Update all value displays
-            const lengthDisplay = container.querySelector('#length-slider').parentElement.querySelector('span');
-            if (lengthDisplay) lengthDisplay.textContent = params.length.toFixed(2).replace('.', ',') + ' m';
-
-            const gravityDisplay = container.querySelector('#gravity-slider').parentElement.querySelector('span');
-            if (gravityDisplay) gravityDisplay.textContent = params.gravity.toFixed(2).replace('.', ',') + ' m/s²';
-
-            const massDisplay = container.querySelector('#mass-slider').parentElement.querySelector('span');
-            if (massDisplay) massDisplay.textContent = (params.mass * 1000).toFixed(0) + ' g';
-
-            const angleDisplay = container.querySelector('#angle-slider').parentElement.querySelector('span');
-            if (angleDisplay) angleDisplay.textContent = Math.round(params.initialAngle) + '°';
-
-            const dampingDisplay = container.querySelector('#damping-slider').parentElement.querySelector('span');
-            if (dampingDisplay) dampingDisplay.textContent = params.damping.toFixed(2).replace('.', ',');
-
-            // Update calculated period
-            const period = 2 * Math.PI * Math.sqrt(params.length / params.gravity);
-            const periodDisplay = container.querySelector('.period-display');
-            if (periodDisplay) periodDisplay.textContent = period.toFixed(3).replace('.', ',') + ' s';
-
-            syncFsControls();
-        }
-
-        // Setup event listeners using event delegation - only runs once
-        document.getElementById('controls-container').addEventListener('input', (e) => {
-            if (e.target.id === 'length-slider') {
-                params.length = parseFloat(e.target.value);
-                scene.remove(labStand);
-                labStand = createLabStand(params.length);
-                scene.add(labStand);
-                createPendulum(params.length, params.mass);
-                updateCameraTarget();
-                updateAngleVisuals();
-                updateValueDisplays();
-            } else if (e.target.id === 'gravity-slider') {
-                params.gravity = parseFloat(e.target.value);
-                updateValueDisplays();
-            } else if (e.target.id === 'mass-slider') {
-                params.mass = parseFloat(e.target.value) / 1000;
-                createPendulum(params.length, params.mass);
-                updateValueDisplays();
-            } else if (e.target.id === 'angle-slider') {
-                params.initialAngle = parseFloat(e.target.value);
-                updateAngleVisuals();
-                updateValueDisplays();
-            } else if (e.target.id === 'damping-slider') {
-                params.damping = parseFloat(e.target.value);
-                updateValueDisplays();
+            let fitLinje = null;
+            if (t2 && k !== null) {
+                const lEnd = Math.min(LMAX, ymax / k);
+                fitLinje = <line x1={X(0)} y1={Y(0)} x2={X(lEnd)} y2={Y(k * lEnd)} stroke={COL.fit} strokeWidth="2.6" />;
             }
+            const gEst = k ? 4 * Math.PI * Math.PI / k : null;
+
+            return (
+                <div className="glass-card rounded-xl p-3">
+                    <div className="flex items-center justify-between mb-2 gap-2">
+                        <div className="flbl">Mätserie</div>
+                        <div className="seg" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                            <button className={!t2 ? 'active' : ''} onClick={() => onMode('T')}><em>T</em> mot <em>l</em></button>
+                            <button className={t2 ? 'active' : ''} onClick={() => onMode('T2')}><em>T</em>² mot <em>l</em></button>
+                        </div>
+                    </div>
+                    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', maxWidth: 470, margin: '0 auto', display: 'block', fontFamily: "'Poppins', sans-serif" }}>
+                        <rect x={L} y={T0} width={R - L} height={B - T0} fill="rgba(255,255,255,0.35)" />
+                        {yt.map((v) => (
+                            <g key={'y' + v}>
+                                <line x1={L} y1={Y(v)} x2={R} y2={Y(v)} stroke="rgba(15,22,32,0.14)" strokeWidth="1" />
+                                <text x={L - 7} y={Y(v) + 4} textAnchor="end" fontSize="12" fill="#3a4151">{fmt(v, decY)}</text>
+                            </g>
+                        ))}
+                        {xt.map((l) => (
+                            <g key={'x' + l}>
+                                <line x1={X(l)} y1={T0} x2={X(l)} y2={B} stroke="rgba(15,22,32,0.14)" strokeWidth="1" />
+                                <text x={X(l)} y={B + 17} textAnchor="middle" fontSize="12" fill="#3a4151">{fmt(l, l % 1 ? 1 : 0)}</text>
+                            </g>
+                        ))}
+                        {/* axlar med pilspets bara åt det positiva hållet */}
+                        <line x1={L} y1={B} x2={R + 4} y2={B} stroke="#0f1620" strokeWidth="1.8" />
+                        <polygon points={`${R + 12},${B} ${R + 3},${B - 4} ${R + 3},${B + 4}`} fill="#0f1620" />
+                        <line x1={L} y1={B} x2={L} y2={T0 - 4} stroke="#0f1620" strokeWidth="1.8" />
+                        <polygon points={`${L},${T0 - 11} ${L - 4},${T0 - 2} ${L + 4},${T0 - 2}`} fill="#0f1620" />
+                        <text x={(L + R) / 2} y={B + 38} textAnchor="middle" fontSize="13" fill="#0f1620">
+                            Pendellängd <tspan fontStyle="italic">l</tspan> (m)
+                        </text>
+                        <text transform={`rotate(-90 15 ${(T0 + B) / 2})`} x="15" y={(T0 + B) / 2} textAnchor="middle" fontSize="13" fill="#0f1620">
+                            {t2 ? <tspan>Periodtid i kvadrat <tspan fontStyle="italic">T</tspan>² (s²)</tspan>
+                                : <tspan>Periodtid <tspan fontStyle="italic">T</tspan> (s)</tspan>}
+                        </text>
+                        {/* aktuell längd */}
+                        <line x1={X(curL)} y1={T0} x2={X(curL)} y2={B} stroke="#c8324a" strokeWidth="1.2" strokeDasharray="2 4" opacity="0.8" />
+                        <polygon points={`${X(curL)},${B - 1} ${X(curL) - 5},${B + 8} ${X(curL) + 5},${B + 8}`} fill="#c8324a" />
+                        {kurva.length > 1 && <polyline points={kurva.join(' ')} fill="none" stroke="#5a6170" strokeWidth="2" strokeDasharray="6 4" />}
+                        {fitLinje}
+                        {pts.map((p, i) => (
+                            <circle key={i} cx={X(p.l)} cy={Y(val(p))} r="5.5"
+                                    fill={p.a0 > 20 ? '#f3eee4' : COL.punkt} stroke={COL.punkt} strokeWidth={p.a0 > 20 ? 2.2 : 1}
+                                    style={{ transition: 'cx 0.2s, cy 0.2s' }} />
+                        ))}
+                    </svg>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1" style={{ fontSize: 11.5, color: 'var(--lab-ink-soft)' }}>
+                        <span><span style={{ color: COL.punkt }}>●</span> mätpunkt</span>
+                        <span><span style={{ color: COL.punkt }}>○</span> stort utslag (över 20°)</span>
+                        {!gissa && <span><span style={{ color: '#5a6170' }}>- - -</span> formelns kurva</span>}
+                        {t2 && <span><span style={{ color: COL.fit }}>━</span> anpassad linje</span>}
+                    </div>
+                    <p className="anm mt-2">
+                        {t2 ? (
+                            pts.length === 0 ? <span>Lägg mätpunkter i diagrammet. Punkterna hamnar på en rät linje genom origo, eftersom <em>T</em>² = (4π²/<em>g</em>)&thinsp;·&thinsp;<em>l</em>.</span> :
+                            <span>Lutningen <em>k</em> = <em>T</em>²/<em>l</em> = {fmt(k, 2)} s²/m.{' '}
+                                {gissa ? <span>Använd sambandet <em>k</em> = 4π²/<em>g</em> för att bestämma <em>g</em>.</span>
+                                       : <span>Då är <em>g</em> = 4π²/<em>k</em> = {fmt(gEst, 2)} m/s².</span>}</span>
+                        ) : (
+                            <span>Kurvan böjer av: fyrdubblas <em>l</em> fördubblas <em>T</em>. Byt till <em>T</em>² mot <em>l</em> så blir sambandet en rät linje.</span>
+                        )}
+                    </p>
+                    {pts.length > 0 && <button className="btn-toggle mt-2" style={{ padding: '4px 10px', fontSize: 12.5 }} onClick={onClear}>Rensa mätserien</button>}
+                </div>
+            );
         });
 
-        // Event listeners for canvas control buttons
-        document.getElementById('canvas-pause-button').addEventListener('click', () => {
-            if (simulationState === 'running') {
-                simulationState = 'paused';
-                renderUI();
-            } else if (simulationState === 'paused') {
-                simulationState = 'running';
-                renderUI();
-            }
-        });
+        // ═══════════════════════════════════════════════
+        //  Delade hjälpkomponenter
+        // ═══════════════════════════════════════════════
+        const Slider = ({ label, value, min, max, step, onChange, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 110, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <span className="sl-wrap">
+                    <input type="range" min={min} max={max} step={step} value={value}
+                           onChange={(e) => onChange(parseFloat(e.target.value))} className="cursor-pointer" />
+                </span>
+                {children}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, valueNode }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    {valueNode}
+                </div>
+                <span className="sl-wrap">
+                    <input type="range" min={min} max={max} step={step} value={value}
+                           onChange={(e) => onChange(parseFloat(e.target.value))} />
+                </span>
+            </div>
+        );
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').trim();
+                if (norm === '' || norm === '-' || norm === '.' || norm === '-.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt}
+                           style={{ color: 'var(--lab-accent, #c8324a)' }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
 
-        document.getElementById('canvas-abort-button').addEventListener('click', () => {
-            simulationState = 'idle';
-            timer = 0;
-            timeRef = 0;
-            swingCount = 0;
-            swingCountRef = 0;
-            measuredPeriod = null;
-            timingActive = false;
-            waitingForTurningPoint = false;
-            params.initialAngle = 0;
-            updateAngleVisuals();
-            renderUI();
-        });
+        // ── Formelkort med ord-etiketter ──
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const Frac = ({ topLabel, top, bottomLabel, bottom }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl" style={topLabel ? null : { visibility: 'hidden' }}>{topLabel || 'x'}</span>
+                <span className="fnum">{top}</span>
+                <span className="fnum" style={{ alignSelf: 'stretch', textAlign: 'center',
+                                                borderTop: '2px solid currentColor', paddingTop: 3, marginTop: 3 }}>{bottom}</span>
+                <span className="flbl" style={bottomLabel ? null : { visibility: 'hidden' }}>{bottomLabel || 'x'}</span>
+            </div>
+        );
+        const FormulaCard = React.memo(({ l, g, T, gissa }) => (
+            <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-3 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <span className="fk-grupp">
+                <Vbl label="Periodtid"><em>T</em></Vbl>
+                <span className="fnum">=</span>
+                <Vbl label="&nbsp;">2π</Vbl>
+                <span className="fnum">·</span>
+                <span className="rot">
+                    <span className="rot-sign fnum">√</span>
+                    <span className="rot-inner">
+                        <Frac topLabel="Pendellängd" top={<em>l</em>} bottomLabel="Tyngdacceleration" bottom={<em>g</em>} />
+                    </span>
+                </span>
+                </span>
+                <span className="fk-grupp">
+                <span className="fnum">=</span>
+                <Vbl label="&nbsp;">2π</Vbl>
+                <span className="fnum">·</span>
+                <span className="rot">
+                    <span className="rot-sign fnum">√</span>
+                    <span className="rot-inner">
+                        <Frac top={<span>{fmtL(l)}&nbsp;m</span>} bottom={<span>{gissa ? '?' : fmt(g, 2)}&nbsp;m/s²</span>} />
+                    </span>
+                </span>
+                <span className="fnum">=</span>
+                <Vbl label="&nbsp;"><b>{gissa ? '?' : fmt(T, 2) + ' s'}</b></Vbl>
+                </span>
+            </div>
+        ));
 
-        document.getElementById('canvas-timing-button').addEventListener('click', () => {
-            if (simulationState === 'running' && !waitingForTurningPoint && !timingActive) {
-                // Start waiting for next turning point
-                waitingForTurningPoint = true;
-                measuredPeriod = null;
-                renderUI();
-            }
-        });
+        // ═══════════════════════════════════════════════
+        //  Tidtagaren (ljusgrindens display) och avläsningar
+        // ═══════════════════════════════════════════════
+        const Tidtagare = ({ sim, running, onMat, onLagg, harPunkt }) => {
+            const m = sim.meas;
+            let storTid = 0, status = 'Redo.', delta = '';
+            if (m.fas === 'armed') { status = 'Väntar på första passagen'; }
+            else if (m.fas === 'running') { storTid = sim.t - m.t0; status = 'Mäter'; delta = m.n + ' av 10'; }
+            else if (m.fas === 'done') { storTid = m.T10; status = 'Klart'; delta = '10 av 10'; }
+            const aktiv = m.fas === 'armed' || m.fas === 'running';
+            return (
+                <div className="glass-card rounded-xl p-3">
+                    <div className="flbl mb-2">Ljusgrind och tidtagare</div>
+                    <div className="lcd">
+                        <div className="lcd-big">{fmtT(storTid)} s</div>
+                        <div className="lcd-sub"><span>{status}</span><span>{delta}</span></div>
+                    </div>
+                    {m.fas === 'done' && (
+                        <p className="anm mt-2">
+                            Tio svängningar tog {fmt(m.T10, 2)} s, så <em>T</em> = {fmt(m.T10, 2)} s / 10 = <b>{fmt(m.T10 / 10, 3)} s</b>.
+                        </p>
+                    )}
+                    <div className="flex gap-2 mt-2 flex-wrap">
+                        <button className="btn-toggle flex-1" onClick={onMat}>{aktiv ? 'Avbryt mätningen' : 'Mät 10 svängningar'}</button>
+                        <button className="btn-toggle flex-1" disabled={m.fas !== 'done' || m.added} onClick={onLagg}>
+                            {m.added ? 'Punkten ligger i diagrammet' : 'Lägg mätpunkt i diagrammet'}
+                        </button>
+                    </div>
+                </div>
+            );
+        };
 
-        document.getElementById('controls-container').addEventListener('click', (e) => {
-            if (e.target.id === 'start-button' || e.target.closest('#start-button')) {
-                if (params.initialAngle >= 0.5 && simulationState === 'idle') {
-                    simulationState = 'running';
-                    timer = 0;
-                    timeRef = 0;
-                    swingCount = 0;
-                    swingCountRef = 0;
-                    measuredPeriod = null;
-                    updateAngleVisuals(); // Clear angle visuals when starting
-                    renderUI();
+        const Avlasning = ({ sim, P, gissa }) => {
+            const m = sim.meas;
+            const Tf = 2 * Math.PI * Math.sqrt(P.l / P.g);
+            const klar = m.fas === 'done' && m.snap;
+            const Tm = klar ? m.T10 / 10 : null;
+            const Tfm = klar ? 2 * Math.PI * Math.sqrt(m.snap.l / m.snap.g) : null;
+            const avv = klar ? (Tm / Tfm - 1) * 100 : null;
+            return (
+                <div className="glass-card rounded-xl p-3">
+                    <div className="flbl mb-2">Avläsning</div>
+                    <div className="grid grid-cols-3 gap-2 rd">
+                        <div className="rd"><b>{fmtL(P.l)} m</b><span>pendellängd <em>l</em></span></div>
+                        <div className="rd"><b>{fmt(Math.abs(sim.th) / DEG, 1)}°</b><span>utslag nu <em>α</em></span></div>
+                        <div className="rd"><b>{klar ? fmt(Tm, 3) + ' s' : '–'}</b><span>uppmätt <em>T</em></span></div>
+                        <div className="rd"><b>{gissa ? '?' : fmt(Tf, 3) + ' s'}</b><span>formelns <em>T</em></span></div>
+                        <div className="rd"><b>{gissa || !klar ? '–' : (avv >= 0 ? '+' : '−') + fmt(Math.abs(avv), 1) + ' %'}</b><span>avvikelse</span></div>
+                        <div className="rd"><b>{klar ? fmt(m.snap.a0, 0) + '°' : '–'}</b><span>utslag vid mätningen</span></div>
+                    </div>
+                </div>
+            );
+        };
+
+        // ── Gissa-läget: okänd planet ──
+        const GissaPanel = ({ st, setSt, onKolla, onNy, harMatning }) => (
+            <div className="glass-card rounded-xl p-3">
+                <div className="flbl mb-2">Okänd planet</div>
+                <p className="anm mb-2">
+                    Pendeln hänger på en okänd himlakropp. Mät <em>T</em> för en eller flera längder, bestäm <em>g</em> och skriv in det. Ljusgrinden och diagrammet är dina enda mätinstrument.
+                </p>
+                {!st.klar ? (
+                    <div className="flex items-center gap-2 flex-wrap">
+                        <span style={{ fontSize: 13 }}><em>g</em> =</span>
+                        <input className="txt-in" type="text" inputMode="decimal" value={st.input} aria-label="Ditt värde på g"
+                               onChange={(e) => setSt({ ...st, input: e.target.value })}
+                               onKeyDown={(e) => { if (e.key === 'Enter') onKolla(); }} />
+                        <span style={{ fontSize: 13 }}>m/s²</span>
+                        <button className="btn-toggle btn-prim" disabled={!harMatning} onClick={onKolla}>Kontrollera</button>
+                    </div>
+                ) : (
+                    <button className="btn-toggle btn-prim" onClick={onNy}>Ny okänd planet</button>
+                )}
+                {!harMatning && !st.klar && <p className="anm mt-1">Gör en mätning först.</p>}
+                {st.fb && <div className={'anm mt-2 ' + (st.fb.ok ? 'svar-ok' : 'svar-fel')} dangerouslySetInnerHTML={{ __html: st.fb.html }} />}
+                <div className="flex gap-4 mt-2" style={{ fontSize: 13 }}>
+                    <span>Poäng: <b>{st.poang}</b></span>
+                    <span>Svit: <b>{st.svit}</b></span>
+                </div>
+            </div>
+        );
+
+        // ═══════════════════════════════════════════════
+        //  Huvudappen
+        // ═══════════════════════════════════════════════
+        const slumpaPlanet = (not) => {
+            let p;
+            do { p = OKANDA[Math.floor(Math.random() * OKANDA.length)]; } while (not && p.namn === not);
+            return p;
+        };
+
+        const App = () => {
+            const [l, setL] = useState(1.0);
+            const [a0, setA0] = useState(10);
+            const [sgn, setSgn] = useState(1);
+            const [m, setM] = useState(100);
+            const [plats, setPlats] = useState('jorden');
+            const [gFri, setGFri] = useState(9.82);
+            const [lage, setLage] = useState('fri');                 // 'fri' | 'gissa'
+            const [okand, setOkand] = useState(() => slumpaPlanet());
+            const [running, setRunning] = useState(true);
+            const [speed, setSpeed] = useState(1);
+            const [show, setShow] = useState({ krafter: false, kurva: true, ghost: true });
+            const [diagMode, setDiagMode] = useState('T2');
+            const [ghost, setGhost] = useState(null);
+            const [forsok, setForsok] = useState(null);
+            const [pts, setPts] = useState([]);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [narrow, setNarrow] = useState(() => window.matchMedia('(max-width: 600px)').matches);
+            const [gst, setGst] = useState({ input: '', fb: null, forsok: 0, klar: false, poang: 0, svit: 0 });
+            const [, force] = useReducer((x) => x + 1, 0);
+
+            const gissa = lage === 'gissa';
+            const g = gissa ? okand.g : (plats === 'valfri' ? gFri : PLATSER.find((p) => p.id === plats).g);
+            const P = { l, m, g, a0, sgn, ghost };
+
+            const simRef = useRef(nySim());
+            const Pref = useRef(P); Pref.current = P;
+            const runRef = useRef(running); runRef.current = running;
+            const spdRef = useRef(speed); spdRef.current = speed;
+            const dragRef = useRef(false);
+            const svgRef = useRef(null);
+            const sceneWrapRef = useRef(null);
+
+            // Ändrade villkor: pendlarna återgår till startläget, en pågående mätning avbryts.
+            const ghostKey = ghost ? ghost.l + '|' + ghost.a0 : '-';
+            useEffect(() => {
+                const s = simRef.current;
+                s.th = sgn * a0 * DEG; s.om = 0; s.t = 0;
+                if (ghost) { s.thB = sgn * ghost.a0 * DEG; s.omB = 0; }
+                if (s.meas.fas === 'armed' || s.meas.fas === 'running') s.meas = nyMatning();
+                force();
+            }, [l, a0, sgn, g, ghostKey]);
+
+            // g ändras (plats): mätserien hör till en viss tyngdacceleration
+            useEffect(() => { setPts([]); simRef.current.meas = nyMatning(); }, [g]);
+
+            // animationsloop
+            useEffect(() => {
+                let raf, last = performance.now();
+                const loop = (now) => {
+                    const dt = Math.min(0.05, (now - last) / 1000);
+                    last = now;
+                    const s = simRef.current;
+                    if (runRef.current && !dragRef.current) {
+                        framat(s, Pref.current, dt * spdRef.current);
+                        force();
+                    } else if (now - s.flash < 260) force();
+                    raf = requestAnimationFrame(loop);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, []);
+
+            // fullskärm och smal skärm
+            useEffect(() => {
+                const handler = () => {
+                    const w = sceneWrapRef.current;
+                    setIsFullscreen(!!w && (document.fullscreenElement === w || document.webkitFullscreenElement === w));
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                const mq = window.matchMedia('(max-width: 600px)');
+                const mqh = () => setNarrow(mq.matches);
+                mq.addEventListener('change', mqh);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                    mq.removeEventListener('change', mqh);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            // ── Åtgärder ──
+            const rensaForsok = () => setForsok(null);
+            const andraL = (v) => { setL(Math.max(LMIN, Math.min(LMAX, v))); rensaForsok(); };
+            const andraA0 = (v) => { setA0(Math.max(1, Math.min(A0MAX, Math.round(v)))); rensaForsok(); };
+            const andraM = (v) => { setM(Math.max(MMIN, Math.min(MMAX, Math.round(v)))); };
+            const valjPlats = (id) => { setPlats(id); rensaForsok(); };
+            const tShow = (k) => setShow((sh) => ({ ...sh, [k]: !sh[k] }));
+            const tillbaka = () => {
+                const s = simRef.current;
+                s.th = sgn * a0 * DEG; s.om = 0; s.t = 0;
+                if (ghost) { s.thB = sgn * ghost.a0 * DEG; s.omB = 0; }
+                if (s.meas.fas === 'armed' || s.meas.fas === 'running') s.meas = nyMatning();
+                setRunning(false); force();
+            };
+            const primar = () => {
+                setRunning((r) => !r);
+            };
+            const primarText = running ? 'Pausa' : (simRef.current.t === 0 ? 'Släpp pendeln' : 'Fortsätt');
+
+            const valjForsok = (f) => {
+                setL(f.set.l); setA0(f.set.a0); setM(f.set.m); setSgn(1);
+                if (f.set.plats !== plats) setPlats(f.set.plats);
+                setGhost(f.ghost); setShow((sh) => ({ ...sh, ghost: true }));
+                setForsok(f.id);
+                setRunning(true);
+                simRef.current.meas = nyMatning();
+            };
+            const valjLage = (nytt) => {
+                if (nytt === lage) return;
+                setLage(nytt); setForsok(null); setGhost(null);
+                setL(1.0); setA0(10); setM(100); setSgn(1);
+                if (nytt === 'gissa') {
+                    setOkand(slumpaPlanet(okand.namn));
+                    setGst({ input: '', fb: null, forsok: 0, klar: false, poang: gst.poang, svit: gst.svit });
+                } else {
+                    setPlats('jorden');
                 }
-            } else if (e.target.id === 'reset-button' || e.target.closest('#reset-button')) {
-                simulationState = 'idle';
-                timer = 0;
-                timeRef = 0;
-                swingCount = 0;
-                swingCountRef = 0;
-                measuredPeriod = null;
-                params.initialAngle = 0;
-                updateAngleVisuals();
-                renderUI();
-            } else if (e.target.closest('.celestial-button')) {
-                const button = e.target.closest('.celestial-button');
-                if (!button.disabled) {
-                    params.gravity = parseFloat(button.dataset.gravity);
-                    renderUI();
+                setPts([]); simRef.current.meas = nyMatning(); setRunning(true);
+            };
+
+            const matning = () => {
+                const s = simRef.current;
+                if (s.meas.fas === 'armed' || s.meas.fas === 'running') { s.meas = nyMatning(); force(); return; }
+                s.meas = { fas: 'armed', n: 0, t0: 0, dir: 0 };
+                if (!runRef.current) setRunning(true);
+                force();
+            };
+            const laggPunkt = () => {
+                const m2 = simRef.current.meas;
+                if (m2.fas !== 'done' || m2.added) return;
+                m2.added = true;
+                setPts((p) => [...p, { l: m2.snap.l, T: m2.T10 / 10, a0: m2.snap.a0 }].slice(-24));
+                force();
+            };
+
+            const kollaGissning = () => {
+                const v = parseFloat(String(gst.input).replace(',', '.'));
+                const mm = simRef.current.meas;
+                if (!isFinite(v) || v <= 0) {
+                    setGst({ ...gst, fb: { ok: false, html: 'Skriv in ett värde på <em>g</em> i m/s².' } });
+                    return;
                 }
-            }
-        });
-
-        // ── Fullskärmsläge ─────────────────────────────────────────────
-        const fsBtn = document.getElementById('fs-btn');
-        const fsIconExpand = document.getElementById('fs-icon-expand');
-        const fsIconCompress = document.getElementById('fs-icon-compress');
-        const sceneTogglesEl = document.getElementById('scene-toggles');
-        const stSlidersEl = document.getElementById('st-sliders');
-        const stHideBtn = document.getElementById('st-hide');
-        const stShowBtn = document.getElementById('st-show-btn');
-
-        function isFullscreenNow() {
-            return !!(document.fullscreenElement || document.webkitFullscreenElement);
-        }
-
-        function resizeRenderer() {
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-        }
-
-        fsBtn.addEventListener('click', () => {
-            if (isFullscreenNow()) {
-                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
-            } else {
-                (container.requestFullscreen || container.webkitRequestFullscreen).call(container);
-            }
-        });
-
-        function onFullscreenChange() {
-            const fs = isFullscreenNow();
-            fsIconExpand.style.display = fs ? 'none' : '';
-            fsIconCompress.style.display = fs ? '' : 'none';
-            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
-            requestAnimationFrame(resizeRenderer);
-            setTimeout(resizeRenderer, 150);
-        }
-        document.addEventListener('fullscreenchange', onFullscreenChange);
-        document.addEventListener('webkitfullscreenchange', onFullscreenChange);
-
-        // Hopfällning av inställningsrutan: krysset göms rutan, runda
-        // knappen tar tillbaka den (placeringsregeln 2026-08-31).
-        stHideBtn.addEventListener('click', () => {
-            sceneTogglesEl.style.display = 'none';
-            stShowBtn.style.display = 'flex';
-        });
-        stShowBtn.addEventListener('click', () => {
-            sceneTogglesEl.style.display = '';
-            stShowBtn.style.display = 'none';
-        });
-
-        // Synka fullskärmspanelens glidare med parametrar + tillstånd
-        // (samma state som sidopanelen — varje reglage har samma värde överallt)
-        function syncFsControls() {
-            const idle = simulationState === 'idle';
-            const rows = [
-                ['fs-length-slider', 'fs-length-value', params.length, params.length.toFixed(2).replace('.', ',') + ' m'],
-                ['fs-gravity-slider', 'fs-gravity-value', params.gravity, params.gravity.toFixed(2).replace('.', ',') + ' m/s²'],
-                ['fs-mass-slider', 'fs-mass-value', params.mass * 1000, (params.mass * 1000).toFixed(0) + ' g'],
-                ['fs-angle-slider', 'fs-angle-value', params.initialAngle, Math.round(params.initialAngle) + '°'],
-            ];
-            for (const [sliderId, valueId, val, text] of rows) {
-                const s = document.getElementById(sliderId);
-                const t = document.getElementById(valueId);
-                if (s) {
-                    if (document.activeElement !== s) s.value = val;
-                    s.disabled = !idle;
+                const rel = Math.abs(v - okand.g) / okand.g;
+                const sist = (mm.fas === 'done' && mm.snap) ? mm : null;
+                const hur = sist
+                    ? 'Med <em>l</em> = ' + fmtL(sist.snap.l) + ' m och <em>T</em> = ' + fmt(sist.T10 / 10, 3) + ' s ger <em>g</em> = 4π²·<em>l</em>/<em>T</em>² = 4π² · ' + fmtL(sist.snap.l) + ' / ' + fmt(sist.T10 / 10, 3) + '² = ' + fmt(4 * Math.PI * Math.PI * sist.snap.l / Math.pow(sist.T10 / 10, 2), 2) + ' m/s².'
+                    : 'Lös ut <em>g</em> ur <em>T</em> = 2π√(<em>l</em>/<em>g</em>): <em>g</em> = 4π²·<em>l</em>/<em>T</em>².';
+                const stort = sist && sist.snap.a0 > 25
+                    ? ' Mätningen gjordes med ' + sist.snap.a0 + '° utslag. Formeln gäller bara för små utslag, så ett värde från så stort utslag blir för lågt.' : '';
+                if (rel <= 0.06) {
+                    const poang = gst.forsok === 0 ? 3 : 1;
+                    setGst({ ...gst, klar: true, poang: gst.poang + poang, svit: gst.svit + 1,
+                        fb: { ok: true, html: 'Det stämmer. Din pendel hänger på <b>' + okand.namn + '</b>, där <em>g</em> = ' + fmt(okand.g, 2) + ' m/s². ' + hur + ' Du får ' + poang + (poang === 1 ? ' poäng.' : ' poäng.') } });
+                    return;
                 }
-                if (t) t.textContent = text;
-            }
-            // Håll sidopanelens glidare i samma läge
-            const mainRows = [
-                ['length-slider', params.length],
-                ['gravity-slider', params.gravity],
-                ['mass-slider', params.mass * 1000],
-                ['angle-slider', params.initialAngle],
-            ];
-            for (const [id, val] of mainRows) {
-                const el = document.getElementById(id);
-                if (el && document.activeElement !== el) el.value = val;
-            }
-        }
+                if (gst.forsok === 0) {
+                    const dir = v < okand.g ? 'Ditt värde är för litet' : 'Ditt värde är för stort';
+                    setGst({ ...gst, forsok: 1,
+                        fb: { ok: false, html: dir + '. Kontrollera att du kvadrerat <em>T</em> och att längden är mätt till kulans tyngdpunkt. Större <em>g</em> ger kortare period.' + stort + ' Försök en gång till.' } });
+                } else {
+                    setGst({ ...gst, klar: true, svit: 0,
+                        fb: { ok: false, html: 'Det stämmer inte. Pendeln hängde på <b>' + okand.namn + '</b>, där <em>g</em> = ' + fmt(okand.g, 2) + ' m/s². ' + hur + stort } });
+                }
+            };
+            const nyPlanet = () => {
+                setOkand(slumpaPlanet(okand.namn));
+                setGst({ ...gst, input: '', fb: null, forsok: 0, klar: false });
+                setPts([]); simRef.current.meas = nyMatning();
+                setRunning(true); setSgn(1); setA0(10); setL(1.0);
+            };
 
-        stSlidersEl.addEventListener('input', (e) => {
-            if (e.target.id === 'fs-length-slider') {
-                params.length = parseFloat(e.target.value);
-                scene.remove(labStand);
-                labStand = createLabStand(params.length);
-                scene.add(labStand);
-                createPendulum(params.length, params.mass);
-                updateCameraTarget();
-                updateAngleVisuals();
-            } else if (e.target.id === 'fs-gravity-slider') {
-                params.gravity = parseFloat(e.target.value);
-            } else if (e.target.id === 'fs-mass-slider') {
-                params.mass = parseFloat(e.target.value) / 1000;
-                createPendulum(params.length, params.mass);
-            } else if (e.target.id === 'fs-angle-slider') {
-                params.initialAngle = parseFloat(e.target.value);
-                updateAngleVisuals();
-            }
-            updateValueDisplays();
-        });
+            // ── Dra i kulan ──
+            const svgPunkt = (e) => {
+                const svg = svgRef.current;
+                const pt = svg.createSVGPoint();
+                pt.x = e.clientX; pt.y = e.clientY;
+                return pt.matrixTransform(svg.getScreenCTM().inverse());
+            };
+            const dragTill = (e) => {
+                const p = svgPunkt(e);
+                const ang = Math.atan2(p.x - PX, p.y - PY) / DEG;
+                const a = Math.max(1, Math.min(A0MAX, Math.round(Math.abs(ang))));
+                setSgn(ang < 0 ? -1 : 1);
+                setA0(a); rensaForsok();
+            };
+            const dragStart = (e) => {
+                e.preventDefault();
+                e.currentTarget.setPointerCapture(e.pointerId);
+                dragRef.current = true;
+                setRunning(false);
+                dragTill(e);
+            };
+            const dragMove = (e) => { if (dragRef.current) dragTill(e); };
+            const dragEnd = () => {
+                if (!dragRef.current) return;
+                dragRef.current = false;
+                setRunning(true);
+            };
 
-        renderUI();
+            // ── Scenens synliga område ──
+            const sim = simRef.current;
+            let vb = { x: 0, w: 700 };
+            if (narrow) {
+                const lMax = Math.max(l, ghost && show.ghost ? ghost.l : 0);
+                const aMax = Math.max(a0, ghost && show.ghost ? ghost.a0 : 0);
+                const need = lMax * S * Math.sin(aMax * DEG) + 60;
+                const h = Math.max(215, Math.min(350, need));
+                vb = { x: PX - h, w: 2 * h };
+            }
+            const bredFs = isFullscreen && !narrow;
+            const Tformel = 2 * Math.PI * Math.sqrt(l / g);
+
+            // ── Paneler (tidtagare, avläsning, gissa, diagram): hamnar i sidopanelen,
+            //    till vänster i bred fullskärm eller i verktygsrutan på mobil ──
+            const paneler = (
+                <React.Fragment>
+                    <Tidtagare sim={sim} running={running} onMat={matning} onLagg={laggPunkt} />
+                    <Avlasning sim={sim} P={P} gissa={gissa} />
+                    {gissa && <GissaPanel st={gst} setSt={setGst} onKolla={kollaGissning} onNy={nyPlanet}
+                                          harMatning={pts.length > 0 || (sim.meas.fas === 'done')} />}
+                    <Diagram pts={pts} mode={diagMode} g={g} visaKurva={show.kurva} curL={l} gissa={gissa}
+                             onMode={setDiagMode} onClear={() => setPts([])} />
+                </React.Fragment>
+            );
+
+            const reglage = (kompakt) => {
+                const S1 = kompakt ? StSlider : Slider;
+                const wrap = (c) => kompakt ? <div className="st-sliders">{c}</div> : <div>{c}</div>;
+                return wrap(
+                    <React.Fragment>
+                        <S1 label="Pendellängd <em>l</em>" value={l} min={LMIN} max={LMAX} step={0.01} onChange={andraL}
+                            valueNode={<NumInput value={l} min={LMIN} max={LMAX} fmtFn={fmtL} unit="m" onCommit={andraL} />}>
+                            {!kompakt && <NumInput value={l} min={LMIN} max={LMAX} fmtFn={fmtL} unit="m" onCommit={andraL} />}
+                        </S1>
+                        <S1 label="Utslag <em>α</em>" value={a0} min={1} max={A0MAX} step={1} onChange={andraA0}
+                            valueNode={<NumInput value={a0} min={1} max={A0MAX} fmtFn={(x) => fmt(x, 0)} unit="°" onCommit={andraA0} />}>
+                            {!kompakt && <NumInput value={a0} min={1} max={A0MAX} fmtFn={(x) => fmt(x, 0)} unit="°" onCommit={andraA0} />}
+                        </S1>
+                        <S1 label="Massa <em>m</em>" value={m} min={MMIN} max={MMAX} step={10} onChange={andraM}
+                            valueNode={<NumInput value={m} min={MMIN} max={MMAX} fmtFn={(x) => fmt(x, 0)} unit="g" onCommit={andraM} />}>
+                            {!kompakt && <NumInput value={m} min={MMIN} max={MMAX} fmtFn={(x) => fmt(x, 0)} unit="g" onCommit={andraM} />}
+                        </S1>
+                        {!gissa && plats === 'valfri' && (
+                            <S1 label="Tyngdacceleration <em>g</em>" value={gFri} min={1} max={30} step={0.1} onChange={setGFri}
+                                valueNode={<NumInput value={gFri} min={1} max={30} fmtFn={(x) => fmt(x, 1)} unit="m/s²" onCommit={setGFri} />}>
+                                {!kompakt && <NumInput value={gFri} min={1} max={30} fmtFn={(x) => fmt(x, 1)} unit="m/s²" onCommit={setGFri} />}
+                            </S1>
+                        )}
+                    </React.Fragment>
+                );
+            };
+
+            const styrknappar = (
+                <div className="flex gap-2">
+                    <button className="btn-toggle btn-prim flex-1" onClick={primar}>{primarText}</button>
+                    <button className="btn-toggle flex-1" onClick={tillbaka}>Börja om</button>
+                </div>
+            );
+
+            // Inställningsrutan uppe till höger (hopfällbar)
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        <label><input type="checkbox" checked={show.krafter} onChange={() => tShow('krafter')} />
+                            <span className="st-swatch" style={{ background: COL.tyngd }}></span>
+                            <span>Krafter</span></label>
+                        <label><input type="checkbox" checked={show.kurva} onChange={() => tShow('kurva')} disabled={gissa} />
+                            <span className="st-swatch" style={{ background: '#5a6170' }}></span>
+                            <span>Formelns kurva</span></label>
+                        {ghost && (
+                            <label><input type="checkbox" checked={show.ghost} onChange={() => tShow('ghost')} />
+                                <span className="st-swatch" style={{ background: '#2f6fd0' }}></span>
+                                <span>Jämförelsependel B</span></label>
+                        )}
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Tidsförlopp</div>
+                                {[[0.25, 'Långsamt (¼×)'], [1, 'Normalt'], [4, 'Snabbt (4×)']].map(([v, t]) => (
+                                    <label key={v}><input type="radio" name="speed" checked={speed === v} onChange={() => setSpeed(v)} /><span>{t}</span></label>
+                                ))}
+                                <div className="st-title mt">Läge</div>
+                                <label><input type="radio" name="lage" checked={lage === 'fri'} onChange={() => valjLage('fri')} /><span>Fritt laboratorium</span></label>
+                                <label><input type="radio" name="lage" checked={lage === 'gissa'} onChange={() => valjLage('gissa')} /><span>Okänd planet</span></label>
+                                {!gissa && (
+                                    <React.Fragment>
+                                        <div className="st-title mt">Plats</div>
+                                        <select value={plats} onChange={(e) => valjPlats(e.target.value)} aria-label="Plats">
+                                            {PLATSER.map((p) => <option key={p.id} value={p.id}>{p.namn}{p.id !== 'valfri' ? ' (' + fmt(p.g, 2) + ' m/s²)' : ''}</option>)}
+                                        </select>
+                                        <div className="st-title mt">Färdigt försök</div>
+                                        <select value={forsok || ''} onChange={(e) => { const f = FORSOK.find((x) => x.id === e.target.value); if (f) valjForsok(f); }} aria-label="Färdigt försök">
+                                            <option value="">Välj försök</option>
+                                            {FORSOK.map((f) => <option key={f.id} value={f.id}>{f.namn}</option>)}
+                                        </select>
+                                    </React.Fragment>
+                                )}
+                                <div className="st-title mt">Reglage</div>
+                                {reglage(true)}
+                                <div className="st-actions">{styrknappar}</div>
+                                {narrow && <div className="st-panels">{paneler}</div>}
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const forsokObj = FORSOK.find((f) => f.id === forsok);
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html?id=fy2">Fysik nivå 2</a> / Plan matematisk pendel
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Plan matematisk pendel</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 840 }}>
+                            En liten kula i ett tunt snöre svänger fram och tillbaka. Dra i kulan för att välja utslag och släpp.
+                            Ljusgrinden vid jämviktsläget mäter tiden för tio svängningar, och du lägger mätpunkten i diagrammet.
+                            Ändra pendelns längd och mät igen: i diagrammet över <em>T</em>² mot <em>l</em> hamnar punkterna på en rät linje
+                            genom origo, och linjens lutning är 4π²/<em>g</em>. Flytta pendeln till Månen, jämför två pendlar
+                            eller gissa vilken okänd planet den hänger på.
+                        </p>
+
+                        <FormulaCard l={l} g={g} T={Tformel} gissa={gissa} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className={'scene-wrap' + (isFullscreen ? ' is-fs' : '') + (bredFs ? ' fs-bred' : '')}
+                                     data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <Scen svgRef={svgRef} sim={sim} P={P} show={show} compact={narrow} gissa={gissa} vb={vb}
+                                          onDragStart={dragStart} onDragMove={dragMove} onDragEnd={dragEnd} />
+                                    {bredFs && <div className="fs-vanster">{paneler}</div>}
+                                    {!isFullscreen && <div className="scene-hint">
+                                        Dra i kulan för att välja utslag. Pendeln startar när du släpper.
+                                    </div>}
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                <div className="hidden lg:flex flex-col gap-3 mt-3">{paneler}</div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2 flex flex-col gap-3">
+                                <div className="glass-card rounded-xl p-3">
+                                    <div className="flbl mb-2">Läge</div>
+                                    <div className="seg" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                                        <button className={!gissa ? 'active' : ''} onClick={() => valjLage('fri')}>Fritt laboratorium</button>
+                                        <button className={gissa ? 'active' : ''} onClick={() => valjLage('gissa')}>Okänd planet</button>
+                                    </div>
+                                    {!gissa && (
+                                        <React.Fragment>
+                                            <div className="flbl mt-3 mb-2">Färdiga försök</div>
+                                            <div className="forsok">
+                                                {FORSOK.map((f) => (
+                                                    <button key={f.id} className={forsok === f.id ? 'active' : ''} onClick={() => valjForsok(f)}>{f.namn}</button>
+                                                ))}
+                                            </div>
+                                            {forsokObj && <p className="anm mt-2" dangerouslySetInnerHTML={{ __html: forsokObj.text }} />}
+                                        </React.Fragment>
+                                    )}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3">
+                                    <div className="flbl mb-2">Reglage</div>
+                                    {reglage(false)}
+                                    {!gissa && (
+                                        <React.Fragment>
+                                            <div className="flbl mt-1 mb-2">Plats</div>
+                                            <div className="seg mb-3" style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}>
+                                                {PLATSER.map((p) => (
+                                                    <button key={p.id} className={plats === p.id ? 'active' : ''} onClick={() => valjPlats(p.id)}>{p.namn}</button>
+                                                ))}
+                                            </div>
+                                        </React.Fragment>
+                                    )}
+                                    <div className="flbl mb-2">Tidsförlopp</div>
+                                    <div className="seg mb-3" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+                                        {[[0.25, 'Långsamt'], [1, 'Normalt'], [4, 'Snabbt']].map(([v, t]) => (
+                                            <button key={v} className={speed === v ? 'active' : ''} onClick={() => setSpeed(v)}>{t}</button>
+                                        ))}
+                                    </div>
+                                    {styrknappar}
+                                    <p className="anm mt-2">
+                                        Ändrar du längd, utslag eller plats återgår pendeln till startläget.
+                                        Massan påverkar inte rörelsen.
+                                    </p>
+                                </div>
+
+                                <div className="lg:hidden flex flex-col gap-3">{paneler}</div>
+                            </div>
+                        </main>
+
+                        <details className="glass-card rounded-xl p-4 mt-6">
+                            <summary className="accordion-head">
+                                <span>Så hänger det ihop</span>
+                                <span aria-hidden="true">+</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2" style={{ color: 'var(--lab-ink-soft)', fontSize: 14.5, lineHeight: 1.55, paddingLeft: 18, listStyle: 'disc' }}>
+                                <li>Pendellängden <em>l</em> räknas från upphängningspunkten till kulans tyngdpunkt. Därför går snöret ända fram till pricken i kulans mitt, och måttbandets avläsning görs där.</li>
+                                <li>Tyngdkraften <em>F</em><sub>G</sub> delas i en komposant längs snöret och en tangentiell komposant <em>F</em><sub>1</sub> = <em>F</em><sub>G</sub>&thinsp;·&thinsp;sin&nbsp;<em>α</em>. Spännkraften <em>F</em><sub>S</sub> tar upp den första, och bara <em>F</em><sub>1</sub> för pendeln mot jämviktsläget.</li>
+                                <li>Massan ingår inte i formeln. <em>F</em><sub>1</sub> är proportionell mot massan, men det är också kulans tröghet, så massan förkortas bort. Prova försöket med samma längd och olika massa.</li>
+                                <li>Kvadrerar du formeln får du <em>T</em>² = (4π²/<em>g</em>)&thinsp;·&thinsp;<em>l</em>, en rät linje genom origo med lutningen 4π²/<em>g</em>. Läs av lutningen och räkna ut <em>g</em> ur den.</li>
+                                <li>Formeln gäller bara för små utslag, eftersom den bygger på att sin&nbsp;<em>α</em> ≈ <em>α</em> (i radianer). Vid 23° blir felet cirka 1 %, vid 45° cirka 4 % och vid 60° cirka 7 %. Simuleringen räknar rörelsen exakt, så du ser avvikelsen själv.</li>
+                                <li>Sekundpendeln har perioden 2,00 s, så den passerar jämviktsläget en gång per sekund. Vid <em>g</em> = 9,82 m/s² är den knappt en meter lång, <em>l</em> ≈ 0,995 m.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
     <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
     <script src="data/katalog.js"></script>
     <script src="section-nav.js"></script>
     <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->

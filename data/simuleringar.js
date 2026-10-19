@@ -114,7 +114,12 @@ window.SIM_NAMES = {
       kw: ['vågor', 'svängning', 'harmonisk svängning', 'läge', 'elongation', 'hastighet', 'acceleration', 'graf', 'grafer', 'derivata', 'fjäder', 'fjäderpendel', 'vändläge', 'jämviktsläge', 'sinus', 'cosinus', 'amplitud', 'periodtid'] },
   ],
   'fysik2-hookes-lag-app.html?lage=kopplade': 'Kopplade fjädrar',
-  'fysik2-pendel-app.html': 'Plan matematisk pendel',
+  'fysik2-pendel-app.html': [
+    { name: 'Plan matematisk pendel', desc: 'Mät pendelns periodtid med en ljusgrind och lägg mätpunkterna i ett diagram över T mot l och T² mot l, så att tyngdaccelerationen kan läsas av ur lutningen.',
+      kw: ['vågor','pendel','matematisk pendel','plan pendel','periodtid','period','svängningstid','ljusgrind','tidtagare','diagram','lutning','tyngdacceleration','tyngdfaktor','sekundpendel','okänd planet','månen','mars','jupiter','små utslag','harmonisk rörelse','svängning','mätserie','laboration','mekanik'] },
+    { name: 'Pendelvågen i 3D', href: 'fysik2-pendel-3d-app.html', desc: 'Femton pendlar med olika längd släpps samtidigt och bildar ormar och vågor som efter en bestämd tid står i rad igen, och en enda pendel visar krafterna i 3D.',
+      kw: ['vågor','pendel','pendelvåg','pendelvågen','periodtid','matematisk pendel','plan pendel','svängningar','harmonisk svängning','tyngdacceleration','spännkraft','komposanter','krafter','3d','mekanik'] },
+  ],
   'fysik2-resonans-app.html': 'Resonans (driven svängning)',
   'fysik2-staende-vag-app.html': 'Stående våg i sträng',
   'fysik2-vagsimulator.html': 'Vågsimulator',

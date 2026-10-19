@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendelvågen i 3D — Fysiklabbet</title>
+    <meta name="description" content="Femton pendlar hänger bredvid varandra, och ju kortare pendel, desto kortare periodtid. Släpp dem samtidigt och se ormar, vågor och kaos som efter en bestämd tid ordnar sig i en rad igen. Byt himlakropp, utslag och kameravy, eller undersök en enda pendel och dess krafter.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-pendel-3d-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Pendelvågen i 3D — Fysik nivå 2">
+    <meta property="og:description" content="Femton pendlar med olika längd släpps samtidigt och bildar ormar och vågor som efter en bestämd tid ordnar sig i en rad igen. Se att periodtiden beror på pendelns längd.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-pendel-3d-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pendelvågen i 3D — Fysik nivå 2">
+    <meta name="twitter:description" content="Femton pendlar med olika längd släpps samtidigt och bildar ormar och vågor som efter en bestämd tid ordnar sig i en rad igen. Se att periodtiden beror på pendelns längd.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <style>
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+        .fnum em { font-family: 'KaTeX_Math', 'Times New Roman', serif; font-style: italic; }
+        .fnum sub { font-style: normal; font-size: 12px; }
+        @media (max-width: 600px) {
+            .formula-card { justify-content: flex-start; }
+            .formula-card .fnum { font-size: 16px; }
+        }
+
+        /* Scenen: en mörk laborationsscen (labbänk i dagsljus).
+           Canvasen bor i .scene-stage med fast höjd; i fullskärm fyller den
+           ramen. Bakgrunden är en CSS-gradient bakom en genomskinlig
+           WebGL-canvas, så att djupet i rummet inte kostar en enda triangel. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.35);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.10);
+            user-select: none;
+            background: var(--lab-bg, #f3eee4);
+        }
+        .scene-stage {
+            position: relative; height: 540px;
+            background: linear-gradient(180deg, #f7f2e8 0%, #ece3d2 100%);
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap:fullscreen .scene-stage, .scene-wrap:-webkit-full-screen .scene-stage {
+            position: absolute; inset: 0; height: auto;
+        }
+        @media (max-width: 600px) {
+            .scene-stage { height: 400px; }
+            /* Mobil fullskärm: scenen ligger kvar i flödet med en egen höjd,
+               så att sim-dock.js hittar den och lägger verktygen UNDER
+               scenen (en absolut stage hoppas över och verktygen skulle
+               då flöda in över bilden från toppen). */
+            .scene-wrap:fullscreen .scene-stage, .scene-wrap:-webkit-full-screen .scene-stage {
+                position: relative; inset: auto; height: 58vh;
+            }
+        }
+        .scene-wrap canvas { display: block; }
+
+        .vy-btn {
+            position: absolute; top: 66px; left: 14px; z-index: 7;
+            width: 40px; height: 40px; border-radius: 50%;
+            background: rgba(243,238,228,0.92);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            color: var(--lab-ink, #0f1620);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            transition: border-color 0.15s ease;
+        }
+        .vy-btn:hover { border-color: var(--lab-accent, #c8324a); }
+        @media (max-width: 600px) {
+            .vy-btn { top: 50px; width: 32px; height: 32px; }
+            /* I mobilens fullskärm ligger verktygsarket över scenen och rymmer
+               samma kameravyer, så den runda vy-knappen göms där (annars
+               hamnar den ovanpå arkets övre hörn). */
+            .scene-wrap:fullscreen .vy-btn, .scene-wrap:-webkit-full-screen .vy-btn { display: none; }
+        }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #f3eee4;
+            background: rgba(15,22,32,0.72); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+        /* Avläsning uppe till vänster under knapparna: träffräknaren i
+           partikelläget. Ljus text på den mörka scenen, ingen ruta. */
+        .scene-info.si-diskret {
+            position: absolute; top: 116px; left: 16px; z-index: 5;
+            color: var(--lab-ink, #0f1620); font-size: 13px; font-weight: 600;
+            pointer-events: none; background: none; border: none; box-shadow: none;
+        }
+        .scene-info.si-diskret span { display: block; font-weight: 400; font-size: 11.5px; color: var(--lab-ink-soft, #3a4151); }
+        @media (max-width: 600px) {
+            /* På mobil flödar sektion 8 hint och avläsning in i scenramen. Avläsningen
+               hålls kvar som ren text uppe till vänster, och hinten behövs inte. */
+            body.lab-sim .scene-wrap .scene-stage .scene-info.si-diskret {
+                position: absolute; top: 88px; left: 12px; margin: 0; align-self: auto;
+            }
+            body.lab-sim .scene-wrap .scene-stage .scene-hint { display: none; }
+        }
+
+        /* Inställningsrutan uppe till höger: kryssrutor och radioknappar i
+           båda lägena, glidare och styrknappar bara i fullskärm. Hopfällbar
+           via .st-hide/.st-show-btn (centrala klasser i styles-laborans-sim.css). */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 30px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 252px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-actions .btn-toggle { font-size: 13px; padding: 7px 10px; }
+        .scene-toggles .st-views { display: flex; gap: 5px; margin-top: 2px; }
+        .scene-toggles .st-views button { flex: 1; padding: 4px 6px; font-size: 11.5px; }
+
+        /* Samma verktygsval som ett KORT i sidopanelen (normalläget) */
+        .st-panel { display: flex; flex-wrap: wrap; gap: 6px 26px; }
+        .st-panel > div { display: flex; flex-direction: column; gap: 3px; min-width: 150px; }
+        .st-panel .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .st-panel .st-title.mt { margin-top: 7px; }
+        .st-panel label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .st-panel input[type="checkbox"], .st-panel input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .st-panel .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease; font-family: Poppins, sans-serif;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle:disabled { opacity: 0.45; cursor: default; }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-small { padding: 5px 10px; font-size: 12.5px; }
+        .view-grid { display: flex; gap: 6px; }
+        .view-grid button { flex: 1; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; }
+        .num-in { width: 60px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; color: var(--lab-accent, #c8324a); }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        // ── Konstanter ──
+        // Världens enhet är meter. Pendlarna hänger från en bom på höjden BEAM_H
+        // och svänger i planet vinkelrätt mot bommen (z-led). Längderna räknas
+        // till kulans tyngdpunkt, precis som i genomgången.
+        const DEG = Math.PI / 180;
+        const G_EARTH = 9.82;
+        const NP = 15;                 // antal pendlar i pendelvågen
+        const N0 = 12;                 // den längsta pendeln gör N0 svängningar på Γ
+        const PITCH = 0.2;             // avstånd mellan pendlarna (m)
+        const BEAM_H = 3.2;            // bommens höjd över bänken (m)
+        const R_WAVE = 0.065, R_ONE = 0.1;
+        const K_ARROW = 0.1;           // pilarnas skala: 1 N = 0,10 m
+        const BODIES = [
+            { id: 'manen', name: 'Månen', g: 1.62 },
+            { id: 'mars', name: 'Mars', g: 3.71 },
+            { id: 'jorden', name: 'Jorden', g: 9.82 },
+            { id: 'jupiter', name: 'Jupiter', g: 24.8 },
+        ];
+        const INK = '#0f1620', C_FG = '#c02626', C_FS = '#1d4fb8', C_ALFA = '#a8520a';
+
+        // pendel k gör (N0 + k) hela svängningar på Γ, så T = Γ/(N0 + k) och l = g·T²/(4π²)
+        const pendLen = (k, gamma) => G_EARTH * Math.pow(gamma / (2 * Math.PI * (N0 + k)), 2);
+        const hueOf = (k) => (k / (NP - 1)) * 0.78;          // röd till violett
+        const cssHue = (k) => 'hsl(' + Math.round(hueOf(k) * 360) + ' 72% 48%)';
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+        const NB = ' ';
+        const withUnit = (v, d, u) => fmt(v, d) + NB + u;
+
+        // ── Reglage-komponenter ──
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').trim();
+                if (norm === '' || norm === '-' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null) n = Math.max(min, n);
+                if (max != null) n = Math.min(max, n);
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt}
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => setTxt(e.target.value)}
+                           onBlur={() => { setEditing(false); commit(txt); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') { e.target.blur(); } }} />
+                    <span className="num-unit">{unit}</span>
+                </span>
+            );
+        };
+        const Slider = ({ label, sub, value, min, max, step, unit, onChange, decimals = 0 }) => (
+            <div className="p-3 rounded-xl glass-card mb-3">
+                <div className="flex justify-between items-baseline mb-2 gap-2">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
+                           dangerouslySetInnerHTML={{ __html: label }} />
+                    <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, decimals)} unit={unit} onCommit={onChange} />
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="w-full cursor-pointer" />
+                <div className="flex justify-between mt-1 text-xs font-mono" style={{ color: 'var(--lab-ink-muted)' }}>
+                    <span>{fmt(min, decimals)} {unit}</span>
+                    <span>{fmt(max, decimals)} {unit}</span>
+                </div>
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
+                             dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, decimals, unit }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, decimals)} unit={unit} onCommit={onChange} />
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        // ── Etiketter i scenen: sprites med fast storlek på skärmen ──
+        // En etikett byggs av delar: kursiv variabel, index (rakt) eller vanlig text.
+        // Texten ritas i bläck eller i kraftens färg, utan kontur eller halo.
+        function makeLabel(color, fontPx) {
+            const cv = document.createElement('canvas');
+            const ctx = cv.getContext('2d');
+            const H = 96, F = 64, S = 44;
+            const tex = new THREE.CanvasTexture(cv);
+            tex.minFilter = THREE.LinearFilter;
+            const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false, sizeAttenuation: false });
+            const sp = new THREE.Sprite(mat);
+            sp.renderOrder = 10;
+            const fontOf = (p) => p.sub ? '500 ' + S + "px Poppins, sans-serif"
+                : p.i ? 'italic ' + F + "px 'Times New Roman', serif"
+                : '500 ' + F + 'px Poppins, sans-serif';
+            const lab = { sprite: sp, px: fontPx * H / F, aspect: 1, key: '', parts: null };
+            lab.set = (parts) => {
+                const key = JSON.stringify(parts);
+                if (key === lab.key) return;
+                lab.key = key; lab.parts = parts;
+                lab.draw();
+            };
+            lab.draw = () => {
+                if (!lab.parts) return;
+                let w = 16;
+                const ws = lab.parts.map(p => { ctx.font = fontOf(p); const x = ctx.measureText(p.t).width; w += x; return x; });
+                cv.width = Math.ceil(w); cv.height = H;
+                ctx.textBaseline = 'alphabetic';
+                let x = 8;
+                lab.parts.forEach((p, i) => {
+                    ctx.font = fontOf(p);
+                    ctx.fillStyle = color;
+                    ctx.fillText(p.t, x, p.sub ? 76 : 62);
+                    x += ws[i];
+                });
+                tex.needsUpdate = true;
+                lab.aspect = cv.width / H;
+                if (lab.size) lab.size();
+            };
+            return lab;
+        }
+        const V = (t) => ({ t, i: true });        // kursiv variabel
+        const SUB = (t) => ({ t, sub: true });    // index, rakt
+        const TX = (t) => ({ t });                // vanlig text
+
+        // ── Pil i 3D: skaft (heldraget eller streckat) och huvud ──
+        function makeArrow(hex, dashed) {
+            const grp = new THREE.Group();
+            const mat = new THREE.MeshBasicMaterial({ color: hex, depthTest: false, transparent: true });
+            const shaftGeo = new THREE.CylinderGeometry(0.02, 0.02, 1, 10);
+            shaftGeo.translate(0, 0.5, 0);
+            const headGeo = new THREE.ConeGeometry(0.05, 1, 18);
+            const head = new THREE.Mesh(headGeo, mat);
+            head.renderOrder = 6;
+            grp.add(head);
+            const shafts = [];
+            const nS = dashed ? 22 : 1;
+            for (let i = 0; i < nS; i++) {
+                const m = new THREE.Mesh(shaftGeo, mat);
+                m.renderOrder = 6;
+                shafts.push(m); grp.add(m);
+            }
+            const Y = new THREE.Vector3(0, 1, 0), dir = new THREE.Vector3();
+            grp.userData.update = (origin, vec) => {
+                const len = vec.length();
+                if (len < 0.02) { grp.visible = false; return; }
+                grp.visible = true;
+                dir.copy(vec).divideScalar(len);
+                grp.position.copy(origin);
+                grp.quaternion.setFromUnitVectors(Y, dir);
+                const hl = Math.min(0.15, 0.5 * len);
+                const hw = Math.min(1, hl / 0.15);
+                head.scale.set(hw, hl, hw);
+                head.position.set(0, len - hl / 2, 0);
+                const sl = Math.max(0, len - hl);
+                if (!dashed) {
+                    shafts[0].visible = sl > 0.001;
+                    shafts[0].scale.set(1, sl, 1);
+                } else {
+                    const dash = 0.075, gap = 0.05;
+                    let p = 0;
+                    shafts.forEach(m => {
+                        if (p < sl - 0.004) {
+                            const dl = Math.min(dash, sl - p);
+                            m.visible = true; m.position.set(0, p, 0); m.scale.set(0.85, dl, 0.85);
+                            p += dash + gap;
+                        } else m.visible = false;
+                    });
+                }
+            };
+            return grp;
+        }
+
+        // Linje med två ändpunkter som kan flyttas varje bildruta
+        function makeLine2(color, opacity, dashed) {
+            const geo = new THREE.BufferGeometry();
+            const arr = new Float32Array(6);
+            geo.setAttribute('position', new THREE.BufferAttribute(arr, 3));
+            const mat = dashed
+                ? new THREE.LineDashedMaterial({ color, transparent: true, opacity, dashSize: 0.06, gapSize: 0.05 })
+                : new THREE.LineBasicMaterial({ color, transparent: true, opacity });
+            const line = new THREE.Line(geo, mat);
+            line.frustumCulled = false;
+            line.set = (ax, ay, az, bx, by, bz) => {
+                arr[0] = ax; arr[1] = ay; arr[2] = az; arr[3] = bx; arr[4] = by; arr[5] = bz;
+                geo.attributes.position.needsUpdate = true;
+                if (dashed) line.computeLineDistances();
+            };
+            return line;
+        }
+
+        // Mjuk rund fläck (skugga/markering) som textur
+        function blobTexture() {
+            const c = document.createElement('canvas'); c.width = c.height = 64;
+            const g = c.getContext('2d');
+            const gr = g.createRadialGradient(32, 32, 2, 32, 32, 32);
+            gr.addColorStop(0, 'rgba(15,22,32,0.5)'); gr.addColorStop(0.55, 'rgba(15,22,32,0.22)'); gr.addColorStop(1, 'rgba(15,22,32,0)');
+            g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+            return new THREE.CanvasTexture(c);
+        }
+
+        // ── 3D-scenen ──
+        const PendelScene = ({ stateRef, simRef, actionsRef }) => {
+            const mountRef = useRef(null);
+
+            useEffect(() => {
+                const mount = mountRef.current;
+                let width = mount.clientWidth, height = mount.clientHeight;
+
+                const scene = new THREE.Scene();
+                const FOV = 38;
+                const camera = new THREE.PerspectiveCamera(FOV, width / height, 0.05, 200);
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+                renderer.setSize(width, height);
+                renderer.setClearColor(0x000000, 0);
+                mount.appendChild(renderer.domElement);
+
+                const controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.08;
+                controls.minDistance = 1.5;
+                controls.maxDistance = 22;
+                controls.maxPolarAngle = Math.PI * 0.5;
+
+                // Kamerapositioner per läge och vy
+                const applyView = (mode, which) => {
+                    const st = stateRef.current;
+                    let pos, tgt;
+                    if (mode === 'wave') {
+                        if (which === 'ovan') { pos = [0, 7.7, -0.25]; tgt = [0, 0, -0.55]; }
+                        else if (which === 'sidan') { pos = [-7.6, 2.3, 2.4]; tgt = [0, 1.6, 0]; }
+                        else { pos = [-2.4, 3.3, 8.8]; tgt = [0.4, 2.5, 0]; }
+                    } else {
+                        const l = st.len, ty = BEAM_H - l * 0.5, d = 3.8 + 0.9 * l;
+                        if (which === 'snett') { pos = [-d * 0.72, ty + 0.9, d * 0.66]; tgt = [0, ty, 0]; }
+                        else { pos = [-d, ty + 0.1, 1.2]; tgt = [0, ty, 0]; }
+                    }
+                    controls.enableDamping = false;
+                    camera.position.set(...pos);
+                    controls.target.set(...tgt);
+                    controls.update();
+                    controls.enableDamping = true;
+                };
+                actionsRef.current.setView = applyView;
+                applyView(stateRef.current.mode, stateRef.current.view);
+
+                // Ljus: mjukt dagsljus från ovan och ett riktat nyckelljus
+                scene.add(new THREE.HemisphereLight(0xffffff, 0xd8cdb6, 0.95));
+                const key = new THREE.DirectionalLight(0xffffff, 0.65);
+                key.position.set(-4, 9, 6);
+                scene.add(key);
+                const fill = new THREE.DirectionalLight(0xfff4e0, 0.25);
+                fill.position.set(6, 4, -3);
+                scene.add(fill);
+
+                // ── Labbänken ──
+                const bench = new THREE.Mesh(new THREE.BoxGeometry(7, 0.12, 7),
+                    new THREE.MeshStandardMaterial({ color: 0xeee6d3, roughness: 0.95, metalness: 0 }));
+                bench.position.set(0, -0.06, 0);
+                scene.add(bench);
+                const benchEdge = new THREE.LineSegments(new THREE.EdgesGeometry(bench.geometry),
+                    new THREE.LineBasicMaterial({ color: 0x8a7f69, transparent: true, opacity: 0.5 }));
+                benchEdge.position.copy(bench.position);
+                scene.add(benchEdge);
+                const gridFine = new THREE.GridHelper(7, 28, 0xcdbfa5, 0xdacfb8);
+                gridFine.position.y = 0.003;
+                gridFine.material.transparent = true; gridFine.material.opacity = 0.7;
+                scene.add(gridFine);
+                const gridMeter = new THREE.GridHelper(7, 7, 0xa89a7e, 0xa89a7e);
+                gridMeter.position.y = 0.004;
+                gridMeter.material.transparent = true; gridMeter.material.opacity = 0.6;
+                scene.add(gridMeter);
+
+                // ── Bom och stativ ──
+                const woodMat = new THREE.MeshStandardMaterial({ color: 0xb98a55, roughness: 0.7, metalness: 0.05 });
+                const steelMat = new THREE.MeshStandardMaterial({ color: 0x8d949f, roughness: 0.4, metalness: 0.6 });
+                const beam = new THREE.Mesh(new THREE.BoxGeometry(1, 0.1, 0.1), woodMat);
+                beam.position.set(0, BEAM_H + 0.05, 0);
+                scene.add(beam);
+                const poles = [], feet = [];
+                [0, 1].forEach(() => {
+                    const p = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 3.5, 16), steelMat);
+                    p.position.y = 1.75; scene.add(p); poles.push(p);
+                    const f = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.045, 1.1), steelMat);
+                    f.position.y = 0.0225; scene.add(f); feet.push(f);
+                });
+                const layoutBeam = (mode) => {
+                    if (mode === beamKey) return;
+                    beamKey = mode;
+                    if (mode === 'wave') {
+                        const w = NP * PITCH + 0.2;
+                        beam.scale.x = w; beam.position.x = 0;
+                        poles[0].position.x = -(w / 2 + 0.035); poles[1].position.x = w / 2 + 0.035;
+                        poles[1].visible = feet[1].visible = true;
+                    } else {
+                        // en pendel: bommen är en kort arm ut från ett stativ bakom pendeln
+                        beam.scale.x = 1.3; beam.position.x = 0.55;
+                        poles[0].position.x = 1.235;
+                        poles[1].visible = feet[1].visible = false;
+                    }
+                    feet[0].position.x = poles[0].position.x; feet[1].position.x = poles[1].position.x;
+                };
+
+                const blobTex = blobTexture();
+
+                // ── Pendelvågen ──
+                const waveGrp = new THREE.Group();
+                scene.add(waveGrp);
+                const bobGeoW = new THREE.SphereGeometry(R_WAVE, 28, 18);
+                const bobs = [], threads = [], blobs = [], segs = [];
+                for (let k = 0; k < NP; k++) {
+                    const c = new THREE.Color().setHSL(hueOf(k), 0.72, 0.5);
+                    const b = new THREE.Mesh(bobGeoW, new THREE.MeshStandardMaterial({ color: c, roughness: 0.3, metalness: 0.15 }));
+                    waveGrp.add(b); bobs.push(b);
+                    const th = makeLine2(0x4a505c, 0.9, false);
+                    waveGrp.add(th); threads.push(th);
+                    const bl = new THREE.Mesh(new THREE.PlaneGeometry(1, 1),
+                        new THREE.MeshBasicMaterial({ map: blobTex, transparent: true, depthWrite: false }));
+                    bl.rotation.x = -Math.PI / 2; bl.position.y = 0.008;
+                    waveGrp.add(bl); blobs.push(bl);
+                    if (k < NP - 1) {
+                        const sg = new THREE.Mesh(new THREE.BoxGeometry(1, 0.006, 0.014),
+                            new THREE.MeshBasicMaterial({ color: 0x0f1620, transparent: true, opacity: 0.6 }));
+                        sg.position.y = 0.012;
+                        waveGrp.add(sg); segs.push(sg);
+                    }
+                }
+                const labLong = makeLabel(INK, 20), labShort = makeLabel(INK, 20);
+                labLong.sprite.center.set(0, 0.5); labShort.sprite.center.set(0, 0.5);
+                waveGrp.add(labLong.sprite); waveGrp.add(labShort.sprite);
+
+                // ── En enda pendel med krafter ──
+                const oneGrp = new THREE.Group();
+                scene.add(oneGrp);
+                const bobOne = new THREE.Mesh(new THREE.SphereGeometry(R_ONE, 36, 24),
+                    new THREE.MeshStandardMaterial({ color: 0x4f7fd6, roughness: 0.3, metalness: 0.2 }));
+                oneGrp.add(bobOne);
+                const threadOne = makeLine2(0x4a505c, 1, false); oneGrp.add(threadOne);
+                const blobOne = new THREE.Mesh(new THREE.PlaneGeometry(1, 1),
+                    new THREE.MeshBasicMaterial({ map: blobTex, transparent: true, depthWrite: false }));
+                blobOne.rotation.x = -Math.PI / 2; blobOne.position.y = 0.008; oneGrp.add(blobOne);
+                const vertRef = makeLine2(0x0f1620, 0.55, true); oneGrp.add(vertRef);
+                const guide1 = makeLine2(0x0f1620, 0.4, true), guide2 = makeLine2(0x0f1620, 0.4, true);
+                oneGrp.add(guide1); oneGrp.add(guide2);
+                const pathGeo = new THREE.BufferGeometry();
+                const PATH_N = 61;
+                pathGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(PATH_N * 3), 3));
+                const pathLine = new THREE.Line(pathGeo, new THREE.LineDashedMaterial({ color: 0x0f1620, transparent: true, opacity: 0.4, dashSize: 0.05, gapSize: 0.05 }));
+                pathLine.frustumCulled = false; oneGrp.add(pathLine);
+                const ARC_N = 25;
+                const arcGeo = new THREE.BufferGeometry();
+                arcGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(ARC_N * 3), 3));
+                const arcLine = new THREE.Line(arcGeo, new THREE.LineBasicMaterial({ color: 0xa8520a }));
+                arcLine.frustumCulled = false; oneGrp.add(arcLine);
+                const arrFS = makeArrow(0x1d4fb8, false), arrFG = makeArrow(0xc02626, false);
+                const arrC = makeArrow(0xc02626, true), arrT = makeArrow(0xc02626, true);
+                [arrFS, arrFG, arrC, arrT].forEach(a => oneGrp.add(a));
+                const cgDot = new THREE.Mesh(new THREE.SphereGeometry(0.026, 14, 10),
+                    new THREE.MeshBasicMaterial({ color: 0x0f1620, depthTest: false }));
+                cgDot.renderOrder = 8; oneGrp.add(cgDot);
+                const lbFS = makeLabel(C_FS, 22), lbFG = makeLabel(C_FG, 22), lbC = makeLabel(C_FG, 22),
+                      lbT = makeLabel(C_FG, 22), lbA = makeLabel(C_ALFA, 22);
+                lbFS.set([V('F'), SUB('S')]); lbFG.set([V('F'), SUB('G')]);
+                lbC.set([V('F'), SUB('G'), TX(' cos '), V('α')]); lbT.set([V('F'), SUB('1')]); lbA.set([V('α')]);
+                [lbFS, lbFG, lbC, lbT, lbA].forEach(l => oneGrp.add(l.sprite));
+
+                const allLabels = [labLong, labShort, lbFS, lbFG, lbC, lbT, lbA];
+                const sizeOne = (l) => {
+                    const h = l.px * 2 * Math.tan(FOV * Math.PI / 360) / height;
+                    l.sprite.scale.set(h * l.aspect, h, 1);
+                };
+                allLabels.forEach(l => { l.size = () => sizeOne(l); l.draw(); });
+                const sizeLabels = () => allLabels.forEach(sizeOne);
+                if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => allLabels.forEach(l => l.draw()));
+
+                // ── Uppdatering av scenen ur simuleringens tillstånd ──
+                const P = new THREE.Vector3(), O = new THREE.Vector3(), W = new THREE.Vector3();
+                const US = new THREE.Vector3(), TT = new THREE.Vector3();
+                let pathKey = '', lastWaveKey = '', viewTop = false, beamKey = '';
+                const update = () => {
+                    const st = stateRef.current, sim = simRef.current;
+                    const wave = st.mode === 'wave';
+                    waveGrp.visible = wave; oneGrp.visible = !wave;
+                    if (wave) {
+                        layoutBeam('wave');
+                        const key = st.gamma + '|' + st.g;
+                        for (let k = 0; k < NP; k++) {
+                            const l = pendLen(k, st.gamma), x = (k - (NP - 1) / 2) * PITCH;
+                            const a = sim.a[k], s = Math.sin(a), c = Math.cos(a);
+                            const by = BEAM_H - l * c, bz = l * s;
+                            bobs[k].position.set(x, by, bz);
+                            threads[k].set(x, BEAM_H, 0, x, by, bz);
+                            const sc = 0.15 + 0.1 * Math.min(1, by / BEAM_H);
+                            blobs[k].position.set(x, 0.008, bz); blobs[k].scale.set(sc, sc, 1);
+                            blobs[k].visible = st.show.skugga;
+                            if (k < NP - 1) {
+                                const l2 = pendLen(k + 1, st.gamma), x2 = x + PITCH, z2 = l2 * Math.sin(sim.a[k + 1]);
+                                const dx = x2 - x, dz = z2 - bz, d = Math.hypot(dx, dz);
+                                segs[k].position.set((x + x2) / 2, 0.012, (bz + z2) / 2);
+                                segs[k].rotation.y = -Math.atan2(dz, dx);
+                                segs[k].scale.x = d;
+                                segs[k].visible = st.show.vag;
+                            }
+                        }
+                        const narrow = width / height < 1.2;
+                        if (key + narrow !== lastWaveKey) {
+                            lastWaveKey = key + narrow;
+                            const l0 = pendLen(0, st.gamma), l1 = pendLen(NP - 1, st.gamma);
+                            const T0 = 2 * Math.PI * Math.sqrt(l0 / st.g), T1 = 2 * Math.PI * Math.sqrt(l1 / st.g);
+                            labLong.set([TX(narrow ? 'Längst: ' : ''), V('l'), TX(' = ' + fmt(l0, 2) + ' m, '), V('T'), TX(' = ' + fmt(T0, 2) + ' s')]);
+                            labShort.set([TX(narrow ? 'Kortast: ' : ''), V('l'), TX(' = ' + fmt(l1, 2) + ' m, '), V('T'), TX(' = ' + fmt(T1, 2) + ' s')]);
+                        }
+                        const xe = (NP - 1) / 2 * PITCH, lE = pendLen(NP - 1, st.gamma);
+                        labLong.sprite.position.set(-xe + 0.14, BEAM_H - pendLen(0, st.gamma) - 0.3, 0);
+                        if (narrow) labShort.sprite.position.set(-xe + 0.14, BEAM_H - pendLen(0, st.gamma) - 0.72, 0);
+                        else labShort.sprite.position.set(xe + 0.36, BEAM_H - lE - 0.02, 0);
+                        labLong.sprite.visible = labShort.sprite.visible = st.show.etiketter && !viewTop;
+                    } else {
+                        layoutBeam('one');
+                        const l = st.len, a = sim.sa, s = Math.sin(a), c = Math.cos(a);
+                        const by = BEAM_H - l * c, bz = l * s;
+                        bobOne.position.set(0, by, bz);
+                        threadOne.set(0, BEAM_H, 0, 0, by, bz);
+                        blobOne.position.set(0, 0.008, bz); blobOne.scale.set(0.4, 0.4, 1);
+                        blobOne.visible = st.show.skugga;
+                        // krafterna (skalenliga: 1 N = K_ARROW m)
+                        const m = st.mass, g = st.g;
+                        const FG = m * g, FSv = m * g * c + m * l * sim.sw * sim.sw, F1 = m * g * s, FC = m * g * c;
+                        P.set(0, by, bz);
+                        US.set(0, c, -s);            // från kulan mot upphängningen
+                        TT.set(0, s, c);             // tangent, växande vinkel
+                        const showF = st.show.kraft, showK = st.show.komp;
+                        arrFG.visible = showF; cgDot.visible = showF; arrFS.visible = showF;
+                        arrC.visible = showF && showK; arrT.visible = showF && showK;
+                        guide1.visible = guide2.visible = showF && showK;
+                        if (showF) {
+                            arrFG.userData.update(P, W.set(0, -FG * K_ARROW, 0));
+                            cgDot.position.copy(P);
+                            O.copy(P).addScaledVector(US, R_ONE);
+                            arrFS.userData.update(O, W.copy(US).multiplyScalar(FSv * K_ARROW));
+                            if (showK) {
+                                arrC.userData.update(P, W.copy(US).multiplyScalar(-FC * K_ARROW));
+                                arrT.userData.update(P, W.copy(TT).multiplyScalar(-F1 * K_ARROW));
+                                const cx = -US.x * FC * K_ARROW, cy = -US.y * FC * K_ARROW, cz = -US.z * FC * K_ARROW;
+                                const tx = -TT.x * F1 * K_ARROW, ty = -TT.y * F1 * K_ARROW, tz = -TT.z * F1 * K_ARROW;
+                                guide1.set(P.x + cx + tx, P.y + cy + ty, P.z + cz + tz, P.x + cx, P.y + cy, P.z + cz);
+                                guide2.set(P.x + cx + tx, P.y + cy + ty, P.z + cz + tz, P.x + tx, P.y + ty, P.z + tz);
+                            }
+                        }
+                        // etiketter vid pilspetsarna, utåt från kulan
+                        const sg = a >= 0 ? 1 : -1;
+                        const lab = st.show.etiketter;
+                        lbFS.sprite.visible = lbFG.sprite.visible = showF && lab;
+                        lbC.sprite.visible = showF && showK && lab;
+                        lbT.sprite.visible = showF && showK && lab && Math.abs(F1) * K_ARROW > 0.1;
+                        const dS = R_ONE + FSv * K_ARROW + 0.14;
+                        lbFS.sprite.position.set(0, by + US.y * dS, bz + US.z * dS + sg * 0.2);
+                        lbFG.sprite.position.set(0, by - FG * K_ARROW - 0.14, bz - sg * 0.22);
+                        const dC = FC * K_ARROW + 0.14;
+                        lbC.sprite.position.set(0, by - US.y * dC + TT.y * sg * 0.3, bz - US.z * dC + TT.z * sg * 0.3);
+                        const dT = Math.abs(F1) * K_ARROW + 0.2;
+                        lbT.sprite.position.set(0, by - TT.y * dT * sg, bz - TT.z * dT * sg);
+                        // lodlinje och vinkelbåge
+                        vertRef.set(0, BEAM_H, 0, 0, BEAM_H - l - 0.15, 0);
+                        const ra = Math.min(0.5, 0.45 * l), pa = arcGeo.attributes.position.array;
+                        arcLine.visible = Math.abs(a) > 0.02;
+                        for (let i = 0; i < ARC_N; i++) {
+                            const th = a * i / (ARC_N - 1);
+                            pa[i * 3] = 0; pa[i * 3 + 1] = BEAM_H - ra * Math.cos(th); pa[i * 3 + 2] = ra * Math.sin(th);
+                        }
+                        arcGeo.attributes.position.needsUpdate = true;
+                        lbA.sprite.visible = arcLine.visible && lab;
+                        const rl = ra + 0.2;
+                        lbA.sprite.position.set(0, BEAM_H - rl * Math.cos(a * 0.5), rl * Math.sin(a * 0.5) + 0.04 * sg);
+                        // banan
+                        const pk = l + '|' + sim.a0;
+                        if (pk !== pathKey) {
+                            pathKey = pk;
+                            const pp = pathGeo.attributes.position.array;
+                            for (let i = 0; i < PATH_N; i++) {
+                                const th = sim.a0 * (2 * i / (PATH_N - 1) - 1);
+                                pp[i * 3] = 0; pp[i * 3 + 1] = BEAM_H - l * Math.cos(th); pp[i * 3 + 2] = l * Math.sin(th);
+                            }
+                            pathGeo.attributes.position.needsUpdate = true;
+                            pathLine.computeLineDistances();
+                        }
+                        pathLine.visible = st.show.bana;
+                    }
+                };
+
+                // ── Fysiken: exakt rörelse, α'' = −(g/l) · sin α, med RK4 ──
+                const sim = simRef.current;
+                const rk = (a, w, gl, h) => {
+                    const k1a = w, k1w = -gl * Math.sin(a);
+                    const k2a = w + 0.5 * h * k1w, k2w = -gl * Math.sin(a + 0.5 * h * k1a);
+                    const k3a = w + 0.5 * h * k2w, k3w = -gl * Math.sin(a + 0.5 * h * k2a);
+                    const k4a = w + h * k3w, k4w = -gl * Math.sin(a + h * k3a);
+                    sim.na = a + h / 6 * (k1a + 2 * k2a + 2 * k3a + k4a);
+                    sim.nw = w + h / 6 * (k1w + 2 * k2w + 2 * k3w + k4w);
+                };
+                const advance = (dtSim) => {
+                    const st = stateRef.current;
+                    const steps = Math.max(1, Math.ceil(dtSim / 0.004)), h = dtSim / steps;
+                    for (let n = 0; n < steps; n++) {
+                        if (st.mode === 'wave') {
+                            for (let k = 0; k < NP; k++) {
+                                rk(sim.a[k], sim.w[k], st.g / pendLen(k, st.gamma), h);
+                                sim.a[k] = sim.na; sim.w[k] = sim.nw;
+                            }
+                        } else {
+                            const prev = sim.sa;
+                            rk(sim.sa, sim.sw, st.g / st.len, h);
+                            sim.sa = sim.na; sim.sw = sim.nw;
+                            // periodtiden mäts mellan två passager genom jämviktsläget (uppåtgående)
+                            if (prev < 0 && sim.sa >= 0) {
+                                const tc = sim.t + (n + 1) * h - h * sim.sa / (sim.sa - prev);
+                                if (sim.lastCross != null) sim.tMeas = tc - sim.lastCross;
+                                sim.lastCross = tc;
+                            }
+                        }
+                    }
+                    sim.t += dtSim;
+                };
+                actionsRef.current.reset = () => {
+                    const st = stateRef.current;
+                    sim.t = 0;
+                    sim.a0 = (st.mode === 'wave' ? st.alphaW : st.alphaS) * DEG;
+                    for (let k = 0; k < NP; k++) { sim.a[k] = sim.a0; sim.w[k] = 0; }
+                    sim.sa = sim.a0; sim.sw = 0; sim.tMeas = null; sim.lastCross = null;
+                    update();
+                };
+                actionsRef.current.reset();
+                window.__pendel = { sim, stateRef, advance };   // testkrok för verifiering
+
+                // ── Animation ──
+                let raf = null, last = 0, visible = true;
+                const tick = (now) => {
+                    raf = requestAnimationFrame(tick);
+                    if (!visible) { last = 0; return; }
+                    const dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
+                    last = now;
+                    const st = stateRef.current;
+                    if (st.running && dt > 0) advance(dt * st.speed);
+                    update();
+                    controls.update();
+                    // sett rakt uppifrån skymmer bommen pendlarna, så den göms då
+                    const top = controls.getPolarAngle() < 0.4; viewTop = top;
+                    beam.visible = !top; poles[0].visible = !top; poles[1].visible = !top && beamKey === 'wave'; feet[0].visible = !top; feet[1].visible = !top && beamKey === 'wave';
+                    renderer.render(scene, camera);
+                };
+                raf = requestAnimationFrame(tick);
+                const io = new IntersectionObserver((e) => { visible = e[0].isIntersecting; }, { threshold: 0.02 });
+                io.observe(mount);
+
+                const onResize = () => {
+                    width = mount.clientWidth; height = mount.clientHeight;
+                    if (!width || !height) return;
+                    camera.aspect = width / height;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(width, height);
+                    sizeLabels();
+                };
+                sizeLabels();
+                const ro = new ResizeObserver(onResize);
+                ro.observe(mount);
+
+                return () => {
+                    cancelAnimationFrame(raf);
+                    io.disconnect(); ro.disconnect();
+                    controls.dispose();
+                    renderer.dispose();
+                    if (renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
+                };
+            }, []);
+
+            return <div ref={mountRef} style={{ position: 'absolute', inset: 0 }} />;
+        };
+
+        // ── Diagram: periodtid mot längd för pendlarna ──
+        const PlotTL = ({ gamma, g }) => {
+            const W = 300, H = 200, pl = 44, pr = 12, pt = 14, pb = 40;
+            const lmax = pendLen(0, gamma), Tmax = 2 * Math.PI * Math.sqrt(lmax / g);
+            const niceUp = (v, s) => Math.ceil(v / s) * s;
+            const xs = lmax > 1.2 ? 0.5 : 0.25, ys = Tmax > 4 ? 2 : 1;
+            const xM = niceUp(lmax * 1.05, xs), yM = niceUp(Tmax * 1.05, ys);
+            const X = (l) => pl + (l / xM) * (W - pl - pr), Y = (T) => H - pb - (T / yM) * (H - pb - pt);
+            const curve = [];
+            for (let i = 0; i <= 60; i++) {
+                const l = xM * i / 60;
+                curve.push(X(l).toFixed(1) + ',' + Y(2 * Math.PI * Math.sqrt(l / g)).toFixed(1));
+            }
+            const xt = [], yt = [];
+            for (let v = 0; v <= xM + 1e-9; v += xs) xt.push(v);
+            for (let v = 0; v <= yM + 1e-9; v += ys) yt.push(v);
+            return (
+                <svg viewBox={'0 0 ' + W + ' ' + H} width="100%" role="img"
+                     aria-label="Diagram över periodtiden mot pendelns längd" style={{ display: 'block' }}>
+                    {yt.map(v => <line key={'gy' + v} x1={pl} x2={W - pr} y1={Y(v)} y2={Y(v)} stroke="rgba(15,22,32,0.10)" />)}
+                    <line x1={pl} y1={H - pb} x2={W - pr + 4} y2={H - pb} stroke="#0f1620" strokeWidth="1.4" />
+                    <line x1={pl} y1={H - pb} x2={pl} y2={pt - 4} stroke="#0f1620" strokeWidth="1.4" />
+                    <path d={'M' + (W - pr - 3) + ' ' + (H - pb - 3.5) + ' L' + (W - pr + 4) + ' ' + (H - pb) + ' L' + (W - pr - 3) + ' ' + (H - pb + 3.5) + ' Z'} fill="#0f1620" />
+                    <path d={'M' + (pl - 3.5) + ' ' + (pt + 3) + ' L' + pl + ' ' + (pt - 4) + ' L' + (pl + 3.5) + ' ' + (pt + 3) + ' Z'} fill="#0f1620" />
+                    {xt.map(v => (
+                        <g key={'x' + v}>
+                            <line x1={X(v)} x2={X(v)} y1={H - pb} y2={H - pb + 4} stroke="#0f1620" />
+                            <text x={X(v)} y={H - pb + 17} textAnchor="middle" fontSize="12" fill="#3a4151">{fmt(v, v % 1 ? 2 : 0)}</text>
+                        </g>
+                    ))}
+                    {yt.map(v => (
+                        <g key={'y' + v}>
+                            <line x1={pl - 4} x2={pl} y1={Y(v)} y2={Y(v)} stroke="#0f1620" />
+                            <text x={pl - 7} y={Y(v) + 4} textAnchor="end" fontSize="12" fill="#3a4151">{fmt(v, 0)}</text>
+                        </g>
+                    ))}
+                    <polyline points={curve.join(' ')} fill="none" stroke="rgba(15,22,32,0.55)" strokeWidth="1.6" strokeDasharray="5 3" />
+                    {Array.from({ length: NP }, (_, k) => {
+                        const l = pendLen(k, gamma);
+                        return <circle key={k} cx={X(l)} cy={Y(2 * Math.PI * Math.sqrt(l / g))} r="5" fill={cssHue(k)} stroke="#0f1620" strokeWidth="0.8" />;
+                    })}
+                    <text x={(pl + W - pr) / 2} y={H - 6} textAnchor="middle" fontSize="13" fill="#0f1620">
+                        <tspan fontStyle="italic" fontFamily="'Times New Roman', serif" fontSize="15">l</tspan> (m)
+                    </text>
+                    <text x="12" y={(pt + H - pb) / 2} textAnchor="middle" fontSize="13" fill="#0f1620"
+                          transform={'rotate(-90 12 ' + ((pt + H - pb) / 2) + ')'}>
+                        <tspan fontStyle="italic" fontFamily="'Times New Roman', serif" fontSize="15">T</tspan> (s)
+                    </text>
+                </svg>
+            );
+        };
+
+        // ── Appen ──
+        const VIEWS_BY_MODE = { wave: ['snett', 'ovan', 'sidan'], one: ['sidan', 'snett'] };
+        const VIEW_NAMES = { snett: 'Snett framifrån', ovan: 'Rakt ovanifrån', sidan: 'Från sidan' };
+        const VIEW_SHORT = { snett: 'Snett', ovan: 'Ovanifrån', sidan: 'Sidan' };
+
+        const App = () => {
+            const [mode, setMode] = useState('wave');
+            const [gamma, setGamma] = useState(30);
+            const [bodyId, setBodyId] = useState('jorden');
+            const [alphaW, setAlphaW] = useState(8);
+            const [alphaS, setAlphaS] = useState(30);
+            const [len, setLen] = useState(1.2);
+            const [mass, setMass] = useState(0.5);
+            const [speed, setSpeed] = useState(1);
+            const [running, setRunning] = useState(true);
+            const [show, setShow] = useState({ skugga: true, vag: true, etiketter: true, kraft: true, komp: true, bana: true });
+            const [view, setViewState] = useState('snett');
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [ui, setUi] = useState({ t: 0, sa: 0, sw: 0, tMeas: null });
+            const sceneWrapRef = useRef(null);
+
+            const g = BODIES.find(b => b.id === bodyId).g;
+            const alpha0 = mode === 'wave' ? alphaW : alphaS;
+            const setAlpha0 = (v) => (mode === 'wave' ? setAlphaW(v) : setAlphaS(v));
+
+            const stateRef = useRef({});
+            stateRef.current = { mode, gamma, g, alphaW, alphaS, len, mass, speed, running, show, view };
+            const simRef = useRef({
+                t: 0, a: new Float64Array(NP), w: new Float64Array(NP), sa: 0, sw: 0, a0: 0,
+                na: 0, nw: 0, tMeas: null, lastCross: null,
+            });
+            const actionsRef = useRef({});
+
+            // Nytt försök (pendlarna släpps om) när något som styr rörelsen ändras
+            useEffect(() => {
+                if (actionsRef.current.reset) actionsRef.current.reset();
+            }, [mode, gamma, g, alphaW, alphaS, len]);
+            useEffect(() => {
+                if (actionsRef.current.setView) actionsRef.current.setView(mode, view);
+            }, [mode, view]);
+
+            useEffect(() => {
+                const id = setInterval(() => {
+                    const s = simRef.current;
+                    setUi(u => (u.t === s.t && u.sa === s.sa && u.tMeas === s.tMeas) ? u : { t: s.t, sa: s.sa, sw: s.sw, tMeas: s.tMeas });
+                }, 120);
+                return () => clearInterval(id);
+            }, []);
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current);
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+            const tShow = (k) => setShow(s => ({ ...s, [k]: !s[k] }));
+            const reset = () => { if (actionsRef.current.reset) actionsRef.current.reset(); setRunning(false); setUi(u => ({ ...u, t: 0 })); };
+            const chooseMode = (m) => {
+                if (m === mode) return;
+                setMode(m);
+                setViewState(m === 'wave' ? 'snett' : 'sidan');
+                setRunning(true);
+            };
+            const setView = (v) => setViewState(v);
+            const views = VIEWS_BY_MODE[mode];
+            const nextView = () => setView(views[(views.indexOf(view) + 1) % views.length]);
+            const playLabel = running ? 'Paus' : (ui.t === 0 ? 'Släpp' : 'Fortsätt');
+
+            // Härledda värden
+            const lens = useMemo(() => Array.from({ length: NP }, (_, k) => pendLen(k, gamma)), [gamma]);
+            const gammaP = gamma * Math.sqrt(G_EARTH / g);
+            const tMod = gammaP > 0 ? ui.t % gammaP : 0;
+            const nextRe = ui.t === 0 ? gammaP : gammaP - tMod;
+            const Tform = mode === 'wave' ? 2 * Math.PI * Math.sqrt(lens[0] / g) : 2 * Math.PI * Math.sqrt(len / g);
+            const aDeg = ui.sa / DEG;
+            const FG = mass * g, FC = FG * Math.cos(ui.sa), F1 = FG * Math.sin(ui.sa);
+            const FS = FG * Math.cos(ui.sa) + mass * len * ui.sw * ui.sw;
+            const corr = (() => {                                              // exakt periodtid / småvinkelformeln
+                let a = 1, b = Math.cos(alpha0 * DEG / 2);
+                for (let i = 0; i < 8; i++) { const an = (a + b) / 2; b = Math.sqrt(a * b); a = an; }
+                return 1 / a;
+            })();
+
+            const Readout = ({ label, value, unit, accent }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-bold text-sm" style={{ color: accent ? 'var(--lab-accent)' : 'var(--lab-ink)' }}>
+                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+            );
+
+            const modeBlock = () => (
+                <React.Fragment>
+                    <div className="st-title">Läge</div>
+                    <label><input type="radio" name="pendel-lage" checked={mode === 'wave'} onChange={() => chooseMode('wave')} /><span>Pendelvågen, femton pendlar</span></label>
+                    <label><input type="radio" name="pendel-lage" checked={mode === 'one'} onChange={() => chooseMode('one')} /><span>En pendel med krafter</span></label>
+                </React.Fragment>
+            );
+            const visaBlock = () => (
+                <React.Fragment>
+                    <div className="st-title mt">Visa</div>
+                    {mode === 'wave' ? (
+                        <React.Fragment>
+                            <label><input type="checkbox" checked={show.vag} onChange={() => tShow('vag')} /><span className="st-swatch" style={{ background: '#0f1620' }}></span><span>Vågformen på bänken</span></label>
+                            <label><input type="checkbox" checked={show.skugga} onChange={() => tShow('skugga')} /><span className="st-swatch" style={{ background: '#8a8f99' }}></span><span>Skuggor</span></label>
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            <label><input type="checkbox" checked={show.kraft} onChange={() => tShow('kraft')} /><span className="st-swatch" style={{ background: C_FS }}></span><span>Krafterna <em>F</em><sub>S</sub> och <em>F</em><sub>G</sub></span></label>
+                            <label><input type="checkbox" checked={show.komp} onChange={() => tShow('komp')} /><span className="st-swatch" style={{ background: C_FG }}></span><span>Komposanter av <em>F</em><sub>G</sub></span></label>
+                            <label><input type="checkbox" checked={show.bana} onChange={() => tShow('bana')} /><span className="st-swatch" style={{ background: '#8a8f99' }}></span><span>Banan</span></label>
+                            <label><input type="checkbox" checked={show.skugga} onChange={() => tShow('skugga')} /><span className="st-swatch" style={{ background: '#8a8f99' }}></span><span>Skugga</span></label>
+                        </React.Fragment>
+                    )}
+                    <label><input type="checkbox" checked={show.etiketter} onChange={() => tShow('etiketter')} /><span>Etiketter</span></label>
+                </React.Fragment>
+            );
+            const bodyButtons = (small) => (
+                <div className="view-grid" style={{ flexWrap: 'wrap' }}>
+                    {BODIES.map(b => (
+                        <button key={b.id} className={'btn-toggle btn-small' + (bodyId === b.id ? ' active' : '')}
+                                style={small ? { padding: '4px 6px', fontSize: 11.5 } : null}
+                                onClick={() => setBodyId(b.id)}>{b.name}</button>
+                    ))}
+                </div>
+            );
+
+            const sliderSet = (Comp) => (
+                <React.Fragment>
+                    {mode === 'wave' ? (
+                        <Comp label="Mönstrets tid (<em>Γ</em>)" sub="Tiden på Jorden. Längderna är valda så att pendel nummer <em>k</em> gör 12 + <em>k</em> hela svängningar på den. Ändrar du tiden byts längderna."
+                              value={gamma} min={20} max={40} step={1} unit="s" onChange={setGamma} decimals={0} />
+                    ) : (
+                        <React.Fragment>
+                            <Comp label="Pendellängd (<em>l</em>)" sub="Mätt till kulans tyngdpunkt."
+                                  value={len} min={0.3} max={2.5} step={0.05} unit="m" onChange={setLen} decimals={2} />
+                            <Comp label="Massa (<em>m</em>)" sub="Påverkar krafterna men inte periodtiden."
+                                  value={mass} min={0.1} max={1} step={0.05} unit="kg" onChange={setMass} decimals={2} />
+                        </React.Fragment>
+                    )}
+                    <Comp label="Utslag (<em>α</em>)" sub={mode === 'wave' ? 'Formeln för <em>T</em> gäller vid små utslag. Prova 40° och se mönstret förlora sin ordning.' : 'Vid stora utslag blir periodtiden längre än formeln ger.'}
+                          value={alpha0} min={2} max={mode === 'wave' ? 40 : 70} step={1} unit="°" onChange={setAlpha0} decimals={0} />
+                    <Comp label="Tidsfart" sub="Under 1 går det i slow motion."
+                          value={speed} min={0.1} max={4} step={0.1} unit="×" onChange={setSpeed} decimals={1} />
+                </React.Fragment>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" />
+                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" />
+                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                <path d="M6 6l12 12M18 6L6 18" />
+                            </svg>
+                        </button>
+                        {modeBlock()}
+                        {visaBlock()}
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">
+                                    {sliderSet((p) => <StSlider {...p} sub={undefined} />)}
+                                </div>
+                                <div className="st-title mt">Himlakropp</div>
+                                {bodyButtons(true)}
+                                <div className="st-title mt">Kameravy</div>
+                                <div className="st-views">
+                                    {views.map(v => <button key={v} className="btn-toggle" onClick={() => setView(v)}>{VIEW_SHORT[v]}</button>)}
+                                </div>
+                                <div className="st-actions">
+                                    <button className="btn-toggle" onClick={() => setRunning(r => !r)}>{playLabel}</button>
+                                    <button className="btn-toggle" onClick={reset}>Börja om</button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const FormulaVbl = ({ label, sym }) => (
+                <div style={{ textAlign: 'center' }}>
+                    <div className="flbl mb-1">{label}</div>
+                    <div className="fnum">{sym}</div>
+                    <div className="flbl mt-1" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</div>
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Pendelvågen i 3D
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Pendelvågen i 3D</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            Femton pendlar hänger bredvid varandra, och varje pendel är en aning kortare än grannen.
+                            Eftersom <strong>kortare pendel ger kortare periodtid</strong> hamnar de snabbt ur takt:
+                            kulorna bildar ormar, vågor och till synes kaos. Längderna är räknade så att pendel nummer <em>k</em>{' '}
+                            hinner göra precis 12 + <em>k</em> hela svängningar på samma tid <em>Γ</em>, och då står alla
+                            kulor i rad igen. Välj <strong>Rakt ovanifrån</strong> för att se vågformen, byt himlakropp
+                            och se hur tiden förlängs, eller undersök <strong>en enda pendel</strong> och dess krafter.
+                        </p>
+
+                        {/* Formelkort med ord-etiketter */}
+                        <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-8 gap-y-4 formula-card">
+                            <div className="flex items-center gap-3">
+                                <FormulaVbl label="Periodtid" sym={<em>T</em>} />
+                                <span className="fnum">=</span>
+                                <span className="fnum">2π</span>
+                                <span className="fnum">⋅</span>
+                                <span className="fnum" style={{ fontSize: 34, lineHeight: 1, marginRight: -4 }}>√</span>
+                                <div style={{ borderTop: '2px solid currentColor', paddingTop: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    <div style={{ textAlign: 'center' }}>
+                                        <div className="flbl mb-1">Pendellängd</div>
+                                        <div className="fnum"><em>l</em></div>
+                                    </div>
+                                    <div style={{ borderTop: '2px solid currentColor', width: '100%', margin: '3px 0' }}></div>
+                                    <div style={{ textAlign: 'center' }}>
+                                        <div className="fnum"><em>g</em></div>
+                                        <div className="flbl mt-1">Tyngdacceleration</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="text-sm" style={{ color: 'var(--lab-ink-soft)', maxWidth: 480 }}>
+                                {mode === 'wave'
+                                    ? <span>Längsta pendeln har <em>l</em> = {fmt(lens[0], 2)} m och <em>g</em> = {fmt(g, 2)} m/s², så
+                                        <em> T</em> = {fmt(Tform, 2)} s. Den kortaste har <em>l</em> = {fmt(lens[NP - 1], 2)} m och
+                                        <em> T</em> = {fmt(2 * Math.PI * Math.sqrt(lens[NP - 1] / g), 2)} s. Pendelns massa och utslag ingår inte i formeln.</span>
+                                    : <span>Med <em>l</em> = {fmt(len, 2)} m och <em>g</em> = {fmt(g, 2)} m/s² ger formeln
+                                        <em> T</em> = {fmt(Tform, 2)} s. Den gäller vid små utslag. Pendelns massa ingår inte.</span>}
+                            </div>
+                        </div>
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-3/5 order-1">
+                                <div className={"scene-wrap" + (isFullscreen ? " is-fs" : "")} ref={sceneWrapRef} data-theme="ljusPapper">
+                                    <div className="scene-stage">
+                                        <PendelScene stateRef={stateRef} simRef={simRef} actionsRef={actionsRef} />
+                                        <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                                title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                            {isFullscreen ? (
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                                                </svg>
+                                            ) : (
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                                                </svg>
+                                            )}
+                                        </button>
+                                        <button className="vy-btn" onClick={nextView} aria-label="Byt kameravy"
+                                                title={'Byt kameravy: nu ' + VIEW_NAMES[view].toLowerCase() + ', nästa ' + VIEW_NAMES[views[(views.indexOf(view) + 1) % views.length]].toLowerCase()}>
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M2 12h4"/><path d="M18 12h4"/><circle cx="12" cy="12" r="4"/>
+                                            </svg>
+                                        </button>
+                                        <div className="scene-info si-diskret">
+                                            <div>{mode === 'wave' ? 'Tid sedan släppet ' + fmt(ui.t, 1) + ' s' : 'Tid ' + fmt(ui.t, 1) + ' s'}</div>
+                                            {mode === 'wave' && <span>Alla i rad igen om {fmt(nextRe, 1)}{NB}s</span>}
+                                        </div>
+                                        <div className="scene-hint">Dra för att vrida kameran, rulla för att zooma</div>
+
+                                        <div className="fs-quick">
+                                            <button className="fq-play" onClick={() => setRunning(r => !r)}
+                                                    aria-label={playLabel} title={playLabel}>
+                                                {running ? (
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                        <rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>
+                                                    </svg>
+                                                ) : (
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+                                                )}
+                                            </button>
+                                            <div className="fq-rows">
+                                                <div className="fq-row">
+                                                    <span className="fq-lbl">Tidsfart</span>
+                                                    <input type="range" min={0.1} max={4} step={0.1} value={speed}
+                                                           onChange={e => setSpeed(parseFloat(e.target.value))} aria-label="Tidsfart" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {sceneToggles()}
+                                </div>
+                            </div>
+
+                            <div className="lg:w-2/5 order-2">
+                                <div className="flex gap-2 mb-3">
+                                    <button className="btn-toggle flex-1" onClick={() => setRunning(r => !r)}>{playLabel}</button>
+                                    <button className="btn-toggle flex-1" onClick={reset}>Börja om</button>
+                                </div>
+                                {sliderSet(Slider)}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Himlakropp (tyngdacceleration <em>g</em>)</h3>
+                                    {bodyButtons(false)}
+                                    <div className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
+                                        {mode === 'wave'
+                                            ? <span>Pendlarna är byggda för Jorden. På {BODIES.find(b => b.id === bodyId).name} är <em>g</em> = {fmt(g, 2)} m/s², så varje <em>T</em> blir {fmt(Math.sqrt(G_EARTH / g), 2)} gånger så lång och hela mönstret tar {fmt(gammaP, 0)}{NB}s.</span>
+                                            : <span>Det är tyngdaccelerationen <em>g</em> = {fmt(g, 2)} m/s² som dras in i formeln.</span>}
+                                    </div>
+                                </div>
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Kameravy</h3>
+                                    <div className="view-grid">
+                                        {views.map(v => (
+                                            <button key={v} className={'btn-toggle btn-small' + (view === v ? ' active' : '')} onClick={() => setView(v)}>{VIEW_NAMES[v]}</button>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Avläsningar</h3>
+                                    {mode === 'wave' ? (
+                                        <React.Fragment>
+                                            <div className="grid grid-cols-2 gap-2">
+                                                <Readout label="Tid sedan släppet" value={fmt(ui.t, 1)} unit="s" />
+                                                <Readout label="Alla i rad igen om" value={fmt(nextRe, 1)} unit="s" accent />
+                                                <Readout label="Återföreningstid" value={fmt(gammaP, 1)} unit="s" />
+                                                <Readout label="Periodtidens avvikelse vid utslaget" value={(corr >= 1.0005 ? '+' : '') + fmt((corr - 1) * 100, 1)} unit="%" />
+                                            </div>
+                                            <div style={{ height: 8, borderRadius: 4, background: 'rgba(15,22,32,0.12)', marginTop: 10, overflow: 'hidden' }}>
+                                                <div style={{ height: '100%', width: (100 * (ui.t === 0 ? 0 : tMod / gammaP)) + '%', background: 'var(--lab-accent)' }}></div>
+                                            </div>
+                                            <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>Stapeln fylls tills pendlarna står i rad igen.</div>
+                                        </React.Fragment>
+                                    ) : (
+                                        <div className="grid grid-cols-2 gap-2">
+                                            <Readout label="Utslag <em>α</em>" value={fmt(aDeg, 0)} unit="°" />
+                                            <Readout label="Tyngdkraft <em>F</em><sub>G</sub> = <em>m</em> · <em>g</em>" value={fmt(FG, 2)} unit="N" />
+                                            <Readout label="Spännkraft <em>F</em><sub>S</sub>" value={fmt(FS, 2)} unit="N" accent />
+                                            <Readout label="Tangentiell komposant <em>F</em><sub>1</sub> = <em>F</em><sub>G</sub> · sin <em>α</em>" value={fmt(Math.abs(F1), 2)} unit="N" />
+                                            <Readout label="Komposant längs snöret <em>F</em><sub>G</sub> · cos <em>α</em>" value={fmt(FC, 2)} unit="N" />
+                                            <Readout label="Periodtid, formeln" value={fmt(Tform, 2)} unit="s" />
+                                            <Readout label="Periodtid, uppmätt" value={ui.tMeas == null ? 'väntar' : fmt(ui.tMeas, 2)} unit={ui.tMeas == null ? '' : 's'} accent />
+                                        </div>
+                                    )}
+                                    {mode === 'one' && <div className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>Pilarnas längd är proportionell mot kraften: 1 N motsvarar 10 cm.</div>}
+                                </div>
+                                {mode === 'wave' && (
+                                    <div className="glass-card rounded-xl p-3 mb-3">
+                                        <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Periodtid mot längd</h3>
+                                        <PlotTL gamma={gamma} g={g} />
+                                        <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
+                                            Varje prick är en pendel, med samma färg som kulan. Dubbel längd ger inte dubbel periodtid, utan <em>T</em> växer med kvadratroten ur <em>l</em>.
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </main>
+
+                        {mode === 'wave' && (
+                            <div className="glass-card rounded-xl p-3 mt-6" style={{ overflowX: 'auto' }}>
+                                <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Pendlarna</h3>
+                                <table className="text-sm font-mono" style={{ borderCollapse: 'collapse', width: '100%', minWidth: 460, color: 'var(--lab-ink)' }}>
+                                    <thead>
+                                        <tr style={{ textAlign: 'right', color: 'var(--lab-ink-muted)' }}>
+                                            <th style={{ textAlign: 'left', padding: '3px 6px' }}>Nr</th>
+                                            <th style={{ padding: '3px 6px' }}>Längd <em>l</em> (m)</th>
+                                            <th style={{ padding: '3px 6px' }}>Periodtid <em>T</em> (s)</th>
+                                            <th style={{ padding: '3px 6px' }}>Svängningar på <em>Γ</em></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {lens.map((l, k) => (
+                                            <tr key={k} style={{ textAlign: 'right', borderTop: '1px solid var(--lab-line)' }}>
+                                                <td style={{ textAlign: 'left', padding: '3px 6px' }}>
+                                                    <span style={{ display: 'inline-block', width: 11, height: 11, borderRadius: '50%', background: cssHue(k), marginRight: 8, verticalAlign: -1 }}></span>{k + 1}
+                                                </td>
+                                                <td style={{ padding: '3px 6px' }}>{fmt(l, 3)}</td>
+                                                <td style={{ padding: '3px 6px' }}>{fmt(2 * Math.PI * Math.sqrt(l / g), 3)}</td>
+                                                <td style={{ padding: '3px 6px' }}>{N0 + k}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
+
+                        <div className="grid md:grid-cols-2 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Varför står de i rad igen?</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Pendel nummer <em>k</em> har periodtiden <em>T</em> = <em>Γ</em>/(12 + <em>k</em>), så den hinner göra ett helt antal
+                                    svängningar på <em>Γ</em>. Alla pendlar är då tillbaka i sitt startläge samtidigt, även om de
+                                    mitt i förloppet svänger åt helt olika håll. Efter halva tiden bildar kulorna två vågor, och
+                                    vid andra bråkdelar av <em>Γ</em> syns fler och fler små vågor tills det ser slumpmässigt ut.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Små utslag, annars driver mönstret</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Formeln <em>T</em> = 2π · √(<em>l</em>/<em>g</em>) gäller bara när utslaget är litet. Vid 8° är
+                                    felet runt 0,1 %, och pendlarna kommer tillbaka i rad. Dra utslaget mot 40°: periodtiden växer
+                                    med några procent, de långa och korta pendlarna får olika stort fel, och när tiden
+                                    <em> Γ</em> gått står kulorna inte längre exakt i rad.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4 md:col-span-2">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Prova själv</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Släpp pendlarna och välj <strong>Rakt ovanifrån</strong>: den svarta linjen på bänken är vågformen.
+                                    Välj sedan <strong>Månen</strong>. Samma pendlar svänger långsammare, eftersom <em>g</em> är mindre, men mönstret
+                                    återkommer ändå, bara senare. Byt till <strong>En pendel med krafter</strong>, ge den ett stort utslag och följ
+                                    spännkraften <em>F</em><sub>S</sub>: den är större i lägsta punkten än när pendeln står stilla. Tyngdkraften <em>F</em><sub>G</sub> delas i en
+                                    komposant längs snöret och en tangentiell komposant <em>F</em><sub>1</sub>, som är den kraft som driver pendeln mot jämviktsläget.
+                                    Teorin finns i genomgången{' '}
+                                    <a className="underline" href="katalog.html?id=fy2-2.5">Plan matematisk pendel</a>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

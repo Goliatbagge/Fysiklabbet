@@ -13871,7 +13871,7 @@
      * Båda operationerna på ett steg skrivs som EN väggpost: -2x+6. */
     var vagg = !!cfg.vagg;
     var xw = Math.max(padL + T.adv('2x+3y-6=0'),
-                      padL + 30 + T.adv('3y=-2x+6')) + 0.9 * F;
+                      padL + T.adv('3y=-2x+6')) + 0.9 * F;
 
     tanke(20, [
       [['k syns bara när ekvationen']],
@@ -13897,14 +13897,14 @@
       y += 2.6 * F;
     } else {
       y += 2.6 * F;
-      xx = T.str('2x+3y-6', padL + 30, y);
+      xx = T.str('2x+3y-6', padL, y);
       var xb1 = T.str('-2x+6', xx, y, BLUE);
       xx = T.str('=0', xb1, y);
       T.str('-2x+6', xx, y, BLUE);
       T.stepEnd();
       y += 2.6 * F;
     }
-    T.str('3y=-2x+6', padL + 30, y);
+    T.str('3y=-2x+6', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -13916,7 +13916,7 @@
       T.stepEnd();
     } else {
       y += 3.4 * F;
-      xx = T.fracH('3y', '3', padL + 30, y, null, BLUE);
+      xx = T.fracH('3y', '3', padL, y, null, BLUE);
       xx = T.str('=', xx, y);
       xx = T.fracH('−2x', '3', xx, y, null, BLUE);
       xx = T.str('+', xx, y);
@@ -13929,7 +13929,7 @@
       [['6 delat med 3 är 2.']]
     ], 1.05);
     y += vagg ? 3.2 * F : 3.8 * F;
-    xx = T.str('y=-', padL + 30, y);
+    xx = T.str('y=-', padL, y);
     xx = T.fracH('2', '3', xx, y);
     T.str('x+2', xx, y);
     T.stepEnd();

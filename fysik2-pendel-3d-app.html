@@ -951,12 +951,12 @@
             const [mode, setMode] = useState('wave');
             const [gamma, setGamma] = useState(30);
             const [bodyId, setBodyId] = useState('jorden');
-            const [alphaW, setAlphaW] = useState(8);
+            const [alphaW, setAlphaW] = useState(20);
             const [alphaS, setAlphaS] = useState(30);
             const [len, setLen] = useState(1.2);
             const [mass, setMass] = useState(0.5);
             const [speed, setSpeed] = useState(1);
-            const [running, setRunning] = useState(true);
+            const [running, setRunning] = useState(false);   // i vila tills eleven trycker Släpp
             const [show, setShow] = useState({ skugga: true, vag: true, etiketter: true, kraft: true, komp: true, bana: true });
             const [view, setViewState] = useState('snett');
             const [isFullscreen, setIsFullscreen] = useState(false);
@@ -1015,7 +1015,7 @@
                 if (m === mode) return;
                 setMode(m);
                 setViewState(m === 'wave' ? 'snett' : 'sidan');
-                setRunning(true);
+                setRunning(false);
             };
             const setView = (v) => setViewState(v);
             const views = VIEWS_BY_MODE[mode];
@@ -1024,18 +1024,21 @@
 
             // Härledda värden
             const lens = useMemo(() => Array.from({ length: NP }, (_, k) => pendLen(k, gamma)), [gamma]);
-            const gammaP = gamma * Math.sqrt(G_EARTH / g);
+            const corr = (() => {                                              // exakt periodtid / småvinkelformeln
+                let a = 1, b = Math.cos(alpha0 * DEG / 2);
+                for (let i = 0; i < 8; i++) { const an = (a + b) / 2; b = Math.sqrt(a * b); a = an; }
+                return 1 / a;
+            })();
+            // Alla pendlar släpps från samma vinkel, så varje periodtid blir lika
+            // många procent längre vid stort utslag. Kvoterna mellan dem ändras
+            // inte, och mönstret återkommer exakt, bara efter Γ · corr.
+            const gammaP = gamma * Math.sqrt(G_EARTH / g) * (mode === 'wave' ? corr : 1);
             const tMod = gammaP > 0 ? ui.t % gammaP : 0;
             const nextRe = ui.t === 0 ? gammaP : gammaP - tMod;
             const Tform = mode === 'wave' ? 2 * Math.PI * Math.sqrt(lens[0] / g) : 2 * Math.PI * Math.sqrt(len / g);
             const aDeg = ui.sa / DEG;
             const FG = mass * g, FC = FG * Math.cos(ui.sa), F1 = FG * Math.sin(ui.sa);
             const FS = FG * Math.cos(ui.sa) + mass * len * ui.sw * ui.sw;
-            const corr = (() => {                                              // exakt periodtid / småvinkelformeln
-                let a = 1, b = Math.cos(alpha0 * DEG / 2);
-                for (let i = 0; i < 8; i++) { const an = (a + b) / 2; b = Math.sqrt(a * b); a = an; }
-                return 1 / a;
-            })();
 
             const Readout = ({ label, value, unit, accent }) => (
                 <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
@@ -1095,8 +1098,8 @@
                                   value={mass} min={0.1} max={1} step={0.05} unit="kg" onChange={setMass} decimals={2} />
                         </React.Fragment>
                     )}
-                    <Comp label="Utslag (<em>α</em>)" sub={mode === 'wave' ? 'Formeln för <em>T</em> gäller vid små utslag. Prova 40° och se mönstret förlora sin ordning.' : 'Vid stora utslag blir periodtiden längre än formeln ger.'}
-                          value={alpha0} min={2} max={mode === 'wave' ? 40 : 70} step={1} unit="°" onChange={setAlpha0} decimals={0} />
+                    <Comp label="Utslag (<em>α</em>)" sub={mode === 'wave' ? 'Vid stort utslag blir varje periodtid lika många procent längre än formeln ger, så mönstret kommer tillbaka lite senare.' : 'Vid stora utslag blir periodtiden längre än formeln ger.'}
+                          value={alpha0} min={2} max={mode === 'wave' ? 45 : 70} step={1} unit="°" onChange={setAlpha0} decimals={0} />
                     <Comp label="Tidsfart" sub="Under 1 går det i slow motion."
                           value={speed} min={0.1} max={4} step={0.1} unit="×" onChange={setSpeed} decimals={1} />
                 </React.Fragment>
@@ -1363,12 +1366,12 @@
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
-                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Små utslag, annars driver mönstret</h3>
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Stort utslag: samma mönster, lite senare</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Formeln <em>T</em> = 2π · √(<em>l</em>/<em>g</em>) gäller bara när utslaget är litet. Vid 8° är
-                                    felet runt 0,1 %, och pendlarna kommer tillbaka i rad. Dra utslaget mot 40°: periodtiden växer
-                                    med några procent, de långa och korta pendlarna får olika stort fel, och när tiden
-                                    <em> Γ</em> gått står kulorna inte längre exakt i rad.
+                                    Formeln <em>T</em> = 2π · √(<em>l</em>/<em>g</em>) gäller bara när utslaget är litet. Vid 20° är
+                                    den verkliga periodtiden knappt 1 % längre, och vid 45° ungefär 4 % längre. Men alla pendlar
+                                    släpps från samma vinkel, så alla blir lika många procent långsammare. Därför står kulorna
+                                    ändå i rad igen, bara en stund efter <em>Γ</em>. Avläsningen Återföreningstid räknar med det.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4 md:col-span-2">

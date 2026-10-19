@@ -24873,17 +24873,20 @@
     tanke(b2);
     placeString('l', px + 12, py + 84, s * 0.55, F * 0.55, acts, BLUE);
     pause(160);
-    /* måttpil längs bågen mellan vändlägena, med spets i båda ändar */
-    (function () {
+    /* måttpil längs bågen mellan vändlägena. Ena vändläget till det
+     * andra är en halv svängning åt ett håll: spets bara åt höger. Hela
+     * perioden (fram och tillbaka) ritas senare under, med två spetsar. */
+    function bagpil(R, bada) {
       var pts = [];
       for (var i = 0; i <= 16; i++) {
         var a = -vin * 0.86 + (i / 16) * 1.72 * vin;
-        pts.push([px + Math.sin(a) * (PL + 34), py + Math.cos(a) * (PL + 34)]);
+        pts.push([px + Math.sin(a) * R, py + Math.cos(a) * R]);
       }
       for (var k = 0; k + 1 < pts.length; k++) line(pts[k], pts[k + 1], BLUE);
-      arrowHead(pts[0][0], pts[0][1], pts[2][0], pts[2][1], 9, BLUE);
+      if (bada) arrowHead(pts[0][0], pts[0][1], pts[2][0], pts[2][1], 9, BLUE);
       arrowHead(pts[16][0], pts[16][1], pts[14][0], pts[14][1], 9, BLUE);
-    })();
+    }
+    bagpil(PL + 34, false);
     placeString('1,00 s', px - 26, py + PL + 62, s * 0.55, F * 0.55, acts, BLUE);
     stepEnd();
 
@@ -24897,6 +24900,10 @@
     tanke(b3);
     placeString('Halva perioden: 1,00 s', 424, 116, s * 0.62, F * 0.62, acts);
     placeString('T=2·1,00=2,00 s', 424, 146, s * 0.62, F * 0.62, acts);
+    pause(200);
+    /* hela perioden: fram OCH tillbaka, spets i båda ändar */
+    bagpil(PL + 82, true);
+    placeString('2,00 s', px - 26, py + PL + 110, s * 0.55, F * 0.55, acts, BLUE);
     stepEnd();
 
     /* ---- pendellängden ---- */
@@ -24931,7 +24938,7 @@
       [['löser sedan ut ', 0], ['l', 1]]
     ]);
     tanke(bQ);
-    placeString('Kvadrera båda led', padL, y, s * 0.62, F * 0.62, acts);
+    placeString('Kvadrera båda led och lös ut l', padL, y, s * 0.62, F * 0.62, acts);
     pause(300);
     y += 2.0 * F;
     var xq = placeString('T^2=4π^2·', padL, y, s, F, acts);

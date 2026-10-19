@@ -20,6 +20,8 @@
   som missades i runda 2, och så vidare tills alla är klara. Ett ord kommer
   alltså aldrig tillbaka förrän rundan är slut. Allt sparas i localStorage
   (nyckeln fysiklabbet.ordlista-hki.v1). Uttal via webbläsarens talsyntes (en-GB).
+  Knappen "Stäng av ljudet" (st.tyst) stoppar uppläsningen när kortet vänds;
+  Lyssna läser ändå upp ordet när man trycker på den.
 -->
 <style>
 :root {
@@ -67,6 +69,8 @@ h1 em { color: var(--accent); }
 .ordet .exempel { font-size: 17px; line-height: 1.55; color: var(--soft); border-left: 3px solid var(--accent); padding-left: 12px; font-style: italic; }
 .ordet .exempel b { color: var(--ink); font-style: normal; }
 .sida .tips { font-size: 13px; color: var(--muted); }
+.ljudrad { align-self: flex-start; display: flex; flex-wrap: wrap; gap: 8px; }
+.lyssna[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: transparent; }
 .lyssna { align-self: flex-start; display: inline-flex; gap: 8px; align-items: center; border: 1px solid var(--line2); background: #fff; border-radius: 999px; padding: 7px 12px; font-size: 13px; }
 .knappar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .knappar button { border-radius: 14px; padding: 15px; font-size: 16px; font-weight: 600; border: 1.5px solid; }
@@ -142,10 +146,16 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
       <button type="button" class="nej" id="nej" hidden>Kunde inte<span class="kbd">←</span></button>
       <button type="button" class="ja" id="ja" hidden>Kunde<span class="kbd">→</span></button>
     </div>
+    <div class="ljudrad" id="ljudrad">
     <button type="button" class="lyssna" id="lyssna">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M2 5h2.5L8 2v10L4.5 9H2z"/><path d="M10 4.5a3.5 3.5 0 0 1 0 5M11.5 3a5.5 5.5 0 0 1 0 8"/></svg>
       Lyssna på engelskan
     </button>
+    <button type="button" class="lyssna" id="tyst" aria-pressed="false" title="Stäng av uppläsningen när kortet vänds">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M2 5h2.5L8 2v10L4.5 9H2z"/><path d="M10 5l3 4M13 5l-3 4"/></svg>
+      <span id="tyst-txt">Stäng av ljudet</span>
+    </button>
+    </div>
   </main>
 
   <section class="lista" id="lista" hidden></section>
@@ -348,7 +358,7 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
     }
     ritaRunda();
     if (!c.ko.length) { visaKlart(); return; }
-    $('klart').hidden = true; $('kort').hidden = false; document.querySelector('.knappar').hidden = false; $('lyssna').hidden = !('speechSynthesis' in window);
+    $('klart').hidden = true; $('kort').hidden = false; document.querySelector('.knappar').hidden = false; $('ljudrad').hidden = !('speechSynthesis' in window);
     var i = c.ko[0];
     // Låt kortet vända tillbaka innan nästa ord visas, så att baksidan inte syns.
     if ($('kort').classList.contains('vand')) { $('kort').classList.remove('vand'); setTimeout(function () { visaKort(i); }, 280); }
@@ -377,7 +387,7 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
   function visaKlart() {
     var c = st.cykel;
     nuvarande = null;
-    $('kort').hidden = true; document.querySelector('.knappar').hidden = true; $('lyssna').hidden = true;
+    $('kort').hidden = true; document.querySelector('.knappar').hidden = true; $('ljudrad').hidden = true;
     $('klart').hidden = false;
     $('runda').innerHTML = '<span><b>Klart</b></span><span>' + c.antal + ' av ' + c.antal + '</span>';
     $('klart-rubrik').textContent = 'Alla ' + c.antal + ' ord klara!';
@@ -403,9 +413,12 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
     rost = r.filter(function (v) { return /en-GB/i.test(v.lang); })[0] || r.filter(function (v) { return /^en/i.test(v.lang); })[0] || null;
   }
   if ('speechSynthesis' in window) { hittaRost(); speechSynthesis.onvoiceschanged = hittaRost; }
-  else $('lyssna').hidden = true;
-  function tala(text) {
-    if (!('speechSynthesis' in window) || !st.ljud) return;
+  else $('ljudrad').hidden = true;
+  // tala(text) läser upp när kortet vänds, om ljudet har slagits på med
+  // Lyssna och inte stängts av. tala(text, true) läser alltid (knappen Lyssna).
+  function tala(text, alltid) {
+    if (!('speechSynthesis' in window)) return;
+    if (!alltid && (!st.ljud || st.tyst)) return;
     speechSynthesis.cancel();
     var u = new SpeechSynthesisUtterance(text); u.lang = 'en-GB'; if (rost) u.voice = rost; u.rate = 0.92;
     speechSynthesis.speak(u);
@@ -414,8 +427,18 @@ footer button { background: none; border: 0; color: var(--muted); text-decoratio
     if (nuvarande == null) return;
     st.ljud = true; spara();
     var o = ORD[nuvarande];
-    tala($('kort').classList.contains('vand') || st.riktning === 'en' ? o[1] : o[1]);
+    tala(o[1], true);
   });
+  function ritaTyst() {
+    $('tyst').setAttribute('aria-pressed', st.tyst ? 'true' : 'false');
+    $('tyst-txt').textContent = st.tyst ? 'Ljudet är av' : 'Stäng av ljudet';
+    $('tyst').title = st.tyst ? 'Slå på uppläsningen när kortet vänds' : 'Stäng av uppläsningen när kortet vänds';
+  }
+  $('tyst').addEventListener('click', function () {
+    st.tyst = !st.tyst; spara(); ritaTyst();
+    if (st.tyst && 'speechSynthesis' in window) speechSynthesis.cancel();
+  });
+  ritaTyst();
 
   // Stapeln: klara ord i den här genomgången (grönt) och ord som väntar på nästa runda (ljust).
   function ritaFramsteg() {

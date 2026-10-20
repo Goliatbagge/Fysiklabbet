@@ -13272,6 +13272,95 @@
              ekvval: 1 };
   }
 
+  /* ---------------- scen: ligger punkten på linjen? (ma1c-4.3 ex 2) ---
+   * Punktens x-koordinat sätts in i ekvationen och y räknas ut. Det
+   * uträknade y jämförs med punktens y-koordinat: de två ringas in
+   * (REGEL JÄMFÖRELSE MED RINGAR) innan slutsatsen skrivs. */
+  function layoutPunktpalinje(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y = 170, xe;
+    var tanke = mkTanke(T);
+    var XE = padL + 30;
+
+    function del(d) {
+      /* punkten skrivs bit för bit, så att x- och y-koordinatens
+       * gränser finns för ringarna */
+      var yP = y;
+      T.str(d.bokstav, padL, yP);
+      var x0 = T.str('(', padL + 54, yP);
+      var xPx = T.str(d.px, x0, yP);
+      var x1 = T.str(',', xPx, yP) + 0.3 * F;
+      var xPy = T.str(d.py, x1, yP);
+      T.str(')', xPy, yP);
+      T.stepEnd();
+
+      tanke(yP, d.tanke1, 1.05);
+      y += 3.6 * F;
+      T.str('Sätter in punktens x-koordinat', padL, y - 1.6 * F, null, 0.62);
+      var xa = T.str('y=−2', XE, y);
+      var xb = T.str('x', xa, y);
+      T.str('+3', xb, y);
+      T.stepEnd();
+
+      /* RINGA VARIABELN: x i ekvationen och punktens x-koordinat */
+      var ringar = substRings(acts, [[x0, xPx, yP, F], [xa, xb, y, F]]);
+      y += 2.4 * F;
+      T.str(d.rad1, XE, y);
+      fadeRings(acts, ringar);
+      T.stepEnd();
+
+      y += 2.4 * F;
+      T.str(d.rad2, XE, y);
+      T.stepEnd();
+
+      y += 2.4 * F;
+      var xr0 = T.str('y=', XE, y);
+      var xr1 = T.str(d.yut, xr0, y);
+      T.stepEnd();
+
+      /* jämförelse: punktens y-koordinat och det uträknade y ringas in */
+      tanke(y, d.tanke2, 1.05);
+      var ringar2 = substRings(acts, [[x1, xPy, yP, F], [xr0, xr1, y, F]]);
+      T.pause(300);
+      fadeRings(acts, ringar2);
+      T.stepEnd();
+
+      tanke(y, d.tanke3, 1.05);
+      y += 3.4 * F;
+      d.svar.forEach(function (s, i) {
+        if (i) y += 1.4 * F;
+        xe = T.str(s, padL, y);
+      });
+      T.underline(xe, y);
+      T.stepEnd();
+    }
+
+    del({ bokstav: 'a)', px: '5', py: '−7',
+          tanke1: [[['Jag sätter in x=5 i']],
+                   [['ekvationen och ser om y']],
+                   [['blir −7.']]],
+          rad1: 'y=−2·5+3', rad2: 'y=−10+3', yut: '−7',
+          tanke2: [[['Jag jämför det uträknade y']],
+                   [['med punktens y-koordinat.']]],
+          tanke3: [[['Båda är −7. Punkten']],
+                   [['uppfyller ekvationen.']]],
+          svar: ['Svar: Ja, punkten ligger', 'på linjen'] });
+
+    y += 4.0 * F;
+    del({ bokstav: 'b)', px: '−4', py: '10',
+          tanke1: [[['Jag sätter in x=−4. Det']],
+                   [['negativa talet skrivs inom']],
+                   [['parentes.']]],
+          rad1: 'y=−2·(−4)+3', rad2: 'y=8+3', yut: '11',
+          tanke2: [[['Jag jämför det uträknade y']],
+                   [['med punktens y-koordinat.']]],
+          tanke3: [[['11 är inte 10. Linjen går']],
+                   [['genom (−4, 11), inte genom']],
+                   [['(−4, 10).']]],
+          svar: ['Svar: Nej, punkten ligger', 'inte på linjen'] });
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   /* ---------------- scen: bestäm linjens ekvation (ma1c-4.4 ex 1) -----
    * Linjen är given, k och m ska läsas AV grafen: m i skärningen med
    * y-axeln, k som "ett steg åt höger, k steg upp". */
@@ -63197,6 +63286,7 @@
                    tankamoped: layoutTankamoped,
                    proportionalitet: layoutProportionalitet,
                    ritagraf: layoutRitagraf,
+                   punktpalinje: layoutPunktpalinje,
                    axelskarning: layoutAxelskarning,
                    linjensekv: layoutLinjensekv,
                    riktkoeff: layoutRiktkoeff,

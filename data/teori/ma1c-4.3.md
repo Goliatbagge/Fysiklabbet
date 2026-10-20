@@ -157,6 +157,42 @@ ligger på linjen.
 :::
 :::
 
+## Ligger punkten på linjen?
+
+En punkt ligger på en linje om dess koordinater uppfyller linjens
+ekvation. Det kan vi pröva utan att rita något: vi sätter in punktens
+$x$-koordinat i ekvationen och räknar ut $y$. Blir $y$ samma som punktens
+$y$-koordinat ligger punkten på linjen. Blir det något annat ligger
+punkten inte på linjen, utan ovanför eller nedanför den.
+
+::: exempel "Exempel 2: Ligger punkten på linjen?"
+**Avgör om punkten ligger på linjen $y = -2x + 3$.<br>a)&nbsp;$(5, -7)$&emsp;&emsp;b)&nbsp;$(-4, 10)$**
+
+::: handskrift
+typ: punktpalinje
+:::
+
+::: textlosning
+**a)** Punkten har $x$-koordinaten 5. Vi sätter in $x = 5$ i ekvationen:
+
+$$y = -2 \cdot 5 + 3 = -10 + 3 = -7$$
+
+Vi får $y = -7$, vilket är samma som punktens $y$-koordinat.
+
+**Svar:** Ja, punkten ligger på linjen.
+
+**b)** Punkten har $x$-koordinaten $-4$. Vi sätter in $x = -4$ i
+ekvationen, med det negativa talet inom parentes:
+
+$$y = -2 \cdot (-4) + 3 = 8 + 3 = 11$$
+
+Vi får $y = 11$, men punktens $y$-koordinat är 10. Linjen går alltså
+genom $(-4, 11)$, en ruta ovanför punkten.
+
+**Svar:** Nej, punkten ligger inte på linjen.
+:::
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Rita en linje för hand"
@@ -176,6 +212,12 @@ ligger på linjen.
 - ***y*-axeln:** sätt $x = 0$ och räkna ut $y$. För $y = kx + m$ blir det $m$.
 - ***x*-axeln:** sätt $y = 0$ och lös ekvationen.
 - Skärningspunkterna skrivs $(0,\ y)$ och $(x,\ 0)$.
+:::
+
+::: sampunkt "Ligger punkten på linjen?"
+- Sätt in punktens $x$-koordinat i ekvationen och räkna ut $y$.
+- Blir $y$ lika med punktens $y$-koordinat ligger punkten **på linjen**,
+  annars inte.
 :::
 
 ::: sampunkt "Vad reglagen visar"

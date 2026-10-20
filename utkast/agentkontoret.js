@@ -1131,7 +1131,11 @@
   // storlekar ("g" läses som "s"), och det här ska synas på en projektor.
   const FONT = "'Poppins', system-ui, sans-serif";
   // Textförstoring i scenen, så att allt går att läsa på en projektor.
-  const TXT = 1.6;
+  // Knappen "Större text" växlar till projektorläget (TXT_STOR), och valet
+  // minns i webbläsaren.
+  const TXT_NORMAL = 1.6, TXT_STOR = 2.4;
+  let TXT = TXT_NORMAL;
+  try { if (localStorage.getItem('agentkontor.storText') === '1') TXT = TXT_STOR; } catch (e) { /* ingen lagring */ }
   function font(vikt, fs) { ctx.font = `${vikt} ${Math.round(fs)}px ${FONT}`; }
 
   function radbryt(text, maxB, maxRader) {
@@ -1173,7 +1177,7 @@
     const smal = canvas.width / dpr < 720;
     if (!smal) {
     // Rumsskyltar, nere till vänster i varje rum.
-    const fsRum = Math.max(10, TXT * 4.6 * s);
+    const fsRum = Math.max(10, Math.min(TXT, 2) * 4.6 * s); // rumsskyltarna går annars ihop i stora läget
     ctx.save();
     for (const r of RUM) {
       const t = r.namn.toUpperCase();
@@ -1212,7 +1216,7 @@
       namnRutor.set(f, nr);
       font(600, fsB);
       const pad = 6 * dpr, lh = fsB * 1.3;
-      const rader = radbryt(f.bubbla.text, smal ? 150 * dpr : Math.max(190 * dpr, 64 * s), 4);
+      const rader = radbryt(f.bubbla.text, smal ? 150 * dpr : Math.max(190 * dpr, 40 * TXT * s), 4);
       const w = Math.max(...rader.map(t => ctx.measureText(t).width)) + pad * 2;
       const h = rader.length * lh + pad * 1.2;
       const ax = vx2(f.x);
@@ -1420,6 +1424,14 @@
     if (e) hoppa(Math.max(simT, e.s - 3));
   });
   $('omKnapp').addEventListener('click', () => $('omDialog').showModal());
+  const textKnapp = $('textStorlek');
+  const visaTextKnapp = () => { const stor = TXT === TXT_STOR; textKnapp.classList.toggle('aktiv', stor); textKnapp.setAttribute('aria-pressed', String(stor)); };
+  visaTextKnapp();
+  textKnapp.addEventListener('click', () => {
+    TXT = TXT === TXT_STOR ? TXT_NORMAL : TXT_STOR;
+    try { localStorage.setItem('agentkontor.storText', TXT === TXT_STOR ? '1' : '0'); } catch (e) { /* ingen lagring */ }
+    visaTextKnapp();
+  });
   $('helskarm').addEventListener('click', () => {
     const app = $('app');
     if (document.fullscreenElement) document.exitFullscreen(); else if (app.requestFullscreen) app.requestFullscreen();

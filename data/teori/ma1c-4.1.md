@@ -25,6 +25,19 @@ Punkten markerad i koordinatsystemet har *x*-koordinaten 2 och *y*-koordinaten
 3, vilket skrivs (2, 3).
 :::
 
+::: tips "Så ritar du ett koordinatsystem"
+1. Dra en vågrät linje med linjal. Det är *x*-axeln. Rita en pilspets i den **högra** änden, eftersom talen blir större åt höger.
+2. Dra en lodrät linje som skär *x*-axeln. Det är *y*-axeln. Rita en pilspets i den **övre** änden, eftersom talen blir större uppåt.
+3. Skriv ***x*** vid pilspetsen på den vågräta axeln och ***y*** vid pilspetsen på den lodräta.
+4. Skriv ut skalan: **minst ett värde på varje axel**, till exempel 1. Utan värden går det inte att veta hur stort ett steg är.
+
+I simuleringen nedan ritas ett koordinatsystem upp steg för steg. Tryck på "Nästa steg" för att se nästa del ritas.
+
+::: minisim
+typ: koordinatguide
+:::
+:::
+
 Koordinatsystemets fyra områden delas in i **kvadranter**. Kvadranten med
 positiva *x*- och *y*-värden kallas första kvadranten. Sedan kommer andra,
 tredje och fjärde kvadranten moturs. Om det i en uppgift står att vi ska
@@ -98,6 +111,8 @@ Grafen till $y = 500 + 400x$ är en rät linje.
 - Skärningen kallas **origo**.
 - En **koordinat** skrivs $(x, y)$: läget i sidled först, läget i höjdled
   sist.
+- Rita pilar åt höger och uppåt, $x$ och $y$ vid pilspetsarna och minst ett
+  värde på varje axel.
 :::
 
 ::: sampunkt "Kvadranterna"

@@ -13136,6 +13136,11 @@
       yTal(v);
       T.pause(80);
     }
+    /* klart: en grön stämpel med en glad smiley landar på den tomma
+     * ytan nere till höger (användarkrav 2026-10-20) */
+    T.pause(450);
+    acts.push({ kind: 'show', obj: { stamp: 1, x: 632, y: 418, r: 54, wins: [] } });
+    T.pause(700);
     T.stepEnd();
 
     /* en ritningsuppgift slutar när figuren är klar, ingen svarsrad */
@@ -42330,6 +42335,24 @@
     return g;
   }
 
+  /* STÄMPEL (stamp: 1): en stor grön stämpel med en glad smiley som
+   * visar att uppgiften är klar. Landar på arket (renderStamp): faller in
+   * förstorad, trycks ned och studsar tillbaka. */
+  var STAMP_GRON = '#2e8b3e';
+  function makeStamp(o) {
+    var g = el('g', { opacity: 0 });
+    var s = el('g', { transform: 'rotate(-12)', fill: 'none', stroke: STAMP_GRON,
+                      'stroke-linecap': 'round', opacity: 0.88 }, g);
+    var r = o.r;
+    el('circle', { cx: 0, cy: 0, r: r, 'stroke-width': r * 0.1 }, s);
+    el('circle', { cx: 0, cy: 0, r: r * 0.8, 'stroke-width': r * 0.035 }, s);
+    el('circle', { cx: -r * 0.27, cy: -r * 0.2, r: r * 0.09, fill: STAMP_GRON, stroke: 'none' }, s);
+    el('circle', { cx: r * 0.27, cy: -r * 0.2, r: r * 0.09, fill: STAMP_GRON, stroke: 'none' }, s);
+    el('path', { d: 'M ' + (-r * 0.45) + ' ' + (r * 0.12) + ' Q 0 ' + (r * 0.68) + ' ' + (r * 0.45) + ' ' + (r * 0.12),
+                 'stroke-width': r * 0.09 }, s);
+    return g;
+  }
+
   function makeNote(o) {
     var g = el('g', { opacity: 0 });
     var t = el('text', { x: o.x, y: o.y,
@@ -64012,9 +64035,10 @@
         return;
       }
       a.obj.el = a.obj.bubble ? makeBubble(a.obj)
+        : a.obj.stamp ? makeStamp(a.obj)
         : a.obj.note ? makeNote(a.obj)
         : a.obj.guide ? makeGuide(a.obj) : makeRuler(a.obj);
-      ((a.obj.bubble || a.obj.note) ? bubbleG : rulerG).appendChild(a.obj.el);
+      ((a.obj.bubble || a.obj.note || a.obj.stamp) ? bubbleG : rulerG).appendChild(a.obj.el);
       objs.push(a.obj);
     });
 
@@ -64323,6 +64347,23 @@
         'rotate(' + (o._ang + ut * 9).toFixed(2) + ')');
     }
 
+    /* STÄMPELN LANDAR: förstorad och genomskinlig i början, trycks ned
+     * under 1 (stämpeln pressas mot pappret) och studsar till 1. */
+    var STAMP_MS = 520;
+    function renderStamp(o, time) {
+      var t0 = null;
+      for (var i = 0; i < o.wins.length; i++) {
+        if (time >= o.wins[i][0] && time < o.wins[i][1]) t0 = o.wins[i][0];
+      }
+      if (t0 == null) { o.el.setAttribute('opacity', 0); return; }
+      var v = Math.min(1, (time - t0) / STAMP_MS), sk, e;
+      if (v < 0.55) { e = v / 0.55; sk = 1.9 - 1.0 * e * e; }
+      else if (v < 0.8) sk = 0.9 + 0.14 * ((v - 0.55) / 0.25);
+      else sk = 1.04 - 0.04 * ((v - 0.8) / 0.2);
+      o.el.setAttribute('opacity', Math.min(1, v / 0.4).toFixed(3));
+      o.el.setAttribute('transform', 'translate(' + o.x + ' ' + o.y + ') scale(' + sk.toFixed(3) + ')');
+    }
+
     function render(time) {
       for (var i = 0; i < strokes.length; i++) {
         var a = strokes[i];
@@ -64340,6 +64381,7 @@
       }
       for (var j = 0; j < objs.length; j++) {
         if (objs[j].lagg) { renderLagg(objs[j], time); continue; }
+        if (objs[j].stamp) { renderStamp(objs[j], time); continue; }
         objs[j].el.setAttribute('opacity', winOpacity(objs[j].wins, time));
       }
       var pp = penPosAt(time);

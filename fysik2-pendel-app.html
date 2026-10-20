@@ -346,13 +346,17 @@
             fit:   '#7c3aed',
         };
 
-        // ── Fysiken: exakt, α'' = −(g/l)·sin α, RK4 ──
-        const acc = (th, g, l) => -(g / l) * Math.sin(th);
-        const rk4 = (th, om, g, l, h) => {
-            const k1t = om,                  k1o = acc(th, g, l);
-            const k2t = om + 0.5 * h * k1o,  k2o = acc(th + 0.5 * h * k1t, g, l);
-            const k3t = om + 0.5 * h * k2o,  k3o = acc(th + 0.5 * h * k2t, g, l);
-            const k4t = om + h * k3o,        k4o = acc(th + h * k3t, g, l);
+        // ── Fysiken: exakt, α'' = −(g/l)·sin α − b·α', RK4 ──
+        // b = 0 ger odämpad svängning. Vid dämpad svängning bromsar luftmotståndet
+        // pendeln med en kraft som är proportionell mot farten, och utslaget
+        // avtar som e^(−b·t/2): med DAMP_B = 0,15 s⁻¹ halveras det på drygt 9 s.
+        const DAMP_B = 0.15;
+        const acc = (th, om, g, l, b) => -(g / l) * Math.sin(th) - b * om;
+        const rk4 = (th, om, g, l, h, b = 0) => {
+            const k1t = om,                  k1o = acc(th, k1t, g, l, b);
+            const k2t = om + 0.5 * h * k1o,  k2o = acc(th + 0.5 * h * k1t, k2t, g, l, b);
+            const k3t = om + 0.5 * h * k2o,  k3o = acc(th + 0.5 * h * k2t, k3t, g, l, b);
+            const k4t = om + h * k3o,        k4o = acc(th + h * k3t, k4t, g, l, b);
             return [th + (h / 6) * (k1t + 2 * k2t + 2 * k3t + k4t),
                     om + (h / 6) * (k1o + 2 * k2o + 2 * k3o + k4o)];
         };
@@ -368,7 +372,7 @@
                 const h = Math.min(H, rem);
                 rem -= h;
                 const th0 = sim.th;
-                const r = rk4(sim.th, sim.om, P.g, P.l, h);
+                const r = rk4(sim.th, sim.om, P.g, P.l, h, P.damp ? DAMP_B : 0);
                 sim.th = r[0]; sim.om = r[1];
                 if ((th0 < 0 && sim.th >= 0) || (th0 > 0 && sim.th <= 0)) {
                     const f = th0 / (th0 - sim.th);
@@ -390,7 +394,7 @@
                 }
                 sim.t += h;
                 if (P.ghost) {
-                    const rb = rk4(sim.thB, sim.omB, P.g, P.ghost.l, h);
+                    const rb = rk4(sim.thB, sim.omB, P.g, P.ghost.l, h, P.damp ? DAMP_B : 0);
                     sim.thB = rb[0]; sim.omB = rb[1];
                 }
             }
@@ -1002,6 +1006,7 @@
             const [okand, setOkand] = useState(() => slumpaPlanet());
             const [running, setRunning] = useState(true);
             const [speed, setSpeed] = useState(1);
+            const [damp, setDamp] = useState(false);   // dämpad svängning (luftmotstånd)
             const [show, setShow] = useState({ krafter: false, kurva: true, ghost: true, ljusgrind: true, gradskiva: true, linjal: true });
             const [diagMode, setDiagMode] = useState('T2');
             const [ghost, setGhost] = useState(null);
@@ -1015,7 +1020,7 @@
 
             const gissa = lage === 'gissa';
             const g = gissa ? okand.g : (plats === 'valfri' ? gFri : PLATSER.find((p) => p.id === plats).g);
-            const P = { l, m, g, a0, sgn, ghost };
+            const P = { l, m, g, a0, sgn, ghost, damp };
 
             const simRef = useRef(nySim());
             const Pref = useRef(P); Pref.current = P;
@@ -1296,6 +1301,9 @@
                                 <span className="st-swatch" style={{ background: '#2f6fd0' }}></span>
                                 <span>Jämförelsependel B</span></label>
                         )}
+                        <div className="st-title mt">Svängning</div>
+                        <label><input type="radio" name="damp" checked={!damp} onChange={() => setDamp(false)} /><span>Odämpad</span></label>
+                        <label><input type="radio" name="damp" checked={damp} onChange={() => setDamp(true)} /><span>Dämpad</span></label>
                         {isFullscreen && (
                             <React.Fragment>
                                 <div className="st-title mt">Tidsförlopp</div>
@@ -1424,7 +1432,8 @@
                                     {styrknappar}
                                     <p className="anm mt-2">
                                         Ändrar du längd, utslag eller plats återgår pendeln till startläget.
-                                        Massan påverkar inte rörelsen.
+                                        Massan påverkar inte rörelsen. Väljer du dämpad svängning bromsas pendeln
+                                        av luftmotståndet, och utslaget avtar för varje svängning.
                                     </p>
                                 </div>
 

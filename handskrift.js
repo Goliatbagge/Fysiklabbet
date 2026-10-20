@@ -13074,6 +13074,85 @@
   /* ---------------- scen: rita grafen för hand (ma1c-4.3 ex 1) --------
    * y = −2x + 3 med värdetabell från x = −3 till 3. Negativa x-värden
    * sätts in inom PARENTES — det är där tecknen brukar tappas bort. */
+  /* ---------------- scen: rita ett koordinatsystem (ma1c-4.1) --------
+   * Guiden "Så ritar du ett koordinatsystem": stegen skrivs som en
+   * numrerad lista överst, och under den ritas systemet ett steg per
+   * klick: x-axeln med linjal och pilspets åt höger, y-axeln med
+   * pilspets uppåt, x ovanför x-axelns pilspets och y bredvid y-axelns,
+   * och sist skalan: först 1 på varje axel (inringat, minst ett värde
+   * per axel), sedan resten. Origo och varje skalsteg ligger på
+   * papperets rutlinjer (ett skalsteg = två rutor, så att talen −1 på
+   * de två axlarna inte krockar vid origo). */
+  function layoutRitaKoordinatsystem(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL;
+    var u = 2 * RUTA, ox = Math.round((padL + 2.5 * u) / RUTA) * RUTA, oy = 19 * RUTA;
+    var XMIN = -2, XMAX = 5, YMIN = -2, YMAX = 4, SK = 0.5;
+    function X(v) { return ox + v * u; }
+    function Y(v) { return oy - v * u; }
+    var x0 = X(XMIN) - 0.5 * u, x1 = X(XMAX) + 0.8 * u;
+    var y0 = Y(YMIN) + 0.5 * u, y1 = Y(YMAX) - 0.8 * u;
+    var ly = 3 * RUTA, lh = 1.5 * RUTA;
+    function punkt(n, txt) { T.str(n + '. ' + txt, padL, ly + (n - 1) * lh, null, 0.5); T.pause(200); }
+    function ax(p, q) { acts.push({ kind: 'stroke', pts: [p, q], color: null, ax: 1 }); }
+    function tal(v) { return v < 0 ? '−' + (-v) : '' + v; }
+    function xTal(v) { var t = tal(v), w = T.adv(t, SK); T.str(t, X(v) - w / 2, oy + 0.9 * F, null, SK); return [X(v) - w / 2, X(v) + w / 2, oy + 0.9 * F]; }
+    function yTal(v) { var t = tal(v), w = T.adv(t, SK); T.str(t, ox - 10 - w, Y(v) + 0.18 * F, null, SK); return [ox - 10 - w, ox - 10, Y(v) + 0.18 * F]; }
+
+    /* 1. x-axeln */
+    punkt(1, 'Vågrät axel med linjal, pil åt höger');
+    linjalPil(acts, [x0, oy], [x1, oy], null, { ax: 1 });
+    T.stepEnd();
+
+    /* 2. y-axeln */
+    punkt(2, 'Lodrät axel med linjal, pil uppåt');
+    linjalPil(acts, [ox, y0], [ox, y1], null, { ax: 1 });
+    T.stepEnd();
+
+    /* 3. beteckningarna: x OVANFÖR x-axelns pilspets, y till höger om
+     * y-axelns */
+    punkt(3, 'Skriv x och y vid pilspetsarna');
+    T.str('x', x1 - T.adv('x', 0.6) - 3, oy - 10, null, 0.6);
+    T.pause(260);
+    T.str('y', ox + 12, y1 + 0.45 * F, null, 0.6);
+    T.stepEnd();
+
+    /* 4. ett värde på varje axel, inringat */
+    punkt(4, 'Minst ett värde på varje axel');
+    ax([X(1), oy - 5], [X(1), oy + 5]);
+    var a = xTal(1);
+    T.pause(200);
+    var r1 = T.ring(a[0], a[1], a[2]);
+    T.pause(320);
+    ax([ox - 5, Y(1)], [ox + 5, Y(1)]);
+    var b = yTal(1);
+    T.pause(200);
+    var r2 = T.ring(b[0], b[1], b[2]);
+    T.stepEnd();
+
+    /* 5. resten av skalan, lika långa steg */
+    T.fade(r1);
+    T.fade(r2);
+    T.pause(200);
+    var v;
+    for (v = XMIN; v <= XMAX; v++) {
+      if (v === 0 || v === 1) continue;
+      ax([X(v), oy - 5], [X(v), oy + 5]);
+      xTal(v);
+      T.pause(80);
+    }
+    T.pause(120);
+    for (v = YMIN; v <= YMAX; v++) {
+      if (v === 0 || v === 1) continue;
+      ax([ox - 5, Y(v)], [ox + 5, Y(v)]);
+      yTal(v);
+      T.pause(80);
+    }
+    T.stepEnd();
+
+    /* en ritningsuppgift slutar när figuren är klar, ingen svarsrad */
+    return { acts: acts, contentW: 660, lastBase: y0 + 0.6 * F, padL: padL };
+  }
+
   function layoutRitagraf(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
     var tanke = mkTanke(T);
@@ -63286,6 +63365,7 @@
                    tankamoped: layoutTankamoped,
                    proportionalitet: layoutProportionalitet,
                    ritagraf: layoutRitagraf,
+                   ritakoordinatsystem: layoutRitaKoordinatsystem,
                    punktpalinje: layoutPunktpalinje,
                    axelskarning: layoutAxelskarning,
                    linjensekv: layoutLinjensekv,

@@ -31,10 +31,10 @@ Punkten markerad i koordinatsystemet har *x*-koordinaten 2 och *y*-koordinaten
 3. Skriv ***x*** vid pilspetsen på den vågräta axeln och ***y*** vid pilspetsen på den lodräta.
 4. Skriv ut skalan: **minst ett värde på varje axel**, till exempel 1. Utan värden går det inte att veta hur stort ett steg är.
 
-I simuleringen nedan ritas ett koordinatsystem upp steg för steg. Tryck på "Nästa steg" för att se nästa del ritas.
+Pennlösningen nedan ritar ett koordinatsystem steg för steg. Klicka för att se nästa steg.
 
-::: minisim
-typ: koordinatguide
+::: handskrift
+typ: ritakoordinatsystem
 :::
 :::
 

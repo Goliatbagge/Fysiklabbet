@@ -546,7 +546,9 @@
         // Saknas fil:, arkiv: och youtube: renderas bara en länkrad — så att
         // material som inte går att bädda in ändå blir ett klick bort.
         function buildVideoEmbed(cfg, nr) {
-            const ratio = cfg.format === '4:3' ? '4 / 3' : '16 / 9';
+            const ratio = cfg.format === '4:3' ? '4 / 3' : (cfg.format === '9:16' ? '9 / 16' : '16 / 9');
+            // Stående film (9:16) får en smal, centrerad ram (.lab-video-staende)
+            const staende = cfg.format === '9:16' ? ' lab-video-staende' : '';
             // Ankare, så att en länk kan peka RAKT på filmen
             // (katalog.html?id=…&block=…). `ankare:` i config-blocket är den
             // stabila formen och överlever att filmens titel skrivs om;
@@ -565,7 +567,7 @@
             const caption = '<figcaption>' + cap.join('') + '</figcaption>';
             if (cfg.fil) {
                 const poster = (cfg.affisch ? ' poster="' + escapeHtml(cfg.affisch) + '"' : '');
-                return '<figure class="lab-video"' + ank + '><div class="lab-video-ram" style="aspect-ratio:' + ratio + '">' +
+                return '<figure class="lab-video' + staende + '"' + ank + '><div class="lab-video-ram" style="aspect-ratio:' + ratio + '">' +
                     '<video controls preload="metadata" playsinline' + poster + '>' +
                     '<source src="' + escapeHtml(cfg.fil) + '" type="video/mp4">' +
                     '</video></div>' + caption + '</figure>';
@@ -578,7 +580,7 @@
             if (!src) {
                 return '<div class="lab-video lab-video-lank"' + ank + '>' + cap.join('') + '</div>';
             }
-            return '<figure class="lab-video"' + ank + '><div class="lab-video-ram" style="aspect-ratio:' + ratio + '">' +
+            return '<figure class="lab-video' + staende + '"' + ank + '><div class="lab-video-ram" style="aspect-ratio:' + ratio + '">' +
                 '<iframe src="' + src + '" title="' + escapeHtml(cfg.titel || 'Videoklipp') + '"' +
                 ' loading="lazy" frameborder="0" allow="fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>' +
                 '</div>' + caption + '</figure>';

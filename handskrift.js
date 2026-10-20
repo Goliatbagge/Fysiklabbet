@@ -13192,6 +13192,86 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: skärning med axlarna (ma1c-4.3 ex 2) -------
+   * y = 2x − 8. a) x = 0 sätts in och y räknas ut, b) y = 0 sätts in och
+   * ekvationen löses i båda redovisningslägena. */
+  function layoutAxelskarning(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T);
+    /* två redovisningslägen (se EKVATIONSREDOVISNING i filhuvudet) */
+    var vagg = !!cfg.vagg;
+    var ekvOp = mkEkvOp(T, vagg);
+    var x0 = padL;
+    function xwFor(rad) { return x0 + T.adv(rad) + 0.9 * F; }
+
+    /* ---- a) ---- */
+    tanke(20, [
+      [['Varje punkt på y-axeln har']],
+      [['x-koordinaten 0. Jag sätter']],
+      [['in x=0 i ekvationen.']]
+    ], 0);
+    y = 150;
+    T.str('a) På y-axeln är x=0, sätter in', padL, y - 1.6 * F,
+          null, 0.62);
+    T.str('y=2·0-8', x0, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('y=0-8', x0, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('y=−8', x0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Det stämmer med m=−8 i']],
+      [['y=kx+m. Punkten är (0, −8).']]
+    ], 1.05);
+    y += 3.0 * F;
+    xe = T.str('Svar: (0, −8)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y + 3.6 * F, [
+      [['Varje punkt på x-axeln har']],
+      [['y-koordinaten 0. Jag sätter']],
+      [['in y=0 och löser ut x.']]
+    ], 1.05);
+    y += 4.4 * F;
+    T.str('b) På x-axeln är y=0, sätter in', padL, y - 1.6 * F,
+          null, 0.62);
+    T.str('0=2x-8', x0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Adderar 8 till båda led.']]
+    ], 1.05);
+    y = ekvOp(y, '+8', xwFor('0=2x-8'), '0=2x-8', { x0: x0 });
+    T.str('8=2x', x0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar båda led med 2.']]
+    ], 1.05);
+    y = ekvOp(y, '/2', xwFor('8=2x'), '8=2x', { x0: x0 });
+    T.str('4=x', x0, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: 2·4-8=0. Punkten']],
+      [['(4, 0) ligger på linjen.']]
+    ], 1.05);
+    y += 3.0 * F;
+    xe = T.str('Svar: (4, 0)', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
   /* ---------------- scen: bestäm linjens ekvation (ma1c-4.4 ex 1) -----
    * Linjen är given, k och m ska läsas AV grafen: m i skärningen med
    * y-axeln, k som "ett steg åt höger, k steg upp". */
@@ -63117,6 +63197,7 @@
                    tankamoped: layoutTankamoped,
                    proportionalitet: layoutProportionalitet,
                    ritagraf: layoutRitagraf,
+                   axelskarning: layoutAxelskarning,
                    linjensekv: layoutLinjensekv,
                    riktkoeff: layoutRiktkoeff,
                    tvapunkter: layoutTvapunkter,

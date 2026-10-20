@@ -12020,6 +12020,22 @@ window.EXITTICKETS = {
       'Bågar hör till andra funktionstyper — linjära ekvationer ger räta linjer.',
     ],
   },
+  {
+    question: 'Var skär linjen $y = 2x - 6$ *x*-axeln?',
+    choices: [
+      'I punkten (0, −6)',
+      'I punkten (−6, 0)',
+      'I punkten (3, 0)',
+      'I punkten (0, 3)',
+    ],
+    correct: 2,
+    why: [
+      'Det är skärningen med *y*-axeln, där $x = 0$.',
+      'Talet −6 är *y*-värdet där linjen skär *y*-axeln, inte en *x*-koordinat.',
+      'På *x*-axeln är $y = 0$. Ekvationen $0 = 2x - 6$ ger $x = 3$, alltså punkten (3, 0).',
+      'En punkt på *x*-axeln har *y*-koordinaten 0, inte *x*-koordinaten 0.',
+    ],
+  },
 ],
 
 'ma1c-4.4': [

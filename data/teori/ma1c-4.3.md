@@ -86,6 +86,77 @@ går vi samtidigt **$k$ steg uppåt eller nedåt**. Du kan också dra i rutnäte
 dig i koordinatsystemet och zooma med mushjulet (eller knapparna uppe till
 höger).
 
+## Skärning med axlarna
+
+Var en linje skär axlarna går att läsa av i grafen, men avläsningen blir
+sällan exakt. Med ekvationen kan vi i stället räkna fram skärningspunkterna
+**algebraiskt**. Det bygger på en enkel iakttagelse:
+
+- Varje punkt på *y*-axeln har *x*-koordinaten 0. Linjen skär alltså
+  *y*-axeln där $x = 0$.
+- Varje punkt på *x*-axeln har *y*-koordinaten 0. Linjen skär alltså
+  *x*-axeln där $y = 0$.
+
+::: formel "Skärning med axlarna"
+**Skärning med *y*-axeln:** sätt $x = 0$ i ekvationen och räkna ut $y$.
+
+**Skärning med *x*-axeln:** sätt $y = 0$ i ekvationen och lös ut $x$.
+:::
+
+I figuren nedan skär linjen $y = 2x - 8$ axlarna i punkterna (0, −8) och
+(4, 0). I punkten på *y*-axeln är *x*-koordinaten 0, och i punkten på
+*x*-axeln är *y*-koordinaten 0.
+
+::: figur
+<svg viewBox="-4 -20 200 288" width="271" height="391" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Linjen y lika med 2 x minus 8 i ett koordinatsystem. Den skär y-axeln i punkten 0 komma minus 8 och x-axeln i punkten 4 komma 0."><line x1="0" y1="0" x2="0" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="22" y1="0" x2="22" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="44" y1="0" x2="44" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="66" y1="0" x2="66" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="88" y1="0" x2="88" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="110" y1="0" x2="110" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="132" y1="0" x2="132" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="154" y1="0" x2="154" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="176" y1="0" x2="176" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="264" x2="176" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="242" x2="176" y2="242" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="220" x2="176" y2="220" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="198" x2="176" y2="198" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="176" x2="176" y2="176" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="154" x2="176" y2="154" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="132" x2="176" y2="132" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="110" x2="176" y2="110" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="88" x2="176" y2="88" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="66" x2="176" y2="66" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="44" x2="176" y2="44" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="22" x2="176" y2="22" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="0" x2="176" y2="0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="66" x2="184" y2="66" stroke="#1f2530" stroke-width="1.6"/><polygon points="192,66 182,61.5 182,70.5" fill="#1f2530"/><line x1="44" y1="264" x2="44" y2="-8" stroke="#1f2530" stroke-width="1.6"/><polygon points="44,-16 39.5,-6 48.5,-6" fill="#1f2530"/><text x="190" y="84" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="53" y="-6" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="88" y="82" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="38" y="26" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="38" y="114" font-size="12" text-anchor="end" fill="#1f2530">−2</text><text x="38" y="158" font-size="12" text-anchor="end" fill="#1f2530">−4</text><text x="38" y="202" font-size="12" text-anchor="end" fill="#1f2530">−6</text><line x1="33" y1="264" x2="165" y2="0" stroke="#4a7d3a" stroke-width="2"/><circle cx="44" cy="242" r="3.6" fill="#2563c9"/><circle cx="132" cy="66" r="3.6" fill="#2563c9"/><text x="54" y="257" font-size="13" text-anchor="start" fill="#2563c9">(0, −8)</text><text x="124" y="57" font-size="13" text-anchor="end" fill="#2563c9">(4, 0)</text><text x="100" y="159" font-size="13" text-anchor="start" fill="#4a7d3a"><tspan font-style="italic">y</tspan> = 2<tspan font-style="italic">x</tspan> − 8</text></svg>
+:::
+
+För en linje på formen $y = kx + m$ ger $x = 0$ alltid $y = m$, så
+skärningen med *y*-axeln kan läsas direkt ur ekvationen. Skärningen med
+*x*-axeln kräver däremot att vi löser en ekvation.
+
+::: exempel "Exempel 2: Skärning med axlarna"
+**Bestäm algebraiskt var linjen $y = 2x - 8$ skär<br>a) *y*-axeln&emsp;&emsp;b) *x*-axeln**
+
+::: handskrift
+typ: axelskarning
+:::
+
+::: textlosning
+**a)** På *y*-axeln är $x = 0$. Vi sätter in $x = 0$ i ekvationen:
+
+$$
+\begin{aligned}
+y &= 2 \cdot 0 - 8 \\
+y &= 0 - 8 \\
+y &= -8
+\end{aligned}
+$$
+
+Skärningspunkten är (0, −8). Det stämmer med att $m = -8$.
+
+**Svar:** (0, −8)
+
+**b)** På *x*-axeln är $y = 0$. Vi sätter in $y = 0$ i ekvationen och löser
+ut $x$:
+
+$$
+\begin{aligned}
+0 &= 2x - 8 \\
+0 \mathbin{\boldsymbol{+}} \boldsymbol{8} &= 2x - 8 \mathbin{\boldsymbol{+}} \boldsymbol{8} \\
+8 &= 2x \\
+\frac{8}{\boldsymbol{2}} &= \frac{2x}{\boldsymbol{2}} \\
+4 &= x
+\end{aligned}
+$$
+
+Skärningspunkten är (4, 0). Kontroll: $2 \cdot 4 - 8 = 0$, så punkten
+ligger på linjen.
+
+**Svar:** (4, 0)
+:::
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Rita en linje för hand"
@@ -99,6 +170,12 @@ höger).
 - En rät linje bestäms av två punkter. Ta gärna en tredje som
   **kontroll**: hamnar den inte på linjen har du räknat fel.
 - $x = 0$ är alltid ett bra val, eftersom det ger $y$-skärningen direkt.
+:::
+
+::: sampunkt "Skärning med axlarna"
+- ***y*-axeln:** sätt $x = 0$ och räkna ut $y$. För $y = kx + m$ blir det $m$.
+- ***x*-axeln:** sätt $y = 0$ och lös ekvationen.
+- Skärningspunkterna skrivs $(0,\ y)$ och $(x,\ 0)$.
 :::
 
 ::: sampunkt "Vad reglagen visar"

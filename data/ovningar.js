@@ -27070,6 +27070,26 @@ $$ a = -2 \\cdot 5 + 3 = -10 + 3 = -7 $$
 
 **Svar:** $a = -7$`,
         },
+        {
+            level: 2,
+            question: `Linjen $y = -3x + 12$ skär *x*-axeln i punkten $(a,\\ 0)$. Bestäm $a$ algebraiskt.`,
+            answer: { value: 4, unit: '' },
+            solution: `På *x*-axeln är $y = 0$. Sätt in $y = 0$ i ekvationen och lös ut $x$:
+
+$$
+\\begin{aligned}
+0 &= -3x + 12 \\\\
+0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3x} &= -3x + 12 \\mathbin{\\boldsymbol{+}} \\boldsymbol{3x} \\\\
+3x &= 12 \\\\
+\\frac{3x}{\\boldsymbol{3}} &= \\frac{12}{\\boldsymbol{3}} \\\\
+x &= 4
+\\end{aligned}
+$$
+
+Kontroll: $-3 \\cdot 4 + 12 = 0$, så punkten (4, 0) ligger på linjen.
+
+**Svar:** $a = 4$`,
+        },
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,

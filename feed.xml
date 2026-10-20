@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Mon, 19 Oct 2026 01:27:47 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 01:29:16 GMT</lastBuildDate>
+    <item>
+      <title>Låga moln kan hjälpa vindkraften att få tillbaka sin vind</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-20-moln-som-hjalper-vindkraften</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-20-moln-som-hjalper-vindkraften</guid>
+      <pubDate>Tue, 20 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Strömningslära</category>
+      <description>Bakom en vindkraftspark till havs blåser det svagare i många kilometer. Datorsimuleringar från Nederländerna visar att ett lågt molntäcke kan göra stråket av svag vind betydligt kortare, eftersom molnens översida kyls och rör om luften under dem.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-20-moln-som-hjalper-vindkraften.jpg" length="203649" type="image/jpeg"/>
+    </item>
     <item>
       <title>Svävande glaskula sammanflätad med ljus i rumstemperatur</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-19-glaskulan-och-ljuset</link>
@@ -177,15 +186,6 @@
       <category>Vågfysik</category>
       <description>Fem vattenvågor som möts i ett femhörnigt kar bildar ett ordnat mönster som ändå aldrig upprepar sig, samma sorts ordning som i en kvasikristall. Virvlarna i mönstret fångar flytande kulor och får dem att snurra.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-03-vattenvagor-med-femtalig-symmetri.jpg" length="97611" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Lasern som tillverkar myoner har tagit sin första bild genom bly</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-02-myoner-ur-en-laser</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-02-myoner-ur-en-laser</guid>
-      <pubDate>Fri, 02 Oct 2026 04:00:00 GMT</pubDate>
-      <category>Partikelfysik</category>
-      <description>Myoner från rymden används redan för att se in i pyramider och vulkaner, men de kommer få och när de själva vill. Vid ett laserlabb i Rumänien har forskare nu skapat egna myoner med en laserpuls och avbildat ett blyblock 23 meter bort.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-02-myoner-ur-en-laser.jpg" length="250789" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

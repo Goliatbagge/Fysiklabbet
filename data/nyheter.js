@@ -103,6 +103,64 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-20-moln-som-hjalper-vindkraften",
+    date: "2026-10-20",
+    title: "Låga moln kan hjälpa vindkraften att få tillbaka sin vind",
+    deck: "Bakom en vindkraftspark till havs blåser det svagare i många kilometer. Datorsimuleringar från Nederländerna visar att ett lågt molntäcke kan göra stråket av svag vind betydligt kortare, eftersom molnens översida kyls och rör om luften under dem.",
+    category: "Strömningslära",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-20-moln-som-hjalper-vindkraften.jpg",
+    imageAlt: "En lång rad vita vindkraftverk står vid horisonten ute till havs under en ljusblå himmel med tunna molnstrimmor. I förgrunden ett mörkblått hav med små vita vågkammar.",
+    imageCredit: "Foto: Thomas Dahlstrøm Nielsen (CC BY-SA 4.0), via Wikimedia Commons. Bilden visar den danska vindkraftsparken Horns Rev 1 i Nordsjön, inte parken i simuleringarna.",
+    tags: ["strömningslära", "vindkraft", "turbulens", "vak", "moln", "atmosfär", "gränsskikt", "temperaturinversion", "värmestrålning", "densitet", "effekt", "förnybar energi", "datorsimulering", "nordsjön"],
+    sources: [
+      { name: "Physics World: Low-level clouds could make wind farms more efficient (14 oktober 2026)", url: "https://physicsworld.com/a/low-level-clouds-could-make-wind-farms-more-efficient/" },
+      { name: "PRX Energy: studien i fulltext (öppet tillgänglig)", url: "https://journals.aps.org/prxenergy/abstract/10.1103/86lm-1nr3" }
+    ],
+    research: {
+      citation: "D. Selvatici och R. J. A. M. Stevens, ”Low-Level Cloud Radiative Forcing Enhances Wind-Farm Wake Recovery”, PRX Energy 5, 033014 (2026)",
+      url: "https://doi.org/10.1103/86lm-1nr3"
+    },
+    larare: {
+      moment: [
+        { label: "Rörelseenergi", href: "katalog.html?id=fy1-4.3" },
+        { label: "Effekt", href: "katalog.html?id=fy1-4.5" },
+        { label: "Densitet", href: "katalog.html?id=fy1-5.1" }
+      ],
+      fragor: [
+        "Varför blåser det svagare bakom ett vindkraftverk? Resonera med hjälp av energiprincipen: vart har vindens energi tagit vägen?",
+        "Effekten i vinden växer med vindhastighetens kub. Hur stor andel av den fulla effekten får ett vindkraftverk som står där vinden bara är 80 procent av den ostörda? Varför gör kuben att även små skillnader i vind spelar stor roll?",
+        "Kall luft sjunker och varm luft stiger. Varför fungerar ett skikt av varm luft ovanpå kall som ett lock, och varför trycks locket uppåt när molnens översida kyls?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Ett vindkraftverk tar energi ur vinden. Det är hela poängen, men det betyder också att luften som passerat rotorbladen blåser långsammare än förut. Bakom en hel park bildas därför ett långt stråk av svagare vind, en vak. Mätningar till havs har visat vakar som sträcker sig upp till 70&nbsp;kilometer. Står nästa park i det stråket ger den mindre el, och till havs ligger parkerna allt tätare.' },
+      { type: 'p', html: 'Nu visar två strömningsforskare vid University of Twente i Nederländerna, Davide Selvatici och Richard Stevens, att vädret kan spela större roll för vakarna än man räknat med. I deras datorsimuleringar hämtade sig vinden bakom en park mycket snabbare när ett lågt, tätt molntäcke låg över havet. Studien är publicerad i den kollegialt granskade tidskriften <em>PRX Energy</em>.' },
+      { type: 'quote', html: 'Hur snabbt vaken återhämtar sig beror på hur effektivt omblandningen i atmosfären drar in luft från den starkare vinden ovanför och vid sidorna.', cite: 'Davide Selvatici, University of Twente, till Physics World (översatt)' },
+      { type: 'h2', text: 'Ett lock över vinden' },
+      { type: 'p', html: 'Närmast havsytan ligger det atmosfäriska gränsskiktet, den del av luften som känner av ytan under sig och som hela tiden blandas om av virvlar. Ovanför gränsskiktet ligger ofta ett skikt där temperaturen i stället ökar med höjden, en temperaturinversion. Varm luft ovanpå kall är ett stabilt läge, eftersom den kalla luften har högre densitet och inte strävar uppåt. Inversionen fungerar därför som ett lock som hindrar virvlarna från att nå högre upp.' },
+      { type: 'p', html: 'Det har betydelse för vindkraften. Högre upp blåser det nämligen starkare, och vaken fylls på med fart när virvlar för ner den snabbare luften ovanifrån. Ju lägre locket ligger, desto tunnare blir skiktet av luft som virvlarna kan hämta fart ifrån.' },
+      { type: 'h2', text: 'Molnen kyls uppifrån' },
+      { type: 'p', html: 'Över Nordsjön är låga, platta molntäcken av typen stratocumulus vanliga. Enligt studien täcker sådana låga moln i genomsnitt mer än 30&nbsp;procent av himlen där, och Nordsjön är samtidigt ett av de områden i världen där det står flest vindkraftverk till havs.' },
+      { type: 'p', html: 'Molnens översida strålar ut värme mot rymden, ungefär som marken gör en klar natt. Nettoförlusten är typiskt 50–90&nbsp;watt per kvadratmeter, och det kyler luften vid molntoppen med 5–10&nbsp;grader per timme. Det är mycket jämfört med uppvärmningen från havsytan, som oftast är mindre än en grad per timme. Den avkylda luften får högre densitet än luften omkring och sjunker. Då kommer en omrörning igång som också drar ner varm och torr luft från ovanför locket in i gränsskiktet. Locket flyttas uppåt, och gränsskiktet blir tjockare.' },
+      { type: 'h2', text: 'Samma park under tre olika himlar' },
+      { type: 'p', html: 'Forskarna räknade på luftens rörelser i ett område som är 70&nbsp;kilometer långt, 15&nbsp;kilometer brett och 10&nbsp;kilometer högt, uppdelat i rutor som är knappt 28&nbsp;meter i sidled. Beräkningarna bygger på strömningslärans grundekvationer, utökade med värme, vattenånga och molndroppar. I området placerades en park med 45 vindkraftverk i nio rader. Varje verk hade en rotordiameter på 198&nbsp;meter, navet satt 119&nbsp;meter över havet, och avståndet mellan verken var knappt en kilometer.' },
+      { type: 'p', html: 'Samma park fick sedan stå i tre sorters väder en natt utan solljus: ett lågt molntäcke som kyls av sin egen värmestrålning, samma moln men med avkylningen avstängd, och klar himmel. Vädret var medvetet förenklat, så att forskarna kunde stänga av en effekt i taget och se vad just den betydde. Med avkylningen påslagen låg locket på 1,2&nbsp;kilometers höjd. Utan avkylningen låg det på 390&nbsp;meter, och med klar himmel på 280&nbsp;meter. Turbulensen i navhöjd var också nästan dubbelt så stark med de avkylda molnen.' },
+      { type: 'image', src: 'nyheter/bilder/2026-10-20-moln-som-hjalper-vindkraften-2.jpg', alt: 'Tre färgkartor ovanför varandra visar vindens hastighet i navhöjd sett ovanifrån, med vinden från vänster. Parkens verk syns som ett rutnät av korta svarta streck. Bakom parken sträcker sig ett ljusare orange band av svagare vind, omgivet av en vit linje. I den översta kartan slutar bandet en bit bakom parken, i de två nedre fortsätter det ända till högerkanten. Under kartorna ett linjediagram där tre kurvor sjunker kraftigt inne i parken och sedan stiger igen; den mörkblå kurvan stiger snabbast.', caption: 'Vinden i navhöjd i simuleringarna, sedd ovanifrån och med vinden från vänster. Den vita linjen omger området där vinden är svagare än 90&nbsp;procent av den inkommande. Överst (Case&nbsp;A) avkylda moln, i mitten (Case&nbsp;B) moln utan avkylning och nederst (Case&nbsp;C) klar himmel. Diagrammet längst ned visar vindens medelvärde över parkens bredd, i kilometer räknat från parkens första rad.', credit: 'Figur: D. Selvatici och R. J. A. M. Stevens, PRX Energy 5, 033014 (2026), CC BY 4.0' },
+      { type: 'p', html: 'Skillnaden syntes tydligt bakom parken. Med de avkylda molnen tog stråket där vinden var svagare än 90&nbsp;procent av den inkommande slut ungefär 17&nbsp;kilometer bakom parkens sista rad. Utan avkylningen var vinden fortfarande svagare än så 32&nbsp;kilometer bort, så långt som forskarna redovisar. Med avkylda moln nådde den extra turbulensen från parken upp till omkring 800&nbsp;meters höjd, medan locket i de två andra fallen höll den under ungefär 400&nbsp;meter.' },
+      { type: 'h2', text: 'Liten skillnad i fart, stor skillnad i effekt' },
+      { type: 'p', html: 'Tio procent svagare vind låter inte mycket. Men effekten som vinden för med sig genom en rotor växer med vindhastighetens kub, $P = \\dfrac{1}{2} \\cdot \\rho \\cdot A \\cdot v^3$, där $\\rho$ är luftens densitet, $A$ den yta rotorbladen sveper över och $v$ vindens hastighet. Vid 90&nbsp;procent av vindhastigheten blir effekten $0{,}9^3 \\approx 0{,}73$ av den ursprungliga, alltså drygt en fjärdedel lägre.' },
+      { type: 'quote', html: 'Våra resultat visar att detta borde tas med i beräkningarna, särskilt i områden med många låga moln som över Nordsjön, där många vindkraftsparker finns och där det årliga molntäcket är större än 30&nbsp;procent.', cite: 'Richard Stevens, University of Twente, till Physics World (översatt)' },
+      { type: 'p', html: 'Forskarna är samtidigt försiktiga. Simuleringarna gäller idealiserade förhållanden, och det finns ännu inga mätningar vid riktiga parker som visar effekten. Studien säger inte heller hur mycket el parken själv ger i molnigt väder, eftersom det beror på flera saker som drar åt olika håll. Det som framför allt påverkas är vinden längre bort, där nästa park kan stå.' },
+      { type: 'quote', html: 'Vi kan inte avgöra om vindkraftsparker verkligen borde placeras närmare varandra i molniga områden, eftersom våra simuleringar gällde idealiserade förhållanden.', cite: 'Davide Selvatici, till Physics World (översatt)' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'Eftersom effekten växer med vindhastighetens kub ger en dubbelt så stark vind åtta gånger så stor effekt. Därför byggs vindkraft där det blåser mycket, gärna till havs.',
+        'Påverkan går åt båda hållen. I simuleringarna rubbade parken också molnen: i ett av fallen ökade molnets vatteninnehåll något över parken, och längre bort avdunstade molnet helt.',
+        'Verken i simuleringen är en referensmodell på 10&nbsp;megawatt som tagits fram för forskning, så att olika forskargrupper kan räkna på samma verk och jämföra sina resultat.'
+      ] }
+    ]
+  },
+  {
     id: "2026-10-19-glaskulan-och-ljuset",
     date: "2026-10-19",
     title: "Svävande glaskula sammanflätad med ljus i rumstemperatur",

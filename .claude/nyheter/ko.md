@@ -15,6 +15,15 @@ Format per post:
 - **Minne i ett mikrofluidikchip: fibrer som minns hur vattnet flöt** **[BREVTEASER]** (nominerad 2026-10-19; originalet öppet, CC BY 4.0, publicerat 2026-10-09, sidan svarar 200) — Yale (Pahlavan, Rajput), ”Fluidic Hysterons and Memory in Flow Networks”, Physical Review X 2026, DOI 10.1103/hh4n-pw7w (PRX är öppen, CC BY). Ingång: hysteres, strömning. Strömningslära publicerades 2026-10-07. Källa (Phys.org 2026-10-14): https://phys.org/news/2026-10-memory-chip.html
   (tillagd 2026-10-15)
 
+- **S301: snabbaste stjärnan runt Sgr A* (8,7 år, 25 000 km/s) känner av svarta hålets rotation** — GRAVITY-samarbetet, Nature 2026, DOI 10.1038/s41586-026-10894-w; fulltext läst i arXiv 2607.12664 (Discovery of a star sensitive to the spin of Sgr A*). OBS: ESO:s pressmeddelande eso2612 kom redan 2026-08-19 (ESO-bilder CC BY 4.0), så inte dagsfärskt; Physics World tog upp den 2026-10-08. Astronomi. Källa: https://physicsworld.com/a/fastest-star-in-the-milky-way-feels-the-rotation-of-our-central-black-hole/
+  (tillagd 2026-10-20)
+
+- **Knuffen från en enda gasmolekyl uppmätt med en svävande nanokula** — Yale (Tseng, Moore), PRL 137, 173601 (2026-10-19), DOI 10.1103/xtzh-6t1f; impulser ned till 10^-23 Ns på en 100 nm-kula kyld till ~100 mK. OBS: för likt glaskulan 2026-10-19, vänta minst en vecka; originalet ej kontrollerat. Källa: https://physics.aps.org/articles/v19/136
+  (tillagd 2026-10-20)
+
+- **Glömd tung neutrino kan förklara varför materia finns** — Roshan (Southampton), Shaw (IIT Kanpur), PRL, DOI 10.1103/nfkx-q6z7 (”Delayed Charged Lepton Yukawa Equilibration in Minimal Seesaw”). Teoretiskt, abstrakt; partikelfysik/kosmologi. Originalet ej kontrollerat. Källa (Phys.org 2026-10-20): https://phys.org/news/2026-10-forgotten-particle-mystery-physicists.html
+  (tillagd 2026-10-20)
+
 - **Rensning av magiska tillstånd minskar felen 40 gånger i första hårdvarutestet** — kvantdatorer (kvantfysik senast 2026-10-09). Originalet ej kontrollerat. Källa (Phys.org 2026-10-17): https://phys.org/news/2026-10-quantum-magic-state-cleanup-errors.html
   (tillagd 2026-10-18)
 

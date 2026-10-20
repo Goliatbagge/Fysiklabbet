@@ -61,6 +61,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'vak',
+    term: 'Vak',
+    former: ['vak', 'vaken', 'vakar', 'vakarna', 'vakeffekt', 'vakeffekten', 'vakeffekter', 'vakeffekterna'],
+    kort: 'Stråket av störd, långsammare luft eller vatten som bildas bakom ett föremål som något strömmar förbi, till exempel bakom en båt, en cyklist eller ett vindkraftverk.',
+    relaterade: ['turbulens', 'gransskikt'],
+    body: [
+      { type: 'p', html: 'Den som cyklat tätt bakom en annan cyklist har känt av en vak. Luften bakom ryggen framför dig har redan bromsats upp och virvlar oroligt, och därför blir luftmotståndet mindre för den som ligger bakom. Samma sak ser man bakom en båt: ett utbrett stråk av virvlande vatten som långsamt jämnar ut sig. Det stråket är båtens vak.' },
+      { type: 'p', html: 'Ett vindkraftverk gör samma sak med vinden, fast med avsikt. Verket tar rörelseenergi ur luften, och då måste luften bakom rotorn blåsa långsammare än luften framför. Bakom en hel park av vindkraftverk slås vakarna ihop till ett brett stråk av svagare vind, som till havs kan sträcka sig flera mil. Ett verk som står i ett annat verks vak ger mindre el, och eftersom effekten i vinden växer med vindhastighetens kub räcker det med lite svagare vind för att förlusten ska märkas.' },
+      { type: 'p', html: 'En vak försvinner inte av sig själv utan fylls på av den ostörda strömningen runt omkring. Virvlar blandar in snabbare luft från sidorna och ovanifrån, och ju mer omrörning det finns, desto fortare återhämtar sig vinden. Därför spelar vädret stor roll: när luften är stilla och skiktad kan vaken bli mycket lång, medan blåsigt och oroligt väder suddar ut den fortare.' }
+    ]
+  },
+  {
+    id: 'temperaturinversion',
+    term: 'Temperaturinversion',
+    former: ['temperaturinversion', 'temperaturinversionen', 'temperaturinversioner', 'inversionen', 'inversionsskikt', 'inversionsskiktet'],
+    kort: 'Ett luftskikt där temperaturen ökar med höjden i stället för att minska. Skiktet är stabilt och fungerar som ett lock som hindrar luften under från att blandas uppåt.',
+    relaterade: ['gransskikt', 'turbulens'],
+    body: [
+      { type: 'p', html: 'Normalt blir luften kallare ju högre upp man kommer, ungefär sex till sju grader per kilometer. Ibland vänder det: ett skikt av varmare luft ligger ovanpå kallare luft. Det kallas en temperaturinversion, efter latinets ord för omvändning.' },
+      { type: 'p', html: 'Kall luft har högre densitet än varm luft. När den kalla luften ligger underst finns det därför ingenting som driver den uppåt, ungefär som när en tung vätska ligger under en lätt. Skiktet blir stabilt och fungerar som ett lock. Virvlar och uppåtgående luft som når locket bromsas och vänder. Det är därför röken från skorstenar en kall vinterdag kan lägga sig som ett platt lager i stället för att stiga, och därför kan avgaser bli kvar över en stad när det är inversion.' },
+      { type: 'p', html: 'En inversion bildas ofta en klar och stilla natt, när marken strålar ut värme mot rymden och kyler luften närmast sig. Den kan också ligga högre upp, som ett tak över det understa luftlagret. Där taket ligger avgör hur tjockt lager av luft som kan blandas om, och det påverkar allt från luftkvaliteten i en stad till hur fort vinden hämtar sig bakom en vindkraftspark.' }
+    ]
+  },
+  {
+    id: 'gransskikt',
+    term: 'Gränsskikt',
+    former: ['gränsskikt', 'gränsskiktet', 'gränsskikten', 'atmosfäriska gränsskiktet', 'atmosfäriskt gränsskikt'],
+    kort: 'Det tunna lager av en gas eller vätska närmast en yta där strömningen bromsas av ytan. I atmosfären är det den understa delen av luften, som känner av marken eller havet under sig.',
+    relaterade: ['turbulens', 'temperaturinversion', 'vak'],
+    body: [
+      { type: 'p', html: 'När luft eller vatten strömmar längs en yta står det allra tunnaste lagret närmast ytan still. Strax ovanför går strömningen lite fortare, och ännu längre ut har den full fart. Lagret där farten ändras från nästan noll till full fart kallas gränsskiktet. Längs en flygplansvinge är det bara några millimeter tjockt, men det är där luftens friktion mot vingen uppstår.' },
+      { type: 'p', html: 'Atmosfären har ett eget, mycket större gränsskikt. Det är den understa delen av luften, ofta från några hundra meter till ett par kilometer tjock, som känner av marken eller havet under sig. Där bromsas vinden av ytans friktion, och luften värms eller kyls av ytan. Gränsskiktet är fullt av virvlar som hela tiden blandar om luften, och därför är vinden byig och ojämn nära marken medan den högre upp blåser jämnare och starkare.' },
+      { type: 'p', html: 'Ovanför det atmosfäriska gränsskiktet ligger ofta en temperaturinversion som fungerar som ett lock. Hur högt locket sitter avgör hur tjockt lager av luft som blandas om. Det spelar roll för väderprognoser, för hur luftföroreningar sprids och för vindkraft, eftersom vindkraftverk i ett tjockt och kraftigt omrört gränsskikt lättare får tillbaka den vind som verken framför har tagit.' }
+    ]
+  },
+  {
     id: 'steril-neutrino',
     term: 'Steril neutrino',
     former: ['steril neutrino', 'sterila neutrinon', 'sterila neutriner', 'sterila neutrinerna'],

@@ -31,7 +31,7 @@ Punkten markerad i koordinatsystemet har *x*-koordinaten 2 och *y*-koordinaten
 3. Skriv ***x*** vid pilspetsen på den vågräta axeln och ***y*** vid pilspetsen på den lodräta.
 4. Skriv ut skalan: **minst ett värde på varje axel**, till exempel 1. Utan värden går det inte att veta hur stort ett steg är.
 
-Pennlösningen nedan ritar ett koordinatsystem steg för steg. Klicka för att se nästa steg.
+Pennan nedan ritar ett koordinatsystem steg för steg. Klicka för att se nästa steg.
 
 ::: handskrift
 typ: ritakoordinatsystem

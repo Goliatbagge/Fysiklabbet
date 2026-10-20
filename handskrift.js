@@ -13079,18 +13079,20 @@
    * genomgångens lista, så pennan skriver dem inte, utan ritar bara
    * systemet, ett steg per klick: x-axeln med linjal och pilspets åt höger, y-axeln med
    * pilspets uppåt, x ovanför x-axelns pilspets och y bredvid y-axelns,
-   * och sist skalan: först 1 på varje axel (inringat, minst ett värde
-   * per axel), sedan resten. Origo och varje skalsteg ligger på
+   * och sist skalan: först 1 på varje axel (minst ett värde per
+   * axel), sedan resten med lika långa steg. Origo och varje skalsteg ligger på
    * papperets rutlinjer (ett skalsteg = två rutor, så att talen −1 på
    * de två axlarna inte krockar vid origo). */
   function layoutRitaKoordinatsystem(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL;
-    var u = 2 * RUTA, ox = Math.round((padL + 2.5 * u) / RUTA) * RUTA, oy = 10 * RUTA;
-    var XMIN = -2, XMAX = 4, YMIN = -2, YMAX = 3, SK = 0.5;
+    /* origo på rutlinjen närmast arkets mitt, och axlarna lika långa åt
+     * alla fyra hållen, så att figuren blir symmetrisk på ritytan */
+    var u = 2 * RUTA, ox = Math.round(PAPER_W / 2 / RUTA) * RUTA, oy = 9 * RUTA;
+    var XMIN = -3, XMAX = 3, YMIN = -3, YMAX = 3, SK = 0.5;
     function X(v) { return ox + v * u; }
     function Y(v) { return oy - v * u; }
-    var x0 = X(XMIN) - 0.5 * u, x1 = X(XMAX) + 0.8 * u;
-    var y0 = Y(YMIN) + 0.5 * u, y1 = Y(YMAX) - 0.8 * u;
+    var x0 = X(XMIN) - 0.8 * u, x1 = X(XMAX) + 0.8 * u;
+    var y0 = Y(YMIN) + 0.8 * u, y1 = Y(YMAX) - 0.8 * u;
     function ax(p, q) { acts.push({ kind: 'stroke', pts: [p, q], color: null, ax: 1 }); }
     function tal(v) { return v < 0 ? '−' + (-v) : '' + v; }
     function xTal(v) { var t = tal(v), w = T.adv(t, SK); T.str(t, X(v) - w / 2, oy + 0.9 * F, null, SK); return [X(v) - w / 2, X(v) + w / 2, oy + 0.9 * F]; }
@@ -13111,22 +13113,15 @@
     T.str('y', ox + 12, y1 + 0.45 * F, null, 0.6);
     T.stepEnd();
 
-    /* 4. ett värde på varje axel, inringat */
+    /* 4. ett värde på varje axel */
     ax([X(1), oy - 5], [X(1), oy + 5]);
-    var a = xTal(1);
-    T.pause(200);
-    var r1 = T.ring(a[0], a[1], a[2]);
+    xTal(1);
     T.pause(320);
     ax([ox - 5, Y(1)], [ox + 5, Y(1)]);
-    var b = yTal(1);
-    T.pause(200);
-    var r2 = T.ring(b[0], b[1], b[2]);
+    yTal(1);
     T.stepEnd();
 
     /* 5. resten av skalan, lika långa steg */
-    T.fade(r1);
-    T.fade(r2);
-    T.pause(200);
     var v;
     for (v = XMIN; v <= XMAX; v++) {
       if (v === 0 || v === 1) continue;

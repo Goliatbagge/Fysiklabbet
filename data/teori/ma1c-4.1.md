@@ -29,7 +29,7 @@ Punkten markerad i koordinatsystemet har *x*-koordinaten 2 och *y*-koordinaten
 1. Dra en vågrät linje med linjal. Det är *x*-axeln. Rita en pilspets i den **högra** änden, eftersom talen blir större åt höger.
 2. Dra en lodrät linje som skär *x*-axeln. Det är *y*-axeln. Rita en pilspets i den **övre** änden, eftersom talen blir större uppåt.
 3. Skriv ***x*** vid pilspetsen på den vågräta axeln och ***y*** vid pilspetsen på den lodräta.
-4. Skriv ut skalan: **minst ett värde på varje axel**, till exempel 1. Utan värden går det inte att veta hur stort ett steg är.
+4. Skriv ut skalan: **minst ett värde på varje axel**, till exempel 1. Utan värden går det inte att veta hur stort ett steg är. Det ska alltid vara lika långt mellan varje steg på en axel. Däremot får *x*-axeln och *y*-axeln ha olika skala, till exempel 1 per ruta på *x*-axeln och 10 per ruta på *y*-axeln.
 
 Pennan nedan ritar ett koordinatsystem steg för steg. Klicka för att se nästa steg.
 

@@ -605,6 +605,7 @@
                     <circle cx={PX} cy={PY} r="3.5" fill="#0f1620" />
 
                     {/* linjal (måttband) med avläsning vid kulans tyngdpunkt */}
+                    {show.linjal && (<g>
                     <rect x={rx} y={PY - 6} width="26" height={2.05 * S + 12} rx="2" fill="#e8c35c" stroke="#8a6d15" strokeWidth="1" />
                     {rulerTicks}
                     <line x1={rx + 26} y1={PY} x2={PX - 8} y2={PY} stroke="#5a6170" strokeWidth="1" strokeDasharray="2 5" opacity="0.7" />
@@ -613,22 +614,27 @@
                     <text x={rx + 42} y={restY - 8} fontSize="15" fontWeight="700" fill="#0f1620">
                         <tspan fontStyle="italic">l</tspan> = {fmtL(l)} m
                     </text>
+                    </g>)}
 
                     {/* gradskiva */}
+                    {show.gradskiva && (<g>
                     <path d={`M ${PX - 74} ${PY} A 74 74 0 0 0 ${PX + 74} ${PY} Z`} fill="#fbf7ee" fillOpacity="0.72" stroke="#3a4151" strokeWidth="1.2" />
                     {ticks}{prLbl}
                     <line x1={PX} y1={PY} x2={PX} y2={PY + 26} stroke="#9aa3b2" strokeWidth="1" strokeDasharray="3 3" />
                     <circle cx={a0x} cy={a0y} r="3.5" fill="#c8324a" />
+                    </g>)}
                     <text x={PX - 90} y={PY + 20} textAnchor="end" fontSize="15" fontWeight="700" fill="#0f1620">
                         <tspan fontStyle="italic">α</tspan> = {fmt(Math.abs(th) / DEG, 1)}°
                     </text>
 
                     {/* ljusgrinden: sitter bakom kulan vid jämviktsläget */}
+                    {show.ljusgrind && (<g>
                     <rect x={PX - 1} y={restY - 14} width="3" height={BENCH - restY + 14} fill="#6c7686" />
                     <rect x={PX - 20} y={restY - 28} width="40" height="56" rx="6" fill="#3b4250" stroke="#1f2430" strokeWidth="1.2" />
                     <circle cx={PX + 11} cy={restY - 19} r="4.2" fill={flashOn ? '#ff3b3b' : '#6a2a2a'} />
                     <circle cx={PX} cy={restY} r="2.4" fill="#ff5a5a" opacity="0.9" />
                     <text x={PX + 8} y={restY + 46} textAnchor="start" fontSize="14" fill="#3a4151">Ljusgrind</text>
+                    </g>)}
 
                     {/* tidtagare på bänken */}
                     {!compact && (
@@ -996,7 +1002,7 @@
             const [okand, setOkand] = useState(() => slumpaPlanet());
             const [running, setRunning] = useState(true);
             const [speed, setSpeed] = useState(1);
-            const [show, setShow] = useState({ krafter: false, kurva: true, ghost: true });
+            const [show, setShow] = useState({ krafter: false, kurva: true, ghost: true, ljusgrind: true, gradskiva: true, linjal: true });
             const [diagMode, setDiagMode] = useState('T2');
             const [ghost, setGhost] = useState(null);
             const [forsok, setForsok] = useState(null);
@@ -1279,6 +1285,12 @@
                         <label><input type="checkbox" checked={show.kurva} onChange={() => tShow('kurva')} disabled={gissa} />
                             <span className="st-swatch" style={{ background: '#5a6170' }}></span>
                             <span>Formelns kurva</span></label>
+                        <label><input type="checkbox" checked={show.ljusgrind} onChange={() => tShow('ljusgrind')} />
+                            <span>Ljusgrind</span></label>
+                        <label><input type="checkbox" checked={show.gradskiva} onChange={() => tShow('gradskiva')} />
+                            <span>Gradskiva</span></label>
+                        <label><input type="checkbox" checked={show.linjal} onChange={() => tShow('linjal')} />
+                            <span>Linjal</span></label>
                         {ghost && (
                             <label><input type="checkbox" checked={show.ghost} onChange={() => tShow('ghost')} />
                                 <span className="st-swatch" style={{ background: '#2f6fd0' }}></span>

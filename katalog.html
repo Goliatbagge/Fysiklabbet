@@ -2477,9 +2477,27 @@
         // Plocka ut bara svaret ur en lösningstext.
         // Letar efter en rad/paragraf som börjar med "**Svar:**".
         function extractAnswer(solution) {
+            // Har lösningen en svarsrad per deluppgift (**a)** … **Svar:** …
+            // **b)** … **Svar:** …) visas alla, var och en med sin bokstav.
+            // Förr visades bara den första, så b) och c) saknades.
             if (!solution) return '';
-            const m = solution.match(/\*\*Svar:\*\*[\s\S]*?(?:\n\n|$)/);
-            return m ? m[0].trim() : '';
+            const rader = [];
+            const re = /\*\*(?:Svar|Answer):\*\*[\s\S]*?(?=\n\n|$)/g;
+            let m;
+            while ((m = re.exec(solution))) {
+                const fore = solution.slice(0, m.index);
+                const delar = fore.match(/(?:^|\n)\*\*([a-h])\)\*\*/g);
+                const del = delar ? delar[delar.length - 1].match(/([a-h])\)/)[1] : null;
+                rader.push({ del, text: m[0].trim() });
+            }
+            if (!rader.length) return '';
+            if (rader.length === 1) return rader[0].text;
+            return rader.map(r => {
+                const rest = r.text.replace(/^\*\*(?:Svar|Answer):\*\*\s*/, '');
+                // Svarsraden räknar redan upp a), b) … själv: lämna den orörd
+                if (!r.del || /(^|\s)[a-h]\)/.test(rest)) return r.text;
+                return '**' + r.del + ')** ' + rest;
+            }).join('\n\n');
         }
 
         // Tolka en sträng som ett tal — accepterar både komma och punkt som
@@ -2503,12 +2521,24 @@
             // multiplikationstecknet: "1,1 · 10^-8" lämnade förr ett mellanslag
             // före e och lästes som 1,1.
             s = s.replace(/\s*[·⋅*x×]\s*10\s*\^?\s*[({]?\s*([+-]?\d+)\s*[)}]?/g, 'e$1');
+            // Parenteser runt ett tal eller ett bråk tas bort, så att ett
+            // negativt svar inom parentes räknas: "(-3)", "(−2)/3", "−(2/3)",
+            // "(−2/3)". Ett minus framför parentesen följer med in, och två
+            // minus i rad tar ut varandra.
+            const TAL = '-?\\s*\\d+(?:\\.\\d+)?(?:e[+-]?\\d+)?';
+            const parTal = new RegExp('\\(\\s*(' + TAL + '(?:\\s*\\/\\s*' + TAL + ')?)\\s*\\)', 'gi');
+            for (let n = 0; n < 3 && parTal.test(s); n++) {
+                parTal.lastIndex = 0;
+                s = s.replace(parTal, '$1');
+            }
+            s = s.replace(/-\s*-\s*/g, '').replace(/-\s+(?=\d)/g, '-');
             // Bråk: "1/2", "-3 / 4" (men inte enheter som m/s, där en bokstav
             // står efter snedstrecket)
-            const fr = s.match(/(-?)(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)(?![\d.e])/i);
-            if (fr && parseFloat(fr[3]) !== 0) {
-                const v = parseFloat(fr[2]) / parseFloat(fr[3]);
-                return { value: fr[1] ? -v : v, sig: Infinity };
+            const fr = s.match(/(-?)(\d+(?:\.\d+)?)\s*\/\s*(-?)(\d+(?:\.\d+)?)(?![\d.e])/i);
+            if (fr && parseFloat(fr[4]) !== 0) {
+                const v = parseFloat(fr[2]) / parseFloat(fr[4]);
+                // Ett bråk är exakt: inga värdesiffror att avrunda efter
+                return { value: (fr[1] ? -1 : 1) * (fr[3] ? -1 : 1) * v, sig: 0 };
             }
             // Plocka första numret (med valfri e-notation)
             const m = s.match(/(-?)(\d+(?:\.\d+)?)(?:e([+-]?\d+))?/i);
@@ -2537,7 +2567,7 @@
             const p = parseAnswerParts(input);
             if (!p) return 'unparseable';
             if (expected.ignoreSign) {
-                const utanTecken = input.replace(/^\s*[-−–]\s*/, '');
+                const utanTecken = input.replace(/^(\s*\(?)\s*[-−–]\s*/, '$1');
                 return checkAnswer(utanTecken, { ...expected, value: Math.abs(expected.value), ignoreSign: false });
             }
             const num = p.value;

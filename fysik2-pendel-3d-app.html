@@ -320,7 +320,7 @@
         const DEG = Math.PI / 180;
         const G_EARTH = 9.82;
         const NP = 15;                 // antal pendlar i pendelvågen
-        const N0 = 12;                 // den längsta pendeln gör N0 svängningar på Γ
+        const N0 = 12;                 // den längsta pendeln gör N0 svängningar på T_mönster
         const PITCH = 0.2;             // avstånd mellan pendlarna (m)
         const BEAM_H = 3.2;            // bommens höjd över bänken (m)
         const R_WAVE = 0.065, R_ONE = 0.1;
@@ -333,7 +333,7 @@
         ];
         const INK = '#0f1620', C_FG = '#c02626', C_FS = '#1d4fb8', C_ALFA = '#a8520a';
 
-        // pendel k gör (N0 + k) hela svängningar på Γ, så T = Γ/(N0 + k) och l = g·T²/(4π²)
+        // pendel k gör (N0 + k) hela svängningar på T_mönster, så T = T_mönster/(N0 + k) och l = g·T²/(4π²)
         const pendLen = (k, gamma) => G_EARTH * Math.pow(gamma / (2 * Math.PI * (N0 + k)), 2);
         const hueOf = (k) => (k / (NP - 1)) * 0.78;          // röd till violett
         const cssHue = (k) => 'hsl(' + Math.round(hueOf(k) * 360) + ' 72% 48%)';
@@ -1043,7 +1043,7 @@
             })();
             // Alla pendlar släpps från samma vinkel, så varje periodtid blir lika
             // många procent längre vid stort utslag. Kvoterna mellan dem ändras
-            // inte, och mönstret återkommer exakt, bara efter Γ · corr.
+            // inte, och mönstret återkommer exakt, bara efter T_mönster · corr.
             const gammaP = gamma * Math.sqrt(G_EARTH / g) * (mode === 'wave' ? corr : 1);
             const tMod = gammaP > 0 ? ui.t % gammaP : 0;
             const nextRe = ui.t === 0 ? gammaP : gammaP - tMod;
@@ -1100,7 +1100,7 @@
             const sliderSet = (Comp) => (
                 <React.Fragment>
                     {mode === 'wave' ? (
-                        <Comp label="Mönstrets tid (<em>Γ</em>)" sub="Tiden på Jorden. Längderna är valda så att pendel nummer <em>k</em> gör 12 + <em>k</em> hela svängningar på den. Ändrar du tiden byts längderna."
+                        <Comp label="Mönstrets periodtid (<em>T</em><sub>mönster</sub>)" sub="Tiden på Jorden. Längderna är valda så att pendel nummer <em>k</em> gör 12 + <em>k</em> hela svängningar på den. Ändrar du tiden byts längderna."
                               value={gamma} min={20} max={40} step={1} unit="s" onChange={setGamma} decimals={0} />
                     ) : (
                         <React.Fragment>
@@ -1199,7 +1199,7 @@
                             Femton pendlar hänger bredvid varandra, och varje pendel är en aning kortare än grannen.
                             Eftersom <strong>kortare pendel ger kortare periodtid</strong> hamnar de snabbt ur takt:
                             kulorna bildar ormar, vågor och till synes kaos. Längderna är räknade så att pendel nummer <em>k</em>{' '}
-                            hinner göra precis 12 + <em>k</em> hela svängningar på samma tid <em>Γ</em>, och då står alla
+                            hinner göra precis 12 + <em>k</em> hela svängningar på samma tid <em>T</em><sub>mönster</sub>, och då står alla
                             kulor i rad igen. Välj <strong>Rakt ovanifrån</strong> för att se vågformen, byt himlakropp
                             och se hur tiden förlängs, eller undersök <strong>en enda pendel</strong> och dess krafter.
                         </p>
@@ -1356,7 +1356,7 @@
                                             <th style={{ textAlign: 'left', padding: '3px 6px' }}>Nr</th>
                                             <th style={{ padding: '3px 6px' }}>Längd <em>l</em> (m)</th>
                                             <th style={{ padding: '3px 6px' }}>Periodtid <em>T</em> (s)</th>
-                                            <th style={{ padding: '3px 6px' }}>Svängningar på <em>Γ</em></th>
+                                            <th style={{ padding: '3px 6px' }}>Svängningar på <em>T</em><sub>mönster</sub></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1379,10 +1379,10 @@
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Varför står de i rad igen?</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Pendel nummer <em>k</em> har periodtiden <em>T</em> = <em>Γ</em>/(12 + <em>k</em>), så den hinner göra ett helt antal
-                                    svängningar på <em>Γ</em>. Alla pendlar är då tillbaka i sitt startläge samtidigt, även om de
+                                    Pendel nummer <em>k</em> har periodtiden <em>T</em> = <em>T</em><sub>mönster</sub>/(12 + <em>k</em>), så den hinner göra ett helt antal
+                                    svängningar på <em>T</em><sub>mönster</sub>. Alla pendlar är då tillbaka i sitt startläge samtidigt, även om de
                                     mitt i förloppet svänger åt helt olika håll. Efter halva tiden bildar kulorna två vågor, och
-                                    vid andra bråkdelar av <em>Γ</em> syns fler och fler små vågor tills det ser slumpmässigt ut.
+                                    vid andra bråkdelar av <em>T</em><sub>mönster</sub> syns fler och fler små vågor tills det ser slumpmässigt ut.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
@@ -1391,7 +1391,7 @@
                                     Formeln <em>T</em> = 2π · √(<em>l</em>/<em>g</em>) gäller bara när utslaget är litet. Vid 20° är
                                     den verkliga periodtiden knappt 1 % längre, och vid 45° ungefär 4 % längre. Men alla pendlar
                                     släpps från samma vinkel, så alla blir lika många procent långsammare. Därför står kulorna
-                                    ändå i rad igen, bara en stund efter <em>Γ</em>. Avläsningen Återföreningstid räknar med det.
+                                    ändå i rad igen, bara en stund efter <em>T</em><sub>mönster</sub>. Avläsningen Återföreningstid räknar med det.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4 md:col-span-2">

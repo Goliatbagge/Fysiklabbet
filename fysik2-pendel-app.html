@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan matematisk pendel — Fysiklabbet</title>
     <meta name="description" content="Mät pendelns periodtid med en ljusgrind, lägg mätpunkterna i ett diagram och läs av tyngdaccelerationen ur lutningen. Prova olika längder, massor och utslag, flytta pendeln till Månen eller gissa vilken okänd planet den hänger på.">
@@ -214,6 +215,15 @@
         details > summary::-webkit-details-marker { display: none; }
         .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
             align-items: center; font-weight: 600; }
+        /* Växlare 2D / 3D / Pendelvågen ovanför scenen (samma på båda sidorna). */
+        .dim-lankar { display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; border-radius: 999px; width: max-content; max-width: 100%;
+            margin: 0 0 12px; background: rgba(243,238,228,0.92);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .dim-lankar a, .dim-lankar button, .dim-lankar span { min-width: 44px; height: 30px; padding: 0 14px; border-radius: 999px; display: flex;
+            align-items: center; justify-content: center; font: 600 13px Poppins, sans-serif; border: none; background: transparent;
+            color: var(--lab-ink, #0f1620); text-decoration: none; cursor: pointer; }
+        .dim-lankar a:hover, .dim-lankar button:hover { background: rgba(15,22,32,0.08); }
+        .dim-lankar .aktiv, .dim-lankar .aktiv:hover { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); cursor: default; }
     </style>
 </head>
 <body class="lab-sim">
@@ -1325,6 +1335,12 @@
                         </p>
 
                         <FormulaCard l={l} g={g} T={Tformel} gissa={gissa} />
+
+                        <div className="dim-lankar" role="group" aria-label="Vy: 2D, 3D eller pendelvågen">
+                            <span className="aktiv" aria-current="true">2D</span>
+                            <a href="fysik2-pendel-3d-app.html?lage=en" title="Samma pendel i 3D, med krafterna">3D</a>
+                            <a href="fysik2-pendel-3d-app.html" title="Femton pendlar som bildar en våg">Pendelvågen i 3D</a>
+                        </div>
 
                         <main className="flex flex-col lg:flex-row gap-6">
                             {/* Scen */}

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="sim-variant-av" content="fysik2-pendel-app.html">
     <title>Pendelvågen i 3D — Fysiklabbet</title>
     <meta name="description" content="Femton pendlar hänger bredvid varandra, och ju kortare pendel, desto kortare periodtid. Släpp dem samtidigt och se ormar, vågor och kaos som efter en bestämd tid ordnar sig i en rad igen. Byt himlakropp, utslag och kameravy, eller undersök en enda pendel och dess krafter.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik2-pendel-3d-app.html">
@@ -226,6 +227,15 @@
         details > summary::-webkit-details-marker { display: none; }
         .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
             align-items: center; font-weight: 600; }
+        /* Växlare 2D / 3D / Pendelvågen ovanför scenen (samma på båda sidorna). */
+        .dim-lankar { display: flex; flex-wrap: wrap; gap: 2px; padding: 3px; border-radius: 999px; width: max-content; max-width: 100%;
+            margin: 0 0 12px; background: rgba(243,238,228,0.92);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .dim-lankar a, .dim-lankar button, .dim-lankar span { min-width: 44px; height: 30px; padding: 0 14px; border-radius: 999px; display: flex;
+            align-items: center; justify-content: center; font: 600 13px Poppins, sans-serif; border: none; background: transparent;
+            color: var(--lab-ink, #0f1620); text-decoration: none; cursor: pointer; }
+        .dim-lankar a:hover, .dim-lankar button:hover { background: rgba(15,22,32,0.08); }
+        .dim-lankar .aktiv, .dim-lankar .aktiv:hover { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); cursor: default; }
     </style>
 </head>
 <body class="lab-sim">
@@ -948,7 +958,9 @@
         const VIEW_SHORT = { snett: 'Snett', ovan: 'Ovanifrån', sidan: 'Sidan' };
 
         const App = () => {
-            const [mode, setMode] = useState('wave');
+            // ?lage=en: 3D-knappen i den plana pendeln öppnar en enda pendel
+            const startEn = new URLSearchParams(location.search).get('lage') === 'en';
+            const [mode, setMode] = useState(startEn ? 'one' : 'wave');
             const [gamma, setGamma] = useState(30);
             const [bodyId, setBodyId] = useState('jorden');
             const [alphaW, setAlphaW] = useState(20);
@@ -958,7 +970,7 @@
             const [speed, setSpeed] = useState(1);
             const [running, setRunning] = useState(false);   // i vila tills eleven trycker Släpp
             const [show, setShow] = useState({ skugga: true, vag: true, etiketter: true, kraft: true, komp: true, bana: true });
-            const [view, setViewState] = useState('snett');
+            const [view, setViewState] = useState(startEn ? 'sidan' : 'snett');
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [togglesOpen, setTogglesOpen] = useState(true);
             const [ui, setUi] = useState({ t: 0, sa: 0, sw: 0, tMeas: null });
@@ -1209,6 +1221,14 @@
                                     : <span>Med <em>l</em> = {fmt(len, 2)} m och <em>g</em> = {fmt(g, 2)} m/s² ger formeln
                                         <em> T</em> = {fmt(Tform, 2)} s. Den gäller vid små utslag. Pendelns massa ingår inte.</span>}
                             </div>
+                        </div>
+
+                        <div className="dim-lankar" role="group" aria-label="Vy: 2D, 3D eller pendelvågen">
+                            <a href="fysik2-pendel-app.html" title="Plan pendel med ljusgrind och diagram">2D</a>
+                            <button className={mode === 'one' ? 'aktiv' : ''} aria-pressed={mode === 'one'}
+                                    onClick={() => chooseMode('one')} title="En pendel med krafter i 3D">3D</button>
+                            <button className={mode === 'wave' ? 'aktiv' : ''} aria-pressed={mode === 'wave'}
+                                    onClick={() => chooseMode('wave')} title="Femton pendlar som bildar en våg">Pendelvågen i 3D</button>
                         </div>
 
                         <main className="flex flex-col lg:flex-row gap-6">

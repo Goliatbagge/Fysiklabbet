@@ -171,6 +171,12 @@
         .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
         .btn-prim { background: var(--lab-accent, #c8324a); color: #fff; border-color: var(--lab-accent, #c8324a); }
         .btn-prim:hover:not(:disabled) { filter: brightness(1.08); }
+        /* Spela/pausa och stega: ikon + text, stegknapparna bara ikon */
+        .styr { display: flex; flex-wrap: wrap; gap: 8px; }
+        .styr .btn-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 7px; }
+        .styr .btn-steg { flex: none; width: 46px; padding-left: 0; padding-right: 0; }
+        .styr .btn-spela { flex: 1 1 120px; }
+        .styr .btn-om { flex: 1 1 100px; }
 
         .seg { display: grid; gap: 1px; border-radius: 9px; overflow: hidden;
                border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
@@ -399,6 +405,27 @@
                 }
             }
         };
+
+        // Stegar BAKÅT dt sekunder (negativt tidssteg). Ljusgrinden mäter inte
+        // baklänges, så en pågående mätning avbryts.
+        const bakat = (sim, P, dt) => {
+            const H = 1 / 400;
+            let rem = Math.min(dt, sim.t);
+            while (rem > 1e-9) {
+                const h = Math.min(H, rem);
+                rem -= h;
+                const r = rk4(sim.th, sim.om, P.g, P.l, -h, P.damp ? DAMP_B : 0);
+                sim.th = r[0]; sim.om = r[1];
+                sim.t -= h;
+                if (P.ghost) {
+                    const rb = rk4(sim.thB, sim.omB, P.g, P.ghost.l, -h, P.damp ? DAMP_B : 0);
+                    sim.thB = rb[0]; sim.omB = rb[1];
+                }
+            }
+            if (sim.t < 1e-9) sim.t = 0;
+            if (sim.meas.fas === 'armed' || sim.meas.fas === 'running') sim.meas = nyMatning();
+        };
+        const STEG = 0.02;   // ett klick på stegknappen = 0,02 s
 
         // ── Färdiga försök ──
         const FORSOK = [
@@ -1121,7 +1148,9 @@
             const primar = () => {
                 setRunning((r) => !r);
             };
-            const primarText = running ? 'Pausa' : (simRef.current.t === 0 ? 'Släpp pendeln' : 'Fortsätt');
+            const primarText = running ? 'Pausa' : (simRef.current.t === 0 ? 'Släpp pendeln' : 'Spela');
+            const stegaFram = () => { setRunning(false); framat(simRef.current, Pref.current, STEG); force(); };
+            const stegaBak = () => { setRunning(false); bakat(simRef.current, Pref.current, STEG); force(); };
 
             const valjForsok = (f) => {
                 setL(f.set.l); setA0(f.set.a0); setM(f.set.m); setSgn(1);
@@ -1277,9 +1306,22 @@
             };
 
             const styrknappar = (
-                <div className="flex gap-2">
-                    <button className="btn-toggle btn-prim flex-1" onClick={primar}>{primarText}</button>
-                    <button className="btn-toggle flex-1" onClick={tillbaka}>Börja om</button>
+                <div className="styr">
+                    <button className="btn-toggle btn-steg" onClick={stegaBak} disabled={simRef.current.t === 0}
+                            aria-label="Stega bakåt" title="Stega bakåt 0,02 s">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="5" width="3" height="14" rx="1" /><path d="M20 5.5v13L9 12z" /></svg>
+                    </button>
+                    <button className="btn-toggle btn-prim btn-spela" onClick={primar}>
+                        {running
+                            ? <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
+                            : <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15L19.5 12z" /></svg>}
+                        <span>{primarText}</span>
+                    </button>
+                    <button className="btn-toggle btn-steg" onClick={stegaFram}
+                            aria-label="Stega framåt" title="Stega framåt 0,02 s">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 5.5v13L15 12z" /><rect x="17" y="5" width="3" height="14" rx="1" /></svg>
+                    </button>
+                    <button className="btn-toggle btn-om" onClick={tillbaka}>Börja om</button>
                 </div>
             );
 
@@ -1408,6 +1450,7 @@
                                         )}
                                     </button>
                                 </div>
+                                {!isFullscreen && <div className="mt-3">{styrknappar}</div>}
                                 <div className="hidden lg:flex flex-col gap-3 mt-3">{paneler}</div>
                             </div>
 
@@ -1451,9 +1494,8 @@
                                             <button key={v} className={speed === v ? 'active' : ''} onClick={() => setSpeed(v)}>{t}</button>
                                         ))}
                                     </div>
-                                    {styrknappar}
                                     <p className="anm mt-2">
-                                        Ändrar du längd, utslag eller plats återgår pendeln till startläget.
+                                        Pausa och stega fram eller tillbaka med knapparna under scenen. Ändrar du längd, utslag eller plats återgår pendeln till startläget.
                                         Massan påverkar inte rörelsen. Väljer du dämpad svängning bromsas pendeln
                                         av luftmotståndet, och utslaget avtar för varje svängning.
                                     </p>

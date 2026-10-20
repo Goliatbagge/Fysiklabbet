@@ -545,6 +545,22 @@
             }
 
             // jämförelsependel B
+            // vinkeln α mellan lodlinjen och snöret (bågens medelpunkt i upphängningen)
+            let vinkelEl = null;
+            if (show.vinkel) {
+                const rV = 40, lodL = Math.min(l * S - rA - 4, 120);
+                const ex = PX + rV * Math.sin(th), ey = PY + rV * Math.cos(th);
+                vinkelEl = (
+                    <g>
+                        <line x1={PX} y1={PY} x2={PX} y2={PY + lodL} stroke="#2563c9" strokeWidth="1.2" strokeDasharray="4 3" />
+                        {Math.abs(th) > 0.5 * DEG && (
+                            <path d={`M ${PX} ${PY + rV} A ${rV} ${rV} 0 0 ${th > 0 ? 0 : 1} ${ex.toFixed(2)} ${ey.toFixed(2)}`}
+                                  fill="none" stroke="#2563c9" strokeWidth="1.8" />
+                        )}
+                    </g>
+                );
+            }
+
             let ghostEl = null;
             if (ghost && show.ghost) {
                 const gx = PX + ghost.l * S * Math.sin(sim.thB), gy = PY + ghost.l * S * Math.cos(sim.thB);
@@ -553,7 +569,7 @@
                     <g>
                         <line x1={PX} y1={PY} x2={gx} y2={gy} stroke="#2f6fd0" strokeWidth="1.8" opacity="0.85" />
                         <circle cx={gx} cy={gy} r={rB} fill="url(#bobB)" stroke="#2a4f8a" strokeWidth="1.4" />
-                        <circle cx={gx} cy={gy} r="2" fill="#0f1620" />
+                        {show.krafter && <circle cx={gx} cy={gy} r="2" fill="#0f1620" />}
                     </g>
                 );
             }
@@ -627,9 +643,11 @@
                     <line x1={PX} y1={PY} x2={PX} y2={PY + 26} stroke="#9aa3b2" strokeWidth="1" strokeDasharray="3 3" />
                     <circle cx={a0x} cy={a0y} r="3.5" fill="#c8324a" />
                     </g>)}
-                    <text x={PX - 90} y={PY + 20} textAnchor="end" fontSize="15" fontWeight="700" fill="#0f1620">
-                        <tspan fontStyle="italic">α</tspan> = {fmt(Math.abs(th) / DEG, 1)}°
-                    </text>
+                    {show.vinkel && (
+                        <text x={PX - 90} y={PY + 20} textAnchor="end" fontSize="15" fontWeight="700" fill="#2563c9">
+                            <tspan fontStyle="italic">α</tspan> = {fmt(Math.abs(th) / DEG, 1)}°
+                        </text>
+                    )}
 
                     {/* ljusgrinden: sitter bakom kulan vid jämviktsläget */}
                     {show.ljusgrind && (<g>
@@ -656,7 +674,8 @@
                     {/* pendel A: snöret går ända till tyngdpunkten */}
                     <line x1={PX} y1={PY} x2={bx} y2={by} stroke="#2a2f3a" strokeWidth="2" />
                     <circle cx={bx} cy={by} r={rA} fill="url(#bobA)" stroke="#2a2f3a" strokeWidth="1.4" />
-                    <circle cx={bx} cy={by} r="2.6" fill="#0f1620" />
+                    {show.krafter && <circle cx={bx} cy={by} r="2.6" fill="#0f1620" />}
+                    {vinkelEl}
                     {krafter}
 
                     {/* etiketter för A och B */}
@@ -1007,7 +1026,7 @@
             const [running, setRunning] = useState(true);
             const [speed, setSpeed] = useState(1);
             const [damp, setDamp] = useState(false);   // dämpad svängning (luftmotstånd)
-            const [show, setShow] = useState({ krafter: false, kurva: true, ghost: true, ljusgrind: true, gradskiva: true, linjal: true });
+            const [show, setShow] = useState({ krafter: false, kurva: true, ghost: true, ljusgrind: true, gradskiva: true, linjal: true, vinkel: true });
             const [diagMode, setDiagMode] = useState('T2');
             const [ghost, setGhost] = useState(null);
             const [forsok, setForsok] = useState(null);
@@ -1290,6 +1309,9 @@
                         <label><input type="checkbox" checked={show.kurva} onChange={() => tShow('kurva')} disabled={gissa} />
                             <span className="st-swatch" style={{ background: '#5a6170' }}></span>
                             <span>Formelns kurva</span></label>
+                        <label><input type="checkbox" checked={show.vinkel} onChange={() => tShow('vinkel')} />
+                            <span className="st-swatch" style={{ background: '#2563c9' }}></span>
+                            <span>Vinkel</span></label>
                         <label><input type="checkbox" checked={show.ljusgrind} onChange={() => tShow('ljusgrind')} />
                             <span>Ljusgrind</span></label>
                         <label><input type="checkbox" checked={show.gradskiva} onChange={() => tShow('gradskiva')} />

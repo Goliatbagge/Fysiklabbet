@@ -94,6 +94,7 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 7vw, 52
   padding: 11px 20px; font-size: 15px; font-weight: 600; border-radius: 10px; cursor: pointer;
   background: var(--ink); color: #fff; border: 1.5px solid var(--ink);
 }
+.knapp { white-space: nowrap; }
 .knapp.sekundar { background: transparent; color: var(--ink); }
 .knapp:hover { opacity: 0.9; }
 .poang { font-family: var(--serif); font-size: 64px; line-height: 1; margin: 6px 0 4px; }
@@ -105,6 +106,9 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 7vw, 52
 .markering { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
 .markering.r { color: var(--green); }
 .markering.f { color: var(--accent); }
+.kopierat { margin: 10px 0 0; font-size: 14.5px; color: var(--green); min-height: 1em; }
+.kopierat:empty { margin: 0; }
+.kopietext { display: block; width: 100%; height: 160px; margin-top: 8px; font: 13px/1.45 var(--mono); color: var(--ink); }
 .fot { margin-top: 28px; font-size: 13px; color: var(--muted); line-height: 1.5; }
 @media (max-width: 600px) {
   .kort { padding: 18px; }
@@ -284,6 +288,56 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 7vw, 52
     });
   }
 
+  // Ren text som eleven klistrar in i lärplattformen: poäng, tidpunkt och
+  // varje fråga med rätt/fel (felsvaren med elevens och det rätta svaret).
+  function resultatText() {
+    var d = new Date();
+    function tv(x) { return (x < 10 ? '0' : '') + x; }
+    var tid = d.getFullYear() + '-' + tv(d.getMonth() + 1) + '-' + tv(d.getDate()) +
+      ' kl. ' + tv(d.getHours()) + '.' + tv(d.getMinutes());
+    var rader = [
+      'Quiz: AI och lagstiftning',
+      'Resultat: ' + poang + ' av ' + ordning.length + ' rätt',
+      'Gjort: ' + tid,
+      ''
+    ];
+    svar.forEach(function (s, i) {
+      rader.push((i + 1) + '. ' + (s.ratt ? 'Rätt' : 'Fel') + ': ' + s.fraga.q);
+      if (!s.ratt) {
+        var rattAlt = s.fraga.alt.filter(function (a) { return a.ratt; })[0];
+        rader.push('   Mitt svar: ' + s.fraga.alt[s.valt].text);
+        rader.push('   Rätt svar: ' + rattAlt.text);
+      }
+    });
+    return rader.join('\n');
+  }
+
+  function kopiera(text, kvitto) {
+    function klart(ok) {
+      kvitto.textContent = ok
+        ? 'Resultatet är kopierat. Klistra in det i lärplattformen.'
+        : 'Det gick inte att kopiera automatiskt. Markera texten nedan och kopiera den.';
+      if (!ok) {
+        var ta = document.createElement('textarea');
+        ta.className = 'kopietext'; ta.readOnly = true; ta.value = text;
+        kvitto.appendChild(ta); ta.select();
+      }
+    }
+    function reserv() {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      klart(ok);
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function () { klart(true); }, reserv);
+    } else reserv();
+  }
+
   function resultat() {
     var n = ordning.length;
     var andel = poang / n;
@@ -296,7 +350,9 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 7vw, 52
       '<div class="poang">' + poang + ' av ' + n + '</div>' +
       '<p class="omdome">' + omdome + '</p>' +
       '<div class="knappar" style="justify-content:flex-start">' +
-      '<button type="button" class="knapp" id="igen">Gör om quizet</button></div>';
+      '<button type="button" class="knapp" id="kopiera">Kopiera resultat</button>' +
+      '<button type="button" class="knapp sekundar" id="igen">Gör om quizet</button></div>' +
+      '<p class="kopierat" id="kopierat" aria-live="polite"></p>';
     if (fel.length) {
       html += '<div class="genomgang"><div class="etikett">Frågor du missade</div>';
       fel.forEach(function (s) {
@@ -309,6 +365,9 @@ h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 7vw, 52
       html += '</div>';
     }
     el.innerHTML = html;
+    document.getElementById('kopiera').addEventListener('click', function () {
+      kopiera(resultatText(), document.getElementById('kopierat'));
+    });
     document.getElementById('igen').addEventListener('click', function () {
       start(); window.scrollTo({ top: el.offsetTop - 20, behavior: 'smooth' });
     });

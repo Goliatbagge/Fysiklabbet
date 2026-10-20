@@ -2480,23 +2480,34 @@
             // Har lösningen en svarsrad per deluppgift (**a)** … **Svar:** …
             // **b)** … **Svar:** …) visas alla, var och en med sin bokstav.
             // Förr visades bara den första, så b) och c) saknades.
+            // Bokstaven tas ur svarsraden själv ("**Svar a):**") eller ur
+            // närmaste deluppgiftsrubrik före den ("**a)**", "**a) Kraften.**").
             if (!solution) return '';
             const rader = [];
-            const re = /\*\*(?:Svar|Answer):\*\*[\s\S]*?(?=\n\n|$)/g;
+            const re = /\*\*(?:Svar|Answer)(?:\s*\(?([a-h])\))?:\*\*[\s\S]*?(?=\n\n|$)/g;
             let m;
             while ((m = re.exec(solution))) {
-                const fore = solution.slice(0, m.index);
-                const delar = fore.match(/(?:^|\n)\*\*([a-h])\)\*\*/g);
-                const del = delar ? delar[delar.length - 1].match(/([a-h])\)/)[1] : null;
-                rader.push({ del, text: m[0].trim() });
+                let del = m[1] || null;
+                const iRaden = !!del;
+                if (!del) {
+                    const fore = solution.slice(0, m.index);
+                    const delar = fore.match(/(?:^|\n)\*\*([a-h])\)/g);
+                    del = delar ? delar[delar.length - 1].match(/([a-h])\)/)[1] : null;
+                }
+                const rest = m[0].replace(/^\*\*(?:Svar|Answer)[^*]*:\*\*\s*/, '').trim();
+                rader.push({ del, rest, iRaden });
             }
             if (!rader.length) return '';
-            if (rader.length === 1) return rader[0].text;
+            const svar = (solution.match(/\*\*(Svar|Answer)/) || [])[1] + ':';
+            // Ett enda svar får bokstav bara om lösningen har flera deluppgifter
+            // (de andra är till exempel "Visa att", som inte har något svar).
+            const antalDelar = new Set((solution.match(/(?:^|\n)\*\*[a-h]\)/g) || [])
+                .map(x => x.trim())).size;
+            if (rader.length === 1 && !rader[0].iRaden && antalDelar < 2) return '**' + svar + '** ' + rader[0].rest;
             return rader.map(r => {
-                const rest = r.text.replace(/^\*\*(?:Svar|Answer):\*\*\s*/, '');
                 // Svarsraden räknar redan upp a), b) … själv: lämna den orörd
-                if (!r.del || /(^|\s)[a-h]\)/.test(rest)) return r.text;
-                return '**' + r.del + ')** ' + rest;
+                if (!r.del || /^\s*\**\s*[a-h]\)/.test(r.rest)) return '**' + svar + '** ' + r.rest;
+                return '**' + r.del + ')** ' + r.rest;
             }).join('\n\n');
         }
 
@@ -2753,7 +2764,10 @@
             const delarRattas = !!delar && delar.some(d => typeof d.value === 'number' || Array.isArray(d.values));
             const fraga = useMemo(() => delar ? utanSvarsinstruktion(uppgift.question) : uppgift.question,
                 [uppgift.question, !!delar]);
-            const answerOnly = useMemo(() => extractAnswer(uppgift.solution), [uppgift.solution]);
+            // Flerval utan svarsrad i lösningen: visa det rätta alternativet
+            const answerOnly = useMemo(() => extractAnswer(uppgift.solution) || (isMC
+                ? '**Svar:** Alternativ ' + String.fromCharCode(65 + uppgift.correct) + ', ' + uppgift.choices[uppgift.correct]
+                : ''), [uppgift.solution, isMC]);
             const pennaKlar = useOvningPenna(showSolution ? uppgift.penna : null);
             const [losVy, setLosVy] = useState(lasHkVy);
             const pennaVy = pennaKlar && losVy === 'penna';

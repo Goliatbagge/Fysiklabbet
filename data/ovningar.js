@@ -3522,7 +3522,7 @@ $$
 
 Eftersom densitet är en *materialegenskap* som inte beror på föremålets storlek eller form kan kronan **inte** vara av rent guld. Den är förmodligen legerad med en lättare metall (till exempel silver eller koppar).
 
-**Svar:** Kronans densitet är 16,9 g/cm³, vilket är klart lägre än 19,3 g/cm³. Kronan är inte av rent guld.
+**Svar:** a) 16,9 g/cm³&emsp;&emsp;b) Nej. Densiteten är klart lägre än guldets 19,3 g/cm³, så kronan är inte av rent guld.
 
 **Generell slutsats:** Densitetsmätning via vattenförträngning är en icke-förstörande metod att avgöra om ett föremål är av det material det utger sig för att vara — historiskt sett samma metod som ska ha avslöjat Arkimedes "guld-i-kronan"-fall.`,
         },
@@ -33024,7 +33024,7 @@ $$ \\left(\\frac{1}{6}\\right)^5 \\cdot \\frac{1}{6} = \\frac{1}{46\\,656} $$
 
 alltså exakt lika stor som för sex sexor. Ett "något annat" i sista kastet är inte mer sannolikt än en sexa.
 
-**Svar:** a) gäller ett enda kast när fem redan är gjorda, b) gäller alla sex kasten innan något är gjort. Kasten är oberoende, så sannolikheten för en sexa är alltid $\\dfrac{1}{6}$ hur många sexor som än kommit innan.
+**Svar:** Frågan i a) gäller ett enda kast när fem redan är gjorda, frågan i b) gäller alla sex kasten innan något är gjort. Kasten är oberoende, så sannolikheten för en sexa är alltid $\\dfrac{1}{6}$ hur många sexor som än kommit innan.
 
 **Generell slutsats:** produktregeln räknar på det som ännu inte har hänt. Det som redan har hänt har sannolikheten 1 och ändrar inte oberoende händelser framåt.`,
         },
@@ -40336,7 +40336,7 @@ $$
 
 Eftersom $k > 0$ är tangentens lutning positiv, vilket betyder att funktionen **växer** i punkten $x = 3$.
 
-**Svar:** $k = 3$; funktionen växer.`,
+**Svar:** a) $k = 3$&emsp;&emsp;b) Funktionen växer.`,
         },
         {
             level: 2,
@@ -40503,7 +40503,7 @@ $$
 f'(4) = 2 \\cdot 4 - 3 = 5
 $$
 
-**Svar:** $f'(x) = 2x - 3$ och $f'(4) = 5$`,
+**Svar:** a) $f'(x) = 2x - 3$&emsp;&emsp;b) $f'(4) = 5$`,
         },
         {
             level: 2,
@@ -43964,7 +43964,7 @@ $$
 B = (10, 1570.79633) \\quad \\Rightarrow \\quad r = 10
 $$
 
-**Svar:** $r = 10$ cm`,
+**Svar:** a) $V(r) = 15\\pi r^2 - \\pi r^3$&emsp;&emsp;b) $r = 10$ cm`,
         },
         {
             level: 2,
@@ -43986,7 +43986,7 @@ $$
 (12, 144) \\quad \\Rightarrow \\quad P(12) = 144
 $$
 
-**Svar:** 144`,
+**Svar:** a) $P(x) = x(24 - x)$&emsp;&emsp;b) 144`,
         },
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
@@ -44007,7 +44007,7 @@ Både $(24 - 2x) > 0$ och $(15 - 2x) > 0$ måste gälla (annars går det inte at
 
 **b)** Grafen till $V(x)$ är ett tredjegradspolynom och har därför två punkter med vågrät tangent — men bara den ena ligger inom definitionsmängden $0 < x < 7{,}5$ från a). Punkten $(10, -200)$ ligger utanför, eftersom $x = 10 > 7{,}5$ (och en negativ volym dessutom saknar fysikalisk mening), så den kan inte vara svaret. Kvar blir $(3, 486)$: eftersom $0 < 3 < 7{,}5$ ligger denna punkt inom definitionsmängden, och volymen är som störst vid $x = 3$ cm (volymen blir då 486 cm³).
 
-**Svar:** $x = 3$ cm`,
+**Svar:** a) $0 < x < 7{,}5$&emsp;&emsp;b) $x = 3$ cm. Punkten $(10, -200)$ ligger utanför definitionsmängden.`,
         },
     ],
 
@@ -44074,7 +44074,7 @@ $$
 \\sin 52\^\circ = \\frac{6{,}0}{h} \\quad\\Leftrightarrow\\quad h = \\frac{6{,}0}{\\sin 52\^\circ} = 7{,}614\\ldots \\approx 7{,}6\\ \\mathrm{m}
 $$
 
-**Svar:** 4,7 m; 7,6 m`,
+**Svar:** a) 4,7 m&emsp;&emsp;b) 7,6 m`,
         },
         {
             level: 2,
@@ -44100,7 +44100,7 @@ $$
 
 Observera att $\\tan^{-1}$ av kvoten mellan de två katetrarna INTE ger hypotenusan (det svarar mot vinkeln, inte en sträcka) — ett vanligt misstag är att blanda ihop de båda inversa/direkta stegen.
 
-**Svar:** 31°; 4,1 m`,
+**Svar:** a) 31°&emsp;&emsp;b) 4,1 m`,
         },
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
@@ -46094,7 +46094,7 @@ $$
 x = 5{,}0 \\cdot \\cos 59{,}316\\ldots^\\circ = 2{,}553\\ldots \\approx 2{,}6\\ \\mathrm{m}
 $$
 
-**Svar:** 59°; 2,6 m`,
+**Svar:** a) 59°&emsp;&emsp;b) 2,6 m`,
         },
         {
             level: 2,
@@ -46118,7 +46118,7 @@ $$
 H = 16{,}865\\ldots + 1{,}6 = 18{,}465\\ldots \\approx 18{,}5\\ \\mathrm{m}
 $$
 
-**Svar:** 16,9 m; 18,5 m`,
+**Svar:** a) 16,9 m&emsp;&emsp;b) 18,5 m`,
         },
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {

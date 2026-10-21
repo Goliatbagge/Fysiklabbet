@@ -5411,6 +5411,110 @@
     return { acts: acts, contentW: 560, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: lyfta ut och in en faktor (ma1c-1.8 ex 4) ---
+   * a) √12 = 2√3, b) √50 = 5√2 och c) 2√7 = √28. Talet under rottecknet
+   * delas upp i en kvadrat gånger ett annat tal, och roten ur kvadraten
+   * dras för sig. I c) går det baklänges: faktorn lyfts in som kvadrat. */
+  function layoutRotlyft(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
+    /* luft före rotkilen, annars klistrar den sig mot tecknet före */
+    function r(innerS, x, yb) { return T.rot(innerS, x + 0.14 * F, yb); }
+
+    /* ett utlyft led, till exempel a) √12 = √(4·3) = √4·√3 = 2√3 */
+    function lyftUt(bokst, talS, kvS, restS, rotS, tankeKv, tankeRot) {
+      xx = T.str(bokst + ' ', padL, y);
+      xx = r(talS, xx, y);
+      T.stepEnd();
+
+      tanke(y, tankeKv);
+      xx = T.str('=', xx, y);
+      xx = r(kvS + '·' + restS, xx, y);
+      T.stepEnd();
+
+      tanke(y, [
+        [['Roten ur en produkt är']],
+        [['roten ur varje faktor']],
+        [['för sig.']]
+      ]);
+      xx = T.str('=', xx, y);
+      xx = r(kvS, xx, y);
+      xx = T.mul(xx, y);
+      xx = r(restS, xx, y);
+      T.stepEnd();
+
+      tanke(y, tankeRot);
+      xx = T.str('=' + rotS, xx, y);
+      r(restS, xx - 0.08 * F, y);
+      T.stepEnd();
+
+      y += 2.1 * F;
+      xe = T.str('Svar: ' + rotS, padL, y);
+      xe = r(restS, xe - 0.08 * F, y);
+      T.underline(xe, y);
+      T.stepEnd();
+    }
+
+    /* ---- a) ---- (under inställningsrutans mobilzon) */
+    y = 185;
+    lyftUt('a)', '12', '4', '3', '2', [
+      [['Jag letar efter en kvadrat']],
+      [['som går jämnt upp i 12.']],
+      [['4 gör det: 12=4·3.']]
+    ], [
+      [['Roten ur 4 är 2. Roten']],
+      [['ur 3 är inget heltal, så']],
+      [['den får stå kvar.']]
+    ]);
+
+    /* ---- b) ---- */
+    y += 3.4 * F;
+    lyftUt('b)', '50', '25', '2', '5', [
+      [['Kvadraten 25 går jämnt']],
+      [['upp i 50: 50=25·2.']]
+    ], [
+      [['Roten ur 25 är 5.']]
+    ]);
+
+    /* ---- c) ---- */
+    y += 3.4 * F;
+    xx = T.str('c) 2', padL, y);
+    xx = r('7', xx - 0.08 * F, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['2 är roten ur 4, så']],
+      [['tvåan lyfts in som 4.']]
+    ]);
+    xx = T.str('=', xx, y);
+    xx = r('4', xx, y);
+    xx = T.mul(xx, y);
+    xx = r('7', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['En produkt av rötter blir']],
+      [['roten ur produkten.']]
+    ]);
+    xx = T.str('=', xx, y);
+    xx = r('4·7', xx, y);
+    T.stepEnd();
+
+    xx = T.str('=', xx, y);
+    r('28', xx, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = r('28', xe, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 560, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   /* ---------------- scen: grundpotensform (ma1c-1.9 ex 1) -------------
    * a) 8 000 000 000, b) 743 000, c) 0,0009 och d) 0,000024. Exponenten
    * RÄKNAS fram i talet: för tal över 1 antalet siffror efter den första,
@@ -63581,6 +63685,7 @@
                    rotberakna: layoutRotberakna,
                    rotforenkla: layoutRotforenkla,
                    rotprodukt: layoutRotprodukt,
+                   rotlyft: layoutRotlyft,
                    grundpotens: layoutGrundpotens,
                    prefix: layoutPrefix,
                    utanprefix: layoutUtanprefix,

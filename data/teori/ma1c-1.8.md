@@ -185,6 +185,66 @@ $$
 :::
 :::
 
+## Lyfta ut och lyfta in en faktor
+
+Regeln för roten ur en produkt gör att vi kan förenkla en rot. Vi delar
+upp talet under rottecknet i en kvadrat (4, 9, 16, 25 …) gånger ett annat
+tal, och drar sedan roten ur kvadraten för sig:
+
+$$
+\sqrt{45} = \sqrt{9 \cdot 5} = \sqrt{9} \cdot \sqrt{5} = 3\sqrt{5}
+$$
+
+Vi säger att vi **lyfter ut** faktorn 3 ur rottecknet. Det går också åt
+andra hållet: en faktor framför roten **lyfts in** genom att den kvadreras,
+
+$$
+3\sqrt{5} = \sqrt{9} \cdot \sqrt{5} = \sqrt{9 \cdot 5} = \sqrt{45}
+$$
+
+::: formel "Lyfta ut och lyfta in en faktor"
+$$
+\sqrt{a^2 \cdot b} = a\sqrt{b}
+$$
+
+Regeln gäller när $a \geq 0$ och $b \geq 0$. Läs den från vänster till
+höger när en faktor lyfts ut och från höger till vänster när den lyfts in.
+:::
+
+::: exempel "Exempel 4 — Lyfta ut och lyfta in"
+**Förenkla genom att lyfta ut en faktor ur rottecknet.<br>a)&nbsp;$\sqrt{12}$&emsp;&emsp;b)&nbsp;$\sqrt{50}$<br>c)&nbsp;Skriv $2\sqrt{7}$ som roten ur ett enda tal.**
+
+::: handskrift
+typ: rotlyft
+:::
+
+::: textlosning
+**a)** Kvadraten 4 går jämnt upp i 12, eftersom $12 = 4 \cdot 3$:
+
+$$
+\sqrt{12} = \sqrt{4 \cdot 3} = \sqrt{4} \cdot \sqrt{3} = 2\sqrt{3}
+$$
+
+**Svar:** $2\sqrt{3}$
+
+**b)** Kvadraten 25 går jämnt upp i 50, eftersom $50 = 25 \cdot 2$:
+
+$$
+\sqrt{50} = \sqrt{25 \cdot 2} = \sqrt{25} \cdot \sqrt{2} = 5\sqrt{2}
+$$
+
+**Svar:** $5\sqrt{2}$
+
+**c)** Faktorn 2 är roten ur 4, så den lyfts in som 4:
+
+$$
+2\sqrt{7} = \sqrt{4} \cdot \sqrt{7} = \sqrt{4 \cdot 7} = \sqrt{28}
+$$
+
+**Svar:** $\sqrt{28}$
+:::
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Rationella exponenter"
@@ -210,6 +270,7 @@ $$
 ::: sampunkt "Rötter ur produkt och kvot"
 - $\sqrt{a \cdot b} = \sqrt{a} \cdot \sqrt{b}$ och $\sqrt{\dfrac{a}{b}} = \dfrac{\sqrt{a}}{\sqrt{b}}$.
 - $\sqrt{4 \cdot 49} = 2 \cdot 7 = 14$.
+- Lyfta ut: $\sqrt{45} = \sqrt{9} \cdot \sqrt{5} = 3\sqrt{5}$.
 - **Inte** vid $+$ och $-$: $\sqrt{9 + 16} = 5$, men $\sqrt{9} + \sqrt{16} = 7$.
 :::
 

@@ -8912,6 +8912,161 @@
              ekvval: 1 };
   }
 
+  /* ---------------- scen: rensa texten (ma1c-2.8 ex 3) ----------------
+   * Läsförståelse i en textuppgift: uppgiftens text står färdig på arket
+   * (forritad), och pennan ringar först in frågan, stryker sedan under
+   * det som behövs och stryker till sist över det som inte behövs. Först
+   * därefter skrivs det förenklade problemet och ekvationen löses som i
+   * exempel 1. Texten radbryts här i scenen (ord för ord mot maxX), så
+   * markeringarna räknas ur de ord som faktiskt står på varje rad.
+   * Taggar: x = behövs inte (överstruket), v = behövs (understruket),
+   * f = frågan (inringad), '' = bindeord som lämnas omarkerade. */
+  function layoutRensatext(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var SC = 0.62, dyRad = 1.30 * F, maxX = 410;
+    var xw = padL + T.adv('3x+75=480') + 0.9 * F;
+    var delar = [
+      ['x', 'Det är fredag kväll och Elin, som går första året på gymnasiet, ska gå på bio med två kompisar.'],
+      ['x', 'Bion ligger 3 km hemifrån, och filmen börjar klockan 19.30 och är 2 timmar och 10 minuter lång.'],
+      ['x', 'Elin har 650 kr på sitt bankkort.'],
+      ['x', 'I kassan'], ['', 'köper hon'], ['v', 'tre biljetter,'],
+      ['', 'som'], ['v', 'kostar lika mycket,'], ['', 'och'],
+      ['v', 'en stor popcorn för 75 kr.'],
+      ['v', 'Totalt betalar hon 480 kr.'],
+      ['f', 'Hur mycket kostar en biljett?']
+    ];
+
+    /* ord för ord: varje ord får rad, x-läge och tagg */
+    var ord = [], rad = 0, x = padL, mell = T.adv(' ', SC) || 0.28 * F * SC;
+    delar.forEach(function (d) {
+      d[1].split(' ').forEach(function (w) {
+        var bw = T.adv(w, SC);
+        if (x > padL && x + bw > maxX) { rad++; x = padL; }
+        ord.push({ t: w, tag: d[0], rad: rad, x0: x, x1: x + bw });
+        x += bw + mell;
+      });
+    });
+    var y0 = 46, nRad = rad + 1;
+    function yRad(r) { return y0 + r * dyRad; }
+    forritad(T, function () {
+      ord.forEach(function (o) { T.str(o.t, o.x0, yRad(o.rad), null, SC); });
+    });
+    /* sammanhängande partier med samma tagg på samma rad */
+    function partier(tag) {
+      var ut = [], cur = null;
+      ord.forEach(function (o) {
+        if (o.tag === tag && cur && cur.rad === o.rad) { cur.x1 = o.x1; return; }
+        cur = o.tag === tag ? { rad: o.rad, x0: o.x0, x1: o.x1 } : null;
+        if (cur) ut.push(cur);
+      });
+      return ut;
+    }
+    var yText = yRad(nRad - 1);
+
+    /* ---- Rensa texten ---- */
+    tanke(yText, [
+      [['Vad frågas det efter?']],
+      [['Ringa in frågan först.']]
+    ]);
+    partier('f').forEach(function (p, i) {
+      if (i) T.pause(200);
+      acts.push({ kind: 'stroke', color: BLUE,
+        pts: ringBox(p.x0 - 0.06 * F, p.x1 + 0.12 * F, yRad(p.rad), F * SC) });
+    });
+    T.stepEnd();
+
+    tanke(yText, [
+      [['Vilka tal och samband']],
+      [['behövs för att svara?']],
+      [['Stryk under dem.']]
+    ]);
+    partier('v').forEach(function (p, i) {
+      if (i) T.pause(160);
+      T.line([p.x0, yRad(p.rad) + 0.20 * F], [p.x1, yRad(p.rad) + 0.20 * F],
+             BLUE);
+    });
+    T.stepEnd();
+
+    tanke(yText, [
+      [['Resten behövs inte. Stryk']],
+      [['över det. Se upp med 650 kr:']],
+      [['det är vad hon HAR, inte']],
+      [['vad hon betalar.']]
+    ]);
+    partier('x').forEach(function (p, i) {
+      if (i) T.pause(140);
+      T.line([p.x0, yRad(p.rad) - 0.20 * F], [p.x1, yRad(p.rad) - 0.20 * F]);
+    });
+    T.stepEnd();
+
+    tanke(yText, [
+      [['Skriv det som är kvar med']],
+      [['egna ord. Nu är problemet']],
+      [['mycket kortare.']]
+    ]);
+    y = yText + 4.0 * F;
+    T.str('Det som är kvar', padL, y - 1.6 * F, null, 0.62);
+    T.str('3 biljetter+popcorn 75 kr', padL, y);
+    y += 2.1 * F;
+    T.str('kostar 480 kr', padL, y);
+    T.stepEnd();
+
+    /* ---- 1. Översätt ---- */
+    tanke(y, [
+      [['Det som efterfrågas är']],
+      [['priset för en biljett.']],
+      [['Det får heta x.']]
+    ]);
+    y += 3.6 * F;
+    T.str('Översätter till en ekvation', padL, y - 1.6 * F, null, 0.62);
+    T.str('x=en biljetts pris i kr', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Tre biljetter kostar 3x.']],
+      [['Med popcornen blir det']],
+      [['480 kr.']]
+    ]);
+    y += 2.3 * F;
+    T.str('3x+75=480', padL, y);
+    T.stepEnd();
+
+    /* ---- 2. Lös ekvationen ---- */
+    tanke(y, [
+      [['Subtraherar 75 från båda']],
+      [['led.']]
+    ]);
+    y = ekvOp(y, '-75', xw, '3x+75=480');
+    T.str('3x=405', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 3 i båda']],
+      [['led.']]
+    ]);
+    y = ekvOp(y, '/3', xw, '3x=405');
+    T.str('x=135', padL, y);
+    T.stepEnd();
+
+    /* ---- 3. Tolka och svara ---- */
+    tanke(y, [
+      [['Rimligt? Tre biljetter för']],
+      [['135 kr är 405 kr, och med']],
+      [['popcornen för 75 kr blir']],
+      [['det 480 kr. Stämmer!']]
+    ]);
+    y += 3.6 * F;
+    T.str('Tolkar och svarar', padL, y - 1.6 * F, null, 0.62);
+    xe = T.str('Svar: 135 kr', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
   /* ---------------- scen: enkla andra-/tredjegradsekvationer ----------
    * (ma1c-2.9 ex 1) a)–f). Genomgående poäng: JÄMN exponent ger två
    * lösningar (± framför roten), UDDA exponent ger en. Rötterna ritas
@@ -63332,6 +63487,7 @@
                    ejtillaten: layoutEjtillaten,
                    delabelopp: layoutDelabelopp,
                    framochtillbaka: layoutFramochtillbaka,
+                   rensatext: layoutRensatext,
                    enklagrad: layoutEnklagrad,
                    kvadratkub: layoutKvadratkub,
                    parenteskvadrat: layoutParenteskvadrat,

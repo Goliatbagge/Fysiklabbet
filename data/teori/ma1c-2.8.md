@@ -223,6 +223,97 @@ svårare uppgifterna:
   bråk, $20\ \text{min} = \dfrac{20}{60}\ \text{h} = \dfrac{1}{3}\ \text{h}$.
 :::
 
+## Plocka ut det viktiga ur texten
+
+En textuppgift innehåller ofta mer än du behöver. Det kan vara en hel liten
+berättelse runt problemet, och ibland finns det tal i texten som inte ska
+användas alls. Innan du översätter till matematik lönar det sig därför att
+**rensa texten** med pennan.
+
+::: tips "Så rensar du en textuppgift"
+1. **Ringa in frågan.** Vad är det egentligen som efterfrågas?
+2. **Stryk under** de tal och samband som behövs för att svara på frågan.
+3. **Stryk över** allt annat. Pröva varje tal: behövs det för att svara på
+   frågan, eller står det bara där?
+4. **Skriv det som är kvar med egna ord.** Nu är problemet kort, och du kan
+   använda metoden i tre steg.
+:::
+
+::: exempel "Exempel 3 — Rensa texten först"
+**Det är fredag kväll och Elin, som går första året på gymnasiet, ska gå på
+bio med två kompisar. Bion ligger 3 km hemifrån, och filmen börjar klockan
+19.30 och är 2 timmar och 10 minuter lång. Elin har 650 kr på sitt
+bankkort. I kassan köper hon tre biljetter, som kostar lika mycket, och en
+stor popcorn för 75 kr. Totalt betalar hon 480 kr. Hur mycket kostar en
+biljett?**
+
+::: handskrift
+typ: rensatext
+:::
+
+::: textlosning
+**Rensa texten**
+
+Vi ringar in frågan, stryker under det som behövs och stryker över resten:
+
+<del>Det är fredag kväll och Elin, som går första året på gymnasiet, ska gå
+på bio med två kompisar. Bion ligger 3 km hemifrån, och filmen börjar
+klockan 19.30 och är 2 timmar och 10 minuter lång. Elin har 650 kr på sitt
+bankkort. I kassan</del> köper hon <u>tre biljetter,</u> som <u>kostar lika
+mycket,</u> och <u>en stor popcorn för 75 kr. Totalt betalar hon
+480 kr.</u> <span class="text-ringad">Hur mycket kostar en biljett?</span>
+
+Se upp med 650 kr. Det är ett tal i texten, men det är vad Elin **har** på
+kortet, inte vad hon betalar. Det behövs inte för att svara på frågan.
+
+Kvar blir: *Tre biljetter, som kostar lika mycket, och en popcorn för 75 kr
+kostar tillsammans 480 kr. Hur mycket kostar en biljett?*
+
+**1. Översätt**
+
+Det som efterfrågas är priset för en biljett. Då kallar vi det för $x$.
+
+$$
+x = \text{en biljetts pris i kr}
+$$
+
+Tre biljetter kostar $3x$, och med popcornen blir det 480 kr:
+
+$$
+3x + 75 = 480
+$$
+
+**2. Lös ekvationen**
+
+Subtraherar 75 från båda led:
+
+$$
+3x + 75 - 75 = 480 - 75
+$$
+
+$$
+3x = 405
+$$
+
+Dividerar med 3 i båda led:
+
+$$
+\frac{3x}{3} = \frac{405}{3}
+$$
+
+$$
+x = 135
+$$
+
+**3. Tolka och svara**
+
+Tre biljetter för 135 kr kostar 405 kr, och med popcornen för 75 kr blir
+det 480 kr. Det stämmer med texten.
+
+**Svar:** 135 kr
+:::
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Metoden i tre steg"
@@ -230,6 +321,12 @@ svårare uppgifterna:
    ekvation.
 2. **Lös ekvationen.**
 3. **Tolka och svara** med enhet. Kontrollera att svaret är rimligt.
+:::
+
+::: sampunkt "Rensa texten först"
+- **Ringa in** frågan, **stryk under** det som behövs och **stryk över**
+  resten.
+- Alla tal i texten behöver inte användas.
 :::
 
 ::: sampunkt "Välj beteckningen smart"

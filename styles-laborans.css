@@ -3229,6 +3229,26 @@ details.lab-forklaring > .formel-harledning-body { padding-top: 12px; }
     white-space: nowrap;
 }
 
+/* Rensa texten (ma1c-2.8 exempel 3): frågan ringas in i blått, som
+   pennan gör i pennlösningen. Överstruket (<del>) tonas ned så att det
+   som är kvar syns, understruket (<u>) får pennans blå. */
+.text-ringad {
+    border: 2px solid #2b5ca8;
+    border-radius: 1em;
+    padding: 0 0.35em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+.lab-block-textlosning del {
+    color: var(--lab-ink-muted);
+    text-decoration-thickness: 1.5px;
+}
+.lab-block-textlosning u {
+    text-decoration-color: #2b5ca8;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
 /* Anmärkning intill en formel (wrapFormelAnm i katalog.html/avsnitt.html):
    formeln och parentes-stycket efter den läggs på samma rad; på smal skärm
    radbryts raden och anmärkningen hamnar under formeln. */

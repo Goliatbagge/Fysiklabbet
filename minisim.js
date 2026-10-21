@@ -11681,7 +11681,13 @@
             // pendellängden: etikett mitt på snöret, på den sida som är fri
             var sida = th >= 0 ? -1 : 1;
             s += lbl(PX + L / 2 * Math.sin(th) + sida * 10, PY + L / 2 * Math.cos(th) + 5, sida < 0 ? 'end' : 'start', it('l'), 15);
-            if (!dragits) s += lbl(PX + 46, PY + 5, 'start', 'Dra i kulan', 13, '#4a5160');
+            // uppmaning vid kulan tills någon dragit i den: på den sida om
+            // kulan som vetter bort från snöret, annars på andra sidan
+            if (!dragits) {
+                var grans = smal ? VBW - 4 : GX0 - 12, hoger = th >= 0 && bx + r + 72 < grans;
+                if (th < 0 && bx - r - 72 < 4) hoger = true;
+                s += lbl(hoger ? bx + r + 8 : bx - r - 8, by + 5, hoger ? 'start' : 'end', 'Dra i mig', 14, '#4a5160');
+            }
             // grafen: tidsfönstret flyter med när kurvan når högerkanten
             var t0 = Math.max(0, tid - fonster);
             function tx(t) { return GX0 + (t - t0) / fonster * (GX1 - GX0); }

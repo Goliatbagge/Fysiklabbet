@@ -5290,6 +5290,127 @@
     return { acts: acts, contentW: 540, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: roten ur produkt och kvot (ma1c-1.8 ex 3) ---
+   * a) √(4·49), b) √(9/25) och c) √2·√8. Roten ur en produkt delas upp
+   * i rötter ur varje faktor, roten ur en kvot i rot ur täljaren delat
+   * med rot ur nämnaren, och i c) används regeln baklänges. */
+  function layoutRotprodukt(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    function tanke(yb, rader, dyn) {
+      T.tanke(T.bubble(120, T.bubbleTop(yb, dyn), 268, rader));
+    }
+    /* bråk där både täljare och nämnare står under var sitt rottecken.
+     * Nämnarens rotstreck ligger 1,02·F över dess baslinje, så nämnaren
+     * sänks för att strecket inte ska nudda bråkstrecket. */
+    function rotKvot(numS, denS, x0, yb) {
+      var nw = T.rotW(numS), dw = T.rotW(denS);
+      var w = Math.max(nw, dw) + 0.3 * F, ybar = yb - 0.34 * F;
+      T.rot(numS, x0 + (w - nw) / 2, ybar - 0.14 * F);
+      T.pause(130);
+      T.line([x0, ybar], [x0 + w, ybar]);
+      T.pause(130);
+      T.rot(denS, x0 + (w - dw) / 2, ybar + 1.32 * F);
+      return x0 + w + 1.5;
+    }
+
+    /* ---- a) ---- (under inställningsrutans mobilzon) */
+    y = 185;
+    xx = T.str('a) ', padL, y);
+    xx = T.rot('4·49', xx + 0.14 * F, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Roten ur en produkt är']],
+      [['detsamma som roten ur']],
+      [['varje faktor för sig.']]
+    ]);
+    xx = T.str('=', xx, y);
+    xx = T.rot('4', xx + 0.14 * F, y);
+    xx = T.mul(xx, y);
+    xx = T.rot('49', xx + 0.14 * F, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Roten ur 4 är 2 och']],
+      [['roten ur 49 är 7.']]
+    ]);
+    xx = T.str('=2·7', xx, y);
+    T.stepEnd();
+
+    T.str('=14', xx, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    xe = T.str('Svar: 14', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    y += 4.4 * F;
+    xx = T.str('b) ', padL, y);
+    xx = rotFrac(T, F, '9', '25', xx + 0.14 * F, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Roten ur en kvot är roten']],
+      [['ur täljaren delat med']],
+      [['roten ur nämnaren.']]
+    ], 1.3);
+    xx = T.str('=', xx + 0.1 * F, y);
+    xx = rotKvot('9', '25', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Roten ur 9 är 3 och']],
+      [['roten ur 25 är 5.']]
+    ], 1.3);
+    xx = T.str('=', xx, y);
+    T.fracH('3', '5', xx, y);
+    T.stepEnd();
+
+    y += 3.2 * F;
+    xe = T.str('Svar: ', padL, y);
+    xe = T.fracH('3', '5', xe, y);
+    T.underline(xe, y + 0.95 * F);
+    T.stepEnd();
+
+    /* ---- c) ---- */
+    y += 4.0 * F;
+    xx = T.str('c) ', padL, y);
+    xx = T.rot('2', xx + 0.14 * F, y);
+    xx = T.mul(xx, y);
+    xx = T.rot('8', xx + 0.14 * F, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Varken 2 eller 8 har en']],
+      [['jämn rot. Regeln gäller']],
+      [['även baklänges, så jag']],
+      [['samlar allt under en rot.']]
+    ]);
+    xx = T.str('=', xx, y);
+    xx = T.rot('2·8', xx + 0.14 * F, y);
+    T.stepEnd();
+
+    xx = T.str('=', xx, y);
+    xx = T.rot('16', xx + 0.14 * F, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Roten ur 16 är 4,']],
+      [['för 4·4=16.']]
+    ]);
+    T.str('=4', xx, y);
+    T.stepEnd();
+
+    y += 2.1 * F;
+    xe = T.str('Svar: 4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 560, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   /* ---------------- scen: grundpotensform (ma1c-1.9 ex 1) -------------
    * a) 8 000 000 000, b) 743 000, c) 0,0009 och d) 0,000024. Exponenten
    * RÄKNAS fram i talet: för tal över 1 antalet siffror efter den första,
@@ -63459,6 +63580,7 @@
                    brakinvers: layoutBrakinvers,
                    rotberakna: layoutRotberakna,
                    rotforenkla: layoutRotforenkla,
+                   rotprodukt: layoutRotprodukt,
                    grundpotens: layoutGrundpotens,
                    prefix: layoutPrefix,
                    utanprefix: layoutUtanprefix,

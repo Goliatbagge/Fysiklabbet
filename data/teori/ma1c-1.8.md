@@ -102,6 +102,89 @@ $$
 :::
 :::
 
+## Roten ur en produkt och roten ur en kvot
+
+Står det en produkt under rottecknet kan vi dra roten ur varje faktor för
+sig och sedan multiplicera. På samma sätt kan roten ur en kvot delas upp i
+roten ur täljaren delat med roten ur nämnaren.
+
+::: formel "Roten ur en produkt och roten ur en kvot"
+$$
+\sqrt{a \cdot b} = \sqrt{a} \cdot \sqrt{b}
+\qquad\qquad
+\sqrt{\dfrac{a}{b}} = \dfrac{\sqrt{a}}{\sqrt{b}}
+$$
+
+Reglerna gäller när $a \geq 0$ och $b \geq 0$ (för kvoten $b > 0$). De
+gäller också baklänges: $\sqrt{2} \cdot \sqrt{8} = \sqrt{2 \cdot 8}$.
+
+::: härledning "Härledning — Med potenslagarna"
+Kvadratroten är detsamma som exponenten $\dfrac{1}{2}$. Potenslagen
+$(a \cdot b)^n = a^n \cdot b^n$ ger då
+
+$$
+\sqrt{a \cdot b} = (a \cdot b)^{1/2} = a^{1/2} \cdot b^{1/2} = \sqrt{a} \cdot \sqrt{b}
+$$
+
+och potenslagen $\left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n}$ ger på samma sätt
+
+$$
+\sqrt{\dfrac{a}{b}} = \left(\dfrac{a}{b}\right)^{1/2} = \dfrac{a^{1/2}}{b^{1/2}} = \dfrac{\sqrt{a}}{\sqrt{b}}
+$$
+:::
+:::
+
+::: härledning "OBS! Gäller inte vid addition och subtraktion"
+Regeln gäller **bara** för en produkt eller en kvot under rottecknet. Vid
+addition och subtraktion får vi inte dra roten ur termerna var för sig:
+
+$$
+\sqrt{9 + 16} = \sqrt{25} = 5 \qquad \text{men} \qquad \sqrt{9} + \sqrt{16} = 3 + 4 = 7
+$$
+
+$$
+\sqrt{25 - 16} = \sqrt{9} = 3 \qquad \text{men} \qquad \sqrt{25} - \sqrt{16} = 5 - 4 = 1
+$$
+
+Alltså är $\sqrt{9 + 16} \neq \sqrt{9} + \sqrt{16}$. Räkna först ut summan
+eller differensen under rottecknet och dra roten ur först därefter.
+:::
+
+::: exempel "Exempel 3 — Roten ur en produkt och en kvot"
+**Beräkna utan räknare<br>a)&nbsp;$\sqrt{4 \cdot 49}$&emsp;&emsp;b)&nbsp;$\sqrt{\dfrac{9}{25}}$&emsp;&emsp;c)&nbsp;$\sqrt{2} \cdot \sqrt{8}$**
+
+::: handskrift
+typ: rotprodukt
+:::
+
+::: textlosning
+**a)** Roten ur en produkt är roten ur varje faktor för sig:
+
+$$
+\sqrt{4 \cdot 49} = \sqrt{4} \cdot \sqrt{49} = 2 \cdot 7 = 14
+$$
+
+**Svar:** 14
+
+**b)** Roten ur en kvot är roten ur täljaren delat med roten ur nämnaren:
+
+$$
+\sqrt{\dfrac{9}{25}} = \dfrac{\sqrt{9}}{\sqrt{25}} = \dfrac{3}{5}
+$$
+
+**Svar:** $\dfrac{3}{5}$
+
+**c)** Varken 2 eller 8 har en jämn kvadratrot. Regeln gäller även
+baklänges, så vi samlar allt under ett rottecken:
+
+$$
+\sqrt{2} \cdot \sqrt{8} = \sqrt{2 \cdot 8} = \sqrt{16} = 4
+$$
+
+**Svar:** 4
+:::
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Rationella exponenter"
@@ -122,6 +205,12 @@ $$
   = \left(\sqrt[n]{a}\right)^{m}$.
 - **Nämnaren** är rotens ordning, **täljaren** är exponenten.
 - $27^{2/3} = \left(\sqrt[3]{27}\right)^{2} = 3^2 = 9$.
+:::
+
+::: sampunkt "Rötter ur produkt och kvot"
+- $\sqrt{a \cdot b} = \sqrt{a} \cdot \sqrt{b}$ och $\sqrt{\dfrac{a}{b}} = \dfrac{\sqrt{a}}{\sqrt{b}}$.
+- $\sqrt{4 \cdot 49} = 2 \cdot 7 = 14$.
+- **Inte** vid $+$ och $-$: $\sqrt{9 + 16} = 5$, men $\sqrt{9} + \sqrt{16} = 7$.
 :::
 
 ::: sampunkt "Räkna med dem"

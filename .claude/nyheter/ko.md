@@ -15,6 +15,15 @@ Format per post:
 - **Minne i ett mikrofluidikchip: fibrer som minns hur vattnet flöt** **[BREVTEASER]** (nominerad 2026-10-19; originalet öppet, CC BY 4.0, publicerat 2026-10-09, sidan svarar 200) — Yale (Pahlavan, Rajput), ”Fluidic Hysterons and Memory in Flow Networks”, Physical Review X 2026, DOI 10.1103/hh4n-pw7w (PRX är öppen, CC BY). Ingång: hysteres, strömning. Strömningslära publicerades 2026-10-07. Källa (Phys.org 2026-10-14): https://phys.org/news/2026-10-memory-chip.html
   (tillagd 2026-10-15)
 
+- **Dold rivalitet mellan två kvanttillstånd i högtemperatursupraledare (två studier samma dag, varav en kallas ”smoking gun”)** — supraledning/kondenserad materia. Originalen ej kontrollerade. Källor (Phys.org 2026-10-20/21): https://phys.org/news/2026-10-hidden-rivalry-quantum-states-heart.html och https://phys.org/news/2026-10-gun-mystery-high-temperature-superconductivity.html
+  (tillagd 2026-10-21)
+
+- **Anpassad bildtakt fångar ultrasnabba förlopp över fem tiopotenser i tid** — optik/mätteknik, höghastighetsfotografering. Originalet ej kontrollerat. Källa (Phys.org 2026-10-20): https://phys.org/news/2026-10-custom-captures-ultrafast-events-magnitude.html
+  (tillagd 2026-10-21)
+
+- **Elektroner styrs med extremt ultraviolett ljus (koherent kvantkontroll)** — atomfysik/attosekundfysik; OBS likt röntgenblixtarna 2026-10-18, vänta. Originalet ej kontrollerat. Källa (Phys.org 2026-10-20): https://phys.org/news/2026-10-electrons-extreme-ultraviolet-team-quantum.html
+  (tillagd 2026-10-21)
+
 - **S301: snabbaste stjärnan runt Sgr A* (8,7 år, 25 000 km/s) känner av svarta hålets rotation** — GRAVITY-samarbetet, Nature 2026, DOI 10.1038/s41586-026-10894-w; fulltext läst i arXiv 2607.12664 (Discovery of a star sensitive to the spin of Sgr A*). OBS: ESO:s pressmeddelande eso2612 kom redan 2026-08-19 (ESO-bilder CC BY 4.0), så inte dagsfärskt; Physics World tog upp den 2026-10-08. Astronomi. Källa: https://physicsworld.com/a/fastest-star-in-the-milky-way-feels-the-rotation-of-our-central-black-hole/
   (tillagd 2026-10-20)
 

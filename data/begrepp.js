@@ -2749,6 +2749,30 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'jet-partikelskur',
+    term: 'Jetar',
+    former: ['jetar', 'jetarna', 'jetpar', 'jetparet', 'jetparen'],
+    kort: 'Smala skurar av partiklar som flyger åt samma håll ut från en kollision i en partikelaccelerator. En sådan skur, en jet, bildas när en enda kvark eller gluon slungas ut med mycket hög energi.',
+    relaterade: ['jetslackning', 'kvark', 'gluon', 'partikelaccelerator'],
+    body: [
+      { type: 'p', html: 'När två protoner eller två atomkärnor krockar i nästan ljusets hastighet händer det ibland att en kvark i den ena träffar en kvark eller gluon i den andra nästan rakt på. De två partiklarna studsar då isär åt motsatta håll med väldigt hög energi. Eftersom rörelsemängden ska bevaras flyger de nästan alltid ut åt var sitt håll, rygg mot rygg.' },
+      { type: 'p', html: 'En kvark kan ändå aldrig ta sig ut ensam. Kraften mellan kvarkar avtar inte när de dras isär, så när den utslungade kvarken försöker lämna sina grannar går det i stället åt energi till att skapa nya kvarkar och antikvarkar. De slår sig ihop till vanliga partiklar som pioner och protoner. Det som når detektorn är därför inte en kvark, utan en smal kon med kanske tio eller tjugo partiklar som alla rör sig ungefär åt samma håll. Det är den konen som kallas en jet.' },
+      { type: 'p', html: 'Genom att mäta energin och riktningen hos alla partiklar i en jet kan forskarna räkna baklänges och ta reda på vad den ursprungliga kvarken eller gluonen hade för energi. Jetar används därför överallt i partikelfysiken: för att leta efter nya partiklar, för att mäta den starka kraften och för att undersöka vad som händer när en jet måste ta sig igenom het kärnmateria på vägen ut.' }
+    ]
+  },
+  {
+    id: 'jetslackning',
+    term: 'Jetsläckning',
+    former: ['jetsläckning', 'jetsläckningen'],
+    kort: 'Att en partikelskur (jet) tappar energi när den måste ta sig igenom en kvark-gluonplasma. Det är ett av de tydligaste tecknen på att en sådan plasma har bildats.',
+    relaterade: ['jet-partikelskur', 'kvark-gluonplasma', 'elliptiskt-flode'],
+    body: [
+      { type: 'p', html: 'När två atomkärnor krockar rakt på varandra i en partikelaccelerator kan det bildas en pytteliten droppe av kvark-gluonplasma, mindre än en atomkärna. Ibland bildas samtidigt två jetar, smala skurar av partiklar som flyger ut åt motsatta håll. Startar jetparet nära kanten av droppen slipper den ena jeten ut nästan direkt, medan den andra måste ta sig igenom hela droppen.' },
+      { type: 'p', html: 'På vägen genom plasman krockar jeten med kvarkar och gluoner och tappar energi, ungefär som en kula som skjuts genom vatten bromsas av motståndet. Forskarna ser det som att det kommer ut färre partiklar med hög energi på den ena sidan än på den andra. Effekten kallas jetsläckning, efter engelskans <em>jet quenching</em>.' },
+      { type: 'p', html: 'Jetsläckning sågs första gången i krockar mellan guldkärnor vid acceleratorn RHIC i USA i början av 2000-talet, och har sedan dess mätts noga i krockar mellan blykärnor vid LHC i Europa. Den stora frågan i dag är hur små och hur energifattiga krockarna kan vara och ändå ge upphov till effekten. Därför har forskarna börjat krocka mindre kärnor, som syre och neon.' }
+    ]
+  },
+  {
     id: 'elliptiskt-flode',
     term: 'Elliptiskt flöde',
     former: ['elliptiskt flöde', 'elliptiska flödet', 'anisotropt flöde', 'anisotropa flödet', 'triangulärt flöde', 'triangulära flödet'],

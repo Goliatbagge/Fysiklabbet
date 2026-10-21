@@ -103,6 +103,65 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-21-jetarna-som-bromsas",
+    date: "2026-10-21",
+    title: "Bromsade partikelskurar tyder på att även syrekärnor smälter till urmateria",
+    deck: "När två syrekärnor krockar i nästan ljusets hastighet kan det bildas en pytteliten droppe av kvark-gluonplasma, den materia som fyllde universum under dess första miljondelar av en sekund. Nu har STAR-experimentet i USA sett att partikelskurar som måste ta sig igenom droppen tappar energi på vägen ut, ett av de tydligaste tecknen på att en sådan plasma bildas.",
+    category: "Kärnfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-10-21-jetarna-som-bromsas.jpg",
+    imageAlt: "Den väldiga STAR-detektorn sedd snett nedifrån i sin hall: en hög konstruktion av blå metall, tjocka kabelknippen i orange, blått och svart och en stor grön lucka med bultar. Framför detektorn står en byggnadsställning i aluminium, och till vänster reser sig en mörkblå, böjd metallvägg.",
+    imageCredit: "Foto: Z22 (CC BY-SA 4.0), via Wikimedia Commons, beskuren. STAR-detektorn vid RHIC, Brookhaven National Laboratory.",
+    tags: ["kärnfysik", "partikelfysik", "kvark-gluonplasma", "jetsläckning", "rhic", "star", "brookhaven", "syrekärnor", "rörelsemängd", "magnetfält", "relativitetsteori", "kosmologi"],
+    sources: [
+      { name: "Phys.org: Oxygen collisions show evidence of jet quenching, a signature of early-universe matter (20 oktober 2026, pressmaterial från Brookhaven National Laboratory)", url: "https://phys.org/news/2026-10-oxygen-collisions-evidence-jet-quenching.html" },
+      { name: "arXiv: studien i fulltext (öppet tillgänglig)", url: "https://arxiv.org/abs/2604.13935" }
+    ],
+    research: {
+      citation: "STAR-samarbetet (B. E. Aboona m.fl.), ”Measurement of Jet Quenching in O+O Collisions at √sNN = 200 GeV by the STAR Experiment at RHIC”, Physical Review Letters 137, 172301 (2026). Förtryck: arXiv:2604.13935",
+      url: "https://doi.org/10.1103/9w2y-bz9n"
+    },
+    larare: {
+      moment: [
+        { label: "Rörelsemängd och impuls", href: "katalog.html?id=fy1-4.7" },
+        { label: "Relativitetsteori", href: "katalog.html?id=fy1-8.1" },
+        { label: "Atomkärnan", href: "katalog.html?id=fy1-9.1" },
+        { label: "Laddade partiklar i magnetfält", href: "katalog.html?id=fy2-3.4" }
+      ],
+      fragor: [
+        "Jetarna bildas i par som flyger isär åt motsatta håll. Förklara med hjälp av rörelsemängdens bevarande varför de, sett längs strålen, flyger åt motsatta håll.",
+        "En laddad partikel i ett magnetfält rör sig i en cirkelbåge med radien r = p/(q · B). Hur stor blir radien för en proton med rörelsemängden 5,3 · 10^−19 kg·m/s i STAR-detektorns magnetfält på 0,5 T? Varför är det en fördel att spåren böjs?",
+        "Forskarna jämför krockar där kärnorna träffar varandra rakt på med krockar där de bara snuddar vid varandra. Varför är det en smart jämförelse, när målet är att avgöra om en plasma bildats?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'Under de första miljondelarna av en sekund efter Big Bang fanns varken protoner eller neutroner. Universum var fyllt av en het, tät soppa av kvarkar och gluoner, de partiklar som annars sitter inlåsta i atomkärnornas byggstenar. Den sortens materia, kvark-gluonplasma, går att återskapa i laboratoriet genom att skjuta atomkärnor mot varandra i nästan ljusets hastighet. Droppen som bildas är mindre än en atomkärna och finns kvar i mindre än en miljarddels miljarddels sekund.' },
+      { type: 'p', html: 'Länge krävdes stora, tunga kärnor som guld och bly för att få fram plasman. Nu rapporterar STAR-samarbetet vid partikelacceleratorn RHIC på Brookhaven National Laboratory i USA starka belägg för jetsläckning, ett av plasmans kännetecken, även när syrekärnor krockar, och det vid en förhållandevis låg energi. En syrekärna har bara 8&nbsp;protoner och 8&nbsp;neutroner, att jämföra med guldkärnans 79&nbsp;protoner och 118&nbsp;neutroner. Studien publicerades den 20&nbsp;oktober i den kollegialt granskade tidskriften <em>Physical Review Letters</em>.' },
+      { type: 'h2', text: 'Två partikelskurar rygg mot rygg' },
+      { type: 'p', html: 'Ingen kan se plasman direkt. Det enda som når detektorn är de partiklar som flyger ut när droppen faller sönder. Ett av de bästa sätten att undersöka den är därför att skicka något rakt igenom den och se vad som kommer ut på andra sidan.' },
+      { type: 'p', html: 'Det sköter krocken själv. Ibland träffar en kvark eller gluon i den ena kärnan en kvark eller gluon i den andra med full kraft, och då slungas två partiklar med mycket hög energi ut åt motsatta håll. Var och en av dem blir en smal skur av partiklar, en jet. Bildas jetparet nära kanten av droppen slipper den ena jeten ut nästan direkt, medan den andra måste plöja sig igenom hela droppen. På vägen tappar den energi, och det kallas jetsläckning.' },
+      { type: 'quote', html: 'Man kan tänka sig att man skjuter en kula genom vatten. Kulan bromsas av motståndet. Samma sak gäller de här partiklarna med hög energi: när de går genom kvark-gluonplasman tappar de energi.', cite: 'Li Yi, Shandong-universitetet, som ledde analysen, i Brookhavens pressmaterial (översatt)' },
+      { type: 'h2', text: 'Att räkna partiklar' },
+      { type: 'p', html: 'STAR-forskarna gick igenom ungefär 500&nbsp;miljoner krockar mellan syrekärnor, insamlade år 2021. De valde ut krockar där en laddad partikel med mycket hög rörelsemängd flög ut, en signal om att ett jetpar bildats, och räknade sedan hur många partiklar och jetar som kom ut åt motsatt håll.' },
+      { type: 'p', html: 'Knepet ligger i jämförelsen. Krockar där kärnorna träffar varandra rakt på skapar flest partiklar och har störst chans att bilda en plasma. Krockar där de bara snuddar vid varandra ger betydligt färre partiklar, och där väntar man sig ingen plasma alls. Forskarna jämförde därför de tio procent av krockarna som gav flest partiklar med en grupp där kärnorna bara delvis träffade varandra. Eftersom båda grupperna mäts med samma detektor och samma metod tar många osäkerheter ut varandra.' },
+      { type: 'image', src: 'nyheter/bilder/2026-10-21-jetarna-som-bromsas-2.jpg', alt: 'Mot svart bakgrund strålar tusentals tunna linjer i blått, turkost, grönt och rött ut från en mörk ring i mitten, som ekrarna i ett hjul. Linjerna fyller en tolvkantig ram.', caption: 'Så här ser en krock ut i STAR-detektorn: varje linje är spåret av en laddad partikel, sett längs strålröret. Bilden visar en av de första krockarna mellan guldkärnor vid full energi i RHIC. En krock mellan syrekärnor ger betydligt färre spår.', credit: 'Bild: Brookhaven National Laboratory (CC BY 2.0), via Wikimedia Commons, beskuren och utan logotyper' },
+      { type: 'p', html: 'Resultatet blev tydligt. På samma sida som den utvalda partikeln var det ingen skillnad mellan grupperna, vilket stämmer med att den jeten slapp ut utan att bromsas. På motsatt sida kom det däremot ungefär 20&nbsp;procent färre partiklar och jetar ut i de rakaste krockarna. Mätt som rörelsemängd motsvarar det att jetarna där i genomsnitt hade omkring 0,7&nbsp;GeV/c mindre rörelsemängd vinkelrätt mot strålen än i jämförelsegruppen, i den enhet partikelfysiker använder (se faktarutan).' },
+      { type: 'h2', text: 'Kan det vara något annat?' },
+      { type: 'p', html: 'Ett underskott av partiklar skulle i princip kunna bero på att kvarkarna och gluonerna i en atomkärna är fördelade lite annorlunda än i fria protoner och neutroner. Forskarna jämförde därför med beräkningar som tar hänsyn till den effekten men inte till någon plasma. Beräkningarna gav bara några procents skillnad, och åt fel håll. De kan alltså inte förklara underskottet.' },
+      { type: 'p', html: 'Hur säkert är resultatet? Beroende på vilken mätstorhet och vilken jämförelse som används ligger underskottet mellan 2,7 och 5,2 standardavvikelser från vad man skulle se om jetarna inte bromsades. Inom partikelfysiken krävs vanligen fem standardavvikelser för att kalla något en upptäckt, Forskarna själva skriver att mätningen ger starka belägg för jetsläckning, inte att den är en upptäckt.' },
+      { type: 'h2', text: 'Mindre kärnor och lägre energi' },
+      { type: 'p', html: 'Syrekärnor har också krockats vid den europeiska acceleratorn LHC, och där syns liknande tecken på jetsläckning. Men LHC krockar kärnorna med mer än 25 gånger så hög energi. I RHIC hade varje proton och neutron energin 100&nbsp;GeV, ungefär 107 gånger dess viloenergi $m \\cdot c^2$. Det motsvarar en fart på 99,996&nbsp;procent av ljusets. Ju högre energi, desto hetare och tätare blir droppen, och desto större borde bromsningen bli. Därför är det intressant att signalen syns redan vid RHIC:s lägre energi.' },
+      { type: 'quote', html: 'Vi tänjer på gränserna på två sätt för att utforska de minsta förutsättningarna för att skapa en kvark-gluonplasma, både när det gäller kärnornas storlek, med de här små syrekrockarna, och genom att titta på data från lägre kollisionsenergier. Och vi ser fortfarande den här avgörande signaturen för kvark-gluonplasma.', cite: 'Rongrong Ma, Brookhaven National Laboratory, i Brookhavens pressmaterial (översatt)' },
+      { type: 'p', html: 'Målet är att hitta gränsen: hur liten och hur energifattig kan en krock vara och ändå skapa urmaterien? RHIC, som var i drift från år 2000, har nu stängts. Den sista körningen avslutades den 6&nbsp;februari 2026 just med krockar mellan syrekärnor, både i STAR och i den nyare detektorn sPHENIX. De data som samlades in då återstår att analysera.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'STAR mäter partiklarnas rörelsemängd med hjälp av ett magnetfält på 0,5&nbsp;tesla. En laddad partikel böjs av i en cirkelbåge med radien $r = \\dfrac{p}{q \\cdot B}$, så ju större rörelsemängd, desto rakare spår. Detektorns spårkammare är en gasfylld cylinder med radien 2&nbsp;meter.',
+        'Partikelfysiker anger ofta rörelsemängd i enheten GeV/c. En proton med rörelsemängden 1&nbsp;GeV/c, alltså ungefär 5,3&nbsp;·&nbsp;10<sup>−19</sup>&nbsp;kg·m/s, går i STAR:s magnetfält i en cirkel med radien knappt 7&nbsp;meter.',
+        'Plasman som bildas i krockarna flyter som en vätska med nästan ingen inre friktion. Den upptäckten gjordes vid RHIC i krockar mellan guldkärnor och kom som en överraskning.'
+      ] },
+      { type: 'p', html: 'Syre har nu studerats både vid RHIC och vid LHC. Det är den enda sortens kärnkrock, förutom krockar mellan protoner, som gjorts vid båda acceleratorerna, och det gör det möjligt att jämföra resultaten direkt.' }
+    ]
+  },
+  {
     id: "2026-10-20-moln-som-hjalper-vindkraften",
     date: "2026-10-20",
     title: "Låga moln kan hjälpa vindkraften att få tillbaka sin vind",

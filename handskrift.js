@@ -9137,47 +9137,89 @@
              ekvval: 1 };
   }
 
+  /* TRYCKT TEXT (typsnitt, inte penna): bredd i px för en sträng i
+   * DM Sans, normal vikt, sajtens brödtext (samma typsnitt som uppgiften
+   * i exempelrutan). Teckenbredderna (em) är uppmätta i Chrome vid 17 px
+   * med getComputedTextLength (DM Sans har optisk storlek, så bredden
+   * gäller just runt 17 px). Okända tecken räknas som 0,55 em. */
+  var TRYCK_FONT = '"DM Sans",system-ui,sans-serif';
+  var TRYCK_EM = (function () {
+    var m = {}, raw = '0:.687 1:.309 2:.575 3:.590 4:.607 5:.611 6:.629 7:.534 ' +
+      '8:.609 9:.629 ,:.181 -:.541 .:.197 ::.201 ?:.521 !:.248 ' +
+      'A:.664 B:.603 C:.718 D:.690 E:.565 F:.535 G:.758 H:.680 ' +
+      'I:.233 J:.500 K:.583 L:.526 M:.843 N:.690 O:.777 P:.580 ' +
+      'R:.594 S:.579 T:.561 U:.656 V:.668 W:.968 Y:.579 Z:.539 ' +
+      'Å:.664 Ä:.664 Ö:.777 a:.544 b:.627 c:.571 d:.628 e:.568 ' +
+      'f:.338 g:.556 h:.574 i:.239 j:.242 k:.504 l:.223 m:.892 ' +
+      'n:.573 o:.593 p:.627 q:.628 r:.368 s:.502 t:.390 u:.573 ' +
+      'v:.525 w:.760 x:.497 y:.556 z:.456 å:.544 ä:.544 ö:.593';
+    m[' '] = 0.267;   /* hårt mellanslag: tal och enhet, frågan */
+    raw.split(' ').forEach(function (p) {
+      var i = p.lastIndexOf(':');
+      m[p.slice(0, i)] = parseFloat(p.slice(i + 1));
+    });
+    return m;
+  })();
+  function tryckBredd(t, fs) {
+    var w = 0;
+    for (var i = 0; i < t.length; i++) w += TRYCK_EM[t[i]] || 0.55;
+    return w * fs;
+  }
+
   /* ---------------- scen: rensa texten (ma1c-2.8 ex 3) ----------------
-   * Läsförståelse i en textuppgift: uppgiftens text står färdig på arket
-   * (forritad), och pennan ringar först in frågan, stryker sedan under
-   * det som behövs och stryker till sist över det som inte behövs. Först
-   * därefter skrivs det förenklade problemet och ekvationen löses som i
-   * exempel 1. Texten radbryts här i scenen (ord för ord mot maxX), så
-   * markeringarna räknas ur de ord som faktiskt står på varje rad.
+   * Läsförståelse i en textuppgift: uppgiftens text står TRYCKT på arket
+   * från början, som den maskinskrivna texten på ett prov (en vit lapp
+   * med typsnittstext, se makeTryck), och pennan gör sina anteckningar
+   * ovanpå: ringar först in frågan, stryker sedan under det som behövs
+   * och stryker till sist över det som inte behövs (fyra gånger fortare,
+   * fart: 4, eftersom det är så mycket text). Först därefter skrivs det
+   * förenklade problemet och ekvationen löses som i exempel 1. Texten
+   * radbryts här i scenen ord för ord mot maxX med DM Sans uppmätta
+   * teckenbredder (tryckBredd), och varje ord får sin bredd som
+   * textLength, så att markeringarna hamnar exakt på orden.
    * Taggar: x = behövs inte (överstruket), v = behövs (understruket),
    * f = frågan (inringad), '' = bindeord som lämnas omarkerade. */
   function layoutRensatext(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    var SC = 0.62, dyRad = 1.30 * F, maxX = 410;
+    var FS = 17, dyRad = 27, maxX = 400, x0Text = 42;
     var xw = padL + T.adv('3x+75=480') + 0.9 * F;
+    /*   binder tal och enhet (och hela frågan, så att ringen
+     * blir en enda) — de får aldrig delas mellan två rader */
     var delar = [
       ['x', 'Det är fredag kväll och Elin, som går första året på gymnasiet, ska gå på bio med två kompisar.'],
-      ['x', 'Bion ligger 3 km hemifrån, och filmen börjar klockan 19.30 och är 2 timmar och 10 minuter lång.'],
-      ['x', 'Elin har 650 kr på sitt bankkort.'],
+      ['x', 'Bion ligger 3 km hemifrån, och filmen börjar klockan 19.30 och är 2 timmar och 10 minuter lång.'],
+      ['x', 'Elin har 650 kr på sitt bankkort.'],
       ['x', 'I kassan'], ['', 'köper hon'], ['v', 'tre biljetter,'],
       ['', 'som'], ['v', 'kostar lika mycket,'], ['', 'och'],
-      ['v', 'en stor popcorn för 75 kr.'],
-      ['v', 'Totalt betalar hon 480 kr.'],
-      ['f', 'Hur mycket kostar en biljett?']
+      ['v', 'en stor popcorn för 75 kr.'],
+      ['v', 'Totalt betalar hon 480 kr.'],
+      ['f', 'Hur mycket kostar en biljett?']
     ];
 
     /* ord för ord: varje ord får rad, x-läge och tagg */
-    var ord = [], rad = 0, x = padL, mell = T.adv(' ', SC) || 0.28 * F * SC;
+    var ord = [], rad = 0, x = x0Text, mell = 0.27 * FS;
     delar.forEach(function (d) {
       d[1].split(' ').forEach(function (w) {
-        var bw = T.adv(w, SC);
-        if (x > padL && x + bw > maxX) { rad++; x = padL; }
+        var bw = tryckBredd(w, FS);
+        if (d[0] === 'f' && ord.length && ord[ord.length - 1].tag !== 'f') x += 10;  /* luft för ringen */
+        if (x > x0Text && x + bw > maxX) { rad++; x = x0Text; }
         ord.push({ t: w, tag: d[0], rad: rad, x0: x, x1: x + bw });
         x += bw + mell;
       });
     });
-    var y0 = 46, nRad = rad + 1;
-    function yRad(r) { return y0 + r * dyRad; }
-    forritad(T, function () {
-      ord.forEach(function (o) { T.str(o.t, o.x0, yRad(o.rad), null, SC); });
-    });
+    /* baslinjerna på rutnätets linjer (27 px), lappen runt texten */
+    var y0 = 54, nRad = rad + 1;
+    /* frågans rad får extra luft ovanför, så att ringen ryms utan att
+     * korsa raden ovanför */
+    var fRad = ord.filter(function (o) { return o.tag === 'f'; })[0].rad;
+    function yRad(r) { return y0 + r * dyRad + (r >= fRad ? 7 : 0); }
+    acts.push({ kind: 'show', fore: 1, obj: { tryck: 1, fs: FS, wins: [],
+      ruta: [x0Text - 16, y0 - 27, maxX - x0Text + 32, nRad * dyRad + 25],
+      ord: ord.map(function (o) {
+        return { t: o.t, x: o.x0, y: yRad(o.rad), len: o.x1 - o.x0 };
+      }) } });
     /* sammanhängande partier med samma tagg på samma rad */
     function partier(tag) {
       var ut = [], cur = null;
@@ -9188,7 +9230,8 @@
       });
       return ut;
     }
-    var yText = yRad(nRad - 1);
+    var yText = yRad(nRad - 1) + 18;
+    var Fr = 1.25 * FS;          /* markeringarnas mått mot den tryckta texten */
 
     /* ---- Rensa texten ---- */
     tanke(yText, [
@@ -9198,7 +9241,8 @@
     partier('f').forEach(function (p, i) {
       if (i) T.pause(200);
       acts.push({ kind: 'stroke', color: BLUE,
-        pts: ringBox(p.x0 - 0.06 * F, p.x1 + 0.12 * F, yRad(p.rad), F * SC) });
+        pts: ringBox(p.x0 - 0.42 * Fr, p.x1 + 0.42 * Fr, yRad(p.rad), Fr,
+                     { ry: 0.78 * Fr, cy: yRad(p.rad) - 0.34 * FS }) });
     });
     T.stepEnd();
 
@@ -9208,9 +9252,10 @@
       [['Stryk under dem.']]
     ]);
     partier('v').forEach(function (p, i) {
-      if (i) T.pause(160);
-      T.line([p.x0, yRad(p.rad) + 0.20 * F], [p.x1, yRad(p.rad) + 0.20 * F],
-             BLUE);
+      if (i) T.pause(120);
+      acts.push({ kind: 'stroke', color: BLUE, fart: 2,
+        pts: humanize([[p.x0, yRad(p.rad) + 0.30 * FS],
+                       [p.x1, yRad(p.rad) + 0.30 * FS]]) });
     });
     T.stepEnd();
 
@@ -9221,8 +9266,10 @@
       [['vad hon betalar.']]
     ]);
     partier('x').forEach(function (p, i) {
-      if (i) T.pause(140);
-      T.line([p.x0, yRad(p.rad) - 0.20 * F], [p.x1, yRad(p.rad) - 0.20 * F]);
+      if (i) T.pause(30);
+      acts.push({ kind: 'stroke', fart: 4,
+        pts: humanize([[p.x0 - 1, yRad(p.rad) - 0.33 * FS],
+                       [p.x1 + 1, yRad(p.rad) - 0.33 * FS]]) });
     });
     T.stepEnd();
 
@@ -42733,6 +42780,29 @@
     return g;
   }
 
+  /* TRYCKT UPPGIFTSTEXT ({tryck:1, ord, fs, ruta}): en vit lapp med
+   * maskinskriven text, som uppgiften på ett prov, som står på arket från
+   * början och som pennan sedan antecknar på (layoutRensatext). Varje ord
+   * ligger på sitt uträknade x med textLength = uträknad bredd, så att
+   * markeringarna träffar orden även om typsnittet avviker en aning
+   * (lengthAdjust 'spacing': bara teckenavståndet justeras, glyferna
+   * sträcks aldrig, annars ser ett ord fetstilt ut). */
+  function makeTryck(o) {
+    var g = el('g', null);
+    var r = o.ruta;
+    el('rect', { x: r[0], y: r[1], width: r[2], height: r[3], rx: 2,
+                 fill: '#ffffff', stroke: 'rgba(15,22,32,0.18)',
+                 'stroke-width': 1 }, g);
+    o.ord.forEach(function (w) {
+      var t = el('text', { x: w.x.toFixed(1), y: w.y.toFixed(1),
+                           'font-family': TRYCK_FONT, 'font-size': o.fs,
+                           fill: '#1f2630', textLength: w.len.toFixed(1),
+                           lengthAdjust: 'spacing' }, g);
+      t.textContent = w.t;
+    });
+    return g;
+  }
+
   function makeNote(o) {
     var g = el('g', { opacity: 0 });
     var t = el('text', { x: o.x, y: o.y,
@@ -64382,6 +64452,14 @@
     el('rect', { x: 0, y: 0, width: W, height: H, fill: PAPER }, svg);
     el('rect', { x: 0, y: 0, width: W, height: H, fill: 'url(#hkGrid)' }, svg);
 
+    /* tryckt uppgiftstext UNDER bläcket: pennan antecknar på den */
+    L.acts.forEach(function (a) {
+      if (a.kind === 'show' && a.obj.tryck && !a.obj.el) {
+        a.obj.el = makeTryck(a.obj);
+        svg.appendChild(a.obj.el);
+      }
+    });
+
     /* bläckgruppen: alla streck, dolda tills de "skrivs" */
     var inkG = el('g', { fill: 'none', stroke: INK, 'stroke-width': F * 0.062,
                          'stroke-linecap': 'round', 'stroke-linejoin': 'round',
@@ -64407,7 +64485,7 @@
     svg.appendChild(hand);
     var bubbleG = el('g', null, svg);
     L.acts.forEach(function (a) {
-      if (a.kind !== 'show' || a.obj.el) return;
+      if (a.kind !== 'show' || a.obj.el || a.obj.tryck) return;
       if (a.obj.pop) {
         /* REGELNOT: pennans egna glyfer (blå) som tonar in på en gång i
          * stället för att skrivas streck för streck — ligger i bläck-

@@ -1656,6 +1656,8 @@ const rad = THREE.MathUtils.degToRad;
 const klamp = THREE.MathUtils.clamp;
 const mjuk = (a, b, x) => { const t = klamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
 const easeInOut = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+// färden mellan världarna: långsam start, mycket hög fart i mitten (fem gånger snittfarten), mjuk inbromsning
+const easeFard = (t) => t < 0.5 ? 16 * t ** 5 : 1 - Math.pow(-2 * t + 2, 5) / 2;
 const $ = (id) => document.getElementById(id);
 
 const LAYOUT = {
@@ -1687,8 +1689,8 @@ const STOPP = [...PLANETER.map((p) => p.id), 'slut'];
 const NS = STOPP.length;
 // avstånden längs resan dras ut, så att världarna inte ligger tätt (månen behåller sitt avstånd till jorden)
 // Avstånden växer dessutom utåt, så att yttre solsystemet känns glesare än det inre:
-// inre planeterna hamnar cirka 3,7 gånger längre isär än i LAYOUT, Pluto cirka 5,6 gånger.
-const AVST = 3.5, AVST_UTAT = 0.6, Z_PLUTO = 1110;
+// inre planeterna hamnar cirka 7,5 gånger längre isär än i LAYOUT, Pluto cirka 13 gånger.
+const AVST = 7, AVST_UTAT = 0.9, Z_PLUTO = 1110;
 const zSkala = (z) => AVST * z * (1 + AVST_UTAT * z / Z_PLUTO);
 const zVarld = (id) => id === 'manen' ? zSkala(LAYOUT.jorden.Z) + (LAYOUT.manen.Z - LAYOUT.jorden.Z) : zSkala(LAYOUT[id].Z);
 // slutstationen: långt ut åt sidan, med blicken tillbaka mot solen
@@ -1697,9 +1699,9 @@ const SLUT_T = new V3(257, -20, -734).multiplyScalar(AVST * (1 + AVST_UTAT));
 const VOY_POS = new V3();
 
 const scen = new THREE.Scene();
-const kamera = new THREE.PerspectiveCamera(48, 1, 0.05, 60000);
+const kamera = new THREE.PerspectiveCamera(48, 1, 0.05, 200000);
 kamera.position.set(0, 40, 30);
-const himmel = byggVintergatan(30000, 0.3);
+const himmel = byggVintergatan(120000, 0.3);
 scen.add(himmel);
 
 /* ---------- Stjärnor som sträcks ut i fart ---------- */
@@ -2139,7 +2141,7 @@ function resPose(s, tid) {
   const t = i >= NS - 1 ? 0 : mjuk(0.16, 0.92, u);
   if (t <= 0) { malPose.pos.copy(poseA.pos); malPose.quat.copy(poseA.quat); return resaInfo; }
   pose(i + 1, tid, poseB);
-  const e = easeInOut(t);
+  const e = easeFard(t);
   _f.copy(poseB.pos).sub(poseA.pos);
   const gap = _f.length();
   _f.divideScalar(gap);
@@ -2438,7 +2440,7 @@ window.addEventListener('scroll', () => {
   }, 280);
 }, { passive: true });
 /* Färden till en annan värld (piltangenterna, rutten, knapparna).
-   Fotonen ska flyta fram: en sträcka tar cirka 5,5 till 7,5 sekunder,
+   Fotonen ska flyta fram: en sträcka tar cirka 7 till 10 sekunder,
    lite längre ju längre det är mellan himlakropparna i scenen. Kameran står
    still precis vid varje värld (u < 0,16 och u > 0,92 i resPose), så de
    bitarna av skrollsträckan hoppas över: rörelsen börjar direkt, och
@@ -2452,7 +2454,7 @@ function stracksTider() {
   const a = nyPose(), b = nyPose(), g = [];
   for (let k = 0; k < NS - 1; k++) { pose(k, 0, a); pose(k + 1, 0, b); g.push(a.pos.distanceTo(b.pos)); }
   const lo = Math.min(...g), hi = Math.max(...g);
-  fardSekunder = g.map((d) => 5.5 + 2.0 * (hi > lo ? (d - lo) / (hi - lo) : 0.5));
+  fardSekunder = g.map((d) => 7 + 3 * (hi > lo ? (d - lo) / (hi - lo) : 0.5));
   return fardSekunder;
 }
 // aktiva bitar (där kameran rör sig) mellan s0 och s1, i färdriktningen
@@ -2477,7 +2479,7 @@ function gaTillStopp(i, snabbt) {
   // tid för varje bit: sträckans tid gånger hur stor del av den aktiva delen biten är
   bitar.forEach((x) => { x.t = tider[x.k] * Math.abs(x.b - x.a) / (AKTIV1 - AKTIV0); });
   let T = bitar.reduce((sum, x) => sum + x.t, 0);
-  if (bitar.length > 1) { const tak = Math.min(14, 4 + 2.4 * bitar.length); if (T > tak) { bitar.forEach((x) => { x.t *= tak / T; }); T = tak; } }
+  if (bitar.length > 1) { const tak = Math.min(18, 5 + 3 * bitar.length); if (T > tak) { bitar.forEach((x) => { x.t *= tak / T; }); T = tak; } }
   const t0 = performance.now();
   if (!bitar.length) {
     // bara stillastående del kvar (landningen sista biten): en kort glidning

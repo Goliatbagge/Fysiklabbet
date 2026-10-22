@@ -57,3 +57,25 @@ Läs `.claude/i18n/RIKTLINJER.md` och `.claude/i18n/termlista.md` först.
 - `Svar:` → `Answer:`, med stor bokstav efter (`Answer: About 1 760 people`).
 - Tankebubblor: korta, i första person ("I substitute x = 4 here").
 - Inga tankstreck som pausmarkör.
+
+## Tankebubblor
+
+Bubblornas text ritas som SVG-text (inte med glyferna) och översätts HELA
+bubblan åt gången av `enBubblor()` i `handskrift.js`. I utdata från
+`handskrift-strangar.js` känns de igen på tecknet ` ¦ `, som skiljer
+bubblans rader åt. Kursiva segment (variabler) står som `*x*`, understrukna
+som `_ord_`. Skriv översättningen i samma form:
+
+```js
+'Volym är sträcka i tre ¦ riktningar: längd gånger bredd ¦ gånger höjd.':
+  'Volume is distance in three ¦ directions: length times width ¦ times height.',
+```
+
+- **Högst lika många rader** (lika många `¦`-delar eller färre) som den
+  svenska: scenen har placerat bubblan efter radantalet.
+- **Ungefär samma radlängd** som den svenska raden (bubblans bredd mäts,
+  men en mycket längre rad gör bubblan bredare än arket).
+- Behåll `*…*` runt samma variabler som i originalet.
+- Första person, korta meningar, som på svenska ("I substitute …").
+- Kontrollera med `EN=1 node .claude/verify-handskrift.js <scener>`
+  (bubblor som skymmer text eller går utanför arket ger fel).

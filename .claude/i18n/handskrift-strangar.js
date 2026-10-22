@@ -24,7 +24,7 @@ const I18N = {
     en: true, lang: 'en',
     t: (s) => { if (fangade) fangade.add(s); return s; },
     tal: (s) => s,
-    add: (o) => Object.assign(dict, o), addHtml() {}, overlay() {}, innehall() {},
+    add: (o) => { for (const k in o) dict[k.replace(/\s+/g, ' ').trim()] = o[k]; }, addHtml() {}, overlay() {}, innehall() {},
 };
 const noop = () => {};
 const win = { I18N, addEventListener: noop, requestAnimationFrame: noop,

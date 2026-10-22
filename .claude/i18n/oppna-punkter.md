@@ -211,3 +211,7 @@ den är åtgärdad.
   inte data/teori/en/.
 - verify-handskrift.js granskar bara svensk pennlayout; engelska strängar
   kan vara längre.
+
+## Fel i svenska pennscener (hittade vid översättningen)
+
+- Scenen linjegraf skriver "y=undefined" och NaN redan på svenska.

@@ -12896,6 +12896,57 @@
    * grafen ritas genom det. Körs på varje scen, se mount() och scen().
    * REGEL (SKALVÄRDEN PÅ SIN PLATS, TONAS BORT NÄR GRAFEN RITAS). */
   function tonaSkalvarden(acts) {
+    return tonaSkalvardenInre(acts);
+  }
+
+  /* EFTERPASS: TANKEBUBBLORNA PÅ ENGELSKA (i18n.js). Bubblornas text ritas
+   * som SVG-text, inte med pennans glyfer, så den går inte genom tillBmp.
+   * Här översätts en HEL bubbla åt gången: nyckeln är bubblans svenska
+   * rader åtskilda med " ¦ ", där kursiva segment skrivs *…* och
+   * understrukna _…_ (samma form som handskrift-strangar.js visar). Den
+   * engelska texten skrivs i samma form och får högst lika många rader
+   * som den svenska, eftersom scenen placerat bubblan efter radantalet.
+   * Saknas en översättning står bubblan kvar på svenska. Körs på varje
+   * scen, se mount() och scen(); på svenska gör den ingenting. */
+  function bubbelNyckel(lines) {
+    return lines.map(function (ln) {
+      return ln.map(function (seg) {
+        var t = String(seg[0]);
+        if (seg[1] === 'u') return '_' + t + '_';
+        return seg[1] ? '*' + t + '*' : t;
+      }).join('');
+    }).join(' ¦ ');
+  }
+  function bubbelRader(text) {
+    return String(text).split('¦').map(function (rad) {
+      rad = rad.trim();
+      var ut = [];
+      rad.split(/(\*[^*]+\*|_[^_]+_)/).forEach(function (del) {
+        if (!del) return;
+        if (/^\*[^*]+\*$/.test(del)) ut.push([del.slice(1, -1), 1]);
+        else if (/^_[^_]+_$/.test(del)) ut.push([del.slice(1, -1), 'u']);
+        else ut.push([del]);
+      });
+      return ut;
+    });
+  }
+  function enBubblor(acts) {
+    if (!window.I18N || !window.I18N.en || !acts) return acts;
+    acts.forEach(function (a) {
+      var o = a && a.kind === 'show' && a.obj;
+      if (!o || !o.bubble || !Array.isArray(o.lines) || o._en) return;
+      var nyckel = bubbelNyckel(o.lines);
+      var en = window.I18N.t(nyckel);
+      if (en === nyckel) return;
+      var rader = bubbelRader(window.I18N.tal(en));
+      if (rader.length > o.lines.length) rader = rader.slice(0, o.lines.length);
+      o.lines = rader;
+      o._en = 1;
+    });
+    return acts;
+  }
+
+  function tonaSkalvardenInre(acts) {
     if (!acts || !acts.length) return acts;
     var grupper = [], sist = new Map();
     acts.forEach(function (a, i) {
@@ -40983,12 +41034,12 @@
 
     T.tanke(T.figurBubble(292, [
       [['Skriver in massorna före och']],
-      [['efter. Produkterna väger MER —']],
-      [['det är därför energi frigörs.']]
+      [['efter. Produkterna väger MINDRE,']],
+      [['och det är därför energi frigörs.']]
     ], 300));
-    T.lbl('128,13822 u', 128, ky + 72, BLUE);
+    T.lbl('128,25449 u', 128, ky + 72, BLUE);
     T.pause(150);
-    T.lbl('128,25449 u', 300, ky + 88, BLUE);
+    T.lbl('128,13822 u', 300, ky + 88, BLUE);
     T.stepEnd();
 
     var y = 400;
@@ -64388,7 +64439,7 @@
     var L = (spec && !Array.isArray(spec) && SCENES[spec.typ])
       ? SCENES[spec.typ](Object.assign({}, spec, { vagg: ekvLage === 'vagg' }), F)
       : layout(spec, F);
-    if (L && L.acts) L.acts = tonaSkalvarden(L.acts);
+    if (L && L.acts) L.acts = enBubblor(tonaSkalvarden(L.acts));
 
     /* svg är "skrivbordet": papperet + extra marginal höger/nedåt så att
      * handen får rum att sticka ut utanför papperskanten. Bredden är
@@ -65597,7 +65648,7 @@
       var L = SCENES[typ]
         ? SCENES[typ](Object.assign({ typ: typ }, cfg || {}), F || FSIZE)
         : null;
-      if (L && L.acts) L.acts = tonaSkalvarden(L.acts);
+      if (L && L.acts) L.acts = enBubblor(tonaSkalvarden(L.acts));
       return L;
     },
     typer: function () { return Object.keys(SCENES); },

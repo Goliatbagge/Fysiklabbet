@@ -1656,8 +1656,19 @@ const rad = THREE.MathUtils.degToRad;
 const klamp = THREE.MathUtils.clamp;
 const mjuk = (a, b, x) => { const t = klamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
 const easeInOut = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-// färden mellan världarna: långsam start, mycket hög fart i mitten (fem gånger snittfarten), mjuk inbromsning
-const easeFard = (t) => t < 0.5 ? 16 * t ** 5 : 1 - Math.pow(-2 * t + 2, 5) / 2;
+// Färden mellan världarna: fotonen accelererar mjukt under första fjärdedelen, håller
+// toppfarten i mitten och bromsar in mjukt under sista fjärdedelen. Farten följer en
+// smoothstep upp och ned, och läget är dess integral, normerad så att e(1) = 1.
+const FARD_RAMP = 0.24;
+function easeFard(t) {
+  const r = FARD_RAMP, A = 1 - r;
+  const S = (x) => x * x * x - x * x * x * x / 2;        // integralen av smoothstep, S(1) = 1/2
+  if (t <= 0) return 0;
+  if (t >= 1) return 1;
+  if (t < r) return r * S(t / r) / A;
+  if (t > 1 - r) return 1 - r * S((1 - t) / r) / A;
+  return (r / 2 + (t - r)) / A;
+}
 const $ = (id) => document.getElementById(id);
 
 const LAYOUT = {
@@ -1689,8 +1700,8 @@ const STOPP = [...PLANETER.map((p) => p.id), 'slut'];
 const NS = STOPP.length;
 // avstånden längs resan dras ut, så att världarna inte ligger tätt (månen behåller sitt avstånd till jorden)
 // Avstånden växer dessutom utåt, så att yttre solsystemet känns glesare än det inre:
-// inre planeterna hamnar cirka 7,5 gånger längre isär än i LAYOUT, Pluto cirka 13 gånger.
-const AVST = 7, AVST_UTAT = 0.9, Z_PLUTO = 1110;
+// inre planeterna hamnar cirka 30 gånger längre isär än i LAYOUT, Pluto cirka 50 gånger.
+const AVST = 28, AVST_UTAT = 0.9, Z_PLUTO = 1110;
 const zSkala = (z) => AVST * z * (1 + AVST_UTAT * z / Z_PLUTO);
 const zVarld = (id) => id === 'manen' ? zSkala(LAYOUT.jorden.Z) + (LAYOUT.manen.Z - LAYOUT.jorden.Z) : zSkala(LAYOUT[id].Z);
 // slutstationen: långt ut åt sidan, med blicken tillbaka mot solen
@@ -1699,19 +1710,19 @@ const SLUT_T = new V3(257, -20, -734).multiplyScalar(AVST * (1 + AVST_UTAT));
 const VOY_POS = new V3();
 
 const scen = new THREE.Scene();
-const kamera = new THREE.PerspectiveCamera(48, 1, 0.05, 200000);
+const kamera = new THREE.PerspectiveCamera(48, 1, 0.05, 1000000);
 kamera.position.set(0, 40, 30);
-const himmel = byggVintergatan(120000, 0.3);
+const himmel = byggVintergatan(500000, 0.3);
 scen.add(himmel);
 
 /* ---------- Stjärnor som sträcks ut i fart ---------- */
 const STRIM_VS = /* glsl */`
 attribute float aEnd; attribute vec3 aColor;
-uniform vec3 uCam, uVel; uniform float uBox;
+uniform vec3 uCam, uVel, uOff; uniform float uBox;
 varying vec3 vC; varying float vA;
 void main(){
   vec3 h = vec3(uBox * 0.5);
-  vec3 p = mod(position - uCam + h, vec3(uBox)) - h + uCam;
+  vec3 p = mod(position - uOff + h, vec3(uBox)) - h + uCam;
   p -= uVel * aEnd;
   float d = length(p - uCam);
   vA = (1.0 - aEnd) * (1.0 - smoothstep(uBox * 0.3, uBox * 0.5, d)) * smoothstep(2.0, 10.0, d);
@@ -1723,11 +1734,11 @@ uniform float uStyrka; varying vec3 vC; varying float vA;
 void main(){ gl_FragColor = vec4(vC * vA * uStyrka * 1.8, 1.0); }`;
 const PUNKT_VS = /* glsl */`
 attribute float aSize; attribute vec3 aColor;
-uniform vec3 uCam; uniform float uBox, uPR, uTime;
+uniform vec3 uCam, uOff; uniform float uBox, uPR, uTime;
 varying vec3 vC; varying float vA;
 void main(){
   vec3 h = vec3(uBox * 0.5);
-  vec3 p = mod(position - uCam + h, vec3(uBox)) - h + uCam;
+  vec3 p = mod(position - uOff + h, vec3(uBox)) - h + uCam;
   float d = length(p - uCam);
   vA = (1.0 - smoothstep(uBox * 0.3, uBox * 0.5, d)) * smoothstep(2.0, 8.0, d) * (0.75 + 0.25 * sin(uTime * 1.3 + position.x));
   vC = aColor;
@@ -1760,14 +1771,14 @@ function byggStrimmor(antal, box) {
   gl.setAttribute('position', new THREE.BufferAttribute(pos, 3));
   gl.setAttribute('aEnd', new THREE.BufferAttribute(end, 1));
   gl.setAttribute('aColor', new THREE.BufferAttribute(fl, 3));
-  const uni = { uCam: { value: new V3() }, uVel: { value: new V3() }, uBox: { value: box }, uStyrka: { value: 0 } };
+  const uni = { uCam: { value: new V3() }, uOff: { value: new V3() }, uVel: { value: new V3() }, uBox: { value: box }, uStyrka: { value: 0 } };
   const linjer = new THREE.LineSegments(gl, new THREE.ShaderMaterial({ uniforms: uni, vertexShader: STRIM_VS, fragmentShader: STRIM_FS, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
   linjer.frustumCulled = false;
   const gp = new THREE.BufferGeometry();
   gp.setAttribute('position', new THREE.BufferAttribute(ppos, 3));
   gp.setAttribute('aSize', new THREE.BufferAttribute(pstor, 1));
   gp.setAttribute('aColor', new THREE.BufferAttribute(pfarg, 3));
-  const puni = { uCam: uni.uCam, uBox: uni.uBox, uPR: { value: PR }, uTime: { value: 0 } };
+  const puni = { uCam: uni.uCam, uOff: uni.uOff, uBox: uni.uBox, uPR: { value: PR }, uTime: { value: 0 } };
   const punkter = new THREE.Points(gp, new THREE.ShaderMaterial({ uniforms: puni, vertexShader: PUNKT_VS, fragmentShader: PUNKT_FS, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
   punkter.frustumCulled = false;
   return { linjer, punkter, uni, puni };
@@ -2133,11 +2144,11 @@ function bezier(a, b, c, d, t, ut) {
   return ut.copy(a).multiplyScalar(u * u * u).addScaledVector(b, 3 * u * u * t).addScaledVector(c, 3 * u * t * t).addScaledVector(d, t * t * t);
 }
 const poseA = nyPose(), poseB = nyPose(), malPose = nyPose(), omlPose = nyPose();
-const resaInfo = { i: 0, t: 0, e: 0 };
+const resaInfo = { i: 0, t: 0, e: 0, gap: 0 };
 function resPose(s, tid) {
   const i = Math.min(Math.floor(s), NS - 1), u = s - i;
   pose(i, tid, poseA);
-  resaInfo.i = i; resaInfo.t = 0; resaInfo.e = 0;
+  resaInfo.i = i; resaInfo.t = 0; resaInfo.e = 0; resaInfo.gap = 0;
   const t = i >= NS - 1 ? 0 : mjuk(0.16, 0.92, u);
   if (t <= 0) { malPose.pos.copy(poseA.pos); malPose.quat.copy(poseA.quat); return resaInfo; }
   pose(i + 1, tid, poseB);
@@ -2155,7 +2166,7 @@ function resPose(s, tid) {
   _D.copy(poseB.W).sub(malPose.pos).normalize();
   quatFran(_D, UPP, _qt);
   malPose.quat.copy(poseA.quat).slerp(_qt, mjuk(0, 0.35, t)).slerp(poseB.quat, mjuk(0.62, 1, t));
-  resaInfo.t = t; resaInfo.e = e;
+  resaInfo.t = t; resaInfo.e = e; resaInfo.gap = gap;
   return resaInfo;
 }
 
@@ -2440,7 +2451,7 @@ window.addEventListener('scroll', () => {
   }, 280);
 }, { passive: true });
 /* Färden till en annan värld (piltangenterna, rutten, knapparna).
-   Fotonen ska flyta fram: en sträcka tar cirka 7 till 10 sekunder,
+   Fotonen ska flyta fram: en sträcka tar cirka 8 till 12 sekunder,
    lite längre ju längre det är mellan himlakropparna i scenen. Kameran står
    still precis vid varje värld (u < 0,16 och u > 0,92 i resPose), så de
    bitarna av skrollsträckan hoppas över: rörelsen börjar direkt, och
@@ -2454,7 +2465,7 @@ function stracksTider() {
   const a = nyPose(), b = nyPose(), g = [];
   for (let k = 0; k < NS - 1; k++) { pose(k, 0, a); pose(k + 1, 0, b); g.push(a.pos.distanceTo(b.pos)); }
   const lo = Math.min(...g), hi = Math.max(...g);
-  fardSekunder = g.map((d) => 7 + 3 * (hi > lo ? (d - lo) / (hi - lo) : 0.5));
+  fardSekunder = g.map((d) => 8 + 4 * (hi > lo ? (d - lo) / (hi - lo) : 0.5));
   return fardSekunder;
 }
 // aktiva bitar (där kameran rör sig) mellan s0 och s1, i färdriktningen
@@ -2479,7 +2490,7 @@ function gaTillStopp(i, snabbt) {
   // tid för varje bit: sträckans tid gånger hur stor del av den aktiva delen biten är
   bitar.forEach((x) => { x.t = tider[x.k] * Math.abs(x.b - x.a) / (AKTIV1 - AKTIV0); });
   let T = bitar.reduce((sum, x) => sum + x.t, 0);
-  if (bitar.length > 1) { const tak = Math.min(18, 5 + 3 * bitar.length); if (T > tak) { bitar.forEach((x) => { x.t *= tak / T; }); T = tak; } }
+  if (bitar.length > 1) { const tak = Math.min(22, 6 + 3.5 * bitar.length); if (T > tak) { bitar.forEach((x) => { x.t *= tak / T; }); T = tak; } }
   const t0 = performance.now();
   if (!bitar.length) {
     // bara stillastående del kvar (landningen sista biten): en kort glidning
@@ -3465,6 +3476,7 @@ const musik = (() => {
 let senast = performance.now(), tid = 0, storlek = { w: -1, h: -1 };
 const forraKam = new V3(), fartVek = new V3(), _ljus = new V3();
 let fartJamn = 0;
+const _rikt = new V3();
 function anpassaStorlek() {
   const w = window.innerWidth, h = window.innerHeight;
   if (!w || !h || (w === storlek.w && h === storlek.h)) return;
@@ -3565,13 +3577,20 @@ function frame(nu) {
   fartVek.copy(kamera.position).sub(forraKam).divideScalar(Math.max(dtVerklig, 1e-3));
   const fart = fartVek.length();
   fartJamn += (fart - fartJamn) * (1 - Math.exp(-dtVerklig * 6));
+  // Stjärnfältet får en upplevd fart: i lugnt tempo den verkliga, men under färden räknad ur
+  // hur stor del av sträckan fotonen klarar per sekund. Med de långa avstånden skulle den
+  // verkliga farten flytta stjärnorna mer än en hel ruta per bild, och då blinkar de i stället
+  // för att bilda strimmor.
+  const andel = resaInfo.gap > 0 ? fartJamn / resaInfo.gap : 0;
+  const upplevd = Math.min(fartJamn, 30 + 1400 * mjuk(0.012, 0.13, andel));
+  if (fartJamn > 1e-6) _rikt.copy(fartVek).normalize(); else _rikt.set(0, 0, 0);
+  strimmor.uni.uOff.value.addScaledVector(_rikt, upplevd * dtVerklig);
   strimmor.uni.uCam.value.copy(kamera.position);
-  strimmor.uni.uVel.value.copy(fartVek).multiplyScalar(0.22);
-  if (strimmor.uni.uVel.value.length() > 110) strimmor.uni.uVel.value.setLength(110);
-  strimmor.uni.uStyrka.value = mjuk(2, 30, fartJamn);
+  strimmor.uni.uVel.value.copy(_rikt).multiplyScalar(Math.min(upplevd * 0.22, 300));
+  strimmor.uni.uStyrka.value = mjuk(2, 30, upplevd);
   strimmor.puni.uTime.value = tid;
   himmel.position.copy(kamera.position);
-  $('varp').style.opacity = (mjuk(20, 160, fartJamn) * 0.9).toFixed(3);
+  $('varp').style.opacity = (mjuk(120, 1100, upplevd) * 0.9).toFixed(3);
   musik.fart(fartJamn);
 
   const stannar = Math.round(s);

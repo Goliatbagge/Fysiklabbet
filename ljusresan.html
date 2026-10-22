@@ -97,6 +97,15 @@ main#resa { position: relative; z-index: 2; }
 .ingress-lank:hover { text-decoration-color: currentColor; }
 .marke svg { color: var(--foton); }
 .topp-knappar { display: flex; gap: 8px; }
+/* med faktapanelen öppen flyttar knapparna åt vänster, så att panelen aldrig täcker dem */
+.topp-knappar { transition: transform 1s var(--ease); }
+@media (min-width: 601px) {
+  body.omlopp .topp-knappar { transform: translateX(calc(-1 * min(580px, 48vw))); }
+}
+@media (min-width: 601px) and (max-width: 1700px) {
+  body.omlopp .topp-knappar .hudknapp .text { display: none; }
+  body.omlopp .topp-knappar .hudknapp.sprak .kort { display: inline; }
+}
 .hudknapp {
   font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
   background: rgba(6, 9, 18, .45); border: 1px solid var(--hud); color: var(--dim); border-radius: 999px;
@@ -464,6 +473,7 @@ body.kan-titta, body.tittar { -webkit-user-select: none; user-select: none; }
   <div class="topp-knappar">
     <button class="hudknapp" id="musikKnapp" aria-pressed="false" title="Slå på eller av bakgrundsmusiken"><span class="lampa"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h4l5 4V6L8 10z"/><path class="vag" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg><span class="text">Musik</span></button>
     <button class="hudknapp" id="noterKnapp" aria-pressed="true" title="Visa eller dölj fältanteckningarna"><span class="lampa"></span><span class="text">Anteckningar</span></button>
+    <button class="hudknapp" id="lysKnapp" aria-pressed="false" title="Lys upp hela himlakroppen, även skuggsidan"><span class="lampa"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg><span class="text">Lys upp</span></button>
     <button class="hudknapp sprak" id="sprakKnapp" lang="en"><span class="text">English</span><span class="kort">EN</span></button>
     <button class="hudknapp" id="kartaKnapp" title="Solsystemet som det ser ut i dag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4.5"/><ellipse cx="12" cy="12" rx="6" ry="2.6"/></svg><span class="text">Solsystemet i dag</span></button>
   </div>
@@ -1251,7 +1261,7 @@ void main(){
 const PLANET_FS = /* glsl */`
 uniform sampler2D uMap, uMap2, uNight, uClouds, uSpec, uRing;
 uniform float uMix2, uReady, uHasNight, uNightStr, uHasClouds, uCloudAmt, uCloudOff, uHasSpec, uBump, uFlow, uTime;
-uniform float uEmissive, uHasRing, uRingIn, uRingOut, uAtmoStr, uRadius, uDim, uSat, uGain;
+uniform float uEmissive, uHasRing, uRingIn, uRingOut, uAtmoStr, uRadius, uDim, uSat, uGain, uFyll;
 uniform vec3 uBase, uLight, uAtmo, uCenter, uRingN;
 varying vec2 vUv; varying vec3 vN; varying vec3 vW; varying vec3 vL;
 ${BRUS}
@@ -1334,7 +1344,7 @@ void main(){
   if (uHasNight > 0.5) {
     vec3 nl = texture2D(uNight, vUv).rgb;
     float mork = smoothstep(0.06, -0.22, ndlG);
-    lit += nl * vec3(1.5, 1.1, 0.7) * 1.6 * mork * uNightStr * (1.0 - moln * 0.85);
+    lit += nl * vec3(1.5, 1.1, 0.7) * 1.6 * mork * uNightStr * (1.0 - moln * 0.85) * (1.0 - uFyll);
   }
   if (uHasRing > 0.5) {
     float dn = dot(L, uRingN);
@@ -1350,8 +1360,13 @@ void main(){
       }
     }
   }
+  // Lys upp: ett fyllnadsljus från kamerans håll som gör även skuggsidan synlig
+  if (uFyll > 0.0) {
+    vec3 fyll = col * (max(dot(Nn, V), 0.0) * 0.8 + 0.22) * 1.15 * (1.0 - moln * 0.35);
+    lit = mix(lit, max(lit, fyll), uFyll);
+  }
   float fres = pow(1.0 - mu, 4.2);
-  float atmLjus = smoothstep(-0.25, 0.55, ndlG);
+  float atmLjus = mix(smoothstep(-0.25, 0.55, ndlG), 1.0, uFyll * 0.7);
   lit += uAtmo * (fres * 1.5 + 0.05) * atmLjus * uAtmoStr;
   gl_FragColor = vec4(lit * uDim, 1.0);
   #include <tonemapping_fragment>
@@ -1359,7 +1374,7 @@ void main(){
 }`;
 
 const MOLN_FS = /* glsl */`
-uniform sampler2D uClouds; uniform float uOff, uAmt, uReady, uDim; uniform vec3 uLight;
+uniform sampler2D uClouds; uniform float uOff, uAmt, uReady, uDim, uFyll; uniform vec3 uLight;
 varying vec2 vUv; varying vec3 vN; varying vec3 vW;
 void main(){
   float c = texture2D(uClouds, vUv + vec2(uOff, 0.0)).r;
@@ -1371,6 +1386,7 @@ void main(){
   float mu = max(dot(Ng, V), 0.0);
   vec3 col = vec3(1.0) * (max(ndl, 0.0) * 1.15 + 0.015) * term;
   col = mix(col, col * vec3(1.0, 0.72, 0.52), smoothstep(0.32, 0.0, ndl) * term);
+  col = mix(col, max(col, vec3(mu * 0.75 + 0.25)), uFyll);
   float a = c * uAmt * uReady * mix(0.55, 1.0, smoothstep(0.0, 0.25, mu));
   gl_FragColor = vec4(col * uDim, a);
   #include <tonemapping_fragment>
@@ -1381,7 +1397,7 @@ const ATMO_VS = /* glsl */`
 varying vec3 vW;
 void main(){ vec4 w = modelMatrix * vec4(position, 1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`;
 const ATMO_FS = /* glsl */`
-uniform vec3 uAtmo, uSun, uLight, uCenter; uniform float uRadius, uThick, uStr, uDim, uJamn;
+uniform vec3 uAtmo, uSun, uLight, uCenter; uniform float uRadius, uThick, uStr, uDim, uJamn, uFyll;
 varying vec3 vW;
 void main(){
   vec3 rd = normalize(vW - cameraPosition);
@@ -1393,7 +1409,7 @@ void main(){
   float tathet = exp(-h * 3.6) * (1.0 - smoothstep(0.8, 1.0, h));
   vec3 n = normalize(cp - uCenter);
   float ndl = dot(n, normalize(uLight));
-  float ljus = mix(smoothstep(-0.4, 0.55, ndl), 1.0, uJamn);
+  float ljus = mix(smoothstep(-0.4, 0.55, ndl), 1.0, max(uJamn, uFyll * 0.75));
   vec3 col = mix(mix(uSun, uAtmo, smoothstep(-0.12, 0.42, ndl)), mix(uSun, uAtmo, exp(-h * 2.5)), uJamn);
   float a = tathet * ljus * uStr;
   gl_FragColor = vec4(col * uDim, a);
@@ -1405,7 +1421,7 @@ const RING_VS = /* glsl */`
 varying vec3 vW; varying float vR;
 void main(){ vR = length(position.xy); vec4 w = modelMatrix * vec4(position, 1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`;
 const RING_FS = /* glsl */`
-uniform sampler2D uRing; uniform float uIn, uOut, uPR, uReady, uDim; uniform vec3 uLight, uCenter, uN;
+uniform sampler2D uRing; uniform float uIn, uOut, uPR, uReady, uDim, uFyll; uniform vec3 uLight, uCenter, uN;
 varying vec3 vW; varying float vR;
 void main(){
   float t = (vR - uIn) / (uOut - uIn);
@@ -1418,7 +1434,8 @@ void main(){
   vec3 V = normalize(cameraPosition - vW);
   float fram = pow(max(dot(-V, L), 0.0), 6.0) * 0.5;
   float ljus = 0.5 + 0.5 * abs(dot(normalize(uN), L));
-  vec3 col = tx.rgb * (ljus + fram) * skugga * 1.25;
+  vec3 col = tx.rgb * (ljus + fram) * mix(skugga, 1.0, uFyll) * 1.25;
+  col = mix(col, max(col, tx.rgb * 1.05), uFyll);
   gl_FragColor = vec4(col * uDim, tx.a * uReady * 0.96);
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
@@ -1450,6 +1467,8 @@ function klotGeo(a, b) { const k = a + 'x' + b; return geoCache[k] || (geoCache[
 const RING_IN = 1.24, RING_UT = 2.27;
 const ringGeo = new THREE.RingGeometry(RING_IN, RING_UT, 256, 1);
 
+// Lys upp-knappen: ett gemensamt värde som alla världars shadrar läser
+const FYLL = { value: 0 };
 function byggPlanet(p, o = {}) {
   const seg = o.seg || [176, 120];
   const root = new THREE.Group();
@@ -1463,7 +1482,7 @@ function byggPlanet(p, o = {}) {
     uHasClouds: { value: p.tex.moln ? 1 : 0 }, uCloudAmt: { value: 1 }, uCloudOff: { value: 0 }, uHasSpec: { value: p.tex.hav ? 1 : 0 },
     uBump: { value: p.bump || 0 }, uFlow: { value: p.flow || 0 }, uTime: { value: 0 }, uEmissive: { value: p.sol ? 1 : 0 },
     uHasRing: { value: p.ring ? 1 : 0 }, uRingIn: { value: RING_IN }, uRingOut: { value: RING_UT },
-    uAtmoStr: { value: p.atmo ? p.atmo.inre : 0 }, uRadius: { value: 1 }, uDim: { value: 1 },
+    uAtmoStr: { value: p.atmo ? p.atmo.inre : 0 }, uRadius: { value: 1 }, uDim: { value: 1 }, uFyll: FYLL,
     uSat: { value: p.sat || 1 }, uGain: { value: p.gain || 1 },
     uBase: { value: new THREE.Color(p.farg) }, uLight: { value: new THREE.Vector3(0, 0, 1) },
     uAtmo: { value: new THREE.Color(p.atmo ? p.atmo.farg : '#000000') }, uCenter: { value: new THREE.Vector3() }, uRingN: { value: new THREE.Vector3(0, 1, 0) },
@@ -1477,7 +1496,7 @@ function byggPlanet(p, o = {}) {
   const obj = { p, root, tilt, snurr, mesh, U, laddad: false, lagerMal: { moln: 1, natt: 1, yta: 0 } };
 
   if (p.tex.moln) {
-    const cU = { uClouds: { value: VIT }, uOff: { value: 0 }, uAmt: { value: 1 }, uReady: { value: 0 }, uDim: { value: 1 }, uLight: U.uLight };
+    const cU = { uClouds: { value: VIT }, uOff: { value: 0 }, uAmt: { value: 1 }, uReady: { value: 0 }, uDim: { value: 1 }, uLight: U.uLight, uFyll: FYLL };
     const cm = new THREE.Mesh(klotGeo(seg[0], seg[1]), new THREE.ShaderMaterial({
       uniforms: cU, vertexShader: PLANET_VS, fragmentShader: MOLN_FS, transparent: true, depthWrite: false,
     }));
@@ -1486,7 +1505,7 @@ function byggPlanet(p, o = {}) {
     obj.cU = cU;
   }
   if (p.ring) {
-    const rU = { uRing: { value: VIT }, uIn: { value: RING_IN }, uOut: { value: RING_UT }, uPR: { value: 1 }, uReady: { value: 0 }, uDim: { value: 1 },
+    const rU = { uRing: { value: VIT }, uIn: { value: RING_IN }, uOut: { value: RING_UT }, uPR: { value: 1 }, uReady: { value: 0 }, uDim: { value: 1 }, uFyll: FYLL,
       uLight: U.uLight, uCenter: U.uCenter, uN: U.uRingN };
     const rm = new THREE.Mesh(ringGeo, new THREE.ShaderMaterial({
       uniforms: rU, vertexShader: RING_VS, fragmentShader: RING_FS, transparent: true, depthWrite: false, side: THREE.DoubleSide,
@@ -1498,7 +1517,7 @@ function byggPlanet(p, o = {}) {
   }
   if (p.atmo) {
     const aU = { uAtmo: { value: new THREE.Color(p.atmo.farg) }, uSun: { value: new THREE.Color(p.atmo.sol) }, uLight: U.uLight,
-      uCenter: U.uCenter, uRadius: U.uRadius, uThick: { value: p.atmo.tjock }, uStr: { value: p.atmo.str }, uDim: U.uDim, uJamn: { value: p.sol ? 1 : 0 } };
+      uCenter: U.uCenter, uRadius: U.uRadius, uThick: { value: p.atmo.tjock }, uStr: { value: p.atmo.str }, uDim: U.uDim, uJamn: { value: p.sol ? 1 : 0 }, uFyll: FYLL };
     const am = new THREE.Mesh(klotGeo(96, 64), new THREE.ShaderMaterial({
       uniforms: aU, vertexShader: ATMO_VS, fragmentShader: ATMO_FS, transparent: true, depthWrite: false,
       side: THREE.BackSide, blending: THREE.AdditiveBlending,
@@ -2444,8 +2463,23 @@ function skarmTraff(o, fx, fy, ut) {
   return ut.copy(ray.direction).multiplyScalar(tca - Math.sqrt(R * R - d2)).add(ray.origin);
 }
 const _rp = new V3();
+const _sk = new V3();
 function notPunkt(p, o, n, ut) {
-  if (n.skarm) return skarmTraff(o, n.skarm[0], n.skarm[1], ut);
+  if (n.skarm) {
+    // Vid stoppet sitter etiketten på en fast plats i bilden. Punkten den pekar på sparas
+    // på världens yta, så att etiketten i omloppsbana följer med när världen roterar.
+    if (!omlopp.aktiv) {
+      const traff = skarmTraff(o, n.skarm[0], n.skarm[1], ut);
+      if (traff) { n._lokal = n._lokal || new V3(); o.mesh.worldToLocal(n._lokal.copy(traff)); }
+      return traff;
+    }
+    if (!n._lokal) {
+      // gick man direkt in i omloppsbana: en punkt på den sida som vetter mot kameran, lite ovanför mitten
+      _sk.copy(kamera.position).sub(o.root.position).normalize().addScaledVector(UPP, 0.45).normalize();
+      n._lokal = o.mesh.worldToLocal(_sk.multiplyScalar(o.root.scale.x).add(o.root.position));
+    }
+    return o.mesh.localToWorld(ut.copy(n._lokal));
+  }
   if (n.ring) {
     // punkten på ringen som hamnar närmast önskad plats i bilden och inte skyms av planeten
     const W = o.root.position, R = o.root.scale.x;
@@ -2539,39 +2573,49 @@ function uppdateraNoter(aktiv, synlighet) {
       _nc.copy(kamera.position).sub(_np);
       const avst = _nc.length();
       _nc.divideScalar(avst);
-      if (!n.ring && !n.skarm) {
+      if (!n.ring && (!n.skarm || omlopp.aktiv)) {
         _nn.copy(_np).sub(W).normalize();
         if (_nn.dot(_nc) < 0.005) return;
       }
       _nv.copy(_np).project(kamera);
       if (_nv.z > 1) return;
       const x = (_nv.x + 1) / 2 * w, y = (1 - _nv.y) / 2 * h;
-      if (x < 30 || x > w - 30 || y < 90 || y > h - 70) return;
+      // i omloppsbana fyller världen nästan hela höjden: etiketterna får gå ända ned mot kanten
+      if (x < 30 || x > w - 30 || y < (omlopp.aktiv ? 84 : 90) || y > h - (omlopp.aktiv ? 22 : 70)) return;
       kandidater.push({ nyckel: p.id + j, n, x, y });
     });
   }
   // lägg ut etiketterna utan krockar, och aldrig över stopptexten
   const placerade = [];
   if (hindret) placerade.push(hindret);
+  // i omloppsbana: alla etiketter som syns får plats, men aldrig bakom faktapanelen
+  if (omlopp.aktiv && dossier.classList.contains('oppen')) { const d = dossier.getBoundingClientRect(); placerade.push({ x0: d.left - 8, x1: d.right, y0: d.top - 8, y1: d.bottom }); }
+  const tak = omlopp.aktiv ? 99 : 3;
   const visas = new Set();
   kandidater.forEach((k) => {
     const bredd = Math.max(k.n.text.length * 11.5, k.n.sub.length * 6.7) + 12;
     // etiketten pekar helst åt höger, bort från textblocket, och vänder bara vid högerkanten
-    const dir = k.x + 76 + bredd < w - 12 ? 1 : -1;
-    const x0 = dir > 0 ? k.x : k.x - 76 - bredd, x1 = dir > 0 ? k.x + 76 + bredd : k.x;
-    const ruta = { x0, x1, y0: k.y - 72, y1: k.y + 8 };
-    if (ruta.x0 < 8 || ruta.x1 > w - 8) return;
-    if (placerade.some((q) => ruta.x0 < q.x1 && ruta.x1 > q.x0 && ruta.y0 < q.y1 && ruta.y1 > q.y0)) return;
-    if (visas.size >= 3) return;
+    // prova först den riktning som passar, sedan den andra
+    const forst = k.x + 76 + bredd < w - 12 ? 1 : -1;
+    // och är det trångt ovanför punkten (bara i omloppsbana) kan etiketten läggas under den
+    let dir = 0, upp = 1, ruta = null;
+    const lagen = [[forst, 1], [-forst, 1]].concat(omlopp.aktiv ? [[forst, -1], [-forst, -1]] : []);
+    for (const [d, u] of lagen) {
+      const r = { x0: d > 0 ? k.x : k.x - 76 - bredd, x1: d > 0 ? k.x + 76 + bredd : k.x, y0: u > 0 ? k.y - 72 : k.y - 8, y1: u > 0 ? k.y + 8 : k.y + 72 };
+      if (r.x0 < 8 || r.x1 > w - 8 || r.y0 < 64 || r.y1 > h - 8) continue;
+      if (placerade.some((q) => r.x0 < q.x1 && r.x1 > q.x0 && r.y0 < q.y1 && r.y1 > q.y0)) continue;
+      dir = d; upp = u; ruta = r; break;
+    }
+    if (!ruta || visas.size >= tak) return;
     placerade.push(ruta);
     visas.add(k.nyckel);
     const post = notEl.get(k.nyckel) || skapaNot(k.nyckel, k.n);
-    if (post.riktning !== dir) {
-      post.riktning = dir;
-      post.g.querySelector('polyline').setAttribute('points', `${dir * 5},-5 ${dir * 32},-40 ${dir * 68},-40`);
+    if (post.riktning !== dir || post.upp !== upp) {
+      post.riktning = dir; post.upp = upp;
+      post.g.querySelector('polyline').setAttribute('points', `${dir * 5},${-5 * upp} ${dir * 32},${-40 * upp} ${dir * 68},${-40 * upp}`);
       const t1 = post.g.querySelector('.hand'), t2 = post.g.querySelector('.sub');
-      t1.setAttribute('x', dir * 76); t1.setAttribute('y', -34);
-      t2.setAttribute('x', dir * 77); t2.setAttribute('y', -16);
+      t1.setAttribute('x', dir * 76); t1.setAttribute('y', upp > 0 ? -34 : 46);
+      t2.setAttribute('x', dir * 77); t2.setAttribute('y', upp > 0 ? -16 : 64);
       t1.setAttribute('text-anchor', dir > 0 ? 'start' : 'end');
       t2.setAttribute('text-anchor', dir > 0 ? 'start' : 'end');
     }
@@ -3557,6 +3601,8 @@ document.addEventListener('keydown', (e) => {
   });
 }
 $('ikStang').addEventListener('click', stangInfo);
+let lysUpp = false;
+$('lysKnapp').addEventListener('click', (e) => { lysUpp = !lysUpp; e.currentTarget.setAttribute('aria-pressed', lysUpp); });
 $('noterKnapp').addEventListener('click', (e) => { noterPa = !noterPa; e.currentTarget.setAttribute('aria-pressed', noterPa); });
 
 /* =====================================================================
@@ -3773,7 +3819,10 @@ function frame(nu) {
   strimmor.puni.uTime.value = tid;
   himmel.position.copy(kamera.position);
   $('varp').style.opacity = (mjuk(120, 1100, upplevd) * 0.9).toFixed(3);
-  foton.uppdatera(dtVerklig, tid, omlopp.aktiv ? 0 : mjuk(90, 700, upplevd));
+  FYLL.value += ((lysUpp ? 1 : 0) - FYLL.value) * (1 - Math.exp(-dtVerklig * 4));
+  // fotonen syns så fort man är på väg mellan två världar, och lyser starkare ju fortare det går
+  const iFlykt = !omlopp.aktiv && info.t > 0.03 && info.t < 0.97;
+  foton.uppdatera(dtVerklig, tid, iFlykt ? 0.6 + 0.4 * mjuk(90, 700, upplevd) : 0);
   musik.fart(fartJamn);
 
   const stannar = Math.round(s);

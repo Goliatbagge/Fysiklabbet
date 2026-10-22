@@ -154,4 +154,5 @@ window.SIM_NAMES = {
   ],
   'fysik2-solens-farg.html': 'Solens färg',
   'fysik2-neutronstjarna.html': 'Neutronstjärnan i skala',
+  'ljusresan.html': 'Ljusresan',
 };

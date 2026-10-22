@@ -805,7 +805,7 @@ function myntTextur(def, sida) {
     g.fillText('KRONA', S / 2, S * .76);
   } else if (std && sida === 1) {
     // Klave: en krönt sköld med tre kronor, som lilla riksvapnet på de
-    // äldre svenska enkronorna, och valören under.
+    // äldre svenska enkronorna, och ordet KLAVE under, som KRONA på kronsidan.
     const ink = 'rgba(38,42,48,.85)';
     const cx = S / 2, top = 168, w = 190, mitt = 300, spets = 398;
     const skold = () => {
@@ -838,8 +838,8 @@ function myntTextur(def, sida) {
     g.beginPath(); g.moveTo(kx, ky + 8); g.lineTo(kx, ky - 40); g.stroke();
     g.beginPath(); g.arc(kx, ky - 52, 11, 0, TAU); g.fill();
     g.fillRect(kx - 3, ky - 76, 6, 20); g.fillRect(kx - 10, ky - 70, 20, 6);
-    g.font = '700 52px Poppins, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
-    g.fillText('1 KR', cx, 446);
+    g.font = '700 46px Poppins, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillText('KLAVE', cx, 440);
   } else if (text) {
     ritaText(g, text, S / 2, S / 2, S * .66, 170, 'rgba(38,42,48,.88)', false);
   }

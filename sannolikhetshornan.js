@@ -874,7 +874,9 @@ function skapaBricka({ center, filt: filtHex, bredd = 15.4, djup = 10 }) {
   world.solver.iterations = 14;
   const mGolv = new CANNON.Material(), mT = new CANNON.Material(), mVagg = new CANNON.Material();
   world.addContactMaterial(new CANNON.ContactMaterial(mGolv, mT, { friction: 0.24, restitution: 0.36 }));
-  world.addContactMaterial(new CANNON.ContactMaterial(mT, mT, { friction: 0.1, restitution: 0.5 }));
+  // Tärning mot tärning: mjukare kontakt, annars darrade en tärning som låg
+  // på en annan.
+  world.addContactMaterial(new CANNON.ContactMaterial(mT, mT, { friction: 0.2, restitution: 0.4, contactEquationRelaxation: 5, frictionEquationRelaxation: 5 }));
   world.addContactMaterial(new CANNON.ContactMaterial(mVagg, mT, { friction: 0.06, restitution: 0.62 }));
   // Mynten får ett eget material. Två tunna mynt som ligger på varandra ger
   // en stel kontakt med många punkter, och med standardvärdena dallrade de i
@@ -992,20 +994,25 @@ function skapaBricka({ center, filt: filtHex, bredd = 15.4, djup = 10 }) {
     const q = d.body.quaternion, up = new CANNON.Vec3(0, 1, 0);
     const lu = q.conjugate().vmult(up), L = new V3(lu.x, lu.y, lu.z);
     const P = d.P;
+    // klar: det är otvetydigt vilken sida som är upp. Plant på brickan, eller
+    // lutad mot en annan tärning men med en sida tydligt högre än nästa.
+    // Bara en tärning som står nästan lika mycket på två sidor knuffas.
     if (P.sides === 4) {
-      let best = 0, bd = -2;
-      P.vertDir.forEach((v, i) => { const t = v.dot(L); if (t > bd) { bd = t; best = i; } });
-      return { li: P.vertLi[best], dot: bd > .94 ? 1 : 0 };
+      let best = 0, bd = -2, bd2 = -2;
+      P.vertDir.forEach((v, i) => { const t = v.dot(L); if (t > bd) { bd2 = bd; bd = t; best = i; } else if (t > bd2) bd2 = t; });
+      const klar = bd > .94 || bd - bd2 >= .3;
+      return { li: P.vertLi[best], dot: klar ? 1 : 0, klar };
     }
-    let best = -1, bd = -2;
-    for (const fi of P.labelFaces) { const t = P.faces[fi].n.dot(L); if (t > bd) { bd = t; best = fi; } }
-    return { li: P.faceLi.get(best), dot: bd };
+    let best = -1, bd = -2, bd2 = -2;
+    for (const fi of P.labelFaces) { const t = P.faces[fi].n.dot(L); if (t > bd) { bd2 = bd; bd = t; best = fi; } else if (t > bd2) bd2 = t; }
+    const klar = P.sides === 2 ? bd >= .15 : (bd >= .93 || bd - bd2 >= .2);
+    return { li: P.faceLi.get(best), dot: bd, klar };
   }
   function avlas() {
     const res = dice.map(uppIndex);
     // Ett mynt som lutar mot kanten eller ett annat mynt har ändå en sida som
     // tydligt vetter uppåt; bara ett mynt som står nästan lodrätt är oavgjort.
-    const sned = res.findIndex((r, i) => dice[i].P.sides === 2 ? (r.dot < .15 && knuffar < 2) : r.dot < .93);
+    const sned = res.findIndex((r, i) => !r.klar && (dice[i].P.sides !== 2 || knuffar < 2));
     if (sned >= 0 && knuffar < 4) {
       // Tärningen lutar mot en kant eller en annan tärning: ge den en knuff.
       const b = dice[sned].body;
@@ -1033,7 +1040,8 @@ function skapaBricka({ center, filt: filtHex, bredd = 15.4, djup = 10 }) {
       knuffar++; still = 0; bild = null; forraSida = null; return;
     }
     busy = false; vila = 0;
-    dice.forEach(d => { if (d.body.isMynt) d.body.sleep(); });
+    // Allt söves vid avläsningen och ligger kvar som det lästes av.
+    dice.forEach(d => d.body.sleep());
     const utfall = dice.map((d, i) => utfallAv(d.def, res[i].li));
     dice.forEach((d, i) => {
       const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: etikettTextur(utfall[i].text), depthTest: false, transparent: true }));
@@ -1057,11 +1065,15 @@ function skapaBricka({ center, filt: filtHex, bredd = 15.4, djup = 10 }) {
   let forraSida = null;
   function stilla() {
     const nu = dice.map(d => [d.body.position.clone(), d.body.quaternion.clone()]);
-    const sida = dice.map(d => { const u = uppIndex(d); return u.dot < .15 ? -1 : u.li; });
+    // Tärningar räknas som stilla när de ligger plant (sidan uppåt avgjord)
+    // med samma sida uppåt hela fönstret och inte längre rullar. En tärning
+    // som ligger på en annan kan annars darra i flera sekunder utan att
+    // sidan någonsin ändras. Lutande tärningar mäts som förut.
+    const sida = dice.map(d => { const u = uppIndex(d); return u.klar ? u.li : -1; });
     let ok = !!(bild && bild.length === nu.length && forraSida);
     if (ok) nu.forEach(([p, q], i) => {
       const b = dice[i].body;
-      if (b.isMynt && sida[i] >= 0) {
+      if (sida[i] >= 0) {
         ok = ok && sida[i] === forraSida[i] && b.velocity.lengthSquared() < 4 && b.angularVelocity.lengthSquared() < 25;
         return;
       }
@@ -1119,7 +1131,7 @@ function skapaBricka({ center, filt: filtHex, bredd = 15.4, djup = 10 }) {
       for (const d of dice) if (d !== grepp.d) d.body.wakeUp();
     }
     // Tunna mynt behöver kortare tidssteg än tärningar för att inte dallra.
-    if (dice.some(d => d.body.isMynt)) world.step(1 / 240, dt, 16); else world.step(1 / 120, dt, 8);
+    world.step(1 / 240, dt, 16);
     for (const d of dice) { d.mesh.position.copy(d.body.position); d.mesh.quaternion.copy(d.body.quaternion); }
     // etiketterna följer med när något flyttas
     if (etiketter.length === dice.length) etiketter.forEach((e, i) => e.position.set(dice[i].body.position.x, dice[i].body.position.y + 1.9, dice[i].body.position.z));
@@ -2028,7 +2040,8 @@ const HJULMALLAR = {
 const ALLA_VALORER = Array.from({ length: 13 }, (_, i) => i + 1);
 function standardLage() {
   return {
-    tarningar: { lista: [nyTarning(6, 'elfenben'), nyTarning(6, 'rod')], vy: 'summa' },
+    // standard: enfärgade vita tärningar med svarta prickar
+    tarningar: { lista: [nyTarning(6, 'elfenben'), nyTarning(6, 'elfenben')], vy: 'summa', farger: 'samma' },
     kort: { farger: ['S', 'H', 'D', 'C'], valorer: ALLA_VALORER.slice(), jokrar: 0, antal: 1, ater: false, vy: 'farg' },
     urna: { innehall: [{ key: 'rod', n: 5 }, { key: 'bla', n: 3 }, { key: 'gul', n: 2 }], antal: 1, ater: true },
     hjul: { sektorer: HJULMALLAR.lika() },
@@ -2041,7 +2054,9 @@ function lasLage() {
     const t = LS.get('tarningar', null);
     if (t && Array.isArray(t.lista) && t.lista.length >= 1 && t.lista.length <= 12 &&
         t.lista.every(d => [2, 4, 6, 8, 10, 12, 20].includes(d.sides) && Array.isArray(d.labels) && d.labels.length === d.sides && Array.isArray(d.sidfarg) && d.sidfarg.length === d.sides)) {
-      s.tarningar = { lista: t.lista.map(d => d.sides === 2 ? nyTarning(6, tfarg(d.farg).key) : ({ sides: d.sides, farg: tfarg(d.farg).key, labels: d.labels.map(l => String(l).slice(0, 6)), sidfarg: d.sidfarg.map(x => (typeof x === 'string' && /^#[0-9a-f]{6}$/i.test(x)) ? x : null) })), vy: t.vy === 'varje' ? 'varje' : 'summa' };
+      s.tarningar = { lista: t.lista.map(d => d.sides === 2 ? nyTarning(6, tfarg(d.farg).key) : ({ sides: d.sides, farg: tfarg(d.farg).key, labels: d.labels.map(l => String(l).slice(0, 6)), sidfarg: d.sidfarg.map(x => (typeof x === 'string' && /^#[0-9a-f]{6}$/i.test(x)) ? x : null) })), vy: t.vy === 'varje' ? 'varje' : 'summa', farger: t.farger === 'olika' ? 'olika' : 'samma' };
+      // sparat från före färgvalet: börja i standardläget, vita tärningar
+      if (!t.farger) s.tarningar.lista.forEach(d => { d.farg = 'elfenben'; });
     }
     const k = LS.get('kort', null);
     if (k && Array.isArray(k.farger) && Array.isArray(k.valorer)) {
@@ -2218,7 +2233,9 @@ function renderSettings() {
       <div class="row"><b>Antal</b>${stepper('t-antal', L.length, 1, 12)}</div>
       <div class="row" style="margin-top:12px"><b>Sort för alla</b></div>
       <div class="seg">${[4, 6, 8, 10, 12, 20].map(s => `<button type="button" data-act="t-typ" data-v="${s}" aria-pressed="${alla === s}">${s === 2 ? 'Mynt' : s}</button>`).join('')}</div>
-      <p class="note">Siffrorna är antalet sidor. Klicka på en tärning nedan för att göra en specialtärning.</p>
+      <div class="row" style="margin-top:12px"><b>Färg</b></div>
+      <div class="seg" role="group" aria-label="Tärningarnas färg"><button type="button" data-act="t-fargval" data-v="samma" aria-pressed="${ST.tarningar.farger !== 'olika'}">Samma färg</button><button type="button" data-act="t-fargval" data-v="olika" aria-pressed="${ST.tarningar.farger === 'olika'}">Olika färger</button></div>
+      <p class="note">Siffrorna är antalet sidor. Klicka på en tärning nedan för att göra en specialtärning eller byta färg.</p>
       <div class="chips" style="margin-top:10px">${L.map((d, i) => { const F = tfarg(d.farg); return `<button type="button" class="chip" data-act="t-chip" data-i="${i}" aria-pressed="${UI.sel === i}"><i style="background:${d.sides === 2 ? '#c4c8cd' : F.bas};color:${d.sides === 2 ? '#222' : F.blakk}">${d.sides === 2 ? 'M' : d.sides}</i>${d.sides === 2 ? 'Mynt' : 'Tärning'} ${i + 1}${arStandard(d) ? '' : '*'}</button>`; }).join('')}</div>`;
     if (UI.sel >= 0 && UI.sel < L.length) {
       const d = L[UI.sel], farger = d.sides !== 2 && d.sides !== 4;
@@ -2513,7 +2530,7 @@ function handling(act, el) {
   switch (act) {
     case 't-antal': {
       if (Tarningar.busy) return;
-      if (d > 0 && L.length < 12) { const s = L[L.length - 1]; L.push(nyTarning(s.sides, TFARGER[L.length % TFARGER.length].key)); }
+      if (d > 0 && L.length < 12) { const s = L[L.length - 1]; L.push(nyTarning(s.sides, ST.tarningar.farger === 'olika' ? TFARGER[L.length % TFARGER.length].key : L[0].farg)); }
       if (d < 0 && L.length > 1) L.pop();
       if (UI.sel >= L.length) UI.sel = -1;
       tarningarAndrade(); renderSettings(); break;
@@ -2521,7 +2538,14 @@ function handling(act, el) {
     case 't-typ': if (Tarningar.busy) return; L.forEach((t, j) => { L[j] = nyTarning(+v, t.farg); }); tarningarAndrade(); renderSettings(); break;
     case 't-chip': UI.sel = UI.sel === i ? -1 : i; renderSettings(); break;
     case 't-sidor': if (Tarningar.busy) return; L[UI.sel] = nyTarning(+v, L[UI.sel].farg); tarningarAndrade(); renderSettings(); break;
-    case 't-farg': L[UI.sel].farg = v; tarningarAndrade(); renderSettings(); break;
+    case 't-farg': if (ST.tarningar.farger === 'olika') L[UI.sel].farg = v; else L.forEach(t => { t.farg = v; }); tarningarAndrade(); renderSettings(); break;
+    case 't-fargval': {
+      if (Tarningar.busy) return;
+      ST.tarningar.farger = v;
+      if (v === 'olika') L.forEach((t, j) => { t.farg = TFARGER[j % TFARGER.length].key; });
+      else L.forEach(t => { t.farg = 'elfenben'; });
+      tarningarAndrade(); renderSettings(); break;
+    }
     case 't-sidfarg': {
       const t = L[UI.sel], cyk = [null, ...SIDFARGER.map(s => s.hex)];
       t.sidfarg[i] = cyk[(cyk.indexOf(t.sidfarg[i]) + 1) % cyk.length];

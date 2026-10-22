@@ -1423,15 +1423,15 @@ i `kopplingsschema.js`; läs dem innan du ändrar något.
 - **Menyvalet Resurser** (infört 2026-09-30, hette tidigare Verktyg) ligger
   efter Nationella prov i huvudmenyn. Det är en rullgardin med tre grupper,
   byggda som Ämne-menyns grupper (`.lab-nav-dd-grupp`): **Verktyg**
-  (Rita kopplingsschema, Sannolikhetskalkylator, Slumpa grupper),
+  (Rita kopplingsschema, Sannolikhetskalkylator, Sannolikhetshörnan, Slumpa grupper),
   **Övningsblad** (Fysik, Matematik, som går till
   `ovningsblad.html#fysik`/`#matematik`) och **Sammanfattningar** (Fysik,
   Matematik, som går till `sammanfattningar.html?amne=fysik`/`?amne=matematik`;
-  valrutan visar då bara det ämnets kurser). Menyn finns på fjorton sidor:
+  valrutan visar då bara det ämnets kurser). Menyn finns på femton sidor:
   `avsnitt`, `begrepp`, `index`, `katalog`, `kontakt`, `nyheter`,
   `nyhetsbrev`, `om`, `simuleringar`, `np`, `kopplingsschema`,
-  `sannolikhetskalkylator`, `slumpa-grupper` och `ovningsblad` (samt
-  `utkast/sannolikhetshornan.html`). Ett nytt verktyg läggs till i alla;
+  `sannolikhetskalkylator`, `sannolikhetshornan`, `slumpa-grupper` och
+  `ovningsblad`. Ett nytt verktyg läggs till i alla;
   en ny sida med huvudmenyn ska ha Resurser med.
 - **`sammanfattningar.html`** (2026-10-05) visar avsnittens
   `::: sammanfattning`-rutor som bildspel för valda kapitel i en kurs. Den
@@ -1507,6 +1507,42 @@ React + Firebase) till sajtens stil. Strukturen beskrivs i filhuvudet.
   `getBoundingClientRect()`, aldrig `clientWidth` (avrundningen uppåt bröt
   om korten till fler rader). Den inbyggda webbläsaren ger ingen helskärm;
   prova med puppeteer i riktig Chrome.
+- FAQ:n i JSON-LD ska vara ordagrant samma som de synliga frågorna. Öka
+  `?v=` på skriptet när det ändras.
+
+### Sannolikhetshörnan (sannolikhetshornan.html)
+
+Fjärde verktyget (förhandsvisat i `utkast/` från 2026-09-27, officiellt
+2026-10-22): `sannolikhetshornan.html` + `sannolikhetshornan.js` (ES-modul,
+three@0.160 och cannon-es@0.20 via importmap). Slumpförsök i 3D på ett bord
+med fem stationer: tärningar, mynt, kortlek, urna och lyckohjul, plus ett
+stapeldiagram som jämför relativ frekvens med sannolikhet.
+`utkast/sannolikhetshornan.html` är en vidarebefordran från
+förhandsvisningens adress. Filhuvudet beskriver stationerna.
+
+- **Rättvisan får aldrig kompromissas.** Tärningar och mynt är
+  fysiksimulerade och rättvisa av symmetri, kort och kulor väljs likformigt,
+  och hjulets slutvinkel dras likformigt över varvet innan animeringen
+  räknas ut baklänges. Styr aldrig ett utfall för att animeringen ska se
+  bättre ut, och dämpa aldrig rörelsen på ett sätt som gynnar en sida.
+- **Tärnings- och myntbrickan är samma kod** (`skapaBricka()`) med var sin
+  fysikvärld. Mynten har eget material, kortare tidssteg och ett eget
+  stillhetsvillkor (samma sida uppåt en stund), annars dallrade de i flera
+  sekunder när de låg på varandra.
+- **Scenen renderas bara när något rör sig** (`wake()`). En station som
+  aldrig somnar håller renderingen igång för alltid, så tärningar och kulor
+  söves efter en stund i vila. **Väck kropparna direkt** när en handling
+  startar (inte först i en tween): tweenens första anrop kan hoppas över en
+  bildruta, och då hinner steget se att allt sover och stänga av fysiken
+  (så slutade skakningen av urnan att göra något, 2026-10-18).
+- **Instansierade meshar måste ha `frustumCulled = false`**: deras
+  avgränsningssfär räknas en gång, när instanserna låg i origo, och då
+  försvann kulorna ur bild (bara skuggorna syntes).
+- Allt ritas och låter ur koden: texturer på canvas, ljud syntetiserade med
+  Web Audio. Inga bild- eller ljudfiler.
+- Granska i riktig Chrome med puppeteer, aldrig i den inbyggda
+  webbläsarrutan: den stryper `requestAnimationFrame` till några bilder per
+  sekund, och då ser fysiken ut att hänga sig.
 - FAQ:n i JSON-LD ska vara ordagrant samma som de synliga frågorna. Öka
   `?v=` på skriptet när det ändras.
 

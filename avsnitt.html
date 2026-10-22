@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avsnitt — Fysiklabbet</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -405,7 +406,7 @@
                         stack.push({ type: ty, close: '</div></details>' });
                         const label = title
                             ? escapeHtml(title).replace(/\*([^*]+)\*/g, '<em>$1</em>')
-                            : (arForklaring ? 'Förklaring' : 'Härledning');
+                            : I18N.t(arForklaring ? 'Förklaring' : 'Härledning');
                         let attr = '';
                         if (arForklaring) {
                             // Ankare som för rutorna nedan, så att ?block= kan
@@ -415,7 +416,7 @@
                             if (title) {
                                 const slug = blockSlug(title);
                                 attr += ' data-block="' + slug + '"';
-                                const kort = slug.replace(/^forklaring-/, '');
+                                const kort = slug.replace(/^(forklaring|explanation)-/, '');
                                 if (kort && kort !== slug) attr += ' data-blockkort="' + kort + '"';
                             }
                         }
@@ -439,8 +440,10 @@
                         // "Exempel 1 — Den fatala gungan" ger också den korta
                         // formen "den-fatala-gungan", som överlever att
                         // exemplen numreras om.
+                        // Engelska titlar ("Example 1: …") har typordet på engelska.
+                        const tyEn = { exempel: 'example', formel: 'formula' }[blockSlug(ty)];
                         const kort = slug.replace(
-                            new RegExp('^' + blockSlug(ty) + '-\\d+-'), '');
+                            new RegExp('^(' + blockSlug(ty) + (tyEn ? '|' + tyEn : '') + ')-\\d+-'), '');
                         if (kort && kort !== slug) ankare += ' data-blockkort="' + kort + '"';
                     }
                     out.push('<div class="lab-block lab-block-' + ty + '"' + ankare + '>');
@@ -474,7 +477,7 @@
             const det = document.createElement('details');
             det.className = 'lab-bildkallor no-begrepp';
             const sum = document.createElement('summary');
-            sum.textContent = 'Bildkällor';
+            sum.textContent = I18N.t('Bildkällor');
             det.appendChild(sum);
             const ol = document.createElement('ol');
             rader.forEach(p => {
@@ -528,7 +531,7 @@
             if (cfg['källa'] || cfg.kalla) meta.push(escapeHtml(cfg['källa'] || cfg.kalla));
             if (cfg['länk'] || cfg.lank) {
                 const url = escapeHtml(cfg['länk'] || cfg.lank);
-                meta.push('<a href="' + url + '" target="_blank" rel="noopener">Se filmen i original</a>');
+                meta.push('<a href="' + url + '" target="_blank" rel="noopener">' + I18N.t('Se filmen i original') + '</a>');
             }
             if (meta.length) cap.push('<span class="lab-video-kalla">' + meta.join(' · ') + '</span>');
             const caption = '<figcaption>' + cap.join('') + '</figcaption>';
@@ -548,7 +551,7 @@
                 return '<div class="lab-video lab-video-lank"' + ank + '>' + cap.join('') + '</div>';
             }
             return '<figure class="lab-video' + staende + '"' + ank + '><div class="lab-video-ram" style="aspect-ratio:' + ratio + '">' +
-                '<iframe src="' + src + '" title="' + escapeHtml(cfg.titel || 'Videoklipp') + '"' +
+                '<iframe src="' + src + '" title="' + escapeHtml(cfg.titel || I18N.t('Videoklipp')) + '"' +
                 ' loading="lazy" frameborder="0" allow="fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>' +
                 '</div>' + caption + '</figure>';
         }
@@ -911,7 +914,7 @@
                         </div>
                     )}
 
-                    <div className="lab-article-body"
+                    <div className="lab-article-body no-i18n"
                         ref={containerRef}
                         dangerouslySetInnerHTML={{ __html: html }} />
                 </article>

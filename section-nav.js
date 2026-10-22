@@ -140,7 +140,7 @@
             // med två visas simuleringarnas egna namn så att de går att skilja åt.
             const title = simHrefs.length === 1
                 ? 'Simulering'
-                : (simName(h, i) || 'Simulering ' + (i + 1));
+                : (simName(h, i) || (window.I18N ? I18N.t('Simulering {n}', { n: i + 1 }) : 'Simulering ' + (i + 1)));
             const inner = '<span class="secnav-tag">Experiment</span>' +
                 '<span class="secnav-title">' + esc(title) + '</span>';
             mid += current

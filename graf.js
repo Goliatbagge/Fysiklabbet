@@ -52,6 +52,10 @@
 (function () {
     'use strict';
 
+    // Språk (i18n.js): gränssnittstexter via I18N.t, decimalpunkt på engelska.
+    var EN = !!(window.I18N && window.I18N.en);
+    function T(sv, vars) { return window.I18N ? window.I18N.t(sv, vars) : sv; }
+
     // ── Sifferformatering (svensk: komma, exakt/avrundat noll → "0") ──────
     function fmt(v, decimals) {
         if (!isFinite(v)) return '–';
@@ -60,7 +64,7 @@
         if (parseFloat(s) === 0) return '0';
         // strippa avslutande nollor i decimaldelen
         if (s.indexOf('.') >= 0) s = s.replace(/0+$/, '').replace(/\.$/, '');
-        return s.replace('.', ',');
+        return EN ? s : s.replace('.', ',');
     }
     // KaTeX-variant: decimalkomma skrivs {,} så det inte läses som skiljetecken
     function fmtTex(v, decimals) {
@@ -124,7 +128,7 @@
             // '·' och '−' (Unicode) tolereras
             if (c === '·') { tokens.push({ t: 'op', v: '*' }); i++; continue; }
             if (c === '−') { tokens.push({ t: 'op', v: '-' }); i++; continue; }
-            throw new Error('Okänt tecken i uttryck: ' + c);
+            throw new Error(T('Okänt tecken i uttryck:') + ' ' + c);
         }
         return tokens;
     }
@@ -168,7 +172,7 @@
             else if (tk.t === '(') { stack.push(tk); }
             else if (tk.t === ')') {
                 while (stack.length && stack[stack.length - 1].t !== '(') output.push(stack.pop());
-                if (!stack.length) throw new Error('Obalanserade parenteser');
+                if (!stack.length) throw new Error(T('Obalanserade parenteser'));
                 stack.pop(); // '('
                 if (stack.length && stack[stack.length - 1].t === 'func') output.push(stack.pop());
             }
@@ -176,7 +180,7 @@
         }
         while (stack.length) {
             var s = stack.pop();
-            if (s.t === '(') throw new Error('Obalanserade parenteser');
+            if (s.t === '(') throw new Error(T('Obalanserade parenteser'));
             output.push(s);
         }
         // Utvärdera RPN mot en scope
@@ -188,7 +192,7 @@
                 else if (o.t === 'name') {
                     if (o.v in scope) st.push(scope[o.v]);
                     else if (o.v in CONSTS) st.push(CONSTS[o.v]);
-                    else throw new Error('Okänd variabel: ' + o.v);
+                    else throw new Error(T('Okänd variabel:') + ' ' + o.v);
                 }
                 else if (o.t === 'op') { var b = st.pop(), a = st.pop(); st.push(OPS[o.v].fn(a, b)); }
                 else if (o.t === 'func') { st.push(FUNCS[o.v](st.pop())); }
@@ -217,15 +221,15 @@
             if (key === 'titel') cfg.title = val;
             else if (key === 'uttryck') cfg.expr = val;
             else if (key === 'ekvation') cfg.eq = val;
-            else if (key === 'lutningstriangel') cfg.triangle = /^(ja|1|true)$/i.test(val);
+            else if (key === 'lutningstriangel') cfg.triangle = /^(ja|yes|1|true)$/i.test(val);
             else if (key === 'område') {
                 cfg.area = val.split(';').map(function (pt) {
                     var q = pt.trim().split(/\s+/);
                     return [num(q[0]), num(q[1])];
                 }).filter(function (q) { return isFinite(q[0]) && isFinite(q[1]); });
             }
-            else if (key === 'hörn') cfg.corners = /^(ja|1|true)$/i.test(val);
-            else if (key === 'skärning') cfg.intercept = !/^(nej|0|false)$/i.test(val);
+            else if (key === 'hörn') cfg.corners = /^(ja|yes|1|true)$/i.test(val);
+            else if (key === 'skärning') cfg.intercept = !/^(nej|no|0|false)$/i.test(val);
             else if (key === 'x') { var xp = val.split(','); cfg.x = [num(xp[0]), num(xp[1])]; }
             else if (key === 'y') { var yp = val.split(','); cfg.y = [num(yp[0]), num(yp[1])]; }
             else {
@@ -287,7 +291,7 @@
         var fn;
         try { fn = compile(cfg.expr); }
         catch (err) {
-            el.textContent = 'Kunde inte tolka uttrycket: ' + cfg.expr;
+            el.textContent = T('Kunde inte tolka uttrycket:') + ' ' + cfg.expr;
             return;
         }
 
@@ -296,7 +300,7 @@
         cfg.params.forEach(function (p) { scope[p.name] = p.value; });
 
         var card = document.createElement('div');
-        card.className = 'lab-graf-card';
+        card.className = 'lab-graf-card i18n-ja';
 
         if (cfg.title) {
             var h = document.createElement('div');
@@ -321,8 +325,8 @@
             width: GEO.W, height: GEO.H,
             'font-family': 'DM Sans, system-ui, sans-serif',
             role: 'img',
-            'aria-label': 'Interaktiv graf till ' + (cfg.title || cfg.expr) +
-                '. Dra för att panorera, zooma med knapparna.'
+            'aria-label': T('Interaktiv graf till {namn}. Dra för att panorera, zooma med knapparna.',
+                { namn: cfg.title || cfg.expr })
         });
         svg.classList.add('lab-graf-svg');
         scene.appendChild(svg);
@@ -549,7 +553,7 @@
                         x: lx, y: ly, 'font-size': 11.5,
                         'text-anchor': anc,
                         fill: COL.accent
-                    }, '(' + fmtDisp(q[0], 2) + (q[0] % 1 || q[1] % 1 ? '; ' : ', ') + fmtDisp(q[1], 2) + ')'));
+                    }, '(' + fmtDisp(q[0], 2) + (!EN && (q[0] % 1 || q[1] % 1) ? '; ' : ', ') + fmtDisp(q[1], 2) + ')'));
                 });
             }
 
@@ -691,10 +695,10 @@
             zoomBox.appendChild(b);
             return b;
         }
-        zBtn('+', 'Zooma in', function () { setScale(view.scale * 1.3); });
-        zBtn('&#8722;', 'Zooma ut', function () { setScale(view.scale / 1.3); });
+        zBtn('+', T('Zooma in'), function () { setScale(view.scale * 1.3); });
+        zBtn('&#8722;', T('Zooma ut'), function () { setScale(view.scale / 1.3); });
         zBtn('<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>',
-            'Återställ vyn', function () {
+            T('Återställ vyn'), function () {
                 view.cx = view0.cx; view.cy = view0.cy; view.scale = view0.scale;
                 draw();
             });
@@ -724,14 +728,14 @@
             slider.type = 'range';
             slider.className = 'lab-graf-slider';
             slider.min = p.min; slider.max = p.max; slider.step = p.step; slider.value = p.value;
-            slider.setAttribute('aria-label', 'Parametern ' + p.name);
+            slider.setAttribute('aria-label', T('Parametern {p}', { p: p.name }));
 
             var field = document.createElement('input');
             field.type = 'number';
             field.className = 'lab-graf-num';
             field.min = p.min; field.max = p.max; field.step = p.step; field.value = p.value;
             field.setAttribute('inputmode', 'decimal');
-            field.setAttribute('aria-label', 'Värde för ' + p.name);
+            field.setAttribute('aria-label', T('Värde för {p}', { p: p.name }));
 
             function apply(v, from) {
                 if (!isFinite(v)) return;
@@ -775,7 +779,7 @@
                 // DOM-vandrare (t.ex. bionic) skulle bli flera flex-items
                 // med luckor mitt i orden.
                 var cbText = document.createElement('span');
-                cbText.textContent = 'Visa trappsteget';
+                cbText.textContent = T('Visa trappsteget');
                 check.appendChild(cbText);
                 foot.appendChild(check);
             }
@@ -784,7 +788,7 @@
                 var reset = document.createElement('button');
                 reset.type = 'button';
                 reset.className = 'lab-graf-reset';
-                reset.textContent = 'Återställ';
+                reset.textContent = T('Återställ');
                 reset.addEventListener('click', function () {
                     rows.forEach(function (r) {
                         scope[r.p.name] = r.p.value;
@@ -817,9 +821,9 @@
             node.setAttribute('data-graf-mounted', '1');
             var src = decodeSrc(node.getAttribute('data-graf-src'));
             var cfg = parseConfig(src);
-            if (!cfg.expr) { node.textContent = 'Graf saknar uttryck.'; continue; }
+            if (!cfg.expr) { node.textContent = T('Graf saknar uttryck.'); continue; }
             try { build(node, cfg); }
-            catch (e) { node.textContent = 'Kunde inte bygga grafen.'; }
+            catch (e) { node.textContent = T('Kunde inte bygga grafen.'); }
         }
     }
 

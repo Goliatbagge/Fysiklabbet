@@ -11,6 +11,79 @@ sessionen på en arbetsgren: committa där, merga (fast-forward om möjligt)
 in i `main` och pusha `main`. Att bara pusha arbetsgrenen räcker inte —
 då syns ingenting på sajten. (Stående önskemål 2026-08-03.)
 
+## ⚠️ KRITISK: Engelska — varje ändring görs på båda språken
+
+> **LÄGE 2026-10-22: engelska är PÅSLAGET för teorigenomgångarna**
+> (`katalog.html` och `avsnitt.html`, listan `AKTIVA_SIDOR` i `i18n.js`).
+> Alla 356 genomgångar, katalogtexterna och exit tickets är översatta, och
+> för dem gäller regeln nedan FULLT UT: ändrar du en genomgång, en
+> katalogtext eller en exit ticket, ändrar du den engelska i samma commit
+> (`node .claude/verify-engelska.js teori katalog exittickets` ska vara grön).
+> Övriga sidor (nyheter, ordlistan, prov, simuleringar, verktyg) visas bara
+> på svenska: där är översättningen PAUSAD, och en sida läggs till i
+> `AKTIVA_SIDOR` först när hela dess innehåll är översatt. Övningarna
+> (`data/en/ovningar/`) och pennlösningarnas text är delvis översatta; det
+> som saknas visas på svenska. Öppna punkter: `.claude/i18n/oppna-punkter.md`.
+
+**Sajten finns på svenska (standard) och engelska** (beslut 2026-10-17:
+hela sajten översätts, och ny eller ändrad text översätts I SAMMA
+ARBETSPASS som den svenska ändringen). Besökaren byter språk med knappen
+English/Svenska sist i huvudmenyn; engelska har adresser med `?lang=en`.
+Svenska är källan; den engelska texten följer efter.
+
+**Regeln: ändrar du svensk text som besökaren ser, ändrar du den engelska
+motsvarigheten i samma commit.** Det gäller teori, övningar, exit tickets,
+nyheter, ordlistan, prov, katalogtexter, gränssnitt, simuleringar och
+pennlösningar. En ny svensk post utan engelska syns som svensk text på den
+engelska sajten, och en ändrad svensk post med gammal engelska säger något
+annat på de två språken, utan att något ser trasigt ut.
+
+Var den engelska texten bor:
+
+| Svenskt | Engelskt |
+|---|---|
+| `data/teori/<id>.md` | `data/teori/en/<id>.md` (byggs av `data/teori/build.js` till `data/en/teori/bundle.js`) |
+| `data/ovningar.js`, `data/exittickets.js`, `data/nyheter.js`, `data/begrepp.js`, `data/np/<prov>.js`, `data/repetition/<id>.js` | `data/en/<samma namn>.js` — `I18N.innehall('<typ>', { id: { kalla, data } })` |
+| `data/katalog.js` (titlar, beskrivningar, intron) | `data/en/katalog.js` — `I18N.katalog({...})` |
+| `data/simuleringar.js` | `data/en/simuleringar.js` |
+| Gränssnitt i en sida | `i18n/sidor/<sida>.js`; i delade skript `i18n/gemensamt/<skript>.js`; menyer, kursnamn och vanliga knappar `i18n/en.js` |
+| Pennlösningarnas text (`handskrift.js`, `data/np/*-penna.js`, `data/ovningar-penna/`) | `data/en/handskrift*.js` (ordlista; nycklarna samlas med `node .claude/i18n/handskrift-strangar.js --saknas`) |
+
+Så fungerar det (detaljer i filhuvudet i `i18n.js` och i
+`.claude/i18n/RIKTLINJER.md`):
+
+- **`i18n.js` laddas först i `<head>` på varje sida.** En ny sida ska ha
+  `<script src="i18n.js"></script>` direkt efter `<meta charset>`
+  (`node .claude/i18n/lagg-in-skript.js` lägger in den).
+- **Varje svensk datafil slutar med `if (window.I18N) window.I18N.overlay('<namn>');`**
+  som laddar den engelska filen ovanpå. Det som inte är översatt visas på
+  svenska. En ny datafil får samma rad.
+- **Gränssnittstext översätts av en ordlista** som byter textnoder vars
+  hela text är en nyckel, och `I18N.addHtml` för stycken med inbäddad
+  markup. Text som byggs ihop i koden (`'Visa ' + n`, canvas-etiketter,
+  `alert`) skrivs `I18N.t('Visa {n} laddningar', {n})`. Klassen `no-i18n`
+  stänger av ordlistan för ett område (redan översatt innehåll,
+  användarens egen text), `i18n-ja` slår på den igen inuti.
+- **Ny fil i `data/en/`, `i18n/sidor/` eller `i18n/gemensamt/`, eller en
+  ändring i `i18n/gemensamt/`?** Kör `node .claude/i18n/bygg-manifest.js`
+  (görs också av `data/teori/build.js`). Den skriver `i18n/manifest.js`
+  (vilka filer som finns) och slår ihop `i18n/gemensamt/*.js` till
+  `i18n/gemensamt.js`, som är den fil sidorna laddar.
+- **Fingeravtryck:** varje engelsk innehållspost bär `kalla`, ett avtryck av
+  den svenska posten den översattes från (`.claude/i18n/kalla.js`; teorin
+  stämplas med `node .claude/i18n/stampla.js <id>`). Uppdatera avtrycket
+  först när den engelska texten verkligen följer den nya svenska.
+- **Tal på engelska har decimalpunkt** (5.0 m/s, `5.0` i KaTeX). `I18N.tal()`
+  gör om decimalkomma i kod som skriver ut tal.
+- **Stilen** (brittisk engelska, inga tankstreck som pausmarkör, fasta
+  termer) står i `.claude/i18n/RIKTLINJER.md` och `.claude/i18n/termlista.md`.
+  Teorins översättningsregler: `.claude/i18n/TEORI-OVERSATTNING.md`.
+
+**Före commit:** `node .claude/verify-engelska.js` — fel på en engelsk post
+vars svenska källa ändrats sedan översättningen (INAKTUELL), och på saknade
+poster i de innehållstyper som redan är helt översatta. Kontrollera synlig
+svenska på en engelsk sida med `node .claude/i18n/kvar.js "<sida>?…"`.
+
 ## Tech Stack
 
 - **Frontend**: Standalone HTML med React 18 (CDN), TailwindCSS (CDN)

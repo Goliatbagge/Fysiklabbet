@@ -12620,6 +12620,8 @@
         for (var i = 0; i < nodes.length; i++) {
             var node = nodes[i];
             node.setAttribute('data-minisim-mounted', '1');
+            // Översätts även när teorin runt omkring är märkt .no-i18n (i18n.js).
+            node.classList.add('i18n-ja');
             var cfg = parseConfig(decodeSrc(node.getAttribute('data-minisim-src')));
             var build = cfg.typ && TYPES[cfg.typ];
             if (!build) { node.textContent = 'Okänd minisimulering.'; continue; }

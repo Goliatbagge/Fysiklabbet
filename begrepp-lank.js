@@ -159,7 +159,9 @@
                 a.className = 'begrepp-lank';
                 a.href = 'begrepp.html?ord=' + encodeURIComponent(b.id);
                 a.setAttribute('data-ord', b.id);
-                a.title = b.term + ' — läs förklaringen i ordlistan';
+                a.title = window.I18N
+                    ? I18N.t('{term} — läs förklaringen i ordlistan', { term: b.term })
+                    : b.term + ' — läs förklaringen i ordlistan';
                 a.textContent = m[0];
                 frag.appendChild(a);
 

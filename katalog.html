@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fysiklabbet — Teori, simuleringar och övningar i fysik</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -471,7 +472,7 @@
                         stack.push({ type: ty, close: '</div></details>' });
                         const label = title
                             ? escapeHtml(title).replace(/\*([^*]+)\*/g, '<em>$1</em>')
-                            : (arForklaring ? 'Förklaring' : 'Härledning');
+                            : I18N.t(arForklaring ? 'Förklaring' : 'Härledning');
                         let attr = '';
                         if (arForklaring) {
                             // Ankare som för rutorna nedan, så att ?block= kan
@@ -481,7 +482,7 @@
                             if (title) {
                                 const slug = blockSlug(title);
                                 attr += ' data-block="' + slug + '"';
-                                const kort = slug.replace(/^forklaring-/, '');
+                                const kort = slug.replace(/^(forklaring|explanation)-/, '');
                                 if (kort && kort !== slug) attr += ' data-blockkort="' + kort + '"';
                             }
                         }
@@ -505,8 +506,10 @@
                         // "Exempel 1 — Den fatala gungan" ger också den korta
                         // formen "den-fatala-gungan", som överlever att
                         // exemplen numreras om.
+                        // Engelska titlar ("Example 1: …") har typordet på engelska.
+                        const tyEn = { exempel: 'example', formel: 'formula' }[blockSlug(ty)];
                         const kort = slug.replace(
-                            new RegExp('^' + blockSlug(ty) + '-\\d+-'), '');
+                            new RegExp('^(' + blockSlug(ty) + (tyEn ? '|' + tyEn : '') + ')-\\d+-'), '');
                         if (kort && kort !== slug) ankare += ' data-blockkort="' + kort + '"';
                     }
                     out.push('<div class="lab-block lab-block-' + ty + '"' + ankare + '>');
@@ -561,7 +564,7 @@
             if (cfg['källa'] || cfg.kalla) meta.push(escapeHtml(cfg['källa'] || cfg.kalla));
             if (cfg['länk'] || cfg.lank) {
                 const url = escapeHtml(cfg['länk'] || cfg.lank);
-                meta.push('<a href="' + url + '" target="_blank" rel="noopener">Se filmen i original</a>');
+                meta.push('<a href="' + url + '" target="_blank" rel="noopener">' + I18N.t('Se filmen i original') + '</a>');
             }
             if (meta.length) cap.push('<span class="lab-video-kalla">' + meta.join(' · ') + '</span>');
             const caption = '<figcaption>' + cap.join('') + '</figcaption>';
@@ -581,7 +584,7 @@
                 return '<div class="lab-video lab-video-lank"' + ank + '>' + cap.join('') + '</div>';
             }
             return '<figure class="lab-video' + staende + '"' + ank + '><div class="lab-video-ram" style="aspect-ratio:' + ratio + '">' +
-                '<iframe src="' + src + '" title="' + escapeHtml(cfg.titel || 'Videoklipp') + '"' +
+                '<iframe src="' + src + '" title="' + escapeHtml(cfg.titel || I18N.t('Videoklipp')) + '"' +
                 ' loading="lazy" frameborder="0" allow="fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>' +
                 '</div>' + caption + '</figure>';
         }
@@ -1147,7 +1150,7 @@
                 let isProse = false;
                 if (!right) {
                     right = Array.from(box.children).find(
-                        el => el.tagName === 'P' && /^där\b/i.test(el.textContent.trim()));
+                        el => el.tagName === 'P' && /^(där|where)\b/i.test(el.textContent.trim()));
                     isProse = !!right;
                 }
                 if (!right) return;                                       // ingen variabelförklaring → lämna
@@ -1162,13 +1165,13 @@
                     if (el.classList && el.classList.contains('lab-block-title')) continue;
                     if (el.tagName === 'DETAILS') continue;               // härlednings-dropdownen stannar under layouten
                     if (el === right) { passedRight = true; continue; }
-                    if (el.tagName === 'P' && el.textContent.trim().toLowerCase() === 'där') { el.remove(); continue; }
+                    if (el.tagName === 'P' && /^(där|where)$/.test(el.textContent.trim().toLowerCase())) { el.remove(); continue; }
                     if (passedRight) { after.push(el); continue; }        // stannar under layouten, i källordning
                     cell.appendChild(el);                                 // flytta in formelinnehållet
                 }
                 if (isProse) {
                     const f = right.firstChild;                          // ta bort ledande "där "
-                    if (f && f.nodeType === 3) f.nodeValue = f.nodeValue.replace(/^\s*där\s+/i, '');
+                    if (f && f.nodeType === 3) f.nodeValue = f.nodeValue.replace(/^\s*(där|where)\s+/i, '');
                     right.classList.add('vardef-prose');
                 } else {
                     right.classList.add('vardef-stack');
@@ -1239,7 +1242,7 @@
                 }
                 delar.push({
                     // Kortets meta visar namnet utan "Fördjupning — "-prefixet.
-                    namn: (m[1] || 'Fördjupning').replace(/^\s*f(ö|o)rdjupning\s*[—–-]\s*/i, ''),
+                    namn: (m[1] || I18N.t('Fördjupning')).replace(/^\s*(f(ö|o)rdjupning|going further|in depth)\s*[—–:-]\s*/i, ''),
                     md: block.join('\n'),
                 });
                 i = j;
@@ -1319,7 +1322,7 @@
             const det = document.createElement('details');
             det.className = 'lab-bildkallor no-begrepp';
             const sum = document.createElement('summary');
-            sum.textContent = 'Bildkällor';
+            sum.textContent = I18N.t('Bildkällor');
             det.appendChild(sum);
             const ol = document.createElement('ol');
             rader.forEach(p => {
@@ -1467,7 +1470,7 @@
                 );
             }
             return (
-                <div className={'lab-article-body lab-article-body-inline' + (bionic ? ' bionic-on' : '') + (dyslexia ? ' dyslexia-on' : '')}
+                <div className={'lab-article-body lab-article-body-inline no-i18n' + (bionic ? ' bionic-on' : '') + (dyslexia ? ' dyslexia-on' : '')}
                     ref={ref}
                     dangerouslySetInnerHTML={{ __html: html }} />
             );
@@ -1506,7 +1509,7 @@
             }, [html]);
             if (!html) return null;
             return (
-                <div className={className || 'lab-article-body lab-article-body-inline'}
+                <div className={(className || 'lab-article-body lab-article-body-inline') + ' no-i18n'}
                     ref={ref}
                     dangerouslySetInnerHTML={{ __html: html }} />
             );
@@ -1667,7 +1670,7 @@
                 const prevTop = steps[steps.length - 1];
                 if (el.classList.contains('lab-block-figur') &&
                     prevTop && !prevTop.block && prevTop.el.tagName === 'P' &&
-                    /\b(figur|bild|diagram|graf|kurv|tabell)\w*/i.test(prevTop.el.textContent || '')) {
+                    /\b(figur|bild|diagram|graf|kurv|tabell|picture|image|graph|curve|table)\w*/i.test(prevTop.el.textContent || '')) {
                     (prevTop.twins || (prevTop.twins = [])).push(el);
                     continue;
                 }
@@ -2399,7 +2402,7 @@
                         + (step === 0 ? ' at-title' : '') + (ready ? ' is-ready' : '')}
                     style={{ '--pres-skala': textScale }}
                     ref={overlayRef} onMouseMove={pokeChrome} onClick={onStageClick}
-                    role="dialog" aria-label={'Presentationsläge: ' + plainTitle(title)}>
+                    role="dialog" aria-label={I18N.t('Presentationsläge:') + ' ' + plainTitle(title)}>
                     <div className="lab-pres-progress" aria-hidden="true">
                         <div style={{ width: (total > 0 ? (step / total) * 100 : 0) + '%' }} />
                     </div>
@@ -2415,7 +2418,7 @@
                             </div>
                         </div>
                         {html ? (
-                            <div className="lab-article-body lab-pres-body" ref={bodyRef}
+                            <div className="lab-article-body lab-pres-body no-i18n" ref={bodyRef}
                                 dangerouslySetInnerHTML={{ __html: html }} />
                         ) : (
                             <p className="lab-pres-empty">Teorigenomgång saknas för det här avsnittet.</p>
@@ -2423,7 +2426,7 @@
                     </div>
                     <div className="lab-pres-bar" onClick={(e) => e.stopPropagation()}>
                         <span className="lab-mono-label lab-pres-counter">
-                            {step === 0 ? 'TITELBILD' : `STEG ${step} / ${total}`}
+                            {step === 0 ? I18N.t('TITELBILD') : I18N.t('STEG {n} / {total}', { n: step, total })}
                         </span>
                         <div className="lab-pres-bar-btns">
                             <button type="button" onClick={prev} disabled={step === 0}
@@ -2449,7 +2452,7 @@
                             {vis && (
                                 <button type="button" className="lab-pres-exit lab-pres-visbtn"
                                     onClick={() => setShowVis(true)}
-                                    title={'Öppna visualiseringen: ' + vis.titel}>
+                                    title={I18N.t('Öppna visualiseringen:') + ' ' + vis.titel}>
                                     Visualisering
                                 </button>
                             )}
@@ -2460,7 +2463,7 @@
                     </div>
                     {showVis && vis && (
                         <div className="lab-pres-vis" onClick={(e) => e.stopPropagation()}
-                            role="dialog" aria-label={'Visualisering: ' + vis.titel}>
+                            role="dialog" aria-label={I18N.t('Visualisering:') + ' ' + vis.titel}>
                             <div className="lab-pres-vis-head">
                                 <span className="lab-mono-label">VISUALISERING · {vis.titel.toUpperCase()}</span>
                                 <button type="button" className="lab-pres-exit"
@@ -2607,7 +2610,7 @@
             const s = input.replace(/[−–—]/g, '-')
                 .replace(/±\s*(\d+(?:[.,]\d+)?)/g, '$1 och -$1')
                 .replace(/[a-zA-Zåäö₀-₉]+\s*=/g, ' ');
-            const tokens = s.split(/\s*(?:\boch\b|\beller\b|;|,\s+|\s{1,})\s*/i)
+            const tokens = s.split(/\s*(?:\boch\b|\beller\b|\band\b|\bor\b|;|,\s+|\s{1,})\s*/i)
                 .map(t => parseAnswerParts(t)).filter(Boolean).map(p => p.value);
             if (!tokens.length) return 'unparseable';
             const kvar = d.values.slice();
@@ -2628,10 +2631,11 @@
         // bort ur kursivraden; övrigt där ("Räkna med g = …") står kvar.
         function utanSvarsinstruktion(q) {
             return q.replace(/(?<!\*)\*(?!\*)((?:[^*\n]|\*\*[^*\n]+\*\*)+)\*(?!\*)/g, (hel, inre) => {
-                inre = inre.replace(/\s+och ange [^.]*som ditt (?:numeriska )?svar/, '');
-                if (!/(^|\.\s+)Ange\b/.test(inre)) return '*' + inre + '*';
+                inre = inre.replace(/\s+och ange [^.]*som ditt (?:numeriska )?svar/, '')
+                    .replace(/\s+and give [^.]*as your (?:numerical )?answer/, '');
+                if (!/(^|\.\s+)(Ange|Give)\b/.test(inre)) return '*' + inre + '*';
                 const kvar = inre.split(/(?<=\.)\s+(?=[A-ZÅÄÖ])/)
-                    .filter(m => !/^\s*Ange\b/.test(m))
+                    .filter(m => !/^\s*(Ange|Give)\b/.test(m))
                     .join(' ').trim();
                 return kvar ? '*' + kvar + '*' : '';
             }).replace(/\n{3,}/g, '\n\n').replace(/(\n|<br>)+\s*$/, '');
@@ -2645,7 +2649,7 @@
                 }
                 return del.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
             }).join(''), [text]);
-            return <span dangerouslySetInnerHTML={{ __html: html }} />;
+            return <span className="no-i18n" dangerouslySetInnerHTML={{ __html: html }} />;
         }
 
         // Symboler för formaterings-popover. ·10ⁿ infogar literalt "·10^"
@@ -2907,7 +2911,7 @@
                                                         value={delSvar[i]}
                                                         placeholder={ord ? 'Svara i ord' : ''}
                                                         style={!ord && d.unit ? { paddingRight: 24 + d.unit.length * 8 } : undefined}
-                                                        aria-label={'Svar på ' + d.del + (d.etikett ? ', ' + d.etikett.replace(/\$/g, '') : '')}
+                                                        aria-label={I18N.t('Svar på') + ' ' + d.del + (d.etikett ? ', ' + d.etikett.replace(/\$/g, '') : '')}
                                                         onFocus={() => { aktivDel.current = i; }}
                                                         onChange={(e) => andraDel(i, e.target.value)}
                                                         onKeyDown={(e) => {
@@ -3718,8 +3722,8 @@
                                         ))}
                                         {sections.some(s => s.fordjupning || s.overkurs) && (
                                             <div className="lab-sections-fotnot">
-                                                {'* ' + [sections.some(s => s.fordjupning) && 'Fördjupning',
-                                                         sections.some(s => s.overkurs) && 'Överkurs']
+                                                {'* ' + [sections.some(s => s.fordjupning) && I18N.t('Fördjupning'),
+                                                         sections.some(s => s.overkurs) && I18N.t('Överkurs')]
                                                         .filter(Boolean).join(', ')}
                                             </div>
                                         )}
@@ -3765,7 +3769,7 @@
                                                         <a className="lab-card lab-card-clickable" href={avsnittsSamUrl}>
                                                             <div className="lab-card-tag">Bildspel</div>
                                                             <div className="lab-card-title">Sammanfattningar för varje avsnitt</div>
-                                                            <div className="lab-card-meta">{antalAvsnittsSam} st</div>
+                                                            <div className="lab-card-meta">{I18N.t('{n} st', { n: antalAvsnittsSam })}</div>
                                                         </a>
                                                     )}
                                                     {hasExit ? (
@@ -3809,7 +3813,7 @@
                                                             <div className="lab-card-meta">
                                                                 {fordjupning.length === 1
                                                                     ? fordjupning[0].namn
-                                                                    : fordjupning.length + ' delar'}
+                                                                    : I18N.t('{n} delar', { n: fordjupning.length })}
                                                             </div>
                                                         </button>
                                                     )}
@@ -3833,7 +3837,7 @@
                                                             onClick={() => setView('ovningar')}>
                                                             <div className="lab-card-tag">Räkna</div>
                                                             <div className="lab-card-title">Övningar</div>
-                                                            <div className="lab-card-meta">{OVNINGAR[tid].length} st</div>
+                                                            <div className="lab-card-meta">{I18N.t('{n} st', { n: OVNINGAR[tid].length })}</div>
                                                         </button>
                                                     ) : (isSummary || isEnhetskoll) ? null : (
                                                         <div className="lab-card lab-card-disabled">
@@ -3849,7 +3853,7 @@
                                                             <div className="lab-card-tag">Träna</div>
                                                             <div className="lab-card-title">Övningsblad</div>
                                                             <div className="lab-card-meta">
-                                                                {OVNINGSBLAD[tid].length === 1 ? '1 blad' : OVNINGSBLAD[tid].length + ' blad'}
+                                                                {OVNINGSBLAD[tid].length === 1 ? I18N.t('1 blad') : I18N.t('{n} blad', { n: OVNINGSBLAD[tid].length })}
                                                             </div>
                                                         </button>
                                                     )}
@@ -4175,16 +4179,21 @@
                 // webbläsarflik eller ett sökresultat.
                 const rent = (t) => String(t == null ? '' : t).replace(/\*/g, '').trim();
 
-                const vyPrefix = {
-                    ovningar: 'Övningar: ',
-                    ovningsblad: 'Övningsblad: ',
-                    exitticket: 'Exit ticket: ',
-                    visualisering: 'Visualisering: ',
-                    fordjupning: 'Fördjupning: ',
-                    sammanfattning: 'Sammanfattning: ',
-                }[state.view] || '';
+                const vyEtikett = {
+                    ovningar: 'Övningar:',
+                    ovningsblad: 'Övningsblad:',
+                    exitticket: 'Exit ticket:',
+                    visualisering: 'Visualisering:',
+                    fordjupning: 'Fördjupning:',
+                    sammanfattning: 'Sammanfattning:',
+                }[state.view];
+                const vyPrefix = vyEtikett ? I18N.t(vyEtikett) + ' ' : '';
+                // Kurs- och kapitelnamnen är svenska nycklar; på engelska
+                // översätts de för fliken (ordlistan i i18n/en.js).
+                const kursNamn = I18N.t(state.course || '');
+                const kapNamn = I18N.t(rent(state.chapter));
 
-                let titel = 'Fysiklabbet — Teori, simuleringar och övningar i fysik';
+                let titel = I18N.t('Fysiklabbet — Teori, simuleringar och övningar i fysik');
                 let beskrivning = '';
 
                 if (avs) {
@@ -4192,17 +4201,17 @@
                     // varje kapitel — utan kapitelnamnet blir de omöjliga att
                     // skilja åt.
                     const namn = String(avs.num).endsWith('.S')
-                        ? `Sammanfattning: ${rent(state.chapter)}`
+                        ? `${I18N.t('Sammanfattning:')} ${kapNamn}`
                         : String(avs.num).endsWith('.E')
-                        ? `Enhetskoll: ${rent(state.chapter)}`
+                        ? `${I18N.t('Enhetskoll:')} ${kapNamn}`
                         : rent(avs.title);
-                    titel = `${vyPrefix}${namn} — ${state.course} — Fysiklabbet`;
+                    titel = `${vyPrefix}${namn} — ${kursNamn} — Fysiklabbet`;
                     beskrivning = rent(avs.description);
                 } else if (state.chapter) {
-                    titel = `${rent(state.chapter)} — ${state.course} — Fysiklabbet`;
+                    titel = `${kapNamn} — ${kursNamn} — Fysiklabbet`;
                     beskrivning = typeof kap?.intro === 'string' ? rent(kap.intro) : '';
                 } else if (state.course) {
-                    titel = `${state.course} — teori, simuleringar och övningar — Fysiklabbet`;
+                    titel = I18N.t('{kurs} — teori, simuleringar och övningar — Fysiklabbet', { kurs: kursNamn });
                 }
 
                 document.title = titel;

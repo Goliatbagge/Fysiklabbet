@@ -1,0 +1,183 @@
+/* i18n/sidor/katalog.js — engelsk ordlista för katalog.html (kursstart,
+ * kapitel, teori, övningar, exit tickets, presentationsläget).
+ *
+ * Innehållet (teori, övningar, exit tickets, katalogtexter) kommer översatt
+ * ur data/en/… och ligger i .no-i18n-behållare. Här finns gränssnittet runt
+ * det, plus etiketterna som koden sätter in med I18N.t (preprocessBlocks,
+ * flikens titel, räknade etiketter som '{n} blad'). */
+I18N.add({
+    // ---- Flikens titel (document.title) ----
+    'Fysiklabbet — Teori, simuleringar och övningar i fysik': 'Fysiklabbet — Theory, simulations and exercises in physics',
+    '{kurs} — teori, simuleringar och övningar — Fysiklabbet': '{kurs} — theory, simulations and exercises — Fysiklabbet',
+    'Övningar:': 'Exercises:',
+    'Övningsblad:': 'Worksheets:',
+    'Exit ticket:': 'Exit ticket:',
+    'Visualisering:': 'Visualisation:',
+    'Fördjupning:': 'Going further:',
+    'Sammanfattning:': 'Summary:',
+    'Enhetskoll:': 'Unit check:',
+
+    // ---- Etiketter i teorin (preprocessBlocks, buildVideoEmbed) ----
+    'Förklaring': 'Explanation',
+    'Härledning': 'Derivation',
+    'Bildkällor': 'Image credits',
+    'Se filmen i original': 'Watch the original film',
+    'Videoklipp': 'Video clip',
+    'Fördjupning kommer snart.': 'Going further: coming soon.',
+    'Teorigenomgång kommer snart.': 'Theory coming soon.',
+
+    // ---- Sökrutan ----
+    'Sök på Fysiklabbet': 'Search Fysiklabbet',
+    'Rensa sökning': 'Clear search',
+    'Inga simuleringar matchar "': 'Nothing matches "',
+
+    // ---- Kursstart och kapitel ----
+    '· ÖVERSIKT': '· OVERVIEW',
+    'KAPITEL ·': 'CHAPTERS ·',
+    'KAPITEL': 'CHAPTERS',
+    'AVSNITT': 'SECTIONS',
+    'Starta →': 'Start →',
+    'Kapitel 01 ·': 'Chapter 01 ·',
+    'avsnitt': 'sections',
+    'Välj ett avsnitt i listan till vänster för att börja läsa.': 'Choose a section in the list on the left to start reading.',
+
+    // ---- Avsnittets huvud och kort ----
+    '· Avsnitt': '· Section',
+    '· Fördjupning': '· Going further',
+    '· Överkurs': '· Extension',
+    'Fördjupning': 'Going further',
+    'Överkurs': 'Extension',
+    'Läsning': 'Reading',
+    'Genomgång': 'Lesson',
+    'Kommer snart': 'Coming soon',
+    'Repetera': 'Revise',
+    'Det viktigaste': 'The key points',
+    'Bildspel': 'Slideshow',
+    'Sammanfattningar för varje avsnitt': 'Summaries for every section',
+    '{n} st': '{n} in total',
+    'Koll': 'Check',
+    'frågor': 'questions',
+    'Utforska': 'Explore',
+    'Utblick': 'Outlook',
+    '{n} delar': '{n} parts',
+    'Experiment': 'Experiment',
+    'Repetitionsspel': 'Revision game',
+    'Enhetskoll': 'Unit check',
+    'Interaktivt': 'Interactive',
+    'Interaktiv': 'Interactive',
+    'Quiz': 'Quiz',
+    'Räkna': 'Calculate',
+    'Träna': 'Practise',
+    '1 blad': '1 sheet',
+    '{n} blad': '{n} sheets',
+    'av': 'of',
+    '← Föregående': '← Previous',
+    'Nästa →': 'Next →',
+    'Repetitionsspel →': 'Revision game →',
+    'Enhetskoll →': 'Unit check →',
+    'Simulering →': 'Simulation →',
+    'Länk kopierad': 'Link copied',
+    'Dela avsnittet': 'Share the section',
+    'Kopiera en länk till avsnittet — den visar avsnittets namn och beskrivning när du klistrar in den':
+        'Copy a link to the section. It shows the section name and description when you paste it.',
+    'Kapitlet avslutas med en enhetskoll — ett snabbt quiz på just de storheter, enheter och beteckningar som kapitlet använder. Svarar du fel får du öva igen tills allt sitter.':
+        'The chapter ends with a unit check: a quick quiz on the quantities, units and symbols that the chapter uses. If you answer incorrectly, you practise again until everything sticks.',
+    'Starta enhetskollen →': 'Start the unit check →',
+
+    // ---- Lässtöd och presentationsknappar ----
+    'Bionisk läsning — fetmarkerar början av varje ord som lässtöd': 'Bionic reading: makes the start of each word bold as a reading aid',
+    'Dyslexivänligt typsnitt (OpenDyslexic) — anpassat för läsare med dyslexi': 'Dyslexia-friendly font (OpenDyslexic), designed for readers with dyslexia',
+    'Dyslexivänligt': 'Dyslexia-friendly',
+    'Visa sammanfattningen i fullskärm': 'Show the summary in full screen',
+    'Fullskärm — visa sammanfattningen som i presentationsläget': 'Full screen: show the summary as in presentation mode',
+    'Presentationsläge — visa genomgången i fullskärm och klicka fram ett stycke i taget':
+        'Presentation mode: show the lesson in full screen and click through one paragraph at a time',
+
+    // ---- Presentationsläget ----
+    'Presentationsläge:': 'Presentation mode:',
+    '· KAPITEL': '· CHAPTER',
+    '· AVSNITT': '· SECTION',
+    'Klicka — eller tryck': 'Click, or press',
+    '— för nästa stycke ·': 'for the next paragraph ·',
+    'avslutar': 'exits',
+    'Teorigenomgång saknas för det här avsnittet.': 'There is no theory for this section yet.',
+    'TITELBILD': 'TITLE SLIDE',
+    'STEG {n} / {total}': 'STEP {n} / {total}',
+    'Föregående steg': 'Previous step',
+    'Nästa steg': 'Next step',
+    'Textstorlek': 'Text size',
+    'Visa varje pennlösning i helskärm och lämna den automatiskt när du går vidare':
+        'Show each pen solution in full screen and leave it automatically when you move on',
+    'Pennlösning i helskärm': 'Pen solution in full screen',
+    'Öppna visualiseringen:': 'Open the visualisation:',
+    'Avsluta · Esc': 'Exit · Esc',
+    'VISUALISERING ·': 'VISUALISATION ·',
+    'Tillbaka till genomgången': 'Back to the lesson',
+    'Visualiseringen kunde inte startas.': 'The visualisation could not be started.',
+    'Visualiseringen kunde inte laddas.': 'The visualisation could not be loaded.',
+
+    // ---- Övningar ----
+    'Alla': 'All',
+    'Nivå': 'Level',
+    'Övningar kommer snart.': 'Exercises coming soon.',
+    'Nivå 1 · Grundläggande': 'Level 1 · Basic',
+    'Nivå 2 · Medel': 'Level 2 · Intermediate',
+    'Nivå 3 · Avancerad': 'Level 3 · Advanced',
+    'Uppgift': 'Exercise',
+    'Dina svar': 'Your answers',
+    'Ditt svar': 'Your answer',
+    'Specialtecken': 'Special characters',
+    'Skriv exponenten själv efter — till exempel ·10^-12': 'Type the exponent yourself afterwards, for example ·10^-12',
+    'Svara i ord': 'Answer in words',
+    'Svar på': 'Answer to',
+    '✓ Rätt!': '✓ Correct!',
+    '✗ Inte riktigt, försök igen': '✗ Not quite, try again',
+    '✗ Inte riktigt — försök igen': '✗ Not quite, try again',
+    '✗ Inte riktigt — rätt alternativ är markerat': '✗ Not quite: the correct option is highlighted',
+    'Skriv lösningarna som tal': 'Write the solutions as numbers',
+    'Kunde inte tolka svaret som ett tal': 'Could not read the answer as a number',
+    'Jämför med svaret under Visa svar': 'Compare with the answer under Show answer',
+    'Kontrollera': 'Check',
+    'Dölj svar': 'Hide answer',
+    'Visa svar': 'Show answer',
+    'Dölj lösningsförslag': 'Hide suggested solution',
+    'Visa lösningsförslag': 'Show suggested solution',
+    'Välj hur lösningen visas': 'Choose how the solution is shown',
+    'Se hur lösningen skrivs för hand, steg för steg': 'See how the solution is written by hand, step by step',
+    'Visa lösningen som vanlig text': 'Show the solution as plain text',
+
+    // ---- Övningsblad ----
+    'Mängdträning att skriva ut eller öppna i mobilen. Varje blad inleds med ett genomräknat exempel och avslutas med svar och lösningsförslag till varje uppgift, så att du kan arbeta helt på egen hand.':
+        'Plenty of practice to print or open on your phone. Each sheet starts with a worked example and ends with answers and suggested solutions to every problem, so that you can work entirely on your own.',
+    'Nivå:': 'Level:',
+    'uppgifter': 'problems',
+    'Grund': 'Basic',
+    'Mellan': 'Intermediate',
+    'Avancerad': 'Advanced',
+    'Grund - Mellan': 'Basic - Intermediate',
+    'Mellan - Avancerad': 'Intermediate - Advanced',
+    'Grund - Avancerad': 'Basic - Advanced',
+    'Grund - Mellan - Avancerad': 'Basic - Intermediate - Advanced',
+    'Öppna bladet': 'Open the sheet',
+    'PDF för utskrift': 'PDF for printing',
+
+    // ---- Exit ticket ----
+    'Exit ticket kommer snart för det här avsnittet.': 'An exit ticket for this section is coming soon.',
+    'Exit ticket · Resultat': 'Exit ticket · Result',
+    'Exit ticket · Fråga': 'Exit ticket · Question',
+    'rätt': 'correct',
+    'rätt hittills': 'correct so far',
+    'Alla rätt — du har koll på grunderna i avsnittet!': 'All correct: you have a good grasp of the basics in this section!',
+    'Starkt! Du har koll på det mesta — titta en extra gång på det du missade.': 'Strong work! You know most of it. Take another look at what you missed.',
+    'En bra bit på väg. Läs gärna igenom teorin igen och gör om förhöret.': 'A good way along. Read through the theory again and retake the quiz.',
+    'Det här avsnittet sitter inte riktigt än — läs teorin en gång till och försök igen.': 'This section has not quite sunk in yet. Read the theory once more and try again.',
+    'Gör om förhöret': 'Retake the quiz',
+    'Läs teorin igen': 'Read the theory again',
+    'Rätt svar': 'Correct answer',
+    'Därför är det fel': 'Why this is wrong',
+    'Visa resultat': 'Show result',
+    'Nästa fråga →': 'Next question →'
+});
+I18N.addHtml({
+    '<b>Bio</b>nisk <b>läs</b>ning': '<b>Bio</b>nic <b>rea</b>ding'
+});

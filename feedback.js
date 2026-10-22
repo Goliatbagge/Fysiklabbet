@@ -36,6 +36,8 @@
     const DEFAULT_SUBJECT = 'Feedback från Fysiklabbet';
     const DEFAULT_PLACEHOLDER = 'Vad vill du berätta? Hittade du en bugg, har du en idé eller en fråga?';
     const DEFAULT_SUBMIT = 'Skicka feedback →';
+    // Textrutans ledtext översätts här: i18n.js rör inte attribut på <textarea>.
+    const tPh = (s) => (window.I18N ? window.I18N.t(s) : s);
 
     // Feedback-widgetens stil matchar Laborans-paletten (pappersbakgrund,
     // ink-svart text, accent-röd #c8324a). Vit knapp + svart border syns
@@ -350,7 +352,7 @@
 
             <div class="fb-field">
                 <label class="fb-label" for="fb-message">Meddelande</label>
-                <textarea class="fb-textarea" id="fb-message" name="message" required placeholder="Vad vill du berätta? Hittade du en bugg, har du en idé eller en fråga?"></textarea>
+                <textarea class="fb-textarea" id="fb-message" name="message" required placeholder="${tPh(DEFAULT_PLACEHOLDER)}"></textarea>
             </div>
 
             <div class="fb-field">
@@ -397,7 +399,7 @@
         opts = opts || {};
         titleEl.textContent = opts.title || DEFAULT_TITLE;
         subjectInput.value = opts.subject || DEFAULT_SUBJECT;
-        messageInput.placeholder = opts.placeholder || DEFAULT_PLACEHOLDER;
+        messageInput.placeholder = tPh(opts.placeholder || DEFAULT_PLACEHOLDER);
         submitBtn.textContent = opts.submitLabel || DEFAULT_SUBMIT;
         urlInput.value = window.location.href;
         panel.classList.add('fb-open');
@@ -420,7 +422,7 @@
         submitBtn.textContent = DEFAULT_SUBMIT;
         titleEl.textContent = DEFAULT_TITLE;
         subjectInput.value = DEFAULT_SUBJECT;
-        messageInput.placeholder = DEFAULT_PLACEHOLDER;
+        messageInput.placeholder = tPh(DEFAULT_PLACEHOLDER);
         fileName.textContent = '';
         hideError();
     }
@@ -482,7 +484,9 @@
             console.error('[feedback] submit misslyckades:', err);
             submitBtn.disabled = false;
             submitBtn.textContent = 'Försök igen';
-            showError(`Kunde inte skicka: ${err.message}. Försök igen, eller mejla ${FEEDBACK_EMAIL} direkt.`);
+            showError(window.I18N
+                ? I18N.t('Kunde inte skicka: {fel}. Försök igen, eller mejla {adress} direkt.', { fel: err.message, adress: FEEDBACK_EMAIL })
+                : `Kunde inte skicka: ${err.message}. Försök igen, eller mejla ${FEEDBACK_EMAIL} direkt.`);
         }
     });
 

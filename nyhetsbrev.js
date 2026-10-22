@@ -379,6 +379,9 @@
         var mo = new MutationObserver(function () {
             var p = hallare.querySelector('.emailoctopus-error-message');
             if (!p) return;
+            // På engelska står deras egna meddelanden kvar (annars skulle
+            // ordlistan och den här bytaren skriva över varandra i en slinga).
+            if (window.I18N && window.I18N.en) return;
             var sv = FEL[p.textContent.trim()];
             if (sv) p.textContent = sv;
         });

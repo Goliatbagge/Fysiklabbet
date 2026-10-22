@@ -1,0 +1,31 @@
+/* Pennlösningarnas spelare (handskrift.js mount): knappar och etiketter.
+ * Texten PÅ papperet översätts i data/en/handskrift*.js. */
+I18N.add({
+    'Skriv': 'Write',
+    'Paus': 'Pause',
+    'Fortsätt': 'Continue',
+    'Börja om': 'Start over',
+    'Tempo': 'Speed',
+    '0,75×': '0.75×',
+    '1,5×': '1.5×',
+    'Ultra': 'Ultra',
+    'Utan tankar': 'Without thoughts',
+    'Med tankar': 'With thoughts',
+    'Ekvationer': 'Equations',
+    'Båda led': 'Both sides',
+    'Väggen': 'The wall',
+    'Helskärm': 'Full screen',
+    'Lämna helskärm': 'Exit full screen',
+    'Inställningar': 'Settings',
+    'Klicka för nästa steg': 'Click for the next step',
+    'Föregående steg (vänsterpil)': 'Previous step (left arrow)',
+    'Nästa steg (högerpil)': 'Next step (right arrow)',
+    'Handskriven lösning': 'Handwritten solution',
+    'Se hur lösningen skrivs för hand, steg för steg': 'See how the solution is written by hand, step by step',
+    'Visa lösningen som vanlig text': 'Show the solution as ordinary text',
+    'Välj hur lösningen visas': 'Choose how the solution is shown',
+    'Uppgift': 'Task',
+    'Lösning': 'Solution',
+    'Med penna': 'With pen',
+    'Som text': 'As text'
+});

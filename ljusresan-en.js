@@ -716,6 +716,7 @@ window.LJUS_EN = {
  "Spela": "Play",
  "Centrum": "Centre",
  "Ljusresan": "Ljusresan",
+ "Musik: skapad med Suno.": "Music: made with Suno.",
  "väte": "hydrogen",
  "Väte": "Hydrogen",
  "helium": "helium",

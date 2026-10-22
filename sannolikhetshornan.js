@@ -386,8 +386,10 @@ bord.rotation.x = -Math.PI / 2; bord.position.set(0, 0, -5);
 bord.receiveShadow = true;
 scene.add(bord);
 const filtFarg = '#174a37';
-// Fond bakom bordet: varm skymning med suddiga ljuspunkter, så att vyerna
-// som ser ut över bordet inte slutar i ett svart tomrum.
+// Fond runt bordet: varm skymning med suddiga ljuspunkter, så att vyerna
+// som ser ut över bordet inte slutar i ett svart tomrum, åt vilket håll man
+// än vrider kameran (hela varvet runt). En cylinder som omger bordet, med
+// texturen ritad så att den går runt utan skarv.
 {
   const c = mkCanvas(2048, 512), g = c.getContext('2d');
   const gr = g.createLinearGradient(0, 0, 0, 512);
@@ -398,10 +400,13 @@ const filtFarg = '#174a37';
     const b = g.createRadialGradient(x, y, 0, x, y, r);
     const f = Math.random() < .7 ? '255,196,120' : '255,150,110';
     b.addColorStop(0, `rgba(${f},${.1 + Math.random() * .2})`); b.addColorStop(1, `rgba(${f},0)`);
-    g.fillStyle = b; g.beginPath(); g.arc(x, y, r, 0, TAU); g.fill();
+    g.fillStyle = b;
+    for (const dx of [-2048, 0, 2048]) { g.beginPath(); g.arc(x + dx, y, r, 0, TAU); g.fill(); }
   }
-  const fond = new THREE.Mesh(new THREE.PlaneGeometry(260, 65), new THREE.MeshBasicMaterial({ map: texOf(c), fog: false }));
-  fond.position.set(0, 28, -62);
+  const t = texOf(c, { repeat: [3, 1] }); t.wrapT = THREE.ClampToEdgeWrapping;
+  const fond = new THREE.Mesh(new THREE.CylinderGeometry(105, 105, 80, 128, 1, true),
+    new THREE.MeshBasicMaterial({ map: t, fog: false, side: THREE.BackSide }));
+  fond.position.set(0, 34, -5);
   scene.add(fond);
 }
 const filtMat = (rep, farg = filtFarg) => {
@@ -444,7 +449,8 @@ function styrVinklar(key, d) {
   const polar = Math.acos(dir.y);
   controls.minPolarAngle = Math.max(0.12, polar - 0.5);
   controls.maxPolarAngle = Math.min(1.42, polar + 0.32);
-  controls.minAzimuthAngle = -0.75; controls.maxAzimuthAngle = 0.75;
+  // hela varvet runt bordet är fritt
+  controls.minAzimuthAngle = -Infinity; controls.maxAzimuthAngle = Infinity;
   controls.minDistance = d * 0.55; controls.maxDistance = d * 1.45;
 }
 let flyg = null;

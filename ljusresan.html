@@ -2481,11 +2481,14 @@ function aktivaBitar(s0, s1) {
 function avbrytFard() { if (fard.aktiv) { cancelAnimationFrame(fard.raf); fard.aktiv = false; } }
 ['wheel', 'touchstart'].forEach((t) => window.addEventListener(t, avbrytFard, { passive: true }));
 window.addEventListener('pointerdown', (e) => { if (!e.target.closest('button, a')) avbrytFard(); });
+// Sätts av ett direkt hopp (klick i rutten): nästa bildruta ställer kameran
+// på plats i stället för att låta den glida dit, så att ingen färd syns.
+let direktHopp = false;
 function gaTillStopp(i, snabbt) {
   i = klamp(i, 0, NS - 1);
   avbrytFard();
   const s0 = window.scrollY / stoppH, s1 = i;
-  if (snabbt || REDUCERA || Math.abs(s1 - s0) < 0.002) { window.scrollTo({ top: s1 * stoppH, behavior: 'instant' }); return; }
+  if (snabbt || REDUCERA || Math.abs(s1 - s0) < 0.002) { if (snabbt) direktHopp = true; window.scrollTo({ top: s1 * stoppH, behavior: 'instant' }); return; }
   const tider = stracksTider(), bitar = aktivaBitar(s0, s1);
   // tid för varje bit: sträckans tid gånger hur stor del av den aktiva delen biten är
   bitar.forEach((x) => { x.t = tider[x.k] * Math.abs(x.b - x.a) / (AKTIV1 - AKTIV0); });
@@ -2530,7 +2533,8 @@ STOPP.forEach((id, i) => {
   const namn = id === 'slut' ? 'Voyager 1' : PLANETER[i].namn;
   const tid = id === 'slut' ? 'cirka 23 h 34 min' : (i === 0 ? 'start' : tidText(ljusTid(AE_AVST[id])));
   li.innerHTML = `<button data-stopp="${i}"><span class="prick" style="color:${id === 'slut' ? '#9aa3b8' : PLANETER[i].acc}"></span><span>${namn}<span class="t">${nb(tid)}</span></span></button>`;
-  li.querySelector('button').addEventListener('click', () => gaTillStopp(i));
+  // ett klick i rutten hoppar direkt till världen, utan färden dit
+  li.querySelector('button').addEventListener('click', () => gaTillStopp(i, true));
   ruttLista.appendChild(li);
 });
 
@@ -3527,6 +3531,10 @@ function frame(nu) {
   omlopp.g += ((omlopp.aktiv ? 1 : 0) - omlopp.g) * (1 - Math.exp(-dtVerklig * 2.6));
   const lambda = omlopp.aktiv ? 5 : (omlopp.g > 0.05 ? 3 : 6);
   const kk = 1 - Math.exp(-dtVerklig * lambda);
+  if (direktHopp) {
+    kamera.position.copy(mal.pos); basQuat.copy(mal.quat);
+    fartJamn = 0; direktHopp = false;
+  }
   forraKam.copy(kamera.position);
   kamera.position.lerp(mal.pos, kk);
   basQuat.slerp(mal.quat, kk);

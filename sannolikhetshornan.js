@@ -1103,7 +1103,9 @@ function skapaBricka({ center, filt: filtHex, bredd = 15.4, djup = 10 }) {
     const b = grepp.d.body;
     b.mass = 1; b.type = CANNON.Body.DYNAMIC; b.updateMassProperties(); b.collisionResponse = true;
     b.velocity.set(0, -2, 0); b.angularVelocity.setZero(); b.wakeUp();
-    grepp = null; vila = 0; aktiv = true; wake();
+    grepp = null; vila = 0; aktiv = true;
+    for (const d of dice) d.body.wakeUp();
+    wake();
   }
   function step(dt) {
     if (!aktiv) return false;
@@ -1111,6 +1113,10 @@ function skapaBricka({ center, filt: filtHex, bredd = 15.4, djup = 10 }) {
       const b = grepp.d.body, m = grepp.mal, k = 1 - Math.pow(.0005, dt);
       b.position.set(lerp(b.position.x, m.x, k), lerp(b.position.y, m.y, k), lerp(b.position.z, m.z, k));
       b.velocity.setZero(); b.angularVelocity.setZero();
+      // De andra hålls vakna medan något dras: allt söves när ett kast lästs
+      // av, och ett mynt som lutade mot det dragna föll annars inte när
+      // stödet försvann, utan blev hängande i luften.
+      for (const d of dice) if (d !== grepp.d) d.body.wakeUp();
     }
     // Tunna mynt behöver kortare tidssteg än tärningar för att inte dallra.
     if (dice.some(d => d.body.isMynt)) world.step(1 / 240, dt, 16); else world.step(1 / 120, dt, 8);

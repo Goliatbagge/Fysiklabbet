@@ -237,7 +237,9 @@ const MOBIL = matchMedia('(max-width: 700px)').matches || /Android|iPhone|iPad/.
 const scene = new THREE.Scene();
 const BG = new THREE.Color(0x15110d);
 scene.background = BG;
-scene.fog = new THREE.Fog(BG, 55, 120);
+// dimman börjar långt bort, så att de andra stationerna syns när man
+// zoomar ut och vrider kameran
+scene.fog = new THREE.Fog(BG, 85, 200);
 const camera = new THREE.PerspectiveCamera(36, 1.6, 0.5, 300);
 let controls = null;
 if (renderer) {
@@ -446,12 +448,14 @@ function stationPose(key) {
 function styrVinklar(key, d) {
   if (!controls) return;
   const s = STATION[key], dir = s.dir.clone().normalize();
-  const polar = Math.acos(dir.y);
-  controls.minPolarAngle = Math.max(0.12, polar - 0.5);
-  controls.maxPolarAngle = Math.min(1.42, polar + 0.32);
-  // hela varvet runt bordet är fritt
+  // Fritt att se sig omkring: rakt uppifrån ned till nästan bordsnivå, hela
+  // varvet runt och utzoomat så långt att de andra stationerna syns, men
+  // aldrig utanför den runda fonden (radie 105 runt bordets mitt).
+  controls.minPolarAngle = 0.05;
+  controls.maxPolarAngle = 1.48;
   controls.minAzimuthAngle = -Infinity; controls.maxAzimuthAngle = Infinity;
-  controls.minDistance = d * 0.55; controls.maxDistance = d * 1.45;
+  const tillKant = 100 - Math.hypot(s.target.x, s.target.z + 5);
+  controls.minDistance = d * 0.55; controls.maxDistance = Math.max(d * 1.45, Math.min(d * 2.8, tillKant));
 }
 let flyg = null;
 async function flygTill(key, direkt = false) {

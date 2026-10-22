@@ -425,7 +425,7 @@ function rundRekt(w, h, r) {
 // ============================================================================
 const STATION = {
   tarningar: { target: new V3(0, 0.3, 0.5), dir: new V3(0, 1.2, 0.95), w: 19, h: 12.8 },
-  mynt: { target: new V3(-30, 0.3, -26.5), dir: new V3(0, 1.2, 0.95), w: 19, h: 12.8 },
+  mynt: { target: new V3(-30, 0.3, -26.5), dir: new V3(0, 1.25, 0.9), w: 26, h: 17.5 },
   kort: { target: new V3(-34.2, 0, 0.5), dir: new V3(0, 1.75, 0.85), w: 30.5, h: 20.8 },
   urna: { target: new V3(31, 3.7, 1.6), dir: new V3(0, 0.55, 1), w: 20, h: 13.5 },
   hjul: { target: new V3(0, 8.6, -24), dir: new V3(0, 0.12, 1), w: 21, h: 21 },
@@ -834,8 +834,8 @@ function myntMesh(def) {
 // Samma bricka och samma fysik, men var sin fysikvärld och var sin plats på
 // bordet. Allt inne i brickan räknas i brickans egna koordinater.
 // ============================================================================
-function skapaBricka({ center, filt: filtHex }) {
-  const G = 230, FLOOR = 0.42, IW = 15.4, ID = 10;
+function skapaBricka({ center, filt: filtHex, bredd = 15.4, djup = 10 }) {
+  const G = 230, FLOOR = 0.42, IW = bredd, ID = djup;
   const world = new CANNON.World({ gravity: new CANNON.Vec3(0, -G, 0) });
   world.allowSleep = true;
   world.solver.iterations = 14;
@@ -928,7 +928,8 @@ function skapaBricka({ center, filt: filtHex }) {
     const n = dice.length, cols = Math.min(n, 6), rows = Math.ceil(n / 6);
     dice.forEach((d, i) => {
       const r = Math.floor(i / 6), c = i % 6, cr = Math.min(6, n - r * 6);
-      placeraVilande(d, (c - (cr - 1) / 2) * 2.45 + (rnd() - .5) * .4, (r - (rows - 1) / 2) * 3.1 + (rnd() - .5) * .4);
+      const sx = IW > 16 ? 3.2 : 2.45, sz = IW > 16 ? 4 : 3.1;
+      placeraVilande(d, (c - (cr - 1) / 2) * sx + (rnd() - .5) * .4, (r - (rows - 1) / 2) * sz + (rnd() - .5) * .4);
     });
     wake();
   }
@@ -939,11 +940,13 @@ function skapaBricka({ center, filt: filtHex }) {
     dice.forEach((d, i) => {
       const r = Math.floor(i / 6), c = i % 6, cr = Math.min(6, n - r * 6);
       const b = d.body;
-      b.position.set((c - (cr - 1) / 2) * 2.3 + (rnd() - .5) * .4, 3.4 + r * 2.4 + rnd() * 1.5, ID / 2 - 1.6 - r * 2.2);
+      if (b.isMynt) b.position.set((c - (cr - 1) / 2) * 3 + (rnd() - .5) * .6, 3.4 + r * 2.4 + rnd() * 1.5, (r - .5) * 3 + (rnd() - .5) * .6);
+      else b.position.set((c - (cr - 1) / 2) * 2.3 + (rnd() - .5) * .4, 3.4 + r * 2.4 + rnd() * 1.5, ID / 2 - 1.6 - r * 2.2);
       const q = new THREE.Quaternion().setFromEuler(new THREE.Euler(rnd() * TAU, rnd() * TAU, rnd() * TAU));
       b.quaternion.set(q.x, q.y, q.z, q.w);
       const mynt = b.isMynt;
-      b.velocity.set((rnd() - .5) * 12, mynt ? 16 + rnd() * 6 : 3 + rnd() * 6, -(15 + rnd() * 11));
+      if (mynt) b.velocity.set((rnd() - .5) * 7, 16 + rnd() * 6, (rnd() - .5) * 7);
+      else b.velocity.set((rnd() - .5) * 12, 3 + rnd() * 6, -(15 + rnd() * 11));
       b.angularVelocity.set((rnd() - .5) * (mynt ? 70 : 40), (rnd() - .5) * 30, (rnd() - .5) * (mynt ? 70 : 40));
       b.wakeUp();
     });
@@ -1065,7 +1068,9 @@ function skapaBricka({ center, filt: filtHex }) {
   };
 }
 const Tarningar = skapaBricka({ center: new V3(0, 0, 0), filt: filtFarg });
-const Mynt = skapaBricka({ center: new V3(-30, 0, -27), filt: '#1b3b5c' });
+// Myntbrickan är större än tärningsbrickan: mynten är breda och rullar gärna
+// på kanten, och på den lilla brickan hamnade de nästan alltid mot väggen.
+const Mynt = skapaBricka({ center: new V3(-30, 0, -27), filt: '#1b3b5c', bredd: 22, djup: 14 });
 
 // ============================================================================
 // Station 2: Kortlek

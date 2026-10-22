@@ -13852,7 +13852,7 @@
   function layoutPunktpalinje(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y = 170, xe;
     var tanke = mkTanke(T);
-    var XE = padL + 30;
+    var XE = padL;
 
     function del(d) {
       /* punkten skrivs bit för bit, så att x- och y-koordinatens

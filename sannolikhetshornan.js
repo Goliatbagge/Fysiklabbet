@@ -1804,6 +1804,7 @@ const Urna = (() => {
     utanfor: () => kulor.filter(k => k.state === 'bricka' || k.state === 'ute' || k.state === 'flyg').length,
     set onKula(f) { onKula = f; }, set onAndring(f) { onAndring = f; },
     klickbar: [glas],
+    stationsdelar: [grp, bricka, kulMesh],
   };
 })();
 
@@ -2025,6 +2026,7 @@ const Hjul = (() => {
     get sektorer() { return sektorer; },
     set onStopp(f) { onStopp = f; },
     klickbar: [yta, nav, navKnapp, falg],
+    stationsdelar: [grp],
   };
 })();
 
@@ -2638,6 +2640,23 @@ function traffObj(ev, lista) {
   if (!traff(ev, lista)) return null;
   return ray.intersectObjects(lista, true)[0].object;
 }
+// Ett klick på en annan station i scenen (till exempel myntbrickan när man
+// står vid hjulet och har vridit kameran) flyttar dit, som flikarna gör.
+const STATIONSDELAR = () => ({
+  tarningar: [Tarningar.grp], mynt: [Mynt.grp], kort: [Kortlek.grp],
+  urna: Urna.stationsdelar, hjul: Hjul.stationsdelar,
+});
+function stationUnder(ev) {
+  if (!renderer) return null;
+  const delar = STATIONSDELAR();
+  let bast = null, bastAvst = Infinity;
+  for (const [m, lista] of Object.entries(delar)) {
+    if (!traff(ev, lista)) continue;
+    const d = ray.intersectObjects(lista, true)[0].distance;
+    if (d < bastAvst) { bastAvst = d; bast = m; }
+  }
+  return bast && bast !== mode ? bast : null;
+}
 const aktivBricka = () => mode === 'tarningar' ? Tarningar : mode === 'mynt' ? Mynt : null;
 const klickMal = () => mode === 'tarningar' ? [Tarningar.grp] : mode === 'mynt' ? [Mynt.grp] : mode === 'kort' ? Kortlek.klickbar : mode === 'urna' ? Urna.klickbar : Hjul.klickbar;
 let ned = null;
@@ -2671,7 +2690,7 @@ canvas.addEventListener('pointermove', ev => {
     return;
   }
   if (ned || !renderer || ev.pointerType !== 'mouse') return;
-  stage.classList.toggle('pek', traff(ev, klickMal()));
+  stage.classList.toggle('pek', traff(ev, klickMal()) || !!stationUnder(ev));
 });
 function slapp(ev) {
   if (!ned) return;
@@ -2686,7 +2705,8 @@ function slapp(ev) {
     const snurrar = Hjul.dragSlut();
     if (snurrar) { doljUtfall(); uppdateraKnapp(); }
     else if (kort) forsok();
-  } else if (kort && traff(ev, klickMal())) forsok();
+  } else if (kort && stationUnder(ev)) setMode(stationUnder(ev));
+  else if (kort && traff(ev, klickMal())) forsok();
   ned = null;
 }
 canvas.addEventListener('pointerup', slapp);

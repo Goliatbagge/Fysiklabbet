@@ -269,6 +269,10 @@ button, input, select { font-family: inherit; }
 .lrad .x:hover { color: var(--accent); background: var(--accent-soft); }
 .lrad .stepper button { width: 26px; height: 26px; font-size: 15px; }
 .lrad .stepper output { min-width: 24px; font-size: 13px; }
+.lrad.vald { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.lrad .tsym { width: 24px; height: 24px; border-radius: 6px; flex: none; display: grid; place-items: center; font: 700 11px var(--sans); box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
+.lrad .namn small { font-weight: 500; color: var(--muted); }
+.lrad select { border: 1px solid var(--line2); border-radius: 8px; background: #fff; font: 600 13px var(--sans); color: var(--ink); padding: 4px 6px; cursor: pointer; }
 .addcol { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
 .addcol button { width: 24px; height: 24px; border-radius: 50%; border: 0; cursor: pointer; box-shadow: inset -3px -4px 6px rgba(0,0,0,.22), inset 0 0 0 1px rgba(0,0,0,.12); transition: transform .12s; }
 .addcol button:hover { transform: scale(1.12); }
@@ -603,7 +607,7 @@ button, input, select { font-family: inherit; }
 
 <!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
      webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
-<script type="module" src="sannolikhetshornan.js?v=202610222100"></script>
+<script type="module" src="sannolikhetshornan.js?v=202610230900"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

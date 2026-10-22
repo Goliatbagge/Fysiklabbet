@@ -2235,8 +2235,9 @@ function renderSettings() {
       <div class="seg">${[4, 6, 8, 10, 12, 20].map(s => `<button type="button" data-act="t-typ" data-v="${s}" aria-pressed="${alla === s}">${s === 2 ? 'Mynt' : s}</button>`).join('')}</div>
       <div class="row" style="margin-top:12px"><b>Färg</b></div>
       <div class="seg" role="group" aria-label="Tärningarnas färg"><button type="button" data-act="t-fargval" data-v="samma" aria-pressed="${ST.tarningar.farger !== 'olika'}">Samma färg</button><button type="button" data-act="t-fargval" data-v="olika" aria-pressed="${ST.tarningar.farger === 'olika'}">Olika färger</button></div>
-      <p class="note">Siffrorna är antalet sidor. Klicka på en tärning nedan för att göra en specialtärning eller byta färg.</p>
-      <div class="chips" style="margin-top:10px">${L.map((d, i) => { const F = tfarg(d.farg); return `<button type="button" class="chip" data-act="t-chip" data-i="${i}" aria-pressed="${UI.sel === i}"><i style="background:${d.sides === 2 ? '#c4c8cd' : F.bas};color:${d.sides === 2 ? '#222' : F.blakk}">${d.sides === 2 ? 'M' : d.sides}</i>${d.sides === 2 ? 'Mynt' : 'Tärning'} ${i + 1}${arStandard(d) ? '' : '*'}</button>`; }).join('')}</div>`;
+      <p class="note">Siffrorna är antalet sidor. Under Varje tärning kan tärningarna få olika många sidor, till exempel en sexsidig och en tiosidig. Pennan öppnar specialtärningen.</p>
+      <div class="row" style="margin-top:12px"><b>Varje tärning</b></div>
+      <div class="lista">${L.map((d, i) => { const F = tfarg(d.farg); return `<div class="lrad${UI.sel === i ? ' vald' : ''}"><span class="tsym" style="background:${F.bas};color:${F.blakk}">${d.sides}</span><span class="namn">Tärning ${i + 1}${arStandard(d) ? '' : ' <small>(special)</small>'}</span><select data-inp="t-sidor-rad" data-i="${i}" aria-label="Antal sidor på tärning ${i + 1}">${[4, 6, 8, 10, 12, 20].map(n => `<option value="${n}"${d.sides === n ? ' selected' : ''}>${n} sidor</option>`).join('')}</select><button type="button" class="x" data-act="t-chip" data-i="${i}" title="Specialtärning och färg" aria-label="Ändra tärning ${i + 1}" aria-pressed="${UI.sel === i}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button></div>`; }).join('')}</div>`;
     if (UI.sel >= 0 && UI.sel < L.length) {
       const d = L[UI.sel], farger = d.sides !== 2 && d.sides !== 4;
       h += `<div class="editor"><h3>${d.sides === 2 ? 'Mynt' : 'Tärning'} ${UI.sel + 1}</h3>
@@ -2591,6 +2592,12 @@ for (const el of [settingsEl, resultsEl]) {
 }
 settingsEl.addEventListener('input', e => {
   const t = e.target, i = +t.dataset.i;
+  if (t.dataset.inp === 't-sidor-rad') {
+    if (Tarningar.busy) { renderSettings(); return; }
+    const L = ST.tarningar.lista; L[i] = nyTarning(+t.value, L[i].farg);
+    if (UI.sel === i) UI.sel = -1;
+    tarningarAndrade(); renderSettings(); return;
+  }
   if (t.dataset.inp === 't-lbl') { ST.tarningar.lista[UI.sel].labels[i] = t.value; tarningarAndrade(false); }
   else if (t.dataset.inp === 'm-lbl') { ST.mynt.labels[i] = t.value; myntAndrade(false); }
   else if (t.dataset.inp === 'h-text') { ST.hjul.sektorer[i].text = t.value; hjulAndrat(false, false); }

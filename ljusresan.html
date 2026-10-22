@@ -239,6 +239,7 @@ html[lang="en"] .intro-namn { font-size: clamp(40px, 5.2vw, 84px); line-height: 
   display: flex; flex-direction: column;
 }
 .dossier.oppen { transform: none; }
+.d-grepp { display: none; }
 .d-topp { padding: 26px 34px 0; }
 .d-stang { position: absolute; top: 22px; right: 26px; }
 .d-huvud { display: flex; align-items: flex-end; gap: 16px; margin-top: 30px; }
@@ -428,9 +429,17 @@ body.kan-titta, body.tittar { -webkit-user-select: none; user-select: none; }
   .k-tid { font-size: 26px; }
   .status { display: none; }
   .marke span.lang { display: none; }
+  .marke b { display: none; }
   .hudknapp .text { display: none; }
   .hudknapp.sprak .kort { display: inline; }
   .dossier { top: auto; left: 0; width: auto; height: 72vh; height: 72svh; border-left: 0; border-top: 1px solid var(--hud); transform: translateY(104%); border-radius: 18px 18px 0 0; }
+  /* panelen går att dra ned till en smal remsa, så att hela världen syns */
+  .d-grepp { display: block; position: absolute; top: 0; left: 50%; width: 120px; height: 30px; transform: translateX(-50%); border: 0; background: none; cursor: grab; touch-action: none; z-index: 2; }
+  .d-grepp::before { content: ''; position: absolute; left: 38px; right: 38px; top: 10px; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, .38); }
+  .d-topp { touch-action: none; }
+  .d-flikar { touch-action: pan-x; }
+  .dossier.oppen.nere { transform: translateY(calc(100% - var(--nere-hojd, 150px))); }
+  .dossier.drar { transition: none; }
   .d-topp { padding: 18px 20px 0; }
   .d-stang { top: 14px; right: 14px; }
   .d-huvud { margin-top: 44px; }
@@ -510,6 +519,7 @@ body.kan-titta, body.tittar { -webkit-user-select: none; user-select: none; }
 <main id="resa"></main>
 
 <aside class="dossier" id="dossier" aria-hidden="true" aria-label="Dossier">
+  <button class="d-grepp" id="dGrepp" aria-label="Dra ned eller upp panelen"></button>
   <div class="d-topp">
     <button class="hudknapp d-stang" id="dStang">Fortsätt resan <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
     <div class="d-huvud"><div class="d-nr" id="dNr"></div><div><div class="d-kicker" id="dKicker"></div><h2 class="d-namn" id="dNamn"></h2></div></div>
@@ -2838,11 +2848,49 @@ function oppnaDossier(i, flik) {
   $('dFlikar').querySelectorAll('button').forEach((b) => b.addEventListener('click', () => visaFlik(b.dataset.flik)));
   document.documentElement.style.setProperty('--acc', p.acc);
   visaFlik(flik || 'oversikt');
+  dossier.classList.remove('nere'); panelNereMal = 0;
   dossier.classList.add('oppen');
   dossier.setAttribute('aria-hidden', 'false');
   document.body.classList.add('last', 'omlopp');
 }
+// mobil: panelen dras ned till en remsa med namn och flikar, eller upp igen
+(() => {
+  const d = dossier, grepp = $('dGrepp');
+  let start = null;
+  const nereAvst = () => d.offsetHeight - (d.querySelector('.d-topp').offsetHeight + 4);
+  const satt = (nere) => { d.classList.toggle('nere', nere); panelNereMal = nere ? 1 : 0; d.style.setProperty('--nere-hojd', (d.offsetHeight - nereAvst()) + 'px'); };
+  const ner = (e) => {
+    if (window.innerWidth > 600 || !d.classList.contains('oppen')) return;
+    if (e.target !== grepp && e.target.closest('button, a')) return;
+    start = { y: e.clientY, bas: d.classList.contains('nere') ? nereAvst() : 0, t: performance.now(), rorde: false, id: e.pointerId };
+    try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {}
+  };
+  const flytta = (e) => {
+    if (!start || e.pointerId !== start.id) return;
+    const dy = e.clientY - start.y;
+    if (Math.abs(dy) > 5) start.rorde = true;
+    if (!start.rorde) return;
+    d.classList.add('drar');
+    d.style.transform = `translateY(${klamp(start.bas + dy, 0, nereAvst())}px)`;
+  };
+  const upp = (e) => {
+    if (!start || e.pointerId !== start.id) return;
+    const dy = e.clientY - start.y, fart = dy / Math.max(1, performance.now() - start.t);
+    d.classList.remove('drar');
+    d.style.transform = '';
+    if (!start.rorde) { if (e.target === grepp) satt(!d.classList.contains('nere')); }
+    else satt(Math.abs(fart) > 0.5 ? fart > 0 : start.bas + dy > nereAvst() / 2);
+    start = null;
+  };
+  [grepp, d.querySelector('.d-topp')].forEach((el) => {
+    el.addEventListener('pointerdown', ner);
+    el.addEventListener('pointermove', flytta);
+    el.addEventListener('pointerup', upp);
+    el.addEventListener('pointercancel', upp);
+  });
+})();
 function stangDossier() {
+  dossier.classList.remove('nere'); panelNereMal = 0;
   omlopp.aktiv = false;
   dossier.classList.remove('oppen');
   dossier.setAttribute('aria-hidden', 'true');
@@ -3494,6 +3542,7 @@ function oppnaVoyager(flik) {
   $('dFlikar').querySelectorAll('button').forEach((b) => b.addEventListener('click', () => visaFlik(b.dataset.flik)));
   document.documentElement.style.setProperty('--acc', '#e6b84f');
   visaFlik(flik || 'oversikt');
+  dossier.classList.remove('nere'); panelNereMal = 0;
   dossier.classList.add('oppen');
   dossier.setAttribute('aria-hidden', 'false');
   document.body.classList.add('last', 'omlopp');
@@ -3634,10 +3683,10 @@ $('noterKnapp').addEventListener('click', (e) => { noterPa = !noterPa; e.current
    Låten "Untitled" (ambient electronic, skapad med Suno) i
    media/solsystemet/ljusresan-musik.mp3. Två ljudspelare turas om, så att
    låten går i loop med en mjuk övertoning i stället för ett glapp. Filen
-   hämtas först när musiken slås på. Webbläsare tillåter inte att ljud
-   startar av sig själv, så musiken slås på med knappen. Valet minns
-   mellan besöken, men även då väntar musiken på första klicket eller
-   tangenttrycket.
+   hämtas när sidan öppnas. Musiken är på från början, utom för den som
+   har stängt av den med knappen (valet minns). De flesta webbläsare
+   tillåter inte att ljud startar innan besökaren har rört sidan, och då
+   börjar musiken vid första klicket eller tangenttrycket.
    ===================================================================== */
 const musik = (() => {
   const FIL = TEX + 'ljusresan-musik.mp3';
@@ -3689,25 +3738,35 @@ const musik = (() => {
     if (pa) {
       if (!spelare) spelare = [nySpelare(), nySpelare()];
       const s = spelare[aktiv];
-      s.play().catch(() => {});
+      // stoppar webbläsaren ljud innan besökaren rört sidan, startar musiken vid första klicket eller tangenttrycket
+      s.play().catch(() => vantaPaBesokaren());
       tona(s, NIVA, 3);
     } else if (spelare) {
       spelare.forEach((s) => tona(s, 0, 1.2, () => { if (!pa) s.pause(); }));
     }
   }
-  $('musikKnapp').addEventListener('click', () => satPa(!pa));
-  // var musiken på förra gången väntar den på första klicket eller tangenttrycket
-  let sparad = false;
-  try { sparad = localStorage.getItem('ljusresanMusik') === '1'; } catch (_) {}
-  if (sparad) {
+  let vantar = false;
+  function vantaPaBesokaren() {
+    if (vantar) return;
+    vantar = true;
+    const handelser = ['pointerdown', 'keydown', 'touchend'];
     const forsta = (e) => {
-      window.removeEventListener('pointerdown', forsta, true);
-      window.removeEventListener('keydown', forsta, true);
-      if (!pa && !(e.target.closest && e.target.closest('#musikKnapp'))) satPa(true);
+      handelser.forEach((h) => window.removeEventListener(h, forsta, true));
+      vantar = false;
+      // ett klick på musikknappen stänger av musiken, som knappen visar
+      if (!pa || (e.target.closest && e.target.closest('#musikKnapp'))) return;
+      const s = spelare[aktiv];
+      s.volume = 0;
+      s.play().catch(() => {});
+      tona(s, NIVA, 3);
     };
-    window.addEventListener('pointerdown', forsta, true);
-    window.addEventListener('keydown', forsta, true);
+    handelser.forEach((h) => window.addEventListener(h, forsta, true));
   }
+  $('musikKnapp').addEventListener('click', () => satPa(!pa));
+  // Musiken är på från början, utom för den som själv har stängt av den tidigare.
+  let sparad = null;
+  try { sparad = localStorage.getItem('ljusresanMusik'); } catch (_) {}
+  if (sparad !== '0') satPa(true);
   // pausa när fliken inte syns
   document.addEventListener('visibilitychange', () => {
     if (!spelare || !pa) return;
@@ -3741,11 +3800,12 @@ function anpassaStorlek() {
     window.scrollTo(0, s * stoppH);
   }
 }
+let panelNere = 0, panelNereMal = 0;
 function satVyforskjutning(g) {
   const w = storlek.w, h = storlek.h;
   if (g < 0.002) { kamera.clearViewOffset(); return; }
   if (kamera.aspect >= 0.9) kamera.setViewOffset(w, h, Math.min(580, w * 0.48) * 0.5 * g, 0, w, h);
-  else kamera.setViewOffset(w, h, 0, h * 0.25 * g, w, h);
+  else kamera.setViewOffset(w, h, 0, h * 0.25 * g * (1 - 0.8 * panelNere), w, h);
 }
 
 function frame(nu) {
@@ -3828,6 +3888,7 @@ function frame(nu) {
     voyager.kropp.quaternion.setFromEuler(_sEul).premultiply(sondVrid.q);
   }
   kamera.near = klamp(narmast * 0.3, 0.02, 4);
+  panelNere += (panelNereMal - panelNere) * (1 - Math.exp(-dtVerklig * 5));
   satVyforskjutning(omlopp.g);
   kamera.updateProjectionMatrix();
 

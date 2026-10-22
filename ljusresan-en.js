@@ -751,6 +751,7 @@ window.LJUS_EN = {
  "/ Ljusresan": "/ Light Journey",
  "Musik: skapad med Suno.": "Music: made with Suno.",
  "Läs mer": "Read more",
+ "Dra ned eller upp panelen": "Drag the panel down or up",
  "Dra för att vrida på sonden": "Drag to turn the probe",
  "Lys upp": "Light up",
  "Lys upp hela himlakroppen, även skuggsidan": "Light up the whole world, including the shadow side",

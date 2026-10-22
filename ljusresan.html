@@ -397,7 +397,7 @@ body.kartalage .hud, body.kartalage #noter, body.kartalage #varp { display: none
 body.omlopp .stopptext, body.omlopp .status, body.omlopp .rutt, body.omlopp .fart { opacity: 0 !important; pointer-events: none; }
 body.omlopp main#resa { touch-action: none; }
 /* under färden går det att se sig omkring: dra med musen (eller sidledes med fingret) */
-body.kan-titta main#resa { cursor: grab; touch-action: pan-y; }
+body.kan-titta main#resa, body.kan-vrida main#resa { cursor: grab; touch-action: pan-y; }
 body.tittar main#resa, body.tittar { cursor: grabbing; }
 body.kan-titta, body.tittar { -webkit-user-select: none; user-select: none; }
 .status .titta { display: block; margin-top: 7px; font-size: 10px; letter-spacing: .16em; color: var(--faint); }
@@ -2444,7 +2444,8 @@ function skapaNot(nyckel, n) {
   noterSvg.appendChild(g);
   const post = { g, riktning: 0, syns: false, n };
   notEl.set(nyckel, post);
-  if (NOT_INFO[n.nyckel || n.text]) g.addEventListener('click', (e) => { e.stopPropagation(); visaInfo(post); });
+  // ett rent klick öppnar rutan; en dragning som råkar börja på etiketten vrider eller tittar som vanligt
+  if (NOT_INFO[n.nyckel || n.text]) g.addEventListener('click', (e) => { e.stopPropagation(); if (!senastDrog) visaInfo(post); });
   return post;
 }
 function lonTillLokal(p, lat, lon, ut) {
@@ -3530,17 +3531,35 @@ function traffKropp(e) {
   return bast;
 }
 window.addEventListener('pointerdown', (e) => {
-  if (e.target.closest && e.target.closest('.fn, .infokort')) return;
-  if (infoPost) stangInfo();
+  if (e.target.closest && e.target.closest('.infokort')) return;
+  const paEtikett = e.target.closest && e.target.closest('.fn');
+  if (infoPost && !paEtikett) stangInfo();
   if (karta.oppen || e.button !== 0) return;
   if (e.target.closest('button, a, input, .dossier, canvas#spCanvas')) return;
   drag = { x: e.clientX, y: e.clientY, lx: e.clientX, ly: e.clientY, lt: performance.now(), id: e.pointerId, drog: false };
 });
+// sondens vridning kring skärmens axlar: sidled kring lodaxeln, höjdled kring den vågräta
+const sondVrid = { q: new Q4(), vy: 0, vp: 0 };
+const _sAx = new V3(), _sQ = new Q4(), _sRot = new Q4(), _sEul = new THREE.Euler();
+function vridSond(axelKamera, vinkel) {
+  _sAx.copy(axelKamera).applyQuaternion(kamera.quaternion).applyQuaternion(_sRot.copy(voyager.root.quaternion).invert()).normalize();
+  sondVrid.q.premultiply(_sQ.setFromAxisAngle(_sAx, vinkel));
+}
+const AX_X = new V3(1, 0, 0), AX_Y = new V3(0, 1, 0);
+const vidSonden = () => !omlopp.aktiv && !karta.oppen && scrollS() > NS - 1.04;
 window.addEventListener('pointermove', (e) => {
   if (!drag || e.pointerId !== drag.id) return;
   const dx = e.clientX - drag.lx, dy = e.clientY - drag.ly;
   if (!drag.drog && Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 6) drag.drog = true;
-  if (drag.drog && !omlopp.aktiv && blick.kan) {
+  // vid slutstationen vrider dragningen sonden själv, så att den går att se från alla håll
+  if (drag.drog && vidSonden()) {
+    if (!document.body.classList.contains('tittar')) { document.body.classList.add('tittar'); window.getSelection()?.removeAllRanges(); }
+    const now = performance.now(), dt = Math.max(1, now - drag.lt) / 1000;
+    vridSond(AX_Y, dx * 0.008);
+    vridSond(AX_X, dy * 0.008);
+    sondVrid.vy = dx * 0.008 / dt; sondVrid.vp = dy * 0.008 / dt;
+    drag.lt = now;
+  } else if (drag.drog && !omlopp.aktiv && blick.kan) {
     if (!document.body.classList.contains('tittar')) { document.body.classList.add('tittar'); window.getSelection()?.removeAllRanges(); }
     blick.malYaw += dx * 0.0042;
     blick.malPitch = klamp(blick.malPitch + dy * 0.0036, -1.35, 1.35);
@@ -3555,8 +3574,12 @@ window.addEventListener('pointermove', (e) => {
   }
   drag.lx = e.clientX; drag.ly = e.clientY;
 });
+let senastDrog = false;
 window.addEventListener('pointerup', (e) => {
   if (!drag || e.pointerId !== drag.id) return;
+  senastDrog = drag.drog;
+  // ett klick på en etikett sköts av etiketten själv
+  if (!drag.drog && e.target.closest && e.target.closest('.fn')) { drag = null; document.body.classList.remove('tittar'); return; }
   if (!drag.drog) {
     if (!omlopp.aktiv && voyager.root.visible) {
       _mus.set(e.clientX / window.innerWidth * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
@@ -3566,6 +3589,7 @@ window.addEventListener('pointerup', (e) => {
     const i = traffKropp(e);
     if (i >= 0 && !omlopp.aktiv) oppnaDossier(i);
   } else if (omlopp.aktiv && performance.now() - drag.lt > 90) { omlopp.vaz = 0; omlopp.vel = 0; }
+  else if (performance.now() - drag.lt > 90) { sondVrid.vy = 0; sondVrid.vp = 0; }
   drag = null;
   document.body.classList.remove('tittar');
 });
@@ -3763,6 +3787,7 @@ function frame(nu) {
   const iFard = !omlopp.aktiv && info.t > 0.02 && info.t < 0.97;
   blick.kan = !omlopp.aktiv;
   document.body.classList.toggle('kan-titta', iFard);
+  document.body.classList.toggle('kan-vrida', vidSonden());
   const haller = drag && drag.drog && !omlopp.aktiv;
   if (!haller) {
     const atergang = omlopp.aktiv ? 1 : (iFard ? mjuk(0.7, 0.95, info.t) : 1);
@@ -3794,8 +3819,13 @@ function frame(nu) {
   if (voyager.root.visible) {
     narmast = Math.min(narmast, Math.max(0.3, kamera.position.distanceTo(voyager.root.position) - 8));
     const vagga = REDUCERA ? 0 : 1;
-    voyager.kropp.rotation.y = voyager.vrid() + Math.sin(tid * 0.06) * 0.1 * vagga;
-    voyager.kropp.rotation.z = Math.sin(tid * 0.045) * 0.035 * vagga;
+    // vridningen man gjort själv, med efterglid som när man snurrar en planet
+    if (!(drag && drag.drog)) {
+      if (Math.abs(sondVrid.vy) + Math.abs(sondVrid.vp) > 1e-4) { vridSond(AX_Y, sondVrid.vy * dtVerklig); vridSond(AX_X, sondVrid.vp * dtVerklig); }
+      const d = Math.exp(-dtVerklig * 2.4); sondVrid.vy *= d; sondVrid.vp *= d;
+    }
+    _sEul.set(0, voyager.vrid() + Math.sin(tid * 0.06) * 0.1 * vagga, Math.sin(tid * 0.045) * 0.035 * vagga);
+    voyager.kropp.quaternion.setFromEuler(_sEul).premultiply(sondVrid.q);
   }
   kamera.near = klamp(narmast * 0.3, 0.02, 4);
   satVyforskjutning(omlopp.g);
@@ -3889,6 +3919,8 @@ function uppdateraHUD(s, info) {
   else if (info.t > 0.02 && info.t < 0.98 && i + 1 < NS) {
     const namn = STOPP[i + 1] === 'slut' ? 'Voyager 1' : PLANETER[i + 1].namn;
     st = `På väg mot <b>${namn}</b> · framme om ${nb(tidText(Math.max(0, ljusTid(b - ae))))}<span class="titta">Håll ned musknappen och dra för att se dig omkring</span>`;
+  } else if (k === NS - 1 && vidSonden()) {
+    st = '<span class="titta">Dra för att vrida på sonden</span>';
   } else if (k < NS - 1) {
     st = `Skrolla vidare mot <b>${STOPP[k + 1] === 'slut' ? 'Voyager 1' : PLANETER[k + 1].namn}</b><span class="pil"></span>`;
   }

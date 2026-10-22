@@ -804,9 +804,42 @@ function myntTextur(def, sida) {
     g.font = '700 46px Poppins, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
     g.fillText('KRONA', S / 2, S * .76);
   } else if (std && sida === 1) {
-    g.font = '700 230px Poppins, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
-    g.fillText('1', S / 2, S / 2 - 6);
-    g.font = '700 46px Poppins, sans-serif'; g.fillText('KLAVE', S / 2, S * .79);
+    // Klave: en krönt sköld med tre kronor, som lilla riksvapnet på de
+    // äldre svenska enkronorna, och valören under.
+    const ink = 'rgba(38,42,48,.85)';
+    const cx = S / 2, top = 168, w = 190, mitt = 300, spets = 398;
+    const skold = () => {
+      g.beginPath();
+      g.moveTo(cx - w / 2, top); g.lineTo(cx + w / 2, top); g.lineTo(cx + w / 2, mitt);
+      g.quadraticCurveTo(cx + w / 2, spets - 30, cx, spets);
+      g.quadraticCurveTo(cx - w / 2, spets - 30, cx - w / 2, mitt); g.closePath();
+    };
+    skold(); g.fillStyle = 'rgba(38,42,48,.16)'; g.fill();
+    g.lineWidth = 9; g.strokeStyle = ink; g.stroke();
+    g.save(); g.translate(cx, 0); g.scale(.86, .86); g.translate(-cx, 18); skold(); g.restore();
+    g.lineWidth = 3; g.strokeStyle = 'rgba(38,42,48,.5)'; g.stroke();
+    // tre kronor, två över en
+    const liten = (x, y, b) => {
+      const h = b * .55;
+      g.beginPath();
+      g.moveTo(x - b / 2, y + h / 2); g.lineTo(x - b / 2 - b * .05, y - h / 2); g.lineTo(x - b / 4, y - h * .05);
+      g.lineTo(x, y - h / 2 - h * .15); g.lineTo(x + b / 4, y - h * .05); g.lineTo(x + b / 2 + b * .05, y - h / 2);
+      g.lineTo(x + b / 2, y + h / 2); g.closePath(); g.fill();
+      g.fillRect(x - b / 2, y + h / 2 + b * .06, b, b * .14);
+      for (const [px, py] of [[x - b / 2 - b * .05, y - h / 2], [x, y - h / 2 - h * .15], [x + b / 2 + b * .05, y - h / 2]]) { g.beginPath(); g.arc(px, py - b * .07, b * .08, 0, TAU); g.fill(); }
+    };
+    g.fillStyle = ink;
+    liten(cx - 46, 222, 58); liten(cx + 46, 222, 58); liten(cx, 300, 58);
+    // kunglig krona ovanpå skölden
+    const kx = cx, ky = 128;
+    g.beginPath(); g.moveTo(kx - 62, ky + 26); g.lineTo(kx + 62, ky + 26); g.lineTo(kx + 58, ky + 8); g.lineTo(kx - 58, ky + 8); g.closePath(); g.fill();
+    g.lineWidth = 8; g.strokeStyle = ink;
+    g.beginPath(); g.moveTo(kx - 58, ky + 8); g.quadraticCurveTo(kx - 56, ky - 38, kx, ky - 40); g.quadraticCurveTo(kx + 56, ky - 38, kx + 58, ky + 8); g.stroke();
+    g.beginPath(); g.moveTo(kx, ky + 8); g.lineTo(kx, ky - 40); g.stroke();
+    g.beginPath(); g.arc(kx, ky - 52, 11, 0, TAU); g.fill();
+    g.fillRect(kx - 3, ky - 76, 6, 20); g.fillRect(kx - 10, ky - 70, 20, 6);
+    g.font = '700 52px Poppins, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillText('1 KR', cx, 446);
   } else if (text) {
     ritaText(g, text, S / 2, S / 2, S * .66, 170, 'rgba(38,42,48,.88)', false);
   }
@@ -1038,11 +1071,53 @@ function skapaBricka({ center, filt: filtHex, bredd = 15.4, djup = 10 }) {
     });
     bild = nu; forraSida = sida; return ok;
   }
+  // Ta tag i en tärning eller ett mynt och flytta det, till exempel för att
+  // se vad myntet under visar. Föremålet lyfts över de andra, behåller sin
+  // sida och lutning medan det dras och faller ned igen när man släpper.
+  let grepp = null;
+  const LYFT = 2.6;
+  function hittaTarning(obj) {
+    for (let o = obj; o; o = o.parent) { const d = dice.find(x => x.mesh === o); if (d) return d; }
+    return null;
+  }
+  function greppa(obj) {
+    if (busy || grepp) return false;
+    const d = hittaTarning(obj); if (!d) return false;
+    const b = d.body;
+    b.wakeUp(); b.velocity.setZero(); b.angularVelocity.setZero();
+    b.mass = 0; b.type = CANNON.Body.KINEMATIC; b.updateMassProperties(); b.collisionResponse = false;
+    grepp = { d, mal: new V3(b.position.x, FLOOR + LYFT, b.position.z) };
+    aktiv = true; wake();
+    return true;
+  }
+  /** Dragplanets höjd i världen, så att pekarstrålen kan skäras med det. */
+  const dragPlan = () => new THREE.Plane(new V3(0, 1, 0), -(center.y + FLOOR + LYFT));
+  function flyttaTill(v) {
+    if (!grepp) return;
+    const r = grepp.d.P.sides === 2 ? 1.5 : 1.05;
+    grepp.mal.set(clamp(v.x - center.x, -IW / 2 + r, IW / 2 - r), FLOOR + LYFT, clamp(v.z - center.z, -ID / 2 + r, ID / 2 - r));
+    wake();
+  }
+  function slappa() {
+    if (!grepp) return;
+    const b = grepp.d.body;
+    b.mass = 1; b.type = CANNON.Body.DYNAMIC; b.updateMassProperties(); b.collisionResponse = true;
+    b.velocity.set(0, -2, 0); b.angularVelocity.setZero(); b.wakeUp();
+    grepp = null; vila = 0; aktiv = true; wake();
+  }
   function step(dt) {
     if (!aktiv) return false;
+    if (grepp) {
+      const b = grepp.d.body, m = grepp.mal, k = 1 - Math.pow(.0005, dt);
+      b.position.set(lerp(b.position.x, m.x, k), lerp(b.position.y, m.y, k), lerp(b.position.z, m.z, k));
+      b.velocity.setZero(); b.angularVelocity.setZero();
+    }
     // Tunna mynt behöver kortare tidssteg än tärningar för att inte dallra.
     if (dice.some(d => d.body.isMynt)) world.step(1 / 240, dt, 16); else world.step(1 / 120, dt, 8);
     for (const d of dice) { d.mesh.position.copy(d.body.position); d.mesh.quaternion.copy(d.body.quaternion); }
+    // etiketterna följer med när något flyttas
+    if (etiketter.length === dice.length) etiketter.forEach((e, i) => e.position.set(dice[i].body.position.x, dice[i].body.position.y + 1.9, dice[i].body.position.z));
+    if (grepp) return true;
     fonster += dt;
     if (busy) {
       tRoll += dt;
@@ -1058,7 +1133,9 @@ function skapaBricka({ center, filt: filtHex, bredd = 15.4, djup = 10 }) {
   }
   stepFns.push(step);
   return {
-    setDefs, kasta,
+    setDefs, kasta, greppa, flyttaTill, slappa, dragPlan,
+    get greppar() { return !!grepp; },
+    meshar: () => dice.map(d => d.mesh),
     visaEtiketter: v => etiketter.forEach(e => { e.visible = v; }),
     dbg: () => ({ aktiv, busy, still: +still.toFixed(2), tRoll: +tRoll.toFixed(2), knuffar, wt: +world.time.toFixed(2) }),
     get busy() { return busy; },
@@ -2513,12 +2590,24 @@ function traff(ev, lista) {
   ray.setFromCamera(pek, camera);
   return ray.intersectObjects(lista, true).length > 0;
 }
+/** Det första föremålet under pekaren, eller null. */
+function traffObj(ev, lista) {
+  if (!traff(ev, lista)) return null;
+  return ray.intersectObjects(lista, true)[0].object;
+}
+const aktivBricka = () => mode === 'tarningar' ? Tarningar : mode === 'mynt' ? Mynt : null;
 const klickMal = () => mode === 'tarningar' ? [Tarningar.grp] : mode === 'mynt' ? [Mynt.grp] : mode === 'kort' ? Kortlek.klickbar : mode === 'urna' ? Urna.klickbar : Hjul.klickbar;
 let ned = null;
 canvas.addEventListener('pointerdown', ev => {
   if (!renderer) return;
   Ljud.init();
   ned = { x: ev.clientX, y: ev.clientY, t: performance.now(), hjul: false };
+  const br = aktivBricka();
+  if (br && !br.busy) {
+    // ett mynt eller en tärning under pekaren kan dras när pekaren rört sig
+    const obj = traffObj(ev, br.meshar());
+    if (obj) { ned.bricka = br; ned.obj = obj; controls.enabled = false; canvas.setPointerCapture(ev.pointerId); }
+  }
   if (mode === 'hjul' && traff(ev, Hjul.klickbar) && Hjul.dragStart(ev)) {
     ned.hjul = true; controls.enabled = false; stage.classList.add('greppa');
     canvas.setPointerCapture(ev.pointerId);
@@ -2526,12 +2615,28 @@ canvas.addEventListener('pointerdown', ev => {
 });
 canvas.addEventListener('pointermove', ev => {
   if (ned && ned.hjul) { Hjul.dragFlytt(ev); return; }
+  if (ned && ned.bricka) {
+    if (!ned.greppar && Math.hypot(ev.clientX - ned.x, ev.clientY - ned.y) > 5) {
+      ned.greppar = ned.bricka.greppa(ned.obj);
+      if (ned.greppar) stage.classList.add('greppa');
+    }
+    if (ned.greppar) {
+      traff(ev, []);
+      const v = new V3();
+      if (ray.ray.intersectPlane(ned.bricka.dragPlan(), v)) ned.bricka.flyttaTill(v);
+    }
+    return;
+  }
   if (ned || !renderer || ev.pointerType !== 'mouse') return;
   stage.classList.toggle('pek', traff(ev, klickMal()));
 });
 function slapp(ev) {
   if (!ned) return;
   const kort = Math.hypot(ev.clientX - ned.x, ev.clientY - ned.y) < 7 && performance.now() - ned.t < 450;
+  if (ned.bricka) {
+    controls.enabled = !flyg;
+    if (ned.greppar) { ned.bricka.slappa(); stage.classList.remove('greppa'); ned = null; return; }
+  }
   if (ned.hjul) {
     stage.classList.remove('greppa');
     controls.enabled = !flyg;
@@ -2542,7 +2647,7 @@ function slapp(ev) {
   ned = null;
 }
 canvas.addEventListener('pointerup', slapp);
-canvas.addEventListener('pointercancel', () => { if (ned && ned.hjul) { Hjul.dragSlut(); stage.classList.remove('greppa'); controls.enabled = true; } ned = null; });
+canvas.addEventListener('pointercancel', () => { if (ned && ned.greppar) { ned.bricka.slappa(); stage.classList.remove('greppa'); controls.enabled = true; } if (ned && ned.hjul) { Hjul.dragSlut(); stage.classList.remove('greppa'); controls.enabled = true; } ned = null; });
 document.addEventListener('keydown', e => {
   if (e.code !== 'Space' || e.repeat) return;
   const t = e.target;

@@ -33,7 +33,9 @@
  *                    alt: '…', caption: '…', credit: '…' }   bild
  *                Bilden ska vara fri att använda (public domain/CC) eller
  *                egenhändigt gjord, och `credit` anger alltid fotograf och
- *                licens. `alt` och `credit` är REN TEXT, `caption` är HTML.
+ *                licens. Källan visas inte vid bilden utan under rubriken
+ *                Bildkällor längst ned i uppslaget. `alt` och `credit` är
+ *                REN TEXT, `caption` är HTML.
  *
  * ⚠️ REN TEXT kontra HTML — den vanligaste fällan:
  *   `term`, `kort`, h2-blockens `text` och faktarutans `title` renderas som

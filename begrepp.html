@@ -137,8 +137,9 @@
         .ord-fact li:last-child { margin-bottom: 0; }
 
         /* Bild i uppslaget — body-block { type: 'image' } (se data/begrepp.js).
-           Samma uppställning som bilderna i nyhetsartiklarna: bildtext till
-           vänster och källan/licensen under den. */
+           Bildtexten står under bilden. Källan och licensen (credit) står
+           INTE där utan samlas under rubriken Bildkällor längst ned i
+           uppslaget, så att de inte stör läsningen. */
         .ord-figur { margin: 30px 0 28px; }
         .ord-figur img {
             width: 100%; height: auto; display: block; border-radius: 4px;
@@ -146,9 +147,10 @@
         }
         .ord-figur figcaption { display: flex; flex-direction: column; gap: 5px; margin-top: 9px; }
         .ord-figur .fig-caption { font-size: 14.5px; line-height: 1.55; color: var(--lab-ink); }
-        .ord-figur .fig-credit {
-            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.03em;
-            color: var(--lab-ink-muted);
+        .ord-kallor { list-style: none; margin: 0; padding: 0; }
+        .ord-kallor li {
+            font-family: var(--lab-font-mono); font-size: 12px; letter-spacing: 0.03em;
+            line-height: 1.6; color: var(--lab-ink-muted); margin-bottom: 4px;
         }
 
         /* Se även + var begreppet dyker upp */
@@ -507,11 +509,10 @@
             if (b.type === 'image') return (
                 <figure className="ord-figur">
                     <img src={b.src} alt={b.alt} loading="lazy" />
-                    {(b.caption || b.credit) && (
+                    {b.caption && (
                         <figcaption>
-                            {b.caption && <span className="fig-caption"
-                                dangerouslySetInnerHTML={{ __html: b.caption }} />}
-                            {b.credit && <span className="fig-credit">{b.credit}</span>}
+                            <span className="fig-caption"
+                                dangerouslySetInnerHTML={{ __html: b.caption }} />
                         </figcaption>
                     )}
                 </figure>
@@ -534,6 +535,8 @@
                 .map(id => ORDLISTA.find(x => x.id === id))
                 .filter(Boolean);
             const artiklar = MENTIONS[b.id] || [];
+            // Bildkällorna samlas längst ned, i bildernas ordning.
+            const kallor = (b.body || []).filter(x => x.type === 'image' && x.credit).map(x => x.credit);
 
             return (
                 <article className="ord-article">
@@ -570,6 +573,22 @@
                                     </a>
                                 ))}
                             </div>
+                        </div>
+                    )}
+
+                    {kallor.length > 0 && (
+                        <div className="ord-section">
+                            <div className="ord-section-label">
+                                {kallor.length === 1 ? 'Bildkälla' : 'Bildkällor'}
+                            </div>
+                            <ol className="ord-kallor">
+                                {kallor.map((k, j) => (
+                                    <li key={j}>
+                                        {kallor.length > 1 && <span className="ord-kalla-nr">{j + 1}. </span>}
+                                        {k}
+                                    </li>
+                                ))}
+                            </ol>
                         </div>
                     )}
 

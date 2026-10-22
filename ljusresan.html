@@ -195,6 +195,21 @@ main#resa { position: relative; z-index: 2; }
 
 /* Fältanteckningar */
 .fn { opacity: 0; transition: opacity .45s; }
+/* anteckningarna går att klicka på: rutan med mer om objektet */
+.fn.syns { pointer-events: bounding-box; cursor: pointer; }
+.fn.syns:hover .hand, .fn.vald .hand { fill: #ffffff; }
+.fn.vald circle:not(.karna) { stroke-width: 2.2; }
+.infokort { position: fixed; z-index: 7; width: min(340px, calc(100vw - 32px)); padding: 18px 20px 16px; border: 1px solid var(--hud); border-radius: 14px;
+  background: rgba(7, 10, 19, .9); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 18px 50px rgba(0, 0, 0, .55);
+  color: var(--ink); opacity: 0; transform: translateY(6px); transition: opacity .25s, transform .25s; pointer-events: none; }
+.infokort.syns { opacity: 1; transform: none; pointer-events: auto; }
+.ik-rubrik { font-family: var(--hand); font-size: 28px; font-weight: 600; line-height: 1.05; color: #fff4d6; padding-right: 30px; }
+.ik-sub { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--acc); margin: 6px 0 10px; }
+.ik-text { font-size: 14px; line-height: 1.7; color: #d0d5e2; margin: 0; }
+.ik-stang { position: absolute; top: 12px; right: 12px; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--hud); background: rgba(255, 255, 255, .04); color: var(--dim); display: grid; place-items: center; cursor: pointer; }
+.ik-stang:hover { color: var(--ink); border-color: rgba(255, 255, 255, .4); }
+.ik-las { margin-top: 14px; }
+@media (max-width: 600px) { .infokort { left: 16px !important; right: 16px; top: auto !important; bottom: 16px; width: auto; } }
 .fn.syns { opacity: 1; }
 .fn circle { fill: none; stroke: #fff2d2; stroke-width: 1.4; }
 .fn circle.karna { fill: #fff2d2; stroke: none; }
@@ -472,6 +487,13 @@ body.kan-titta, body.tittar { -webkit-user-select: none; user-select: none; }
   <div class="f-not">ljusets fart i vakuum</div>
 </div>
 <div class="hud status" id="status"></div>
+<div class="infokort" id="infokort" role="dialog" aria-labelledby="ikRubrik">
+  <button class="ik-stang" id="ikStang" aria-label="Stäng"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="ik-rubrik" id="ikRubrik"></div>
+  <div class="ik-sub" id="ikSub"></div>
+  <p class="ik-text" id="ikText"></p>
+  <button class="knapp sek ik-las" id="ikLas">Läs mer</button>
+</div>
 
 <main id="resa"></main>
 
@@ -2243,10 +2265,78 @@ const NOTER = {
 };
 const noterSvg = $('noter');
 const SVGNS = 'http://www.w3.org/2000/svg';
+let infoPost = null;
+function visaInfo(post) {
+  const n = post.n, info = NOT_INFO[n.nyckel || n.text];
+  if (!info) return;
+  if (infoPost) infoPost.g.classList.remove('vald');
+  infoPost = post;
+  post.g.classList.add('vald');
+  const kort = $('infokort');
+  $('ikRubrik').textContent = n.text;
+  $('ikSub').textContent = nb(n.sub || '');
+  $('ikText').textContent = info.text;
+  $('ikLas').style.display = info.las ? '' : 'none';
+  $('ikLas').onclick = () => { stangInfo(); oppnaVoyager(info.las); };
+  // bredvid anteckningen, inom fönstret (på mobilen ligger rutan i nederkanten)
+  const r = post.g.getBoundingClientRect(), w = Math.min(340, window.innerWidth - 32);
+  kort.style.left = '0px'; kort.style.top = '0px';
+  kort.classList.add('syns');
+  const h = kort.offsetHeight;
+  let x = post.riktning > 0 ? r.left : r.right - w, y = r.bottom + 12;
+  if (y + h > window.innerHeight - 16) y = r.top - h - 12;
+  x = klamp(x, 16, window.innerWidth - w - 16);
+  y = klamp(y, 70, window.innerHeight - h - 16);
+  kort.style.left = x + 'px'; kort.style.top = y + 'px';
+}
+function stangInfo() {
+  if (infoPost) infoPost.g.classList.remove('vald');
+  infoPost = null;
+  $('infokort').classList.remove('syns');
+}
 const notEl = new Map();
 let noterPa = true;
 const _np = new V3(), _nn = new V3(), _nc = new V3(), _nv = new V3();
+// anteckningens svenska text är nyckeln till dess informationsruta, även när sidan visas på engelska
+Object.values(NOTER).forEach((lista) => lista.forEach((n) => { n.nyckel = n.text; }));
 laggEngelska(NOTER, 'NOTER');
+/* Informationsrutorna: klickar man på en fältanteckning visas en kort text om
+   objektet. las: fliken i Voyager-artikeln som knappen Läs mer öppnar. */
+const NOT_INFO = {
+  'Fotosfären': { text: 'Fotosfären är det lager av solen som vi ser, bara omkring 500 km tjockt. Temperaturen är cirka 5 500 °C. Under den är gasen så tät att ljuset inte tar sig ut, och över den blir gasen genomskinlig. Ytan är täckt av granuler, celler av uppvällande het gas som var och en är ungefär lika stor som Frankrike.' },
+  'Kratrar överallt': { text: 'Merkurius har nästan ingen atmosfär, så meteoriterna bromsas inte upp och brinner inte upp på vägen ned. Varje nedslag lämnar ett ärr, och utan vind och regn som nöter ned dem finns kratrarna kvar i miljarder år. Den största, Calorisbassängen, är cirka 1 550 km bred.' },
+  'Svavelsyramoln': { text: 'Venus är helt täckt av moln av svavelsyradroppar, ungefär mellan 45 och 70 km över ytan. Molnen reflekterar det mesta av solljuset, och därför lyser Venus starkare än allt annat på himlen utom solen och månen. Molnen färdas runt planeten på ungefär fyra dygn, fast planeten själv behöver 243 dygn för ett varv runt sin axel.' },
+  'Maxwell Montes': { text: 'Venus högsta bergsmassiv, cirka 11 km högt, alltså högre över omgivningen än Mount Everest är över havet. Det ligger på höglandet Ishtar Terra och har fått sitt namn efter fysikern James Clerk Maxwell. Det är ett av få platsnamn på Venus som inte kommer från en kvinna eller en gudinna.' },
+  'Aphrodite Terra': { text: 'Venus största högland, ungefär lika stort som Sydamerika, nära ekvatorn. Här finns långa förkastningar och spår av vulkaner. Rymdsonden Magellan kartlade området med radar genom molnen i början av 1990-talet.' },
+  'Du är här': { text: 'Ungefär här ligger Sverige. Från rymden syns inga gränser, bara land, hav och moln. Solljuset som lyser upp oss lämnade solen för drygt åtta minuter sedan.' },
+  'Sahara': { text: 'Världens största heta öken, nästan lika stor som USA. För omkring 6 000 år sedan var stora delar av den en grön savann med sjöar. I dag blåser damm från Sahara över Atlanten och gödslar regnskogen i Amazonas.' },
+  'Himalaya': { text: 'Bergskedjan bildas där den indiska kontinentalplattan pressas mot den eurasiska. Mount Everest, 8 849 m, är det högsta berget över havsytan, och bergen växer fortfarande med några millimeter per år.' },
+  'Amazonas': { text: 'Världens största regnskog, omkring 5,5 miljoner km². Den rymmer ungefär var tionde känd art på jorden. Amazonfloden för ut mer vatten i havet än någon annan flod.' },
+  'Stilla havet': { text: 'Jordens största och djupaste hav, större än alla kontinenter tillsammans. Den djupaste punkten, Challengerdjupet i Marianergraven, ligger nästan 11 km under havsytan.' },
+  'Apollo 11': { text: 'Här landade Neil Armstrong och Buzz Aldrin den 20 juli 1969, på slätten Mare Tranquillitatis. De var de första människorna på en annan himlakropp. Fotspåren finns troligen kvar, eftersom det inte finns någon vind som blåser bort dem.' },
+  'Mare Imbrium': { text: 'En av månens stora mörka slätter, ett så kallat hav. Den bildades när ett jättelikt nedslag för cirka 3,9 miljarder år sedan slog upp en bassäng som senare fylldes av lava. Den stelnade basalten är mörkare än höglandet runt omkring.' },
+  'Tycho': { text: 'En ung krater, bara omkring 100 miljoner år gammal och 85 km bred. Från den strålar ljusa stråk av utkastat material ut över stora delar av månen, och de syns tydligt i en vanlig kikare vid fullmåne.' },
+  'Oceanus Procellarum': { text: 'Stormarnas ocean är det största av månens hav, ungefär 4 miljoner km². Den bildades av lava som en gång strömmade upp och fyllde låglandet. Apollo 12 landade här år 1969.' },
+  'Olympus Mons': { text: 'Solsystemets högsta kända vulkan, cirka 22 km hög och ungefär 600 km bred. Den kunde bli så stor eftersom Mars saknar plattektonik: skorpan ligger kvar över samma heta punkt i miljontals år, och lavan fortsätter att bygga på samma berg.' },
+  'Valles Marineris': { text: 'Ett kanjonsystem som är cirka 4 000 km långt och upp till 7 km djupt. Det skulle räcka tvärs över hela Europa. Det bildades troligen när skorpan sprack upp, inte av ett vattendrag som Grand Canyon.' },
+  'Hellas Planitia': { text: 'En av solsystemets största nedslagsbassänger, cirka 2 300 km bred och omkring 7 km djup. Lufttrycket på botten är det högsta på Mars, ungefär dubbelt så högt som på planetens medelnivå.' },
+  'Jezerokratern': { text: 'En 45 km bred krater som en gång rymde en sjö, med ett gammalt floddelta. Här har rovern Perseverance kört sedan 2021 och samlat stenprov som kan visa om det någon gång har funnits liv på Mars.' },
+  'Stora röda fläcken': { text: 'En gigantisk storm, ett högtryck som har virvlat i åtminstone 190 år. Den är bredare än jorden men har krympt under de senaste hundra åren. Vindarna i kanten blåser med över 400 km/h.' },
+  'Molnband': { text: 'Jupiters ljusa zoner och mörka bälten är moln på olika höjd, som dras ut till band av planetens snabba rotation: ett dygn är knappt tio timmar. Vindarna i angränsande band blåser åt motsatta håll, med över 500 km/h.' },
+  'Cassinidelningen': { text: 'Ett 4 800 km brett glapp mellan Saturnus två ljusaste ringar. Det är inte helt tomt, bara glesare. Partiklar i glappet går runt Saturnus två gånger för varje varv som månen Mimas gör, och de upprepade dragen från Mimas rensar banan. Giovanni Cassini upptäckte glappet år 1675.' },
+  'Moln av ammoniak': { text: 'De översta molnen på Saturnus består av frusen ammoniak, och längre ned finns moln av ammoniumvätesulfid och vatten. Planeten består nästan bara av väte och helium, och medeldensiteten är så låg som 0,7 g/cm³, lägre än vattnets.' },
+  'Nordpolen': { text: 'Uranus rotationsaxel lutar 98 grader, så planeten rullar fram längs sin bana nästan liggande på sidan. Varje pol har därför sommar i 42 år och mörker i 42 år. Troligen välte en kollision med en stor kropp planeten för länge sedan.' },
+  'Snabbaste vindarna': { text: 'Neptunus har solsystemets snabbaste vindar, över 2 000 km/h, trots att planeten får mycket lite energi från solen. En del av energin kommer från värme inifrån planeten, men exakt hur vindarna kan bli så starka är inte helt utrett.' },
+  'Sputnik Planitia': { text: 'En slätt av kväveis, över 1 000 km bred, som utgör den västra halvan av Plutos ljusa hjärta. Isen rör sig långsamt i stora celler, ungefär som vatten som kokar, och därför finns inga kratrar där: ytan förnyas hela tiden.' },
+  'Wright Mons': { text: 'Ett berg som är omkring 4 km högt och 150 km brett, med en djup grop i toppen. Forskarna tror att det kan vara en isvulkan, som har fått ut is och trögflytande vatten i stället för lava.' },
+  'Cthulhu': { text: 'Ett mörkt, avlångt område längs Plutos ekvator, ungefär 3 000 km långt. Den rödbruna färgen kommer från toliner, organiska ämnen som bildas när ultraviolett ljus och strålning bryter ned metan och kväve.' },
+  'Solen': { text: 'Från Voyager 1, ungefär 170 gånger längre bort än jorden, är solen bara en ljusstark stjärna. Den är fortfarande den överlägset starkaste på himlen, men ger bara ungefär en trettiotusendel så mycket ljus som här hemma.' },
+  'Parabolantennen': { text: 'Antennen är 3,7 m bred och pekar hela tiden mot jorden. Sändaren har en effekt på drygt 20 watt, ungefär som en kylskåpslampa, och signalen fångas upp av NASA:s 70 meter stora antenner.', las: 'teknik' },
+  'Guldskivan': { text: 'En grammofonskiva av guldpläterad koppar med 116 bilder, hälsningar på 55 språk, ljud från jorden och 27 musikstycken. Den är tänkt som en flaskpost till den som en dag kanske hittar sonden, och på omslaget står en bruksanvisning ritad med fysik.', las: 'skivan' },
+  'Radioisotopgeneratorer': { text: 'Tre generatorer med plutonium-238 gör om värmen från sönderfallet till el. De gav cirka 470 watt vid starten och tappar ungefär 4 watt per år. Solceller hade varit värdelösa så här långt från solen.', las: 'teknik' },
+  'Kamerorna': { text: 'Med de här kamerorna tog Voyager 1 bilden av jorden som en blekblå prick, den 14 februari 1990 från ungefär 6 miljarder km. Strax efteråt stängdes kamerorna av för att spara energi.', las: 'resan' },
+};
+laggEngelska(NOT_INFO, 'NOT_INFO');
 function skapaNot(nyckel, n) {
   const g = document.createElementNS(SVGNS, 'g');
   g.setAttribute('class', 'fn');
@@ -2254,8 +2344,9 @@ function skapaNot(nyckel, n) {
   g.querySelector('.hand').textContent = n.text;
   g.querySelector('.sub').textContent = nb(n.sub);
   noterSvg.appendChild(g);
-  const post = { g, riktning: 0, syns: false };
+  const post = { g, riktning: 0, syns: false, n };
   notEl.set(nyckel, post);
+  if (NOT_INFO[n.nyckel || n.text]) g.addEventListener('click', (e) => { e.stopPropagation(); visaInfo(post); });
   return post;
 }
 function lonTillLokal(p, lat, lon, ut) {
@@ -2409,7 +2500,7 @@ function uppdateraNoter(aktiv, synlighet) {
     if (!post.syns) { post.syns = true; requestAnimationFrame(() => { if (post.syns) post.g.classList.add('syns'); }); }
   });
   notEl.forEach((post, nyckel) => {
-    if (!visas.has(nyckel) && post.syns) { post.syns = false; post.g.classList.remove('syns'); }
+    if (!visas.has(nyckel) && post.syns) { post.syns = false; post.g.classList.remove('syns'); if (infoPost === post) stangInfo(); }
   });
 }
 
@@ -3316,6 +3407,8 @@ function traffKropp(e) {
   return bast;
 }
 window.addEventListener('pointerdown', (e) => {
+  if (e.target.closest && e.target.closest('.fn, .infokort')) return;
+  if (infoPost) stangInfo();
   if (karta.oppen || e.button !== 0) return;
   if (e.target.closest('button, a, input, .dossier, canvas#spCanvas')) return;
   drag = { x: e.clientX, y: e.clientY, lx: e.clientX, ly: e.clientY, lt: performance.now(), id: e.pointerId, drog: false };
@@ -3364,6 +3457,7 @@ window.addEventListener('wheel', (e) => {
 }, { passive: false });
 document.addEventListener('keydown', (e) => {
   if (e.target.closest && e.target.closest('input')) return;
+  if (e.key === 'Escape' && infoPost) { stangInfo(); return; }
   if (e.key === 'Escape') { if (karta.oppen) stangKarta(); else if (omlopp.aktiv) stangDossier(); return; }
   if (omlopp.aktiv || karta.oppen) return;
   const s = scrollS();
@@ -3383,6 +3477,7 @@ document.addEventListener('keydown', (e) => {
     location.href = u.toString();
   });
 }
+$('ikStang').addEventListener('click', stangInfo);
 $('noterKnapp').addEventListener('click', (e) => { noterPa = !noterPa; e.currentTarget.setAttribute('aria-pressed', noterPa); });
 
 /* =====================================================================

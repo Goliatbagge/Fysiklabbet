@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Wed, 21 Oct 2026 04:56:25 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2026 01:24:04 GMT</lastBuildDate>
+    <item>
+      <title>Flimrande magnetism kan vara limmet i en gåtfull supraledare</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-22-spinnen-som-limmar-elektronerna</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-22-spinnen-som-limmar-elektronerna</guid>
+      <pubDate>Thu, 22 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Supraledning</category>
+      <description>I vissa kopparoxider leder elektronerna ström helt utan motstånd, men ingen har kunnat visa vad som får dem att bilda par. Nu har forskare i Bristol mätt hur motståndet hos en sådan supraledare beter sig i starka magnetfält, och svaret pekar på kortlivade magnetiska mönster bland elektronernas spinn.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-22-spinnen-som-limmar-elektronerna.jpg" length="157466" type="image/jpeg"/>
+    </item>
     <item>
       <title>Bromsade partikelskurar tyder på att även syrekärnor smälter till urmateria</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-21-jetarna-som-bromsas</link>
@@ -177,15 +186,6 @@
       <category>Termodynamik</category>
       <description>För tre år sedan rapporterades att grönt ljus kan slita loss vattenmolekyler direkt ur ytan, utan att värma vattnet. Forskare i Mainz har nu lyst på rent vatten med blå, grön och röd laser och mätt både hur fort ytan sjunker och hur de yttersta molekylerna sitter. Ingenting ändrades.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-04-ljus-skyndar-inte-pa-avdunstningen.jpg" length="499897" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Tio upptäckter vi tror kan få Nobelpriset i fysik</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-03-tio-namn-till-nobelpriset-i-fysik</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-03-tio-namn-till-nobelpriset-i-fysik</guid>
-      <pubDate>Sat, 03 Oct 2026 04:00:00 GMT</pubDate>
-      <category>Nobelpriset</category>
-      <description>På tisdag tillkännages årets Nobelpris i fysik. Ingen utanför Vetenskapsakademien vet vem som får det, men vissa upptäckter dyker upp på tipslistorna år efter år. Här är tio som Fysiklabbet tippar, och forskarna bakom dem.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-03-tio-namn-till-nobelpriset-i-fysik.jpg" length="259327" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

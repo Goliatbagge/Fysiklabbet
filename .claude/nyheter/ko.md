@@ -15,8 +15,11 @@ Format per post:
 - **Minne i ett mikrofluidikchip: fibrer som minns hur vattnet flöt** **[BREVTEASER]** (nominerad 2026-10-19; originalet öppet, CC BY 4.0, publicerat 2026-10-09, sidan svarar 200) — Yale (Pahlavan, Rajput), ”Fluidic Hysterons and Memory in Flow Networks”, Physical Review X 2026, DOI 10.1103/hh4n-pw7w (PRX är öppen, CC BY). Ingång: hysteres, strömning. Strömningslära publicerades 2026-10-07. Källa (Phys.org 2026-10-14): https://phys.org/news/2026-10-memory-chip.html
   (tillagd 2026-10-15)
 
-- **Dold rivalitet mellan två kvanttillstånd i högtemperatursupraledare (två studier samma dag, varav en kallas ”smoking gun”)** — supraledning/kondenserad materia. Originalen ej kontrollerade. Källor (Phys.org 2026-10-20/21): https://phys.org/news/2026-10-hidden-rivalry-quantum-states-heart.html och https://phys.org/news/2026-10-gun-mystery-high-temperature-superconductivity.html
-  (tillagd 2026-10-21)
+- **Ljusinducerad asymmetrisk pseudogap under Tc i kuprater (den andra supraledarstudien 2026-10-21)** — Armanno m.fl., Nature Physics 2026, DOI 10.1038/s41567-026-03446-6 (ej öppen enligt Crossref, kontrollera fulltext). OBS: supraledning publicerades 2026-10-22 (spinnfluktuationerna), vänta minst ett par veckor. Källa (Phys.org 2026-10-21): https://phys.org/news/2026-10-hidden-rivalry-quantum-states-heart.html
+  (tillagd 2026-10-21, omskriven 2026-10-22)
+
+- **Förbjudna emissioner från grafen kan avslöja kvantfluktuationer i inkommande ljus** — optik/kvantoptik, DOI 10.1103/v886-ypf7. Originalet ej kontrollerat. Källa (Phys.org 2026-10-21): https://phys.org/news/2026-10-forbidden-emissions-graphene-expose-quantum.html
+  (tillagd 2026-10-22)
 
 - **Anpassad bildtakt fångar ultrasnabba förlopp över fem tiopotenser i tid** — optik/mätteknik, höghastighetsfotografering. Originalet ej kontrollerat. Källa (Phys.org 2026-10-20): https://phys.org/news/2026-10-custom-captures-ultrafast-events-magnitude.html
   (tillagd 2026-10-21)

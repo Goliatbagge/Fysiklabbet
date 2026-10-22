@@ -1549,7 +1549,7 @@ window.BEGREPP = [
   {
     id: 'supraledare',
     term: 'Supraledare',
-    former: ['supraledare', 'supraledaren', 'supraledarna', 'supraledning', 'supraledningen', 'supraledande', 'kupratsupraledare', 'kupratsupraledarna'],
+    former: ['supraledare', 'supraledaren', 'supraledarna', 'supraledning', 'supraledningen', 'supraledande', 'kupratsupraledare', 'kupratsupraledaren', 'kupratsupraledarna', 'högtemperatursupraledning', 'högtemperatursupraledare'],
     kort: 'Ett material som under en viss kritisk temperatur leder ström helt utan elektriskt motstånd — och dessutom trycker ut magnetfält ur sitt inre, så att magneter kan sväva över det.',
     relaterade: ['absoluta-nollpunkten', 'superfluid'],
     body: [
@@ -4158,6 +4158,42 @@ window.BEGREPP = [
       { type: 'p', html: 'En atom som fått extra energi, en exciterad atom, gör sig förr eller senare av med den genom att sända ut en foton. Oftast sker det spontant, vid en slumpmässig tidpunkt och i en slumpmässig riktning. En glödlampa eller ett lysrör lyser på det sättet: miljarder atomer som var för sig skickar ut ljus åt alla håll.' },
       { type: 'p', html: 'Men om en foton med precis rätt energi passerar en exciterad atom kan den få atomen att sända ut sin foton genast, med samma energi och i samma riktning. Det kallas stimulerad emission, och Albert Einstein förutsade fenomenet redan 1917. Nu finns det två likadana fotoner i stället för en. Om det finns många exciterade atomer längs vägen kan varje foton ge upphov till fler, och ljuset förstärks som en lavin. Det kräver att fler atomer är exciterade än i grundtillståndet, annars äts fotonerna upp av atomer som tar upp dem i stället.' },
       { type: 'p', html: 'I en laser studsar ljuset fram och tillbaka mellan två speglar för att hinna förstärkas många gånger. Förstärkt spontan emission är samma lavin men i en enda passage, utan speglar. Den startar med några slumpvis utsända fotoner och kräver därför en mycket stor andel exciterade atomer på en gång. För röntgenstrålning går det bara att nå med extremt intensiva pulser, och därför används fenomenet för att kontrollera hur starka sådana pulser verkligen är.' }
+    ]
+  },
+  {
+    id: 'antiferromagnetism',
+    term: 'Antiferromagnetism',
+    former: ['antiferromagnetism', 'antiferromagnetismen', 'antiferromagnet', 'antiferromagneten', 'antiferromagneter', 'antiferromagnetisk', 'antiferromagnetiskt', 'antiferromagnetiska'],
+    kort: 'En sorts magnetisk ordning där grannatomernas små magneter pekar åt motsatta håll, så att de tar ut varandra. Materialet som helhet blir då inte magnetiskt, fast varje atom är det.',
+    relaterade: ['spinn', 'supraledare', 'kuprat'],
+    body: [
+      { type: 'p', html: 'Elektroner har ett spinn, som gör varje elektron till en pytteliten magnet. I ett vanligt magnetiskt material som järn, en ferromagnet, pekar de flesta av dessa små magneter åt samma håll, och deras fält läggs ihop till ett fält som går att känna. I en antiferromagnet gör grannarna tvärtom: den ena pekar upp, nästa ned, nästa upp igen, som ett schackbräde av nordändar och sydändar. Fälten tar ut varandra, och utifrån märks nästan ingen magnetism alls.' },
+      { type: 'p', html: 'Ordningen uppstår eftersom det för vissa material kostar mindre energi om grannarnas spinn pekar åt olika håll. Precis som för en ferromagnet håller ordningen bara när det är tillräckligt kallt. Blir det för varmt skakar värmerörelsen sönder mönstret. Ordningen kan också förstöras på andra sätt, till exempel genom att man byter ut några av atomerna i materialet.' },
+      { type: 'p', html: 'Även när den ordnade magnetismen är borta kan små områden för ett ögonblick ordna sig i det gamla mönstret, för att sedan lösas upp igen och dyka upp någon annanstans. Sådana kortlivade, flimrande mönster kallas spinnfluktuationer. I kopparoxider som blir supraledande vid hög temperatur är de huvudmisstänkta för att vara det lim som får elektronerna att bilda par.' }
+    ]
+  },
+  {
+    id: 'magnetoresistans',
+    term: 'Magnetoresistans',
+    former: ['magnetoresistans', 'magnetoresistansen', 'magnetoresistanser', 'magnetoresistiv', 'magnetoresistiva'],
+    kort: 'Att resistansen i ett material ändras när man lägger på ett magnetfält. Hur stor ändringen blir avslöjar mycket om hur elektronerna rör sig och vad de krockar med.',
+    relaterade: ['halleffekten', 'spinntronik', 'spinn'],
+    body: [
+      { type: 'p', html: 'En elektron som rör sig genom ett magnetfält känner en kraft åt sidan, vinkelrätt mot både fältet och rörelsen. Banan böjs därför av till en båge. I en ledare betyder det att elektronerna inte längre åker rakt fram i strömmens riktning mellan krockarna, utan svänger av åt sidan. Då tar det längre tid för dem att ta sig fram, och resistansen ökar. Det är magnetoresistans.' },
+      { type: 'p', html: 'Effekten är oftast liten, men den är ett känsligt mätverktyg. Hur mycket resistansen ökar beror på hur långt elektronerna hinner innan de krockar med något, alltså hur stor del av en båge de hinner gå. Det beror också på om krockarna är vanligare för elektroner som rör sig åt vissa håll. Genom att mäta magnetoresistansen vid olika temperaturer och fältstyrkor kan forskare därför ta reda på vad elektronerna egentligen studsar mot.' },
+      { type: 'p', html: 'I vissa skiktade material, där tunna lager av magnetiska och omagnetiska metaller växlar, kan resistansen ändras mycket kraftigt med magnetfältet. Den effekten kallas jättemagnetoresistans, och den gjorde det möjligt att läsa av de små magnetiserade områdena på hårddiskar.' }
+    ]
+  },
+  {
+    id: 'kuprat',
+    term: 'Kuprat',
+    former: ['kuprat', 'kupraten', 'kuprater', 'kupraterna'],
+    kort: 'En kopparoxid med lager av koppar- och syreatomer. Vissa kuprater blir supraledande vid förvånansvärt höga temperaturer, ända upp mot −140 °C.',
+    relaterade: ['supraledare', 'antiferromagnetism', 'cooperpar', 'dopning'],
+    body: [
+      { type: 'p', html: 'En kuprat är ett keramiskt material som innehåller koppar och syre, ofta tillsammans med ämnen som lantan, barium eller yttrium. Atomerna sitter i platta lager av koppar och syre med andra atomer emellan, ungefär som skivorna i en smörgås. Det är i koppar-syre-lagren som det intressanta händer.' },
+      { type: 'p', html: 'Utan tillsatser leder en kuprat knappt ström alls. Den är en isolator och dessutom antiferromagnetisk. Byter man ut några av atomerna så att materialet får några extra elektroner, eller förlorar några, börjar det leda ström, och under en viss temperatur blir det supraledande. Vissa kuprater blir supraledande redan när de kyls med flytande kväve, som kokar vid 77&nbsp;kelvin (−196&nbsp;°C). Det är långt varmare än de flesta andra supraledare tål.' },
+      { type: 'p', html: 'Att kuprater kan bli supraledande upptäcktes 1986, och upptäckten belönades med Nobelpriset i fysik året därpå. Varför de blir supraledande vid så höga temperaturer är fortfarande inte helt utrett. Den vanliga förklaringen för supraledare, där vibrationer i kristallgittret parar ihop elektronerna, räcker inte. Många forskare tror att magnetiska fluktuationer bland elektronernas spinn spelar huvudrollen.' }
     ]
   },
 ];

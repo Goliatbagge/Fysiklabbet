@@ -103,6 +103,147 @@
  */
 const NYHETER_ALL = [
   {
+    "id": "2026-10-22-spinnen-som-limmar-elektronerna",
+    "date": "2026-10-22",
+    "title": "Flimrande magnetism kan vara limmet i en gåtfull supraledare",
+    "deck": "I vissa kopparoxider leder elektronerna ström helt utan motstånd, men ingen har kunnat visa vad som får dem att bilda par. Nu har forskare i Bristol mätt hur motståndet hos en sådan supraledare beter sig i starka magnetfält, och svaret pekar på kortlivade magnetiska mönster bland elektronernas spinn.",
+    "category": "Supraledning",
+    "readingTime": "6 min",
+    "image": "nyheter/bilder/2026-10-22-spinnen-som-limmar-elektronerna.jpg",
+    "imageAlt": "En svart, rund magnet svävar några centimeter ovanför en mörk skiva i en vit frigolitbehållare. Kall dimma från flytande kväve väller över kanten mot en blågrå bakgrund.",
+    "imageCredit": "Foto: Mai-Linh Doan (CC BY-SA 3.0), via Wikimedia Commons, beskuren. En magnet svävar över en kopparoxidsupraledare som kylts med flytande kväve. Bilden visar inte materialet i studien.",
+    "tags": [
+      "supraledning",
+      "kondenserade materiens fysik",
+      "kuprater",
+      "cooperpar",
+      "spinn",
+      "antiferromagnetism",
+      "magnetoresistans",
+      "resistans",
+      "magnetfält",
+      "lorentzkraft",
+      "halleffekten",
+      "temperatur"
+    ],
+    "sources": [
+      {
+        "name": "Phys.org: 'Smoking gun' may help solve mystery of high-temperature superconductivity (21 oktober 2026, pressmeddelande från University of Bristol)",
+        "url": "https://phys.org/news/2026-10-gun-mystery-high-temperature-superconductivity.html"
+      },
+      {
+        "name": "Nature Physics: studien i fulltext (öppet tillgänglig)",
+        "url": "https://www.nature.com/articles/s41567-026-03454-6"
+      }
+    ],
+    "research": {
+      "citation": "C. M. Duffy, S. J. Tu, Q. H. Chen, J. S. Zhang, A. Cuoghi, R. D. H. Hinlopen, T. Sarkar, R. L. Greene, K. Jin och N. E. Hussey, ”Evidence for spin-fluctuation-mediated superconductivity in electron-doped cuprates”, Nature Physics (2026)",
+      "url": "https://doi.org/10.1038/s41567-026-03454-6"
+    },
+    "larare": {
+      "moment": [
+        {
+          "label": "Resistans och Ohms lag",
+          "href": "katalog.html?id=fy1-7.5"
+        },
+        {
+          "label": "Laddade partiklar i magnetfält",
+          "href": "katalog.html?id=fy2-3.4"
+        },
+        {
+          "label": "Magnetism och magnetfält",
+          "href": "katalog.html?id=fy2-3.1"
+        }
+      ],
+      "fragor": [
+        "I en vanlig metall ökar resistansen när temperaturen stiger. Förklara med en modell av elektroner som krockar med ett vibrerande gitter varför det blir så.",
+        "En elektron som rör sig vinkelrätt mot ett magnetfält påverkas av kraften F = q · v · B. Varför kan ett starkt magnetfält göra att resistansen i en ledare ökar, trots att kraften aldrig gör något arbete på elektronen?",
+        "Forskarna drar slutsatser om vad som parar ihop elektronerna genom att mäta materialet ovanför den temperatur där det blir supraledande. Varför kan det fungera? Vilka svagheter har metoden?"
+      ]
+    },
+    "body": [
+      {
+        "type": "p",
+        "html": "En supraledare leder elektrisk ström helt utan motstånd. Det upptäcktes redan 1911, när kvicksilver kyldes till ungefär 4&nbsp;kelvin, alltså 4&nbsp;grader över den absoluta nollpunkten. Supraledare används i dag bland annat i magnetkameror på sjukhus och i partikelacceleratorer, men de flesta av dem måste kylas med flytande helium, vilket är dyrt och krångligt."
+      },
+      {
+        "type": "p",
+        "html": "År 1986 hittades en ny sorts supraledare: kopparoxider, så kallade kuprater. Vissa av dem blir supraledande redan när de kyls med flytande kväve, som kokar vid 77&nbsp;kelvin (−196&nbsp;°C). Upptäckten gav Nobelpriset i fysik året därpå. Men i fyrtio år har forskarna diskuterat <em>varför</em> kupraterna är supraledande. Nu har en grupp under ledning av Nigel Hussey vid University of Bristol publicerat mätningar som pekar ut en tydlig misstänkt, åtminstone för en av kupraternas två huvudgrupper. Studien publicerades den 19&nbsp;oktober i den kollegialt granskade tidskriften <em>Nature Physics</em>."
+      },
+      {
+        "type": "h2",
+        "text": "Elektroner som går i par"
+      },
+      {
+        "type": "p",
+        "html": "I en vanlig metall krockar elektronerna hela tiden med atomerna i kristallgittret, som vibrerar mer ju varmare det är. Det är krockarna som ger motstånd. I en supraledare har elektronerna i stället slagit sig ihop två och två, i så kallade cooperpar, och paren kan röra sig genom materialet utan att tappa energi."
+      },
+      {
+        "type": "p",
+        "html": "Men elektroner stöter bort varandra, eftersom de har samma laddning. Något måste fungera som lim. I de klassiska supraledarna är limmet gittret självt: en elektron drar till sig de positiva jonerna en aning när den passerar, och det lilla överskottet av positiv laddning drar i sin tur till sig nästa elektron. Den förklaringen, BCS-teorin från 1957, gav också Nobelpriset. Den har en viktig följd: samma gittervibrationer som ger motstånd vid högre temperatur är också det som parar ihop elektronerna. Ju starkare elektronerna påverkas av gittret, desto mer motstånd i värme och desto högre temperatur där supraledningen börjar."
+      },
+      {
+        "type": "p",
+        "html": "I kupraterna räcker gittret inte som förklaring. Den främsta kandidaten har länge varit magnetism. Varje elektron har ett spinn, som gör den till en liten magnet. Utgångsmaterialet för en kuprat är antiferromagnetiskt: grannarnas spinn pekar åt motsatta håll, upp, ned, upp, ned. När materialet ändras försvinner den ordningen efter hand, men kortlivade rester av mönstret flimrar fortfarande fram och tillbaka. Det kallas spinnfluktuationer. Problemet har varit att ingen kunnat visa ett direkt samband mellan hur starkt elektronerna påverkas av dem och vid vilken temperatur materialet blir supraledande."
+      },
+      {
+        "type": "h2",
+        "text": "Ett prov med många recept"
+      },
+      {
+        "type": "p",
+        "html": "Forskarna valde kupraten lantan-cerium-kopparoxid. Där byts en del av lantanatomerna mot cerium, som tillför extra elektroner. Ju mer cerium, desto lägre blir den temperatur där supraledningen börjar, från omkring 25&nbsp;kelvin ned till noll. För att kunna jämföra många blandningar på ett rättvist sätt tillverkades materialet som tunna filmer där andelen cerium ökar gradvis från den ena änden till den andra, med allt annat lika. Längs två sådana filmer satte forskarna kontakter och fick på så vis 19&nbsp;olika blandningar att mäta på."
+      },
+      {
+        "type": "p",
+        "html": "Mätningarna gjordes ovanför den temperatur där supraledningen börjar, i ett magnetlaboratorium i Nijmegen i Nederländerna, med magnetfält på upp till 35&nbsp;tesla. Det är ungefär 700&nbsp;000 gånger starkare än jordens magnetfält. Magnetfältet böjer av elektronernas banor, och då ökar motståndet i materialet. Hur mycket det ökar beror på hur långt elektronerna hinner innan de krockar, och på om krockarna är vanligare åt vissa håll än andra. Effekten kallas magnetoresistans och fungerar som ett fingeravtryck av vad elektronerna studsar mot."
+      },
+      {
+        "type": "h2",
+        "text": "Motståndet följde supraledningen"
+      },
+      {
+        "type": "p",
+        "html": "Mätningarna gick bara att förklara om elektronerna spreds mycket mer kraftigt i vissa riktningar än i andra. Den spridningen kunde i princip komma från antingen magnetiska spinnfluktuationer eller från fluktuationer i laddningen. För att avgöra vilket räknade forskarna på halleffekten, den lilla spänning som uppstår tvärs över en ledare i ett magnetfält, med mätningar från tidigare studier av samma material. I materialet byter den tecken när temperaturen höjs. Det gick att förklara med spinnfluktuationer men inte med laddningsfluktuationer."
+      },
+      {
+        "type": "p",
+        "html": "Det avgörande var vad som hände när andelen cerium ökade. Styrkan hos den riktningsberoende spridningen sjönk till ungefär en tiondel över hela serien, samtidigt som temperaturen för supraledning sjönk från 25&nbsp;kelvin till noll. Det är samma sorts samband som i de klassiska supraledarna, bara med magnetiska fluktuationer i stället för gittervibrationer."
+      },
+      {
+        "type": "quote",
+        "html": "Korrelationen mellan styrkan i den här växelverkan och den kritiska temperaturen bekräftade sedan att supraledningen i det här materialet verkligen kommer från växelverkan mellan ledningselektronerna och spinnfluktuationerna.",
+        "cite": "Caitlin Duffy, som ledde mätningarna och i dag forskar vid CNRS i Frankrike, i Bristols pressmeddelande (översatt)"
+      },
+      {
+        "type": "h2",
+        "text": "Halva gåtan"
+      },
+      {
+        "type": "p",
+        "html": "Resultatet gäller kuprater som fått extra elektroner. De högsta temperaturerna finns i stället hos kuprater där elektroner tagits bort, och där är det fortfarande oklart. Där beter sig magnetoresistansen på ett helt annat sätt, och samma modell går inte att använda. Forskarna drar därför slutsatsen att de högre temperaturerna där inte bara kan bero på att elektronerna påverkas starkare av samma spinnfluktuationer. Något mer måste till."
+      },
+      {
+        "type": "quote",
+        "html": "Vi har hittat den första avgörande ingrediensen. Uppgiften nu är att leta upp den andra. Först då kan teoretikerna ta fram hela historien om högtemperatursupraledning.",
+        "cite": "Nigel Hussey, University of Bristol, i Bristols pressmeddelande (översatt)"
+      },
+      {
+        "type": "p",
+        "html": "Det är också värt att veta att slutsatsen bygger på en modell. Forskarna anpassar en beräkning av hur elektronerna sprids till mätdata och visar att en viss sorts spridning förklarar allt de ser, medan andra inte gör det. Det är ett starkt indicium, men inte en direkt observation av själva limmet."
+      },
+      {
+        "type": "fact",
+        "title": "Visste du?",
+        "items": [
+          "Kopparoxiderna leder i vanliga fall ström ganska dåligt. Utgångsmaterialet, innan något tillsatts, är till och med en isolator, trots att man efter enkla räkningar skulle vänta sig en metall.",
+          "Kupratsupraledaren med högst känd övergångstemperatur vid normalt tryck blir supraledande vid omkring 133&nbsp;kelvin, alltså −140&nbsp;°C.",
+          "En magnet kan sväva över en supraledare eftersom supraledaren trycker ut magnetfältet ur sitt inre. Fenomenet kallas meissnereffekten."
+        ]
+      }
+    ]
+  },
+  {
     id: "2026-10-21-jetarna-som-bromsas",
     date: "2026-10-21",
     title: "Bromsade partikelskurar tyder på att även syrekärnor smälter till urmateria",

@@ -585,6 +585,16 @@
         /* Wrappern finns bara för att handskrift.js ska hitta frågestammen
            att klona till helskärmens uppgiftspanel — den ska inte rita
            någon egen ruta på sidan. */
+        /* ---- Lösningsfilm ("Film") ----
+           En uppgift med fältet film: { fil, affisch } får ett tredje val
+           i växeln. Filmen är 16:9 och fyller textspalten. */
+        .np-film { margin: 4px 0 18px; }
+        .np-film video {
+            display: block; width: 100%; aspect-ratio: 16 / 9;
+            background: #f3eee4; border: 1px solid var(--lab-rule, rgba(31,37,48,0.15));
+            border-radius: 10px;
+        }
+        .np-film figcaption { font-size: 13px; color: var(--lab-ink-muted); margin-top: 8px; }
         .np-penna-ex {
             background: none;
             border: 0;
@@ -1805,12 +1815,26 @@
             );
         }
 
+        // Lösningsfilmen: förklaringen med berättarröst (se .claude/losningsfilmer.md).
+        // Valet sparas inte: vyvalet delas med teorin, som inte har filmer.
+        function FilmVy({ film }) {
+            return (
+                <figure className="np-film">
+                    <video controls playsInline preload="metadata" poster={film.affisch} src={film.fil} />
+                    <figcaption>Lösningen förklarad steg för steg{film.langd ? ' (' + film.langd + ')' : ''}.</figcaption>
+                </figure>
+            );
+        }
+
         function UppgiftView({ prov, uppgift }) {
             const [visadeSteg, setVisadeSteg] = useState(LOS_DIREKT ? 999 : 0);
             const [presenting, setPresenting] = useState(PRES_START != null);
             const penna = pennaTyp(prov, uppgift);
             const [vy, setVy] = useState(lasVy);
             const pennaVy = penna && vy === 'penna';
+            const film = uppgift.sekretess ? null : (uppgift.film || null);
+            const filmVy = !!film && vy === 'film';
+            const egenVy = pennaVy || filmVy;   // textlösningens steg döljs
             const stegEls = useRef([]);
             const svarEl = useRef(null);
             const fragaEl = useRef(null);
@@ -1916,19 +1940,28 @@
                         </button>
                     </div>
                     <TeoriLankar ids={uppgift.genomgangar} kurs={prov.kurs} />
-                    {penna && (
+                    {(penna || film) && (
                         <div className="np-vyval" role="group" aria-label="Välj hur lösningen visas">
                             <span className="np-vyval-label">Lösning</span>
+                            {penna && (
+                                <button type="button"
+                                    className={'lab-btn lab-btn-quiet np-vyval-btn' + (pennaVy ? ' is-on' : '')}
+                                    onClick={() => { setVy('penna'); skrivVy('penna'); }}
+                                    title="Se hur lösningen skrivs för hand, steg för steg">Med penna</button>
+                            )}
                             <button type="button"
-                                className={'lab-btn lab-btn-quiet np-vyval-btn' + (pennaVy ? ' is-on' : '')}
-                                onClick={() => { setVy('penna'); skrivVy('penna'); }}
-                                title="Se hur lösningen skrivs för hand, steg för steg">Med penna</button>
-                            <button type="button"
-                                className={'lab-btn lab-btn-quiet np-vyval-btn' + (pennaVy ? '' : ' is-on')}
+                                className={'lab-btn lab-btn-quiet np-vyval-btn' + (egenVy ? '' : ' is-on')}
                                 onClick={() => { setVy('text'); skrivVy('text'); }}
                                 title="Visa lösningen som vanlig text">Som text</button>
+                            {film && (
+                                <button type="button"
+                                    className={'lab-btn lab-btn-quiet np-vyval-btn' + (filmVy ? ' is-on' : '')}
+                                    onClick={() => setVy('film')}
+                                    title="Se en film där lösningen förklaras steg för steg">Film</button>
+                            )}
                         </div>
                     )}
+                    {filmVy && <FilmVy film={film} />}
                     {pennaVy && (
                         <React.Fragment>
                             <PennaVy typ={penna} prov={prov} uppgift={uppgift} />
@@ -1951,13 +1984,13 @@
                             )}
                         </React.Fragment>
                     )}
-                    {!pennaVy && visadeSteg === 0 && (
+                    {!egenVy && visadeSteg === 0 && (
                         <p className="np-hint" style={{ margin: '4px 0 14px' }}>
                             Försök lösa uppgiften själv först — klicka sedan fram lösningen ett steg i taget.
                         </p>
                     )}
 
-                    {!pennaVy && visadeSteg > 0 && (
+                    {!egenVy && visadeSteg > 0 && (
                         <div className="np-losning-flode">
                             {uppgift.steg.slice(0, visadeSteg).map((s, i) => (
                                 <div className="np-steg" key={i} ref={el => { stegEls.current[i] = el; }}>
@@ -1982,7 +2015,7 @@
                         </div>
                     )}
 
-                    {!pennaVy && alltVisat && (
+                    {!egenVy && alltVisat && (
                         <div className="np-svar" ref={svarEl}>
                             {/* Har deluppgifterna egna delsvar är det samlade
                                 svaret överflödigt — visa bara bedömningen. */}
@@ -2010,7 +2043,7 @@
                         </div>
                     )}
 
-                    <div className="np-steg-knappar" style={pennaVy ? { display: 'none' } : null}>
+                    <div className="np-steg-knappar" style={egenVy ? { display: 'none' } : null}>
                         {!alltVisat && (
                             <button className="lab-btn lab-btn-primary" onClick={() => setVisadeSteg(v => v + 1)}>
                                 {visadeSteg === 0 ? 'Visa första steget' : 'Visa nästa steg'}

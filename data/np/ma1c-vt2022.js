@@ -17,6 +17,8 @@
 //   svar       — slutsvaret enligt bedömningsanvisningarna
 //   bedomning  — [[krav, nivå]] enligt bedömningsanvisningarna
 //   sekretess  — true om uppgiften är borttagen ur det frisläppta provet
+//   film       — { fil, affisch, langd } lösningsfilm med berättarröst (valet
+//                "Film" i np.html); se .claude/losningsfilmer.md
 //
 // Källa: Skolverket/PRIM-gruppen. Provet återanvänds inte enligt beslut
 // Dnr 6.2.1-2023:233 och får därför användas övningsmaterial.
@@ -661,6 +663,7 @@ window.NP_PROV['ma1c-vt2022'] = {
         {
             nr: 18, del: 'C', poang: [2, 0, 0], omrade: 'Räta linjen — genom två punkter',
             genomgangar: ['ma1c-4.5'],
+            film: { fil: 'media/video/np-ma1c-vt2022-u18.mp4', affisch: 'media/video/np-ma1c-vt2022-u18.jpg', langd: '4 min' },
             endastSvar: false,
             fraga: 'Bestäm ekvationen för den räta linje som går genom punkterna $(2,\\ 10)$ och $(12,\\ 30)$.',
             figur: null,

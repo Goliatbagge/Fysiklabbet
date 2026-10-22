@@ -2,11 +2,24 @@
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
+<script>
+  // Språket: ?lang=en eller ett sparat val. Svenska är standard.
+  window.LR_EN = (function () {
+    var q = new URLSearchParams(location.search).get('lang');
+    try {
+      if (q) { localStorage.setItem('ljusresanSprak', q === 'en' ? 'en' : 'sv'); return q === 'en'; }
+      return localStorage.getItem('ljusresanSprak') === 'en';
+    } catch (e) { return q === 'en'; }
+  })();
+  if (window.LR_EN) document.documentElement.lang = 'en';
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Ljusresan — Fysiklabbet</title>
 <meta name="description" content="Följ en ljusstråle från solen ut till Pluto och Voyager 1. Flyg lågt över varje värld, läs fältanteckningarna och se med spektrometern vad atmosfärerna består av.">
 <meta name="theme-color" content="#020307">
 <link rel="canonical" href="https://fysiklabbet.se/ljusresan.html">
+<link rel="alternate" hreflang="sv" href="https://fysiklabbet.se/ljusresan.html">
+<link rel="alternate" hreflang="en" href="https://fysiklabbet.se/ljusresan.html?lang=en">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
 <meta property="og:type" content="website">
@@ -79,6 +92,7 @@ main#resa { position: relative; z-index: 2; }
 .topp > * { pointer-events: auto; }
 .marke { font-family: var(--mono); font-size: 11.5px; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; color: var(--dim); display: flex; gap: 10px; align-items: center; }
 .marke b { color: var(--ink); font-weight: 500; }
+.hudknapp.sprak .kort { display: none; font-weight: 600; letter-spacing: .08em; }
 .ingress-lank { color: var(--foton); text-decoration: underline; text-decoration-color: rgba(255, 210, 122, .45); text-underline-offset: 3px; }
 .ingress-lank:hover { text-decoration-color: currentColor; }
 .marke svg { color: var(--foton); }
@@ -389,6 +403,7 @@ body.kan-titta, body.tittar { -webkit-user-select: none; user-select: none; }
   .status { display: none; }
   .marke span.lang { display: none; }
   .hudknapp .text { display: none; }
+  .hudknapp.sprak .kort { display: inline; }
   .dossier { top: auto; left: 0; width: auto; height: 72vh; height: 72svh; border-left: 0; border-top: 1px solid var(--hud); transform: translateY(104%); border-radius: 18px 18px 0 0; }
   .d-topp { padding: 18px 20px 0; }
   .d-stang { top: 14px; right: 14px; }
@@ -432,6 +447,7 @@ body.kan-titta, body.tittar { -webkit-user-select: none; user-select: none; }
   <div class="topp-knappar">
     <button class="hudknapp" id="musikKnapp" aria-pressed="false" title="Slå på eller av bakgrundsmusiken"><span class="lampa"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h4l5 4V6L8 10z"/><path class="vag" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg><span class="text">Musik</span></button>
     <button class="hudknapp" id="noterKnapp" aria-pressed="true" title="Visa eller dölj fältanteckningarna"><span class="lampa"></span><span class="text">Anteckningar</span></button>
+    <button class="hudknapp sprak" id="sprakKnapp" lang="en"><span class="text">English</span><span class="kort">EN</span></button>
     <button class="hudknapp" id="kartaKnapp" title="Solsystemet som det ser ut i dag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4.5"/><ellipse cx="12" cy="12" rx="6" ry="2.6"/></svg><span class="text">Solsystemet i dag</span></button>
   </div>
 </header>
@@ -491,6 +507,56 @@ body.kan-titta, body.tittar { -webkit-user-select: none; user-select: none; }
 
 <script type="module">
 import * as THREE from 'three';
+
+/* =====================================================================
+   SPRÅK
+   Svenska är källan. På engelska (?lang=en) läggs ljusresan-en.js över:
+   datablocken får engelsk text per sökväg (laggEngelska), och en
+   MutationObserver byter ut gränssnittets textnoder och attribut mot
+   ordlistan, även det som ritas om under färden. Text med tal i matchas
+   av mönsterregler. Canvas-text och tal formateras direkt i koden.
+   ===================================================================== */
+const EN = !!window.LR_EN;
+if (EN) await import('./ljusresan-en.js?v=1');
+const LE = window.LJUS_EN || { data: {}, ui: {}, regler: [] };
+const T = (s) => (EN && LE.ui[s]) || s;
+function laggEngelska(rot, namn) {
+  if (!EN) return;
+  const pre = namn + '.';
+  for (const [vag, txt] of Object.entries(LE.data)) {
+    if (!vag.startsWith(pre)) continue;
+    const d = vag.slice(pre.length).split('.');
+    let o = rot;
+    for (let i = 0; i < d.length - 1 && o; i++) o = o[d[i]];
+    if (o && typeof o[d[d.length - 1]] === 'string') o[d[d.length - 1]] = txt;
+  }
+}
+function oversattText(raw) {
+  const t = raw.replace(/\u00a0/g, ' ').trim();
+  if (!t || !/[A-Za-zÅÄÖåäö]/.test(t)) return null;
+  let e = LE.ui[t];
+  if (e == null) for (const [re, ers] of LE.regler) { if (re.test(t)) { e = t.replace(re, ers); break; } }
+  if (e == null || e === t) return null;
+  const fore = raw.match(/^\s*/)[0], efter = raw.match(/\s*$/)[0];
+  return fore + e + efter;
+}
+function oversattTrad(rot) {
+  if (rot.nodeType === 3) { const e = oversattText(rot.data); if (e != null) rot.data = e; return; }
+  if (rot.nodeType !== 1 || rot.closest('script, style')) return;
+  const elem = [rot, ...rot.querySelectorAll('*')];
+  elem.forEach((el) => ['title', 'aria-label'].forEach((a) => {
+    const v = el.getAttribute && el.getAttribute(a);
+    if (v) { const e = oversattText(v); if (e != null) el.setAttribute(a, e.trim()); }
+  }));
+  const w = document.createTreeWalker(rot, NodeFilter.SHOW_TEXT);
+  const noder = [];
+  while (w.nextNode()) noder.push(w.currentNode);
+  noder.forEach((n) => { if (!n.parentElement.closest('script, style')) { const e = oversattText(n.data); if (e != null) n.data = e; } });
+}
+if (EN) {
+  oversattTrad(document.body);
+  new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach(oversattTrad))).observe(document.body, { childList: true, subtree: true });
+}
 
 /* =====================================================================
    DATA
@@ -1024,6 +1090,9 @@ BESTAR.pluto = {
     { rubrik: 'Atmosfären, räknat i volym', delar: [['kväve', 99.2], ['metan', 0.7], ['övrigt', 0.1, 'mest kolmonoxid']], not: 'Mätt av New Horizons 2015. Atmosfären är mycket tunn: trycket vid ytan är omkring en hundratusendel av jordens.' },
   ],
 };
+// den svenska faktaetiketten sparas: dataRad letar upp rader på den
+PLANETER.forEach((p) => { p.faktaSv = p.fakta.map((r) => r[0]); });
+laggEngelska(PLANETER, 'PLANETER'); laggEngelska(FORDJUPNING, 'FORDJUPNING'); laggEngelska(BESTAR, 'BESTAR');
 PLANETER.forEach((p) => Object.assign(p, FORDJUPNING[p.id], { bestar: BESTAR[p.id] }));
 PLANETER.filter((p) => !p.sol && !p.mane && !p.dverg).forEach((p, k) => { p.nr = k + 1; });
 const N = PLANETER.length;
@@ -1037,8 +1106,8 @@ function fmt(n, d = 0) {
   const s = Math.abs(n).toFixed(d);
   if (parseFloat(s) === 0) return '0';
   let [i, f] = s.split('.');
-  i = i.replace(/\B(?=(\d{3})+(?!\d))/g, NB);
-  return (n < 0 ? '−' : '') + i + (f ? ',' + f : '');
+  i = i.replace(/\B(?=(\d{3})+(?!\d))/g, EN ? ',' : NB);
+  return (n < 0 ? '−' : '') + i + (f ? (EN ? '.' : ',') + f : '');
 }
 function sig(n, k = 3) {
   if (n === 0) return '0';
@@ -1562,15 +1631,15 @@ function bestarHTML(p) {
   const staplar = b.staplar.map((st) => `
     <div class="stapel">
       <div class="st-rubrik">${st.rubrik}</div>
-      <div class="st-bar">${st.delar.map(([n, v]) => `<span style="flex:${Math.max(v, 1.4)} 0 0;background:${AMNE[n]}" title="${n} ${procent(v)}"></span>`).join('')}</div>
-      <ul class="st-lista">${st.delar.map(([n, v, detalj]) => `<li><i style="background:${AMNE[n]}"></i><span>${n[0].toUpperCase() + n.slice(1)}${detalj ? `<small>${detalj}</small>` : ''}</span><b>${procent(v)}</b></li>`).join('')}</ul>
+      <div class="st-bar">${st.delar.map(([n, v]) => `<span style="flex:${Math.max(v, 1.4)} 0 0;background:${AMNE[n]}" title="${T(n)} ${procent(v)}"></span>`).join('')}</div>
+      <ul class="st-lista">${st.delar.map(([n, v, detalj]) => `<li><i style="background:${AMNE[n]}"></i><span>${T(n[0].toUpperCase() + n.slice(1))}${detalj ? `<small>${detalj}</small>` : ''}</span><b>${procent(v)}</b></li>`).join('')}</ul>
       ${st.not ? `<p class="not">${st.not}</p>` : ''}
     </div>`).join('');
   return `<p class="svar">${b.svar}</p>
     <div class="ruta bestar">
       <div class="st-rubrik">Inifrån och ut</div>
       <div class="snitt-rad">${svg}<ul class="lagerlista">${lista}</ul></div>
-      <p class="not">Skikten är ritade ungefär i rätt proportioner, men de allra tunnaste är förstorade så att de syns.${b.lagerNot ? ' ' + b.lagerNot : ''}</p>
+      <p class="not">${T('Skikten är ritade ungefär i rätt proportioner, men de allra tunnaste är förstorade så att de syns.')}${b.lagerNot ? ' ' + b.lagerNot : ''}</p>
     </div>
     ${b.atmoNot ? `<p class="not atmo-not">${b.atmoNot}</p>` : ''}
     ${staplar}`;
@@ -2161,6 +2230,7 @@ const SVGNS = 'http://www.w3.org/2000/svg';
 const notEl = new Map();
 let noterPa = true;
 const _np = new V3(), _nn = new V3(), _nc = new V3(), _nv = new V3();
+laggEngelska(NOTER, 'NOTER');
 function skapaNot(nyckel, n) {
   const g = document.createElementNS(SVGNS, 'g');
   g.setAttribute('class', 'fn');
@@ -2388,7 +2458,7 @@ STOPP.forEach((id, i) => {
 });
 
 function dataRad(p) {
-  const hamta = (etiketter) => p.fakta.find(([k]) => etiketter.includes(k));
+  const hamta = (etiketter) => p.fakta.find((_, i) => etiketter.includes(p.faktaSv[i]));
   const val = [hamta(['Diameter']), hamta(['Tyngdfaktor']), hamta(['Ett dygn', 'Rotationstid']), hamta(['Temperatur', 'Medeltemperatur', 'Yttemperatur'])].filter(Boolean);
   return `<dl class="s-data">${val.map(([k, v]) => `<div><dt>${k}</dt><dd>${faktaVarde(p, v)}</dd></div>`).join('')}</dl>`;
 }
@@ -2468,7 +2538,7 @@ function oppnaDossier(i, flik) {
   $('dNr').textContent = String(i + 1).padStart(2, '0');
   $('dKicker').textContent = p.kicker;
   $('dNamn').textContent = p.namn;
-  $('dFlikar').innerHTML = FLIKAR.map(([id, t]) => `<button role="tab" data-flik="${id}" aria-selected="false">${t === 'Du där' ? 'Du på ' + p.namn : t}</button>`).join('');
+  $('dFlikar').innerHTML = FLIKAR.map(([id, t]) => `<button role="tab" data-flik="${id}" aria-selected="false">${t === 'Du där' ? (EN ? 'You on ' + p.namn.replace(/^The /, 'the ') : 'Du på ' + p.namn) : t}</button>`).join('');
   $('dFlikar').querySelectorAll('button').forEach((b) => b.addEventListener('click', () => visaFlik(b.dataset.flik)));
   document.documentElement.style.setProperty('--acc', p.acc);
   visaFlik(flik || 'oversikt');
@@ -2500,11 +2570,13 @@ function storlekSVG(p) {
   </div>`;
 }
 
+let voyagerEn = null;
 function visaFlik(flik) {
   dFlik = flik;
   $('dFlikar').querySelectorAll('button').forEach((b) => b.setAttribute('aria-selected', b.dataset.flik === flik));
   if (omlopp.k === NS - 1) {
-    dInnehall.innerHTML = voyagerFlik(flik);
+    if (EN && !voyagerEn) voyagerEn = LE.lagVoyager(fmt, nb, NB, voyagerAE, AE_KM, C_KM);
+    dInnehall.innerHTML = (EN ? voyagerEn : voyagerFlik)(flik);
     dInnehall.scrollTop = 0;
     startaVoyRaknare();
     return;
@@ -2529,6 +2601,7 @@ function visaFlik(flik) {
     const r = p.radie * 1000;
     const gBer = G_KONST * p.massa / (r * r);
     const vems = p.sol ? 'solens' : p.mane ? 'månens' : p.dverg ? 'dvärgplanetens' : 'planetens';
+    const vemsEn = p.sol ? 'the Sun' : p.mane ? 'the Moon' : p.dverg ? 'the dwarf planet' : 'the planet';
     html = `<div class="ruta">
         <div class="reglage"><label for="rMassa">Din massa <b id="vMassa"></b></label><input type="range" id="rMassa" min="20" max="150" value="${panelMassa}"></div>
         ${p.sol ? '' : `<div class="reglage"><label for="rAlder">Din ålder <b id="vAlder"></b></label><input type="range" id="rAlder" min="1" max="100" value="${panelAlder}"></div>`}
@@ -2547,11 +2620,13 @@ function visaFlik(flik) {
         <ul class="dar">
           <li><i>g</i> = tyngdfaktor (N/kg)</li>
           <li><i>G</i> = gravitationskonstanten, ${sci(G_KONST, 3)}${NB}N·m²/kg²</li>
-          <li><i>M</i> = ${vems} massa (kg)</li>
-          <li><i>r</i> = ${vems} radie vid ekvatorn (m)</li>
+          <li><i>M</i> = ${EN ? `mass of ${vemsEn} (kg)` : `${vems} massa (kg)`}</li>
+          <li><i>r</i> = ${EN ? `radius of ${vemsEn} at the equator (m)` : `${vems} radie vid ekvatorn (m)`}</li>
         </ul>
-        ${p.id === 'jorden' ? `<p class="not-text">I Sverige mäter vi 9,82${NB}N/kg. Vi ligger närmare jordens medelpunkt än ekvatorn gör och påverkas mindre av jordens rotation.</p>` : ''}
-        <p class="not-text">Flykthastigheten, den fart som krävs för att lämna ${p.sol ? 'solen' : p.mane ? 'månen' : p.dverg ? 'dvärgplaneten' : 'planeten'} för gott, är ${sig(flykt(p), 3)}${NB}km/s.</p>
+        ${p.id === 'jorden' && EN ? `<p class="not-text">In Sweden we measure 9.82${NB}N/kg. We are closer to the centre of the Earth than the equator is, and we are less affected by Earth’s rotation.</p>` : ''}
+        ${p.id === 'jorden' && !EN ? `<p class="not-text">I Sverige mäter vi 9,82${NB}N/kg. Vi ligger närmare jordens medelpunkt än ekvatorn gör och påverkas mindre av jordens rotation.</p>` : ''}
+        ${EN ? `<p class="not-text">The escape velocity, the speed needed to leave ${vemsEn} for good, is ${sig(flykt(p), 3)}${NB}km/s.</p>` : ''}
+        ${EN ? '' : `<p class="not-text">Flykthastigheten, den fart som krävs för att lämna ${p.sol ? 'solen' : p.mane ? 'månen' : p.dverg ? 'dvärgplaneten' : 'planeten'} för gott, är ${sig(flykt(p), 3)}${NB}km/s.</p>`}
       </div>`;
   } else if (flik === 'fordj') {
     html = `<div class="fordj">${p.avsnitt.map(([rub, txt]) => `<h3>${rub}</h3><p>${txt}</p>`).join('')}</div>
@@ -2587,7 +2662,8 @@ function kopplaRaknare(p) {
     if (rA && p.period) {
       const ar = panelAlder * 365.256 / p.period;
       if (p.mane) rader.push(['Så många varv har månen gått runt jorden sedan du föddes', `${fmt(ar)}${NB}varv`]);
-      else rader.push([`Din ålder i ${p.namn.toLowerCase() === 'jorden' ? 'jordår' : p.namn + 'år'}`, `${sig(ar, ar < 10 ? 2 : 3)}${NB}år`]);
+      else if (EN) rader.push([`Your age in ${p.id === 'jorden' ? 'Earth' : p.namn} years`, `${sig(ar, ar < 10 ? 2 : 3)}${NB}years`]);
+      else rader.push([`Din ålder i ${p.id === 'jorden' ? 'jordår' : p.namn + 'år'}`, `${sig(ar, ar < 10 ? 2 : 3)}${NB}år`]);
     }
     $('utfall').innerHTML = rader.map(([a, b]) => `<div><span>${a}</span><b>${b}</b></div>`).join('')
       + (p.gas ? '' : '<div style="border:0;padding-bottom:0"><span style="font-size:12px;color:var(--faint)">Fallet räknas utan luftmotstånd.</span></div>');
@@ -2634,6 +2710,7 @@ const SPEKTRUM = {
   neptunus: { mix: { sol: 0.3, ch4: 1.3, h2: 1 }, text: 'Samma sak som hos Uranus: metanet äter upp det röda ljuset, och det blå blir kvar.' },
   pluto: { mix: { sol: 0.3, toliner: 1, ch4is: 1, n2is: 1, cois: 1 }, text: 'Isarna på ytan syns i infrarött: metanis, kväveis och kolmonoxidis har alla egna band. Toliner tar bort blått ljus och gör ytan rödbrun.' },
 };
+laggEngelska(ABS, 'ABS'); laggEngelska(SPEKTRUM, 'SPEKTRUM');
 const SP_MIN = 380, SP_SYN = 750, SP_MAX = 2500, SP_DEL = 0.56;
 function spX(lam, w) { return lam <= SP_SYN ? (lam - SP_MIN) / (SP_SYN - SP_MIN) * SP_DEL * w : (SP_DEL + (lam - SP_SYN) / (SP_MAX - SP_SYN) * (1 - SP_DEL)) * w; }
 function spLam(x, w) { const f = x / w; return f <= SP_DEL ? SP_MIN + f / SP_DEL * (SP_SYN - SP_MIN) : SP_SYN + (f - SP_DEL) / (1 - SP_DEL) * (SP_MAX - SP_SYN); }
@@ -2713,8 +2790,8 @@ function ritaSpektrum(p) {
       x.fillText(t.replace(' ', NB), l === 400 ? Math.max(0, px - 4) : px, axel + 8);
     });
     x.textAlign = 'left'; x.fillStyle = 'rgba(205,220,255,0.45)';
-    x.fillText('SYNLIGT LJUS', 4, graf0 + 10);
-    x.fillText('INFRARÖTT', xs + 6, graf0 + 10);
+    x.fillText(T('SYNLIGT LJUS'), 4, graf0 + 10);
+    x.fillText(T('INFRARÖTT'), xs + 6, graf0 + 10);
   };
   rita();
   cv._rita = rita;
@@ -2832,7 +2909,7 @@ $('kSpela').addEventListener('click', () => {
   bana.spelar = !bana.spelar;
   $('kIkonPaus').style.display = bana.spelar ? '' : 'none';
   $('kIkonSpela').style.display = bana.spelar ? 'none' : '';
-  $('kSpela').setAttribute('aria-label', bana.spelar ? 'Pausa' : 'Spela');
+  $('kSpela').setAttribute('aria-label', T(bana.spelar ? 'Pausa' : 'Spela'));
 });
 if (!bana.spelar) { $('kIkonPaus').style.display = 'none'; $('kIkonSpela').style.display = ''; }
 $('kVerklig').addEventListener('click', (e) => { bana.mMal = bana.mMal > 0.5 ? 0 : 1; e.currentTarget.setAttribute('aria-pressed', bana.mMal > 0.5); });
@@ -2908,7 +2985,7 @@ function uppdateraBanor(dt, w, h) {
     if (syns) placerade.push(ruta);
     bana.etiketter[i].style.opacity = syns ? 1 : 0;
   });
-  const datum = new Date(J2000 + bana.dagar * 86400000).toLocaleDateString('sv-SE', { day: 'numeric', month: 'long', year: 'numeric' });
+  const datum = new Date(J2000 + bana.dagar * 86400000).toLocaleDateString(EN ? 'en-GB' : 'sv-SE', { day: 'numeric', month: 'long', year: 'numeric' });
   if (datum !== datumSenast) { $('kDatum').textContent = datum; datumSenast = datum; }
 }
 
@@ -3096,9 +3173,9 @@ function startaVoyRaknare() {
     const ae = voyagerAE(), km = ae * AE_KM;
     dInnehall.querySelectorAll('[data-voy]').forEach((el) => {
       const t = el.dataset.voy;
-      if (t === 'km') el.textContent = fmt(km / 1e9, 3) + NB + 'miljarder km';
-      else if (t === 'ae') el.textContent = fmt(ae, el.closest('.ruta') ? 2 : 1) + NB + 'AE';
-      else if (t === 'tid') el.textContent = fmt(km / C_KM / 3600, 2) + NB + 'timmar';
+      if (t === 'km') el.textContent = fmt(km / 1e9, 3) + NB + (EN ? 'billion km' : 'miljarder km');
+      else if (t === 'ae') el.textContent = fmt(ae, el.closest('.ruta') ? 2 : 1) + NB + (EN ? 'AU' : 'AE');
+      else if (t === 'tid') el.textContent = fmt(km / C_KM / 3600, 2) + NB + (EN ? 'hours' : 'timmar');
       else if (t === 'sedan') el.textContent = fmt((Date.now() - start) / 1000 * 16.9, 0) + NB + 'km';
     });
   }, 250);
@@ -3212,6 +3289,19 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { gaTillStopp(Math.floor(s + 0.5) + 1); e.preventDefault(); }
   if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { gaTillStopp(Math.ceil(s - 0.5) - 1); e.preventDefault(); }
 });
+{
+  const k = $('sprakKnapp');
+  k.querySelector('.text').textContent = EN ? 'Svenska' : 'English';
+  k.querySelector('.kort').textContent = EN ? 'SV' : 'EN';
+  k.lang = EN ? 'sv' : 'en';
+  k.title = EN ? 'Visa sidan på svenska' : 'Show this page in English';
+  k.addEventListener('click', () => {
+    try { localStorage.setItem('ljusresanSprak', EN ? 'sv' : 'en'); } catch (e) {}
+    const u = new URL(location.href);
+    if (EN) u.searchParams.set('lang', 'sv'); else u.searchParams.set('lang', 'en');
+    location.href = u.toString();
+  });
+}
 $('noterKnapp').addEventListener('click', (e) => { noterPa = !noterPa; e.currentTarget.setAttribute('aria-pressed', noterPa); });
 
 /* =====================================================================

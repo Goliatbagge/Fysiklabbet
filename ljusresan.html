@@ -1686,17 +1686,20 @@ const START_SPIN = { solen: 0, merkurius: 1.2, venus: 0, jorden: 4.9, manen: 4.2
 const STOPP = [...PLANETER.map((p) => p.id), 'slut'];
 const NS = STOPP.length;
 // avstånden längs resan dras ut, så att världarna inte ligger tätt (månen behåller sitt avstånd till jorden)
-const AVST = 1.9;
-const zVarld = (id) => id === 'manen' ? LAYOUT.jorden.Z * AVST + (LAYOUT.manen.Z - LAYOUT.jorden.Z) : LAYOUT[id].Z * AVST;
+// Avstånden växer dessutom utåt, så att yttre solsystemet känns glesare än det inre:
+// inre planeterna hamnar cirka 3,7 gånger längre isär än i LAYOUT, Pluto cirka 5,6 gånger.
+const AVST = 3.5, AVST_UTAT = 0.6, Z_PLUTO = 1110;
+const zSkala = (z) => AVST * z * (1 + AVST_UTAT * z / Z_PLUTO);
+const zVarld = (id) => id === 'manen' ? zSkala(LAYOUT.jorden.Z) + (LAYOUT.manen.Z - LAYOUT.jorden.Z) : zSkala(LAYOUT[id].Z);
 // slutstationen: långt ut åt sidan, med blicken tillbaka mot solen
-const SLUT_P = new V3(-620, 230, -1380).multiplyScalar(AVST);
-const SLUT_T = new V3(257, -20, -734).multiplyScalar(AVST);
+const SLUT_P = new V3(-620, 230, -1380).multiplyScalar(AVST * (1 + AVST_UTAT));
+const SLUT_T = new V3(257, -20, -734).multiplyScalar(AVST * (1 + AVST_UTAT));
 const VOY_POS = new V3();
 
 const scen = new THREE.Scene();
-const kamera = new THREE.PerspectiveCamera(48, 1, 0.05, 20000);
+const kamera = new THREE.PerspectiveCamera(48, 1, 0.05, 60000);
 kamera.position.set(0, 40, 30);
-const himmel = byggVintergatan(9000, 0.3);
+const himmel = byggVintergatan(30000, 0.3);
 scen.add(himmel);
 
 /* ---------- Stjärnor som sträcks ut i fart ---------- */

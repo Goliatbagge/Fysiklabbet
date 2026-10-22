@@ -3896,6 +3896,9 @@
                                                             <span className="lab-bionic-knob" />
                                                             <span className="lab-dys-label">Dyslexivänligt</span>
                                                         </button>
+                                                        {/* Språkvalet (jordklot med meny), byggt av i18n.js */}
+                                                        <span className="lab-lang-slot"
+                                                            ref={el => { if (el && window.I18N && window.I18N.sprakvaljare) window.I18N.sprakvaljare(el); }} />
                                                         {view === 'sammanfattning' && (
                                                             <button type="button" className="lab-pres-launch"
                                                                 onClick={() => setPresenting('sist')}

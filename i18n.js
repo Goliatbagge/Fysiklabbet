@@ -360,45 +360,112 @@
     }
 
     // ---- Språkknappen -----------------------------------------------------
+    // Ett jordklot som öppnar en liten meny med språken. Samma väljare
+    // sitter sist i huvudmenyn och (på teorisidorna) till höger om
+    // knappen Dyslexivänligt: katalog.html anropar I18N.sprakvaljare(el).
+    var SPRAKNAMN = { sv: 'Svenska', en: 'English' };
+    var GLOB = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+        'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/>' +
+        '<path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>';
     var CSS = '' +
-        '.lab-lang{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;cursor:pointer;' +
-        'font:inherit;color:inherit;background:none;border:1px solid currentColor;border-radius:999px;' +
-        'padding:3px 10px !important;opacity:.85;text-decoration:none}' +
-        '.lab-lang:hover{opacity:1}' +
-        '.lab-lang svg{flex:none}';
+        '.lab-lang-dd{position:relative;display:inline-flex;align-items:center}' +
+        '.lab-lang-glob{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;' +
+        'padding:0 !important;border:none;border-radius:999px;background:none;color:inherit;cursor:pointer;opacity:.85}' +
+        '.lab-lang-glob:hover,.lab-lang-dd.is-open .lab-lang-glob{opacity:1;background:rgba(15,22,32,.07)}' +
+        '.lab-lang-glob:focus-visible{outline:2px solid currentColor;outline-offset:2px}' +
+        '.lab-lang-meny{position:absolute;top:calc(100% + 6px);right:0;z-index:60;min-width:150px;padding:6px;' +
+        'background:#fbf9f4;border:1px solid rgba(15,22,32,.14);border-radius:12px;' +
+        'box-shadow:0 8px 24px rgba(15,22,32,.14);display:none}' +
+        '.lab-lang-dd.is-open .lab-lang-meny{display:block}' +
+        '.lab-lang-meny a{display:flex !important;align-items:center;justify-content:space-between;gap:12px;' +
+        'padding:8px 12px !important;border-radius:8px;color:#0f1620 !important;text-decoration:none !important;' +
+        'font-size:14px;white-space:nowrap;background:none !important;border:none !important}' +
+        '.lab-lang-meny a:hover{background:rgba(15,22,32,.07) !important}' +
+        '.lab-lang-meny a[aria-checked="true"]{font-weight:600}' +
+        '.lab-lang-meny a[aria-checked="true"]::after{content:"\\2713";font-weight:600}' +
+        '.lab-bionic-bar .lab-lang-glob{width:30px;height:30px}';
+    var cssLagd = false;
+    function laggCss() {
+        if (cssLagd) return;
+        cssLagd = true;
+        var st = document.createElement('style');
+        st.textContent = CSS;
+        document.head.appendChild(st);
+    }
+    function sprakUrl(till) {
+        var u = new URL(window.location.href);
+        if (till === 'en') u.searchParams.set('lang', 'en'); else u.searchParams.delete('lang');
+        return u.href;
+    }
+    function bygValjare() {
+        var dd = document.createElement('div');
+        dd.className = 'lab-lang-dd no-i18n';
+        var knp = document.createElement('button');
+        knp.type = 'button';
+        knp.className = 'lab-lang-glob';
+        knp.setAttribute('aria-haspopup', 'true');
+        knp.setAttribute('aria-expanded', 'false');
+        knp.setAttribute('aria-label', EN ? 'Language' : 'Språk');
+        knp.title = EN ? 'Language / Språk' : 'Språk / Language';
+        knp.innerHTML = GLOB;
+        var meny = document.createElement('div');
+        meny.className = 'lab-lang-meny';
+        meny.setAttribute('role', 'menu');
+        ['sv', 'en'].forEach(function (k) {
+            var a = document.createElement('a');
+            a.setAttribute('role', 'menuitemradio');
+            a.setAttribute('aria-checked', k === lang ? 'true' : 'false');
+            a.setAttribute('data-lang-fast', '1');
+            a.setAttribute('hreflang', k);
+            a.setAttribute('lang', k);
+            a.href = sprakUrl(k);
+            a.textContent = SPRAKNAMN[k];
+            a.addEventListener('click', function (e) {
+                if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+                e.preventDefault();
+                if (k === lang) { stang(); return; }
+                bytTill(k);
+            });
+            meny.appendChild(a);
+        });
+        function stang() {
+            dd.classList.remove('is-open');
+            knp.setAttribute('aria-expanded', 'false');
+        }
+        knp.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var opp = !dd.classList.contains('is-open');
+            dd.classList.toggle('is-open', opp);
+            knp.setAttribute('aria-expanded', opp ? 'true' : 'false');
+        });
+        document.addEventListener('click', function (e) { if (!dd.contains(e.target)) stang(); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') stang(); });
+        dd.appendChild(knp);
+        dd.appendChild(meny);
+        return dd;
+    }
+    // Lägger en väljare i el (en gång). Används av katalog.html.
+    function sprakvaljare(el) {
+        if (!AKTIV || !el || el.querySelector('.lab-lang-dd')) return;
+        laggCss();
+        el.appendChild(bygValjare());
+    }
     function knapp() {
         var navs = document.querySelectorAll('nav.lab-nav, .navbar .nav-menu');
         for (var i = 0; i < navs.length; i++) {
             var nav = navs[i];
-            if (nav.querySelector('.lab-lang')) continue;
-            var a = document.createElement('a');
-            var till = EN ? 'sv' : 'en';
-            a.className = 'lab-lang no-i18n';
-            a.setAttribute('data-lang-fast', '1');
-            a.setAttribute('hreflang', till);
-            a.setAttribute('lang', till);
-            var u = new URL(window.location.href);
-            if (till === 'en') u.searchParams.set('lang', 'en'); else u.searchParams.delete('lang');
-            a.href = u.href;
-            a.title = EN ? 'Visa sidan på svenska' : 'Show this page in English';
-            a.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>' +
-                (EN ? 'Svenska' : 'English');
-            a.addEventListener('click', function (e) {
-                if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
-                e.preventDefault();
-                bytTill(till);
-            });
+            if (nav.querySelector('.lab-lang-dd')) continue;
+            var dd = bygValjare();
             if (nav.nodeName === 'UL') {
-                var li = document.createElement('li'); li.appendChild(a); nav.appendChild(li);
-            } else nav.appendChild(a);
+                var li = document.createElement('li'); li.appendChild(dd); nav.appendChild(li);
+            } else nav.appendChild(dd);
         }
     }
 
     function onReady() {
         if (!AKTIV) return;   // sidan har ingen engelsk version ännu
-        var st = document.createElement('style');
-        st.textContent = CSS;
-        document.head.appendChild(st);
+        laggCss();
         hreflang();
         knapp();
         // React-sidor ritar sidhuvudet efter DOMContentLoaded: leta igen en stund.
@@ -544,6 +611,7 @@
         svgEtiketter: svgEtiketter,
         innehall: innehall,
         katalog: katalog,
+        sprakvaljare: sprakvaljare,
         kurskod: function (namn) { return KODER[namn] || null; },
         lang: lang,
         en: EN,

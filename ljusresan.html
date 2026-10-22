@@ -2435,7 +2435,7 @@ window.addEventListener('scroll', () => {
   }, 280);
 }, { passive: true });
 /* Färden till en annan värld (piltangenterna, rutten, knapparna).
-   Fotonen ska flyta fram: en sträcka tar cirka 2,9 till 3,9 sekunder,
+   Fotonen ska flyta fram: en sträcka tar cirka 5,5 till 7,5 sekunder,
    lite längre ju längre det är mellan himlakropparna i scenen. Kameran står
    still precis vid varje värld (u < 0,16 och u > 0,92 i resPose), så de
    bitarna av skrollsträckan hoppas över: rörelsen börjar direkt, och
@@ -2449,7 +2449,7 @@ function stracksTider() {
   const a = nyPose(), b = nyPose(), g = [];
   for (let k = 0; k < NS - 1; k++) { pose(k, 0, a); pose(k + 1, 0, b); g.push(a.pos.distanceTo(b.pos)); }
   const lo = Math.min(...g), hi = Math.max(...g);
-  fardSekunder = g.map((d) => 2.85 + 1.0 * (hi > lo ? (d - lo) / (hi - lo) : 0.5));
+  fardSekunder = g.map((d) => 5.5 + 2.0 * (hi > lo ? (d - lo) / (hi - lo) : 0.5));
   return fardSekunder;
 }
 // aktiva bitar (där kameran rör sig) mellan s0 och s1, i färdriktningen
@@ -2474,7 +2474,7 @@ function gaTillStopp(i, snabbt) {
   // tid för varje bit: sträckans tid gånger hur stor del av den aktiva delen biten är
   bitar.forEach((x) => { x.t = tider[x.k] * Math.abs(x.b - x.a) / (AKTIV1 - AKTIV0); });
   let T = bitar.reduce((sum, x) => sum + x.t, 0);
-  if (bitar.length > 1) { const tak = Math.min(8, 2.4 + 1.4 * bitar.length); if (T > tak) { bitar.forEach((x) => { x.t *= tak / T; }); T = tak; } }
+  if (bitar.length > 1) { const tak = Math.min(14, 4 + 2.4 * bitar.length); if (T > tak) { bitar.forEach((x) => { x.t *= tak / T; }); T = tak; } }
   const t0 = performance.now();
   if (!bitar.length) {
     // bara stillastående del kvar (landningen sista biten): en kort glidning

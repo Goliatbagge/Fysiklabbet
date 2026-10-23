@@ -684,6 +684,7 @@ window.LJUS_EN = {
  "Bortom Pluto": "Beyond Pluto",
  "Rymdsonden framför dig är Voyager 1, det föremål som människor har skickat längst bort. Den sköts upp 1977 och är nu ungefär 170 gånger så långt från solen som jorden. Ljuset behöver nästan ett helt dygn för att nå den, och härifrån är solen bara en ljusstark stjärna. Under resan stod världarna på rad och avstånden var hoptryckta, men ljusklockan visade de verkliga tiderna.": "The space probe in front of you is Voyager 1, the most distant object people have ever sent. It was launched in 1977 and is now about 170 times as far from the Sun as Earth is. Light needs almost a whole day to reach it, and from here the Sun is just a bright star. On the journey the worlds stood in a row and the distances were squeezed together, but the light clock showed the real times.",
  "Ljuset": "Light",
+ "Ljuset just nu": "Light now",
  "Närmaste stjärnan": "Nearest star",
  "Resan dit": "Getting there",
  "cirka 170 AE": "about 170 AU",

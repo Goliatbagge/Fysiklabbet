@@ -1163,7 +1163,7 @@ function sig(n, k = 3) {
 function nb(s) { return s.replace(/(\d) /g, '$1' + NB).replace(/ · /g, NB + '·' + NB); }
 function tidText(sek) {
   if (sek < 3600) { const m = Math.floor(sek / 60), s = Math.round(sek % 60); return `${m}${NB}min ${s}${NB}s`; }
-  const h = Math.floor(sek / 3600), m = Math.round((sek % 3600) / 60);
+  const tot = Math.round(sek / 60), h = Math.floor(tot / 60), m = tot % 60;   // aldrig "23 h 60 min"
   return `${h}${NB}h ${m}${NB}min`;
 }
 function sci(n, k = 3) {
@@ -1739,7 +1739,7 @@ const LAYOUT = {
   pluto: { Z: 1110, X: 11, Y: 3, R: 1.25 },
 };
 // Verkliga avstånd från solen i AE (månen: jordens avstånd plus avståndet jorden–månen)
-const AE_AVST = { solen: 0, merkurius: 0.387, venus: 0.723, jorden: 1, manen: 1.00257, mars: 1.524, jupiter: 5.203, saturnus: 9.537, uranus: 19.19, neptunus: 30.07, pluto: 39.48, slut: 170 };
+const AE_AVST = { solen: 0, merkurius: 0.387, venus: 0.723, jorden: 1, manen: 1.00257, mars: 1.524, jupiter: 5.203, saturnus: 9.537, uranus: 19.19, neptunus: 30.07, pluto: 39.48, get slut() { return voyagerAE(); } };
 const SKOTT_STD = { alt: 0.3, upp: 36, dip: 0.97, bank: 19 };
 const SKOTT = {
   solen: { alt: 0.16, dip: 0.9, bank: 0 },
@@ -2756,7 +2756,7 @@ STOPP.forEach((id, i) => {
   const li = document.createElement('li');
   li.style.top = (i / (NS - 1) * 100) + '%';
   const namn = id === 'slut' ? 'Voyager 1' : PLANETER[i].namn;
-  const tid = id === 'slut' ? 'cirka 23 h 34 min' : (i === 0 ? 'start' : tidText(ljusTid(AE_AVST[id])));
+  const tid = id === 'slut' ? tidText(ljusTid(voyagerAE())) : (i === 0 ? 'start' : tidText(ljusTid(AE_AVST[id])));
   li.innerHTML = `<button data-stopp="${i}"><span class="prick" style="color:${id === 'slut' ? '#9aa3b8' : PLANETER[i].acc}"></span><span>${namn}<span class="t">${nb(tid)}</span></span></button>`;
   // ett klick i rutten hoppar direkt till världen, utan färden dit
   li.querySelector('button').addEventListener('click', () => gaTillStopp(i, true));
@@ -2789,14 +2789,30 @@ function fyllStopptext(i) {
         </span>
       </div>`;
   } else if (i === NS - 1) {
+    // dagar kvar till ljusdygnet räknas i besökarens kalender, så att "i dag" stämmer
+    const idag = new Date(); idag.setHours(0, 0, 0, 0);
+    const dagar = Math.round((new Date(2026, 10, 18) - idag) / 864e5);
+    const ljusMening = EN
+      ? (dagar > 1 ? `Light needs almost a whole day to reach it, and in ${dagar} days, on 18 November 2026, it will become the first object to be a whole light day from Earth.`
+        : dagar === 1 ? 'Light needs almost a whole day to reach it, and tomorrow, on 18 November 2026, it will become the first object to be a whole light day from Earth.'
+        : dagar === 0 ? 'Today, 18 November 2026, Voyager 1 becomes the first object to be a whole light day from Earth.'
+        : 'Light needs more than a day to reach it. On 18 November 2026 it became the first object to be a whole light day from Earth.')
+      : (dagar > 1 ? `Ljuset behöver nästan ett helt dygn för att nå den, och om ${dagar} dagar, den 18 november 2026, blir den det första föremål som är ett helt ljusdygn från jorden.`
+        : dagar === 1 ? 'Ljuset behöver nästan ett helt dygn för att nå den, och i morgon, den 18 november 2026, blir den det första föremål som är ett helt ljusdygn från jorden.'
+        : dagar === 0 ? 'I dag, den 18 november 2026, blir Voyager 1 det första föremål som är ett helt ljusdygn från jorden.'
+        : 'Ljuset behöver mer än ett dygn för att nå den. Den 18 november 2026 blev den det första föremål som är ett helt ljusdygn från jorden.');
+    // ingressen byggs här i båda språken: den ändras med datumet och kan inte slås upp i ordlistan
+    const ingress = EN
+      ? `The space probe in front of you is Voyager 1, the most distant object people have ever sent. It was launched in 1977 and is now about 170 times as far from the Sun as Earth is. ${ljusMening} From here the Sun is just a bright star. On the journey the worlds stood in a row and the distances were squeezed together, but the light clock showed the real times.`
+      : `Rymdsonden framför dig är Voyager 1, det föremål som människor har skickat längst bort. Den sköts upp 1977 och är nu ungefär 170 gånger så långt från solen som jorden. ${ljusMening} Härifrån är solen bara en ljusstark stjärna. Under resan stod världarna på rad och avstånden var hoptryckta, men ljusklockan visade de verkliga tiderna.`;
     stopptext.innerHTML = `
       <div class="s-rad"><div class="s-nr">∞</div><div class="s-kicker">Stopp <b>12</b> av 12</div></div>
       <h2 class="s-namn lang">Bortom Pluto</h2>
       <div class="s-stråle"></div>
-      <p class="s-ingress">Rymdsonden framför dig är Voyager 1, det föremål som människor har skickat längst bort. Den sköts upp 1977 och är nu ungefär 170 gånger så långt från solen som jorden. Ljuset behöver nästan ett helt dygn för att nå den, och härifrån är solen bara en ljusstark stjärna. Under resan stod världarna på rad och avstånden var hoptryckta, men ljusklockan visade de verkliga tiderna.</p>
+      <p class="s-ingress">${ingress}</p>
       <dl class="s-data">
-        <div><dt>Voyager 1</dt><dd>${nb('cirka 170 AE')}</dd></div>
-        <div><dt>Ljuset</dt><dd>${nb('nästan 24 h')}</dd></div>
+        <div><dt>Voyager 1</dt><dd>${fmt(voyagerAE(), 1)}${NB}${EN ? 'AU' : 'AE'}</dd></div>
+        <div><dt>Ljuset just nu</dt><dd data-voy-ljus>${voyagerLjusText()}</dd></div>
         <div><dt>Närmaste stjärnan</dt><dd>${nb('4,2 ljusår')}</dd></div>
         <div><dt>Resan dit</dt><dd>${nb('drygt 4 år')}</dd></div>
       </dl>
@@ -3340,7 +3356,13 @@ function uppdateraBanor(dt, w, h) {
    uppgifterna om skivans innehåll efter NASA:s förteckning över guldskivan.
    ===================================================================== */
 // Voyager 1 är ett ljusdygn (173,1 AE) från jorden den 18 november 2026 och fjärmar sig 3,565 AE per år
-function voyagerAE() { return 173.1 + 3.565 * (Date.now() - Date.UTC(2026, 10, 18)) / (365.25 * 864e5); }
+// Förankringen är exakt ett ljusdygn i sidans egna konstanter, så att ljusklockan slår om till 24:00:00 just den dagen.
+// (Funktionsdeklarationer: rutten längre upp anropar dem innan den här raden har körts.)
+function voyagerAE() { return 86400 * C_KM / AE_KM + 3.565 * (Date.now() - Date.UTC(2026, 10, 18)) / (365.25 * 864e5); }
+function voyagerLjusText() {
+  const sek = ljusTid(voyagerAE()), h = Math.floor(sek / 3600), m = Math.floor((sek % 3600) / 60), s = Math.floor(sek % 60);
+  return `${h}${NB}h ${m}${NB}min ${s}${NB}s`;
+}
 const VOY_FLIKAR = [['oversikt', 'Översikt'], ['skivan', 'Guldskivan'], ['resan', 'Resan'], ['teknik', 'Tekniken'], ['fordj', 'Fördjupning']];
 const VOY_LATTAR = [
   ['Brandenburgkonsert nr 2, första satsen', 'Johann Sebastian Bach, Tyskland'],
@@ -3965,6 +3987,8 @@ function uppdateraHUD(s, info) {
   const a = AE_AVST[STOPP[i]], b = i + 1 < NS ? AE_AVST[STOPP[i + 1]] : a;
   const ae = a + (b - a) * info.e;
   $('kTid').textContent = klockText(ljusTid(ae));
+  const voyLjus = stopptext.querySelector('[data-voy-ljus]');
+  if (voyLjus) { const t = voyagerLjusText(); if (voyLjus.textContent !== t) voyLjus.textContent = t; }
   $('kAvst').textContent = ae < 1e-6 ? 'vid solens yta' : `${fmt(ae * AE_KM / 1e6, ae * AE_KM / 1e6 >= 100 ? 0 : 1)}${NB}miljoner km · ${fmt(ae, ae < 10 ? 2 : 1)}${NB}AE`;
 
   // rutten

@@ -873,7 +873,7 @@ window.BEGREPP = [
   {
     id: 'kavitet',
     term: 'Kavitet',
-    former: ['kavitet', 'kaviteten', 'kaviteter', 'kaviteterna', 'mörk kavitet', 'resonator', 'resonatorn', 'ringresonator', 'ringresonatorn', 'terahertzresonator', 'terahertzresonatorn', 'spegelkavitet', 'spegelkaviteten', 'mekanisk resonator', 'mekaniska resonatorn', 'mekaniska resonatorer'],
+    former: ['kavitet', 'kaviteten', 'mikrovågskavitet', 'mikrovågskaviteten', 'kaviteter', 'kaviteterna', 'mörk kavitet', 'resonator', 'resonatorn', 'ringresonator', 'ringresonatorn', 'terahertzresonator', 'terahertzresonatorn', 'spegelkavitet', 'spegelkaviteten', 'mekanisk resonator', 'mekaniska resonatorn', 'mekaniska resonatorer'],
     kort: 'Ett litet inneslutet utrymme mellan speglar eller metallytor där bara vissa våglängder passar in. Kaviteten bestämmer därmed vilka elektromagnetiska svängningar som alls kan finnas i den.',
     relaterade: ['vakuumfluktuation', 'laser', 'metamaterial', 'terahertzstralning'],
     body: [
@@ -1986,7 +1986,7 @@ window.BEGREPP = [
   {
     id: 'elektronvolt',
     term: 'Elektronvolt',
-    former: ['elektronvolt', 'elektronvolten', 'elektronvolter', 'elektronvolterna',
+    former: ['elektronvolt', 'elektronvolten', 'mikroelektronvolt', 'elektronvolter', 'elektronvolterna',
              'kiloelektronvolt', 'kiloelektronvolten', 'kiloelektronvolter',
              'megaelektronvolt', 'megaelektronvolten', 'megaelektronvolter',
              'megaelektronvolterna', 'gigaelektronvolt', 'gigaelektronvolten',
@@ -3194,6 +3194,30 @@ window.BEGREPP = [
       { type: 'p', html: 'Alla partiklar hör till en av två familjer, och gränsen dras av spinnet, ett slags inbyggd rotation som bara kan anta bestämda värden. Partiklar med halvtaligt spinn kallas fermioner efter Enrico Fermi. Dit hör allt som materia är byggd av: elektroner, kvarkar, protoner, neutroner och neutriner. Partiklar med heltaligt spinn kallas i stället bosoner, och dit hör kraftbärarna som fotonen. Uppdelningen låter formell, men den ger de två familjerna helt olika beteenden.' },
       { type: 'p', html: 'Fermionernas kännetecken är att två likadana aldrig kan befinna sig i exakt samma tillstånd samtidigt. Regeln kallas Paulis uteslutningsprincip, och den är orsaken till att världen ser ut som den gör. Elektronerna i en atom kan inte alla lägga sig innerst där energin är lägst, utan tvingas fylla på utåt skal för skal. Det är den påtvingade fördelningen som ger grundämnena olika kemiska egenskaper och som gör det periodiska systemet begripligt. Samma spärr gör också att materia tar plats: din hand går inte genom bordet därför att elektronerna i de två ytorna vägrar dela tillstånd.' },
       { type: 'p', html: 'Spärren kan bära upp hela himlakroppar. I en vit dvärg och i en neutronstjärna har fusionen upphört, och det som hindrar gravitationen från att pressa ihop stjärnan är att fermionerna helt enkelt inte kan trängas närmare varandra. Sammansatta objekt räknas efter antalet byggstenar: med ett udda totalt antal protoner, neutroner och elektroner uppträder atomen som en fermion, med ett jämnt som en boson. Helium-3 och helium-4 hamnar därför i var sin familj och beter sig helt olika vid låga temperaturer. Och kopplas två fermioner ihop parvis, som elektronerna i en supraledare, uppträder paret utåt som en boson.' }
+    ]
+  },
+  {
+    id: 'kvantcyklotron',
+    term: 'Kvantcyklotron',
+    former: ['kvantcyklotron', 'kvantcyklotronen', 'kvantcyklotroner', 'kvantcyklotronerna'],
+    kort: 'En enda laddad partikel som går runt i ett starkt magnetfält och är så nedkyld att dess rörelse bara kan ha bestämda energier. Forskarna kan då se den hoppa ett energisteg i taget.',
+    relaterade: ['penningfalla', 'positron', 'magnetiskt-moment', 'spinn'],
+    body: [
+      { type: 'p', html: 'En laddad partikel i ett magnetfält går runt i en cirkel. Den magnetiska kraften drar hela tiden in den mot mitten, ungefär som snöret drar in en sten som du snurrar runt. Det märkliga är att antalet varv per sekund inte beror på farten: en snabbare partikel går i en större cirkel men hinner lika många varv. Varvtalet bestäms bara av partikelns laddning, dess massa och hur starkt magnetfältet är. Den rörelsen kallas cyklotronrörelse, efter en tidig sorts partikelaccelerator som byggde på samma princip.' },
+      { type: 'p', html: 'Kyler man en enda partikel tillräckligt mycket händer något nytt. Kvantfysiken tillåter då bara vissa bestämda energier för rörelsen, som pinnarna på en stege med lika långt mellan varje pinne. Vid vanlig temperatur är stegen så små att partikeln hela tiden knuffas upp och ner av värmen, och ingen märker att energin är uppdelad i steg. Vid några tiondels grader över den absoluta nollpunkten ligger partikeln däremot stilla på den nedersta pinnen. Då kallas uppställningen en kvantcyklotron.' },
+      { type: 'p', html: 'I en kvantcyklotron kan forskarna lyfta partikeln ett enda steg med mikrovågor och se när den faller tillbaka. Partikeln sitter i en penningfälla, och genom att mäta två frekvenser, hur snabbt den går runt och hur snabbt dess spinn vrider sig, kan man bestämma partikelns magnetiska moment. Med en elektron har det gett det noggrannaste mätvärde som finns för någon elementarpartikel, och år 2026 lyckades man för första gången bygga en kvantcyklotron med en positron.' }
+    ]
+  },
+  {
+    id: 'positronium',
+    term: 'Positronium',
+    former: ['positronium', 'positroniumet', 'positroniumatom', 'positroniumatomen', 'positroniumatomer', 'positroniumatomerna'],
+    kort: 'En atom utan kärna: en elektron och en positron som kretsar kring varandra. Den lever bara en kort stund innan de två förintar varandra.',
+    relaterade: ['positron', 'annihilation', 'antimateria'],
+    body: [
+      { type: 'p', html: 'En väteatom består av en tung proton och en lätt elektron som hålls ihop av den elektriska attraktionen mellan plus och minus. Byter man ut protonen mot en positron, elektronens antipartikel, får man positronium. Positronen har samma massa som elektronen, så ingen av dem sitter i mitten. I stället kretsar de kring en gemensam punkt mitt emellan sig, som två dansare som håller varandra i händerna.' },
+      { type: 'p', html: 'Positronium har energinivåer precis som väte, men energierna är bara ungefär hälften så stora. Atomen är dessutom kortlivad. I sitt grundtillstånd förintas paret efter en tiondels nanosekund eller drygt hundra nanosekunder, beroende på hur de två partiklarnas spinn är riktade. Kvar blir gammastrålning.' },
+      { type: 'p', html: 'Eftersom positronium saknar elektrisk laddning påverkas det inte av elektriska fält. Det kan utnyttjas för att leda in positroner i en fälla: en positron som tagit med sig en elektron glider obehindrat förbi de elektriska fälten, och först där fältet blir starkt nog slits paret isär och positronen fångas. Positronium används också för att pröva teorin för hur ljus och laddade partiklar växelverkar, eftersom atomen bara består av partiklar som man kan räkna exakt på.' }
     ]
   },
   {

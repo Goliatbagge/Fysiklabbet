@@ -15,6 +15,18 @@ Format per post:
 - **Minne i ett mikrofluidikchip: fibrer som minns hur vattnet flöt** **[BREVTEASER]** (nominerad 2026-10-19; originalet öppet, CC BY 4.0, publicerat 2026-10-09, sidan svarar 200) — Yale (Pahlavan, Rajput), ”Fluidic Hysterons and Memory in Flow Networks”, Physical Review X 2026, DOI 10.1103/hh4n-pw7w (PRX är öppen, CC BY). Ingång: hysteres, strömning. Strömningslära publicerades 2026-10-07. Källa (Phys.org 2026-10-14): https://phys.org/news/2026-10-memory-chip.html
   (tillagd 2026-10-15)
 
+- **Schrödingers förlorade manuskript visar hans syn på kvantslumpen** — fysikhistoria/kvantfysik, tidlös och läsvärd. Originalet ej kontrollerat. Källa (Phys.org 2026-10-22): https://phys.org/news/2026-10-lost-schrdinger-manuscript-reveals-true.html
+  (tillagd 2026-10-23)
+
+- **Kvantinterferens fångar elektronvågor i en metall för första gången** — fasta tillståndets fysik; OBS supraledning 2026-10-22, vänta några dagar. Originalet ej kontrollerat. Källa (Phys.org 2026-10-22): https://phys.org/news/2026-10-quantum-electron-metal.html
+  (tillagd 2026-10-23)
+
+- **Atomminne håller joner på avstånd sammanflätade i cirka 10 sekunder** — kvantkommunikation; OBS kvantfysik 2026-10-19. Originalet ej kontrollerat. Källa (Phys.org 2026-10-21): https://phys.org/news/2026-10-atomic-memory-distant-ions-entangled.html
+  (tillagd 2026-10-23)
+
+- **Ultrakorta ljuspulser följer molekylers rörelse med tre femtosekunders upplösning** — atom-/molekylfysik; OBS likt attosekundnyheten 2026-10-18, vänta. Originalet ej kontrollerat. Källa (Phys.org 2026-10-23): https://phys.org/news/2026-10-ultrafast-pulses-track-molecular-motion.html
+  (tillagd 2026-10-23)
+
 - **Ljusinducerad asymmetrisk pseudogap under Tc i kuprater (den andra supraledarstudien 2026-10-21)** — Armanno m.fl., Nature Physics 2026, DOI 10.1038/s41567-026-03446-6 (ej öppen enligt Crossref, kontrollera fulltext). OBS: supraledning publicerades 2026-10-22 (spinnfluktuationerna), vänta minst ett par veckor. Källa (Phys.org 2026-10-21): https://phys.org/news/2026-10-hidden-rivalry-quantum-states-heart.html
   (tillagd 2026-10-21, omskriven 2026-10-22)
 

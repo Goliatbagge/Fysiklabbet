@@ -103,6 +103,70 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-23-positronen-som-stannade",
+    date: "2026-10-23",
+    title: "En enda positron fångad och nedkyld i månader",
+    deck: "Fysiker i USA har fångat en enda positron, elektronens antipartikel, och kylt den så långt att den ligger stilla i sitt lägsta kvanttillstånd. Nu kan de se den hoppa ett energisteg i taget, och det öppnar för den skarpaste jämförelsen hittills mellan elektronen och positronen.",
+    category: "Partikelfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-23-positronen-som-stannade.jpg",
+    imageAlt: "Svartvitt, runt fotografi ur en dimkammare. En vågrät mörk rand, en blyplatta, delar bilden mitt itu. En tunn prickad linje kommer in nerifrån, går genom plattan och fortsätter uppåt i en båge som är tydligt mer krökt ovanför plattan än nedanför.",
+    imageCredit: "Foto: Carl D. Anderson, Physical Review 43, 491 (1933), fri från upphovsrätt, via Wikimedia Commons, beskuren. Det första fotografiet av en positron, taget 2 augusti 1932. Bilden visar inte det nya experimentet.",
+    tags: ["partikelfysik", "antimateria", "positron", "penningfälla", "magnetfält", "cirkulär rörelse", "energinivåer", "kvantfysik", "spinn", "magnetiskt moment", "cpt-symmetri", "standardmodellen", "radioaktivitet", "northwestern"],
+    sources: [
+      { name: "Northwestern University: Scientists trap and tame a single particle of antimatter for months (21 oktober 2026)", url: "https://news.northwestern.edu/stories/2026/10/scientists-trap-and-tame-a-single-particle-of-antimatter-for-months" },
+      { name: "Physics Magazine (APS): A Quantum Cyclotron for Antimatter (21 oktober 2026)", url: "https://physics.aps.org/articles/v19/132" },
+      { name: "Physics World: One-positron quantum cyclotron could put the Standard Model to the test (20 oktober 2026)", url: "https://physicsworld.com/?p=131118" },
+      { name: "arXiv: studien i fulltext (öppet tillgänglig)", url: "https://arxiv.org/abs/2605.08147" }
+    ],
+    research: {
+      citation: "T. G. Myers, L. Soucy, B. A. D. Sukra, B. Sinha och G. Gabrielse, ”One-Positron Quantum Cyclotron”, Physical Review Letters 137, 173001 (2026). Förtryck: arXiv:2605.08147",
+      url: "https://doi.org/10.1103/gbkc-6nlj"
+    },
+    larare: {
+      moment: [
+        { label: "Laddade partiklar i magnetfält", href: "katalog.html?id=fy2-3.4" },
+        { label: "Cirkulär rörelse", href: "katalog.html?id=fy2-1.5" },
+        { label: "Bohrs atommodell och energinivåer", href: "katalog.html?id=fy2-4.8" },
+        { label: "Radioaktivt sönderfall", href: "katalog.html?id=fy1-9.3" }
+      ],
+      fragor: [
+        "Visa med hjälp av den magnetiska kraften och centripetalkraften att varvtalet för en laddad partikel i ett magnetfält inte beror på farten. Varför är det en fördel när man vill mäta mycket noggrant?",
+        "Energistegen i positronens bana motsvarar ungefär 7,5 K. Förklara varför fällan måste hållas vid 0,3 K och inte bara vid 4 K, som är temperaturen hos flytande helium.",
+        "Forskarna väntar sig att positronen och elektronen har exakt lika stora magnetiska moment. Varför är det ändå värt flera års arbete att mäta det?"
+      ]
+    },
+    body: [
+      { type: 'p', html: 'En positron är elektronens spegelbild: samma massa, lika stor laddning men med motsatt tecken. Möter den en elektron försvinner båda och blir strålning. Eftersom vår värld är full av elektroner brukar en positron därför inte överleva länge. Nu har fysiker vid Northwestern University i USA fångat en enda positron och hållit den kvar i månader, nedkyld så långt att den ligger stilla i sitt lägsta möjliga energitillstånd.' },
+      { type: 'p', html: 'Det har aldrig gjorts förut med en positron. Uppställningen kallas en kvantcyklotron, och studien publicerades den 21&nbsp;oktober i den kollegialt granskade tidskriften <em>Physical Review Letters</em>. Gruppen leds av Gerald Gabrielse, som tidigare har gjort samma sak med en elektron och med den mätt elektronens magnetiska egenskaper noggrannare än någon annan egenskap hos någon elementarpartikel.' },
+      { type: 'quote', html: 'Vi kyler den så mycket att den hamnar i sitt kvantmekaniska grundtillstånd. Vi har faktiskt fått den här mycket snabba positronen att ligga still och uppföra sig i månader i sträck.', cite: 'Gerald Gabrielse, Northwestern University, i universitetets pressmeddelande (översatt)' },
+      { type: 'h2', text: 'Från nära ljusets hastighet till nästan stillastående' },
+      { type: 'p', html: 'Positronerna kommer från en liten, helt inkapslad bit radioaktivt natrium-22. När en kärna sönderfaller skickas en positron ut med en rörelseenergi på upp till 546&nbsp;keV, vilket motsvarar närmare 90&nbsp;procent av ljusets hastighet. Den positron som till slut fångas har en värmeenergi på bara 26&nbsp;mikroelektronvolt, ungefär en tjugomiljarddel av startenergin.' },
+      { type: 'p', html: 'Inbromsningen sker i flera steg. Positronerna passerar ett titanfönster som är 10&nbsp;mikrometer tjockt och bromsas sedan i en kristall av volfram. De allra långsammaste knuffas ut ur kristallens yta, och en sådan positron kan på vägen ut dra med sig en elektron. Paret bildar en lös atom, positronium, som är elektriskt neutral och därför kan glida in genom ett hål på 0,6&nbsp;millimeter i fällans vägg utan att stoppas av de elektriska fälten. Först inne i fällan blir fältet så starkt att paret slits isär. Elektronen försvinner, men positronen blir kvar.' },
+      { type: 'p', html: 'Det går långsamt. Källan är svag, med omkring 670&nbsp;000 sönderfall per sekund, och det tar 8 till 11&nbsp;timmar innan en positron fastnar. Men när den väl sitter där behöver den inte bytas ut.' },
+      { type: 'h2', text: 'En bana med bestämda energisteg' },
+      { type: 'p', html: 'Fällan är en så kallad penningfälla: en uppsättning elektroder inuti en supraledande spole som ger ett magnetfält på 5,6&nbsp;tesla, omkring 100&nbsp;000 gånger starkare än jordens. Magnetfältet tvingar positronen att gå runt i en liten cirkel, och elektroderna hindrar den från att glida i väg längs fältet. Hela fällan hålls vid 0,3&nbsp;kelvin med en utspädningskryostat, och kylan gör samtidigt vakuumet så gott att positronen inte stöter på någon gasatom att förintas mot.' },
+      { type: 'p', html: 'Det fina med cirkelrörelsen i ett magnetfält är att varvtalet inte beror på farten. Den magnetiska kraften $q \\cdot v \\cdot B$ är centripetalkraften $\\dfrac{m \\cdot v^2}{r}$, och ur det följer att frekvensen blir $f = \\dfrac{q \\cdot B}{2\\pi \\cdot m}$. En snabbare positron går i en större cirkel men gör lika många varv per sekund. I fältet på 5,6&nbsp;tesla blir det omkring 156&nbsp;miljarder varv per sekund.' },
+      { type: 'p', html: 'I kvantfysiken kan rörelsen bara ha vissa bestämda energier, som pinnar på en stege med lika långt mellan pinnarna. Ett steg motsvarar en temperatur på ungefär 7,5&nbsp;kelvin. Vid 0,3&nbsp;kelvin räcker värmen inte till för att lyfta positronen ett enda steg: sannolikheten är bara omkring en på hundra miljarder. Därför ligger den på stegens nedersta pinne.' },
+      { type: 'h2', text: 'Att se ett kvanthopp utan att störa det' },
+      { type: 'p', html: 'För att lyfta positronen ett steg skickar forskarna in mikrovågor med just rätt frekvens. Svårigheten är att se att den har flyttat sig. Positronen svänger samtidigt fram och tillbaka längs magnetfältet, cirka 206&nbsp;miljoner gånger per sekund, och den svängningen ger en svag elektrisk signal i elektroderna. Ringar av nickel runt fällan gör magnetfältet lite ojämnt, och då ändras frekvensen hos den svängningen med 3,8&nbsp;hertz för varje steg positronen tar. Mätningen avslöjar alltså vilket energitillstånd positronen befinner sig i, utan att ändra det.' },
+      { type: 'p', html: 'Det kräver tid. Fritt i rummet skulle positronen falla tillbaka till botten på 83&nbsp;millisekunder genom att sända ut strålning, och det är för kort för att signalen från en enda partikel ska gå att mäta. Elektroderna är därför formade som en sluten mikrovågskavitet som gör det svårt för strålningen att komma ut, och livslängden blir omkring 4&nbsp;sekunder. I mätningarna syns tydliga trappsteg: positronen hoppar upp ett steg, ligger kvar en stund och faller sedan ned igen.' },
+      { type: 'p', html: 'Forskarna såg också positronens spinn vända. Att varje hopp ger samma förskjutning, omkring 3,8&nbsp;hertz, är dessutom beviset på att det bara finns en positron i fällan. Med två positroner hade förskjutningen blivit hälften så stor.' },
+      { type: 'h2', text: 'En spegel som borde vara perfekt' },
+      { type: 'p', html: 'Målet är att mäta positronens magnetiska moment, alltså hur starkt den beter sig som en liten magnet. Det visar sig i förhållandet mellan hur snabbt spinnet vrider sig och hur snabbt positronen går runt. Enligt standardmodellen, partikelfysikens teori, ska positronen och elektronen ha exakt lika stora magnetiska moment. Det följer av en grundläggande symmetri, CPT-symmetrin, som säger att en värld av antimateria i spegelbild och med baklänges tid ska bete sig precis som vår.' },
+      { type: 'p', html: 'Elektronens magnetiska moment mätte samma grupp år 2023 med en noggrannhet på en del på tio biljoner. Den bästa jämförelsen mellan de två är däremot från 1987, gjord med en klassisk metod. Den visade att de är lika inom 2,1&nbsp;delar på en biljon, ungefär 16 gånger grövre än dagens elektronmätning. Lyckas forskarna mäta positronen lika noggrant som elektronen skulle det enligt studien testa symmetrin mer än 30 gånger skarpare än i dag för elektronen och dess antipartikel.' },
+      { type: 'quote', html: 'Nuvarande teorier säger att de två mätningarna inte kommer att skilja sig åt. Om det visar sig att de inte är lika skulle det vara den största upptäckten inom fysiken under det senaste århundradet.', cite: 'Gerald Gabrielse, i universitetets pressmeddelande (översatt)' },
+      { type: 'p', html: 'Själva mätningen är inte gjord än. Forskarna skriver att det återstår att finslipa uppställningen och att det tar lång tid att gå igenom alla felkällor. Men den svåraste delen är avklarad: positronen ligger där, i sitt grundtillstånd, och väntar.' },
+      { type: 'fact', title: 'Visste du?', items: [
+        'Huvudbilden är det första fotografiet av en positron. Carl Anderson tog det i en dimkammare med ett magnetfält år 1932. Partikeln kom underifrån och tappade energi i en blyplatta, så att banan blev mer krökt ovanför plattan. När rörelseriktningen var känd visade böjningen att laddningen var positiv. Anderson fick Nobelpriset i fysik 1936.',
+        'Med formeln $f = \\dfrac{q \\cdot B}{2\\pi \\cdot m}$ och $B = 5{,}6\\ \\mathrm{T}$ blir positronens varvtal knappt 157&nbsp;GHz. Studien anger omkring 156&nbsp;GHz. Skillnaden beror på att både fältet och frekvensen är avrundade.',
+        'Även protonen och antiprotonen har jämförts på samma sätt, men där är noggrannheten bara en del på en miljard.',
+        'I det högre av de två spinnlägena skulle positronen enligt forskarnas beräkning ligga kvar i genomsnitt 2,1&nbsp;år innan spinnet vänder av sig självt.'
+      ] },
+      { type: 'p', html: 'Universum borde ha fått lika mycket materia som antimateria vid Big Bang, och de två borde ha förintat varandra. Att vi finns visar att något skiljer dem åt. En enda nedkyld positron kan bli ett av de skarpaste verktyg som finns för att leta efter den skillnaden.' }
+    ]
+  },
+  {
     "id": "2026-10-22-spinnen-som-limmar-elektronerna",
     "date": "2026-10-22",
     "title": "Flimrande magnetism kan vara limmet i en gåtfull supraledare",

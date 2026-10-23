@@ -3013,8 +3013,12 @@ function kopplaRaknare(p) {
     const tyngd = panelMassa * p.g;
     const hopp = 0.5 * 9.82 / p.g;
     const fall = Math.sqrt(2 * 10 / p.g);
+    // Massan som skulle ge samma tyngd på jorden, så att newtontalet går att känna på
+    const kannsSom = tyngd / 9.82;
+    const kannsSomTxt = kannsSom >= 10 ? fmt(Math.round(kannsSom)) : sig(kannsSom, 2);
     const rader = [
-      [`Din tyngd, <i>F</i><sub>G</sub> = <i>m</i> · <i>g</i>`, `${sig(tyngd, 3)}${NB}N`],
+      [`Din tyngd, <i>F</i><sub>G</sub> = <i>m</i> · <i>g</i>`, `${sig(tyngd, 3)}${NB}N`
+        + (p.id === 'jorden' ? '' : `<span style="display:block;text-align:right;font-weight:400;font-size:12px;color:var(--dim)">(känns som ${kannsSomTxt}${NB}kg på jorden)</span>`)],
       ['Tyngden jämfört med på jorden', `${sig(p.g / 9.82, 2)} gånger så stor`],
       ['Ett hopp på 50 cm på jorden blir här', hopp >= 1 ? `${sig(hopp, 2)}${NB}m` : `${sig(hopp * 100, 2)}${NB}cm`],
       ['Ett fall från 10 m höjd tar', `${sig(fall, 2)}${NB}s`],

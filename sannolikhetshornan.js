@@ -2053,7 +2053,7 @@ const ALLA_VALORER = Array.from({ length: 13 }, (_, i) => i + 1);
 function standardLage() {
   return {
     // standard: enfärgade vita tärningar med svarta prickar
-    tarningar: { lista: [nyTarning(6, 'elfenben'), nyTarning(6, 'elfenben')], vy: 'summa', farger: 'samma' },
+    tarningar: { lista: [nyTarning(6, 'elfenben'), nyTarning(6, 'elfenben')], vy: 'summa', farger: 'samma', tillagg: 0 },
     kort: { farger: ['S', 'H', 'D', 'C'], valorer: ALLA_VALORER.slice(), jokrar: 0, antal: 1, ater: false, vy: 'farg' },
     urna: { innehall: [{ key: 'rod', n: 5 }, { key: 'bla', n: 3 }, { key: 'gul', n: 2 }], antal: 1, ater: true },
     hjul: { sektorer: HJULMALLAR.lika() },
@@ -2066,7 +2066,7 @@ function lasLage() {
     const t = LS.get('tarningar', null);
     if (t && Array.isArray(t.lista) && t.lista.length >= 1 && t.lista.length <= 12 &&
         t.lista.every(d => [2, 4, 6, 8, 10, 12, 20].includes(d.sides) && Array.isArray(d.labels) && d.labels.length === d.sides && Array.isArray(d.sidfarg) && d.sidfarg.length === d.sides)) {
-      s.tarningar = { lista: t.lista.map(d => d.sides === 2 ? nyTarning(6, tfarg(d.farg).key) : ({ sides: d.sides, farg: tfarg(d.farg).key, labels: d.labels.map(l => String(l).slice(0, 6)), sidfarg: d.sidfarg.map(x => (typeof x === 'string' && /^#[0-9a-f]{6}$/i.test(x)) ? x : null) })), vy: t.vy === 'varje' ? 'varje' : 'summa', farger: t.farger === 'olika' ? 'olika' : 'samma' };
+      s.tarningar = { lista: t.lista.map(d => d.sides === 2 ? nyTarning(6, tfarg(d.farg).key) : ({ sides: d.sides, farg: tfarg(d.farg).key, labels: d.labels.map(l => String(l).slice(0, 6)), sidfarg: d.sidfarg.map(x => (typeof x === 'string' && /^#[0-9a-f]{6}$/i.test(x)) ? x : null) })), vy: t.vy === 'varje' ? 'varje' : 'summa', farger: t.farger === 'olika' ? 'olika' : 'samma', tillagg: clamp(Math.round(+t.tillagg || 0), -99, 99) };
       // sparat från före färgvalet: börja i standardläget, vita tärningar
       if (!t.farger) s.tarningar.lista.forEach(d => { d.farg = 'elfenben'; });
     }
@@ -2119,7 +2119,37 @@ function myntSammanfattning(utf) {
 const inc = (m, k) => m.set(k, (m.get(k) || 0) + 1);
 const talNyckel = v => { const r = Math.round(v * 1e6) / 1e6; return String(r).replace('.', ',').replace('-', '−'); };
 const allaNumeriska = () => ST.tarningar.lista.every(d => d.labels.every(l => !isNaN(parseTal(l))));
-function tarningVy() { return ST.tarningar.lista.length > 1 && allaNumeriska() && ST.tarningar.vy === 'summa' ? 'summa' : 'varje'; }
+/** Talet som läggs till summan, som +4 i 2T8+4. */
+const tTillagg = () => ST.tarningar.tillagg || 0;
+const tSumma = data => data.reduce((a, u) => a + u.num, tTillagg());
+const tecken = k => (k < 0 ? '−' : '+') + Math.abs(k);
+/** Kastet skrivet som i rollspel: 2T8+1T6+4. */
+function tUttryck() {
+  const n = new Map();
+  for (const d of ST.tarningar.lista) n.set(d.sides, (n.get(d.sides) || 0) + 1);
+  const k = tTillagg();
+  return [...n].map(([s, c]) => c + 'T' + s).join('+') + (k ? tecken(k).replace('−', '-') : '');
+}
+/** Tolkar "2T8+1T6+4" (även d i stället för T). Ger { sidor, k } eller { fel }. */
+function tolkaUttryck(str) {
+  const t = String(str).replace(/\s+/g, '').replace(/[−–]/g, '-').toUpperCase().replace(/D/g, 'T');
+  const exempel = 'Skriv till exempel 2T8+1T6+4.';
+  if (!/^[+-]?(\d*T\d+|\d+)([+-](\d*T\d+|\d+))*$/.test(t)) return { fel: exempel };
+  const sidor = []; let k = 0;
+  for (const m of t.matchAll(/([+-]?)(?:(\d*)T(\d+)|(\d+))/g)) {
+    if (m[3] !== undefined) {
+      if (m[1] === '-') return { fel: 'Tärningar kan bara läggas till, inte dras ifrån.' };
+      const n = m[2] === '' ? 1 : +m[2], s = +m[3];
+      if (![4, 6, 8, 10, 12, 20].includes(s)) return { fel: 'Tärningarna kan ha 4, 6, 8, 10, 12 eller 20 sidor.' };
+      if (n < 1 || sidor.length + n > 12) return { fel: 'Det går att kasta 1 till 12 tärningar.' };
+      for (let i = 0; i < n; i++) sidor.push(s);
+    } else k += (m[1] === '-' ? -1 : 1) * +m[4];
+  }
+  if (!sidor.length) return { fel: 'Ta med minst en tärning. ' + exempel };
+  if (Math.abs(k) > 99) return { fel: 'Talet som läggs till får vara högst 99.' };
+  return { sidor, k };
+}
+function tarningVy() { return (ST.tarningar.lista.length > 1 || tTillagg()) && allaNumeriska() && ST.tarningar.vy === 'summa' ? 'summa' : 'varje'; }
 const HJUL_NYCKEL = (s, i) => s.text.trim() || 'Sektor ' + (i + 1);
 
 /** Kategorierna i diagrammet: { key, label, num, den, farg? } i visningsordning. */
@@ -2132,7 +2162,7 @@ function kategorier() {
   if (mode === 'tarningar') {
     const lista = ST.tarningar.lista;
     if (tarningVy() === 'summa') {
-      let dist = new Map([[0, 1]]), den = 1;
+      let dist = new Map([[tTillagg(), 1]]), den = 1;
       for (const d of lista) {
         const nd = new Map();
         for (const [s, w] of dist) for (const l of d.labels) { const v = Math.round((s + parseTal(l)) * 1e6) / 1e6; nd.set(v, (nd.get(v) || 0) + w); }
@@ -2177,9 +2207,9 @@ function registrera(m, data, tyst = false) {
   if (m === 'tarningar') {
     S.n++;
     data.forEach(u => inc(S.c.varje, u.key)); S.nVarje += data.length;
-    if (data.every(u => !isNaN(u.num))) { const sum = data.reduce((a, u) => a + u.num, 0); inc(S.c.summa, talNyckel(sum)); if (tarningVy() === 'summa') key = talNyckel(sum); }
+    if (data.every(u => !isNaN(u.num))) { const sum = tSumma(data); inc(S.c.summa, talNyckel(sum)); if (tarningVy() === 'summa') key = talNyckel(sum); }
     if (!key && data.length === 1) key = data[0].key;
-    chip = tarningVy() === 'summa' ? esc(talNyckel(data.reduce((a, u) => a + u.num, 0))) : data.map(u => (u.farg ? `<i style="background:${u.farg}"></i>` : '') + esc(u.text)).join(' · ');
+    chip = tarningVy() === 'summa' ? esc(talNyckel(tSumma(data))) : data.map(u => (u.farg ? `<i style="background:${u.farg}"></i>` : '') + esc(u.text)).join(' · ');
   } else if (m === 'mynt') {
     S.n++;
     const [a, b] = myntNamn(), k = data.filter(u => u.li === 0).length;
@@ -2242,7 +2272,11 @@ function renderSettings() {
   if (mode === 'tarningar') {
     const L = ST.tarningar.lista, alla = L.every(d => d.sides === L[0].sides) ? L[0].sides : 0;
     h += `<div class="grp"><div class="grp-h"><span class="eyebrow">Tärningar</span></div>
-      <div class="row"><b>Antal</b>${stepper('t-antal', L.length, 1, 12)}</div>
+      <div class="row"><b>Kast</b></div>
+      <label class="uttryck"><input type="text" data-inp="t-uttryck" value="${esc(tUttryck())}" spellcheck="false" autocomplete="off" maxlength="40" aria-label="Kastet skrivet som i rollspel, till exempel 2T8+1T6+4"></label>
+      <p class="note" id="uttryckNot">Skriv som i rollspel: 2T8+1T6+4 är två åttasidiga tärningar och en sexsidig, och 4 läggs till summan.</p>
+      <div class="row" style="margin-top:12px"><b>Antal</b>${stepper('t-antal', L.length, 1, 12)}</div>
+      <div class="row" style="margin-top:10px"><b>Lägg till summan</b>${stepper('t-tillagg', tTillagg(), -99, 99).replace(/<output>-?\d+<\/output>/, `<output>${tTillagg() ? tecken(tTillagg()) : '0'}</output>`)}</div>
       <div class="row" style="margin-top:12px"><b>Sort för alla</b></div>
       <div class="seg">${[4, 6, 8, 10, 12, 20].map(s => `<button type="button" data-act="t-typ" data-v="${s}" aria-pressed="${alla === s}">${s === 2 ? 'Mynt' : s}</button>`).join('')}</div>
       <div class="row" style="margin-top:12px"><b>Färg</b></div>
@@ -2312,7 +2346,7 @@ function renderSettings() {
 const ENHET = { tarningar: ['kast', 'kast'], mynt: ['kast', 'kast'], kort: ['draget kort', 'dragna kort'], urna: ['dragen kula', 'dragna kulor'], hjul: ['snurr', 'snurr'] };
 function renderResultat() {
   const S = STAT[mode];
-  const vyer = mode === 'tarningar' && ST.tarningar.lista.length > 1 && allaNumeriska()
+  const vyer = mode === 'tarningar' && (ST.tarningar.lista.length > 1 || tTillagg()) && allaNumeriska()
     ? [['summa', 'Summa'], ['varje', 'Varje tärning']]
     : mode === 'mynt' && ST.mynt.antal > 1 ? [['antal', 'Antal ' + myntNamn()[0].toLowerCase()], ['sida', 'Varje mynt']]
     : mode === 'kort' ? [['farg', 'Färg'], ['valor', 'Valör'], ['rodsvart', 'Röd eller svart']] : null;
@@ -2442,11 +2476,13 @@ function doljUtfall() { utfallEl.classList.remove('on'); }
 // ---- Utfall från scenen ----
 Tarningar.onResult = utf => {
   registrera('tarningar', utf);
-  if (utf.length === 1) visaUtfall(`<span class="u-lbl">Utfall</span><span class="u-val">${esc(utf[0].text)}</span>`);
+  const numeriskt = utf.every(u => !isNaN(u.num));
+  if (utf.length === 1 && !(tTillagg() && numeriskt)) visaUtfall(`<span class="u-lbl">Utfall</span><span class="u-val">${esc(utf[0].text)}</span>`);
   else {
-    const chips = utf.map(u => `<span class="u-chip">${u.farg ? `<i style="background:${u.farg}"></i>` : ''}${esc(u.text)}</span>`).join('');
+    const chips = utf.map(u => `<span class="u-chip">${u.farg ? `<i style="background:${u.farg}"></i>` : ''}${esc(u.text)}</span>`).join('')
+      + (tTillagg() && numeriskt ? `<span class="u-chip u-tillagg">${tecken(tTillagg())}</span>` : '');
     let sum = '';
-    if (utf.every(u => !isNaN(u.num))) sum = `<span class="u-sum"><small>Summa</small>${esc(talNyckel(utf.reduce((a, u) => a + u.num, 0)))}</span>`;
+    if (numeriskt) sum = `<span class="u-sum"><small>Summa</small>${esc(talNyckel(tSumma(utf)))}</span>`;
     else {
       // specialtärningar med ord eller färger: räkna ihop, "2 röd, 1 blå"
       const antal = new Map(); utf.forEach(u => antal.set(u.text, (antal.get(u.text) || 0) + 1));
@@ -2548,6 +2584,7 @@ function handling(act, el) {
       if (UI.sel >= L.length) UI.sel = -1;
       tarningarAndrade(); renderSettings(); break;
     }
+    case 't-tillagg': if (Tarningar.busy) return; ST.tarningar.tillagg = clamp(tTillagg() + d, -99, 99); if (ST.tarningar.tillagg) ST.tarningar.vy = 'summa'; UI.valdKey = null; visade = new Map(); tarningarAndrade(); renderSettings(); break;
     case 't-typ': if (Tarningar.busy) return; L.forEach((t, j) => { L[j] = nyTarning(+v, t.farg); }); tarningarAndrade(); renderSettings(); break;
     case 't-chip': UI.sel = UI.sel === i ? -1 : i; renderSettings(); break;
     case 't-sidor': if (Tarningar.busy) return; L[UI.sel] = nyTarning(+v, L[UI.sel].farg); tarningarAndrade(); renderSettings(); break;
@@ -2615,7 +2652,29 @@ settingsEl.addEventListener('input', e => {
   else if (t.dataset.inp === 'h-text') { ST.hjul.sektorer[i].text = t.value; hjulAndrat(false, false); }
   else if (t.dataset.inp === 'h-farg') { ST.hjul.sektorer[i].farg = t.value; hjulAndrat(false, false); }
 });
-settingsEl.addEventListener('change', e => { if (e.target.dataset.inp === 't-lbl') renderSettings(); });
+settingsEl.addEventListener('change', e => {
+  if (e.target.dataset.inp === 't-lbl') renderSettings();
+  if (e.target.dataset.inp === 't-uttryck') tillampaUttryck(e.target);
+});
+settingsEl.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.dataset.inp === 't-uttryck') { e.preventDefault(); tillampaUttryck(e.target); } });
+/** Ställer upp tärningarna efter ett uttryck som 2T8+1T6+4. Tärningar som
+ *  redan har rätt antal sidor behålls, med sina egna sidor och färger. */
+function tillampaUttryck(inp) {
+  if (Tarningar.busy) { renderSettings(); return; }
+  if (inp.value.replace(/\s/g, '').toUpperCase().replace(/D/g, 'T') === tUttryck().toUpperCase()) { inp.value = tUttryck(); return; }
+  const r = tolkaUttryck(inp.value);
+  if (r.fel) {
+    inp.parentNode.classList.add('fel');
+    const not = $('#uttryckNot'); if (not) not.textContent = r.fel;
+    return;
+  }
+  const L = ST.tarningar.lista, olika = ST.tarningar.farger === 'olika';
+  ST.tarningar.lista = r.sidor.map((s, j) => L[j] && L[j].sides === s ? L[j] : nyTarning(s, olika ? TFARGER[j % TFARGER.length].key : (L[0] ? L[0].farg : 'elfenben')));
+  ST.tarningar.tillagg = r.k;
+  if (r.sidor.length > 1 || r.k) ST.tarningar.vy = 'summa';
+  UI.sel = -1; UI.valdKey = null; visade = new Map();
+  tarningarAndrade(); renderSettings();
+}
 // Staplarna: peka eller klicka för exakta värden.
 resultsEl.addEventListener('pointerover', e => { const r = e.target.closest('#chart .hit'); if (!r) return; UI.valdKey = r.dataset.k; $('#chart').querySelectorAll('rect.bar').forEach(b => b.classList.toggle('hl', b.dataset.k === UI.valdKey)); renderInfo(); });
 

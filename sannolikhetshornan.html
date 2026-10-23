@@ -52,6 +52,7 @@
    },
    "featureList": [
     "Tärningar med 4, 6, 8, 10, 12 eller 20 sidor",
+    "Tärningskast som i rollspel, till exempel 2T8+1T6+4",
     "Mynt för krona och klave, med fördelningen av antalet krona",
     "Egna specialtärningar där varje sida kan redigeras",
     "Kortlek där färger, valörer och jokrar väljs fritt",
@@ -254,6 +255,11 @@ button, input, select { font-family: inherit; }
 .face input { width: 100%; min-width: 0; border: 0; outline: 0; font: 600 14px var(--sans); color: var(--ink); background: none; padding: 3px 0; }
 .face button { width: 18px; height: 18px; flex: none; border-radius: 5px; border: 0; cursor: pointer; box-shadow: inset 0 0 0 1px rgba(0,0,0,.2); padding: 0; }
 .face:focus-within { border-color: var(--accent); }
+.uttryck { display: block; margin-top: 8px; background: #fff; border: 1px solid var(--line2); border-radius: 10px; padding: 4px 10px; }
+.uttryck input { width: 100%; border: 0; outline: 0; background: none; font: 600 16px var(--mono); color: var(--ink); padding: 4px 0; }
+.uttryck:focus-within { border-color: var(--accent); }
+.uttryck.fel, .uttryck.fel:focus-within { border-color: #c0283a; }
+.uttryck.fel + .note { color: #c0283a; }
 
 /* Urna och lyckohjul: listrader */
 .lista { display: flex; flex-direction: column; gap: 6px; }
@@ -571,7 +577,7 @@ button, input, select { font-family: inherit; }
 
     <h2>Fem slumpförsök</h2>
     <h3>Tärningar</h3>
-    <p>Kasta upp till tolv tärningar på en gång, med 4, 6, 8, 10, 12 eller 20 sidor. Med flera tärningar kan diagrammet visa summan, och då syns det tydligt att summan 7 är vanligast med två sexsidiga tärningar. Klicka på en tärning i listan för att göra en specialtärning: skriv vad som ska stå på varje sida och ge sidorna egna färger.</p>
+    <p>Kasta upp till tolv tärningar på en gång, med 4, 6, 8, 10, 12 eller 20 sidor. Med flera tärningar kan diagrammet visa summan, och då syns det tydligt att summan 7 är vanligast med två sexsidiga tärningar. Klicka på en tärning i listan för att göra en specialtärning: skriv vad som ska stå på varje sida och ge sidorna egna färger. Spelar du rollspel kan du skriva kastet som du är van vid, till exempel 2T8+1T6+4: då kastas två åttasidiga tärningar och en sexsidig, och 4 läggs till summan.</p>
     <h3>Mynt</h3>
     <p>Singla slant med upp till tolv mynt på en egen bricka. Utfallet sammanfattas, till exempel 5 krona och 3 klave, och diagrammet kan visa hur många av mynten som landade med krona uppåt. Med två mynt är en krona och en klave vanligare än två krona, eftersom det kan hända på två sätt.</p>
     <h3>Kortlek</h3>
@@ -607,7 +613,7 @@ button, input, select { font-family: inherit; }
 
 <!-- Versionsnumret gör att HTML och skript alltid hör ihop: GitHub Pages låter
      webbläsaren spara filerna i tio minuter. Öka numret när skriptet ändras. -->
-<script type="module" src="sannolikhetshornan.js?v=202610231200"></script>
+<script type="module" src="sannolikhetshornan.js?v=202610231800"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

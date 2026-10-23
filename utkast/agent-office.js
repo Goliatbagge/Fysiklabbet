@@ -1207,7 +1207,7 @@
   // storlekar ("g" läses som "s"), och det här ska synas på en projektor.
   const FONT = "'Poppins', system-ui, sans-serif";
   // Textförstoring i scenen, så att allt går att läsa på en projektor.
-  // Reglaget "Textstorlek" går från 1× (normal) till 4× (ungefär 2,7 gånger
+  // Reglaget "Textstorlek" (bara texten i scenen, inte sidopanelen) går från 1× (normal) till 4× (ungefär 2,7 gånger
   // det gamla projektorläget 1,5×). Knappen "Större text" hoppar mellan 1×
   // och 3×. Valet minns i webbläsaren. TXT är skalan som scentexten räknas i.
   const TXT_NORMAL = 1.6, TEXT_MIN = 1, TEXT_MAX = 4, TEXT_STOR = 3;
@@ -1524,8 +1524,6 @@
     TXT = TXT_NORMAL * textFaktor;
     textReglage.value = textFaktor;
     textVarde.textContent = textEtikett(textFaktor);
-    // Sidopanelens listor växer med, men mindre än scentexten (högst 2,2×).
-    document.documentElement.style.setProperty('--dom', String(1 + (textFaktor - 1) * 0.4));
     const stor = textFaktor > 1;
     textKnapp.classList.toggle('aktiv', stor); textKnapp.setAttribute('aria-pressed', String(stor));
     if (spara) { try { localStorage.setItem('agentkontor.textStorlek', String(textFaktor)); } catch (e) { /* ingen lagring */ } }

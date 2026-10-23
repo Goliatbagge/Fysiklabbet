@@ -121,7 +121,7 @@ const HTML = [
   [R`        Större text
       </button>`, R`        Larger text
       </button>`],
-  [R`title="Gör namnskyltar, pratbubblor och händelseloggen större, upp till 4 gånger">Textstorlek`, R`title="Make name labels, speech bubbles and the event log larger, up to 4 times">Text size`],
+  [R`title="Gör namnskyltar, pratbubblor och skyltar i kontoret större, upp till 4 gånger">Textstorlek`, R`title="Make name labels, speech bubbles and signs in the office larger, up to 4 times">Text size`],
   [R`aria-label="Textstorlek"`, R`aria-label="Text size"`],
   [R`<button class="knapp" id="omKnapp">Om kontoret</button>`, R`<button class="knapp" id="omKnapp">About the office</button>`],
   [R`href="agent-office.html" hreflang="en" lang="en" title="English version" aria-label="English version">`, R`href="agentkontoret.html" hreflang="sv" lang="sv" title="Svensk version" aria-label="Svensk version">`],

@@ -677,18 +677,8 @@ table.svar td input.kort-tal { width: 70px; }
           <h2><em>Tredubbla</em> pengarna</h2>
           <div class="forberedd"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 7.5 5.5 11 12 3"/></svg>Räntelabbets mål är nu tredubbla beloppet</div>
           <div class="fraga">
-            <p class="q"><span class="qn">17</span><span>Hur lång tid tar det att tredubbla pengarna?</span></p>
-            <div class="tabell-wrap">
-              <table class="svar" id="t14">
-                <thead><tr><th>Räntesats (%)</th><th>Tredubblingstid (år, en decimal)</th><th>Räntesats · tid</th></tr></thead>
-                <tbody>
-                  <tr data-r="3" data-mal="3"><td>3</td><td><input type="text" inputmode="decimal" aria-label="3 %, år till tredubbling" data-spara id="t14a"></td><td class="auto"></td></tr>
-                  <tr data-r="6" data-mal="3"><td>6</td><td><input type="text" inputmode="decimal" aria-label="6 %, år till tredubbling" data-spara id="t14b"></td><td class="auto"></td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="kontroll"><button class="knapp" type="button" data-kontrollera="t14">Kontrollera</button></div>
-            <div class="aterkoppling" id="t14-svar" aria-live="polite"></div>
+            <p class="q"><span class="qn">17</span><span>Hur lång tid tar det att tredubbla pengarna? Undersök det med Räntelabbet på det sätt ni vill. Skriv vad ni prövade och vad ni kom fram till.</span></p>
+            <textarea id="q14t" data-spara aria-label="Fråga 17"></textarea>
           </div>
           <div class="fraga">
             <p class="q"><span class="qn">18</span><span>Finns det en tredubblingsregel på samma sätt? Vilket tal ska stå i den?</span></p>
@@ -999,8 +989,7 @@ table.svar td input.kort-tal { width: 70px; }
       ut.textContent = {
         t4: 'Rätt. Alla belopp fördubblas under år 12. Startbeloppet spelar ingen roll. På nästa sida förklarar ni varför.',
         t6: 'Rätt. Titta på kolumnen räntesats · tid och skriv in heltalet nedan.',
-        t8: 'Rätt. Lägg märke till 2 %: efter 35 år är beloppet 1,9999 gånger insättningen, så fördubblingen sker precis efter 35 år.',
-        t14: 'Rätt. Jämför räntesats · tid med fördubblingen. Vilket tal hamnar ni nära nu?'
+        t8: 'Rätt. Lägg märke till 2 %: efter 35 år är beloppet 1,9999 gånger insättningen, så fördubblingen sker precis efter 35 år.'
       }[tabellId];
       svar[tabellId + 'ok'] = true; spara();
     } else if (helaAr) {
@@ -1110,7 +1099,7 @@ table.svar td input.kort-tal { width: 70px; }
     });
   }
   function uppdateraAllt() {
-    ['t6', 't8', 't14'].forEach(autoKolumn);
+    ['t6', 't8'].forEach(autoKolumn);
     regelVarde(); uppdateraJamforelser();
     if (skarmar[nu] && skarmar[nu].dataset.skarm === 'gissa') {
       $('nasta-txt').textContent = svar.last ? 'Nästa' : 'Lås gissningarna';
@@ -1439,7 +1428,7 @@ table.svar td input.kort-tal { width: 70px; }
     tab('t13p', 'Fråga 14 (fyra och sexton gånger så stort)');
     rad.push('Fråga 15: ' + $('q12v').value);
     rad.push('Fråga 16: ' + $('q13').value);
-    tab('t14', 'Fråga 17 (tredubbling)');
+    rad.push('Fråga 17 (tredubbling): ' + $('q14t').value);
     rad.push('Fråga 18: ' + $('q15').value);
     return rad.join('\n');
   }

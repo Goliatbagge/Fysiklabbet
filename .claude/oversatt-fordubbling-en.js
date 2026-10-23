@@ -145,8 +145,6 @@ const PAR = [
   [R`<span class="qn">6</span><span>Fyll i tabellen.</span>`, R`<span class="qn">6</span><span>Fill in the table.</span>`],
   [R`<span class="qn">8</span><span>Fyll i tabellen.</span>`, R`<span class="qn">8</span><span>Fill in the table.</span>`],
   [R`<th>Räntesats (%)</th><th>Fördubblingstid (år, en decimal)</th><th>Räntesats · tid</th>`, R`<th>Interest rate (%)</th><th>Doubling time (years, one decimal)</th><th>Rate · time</th>`],
-  [R`<th>Räntesats (%)</th><th>Tredubblingstid (år, en decimal)</th><th>Räntesats · tid</th>`, R`<th>Interest rate (%)</th><th>Tripling time (years, one decimal)</th><th>Rate · time</th>`],
-  [R` %, år till tredubbling"`, R` %, years to triple"`],
   [R` %, år"`, R` %, years"`],
   [R`<label for="q6n">Räntesats · tid hamnar nära heltalet</label>`, R`<label for="q6n">Rate · time ends up close to the whole number</label>`],
 
@@ -252,7 +250,8 @@ const PAR = [
   [R`<p class="delmarke">Utmaning</p>`, R`<p class="delmarke">Challenge</p>`],
   [R`<h2><em>Tredubbla</em> pengarna</h2>`, R`<h2><em>Triple</em> your money</h2>`],
   [R`Räntelabbets mål är nu tredubbla beloppet</div>`, R`The Interest Lab's target is now three times the deposit</div>`],
-  [R`<span>Hur lång tid tar det att tredubbla pengarna?</span>`, R`<span>How long does it take to triple your money?</span>`],
+  [R`<span>Hur lång tid tar det att tredubbla pengarna? Undersök det med Räntelabbet på det sätt ni vill. Skriv vad ni prövade och vad ni kom fram till.</span>`, R`<span>How long does it take to triple your money? Investigate it with the Interest Lab in any way you like. Write down what you tried and what you found.</span>`],
+  [R`aria-label="Fråga 17"`, R`aria-label="Question 17"`],
   [R`<span>Finns det en tredubblingsregel på samma sätt? Vilket tal ska stå i den?</span>`, R`<span>Is there a tripling rule in the same way? Which number should it contain?</span>`],
   [R`aria-label="Fråga 18"`, R`aria-label="Question 18"`],
 
@@ -324,12 +323,10 @@ const PAR = [
     else ut.textContent = paminn ? 'Answer questions 1, 2 and 3 before you move on.' : 'When you move on, your guesses are locked.';`],
   [R`t4: 'Rätt. Alla belopp fördubblas under år 12. Startbeloppet spelar ingen roll. På nästa sida förklarar ni varför.',
         t6: 'Rätt. Titta på kolumnen räntesats · tid och skriv in heltalet nedan.',
-        t8: 'Rätt. Lägg märke till 2 %: efter 35 år är beloppet 1,9999 gånger insättningen, så fördubblingen sker precis efter 35 år.',
-        t14: 'Rätt. Jämför räntesats · tid med fördubblingen. Vilket tal hamnar ni nära nu?'`,
+        t8: 'Rätt. Lägg märke till 2 %: efter 35 år är beloppet 1,9999 gånger insättningen, så fördubblingen sker precis efter 35 år.'`,
    R`t4: 'Correct. Every deposit doubles during year 12. The deposit does not matter. On the next page you explain why.',
         t6: 'Correct. Look at the column rate · time and type the whole number below.',
-        t8: 'Correct. Notice 2 %: after 35 years the amount is 1.9999 times the deposit, so the doubling happens just after 35 years.',
-        t14: 'Correct. Compare rate · time with the doubling. Which number do you end up close to now?'`],
+        t8: 'Correct. Notice 2 %: after 35 years the amount is 1.9999 times the deposit, so the doubling happens just after 35 years.'`],
   [R`? 'Rätt. 72-regeln ger 36, 9 och 8 i huvudet, och Räntelabbet visar ungefär 35,0, 9,0 och 8,0. Huvudräkningen kommer nära, särskilt vid låga räntor.'
         : 'Rätt. 4 är två fördubblingar och 16 är fyra. Varje fördubbling tar ungefär 9 år, så x ≈ 2 · 9 = 18 och x ≈ 4 · 9 = 36. Räntelabbet visar 18,0 och 36,0. I Matematik 2 lär ni er logaritmer, som ger exakta svar.';`,
    R`? 'Correct. The rule of 72 gives 36, 9 and 8 in your head, and the Interest Lab shows about 35.0, 9.0 and 8.0. Mental arithmetic gets close, especially at low rates.'
@@ -417,7 +414,7 @@ const PAR = [
     tab('t13p', 'Fråga 14 (fyra och sexton gånger så stort)');
     rad.push('Fråga 15: ' + $('q12v').value);
     rad.push('Fråga 16: ' + $('q13').value);
-    tab('t14', 'Fråga 17 (tredubbling)');
+    rad.push('Fråga 17 (tredubbling): ' + $('q14t').value);
     rad.push('Fråga 18: ' + $('q15').value);`,
    R`tab('t4', 'Question 4');
     rad.push('Question 5: ' + $('q5').value);
@@ -434,7 +431,7 @@ const PAR = [
     tab('t13p', 'Question 14 (four and sixteen times as large)');
     rad.push('Question 15: ' + $('q12v').value);
     rad.push('Question 16: ' + $('q13').value);
-    tab('t14', 'Question 17 (tripling)');
+    rad.push('Question 17 (tripling): ' + $('q14t').value);
     rad.push('Question 18: ' + $('q15').value);`],
   [R`function klart() { st.textContent = 'Svaren är kopierade.'; }`, R`function klart() { st.textContent = 'Your answers have been copied.'; }`],
   [R`st.textContent = 'Kopieringen misslyckades. Skriv ut sidan i stället.';`, R`st.textContent = 'Copying failed. Print the page instead.';`],

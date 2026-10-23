@@ -680,18 +680,8 @@ table.svar td input.kort-tal { width: 70px; }
           <h2><em>Triple</em> your money</h2>
           <div class="forberedd"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 7.5 5.5 11 12 3"/></svg>The Interest Lab's target is now three times the deposit</div>
           <div class="fraga">
-            <p class="q"><span class="qn">17</span><span>How long does it take to triple your money?</span></p>
-            <div class="tabell-wrap">
-              <table class="svar" id="t14">
-                <thead><tr><th>Interest rate (%)</th><th>Tripling time (years, one decimal)</th><th>Rate · time</th></tr></thead>
-                <tbody>
-                  <tr data-r="3" data-mal="3"><td>3</td><td><input type="text" inputmode="decimal" aria-label="3 %, years to triple" data-spara id="t14a"></td><td class="auto"></td></tr>
-                  <tr data-r="6" data-mal="3"><td>6</td><td><input type="text" inputmode="decimal" aria-label="6 %, years to triple" data-spara id="t14b"></td><td class="auto"></td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="kontroll"><button class="knapp" type="button" data-kontrollera="t14">Check</button></div>
-            <div class="aterkoppling" id="t14-svar" aria-live="polite"></div>
+            <p class="q"><span class="qn">17</span><span>How long does it take to triple your money? Investigate it with the Interest Lab in any way you like. Write down what you tried and what you found.</span></p>
+            <textarea id="q14t" data-spara aria-label="Question 17"></textarea>
           </div>
           <div class="fraga">
             <p class="q"><span class="qn">18</span><span>Is there a tripling rule in the same way? Which number should it contain?</span></p>
@@ -1002,8 +992,7 @@ table.svar td input.kort-tal { width: 70px; }
       ut.textContent = {
         t4: 'Correct. Every deposit doubles during year 12. The deposit does not matter. On the next page you explain why.',
         t6: 'Correct. Look at the column rate · time and type the whole number below.',
-        t8: 'Correct. Notice 2 %: after 35 years the amount is 1.9999 times the deposit, so the doubling happens just after 35 years.',
-        t14: 'Correct. Compare rate · time with the doubling. Which number do you end up close to now?'
+        t8: 'Correct. Notice 2 %: after 35 years the amount is 1.9999 times the deposit, so the doubling happens just after 35 years.'
       }[tabellId];
       svar[tabellId + 'ok'] = true; spara();
     } else if (helaAr) {
@@ -1113,7 +1102,7 @@ table.svar td input.kort-tal { width: 70px; }
     });
   }
   function uppdateraAllt() {
-    ['t6', 't8', 't14'].forEach(autoKolumn);
+    ['t6', 't8'].forEach(autoKolumn);
     regelVarde(); uppdateraJamforelser();
     if (skarmar[nu] && skarmar[nu].dataset.skarm === 'gissa') {
       $('nasta-txt').textContent = svar.last ? 'Next' : 'Lock my guesses';
@@ -1442,7 +1431,7 @@ table.svar td input.kort-tal { width: 70px; }
     tab('t13p', 'Question 14 (four and sixteen times as large)');
     rad.push('Question 15: ' + $('q12v').value);
     rad.push('Question 16: ' + $('q13').value);
-    tab('t14', 'Question 17 (tripling)');
+    rad.push('Question 17 (tripling): ' + $('q14t').value);
     rad.push('Question 18: ' + $('q15').value);
     return rad.join('\n');
   }

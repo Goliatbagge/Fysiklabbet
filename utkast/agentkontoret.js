@@ -115,6 +115,8 @@
   mobel('skrivbord', 12, 21, 3, 1, { dator: true, stor: true, agare: 'webbdesigner' });
   mobel('testbank', 4, 25, 4, 1, { dyn: true, agare: 'testare' });
   mobel('hylla', 11, 18, 5, 1); mobel('vaxt', 15, 27, 1, 1);
+  mobel('skrivbord', 9, 25, 3, 1, { dator: true, agare: 'matematiker' });
+  mobel('skrivbord', 13, 25, 3, 1, { dator: true, agare: 'fysikexpert' });
   // Bildateljén
   mobel('staffli', 19, 21, 1, 1, { dyn: true });
   mobel('fargbord', 17, 25, 2, 1);
@@ -123,6 +125,7 @@
   mobel('skrivbord', 23, 21, 3, 1, { dator: true, agare: 'nyhetsbrev' });
   mobel('skrivbord', 27, 21, 3, 1, { dator: true, headset: true, agare: 'svarsagent' });
   mobel('brevlada', 28, 26, 1, 1);
+  mobel('skrivbord', 24, 25, 3, 1, { dator: true, headset: true, agare: 'rostmanus' });
   // Mötesrummet
   mobel('motesbord', 32, 21, 5, 3);
   mobel('tavla', 35, 18, 3, 1, { dyn: true });
@@ -174,6 +177,15 @@
     testare: { namn: 'Testaren', roll: 'Kvalitetskontroll', hem: [6, 26, 'upp'], fil: 'testare.md', modell: 'Haiku',
       text: 'Provkör simuleringarna efter varje ändring och letar fel i fysik, gränssnitt och mobilvy.',
       look: { hud: '#f5d0b0', har: '#6d4c41', stil: 'keps', keps: '#27ae60', troja: '#95a5a6', byxa: '#34495e' } },
+    fysikexpert: { namn: 'Fysikexperten', roll: 'Fysikgranskning på expertnivå', hem: [14, 26, 'upp'], fil: 'fysikexpert.md', modell: 'Opus',
+      text: 'Granskar att fysiken är rätt, på en nivå över kursplanen: formler och härledningar, enheter, tecken, talvärden, förenklingar, kraftfigurer och simuleringarnas modell. Rapporterar fel med belägg men skriver aldrig om något själv.',
+      look: { hud: '#e0ac85', har: '#9e9e9e', stil: 'flint', troja: '#1f3a5f', byxa: '#2b2b33', glasogon: true } },
+    matematiker: { namn: 'Matematikern', roll: 'Matematikgranskning', hem: [10, 26, 'upp'], fil: 'matematiker.md', modell: 'Opus',
+      text: 'Räknar om varje steg i teori, övningar, pennlösningar och provlösningar: svar och facit, avrundning, notation, definitionsmängder och att metoden passar kursens nivå. Rapporterar fel men ändrar aldrig stil eller upplägg.',
+      look: { hud: '#f2cfae', har: '#4a2c1a', stil: 'knut', troja: '#c0392b', byxa: '#3b3b4f', glasogon: true } },
+    rostmanus: { namn: 'Röstmanusförfattaren', roll: 'Talmanus till lösningsfilmer', hem: [25, 26, 'upp'], fil: 'rostmanus.md', modell: 'Opus',
+      text: 'Skriver det som berättarrösten säger i lösningsfilmerna, med all matematik i uttalad svenska så som en lärare säger den vid tavlan. Skriver aldrig text som eleven ska se.',
+      look: { hud: '#c99872', har: '#222', stil: 'lockar', troja: '#00897b', byxa: '#37474f', headset: true } },
     'image-creator': { namn: 'Bildmakaren', roll: 'AI-bilder', hem: [19, 23, 'upp'], fil: 'image-creator.md', modell: 'Sonnet',
       text: 'Tar fram bilder med Googles Gemini när det inte finns någon fri bild att använda, till exempel till en nyhetsartikel.',
       look: { hud: '#e8b48a', har: '#7b1fa2', stil: 'lang', troja: '#ff8a65', byxa: '#4a4a4a', basker: '#222' } },
@@ -206,7 +218,7 @@
     look: { hud: '#f2c7a2', har: '#6b3f2a', stil: 'kort', troja: '#e9a68a', byxa: '#5a4a48', liten: true } };
   const AGENT_FARG = {
     nyhetsagent: '#6aa7ff', utgivare: '#ef5f5f', korrekturlasare: '#b58cf0', pedagog: '#5fd08a', grafik: '#2ec4b6',
-    webbdesigner: '#f1c40f', testare: '#95a5a6', 'image-creator': '#ff8a65', nyhetsbrev: '#e67e22', svarsagent: '#7c8cff',
+    webbdesigner: '#f1c40f', testare: '#95a5a6', fysikexpert: '#4dabf7', matematiker: '#ff6b6b', rostmanus: '#26c6da', 'image-creator': '#ff8a65', nyhetsbrev: '#e67e22', svarsagent: '#7c8cff',
     'facebook-agent': '#4c6ef5', 'instagram-agent': '#ff6fae', claude: '#e8845f', larare: '#6fcf97', hjalp: '#e9a68a',
     sitemap: '#6aa7ff', vakt: '#5fd08a', servervakt: '#f0a04b', 'general-purpose': '#e9a68a',
   };
@@ -617,6 +629,9 @@
       if (agentId === 'korrekturlasare') svar = 'Språket är granskat';
       if (agentId === 'pedagog') svar = 'Fysiken är granskad';
       if (agentId === 'grafik') svar = 'Figurerna är klara';
+      if (agentId === 'fysikexpert') svar = e.utslag ? 'Utslag: ' + e.utslag : 'Fysiken är kontrollerad';
+      if (agentId === 'matematiker') svar = e.utslag ? 'Utslag: ' + e.utslag : 'Matematiken är kontrollerad';
+      if (agentId === 'rostmanus') svar = 'Manuset är klart';
       saga(A, svar, 2300, farg);
       gor(A, () => {
         const r = { s: simT, text: `${A.namn}: ${svar.replace(/^Utslag: /, '')}`, farg: AGENT_FARG[agentId] };

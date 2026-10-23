@@ -191,6 +191,8 @@
   mobel('skrivbord', 12, 21, 3, 1, { dator: true, stor: true, agare: 'webbdesigner' });
   mobel('testbank', 4, 25, 4, 1, { dyn: true, agare: 'testare' });
   mobel('hylla', 11, 18, 5, 1); mobel('vaxt', 15, 27, 1, 1);
+  mobel('skrivbord', 9, 25, 3, 1, { dator: true, agare: 'matematiker' });
+  mobel('skrivbord', 13, 25, 3, 1, { dator: true, agare: 'fysikexpert' });
   // Bildateljén
   mobel('staffli', 19, 21, 1, 1, { dyn: true });
   mobel('fargbord', 17, 25, 2, 1);
@@ -199,6 +201,7 @@
   mobel('skrivbord', 23, 21, 3, 1, { dator: true, agare: 'nyhetsbrev' });
   mobel('skrivbord', 27, 21, 3, 1, { dator: true, headset: true, agare: 'svarsagent' });
   mobel('brevlada', 28, 26, 1, 1);
+  mobel('skrivbord', 24, 25, 3, 1, { dator: true, headset: true, agare: 'rostmanus' });
   // Mötesrummet
   mobel('motesbord', 32, 21, 5, 3);
   mobel('tavla', 35, 18, 3, 1, { dyn: true });
@@ -250,6 +253,15 @@
     testare: { namn: 'Tester', roll: 'Quality control', hem: [6, 26, 'upp'], fil: 'testare.md', modell: 'Haiku',
       text: 'Test-runs the simulations after every change and looks for errors in physics, interface and mobile view.',
       look: { hud: '#f5d0b0', har: '#6d4c41', stil: 'keps', keps: '#27ae60', troja: '#95a5a6', byxa: '#34495e' } },
+    fysikexpert: { namn: 'Physics expert', roll: 'Expert physics review', hem: [14, 26, 'upp'], fil: 'fysikexpert.md', modell: 'Opus',
+      text: 'Checks that the physics is right, at a level above the curriculum: formulas and derivations, units, signs, numerical values, simplifications, force diagrams and the models behind the simulations. Reports errors with evidence but never rewrites anything itself.',
+      look: { hud: '#e0ac85', har: '#9e9e9e', stil: 'flint', troja: '#1f3a5f', byxa: '#2b2b33', glasogon: true } },
+    matematiker: { namn: 'Mathematician', roll: 'Mathematics review', hem: [10, 26, 'upp'], fil: 'matematiker.md', modell: 'Opus',
+      text: 'Recalculates every step in lessons, exercises, pen solutions and exam solutions: answers and answer keys, rounding, notation, domains and whether the method suits the course level. Reports errors but never changes style or structure.',
+      look: { hud: '#f2cfae', har: '#4a2c1a', stil: 'knut', troja: '#c0392b', byxa: '#3b3b4f', glasogon: true } },
+    rostmanus: { namn: 'Voice script writer', roll: 'Voice-over scripts for solution videos', hem: [25, 26, 'upp'], fil: 'rostmanus.md', modell: 'Opus',
+      text: 'Writes what the narrator says in the solution videos, with all the mathematics spelled out in spoken Swedish the way a teacher says it at the board. Never writes text that the student is meant to see.',
+      look: { hud: '#c99872', har: '#222', stil: 'lockar', troja: '#00897b', byxa: '#37474f', headset: true } },
     'image-creator': { namn: 'Image maker', roll: 'AI images', hem: [19, 23, 'upp'], fil: 'image-creator.md', modell: 'Sonnet',
       text: 'Creates images with Google\'s Gemini when there is no free image to use, for example for a news article.',
       look: { hud: '#e8b48a', har: '#7b1fa2', stil: 'lang', troja: '#ff8a65', byxa: '#4a4a4a', basker: '#222' } },
@@ -282,7 +294,7 @@
     look: { hud: '#f2c7a2', har: '#6b3f2a', stil: 'kort', troja: '#e9a68a', byxa: '#5a4a48', liten: true } };
   const AGENT_FARG = {
     nyhetsagent: '#6aa7ff', utgivare: '#ef5f5f', korrekturlasare: '#b58cf0', pedagog: '#5fd08a', grafik: '#2ec4b6',
-    webbdesigner: '#f1c40f', testare: '#95a5a6', 'image-creator': '#ff8a65', nyhetsbrev: '#e67e22', svarsagent: '#7c8cff',
+    webbdesigner: '#f1c40f', testare: '#95a5a6', fysikexpert: '#4dabf7', matematiker: '#ff6b6b', rostmanus: '#26c6da', 'image-creator': '#ff8a65', nyhetsbrev: '#e67e22', svarsagent: '#7c8cff',
     'facebook-agent': '#4c6ef5', 'instagram-agent': '#ff6fae', claude: '#e8845f', larare: '#6fcf97', hjalp: '#e9a68a',
     sitemap: '#6aa7ff', vakt: '#5fd08a', servervakt: '#f0a04b', 'general-purpose': '#e9a68a',
   };
@@ -693,6 +705,9 @@
       if (agentId === 'korrekturlasare') svar = 'The language is reviewed';
       if (agentId === 'pedagog') svar = 'The physics is reviewed';
       if (agentId === 'grafik') svar = 'The figures are ready';
+      if (agentId === 'fysikexpert') svar = e.utslag ? 'Verdict: ' + e.utslag : 'The physics is checked';
+      if (agentId === 'matematiker') svar = e.utslag ? 'Verdict: ' + e.utslag : 'The mathematics is checked';
+      if (agentId === 'rostmanus') svar = 'The script is ready';
       saga(A, svar, 2300, farg);
       gor(A, () => {
         const r = { s: simT, text: `${A.namn}: ${svar.replace(/^Verdict: /, '')}`, farg: AGENT_FARG[agentId] };

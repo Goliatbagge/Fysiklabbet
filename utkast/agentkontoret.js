@@ -1131,11 +1131,17 @@
   // storlekar ("g" läses som "s"), och det här ska synas på en projektor.
   const FONT = "'Poppins', system-ui, sans-serif";
   // Textförstoring i scenen, så att allt går att läsa på en projektor.
-  // Knappen "Större text" växlar till projektorläget (TXT_STOR), och valet
-  // minns i webbläsaren.
-  const TXT_NORMAL = 1.6, TXT_STOR = 2.4;
-  let TXT = TXT_NORMAL;
-  try { if (localStorage.getItem('agentkontor.storText') === '1') TXT = TXT_STOR; } catch (e) { /* ingen lagring */ }
+  // Reglaget "Textstorlek" går från 1× (normal) till 4× (ungefär 2,7 gånger
+  // det gamla projektorläget 1,5×). Knappen "Större text" hoppar mellan 1×
+  // och 3×. Valet minns i webbläsaren. TXT är skalan som scentexten räknas i.
+  const TXT_NORMAL = 1.6, TEXT_MIN = 1, TEXT_MAX = 4, TEXT_STOR = 3;
+  let textFaktor = 1;
+  try {
+    const sparad = parseFloat(localStorage.getItem('agentkontor.textStorlek'));
+    if (sparad >= TEXT_MIN && sparad <= TEXT_MAX) textFaktor = sparad;
+    else if (localStorage.getItem('agentkontor.storText') === '1') textFaktor = 1.5;
+  } catch (e) { /* ingen lagring */ }
+  let TXT = TXT_NORMAL * textFaktor;
   function font(vikt, fs) { ctx.font = `${vikt} ${Math.round(fs)}px ${FONT}`; }
 
   function radbryt(text, maxB, maxRader) {
@@ -1147,14 +1153,14 @@
     return rader;
   }
   // Enkel krockhantering: en ruta som överlappar en redan placerad flyttas
-  // uppåt tills den är fri.
-  function placera(ruta, upptagna) {
+  // uppåt (eller nedåt, om ned är satt) tills den är fri.
+  function placera(ruta, upptagna, ned) {
     for (let varv = 0; varv < 12; varv++) {
       const krock = upptagna.find(u => ruta.x < u.x + u.w && ruta.x + ruta.w > u.x && ruta.y < u.y + u.h && ruta.y + ruta.h > u.y);
       if (!krock) break;
-      ruta.y = krock.y - ruta.h - 2 * dpr;
+      ruta.y = ned ? krock.y + krock.h + 2 * dpr : krock.y - ruta.h - 2 * dpr;
     }
-    ruta.y = Math.max(2 * dpr, ruta.y);
+    ruta.y = clamp(ruta.y, 2 * dpr, canvas.height - ruta.h - 2 * dpr);
     upptagna.push(ruta);
     return ruta;
   }
@@ -1184,7 +1190,7 @@
       skylt(t, vx2(r.x * T + 4), vy2((r.y + r.h) * T - 10), fsRum, 'rgba(20,14,26,.74)', '#f3e3c3');
     }
     // Skyltar på maskinerna i öppna kontoret.
-    const fsMask = Math.max(9, TXT * 3.9 * s);
+    const fsMask = Math.max(9, Math.min(TXT, 2.4) * 3.9 * s); // maskinskyltarna går annars ihop när texten är stor
     const maskiner = [['SCHEMALÄGGAREN', 23 * T, 12 * T + 3], ['VERIFIERINGSSLUSSEN', 31 * T, 13 * T + 1], ['BYGGET', 26 * T, 15 * T + 2], ['SAJTEN', 38 * T, 13 * T + 1]];
     const slussAktiv = effekt.sluss && realNu < effekt.sluss.slut && effekt.sluss.lampor.some(l => realNu >= l.tand);
     const sajtAktiv = realNu < effekt.sajt;
@@ -1205,7 +1211,7 @@
     const namnRuta = f => {
       font(600, fsNamn);
       const w = ctx.measureText(f.namn).width + 10 * dpr, h = fsNamn * 1.35 + 2 * dpr;
-      return { x: vx2(f.x) - w / 2, y: vy2(f.y - (f.def.look && f.def.look.liten ? 21 : 26)) - h, w, h };
+      return { x: clamp(vx2(f.x) - w / 2, 2 * dpr, canvas.width - w - 2 * dpr), y: vy2(f.y - (f.def.look && f.def.look.liten ? 21 : 26)) - h, w, h };
     };
     // Den som pratar får företräde: namnskylt och bubbla placeras först, som
     // en enhet. Övriga namnskyltar flyttas undan, och får de inte plats döljs
@@ -1216,12 +1222,18 @@
       namnRutor.set(f, nr);
       font(600, fsB);
       const pad = 6 * dpr, lh = fsB * 1.3;
-      const rader = radbryt(f.bubbla.text, smal ? 150 * dpr : Math.max(190 * dpr, 40 * TXT * s), 4);
-      const w = Math.max(...rader.map(t => ctx.measureText(t).width)) + pad * 2;
+      // Bubblans bredd följer textstorleken (cirka 25 tecken per rad) men ryms
+      // alltid i scenen; stor text får en rad till innan den kortas med "…".
+      const rader = radbryt(f.bubbla.text, Math.min(canvas.width - 16 * dpr, smal ? Math.max(150 * dpr, 9 * fsB) : Math.max(190 * dpr, 11 * fsB)), textFaktor > 2 ? 5 : 4);
+      const w = Math.min(canvas.width - 8 * dpr, Math.max(...rader.map(t => ctx.measureText(t).width)) + pad * 2);
       const h = rader.length * lh + pad * 1.2;
       const ax = vx2(f.x);
-      const r = placera({ x: clamp(ax - w / 2, 4 * dpr, canvas.width - w - 4 * dpr), y: nr.y - h - 7 * dpr, w, h }, upptagna);
-      bubbelRutor.push({ f, r, rader, pad, lh, ax, nr });
+      // Får bubblan inte plats ovanför namnskylten (figuren står högt upp i
+      // scenen och texten är stor) hamnar den under figuren i stället.
+      const x = clamp(ax - w / 2, 4 * dpr, canvas.width - w - 4 * dpr);
+      const under = nr.y - h - 7 * dpr < 2 * dpr;
+      const r = placera({ x, y: under ? vy2(f.y) + 9 * dpr : nr.y - h - 7 * dpr, w, h }, upptagna, under);
+      bubbelRutor.push({ f, r, rader, pad, lh, ax, nr, under, fy: vy2(f.y) });
     }
     for (const f of synliga.filter(f => !pratar(f))) {
       const r = namnRuta(f);
@@ -1239,15 +1251,20 @@
         for (let i = 0; i < 3; i++) { ctx.fillStyle = i < n ? '#f0a04b' : 'rgba(240,160,75,.3)'; ctx.fillRect(r.x + r.w + 4 * dpr + i * 5 * dpr, r.y + r.h / 2 - 2 * dpr, 3 * dpr, 3 * dpr); }
       }
     }
-    for (const { f, r, rader, pad, lh, ax, nr } of bubbelRutor) {
+    for (const { f, r, rader, pad, lh, ax, nr, under, fy } of bubbelRutor) {
       const kant = f.bubbla.farg || '#2a2130';
       ctx.fillStyle = '#fffaf0'; ctx.strokeStyle = kant; ctx.lineWidth = 2 * dpr;
       ctx.beginPath(); ctx.roundRect(r.x, r.y, r.w, r.h, 6 * dpr); ctx.fill(); ctx.stroke();
-      // Pilen ner mot den egna namnskylten.
-      const px = clamp(ax, r.x + 8 * dpr, r.x + r.w - 8 * dpr), spets = Math.min(nr.y - 1 * dpr, r.y + r.h + 7 * dpr);
-      ctx.beginPath(); ctx.moveTo(px - 5 * dpr, r.y + r.h - 1); ctx.lineTo(px, spets); ctx.lineTo(px + 5 * dpr, r.y + r.h - 1); ctx.closePath();
-      ctx.fillStyle = '#fffaf0'; ctx.fill();
-      ctx.beginPath(); ctx.moveTo(px - 5 * dpr, r.y + r.h); ctx.lineTo(px, spets); ctx.lineTo(px + 5 * dpr, r.y + r.h); ctx.stroke();
+      // Pilen ner mot den egna namnskylten, eller upp mot figuren när
+      // bubblan står under den.
+      const px = clamp(ax, r.x + 8 * dpr, r.x + r.w - 8 * dpr);
+      const bas = under ? r.y : r.y + r.h, inat = under ? 1 : -1;
+      const spets = under ? Math.max(fy + 2 * dpr, r.y - 7 * dpr) : Math.min(nr.y - 1 * dpr, r.y + r.h + 7 * dpr);
+      if (under ? spets < bas : spets > bas) {
+        ctx.beginPath(); ctx.moveTo(px - 5 * dpr, bas + inat); ctx.lineTo(px, spets); ctx.lineTo(px + 5 * dpr, bas + inat); ctx.closePath();
+        ctx.fillStyle = '#fffaf0'; ctx.fill();
+        ctx.beginPath(); ctx.moveTo(px - 5 * dpr, bas); ctx.lineTo(px, spets); ctx.lineTo(px + 5 * dpr, bas); ctx.stroke();
+      }
       ctx.fillStyle = f.bubbla.farg && f.bubbla.farg !== '#2a2130' ? f.bubbla.farg : '#231a2b';
       font(600, fsB);
       rader.forEach((t, i) => ctx.fillText(t, r.x + pad, r.y + pad * 0.6 + i * lh));
@@ -1262,7 +1279,7 @@
         const t = (sista.fel ? 'Rött: ' : 'Grönt: ') + sista.namn;
         font(700, fs);
         const w = ctx.measureText(t).width;
-        skylt(t, vx2(31 * T) - w / 2, vy2(13 * T + 1), fs, sista.fel ? '#c0392b' : '#1e8449', '#fff');
+        skylt(t, clamp(vx2(31 * T) - w / 2, 6 * dpr, canvas.width - w - 6 * dpr), vy2(13 * T + 1), fs, sista.fel ? '#c0392b' : '#1e8449', '#fff');
       }
     }
     // Sajtskärmen blinkar till efter en push.
@@ -1271,7 +1288,7 @@
       const t = 'fysiklabbet.se ' + effekt.sajtText;
       font(700, fs);
       const w = ctx.measureText(t).width;
-      skylt(t, vx2(38 * T) - w / 2, vy2(13 * T + 1), fs, '#f0a04b', '#1b1422');
+      skylt(t, clamp(vx2(38 * T) - w / 2, 6 * dpr, canvas.width - w - 6 * dpr), vy2(13 * T + 1), fs, '#f0a04b', '#1b1422');
     }
   }
 
@@ -1424,14 +1441,23 @@
     if (e) hoppa(Math.max(simT, e.s - 3));
   });
   $('omKnapp').addEventListener('click', () => $('omDialog').showModal());
-  const textKnapp = $('textStorlek');
-  const visaTextKnapp = () => { const stor = TXT === TXT_STOR; textKnapp.classList.toggle('aktiv', stor); textKnapp.setAttribute('aria-pressed', String(stor)); };
-  visaTextKnapp();
-  textKnapp.addEventListener('click', () => {
-    TXT = TXT === TXT_STOR ? TXT_NORMAL : TXT_STOR;
-    try { localStorage.setItem('agentkontor.storText', TXT === TXT_STOR ? '1' : '0'); } catch (e) { /* ingen lagring */ }
-    visaTextKnapp();
-  });
+  const textKnapp = $('textStorlek'), textReglage = $('textReglage'), textVarde = $('textVarde');
+  const textEtikett = v => String(Math.round(v * 100) / 100).replace('.', ',') + '×';
+  function sattTextstorlek(v, spara) {
+    textFaktor = clamp(Math.round(v * 4) / 4, TEXT_MIN, TEXT_MAX);
+    TXT = TXT_NORMAL * textFaktor;
+    textReglage.value = textFaktor;
+    textVarde.textContent = textEtikett(textFaktor);
+    // Sidopanelens listor växer med, men mindre än scentexten (högst 2,2×).
+    document.documentElement.style.setProperty('--dom', String(1 + (textFaktor - 1) * 0.4));
+    const stor = textFaktor > 1;
+    textKnapp.classList.toggle('aktiv', stor); textKnapp.setAttribute('aria-pressed', String(stor));
+    if (spara) { try { localStorage.setItem('agentkontor.textStorlek', String(textFaktor)); } catch (e) { /* ingen lagring */ } }
+  }
+  textReglage.min = TEXT_MIN; textReglage.max = TEXT_MAX; textReglage.step = 0.25;
+  sattTextstorlek(textFaktor, false);
+  textReglage.addEventListener('input', () => sattTextstorlek(parseFloat(textReglage.value), true));
+  textKnapp.addEventListener('click', () => sattTextstorlek(textFaktor > 1 ? 1 : TEXT_STOR, true));
   $('helskarm').addEventListener('click', () => {
     const app = $('app');
     if (document.fullscreenElement) document.exitFullscreen(); else if (app.requestFullscreen) app.requestFullscreen();
@@ -1492,7 +1518,7 @@
       $('logg').innerHTML = '<li class="nu-tom">Inget data. Kör node .claude/bygg-agentkontor.js</li>';
     } else {
       // Adressen kan välja dag, klockslag och hastighet, till exempel
-      // agentkontoret.html?dag=2026-09-30&t=13:00&fart=2 inför en demonstration.
+      // agentkontoret.html?dag=2026-09-30&t=13:00&fart=2&text=3 inför en demonstration.
       const q = new URLSearchParams(location.search);
       const d = dagar.includes(q.get('dag')) ? q.get('dag') : dagar[dagar.length - 1];
       $('dagval').value = d;
@@ -1501,6 +1527,8 @@
       if (t) hoppa((+t[1]) * 3600 + (+t[2]) * 60);
       const fq = q.get('fart');
       if (fq) { const b = [...$('hastighet').children].find(x => x.dataset.v === fq); if (b) b.click(); }
+      const tq = parseFloat((q.get('text') || '').replace(',', '.'));
+      if (tq) sattTextstorlek(tq, false);
     }
     $('klockDag').textContent = dagId ? veckodag(dagId) : '';
     $('dagval').addEventListener('change', () => { $('klockDag').textContent = veckodag(dagId); });

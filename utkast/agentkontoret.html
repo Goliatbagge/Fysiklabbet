@@ -29,7 +29,7 @@ html, body { margin: 0; background: var(--bg); color: var(--text); }
 body { font-family: 'Poppins', system-ui, sans-serif; font-size: 14px; min-height: 100vh; }
 button, select { font: inherit; color: inherit; }
 
-.app { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 14px; padding: 14px; max-width: 1800px; margin: 0 auto; }
+.app { display: grid; grid-template-columns: minmax(0, 1fr) min(calc(340px * var(--dom, 1)), 42vw); gap: 14px; padding: 14px; max-width: 1800px; margin: 0 auto; }
 .app:fullscreen { max-width: none; background: var(--bg); height: 100vh; overflow: hidden; }
 
 /* ---- Rubrikrad ---- */
@@ -50,6 +50,10 @@ button, select { font: inherit; color: inherit; }
 .hastighet button + button { border-left: 1px solid var(--kant); }
 .hastighet button.aktiv { background: var(--accent); color: #1b1422; font-weight: 600; }
 select.knapp { padding-right: 8px; }
+a.knapp { color: inherit; text-decoration: none; }
+.textreglage { cursor: default; }
+.textreglage input { width: 110px; accent-color: var(--accent); margin: 0; cursor: pointer; }
+.textreglage output { min-width: 3.2em; font-variant-numeric: tabular-nums; color: var(--accent); font-weight: 600; }
 .klocka { background: #0d0b12; border: 1px solid var(--kant); border-radius: 8px; padding: 4px 14px; text-align: right; min-width: 150px; }
 .klocka b { font-family: 'Press Start 2P', monospace; font-weight: 400; font-size: 19px; display: block; line-height: 1.3; }
 .klocka span { font-size: 11.5px; color: var(--dampad); }
@@ -91,11 +95,11 @@ select.knapp { padding-right: 8px; }
 .kpi b.bump { animation: bump .5s; }
 @keyframes bump { 30% { transform: scale(1.35); color: var(--accent); } }
 
-.lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.lista { font-size: calc(14px * var(--dom, 1)); list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
 .lista li { display: grid; grid-template-columns: 10px 1fr; gap: 8px; align-items: start; line-height: 1.35; }
-.lista .prick { width: 10px; height: 10px; border-radius: 2px; margin-top: 4px; }
+.lista .prick { width: 10px; height: 10px; border-radius: 2px; margin-top: .35em; }
 .lista b { font-weight: 600; }
-.lista small { color: var(--dampad); display: block; font-size: 12px; }
+.lista small { color: var(--dampad); display: block; font-size: .86em; }
 .nu-tom { color: var(--dampad); font-style: italic; }
 
 .logg { flex: 1; min-height: 220px; display: flex; flex-direction: column; }
@@ -161,7 +165,12 @@ dialog code { background: #0d0b12; padding: 1px 5px; border-radius: 4px; font-si
         <svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 14l3.6-11h1.8L10 14H8.3l-.9-2.8H3.6L2.7 14zm3.1-4.2h2.8L5.5 5.3z"/><path d="M10.5 14l2-6h1.2l2 6h-1.2l-.5-1.5h-1.8l-.5 1.5zm2-2.6h1.2l-.6-1.9z"/></svg>
         Större text
       </button>
+      <label class="knapp textreglage" title="Gör namnskyltar, pratbubblor och händelseloggen större, upp till 4 gånger">Textstorlek
+        <input type="range" id="textReglage" min="1" max="4" step="0.25" value="1" aria-label="Textstorlek">
+        <output id="textVarde" for="textReglage">1×</output>
+      </label>
       <button class="knapp" id="omKnapp">Om kontoret</button>
+      <a class="knapp" href="agent-office.html" hreflang="en" lang="en" title="English version" aria-label="English version"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="8" cy="8" r="6.6"/><ellipse cx="8" cy="8" rx="2.8" ry="6.6"/><path d="M1.6 8h12.8M2.6 4.6h10.8M2.6 11.4h10.8"/></svg>English</a>
       <button class="knapp" id="helskarm" title="Helskärm" aria-label="Helskärm">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>
       </button>
@@ -220,7 +229,7 @@ dialog code { background: #0d0b12; padding: 1px 5px; border-radius: 4px; font-si
 </dialog>
 
 <script src="agentkontoret-data.js?v=1"></script>
-<script src="agentkontoret.js?v=3"></script>
+<script src="agentkontoret.js?v=4"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

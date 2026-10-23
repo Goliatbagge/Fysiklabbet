@@ -106,7 +106,7 @@ const NYHETER_ALL = [
     id: "2026-10-23-positronen-som-stannade",
     date: "2026-10-23",
     title: "En enda positron fångad och nedkyld i månader",
-    deck: "Fysiker i USA har fångat en enda positron, elektronens antipartikel, och kylt den så långt att den ligger stilla i sitt lägsta kvanttillstånd. Nu kan de se den hoppa ett energisteg i taget, och det öppnar för den skarpaste jämförelsen hittills mellan elektronen och positronen.",
+    deck: "Fysiker i USA har fångat en enda positron, elektronens antipartikel, och kylt ned den så mycket att den hamnat i sitt lägsta möjliga kvanttillstånd. Nu kan de se den hoppa ett energisteg i taget, och det öppnar för den skarpaste jämförelsen hittills mellan elektronen och positronen.",
     category: "Partikelfysik",
     readingTime: "5 min",
     image: "nyheter/bilder/2026-10-23-positronen-som-stannade.jpg",
@@ -137,7 +137,7 @@ const NYHETER_ALL = [
       ]
     },
     body: [
-      { type: 'p', html: 'En positron är elektronens spegelbild: samma massa, lika stor laddning men med motsatt tecken. Möter den en elektron försvinner båda och blir strålning. Eftersom vår värld är full av elektroner brukar en positron därför inte överleva länge. Nu har fysiker vid Northwestern University i USA fångat en enda positron och hållit den kvar i månader, nedkyld så långt att den ligger stilla i sitt lägsta möjliga energitillstånd.' },
+      { type: 'p', html: 'En positron är elektronens spegelbild: samma massa, lika stor laddning men med motsatt tecken. Möter den en elektron försvinner båda och blir strålning. Eftersom vår värld är full av elektroner brukar en positron därför inte överleva länge. Nu har fysiker vid Northwestern University i USA fångat en enda positron och hållit den kvar i månader, nedkyld så mycket att den hamnat i sitt lägsta möjliga energitillstånd.' },
       { type: 'p', html: 'Det har aldrig gjorts förut med en positron. Uppställningen kallas en kvantcyklotron, och studien publicerades den 21&nbsp;oktober i den kollegialt granskade tidskriften <em>Physical Review Letters</em>. Gruppen leds av Gerald Gabrielse, som tidigare har gjort samma sak med en elektron och med den mätt elektronens magnetiska egenskaper noggrannare än någon annan egenskap hos någon elementarpartikel.' },
       { type: 'quote', html: 'Vi kyler den så mycket att den hamnar i sitt kvantmekaniska grundtillstånd. Vi har faktiskt fått den här mycket snabba positronen att ligga still och uppföra sig i månader i sträck.', cite: 'Gerald Gabrielse, Northwestern University, i universitetets pressmeddelande (översatt)' },
       { type: 'h2', text: 'Från nära ljusets hastighet till nästan stillastående' },
@@ -639,7 +639,7 @@ const NYHETER_ALL = [
     },
     body: [
       { type: 'p', html: 'Snurra en kula i en burk sirap, så drar kulan med sig sirapen närmast sig. Enligt Einsteins allmänna relativitetsteori gör jorden något liknande med rumtiden runt sig: när planeten roterar släpar den med sig själva referensramen, alltså de riktningar man mäter vinklar och rotationer mot. Effekten kallas ramsläpning och förutsades av de österrikiska fysikerna Josef Lense och Hans Thirring redan 1918. Den är så svag att det tog mer än åttio år innan någon kunde mäta den.' },
-      { type: 'p', html: 'Nu föreslår fyra fysiker ett sätt att mäta den i ett vanligt laboratorium, med en ring av helium som kylts så långt att den blivit supraflytande. Förslaget publicerades i <em>Physical Review Letters</em> den 17 september 2026. Bakom det står Kai-Isaak Ellers och Birgitta Whaley vid University of California, Berkeley, Marios Christodoulou vid Österrikiska vetenskapsakademiens institut för kvantoptik och kvantinformation i Wien och Keith Schwab vid Caltech i Pasadena. Det är en teoretisk studie: instrumentet är inte byggt, och en avgörande del av det finns ännu inte.' },
+      { type: 'p', html: 'Nu föreslår fyra fysiker ett sätt att mäta den i ett vanligt laboratorium, med en ring av helium som kylts ned så kraftigt att den blivit supraflytande. Förslaget publicerades i <em>Physical Review Letters</em> den 17 september 2026. Bakom det står Kai-Isaak Ellers och Birgitta Whaley vid University of California, Berkeley, Marios Christodoulou vid Österrikiska vetenskapsakademiens institut för kvantoptik och kvantinformation i Wien och Keith Schwab vid Caltech i Pasadena. Det är en teoretisk studie: instrumentet är inte byggt, och en avgörande del av det finns ännu inte.' },
 
       { type: 'h2', text: 'En effekt på fyra tiomiljarddelar' },
       { type: 'p', html: 'Jorden snurrar ett varv per dygn, med vinkelhastigheten $\\omega \\approx 7{,}3 \\cdot 10^{-5}\\ \\mathrm{rad/s}$. Ramsläpningen vid Berkeleys breddgrad ger enligt studien som mest en extra vridning på $2{,}9 \\cdot 10^{-14}\\ \\mathrm{rad/s}$. Det är ungefär fyra tiomiljarddelar av jordens egen rotation.' },

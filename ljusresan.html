@@ -401,6 +401,8 @@ body.omlopp main#resa { touch-action: none; }
 body.kan-titta main#resa, body.kan-vrida main#resa { cursor: grab; touch-action: pan-y; }
 body.tittar main#resa, body.tittar { cursor: grabbing; }
 body.kan-titta, body.tittar { -webkit-user-select: none; user-select: none; }
+.klocka.realtid .k-rubrik { color: var(--foton); }
+.k-not { font-family: var(--mono); font-size: 11.5px; color: var(--foton); margin-top: 4px; min-height: 1em; }
 .status .titta { display: block; margin-top: 7px; font-size: 10px; letter-spacing: .16em; color: var(--faint); }
 .hud, .rutt, .fart { transition: opacity .6s; }
 
@@ -481,6 +483,7 @@ body.kan-titta, body.tittar { -webkit-user-select: none; user-select: none; }
   </a>
   <div class="topp-knappar">
     <button class="hudknapp" id="musikKnapp" aria-pressed="false" title="Slå på eller av bakgrundsmusiken"><span class="lampa"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h4l5 4V6L8 10z"/><path class="vag" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg><span class="text">Musik</span></button>
+    <button class="hudknapp" id="realtidKnapp" aria-pressed="false" title="Låt ljuset färdas i verklig tid: till jorden tar det drygt åtta minuter"><span class="lampa"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="text">Realtid</span></button>
     <button class="hudknapp" id="noterKnapp" aria-pressed="true" title="Visa eller dölj fältanteckningarna"><span class="lampa"></span><span class="text">Anteckningar</span></button>
     <button class="hudknapp" id="lysKnapp" aria-pressed="false" title="Lys upp hela himlakroppen, även skuggsidan"><span class="lampa"></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg><span class="text">Lys upp</span></button>
     <button class="hudknapp sprak" id="sprakKnapp" lang="en"><span class="text">English</span><span class="kort">EN</span></button>
@@ -498,9 +501,10 @@ body.kan-titta, body.tittar { -webkit-user-select: none; user-select: none; }
 <section class="hud stopptext" id="stopptext" aria-live="polite"></section>
 
 <div class="hud klocka">
-  <div class="k-rubrik">Ljuset har färdats i</div>
+  <div class="k-rubrik" id="kRubrik">Ljuset har färdats i</div>
   <div class="k-tid" id="kTid">00:00:00</div>
   <div class="k-avst" id="kAvst">vid solens yta</div>
+  <div class="k-not" id="kNot"></div>
 </div>
 <div class="hud fart">
   <div class="k-rubrik">Fart</div>
@@ -2669,7 +2673,7 @@ window.addEventListener('scroll', () => {
   senastY = y;
   clearTimeout(landningsTimer);
   landningsTimer = setTimeout(() => {
-    if (omlopp.aktiv || karta.oppen || fard.aktiv) return;
+    if (omlopp.aktiv || karta.oppen || fard.aktiv || realtid.aktiv) return;
     const s = window.scrollY / stoppH, k = Math.round(s), d = s - k;
     if (Math.abs(d) < 0.004 || Math.abs(d) > 0.26) return;
     if ((d < 0 && skrollRiktning > 0) || (d > 0 && skrollRiktning < 0)) gaTillStopp(k);
@@ -2712,6 +2716,7 @@ let direktHopp = false;
 function gaTillStopp(i, snabbt) {
   i = klamp(i, 0, NS - 1);
   avbrytFard();
+  stoppaRealtid();
   const s0 = window.scrollY / stoppH, s1 = i;
   if (snabbt || REDUCERA || Math.abs(s1 - s0) < 0.002) { if (snabbt) direktHopp = true; window.scrollTo({ top: s1 * stoppH, behavior: 'instant' }); return; }
   const tider = stracksTider(), bitar = aktivaBitar(s0, s1);
@@ -2744,6 +2749,79 @@ function gaTillStopp(i, snabbt) {
 }
 
 function ljusTid(ae) { return ae * AE_KM / C_KM; }
+
+/* ---------- Realtid ----------
+   Ljuset färdas i verklig tid: från solen till jorden tar det drygt åtta
+   riktiga minuter. Klockan räknas ur performance.now(), så resan går vidare
+   även när fliken ligger i bakgrunden. Kamerans läge räknas baklänges ur
+   ljusets avstånd, så att den står där ljuset är längs sträckan, och sidan
+   skrollas med så att man fortsätter därifrån när realtiden stängs av.
+   Skrollar man själv, eller väljer ett stopp, avbryts realtiden. */
+const realtid = { aktiv: false, ae0: 0, t0: 0, ae: 0, s: 0, seg: 0, not: '', notTill: 0, start: 0 };
+const AE_PER_S = C_KM / AE_KM;
+const realtidKnapp = $('realtidKnapp');
+function startaRealtid() {
+  if (karta.oppen) stangKarta();
+  avbrytFard();
+  let k = Math.round(scrollS());
+  if (k >= NS - 1) k = 0;
+  realtid.aktiv = true;
+  realtid.ae0 = AE_AVST[STOPP[k]];
+  realtid.start = k;
+  realtid.t0 = performance.now();
+  realtid.seg = k;
+  realtid.not = k === 0 ? 'Ljuset lämnar solen nu' : `Ljuset lämnar ${PLANETER[k].namn} nu`;
+  realtid.notTill = realtid.t0 + 6000;
+  realtidKnapp.setAttribute('aria-pressed', 'true');
+  klockaEl.classList.add('realtid');
+  $('kRubrik').textContent = 'Realtid · ljuset har färdats i';
+  uppdateraRealtid(realtid.t0);
+}
+function stoppaRealtid() {
+  if (!realtid.aktiv) return;
+  realtid.aktiv = false;
+  realtidKnapp.setAttribute('aria-pressed', 'false');
+  klockaEl.classList.remove('realtid');
+  $('kRubrik').textContent = 'Ljuset har färdats i';
+  $('kNot').textContent = '';
+}
+realtidKnapp.addEventListener('click', () => { if (realtid.aktiv) stoppaRealtid(); else startaRealtid(); });
+// omvändningar av easeInOut och mjuk(0,1,x), för att få kamerans läge ur ljusets avstånd
+const easeInv = (e) => e < 0.5 ? Math.cbrt(e / 4) : 1 - Math.cbrt(2 * (1 - e)) / 2;
+const mjukInv = (t) => 0.5 - Math.sin(Math.asin(klamp(1 - 2 * t, -1, 1)) / 3);
+function uppdateraRealtid(nu) {
+  const ae = realtid.ae0 + (nu - realtid.t0) / 1000 * AE_PER_S;
+  const slut = AE_AVST.slut;
+  if (ae >= slut) {
+    realtid.ae = slut; realtid.s = NS - 1;
+    stoppaRealtid();
+    $('kNot').textContent = `Ljuset har nått Voyager 1 efter ${tidText(ljusTid(slut))}`.replace(/ /g, NB);
+    window.scrollTo({ top: (NS - 1) * stoppH, behavior: 'instant' });
+    return;
+  }
+  let i = 0;
+  while (i < NS - 2 && AE_AVST[STOPP[i + 1]] <= ae) i++;
+  const a = AE_AVST[STOPP[i]], b = AE_AVST[STOPP[i + 1]];
+  const e = klamp((ae - a) / (b - a), 0, 1);
+  realtid.ae = ae;
+  realtid.s = i + 0.16 + mjukInv(easeInv(e)) * 0.76;
+  if (i > realtid.seg) {
+    // ljuset har passerat en eller flera världar sedan förra bildrutan
+    realtid.seg = i;
+    const namn = PLANETER[i].namn;
+    realtid.not = i === 4
+      ? `Ljuset har nått jorden efter ${tidText(ljusTid(AE_AVST.jorden))} och månen ${fmt(ljusTid(a - AE_AVST.jorden), 1)} s senare`
+      : `Ljuset har nått ${namn} efter ${tidText(ljusTid(a))}`;
+    realtid.notTill = nu + 9000;
+    musik.ankomst();
+  }
+  const y = realtid.s * stoppH;
+  if (Math.abs(window.scrollY - y) >= 1) { window.scrollTo({ top: y, behavior: 'instant' }); }
+}
+// skrollar man själv (hjul, finger, tangenter) avbryts realtiden; sidans egen skrollning ligger inom en pixel eller två
+window.addEventListener('scroll', () => {
+  if (realtid.aktiv && !omlopp.aktiv && !karta.oppen && Math.abs(window.scrollY - realtid.s * stoppH) > 3) stoppaRealtid();
+}, { passive: true });
 function klockText(sek) {
   const h = Math.floor(sek / 3600), m = Math.floor((sek % 3600) / 60), s = Math.floor(sek % 60);
   const p = (x) => String(x).padStart(2, '0');
@@ -2776,8 +2854,8 @@ function fyllStopptext(i) {
       <div class="s-kicker">En resa i ljusets fart</div>
       <h1 class="s-namn intro-namn">Ljusresan</h1>
       <div class="s-stråle"></div>
-      <p class="s-ingress">Följ en ljusstråle från solens yta ut till Pluto och vidare. I verkligheten tar resan till Pluto fem och en halv timme. Här tar den så lång tid som du vill: skrolla för att resa, stanna vid varje värld och gå in i omloppsbana. Resan hör till genomgången <a class="ingress-lank" href="katalog.html?id=fy2-5.1">Universums struktur</a> i Fysik nivå 2.</p>
-      <div class="s-knappar"><button class="knapp prim" data-till="1">Starta resan</button><button class="knapp sek" data-omlopp="0">Om solen</button></div>
+      <p class="s-ingress">Följ en ljusstråle från solens yta ut till Pluto och vidare. I verkligheten tar resan till Pluto fem och en halv timme. Här tar den så lång tid som du vill: skrolla för att resa, stanna vid varje värld och gå in i omloppsbana. Eller res i realtid, så når ljuset jorden efter drygt åtta riktiga minuter. Resan hör till genomgången <a class="ingress-lank" href="katalog.html?id=fy2-5.1">Universums struktur</a> i Fysik nivå 2.</p>
+      <div class="s-knappar"><button class="knapp prim" data-till="1">Starta resan</button><button class="knapp sek" data-realtid>Res i realtid</button><button class="knapp sek" data-omlopp="0">Om solen</button></div>
       <div class="skrolltips">
         <span class="st-mus">
           <svg viewBox="0 0 26 38" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="1.5" y="1.5" width="23" height="35" rx="11.5"/><line class="hjul" x1="13" y1="8" x2="13" y2="13" stroke-linecap="round" stroke-width="2.6"/></svg>
@@ -2832,6 +2910,7 @@ function fyllStopptext(i) {
   document.documentElement.style.setProperty('--acc', acc);
   stopptext.querySelectorAll('[data-till]').forEach((b) => b.addEventListener('click', () => gaTillStopp(+b.dataset.till)));
   stopptext.querySelectorAll('[data-omlopp]').forEach((b) => b.addEventListener('click', () => oppnaDossier(+b.dataset.omlopp, b.dataset.flik)));
+  stopptext.querySelectorAll('[data-realtid]').forEach((b) => b.addEventListener('click', startaRealtid));
   stopptext.querySelectorAll('[data-karta]').forEach((b) => b.addEventListener('click', oppnaKarta));
   stopptext.querySelectorAll('[data-voyager]').forEach((b) => b.addEventListener('click', () => oppnaVoyager(b.dataset.voyager || 'oversikt')));
   ruttLista.querySelectorAll('li').forEach((li, k) => { li.classList.toggle('aktiv', k === i); });
@@ -3850,7 +3929,8 @@ function frame(nu) {
     return;
   }
 
-  const s = scrollS();
+  if (realtid.aktiv) uppdateraRealtid(performance.now());
+  const s = realtid.aktiv ? realtid.s : scrollS();
   const info = resPose(s, tid);
   // texturer för närliggande stopp
   for (let k = info.i - 1; k <= info.i + 2; k++) if (kroppar[k]) kroppar[k].ladda();
@@ -3971,7 +4051,7 @@ function loop(nu) {
 function uppdateraHUD(s, info) {
   const k = Math.round(s);
   const nara = s - k;
-  const synlig = omlopp.aktiv ? 0 : mjuk(-0.15, -0.06, nara) * (1 - mjuk(0.14, 0.24, nara));
+  const synlig = omlopp.aktiv || realtid.aktiv ? 0 : mjuk(-0.15, -0.06, nara) * (1 - mjuk(0.14, 0.24, nara));
   if (k !== visatStopp && !omlopp.aktiv) fyllStopptext(k);
   // presentera först när kameran är framme, annars är världen fortfarande liten i bild
   const framme = kamera.position.distanceTo(malPose.pos) < (k < PLANETER.length ? kroppar[k].root.scale.x * 0.06 : 0.4);
@@ -3989,7 +4069,11 @@ function uppdateraHUD(s, info) {
   // ljusklockan
   const i = info.i;
   const a = AE_AVST[STOPP[i]], b = i + 1 < NS ? AE_AVST[STOPP[i + 1]] : a;
-  const ae = a + (b - a) * info.e;
+  const ae = realtid.aktiv ? realtid.ae : a + (b - a) * info.e;
+  if (realtid.aktiv) {
+    const not = performance.now() < realtid.notTill ? realtid.not.replace(/ /g, NB) : '';
+    if ($('kNot').textContent !== not) $('kNot').textContent = not;
+  }
   $('kTid').textContent = klockText(ljusTid(ae));
   const voyLjus = stopptext.querySelector('[data-voy-ljus]');
   if (voyLjus) { const t = voyagerLjusText(); if (voyLjus.textContent !== t) voyLjus.textContent = t; }
@@ -4005,7 +4089,11 @@ function uppdateraHUD(s, info) {
   // statusraden
   let st = '';
   if (omlopp.aktiv) st = '';
-  else if (info.t > 0.02 && info.t < 0.98 && i + 1 < NS) {
+  else if (realtid.aktiv) {
+    const nasta = Math.min(realtid.seg + 1, NS - 1);
+    const namn = STOPP[nasta] === 'slut' ? 'Voyager 1' : PLANETER[nasta].namn;
+    st = `Realtid · på väg mot <b>${namn}</b> · framme om ${nb(tidText(Math.max(0, ljusTid(AE_AVST[STOPP[nasta]] - realtid.ae))))}<span class="titta">Skrolla för att lämna realtiden</span>`;
+  } else if (info.t > 0.02 && info.t < 0.98 && i + 1 < NS) {
     const namn = STOPP[i + 1] === 'slut' ? 'Voyager 1' : PLANETER[i + 1].namn;
     st = `På väg mot <b>${namn}</b> · framme om ${nb(tidText(Math.max(0, ljusTid(b - ae))))}<span class="titta">Håll ned musknappen och dra för att se dig omkring</span>`;
   } else if (k === NS - 1 && vidSonden()) {

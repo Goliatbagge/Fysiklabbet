@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flyta eller sjunka — Fysiklabbet</title>
     <meta name="description" content="Dra föremål från labbänken ner i akvariet, läs flytkartan och gissa om de flyter, svävar eller sjunker — Arkimedes princip i praktiken.">
@@ -269,6 +270,10 @@
         const WATER_V0 = 0.085;              // vätskevolym utan föremål (m³) = 85 L
         const SCENE_W_M = VB_W / PX;
         const HANG_X = 499 / PX;             // stativets upphängningspunkt (m)
+        // Jämförelse av två föremål: båda hänger i stativet ovanför vätskan
+        // tills eleven klickar Släpp. Med 10 L var (128 px breda) blir det
+        // 22 px luft emellan och båda ryms innanför glaset.
+        const HANG_AB = { A: 420 / PX, B: 570 / PX };
         const HANG_TOP_PY = 185;             // hängande blockets överkant i px
 
         const toPx = (xm) => xm * PX;
@@ -547,6 +552,7 @@
             const [showValues, setShowValues] = useState(false);
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [togglesOpen, setTogglesOpen] = useState(true);
+            const [hangKey, setHangKey] = useState(0);   // ökas av färdiga försök → häng upp igen
             const [, setTick] = useState(0);
 
             const sceneWrapRef = useRef(null);
@@ -580,16 +586,19 @@
             gissaRef.current = gissa;
 
             // Startpositioner: på bänken på var sin sida om akvariet.
-            // I Gissa-läget hänger föremålet i stativet ovanför vattnet.
+            // I Gissa-läget hänger föremålet i stativet ovanför vattnet, och
+            // när två föremål jämförs hänger båda där tills eleven klickar
+            // Släpp, så att de släpps samtidigt.
             const resetBlocks = useCallback(() => {
                 const w = worldRef.current;
-                const hanging = mode === 'gissa' && gissaRef.current.phase === 'gissa';
+                const jamfor = mode === 'utforska' && blockCfg.length === 2;
+                const hanging = jamfor || (mode === 'gissa' && gissaRef.current.phase === 'gissa');
                 w.blocks = blockCfg.map(cfg => {
                     const { bh } = dims(cfg.V);
                     const hangY = (BENCH_PY - HANG_TOP_PY) / PX - bh;
                     return {
                         id: cfg.id, V: cfg.V, m: cfg.m,
-                        x: hanging ? HANG_X : (cfg.id === 'A' ? 0.50 : 1.68),
+                        x: hanging ? (jamfor ? HANG_AB[cfg.id] : HANG_X) : (cfg.id === 'A' ? 0.50 : 1.68),
                         y: hanging ? hangY + bh / 2 : bh / 2, vy: 0,
                         grabbed: false, resting: !hanging, held: hanging,
                     };
@@ -600,7 +609,7 @@
 
             // Nytt läge / ny utmaning / nytt antal föremål → börja om.
             // Ändrade värden på befintliga föremål → uppdatera V och m på plats.
-            const blockIdsKey = mode + '|' + blockCfg.map(c => c.id).join(',') +
+            const blockIdsKey = mode + '|' + hangKey + '|' + blockCfg.map(c => c.id).join(',') +
                 '|' + (mode === 'gissa' && gissa.ch ? gissa.ch.m + '/' + gissa.ch.V + '/' + gissa.ch.fluidId : '');
             useEffect(() => { resetBlocks(); }, [blockIdsKey]);
             useEffect(() => {
@@ -611,7 +620,9 @@
                     b.m = blockCfg[i].m;
                     const { bh } = dims(b.V);
                     const floorY = centerInTank(b) ? FLOOR_M : 0;
-                    if (!b.held && b.y - bh / 2 < floorY) { b.y = floorY + bh / 2; }
+                    // Ett hängande föremål behåller överkanten i kroken
+                    if (b.held) b.y = (BENCH_PY - HANG_TOP_PY) / PX - bh / 2;
+                    else if (b.y - bh / 2 < floorY) { b.y = floorY + bh / 2; }
                 });
             }, [blockCfg]);
 
@@ -807,7 +818,14 @@
             };
 
             const onBlockDown = (b) => (e) => {
-                if (b.held) return;   // hängande mysterieföremål släpps först vid svar
+                if (b.held) {
+                    // Hängande mysterieföremål släpps först vid svar. Vid
+                    // jämförelsen släpper ett klick på ett föremål båda samtidigt.
+                    if (mode === 'utforska') {
+                        worldRef.current.blocks.forEach(o => { o.held = false; o.vy = 0; });
+                    }
+                    return;
+                }
                 e.preventDefault();
                 const p = svgPoint(e);
                 b.grabbed = true;
@@ -879,6 +897,12 @@
             });
 
             const masked = mode === 'gissa' && gissa.phase === 'gissa';
+            const jamfor = mode === 'utforska' && w.blocks.length === 2;
+            const nagotHanger = jamfor && w.blocks.some(b => b.held);
+            const slappAlla = () => {
+                worldRef.current.blocks.forEach(b => { b.held = false; b.vy = 0; });
+                setTick(t => t + 1);
+            };
 
             // ── Scenens SVG ──
             const time = performance.now() / 1000;
@@ -986,20 +1010,26 @@
                     {/* Flytkartan (bakom föremålen) */}
                     {renderFloatMap()}
 
-                    {/* Labbstativ (endast Gissa-läget) */}
-                    {mode === 'gissa' && (
-                        <g pointerEvents="none">
-                            <rect x="700" y="508" width="100" height="12" rx="2" fill="#b8bfc7" stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
-                            <rect x="746" y="150" width="8" height="358" fill="#9aa2ab" stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
-                            <rect x="495" y="160" width="255" height="8" rx="3" fill="#9aa2ab" stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
-                            <rect x="493" y="160" width="12" height="14" rx="2" fill="#6a7076" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
-                            {gissa.phase === 'gissa' && w.blocks[0] && (
-                                <line x1={toPx(HANG_X)} y1="174" x2={toPx(HANG_X)}
-                                    y2={toPy(w.blocks[0].y + dims(w.blocks[0].V).bh / 2)}
-                                    stroke="#3a4151" strokeWidth="1.6" />
-                            )}
-                        </g>
-                    )}
+                    {/* Labbstativ (Gissa-läget och jämförelsen av två föremål) */}
+                    {(mode === 'gissa' || jamfor) && (() => {
+                        const hooks = jamfor ? [toPx(HANG_AB.A), toPx(HANG_AB.B)] : [toPx(HANG_X)];
+                        const armL = hooks[0] - 4;
+                        return (
+                            <g pointerEvents="none">
+                                <rect x="700" y="508" width="100" height="12" rx="2" fill="#b8bfc7" stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
+                                <rect x="746" y="150" width="8" height="358" fill="#9aa2ab" stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
+                                <rect x={armL} y="160" width={750 - armL} height="8" rx="3" fill="#9aa2ab" stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
+                                {hooks.map(hx => (
+                                    <rect key={'hook' + hx} x={hx - 6} y="160" width="12" height="14" rx="2" fill="#6a7076" stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
+                                ))}
+                                {w.blocks.filter(b => b.held).map(b => (
+                                    <line key={'snore' + b.id} x1={toPx(b.x)} y1="174" x2={toPx(b.x)}
+                                        y2={toPy(b.y + dims(b.V).bh / 2)}
+                                        stroke="#3a4151" strokeWidth="1.6" />
+                                ))}
+                            </g>
+                        );
+                    })()}
 
                     {/* Glasets inre: svag ton + bakre överkant, så att akvariet
                         läses som en sammanhängande glaslåda och inte två pelare */}
@@ -1076,7 +1106,8 @@
 
                     {/* Kraftpilar + föremålsetiketter (överst) */}
                     {blockData.map(({ b, FG, FL, FN }) => {
-                        if (b.held) return null;
+                        if (b.held && mode === 'gissa') return null;
+                        const hanger = b.held;   // hänger i kroken: inga kraftpilar förrän det släpps
                         const { bw, bh } = dims(b.V);
                         const sp = bw * PX, hp = bh * PX;
                         const cx = toPx(b.x);
@@ -1084,15 +1115,15 @@
                         const sc = w.forceScale;
                         return (
                             <g key={'lbl' + b.id} pointerEvents="none">
-                                {showFL && FL > 0.5 && (
+                                {!hanger && showFL && FL > 0.5 && (
                                     <ForceArrow xPx={cx} fromPy={cy} lenPy={FL * sc} dir={-1}
                                         color={COL_FL} sub="L" value={FL} showValue={showValues} />
                                 )}
-                                {showFG && (
+                                {!hanger && showFG && (
                                     <ForceArrow xPx={cx} fromPy={cy} lenPy={FG * sc} dir={1}
                                         color={COL_FG} sub="G" value={FG} showValue={showValues} dot />
                                 )}
-                                {showFN && FN > 0.5 && (
+                                {!hanger && showFN && FN > 0.5 && (
                                     <ForceArrow xPx={cx + sp * 0.28} fromPy={cy + hp / 2} lenPy={FN * sc} dir={-1}
                                         color={COL_FN} sub="N" value={FN} showValue={showValues} />
                                 )}
@@ -1117,7 +1148,7 @@
                     })}
 
                     {/* Massa-chip även för hängande mysterieföremål */}
-                    {blockData.filter(d => d.b.held).map(({ b }) => {
+                    {blockData.filter(d => d.b.held && mode === 'gissa').map(({ b }) => {
                         const sp = dims(b.V).bw * PX;
                         const cx = toPx(b.x);
                         const cy = toPy(b.y);
@@ -1145,7 +1176,7 @@
                 { name: 'Samma densitet', desc: 'trä i två storlekar — flyter lika djupt',
                   a: { mat: 'Trä (furu)', rho: 500, V: 2 }, b: { mat: 'Trä (furu)', rho: 500, V: 8 } },
             ];
-            const applyPreset = (p) => { setObjA({ ...p.a }); setObjB({ ...p.b }); setTwoObjects(true); };
+            const applyPreset = (p) => { setObjA({ ...p.a }); setObjB({ ...p.b }); setTwoObjects(true); setHangKey(k => k + 1); };
 
             const utforskaControls = (tag) => (
                 <React.Fragment>
@@ -1261,8 +1292,10 @@
                             </div>
                             <p className="mt-2" style={{ color: 'var(--lab-ink-soft, #3a4151)' }}>
                                 Dra föremålen från bänken ner i akvariet — släpp, tryck ner mot botten eller
-                                lyft upp dem igen. Flytkartan till vänster visar varför det blir som det blir,
-                                och i Gissa-läget förutsäger du resultatet innan föremålet släpps.
+                                lyft upp dem igen. Jämför du två föremål hänger de i stativet ovanför vätskan
+                                tills du klickar Släpp, så att de släpps samtidigt. Flytkartan till vänster visar
+                                varför det blir som det blir, och i Gissa-läget förutsäger du resultatet innan
+                                föremålet släpps.
                             </p>
                         </div>
 
@@ -1384,7 +1417,11 @@
                                         )}
                                         {mode === 'utforska' && (
                                             <div className="st-actions">
-                                                <button type="button" className="st-btn" onClick={resetBlocks}>Börja om</button>
+                                                {nagotHanger && (
+                                                    <button type="button" className="st-btn" onClick={slappAlla}
+                                                        style={{ background: 'var(--lab-accent, #c8324a)', borderColor: 'var(--lab-accent, #c8324a)', color: '#ffffff' }}>Släpp</button>
+                                                )}
+                                                <button type="button" className="st-btn" onClick={resetBlocks}>{jamfor ? 'Häng upp igen' : 'Börja om'}</button>
                                             </div>
                                         )}
                                     </div>

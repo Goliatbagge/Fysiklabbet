@@ -11,6 +11,27 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-10-25 — "Positronen som stannade, och en resa i ljusets fart"
+- Status: UTKAST skrivet lördag 2026-10-24 (före 08.00-deadline, molnsession). Tänkt
+  utskick söndag 2026-10-25 kl 06.00 svensk tid. **Kampanjen är INTE upplagd i
+  EmailOctopus** (molnet saknar Chrome): kör `/brev-till-octopus` lokalt, testskicka och
+  schemalägg (tidszonen default:ar till London). Bilderna i nyheter/brev/ pushades till main.
+- Brevperiod 2026-10-18 till 2026-10-24: sju artiklar, alla länkade. `verify-nyhetsbrev.js`
+  och `verify-sprak.js` utan fel (längdvarning ~694 ord).
+- Nyheter: 2026-10-23-positronen-som-stannade (hjälte), 2026-10-19-glaskulan-och-ljuset
+  (förra brevets teaser, infriad) och 2026-10-24-kulorna-som-laddas-som-kondensatorer
+  (miniatyrer). Läs även: röntgenblixtar (10-18), syrekärnor (10-21), spinn/supraledare
+  (10-22), moln/vindkraft (10-20).
+- Nytt på sajten: Ljusresan (skärmdump av startbilden), Sannolikhetshörnan (skärmdump efter
+  1 003 kast), Pendeln i nya kläder (ingen bild: Tailwind-CDN spärrad, layouten blev inte
+  representativ), teorigenomgångarna på engelska. Bortvalt: Ma 3b (10-17), guiden Så ritar du ett
+  koordinatsystem, Ljusresan-detaljer, pennlösningsfixar.
+- Bilder: nyheter/brev/2026-10-25-{ljusresan,sannolikhetshornan,positron-hero,glaskula-thumb,
+  kulor-thumb}.jpg. Skärmdumparna är tagna i Chromium med lokala three/cannon-es.
+- Veckans tips: utelämnat (brevet redan långt). tips.md orörd.
+- Teaser: mikrofluidikchipet med minne (Yale, PRX) ur ko.md, [BREVTEASER]; kontrollerat mot
+  data/nyheter.js, ej publicerat. Teasat 2026-10-25.
+
 ## 2026-10-18 — "Fysiklabbet i film, och en snabbsnurrande asteroid"
 - Status: SCHEMALAGD i EmailOctopus 2026-10-17 som "Nyhetsbrev nr 10 - 2026-10-18",
   söndag 2026-10-18 kl 06.00 (Europe/Amsterdam = svensk tid), 33 prenumeranter.

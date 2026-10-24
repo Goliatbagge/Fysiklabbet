@@ -103,6 +103,68 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-24-kulorna-som-laddas-som-kondensatorer",
+    date: "2026-10-24",
+    title: "Plastkulor som svävar i ultraljud laddas upp som kondensatorer",
+    deck: "Två små plastkulor hölls svävande i ultraljud och fick krocka med varandra om och om igen. Varje krock flyttade en slumpmässig mängd laddning, men sammantaget följde laddningen samma kurva som en kondensator som laddas upp, och efter några minuter började den plana ut.",
+    category: "Elektrostatik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-24-kulorna-som-laddas-som-kondensatorer.jpg",
+    imageAlt: "Nattfoto av ett vulkanutbrott. Över en glödande krater lyser himlen orange och röd av aska och lava, och flera förgrenade blixtar slår ned i askmolnet. I förgrunden syns svarta siluetter av träd.",
+    imageCredit: "Foto: R. Hadian, U.S. Geological Survey (public domain), via Wikimedia Commons. Blixtar i askmolnet över vulkanen Galunggung på Java 1982. Bilden visar inte experimentet.",
+    tags: ["elektrostatik", "laddning", "triboelektricitet", "statisk elektricitet", "kondensator", "faradays bur", "influens", "elektrisk ström", "ultraljud", "akustisk levitation", "stående våg", "vulkaner", "blixtar", "bristol"],
+    sources: [
+      { name: "Physics Magazine (APS): Tiny Particles Charge Like Capacitors (23 oktober 2026)", url: "https://physics.aps.org/articles/v19/143" },
+      { name: "Physical Review E: studien i fulltext (öppet tillgänglig, CC BY 4.0)", url: "https://journals.aps.org/pre/abstract/10.1103/p9zp-hf26" }
+    ],
+    research: {
+      citation: "T. F. O’Hara, A. C. Barnes, J. W. E. Drewitt, N. Croll Dawes och K. L. Aplin, ”It takes two to tribo: Stochastic charge evolution in repeated binary collisions of acoustically levitated particles”, Physical Review E 114, 045409 (2026)",
+      url: "https://doi.org/10.1103/p9zp-hf26"
+    },
+    simulering: {
+      href: "fysik1-bandgenerator-app.html",
+      name: "Bandgeneratorn",
+      text: "Ladda upp bandgeneratorns klot och se gnistor slå över till en jordad kula, aluminiumformar flyga i väg och hår resa sig."
+    },
+    larare: {
+      moment: [
+        { label: "Laddning och influens", href: "katalog.html?id=fy1-7.1" },
+        { label: "Elektrisk ström", href: "katalog.html?id=fy1-7.3" },
+        { label: "Elektriska fält och elektrisk fältstyrka", href: "katalog.html?id=fy1-7.10" },
+        { label: "Ljudvågor och stående vågor i pipor", href: "katalog.html?id=fy2-2.10" }
+      ],
+      fragor: [
+        "Kulan rör aldrig vid metallburen, men ändå går det en ström genom mätinstrumentet när den åker in. Förklara varför med hjälp av influens.",
+        "Mätinstrumentet registrerar en ström, inte en laddning. Hur stor laddning har en kula som ger en strömpuls på i medeltal 0,2 nA som varar i 40 ms? Vilket samband använder du?",
+        "Varför flyttar varje krock allt mindre laddning ju mer laddade kulorna redan är? Jämför med vad som händer med strömmen när en kondensator laddas upp av ett batteri."
+      ]
+    },
+    body: [
+      { type: "p", html: "Gnid en ballong mot håret, så fastnar den i taket. Att föremål blir laddade när de gnids mot eller slår emot varandra har människor vetat i mer än två tusen år. Ändå finns det fortfarande inget säkert svar på varför, särskilt inte när två bitar av samma material krockar. Nu har forskare vid University of Bristol i Storbritannien låtit två små plastkulor krocka med varandra om och om igen medan de svävade fritt i luften, och mätt laddningen på var och en efter varje krock." },
+      { type: "h2", text: "Samma plast, ändå olika laddning" },
+      { type: "p", html: "Uppladdningen kallas triboelektricitet, efter grekiskans ord för att gnida. För metaller är den ganska väl förstådd: elektroner vandrar över till den metall som håller hårdast i dem och stannar kvar där när ytorna skiljs åt. För isolatorer, som plast och glas, finns flera konkurrerande förklaringar. Det kan vara elektroner som flyttar sig, joner som följer med, molekylbitar som slits loss eller små mängder material som fastnar på den andra ytan. Det mest förbryllande är att två ytor av precis samma material också laddas, den ena positivt och den andra negativt." },
+      { type: "p", html: "Frågan är inte bara akademisk. Askkorn som krockar i ett vulkanutbrott kan ladda upp askmolnet så mycket att det blixtrar, damm laddas upp i stoftvirvlarna på Mars, och i industrin kan laddat pulver ge gnistor som antänder dammet." },
+      { type: "h2", text: "Kulor som svävar i ljud" },
+      { type: "p", html: "För att komma åt en enskild krock använde Tom O’Hara, doktorand i aerosolvetenskap, och hans handledare Karen Aplin en akustisk levitator. Två plattor med små högtalare skickar ultraljud med frekvensen 40&nbsp;kHz mot varandra, och vågorna bildar en stående våg med stilla punkter där lätta föremål kan sväva. Kulorna, ungefär 2&nbsp;mm stora, var gjorda av polystyren, samma plast som frigolit är tillverkat av. Genom att ändra högtalarnas fas, alltså hur deras svängningar ligger i förhållande till varandra, kunde forskarna antingen samla kulorna i en gemensam punkt, så att de krockade, eller skjuta isär dem till 20&nbsp;mm avstånd." },
+      { type: "p", html: "Där väntade varsin liten bur av metallnät. När en laddad kula närmar sig buren drar den laddningar i nätet till sig, och då går en ytterst svag ström genom ett mätinstrument som forskarna byggt själva. Strömpulsen räknas sedan om till laddning. Trådarna i nätet sitter 1,5&nbsp;mm isär, alltså mindre än hälften av ultraljudets våglängd på 8,65&nbsp;mm, så ljudvågen passerar nästan ostörd medan buren ändå fungerar som en sluten metallbur. När forskarna doppade samma kula i buren gång på gång varierade den uppmätta laddningen med bara 1,4&nbsp;procent." },
+      { type: "image", src: "nyheter/bilder/2026-10-24-kulorna-som-laddas-som-kondensatorer-2.jpg", alt: "Sju små fotografier i en mosaik, märkta a till g. De visar föremål som svävar fritt i luften: en vit droppe, en myra, färgade plastbitar, ett litet elektronikchip, droppar på rad och ett vitt korn.", caption: "Föremål som svävar i en akustisk levitator av samma grundtyp som den forskarna byggde vidare på: bland annat en droppe, en myra, plastbitar och ett elektronikchip. Bilden visar inte själva experimentet.", credit: "Foto: Asier Marzo, Adrian Barnes och Bruce W. Drinkwater (CC BY 4.0), via Wikimedia Commons" },
+      { type: "h2", text: "Slumpartat i varje krock, förutsägbart i längden" },
+      { type: "p", html: "Kulorna krockade ungefär var fjärde sekund, och mängden laddning som flyttades varierade kraftigt från krock till krock. Under den första minuten, cirka 15&nbsp;krockar, växte laddningen ändå nästan jämnt, med i genomsnitt 0,07 respektive 0,05&nbsp;pikocoulomb per krock för de två kulorna, knappt en halv miljon respektive omkring 300&nbsp;000 elementarladdningar. Den jämna ökningen stämmer med vad en grupp i Chicago såg med en liknande metod 2020. Men eftersom kulorna nu kunde hållas kvar i flera minuter gick det att se vad som hände sedan: laddningen växte allt långsammare och närmade sig ett tak. Under mätseriens 55&nbsp;krockar pekade kurvorna mot omkring 8,8&nbsp;pikocoulomb på den ena kulan och 6,5&nbsp;pikocoulomb på den andra." },
+      { type: "p", html: "Kurvan är densamma som när en kondensator laddas upp genom ett motstånd, $Q = Q_\\text{max} \\cdot \\left(1 - e^{-t/\\tau}\\right)$, där tidskonstanten $\\tau$ (tau) anger hur snabbt taket nås. Mätningarna passade kurvan mycket väl, med tidskonstanter på omkring 150 och 180&nbsp;sekunder. Den så kallade kondensatormodellen säger att laddningen på kulan själv motverkar fortsatt uppladdning, på samma sätt som spänningen över en kondensator bromsar strömmen ju närmare batteriets spänning den kommer." },
+      { type: "quote", html: "Det här arbetet fyller en lucka, och resultaten kan bli mycket användbara.", cite: "Galien Grosjean, fysiker vid Barcelonas universitet, som inte deltog i studien, till Physics Magazine" },
+      { type: "p", html: "Grosjean blev förvånad över hur snabbt uppladdningen avtar. Forskarna är själva noga med att en kurva som passar inte avslöjar vad som händer i kontaktytan. Samma utplaning kan uppstå om kulornas ytor helt enkelt har ett begränsat förråd av laddningsbärare som tar slut, eller om små lokala urladdningar äter upp den nya laddningen. Det visade kulparet valdes dessutom ut som typiskt: i de flesta par fick samma kula hela tiden samma tecken på sin laddning, och uppladdningen planade ut, men hur mycket och hur fort varierade." },
+      { type: "p", html: "Som jämförelse sprejade forskarna några kulor med ledande grafit. Då flyttades betydligt mindre laddning, och för de flesta krockar gick den knappt att skilja från bruset i mätningen. I ett material som leder ström sprider sig laddningen över ytan och kan jämnas ut vid nästa kontakt, i stället för att sitta kvar där den hamnade." },
+      { type: "h2", text: "Från labbänken till askmolnet" },
+      { type: "quote", html: "Kontrasten mellan hur slumpartad varje enskild krock är och hur anmärkningsvärt förutsägbart beteendet blir när krockarna upprepas många gånger.", cite: "Tom O’Hara, University of Bristol, om vad som fascinerar honom, till Physics Magazine" },
+      { type: "p", html: "Än så länge fungerar uppställningen bara med lätta material som polystyren. Med kraftigare ultraljudshögtalare och en annan geometri hoppas forskarna kunna lyfta tyngre korn och flytta burarna längre isär, så att mätningen blir ännu renare. Målet är bättre modeller för hur laddning byggs upp när otaliga korn krockar i ett pulver eller ett askmoln, där ingen kan följa en enskild krock." },
+      { type: "fact", title: "Visste du?", items: [
+        "Ordet elektron kommer från grekiskans ord för bärnsten. Redan i antiken var det känt att bärnsten som gnids drar till sig lätta saker som strå och fjäderdun.",
+        "Laddningen på den ena kulan, omkring 8,8&nbsp;pikocoulomb, motsvarar ungefär 55&nbsp;miljoner elementarladdningar. En pikocoulomb är en miljondels miljondels coulomb.",
+        "Ultraljudet i levitatorn har frekvensen 40&nbsp;kHz och våglängden 8,65&nbsp;mm. Det ger ljudhastigheten 0,00865&nbsp;m · 40&nbsp;000&nbsp;Hz ≈ 346&nbsp;m/s, vilket stämmer med ljudets fart i rumstempererad luft."
+      ] }
+    ]
+  },
+  {
     id: "2026-10-23-positronen-som-stannade",
     date: "2026-10-23",
     title: "En enda positron fångad och nedkyld i månader",

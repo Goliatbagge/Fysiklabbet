@@ -2789,6 +2789,30 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'triboelektricitet',
+    term: 'Triboelektricitet',
+    former: ['triboelektricitet', 'triboelektriciteten', 'triboelektrisk', 'triboelektriska', 'triboelektriskt', 'triboelektrisk uppladdning', 'kontaktuppladdning', 'kontaktuppladdningen', 'friktionselektricitet', 'friktionselektriciteten'],
+    kort: 'Den laddning som uppstår när två ytor rörs vid eller gnids mot varandra och sedan skiljs åt. Det är den som får en ballong att fastna i taket och håret att resa sig efter en tröja i ylle.',
+    relaterade: ['kondensator'],
+    body: [
+      { type: 'p', html: 'Dra av dig en fleecetröja i mörker, så kan du se små gnistor och höra det spraka. När två ytor nuddar varandra flyttas lite laddning från den ena till den andra, och när de dras isär blir den kvar: den ena ytan blir positiv, den andra negativ. Ordet kommer från grekiskans <em>tribein</em>, att gnida. Att gnida hjälper eftersom ytorna då får fler kontaktpunkter, men det är själva kontakten som laddar.' },
+      { type: 'p', html: 'För metaller går det att förklara ganska enkelt. Olika metaller håller olika hårt i sina elektroner, och när två metaller rör vid varandra vandrar elektroner till den som håller hårdast. För isolatorer som plast, glas och gummi är det svårare. Där kan det vara elektroner som flyttar sig, men också joner, molekylbitar som slits loss eller små mängder material som fastnar på den andra ytan, och forskarna är inte överens om vad som väger tyngst. Det märkligaste är att två bitar av exakt samma plast också laddas, den ena positivt och den andra negativt.' },
+      { type: 'p', html: 'Fenomenet är mer än en kul effekt. Blixtar i askmoln från vulkanutbrott kommer av att askkorn krockar och laddas upp. I fabriker kan laddat pulver eller mjöl ge gnistor som antänder dammet, och därför jordas maskiner och rör. Samtidigt används effekten med flit: i en bandgenerator laddas ett gummiband genom kontakt med en rulle, och i laserskrivare laddas tonerpulvret upp genom kontakt så att det fastnar där det ska på papperet.' }
+    ]
+  },
+  {
+    id: 'kondensator',
+    term: 'Kondensator',
+    former: ['kondensator', 'kondensatorn', 'kondensatorer', 'kondensatorerna', 'plattkondensator', 'plattkondensatorn'],
+    kort: 'En komponent som lagrar elektrisk laddning, i sin enklaste form två metallplattor med ett tunt isolerande skikt emellan. Ju mer laddning den har fått, desto svårare blir det att få in mer.',
+    relaterade: ['triboelektricitet'],
+    body: [
+      { type: 'p', html: 'En kondensator är i grunden två ledande plattor som inte rör vid varandra. Kopplar man den till ett batteri drar batteriet elektroner från den ena plattan och trycker över dem till den andra. Den ena plattan blir positiv, den andra lika mycket negativ, och mellan dem uppstår ett elektriskt fält och en spänning. Kopplar man sedan bort batteriet ligger laddningen kvar, redo att användas, ungefär som vatten i en vattenreservoar.' },
+      { type: 'p', html: 'Det intressanta är hur uppladdningen går till. I början strömmar laddningen in snabbt. Men ju mer laddning plattorna har fått, desto större blir spänningen över kondensatorn, och den spänningen motverkar batteriets. Strömmen blir därför allt svagare, och laddningen närmar sig ett tak utan att någonsin riktigt nå det. Kurvan beskrivs med en exponentialfunktion och en tidskonstant, som anger hur snabbt det går: efter en tidskonstant har kondensatorn fått omkring 63&nbsp;procent av sin slutliga laddning, och efter fem tidskonstanter är den i praktiken full.' },
+      { type: 'p', html: 'Kondensatorer finns i nästan all elektronik. Blixten i en kamera laddar en kondensator och tömmer den på en tusendels sekund, nätaggregat använder dem för att jämna ut spänningen, och pekskärmar känner av fingret genom att det ändrar hur mycket laddning små kondensatorer i skärmen rymmer. Samma matematik dyker också upp i helt andra sammanhang där något fylls på allt långsammare ju fullare det blir.' }
+    ]
+  },
+  {
     id: 'akustisk-levitation',
     term: 'Akustisk levitation',
     former: ['akustisk levitation', 'akustiska levitationen', 'levitation', 'levitationen', 'akustisk levitator', 'akustiska levitatorn', 'levitator', 'levitatorn', 'levitatorer'],

@@ -671,7 +671,7 @@
             const letAirIn = () => animateAir(1, 1500);
             const tShow = (k) => setShow((s) => ({ ...s, [k]: !s[k] }));
 
-            const SceneToggles = () => (
+            const sceneToggles = () => (
                 <div className="scene-toggles">
                     <div className="st-title">Visa</div>
                     <label><input type="checkbox" checked={show.timer} onChange={() => tShow('timer')} /><span>Stoppur</span></label>
@@ -725,7 +725,7 @@
                         <div className="lg:w-3/5 order-1">
                             <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
                                 <VacuumScene motion={motion} air={air} show={show} pumping={pumping} svgRef={svgRef} />
-                                <SceneToggles />
+                                {sceneToggles()}
 
                                 {isFullscreen && (
                                     <React.Fragment>

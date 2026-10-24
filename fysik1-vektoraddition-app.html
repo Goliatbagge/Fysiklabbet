@@ -653,7 +653,7 @@
             // fullskärm) reglagen + styrknapparna. Hopfällbar (.st-hide/.st-show-btn):
             // bottenpanelen .fs-controls skymde nedåtriktade vektorer i koordinat-
             // planets nedre del (placeringsregeln 2026-08-31).
-            const SceneToggles = () => togglesOpen ? (
+            const sceneToggles = () => togglesOpen ? (
                 <div className="scene-toggles">
                     <button className="st-hide" onClick={() => setTogglesOpen(false)}
                             aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
@@ -777,7 +777,7 @@
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
                                     <Scene v1={v1} v2={v2} method={method} p={p} show={show} onDrag={drag} svgRef={svgRef} dragId={dragId} />
 
-                                    <SceneToggles />
+                                    {sceneToggles()}
 
                                     <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
                                             title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>

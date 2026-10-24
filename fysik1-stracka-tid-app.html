@@ -165,6 +165,23 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
+        // Kompakt reglage-rad för inställningsrutan uppe till höger i
+        // fullskärm: etikett + värde på en rad, glidaren under. Definieras
+        // UTANFÖR komponenten: annars blir den en ny komponenttyp vid varje
+        // render och glidaren monteras om mitt i draget.
+        const StSlider = ({ label, value, min, max, step, unit, onChange, fmtFn }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    <span style={{ whiteSpace: 'nowrap', fontWeight: 600, color: 'var(--lab-ink, #0f1620)' }}>
+                        {fmtFn(value)} {unit}
+                    </span>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
         const DistanceTimeSimulation = () => {
             const [motionType, setMotionType] = useState('constant-velocity');
             const [s0, setS0] = useState(0); // Initial position (m)
@@ -252,21 +269,6 @@
                 const s = formatNumber(num, 1);
                 return (s === '0,0' || s === '-0,0') ? '0' : s;
             };
-
-            // Kompakt reglage-rad för inställningsrutan uppe till höger i
-            // fullskärm: etikett + värde på en rad, glidaren under.
-            const StSlider = ({ label, value, min, max, step, unit, onChange }) => (
-                <div className="st-slider">
-                    <div className="st-slider-top">
-                        <span dangerouslySetInnerHTML={{ __html: label }} />
-                        <span style={{ whiteSpace: 'nowrap', fontWeight: 600, color: 'var(--lab-ink, #0f1620)' }}>
-                            {fmt(value)} {unit}
-                        </span>
-                    </div>
-                    <input type="range" min={min} max={max} step={step} value={value}
-                           onChange={(e) => onChange(parseFloat(e.target.value))} />
-                </div>
-            );
 
             // Kursiv variabel (HTML)
             const V = ({ children }) => <em>{children}</em>;
@@ -730,12 +732,12 @@
                                                 sidopanelen (aldrig dubblerade). */}
                                             <div className="st-title mt">Reglage</div>
                                             <div className="st-sliders">
-                                                <StSlider label="Startläge (<em>s</em>₀)" value={s0}
+                                                <StSlider fmtFn={fmt} label="Startläge (<em>s</em>₀)" value={s0}
                                                           min={-20} max={30} step={1} unit="m" onChange={setS0} />
-                                                <StSlider label={motionType === 'constant-velocity' ? 'Hastighet (<em>v</em>)' : 'Starthastighet (<em>v</em>₀)'}
+                                                <StSlider fmtFn={fmt} label={motionType === 'constant-velocity' ? 'Hastighet (<em>v</em>)' : 'Starthastighet (<em>v</em>₀)'}
                                                           value={velocity} min={-10} max={10} step={1} unit="m/s" onChange={setVelocity} />
                                                 {showSlope && (
-                                                    <StSlider label="Tangeringspunkt (<em>t</em>)" value={tangentTime}
+                                                    <StSlider fmtFn={fmt} label="Tangeringspunkt (<em>t</em>)" value={tangentTime}
                                                               min={0} max={20} step={1} unit="s" onChange={setTangentTime} />
                                                 )}
                                             </div>

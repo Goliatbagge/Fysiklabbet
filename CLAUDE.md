@@ -294,6 +294,12 @@ node .claude/verify-begrepp.js
 # puppeteer-core i %TEMP%\pptr-test.
 node .claude/verify-fs-btn.js
 
+# Verifiera att GLIDARNA i simuleringarna inte monteras om vid varje render
+# (KÖR FÖRE COMMIT vid nya eller ändrade reglage!) — en komponent med <input>
+# som definieras inuti App eller skickas som ny pilfunktion byts ut vid varje
+# render, och draget dör. Se "Glidare får aldrig monteras om under ett drag".
+node .claude/verify-glidare-remount.js
+
 # Verifiera mobil-dispositionen i simuleringarna (KÖR FÖRE COMMIT vid
 # ändringar i scener, verktygsrutor eller sektion 8 i
 # styles-laborans-sim.css) — startar 390×744, går in i fullskärm i varje
@@ -2773,6 +2779,31 @@ Krav på mönstret:
 
 Komplett CSS- och React-mall: kopiera från
 `fysik2-cirkular-rorelse-app.html` eller `fysik1-arkimedes.html`.
+
+### ⚠️ Glidare får aldrig monteras om under ett drag
+
+**En React-komponent som innehåller en glidare (eller annan `<input>`) ska
+definieras på TOPPNIVÅN i skriptet, utanför `App`, och skickas aldrig som en
+ny pilfunktion.** Annars blir den en ny komponenttyp vid varje render, React
+byter ut hela underträdet och `<input>`-elementet som eleven håller i
+försvinner. Draget dör efter första steget, och glidaren känns omöjlig att
+ta tag i (påpekat 2026-10-24 i fullskärm i Plan matematisk pendel 3D, där
+`sliderSet((p) => <StSlider {...p} />)` gjorde det; samma fel fanns i
+fullskärmsglidarna i Sträcka–tid). Felet syns nästan bara i fullskärm,
+eftersom det är där inställningsrutan har egna, kompakta glidare, och värst
+i simuleringar som renderar om ofta (avläsningar som uppdateras flera gånger
+i sekunden).
+
+- **Skicka komponenten själv**: `sliderSet(StSlider)`, aldrig
+  `sliderSet((p) => <StSlider {...p} />)`.
+- **Behöver komponenten något ur `App`** (en formaterare, ett state): skicka
+  det som prop i stället för att definiera komponenten inne i `App`.
+- **En hjälpfunktion inne i `App` döps med gemen och anropas**:
+  `{sceneToggles()}`, aldrig `<SceneToggles />`. Ett anrop skapar ingen ny
+  komponenttyp.
+- `node .claude/verify-glidare-remount.js` hittar båda mönstren. Kör den
+  före commit när du skrivit eller ändrat reglage i en simulering, och dra
+  i varje glidare i fullskärm innan simuleringen räknas som klar.
 
 ### Mobil (≤600px): scenen överst, verktygen UNDER — aldrig ovanpå
 

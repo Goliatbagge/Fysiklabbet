@@ -15,14 +15,11 @@ Format per post:
 - **Minne i ett mikrofluidikchip: fibrer som minns hur vattnet flöt** **[BREVTEASER]** (nominerad 2026-10-19; originalet öppet, CC BY 4.0, publicerat 2026-10-09, sidan svarar 200) — Yale (Pahlavan, Rajput), ”Fluidic Hysterons and Memory in Flow Networks”, Physical Review X 2026, DOI 10.1103/hh4n-pw7w (PRX är öppen, CC BY). Ingång: hysteres, strömning. Strömningslära publicerades 2026-10-07. Källa (Phys.org 2026-10-14): https://phys.org/news/2026-10-memory-chip.html
   (tillagd 2026-10-15)
 
-- **Vad gör glas bra på att leda värme? Ljudhastigheten avgör** — termodynamik/materialfysik, 13 silikatglas, värmeledningsförmågan följer ljudhastigheten (fononer). Sukenaga m.fl. (Tohoku), Applied Physics Letters 129, 132203 (2026), DOI 10.1063/5.0351403; originalet ej kontrollerat (AIP, öppenhet okänd). Källa (Phys.org 2026-10-23): https://phys.org/news/2026-10-glass-good-key.html
+- **Vad gör glas bra på att leda värme? Ljudhastigheten avgör** — termodynamik/materialfysik, 13 silikatglas, värmeledningsförmågan följer ljudhastigheten (fononer). Sukenaga m.fl. (Tohoku), Applied Physics Letters 129, 132203 (2026), DOI 10.1063/5.0351403; fulltexten SPÄRRAD 2026-10-25 (pubs.aip.org ger Cloudflare-kontroll, Crossref saknar licens, inget arXiv; bara abstractet läst: 13 binära silikatglas M2/nO–SiO2, M = Li, Na, Ca, Pb, cirka 298 K, λ ≈ 3,0·10^-4 · v). Ta bara upp om fulltexten blir åtkomlig. Källa (Phys.org 2026-10-23): https://phys.org/news/2026-10-glass-good-key.html
   (tillagd 2026-10-24)
 
 - **Ett vanligt kiselgitter avslöjar en dold ”vridning” i ljus från elektronstrålar** — optik, Smith–Purcell-strålning? Originalet ej kontrollerat. Källa (Phys.org 2026-10-23): https://phys.org/news/2026-10-plain-silicon-reveals-hidden-electron.html
   (tillagd 2026-10-24)
-
-- **Schrödingers förlorade manuskript visar hans syn på kvantslumpen** — fysikhistoria/kvantfysik, tidlös och läsvärd. Originalet ej kontrollerat. Källa (Phys.org 2026-10-22): https://phys.org/news/2026-10-lost-schrdinger-manuscript-reveals-true.html
-  (tillagd 2026-10-23)
 
 - **Kvantinterferens fångar elektronvågor i en metall för första gången** — fasta tillståndets fysik; OBS supraledning 2026-10-22, vänta några dagar. Originalet ej kontrollerat. Källa (Phys.org 2026-10-22): https://phys.org/news/2026-10-quantum-electron-metal.html
   (tillagd 2026-10-23)

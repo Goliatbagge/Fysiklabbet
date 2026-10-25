@@ -4248,6 +4248,42 @@ window.BEGREPP = [
       { type: 'p', html: 'Att kuprater kan bli supraledande upptäcktes 1986, och upptäckten belönades med Nobelpriset i fysik året därpå. Varför de blir supraledande vid så höga temperaturer är fortfarande inte helt utrett. Den vanliga förklaringen för supraledare, där vibrationer i kristallgittret parar ihop elektronerna, räcker inte. Många forskare tror att magnetiska fluktuationer bland elektronernas spinn spelar huvudrollen.' }
     ]
   },
+  {
+    id: 'dolda-variabler',
+    term: 'Dolda variabler',
+    former: ['dolda variabler', 'dolda variablerna', 'dold variabel', 'dolda variabeln', 'gömda variabler'],
+    kort: 'Tänkta egenskaper som en partikel skulle bära med sig och som i förväg bestämmer vad en mätning ger. Finns de, är slumpen i kvantfysiken bara skenbar, precis som slumpen i en slantsingling.',
+    relaterade: ['determinism', 'bells-olikhet', 'kvantmekanik'],
+    body: [
+      { type: 'p', html: 'Kasta en tärning, så säger du att varje sida har chansen en på sex. Men tärningen följer helt vanliga rörelselagar. Om du visste exakt hur den släpptes, hur den snurrade och hur bordet ser ut, kunde du räkna ut vilken sida som hamnar uppåt. Slumpen beror på allt du inte vet. De okända detaljerna kan kallas dolda variabler: de finns där, de bestämmer utfallet, men du ser dem inte.' },
+      { type: 'p', html: 'Kvantmekaniken ger bara sannolikheter. En foton som når ett polarisationsfilter går igenom med en viss sannolikhet, och teorin säger ingenting om vad just den här fotonen kommer att göra. Frågan är om det är som med tärningen, så att varje foton bär på dolda egenskaper som redan avgjort saken, eller om slumpen är äkta och utfallet inte bestäms förrän mätningen görs. Albert Einstein, Erwin Schrödinger och David Bohm prövade alla tanken på dolda variabler, och Bohm byggde 1952 en hel teori som ger samma förutsägelser som vanlig kvantmekanik.' },
+      { type: 'p', html: 'År 1964 visade John Bell att en viss sort, dolda variabler som bara påverkas av det som finns i närheten, leder till förutsägelser som skiljer sig från kvantmekanikens. Experiment med sammanflätade fotonpar har sedan gett kvantmekaniken rätt. Dolda variabler är alltså inte helt uteslutna, men de måste i så fall hänga ihop över stora avstånd på ett sätt som ingen klassisk tärning gör. Vilken bild som är den rätta är fortfarande en öppen fråga.' },
+    ]
+  },
+  {
+    id: 'determinism',
+    term: 'Determinism',
+    former: ['determinism', 'determinismen', 'deterministisk', 'deterministiska', 'deterministiskt', 'indeterminism', 'indeterminismen', 'indeterministisk', 'indeterministiska', 'indeterministiskt'],
+    kort: 'Uppfattningen att allt som händer är helt bestämt av hur det var innan. Motsatsen, indeterminism, innebär att naturen har en äkta slump inbyggd.',
+    relaterade: ['dolda-variabler', 'kvantmekanik'],
+    body: [
+      { type: 'p', html: 'Newtons rörelselagar ser deterministiska ut. Vet du var en planet befinner sig och hur snabbt den rör sig i dag kan du räkna ut var den är om hundra år. Den franske matematikern Pierre-Simon de Laplace drog slutsatsen till sin spets år 1814: en tänkt varelse som kände alla partiklars lägen och hastigheter skulle kunna förutsäga hela framtiden och räkna ut hela det förflutna.' },
+      { type: 'p', html: 'Med kvantmekaniken på 1920-talet kom en ny sorts osäkerhet. Teorin ger bara sannolikheter för vad en mätning visar, och många fysiker drog slutsatsen att naturen själv är indeterministisk, alltså att utfallet inte är bestämt förrän det inträffar. Andra menade att sannolikheterna bara visar att teorin är ofullständig. Redan före kvantmekaniken hävdade några fysiker, bland dem Erwin Schrödinger, att även den klassiska fysikens lagar i grunden är statistiska.' },
+      { type: 'p', html: 'Frågan är inte bara filosofisk. Ett slumptal ur en kvantprocess, till exempel om en foton går igenom en halvgenomskinlig spegel eller studsar, används i dag när man behöver slump som ingen kan förutsäga, som i kryptering. Om naturen ytterst är deterministisk eller inte har ändå ingen kunnat avgöra med ett experiment.' },
+    ]
+  },
+  {
+    id: 'malus-lag',
+    term: 'Malus lag',
+    former: ['malus lag'],
+    kort: 'Ett samband för hur mycket polariserat ljus som går igenom ett polarisationsfilter: andelen är cosinus i kvadrat av vinkeln mellan ljusets polarisationsriktning och filtrets riktning.',
+    relaterade: ['polarisation', 'foton'],
+    body: [
+      { type: 'p', html: 'Håll två polaroidglasögon framför varandra och vrid det ena. När filtren är parallella ser du igenom dem nästan som genom ett. När du vrider blir det mörkare, och när filtren står vinkelräta mot varandra släpps nästan inget ljus igenom alls. Den franske fysikern Étienne-Louis Malus beskrev hur ljuset avtar år 1809.' },
+      { type: 'p', html: 'Sambandet säger att intensiteten efter filtret är <em>I</em>&nbsp;=&nbsp;<em>I</em><sub>0</sub>&nbsp;·&nbsp;cos<sup>2</sup>&nbsp;<em>α</em>, där <em>I</em><sub>0</sub> är intensiteten före filtret och <em>α</em> är vinkeln mellan ljusets polarisationsriktning och filtrets genomsläppsriktning. Vid 0° går allt igenom, vid 45° hälften och vid 90° ingenting. Skälet är att filtret bara släpper igenom den del av ljusvågens svängning som ligger längs filtrets riktning.' },
+      { type: 'p', html: 'Med kvantfysikens ögon består ljuset av fotoner, och en foton kan inte delas. Då betyder sambandet att varje foton släpps igenom med sannolikheten cos<sup>2</sup>&nbsp;<em>α</em>. Vid 60° går alltså var fjärde foton igenom, men ingen kan säga i förväg vilka. Den slumpen har gjort Malus lag till ett klassiskt exempel i diskussionen om huruvida naturen är slumpmässig på riktigt.' },
+    ]
+  }
 ];
 
 

@@ -103,6 +103,66 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-25-schrodingers-glomda-manuskript",
+    date: "2026-10-25",
+    title: "Schrödingers bortglömda manuskript visar att dold ordning i kvantvärlden inte gick att utesluta",
+    deck: "I ett arkiv i Wien har tre handskrivna sidor av Erwin Schrödinger legat otryckta i över 80 år. Med en enkel modell för ljus som passerar ett polarisationsfilter visade han att ett påstått bevis för att slumpen i kvantfysiken är äkta inte höll, fast han själv trodde att den var det.",
+    category: "Fysikhistoria",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-25-schrodingers-glomda-manuskript.jpg",
+    imageAlt: "Svartvitt gruppfoto av 29 fysiker i mörka kostymer, uppställda i tre rader framför en stenbyggnad. I mitten av den främre raden sitter Albert Einstein, och Marie Curie sitter trea från vänster. Erwin Schrödinger står i den bakre raden, i ljus kavaj och fluga.",
+    imageCredit: "Foto: Benjamin Couprie, Institut International de Physique Solvay (public domain), via Wikimedia Commons. Solvaykonferensen i Bryssel 1927, där kvantmekanikens tolkning debatterades. Schrödinger står i bakre raden, sjätte från vänster.",
+    tags: ["kvantmekanik", "fysikhistoria", "schrödinger", "dolda variabler", "determinism", "slump", "polarisation", "malus lag", "foton", "von neumann", "bell", "sannolikhet"],
+    sources: [
+      { name: "Phys.org: Lost Schrödinger manuscript reveals his true view of quantum randomness (22 oktober 2026)", url: "https://phys.org/news/2026-10-lost-schrdinger-manuscript-reveals-true.html" },
+      { name: "arXiv: förtrycket i fulltext, med hela manuskriptet återgivet (öppet tillgängligt)", url: "https://arxiv.org/abs/2610.20752" },
+      { name: "Nobelpriset: nobelpriset i fysik 1933 (Schrödinger och Dirac)", url: "https://www.nobelprize.org/prizes/physics/1933/summary/" },
+      { name: "Nobelpriset: nobelpriset i fysik 2022 (Aspect, Clauser och Zeilinger)", url: "https://www.nobelprize.org/prizes/physics/2022/summary/" }
+    ],
+    research: {
+      citation: "F. Del Santo, ”Schrödinger’s unpublished hidden-variable model in the 1944-45 debate over the ’Collapse of Determinism’”, arXiv:2610.20752 (2026), förtryck som ännu inte granskats av andra forskare",
+      url: "https://arxiv.org/abs/2610.20752"
+    },
+    larare: {
+      moment: [
+        { label: "Elektromagnetiska vågor och ljus", href: "katalog.html?id=fy2-4.1" },
+        { label: "Fotoelektrisk effekt", href: "katalog.html?id=fy2-4.5" },
+        { label: "Våg-partikeldualitet och de Broglies hypotes", href: "katalog.html?id=fy2-4.6" }
+      ],
+      fragor: [
+        "Ett polarisationsfilter vrids så att vinkeln mot ljusets polarisationsriktning är 60°. Hur stor andel av fotonerna släpps igenom enligt Malus lag, och vilka värden på det dolda talet x släpps igenom i Schrödingers modell?",
+        "Varför räcker det inte att varje foton bär med sig ett färdigt ja eller nej, när filtret kan vridas medan fotonen är på väg? Gäller samma problem för en slantsingling?",
+        "Schrödinger skrev att experiment och logik aldrig kan bevisa att vare sig en deterministisk eller en slumpmässig natur är omöjlig. Håller ni med? Vad har förändrats sedan Bells arbete på 1960-talet?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Singlar du slant säger du att det är femtio procent chans för krona. Men egentligen är utfallet bestämt redan när myntet lämnar tummen. Kände du kraften, vinkeln och luftmotståndet exakt skulle du kunna räkna ut svaret i förväg. Slumpen sitter i det du inte vet, inte i myntet." },
+      { type: "p", html: "I kvantfysiken är det annorlunda, eller så verkar det åtminstone. Teorin ger bara sannolikheter, och sedan 1920-talet har fysiker grälat om varför. Är slumpen äkta, eller finns det en dold ordning bakom den, så kallade dolda variabler, som vi bara inte ser? Nu har fysikern och vetenskapshistorikern Flavio Del Santo vid Genèves universitet hittat ett inlägg i den debatten som aldrig blev publicerat, skrivet av en av kvantmekanikens grundare, Erwin Schrödinger." },
+      { type: "h2", text: "Ett omöjlighetsbevis och ett gräl i Nature" },
+      { type: "p", html: "År 1932 presenterade matematikern John von Neumann vad de flesta uppfattade som ett bevis för att kvantmekaniken inte kan kompletteras med dolda variabler. Filosofen Grete Hermann påpekade redan 1935 att beviset vilade på ett antagande som inte behövde gälla, men hennes kritik fick nästan ingen uppmärksamhet. I mer än tio år slutade i stort sett alla att leta efter sådana modeller." },
+      { type: "p", html: "Under andra världskriget blossade frågan upp igen. Matematikern Edmund Whittaker hävdade i en föreläsning i London i maj 1943 att slumpen i kvantvärlden är äkta, och han gav ett enkelt exempel med ljus. När en foton som är polariserad i en viss riktning når ett polarisationsfilter som är vridet vinkeln $\\alpha$ mot fotonens polarisationsriktning släpps den igenom med sannolikheten $\\cos^2 \\alpha$. Det är Malus lag, översatt till enskilda fotoner." },
+      { type: "p", html: "Whittaker tänkte sig att varje foton bär ett dolt ja eller nej, som ett mynt som redan landat. Då måste andelen $\\cos^2 \\alpha$ av fotonerna ha ett ja. Men filtret kan vridas medan fotonerna är på väg, och de färdiga svaren ändras inte av det. Andelen som släpps igenom skulle alltså inte följa vinkeln, och det gör den. Slutsatsen blev att dolda variabler är omöjliga. Exemplet satte i gång en debatt med elva inlägg på ungefär ett år, tio av dem i tidskriften <em>Nature</em>." },
+      { type: "h2", text: "Ett tal mellan 0 och 1 i stället för ett ja eller nej" },
+      { type: "p", html: "Schrödinger följde debatten och skrev ett svar på tre sidor under samma rubrik, ”<span class=\"no-begrepp\">Collapse of Determinism</span>”. Det är inte daterat, men det nämner ett inlägg från den 25 november 1944 och måste alltså ha skrivits senare. Manuskriptet trycktes aldrig och ligger i Schrödingers arkiv vid Wiens universitet. Del Santo har nu skrivit av det och analyserat det." },
+      { type: "quote", html: "Även jag har förbryllats av denna slutsats. Det absurda resultatet orsakas uppenbart av det förenklande antagandet att parametern bara kan ha två diskreta värden.", cite: "Erwin Schrödinger i det opublicerade manuskriptet, citerat i förtrycket" },
+      { type: "p", html: "I Schrödingers modell bär varje foton i stället ett dolt tal $x$ någonstans mellan 0 och 1, och alla värden är lika vanliga. Fotonen går igenom filtret om $x \\geq \\sin^2 \\alpha$. Andelen fotoner som klarar det är då $1 - \\sin^2 \\alpha = \\cos^2 \\alpha$, precis vad Malus lag kräver. Med $\\alpha = 30^\\circ$ blir $\\sin^2 \\alpha = 0{,}25$, och fotonerna med $x$ mellan 0,25 och 1 släpps igenom, alltså 75&nbsp;procent." },
+      { type: "p", html: "Poängen är att svaret bestäms både av fotonen och av filtret. Fotonen bär inget färdigt ja eller nej, utan ett tal som jämförs med filtrets vinkel först när de möts. Att filtret vrids under resan gör därför ingenting." },
+      { type: "p", html: "Schrödinger såg också nästa problem. Efter filtret har bara fotoner med stora $x$ kvar, och då skulle ett andra filter ge fel resultat. Han lade därför till en regel för hur talet ändras när fotonen passerar: $x' = \\dfrac{x - \\sin^2 \\alpha}{\\cos^2 \\alpha}$. Den sträcker ut intervallet från $\\sin^2 \\alpha$ till 1 så att det åter täcker hela vägen från 0 till 1. ”Jag kan inte se någon motsägelse i att anta dessa förändringar”, skrev han." },
+      { type: "image", src: "nyheter/bilder/2026-10-25-schrodingers-glomda-manuskript-2.jpg", alt: "Svartvitt porträtt av en medelålders man i profil, med bakåtkammat mörkt hår, runda glasögon med tunna bågar, vit skjorta och fluga.", caption: "Erwin Schrödinger delade nobelpriset i fysik 1933 med Paul Dirac för upptäckten av nya produktiva former av atomteorin. Drygt tio år senare tog han ställning i debatten om slumpen i kvantfysiken, men hans svar trycktes aldrig.", credit: "Foto: Robertson, Berlin, via Smithsonian Institution (inga kända upphovsrättsliga begränsningar), Wikimedia Commons" },
+      { type: "h2", text: "En principfråga, inte en trosbekännelse" },
+      { type: "p", html: "Betyder fyndet att Schrödinger trodde på en förutbestämd natur? Nej, enligt Del Santo. Redan i början av 1920-talet, innan kvantmekaniken fanns, hade Schrödinger kallat determinismen en filosofisk fördom och hävdat att naturlagarna är statistiska i grunden. Modellen ska läsas som ett principbevis: den visar att ett påstått bevis för omöjlighet inte höll, inte att dolda variabler är rätt." },
+      { type: "quote", html: "Experimentella belägg plus logisk slutledning kan aldrig bevisa att vare sig den deterministiska eller den indeterministiska synen är omöjlig.", cite: "Erwin Schrödinger i det opublicerade manuskriptet" },
+      { type: "p", html: "Varför publicerade han det inte? Del Santo håller det för troligt att Schrödinger fick syn på en artikel av fysikern Heinrich Pelzer, som redan i maj 1944 hade visat ungefär samma sak. Pelzers modell ger samma resultat för ett enda filter, men han angav ingen exakt regel för hur fotonens dolda tal ändras efteråt. Schrödinger kan ha tyckt att huvudpoängen redan var gjord." },
+      { type: "p", html: "Del Santo pekar också på något som ingen i debatten tycks ha lagt märke till: behovet av ett tal i stället för ett ja eller nej är inte alls kvantmekaniskt. Även en slant behöver mer än ett färdigt svar om golvets höjd kan ändras medan myntet är i luften." },
+      { type: "fact", title: "Hur slutade striden?", items: [
+        "År 1952 presenterade David Bohm en fullständig teori med dolda variabler som ger samma förutsägelser som kvantmekaniken. Den visade att von Neumanns bevis inte kunde gälla så allmänt som man trott.",
+        "År 1964 visade John Bell att dolda variabler som bara påverkas av det som finns i närheten leder till förutsägelser som går att pröva. Experiment har sedan uteslutit just den sortens modeller, och 2022 fick Alain Aspect, John Clauser och Anton Zeilinger nobelpriset i fysik för sådana försök.",
+        "Schrödingers modell handlar om en foton i taget och berörs inte direkt av Bells test, som kräver två sammanflätade partiklar.",
+        "Förtrycket har ännu inte granskats av andra forskare. Schrödingers egen text återges i sin helhet sist i det."
+      ] }
+    ]
+  },
+  {
     id: "2026-10-24-kulorna-som-laddas-som-kondensatorer",
     date: "2026-10-24",
     title: "Plastkulor som svävar i ultraljud laddas upp som kondensatorer",

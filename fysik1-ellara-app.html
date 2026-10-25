@@ -30,79 +30,29 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
     <style>
-        .dark-container {
-            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
-        }
+        .dark-container { background: transparent; }
         .glass-card {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(200, 50, 74, 0.15);
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
         }
-        .glass-card-light {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(15, 22, 32, 0.28);
-        }
-        .glow-text {
-            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
-        }
-        .btn-glow {
-            box-shadow: 0 0 20px rgba(200, 50, 74, 0.3);
-            transition: all 0.3s ease;
-        }
-        .btn-glow:hover {
-            box-shadow: 0 0 30px rgba(200, 50, 74, 0.5);
-        }
-        .electron-glow {
-            filter: drop-shadow(0 0 6px rgba(200, 50, 74, 0.8));
-        }
-        .wire-glow {
-            filter: drop-shadow(0 0 3px rgba(200, 50, 74, 0.4));
-        }
-        .bulb-glow {
-            filter: drop-shadow(0 0 15px rgba(250, 204, 21, 0.6));
-        }
-        .battery-clickable:hover .battery-pole {
-            stroke: #67e8f9;
-            filter: drop-shadow(0 0 6px rgba(200, 50, 74, 0.8));
-        }
-        .battery-clickable:hover text {
-            filter: drop-shadow(0 0 4px currentColor);
-        }
-        .battery-clickable {
-            transition: transform 0.1s ease;
-        }
-        .battery-clickable:active {
-            transform: scale(0.95);
-        }
-        input[type="range"] {
-            -webkit-appearance: none;
-            appearance: none;
-            background: linear-gradient(to right, #0ea5e9 0%, #0ea5e9 var(--progress, 50%), #1e293b var(--progress, 50%), #1e293b 100%);
-            border-radius: 8px;
-            height: 8px;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-            cursor: pointer;
-            box-shadow: 0 0 12px rgba(200, 50, 74, 0.6);
-        }
-        input[type="range"]::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 0 12px rgba(200, 50, 74, 0.6);
-        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); width: 100%; }
+
+        /* Formelkortet: ord-etiketter över variablerna */
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink, #0f1620); font-size: 19px; }
+
+        .panel-rubrik { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+                        color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 10px; }
+
+        /* Batteriet går att klicka på för att vända det */
+        .batteri-klick { cursor: pointer; }
+        .batteri-klick:hover .batteri-pol { stroke: var(--lab-accent, #c8324a); }
+
         /* Fullskärmsläge: scenens svg skalar med wrappern (scopad till
            direkta barn så fs-btn-ikonen inte blåses upp) */
+        body.lab-sim .scene-wrap { border-radius: 12px; overflow: hidden;
+                                   border: 1px solid rgba(15,22,32,0.18); }
         body.lab-sim .scene-wrap > svg { display: block; width: 100%; height: auto; }
         body.lab-sim .scene-wrap:fullscreen > svg { width: 100%; height: 100%; }
         body.lab-sim .scene-wrap:-webkit-full-screen > svg { width: 100%; height: 100%; }
@@ -219,7 +169,7 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
-        // Generera "burnout"-ljud - kort elektrisk smäll när lampan bränner sönder
+        // Kort elektrisk smäll när glödlampan går sönder (syntetiserat, inga ljudfiler)
         const playBurnoutSound = () => {
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -228,1101 +178,789 @@
                 const length = sampleRate * duration;
                 const buffer = ctx.createBuffer(1, length, sampleRate);
                 const data = buffer.getChannelData(0);
-
                 for (let i = 0; i < length; i++) {
                     const t = i / sampleRate;
-                    // Kort kraftig attack som snabbt dör ut
                     const pop = (t < 0.01) ? Math.sin(2 * Math.PI * 150 * t) * 4 : 0;
-                    // Elektriskt surr/fräsande som tonar ut
                     const buzz = Math.sin(2 * Math.PI * 100 * t) * Math.exp(-t * 8) * 0.5;
                     const fizzle = (Math.random() * 2 - 1) * Math.exp(-t * 6) * 0.4;
-                    // Lågfrekvent "thump"
                     const thump = Math.sin(2 * Math.PI * 60 * t) * Math.exp(-t * 20);
                     data[i] = (pop + buzz + fizzle + thump) * 0.25;
                 }
-
                 const source = ctx.createBufferSource();
                 source.buffer = buffer;
-
                 const lowpass = ctx.createBiquadFilter();
                 lowpass.type = 'lowpass';
                 lowpass.frequency.value = 2000;
-
                 source.connect(lowpass);
                 lowpass.connect(ctx.destination);
                 source.start();
                 source.onended = () => ctx.close();
             } catch (e) {
-                // Ljud stöds inte - ignorera tyst
+                // Ljud stöds inte, ignorera tyst
             }
         };
 
-        const CircuitType = {
-          DC: 'dc',
-          AC: 'ac',
+        const fmt = (v, d) => {
+            const s = v.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',');
         };
+        const fmtI = (i) => fmt(i, i < 1 ? 2 : 1);
 
-        // Constants for the SVG path
-        const PATH_LENGTH = 1000;
-        const TOP_WIRE_END = 300;
-        const RIGHT_WIRE_END = 500;
-        const BOTTOM_WIRE_END = 800;
-        const NUM_ELECTRONS = 40;
-        const NUM_ARROWS = 12;
-        const AC_AMPLITUDE_FACTOR = 10;
-        const ANIMATION_SPEED_FACTOR = 0.8;
+        const CircuitType = { DC: 'dc', AC: 'ac' };
 
-        const getCoordsOnPath = (position) => {
-          const p = position % PATH_LENGTH;
+        // ── Kretsens geometri (viewBox 640 × 400) ─────────────────────
+        // Ledningen är en rektangel. Positionen längs ledningen räknas
+        // medurs från det övre vänstra hörnet: överledningen, högra sidan
+        // (komponenten), bottenledningen och vänstra sidan (batteriet).
+        const VB_W = 640, VB_H = 400;
+        const XL = 90, XR = 550, YT = 70, YB = 330;
+        const LEN_T = XR - XL, LEN_R = YB - YT;
+        const PER = 2 * (LEN_T + LEN_R);
+        const MID_Y = (YT + YB) / 2;
+        const COMP_POS = LEN_T + (MID_Y - YT);     // komponentens mitt längs ledningen
+        const RES_HALF = 45;                       // resistorns halva längd
+        const AMP_X = (XL + XR) / 2;
+        const WIRE_PATH = `M ${XL} ${YT} H ${XR} V ${YB} H ${XL} Z`;
+        const NUM_ELECTRONS = 60;
+        const NUM_ARROWS = 16;
+        const DRIFT_PX_PER_AMP = 26;   // driftfart i bilden: px/s per ampere (∝ strömmen)
+        const AC_PX_PER_AMP = 9;       // svängningens amplitud vid växelström: px per ampere
+        const BREAK_CURRENT = 24;      // lampan går sönder vid denna ström (A)
+        const INK = '#0f1620';
+        const MUTED = '#5a6170';
+        const ACCENT = '#c8324a';
+        const PAPER = '#f4eee2';
 
-          if (p >= 0 && p < TOP_WIRE_END) {
-            return { x: 50 + p, y: 50 };
-          } else if (p >= TOP_WIRE_END && p < RIGHT_WIRE_END) {
-            return { x: 350, y: 50 + (p - TOP_WIRE_END) };
-          } else if (p >= RIGHT_WIRE_END && p < BOTTOM_WIRE_END) {
-            return { x: 350 - (p - RIGHT_WIRE_END), y: 250 };
-          } else {
-            return { x: 50, y: 250 - (p - BOTTOM_WIRE_END) };
-          }
+        const pointAt = (pos) => {
+            const p = ((pos % PER) + PER) % PER;
+            if (p < LEN_T) return { x: XL + p, y: YT, dx: 1, dy: 0 };
+            if (p < LEN_T + LEN_R) return { x: XR, y: YT + (p - LEN_T), dx: 0, dy: 1 };
+            if (p < 2 * LEN_T + LEN_R) return { x: XR - (p - LEN_T - LEN_R), y: YB, dx: -1, dy: 0 };
+            return { x: XL, y: YB - (p - 2 * LEN_T - LEN_R), dx: 0, dy: -1 };
         };
+        const pathDist = (a, b) => {
+            const d = (((a - b) % PER) + PER) % PER;
+            return Math.min(d, PER - d);
+        };
+        const clamp01 = (v) => Math.max(0, Math.min(1, v));
 
-        const CircuitDiagram = ({ circuitType, showElectrons, showCurrentDirection, currentStrength, acFrequency, isPaused, isBulbBroken, batteryFlipped, onBatteryClick, showValues, voltage, resistance, componentType, sceneWrapRef, overlay }) => {
-          const [electrons, setElectrons] = useState([]);
-          const [arrows, setArrows] = useState([]);
-          const animationFrameId = useRef(null);
-          const dcPositionOffset = useRef(0);
-          const dcArrowPositionOffset = useRef(0);
-          const currentStrengthRef = useRef(currentStrength);
-          const isPausedRef = useRef(isPaused);
-          const isBulbBrokenRef = useRef(isBulbBroken);
-          const batteryFlippedRef = useRef(batteryFlipped);
-          const componentTypeRef = useRef(componentType);
-          const animateRef = useRef(null);
+        // Glödlampans ljusstyrka ur effekten P = U · I (mättas mjukt)
+        const brightness = (U, I) => 1 - Math.exp(-(U * I) / 20);
 
-          useEffect(() => {
-            currentStrengthRef.current = currentStrength;
-          }, [currentStrength]);
-
-          useEffect(() => {
-            isPausedRef.current = isPaused;
-            if (!isPaused && animationFrameId.current === null && animateRef.current) {
-                animationFrameId.current = requestAnimationFrame(animateRef.current);
+        // Positiva joner i resistorns metallgitter
+        const IONS = (() => {
+            const out = [];
+            for (let r = 0; r < 6; r++) {
+                const y = MID_Y - 37 + r * 14.8;
+                const xs = r % 2 === 0 ? [XR - 12, XR + 12] : [XR - 15.5, XR, XR + 15.5];
+                xs.forEach((x) => out.push({ x, y }));
             }
-          }, [isPaused]);
+            return out;
+        })();
 
-          useEffect(() => {
-            isBulbBrokenRef.current = isBulbBroken;
-          }, [isBulbBroken]);
-
-          useEffect(() => {
-            batteryFlippedRef.current = batteryFlipped;
-          }, [batteryFlipped]);
-
-          useEffect(() => {
-            componentTypeRef.current = componentType;
-          }, [componentType]);
-
-          useEffect(() => {
-            const initialElectrons = [];
-            for (let i = 0; i < NUM_ELECTRONS; i++) {
-              initialElectrons.push({
-                id: i,
-                basePosition: (i * PATH_LENGTH) / NUM_ELECTRONS,
-              });
+        // ── Scenen ────────────────────────────────────────────────
+        // Det statiska ritas av React. Elektroner, strömpilar och lampans
+        // sken flyttas direkt i DOM:en i en requestAnimationFrame-loop, så
+        // att React inte behöver rendera om scenen 60 gånger i sekunden.
+        const CircuitScene = (props) => {
+            const { circuitType, showElectrons, showArrows, current, voltage, resistance,
+                    isBroken, batteryFlipped, onBatteryClick, showValues, componentType,
+                    sceneWrapRef, overlay } = props;
+            const live = useRef(props);
+            live.current = props;
+            const elRefs = useRef([]);
+            const arRefs = useRef([]);
+            const glowRef = useRef(null);
+            const coreRef = useRef(null);
+            const seeds = useRef(null);
+            if (!seeds.current) {
+                seeds.current = Array.from({ length: NUM_ELECTRONS }, (_, i) => ({
+                    base: (i + Math.random() * 0.5) * PER / NUM_ELECTRONS,
+                    f1: 5 + Math.random() * 5, f2: 8 + Math.random() * 6, f3: 4 + Math.random() * 5,
+                    p1: Math.random() * 6.28, p2: Math.random() * 6.28, p3: Math.random() * 6.28,
+                }));
             }
-            setElectrons(initialElectrons);
+            const st = useRef({ drift: 0, tAc: 0, tTh: 0, last: null });
 
-            const initialArrows = [];
-            for (let i = 0; i < NUM_ARROWS; i++) {
-                initialArrows.push({
-                    id: i,
-                    basePosition: (i * PATH_LENGTH) / NUM_ARROWS,
-                });
-            }
-            setArrows(initialArrows);
-
-            dcPositionOffset.current = 0;
-            dcArrowPositionOffset.current = 0;
-
-            const animate = (timestamp) => {
-              if (isPausedRef.current) {
-                animationFrameId.current = null;
-                return;
-              }
-
-              // Stop animation if bulb is broken (only when bulb is selected)
-              const isFrozen = componentTypeRef.current === 'bulb' && isBulbBrokenRef.current;
-              if (circuitType === CircuitType.DC && !isFrozen) {
-                const animationStep = currentStrengthRef.current * ANIMATION_SPEED_FACTOR;
-                // Reverse direction if battery is flipped
-                const direction = batteryFlippedRef.current ? 1 : -1;
-                dcPositionOffset.current = (dcPositionOffset.current + direction * animationStep) % PATH_LENGTH;
-                dcArrowPositionOffset.current = (dcArrowPositionOffset.current - direction * animationStep) % PATH_LENGTH;
-              }
-
-              setElectrons(prev => [...prev]);
-
-              animationFrameId.current = requestAnimationFrame(animate);
-            };
-
-            animateRef.current = animate;
-
-            if (!isPausedRef.current) {
-                animationFrameId.current = requestAnimationFrame(animate);
-            }
-
-            return () => {
-              if (animationFrameId.current) {
-                cancelAnimationFrame(animationFrameId.current);
-              }
-            };
-          }, [circuitType]);
-
-          const acAnimationFrequencyFactor = (2 * Math.PI * acFrequency) / 1000;
-
-          // Handler for battery click - defined at component level
-          const handleBatteryClick = (e) => {
-            e.stopPropagation();
-            if (onBatteryClick) {
-              onBatteryClick();
-            }
-          };
-
-          // Swedish standard symbol: circle with X
-          const Bulb = () => {
-            const glowIntensity = isBulbBroken ? 0 : Math.max(0, Math.min(currentStrength / 2, 1));
-            const glowColor = isBulbBroken ? '#64748b' : (glowIntensity > 0.1 ? '#fbbf24' : '#38bdf8');
-
-            if (isBulbBroken) {
-              return (
-                <g>
-                  {/* Smoke/burnt effect */}
-                  <ellipse cx="350" cy="130" rx="12" ry="20" fill="#475569" opacity="0.3" style={{ filter: 'blur(8px)' }} />
-                  {/* Background circle to hide wire */}
-                  <circle
-                    cx="350" cy="150" r="17"
-                    fill="#f3eee4"
-                  />
-                  {/* Broken circle with cracks */}
-                  <circle
-                    cx="350" cy="150" r="18"
-                    fill="none"
-                    stroke="#64748b"
-                    strokeWidth="2.5"
-                    strokeDasharray="8 4"
-                  />
-                  {/* Broken X - jagged lines */}
-                  <path
-                    d="M 337 137 L 348 148 M 352 152 L 363 163"
-                    stroke="#64748b"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M 363 137 L 352 148 M 348 152 L 337 163"
-                    stroke="#64748b"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                  />
-                  {/* Crack lines */}
-                  <path
-                    d="M 340 135 L 344 142 L 338 148"
-                    stroke="#ef4444"
-                    strokeWidth="1.5"
-                    fill="none"
-                    opacity="0.7"
-                  />
-                  <path
-                    d="M 360 155 L 364 160 L 358 166"
-                    stroke="#ef4444"
-                    strokeWidth="1.5"
-                    fill="none"
-                    opacity="0.7"
-                  />
-                  {/* Burnt spot */}
-                  <circle cx="350" cy="150" r="6" fill="#e4dac6" opacity="0.5" />
-                </g>
-              );
-            }
-
-            // Background color transitions from dark to warm glow
-            const bgColor = glowIntensity > 0.1
-              ? `rgba(251, 191, 36, ${glowIntensity * 0.3})`
-              : '#050510';
-
-            return (
-              <g>
-                {/* Outer glow when lit */}
-                <circle
-                  cx="350" cy="150" r="28"
-                  fill="#fef08a"
-                  style={{ opacity: glowIntensity * 0.4, filter: 'blur(10px)' }}
-                />
-                {/* Background circle to hide wire - glows when lit */}
-                <circle
-                  cx="350" cy="150" r="17"
-                  fill="#f3eee4"
-                />
-                {/* Inner glow overlay */}
-                {glowIntensity > 0.1 && (
-                  <circle
-                    cx="350" cy="150" r="16"
-                    fill="#fbbf24"
-                    style={{ opacity: glowIntensity * 0.4 }}
-                  />
-                )}
-                {/* Circle */}
-                <circle
-                  cx="350" cy="150" r="18"
-                  fill="none"
-                  stroke={glowColor}
-                  strokeWidth="2.5"
-                  style={{ filter: glowIntensity > 0.3 ? 'drop-shadow(0 0 8px rgba(251, 191, 36, 0.6))' : 'none' }}
-                />
-                {/* X inside - diagonal lines */}
-                <line
-                  x1="337" y1="137" x2="363" y2="163"
-                  stroke={glowColor}
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                />
-                <line
-                  x1="363" y1="137" x2="337" y2="163"
-                  stroke={glowColor}
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                />
-                {/* Resistance value */}
-                {showValues && (
-                  <text x="320" y="150" textAnchor="end" dominantBaseline="middle" fill="#5a6170" fontSize="12px">
-                    <tspan fontStyle="italic">R</tspan>
-                    <tspan> = {resistance} Ω</tspan>
-                  </text>
-                )}
-              </g>
-            );
-          };
-
-          // Swedish standard symbol: rectangular box for resistor
-          const Resistor = () => {
-            const boxWidth = 50;
-            const boxHeight = 20;
-            const x = 200;  // Center of bottom wire
-            const y = 250;
-
-            return (
-              <g>
-                {/* Background to hide wire */}
-                <rect
-                  x={x - boxWidth/2 - 5}
-                  y={y - 3}
-                  width={boxWidth + 10}
-                  height={6}
-                  fill="#f3eee4"
-                />
-                {/* Resistor box */}
-                <rect
-                  x={x - boxWidth/2}
-                  y={y - boxHeight/2}
-                  width={boxWidth}
-                  height={boxHeight}
-                  fill="none"
-                  stroke="#0f1620"
-                  strokeWidth="2.5"
-                  rx="2"
-                />
-                {/* Connection lines (already part of main wire, just for visual clarity) */}
-                <line
-                  x1={x - boxWidth/2}
-                  y1={y}
-                  x2={x - boxWidth/2 - 5}
-                  y2={y}
-                  stroke="#0f1620"
-                  strokeWidth="2"
-                />
-                <line
-                  x1={x + boxWidth/2}
-                  y1={y}
-                  x2={x + boxWidth/2 + 5}
-                  y2={y}
-                  stroke="#0f1620"
-                  strokeWidth="2"
-                />
-                {/* R label */}
-                <text
-                  x={x}
-                  y={y + 1}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  fill="#0f1620"
-                  fontSize="14px"
-                  fontWeight="bold"
-                  fontStyle="italic"
-                >
-                  R
-                </text>
-                {/* Resistance value */}
-                {showValues && (
-                  <text
-                    x={x}
-                    y={y - boxHeight/2 - 8}
-                    textAnchor="middle"
-                    fill="#5a6170"
-                    fontSize="12px"
-                  >
-                    <tspan fontStyle="italic">R</tspan>
-                    <tspan> = {resistance} Ω</tspan>
-                  </text>
-                )}
-              </g>
-            );
-          };
-
-          // Swedish standard symbol: horizontal lines perpendicular to wire (long = +, short = -)
-          const PowerSource = () => {
-              if (circuitType === CircuitType.DC) {
-                  // When battery is flipped, swap the positions of + and -
-                  const topY = 140;
-                  const bottomY = 160;
-                  const longLineY = batteryFlipped ? bottomY : topY;
-                  const shortLineY = batteryFlipped ? topY : bottomY;
-                  const plusY = batteryFlipped ? bottomY + 4 : topY + 4;
-                  const minusY = batteryFlipped ? topY + 4 : bottomY + 4;
-
-                  return (
-                      <g
-                        style={{ cursor: 'pointer', pointerEvents: 'all' }}
-                        className="battery-clickable"
-                        onPointerDown={(e) => { e.stopPropagation(); onBatteryClick && onBatteryClick(); }}
-                      >
-                          {/* Invisible larger hit area for easier clicking */}
-                          <rect
-                            x="20" y="130" width="60" height="40"
-                            fill="#f3eee4"
-                            style={{ pointerEvents: 'all' }}
-                          />
-                          {/* Gap in wire - cover the wire between terminals */}
-                          <line x1="50" y1="135" x2="50" y2="165" stroke="#f3eee4" strokeWidth="8" />
-                          {/* Long horizontal line (positive terminal) */}
-                          <line
-                            className="battery-pole"
-                            x1="30" y1={longLineY} x2="70" y2={longLineY}
-                            stroke="#0f1620"
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                          />
-                          {/* Short horizontal line (negative terminal) */}
-                          <line
-                            className="battery-pole"
-                            x1="38" y1={shortLineY} x2="62" y2={shortLineY}
-                            stroke="#0f1620"
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                          />
-                          {/* Plus label */}
-                          <text x="75" y={plusY} fill="#22c55e" fontSize="12px" fontWeight="bold">+</text>
-                          {/* Minus label */}
-                          <text x="66" y={minusY} fill="#ef4444" fontSize="12px" fontWeight="bold">−</text>
-                          {/* Voltage value */}
-                          {showValues && (
-                            <text x="88" y="150" textAnchor="start" dominantBaseline="middle" fill="#5a6170" fontSize="12px">
-                              <tspan fontStyle="italic">U</tspan>
-                              <tspan> = {voltage} V</tspan>
-                            </text>
-                          )}
-                          {/* Hover hint */}
-                          <title>Klicka för att vända batteriet</title>
-                      </g>
-                  );
-              } else {
-                  // AC source: circles at terminals with tilde between
-                  return (
-                      <g>
-                          {/* Gap in wire */}
-                          <line x1="50" y1="120" x2="50" y2="180" stroke="#f3eee4" strokeWidth="8" />
-                          {/* Top terminal circle */}
-                          <circle cx="50" cy="125" r="5" fill="none" stroke="#0f1620" strokeWidth="2" />
-                          {/* Bottom terminal circle */}
-                          <circle cx="50" cy="175" r="5" fill="none" stroke="#0f1620" strokeWidth="2" />
-                          {/* Tilde - horizontal ~ */}
-                          <path
-                            d="M 35 150 Q 42 138, 50 150 Q 58 162, 65 150"
-                            stroke="#0f1620"
-                            fill="none"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                          />
-                          {/* Voltage value */}
-                          {showValues && (
-                            <text x="75" y="150" textAnchor="start" dominantBaseline="middle" fill="#5a6170" fontSize="12px">
-                              <tspan fontStyle="italic">U</tspan>
-                              <tspan> = {voltage} V</tspan>
-                            </text>
-                          )}
-                      </g>
-                  )
-              }
-          };
-
-          // Current direction arrows
-          const ArrowShapes = () => (
-            <>
-              {arrows.map(arrow => {
-                  const acAmplitude = currentStrength * AC_AMPLITUDE_FACTOR;
-                  const posValue = arrow.basePosition + (circuitType === CircuitType.AC
-                    ? -acAmplitude * Math.sin(performance.now() * acAnimationFrequencyFactor)
-                    : dcArrowPositionOffset.current
-                  );
-
-                  const normalizedPos = ((posValue % PATH_LENGTH) + PATH_LENGTH) % PATH_LENGTH;
-
-                  // Skip arrows near battery and active component
-                  if (normalizedPos > 870 && normalizedPos < 930) return null;
-                  if (componentType === 'bulb' && normalizedPos > 370 && normalizedPos < 430) return null;
-                  if (componentType === 'resistor' && normalizedPos > 620 && normalizedPos < 680) return null;
-
-                  const { x, y } = getCoordsOnPath(normalizedPos);
-                  const { x: x2, y: y2 } = getCoordsOnPath(normalizedPos + 1);
-                  let angle = Math.atan2(y2 - y, x2 - x) * (180 / Math.PI);
-
-                  if (circuitType === CircuitType.AC) {
-                    const velocityDirection = -Math.cos(performance.now() * acAnimationFrequencyFactor);
-                    if (velocityDirection < 0) {
-                      angle += 180;
+            useEffect(() => {
+                let raf;
+                const frame = (now) => {
+                    raf = requestAnimationFrame(frame);
+                    const s = st.current;
+                    const L = live.current;
+                    const dt = s.last == null ? 0 : Math.min(0.05, (now - s.last) / 1000);
+                    s.last = now;
+                    const blocked = L.componentType === 'bulb' && L.isBroken;
+                    const ac = L.circuitType === CircuitType.AC;
+                    if (!L.isPaused) {
+                        s.tTh += dt;
+                        if (!blocked) {
+                            if (ac) s.tAc += dt;
+                            else s.drift += (L.batteryFlipped ? 1 : -1) * DRIFT_PX_PER_AMP * L.current * dt;
+                        }
                     }
-                  } else if (batteryFlipped) {
-                    // Flip arrow direction when battery is flipped
-                    angle += 180;
-                  }
+                    const w = 2 * Math.PI * L.frequency;
+                    const off = ac ? AC_PX_PER_AMP * L.current * Math.sin(w * s.tAc) : s.drift;
+                    const resistor = L.componentType === 'resistor';
 
-                  return (
-                    <path
-                      key={`arrow-${arrow.id}`}
-                      d="M-6 -4 L6 0 L-6 4 Z"
-                      fill="#0f1620"
-                      opacity="0.95"
-                      transform={`translate(${x} ${y}) rotate(${angle})`}
-                      style={{ filter: 'drop-shadow(0 0 4px rgba(200, 50, 74, 0.6))' }}
-                    />
-                  );
-              })}
-            </>
-          );
+                    // Elektronerna: drift längs ledningen + värmerörelse (darrning)
+                    seeds.current.forEach((e, i) => {
+                        const node = elRefs.current[i];
+                        if (!node) return;
+                        const pos = e.base + off;
+                        const pt = pointAt(pos);
+                        let amp = 1.8;
+                        if (resistor) {
+                            amp += 7.5 * clamp01((RES_HALF + 6 - pathDist(pos, COMP_POS)) / 14);
+                        }
+                        const t = s.tTh;
+                        const n = amp * (0.62 * Math.sin(e.f1 * t + e.p1) + 0.38 * Math.sin(e.f2 * t + e.p2));
+                        const tg = amp * 0.45 * Math.sin(e.f3 * t + e.p3);
+                        const x = pt.x + pt.dx * tg - pt.dy * n;
+                        const y = pt.y + pt.dy * tg + pt.dx * n;
+                        node.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
+                    });
 
-          // Glowing cyan electrons
-          const ElectronDots = () => {
-            return (
-            <>
-              {/* Glow filter definition */}
-              <defs>
-                <filter id="electronGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="2" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              {electrons.map(electron => {
-                  // Freeze electrons when bulb is broken (only if bulb is selected)
-                  const isFrozen = componentType === 'bulb' && isBulbBroken;
-                  const acAmplitude = isFrozen ? 0 : currentStrength * AC_AMPLITUDE_FACTOR;
-                  const posValue = electron.basePosition + (isFrozen
-                    ? 0
-                    : (circuitType === CircuitType.AC
-                      ? acAmplitude * Math.sin(performance.now() * acAnimationFrequencyFactor)
-                      : dcPositionOffset.current)
-                  );
+                    // Strömpilarna: rör sig åt motsatt håll mot elektronerna
+                    const vel = ac ? Math.cos(w * s.tAc) : 0;
+                    for (let j = 0; j < NUM_ARROWS; j++) {
+                        const node = arRefs.current[j];
+                        if (!node) continue;
+                        const pos = (j + 0.5) * PER / NUM_ARROWS - off;
+                        const pt = pointAt(pos);
+                        let ang = Math.atan2(pt.dy, pt.dx) * 180 / Math.PI;
+                        const medurs = ac ? vel < 0 : !L.batteryFlipped;
+                        if (!medurs) ang += 180;
+                        node.setAttribute('transform', `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)}) rotate(${ang.toFixed(1)})`);
+                        node.setAttribute('opacity', ac ? (0.2 + 0.8 * Math.abs(vel)).toFixed(2) : '1');
+                    }
 
-                  const normalizedPos = ((posValue % PATH_LENGTH) + PATH_LENGTH) % PATH_LENGTH;
+                    // Glödlampans sken (fladdrar i takt med växelströmmen)
+                    if (glowRef.current && coreRef.current) {
+                        let b = blocked ? 0 : brightness(L.voltage, L.current);
+                        if (ac) b *= 0.4 + 0.6 * Math.pow(Math.sin(w * s.tAc), 2);
+                        glowRef.current.setAttribute('opacity', b.toFixed(3));
+                        coreRef.current.setAttribute('opacity', (0.95 * b).toFixed(3));
+                    }
+                };
+                raf = requestAnimationFrame(frame);
+                return () => cancelAnimationFrame(raf);
+            }, []);
 
-                  // Skip electrons near battery and active component
-                  if (normalizedPos > 870 && normalizedPos < 930) return null;
-                  if (componentType === 'bulb' && normalizedPos > 370 && normalizedPos < 430) return null;
-                  if (componentType === 'resistor' && normalizedPos > 620 && normalizedPos < 680) return null;
+            const blocked = componentType === 'bulb' && isBroken;
+            const iVisas = blocked ? 0 : current;
 
-                  const { x, y } = getCoordsOnPath(normalizedPos);
-                  return (
-                    <g key={electron.id} filter="url(#electronGlow)">
-                      {/* Outer glow */}
-                      <circle cx={x} cy={y} r="6" fill="#0f1620" opacity="0.3" />
-                      {/* Main electron */}
-                      <circle cx={x} cy={y} r="4" fill="#0f1620" />
-                      {/* Inner highlight */}
-                      <circle cx={x - 1} cy={y - 1} r="1.5" fill="#7dd3fc" opacity="0.8" />
-                      {/* Minus sign */}
-                      <text
-                        x={x}
-                        y={y}
-                        textAnchor="middle"
-                        dominantBaseline="central"
-                        fill="#f3eee4"
-                        fontSize="6px"
-                        fontWeight="bold"
-                      >
-                        −
-                      </text>
+            // Batteri (likström) eller växelspänningskälla på vänstra ledningen
+            const Source = () => {
+                if (circuitType === CircuitType.AC) {
+                    return (
+                        <g>
+                            <circle cx={XL} cy={MID_Y} r="23" fill={PAPER} stroke={INK} strokeWidth="2.4" />
+                            <path d={`M ${XL - 12} ${MID_Y} C ${XL - 7} ${MID_Y - 10}, ${XL - 1} ${MID_Y - 10}, ${XL} ${MID_Y} S ${XL + 7} ${MID_Y + 10}, ${XL + 12} ${MID_Y}`}
+                                  fill="none" stroke={INK} strokeWidth="2.4" strokeLinecap="round" />
+                        </g>
+                    );
+                }
+                const yLang = batteryFlipped ? MID_Y + 7 : MID_Y - 7;   // lång platta = pluspol
+                const yKort = batteryFlipped ? MID_Y - 7 : MID_Y + 7;   // kort platta = minuspol
+                return (
+                    <g className="batteri-klick" onPointerDown={(e) => { e.stopPropagation(); onBatteryClick(); }}>
+                        <title>Klicka för att vända batteriet</title>
+                        <rect x={XL - 40} y={MID_Y - 34} width="80" height="68" fill="transparent" />
+                        <rect x={XL - 13} y={MID_Y - 7} width="26" height="14" fill={PAPER} />
+                        <line className="batteri-pol" x1={XL - 25} y1={yLang} x2={XL + 25} y2={yLang}
+                              stroke={INK} strokeWidth="2.2" strokeLinecap="butt" />
+                        <line className="batteri-pol" x1={XL - 13} y1={yKort} x2={XL + 13} y2={yKort}
+                              stroke={INK} strokeWidth="5.5" strokeLinecap="butt" />
+                        <text x={XL - 31} y={yLang} textAnchor="end" dominantBaseline="central"
+                              fill={INK} fontSize="17" fontWeight="600">+</text>
+                        <text x={XL - 31} y={yKort} textAnchor="end" dominantBaseline="central"
+                              fill={INK} fontSize="17" fontWeight="600">−</text>
                     </g>
-                  );
-              })}
-            </>
-          );
-          };
+                );
+            };
 
-          return (
-            <div className="glass-card rounded-2xl p-6 w-full max-w-2xl">
-              <h3 className="text-lg font-semibold text-slate-300 mb-4 flex items-center gap-2">
-                <span className="text-cyan-400">⚡</span> Kopplingsschema
-              </h3>
-              <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef} style={{ userSelect: 'none' }}>
-              <svg viewBox="0 0 400 300" className="w-full h-auto">
-                {/* Background */}
-                <rect x="0" y="0" width="400" height="300" fill="#f3eee4" rx="8" />
+            // Glödlampa (svensk symbol: cirkel med kryss) på högra ledningen
+            const Bulb = () => {
+                const r = 24, k = 16.5;
+                if (isBroken) {
+                    return (
+                        <g>
+                            <circle cx={XR} cy={MID_Y - 36} r="13" fill="#8a8f99" opacity="0.18" />
+                            <circle cx={XR + 9} cy={MID_Y - 52} r="9" fill="#8a8f99" opacity="0.12" />
+                            <circle cx={XR} cy={MID_Y} r={r} fill={PAPER} stroke="#7b818c" strokeWidth="2.4" strokeDasharray="7 4" />
+                            <path d={`M ${XR - k} ${MID_Y - k} L ${XR - 3} ${MID_Y - 3} M ${XR + 3} ${MID_Y + 3} L ${XR + k} ${MID_Y + k}`}
+                                  stroke="#7b818c" strokeWidth="2.4" strokeLinecap="round" />
+                            <path d={`M ${XR + k} ${MID_Y - k} L ${XR + 4} ${MID_Y - 2} M ${XR - 2} ${MID_Y + 4} L ${XR - k} ${MID_Y + k}`}
+                                  stroke="#7b818c" strokeWidth="2.4" strokeLinecap="round" />
+                            <circle cx={XR} cy={MID_Y} r="5" fill="#3d3a36" opacity="0.35" />
+                        </g>
+                    );
+                }
+                return (
+                    <g>
+                        <circle cx={XR} cy={MID_Y} r={r} fill={PAPER} />
+                        <circle ref={coreRef} cx={XR} cy={MID_Y} r={r - 1.5} fill="url(#lampKarna)" opacity="0" />
+                        <circle cx={XR} cy={MID_Y} r={r} fill="none" stroke={INK} strokeWidth="2.4" />
+                        <line x1={XR - k} y1={MID_Y - k} x2={XR + k} y2={MID_Y + k} stroke={INK} strokeWidth="2.4" strokeLinecap="round" />
+                        <line x1={XR + k} y1={MID_Y - k} x2={XR - k} y2={MID_Y + k} stroke={INK} strokeWidth="2.4" strokeLinecap="round" />
+                    </g>
+                );
+            };
 
-                {/* Wire path with glow */}
-                <path
-                  d="M 50 50 H 350 V 250 H 50 Z"
-                  fill="none"
-                  stroke="#0ea5e9"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  className="wire-glow"
-                  opacity="0.8"
-                />
+            const etikettX = XR - 36;
+            const legend = [];
+            if (showElectrons) legend.push('el');
+            if (showElectrons && componentType === 'resistor') legend.push('jon');
+            if (showArrows && !blocked) legend.push('pil');
 
-                {/* Brighter wire overlay */}
-                <path
-                  d="M 50 50 H 350 V 250 H 50 Z"
-                  fill="none"
-                  stroke="#0f1620"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
+            return (
+                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef} style={{ userSelect: 'none' }}>
+                    <svg viewBox="32 18 576 356" fontFamily="'DM Sans', Poppins, system-ui, sans-serif"
+                         role="img" aria-label="Elektrisk krets med spänningskälla, amperemeter och en glödlampa eller resistor">
+                        <defs>
+                            <linearGradient id="papper" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stopColor="#f7f2e8" />
+                                <stop offset="1" stopColor="#ece3d2" />
+                            </linearGradient>
+                            <pattern id="rutnat" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(70,110,190,0.14)" strokeWidth="1" />
+                            </pattern>
+                            <radialGradient id="elKropp" cx="36%" cy="32%" r="72%">
+                                <stop offset="0" stopColor="#d6e9ff" />
+                                <stop offset="0.38" stopColor="#5d9cf0" />
+                                <stop offset="1" stopColor="#1a4aa3" />
+                            </radialGradient>
+                            <radialGradient id="elSken">
+                                <stop offset="0" stopColor="rgba(46,110,230,0.38)" />
+                                <stop offset="1" stopColor="rgba(46,110,230,0)" />
+                            </radialGradient>
+                            <radialGradient id="jonKropp" cx="36%" cy="32%" r="72%">
+                                <stop offset="0" stopColor="#f6d2c6" />
+                                <stop offset="1" stopColor="#c46a52" />
+                            </radialGradient>
+                            <radialGradient id="lampSken">
+                                <stop offset="0" stopColor="rgba(255,196,40,0.75)" />
+                                <stop offset="0.45" stopColor="rgba(255,190,40,0.32)" />
+                                <stop offset="1" stopColor="rgba(255,190,40,0)" />
+                            </radialGradient>
+                            <radialGradient id="lampKarna">
+                                <stop offset="0" stopColor="#fff3b0" />
+                                <stop offset="1" stopColor="#f5b52e" />
+                            </radialGradient>
+                            <g id="elektron">
+                                <circle r="9" fill="url(#elSken)" />
+                                <circle r="5" fill="url(#elKropp)" stroke="#173f8c" strokeWidth="0.6" />
+                                <rect x="-2.5" y="-0.7" width="5" height="1.4" rx="0.5" fill="#eef5ff" />
+                            </g>
+                        </defs>
 
-                {/* Current value above top wire */}
-                {showValues && (
-                  <text x="200" y="35" textAnchor="middle" fill="#5a6170" fontSize="12px">
-                    <tspan fontStyle="italic">I</tspan>
-                    <tspan> = {currentStrength.toFixed(1).replace('.', ',')} A</tspan>
-                  </text>
-                )}
+                        <rect x="0" y="0" width={VB_W} height={VB_H} fill="url(#papper)" />
+                        <rect x="0" y="0" width={VB_W} height={VB_H} fill="url(#rutnat)" />
 
-                {/* Current direction arrows - hidden when bulb is broken */}
-                <g>
-                    {showCurrentDirection && !(componentType === 'bulb' && isBulbBroken) && <ArrowShapes />}
-                </g>
+                        {/* Lampans sken ligger under ledningen, som ljus på papperet */}
+                        {componentType === 'bulb' && !isBroken && (
+                            <circle ref={glowRef} cx={XR} cy={MID_Y} r="78" fill="url(#lampSken)" opacity="0" />
+                        )}
 
-                {/* Components */}
-                <PowerSource />
-                {componentType === 'bulb' && <Bulb />}
-                {componentType === 'resistor' && <Resistor />}
+                        {/* Ledningen: en genomskuren kopparledning som elektronerna rör sig i */}
+                        <path d={WIRE_PATH} fill="none" stroke={INK} strokeWidth="21" strokeLinejoin="round" />
+                        <path d={WIRE_PATH} fill="none" stroke="#e7cba0" strokeWidth="16.5" strokeLinejoin="round" />
+                        <path d={WIRE_PATH} fill="none" stroke="#f3e2c6" strokeWidth="7" strokeLinejoin="round" />
 
-                {/* Electrons - still visible but frozen when bulb is broken */}
-                <g>
-                    {showElectrons && <ElectronDots/>}
-                </g>
-              </svg>
-              {overlay}
-              </div>
-            </div>
-          );
+                        {/* Resistorns metallgitter med positiva joner */}
+                        {componentType === 'resistor' && (
+                            <g>
+                                <rect x={XR - 23} y={MID_Y - RES_HALF} width="46" height={2 * RES_HALF} fill="#e3cfae" />
+                                {IONS.map((p, i) => (
+                                    <g key={i} transform={`translate(${p.x} ${p.y})`}>
+                                        <circle r="4.6" fill="url(#jonKropp)" stroke="#8f3a26" strokeWidth="0.7" />
+                                        <path d="M -2.4 0 H 2.4 M 0 -2.4 V 2.4" stroke="#6e2615" strokeWidth="1.1" />
+                                    </g>
+                                ))}
+                            </g>
+                        )}
+
+                        {/* Strömriktningen (från plus till minus) */}
+                        <g display={showArrows && !blocked ? 'inline' : 'none'}>
+                            {Array.from({ length: NUM_ARROWS }, (_, j) => (
+                                <path key={j} ref={(n) => { arRefs.current[j] = n; }}
+                                      d="M -5 -6 L 4 0 L -5 6" fill="none" stroke={ACCENT}
+                                      strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                            ))}
+                        </g>
+
+                        {/* Elektronerna */}
+                        <g display={showElectrons ? 'inline' : 'none'}>
+                            {seeds.current.map((e, i) => (
+                                <use key={i} href="#elektron" ref={(n) => { elRefs.current[i] = n; }} />
+                            ))}
+                        </g>
+
+                        {/* Komponenterna ritas ovanpå, så att elektronerna passerar bakom dem */}
+                        {componentType === 'resistor' && (
+                            <rect x={XR - 23} y={MID_Y - RES_HALF} width="46" height={2 * RES_HALF}
+                                  fill="none" stroke={INK} strokeWidth="2.6" />
+                        )}
+                        {componentType === 'bulb' && <Bulb />}
+                        <Source />
+
+                        {/* Amperemeter på överledningen */}
+                        <circle cx={AMP_X} cy={YT} r="17" fill={PAPER} stroke={INK} strokeWidth="2.4" />
+                        <text x={AMP_X} y={YT + 1} textAnchor="middle" dominantBaseline="central"
+                              fill={INK} fontSize="17" fontWeight="600">A</text>
+
+                        {/* Värden */}
+                        {showValues && (
+                            <g fontSize="16" fill={INK}>
+                                <text x={AMP_X} y={YT - 28} textAnchor="middle">
+                                    <tspan fontStyle="italic">I</tspan> = {fmtI(iVisas)} A
+                                </text>
+                                <text x={XL + 40} y={MID_Y} dominantBaseline="central">
+                                    <tspan fontStyle="italic">U</tspan> = {voltage} V
+                                </text>
+                                <text x={etikettX} y={MID_Y} textAnchor="end" dominantBaseline="central">
+                                    <tspan fontStyle="italic">R</tspan> = {resistance} Ω
+                                </text>
+                            </g>
+                        )}
+
+                        {/* Teckenförklaring nere till vänster inne i kretsen */}
+                        <g fontSize="13" fill={MUTED}>
+                            {legend.map((typ, k) => {
+                                const y = YB - 30 - k * 22;
+                                const x = XL + 34;
+                                if (typ === 'el') return (
+                                    <g key={typ}>
+                                        <use href="#elektron" transform={`translate(${x} ${y})`} />
+                                        <text x={x + 14} y={y} dominantBaseline="central">Elektron (negativt laddad)</text>
+                                    </g>
+                                );
+                                if (typ === 'jon') return (
+                                    <g key={typ}>
+                                        <g transform={`translate(${x} ${y})`}>
+                                            <circle r="4.6" fill="url(#jonKropp)" stroke="#8f3a26" strokeWidth="0.7" />
+                                            <path d="M -2.4 0 H 2.4 M 0 -2.4 V 2.4" stroke="#6e2615" strokeWidth="1.1" />
+                                        </g>
+                                        <text x={x + 14} y={y} dominantBaseline="central">Positiv jon i resistorns metall</text>
+                                    </g>
+                                );
+                                return (
+                                    <g key={typ}>
+                                        <path d={`M ${x - 5} ${y - 6} L ${x + 4} ${y} L ${x - 5} ${y + 6}`} fill="none"
+                                              stroke={ACCENT} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                                        <text x={x + 14} y={y} dominantBaseline="central">Strömriktning</text>
+                                    </g>
+                                );
+                            })}
+                        </g>
+                    </svg>
+                    {overlay}
+                </div>
+            );
         };
 
         // Kompakt reglage-rad för inställningsrutan uppe till höger i
         // fullskärm: etikett + värde på en rad, glidaren under.
         const StSlider = ({ label, value, min, max, step, unit, onChange, formatValue }) => (
-          <div className="st-slider">
-            <div className="st-slider-top">
-              <span dangerouslySetInnerHTML={{ __html: label }} />
-              <span style={{ whiteSpace: 'nowrap', fontWeight: 600, color: 'var(--lab-ink, #0f1620)' }}>
-                {formatValue ? formatValue(value) : value} {unit}
-              </span>
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    <span style={{ whiteSpace: 'nowrap', fontWeight: 600, color: 'var(--lab-ink, #0f1620)' }}>
+                        {formatValue ? formatValue(value) : value} {unit}
+                    </span>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
             </div>
-            <input type="range" min={min} max={max} step={step} value={value}
-                   onChange={(e) => onChange(parseFloat(e.target.value))} />
-          </div>
+        );
+
+        // Formelkortet: variabel med ord-etikett ovanför (och en osynlig
+        // spacer under, så att symbolen linjerar med bråkens mittlinje).
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const Frac = ({ top, bottom, size = 19 }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.15, fontSize: size, color: 'var(--lab-ink)' }}>
+                <span style={{ padding: '0 8px 3px' }}>{top}</span>
+                <span style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bottom}</span>
+            </div>
+        );
+        const FormulaCard = ({ U, R, I, broken }) => (
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-3 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <Vbl label="Spänning"><em>U</em></Vbl>
+                <span className="fnum">=</span>
+                <Vbl label="Resistans"><em>R</em></Vbl>
+                <span className="fnum">·</span>
+                <Vbl label="Ström"><em>I</em></Vbl>
+                <span className="fnum" style={{ margin: '0 4px' }}>⟺</span>
+                <span className="fnum"><em>I</em> =</span>
+                <Frac top={<em>U</em>} bottom={<em>R</em>} />
+                {broken ? (
+                    <span style={{ fontSize: 15, color: 'var(--lab-accent, #c8324a)', marginLeft: 6 }}>
+                        Lampan är trasig. Kretsen är bruten och ingen ström går.
+                    </span>
+                ) : (
+                    <React.Fragment>
+                        <span className="fnum">=</span>
+                        <Frac top={`${U} V`} bottom={`${R} Ω`} size={15} />
+                        <span className="fnum">=</span>
+                        <span className="fnum">{fmtI(I)} A</span>
+                    </React.Fragment>
+                )}
+            </div>
+        );
+
+        const SEL = 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow';
+        const OSEL = 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500';
+        const Seg = ({ options, value, onChange }) => (
+            <div className="flex gap-2">
+                {options.map((o) => (
+                    <button key={o.v} onClick={() => onChange(o.v)}
+                            className={`flex-1 px-3 py-2.5 rounded-xl font-medium transition-all text-sm ${value === o.v ? SEL : OSEL}`}>
+                        {o.t}
+                    </button>
+                ))}
+            </div>
         );
 
         const App = () => {
-          const [circuitType, setCircuitType] = useState(CircuitType.DC);
-          const [displayMode, setDisplayMode] = useState('current');
-          const [voltage, setVoltage] = useState(12);
-          const [resistance, setResistance] = useState(10);
-          const [frequency, setFrequency] = useState(1.0);
-          const [isPaused, setIsPaused] = useState(false);
-          const [isBulbBroken, setIsBulbBroken] = useState(false);
-          const [batteryFlipped, setBatteryFlipped] = useState(false);
-          const [showValues, setShowValues] = useState(true);
-          const [componentType, setComponentType] = useState('bulb'); // 'bulb' or 'resistor'
-          const [isFullscreen, setIsFullscreen] = useState(false);
-          const [togglesOpen, setTogglesOpen] = useState(true);
-          const sceneWrapRef = useRef(null);
+            const [circuitType, setCircuitType] = useState(CircuitType.DC);
+            const [displayMode, setDisplayMode] = useState('electrons');   // 'current' | 'electrons' | 'both'
+            const [voltage, setVoltage] = useState(12);
+            const [resistance, setResistance] = useState(10);
+            const [frequency, setFrequency] = useState(1.0);
+            const [isPaused, setIsPaused] = useState(false);
+            const [isBulbBroken, setIsBulbBroken] = useState(false);
+            const [batteryFlipped, setBatteryFlipped] = useState(false);
+            const [showValues, setShowValues] = useState(true);
+            const [componentType, setComponentType] = useState('bulb');   // 'bulb' | 'resistor'
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const sceneWrapRef = useRef(null);
 
-          useEffect(() => {
-            const handler = () => {
-              setIsFullscreen(
-                document.fullscreenElement === sceneWrapRef.current ||
-                document.webkitFullscreenElement === sceneWrapRef.current
-              );
+            useEffect(() => {
+                const handler = () => {
+                    setIsFullscreen(
+                        document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current
+                    );
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+                if (isFs) {
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                } else {
+                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                }
             };
-            document.addEventListener('fullscreenchange', handler);
-            document.addEventListener('webkitfullscreenchange', handler);
-            return () => {
-              document.removeEventListener('fullscreenchange', handler);
-              document.removeEventListener('webkitfullscreenchange', handler);
-            };
-          }, []);
 
-          const toggleFullscreen = () => {
-            const el = sceneWrapRef.current;
-            if (!el) return;
-            const isFs = document.fullscreenElement || document.webkitFullscreenElement;
-            if (isFs) {
-              (document.exitFullscreen || document.webkitExitFullscreen).call(document);
-            } else {
-              (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
-            }
-          };
+            const current = voltage / resistance;
+            const broken = componentType === 'bulb' && isBulbBroken;
 
-          const current = voltage / resistance;
+            // Lampan går sönder när strömmen når 24 A (bara när lampan sitter i kretsen)
+            useEffect(() => {
+                if (componentType === 'bulb' && current >= BREAK_CURRENT && !isBulbBroken) {
+                    playBurnoutSound();
+                    setIsBulbBroken(true);
+                }
+            }, [current, isBulbBroken, componentType]);
 
-          // Break the bulb when current reaches 24 A (only when bulb is selected)
-          useEffect(() => {
-            if (componentType === 'bulb' && current >= 24 && !isBulbBroken) {
-              playBurnoutSound();
-              setIsBulbBroken(true);
-            }
-          }, [current, isBulbBroken, componentType]);
+            const handleReplaceBulb = () => setIsBulbBroken(false);
 
-          const handleReplaceBulb = () => {
-            setIsBulbBroken(false);
-          };
-
-          const handleSliderStyle = (value, min, max) => {
-            const progress = ((value - min) / (max - min)) * 100;
-            return { '--progress': `${progress}%` };
-          };
-
-          const sceneOverlay = (
-            <>
-              <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
-                      title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
-                {isFullscreen ? (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
-                  </svg>
-                ) : (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
-                  </svg>
-                )}
-              </button>
-              {/* Inställningsrutan uppe till höger — hopfällbar, och i
-                  fullskärm bor även glidarna här (placeringsregeln
-                  2026-08-31: bottenpanelen låg ovanpå kretsens nedre
-                  ledare och skymde strömanimationen bakom lampan/
-                  resistorn). Rutans innehåll dubblerar sidopanelen, så
-                  den visas bara i fullskärm, precis som förr. */}
-              {isFullscreen && (
-                !togglesOpen ? (
-                  <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
-                          aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                         strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                      <line x1="4" y1="8" x2="20" y2="8" />
-                      <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
-                      <line x1="4" y1="16" x2="20" y2="16" />
-                      <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
-                    </svg>
-                  </button>
-                ) : (
-                  <div className="scene-toggles">
-                    <button className="st-hide" onClick={() => setTogglesOpen(false)}
-                            aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                           strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
-                        <path d="M6 6l12 12M18 6L6 18" />
-                      </svg>
+            const sceneOverlay = (
+                <>
+                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                        {isFullscreen ? (
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                            </svg>
+                        ) : (
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                            </svg>
+                        )}
                     </button>
-                    <div className="st-title">Kretstyp</div>
-                    <label>
-                      <input type="radio" name="fs-kretstyp" checked={circuitType === CircuitType.DC}
-                             onChange={() => setCircuitType(CircuitType.DC)} />
-                      Likström (DC)
-                    </label>
-                    <label>
-                      <input type="radio" name="fs-kretstyp" checked={circuitType === CircuitType.AC}
-                             onChange={() => setCircuitType(CircuitType.AC)} />
-                      Växelström (AC)
-                    </label>
-                    <div className="st-title mt">Visningsläge</div>
-                    <label>
-                      <input type="radio" name="fs-visning" checked={displayMode === 'current'}
-                             onChange={() => setDisplayMode('current')} />
-                      Strömriktning
-                    </label>
-                    <label>
-                      <input type="radio" name="fs-visning" checked={displayMode === 'electrons'}
-                             onChange={() => setDisplayMode('electrons')} />
-                      Elektroner
-                    </label>
-                    <div className="st-title mt">Komponent</div>
-                    <label>
-                      <input type="radio" name="fs-komponent" checked={componentType === 'bulb'}
-                             onChange={() => setComponentType('bulb')} />
-                      Glödlampa
-                    </label>
-                    <label>
-                      <input type="radio" name="fs-komponent" checked={componentType === 'resistor'}
-                             onChange={() => setComponentType('resistor')} />
-                      Resistor
-                    </label>
-                    <label style={{ marginTop: 7 }}>
-                      <input type="checkbox" checked={showValues}
-                             onChange={(e) => setShowValues(e.target.checked)} />
-                      Visa värden
-                    </label>
+                    {/* Inställningsrutan uppe till höger: hopfällbar, och i
+                        fullskärm bor även glidarna här (placeringsregeln
+                        2026-08-31). Rutans innehåll dubblerar sidopanelen,
+                        så den visas bara i fullskärm. */}
                     {isFullscreen && (
-                      <React.Fragment>
-                        <div className="st-title mt">Reglage</div>
-                        <div className="st-sliders">
-                          <StSlider label="Spänning (<em>U</em>)" value={voltage}
-                                    min={1} max={24} step={1} unit="V"
-                                    onChange={(v) => setVoltage(v)} />
-                          <StSlider label="Resistans (<em>R</em>)" value={resistance}
-                                    min={1} max={50} step={1} unit="Ω"
-                                    onChange={(v) => setResistance(v)} />
-                          {circuitType === CircuitType.AC && (
-                            <StSlider label="Frekvens (<em>f</em>)" value={frequency}
-                                      min={0.2} max={5} step={0.1} unit="Hz"
-                                      formatValue={(v) => v.toFixed(1).replace('.', ',')}
-                                      onChange={(v) => setFrequency(v)} />
-                          )}
-                        </div>
-                      </React.Fragment>
+                        !togglesOpen ? (
+                            <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                                    aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                                    <line x1="4" y1="8" x2="20" y2="8" />
+                                    <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                                    <line x1="4" y1="16" x2="20" y2="16" />
+                                    <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                                </svg>
+                            </button>
+                        ) : (
+                            <div className="scene-toggles">
+                                <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                        aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                         strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                        <path d="M6 6l12 12M18 6L6 18" />
+                                    </svg>
+                                </button>
+                                <div className="st-title">Kretstyp</div>
+                                <label>
+                                    <input type="radio" name="fs-kretstyp" checked={circuitType === CircuitType.DC}
+                                           onChange={() => setCircuitType(CircuitType.DC)} />
+                                    Likström
+                                </label>
+                                <label>
+                                    <input type="radio" name="fs-kretstyp" checked={circuitType === CircuitType.AC}
+                                           onChange={() => setCircuitType(CircuitType.AC)} />
+                                    Växelström
+                                </label>
+                                <div className="st-title mt">Visa</div>
+                                <label>
+                                    <input type="radio" name="fs-visning" checked={displayMode === 'electrons'}
+                                           onChange={() => setDisplayMode('electrons')} />
+                                    Elektroner
+                                </label>
+                                <label>
+                                    <input type="radio" name="fs-visning" checked={displayMode === 'current'}
+                                           onChange={() => setDisplayMode('current')} />
+                                    Strömriktning
+                                </label>
+                                <label>
+                                    <input type="radio" name="fs-visning" checked={displayMode === 'both'}
+                                           onChange={() => setDisplayMode('both')} />
+                                    Båda
+                                </label>
+                                <div className="st-title mt">Komponent</div>
+                                <label>
+                                    <input type="radio" name="fs-komponent" checked={componentType === 'bulb'}
+                                           onChange={() => setComponentType('bulb')} />
+                                    Glödlampa
+                                </label>
+                                <label>
+                                    <input type="radio" name="fs-komponent" checked={componentType === 'resistor'}
+                                           onChange={() => setComponentType('resistor')} />
+                                    Resistor
+                                </label>
+                                <label style={{ marginTop: 7 }}>
+                                    <input type="checkbox" checked={showValues}
+                                           onChange={(e) => setShowValues(e.target.checked)} />
+                                    Visa värden
+                                </label>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">
+                                    <StSlider label="Spänning (<em>U</em>)" value={voltage}
+                                              min={1} max={24} step={1} unit="V"
+                                              onChange={(v) => setVoltage(v)} />
+                                    <StSlider label="Resistans (<em>R</em>)" value={resistance}
+                                              min={1} max={50} step={1} unit="Ω"
+                                              onChange={(v) => setResistance(v)} />
+                                    {circuitType === CircuitType.AC && (
+                                        <StSlider label="Frekvens (<em>f</em>)" value={frequency}
+                                                  min={0.2} max={5} step={0.1} unit="Hz"
+                                                  formatValue={(v) => fmt(v, 1)}
+                                                  onChange={(v) => setFrequency(v)} />
+                                    )}
+                                </div>
+                                <div className="st-actions">
+                                    <button className="st-btn" onClick={() => setIsPaused(prev => !prev)}>
+                                        {isPaused ? 'Starta' : 'Pausa'}
+                                    </button>
+                                    {circuitType === CircuitType.DC && (
+                                        <button className="st-btn" onClick={() => setBatteryFlipped(prev => !prev)}>
+                                            Vänd batteriet
+                                        </button>
+                                    )}
+                                    {broken && (
+                                        <button className="st-btn" onClick={handleReplaceBulb}>
+                                            Byt lampa
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        )
                     )}
-                    <div className="st-actions">
-                      <button className="st-btn" onClick={() => setIsPaused(prev => !prev)}>
-                        {isPaused ? 'Starta' : 'Pausa'}
-                      </button>
-                      {circuitType === CircuitType.DC && (
-                        <button className="st-btn" onClick={() => setBatteryFlipped(prev => !prev)}>
-                          Vänd batteri
-                        </button>
-                      )}
-                      {componentType === 'bulb' && isBulbBroken && (
-                        <button className="st-btn" onClick={handleReplaceBulb}>
-                          Byt ut lampan
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                )
-              )}
-            </>
-          );
+                </>
+            );
 
-          return (
-            <div className="min-h-screen flex flex-col items-center py-8 px-4 gap-6 max-w-5xl mx-auto">
-
-              {/* Header */}
-              <header className="text-center space-y-3">
-                <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 tracking-tight glow-text">
-                  Elektriska kretsar
-                </h1>
-                <p className="text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                  Utforska hur elektroner och ström flödar i likströms- och växelströmskretsar.
-                </p>
-              </header>
-
-              {/* Main content */}
-              <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                {/* Left: Circuit Diagram */}
-                <div className="flex flex-col gap-4">
-                  <CircuitDiagram
-                    circuitType={circuitType}
-                    showElectrons={displayMode === 'electrons'}
-                    showCurrentDirection={displayMode === 'current'}
-                    currentStrength={current}
-                    acFrequency={frequency}
-                    isPaused={isPaused}
-                    isBulbBroken={isBulbBroken}
-                    batteryFlipped={batteryFlipped}
-                    onBatteryClick={() => setBatteryFlipped(prev => !prev)}
-                    showValues={showValues}
-                    voltage={voltage}
-                    resistance={resistance}
-                    componentType={componentType}
-                    sceneWrapRef={sceneWrapRef}
-                    overlay={sceneOverlay}
-                  />
-
-                  {/* Info Box */}
-                  <div className="glass-card p-5 rounded-xl">
-                    <h3 className="text-lg font-semibold text-slate-200 mb-2">
-                      {circuitType === CircuitType.DC ? '⎓ Likström (DC)' : '∿ Växelström (AC)'}
-                    </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      {circuitType === CircuitType.DC
-                        ? 'I en likströmskrets flödar elektronerna kontinuerligt i samma riktning – från minuspolen till pluspolen. Den konventionella strömriktningen (I) är motsatt, från plus till minus. Batterier och solceller ger likström.'
-                        : 'I en växelströmskrets byter elektronerna riktning många gånger per sekund i en oscillerande rörelse. De rör sig fram och tillbaka, men överför ändå energi genom att "knuffa" på varandra. Eluttag i hemmet ger växelström (50 Hz).'}
-                    </p>
-                    {circuitType === CircuitType.DC && batteryFlipped && (
-                      <p className="text-orange-400 text-sm mt-3 p-2 bg-orange-500/10 rounded-lg">
-                        🔄 Batteriet är vänt - strömmen flödar nu åt motsatt håll!
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Ohms Law - compact version */}
-                  <div className="glass-card p-4 rounded-xl">
-                    <h3 className="text-sm font-medium text-slate-400 mb-3">Ohms lag</h3>
-                    <div className="grid grid-cols-3 gap-2">
-                      <div className="text-center p-2 bg-slate-800/50 rounded-lg">
-                        <div className="text-lg font-mono font-bold text-cyan-400">U = R·I</div>
-                        <div className="text-slate-500 text-xs mt-1">Spänning</div>
-                      </div>
-                      <div className="text-center p-2 bg-slate-800/50 rounded-lg">
-                        <div className="text-lg font-mono font-bold text-green-400 flex items-center justify-center gap-1">
-                          <span>I</span>
-                          <span>=</span>
-                          <span className="inline-flex flex-col items-center text-sm">
-                            <span className="border-b border-green-400 px-1">U</span>
-                            <span className="px-1">R</span>
-                          </span>
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html?id=fy1">Fysik nivå 1</a> / Elektriska kretsar
                         </div>
-                        <div className="text-slate-500 text-xs mt-1">Ström</div>
-                      </div>
-                      <div className="text-center p-2 bg-slate-800/50 rounded-lg">
-                        <div className="text-lg font-mono font-bold text-orange-400 flex items-center justify-center gap-1">
-                          <span>R</span>
-                          <span>=</span>
-                          <span className="inline-flex flex-col items-center text-sm">
-                            <span className="border-b border-orange-400 px-1">U</span>
-                            <span className="px-1">I</span>
-                          </span>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Elektriska kretsar</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            Spänningen från batteriet driver <strong>elektronerna</strong> runt i kretsen. Hur stor
+                            <strong> strömmen</strong> blir beror på <strong>resistansen</strong>: ju större resistans, desto
+                            mindre ström vid samma spänning. Det sambandet är <strong>Ohms lag</strong>. Elektronerna darrar
+                            hela tiden av värmerörelsen, men det är den långsamma driften längs ledningen som är strömmen.
+                        </p>
+
+                        <FormulaCard U={voltage} R={resistance} I={current} broken={broken} />
+
+                        <div className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen och förklaringar */}
+                            <div className="lg:w-2/3 order-1 flex flex-col gap-4">
+                                <CircuitScene
+                                    circuitType={circuitType}
+                                    showElectrons={displayMode !== 'current'}
+                                    showArrows={displayMode !== 'electrons'}
+                                    current={current}
+                                    voltage={voltage}
+                                    resistance={resistance}
+                                    frequency={frequency}
+                                    isPaused={isPaused}
+                                    isBroken={isBulbBroken}
+                                    batteryFlipped={batteryFlipped}
+                                    onBatteryClick={() => setBatteryFlipped(prev => !prev)}
+                                    showValues={showValues}
+                                    componentType={componentType}
+                                    sceneWrapRef={sceneWrapRef}
+                                    overlay={sceneOverlay}
+                                />
+                                {circuitType === CircuitType.DC && (
+                                    <p className="text-sm" style={{ color: 'var(--lab-ink-muted)', marginTop: -4 }}>
+                                        Klicka på batteriet för att vända det.
+                                    </p>
+                                )}
+
+                            </div>
+
+                            {/* Sidopanel med reglage */}
+                            <div className="lg:w-1/3 order-2 flex flex-col gap-4">
+                                <div className="glass-card p-4 rounded-xl">
+                                    <div className="panel-rubrik">Kretstyp</div>
+                                    <Seg value={circuitType} onChange={setCircuitType}
+                                         options={[{ v: CircuitType.DC, t: 'Likström' }, { v: CircuitType.AC, t: 'Växelström' }]} />
+                                    {circuitType === CircuitType.DC && (
+                                        <button onClick={() => setBatteryFlipped(prev => !prev)}
+                                                className={`w-full mt-3 px-4 py-2.5 rounded-xl font-medium transition-all text-sm ${batteryFlipped ? SEL : OSEL}`}>
+                                            {batteryFlipped ? 'Batteriet är vänt' : 'Vänd batteriet'}
+                                        </button>
+                                    )}
+                                </div>
+
+                                <div className="glass-card p-4 rounded-xl">
+                                    <div className="panel-rubrik">Visa</div>
+                                    <Seg value={displayMode} onChange={setDisplayMode}
+                                         options={[{ v: 'electrons', t: 'Elektroner' }, { v: 'current', t: 'Strömriktning' }, { v: 'both', t: 'Båda' }]} />
+                                    <div className="panel-rubrik" style={{ marginTop: 16 }}>Komponent i kretsen</div>
+                                    <Seg value={componentType} onChange={setComponentType}
+                                         options={[{ v: 'bulb', t: 'Glödlampa' }, { v: 'resistor', t: 'Resistor' }]} />
+                                    <label className="flex items-center gap-3 cursor-pointer mt-4">
+                                        <input type="checkbox" checked={showValues}
+                                               onChange={(e) => setShowValues(e.target.checked)}
+                                               style={{ width: 18, height: 18, accentColor: 'var(--lab-accent)' }} />
+                                        <span style={{ color: 'var(--lab-ink)' }}>Visa värden</span>
+                                    </label>
+                                </div>
+
+                                <div className="glass-card p-4 rounded-xl">
+                                    <div className="panel-rubrik">Reglage</div>
+                                    <div className="space-y-5">
+                                        <div>
+                                            <div className="flex justify-between items-center mb-2">
+                                                <label style={{ color: 'var(--lab-ink)' }}>Spänning (<em>U</em>)</label>
+                                                <span className="font-mono px-2 py-1 rounded" style={{ color: 'var(--lab-ink)', border: '1px solid var(--lab-line)' }}>{voltage} V</span>
+                                            </div>
+                                            <input type="range" min="1" max="24" step="1" value={voltage}
+                                                   onChange={(e) => setVoltage(parseFloat(e.target.value))} />
+                                        </div>
+                                        <div>
+                                            <div className="flex justify-between items-center mb-2">
+                                                <label style={{ color: 'var(--lab-ink)' }}>Resistans (<em>R</em>)</label>
+                                                <span className="font-mono px-2 py-1 rounded" style={{ color: 'var(--lab-ink)', border: '1px solid var(--lab-line)' }}>{resistance} Ω</span>
+                                            </div>
+                                            <input type="range" min="1" max="50" step="1" value={resistance}
+                                                   onChange={(e) => setResistance(parseFloat(e.target.value))} />
+                                        </div>
+                                        {circuitType === CircuitType.AC && (
+                                            <div>
+                                                <div className="flex justify-between items-center mb-2">
+                                                    <label style={{ color: 'var(--lab-ink)' }}>Frekvens (<em>f</em>)</label>
+                                                    <span className="font-mono px-2 py-1 rounded" style={{ color: 'var(--lab-ink)', border: '1px solid var(--lab-line)' }}>{fmt(frequency, 1)} Hz</span>
+                                                </div>
+                                                <input type="range" min="0.2" max="5" step="0.1" value={frequency}
+                                                       onChange={(e) => setFrequency(parseFloat(e.target.value))} />
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card p-4 rounded-xl">
+                                    <div className="flex items-center justify-between gap-3">
+                                        <div>
+                                            <div className="panel-rubrik" style={{ marginBottom: 2 }}>Strömmen</div>
+                                            <div className="text-3xl font-bold" style={{ color: broken ? 'var(--lab-accent)' : 'var(--lab-ink)' }}>
+                                                <em>I</em> = {fmtI(broken ? 0 : current)} A
+                                            </div>
+                                        </div>
+                                        <button onClick={() => setIsPaused(prev => !prev)}
+                                                className={`px-5 py-2.5 rounded-xl font-semibold transition-all ${isPaused ? SEL : OSEL}`}>
+                                            {isPaused ? 'Starta' : 'Pausa'}
+                                        </button>
+                                    </div>
+                                    {broken && (
+                                        <div className="mt-4 p-3 rounded-lg" style={{ border: '1px solid var(--lab-accent)' }}>
+                                            <div className="text-sm font-semibold mb-3" style={{ color: 'var(--lab-accent)' }}>
+                                                Strömmen blev för stor och glödtråden brann av. Kretsen är bruten.
+                                            </div>
+                                            <button onClick={handleReplaceBulb}
+                                                    className={`w-full px-4 py-2 rounded-lg font-semibold transition-all ${SEL}`}>
+                                                Byt lampa
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
                         </div>
-                        <div className="text-slate-500 text-xs mt-1">Resistans</div>
-                      </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                    <div className="glass-card p-5 rounded-xl">
+                                        <div className="panel-rubrik">{circuitType === CircuitType.DC ? 'Likström' : 'Växelström'}</div>
+                                        <p className="text-sm leading-relaxed" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            {circuitType === CircuitType.DC
+                                                ? <span>I en likströmskrets driver batteriet elektronerna åt ett och samma håll: från minuspolen, genom kretsen, till pluspolen. Den överenskomna <strong>strömriktningen</strong> är den motsatta, från plus till minus. Batterier och solceller ger likström.</span>
+                                                : <span>I en växelströmskrets byter spänningen riktning hela tiden, och elektronerna svänger fram och tillbaka på ungefär samma ställe. De kommer ingenstans, men energin förs ändå vidare genom kretsen. Eluttagen i hemmet ger växelström med frekvensen 50&nbsp;Hz. Titta på lampan: den lyser starkast när strömmen är som störst.</span>}
+                                        </p>
+                                        {circuitType === CircuitType.DC && batteryFlipped && (
+                                            <p className="text-sm mt-3" style={{ color: 'var(--lab-accent)' }}>
+                                                Batteriet är vänt, så strömmen går nu åt andra hållet.
+                                            </p>
+                                        )}
+                                    </div>
+                                    <div className="glass-card p-5 rounded-xl">
+                                        <div className="panel-rubrik">Varför ger en resistor motstånd?</div>
+                                        <p className="text-sm leading-relaxed" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            I en metall sitter <strong>positiva joner</strong> i ett gitter, och elektronerna krockar med dem
+                                            på vägen. Varje krock bromsar elektronerna, så det krävs en spänning för att hålla dem i rörelse.
+                                            Byt till resistorn: inne i den studsar elektronerna mycket mer. Strömmen är ändå lika stor överallt
+                                            i kretsen, så de driver lika fort där som i ledningen.
+                                        </p>
+                                    </div>
+                                </div>
                     </div>
-                  </div>
                 </div>
-
-                {/* Right: Controls */}
-                <div className="flex flex-col gap-4">
-
-                  {/* Circuit Type */}
-                  <div className="glass-card p-4 rounded-xl">
-                    <h3 className="text-sm font-medium text-slate-400 mb-3">Kretstyp</h3>
-                    <div className="flex gap-3">
-                      <button
-                        onClick={() => setCircuitType(CircuitType.DC)}
-                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
-                          circuitType === CircuitType.DC
-                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
-                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
-                        }`}
-                      >
-                        ⎓ Likström (DC)
-                      </button>
-                      <button
-                        onClick={() => setCircuitType(CircuitType.AC)}
-                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
-                          circuitType === CircuitType.AC
-                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
-                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
-                        }`}
-                      >
-                        ∿ Växelström (AC)
-                      </button>
-                    </div>
-                    {/* Flip battery button - only for DC */}
-                    {circuitType === CircuitType.DC && (
-                      <button
-                        onClick={() => setBatteryFlipped(prev => !prev)}
-                        className={`w-full mt-3 px-4 py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2 ${
-                          batteryFlipped
-                            ? 'bg-orange-500/30 text-orange-300 border-2 border-orange-400'
-                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
-                        }`}
-                      >
-                        🔄 Vänd batteri {batteryFlipped ? '(vänt)' : ''}
-                      </button>
-                    )}
-                  </div>
-
-                  {/* Display Mode */}
-                  <div className="glass-card p-4 rounded-xl">
-                    <h3 className="text-sm font-medium text-slate-400 mb-3">Visningsläge</h3>
-                    <div className="flex gap-3">
-                      <button
-                        onClick={() => setDisplayMode('current')}
-                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
-                          displayMode === 'current'
-                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
-                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
-                        }`}
-                      >
-                        → Strömriktning
-                      </button>
-                      <button
-                        onClick={() => setDisplayMode('electrons')}
-                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
-                          displayMode === 'electrons'
-                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
-                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
-                        }`}
-                      >
-                        ● Elektroner
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Component Type */}
-                  <div className="glass-card p-4 rounded-xl">
-                    <h3 className="text-sm font-medium text-slate-400 mb-3">Komponent i kretsen</h3>
-                    <div className="flex gap-3">
-                      <button
-                        onClick={() => setComponentType('bulb')}
-                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
-                          componentType === 'bulb'
-                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
-                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
-                        }`}
-                      >
-                        💡 Glödlampa
-                      </button>
-                      <button
-                        onClick={() => setComponentType('resistor')}
-                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
-                          componentType === 'resistor'
-                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
-                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
-                        }`}
-                      >
-                        ▭ Resistor
-                      </button>
-                    </div>
-                    <div className="mt-3 pt-3 border-t border-slate-700">
-                      <label className="flex items-center gap-3 cursor-pointer group">
-                        <input
-                          type="checkbox"
-                          checked={showValues}
-                          onChange={(e) => setShowValues(e.target.checked)}
-                          className="w-5 h-5 rounded border-slate-600 bg-slate-800 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-0 cursor-pointer"
-                        />
-                        <span className="text-slate-300 group-hover:text-slate-200">Visa värden</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  {/* Parameters */}
-                  <div className="glass-card p-4 rounded-xl">
-                    <h3 className="text-sm font-medium text-slate-400 mb-4">Kretsparametrar</h3>
-
-                    <div className="space-y-5">
-                      {/* Voltage */}
-                      <div>
-                        <div className="flex justify-between items-center mb-2">
-                          <label className="text-slate-300">Spänning (U)</label>
-                          <span className="font-mono text-cyan-400 bg-slate-800 px-2 py-1 rounded">
-                            {voltage} V
-                          </span>
-                        </div>
-                        <input
-                          type="range"
-                          min="1"
-                          max="24"
-                          step="1"
-                          value={voltage}
-                          onChange={(e) => setVoltage(parseFloat(e.target.value))}
-                          className="w-full cursor-pointer"
-                          style={handleSliderStyle(voltage, 1, 24)}
-                        />
-                      </div>
-
-                      {/* Resistance */}
-                      <div>
-                        <div className="flex justify-between items-center mb-2">
-                          <label className="text-slate-300">Resistans (R)</label>
-                          <span className="font-mono text-cyan-400 bg-slate-800 px-2 py-1 rounded">
-                            {resistance} Ω
-                          </span>
-                        </div>
-                        <input
-                          type="range"
-                          min="1"
-                          max="50"
-                          step="1"
-                          value={resistance}
-                          onChange={(e) => setResistance(parseFloat(e.target.value))}
-                          className="w-full cursor-pointer"
-                          style={handleSliderStyle(resistance, 1, 50)}
-                        />
-                      </div>
-
-                      {/* AC Frequency */}
-                      {circuitType === CircuitType.AC && (
-                        <div>
-                          <div className="flex justify-between items-center mb-2">
-                            <label className="text-slate-300">Frekvens (f)</label>
-                            <span className="font-mono text-cyan-400 bg-slate-800 px-2 py-1 rounded">
-                              {frequency.toFixed(1).replace('.', ',')} Hz
-                            </span>
-                          </div>
-                          <input
-                            type="range"
-                            min="0.2"
-                            max="5"
-                            step="0.1"
-                            value={frequency}
-                            onChange={(e) => setFrequency(parseFloat(e.target.value))}
-                            className="w-full cursor-pointer"
-                            style={handleSliderStyle(frequency, 0.2, 5)}
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Current Display & Controls */}
-                  <div className="glass-card p-4 rounded-xl">
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <div className="text-sm text-slate-400">Strömstyrka (I = U/R)</div>
-                        <div className={`text-3xl font-mono font-bold ${componentType === 'bulb' && isBulbBroken ? 'text-red-400' : 'text-yellow-400'}`}>
-                          {current.toFixed(1).replace('.', ',')} A
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => setIsPaused(prev => !prev)}
-                        className={`px-6 py-3 rounded-xl font-bold transition-all ${
-                          isPaused
-                            ? 'bg-green-500 text-white hover:bg-green-600'
-                            : 'bg-orange-500 text-white hover:bg-orange-600'
-                        }`}
-                      >
-                        {isPaused ? '▶ Starta' : '⏸ Pausa'}
-                      </button>
-                    </div>
-                    {componentType === 'bulb' && isBulbBroken && (
-                      <div className="mt-3 p-3 bg-red-500/20 border border-red-500/50 rounded-lg">
-                        <div className="text-red-400 font-semibold text-center mb-3">⚠️ Lampan har gått sönder! Kretsen är bruten.</div>
-                        <button
-                          onClick={handleReplaceBulb}
-                          className="w-full px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-lg transition-all"
-                        >
-                          💡 Byt ut lampan
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          );
+            );
         };
 
         const root = ReactDOM.createRoot(document.getElementById('root'));

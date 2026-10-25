@@ -1,16 +1,17 @@
 # =====================================================================
 #  Fysiklabbet - registrerar nyhetsjobbets schemalagda uppgifter.
 #
-#  Rutinen sedan 2026-10-25: morgondagens nyhet skrivs pa eftermiddagen och
-#  mejlas till agaren for granskning, svaren lases morgon och kvall, och
-#  nattens korning ar bara ett skyddsnat (se filhuvudet i daglig-nyhet.ps1).
+#  Rutinen sedan 2026-10-25: pa natten skrivs MORGONDAGENS nyhet (ett dygn i
+#  forvag) och mejlas till agaren, som hinner godkanna den under dagen.
+#  Svaren lases fem ganger om dagen. Samma nattkorning ar ocksa skyddsnat
+#  for dagens artikel (se filhuvudet i daglig-nyhet.ps1).
 #
-#  Fyra uppgifter registreras:
-#    "<Namn> imorgon"  DAILY <ImorgonTid> + <ImorgonOmforsok>
-#                      skriver morgondagens artikel och mejlar granskningslanken
-#    "<Namn> svar"     DAILY <SvarTider>  - laser agarens mejlsvar
-#    "<Namn>"          DAILY <Tid> + <OmforsokTid> - skyddsnat for dagens artikel
-#    "<Namn> (start)"  ONLOGON + 5 min    - skyddsnat efter omstart
+#  Fyra uppgifter registreras (lagena idag och imorgon gor samma sak, sa
+#  att tva uppgifter tacker natten oberoende av varandra):
+#    "<Namn> imorgon"  DAILY <ImorgonTider> - nattkorning + omforsok
+#    "<Namn> svar"     DAILY <SvarTider>    - laser agarens mejlsvar
+#    "<Namn>"          DAILY <Tid> + <OmforsokTid> - nattkorning (reserv)
+#    "<Namn> (start)"  ONLOGON + 5 min      - efter omstart
 #
 #  Alla pekar pa daglig-nyhet.ps1 i DEN HAR arbetskatalogen. Kor skriptet
 #  fran nyhetsjobbets egen worktree (C:\claude\Fysiklabbet-nyhetsjobb), inte
@@ -29,9 +30,8 @@
 param(
     [string]$Tid             = '03:15',
     [string]$OmforsokTid     = '07:15',
-    [string]$ImorgonTid      = '14:15',
-    [string]$ImorgonOmforsok = '16:45',
-    [string[]]$SvarTider     = @('07:45', '19:15', '22:15'),
+    [string[]]$ImorgonTider  = @('03:20', '07:20', '13:15'),
+    [string[]]$SvarTider     = @('07:45', '11:45', '15:45', '19:15', '22:15'),
     [string]$Namn            = 'Fysiklabbet daglig nyhet',
     [switch]$Avinstallera
 )
@@ -101,10 +101,8 @@ function Registrera([string]$TaskNamn, [string]$Lage, $Triggers, [string]$Beskri
     Write-Output "OK  $TaskNamn"
 }
 
-Registrera $NamnImorgon 'imorgon' @(
-    (New-ScheduledTaskTrigger -Daily -At $ImorgonTid),
-    (New-ScheduledTaskTrigger -Daily -At $ImorgonOmforsok)) `
-    "Skriver morgondagens fysiknyhet (dold av datumgrinden till midnatt) och mejlar agaren en granskningslank. $ImorgonTid, omforsok $ImorgonOmforsok."
+Registrera $NamnImorgon 'imorgon' @($ImorgonTider | ForEach-Object { New-ScheduledTaskTrigger -Daily -At $_ }) `
+    ("Nattkorning: skyddsnat for dagens nyhet, sedan morgondagens nyhet (dold av datumgrinden till midnatt) och ett granskningsmejl till agaren. " + ($ImorgonTider -join ', ') + '.')
 
 Registrera $NamnSvar 'svar' @($SvarTider | ForEach-Object { New-ScheduledTaskTrigger -Daily -At $_ }) `
     ("Laser agarens svar pa granskningsmejlen och gor andringarna. " + ($SvarTider -join ', ') + '.')
@@ -112,7 +110,7 @@ Registrera $NamnSvar 'svar' @($SvarTider | ForEach-Object { New-ScheduledTaskTri
 Registrera $Namn 'idag' @(
     (New-ScheduledTaskTrigger -Daily -At $Tid),
     (New-ScheduledTaskTrigger -Daily -At $OmforsokTid)) `
-    "Skyddsnat: skriver och publicerar dagens nyhet direkt om ingen forberetts dagen innan. $Tid, omforsok $OmforsokTid."
+    "Nattkorning (reserv till '$NamnImorgon'): skyddsnat for dagens nyhet, sedan morgondagens nyhet for granskning. $Tid, omforsok $OmforsokTid."
 
 # -User MASTE anges, annars kraver logon-triggern administratorsratt.
 $TriggerLogon = New-ScheduledTaskTrigger -AtLogOn -User $KontoNamn

@@ -3775,21 +3775,24 @@ går ut automatiskt till varje ny prenumerant utan att någon läser det först.
 **Sedan 2026-10-25 förhandsgranskas nyheten av ägaren** (uttryckligt
 önskemål). Rutinen, i `.claude/nyheter/daglig-nyhet.ps1`:
 
-- **14.15 (omförsök 16.45), `-Lage imorgon`:** nyhetsagenten skriver
-  MORGONDAGENS artikel med morgondagens datum, utgivaren granskar och
-  jobbet pushar. Datumgrinden i `data/nyheter.js` håller den dold till
-  midnatt. Sedan mejlas ägaren (Gmail-kopplingen, till ägarens egen
-  adress) en länk till förhandsvisningen `nyheter.html?id=<id>&forhand=1`.
-- **07.45, 19.15 och 22.15, `-Lage svar`:** jobbet läser ägarens svar på
-  mejlet. OK kvitteras, ändringar görs (med ny granskning om fakta ändras)
-  och pushas, och "stoppa" tar bort artikeln och skriver en ny. Svaret
-  07.45 gäller den artikel som just publicerats, som ägaren kontrollerar på
-  morgonen.
+- **På natten skrivs nyheten ett dygn i förväg** (03.20, omförsök 07.20
+  och 13.15, uppgiften "… imorgon"; reserv 03.15/07.15 och vid inloggning,
+  uppgiften utan tillägg). Nyhetsagenten skriver MORGONDAGENS artikel med
+  morgondagens datum, utgivaren granskar och jobbet pushar. Datumgrinden i
+  `data/nyheter.js` håller den dold till midnatt. Sedan mejlas ägaren
+  (Gmail-kopplingen, till ägarens egen adress) en länk till förhandsvisningen
+  `nyheter.html?id=<id>&forhand=1`, så att den kan godkännas under dagen.
+  (Första dagen, 2026-10-25, skrevs artikeln undantagsvis på eftermiddagen.)
+- **07.45, 11.45, 15.45, 19.15 och 22.15, `-Lage svar`:** jobbet läser
+  ägarens svar på mejlet. OK kvitteras, ändringar görs (med ny granskning om
+  fakta ändras) och pushas, och "stoppa" tar bort artikeln och skriver en
+  ny. Ett svar på gårdagens mejl gäller den artikel som just publicerats,
+  som ägaren då kontrollerar i efterhand.
 - **Inget svar betyder att artikeln publiceras ändå** vid midnatt.
-- **03.15/07.15 och vid inloggning, `-Lage idag`:** skyddsnätet nedan.
-  Det gör ingenting när artikeln förberetts dagen innan. Saknas den skrivs
-  och publiceras den direkt, och ägaren får ett mejl om att den gick ut
-  utan förhandsgranskning.
+- **Samma nattkörning är skyddsnätet** nedan: finns ingen förberedd artikel
+  för dagen skrivs och publiceras den direkt, och ägaren får ett mejl om att
+  den gick ut utan förhandsgranskning. Lägena `idag` och `imorgon` gör
+  exakt samma sak; två uppgifter täcker natten oberoende av varandra.
 - Varje mejl från jobbet har ämnesraden `[Nyhet <datum>] …` och slutar med
   markören `FL-JOBB FL-NYHET:<datum>`. Ett svar räknas som obehandlat så
   länge det senaste meddelandet i tråden saknar markören.

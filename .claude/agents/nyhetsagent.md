@@ -167,8 +167,8 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
     allt annat committas/pushas fortfarande bara på begäran.
 
     **Förhandsgranskning (sedan 2026-10-25).** Den dagliga artikeln skrivs
-    normalt DAGEN INNAN, med morgondagens datum, av jobbet
-    `.claude/nyheter/daglig-nyhet.ps1 -Lage imorgon`. Datumgrinden i
+    normalt på natten ETT DYGN I FÖRVÄG, med morgondagens datum, av jobbet
+    `.claude/nyheter/daglig-nyhet.ps1`. Datumgrinden i
     `data/nyheter.js` döljer den till midnatt, så den kan pushas direkt, och
     jobbet mejlar sedan ägaren en förhandsvisningslänk
     (`nyheter.html?id=<id>&forhand=1`). Ägaren svarar OK, ber om ändringar

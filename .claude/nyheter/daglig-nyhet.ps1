@@ -1,18 +1,21 @@
 ﻿# =====================================================================
 #  Fysiklabbet - daglig nyhet (med förhandsgranskning)
 #
-#  Rutinen sedan 2026-10-25 (ägarens beslut):
-#    1. -Lage imorgon (eftermiddag): nyhetsagenten skriver MORGONDAGENS
-#       artikel med morgondagens datum. Datumgrinden i data/nyheter.js
-#       döljer den till midnatt, så den kan pushas direkt. Sedan mejlas
-#       ägaren en granskningslänk (nyheter.html?id=...&forhand=1).
-#    2. -Lage svar (morgon + kväll): läser ägarens mejlsvar. "OK" kvitteras,
-#       ändringar görs och pushas, "stoppa" tar bort artikeln och skriver en
-#       ny. Inget svar = artikeln publiceras ändå vid midnatt.
-#    3. -Lage idag (natt, omförsök, inloggning): SKYDDSNÄT. Finns dagens
-#       artikel redan (det normala) händer ingenting. Saknas den skrivs och
-#       publiceras den direkt, och ägaren får ett mejl om att den gick ut
-#       utan förhandsgranskning.
+#  Rutinen sedan 2026-10-25 (ägarens beslut; nattschemat sedan samma kväll):
+#    1. NATT (-Lage imorgon 03.20 eller -Lage idag 03.15, omförsök 07.15/
+#       07.20 och 13.15, samt vid inloggning). Båda lägena gör samma sak:
+#       a) SKYDDSNÄT: finns dagens artikel (förberedd natten innan) händer
+#          ingenting. Saknas den skrivs och publiceras den direkt, och ägaren
+#          får ett mejl om att den gick ut utan förhandsgranskning.
+#       b) Nyhetsagenten skriver MORGONDAGENS artikel med morgondagens datum.
+#          Datumgrinden i data/nyheter.js döljer den till midnatt, så den kan
+#          pushas direkt. Sedan mejlas ägaren en granskningslänk
+#          (nyheter.html?id=...&forhand=1), så att hen kan läsa och godkänna
+#          den under dagen.
+#    2. -Lage svar (07.45, 11.45, 15.45, 19.15, 22.15): läser ägarens
+#       mejlsvar. "OK" kvitteras, ändringar görs och pushas, "stoppa" tar
+#       bort artikeln och skriver en ny. Inget svar = artikeln publiceras
+#       ändå vid midnatt.
 #
 #  Jobbet arbetar i en EGEN arbetskatalog (git worktree, gren nyhetsjobb,
 #  C:\claude\Fysiklabbet-nyhetsjobb) som återställs till origin/main före
@@ -348,7 +351,9 @@ function Kor-Skriv([string]$Datum, [bool]$Forhand) {
     Start-Sleep -Seconds 90
     if ($Forhand) { $typ = 'granska' } else { $typ = 'publicerad' }
     Invoke-Claude (Prompt-Mejl $Datum $id $typ) 'sonnet'
-    if ($script:ClaudeText -notmatch 'MEJL SKICKAT') { Log 'VARNING: mejlet till ägaren verkar inte ha skickats.' }
+    # Sessionen skriver inte alltid den överenskomna raden ordagrant (första
+    # körningen 2026-10-25 svarade "Mejlet är skickat …"), så godta båda.
+    if ($script:ClaudeText -notmatch 'MEJL SKICKAT|[Mm]ejlet är skickat|email (has been |was )?sent') { Log 'VARNING: mejlet till ägaren verkar inte ha skickats.' }
 }
 
 function Kor-Svar {
@@ -411,10 +416,10 @@ if ($Gren -ne 'nyhetsjobb') {
 
 Log "=== Nyhetsjobb: start ($Today) ==="
 
-# Snabb utgång utan lås och utan git: skyddsnätet behöver inte göra något
-# när dagens artikel redan ligger i arbetskatalogen (det normala).
-if ($Lage -eq 'idag' -and (HasArticle $Today)) {
-    Log 'Dagens nyhet finns redan. Inget att göra.'
+# Snabb utgång utan lås och utan git: nattjobbet behöver inte göra något när
+# både dagens och morgondagens artikel redan ligger i arbetskatalogen.
+if ($Lage -ne 'svar' -and (HasArticle $Today) -and (HasArticle $Tomorrow)) {
+    Log 'Dagens och morgondagens nyhet finns redan. Inget att göra.'
     Log '=== Nyhetsjobb: slut ==='
     return
 }
@@ -440,23 +445,23 @@ try {
     $script:Claude = Find-Claude
     Sync-Main
 
-    switch ($Lage) {
-        'imorgon' {
-            if (HasArticle $Tomorrow) { Log "Morgondagens nyhet ($Tomorrow) finns redan." }
-            elseif (-not (Tak "imorgon-$Tomorrow" 2)) { Log 'Redan två försök för morgondagen - skyddsnätet tar över i natt.' }
-            else { Kor-Skriv $Tomorrow $true }
+    if ($Lage -eq 'svar') {
+        Kor-Svar
+    }
+    else {
+        # 'idag' och 'imorgon' gör samma sak (två namn för att de gamla
+        # uppgifterna utan -Lage ska fungera): först skyddsnätet för dagens
+        # artikel, sedan morgondagens artikel för granskning.
+        if (HasArticle $Today) { Log 'Dagens nyhet finns (förberedd i går).' }
+        elseif (-not (Tak "idag-$Today" 3)) { Log 'Redan tre försök för dagens nyhet utan resultat - hoppar över den.' }
+        else {
+            Log 'Ingen förberedd artikel för idag. Skyddsnätet skriver och publicerar direkt.'
+            Kor-Skriv $Today $false
         }
-        'svar' {
-            Kor-Svar
-        }
-        'idag' {
-            if (HasArticle $Today) { Log 'Dagens nyhet kom in via synken. Inget mer att göra.' }
-            elseif (-not (Tak "idag-$Today" 3)) { Log 'Redan tre försök idag utan resultat - avstår.' }
-            else {
-                Log 'Ingen förberedd artikel för idag. Skyddsnätet skriver och publicerar direkt.'
-                Kor-Skriv $Today $false
-            }
-        }
+
+        if (HasArticle $Tomorrow) { Log "Morgondagens nyhet ($Tomorrow) finns redan." }
+        elseif (-not (Tak "imorgon-$Tomorrow" 3)) { Log 'Redan tre försök för morgondagens nyhet - avstår.' }
+        else { Kor-Skriv $Tomorrow $true }
     }
 }
 catch {

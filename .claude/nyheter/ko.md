@@ -12,8 +12,8 @@ Format per post:
 
 ## Kö
 
-- **Minne i ett mikrofluidikchip: fibrer som minns hur vattnet flöt** **[BREVTEASER]** (nominerad 2026-10-19; originalet öppet, CC BY 4.0, publicerat 2026-10-09, sidan svarar 200) — Yale (Pahlavan, Rajput), ”Fluidic Hysterons and Memory in Flow Networks”, Physical Review X 2026, DOI 10.1103/hh4n-pw7w (PRX är öppen, CC BY). Ingång: hysteres, strömning. Strömningslära publicerades 2026-10-07. Källa (Phys.org 2026-10-14): https://phys.org/news/2026-10-memory-chip.html
-  (tillagd 2026-10-15)
+- **S301: snabbaste stjärnan runt Sgr A* (8,7 år, 25 000 km/s) känner av svarta hålets rotation** **[BREVTEASER]** (nominerad 2026-10-25: snabbaste kända stjärnan i Vintergatan, belagd i fulltext; astronomi senast 2026-10-14) — GRAVITY-samarbetet, Nature 2026, DOI 10.1038/s41586-026-10894-w; fulltext läst i arXiv 2607.12664 (Discovery of a star sensitive to the spin of Sgr A*). OBS: ESO:s pressmeddelande eso2612 kom redan 2026-08-19 (ESO-bilder CC BY 4.0), så inte dagsfärskt; Physics World tog upp den 2026-10-08. Astronomi. Källa: https://physicsworld.com/a/fastest-star-in-the-milky-way-feels-the-rotation-of-our-central-black-hole/
+  (tillagd 2026-10-20)
 
 - **Vad gör glas bra på att leda värme? Ljudhastigheten avgör** — termodynamik/materialfysik, 13 silikatglas, värmeledningsförmågan följer ljudhastigheten (fononer). Sukenaga m.fl. (Tohoku), Applied Physics Letters 129, 132203 (2026), DOI 10.1063/5.0351403; fulltexten SPÄRRAD 2026-10-25 (pubs.aip.org ger Cloudflare-kontroll, Crossref saknar licens, inget arXiv; bara abstractet läst: 13 binära silikatglas M2/nO–SiO2, M = Li, Na, Ca, Pb, cirka 298 K, λ ≈ 3,0·10^-4 · v). Ta bara upp om fulltexten blir åtkomlig. Källa (Phys.org 2026-10-23): https://phys.org/news/2026-10-glass-good-key.html
   (tillagd 2026-10-24)
@@ -41,9 +41,6 @@ Format per post:
 
 - **Elektroner styrs med extremt ultraviolett ljus (koherent kvantkontroll)** — atomfysik/attosekundfysik; OBS likt röntgenblixtarna 2026-10-18, vänta. Originalet ej kontrollerat. Källa (Phys.org 2026-10-20): https://phys.org/news/2026-10-electrons-extreme-ultraviolet-team-quantum.html
   (tillagd 2026-10-21)
-
-- **S301: snabbaste stjärnan runt Sgr A* (8,7 år, 25 000 km/s) känner av svarta hålets rotation** — GRAVITY-samarbetet, Nature 2026, DOI 10.1038/s41586-026-10894-w; fulltext läst i arXiv 2607.12664 (Discovery of a star sensitive to the spin of Sgr A*). OBS: ESO:s pressmeddelande eso2612 kom redan 2026-08-19 (ESO-bilder CC BY 4.0), så inte dagsfärskt; Physics World tog upp den 2026-10-08. Astronomi. Källa: https://physicsworld.com/a/fastest-star-in-the-milky-way-feels-the-rotation-of-our-central-black-hole/
-  (tillagd 2026-10-20)
 
 - **Knuffen från en enda gasmolekyl uppmätt med en svävande nanokula** — Yale (Tseng, Moore), PRL 137, 173601 (2026-10-19), DOI 10.1103/xtzh-6t1f; impulser ned till 10^-23 Ns på en 100 nm-kula kyld till ~100 mK. OBS: för likt glaskulan 2026-10-19, vänta minst en vecka; originalet ej kontrollerat. Källa: https://physics.aps.org/articles/v19/136
   (tillagd 2026-10-20)

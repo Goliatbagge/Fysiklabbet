@@ -3883,6 +3883,30 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'mikrofluidik',
+    term: 'Mikrofluidik',
+    former: ['mikrofluidik', 'mikrofluidiken', 'mikrofluidikchip', 'mikrofluidikchipet', 'mikrofluidikchipen', 'mikrofluidisk', 'mikrofluidiskt', 'mikrofluidiska'],
+    kort: 'Konsten att styra vätskor i kanaler som är tunnare än ett hårstrå, ofta i ett litet genomskinligt chip stort som ett frimärke.',
+    relaterade: ['viskositet', 'hydrogel'],
+    body: [
+      { type: 'p', html: 'Ett mikrofluidikchip ser ut som en liten bit genomskinlig plast eller glas, ofta inte större än ett frimärke. Inuti finns ett nät av kanaler som bara är några tiotals till några hundra mikrometer breda och djupa, alltså ungefär lika tunna som ett hårstrå. Små pumpar eller sprutor trycker in vätska, och kanalerna leder den vidare till platser där den blandas, värms, delas upp i droppar eller undersöks i mikroskop. Kanalerna gjuts ofta i ett mjukt silikongummi mot en form, ungefär som när man gjuter is i en isbitsform.' },
+      { type: 'p', html: 'I så smala kanaler beter sig vätskor annorlunda än i ett handfat. Vattnet virvlar nästan aldrig, utan glider fram i jämna lager som inte blandas med varandra, eftersom den inre friktionen i vätskan är mycket större än vätskans tröghet. Två färgade vätskor kan därför flyta sida vid sida i samma kanal och blandas bara långsamt, genom att molekylerna själva vandrar över gränsen. Ett sådant flöde går dessutom tillbaka exakt samma väg om pumpen körs baklänges, ungefär som en film som spelas upp baklänges.' },
+      { type: 'p', html: 'Tekniken används för att analysera blodprov med några få droppar, sortera celler, odla vävnad i miniatyr och göra snabba medicinska tester. Eftersom kanalerna är så små går det åt mycket lite vätska och provmaterial. Forskare försöker också bygga hela styrsystem av vätska, där ventiler och kanaler gör samma jobb som transistorer och ledningar i ett elektroniskt chip.' }
+    ]
+  },
+  {
+    id: 'hysteron',
+    term: 'Hysteron',
+    former: ['hysteron', 'hysteronen', 'hysteroner', 'hysteronerna'],
+    kort: 'En enkel brytare med två stabila lägen som slår om vid en nivå på vägen upp och vid en annan, lägre nivå på vägen ned. Den minns därför åt vilket håll den senast drevs.',
+    relaterade: ['hysteres'],
+    body: [
+      { type: 'p', html: 'Tänk dig en strömbrytare som slås på när du trycker med en kraft på 5&nbsp;newton, men som slås av först när du släpper efter till 2&nbsp;newton. Trycker du med 3&nbsp;newton går det inte att säga om den är på eller av förrän du vet vad som hände innan: om du kom från ett hårt tryck är den på, om du kom från ett löst är den av. En sådan brytare med två trösklar kallas inom fysiken en hysteron. Den är den enklaste tänkbara byggstenen för ett minne.' },
+      { type: 'p', html: 'Många material innehåller massor av små områden som beter sig just så. Ett skrynkligt papper, en hög med sandkorn eller ett glas har små delar som plötsligt ändrar läge när materialet pressas, och som inte hoppar tillbaka förrän trycket minskat en bra bit. Fysiker beskriver därför materialens minne som en samling hysteroner. Är de oberoende av varandra blir minnet ordnat och förutsägbart. Påverkar de varandra kan ett omslag på ett ställe flytta trösklarna på ett annat, och då kan flera av dem slå om på en gång, som en liten lavin.' },
+      { type: 'p', html: 'Ordet kommer av hysteres, som betyder att ligga efter. Hysteroner finns i gummimembran som trycks ut och in, i vikta pappersstrukturer och i böjliga fibrer som en vätska strömmar förbi. Forskare försöker använda dem för att bygga material som kan räkna, minnas och reagera på sin omgivning utan elektronik.' }
+    ]
+  },
+  {
     id: 'viskoelasticitet',
     term: 'Viskoelasticitet',
     former: ['viskoelasticitet', 'viskoelasticiteten', 'viskoelastisk', 'viskoelastiskt', 'viskoelastiska', 'spänningsrelaxation', 'spänningsrelaxationen'],

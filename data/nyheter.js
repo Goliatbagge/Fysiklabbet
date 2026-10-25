@@ -103,6 +103,63 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-26-fibrerna-som-minns-flodet",
+    date: "2026-10-26",
+    title: "Mjuka fibrer i ett vattenchip minns hur vätskan har flutit",
+    deck: "Forskare vid Yale har placerat små böjliga fibrer i kanaler som är ungefär lika djupa som ett hårstrå är tjockt. När flödet ökar slår en fiber plötsligt över till ett nytt läge och stannar där, även när flödet minskar igen. Varje fiber blir på så sätt en liten minnescell, en etta eller en nolla, helt utan elektronik.",
+    category: "Strömningslära",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-26-fibrerna-som-minns-flodet.jpg",
+    imageAlt: "En hand håller upp ett litet genomskinligt plastchip mellan tummen och två fingrar. I chipet syns en tunn kanal fylld med mörk vätska, med blå och röda droppar vid in- och utloppen. Bakgrunden är ett ljust, suddigt laboratorium.",
+    imageCredit: "Foto: Niftyfiftycat (CC BY-SA 4.0), via Wikimedia Commons. Ett mikrofluidikchip. Bilden visar inte Yalechipet.",
+    tags: ["strömningslära", "mikrofluidik", "hysteres", "hysteron", "bistabilitet", "minne", "flödesmotstånd", "ohms lag", "parallellkoppling", "elasticitet", "hydrogel", "mjuka robotar", "slemsvamp", "yale"],
+    sources: [
+      { name: "Phys.org: Storing memory on a chip with flowing water (14 oktober 2026, pressmeddelande från Yale University)", url: "https://phys.org/news/2026-10-memory-chip.html" },
+      { name: "Physical Review X: studien i fulltext (öppet tillgänglig, CC BY 4.0)", url: "https://journals.aps.org/prx/abstract/10.1103/hh4n-pw7w" }
+    ],
+    research: {
+      citation: "A. S. Rajput och A. A. Pahlavan, ”Fluidic Hysterons and Memory in Flow Networks”, Physical Review X 16, 041011 (2026)",
+      url: "https://doi.org/10.1103/hh4n-pw7w"
+    },
+    larare: {
+      moment: [
+        { label: "Resistans och Ohms lag", href: "katalog.html?id=fy1-7.5" },
+        { label: "Kopplingsscheman, serie- och parallellkoppling", href: "katalog.html?id=fy1-7.6" },
+        { label: "Komplexa kopplingar", href: "katalog.html?id=fy1-7.8" }
+      ],
+      fragor: [
+        "Fiberkanalen och förbifarten har samma tryckskillnad över sig. Använd sambandet Δp = R · Q för att förklara varför en större del av flödet går genom förbifarten när fibern slår över och fiberkanalens flödesmotstånd ökar. Vilken krets i elläran beter sig likadant?",
+        "Mellan de två trösklarna har fibern två stabila lägen för samma flöde. Vilken information behöver du, utöver hur stort flödet är just nu, för att avgöra vilket läge den har? Ge ett annat exempel på något som beter sig så.",
+        "Ett mycket långsamt flöde i en smal kanal går tillbaka exakt samma väg om pumpen körs baklänges, och kan därför inte minnas något på egen hand. Varför kan det ändå bli ett minne när det finns en böjlig fiber i kanalen?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Ett skrynkligt papper som slätas ut behåller sina veck, och fotspår i sanden visar var någon har gått. Många material bär på det sättet spår av sin historia. Ett vätskeflöde i en mycket smal kanal gör det däremot inte av sig självt: där rör sig vätskan så långsamt och trögt att den rinner tillbaka precis samma väg om pumpen körs baklänges. Nu har Abhineet Singh Rajput och Amir Pahlavan vid Yale University i USA visat att ett sådant flöde ändå kan få ett minne, om det får sällskap av något som böjer sig. Studien är publicerad i <em>Physical Review X</em>." },
+      { type: "h2", text: "En fiber som slår över" },
+      { type: "p", html: "Forskarna gjuter kanaler i ett mjukt, genomskinligt silikonmaterial. Kanalerna är 80&nbsp;mikrometer djupa, ungefär lika mycket som ett hårstrå är tjockt, och mellan 0,8 och 2&nbsp;millimeter breda. Inne i kanalen tillverkas en fiber av hydrogel direkt på plats: kanalen fylls med en vätska som stelnar i ultraviolett ljus, och ljuset släpps bara in där fibern ska sitta. Fibern sitter fast i ena kanalväggen, lutar in mot strömmen och är 70&nbsp;mikrometer hög, nästan lika hög som kanalen. En del av vätskan smiter igenom de tunna spalterna ovanför och under fibern. Resten tar vägen förbi fiberns spets, genom gapet mellan spetsen och kanalväggen." },
+      { type: "p", html: "När flödet ökar trycker vätskan fibern åt sidan, och spetsen kommer närmare väggen. Gapet krymper, och då blir den vägen trögare att ta. Mer vätska pressas i stället genom de tunna spalterna, och det ändrar i sin tur kraften på fibern. Formen styr alltså flödet, och flödet styr formen. En kort fiber, vars längd är 65&nbsp;procent av kanalens bredd, böjer sig mjukt och gradvis när flödet ökar. En fiber som är lika lång som kanalen är bred gör något annat: vid ett visst flöde slår den plötsligt över till ett helt nytt läge." },
+      { type: "h2", text: "Två lägen och två trösklar" },
+      { type: "p", html: "Det intressanta händer när flödet sedan minskar. Fibern hoppar inte tillbaka vid samma flöde som den slog över vid, utan ligger kvar i sitt nya läge tills flödet blivit tydligt lägre. Mellan de två trösklarna finns alltså två stabila lägen för samma flöde, och vilket av dem fibern har beror på om flödet senast var högt eller lågt. Fenomenet kallas hysteres, och ett element som beter sig så kallas en hysteron. Forskarna betecknar läget innan fibern slagit över med 0 och det överslagna med 1, precis som en bit i ett datorminne." },
+      { type: "p", html: "Om en fiber kan slå över avgörs i praktiken av geometrin: kvoten mellan fiberns längd och kanalens bredd, och vinkeln som fibern sitter fast med. Fiberns styvhet påverkar däremot vid vilket flöde det sker och hur brett fönstret mellan trösklarna blir. Flödena är mycket små, från en tusendels mikroliter till en mikroliter per sekund, så vätskans tröghet spelar ingen roll. Minnet sitter alltså i fiberns läge och inte i att vätskan har fart." },
+      { type: "image", src: "nyheter/bilder/2026-10-26-fibrerna-som-minns-flodet-2.jpg", alt: "Två mikroskopbilder bredvid varandra av en mörk, avlång fiber i en kanal, omgiven av tusentals ljusa strimmor som visar hur vätskan strömmar. Till vänster lutar fibern snett, till höger står den nästan rakt upp och är lätt böjd. Mellan bilderna visar en liten ruta fiberns form i de två lägena med en blå pil som visar hoppet.", caption: "En lång fiber före (vänster) och efter (höger) att den slagit över. De ljusa strimmorna är spår av små självlysande partiklar som följer med vätskan. Rutan i mitten jämför fiberns form i de två lägena.", credit: "Bild: A. S. Rajput och A. A. Pahlavan, Physical Review X 16, 041011 (2026), figur 1b (CC BY 4.0), beskuren" },
+      { type: "h2", text: "En förbifart kopplar ihop fibrerna" },
+      { type: "p", html: "Nästa steg var att lägga en rak kanal utan fiber vid sidan av fiberkanalen, en sorts förbifart. För ett så långsamt flöde gäller ett samband som liknar Ohms lag, $\\Delta p = R \\cdot Q$, där tryckskillnaden $\\Delta p$ driver flödet $Q$ genom kanalens flödesmotstånd $R$. De två kanalerna har samma tryckskillnad över sig, som två parallellkopplade motstånd har samma spänning. När fibern slår över ökar fiberkanalens flödesmotstånd, och vätskan leds i stället till förbifarten. Fibern fungerar då som en ventil som stänger av sig själv. Ju bredare förbifarten görs, desto senare slår fibern över och desto mindre blir hoppet, och vid en viss bredd försvinner det helt." },
+      { type: "p", html: "Med två fibrer efter varandra i fiberkanalen händer något mer. Utan förbifart får båda samma flöde och slår över var för sig. Med förbifart påverkar de varandra, fast de aldrig rör vid varandra: när den ena slår över leds vätska bort till förbifarten, och den andra får mindre flöde. I ett av försöken slog den ena fibern över först, och när den andra senare gjorde detsamma föll den första tillbaka till sitt ursprungliga läge, ungefär som i en liten lavin. Hur starkt fibrerna påverkar varandra styrs av hur bred förbifarten är." },
+      { type: "quote", html: "Medan vanlig mikrofluidik bygger på aktiva komponenter använder det här systemet mikrofibrer för att lagra information passivt.", cite: "Abhineet Singh Rajput, Yale University, i universitetets pressmeddelande" },
+      { type: "h2", text: "Tio fibrer som hittar hem" },
+      { type: "p", html: "Till sist byggde forskarna en kanal med tio fibrer i rad och lät flödet gå upp och ned mellan allt tätare vändlägen. Utan förbifart betedde sig fibrerna som tio oberoende strömbrytare. Med förbifart blev vägen mellan lägena krokigare, och flera fibrer kunde byta läge i ett och samma steg av flödet, åt olika håll. I ett försök med fem fibrer släppte två fibrer samtidigt som en tredje slog över, så att antalet överslagna fibrer minskade fast flödet ökade. Ändå hittade fibrerna i varje försök med fem och tio fibrer tillbaka till exakt samma mönster av ettor och nollor när flödet återvände till ett tidigare vändläge." },
+      { type: "h2", text: "En hjärna för mjuka robotar" },
+      { type: "p", html: "Pahlavan ser framför sig mjuka robotar där flöde och tryck tar elektriska strömmens plats, fibrerna fungerar som ventiler och kanalerna som ledningar." },
+      { type: "quote", html: "I många av de här miljöerna kanske elektronik inte fungerar, på grund av elektromagnetiska störningar eller andra problem. Idén är att vi skulle kunna konstruera en helt vätskebaserad styrenhet som byggs in i en mjuk robot och i praktiken fungerar som dess hjärna.", cite: "Amir Pahlavan, Yale University, i universitetets pressmeddelande" },
+      { type: "p", html: "Forskarna ser också chipet som en förenklad modell av levande flödesnät, som svampars trådar, växters rötter och slemsvampen, en encellig organism utan hjärna som ändå kan hitta den kortaste vägen genom en labyrint. Verkliga organismer växer och bygger om sina kanaler. Den öppna frågan är hur mycket av deras minne som kräver en sådan aktiv styrning, och hur mycket som redan kan uppstå ur ren mekanik." },
+      { type: "fact", title: "Visste du?", items: [
+        "Ordet hysteres kommer från grekiskans ord för att ligga efter. Fibern ligger efter flödet: den hoppar tillbaka först när flödet sjunkit en bra bit under den nivå där den slog över.",
+        "Vid det största flödet i försöken, en mikroliter per sekund, skulle det ta drygt ett dygn att fylla en deciliter.",
+        "Hydrogelen i fibrerna har elasticitetsmodulen 0,30&nbsp;megapascal. Stål är omkring 700&nbsp;000 gånger styvare."
+      ] }
+    ]
+  },
+  {
     id: "2026-10-25-schrodingers-glomda-manuskript",
     date: "2026-10-25",
     title: "Schrödingers bortglömda manuskript visar att dold ordning i kvantvärlden inte gick att utesluta",

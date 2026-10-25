@@ -1563,7 +1563,21 @@
         function App() {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
-            const article = id ? NYHETER.find(a => a.id === id) : null;
+            // Förhandsvisning (?id=…&forhand=1): visar en artikel som datumgrinden
+            // ännu håller dold, så att den kan granskas i mobilen dagen innan den
+            // publiceras. Länken finns bara i granskningsmejlet från nyhetsjobbet
+            // (.claude/nyheter/daglig-nyhet.ps1). Sidan märks noindex under tiden.
+            const forhand = id && params.has('forhand') && !NYHETER.some(a => a.id === id)
+                ? (window.NYHETER_ALL || []).find(a => a.id === id) : null;
+            const article = id ? (NYHETER.find(a => a.id === id) || forhand) : null;
+
+            React.useEffect(() => {
+                if (forhand) {
+                    const m = document.createElement('meta');
+                    m.name = 'robots'; m.content = 'noindex';
+                    document.head.appendChild(m);
+                }
+            }, [forhand]);
 
             React.useEffect(() => {
                 document.title = article
@@ -1584,6 +1598,13 @@
                 <div className="lab-page">
                     <Topbar />
                     <Header />
+                    {forhand && (
+                        <div style={{ maxWidth: '760px', margin: '0 auto 12px', padding: '10px 14px',
+                                      border: '1.5px dashed currentColor', borderRadius: '6px' }}>
+                            Förhandsvisning. Artikeln publiceras {formatDate(forhand.date)}
+                            {forhand.time ? ` kl. ${forhand.time}` : ''} och syns inte på sajten innan dess.
+                        </div>
+                    )}
                     {article ? <ArticleView a={article} /> : <ListView />}
                     <Footer />
                 </div>

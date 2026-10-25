@@ -3772,6 +3772,39 @@ går ut automatiskt till varje ny prenumerant utan att någon läser det först.
 
 ## ⚠️ Dagens nyhet: Windows-uppgiften, omförsöket och nyhetsvakten
 
+**Sedan 2026-10-25 förhandsgranskas nyheten av ägaren** (uttryckligt
+önskemål). Rutinen, i `.claude/nyheter/daglig-nyhet.ps1`:
+
+- **14.15 (omförsök 16.45), `-Lage imorgon`:** nyhetsagenten skriver
+  MORGONDAGENS artikel med morgondagens datum, utgivaren granskar och
+  jobbet pushar. Datumgrinden i `data/nyheter.js` håller den dold till
+  midnatt. Sedan mejlas ägaren (Gmail-kopplingen, till ägarens egen
+  adress) en länk till förhandsvisningen `nyheter.html?id=<id>&forhand=1`.
+- **07.45, 19.15 och 22.15, `-Lage svar`:** jobbet läser ägarens svar på
+  mejlet. OK kvitteras, ändringar görs (med ny granskning om fakta ändras)
+  och pushas, och "stoppa" tar bort artikeln och skriver en ny. Svaret
+  07.45 gäller den artikel som just publicerats, som ägaren kontrollerar på
+  morgonen.
+- **Inget svar betyder att artikeln publiceras ändå** vid midnatt.
+- **03.15/07.15 och vid inloggning, `-Lage idag`:** skyddsnätet nedan.
+  Det gör ingenting när artikeln förberetts dagen innan. Saknas den skrivs
+  och publiceras den direkt, och ägaren får ett mejl om att den gick ut
+  utan förhandsgranskning.
+- Varje mejl från jobbet har ämnesraden `[Nyhet <datum>] …` och slutar med
+  markören `FL-JOBB FL-NYHET:<datum>`. Ett svar räknas som obehandlat så
+  länge det senaste meddelandet i tråden saknar markören.
+
+**Jobbet kör i en egen arbetskatalog**, git-worktreen
+`C:\claude\Fysiklabbet-nyhetsjobb` (gren `nyhetsjobb`), som återställs till
+`origin/main` före varje körning och pushar med `git push origin HEAD:main`.
+Den gemensamma arbetskatalogen `C:\claude\Fysiklabbet` används aldrig av
+jobbet: där står interaktiva sessioner på arbetsgrenar med stagade filer,
+och natten 2026-10-25 drog jobbet in main i en sådan gren, fick konflikt i
+`feed.xml` och kunde inte pusha. De schemalagda uppgifterna pekar därför på
+skriptet i worktreen och registreras med `installera-task.ps1` därifrån.
+Worktreen behöver en kopia av `.env` (Gemini-nyckeln), som git ignorerar.
+Arbeta aldrig själv i den katalogen; den skrivs över vid nästa körning.
+
 **Dagens nyhet skrivs av en schemalagd uppgift på Windows-datorn**, inte i
 molnet: `.claude/nyheter/daglig-nyhet.ps1` kör nyhetsagenten headless kl 03.15
 och pushar till main. Den 4 oktober 2026 kom ingen nyhet alls, och

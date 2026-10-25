@@ -166,6 +166,17 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
     Detta är den enda ändringstyp i projektet som pushas utan att fråga —
     allt annat committas/pushas fortfarande bara på begäran.
 
+    **Förhandsgranskning (sedan 2026-10-25).** Den dagliga artikeln skrivs
+    normalt DAGEN INNAN, med morgondagens datum, av jobbet
+    `.claude/nyheter/daglig-nyhet.ps1 -Lage imorgon`. Datumgrinden i
+    `data/nyheter.js` döljer den till midnatt, så den kan pushas direkt, och
+    jobbet mejlar sedan ägaren en förhandsvisningslänk
+    (`nyheter.html?id=<id>&forhand=1`). Ägaren svarar OK, ber om ändringar
+    eller skriver stoppa; svaren hanteras av `-Lage svar`. Inget svar betyder
+    att artikeln publiceras ändå. När jobbet kör dig säger uppdraget vilket
+    datum artikeln ska ha och att skriptet sköter push och mejl: följ det.
+    Startas du för hand i en vanlig session gäller steg 12 som förut.
+
 ## Källor (kontrollera dessa)
 
 - **Phys.org — Physics News**: https://phys.org/physics-news/

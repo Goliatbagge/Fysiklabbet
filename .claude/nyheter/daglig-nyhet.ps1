@@ -390,6 +390,25 @@ function Kor-Svar {
 # ---------------------------------------------------------------------
 
 Set-Location $Repo
+
+# ⛔ SPÄRR: skriptet återställer arbetskatalogen med git reset --hard och
+# git clean. Det får bara ske i nyhetsjobbets egen worktree (gren
+# nyhetsjobb), aldrig i den gemensamma arbetskatalogen där ocommittat arbete
+# ligger. Startas skriptet någon annanstans (en gammal schemalagd uppgift som
+# pekar på C:\claude\Fysiklabbet) lämnas jobbet över till worktreens skript.
+$Gren = (& git rev-parse --abbrev-ref HEAD 2>$null)
+if ($Gren -ne 'nyhetsjobb') {
+    $Worktree = 'C:\claude\Fysiklabbet-nyhetsjobb'
+    $Dit = Join-Path $Worktree '.claude\nyheter\daglig-nyhet.ps1'
+    if ((Test-Path $Dit) -and ((Resolve-Path $Dit).Path -ne $PSCommandPath)) {
+        Log "Startat i $Repo (gren $Gren). Lämnar över till $Dit."
+        & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $Dit -Lage $Lage
+    } else {
+        Log "FEL: startat i $Repo på grenen '$Gren', inte i nyhetsjobbets worktree. Avbryter utan att röra något."
+    }
+    return
+}
+
 Log "=== Nyhetsjobb: start ($Today) ==="
 
 # Snabb utgång utan lås och utan git: skyddsnätet behöver inte göra något

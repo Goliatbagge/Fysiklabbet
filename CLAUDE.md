@@ -90,7 +90,11 @@ svenska på en engelsk sida med `node .claude/i18n/kvar.js "<sida>?…"`.
 via `?lang=nb`** (infört 2026-10-26, så att länkar kan skickas till norska
 lärare och elever): `https://fysiklabbet.se/fysik1-densitet-app.html?lang=nb`.
 Svenska är fortfarande standardspråket; jordgloben sist i huvudmenyn
-visar på varje sida vilka språk den finns på (Svenska, Norsk, English).
+visar vilka språk sidan finns på. På simuleringarna sitter den inte i
+huvudmenyn utan som en ruta (SPRÅK + språkets namn) längst till höger i
+avsnittsraden ovanför simuleringen, så att den syns och läses som ett val
+för simuleringen (önskemål 2026-10-26). Teorisidorna har kvar sin glob
+i menyn.
 Övriga sidor (katalog, teori) har ingen norsk version. Motorn är `i18n.js` (samma som för
 engelskan); ordlistorna är `i18n/nb.js` (gemensamt) och
 `i18n/nb/sidor/<sida>.js` (en per simulering). Arbetsgången står i

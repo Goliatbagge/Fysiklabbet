@@ -413,7 +413,34 @@
         '.lab-lang-meny a:hover{background:rgba(15,22,32,.07) !important}' +
         '.lab-lang-meny a[aria-checked="true"]{font-weight:600}' +
         '.lab-lang-meny a[aria-checked="true"]::after{content:"\\2713";font-weight:600}' +
-        '.lab-bionic-bar .lab-lang-glob{width:30px;height:30px}';
+        '.lab-bionic-bar .lab-lang-glob{width:30px;height:30px}' +
+        // Simuleringarna: väljaren sitter som en egen ruta längst till höger
+        // i avsnittsraden (.secnav från section-nav.js), direkt ovanför
+        // simuleringen, med texten SPRÅK + språkets namn. Den ser ut som
+        // rutorna bredvid så att den syns, och läget visar att den gäller
+        // simuleringen och inte hela sajten.
+        '.lab-lang-sim{margin-left:auto;flex:0 0 auto}' +
+        '.lab-lang-sim .lab-lang-kort{display:flex;align-items:center;gap:10px;height:100%;cursor:pointer;' +
+        'background:var(--lab-bg,#f3eee4);color:var(--lab-ink,#0f1620);font-family:Poppins,sans-serif;' +
+        'border:1px solid var(--lab-line-strong,rgba(15,22,32,.28));border-radius:10px;padding:8px 14px 8px 12px;' +
+        'text-align:left;transition:border-color .15s ease}' +
+        '.lab-lang-sim .lab-lang-kort:hover,.lab-lang-sim.is-open .lab-lang-kort{border-color:var(--lab-accent,#c8324a)}' +
+        '.lab-lang-sim .lab-lang-kort:focus-visible{outline:2px solid currentColor;outline-offset:2px}' +
+        '.lab-lang-kort svg{flex:none}' +
+        '.lab-lang-kort-text{display:flex;flex-direction:column;gap:1px}' +
+        '.lab-lang-kort-tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.65;' +
+        'font-family:var(--lab-font-mono,monospace)}' +
+        '.lab-lang-kort-namn{font-weight:600;font-size:15px;white-space:nowrap}' +
+        '.lab-lang-kort-namn::after{content:"";display:inline-block;margin-left:7px;vertical-align:3px;' +
+        'border:4px solid transparent;border-top:5px solid currentColor;border-bottom:0}' +
+        // Avsnittsradens regler för länkar (.secnav a: kolumn, ram, centrering)
+        // får inte slå igenom i rullgardinsmenyn.
+        '.secnav .lab-lang-meny a{flex-direction:row !important;align-items:center !important;text-align:left !important;' +
+        'min-width:0 !important;flex:none !important;border:none !important;gap:12px}' +
+        '.lab-lang-rad{display:flex;justify-content:flex-end;max-width:1400px;margin:14px auto 0;' +
+        'padding:0 2rem;box-sizing:border-box}' +
+        '@media(max-width:560px){.lab-lang-sim{flex:1 1 100%;display:flex;justify-content:flex-end}' +
+        '.lab-lang-rad{padding:0 1rem}.lab-lang-kort-namn{font-size:13px}}';
     var cssLagd = false;
     function laggCss() {
         if (cssLagd) return;
@@ -427,17 +454,21 @@
         if (till !== 'sv') u.searchParams.set('lang', till); else u.searchParams.delete('lang');
         return u.href;
     }
-    function bygValjare() {
+    function bygValjare(kort) {
         var dd = document.createElement('div');
-        dd.className = 'lab-lang-dd no-i18n';
+        dd.className = 'lab-lang-dd no-i18n' + (kort ? ' lab-lang-sim' : '');
         var knp = document.createElement('button');
         knp.type = 'button';
-        knp.className = 'lab-lang-glob';
+        knp.className = kort ? 'lab-lang-kort' : 'lab-lang-glob';
         knp.setAttribute('aria-haspopup', 'true');
         knp.setAttribute('aria-expanded', 'false');
         knp.setAttribute('aria-label', EN ? 'Language' : 'Språk');
         knp.title = EN ? 'Language / Språk' : NB ? 'Språk / Svenska' : sidansSprak().indexOf('nb') >= 0 ? 'Språk / Norsk' : 'Språk / Language';
-        knp.innerHTML = GLOB;
+        knp.innerHTML = kort
+            ? GLOB + '<span class="lab-lang-kort-text"><span class="lab-lang-kort-tag">' +
+              (EN ? 'Language' : 'Språk') + '</span><span class="lab-lang-kort-namn">' + SPRAKNAMN[lang] + '</span></span>'
+            : GLOB;
+        if (kort) knp.title = NB ? 'Velg språk for simuleringen' : 'Välj språk för simuleringen';
         var meny = document.createElement('div');
         meny.className = 'lab-lang-meny';
         meny.setAttribute('role', 'menu');
@@ -480,7 +511,34 @@
         laggCss();
         el.appendChild(bygValjare());
     }
-    function knapp() {
+    // Simuleringarna (de sidor som finns på norska) har väljaren i
+    // avsnittsraden ovanför simuleringen, inte i huvudmenyn. Saknar sidan
+    // avsnittsrad läggs väljaren i en egen rad under sidhuvudet. I en iframe
+    // (simuleringen inbäddad i en annan sida) visas ingen väljare.
+    var SIMSIDA = harSprak(SIDA, 'nb');
+    var IFRAME = (function () { try { return window.self !== window.top; } catch (e) { return true; } })();
+    function simKnapp(reserv) {
+        if (IFRAME) return;
+        var dd = document.querySelector('.lab-lang-sim');
+        var secnav = document.querySelector('.secnav');
+        if (secnav) {
+            if (dd && dd.parentNode === secnav) return;
+            if (!dd) dd = bygValjare(true);
+            var gammal = document.querySelector('.lab-lang-rad');
+            secnav.appendChild(dd);
+            if (gammal) gammal.parentNode.removeChild(gammal);
+            return;
+        }
+        if (dd || !reserv) return;
+        var rad = document.createElement('div');
+        rad.className = 'lab-lang-rad';
+        rad.appendChild(bygValjare(true));
+        var header = document.querySelector('.lab-header') || document.querySelector('nav.navbar, nav.lab-nav');
+        if (header && header.parentNode) header.parentNode.insertBefore(rad, header.nextSibling);
+        else document.body.insertBefore(rad, document.body.firstChild);
+    }
+    function knapp(forsok) {
+        if (SIMSIDA) { simKnapp((forsok || 0) >= 12); return; }
         var navs = document.querySelectorAll('nav.lab-nav, .navbar .nav-menu');
         for (var i = 0; i < navs.length; i++) {
             var nav = navs[i];
@@ -500,7 +558,7 @@
         // React-sidor ritar sidhuvudet efter DOMContentLoaded: leta igen en stund.
         var forsok = 0;
         var iv = setInterval(function () {
-            knapp();
+            knapp(forsok);
             if (++forsok > 40) clearInterval(iv);
         }, 250);
         if (OV) starta();

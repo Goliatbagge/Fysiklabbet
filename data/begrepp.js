@@ -63,6 +63,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'aktiv-materia',
+    term: 'Aktiv materia',
+    former: ['aktiv materia', 'aktiva materian'],
+    kort: 'Samlingar av delar som var för sig omvandlar energi till egen rörelse, som fåglar i en flock, bakterier i en svärm eller små självgående robotar.',
+    relaterade: ['kantstrom', 'sparrhakeseffekt', 'kiralitet'],
+    body: [
+      { type: 'p', html: 'En sten som rullar nedför en backe rör sig för att något utifrån drar i den, i det här fallet tyngdkraften. En fågel i en flock rör sig av en annan anledning: den har ett eget energiförråd i musklerna och bestämmer själv riktningen. När många sådana självgående delar samlas på samma ställe talar fysikerna om aktiv materia. Exemplen finns överallt: fiskstim, fågelflockar, bakterier som simmar i en droppe, fotgängare i en tunnelbanegång och små leksaksrobotar som skakar sig fram över ett bord.' },
+      { type: 'p', html: 'Det som gör aktiv materia speciell är att den aldrig är i jämvikt. I en vanlig gas får molekylerna sin rörelse från värmen runt omkring, och när allt har samma temperatur jämnar rörelserna ut sig. I aktiv materia tillförs energi hela tiden, inne i varje del, och då kan saker hända som är omöjliga i en gas: delarna kan klumpa ihop sig av sig själva, börja röra sig åt samma håll som en flock, eller strömma runt längs kanten på en behållare.' },
+      { type: 'p', html: 'Forskarna vill förstå vilka regler som styr sådana kollektiva rörelser, och om man kan konstruera material som formar om sig eller förflyttar sig utan yttre styrning. Eftersom levande system är svåra att kontrollera i detalj använder man ofta enkla modeller, till exempel vibrerande borstrobotar, där man kan mäta allt som påverkar rörelsen.' }
+    ]
+  },
+  {
+    id: 'kantstrom',
+    term: 'Kantström',
+    former: ['kantström', 'kantströmmen', 'kantströmmar', 'kantströmmarna'],
+    kort: 'En ström av partiklar som kretsar runt längs kanten på ett område, medan det är lugnare inne i mitten.',
+    relaterade: ['aktiv-materia', 'kiralitet'],
+    body: [
+      { type: 'p', html: 'Tänk dig en skolgård full av elever som alla har fått rådet att hela tiden svänga lite åt vänster när de går. Mitt på gården blir det bara ett myller av små cirklar som krockar med varandra. Men vid staketet kan ingen svänga ut, och där samlas eleverna i en lång rad som går runt, runt längs kanten. En sådan ström längs gränsen kallas kantström.' },
+      { type: 'p', html: 'Kantströmmar uppstår ofta i system där delarna själva roterar eller svänger åt ett bestämt håll, till exempel bakterier som simmar i spiraler eller små robotar som alltid drar åt samma sida. Inne i området tar de små rörelserna ut varandra, men vid kanten blir de kvar som en ström i en enda riktning. Även självgående delar som inte svänger samlas ofta vid väggarna, eftersom de håller sin riktning en stund och därför fortsätter längs väggen när de väl nått fram.' },
+      { type: 'p', html: 'Liknande strömmar längs kanten finns också i helt andra delar av fysiken, till exempel i vissa tunna material där elektronerna bara kan leda ström längs materialets kant. Där styrs strömmen av kvantmekanik, men grundbilden är densamma: rörelse som inte syns inne i mitten blir synlig vid gränsen.' }
+    ]
+  },
+  {
+    id: 'sparrhakeseffekt',
+    term: 'Spärrhakeseffekt',
+    former: ['spärrhakeseffekt', 'spärrhakeseffekten', 'spärrhakeseffekter'],
+    kort: 'När en osymmetrisk form i omgivningen gör att partiklar som rör sig slumpmässigt ändå får en nettoström åt ett visst håll. Det kräver att systemet inte är i jämvikt.',
+    relaterade: ['aktiv-materia'],
+    body: [
+      { type: 'p', html: 'En spärrhake är mekanismen i en spärrnyckel eller i frihjulsnavet på en cykel: ett kugghjul med sneda tänder och en liten hake som låter hjulet snurra åt ena hållet men stoppar det åt det andra. Ordet har lånats in i fysiken för alla situationer där en osymmetrisk form gör att rörelse åt ena hållet går lättare än åt det andra.' },
+      { type: 'p', html: 'En berömd fråga, som fysikern Richard Feynman diskuterade i sina föreläsningar, är om man kunde sätta ett sådant kugghjul i en gas och låta molekylernas slumpmässiga knuffar driva det åt ett håll. Svaret är nej, så länge allt har samma temperatur: haken själv skakar också av värmen och släpper igen lika ofta som den låser. Annars skulle man kunna få ut arbete ur värme utan någon temperaturskillnad, och det förbjuder termodynamikens andra huvudsats.' },
+      { type: 'p', html: 'Är systemet däremot inte i jämvikt fungerar det. Bakterier som simmar in i ett fält av trattformade hinder samlas på ena sidan, och självgående robotar kan få fri väg åt ena hållet och köer åt det andra. Sådana effekter studeras för att kunna sortera partiklar eller styra transport i små kanaler utan pumpar.' }
+    ]
+  },
+  {
     id: 'vak',
     term: 'Vak',
     former: ['vak', 'vaken', 'vakar', 'vakarna', 'vakeffekt', 'vakeffekten', 'vakeffekter', 'vakeffekterna'],

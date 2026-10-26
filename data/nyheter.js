@@ -103,6 +103,64 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-27-borstrobotarna-som-svanger",
+    date: "2026-10-27",
+    title: "Leksaksrobotar som alltid svänger visar hur ett hinders form styr trafiken",
+    deck: "Fysiker i Greifswald har klätt små vibrerande leksaksrobotar i plasthus med lock av soppåsplast. Robotarna drar alltid åt samma håll, och med ett snäckformat hinder i mitten av arenan kan forskarna få dem att flyta fram i ena riktningen och korka igen i den andra.",
+    category: "Mekanik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-27-borstrobotarna-som-svanger.jpg",
+    imageAlt: "En rosa leksaksrobot i plast, ungefär lika stor som ett finger, ligger på en vit yta. Ovansidan har ett genomskinligt rött fönster, och under kroppen syns en rad tunna, böjda ben.",
+    imageCredit: "Foto: Shanze1 (CC BY-SA 4.0), via Wikimedia Commons, beskuren. En Hexbug nano utan forskarnas plasthus.",
+    tags: ["mekanik", "aktiv materia", "borstrobot", "kiralitet", "vinkelhastighet", "cirkulär rörelse", "friktion", "kantström", "spärrhakeseffekt", "jämvikt", "statistisk fysik", "greifswald"],
+    sources: [
+      { name: "Physics World: Chiral bristlebot toys shed light on transport dynamics in active matter systems (20 oktober 2026, intervju med Horst-Holger Boltz, sponsrad av EPL)", url: "https://physicsworld.com/a/chiral-bristlebot-toys-shed-light-on-transport-dynamics-in-active-matter-systems/" },
+      { name: "EPL: studien i fulltext (öppet tillgänglig, CC BY 4.0)", url: "https://iopscience.iop.org/article/10.1209/0295-5075/ae9008" }
+    ],
+    research: {
+      citation: "T. Wagner, M. Himpel, T. Ihle och H.-H. Boltz, ”Geometry-induced transport of self-aligning chiral bristlebots”, EPL 156, 37002 (2026)",
+      url: "https://doi.org/10.1209/0295-5075/ae9008"
+    },
+    larare: {
+      moment: [
+        { label: "Period, frekvens, radianer och vinkelhastighet", href: "katalog.html?id=fy2-1.4" },
+        { label: "Cirkulär rörelse", href: "katalog.html?id=fy2-1.5" },
+        { label: "Friktion", href: "katalog.html?id=fy1-3.6" }
+      ],
+      fragor: [
+        "En robot har farten 15,75 cm/s och vinkelhastigheten 1,11 rad/s. Använd v = ω · r för att räkna ut radien på bågarna den svänger i, och jämför med arenans radie, 25 cm. Varför gör det att väggen får så stor betydelse i försöken?",
+        "Med ett hårt lock gick robotarna nästan rakt, med ett mjukt lock av tunn plastfolie svängde de. Locket lyfter ringen en aning vid varje skakning. Hur kan det ändra friktionen mot underlaget, och varför kan det påverka hur roboten rör sig?",
+        "I en gas där allt har samma temperatur kan ett snett format hinder aldrig ensamt skapa en ström åt ett visst håll. Varför fungerar det ändå med robotarna? Vad skulle det betyda om det fungerade i gasen?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Den som har lekt med en Hexbug nano vet att den sällan går rakt. Den lilla plastbuggen, ungefär lika stor som ett finger, surrar fram över bordet på sina tunna ben, men motorn sitter en bit från mitten och därför drar buggen hela tiden åt samma håll. Forskare som använder sådana leksaker i experiment har ofta försökt bli av med den skevheten, till exempel med en liten motvikt. Timo Wagner, Michael Himpel, Thomas Ihle och Horst-Holger Boltz vid universitetet i Greifswald i Tyskland gjorde tvärtom. Deras studie är publicerad i tidskriften <em>EPL</em>." },
+      { type: "quote", html: "Många tidigare försök med borstrobotar har gått ut på att styra den här kiraliteten, eller att undertrycka den med motvikter, men vi valde att satsa på den.", cite: "Horst-Holger Boltz, universitetet i Greifswald, i en intervju med Physics World" },
+      { type: "h2", text: "Skakningar blir fart" },
+      { type: "p", html: "En borstrobot har inga hjul. En liten motor får kroppen att vibrera, och eftersom benen är snedställda är roboten olika fram och bak. Samspelet mellan skakningarna och friktionen mot underlaget blir då en rörelse framåt. Sådana robotar är en populär modell för det fysikerna kallar aktiv materia: system där varje del själv omvandlar energi till rörelse, som fåglar i en flock eller bakterier i en svärm. Att en sådan del hela tiden svänger åt samma håll gör den kiral, den skiljer sig från sin egen spegelbild." },
+      { type: "h2", text: "Ett plasthus med lock av soppåsplast" },
+      { type: "p", html: "En ensam Hexbug fastnar gärna mot väggar och i klungor med andra. Forskarna placerade därför varje robot i en 3D-utskriven ring med 5,4&nbsp;centimeters diameter, precis så stor att roboten kan vända på stället inne i den. Varje ring kostar ungefär en euro att skriva ut. De provade elva varianter med olika höjd, kant och lock. Ett hårt lock gjorde att robotarna gick nästan rakt, i sträckor på omkring en meter, och svängningen försvann nästan helt. Bäst blev ett mjukt lock av polyetenfolie, 5&nbsp;mikrometer tjock, av den sort som säljs som soppåsar." },
+      { type: "p", html: "Det mjuka locket gör också något mer. När ringen knuffas åt ett visst håll vrider sig roboten inuti efter en kort stund så att den pekar dit ringen faktiskt rör sig. Den egenskapen kallas självinriktning, och den gör att robotarna glider av mot väggar och mot varandra i stället för att köra fast." },
+      { type: "quote", html: "Det här är en försöksplattform som gymnasieelever skulle kunna använda: den kräver små investeringar men ger ändå möjlighet till relevant forskning.", cite: "Horst-Holger Boltz i intervjun med Physics World" },
+      { type: "h2", text: "Cirklar med en radie på 14 centimeter" },
+      { type: "p", html: "Robotarna släpps i en rund arena med radien 25&nbsp;centimeter, upp till åtta åt gången, utvalda bland 25 robotar som betedde sig mest lika. En kamera ovanför tar 25 bilder per sekund, och de flesta mätningarna omfattar omkring 2&nbsp;000 bilder, alltså drygt en minut. Ur bilderna räknar forskarna fram att en robot har farten $v \\approx 15{,}75\\ \\mathrm{cm/s}$ och att dess färdriktning vrids med vinkelhastigheten $\\omega \\approx 1{,}11\\ \\mathrm{rad/s}$. Ett helt varv tar alltså drygt fem och en halv sekund. Med sambandet $v = \\omega \\cdot r$ ger det bågar med en radie på omkring 14&nbsp;centimeter, drygt halva arenans radie, alltså samma storleksordning. Väggen kommer därför att spela stor roll." },
+      { type: "image", src: "nyheter/bilder/2026-10-27-borstrobotarna-som-svanger-2.jpg", alt: "Svartvit bild tagen rakt uppifrån av en rund arena med en svart kant. Åtta små runda plastringar står utspridda, de flesta nära kanten och en i mitten. Färgade linjer visar de bågformade vägar som några av ringarna har rört sig längs.", caption: "Arenan sedd uppifrån, med robotarna i sina plasthus. De färgade linjerna visar vägar som datorn har följt i filmen.", credit: "Bild: T. Wagner, M. Himpel, T. Ihle och H.-H. Boltz, EPL 156, 37002 (2026), figur 1 (CC BY 4.0), beskuren" },
+      { type: "h2", text: "En ström längs kanten" },
+      { type: "p", html: "Robotarna samlas vid väggen och kretsar runt längs den, ett fenomen som kallas kantström. Det beror främst på att de håller sin riktning en stund, men kiraliteten avgör hur stabil strömmen blir. När robotarna kretsar åt det håll där deras egen svängning hela tiden styr dem in mot väggen håller de sig tätt intill den. Kretsar de åt andra hållet styr svängningen dem bort från väggen, och avståndet till den varierar kraftigt." },
+      { type: "h2", text: "Snäckan som släpper igenom åt ena hållet" },
+      { type: "p", html: "Sedan placerade forskarna ett hinder i form av en spiral, en snäcka, i mitten av arenan. Runt snäckan smalnar vägen av till en flaskhals som är ungefär två robotar bred. Från ena sidan närmar man sig flaskhalsen genom en jämn avsmalning, som en tratt. Från andra sidan finns en öppen yta där en robot hinner vända, och när den vänder om kan den korka igen passagen. Snäckan kan vändas upp och ned, så forskarna kunde pröva båda riktningarna på hindret med strömmen åt båda hållen." },
+      { type: "p", html: "Skillnaden var stor. När strömmen gick åt det stabila hållet och snäckan var vänd åt samma håll stod nästan ingen robot stilla, och flaskhalsen spelade knappt någon roll. När strömmen gick åt det instabila hållet och snäckan var vänd åt motsatt håll blev det tydliga köer, med många robotar som stod nästan stilla. Det här är en så kallad spärrhakeseffekt, där formen på omgivningen gör att rörelsen gynnas åt ena hållet. Boltz kallar den ett genuint fenomen utanför jämvikt, som inte skulle kunna uppstå i ett passivt system. I en gas där allt har samma temperatur kan ett snett format hinder aldrig ensamt skapa en ström åt ett visst håll, för då skulle man kunna få ut arbete ur värme utan någon temperaturskillnad. Robotarna har egna batterier och är därför aldrig i jämvikt." },
+      { type: "h2", text: "Tre robotar i en triangel" },
+      { type: "p", html: "I ett sista försök kopplade forskarna ihop tre robotar med stela, 3D-utskrivna stag till en liksidig triangel. Triangeln växlade av sig själv mellan två sätt att röra sig: ibland gled den fram i en riktning med hög fart, ibland snurrade den runt nästan på stället. Där syntes dock nästan inget spår av robotarnas kiralitet, vilket forskarna tror beror på väggarna. I datorsimuleringar utan väggar syns den tydligt." },
+      { type: "p", html: "Nästa steg är att räkna fram hur sådana robotar borde bete sig, utan att anpassa något i efterhand. Eftersom forskarna har mätt upp nästan alla storheter som behövs, som farten, vinkelhastigheten och hur snabbt robotarna riktar in sig, går teorin att jämföra direkt med försöken. Målet är, med Boltz ord, en kvantitativ förutsägelse från grunden som sedan kan prövas mot mätdata." },
+      { type: "fact", title: "Visste du?", items: [
+        "Batterierna sätter gränsen för försöken: varje mätning varar högst några minuter, och därefter börjar robotarna påverkas av att batterierna laddas ur.",
+        "Åtta robotar i plasthus täcker ungefär en tiondel av golvet i arenan.",
+        "Ordet kiral kommer från grekiskans ord för hand. En höger- och en vänsterhand är varandras spegelbilder, men går inte att lägga exakt ovanpå varandra."
+      ] }
+    ]
+  },
+  {
     id: "2026-10-26-fibrerna-som-minns-flodet",
     date: "2026-10-26",
     title: "Mjuka fibrer i ett vattenchip minns hur vätskan har flutit",

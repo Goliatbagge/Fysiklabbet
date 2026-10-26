@@ -15,6 +15,15 @@ Format per post:
 - **S301: snabbaste stjärnan runt Sgr A* (8,7 år, 25 000 km/s) känner av svarta hålets rotation** **[BREVTEASER]** (nominerad 2026-10-25: snabbaste kända stjärnan i Vintergatan, belagd i fulltext; astronomi senast 2026-10-14) — GRAVITY-samarbetet, Nature 2026, DOI 10.1038/s41586-026-10894-w; fulltext läst i arXiv 2607.12664 (Discovery of a star sensitive to the spin of Sgr A*). OBS: ESO:s pressmeddelande eso2612 kom redan 2026-08-19 (ESO-bilder CC BY 4.0), så inte dagsfärskt; Physics World tog upp den 2026-10-08. Astronomi. Källa: https://physicsworld.com/a/fastest-star-in-the-milky-way-feels-the-rotation-of-our-central-black-hole/
   (tillagd 2026-10-20)
 
+- **Ny typ av superjonisk is observerad (Physics World, oktober 2026)** — tillstånd/planetfysik. OBS: superjonisk is (hcp-fasen) publicerades redan 2026-09-13; ta bara om fyndet är tydligt annorlunda. Originalet ej kontrollerat. Källa: https://physicsworld.com/a/new-type-of-superionic-water-ice-observed-for-the-first-time/
+  (tillagd 2026-10-26)
+
+- **Kvantmekaniken sätter en hastighetsgräns för hur snabbt något kan nå termisk jämvikt (τ ≥ ħ/2kT)** — termodynamik/kvant, teoretiskt. Abiuso, Rolandi, Calsamiglia, Sekatski, Perarnau-Llobet, Nature Physics (15 oktober 2026); förtryck arXiv 2506.19188 (läsbart). Källa: https://physicsworld.com/a/your-beer-can-only-cool-so-fast-blame-quantum-mechanics/
+  (tillagd 2026-10-26)
+
+- **Supraström läser av kvantinformation utan att förstöra den** — kvantteknik. Originalet ej kontrollerat. Källa (Phys.org 2026-10-26): https://phys.org/news/2026-10-supercurrent-enables-quantum-destroying.html
+  (tillagd 2026-10-26)
+
 - **Vad gör glas bra på att leda värme? Ljudhastigheten avgör** — termodynamik/materialfysik, 13 silikatglas, värmeledningsförmågan följer ljudhastigheten (fononer). Sukenaga m.fl. (Tohoku), Applied Physics Letters 129, 132203 (2026), DOI 10.1063/5.0351403; fulltexten SPÄRRAD 2026-10-25 (pubs.aip.org ger Cloudflare-kontroll, Crossref saknar licens, inget arXiv; bara abstractet läst: 13 binära silikatglas M2/nO–SiO2, M = Li, Na, Ca, Pb, cirka 298 K, λ ≈ 3,0·10^-4 · v). Ta bara upp om fulltexten blir åtkomlig. Källa (Phys.org 2026-10-23): https://phys.org/news/2026-10-glass-good-key.html
   (tillagd 2026-10-24)
 

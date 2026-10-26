@@ -10,6 +10,9 @@
  */
 window.BEGREPP_LATT = true;
 window.BEGREPP = [
+  {"id":"aktiv-materia","term":"Aktiv materia","kort":"Samlingar av delar som var för sig omvandlar energi till egen rörelse, som fåglar i en flock, bakterier i en svärm eller små självgående robotar.","former":["aktiv materia","aktiva materian"]},
+  {"id":"kantstrom","term":"Kantström","kort":"En ström av partiklar som kretsar runt längs kanten på ett område, medan det är lugnare inne i mitten.","former":["kantström","kantströmmen","kantströmmar","kantströmmarna"]},
+  {"id":"sparrhakeseffekt","term":"Spärrhakeseffekt","kort":"När en osymmetrisk form i omgivningen gör att partiklar som rör sig slumpmässigt ändå får en nettoström åt ett visst håll. Det kräver att systemet inte är i jämvikt.","former":["spärrhakeseffekt","spärrhakeseffekten","spärrhakeseffekter"]},
   {"id":"vak","term":"Vak","kort":"Stråket av störd, långsammare luft eller vatten som bildas bakom ett föremål som något strömmar förbi, till exempel bakom en båt, en cyklist eller ett vindkraftverk.","former":["vak","vaken","vakar","vakarna","vakeffekt","vakeffekten","vakeffekter","vakeffekterna"]},
   {"id":"temperaturinversion","term":"Temperaturinversion","kort":"Ett luftskikt där temperaturen ökar med höjden i stället för att minska. Skiktet är stabilt och fungerar som ett lock som hindrar luften under från att blandas uppåt.","former":["temperaturinversion","temperaturinversionen","temperaturinversioner","inversionen","inversionsskikt","inversionsskiktet"]},
   {"id":"gransskikt","term":"Gränsskikt","kort":"Det tunna lager av en gas eller vätska närmast en yta där strömningen bromsas av ytan. I atmosfären är det den understa delen av luften, som känner av marken eller havet under sig.","former":["gränsskikt","gränsskiktet","gränsskikten","atmosfäriska gränsskiktet","atmosfäriskt gränsskikt"]},

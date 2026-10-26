@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bandgeneratorn — Fysiklabbet</title>
     <meta name="description" content="Ladda klotet i 3D — gnistor mot jordad kula, flygande aluminiumformar och hår som reser sig.">
@@ -586,6 +587,7 @@
         }
 
         _label(text, position, color = '#5a6170', size = 26, italic = false) {
+            if (window.I18N) text = I18N.t(text);
             const canvas = document.createElement('canvas');
             const pad = 8;
             const mctx = canvas.getContext('2d');

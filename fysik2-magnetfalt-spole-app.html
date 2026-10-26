@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magnetfält i spole — Fysiklabbet</title>
     <meta name="description" content="En solenoid i 3D som du kan rotera fritt — lindningen syns tydligt och blå strömpilar vandrar längs tråden. Fältlinjerna är homogena inuti och böjer sig runt som hos en stavmagnet. Ändra strömmen I, varvtalet n och spolens längd l och se hur flödestätheten B = μ₀ · n · I/l ändras, och byt strömriktning för att vända fältet och polerna.">
@@ -972,7 +973,7 @@
                                                           valueText={`${fmt(I, 1)} A`} />
                                                 <FsSlider label="Varvtal (<em>n</em>)" value={n}
                                                           min={NMIN} max={NMAX} step={25} onChange={setN}
-                                                          valueText={`${fmtNum(n, 0)} varv`} />
+                                                          valueText={window.I18N ? I18N.t('{n} varv', { n: fmtNum(n, 0) }) : `${fmtNum(n, 0)} varv`} />
                                                 <FsSlider label="Spolens längd (<em>l</em>)" value={lcm}
                                                           min={LMIN} max={LMAX} step={0.5} onChange={setLcm}
                                                           valueText={`${fmt(lcm, lcm % 1 ? 1 : 0)} cm`} />
@@ -1015,7 +1016,7 @@
                                     <Slider label="Varvtal (<em>n</em>)"
                                             sub="Antalet varv i spolen. Fler varv på samma längd ⟹ starkare fält."
                                             value={n} min={NMIN} max={NMAX} step={25} onChange={setN}
-                                            valueText={`${fmtNum(n, 0)} varv`} />
+                                            valueText={window.I18N ? I18N.t('{n} varv', { n: fmtNum(n, 0) }) : `${fmtNum(n, 0)} varv`} />
                                     <Slider label="Spolens längd (<em>l</em>)"
                                             sub="Längre spole med samma varvtal ⟹ glesare varv ⟹ svagare fält."
                                             value={lcm} min={LMIN} max={LMAX} step={0.5} onChange={setLcm}

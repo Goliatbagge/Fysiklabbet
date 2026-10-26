@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attraktion och repulsion — Fysiklabbet</title>
     <meta name="description" content="Två stavmagneter på en labbänk: dra dem mot varandra, vänd polerna och släpp. Lika poler repellerar och olika poler attraherar — kraftpilarna i gapet visar kraften på varje magnet, fältbilden visar varför, och kraft–avståndsgrafen visar hur kraften växer snabbt när avståndet minskar. Magneterna börjar glida först när magnetkraften övervinner friktionen.">
@@ -898,7 +899,7 @@
                                         <span className="si-val">{fmt(info.dcm, 1)} cm</span>
                                         <span className="si-lbl" style={{ marginTop: 3 }}>Kraftens storlek</span>
                                         <div className="si-bar"><div style={{ width: info.pct + '%' }} /></div>
-                                        <span className="si-ord">Magneterna {info.laege}</span>
+                                        <span className="si-ord">{window.I18N ? I18N.t('Magneterna ' + info.laege) : 'Magneterna ' + info.laege}</span>
                                     </div>
 
                                     <div className="scene-hint">Dra magneterna i sidled — släpp dem sedan fria</div>

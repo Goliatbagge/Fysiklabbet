@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neutronstjärnan i skala — Fysiklabbet</title>
     <meta name="description" content="Hur stor är en neutronstjärna? Rotera en 3D-jord och flyg in till en skalenlig neutronstjärna — liten som en stad, men tyngre än solen.">
@@ -842,7 +843,7 @@
                 controls.maxDistance = view.maxDistance;
                 controls.enabled = true;
                 flyBtn.disabled = false;
-                flyBtn.textContent = atStar ? 'Tillbaka till jorden' : 'Flyg till neutronstjärnan';
+                flyBtn.textContent = atStar ? (window.I18N ? I18N.t('Tillbaka till jorden') : 'Tillbaka till jorden') : (window.I18N ? I18N.t('Flyg till neutronstjärnan') : 'Flyg till neutronstjärnan');
                 flight = null;
             }
         }
@@ -861,7 +862,7 @@
             controls.target.copy(STAR_VIEW.target);
             controls.minDistance = STAR_VIEW.minDistance;
             atStar = true;
-            flyBtn.textContent = 'Tillbaka till jorden';
+            flyBtn.textContent = (window.I18N ? I18N.t('Tillbaka till jorden') : 'Tillbaka till jorden');
         }
 
         // ---------- Visningsval ----------
@@ -971,7 +972,7 @@
             const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
             fsIconExpand.style.display = isFullscreen ? 'none' : '';
             fsIconCompress.style.display = isFullscreen ? '' : 'none';
-            fsBtn.title = isFullscreen ? 'Lämna fullskärm' : 'Fullskärm';
+            fsBtn.title = isFullscreen ? (window.I18N ? I18N.t('Lämna fullskärm') : 'Lämna fullskärm') : (window.I18N ? I18N.t('Fullskärm') : 'Fullskärm');
             requestAnimationFrame(handleResize);
         }
         document.addEventListener('fullscreenchange', onFullscreenChange);

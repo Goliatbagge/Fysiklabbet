@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Satellit i omloppsbana — Fysiklabbet</title>
     <meta name="description" content="Skjut upp en satellit runt jorden: ställ in höjd och fart och se om banan blir en cirkel, en ellips, en krasch mot jordytan eller en flykt bort från jorden. Gravitationskraften, hastigheten, den förutsagda banan och energierna visas live, med rymdteleskopet Hubble som utgångsläge.">
@@ -272,7 +273,7 @@
             if (s < 90) return fmt(s, 0) + ' s';
             if (s < 5400) return fmt(s / 60, 1) + ' min';
             if (s < 172800) return fmt(s / 3600, 1) + ' h';
-            return fmt(s / 86400, 1) + ' dygn';
+            return fmt(s / 86400, 1) + ' ' + (window.I18N ? I18N.t('dygn') : 'dygn');
         };
         const fmtKm = (m) => fmtNum(m / 1000, 0) + ' km';
 
@@ -574,10 +575,10 @@ const KONTINENTER = [
                 </g>
             );
             const rubrik = {
-                krasch:   ['Kraschbana', 'perigeum ' + (el.rp < RJ ? fmtKm(RJ - el.rp) : '') + ' under jordytan'],
-                ellipsIn: ['Ellipsbana, för långsam för cirkel', 'faller inåt men missar jorden, perigeum ' + fmtKm(el.rp - RJ)],
+                krasch:   ['Kraschbana', window.I18N ? I18N.t('perigeum {d} under jordytan', { d: (el.rp < RJ ? fmtKm(RJ - el.rp) : '') }) : 'perigeum ' + (el.rp < RJ ? fmtKm(RJ - el.rp) : '') + ' under jordytan'],
+                ellipsIn: ['Ellipsbana, för långsam för cirkel', window.I18N ? I18N.t('faller inåt men missar jorden, perigeum {d}', { d: fmtKm(el.rp - RJ) }) : 'faller inåt men missar jorden, perigeum ' + fmtKm(el.rp - RJ)],
                 cirkel:   ['Cirkelbana', 'gravitationskraften är exakt den centripetalkraft som krävs'],
-                ellipsUt: ['Ellipsbana, för snabb för cirkel', 'stiger utåt och kommer tillbaka, apogeum ' + fmtKm(el.ra - RJ)],
+                ellipsUt: ['Ellipsbana, för snabb för cirkel', window.I18N ? I18N.t('stiger utåt och kommer tillbaka, apogeum {d}', { d: fmtKm(el.ra - RJ) }) : 'stiger utåt och kommer tillbaka, apogeum ' + fmtKm(el.ra - RJ)],
                 flykt:    ['Flyktbana', 'farten når flykthastigheten, satelliten återvänder aldrig'],
             }[typ];
             const rubCol = { krasch: COL.krasch, ellipsIn: COL.ellipsIn, cirkel: COL.cirkel, ellipsUt: COL.ellipsUt, flykt: COL.flykt }[typ];

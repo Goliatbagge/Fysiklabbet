@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stående våg i sträng — Fysiklabbet</title>
     <meta name="description" content="Vad som händer när en våg möter en gräns.">
@@ -596,7 +597,7 @@
                                                         className={isActive ? 'btn-toggle active' : 'btn-toggle'}
                                                         onClick={() => handlePresetClick(n)}
                                                         disabled={isDisabled}>
-                                                        {n === 1 ? 'Grundton' : n === 2 ? '1:a' : n === 3 ? '2:a' : `${n - 1}:e`}
+                                                        {n === 1 ? 'Grundton' : n === 2 ? '1:a' : n === 3 ? '2:a' : (window.I18N ? I18N.t('{n}:e', {n: n - 1}) : `${n - 1}:e`)}
                                                     </button>
                                                 );
                                             })}
@@ -606,7 +607,7 @@
                                                 harmonic === 1 ? 'Grundtonen' :
                                                 harmonic === 2 ? '1:a övertonen' :
                                                 harmonic === 3 ? '2:a övertonen' :
-                                                `${harmonic - 1}:e övertonen`
+                                                (window.I18N ? I18N.t('{n}:e övertonen', {n: harmonic - 1}) : `${harmonic - 1}:e övertonen`)
                                             ) : 'Ingen resonans'}
                                             {' — grundfrekvens '}
                                             {isFinite(fundamentalFrequency) ? fundamentalFrequency.toFixed(2).replace('.', ',') : '...'} Hz
@@ -699,7 +700,7 @@
                                                             key={n}
                                                             onClick={() => handlePresetClick(n)}
                                                             disabled={isDisabled}
-                                                            title={isDisabled ? (isBeyondMax ? `Kräver ${calculatedFreq.toFixed(1)} Hz` : `Beräkna grundfrekvens först`) : `${calculatedFreq.toFixed(2).replace('.',',')} Hz`}
+                                                            title={isDisabled ? (isBeyondMax ? (window.I18N ? I18N.t('Kräver {f} Hz', {f: calculatedFreq.toFixed(1)}) : `Kräver ${calculatedFreq.toFixed(1)} Hz`) : `Beräkna grundfrekvens först`) : `${calculatedFreq.toFixed(2).replace('.',',')} Hz`}
                                                             className={`px-3 py-1 text-xs rounded-md transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900 ${
                                                                 isActive
                                                                     ? 'bg-cyan-500 text-white font-semibold shadow-md shadow-cyan-500/30'
@@ -708,7 +709,7 @@
                                                                 isDisabled ? 'opacity-50 cursor-not-allowed' : ''
                                                             }`}
                                                         >
-                                                            {n === 1 ? 'Grundton' : n === 2 ? '1:a' : n === 3 ? '2:a' : `${n - 1}:e`}
+                                                            {n === 1 ? 'Grundton' : n === 2 ? '1:a' : n === 3 ? '2:a' : (window.I18N ? I18N.t('{n}:e', {n: n - 1}) : `${n - 1}:e`)}
                                                         </button>
                                                     );
                                                 })}
@@ -768,7 +769,7 @@
                                             harmonic === 1 ? 'Grundtonen' :
                                             harmonic === 2 ? '1:a övertonen' :
                                             harmonic === 3 ? '2:a övertonen' :
-                                            `${harmonic - 1}:e övertonen`
+                                            (window.I18N ? I18N.t('{n}:e övertonen', {n: harmonic - 1}) : `${harmonic - 1}:e övertonen`)
                                         ) : 'Ingen resonans'}
                                     </p>
                                     <p className={`mt-2 text-sm ${isResonant ? 'text-cyan-400' : 'text-gray-500'} transition-colors duration-300`}>

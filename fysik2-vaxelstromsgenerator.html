@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Växelströmsgenerator — Fysiklabbet</title>
     <meta name="description" content="Roterande spole i ett magnetfält alstrar sinusformad växelspänning — Faradays lag i 3D.">
@@ -436,7 +437,7 @@
             ctx.fillStyle = color;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillText(text, size, size);
+            ctx.fillText(window.I18N ? I18N.t(text) : text, size, size);
             const tex = new THREE.CanvasTexture(canvas);
             const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
             const sprite = new THREE.Sprite(mat);
@@ -944,7 +945,7 @@
 
         // X label
         ctx.textAlign = 'center';
-        ctx.fillText('tid', padL + gW / 2, padT + gH + padB - 2);
+        ctx.fillText(window.I18N ? I18N.t('tid') : 'tid', padL + gW / 2, padT + gH + padB - 2);
 
         if (history.length < 2) return;
 

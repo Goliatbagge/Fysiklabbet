@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rörelsediagram — Fysiklabbet</title>
     <meta name="description" content="Rörelseformlerna och hur de hänger ihop med diagrammen.">
@@ -1068,7 +1069,7 @@
                         {motionTypes.map(([key, config]) => (
                             <div key={key} className="glass-card p-3 rounded-xl">
                                 <ComparisonGraph
-                                    title={`${config.icon} ${config.name}`}
+                                    title={`${config.icon} ${window.I18N ? I18N.t(config.name) : config.name}`}
                                     subtitle={`${currentGraph.label} (${currentGraph.unit})`}
                                     unit={currentGraph.unit}
                                     config={config}

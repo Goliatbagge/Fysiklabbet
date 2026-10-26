@@ -1,0 +1,118 @@
+/* i18n/nb/sidor/fysik1-acceleration-tid-app.js — norska (bokmål) för
+ * simuleringen Acceleration-tid-diagram. */
+(function () {
+    I18N.add({
+        // Sidhuvud och delning
+        'Acceleration-tid-diagram — Fysiklabbet': 'Akselerasjon-tid-diagram — Fysiklabbet',
+        'Acceleration-tid-diagram — Fysik nivå 1': 'Akselerasjon-tid-diagram — Fysikk nivå 1',
+        'Att läsa hastighetsändring ur ett a-t-diagram — arean mellan grafen och tidsaxeln ger Δv.':
+            'Slik leser du hastighetsendringen i et a-t-diagram: arealet mellom grafen og tidsaksen gir Δv.',
+        'Acceleration-tid-diagram': 'Akselerasjon-tid-diagram',
+        'Utforska hur accelerationen förändras över tid. Lär dig att': 'Utforsk hvordan akselerasjonen endrer seg over tid. Lær at',
+        'arean mellan grafen och tidsaxeln ger hastighetsändringen': 'arealet mellom grafen og tidsaksen gir hastighetsendringen',
+        '— area under axeln räknas som negativ.': '(areal under aksen regnes som negativt).',
+
+        // Grafen
+        'Acceleration-tid-graf': 'Akselerasjon-tid-graf',
+        'Acceleration (m/s²)': 'Akselerasjon (m/s²)',
+
+        // Inställningsrutan i fullskärm
+        'Dölj inställningar': 'Skjul innstillinger',
+        'Visa inställningar': 'Vis innstillinger',
+        'Typ av acceleration': 'Type akselerasjon',
+        'Konstant acceleration': 'Konstant akselerasjon',
+        'Linjärt föränderlig': 'Lineært varierende',
+        'Acceleration + inbromsning': 'Akselerasjon + oppbremsing',
+        'Area (hastighetsändring)': 'Areal (hastighetsendring)',
+        'Tid (': 'Tid (',
+        'Start-acceleration (': 'Startakselerasjon (',
+        'Acceleration fas 1 (': 'Akselerasjon fase 1 (',
+        'Acceleration (': 'Akselerasjon (',
+        'Slut-acceleration (': 'Sluttakselerasjon (',
+        'Acceleration fas 2 (': 'Akselerasjon fase 2 (',
+        'Brytpunkt (': 'Knekkpunkt (',
+        'Intervall: start': 'Intervall: start',
+        'Intervall: slut': 'Intervall: slutt',
+        'Rörelse': 'Bevegelse',
+        '⏸ Pausa': '⏸ Pause',
+        '▶ Spela': '▶ Spill av',
+        '▶ Spela upp': '▶ Spill av',
+        '↺ Återställ': '↺ Tilbakestill',
+
+        // Resultatrutan
+        '📊 Resultat över intervallet': '📊 Resultat over intervallet',
+        's till': 's til',
+        'Hastighetsändring:': 'Hastighetsendring:',
+        'Sluthastighet:': 'Slutthastighet:',
+        '🚀 Sammanlagt ökar hastigheten (mer area ovanför axeln)': '🚀 Samlet øker hastigheten (mer areal over aksen)',
+        '🛑 Sammanlagt minskar hastigheten (mer area under axeln)': '🛑 Samlet minker hastigheten (mer areal under aksen)',
+        '⚖️ Lika mycket area ovanför och under axeln — hastigheten är oförändrad': '⚖️ Like mye areal over og under aksen, så hastigheten er uendret',
+
+        // Rörelse
+        '🚗 Rörelse': '🚗 Bevegelse',
+        'Läge': 'Posisjon',
+        'Bilen ovanför diagrammet kör så som grafen beskriver. Den': 'Bilen over diagrammet kjører slik grafen beskriver. Det',
+        'orangea punkten': 'oransje punktet',
+        'markerar bilens aktuella tidpunkt på grafen — arean upp till den punkten är hastighetsändringen, och därför ändrar bilen sin fart precis så.':
+            'markerer bilens nåværende tidspunkt på grafen. Arealet fram til det punktet er hastighetsendringen, og derfor endrer bilen farten sin akkurat slik.',
+
+        // Areaanalys
+        '📏 Areaanalys: hastighetsändring': '📏 Arealanalyse: hastighetsendring',
+        'Färgkodning:': 'Fargekoding:',
+        'Positiv area (': 'Positivt areal (',
+        '> 0) → ökar': '> 0) → øker',
+        'Negativ area (': 'Negativt areal (',
+        '< 0) → minskar': '< 0) → minker',
+        'positiv area': 'positivt areal',
+        'negativ area': 'negativt areal',
+        '📊 Beräkningar (': '📊 Beregninger (',
+        '🟢 Positiv area:': '🟢 Positivt areal:',
+        '🔴 Negativ area:': '🔴 Negativt areal:',
+        'Rektangelarea (höjd × bredd):': 'Rektangelareal (høyde × bredde):',
+        '→ Hastigheten har ökat över intervallet': '→ Hastigheten har økt over intervallet',
+        '← Hastigheten har minskat över intervallet': '← Hastigheten har minket over intervallet',
+        '○ Hastigheten är oförändrad — positiv och negativ area tar ut varandra': '○ Hastigheten er uendret: positivt og negativt areal opphever hverandre',
+        'Hastighet före och efter:': 'Hastighet før og etter:',
+        '(slut) =': '(slutt) =',
+        'm/s vid': 'm/s ved',
+        '💡 Viktigt att förstå:': '💡 Viktig å forstå:',
+        'Arean mellan': 'Arealet mellom',
+        '-grafen och tidsaxeln ger': '-grafen og tidsaksen gir',
+        'hastighetsändringen': 'hastighetsendringen',
+        'Area': 'Areal',
+        'ovanför': 'over',
+        'tidsaxeln (': 'tidsaksen (',
+        '> 0) räknas': '> 0) regnes som',
+        'positiv': 'positivt',
+        '— hastigheten ökar.': '(hastigheten øker).',
+        '< 0) räknas': '< 0) regnes som',
+        'negativ': 'negativt',
+        '— hastigheten minskar.': '(hastigheten minker).',
+        'är skillnaden mellan dem, inte den totala arean.': 'er differansen mellom dem, ikke det totale arealet.',
+        '⚠️ Här finns både positiv och negativ area — de delvis tar ut varandra.': '⚠️ Her er det både positivt og negativt areal, og de opphever hverandre delvis.',
+
+        // Sidopanelen
+        '⚙️ Parametrar': '⚙️ Parametere',
+        'Påverkar bara sluthastigheten, inte arean.': 'Påvirker bare slutthastigheten, ikke arealet.',
+        '👁️ Visningsalternativ': '👁️ Visningsvalg',
+        'Visa area (hastighetsändring)': 'Vis areal (hastighetsendring)',
+        'Tidsintervall för area:': 'Tidsintervall for arealet:',
+        'Tips: du kan också dra de blå punkterna på tidsaxeln.': 'Tips: du kan også dra de blå punktene på tidsaksen.',
+        'Hastighetsändring från area:': 'Hastighetsendring fra areal:',
+        '= area mellan': '= arealet mellom',
+        '-grafen och': '-grafen og',
+        '-axeln': '-aksen',
+        'area under axeln räknas negativ': 'areal under aksen regnes som negativt',
+        'Vid konstant acceleration:': 'Ved konstant akselerasjon:',
+        'Allmänt (integral):': 'Generelt (integral):',
+        '💡 Kom ihåg!': '💡 Husk!',
+        'Hastighetsändring': 'Hastighetsendring',
+        '✓ Area': '✓ Areal',
+        'tidsaxeln är positiv (': 'tidsaksen er positivt (',
+        'ökar)': 'øker)',
+        'tidsaxeln är negativ (': 'tidsaksen er negativt (',
+        'minskar)': 'minker)',
+        '= positiv area − negativ area': '= positivt areal − negativt areal',
+        '✓ Horisontell linje = konstant acceleration → rektangelarea': '✓ Horisontal linje = konstant akselerasjon → rektangelareal'
+    });
+})();

@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krafter i hissen — Fysiklabbet</title>
     <meta name="description" content="Åk hiss med en person på en kraftplatta och se tyngdkraften, normalkraften, den resulterande kraften och accelerationen i varje del av färden. Kraftplattans mätning ritas som en graf, precis som i laborationen, och du kan förutsäga vad plattan visar innan du ser det.">
@@ -589,7 +590,7 @@
             const lit = knappar.lit.has(k), har = knappar.har === k;
             return (
                 <g style={{ cursor: knappar.trasig ? 'not-allowed' : 'pointer' }} opacity={knappar.trasig ? 0.45 : 1}
-                   role="button" aria-label={'Åk till våning ' + k}
+                   role="button" aria-label={window.I18N ? I18N.t('Åk till våning {n}', {n: k}) : 'Åk till våning ' + k}
                    onClick={(e) => { e.stopPropagation(); if (!knappar.trasig) knappar.aka(k); }}>
                     <circle cx={x} cy={y} r={r} fill={har ? '#ffffff' : '#ecebe7'}
                             stroke={lit ? '#e0701a' : (har ? '#3f4a57' : '#8d8a83')} strokeWidth={lit ? 2.6 : 1.6} />
@@ -1073,7 +1074,7 @@
             });
             const fy = smal ? y + 74 + 2 * (knH + 8) + 12 : y + 78 + knH + 20;
             const maxT = Math.floor((w - 28) / 7.3);
-            const rader = besvarad ? radbryt(FORKLARING[fraga.seg.ph].replace(/F_N/g, 'FN').replace(/F_G/g, 'FG').replace(/F_R/g, 'FR'), maxT) : [];
+            const rader = besvarad ? radbryt((window.I18N ? I18N.t(FORKLARING[fraga.seg.ph]) : FORKLARING[fraga.seg.ph]).replace(/F_N/g, 'FN').replace(/F_G/g, 'FG').replace(/F_R/g, 'FR'), maxT) : [];
             // index i förklaringen skrivs ut som tspan
             const radJSX = (r) => r.split(/(FN|FG|FR)/).map((del, i) =>
                 /^F[NGR]$/.test(del) ? <Sym key={i} s="F" sub={del[1]} fs={13} /> : <tspan key={i}>{del}</tspan>);
@@ -1084,21 +1085,21 @@
                         {besvarad ? 'FACIT' : 'FÖRUTSÄG INNAN DU SER MÄTNINGEN'}
                     </text>
                     <text x={x + w - 14} y={y + 21} textAnchor="end" fontSize="12" fill="rgba(15,22,32,0.7)">
-                        {poang.n > 0 ? `${poang.ratt} av ${poang.n} rätt` : ''}
+                        {poang.n > 0 ? (window.I18N ? I18N.t('{r} av {n} rätt', {r: poang.ratt, n: poang.n}) : `${poang.ratt} av ${poang.n} rätt`) : ''}
                     </text>
                     <text x={x + 14} y={y + 44} fontSize="16" fontWeight="700" fill={COL.ink}>{titel}.</text>
                     <text x={x + 14} y={y + 63} fontSize="13.5" fill="rgba(15,22,32,0.82)">
                         Hur stor är normalkraften <Sym s="F" sub="N" fs={13.5} /> jämfört med tyngdkraften <Sym s="F" sub="G" fs={13.5} />?
                     </text>
                     {knappar}
-                    {!besvarad && radbryt('Ledtråd: titta på hur hastigheten ändras, inte på åt vilket håll hissen åker. Accelerationen och den resulterande kraften pekar åt samma håll som förändringen.', maxT).map((r, i) => (
+                    {!besvarad && radbryt((window.I18N ? I18N.t : (x => x))('Ledtråd: titta på hur hastigheten ändras, inte på åt vilket håll hissen åker. Accelerationen och den resulterande kraften pekar åt samma håll som förändringen.'), maxT).map((r, i) => (
                         <text key={i} x={x + 14} y={fy + 4 + i * 17} fontSize="13" fill="rgba(15,22,32,0.6)">{r}</text>
                     ))}
                     {besvarad && (
                         <g>
                             <text x={x + 14} y={fy + 4} fontSize="14" fontWeight="700"
                                   fill={fraga.svar === ratt ? COL.norm : COL.res}>
-                                {fraga.svar === ratt ? 'Rätt svar.' : 'Inte riktigt. Rätt svar är ' + KANSLA_ORD[ratt] + '.'}
+                                {fraga.svar === ratt ? 'Rätt svar.' : (window.I18N ? I18N.t('Inte riktigt. Rätt svar är {svar}.', {svar: I18N.t(KANSLA_ORD[ratt])}) : 'Inte riktigt. Rätt svar är ' + KANSLA_ORD[ratt] + '.')}
                             </text>
                             {rader.map((r, i) => (
                                 <text key={i} x={x + 14} y={fy + 26 + i * 17} fontSize="13" fill="rgba(15,22,32,0.85)">{radJSX(r)}</text>
@@ -1139,7 +1140,7 @@
                 if (broken) titel = 'Hissen har fastnat mellan våningarna';
                 else if (st.y < 0.05) titel = 'Hissen står stilla längst ner';
                 else if (st.y > H_TOPP - 0.05) titel = 'Hissen står stilla högst upp';
-                else titel = 'Hissen står stilla på våning ' + Math.round(st.y / VAN_H);
+                else titel = window.I18N ? I18N.t('Hissen står stilla på våning {n}', {n: Math.round(st.y / VAN_H)}) : 'Hissen står stilla på våning ' + Math.round(st.y / VAN_H);
             }
             const K = krafter(m, st.a);
             const under = dolj ? 'Positiv riktning är uppåt'
@@ -1471,7 +1472,7 @@
                 <div className={'hisspanel ' + cls} role="group" aria-label="Våningsknappar">
                     {[...Array(TOPP + 1)].map((_, i) => TOPP - i).map(v => (
                         <button key={v} className={'vknapp' + (malVan.has(v) ? ' lit' : '') + (harVan === v ? ' har' : '')}
-                                disabled={tl.trasig} onClick={() => aka(v)} aria-label={'Åk till våning ' + v}>{v}</button>
+                                disabled={tl.trasig} onClick={() => aka(v)} aria-label={window.I18N ? I18N.t('Åk till våning {n}', {n: v}) : 'Åk till våning ' + v}>{v}</button>
                     ))}
                 </div>
             );
@@ -1627,7 +1628,7 @@
                                         ))}
                                     </div>
                                     <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
-                                        {lageInfo ? LAGE_TEXT[lageInfo.id] + ' Tryck Fortsätt för att köra vidare.'
+                                        {lageInfo ? (window.I18N ? I18N.t(LAGE_TEXT[lageInfo.id]) + ' ' + I18N.t('Tryck Fortsätt för att köra vidare.') : LAGE_TEXT[lageInfo.id] + ' Tryck Fortsätt för att köra vidare.')
                                             : 'Samma nio lägen som i laborationen. Ett klick fryser bilden i just det läget, med mätningen fram till dess i grafen.'}
                                     </p>
                                 </div>
@@ -1666,7 +1667,7 @@
                                     <div className="grid grid-cols-3 gap-2 text-center mt-3 pt-3" style={{ borderTop: '1px solid var(--lab-line, rgba(15,22,32,0.14))' }}>
                                         <Avl val={fmt(st.v, 2) + ' m/s'} lbl="hastighet <em>v</em>" col={COL.fart} />
                                         <Avl val={fmt(st.y, 1) + ' m'} lbl="höjd över bottenvåningen" />
-                                        <Avl val={gissa ? `${poang.ratt} av ${poang.n}` : '–'} lbl="rätta gissningar" />
+                                        <Avl val={gissa ? (window.I18N ? I18N.t('{r} av {n}', {r: poang.ratt, n: poang.n}) : `${poang.ratt} av ${poang.n}`) : '–'} lbl="rätta gissningar" />
                                     </div>
                                 </div>
 

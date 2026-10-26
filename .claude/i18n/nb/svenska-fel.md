@@ -1,0 +1,55 @@
+# Fel i den svenska källtexten (hittade vid den norska översättningen 2026-10-26)
+
+Upptäckta av norsk-sprakgranskare. Ingenting här är ändrat i svenskan. Rättas svenskan ska nyckeln i i18n/nb/sidor/<sida>.js följa med, annars faller den norska strängen bort.
+
+- fysik1-elektriska-falt.html: 'blir fältet nästan homogent - linjerna är parallella och jämnt fördelade.' uses a hyphen as a pause marker, which breaks the site's rule against dashes as pause markers.
+- fysik1-elektriska-falt.html: the instruction '• Klicka på objekt → 🗑️ för att ta bort' contains an emoji (🗑️), which is banned on the site. The emoji is carried into the Norwegian text because it is part of the key.
+- fysik1-berg-och-dalbana.html: several pause dashes in the body text ('— inte på banans form', 'Diagrammen visar … från starten —', 'Nej — utan energiförluster …'). The Norwegian text is written without them.
+- fysik1-berg-och-dalbana.html: 'accelerationen är ändringen av farten, a = Δv / Δt': v is signed along the track, so strictly speaking it is the change in velocity ('hastigheten'), not in speed ('farten'). The Norwegian follows the source ('endringen i farten').
+- fysik1-faradays-bur.html STEP_DESCRIPTIONS steg 1 och 6 innehåller tankstreck som pausmarkör ('neutral – lika många …', 'inget fält – fransarna …'), vilket bryter mot sajtregeln. Det är äldre text och ändras inte här.
+- fysik1-enhetskollen.html: 'Enhetskollen har flyttat — till nya enhetskollen' har ett tankstreck som pausmarkör (äldre text).
+- fysik1-flugan-i-bagaren-app.html, svaret i förutsäg-läget: 'Rätt! Utslaget oförändrat — det är oförändrat.' är en dubblering som blivit kvar i den svenska källan. Den norska översättningen är förenklad till 'Riktig! Utslaget er uendret.'
+- fysik1-hastighet-tid-app.html: the headings contain emojis (📊, 🚀, 📐, ⚠️ and others), which breaks the site rule against emojis. They are kept in the Norwegian strings so the keys still match.
+- fysik1-hastighet-tid-app.html: the formula lines use a slash and a hyphen as the minus sign ('a = Δv / Δt', 'Positiv area - Negativ area', '(v₂ - v₁) / (t₂ - t₁)'). It also uses title case: 'Sträcka eller Förflyttning', 'Lutningsanalys (Acceleration)', 'Förflyttning = Positiv area - Negativ area'.
+- fysik1-hastighet-tid-app.html: English glosses in the Swedish text ('Förflyttning (displacement)', 'Sträcka (distance)'). The Norwegian version leaves them out.
+- fysik1-kirchhoffs-lag.html, rad 1326: tankstreck som pausmarkör efter «laddningsbevarande –». I statusraden «Lagen är alltid uppfylld - strömmarna …» används ett bindestreck som tankstreck.
+- fysik1-kirchhoffs-lag.html: emojier i knappar och återkoppling (🔄 Ny uppgift, 🎉 Rätt!, 💡 Nästan!) bryter mot sajtens emojiförbud. De finns kvar oförändrade även på norska.
+- fysik1-lutande-plan-app.html: tankstreck som pausmarkör i ingressen («hålls kvar av friktionen — ända tills»), i scenens lägestexter och i missuppfattningarna («Nej — …»). På norska är de omskrivna.
+- fysik1-lutande-plan-app.html: förkortningarna «maxfriktion» och «accel.» i löptext och etiketter. «accel.» i en trång avläsningscell är tillåten.
+- fysik1-newtons-andra-app.html: avläsningsetiketten 'accel. a' är en förkortning, och sajtregeln säger att förkortningar skrivs ut. Den är troligen avsiktlig på grund av trång plats. På norska är den utskriven ('akselerasjon').
+- fysik1-rorelsediagram.html: 'Tyngdaccelerationen är alltid -10 m/s²'. Sajten räknar med g = 9,82 m/s², och g är alltid positivt (a = −g med uppåt positivt). Formuleringen säger att tyngdaccelerationen är negativ, och den använder bindestreck i stället för minustecken.
+- fysik1-serie-parallell.html: emojier (⚠️, 💡) i varningsrutorna och i 'Testa själv'. Det bryter mot sajtens emojiförbud, och den norska texten ärver dem.
+- fysik1-rorelsediagram.html: 'Jämförelse av Läge-tid-diagram (s-t)' har versal mitt i meningen ('Läge-tid' i fullName).
+- fysik1-stralning-genomtranglighet.html, rad 297–299 och 1001–1005: 'Tunn aluminium', 'Tunn bly' och 'Tjock bly' ska vara 'Tunt aluminium', 'Tunt bly' och 'Tjockt bly', eftersom bly och aluminium är neutrum. Felet syns också i förklaringstexterna på rad 1028–1029 ('Tunn bly minskar …', 'Tjock bly absorberar …'), som är ordlistans nycklar. Ändras svenskan måste nycklarna i i18n/nb/sidor/fysik1-stralning-genomtranglighet.js ändras samtidigt.
+- fysik1-tryck.html, förklaringsrutan: 'I denna simulering är värdet 0.0821 (L·atm)/(mol·K)' har decimalpunkt. Sajtregeln är decimalkomma (0,0821). Talet ändras inte i den norska översättningen förrän det rättats i källan.
+- fysik1-tryck.html: i titeln 'Tryck - Ideala gaslagen' används bindestreck som avskiljare. Kolon vore tydligare ('Tryck: ideala gaslagen'). Det är bara en stilnot.
+- fysik1-tyngdfaktor-jorden.html och fysik1-tyngdkraft-normalkraft.html: den svenska löptexten har tankstreck som pausmarkör ('— samma acceleration …', 'normalkraft — en kraft', 'Nej — …'), vilket sajtregeln förbjuder i nyskriven text. Den norska texten har redan skrivits om utan tankstreck.
+- fysik2-brada-tva-stod-app.html, ingressen: «momentlagen M = F · l». M = F · l är definitionen av kraftmoment. Momentlagen är M↶ = M↷ (summan av momenten moturs = summan medurs). Den norska översättningen följer källan (momentsetningen M = F · l), så rättas svenskan bör norskan rättas samtidigt.
+- fysik1-vektoraddition-app.html: rubrikerna har emojier (📐 Triangelmetoden, ⚠️ Vanliga missuppfattningar). Det bryter mot sajtens emojiförbud, och den norska ordlistan har kvar dem precis som svenskan.
+- fysik2-dubbelspalt.html, Vanliga missuppfattningar: citaten skrivs med raka &quot;…&quot; i stället för svenska citattecken ”…”.
+- fysik2-dubbelspalt-2d-app.html och -3d-app.html: reservtexten 'Simuleringen har flyttat — till …' har ett tankstreck som pausmarkör, vilket bryter mot sajtregeln. Det norska har inget.
+- fysik2-fotoelektrisk-effekt.html rad 1213–1214: kommatecken saknas före huvudsatsen i 'finns ingen foton med tillräcklig energi händer inget' (borde vara '… tillräcklig energi, händer inget'). Det är ett skiljetecken, inte ett sakfel.
+- fysik2-hastighetsvaljare-app.html line 335: the formula footnote opens with a lowercase letter ('väljaren: F_e = F_m — spektrometern: …') and uses a tankstreck as a pause marker, which the site rules ban. A suggestion: 'I väljaren: … I spektrometern: …'.
+- fysik2-konisk-pendel-app.html: rubrikerna har emojier (📈 💡 ⚠️ ⚙️), vilket bryter mot sajtens emojiförbud. De bör tas bort i den svenska källan, och då följer nycklarna i den norska ordlistan med.
+- fysik2-konisk-pendel-app.html: kryssrutan 'Nettokraft F_c' står för centripetalkraften. 'Resulterande kraft' hade följt sajtens terminologi bättre än 'Nettokraft'.
+- fysik2-konisk-pendel-app.html: den svenska ingressen och förklaringarna använder tankstreck som pausmarkör (äldre text, saneras inte utan begäran).
+- fysik2-laddade-partiklar-app.html rad 733 och 762, fysik2-ledare-magnetfalt-app.html rad 873, 1016, 1052 med flera: raka citattecken "…" i svensk löptext i stället för svenska ”…” (kraftmoment-sidan använder ”…”). Inte ändrat.
+- fysik2-magnetfalt-app.html, brödsmulan: «Magnetfält - Rak ledare» har ett bindestreck som pausmarkör, och en rubrik med «Magnetfältssimulator - Rak ledare» likaså. Det strider mot sajtregeln om tankstreck.
+- fysik2-lenz-lag-app.html: «Inte riktigt — den motverkar …», «Nej — utan rörelse …» med flera har tankstreck i löptexten. Det är äldre text och saneras inte utan att användaren ber om det.
+- fysik2-magnetfalt-spole-app.html, rutan 'Homogent fält inuti': 'Utanför spolen liknar fältet en stavmagnets, med en nordända och en sydända, precis som en stavmagnet.' säger samma jämförelse två gånger. Den norska översättningen tar bara med den en gång.
+- fysik2-magnetiskt-flode.html: tankstreck (&ndash;) används som pausmarkör i 'fältlinjerna ligger – alltså styrkan …', vilket bryter mot sajtregeln. Den norska översättningen har komma.
+- fysik2-magnetfalt-spole-app.html och fysik2-magnetpoler-app.html: den svenska löptexten har många tankstreck (—) som pausmarkör. Det är äldre text, och den norska översättningen har punkt, kolon eller komma i stället.
+- fysik2-manens-faser.html: 'Vaxande skära', 'Vaxande halvmåne' och 'vaxande' är felstavat för 'Växande'. Nycklarna i den norska ordlistan använder samma felstavning, så ändras svenskan måste nycklarna följa med.
+- fysik2-manens-faser.html: 'Växande/Avtagande halvmåne' står för fasen där mer än halva skivan är belyst (gibbous). På svenska betyder 'halvmåne' normalt kvarteret. Rätt namn är 'växande/avtagande måne'.
+- fysik2-manens-faser.html: 'Månen kretsar runt jorden med en period på cirka 29,5 dygn' blandar ihop omloppstiden (siderisk månad, cirka 27,3 dygn) med fasernas cykel (synodisk månad, 29,5 dygn). Bättre: 'Månens faser upprepas med en period på cirka 29,5 dygn'.
+- fysik2-pipor-app.html rad 732: 'Svängningen visas kraftigt fördröjd' betyder att den kommer för sent, men det som menas är att den visas i ultrarapid. Bättre: 'visas kraftigt nedsaktad'.
+- fysik2-pipor-app.html: löptexten har flera tankstreck som pausmarkörer ('— och spela tonen!', 'Nej — ljudvågen…', 'Tvärtom — …', 'Longitudinell — men ritas transversell'). Det är äldre text och inte sanerad, så det bryter mot regeln om tankstreck.
+- fysik2-resonans-app.html: «Tacoma Bridge (1940)». Brons namn är Tacoma Narrows Bridge. Inget fel i sak, men namnet är ofullständigt.
+- fysik2-rorelse-wrapper.html: brödsmulan har title case, 'Rörelse och Krafter' (ska vara 'Rörelse och krafter'), och iframens title heter 'Snett kast simulering', som är särskrivet.
+- fysik2-skiftnyckel-app.html: ingressen, beräkningstexterna, missuppfattningarna och meta-beskrivningen innehåller tankstreck som pausmarkör, vilket sajtregeln förbjuder (äldre text, saneras inte utan att användaren ber om det).
+- fysik2-spektrallinjer.html rad 1385: 'hett gas' ska vara 'het gas' (gas är ett n-ord).
+- fysik2-staende-vag-app.html: temaväljarens 'Ljus papper' ska vara 'Ljust papper' (papper är neutrum).
+- fysik2-staende-vag-app.html: i sidfoten står 'Skapad med React, TypeScript, och Tailwind CSS.' med ett kommatecken före 'och' (anglicism).
+- fysik2-vaxelstromsgenerator.html, Tillämpningar: 'med tusentals varv och starka elektromagneter' är tvetydigt. Läsaren kan inte avgöra om det gäller lindningsvarv eller rotationsvarv. Översatt som vindinger (lindning), som verkar vara det som menas.
+- fysik2-vaxelstromsgenerator.html använder θ som vinkelbeteckning ('Vinkel θ', Φ = BA·cos(θ)). Sajtregeln säger α. Det är äldre text och ska inte rättas utan beslut, men det noteras.
+- fysik2-vaxelstromsgenerator.html, metabeskrivningen: 'Faradays lag i 3D' ska troligen vara 'Faradays induktionslag', som i ingressen.

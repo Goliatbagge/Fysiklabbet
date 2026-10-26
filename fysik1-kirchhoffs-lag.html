@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kirchhoffs första lag — Fysiklabbet</title>
     <meta name="description" content="Hur strömmar fördelas i en förgreningspunkt — Kirchhoffs lagar.">
@@ -793,9 +794,9 @@
                 const totalOut = outWires === 1 ? currents.out1 : currents.out1 + currents.out2;
 
                 if (unknownKey.startsWith('in')) {
-                    return `Tänk på att summan av strömmarna IN måste vara lika med summan av strömmarna UT. Strömmarna ut är totalt ${formatNumber(totalOut)} A.`;
+                    return window.I18N ? I18N.t('Tänk på att summan av strömmarna IN måste vara lika med summan av strömmarna UT. Strömmarna ut är totalt {n} A.', { n: formatNumber(totalOut) }) : `Tänk på att summan av strömmarna IN måste vara lika med summan av strömmarna UT. Strömmarna ut är totalt ${formatNumber(totalOut)} A.`;
                 } else {
-                    return `Tänk på att summan av strömmarna UT måste vara lika med summan av strömmarna IN. Strömmarna in är totalt ${formatNumber(totalIn)} A.`;
+                    return window.I18N ? I18N.t('Tänk på att summan av strömmarna UT måste vara lika med summan av strömmarna IN. Strömmarna in är totalt {n} A.', { n: formatNumber(totalIn) }) : `Tänk på att summan av strömmarna UT måste vara lika med summan av strömmarna IN. Strömmarna in är totalt ${formatNumber(totalIn)} A.`;
                 }
             };
 

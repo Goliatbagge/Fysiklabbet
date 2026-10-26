@@ -771,7 +771,7 @@
 
         function targetOmega() { return 2 * Math.PI * parseFloat(slider.value); }
         function syncSliderVal() {
-            sliderVal.textContent = fmt(parseFloat(slider.value), 1) + ' varv/s';
+            sliderVal.textContent = (window.I18N ? I18N.t('{v} varv/s', { v: fmt(parseFloat(slider.value), 1) }) : fmt(parseFloat(slider.value), 1) + ' varv/s');
         }
         syncSliderVal();
 
@@ -1278,7 +1278,7 @@
         }
 
         function updateInfo() {
-            info.textContent = 'Varvtal: ' + fmt(Math.abs(omega) / (2 * Math.PI), 1) + ' varv/s';
+            info.textContent = (window.I18N ? I18N.t('Varvtal: {v} varv/s', { v: fmt(Math.abs(omega) / (2 * Math.PI), 1) }) : 'Varvtal: ' + fmt(Math.abs(omega) / (2 * Math.PI), 1) + ' varv/s');
         }
 
         // ── UI-logik ──────────────────────────────────────────────────────
@@ -1526,7 +1526,7 @@
 
         function targetOmega() { return 2 * Math.PI * parseFloat(slider.value); }
         function syncSliderVal() {
-            sliderVal.textContent = fmt(parseFloat(slider.value), 1) + ' varv/s';
+            sliderVal.textContent = (window.I18N ? I18N.t('{v} varv/s', { v: fmt(parseFloat(slider.value), 1) }) : fmt(parseFloat(slider.value), 1) + ' varv/s');
         }
         syncSliderVal();
 
@@ -1990,8 +1990,8 @@
         }
 
         function updateInfo() {
-            info.textContent = 'Varvtal: ' + fmt(Math.abs(omega) / (2 * Math.PI), 1) +
-                ' varv/s · Vatten: ' + Math.round(wet * 100) + ' %';
+            info.textContent = (window.I18N ? I18N.t('Varvtal: {v} varv/s · Vatten: {p} %', { v: fmt(Math.abs(omega) / (2 * Math.PI), 1), p: Math.round(wet * 100) }) : 'Varvtal: ' + fmt(Math.abs(omega) / (2 * Math.PI), 1) +
+                ' varv/s · Vatten: ' + Math.round(wet * 100) + ' %');
         }
 
         // ── UI-logik ──────────────────────────────────────────────────────

@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brandsläckaren i rymden — Fysiklabbet</title>
     <meta name="description" content="Newtons tredje lag: aktion och reaktion — navigera en astronaut med brandsläckare i rymden och docka med satelliten.">
@@ -756,7 +757,7 @@
             const hintText = isDocked
                 ? 'Dockad — starta ett nytt försök i rutan uppe till höger.'
                 : gameActive
-                    ? `Navigera in i den gula dockningsporten — med fart under ${fmt(DOCK_SPEED, 1)} m/s!`
+                    ? (window.I18N ? I18N.t('Navigera in i den gula dockningsporten — med fart under {v} m/s!', { v: fmt(DOCK_SPEED, 1) }) : `Navigera in i den gula dockningsporten — med fart under ${fmt(DOCK_SPEED, 1)} m/s!`)
                     : 'Klicka/tryck och håll i scenen: brandsläckaren sprutar gas mot pekaren och motkraften puttar astronauten åt motsatta hållet.';
 
             return (

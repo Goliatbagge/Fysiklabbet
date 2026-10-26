@@ -1,0 +1,86 @@
+/* i18n/nb/sidor/fysik1-massdefekt.js — norska (bokmål) för simuleringen
+ * Massdefekt och bindningsenergi. */
+(function () {
+    I18N.add({
+        'Massdefekt och bindningsenergi — Fysiklabbet': 'Massedefekt og bindingsenergi — Fysiklabbet',
+        'Massdefekt och bindningsenergi — Fysik nivå 1': 'Massedefekt og bindingsenergi — Fysikk nivå 1',
+        'Massa omvandlas till energi när kärnor slås ihop — E = Δm · c².': 'Masse omdannes til energi når kjerner slås sammen: E = Δm · c².',
+        '/ Massdefekt och bindningsenergi': '/ Massedefekt og bindingsenergi',
+        'Massdefekt och bindningsenergi': 'Massedefekt og bindingsenergi',
+        'När nukleoner (protoner och neutroner) bildar en kärna minskar den totala massan, eftersom energi strålar ut i form av en foton (γ). Den förlorade energin motsvarar kärnans bindningsenergi, det vill säga den energi man måste tillföra för att bryta upp kärnan igen.':
+            'Når nukleoner (protoner og nøytroner) danner en kjerne, minker den totale massen, fordi energi stråles ut i form av et foton (γ). Den tapte energien tilsvarer bindingsenergien til kjernen, det vil si den energien man må tilføre for å bryte opp kjernen igjen.',
+        // Formelkortet
+        'Bindningsenergi': 'Bindingsenergi',
+        'Massdefekt': 'Massedefekt',
+        'Ljusets hastighet': 'Lyshastighet',
+        // Läge och exempel
+        'Fusion': 'Fusjon',
+        'Separation': 'Separasjon',
+        'Läge': 'Modus',
+        'Exempel': 'Eksempel',
+        'Proton + neutron → deuterium': 'Proton + nøytron → deuterium',
+        'Deuterium + deuterium → helium-4': 'Deuterium + deuterium → helium-4',
+        'Visa inställningar': 'Vis innstillinger',
+        'Dölj inställningar': 'Skjul innstillinger',
+        // Knappar under scenen
+        'Starta fusion': 'Start fusjon',
+        'Bryt bindningen': 'Bryt bindingen',
+        'Kör igen': 'Kjør igjen',
+        'Animering pågår…': 'Animasjonen pågår …',
+        // Partiklar (canvas och masspanel)
+        'Proton': 'Proton',
+        'Neutron': 'Nøytron',
+        'Deuterium': 'Deuterium',
+        'Helium-4': 'Helium-4',
+        'Foton (γ)': 'Foton (γ)',
+        // Canvas
+        'Total massa': 'Total masse',
+        'Tryck "Starta fusion" för att se reaktionen': 'Trykk på «Start fusjon» for å se reaksjonen',
+        'Δm = {dm} u  (massa som blev energi)': 'Δm = {dm} u  (masse som ble energi)',
+        'Krävs: {e} MeV för att bryta bindningen': 'Det trengs {e} MeV for å bryte bindingen',
+        'Tryck "Bryt bindningen" för att se separationen': 'Trykk på «Bryt bindingen» for å se separasjonen',
+        'Tillförd energi: {e} MeV': 'Tilført energi: {e} MeV',
+        'Ökade med Δm = {dm} u  (energi blev massa)': 'Økte med Δm = {dm} u  (energi ble masse)',
+        'Tillförd energi: {e} MeV → massa': 'Tilført energi: {e} MeV → masse',
+        // Masspanelen
+        'Massbalans': 'Massebalanse',
+        '= Summa (fria)': '= Sum (frie)',
+        '(bunden)': '(bundet)',
+        'Massdefekt Δ': 'Massedefekt Δ',
+        'Per nukleon': 'Per nukleon',
+        'MeV/nukleon': 'MeV/nukleon',
+        'Reaktion (': 'Reaksjon (',
+        'fusion': 'fusjon',
+        'separation': 'separasjon',
+        // Förklaringarna
+        'Vad är massdefekt?': 'Hva er massedefekt?',
+        'En fri proton väger': 'Et fritt proton veier',
+        'och en fri neutron väger': 'og et fritt nøytron veier',
+        '. Deras summa är 2,015 941 u. Men en deuteronkärna (²H) väger bara': '. Summen av dem er 2,015 941 u. Men en deuteronkjerne (²H) veier bare',
+        ', alltså': ', altså',
+        'mindre': 'mindre',
+        'än de fria partiklarna.': 'enn de frie partiklene.',
+        'Massdifferensen kallas': 'Masseforskjellen kalles',
+        'massdefekt': 'massedefekt',
+        '). Enligt Einsteins formel': '). Ifølge Einsteins formel',
+        'har denna massa omvandlats till den': 'er denne massen omdannet til den',
+        'bindningsenergi': 'bindingsenergien',
+        'som håller kärnan samman.': 'som holder kjernen sammen.',
+        'Fusion och separation': 'Fusjon og separasjon',
+        'Vid': 'Ved',
+        'slås kärnor ihop och bindningsenergin': 'slås kjerner sammen, og bindingsenergien',
+        'frigörs': 'frigjøres',
+        ', ofta som gammastrålning (γ). Det är denna process som driver solen och stjärnorna.': ', ofte som gammastråling (γ). Det er denne prosessen som driver solen og stjernene.',
+        'bryts kärnan isär. Då måste': 'brytes kjernen opp. Da må',
+        'exakt lika mycket': 'nøyaktig like mye',
+        'tillföras': 'tilføres',
+        'som frigörs vid fusionen. Bindningsenergin är det ”lim” som håller kärnan samman: ju mer per nukleon, desto stabilare kärna.':
+            'som frigjøres ved fusjonen. Bindingsenergien er «limet» som holder kjernen sammen: jo mer per nukleon, desto mer stabil er kjernen.',
+        'Räkneexempel: p + n → ²H': 'Regneeksempel: p + n → ²H',
+        'Massor av fria partiklar': 'Massene til de frie partiklene',
+        'Summa =': 'Sum =',
+        'Massa hos den bundna kärnan (²H)': 'Massen til den bundne kjernen (²H)',
+        'Per nukleon (': 'Per nukleon (',
+        'Helium-4 har 7,07 MeV per nukleon och är därför en mycket stabilare kärna.': 'Helium-4 har 7,07 MeV per nukleon og er derfor en mye mer stabil kjerne.'
+    });
+})();

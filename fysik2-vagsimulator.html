@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8" />
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vågsimulator — Fysiklabbet</title>
     <meta name="description" content="Mekaniska vågor i 2D och 3D — interferens, doppler, nodlinjer.">
@@ -612,8 +613,8 @@ const WaveSimulator = () => {
           // Text Labels
           ctx.fillStyle = 'rgba(15, 22, 32, 0.85)';
           ctx.font = '14px Arial';
-          ctx.fillText("Djupt vatten (v)", 20, boundaryY - 10);
-          ctx.fillText("Grunt vatten (v/2)", 20, boundaryY + 20);
+          ctx.fillText(window.I18N ? I18N.t("Djupt vatten (v)") : "Djupt vatten (v)", 20, boundaryY - 10);
+          ctx.fillText(window.I18N ? I18N.t("Grunt vatten (v/2)") : "Grunt vatten (v/2)", 20, boundaryY + 20);
 
           if (showRefractionAngles) {
               const rayLen = 150;

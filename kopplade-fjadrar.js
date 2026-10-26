@@ -296,12 +296,12 @@
 
             // ── namn, periodtid och antal svängningar ──
             for (var j = 0; j < 3; j++) {
-                text(NAMN[j], XS[j], 386, { size: 14, align: 'center', bold: true });
+                text(window.I18N ? I18N.t(NAMN[j]) : NAMN[j], XS[j], 386, { size: 14, align: 'center', bold: true });
                 if (visaT && state === 'svang') {
                     mixed(XS[j], 405, [{ t: 'T', it: true }, { t: ' = ' + fmt(period(j), 2) + ' s', it: false }],
                         'center', 14, INK);
                     var n = Math.floor(t / period(j) + 1e-9);
-                    text(n + (n === 1 ? ' svängning' : ' svängningar'), XS[j], 423,
+                    text(window.I18N ? I18N.t(n === 1 ? '{n} svängning' : '{n} svängningar', { n: n }) : n + (n === 1 ? ' svängning' : ' svängningar'), XS[j], 423,
                         { size: 13, align: 'center', color: '#4a5260' });
                 }
             }

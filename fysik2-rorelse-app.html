@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snett kast — Fysiklabbet</title>
     <meta name="description" content="Kasta en tennisboll i ett snett kast och följ hastighetsvektorerna: hastigheten i x-led är konstant, hastigheten i y-led ändras av tyngdaccelerationen. Ändra utkastvinkel, utgångshastighet och utkasthöjd, stega bildruta för bildruta, slå på luftmotstånd eller kasta på månen.">
@@ -1110,7 +1111,7 @@
                                             <button key={b.name} type="button"
                                                     className={"body-btn" + (activeBody && activeBody.name === b.name ? ' active' : '')}
                                                     onClick={() => setP('g', b.g)}
-                                                    title={`${b.name}: ${fmt(b.g, 2)} m/s²`} aria-label={`${b.name}: ${fmt(b.g, 2)} m/s²`}>
+                                                    title={`${window.I18N ? I18N.t(b.name) : b.name}: ${fmt(b.g, 2)} m/s²`} aria-label={`${window.I18N ? I18N.t(b.name) : b.name}: ${fmt(b.g, 2)} m/s²`}>
                                                 <span className="body-dot" style={{ backgroundImage: b.grad }}></span>
                                                 <span>{b.name}</span>
                                             </button>

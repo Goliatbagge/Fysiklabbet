@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fotoelektrisk effekt — Fysiklabbet</title>
     <meta name="description" content="Ljusvågor mot en metallyta — Einsteins fotonteori.">
@@ -1173,7 +1174,7 @@ function App() {
                     }}>
                         <div style={{ color:'#fca5a5', fontWeight:600, fontFamily:'Poppins,sans-serif',
                                       fontSize:'0.9rem', marginBottom:6 }}>
-                            Om <em className="italic-var">h·f</em> &lt; <em className="italic-var">W</em><sub>u</sub>
+                            {window.I18N ? I18N.t('Om{s}', { s: ' ' }) : 'Om '}<em className="italic-var">h·f</em> &lt; <em className="italic-var">W</em><sub>u</sub>
                         </div>
                         <div style={{ color:'var(--lab-ink-soft)', fontFamily:'Poppins,sans-serif',
                                       fontSize:'0.88rem', lineHeight:1.55 }}>
@@ -1188,7 +1189,7 @@ function App() {
                     }}>
                         <div style={{ color:'#86efac', fontWeight:600, fontFamily:'Poppins,sans-serif',
                                       fontSize:'0.9rem', marginBottom:6 }}>
-                            Om <em className="italic-var">h·f</em> ≥ <em className="italic-var">W</em><sub>u</sub>
+                            {window.I18N ? I18N.t('Om{s}', { s: ' ' }) : 'Om '}<em className="italic-var">h·f</em> ≥ <em className="italic-var">W</em><sub>u</sub>
                         </div>
                         <div style={{ color:'var(--lab-ink-soft)', fontFamily:'Poppins,sans-serif',
                                       fontSize:'0.88rem', lineHeight:1.55 }}>

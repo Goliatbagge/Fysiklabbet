@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Densitet — Fysiklabbet</title>
     <meta name="description" content="Hur tätt packat ett material är — ρ = m / V och vattnets densitet.">
@@ -592,7 +593,7 @@
                                ? 'material-btn-active'
                                : 'material-btn'
                            }`}
-                           title={`${mat.name} – ${formatNum(mat.density)} kg/m³`}
+                           title={`${window.I18N ? I18N.t(mat.name) : mat.name} – ${formatNum(mat.density)} kg/m³`}
                          >
                            <div className={`w-3 h-3 rounded-full ${mat.dotColor} flex-shrink-0`} style={{ boxShadow: '0 0 0 1px rgba(15,22,32,0.18)' }}></div>
                            <span>{mat.name}</span>

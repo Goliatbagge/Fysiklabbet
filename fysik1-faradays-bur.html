@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faradays bur — Fysiklabbet</title>
     <meta name="description" content="Hur ett metallhölje skärmar av elektriska fält.">
@@ -632,7 +633,7 @@
                             ctx.font = '14px Poppins, sans-serif';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
-                            ctx.fillText('Resulterande fält = 0', cageX + cageW / 2, cageY + cageH / 2);
+                            ctx.fillText((window.I18N ? I18N.t('Resulterande fält = 0') : 'Resulterande fält = 0'), cageX + cageW / 2, cageY + cageH / 2);
                         }
                     }
 
@@ -728,12 +729,12 @@
                     ctx.fillStyle = 'rgba(15, 22, 32, 0.84)';
                     ctx.font = '13px Poppins, sans-serif';
                     ctx.textAlign = 'center';
-                    ctx.fillText('Metallhölje', cageX + cageW / 2, cageY - 12);
+                    ctx.fillText((window.I18N ? I18N.t('Metallhölje') : 'Metallhölje'), cageX + cageW / 2, cageY - 12);
 
                     if (currentStep >= 2 && currentStep < 5) {
                         ctx.font = 'italic 13px Poppins, sans-serif';
                         ctx.textAlign = 'left';
-                        const extLabel = 'Yttre elektriskt fält →';
+                        const extLabel = (window.I18N ? I18N.t('Yttre elektriskt fält →') : 'Yttre elektriskt fält →');
                         const extLabelX = cageX + t + 14;
                         const extLabelY = cageY + t + 18;
                         const extLabelW = ctx.measureText(extLabel).width;
@@ -745,7 +746,7 @@
                     if (currentStep === 4) {
                         ctx.font = 'italic 13px Poppins, sans-serif';
                         ctx.textAlign = 'right';
-                        const indLabel = '← Inducerat fält';
+                        const indLabel = (window.I18N ? I18N.t('← Inducerat fält') : '← Inducerat fält');
                         const indLabelX = cageX + cageW - t - 14;
                         const indLabelY = cageY + cageH - t - 14;
                         const indLabelW = ctx.measureText(indLabel).width;
@@ -1016,15 +1017,15 @@
                         ctx.textAlign = 'center';
                         if (anyInside && anyOutside) {
                             ctx.fillStyle = 'rgba(245, 158, 11, 0.9)';
-                            ctx.fillText('Fält → utanför', px, labelY);
+                            ctx.fillText((window.I18N ? I18N.t('Fält → utanför') : 'Fält → utanför'), px, labelY);
                             ctx.fillStyle = 'rgba(34, 197, 94, 0.9)';
-                            ctx.fillText('Inget fält inuti!', px, labelY + 14);
+                            ctx.fillText((window.I18N ? I18N.t('Inget fält inuti!') : 'Inget fält inuti!'), px, labelY + 14);
                         } else if (anyInside) {
                             ctx.fillStyle = 'rgba(34, 197, 94, 0.9)';
-                            ctx.fillText('Inget fält!', px, labelY);
+                            ctx.fillText((window.I18N ? I18N.t('Inget fält!') : 'Inget fält!'), px, labelY);
                         } else {
                             ctx.fillStyle = 'rgba(245, 158, 11, 0.9)';
-                            ctx.fillText('Fält →', px, labelY);
+                            ctx.fillText((window.I18N ? I18N.t('Fält →') : 'Fält →'), px, labelY);
                         }
                     }
 
@@ -1033,7 +1034,7 @@
                         ctx.fillStyle = 'rgba(15, 22, 32, 0.7)';
                         ctx.font = '16px Poppins, sans-serif';
                         ctx.textAlign = 'center';
-                        ctx.fillText('Rör musen över simuleringen för att använda fältprovaren', width / 2, height - 30);
+                        ctx.fillText((window.I18N ? I18N.t('Rör musen över simuleringen för att använda fältprovaren') : 'Rör musen över simuleringen för att använda fältprovaren'), width / 2, height - 30);
                     }
 
                     animId = requestAnimationFrame(render);

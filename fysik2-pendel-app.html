@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan matematisk pendel — Fysiklabbet</title>
     <meta name="description" content="Mät pendelns periodtid med en ljusgrind, lägg mätpunkterna i ett diagram och läs av tyngdaccelerationen ur lutningen. Prova olika längder, massor och utslag, flytta pendeln till Månen eller gissa vilken okänd planet den hänger på.">
@@ -317,6 +318,8 @@
         };
         // Pendellängden skrivs med tre decimaler bara när den behövs (0,995 m).
         const fmtT = (x) => x.toFixed(2).replace('.', ',');
+        // Översättning (i18n.js): svensk text som nyckel, {platshållare} fylls i.
+        const tr = (s, v) => window.I18N ? I18N.t(s, v) : (v ? s.replace(/\{(\w+)\}/g, (m, k) => v[k] != null ? v[k] : m) : s);
         const fmtL = (l) => Math.abs(l * 100 - Math.round(l * 100)) > 1e-6 ? fmt(l, 3) : fmt(l, 2);
 
         // ── Platser och okända planeter ──
@@ -957,7 +960,7 @@
             const m = sim.meas;
             let storTid = 0, status = 'Redo.', delta = '';
             if (m.fas === 'armed') { status = 'Väntar på första passagen'; }
-            else if (m.fas === 'running') { storTid = sim.t - m.t0; status = 'Mäter'; delta = m.n + ' av 10'; }
+            else if (m.fas === 'running') { storTid = sim.t - m.t0; status = 'Mäter'; delta = tr('{n} av 10', { n: m.n }); }
             else if (m.fas === 'done') { storTid = m.T10; status = 'Klart'; delta = '10 av 10'; }
             const aktiv = m.fas === 'armed' || m.fas === 'running';
             return (
@@ -1192,29 +1195,30 @@
                 const v = parseFloat(String(gst.input).replace(',', '.'));
                 const mm = simRef.current.meas;
                 if (!isFinite(v) || v <= 0) {
-                    setGst({ ...gst, fb: { ok: false, html: 'Skriv in ett värde på <em>g</em> i m/s².' } });
+                    setGst({ ...gst, fb: { ok: false, html: tr('Skriv in ett värde på <em>g</em> i m/s².') } });
                     return;
                 }
                 const rel = Math.abs(v - okand.g) / okand.g;
                 const sist = (mm.fas === 'done' && mm.snap) ? mm : null;
                 const hur = sist
-                    ? 'Med <em>l</em> = ' + fmtL(sist.snap.l) + ' m och <em>T</em> = ' + fmt(sist.T10 / 10, 3) + ' s ger <em>g</em> = 4π²·<em>l</em>/<em>T</em>² = 4π² · ' + fmtL(sist.snap.l) + ' / ' + fmt(sist.T10 / 10, 3) + '² = ' + fmt(4 * Math.PI * Math.PI * sist.snap.l / Math.pow(sist.T10 / 10, 2), 2) + ' m/s².'
-                    : 'Lös ut <em>g</em> ur <em>T</em> = 2π√(<em>l</em>/<em>g</em>): <em>g</em> = 4π²·<em>l</em>/<em>T</em>².';
+                    ? tr('Med <em>l</em> = {l} m och <em>T</em> = {T} s ger <em>g</em> = 4π²·<em>l</em>/<em>T</em>² = 4π² · {l} / {T}² = {g} m/s².',
+                         { l: fmtL(sist.snap.l), T: fmt(sist.T10 / 10, 3), g: fmt(4 * Math.PI * Math.PI * sist.snap.l / Math.pow(sist.T10 / 10, 2), 2) })
+                    : tr('Lös ut <em>g</em> ur <em>T</em> = 2π√(<em>l</em>/<em>g</em>): <em>g</em> = 4π²·<em>l</em>/<em>T</em>².');
                 const stort = sist && sist.snap.a0 > 25
-                    ? ' Mätningen gjordes med ' + sist.snap.a0 + '° utslag. Formeln gäller bara för små utslag, så ett värde från så stort utslag blir för lågt.' : '';
+                    ? ' ' + tr('Mätningen gjordes med {a}° utslag. Formeln gäller bara för små utslag, så ett värde från så stort utslag blir för lågt.', { a: sist.snap.a0 }) : '';
                 if (rel <= 0.06) {
                     const poang = gst.forsok === 0 ? 3 : 1;
                     setGst({ ...gst, klar: true, poang: gst.poang + poang, svit: gst.svit + 1,
-                        fb: { ok: true, html: 'Det stämmer. Din pendel hänger på <b>' + okand.namn + '</b>, där <em>g</em> = ' + fmt(okand.g, 2) + ' m/s². ' + hur + ' Du får ' + poang + (poang === 1 ? ' poäng.' : ' poäng.') } });
+                        fb: { ok: true, html: tr('Det stämmer. Din pendel hänger på <b>{namn}</b>, där <em>g</em> = {g} m/s².', { namn: okand.namn, g: fmt(okand.g, 2) }) + ' ' + hur + ' ' + tr('Du får {p} poäng.', { p: poang }) } });
                     return;
                 }
                 if (gst.forsok === 0) {
-                    const dir = v < okand.g ? 'Ditt värde är för litet' : 'Ditt värde är för stort';
+                    const dir = v < okand.g ? tr('Ditt värde är för litet') : tr('Ditt värde är för stort');
                     setGst({ ...gst, forsok: 1,
-                        fb: { ok: false, html: dir + '. Kontrollera att du kvadrerat <em>T</em> och att längden är mätt till kulans tyngdpunkt. Större <em>g</em> ger kortare period.' + stort + ' Försök en gång till.' } });
+                        fb: { ok: false, html: dir + tr('. Kontrollera att du kvadrerat <em>T</em> och att längden är mätt till kulans tyngdpunkt. Större <em>g</em> ger kortare period.') + stort + ' ' + tr('Försök en gång till.') } });
                 } else {
                     setGst({ ...gst, klar: true, svit: 0,
-                        fb: { ok: false, html: 'Det stämmer inte. Pendeln hängde på <b>' + okand.namn + '</b>, där <em>g</em> = ' + fmt(okand.g, 2) + ' m/s². ' + hur + stort } });
+                        fb: { ok: false, html: tr('Det stämmer inte. Pendeln hängde på <b>{namn}</b>, där <em>g</em> = {g} m/s².', { namn: okand.namn, g: fmt(okand.g, 2) }) + ' ' + hur + stort } });
                 }
             };
             const nyPlanet = () => {
@@ -1470,7 +1474,7 @@
                                                     <button key={f.id} className={forsok === f.id ? 'active' : ''} onClick={() => valjForsok(f)}>{f.namn}</button>
                                                 ))}
                                             </div>
-                                            {forsokObj && <p className="anm mt-2" dangerouslySetInnerHTML={{ __html: forsokObj.text }} />}
+                                            {forsokObj && <p className="anm mt-2" dangerouslySetInnerHTML={{ __html: tr(forsokObj.text) }} />}
                                         </React.Fragment>
                                     )}
                                 </div>

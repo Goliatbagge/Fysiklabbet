@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spektrallinjer — Fysiklabbet</title>
     <meta name="description" content="Grundämnenas fingeravtryck — emissions- och absorptionsspektrum.">
@@ -790,6 +791,8 @@
             { z:118, sym:'Og', name:'Oganesson', cat:'noble', p:7, g:18,
               lines: L([[466.0,0.8],[540.0,0.95],[630.0,1.0]]) }
         ];
+        // Grundämnenas namn på sidans språk (i18n.js). Koden jämför bara z och sym.
+        if (window.I18N) ELEMENTS.forEach(e => { e.name = I18N.t(e.name); });
 
         // Våglängd till RGB-färg
         function wavelengthToRGB(wl) {
@@ -1147,7 +1150,7 @@
                                             className="element-select compact"
                                             value={el.z}
                                             onChange={(e) => updateAt(idx, parseInt(e.target.value, 10))}
-                                            aria-label={`Välj grundämne för rad ${idx + 1}`}
+                                            aria-label={window.I18N ? I18N.t('Välj grundämne för rad {n}', { n: idx + 1 }) : `Välj grundämne för rad ${idx + 1}`}
                                         >
                                             {sortedList.map(e => (
                                                 <option key={e.z} value={e.z}>
@@ -1236,7 +1239,7 @@
             // Sorterad lista — växlas mellan atomnummer och alfabetisk (svensk kollation)
             const sortedList = useMemo(() => {
                 if (sortOrder === 'alpha') {
-                    return [...ELEMENTS].sort((a, b) => a.name.localeCompare(b.name, 'sv'));
+                    return [...ELEMENTS].sort((a, b) => a.name.localeCompare(b.name, (window.I18N && I18N.nb) ? 'nb' : 'sv'));
                 }
                 return [...ELEMENTS].sort((a, b) => a.z - b.z);
             }, [sortOrder]);

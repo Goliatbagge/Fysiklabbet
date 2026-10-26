@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaffelbalansen — Fysiklabbet</title>
     <meta name="description" content="Interaktiv 3D-simulering av det klassiska balanstricket: två gafflar i en kork balanserar på en nål mot den smala kanten av ett mynt på högkant. Se varför tyngdpunkten under stödpunkten gör jämvikten stabil — knuffa till, ändra gaffelvinkeln och hitta gränsen där det välter.">
@@ -718,8 +719,8 @@
                     if (vanster) spr.center.set(0, 0.5);
                     return spr;
                 };
-                const cmLabel = makeLabel([{ t: 'Tyngdpunkt' }], COL.cm);
-                const pivotLabel = makeLabel([{ t: 'Stödpunkt' }], COL.pivot);
+                const cmLabel = makeLabel([{ t: (window.I18N ? I18N.t('Tyngdpunkt') : 'Tyngdpunkt') }], COL.cm);
+                const pivotLabel = makeLabel([{ t: (window.I18N ? I18N.t('Stödpunkt') : 'Stödpunkt') }], COL.pivot);
                 pivotLabel.position.copy(PIVOT).add(new THREE.Vector3(1.4, 1.5, 0));
                 const gravLabel = makeLabel([{ t: 'F', i: true }, { t: 'G', sub: true }], COL.gravity);
                 const leverLabel = makeLabel([{ t: 'l', i: true }], COL.lever, 1, false);
@@ -1349,7 +1350,9 @@
                             {/* Kontroller */}
                             <div className="lg:w-2/5 order-2">
                                 <Slider label="Gaffelvinkel (<em>β</em>)"
-                                        sub={`Hur brant nedåt gafflarna pekar. Brantare vinkel sänker tyngdpunkten — gränsen går vid <em>β</em> ≈ ${fmt(d.betaCrit, 0)}°, där tyngdpunkten passerar stödpunkten.`}
+                                        sub={window.I18N
+                                            ? I18N.t('Hur brant nedåt gafflarna pekar. Brantare vinkel sänker tyngdpunkten — gränsen går vid <em>β</em> ≈ {b}°, där tyngdpunkten passerar stödpunkten.', { b: fmt(d.betaCrit, 0) })
+                                            : `Hur brant nedåt gafflarna pekar. Brantare vinkel sänker tyngdpunkten — gränsen går vid <em>β</em> ≈ ${fmt(d.betaCrit, 0)}°, där tyngdpunkten passerar stödpunkten.`}
                                         value={beta} min={10} max={70} step={1} unit="°" onChange={setBeta} />
 
                                 <div className="flex gap-2 mb-4">
@@ -1362,7 +1365,7 @@
                                     <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Beräknade värden</h3>
                                     <div className="grid grid-cols-2 gap-2">
                                         <Readout label="Tyngdpunktens läge" value={fmt(Math.abs(dMm), 1)}
-                                                 unit={`mm ${d.stable ? 'under' : 'över'} stödpunkten`} accent />
+                                                 unit={window.I18N ? I18N.t(d.stable ? 'mm under stödpunkten' : 'mm över stödpunkten') : `mm ${d.stable ? 'under' : 'över'} stödpunkten`} accent />
                                         <Readout label="Utslagsvinkel" value={fmt(tiltDeg, 1)} unit="°" />
                                         <Readout label="Svängningstid <em>T</em>" value={d.stable && forksOn ? fmt(d.period, 2) : '—'} unit={d.stable && forksOn ? 's' : ''} />
                                         <Readout label="Kritisk vinkel <em>β</em>" value={fmt(d.betaCrit, 0)} unit="°" />

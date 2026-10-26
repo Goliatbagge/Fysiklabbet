@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energinivåer — Fysiklabbet</title>
     <meta name="description" content="Bohrs atommodell — animera elektronhopp och se fotoner emitteras.">
@@ -646,7 +647,7 @@
             const e = energyOf(displayN);
             ctx.fillStyle = 'rgba(15, 22, 32, 0.90)';
             drawMixedText(ctx, [
-                { text: 'Elektron i ', italic: false },
+                { text: (window.I18N ? I18N.t('Elektron i ') : 'Elektron i '), italic: false },
                 { text: 'n', italic: true },
                 { text: `=${displayN}`, italic: false }
             ], 14, H - 28, 11, '600', 'left');
@@ -789,7 +790,7 @@
             ctx.font = 'italic 11px Poppins, sans-serif';
             ctx.textAlign = 'left';
             ctx.textBaseline = 'top';
-            ctx.fillText('Kontinuum (joniserad)', pad.left + 8, pad.top + 6);
+            ctx.fillText((window.I18N ? I18N.t('Kontinuum (joniserad)') : 'Kontinuum (joniserad)'), pad.left + 8, pad.top + 6);
 
             // Y-axel (bruten)
             ctx.strokeStyle = 'rgba(15, 22, 32, 0.33)';
@@ -809,7 +810,7 @@
             ctx.font = '500 11px Poppins, sans-serif';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillText('Energi (eV)', 0, 0);
+            ctx.fillText((window.I18N ? I18N.t('Energi (eV)') : 'Energi (eV)'), 0, 0);
             ctx.restore();
 
             // Brott-indikator (zigzag) mellan övre och nedre regionen
@@ -832,7 +833,7 @@
             ctx.font = 'italic 9px Poppins, sans-serif';
             ctx.textAlign = 'left';
             ctx.textBaseline = 'middle';
-            ctx.fillText('bruten skala', pad.left + plotW - 72, breakMid);
+            ctx.fillText((window.I18N ? I18N.t('bruten skala') : 'bruten skala'), pad.left + plotW - 72, breakMid);
 
             // Alla nivåer (linjer ritas på sina korrekta positioner — inga staggade etiketter)
             const levelDefs = [
@@ -974,7 +975,7 @@
                 ctx.font = '600 10px Poppins, sans-serif';
                 ctx.textAlign = 'right';
                 ctx.textBaseline = 'middle';
-                ctx.fillText(isEmission ? 'emission ↓' : 'absorption ↑', ax - 10, midY);
+                ctx.fillText(isEmission ? (window.I18N ? I18N.t('emission ↓') : 'emission ↓') : (window.I18N ? I18N.t('absorption ↑') : 'absorption ↑'), ax - 10, midY);
             }
         }
 
@@ -1829,7 +1830,7 @@
                                 <div className="flex items-center justify-between mb-3">
                                     <h2 className="text-lg font-semibold text-slate-200">Synligt spektrum</h2>
                                     <span className="text-xs text-slate-500">
-                                        {color.visible ? `Aktuell linje: ${formatNum(wavelength, 0)} nm (${color.label})` : 'Utanför synligt område'}
+                                        {color.visible ? (window.I18N ? I18N.t('Aktuell linje: {wl} nm ({farg})', { wl: formatNum(wavelength, 0), farg: I18N.t(color.label) }) : `Aktuell linje: ${formatNum(wavelength, 0)} nm (${color.label})`) : 'Utanför synligt område'}
                                     </span>
                                 </div>
                                 <div className="canvas-wrap" style={{ padding: 0 }}>

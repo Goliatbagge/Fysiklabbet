@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wiens förskjutningslag — Fysiklabbet</title>
     <meta name="description" content="Hur strålningstoppen förskjuts när temperaturen ökar — Wiens lag.">
@@ -546,7 +547,7 @@ function PlanckGraph({ T, showComparison, fullscreen }) {
         ctx.fillStyle = 'rgba(226, 232, 240, 0.55)';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
-        ctx.fillText('Synligt ljus', (visLeft + visRight) / 2, pad.top + 4);
+        ctx.fillText((window.I18N ? I18N.t('Synligt ljus') : 'Synligt ljus'), (visLeft + visRight) / 2, pad.top + 4);
 
         // Grid (små linjer per decimaldel)
         ctx.lineWidth = 1;
@@ -615,9 +616,9 @@ function PlanckGraph({ T, showComparison, fullscreen }) {
 
         // X-axel titel (variabel i kursiv + rak enhet)
         drawMixedText(ctx, [
-            { text: 'Våglängd ', font: '12px Poppins, sans-serif', color: '#cbd5e1' },
+            { text: (window.I18N ? I18N.t('Våglängd') : 'Våglängd') + ' ', font: '12px Poppins, sans-serif', color: '#cbd5e1' },
             { text: 'λ',         font: 'italic 13px Poppins, sans-serif', color: '#e2e8f0' },
-            { text: '  (logaritmisk skala)', font: '11px Poppins, sans-serif', color: '#64748b' },
+            { text: '  (' + (window.I18N ? I18N.t('logaritmisk skala') : 'logaritmisk skala') + ')', font: '11px Poppins, sans-serif', color: '#64748b' },
         ], pad.left + gw / 2, pad.top + gh + 48, { align: 'center', baseline: 'alphabetic' });
 
         // Y-axel ticks + etiketter (varannan decenn)
@@ -647,7 +648,7 @@ function PlanckGraph({ T, showComparison, fullscreen }) {
         ctx.translate(22, pad.top + gh / 2);
         ctx.rotate(-Math.PI / 2);
         drawMixedText(ctx, [
-            { text: 'Spektral emittans ', font: '12px Poppins, sans-serif', color: '#cbd5e1' },
+            { text: (window.I18N ? I18N.t('Spektral emittans') : 'Spektral emittans') + ' ', font: '12px Poppins, sans-serif', color: '#cbd5e1' },
             { text: 'M',                   font: 'italic 13px Poppins, sans-serif', color: '#e2e8f0' },
             { text: 'λ',                   font: 'italic 9px Poppins, sans-serif',  color: '#e2e8f0', dy: 4 },
             { text: '  (W/(m²·μm))',       font: '11px Poppins, sans-serif',         color: '#64748b' },

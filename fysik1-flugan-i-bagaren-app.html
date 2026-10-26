@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flugan i bägaren — Fysiklabbet</title>
     <meta name="description" content="En fluga lyfter inne i en bägare som står på en känslig våg — ändras utslaget? Följ luftens nedsvep, vågens utslag och rörelsemängden, i realtid och ultrarapid.">
@@ -342,6 +343,9 @@
 
         const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
         const smoother = (t) => { const x = clamp(t, 0, 1); return x * x * (3 - 2 * x); };
+        // Översättning av text som ritas i koden (canvas); svenska utan I18N.
+        const oversatt = (s, v) => window.I18N ? I18N.t(s, v)
+            : (v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (v[k] != null ? v[k] : m)) : s);
 
         // ── Förloppen (scenarier) ─────────────────────────────────
         // svar: vad vågen visar under förloppets karakteristiska fas,
@@ -1268,7 +1272,7 @@
                 ctx.fillStyle = INK_SOFT;
                 ctx.font = '600 7.5px "JetBrains Mono", monospace';
                 ctx.textAlign = 'center';
-                ctx.fillText('NOLLSTÄLL', BTN_NOLL.x + BTN_NOLL.w / 2, BTN_NOLL.y + 12);
+                ctx.fillText(oversatt('NOLLSTÄLL'), BTN_NOLL.x + BTN_NOLL.w / 2, BTN_NOLL.y + 12);
                 ctx.fillText('ON/OFF', BTN_ONOFF.x + BTN_ONOFF.w / 2, BTN_ONOFF.y + 12);
             }
 
@@ -1310,7 +1314,7 @@
 
                 ctx.fillStyle = 'rgba(147,236,171,0.65)';
                 ctx.textAlign = 'right';
-                ctx.fillText('VÅG 0,1 mg', 604, 526);
+                ctx.fillText(oversatt('VÅG 0,1 mg'), 604, 526);
             }
 
             beakerGeom() {
@@ -1400,7 +1404,7 @@
                 ctx.font = '400 10.5px Poppins, sans-serif';
                 ctx.textAlign = 'center';
                 const pTxt = p0 < 0.001 ? '< 0,001' : fmtSmart(p0, p0 < 0.01 ? 3 : 2);
-                ctx.fillText('övertryck max ' + pTxt + ' Pa', CX, g.botY - 13);
+                ctx.fillText(oversatt('övertryck max {p} Pa', { p: pTxt }), CX, g.botY - 13);
             }
 
             drawParticles(ctx) {
@@ -1480,7 +1484,7 @@
                     ctx.fillStyle = INK_MUTED;
                     ctx.font = '400 10.5px Poppins, sans-serif';
                     ctx.textAlign = 'right';
-                    ctx.fillText('läckage ' + formatNum((1 - this.f) * 100, 0) + ' %', CX - D_BEAKER / 2 * PX - WALL - 8, g.rimY - 18);
+                    ctx.fillText(oversatt('läckage {n} %', { n: formatNum((1 - this.f) * 100, 0) }), CX - D_BEAKER / 2 * PX - WALL - 8, g.rimY - 18);
                     ctx.textAlign = 'left';
                 }
             }
@@ -1609,10 +1613,10 @@
                 ctx.fillStyle = INK_SOFT;
                 ctx.font = '600 11px Poppins, sans-serif';
                 ctx.textAlign = 'left';
-                ctx.fillText('VÅGENS UTSLAG', gx + 12, gy + 18);
+                ctx.fillText(oversatt('VÅGENS UTSLAG'), gx + 12, gy + 18);
                 ctx.fillStyle = INK_MUTED;
                 ctx.font = '400 9.5px Poppins, sans-serif';
-                ctx.fillText('avvikelse från vilovärdet, i µN', gx + 12, gy + 31);
+                ctx.fillText(oversatt('avvikelse från vilovärdet, i µN'), gx + 12, gy + 31);
 
                 const px0 = gx + 40, px1 = gx + gw - 10;
                 const py0 = gy + 44, py1 = gy + gh - 22;
@@ -1691,12 +1695,12 @@
                 ctx.lineWidth = 1.6;
                 ctx.beginPath(); ctx.moveTo(px0, gy + gh - 8); ctx.lineTo(px0 + 14, gy + gh - 8); ctx.stroke();
                 ctx.fillStyle = INK_MUTED;
-                ctx.fillText('verklig kraft', px0 + 18, gy + gh - 5);
+                ctx.fillText(oversatt('verklig kraft'), px0 + 18, gy + gh - 5);
                 ctx.strokeStyle = COL_ACCENT;
                 ctx.beginPath(); ctx.moveTo(px0 + 82, gy + gh - 8); ctx.lineTo(px0 + 96, gy + gh - 8); ctx.stroke();
-                ctx.fillText(!this.scaleOn ? 'vågen avstängd' : 'vågen visar', px0 + 100, gy + gh - 5);
+                ctx.fillText(oversatt(!this.scaleOn ? 'vågen avstängd' : 'vågen visar'), px0 + 100, gy + gh - 5);
                 ctx.textAlign = 'right';
-                ctx.fillText('fönster ' + fmtSmart(W, 2) + ' s', px1, gy + gh - 5);
+                ctx.fillText(oversatt('fönster {w} s', { w: fmtSmart(W, 2) }), px1, gy + gh - 5);
             }
 
             // ── Enkelt läge: stor avläsning + klartext i grafens ställe ──
@@ -1743,7 +1747,8 @@
             drawSimplePanel(ctx) {
                 const px = 20, py = 96, pw = 310;
                 ctx.textAlign = 'left';
-                const st = this.simpleStatus();
+                const st0 = this.simpleStatus();
+                const st = { ...st0, head: oversatt(st0.head), body: oversatt(st0.body) };
                 ctx.font = '400 12.5px Poppins, sans-serif';
                 const bodyLines = Math.max(1, Math.ceil(ctx.measureText(st.body).width / (pw - 28)));
                 const ph = 118 + 20 + bodyLines * 17 + 26;
@@ -1754,7 +1759,7 @@
                 ctx.fill(); ctx.stroke();
                 ctx.fillStyle = INK_SOFT;
                 ctx.font = '600 11px Poppins, sans-serif';
-                ctx.fillText('VÅGEN VISAR', px + 14, py + 24);
+                ctx.fillText(oversatt('VÅGEN VISAR'), px + 14, py + 24);
                 let big = '— —';
                 if (this.scaleOn) {
                     const mgv = (this.lcdG - this.cfg.tareG) * 1000;
@@ -1770,7 +1775,7 @@
                 if (this.scaleOn) ctx.fillText('mg', px + 22 + bw, py + 64);
                 ctx.font = '400 11px Poppins, sans-serif';
                 ctx.fillStyle = INK_MUTED;
-                ctx.fillText('nollställd våg: bara flugans bidrag syns', px + 14, py + 82);
+                ctx.fillText(oversatt('nollställd våg: bara flugans bidrag syns'), px + 14, py + 82);
                 ctx.font = '600 14.5px Poppins, sans-serif';
                 ctx.fillStyle = st.ok ? '#2d6a3e' : COL_ACCENT;
                 let yy = this.wrapText(ctx, st.head, px + 14, py + 108, pw - 28, 19);
@@ -1779,7 +1784,7 @@
                 yy = this.wrapText(ctx, st.body, px + 14, yy + 4, pw - 28, 17);
                 ctx.font = '400 11px Poppins, sans-serif';
                 ctx.fillStyle = INK_MUTED;
-                ctx.fillText('Dra i flugan eller använd knapparna.', px + 14, py + ph - 12);
+                ctx.fillText(oversatt('Dra i flugan eller använd knapparna.'), px + 14, py + ph - 12);
             }
 
             drawStatus(ctx) {
@@ -1797,25 +1802,25 @@
                 ctx.fillStyle = INK_SOFT;
                 ctx.font = '600 12px Poppins, sans-serif';
                 ctx.textAlign = 'left';
-                ctx.fillText(this.scenario.name, 22, 372);
+                ctx.fillText(oversatt(this.scenario.name), 22, 372);
                 ctx.fillStyle = INK_MUTED;
                 ctx.font = '400 11px Poppins, sans-serif';
                 const ph = this.dragTarget !== null ? 'Du styr flugan' : (PHASE_TXT[this.phase] || '');
-                ctx.fillText(ph + (this.cfg.paused ? ' — pausad' : ''), 22, 389);
+                ctx.fillText(oversatt(ph) + (this.cfg.paused ? oversatt(' — pausad') : ''), 22, 389);
                 // uppspelningshastighet
                 const speed = SPEEDS[this.cfg.speedIdx];
-                const sTxt = speed === 1 ? 'realtid' : 'ultrarapid 1/' + formatNum(1 / speed, 0);
-                ctx.fillText('Uppspelning: ' + sTxt, 22, 406);
+                const sTxt = speed === 1 ? oversatt('realtid') : oversatt('ultrarapid 1/{n}', { n: formatNum(1 / speed, 0) });
+                ctx.fillText(oversatt('Uppspelning: {s}', { s: sTxt }), 22, 406);
 
                 // avvikelse-läsning (i vänstra friytan, klar från overlay-rutorna)
                 const dev = this.ema.dev;
                 ctx.font = '500 15px "JetBrains Mono", monospace';
                 ctx.fillStyle = Math.abs(dev) < 6 ? '#2d6a3e' : COL_ACCENT;
                 const devTxt = (dev > 0 ? '+' : dev < 0 ? '−' : '') + fmtSmart(Math.abs(dev), 1) + ' µN';
-                ctx.fillText('Avvikelse: ' + (Math.abs(dev) < 1.5 ? '≈ 0 µN' : devTxt), 22, 427);
+                ctx.fillText(oversatt('Avvikelse: {v}', { v: (Math.abs(dev) < 1.5 ? '≈ 0 µN' : devTxt) }), 22, 427);
                 ctx.fillStyle = INK_MUTED;
                 ctx.font = '400 10.5px Poppins, sans-serif';
-                ctx.fillText('flugans tyngd ' + fmtSmart(this.m * G_ACC * 1e6, 0) + ' µN — infångning f = ' + formatNum(this.f * 100, 0) + ' %', 22, 443);
+                ctx.fillText(oversatt('flugans tyngd {a} µN — infångning f = {b} %', { a: fmtSmart(this.m * G_ACC * 1e6, 0), b: formatNum(this.f * 100, 0) }), 22, 443);
             }
 
             // ── Systemgränser (frilagd kropp) ──
@@ -1858,7 +1863,7 @@
                     ctx.fillStyle = INK_SOFT;
                     ctx.font = '400 10.5px Poppins, sans-serif';
                     ctx.textAlign = 'left';
-                    lines.forEach((ln, i) => ctx.fillText(ln, 24, 478 + i * 14));
+                    lines.forEach((ln, i) => ctx.fillText(oversatt(ln), 24, 478 + i * 14));
                 };
 
                 if (b === 'fluga') {
@@ -2322,7 +2327,7 @@
                                 </React.Fragment>
                             )}
                             <div className="text-xs" style={{ color: 'var(--lab-ink-muted, #8a8579)' }}>
-                                Rätt: {gissa.right} av {gissa.total}{gissa.streak >= 2 ? ' — svit: ' + gissa.streak : ''}
+                                Rätt: {gissa.right} av {gissa.total}{gissa.streak >= 2 ? oversatt(' — svit: {n}', { n: gissa.streak }) : ''}
                             </div>
                         </React.Fragment>
                     )}

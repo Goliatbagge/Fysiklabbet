@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radioaktivt sönderfall — Fysiklabbet</title>
     <meta name="description" content="Protoner och neutroner — uppbyggnad av atomkärnan.">
@@ -487,7 +488,7 @@
                 ctx.fill();
                 ctx.shadowBlur = 0;
                 ctx.fillStyle = '#0f1620';
-                ctx.fillText(item.label, x + dotR * 2 + 6, iy);
+                ctx.fillText(window.I18N ? I18N.t(item.label) : item.label, x + dotR * 2 + 6, iy);
             });
             ctx.restore();
         }
@@ -531,7 +532,7 @@
 
             // Measure name
             ctx.font = `${nameSize}px Poppins, sans-serif`;
-            const nameStr = info.name ? '  ' + info.name : '';
+            const nameStr = info.name ? '  ' + (window.I18N ? I18N.t(info.name) : info.name) : '';
             const nameW = info.name ? ctx.measureText(nameStr).width : 0;
 
             // Measure scripts - use the wider of mass/Z for the column
@@ -728,7 +729,7 @@
                     ctx.fillStyle = INK;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText(DECAY_TITLES[decayType], w / 2, 24);
+                    ctx.fillText(window.I18N ? I18N.t(DECAY_TITLES[decayType]) : DECAY_TITLES[decayType], w / 2, 24);
                     ctx.restore();
                 }
 
@@ -763,7 +764,7 @@
                         ctx.fillStyle = COL_AMBER_TEXT;
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
-                        ctx.fillText('Exciterat tillstånd', w / 2, stateY);
+                        ctx.fillText(window.I18N ? I18N.t('Exciterat tillstånd') : 'Exciterat tillstånd', w / 2, stateY);
                         ctx.restore();
                     }
 
@@ -1101,7 +1102,7 @@
                             ctx.fillStyle = '#0f1620';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
-                            ctx.fillText('Grundtillst\u00e5nd', cx, stateY);
+                            ctx.fillText(window.I18N ? I18N.t('Grundtillst\u00e5nd') : 'Grundtillst\u00e5nd', cx, stateY);
                             ctx.restore();
                         }
 
@@ -1219,8 +1220,8 @@
                     ctx.textAlign = 'center';
                     ctx.fillStyle = '#0f1620';
                     const hdrY = narrow ? legendBottom + 2 : 10;
-                    ctx.fillText('F\u00f6re', w / 4, hdrY);
-                    ctx.fillText('Efter', 3 * w / 4, hdrY);
+                    ctx.fillText(window.I18N ? I18N.t('F\u00f6re') : 'F\u00f6re', w / 4, hdrY);
+                    ctx.fillText(window.I18N ? I18N.t('Efter') : 'Efter', 3 * w / 4, hdrY);
                     ctx.restore();
 
                     // ── LEFT PANEL: frozen original nucleus with subtle jiggle ─
@@ -1252,7 +1253,7 @@
                         ctx.fillStyle = COL_AMBER_TEXT;
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
-                        ctx.fillText('Exciterat tillst\u00e5nd', lcx, parentTopY - 44);
+                        ctx.fillText(window.I18N ? I18N.t('Exciterat tillst\u00e5nd') : 'Exciterat tillst\u00e5nd', lcx, parentTopY - 44);
                         ctx.restore();
                     }
 
@@ -1483,7 +1484,7 @@
                         ctx.fillStyle = '#0f1620';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
-                        ctx.fillText('Grundtillst\u00e5nd', rcx, gtTopY - 44);
+                        ctx.fillText(window.I18N ? I18N.t('Grundtillst\u00e5nd') : 'Grundtillst\u00e5nd', rcx, gtTopY - 44);
                         ctx.restore();
 
                         // Gamma dot at final position (no wave)

@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strålnings genomtränglighet — Fysiklabbet</title>
     <meta name="description" content="Alfa, beta och gamma genom textil, aluminium och bly.">
@@ -375,7 +376,7 @@
                 ctx.font = `bold ${Math.max(10, W * 0.022)}px Poppins, sans-serif`;
                 ctx.fillStyle = '#0f1620';
                 ctx.textAlign = 'center';
-                ctx.fillText(bs.label, barrierCX, bTop - 10);
+                ctx.fillText(window.I18N ? I18N.t(bs.label) : bs.label, barrierCX, bTop - 10);
             }
 
             // ── Rita preparat (glasstav med preparat i spetsen) ─────────────
@@ -512,7 +513,7 @@
             ctx.font = `bold ${Math.max(9, W * 0.02)}px Poppins, sans-serif`;
             ctx.fillStyle = '#0f1620';
             ctx.textAlign = 'center';
-            ctx.fillText('GM-rör', gmMid, gmTop - 10);
+            ctx.fillText(window.I18N ? I18N.t('GM-rör') : 'GM-rör', gmMid, gmTop - 10);
 
             // ── Rita partiklar ─────────────────────────────────────────────────
             for (const p of particles) {
@@ -1011,18 +1012,21 @@
                 const pct = Math.round(trans * 100);
                 if (source === 'alpha') {
                     if (barrier === 'none') return 'Alfapartiklar (heliumkärnor, laddning +2) är tunga och joniserande. Utan hinder når nästan alla GM-röret. Räckvidd i luft: bara några centimeter.';
+                    if (window.I18N && I18N.nb) return I18N.t('Alfapartiklar stoppas effektivt av {hinder}. Alfastrålning kan stoppas av ett papper eller av huden. Det är intern exponering som är farlig. Genomtränglighet: {pct} %.', { hinder: I18N.t(barrierLabels[barrier]).toLowerCase(), pct });
                     return `Alfapartiklar stoppas effektivt av ${barrierLabels[barrier].toLowerCase()}. Alfastrålning kan stoppas av ett papper eller av huden. Det är intern exponering som är farlig. Genomtränglighet: ${pct} %.`;
                 }
                 if (source === 'beta') {
                     if (barrier === 'none') return 'Betapartiklar (elektroner, laddning −1) är lättare och snabbare än alfapartiklar. Räckvidd i luft: upp till några meter.';
-                    if (barrier === 'textile') return `Betastrålning passerar nästan obehindrat genom textil (${pct} % transmission). Klädsel skyddar knappt mot beta.`;
+                    if (barrier === 'textile') return window.I18N ? I18N.t('Betastrålning passerar nästan obehindrat genom textil ({pct} % transmission). Klädsel skyddar knappt mot beta.', { pct }) : `Betastrålning passerar nästan obehindrat genom textil (${pct} % transmission). Klädsel skyddar knappt mot beta.`;
+                    if (window.I18N && I18N.nb) return I18N.t('Betapartiklar absorberas helt i {hinder}. Aluminium på några millimeter räcker för att stoppa de flesta betapartiklar. Genomtränglighet: {pct} %.', { hinder: I18N.t(barrierLabels[barrier]).toLowerCase(), pct });
                     return `Betapartiklar absorberas helt i ${barrierLabels[barrier].toLowerCase()}. Aluminium på några millimeter räcker för att stoppa de flesta betapartiklar. Genomtränglighet: ${pct} %.`;
                 }
                 if (source === 'gamma') {
                     if (barrier === 'none') return 'Gammastrålning är elektromagnetisk strålning (fotoner) med mycket hög energi. Den har ingen elektrisk laddning och är svår att stoppa.';
+                    if ((barrier === 'textile' || barrier === 'aluminum') && window.I18N && I18N.nb) return I18N.t('Gammastrålning passerar nästan opåverkat genom {hinder} ({pct} % transmission). Det krävs täta, tunga material som bly eller betong.', { hinder: I18N.t(barrierLabels[barrier]).toLowerCase(), pct });
                     if (barrier === 'textile' || barrier === 'aluminum') return `Gammastrålning passerar nästan opåverkat genom ${barrierLabels[barrier].toLowerCase()} (${pct} % transmission). Det krävs täta, tunga material som bly eller betong.`;
-                    if (barrier === 'thinlead') return `Tunn bly minskar gammastrålningen kraftigt, till ${pct} % transmission. Bly är effektivt på grund av sin höga atomvikt och densitet: elektronerna i blyatomerna växelverkar med fotonerna.`;
-                    return `Tjock bly absorberar nästan all gammastrålning (${pct} % transmission kvarstår). Tjockt bly eller betong används som strålskärm runt reaktorer och röntgenrum.`;
+                    if (barrier === 'thinlead') return window.I18N ? I18N.t('Tunn bly minskar gammastrålningen kraftigt, till {pct} % transmission. Bly är effektivt på grund av sin höga atomvikt och densitet: elektronerna i blyatomerna växelverkar med fotonerna.', { pct }) : `Tunn bly minskar gammastrålningen kraftigt, till ${pct} % transmission. Bly är effektivt på grund av sin höga atomvikt och densitet: elektronerna i blyatomerna växelverkar med fotonerna.`;
+                    return window.I18N ? I18N.t('Tjock bly absorberar nästan all gammastrålning ({pct} % transmission kvarstår). Tjockt bly eller betong används som strålskärm runt reaktorer och röntgenrum.', { pct }) : `Tjock bly absorberar nästan all gammastrålning (${pct} % transmission kvarstår). Tjockt bly eller betong används som strålskärm runt reaktorer och röntgenrum.`;
                 }
                 return '';
             };

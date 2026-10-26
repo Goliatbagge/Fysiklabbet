@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skiftnyckeln och hävarmen — Fysiklabbet</title>
     <meta name="description" content="Dra i kraftpilen på en skiftnyckel: flytta angreppspunkten längs skaftet, vinkla kraften och se hävarmen — det vinkelräta avståndet från vridningspunkten till kraftens riktningslinje — ändras i realtid. Räcker kraftmomentet M = F · l för att lossa den tröga muttern?">
@@ -498,8 +499,8 @@
                         {M > 0.05 && <tspan> ({medurs ? 'medurs' : 'moturs'})</tspan>}
                     </Tag>
                     <Tag x={300} y={60} color={loose ? COL.ok : COL.soft} size={15} weight={600}>
-                        {loose ? `Muttern lossnar! (den kärvar upp till ${fmt(M_KRAV, 1)} Nm)`
-                               : `Muttern sitter fast — det krävs ${fmt(M_KRAV, 1)} Nm för att lossa den`}
+                        {loose ? (window.I18N ? I18N.t('Muttern lossnar! (den kärvar upp till {m} Nm)', { m: fmt(M_KRAV, 1) }) : `Muttern lossnar! (den kärvar upp till ${fmt(M_KRAV, 1)} Nm)`)
+                               : (window.I18N ? I18N.t('Muttern sitter fast — det krävs {m} Nm för att lossa den', { m: fmt(M_KRAV, 1) }) : `Muttern sitter fast — det krävs ${fmt(M_KRAV, 1)} Nm för att lossa den`)}
                     </Tag>
 
                     {/* skiftnyckeln */}

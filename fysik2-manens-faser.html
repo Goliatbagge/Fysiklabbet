@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Månens faser — Fysiklabbet</title>
     <meta name="description" content="Månens position i banan ger de olika månfaserna.">
@@ -597,7 +598,7 @@
                 ctx.font = '600 14px Poppins, sans-serif';
                 ctx.fillStyle = '#fde68a';
                 ctx.textAlign = 'center';
-                ctx.fillText('Solljus', W - 30, 30);
+                ctx.fillText((window.I18N ? I18N.t('Solljus') : 'Solljus'), W - 30, 30);
 
                 // Sun rays arrows
                 ctx.strokeStyle = 'rgba(253, 230, 138, 0.4)';
@@ -656,7 +657,7 @@
                 ctx.font = '600 14px Poppins, sans-serif';
                 ctx.fillStyle = '#94a3b8';
                 ctx.textAlign = 'center';
-                ctx.fillText('Jorden', cx, cy + earthR + 22);
+                ctx.fillText((window.I18N ? I18N.t('Jorden') : 'Jorden'), cx, cy + earthR + 22);
 
                 // Draw moon at orbital position
                 // angle 0 = between earth and sun (right side / new moon)
@@ -714,7 +715,7 @@
                     ctx.fillStyle = isActive ? '#38bdf8' : 'rgba(148, 163, 184, 0.5)';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText(p.name, lx, ly);
+                    ctx.fillText((window.I18N ? I18N.t(p.name) : p.name), lx, ly);
 
                     // Small dot on orbit for this phase
                     const dotX = cx + orbitA * Math.cos(pRad);
@@ -766,7 +767,7 @@
                 ctx.font = '400 13px Poppins, sans-serif';
                 ctx.fillStyle = '#64748b';
                 ctx.textAlign = 'left';
-                ctx.fillText(`Dag ${dayInCycle.toFixed(1).replace('.', ',')} av 29,5`, 15, H - 15);
+                ctx.fillText((window.I18N ? I18N.t('Dag {d} av 29,5', { d: dayInCycle.toFixed(1).replace('.', ',') }) : `Dag ${dayInCycle.toFixed(1).replace('.', ',')} av 29,5`), 15, H - 15);
 
             }, [drawMoonView, currentPhase]);
 
@@ -1263,7 +1264,7 @@
                 slCtx.font = '600 32px Poppins, sans-serif';
                 slCtx.fillStyle = '#fde68a';
                 slCtx.textAlign = 'center';
-                slCtx.fillText('Solen', 128, 40);
+                slCtx.fillText((window.I18N ? I18N.t('Solen') : 'Solen'), 128, 40);
                 const sunLabelMat = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(sunLabelCanvas), transparent: true, depthWrite: false });
                 const sunLabel = new THREE.Sprite(sunLabelMat);
                 sunLabel.position.set(30, 4, 0);
@@ -1280,7 +1281,7 @@
                     lCtx.font = '400 22px Poppins, sans-serif';
                     lCtx.fillStyle = 'rgba(148, 163, 184, 0.7)';
                     lCtx.textAlign = 'center';
-                    lCtx.fillText(p.name, 128, 32);
+                    lCtx.fillText((window.I18N ? I18N.t(p.name) : p.name), 128, 32);
                     const mat = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(labelCanvas), transparent: true, depthWrite: false });
                     const sprite = new THREE.Sprite(mat);
                     sprite.position.set(7.5 * Math.cos(pRad), 0.8, -7.5 * Math.sin(pRad));

@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="sim-variant-av" content="fysik2-hjul-och-fjader-app.html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hjulet och fjädern i 3D — Fysiklabbet</title>
@@ -740,11 +741,12 @@
                 scene.add(hLine);
 
                 // Etiketter
-                const lblLampa = labelSprite('Lampa', '#dfe7f5', 24);
+                const tt = (s) => (window.I18N ? I18N.t(s) : s);
+                const lblLampa = labelSprite(tt('Lampa'), '#dfe7f5', 24);
                 lblLampa.position.set(-7.1, HY + 1.35, 0);
-                const lblVagg = labelSprite('Skuggan på väggen', '#dfe7f5', 22);
+                const lblVagg = labelSprite(tt('Skuggan på väggen'), '#dfe7f5', 22);
                 lblVagg.position.set(WALL_X - 0.3, HY + R + 0.85, -0.6);
-                const lblHjul = labelSprite('Stift', '#9cc2ff', 22);
+                const lblHjul = labelSprite(tt('Stift'), '#9cc2ff', 22);
                 scene.add(lblLampa, lblVagg, lblHjul);
 
                 // ── Uppdatering per bildruta ──
@@ -1076,7 +1078,9 @@
                                                     aria-pressed="false" title="Samma försök som plan figur">2D</button>
                                         </div>
                                         <button className="vy-btn" onClick={nextView} aria-label="Byt kameravy"
-                                                title={'Byt kameravy: nu ' + VIEW_NAMES[view].toLowerCase() + ', nästa ' + VIEW_NAMES[VIEWS[(VIEWS.indexOf(view) + 1) % VIEWS.length]].toLowerCase()}>
+                                                title={window.I18N
+                                                    ? I18N.t('Byt kameravy: nu {nu}, nästa {nasta}', { nu: I18N.t(VIEW_NAMES[view]).toLowerCase(), nasta: I18N.t(VIEW_NAMES[VIEWS[(VIEWS.indexOf(view) + 1) % VIEWS.length]]).toLowerCase() })
+                                                    : 'Byt kameravy: nu ' + VIEW_NAMES[view].toLowerCase() + ', nästa ' + VIEW_NAMES[VIEWS[(VIEWS.indexOf(view) + 1) % VIEWS.length]].toLowerCase()}>
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                                                 <path d="M2 12h4"/><path d="M18 12h4"/><circle cx="12" cy="12" r="4"/>
                                             </svg>

@@ -2,6 +2,7 @@
 <html lang="sv">
   <head>
     <meta charset="UTF-8" />
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Värmeflöde — Fysiklabbet</title>
     <meta name="description" content="Kroppen alstrar ca 100 W som måste bort. Se hur värmeflödet från huden beror på lufttemperaturen — och varför 22 °C känns lagom men 36 °C känns hett.">
@@ -367,6 +368,9 @@
       // ===== UTILS =====
       const NB = ' ';                     // hårt mellanslag
       const MINUS = '−';                  // äkta minustecken
+      // Översättning (i18n.js): tr('Text {x}', {x}) — svenska utan I18N
+      const tr = (s, v) => window.I18N ? I18N.t(s, v)
+        : String(s).replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m));
 
       const kelvin = (c) => Math.round(c + 273.15);
 
@@ -761,30 +765,30 @@
                 className: 'scene-flow-label',
                 x: "345", y: "236", textAnchor: "end", fill: COL.ut, fontSize: "15",
                 fontFamily: "Poppins, sans-serif", fontWeight: "600"
-              }, 'Huden strålar ut ≈ ' + fmtW10(P_UT_STRAL)),
+              }, tr('Huden strålar ut ≈ {p}', { p: fmtW10(P_UT_STRAL) })),
               React.createElement('text', {
                 className: 'scene-flow-label',
                 x: "345", y: "298", textAnchor: "end", fill: COL.in, fontSize: "15",
                 fontFamily: "Poppins, sans-serif", fontWeight: "600"
-              }, 'Rummet strålar in ≈ ' + fmtW10(pIn)),
+              }, tr('Rummet strålar in ≈ {p}', { p: fmtW10(pIn) })),
               pSvett > 0.5 && React.createElement('text', {
                 className: 'scene-flow-label',
                 x: "482", y: "150", fill: COL.svett, fontSize: "15",
                 fontFamily: "Poppins, sans-serif", fontWeight: "600"
-              }, 'Avdunstning ' + fmtW(pSvett)),
+              }, tr('Avdunstning {p}', { p: fmtW(pSvett) })),
               // Nettot, i fri yta till höger ovanför stolen
               React.createElement('text', {
                 className: 'scene-flow-label',
                 x: "482", y: "190", fill: "#0f1620", fontSize: "14",
                 fontFamily: "Poppins, sans-serif", fontWeight: "600"
               }, pOut >= 0.5
-                  ? 'Netto: ' + fmtW(pOut) + ' ut'
-                  : (pOut <= -0.5 ? 'Netto: ' + fmtW(-pOut) + ' in' : 'Netto: 0' + NB + 'W')),
+                  ? tr('Netto: {p} ut', { p: fmtW(pOut) })
+                  : (pOut <= -0.5 ? tr('Netto: {p} in', { p: fmtW(-pOut) }) : tr('Netto: {p}', { p: '0' + NB + 'W' }))),
               React.createElement('text', {
                 className: 'scene-flow-label',
                 x: CENTER_X, y: "376", textAnchor: "middle", fill: "#7a5410",
                 fontSize: "14", fontFamily: "Poppins, sans-serif", fontWeight: "600"
-              }, 'Ämnesomsättningen alstrar ' + fmtW(P_METABOL))
+              }, tr('Ämnesomsättningen alstrar {p}', { p: fmtW(P_METABOL) }))
             ),
 
             // ---------- LÄGE: ALSTRAT MOT AVGIVET ----------
@@ -809,14 +813,14 @@
                 className: 'scene-flow-label',
                 x: "470", y: "196", fill: COL.referens, fontSize: "15",
                 fontFamily: "Poppins, sans-serif", fontWeight: "600"
-              }, 'Måste bort: ' + fmtW(P_METABOL)),
+              }, tr('Måste bort: {p}', { p: fmtW(P_METABOL) })),
               React.createElement('text', {
                 className: 'scene-flow-label',
                 x: "470", y: "322", fill: flowColor, fontSize: "15",
                 fontFamily: "Poppins, sans-serif", fontWeight: "600"
               }, pOut >= 0
-                  ? 'Avges netto: ' + fmtW(pOut)
-                  : 'Tas upp netto: ' + fmtW(-pOut)),
+                  ? tr('Avges netto: {p}', { p: fmtW(pOut) })
+                  : tr('Tas upp netto: {p}', { p: fmtW(-pOut) })),
 
               Math.abs(balans) <= 9 && React.createElement('text', {
                 className: 'scene-flow-label',
@@ -843,7 +847,7 @@
             React.createElement('span', { className: "ol-title" }, "Din hud"),
             React.createElement('div', { className: "ol-value" }, fmtC(T_HUD)),
             React.createElement('div', { className: "ol-sub" },
-              "(" + kelvin(T_HUD) + NB + "K) · kärna " + fmtC(T_KARNA))
+              tr('({k}' + NB + 'K) · kärna {t}', { k: kelvin(T_HUD), t: fmtC(T_KARNA) }))
           ),
 
           // Upplevelse-kortet hålls medvetet kompakt (ingen motiveringsrad) —
@@ -910,7 +914,8 @@
               style: { background: sens.tone, marginTop: '6px' }
             }),
             React.createElement('span', { className: "font-medium t-ink" },
-              sens.text.charAt(0) + sens.text.slice(1).toLowerCase() + ' — ' + sens.why
+              window.I18N ? tr('{tillstand} — {varfor}', { tillstand: tr(sens.text.charAt(0) + sens.text.slice(1).toLowerCase()), varfor: tr(sens.why) })
+                : sens.text.charAt(0) + sens.text.slice(1).toLowerCase() + ' — ' + sens.why
             )
           ),
           React.createElement('div', { className: "space-y-3" },
@@ -919,12 +924,11 @@
             tredje
           ),
           pInNetto > 0.5 && React.createElement('p', { className: "text-xs mt-3", style: { color: COL.in } },
-            'Luften är varmare än huden — nettoflödet går i stället in i kroppen: ' + fmtW(pInNetto) + '.'
+            tr('Luften är varmare än huden — nettoflödet går i stället in i kroppen: {p}.', { p: fmtW(pInNetto) })
           ),
           React.createElement('p', { className: "text-xs t-muted mt-3" },
-            'Utbytet går åt båda hållen: huden strålar ut ≈ ' + fmtW10(P_UT_STRAL) +
-            ' och rummet strålar in ≈ ' + fmtW10(pInBrutto) + ' — skillnaden är nettoflödet. ' +
-            'Streckad markering visar de ' + fmtW(P_METABOL) + ' som måste bort för att kroppstemperaturen ska hållas konstant.'
+            tr('Utbytet går åt båda hållen: huden strålar ut ≈ {ut} och rummet strålar in ≈ {in} — skillnaden är nettoflödet. Streckad markering visar de {p} som måste bort för att kroppstemperaturen ska hållas konstant.',
+              { ut: fmtW10(P_UT_STRAL), in: fmtW10(pInBrutto), p: fmtW(P_METABOL) })
           )
         );
       };
@@ -1085,7 +1089,7 @@
                     React.createElement('span', null, fmtC(T_MAX) + " (" + kelvin(T_MAX) + NB + "K)")
                   ),
                   React.createElement('p', { className: "text-xs t-muted mt-3" },
-                    "Hudens temperatur ligger fast på " + fmtC(T_HUD) + " — kroppen håller den konstant."
+                    tr('Hudens temperatur ligger fast på {t} — kroppen håller den konstant.', { t: fmtC(T_HUD) })
                   )
                 ),
 

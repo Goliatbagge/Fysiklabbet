@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solförmörkelse — Fysiklabbet</title>
     <meta name="description" content="Upplev en total solförmörkelse sedd från jorden — partiell fas, Bailys pärlor, diamantring, kromosfär, protuberanser och koronan, med fysikaliskt korrekt geometri.">
@@ -917,24 +918,26 @@ function drawScene(ctx, W, H, state, nowSec) {
 }
 
 // ── Fasbeskrivning + nedräkning ─────────────────────────────────────────────
+// Översättningsbar text med platshållare (i18n.js); svenska om I18N saknas.
+const T = (s, v) => window.I18N ? I18N.t(s, v) : s.replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null) ? v[k] : m);
 function phaseInfo(t, g) {
     const { typ, tC1, tC2 } = g;
     if (typ === 'ingen' || tC1 === null) {
-        return { fas: 'Ingen förmörkelse', next: 'Månen passerar vid sidan av solen' };
+        return { fas: 'Ingen förmörkelse', next: T('Månen passerar vid sidan av solen') };
     }
     const centralNamn = typ === 'total' ? 'Totalitet' : 'Ringformig fas';
-    if (t < -tC1) return { fas: 'Före förmörkelsen', next: 'Första kontakten om ' + fmtDur(-tC1 - t) };
-    if (t > tC1) return { fas: 'Förmörkelsen är slut', next: 'Fjärde kontakten var för ' + fmtDur(t - tC1) + ' sedan' };
+    if (t < -tC1) return { fas: 'Före förmörkelsen', next: T('Första kontakten om {t}', { t: fmtDur(-tC1 - t) }) };
+    if (t > tC1) return { fas: 'Förmörkelsen är slut', next: T('Fjärde kontakten var för {t} sedan', { t: fmtDur(t - tC1) }) };
     if (tC2 !== null && t >= -tC2 && t <= tC2) {
-        return { fas: centralNamn, next: centralNamn + ' slutar om ' + fmtDur(tC2 - t), central: true };
+        return { fas: centralNamn, next: T(centralNamn + ' slutar om {t}', { t: fmtDur(tC2 - t) }), central: true };
     }
     if (t < 0) {
         const nextText = (tC2 !== null)
-            ? centralNamn + ' börjar om ' + fmtDur(-tC2 - t)
-            : 'Störst täckning om ' + fmtDur(-t);
+            ? T(centralNamn + ' börjar om {t}', { t: fmtDur(-tC2 - t) })
+            : T('Störst täckning om {t}', { t: fmtDur(-t) });
         return { fas: 'Partiell fas (växande)', next: nextText };
     }
-    return { fas: 'Partiell fas (avtagande)', next: 'Förmörkelsen slutar om ' + fmtDur(tC1 - t) };
+    return { fas: 'Partiell fas (avtagande)', next: T('Förmörkelsen slutar om {t}', { t: fmtDur(tC1 - t) }) };
 }
 
 // ── React-appen ─────────────────────────────────────────────────────────────

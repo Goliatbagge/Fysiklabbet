@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halveringstid — Fysiklabbet</title>
     <meta name="description" content="Exponentiellt sönderfall genom fem halveringstider.">
@@ -385,7 +386,7 @@
                 ctx.font = '600 13px Poppins, sans-serif';
                 ctx.fillStyle = '#0f1620';
                 ctx.textAlign = 'center';
-                ctx.fillText(`${remainingCount} av ${TOTAL_NUCLEI} kärnor kvar (${formatPercent(remainingPercent)} %)`, W / 2, gridPadY + gridH + 20);
+                ctx.fillText(window.I18N ? I18N.t('{n} av {tot} kärnor kvar ({p} %)', {n: remainingCount, tot: TOTAL_NUCLEI, p: formatPercent(remainingPercent)}) : `${remainingCount} av ${TOTAL_NUCLEI} kärnor kvar (${formatPercent(remainingPercent)} %)`, W / 2, gridPadY + gridH + 20);
 
                 // ─── Graph ─────────────────────────────
                 const graphLeft = 70;
@@ -466,7 +467,7 @@
                 ctx.textBaseline = 'middle';
                 ctx.font = 'italic 13px Poppins, sans-serif';
                 ctx.fillStyle = '#0f1620';
-                ctx.fillText('Återstående mängd (%)', 0, 0);
+                ctx.fillText(window.I18N ? I18N.t('Återstående mängd (%)') : 'Återstående mängd (%)', 0, 0);
                 ctx.restore();
 
                 // X-axis labels
@@ -502,7 +503,7 @@
                 ctx.font = 'italic 13px Poppins, sans-serif';
                 ctx.fillStyle = '#0f1620';
                 ctx.textAlign = 'center';
-                ctx.fillText('Antal halveringstider', graphLeft + graphWidth / 2, graphBottom + 26);
+                ctx.fillText(window.I18N ? I18N.t('Antal halveringstider') : 'Antal halveringstider', graphLeft + graphWidth / 2, graphBottom + 26);
 
                 // ─── Smooth exponential curve (faded, full range) ───
                 ctx.strokeStyle = 'rgba(239, 68, 68, 0.3)';

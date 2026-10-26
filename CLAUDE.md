@@ -84,6 +84,31 @@ vars svenska källa ändrats sedan översättningen (INAKTUELL), och på saknade
 poster i de innehållstyper som redan är helt översatta. Kontrollera synlig
 svenska på en engelsk sida med `node .claude/i18n/kvar.js "<sida>?…"`.
 
+## Norska (bokmål) i simuleringarna
+
+**Alla fysiksimuleringar (`fysik1-*.html`, `fysik2-*.html`) finns på norska
+via `?lang=nb`** (infört 2026-10-26, så att länkar kan skickas till norska
+lärare och elever): `https://fysiklabbet.se/fysik1-densitet-app.html?lang=nb`.
+Svenska är fortfarande standardspråket; jordgloben sist i huvudmenyn
+visar på varje sida vilka språk den finns på (Svenska, Norsk, English).
+Övriga sidor (katalog, teori) har ingen norsk version. Motorn är `i18n.js` (samma som för
+engelskan); ordlistorna är `i18n/nb.js` (gemensamt) och
+`i18n/nb/sidor/<sida>.js` (en per simulering). Arbetsgången står i
+`.claude/i18n/nb/SIMULERINGAR.md`, fackorden i `.claude/i18n/nb/termlista.md`.
+
+- **Ändrar du svensk text i en simulering, ändra den norska nyckeln och
+  översättningen i samma commit.** Nyckeln är den svenska texten exakt; en
+  ändrad svensk sträng utan ny nyckel visas på svenska på den norska sidan.
+- **Ny simulering:** skriv `i18n/nb/sidor/<sida>.js`, kör
+  `node .claude/i18n/nb/bygg-manifest.js` och
+  `node .claude/i18n/nb/kvar.js <sida>.html` (ska ge 0).
+- **Text som byggs i kod** (mallsträngar, canvas `fillText`, sprites)
+  skrivs `window.I18N ? I18N.t('…') : '…'`. Simuleringar i en iframe
+  (`fysik1-tryck-pa/standalone.html`, `fysik2-magnetfalt/standalone.html`)
+  läser förälderns `window.parent.I18N`.
+- **Agenten `norsk-sprakgranskare`** granskar och godkänner all norsk text.
+- Fel i svenskan som hittades vid översättningen: `.claude/i18n/nb/svenska-fel.md`.
+
 ## Tech Stack
 
 - **Frontend**: Standalone HTML med React 18 (CDN), TailwindCSS (CDN)

@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ljudvågor och stående vågor i pipor — Fysiklabbet</title>
     <meta name="description" content="Stående vågor i öppna, halvöppna och slutna pipor. Välj piptyp, ändra pipans längd och tonens ordningsnummer, se noderna och bukarna flytta sig — och spela tonen! Med luftpartiklarna framme syns att ljudvågen egentligen är longitudinell fast den ritas som transversell (l = n · λ/2 respektive l = (2n − 1) · λ/4).">
@@ -225,6 +226,8 @@
         const ANIMF = 0.6;                   // visuell svängningsfrekvens (Hz), kraftigt fördröjd
 
         const TONE_NAMES = ['grundtonen', 'första övertonen', 'andra övertonen', 'tredje övertonen'];
+        // Översättning (i18n.js): svensk text som nyckel.
+        const tr = (s) => window.I18N ? I18N.t(s) : s;
 
         const fmt = (num, decimals = 1) => {
             if (!isFinite(num)) return '–';
@@ -468,7 +471,7 @@
             const osc = Math.cos(th);
             const lenPx = l * PPM;
             const xPx = (xm) => PX0 + xm * PPM;
-            const toneName = TONE_NAMES[n - 1];
+            const toneName = tr(TONE_NAMES[n - 1]);
 
             // ── Inställningsrutan uppe till höger — hopfällbar, och i
             // fullskärm bor även glidarna här (placeringsregeln 2026-08-31:
@@ -523,7 +526,7 @@
                                               min={LMIN} max={LMAX} step={0.01} unit="m" onChange={setL} decimals={2} />
                                     <StSlider label="Ton (<em>n</em>)" value={n}
                                               min={NMIN} max={NMAX} step={1} onChange={(x) => setN(Math.round(x))}
-                                              valueText={`${TONE_NAMES[n - 1]} (n = ${n})`} />
+                                              valueText={`${tr(TONE_NAMES[n - 1])} (n = ${n})`} />
                                 </div>
                                 <div className="st-actions">
                                     <button className="btn-toggle" onClick={togglePlay}>{playing ? 'Tysta tonen' : 'Spela tonen'}</button>
@@ -754,7 +757,7 @@
                                             sub="<em>n</em> = 1 är grundtonen. Varje överton lägger till en buk inuti pipan."
                                             value={n} min={NMIN} max={NMAX} step={1} decimals={0}
                                             onChange={(x) => setN(Math.round(x))}
-                                            valueText={`${TONE_NAMES[n - 1]} (n = ${n})`} />
+                                            valueText={`${tr(TONE_NAMES[n - 1])} (n = ${n})`} />
                                     <div className="flex gap-2 mt-1">
                                         <button className={`btn-toggle flex-1 ${playing ? 'active' : ''}`} onClick={togglePlay}>
                                             {playing ? 'Tysta tonen' : 'Spela tonen'}

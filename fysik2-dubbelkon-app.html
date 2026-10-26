@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dubbelkonen som rullar uppför — Fysiklabbet</title>
     <meta name="description" content="Interaktiv 3D-simulering av den klassiska demonstrationen där en dubbelkon ser ut att rulla uppför en lutande bana. Skenorna går isär, kontaktpunkterna vandrar mot konens spetsar och tyngdpunkten sjunker fastän banan stiger. Jämför med cylindern som rullar nedåt, ändra lutningen och hitta gränsen där illusionen bryts.">
@@ -669,9 +670,9 @@
                 // Etiketterna ska vara LÄSBARA på skärmen (~20 px eller mer)
                 // — glyfhöjden i scen-enheter är fontPx · 0,0068 · skala, så
                 // skala 9 ger ≈ 2,5 enheter ≈ 25 px med startkameran.
-                const cmLabel = makeLabel([{ t: 'Tyngdpunkt' }], COL.cm, 9);
+                const cmLabel = makeLabel([{ t: (window.I18N ? I18N.t('Tyngdpunkt') : 'Tyngdpunkt') }], COL.cm, 9);
                 scene.add(cmLabel);
-                const refLabel = makeLabel([{ t: 'Vågrät startnivå' }], COL.ref, 8.5);
+                const refLabel = makeLabel([{ t: (window.I18N ? I18N.t('Vågrät startnivå') : 'Vågrät startnivå') }], COL.ref, 8.5);
                 scene.add(refLabel);
 
                 // Spårlinjen: tyngdpunktens bana ritas efterhand som ett
@@ -1304,7 +1305,7 @@
                                 )}
 
                                 <Slider label="Banans lutning (<em>β</em>)"
-                                        sub={`Hur brant skenornas överkant stiger mot den breda änden. Gränsen för dubbelkonen går vid <em>β</em> ≈ ${fmt(d.thetaCrit, 1)}° med den aktuella öppningsvinkeln.`}
+                                        sub={`Hur brant skenornas överkant stiger mot den breda änden. Gränsen för dubbelkonen går vid <em>β</em> ${window.I18N ? I18N.t('≈ {v}° med den aktuella öppningsvinkeln.', { v: fmt(d.thetaCrit, 1) }) : '≈ ' + fmt(d.thetaCrit, 1) + '° med den aktuella öppningsvinkeln.'}`}
                                         value={theta} min={0} max={8} step={0.5} unit="°" onChange={setTheta} decimals={1} />
                                 <Slider label="Halva öppningsvinkeln (<em>φ</em>)"
                                         sub="Hur snabbt skenorna går isär. Större vinkel flyttar kontaktpunkterna snabbare ut mot spetsarna, så att tyngdpunkten sjunker brantare."

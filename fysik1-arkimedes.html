@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arkimedes princip — Fysiklabbet</title>
     <meta name="description" content="Sänk en sten med dynamometer i ett bräddkärl — tyngdminskningen är exakt lika stor som det undanträngda vattnets tyngd. Arkimedes princip som labbförsök.">
@@ -793,7 +794,7 @@
                     </g>
 
                     {/* Etikett över bägaren */}
-                    <Chip xPx={622} yPy={362} text="Undanträngt vatten" size={11} />
+                    <Chip xPx={622} yPy={362} text={window.I18N ? I18N.t('Undanträngt vatten') : 'Undanträngt vatten'} size={11} />
 
                     {/* Kraftpilar på stenen (överst) */}
                     <g pointerEvents="none">

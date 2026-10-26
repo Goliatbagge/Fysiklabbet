@@ -1,4 +1,11 @@
-/* i18n.js — språkval för Fysiklabbet (svenska som standard, engelska som tillval).
+/* i18n.js — språkval för Fysiklabbet (svenska som standard, engelska och
+ * norska (bokmål) som tillval).
+ *
+ * NORSKA (?lang=nb, infört 2026-10-26) gäller bara fysiksimuleringarna
+ * (fysik1-*.html, fysik2-*.html). Ordlistorna ligger i i18n/nb.js (gemensamt)
+ * och i18n/nb/sidor/<sida>.js (en per simulering), och i18n/nb/manifest.js
+ * (genererad av .claude/i18n/nb/bygg-manifest.js) räknar upp vilka som finns.
+ * Decimalkomma behålls på norska. Se "Norska" i CLAUDE.md.
  *
  * Laddas SYNKRONT i <head> på varje sida, före allt annat innehåll:
  *     <script src="i18n.js"></script>
@@ -37,7 +44,7 @@
     'use strict';
 
     var NYCKEL = 'fysiklabbetSprak';
-    var SPRAK = ['sv', 'en'];
+    var SPRAK = ['sv', 'en', 'nb'];
 
     function lasParam() {
         try {
@@ -64,12 +71,24 @@
     function sidnamn(path) {
         return (String(path).split('?')[0].split('#')[0].split('/').pop() || 'index.html').replace(/\.html$/, '');
     }
-    var AKTIV = AKTIVA_SIDOR.indexOf(sidnamn(window.location.pathname)) >= 0;
+    // Norska: alla fysiksimuleringar (fysik1-*, fysik2-*), men inte
+    // översiktssidorna fysik1.html/fysik2.html.
+    function norskSida(namn) { return /^fysik[12]-/.test(namn); }
+    function harSprak(namn, l) {
+        if (l === 'en') return AKTIVA_SIDOR.indexOf(namn) >= 0;
+        if (l === 'nb') return norskSida(namn);
+        return true;
+    }
+    var SIDA = sidnamn(window.location.pathname);
+    var AKTIV = harSprak(SIDA, 'en') || harSprak(SIDA, 'nb');
 
     var param = lasParam();
     if (param) spara(param);
-    var lang = AKTIV ? (param || lasSparat() || 'sv') : 'sv';
+    var onskat = param || lasSparat() || 'sv';
+    var lang = harSprak(SIDA, onskat) ? onskat : 'sv';
     var EN = lang === 'en';
+    var NB = lang === 'nb';
+    var OV = EN || NB;   // sidan visas översatt
 
     document.documentElement.lang = lang;
     document.documentElement.setAttribute('data-lang', lang);
@@ -84,7 +103,7 @@
     var HTML = Object.create(null), harHtml = false;
     function normal(s) { return String(s).replace(/\s+/g, ' ').trim(); }
     function normalHtml(s) {
-        return normal(String(s).replace(/([?&])lang=en(&amp;|&)?/g, function (m, a, b) { return b ? a : ''; })
+        return normal(String(s).replace(/([?&])lang=(?:en|nb)(&amp;|&)?/g, function (m, a, b) { return b ? a : ''; })
             .replace(/>\s+</g, '> <'));
     }
     function add(obj) {
@@ -92,14 +111,14 @@
         for (var k in obj) {
             if (Object.prototype.hasOwnProperty.call(obj, k)) DICT[normal(k)] = obj[k];
         }
-        if (EN && klar) oversattAllt();
+        if (OV && klar) oversattAllt();
     }
     function addHtml(obj) {
         if (!obj) return;
         for (var k in obj) {
             if (Object.prototype.hasOwnProperty.call(obj, k)) { HTML[normalHtml(k)] = obj[k]; harHtml = true; }
         }
-        if (EN && klar) oversattAllt();
+        if (OV && klar) oversattAllt();
     }
     var BLOCK = { P: 1, LI: 1, H1: 1, H2: 1, H3: 1, H4: 1, H5: 1, H6: 1, TD: 1, TH: 1, DT: 1, DD: 1,
                   FIGCAPTION: 1, LABEL: 1, SUMMARY: 1, BLOCKQUOTE: 1, SPAN: 1, DIV: 1, BUTTON: 1, A: 1 };
@@ -115,7 +134,7 @@
     // t('Visa {n} laddningar', {n: 3}) — platshållare i båda språken.
     function t(sv, vars) {
         var s = sv;
-        if (EN) {
+        if (OV) {
             var hit = DICT[normal(sv)];
             if (hit != null) s = hit;
         }
@@ -171,16 +190,16 @@
 
     // ---- Adresser ----------------------------------------------------------
     function medLang(url) {
-        if (!EN || url == null) return url;
+        if (!OV || url == null) return url;
         var s = String(url);
         if (/^(mailto:|tel:|javascript:|data:|blob:|#)/i.test(s)) return s;
         var a;
         try { a = new URL(s, window.location.href); } catch (e) { return s; }
         if (a.origin !== window.location.origin) return s;
         if (!/(\.html|\/)$/.test(a.pathname)) return s;  // bara sidor, inte filer
-        if (AKTIVA_SIDOR.indexOf(sidnamn(a.pathname)) < 0) return s;  // sidan är ännu bara svensk
-        if (a.searchParams.get('lang') === 'en') return s;
-        a.searchParams.set('lang', 'en');
+        if (!harSprak(sidnamn(a.pathname), lang)) return s;  // sidan finns inte på språket
+        if (a.searchParams.get('lang') === lang) return s;
+        a.searchParams.set('lang', lang);
         // Behåll relativ form om originalet var relativt.
         if (/^[a-z]+:\/\//i.test(s) || s.charAt(0) === '/') return a.href;
         var rel = a.pathname.split('/').pop() + a.search + a.hash;
@@ -191,7 +210,7 @@
         }
         return dir + rel;
     }
-    if (EN && window.history) {
+    if (OV && window.history) {
         ['pushState', 'replaceState'].forEach(function (fn) {
             var orig = window.history[fn];
             if (!orig) return;
@@ -207,7 +226,7 @@
     function bytTill(nytt) {
         spara(nytt);
         var a = new URL(window.location.href);
-        if (nytt === 'en') a.searchParams.set('lang', 'en');
+        if (nytt !== 'sv') a.searchParams.set('lang', nytt);
         else a.searchParams.delete('lang');
         window.location.href = a.href;
     }
@@ -217,20 +236,26 @@
         try {
             var sv = new URL(window.location.href);
             sv.searchParams.delete('lang');
-            var en = new URL(sv.href);
-            en.searchParams.set('lang', 'en');
-            [['sv', sv.href], ['en', en.href], ['x-default', sv.href]].forEach(function (p) {
+            var par = [['sv', sv.href]];
+            ['en', 'nb'].forEach(function (l) {
+                if (!harSprak(SIDA, l)) return;
+                var u = new URL(sv.href);
+                u.searchParams.set('lang', l);
+                par.push([l, u.href]);
+            });
+            par.push(['x-default', sv.href]);
+            par.forEach(function (p) {
                 var l = document.createElement('link');
                 l.rel = 'alternate'; l.hreflang = p[0]; l.href = p[1];
                 document.head.appendChild(l);
             });
-            if (EN) {
+            if (OV) {
                 var c = document.querySelector('link[rel="canonical"]');
                 if (c) c.href = medLang(c.href);
                 var og = document.querySelector('meta[property="og:url"]');
                 if (og) og.content = medLang(og.content);
                 var loc = document.querySelector('meta[property="og:locale"]');
-                if (loc) loc.content = 'en_GB';
+                if (loc) loc.content = EN ? 'en_GB' : 'nb_NO';
             }
         } catch (e) {}
     }
@@ -363,7 +388,11 @@
     // Ett jordklot som öppnar en liten meny med språken. Samma väljare
     // sitter sist i huvudmenyn och (på teorisidorna) till höger om
     // knappen Dyslexivänligt: katalog.html anropar I18N.sprakvaljare(el).
-    var SPRAKNAMN = { sv: 'Svenska', en: 'English' };
+    var SPRAKNAMN = { sv: 'Svenska', nb: 'Norsk', en: 'English' };
+    // Menyn visar bara de språk sidan finns på (svenska alltid först).
+    function sidansSprak() {
+        return ['sv', 'nb', 'en'].filter(function (k) { return k === 'sv' || harSprak(SIDA, k); });
+    }
     var GLOB = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
         'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
         '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/>' +
@@ -395,7 +424,7 @@
     }
     function sprakUrl(till) {
         var u = new URL(window.location.href);
-        if (till === 'en') u.searchParams.set('lang', 'en'); else u.searchParams.delete('lang');
+        if (till !== 'sv') u.searchParams.set('lang', till); else u.searchParams.delete('lang');
         return u.href;
     }
     function bygValjare() {
@@ -407,12 +436,12 @@
         knp.setAttribute('aria-haspopup', 'true');
         knp.setAttribute('aria-expanded', 'false');
         knp.setAttribute('aria-label', EN ? 'Language' : 'Språk');
-        knp.title = EN ? 'Language / Språk' : 'Språk / Language';
+        knp.title = EN ? 'Language / Språk' : NB ? 'Språk / Svenska' : sidansSprak().indexOf('nb') >= 0 ? 'Språk / Norsk' : 'Språk / Language';
         knp.innerHTML = GLOB;
         var meny = document.createElement('div');
         meny.className = 'lab-lang-meny';
         meny.setAttribute('role', 'menu');
-        ['sv', 'en'].forEach(function (k) {
+        sidansSprak().forEach(function (k) {
             var a = document.createElement('a');
             a.setAttribute('role', 'menuitemradio');
             a.setAttribute('aria-checked', k === lang ? 'true' : 'false');
@@ -474,7 +503,7 @@
             knapp();
             if (++forsok > 40) clearInterval(iv);
         }, 250);
-        if (EN) starta();
+        if (OV) starta();
     }
 
     // ---- Katalogen --------------------------------------------------------
@@ -615,6 +644,7 @@
         kurskod: function (namn) { return KODER[namn] || null; },
         lang: lang,
         en: EN,
+        nb: NB,
         t: t,
         add: add,
         addHtml: addHtml,
@@ -627,6 +657,11 @@
         _dict: DICT
     };
 
+    if (NB) {
+        skript('i18n/nb.js');
+        window.I18N._sida = SIDA;
+        skript('i18n/nb/manifest.js');
+    }
     if (EN) {
         skript('i18n/en.js');
         // Sidans egen ordlista (i18n/sidor/<sida>.js) laddas av manifestet,

@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Massdefekt och bindningsenergi — Fysiklabbet</title>
     <meta name="description" content="Massa omvandlas till energi när kärnor slås ihop — E = Δm · c².">
@@ -252,6 +253,9 @@
     function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
     // Decimalkomma, och decimalerna grupperade tre och tre med hårt
     // mellanslag (1,007 276 u) som i räkneexemplet nedanför scenen.
+    // Översättning (?lang=nb): I18N.t med platshållare; utan I18N svenska.
+    const T = (s, v) => window.I18N ? I18N.t(s, v)
+        : (v ? s.replace(/\{(\w+)\}/g, (m, k) => (v[k] != null ? v[k] : m)) : s);
     function fmt(n, d = 6) {
         const [intp, frac] = n.toFixed(d).split('.');
         if (!frac) return intp;
@@ -334,7 +338,7 @@
         ctx.fillStyle = color;
         ctx.textAlign = align;
         ctx.textBaseline = 'middle';
-        ctx.fillText(text, x, y);
+        ctx.fillText(T(text), x, y);
         ctx.restore();
     }
 
@@ -412,7 +416,7 @@
             ctx.fill();
             ctx.shadowBlur = 0;
             ctx.fillStyle = '#0f1620';
-            ctx.fillText(item.label, x + dotR*2 + 5, iy);
+            ctx.fillText(T(item.label), x + dotR*2 + 5, iy);
         });
         // Foton (γ) – liten prick med γ-symbol
         const photonY = y + items.length * lineH;
@@ -522,7 +526,7 @@
                     ctx.fillStyle = INK_MUTED;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText('Total massa', bcx, massBoxY - bh*0.22);
+                    ctx.fillText(T('Total massa'), bcx, massBoxY - bh*0.22);
                     // Värde (ingen glöd: en ljus skugga blir en halo på papper)
                     ctx.font = fsBig;
                     ctx.fillStyle = highlight ? '#c8324a' : INK;
@@ -608,7 +612,7 @@
                         // Massdefektinfo – visa efter rasslet
                         if (rattleT >= 0.8) {
                             const ea = clamp((rattleT - 0.8) / 0.2, 0, 1);
-                            txt(ctx, 'Δm = ' + fmt(cfg.deltaM) + ' u  (massa som blev energi)',
+                            txt(ctx, T('Δm = {dm} u  (massa som blev energi)', { dm: fmt(cfg.deltaM) }),
                                 cx, H*0.79, fs, INK, ea);
                             txt(ctx, 'E = Δm · c² = ' + fmt(cfg.Eb, 3) + ' MeV',
                                 cx, H*0.86, fsH, C_ENERGY_TEXT, ea);
@@ -627,7 +631,7 @@
                     // Massruta visar bundna kärnans massa
                     drawMassBox(cfg.prod.mass, 1, false);
                     // Energiindikator (hur mycket som krävs)
-                    txt(ctx, 'Krävs: ' + fmt(cfg.Eb, 2) + ' MeV för att bryta bindningen',
+                    txt(ctx, T('Krävs: {e} MeV för att bryta bindningen', { e: fmt(cfg.Eb, 2) }),
                         cx, H*0.87, fs, C_ENERGY_TEXT, 0.9);
                     txt(ctx, 'Tryck "Bryt bindningen" för att se separationen',
                         cx, H*0.93, fs, INK_MUTED);
@@ -648,7 +652,7 @@
                             cx, cy + nr*3.4, fsB, '#0f1620', 1 - et*0.5);
                         // Massruta visar bundna massan
                         drawMassBox(cfg.prod.mass, 1, false);
-                        txt(ctx, 'Tillförd energi: ' + fmt(cfg.Eb, 2) + ' MeV',
+                        txt(ctx, T('Tillförd energi: {e} MeV', { e: fmt(cfg.Eb, 2) }),
                             cx, H*0.84, fsB, C_ENERGY_TEXT, et);
 
                     } else if (prog < FLASH_END) {
@@ -682,9 +686,9 @@
                         // Massdefektinfo – visa efter rasslet
                         if (rattleT >= 0.8) {
                             const ea = clamp((rattleT - 0.8) / 0.2, 0, 1);
-                            txt(ctx, 'Ökade med Δm = ' + fmt(cfg.deltaM) + ' u  (energi blev massa)',
+                            txt(ctx, T('Ökade med Δm = {dm} u  (energi blev massa)', { dm: fmt(cfg.deltaM) }),
                                 cx, H*0.79, fs, INK, ea);
-                            txt(ctx, 'Tillförd energi: ' + fmt(cfg.Eb, 3) + ' MeV → massa',
+                            txt(ctx, T('Tillförd energi: {e} MeV → massa', { e: fmt(cfg.Eb, 3) }),
                                 cx, H*0.86, fsH, C_ENERGY_TEXT, ea);
                         }
                     }

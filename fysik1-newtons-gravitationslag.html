@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Newtons gravitationslag — Fysiklabbet</title>
     <meta name="description" content="Kraften mellan två massor — F = G · m₁ · m₂ / r².">
@@ -1140,7 +1141,7 @@
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.font = '600 14px Poppins, sans-serif';
-                ctx.fillText('Jorden', ex, ey);
+                ctx.fillText(window.I18N ? I18N.t('Jorden') : 'Jorden', ex, ey);
                 drawMixedText(ctx, [
                     { text: 'm', italic: true, color: earthLabelColor },
                     { text: 'J', subscript: true, color: earthLabelColor },
@@ -1203,7 +1204,7 @@
                 ctx.textAlign = labelAlign;
                 ctx.textBaseline = 'middle';
                 ctx.font = '600 12px Poppins, sans-serif';
-                ctx.fillText('Människa', lx, ly - 8);
+                ctx.fillText(window.I18N ? I18N.t('Människa') : 'Människa', lx, ly - 8);
                 drawMixedText(ctx, [
                     { text: 'm', italic: true, color: humanLabelColor },
                     { text: 'p', subscript: true, color: humanLabelColor },
@@ -1263,7 +1264,7 @@
                 ctx.textAlign = 'left';
                 ctx.textBaseline = 'top';
                 ctx.font = '600 12px Poppins, sans-serif';
-                ctx.fillText('Gravitationskraften (samma åt båda håll)', textX, 22);
+                ctx.fillText(window.I18N ? I18N.t('Gravitationskraften (samma åt båda håll)') : 'Gravitationskraften (samma åt båda håll)', textX, 22);
                 ctx.font = '700 22px Poppins, sans-serif';
                 ctx.fillStyle = '#fbbf24';
                 drawMixedText(ctx, [
@@ -1272,7 +1273,7 @@
                 ], textX, 44, 22, '700', 'left');
                 ctx.font = '500 11px Poppins, sans-serif';
                 ctx.fillStyle = '#cbd5e1';
-                ctx.fillText(`≈ tyngden av en 70 kg-person på jordytan`, textX, 70);
+                ctx.fillText(window.I18N ? I18N.t('≈ tyngden av en 70 kg-person på jordytan') : '≈ tyngden av en 70 kg-person på jordytan', textX, 70);
             };
 
             // ----------------------------------------------------------

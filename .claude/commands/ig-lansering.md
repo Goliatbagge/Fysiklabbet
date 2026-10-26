@@ -37,6 +37,11 @@ Facebook-lanseringsjobbet (som körs först). Läs dess rader för i dag:
   och kör om jobben i rätt ordning — Facebook först, sedan detta jobb,
   som då hittar en färsk Facebook-rad att spegla.
 
+**⛔ Översättningar postas ALDRIG** (uttryckligt beslut 2026-10-26): att
+simuleringarna finns på norska (`?lang=nb`), eller sajten på engelska
+eller andra språk, ska inte ut på Instagram, även om Facebook-raden
+skulle nämna det. Logga då `ig-lansering: ingen (översättning postas inte)`.
+
 Max ett lanseringsinlägg per dag.
 
 ## 2. Skriv bildtexten

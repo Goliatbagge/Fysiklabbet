@@ -28,6 +28,12 @@ funktion på sajten (sökning, uppläsning, ordlista, repetitionspaket …).
 Rena rättelser, refaktoreringar, dagliga nyhetsartiklar och verifierare
 räknas INTE.
 
+**⛔ Översättningar postas ALDRIG** (uttryckligt beslut 2026-10-26): att
+simuleringarna finns på norska (`?lang=nb`, commit 8e8482cc "Norska
+(bokmål) i alla fysiksimuleringar"), och likaså engelska eller andra
+språkversioner, jordgloben/språkvalet och ändringar i `i18n/`, är INGEN
+lansering. Hoppa över sådana commits och flytta pekaren förbi dem.
+
 Finns ingen sådan lansering: logga `lansering: ingen ny lansering`,
 flytta fram `senaste lanseringskoll:`-pekaren till det du granskat och
 avsluta.

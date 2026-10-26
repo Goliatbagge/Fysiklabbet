@@ -107,6 +107,9 @@ engelskan); ordlistorna är `i18n/nb.js` (gemensamt) och
   (`fysik1-tryck-pa/standalone.html`, `fysik2-magnetfalt/standalone.html`)
   läser förälderns `window.parent.I18N`.
 - **Agenten `norsk-sprakgranskare`** granskar och godkänner all norsk text.
+- **⛔ Den norska versionen ska INTE ut på sociala medier** (uttryckligt
+  beslut 2026-10-26): inga lanseringsinlägg, inga nämningar i nyhetsbrevet
+  eller i `UPDATES` på startsidan. Lanseringsjobben har regeln inskriven.
 - Fel i svenskan som hittades vid översättningen: `.claude/i18n/nb/svenska-fel.md`.
 
 ## Tech Stack

@@ -3781,7 +3781,7 @@ går ut automatiskt till varje ny prenumerant utan att någon läser det först.
   morgondagens datum, utgivaren granskar och jobbet pushar. Datumgrinden i
   `data/nyheter.js` håller den dold till midnatt. Sedan mejlas ägaren
   (Gmail-kopplingen, till ägarens egen adress) en länk till förhandsvisningen
-  `nyheter.html?id=<id>&forhand=1`, så att den kan godkännas under dagen.
+  `nyheter.html?forhand=<id>` (en enda parameter; mejlagenten tappade `&forhand=1` ur den äldre formen 2026-10-26), så att den kan godkännas under dagen.
   (Första dagen, 2026-10-25, skrevs artikeln undantagsvis på eftermiddagen.)
 - **07.45, 11.45, 15.45, 19.15 och 22.15, `-Lage svar`:** jobbet läser
   ägarens svar på mejlet. OK kvitteras, ändringar görs (med ny granskning om

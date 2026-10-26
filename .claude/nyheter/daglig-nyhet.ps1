@@ -10,7 +10,7 @@
 #       b) Nyhetsagenten skriver MORGONDAGENS artikel med morgondagens datum.
 #          Datumgrinden i data/nyheter.js döljer den till midnatt, så den kan
 #          pushas direkt. Sedan mejlas ägaren en granskningslänk
-#          (nyheter.html?id=...&forhand=1), så att hen kan läsa och godkänna
+#          (nyheter.html?forhand=<id>), så att hen kan läsa och godkänna
 #          den under dagen.
 #    2. -Lage svar (07.45, 11.45, 15.45, 19.15, 22.15): läser ägarens
 #       mejlsvar. "OK" kvitteras, ändringar görs och pushas, "stoppa" tar
@@ -257,7 +257,7 @@ Then git add ONLY the news files and git commit on the current branch. Do NOT pu
 }
 
 function Prompt-Mejl([string]$Datum, [string]$Id, [string]$Typ) {
-    $lank   = "$Bas/nyheter.html?id=$Id&forhand=1"
+    $lank   = "$Bas/nyheter.html?forhand=$Id"
     $publik = "$Bas/nyheter.html?id=$Id"
     if ($Typ -eq 'granska') {
         $amne = "[Nyhet $Datum] Att granska: <title>"
@@ -265,7 +265,7 @@ function Prompt-Mejl([string]$Datum, [string]$Id, [string]$Typ) {
 The article is scheduled and will be published automatically at 00.00 on $Datum. Write a short review email in Swedish with:
 - one sentence saying that tomorrow's news article (weekday and date written out in Swedish) is ready and is published automatically at midnight;
 - the title in bold, the deck, the category and the reading time;
-- a prominent link "Läs artikeln i förhandsvisning" to $lank (add that it can take a few minutes after this email before the link works);
+- a prominent link "Läs artikeln i förhandsvisning" whose href is EXACTLY $lank, copied character for character (never the plain ?id= address: the article is still hidden by the date gate and that address only shows the news list). Add that it can take a few minutes after this email before the link works;
 - the utgivare's verdict for this article and, briefly, what had to be corrected (from .claude/nyheter/granskningar.md);
 - the sources (name and link for the news source and the original research);
 - this instruction, word for word: "Svara på det här mejlet med OK, eller skriv vad som ska ändras. Ändringar som kommer in före klockan 22.15 hinner göras före publiceringen. Vill du inte att artikeln publiceras, skriv stoppa. Svarar du inte publiceras den ändå."
@@ -325,7 +325,7 @@ Do NOT push and do NOT pull (the calling script pushes), and do not send any ema
 
 function Prompt-Kvittera([string]$Datum, [string]$Tradid, [string]$Id) {
     $utfall = Join-Path $LogDir 'andring-utfall.txt'
-    if ($Datum -gt $Today) { $lank = "$Bas/nyheter.html?id=$Id&forhand=1" } else { $lank = "$Bas/nyheter.html?id=$Id" }
+    if ($Datum -gt $Today) { $lank = "$Bas/nyheter.html?forhand=$Id" } else { $lank = "$Bas/nyheter.html?id=$Id" }
     return @"
 Read the file $utfall. Reply in the Gmail thread with id $Tradid (send_message with replyThreadId, to $Agare only) with a short Swedish email built from that file: what was changed or answered and, if the article still exists, a link to $lank (the change can take a few minutes to show). If line 1 is BORTTAGEN, say that the article has been removed and, if the date $Datum is still in the future, that a new article is being written and will arrive in a separate review email. No emojis, no dashes as pause markers. The last line must be exactly: FL-JOBB FL-NYHET:$Datum
 Do not change any files. Print MEJL SKICKAT when done.

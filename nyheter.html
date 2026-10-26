@@ -1562,11 +1562,16 @@
 
         function App() {
             const params = new URLSearchParams(window.location.search);
-            const id = params.get('id');
-            // Förhandsvisning (?id=…&forhand=1): visar en artikel som datumgrinden
-            // ännu håller dold, så att den kan granskas i mobilen dagen innan den
-            // publiceras. Länken finns bara i granskningsmejlet från nyhetsjobbet
-            // (.claude/nyheter/daglig-nyhet.ps1). Sidan märks noindex under tiden.
+            // ?forhand=<id> är förhandslänkens form i granskningsmejlet: en enda
+            // parameter, så att ingenting kan tappas på vägen. Mejlagenten skrev
+            // 2026-10-26 den äldre formen ?id=…&forhand=1 utan &forhand=1, och då
+            // landade ägaren i nyhetslistan i stället för i artikeln.
+            const id = params.get('id') || params.get('forhand');
+            // Förhandsvisning (?forhand=<id>, eller ?id=…&forhand=1): visar en
+            // artikel som datumgrinden ännu håller dold, så att den kan granskas i
+            // mobilen dagen innan den publiceras. Länken finns bara i
+            // granskningsmejlet från nyhetsjobbet (.claude/nyheter/daglig-nyhet.ps1).
+            // Sidan märks noindex under tiden.
             const forhand = id && params.has('forhand') && !NYHETER.some(a => a.id === id)
                 ? (window.NYHETER_ALL || []).find(a => a.id === id) : null;
             const article = id ? (NYHETER.find(a => a.id === id) || forhand) : null;

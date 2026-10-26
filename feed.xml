@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sun, 25 Oct 2026 15:53:44 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 00:28:54 GMT</lastBuildDate>
+    <item>
+      <title>Mjuka fibrer i ett vattenchip minns hur vätskan har flutit</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-26-fibrerna-som-minns-flodet</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-26-fibrerna-som-minns-flodet</guid>
+      <pubDate>Mon, 26 Oct 2026 04:00:00 GMT</pubDate>
+      <category>Strömningslära</category>
+      <description>Forskare vid Yale har placerat små böjliga fibrer i kanaler som är ungefär lika djupa som ett hårstrå är tjockt. När flödet ökar slår en fiber plötsligt över till ett nytt läge och stannar där, även när flödet minskar igen. Varje fiber blir på så sätt en liten minnescell, en etta eller en nolla, helt utan elektronik.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-26-fibrerna-som-minns-flodet.jpg" length="143040" type="image/jpeg"/>
+    </item>
     <item>
       <title>Schrödingers bortglömda manuskript visar att dold ordning i kvantvärlden inte gick att utesluta</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-25-schrodingers-glomda-manuskript</link>
@@ -177,15 +186,6 @@
       <category>Strömningslära</category>
       <description>En hjärtklaff är en mjuk ventil som stänger utan att något styr den. Forskare vid Harvard har byggt en enkel modell av den, en kon av silikon i ett vattenrör, och upptäckt att små ojämnheter i flödet får den att stänga vid omkring en tiondel av det tryck som krävs när vattnet flyter jämnt.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-07-brus-hjalper-mjuk-ventil-att-stanga.jpg" length="547552" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>SPECIAL: Nobelpriset i fysik 2026 går till Francis Halzen, som gjorde isen på Sydpolen till ett teleskop</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-06-nobelpriset-i-fysik-francis-halzen</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-06-nobelpriset-i-fysik-francis-halzen</guid>
-      <pubDate>Tue, 06 Oct 2026 04:00:00 GMT</pubDate>
-      <category>Nobelpriset</category>
-      <description>Årets Nobelpris i fysik går till belgaren Francis Halzen. Han kom på hur en kubikkilometer is under Sydpolen kan fånga neutriner, spöklika partiklar som passerar rakt genom hela jordklotet, och med observatoriet IceCube har forskarna för första gången sett neutriner som kommer från andra galaxer.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-06-nobelpriset-halzen-icecube.jpg" length="35793" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

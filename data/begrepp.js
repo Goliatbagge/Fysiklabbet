@@ -63,6 +63,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'metalins',
+    term: 'Metalins',
+    former: ['metalins', 'metalinsen', 'metalinser', 'metalinserna'],
+    kort: 'En helt platt lins som böjer ljus med ett tätt mönster av små pelare i stället för med en krökt glasyta. Pelarna är smalare än ljusets våglängd, står tätare än en våglängd och fördröjer ljusvågen olika mycket på olika ställen.',
+    relaterade: ['polarisation', 'diffraktion', 'brytningsindex'],
+    body: [
+      { type: 'p', html: 'En vanlig lins i ett par glasögon är tjockare i mitten än i kanten (eller tvärtom). Ljuset går långsammare i glas än i luft, så den del av ljusvågen som passerar den tjocka mitten blir fördröjd mer än den del som går genom kanten. Vågfronten böjs, och ljuset samlas i en brännpunkt. Det är alltså fördröjningen som gör jobbet, inte själva glaset.' },
+      { type: 'p', html: 'En metalins ger samma fördröjning på ett helt annat sätt. Ytan är täckt av miljontals små pelare, ofta av kisel, kiselnitrid eller titandioxid, som är högst omkring en tusendels millimeter höga och står tätare än ljusets våglängd. Varje pelare fördröjer ljuset som passerar den olika mycket beroende på hur tjock den är och hur den är vriden. Genom att placera rätt pelare på rätt ställe kan konstruktören forma vågen precis som en krökt lins gör, fast linsen är platt som ett frimärke. Ett sådant mönster kallas en metayta, och ”meta” syftar på att egenskaperna kommer från strukturen och inte från materialet i sig.' },
+      { type: 'p', html: 'Det fina med metalinser är att de kan göra saker som en vanlig lins inte kan. Pelarna kan till exempel reagera olika på olika polarisation, så att en och samma lins har två brännpunkter, eller på olika färger. De kan också tillverkas med samma teknik som datorchip, vilket gör dem lovande för tunna kameror i mobiltelefoner och i små medicinska instrument. Nackdelen är att de ofta bara fungerar riktigt bra för en viss våglängd.' }
+    ]
+  },
+  {
+    id: 'fotoakustisk-avbildning',
+    term: 'Fotoakustisk avbildning',
+    former: ['fotoakustisk avbildning', 'fotoakustiska avbildningen', 'fotoakustisk', 'fotoakustiskt', 'fotoakustiska', 'fotoakustiskt mikroskop', 'fotoakustisk mikroskopi', 'fotoakustik', 'fotoakustiken'],
+    kort: 'En metod att ta bilder inne i kroppen där man skickar in ljus och lyssnar efter ljud. Där ljuset absorberas värms vävnaden lite och sänder ut en svag ultraljudsvåg.',
+    relaterade: ['laser', 'metalins'],
+    body: [
+      { type: 'p', html: 'Tänk dig en svart sten som ligger i solen och blir varm. Ett mörkt föremål absorberar ljus, och energin blir till värme. Om ljuset kommer i en mycket kort blixt blir uppvärmningen plötslig: föremålet utvidgas på en bråkdel av en mikrosekund, och den snabba rörelsen skickar ut en tryckvåg, alltså ljud. Fenomenet upptäcktes redan på 1880-talet av Alexander Graham Bell, telefonens uppfinnare.' },
+      { type: 'p', html: 'I fotoakustisk avbildning används det för att se in i levande vävnad. En laser skickar korta pulser mot huden eller ögat, ofta med en färg som blodets hemoglobin absorberar bra. Varje blodkärl som träffas blir då en liten ljudkälla. Ultraljudsmottagare på ytan fångar upp ljudet, och eftersom ljudet tar längre tid på sig ju djupare det startade kan en dator räkna ut var ljudkällorna satt. Resultatet blir en tredimensionell karta över blodkärlen, utan att något kontrastmedel behöver sprutas in.' },
+      { type: 'p', html: 'Styrkan är kombinationen. Ljus sprids kraftigt i vävnad och ger därför suddiga bilder redan omkring en millimeter in, medan ultraljud sprids mycket mindre. Fotoakustiken använder ljuset bara för att välja ut vad som ska synas, och låter ljudet bära informationen ut. Tekniken prövas bland annat för att hitta tumörer, följa hur sår läker och undersöka blodkärl i ögat.' }
+    ]
+  },
+  {
+    id: 'flytande-kristall',
+    term: 'Flytande kristall',
+    former: ['flytande kristall', 'flytande kristallen', 'flytande kristaller', 'flytande kristallerna'],
+    kort: 'Ett ämne som flyter som en vätska men vars avlånga molekyler ändå pekar åt ungefär samma håll, som i en kristall. Molekylerna går att vrida med en elektrisk spänning, och det används i bildskärmar.',
+    relaterade: ['polarisation', 'dubbelbrytning'],
+    body: [
+      { type: 'p', html: 'I en vanlig vätska, som vatten, ligger molekylerna huller om buller och pekar åt alla håll. I en kristall, som salt, sitter de i ordnade rader. En flytande kristall är ett mellanting. Molekylerna är avlånga, ungefär som tändstickor, och de kan glida förbi varandra så att ämnet flyter. Men de ställer sig ändå ungefär parallellt, som tändstickorna i en ask som någon har skakat lite.' },
+      { type: 'p', html: 'Eftersom molekylerna är avlånga går ljus igenom dem olika snabbt beroende på hur ljusets fält svänger i förhållande till molekylerna. Ämnet är dubbelbrytande. Det gör att en flytande kristall kan ändra ljusets polarisation, till exempel vrida svängningsriktningen eller göra om rakt svängande ljus till ljus som vrider sig som en korkskruv. Molekylerna har dessutom en elektrisk laddningsfördelning som gör att de vrider sig när man lägger en spänning över dem, och då ändras effekten på ljuset.' },
+      { type: 'p', html: 'Det är precis så en LCD-skärm fungerar. Varje bildpunkt är en liten cell med flytande kristall mellan två polarisationsfilter, och spänningen över cellen bestämmer hur mycket ljus som släpps igenom. Samma princip används i forskning för att styra ljus elektriskt, utan några rörliga delar.' }
+    ]
+  },
+  {
     id: 'aktiv-materia',
     term: 'Aktiv materia',
     former: ['aktiv materia', 'aktiva materian'],

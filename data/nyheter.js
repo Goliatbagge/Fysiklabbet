@@ -103,6 +103,60 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-28-linsen-som-byter-fokus",
+    date: "2026-10-28",
+    title: "Platt lins växlar mellan två brännpunkter när spänningen ändras",
+    deck: "Forskare i Sydkorea har byggt en platt lins av pelare som är en tusendels millimeter höga, och den har två brännpunkter, en för vardera vridningsriktningen hos cirkulärpolariserat ljus. En flytande kristall väljer brännpunkt när spänningen ändras, och mikroskopet kan då ta skarpa bilder av blodkärl på två olika djup i ett råttöga utan att någon lins eller annan optisk del flyttas.",
+    category: "Optik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-28-linsen-som-byter-fokus.jpg",
+    imageAlt: "Illustration av ett litet genomskinligt chip med ett skimrande rutmönster i regnbågens färger, som svävar i mitten av en guldfärgad ring mot en mörkblå, suddig laboratoriebakgrund. Gröna laserstrålar går genom chipet och slutar i lysande punkter.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["optik", "lins", "metalins", "brännpunkt", "polarisation", "cirkulär polarisation", "flytande kristall", "fotoakustisk avbildning", "ultraljud", "upplösning", "diffraktion", "medicinsk fysik", "postech"],
+    sources: [
+      { name: "Phys.org: Metalens microscope switches focus with voltage, not moving optics (oktober 2026, pressmeddelande från POSTECH)", url: "https://phys.org/news/2026-10-metalens-microscope-focus-voltage-optics.html" },
+      { name: "Light: Science & Applications: studien i fulltext (öppet tillgänglig, CC BY 4.0)", url: "https://www.nature.com/articles/s41377-026-02365-8" }
+    ],
+    research: {
+      citation: "H. Kim, E. Park, J. Park, D. K. Oh, J. Shin, H. Heo, C. Kim och J. Rho, ”Electrically switchable dual-focus metalens for depth-extended in vivo photoacoustic imaging of ophthalmic vascular disease”, Light: Science & Applications 15, 369 (2026)",
+      url: "https://doi.org/10.1038/s41377-026-02365-8"
+    },
+    larare: {
+      moment: [
+        { label: "Elektromagnetiska vågor och ljus", href: "katalog.html?id=fy2-4.1" },
+        { label: "Ljus, diffraktion och interferens", href: "katalog.html?id=fy2-4.2" },
+        { label: "Ljudvågor och stående vågor i pipor", href: "katalog.html?id=fy2-2.10" }
+      ],
+      fragor: [
+        "Mikroskopet skickar in ljus men lyssnar efter ljud. Varför ger tiden det tar för ultraljudet att nå sensorn information om djupet, men inte om läget i sidled? Hur löser forskarna det andra problemet?",
+        "En lins som samlar ljuset i en bred kon ger en liten ljusfläck men ett kort skarpt område. Varför går det inte att få både en liten fläck och ett långt skarpt område med en och samma vanliga lins?",
+        "Linsen är byggd av ett material som nästan inte absorberar grönt ljus. Varför är det extra viktigt just i ett mikroskop som bygger på att ljus absorberas och blir till ljud?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Den som har fotograferat en blomma på nära håll vet att det skarpa området är tunt: ställer man in skärpan på kronbladen blir stjälken suddig. Mikroskop har samma problem, bara värre. Ju mindre detaljer en lins ska kunna visa, desto tunnare blir det skarpa skiktet, och för att se något på ett annat djup måste linsen flyttas. Nu har forskare vid Pohang University of Science and Technology, POSTECH, i Sydkorea byggt en platt lins som i stället byter brännpunkt när en liten elektrisk spänning ändras. Studien leds av Junsuk Rho och Chulhong Kim och är publicerad i tidskriften <em>Light: Science &amp; Applications</em>." },
+      { type: "h2", text: "Ljus in, ljud ut" },
+      { type: "p", html: "Linsen sitter i ett fotoakustiskt mikroskop, ett instrument som skickar in ljus men lyssnar efter ljud. En laser skjuter korta pulser av grönt ljus med våglängden 532&nbsp;nanometer, en färg som blodets hemoglobin absorberar starkt. Där ljuset absorberas värms vävnaden upp en aning under en kort stund och utvidgas, och då uppstår en liten tryckvåg, ultraljud. En ringformad sensor runt linsen fångar upp ljudet. Ljudet behöver längre tid för att nå sensorn ju längre bort det startade, så tiden avslöjar djupet. Med sambandet $\\Delta t = \\dfrac{s}{v}$ och ljudets fart i vatten, ungefär 1&nbsp;500&nbsp;m/s, tar det omkring 0,7&nbsp;mikrosekunder för ljudet att färdas en millimeter. Läget i sidled bestäms i stället av var den skarpa ljusfläcken befinner sig, och genom att provet avsöks punkt för punkt med motoriserade bord byggs en tredimensionell bild av blodkärlen upp." },
+      { type: "p", html: "Här finns haken. För att ljusfläcken ska bli liten måste ljuset samlas i en bred kon, och då blir det skarpa området kort i djupled. Blodkärl som ligger lite djupare eller grundare än brännpunkten blir suddiga. Andra forskargrupper har försökt sträcka ut fokus till en lång, smal stråle, men då sprids ljuset ut över en längre sträcka och signalen blir svagare, och ljusringar runt strålen ger falska signaler." },
+      { type: "h2", text: "En lins av små pelare" },
+      { type: "p", html: "Forskarnas lösning är en metalins, en lins som inte böjer ljuset med en krökt glasyta utan med ett tätt mönster av pelare som är smalare än ljusets våglängd och står tätare än en våglängd. Pelarna är av kiselnitrid, 1&nbsp;000&nbsp;nanometer höga och placerade 340&nbsp;nanometer från varandra, räknat från mitt till mitt, på en glasskiva. Hela linsen är mindre än en millimeter bred. Varje pelare fördröjer ljusvågen olika mycket beroende på sin form och hur den är vriden, och tillsammans formar pelarna vågen så att den samlas i en brännpunkt." },
+      { type: "p", html: "Knepet är att ljuset är cirkulärpolariserat. Det elektriska fältet i ljusvågen svänger då inte fram och tillbaka i en riktning utan vrider sig runt som en korkskruv, antingen åt höger eller åt vänster. Vridna pelare påverkar de två vridningsriktningarna på motsatt sätt, och genom att välja både form och vinkel för varje pelare kunde forskarna ge linsen två olika brännvidder. Högervridet ljus samlas i en punkt, vänstervridet ljus i en annan. Linsen är alltså egentligen två linser i en." },
+      { type: "image", src: "nyheter/bilder/2026-10-28-linsen-som-byter-fokus-2.jpg", alt: "Figur i tre delar. Överst en ritning av grönt laserljus som går genom en platta med flytande kristaller och sedan genom en lins mitt i en guldfärgad ring, och samlas i två punkter märkta F1 och F2 på olika avstånd. Nere till vänster en svartvit mikroskopbild av en rund lins med ett fint rutmönster av pelare. Nere till höger två röda bilder av blodkärlen i ett råttöga, en för vardera brännpunkten.", caption: "Överst: den flytande kristallen väljer vridningsriktning på ljuset, och linsen i ringsensorn samlar det i brännpunkten F<sub>1</sub> eller F<sub>2</sub>. Nere till vänster: linsen i elektronmikroskop, med pelarna förstorade i rutan. Nere till höger: blodkärlen i ett råttöga avbildade med de två brännpunkterna.", credit: "Bild: H. Kim med flera, Light: Science & Applications (2026), figur 1 (CC BY 4.0)" },
+      { type: "h2", text: "En flytande kristall väljer brännpunkt" },
+      { type: "p", html: "Framför linsen sitter en tunn cell med flytande kristaller, samma sorts material som finns i en vanlig bildskärm. När spänningen över cellen ändras vrider sig de avlånga molekylerna, och ljusets polarisation ändras. Vid 0,87&nbsp;volt blir ljuset högervridet och vid 1,03&nbsp;volt vänstervridet. Bytet tar ungefär en kvarts sekund." },
+      { type: "quote", html: "Genom att utnyttja att en metalins kan ha olika funktion för olika polarisation kan vi växla ett högupplöst fokus i djupled utan att flytta några optiska komponenter mekaniskt.", cite: "Junsuk Rho, POSTECH, i universitetets pressmeddelande" },
+      { type: "p", html: "I vatten, där mätningarna görs, hamnar de två brännpunkterna drygt 6 och knappt 7&nbsp;millimeter från linsen, ungefär 0,9&nbsp;millimeter från varandra. Tillsammans täcker de omkring 1,2&nbsp;millimeter i djupled. Vid brännpunkterna kan mikroskopet skilja detaljer som ligger 3,1 respektive 3,7&nbsp;mikrometer från varandra, mycket nära vad ljusets vågnatur över huvud taget tillåter med en så smal ljuskon." },
+      { type: "h2", text: "Nya blodkärl i ett skadat öga" },
+      { type: "p", html: "Forskarna provade mikroskopet på råttor vars hornhinna hade skadats med en frätande, basisk vätska. En sådan skada får nya, små blodkärl att växa in i hornhinnan, som normalt saknar blodkärl. Fjorton dagar efter skadan syntes de nya kärlen skarpt med den närmare brännpunkten, med en diameter på i genomsnitt omkring 18&nbsp;mikrometer. Med den brännpunkten såg däremot kärlen i regnbågshinnan, som ligger djupare, ut att vara omkring 42&nbsp;mikrometer breda, eftersom de var suddiga. När forskarna växlade till den bortre brännpunkten blev det tvärtom: regnbågshinnans kärl mättes till omkring 16&nbsp;mikrometer och hornhinnans till omkring 45. Mätningarna visade också att de nya kärlen bara fanns i hornhinnan." },
+      { type: "p", html: "Forskarna påpekar själva att mycket återstår. Linsen är konstruerad för att arbeta i vatten och fokuserade sämre när forskarna provade den i ett material som sprider ljuset, och för vävnad som hud och hjärna skulle linsen behöva konstrueras om. Ögat är genomskinligt, och därför ser forskarna ögonsjukdomar som ett särskilt lovande användningsområde. Mikroskopet är dessutom långsamt i dag: en bild av hela ögat tar mer än två sekunder. Med snabbare avsökning skulle det enligt forskarna gå att nå 20 bilder per sekund." },
+      { type: "fact", title: "Visste du?", items: [
+        "Linsens material, kiselnitrid, valdes så att det nästan inte absorberar det gröna ljuset. Ett lager som är en mikrometer tjockt absorberar bara ungefär 2&nbsp;procent av ljuset. Annars skulle linsen själv värmas av laserpulserna och skicka ut ultraljud.",
+        "Ultraljudssensorn är en ring av en tunn plastfilm som ger en elektrisk spänning när den trycks ihop. Linsen sitter i ett hål på 1,8&nbsp;millimeter mitt i ringen, så att ljuset och ljudet följer samma axel.",
+        "Brännpunkternas avstånd, 0,9&nbsp;millimeter, är större än en hornhinnas tjocklek, som enligt forskarna brukar vara 0,5–0,6&nbsp;millimeter. Hela hornhinnan ryms därför inom det område som kan avbildas skarpt."
+      ] }
+    ]
+  },
+  {
     id: "2026-10-27-borstrobotarna-som-svanger",
     date: "2026-10-27",
     title: "Leksaksrobotar som alltid svänger visar hur ett hinders form styr trafiken",

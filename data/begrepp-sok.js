@@ -10,6 +10,9 @@
  */
 window.BEGREPP_LATT = true;
 window.BEGREPP = [
+  {"id":"metalins","term":"Metalins","kort":"En helt platt lins som böjer ljus med ett tätt mönster av små pelare i stället för med en krökt glasyta. Pelarna är smalare än ljusets våglängd, står tätare än en våglängd och fördröjer ljusvågen olika mycket på olika ställen.","former":["metalins","metalinsen","metalinser","metalinserna"]},
+  {"id":"fotoakustisk-avbildning","term":"Fotoakustisk avbildning","kort":"En metod att ta bilder inne i kroppen där man skickar in ljus och lyssnar efter ljud. Där ljuset absorberas värms vävnaden lite och sänder ut en svag ultraljudsvåg.","former":["fotoakustisk avbildning","fotoakustiska avbildningen","fotoakustisk","fotoakustiskt","fotoakustiska","fotoakustiskt mikroskop","fotoakustisk mikroskopi","fotoakustik","fotoakustiken"]},
+  {"id":"flytande-kristall","term":"Flytande kristall","kort":"Ett ämne som flyter som en vätska men vars avlånga molekyler ändå pekar åt ungefär samma håll, som i en kristall. Molekylerna går att vrida med en elektrisk spänning, och det används i bildskärmar.","former":["flytande kristall","flytande kristallen","flytande kristaller","flytande kristallerna"]},
   {"id":"aktiv-materia","term":"Aktiv materia","kort":"Samlingar av delar som var för sig omvandlar energi till egen rörelse, som fåglar i en flock, bakterier i en svärm eller små självgående robotar.","former":["aktiv materia","aktiva materian"]},
   {"id":"kantstrom","term":"Kantström","kort":"En ström av partiklar som kretsar runt längs kanten på ett område, medan det är lugnare inne i mitten.","former":["kantström","kantströmmen","kantströmmar","kantströmmarna"]},
   {"id":"sparrhakeseffekt","term":"Spärrhakeseffekt","kort":"När en osymmetrisk form i omgivningen gör att partiklar som rör sig slumpmässigt ändå får en nettoström åt ett visst håll. Det kräver att systemet inte är i jämvikt.","former":["spärrhakeseffekt","spärrhakeseffekten","spärrhakeseffekter"]},

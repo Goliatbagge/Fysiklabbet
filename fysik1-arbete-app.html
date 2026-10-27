@@ -579,7 +579,10 @@
 
         // Dynamometern lokalt: snöre från A (origo) ut längs +x, krok, den
         // utdragna skalstången (längd ∝ F), hylsan och ringen.
-        const Dynamometer = ({ F, ls }) => {
+        // rot = vridningen (grader, SVG) som dynamometern ritas med. Pekar den
+        // åt vänster vänds texten ett halvt varv, så att den aldrig står upp och ner.
+        const Dynamometer = ({ F, ls, rot = 0 }) => {
+            const uppochner = Math.cos(rot * Math.PI / 180) < -0.01;
             const ut = STR * F;
             const xr = ls + 4;               // skalstången börjar efter kroken
             const xh = xr + ut;              // hylsan
@@ -596,7 +599,8 @@
                     {ticks}
                     <rect x={xh} y="-10" width={DB} height="20" rx="5" fill="#e5e9ee" stroke="#7b8594" strokeWidth="1.4" />
                     <rect x={xh + DB - 18} y="-10" width="8" height="20" fill="#c8324a" opacity="0.85" />
-                    <text x={xh + 30} y="4.5" fontSize="12" fontWeight="700" fill="#4b5563" fontFamily="Poppins, sans-serif" textAnchor="middle">0–20 N</text>
+                    <text x={xh + 30} y="4.5" fontSize="12" fontWeight="700" fill="#4b5563" fontFamily="Poppins, sans-serif" textAnchor="middle"
+                          transform={uppochner ? `rotate(180 ${xh + 30} 0)` : undefined}>0–20 N</text>
                 </g>
             );
         };
@@ -877,14 +881,16 @@
 
                     {/* ── Dynamometern och handen ── */}
                     <g transform={`translate(${g.A.x} ${g.A.y}) rotate(${lage === 'dra' ? -v : -90})`}>
-                        <Dynamometer F={F} ls={lage === 'dra' ? LS : LS_L} />
+                        <Dynamometer F={F} ls={lage === 'dra' ? LS : LS_L} rot={lage === 'dra' ? -v : -90} />
                         <g transform={`translate(${g.L} 0)`}><Hand /></g>
                     </g>
                     {/* dynamometerns avläsning */}
                     {(() => {
                         const mitt = (lage === 'dra' ? LS : LS_L) + 4 + STR * F + DB / 2;
-                        const nx = lage === 'dra' ? -Math.sin(v * DEG) : 1;
-                        const ny = lage === 'dra' ? -Math.cos(v * DEG) : 0;
+                        // vinkelrätt mot dynamometern, alltid på ovansidan
+                        let nx = lage === 'dra' ? -Math.sin(v * DEG) : 1;
+                        let ny = lage === 'dra' ? -Math.cos(v * DEG) : 0;
+                        if (ny > 0) { nx = -nx; ny = -ny; }
                         const px = g.A.x + g.u.x * mitt + nx * 24, py = g.A.y + g.u.y * mitt + ny * 24 + 5;
                         return <text x={px} y={py} textAnchor={lage === 'dra' ? (v > 120 ? 'start' : v > 60 ? 'end' : 'middle') : 'start'} fontSize="16" fontWeight="700"
                                      fill="#374151" fontFamily="'JetBrains Mono', monospace">{`${fmt(F, 1)} N`}</text>;

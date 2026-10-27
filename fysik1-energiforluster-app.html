@@ -653,7 +653,10 @@
 
         // Dynamometern lokalt: snöre från A (origo) ut längs +x, krok, den
         // utdragna skalstången (längd ∝ F), hylsan och ringen.
-        const Dynamometer = ({ F, ls }) => {
+        // rot = vridningen (grader, SVG) som dynamometern ritas med. Pekar den
+        // åt vänster vänds texten ett halvt varv, så att den aldrig står upp och ner.
+        const Dynamometer = ({ F, ls, rot = 0 }) => {
+            const uppochner = Math.cos(rot * Math.PI / 180) < -0.01;
             const ut = STR * F;
             const xr = ls + 4;               // skalstången börjar efter kroken
             const xh = xr + ut;              // hylsan
@@ -670,7 +673,8 @@
                     {ticks}
                     <rect x={xh} y="-10" width={DB} height="20" rx="5" fill="#e5e9ee" stroke="#7b8594" strokeWidth="1.4" />
                     <rect x={xh + DB - 18} y="-10" width="8" height="20" fill="#c8324a" opacity="0.85" />
-                    <text x={xh + 30} y="4.5" fontSize="12" fontWeight="700" fill="#4b5563" fontFamily="Poppins, sans-serif" textAnchor="middle">0–20 N</text>
+                    <text x={xh + 30} y="4.5" fontSize="12" fontWeight="700" fill="#4b5563" fontFamily="Poppins, sans-serif" textAnchor="middle"
+                          transform={uppochner ? `rotate(180 ${xh + 30} 0)` : undefined}>0–20 N</text>
                 </g>
             );
         };
@@ -764,7 +768,7 @@
                 handGrupp = (
                     <g>
                         <g transform={`translate(${A.x} ${A.y}) rotate(${180 + cfg.a1})`}>
-                            <Dynamometer F={k.F} ls={LS} />
+                            <Dynamometer F={k.F} ls={LS} rot={180 + cfg.a1} />
                             <g transform={`translate(${L} 0)`}><Hand /></g>
                         </g>
                         <text x={A.x + ux * (LS + 4 + STR * k.F + DB / 2) - uy * 26} y={A.y + uy * (LS + 4 + STR * k.F + DB / 2) + ux * 26 + 5}

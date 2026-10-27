@@ -24,4 +24,10 @@ const ut = `/* i18n/nb/manifest.js — GENERERAD av .claude/i18n/nb/bygg-manifes
 `;
 fs.mkdirSync(path.join(ROT, 'i18n', 'nb'), { recursive: true });
 fs.writeFileSync(path.join(ROT, 'i18n', 'nb', 'manifest.js'), ut);
+// Samma lista i i18n.js, som avgör vilka sidor som alls finns på norska.
+const i18nFil = path.join(ROT, 'i18n.js');
+const i18n = fs.readFileSync(i18nFil, 'utf8');
+const nyI18n = i18n.replace(/var NB_SIDOR = (?:\/\*@nb-sidor\*\/)?\[[^\]]*\];/, () => 'var NB_SIDOR = /*@nb-sidor*/' + JSON.stringify(sidor) + ';');
+if (!/var NB_SIDOR = /.test(i18n)) throw new Error('NB_SIDOR saknas i i18n.js');
+fs.writeFileSync(i18nFil, nyI18n);
 console.log('i18n/nb/manifest.js: ' + sidor.length + ' simuleringar');

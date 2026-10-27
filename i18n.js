@@ -71,9 +71,12 @@
     function sidnamn(path) {
         return (String(path).split('?')[0].split('#')[0].split('/').pop() || 'index.html').replace(/\.html$/, '');
     }
-    // Norska: alla fysiksimuleringar (fysik1-*, fysik2-*), men inte
-    // översiktssidorna fysik1.html/fysik2.html.
-    function norskSida(namn) { return /^fysik[12]-/.test(namn); }
+    // Norska: bara de simuleringar som har en norsk ordlista
+    // (i18n/nb/sidor/<sida>.js). Nya simuleringar utan ordlista visas på
+    // svenska och får inget ?lang=nb i adressen. Listan skrivs av
+    // .claude/i18n/nb/bygg-manifest.js; redigera den inte för hand.
+    var NB_SIDOR = /*@nb-sidor*/["fysik1-acceleration-tid-app","fysik1-arkimedes","fysik1-bandgenerator-app","fysik1-berg-och-dalbana","fysik1-coulombs-lag","fysik1-densitet-app","fysik1-elektriska-falt","fysik1-ellara-app","fysik1-enhetskollen","fysik1-faradays-bur","fysik1-flugan-i-bagaren-app","fysik1-flytkraft-app","fysik1-friktion-app","fysik1-halveringstid","fysik1-hastighet-tid-app","fysik1-hiss-app","fysik1-influens","fysik1-kirchhoffs-lag","fysik1-lutande-plan-app","fysik1-magdeburgska-halvklot","fysik1-massdefekt","fysik1-newtons-andra-app","fysik1-newtons-forsta-app","fysik1-newtons-gravitationslag","fysik1-newtons-tredje-app","fysik1-rorelsediagram","fysik1-serie-parallell","fysik1-sonderfall","fysik1-stracka-tid-app","fysik1-stralning-genomtranglighet","fysik1-tryck","fysik1-tryck-pa-app","fysik1-tyngdfaktor-jorden","fysik1-tyngdkraft-normalkraft","fysik1-varme-app","fysik1-vektoraddition-app","fysik2-brada-tva-stod-app","fysik2-brytning-app","fysik2-cirkular-rorelse-app","fysik2-dubbelkon-app","fysik2-dubbelspalt","fysik2-dubbelspalt-2d-app","fysik2-dubbelspalt-3d-app","fysik2-em-stralning","fysik2-energinivaer","fysik2-fotoelektrisk-effekt","fysik2-gaffelbalans-app","fysik2-hastighetsvaljare-app","fysik2-hjul-och-fjader-3d-app","fysik2-hjul-och-fjader-app","fysik2-hookes-lag-app","fysik2-induktion-app","fysik2-jordmagnetiska-faltet","fysik2-konisk-pendel","fysik2-konisk-pendel-app","fysik2-kraftmoment-app","fysik2-laddade-partiklar-app","fysik2-ledare-magnetfalt-app","fysik2-lenz-lag-app","fysik2-ljudniva-app","fysik2-magnetfalt-app","fysik2-magnetfalt-spole-app","fysik2-magnetiskt-flode","fysik2-magnetpoler-app","fysik2-magnetror-app","fysik2-manens-faser","fysik2-neutronstjarna","fysik2-pendel-3d-app","fysik2-pendel-app","fysik2-pipor-app","fysik2-pulser-vagor-app","fysik2-resonans-app","fysik2-rorelse-app","fysik2-rorelse-wrapper","fysik2-satellitbana-app","fysik2-skiftnyckel-app","fysik2-solens-farg","fysik2-solformorkelse","fysik2-spektrallinjer","fysik2-staende-vag-app","fysik2-stavmagnet-app","fysik2-svangningar-jamforelse","fysik2-svangningsgrafer-app","fysik2-svangningstid-app","fysik2-tomtebloss-app","fysik2-transformator-app","fysik2-vagsimulator","fysik2-vaxelstromsgenerator","fysik2-vinkelhastighet-app","fysik2-virvelstrommar-app","fysik2-wiens-lag"];
+    function norskSida(namn) { return NB_SIDOR.indexOf(namn) >= 0; }
     function harSprak(namn, l) {
         if (l === 'en') return AKTIVA_SIDOR.indexOf(namn) >= 0;
         if (l === 'nb') return norskSida(namn);
@@ -86,6 +89,15 @@
     if (param) spara(param);
     var onskat = param || lasSparat() || 'sv';
     var lang = harSprak(SIDA, onskat) ? onskat : 'sv';
+    // Sidan finns inte på det språk adressen ber om: ta bort ?lang=… så att
+    // adressen inte påstår något annat än det som visas.
+    if (param && param !== lang && window.history && window.history.replaceState) {
+        try {
+            var utan = new URL(window.location.href);
+            utan.searchParams.delete('lang');
+            window.history.replaceState(window.history.state, '', utan.href);
+        } catch (e) {}
+    }
     var EN = lang === 'en';
     var NB = lang === 'nb';
     var OV = EN || NB;   // sidan visas översatt

@@ -28,7 +28,7 @@ simuleringen länkas i katalogen och vars beteckningar den ska följa.
 | 4 | 3.7 Sammensatte systemer | fy1-3.10 Trissor | Två kroppar med snöre över trissa (låda på bord + hängande vikt, Atwood): friläggning av varje kropp, gemensam acceleration, spännkraften | 2D | [x] |
 | 5 | 6.3 Trykk i væsker og rør | fy1-5.3 Vätsketryck (+ 5.8 Pascals princip) | Vätsketryck mot djup, kommunicerande kärl, U-rörsmanometer och hydraulisk press | 2D | [x] |
 | 6 | 7.4 Termofysikkens første lov | fy1-6.5 Termodynamikens huvudsatser | Gas i cylinder med kolv: värme in, arbete ut, Δ*U* = *Q* − *W* (tecken enligt teorin) med partiklar som rör sig | 2D eller 3D | [x] |
-| 7 | 7.5 Energikvalitet og termofysikkens andre lov | fy1-6.5 Termodynamikens huvudsatser | Varmt och kallt i kontakt: energin sprids men går aldrig tillbaka av sig själv; värmemaskinens maximala verkningsgrad | 2D | [ ] |
+| 7 | 7.5 Energikvalitet og termofysikkens andre lov | fy1-6.5 Termodynamikens huvudsatser | Varmt och kallt i kontakt: energin sprids men går aldrig tillbaka av sig själv; värmemaskinens maximala verkningsgrad | 2D | [x] |
 | 8 | 6.5 Strømninger i rør | saknas (nytt stoff för Fysiklabbet) | Kontinuitetsekvationen (smalare rör ger högre fart), eventuellt tryckfall/Bernoulli. **Kräver bokens innehåll först** | 2D | [ ] |
 | 9 | 1.1 Å tenke fysikk | fy1-1.1 Fysik som ämne | Storleksordningar: zooma från atom till universum, uppskatta och jämföra. **Stäm av vad boken tar upp** | 2D | [ ] |
 | 10 | 1.3 Formler | fy1-1.2 Storheter, enheter och prefix | Formelverkstad: dra i storheterna och se proportionalitet, enhetskontroll, lös ut en storhet. **Stäm av vad boken tar upp** | 2D | [ ] |
@@ -137,9 +137,21 @@ Tas när del 1 och 2 är klara.
 - [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn
 - [x] Fysikgranskning och språkgranskning, rättningarna införda (värmeutbyte med rummet så att snabbt och långsamt skiljer sig, p–V-diagrammet ritar trycket mot kolven, luften ovanför kolven nämns, cykelslangen i stället för sprayflaskan)
 - [x] Sam testar och godkänner (2026-10-27)
-- [ ] Commit och push till `main`
+- [x] Commit och push till `main` (77b9a0f7)
 - [ ] Länken till Sigbjørn
 - [ ] Att göra senare: teorin i fy1-6.5 får formeln ΔU = Q + W (sätter igång uppdateringskedjan)
+
+## Status: nr 7, Energins kvalitet och andra huvudsatsen (`fysik1-andra-huvudsatsen-app.html`)
+
+- [x] Koncept godkänt (2026-10-27, `koncept-07-andra-huvudsatsen.md`): båda lägena, η_max = 1 − T_k/T_v och diagrammet över antalet sätt
+- [x] Motorn med test: `node .claude/test-varme-motor.js` (källan i `varme-motor.js`, inklistrad i sidan)
+- [x] Sidan byggd: två block som utbyter energibrickor på måfå (Einsteinkristaller, två partiklar väljs helt på måfå), temperatur över tid, antalet sätt, snabbspolning; värmemaskin och värmepump med brickor efter kvalitet; sex färdiga försök; gissa-läge
+- [x] Inkopplad: `href2` på fy1-6.5 (bredvid Gaskolven), `data/simuleringar.js` med egna namn och sökord för båda, `UPDATES`, `verify-navigation.js`
+- [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn
+- [x] Fysikgranskning och språkgranskning, rättningarna införda (blind dynamik i stället för Metropolis, fladdret förklarat, värmepumpens gräns i formelkortet, 10²⁵ atomer, entropin kan tillfälligt minska)
+- [x] Sam testar och godkänner (2026-10-27)
+- [ ] Commit och push till `main`
+- [ ] Länken till Sigbjørn
 
 ## Process för varje simulering
 

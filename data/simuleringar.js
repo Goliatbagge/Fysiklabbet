@@ -54,7 +54,12 @@ window.SIM_NAMES = {
   'fysik1-trissor-app.html': 'Sammansatta system',
   'fysik1-vatsketryck-app.html': 'Tryck i vätskor',
   'fysik1-vatsketryck-app.html?lage=pascal': 'Pascals princip: hydraulpressen',
-  'fysik1-forsta-huvudsatsen-app.html': 'Termodynamikens första huvudsats',
+  'fysik1-forsta-huvudsatsen-app.html': [
+    { name: 'Termodynamikens första huvudsats', desc: 'Värm en gas, tryck ihop den eller låt den trycka upp en kolv, och följ energin mellan värme, arbete och inre energi.',
+      kw: ['termodynamik','värme','första huvudsatsen','inre energi','arbete','gas','kolv','cykelpump','energiprincipen','ideal gas'] },
+    { name: 'Termodynamikens andra huvudsats', href: 'fysik1-andra-huvudsatsen-app.html', desc: 'Värme går från varmt till kallt: se energin spridas på måfå mellan två block, och räkna ut värmemaskinens största möjliga verkningsgrad.',
+      kw: ['termodynamik','värme','andra huvudsatsen','entropi','värmemaskin','värmepump','kylskåp','verkningsgrad','energins kvalitet','temperatur','jämvikt','nollte huvudsatsen'] },
+  ],
   'fysik1-berg-och-dalbana.html': 'Berg-och-dalbana (energiprincipen)',
   'fysik1-tryck-pa-app.html': 'Tryck och tryckkraft',
   'fysik1-magdeburgska-halvklot.html': 'Magdeburgska halvkloten',

@@ -106,6 +106,8 @@ window.SIM_NAMES = {
   'fysik2-brada-tva-stod-app.html': [
     { name: 'Brädan på två bockar', desc: 'Dra i lasten och i stöden och se stödkrafterna F_P och F_Q live. Välj vridningspunkt fritt (vid ett stöd blir dess hävarm 0) och lös ut den andra kraften med momentlagen — och se brädan välta när tyngdpunkten passerar ett stöd.',
       kw: ['krafter','moment','vridmoment','kraftmoment','momentlagen','jämvikt','vridningspunkt','stöd','stödkraft','bock','bräda','hävarm','tyngdpunkt','vältning','statik','mekanik'] },
+    { name: 'Linjalen på två fingrar', href: 'fysik2-linjalen-app.html', desc: 'Lägg en linjal på två pekfingrar och dra ihop dem: fingrarna glider växelvis och möts under tyngdpunkten. Se normalkrafterna som staplar, pröva en kvast eller ett basebollträ och se vad som händer när fingrarna dras isär.',
+      kw: ['krafter','linjal','pekfinger','fingrar','tyngdpunkt','hitta tyngdpunkten','normalkraft','friktion','vilofriktion','glidfriktion','momentlagen','kvast','basebollträ','biljardkö','stöd','statik','mekanik'] },
   ],
   'fysik2-gaffelbalans-app.html': [
     { name: 'Gaffelbalansen', desc: 'Det klassiska balanstricket i 3D: två gafflar i en kork balanserar på en nålspets mot den smala kanten av ett mynt på högkant. Knuffa till, ändra gaffelvinkeln och se varför det är så lätt — tyngdpunkten hamnar under stödpunkten.',

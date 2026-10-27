@@ -48,8 +48,8 @@ att länka till från boken.
 
 | # | Simulering | Finns i | Bokens delkapitel | Klar |
 |---|---|---|---|---|
-| 11 | Vältning (kloss som lutas tills den välter) | fy2-1.2, fy2-1.3 | 4.1 Likevekt, 4.5 Gjenstander som står på skrå | byggd, testas |
-| 12 | Linjalen på två fingrar | fy2-1.2 | 4.1 Likevekt | [ ] |
+| 11 | Vältning (kloss som lutas tills den välter) | fy2-1.2, fy2-1.3 | 4.1 Likevekt, 4.5 Gjenstander som står på skrå | [x] |
+| 12 | Linjalen på två fingrar | fy2-1.2 | 4.1 Likevekt | [x] |
 | 13 | Lodlinjen (tyngdpunkt med lod) | fy2-1.3 | 4.1 Likevekt | [ ] |
 | 14 | Numerisk modellering (kalkylbladet + stegkastet) | fy2-1.9 | 2.6 Matematisk modellering av bevegelse | [ ] |
 
@@ -161,9 +161,23 @@ Tas när del 1 och 2 är klara.
 - [x] Inkopplad: `href3` på fy2-1.3 (efter gaffelbalansen och dubbelkonen), `data/simuleringar.js` med eget namn och sökord, `UPDATES`, `verify-navigation.js`
 - [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn; gissatestet `%TEMP%\pptr-test\valt-gissa.js`
 - [x] Fysikgranskning och språkgranskning, rättningarna införda (veven går vidare under glidningen, startläget så att breda klossar står på plankan, F_N på bänken, "last" i stället för "vikt", stoppkloss vid gångjärnet, kraftvärden, gränsfallet förklarat, F_G blå)
-- [ ] Sam testar och godkänner
+- [x] Sam testar och godkänner (2026-10-27)
+- [x] Commit och push till `main` (9713e01d)
+- [ ] Länken till Sigbjørn
+
+## Status: nr 12, Linjalen på två fingrar (`fysik2-linjalen-app.html`)
+
+- [x] Koncept godkänt (2026-10-27, `koncept-12-linjalen.md`): ett μ för eleven (glidfriktion 0,3; vilofriktionen 0,5 i en fördjupningsruta), dra isär som sista försök, kvast, basebollträ och biljardkö
+- [x] Motorn med test: `node .claude/test-linjal-motor.js` (källan i `linjal-motor.js`, inklistrad i sidan)
+- [x] Sidan byggd: dra ihop och dra isär, normalkrafterna som staplar med strecket "byte", spåret längs föremålet över tiden, fyra föremål och en vikt, fem färdiga försök, gissa-läge (var möts fingrarna, vilket finger glider först)
+- [x] Inkopplad: `href2` på fy2-1.2 (efter brädan på två bockar), `data/simuleringar.js` med eget namn och sökord, `UPDATES`, `verify-navigation.js`
+- [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn; gissatestet `%TEMP%\pptr-test\lin-gissa.js`
+- [x] Fysikgranskning och språkgranskning, rättningarna införda (hävarmarna kring Q som i teorin, F_P = F_G · l_G / l_P, friktionskrafterna lika stora och gränsen som skiljer, tyngdpunkten alltid mellan fingrarna, friktionspilar med beteckning, fallets tröghetsmoment)
+- [x] Sam testar och godkänner (2026-10-27)
 - [ ] Commit och push till `main`
 - [ ] Länken till Sigbjørn
+- [x] Teorin i fy2-1.2 rättad (demonstrationen och sammanfattningen): fingret närmast tyngdpunkten *tål* större friktionskraft; krafterna är lika stora
+- [ ] Att göra: skärmläsartexten i `minisim.js` (typ linjal) säger fortfarande "därmed mindre friktion"
 
 ## Process för varje simulering
 

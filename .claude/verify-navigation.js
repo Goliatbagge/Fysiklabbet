@@ -62,6 +62,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-kraftmoment-app.html',
     'fysik2-skiftnyckel-app.html',
     'fysik2-brada-tva-stod-app.html',
+    'fysik2-linjalen-app.html',
     'fysik2-gaffelbalans-app.html',
     'fysik2-dubbelkon-app.html',
     'fysik2-valtning-app.html',

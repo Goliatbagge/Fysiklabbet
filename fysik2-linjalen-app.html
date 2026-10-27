@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linjalen på två fingrar — Fysiklabbet</title>
+    <meta name="description" content="Lägg en linjal på två pekfingrar och dra ihop dem: fingrarna glider växelvis och möts alltid under tyngdpunkten. Se normalkrafterna som staplar, pröva en kvast eller ett basebollträ, och dra isär fingrarna för att se varför tricket bara fungerar åt ena hållet.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-linjalen-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Linjalen på två fingrar — Fysik nivå 2">
+    <meta property="og:description" content="Lägg en linjal på två pekfingrar och dra ihop dem: fingrarna glider växelvis och möts alltid under tyngdpunkten. Se normalkrafterna som staplar, pröva en kvast eller ett basebollträ, och dra isär fingrarna för att se varför tricket bara fungerar åt ena hållet.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-linjalen-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Linjalen på två fingrar — Fysik nivå 2">
+    <meta name="twitter:description" content="Lägg en linjal på två pekfingrar och dra ihop dem: fingrarna glider växelvis och möts alltid under tyngdpunkten. Se normalkrafterna som staplar, pröva en kvast eller ett basebollträ, och dra isär fingrarna för att se varför tricket bara fungerar åt ena hållet.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+        input[type="range"]:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1;
+                text-align: center; max-width: 150px; }
+        .fnum { color: var(--lab-ink); font-size: 20px; font-family: 'Poppins', sans-serif; }
+        .fnum-live { color: var(--lab-ink); font-size: 17px; font-family: 'Poppins', sans-serif; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 80px; }
+        .num-in { width: 50px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:disabled { opacity: 0.55; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* Scenen: en svg med egen proportion (1000 × 660). Mobilen (sektion 8 i
+           styles-laborans-sim.css) dockar verktygen under den. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1000 / 660;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .handtag { cursor: grab; }
+        .handtag.drar { cursor: grabbing; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 34px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-start {
+            background: var(--lab-accent, #c8324a); color: #fff; border: 1px solid var(--lab-accent, #c8324a);
+            border-radius: 8px; padding: 9px 14px; font-weight: 700; cursor: pointer;
+        }
+        .btn-start:hover:not(:disabled) { filter: brightness(1.06); }
+        .btn-start:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .mode-seg { display: flex; gap: 0; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button {
+            flex: 1; padding: 8px 8px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .mode-seg button:last-child { border-right: none; }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+
+        /* Färdiga försök */
+        .forsok-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .forsok {
+            text-align: left; padding: 7px 9px; border-radius: 8px; cursor: pointer;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; font-weight: 600; color: var(--lab-ink, #0f1620); line-height: 1.25;
+        }
+        .forsok .sub { display: block; font-size: 11.5px; font-weight: 400; color: var(--lab-ink-soft, #3a4151); }
+        .forsok:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .forsok:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* Avläsning */
+        .avl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
+        .avl .v { font-weight: 700; font-size: 16px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+        .avl .l { font-size: 11.5px; color: var(--lab-ink-muted, #5a6170); }
+
+        /* Resultatrutan efter ett försök */
+        .resultat { border-left: 4px solid var(--lab-accent, #c8324a); }
+        .resultat.ratt { border-left-color: #15803d; }
+
+        /* Gissa-läget */
+        .gissa-in { width: 90px; padding: 6px 8px; border-radius: 7px; font-size: 15px;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                    background: #fff; font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .gissa-in:focus { outline: none; border-color: var(--lab-accent, #c8324a); }
+        .kort3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .kort3 button {
+            padding: 8px 6px; border-radius: 8px; cursor: pointer; text-align: center;
+            background: var(--lab-bg, #f3eee4); border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; line-height: 1.45; color: var(--lab-ink, #0f1620);
+        }
+        .kort3 button:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .kort3 button.vald { border-color: var(--lab-ink, #0f1620); box-shadow: 0 0 0 2px rgba(15,22,32,0.15); }
+        .kort3 button.basta { background: rgba(21,128,61,0.10); border-color: #15803d; }
+        .kort3 .bok { font-weight: 700; font-size: 15px; display: block; margin-bottom: 2px; }
+        .kort3 .stapel { height: 6px; border-radius: 3px; background: #d4930f; margin-top: 5px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script id="linjal-motor">
+// Motorn för Fingerbalansen (fysik2-linjalen-app.html).
+// Källan ligger här och klistras in oförändrad i sidan; testet
+// .claude/test-linjal-motor.js kontrollerar fysiken och att kopian är identisk.
+//
+// Ett avlångt föremål (linjal, kvast, basebollträ, biljardkö) med längden L
+// och massan m ligger vågrätt på två pekfingrar, P till vänster och Q till
+// höger. Föremålets egen tyngdpunkt ligger xG från vänstra änden, och en
+// extra vikt med massan mV kan ligga xV från vänstra änden. Allt mäts i meter
+// längs bänken (labbets x), och X är föremålets vänstra ände.
+//
+// Normalkrafterna följer av kraft- och momentjämvikt. Med lP och lQ som
+// fingrarnas avstånd till tyngdpunkten ger momentlagen kring Q
+//     F_P · (lP + lQ) = F_G · lQ,  alltså  F_P = F_G · lQ / (lP + lQ),
+// och på samma sätt F_Q = F_G · lP / (lP + lQ).
+//
+// Friktionen: ett finger som glider mot föremålet ger glidfriktionen MU · F_N.
+// Ett finger som sitter fast kan ge högst vilofriktionen MU_VILA · F_N, och
+// MU_VILA är något större än MU (så som det är för hud mot trä). Föremålet
+// rör sig långsamt och utan acceleration, så friktionen från det fasta
+// fingret är lika stor som glidfriktionen från det andra. Det fasta fingret
+// släpper när MU · F_N(glider) > MU_VILA · F_N(fast), och då byter fingrarna
+// roll. Är normalkrafterna exakt lika avgör minsta ojämnhet vilket finger som
+// glider först; här börjar Q glida (som när man gör försöket själv).
+//
+// Dras fingrarna isär glider hela tiden fingret längst bort från
+// tyngdpunkten: dess normalkraft blir bara mindre, så det byter aldrig roll.
+// När det har glidit av änden vilar föremålet på ett finger utanför
+// tyngdpunkten och faller (rotation kring fingret, som en stav).
+(function () {
+    const G = 9.82;
+    const MU = 0.3;          // glidfriktion, det tal eleven ser
+    const MU_VILA = 0.5;     // vilofriktion, tydligt större (hud mot trä)
+    const FINGER = 0.056;     // avståndet mellan fingrarnas mitt när de möts (fingrarnas tjocklek)
+
+    function tp(c) {
+        const M = c.m + c.mV;
+        return { M, xT: (c.m * c.xG + c.mV * c.xV) / M };
+    }
+    // krafterna i det aktuella läget (N); l mäts från fingret till tyngdpunkten
+    function krafter(c, st) {
+        const t = tp(c), FG = t.M * G;
+        const xT = st.X + t.xT;
+        const lP = xT - st.pP, lQ = st.pQ - xT;
+        const FP = FG * lQ / (lP + lQ), FQ = FG * lP / (lP + lQ);
+        // friktionen: det glidande fingret ger MU · F_N, det fasta lika mycket åt andra hållet
+        let fP = 0, fQ = 0;
+        if (st.fas === 'dra') {
+            if (st.fast === 'P') { fQ = MU * FQ; fP = fQ; }
+            else if (st.fast === 'Q') { fP = MU * FP; fQ = fP; }
+            else { fP = MU * FP; fQ = MU * FQ; }
+        }
+        return { FG, FP, FQ, lP, lQ, xT, fP, fQ };
+    }
+
+    function nytt(c, pP, pQ, X) {
+        return { pP, pQ, X, fast: null, fas: 'vila', riktning: 1, t: 0, byten: 0, spar: [], vinkel: 0, omega: 0, pivot: null, sistSpar: -1 };
+    }
+    function vemFast(c, st) {
+        const k = krafter(c, st);
+        if (Math.abs(k.FP - k.FQ) < 1e-9 * k.FG) return 'P';
+        return k.FP > k.FQ ? 'P' : 'Q';
+    }
+    // riktning 1: ihop, −1: isär
+    function starta(c, st, riktning) {
+        st.riktning = riktning; st.fas = 'dra';
+        st.fast = vemFast(c, st);
+        st.spar = [{ t: 0, pP: st.pP, pQ: st.pQ, X: st.X, xT: krafter(c, st).xT, fast: st.fast }];
+        st.t = 0; st.byten = 0; st.sistSpar = 0;
+    }
+
+    function steg(st, c, dt, fart) {
+        const n = Math.max(1, Math.ceil(dt / 0.001)), h = dt / n;
+        for (let i = 0; i < n; i++) {
+            if (st.fas === 'dra') {
+                const d = st.riktning * fart * h;
+                st.pP += d; st.pQ -= d;
+                if (st.fast === 'P') st.X += d;
+                else if (st.fast === 'Q') st.X -= d;
+                const k = krafter(c, st);
+                const fore = st.fast;
+                if (st.fast === 'P' && MU * k.FQ > MU_VILA * k.FP) st.fast = 'Q';
+                else if (st.fast === 'Q' && MU * k.FP > MU_VILA * k.FQ) st.fast = 'P';
+                else if (st.fast === 'båda' && Math.abs(k.FP - k.FQ) > 1e-6 * k.FG) st.fast = k.FP > k.FQ ? 'P' : 'Q';
+                if (fore !== st.fast && fore !== 'båda') st.byten++;
+                st.t += h;
+                if (st.t - st.sistSpar >= 0.02) { st.spar.push({ t: st.t, pP: st.pP, pQ: st.pQ, X: st.X, xT: k.xT, fast: st.fast }); st.sistSpar = st.t; }
+                if (st.riktning > 0 && st.pQ - st.pP <= FINGER) {
+                    st.fas = 'mott'; st.spar.push({ t: st.t, pP: st.pP, pQ: st.pQ, X: st.X, xT: k.xT, fast: st.fast });
+                } else if (st.riktning < 0) {
+                    // ett finger har glidit av änden: föremålet vilar på det andra och faller
+                    const avP = st.pP < st.X, avQ = st.pQ > st.X + c.L;
+                    if (avP || avQ) {
+                        st.fas = 'faller'; st.pivot = avP ? st.pQ : st.pP; st.vinkel = 0; st.omega = 0;
+                        st.spar.push({ t: st.t, pP: st.pP, pQ: st.pQ, X: st.X, xT: k.xT, fast: st.fast });
+                    }
+                }
+            } else if (st.fas === 'faller') {
+                // stav som roterar kring fingret; positiv vinkel: tyngdpunktens sida går nedåt
+                const t = tp(c), xT = st.X + t.xT, d = Math.abs(xT - st.pivot);
+                // stav kring fingret, vikten som en punktmassa
+                const xP = st.pivot - st.X;
+                const I = c.m * c.L * c.L / 12 + c.m * (c.xG - xP) ** 2 + c.mV * (c.xV - xP) ** 2;
+                st.omega += t.M * G * d * Math.cos(st.vinkel) / I * h;
+                st.vinkel += st.omega * h;
+                if (st.vinkel >= 0.9) { st.vinkel = 0.9; st.fas = 'fallen'; }
+            }
+        }
+        return st;
+    }
+
+    // De färdiga föremålen. xG från vänstra änden; det tunga ligger till höger.
+    const FOREMAL = {
+        linjal: { namn: 'Linjal', L: 1.00, m: 0.15, xG: 0.50 },
+        kvast:  { namn: 'Kvast', L: 1.30, m: 0.60, xG: 0.85 },
+        bat:    { namn: 'Basebollträ', L: 0.84, m: 0.90, xG: 0.56 },
+        ko:     { namn: 'Biljardkö', L: 1.45, m: 0.55, xG: 1.00 },
+    };
+
+    const ut = { G, MU, MU_VILA, FINGER, FOREMAL, tp, krafter, nytt, starta, steg };
+    if (typeof window !== 'undefined') window.LinjalMotor = ut;
+    if (typeof module !== 'undefined') module.exports = ut;
+})();
+</script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const M = window.LinjalMotor;
+
+        // ── Talformat: decimalkomma, äkta minustecken, exakt noll som "0" ──
+        const fmt = (num, d = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+
+        // Ren text med variabler i kursiv: F_P, l_Q, m, μ.
+        const Fx = ({ text }) => {
+            const delar = [];
+            const re = /(?<![\p{L}\d])([Flm])_([\p{L}\d]+)|(?<![\p{L}\d])([μm])(?![\p{L}\d])/gu;
+            let sist = 0, mm, n = 0;
+            while ((mm = re.exec(text))) {
+                if (mm.index > sist) delar.push(text.slice(sist, mm.index));
+                if (mm[1]) delar.push(<span key={n++}><em>{mm[1]}</em><sub>{mm[2]}</sub></span>);
+                else delar.push(<em key={n++}>{mm[3]}</em>);
+                sist = re.lastIndex;
+            }
+            delar.push(text.slice(sist));
+            return <React.Fragment>{delar}</React.Fragment>;
+        };
+        const Brak = ({ t, n }) => (
+            <span style={{ display: 'inline-flex', flexDirection: 'column', verticalAlign: 'middle', textAlign: 'center',
+                           lineHeight: 1.05, fontSize: '0.92em', margin: '0 3px' }}>
+                <span style={{ padding: '0 2px 1px' }}>{t}</span>
+                <span style={{ padding: '1px 2px 0', borderTop: '1.5px solid currentColor' }}>{n}</span>
+            </span>
+        );
+        const Sub = ({ s, i }) => <span><em>{s}</em><sub>{i}</sub></span>;
+
+        const COL = {
+            ink:   '#0f1620',
+            soft:  'rgba(15,22,32,0.7)',
+            tyngd: '#2563c9',
+            norm:  '#0d9488',
+            frik:  '#e0701a',
+            tp:    '#2e9e4f',
+            P:     '#7c3aed',
+            Q:     '#c8324a',
+            fast:  '#15803d',
+            glid:  '#c2410c',
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  SCENENS GEOMETRI (viewBox 1000 × 660)
+        // ════════════════════════════════════════════════════════
+        const VB_W = 1000, VB_H = 660;
+        const SK = 500;                      // px per meter
+        const X0 = 50, LAB_L = 1.5;          // labbets x = 0 i px 50, och 1,5 m brett
+        const Y_OBJ = 190;                   // föremålets mittlinje
+        const px = (x) => X0 + x * SK;
+        const startX = (L) => (LAB_L - L) / 2;
+        // Spåret under scenen
+        const SP_Y0 = 438, SP_Y1 = 640;
+
+        // Föremålens halva tjocklek i px längs föremålet (s i meter från vänstra änden)
+        function radie(id, s, L) {
+            if (id === 'linjal') return 8;
+            if (id === 'kvast') return 5.5;
+            if (id === 'bat') {
+                if (s < 0.025) return 9;
+                if (s < 0.33) return 6;
+                if (s < 0.66) return 6 + 10 * (s - 0.33) / 0.33;
+                return 16;
+            }
+            return 3.6 + 5.4 * s / L;         // biljardkön: smal spets till vänster
+        }
+        // där fingrarna får ligga (m från vänstra änden)
+        const stodOmrade = (id, L) => id === 'kvast' ? [0.02, 0.99] : [0.015, L - 0.015];
+
+        // ════════════════════════════════════════════════════════
+        //  RITDELAR
+        // ════════════════════════════════════════════════════════
+        // ════════════════════════════════════════════════════════
+        //  RITDELAR
+        // ════════════════════════════════════════════════════════
+        // Pil med rakt avslutat skaft som slutar vid huvudets bas.
+        const Pil = ({ x1, y1, x2, y2, color, width = 4.5, head = 15, dash = false, edge = false, opacity = 1 }) => {
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 2) return null;
+            const ux = (x2 - x1) / len, uy = (y2 - y1) / len;
+            const hd = Math.min(head, len * 0.9);
+            const bx = x2 - ux * hd, by = y2 - uy * hd;
+            const hw = hd * 0.48;
+            const p1 = `${bx - uy * hw},${by + ux * hw}`;
+            const p2 = `${bx + uy * hw},${by - ux * hw}`;
+            const kant = 'rgba(15,22,32,0.5)';
+            return (
+                <g opacity={opacity}>
+                    {edge && <line x1={x1} y1={y1} x2={bx} y2={by} stroke={kant} strokeWidth={width + 3} strokeLinecap="butt" />}
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="butt" strokeDasharray={dash ? '7 5' : undefined} />
+                    <polygon points={`${x2},${y2} ${p1} ${p2}`} fill={color}
+                             stroke={edge ? kant : 'none'} strokeWidth={edge ? 1.6 : 0} strokeLinejoin="round" />
+                </g>
+            );
+        };
+
+        // Beteckning med index: F, Fₛ, F₁ … Variabeln kursiv, indexet rakt.
+        const Bet = ({ x, y, sym, idx, color, size = 18, anchor = 'start', weight = 600 }) => (
+            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}
+                  fontFamily="Poppins, sans-serif">
+                <tspan fontStyle="italic">{sym}</tspan>
+                {idx != null && <tspan fontSize={size * 0.68} dy={size * 0.25}>{idx}</tspan>}
+            </text>
+        );
+
+        // Föremålet ritat i lokala koordinater: x = 0 i vänstra änden, y = 0 på mittlinjen.
+        const Foremal = ({ id, L, visaSkala }) => {
+            const w = L * SK;
+            if (id === 'linjal') {
+                const ticks = [];
+                for (let cm = 0; cm <= 100; cm++) {
+                    const x = cm * SK / 100, lang = cm % 10 === 0 ? 8 : cm % 5 === 0 ? 5.5 : 3;
+                    ticks.push(<line key={cm} x1={x} y1={-8} x2={x} y2={-8 + lang} stroke="#5b4220" strokeWidth={cm % 10 === 0 ? 1.1 : 0.7} />);
+                    if (visaSkala && cm % 10 === 0 && cm > 0 && cm < 100) ticks.push(<text key={'t' + cm} x={x} y={6.5} textAnchor="middle" fontSize="8" fill="#5b4220">{cm}</text>);
+                }
+                return (
+                    <g>
+                        <rect x={0} y={-8} width={w} height={16} rx="1.5" fill="#e8c983" stroke="#8a6427" strokeWidth="1.2" />
+                        {ticks}
+                    </g>
+                );
+            }
+            if (id === 'kvast') {
+                const sx = 1.0 * SK;
+                return (
+                    <g>
+                        <rect x={0} y={-5.5} width={sx} height={11} rx="5" fill="#c9965a" stroke="#7a5326" strokeWidth="1.2" />
+                        <rect x={6} y={-2} width={sx - 12} height={2} fill="#e0b47a" opacity="0.6" />
+                        {/* borsthållaren och borsten */}
+                        <rect x={sx - 4} y={-16} width={0.08 * SK} height={32} rx="4" fill="#b23b3b" stroke="#6d1f1f" strokeWidth="1.2" />
+                        {Array.from({ length: 15 }, (_, i) => {
+                            const y = -14 + i * 2, x1 = sx + 0.075 * SK;
+                            return <line key={i} x1={x1} y1={y} x2={w} y2={y * 1.9} stroke="#c9a23a" strokeWidth="1.6" strokeLinecap="round" />;
+                        })}
+                    </g>
+                );
+            }
+            if (id === 'bat') {
+                const pts = [];
+                for (let i = 0; i <= 80; i++) { const s = (i / 80) * L; pts.push([s * SK, radie('bat', s, L)]); }
+                const ovre = pts.map(([x, r]) => `${x},${-r}`).join(' ');
+                const undre = pts.slice().reverse().map(([x, r]) => `${x},${r}`).join(' ');
+                return (
+                    <g>
+                        <polygon points={`${ovre} ${undre}`} fill="#d8b07a" stroke="#7a5326" strokeWidth="1.2" strokeLinejoin="round" />
+                        <rect x={0.04 * SK} y={-6} width={0.22 * SK} height={12} fill="#2b2b2b" opacity="0.75" />
+                        <path d={`M ${0.7 * SK} ${-11} L ${0.8 * SK} ${-11}`} stroke="#f1d9ae" strokeWidth="2" opacity="0.7" />
+                    </g>
+                );
+            }
+            // biljardkön
+            const pts = [];
+            for (let i = 0; i <= 40; i++) { const s = (i / 40) * L; pts.push([s * SK, radie('ko', s, L)]); }
+            const ovre = pts.map(([x, r]) => `${x},${-r}`).join(' ');
+            const undre = pts.slice().reverse().map(([x, r]) => `${x},${r}`).join(' ');
+            const xb = 1.0 * SK;
+            return (
+                <g>
+                    <polygon points={`${ovre} ${undre}`} fill="#e6c48c" stroke="#7a5326" strokeWidth="1.1" strokeLinejoin="round" />
+                    <polygon points={`${xb},${-radie('ko', 1.0, L)} ${w},${-radie('ko', L, L)} ${w},${radie('ko', L, L)} ${xb},${radie('ko', 1.0, L)}`} fill="#3b2314" />
+                    <rect x={0} y={-3.6} width={0.025 * SK} height={7.2} fill="#f5f5f0" stroke="#7a5326" strokeWidth="0.8" />
+                    <rect x={-3} y={-3.2} width={3} height={6.4} fill="#2f5d8a" />
+                </g>
+            );
+        };
+
+        // Handen som en pistol, sedd framifrån: pekfingret pekar rakt fram (in i
+        // bilden), så vi ser fingertoppen som en platt ellips med föremålet
+        // vilande ovanpå. Under den sitter de andra fingrarna inböjda och
+        // underarmen. sida = −1: vänster hand (P), 1: höger hand (Q).
+        // (x, y) är punkten där fingret möter föremålets undersida.
+        const Hand = ({ x, y, sida, onDown, aktiv, glider, rikt }) => {
+            const bx = x + sida * 7;             // handens mitt, lite utåt
+            const cy = y + 9;                    // fingertoppens mitt
+            return (
+                <g style={{ cursor: aktiv ? 'grab' : 'default' }} onPointerDown={onDown}>
+                    {/* underarmen */}
+                    <path d={`M ${bx - 15} ${y + 128} L ${bx - 13} ${y + 78} L ${bx + 13} ${y + 78} L ${bx + 15} ${y + 128} Z`}
+                          fill="#dfa982" stroke="#a36a45" strokeWidth="1.4" strokeLinejoin="round" />
+                    {/* handen med de inböjda fingrarna (långfinger, ringfinger, lillfinger) */}
+                    <rect x={bx - 19} y={y + 16} width="38" height="66" rx="15" fill="#e7b48f" stroke="#a36a45" strokeWidth="1.4" />
+                    {[0, 1, 2].map((i) => (
+                        <path key={i} d={`M ${bx - 15} ${y + 38 + i * 13} Q ${bx} ${y + 44 + i * 13} ${bx + 15} ${y + 38 + i * 13}`}
+                              fill="none" stroke="#a36a45" strokeWidth="1.2" opacity="0.75" />
+                    ))}
+                    {/* tummen längs handens yttre sida, uppåt */}
+                    <path d={`M ${bx + sida * 17} ${y + 62} Q ${bx + sida * 24} ${y + 40} ${bx + sida * 19} ${y + 22}`}
+                          fill="none" stroke="#a36a45" strokeWidth="10" strokeLinecap="round" />
+                    <path d={`M ${bx + sida * 17} ${y + 62} Q ${bx + sida * 24} ${y + 40} ${bx + sida * 19} ${y + 22}`}
+                          fill="none" stroke="#e7b48f" strokeWidth="7.4" strokeLinecap="round" />
+                    {/* pekfingrets topp, sedd rakt framifrån */}
+                    <ellipse cx={x} cy={cy} rx="13" ry="10" fill="#ecbc98" stroke="#a36a45" strokeWidth="1.5" />
+                    <path d={`M ${x - 8} ${cy + 3} Q ${x} ${cy + 8} ${x + 8} ${cy + 3}`} fill="none" stroke="rgba(163,106,69,0.5)" strokeWidth="1.4" />
+                    <path d={`M ${x - 8} ${cy - 2} Q ${x - 5} ${cy - 6} ${x} ${cy - 6}`} fill="none" stroke="rgba(255,240,220,0.85)" strokeWidth="1.8" strokeLinecap="round" />
+                    {/* rörelsestrimmor när fingret glider mot föremålet */}
+                    {glider && [0, 1, 2].map((k) => {
+                        const yy = y + 4 + k * 6, x0 = x - rikt * (17 + k * 3);
+                        return <line key={k} x1={x0} y1={yy} x2={x0 - rikt * (12 - k * 2)} y2={yy} stroke="rgba(15,22,32,0.45)" strokeWidth="1.6" strokeLinecap="round" />;
+                    })}
+                </g>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  SCENEN
+        // ════════════════════════════════════════════════════════
+        const Scen = ({ c, id, st, show, svgRef, flyttaFinger, vila, doljTp, tMax, dolj }) => {
+            const k = M.krafter(c, st);
+            const t = M.tp(c);
+            const X = st.X;
+            const sP = st.pP - X, sQ = st.pQ - X;
+            const yP = Y_OBJ + radie(id, Math.max(0, Math.min(c.L, sP)), c.L), yQ = Y_OBJ + radie(id, Math.max(0, Math.min(c.L, sQ)), c.L);
+            const faller = st.fas === 'faller' || st.fas === 'fallen';
+            // fallet: rotation kring det finger som är kvar, åt tyngdpunktens sida
+            let rot = '';
+            if (faller) {
+                const piv = px(st.pivot), py = st.pivot === st.pP ? yP : yQ;
+                const sgn = (X + t.xT) > st.pivot ? 1 : -1;
+                rot = `rotate(${sgn * st.vinkel * 180 / Math.PI} ${piv} ${py})`;
+            }
+            const FSK = 80 / k.FG;
+            const visaKr = show.krafter && !faller && !dolj;
+            const xTpx = px(k.xT);
+            const tpSyns = show.tp || st.fas === 'mott' || faller;
+            const gl = (f) => st.fas === 'dra' && (st.fast === 'båda' || st.fast !== f);
+            const dra = (f) => (e) => {
+                if (!vila) return;
+                const svg = svgRef.current; if (!svg) return;
+                e.preventDefault();
+                const flytta = (ev) => {
+                    const pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY;
+                    const q = pt.matrixTransform(svg.getScreenCTM().inverse());
+                    flyttaFinger(f, (q.x - X0) / SK - X);
+                };
+                const slapp = () => { window.removeEventListener('pointermove', flytta); window.removeEventListener('pointerup', slapp); };
+                window.addEventListener('pointermove', flytta);
+                window.addEventListener('pointerup', slapp);
+            };
+            const mxP = c.mV > 0 ? px(X + c.xV) : null;
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet" role="img"
+                     aria-label="Ett avlångt föremål vilar på två pekfingrar. När fingrarna dras ihop glider de växelvis och möts under tyngdpunkten. Normalkrafterna visas som staplar, och ett spår visar fingrarnas lägen över tiden.">
+                    <defs>
+                        <linearGradient id="vagg" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#f7f2e8" /><stop offset="1" stopColor="#ece3d2" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width={VB_W} height={VB_H} fill="url(#vagg)" />
+                    <g fontFamily="Poppins, sans-serif">
+                        {/* händerna */}
+                        <Hand x={px(st.pP)} y={yP} sida={-1} onDown={dra('P')} aktiv={vila} glider={gl('P')} rikt={st.riktning} />
+                        <Hand x={px(st.pQ)} y={yQ} sida={1} onDown={dra('Q')} aktiv={vila} glider={gl('Q')} rikt={-st.riktning} />
+                        {/* föremålet */}
+                        <g transform={rot}>
+                            <g transform={`translate(${px(X)} ${Y_OBJ})`}><Foremal id={id} L={c.L} visaSkala /></g>
+                            {c.mV > 0 && <rect x={mxP - 9} y={Y_OBJ - 30} width="18" height="22" rx="2" fill="#b08d2e" stroke="#6b5410" strokeWidth="1.2" />}
+                            {tpSyns && !doljTp && <circle cx={xTpx} cy={Y_OBJ} r="5.5" fill={COL.tp} stroke="#14532d" strokeWidth="1.2" />}
+                        </g>
+                        {/* krafterna på föremålet, skalenliga */}
+                        {visaKr && (
+                            <g>
+                                {tpSyns && !doljTp && <Pil x1={xTpx} y1={Y_OBJ} x2={xTpx} y2={Y_OBJ + k.FG * FSK} color={COL.tyngd} width={4} edge />}
+                                {tpSyns && !doljTp && <line x1={xTpx + 3} y1={Y_OBJ + k.FG * FSK - 14} x2={xTpx + 52} y2={Y_OBJ + k.FG * FSK - 14} stroke={COL.tyngd} strokeWidth="1" opacity="0.6" />}
+                                {tpSyns && !doljTp && <Bet x={xTpx + 56} y={Y_OBJ + k.FG * FSK - 8} sym="F" idx="G" color={COL.tyngd} size={17} />}
+                                <Pil x1={px(st.pP)} y1={yP} x2={px(st.pP)} y2={yP - k.FP * FSK} color={COL.norm} width={4} edge />
+                                <Bet x={px(st.pP) - 8} y={yP - k.FP * FSK - 6} sym="F" idx="P" color={COL.norm} size={17} anchor="end" />
+                                <Pil x1={px(st.pQ)} y1={yQ} x2={px(st.pQ)} y2={yQ - k.FQ * FSK} color={COL.norm} width={4} edge />
+                                <Bet x={px(st.pQ) + 8} y={yQ - k.FQ * FSK - 6} sym="F" idx="Q" color={COL.norm} size={17} />
+                                {st.fas === 'dra' && k.fP > 0.002 && <Pil x1={px(st.pP)} y1={yP} x2={px(st.pP) + st.riktning * k.fP * FSK * 2} y2={yP} color={COL.frik} width={3.5} head={11} edge />}
+                                {st.fas === 'dra' && k.fP > 0.002 && <Bet x={px(st.pP) + st.riktning * (k.fP * FSK * 2 + 4)} y={yP + 22} sym="F" idx="f" color={COL.frik} size={15} anchor={(+st.riktning) > 0 ? 'start' : 'end'} />}
+                                {st.fas === 'dra' && k.fQ > 0.002 && <Pil x1={px(st.pQ)} y1={yQ} x2={px(st.pQ) - st.riktning * k.fQ * FSK * 2} y2={yQ} color={COL.frik} width={3.5} head={11} edge />}
+                                {st.fas === 'dra' && k.fQ > 0.002 && <Bet x={px(st.pQ) - st.riktning * (k.fQ * FSK * 2 + 4)} y={yQ + 22} sym="F" idx="f" color={COL.frik} size={15} anchor={(-st.riktning) > 0 ? 'start' : 'end'} />}
+                            </g>
+                        )}
+                        {/* fingrarnas namn och om de glider */}
+                        {[['P', st.pP, yP], ['Q', st.pQ, yQ]].map(([f, p, y]) => (
+                            <text key={f} x={px(p) + (f === 'P' ? -56 : 56)} y={y + 38} textAnchor="middle" fontSize="17" fontWeight="700" fill={COL[f]}>{f}</text>
+                        ))}
+                        {st.fas === 'dra' && [['P', st.pP, yP], ['Q', st.pQ, yQ]].map(([f, p, y]) => (
+                            <text key={'s' + f} x={px(p) + (f === 'P' ? -56 : 56)} y={y + 58} textAnchor="middle" fontSize="12.5" fontWeight="600"
+                                  fill={gl(f) ? COL.glid : COL.fast}>{gl(f) ? 'glider' : 'fast'}</text>
+                        ))}
+                        {st.fas === 'mott' && <text x={xTpx} y={Y_OBJ - 58} textAnchor="middle" fontSize="16" fontWeight="700" fill={COL.tp}>Fingrarna möts under tyngdpunkten</text>}
+                        {faller && <text x={px(LAB_L / 2)} y={70} textAnchor="middle" fontSize="16" fontWeight="700" fill={COL.Q}>Ett finger har glidit av änden, och föremålet faller</text>}
+
+                        {/* normalkrafterna som staplar */}
+                        {(() => {
+                            const x0 = 850, yb = 420, hMax = 200;
+                            const sk = hMax / k.FG;
+                            const fastF = st.fas === 'dra' && st.fast !== 'båda' ? st.fast : null;
+                            const grans = fastF ? (fastF === 'P' ? k.FP : k.FQ) * M.MU_VILA / M.MU : null;
+                            const bar = (f, F, x) => (
+                                <g key={f}>
+                                    <rect x={x} y={yb - F * sk} width="38" height={Math.max(0, F * sk)} fill={COL.norm} opacity={gl(f) ? 0.45 : 0.9} />
+                                    <text x={x + 19} y={yb + 20} textAnchor="middle" fontSize="15" fontWeight="700" fill={COL[f]}>{f}</text>
+                                    <text x={x + 19} y={yb - F * sk - 7} textAnchor="middle" fontSize="12" fill={COL.ink}>{fmt(F, 2)} N</text>
+                                </g>
+                            );
+                            if (dolj) return <text x={x0 - 12} y={yb - hMax - 40} fontSize="13" fill={COL.soft}>Svara först.</text>;
+                            if (faller) return <g><text x={x0 - 12} y={yb - hMax - 40} fontSize="13" fill={COL.soft}>Bara ett finger bär.</text><text x={x0 - 12} y={yb - hMax - 22} fontSize="13" fill={COL.soft}>Tyngdpunkten ligger</text><text x={x0 - 12} y={yb - hMax - 4} fontSize="13" fill={COL.soft}>utanför det.</text></g>;
+                            return (
+                                <g>
+                                    <text x={x0 - 12} y={yb - hMax - 40} fontSize="14" fontWeight="600" fill={COL.ink}>Normalkrafterna</text>
+                                    <line x1={x0 - 8} y1={yb} x2={x0 + 118} y2={yb} stroke={COL.ink} strokeWidth="1.2" />
+                                    <line x1={x0 - 8} y1={yb - hMax} x2={x0 + 118} y2={yb - hMax} stroke={COL.tyngd} strokeWidth="1" strokeDasharray="3 3" opacity="0.7" />
+                                    <text x={x0 + 120} y={yb - hMax + 4} fontSize="11" fill={COL.tyngd}><tspan fontStyle="italic">F</tspan><tspan fontSize="8" dy="2">G</tspan></text>
+                                    {bar('P', k.FP, x0)}
+                                    {bar('Q', k.FQ, x0 + 66)}
+                                    {grans != null && grans * sk < hMax + 30 && (
+                                        <g>
+                                            <line x1={(fastF === 'P' ? x0 + 66 : x0) - 4} y1={yb - grans * sk} x2={(fastF === 'P' ? x0 + 66 : x0) + 42} y2={yb - grans * sk}
+                                                  stroke={COL.glid} strokeWidth="2" strokeDasharray="5 3" />
+                                            <text x={(fastF === 'P' ? x0 + 66 : x0) + 46} y={yb - grans * sk + 4} textAnchor="start" fontSize="11" fontWeight="600" fill={COL.glid}>byte</text>
+                                        </g>
+                                    )}
+                                    <text x={x0 - 12} y={yb + 44} fontSize="12" fill={COL.soft}>Fingret med minst</text>
+                                    <text x={x0 - 12} y={yb + 60} fontSize="12" fill={COL.soft}>normalkraft glider.</text>
+                                </g>
+                            );
+                        })()}
+
+                        {/* spåret: fingrarnas lägen över tiden, rakt under scenen */}
+                        {show.spar && (() => {
+                            const sk = (SP_Y1 - SP_Y0 - 14) / Math.max(1, tMax);
+                            // lägena längs föremålet, ritade under föremålets startläge
+                            const X1 = st.spar.length ? st.spar[0].X : st.X;
+                            const linje = (nyckel) => st.spar.map((p) => `${px(X1 + p[nyckel] - p.X)},${SP_Y0 + 10 + p.t * sk}`).join(' ');
+                            const sista = st.spar[st.spar.length - 1];
+                            return (
+                                <g>
+                                    <line x1={X0} y1={SP_Y0} x2={px(LAB_L)} y2={SP_Y0} stroke={COL.ink} strokeWidth="1" opacity="0.4" />
+                                    <line x1={X0 - 16} y1={SP_Y0 + 4} x2={X0 - 16} y2={SP_Y1 - 6} stroke={COL.ink} strokeWidth="1.2" />
+                                    <polygon points={`${X0 - 16},${SP_Y1} ${X0 - 20},${SP_Y1 - 8} ${X0 - 12},${SP_Y1 - 8}`} fill={COL.ink} />
+                                    <text x={X0 - 22} y={SP_Y1 - 4} textAnchor="end" fontSize="12" fill={COL.soft} transform={`rotate(-90 ${X0 - 22} ${SP_Y1 - 4})`}>tid</text>
+                                    <text x={X0} y={SP_Y0 - 8} fontSize="13" fontWeight="600" fill={COL.ink}>Var fingrarna ligger längs föremålet, med tiden nedåt</text>
+                                    {st.spar.length > 1 && (
+                                        <g>
+                                            {tpSyns && !doljTp && <polyline points={linje('xT')} fill="none" stroke={COL.tp} strokeWidth="1.6" strokeDasharray="5 4" />}
+                                            <polyline points={linje('pP')} fill="none" stroke={COL.P} strokeWidth="2.4" strokeLinejoin="round" />
+                                            <polyline points={linje('pQ')} fill="none" stroke={COL.Q} strokeWidth="2.4" strokeLinejoin="round" />
+                                            <circle cx={px(X1 + sista.pP - sista.X)} cy={SP_Y0 + 10 + sista.t * sk} r="3.5" fill={COL.P} />
+                                            <circle cx={px(X1 + sista.pQ - sista.X)} cy={SP_Y0 + 10 + sista.t * sk} r="3.5" fill={COL.Q} />
+                                        </g>
+                                    )}
+                                    {st.spar.length <= 1 && <text x={px(LAB_L / 2)} y={(SP_Y0 + SP_Y1) / 2} textAnchor="middle" fontSize="13" fill={COL.soft}>Dra ihop fingrarna, så ritas spåret här.</text>}
+                                    {st.spar.length > 1 && <text x={X0 + 6} y={SP_Y1 + 14} fontSize="12" fill={COL.soft}>{st.byten === 0 ? 'Fingrarna har inte bytt roll än' : st.byten === 1 ? 'Fingrarna har bytt roll en gång' : `Fingrarna har bytt roll ${st.byten} gånger`}</text>}
+                                </g>
+                            );
+                        })()}
+                    </g>
+                </svg>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  REGLAGE
+        // ════════════════════════════════════════════════════════
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, disabled, color = 'var(--lab-accent, #c8324a)' }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').replace('−', '-').trim();
+                if (norm === '' || norm === '-' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt} disabled={disabled}
+                           style={{ color }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+        const Slider = ({ label, value, min, max, step, onChange, disabled, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 112, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, disabled, valueNode }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    {valueNode}
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        // Formelkortet: varje storhet har sitt namn ovanför.
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  FORMELKORTET
+        // ════════════════════════════════════════════════════════
+        const BrakL = ({ tl, t, n, nl }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{tl}</span>
+                <span className="fnum" style={{ padding: '0 4px' }}>{t}</span>
+                <span style={{ alignSelf: 'stretch', borderTop: '2px solid currentColor', margin: '2px 0' }} />
+                <span className="fnum" style={{ padding: '0 4px' }}>{n}</span>
+                <span className="flbl">{nl}</span>
+            </div>
+        );
+        const FormelKort = ({ k, dolj, fas }) => {
+            const faller = fas === 'faller' || fas === 'fallen';
+            const lG = k.lQ, lP = k.lP + k.lQ;     // hävarmarna kring Q
+            return (
+                <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                    <div className="flex flex-wrap items-center gap-x-8 gap-y-3 mb-3">
+                        <div className="flex items-center gap-x-3">
+                            <Vbl label="Normalkraft från P"><Sub s="F" i="P" /></Vbl>
+                            <span className="fnum">=</span>
+                            <Vbl label="Tyngdkraft"><Sub s="F" i="G" /></Vbl>
+                            <span className="fnum">·</span>
+                            <BrakL tl="Hävarm för tyngdkraften" t={<Sub s="l" i="G" />} n={<Sub s="l" i="P" />} nl="Hävarm för normalkraften" />
+                        </div>
+                        <div className="text-sm" style={{ color: 'var(--lab-ink-soft)', maxWidth: 520 }}>
+                            Välj vridningspunkten i fingret Q. Momentlagen ger <Sub s="F" i="P" /> · <Sub s="l" i="P" /> = <Sub s="F" i="G" /> · <Sub s="l" i="G" />,
+                            där <Sub s="l" i="P" /> är avståndet från P till Q och <Sub s="l" i="G" /> avståndet från tyngdpunkten till Q. Kraftjämvikten ger
+                            sedan <Sub s="F" i="Q" /> = <Sub s="F" i="G" /> − <Sub s="F" i="P" />. Linjalen accelererar inte i sidled, så friktionskrafterna från
+                            P och Q är lika stora och motriktade. Ett finger glider när friktionen når gränsen <em>μ</em> · <Sub s="F" i="N" />. Fingret som bär minst
+                            når sin gräns först och glider, och det som bär mest sitter fast.
+                        </div>
+                    </div>
+                    <div className="pt-3 fnum-live" style={{ borderTop: '1px solid var(--lab-line, rgba(15,22,32,0.14))' }}>
+                        {dolj ? <div>Räkna själv innan du provar.</div> : faller ? (
+                            <div>Ett finger bär. Tyngdkraften ger ett kraftmoment kring det, och föremålet vrids.</div>
+                        ) : (
+                            <div>
+                                <Sub s="F" i="P" /> = {fmt(k.FG, 2)}{'\u00a0'}N · <Brak t={`${fmt(lG * 100, 1)}\u00a0cm`} n={`${fmt(lP * 100, 1)}\u00a0cm`} /> = {fmt(k.FP, 2)}{'\u00a0'}N,{'\u2003'}
+                                <Sub s="F" i="Q" /> = {fmt(k.FG, 2)}{'\u00a0'}N − {fmt(k.FP, 2)}{'\u00a0'}N = {fmt(k.FQ, 2)}{'\u00a0'}N
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  FÄRDIGA FÖRSÖK OCH GISSA-LÄGET
+        // ════════════════════════════════════════════════════════
+        const FORSOK = [
+            { id: 'sym',   namn: 'Fingrarna symmetriskt', sub: 'möts i mitten', cfg: { obj: 'linjal', vikt: false, fP: 10, fQ: 90, rikt: 1 } },
+            { id: 'nara',  namn: 'Ena fingret nära mitten', sub: 'det andra glider först', cfg: { obj: 'linjal', vikt: false, fP: 42, fQ: 95, rikt: 1 } },
+            { id: 'vikt',  namn: 'Vikt i ena änden', sub: 'möts närmare vikten', cfg: { obj: 'linjal', vikt: true, xV: 88, fP: 5, fQ: 95, rikt: 1 } },
+            { id: 'kvast', namn: 'Kvasten', sub: 'tyngdpunkten nära borsten', cfg: { obj: 'kvast', vikt: false, fP: 5, fQ: 98, rikt: 1 } },
+            { id: 'isar',  namn: 'Dra isär', sub: 'linjalen faller', cfg: { obj: 'linjal', vikt: false, fP: 40, fQ: 62, rikt: -1 } },
+        ];
+        const slump = (a) => a[Math.floor(Math.random() * a.length)];
+        function nyUppgift(typ) {
+            if (typ === 'mots') return { typ, mV: slump([0.1, 0.2, 0.3]), xV: slump([10, 15, 20, 80, 85, 90]) };
+            let u;
+            do { u = { typ, fP: slump([5, 10, 15, 20, 25, 30, 35]), fQ: slump([65, 70, 75, 80, 85, 90, 95]) }; }
+            while (Math.abs((50 - u.fP) - (u.fQ - 50)) < 8);
+            return u;
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  HUVUDAPP
+        // ════════════════════════════════════════════════════════
+        const FART = 0.08;   // fingrarnas fart (m/s)
+        const App = () => {
+            const [obj, setObj] = useState('linjal');
+            const [vikt, setVikt] = useState(false);
+            const [xV, setXV] = useState(85);          // cm från vänstra änden
+            const [fP, setFP] = useState(10);          // cm från vänstra änden
+            const [fQ, setFQ] = useState(90);
+            const [show, setShow] = useState({ tp: false, krafter: true, spar: true });
+            const [kor, setKor] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [, setFrame] = useState(0);
+            const [gissa, setGissa] = useState(null);
+            const [svarTxt, setSvarTxt] = useState('');
+            const [svarStatus, setSvarStatus] = useState(null);
+            const [poang, setPoang] = useState({ ratt: 0, totalt: 0, svit: 0 });
+
+            const F = M.FOREMAL[obj];
+            const c = { L: F.L, m: F.m, xG: F.xG, mV: vikt ? 0.2 : 0, xV: Math.min(xV / 100, F.L) };
+            if (gissa && gissa.typ === 'mots') { c.mV = gissa.mV; c.xV = gissa.xV / 100; }
+            const cRef = useRef(c); cRef.current = c;
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            // Föremålet följer med det fasta fingret och vandrar i sidled. Startläget
+            // väljs så att det hamnar lika långt från scenens mitt i slutet av
+            // "Dra ihop" som i början: en provkörning ger hur långt det vandrar.
+            const nyttSt = (cc, a, b) => {
+                const X0s = startX(cc.L);
+                const prov = M.nytt(cc, X0s + a / 100, X0s + b / 100, X0s);
+                M.starta(cc, prov, 1);
+                for (let i = 0; i < 4000 && prov.fas === 'dra'; i++) M.steg(prov, cc, 1 / 30, FART);
+                const X = X0s - (prov.X - X0s) / 2;
+                return M.nytt(cc, X + a / 100, X + b / 100, X);
+            };
+            const st = useRef(nyttSt(c, fP, fQ));
+            const korRef = useRef(false); korRef.current = kor;
+            const tMax = useRef(10);
+            const fRef = useRef({ fP, fQ }); fRef.current = { fP, fQ };
+
+            useEffect(() => {
+                let raf, last = null;
+                const loop = (ts) => {
+                    if (last == null) last = ts;
+                    const dt = Math.min((ts - last) / 1000, 0.05); last = ts;
+                    const s = st.current;
+                    if (s.fas === 'faller') M.steg(s, cRef.current, dt, 0);
+                    else if (korRef.current && s.fas === 'dra') {
+                        M.steg(s, cRef.current, dt, FART);
+                        if (s.fas !== 'dra' && s.fas !== 'faller') setKor(false);
+                    }
+                    setFrame((n) => n + 1);
+                    raf = requestAnimationFrame(loop);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, []);
+
+            const aterstall = (cc = cRef.current, a = fRef.current.fP, b = fRef.current.fQ) => { st.current = nyttSt(cc, a, b); setKor(false); };
+            // nytt föremål, vikt eller fingrarnas lägen: börja om
+            useEffect(() => { if (st.current.fas === 'vila' || st.current.fas === 'mott' || st.current.fas === 'fallen') aterstall(); }, [obj, vikt, xV, fP, fQ]);
+            // ny vikt eller nytt föremål: tyngdpunkten måste ligga mellan fingrarna
+            useEffect(() => {
+                if (gissa) return;
+                const xT = M.tp(cRef.current).xT * 100;
+                if (fP > xT - 2) setFP(Math.floor(xT - 2));
+                if (fQ < xT + 2) setFQ(Math.ceil(xT + 2));
+            }, [obj, vikt, xV]);
+
+            const starta = (rikt) => {
+                const s = st.current;
+                if (s.fas !== 'vila') { aterstall(); }
+                M.starta(cRef.current, st.current, rikt);
+                const gap = st.current.pQ - st.current.pP;
+                tMax.current = rikt > 0 ? gap / (2 * FART) + 0.3 : (cRef.current.L - gap) / (2 * FART) + 0.6;
+                setKor(true);
+            };
+            const vila = st.current.fas === 'vila';
+            const flyttaFinger = (f, s) => {
+                const [a, b] = stodOmrade(obj, F.L);
+                const t = M.tp(cRef.current).xT;
+                const g = fRef.current;
+                if (f === 'P') setFP(Math.round(Math.max(a, Math.min(s, t - 0.02, g.fQ / 100 - 0.05)) * 100));
+                else setFQ(Math.round(Math.min(b, Math.max(s, t + 0.02, g.fP / 100 + 0.05)) * 100));
+            };
+            const valjObj = (id) => {
+                const L = M.FOREMAL[id].L, [a, b] = stodOmrade(id, L);
+                setObj(id); setFP(Math.round(a * 100 + 3)); setFQ(Math.round(b * 100 - 3)); setXV(Math.round(L * 85));
+            };
+
+            const korForsok = (f) => {
+                const k = f.cfg;
+                setObj(k.obj); setVikt(k.vikt); if (k.xV) setXV(k.xV); setFP(k.fP); setFQ(k.fQ);
+                setTimeout(() => starta(k.rikt), 500);
+            };
+
+            // ── Gissa-läget ──
+            const startaGissa = (typ) => {
+                const u = nyUppgift(typ);
+                setGissa(u); setSvarTxt(''); setSvarStatus(null);
+                setObj('linjal'); setVikt(false);
+                const a = typ === 'mots' ? 5 : u.fP, b = typ === 'mots' ? 95 : u.fQ;
+                setFP(a); setFQ(b);
+                const cc = { ...M.FOREMAL.linjal, mV: typ === 'mots' ? u.mV : 0, xV: typ === 'mots' ? u.xV / 100 : 0 };
+                st.current = nyttSt(cc, a, b); setKor(false);
+            };
+            const kolla = (val) => {
+                const u = gissa;
+                let ratt, text;
+                if (u.typ === 'mots') {
+                    const n = parseFloat(svarTxt.replace(',', '.'));
+                    if (!isFinite(n)) { setSvarStatus({ ratt: false, text: 'Skriv in ett läge i centimeter, till exempel 62.' }); return; }
+                    const m = M.FOREMAL.linjal.m, xT = (m * 50 + u.mV * u.xV) / (m + u.mV);
+                    ratt = Math.abs(n - xT) <= 1;
+                    text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} Momentlagen kring linjalens vänstra ände, där g förkortas bort: (0,15 kg + ${fmt(u.mV, 1)} kg) · x = 0,15 kg · 50 cm + ${fmt(u.mV, 1)} kg · ${u.xV} cm, så x = ${fmt(xT, 1)} cm. Där möts fingrarna.`;
+                    if (!ratt && Math.abs(n - 50) <= 1) text += ' Vikten flyttar tyngdpunkten från mitten mot vikten.';
+                } else {
+                    const facit = (50 - u.fP) > (u.fQ - 50) ? 'P' : 'Q';
+                    ratt = val === facit;
+                    const nar = facit === 'P' ? 'Q' : 'P';
+                    text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} Tyngdpunkten ligger vid 50 cm. P sitter ${50 - u.fP} cm och Q ${u.fQ - 50} cm från den. ${nar} sitter närmast, bär mest och tål störst friktionskraft, så ${facit} glider först.`;
+                }
+                setSvarStatus({ ratt, text });
+                setPoang((p) => ({ ratt: p.ratt + (ratt ? 1 : 0), totalt: p.totalt + 1, svit: ratt ? p.svit + 1 : 0 }));
+                setTimeout(() => starta(1), 300);
+            };
+            const avslutaGissa = () => { setGissa(null); setSvarStatus(null); aterstall({ ...cRef.current, mV: vikt ? 0.2 : 0, xV: Math.min(xV / 100, F.L) }); };
+            const dolj = !!gissa && svarStatus === null;
+            const las = !!gissa;
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(document.fullscreenElement === sceneWrapRef.current || document.webkitFullscreenElement === sceneWrapRef.current);
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => { document.removeEventListener('fullscreenchange', handler); document.removeEventListener('webkitfullscreenchange', handler); };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const [sa, sb] = stodOmrade(obj, F.L);
+            const reglage = (Sl, kompakt) => {
+                const rad = (label, value, min, max, step, onChange, unit, d = 0, l2 = las || !vila) => (
+                    <Sl key={label} label={label} value={value} min={min} max={max} step={step} onChange={onChange} disabled={l2}
+                        {...(kompakt ? { valueNode: <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, d)} unit={unit} disabled={l2} onCommit={onChange} /> } : {})}>
+                        {!kompakt && <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, d)} unit={unit} disabled={l2} onCommit={onChange} />}
+                    </Sl>
+                );
+                return (
+                    <React.Fragment>
+                        {rad('Fingret P', fP, Math.round(sa * 100), Math.round(sb * 100), 1, (v) => flyttaFinger('P', v / 100), 'cm')}
+                        {rad('Fingret Q', fQ, Math.round(sa * 100), Math.round(sb * 100), 1, (v) => flyttaFinger('Q', v / 100), 'cm')}
+                        {vikt && !gissa && rad('Viktens läge', xV, 2, Math.round(F.L * 100) - 2, 1, setXV, 'cm')}
+                    </React.Fragment>
+                );
+            };
+            const knappar = (cls) => (
+                <React.Fragment>
+                    <button className={cls('btn-start')} disabled={las} onClick={() => starta(1)}>Dra ihop</button>
+                    <button className={cls('btn-toggle')} disabled={las} onClick={() => starta(-1)}>Dra isär</button>
+                    {st.current.fas === 'dra' && <button className={cls('btn-toggle')} onClick={() => setKor((v) => !v)}>{kor ? 'Paus' : 'Fortsätt'}</button>}
+                    <button className={cls('btn-toggle')} onClick={() => aterstall()} disabled={las}>Börja om</button>
+                </React.Fragment>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        <label><input type="checkbox" checked={show.tp} disabled={las} onChange={() => setShow((s) => ({ ...s, tp: !s.tp }))} /><span>Tyngdpunkten</span></label>
+                        <label><input type="checkbox" checked={show.krafter} onChange={() => setShow((s) => ({ ...s, krafter: !s.krafter }))} /><span>Krafter</span></label>
+                        <label><input type="checkbox" checked={show.spar} onChange={() => setShow((s) => ({ ...s, spar: !s.spar }))} /><span>Spåret</span></label>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglage(StSlider, true)}</div>
+                                <div className="st-actions">{knappar((k) => k)}</div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const k = M.krafter(c, st.current);
+            const doljTp = dolj && gissa && gissa.typ === 'mots';
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-7xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Linjalen på två fingrar
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Linjalen på två fingrar</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            Lägg en linjal på två pekfingrar och dra ihop fingrarna. De glider växelvis och möts alltid under tyngdpunkten,
+                            var den än ligger. Staplarna visar varför: fingret närmast tyngdpunkten bär mest, tål störst friktionskraft och sitter fast.
+                        </p>
+
+                        <FormelKort k={k} dolj={dolj} fas={st.current.fas} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 xl:w-3/4 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <Scen c={c} id={obj} st={st.current} show={show} svgRef={svgRef} flyttaFinger={flyttaFinger} vila={vila && !las}
+                                          doljTp={doljTp} tMax={tMax.current} dolj={dolj} />
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Dra i fingrarna för att flytta dem innan du börjar. Krafterna på föremålet ritas skalenligt: normalkrafterna
+                                    från fingrarna och, när tyngdpunkten visas, tyngdkraften (blå) i tyngdpunkten (grön prick). Friktionskrafterna
+                                    längs föremålet ritas i dubbel skala, så att de syns. Spåret under scenen
+                                    visar var längs föremålet fingrarna har legat, med tiden nedåt.
+                                </p>
+                            </div>
+
+                            <div className="lg:w-1/3 xl:w-1/4 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Föremål</div>
+                                    <div className="forsok-lista mb-3">
+                                        {Object.entries(M.FOREMAL).map(([id, v]) => (
+                                            <button key={id} className="forsok" disabled={las} onClick={() => valjObj(id)}
+                                                    style={obj === id ? { background: 'var(--lab-ink)', color: 'var(--lab-bg)' } : undefined}>
+                                                {v.namn}<span className="sub">{fmt(v.L * 100, 0)}{' '}cm, {fmt(v.m * 1000, 0)}{' '}g</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <label className="flex items-center gap-2 text-sm" style={{ color: 'var(--lab-ink)' }}>
+                                        <input type="checkbox" checked={vikt} disabled={las} onChange={() => setVikt((v) => !v)} />
+                                        <span>Lägg en vikt på 200{' '}g på föremålet</span>
+                                    </label>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    {!isFullscreen && reglage(Slider, false)}
+                                    {isFullscreen && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Reglagen finns i rutan uppe till höger i fullskärm.</p>}
+                                    <div className="grid grid-cols-2 gap-2 mt-2">{knappar((k) => k + ' w-full')}</div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Färdiga försök</div>
+                                    <div className="forsok-lista">
+                                        {FORSOK.map((f) => (
+                                            <button key={f.id} className="forsok" disabled={las} onClick={() => korForsok(f)}>
+                                                {f.namn}<span className="sub">{f.sub}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flbl" style={{ textAlign: 'left' }}>Gissa-läge</div>
+                                        {poang.totalt > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>{poang.ratt} av {poang.totalt} rätt{poang.svit > 1 ? `, ${poang.svit} i rad` : ''}</div>}
+                                    </div>
+                                    {!gissa && (
+                                        <div className="flex flex-col gap-2">
+                                            <button className="btn-toggle" onClick={() => startaGissa('mots')}>Var möts fingrarna?</button>
+                                            <button className="btn-toggle" onClick={() => startaGissa('forst')}>Vilket finger glider först?</button>
+                                        </div>
+                                    )}
+                                    {gissa && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                {gissa.typ === 'mots'
+                                                    ? <span>En linjal är 100{' '}cm lång och har massan 150{' '}g. En vikt på {fmt(gissa.mV * 1000, 0)}{' '}g ligger {gissa.xV}{' '}cm från linjalens vänstra ände. Var möts fingrarna, räknat från samma ände?</span>
+                                                    : <span>Linjalen är 100{' '}cm lång och jämntjock. Fingret P ligger vid {gissa.fP}{' '}cm och fingret Q vid {gissa.fQ}{' '}cm. Vilket finger glider först när de dras ihop?</span>}
+                                            </p>
+                                            {gissa.typ === 'mots' ? (
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span><em>x</em> =</span>
+                                                    <input className="gissa-in" type="text" inputMode="decimal" value={svarTxt} disabled={svarStatus !== null}
+                                                           onChange={(e) => setSvarTxt(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && svarStatus === null) kolla(); }} />
+                                                    <span>cm</span>
+                                                    <button className="btn-start" onClick={() => kolla()} disabled={svarStatus !== null}>Kolla</button>
+                                                </div>
+                                            ) : (
+                                                <div className="mode-seg mb-2">
+                                                    {[['P', 'P glider'], ['Q', 'Q glider']].map(([kk, n]) => <button key={kk} disabled={svarStatus !== null} onClick={() => kolla(kk)}>{n}</button>)}
+                                                </div>
+                                            )}
+                                            {svarStatus && <p className="text-sm mb-2" style={{ color: svarStatus.ratt ? '#15803d' : 'var(--lab-accent)' }}>{svarStatus.text}</p>}
+                                            <div className="flex gap-2">
+                                                {svarStatus && <button className="btn-toggle flex-1" onClick={() => startaGissa(gissa.typ)}>Ny uppgift</button>}
+                                                <button className="btn-toggle flex-1" onClick={avslutaGissa}>Avsluta</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Den som bär mest sitter fast</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Fingret närmast tyngdpunkten får den största normalkraften. Den största friktionskraft ett finger kan ge är <em>μ</em> · <Sub s="F" i="N" />,
+                                    så det fingret kan hålla emot mest innan det börjar glida. Därför sitter det fast och följer med linjalen, medan det
+                                    andra fingret glider mot den.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Fingrarna byter roll</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Det glidande fingret kommer allt närmare tyngdpunkten och bär allt mer. När dess stapel når strecket märkt ”byte” släpper det andra fingret, och de byter roll. Så fortsätter det tills fingrarna möts, och då ligger tyngdpunkten mellan dem.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Åt andra hållet går det inte</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Dras fingrarna isär glider hela tiden det finger som sitter längst bort från tyngdpunkten. Det bär allt mindre,
+                                    så det byter aldrig roll. Till slut glider det av änden, och linjalen faller. Fundera: varför kan det fasta fingret aldrig
+                                    släppa när fingrarna dras isär?
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Fördjupning: vilofriktion och glidfriktion</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <div className="mt-3 text-sm space-y-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <p>
+                                    Ett finger som sitter fast kan hålla emot med lite större friktionskraft än ett finger som glider. Friktionstalet
+                                    för vila är alltså något större än för glidning. Här är friktionstalet {fmt(M.MU, 1)} för glidning och {fmt(M.MU_VILA, 1)} för vila.
+                                </p>
+                                <p>
+                                    Det fasta fingret håller emot lika mycket som glidfriktionen från det glidande fingret, {fmt(M.MU, 1)} · <Sub s="F" i="N" />, där <Sub s="F" i="N" /> är det glidande fingrets normalkraft.
+                                    Det släpper först när den kraften blir större än {fmt(M.MU_VILA, 1)} · <Sub s="F" i="N" /> för det fasta fingret, alltså när
+                                    det glidande fingret bär {fmt(M.MU_VILA / M.MU, 1)} gånger så mycket som det fasta. Det är strecket ”byte” i stapeldiagrammet. Vore de två
+                                    friktionstalen lika stora skulle fingrarna, så snart de står lika långt från tyngdpunkten, glida båda på en gång (i praktiken
+                                    i mycket små ryck) och ändå mötas under tyngdpunkten.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Fingrarna möts alltid i mitten av linjalen.”</strong> Nej. De möts under tyngdpunkten. Ligger det en vikt på
+                                    linjalen, eller är föremålet tyngre i ena änden som en kvast, möts de en bit från mitten.</li>
+                                <li><strong>”Det är fingret som rör sig snabbast som glider.”</strong> Nej. Båda fingrarna rör sig lika fort. Det är
+                                    normalkraften som avgör vilket som glider: det som bär minst.</li>
+                                <li><strong>”Det fasta fingret har större friktionskraft.”</strong> Nej. Linjalen accelererar inte i sidled (utom i de korta ögonblicken
+                                    när fingrarna byter roll), så friktionskrafterna från de två fingrarna är lika stora och motriktade. Skillnaden är att det fasta fingret skulle tåla mer, eftersom det bär mer.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

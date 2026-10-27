@@ -67,6 +67,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-dubbelkon-app.html',
     'fysik2-valtning-app.html',
     'fysik2-lodlinjen-app.html',
+    'fysik1-kalorimetri-app.html',
     'fysik2-stegmetoden-app.html',
     'fysik1-lutande-plan-app.html',
     'fysik1-arbete-app.html',

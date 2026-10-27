@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalorimetern — Fysiklabbet</title>
+    <meta name="description" content="Blanda varmt och kallt vatten, sänk ned en het metallbit eller lägg is i en kalorimeter. Se den avgivna och den upptagna energin som joulebrickor och räkna ut den specifika värmekapaciteten för en okänd metall.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik1-kalorimetri-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Kalorimetern — Fysik nivå 1">
+    <meta property="og:description" content="Blanda varmt och kallt vatten, sänk ned en het metallbit eller lägg is i en kalorimeter. Se den avgivna och den upptagna energin som joulebrickor och räkna ut den specifika värmekapaciteten för en okänd metall.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik1-kalorimetri-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kalorimetern — Fysik nivå 1">
+    <meta name="twitter:description" content="Blanda varmt och kallt vatten, sänk ned en het metallbit eller lägg is i en kalorimeter. Se den avgivna och den upptagna energin som joulebrickor och räkna ut den specifika värmekapaciteten för en okänd metall.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+        input[type="range"]:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1;
+                text-align: center; max-width: 150px; }
+        .fnum { color: var(--lab-ink); font-size: 20px; font-family: 'Poppins', sans-serif; }
+        .fnum-live { color: var(--lab-ink); font-size: 17px; font-family: 'Poppins', sans-serif; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 80px; }
+        .num-in { width: 50px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:disabled { opacity: 0.55; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* Scenen: en svg med egen proportion (1000 × 660). Mobilen (sektion 8 i
+           styles-laborans-sim.css) dockar verktygen under den. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1000 / 660;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .handtag { cursor: grab; }
+        .handtag.drar { cursor: grabbing; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 34px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-start {
+            background: var(--lab-accent, #c8324a); color: #fff; border: 1px solid var(--lab-accent, #c8324a);
+            border-radius: 8px; padding: 9px 14px; font-weight: 700; cursor: pointer;
+        }
+        .btn-start:hover:not(:disabled) { filter: brightness(1.06); }
+        .btn-start:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .mode-seg { display: flex; gap: 0; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button {
+            flex: 1; padding: 8px 8px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .mode-seg button:last-child { border-right: none; }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+
+        /* Färdiga försök */
+        .forsok-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .forsok {
+            text-align: left; padding: 7px 9px; border-radius: 8px; cursor: pointer;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; font-weight: 600; color: var(--lab-ink, #0f1620); line-height: 1.25;
+        }
+        .forsok .sub { display: block; font-size: 11.5px; font-weight: 400; color: var(--lab-ink-soft, #3a4151); }
+        .forsok:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .forsok:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* Avläsning */
+        .avl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
+        .avl .v { font-weight: 700; font-size: 16px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+        .avl .l { font-size: 11.5px; color: var(--lab-ink-muted, #5a6170); }
+
+        /* Resultatrutan efter ett försök */
+        .resultat { border-left: 4px solid var(--lab-accent, #c8324a); }
+        .resultat.ratt { border-left-color: #15803d; }
+
+        /* Gissa-läget */
+        .gissa-in { width: 90px; padding: 6px 8px; border-radius: 7px; font-size: 15px;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                    background: #fff; font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .gissa-in:focus { outline: none; border-color: var(--lab-accent, #c8324a); }
+        .kort3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .kort3 button {
+            padding: 8px 6px; border-radius: 8px; cursor: pointer; text-align: center;
+            background: var(--lab-bg, #f3eee4); border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; line-height: 1.45; color: var(--lab-ink, #0f1620);
+        }
+        .kort3 button:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .kort3 button.vald { border-color: var(--lab-ink, #0f1620); box-shadow: 0 0 0 2px rgba(15,22,32,0.15); }
+        .kort3 button.basta { background: rgba(21,128,61,0.10); border-color: #15803d; }
+        .kort3 .bok { font-weight: 700; font-size: 15px; display: block; margin-bottom: 2px; }
+        .kort3 .stapel { height: 6px; border-radius: 3px; background: #d4930f; margin-top: 5px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+        /* Formelkortet ryms på en telefon: tätare rad och mindre etiketter */
+        @media (max-width: 480px) {
+            .fk-rader > div { column-gap: 6px !important; }
+            .fk-rader .flbl { font-size: 9px; letter-spacing: 0.02em; }
+        }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script id="kalorimeter-motor">
+// Motorn för Kalorimetern (fysik1-kalorimetri-app.html).
+// Källan ligger här och klistras in oförändrad i sidan; testet
+// .claude/test-kalorimeter-motor.js kontrollerar fysiken och att kopian är identisk.
+//
+// Två kroppar utbyter energi: A är det som läggs i kalorimetern (varmt
+// vatten, en metallbit eller is) och B är det som redan finns i den (vatten,
+// och med en riktig kalorimeter även koppen själv). Varje kropp beskrivs med
+// sin entalpi H, räknad från fast ämne vid 0 °C:
+//     H = C_fast · T                  för T < 0 °C
+//     0 ≤ H ≤ L       (T = 0 °C)      under smältningen, L = l_s · m
+//     H = L + C_flyt · T              för T > 0 °C
+// där C = c · m (+ koppens värmekapacitet för B). En metall har L = 0 och
+// samma c i båda leden. Då blir isens smältning en platå i temperaturen, och
+// energibalansen E_avg = E_upp är summan av alla ändringar i H.
+//
+// Utbytet går som Newtons avsvalningslag, P = K · (T_A − T_B). Varje
+// tidssteg räknas exakt för de aktuella värmekapaciteterna, så att
+// temperaturerna aldrig svänger förbi varandra. En riktig kalorimeter läcker
+// dessutom energi till rummet, P = h · (T_B − T_rum).
+(function () {
+    const VATTEN = { c_fast: 2200, c_flyt: 4180, ls: 334000 };
+    const METALLER = {
+        aluminium: { namn: 'Aluminium', c: 900 },
+        jarn:      { namn: 'Järn',      c: 460 },
+        koppar:    { namn: 'Koppar',    c: 390 },
+        tenn:      { namn: 'Tenn',      c: 230 },
+        bly:       { namn: 'Bly',       c: 130 },
+    };
+    const KOPP_C = 90;        // J/K, den riktiga kalorimeterns inre kopp, omrörare och termometer
+    const LACKA_H = 0.5;      // W/K, läckaget till rummet
+    const T_RUM = 20;         // °C
+    const TAU = 10;           // s, omrörningens tidsskala
+    const STOR = 1e15;        // "oändlig" värmekapacitet under en fasövergång
+
+    // En kropp: typ 'vatten' eller en metallnyckel, massa m, starttemperatur
+    // T0, fas 'fast' eller 'flytande' (avgör vatten vid exakt 0 °C) och
+    // extra värmekapacitet Cx (koppen).
+    function kropp(typ, m, T0, fas, Cx = 0) {
+        let Cs, Cl, L;
+        if (typ === 'vatten') { Cs = VATTEN.c_fast * m; Cl = VATTEN.c_flyt * m; L = VATTEN.ls * m; }
+        else { const c = METALLER[typ].c; Cs = Cl = c * m; L = 0; }
+        const k = { typ, m, Cs: Cs + Cx, Cl: Cl + Cx, L, Cx, fas };
+        k.H0 = entalpi(k, T0, fas);
+        k.H = k.H0;
+        k.T0 = T0;
+        return k;
+    }
+    function entalpi(k, T, fas) {
+        if (T < 0 || (T === 0 && fas === 'fast')) return k.Cs * T;
+        return k.L + k.Cl * T;
+    }
+    function temp(k, H = k.H) {
+        if (H < 0) return H / k.Cs;
+        if (H <= k.L) return 0;
+        return (H - k.L) / k.Cl;
+    }
+    // värmekapaciteten just nu (oändlig mitt i en fasövergång)
+    function kapacitet(k) {
+        if (k.H < 0) return k.Cs;
+        if (k.H <= k.L && k.L > 0) return STOR;
+        return k.Cl;
+    }
+    // andel smält (vatten), 0 … 1
+    const smalt = (k, H = k.H) => (k.L > 0 ? Math.max(0, Math.min(1, H / k.L)) : 1);
+
+    // Jämvikten utan förluster och utan koppen: den temperatur där
+    // H_A(T) + H_B(T) = H_A0 + H_B0, och hur mycket is som smält.
+    function jamvikt(A, B) {
+        const ren = (k) => ({ Cs: k.Cs - k.Cx, Cl: k.Cl - k.Cx, L: k.L });
+        const a = ren(A), b = ren(B);
+        const H = A.H0 + B.H0 - A.Cx * A.T0 - B.Cx * B.T0;
+        const L = a.L + b.L;
+        let T, flytande;
+        if (H < 0) { T = H / (a.Cs + b.Cs); }
+        else if (H <= L) { T = 0; }
+        else { T = (H - L) / (a.Cl + b.Cl); }
+        // massan flytande vatten före och efter
+        const vattenMassa = (k) => (k.typ === 'vatten' ? k.m : 0);
+        const flytFore = vattenMassa(A) * smalt(A, A.H0 - A.Cx * A.T0) + vattenMassa(B) * smalt(B, B.H0 - B.Cx * B.T0);
+        if (H < 0) flytande = 0;
+        else if (H <= L) flytande = L > 0 ? H / VATTEN.ls : 0;
+        else flytande = vattenMassa(A) + vattenMassa(B);
+        return { T, smaltMassa: flytande - flytFore };
+    }
+
+    // Ett försök: A läggs i B. Med forlust räknas koppen och läckaget med.
+    function nyttForsok({ A, B, forlust = false }) {
+        const KA = kropp(A.typ, A.m, A.T, A.fas || 'flytande');
+        const KB = kropp(B.typ, B.m, B.T, B.fas || 'flytande', forlust ? KOPP_C : 0);
+        const K = Math.sqrt(Math.min(KA.Cs, KA.Cl) * Math.min(KB.Cs, KB.Cl)) / TAU;
+        return { A: KA, B: KB, K, h: forlust ? LACKA_H : 0, forlust, t: 0, Erum: 0, klar: false, ideal: jamvikt(KA, KB) };
+    }
+
+    // Ett tidssteg dt (s). Returnerar true när temperaturerna har mötts.
+    function steg(st, dt) {
+        if (st.klar) return true;
+        const n = Math.max(1, Math.ceil(dt / 0.02));
+        const d = dt / n;
+        for (let i = 0; i < n; i++) {
+            const TA = temp(st.A), TB = temp(st.B);
+            const CA = kapacitet(st.A), CB = kapacitet(st.B);
+            const inv = 1 / CA + 1 / CB;
+            const Qeq = (TA - TB) / inv;                       // det som jämnar ut temperaturerna
+            const Q = Qeq * (1 - Math.exp(-st.K * d * inv));   // exakt för ett linjärt avsnitt
+            st.A.H -= Q;
+            st.B.H += Q;
+            if (st.h > 0) {
+                const Qr = st.h * (temp(st.B) - T_RUM) * d;
+                st.B.H -= Qr;
+                st.Erum += Qr;
+            }
+            st.t += d;
+        }
+        // med läckage blir en liten skillnad kvar, den som driver läckaget
+        const kvar = 0.02 + 2 * st.h * Math.abs(temp(st.B) - T_RUM) / st.K;
+        if ((Math.abs(temp(st.A) - temp(st.B)) < kvar && st.t > 1) || st.t > 900) { st.klar = true; utjamna(st); }
+        return st.klar;
+    }
+    // Sista biten: kropparna får exakt samma temperatur, med samma totala energi.
+    function utjamna(st) {
+        const A = st.A, B = st.B, H = A.H + B.H;
+        const Hfast = 0, Hflyt = A.L + B.L;               // summan vid 0 °C, före och efter smältningen
+        let T;
+        if (H < Hfast) T = H / (A.Cs + B.Cs);
+        else if (H > Hflyt) T = (H - Hflyt) / (A.Cl + B.Cl);
+        else {                                            // smältningen pågår: båda vid exakt 0 °C
+            B.H = Math.min(B.L, H);
+            A.H = H - B.H;
+            return;
+        }
+        A.H = T < 0 ? A.Cs * T : A.L + A.Cl * T;
+        B.H = H - A.H;
+    }
+
+    // En ändring av H från H0 till H delad på avsnitten fast / smältning / flytande
+    // (bara kroppens eget ämne, inte koppen). Positivt = upptagen energi.
+    function delar(k) {
+        const Hw = (H) => H - k.Cx * temp(k, H);
+        const a = Hw(k.H0), b = Hw(k.H);
+        const over = (lo, hi) => {
+            const x0 = Math.max(Math.min(a, b), lo), x1 = Math.min(Math.max(a, b), hi);
+            return Math.max(0, x1 - x0) * Math.sign(b - a);
+        };
+        return { fast: over(-Infinity, 0), fas: over(0, k.L), flyt: over(k.L, Infinity) };
+    }
+    // Alla energiposter i försöket. Summan är noll (energin bevaras).
+    function energier(st) {
+        const TB = temp(st.B);
+        return {
+            A: delar(st.A),
+            B: delar(st.B),
+            kopp: st.B.Cx * (TB - st.B.T0),
+            rum: st.Erum,
+        };
+    }
+
+    // Den specifika värmekapacitet som räknas fram ur mätningen: metallen
+    // med massan mM och starttemperaturen TM i vattnet mV, TV, sluttemperatur T.
+    const cUrMatning = (mM, TM, mV, TV, T) => VATTEN.c_flyt * mV * (T - TV) / (mM * (TM - T));
+
+    const ut = { VATTEN, METALLER, KOPP_C, LACKA_H, T_RUM, TAU, kropp, entalpi, temp, kapacitet, smalt,
+                 jamvikt, nyttForsok, steg, delar, energier, cUrMatning };
+    if (typeof window !== 'undefined') window.KalorimeterMotor = ut;
+    if (typeof module !== 'undefined') module.exports = ut;
+})();
+</script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+        const M = window.KalorimeterMotor;
+
+        // ── Talformat: decimalkomma, äkta minustecken, exakt noll som "0", hårt mellanslag i tusental ──
+        const fmt = (num, d = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [hel, dec] = s.replace('-', '').split('.');
+            const grupper = hel.length > 3 ? hel.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : hel;
+            return (num < 0 ? '−' : '') + grupper + (dec !== undefined ? ',' + dec : '');
+        };
+        // en energi i J eller kJ, med lagom många decimaler
+        const fmtE = (E) => (Math.abs(E) < 1000 ? `${fmt(E, 0)} J` : `${fmt(E / 1000, Math.abs(E) < 10000 ? 2 : 1)} kJ`);
+        // ett tal som i en uträkning: tusental med hårt mellanslag, inga onödiga nollor
+        const tal = (x, d = 2) => fmt(x, d).replace(/,?0+$/, (m) => (m.startsWith(',') ? '' : m)).replace(/,$/, '');
+        // massor skrivs med två värdesiffror där det går (0,50 kg, 1,0 kg)
+        const kg = (m) => fmt(m, m < 1 ? 2 : 1);
+
+        // Ren text med variabler i kursiv: T_v, m_is, c_metall, l_s och ΔT får index.
+        const Fx = ({ text }) => {
+            const delar = [];
+            const re = /(?<![\p{L}\d])(ΔT|[TcmlE])_([\p{L}\d]+)|(?<![\p{L}\d])(ΔT|[Tcm])(?![\p{L}\d])/gu;
+            let sist = 0, mm, n = 0;
+            const sym = (s) => (s === 'ΔT' ? <span>Δ<em>T</em></span> : <em>{s}</em>);
+            while ((mm = re.exec(text))) {
+                if (mm.index > sist) delar.push(text.slice(sist, mm.index));
+                if (mm[1]) delar.push(<span key={n++}>{sym(mm[1])}<sub>{mm[2]}</sub></span>);
+                else delar.push(<span key={n++}>{sym(mm[3])}</span>);
+                sist = re.lastIndex;
+            }
+            delar.push(text.slice(sist));
+            return <React.Fragment>{delar}</React.Fragment>;
+        };
+        const Brak = ({ t, n }) => (
+            <span style={{ display: 'inline-flex', flexDirection: 'column', verticalAlign: 'middle', textAlign: 'center',
+                           lineHeight: 1.05, fontSize: '0.92em', margin: '0 3px' }}>
+                <span style={{ padding: '0 2px 1px' }}>{t}</span>
+                <span style={{ padding: '1px 2px 0', borderTop: '1.5px solid currentColor' }}>{n}</span>
+            </span>
+        );
+        const Sub = ({ s, i }) => <span>{s === 'ΔT' ? <span>Δ<em>T</em></span> : <em>{s}</em>}<sub>{i}</sub></span>;
+
+        const COL = {
+            ink:    '#0f1620',
+            soft:   'rgba(15,22,32,0.7)',
+            varm:   '#d9480f',
+            kall:   '#2563c9',
+            metall: '#9a5b1e',
+            isVarm: '#7cc4e8',
+            smalt:  '#0e7490',
+            kopp:   '#8b6b4a',
+            rum:    '#94a3b8',
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  FÖRSÖKENS UPPSTÄLLNING
+        // ════════════════════════════════════════════════════════
+        const LAGEN = [['vatten', 'Blanda vatten'], ['metall', 'Metallbit i vatten'], ['is', 'Is i vatten']];
+        const METALL_ORDNING = ['aluminium', 'jarn', 'koppar', 'tenn', 'bly'];
+        const T_METALL = 100;
+        // Uppställningen ger motorns A (det som läggs i) och B (det som finns i kalorimetern).
+        function uppstallning(lage, p, okand) {
+            if (lage === 'vatten') return { A: { typ: 'vatten', m: p.mV, T: p.TV }, B: { typ: 'vatten', m: p.mK, T: p.TK } };
+            if (lage === 'metall') return { A: { typ: p.metall === 'okand' ? okand : p.metall, m: p.mM, T: T_METALL }, B: { typ: 'vatten', m: p.mW, T: p.TW } };
+            return { A: { typ: 'vatten', m: p.mIs, T: p.TIs, fas: 'fast' }, B: { typ: 'vatten', m: p.mW2, T: p.TW2 } };
+        }
+        // namnen på kropparna i texterna
+        function namn(lage) {
+            if (lage === 'vatten') return { A: 'det varma vattnet', B: 'det kalla vattnet' };
+            if (lage === 'metall') return { A: 'metallbiten', B: 'vattnet' };
+            return { A: 'isen', B: 'vattnet' };
+        }
+        // Energiposterna som staplarna och förklaringen visar. E > 0 är upptagen energi.
+        function poster(lage, e) {
+            const ut = [];
+            const n = namn(lage);
+            const lagg = (k, E, farg, upp, av) => { if (Math.abs(E) > 0.5) ut.push({ k, E, farg, text: E > 0 ? upp : av }); };
+            if (lage === 'is') {
+                lagg('Afast', e.A.fast, COL.isVarm, 'isen värms till 0 °C', 'isen svalnar');
+                lagg('Afas', e.A.fas, COL.smalt, 'isen smälter', 'vattnet fryser till is');
+                lagg('Aflyt', e.A.flyt, COL.kall, 'smältvattnet värms', 'smältvattnet svalnar');
+                lagg('Bflyt', e.B.flyt, COL.varm, 'vattnet värms', 'vattnet svalnar');
+                lagg('Bfas', e.B.fas, '#9a3412', 'isen i vattnet smälter', 'vattnet fryser till is');
+                lagg('Bfast', e.B.fast, '#c2410c', 'den nya isen värms', 'det frusna vattnet svalnar');
+            } else {
+                const fA = lage === 'vatten' ? COL.varm : COL.metall;
+                lagg('A', e.A.fast + e.A.fas + e.A.flyt, fA, `${n.A} värms`, `${n.A} svalnar`);
+                lagg('B', e.B.fast + e.B.fas + e.B.flyt, COL.kall, `${n.B} värms`, `${n.B} svalnar`);
+            }
+            lagg('kopp', e.kopp, COL.kopp, 'kalorimeterns kopp värms', 'kalorimeterns kopp svalnar');
+            lagg('rum', e.rum, COL.rum, 'energi läcker ut till rummet', 'energi kommer in från rummet');
+            // posterna står i stapeln i den ordning energin flyttas
+            const ordning = ['A', 'Afast', 'Afas', 'Aflyt', 'B', 'Bflyt', 'Bfas', 'Bfast', 'kopp', 'rum'];
+            return ut.sort((a, b) => ordning.indexOf(a.k) - ordning.indexOf(b.k));
+        }
+        // En bricka är en jämn energimängd, vald så att staplarna får högst 60 brickor.
+        function brickVarde(E) {
+            for (const v of [100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000]) if (E / v <= 60) return v;
+            return 100000;
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  SCENEN (viewBox 1000 × 660)
+        // ════════════════════════════════════════════════════════
+        const VB_W = 1000, VB_H = 660;
+        const BANK = 560;
+        const KOPP = { x: 214, y: 330, w: 172, h: 230, vagg: 16 };    // kalorimeterns isolerade kopp
+        const INRE = { x: KOPP.x + KOPP.vagg, y: KOPP.y + 12, w: KOPP.w - 2 * KOPP.vagg, b: BANK - KOPP.vagg };
+        const NIVA = { vatten: [16, 90], metall: [70, 120], is: [16, 44] };   // px: grundnivå och höjd per kilogram
+        const ST = { x0: 486, x1: 676, botten: 520, s: 14, gap: 2, per: 5 };   // energivågens staplar
+        const G = { x0: 728, x1: 968, y0: 340, y1: 168 };              // T–t-diagrammet
+
+        // färgen på vatten efter temperaturen
+        function vattenFarg(T) {
+            const f = Math.max(0, Math.min(1, T / 100));
+            return `rgba(${Math.round(110 + 120 * f)},${Math.round(170 - 60 * f)},${Math.round(225 - 150 * f)},0.42)`;
+        }
+        const easeInOut = (u) => (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
+
+        // En isbit sedd från sidan.
+        const Isbit = ({ x, y, s, rot = 0 }) => (
+            <g transform={`rotate(${rot} ${x + s / 2} ${y + s / 2})`}>
+                <rect x={x} y={y} width={s} height={s} rx={s * 0.18} fill="#e8f4fb" stroke="#6f93b8" strokeWidth="1.3" />
+                <path d={`M ${x + s * 0.22} ${y + s * 0.3} L ${x + s * 0.5} ${y + s * 0.2}`} stroke="rgba(255,255,255,0.9)" strokeWidth="1.6" strokeLinecap="round" />
+            </g>
+        );
+        // Metallbiten: en kub vars kant följer massan.
+        const metallKant = (m, typ) => 22 + 26 * Math.cbrt(m);
+        const METALL_FARG = { aluminium: '#c9ced6', jarn: '#6b7280', koppar: '#c2703d', tenn: '#a8aeb6', bly: '#5f6573' };
+        const Metallbit = ({ x, y, s, typ, okand }) => (
+            <g>
+                <rect x={x} y={y} width={s} height={s} rx="3" fill={okand ? '#8c8f96' : METALL_FARG[typ]} stroke="#3b3f46" strokeWidth="1.4" />
+                <path d={`M ${x + 4} ${y + 5} L ${x + s - 6} ${y + 5}`} stroke="rgba(255,255,255,0.55)" strokeWidth="2" strokeLinecap="round" />
+                {okand && <text x={x + s / 2} y={y + s / 2 + 6} textAnchor="middle" fontSize="17" fontWeight="700" fill="#f8fafc">?</text>}
+            </g>
+        );
+        // En digital termometer: displayen och givaren.
+        const Termometer = ({ x, y, T, dolj, langd = 210, etikett }) => (
+            <g>
+                <line x1={x} y1={y + 38} x2={x} y2={y + 38 + langd} stroke="#4b5563" strokeWidth="4" strokeLinecap="butt" />
+                <line x1={x} y1={y + 38 + langd - 14} x2={x} y2={y + 38 + langd} stroke="#9ca3af" strokeWidth="4" />
+                <rect x={x - 44} y={y} width="88" height="38" rx="6" fill="#1f2937" stroke="#111827" strokeWidth="1.2" />
+                <rect x={x - 38} y={y + 6} width="76" height="26" rx="3" fill="#d9f0d0" />
+                <text x={x + 33} y={y + 25} textAnchor="end" fontSize="16" fontWeight="700" fill="#0f1620" style={{ fontVariantNumeric: 'tabular-nums' }}>
+                    {dolj ? '? °C' : `${fmt(T, 1)} °C`}
+                </text>
+                {etikett && <text x={x} y={y - 8} textAnchor="middle" fontSize="13" fill={COL.soft}>{etikett}</text>}
+            </g>
+        );
+
+        const Scen = (p) => {
+            const { lage, cfg, st, fas, hall, t, hist, dryck, enh, flyg, nu, dolj, doljMetall, okand, ideal, forlust, ror } = p;
+            const A = st.A, B = st.B;
+            const TA = M.temp(A), TB = M.temp(B);
+            const smaltA = lage === 'is' ? M.smalt(A) : 0;
+            // vätskan i koppen: B, och efter tillsättningen även smält is eller hällt vatten
+            const iKoppen = fas !== 'fore';
+            const mFlyt = B.m * (lage === 'is' ? M.smalt(B) : 1) + (lage === 'vatten' && iKoppen ? A.m * hall : 0) + (lage === 'is' && iKoppen ? A.m * smaltA : 0);
+            const niva = Math.min(INRE.b - INRE.y - 26, NIVA[lage][0] + mFlyt * NIVA[lage][1]);
+            const yYta = INRE.b - niva;
+            const Tkopp = TB;
+            const rorY = ror ? Math.sin(nu / 160) * 12 : 0;
+
+            // ── källan till vänster ──
+            let kalla = null, fram = null, overst = null;
+            if (lage === 'vatten') {
+                // bägaren med varmt vatten flyttas upp och tippas över koppen
+                const u = fas === 'fore' ? 0 : fas === 'haller' ? easeInOut(Math.min(1, hall * 1.6)) : 1;
+                const kvar = fas === 'fore' ? 1 : fas === 'haller' ? 1 - Math.max(0, Math.min(1, (hall - 0.35) / 0.65)) : 0;
+                const bx = 60 + (KOPP.x - 70 - 60) * u, by = 430 - 190 * u, rot = 105 * u;
+                const bw = 92, bh = 120;
+                const vh = Math.min(bh - 12, 12 + A.m * 120) * kvar;
+                const strale = fas === 'haller' && hall > 0.35 && hall < 1;
+                const syns = fas !== 'klar' && fas !== 'ror';
+                overst = (
+                    <g>
+                        {strale && <path d={`M ${KOPP.x + 22} ${by + 20} Q ${KOPP.x + 40} ${by + 70} ${KOPP.x + 46} ${KOPP.y - 14}`} stroke={vattenFarg(TA).replace('0.42', '0.75')} strokeWidth="9" fill="none" strokeLinecap="round" />}
+                        {syns && (
+                            <g transform={`translate(${bx} ${by}) rotate(${rot} ${bw} 0)`}>
+                                {rot < 35 && <rect x="0" y={bh - vh} width={bw} height={vh} fill={vattenFarg(TA)} />}
+                                <path d={`M 0 0 L 0 ${bh} L ${bw} ${bh} L ${bw} 0 L ${bw + 8} -6`} fill="none" stroke="#5b7a99" strokeWidth="2.4" strokeLinejoin="round" />
+                                {[0.25, 0.5, 0.75].map((f) => <line key={f} x1="0" y1={bh * f} x2="14" y2={bh * f} stroke="#5b7a99" strokeWidth="1.2" />)}
+                            </g>
+                        )}
+                        {fas === 'fore' && <Termometer x={106} y={250} T={TA} langd={150} etikett="varmt vatten" />}
+                        {fas === 'fore' && <text x="106" y={BANK + 24} textAnchor="middle" fontSize="13" fill={COL.soft}>{kg(A.m)} kg</text>}
+                    </g>
+                );
+            } else if (lage === 'metall') {
+                // kastrullen med kokande vatten och metallbiten i en tråd
+                const s = metallKant(A.m);
+                const u = fas === 'fore' ? 0 : fas === 'haller' ? easeInOut(Math.min(1, hall)) : 1;
+                const x0 = 118 - s / 2, y0 = 470 - s / 2;
+                const x1 = INRE.x + INRE.w * 0.62 - s / 2, y1 = INRE.b - s - 8;
+                const lyft = Math.sin(Math.PI * u) * 190;
+                const mx = x0 + (x1 - x0) * u, my = y0 + (y1 - y0) * u - lyft;
+                fram = <Metallbit x={mx} y={my} s={s} typ={A.typ} okand={doljMetall} />;
+                overst = <line x1={mx + s / 2} y1={my} x2={mx + s / 2} y2={Math.min(my, 300) - 40} stroke="#57534e" strokeWidth="1.4" />;
+                kalla = (
+                    <g>
+                        <rect x="46" y="440" width="144" height="106" rx="6" fill="#9aa3ad" stroke="#4b5563" strokeWidth="2" />
+                        <rect x="52" y="452" width="132" height="88" fill={vattenFarg(100)} />
+                        <rect x="34" y="440" width="168" height="8" rx="3" fill="#6b7280" />
+                        {[0, 1, 2, 3, 4].map((i) => {
+                            const fase = ((nu / 900) + i * 0.23) % 1;
+                            return <circle key={i} cx={64 + i * 26} cy={536 - fase * 80} r={2 + fase * 3} fill="none" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />;
+                        })}
+                        <rect x="40" y="546" width="156" height="14" rx="3" fill="#374151" />
+                        <text x="118" y={BANK + 24} textAnchor="middle" fontSize="13" fill={COL.soft}>kokande vatten, 100 °C</text>
+                        {fas === 'fore' && <text x="118" y="410" textAnchor="middle" fontSize="13" fill={COL.soft}>{doljMetall ? 'okänd metall' : M.METALLER[A.typ].namn.toLowerCase()}, {kg(A.m)} kg</text>}
+                    </g>
+                );
+            } else {
+                // skålen med is
+                const n = Math.max(1, Math.min(9, Math.round(A.m / 0.05 * (A.m < 0.3 ? 1 : 0.4)) || 1));
+                const s0 = 26;
+                const u = fas === 'fore' ? 0 : fas === 'haller' ? Math.min(1, hall) : 1;
+                const kvar = 1 - smaltA;
+                const sIs = s0 * Math.cbrt(Math.max(0.0001, kvar));
+                const bitar = [];
+                for (let i = 0; i < n; i++) {
+                    const sx = 70 + (i % 4) * 28, sy = 512 - Math.floor(i / 4) * 22;
+                    const ex = INRE.x + 18 + (i % 5) * 24, ey = yYta - sIs * 0.3 + Math.floor(i / 5) * 6 + (ror ? Math.sin(nu / 300 + i) * 2 : 0);
+                    const ui = Math.max(0, Math.min(1, u * 1.4 - i * 0.05));
+                    const x = sx + (ex - sx) * ui, y = sy + (ey - sy) * ui - Math.sin(Math.PI * ui) * 140;
+                    if (kvar > 0.002 || fas === 'fore') bitar.push(<Isbit key={i} x={x} y={y} s={fas === 'fore' ? s0 : sIs} rot={(i * 23) % 30 - 15} />);
+                }
+                fram = <g>{bitar}</g>;
+                kalla = (
+                    <g>
+                        <path d="M 52 520 Q 120 576 188 520 Z" fill="#dbe4ec" stroke="#6f93b8" strokeWidth="2" />
+                        {fas === 'fore' && <text x="120" y={BANK + 24} textAnchor="middle" fontSize="13" fill={COL.soft}>is, {kg(A.m)} kg, {fmt(A.T0, 0)} °C</text>}
+                        {fas !== 'fore' && kvar > 0.002 && <text x="120" y={BANK + 24} textAnchor="middle" fontSize="13" fill={COL.soft}>is kvar: {kg(A.m * kvar)} kg</text>}
+                        {fas !== 'fore' && kvar <= 0.002 && <text x="120" y={BANK + 24} textAnchor="middle" fontSize="13" fill={COL.soft}>all is har smält</text>}
+                    </g>
+                );
+            }
+
+            // ── energivågen ──
+            const lista = poster(lage, enh);
+            const avg = lista.filter((x) => x.E < 0), upp = lista.filter((x) => x.E > 0);
+            const enhet = p.bricka;
+            const stapel = (poster, x0) => {
+                const ut = [];
+                let kum = 0, lagd = 0;
+                poster.forEach((ps) => {
+                    kum += Math.abs(ps.E) / enhet;
+                    const hela = Math.floor(kum + 1e-9);
+                    for (; lagd < hela; lagd++) {
+                        const k = lagd % ST.per, r = Math.floor(lagd / ST.per);
+                        ut.push(<rect key={`${ps.k}${lagd}`} x={x0 + k * (ST.s + ST.gap)} y={ST.botten - (r + 1) * (ST.s + ST.gap)} width={ST.s} height={ST.s} rx="2.5" fill={ps.farg} stroke="rgba(15,22,32,0.35)" strokeWidth="0.7" />);
+                    }
+                });
+                // den påbörjade brickan
+                const rest = kum - lagd;
+                if (rest > 0.02 && poster.length) {
+                    const k = lagd % ST.per, r = Math.floor(lagd / ST.per);
+                    ut.push(<rect key="rest" x={x0 + k * (ST.s + ST.gap)} y={ST.botten - r * (ST.s + ST.gap) - ST.gap - ST.s * rest} width={ST.s} height={ST.s * rest} rx="1.5" fill={poster[poster.length - 1].farg} opacity="0.7" />);
+                }
+                return ut;
+            };
+            const bredd = ST.per * (ST.s + ST.gap) - ST.gap;
+            const xL = ST.x0, xR = ST.x1 - bredd;
+            const Eavg = avg.reduce((s, x) => s - x.E, 0), Eupp = upp.reduce((s, x) => s + x.E, 0);
+            const topp = ST.botten - Math.ceil(Eavg / enhet / ST.per) * (ST.s + ST.gap);
+
+            // ── T–t-diagrammet ──
+            const { tMax, Tlo, Thi } = p.skala;
+            const tx = (tt) => G.x0 + (G.x1 - G.x0) * Math.min(1, tt / tMax);
+            const ty = (T) => G.y0 - (G.y0 - G.y1) * (T - Tlo) / (Thi - Tlo);
+            const linje = (k) => hist.map((h, i) => `${i ? 'L' : 'M'} ${tx(h.t).toFixed(1)} ${ty(h[k]).toFixed(1)}`).join(' ');
+            const steg = (Thi - Tlo) > 60 ? 20 : 10;
+            const tick = [];
+            for (let T = Math.ceil(Tlo / steg) * steg; T <= Thi; T += steg) tick.push(T);
+            const tSteg = tMax > 120 ? 60 : tMax > 50 ? 20 : 10;
+            const tTick = [];
+            for (let tt = tSteg; tt < tMax; tt += tSteg) tTick.push(tt);
+            const fargA = lage === 'is' ? COL.smalt : lage === 'metall' ? COL.metall : COL.varm;
+            const fargB = lage === 'is' ? COL.varm : COL.kall;
+            const nn = namn(lage);
+            if (lage === 'is' && smaltA > 0.999) nn.A = 'smältvattnet';
+
+            return (
+                <svg ref={p.svgRef} viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet" role="img"
+                     aria-label="En kalorimeter på en labbänk med termometer och omrörare. Bredvid står staplar med joulebrickor för den avgivna och den upptagna energin, och ett diagram över de två temperaturerna.">
+                    <defs>
+                        <linearGradient id="vagg" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#f7f2e8" /><stop offset="1" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <pattern id="frigolit" width="10" height="10" patternUnits="userSpaceOnUse">
+                            <rect width="10" height="10" fill="#f4f1ea" />
+                            <circle cx="3" cy="3" r="2.2" fill="#e6e1d6" /><circle cx="8" cy="7" r="2" fill="#ebe6dc" />
+                        </pattern>
+                    </defs>
+                    <rect x="0" y="0" width={VB_W} height={VB_H} fill="url(#vagg)" />
+                    <rect x="20" y={BANK} width="440" height="14" fill="#cbb48c" stroke="#8a6230" strokeWidth="1" />
+                    <g fontFamily="Poppins, sans-serif">
+                        {kalla}
+
+                        {/* kalorimetern */}
+                        <rect x={KOPP.x} y={KOPP.y} width={KOPP.w} height={BANK - KOPP.y} rx="10" fill="url(#frigolit)" stroke="#9c9381" strokeWidth="2" />
+                        <rect x={INRE.x} y={INRE.y} width={INRE.w} height={INRE.b - INRE.y} fill={forlust ? '#d7dbe0' : '#fbfaf7'} stroke={forlust ? '#8c939c' : '#c9c1b0'} strokeWidth={forlust ? 2.4 : 1.2} />
+                        {fram}
+                        {niva > 0 && <rect x={INRE.x + 1.2} y={yYta} width={INRE.w - 2.4} height={niva} fill={vattenFarg(Tkopp)} />}
+                        {niva > 0 && <line x1={INRE.x + 1.2} y1={yYta} x2={INRE.x + INRE.w - 1.2} y2={yYta} stroke="rgba(37,99,201,0.45)" strokeWidth="1.4" />}
+                        {overst}
+                        {/* locket med hål för termometern och omröraren */}
+                        <rect x={KOPP.x - 6} y={KOPP.y - 14} width={KOPP.w + 12} height="16" rx="5" fill="url(#frigolit)" stroke="#9c9381" strokeWidth="2" />
+                        {/* omröraren */}
+                        <g transform={`translate(0 ${rorY})`}>
+                            <line x1={INRE.x + 22} y1={KOPP.y - 70} x2={INRE.x + 22} y2={INRE.b - 26} stroke="#6b7280" strokeWidth="3" />
+                            <ellipse cx={INRE.x + 22} cy={INRE.b - 24} rx="18" ry="4" fill="none" stroke="#6b7280" strokeWidth="3" />
+                            <circle cx={INRE.x + 22} cy={KOPP.y - 72} r="5" fill="#374151" />
+                        </g>
+                        <Termometer x={INRE.x + INRE.w - 30} y={KOPP.y - 110} T={Tkopp} dolj={dolj} langd={INRE.b - KOPP.y + 50} />
+                        <text x={KOPP.x + KOPP.w / 2} y={BANK + 24} textAnchor="middle" fontSize="13" fill={COL.soft}>
+                            {forlust ? 'riktig kalorimeter' : 'kalorimeter'}
+                        </text>
+                        <text x={KOPP.x + KOPP.w / 2} y={BANK + 42} textAnchor="middle" fontSize="13" fill={COL.soft}>
+                            {lage === 'vatten' ? 'kallt vatten' : 'vatten'}, {kg(B.m)} kg{fas === 'fore' ? `, ${fmt(B.T0, 0)} °C` : ''}
+                        </text>
+
+                        {/* energivågen */}
+                        <text x={(ST.x0 + ST.x1) / 2} y="92" textAnchor="middle" fontSize="16" fontWeight="600" fill={COL.ink}>Energivågen</text>
+                        <line x1={xL - 6} y1={ST.botten + 2} x2={xR + bredd + 6} y2={ST.botten + 2} stroke={COL.ink} strokeWidth="1.6" />
+                        {stapel(avg, xL)}
+                        {stapel(upp, xR)}
+                        {Eavg > enhet * 0.5 && <text x={(ST.x0 + ST.x1) / 2} y={Math.max(topp, 120) + 10} textAnchor="middle" fontSize="26" fontWeight="600" fill={COL.ink}>=</text>}
+                        {flyg.map((f) => {
+                            const u = Math.min(1, (nu - f.t0) / 420);
+                            const x = xL + bredd / 2 + (xR - xL) * u - ST.s / 2;
+                            const y = f.y - Math.sin(Math.PI * u) * 50;
+                            return <rect key={f.id} x={x} y={y} width={ST.s} height={ST.s} rx="2.5" fill={f.farg} stroke="rgba(15,22,32,0.35)" strokeWidth="0.7" opacity={1 - u * 0.4} />;
+                        })}
+                        <text x={xL + bredd / 2} y={ST.botten + 24} textAnchor="middle" fontSize="14" fontWeight="600" fill={COL.ink}>avgiven</text>
+                        <text x={xR + bredd / 2} y={ST.botten + 24} textAnchor="middle" fontSize="14" fontWeight="600" fill={COL.ink}>upptagen</text>
+                        <text x={xL + bredd / 2} y={ST.botten + 44} textAnchor="middle" fontSize="13" fill={COL.soft}>{fmtE(Eavg)}</text>
+                        <text x={xR + bredd / 2} y={ST.botten + 44} textAnchor="middle" fontSize="13" fill={COL.soft}>{fmtE(Eupp)}</text>
+                        <text x={(ST.x0 + ST.x1) / 2} y={ST.botten + 72} textAnchor="middle" fontSize="13" fill={COL.soft}>1 bricka = {fmtE(enhet)}</text>
+
+                        {/* temperaturen över tid */}
+                        <text x={G.x0} y={G.y1 - 26} fontSize="15" fontWeight="600" fill={COL.ink}>Temperaturen över tid</text>
+                        <line x1={G.x0} y1={G.y0} x2={G.x1 + 6} y2={G.y0} stroke={COL.ink} strokeWidth="1.2" />
+                        <polygon points={`${G.x1 + 10},${G.y0} ${G.x1 + 2},${G.y0 - 4} ${G.x1 + 2},${G.y0 + 4}`} fill={COL.ink} />
+                        <line x1={G.x0} y1={G.y0} x2={G.x0} y2={G.y1 - 6} stroke={COL.ink} strokeWidth="1.2" />
+                        <polygon points={`${G.x0},${G.y1 - 10} ${G.x0 - 4},${G.y1 - 2} ${G.x0 + 4},${G.y1 - 2}`} fill={COL.ink} />
+                        <text x={G.x0 + 8} y={G.y1 - 2} fontSize="13" fill={COL.soft}><tspan fontStyle="italic">T</tspan> (°C)</text>
+                        <text x={G.x1} y={G.y0 + 34} textAnchor="end" fontSize="13" fill={COL.soft}><tspan fontStyle="italic">t</tspan> (s)</text>
+                        {tick.map((T) => (
+                            <g key={T}>
+                                <line x1={G.x0 - 4} y1={ty(T)} x2={G.x0} y2={ty(T)} stroke={COL.ink} strokeWidth="1" />
+                                <text x={G.x0 - 7} y={ty(T) + 4} textAnchor="end" fontSize="12" fill={COL.soft}>{fmt(T, 0)}</text>
+                            </g>
+                        ))}
+                        {tTick.map((tt) => (
+                            <g key={tt}>
+                                <line x1={tx(tt)} y1={G.y0} x2={tx(tt)} y2={G.y0 + 4} stroke={COL.ink} strokeWidth="1" />
+                                <text x={tx(tt)} y={G.y0 + 17} textAnchor="middle" fontSize="12" fill={COL.soft}>{tt}</text>
+                            </g>
+                        ))}
+                        {!dolj && ideal != null && <line x1={G.x0} y1={ty(ideal)} x2={G.x1} y2={ty(ideal)} stroke="rgba(15,22,32,0.45)" strokeWidth="1.2" strokeDasharray="5 4" />}
+                        {hist.length > 1 && <path d={linje('A')} fill="none" stroke={fargA} strokeWidth="2.4" />}
+                        {hist.length > 1 && <path d={linje('B')} fill="none" stroke={fargB} strokeWidth="2.4" />}
+                        {/* förklaringen */}
+                        <g>
+                            <line x1={G.x0} y1={G.y0 + 56} x2={G.x0 + 22} y2={G.y0 + 56} stroke={fargA} strokeWidth="3" />
+                            <text x={G.x0 + 30} y={G.y0 + 61} fontSize="13" fill={COL.ink}>{nn.A}{dolj ? '' : `: ${fmt(TA, 1)} °C`}</text>
+                            <line x1={G.x0} y1={G.y0 + 78} x2={G.x0 + 22} y2={G.y0 + 78} stroke={fargB} strokeWidth="3" />
+                            <text x={G.x0 + 30} y={G.y0 + 83} fontSize="13" fill={COL.ink}>{nn.B}{dolj ? '' : `: ${fmt(TB, 1)} °C`}</text>
+                            {!dolj && ideal != null && <line x1={G.x0} y1={G.y0 + 100} x2={G.x0 + 22} y2={G.y0 + 100} stroke="rgba(15,22,32,0.45)" strokeWidth="1.4" strokeDasharray="5 4" />}
+                            {!dolj && ideal != null && <text x={G.x0 + 30} y={G.y0 + 105} fontSize="13" fill={COL.ink}>beräknat utan förluster: {fmt(ideal, 1)} °C</text>}
+                        </g>
+                        <text x={G.x0} y={G.y0 + 140} fontSize="14" fontWeight="600" fill={COL.ink}>Vart energin tar vägen</text>
+                        {lista.length === 0 && <text x={G.x0} y={G.y0 + 162} fontSize="13" fill={COL.soft}>ingenting ännu</text>}
+                        {lista.map((ps, i) => (
+                            <g key={ps.k}>
+                                <rect x={G.x0} y={G.y0 + 152 + i * 21} width="13" height="13" rx="2" fill={ps.farg} stroke="rgba(15,22,32,0.35)" strokeWidth="0.7" />
+                                <text x={G.x0 + 20} y={G.y0 + 163 + i * 21} fontSize="13" fill={COL.ink}>{ps.text}</text>
+                                <text x={G.x1 + 8} y={G.y0 + 163 + i * 21} textAnchor="end" fontSize="13" fill={COL.soft} style={{ fontVariantNumeric: 'tabular-nums' }}>{fmtE(Math.abs(ps.E))}</text>
+                            </g>
+                        ))}
+                        {t > 0 && <text x={KOPP.x + KOPP.w / 2} y="170" textAnchor="middle" fontSize="14" fill={COL.soft}><tspan fontStyle="italic">t</tspan> = {fmt(t, 0)} s{fas === 'klar' ? ', temperaturen har slutat ändras' : ''}</text>}
+                    </g>
+                </svg>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  REGLAGE
+        // ════════════════════════════════════════════════════════
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, disabled, color = 'var(--lab-accent, #c8324a)' }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').replace('−', '-').trim();
+                if (norm === '' || norm === '-' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt} disabled={disabled}
+                           style={{ color }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+        const Slider = ({ label, value, min, max, step, onChange, disabled, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 112, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, disabled, valueNode }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    {valueNode}
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        // Formelkortet: varje storhet har sitt namn ovanför.
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  FORMELKORTET
+        // ════════════════════════════════════════════════════════
+        const FormelKort = ({ lage, cfg, ideal, matT, klar, dolj, doljMetall, okand }) => {
+            const A = cfg.A, B = cfg.B;
+            let rad = null;
+            const Ttxt = dolj ? '?' : `${fmt(ideal.T, 1)} °C`;
+            if (lage === 'vatten') {
+                rad = <div><Sub s="c" i="" />·<Sub s="m" i="v" />·<Sub s="ΔT" i="v" /> = <Sub s="c" i="" />·<Sub s="m" i="k" />·<Sub s="ΔT" i="k" />{' '}
+                    ger {tal(4180, 0)} · {kg(A.m)} · ({fmt(A.T, 0)} − <em>T</em>) = {tal(4180, 0)} · {kg(B.m)} · (<em>T</em> − {fmt(B.T, 0)}), alltså <em>T</em> = {Ttxt}</div>;
+            } else if (lage === 'metall') {
+                const c = M.METALLER[A.typ].c;
+                rad = <div><Sub s="c" i="metall" /> · <Sub s="m" i="metall" /> · <Sub s="ΔT" i="metall" /> = <Sub s="c" i="vatten" /> · <Sub s="m" i="vatten" /> · <Sub s="ΔT" i="vatten" />{' '}
+                    ger {doljMetall ? <Sub s="c" i="metall" /> : tal(c, 0)} · {kg(A.m)} · (100 − <em>T</em>) = {tal(4180, 0)} · {kg(B.m)} · (<em>T</em> − {fmt(B.T, 0)}){doljMetall ? '' : <span>, alltså <em>T</em> = {Ttxt}</span>}
+                    {doljMetall && klar && matT != null && !dolj && (
+                        <div className="mt-1">Med den uppmätta temperaturen <em>T</em> = {fmt(matT, 1)} °C blir <Sub s="c" i="metall" /> ={' '}
+                            <Brak t={`${tal(4180, 0)} · ${kg(B.m)} · (${fmt(matT, 1)} − ${fmt(B.T, 0)})`} n={`${kg(A.m)} · (100 − ${fmt(matT, 1)})`} /> ≈ {fmt(M.cUrMatning(A.m, 100, B.m, B.T, Math.round(matT * 10) / 10) / 1000, 2)} kJ/(kg · K)</div>
+                    )}
+                </div>;
+            } else {
+                const helt = ideal.smaltMassa >= A.m - 1e-9;
+                const fryser = ideal.smaltMassa < -1e-9;
+                rad = <div>
+                    {fryser && ideal.T < -1e-9 ? <span>Isen är så kall och så stor att allt vatten fryser till is. Sluttemperaturen blir <em>T</em> = {Ttxt}.</span>
+                    : fryser ? <span><Sub s="c" i="is" /> · <Sub s="m" i="is" /> · <Sub s="ΔT" i="is" /> = <Sub s="c" i="v" /> · <Sub s="m" i="v" /> · <Sub s="ΔT" i="v" /> + <Sub s="l" i="s" /> · <Sub s="m" i="fruset" />{' '}
+                        ger {tal(2200, 0)} · {kg(A.m)} · {fmt(-A.T, 0)} = {tal(4180, 0)} · {kg(B.m)} · {fmt(B.T, 0)} + {tal(334000, 0)} · <Sub s="m" i="fruset" />,
+                        alltså <Sub s="m" i="fruset" /> = {dolj ? '?' : `${fmt(-ideal.smaltMassa, 3)} kg`} och <em>T</em> = 0 °C. En del av vattnet fryser till is.</span>
+                    : helt ? <span><Sub s="c" i="v" /> · <Sub s="m" i="v" /> · <Sub s="ΔT" i="v" /> = <Sub s="c" i="is" /> · <Sub s="m" i="is" /> · <Sub s="ΔT" i="is" /> + <Sub s="l" i="s" /> · <Sub s="m" i="is" /> + <Sub s="c" i="v" /> · <Sub s="m" i="is" /> · <em>T</em>{' '}
+                        ger {tal(4180, 0)} · {kg(B.m)} · ({fmt(B.T, 0)} − <em>T</em>) = {tal(2200, 0)} · {kg(A.m)} · {fmt(-A.T, 0)} + {tal(334000, 0)} · {kg(A.m)} + {tal(4180, 0)} · {kg(A.m)} · <em>T</em>, alltså <em>T</em> = {Ttxt}. All is smälter.</span>
+                    : <span><Sub s="c" i="v" /> · <Sub s="m" i="v" /> · <Sub s="ΔT" i="v" /> = <Sub s="c" i="is" /> · <Sub s="m" i="is" /> · <Sub s="ΔT" i="is" /> + <Sub s="l" i="s" /> · <Sub s="m" i="smältis" />{' '}
+                        ger {tal(4180, 0)} · {kg(B.m)} · {fmt(B.T, 0)} = {tal(2200, 0)} · {kg(A.m)} · {fmt(-A.T, 0)} + {tal(334000, 0)} · <Sub s="m" i="smältis" />,
+                        alltså <Sub s="m" i="smältis" /> = {dolj ? '?' : `${fmt(ideal.smaltMassa, 3)} kg`} och <em>T</em> = 0 °C. Vattnets energi räcker inte för att smälta all is.</span>}
+                </div>;
+            }
+            return (
+                <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                    <div className="flex flex-wrap items-center gap-x-10 gap-y-3 mb-3 fk-rader">
+                        <div className="flex items-center gap-x-3">
+                            <Vbl label="Energi"><em>E</em></Vbl>
+                            <span className="fnum">=</span>
+                            <Vbl label={<span>Specifik<br />värmekapacitet</span>}><em>c</em></Vbl>
+                            <span className="fnum">·</span>
+                            <Vbl label="Massa"><em>m</em></Vbl>
+                            <span className="fnum">·</span>
+                            <Vbl label={<span>Temperatur-<br />ändring</span>}><span>Δ<em>T</em></span></Vbl>
+                        </div>
+                        <div className="flex items-center gap-x-3">
+                            <Vbl label="Avgiven energi"><Sub s="E" i="avg" /></Vbl>
+                            <span className="fnum">=</span>
+                            <Vbl label="Upptagen energi"><Sub s="E" i="upp" /></Vbl>
+                        </div>
+                        {lage === 'is' && (
+                            <div className="flex items-center gap-x-3">
+                                <Vbl label="Smältenergi"><em>E</em></Vbl>
+                                <span className="fnum">=</span>
+                                <Vbl label={<span>Specifik<br />smältentalpi</span>}><Sub s="l" i="s" /></Vbl>
+                                <span className="fnum">·</span>
+                                <Vbl label="Massa"><em>m</em></Vbl>
+                            </div>
+                        )}
+                    </div>
+                    <div className="pt-3 fnum-live" style={{ borderTop: '1px solid var(--lab-line, rgba(15,22,32,0.14))' }}>
+                        {dolj ? <div>Räkna ut sluttemperaturen innan du blandar.</div> : rad}
+                        <div className="mt-1 text-base" style={{ color: 'var(--lab-ink-soft)' }}>
+                            {lage === 'is'
+                                ? 'Medan isen smälter står temperaturen still vid 0 °C. Energin går till att bryta bindningarna i isen, inte till att höja temperaturen.'
+                                : <span>Utan energiförluster är den avgivna energin lika stor som den upptagna. Här är <span style={{ whiteSpace: 'nowrap' }}><em>c</em> · <em>m</em></span> = {doljMetall ? '?' : tal(M.METALLER[A.typ] ? M.METALLER[A.typ].c * A.m : 4180 * A.m, 0)} J/K för {namn(lage).A} och {tal(4180 * B.m, 0)} J/K för {namn(lage).B}: det som har störst <span style={{ whiteSpace: 'nowrap' }}><em>c</em> · <em>m</em></span> behöver mest energi för varje grad och ändrar därför temperatur minst. Sluttemperaturen hamnar närmast dess starttemperatur.</span>}
+                            {' '}<em>c</em> för vatten är 4,18 kJ/(kg · K){lage === 'is' ? <span>, <em>c</em> för is 2,2 kJ/(kg · K) och <Sub s="l" i="s" /> för is 334 kJ/kg</span> : ''}.
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  FÄRDIGA FÖRSÖK OCH GISSA-LÄGET
+        // ════════════════════════════════════════════════════════
+        const FORSOK = [
+            { id: 'ex2',    namn: 'Exempel 2 i teorin', sub: 'Uppvärmning och avsvalning: 5,0 dl vid 80 °C i 3,0 dl vid 20 °C', lage: 'vatten', p: { mV: 0.5, TV: 80, mK: 0.3, TK: 20 } },
+            { id: 'lika',   namn: 'Lika mycket av varje', sub: '0,30 kg vid 80 °C och vid 20 °C', lage: 'vatten', p: { mV: 0.3, TV: 80, mK: 0.3, TK: 20 } },
+            { id: 'koppar', namn: 'Kopparbit i vatten', sub: '0,10 kg koppar i 0,30 kg vatten', lage: 'metall', p: { metall: 'koppar', mM: 0.1, mW: 0.3, TW: 20 } },
+            { id: 'okand',  namn: 'Den okända metallen', sub: 'räkna ut c och slå upp metallen', lage: 'metall', p: { metall: 'okand', mM: 0.2, mW: 0.2, TW: 20 } },
+            { id: 'isex',   namn: 'Is i varmt vatten', sub: 'Exempel 2 i Faser och fasövergångar', lage: 'is', p: { mW2: 1.0, TW2: 56, mIs: 2.0, TIs: -8 } },
+            { id: 'isbit',  namn: 'En isbit i ett glas', sub: '50 g is vid −18 °C, 0,30 kg vatten', lage: 'is', p: { mW2: 0.3, TW2: 20, mIs: 0.05, TIs: -18 } },
+        ];
+        const slump = (a) => a[Math.floor(Math.random() * a.length)];
+        function nyUppgift(typ) {
+            if (typ === 'slut') {
+                if (Math.random() < 0.5) {
+                    const TV = slump([60, 70, 80, 90]), TK = slump([10, 15, 20]);
+                    return { typ, lage: 'vatten', p: { mV: slump([0.1, 0.2, 0.3, 0.4, 0.5]), TV, mK: slump([0.1, 0.2, 0.3, 0.4, 0.5]), TK } };
+                }
+                return { typ, lage: 'metall', p: { metall: slump(METALL_ORDNING), mM: slump([0.2, 0.3, 0.4, 0.5]), mW: slump([0.1, 0.2, 0.3]), TW: slump([15, 20]) } };
+            }
+            // vilken metall: vattnets temperatur ska stiga minst 4 grader, annars blir avläsningen för grov
+            for (let i = 0; i < 200; i++) {
+                const met = slump(METALL_ORDNING), mM = slump([0.1, 0.2, 0.3, 0.4, 0.5]), mW = slump([0.1, 0.2, 0.3]), TW = slump([15, 20]);
+                const c = M.METALLER[met].c;
+                const T = (c * mM * 100 + 4180 * mW * TW) / (c * mM + 4180 * mW);
+                if (T - TW >= 4) return { typ, lage: 'metall', met, p: { metall: 'okand', mM, mW, TW } };
+            }
+            return { typ, lage: 'metall', met: 'aluminium', p: { metall: 'okand', mM: 0.3, mW: 0.2, TW: 20 } };
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  HUVUDAPP
+        // ════════════════════════════════════════════════════════
+        const App = () => {
+            const q = new URLSearchParams(location.search).get('lage');
+            const [lage, setLage] = useState(q === 'is' || q === 'metall' ? q : 'vatten');
+            const [p, setP] = useState({ mV: 0.5, TV: 80, mK: 0.3, TK: 20, metall: 'koppar', mM: 0.1, mW: 0.3, TW: 20, mW2: 1.0, TW2: 56, mIs: 2.0, TIs: -8 });
+            const [okand, setOkand] = useState(() => slump(METALL_ORDNING));
+            const [visaOkand, setVisaOkand] = useState(false);
+            const [forlust, setForlust] = useState(false);
+            const [snabb, setSnabb] = useState(false);
+            const [fas, setFas] = useState('fore');          // fore, haller, ror, klar
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [, setFrame] = useState(0);
+            const [gissa, setGissa] = useState(null);
+            const [svarTxt, setSvarTxt] = useState('');
+            const [svarStatus, setSvarStatus] = useState(null);
+            const [poang, setPoang] = useState({ ratt: 0, totalt: 0, svit: 0 });
+
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const stRef = useRef(null);
+            const histRef = useRef([]);
+            const hallRef = useRef(0);
+            const flygRef = useRef([]);
+            const idRef = useRef(0);
+            const lagdRef = useRef(0);
+            const lastRef = useRef(null);
+            const bubblaRef = useRef(0);
+            const live = useRef({});
+
+            const okandTyp = gissa && gissa.typ === 'metall' ? gissa.met : okand;
+            const cfg = useMemo(() => uppstallning(lage, p, okandTyp), [lage, p, okandTyp]);
+            // En provkörning ger brickans storlek och diagrammets skalor.
+            const prov = useMemo(() => {
+                const s = M.nyttForsok({ ...cfg, forlust });
+                let n = 0;
+                const T = [M.temp(s.A), M.temp(s.B), s.ideal.T];
+                while (!M.steg(s, 0.25) && n < 4000) n++;
+                T.push(M.temp(s.A), M.temp(s.B));
+                const e = M.energier(s);
+                const Eavg = poster(lage, e).filter((x) => x.E < 0).reduce((a, x) => a - x.E, 0);
+                const lo = Math.min(...T), hi = Math.max(...T);
+                return {
+                    bricka: brickVarde(Eavg),
+                    // modellsekunder per verklig sekund: ett försök tar ungefär nio sekunder att se
+                    fart: Math.max(2, Math.min(30, s.t / 9)),
+                    skala: { tMax: Math.max(20, Math.ceil(s.t * 1.15 / 10) * 10), Tlo: Math.floor((lo - 4) / 10) * 10, Thi: Math.ceil((hi + 4) / 10) * 10 },
+                };
+            }, [cfg, forlust, lage]);
+
+            const nyttForsok = () => {
+                stRef.current = M.nyttForsok({ ...cfg, forlust });
+                histRef.current = [{ t: 0, A: M.temp(stRef.current.A), B: M.temp(stRef.current.B) }];
+                hallRef.current = 0; flygRef.current = []; lagdRef.current = 0;
+                setFas('fore');
+            };
+            // en ny uppställning ger ett nytt försök direkt, så att scenen aldrig ritar det gamla
+            const nyckel = JSON.stringify([cfg, forlust]);
+            const nyckelRef = useRef(null);
+            if (nyckelRef.current !== nyckel) {
+                nyckelRef.current = nyckel;
+                stRef.current = M.nyttForsok({ ...cfg, forlust });
+                histRef.current = [{ t: 0, A: M.temp(stRef.current.A), B: M.temp(stRef.current.B) }];
+                hallRef.current = 0; flygRef.current = []; lagdRef.current = 0;
+            }
+            useEffect(() => { setFas('fore'); }, [nyckel]);
+            live.current = { fas, snabb, lage, bricka: prov.bricka, fart: prov.fart };
+
+            useEffect(() => {
+                let raf;
+                const loop = (ts) => {
+                    if (lastRef.current == null) lastRef.current = ts;
+                    const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
+                    lastRef.current = ts;
+                    const L = live.current;
+                    if (L.fas === 'haller') {
+                        hallRef.current = Math.min(1, hallRef.current + dt / 1.6);
+                        if (hallRef.current >= 1) setFas('ror');
+                    } else if (L.fas === 'ror') {
+                        const st = stRef.current;
+                        const klar = M.steg(st, dt * L.fart * (L.snabb ? 5 : 1));
+                        const h = histRef.current;
+                        h.push({ t: st.t, A: M.temp(st.A), B: M.temp(st.B) });
+                        if (h.length > 1500) h.splice(1, 1);
+                        // en ny hel bricka flyger från den avgivna till den upptagna stapeln
+                        const lista = poster(L.lage, M.energier(st));
+                        const Eavg = lista.filter((x) => x.E < 0).reduce((a, x) => a - x.E, 0);
+                        const hela = Math.floor(Eavg / L.bricka);
+                        if (hela > lagdRef.current) {
+                            const sista = lista.filter((x) => x.E > 0).pop();
+                            const r = Math.floor(lagdRef.current / ST.per);
+                            if (!L.snabb && sista) flygRef.current.push({ id: idRef.current++, t0: ts, y: ST.botten - (r + 1) * (ST.s + ST.gap), farg: sista.farg });
+                            lagdRef.current = hela;
+                        }
+                        if (klar) setFas('klar');
+                    }
+                    const flog = flygRef.current.length > 0;
+                    flygRef.current = flygRef.current.filter((f) => ts - f.t0 < 420);
+                    // rita bara om när något rör sig; kastrullens bubblor räcker med tio bilder i sekunden
+                    if (L.fas === 'haller' || L.fas === 'ror' || flog) setFrame((n) => n + 1);
+                    else if (L.lage === 'metall' && ts - (bubblaRef.current || 0) > 100) { bubblaRef.current = ts; setFrame((n) => n + 1); }
+                    raf = requestAnimationFrame(loop);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, []);
+
+            const blanda = () => { if (fas === 'fore') { hallRef.current = 0; setFas('haller'); } };
+            const satt = (nytt) => setP((x) => ({ ...x, ...nytt }));
+            const valjLage = (l) => { setLage(l); setVisaOkand(false); };
+            const korForsok = (f) => {
+                setLage(f.lage); satt(f.p); setVisaOkand(false);
+                if (f.p.metall === 'okand') setOkand(slump(METALL_ORDNING));
+                setTimeout(() => { hallRef.current = 0; setFas('haller'); }, 650);
+            };
+
+            // ── Gissa-läget ──
+            const startaGissa = (t) => {
+                const u = nyUppgift(t);
+                setGissa(u); setSvarTxt(''); setSvarStatus(null); setVisaOkand(false); setForlust(false);
+                setLage(u.lage); satt(u.p);
+                if (t === 'metall') setTimeout(() => { hallRef.current = 0; setFas('haller'); }, 650);
+            };
+            const kolla = (val) => {
+                const u = gissa;
+                let ratt, text;
+                if (u.typ === 'slut') {
+                    const n = parseFloat(svarTxt.replace(/\s| /g, '').replace(',', '.').replace('−', '-'));
+                    if (!isFinite(n)) { setSvarStatus({ ratt: false, text: 'Skriv in ett tal, till exempel 45.' }); return; }
+                    const c = uppstallning(u.lage, { ...p, ...u.p }, null);
+                    const id = M.nyttForsok(c).ideal.T;
+                    ratt = Math.abs(n - id) <= 0.5;
+                    if (u.lage === 'vatten') {
+                        text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} Det varma vattnet avger lika mycket energi som det kalla tar upp: c · m_v · (${fmt(u.p.TV, 0)} − T) = c · m_k · (T − ${fmt(u.p.TK, 0)}). Med m_v = ${kg(u.p.mV)} kg och m_k = ${kg(u.p.mK)} kg blir T = ${fmt(id, 1)} °C.`;
+                        if (!ratt && Math.abs(n - (u.p.TV + u.p.TK) / 2) <= 0.5 && u.p.mV !== u.p.mK) text += ' Du tog medelvärdet av temperaturerna, men det gäller bara när det är lika mycket varmt som kallt vatten.';
+                    } else {
+                        const cm = M.METALLER[u.p.metall].c;
+                        text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} Metallen avger lika mycket energi som vattnet tar upp: c_metall · m_metall · (100 − T) = c_vatten · m_vatten · (T − ${fmt(u.p.TW, 0)}). Med c_metall = ${tal(cm, 0)} J/(kg · K) blir sluttemperaturen T = ${fmt(id, 1)} °C.`;
+                        const vagt = (u.p.mM * 100 + u.p.mW * u.p.TW) / (u.p.mM + u.p.mW);
+                        if (!ratt && Math.abs(n - vagt) <= 1) text += ' Du viktade temperaturerna bara med massorna. Vatten behöver mycket mer energi per kilogram och grad än metallen, så sluttemperaturen hamnar nära vattnets.';
+                    }
+                    hallRef.current = 0; setFas('haller');
+                } else {
+                    const st = stRef.current;
+                    const Tm = Math.round(M.temp(st.B) * 10) / 10;
+                    const c = M.cUrMatning(u.p.mM, 100, u.p.mW, u.p.TW, Tm);
+                    ratt = val === u.met;
+                    text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} Vattnet tog upp c_vatten · m_vatten · ΔT_vatten = ${tal(4180, 0)} · ${kg(u.p.mW)} · (${fmt(Tm, 1)} − ${fmt(u.p.TW, 0)}) = ${fmtE(4180 * u.p.mW * (Tm - u.p.TW))}. Metallen avgav lika mycket, så c_metall = ${fmtE(4180 * u.p.mW * (Tm - u.p.TW))} delat med ${kg(u.p.mM)} · (100 − ${fmt(Tm, 1)}) ≈ ${fmt(c / 1000, 2)} kJ/(kg · K). Det är ${M.METALLER[u.met].namn.toLowerCase()}, ${fmt(M.METALLER[u.met].c / 1000, 2)} kJ/(kg · K).`;
+                    setVisaOkand(true);
+                }
+                setSvarStatus({ ratt, text });
+                setPoang((x) => ({ ratt: x.ratt + (ratt ? 1 : 0), totalt: x.totalt + 1, svit: ratt ? x.svit + 1 : 0 }));
+            };
+            const avslutaGissa = () => { setGissa(null); setSvarStatus(null); };
+            const dolj = !!gissa && gissa.typ === 'slut' && svarStatus === null;
+            const doljMetall = lage === 'metall' && p.metall === 'okand' && !visaOkand;
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(document.fullscreenElement === sceneWrapRef.current || document.webkitFullscreenElement === sceneWrapRef.current);
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => { document.removeEventListener('fullscreenchange', handler); document.removeEventListener('webkitfullscreenchange', handler); };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const st = stRef.current;
+            const las = !!gissa;
+            const ideal = st.ideal;
+            const startTxt = lage === 'vatten' ? 'Häll i det varma vattnet' : lage === 'metall' ? 'Sänk ned metallbiten' : 'Lägg i isen';
+            const reglage = (Sl, kompakt) => {
+                const rad = (label, value, min, max, step, onChange, unit, d = 0) => (
+                    <Sl key={label} label={label} value={value} min={min} max={max} step={step} onChange={onChange} disabled={las}
+                        {...(kompakt ? { valueNode: <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, d)} unit={unit} disabled={las} onCommit={onChange} /> } : {})}>
+                        {!kompakt && <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, d)} unit={unit} disabled={las} onCommit={onChange} />}
+                    </Sl>
+                );
+                if (lage === 'vatten') return (
+                    <React.Fragment>
+                        {rad('Varmt vatten, massa', p.mV, 0.05, 1, 0.05, (x) => satt({ mV: x }), 'kg', 2)}
+                        {rad('Varmt vatten, <em>T</em>', p.TV, 30, 100, 1, (x) => satt({ TV: x, TK: Math.min(p.TK, x - 1) }), '°C')}
+                        {rad('Kallt vatten, massa', p.mK, 0.05, 1, 0.05, (x) => satt({ mK: x }), 'kg', 2)}
+                        {rad('Kallt vatten, <em>T</em>', p.TK, 0, 60, 1, (x) => satt({ TK: Math.min(x, p.TV - 1) }), '°C')}
+                    </React.Fragment>
+                );
+                if (lage === 'metall') return (
+                    <React.Fragment>
+                        {rad('Metallbitens massa', p.mM, 0.05, 1, 0.05, (x) => satt({ mM: x }), 'kg', 2)}
+                        {rad('Vattnets massa', p.mW, 0.05, 1, 0.05, (x) => satt({ mW: x }), 'kg', 2)}
+                        {rad('Vattnets <em>T</em>', p.TW, 0, 40, 1, (x) => satt({ TW: x }), '°C')}
+                    </React.Fragment>
+                );
+                return (
+                    <React.Fragment>
+                        {rad('Vattnets massa', p.mW2, 0.1, 2, 0.1, (x) => satt({ mW2: x }), 'kg', 1)}
+                        {rad('Vattnets <em>T</em>', p.TW2, 5, 90, 1, (x) => satt({ TW2: x }), '°C')}
+                        {rad('Isens massa', p.mIs, 0.01, 2, 0.01, (x) => satt({ mIs: x }), 'kg', 2)}
+                        {rad('Isens <em>T</em>', p.TIs, -30, 0, 1, (x) => satt({ TIs: x }), '°C')}
+                    </React.Fragment>
+                );
+            };
+            const knappar = (kl) => (
+                <React.Fragment>
+                    <button className={`btn-start ${kl}`} onClick={blanda} disabled={las || fas !== 'fore'}>{startTxt}</button>
+                    <button className={`btn-toggle ${kl}`} onClick={nyttForsok} disabled={las && svarStatus === null}>Börja om</button>
+                </React.Fragment>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Inställningar</div>
+                        <label><input type="checkbox" checked={forlust} disabled={las} onChange={() => setForlust((x) => !x)} /><span>Riktig kalorimeter</span></label>
+                        <label><input type="checkbox" checked={snabb} onChange={() => setSnabb((x) => !x)} /><span>Snabbspola</span></label>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglage(StSlider, true)}</div>
+                                <div className="st-actions">{knappar('')}</div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-7xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Kalorimetern
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Kalorimetern</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            I en kalorimeter blandas två ämnen med olika temperatur. Det varma avger energi och det kalla tar upp lika mycket,
+                            tills båda har samma temperatur. Blanda vatten, sänk ned en metallbit eller lägg i is, och följ joulebrickorna i
+                            energivågen. Med en okänd metall blir kalorimetern ett mätinstrument: räkna ut metallens specifika värmekapacitet och slå upp vilken metall det är.
+                        </p>
+
+                        <FormelKort lage={lage} cfg={cfg} ideal={ideal} matT={fas === 'klar' ? M.temp(st.B) : null} klar={fas === 'klar'} dolj={dolj} doljMetall={doljMetall} okand={okandTyp} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 xl:w-3/4 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <Scen lage={lage} cfg={cfg} svgRef={svgRef} st={st} fas={fas} hall={hallRef.current} t={st.t} hist={histRef.current}
+                                          enh={M.energier(st)} flyg={flygRef.current} nu={performance.now()} dolj={dolj} doljMetall={doljMetall} okand={okandTyp}
+                                          ideal={forlust || fas !== 'fore' ? ideal.T : null} forlust={forlust} ror={fas === 'ror'} bricka={prov.bricka} skala={prov.skala} />
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    {lage !== 'metall' && 'I verkligheten blandas vattnet på några sekunder. Simuleringen visar förloppet långsamt, som om det varma och det kalla vore två delar som omröraren för samman, så att du kan följa hur energin flyttas. Sluttemperaturen blir densamma. '}
+                                    {forlust
+                                        ? `Den riktiga kalorimetern har en inre kopp, omrörare och termometer som tillsammans har värmekapaciteten ${M.KOPP_C} J/K och som börjar vid vattnets temperatur. Dessutom går lite energi genom isoleringen, mot rummets ${M.T_RUM} °C. När det varma vattnet eller metallbiten värmer det kalla tar koppen och rummet emot energi, och sluttemperaturen blir lite lägre än den beräknade. När is kyler vattnet ger koppen och rummet energi i stället, och sluttemperaturen blir lite högre.`
+                                        : 'En idealisk kalorimeter: koppen tar inte upp någon energi och ingen energi läcker ut. Slå på Riktig kalorimeter för att se vad som händer i en verklig mätning.'}
+                                </p>
+                            </div>
+
+                            <div className="lg:w-1/3 xl:w-1/4 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Försök</div>
+                                    <div className="mode-seg mb-3" style={{ flexDirection: 'column' }}>
+                                        {LAGEN.map(([k, n]) => <button key={k} className={lage === k ? 'active' : ''} disabled={las} onClick={() => valjLage(k)}>{n}</button>)}
+                                    </div>
+                                    {lage === 'metall' && (
+                                        <React.Fragment>
+                                            <div className="flbl mb-2" style={{ textAlign: 'left' }}>Metall</div>
+                                            <div className="forsok-lista mb-2">
+                                                {[...METALL_ORDNING, 'okand'].map((k) => (
+                                                    <button key={k} className="forsok" disabled={las} onClick={() => { satt({ metall: k }); setVisaOkand(false); if (k === 'okand') setOkand(slump(METALL_ORDNING)); }}
+                                                            style={p.metall === k ? { background: 'var(--lab-ink)', color: 'var(--lab-bg)' } : undefined}>
+                                                        {k === 'okand' ? 'Okänd metall' : M.METALLER[k].namn}
+                                                        {k !== 'okand' && <span className="sub">{fmt(M.METALLER[k].c / 1000, 2)} kJ/(kg · K)</span>}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                            {p.metall === 'okand' && !las && (
+                                                <button className="btn-toggle w-full mb-1" onClick={() => setVisaOkand(true)} disabled={visaOkand}>
+                                                    {visaOkand ? `Det är ${M.METALLER[okand].namn.toLowerCase()}` : 'Visa vilken metall det är'}
+                                                </button>
+                                            )}
+                                        </React.Fragment>
+                                    )}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    {!isFullscreen && reglage(Slider, false)}
+                                    {isFullscreen && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Reglagen finns i rutan uppe till höger i fullskärm.</p>}
+                                    {lage === 'metall' && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Metallbiten har värmts i kokande vatten, så den har temperaturen 100 °C.</p>}
+                                    <div className="flex gap-2 mt-2">{knappar('flex-1')}</div>
+                                    <label className="flex items-center gap-2 text-sm mt-2" style={{ color: 'var(--lab-ink)' }}>
+                                        <input type="checkbox" checked={forlust} disabled={las} onChange={() => setForlust((x) => !x)} /> Riktig kalorimeter (koppen och läckaget)
+                                    </label>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Färdiga försök</div>
+                                    <div className="forsok-lista">
+                                        {FORSOK.map((f) => (
+                                            <button key={f.id} className="forsok" disabled={las} onClick={() => korForsok(f)}>
+                                                {f.namn}<span className="sub">{f.sub}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flbl" style={{ textAlign: 'left' }}>Gissa-läge</div>
+                                        {poang.totalt > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>{poang.ratt} av {poang.totalt} rätt{poang.svit > 1 ? `, ${poang.svit} i rad` : ''}</div>}
+                                    </div>
+                                    {!gissa && (
+                                        <div className="flex flex-col gap-2">
+                                            <button className="btn-toggle" onClick={() => startaGissa('slut')}>Vad blir sluttemperaturen?</button>
+                                            <button className="btn-toggle" onClick={() => startaGissa('metall')}>Vilken metall är det?</button>
+                                        </div>
+                                    )}
+                                    {gissa && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                {gissa.typ === 'slut'
+                                                    ? (gissa.lage === 'vatten'
+                                                        ? <span>{kg(gissa.p.mV)} kg vatten med temperaturen {fmt(gissa.p.TV, 0)} °C hälls i {kg(gissa.p.mK)} kg vatten med temperaturen {fmt(gissa.p.TK, 0)} °C. Vad blir sluttemperaturen?</span>
+                                                        : <span>En bit {M.METALLER[gissa.p.metall].namn.toLowerCase()} på {kg(gissa.p.mM)} kg värms till 100 °C och sänks ned i {kg(gissa.p.mW)} kg vatten med temperaturen {fmt(gissa.p.TW, 0)} °C. Vad blir sluttemperaturen? <em>c</em> för {M.METALLER[gissa.p.metall].namn.toLowerCase()} är {fmt(M.METALLER[gissa.p.metall].c / 1000, 2)} kJ/(kg · K).</span>)
+                                                    : <span>En okänd metallbit på {kg(gissa.p.mM)} kg har värmts till 100 °C och sänks ned i {kg(gissa.p.mW)} kg vatten med temperaturen {fmt(gissa.p.TW, 0)} °C. Läs av sluttemperaturen, räkna ut metallens specifika värmekapacitet och välj metall.</span>}
+                                            </p>
+                                            {gissa.typ === 'slut' ? (
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span><em>T</em> =</span>
+                                                    <input className="gissa-in" type="text" inputMode="decimal" value={svarTxt} disabled={svarStatus !== null}
+                                                           onChange={(e) => setSvarTxt(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && svarStatus === null) kolla(); }} />
+                                                    <span>°C</span>
+                                                    <button className="btn-start" onClick={() => kolla()} disabled={svarStatus !== null}>Kolla</button>
+                                                </div>
+                                            ) : (
+                                                <div className="forsok-lista mb-2">
+                                                    {METALL_ORDNING.map((k) => (
+                                                        <button key={k} className="forsok" disabled={svarStatus !== null || fas !== 'klar'} onClick={() => kolla(k)}>
+                                                            {M.METALLER[k].namn}<span className="sub">{fmt(M.METALLER[k].c / 1000, 2)} kJ/(kg · K)</span>
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            )}
+                                            {gissa.typ === 'metall' && fas !== 'klar' && svarStatus === null && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Vänta tills temperaturen har slutat ändras.</p>}
+                                            {svarStatus && <p className="text-sm mb-2" style={{ color: svarStatus.ratt ? '#15803d' : 'var(--lab-accent)' }}><Fx text={svarStatus.text} /></p>}
+                                            <div className="flex gap-2">
+                                                {svarStatus && <button className="btn-toggle flex-1" onClick={() => startaGissa(gissa.typ)}>Ny uppgift</button>}
+                                                <button className="btn-toggle flex-1" onClick={avslutaGissa}>Avsluta</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Så fungerar en kalorimeter</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    En kalorimeter är ett välisolerat kärl med lock, omrörare och termometer. Isoleringen gör att nästan ingen energi
+                                    går ut till rummet, så den energi som det varma avger tas upp av det kalla. Omrörningen gör att temperaturen blir
+                                    densamma i hela kärlet, och termometern visar när den har slutat ändras.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Vattnets temperatur ändras minst</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Vatten har en ovanligt stor specifik värmekapacitet, 4,18 kJ/(kg · K), ungefär tio gånger så stor som koppars.
+                                    Därför ändras vattnets temperatur bara lite när en het metallbit sänks ned i det, medan metallbiten svalnar nästan
+                                    ända ned till vattnets temperatur.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Is kyler mer än kallt vatten</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Att smälta ett kilogram is kräver 334 kJ. Det räcker för att värma ett kilogram vatten 80 grader. Därför kyler
+                                    en isbit en dryck mycket mer än samma massa iskallt vatten, och temperaturen står still vid 0 °C så länge det finns is kvar.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Sluttemperaturen är alltid medelvärdet.”</strong> Bara när det är lika mycket av samma ämne, eller när båda har lika stort <em>c</em> · <em>m</em>. Annars hamnar
+                                    sluttemperaturen närmast det som har störst <em>c</em> · <em>m</em>.</li>
+                                <li><strong>”Det kalla avger kyla.”</strong> Nej. Det är energi som går från det varma till det kalla. Det kalla blir varmare
+                                    för att det tar emot energi.</li>
+                                <li><strong>”Metallbiten och vattnet ändrar temperatur lika mycket.”</strong> Nej. Metallbiten avger lika mycket energi som vattnet tar upp, men vattnet
+                                    har oftast mycket större <em>c</em> · <em>m</em> och behöver därför mer energi för varje grad, så dess temperatur ändras mindre.</li>
+                                <li><strong>”Isen blir varmare medan den smälter.”</strong> Nej. Under smältningen står temperaturen still vid 0 °C. Energin går
+                                    åt till att bryta bindningarna mellan vattenmolekylerna i isen.</li>
+                                <li><strong>”En mätning som ger lite för låg temperatur är fel.”</strong> Nej. När blandningen är varmare än rummet visar den att energi har gått till kalorimeterns
+                                    kopp och ut till rummet. Därför gör man mätningen snabbt och med god isolering.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

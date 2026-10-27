@@ -61,7 +61,7 @@ Tas när del 1 och 2 är klara.
 
 | # | Bokens delkapitel | Det som finns | Vad som saknas | Klar |
 |---|---|---|---|---|
-| 15 | 7.3 Kalorimetri | Uppvärmning och avsvalning | En kalorimeter där två ämnen blandas och sluttemperaturen förutsägs | [ ] |
+| 15 | 7.3 Kalorimetri | Uppvärmning och avsvalning | En kalorimeter där två ämnen blandas och sluttemperaturen förutsägs | [x] |
 | 16 | 1.2 Målinger og usikkerhet | Enhetskollen (delvis) | Mätosäkerhet: upprepade mätningar, medelvärde och spridning. Sigbjørn har egen app, stäm av först | [ ] |
 
 ---
@@ -201,9 +201,21 @@ Tas när del 1 och 2 är klara.
 - [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn; testet `%TEMP%\pptr-test\steg-gissa.js` (gissa och kopiering)
 - [x] Fysikgranskning och språkgranskning, rättningarna införda (varning när tidssteget är längre än bromstiden, förklaring till felkartan med luftmotstånd, missuppfattningen om lätta bollar, kastvidden i scenen, formelkortet med rakt bråkstreck och a_y, fallets tyngdpunkt och nedslagsfart)
 - [x] Sam testar och godkänner (2026-10-27)
-- [ ] Commit och push till `main`
+- [x] Commit och push till `main` (4c34f8a5)
 - [ ] Länken till Sigbjørn
 - [ ] Fråga till Sam: teorin fy2-1.9 föreslår cellen G2 för tidssteget i tipsrutan, men simuleringens blad har tidssteget i J2 (G är *a*_y); och "de värdesiffror du bryr dig om" i tipsrutan
+
+## Status: nr 15, Kalorimetern (`fysik1-kalorimetri-app.html`)
+
+- [x] Koncept godkänt (2026-10-27, `koncept-15-kalorimetri.md`): alla tre lägena (även isen), energiförlusterna avslagna från början, djuplänken `?lage=is` från fy1-6.3
+- [x] Motorn med test: `node .claude/test-kalorimeter-motor.js` (exempel 2 i fy1-6.2 och fy1-6.3, kopparbiten, isbiten som smälter helt, vatten som fryser, energibevarandet med koppen och läckaget)
+- [x] Sidan byggd: kalorimetern med bägare, kastrull och isskål, energivågen med joulebrickor, *T*–*t*-diagrammet, "Vart energin tar vägen", riktig kalorimeter, sex färdiga försök, gissa-läge (sluttemperaturen, den okända metallen)
+- [x] Inkopplad: `href2` på fy1-6.2, `href` med `?lage=is` på fy1-6.3, `data/simuleringar.js`, `UPDATES`, `verify-navigation.js`
+- [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn; testet `%TEMP%\pptr-test\kal-gissa.js`
+- [x] Fysikgranskning och språkgranskning, rättningarna införda (den riktiga kalorimeterns avvikelse åt båda hållen, allt eller en del av vattnet fryser, isen står på exakt 0 °C, c · m för båda kropparna i formelkortet, en mening om att blandningen visas långsamt, per kilogram och grad, tusental med hårt mellanslag, språkrättningar i återkopplingen och korten)
+- [x] Sam testar och godkänner (2026-10-27)
+- [ ] Commit och push till `main`
+- [ ] Länken till Sigbjørn
 
 ## Process för varje simulering
 

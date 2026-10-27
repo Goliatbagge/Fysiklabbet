@@ -70,7 +70,13 @@ window.SIM_NAMES = {
       kw: ['arkimedes','arkimedes princip','lyftkraft','flytkraft','dynamometer','undanträngt vatten','undanträngd','densitet','vätska','bräddkärl','tyngdminskning','spännkraft'] },
   ],
   'fysik1-tryck.html': 'Ideala gaslagen',
-  'fysik1-varme-app.html': 'Uppvärmning och avsvalning',
+  'fysik1-varme-app.html': [
+    { name: 'Uppvärmning och avsvalning', desc: 'Värm upp och låt föremål svalna, och se hur de växlar värme med omgivningen.',
+      kw: ['värme','värmelära','termodynamik','temperatur','strålning','energi','värmekapacitet','uppvärmning','avsvalning'] },
+    { name: 'Kalorimetern', href: 'fysik1-kalorimetri-app.html', desc: 'Blanda varmt och kallt vatten, sänk ned en het metallbit eller lägg is i en kalorimeter. Joulebrickor visar att den avgivna energin är lika stor som den upptagna, och med en okänd metall räknar du ut den specifika värmekapaciteten och slår upp metallen.',
+      kw: ['värme','värmelära','kalorimeter','kalorimetri','specifik värmekapacitet','värmekapacitet','avgiven energi','upptagen energi','sluttemperatur','blandning','blanda vatten','metallbit','okänd metall','is','smältning','energiförluster'] },
+  ],
+  'fysik1-kalorimetri-app.html?lage=is': 'Kalorimetern: is i vatten',
   'fysik1-influens.html': [
     { name: 'Elektrisk influens', desc: 'Hur en neutral aluminiumburk attraheras av en laddad stav.',
       kw: ['ellära','elektricitet','laddning','influens','elektrostatik','neutral','statisk elektricitet','aluminiumburk','laddad stav','elektroner','attraktion'] },

@@ -119,6 +119,10 @@ window.SIM_NAMES = {
     { name: 'Tyngdpunkt och lodlinje', href: 'fysik2-lodlinjen-app.html', desc: 'Häng upp en skiva i en spik och rita av lodets snöre med skivan hängd i två olika hål: linjerna korsas i tyngdpunkten. L-formad skiva, hästsko, Sverigekartan, en egen form och en kontroll på nålspetsen.',
       kw: ['krafter','tyngdpunkt','lodlinje','lod','hitta tyngdpunkten','upphängningspunkt','kraftmoment','hävarm','fysisk pendel','nålspets','balans','sverigekartan','sveriges mittpunkt','hästsko','statik','mekanik'] },
   ],
+  'fysik2-stegmetoden-app.html': [
+    { name: 'Stegmetoden', desc: 'Räkna ett kast steg för steg i ett kalkylblad som är kopplat till banan och går att kopiera till Excel. Se hur felet halveras med tidssteget, lägg till luftmotstånd och se gränshastigheten för en badmintonboll.',
+      kw: ['rörelse','stegmetoden','eulers stegmetod','euler','numerisk simulering','numerisk metod','kalkylblad','excel','tidssteg','kaströrelse','luftmotstånd','gränshastighet','badmintonboll','tennisboll','modellering','mekanik'] },
+  ],
   'fysik2-satellitbana-app.html': 'Satellit i omloppsbana',
   'fysik2-konisk-pendel.html': 'Konisk pendel',
   'fysik2-rorelse-app.html': 'Snett kast',

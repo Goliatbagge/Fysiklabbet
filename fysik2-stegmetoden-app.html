@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stegmetoden — Fysiklabbet</title>
+    <meta name="description" content="Räkna ett kast steg för steg med stegmetoden i ett kalkylblad som går att kopiera till Excel. Se hur felet beror på tidssteget, lägg till luftmotstånd och följ en badmintonboll tills den når sin gränshastighet.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-stegmetoden-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Stegmetoden — Fysik nivå 2">
+    <meta property="og:description" content="Räkna ett kast steg för steg med stegmetoden i ett kalkylblad som går att kopiera till Excel. Se hur felet beror på tidssteget, lägg till luftmotstånd och följ en badmintonboll tills den når sin gränshastighet.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-stegmetoden-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stegmetoden — Fysik nivå 2">
+    <meta name="twitter:description" content="Räkna ett kast steg för steg med stegmetoden i ett kalkylblad som går att kopiera till Excel. Se hur felet beror på tidssteget, lägg till luftmotstånd och följ en badmintonboll tills den når sin gränshastighet.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+        input[type="range"]:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1;
+                text-align: center; max-width: 150px; }
+        .fnum { color: var(--lab-ink); font-size: 20px; font-family: 'Poppins', sans-serif; }
+        .fnum-live { color: var(--lab-ink); font-size: 17px; font-family: 'Poppins', sans-serif; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 80px; }
+        .num-in { width: 50px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:disabled { opacity: 0.55; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* Scenen: en svg med egen proportion (1000 × 660). Mobilen (sektion 8 i
+           styles-laborans-sim.css) dockar verktygen under den. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1000 / 660;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .handtag { cursor: grab; }
+        .handtag.drar { cursor: grabbing; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 34px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-start {
+            background: var(--lab-accent, #c8324a); color: #fff; border: 1px solid var(--lab-accent, #c8324a);
+            border-radius: 8px; padding: 9px 14px; font-weight: 700; cursor: pointer;
+        }
+        .btn-start:hover:not(:disabled) { filter: brightness(1.06); }
+        .btn-start:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .mode-seg { display: flex; gap: 0; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button {
+            flex: 1; padding: 8px 8px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .mode-seg button:last-child { border-right: none; }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+
+        /* Färdiga försök */
+        .forsok-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .forsok {
+            text-align: left; padding: 7px 9px; border-radius: 8px; cursor: pointer;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; font-weight: 600; color: var(--lab-ink, #0f1620); line-height: 1.25;
+        }
+        .forsok .sub { display: block; font-size: 11.5px; font-weight: 400; color: var(--lab-ink-soft, #3a4151); }
+        .forsok:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .forsok:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* Avläsning */
+        .avl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
+        .avl .v { font-weight: 700; font-size: 16px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+        .avl .l { font-size: 11.5px; color: var(--lab-ink-muted, #5a6170); }
+
+        /* Resultatrutan efter ett försök */
+        .resultat { border-left: 4px solid var(--lab-accent, #c8324a); }
+        .resultat.ratt { border-left-color: #15803d; }
+
+        /* Gissa-läget */
+        .gissa-in { width: 90px; padding: 6px 8px; border-radius: 7px; font-size: 15px;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                    background: #fff; font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .gissa-in:focus { outline: none; border-color: var(--lab-accent, #c8324a); }
+        .kort3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .kort3 button {
+            padding: 8px 6px; border-radius: 8px; cursor: pointer; text-align: center;
+            background: var(--lab-bg, #f3eee4); border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; line-height: 1.45; color: var(--lab-ink, #0f1620);
+        }
+        .kort3 button:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .kort3 button.vald { border-color: var(--lab-ink, #0f1620); box-shadow: 0 0 0 2px rgba(15,22,32,0.15); }
+        .kort3 button.basta { background: rgba(21,128,61,0.10); border-color: #15803d; }
+        .kort3 .bok { font-weight: 700; font-size: 15px; display: block; margin-bottom: 2px; }
+        .kort3 .stapel { height: 6px; border-radius: 3px; background: #d4930f; margin-top: 5px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+        /* Kalkylbladet */
+        .kalk-fx { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-bottom: 6px; }
+        .kalk-namn { min-width: 44px; padding: 2px 6px; border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); border-radius: 4px; text-align: center; font-weight: 600; }
+        .kalk-fxsym { color: var(--lab-ink-soft); }
+        .kalk-fx code { flex: 1; padding: 3px 8px; border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); border-radius: 4px; background: #fff; font-size: 13px; overflow-x: auto; white-space: nowrap; }
+        .kalk-wrap { display: flex; gap: 12px; align-items: flex-start; }
+        .kalk-tab { flex: 1; min-width: 0; max-width: 100%; max-height: 300px; overflow: auto; border: 1px solid var(--lab-line, rgba(15,22,32,0.18)); background: #fff; }
+        .kalk table { border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+        .kalk th { position: sticky; top: 0; background: #e9e4d8; font-weight: 600; padding: 2px 8px; border: 1px solid #d6cfbf; z-index: 1; }
+        .kalk td { padding: 2px 8px; border: 1px solid #e5e0d4; text-align: right; cursor: cell; white-space: nowrap; }
+        .kalk td.kalk-rnr { background: #e9e4d8; color: var(--lab-ink-soft); text-align: center; cursor: default; }
+        .kalk td.kalk-rub { font-weight: 600; text-align: center; background: #f6f2e8; }
+        .kalk thead tr:nth-child(2) td { position: sticky; top: 22px; z-index: 1; }
+        .kalk tr.vald td { background: #e8f0fd; }
+        .kalk td.ref { outline: 2px solid #e0701a; outline-offset: -2px; }
+        .kalk td.akt { outline: 2px solid #2563c9; outline-offset: -2px; background: #dbe7fb; }
+        .kalk-konst { flex: 0 0 auto; }
+        .steg-tab { border-collapse: collapse; font-size: 13.5px; width: 100%; font-variant-numeric: tabular-nums; }
+        .steg-tab th, .steg-tab td { padding: 4px 10px; border-bottom: 1px solid var(--lab-line, rgba(15,22,32,0.14)); text-align: right; white-space: nowrap; }
+        .steg-tab th:first-child, .steg-tab td:first-child { text-align: left; }
+        .steg-tab tr.steg-ref td { font-weight: 600; }
+        .steg-farg { display: inline-block; width: 18px; height: 4px; border-radius: 2px; margin-left: 6px; vertical-align: middle; }
+        @media (max-width: 640px) { .kalk-wrap { flex-direction: column; } .kalk-tab { width: 100%; } }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script id="steg-motor">
+// Motorn för Stegverkstaden (fysik2-stegmetoden-app.html).
+// Källan ligger här och klistras in oförändrad i sidan; testet
+// .claude/test-steg-motor.js kontrollerar fysiken och att kopian är identisk.
+//
+// Stegmetoden (Eulers stegmetod) som i fy2-1.9: värdena i början av ett steg
+// används för ändringen under steget,
+//     t(n+1) = t(n) + Δt
+//     x(n+1) = x(n) + vx(n) · Δt         y(n+1) = y(n) + vy(n) · Δt
+//     vx(n+1) = vx(n) + ax(n) · Δt       vy(n+1) = vy(n) + ay(n) · Δt
+// Luftmotståndet F = k · v² är motriktat hastigheten, så
+//     ax = −(k/m) · v · vx               ay = −g − (k/m) · v · vy.
+// Landningen bestäms som i teorin: en rät linje mellan de två punkterna
+// närmast marken. Stighöjden är den högsta y bland stegen.
+(function () {
+    const G = 9.82;
+
+    function acc(vx, vy, k, m, g) {
+        const v = Math.hypot(vx, vy), c = m > 0 ? k / m : 0;
+        return [-c * v * vx, -g - c * v * vy];
+    }
+
+    // p = { v0x, v0y, k, m, dt, g }
+    function kast(p) {
+        const g = p.g == null ? G : p.g;
+        let t = 0, x = 0, y = 0, vx = p.v0x, vy = p.v0y;
+        const rader = [];
+        for (let n = 0; n < 200000; n++) {
+            const [ax, ay] = acc(vx, vy, p.k, p.m, g);
+            rader.push({ n, t, x, y, vx, vy, ax, ay });
+            if (n > 0 && y < 0) break;
+            t += p.dt;
+            const nx = x + vx * p.dt, ny = y + vy * p.dt;
+            vx += ax * p.dt; vy += ay * p.dt;
+            x = nx; y = ny;
+        }
+        const a = rader[rader.length - 2], b = rader[rader.length - 1];
+        const f = a.y / (a.y - b.y);
+        return {
+            rader,
+            kastvidd: a.x + f * (b.x - a.x),
+            flygtid: a.t + f * (b.t - a.t),
+            stighojd: rader.reduce((h, r) => Math.max(h, r.y), 0),
+        };
+    }
+    // utan luftmotstånd, med formlerna för kaströrelse
+    function exakt(v0x, v0y, g) {
+        g = g == null ? G : g;
+        const T = 2 * v0y / g;
+        return { kastvidd: v0x * T, flygtid: T, stighojd: v0y * v0y / (2 * g) };
+    }
+    // med luftmotstånd: referens med mycket kort tidssteg
+    const referens = (p) => kast(Object.assign({}, p, { dt: 1e-4 }));
+
+    // Fall rakt ned med luftmotstånd, nedåt positivt: a = g − (k/m) · v².
+    // p = { m, k, dt, H } — räknar tills föremålet fallit H.
+    function fall(p) {
+        const g = p.g == null ? G : p.g;
+        let t = 0, s = 0, v = 0;
+        const rader = [];
+        for (let n = 0; n < 2000000; n++) {
+            const a = g - (p.k / p.m) * v * v;
+            rader.push({ n, t, s, v, a });
+            if (s >= p.H) break;
+            t += p.dt; s += v * p.dt; v += a * p.dt;
+        }
+        return { rader, vGrans: Math.sqrt(p.m * g / p.k) };
+    }
+    // läget vid tiden t ur stegen (rät linje mellan två steg)
+    function vid(rader, t, falt) {
+        if (t <= rader[0].t) return rader[0][falt];
+        for (let i = 1; i < rader.length; i++) {
+            if (rader[i].t >= t) {
+                const a = rader[i - 1], b = rader[i], f = (t - a.t) / (b.t - a.t);
+                return a[falt] + f * (b[falt] - a[falt]);
+            }
+        }
+        return rader[rader.length - 1][falt];
+    }
+
+    // Bästa utkastvinkeln för en given fart (hela grader)
+    function bastaVinkel(v0, k, m, dt) {
+        let bast = 0, R = -1;
+        for (let a = 10; a <= 80; a++) {
+            const r = a * Math.PI / 180;
+            const k1 = kast({ v0x: v0 * Math.cos(r), v0y: v0 * Math.sin(r), k, m, dt: dt || 0.002 }).kastvidd;
+            if (k1 > R) { R = k1; bast = a; }
+        }
+        return { vinkel: bast, kastvidd: R };
+    }
+
+    // ── Kalkylbladet i svensk Excel-stil ──
+    // Kolumnerna A–G: t, x, y, vx, vy, ax, ay. Konstanterna i J2–J5:
+    // Δt, g, k, m. Rad 2 är startvärdena; varje rad hämtar från raden ovanför.
+    const KOLUMNER = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    const RUBRIKER = ['t (s)', 'x (m)', 'y (m)', 'vx (m/s)', 'vy (m/s)', 'ax (m/s²)', 'ay (m/s²)'];
+    const KONST = [['Δt (s)', 'J2'], ['g (m/s²)', 'J3'], ['k (kg/m)', 'J4'], ['m (kg)', 'J5']];
+    // formeln i cellen (kolumn 0–6, kalkylbladets rad r ≥ 2)
+    function formel(kol, r, start) {
+        const o = r - 1;      // raden ovanför
+        if (r === 2) {
+            if (kol <= 2) return '0';
+            if (kol === 3) return start ? start.vx : '';
+            if (kol === 4) return start ? start.vy : '';
+        }
+        switch (kol) {
+            case 0: return `=A${o}+$J$2`;
+            case 1: return `=B${o}+D${o}*$J$2`;
+            case 2: return `=C${o}+E${o}*$J$2`;
+            case 3: return `=D${o}+F${o}*$J$2`;
+            case 4: return `=E${o}+G${o}*$J$2`;
+            case 5: return `=-$J$4/$J$5*ROT(D${r}^2+E${r}^2)*D${r}`;
+            case 6: return `=-$J$3-$J$4/$J$5*ROT(D${r}^2+E${r}^2)*E${r}`;
+        }
+        return '';
+    }
+    // vilka celler en formel hämtar från (för markeringen i bladet)
+    function hamtar(kol, r) {
+        const o = r - 1;
+        if (r === 2 && kol <= 4) return [];
+        switch (kol) {
+            case 0: return [['A', o], ['J', 2]];
+            case 1: return [['B', o], ['D', o], ['J', 2]];
+            case 2: return [['C', o], ['E', o], ['J', 2]];
+            case 3: return [['D', o], ['F', o], ['J', 2]];
+            case 4: return [['E', o], ['G', o], ['J', 2]];
+            case 5: return [['J', 4], ['J', 5], ['D', r], ['E', r]];
+            case 6: return [['J', 3], ['J', 4], ['J', 5], ['D', r], ['E', r]];
+        }
+        return [];
+    }
+    const komma = (v) => String(+v.toFixed(6)).replace('.', ',');
+    // Hela bladet som tabbseparerad text med formler, för att klistra in i Excel
+    function tsv(p, antalRader) {
+        const varden = [p.dt, p.g == null ? G : p.g, p.k, p.m];
+        const rad = [RUBRIKER.concat(['', 'Konstant', 'Värde']).join('\t')];
+        for (let r = 2; r <= Math.max(antalRader + 1, 5); r++) {
+            const celler = r <= antalRader + 1
+                ? KOLUMNER.map((_, kol) => formel(kol, r, { vx: komma(p.v0x), vy: komma(p.v0y) }))
+                : KOLUMNER.map(() => '');
+            const i = r - 2;
+            rad.push(celler.concat(i < KONST.length ? ['', KONST[i][0], komma(varden[i])] : []).join('\t'));
+        }
+        return rad.join('\n');
+    }
+
+    const FOREMAL = {
+        tennis:    { namn: 'Tennisboll', m: 0.057, k: 0.0012 },
+        badminton: { namn: 'Badmintonboll', m: 0.005, k: 0.0011 },
+        fotboll:   { namn: 'Fotboll', m: 0.43, k: 0.0057 },
+        kula:      { namn: 'Stålkula', m: 0.11, k: 0.00021 },
+    };
+
+    const ut = { G, acc, kast, exakt, referens, fall, vid, bastaVinkel, KOLUMNER, RUBRIKER, KONST, formel, hamtar, tsv, komma, FOREMAL };
+    if (typeof window !== 'undefined') window.StegMotor = ut;
+    if (typeof module !== 'undefined') module.exports = ut;
+})();
+</script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const M = window.StegMotor;
+
+        // ── Talformat: decimalkomma, äkta minustecken, exakt noll som "0" ──
+        const fmt = (num, d = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+        const NB = ' ';
+        const Sub = ({ s, i }) => <span><em>{s}</em><sub>{i}</sub></span>;
+        // v med två kursiva index, som v_{x,n}
+        const kursivIndex = (t) => typeof t !== 'string' ? t : t.split(/([a-zA-Z]+)/).map((d, i) => (/[a-zA-Z]/.test(d) ? <em key={i}>{d}</em> : d));
+        const Vi = ({ s, a, b }) => <span><em>{s}</em><sub>{kursivIndex(a)}{b != null && <span>,{kursivIndex(b)}</span>}</sub></span>;
+        const Brak = ({ t, n }) => (
+            <span style={{ display: 'inline-flex', flexDirection: 'column', verticalAlign: 'middle', textAlign: 'center', lineHeight: 1.05, fontSize: '0.92em', margin: '0 3px' }}>
+                <span style={{ padding: '0 2px 1px' }}>{t}</span>
+                <span style={{ padding: '1px 2px 0', borderTop: '1.5px solid currentColor' }}>{n}</span>
+            </span>
+        );
+
+        const COL = {
+            ink:   '#0f1620',
+            soft:  'rgba(15,22,32,0.7)',
+            steg:  '#2563c9',
+            exakt: '#7c828c',
+            fart:  '#15803d',
+            acc:   '#c8324a',
+            luft:  '#e0701a',
+            tyngd: '#2563c9',
+        };
+        const DT_VAL = [0.2, 0.1, 0.05, 0.02, 0.01];
+        const DT_JAMFOR = [0.2, 0.1, 0.05, 0.02, 0.01, 0.005, 0.001];
+        const dtText = (dt) => String(+dt.toFixed(4)).replace('.', ',');   // 0,2  0,05  0,025  0,001
+
+        // ════════════════════════════════════════════════════════
+        //  SCENENS GEOMETRI (viewBox 1000 × 560)
+        // ════════════════════════════════════════════════════════
+        const VB_W = 1000, VB_H = 580;
+        const PL = { x0: 78, x1: 960, y0: 70, y1: 440 };   // banans ritruta, marken vid y1 (plats under för steget under marken)
+
+        // skala med lika enheter i x- och y-led
+        function skala(xmax, ymax, x1) {
+            const s = Math.min(((x1 || PL.x1) - PL.x0) / Math.max(xmax, 0.5), (PL.y1 - PL.y0) / Math.max(ymax, 0.5));
+            return { s, X: (x) => PL.x0 + x * s, Y: (y) => PL.y1 - y * s };
+        }
+        const steg125 = (max) => { const r = Math.pow(10, Math.floor(Math.log10(max / 5))); for (const k of [1, 2, 5, 10]) if (max / (k * r) <= 8) return k * r; return 10 * r; };
+
+        // ════════════════════════════════════════════════════════
+        //  RITDELAR
+        // ════════════════════════════════════════════════════════
+        // Pil med rakt avslutat skaft som slutar vid huvudets bas.
+        const Pil = ({ x1, y1, x2, y2, color, width = 4.5, head = 15, dash = false, edge = false, opacity = 1 }) => {
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 2) return null;
+            const ux = (x2 - x1) / len, uy = (y2 - y1) / len;
+            const hd = Math.min(head, len * 0.9);
+            const bx = x2 - ux * hd, by = y2 - uy * hd;
+            const hw = hd * 0.48;
+            const p1 = `${bx - uy * hw},${by + ux * hw}`;
+            const p2 = `${bx + uy * hw},${by - ux * hw}`;
+            const kant = 'rgba(15,22,32,0.5)';
+            return (
+                <g opacity={opacity}>
+                    {edge && <line x1={x1} y1={y1} x2={bx} y2={by} stroke={kant} strokeWidth={width + 3} strokeLinecap="butt" />}
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="butt" strokeDasharray={dash ? '7 5' : undefined} />
+                    <polygon points={`${x2},${y2} ${p1} ${p2}`} fill={color}
+                             stroke={edge ? kant : 'none'} strokeWidth={edge ? 1.6 : 0} strokeLinejoin="round" />
+                </g>
+            );
+        };
+
+        // Beteckning med index: F, Fₛ, F₁ … Variabeln kursiv, indexet rakt.
+        const Bet = ({ x, y, sym, idx, color, size = 18, anchor = 'start', weight = 600 }) => (
+            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}
+                  fontFamily="Poppins, sans-serif">
+                <tspan fontStyle="italic">{sym}</tspan>
+                {idx != null && <tspan fontSize={size * 0.68} dy={size * 0.25}>{idx}</tspan>}
+            </text>
+        );
+
+        // Mark och axlar för banan
+        const Axlar = ({ S, xmax, ymax }) => {
+            const dx = steg125(xmax), ticks = [];
+            for (let x = dx; x <= xmax + 1e-9; x += dx) ticks.push(x);
+            const dy = steg125(ymax), yt = [];
+            for (let y = dy; y <= ymax + 1e-9; y += dy) yt.push(y);
+            const d = dx < 1 ? 1 : 0;
+            return (
+                <g>
+                    <rect x={PL.x0 - 30} y={PL.y1} width={PL.x1 - PL.x0 + 50} height="16" fill="#cfe3c2" />
+                    <line x1={PL.x0 - 30} y1={PL.y1} x2={PL.x1 + 20} y2={PL.y1} stroke="#4f7d47" strokeWidth="1.6" />
+                    <line x1={PL.x0} y1={PL.y1} x2={PL.x0} y2={PL.y0 - 34} stroke={COL.ink} strokeWidth="1.2" />
+                    <polygon points={`${PL.x0},${PL.y0 - 40} ${PL.x0 - 4},${PL.y0 - 31} ${PL.x0 + 4},${PL.y0 - 31}`} fill={COL.ink} />
+                    <text x={PL.x0 + 8} y={PL.y0 - 32} fontSize="13" fill={COL.ink}><tspan fontStyle="italic">y</tspan> (m)</text>
+                    <text x={PL.x1 + 18} y={PL.y1 + 36} textAnchor="end" fontSize="13" fill={COL.ink}><tspan fontStyle="italic">x</tspan> (m)</text>
+                    {ticks.map((x) => <g key={x}><line x1={S.X(x)} y1={PL.y1} x2={S.X(x)} y2={PL.y1 + 5} stroke={COL.ink} /><text x={S.X(x)} y={PL.y1 + 30} textAnchor="middle" fontSize="11" fill={COL.soft}>{fmt(x, d)}</text></g>)}
+                    {yt.map((y) => <g key={y}><line x1={PL.x0 - 5} y1={S.Y(y)} x2={PL.x0} y2={S.Y(y)} stroke={COL.ink} /><text x={PL.x0 - 8} y={S.Y(y) + 4} textAnchor="end" fontSize="11" fill={COL.soft}>{fmt(y, dy < 1 ? 1 : 0)}</text></g>)}
+                </g>
+            );
+        };
+        const parabel = (S, v0x, v0y, kv) => {
+            const e = M.exakt(v0x, v0y), pts = [];
+            for (let i = 0; i <= 120; i++) { const t = e.flygtid * i / 120; pts.push(`${S.X(v0x * t).toFixed(1)},${S.Y(v0y * t - 4.91 * t * t).toFixed(1)}`); }
+            return <polyline points={pts.join(' ')} fill="none" stroke={kv || COL.exakt} strokeWidth="1.8" strokeDasharray="6 4" />;
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  LÄGE 1: KALKYLBLADET OCH BANAN
+        // ════════════════════════════════════════════════════════
+        const Lage1 = ({ p, k, antal, vald, setVald, dolj, objId, visaUtan }) => {
+            const ex = M.exakt(p.v0x, p.v0y);
+            const xmax = Math.max(k.kastvidd, p.k ? 0 : ex.kastvidd, ex.kastvidd * (p.k ? 0 : 1)) * 1.08 + 0.3;
+            const ymax = Math.max(k.stighojd, p.k ? k.stighojd : ex.stighojd) * 1.15 + 0.3;
+            const xm = Math.max(xmax, p.k ? k.kastvidd * 1.1 : ex.kastvidd * 1.1), ym = Math.max(ymax, p.k ? ymax : ex.stighojd * 1.15);
+            const visaParabel = !p.k || visaUtan;
+            const S = skala(visaParabel ? Math.max(xm, ex.kastvidd * 1.1) : Math.max(k.kastvidd * 1.1, 1), visaParabel ? Math.max(ym, ex.stighojd * 1.15) : ym);
+            const rader = k.rader.slice(0, antal);
+            const sista = rader[rader.length - 1];
+            const r = rader[Math.min(vald, rader.length - 1)];
+            const VS = 3.2, AS = 3.2;      // px per m/s och per m/s²
+            return (
+                <g>
+                    <Axlar S={S} xmax={(PL.x1 - PL.x0) / S.s * 0.98} ymax={(PL.y1 - PL.y0) / S.s * 0.98} />
+                    {visaParabel && parabel(S, p.v0x, p.v0y)}
+                    <polyline points={rader.filter((q) => q.y >= 0 || q === rader[rader.length - 1]).map((q) => `${S.X(q.x).toFixed(1)},${S.Y(Math.max(q.y, -0.6 / S.s * 20)).toFixed(1)}`).join(' ')}
+                              fill="none" stroke={COL.steg} strokeWidth="2.2" strokeLinejoin="round" />
+                    {rader.map((q, i) => (
+                        <circle key={i} cx={S.X(q.x)} cy={S.Y(q.y)} r={i === vald ? 6 : rader.length > 60 ? 2.2 : 3.6} fill={COL.steg}
+                                stroke={i === vald ? COL.ink : 'none'} strokeWidth="1.5" style={{ cursor: 'pointer' }} onClick={() => setVald(i)} />
+                    ))}
+                    {sista && <circle cx={S.X(sista.x)} cy={S.Y(sista.y)} r="8" fill={BOLLFARG[objId][0]} stroke={BOLLFARG[objId][1]} strokeWidth="1.4" />}
+                    {r && !dolj && (
+                        <g>
+                            <Pil x1={S.X(r.x)} y1={S.Y(r.y)} x2={S.X(r.x) + r.vx * VS} y2={S.Y(r.y) - r.vy * VS} color={COL.fart} width={3.5} head={12} />
+                            <Pil x1={S.X(r.x)} y1={S.Y(r.y)} x2={S.X(r.x) + r.ax * AS} y2={S.Y(r.y) - r.ay * AS} color={COL.acc} width={3.5} head={12} />
+                            <Bet x={S.X(r.x) + r.vx * VS + 8} y={S.Y(r.y) - r.vy * VS - 4} sym="v" color={COL.fart} size={16} />
+                            <Bet x={S.X(r.x) + r.ax * AS + (r.ax < 0 ? -10 : 10)} y={S.Y(r.y) - r.ay * AS + 4} sym="a" color={COL.acc} size={16} anchor={r.ax < 0 ? 'end' : 'start'} />
+                        </g>
+                    )}
+                    <g fontSize="13" fill={COL.ink}>
+                        <line x1="250" y1="22" x2="274" y2="22" stroke={COL.steg} strokeWidth="2.4" /><circle cx="262" cy="22" r="3.6" fill={COL.steg} />
+                        <text x="280" y="26">stegmetoden, Δ<tspan fontStyle="italic">t</tspan> = {dtText(p.dt)}{NB}s</text>
+                        {visaParabel && <g><line x1="250" y1="44" x2="274" y2="44" stroke={COL.exakt} strokeWidth="1.8" strokeDasharray="6 4" /><text x="280" y="48">{p.k ? 'samma kast utan luftmotstånd' : 'exakt kastparabel'}</text></g>}
+                        <text x="250" y={visaParabel ? 70 : 48} fill={COL.soft}>steg {rader.length - 1} av {k.rader.length - 1}</text>
+                        {antal >= k.rader.length && !dolj && <text x="250" y={visaParabel ? 92 : 70} fill={COL.ink}>kastvidd {fmt(k.kastvidd, 1)}{NB}m, stighöjd {fmt(k.stighojd, 1)}{NB}m</text>}
+                    </g>
+                </g>
+            );
+        };
+
+        const BOLLFARG = { tennis: ['#d4e157', '#7c8b1f'], badminton: ['#ffffff', '#6b7280'], fotboll: ['#ffffff', '#111827'], kula: ['#9ca3af', '#374151'] };
+        // Kalkylbladet (HTML under scenen)
+const RUBRIK_JSX = [
+            <span><em>t</em> (s)</span>, <span><em>x</em> (m)</span>, <span><em>y</em> (m)</span>,
+            <span><Vi s="v" a="x" /> (m/s)</span>, <span><Vi s="v" a="y" /> (m/s)</span>,
+            <span><Vi s="a" a="x" /> (m/s²)</span>, <span><Vi s="a" a="y" /> (m/s²)</span>,
+        ];
+        const Kalkylblad = ({ p, k, antal, vald, setVald, cell, setCell, dolj }) => {
+            const rader = k.rader.slice(0, antal);
+            const ref = useRef(null);
+            useEffect(() => {
+                const el = ref.current && ref.current.querySelector(`[data-rad="${vald}"]`);
+                if (el && ref.current) { const box = ref.current; const top = el.offsetTop - box.clientHeight / 2; box.scrollTop = Math.max(0, top); }
+            }, [vald]);
+            const rad = cell ? cell[1] + 2 : vald + 2;
+            const kol = cell ? cell[0] : null;
+            const formel = kol == null ? '' : kol >= 7 ? M.komma([p.dt, M.G, p.k, p.m][kol - 7]) : M.formel(kol, rad, { vx: M.komma(p.v0x), vy: M.komma(p.v0y) });
+            const hamtar = kol == null || kol >= 7 ? [] : M.hamtar(kol, rad).map(([c, n]) => c + n);
+            const namn = kol == null ? '' : kol >= 7 ? 'J' + (kol - 5) : M.KOLUMNER[kol] + rad;
+            const dec = [p.dt < 0.1 ? 2 : 1, 3, 3, 2, 2, 2, 2];
+            const varde = (q, i) => [q.t, q.x, q.y, q.vx, q.vy, q.ax, q.ay][i];
+            return (
+                <div className="glass-card rounded-xl p-3 mt-3 kalk">
+                    <div className="kalk-fx"><span className="kalk-namn">{namn || ' '}</span><span className="kalk-fxsym"><em>fx</em></span><code>{kol == null ? <span style={{ color: 'var(--lab-ink-soft)' }}>Klicka på en cell för att se formeln.</span> : formel}</code></div>
+                    <div className="kalk-wrap">
+                        <div className="kalk-tab" ref={ref}>
+                            <table>
+                                <thead>
+                                    <tr><th className="kalk-rnr"></th>{M.KOLUMNER.map((c) => <th key={c}>{c}</th>)}</tr>
+                                    <tr><td className="kalk-rnr">1</td>{RUBRIK_JSX.map((h, i) => <td key={i} className="kalk-rub">{h}</td>)}</tr>
+                                </thead>
+                                <tbody>
+                                    {rader.map((q, i) => (
+                                        <tr key={i} data-rad={i} className={i === vald ? 'vald' : ''} onClick={() => { setVald(i); }}>
+                                            <td className="kalk-rnr">{i + 2}</td>
+                                            {M.KOLUMNER.map((c, j) => {
+                                                const id = c + (i + 2);
+                                                const cls = (cell && cell[0] === j && cell[1] === i ? 'akt ' : '') + (hamtar.includes(id) ? 'ref' : '');
+                                                return <td key={c} className={cls} onClick={(e) => { e.stopPropagation(); setVald(i); setCell([j, i]); }}>
+                                                    {dolj && j >= 1 && j <= 2 && i > 0 ? '?' : fmt(varde(q, j), dec[j])}</td>;
+                                            })}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        <table className="kalk-konst">
+                            <thead><tr><th>I</th><th>J</th></tr></thead>
+                            <tbody>
+                                <tr><td className="kalk-rub">Konstant</td><td className="kalk-rub">Värde</td></tr>
+                                {M.KONST.map(([namnK, id], i) => (
+                                    <tr key={id}><td>{namnK}</td>
+                                        <td className={(cell && cell[0] === 7 + i ? 'akt ' : '') + (hamtar.includes(id) ? 'ref' : '')} onClick={() => setCell([7 + i, 0])}>
+                                            {M.komma([p.dt, M.G, p.k, p.m][i])}</td></tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                        Cellerna som formeln hämtar sina värden från markeras. Raderna 2–{rader.length + 1} motsvarar stegen
+                        <em> n</em> = 0–{rader.length - 1}.
+                    </p>
+                </div>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  LÄGE 2: HUR KORT SKA TIDSSTEGET VARA?
+        // ════════════════════════════════════════════════════════
+        const FARGER = ['#bcd0f2', '#93b3ea', '#6b95e0', '#4677d4', '#2563c9', '#1b4ea3', '#123a7d'];
+        const jamforelse = (p) => {
+            const ref = p.k ? M.referens(p) : Object.assign(M.exakt(p.v0x, p.v0y), { rader: null });
+            return { ref, korningar: DT_JAMFOR.map((dt) => ({ dt, k: M.kast(Object.assign({}, p, { dt })) })) };
+        };
+        const Lage2 = ({ p, J, dolj, valda }) => {
+            const xm = Math.max(...J.korningar.map((r) => r.k.rader[r.k.rader.length - 1].x), J.ref.kastvidd) * 1.03;
+            const ym = Math.max(...J.korningar.map((r) => r.k.stighojd), J.ref.stighojd) * 1.18;
+            const S = skala(xm, ym, 620);
+            const ref = J.ref;
+            // felkartan
+            const F = { x0: 720, x1: 955, y0: 120, y1: 330 };
+            const fel = J.korningar.map((r) => ({ dt: r.dt, f: Math.abs(r.k.kastvidd - ref.kastvidd) }));
+            const fmax = Math.max(...fel.map((q) => Math.abs(q.f))) * 1.15 || 1;
+            const FX = (dt) => F.x0 + (F.x1 - F.x0) * dt / 0.2, FY = (f) => F.y1 - (F.y1 - F.y0) * f / fmax;
+            const lutning = fel.find((q) => q.dt === 0.01).f / 0.01;
+            return (
+                <g>
+                    <Axlar S={S} xmax={xm} ymax={(PL.y1 - PL.y0) / S.s * 0.98} />
+                    {p.k ? <polyline points={ref.rader.filter((q, i) => i % 40 === 0 || i === ref.rader.length - 1).map((q) => `${S.X(q.x).toFixed(1)},${S.Y(Math.max(q.y, 0)).toFixed(1)}`).join(' ')} fill="none" stroke={COL.exakt} strokeWidth="1.8" strokeDasharray="6 4" />
+                        : parabel(S, p.v0x, p.v0y)}
+                    {J.korningar.map((r, i) => valda.includes(r.dt) && (
+                        <polyline key={r.dt} points={r.k.rader.map((q) => `${S.X(q.x).toFixed(1)},${S.Y(Math.max(q.y, -0.02 * ym)).toFixed(1)}`).join(' ')}
+                                  fill="none" stroke={FARGER[i]} strokeWidth={r.dt >= 0.05 ? 2.2 : 1.6} strokeLinejoin="round" />
+                    ))}
+                    {/* felkartan */}
+                    <rect x={F.x0 - 60} y={F.y0 - 34} width={F.x1 - F.x0 + 80} height={F.y1 - F.y0 + 82} rx="8" fill="#f7f2e8" stroke="rgba(15,22,32,0.2)" />
+                    <text x={F.x0 - 48} y={F.y0 - 14} fontSize="13" fontWeight="600" fill={COL.ink}>Felet i kastvidden (belopp)</text>
+                    <line x1={F.x0} y1={F.y1} x2={F.x1 + 6} y2={F.y1} stroke={COL.ink} strokeWidth="1.1" />
+                    <line x1={F.x0} y1={F.y1} x2={F.x0} y2={F.y0 - 6} stroke={COL.ink} strokeWidth="1.1" />
+                    {[0.05, 0.1, 0.15, 0.2].map((dt) => <text key={dt} x={FX(dt)} y={F.y1 + 15} textAnchor="middle" fontSize="10" fill={COL.soft}>{fmt(dt, 2)}</text>)}
+                    <text x={F.x1 + 6} y={F.y1 + 32} textAnchor="end" fontSize="11" fill={COL.soft}>tidssteg Δ<tspan fontStyle="italic">t</tspan> (s)</text>
+                    <text x={F.x0 - 6} y={F.y0 + 4} textAnchor="end" fontSize="10" fill={COL.soft}>{fmt(fmax, fmax < 1 ? 2 : 1)} m</text>
+                    <text x={F.x0 - 6} y={F.y1 + 4} textAnchor="end" fontSize="10" fill={COL.soft}>0</text>
+                    {!dolj && <line x1={FX(0)} y1={FY(0)} x2={FX(0.2)} y2={FY(lutning * 0.2)} stroke={COL.soft} strokeWidth="1" strokeDasharray="4 4" />}
+                    {fel.map((q, i) => (dolj && i > 0 ? null : <circle key={q.dt} cx={FX(q.dt)} cy={FY(q.f)} r="4.2" fill={FARGER[i]} stroke={COL.ink} strokeWidth="0.8" />))}
+                    <g fontSize="13" fill={COL.ink}>
+                        <line x1="250" y1="22" x2="274" y2="22" stroke={COL.exakt} strokeWidth="1.8" strokeDasharray="6 4" />
+                        <text x="280" y="26">{p.k ? <tspan>referens med Δ<tspan fontStyle="italic">t</tspan> = 0,0001{NB}s</tspan> : 'exakt kastparabel'}</text>
+                        <text x="250" y="48" fill={COL.soft}>Blått: stegmetoden, mörkare för kortare tidssteg.</text>
+                    </g>
+                </g>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  LÄGE 3: FALLET MED LUFTMOTSTÅND
+        // ════════════════════════════════════════════════════════
+        const BOLLAR = [['tennis', '#d4e157', '#7c8b1f'], ['badminton', '#ffffff', '#6b7280']];
+        const Lage3 = ({ H, falls, t, dolj }) => {
+            const T = { x0: 70, y0: 60, y1: 440 };
+            const Ys = (s) => T.y0 + (T.y1 - T.y0) * s / H;
+            const G = { x0: 450, x1: 950, y0: 70, y1: 440 };
+            const tMax = Math.max(...falls.map((f) => f.rader[f.rader.length - 1].t)) * 1.05;
+            const vMax = Math.max(...falls.map((f) => Math.max(f.vGrans, f.rader[f.rader.length - 1].v))) * 1.12;
+            const GX = (tt) => G.x0 + (G.x1 - G.x0) * tt / tMax, GY = (v) => G.y1 - (G.y1 - G.y0) * v / vMax;
+            const dtt = steg125(tMax), dv = steg125(vMax);
+            const tt = [], vv = [];
+            for (let q = dtt; q <= tMax; q += dtt) tt.push(q);
+            for (let q = dv; q <= vMax; q += dv) vv.push(q);
+            return (
+                <g>
+                    {/* höjdskala och mark */}
+                    <rect x="40" y={T.y1} width="360" height="16" fill="#cfe3c2" />
+                    <line x1="40" y1={T.y1} x2="400" y2={T.y1} stroke="#4f7d47" strokeWidth="1.6" />
+                    <line x1={T.x0} y1={T.y0} x2={T.x0} y2={T.y1} stroke={COL.ink} strokeWidth="1.2" />
+                    {(() => { const d = steg125(H), ut = []; for (let h = 0; h <= H + 1e-9; h += d) ut.push(h); return ut; })().map((h) => <g key={h}><line x1={T.x0 - 5} y1={Ys(H - h)} x2={T.x0} y2={Ys(H - h)} stroke={COL.ink} /><text x={T.x0 - 8} y={Ys(H - h) + 4} textAnchor="end" fontSize="11" fill={COL.soft}>{fmt(h, 0)}</text></g>)}
+                    <text x={T.x0 + 6} y={T.y0 - 14} fontSize="13" fill={COL.ink}>höjd (m)</text>
+                    {falls.map((f, i) => {
+                        const s = Math.min(H, M.vid(f.rader, t, 's')), v = M.vid(f.rader, t, 'v');
+                        const x = 170 + i * 140, badm = f.obj === M.FOREMAL.badminton;
+                        const y = Ys(s) - (badm ? 14 : 10);         // bollens tyngdpunkt (korken på badmintonbollen)
+                        const FG = f.obj.m * M.G, Fl = f.obj.k * v * v, L = 56;
+                        const nere = s >= H - 1e-9;      // landat: inga krafter ritas (marken tar emot)
+                        
+                        return (
+                            <g key={i}>
+                                <text x={x} y={T.y1 + 34} textAnchor="middle" fontSize="13" fontWeight="600" fill={COL.ink}>{f.obj.namn}</text>
+                                {badm
+                                    ? <g><path d={`M ${x - 9} ${y - 22} L ${x + 9} ${y - 22} L ${x + 5} ${y - 6} L ${x - 5} ${y - 6} Z`} fill="#fff" stroke="#6b7280" strokeWidth="1.2" /><circle cx={x} cy={y + 1} r="6" fill="#f3f4f6" stroke="#6b7280" strokeWidth="1.2" /></g>
+                                    : <circle cx={x} cy={y} r="10" fill="#d4e157" stroke="#7c8b1f" strokeWidth="1.4" />}
+                                {!nere && <circle cx={x} cy={y} r="2.6" fill={COL.ink} />}
+                                {!nere && <Pil x1={x} y1={y} x2={x} y2={y + L} color={COL.tyngd} width={3.5} head={11} edge />}
+                                {!nere && Fl / FG * L > 3 && <Pil x1={x} y1={y} x2={x} y2={y - Fl / FG * L} color={COL.luft} width={3.5} head={11} edge />}
+                                {!nere && <Bet x={x + 12} y={y + L - 2} sym="F" idx="G" color={COL.tyngd} size={14} />}
+                                {!nere && Fl / FG * L > 3 && <Bet x={x + 12} y={y - Fl / FG * L + 10} sym="F" idx="luft" color={COL.luft} size={14} />}
+                                <text x={x} y={T.y1 + 54} textAnchor="middle" fontSize="13" fill={COL.ink}>{nere ? 'nedslagsfart' : <tspan><tspan fontStyle="italic">v</tspan> = {fmt(v, 1)}{NB}m/s</tspan>}</text>
+                                {nere && <text x={x} y={T.y1 + 72} textAnchor="middle" fontSize="13" fill={COL.ink}>{fmt(v, 1)}{NB}m/s</text>}
+                                {!nere && v > 0.99 * f.vGrans && <text x={x + 14} y={y + 4} fontSize="12" fill={COL.soft}>jämvikt</text>}
+                            </g>
+                        );
+                    })}
+                    {/* v–t-diagrammet */}
+                    <line x1={G.x0} y1={G.y1} x2={G.x1 + 8} y2={G.y1} stroke={COL.ink} strokeWidth="1.2" />
+                    <polygon points={`${G.x1 + 14},${G.y1} ${G.x1 + 5},${G.y1 - 4} ${G.x1 + 5},${G.y1 + 4}`} fill={COL.ink} />
+                    <line x1={G.x0} y1={G.y1} x2={G.x0} y2={G.y0 - 22} stroke={COL.ink} strokeWidth="1.2" />
+                    <polygon points={`${G.x0},${G.y0 - 28} ${G.x0 - 4},${G.y0 - 19} ${G.x0 + 4},${G.y0 - 19}`} fill={COL.ink} />
+                    <text x={G.x0 + 8} y={G.y0 - 18} fontSize="13" fill={COL.ink}><tspan fontStyle="italic">v</tspan> (m/s)</text>
+                    <text x={G.x1 + 14} y={G.y1 + 32} textAnchor="end" fontSize="13" fill={COL.ink}><tspan fontStyle="italic">t</tspan> (s)</text>
+                    {tt.map((q) => <g key={q}><line x1={GX(q)} y1={G.y1} x2={GX(q)} y2={G.y1 + 5} stroke={COL.ink} /><text x={GX(q)} y={G.y1 + 18} textAnchor="middle" fontSize="11" fill={COL.soft}>{fmt(q, dtt < 1 ? 1 : 0)}</text></g>)}
+                    {vv.map((q) => <g key={q}><line x1={G.x0 - 5} y1={GY(q)} x2={G.x0} y2={GY(q)} stroke={COL.ink} /><text x={G.x0 - 8} y={GY(q) + 4} textAnchor="end" fontSize="11" fill={COL.soft}>{fmt(q, 0)}</text></g>)}
+                    {falls.map((f, i) => {
+                        const pts = f.rader.filter((q, j) => q.t <= t && (j % 5 === 0)).map((q) => `${GX(q.t).toFixed(1)},${GY(q.v).toFixed(1)}`);
+                        const farg = i === 0 ? '#7c8b1f' : '#4b5563';
+                        return (
+                            <g key={i}>
+                                {!dolj && f.vGrans < vMax && <line x1={G.x0} y1={GY(f.vGrans)} x2={G.x1} y2={GY(f.vGrans)} stroke={farg} strokeWidth="1.1" strokeDasharray="5 4" />}
+                                {!dolj && f.vGrans < vMax && <text x={G.x1} y={GY(f.vGrans) - 6} textAnchor="end" fontSize="12" fill={farg}>gränshastighet {fmt(f.vGrans, 1)}{NB}m/s</text>}
+                                {pts.length > 1 && <polyline points={pts.join(' ')} fill="none" stroke={farg} strokeWidth="2.4" strokeLinejoin="round" />}
+                            </g>
+                        );
+                    })}
+                    <text x={G.x0 + 10} y={G.y1 + 46} fontSize="12" fill={COL.soft}>Räknat med stegmetoden, Δ<tspan fontStyle="italic">t</tspan> = 0,01{NB}s.</text>
+                    <text x="40" y={T.y1 + 100} fontSize="12" fill={COL.soft}>Pilarna är ritade i varje bolls egen skala:</text>
+                    <text x="40" y={T.y1 + 116} fontSize="12" fill={COL.soft}>tennisbollens tyngdkraft är elva gånger större.</text>
+                    {(() => { const tb = falls.find((f) => f.obj === M.FOREMAL.tennis); if (!tb || dolj) return null; const vs = tb.rader[tb.rader.length - 1].v;
+                        return vs < 0.97 * tb.vGrans ? <text x={G.x0 + 10} y={G.y1 + 64} fontSize="12" fill={COL.soft}>Tennisbollen hinner inte nå sin gränshastighet på {fmt(H, 0)}{NB}m ({fmt(vs, 1)} av {fmt(tb.vGrans, 1)}{NB}m/s).</text> : null; })()}
+                </g>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  REGLAGE
+        // ════════════════════════════════════════════════════════
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, disabled, color = 'var(--lab-accent, #c8324a)' }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').replace('−', '-').trim();
+                if (norm === '' || norm === '-' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt} disabled={disabled}
+                           style={{ color }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+        const Slider = ({ label, value, min, max, step, onChange, disabled, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 112, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, disabled, valueNode }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    {valueNode}
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        // Formelkortet: varje storhet har sitt namn ovanför.
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  FORMELKORTET
+        // ════════════════════════════════════════════════════════
+        const FormelKort = () => (
+            <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                <div className="flex flex-wrap items-center gap-x-8 gap-y-3 mb-3">
+                    <div className="flex items-center gap-x-3">
+                        <Vbl label="Nytt läge"><Vi s="x" a="n+1" /></Vbl>
+                        <span className="fnum">=</span>
+                        <Vbl label="Gammalt läge"><Vi s="x" a="n" /></Vbl>
+                        <span className="fnum">+</span>
+                        <Vbl label="Hastighet"><Vi s="v" a="x" b="n" /></Vbl>
+                        <span className="fnum">·</span>
+                        <Vbl label="Tidssteg"><span>Δ<em>t</em></span></Vbl>
+                    </div>
+                    <div className="text-sm" style={{ color: 'var(--lab-ink-soft)', maxWidth: 500 }}>
+                        Nytt värde = gammalt värde + ändringen under tidssteget. Detsamma gäller för <em>y</em> och för hastigheterna:
+                        {' '}<Vi s="v" a="x" b="n+1" /> = <Vi s="v" a="x" b="n" /> + <Vi s="a" a="x" b="n" /> · Δ<em>t</em>. Luftmotståndet
+                        {' '}<Sub s="F" i="luft" /> = <em>k</em> · <em>v</em>² är motriktat hastigheten och ger
+                        {' '}<Sub s="a" i="x" /> = −<Brak t={<em>k</em>} n={<em>m</em>} /> · <em>v</em> · <Sub s="v" i="x" /> och
+                        {' '}<Sub s="a" i="y" /> = −<em>g</em> − <Brak t={<em>k</em>} n={<em>m</em>} /> · <em>v</em> · <Sub s="v" i="y" />.
+                    </div>
+                </div>
+            </div>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  FÄRDIGA FÖRSÖK OCH GISSA-LÄGET
+        // ════════════════════════════════════════════════════════
+        const FORSOK = [
+            { id: 'ex1',  namn: 'Exempel 1 från teorin', sub: '8,0 m/s och 6,0 m/s, Δt = 0,1 s', cfg: { lage: 1, obj: 'tennis', luft: false, v0x: 8, v0y: 6, dt: 0.1, kor: true } },
+            { id: 'dt',   namn: 'Långt och kort tidssteg', sub: '0,2 s mot 0,001 s', cfg: { lage: 2, obj: 'tennis', luft: false, v0x: 8, v0y: 6, valda: [0.2, 0.001] } },
+            { id: 'luft', namn: 'Tennisboll och badmintonboll', sub: 'släpps från 30 m', cfg: { lage: 3, H: 30 } },
+            { id: 'basta', namn: 'Bästa utkastvinkeln', sub: 'tennisboll, 30 m/s, 39°', cfg: { lage: 1, obj: 'tennis', luft: true, v0x: 23.3, v0y: 18.9, dt: 0.05, kor: true } },
+            { id: 'v45',  namn: 'Samma kast vid 45°', sub: 'tennisboll, 30 m/s, kortare', cfg: { lage: 1, obj: 'tennis', luft: true, v0x: 21.2, v0y: 21.2, dt: 0.05, kor: true } },
+            { id: 'grans', namn: 'Gränshastigheten', sub: 'badmintonbollen nära gränshastigheten efter knappt 9 m', cfg: { lage: 3, H: 10 } },
+        ];
+        const slump = (a) => a[Math.floor(Math.random() * a.length)];
+        function nyUppgift(typ) {
+            if (typ === 'fel') return { typ, dt: slump([0.2, 0.1, 0.05, 0.02]), v0x: slump([6, 8, 10, 12]), v0y: slump([5, 6, 8, 10]) };
+            return { typ, obj: slump(Object.keys(M.FOREMAL)) };
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  HUVUDAPP
+        // ════════════════════════════════════════════════════════
+        const App = () => {
+            const [lage, setLage] = useState(1);
+            const [obj, setObj] = useState('tennis');
+            const [luft, setLuft] = useState(false);
+            const [v0x, setV0x] = useState(8);
+            const [v0y, setV0y] = useState(6);
+            const [dt, setDt] = useState(0.1);
+            const [antal, setAntal] = useState(1);
+            const [kor, setKor] = useState(false);
+            const [vald, setVald] = useState(0);
+            const [cell, setCell] = useState(null);
+            const [valda, setValda] = useState(DT_JAMFOR);
+            const [H, setH] = useState(30);
+            const [tFall, setTFall] = useState(0);
+            const [fallKor, setFallKor] = useState(false);
+            const [kopierat, setKopierat] = useState('');
+            const [visaUtan, setVisaUtan] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [gissa, setGissa] = useState(null);
+            const [svarTxt, setSvarTxt] = useState('');
+            const [svarStatus, setSvarStatus] = useState(null);
+            const [poang, setPoang] = useState({ ratt: 0, totalt: 0, svit: 0 });
+
+            const O = M.FOREMAL[obj];
+            const p = gissa && gissa.typ === 'fel'
+                ? { v0x: gissa.v0x, v0y: gissa.v0y, k: 0, m: 1, dt }
+                : { v0x, v0y, k: luft ? O.k : 0, m: O.m, dt };
+            const k = M.kast(p);
+            // bromstiden m/(k v): ett längre tidssteg låter stegmetoden bromsa bollen mer än den har fart
+            const bromstid = p.k ? p.m / (p.k * Math.hypot(p.v0x, p.v0y)) : Infinity;
+            const J = lage === 2 ? jamforelse(p) : null;
+            const fallObj = gissa && gissa.typ === 'grans' ? [M.FOREMAL[gissa.obj]] : [M.FOREMAL.tennis, M.FOREMAL.badminton];
+            const falls = lage === 3 ? fallObj.map((o) => Object.assign(M.fall({ m: o.m, k: o.k, dt: 0.01, H }), { obj: o })) : [];
+            const tSlut = falls.length ? Math.max(...falls.map((f) => f.rader[f.rader.length - 1].t)) : 0;
+            const sceneWrapRef = useRef(null);
+
+            // läge 1: raderna fylls i medan bollen flyger
+            useEffect(() => {
+                if (!kor || lage !== 1) return;
+                const ms = Math.max(30, Math.min(260, 2400 / k.rader.length));
+                const id = setInterval(() => setAntal((a) => {
+                    if (a >= k.rader.length) { setKor(false); return a; }
+                    setVald(a); return a + 1;
+                }), ms);
+                return () => clearInterval(id);
+            }, [kor, lage, k.rader.length]);
+            useEffect(() => { setAntal((a) => Math.min(Math.max(a, 1), k.rader.length)); setVald((v) => Math.min(v, k.rader.length - 1)); }, [k.rader.length]);
+            // läge 3: fallet i verklig tid
+            useEffect(() => {
+                if (!fallKor || lage !== 3) return;
+                let raf, last = null;
+                const loop = (ts) => {
+                    if (last == null) last = ts;
+                    const d = (ts - last) / 1000; last = ts;
+                    setTFall((t) => { const n = t + d; if (n >= tSlut) { setFallKor(false); return tSlut; } return n; });
+                    raf = requestAnimationFrame(loop);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, [fallKor, lage, tSlut]);
+
+            const borjaOm = () => { setKor(false); setAntal(1); setVald(0); setCell(null); setTFall(0); setFallKor(false); };
+            const ettSteg = () => { setKor(false); setAntal((a) => { const n = Math.min(a + 1, k.rader.length); setVald(n - 1); return n; }); };
+            const helaKastet = () => { if (antal >= k.rader.length) { setAntal(1); setVald(0); } setKor(true); };
+            const kopiera = () => {
+                const text = M.tsv(p, k.rader.length);
+                const klart = () => { setKopierat(`Kopierat: ${k.rader.length} rader. Klistra in i cell A1 i ett tomt kalkylblad. Formlerna är skrivna för svenska Excel; i engelsk version heter ROT i stället SQRT och decimaltecknet är punkt.`); setTimeout(() => setKopierat(''), 6000); };
+                if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(klart, () => setKopierat('Det gick inte att kopiera. Tillåt urklipp i webbläsaren och försök igen.'));
+                else setKopierat('Webbläsaren låter inte sidan kopiera till urklipp.');
+            };
+
+            const korForsok = (f) => {
+                const c = f.cfg;
+                setGissa(null); setSvarStatus(null);
+                setLage(c.lage);
+                if (c.obj) setObj(c.obj);
+                if (c.luft != null) setLuft(c.luft);
+                if (c.v0x != null) { setV0x(c.v0x); setV0y(c.v0y); }
+                if (c.dt) setDt(c.dt);
+                if (c.valda) setValda(c.valda); else setValda(DT_JAMFOR);
+                if (c.H) setH(c.H);
+                setKor(false); setAntal(1); setVald(0); setCell(null); setTFall(0); setFallKor(false);
+                if (c.kor) setTimeout(() => setKor(true), 400);
+                if (c.lage === 3) setTimeout(() => setFallKor(true), 400);
+            };
+
+            // ── Gissa-läget ──
+            const startaGissa = (typ) => {
+                const u = nyUppgift(typ);
+                setGissa(u); setSvarTxt(''); setSvarStatus(null);
+                setKor(false); setFallKor(false); setTFall(0);
+                if (typ === 'fel') { setLage(2); setDt(u.dt); setValda([u.dt, u.dt / 2]); }
+                else { setLage(3); setH(30); }
+            };
+            const kolla = () => {
+                const u = gissa;
+                const n = parseFloat(svarTxt.replace(',', '.').replace('−', '-'));
+                if (!isFinite(n)) { setSvarStatus({ ratt: false, text: 'Skriv in ett tal.' }); return; }
+                let ratt, text;
+                if (u.typ === 'fel') {
+                    const e = M.exakt(u.v0x, u.v0y).kastvidd;
+                    const f1 = M.kast({ v0x: u.v0x, v0y: u.v0y, k: 0, m: 1, dt: u.dt }).kastvidd - e;
+                    const f2 = M.kast({ v0x: u.v0x, v0y: u.v0y, k: 0, m: 1, dt: u.dt / 2 }).kastvidd - e;
+                    ratt = Math.abs(n - f2) <= Math.max(0.03, 0.12 * Math.abs(f2));
+                    text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} Med halva tidssteget, ${dtText(u.dt / 2)}${NB}s, blev felet ${fmt(f2, 2)}${NB}m. Det är ungefär hälften av ${fmt(f1, 2)}${NB}m: felet halveras när tidssteget halveras.`;
+                } else {
+                    const o = M.FOREMAL[u.obj], v = Math.sqrt(o.m * M.G / o.k);
+                    ratt = Math.abs(n - v) <= 0.03 * v;
+                    text = <span>{ratt ? 'Rätt!' : 'Inte riktigt.'} Vid gränshastigheten är luftmotståndet lika stort som tyngdkraften, <em>k</em> · <em>v</em>² = <em>m</em> · <em>g</em>. Det ger <em>v</em> = √<Brak t={<span><em>m</em> · <em>g</em></span>} n={<em>k</em>} /> = √<Brak t={`${M.komma(o.m)}${NB}kg · 9,82${NB}N/kg`} n={`${M.komma(o.k)}${NB}kg/m`} /> ≈ {fmt(v, 1)}{NB}m/s.</span>;
+                    setTimeout(() => setFallKor(true), 300);
+                }
+                setSvarStatus({ ratt, text });
+                setPoang((q) => ({ ratt: q.ratt + (ratt ? 1 : 0), totalt: q.totalt + 1, svit: ratt ? q.svit + 1 : 0 }));
+            };
+            const avslutaGissa = () => { setGissa(null); setSvarStatus(null); setValda(DT_JAMFOR); borjaOm(); };
+            const dolj = !!gissa && svarStatus === null;
+            const las = !!gissa;
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(document.fullscreenElement === sceneWrapRef.current || document.webkitFullscreenElement === sceneWrapRef.current);
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => { document.removeEventListener('fullscreenchange', handler); document.removeEventListener('webkitfullscreenchange', handler); };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const reglage = (Sl, kompakt) => {
+                const rad = (label, value, min, max, step, onChange, unit, d = 0, l2 = las) => (
+                    <Sl key={label} label={label} value={value} min={min} max={max} step={step} onChange={onChange} disabled={l2}
+                        {...(kompakt ? { valueNode: <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, d)} unit={unit} disabled={l2} onCommit={onChange} /> } : {})}>
+                        {!kompakt && <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, d)} unit={unit} disabled={l2} onCommit={onChange} />}
+                    </Sl>
+                );
+                if (lage === 3) return rad('Fallhöjd', H, 5, 100, 5, (v) => { setH(v); setTFall(0); setFallKor(false); }, 'm');
+                return (
+                    <React.Fragment>
+                        {rad('Utgångshastighet <em>v</em><sub><em>x</em>,0</sub>', v0x, 0, 40, 0.1, (v) => { setV0x(v); }, 'm/s', 1)}
+                        {rad('Utgångshastighet <em>v</em><sub><em>y</em>,0</sub>', v0y, 0, 40, 0.1, (v) => { setV0y(v); }, 'm/s', 1)}
+                    </React.Fragment>
+                );
+            };
+            const knappar = (cls) => lage === 1 ? (
+                <React.Fragment>
+                    <button className={cls('btn-start')} disabled={las || antal >= k.rader.length} onClick={ettSteg}>Ett steg</button>
+                    <button className={cls('btn-toggle')} disabled={las} onClick={() => (kor ? setKor(false) : helaKastet())}>{kor ? 'Paus' : 'Hela kastet'}</button>
+                    <button className={cls('btn-toggle')} disabled={las} onClick={borjaOm}>Börja om</button>
+                    <button className={cls('btn-toggle')} disabled={las} onClick={kopiera}>Kopiera kalkylbladet</button>
+                </React.Fragment>
+            ) : lage === 3 ? (
+                <React.Fragment>
+                    <button className={cls('btn-start')} disabled={dolj} onClick={() => { if (tFall >= tSlut) setTFall(0); setFallKor((v) => !v); }}>{fallKor ? 'Paus' : falls.length > 1 ? 'Släpp bollarna' : 'Släpp bollen'}</button>
+                    <button className={cls('btn-toggle')} onClick={borjaOm}>Börja om</button>
+                </React.Fragment>
+            ) : null;
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Inställningar</div>
+                        {lage !== 3 && <label><input type="checkbox" checked={luft} disabled={las} onChange={() => setLuft((v) => !v)} /><span>Med luftmotstånd</span></label>}
+                        {lage === 1 && luft && <label><input type="checkbox" checked={visaUtan} disabled={las} onChange={() => setVisaUtan((v) => !v)} /><span>Visa kastet utan luftmotstånd</span></label>}
+                        {lage === 3 && <label><input type="checkbox" checked readOnly /><span>Med luftmotstånd</span></label>}
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglage(StSlider, true)}</div>
+                                {knappar((x) => x) && <div className="st-actions">{knappar((x) => x)}</div>}
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const fart = Math.hypot(v0x, v0y), vinkel = Math.atan2(v0y, v0x) * 180 / Math.PI;
+            const tabell = J && (
+                <div className="glass-card rounded-xl p-3 mt-3 overflow-x-auto">
+                    <table className="steg-tab">
+                        <thead><tr><th>Visa</th><th>Tidssteg Δ<em>t</em></th><th>Antal steg</th><th>Kastvidd</th><th>Stighöjd</th><th>Fel i kastvidden</th></tr></thead>
+                        <tbody>
+                            {J.korningar.map((r, i) => (
+                                <tr key={r.dt}>
+                                    <td><input type="checkbox" checked={valda.includes(r.dt)} disabled={las} onChange={() => setValda((v) => v.includes(r.dt) ? v.filter((x) => x !== r.dt) : v.concat([r.dt]))} />
+                                        <span className="steg-farg" style={{ background: FARGER[i] }} /></td>
+                                    <td>{dtText(r.dt)}{NB}s</td>
+                                    <td>{r.k.rader.length - 1}</td>
+                                    <td>{dolj && r.dt !== gissa.dt ? '?' : `${fmt(r.k.kastvidd, 2)}${NB}m`}</td>
+                                    <td>{dolj && r.dt !== gissa.dt ? '?' : `${fmt(r.k.stighojd, 2)}${NB}m`}</td>
+                                    <td>{dolj && r.dt !== gissa.dt ? '?' : `${fmt(r.k.kastvidd - J.ref.kastvidd, 2)}${NB}m`}</td>
+                                </tr>
+                            ))}
+                            <tr className="steg-ref"><td></td><td colSpan="2">{p.k ? <span>Referens (Δ<em>t</em> = 0,0001{NB}s)</span> : 'Exakt (formlerna)'}</td>
+                                <td>{fmt(J.ref.kastvidd, 2)}{NB}m</td><td>{fmt(J.ref.stighojd, 2)}{NB}m</td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-7xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Stegmetoden
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Stegmetoden</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            Räkna ett kast steg för steg, precis som i ett kalkylblad: varje rad är ett tidssteg och varje punkt i banan en rad.
+                            Se hur felet beror på tidssteget och lägg till luftmotstånd. Släpp sedan en tennisboll och en badmintonboll och se hur
+                            de når sin gränshastighet.
+                        </p>
+
+                        <FormelKort />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 xl:w-3/4 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <svg viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet" role="img"
+                                         aria-label="Ett kast räknat med stegmetoden: blå punkter för varje tidssteg, den exakta kastparabeln streckad, och pilar för hastighet och acceleration.">
+                                        <defs>
+                                            <linearGradient id="vagg" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="0" stopColor="#f7f2e8" /><stop offset="1" stopColor="#ece3d2" />
+                                            </linearGradient>
+                                        </defs>
+                                        <rect x="0" y="0" width={VB_W} height={VB_H} fill="url(#vagg)" />
+                                        <g fontFamily="Poppins, sans-serif">
+                                            {lage === 1 && <Lage1 p={p} k={k} antal={antal} vald={vald} setVald={(i) => { setVald(i); setCell(null); }} dolj={dolj} objId={obj} visaUtan={visaUtan} />}
+                                            {lage === 2 && <Lage2 p={p} J={J} dolj={dolj} valda={valda} />}
+                                            {lage === 3 && <Lage3 H={H} falls={falls} t={tFall} dolj={dolj} />}
+                                        </g>
+                                    </svg>
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                {lage === 1 && <Kalkylblad p={p} k={k} antal={antal} vald={vald} setVald={setVald} cell={cell} setCell={setCell} dolj={dolj} />}
+                                {lage === 1 && kopierat && <p className="text-sm mt-2" style={{ color: '#15803d' }}>{kopierat}</p>}
+                                {lage === 1 && dt > 0.5 * bromstid && <p className="text-sm mt-2" style={{ color: 'var(--lab-accent)' }}>
+                                    Tidssteget är för långt för den här bollen. Luftmotståndet bromsar den på ungefär {fmt(bromstid, 2)}{NB}s, och under ett så långt
+                                    steg hinner stegmetoden bromsa bollen mer än den har fart, så att den kan fara bakåt. Välj ett kortare tidssteg.</p>}
+                                {lage === 2 && tabell}
+                                {lage === 2 && p.k > 0 && !dolj && <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Med luftmotstånd gäller ”halva tidssteget, halva felet” bara när tidssteget är kort jämfört med bromstiden <em>m</em>/(<em>k</em> · <em>v</em>),
+                                    här {fmt(bromstid, 2)}{NB}s. Med längre tidssteg hamnar prickarna långt från linjen, och felet kan till och med bli mindre för ett längre
+                                    steg när två fel råkar ta ut varandra. Felkartan visar felets belopp; tabellen visar det med tecken.</p>}
+                                {lage === 1 && <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Hastigheten (grön) och accelerationen (röd) ritas för den markerade raden. Klicka på en punkt i banan eller en rad i bladet.</p>}
+                            </div>
+
+                            <div className="lg:w-1/3 xl:w-1/4 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Läge</div>
+                                    <div className="forsok-lista mb-3">
+                                        {[[1, 'Kalkylbladet och banan'], [2, 'Hur kort ska tidssteget vara?'], [3, 'Fallet med luftmotstånd']].map(([n, t]) => (
+                                            <button key={n} className="forsok" disabled={las} onClick={() => { setLage(n); borjaOm(); }}
+                                                    style={lage === n ? { background: 'var(--lab-ink)', color: 'var(--lab-bg)' } : undefined}>{t}</button>
+                                        ))}
+                                    </div>
+                                    {lage !== 3 && (
+                                        <React.Fragment>
+                                            <div className="flbl mb-2" style={{ textAlign: 'left' }}>Föremål</div>
+                                            <div className="forsok-lista mb-2">
+                                                {Object.entries(M.FOREMAL).map(([id, o]) => (
+                                                    <button key={id} className="forsok" disabled={las} onClick={() => setObj(id)}
+                                                            style={obj === id ? { background: 'var(--lab-ink)', color: 'var(--lab-bg)' } : undefined}>
+                                                        {o.namn}<span className="sub">{fmt(o.m * 1000, 0)}{NB}g, <em>k</em> = {M.komma(o.k)}{NB}kg/m</span></button>
+                                                ))}
+                                            </div>
+                                            <label className="flex items-center gap-2 text-sm" style={{ color: 'var(--lab-ink)' }}>
+                                                <input type="checkbox" checked={luft} disabled={las} onChange={() => setLuft((v) => !v)} /><span>Med luftmotstånd</span>
+                                            </label>
+                                        </React.Fragment>
+                                    )}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    {!isFullscreen && reglage(Slider, false)}
+                                    {lage !== 3 && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Fart {fmt(fart, 1)}{NB}m/s, utkastvinkel {fmt(vinkel, 0)}°</p>}
+                                    {lage === 1 && (
+                                        <div className="mb-2">
+                                            <div className="text-xs mb-1" style={{ color: 'var(--lab-ink-soft)' }}>Tidssteg Δ<em>t</em></div>
+                                            <div className="mode-seg">{DT_VAL.map((d) => <button key={d} disabled={las} className={dt === d ? 'active' : ''} onClick={() => { setDt(d); borjaOm(); }}>{dtText(d)}{NB}s</button>)}</div>
+                                        </div>
+                                    )}
+                                    {isFullscreen && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Reglagen finns i rutan uppe till höger i fullskärm.</p>}
+                                    {!isFullscreen && knappar((x) => x) && <div className="grid grid-cols-2 gap-2 mt-2">{knappar((x) => x + ' w-full')}</div>}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Färdiga försök</div>
+                                    <div className="forsok-lista">
+                                        {FORSOK.map((f) => (
+                                            <button key={f.id} className="forsok" disabled={las} onClick={() => korForsok(f)}>{f.namn}<span className="sub">{f.sub}</span></button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flbl" style={{ textAlign: 'left' }}>Gissa-läge</div>
+                                        {poang.totalt > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>{poang.ratt} av {poang.totalt} rätt{poang.svit > 1 ? `, ${poang.svit} i rad` : ''}</div>}
+                                    </div>
+                                    {!gissa && (
+                                        <div className="flex flex-col gap-2">
+                                            <button className="btn-toggle" onClick={() => startaGissa('fel')}>Hur ändras felet?</button>
+                                            <button className="btn-toggle" onClick={() => startaGissa('grans')}>Vilken gränshastighet?</button>
+                                        </div>
+                                    )}
+                                    {gissa && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                {gissa.typ === 'fel'
+                                                    ? <span>Ett kast med {fmt(gissa.v0x, 1)}{NB}m/s i <em>x</em>-led och {fmt(gissa.v0y, 1)}{NB}m/s i <em>y</em>-led räknas med tidssteget {dtText(gissa.dt)}{NB}s. Felet i kastvidden blir {fmt(M.kast({ v0x: gissa.v0x, v0y: gissa.v0y, k: 0, m: 1, dt: gissa.dt }).kastvidd - M.exakt(gissa.v0x, gissa.v0y).kastvidd, 2)}{NB}m. Hur stort blir felet med halva tidssteget?</span>
+                                                    : <span>En {M.FOREMAL[gissa.obj].namn.toLowerCase()} har massan {fmt(M.FOREMAL[gissa.obj].m * 1000, 0)}{NB}g och <em>k</em> = {M.komma(M.FOREMAL[gissa.obj].k)}{NB}kg/m. Hur stor blir gränshastigheten när den faller?</span>}
+                                            </p>
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <span>{gissa.typ === 'fel' ? 'fel =' : <span><em>v</em> =</span>}</span>
+                                                <input className="gissa-in" type="text" inputMode="decimal" value={svarTxt} disabled={svarStatus !== null}
+                                                       onChange={(e) => setSvarTxt(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && svarStatus === null) kolla(); }} />
+                                                <span>{gissa.typ === 'fel' ? 'm' : 'm/s'}</span>
+                                                <button className="btn-start" onClick={kolla} disabled={svarStatus !== null}>Kolla</button>
+                                            </div>
+                                            {svarStatus && <p className="text-sm mb-2" style={{ color: svarStatus.ratt ? '#15803d' : 'var(--lab-accent)' }}>{svarStatus.text}</p>}
+                                            <div className="flex gap-2">
+                                                {svarStatus && <button className="btn-toggle flex-1" onClick={() => startaGissa(gissa.typ)}>Ny uppgift</button>}
+                                                <button className="btn-toggle flex-1" onClick={avslutaGissa}>Avsluta</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Nytt värde = gammalt värde + ändringen</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    I varje steg används värdena i början av steget för att räkna ut ändringen under steget. Det är just det en rad i
+                                    kalkylbladet gör: den hämtar sina värden från raden ovanför.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Felet halveras med tidssteget</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Under ett steg ändras hastigheten, men metoden räknar med värdet i början av steget. Ju kortare steget är, desto
+                                    mindre hinner hastigheten ändras. För stegmetoden blir felet ungefär proportionellt mot tidssteget, så länge tidssteget är kort.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Gränshastigheten</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Luftmotståndet växer med kvadraten på farten. När det blivit lika stort som tyngdkraften, <em>k</em> · <em>v</em>² = <em>m</em> · <em>g</em>,
+                                    är den resulterande kraften noll och farten ökar inte längre. En lätt badmintonboll har nått 95 % av sin
+                                    gränshastighet efter drygt 5 meter.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Så vet du att simuleringen räknar rätt</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>Pröva ett fall med känt svar.</strong> Utan luftmotstånd ska stegmetoden komma nära den exakta kastparabeln.</li>
+                                <li><strong>Halvera tidssteget.</strong> Om resultatet inte ändras i de värdesiffror som behövs är tidssteget tillräckligt kort.</li>
+                                <li><strong>Rimlighetsbedöm.</strong> Med luftmotstånd ska kastet bli kortare och lägre än utan, aldrig längre.</li>
+                            </ul>
+                        </details>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Datorn räknar exakt.”</strong> Nej. Stegmetoden ger ett närmevärde. Felet beror på tidssteget, inte på datorn.</li>
+                                <li><strong>”Med luftmotstånd är 45° fortfarande bästa vinkeln.”</strong> Nej. För en tennisboll som kastas med 30{NB}m/s är det ungefär 39°.</li>
+                                <li><strong>”Luftmotståndet är större på en lätt boll.”</strong> Nej. Luftmotståndet <em>k</em> · <em>v</em>² beror inte på massan,
+                                    och tennisbollen och badmintonbollen har ungefär samma <em>k</em>. Men samma kraft ger en lätt boll en mycket större
+                                    acceleration, <em>a</em> = <em>F</em>/<em>m</em>, så den bromsas mer. Utan luftmotstånd faller alla föremål lika fort.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

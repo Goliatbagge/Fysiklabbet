@@ -51,7 +51,7 @@ att länka till från boken.
 | 11 | Vältning (kloss som lutas tills den välter) | fy2-1.2, fy2-1.3 | 4.1 Likevekt, 4.5 Gjenstander som står på skrå | [x] |
 | 12 | Linjalen på två fingrar | fy2-1.2 | 4.1 Likevekt | [x] |
 | 13 | Lodlinjen (tyngdpunkt med lod) | fy2-1.3 | 4.1 Likevekt | [x] |
-| 14 | Numerisk modellering (kalkylbladet + stegkastet) | fy2-1.9 | 2.6 Matematisk modellering av bevegelse | [ ] |
+| 14 | Numerisk modellering (kalkylbladet + stegkastet) | fy2-1.9 | 2.6 Matematisk modellering av bevegelse | [x] |
 
 ---
 
@@ -189,8 +189,21 @@ Tas när del 1 och 2 är klara.
 - [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn; interaktionstestet `%TEMP%\pptr-test	p-test.js`
 - [x] Fysikgranskning och språkgranskning, rättningarna införda (försöken väntar tills skivan hänger still, mindre rityta så att egna former ryms, l_G-etiketten och måttlinjen i fri yta, momenttexten under svängningen, rutan om Sveriges mittpunkt med 1947 års nålmetod)
 - [x] Sam testar och godkänner (2026-10-27)
-- [ ] Commit och push till `main` (glöm inte `href4.py` på section-nav, sok och verifierarna)
+- [x] Commit och push till `main` (532c934c)
 - [ ] Länken till Sigbjørn
+
+## Status: nr 14, Stegmetoden (`fysik2-stegmetoden-app.html`)
+
+- [x] Koncept godkänt (2026-10-27, `koncept-14-stegmetoden.md`): alla tre lägena, knappen som kopierar kalkylbladet och formler i svensk Excel-stil
+- [x] Motorn med test: `node .claude/test-steg-motor.js` (återskapar teorins tabell i fy2-1.9 exakt; kalkylbladets formler räknas om och jämförs med motorn)
+- [x] Sidan byggd: kalkylbladet ihopkopplat med banan (formelraden, markerade celler, kopiera till Excel), jämförelse av sju tidssteg med felkartan, fallet med tennisboll och badmintonboll och gränshastigheten, sex färdiga försök, gissa-läge (felet med halva tidssteget, gränshastigheten)
+- [x] Inkopplad: `href` på fy2-1.9, `data/simuleringar.js`, `UPDATES`, `verify-navigation.js`
+- [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn; testet `%TEMP%\pptr-test\steg-gissa.js` (gissa och kopiering)
+- [x] Fysikgranskning och språkgranskning, rättningarna införda (varning när tidssteget är längre än bromstiden, förklaring till felkartan med luftmotstånd, missuppfattningen om lätta bollar, kastvidden i scenen, formelkortet med rakt bråkstreck och a_y, fallets tyngdpunkt och nedslagsfart)
+- [x] Sam testar och godkänner (2026-10-27)
+- [ ] Commit och push till `main`
+- [ ] Länken till Sigbjørn
+- [ ] Fråga till Sam: teorin fy2-1.9 föreslår cellen G2 för tidssteget i tipsrutan, men simuleringens blad har tidssteget i J2 (G är *a*_y); och "de värdesiffror du bryr dig om" i tipsrutan
 
 ## Process för varje simulering
 

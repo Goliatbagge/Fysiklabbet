@@ -68,6 +68,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-arbete-app.html',
     'fysik1-energiforluster-app.html',
     'fysik1-effekt-verkningsgrad-app.html',
+    'fysik1-trissor-app.html',
     'fysik1-flytkraft-app.html',
     'fysik1-hastighet-tid-app.html',
     'fysik1-acceleration-tid-app.html',

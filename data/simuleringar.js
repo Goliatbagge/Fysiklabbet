@@ -49,6 +49,8 @@ window.SIM_NAMES = {
   'fysik1-hiss-app.html': 'Krafter i hissen',
   'fysik1-arbete-app.html': 'Arbete',
   'fysik1-energiforluster-app.html': 'Förlust av mekanisk energi',
+  'fysik1-effekt-verkningsgrad-app.html': 'Effekt och verkningsgrad',
+  'fysik1-effekt-verkningsgrad-app.html?lage=apparater': 'Verkningsgrad: lampor och apparater',
   'fysik1-berg-och-dalbana.html': 'Berg-och-dalbana (energiprincipen)',
   'fysik1-tryck-pa-app.html': 'Tryck och tryckkraft',
   'fysik1-magdeburgska-halvklot.html': 'Magdeburgska halvkloten',

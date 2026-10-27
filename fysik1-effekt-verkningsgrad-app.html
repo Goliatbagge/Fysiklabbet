@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Effekt och verkningsgrad — Fysiklabbet</title>
+    <meta name="description" content="Effekt är hur snabbt energi omvandlas och verkningsgrad hur stor del som blir nyttig. Lyft en vikt med en motor, låt Emilia springa uppför en trappa och jämför vad lampor och andra apparater kostar, med energin som brickor i ett energiflödesdiagram.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik1-effekt-verkningsgrad-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Effekt och verkningsgrad — Fysik nivå 1">
+    <meta property="og:description" content="Effekt är hur snabbt energi omvandlas och verkningsgrad hur stor del som blir nyttig. Lyft en vikt med en motor, låt Emilia springa uppför en trappa och jämför vad lampor och andra apparater kostar, med energin som brickor i ett energiflödesdiagram.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik1-effekt-verkningsgrad-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Effekt och verkningsgrad — Fysik nivå 1">
+    <meta name="twitter:description" content="Effekt är hur snabbt energi omvandlas och verkningsgrad hur stor del som blir nyttig. Lyft en vikt med en motor, låt Emilia springa uppför en trappa och jämför vad lampor och andra apparater kostar, med energin som brickor i ett energiflödesdiagram.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+        input[type="range"]:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1;
+                text-align: center; max-width: 150px; }
+        .fnum { color: var(--lab-ink); font-size: 20px; font-family: 'Poppins', sans-serif; }
+        .fnum-live { color: var(--lab-ink); font-size: 17px; font-family: 'Poppins', sans-serif; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 80px; }
+        .num-in { width: 50px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:disabled { opacity: 0.55; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* Scenen: en svg med egen proportion (1000 × 660). Mobilen (sektion 8 i
+           styles-laborans-sim.css) dockar verktygen under den. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1000 / 660;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .handtag { cursor: grab; }
+        .handtag.drar { cursor: grabbing; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 34px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-start {
+            background: var(--lab-accent, #c8324a); color: #fff; border: 1px solid var(--lab-accent, #c8324a);
+            border-radius: 8px; padding: 9px 14px; font-weight: 700; cursor: pointer;
+        }
+        .btn-start:hover:not(:disabled) { filter: brightness(1.06); }
+        .btn-start:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .mode-seg { display: flex; gap: 0; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button {
+            flex: 1; padding: 8px 8px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .mode-seg button:last-child { border-right: none; }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+
+        /* Färdiga försök */
+        .forsok-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .forsok {
+            text-align: left; padding: 7px 9px; border-radius: 8px; cursor: pointer;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; font-weight: 600; color: var(--lab-ink, #0f1620); line-height: 1.25;
+        }
+        .forsok .sub { display: block; font-size: 11.5px; font-weight: 400; color: var(--lab-ink-soft, #3a4151); }
+        .forsok:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .forsok:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* Avläsning */
+        .avl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
+        .avl .v { font-weight: 700; font-size: 16px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+        .avl .l { font-size: 11.5px; color: var(--lab-ink-muted, #5a6170); }
+
+        /* Resultatrutan efter ett försök */
+        .resultat { border-left: 4px solid var(--lab-accent, #c8324a); }
+        .resultat.ratt { border-left-color: #15803d; }
+
+        /* Gissa-läget */
+        .gissa-in { width: 90px; padding: 6px 8px; border-radius: 7px; font-size: 15px;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                    background: #fff; font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .gissa-in:focus { outline: none; border-color: var(--lab-accent, #c8324a); }
+        .kort3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .kort3 button {
+            padding: 8px 6px; border-radius: 8px; cursor: pointer; text-align: center;
+            background: var(--lab-bg, #f3eee4); border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; line-height: 1.45; color: var(--lab-ink, #0f1620);
+        }
+        .kort3 button:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .kort3 button.vald { border-color: var(--lab-ink, #0f1620); box-shadow: 0 0 0 2px rgba(15,22,32,0.15); }
+        .kort3 button.basta { background: rgba(21,128,61,0.10); border-color: #15803d; }
+        .kort3 .bok { font-weight: 700; font-size: 15px; display: block; margin-bottom: 2px; }
+        .kort3 .stapel { height: 6px; border-radius: 3px; background: #d4930f; margin-top: 5px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+        /* Remsorna på den plana sträckan */
+        .remsor { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+        .remsor button {
+            padding: 6px 4px; border-radius: 8px; cursor: pointer; font-size: 12.5px; font-weight: 600; line-height: 1.2;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .remsor button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+        .remsor button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); border-color: var(--lab-ink, #0f1620); }
+        .remsor button:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script id="effekt-motor">
+// Modellen för simuleringen Effekt och verkningsgrad
+// (fysik1-effekt-verkningsgrad-app.html). Källan bor här och klistras in i
+// sidans <script id="effekt-motor">; testet (test-effekt-motor.js) läser den
+// här filen direkt. Håll dem identiska.
+//
+// Läget 'lyft': en motor (eller Emilia i trappan) lyfter massan m till
+// höjden h med jämn fart. Den tillförda effekten P_t är konstant, och den
+// nyttiga effekten är P_n = η · P_t, som allt går till lägesenergi:
+//   v = P_n / (m · g),  Δt = m · g · h / P_n
+//   E_t = P_t · t,  E_n = m · g · y = P_n · t,  värme = E_t − E_n
+// Igångsättningen och inbromsningen försummas (rörelseenergin är liten).
+//
+// Läget 'apparater': två apparater med effekten P och verkningsgraden η är
+// påslagna 'paPerDygn' timmar i början av varje dygn (saknas den är
+// apparaten på hela tiden). Energin räknas i timmar och Wh.
+(function (root) {
+    const G = 9.82;
+    const KWH = 3.6e6;              // J per kWh
+
+    // ── Lyft ──
+    function lyftData(cfg) {
+        const Pn = cfg.eta * cfg.Pt;
+        const v = Pn / (cfg.m * G);
+        const T = (cfg.m * G * cfg.h) / Pn;
+        return { Pn, v, T, Pf: cfg.Pt - Pn, En: cfg.m * G * cfg.h, Et: cfg.Pt * T };
+    }
+    function lyftVid(cfg, t) {
+        const d = lyftData(cfg);
+        const tt = Math.max(0, Math.min(t, d.T));
+        const Et = cfg.Pt * tt;
+        const En = d.Pn * tt;
+        return { t: tt, y: d.v * tt, Et, En, Q: Et - En, klar: t >= d.T, T: d.T };
+    }
+
+    // ── Apparater ──
+    // t i timmar. Returnerar energi i Wh och effekt i W just nu.
+    function apparatVid(app, t) {
+        const tt = Math.max(0, t);
+        let pa, paNu;
+        if (app.paPerDygn == null || app.paPerDygn >= 24) { pa = tt; paNu = true; }
+        else {
+            const dygn = Math.floor(tt / 24), rest = tt - 24 * dygn;
+            pa = dygn * app.paPerDygn + Math.min(rest, app.paPerDygn);
+            paNu = rest < app.paPerDygn;
+        }
+        const Et = app.P * pa;
+        return { Et, En: app.eta * Et, Q: (1 - app.eta) * Et, paNu };
+    }
+    const kostnad = (Wh, pris) => (Wh / 1000) * pris;
+
+    // ── Brickor ──
+    // "Snygga" brickvärden: … 0,1, 0,2, 0,5, 1, 2, 5, 10, 20, 50 …
+    const SNYGGA = [];
+    for (let e = -3; e < 12; e++) for (const s of [1, 2, 5]) SNYGGA.push(s * Math.pow(10, e));
+    // Minsta snygga brickvärde som ger högst 'maxPerS' brickor per sekund
+    // (aldrig under 'minsta', som är 1 om inget annat anges).
+    function brickVarde(effekt, maxPerS = 18, minsta = 1) {
+        const mal = effekt / maxPerS;
+        return SNYGGA.find((v) => v >= minsta && v >= mal) || SNYGGA[SNYGGA.length - 1];
+    }
+    // Största snygga värde som högst är x (för att få tillräckligt många brickor).
+    const snyggtNedat = (x) => [...SNYGGA].reverse().find((v) => v <= x) || SNYGGA[0];
+    // Delar upp brickorna i nyttiga och förlorade så att andelen nyttiga följer
+    // η så jämnt som möjligt: bricka nummer k är nyttig om round(k · η) ökar.
+    // Av N brickor blir då round(N · η) nyttiga, och redan den första brickan
+    // är nyttig när η ≥ 0,5.
+    const arNyttig = (k, eta) => Math.round((k + 1) * eta + 1e-9) > Math.round(k * eta + 1e-9);
+
+    root.EffektMotor = { G, KWH, lyftData, lyftVid, apparatVid, kostnad, brickVarde, snyggtNedat, arNyttig };
+    if (typeof module !== 'undefined') module.exports = root.EffektMotor;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const M = window.EffektMotor;
+        const G = M.G;
+
+        // ── Talformat: decimalkomma, äkta minustecken, exakt noll som "0" ──
+        const fmt = (num, d = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [i, f] = s.replace('-', '').split('.');
+            const grupp = i.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return (num < 0 ? '−' : '') + grupp + (f !== undefined ? ',' + f : '');
+        };
+        // Tal med lagom många decimaler för storleken
+        const fmtA = (x) => Math.abs(x) >= 100 ? fmt(x, 0) : Math.abs(x) >= 10 ? fmt(x, 1) : fmt(x, 2);
+        const fmtTid = (h) => {
+            // h i timmar → "2 dygn 3 h", "5 h 20 min" eller "12 min"
+            if (h >= 24) { const d = Math.floor(h / 24), r = Math.round(h - d * 24); return `${d} ${d === 1 ? 'dygn' : 'dygn'}${r ? ` ${r} h` : ''}`; }
+            if (h >= 1) { const t = Math.floor(h), mi = Math.round((h - t) * 60); return `${t} h${mi ? ` ${mi} min` : ''}`; }
+            return `${fmt(h * 60, 0)} min`;
+        };
+
+        // Ren text med variabler i kursiv: P_n blir P med index n, ΔE och Δt får
+        // kursiv bokstav, och ensamma storhetsbokstäver (m, g, h, η) kursiveras.
+        // En bokstav direkt efter ett tal är en enhet och står rakt.
+        const Fx = ({ text }) => {
+            const delar = [];
+            const re = /(?<![\p{L}\d])(P|E)_(\p{L}+)|Δ(E|t)(?![\p{L}])|(?<![\p{L}\d])(?<!\d )([mghη])(?![\p{L}\d])/gu;
+            let sist = 0, mm, n = 0;
+            while ((mm = re.exec(text))) {
+                if (mm.index > sist) delar.push(text.slice(sist, mm.index));
+                if (mm[1]) delar.push(<span key={n++}><em>{mm[1]}</em><sub>{mm[2]}</sub></span>);
+                else if (mm[3]) delar.push(<span key={n++}>Δ<em>{mm[3]}</em></span>);
+                else delar.push(<em key={n++}>{mm[4]}</em>);
+                sist = re.lastIndex;
+            }
+            delar.push(text.slice(sist));
+            return <React.Fragment>{delar}</React.Fragment>;
+        };
+
+        // Bråk med rakt bråkstreck mitt i löptexten
+        const Brak = ({ t, n }) => (
+            <span style={{ display: 'inline-flex', flexDirection: 'column', verticalAlign: 'middle', textAlign: 'center',
+                           lineHeight: 1.05, fontSize: '0.92em', margin: '0 3px' }}>
+                <span style={{ padding: '0 2px 1px' }}>{t}</span>
+                <span style={{ padding: '1px 2px 0', borderTop: '1.5px solid currentColor' }}>{n}</span>
+            </span>
+        );
+
+        const COL = {
+            ink:   '#0f1620',
+            brick: '#d4930f',
+            brickK:'#8f6206',
+            tillf: '#4b5563',   // tillförd energi
+            nytt:  '#15803d',   // nyttig energi
+            varme: '#c2410c',   // värme (förlust)
+            ljus:  '#d4a106',
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  APPARATER OCH MOTORER
+        // ════════════════════════════════════════════════════════
+        const MOTORER = [
+            { k: 'leksak', namn: 'Leksaksmotor', eta: 0.25 },
+            { k: 'el',     namn: 'Liten elmotor', eta: 0.70 },
+        ];
+        // Glödlampan och LED-lampan ger ungefär lika mycket ljus (cirka 3 W
+        // synligt ljus, som en vanlig 60 W-glödlampa). Ungefärliga värden.
+        const APPARATER = [
+            { k: 'glod',  namn: 'Glödlampa 60 W',  P: 60,   eta: 0.05, nytta: 'Ljus',  forlust: 'Värme', typ: 'lampa' },
+            { k: 'led',   namn: 'LED-lampa 8 W',   P: 8,    eta: 0.38, nytta: 'Ljus',  forlust: 'Värme', typ: 'led' },
+            { k: 'glod85',namn: 'Glödlampa 8,5 W', P: 8.5,  eta: 0.05, nytta: 'Ljus',  forlust: 'Värme', typ: 'lampa' },
+            { k: 'led1',  namn: 'LED-lampa 1,1 W (samma ljus)', P: 1.1, eta: 0.38, nytta: 'Ljus', forlust: 'Värme', typ: 'led' },
+            { k: 'kok',   namn: 'Vattenkokare 2 000 W, 6 min per dygn', P: 2000, eta: 0.90, paPerDygn: 0.1, nytta: 'Varmt vatten', forlust: 'Värme i rummet', typ: 'kok' },
+            { k: 'akv',   namn: 'Akvarievärmare 25 W', P: 25, eta: 1.0, nytta: 'Varmt vatten', forlust: 'Ingen förlust', typ: 'akv' },
+            { k: 'lad',   namn: 'Mobilladdare 10 W, 2 h per dygn', P: 10, eta: 0.85, paPerDygn: 2, nytta: 'Kemisk energi', forlust: 'Värme', typ: 'lad' },
+            { k: 'tv',    namn: 'Äldre tv i viloläge 1 W', P: 1, eta: 0, nytta: 'Ingen nytta', forlust: 'Värme', typ: 'tv' },
+        ];
+        const app = (k) => APPARATER.find((a) => a.k === k);
+        const TAKTER = [
+            { k: 'min',  namn: '1 s = 1 min',  hPerS: 1 / 60 },
+            { k: 'h',    namn: '1 s = 1 h',    hPerS: 1 },
+            { k: 'dygn', namn: '1 s = 1 dygn', hPerS: 24 },
+            { k: 'vecka', namn: '1 s = 1 vecka', hPerS: 168 },
+        ];
+
+        // ════════════════════════════════════════════════════════
+        //  SCENENS GEOMETRI (viewBox 1000 × 660)
+        // ════════════════════════════════════════════════════════
+        const VB_W = 1000, VB_H = 660;
+        const BANK = 392;                       // bänkens ovansida
+        const S_LYFT = 250;                     // px per meter vid lyftet
+        const S_TRAPPA = 58;                    // px per meter i trappan
+        const STATIV_X = 724, VIKT_X = 696;
+        const DX0 = 92, DW = 500, DTOP = 462, DBOT = 612;
+
+        // ── Sankeydiagrammet ──
+        // Ett band från källan till apparaten, som sedan delar sig i nytta och
+        // förlust. Bandets bredd är effekten.
+        function sankeyGeo(y0, bredd, eta, kompakt) {
+            const wN = bredd * eta, wF = bredd - wN;
+            const sx0 = 110, dx0 = 270, dx1 = 310, ux = 470;
+            const yTop = y0 - bredd / 2;
+            const sprid = kompakt ? 52 : 92;
+            const nyY = y0 - sprid, fY = y0 + sprid;
+            return { sx0, dx0, dx1, ux, yTop, wN, wF, nyTop: nyY - wN / 2, fTop: fY - wF / 2, bredd, y0, nyY, fY };
+        }
+        const band = (x0, t0, x1, t1, w) => {
+            const xm = (x0 + x1) / 2;
+            return `M ${x0} ${t0} C ${xm} ${t0}, ${xm} ${t1}, ${x1} ${t1} L ${x1} ${t1 + w} C ${xm} ${t1 + w}, ${xm} ${t0 + w}, ${x0} ${t0 + w} Z`;
+        };
+        // Punkt längs en brickas väg: rakt från källan till apparaten, sedan längs
+        // mittlinjen i nytto- eller förlustbandet. u ∈ [0, 1].
+        function brickPunkt(g, nyttig, u) {
+            const L1 = g.dx1 - g.sx0, L2 = g.ux - g.dx1;
+            const s = u * (L1 + L2);
+            const ymid = nyttig ? g.yTop + g.wN / 2 : g.yTop + g.wN + g.wF / 2;
+            if (s <= L1) return { x: g.sx0 + s, y: ymid };
+            const t = (s - L1) / L2;
+            const y1 = nyttig ? g.nyY : g.fY;
+            // kubisk bezier med kontrollpunkter i mitten (samma som bandet)
+            const a = (1 - t) ** 3, b = 3 * (1 - t) ** 2 * t, c = 3 * (1 - t) * t * t, d = t ** 3;
+            return { x: g.dx1 + (L2) * (b * 0.5 + c * 0.5 + d), y: a * ymid + b * ymid + c * y1 + d * y1 };
+        }
+
+        const Sankey = ({ g, kalla, apparat, nytta, forlust, Pt, Pn, flygande, nyttFarg, kompakt }) => {
+            const fs = kompakt ? 13 : 14;
+            return (
+                <g>
+                    {/* källan till apparaten */}
+                    <rect x={g.sx0} y={g.yTop} width={g.dx0 - g.sx0} height={Math.max(1, g.bredd)} fill={COL.tillf} opacity="0.28" />
+                    {/* nytta och förlust */}
+                    {g.wN > 0.3 && <path d={band(g.dx1, g.yTop, g.ux, g.nyTop, g.wN)} fill={nyttFarg} opacity="0.32" />}
+                    {g.wF > 0.3 && <path d={band(g.dx1, g.yTop + g.wN, g.ux, g.fTop, g.wF)} fill={COL.varme} opacity="0.32" />}
+                    {/* noderna */}
+                    <rect x={g.sx0 - 16} y={g.yTop - 8} width="16" height={g.bredd + 16} rx="3" fill={COL.tillf} />
+                    <rect x={g.dx0} y={g.yTop - 10} width={g.dx1 - g.dx0} height={g.bredd + 20} rx="5" fill="#374151" />
+                    {g.wN > 0.3 && <rect x={g.ux} y={g.nyTop - 4} width="10" height={g.wN + 8} rx="2" fill={nyttFarg} />}
+                    {g.wF > 0.3 && <rect x={g.ux} y={g.fTop - 4} width="10" height={g.wF + 8} rx="2" fill={COL.varme} />}
+                    {/* brickorna */}
+                    {flygande.map((t) => <rect key={t.id} x={t.x - 6} y={t.y - 5} width="12" height="10" rx="2" fill={COL.brick} stroke={COL.brickK} strokeWidth="0.8" opacity={t.op} />)}
+                    {/* etiketter */}
+                    <text x={g.sx0 - 22} y={g.y0 - 4} textAnchor="end" fontSize={fs} fontWeight="600" fill={COL.tillf} fontFamily="Poppins, sans-serif">{kalla}</text>
+                    <text x={g.sx0 - 22} y={g.y0 + 14} textAnchor="end" fontSize={fs} fill={COL.tillf} fontFamily="Poppins, sans-serif">
+                        <tspan fontStyle="italic">P</tspan><tspan fontSize={fs * 0.7} dy="3">t</tspan><tspan dy="-3"> = {fmtA(Pt)} W</tspan></text>
+                    <text x={(g.dx0 + g.dx1) / 2} y={g.yTop - 16} textAnchor="middle" fontSize={fs} fontWeight="600" fill={COL.ink} fontFamily="Poppins, sans-serif">{apparat}</text>
+                    <text x={g.ux + 16} y={g.nyY - 3} fontSize={fs} fontWeight="600" fill={nyttFarg} fontFamily="Poppins, sans-serif">{nytta}</text>
+                    <text x={g.ux + 16} y={g.nyY + 14} fontSize={fs} fill={nyttFarg} fontFamily="Poppins, sans-serif">
+                        <tspan fontStyle="italic">P</tspan><tspan fontSize={fs * 0.7} dy="3">n</tspan><tspan dy="-3"> = {fmtA(Pn)} W</tspan></text>
+                    <text x={g.ux + 16} y={g.fY - 3} fontSize={fs} fontWeight="600" fill={COL.varme} fontFamily="Poppins, sans-serif">{forlust}</text>
+                    <text x={g.ux + 16} y={g.fY + 14} fontSize={fs} fill={COL.varme} fontFamily="Poppins, sans-serif">{fmtA(Pt - Pn)} W</text>
+                </g>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  RITDELAR
+        // ════════════════════════════════════════════════════════
+        // Pil med rakt avslutat skaft som slutar vid huvudets bas.
+        const Pil = ({ x1, y1, x2, y2, color, width = 4.5, head = 15, dash = false, edge = false, opacity = 1 }) => {
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 2) return null;
+            const ux = (x2 - x1) / len, uy = (y2 - y1) / len;
+            const hd = Math.min(head, len * 0.9);
+            const bx = x2 - ux * hd, by = y2 - uy * hd;
+            const hw = hd * 0.48;
+            const p1 = `${bx - uy * hw},${by + ux * hw}`;
+            const p2 = `${bx + uy * hw},${by - ux * hw}`;
+            const kant = 'rgba(15,22,32,0.5)';
+            return (
+                <g opacity={opacity}>
+                    {edge && <line x1={x1} y1={y1} x2={bx} y2={by} stroke={kant} strokeWidth={width + 3} strokeLinecap="butt" />}
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="butt" strokeDasharray={dash ? '7 5' : undefined} />
+                    <polygon points={`${x2},${y2} ${p1} ${p2}`} fill={color}
+                             stroke={edge ? kant : 'none'} strokeWidth={edge ? 1.6 : 0} strokeLinejoin="round" />
+                </g>
+            );
+        };
+
+        // Beteckning med index: F, Fₛ, F₁ … Variabeln kursiv, indexet rakt.
+        const Bet = ({ x, y, sym, idx, color, size = 18, anchor = 'start', weight = 600 }) => (
+            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}
+                  fontFamily="Poppins, sans-serif">
+                <tspan fontStyle="italic">{sym}</tspan>
+                {idx != null && <tspan fontSize={size * 0.68} dy={size * 0.25}>{idx}</tspan>}
+            </text>
+        );
+
+        // Handen som håller i dynamometerns ring. Lokalt: ringen i origo,
+        // armen ut längs +x (bort från föremålet).
+        const Hand = () => (
+            <g>
+                <path d="M 30 -14 L 82 -15 L 82 15 L 30 14 Z" fill="#3d5a80" stroke="#2b4160" strokeWidth="1.4" strokeLinejoin="round" />
+                <rect x="26" y="-16" width="9" height="32" rx="3" fill="#2b4160" />
+                <path d="M 3 -11 Q 8 -16 20 -15 Q 28 -14 29 -8 L 29 8 Q 28 14 20 15 Q 8 16 3 11 Z"
+                      fill="#ebbf9b" stroke="#a8724c" strokeWidth="1.3" />
+                <circle cx="0" cy="0" r="8" fill="none" stroke="#6b7280" strokeWidth="3" />
+                {[-12, -6, 0, 6].map((y, i) => (
+                    <rect key={i} x="-7" y={y} width="15" height="6.2" rx="3.1"
+                          fill="#ebbf9b" stroke="#a8724c" strokeWidth="1.1" />
+                ))}
+                <path d="M 16 -13 Q 7 -20 -3 -14" fill="none" stroke="#a8724c" strokeWidth="8.4" strokeLinecap="round" />
+                <path d="M 16 -13 Q 7 -20 -3 -14" fill="none" stroke="#ebbf9b" strokeWidth="6" strokeLinecap="round" />
+                <path d="M 19 -6 Q 22 0 19 6" fill="none" stroke="#a8724c" strokeWidth="1" opacity="0.6" />
+            </g>
+        );
+
+        // Dynamometern lokalt: snöre från A (origo) ut längs +x, krok, den
+        // utdragna skalstången (längd ∝ F), hylsan och ringen.
+        // rot = vridningen (grader, SVG) som dynamometern ritas med. Pekar den
+        // åt vänster vänds texten ett halvt varv, så att den aldrig står upp och ner.
+        const Dynamometer = ({ F, ls, rot = 0 }) => {
+            const uppochner = Math.cos(rot * Math.PI / 180) < -0.01;
+            const ut = STR * F;
+            const xr = ls + 4;               // skalstången börjar efter kroken
+            const xh = xr + ut;              // hylsan
+            const ticks = [];
+            for (let n = 0; n <= F + 1e-9; n += 5) {
+                const tx = xh - STR * n;
+                ticks.push(<line key={n} x1={tx} y1={-4} x2={tx} y2={4} stroke="#8f6206" strokeWidth="1.2" />);
+            }
+            return (
+                <g>
+                    <line x1="0" y1="0" x2={ls} y2="0" stroke="#5b4a3a" strokeWidth="1.8" />
+                    <path d={`M ${ls - 1} 0 q 3 -5 6 0 q 0 3 -2 4`} fill="none" stroke="#4b5563" strokeWidth="1.8" />
+                    <rect x={xr} y="-4.5" width={Math.max(0.5, ut)} height="9" fill="#fde68a" stroke="#a16207" strokeWidth="1" />
+                    {ticks}
+                    <rect x={xh} y="-10" width={DB} height="20" rx="5" fill="#e5e9ee" stroke="#7b8594" strokeWidth="1.4" />
+                    <rect x={xh + DB - 18} y="-10" width="8" height="20" fill="#c8324a" opacity="0.85" />
+                    <text x={xh + 30} y="4.5" fontSize="12" fontWeight="700" fill="#4b5563" fontFamily="Poppins, sans-serif" textAnchor="middle"
+                          transform={uppochner ? `rotate(180 ${xh + 30} 0)` : undefined}>0–20 N</text>
+                </g>
+            );
+        };
+
+        // ── Labbföremålen ──
+        const Energimatare = ({ x, y, P, E, enhet }) => (
+            <g>
+                <rect x={x} y={y} width="118" height="78" rx="9" fill="#f4f5f7" stroke="#6b7280" strokeWidth="1.6" />
+                <rect x={x + 8} y={y + 8} width="102" height="42" rx="4" fill="#1f2a1f" />
+                <text x={x + 104} y={y + 26} textAnchor="end" fontSize="15" fill="#9ef0a8" fontFamily="'JetBrains Mono', monospace">{fmtA(P)} W</text>
+                <text x={x + 104} y={y + 44} textAnchor="end" fontSize="13" fill="#9ef0a8" fontFamily="'JetBrains Mono', monospace">{E}</text>
+                <text x={x + 59} y={y + 66} textAnchor="middle" fontSize="11" fill="#4b5563" fontFamily="Poppins, sans-serif">energimätare</text>
+            </g>
+        );
+        const Stoppur = ({ x, y, t }) => (
+            <g>
+                <circle cx={x} cy={y} r="30" fill="#f4f5f7" stroke="#374151" strokeWidth="2.4" />
+                <rect x={x - 5} y={y - 40} width="10" height="9" rx="2" fill="#374151" />
+                {Array.from({ length: 12 }, (_, i) => {
+                    const a = (i / 12) * 2 * Math.PI;
+                    return <line key={i} x1={x + 24 * Math.sin(a)} y1={y - 24 * Math.cos(a)} x2={x + 28 * Math.sin(a)} y2={y - 28 * Math.cos(a)} stroke="#6b7280" strokeWidth="1.2" />;
+                })}
+                <line x1={x} y1={y} x2={x + 22 * Math.sin((t % 60) / 60 * 2 * Math.PI)} y2={y - 22 * Math.cos((t % 60) / 60 * 2 * Math.PI)} stroke="#c8324a" strokeWidth="2" />
+                <circle cx={x} cy={y} r="2.5" fill="#374151" />
+                <text x={x} y={y + 50} textAnchor="middle" fontSize="15" fontWeight="600" fill={COL.ink} fontFamily="'JetBrains Mono', monospace">{fmt(t, 1)} s</text>
+            </g>
+        );
+        // Emilia: en enkel figur som går eller springer uppför trappan.
+        const Emilia = ({ x, y, fas, springer }) => {
+            const sv = Math.sin(fas) * (springer ? 0.9 : 0.55);
+            const ben = (s) => `M 0 -34 L ${-8 * s} -16 L ${-4 * s} 0`;
+            return (
+                <g transform={`translate(${x} ${y}) scale(1.15)`}>
+                    <path d={ben(sv)} fill="none" stroke="#2b4160" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d={ben(-sv)} fill="none" stroke="#3d5a80" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M 0 -60 L 0 -34" stroke="#c8324a" strokeWidth="11" strokeLinecap="round" />
+                    <path d={`M 0 -56 L ${7 * sv - 4} -44 L ${7 * sv - 8} -34`} fill="none" stroke="#ebbf9b" strokeWidth="4" strokeLinecap="round" />
+                    <path d={`M 0 -56 L ${-7 * sv - 4} -44 L ${-7 * sv - 8} -34`} fill="none" stroke="#d9a982" strokeWidth="4" strokeLinecap="round" />
+                    <circle cx="-1" cy="-70" r="8" fill="#ebbf9b" stroke="#a8724c" strokeWidth="1.2" />
+                    <path d="M -9 -72 Q -3 -82 7 -74 Q 2 -78 -9 -72" fill="#5b3a1e" />
+                </g>
+            );
+        };
+        // Apparaterna på bänken
+        const Apparat = ({ typ, x, ljus, varm, ir, pa }) => {
+            const glow = pa ? ljus : 0;
+            if (typ === 'lampa' || typ === 'led') {
+                return (
+                    <g>
+                        <rect x={x - 26} y={BANK - 10} width="52" height="10" rx="3" fill="#4b5563" />
+                        <rect x={x - 3} y={BANK - 92} width="6" height="84" fill="#6b7280" />
+                        {glow > 0 && !ir && <circle cx={x} cy={BANK - 128} r={46 + 30 * glow} fill="#fde68a" opacity={0.18 + 0.25 * glow} />}
+                        {ir && pa && <circle cx={x} cy={BANK - 128} r={22 + 40 * varm} fill="rgb(250,150,30)" opacity={0.25 + 0.6 * varm} />}
+                        <rect x={x - 10} y={BANK - 104} width="20" height="14" rx="2" fill="#9ca3af" />
+                        {typ === 'lampa' ? (
+                            <g>
+                                <circle cx={x} cy={BANK - 128} r="22" fill={ir ? '#3b3550' : (pa ? '#fff7d1' : '#eef1f4')} stroke={ir ? '#8b84a8' : '#9ca3af'} strokeWidth="1.4" />
+                                {!ir && <path d={`M ${x - 7} ${BANK - 106} L ${x - 5} ${BANK - 128} q 5 -8 10 0 L ${x + 7} ${BANK - 106}`} fill="none" stroke={pa ? '#f59e0b' : '#9ca3af'} strokeWidth="1.6" />}
+                            </g>
+                        ) : (
+                            <g>
+                                <path d={`M ${x - 20} ${BANK - 104} L ${x - 20} ${BANK - 130} Q ${x} ${BANK - 158} ${x + 20} ${BANK - 130} L ${x + 20} ${BANK - 104} Z`}
+                                      fill={ir ? '#3b3550' : (pa ? '#fffbe6' : '#eef1f4')} stroke={ir ? '#8b84a8' : '#9ca3af'} strokeWidth="1.4" />
+                                {!ir && [-9, 0, 9].map((d) => <rect key={d} x={x + d - 3} y={BANK - 132} width="6" height="14" rx="1.5" fill={pa ? '#fbbf24' : '#d1d5db'} />)}
+                            </g>
+                        )}
+                    </g>
+                );
+            }
+            if (typ === 'kok') {
+                return (
+                    <g>
+                        {ir && pa && <ellipse cx={x} cy={BANK - 40} rx={44} ry={42} fill="rgb(250,150,30)" opacity={0.25 + 0.5 * varm} />}
+                        <rect x={x - 32} y={BANK - 8} width="64" height="8" rx="3" fill="#374151" />
+                        <path d={`M ${x - 26} ${BANK - 8} L ${x - 22} ${BANK - 78} Q ${x} ${BANK - 86} ${x + 22} ${BANK - 78} L ${x + 26} ${BANK - 8} Z`} fill={ir ? '#3b3550' : '#e5e7eb'} stroke="#6b7280" strokeWidth="1.6" />
+                        <path d={`M ${x + 24} ${BANK - 66} q 22 4 18 30 q -2 10 -16 14`} fill="none" stroke="#6b7280" strokeWidth="5" />
+                        {pa && !ir && <circle cx={x + 16} cy={BANK - 20} r="3.5" fill="#ef4444" />}
+                        {pa && !ir && [0, 1, 2].map((i) => <path key={i} d={`M ${x - 8 + i * 8} ${BANK - 92} q -6 -10 0 -20 q 6 -10 0 -20`} fill="none" stroke="#cbd5e1" strokeWidth="2" opacity="0.8" />)}
+                    </g>
+                );
+            }
+            if (typ === 'akv') {
+                return (
+                    <g>
+                        {ir && pa && <rect x={x - 52} y={BANK - 92} width="104" height="90" rx="6" fill="rgb(250,150,30)" opacity={0.18 + 0.3 * varm} />}
+                        <rect x={x - 46} y={BANK - 70} width="92" height="70" rx="3" fill={ir ? '#3b3550' : '#d8eef7'} stroke="#6b8a9a" strokeWidth="1.6" />
+                        {!ir && <rect x={x - 44} y={BANK - 58} width="88" height="56" fill="#9fd3ea" opacity="0.8" />}
+                        {!ir && <path d={`M ${x - 40} ${BANK - 4} q 6 -16 2 -26 M ${x - 30} ${BANK - 4} q -4 -12 2 -20`} fill="none" stroke="#2f855a" strokeWidth="2.4" />}
+                        {!ir && <path d={`M ${x + 8} ${BANK - 34} q 8 -6 16 0 q -8 6 -16 0 Z M ${x + 24} ${BANK - 34} l 6 -4 l 0 8 Z`} fill="#f59e0b" />}
+                        <rect x={x + 30} y={BANK - 66} width="7" height="46" rx="3" fill={ir ? '#5b5470' : (pa ? '#7f1d1d' : '#6b7280')} />
+                    </g>
+                );
+            }
+            if (typ === 'lad') {
+                return (
+                    <g>
+                        {ir && pa && <ellipse cx={x} cy={BANK - 30} rx={30} ry={24} fill="rgb(250,150,30)" opacity={0.2 + 0.4 * varm} />}
+                        <rect x={x - 34} y={BANK - 14} width="40" height="14" rx="3" fill={ir ? '#3b3550' : '#1f2937'} />
+                        <rect x={x - 2} y={BANK - 66} width="34" height="66" rx="6" fill={ir ? '#3b3550' : '#111827'} stroke="#6b7280" strokeWidth="1.2" />
+                        <rect x={x + 2} y={BANK - 60} width="26" height="50" rx="3" fill={ir ? '#3b3550' : (pa ? '#1e3a8a' : '#1f2937')} />
+                        {pa && !ir && <rect x={x + 9} y={BANK - 42} width="12" height="18" rx="2" fill="none" stroke="#86efac" strokeWidth="1.6" />}
+                        {pa && !ir && <rect x={x + 11} y={BANK - 34} width="8" height="8" fill="#86efac" />}
+                        <path d={`M ${x - 14} ${BANK - 14} q 0 -18 14 -20`} fill="none" stroke="#374151" strokeWidth="2.4" />
+                    </g>
+                );
+            }
+            return (
+                <g>
+                    {ir && pa && <ellipse cx={x} cy={BANK - 50} rx={44} ry={34} fill="rgb(250,150,30)" opacity={0.12 + 0.3 * varm} />}
+                    <rect x={x - 6} y={BANK - 18} width="12" height="18" fill="#374151" />
+                    <rect x={x - 46} y={BANK - 84} width="92" height="66" rx="4" fill={ir ? '#3b3550' : '#111827'} stroke="#6b7280" strokeWidth="1.4" />
+                    {pa && !ir && <circle cx={x + 40} cy={BANK - 24} r="2.5" fill="#ef4444" />}
+                </g>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  SCENEN
+        // ════════════════════════════════════════════════════════
+        const Scen = ({ lage, lyft, sim, appA, appB, appSim, show, flygA, flygB, ghost, svgRef, emilia, dolj, kalla, brick }) => {
+            const ir = show.ir;
+            let topp, sankey, graf, tavla;
+
+            if (lage === 'lyft') {
+                const d = M.lyftData(lyft);
+                const skala = emilia ? 100 / 5000 : 5;            // px per W i sankeyn
+                const g = sankeyGeo(230, Math.max(2, lyft.Pt * skala), lyft.eta, false);
+                sankey = <Sankey g={g} kalla={kalla} apparat={emilia ? 'Kroppen' : 'Motorn'} nytta="Lägesenergi" forlust="Värme"
+                                 Pt={lyft.Pt} Pn={d.Pn} flygande={flygA} nyttFarg={COL.nytt} />;
+                // ── den fysiska scenen till höger ──
+                if (emilia) {
+                    const steg = 8, H = 4.0;
+                    const stegH = (H / steg) * S_TRAPPA, stegB = 36;
+                    const x0 = 950;
+                    const trappa = [];
+                    for (let i = 0; i < steg; i++) {
+                        trappa.push(<rect key={i} x={x0 - (i + 1) * stegB} y={BANK - (i + 1) * stegH} width={stegB} height={(i + 1) * stegH} fill="#d6b17a" stroke="#8a6230" strokeWidth="1" />);
+                    }
+                    const yP = sim.y;
+                    // från golvet till höger om trappan till mitten av översta steget
+                    const xP = (x0 + 14) - (yP / H) * (steg * stegB - stegB / 2 + 14);
+                    topp = (
+                        <g>
+                            {trappa}
+                            <Pil x1={x0 - steg * stegB - 18} y1={BANK} x2={x0 - steg * stegB - 18} y2={BANK - H * S_TRAPPA} color="rgba(15,22,32,0.7)" width={1.6} head={9} />
+                            <Pil x1={x0 - steg * stegB - 18} y1={BANK - H * S_TRAPPA} x2={x0 - steg * stegB - 18} y2={BANK} color="rgba(15,22,32,0.7)" width={1.6} head={9} />
+                            <text x={x0 - steg * stegB - 18} y={BANK - H * S_TRAPPA - 12} textAnchor="middle" fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif">
+                                <tspan fontStyle="italic">h</tspan> = 4,0 m</text>
+                            <Emilia x={xP} y={(() => {
+                                // fötterna på steget hon står på
+                                const i = Math.floor((x0 - xP) / stegB);
+                                return i < 0 ? BANK : BANK - Math.min(steg, i + 1) * stegH;
+                            })()} fas={sim.t * (emilia === 'spring' ? 14 : 7)} springer={emilia === 'spring'} />
+                            <Stoppur x={905} y={210} t={sim.t} />
+                        </g>
+                    );
+                } else {
+                    const yUnder = BANK - sim.y * S_LYFT;
+                    const vW = 28 + 9 * Math.min(lyft.m, 2), vH = 26 + 10 * Math.min(lyft.m, 2);
+                    const trissY = 112, trissR = 14;
+                    const trumX = STATIV_X + 14, trumY = BANK - 52;
+                    const pa = sim.t > 0 && !sim.klar;
+                    topp = (
+                        <g>
+                            {/* stativet med trissan */}
+                            <rect x={STATIV_X - 30} y={BANK - 8} width="90" height="8" rx="2" fill="#4b5563" />
+                            <rect x={STATIV_X - 3} y={trissY - 6} width="6" height={BANK - trissY} fill="#9aa3ad" stroke="#5b6470" strokeWidth="1" />
+                            <rect x={STATIV_X - 14} y={trissY - 4} width="17" height="8" rx="2" fill="#6b7280" />
+                            <circle cx={VIKT_X + trissR} cy={trissY} r={trissR} fill="#d1d5db" stroke="#4b5563" strokeWidth="1.6" />
+                            <circle cx={VIKT_X + trissR} cy={trissY} r="3" fill="#4b5563" />
+                            {/* snöret: ned till vikten och snett ned till vinschen */}
+                            <line x1={VIKT_X} y1={trissY} x2={VIKT_X} y2={yUnder - vH} stroke="#5b4a3a" strokeWidth="1.6" />
+                            <line x1={VIKT_X + trissR + 10} y1={trissY + 9} x2={trumX + 8} y2={trumY} stroke="#5b4a3a" strokeWidth="1.6" />
+                            {/* motor och vinsch på bänken */}
+                            {ir && <circle cx={trumX + 22} cy={BANK - 22} r={18 + 32 * (1 - lyft.eta)} fill="rgb(250,150,30)" opacity={pa ? 0.55 : 0.15} />}
+                            <rect x={trumX - 4} y={BANK - 40} width="56" height="40" rx="6" fill={lyft.eta > 0.5 ? '#1e3a8a' : '#b45309'} stroke="#1f2937" strokeWidth="1.4" />
+                            <circle cx={trumX + 8} cy={trumY + 8} r="11" fill="#d1d5db" stroke="#4b5563" strokeWidth="1.6" />
+                            <text x={trumX + 34} y={BANK - 14} textAnchor="middle" fontSize="11" fontWeight="700" fill="#f3f4f6" fontFamily="Poppins, sans-serif">M</text>
+                            {/* vikten */}
+                            <rect x={VIKT_X - vW / 2} y={yUnder - vH} width={vW} height={vH} rx="5" fill="#b8913a" stroke="#6d521a" strokeWidth="1.6" />
+                            <text x={VIKT_X} y={yUnder - vH / 2 + 5} textAnchor="middle" fontSize="12" fontWeight="700" fill="#3b2a08" fontFamily="Poppins, sans-serif">{fmt(lyft.m, 1)} kg</text>
+                            {/* höjdskalan till vänster om vikten */}
+                            <rect x={VIKT_X - 52} y={BANK - 1.0 * S_LYFT - 6} width="14" height={1.0 * S_LYFT + 6} fill="#f1f3f5" stroke="#8a94a3" strokeWidth="1" />
+                            {Array.from({ length: 11 }, (_, i) => i).map((i) => (
+                                <g key={i}>
+                                    <line x1={VIKT_X - 38} y1={BANK - i * 0.1 * S_LYFT} x2={VIKT_X - (i % 5 === 0 ? 50 : 45)} y2={BANK - i * 0.1 * S_LYFT} stroke="#4b5563" strokeWidth="1.1" />
+                                    {i % 2 === 0 && i > 0 && <text x={VIKT_X - 56} y={BANK - i * 0.1 * S_LYFT + 5} textAnchor="end" fontSize="13" fill="#374151" fontFamily="Poppins, sans-serif">{fmt(i * 0.1, 1)}{i === 10 ? ' m' : ''}</text>}
+                                </g>
+                            ))}
+                            {/* målhöjden */}
+                            <line x1={VIKT_X - 38} y1={BANK - lyft.h * S_LYFT} x2={VIKT_X + 34} y2={BANK - lyft.h * S_LYFT} stroke="#c8324a" strokeWidth="1.2" strokeDasharray="5 4" />
+                            <Energimatare x={850} y={BANK - 92} P={pa ? lyft.Pt : 0} E={`${fmtA(sim.Et)} J`} />
+                            <path d={`M 850 ${BANK - 40} C 830 ${BANK - 40}, 830 ${BANK - 20}, ${trumX + 52} ${BANK - 20}`} fill="none" stroke="#1f2937" strokeWidth="2" />
+                            <Stoppur x={905} y={205} t={sim.t} />
+                        </g>
+                    );
+                }
+                // ── energi–tid-diagrammet ──
+                const tMax = Math.max(1, Math.ceil(Math.max(d.T, ghost ? ghost.T : 0) * 1.1));
+                const eMax = (() => {
+                    const e = Math.max(d.Et, ghost ? ghost.Et : 0) * 1.08;
+                    const steg = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000];
+                    const s = steg.find((x) => e / x <= 6) || 50000;
+                    return Math.ceil(e / s) * s;
+                })();
+                const sx = (t) => DX0 + (t / tMax) * DW;
+                const ey = (e) => DBOT - (e / eMax) * (DBOT - DTOP);
+                const linje = (P, T, col, w, dash, key) => <line key={key} x1={sx(0)} y1={ey(0)} x2={sx(T)} y2={ey(P * T)} stroke={col} strokeWidth={w} strokeDasharray={dash} />;
+                const tSteg = tMax <= 6 ? 1 : tMax <= 15 ? 2 : tMax <= 40 ? 5 : 10;
+                const eStegV = eMax / 5;
+                graf = (
+                    <g>
+                        {Array.from({ length: Math.floor(tMax / tSteg) + 1 }, (_, i) => i * tSteg).map((t) => (
+                            <g key={'t' + t}>
+                                <line x1={sx(t)} y1={DTOP} x2={sx(t)} y2={DBOT} stroke="rgba(15,22,32,0.10)" />
+                                {t > 0 && <text x={sx(t)} y={DBOT + 20} textAnchor="middle" fontSize="14" fill="rgba(15,22,32,0.75)" fontFamily="Poppins, sans-serif">{t}</text>}
+                            </g>
+                        ))}
+                        {Array.from({ length: 6 }, (_, i) => i * eStegV).map((e) => (
+                            <g key={'e' + e}>
+                                <line x1={DX0} y1={ey(e)} x2={DX0 + DW} y2={ey(e)} stroke="rgba(15,22,32,0.10)" />
+                                <text x={DX0 - 9} y={ey(e) + 5} textAnchor="end" fontSize="13" fill="rgba(15,22,32,0.75)" fontFamily="Poppins, sans-serif">{fmt(e, 0)}</text>
+                            </g>
+                        ))}
+                        {show.forra && ghost && [linje(ghost.Pt, ghost.T, 'rgba(75,85,99,0.45)', 2, '6 4', 'g1'), linje(ghost.Pn, ghost.T, 'rgba(21,128,61,0.45)', 2, '6 4', 'g2')]}
+                        {sim.t > 0 && [linje(lyft.Pt, sim.t, COL.tillf, 3, undefined, 'l1'), linje(d.Pn, sim.t, COL.nytt, 3, undefined, 'l2')]}
+                        <line x1={DX0} y1={DBOT} x2={DX0 + DW + 16} y2={DBOT} stroke={COL.ink} strokeWidth="1.6" />
+                        <polygon points={`${DX0 + DW + 24},${DBOT} ${DX0 + DW + 13},${DBOT - 5} ${DX0 + DW + 13},${DBOT + 5}`} fill={COL.ink} />
+                        <line x1={DX0} y1={DBOT} x2={DX0} y2={DTOP - 14} stroke={COL.ink} strokeWidth="1.6" />
+                        <polygon points={`${DX0},${DTOP - 22} ${DX0 - 5},${DTOP - 11} ${DX0 + 5},${DTOP - 11}`} fill={COL.ink} />
+                        <text x={DX0 + 12} y={DTOP - 14} fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif"><tspan fontStyle="italic">E</tspan> (J)</text>
+                        <text x={DX0 + DW + 30} y={DBOT + 5} fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif"><tspan fontStyle="italic">t</tspan> (s)</text>
+                        {sim.t > 0 && <g>
+                            <Bet x={sx(sim.t) + 8} y={ey(lyft.Pt * sim.t) + 5} sym="E" idx="t" color={COL.tillf} size={15} />
+                            <Bet x={sx(sim.t) + 8} y={ey(d.Pn * sim.t) + 5} sym="E" idx="n" color={COL.nytt} size={15} />
+                        </g>}
+                        <text x={DX0 + 120} y={DTOP - 14} fontSize="14" fill="rgba(15,22,32,0.75)" fontFamily="Poppins, sans-serif">lutningen är effekten</text>
+                    </g>
+                );
+                const Et = sim.Et, En = sim.En;
+                tavla = (
+                    <g fontFamily="Poppins, sans-serif">
+                        {[
+                            ['P', 't', `${fmtA(lyft.Pt)} W`, COL.tillf, 'tillförd effekt'],
+                            ['P', 'n', `${fmtA(d.Pn)} W`, COL.nytt, 'nyttig effekt'],
+                            ['η', null, dolj ? '?' : `${fmt(lyft.eta, 2)} = ${fmt(lyft.eta * 100, 0)} %`, COL.ink, 'verkningsgrad'],
+                            ['Δt', null, `${fmt(sim.t, 2)} s`, COL.ink, 'tid'],
+                            ['E', 't', `${fmtA(Et)} J`, COL.tillf, 'tillförd energi'],
+                            ['E', 'n', dolj ? '?' : `${fmtA(En)} J`, COL.nytt, 'nyttig energi'],
+                        ].map(([sym, idx, v, col, ord], i) => (
+                            <g key={i} transform={`translate(${650 + (i % 2) * 165} ${DTOP - 6 + Math.floor(i / 2) * 60})`}>
+                                <text x="0" y="0" fontSize="12" fill="rgba(15,22,32,0.6)">{ord}</text>
+                                <text x="0" y="24" fontSize="19" fontWeight="700" fill={col}>
+                                    {sym === 'Δt' ? <tspan>Δ<tspan fontStyle="italic">t</tspan></tspan> : <tspan fontStyle="italic">{sym}</tspan>}
+                                    {idx && <tspan fontSize="13" dy="4">{idx}</tspan>}
+                                    <tspan dy={idx ? -4 : 0}> = {v}</tspan>
+                                </text>
+                            </g>
+                        ))}
+                    </g>
+                );
+            } else {
+                // ════ APPARATER ════
+                const A = app(appA), B = app(appB);
+                const skala = 70 / Math.max(A.P, B.P);
+                const eA = M.apparatVid(A, appSim.t), eB = M.apparatVid(B, appSim.t);
+                // bandets bredd är effekten just nu: en avstängd apparat har inget flöde
+                const gA = sankeyGeo(150, Math.max(1, (eA.paNu ? A.P : 0) * skala), A.eta, true);
+                const gB = sankeyGeo(320, Math.max(1, (eB.paNu ? B.P : 0) * skala), B.eta, true);
+                const nyF = (a) => a.nytta === 'Ljus' ? COL.ljus : COL.nytt;
+                sankey = (
+                    <g>
+                        <Sankey g={gA} kalla="Eluttag" apparat={A.namn.replace(/ \d.*$/, '')} nytta={A.nytta} forlust={A.forlust}
+                                Pt={eA.paNu ? A.P : 0} Pn={eA.paNu ? A.P * A.eta : 0} flygande={flygA} nyttFarg={nyF(A)} kompakt />
+                        <Sankey g={gB} kalla="Eluttag" apparat={B.namn.replace(/ \d.*$/, '')} nytta={B.nytta} forlust={B.forlust}
+                                Pt={eB.paNu ? B.P : 0} Pn={eB.paNu ? B.P * B.eta : 0} flygande={flygB} nyttFarg={nyF(B)} kompakt />
+                    </g>
+                );
+                const ljusMax = Math.max(A.P * A.eta, B.P * B.eta, 1e-9);
+                const varmMax = Math.max(A.P * (1 - A.eta), B.P * (1 - B.eta), 1e-9);
+                topp = (
+                    <g>
+                        <Apparat typ={A.typ} x={720} ljus={A.nytta === 'Ljus' ? (A.P * A.eta) / ljusMax : 0} varm={(A.P * (1 - A.eta)) / varmMax} ir={ir} pa={appSim.t > 0 && eA.paNu} />
+                        <Apparat typ={B.typ} x={880} ljus={B.nytta === 'Ljus' ? (B.P * B.eta) / ljusMax : 0} varm={(B.P * (1 - B.eta)) / varmMax} ir={ir} pa={appSim.t > 0 && eB.paNu} />
+                        <text x={720} y={BANK + 24} textAnchor="middle" fontSize="14" fontWeight="600" fill={ir ? '#e5e1f0' : COL.ink} fontFamily="Poppins, sans-serif">A</text>
+                        <text x={880} y={BANK + 24} textAnchor="middle" fontSize="14" fontWeight="600" fill={ir ? '#e5e1f0' : COL.ink} fontFamily="Poppins, sans-serif">B</text>
+                        <text x={800} y={186} textAnchor="middle" fontSize="18" fontWeight="700" fill={ir ? '#e5e1f0' : COL.ink} fontFamily="'JetBrains Mono', monospace">{fmtTid(appSim.t)}</text>
+                    </g>
+                );
+                const tMax = Math.max(1, appSim.tMax);
+                const eMaxWh = Math.max(M.apparatVid(A, tMax).Et, M.apparatVid(B, tMax).Et, 1);
+                const ekWh = eMaxWh / 1000;
+                const steg = [0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50];
+                const eSteg = steg.find((x) => ekWh * 1.08 / x <= 6) || 100;
+                const eMax = Math.ceil(ekWh * 1.08 / eSteg) * eSteg;
+                const sx = (t) => DX0 + (t / tMax) * DW;
+                const ey = (kwh) => DBOT - (kwh / eMax) * (DBOT - DTOP);
+                const kurva = (a, col, key) => {
+                    const pts = [];
+                    const n = 60;
+                    for (let i = 0; i <= n; i++) {
+                        const t = Math.min(appSim.t, (i / n) * tMax);
+                        pts.push(`${sx(t)},${ey(M.apparatVid(a, t).Et / 1000)}`);
+                    }
+                    return <polyline key={key} points={pts.join(' ')} fill="none" stroke={col} strokeWidth="3" />;
+                };
+                const tickT = tMax <= 1 ? 0.25 : tMax <= 6 ? 1 : tMax <= 24 ? 4 : tMax <= 72 ? 12 : 24;
+                const decE = eSteg >= 1 ? 0 : eSteg >= 0.1 ? 1 : eSteg >= 0.01 ? 2 : 3;
+                graf = (
+                    <g>
+                        {Array.from({ length: Math.floor(tMax / tickT + 1e-9) + 1 }, (_, i) => i * tickT).map((t) => (
+                            <g key={'t' + t}>
+                                <line x1={sx(t)} y1={DTOP} x2={sx(t)} y2={DBOT} stroke="rgba(15,22,32,0.10)" />
+                                {t > 0 && <text x={sx(t)} y={DBOT + 20} textAnchor="middle" fontSize="14" fill="rgba(15,22,32,0.75)" fontFamily="Poppins, sans-serif">{fmt(t, tickT < 1 ? 2 : 0)}</text>}
+                            </g>
+                        ))}
+                        {Array.from({ length: Math.round(eMax / eSteg) + 1 }, (_, i) => i * eSteg).map((e) => (
+                            <g key={'e' + e}>
+                                <line x1={DX0} y1={ey(e)} x2={DX0 + DW} y2={ey(e)} stroke="rgba(15,22,32,0.10)" />
+                                <text x={DX0 - 9} y={ey(e) + 5} textAnchor="end" fontSize="13" fill="rgba(15,22,32,0.75)" fontFamily="Poppins, sans-serif">{fmt(e, decE)}</text>
+                            </g>
+                        ))}
+                        {appSim.t > 0 && [kurva(A, '#1d4ed8', 'a'), kurva(B, '#be185d', 'b')]}
+                        <line x1={DX0} y1={DBOT} x2={DX0 + DW + 16} y2={DBOT} stroke={COL.ink} strokeWidth="1.6" />
+                        <polygon points={`${DX0 + DW + 24},${DBOT} ${DX0 + DW + 13},${DBOT - 5} ${DX0 + DW + 13},${DBOT + 5}`} fill={COL.ink} />
+                        <line x1={DX0} y1={DBOT} x2={DX0} y2={DTOP - 14} stroke={COL.ink} strokeWidth="1.6" />
+                        <polygon points={`${DX0},${DTOP - 22} ${DX0 - 5},${DTOP - 11} ${DX0 + 5},${DTOP - 11}`} fill={COL.ink} />
+                        <text x={DX0 + 12} y={DTOP - 14} fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif"><tspan fontStyle="italic">E</tspan> (kWh)</text>
+                        <text x={DX0 + DW + 30} y={DBOT + 5} fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif"><tspan fontStyle="italic">t</tspan> (h)</text>
+                        <g transform={`translate(${DX0 + 150} ${DTOP - 18})`} fontFamily="Poppins, sans-serif">
+                            <line x1="0" y1="-5" x2="20" y2="-5" stroke="#1d4ed8" strokeWidth="3" /><text x="25" y="0" fontSize="14" fill={COL.ink}>A</text>
+                            <line x1="60" y1="-5" x2="80" y2="-5" stroke="#be185d" strokeWidth="3" /><text x="85" y="0" fontSize="14" fill={COL.ink}>B</text>
+                        </g>
+                    </g>
+                );
+                const rad = (a, e, col, bok, i) => (
+                    <g key={bok} transform={`translate(650 ${DTOP + i * 78})`} fontFamily="Poppins, sans-serif">
+                        <text x="0" y="0" fontSize="14" fontWeight="700" fill={col}>{bok}: {a.namn}</text>
+                        <text x="0" y="24" fontSize="17" fontWeight="700" fill={COL.ink}>{fmt(e.Et / 1000, e.Et < 1000 ? 3 : 2)} kWh</text>
+                        <text x="150" y="24" fontSize="17" fontWeight="700" fill={COL.ink}>{fmt(M.kostnad(e.Et, appSim.pris), 2)} kr</text>
+                        <text x="0" y="44" fontSize="12.5" fill="rgba(15,22,32,0.65)">{a.eta > 0 ? `varav ${a.nytta.toLowerCase()} ${fmt(e.En / 1000, e.En < 100 ? 3 : 2)} kWh` : 'allt blir värme'}</text>
+                    </g>
+                );
+                tavla = (
+                    <g>
+                        {rad(A, eA, '#1d4ed8', 'A', 0)}
+                        {rad(B, eB, '#be185d', 'B', 1)}
+                        <text x="800" y={DTOP + 172} fontSize="12.5" fill="rgba(15,22,32,0.65)" fontFamily="Poppins, sans-serif">elpris {fmt(appSim.pris, 2)} kr/kWh</text>
+                    </g>
+                );
+            }
+
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet" role="img"
+                     aria-label="Ett energiflödesdiagram där brickor på en joule strömmar från källan genom apparaten och delar sig i nyttig energi och värme, bredvid en motor som lyfter en vikt eller två apparater på en bänk.">
+                    <defs>
+                        <linearGradient id="vagg" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#f7f2e8" /><stop offset="1" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <linearGradient id="bank" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#d6b17a" /><stop offset="1" stopColor="#b98d51" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width={VB_W} height={VB_H} fill="url(#vagg)" />
+                    {/* bänken under den fysiska scenen */}
+                    <rect x="620" y={BANK} width="360" height="16" fill="url(#bank)" stroke="#8a6230" strokeWidth="1.2" />
+                    {ir && <rect x="612" y="0" width="388" height={BANK + 16} fill="rgba(14,12,26,0.93)" />}
+                    {ir && <text x="640" y="40" fontSize="14" fontWeight="600" fill="#e5e1f0" fontFamily="Poppins, sans-serif">VÄRMEKAMERA</text>}
+                    {/* skiljelinje mellan diagrammet och labbet */}
+                    <line x1="606" y1="40" x2="606" y2={BANK + 10} stroke="rgba(15,22,32,0.12)" strokeWidth="1" />
+                    {sankey}
+                    {topp}
+                    <rect x="20" y={DTOP - 40} width="960" height={VB_H - DTOP + 30} fill="rgba(255,255,255,0.28)" />
+                    <line x1="20" y1={DTOP - 40} x2="980" y2={DTOP - 40} stroke="rgba(15,22,32,0.15)" strokeWidth="1" />
+                    {graf}
+                    {tavla}
+                    <g>
+                        <rect x="120" y="40" width="14" height="11" rx="2" fill={COL.brick} stroke={COL.brickK} strokeWidth="0.8" />
+                        <text x="140" y="50" fontSize="14" fill="rgba(15,22,32,0.75)" fontFamily="Poppins, sans-serif">= {lage === 'lyft' ? `${fmt(brick, 0)} J` : `${fmt(brick, brick < 1 ? (brick < 0.1 ? 2 : 1) : 0)} Wh`}, och bandets bredd visar effekten</text>
+                    </g>
+                </svg>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  REGLAGE
+        // ════════════════════════════════════════════════════════
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, disabled, color = 'var(--lab-accent, #c8324a)' }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').replace('−', '-').trim();
+                if (norm === '' || norm === '-' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt} disabled={disabled}
+                           style={{ color }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+        const Slider = ({ label, value, min, max, step, onChange, disabled, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 112, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, disabled, valueNode }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    {valueNode}
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        // Formelkortet: varje storhet har sitt namn ovanför.
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+
+        const FormelKort = ({ lage, P, dE, dt, eta, dolj }) => (
+            <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+                    <div className="flex items-center gap-x-3">
+                        <Vbl label="Effekt"><em>P</em></Vbl>
+                        <span className="fnum">=</span>
+                        <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                            <span className="flbl">Omvandlad energi</span>
+                            <span className="fnum" style={{ padding: '0 8px 3px' }}>Δ<em>E</em></span>
+                            <span className="fnum" style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>Δ<em>t</em></span>
+                            <span className="flbl">Tid</span>
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-x-3">
+                        <Vbl label="Verkningsgrad"><em>η</em></Vbl>
+                        <span className="fnum">=</span>
+                        <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                            <span className="flbl">Nyttig energi</span>
+                            <span className="fnum" style={{ padding: '0 8px 3px' }}><em>E</em><sub>n</sub></span>
+                            <span className="fnum" style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}><em>E</em><sub>t</sub></span>
+                            <span className="flbl">Tillförd energi</span>
+                        </div>
+                        <span className="fnum">=</span>
+                        <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                            <span className="flbl">Nyttig effekt</span>
+                            <span className="fnum" style={{ padding: '0 8px 3px' }}><em>P</em><sub>n</sub></span>
+                            <span className="fnum" style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}><em>P</em><sub>t</sub></span>
+                            <span className="flbl">Tillförd effekt</span>
+                        </div>
+                    </div>
+                </div>
+                <div className="mt-3 pt-3" style={{ borderTop: '1px solid var(--lab-line, rgba(15,22,32,0.14))' }}>
+                    {dolj ? (
+                        <span className="fnum-live" style={{ color: 'var(--lab-ink-soft)' }}>Gissa-läget: räkna själv innan du kör.</span>
+                    ) : lage === 'lyft' ? (
+                        <span className="fnum-live">
+                            <span style={{ display: 'inline-block', marginRight: 28 }}><em>P</em><sub>n</sub> = {fmtA(dE)} J / {fmt(dt, 2)} s = {fmtA(P)} W</span>
+                            <span style={{ display: 'inline-block' }}><em>η</em> = {fmt(eta, 2)} = {fmt(eta * 100, 0)} %</span>
+                        </span>
+                    ) : (
+                        <span className="fnum-live">1 kWh = 1 000 W · 3 600 s = 3,6 · 10<sup>6</sup> J</span>
+                    )}
+                </div>
+            </div>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  FÄRDIGA FÖRSÖK
+        // ════════════════════════════════════════════════════════
+        const FORSOK = [
+            { id: 'p5',  namn: 'Lyft med 5 W', sub: 'elmotor, 1 kg, 0,8 m', cfg: { lage: 'lyft', motor: 'el', Pt: 5, m: 1, h: 0.8 } },
+            { id: 'p10', namn: 'Samma lyft med 10 W', sub: 'dubbel effekt', cfg: { lage: 'lyft', motor: 'el', Pt: 10, m: 1, h: 0.8 } },
+            { id: 'gam', namn: 'Leksaksmotor', sub: '10 W, η = 25 %', cfg: { lage: 'lyft', motor: 'leksak', Pt: 10, m: 1, h: 0.8 } },
+            { id: 'ny',  namn: 'Elmotor', sub: '10 W, η = 70 %', cfg: { lage: 'lyft', motor: 'el', Pt: 10, m: 1, h: 0.8 } },
+            { id: 'gar', namn: 'Emilia går', sub: '60 kg, 4,0 m på 10 s', cfg: { lage: 'lyft', emilia: 'ga' } },
+            { id: 'spr', namn: 'Emilia springer', sub: 'samma trappa på 2,5 s', cfg: { lage: 'lyft', emilia: 'spring' } },
+            { id: 'lam', namn: 'Glödlampa och LED-lampa', sub: 'lika mycket ljus, ett dygn', cfg: { lage: 'app', A: 'glod', B: 'led', takt: 'h', tMax: 24 } },
+            { id: 'glom', namn: 'Den glömda glödlampan', sub: '8,5 W i två dygn, mot en LED-lampa', cfg: { lage: 'app', A: 'glod85', B: 'led1', takt: 'dygn', tMax: 48 } },
+            { id: 'kok', namn: 'Vattenkokare och akvarium', sub: 'stor effekt under kort tid', cfg: { lage: 'app', A: 'kok', B: 'akv', takt: 'h', tMax: 24 } },
+            { id: 'tv',  namn: 'Tv i viloläge', sub: 'mot laddaren, under ett år', cfg: { lage: 'app', A: 'tv', B: 'lad', takt: 'vecka', tMax: 365 * 24 } },
+        ];
+        const EMILIA = { m: 60, h: 4.0, eta: 0.2 };
+        const emiliaLyft = (vad) => {
+            const dt = vad === 'spring' ? 2.5 : 10;
+            const Pn = (EMILIA.m * G * EMILIA.h) / dt;
+            return { m: EMILIA.m, h: EMILIA.h, eta: EMILIA.eta, Pt: Pn / EMILIA.eta };
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  GISSA-LÄGET
+        // ════════════════════════════════════════════════════════
+        const slump = (a) => a[Math.floor(Math.random() * a.length)];
+        function nyUppgift(typ) {
+            const motor = slump(MOTORER);
+            // lagom långa lyft (cirka 2–15 s) så att det finns något att se
+            for (let f = 0; f < 100; f++) {
+                const Pt = slump([2, 3, 4, 5, 6, 8]);
+                const m = slump([0.5, 1, 1.5, 2]);
+                const h = slump([0.5, 0.6, 0.8, 1.0]);
+                const T = (m * G * h) / (motor.eta * Pt);
+                if (T < 2 || T > 15) continue;
+                return { typ, motor: motor.k, eta: motor.eta, Pt, m, h, T };
+            }
+            return { typ, motor: 'el', eta: 0.7, Pt: 4, m: 1, h: 0.8, T: (1 * G * 0.8) / (0.7 * 4) };
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  HUVUDAPP
+        // ════════════════════════════════════════════════════════
+        const App = () => {
+            const params = new URLSearchParams(location.search);
+            const [lage, setLage] = useState(params.get('lage') === 'apparater' ? 'app' : 'lyft');
+            const [motor, setMotor] = useState('el');
+            const [Pt, setPt] = useState(8);
+            const [m, setM] = useState(1);
+            const [h, setH] = useState(0.8);
+            const [emilia, setEmilia] = useState(null);       // null | 'ga' | 'spring'
+            const [appA, setAppA] = useState('glod');
+            const [appB, setAppB] = useState('led');
+            const [takt, setTakt] = useState('h');
+            const [tMaxApp, setTMaxApp] = useState(24);
+            const [pris, setPris] = useState(1.5);
+            const [show, setShow] = useState({ ir: false, forra: true });
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [kor, setKor] = useState(false);
+            const [, setFrame] = useState(0);
+            const [ghost, setGhost] = useState(null);
+            const [gissa, setGissa] = useState(null);
+            const [svarTxt, setSvarTxt] = useState('');
+            const [svarStatus, setSvarStatus] = useState(null);
+            const [poang, setPoang] = useState({ ratt: 0, totalt: 0, svit: 0 });
+
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const korRef = useRef(false);
+            const rafRef = useRef(null);
+            const lastRef = useRef(null);
+            const tRef = useRef(0);                 // simulerad tid: s (lyft) eller h (apparater)
+            const flygA = useRef([]), flygB = useRef([]);
+            const raknA = useRef(0), raknB = useRef(0);
+            const idRef = useRef(1);
+            const senasteRef = useRef(null);
+            const gissaRef = useRef(null);
+
+            const motorEta = MOTORER.find((x) => x.k === motor).eta;
+            const lyft = emilia ? emiliaLyft(emilia) : { m, h, Pt, eta: motorEta };
+            const lyftRef = useRef(lyft); lyftRef.current = lyft;
+            const A = app(appA), B = app(appB);
+            const taktH = TAKTER.find((x) => x.k === takt).hPerS;
+            const appRef = useRef(null); appRef.current = { A, B, taktH, tMax: tMaxApp };
+            const lageRef = useRef(lage); lageRef.current = lage;
+
+            // Brickans värde: lagom många brickor per sekund
+            // Emilia har samma brickvärde när hon går och springer, så att samma
+            // energi alltid är lika många brickor. Apparaterna får minst cirka 20
+            // brickor under hela försöket.
+            const brickJ = lage === 'lyft'
+                ? (emilia ? 200 : M.brickVarde(lyft.Pt, 16))
+                : Math.min(M.brickVarde(Math.max(A.P, B.P) * taktH, 14, 0),
+                           M.snyggtNedat(Math.max(M.apparatVid(A, tMaxApp).Et, M.apparatVid(B, tMaxApp).Et) / 20));
+            const brickRef = useRef(brickJ); brickRef.current = brickJ;
+
+            const nollstall = () => {
+                if (senasteRef.current) { setGhost(senasteRef.current); senasteRef.current = null; }
+                tRef.current = 0; flygA.current = []; flygB.current = []; raknA.current = 0; raknB.current = 0;
+                lastRef.current = null;
+                setFrame((n) => n + 1);
+            };
+            useEffect(() => { if (!korRef.current) nollstall(); }, [lage, motor, Pt, m, h, emilia, appA, appB, takt, tMaxApp]);
+            useEffect(() => { setGhost(null); senasteRef.current = null; }, [lage]);
+
+            // ── Brickorna: en ny bricka för varje brickvärde energi som tillförs ──
+            const RESTID = 1.5;     // s (verklig tid) för en bricka genom diagrammet
+            const spawn = (lista, rakn, Etot, eta, g) => {
+                const n = Math.floor(Etot / brickRef.current + 1e-9);
+                while (rakn.current < n) {
+                    const k = rakn.current++;
+                    lista.current.push({ id: idRef.current++, u: 0, nyttig: M.arNyttig(k, eta), g, x: g.sx0, y: g.y0, op: 1 });
+                }
+            };
+            const flytta = (lista, dt) => {
+                lista.current = lista.current.filter((t) => {
+                    t.u += dt / RESTID;
+                    const p = brickPunkt(t.g, t.nyttig, Math.min(1, t.u));
+                    t.x = p.x; t.y = p.y;
+                    t.op = t.u > 0.92 ? Math.max(0, (1 - t.u) / 0.08) : 1;
+                    return t.u < 1;
+                });
+            };
+
+            useEffect(() => {
+                const loop = (ts) => {
+                    if (lastRef.current == null) lastRef.current = ts;
+                    const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
+                    lastRef.current = ts;
+                    if (korRef.current) {
+                        if (lageRef.current === 'lyft') {
+                            const L = lyftRef.current;
+                            const d = M.lyftData(L);
+                            tRef.current = Math.min(d.T, tRef.current + dt);
+                            const s = M.lyftVid(L, tRef.current);
+                            const skala = emiliaRef.current ? 100 / 5000 : 5;
+                            spawn(flygA, raknA, s.Et, L.eta, sankeyGeo(230, Math.max(2, L.Pt * skala), L.eta, false));
+                            if (s.klar) avsluta();
+                        } else {
+                            const a = appRef.current;
+                            tRef.current = Math.min(a.tMax, tRef.current + dt * a.taktH);
+                            const skala = 70 / Math.max(a.A.P, a.B.P);
+                            spawn(flygA, raknA, M.apparatVid(a.A, tRef.current).Et, a.A.eta, sankeyGeo(150, Math.max(2, a.A.P * skala), a.A.eta, true));
+                            spawn(flygB, raknB, M.apparatVid(a.B, tRef.current).Et, a.B.eta, sankeyGeo(320, Math.max(2, a.B.P * skala), a.B.eta, true));
+                            if (tRef.current >= a.tMax) avsluta();
+                        }
+                    }
+                    flytta(flygA, dt); flytta(flygB, dt);
+                    setFrame((n) => n + 1);
+                    if (korRef.current || flygA.current.length || flygB.current.length) rafRef.current = requestAnimationFrame(loop);
+                    else { rafRef.current = null; lastRef.current = null; }
+                };
+                if ((kor || flygA.current.length || flygB.current.length) && !rafRef.current) rafRef.current = requestAnimationFrame(loop);
+                return () => { if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null; } };
+            }, [kor]);
+            const emiliaRef = useRef(emilia); emiliaRef.current = emilia;
+
+            const avsluta = () => {
+                korRef.current = false; setKor(false);
+                if (lageRef.current === 'lyft') {
+                    const L = lyftRef.current, d = M.lyftData(L);
+                    senasteRef.current = { Pt: L.Pt, Pn: d.Pn, T: d.T, Et: d.Et };
+                    if (gissaRef.current) ratta();
+                }
+            };
+            const starta = () => {
+                const klar = lage === 'lyft' ? tRef.current >= M.lyftData(lyft).T - 1e-9 : tRef.current >= tMaxApp - 1e-9;
+                if (klar || tRef.current > 0) nollstall();
+                korRef.current = true; setKor(true);
+            };
+            const pausa = () => { korRef.current = false; setKor(false); };
+            const fortsatt = () => { korRef.current = true; setKor(true); };
+            const borjaOm = () => { korRef.current = false; setKor(false); nollstall(); };
+
+            const korForsok = (f) => {
+                korRef.current = false; setKor(false);
+                const c = f.cfg;
+                setLage(c.lage);
+                if (c.lage === 'lyft') {
+                    setEmilia(c.emilia || null);
+                    if (!c.emilia) { setMotor(c.motor); setPt(c.Pt); setM(c.m); setH(c.h); }
+                } else {
+                    setAppA(c.A); setAppB(c.B); setTakt(c.takt); setTMaxApp(c.tMax);
+                }
+                setTimeout(() => { nollstall(); korRef.current = true; setKor(true); }, 40);
+            };
+
+            // ── Gissa-läget ──
+            const startaGissa = (typ) => {
+                const u = nyUppgift(typ);
+                korRef.current = false; setKor(false);
+                setLage('lyft'); setEmilia(null); setMotor(u.motor); setPt(u.Pt); setM(u.m); setH(u.h);
+                setGissa(u); setSvarTxt(''); setSvarStatus(null); gissaRef.current = null;
+                setGhost(null); senasteRef.current = null;
+                setTimeout(() => nollstall(), 30);
+            };
+            const kolla = () => {
+                const n = parseFloat(svarTxt.replace(',', '.').replace('−', '-'));
+                if (!isFinite(n)) { setSvarStatus({ ratt: false, text: 'Skriv in ett tal, till exempel 12,5.' }); return; }
+                gissaRef.current = { svar: n, u: gissa };
+                setSvarStatus('kor');
+                nollstall(); korRef.current = true; setKor(true);
+            };
+            function ratta() {
+                const { svar, u } = gissaRef.current;
+                gissaRef.current = null;
+                const d = M.lyftData({ m: u.m, h: u.h, Pt: u.Pt, eta: u.eta });
+                const facit = u.typ === 'tid' ? d.T : d.Pn;
+                const ratt = Math.abs(svar - facit) <= Math.max(0.03 * Math.abs(facit), 0.05);
+                let text;
+                if (u.typ === 'tid') {
+                    text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} Nyttig effekt P_n = η · P_t = ${fmt(u.eta, 2)} · ${u.Pt} W = ${fmt(d.Pn, 2)} W. Den nyttiga energin är lägesenergin E_n = m · g · h = ${fmt(u.m, 1)} · 9,82 · ${fmt(u.h, 1)} = ${fmt(d.En, 2)} J, så Δt = E_n / P_n = ${fmt(d.En, 2)} / ${fmt(d.Pn, 2)} = ${fmt(d.T, 2)} s.`;
+                    if (!ratt && Math.abs(svar - d.En / u.Pt) < 0.03 * d.En / u.Pt) text += ' Du räknade med hela den tillförda effekten. Bara den nyttiga delen lyfter vikten.';
+                } else {
+                    text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} Den nyttiga energin är lägesenergin E_n = m · g · h = ${fmt(d.En, 2)} J, och den omvandlades på ${fmt(d.T, 2)} s. P_n = E_n / Δt = ${fmt(d.En, 2)} / ${fmt(d.T, 2)} = ${fmt(d.Pn, 2)} W. Verkningsgraden blir η = P_n / P_t = ${fmt(d.Pn, 2)} / ${u.Pt} = ${fmt(u.eta, 2)}.`;
+                    if (!ratt && Math.abs(svar - u.Pt) < 0.03 * u.Pt) text += ' Det är den tillförda effekten. Den nyttiga är mindre, eftersom en del blir värme.';
+                }
+                setSvarStatus({ ratt, text });
+                setPoang((p) => ({ ratt: p.ratt + (ratt ? 1 : 0), totalt: p.totalt + 1, svit: ratt ? p.svit + 1 : 0 }));
+            }
+            const avslutaGissa = () => { setGissa(null); setSvarStatus(null); gissaRef.current = null; };
+            const dolj = !!gissa && (svarStatus === null || svarStatus === 'kor');
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(document.fullscreenElement === sceneWrapRef.current || document.webkitFullscreenElement === sceneWrapRef.current);
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => { document.removeEventListener('fullscreenchange', handler); document.removeEventListener('webkitfullscreenchange', handler); };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const d = M.lyftData(lyft);
+            const sim = lage === 'lyft' ? M.lyftVid(lyft, tRef.current) : null;
+            const appSim = { t: tRef.current, tMax: tMaxApp, pris };
+            const tShow = (key) => setShow((sh) => ({ ...sh, [key]: !sh[key] }));
+            const lastReglage = kor || !!gissa;
+            const klarNu = lage === 'lyft' ? tRef.current >= d.T - 1e-9 : tRef.current >= tMaxApp - 1e-9;
+            const pagar = tRef.current > 0 && !klarNu;
+            const startEtikett = kor ? 'Pausa' : pagar ? 'Fortsätt' : 'Starta';
+            const startKlick = kor ? pausa : pagar ? fortsatt : starta;
+            const kalla = emilia ? 'Maten' : 'Eluttag';
+
+            const reglage = (Sl, kompakt) => {
+                const rad = (label, value, min, max, step, onChange, fmtFn, unit) => (
+                    <Sl label={label} value={value} min={min} max={max} step={step} onChange={onChange} disabled={lastReglage}
+                        {...(kompakt ? { valueNode: <NumInput value={value} min={min} max={max} fmtFn={fmtFn} unit={unit} disabled={lastReglage} onCommit={onChange} /> } : {})}>
+                        {!kompakt && <NumInput value={value} min={min} max={max} fmtFn={fmtFn} unit={unit} disabled={lastReglage} onCommit={onChange} />}
+                    </Sl>
+                );
+                if (lage === 'lyft') {
+                    if (emilia) return <p className="text-xs mb-1" style={{ color: 'var(--lab-ink-soft)' }}>Emilia väger 60 kg och trappan är 4,0 m hög. Välj ett annat försök eller läget Lyft för att ställa in egna värden.</p>;
+                    return (
+                        <React.Fragment>
+                            {rad('Tillförd effekt <em>P</em><sub>t</sub>', Pt, 2, 20, 0.5, setPt, (x) => fmt(x, 1), 'W')}
+                            {rad('Massa <em>m</em>', m, 0.2, 2, 0.1, setM, (x) => fmt(x, 1), 'kg')}
+                            {rad('Höjd <em>h</em>', h, 0.2, 1.0, 0.05, setH, (x) => fmt(x, 2), 'm')}
+                        </React.Fragment>
+                    );
+                }
+                return rad('Elpris', pris, 0.5, 4, 0.05, setPris, (x) => fmt(x, 2), 'kr/kWh');
+            };
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        <label><input type="checkbox" checked={show.ir} onChange={() => tShow('ir')} /><span>Värmekamera</span></label>
+                        <label><input type="checkbox" checked={show.forra} onChange={() => tShow('forra')} disabled={lage !== 'lyft'} /><span>Förra lyftet</span></label>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglage(StSlider, true)}</div>
+                                <div className="st-actions">
+                                    <button className="btn-start" onClick={startKlick} disabled={!!gissa}>{startEtikett}</button>
+                                    <button className="btn-toggle" onClick={borjaOm} disabled={!!gissa}>Börja om</button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-7xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Effekt och verkningsgrad
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Effekt och verkningsgrad</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            <strong>Energi</strong> är hur mycket som omvandlas, <strong>effekt</strong> är hur snabbt det går. Här strömmar
+                            energin som brickor genom ett energiflödesdiagram: antalet brickor är energin och hur många brickor som
+                            strömmar per sekund är effekten. Vid apparaten delar sig flödet. En del blir det apparaten är till för, resten
+                            blir värme, och andelen som blir nytta är <strong>verkningsgraden</strong>. Lyft en vikt med en motor, låt Emilia
+                            springa uppför en trappa, eller jämför vad lampor och andra apparater kostar att ha på.
+                        </p>
+
+                        <FormelKort lage={lage} P={d.Pn} dE={sim ? sim.En : 0} dt={sim ? sim.t : 0} eta={lyft.eta} dolj={dolj} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 xl:w-3/4 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <Scen lage={lage} lyft={lyft} sim={sim || { t: 0, y: 0, Et: 0, En: 0, klar: false }} appA={appA} appB={appB} appSim={appSim}
+                                          show={show} flygA={flygA.current} flygB={flygB.current} ghost={ghost} svgRef={svgRef}
+                                          emilia={emilia} dolj={dolj} kalla={kalla} brick={brickJ} />
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    {lage === 'lyft' && emilia
+                                        ? 'Exempel 1 i genomgången söker den nyttiga effekten, den som ökar Emilias lägesenergi: 0,24 kW när hon går och 0,94 kW när hon springer. Kroppen har en verkningsgrad på ungefär 20 %, så den tillförda effekten från maten är omkring fem gånger så stor, och resten blir värme.'
+                                        : lage === 'lyft'
+                                        ? 'Motorn lyfter vikten med jämn fart till den röda linjen. Energimätaren visar den tillförda effekten och energin, och stoppuret tiden. Igångsättningen försummas.'
+                                        : 'Tiden snabbspolas. Energin räknas i kilowattimmar, och kostnaden räknas ut med elpriset. Effekterna och verkningsgraderna är ungefärliga.'}
+                                </p>
+                            </div>
+
+                            <div className="lg:w-1/3 xl:w-1/4 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Försöket</div>
+                                    <div className="mode-seg mb-3">
+                                        <button className={lage === 'lyft' ? 'active' : ''} disabled={lastReglage} onClick={() => { setLage('lyft'); setEmilia(null); }}>Lyft</button>
+                                        <button className={lage === 'app' ? 'active' : ''} disabled={lastReglage} onClick={() => setLage('app')}>Apparater</button>
+                                    </div>
+                                    {lage === 'lyft' && !emilia && (
+                                        <div className="mode-seg">
+                                            {MOTORER.map((x) => (
+                                                <button key={x.k} className={motor === x.k ? 'active' : ''} disabled={lastReglage} onClick={() => setMotor(x.k)}>
+                                                    {x.namn}<span className="sub"><em>η</em> = {fmt(x.eta * 100, 0)} %</span></button>
+                                            ))}
+                                        </div>
+                                    )}
+                                    {lage === 'app' && (
+                                        <div className="flex flex-col gap-2">
+                                            {[['A', appA, setAppA], ['B', appB, setAppB]].map(([bok, v, set]) => (
+                                                <label key={bok} className="text-sm flex items-center gap-2" style={{ color: 'var(--lab-ink)' }}>
+                                                    <span style={{ fontWeight: 700, width: 14 }}>{bok}</span>
+                                                    <select className="flex-1 num-in" style={{ width: 'auto', textAlign: 'left', fontFamily: 'inherit' }} value={v} disabled={lastReglage} onChange={(e) => set(e.target.value)}>
+                                                        {APPARATER.map((x) => <option key={x.k} value={x.k}>{x.namn}</option>)}
+                                                    </select>
+                                                </label>
+                                            ))}
+                                            <div className="mode-seg mt-1">
+                                                {TAKTER.map((x) => (
+                                                    <button key={x.k} className={takt === x.k ? 'active' : ''} disabled={kor} onClick={() => setTakt(x.k)} style={{ fontSize: 12 }}>{x.namn}</button>
+                                                ))}
+                                            </div>
+                                            <div className="mode-seg">
+                                                {[[1, '1 h'], [24, '1 dygn'], [48, '2 dygn'], [365 * 24, '1 år']].map(([t, n]) => (
+                                                    <button key={t} className={tMaxApp === t ? 'active' : ''} disabled={kor} onClick={() => setTMaxApp(t)} style={{ fontSize: 12 }}>{n}</button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    {!isFullscreen && reglage(Slider, false)}
+                                    {isFullscreen && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Reglagen finns i rutan uppe till höger i fullskärm.</p>}
+                                    <div className="flex gap-2 mt-2">
+                                        <button className="btn-start flex-1" onClick={startKlick} disabled={!!gissa}>{startEtikett}</button>
+                                        <button className="btn-toggle flex-1" onClick={borjaOm} disabled={!!gissa}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Färdiga försök</div>
+                                    <div className="forsok-lista">
+                                        {FORSOK.map((f) => (
+                                            <button key={f.id} className="forsok" disabled={!!gissa} onClick={() => korForsok(f)}>
+                                                {f.namn}<span className="sub">{f.sub}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flbl" style={{ textAlign: 'left' }}>Gissa-läge</div>
+                                        {poang.totalt > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>{poang.ratt} av {poang.totalt} rätt{poang.svit > 1 ? `, ${poang.svit} i rad` : ''}</div>}
+                                    </div>
+                                    {!gissa && (
+                                        <div className="flex flex-col gap-2">
+                                            <button className="btn-toggle" onClick={() => startaGissa('tid')}>Hur länge tar lyftet?</button>
+                                            <button className="btn-toggle" onClick={() => startaGissa('effekt')}>Räkna den nyttiga effekten</button>
+                                        </div>
+                                    )}
+                                    {gissa && (
+                                        <div>
+                                            {gissa.typ === 'tid' ? (
+                                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                    En {MOTORER.find((x) => x.k === gissa.motor).namn.toLowerCase()} med verkningsgraden <em>η</em> = {fmt(gissa.eta * 100, 0)} %
+                                                    får den tillförda effekten <em>P</em><sub>t</sub> = {gissa.Pt} W och lyfter {fmt(gissa.m, 1)} kg till höjden {fmt(gissa.h, 1)} m.
+                                                    Hur lång tid tar lyftet?
+                                                </p>
+                                            ) : (
+                                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                    En motor får den tillförda effekten <em>P</em><sub>t</sub> = {gissa.Pt} W och lyfter {fmt(gissa.m, 1)} kg till höjden {fmt(gissa.h, 1)} m.
+                                                    Stoppuret visar att lyftet tar {fmt(gissa.T, 2)} s. Hur stor är den nyttiga effekten?
+                                                </p>
+                                            )}
+                                            <div className="flex items-center gap-2 mb-2">
+                                                {gissa.typ === 'tid' ? <span>Δ<em>t</em> =</span> : <span><em>P</em><sub>n</sub> =</span>}
+                                                <input className="gissa-in" type="text" inputMode="decimal" value={svarTxt} disabled={svarStatus !== null}
+                                                       onChange={(e) => setSvarTxt(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && svarStatus === null) kolla(); }} />
+                                                <span>{gissa.typ === 'tid' ? 's' : 'W'}</span>
+                                                <button className="btn-start" onClick={kolla} disabled={svarStatus !== null}>Kolla</button>
+                                            </div>
+                                            {svarStatus === 'kor' && <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>Lyftet körs …</p>}
+                                            {svarStatus && svarStatus !== 'kor' && <p className="text-sm mb-2" style={{ color: svarStatus.ratt ? '#15803d' : 'var(--lab-accent)' }}><Fx text={svarStatus.text} /></p>}
+                                            <div className="flex gap-2">
+                                                {svarStatus && svarStatus !== 'kor' && <button className="btn-toggle flex-1" onClick={() => startaGissa(gissa.typ)}>Ny uppgift</button>}
+                                                <button className="btn-toggle flex-1" onClick={avslutaGissa} disabled={svarStatus === 'kor'}>Avsluta</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Energi och effekt</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Energin är hur mycket som omvandlas och mäts i joule. Effekten är hur snabbt det sker, <em>P</em> = <Brak t={<span>Δ<em>E</em></span>} n={<span>Δ<em>t</em></span>} />,
+                                    och mäts i watt: 1 W = 1 J/s. I diagrammet över energin mot tiden är effekten lutningen. Samma lyft med dubbel effekt
+                                    kräver samma energi men tar halva tiden.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Verkningsgrad</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Verkningsgraden är andelen av den tillförda energin som blir nyttig, <em>η</em> = <Brak t={<span><em>E</em><sub>n</sub></span>} n={<span><em>E</em><sub>t</sub></span>} /> = <Brak t={<span><em>P</em><sub>n</sub></span>} n={<span><em>P</em><sub>t</sub></span>} />.
+                                    Den ligger alltid mellan 0 och 1. Resten blir oftast värme, och den försvinner inte: i energiflödesdiagrammet
+                                    är nytta plus värme alltid lika många brickor som det tillförda.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Kilowattimmar</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    På elräkningen betalar man för energi, inte effekt. 1 kWh är energin som omvandlas på en timme med effekten 1 000 W:
+                                    1 kWh = 1 000 W · 3 600 s = 3,6 · 10<sup>6</sup> J. En apparat med liten effekt kan därför kosta mer än en med stor
+                                    effekt, om den är på mycket längre.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Effekt och energi är samma sak.”</strong> Nej. Energi är hur mycket, effekt är hur snabbt. Emilias lägesenergi
+                                    ökar lika mycket när hon går som när hon springer, men den nyttiga effekten blir fyra gånger så stor när det tar en fjärdedel av tiden.</li>
+                                <li><strong>”En apparat med stor effekt kostar alltid mest.”</strong> Nej, det beror också på hur länge den är på.
+                                    Jämför vattenkokaren och laddaren under ett dygn.</li>
+                                <li><strong>”Energi försvinner i en dålig motor.”</strong> Nej, den blir värme. Verkningsgraden säger hur stor andel
+                                    som blir det man vill ha.</li>
+                                <li><strong>”Verkningsgraden kan bli större än 100 %.”</strong> Aldrig. Då skulle apparaten ge ut mer energi än den får.</li>
+                                <li><strong>”kW och kWh är samma enhet.”</strong> Nej. kW är effekt (hur snabbt), kWh är energi (hur mycket).</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

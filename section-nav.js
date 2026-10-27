@@ -52,7 +52,8 @@
                         if (sec.delad) continue;
                         if ((sec.href && sec.href.toLowerCase() === target) ||
                             (sec.href2 && sec.href2.toLowerCase() === target) ||
-                            (sec.href3 && sec.href3.toLowerCase() === target)) {
+                            (sec.href3 && sec.href3.toLowerCase() === target) ||
+                            (sec.href4 && sec.href4.toLowerCase() === target)) {
                             return { courseKey, sec };
                         }
                     }
@@ -108,6 +109,7 @@
     const simHrefs = [sec.href]
         .concat(sec.href2 ? [sec.href2] : [])
         .concat(sec.href3 ? [sec.href3] : [])
+        .concat(sec.href4 ? [sec.href4] : [])
         .filter(Boolean);
 
     // Namnet på en simulering hämtas ur SIM_NAMES, som kan vara en sträng

@@ -116,6 +116,8 @@ window.SIM_NAMES = {
       kw: ['krafter','tyngdpunkt','dubbelkon','kon','rullar uppför','uppförsbacke','lutande bana','illusion','rullning','cylinder','lägesenergi','kontaktpunkt','demonstration','3d','mekanik'] },
     { name: 'Vältning', href: 'fysik2-valtning-app.html', desc: 'Luta en kloss tills den välter, lägg en last i den och se tyngdpunkten flytta sig, eller ställ den på en planka och se om den glider eller välter först.',
       kw: ['krafter','vältning','välta','vältningsvinkel','tyngdpunkt','lodlinje','stödyta','vridningspunkt','stabilitet','lutande plan','friktion','glida','normalkraft','kloss','mekanik'] },
+    { name: 'Tyngdpunkt och lodlinje', href: 'fysik2-lodlinjen-app.html', desc: 'Häng upp en skiva i en spik och rita av lodets snöre med skivan hängd i två olika hål: linjerna korsas i tyngdpunkten. L-formad skiva, hästsko, Sverigekartan, en egen form och en kontroll på nålspetsen.',
+      kw: ['krafter','tyngdpunkt','lodlinje','lod','hitta tyngdpunkten','upphängningspunkt','kraftmoment','hävarm','fysisk pendel','nålspets','balans','sverigekartan','sveriges mittpunkt','hästsko','statik','mekanik'] },
   ],
   'fysik2-satellitbana-app.html': 'Satellit i omloppsbana',
   'fysik2-konisk-pendel.html': 'Konisk pendel',

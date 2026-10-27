@@ -59,7 +59,7 @@
         });
     // Skyddsnät: en andra eller tredje simulering (href2/href3) som saknar
     // post i SIM_NAMES ska ändå komma med i listan/sökningen.
-    for (const extra of [section.href2, section.href3]) {
+    for (const extra of [section.href2, section.href3, section.href4]) {
       if (extra && !out.some(s => s.href === extra)) {
         out.push({ name: section.title, desc: section.description, href: extra,
                    num: section.num, kw: null });

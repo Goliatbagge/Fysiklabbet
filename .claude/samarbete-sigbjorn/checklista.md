@@ -50,7 +50,7 @@ att länka till från boken.
 |---|---|---|---|---|
 | 11 | Vältning (kloss som lutas tills den välter) | fy2-1.2, fy2-1.3 | 4.1 Likevekt, 4.5 Gjenstander som står på skrå | [x] |
 | 12 | Linjalen på två fingrar | fy2-1.2 | 4.1 Likevekt | [x] |
-| 13 | Lodlinjen (tyngdpunkt med lod) | fy2-1.3 | 4.1 Likevekt | [ ] |
+| 13 | Lodlinjen (tyngdpunkt med lod) | fy2-1.3 | 4.1 Likevekt | [x] |
 | 14 | Numerisk modellering (kalkylbladet + stegkastet) | fy2-1.9 | 2.6 Matematisk modellering av bevegelse | [ ] |
 
 ---
@@ -174,10 +174,23 @@ Tas när del 1 och 2 är klara.
 - [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn; gissatestet `%TEMP%\pptr-test\lin-gissa.js`
 - [x] Fysikgranskning och språkgranskning, rättningarna införda (hävarmarna kring Q som i teorin, F_P = F_G · l_G / l_P, friktionskrafterna lika stora och gränsen som skiljer, tyngdpunkten alltid mellan fingrarna, friktionspilar med beteckning, fallets tröghetsmoment)
 - [x] Sam testar och godkänner (2026-10-27)
-- [ ] Commit och push till `main`
+- [x] Commit och push till `main` (59b17bb7)
 - [ ] Länken till Sigbjørn
 - [x] Teorin i fy2-1.2 rättad (demonstrationen och sammanfattningen): fingret närmast tyngdpunkten *tål* större friktionskraft; krafterna är lika stora
 - [ ] Att göra: skärmläsartexten i `minisim.js` (typ linjal) säger fortfarande "därmed mindre friktion"
+
+## Status: nr 13, Tyngdpunkt och lodlinje (`fysik2-lodlinjen-app.html`)
+
+- [x] Koncept godkänt (2026-10-27, `koncept-13-lodlinjen.md`): stöd för `href4` på fy2-1.3, Sverigekartan och en egen form att rita
+- [x] `href4` i `section-nav.js`, `data/sok.js`, `verify-sok.js` och `verify-sim-vaxlare.js` (skriptet `href4.py` i scratchpad gör samma ändring i push-worktree)
+- [x] Motorn med test: `node .claude/test-tyngdpunkt-motor.js` (källan i `tyngdpunkt-motor.js`; Sverigekartan ur Natural Earth 1:50m, fastlandet, förenklad)
+- [x] Sidan byggd: skivan hänger i en spik med ett lod och svänger som en dämpad fysisk pendel, rita av lodet från flera hål, F_G och hävarmen l_G, fem former (oregelbunden, L, hästsko, Sverige, egen ritad), nålspetsen sedd uppifrån, fem färdiga försök, gissa-läge
+- [x] Inkopplad: `href4` på fy2-1.3, `data/simuleringar.js`, `UPDATES`, `verify-navigation.js`
+- [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn; interaktionstestet `%TEMP%\pptr-test	p-test.js`
+- [x] Fysikgranskning och språkgranskning, rättningarna införda (försöken väntar tills skivan hänger still, mindre rityta så att egna former ryms, l_G-etiketten och måttlinjen i fri yta, momenttexten under svängningen, rutan om Sveriges mittpunkt med 1947 års nålmetod)
+- [x] Sam testar och godkänner (2026-10-27)
+- [ ] Commit och push till `main` (glöm inte `href4.py` på section-nav, sok och verifierarna)
+- [ ] Länken till Sigbjørn
 
 ## Process för varje simulering
 

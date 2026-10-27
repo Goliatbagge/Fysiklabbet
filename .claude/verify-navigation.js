@@ -66,6 +66,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-gaffelbalans-app.html',
     'fysik2-dubbelkon-app.html',
     'fysik2-valtning-app.html',
+    'fysik2-lodlinjen-app.html',
     'fysik1-lutande-plan-app.html',
     'fysik1-arbete-app.html',
     'fysik1-energiforluster-app.html',

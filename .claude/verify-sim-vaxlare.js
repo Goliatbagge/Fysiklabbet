@@ -45,10 +45,10 @@ for (const subjKey of Object.keys(KATALOG)) {
         const chapters = (courses[courseKey] && courses[courseKey].chapters) || {};
         for (const chapKey of Object.keys(chapters)) {
             for (const sec of (chapters[chapKey].sections || [])) {
-                if (sec.href && (sec.href2 || sec.href3)) {
+                if (sec.href && (sec.href2 || sec.href3 || sec.href4)) {
                     pairs.push({ course: courseKey, num: sec.num, title: sec.title,
                                  href: sec.href,
-                                 extra: [sec.href2, sec.href3].filter(Boolean) });
+                                 extra: [sec.href2, sec.href3, sec.href4].filter(Boolean) });
                 }
             }
         }

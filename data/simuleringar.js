@@ -54,6 +54,7 @@ window.SIM_NAMES = {
   'fysik1-trissor-app.html': 'Sammansatta system',
   'fysik1-vatsketryck-app.html': 'Tryck i vätskor',
   'fysik1-vatsketryck-app.html?lage=pascal': 'Pascals princip: hydraulpressen',
+  'fysik1-forsta-huvudsatsen-app.html': 'Termodynamikens första huvudsats',
   'fysik1-berg-och-dalbana.html': 'Berg-och-dalbana (energiprincipen)',
   'fysik1-tryck-pa-app.html': 'Tryck och tryckkraft',
   'fysik1-magdeburgska-halvklot.html': 'Magdeburgska halvkloten',

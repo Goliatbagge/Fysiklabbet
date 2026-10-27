@@ -27,7 +27,7 @@ simuleringen länkas i katalogen och vars beteckningar den ska följa.
 | 3 | 5.6 Virkningsgrad og effekt | fy1-4.5 Effekt, fy1-4.6 Verkningsgrad | Motor/kran som lyfter last: tillförd och nyttig energi, effekt som energi per tid, verkningsgrad som energiflöde (sankeydiagram) | 2D | [x] |
 | 4 | 3.7 Sammensatte systemer | fy1-3.10 Trissor | Två kroppar med snöre över trissa (låda på bord + hängande vikt, Atwood): friläggning av varje kropp, gemensam acceleration, spännkraften | 2D | [x] |
 | 5 | 6.3 Trykk i væsker og rør | fy1-5.3 Vätsketryck (+ 5.8 Pascals princip) | Vätsketryck mot djup, kommunicerande kärl, U-rörsmanometer och hydraulisk press | 2D | [x] |
-| 6 | 7.4 Termofysikkens første lov | fy1-6.5 Termodynamikens huvudsatser | Gas i cylinder med kolv: värme in, arbete ut, Δ*U* = *Q* − *W* (tecken enligt teorin) med partiklar som rör sig | 2D eller 3D | [ ] |
+| 6 | 7.4 Termofysikkens første lov | fy1-6.5 Termodynamikens huvudsatser | Gas i cylinder med kolv: värme in, arbete ut, Δ*U* = *Q* − *W* (tecken enligt teorin) med partiklar som rör sig | 2D eller 3D | [x] |
 | 7 | 7.5 Energikvalitet og termofysikkens andre lov | fy1-6.5 Termodynamikens huvudsatser | Varmt och kallt i kontakt: energin sprids men går aldrig tillbaka av sig själv; värmemaskinens maximala verkningsgrad | 2D | [ ] |
 | 8 | 6.5 Strømninger i rør | saknas (nytt stoff för Fysiklabbet) | Kontinuitetsekvationen (smalare rör ger högre fart), eventuellt tryckfall/Bernoulli. **Kräver bokens innehåll först** | 2D | [ ] |
 | 9 | 1.1 Å tenke fysikk | fy1-1.1 Fysik som ämne | Storleksordningar: zooma från atom till universum, uppskatta och jämföra. **Stäm av vad boken tar upp** | 2D | [ ] |
@@ -125,8 +125,21 @@ Tas när del 1 och 2 är klara.
 - [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn
 - [x] Fysikgranskning och språkgranskning, rättningarna införda (krafterna i pressen i skala mot varandra, arbetet som går till rörelseenergi, bilen 2 ton som i Exempel 1, massa och tyngd isärhållna, sonden flyttbar i sidled)
 - [x] Sam testar och godkänner (2026-10-27)
+- [x] Commit och push till `main` (64b6ffb0)
+- [ ] Länken till Sigbjørn
+
+## Status: nr 6, Termodynamikens första huvudsats (`fysik1-forsta-huvudsatsen-app.html`)
+
+- [x] Koncept godkänt (2026-10-27, `koncept-06-forsta-huvudsatsen.md`): ΔU = Q + W med arbetet på gasen, simuleringen först och teorin senare, p–V-diagrammet dolt från början
+- [x] Gasmotorn med test: `node .claude/test-gas-motor.js` (källan i `gas-motor.js`, inklistrad i sidan)
+- [x] Sidan byggd: gascylinder med partiklar, värmeplatta som värmer och kyler, isolering, kolv som kan låsas, släppas eller tryckas ned, joulebrickor mellan Q, W och U, räkneverk, p–V-diagram, fem färdiga försök, gissa-läge
+- [x] Inkopplad: katalog fy1-6.5, `data/simuleringar.js`, `UPDATES`, `verify-navigation.js`
+- [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn
+- [x] Fysikgranskning och språkgranskning, rättningarna införda (värmeutbyte med rummet så att snabbt och långsamt skiljer sig, p–V-diagrammet ritar trycket mot kolven, luften ovanför kolven nämns, cykelslangen i stället för sprayflaskan)
+- [x] Sam testar och godkänner (2026-10-27)
 - [ ] Commit och push till `main`
 - [ ] Länken till Sigbjørn
+- [ ] Att göra senare: teorin i fy1-6.5 får formeln ΔU = Q + W (sätter igång uppdateringskedjan)
 
 ## Process för varje simulering
 

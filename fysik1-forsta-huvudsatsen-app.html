@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termodynamikens första huvudsats — Fysiklabbet</title>
+    <meta name="description" content="Värm en gas, tryck ihop den eller låt den lyfta en vikt, och följ joulebrickorna mellan värme, arbete och inre energi. Termodynamikens första huvudsats, ΔU = Q + W.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik1-forsta-huvudsatsen-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Termodynamikens första huvudsats — Fysik nivå 1">
+    <meta property="og:description" content="Värm en gas, tryck ihop den eller låt den lyfta en vikt, och följ joulebrickorna mellan värme, arbete och inre energi. Termodynamikens första huvudsats, ΔU = Q + W.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik1-forsta-huvudsatsen-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Termodynamikens första huvudsats — Fysik nivå 1">
+    <meta name="twitter:description" content="Värm en gas, tryck ihop den eller låt den lyfta en vikt, och följ joulebrickorna mellan värme, arbete och inre energi. Termodynamikens första huvudsats, ΔU = Q + W.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+        input[type="range"]:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1;
+                text-align: center; max-width: 150px; }
+        .fnum { color: var(--lab-ink); font-size: 20px; font-family: 'Poppins', sans-serif; }
+        .fnum-live { color: var(--lab-ink); font-size: 17px; font-family: 'Poppins', sans-serif; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 80px; }
+        .num-in { width: 50px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:disabled { opacity: 0.55; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* Scenen: en svg med egen proportion (1000 × 660). Mobilen (sektion 8 i
+           styles-laborans-sim.css) dockar verktygen under den. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1000 / 660;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .handtag { cursor: grab; }
+        .handtag.drar { cursor: grabbing; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 34px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-start {
+            background: var(--lab-accent, #c8324a); color: #fff; border: 1px solid var(--lab-accent, #c8324a);
+            border-radius: 8px; padding: 9px 14px; font-weight: 700; cursor: pointer;
+        }
+        .btn-start:hover:not(:disabled) { filter: brightness(1.06); }
+        .btn-start:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .mode-seg { display: flex; gap: 0; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button {
+            flex: 1; padding: 8px 8px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .mode-seg button:last-child { border-right: none; }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+
+        /* Färdiga försök */
+        .forsok-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .forsok {
+            text-align: left; padding: 7px 9px; border-radius: 8px; cursor: pointer;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; font-weight: 600; color: var(--lab-ink, #0f1620); line-height: 1.25;
+        }
+        .forsok .sub { display: block; font-size: 11.5px; font-weight: 400; color: var(--lab-ink-soft, #3a4151); }
+        .forsok:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .forsok:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* Avläsning */
+        .avl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
+        .avl .v { font-weight: 700; font-size: 16px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+        .avl .l { font-size: 11.5px; color: var(--lab-ink-muted, #5a6170); }
+
+        /* Resultatrutan efter ett försök */
+        .resultat { border-left: 4px solid var(--lab-accent, #c8324a); }
+        .resultat.ratt { border-left-color: #15803d; }
+
+        /* Gissa-läget */
+        .gissa-in { width: 90px; padding: 6px 8px; border-radius: 7px; font-size: 15px;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                    background: #fff; font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .gissa-in:focus { outline: none; border-color: var(--lab-accent, #c8324a); }
+        .kort3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .kort3 button {
+            padding: 8px 6px; border-radius: 8px; cursor: pointer; text-align: center;
+            background: var(--lab-bg, #f3eee4); border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; line-height: 1.45; color: var(--lab-ink, #0f1620);
+        }
+        .kort3 button:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .kort3 button.vald { border-color: var(--lab-ink, #0f1620); box-shadow: 0 0 0 2px rgba(15,22,32,0.15); }
+        .kort3 button.basta { background: rgba(21,128,61,0.10); border-color: #15803d; }
+        .kort3 .bok { font-weight: 700; font-size: 15px; display: block; margin-bottom: 2px; }
+        .kort3 .stapel { height: 6px; border-radius: 3px; background: #d4930f; margin-top: 5px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+        /* Remsorna på den plana sträckan */
+        .remsor { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+        .remsor button {
+            padding: 6px 4px; border-radius: 8px; cursor: pointer; font-size: 12.5px; font-weight: 600; line-height: 1.2;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .remsor button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+        .remsor button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); border-color: var(--lab-ink, #0f1620); }
+        .remsor button:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script id="gas-motor">
+// Gasmotorn för Gaskolven (fysik1-forsta-huvudsatsen-app.html).
+// Källan ligger här och klistras in oförändrad i sidan; testet
+// .claude/test-gas-motor.js kontrollerar fysiken och att kopian är identisk.
+//
+// En enatomig ideal gas i en cylinder med en kolv. Den inre energin är
+// U = 3/2 · n · R · T = 3/2 · p · V. Energin ändras på två sätt:
+//   Q  värme till gasen: från värmeplattan med effekten P, och mellan
+//      cylindern och rummet (k · (T_rum − T)). Noll när cylindern är isolerad.
+//   W  arbete på gasen från kolven
+// och första huvudsatsen ΔU = Q + W gäller i varje tidssteg, eftersom U bara
+// ändras genom de två termerna.
+//
+// Kolven kan vara
+//   'last'  låst med en spärr: volymen står still, W = 0
+//   'hand'  nedtryckt av en hand med en bestämd fart till ett mål, sedan hållen
+//   'fri'   fri, med vikter: rör sig av tryckskillnaden och tyngden. Gasen
+//           bromsar kolven (trycket mot kolvytan är p − DAMP · v / A), så att
+//           svängningarna dör ut. W är arbetet som kolvytan utför på gasen; när
+//           kolven har stannat är W = −p_yttre · ΔV.
+//
+// Slår kolven i ett ändläge sätts farten till noll; kolvens rörelseenergi
+// försvinner då ur bokföringen, men det påverkar inte gasens ΔU = Q + W.
+(function () {
+    const R = 8.314;
+    const G = 9.82;
+    const P0 = 101300;               // lufttrycket ovanför kolven
+    const A = 0.016;                 // kolvens area, m²
+    const N_MOL = 0.1347;            // gasmängden, mol
+    const M_KOLV = 2;                // kolvens egen massa, kg
+    const L_MIN = 0.05, L_MAX = 0.40;
+    const DAMP = 600;                // N · s/m
+    const K_LACK = 0.15;             // W/K, värmeutbytet med rummet
+    const T_RUM = 293.15;
+    const CV = 1.5 * N_MOL * R;      // J/K, så att U = CV · T
+
+    const tryck = (st) => (2 / 3) * st.U / (A * st.L);
+    const pKolv = (st) => tryck(st) - (st.kolv === 'fri' ? DAMP * st.v / A : 0);
+    const temp = (st) => st.U / CV;
+    const volym = (st) => A * st.L;
+    const pYttre = (cfg) => P0 + (M_KOLV + cfg.vikter) * G / A;
+
+    // Ett tillstånd med längden L och temperaturen T.
+    function nytt(L, T) {
+        return { L, U: CV * T, v: 0, Q: 0, W: 0, t: 0, U0: CV * T, kolv: 'last', handMal: L, handFart: 0, pv: [[A * L, (2 / 3) * CV * T / (A * L)]] };
+    }
+    // Jämviktsläget för en fri kolv med vikterna i cfg vid temperaturen T.
+    const jamviktL = (cfg, T) => N_MOL * R * T / (pYttre(cfg) * A);
+
+    // Trycket mitt i ett delsteg (andra ordningens noggrannhet i arbetet p · dV).
+    function pMitt(st, p, dx, dQ) {
+        const Uh = st.U + 0.5 * (dQ - p * A * dx), Lh = st.L + 0.5 * dx;
+        return (2 / 3) * Uh / (A * Lh);
+    }
+
+    function steg(st, cfg, dt) {
+        const n = Math.max(1, Math.ceil(dt / 0.0005)), h = dt / n;
+        for (let i = 0; i < n; i++) {
+            const Pv = cfg.isolerad ? 0 : cfg.P + K_LACK * (T_RUM - st.U / CV);
+            const p = (2 / 3) * st.U / (A * st.L);
+            let dW = 0;
+            if (st.kolv === 'last') {
+                st.v = 0;
+            } else if (st.kolv === 'hand') {
+                const kvar = st.handMal - st.L;
+                if (Math.abs(kvar) < 1e-9) st.v = 0;
+                else {
+                    st.v = Math.sign(kvar) * Math.min(st.handFart, Math.abs(kvar) / h);
+                }
+                dW = -pMitt(st, p, st.v * h, Pv * h) * A * st.v * h;
+                st.L += st.v * h;
+            } else {
+                const M = M_KOLV + cfg.vikter;
+                const F = (p - P0) * A - M * G - DAMP * st.v;
+                st.v += F / M * h;                       // halvimplicit Euler
+                let ny = st.L + st.v * h;
+                if (ny < L_MIN || ny > L_MAX) { ny = Math.max(L_MIN, Math.min(L_MAX, ny)); st.v = 0; }
+                const dx = ny - st.L;
+                dW = -pMitt(st, p, dx, Pv * h + DAMP * st.v * st.v * h) * A * dx + DAMP * st.v * st.v * h;
+                st.L = ny;
+            }
+            const dQ = Pv * h;
+            st.U += dQ + dW;
+            st.Q += dQ;
+            st.W += dW;
+            st.t += h;
+        }
+        // p–V-spåret, glest. Trycket är det mot kolvytan, så att ytan under
+        // kurvan blir lika stor som arbetet.
+        const sist = st.pv[st.pv.length - 1], V = A * st.L, p = pKolv(st);
+        if (Math.abs(V - sist[0]) > 2e-6 || Math.abs(p - sist[1]) > 150) st.pv.push([V, p]);
+        return st;
+    }
+
+    const ut = { R, G, P0, A, N_MOL, M_KOLV, L_MIN, L_MAX, CV, K_LACK, T_RUM, tryck, pKolv, temp, volym, pYttre, nytt, jamviktL, steg };
+    if (typeof window !== 'undefined') window.GasMotor = ut;
+    if (typeof module !== 'undefined') module.exports = ut;
+})();
+</script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const M = window.GasMotor;
+
+        // ── Talformat: decimalkomma, äkta minustecken, exakt noll som "0", hårt mellanslag i tusental ──
+        const fmt = (num, d = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [hel, dec] = s.replace('-', '').split('.');
+            const grupper = hel.length > 3 ? hel.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : hel;
+            return (num < 0 ? '−' : '') + grupper + (dec !== undefined ? ',' + dec : '');
+        };
+        // med tecken: +120, −40, 0
+        const fmtT = (num, d = 0) => { const s = fmt(num, d); return s === '0' || s.startsWith('−') ? s : '+' + s; };
+
+        // Ren text med variabler i kursiv: ΔU, Q, W, T får kursiv bokstav.
+        const Fx = ({ text }) => {
+            const delar = [];
+            const re = /(Δ)?(?<![\p{L}\d])([QWUT])(?![\p{L}\d])/gu;
+            let sist = 0, mm, n = 0;
+            while ((mm = re.exec(text))) {
+                if (mm.index > sist) delar.push(text.slice(sist, mm.index));
+                delar.push(<span key={n++}>{mm[1] || ''}<em>{mm[2]}</em></span>);
+                sist = re.lastIndex;
+            }
+            delar.push(text.slice(sist));
+            return <React.Fragment>{delar}</React.Fragment>;
+        };
+
+        const COL = {
+            ink:   '#0f1620',
+            soft:  'rgba(15,22,32,0.7)',
+            Q:     '#d9480f',
+            W:     '#2563c9',
+            U:     '#7c3aed',
+            grans: '#c8324a',
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  SCENENS GEOMETRI (viewBox 1000 × 660)
+        // ════════════════════════════════════════════════════════
+        const VB_W = 1000, VB_H = 660;
+        const BANK = 590;
+        const SK = 1000;                     // px per meter
+        const CX0 = 200, CX1 = 360, CB = 520, CTOPP = 100;
+        const KOLV_H = 18, VIKT_H = 14;
+        const BRICKA = 10;                   // joule per bricka
+        const BIN = { x0: 520, per: 12, s: 15, botten: 520 };
+        const NPART = 34;
+
+        const kolvY = (L) => CB - L * SK;     // kolvens undersida
+        const binPos = (i) => ({ x: BIN.x0 + (i % BIN.per) * BIN.s, y: BIN.botten - (Math.floor(i / BIN.per) + 1) * BIN.s });
+
+        // Partiklarna: rent visuella, med en fart som följer temperaturen.
+        function nyaPartiklar(L) {
+            const top = kolvY(L) + 4;
+            return Array.from({ length: NPART }, () => {
+                const a = Math.random() * 2 * Math.PI;
+                return { x: CX0 + 6 + Math.random() * (CX1 - CX0 - 12), y: top + Math.random() * Math.max(4, CB - top - 8),
+                         ux: Math.cos(a), uy: Math.sin(a), f: 0.55 + Math.random() * 0.9 };
+            });
+        }
+        function flyttaPartiklar(ps, L, T, dt) {
+            const top = kolvY(L) + 3, fart = 140 * Math.sqrt(T / 293.15);
+            for (const q of ps) {
+                q.x += q.ux * fart * q.f * dt; q.y += q.uy * fart * q.f * dt;
+                if (q.x < CX0 + 4) { q.x = CX0 + 4; q.ux = Math.abs(q.ux); }
+                if (q.x > CX1 - 4) { q.x = CX1 - 4; q.ux = -Math.abs(q.ux); }
+                if (q.y > CB - 4) { q.y = CB - 4; q.uy = -Math.abs(q.uy); }
+                if (q.y < top + 1) { q.y = top + 1; q.uy = Math.abs(q.uy); }
+            }
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  RITDELAR
+        // ════════════════════════════════════════════════════════
+        // Pil med rakt avslutat skaft som slutar vid huvudets bas.
+        const Pil = ({ x1, y1, x2, y2, color, width = 4.5, head = 15, dash = false, edge = false, opacity = 1 }) => {
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 2) return null;
+            const ux = (x2 - x1) / len, uy = (y2 - y1) / len;
+            const hd = Math.min(head, len * 0.9);
+            const bx = x2 - ux * hd, by = y2 - uy * hd;
+            const hw = hd * 0.48;
+            const p1 = `${bx - uy * hw},${by + ux * hw}`;
+            const p2 = `${bx + uy * hw},${by - ux * hw}`;
+            const kant = 'rgba(15,22,32,0.5)';
+            return (
+                <g opacity={opacity}>
+                    {edge && <line x1={x1} y1={y1} x2={bx} y2={by} stroke={kant} strokeWidth={width + 3} strokeLinecap="butt" />}
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="butt" strokeDasharray={dash ? '7 5' : undefined} />
+                    <polygon points={`${x2},${y2} ${p1} ${p2}`} fill={color}
+                             stroke={edge ? kant : 'none'} strokeWidth={edge ? 1.6 : 0} strokeLinejoin="round" />
+                </g>
+            );
+        };
+
+        // Beteckning med index: F, Fₛ, F₁ … Variabeln kursiv, indexet rakt.
+        const Bet = ({ x, y, sym, idx, color, size = 18, anchor = 'start', weight = 600 }) => (
+            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}
+                  fontFamily="Poppins, sans-serif">
+                <tspan fontStyle="italic">{sym}</tspan>
+                {idx != null && <tspan fontSize={size * 0.68} dy={size * 0.25}>{idx}</tspan>}
+            </text>
+        );
+
+        // En bricka: en liten ruta i energins färg.
+        const Bricka = ({ x, y, c, op = 1 }) => <rect x={x + 1} y={y + 1} width={BIN.s - 2} height={BIN.s - 2} rx="2.5" fill={c} opacity={op} stroke="rgba(15,22,32,0.35)" strokeWidth="0.8" />;
+
+        // Handen som trycker ned kolven ovanifrån.
+        const TryckHand = ({ x, y }) => (
+            <g transform={`translate(${x} ${y})`}>
+                <path d="M -16 -78 L -12 -30 L 12 -30 L 16 -78 Z" fill="#3d5a80" stroke="#2b4160" strokeWidth="1.3" strokeLinejoin="round" />
+                <path d="M -20 -32 Q -22 -12 -14 -2 L 14 -2 Q 22 -12 20 -32 Z" fill="#ebbf9b" stroke="#a8724c" strokeWidth="1.3" strokeLinejoin="round" />
+                {[-10, -3, 4, 11].map((fx) => <line key={fx} x1={fx} y1="-14" x2={fx} y2="-3" stroke="#a8724c" strokeWidth="0.9" />)}
+            </g>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  SCENEN
+        // ════════════════════════════════════════════════════════
+        const Scen = ({ st, cfg, partiklar, flyg, binAntal, show, svgRef, nu }) => {
+            const T = M.temp(st), p = M.tryck(st), yK = kolvY(st.L);
+            const varme = cfg.isolerad ? 0 : cfg.P;
+            const glod = varme > 0 ? `rgba(220,60,20,${0.25 + 0.6 * Math.min(1, varme / 30)})` : varme < 0 ? `rgba(40,110,220,${0.25 + 0.6 * Math.min(1, -varme / 30)})` : '#9ca3af';
+            // gasens färg följer temperaturen, svagt
+            const tf = Math.max(0, Math.min(1, (T - 200) / 500));
+            const gas = `rgb(${Math.round(225 + 25 * tf)},${Math.round(235 - 45 * tf)},${Math.round(245 - 85 * tf)})`;
+            const nV = cfg.vikter / 5;
+            const viktTopp = yK - KOLV_H - nV * VIKT_H;
+            // källornas punkter för brickorna
+            const qKalla = { x: (CX0 + CX1) / 2 - 7, y: CB + 14 };
+            const wKalla = { x: CX1 + 8, y: yK - KOLV_H / 2 - 7 };
+            const binTopp = (i) => binPos(Math.max(0, i));
+
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet" role="img"
+                     aria-label="En glascylinder med gas och en kolv står på en värmeplatta. Joulebrickor flyttas mellan värmeplattan, kolven och ett fack för gasens inre energi, så att första huvudsatsen ΔU = Q + W syns som ett energiflöde.">
+                    <defs>
+                        <linearGradient id="vagg" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#f7f2e8" /><stop offset="1" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <pattern id="mantel" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                            <rect width="8" height="8" fill="#e5ddd0" /><line x1="0" y1="0" x2="0" y2="8" stroke="#a8a29e" strokeWidth="3" />
+                        </pattern>
+                    </defs>
+                    <rect x="0" y="0" width={VB_W} height={VB_H} fill="url(#vagg)" />
+                    <rect x="20" y={BANK} width="960" height="12" fill="#cbb48c" stroke="#8a6230" strokeWidth="1" />
+
+                    {/* värmeplattan */}
+                    <rect x={CX0 - 30} y={CB + 6} width={CX1 - CX0 + 60} height="24" rx="4" fill="#4b5563" />
+                    <rect x={CX0 - 22} y={CB + 8} width={CX1 - CX0 + 44} height="8" rx="2" fill={glod} />
+                    <rect x={CX0 - 18} y={CB + 30} width="16" height={BANK - CB - 30} fill="#6b7280" />
+                    <rect x={CX1 + 2} y={CB + 30} width="16" height={BANK - CB - 30} fill="#6b7280" />
+                    <text x={CX0 - 40} y={CB + 24} textAnchor="end" fontSize="14" fontWeight="600" fill={cfg.isolerad ? COL.soft : COL.Q} fontFamily="Poppins, sans-serif">
+                        {cfg.isolerad ? 'isolerad' : `värmeplatta ${fmtT(cfg.P, 0)} W`}
+                    </text>
+
+                    {/* gasen och partiklarna */}
+                    <rect x={CX0} y={yK} width={CX1 - CX0} height={CB - yK} fill={gas} />
+                    {partiklar.map((q, i) => <circle key={i} cx={q.x} cy={q.y} r="3.4" fill="#475569" />)}
+
+                    {/* cylindern och manteln */}
+                    {cfg.isolerad && (
+                        <g>
+                            <rect x={CX0 - 18} y={CTOPP + 20} width="14" height={CB - CTOPP - 14} fill="url(#mantel)" stroke="#78716c" strokeWidth="1" />
+                            <rect x={CX1 + 4} y={CTOPP + 20} width="14" height={CB - CTOPP - 14} fill="url(#mantel)" stroke="#78716c" strokeWidth="1" />
+                            <rect x={CX0 - 18} y={CB} width={CX1 - CX0 + 36} height="8" fill="url(#mantel)" stroke="#78716c" strokeWidth="1" />
+                        </g>
+                    )}
+                    <path d={`M ${CX0 - 2} ${CTOPP} L ${CX0 - 2} ${CB + 2} L ${CX1 + 2} ${CB + 2} L ${CX1 + 2} ${CTOPP}`} fill="none" stroke="#5b7083" strokeWidth="3" strokeLinejoin="round" />
+
+                    {/* kolven, spärren och vikterna */}
+                    <rect x={CX0} y={yK - KOLV_H} width={CX1 - CX0} height={KOLV_H} fill="#6b7280" stroke="#374151" strokeWidth="1.2" />
+                    {Array.from({ length: nV }, (_, i) => (
+                        <g key={i}>
+                            <rect x={(CX0 + CX1) / 2 - 50} y={yK - KOLV_H - (i + 1) * VIKT_H} width="100" height={VIKT_H - 1} rx="2" fill="#57534e" stroke="#292524" strokeWidth="1" />
+                            <text x={(CX0 + CX1) / 2} y={yK - KOLV_H - i * VIKT_H - 3.5} textAnchor="middle" fontSize="9.5" fill="#f5f5f4" fontFamily="Poppins, sans-serif">5 kg</text>
+                        </g>
+                    ))}
+                    {st.kolv === 'last' && (
+                        <g>
+                            {[CX0 - 2, CX1 + 2].map((sx, i) => <rect key={i} x={i === 0 ? sx - 14 : sx} y={yK - KOLV_H + 2} width="14" height="12" rx="2" fill={COL.grans} stroke="#7f1d1d" strokeWidth="1" />)}
+                            <text x={CX1 + 22} y={yK - KOLV_H + 12} fontSize="13" fontWeight="600" fill={COL.grans} fontFamily="Poppins, sans-serif">spärr</text>
+                        </g>
+                    )}
+                    {st.kolv === 'hand' && <TryckHand x={(CX0 + CX1) / 2} y={nV ? viktTopp : yK - KOLV_H} />}
+
+                    {/* fackets brickor */}
+                    <text x={BIN.x0} y={300} fontSize="14" fontWeight="600" fill={COL.U} fontFamily="Poppins, sans-serif">
+                        Inre energi <tspan fontStyle="italic">U</tspan> = {fmt(st.U, 0)} J
+                    </text>
+                    <line x1={BIN.x0 - 4} y1={BIN.botten + 1} x2={BIN.x0 + BIN.per * BIN.s + 4} y2={BIN.botten + 1} stroke={COL.ink} strokeWidth="1.4" />
+                    {Array.from({ length: Math.max(0, binAntal) }, (_, i) => { const q = binPos(i); return <Bricka key={i} x={q.x} y={q.y} c={COL.U} />; })}
+                    <text x={BIN.x0} y={BIN.botten + 20} fontSize="12" fill={COL.soft} fontFamily="Poppins, sans-serif">en bricka = {BRICKA} J</text>
+
+                    {/* brickor på väg */}
+                    {flyg.map((b) => {
+                        const s = Math.min(1, (nu - b.t0) / 650);
+                        const kalla = b.typ === 'Q' ? qKalla : wKalla;
+                        const mal = binTopp(b.plats);
+                        const [a, z] = b.in ? [kalla, mal] : [mal, b.typ === 'Q' ? { x: qKalla.x, y: CB + 40 } : { x: wKalla.x + 40, y: wKalla.y - 60 }];
+                        const ux = a.x + (z.x - a.x) * s, uy = a.y + (z.y - a.y) * s - Math.sin(Math.PI * s) * 70;
+                        return <Bricka key={b.id} x={ux} y={uy} c={b.typ === 'Q' ? COL.Q : COL.W} op={b.in ? 1 : 1 - 0.6 * s} />;
+                    })}
+
+                    {/* räkneverket */}
+                    <g fontFamily="Poppins, sans-serif">
+                        <text x="740" y="200" fontSize="15" fill={COL.Q} fontWeight="600"><tspan fontStyle="italic">Q</tspan> = {fmtT(st.Q, 0)} J</text>
+                        <text x="740" y="226" fontSize="13" fill={COL.soft}>värme till gasen</text>
+                        <text x="740" y="262" fontSize="15" fill={COL.W} fontWeight="600"><tspan fontStyle="italic">W</tspan> = {fmtT(st.W, 0)} J</text>
+                        <text x="740" y="288" fontSize="13" fill={COL.soft}>arbete på gasen</text>
+                        <line x1="740" y1="304" x2="975" y2="304" stroke={COL.ink} strokeWidth="1.2" />
+                        <text x="740" y="332" fontSize="17" fill={COL.U} fontWeight="700">Δ<tspan fontStyle="italic">U</tspan> = <tspan fontStyle="italic">Q</tspan> + <tspan fontStyle="italic">W</tspan> = {fmtT(st.U - st.U0, 0)} J</text>
+                    </g>
+
+                    {/* p–V-diagrammet */}
+                    {show.pv && (() => {
+                        const D = { x0: 770, x1: 975, y0: 495, y1: 385 };
+                        const Vmax = M.A * M.L_MAX, pmax = 500000;
+                        const dx = (V) => D.x0 + (D.x1 - D.x0) * V / Vmax, dy = (pp) => D.y0 - (D.y0 - D.y1) * Math.min(pp, pmax) / pmax;
+                        const spar = st.pv.concat([[M.volym(st), M.pKolv(st)]]);
+                        const linje = spar.map(([V, pp], i) => `${i ? 'L' : 'M'} ${dx(V)} ${dy(pp)}`).join(' ');
+                        const yta = `${linje} L ${dx(spar[spar.length - 1][0])} ${D.y0} L ${dx(spar[0][0])} ${D.y0} Z`;
+                        return (
+                            <g fontFamily="Poppins, sans-serif">
+                                <text x={D.x0} y={D.y1 - 24} fontSize="13" fontWeight="600" fill={COL.ink}>Trycket och volymen</text>
+                                <path d={yta} fill="rgba(37,99,201,0.15)" />
+                                <line x1={D.x0} y1={D.y0} x2={D.x1 + 6} y2={D.y0} stroke={COL.ink} strokeWidth="1.2" />
+                                <polygon points={`${D.x1 + 10},${D.y0} ${D.x1 + 2},${D.y0 - 4} ${D.x1 + 2},${D.y0 + 4}`} fill={COL.ink} />
+                                <line x1={D.x0} y1={D.y0} x2={D.x0} y2={D.y1 - 6} stroke={COL.ink} strokeWidth="1.2" />
+                                <polygon points={`${D.x0},${D.y1 - 10} ${D.x0 - 4},${D.y1 - 2} ${D.x0 + 4},${D.y1 - 2}`} fill={COL.ink} />
+                                <text x={D.x0 + 8} y={D.y1 - 2} fontSize="12" fill={COL.soft}><tspan fontStyle="italic">p</tspan> (kPa)</text>
+                                <text x={D.x1} y={D.y0 + 30} textAnchor="end" fontSize="12" fill={COL.soft}><tspan fontStyle="italic">V</tspan> (liter)</text>
+                                {[250, 500].map((kp) => <text key={kp} x={D.x0 - 5} y={dy(kp * 1000) + 4} textAnchor="end" fontSize="10" fill={COL.soft}>{kp}</text>)}
+                                {[3, 6].map((l) => <text key={l} x={dx(l / 1000)} y={D.y0 + 14} textAnchor="middle" fontSize="10" fill={COL.soft}>{l}</text>)}
+                                <path d={linje} fill="none" stroke={COL.W} strokeWidth="2" />
+                                <circle cx={dx(M.volym(st))} cy={dy(M.pKolv(st))} r="4.5" fill={COL.grans} />
+                                <text x={D.x0 - 30} y={D.y0 + 48} fontSize="12" fill={COL.soft}>Ytan under kurvan är lika stor som arbetet.</text>
+                                <text x={D.x0 - 30} y={D.y0 + 64} fontSize="12" fill={COL.soft}>Vid expansion är <tspan fontStyle="italic">W</tspan> negativt.</text>
+                            </g>
+                        );
+                    })()}
+
+                    {/* avläsningsraden */}
+                    <g fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif">
+                        <text x="40" y="635"><tspan fontStyle="italic">T</tspan> = {fmt(T - 273.15, 0)} °C ({fmt(T, 0)} K)</text>
+                        <text x="300" y="635"><tspan fontStyle="italic">p</tspan> = {fmt(p / 1000, 1)} kPa</text>
+                        <text x="520" y="635"><tspan fontStyle="italic">V</tspan> = {fmt(M.volym(st) * 1000, 2)} liter</text>
+                        <text x="760" y="635">vikter: {fmt(cfg.vikter, 0)} kg</text>
+                    </g>
+                </svg>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  REGLAGE
+        // ════════════════════════════════════════════════════════
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, disabled, color = 'var(--lab-accent, #c8324a)' }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').replace('−', '-').trim();
+                if (norm === '' || norm === '-' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt} disabled={disabled}
+                           style={{ color }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+        const Slider = ({ label, value, min, max, step, onChange, disabled, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 112, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, disabled, valueNode }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    {valueNode}
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        // Formelkortet: varje storhet har sitt namn ovanför.
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  FORMELKORTET
+        // ════════════════════════════════════════════════════════
+        const FormelKort = ({ st, cfg }) => {
+            const dU = st.U - st.U0;
+            const T = M.temp(st), T0 = st.U0 / M.CV;
+            let lage;
+            if (st.kolv === 'last') lage = 'Kolven är låst: volymen ändras inte, så inget nytt arbete utförs och W ändras inte.';
+            else if (st.kolv === 'hand') lage = 'Handen trycker ned kolven och utför ett positivt arbete på gasen, så energi går in i den.';
+            else lage = 'Kolven är fri: när gasen expanderar trycker den upp kolven, vikterna och luften ovanför, och arbetet på gasen blir negativt.';
+            if (cfg.isolerad) lage += ' Cylindern är isolerad, så ingen ny värme går in eller ut och Q ändras inte.';
+            const trend = Math.abs(T - T0) < 0.5 ? 'Temperaturen är densamma som vid starten.'
+                : T > T0 ? `Gasen är ${fmt(T - T0, 0)} K varmare än vid starten.` : `Gasen är ${fmt(T0 - T, 0)} K kallare än vid starten.`;
+            return (
+                <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                    <div className="flex flex-wrap items-center gap-x-8 gap-y-3 mb-3">
+                        <div className="flex items-center gap-x-3">
+                            <Vbl label="Ändring av inre energi">Δ<em>U</em></Vbl>
+                            <span className="fnum">=</span>
+                            <Vbl label="Värme till gasen"><em>Q</em></Vbl>
+                            <span className="fnum">+</span>
+                            <Vbl label="Arbete på gasen"><em>W</em></Vbl>
+                        </div>
+                        <div className="text-sm" style={{ color: 'var(--lab-ink-soft)', maxWidth: 540 }}>
+                            Termodynamikens första huvudsats: energi kan varken skapas eller förstöras, bara omvandlas. Den inre energin ändras
+                            genom värme och genom arbete. Energi som går in i gasen räknas positiv, och energi som går ut räknas negativ.
+                        </div>
+                    </div>
+                    <div className="pt-3 fnum-live" style={{ borderTop: '1px solid var(--lab-line, rgba(15,22,32,0.14))' }}>
+                        <div>Δ<em>U</em> = <em>Q</em> + <em>W</em> = ({fmtT(st.Q, 0)} J) + ({fmtT(st.W, 0)} J) = {fmtT(dU, 0)} J</div>
+                        <div className="mt-1 text-base" style={{ color: 'var(--lab-ink-soft)' }}><Fx text={lage} /> <Fx text={trend} /></div>
+                    </div>
+                </div>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  FÄRDIGA FÖRSÖK OCH GISSA-LÄGET
+        // ════════════════════════════════════════════════════════
+        // L och T är startläget; kolv, hand och tid styr förloppet.
+        const FORSOK = [
+            { id: 'last', namn: 'Värm med låst kolv', sub: 'W = 0, så ΔU = Q', cfg: { vikter: 0, P: 20, isolerad: false, T: 293.15, kolv: 'last', tid: 12 } },
+            { id: 'pump', namn: 'Cykelpumpen', sub: 'isolerad, kolven trycks ned snabbt', cfg: { vikter: 0, P: 0, isolerad: true, T: 293.15, kolv: 'hand', mal: 0.12, fart: 0.5, tid: 2 } },
+            { id: 'lyft', namn: 'Gasen trycker upp kolven', sub: 'isolerad, med 20 kg vikter, spärren släpps', cfg: { vikter: 20, P: 0, isolerad: true, T: 450, L: 0.1, kolv: 'fri', tid: 4 } },
+            { id: 'fri',  namn: 'Värm med fri kolv', sub: 'värmen blir dels inre energi, dels arbete', cfg: { vikter: 10, P: 20, isolerad: false, T: 293.15, kolv: 'fri', tid: 12 } },
+            { id: 'kyl',  namn: 'Tryck ihop och kyl', sub: 'temperaturen ändras bara lite', cfg: { vikter: 0, P: -27.5, isolerad: false, T: 293.15, kolv: 'hand', mal: 0.12, fart: 0.0133, tid: 6.0 } },
+        ];
+        const slump = (a) => a[Math.floor(Math.random() * a.length)];
+        function nyUppgift(typ) {
+            let Q, W;
+            do { Q = slump([80, 50, 120, 0, -40, -60]); W = slump([30, 60, 0, -30, -50, -90]); } while (Q === 0 && W === 0);
+            if (Q !== 0 && Math.random() < 0.2) W = -Q;      // ibland tar de ut varandra
+            return { typ, Q, W };
+        }
+        function beskriv(Q, W) {
+            const q = Q > 0 ? `Gasen får ${fmt(Q, 0)} J värme` : Q < 0 ? `Gasen avger ${fmt(-Q, 0)} J värme` : 'Cylindern är isolerad, så ingen värme går in eller ut';
+            const w = W > 0 ? `Samtidigt trycks kolven ned, så att ett arbete på ${fmt(W, 0)} J utförs på gasen`
+                : W < 0 ? (Q !== 0 ? `Samtidigt trycker den upp kolven och utför ett arbete på ${fmt(-W, 0)} J` : `Gasen trycker upp kolven och utför ett arbete på ${fmt(-W, 0)} J`)
+                : 'Kolven är låst';
+            return `${q}. ${w}.`;
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  HUVUDAPP
+        // ════════════════════════════════════════════════════════
+        const START_T = 293.15;
+        const App = () => {
+            const [vikter, setVikter] = useState(0);
+            const [P, setP] = useState(20);
+            const [isolerad, setIsolerad] = useState(false);
+            const [fart, setFart] = useState('snabbt');
+            const [show, setShow] = useState({ pv: false });
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [kor, setKor] = useState(false);
+            const [, setFrame] = useState(0);
+            const [gissa, setGissa] = useState(null);
+            const [svarTxt, setSvarTxt] = useState('');
+            const [svarStatus, setSvarStatus] = useState(null);
+            const [poang, setPoang] = useState({ ratt: 0, totalt: 0, svit: 0 });
+
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const cfg = { vikter, P, isolerad };
+            const cfgRef = useRef(cfg); cfgRef.current = cfg;
+            const stRef = useRef(null);
+            const partRef = useRef(null);
+            const flygRef = useRef([]);
+            const binRef = useRef({ q: 0, w: 0 });   // landade brickor (med tecken) av respektive slag
+            const korRef = useRef(false);
+            const rafRef = useRef(null);
+            const lastRef = useRef(null);
+            const stoppRef = useRef(null);
+            const idRef = useRef(0);
+
+            const nollstall = (L, T, kolv) => {
+                const st = M.nytt(L, T); st.kolv = kolv;
+                stRef.current = st;
+                partRef.current = nyaPartiklar(L);
+                flygRef.current = []; binRef.current = { q: 0, w: 0 };
+                lastRef.current = null; stoppRef.current = null;
+                setFrame((n) => n + 1);
+            };
+            if (!stRef.current) {
+                const L = M.jamviktL(cfg, START_T);
+                stRef.current = M.nytt(L, START_T);
+                partRef.current = nyaPartiklar(L);
+            }
+
+            // brickorna: en ny bricka skickas när Q eller W har ändrats med en hel bricka
+            const skickaBrickor = (nu) => {
+                const st = stRef.current, b = binRef.current;
+                const paVag = (typ, dir) => flygRef.current.filter((f) => f.typ === typ && f.in === dir).length;
+                for (const typ of ['Q', 'W']) {
+                    const mal = Math.round(st[typ] / BRICKA);
+                    const har = b[typ.toLowerCase()] + paVag(typ, true) - paVag(typ, false);
+                    const senast = flygRef.current.filter((f) => f.typ === typ).reduce((m, f) => Math.max(m, f.t0), -1e9);
+                    if (mal !== har && nu - senast > 45) {
+                        const inn = mal > har;
+                        const totalt = Math.round(st.U0 / BRICKA) + b.q + b.w;
+                        // en bricka ut lämnar facket direkt, en bricka in får sin plats när den landar
+                        if (!inn) b[typ.toLowerCase()] -= 1;
+                        flygRef.current.push({ id: idRef.current++, typ, in: inn, t0: nu, plats: inn ? totalt + paVag('Q', true) + paVag('W', true) : totalt - 1 });
+                    }
+                }
+                flygRef.current = flygRef.current.filter((f) => {
+                    if (nu - f.t0 < 650) return true;
+                    if (f.in) b[f.typ.toLowerCase()] += 1;
+                    return false;
+                });
+            };
+
+            const loop = (ts) => {
+                if (lastRef.current == null) lastRef.current = ts;
+                const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
+                lastRef.current = ts;
+                const st = stRef.current;
+                if (korRef.current) {
+                    M.steg(st, cfgRef.current, dt);
+                    const T = M.temp(st);
+                    if ((stoppRef.current != null && st.t >= stoppRef.current) || T > 1000 || T < 80) { korRef.current = false; setKor(false); }
+                }
+                flyttaPartiklar(partRef.current, st.L, M.temp(st), dt);
+                skickaBrickor(ts);
+                setFrame((n) => n + 1);
+                rafRef.current = requestAnimationFrame(loop);
+            };
+            useEffect(() => {
+                rafRef.current = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(rafRef.current);
+            }, []);
+
+            // vikterna ändras: i vila hamnar en fri kolv i sitt nya jämviktsläge
+            useEffect(() => {
+                const st = stRef.current;
+                if (!korRef.current && st.t === 0 && st.kolv !== 'hand') nollstall(M.jamviktL(cfg, START_T), START_T, st.kolv);
+            }, [vikter]);
+
+            const starta = () => { korRef.current = true; setKor(true); };
+            const pausa = () => { korRef.current = false; setKor(false); };
+            const borjaOm = () => { korRef.current = false; setKor(false); nollstall(M.jamviktL(cfg, START_T), START_T, 'last'); };
+            const sattKolv = (k) => {
+                const st = stRef.current;
+                st.kolv = k;
+                if (k === 'hand') {
+                    st.handMal = Math.max(M.L_MIN + 0.01, st.L - 0.10);
+                    st.handFart = fart === 'snabbt' ? 0.5 : 0.02;
+                    starta();
+                }
+                if (k === 'fri' && !korRef.current) starta();
+                setFrame((n) => n + 1);
+            };
+
+            const korForsok = (f) => {
+                korRef.current = false; setKor(false);
+                const c = f.cfg;
+                setVikter(c.vikter); setP(c.P); setIsolerad(c.isolerad);
+                const cf = { vikter: c.vikter, P: c.P, isolerad: c.isolerad };
+                const L = c.L != null ? c.L : M.jamviktL(cf, c.T);
+                setTimeout(() => {
+                    // kolven står låst en kort stund, så att man hinner se startläget
+                    nollstall(L, c.T, 'last');
+                    stoppRef.current = c.tid;
+                    setTimeout(() => {
+                        const st = stRef.current;
+                        st.kolv = c.kolv;
+                        if (c.kolv === 'hand') { st.handMal = c.mal; st.handFart = c.fart; }
+                        korRef.current = true; setKor(true);
+                    }, 600);
+                }, 40);
+            };
+
+            // ── Gissa-läget ──
+            const startaGissa = (typ) => { setGissa(nyUppgift(typ)); setSvarTxt(''); setSvarStatus(null); };
+            const kolla = (val) => {
+                const t = gissa, dU = t.Q + t.W;
+                const tecken = `Arbetet räknas ${t.W < 0 ? 'negativt eftersom gasen utför det' : t.W > 0 ? 'positivt eftersom det utförs på gasen' : 'som noll'}: W = ${fmtT(t.W, 0)} J. ΔU = Q + W = (${fmtT(t.Q, 0)} J) + (${fmtT(t.W, 0)} J) = ${fmtT(dU, 0)} J.`;
+                let ratt, text;
+                if (t.typ === 'riktning') {
+                    const facit = dU > 0 ? 'varmare' : dU < 0 ? 'kallare' : 'lika';
+                    ratt = val === facit;
+                    text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} ${tecken} ${dU > 0 ? 'Den inre energin ökar, så gasen blir varmare.' : dU < 0 ? 'Den inre energin minskar, så gasen blir kallare.' : 'Den inre energin är oförändrad, så temperaturen är densamma.'}`;
+                } else {
+                    const n = parseFloat(svarTxt.replace(/\s| /g, '').replace(',', '.').replace('−', '-').replace('+', ''));
+                    if (!isFinite(n)) { setSvarStatus({ ratt: false, text: 'Skriv in ett tal, till exempel 50 eller −30.' }); return; }
+                    ratt = Math.abs(n - dU) < 0.5;
+                    text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} ${tecken}`;
+                    if (!ratt && Math.abs(n - (t.Q - t.W)) < 0.5) text += t.W < 0 ? ' Du fick fel tecken på arbetet. När gasen utför arbete förlorar den energi.' : ' Du fick fel tecken på arbetet. Arbete på gasen tillför energi, så det läggs till.';
+                    else if (!ratt && Math.abs(n + dU) < 0.5 && dU !== 0) text += ' Du fick fel tecken på svaret.';
+                }
+                setSvarStatus({ ratt, text });
+                setPoang((p) => ({ ratt: p.ratt + (ratt ? 1 : 0), totalt: p.totalt + 1, svit: ratt ? p.svit + 1 : 0 }));
+            };
+            const avslutaGissa = () => { setGissa(null); setSvarStatus(null); };
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(document.fullscreenElement === sceneWrapRef.current || document.webkitFullscreenElement === sceneWrapRef.current);
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => { document.removeEventListener('fullscreenchange', handler); document.removeEventListener('webkitfullscreenchange', handler); };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const st = stRef.current;
+            const b = binRef.current;
+            const binAntal = Math.round(st.U0 / BRICKA) + b.q + b.w;
+            const startEtikett = kor ? 'Pausa' : 'Starta';
+            const startKlick = kor ? pausa : () => { stoppRef.current = null; starta(); };
+
+            const reglage = (Sl, kompakt) => (
+                <Sl label="Värmeplatta <em>P</em> (minus kyler)" value={P} min={-30} max={30} step={1} onChange={setP} disabled={isolerad}
+                    {...(kompakt ? { valueNode: <NumInput value={P} min={-30} max={30} fmtFn={(x) => fmtT(x, 0)} unit="W" disabled={isolerad} onCommit={setP} /> } : {})}>
+                    {!kompakt && <NumInput value={P} min={-30} max={30} fmtFn={(x) => fmtT(x, 0)} unit="W" disabled={isolerad} onCommit={setP} />}
+                </Sl>
+            );
+            const kolvKnappar = (
+                <React.Fragment>
+                    <button className={st.kolv === 'last' ? 'btn-start' : 'btn-toggle'} onClick={() => sattKolv('last')}>Lås kolven</button>
+                    <button className={st.kolv === 'fri' ? 'btn-start' : 'btn-toggle'} onClick={() => sattKolv('fri')}>Släpp kolven</button>
+                    <button className={st.kolv === 'hand' ? 'btn-start' : 'btn-toggle'} onClick={() => sattKolv('hand')} disabled={st.L <= M.L_MIN + 0.015}>Tryck ned kolven</button>
+                </React.Fragment>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        <label><input type="checkbox" checked={show.pv} onChange={() => setShow((s) => ({ ...s, pv: !s.pv }))} /><span><em>p</em>–<em>V</em>-diagram</span></label>
+                        <label><input type="checkbox" checked={isolerad} onChange={() => setIsolerad((x) => !x)} /><span>Isolerad cylinder</span></label>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglage(StSlider, true)}</div>
+                                <div className="st-actions">
+                                    {kolvKnappar}
+                                    <button className="btn-start" onClick={startKlick}>{startEtikett}</button>
+                                    <button className="btn-toggle" onClick={borjaOm}>Börja om</button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-7xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Termodynamikens första huvudsats
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Termodynamikens första huvudsats</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            Gasen i cylindern har en <strong>inre energi</strong>. I en sådan här gas är den bara partiklarnas rörelseenergi. Den kan ändras på två sätt: genom
+                            <strong> värme</strong> från värmeplattan och genom <strong>arbete</strong> när kolven rör sig. Joulebrickorna visar vart
+                            energin tar vägen. Ingen bricka uppstår och ingen försvinner. Brickorna flyttas bara mellan värmeplattan, kolven och gasen.
+                        </p>
+
+                        <FormelKort st={st} cfg={cfg} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 xl:w-3/4 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <Scen st={st} cfg={cfg} partiklar={partRef.current} flyg={flygRef.current} binAntal={binAntal} show={show} svgRef={svgRef} nu={performance.now()} />
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Cylindern innehåller en enatomig ideal gas, och partiklarnas fart i bilden följer temperaturen. Kolven har massan 2 kg och sluter tätt.
+                                    Ovanför den trycker luften med 101,3 kPa. När kolven rör sig fritt bromsas den av gasen själv, så att den slutar
+                                    svänga. Den energin stannar i gasen och ingår i arbetet <em>W</em>, som är lika med −<em>p</em><sub>yttre</sub> · Δ<em>V</em> när kolven har stannat.
+                                    Utan isolering går värme mellan cylindern och rummet, och den räknas in i <em>Q</em>.
+                                </p>
+                            </div>
+
+                            <div className="lg:w-1/3 xl:w-1/4 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Kolven</div>
+                                    <div className="flex flex-col gap-2 mb-3">{kolvKnappar}</div>
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Handen trycker</div>
+                                    <div className="mode-seg mb-3">
+                                        {[['snabbt', 'Snabbt'], ['langsamt', 'Långsamt']].map(([k, n]) => <button key={k} className={fart === k ? 'active' : ''} onClick={() => setFart(k)}>{n}</button>)}
+                                    </div>
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Vikter på kolven</div>
+                                    <div className="mode-seg">
+                                        {[0, 5, 10, 20].map((v) => <button key={v} className={vikter === v ? 'active' : ''} onClick={() => setVikter(v)}>{v} kg</button>)}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    {!isFullscreen && reglage(Slider, false)}
+                                    {isFullscreen && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Reglagen finns i rutan uppe till höger i fullskärm.</p>}
+                                    <label className="flex items-center gap-2 text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                        <input type="checkbox" checked={isolerad} onChange={() => setIsolerad((x) => !x)} /> Isolerad cylinder (ingen värme in eller ut)
+                                    </label>
+                                    <div className="flex gap-2 mt-2">
+                                        <button className="btn-start flex-1" onClick={startKlick}>{startEtikett}</button>
+                                        <button className="btn-toggle flex-1" onClick={borjaOm}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Färdiga försök</div>
+                                    <div className="forsok-lista">
+                                        {FORSOK.map((f) => (
+                                            <button key={f.id} className="forsok" onClick={() => korForsok(f)}>
+                                                {f.namn}<span className="sub"><Fx text={f.sub} /></span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flbl" style={{ textAlign: 'left' }}>Gissa-läge</div>
+                                        {poang.totalt > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>{poang.ratt} av {poang.totalt} rätt{poang.svit > 1 ? `, ${poang.svit} i rad` : ''}</div>}
+                                    </div>
+                                    {!gissa && (
+                                        <div className="flex flex-col gap-2">
+                                            <button className="btn-toggle" onClick={() => startaGissa('riktning')}>Varmare eller kallare?</button>
+                                            <button className="btn-toggle" onClick={() => startaGissa('du')}>Hur mycket ändras den inre energin?</button>
+                                        </div>
+                                    )}
+                                    {gissa && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                {beskriv(gissa.Q, gissa.W)} {gissa.typ === 'riktning' ? 'Blir gasen varmare, kallare eller lika varm?' : <span>Hur mycket ändras gasens inre energi?</span>}
+                                            </p>
+                                            {gissa.typ === 'riktning' ? (
+                                                <div className="mode-seg mb-2">
+                                                    {[['varmare', 'Varmare'], ['kallare', 'Kallare'], ['lika', 'Lika varm']].map(([k, n]) => <button key={k} disabled={svarStatus !== null} onClick={() => kolla(k)}>{n}</button>)}
+                                                </div>
+                                            ) : (
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span>Δ<em>U</em> =</span>
+                                                    <input className="gissa-in" type="text" inputMode="decimal" value={svarTxt} disabled={svarStatus !== null}
+                                                           onChange={(e) => setSvarTxt(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && svarStatus === null) kolla(); }} />
+                                                    <span>J</span>
+                                                    <button className="btn-start" onClick={() => kolla()} disabled={svarStatus !== null}>Kolla</button>
+                                                </div>
+                                            )}
+                                            {svarStatus && <p className="text-sm mb-2" style={{ color: svarStatus.ratt ? '#15803d' : 'var(--lab-accent)' }}><Fx text={svarStatus.text} /></p>}
+                                            <div className="flex gap-2">
+                                                {svarStatus && <button className="btn-toggle flex-1" onClick={() => startaGissa(gissa.typ)}>Ny uppgift</button>}
+                                                <button className="btn-toggle flex-1" onClick={avslutaGissa}>Avsluta</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Två vägar in och ut</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Värme <em>Q</em> går över när det finns en temperaturskillnad, till exempel mellan värmeplattan och gasen. Arbete <em>W</em>
+                                    utförs när en kraft flyttar kolven. Båda ändrar gasens inre energi, och båda mäts i joule.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Tecknen</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Energi som går in i gasen räknas positiv: värme från plattan och arbete när kolven trycks ned. Energi som går ut räknas
+                                    negativ: värme som gasen avger och arbete som gasen själv utför när den trycker upp kolven.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>I vardagen</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    En cykelpump blir varm när luften trycks ihop snabbt: arbetet blir inre energi, utan att någon värme tillförs. Luft som pyser ut ur en cykelslang
+                                    känns kall: gasen expanderar och utför arbete mot den omgivande luften.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Det enda sättet att höja temperaturen på en gas är att tillföra värme.”</strong> Nej. Arbete fungerar lika bra: tryck ihop gasen,
+                                    så blir den varmare, som i cykelpumpen.</li>
+                                <li><strong>”Värme och temperatur är samma sak.”</strong> Nej. Värme är energi som går över. Temperatur är ett mått på hur snabbt
+                                    partiklarna rör sig. Värms gasen med fri kolv stiger temperaturen mindre än med låst kolv, eftersom en del av energin lämnar gasen igen som arbete när den trycker upp kolven och luften.</li>
+                                <li><strong>”En gas som expanderar blir alltid kallare.”</strong> Nej, bara om ingen värme tillförs. Värms gasen samtidigt kan den
+                                    både expandera och bli varmare.</li>
+                                <li><strong>”Energin i gasen tar slut när den svalnar.”</strong> Nej, den lämnar gasen. Brickorna som lämnar facket hamnar som
+                                    värme i plattan eller som arbete på kolven, vikterna och luften ovanför.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

@@ -137,9 +137,9 @@ function korKlart(cfg, maxT = 30) {
 {
     const sida = path.join(__dirname, '..', 'fysik1-arbete-app.html');
     if (fs.existsSync(sida)) {
-        const html = fs.readFileSync(sida, 'utf8');
+        const html = fs.readFileSync(sida, 'utf8').replace(/\r\n/g, '\n');
         const m = html.match(/<script id="arbete-motor">\n([\s\S]*?)<\/script>/);
-        const kalla = fs.readFileSync(path.join(__dirname, 'samarbete-sigbjorn', 'arbete-motor.js'), 'utf8');
+        const kalla = fs.readFileSync(path.join(__dirname, 'samarbete-sigbjorn', 'arbete-motor.js'), 'utf8').replace(/\r\n/g, '\n');
         sant(m && m[1].trim() === kalla.trim(), 'sidans motor är identisk med arbete-motor.js');
     }
 }

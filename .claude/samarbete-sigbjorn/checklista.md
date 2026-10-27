@@ -22,7 +22,7 @@ simuleringen länkas i katalogen och vars beteckningar den ska följa.
 
 | # | Bokens delkapitel | Fysiklabbet-avsnitt | Idé (preliminär) | 2D/3D | Klar |
 |---|---|---|---|---|---|
-| 1 | 5.1 Arbeid | fy1-4.1 Energi, intro och arbete | Dra en låda med en kraft som kan vinklas: *W* = *F* · *s* · cos *α*, arbetet som area under *F*–*s*-grafen, nollarbete när kraften är vinkelrät | 2D | [ ] |
+| 1 | 5.1 Arbeid | fy1-4.1 Energi, intro och arbete | Dra en låda med en kraft som kan vinklas: *W* = *F* · *s* · cos *α*, arbetet som area under *F*–*s*-grafen, nollarbete när kraften är vinkelrät | 2D | [x] |
 | 2 | 5.5 Tap av mekanisk energi | fy1-4.9 Arbete med friktion | Släde/vagn med friktion: energistaplar där lägesenergi + rörelseenergi minskar och "värme" växer lika mycket | 2D (3D övervägs) | [ ] |
 | 3 | 5.6 Virkningsgrad og effekt | fy1-4.5 Effekt, fy1-4.6 Verkningsgrad | Motor/kran som lyfter last: tillförd och nyttig energi, effekt som energi per tid, verkningsgrad som energiflöde (sankeydiagram) | 2D | [ ] |
 | 4 | 3.7 Sammensatte systemer | fy1-3.10 Trissor | Två kroppar med snöre över trissa (låda på bord + hängande vikt, Atwood): friläggning av varje kropp, gemensam acceleration, spännkraften | 2D | [ ] |
@@ -74,9 +74,21 @@ Tas när del 1 och 2 är klara.
 - [x] Inkopplad: katalog fy1-4.1, `data/simuleringar.js`, `UPDATES`, `verify-navigation.js`
 - [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn
 - [x] Fysikgranskning (agenten pedagog) och språkgranskning (korrekturlasare), rättningarna införda
-- [ ] `node data/build-nyheter-og.js` för sitemapen (väntar på att konflikten i `feed.xml` löses)
+- [x] `node data/build-nyheter-og.js` för sitemapen (körd i en ren worktree på main)
+- [x] Sam testar och godkänner (2026-10-27: startläget i Lyfta gav inget lyft, rättat)
+- [x] Commit och push till `main` (d4fda6fb)
+- [ ] Länken till Sigbjørn
+
+## Status: nr 2, Förlust av mekanisk energi (`fysik1-energiforluster-app.html`)
+
+- [x] Koncept godkänt (2026-10-27): två ramper och läget Dra uppför
+- [x] Rörelsemotorn med test: `node .claude/test-klossbana-motor.js` (källan i `klossbana-motor.js`, inklistrad i sidan)
+- [x] Sidan byggd: U-bana med utbytbara remsor, värmekamera, energidiagram, energifack, tio färdiga försök, gissa-läge i två nivåer, Dra uppför med arbetsruta
+- [x] Inkopplad: katalog fy1-4.9, `data/simuleringar.js`, `UPDATES`, `verify-navigation.js`
+- [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, språk, mobil-scen, fs-btn
+- [x] Fysikgranskning och språkgranskning, rättningarna införda (bland annat att brickorna nu bevaras exakt)
 - [ ] Sam testar och godkänner
-- [ ] Commit och push till `main`
+- [ ] Commit och push till `main` (tillsammans med rättningen i Arbetsbänken: ett försök som väljs medan ett annat pågår startar nu)
 - [ ] Länken till Sigbjørn
 
 ## Process för varje simulering

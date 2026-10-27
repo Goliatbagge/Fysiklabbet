@@ -1385,7 +1385,9 @@
 
             // Färdigt försök: ställ upp och kör.
             const korForsok = (f) => {
-                korRef.current = false;
+                // kor måste gå false → true, annars startas inte animationsloopen om
+                // när ett försök väljs medan ett annat pågår.
+                korRef.current = false; setKor(false);
                 setUtforska(!!f.utforska);
                 setShow((sh) => ({ ...sh, ultra: !f.verkligTid }));
                 const c = f.cfg;

@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Förlust av mekanisk energi — Fysiklabbet</title>
+    <meta name="description" content="En träkloss glider i en bana med två ramper. Byt remsa på den plana sträckan, se med en värmekamera var friktionen gör om mekanisk energi till värme, och dra klossen uppför för att se att arbetet blir lägesenergi plus friktionsvärme.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik1-energiforluster-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Förlust av mekanisk energi — Fysik nivå 1">
+    <meta property="og:description" content="En träkloss glider i en bana med två ramper. Byt remsa på den plana sträckan, se med en värmekamera var friktionen gör om mekanisk energi till värme, och dra klossen uppför för att se att arbetet blir lägesenergi plus friktionsvärme.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik1-energiforluster-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Förlust av mekanisk energi — Fysik nivå 1">
+    <meta name="twitter:description" content="En träkloss glider i en bana med två ramper. Byt remsa på den plana sträckan, se med en värmekamera var friktionen gör om mekanisk energi till värme, och dra klossen uppför för att se att arbetet blir lägesenergi plus friktionsvärme.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+        input[type="range"]:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1;
+                text-align: center; max-width: 150px; }
+        .fnum { color: var(--lab-ink); font-size: 20px; font-family: 'Poppins', sans-serif; }
+        .fnum-live { color: var(--lab-ink); font-size: 17px; font-family: 'Poppins', sans-serif; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 80px; }
+        .num-in { width: 50px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:disabled { opacity: 0.55; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* Scenen: en svg med egen proportion (1000 × 660). Mobilen (sektion 8 i
+           styles-laborans-sim.css) dockar verktygen under den. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1000 / 660;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .handtag { cursor: grab; }
+        .handtag.drar { cursor: grabbing; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 34px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-start {
+            background: var(--lab-accent, #c8324a); color: #fff; border: 1px solid var(--lab-accent, #c8324a);
+            border-radius: 8px; padding: 9px 14px; font-weight: 700; cursor: pointer;
+        }
+        .btn-start:hover:not(:disabled) { filter: brightness(1.06); }
+        .btn-start:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .mode-seg { display: flex; gap: 0; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button {
+            flex: 1; padding: 8px 8px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .mode-seg button:last-child { border-right: none; }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+
+        /* Färdiga försök */
+        .forsok-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .forsok {
+            text-align: left; padding: 7px 9px; border-radius: 8px; cursor: pointer;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; font-weight: 600; color: var(--lab-ink, #0f1620); line-height: 1.25;
+        }
+        .forsok .sub { display: block; font-size: 11.5px; font-weight: 400; color: var(--lab-ink-soft, #3a4151); }
+        .forsok:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .forsok:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* Avläsning */
+        .avl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
+        .avl .v { font-weight: 700; font-size: 16px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+        .avl .l { font-size: 11.5px; color: var(--lab-ink-muted, #5a6170); }
+
+        /* Resultatrutan efter ett försök */
+        .resultat { border-left: 4px solid var(--lab-accent, #c8324a); }
+        .resultat.ratt { border-left-color: #15803d; }
+
+        /* Gissa-läget */
+        .gissa-in { width: 90px; padding: 6px 8px; border-radius: 7px; font-size: 15px;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                    background: #fff; font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .gissa-in:focus { outline: none; border-color: var(--lab-accent, #c8324a); }
+        .kort3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .kort3 button {
+            padding: 8px 6px; border-radius: 8px; cursor: pointer; text-align: center;
+            background: var(--lab-bg, #f3eee4); border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; line-height: 1.45; color: var(--lab-ink, #0f1620);
+        }
+        .kort3 button:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .kort3 button.vald { border-color: var(--lab-ink, #0f1620); box-shadow: 0 0 0 2px rgba(15,22,32,0.15); }
+        .kort3 button.basta { background: rgba(21,128,61,0.10); border-color: #15803d; }
+        .kort3 .bok { font-weight: 700; font-size: 15px; display: block; margin-bottom: 2px; }
+        .kort3 .stapel { height: 6px; border-radius: 3px; background: #d4930f; margin-top: 5px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+        /* Remsorna på den plana sträckan */
+        .remsor { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+        .remsor button {
+            padding: 6px 4px; border-radius: 8px; cursor: pointer; font-size: 12.5px; font-weight: 600; line-height: 1.2;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .remsor button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+        .remsor button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); border-color: var(--lab-ink, #0f1620); }
+        .remsor button:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script id="klossbana-motor">
+// Rörelsemotorn för simuleringen Förlust av mekanisk energi
+// (fysik1-energiforluster-app.html). Källan bor här och klistras in i sidans
+// <script id="klossbana-motor">; testet (test-klossbana-motor.js) läser den
+// här filen direkt. Håll dem identiska.
+//
+// Banan är en låg U-bana: vänster ramp, plan sträcka, höger ramp. Klossen
+// rör sig längs banan, och läget anges med båglängden u (m):
+//   vänster ramp  u ∈ [−L1, 0]       höjd (−u)·sin α1
+//   plan          u ∈ [0, Lp]        höjd 0
+//   höger ramp    u ∈ [Lp, Lp + L2]  höjd (u − Lp)·sin α2
+// Övergångarna ritas rundade; i motorn byter lutningen tvärt men farten
+// följer med (stöten mot hörnet och den extra normalkraften i rundningen
+// försummas, som i kursen).
+//
+// På varje del är accelerationen konstant: tyngdkraftens komposant längs
+// banan och friktionen F_f = μ · F_N med F_N = m · g · cos α (samma μ för vila
+// och glidning). Varje tidssteg integreras exakt och kortas vid delgränser
+// och när farten byter tecken, så att energibokföringen
+//   E_p + E_k + E_v = konstant
+// stämmer på avrundningsfelet när.
+//
+// Läget 'dra': handen drar klossen uppför vänster ramp med jämn fart.
+// Kraften är parallell med rampen, F = m · g · (sin α + μ · cos α), och
+// arbetet W = F · s blir ΔE_p + E_v.
+(function (root) {
+    const G = 9.82;
+    const DEG = Math.PI / 180;
+    const DRA_FART = 0.4;          // m/s när handen drar uppför
+    const STILL_TID = 0.8;         // s stillastående innan försöket avslutas
+    const CELL = 0.02;             // m per cell i värmekartan
+
+    // Banans mått ur inställningarna.
+    function bana(cfg) {
+        const L1 = cfg.H / Math.sin(cfg.a1 * DEG);
+        const L2 = cfg.H / Math.sin(cfg.a2 * DEG);
+        return { L1, L2, Lp: cfg.Lp, umin: -L1, umax: cfg.Lp + L2 };
+    }
+    // Del, lutning (rad, positiv = höjden ökar med u) och friktionstal vid u.
+    // vid = -1: delen strax före u, +1: strax efter (för gränserna).
+    function del(cfg, u, vid) {
+        const b = bana(cfg);
+        const e = 1e-12 * (vid || 0);
+        const uu = u + e;
+        if (uu < 0) return { namn: 'v', lut: -cfg.a1 * DEG, mu: cfg.muRamp, fran: b.umin, till: 0 };
+        if (uu < b.Lp) return { namn: 'p', lut: 0, mu: cfg.muPlan, fran: 0, till: b.Lp };
+        return { namn: 'h', lut: cfg.a2 * DEG, mu: cfg.muRamp, fran: b.Lp, till: b.umax };
+    }
+    function hojd(cfg, u) {
+        const b = bana(cfg);
+        if (u < 0) return -u * Math.sin(cfg.a1 * DEG);
+        if (u <= b.Lp) return 0;
+        return (u - b.Lp) * Math.sin(cfg.a2 * DEG);
+    }
+    // Läget u på vänster ramp där klossen har höjden h.
+    const uFranHojd = (cfg, h) => -h / Math.sin(cfg.a1 * DEG);
+
+    function nytt(cfg) {
+        const b = bana(cfg);
+        const u0 = cfg.lage === 'dra' ? 0 : uFranHojd(cfg, cfg.h);
+        const nCell = Math.ceil((b.umax - b.umin) / CELL) + 1;
+        return {
+            u: u0, vel: 0, t: 0, sTot: 0, Ev: 0, W: 0,
+            E0: cfg.m * G * hojd(cfg, u0),
+            still: 0, klar: false, orsak: null, vandor: 0,
+            vandHojder: [],                     // exakt höjd vid varje vändning (m)
+            varme: new Float64Array(nCell),     // J per cell, för värmekameran
+            prov: [[0, cfg.m * G * hojd(cfg, u0), 0, 0]],   // [sTot, Ep, Ek, Ev]
+            dragProv: [[0, 0]],                             // [s, F] i läget dra
+        };
+    }
+
+    // Krafter och acceleration (längs +u) i ett tillstånd.
+    function krafter(st, cfg) {
+        const m = cfg.m, FG = m * G;
+        if (cfg.lage === 'dra') {
+            const a = cfg.a1 * DEG;
+            const FN = FG * Math.cos(a);
+            const Ff = cfg.muRamp * FN;
+            return { F: FG * Math.sin(a) + Ff, FN, Ff, Fpar: FG * Math.sin(a), a: 0, statisk: false, lut: -a, FG };
+        }
+        const riktning = st.vel !== 0 ? Math.sign(st.vel) : 0;
+        let d = del(cfg, st.u, riktning || 1);
+        // Står klossen exakt på en gräns, välj den del dit tyngden drar den.
+        const FN = FG * Math.cos(d.lut);
+        const Fpar = -FG * Math.sin(d.lut);          // tyngdens komposant längs +u
+        const Ffmax = d.mu * FN;
+        if (Math.abs(st.vel) <= 1e-12) {
+            if (Math.abs(Fpar) <= Ffmax + 1e-12) return { FN, Ff: Math.abs(Fpar), Fpar, a: 0, statisk: true, lut: d.lut, FG };
+            return { FN, Ff: Ffmax, Fpar, a: (Fpar - Math.sign(Fpar) * Ffmax) / m, statisk: false, lut: d.lut, FG };
+        }
+        return { FN, Ff: Ffmax, Fpar, a: (Fpar - Math.sign(st.vel) * Ffmax) / m, statisk: false, lut: d.lut, FG };
+    }
+
+    function laggVarme(st, cfg, u1, u2, effekt) {
+        // effekt = värme per meter (J/m) längs sträckan u1 → u2
+        const b = bana(cfg);
+        let a = Math.min(u1, u2), c = Math.max(u1, u2);
+        while (a < c - 1e-12) {
+            const i = Math.floor((a - b.umin) / CELL + 1e-9);
+            // Avrundningen får aldrig ge en cellgräns på eller före a (då står loopen still).
+            const slut = Math.min(c, Math.max(b.umin + (i + 1) * CELL, a + 1e-9));
+            if (i >= 0 && i < st.varme.length) st.varme[i] += effekt * (slut - a);
+            a = slut;
+        }
+    }
+
+    function steg(st, cfg, h) {
+        if (st.klar) return st;
+        const k = krafter(st, cfg);
+        if (cfg.lage === 'dra') {
+            const mal = uFranHojd(cfg, cfg.h);          // negativt
+            let du = -DRA_FART * h;
+            if (st.u + du <= mal) { du = mal - st.u; st.klar = true; st.orsak = 'mal'; }
+            const s = Math.abs(du);
+            st.W += k.F * s;
+            st.Ev += k.Ff * s;
+            laggVarme(st, cfg, st.u, st.u + du, k.Ff);
+            st.u += du; st.sTot += s; st.t += h;
+            st.prov.push([st.sTot, cfg.m * G * hojd(cfg, st.u), 0, st.Ev]);
+            st.dragProv.push([st.sTot, k.F]);
+            return st;
+        }
+        if (k.statisk) {
+            st.still += h; st.t += h;
+            if (st.still >= STILL_TID) { st.klar = true; st.orsak = 'stannade'; }
+            return st;
+        }
+        st.still = 0;
+        const v = st.vel, a = k.a;
+        const riktning = v !== 0 ? Math.sign(v) : Math.sign(a);
+        const d = del(cfg, st.u, riktning);
+        let tau = h, vandning = false;
+        if (v !== 0 && a !== 0 && Math.sign(a) !== Math.sign(v)) {
+            const t0 = -v / a;
+            if (t0 < tau) { tau = t0; vandning = true; }
+        }
+        let du = v * tau + 0.5 * a * tau * tau;
+        // Delgräns inom steget?
+        const grans = riktning > 0 ? d.till : d.fran;
+        if ((riktning > 0 && st.u + du > grans) || (riktning < 0 && st.u + du < grans)) {
+            const dd = grans - st.u;
+            let t;
+            if (Math.abs(a) < 1e-12) t = dd / v;
+            else {
+                const disk = Math.max(0, v * v + 2 * a * dd);
+                t = (-v + riktning * Math.sqrt(disk)) / a;
+            }
+            tau = Math.max(0, Math.min(tau, t)); du = dd; vandning = false;
+        }
+        const nyVel = vandning ? 0 : v + a * tau;
+        const Ff = d.mu * cfg.m * G * Math.cos(d.lut);
+        st.Ev += Ff * Math.abs(du);
+        laggVarme(st, cfg, st.u, st.u + du, Ff);
+        st.u += du; st.vel = nyVel; st.t += tau; st.sTot += Math.abs(du);
+        if (vandning) { st.vandor++; st.vandHojder.push(hojd(cfg, st.u)); }
+        const b = bana(cfg);
+        st.u = Math.max(b.umin, Math.min(b.umax, st.u));
+        st.prov.push([st.sTot, cfg.m * G * hojd(cfg, st.u), 0.5 * cfg.m * nyVel * nyVel, st.Ev]);
+        return st;
+    }
+
+    function kor(st, cfg, dt, h = 1 / 600) {
+        let kvar = dt;
+        while (kvar > 1e-12 && !st.klar) {
+            const d = Math.min(h, kvar);
+            steg(st, cfg, d);
+            kvar -= d;
+        }
+        return st;
+    }
+
+    function energier(st, cfg) {
+        const Ep = cfg.m * G * hojd(cfg, st.u);
+        const Ek = cfg.lage === 'dra' ? 0 : 0.5 * cfg.m * st.vel * st.vel;
+        const fel = cfg.lage === 'dra' ? st.W - (Ep - st.E0 + st.Ev) : st.E0 - (Ep + Ek + st.Ev);
+        return { Ep, Ek, Ev: st.Ev, W: st.W, E0: st.E0, fel };
+    }
+
+    root.KlossbanaMotor = { G, DEG, DRA_FART, CELL, bana, del, hojd, uFranHojd, nytt, krafter, steg, kor, energier };
+    if (typeof module !== 'undefined') module.exports = root.KlossbanaMotor;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const M = window.KlossbanaMotor;
+        const G = M.G, DEG = M.DEG;
+
+        // ── Talformat: decimalkomma, äkta minustecken, exakt noll som "0" ──
+        const fmt = (num, d = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+        const fmtDeg = (a) => String(Math.round(a));
+
+        const COL = {
+            F:     '#d12f2f',   // kraften från handen
+            frik:  '#e0701a',   // friktionskraft
+            tyngd: '#7c3aed',   // tyngdkraft
+            norm:  '#0d9488',   // normalkraft
+            ink:   '#0f1620',
+            brick: '#d4930f',
+            brickK:'#8f6206',
+            Ek:    '#2563eb',
+            Ep:    '#15803d',
+            Q:     '#c2410c',
+        };
+
+        // Remsorna på den plana sträckan och rampernas yta.
+        const REMSOR = [
+            { k: 'ingen',  namn: 'Ingen friktion', mu: 0 },
+            { k: 'plast',  namn: 'Plast',          mu: 0.1 },
+            { k: 'tra',    namn: 'Trä',            mu: 0.25 },
+            { k: 'filt',   namn: 'Filt',           mu: 0.4 },
+            { k: 'sand',   namn: 'Sandpapper',     mu: 0.6 },
+        ];
+        const RAMPER = [
+            { k: 'ingen', namn: 'Ingen friktion', mu: 0 },
+            { k: 'tra',   namn: 'Trä',            mu: 0.25 },
+            { k: 'filt',  namn: 'Filt',           mu: 0.4 },
+        ];
+        const muAv = (lista, k) => lista.find((x) => x.k === k).mu;
+
+        // Hela brickor i facken: avrunda så att summan alltid blir floor(total).
+        // Med bara floor i varje fack kunde 1,5 J + 1,5 J bli två brickor i
+        // stället för tre, och då dök brickor upp eller försvann.
+        function heltal(varden) {
+            const tot = Math.floor(varden.reduce((a, b) => a + b, 0) + 1e-6);
+            const bas = varden.map((v) => Math.floor(v + 1e-9));
+            let kvar = tot - bas.reduce((a, b) => a + b, 0);
+            const ordning = varden.map((v, i) => [v - bas[i], i]).sort((x, y) => y[0] - x[0]);
+            for (let j = 0; kvar > 0 && j < ordning.length; j++, kvar--) bas[ordning[j][1]]++;
+            return bas;
+        }
+
+        // Ren text med variabler i kursiv: E_p blir E med index p, och ensamma
+        // bokstäver för storheter (m, g, h, s, L, W, α, μ) kursiveras. En bokstav
+        // direkt efter ett tal är en enhet (0,6 m) och står rakt.
+        const Fx = ({ text }) => {
+            const delar = [];
+            const re = /(?<![\p{L}\d])(E|F)_(\p{L}+)|(?<![\p{L}\d])(?<!\d )([mghsLWαμ])([₁₂]?)(?![\p{L}\d])/gu;
+            let sist = 0, mm, n = 0;
+            while ((mm = re.exec(text))) {
+                if (mm.index > sist) delar.push(text.slice(sist, mm.index));
+                if (mm[1]) delar.push(<span key={n++}><em>{mm[1]}</em><sub>{mm[2]}</sub></span>);
+                else delar.push(<span key={n++}><em>{mm[3]}</em>{mm[4]}</span>);
+                sist = re.lastIndex;
+            }
+            delar.push(text.slice(sist));
+            return <React.Fragment>{delar}</React.Fragment>;
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  SCENENS GEOMETRI (viewBox 1000 × 660)
+        // ════════════════════════════════════════════════════════
+        const VB_W = 1000, VB_H = 660;
+        const BAS = 392;               // banans plana del
+        const HMAX = 0.6;              // rampernas höjd (m)
+        const LP = 1.2;                // plana sträckans längd (m)
+        const KL_W = 46, KL_H = 30;    // klossen (ritas inte skalenligt)
+        const FSK = 4;                 // kraftpilarnas skala, px per newton
+        const LS = 40;                 // snöret vid Dra uppför
+        const DB = 70, STR = 1.7;      // dynamometerns hylsa och utdrag
+
+        const DX0 = 92, DW = 500, DTOP = 462, DBOT = 612;
+        const FACK = [
+            { k: 'Ek', namn: 'Rörelseenergi', x: 672, col: COL.Ek },
+            { k: 'Ep', namn: 'Lägesenergi',   x: 774, col: COL.Ep },
+            { k: 'Q',  namn: 'Värme',         x: 876, col: COL.Q },
+        ];
+        const FACK_W = 96, FACK_TOP = 470, FACK_BOT = 612;
+        const slot = (fx, i) => ({
+            x: fx + 9 + (i % 5) * 16,
+            y: FACK_BOT - 15 - Math.floor(i / 5) * 13.5,
+        });
+
+        function banGeo(cfg) {
+            const wL = HMAX / Math.tan(cfg.a1 * DEG), wR = HMAX / Math.tan(cfg.a2 * DEG);
+            const tot = wL + LP + wR;
+            const S = Math.min(230, 760 / tot);
+            const x0 = 530 - (tot * S) / 2;
+            const xa = x0 + wL * S, xb = xa + LP * S, xc = xb + wR * S;
+            return { S, x0, xa, xb, xc, ytop: BAS - HMAX * S };
+        }
+        // Punkt på banans yta och ytans lutning (grader, SVG-rotation) vid läget u.
+        function ytpunkt(cfg, geo, u) {
+            const a1 = cfg.a1 * DEG, a2 = cfg.a2 * DEG;
+            if (u < 0) return { x: geo.xa + u * Math.cos(a1) * geo.S, y: BAS + u * Math.sin(a1) * geo.S };
+            if (u <= LP) return { x: geo.xa + u * geo.S, y: BAS };
+            const d = u - LP;
+            return { x: geo.xb + d * Math.cos(a2) * geo.S, y: BAS - d * Math.sin(a2) * geo.S };
+        }
+        // Klossens lutning tonas mjukt över i rundningarna vid hörnen.
+        function lutning(cfg, u) {
+            const r = 0.05;
+            if (u < -r) return cfg.a1;
+            if (u < r) return cfg.a1 * (r - u) / (2 * r);
+            if (u < LP - r) return 0;
+            if (u < LP + r) return -cfg.a2 * (u - (LP - r)) / (2 * r);
+            return -cfg.a2;
+        }
+        function klossLage(cfg, geo, u) {
+            const p = ytpunkt(cfg, geo, u);
+            const ang = lutning(cfg, u);
+            const ar = ang * DEG;
+            const nx = Math.sin(ar), ny = -Math.cos(ar);       // uppåt från ytan
+            return { x: p.x + nx * KL_H / 2, y: p.y + ny * KL_H / 2, ang, yta: p, nx, ny };
+        }
+
+        // Värmekamerans färgskala (svart → violett → rött → gult → vitt).
+        const IR = [[0, [26, 16, 46]], [0.25, [105, 25, 120]], [0.5, [205, 45, 60]], [0.75, [250, 150, 30]], [1, [255, 248, 210]]];
+        const irFarg = (t) => {
+            t = Math.max(0, Math.min(1, t));
+            for (let i = 1; i < IR.length; i++) {
+                if (t <= IR[i][0]) {
+                    const [t0, c0] = IR[i - 1], [t1, c1] = IR[i];
+                    const f = (t - t0) / (t1 - t0);
+                    return `rgb(${c0.map((c, j) => Math.round(c + (c1[j] - c) * f)).join(',')})`;
+                }
+            }
+            return 'rgb(255,248,210)';
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  RITDELAR
+        // ════════════════════════════════════════════════════════
+        // Pil med rakt avslutat skaft som slutar vid huvudets bas.
+        const Pil = ({ x1, y1, x2, y2, color, width = 4.5, head = 15, dash = false, edge = false, opacity = 1 }) => {
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 2) return null;
+            const ux = (x2 - x1) / len, uy = (y2 - y1) / len;
+            const hd = Math.min(head, len * 0.9);
+            const bx = x2 - ux * hd, by = y2 - uy * hd;
+            const hw = hd * 0.48;
+            const p1 = `${bx - uy * hw},${by + ux * hw}`;
+            const p2 = `${bx + uy * hw},${by - ux * hw}`;
+            const kant = 'rgba(15,22,32,0.5)';
+            return (
+                <g opacity={opacity}>
+                    {edge && <line x1={x1} y1={y1} x2={bx} y2={by} stroke={kant} strokeWidth={width + 3} strokeLinecap="butt" />}
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="butt" strokeDasharray={dash ? '7 5' : undefined} />
+                    <polygon points={`${x2},${y2} ${p1} ${p2}`} fill={color}
+                             stroke={edge ? kant : 'none'} strokeWidth={edge ? 1.6 : 0} strokeLinejoin="round" />
+                </g>
+            );
+        };
+
+        // Beteckning med index: F, Fₛ, F₁ … Variabeln kursiv, indexet rakt.
+        const Bet = ({ x, y, sym, idx, color, size = 18, anchor = 'start', weight = 600 }) => (
+            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}
+                  fontFamily="Poppins, sans-serif">
+                <tspan fontStyle="italic">{sym}</tspan>
+                {idx != null && <tspan fontSize={size * 0.68} dy={size * 0.25}>{idx}</tspan>}
+            </text>
+        );
+
+        // Handen som håller i dynamometerns ring. Lokalt: ringen i origo,
+        // armen ut längs +x (bort från föremålet).
+        const Hand = () => (
+            <g>
+                <path d="M 30 -14 L 82 -15 L 82 15 L 30 14 Z" fill="#3d5a80" stroke="#2b4160" strokeWidth="1.4" strokeLinejoin="round" />
+                <rect x="26" y="-16" width="9" height="32" rx="3" fill="#2b4160" />
+                <path d="M 3 -11 Q 8 -16 20 -15 Q 28 -14 29 -8 L 29 8 Q 28 14 20 15 Q 8 16 3 11 Z"
+                      fill="#ebbf9b" stroke="#a8724c" strokeWidth="1.3" />
+                <circle cx="0" cy="0" r="8" fill="none" stroke="#6b7280" strokeWidth="3" />
+                {[-12, -6, 0, 6].map((y, i) => (
+                    <rect key={i} x="-7" y={y} width="15" height="6.2" rx="3.1"
+                          fill="#ebbf9b" stroke="#a8724c" strokeWidth="1.1" />
+                ))}
+                <path d="M 16 -13 Q 7 -20 -3 -14" fill="none" stroke="#a8724c" strokeWidth="8.4" strokeLinecap="round" />
+                <path d="M 16 -13 Q 7 -20 -3 -14" fill="none" stroke="#ebbf9b" strokeWidth="6" strokeLinecap="round" />
+                <path d="M 19 -6 Q 22 0 19 6" fill="none" stroke="#a8724c" strokeWidth="1" opacity="0.6" />
+            </g>
+        );
+
+        // Dynamometern lokalt: snöre från A (origo) ut längs +x, krok, den
+        // utdragna skalstången (längd ∝ F), hylsan och ringen.
+        const Dynamometer = ({ F, ls }) => {
+            const ut = STR * F;
+            const xr = ls + 4;               // skalstången börjar efter kroken
+            const xh = xr + ut;              // hylsan
+            const ticks = [];
+            for (let n = 0; n <= F + 1e-9; n += 5) {
+                const tx = xh - STR * n;
+                ticks.push(<line key={n} x1={tx} y1={-4} x2={tx} y2={4} stroke="#8f6206" strokeWidth="1.2" />);
+            }
+            return (
+                <g>
+                    <line x1="0" y1="0" x2={ls} y2="0" stroke="#5b4a3a" strokeWidth="1.8" />
+                    <path d={`M ${ls - 1} 0 q 3 -5 6 0 q 0 3 -2 4`} fill="none" stroke="#4b5563" strokeWidth="1.8" />
+                    <rect x={xr} y="-4.5" width={Math.max(0.5, ut)} height="9" fill="#fde68a" stroke="#a16207" strokeWidth="1" />
+                    {ticks}
+                    <rect x={xh} y="-10" width={DB} height="20" rx="5" fill="#e5e9ee" stroke="#7b8594" strokeWidth="1.4" />
+                    <rect x={xh + DB - 18} y="-10" width="8" height="20" fill="#c8324a" opacity="0.85" />
+                    <text x={xh + 30} y="4.5" fontSize="12" fontWeight="700" fill="#4b5563" fontFamily="Poppins, sans-serif" textAnchor="middle">0–20 N</text>
+                </g>
+            );
+        };
+
+        // Träklossen, roterad efter banans lutning.
+        const Kloss = ({ k, m, ir, utanText }) => (
+            <g transform={`translate(${k.x} ${k.y}) rotate(${k.ang})`}>
+                <rect x={-KL_W / 2} y={-KL_H / 2} width={KL_W} height={KL_H} rx="3"
+                      fill={ir ? '#3b3550' : '#c98d4f'} stroke={ir ? '#8b84a8' : '#7a4d22'} strokeWidth="1.6" />
+                {!ir && <path d={`M ${-KL_W / 2 + 4} -3 q ${KL_W * 0.3} -3 ${KL_W - 8} 1`} fill="none" stroke="#9c6430" strokeWidth="1" opacity="0.55" />}
+                {!ir && !utanText && <text x="0" y="5" textAnchor="middle" fontSize="11.5" fontWeight="700" fill="#4a2c10"
+                              fontFamily="Poppins, sans-serif">{fmt(m, 1)} kg</text>}
+            </g>
+        );
+
+        // Remsans utseende på den plana sträckan.
+        const Remsa = ({ x1, x2, typ }) => {
+            const y = BAS - 5, h = 5, w = x2 - x1;
+            if (typ === 'ingen') return <rect x={x1} y={y} width={w} height={h} fill="#dbe7f0" stroke="#8aa4b8" strokeWidth="0.8" />;
+            if (typ === 'plast') return <rect x={x1} y={y} width={w} height={h} fill="#bfe0ef" stroke="#5f97b4" strokeWidth="0.8" />;
+            if (typ === 'tra') return <rect x={x1} y={y} width={w} height={h} fill="#d9a766" stroke="#9c6430" strokeWidth="0.8" />;
+            if (typ === 'filt') return <rect x={x1} y={y} width={w} height={h} fill="#2f6b4f" stroke="#1d4733" strokeWidth="0.8" />;
+            const prickar = [];
+            for (let x = x1 + 3; x < x2 - 2; x += 5) prickar.push(<circle key={x} cx={x} cy={y + 1.5 + ((x * 7) % 3)} r="0.8" fill="#8a6d3b" />);
+            return <g><rect x={x1} y={y} width={w} height={h} fill="#e6cf9a" stroke="#a8874a" strokeWidth="0.8" />{prickar}</g>;
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  SCENEN
+        // ════════════════════════════════════════════════════════
+        const Scen = ({ cfg, st, k, en, show, svgRef, drag, drar, flagga, flaggDrag, visaFlagga, ghost, flygande, raknare, dolj, remsa, ramp }) => {
+            const geo = banGeo(cfg);
+            const kl = klossLage(cfg, geo, st.u);
+            const ir = show.ir;
+            const dra = cfg.lage === 'dra';
+
+            // ── Banans profil ──
+            const yt = geo.ytop;
+            const banaYta = `M ${geo.x0} ${yt} L ${geo.xa} ${BAS} L ${geo.xb} ${BAS} L ${geo.xc} ${yt}`;
+
+            // ── Värmekartan längs banan ──
+            const b = M.bana(cfg);
+            const irSeg = [];
+            if (ir) {
+                const skala = 2 * G * 0.6;              // J/m: fast skala (2 kg på sandpapper), så att en tung kloss syns som mer värme
+                for (let i = 0; i < st.varme.length; i++) {
+                    if (st.varme[i] <= 1e-6) continue;
+                    const u1 = b.umin + i * M.CELL, u2 = Math.min(b.umax, u1 + M.CELL);
+                    const p1 = ytpunkt(cfg, geo, u1), p2 = ytpunkt(cfg, geo, u2);
+                    const perM = st.varme[i] / (u2 - u1);
+                    irSeg.push(<line key={i} x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} stroke={irFarg(Math.sqrt(perM / skala) * 0.95)}
+                                     strokeWidth="9" strokeLinecap="round" />);
+                }
+            }
+
+            // ── Kraftpilar ──
+            const pilar = [];
+            if (show.krafter) {
+                const ar = kl.ang * DEG;
+                const tx = Math.cos(ar), ty = Math.sin(ar);        // längs ytan, åt höger
+                // tyngdkraften från tyngdpunkten
+                // F_G och F_N ritas på samma verkningslinje, skaften precis intill
+                // varandra (annars ser de ut som ett kraftpar).
+                const ox = -2.2 * Math.cos(kl.ang * DEG), oy = -2.2 * Math.sin(kl.ang * DEG);
+                pilar.push(<g key="fg"><Pil x1={kl.x + ox} y1={kl.y + oy} x2={kl.x + ox} y2={kl.y + oy + k.FG * FSK} color={COL.tyngd} width={4} />
+                    <circle cx={kl.x} cy={kl.y} r="2.6" fill={COL.ink} />
+                    <Bet x={kl.x - 10} y={kl.y + k.FG * FSK + 2} sym="F" idx="G" color={COL.tyngd} size={16} anchor="end" /></g>);
+                // normalkraften från kontaktytan
+                const ytx = kl.yta.x, yty = kl.yta.y;
+                pilar.push(<g key="fn"><Pil x1={ytx - ox} y1={yty - oy} x2={ytx - ox + kl.nx * k.FN * FSK} y2={yty - oy + kl.ny * k.FN * FSK} color={COL.norm} width={4} />
+                    <Bet x={ytx - ox + kl.nx * k.FN * FSK + 9} y={yty - oy + kl.ny * k.FN * FSK + 4} sym="F" idx="N" color={COL.norm} size={16} /></g>);
+                // friktionen i bakkanten, mot rörelsen
+                // åt det håll klossen glider, eller vill glida (vid släppet och i vila)
+                const rorRiktning = dra ? -1 : (st.vel > 1e-9 ? 1 : st.vel < -1e-9 ? -1 : Math.sign(k.Fpar));
+                if (k.Ff > 0.05 && rorRiktning !== 0) {
+                    const bak = { x: ytx - rorRiktning * tx * KL_W / 2, y: yty - rorRiktning * ty * KL_W / 2 };
+                    const L = k.Ff * FSK;
+                    const tip = { x: bak.x - rorRiktning * tx * L, y: bak.y - rorRiktning * ty * L };
+                    pilar.push(<g key="ff"><Pil x1={bak.x} y1={bak.y - 3} x2={tip.x} y2={tip.y - 3} color={COL.frik} width={3.6} edge />
+                        <Bet x={tip.x - rorRiktning * 6} y={tip.y - 10} sym="F" idx="f" color={COL.frik} size={15} anchor={rorRiktning > 0 ? 'end' : 'start'} /></g>);
+                }
+            }
+
+            // ── Dra uppför: handen och dynamometern längs rampen ──
+            let handGrupp = null;
+            if (dra) {
+                const ar = cfg.a1 * DEG;
+                const ux = -Math.cos(ar), uy = -Math.sin(ar);      // uppför vänster ramp
+                const A = { x: kl.x + ux * KL_W / 2, y: kl.y + uy * KL_W / 2 };
+                const L = LS + 4 + STR * k.F + DB + 10;
+                handGrupp = (
+                    <g>
+                        <g transform={`translate(${A.x} ${A.y}) rotate(${180 + cfg.a1})`}>
+                            <Dynamometer F={k.F} ls={LS} />
+                            <g transform={`translate(${L} 0)`}><Hand /></g>
+                        </g>
+                        <text x={A.x + ux * (LS + 4 + STR * k.F + DB / 2) - uy * 26} y={A.y + uy * (LS + 4 + STR * k.F + DB / 2) + ux * 26 + 5}
+                              textAnchor="middle" fontSize="15" fontWeight="700" fill="#374151" fontFamily="'JetBrains Mono', monospace">{fmt(k.F, 1)} N</text>
+                        {show.krafter && <Pil x1={A.x} y1={A.y} x2={A.x + ux * k.F * FSK} y2={A.y + uy * k.F * FSK} color={COL.F} width={4.5} edge />}
+                        {show.krafter && <Bet x={A.x + ux * k.F * FSK - 4} y={A.y + uy * k.F * FSK - 10} sym="F" color={COL.F} anchor="end" />}
+                    </g>
+                );
+            }
+
+            // ── Höjdskalan på stativet ──
+            const skalaX = geo.x0 - 34;
+            const hNu = M.hojd(cfg, st.u);
+            const hMal = cfg.h;
+
+            // ── Diagrammet under banan ──
+            let diagram;
+            if (!dra) {
+                const sMax = Math.max(1.5, Math.ceil((st.sTot * 1.08) * 2) / 2);
+                const eMax = Math.max(2, Math.ceil(en.E0 / 2) * 2);
+                const sx = (s) => DX0 + (s / sMax) * DW;
+                const ey = (e) => DBOT - (e / eMax) * (DBOT - DTOP);
+                const prov = st.prov;
+                const steg = Math.max(1, Math.floor(prov.length / 500));
+                const linje = (idx) => {
+                    const pts = [];
+                    for (let i = 0; i < prov.length; i += steg) pts.push(`${sx(prov[i][0])},${ey(idx(prov[i]))}`);
+                    const sista = prov[prov.length - 1];
+                    pts.push(`${sx(sista[0])},${ey(idx(sista))}`);
+                    return pts.join(' ');
+                };
+                const ticksS = [];
+                const sSteg = sMax <= 3 ? 0.5 : sMax <= 6 ? 1 : 2;
+                for (let s = 0; s <= sMax + 1e-9; s += sSteg) ticksS.push(s);
+                const ticksE = [];
+                const eSteg = eMax <= 6 ? 1 : eMax <= 12 ? 2 : 5;
+                for (let e = 0; e <= eMax + 1e-9; e += eSteg) ticksE.push(e);
+                const gLinje = ghost && ghost.prov ? (() => {
+                    const gp = ghost.prov, gs = Math.max(1, Math.floor(gp.length / 400));
+                    const pts = [];
+                    for (let i = 0; i < gp.length; i += gs) if (gp[i][0] <= sMax) pts.push(`${sx(gp[i][0])},${ey(gp[i][1] + gp[i][2])}`);
+                    return pts.join(' ');
+                })() : null;
+                diagram = (
+                    <g>
+                        {ticksS.map((s) => <line key={'vs' + s} x1={sx(s)} y1={DTOP} x2={sx(s)} y2={DBOT} stroke="rgba(15,22,32,0.10)" />)}
+                        {ticksE.map((e) => <line key={'ve' + e} x1={DX0} y1={ey(e)} x2={DX0 + DW} y2={ey(e)} stroke="rgba(15,22,32,0.10)" />)}
+                        {/* den totala energin: ändras aldrig */}
+                        <line x1={DX0} y1={ey(en.E0)} x2={DX0 + DW} y2={ey(en.E0)} stroke="rgba(15,22,32,0.55)" strokeWidth="1.6" strokeDasharray="7 5" />
+                        {show.forra && gLinje && <polyline points={gLinje} fill="none" stroke="rgba(15,22,32,0.35)" strokeWidth="1.8" strokeDasharray="4 4" />}
+                        {prov.length > 1 && (
+                            <g>
+                                <polyline points={linje((p) => p[3])} fill="none" stroke={COL.Q} strokeWidth="2.2" />
+                                <polyline points={linje((p) => p[1])} fill="none" stroke={COL.Ep} strokeWidth="2.2" />
+                                <polyline points={linje((p) => p[2])} fill="none" stroke={COL.Ek} strokeWidth="2.2" />
+                                <polyline points={linje((p) => p[1] + p[2])} fill="none" stroke={COL.ink} strokeWidth="3.2" />
+                            </g>
+                        )}
+                        <line x1={DX0} y1={DBOT} x2={DX0 + DW + 16} y2={DBOT} stroke={COL.ink} strokeWidth="1.6" />
+                        <polygon points={`${DX0 + DW + 24},${DBOT} ${DX0 + DW + 13},${DBOT - 5} ${DX0 + DW + 13},${DBOT + 5}`} fill={COL.ink} />
+                        <line x1={DX0} y1={DBOT} x2={DX0} y2={DTOP - 14} stroke={COL.ink} strokeWidth="1.6" />
+                        <polygon points={`${DX0},${DTOP - 22} ${DX0 - 5},${DTOP - 11} ${DX0 + 5},${DTOP - 11}`} fill={COL.ink} />
+                        {ticksS.filter((s) => s > 0).map((s) => <text key={'ts' + s} x={sx(s)} y={DBOT + 20} textAnchor="middle" fontSize="14"
+                              fill="rgba(15,22,32,0.75)" fontFamily="Poppins, sans-serif">{fmt(s, sSteg < 1 ? 1 : 0)}</text>)}
+                        {ticksE.map((e) => <text key={'te' + e} x={DX0 - 9} y={ey(e) + 5} textAnchor="end" fontSize="14"
+                              fill="rgba(15,22,32,0.75)" fontFamily="Poppins, sans-serif">{fmt(e, 0)}</text>)}
+                        <text x={DX0 + 12} y={DTOP - 14} fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif"><tspan fontStyle="italic">E</tspan> (J)</text>
+                        <text x={DX0 + DW + 30} y={DBOT + 5} fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif"><tspan fontStyle="italic">s</tspan> (m)</text>
+                        {/* teckenförklaring */}
+                        <g transform={`translate(${DX0 + 92} ${DTOP - 18})`}>
+                            <line x1="0" y1="-5" x2="20" y2="-5" stroke="rgba(15,22,32,0.55)" strokeWidth="1.6" strokeDasharray="7 5" />
+                            <text x="25" y="0" fontSize="14" fill="rgba(15,22,32,0.8)" fontFamily="Poppins, sans-serif">total</text>
+                        </g>
+                        {[['E', 'mek', COL.ink, 'mekanisk'], ['E', 'p', COL.Ep, null], ['E', 'k', COL.Ek, null], ['E', 'v', COL.Q, null]].map(([sym, idx, col, ord], i) => (
+                            <g key={idx} transform={`translate(${DX0 + 172 + i * 82} ${DTOP - 18})`}>
+                                <line x1="0" y1="-5" x2="18" y2="-5" stroke={col} strokeWidth={idx === 'mek' ? 3.2 : 2.2} />
+                                <Bet x={22} y={0} sym={sym} idx={idx} color={col} size={15} />
+                            </g>
+                        ))}
+                    </g>
+                );
+            } else {
+                // arbetsrutan: F mot s, varje ruta 0,1 m · 10 N = 1 J
+                const sMal = cfg.h / Math.sin(cfg.a1 * DEG);
+                const smax = Math.max(0.6, Math.ceil(sMal * 10 + 1e-9) / 10);
+                const sx = (s) => DX0 + (s / smax) * DW;
+                const fy = (f) => DBOT - f * 7.5;
+                const dp = st.dragProv;
+                const sist = dp[dp.length - 1];
+                const poly = st.sTot > 1e-6 ? `${sx(0)},${fy(0)} ${sx(0)},${fy(sist[1])} ${sx(sist[0])},${fy(sist[1])} ${sx(sist[0])},${fy(0)}` : null;
+                const gpoly = show.forra && ghost && ghost.dragProv ? (() => {
+                    const g = ghost.dragProv[ghost.dragProv.length - 1];
+                    return `${sx(0)},${fy(0)} ${sx(0)},${fy(g[1])} ${sx(g[0])},${fy(g[1])} ${sx(g[0])},${fy(0)}`;
+                })() : null;
+                const cel = [];
+                for (let i = 0; i <= Math.round(smax / 0.1); i++) cel.push(<line key={'c' + i} x1={sx(i * 0.1)} y1={DTOP} x2={sx(i * 0.1)} y2={DBOT} stroke="rgba(15,22,32,0.10)" />);
+                [10, 20].forEach((f) => cel.push(<line key={'r' + f} x1={DX0} y1={fy(f)} x2={DX0 + DW} y2={fy(f)} stroke="rgba(15,22,32,0.10)" />));
+                diagram = (
+                    <g>
+                        {cel}
+                        <defs>{poly && <clipPath id="klArea"><polygon points={poly} /></clipPath>}</defs>
+                        {poly && <g>
+                            <polygon points={poly} fill="rgba(212,147,15,0.30)" />
+                            <g clipPath="url(#klArea)">
+                                {Array.from({ length: Math.round(smax / 0.1) + 1 }, (_, i) => <line key={i} x1={sx(i * 0.1)} y1={DTOP - 10} x2={sx(i * 0.1)} y2={DBOT} stroke={COL.brickK} strokeWidth="1.3" opacity="0.55" />)}
+                                {[10, 20].map((f) => <line key={f} x1={DX0} y1={fy(f)} x2={DX0 + DW} y2={fy(f)} stroke={COL.brickK} strokeWidth="1.3" opacity="0.55" />)}
+                            </g>
+                            <polyline points={poly} fill="none" stroke={COL.brickK} strokeWidth="2" />
+                        </g>}
+                        {gpoly && <polygon points={gpoly} fill="none" stroke="rgba(15,22,32,0.55)" strokeWidth="1.6" strokeDasharray="6 4" />}
+                        <line x1={DX0} y1={DBOT} x2={DX0 + DW + 16} y2={DBOT} stroke={COL.ink} strokeWidth="1.6" />
+                        <polygon points={`${DX0 + DW + 24},${DBOT} ${DX0 + DW + 13},${DBOT - 5} ${DX0 + DW + 13},${DBOT + 5}`} fill={COL.ink} />
+                        <line x1={DX0} y1={DBOT} x2={DX0} y2={DTOP - 14} stroke={COL.ink} strokeWidth="1.6" />
+                        <polygon points={`${DX0},${DTOP - 22} ${DX0 - 5},${DTOP - 11} ${DX0 + 5},${DTOP - 11}`} fill={COL.ink} />
+                        {Array.from({ length: Math.round(smax / 0.1) }, (_, i) => i + 1).filter((i) => i % (smax > 1 ? 2 : 1) === 0).map((i) => (
+                            <text key={'x' + i} x={sx(i * 0.1)} y={DBOT + 20} textAnchor="middle" fontSize="14" fill="rgba(15,22,32,0.75)" fontFamily="Poppins, sans-serif">{fmt(i * 0.1, 1)}</text>))}
+                        {[0, 10, 20].map((f) => <text key={'f' + f} x={DX0 - 9} y={fy(f) + 5} textAnchor="end" fontSize="14" fill="rgba(15,22,32,0.75)" fontFamily="Poppins, sans-serif">{f}</text>)}
+                        <text x={DX0 + 12} y={DTOP - 14} fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif"><tspan fontStyle="italic">F</tspan> (N)</text>
+                        <text x={DX0 + DW + 30} y={DBOT + 5} fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif"><tspan fontStyle="italic">s</tspan> (m)</text>
+                        <text x={DX0 + DW} y={DTOP - 14} textAnchor="end" fontSize="20" fontWeight="700" fill={COL.brickK} fontFamily="Poppins, sans-serif">
+                            <tspan fontStyle="italic">W</tspan> = {fmt(en.W, 1)} J</text>
+                    </g>
+                );
+            }
+
+            const iLuften = { Ek: 0, Ep: 0, Q: 0 };
+            flygande.forEach((t) => { if (t.till.k in iLuften) iLuften[t.till.k]++; });
+
+            // Flaggan i gissa-läget
+            const fl = visaFlagga ? ytpunkt(cfg, geo, flagga) : null;
+            const ghostKl = show.forra && ghost && ghost.u != null && !dra ? klossLage(cfg, geo, ghost.u) : null;
+
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet" role="img"
+                     aria-label="En träkloss glider i en låg U-bana med två ramper och en plan sträcka i mitten. Under banan visas energin i ett diagram och i tre fack med joulebrickor.">
+                    <defs>
+                        <linearGradient id="vagg" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#f7f2e8" /><stop offset="1" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <linearGradient id="bank" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#d6b17a" /><stop offset="1" stopColor="#b98d51" />
+                        </linearGradient>
+                        <linearGradient id="kil" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#e2c08c" /><stop offset="1" stopColor="#c99c5c" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width={VB_W} height={VB_H} fill="url(#vagg)" />
+
+                    {/* bänken och banan */}
+                    <rect x="20" y={BAS + 12} width="960" height="16" fill="url(#bank)" stroke="#8a6230" strokeWidth="1.2" />
+                    <polygon points={`${geo.x0},${yt} ${geo.xa},${BAS} ${geo.x0},${BAS}`} fill="url(#kil)" stroke="#8a6230" strokeWidth="1.2" />
+                    <polygon points={`${geo.xc},${yt} ${geo.xb},${BAS} ${geo.xc},${BAS}`} fill="url(#kil)" stroke="#8a6230" strokeWidth="1.2" />
+                    <rect x={geo.x0 - 6} y={BAS} width={geo.xc - geo.x0 + 12} height="12" fill="#c99c5c" stroke="#8a6230" strokeWidth="1.2" />
+                    <path d={banaYta} fill="none" stroke={ramp === 'ingen' ? '#7f9bb0' : '#9c6430'} strokeWidth="4" strokeLinejoin="round" />
+                    <Remsa x1={geo.xa + 6} x2={geo.xb - 6} typ={remsa} />
+                    {/* linjal längs planen: avståndet från vänstra backens fot */}
+                    <g>
+                        <rect x={geo.xa - 6} y={BAS + 13} width={LP * geo.S + 12} height="14" fill="#e2e6ea" stroke="#8a94a3" strokeWidth="0.8" />
+                        {Array.from({ length: 13 }, (_, i) => i).map((i) => (
+                            <g key={i}>
+                                <line x1={geo.xa + i * 0.1 * geo.S} y1={BAS + 13} x2={geo.xa + i * 0.1 * geo.S} y2={BAS + 13 + (i % 2 === 0 ? 6 : 3)} stroke="#4b5563" strokeWidth="1" />
+                                {i % 2 === 0 && <text x={geo.xa + i * 0.1 * geo.S + (i === 0 ? 3 : 0)} y={BAS + 26} textAnchor={i === 0 ? 'start' : 'middle'} fontSize="11"
+                                                      fill="#374151" fontFamily="Poppins, sans-serif">{i === 12 ? '1,2 m' : fmt(i * 0.1, 1)}</text>}
+                            </g>
+                        ))}
+                    </g>
+
+                    {/* höjdskalan */}
+                    <g>
+                        <rect x={skalaX - 4} y={yt - 6} width="16" height={BAS - yt + 6} fill="#f1f3f5" stroke="#8a94a3" strokeWidth="1" />
+                        {Array.from({ length: 7 }, (_, i) => i).map((i) => (
+                            <g key={i}>
+                                <line x1={skalaX - 4} y1={BAS - i * 0.1 * geo.S} x2={skalaX + 6} y2={BAS - i * 0.1 * geo.S} stroke="#4b5563" strokeWidth="1.2" />
+                                {i > 0 && <text x={skalaX - 9} y={BAS - i * 0.1 * geo.S + 5} textAnchor="end" fontSize="13" fill="#374151"
+                                                fontFamily="Poppins, sans-serif">{fmt(i * 0.1, 1)}{i === 6 ? ' m' : ''}</text>}
+                            </g>
+                        ))}
+                        {/* visare för klossens höjd */}
+                        <line x1={skalaX + 12} y1={BAS - hNu * geo.S} x2={kl.yta.x} y2={BAS - hNu * geo.S} stroke="rgba(15,22,32,0.4)" strokeWidth="1" strokeDasharray="3 3" />
+                        {dra && <line x1={skalaX + 12} y1={BAS - hMal * geo.S} x2={ytpunkt(cfg, geo, M.uFranHojd(cfg, hMal)).x} y2={BAS - hMal * geo.S}
+                                      stroke="#c8324a" strokeWidth="1.2" strokeDasharray="5 4" />}
+                        <text x={skalaX + 4} y={yt - 16} textAnchor="middle" fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif">
+                            <tspan fontStyle="italic">h</tspan> = {fmt(hNu, 2)} m</text>
+                    </g>
+
+                    {/* värmekameran */}
+                    {ir && (
+                        <g>
+                            <rect x="0" y="0" width={VB_W} height={BAS + 30} fill="rgba(14,12,26,0.93)" />
+                            <path d={banaYta} fill="none" stroke="#3a3550" strokeWidth="9" strokeLinejoin="round" />
+                            {irSeg}
+                            <text x="70" y="40" fontSize="14" fontWeight="600" fill="#e5e1f0" fontFamily="Poppins, sans-serif">VÄRMEKAMERA</text>
+                            <g transform="translate(70 54)">
+                                {Array.from({ length: 40 }, (_, i) => <rect key={i} x={i * 8} y="0" width="8.2" height="10" fill={irFarg(i / 39)} />)}
+                                <text x="0" y="27" fontSize="13" fill="#cfc9e0" fontFamily="Poppins, sans-serif">ingen värme</text>
+                                <text x="320" y="27" textAnchor="end" fontSize="13" fill="#cfc9e0" fontFamily="Poppins, sans-serif">mycket friktionsvärme per meter</text>
+                            </g>
+                        </g>
+                    )}
+
+                    {/* förra försökets stopp */}
+                    {ghostKl && <g opacity="0.45">
+                        <rect x={-KL_W / 2} y={-KL_H / 2} width={KL_W} height={KL_H} rx="3" fill="none" stroke={ir ? '#cfc9e0' : COL.ink}
+                              strokeWidth="1.4" strokeDasharray="5 4" transform={`translate(${ghostKl.x} ${ghostKl.y}) rotate(${ghostKl.ang})`} />
+                        <line x1={ghostKl.x} y1={ghostKl.y - KL_H / 2 - 4} x2={ghostKl.x} y2={ghostKl.y - KL_H / 2 - 26} stroke={ir ? '#cfc9e0' : COL.ink} strokeWidth="1.2" />
+                        <text x={ghostKl.x} y={ghostKl.y - KL_H / 2 - 32} textAnchor="middle" fontSize="13" fill={ir ? '#cfc9e0' : COL.ink}
+                              fontFamily="Poppins, sans-serif">förra stoppet</text>
+                    </g>}
+
+                    {/* gissa-flaggan */}
+                    {fl && (
+                        <g className="handtag" style={{ cursor: flaggDrag.last ? 'default' : 'grab' }}
+                           onPointerDown={flaggDrag.down} onPointerMove={flaggDrag.move} onPointerUp={flaggDrag.up} onPointerCancel={flaggDrag.up}>
+                            <line x1={fl.x} y1={fl.y} x2={fl.x} y2={fl.y - 58} stroke={ir ? '#e5e1f0' : '#374151'} strokeWidth="2" />
+                            <polygon points={`${fl.x},${fl.y - 58} ${fl.x + 24},${fl.y - 50} ${fl.x},${fl.y - 42}`} fill="#c8324a" />
+                            <text x={fl.x} y={fl.y - 66} textAnchor="middle" fontSize="15" fontWeight="600" fill={ir ? '#e5e1f0' : COL.ink}
+                                  fontFamily="Poppins, sans-serif"><tspan fontStyle="italic">s</tspan> = {fmt(flagga, 2)} m</text>
+                            <rect x={fl.x - 18} y={fl.y - 64} width="48" height="70" fill="transparent" />
+                        </g>
+                    )}
+
+                    <Kloss k={kl} m={cfg.m} ir={ir} utanText={show.krafter} />
+                    {handGrupp}
+                    {!ir && pilar}
+
+                    {/* klossens greppyta: dra den uppför rampen för att välja höjden */}
+                    {!dra && !drag.last && (
+                        <circle cx={kl.x} cy={kl.y} r="30" fill="transparent" className={`handtag ${drar ? 'drar' : ''}`}
+                                onPointerDown={drag.down} onPointerMove={drag.move} onPointerUp={drag.up} onPointerCancel={drag.up} />
+                    )}
+
+                    {/* ════ DIAGRAM OCH ENERGIFACK ════ */}
+                    <rect x="20" y={DTOP - 40} width="960" height={VB_H - DTOP + 30} fill="rgba(255,255,255,0.28)" />
+                    <line x1="20" y1={DTOP - 40} x2="980" y2={DTOP - 40} stroke="rgba(15,22,32,0.15)" strokeWidth="1" />
+                    {diagram}
+
+                    <text x={FACK[1].x + FACK_W / 2} y={DTOP - 14} textAnchor="middle" fontSize="14" fill="rgba(15,22,32,0.7)"
+                          fontFamily="Poppins, sans-serif">{dra ? 'Arbetet blir' : `Totalt ${fmt(en.E0, 1)} J, hela tiden`}</text>
+                    {FACK.map((f) => {
+                        const n = Math.max(0, raknare[f.k] - iLuften[f.k]);
+                        const varde = f.k === 'Ek' ? en.Ek : f.k === 'Ep' ? en.Ep : en.Ev;
+                        return (
+                            <g key={f.k}>
+                                <text x={f.x + FACK_W / 2} y={FACK_TOP - 6} textAnchor="middle" fontSize="13" fontWeight="600" fill={f.col}
+                                      fontFamily="Poppins, sans-serif">{f.namn}</text>
+                                <rect x={f.x} y={FACK_TOP} width={FACK_W} height={FACK_BOT - FACK_TOP} rx="6"
+                                      fill={f.col} fillOpacity="0.07" stroke={f.col} strokeWidth="1.4" />
+                                {Array.from({ length: n }, (_, i) => {
+                                    const p = slot(f.x, i);
+                                    return <rect key={i} x={p.x} y={p.y} width="14" height="11" rx="2" fill={COL.brick} stroke={COL.brickK} strokeWidth="0.8" />;
+                                })}
+                                <text x={f.x + FACK_W / 2} y={FACK_BOT + 22} textAnchor="middle" fontSize="15" fontWeight="700"
+                                      fill={COL.ink} fontFamily="'JetBrains Mono', monospace">{dolj ? '?' : `${fmt(varde, 1)} J`}</text>
+                            </g>
+                        );
+                    })}
+                    <g>
+                        <rect x={FACK[0].x} y={FACK_BOT + 34} width="14" height="11" rx="2" fill={COL.brick} stroke={COL.brickK} strokeWidth="0.8" />
+                        <text x={FACK[0].x + 20} y={FACK_BOT + 44} fontSize="13" fill="rgba(15,22,32,0.7)" fontFamily="Poppins, sans-serif">= 1 J</text>
+                    </g>
+                    {flygande.map((t) => (
+                        <rect key={t.id} x={t.x} y={t.y} width="14" height="11" rx="2" fill={COL.brick} stroke={COL.brickK} strokeWidth="0.8" opacity={t.op} />
+                    ))}
+                </svg>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  REGLAGE
+        // ════════════════════════════════════════════════════════
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, disabled, color = 'var(--lab-accent, #c8324a)' }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').replace('−', '-').trim();
+                if (norm === '' || norm === '-' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt} disabled={disabled}
+                           style={{ color }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+        const Slider = ({ label, value, min, max, step, onChange, disabled, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 112, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, disabled, valueNode }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    {valueNode}
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        // Formelkortet: varje storhet har sitt namn ovanför.
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+
+        const FormelKort = ({ lage, en, Ff, s, dolj }) => (
+            <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+                    <div className="flex items-center gap-x-3">
+                        <Vbl label="Friktionsvärme"><em>E</em><sub>v</sub></Vbl>
+                        <span className="fnum">=</span>
+                        <Vbl label="Friktionskraft"><em>F</em><sub>f</sub></Vbl>
+                        <span className="fnum">·</span>
+                        <Vbl label="Sträcka längs underlaget"><em>s</em></Vbl>
+                    </div>
+                    <div className="flex items-center gap-x-3">
+                        <Vbl label="Arbete"><em>W</em></Vbl>
+                        <span className="fnum">=</span>
+                        <Vbl label="Ändring av lägesenergi">Δ<em>E</em><sub>p</sub></Vbl>
+                        <span className="fnum">+</span>
+                        <Vbl label="Friktionsvärme"><em>E</em><sub>v</sub></Vbl>
+                    </div>
+                </div>
+                <div className="mt-3 pt-3" style={{ borderTop: '1px solid var(--lab-line, rgba(15,22,32,0.14))' }}>
+                    {dolj ? (
+                        <span className="fnum-live" style={{ color: 'var(--lab-ink-soft)' }}>Gissa-läget: sätt ut flaggan där du tror att klossen stannar.</span>
+                    ) : lage === 'dra' ? (
+                        <span className="fnum-live">
+                            <span style={{ display: 'inline-block', marginRight: 28 }}><em>W</em> = {fmt(en.Ep - en.E0, 2)} J + {fmt(en.Ev, 2)} J = {fmt(en.W, 2)} J</span>
+                            <span style={{ display: 'inline-block' }}><em>E</em><sub>v</sub> = {fmt(Ff, 2)} N · {fmt(s, 2)} m = {fmt(en.Ev, 2)} J</span>
+                        </span>
+                    ) : (
+                        <span className="fnum-live">
+                            <span style={{ display: 'inline-block', marginRight: 28 }}><em>E</em><sub>p</sub> + <em>E</em><sub>k</sub> = {fmt(en.Ep, 2)} J + {fmt(en.Ek, 2)} J = {fmt(en.Ep + en.Ek, 2)} J</span>
+                            <span style={{ display: 'inline-block' }}>+ <em>E</em><sub>v</sub> = {fmt(en.Ev, 2)} J ger totalt {fmt(en.Ep + en.Ek + en.Ev, 2)} J</span>
+                        </span>
+                    )}
+                </div>
+            </div>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  FÄRDIGA FÖRSÖK
+        // ════════════════════════════════════════════════════════
+        const BAS_CFG = { lage: 'slapp', a: 30, m: 1, h: 0.4, ramp: 'ingen', remsa: 'tra' };
+        const FORSOK = [
+            { id: 'utan',  namn: 'Utan friktion', sub: 'samma höjd varje gång', cfg: { ...BAS_CFG, remsa: 'ingen', h: 0.4 }, verkligTid: true },
+            { id: 'sand',  namn: 'Sandpapper', sub: 'klossen stannar på planen', cfg: { ...BAS_CFG, remsa: 'sand', h: 0.4 } },
+            { id: 'fram',  namn: 'Fram och tillbaka', sub: 'plast: höjden minskar', cfg: { ...BAS_CFG, remsa: 'plast', h: 0.5 }, verkligTid: true },
+            { id: 'latt',  namn: 'Lätt kloss, 0,5 kg', sub: 'trä i backen, filt på planen', cfg: { ...BAS_CFG, ramp: 'tra', remsa: 'filt', m: 0.5, h: 0.5 } },
+            { id: 'tung',  namn: 'Tung kloss, 2 kg', sub: 'samma höjd: var stannar den?', cfg: { ...BAS_CFG, ramp: 'tra', remsa: 'filt', m: 2, h: 0.5 } },
+            { id: 'flack', namn: 'Flack ramp, 20°', sub: 'längre väg i backen', cfg: { ...BAS_CFG, ramp: 'tra', remsa: 'tra', a: 20, h: 0.4 } },
+            { id: 'brant', namn: 'Brant ramp, 45°', sub: 'samma höjd, kortare väg', cfg: { ...BAS_CFG, ramp: 'tra', remsa: 'tra', a: 45, h: 0.4 } },
+            { id: 'ligger', namn: 'Filt i backen, 20°', sub: 'tan α < μ: ligger kvar', cfg: { ...BAS_CFG, ramp: 'filt', remsa: 'tra', a: 20, h: 0.4 } },
+            { id: 'dramed', namn: 'Dra uppför', sub: 'trä: friktion i backen', cfg: { ...BAS_CFG, lage: 'dra', ramp: 'tra', m: 2, h: 0.5 } },
+            { id: 'drautan', namn: 'Dra uppför', sub: 'ingen friktion', cfg: { ...BAS_CFG, lage: 'dra', ramp: 'ingen', m: 2, h: 0.5 } },
+        ];
+
+        // ════════════════════════════════════════════════════════
+        //  GISSA-LÄGET: var stannar klossen?
+        // ════════════════════════════════════════════════════════
+        const slump = (a) => a[Math.floor(Math.random() * a.length)];
+        function nyUppgift(niva) {
+            for (let f = 0; f < 300; f++) {
+                const remsa = slump(['tra', 'filt', 'sand']);
+                const mup = muAv(REMSOR, remsa);
+                const ramp = niva === 2 ? 'tra' : 'ingen';
+                const mur = muAv(RAMPER, ramp);
+                const a = niva === 2 ? slump([30, 35, 40, 45]) : 30;
+                const h = slump([0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5]);
+                const m = slump([0.5, 1, 1.5, 2]);
+                const s = (h - mur * h / Math.tan(a * DEG)) / mup;
+                if (s < 0.15 || s > LP - 0.08) continue;
+                return { lage: 'slapp', a, m, h, ramp, remsa, s, niva };
+            }
+            return { lage: 'slapp', a: 30, m: 1, h: 0.3, ramp: 'ingen', remsa: 'filt', s: 0.75, niva: 1 };
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  HUVUDAPP
+        // ════════════════════════════════════════════════════════
+        const App = () => {
+            const [lage, setLage] = useState('slapp');
+            const [a, setA] = useState(30);
+            const [m, setM] = useState(1);
+            const [h, setH] = useState(0.4);
+            const [ramp, setRamp] = useState('ingen');
+            const [remsa, setRemsa] = useState('filt');
+            const [show, setShow] = useState({ krafter: false, ir: false, forra: true, ultra: true });
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [kor, setKor] = useState(false);
+            const [, setFrame] = useState(0);
+            const [drar, setDrar] = useState(false);
+            const [resultat, setResultat] = useState(null);
+            const [ghost, setGhost] = useState(null);
+            const [gissa, setGissa] = useState(null);       // null | uppgift
+            const [flagga, setFlagga] = useState(0.6);
+            const [gStatus, setGStatus] = useState(null);   // null | 'kor' | { text, bra }
+            const [poang, setPoang] = useState({ traffar: 0, totalt: 0, svit: 0 });
+
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const stRef = useRef(null);
+            const cfgRef = useRef(null);
+            const korRef = useRef(false);
+            const rafRef = useRef(null);
+            const lastRef = useRef(null);
+            const flygRef = useRef([]);
+            const rakRef = useRef({ Ek: 0, Ep: 0, Q: 0, Wp: 0 });
+            const idRef = useRef(1);
+            const senasteRef = useRef(null);
+            const flaggDragRef = useRef(false);
+            const gissaRef = useRef(null);
+
+            const cfg = { lage, a1: a, a2: a, H: HMAX, Lp: LP, m, h, muRamp: muAv(RAMPER, ramp), muPlan: muAv(REMSOR, remsa) };
+            cfgRef.current = cfg;
+            if (!stRef.current) stRef.current = M.nytt(cfg);
+
+            const nollstall = (c = cfgRef.current) => {
+                if (senasteRef.current) { setGhost(senasteRef.current); senasteRef.current = null; }
+                stRef.current = M.nytt(c);
+                const e = M.energier(stRef.current, c);
+                rakRef.current = { Ek: 0, Ep: Math.floor(e.Ep + 1e-6), Q: 0, Wp: 0 };
+                flygRef.current = [];
+                lastRef.current = null;
+                setFrame((n) => n + 1);
+            };
+            useEffect(() => {
+                if (korRef.current) return;
+                nollstall(cfgRef.current);
+                setResultat(null);
+            }, [lage, a, m, h, ramp, remsa]);
+            useEffect(() => { setGhost(null); senasteRef.current = null; }, [lage]);
+            // första renderingen: fyll lägesenergifacket
+            useEffect(() => { nollstall(cfgRef.current); }, []);
+
+            // ── Brickornas bokföring (som i Arbetsbänken) ──
+            const flygTill = (fran, till, nu) => {
+                flygRef.current.push({ id: idRef.current++, p0: fran, till, t0: nu, dur: 650, x: fran.x, y: fran.y, op: 1 });
+            };
+            const bokfor = (nu) => {
+                const c = cfgRef.current, st = stRef.current;
+                const e = M.energier(st, c);
+                const [nEk, nEp, nQ] = heltal([e.Ek, e.Ep, e.Ev]);
+                const ny = { Ek: nEk, Ep: nEp, Q: nQ, Wp: Math.floor(Math.max(0, e.W) + 1e-6) };
+                const gm = rakRef.current;
+                const kallor = [], mal = [];
+                if (c.lage === 'dra') {
+                    const sMal = c.h / Math.sin(c.a1 * DEG);
+                    const smax = Math.max(0.6, Math.ceil(sMal * 10 + 1e-9) / 10);
+                    const F = st.dragProv[st.dragProv.length - 1][1];
+                    for (let i = 0; i < ny.Wp - gm.Wp; i++) kallor.push({ typ: 'rekt', pos: { x: DX0 + (st.sTot / smax) * DW - 6, y: DBOT - F * 7.5 / 2 } });
+                }
+                ['Ep', 'Ek', 'Q'].forEach((k) => {
+                    const d = ny[k] - gm[k];
+                    const fx = FACK.find((f) => f.k === k).x;
+                    for (let i = 0; i < -d; i++) kallor.push({ typ: 'fack', pos: slot(fx, gm[k] - 1 - i) });
+                    for (let i = 0; i < d; i++) mal.push({ k, idx: gm[k] + i });
+                });
+                mal.forEach((mm, i) => {
+                    const kl = kallor[i];
+                    const fx = FACK.find((f) => f.k === mm.k).x;
+                    const fran = kl ? kl.pos : { x: 640, y: DTOP };
+                    flygTill(fran, { k: mm.k, pos: slot(fx, mm.idx) }, nu);
+                });
+                rakRef.current = ny;
+            };
+            const animeraBrickor = (nu) => {
+                flygRef.current = flygRef.current.filter((t) => {
+                    const u = Math.min(1, (nu - t.t0) / t.dur);
+                    const e = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+                    const q = t.till.pos;
+                    t.x = t.p0.x + (q.x - t.p0.x) * e;
+                    t.y = t.p0.y + (q.y - t.p0.y) * e - 50 * Math.sin(Math.PI * u);
+                    return u < 1;
+                });
+            };
+
+            useEffect(() => {
+                const loop = (ts) => {
+                    if (lastRef.current == null) lastRef.current = ts;
+                    const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
+                    lastRef.current = ts;
+                    const st = stRef.current, c = cfgRef.current;
+                    if (korRef.current && !st.klar) {
+                        M.kor(st, c, dt * (show.ultra ? 0.25 : 1));
+                        bokfor(ts);
+                        if (st.klar) avsluta();
+                    }
+                    animeraBrickor(ts);
+                    setFrame((n) => n + 1);
+                    if (korRef.current || flygRef.current.length) rafRef.current = requestAnimationFrame(loop);
+                    else { rafRef.current = null; lastRef.current = null; }
+                };
+                if ((kor || flygRef.current.length) && !rafRef.current) rafRef.current = requestAnimationFrame(loop);
+                return () => { if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null; } };
+            }, [kor, show.ultra]);
+
+            const avsluta = () => {
+                korRef.current = false;
+                setKor(false);
+                const st = stRef.current, c = cfgRef.current;
+                const e = M.energier(st, c);
+                senasteRef.current = { prov: st.prov.slice(), dragProv: st.dragProv.slice(), u: st.u, W: e.W };
+                setResultat(beskriv(st, c, e));
+                if (gissaRef.current) rattaGissning(st);
+            };
+            const starta = () => {
+                const st = stRef.current;
+                if (st.klar || st.sTot > 0) nollstall(cfgRef.current);
+                korRef.current = true; setResultat(null); setKor(true);
+            };
+            const pausa = () => { korRef.current = false; setKor(false); };
+            const fortsatt = () => { korRef.current = true; setKor(true); };
+            const borjaOm = () => { korRef.current = false; setKor(false); nollstall(cfgRef.current); setResultat(null); };
+
+            const korForsok = (f) => {
+                // kor måste gå false → true, annars startas inte animationsloopen om
+                // när ett försök väljs medan ett annat pågår.
+                korRef.current = false; setKor(false);
+                setShow((sh) => ({ ...sh, ultra: !f.verkligTid }));
+                const c = f.cfg;
+                setLage(c.lage); setA(c.a); setM(c.m); setH(c.h); setRamp(c.ramp); setRemsa(c.remsa);
+                setTimeout(() => {
+                    nollstall(cfgRef.current);
+                    korRef.current = true; setResultat(null); setKor(true);
+                }, 40);
+            };
+
+            function beskriv(st, c, e) {
+                if (c.lage === 'dra') {
+                    const dEp = e.Ep - e.E0;
+                    return { rubrik: `W = ${fmt(e.W, 1)} J`,
+                        text: c.muRamp > 0
+                            ? `Handen drog klossen ${fmt(st.sTot, 2)} m uppför rampen med jämn fart. Lägesenergin ökade med ${fmt(dEp, 1)} J och friktionen gjorde ${fmt(e.Ev, 1)} J till värme, så arbetet blev ${fmt(e.W, 1)} J. Utan friktion hade det räckt med ${fmt(dEp, 1)} J.`
+                            : `Utan friktion blir allt arbete lägesenergi: arbetet är lika stort som ökningen av lägesenergin, ${fmt(dEp, 1)} J. Prova samma lyft med trä i backen och jämför arbetsrutan med förra försöket.` };
+                }
+                if (st.sTot < 1e-6) return { rubrik: 'Klossen glider inte',
+                    text: `Friktionen i backen är så stor att klossen ligger kvar. Den glider bara om tyngdens komposant längs rampen, m · g · sin α, är större än den största friktionen μ · m · g · cos α, alltså om tan α > μ. Här är tan ${fmtDeg(c.a1)}° = ${fmt(Math.tan(c.a1 * DEG), 2)} och μ = ${fmt(c.muRamp, 2)}. Modellen räknar, som kursen, med samma friktionstal i vila och i glidning.` };
+                const var_ = st.u < 0 ? 'i vänstra backen' : st.u <= LP ? `på planen, ${fmt(st.u, 2)} m från vänstra backen` : 'i högra backen';
+                return { rubrik: `Klossen stannade ${var_}`,
+                    text: `Klossen gled ${fmt(st.sTot, 2)} m${st.vandor > 0 ? ` och vände ${st.vandor} ${st.vandor === 1 ? 'gång' : 'gånger'}` : ''}. Av startenergin ${fmt(e.E0, 2)} J har ${fmt(e.Ev, 2)} J blivit värme${e.Ep > 0.005 ? ` och ${fmt(e.Ep, 2)} J finns kvar som lägesenergi` : ''}. Ingen energi har försvunnit: värmen och lägesenergin är tillsammans lika mycket som klossen hade från början.` };
+            }
+
+            // ── Gissa-läget ──
+            const startaGissa = (niva) => {
+                const u = nyUppgift(niva);
+                korRef.current = false; setKor(false);
+                setLage('slapp'); setA(u.a); setM(u.m); setH(u.h); setRamp(u.ramp); setRemsa(u.remsa);
+                setFlagga(LP / 2); setGStatus(null); setGissa(u); gissaRef.current = null;
+                setGhost(null); senasteRef.current = null;
+                setShow((sh) => ({ ...sh, ir: false }));
+                setTimeout(() => nollstall(cfgRef.current), 30);
+            };
+            const slappGissning = () => {
+                gissaRef.current = { flagga, u: gissa };
+                setGStatus('kor');
+                nollstall(cfgRef.current);
+                korRef.current = true; setKor(true);
+            };
+            function rattaGissning(st) {
+                const { flagga: fl, u } = gissaRef.current;
+                gissaRef.current = null;
+                const fel = Math.abs(st.u - fl) * 100;   // cm
+                const bra = fel <= 5;
+                const kalkyl = u.niva === 1
+                    ? `Rampen är utan friktion, så hela lägesenergin m · g · h finns kvar vid planen. Friktionen μ · m · g gör om den till värme på sträckan s = h / μ = ${fmt(u.h, 2)} / ${fmt(muAv(REMSOR, u.remsa), 2)} = ${fmt(st.u, 2)} m.`
+                    : `Kalla friktionstalet i backen μ₁ och på planen μ₂. I backen gör friktionen om μ₁ · m · g · cos α · L till värme, där L = h / sin α är backens längd. Kvar vid planen är m · g · (h − μ₁ · h / tan α), och på planen stannar klossen efter s = (h − μ₁ · h / tan α) / μ₂ = ${fmt(st.u, 2)} m.`;
+                const text = `${fel <= 2 ? 'Mitt i prick!' : bra ? 'Nära!' : 'Inte riktigt.'} Flaggan stod ${fmt(fel, 0)} cm från stället där klossen stannade. ${kalkyl} Massan påverkar inte svaret.`;
+                setGStatus({ bra, text });
+                setPoang((p) => ({ traffar: p.traffar + (bra ? 1 : 0), totalt: p.totalt + 1, svit: bra ? p.svit + 1 : 0 }));
+            }
+            const avslutaGissa = () => { setGissa(null); setGStatus(null); gissaRef.current = null; };
+            const doljGissa = !!gissa && gStatus === null;
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(document.fullscreenElement === sceneWrapRef.current || document.webkitFullscreenElement === sceneWrapRef.current);
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => { document.removeEventListener('fullscreenchange', handler); document.removeEventListener('webkitfullscreenchange', handler); };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            // ── Dra klossen uppför vänster ramp för att välja höjden ──
+            const pekare = (e) => {
+                const svg = svgRef.current;
+                const ctm = svg && svg.getScreenCTM();
+                if (!ctm) return null;
+                const pt = svg.createSVGPoint();
+                pt.x = e.clientX; pt.y = e.clientY;
+                return pt.matrixTransform(ctm.inverse());
+            };
+            const hojdFranPekare = (e) => {
+                const p = pekare(e);
+                if (!p) return;
+                const geo = banGeo(cfgRef.current);
+                const hh = (BAS - p.y) / geo.S;
+                setH(Math.round(Math.max(0.05, Math.min(HMAX, hh)) * 100) / 100);
+            };
+            const drag = {
+                last: kor || !!gissa,
+                down: (e) => { e.preventDefault(); setDrar(true); e.currentTarget.setPointerCapture?.(e.pointerId); hojdFranPekare(e); },
+                move: (e) => { if (drar) hojdFranPekare(e); },
+                up: (e) => { setDrar(false); e.currentTarget.releasePointerCapture?.(e.pointerId); },
+            };
+            const flaggaFranPekare = (e) => {
+                const p = pekare(e);
+                if (!p) return;
+                const geo = banGeo(cfgRef.current);
+                setFlagga(Math.max(0.02, Math.min(LP - 0.02, (p.x - geo.xa) / geo.S)));
+            };
+            const flaggDrag = {
+                last: gStatus !== null,
+                down: (e) => { if (gStatus !== null) return; e.preventDefault(); flaggDragRef.current = true; e.currentTarget.setPointerCapture?.(e.pointerId); flaggaFranPekare(e); },
+                move: (e) => { if (flaggDragRef.current) flaggaFranPekare(e); },
+                up: (e) => { flaggDragRef.current = false; e.currentTarget.releasePointerCapture?.(e.pointerId); },
+            };
+
+            const st = stRef.current;
+            const kNu = M.krafter(st, cfg);
+            const en = M.energier(st, cfg);
+            const tShow = (key) => setShow((sh) => ({ ...sh, [key]: !sh[key] }));
+            const lastReglage = kor || !!gissa;
+            const pagar = st.sTot > 0 && !st.klar;
+            const startEtikett = kor ? 'Pausa' : pagar ? 'Fortsätt' : lage === 'dra' ? 'Dra' : 'Släpp klossen';
+            const startKlick = kor ? pausa : pagar ? fortsatt : starta;
+
+            const reglage = (Sl, kompakt) => {
+                const rad = (label, value, min, max, step, onChange, fmtFn, unit, color) => (
+                    <Sl label={label} value={value} min={min} max={max} step={step} onChange={onChange} disabled={lastReglage}
+                        {...(kompakt ? { valueNode: <NumInput value={value} min={min} max={max} fmtFn={fmtFn} unit={unit} color={color} disabled={lastReglage} onCommit={onChange} /> } : {})}>
+                        {!kompakt && <NumInput value={value} min={min} max={max} fmtFn={fmtFn} unit={unit} color={color} disabled={lastReglage} onCommit={onChange} />}
+                    </Sl>
+                );
+                return (
+                    <React.Fragment>
+                        {rad(lage === 'dra' ? 'Höjd att dra till <em>h</em>' : 'Släpphöjd <em>h</em>', h, 0.05, HMAX, 0.01, setH, (x) => fmt(x, 2), 'm')}
+                        {rad('Massa <em>m</em>', m, 0.5, 2, 0.1, setM, (x) => fmt(x, 1), 'kg')}
+                        {rad('Rampernas lutning <em>α</em>', a, 20, 50, 1, setA, fmtDeg, '°')}
+                    </React.Fragment>
+                );
+            };
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        <label><input type="checkbox" checked={show.ir} onChange={() => tShow('ir')} /><span>Värmekamera</span></label>
+                        <label><input type="checkbox" checked={show.krafter} onChange={() => tShow('krafter')} /><span>Krafter</span></label>
+                        <label><input type="checkbox" checked={show.forra} onChange={() => tShow('forra')} /><span>Förra försöket</span></label>
+                        <label><input type="checkbox" checked={show.ultra} onChange={() => tShow('ultra')} /><span>Ultrarapid</span></label>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglage(StSlider, true)}</div>
+                                <div className="st-actions">
+                                    <button className="btn-start" onClick={gissa && gStatus === null ? slappGissning : startKlick} disabled={!!gissa && gStatus !== null}>{gissa && gStatus === null ? 'Släpp klossen' : startEtikett}</button>
+                                    <button className="btn-toggle" onClick={borjaOm} disabled={!!gissa}>Börja om</button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const remsaMu = muAv(REMSOR, remsa);
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-7xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Förlust av mekanisk energi
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Förlust av mekanisk energi</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            En träkloss glider i en bana med två ramper. Utan friktion når den samma höjd på andra sidan
+                            gång på gång. Med friktion blir en del av den <strong>mekaniska energin</strong>, lägesenergi och
+                            rörelseenergi, till <strong>värme</strong> i klossen och underlaget, och klossen når inte lika högt för varje passage.
+                            Ingen energi försvinner: värmekameran visar var den tog vägen. Dra klossen uppför rampen för att
+                            välja höjden, byt remsa på den plana sträckan och tryck på Släpp klossen.
+                        </p>
+
+                        <FormelKort lage={lage} en={en} Ff={kNu.Ff} s={st.sTot} dolj={doljGissa} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 xl:w-3/4 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <Scen cfg={cfg} st={st} k={kNu} en={en} show={show} svgRef={svgRef} drag={drag} drar={drar}
+                                          flagga={flagga} flaggDrag={flaggDrag} visaFlagga={!!gissa} ghost={ghost}
+                                          flygande={flygRef.current} raknare={rakRef.current} dolj={doljGissa} remsa={remsa} ramp={ramp} />
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    {lage === 'dra'
+                                        ? 'Handen drar klossen uppför den vänstra rampen med jämn fart, till den röda höjdlinjen. Kraften är parallell med rampen. Den lilla rörelseenergin när klossen sätts i gång försummas.'
+                                        : 'Dra klossen uppför den vänstra rampen för att välja släpphöjden. Värmekameran visar hur mycket friktionsvärme som har uppstått per meter längs banan. En riktig värmekamera visar i stället temperaturökningen som värmen ger.'}
+                                    {' '}Luftmotståndet försummas. I en verklig rundning mellan ramp och plan trycker klossen extra hårt mot underlaget, så där blir friktionen och värmen lite större. Modellen bortser från det och låter klossen behålla farten genom hörnet.
+                                </p>
+                                {resultat && (
+                                    <div className="glass-card rounded-xl p-4 mt-3 resultat">
+                                        <div className="font-bold mb-1" style={{ color: 'var(--lab-ink)' }}><Fx text={resultat.rubrik} /></div>
+                                        <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}><Fx text={resultat.text} /></p>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="lg:w-1/3 xl:w-1/4 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Försöket</div>
+                                    <div className="mode-seg mb-3">
+                                        <button className={lage === 'slapp' ? 'active' : ''} disabled={lastReglage} onClick={() => setLage('slapp')}>Släpp klossen</button>
+                                        <button className={lage === 'dra' ? 'active' : ''} disabled={lastReglage} onClick={() => setLage('dra')}>Dra uppför</button>
+                                    </div>
+                                    {lage === 'slapp' && (
+                                        <React.Fragment>
+                                            <div className="text-xs mb-1" style={{ color: 'var(--lab-ink-soft)' }}>Remsa på planen</div>
+                                            <div className="remsor mb-3">
+                                                {REMSOR.map((r) => (
+                                                    <button key={r.k} className={remsa === r.k ? 'active' : ''} disabled={lastReglage} onClick={() => setRemsa(r.k)}>
+                                                        {r.namn}<span className="sub">μ = {fmt(r.mu, 2)}</span></button>
+                                                ))}
+                                            </div>
+                                        </React.Fragment>
+                                    )}
+                                    <div className="text-xs mb-1" style={{ color: 'var(--lab-ink-soft)' }}>Rampernas yta</div>
+                                    <div className="mode-seg">
+                                        {RAMPER.map((r) => (
+                                            <button key={r.k} className={ramp === r.k ? 'active' : ''} disabled={lastReglage} onClick={() => setRamp(r.k)}>
+                                                {r.namn}<span className="sub">μ = {fmt(r.mu, 2)}</span></button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    {!isFullscreen && reglage(Slider, false)}
+                                    {isFullscreen && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Reglagen finns i rutan uppe till höger i fullskärm.</p>}
+                                    <div className="flex gap-2 mt-2">
+                                        <button className="btn-start flex-1" onClick={startKlick} disabled={!!gissa}>{startEtikett}</button>
+                                        <button className="btn-toggle flex-1" onClick={borjaOm} disabled={!!gissa}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Färdiga försök</div>
+                                    <div className="forsok-lista">
+                                        {FORSOK.map((f) => (
+                                            <button key={f.id} className="forsok" disabled={!!gissa} onClick={() => korForsok(f)}>
+                                                {f.namn}<span className="sub">{f.sub}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Avläsning</div>
+                                    <div className="avl">
+                                        <div><div className="v">{fmt(M.hojd(cfg, st.u), 2)} m</div><div className="l">höjd <em>h</em></div></div>
+                                        <div><div className="v">{fmt(Math.abs(st.vel), 2)} m/s</div><div className="l">fart</div></div>
+                                        <div><div className="v">{fmt(st.sTot, 2)} m</div><div className="l">sträcka <em>s</em></div></div>
+                                        <div><div className="v" style={{ color: COL.Ep }}>{fmt(en.Ep, 2)} J</div><div className="l"><em>E</em><sub>p</sub></div></div>
+                                        <div><div className="v" style={{ color: COL.Ek }}>{fmt(en.Ek, 2)} J</div><div className="l"><em>E</em><sub>k</sub></div></div>
+                                        <div><div className="v" style={{ color: COL.Q }}>{fmt(en.Ev, 2)} J</div><div className="l"><em>E</em><sub>v</sub></div></div>
+                                        <div><div className="v" style={{ color: COL.frik }}>{fmt(kNu.Ff, 2)} N</div><div className="l">friktion <em>F</em><sub>f</sub></div></div>
+                                        <div><div className="v">{fmt(kNu.FN, 2)} N</div><div className="l">normalkraft <em>F</em><sub>N</sub></div></div>
+                                        <div><div className="v" style={{ color: COL.brickK }}>{lage === 'dra' ? `${fmt(en.W, 2)} J` : '–'}</div><div className="l">arbete <em>W</em></div></div>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flbl" style={{ textAlign: 'left' }}>Gissa-läge: var stannar klossen?</div>
+                                        {poang.totalt > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>{poang.traffar} av {poang.totalt} nära{poang.svit > 1 ? `, ${poang.svit} i rad` : ''}</div>}
+                                    </div>
+                                    {!gissa && (
+                                        <div className="flex flex-col gap-2">
+                                            <button className="btn-toggle" onClick={() => startaGissa(1)}>Nivå 1: friktion bara på planen</button>
+                                            <button className="btn-toggle" onClick={() => startaGissa(2)}>Nivå 2: friktion även i backen</button>
+                                        </div>
+                                    )}
+                                    {gissa && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                Klossen ({fmt(gissa.m, 1)} kg) släpps från höjden <em>h</em> = {fmt(gissa.h, 2)} m.
+                                                {gissa.niva === 1
+                                                    ? <span> Rampen är utan friktion och lutar {gissa.a}°.</span>
+                                                    : <span> Rampen är av trä (<em>μ</em> = 0,25) och lutar {gissa.a}°.</span>}
+                                                {' '}Remsan på planen är {REMSOR.find((r) => r.k === gissa.remsa).namn.toLowerCase()} med <em>μ</em> = {fmt(remsaMu, 2)}.
+                                                Dra flaggan till stället där du tror att klossen stannar.
+                                            </p>
+                                            {gStatus === null && <button className="btn-start w-full mb-2" onClick={slappGissning}>Släpp klossen</button>}
+                                            {gStatus === 'kor' && <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Klossen glider …</p>}
+                                            {gStatus && gStatus !== 'kor' && <p className="text-sm mb-2" style={{ color: gStatus.bra ? '#15803d' : 'var(--lab-accent)' }}><Fx text={gStatus.text} /></p>}
+                                            <div className="flex gap-2">
+                                                {gStatus && gStatus !== 'kor' && <button className="btn-toggle flex-1" onClick={() => startaGissa(gissa.niva)}>Ny uppgift</button>}
+                                                <button className="btn-toggle flex-1" onClick={avslutaGissa} disabled={gStatus === 'kor'}>Avsluta</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Energin försvinner inte</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Den mekaniska energin, lägesenergi plus rörelseenergi, minskar när klossen glider på ett strävt underlag.
+                                    Men lika mycket blir värme i klossen och underlaget, där de gnids mot varandra. Den streckade linjen i diagrammet, den totala energin,
+                                    ligger kvar på samma nivå hela tiden. Det är därför man säger att mekanisk energi går förlorad, inte energi.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Värmen beror på sträckan</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Friktionsvärmen är <em>E</em><sub>v</sub> = <em>F</em><sub>f</sub> · <em>s</em>, där <em>s</em> är sträckan längs
+                                    underlaget, inte höjdskillnaden. Friktionskraften är <em>F</em><sub>f</sub> = <em>μ</em> · <em>F</em><sub>N</sub>,
+                                    och i en backe är normalkraften bara <em>m</em> · <em>g</em> · cos <em>α</em>. I värmekameran glöder spåret därför
+                                    svagare i backen än på planen, om underlaget är detsamma.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Mer arbete med friktion</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Drar man klossen uppför går arbetet till två saker: lägesenergi och värme,
+                                    <em> W</em> = Δ<em>E</em><sub>p</sub> + <em>E</em><sub>v</sub>. För samma höjd krävs därför mer arbete när
+                                    det finns friktion. Jämför de två försöken Dra uppför: arbetsrutan blir större med trä i backen.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Friktionen förstör energi.”</strong> Nej. Energin byter form till värme, och summan är densamma. Det är
+                                    bara den mekaniska energin som minskar.</li>
+                                <li><strong>”En tyngre kloss glider längre.”</strong> Inte om friktionstalet är detsamma. Både lägesenergin och
+                                    friktionskraften är proportionella mot massan, så massan förkortas bort. Prova den lätta och den tunga klossen.</li>
+                                <li><strong>”Friktionsvärmen beror på höjden klossen faller.”</strong> Nej, den beror på sträckan längs underlaget.
+                                    En flack ramp ger längre väg och mer värme i backen för samma höjd.</li>
+                                <li><strong>”Friktionen är lika stor i backen som på planen.”</strong> Inte med samma underlag. I backen trycker klossen mindre mot
+                                    underlaget, så normalkraften och därmed friktionen är mindre där.</li>
+                                <li><strong>”Utan friktion skulle klossen till slut stanna ändå.”</strong> Inte i den här modellen. Utan friktion och
+                                    luftmotstånd når klossen samma höjd varje gång, eftersom ingen mekanisk energi blir värme.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

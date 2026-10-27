@@ -47,6 +47,7 @@ window.SIM_NAMES = {
   ],
   'fysik1-newtons-gravitationslag.html': 'Newtons gravitationslag',
   'fysik1-hiss-app.html': 'Krafter i hissen',
+  'fysik1-arbete-app.html': 'Arbete',
   'fysik1-berg-och-dalbana.html': 'Berg-och-dalbana (energiprincipen)',
   'fysik1-tryck-pa-app.html': 'Tryck och tryckkraft',
   'fysik1-magdeburgska-halvklot.html': 'Magdeburgska halvkloten',

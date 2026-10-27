@@ -1,0 +1,1874 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arbete — Fysiklabbet</title>
+    <meta name="description" content="Dra en vagn eller en låda med en dynamometer, lyft en vikt eller bär den. Se arbetet W = F · s växa som en area som fylls med joulebrickor, och följ energin vidare till rörelseenergi, lägesenergi och värme.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik1-arbete-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Arbete — Fysik nivå 1">
+    <meta property="og:description" content="Dra en vagn eller en låda med en dynamometer, lyft en vikt eller bär den. Se arbetet W = F · s växa som en area som fylls med joulebrickor, och följ energin vidare till rörelseenergi, lägesenergi och värme.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik1-arbete-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Arbete — Fysik nivå 1">
+    <meta name="twitter:description" content="Dra en vagn eller en låda med en dynamometer, lyft en vikt eller bär den. Se arbetet W = F · s växa som en area som fylls med joulebrickor, och följ energin vidare till rörelseenergi, lägesenergi och värme.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+        input[type="range"]:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1;
+                text-align: center; max-width: 150px; }
+        .fnum { color: var(--lab-ink); font-size: 20px; font-family: 'Poppins', sans-serif; }
+        .fnum-live { color: var(--lab-ink); font-size: 17px; font-family: 'Poppins', sans-serif; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 80px; }
+        .num-in { width: 50px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:disabled { opacity: 0.55; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* Scenen: en svg med egen proportion (1000 × 660). Mobilen (sektion 8 i
+           styles-laborans-sim.css) dockar verktygen under den. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1000 / 660;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .handtag { cursor: grab; }
+        .handtag.drar { cursor: grabbing; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 34px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-start {
+            background: var(--lab-accent, #c8324a); color: #fff; border: 1px solid var(--lab-accent, #c8324a);
+            border-radius: 8px; padding: 9px 14px; font-weight: 700; cursor: pointer;
+        }
+        .btn-start:hover:not(:disabled) { filter: brightness(1.06); }
+        .btn-start:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .mode-seg { display: flex; gap: 0; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button {
+            flex: 1; padding: 8px 8px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .mode-seg button:last-child { border-right: none; }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+
+        /* Färdiga försök */
+        .forsok-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .forsok {
+            text-align: left; padding: 7px 9px; border-radius: 8px; cursor: pointer;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; font-weight: 600; color: var(--lab-ink, #0f1620); line-height: 1.25;
+        }
+        .forsok .sub { display: block; font-size: 11.5px; font-weight: 400; color: var(--lab-ink-soft, #3a4151); }
+        .forsok:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .forsok:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* Avläsning */
+        .avl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
+        .avl .v { font-weight: 700; font-size: 16px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+        .avl .l { font-size: 11.5px; color: var(--lab-ink-muted, #5a6170); }
+
+        /* Resultatrutan efter ett försök */
+        .resultat { border-left: 4px solid var(--lab-accent, #c8324a); }
+        .resultat.ratt { border-left-color: #15803d; }
+
+        /* Gissa-läget */
+        .gissa-in { width: 90px; padding: 6px 8px; border-radius: 7px; font-size: 15px;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                    background: #fff; font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .gissa-in:focus { outline: none; border-color: var(--lab-accent, #c8324a); }
+        .kort3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .kort3 button {
+            padding: 8px 6px; border-radius: 8px; cursor: pointer; text-align: center;
+            background: var(--lab-bg, #f3eee4); border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; line-height: 1.45; color: var(--lab-ink, #0f1620);
+        }
+        .kort3 button:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .kort3 button.vald { border-color: var(--lab-ink, #0f1620); box-shadow: 0 0 0 2px rgba(15,22,32,0.15); }
+        .kort3 button.basta { background: rgba(21,128,61,0.10); border-color: #15803d; }
+        .kort3 .bok { font-weight: 700; font-size: 15px; display: block; margin-bottom: 2px; }
+        .kort3 .stapel { height: 6px; border-radius: 3px; background: #d4930f; margin-top: 5px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script id="arbete-motor">
+// Rörelsemotorn för simuleringen Arbete (fysik1-arbete-app.html).
+// Källan bor här och klistras in i sidans <script id="arbete-motor">; testet
+// (test-arbete-motor.js) läser den här filen direkt. Håll dem identiska.
+//
+// En rörelse längs EN axel, med konstanta krafter inom varje tidssteg. Varje
+// steg integreras exakt (dx = v·dt + a·dt²/2), så energibokföringen
+//   W + Ek0 = Ek + Ep + Q
+// stämmer på avrundningsfelet när, inte bara ungefär.
+//
+// Lägen:
+//   'dra'  — föremål på vågrät bänk, kraften F i vinkeln v över vågrätt.
+//            Fs = F·cos v längs rörelsen, F1 = F·sin v lyfter något, så
+//            FN = m·g − F1 och friktionen Ff = μ·FN (samma μ för vila och
+//            glidning, som i kursen). En stoppkloss bakom
+//            föremålet hindrar det från att åka bakåt från start.
+//   'lyft' — föremålet lyfts lodrätt, kraften F rakt uppåt. Vilar på bänken
+//            så länge F ≤ m·g. Stannar det på väg upp håller handen kvar det.
+//   'bar'  — handen bär föremålet med jämn fart åt sidan. Kraften är m·g
+//            rakt uppåt, vinkelrät mot rörelsen, så Fs = 0 och W = 0.
+(function (root) {
+    const G = 9.82;
+    const DEG = Math.PI / 180;
+    const BAR_FART = 1.0;          // m/s när handen bär
+    const FAST_TID = 1.0;          // s stillastående innan försöket avslutas
+
+    function nytt(cfg) {
+        const v0 = cfg.v0 || 0;
+        return {
+            x: 0, vel: v0, t: 0,
+            W: 0, Q: 0, Ek0: 0.5 * cfg.m * v0 * v0,
+            still: 0, rortSig: v0 > 0,
+            klar: false, orsak: null,
+            prov: [[0, krafter({ x: 0, vel: v0 }, cfg).Fs]],
+        };
+    }
+
+    // Krafterna i ett givet tillstånd. Ff är friktionskraftens storlek,
+    // statisk = föremålet står still (friktionen eller bänken håller emot).
+    function krafter(st, cfg) {
+        const m = cfg.m, FG = m * G;
+        if (cfg.lage === 'bar') {
+            return { Fs: 0, F1: FG, FN: 0, Ff: 0, a: 0, statisk: false, FG };
+        }
+        if (cfg.lage === 'lyft') {
+            const F = cfg.F;
+            const paBanken = st.x <= 1e-12 && st.vel <= 1e-12;
+            if (paBanken && F <= FG) {
+                return { Fs: F, F1: F, FN: FG - F, Ff: 0, a: 0, statisk: true, FG };
+            }
+            return { Fs: F, F1: F, FN: 0, Ff: 0, a: (F - FG) / m, statisk: false, FG };
+        }
+        // 'dra'
+        const vr = cfg.v * DEG;
+        const Fs = cfg.F * Math.cos(vr);
+        const F1 = cfg.F * Math.sin(vr);
+        const FN = Math.max(0, FG - F1);
+        const Ffmax = cfg.mu * FN;
+        if (Math.abs(st.vel) <= 1e-12) {
+            // Stoppklossen bakom föremålet tar emot en kraft bakåt från start.
+            if (Fs < 0 && st.x <= 1e-12) return { Fs, F1, FN, Ff: 0, a: 0, statisk: true, stopp: true, FG };
+            if (Math.abs(Fs) <= Ffmax + 1e-12) return { Fs, F1, FN, Ff: Math.abs(Fs), a: 0, statisk: true, FG };
+            const a = (Fs - Math.sign(Fs) * Ffmax) / m;
+            return { Fs, F1, FN, Ff: Ffmax, a, statisk: false, FG };
+        }
+        const a = (Fs - Math.sign(st.vel) * Ffmax) / m;
+        return { Fs, F1, FN, Ff: Ffmax, a, statisk: false, FG };
+    }
+
+    // Ett tidssteg h. Konstant acceleration inom steget; steget kortas om
+    // farten byter tecken (friktionen stannar föremålet), om målet nås eller
+    // om föremålet når stoppklossen.
+    function steg(st, cfg, h) {
+        if (st.klar) return st;
+        const k = krafter(st, cfg);
+        if (cfg.lage === 'bar') {
+            let dx = BAR_FART * h;
+            if (st.x + dx >= cfg.s) { dx = cfg.s - st.x; st.klar = true; st.orsak = 'mal'; }
+            st.x += dx; st.t += h;
+            st.prov.push([st.x, 0]);
+            return st;
+        }
+        if (k.statisk) {
+            st.still += h; st.t += h;
+            if (st.still >= FAST_TID) {
+                st.klar = true;
+                st.orsak = st.rortSig ? 'stannade' : 'fast';
+            }
+            return st;
+        }
+        st.still = 0;
+        const v = st.vel, a = k.a;
+        let tau = h;
+        let stopp = false, mal = false;
+        // Farten byter tecken inom steget?
+        if (v !== 0 && a !== 0 && Math.sign(a) !== Math.sign(v)) {
+            const tStopp = -v / a;
+            if (tStopp < tau) { tau = tStopp; stopp = true; }
+        }
+        let dx = v * tau + 0.5 * a * tau * tau;
+        // Målet nås inom steget?
+        if (st.x + dx >= cfg.s - 1e-12 && dx > 0) {
+            const d = cfg.s - st.x;
+            let t;
+            if (Math.abs(a) < 1e-12) t = d / v;
+            else {
+                const disk = v * v + 2 * a * d;
+                t = (-v + Math.sqrt(Math.max(0, disk))) / a;
+            }
+            tau = Math.max(0, Math.min(tau, t)); mal = true; stopp = false;
+            dx = d;
+        }
+        // Stoppklossen (bakåt till start)?
+        if (st.x + dx < 0) {
+            const d = -st.x;
+            let t;
+            if (Math.abs(a) < 1e-12) t = d / v;
+            else {
+                const disk = v * v + 2 * a * d;
+                t = (-v - Math.sqrt(Math.max(0, disk))) / a;
+            }
+            tau = Math.max(0, Math.min(tau, t)); dx = d;
+            stopp = true;
+        }
+        const nyVel = stopp ? 0 : v + a * tau;
+        st.W += k.Fs * dx;
+        st.Q += k.Ff * Math.abs(dx);
+        // När stoppklossen stoppar föremålet (bakåt till x = 0) tas den kvarvarande
+        // rörelseenergin upp av stöten. Den räknas som värme.
+        if (stopp && st.x + dx <= 1e-12 && dx < 0) {
+            const kvar = 0.5 * cfg.m * (v + a * tau) ** 2;
+            st.Q += kvar;
+        }
+        st.x += dx; st.vel = nyVel; st.t += tau;
+        if (Math.abs(dx) > 0) st.rortSig = true;
+        st.prov.push([st.x, k.Fs]);
+        if (mal) { st.klar = true; st.orsak = 'mal'; }
+        // Föremålet har stannat (friktionen, en bromsande kraft eller handen
+        // som håller kvar vikten): försöket är slut.
+        else if (stopp) { st.klar = true; st.orsak = 'stannade'; }
+        return st;
+    }
+
+    // Kör så många småsteg som behövs för tiden dt.
+    function kor(st, cfg, dt, h = 1 / 600) {
+        let kvar = dt;
+        while (kvar > 1e-12 && !st.klar) {
+            const d = Math.min(h, kvar);
+            steg(st, cfg, d);
+            kvar -= d;
+        }
+        return st;
+    }
+
+    function energier(st, cfg) {
+        const Ek = 0.5 * cfg.m * st.vel * st.vel;
+        const Ep = cfg.lage === 'lyft' ? cfg.m * G * st.x : 0;
+        const Ek0 = cfg.lage === 'bar' ? 0 : st.Ek0;
+        const EkVisa = cfg.lage === 'bar' ? 0 : Ek;
+        return { Ek: EkVisa, Ep, Q: st.Q, W: st.W, Ek0,
+                 fel: (st.W + Ek0) - (EkVisa + Ep + st.Q) };
+    }
+
+    root.ArbeteMotor = { G, DEG, BAR_FART, nytt, krafter, steg, kor, energier };
+    if (typeof module !== 'undefined') module.exports = root.ArbeteMotor;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+        const M = window.ArbeteMotor;
+        const G = M.G, DEG = M.DEG;
+
+        // ── Talformat: decimalkomma, äkta minustecken, exakt noll som "0" ──
+        const fmt = (num, d = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+        const fmtDeg = (a) => String(Math.round(a));
+
+        const COL = {
+            F:     '#d12f2f',   // kraften från handen och dess komposanter (som i teorin)
+            frik:  '#e0701a',   // friktionskraft
+            tyngd: '#7c3aed',   // tyngdkraft
+            ink:   '#0f1620',
+            brick: '#d4930f',   // joulebrickorna
+            brickK:'#8f6206',
+            Ek:    '#2563eb',
+            Ep:    '#15803d',
+            Q:     '#c2410c',
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  SCENENS GEOMETRI (viewBox 1000 × 660)
+        // ════════════════════════════════════════════════════════
+        const VB_W = 1000, VB_H = 660;
+        const BANK_Y = 360;            // bänkens ovansida
+        const PXM = 200;               // px per meter längs bänken
+        const PXM_L = 240;             // px per meter vid lyftet
+        // Föremålets bakkant vid start. Plats bakom för friktionspilen, och
+        // längre in när handen drar bakåt (v > 90°) så att den syns.
+        const xStart = (c) => (c.lage === 'dra' && Math.cos(c.v * DEG) < -0.01) ? 380 : 190;
+        const FSK = 6;                 // kraftpilarnas skala vid dragning, px per newton
+        const FSK_V = 3.5;             // vid lyft och bär (tyngdkraften måste rymmas)
+        const LS = 138, LS_L = 26;     // snörets längd (dra / lyft och bär), längre än F-pilen vid 20 N
+        const DB = 70;                 // dynamometerns hylsa
+        const STR = 1.7;               // dynamometerns utdrag, px per newton
+        const FMAX = 20;               // dynamometerns största värde (N)
+        const LYFT_X = 330;            // viktens mitt när den lyfts
+        const STATIV_X = 250;
+        const BAR_X0 = 230;           // viktens mitt vid start när den bärs
+        const BAR_Y = 300;             // viktens underkant när den bärs
+
+        // Arbetsrutan
+        const DX0 = 92, DW = 500, DTOP = 462, DBOT = 612;
+        // Energifacken
+        const FACK = [
+            { k: 'Ek', namn: 'Rörelseenergi', x: 672, col: COL.Ek },
+            { k: 'Ep', namn: 'Lägesenergi',   x: 774, col: COL.Ep },
+            { k: 'Q',  namn: 'Värme',         x: 876, col: COL.Q },
+        ];
+        const FACK_W = 96, FACK_TOP = 470, FACK_BOT = 612;
+        const slot = (fx, i) => ({
+            x: fx + 9 + (i % 5) * 16,
+            y: FACK_BOT - 15 - Math.floor(i / 5) * 13.5,
+        });
+
+        const foremal = (lage, obj, m) => {
+            if (lage !== 'dra') {
+                const mm = Math.min(m, 2.5);
+                return { w: 30 + 10 * mm, h: 34 + 8 * mm };
+            }
+            if (obj === 'vagn') return { w: 86, h: 62 };
+            return { w: 56 + 7 * Math.min(m, 5), h: 44 + 6 * Math.min(m, 5) };
+        };
+
+        // Var föremålet, angreppspunkten A och handtaget befinner sig.
+        function geometri(cfg, x) {
+            const { lage, obj, m, F, v } = cfg;
+            const f = foremal(lage, obj, m);
+            if (lage === 'dra') {
+                const x0 = xStart(cfg);
+                const bak = x0 + x * PXM;
+                const fram = bak + f.w;
+                const ay = obj === 'vagn' ? BANK_Y - 40 : BANK_Y - f.h / 2;
+                const ux = Math.cos(v * DEG), uy = -Math.sin(v * DEG);
+                const L = LS + 4 + STR * F + DB + 10;
+                // Drar handen bakåt sitter snöret i föremålets bakkant.
+                const ax = ux < -0.01 ? bak : fram;
+                return { f, x0, bak, fram, A: { x: ax, y: ay }, u: { x: ux, y: uy }, L,
+                         H: { x: ax + ux * L, y: ay + uy * L } };
+            }
+            const cx = lage === 'lyft' ? LYFT_X : BAR_X0 + x * PXM;
+            const under = lage === 'lyft' ? BANK_Y - x * PXM_L : BAR_Y;
+            const topp = under - f.h;
+            const L = LS_L + 4 + STR * F + DB + 10;
+            return { f, cx, under, topp, A: { x: cx, y: topp }, u: { x: 0, y: -1 }, L,
+                     H: { x: cx, y: topp - L } };
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  RITDELAR
+        // ════════════════════════════════════════════════════════
+        // Pil med rakt avslutat skaft som slutar vid huvudets bas.
+        const Pil = ({ x1, y1, x2, y2, color, width = 4.5, head = 15, dash = false, edge = false, opacity = 1 }) => {
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 2) return null;
+            const ux = (x2 - x1) / len, uy = (y2 - y1) / len;
+            const hd = Math.min(head, len * 0.9);
+            const bx = x2 - ux * hd, by = y2 - uy * hd;
+            const hw = hd * 0.48;
+            const p1 = `${bx - uy * hw},${by + ux * hw}`;
+            const p2 = `${bx + uy * hw},${by - ux * hw}`;
+            const kant = 'rgba(15,22,32,0.5)';
+            return (
+                <g opacity={opacity}>
+                    {edge && <line x1={x1} y1={y1} x2={bx} y2={by} stroke={kant} strokeWidth={width + 3} strokeLinecap="butt" />}
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="butt" strokeDasharray={dash ? '7 5' : undefined} />
+                    <polygon points={`${x2},${y2} ${p1} ${p2}`} fill={color}
+                             stroke={edge ? kant : 'none'} strokeWidth={edge ? 1.6 : 0} strokeLinejoin="round" />
+                </g>
+            );
+        };
+
+        // Beteckning med index: F, Fₛ, F₁ … Variabeln kursiv, indexet rakt.
+        const Bet = ({ x, y, sym, idx, color, size = 18, anchor = 'start', weight = 600 }) => (
+            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}
+                  fontFamily="Poppins, sans-serif">
+                <tspan fontStyle="italic">{sym}</tspan>
+                {idx != null && <tspan fontSize={size * 0.68} dy={size * 0.25}>{idx}</tspan>}
+            </text>
+        );
+
+        // Handen som håller i dynamometerns ring. Lokalt: ringen i origo,
+        // armen ut längs +x (bort från föremålet).
+        const Hand = () => (
+            <g>
+                <path d="M 30 -14 L 82 -15 L 82 15 L 30 14 Z" fill="#3d5a80" stroke="#2b4160" strokeWidth="1.4" strokeLinejoin="round" />
+                <rect x="26" y="-16" width="9" height="32" rx="3" fill="#2b4160" />
+                <path d="M 3 -11 Q 8 -16 20 -15 Q 28 -14 29 -8 L 29 8 Q 28 14 20 15 Q 8 16 3 11 Z"
+                      fill="#ebbf9b" stroke="#a8724c" strokeWidth="1.3" />
+                <circle cx="0" cy="0" r="8" fill="none" stroke="#6b7280" strokeWidth="3" />
+                {[-12, -6, 0, 6].map((y, i) => (
+                    <rect key={i} x="-7" y={y} width="15" height="6.2" rx="3.1"
+                          fill="#ebbf9b" stroke="#a8724c" strokeWidth="1.1" />
+                ))}
+                <path d="M 16 -13 Q 7 -20 -3 -14" fill="none" stroke="#a8724c" strokeWidth="8.4" strokeLinecap="round" />
+                <path d="M 16 -13 Q 7 -20 -3 -14" fill="none" stroke="#ebbf9b" strokeWidth="6" strokeLinecap="round" />
+                <path d="M 19 -6 Q 22 0 19 6" fill="none" stroke="#a8724c" strokeWidth="1" opacity="0.6" />
+            </g>
+        );
+
+        // Dynamometern lokalt: snöre från A (origo) ut längs +x, krok, den
+        // utdragna skalstången (längd ∝ F), hylsan och ringen.
+        const Dynamometer = ({ F, ls }) => {
+            const ut = STR * F;
+            const xr = ls + 4;               // skalstången börjar efter kroken
+            const xh = xr + ut;              // hylsan
+            const ticks = [];
+            for (let n = 0; n <= F + 1e-9; n += 5) {
+                const tx = xh - STR * n;
+                ticks.push(<line key={n} x1={tx} y1={-4} x2={tx} y2={4} stroke="#8f6206" strokeWidth="1.2" />);
+            }
+            return (
+                <g>
+                    <line x1="0" y1="0" x2={ls} y2="0" stroke="#5b4a3a" strokeWidth="1.8" />
+                    <path d={`M ${ls - 1} 0 q 3 -5 6 0 q 0 3 -2 4`} fill="none" stroke="#4b5563" strokeWidth="1.8" />
+                    <rect x={xr} y="-4.5" width={Math.max(0.5, ut)} height="9" fill="#fde68a" stroke="#a16207" strokeWidth="1" />
+                    {ticks}
+                    <rect x={xh} y="-10" width={DB} height="20" rx="5" fill="#e5e9ee" stroke="#7b8594" strokeWidth="1.4" />
+                    <rect x={xh + DB - 18} y="-10" width="8" height="20" fill="#c8324a" opacity="0.85" />
+                    <text x={xh + 30} y="4.5" fontSize="12" fontWeight="700" fill="#4b5563" fontFamily="Poppins, sans-serif" textAnchor="middle">0–20 N</text>
+                </g>
+            );
+        };
+
+        // Dynamikvagn eller trälåda på bänken.
+        const Vagn = ({ x, w }) => (
+            <g>
+                <rect x={x} y={BANK_Y - 62} width={w} height="40" rx="5" fill="#c4d9f0" stroke="#4f7197" strokeWidth="1.8" />
+                <line x1={x + 6} y1={BANK_Y - 52} x2={x + w - 6} y2={BANK_Y - 52} stroke="rgba(79,113,151,0.5)" strokeWidth="1.4" />
+                <rect x={x + 10} y={BANK_Y - 44} width={w - 20} height="10" rx="3" fill="rgba(79,113,151,0.18)" />
+                {[x + 20, x + w - 20].map((cx, i) => (
+                    <g key={i}>
+                        <circle cx={cx} cy={BANK_Y - 11} r="11" fill="#2c2c30" stroke="rgba(15,22,32,0.6)" strokeWidth="1" />
+                        <circle cx={cx} cy={BANK_Y - 11} r="3.6" fill="#8b8b93" />
+                    </g>
+                ))}
+            </g>
+        );
+        const Lada = ({ x, w, h, m }) => (
+            <g>
+                <rect x={x} y={BANK_Y - h} width={w} height={h} rx="3" fill="#c98d4f" stroke="#7a4d22" strokeWidth="1.8" />
+                {[0.28, 0.55, 0.8].map((t, i) => (
+                    <path key={i} d={`M ${x + 4} ${BANK_Y - h + h * t} q ${w * 0.3} ${-4 + i * 3} ${w - 8} ${1 - i}`}
+                          fill="none" stroke="#9c6430" strokeWidth="1" opacity="0.55" />
+                ))}
+                <rect x={x + 3} y={BANK_Y - h + 3} width={w - 6} height={h - 6} rx="2" fill="none" stroke="#a86a33" strokeWidth="1.2" opacity="0.7" />
+                <text x={x + w / 2} y={BANK_Y - h / 2 + 5} textAnchor="middle" fontSize="14" fontWeight="700"
+                      fill="#4a2c10" fontFamily="Poppins, sans-serif">{fmt(m, 1)} kg</text>
+            </g>
+        );
+        // Vikt (lyft och bär): mässingsvikt med krok.
+        const Vikt = ({ cx, under, w, h, m }) => (
+            <g>
+                <rect x={cx - w / 2} y={under - h} width={w} height={h} rx="5" fill="#b8913a" stroke="#6d521a" strokeWidth="1.8" />
+                <rect x={cx - w / 2 + 4} y={under - h + 4} width="6" height={h - 8} rx="3" fill="#e6c36a" opacity="0.7" />
+                <ellipse cx={cx} cy={under - h} rx={w / 2} ry="4" fill="#cfa64a" stroke="#6d521a" strokeWidth="1.2" />
+                <text x={cx} y={under - h * 0.6} textAnchor="middle" fontSize="13" fontWeight="700"
+                      fill="#3b2a08" fontFamily="Poppins, sans-serif">{fmt(m, 1)} kg</text>
+            </g>
+        );
+
+        // Måttpil med beteckning (förflyttningen s).
+        const SPil = ({ x1, y1, x2, y2, label, side = 'under' }) => {
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 3) return null;
+            const lodrat = Math.abs(x2 - x1) < 1;
+            const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+            return (
+                <g>
+                    <Pil x1={x1} y1={y1} x2={x2} y2={y2} color="rgba(15,22,32,0.78)" width={2} head={10} />
+                    {lodrat
+                        ? <text x={mx + 10} y={my + 5} fontSize="16" fill={COL.ink} fontFamily="Poppins, sans-serif">
+                              <tspan fontStyle="italic">s</tspan> = {label}</text>
+                        : <text x={x2 + 10} y={y1 + 5} textAnchor="start" fontSize="16" fill={COL.ink}
+                                fontFamily="Poppins, sans-serif"><tspan fontStyle="italic">s</tspan> = {label}</text>}
+                </g>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  SCENEN
+        // ════════════════════════════════════════════════════════
+        const Scen = ({ cfg, st, k, en, show, svgRef, handtag, drar, gissaDolj, ghost, flygande, raknare, utforska, smax }) => {
+            const g = geometri(cfg, st.x);
+            const { lage, obj, m, F, v } = cfg;
+            const visaKrafter = show.krafter;
+
+            // ── Arbetsrutan ──
+            const fsk = utforska && lage === 'dra' ? 3.75 : 7.5;      // px per newton
+            const noll = utforska && lage === 'dra' ? (DTOP + DBOT) / 2 : DBOT;
+            const sx = (x) => DX0 + (x / smax) * DW;
+            const fy = (f) => noll - f * fsk;
+            const omrade = (prov) => {
+                if (!prov || prov.length < 2) return null;
+                const pts = [`${sx(0)},${fy(0)}`];
+                let prevX = 0, prevF = null;
+                const ut = [];
+                for (let i = 1; i < prov.length; i++) {
+                    const [x, f] = prov[i];
+                    if (prevF === null || Math.abs(f - prevF) > 1e-6) {
+                        ut.push([prevX, f]);
+                        prevF = f;
+                    }
+                    prevX = x;
+                }
+                ut.push([prevX, prevF]);
+                // trappsteg: varje nytt Fs börjar vid förra x
+                for (let i = 0; i < ut.length; i++) {
+                    const [x, f] = ut[i];
+                    const nx = i + 1 < ut.length ? ut[i + 1][0] : prevX;
+                    pts.push(`${sx(x)},${fy(f)}`, `${sx(nx)},${fy(f)}`);
+                }
+                pts.push(`${sx(prevX)},${fy(0)}`);
+                return pts.join(' ');
+            };
+            const poly = st.x > 1e-6 ? omrade(st.prov) : null;
+            const ghostPoly = ghost ? omrade(ghost.prov) : null;
+
+            // Rutnätet: 0,1 m × 10 N = 1 J per ruta
+            const celler = [];
+            for (let i = 0; i <= Math.round(smax / 0.1); i++) {
+                const xx = sx(i * 0.1);
+                celler.push(<line key={'v' + i} x1={xx} y1={DTOP} x2={xx} y2={DBOT} stroke="rgba(15,22,32,0.10)" strokeWidth="1" />);
+            }
+            const fRader = utforska && lage === 'dra' ? [-20, -10, 0, 10, 20] : [0, 10, 20];
+            fRader.forEach((f) => celler.push(
+                <line key={'h' + f} x1={DX0} y1={fy(f)} x2={DX0 + DW} y2={fy(f)} stroke="rgba(15,22,32,0.10)" strokeWidth="1" />));
+
+            const xTicks = [];
+            const xSteg = lage === 'lyft' ? 0.1 : 0.5;
+            for (let s = 0; s <= smax + 1e-9; s += xSteg) {
+                xTicks.push(
+                    <g key={s}>
+                        <line x1={sx(s)} y1={fy(0) - 4} x2={sx(s)} y2={fy(0) + 4} stroke={COL.ink} strokeWidth="1.4" />
+                        {s > 1e-9 && <text x={sx(s)} y={fy(0) + 20} textAnchor="middle" fontSize="14" fill="rgba(15,22,32,0.75)"
+                              fontFamily="Poppins, sans-serif">{fmt(s, 1)}</text>}
+                    </g>);
+            }
+
+            // ── Kraftpilar (samma skala för alla krafter i scenen) ──
+            const Fs = k.Fs;
+            const FK = lage === 'dra' ? FSK : FSK_V;
+            const pilar = [];
+            if (visaKrafter && F > 0.05) {
+                const L = F * FK;
+                const tip = { x: g.A.x + g.u.x * L, y: g.A.y + g.u.y * L };
+                pilar.push(<Pil key="F" x1={g.A.x} y1={g.A.y} x2={tip.x} y2={tip.y} color={COL.F} width={4.5} edge={lage !== 'dra'} />);
+                if (lage === 'dra') {
+                    // Etiketten vid spetsen, ut i fri yta på den sida som vetter bort från bänken
+                    const nx = -g.u.y, ny = g.u.x;      // vinkelrätt, åt höger om pilen
+                    const ox = v < 25 ? 0 : nx * 16, oy = v < 25 ? -14 : ny * 16;
+                    pilar.push(<Bet key="Fl" x={tip.x + g.u.x * 8 + ox} y={tip.y + g.u.y * 8 + oy + 6} sym="F" color={COL.F}
+                                    anchor={v < 25 ? 'middle' : 'start'} />);
+                } else {
+                    pilar.push(<Bet key="Fl" x={tip.x - 12} y={tip.y + 16} sym="F" color={COL.F} anchor="end" />);
+                }
+            }
+            if (visaKrafter && show.komp && lage === 'dra' && F > 0.05 && v > 0.5 && Math.abs(v - 90) > 0.5 && Math.abs(v - 180) > 0.5) {
+                const F1 = F * Math.sin(v * DEG), F2 = F * Math.cos(v * DEG);
+                const t1 = { x: g.A.x, y: g.A.y - F1 * FK };
+                const t2 = { x: g.A.x + F2 * FK, y: g.A.y };
+                const tip = { x: g.A.x + g.u.x * F * FK, y: g.A.y + g.u.y * F * FK };
+                pilar.push(
+                    <g key="komp">
+                        <line x1={t1.x} y1={t1.y} x2={tip.x} y2={tip.y} stroke="rgba(209,47,47,0.35)" strokeWidth="1.3" strokeDasharray="3 4" />
+                        <line x1={t2.x} y1={t2.y} x2={tip.x} y2={tip.y} stroke="rgba(209,47,47,0.35)" strokeWidth="1.3" strokeDasharray="3 4" />
+                        <Pil x1={g.A.x} y1={g.A.y} x2={t1.x} y2={t1.y} color={COL.F} width={2.8} head={12} dash />
+                        <Pil x1={g.A.x} y1={g.A.y} x2={t2.x} y2={t2.y} color={COL.F} width={2.8} head={12} dash />
+                        {F1 * FK > 14 && <Bet x={t1.x + (F2 >= 0 ? -8 : 8)} y={t1.y + 8} sym="F" idx="1" color={COL.F} size={16} anchor={F2 >= 0 ? 'end' : 'start'} />}
+                        {Math.abs(F2) * FK > 14 && <Bet x={t2.x + (F2 > 0 ? 0 : -4)} y={t2.y + 24} sym="F" idx="2" color={COL.F} size={16}
+                                                         anchor={F2 > 0 ? 'middle' : 'end'} />}
+                    </g>);
+            }
+            // vinkelbåge
+            if (lage === 'dra' && v > 0.5 && F > 0.05) {
+                const r = 40;
+                const ex = g.A.x + r * Math.cos(v * DEG), ey = g.A.y - r * Math.sin(v * DEG);
+                const big = v > 180 ? 1 : 0;
+                const bis = (v / 2) * DEG;
+                pilar.push(
+                    <g key="vinkel">
+                        <line x1={g.A.x} y1={g.A.y} x2={g.A.x + 78} y2={g.A.y} stroke="rgba(15,22,32,0.45)" strokeWidth="1.2" strokeDasharray="4 4" />
+                        <path d={`M ${g.A.x + r} ${g.A.y} A ${r} ${r} 0 ${big} 0 ${ex} ${ey}`} fill="none" stroke="rgba(15,22,32,0.7)" strokeWidth="1.4" />
+                        <text x={g.A.x + 58 * Math.cos(bis)} y={g.A.y - 58 * Math.sin(bis) + 6} textAnchor="middle" fontSize="16"
+                              fill={COL.ink} fontFamily="Poppins, sans-serif"><tspan fontStyle="italic">v</tspan></text>
+                    </g>);
+            }
+            // friktionskraften i bakkanten
+            if (visaKrafter && lage === 'dra' && k.Ff > 0.05) {
+                const riktning = st.vel > 1e-9 ? -1 : st.vel < -1e-9 ? 1 : (Fs > 0 ? -1 : 1);
+                const bx = riktning < 0 ? g.bak : g.fram;
+                const y = BANK_Y - 4;
+                const tx = bx + riktning * k.Ff * FK;
+                pilar.push(
+                    <g key="ff">
+                        <Pil x1={bx} y1={y} x2={tx} y2={y} color={COL.frik} width={4} edge />
+                        <Bet x={tx + riktning * 6} y={y - 10} sym="F" idx="f" color={COL.frik} size={16} anchor={riktning < 0 ? 'end' : 'start'} />
+                    </g>);
+            }
+            // normalkraften från bänken när vikten vilar (kraften räcker inte till lyftet)
+            if (visaKrafter && lage === 'lyft' && k.statisk && k.FN > 0.05) {
+                const ny = BANK_Y - k.FN * FK;
+                const nx = g.cx + 9;
+                pilar.push(
+                    <g key="fn">
+                        <Pil x1={nx} y1={BANK_Y} x2={nx} y2={ny} color="#0d9488" width={4} edge />
+                        <Bet x={nx + 10} y={ny + 16} sym="F" idx="N" color="#0d9488" size={16} />
+                    </g>);
+            }
+            // tyngdkraften vid lyft och bär
+            if (visaKrafter && lage !== 'dra') {
+                const cy = g.under - g.f.h / 2;
+                const ty = cy + k.FG * FK;
+                pilar.push(
+                    <g key="fg">
+                        <Pil x1={g.cx} y1={cy} x2={g.cx} y2={ty} color={COL.tyngd} width={4.5} />
+                        <circle cx={g.cx} cy={cy} r="2.8" fill={COL.ink} />
+                        <Bet x={g.cx + 12} y={ty - 2} sym="F" idx="G" color={COL.tyngd} />
+                    </g>);
+            }
+
+            // ── Joulebrickor i facken ──
+            const iLuften = { Ek: 0, Ep: 0, Q: 0 };
+            flygande.forEach((t) => { if (t.till in iLuften) iLuften[t.till]++; });
+
+            const dragX = lage === 'dra' ? g.x0 + cfg.s * PXM : null;
+            const linjalX = lage === 'bar' ? BAR_X0 : (g.x0 || 190);
+
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet"
+                     role="img" aria-label="Labbänk där en hand drar ett föremål med en dynamometer, och under den en ruta där arbetet fylls med joulebrickor">
+                    <defs>
+                        <linearGradient id="vagg" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#f7f2e8" /><stop offset="1" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <linearGradient id="bank" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#d6b17a" /><stop offset="1" stopColor="#b98d51" />
+                        </linearGradient>
+                        <clipPath id="klippPos"><rect x={DX0} y={DTOP - 10} width={DW} height={fy(0) - DTOP + 10} /></clipPath>
+                        <clipPath id="klippNeg"><rect x={DX0} y={fy(0)} width={DW} height={DBOT - fy(0) + 10} /></clipPath>
+                        {poly && <clipPath id="klippArea"><polygon points={poly} /></clipPath>}
+                    </defs>
+                    <rect x="0" y="0" width={VB_W} height={VB_H} fill="url(#vagg)" />
+
+                    {/* ── Bänken ── */}
+                    <rect x="20" y={BANK_Y} width="960" height="18" fill="url(#bank)" stroke="#8a6230" strokeWidth="1.2" />
+                    {[120, 330, 560, 790].map((x, i) => (
+                        <path key={i} d={`M ${x} ${BANK_Y + 6} q 60 -3 140 1`} fill="none" stroke="#9a7038" strokeWidth="1" opacity="0.5" />
+                    ))}
+                    {/* metallinjal längs bänkkanten (dra och bär) */}
+                    {lage !== 'lyft' && (
+                        <g>
+                            <rect x={linjalX - 14} y={BANK_Y + 18} width={1.5 * PXM + 64} height="22" fill="#e2e6ea" stroke="#8a94a3" strokeWidth="1" />
+                            {Array.from({ length: 19 }, (_, i) => i).map((i) => {
+                                const x = linjalX + i * 0.1 * PXM;
+                                const halv = i % 5 === 0;
+                                return <line key={i} x1={x} y1={BANK_Y + 18} x2={x} y2={BANK_Y + 18 + (halv ? 10 : 6)} stroke="#4b5563" strokeWidth={halv ? 1.4 : 1} />;
+                            })}
+                            {[0, 0.5, 1, 1.5].map((s) => (
+                                <text key={s} x={linjalX + s * PXM} y={BANK_Y + 37} textAnchor="middle" fontSize="12"
+                                      fill="#374151" fontFamily="Poppins, sans-serif">{s === 1.5 ? '1,5 m' : fmt(s, 1)}</text>
+                            ))}
+                        </g>
+                    )}
+
+                    {/* ── Stativet (lyft) ── */}
+                    {lage === 'lyft' && (
+                        <g>
+                            <rect x={STATIV_X - 34} y={BANK_Y - 8} width="68" height="8" rx="2" fill="#4b5563" />
+                            <rect x={STATIV_X - 3} y="60" width="6" height={BANK_Y - 68} fill="#9aa3ad" stroke="#5b6470" strokeWidth="1" />
+                            <rect x={STATIV_X - 24} y={BANK_Y - 0.6 * PXM_L - 8} width="18" height={0.6 * PXM_L + 8} fill="#f1f3f5" stroke="#8a94a3" strokeWidth="1" />
+                            {Array.from({ length: 7 }, (_, i) => i).map((i) => (
+                                <g key={i}>
+                                    <line x1={STATIV_X - 6} y1={BANK_Y - i * 0.1 * PXM_L} x2={STATIV_X - 15} y2={BANK_Y - i * 0.1 * PXM_L} stroke="#4b5563" strokeWidth="1.2" />
+                                    {i > 0 && <text x={STATIV_X - 30} y={BANK_Y - i * 0.1 * PXM_L + 5} textAnchor="end" fontSize="13" fill="#374151"
+                                                    fontFamily="Poppins, sans-serif">{fmt(i * 0.1, 1)}{i === 6 ? ' m' : ''}</text>}
+                                </g>
+                            ))}
+                            {/* visare från viktens underkant till skalan */}
+                            <line x1={STATIV_X - 6} y1={g.under} x2={g.cx - g.f.w / 2} y2={g.under} stroke="rgba(15,22,32,0.45)" strokeWidth="1" strokeDasharray="3 3" />
+                        </g>
+                    )}
+
+                    {/* ── Stoppkloss och mål (dra) ── */}
+                    {lage === 'dra' && (
+                        <g>
+                            <rect x={g.x0 - 16} y={BANK_Y - 20} width="12" height="20" rx="2" fill="#6b7280" stroke="#374151" strokeWidth="1" />
+                            {/* målet: en svag kontur där föremålet slutar, och en markering på linjalen */}
+                            <rect x={dragX} y={BANK_Y - g.f.h} width={g.f.w} height={g.f.h} rx="4" fill="none"
+                                  stroke="rgba(15,22,32,0.2)" strokeWidth="1.3" strokeDasharray="6 5" />
+                            <polygon points={`${dragX},${BANK_Y + 27} ${dragX - 6},${BANK_Y + 18} ${dragX + 6},${BANK_Y + 18}`} fill="#c8324a" />
+                        </g>
+                    )}
+
+                    {/* ── Föremålet ── */}
+                    {lage === 'dra' && (obj === 'vagn' ? <Vagn x={g.bak} w={g.f.w} /> : <Lada x={g.bak} w={g.f.w} h={g.f.h} m={m} />)}
+                    {lage !== 'dra' && <Vikt cx={g.cx} under={g.under} w={g.f.w} h={g.f.h} m={m} />}
+
+                    {/* ── Dynamometern och handen ── */}
+                    <g transform={`translate(${g.A.x} ${g.A.y}) rotate(${lage === 'dra' ? -v : -90})`}>
+                        <Dynamometer F={F} ls={lage === 'dra' ? LS : LS_L} />
+                        <g transform={`translate(${g.L} 0)`}><Hand /></g>
+                    </g>
+                    {/* dynamometerns avläsning */}
+                    {(() => {
+                        const mitt = (lage === 'dra' ? LS : LS_L) + 4 + STR * F + DB / 2;
+                        const nx = lage === 'dra' ? -Math.sin(v * DEG) : 1;
+                        const ny = lage === 'dra' ? -Math.cos(v * DEG) : 0;
+                        const px = g.A.x + g.u.x * mitt + nx * 24, py = g.A.y + g.u.y * mitt + ny * 24 + 5;
+                        return <text x={px} y={py} textAnchor={lage === 'dra' ? (v > 120 ? 'start' : v > 60 ? 'end' : 'middle') : 'start'} fontSize="16" fontWeight="700"
+                                     fill="#374151" fontFamily="'JetBrains Mono', monospace">{`${fmt(F, 1)} N`}</text>;
+                    })()}
+
+                    {pilar}
+
+                    {/* förflyttningen s */}
+                    {lage === 'dra' && st.x > 0.004 && <SPil x1={g.x0} y1={BANK_Y + 52} x2={g.bak} y2={BANK_Y + 52} label={`${fmt(st.x, 2)} m`} />}
+                    {lage === 'bar' && st.x > 0.004 && <SPil x1={BAR_X0} y1={BANK_Y + 52} x2={g.cx} y2={BANK_Y + 52} label={`${fmt(st.x, 2)} m`} />}
+                    {lage === 'lyft' && st.x > 0.004 && <SPil x1={g.cx + g.f.w / 2 + 22} y1={BANK_Y} x2={g.cx + g.f.w / 2 + 22} y2={g.under} label={`${fmt(st.x, 2)} m`} />}
+
+                    {/* handtaget: osynlig träffyta */}
+                    {!handtag.last && (
+                        <circle cx={g.H.x} cy={g.H.y} r="30" fill="transparent" className={`handtag ${drar ? 'drar' : ''}`}
+                                onPointerDown={handtag.down} onPointerMove={handtag.move} onPointerUp={handtag.up} onPointerCancel={handtag.up} />
+                    )}
+
+                    {/* ════ ARBETSRUTAN ════ */}
+                    <rect x="20" y={DTOP - 40} width="960" height={VB_H - DTOP + 30} fill="rgba(255,255,255,0.28)" />
+                    <line x1="20" y1={DTOP - 40} x2="980" y2={DTOP - 40} stroke="rgba(15,22,32,0.15)" strokeWidth="1" />
+                    {celler}
+                    {poly && (
+                        <g>
+                            <polygon points={poly} fill="rgba(212,147,15,0.30)" clipPath="url(#klippPos)" />
+                            <polygon points={poly} fill="rgba(91,125,177,0.30)" clipPath="url(#klippNeg)" />
+                            {/* brickmönstret inne i ytan: varje ruta är 1 J */}
+                            <g clipPath="url(#klippArea)">
+                                {Array.from({ length: Math.round(smax / 0.1) + 1 }, (_, i) => (
+                                    <line key={i} x1={sx(i * 0.1)} y1={DTOP - 10} x2={sx(i * 0.1)} y2={DBOT + 10} stroke={COL.brickK} strokeWidth="1.3" opacity="0.55" />
+                                ))}
+                                {fRader.map((f) => (
+                                    <line key={f} x1={DX0} y1={fy(f)} x2={DX0 + DW} y2={fy(f)} stroke={COL.brickK} strokeWidth="1.3" opacity="0.55" />
+                                ))}
+                            </g>
+                            <polyline points={poly} fill="none" stroke={COL.brickK} strokeWidth="2" />
+                        </g>
+                    )}
+                    {show.forra && ghostPoly && (
+                        <g>
+                            <polygon points={ghostPoly} fill="none" stroke="rgba(15,22,32,0.55)" strokeWidth="1.6" strokeDasharray="6 4" />
+                        </g>
+                    )}
+                    {/* axlar */}
+                    <line x1={DX0} y1={fy(0)} x2={DX0 + DW + 16} y2={fy(0)} stroke={COL.ink} strokeWidth="1.6" />
+                    <polygon points={`${DX0 + DW + 24},${fy(0)} ${DX0 + DW + 13},${fy(0) - 5} ${DX0 + DW + 13},${fy(0) + 5}`} fill={COL.ink} />
+                    <line x1={DX0} y1={DBOT + (utforska && lage === 'dra' ? 0 : 0)} x2={DX0} y2={DTOP - 14} stroke={COL.ink} strokeWidth="1.6" />
+                    <polygon points={`${DX0},${DTOP - 22} ${DX0 - 5},${DTOP - 11} ${DX0 + 5},${DTOP - 11}`} fill={COL.ink} />
+                    {xTicks}
+                    {fRader.map((f) => (
+                        <g key={'t' + f}>
+                            <line x1={DX0 - 4} y1={fy(f)} x2={DX0 + 4} y2={fy(f)} stroke={COL.ink} strokeWidth="1.4" />
+                            <text x={DX0 - 9} y={fy(f) + 5} textAnchor="end" fontSize="14" fill="rgba(15,22,32,0.75)"
+                                  fontFamily="Poppins, sans-serif">{fmt(f, 0)}</text>
+                        </g>
+                    ))}
+                    <text x={DX0 + 12} y={DTOP - 14} fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif">
+                        <tspan fontStyle="italic">F</tspan><tspan fontSize="11" dy="4">s</tspan><tspan dy="-4"> (N)</tspan>
+                    </text>
+                    <text x={DX0 + DW + 30} y={fy(0) + 5} textAnchor="start" fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif">
+                        <tspan fontStyle="italic">s</tspan> (m)
+                    </text>
+                    {/* F₂ = Fₛ vid ytans framkant: höjden ÄR komposanten längs rörelsen */}
+                    {st.x > 0.004 && Math.abs(Fs) * fsk > 12 && (
+                        <g>
+                            <Pil x1={sx(st.x)} y1={fy(0)} x2={sx(st.x)} y2={fy(Fs)} color={COL.F} width={2.6} head={11} dash />
+                            <Bet x={sx(st.x) + 7} y={fy(Fs / 2) + 6} sym="F" idx="s" color={COL.F} size={15} />
+                        </g>
+                    )}
+                    {/* arbetet */}
+                    <text x={DX0 + DW} y={DTOP - 14} textAnchor="end" fontSize="20" fontWeight="700" fill={COL.brickK}
+                          fontFamily="Poppins, sans-serif">
+                        <tspan fontStyle="italic">W</tspan> = {gissaDolj ? '?' : `${fmt(en.W, 1)} J`}
+                    </text>
+                    {show.forra && ghost && (
+                        <text x={DX0 + DW - 150} y={DTOP - 14} textAnchor="end" fontSize="14" fill="rgba(15,22,32,0.6)"
+                              fontFamily="Poppins, sans-serif">förra: {fmt(ghost.W, 1)} J</text>
+                    )}
+
+                    {/* ════ ENERGIFACKEN ════ */}
+                    <text x={FACK[1].x + FACK_W / 2} y={DTOP - 14} textAnchor="middle" fontSize="14" fill="rgba(15,22,32,0.7)"
+                          fontFamily="Poppins, sans-serif">Energin hamnar som</text>
+                    {FACK.map((f) => {
+                        const n = Math.max(0, raknare[f.k] - iLuften[f.k]);
+                        const varde = f.k === 'Ek' ? en.Ek : f.k === 'Ep' ? en.Ep : en.Q;
+                        return (
+                            <g key={f.k}>
+                                <text x={f.x + FACK_W / 2} y={FACK_TOP - 6} textAnchor="middle" fontSize="13" fontWeight="600" fill={f.col}
+                                      fontFamily="Poppins, sans-serif">{f.namn}</text>
+                                <rect x={f.x} y={FACK_TOP} width={FACK_W} height={FACK_BOT - FACK_TOP} rx="6"
+                                      fill={f.col} fillOpacity="0.07" stroke={f.col} strokeWidth="1.4" />
+                                {Array.from({ length: n }, (_, i) => {
+                                    const p = slot(f.x, i);
+                                    return <rect key={i} x={p.x} y={p.y} width="14" height="11" rx="2" fill={COL.brick} stroke={COL.brickK} strokeWidth="0.8" />;
+                                })}
+                                <text x={f.x + FACK_W / 2} y={FACK_BOT + 22} textAnchor="middle" fontSize="15" fontWeight="700"
+                                      fill={COL.ink} fontFamily="'JetBrains Mono', monospace">{gissaDolj ? '?' : `${fmt(varde, 1)} J`}</text>
+                            </g>
+                        );
+                    })}
+                    <g>
+                        <rect x={FACK[0].x} y={FACK_BOT + 34} width="14" height="11" rx="2" fill={COL.brick} stroke={COL.brickK} strokeWidth="0.8" />
+                        <text x={FACK[0].x + 17} y={FACK_BOT + 43} fontSize="13" fill="rgba(15,22,32,0.7)" fontFamily="Poppins, sans-serif">= 1 J = en ruta i diagrammet</text>
+                    </g>
+
+                    {/* flygande brickor */}
+                    {flygande.map((t) => (
+                        <rect key={t.id} x={t.x} y={t.y} width="14" height="11" rx="2" fill={COL.brick} stroke={COL.brickK}
+                              strokeWidth="0.8" opacity={t.op} />
+                    ))}
+                </svg>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  REGLAGE
+        // ════════════════════════════════════════════════════════
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, disabled, color = 'var(--lab-accent, #c8324a)' }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').replace('−', '-').trim();
+                if (norm === '' || norm === '-' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt} disabled={disabled}
+                           style={{ color }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+        const Slider = ({ label, value, min, max, step, onChange, disabled, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 112, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, disabled, valueNode }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    {valueNode}
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        // Formelkortet: varje storhet har sitt namn ovanför.
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const FormelKort = ({ Fs, s, W, F, v, dolj, lage, varierat }) => (
+            <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                    <div className="flex items-center gap-x-3">
+                    <Vbl label="Arbete"><em>W</em></Vbl>
+                    <span className="fnum">=</span>
+                    <Vbl label="Kraften i rörelsens riktning"><em>F</em><sub>s</sub></Vbl>
+                    <span className="fnum">·</span>
+                    <Vbl label="Sträcka"><em>s</em></Vbl>
+                    </div>
+                    <div className="flex items-center gap-x-3">
+                    <span className="fnum" style={{ color: 'var(--lab-ink-muted)' }}>där</span>
+                    <Vbl label="Kraften i rörelsens riktning"><em>F</em><sub>s</sub></Vbl>
+                    <span className="fnum">=</span>
+                    <Vbl label="Kraft"><em>F</em></Vbl>
+                    <span className="fnum">·</span>
+                    <span className="fnum">cos</span>
+                    <Vbl label="Vinkel mot rörelsen"><em>v</em></Vbl>
+                    </div>
+                </div>
+                <div className="mt-3 pt-3 flex flex-wrap items-center gap-x-2" style={{ borderTop: '1px solid var(--lab-line, rgba(15,22,32,0.14))' }}>
+                    {dolj ? (
+                        <span className="fnum-live" style={{ color: 'var(--lab-ink-soft)' }}>Gissa-läget: räkna ut arbetet själv innan du startar försöket.</span>
+                    ) : (
+                        <span className="fnum-live">
+                            {lage === 'dra' && <span style={{ display: 'inline-block', marginRight: 28 }}><em>F</em><sub>s</sub> = {fmt(F, 1)} N · cos {fmtDeg(v)}° = {fmt(Fs, 2)} N</span>}
+                            {lage === 'bar' && <span>Kraften är rakt uppåt och rörelsen åt sidan, så <em>F</em><sub>s</sub> = 0&emsp;&emsp;</span>}
+                            {varierat
+                                ? <span style={{ display: 'inline-block' }}>Kraften ändrades under vägen, så <em>W</em> = arean under grafen = {fmt(W, 1)} J</span>
+                                : <span style={{ display: 'inline-block' }}><em>W</em> = {fmt(Fs, 2)} N · {fmt(s, 2)} m = {fmt(W, 1)} Nm = {fmt(W, 1)} J</span>}
+                        </span>
+                    )}
+                </div>
+            </div>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  FÄRDIGA FÖRSÖK
+        // ════════════════════════════════════════════════════════
+        const FORSOK = [
+            { id: 'rakt',  namn: 'Dra rakt', sub: 'vagn, 8 N, v = 0°',
+              cfg: { lage: 'dra', obj: 'vagn', m: 2, mu: 0, F: 8, v: 0, s: 1.5, v0: 0 } },
+            { id: 'snett', namn: 'Dra snett', sub: 'vagn, 12 N, v = 30°',
+              cfg: { lage: 'dra', obj: 'vagn', m: 2, mu: 0, F: 12, v: 30, s: 1.5, v0: 0 } },
+            { id: 'lada',  namn: 'Dra lådan', sub: 'friktion ger värme',
+              cfg: { lage: 'dra', obj: 'lada', m: 2, mu: 0.3, F: 10, v: 0, s: 1.5, v0: 0 } },
+            { id: 'fast',  namn: 'Lådan sitter fast', sub: '20 N men ingen rörelse',
+              cfg: { lage: 'dra', obj: 'lada', m: 5, mu: 0.6, F: 20, v: 0, s: 1.5, v0: 0 } },
+            { id: 'bar',   namn: 'Bära vikten', sub: 'kraften uppåt, rörelsen åt sidan',
+              cfg: { lage: 'bar', obj: 'lada', m: 2, mu: 0, F: 2 * G, v: 90, s: 1.5, v0: 0 } },
+            { id: 'lyft1', namn: 'Lyft 1 kg 0,6 m', sub: 'med jämn fart',
+              cfg: { lage: 'lyft', obj: 'lada', m: 1, mu: 0, F: 1 * G, v: 90, s: 0.6, v0: 0.25 }, verkligTid: true },
+            { id: 'lyft2', namn: 'Lyft 2 kg 0,3 m', sub: 'samma arbete?',
+              cfg: { lage: 'lyft', obj: 'lada', m: 2, mu: 0, F: 2 * G, v: 90, s: 0.3, v0: 0.25 }, verkligTid: true },
+            { id: 'broms', namn: 'Bromsa vagnen', sub: 'Utforska: v = 150°',
+              cfg: { lage: 'dra', obj: 'vagn', m: 2, mu: 0, F: 6, v: 150, s: 1.5, v0: 1.2 }, utforska: true },
+        ];
+
+        // ════════════════════════════════════════════════════════
+        //  GISSA-LÄGET
+        // ════════════════════════════════════════════════════════
+        const slump = (a) => a[Math.floor(Math.random() * a.length)];
+        function nyUppgift() {
+            for (let f = 0; f < 200; f++) {
+                const obj = slump(['vagn', 'lada']);
+                const m = slump([1, 1.5, 2, 2.5, 3]);
+                const mu = obj === 'vagn' ? 0 : 0.2;
+                const F = slump([6, 8, 9, 10, 12, 14, 15, 16, 18, 20]);
+                const v = slump([0, 20, 25, 30, 35, 40, 45, 50, 60]);
+                const s = slump([0.6, 0.8, 0.9, 1.0, 1.2, 1.4, 1.5]);
+                const F1 = F * Math.sin(v * DEG), Fs = F * Math.cos(v * DEG);
+                if (F1 > 0.9 * m * G) continue;
+                if (Fs <= mu * (m * G - F1) + 0.5) continue;
+                return { lage: 'dra', obj, m, mu, F, v, s, v0: 0, W: Fs * s };
+            }
+            return { lage: 'dra', obj: 'vagn', m: 2, mu: 0, F: 10, v: 30, s: 1.2, v0: 0, W: 10 * Math.cos(30 * DEG) * 1.2 };
+        }
+        function nyJamforelse() {
+            for (let f = 0; f < 500; f++) {
+                const kort = [0, 1, 2].map(() => {
+                    const F = slump([6, 8, 10, 12, 15, 16, 18, 20]);
+                    const v = slump([0, 30, 45, 60, 70]);
+                    const s = slump([0.5, 0.8, 1.0, 1.2, 1.5, 2.0]);
+                    return { F, v, s, W: F * Math.cos(v * DEG) * s };
+                });
+                const W = kort.map((k) => k.W).sort((a, b) => b - a);
+                if (W[0] < W[1] * 1.12) continue;
+                // minst ett kort ska ha större kraft än vinnaren (frestelsen)
+                const best = kort.find((k) => k.W === W[0]);
+                if (!kort.some((k) => k !== best && k.F > best.F)) continue;
+                return kort;
+            }
+            return null;
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  HUVUDAPP
+        // ════════════════════════════════════════════════════════
+        const App = () => {
+            const [lage, setLage] = useState('dra');
+            const [obj, setObj] = useState('vagn');
+            const [m, setM] = useState(2);
+            const [mu, setMu] = useState(0.3);
+            const [F, setFraw] = useState(8);
+            const [v, setVraw] = useState(0);
+            const [s, setS] = useState(1.5);
+            const [v0, setV0] = useState(0);
+            const [utforska, setUtforska] = useState(false);
+            const [show, setShow] = useState({ krafter: true, komp: true, forra: true, ultra: true });
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [kor, setKor] = useState(false);
+            const [, setFrame] = useState(0);
+            const [drar, setDrar] = useState(false);
+            const [resultat, setResultat] = useState(null);
+            const [ghost, setGhost] = useState(null);
+
+            // gissa-läget
+            const [gissa, setGissa] = useState(null);      // null | 'rakna' | 'jamfor'
+            const [uppg, setUppg] = useState(null);
+            const [svarTxt, setSvarTxt] = useState('');
+            const [svarStatus, setSvarStatus] = useState(null);   // null | 'kor' | {ratt, text}
+            const [jamfor, setJamfor] = useState(null);
+            const [valt, setValt] = useState(null);
+            const [poang, setPoang] = useState({ ratt: 0, totalt: 0, svit: 0 });
+
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const stRef = useRef(null);
+            const cfgRef = useRef(null);
+            const korRef = useRef(false);
+            const rafRef = useRef(null);
+            const lastRef = useRef(null);
+            const flygRef = useRef([]);
+            const rakRef = useRef({ Ek: 0, Ep: 0, Q: 0, Wp: 0, Wn: 0 });
+            const idRef = useRef(1);
+            const uppgRef = useRef(null);
+            const senasteRef = useRef(null);   // senast avslutade försöket, blir "förra" när nästa börjar
+
+            const lyftLik = lage !== 'dra';
+            const effMu = lage === 'dra' && obj === 'lada' ? mu : 0;
+            const effV = lage === 'dra' ? v : 90;
+            const effF = lage === 'bar' ? m * G : F;
+            const cfg = { lage, obj, m, mu: effMu, F: effF, v: effV, s, v0: lage === 'dra' && utforska ? v0 : (cfgRef.current?.v0Forsok ?? 0) };
+            cfgRef.current = Object.assign(cfgRef.current || {}, cfg);
+            const smax = lage === 'lyft' ? 0.6 : 1.5;
+            const vMax = utforska ? 180 : 90;
+
+            // Kraften får inte lyfta föremålet från bänken (F·sin v ≤ m·g).
+            const klampF = (f, vv) => {
+                let ff = Math.max(0, Math.min(FMAX, f));
+                if (lage === 'dra') {
+                    const sv = Math.sin(vv * DEG);
+                    if (sv > 1e-6) ff = Math.min(ff, (m * G * 0.98) / sv);
+                }
+                return ff;
+            };
+            // Startfarten i lyftförsöken (vikten lyfts med jämn fart) gäller
+            // bara tills man själv ändrar kraften eller massan.
+            const slappForsok = () => { if (cfgRef.current) cfgRef.current.v0Forsok = 0; };
+            const setF = (f) => { slappForsok(); setFraw(klampF(f, v)); };
+            const setV = (vv) => { const nv = Math.max(0, Math.min(vMax, vv)); setVraw(nv); setFraw((f) => klampF(f, nv)); };
+            // Varje läge ska starta så att något händer när man trycker på Starta:
+            // lyftet får en kraft större än tyngdkraften, lådan en kraft som
+            // övervinner friktionen. (Att det kan stå still är en egen poäng,
+            // men den visas i försöket Lådan sitter fast, inte i startläget.)
+            const startKraft = (la, ob, mm, my, f, vv) => {
+                if (la === 'lyft') return Math.max(f, Math.min(FMAX, Math.ceil(mm * G) + 2));
+                if (la === 'dra' && ob === 'lada') {
+                    const sv = Math.sin(vv * DEG), cv = Math.cos(vv * DEG);
+                    if (cv > 0.05) {
+                        const fMin = (my * mm * G) / (cv + my * sv);
+                        if (f < fMin + 1) return Math.min(FMAX, Math.ceil(fMin + 2));
+                    }
+                }
+                return f;
+            };
+            const valjLage = (k) => {
+                slappForsok();
+                setLage(k);
+                if (k === 'lyft') {
+                    setM(1); setS(0.6);
+                    setFraw(startKraft('lyft', obj, 1, 0, 0, 90));
+                } else if (k === 'bar') {
+                    setM((mm) => Math.min(mm, 2)); setS(1.5);
+                } else {
+                    setS(1.5);
+                    setFraw((f) => startKraft('dra', obj, m, mu, f > 0 ? f : 8, v));
+                }
+            };
+            const setMasse = (x) => {
+                slappForsok(); setM(x);
+                // En lättare låda får inte lyftas från bänken av den kraft som redan är inställd.
+                if (lage === 'dra') {
+                    const sv = Math.sin(v * DEG);
+                    if (sv > 1e-6) setFraw((f) => Math.min(f, (x * G * 0.98) / sv));
+                }
+            };
+
+            const nollstall = (c = cfgRef.current) => {
+                if (senasteRef.current) { setGhost(senasteRef.current); senasteRef.current = null; }
+                stRef.current = M.nytt(c);
+                const e = M.energier(stRef.current, c);
+                rakRef.current = { Ek: Math.floor(e.Ek + 1e-6), Ep: 0, Q: 0, Wp: 0, Wn: 0 };
+                flygRef.current = [];
+                lastRef.current = null;
+                setFrame((n) => n + 1);
+            };
+            if (!stRef.current) {
+                stRef.current = M.nytt(cfg);
+            }
+
+            // Ändras uppställningen medan inget körs: börja om från start.
+            useEffect(() => {
+                if (korRef.current) return;
+                nollstall(cfgRef.current);
+                setResultat(null);
+            }, [lage, obj, m, mu, s, v0, utforska]);
+            // Kraft och vinkel: börja om bara om försöket redan är klart. Är det
+            // pausat mitt i gäller den nya kraften när det fortsätter.
+            useEffect(() => {
+                if (korRef.current) return;
+                const st = stRef.current;
+                if (st && st.klar) { nollstall(cfgRef.current); setResultat(null); }
+                else if (st && st.x <= 0) { st.prov = [[0, M.krafter(st, cfgRef.current).Fs]]; }
+            }, [F, v]);
+            // Byter man läge försvinner förra försöket (axlarna är olika).
+            useEffect(() => { setGhost(null); senasteRef.current = null; }, [lage, utforska]);
+            useEffect(() => { if (!utforska && v > 90) setV(90); }, [utforska]);
+
+            // ── Brickornas bokföring ──
+            const flygTill = (fran, till, nu) => {
+                const p0 = fran;
+                const id = idRef.current++;
+                flygRef.current.push({ id, p0, till, t0: nu, dur: 650, x: p0.x, y: p0.y, op: 1 });
+            };
+            const bokfor = (nu) => {
+                const c = cfgRef.current, st = stRef.current;
+                const e = M.energier(st, c);
+                const ny = {
+                    Ek: Math.floor(e.Ek + 1e-6), Ep: Math.floor(e.Ep + 1e-6), Q: Math.floor(e.Q + 1e-6),
+                    Wp: Math.floor(Math.max(0, e.W) + 1e-6), Wn: Math.floor(Math.max(0, -e.W) + 1e-6),
+                };
+                const gm = rakRef.current;
+                const g = geometri(c, st.x);
+                const smaxC = c.lage === 'lyft' ? 0.6 : 1.5;
+                const ext = utforska && c.lage === 'dra';
+                const fsk = ext ? 3.75 : 7.5, noll = ext ? (DTOP + DBOT) / 2 : DBOT;
+                const Fs = M.krafter(st, c).Fs;
+                const rektPos = { x: DX0 + (st.x / smaxC) * DW - 6, y: noll - (Fs / 2) * fsk - 4 };
+                const kallor = [], mal = [];
+                for (let i = 0; i < ny.Wp - gm.Wp; i++) kallor.push({ typ: 'rekt' });
+                ['Ek', 'Ep', 'Q'].forEach((k) => {
+                    const d = ny[k] - gm[k];
+                    const fx = FACK.find((f) => f.k === k).x;
+                    for (let i = 0; i < -d; i++) kallor.push({ typ: 'fack', pos: slot(fx, gm[k] - 1 - i) });
+                    for (let i = 0; i < d; i++) mal.push({ typ: 'fack', k, idx: gm[k] + i });
+                });
+                for (let i = 0; i < ny.Wn - gm.Wn; i++) mal.push({ typ: 'hand' });
+                // rektangeln först till facken, sedan fack till fack
+                let ki = 0;
+                mal.forEach((mm) => {
+                    const kl = kallor[ki++] || { typ: 'rekt' };
+                    const fran = kl.typ === 'rekt' ? rektPos : kl.pos;
+                    if (mm.typ === 'fack') {
+                        const fx = FACK.find((f) => f.k === mm.k).x;
+                        flygTill(fran, { k: mm.k, pos: slot(fx, mm.idx) }, nu);
+                    } else {
+                        flygTill(fran, { k: 'hand', pos: { x: g.H.x - 5, y: g.H.y - 4 } }, nu);
+                    }
+                });
+                rakRef.current = ny;
+            };
+            const animeraBrickor = (nu) => {
+                flygRef.current = flygRef.current.filter((t) => {
+                    const u = Math.min(1, (nu - t.t0) / t.dur);
+                    const e = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+                    const q = t.till.pos;
+                    const lyft = -60 * Math.sin(Math.PI * u);
+                    t.x = t.p0.x + (q.x - t.p0.x) * e;
+                    t.y = t.p0.y + (q.y - t.p0.y) * e + lyft;
+                    t.op = t.till.k === 'hand' ? 1 - u : 1;
+                    return u < 1;
+                });
+            };
+
+            // ── Animationsloopen ──
+            useEffect(() => {
+                const loop = (ts) => {
+                    if (lastRef.current == null) lastRef.current = ts;
+                    const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
+                    lastRef.current = ts;
+                    const st = stRef.current, c = cfgRef.current;
+                    if (korRef.current && !st.klar) {
+                        M.kor(st, c, dt * (show.ultra ? 0.25 : 1));
+                        bokfor(ts);
+                        if (st.klar) avsluta();
+                    }
+                    animeraBrickor(ts);
+                    setFrame((n) => n + 1);
+                    if (korRef.current || flygRef.current.length) rafRef.current = requestAnimationFrame(loop);
+                    else { rafRef.current = null; lastRef.current = null; }
+                };
+                if ((kor || flygRef.current.length) && !rafRef.current) rafRef.current = requestAnimationFrame(loop);
+                return () => { if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null; } };
+            }, [kor, show.ultra, utforska]);
+
+            const avsluta = () => {
+                korRef.current = false;
+                setKor(false);
+                const st = stRef.current, c = cfgRef.current;
+                const e = M.energier(st, c);
+                senasteRef.current = { prov: st.prov.slice(), W: e.W, lage: c.lage };
+                setResultat(beskriv(st, c, e));
+                if (uppgRef.current) rattaGissning(e.W);
+            };
+
+            const starta = () => {
+                const st = stRef.current;
+                if (st.klar || st.x > 0) nollstall(cfgRef.current);
+                korRef.current = true;
+                setResultat(null);
+                setKor(true);
+            };
+            const pausa = () => { korRef.current = false; setKor(false); };
+            const fortsatt = () => { korRef.current = true; setKor(true); };
+            const borjaOm = () => { korRef.current = false; setKor(false); nollstall(cfgRef.current); setResultat(null); };
+
+            // Färdigt försök: ställ upp och kör.
+            const korForsok = (f) => {
+                korRef.current = false;
+                setUtforska(!!f.utforska);
+                setShow((sh) => ({ ...sh, ultra: !f.verkligTid }));
+                const c = f.cfg;
+                setLage(c.lage); setObj(c.obj); setM(c.m);
+                if (c.lage === 'dra' && c.obj === 'lada') setMu(c.mu);
+                setFraw(c.F); setVraw(c.v); setS(c.s); setV0(c.v0 || 0);
+                cfgRef.current = Object.assign({}, c, { v0Forsok: c.lage !== 'dra' ? c.v0 : 0 });
+                setTimeout(() => {
+                    nollstall(cfgRef.current);
+                    korRef.current = true; setResultat(null); setKor(true);
+                }, 30);
+            };
+            // Beskrivning av det som hände, i ord.
+            function beskriv(st, c, e) {
+                if (c.lage === 'bar') return { rubrik: 'Inget arbete uträttades',
+                    text: `Handen höll uppe vikten med ${fmt(c.F, 1)} N hela vägen, men kraften pekar rakt uppåt och vikten flyttades åt sidan. Ingen förflyttning skedde i kraftens riktning, så W = 0. Det kan kännas tröttsamt att bära, men i fysikens mening är det inget arbete.` };
+                if (st.orsak === 'fast') {
+                    if (c.lage === 'lyft') return { rubrik: 'Vikten lyftes inte',
+                        text: `Kraften ${fmt(c.F, 1)} N är mindre än tyngdkraften ${fmt(c.m * G, 1)} N, så bänken bär resten av tyngden. Ingen förflyttning, alltså inget arbete: W = 0.` };
+                    const Fs0 = c.F * Math.cos(c.v * DEG);
+                    if (M.krafter(st, c).stopp) return { rubrik: 'Ingen förflyttning, inget arbete',
+                        text: `Kraften drar bakåt, men föremålet står mot stoppklossen och kan inte röra sig. Sträckan är 0, så W = 0. Ge vagnen en startfart framåt för att se kraften bromsa den.` };
+                    return { rubrik: 'Ingen förflyttning, inget arbete',
+                        text: `Dynamometern visar ${fmt(c.F, 1)} N, och komposanten längs bänken är ${fmt(Fs0, 1)} N. Friktionen håller emot lika mycket och föremålet står kvar. Sträckan är 0, så W = ${fmt(Fs0, 1)} N · 0 m = 0. En stor kraft räcker inte: något måste också flyttas.` };
+                }
+                const dEk = e.Ek - e.Ek0;
+                const delar = [];
+                if (dEk > 0.05) delar.push(`${fmt(dEk, 1)} J mer rörelseenergi`);
+                if (e.Ep > 0.05) delar.push(`${fmt(e.Ep, 1)} J lägesenergi`);
+                if (e.Q > 0.05) delar.push(`${fmt(e.Q, 1)} J värme`);
+                const lista = (d) => d.join(', ').replace(/, ([^,]*)$/, ' och $1');
+                if (e.W < -0.05) {
+                    const namn = c.obj === 'vagn' ? 'vagnen' : 'lådan';
+                    const slut = st.orsak === 'stannade' ? `stannade efter ${fmt(st.x, 2)} m` : `hade ${fmt(e.Ek, 1)} J kvar när den nådde målet`;
+                    const varme = e.Q > 0.05 ? ` Friktionen gjorde samtidigt om ${fmt(e.Q, 1)} J till värme.` : '';
+                    return { rubrik: `Negativt arbete: W = ${fmt(e.W, 1)} J`,
+                        text: `Kraften pekade snett bakåt, mot rörelsen (v = ${fmtDeg(c.v)}°), så komposanten längs rörelsen var negativ. Kraften tog energi från ${namn} i stället för att ge den: ${namn} hade ${fmt(e.Ek0, 1)} J rörelseenergi från början och ${slut}.${varme}` };
+                }
+                const start = e.Ek0 > 0.05 ? ` Föremålet hade dessutom ${fmt(e.Ek0, 1)} J rörelseenergi redan från starten.` : '';
+                return { rubrik: `W = ${fmt(e.W, 1)} J`,
+                    text: `Kraften uträttade arbetet ${fmt(e.W, 1)} J längs ${fmt(st.x, 2)} m. Arbetet har blivit ${delar.length ? lista(delar) : 'ingen annan form'}.${start}` };
+            }
+
+            // ── Gissa-läget ──
+            const startaRakna = () => {
+                const u = nyUppgift();
+                setGissa('rakna'); setUppg(u); uppgRef.current = null;
+                setSvarTxt(''); setSvarStatus(null);
+                korRef.current = false; setKor(false);
+                setUtforska(false);
+                setLage('dra'); setObj(u.obj); setM(u.m); if (u.obj === 'lada') setMu(u.mu);
+                setFraw(u.F); setVraw(u.v); setS(u.s); setV0(0);
+                cfgRef.current = Object.assign({}, u, { v0Forsok: 0 });
+                setGhost(null);
+                setTimeout(() => nollstall(cfgRef.current), 20);
+            };
+            const kollaSvar = () => {
+                const n = parseFloat(svarTxt.replace(',', '.').replace('−', '-'));
+                if (!isFinite(n)) { setSvarStatus({ ratt: false, text: 'Skriv in ett tal, till exempel 12,5.' }); return; }
+                uppgRef.current = { svar: n, u: uppg };
+                setSvarStatus('kor');
+                nollstall(cfgRef.current);
+                korRef.current = true; setKor(true);
+            };
+            function rattaGissning(Wfacit) {
+                const { svar, u } = uppgRef.current;
+                uppgRef.current = null;
+                const nara = (a, b) => Math.abs(a - b) <= Math.max(0.02 * Math.abs(b), 0.05);
+                const ratt = nara(svar, Wfacit);
+                const kalkyl = `W = F · cos v · s = ${fmt(u.F, 0)} N · cos ${u.v}° · ${fmt(u.s, 1)} m = ${fmt(Wfacit, 1)} J`;
+                let text;
+                if (ratt) text = `Rätt! ${kalkyl}.`;
+                else if (u.v > 0 && nara(svar, u.F * u.s)) text = `Du räknade med hela kraften F. Bara komposanten längs rörelsen, F · cos v, uträttar arbete. ${kalkyl}.`;
+                else if (u.v > 0 && nara(svar, u.F * Math.sin(u.v * DEG) * u.s)) text = `Du använde den lodräta komposanten F · sin v. Det är komposanten längs rörelsen, F · cos v, som räknas. ${kalkyl}.`;
+                else text = `Inte riktigt. ${kalkyl}.`;
+                setSvarStatus({ ratt, text });
+                setPoang((p) => ({ ratt: p.ratt + (ratt ? 1 : 0), totalt: p.totalt + 1, svit: ratt ? p.svit + 1 : 0 }));
+            }
+            const startaJamfor = () => {
+                setGissa('jamfor'); setJamfor(nyJamforelse()); setValt(null);
+                uppgRef.current = null;
+            };
+            const valjKort = (i) => {
+                if (valt != null) return;
+                setValt(i);
+                const best = jamfor.reduce((b, k, j) => (k.W > jamfor[b].W ? j : b), 0);
+                const ratt = i === best;
+                setPoang((p) => ({ ratt: p.ratt + (ratt ? 1 : 0), totalt: p.totalt + 1, svit: ratt ? p.svit + 1 : 0 }));
+            };
+            const avslutaGissa = () => { setGissa(null); setUppg(null); setSvarStatus(null); uppgRef.current = null; };
+            const lastGissa = gissa === 'rakna';
+            const doljSvar = lastGissa && svarStatus !== null && svarStatus !== 'kor' ? false : lastGissa;
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current);
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            // ── Handtaget: avståndet ger kraften, riktningen ger vinkeln ──
+            const pekare = (e) => {
+                const svg = svgRef.current;
+                const ctm = svg && svg.getScreenCTM();
+                if (!ctm) return null;
+                const pt = svg.createSVGPoint();
+                pt.x = e.clientX; pt.y = e.clientY;
+                return pt.matrixTransform(ctm.inverse());
+            };
+            const franPekare = (e) => {
+                const p = pekare(e);
+                if (!p) return;
+                const c = cfgRef.current;
+                const g = geometri(c, stRef.current.x);
+                if (c.lage === 'dra') {
+                    const dx = p.x - g.A.x, dy = g.A.y - p.y;
+                    let ang = Math.atan2(dy, dx) / DEG;
+                    if (ang < -90) ang += 360;
+                    ang = Math.round(Math.max(0, Math.min(vMax, ang)));
+                    const dist = Math.hypot(dx, dy);
+                    let f = Math.round(((dist - (LS + 4 + DB + 10)) / STR) * 2) / 2;
+                    setVraw(ang);
+                    slappForsok(); setFraw(klampF(f, ang));
+                } else if (c.lage === 'lyft') {
+                    const dist = g.A.y - p.y;
+                    let f = Math.round(((dist - (LS_L + 4 + DB + 10)) / STR) * 10) / 10;
+                    slappForsok(); setFraw(Math.max(0, Math.min(FMAX, f)));
+                }
+            };
+            const handtag = {
+                last: lastGissa || lage === 'bar',
+                down: (e) => { e.preventDefault(); setDrar(true); e.currentTarget.setPointerCapture?.(e.pointerId); franPekare(e); },
+                move: (e) => { if (drar) franPekare(e); },
+                up: (e) => { setDrar(false); e.currentTarget.releasePointerCapture?.(e.pointerId); },
+            };
+
+            const st = stRef.current;
+            const kNu = M.krafter(st, cfgRef.current);
+            const en = M.energier(st, cfgRef.current);
+            const tShow = (key) => setShow((sh) => ({ ...sh, [key]: !sh[key] }));
+            const lastReglage = kor || lastGissa;
+            const startEtikett = kor ? 'Pausa' : (st.x > 0 && !st.klar ? 'Fortsätt' : 'Starta');
+            const startKlick = kor ? pausa : (st.x > 0 && !st.klar ? fortsatt : starta);
+
+            // ── Reglagen (sidopanelen i normalläge, rutan i fullskärm) ──
+            const reglage = (Sl, kompakt) => {
+                const F_ = (val) => <NumInput value={val} min={0} max={FMAX} fmtFn={(x) => fmt(x, 1)} unit="N" disabled={lastReglage && lage !== 'dra'} onCommit={setF} />;
+                return (
+                    <React.Fragment>
+                        {lage !== 'bar' && (
+                            <Sl label="Kraft <em>F</em>" value={F} min={0} max={FMAX} step={0.5} onChange={setF} disabled={lastGissa}
+                                {...(kompakt ? { valueNode: F_(F) } : {})}>{!kompakt && F_(F)}</Sl>
+                        )}
+                        {lage === 'dra' && (
+                            <Sl label="Vinkel <em>v</em>" value={v} min={0} max={vMax} step={1} onChange={setV} disabled={lastGissa}
+                                {...(kompakt ? { valueNode: <NumInput value={v} min={0} max={vMax} fmtFn={fmtDeg} unit="°" disabled={lastGissa} onCommit={setV} /> } : {})}>
+                                {!kompakt && <NumInput value={v} min={0} max={vMax} fmtFn={fmtDeg} unit="°" disabled={lastGissa} onCommit={setV} />}
+                            </Sl>
+                        )}
+                        <Sl label="Sträcka <em>s</em>" value={s} min={0.1} max={smax} step={0.05} onChange={(x) => setS(Math.min(smax, x))} disabled={lastReglage}
+                            {...(kompakt ? { valueNode: <NumInput value={s} min={0.05} max={smax} fmtFn={(x) => fmt(x, 2)} unit="m" disabled={lastReglage} onCommit={(x) => setS(Math.min(smax, x))} /> } : {})}>
+                            {!kompakt && <NumInput value={s} min={0.05} max={smax} fmtFn={(x) => fmt(x, 2)} unit="m" disabled={lastReglage} onCommit={(x) => setS(Math.min(smax, x))} />}
+                        </Sl>
+                        <Sl label="Massa <em>m</em>" value={m} min={0.5} max={lage === 'dra' ? 5 : 2} step={0.5} onChange={setMasse} disabled={lastReglage}
+                            {...(kompakt ? { valueNode: <NumInput value={m} min={0.1} max={lage === 'dra' ? 5 : 2} fmtFn={(x) => fmt(x, 1)} unit="kg" disabled={lastReglage} onCommit={setMasse} /> } : {})}>
+                            {!kompakt && <NumInput value={m} min={0.1} max={lage === 'dra' ? 5 : 2} fmtFn={(x) => fmt(x, 1)} unit="kg" disabled={lastReglage} onCommit={setMasse} />}
+                        </Sl>
+                        {lage === 'dra' && obj === 'lada' && (
+                            <Sl label="Friktionstal <em>μ</em>" value={mu} min={0} max={0.8} step={0.05} onChange={setMu} disabled={lastReglage}
+                                {...(kompakt ? { valueNode: <NumInput value={mu} min={0} max={1} fmtFn={(x) => fmt(x, 2)} color={COL.frik} disabled={lastReglage} onCommit={setMu} /> } : {})}>
+                                {!kompakt && <NumInput value={mu} min={0} max={1} fmtFn={(x) => fmt(x, 2)} color={COL.frik} disabled={lastReglage} onCommit={setMu} />}
+                            </Sl>
+                        )}
+                        {lage === 'dra' && utforska && (
+                            <Sl label="Startfart" value={v0} min={0} max={2} step={0.1} onChange={setV0} disabled={lastReglage}
+                                {...(kompakt ? { valueNode: <NumInput value={v0} min={0} max={3} fmtFn={(x) => fmt(x, 1)} unit="m/s" disabled={lastReglage} onCommit={setV0} /> } : {})}>
+                                {!kompakt && <NumInput value={v0} min={0} max={3} fmtFn={(x) => fmt(x, 1)} unit="m/s" disabled={lastReglage} onCommit={setV0} />}
+                            </Sl>
+                        )}
+                    </React.Fragment>
+                );
+            };
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                <path d="M6 6l12 12M18 6L6 18" />
+                            </svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        <label><input type="checkbox" checked={show.krafter} onChange={() => tShow('krafter')} />
+                            <span className="st-swatch" style={{ background: COL.F }}></span><span>Krafter</span></label>
+                        <label><input type="checkbox" checked={show.komp} onChange={() => tShow('komp')} disabled={!show.krafter || lage !== 'dra'} />
+                            <span>Komposanter <em>F</em><sub>1</sub>, <em>F</em><sub>2</sub></span></label>
+                        <label><input type="checkbox" checked={show.forra} onChange={() => tShow('forra')} /><span>Förra försöket</span></label>
+                        <label><input type="checkbox" checked={show.ultra} onChange={() => tShow('ultra')} /><span>Ultrarapid</span></label>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglage(StSlider, true)}</div>
+                                <div className="st-actions">
+                                    <button className="btn-start" onClick={startKlick} disabled={lastGissa}>{startEtikett}</button>
+                                    <button className="btn-toggle" onClick={borjaOm} disabled={lastGissa}>Börja om</button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const Fs = kNu.Fs;
+            const sVisa = st.x > 0 ? st.x : s;
+            const varierat = st.prov.some((p) => Math.abs(p[1] - st.prov[st.prov.length - 1][1]) > 1e-6);
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-7xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Arbete
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Arbete</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            När en kraft flyttar ett föremål uträttar kraften ett <strong>arbete</strong>: energi förs över till
+                            föremålet och byter form. Arbetet är kraften i rörelsens riktning gånger sträckan,
+                            och det syns här som en <strong>area</strong> som fylls med brickor på en joule var.
+                            Ta tag i handen och dra i dynamometern. Avståndet bestämmer kraften och riktningen bestämmer
+                            vinkeln <em>v</em>. Tryck sedan på Starta och se vart energin tar vägen.
+                        </p>
+
+                        <FormelKort Fs={Fs} s={sVisa} W={st.x > 0 ? en.W : Fs * s} F={effF} v={effV} dolj={doljSvar} lage={lage} varierat={varierat} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 xl:w-3/4 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <Scen cfg={cfgRef.current} st={st} k={kNu} en={en} show={show} svgRef={svgRef}
+                                          handtag={handtag} drar={drar} gissaDolj={doljSvar} ghost={ghost && ghost.lage === lage ? ghost : null}
+                                          flygande={flygRef.current} raknare={rakRef.current} utforska={utforska} smax={smax} />
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    {lage === 'dra' && 'Ta tag i handen och dra: avståndet från föremålet bestämmer kraften, riktningen bestämmer vinkeln v. Det går också att ändra kraften medan föremålet rör sig.'}
+                                    {lage === 'lyft' && 'Dra handen uppåt eller nedåt för att ändra kraften. Från vila lyfts vikten först när kraften är större än tyngdkraften. De färdiga lyftförsöken startar med en liten fart uppåt, och då räcker en kraft lika stor som tyngdkraften för att vikten ska fortsätta uppåt med jämn fart.'}
+                                    {lage === 'bar' && 'Handen bär vikten med jämn fart längs bänken. Kraften är lika stor som tyngdkraften och pekar rakt uppåt.'}
+                                    {' '}Luftmotståndet försummas.
+                                </p>
+
+                                {resultat && (
+                                    <div className="glass-card rounded-xl p-4 mt-3 resultat">
+                                        <div className="font-bold mb-1" style={{ color: 'var(--lab-ink)' }}>{resultat.rubrik}</div>
+                                        <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>{resultat.text}</p>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* ── Sidopanelen ── */}
+                            <div className="lg:w-1/3 xl:w-1/4 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Försöket</div>
+                                    <div className="mode-seg mb-2">
+                                        {[['dra', 'Dra'], ['lyft', 'Lyfta'], ['bar', 'Bära']].map(([k, n]) => (
+                                            <button key={k} className={lage === k ? 'active' : ''} disabled={lastReglage}
+                                                    onClick={() => valjLage(k)}>{n}</button>
+                                        ))}
+                                    </div>
+                                    {lage === 'dra' && (
+                                        <div className="mode-seg">
+                                            <button className={obj === 'vagn' ? 'active' : ''} disabled={lastReglage} onClick={() => setObj('vagn')}>
+                                                Vagn<span className="sub">ingen friktion</span></button>
+                                            <button className={obj === 'lada' ? 'active' : ''} disabled={lastReglage} onClick={() => { setObj('lada'); setFraw(startKraft('dra', 'lada', m, mu, F, v)); }}>
+                                                Trälåda<span className="sub">med friktion</span></button>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    {!isFullscreen && reglage(Slider, false)}
+                                    {isFullscreen && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Reglagen finns i rutan uppe till höger i fullskärm.</p>}
+                                    <div className="flex gap-2 mt-2">
+                                        <button className="btn-start flex-1" onClick={startKlick} disabled={lastGissa}>{startEtikett}</button>
+                                        <button className="btn-toggle flex-1" onClick={borjaOm} disabled={lastGissa}>Börja om</button>
+                                    </div>
+                                    <label className="flex items-center gap-2 mt-3 text-sm cursor-pointer" style={{ color: 'var(--lab-ink)' }}>
+                                        <input type="checkbox" checked={utforska} disabled={lastReglage}
+                                               onChange={() => { if (!utforska && v0 === 0) setV0(1.2); setUtforska((u) => !u); }} style={{ accentColor: 'var(--lab-accent)' }} />
+                                        <span>Utforska: vinklar över 90° och startfart</span>
+                                    </label>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Färdiga försök</div>
+                                    <div className="forsok-lista">
+                                        {FORSOK.map((f) => (
+                                            <button key={f.id} className="forsok" disabled={lastGissa} onClick={() => korForsok(f)}>
+                                                {f.namn}<span className="sub">{f.sub}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Avläsning</div>
+                                    <div className="avl">
+                                        <div><div className="v" style={{ color: COL.F }}>{fmt(effF, 1)} N</div><div className="l">kraft <em>F</em></div></div>
+                                        <div><div className="v" style={{ color: COL.F }}>{fmt(Fs, 1)} N</div><div className="l">längs rörelsen <em>F</em><sub>s</sub></div></div>
+                                        <div><div className="v">{fmt(st.x, 2)} m</div><div className="l">sträcka <em>s</em></div></div>
+                                        <div><div className="v" style={{ color: COL.frik }}>{lage === 'dra' && obj === 'lada' ? `${fmt(kNu.Ff, 1)} N` : '–'}</div><div className="l">friktion <em>F</em><sub>f</sub></div></div>
+                                        <div><div className="v">{fmt(Math.abs(st.vel), 2)} m/s</div><div className="l">fart</div></div>
+                                        <div><div className="v" style={{ color: COL.brickK }}>{doljSvar ? '?' : `${fmt(en.W, 1)} J`}</div><div className="l">arbete <em>W</em></div></div>
+                                    </div>
+                                </div>
+
+                                {/* Gissa-läget */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flbl" style={{ textAlign: 'left' }}>Gissa-läge</div>
+                                        {poang.totalt > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            {poang.ratt} av {poang.totalt} rätt{poang.svit > 1 ? `, ${poang.svit} i rad` : ''}</div>}
+                                    </div>
+                                    {!gissa && (
+                                        <div className="flex flex-col gap-2">
+                                            <button className="btn-toggle" onClick={startaRakna}>Räkna ut arbetet</button>
+                                            <button className="btn-toggle" onClick={startaJamfor}>Vilket försök ger mest arbete?</button>
+                                        </div>
+                                    )}
+                                    {gissa === 'rakna' && uppg && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                En hand drar {uppg.obj === 'vagn' ? 'vagnen' : 'lådan'} med kraften <em>F</em> = {fmt(uppg.F, 0)} N
+                                                i vinkeln <em>v</em> = {uppg.v}° mot bänken, sträckan <em>s</em> = {fmt(uppg.s, 1)} m.
+                                                Hur stort arbete uträttar kraften?
+                                            </p>
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <span style={{ fontStyle: 'italic' }}>W</span> =
+                                                <input className="gissa-in" type="text" inputMode="decimal" value={svarTxt}
+                                                       disabled={svarStatus !== null}
+                                                       onChange={(e) => setSvarTxt(e.target.value)}
+                                                       onKeyDown={(e) => { if (e.key === 'Enter' && svarStatus === null) kollaSvar(); }} />
+                                                <span>J</span>
+                                                <button className="btn-start" onClick={kollaSvar} disabled={svarStatus !== null}>Kolla</button>
+                                            </div>
+                                            {svarStatus === 'kor' && <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>Försöket körs. Räkna brickorna!</p>}
+                                            {svarStatus && svarStatus !== 'kor' && (
+                                                <p className="text-sm mb-2" style={{ color: svarStatus.ratt ? '#15803d' : 'var(--lab-accent)' }}>{svarStatus.text}</p>
+                                            )}
+                                            <div className="flex gap-2">
+                                                {svarStatus && svarStatus !== 'kor' && <button className="btn-toggle flex-1" onClick={startaRakna}>Ny uppgift</button>}
+                                                <button className="btn-toggle flex-1" onClick={avslutaGissa} disabled={svarStatus === 'kor'}>Avsluta</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {gissa === 'jamfor' && jamfor && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                Föremålet flyttas sträckan <em>s</em> av en kraft <em>F</em> i vinkeln <em>v</em> mot rörelsen.
+                                                I vilket försök uträttar kraften störst arbete?
+                                            </p>
+                                            <div className="kort3 mb-2">
+                                                {jamfor.map((k, i) => {
+                                                    const max = Math.max(...jamfor.map((q) => q.W));
+                                                    const basta = valt != null && k.W === max;
+                                                    return (
+                                                        <button key={i} className={`${valt === i ? 'vald' : ''} ${basta ? 'basta' : ''}`} onClick={() => valjKort(i)} disabled={valt != null}>
+                                                            <span className="bok">{'ABC'[i]}</span>
+                                                            <em>F</em> = {k.F} N<br /><em>v</em> = {k.v}°<br /><em>s</em> = {fmt(k.s, 1)} m
+                                                            {valt != null && <span style={{ display: 'block', marginTop: 4, fontWeight: 700 }}>{fmt(k.W, 1)} J</span>}
+                                                            {valt != null && <div className="stapel" style={{ width: `${Math.max(4, (k.W / max) * 100)}%` }}></div>}
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
+                                            {valt != null && (() => {
+                                                const max = Math.max(...jamfor.map((q) => q.W));
+                                                const ratt = jamfor[valt].W === max;
+                                                return <p className="text-sm mb-2" style={{ color: ratt ? '#15803d' : 'var(--lab-accent)' }}>
+                                                    {ratt ? 'Rätt! ' : 'Inte riktigt. '}Arbetet är <em>F</em> · cos <em>v</em> · <em>s</em>: en stor kraft i en stor vinkel ger en liten komposant längs rörelsen.
+                                                </p>;
+                                            })()}
+                                            <div className="flex gap-2">
+                                                {valt != null && <button className="btn-toggle flex-1" onClick={startaJamfor}>Ny fråga</button>}
+                                                <button className="btn-toggle flex-1" onClick={avslutaGissa}>Avsluta</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Arbetet är en area</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Ritar man kraften i rörelsens riktning mot sträckan blir arbetet <em>W</em> = <em>F</em><sub>s</sub> · <em>s</em> arean
+                                    under grafen, eftersom en rektangels area är höjd gånger bredd. Varje ruta i diagrammet är 10 N gånger 0,1 m,
+                                    alltså 1 Nm = 1 J. Ändras kraften under vägen blir ytan trappformad, men arbetet är fortfarande arean.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Bara kraften längs rörelsen räknas</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    En sned kraft delas upp i en komposant längs rörelsen, <em>F</em><sub>2</sub> = <em>F</em> · cos <em>v</em>, och en
+                                    vinkelrät, <em>F</em><sub>1</sub> = <em>F</em> · sin <em>v</em>. Bara den första uträttar arbete. Den andra lyfter lite
+                                    i föremålet och minskar normalkraften och därmed friktionen, men flyttar det inte. Vid <em>v</em> = 90° blir arbetet noll.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Arbete flyttar energi</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Arbete är ingen energiform utan en process där energi förs över till eller från föremålet och byter form.
+                                    Utan friktion blir allt rörelseenergi, med friktion blir en del värme, och vid ett lyft blir det lägesenergi.
+                                    Brickorna i facken är startenergin plus arbetet, räknat i hela joule.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Det jag blir trött av är arbete.”</strong> Nej. Att bära en väska rakt fram eller trycka mot en vägg som inte
+                                    rör sig ger inget arbete i fysikens mening, eftersom ingenting flyttas i kraftens riktning. Musklerna blir ändå trötta,
+                                    men energin som musklerna gör av med blir värme i kroppen.</li>
+                                <li><strong>”Större kraft ger alltid större arbete.”</strong> Bara om sträckan och vinkeln är desamma. En stor kraft i
+                                    stor vinkel kan ge mindre arbete än en liten kraft rakt framåt.</li>
+                                <li><strong>”Det tyngre föremålet kräver alltid mer arbete att lyfta.”</strong> Det beror också på höjden. Att lyfta 1 kg 0,6 m uppåt ger
+                                    samma arbete som att lyfta 2 kg 0,3 m, eftersom arbetet är kraft gånger sträcka.</li>
+                                <li><strong>”Tyngdkraften och normalkraften uträttar arbete när lådan dras längs bänken.”</strong> Nej. Båda är
+                                    vinkelräta mot rörelsen, så deras komposant längs rörelsen är noll.</li>
+                                <li><strong>”Arbete kan inte vara negativt.”</strong> Jo. Pekar kraften bakåt mot rörelsen tar den energi från föremålet.
+                                    Prova försöket Bromsa vagnen i Utforska-läget.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

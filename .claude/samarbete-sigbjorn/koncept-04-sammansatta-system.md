@@ -1,6 +1,6 @@
 # Koncept 4: Sammansatta system (bokens 3.7, Fysiklabbet fy1-3.10)
 
-Status: **väntar på Sams godkännande** (2026-10-27)
+Status: **godkänt och byggt** (2026-10-27, pushat ea4fa37a)
 
 Arbetsnamn: **Trissbordet**, filen `fysik1-trissor-app.html`, länkad som
 `href` på fy1-3.10 Trissor. Fjärde delen i serien, med samma labbänk,

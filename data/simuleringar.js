@@ -52,6 +52,8 @@ window.SIM_NAMES = {
   'fysik1-effekt-verkningsgrad-app.html': 'Effekt och verkningsgrad',
   'fysik1-effekt-verkningsgrad-app.html?lage=apparater': 'Verkningsgrad: lampor och apparater',
   'fysik1-trissor-app.html': 'Sammansatta system',
+  'fysik1-vatsketryck-app.html': 'Tryck i vätskor',
+  'fysik1-vatsketryck-app.html?lage=pascal': 'Pascals princip: hydraulpressen',
   'fysik1-berg-och-dalbana.html': 'Berg-och-dalbana (energiprincipen)',
   'fysik1-tryck-pa-app.html': 'Tryck och tryckkraft',
   'fysik1-magdeburgska-halvklot.html': 'Magdeburgska halvkloten',

@@ -26,7 +26,7 @@ simuleringen länkas i katalogen och vars beteckningar den ska följa.
 | 2 | 5.5 Tap av mekanisk energi | fy1-4.9 Arbete med friktion | Släde/vagn med friktion: energistaplar där lägesenergi + rörelseenergi minskar och "värme" växer lika mycket | 2D (3D övervägs) | [x] |
 | 3 | 5.6 Virkningsgrad og effekt | fy1-4.5 Effekt, fy1-4.6 Verkningsgrad | Motor/kran som lyfter last: tillförd och nyttig energi, effekt som energi per tid, verkningsgrad som energiflöde (sankeydiagram) | 2D | [x] |
 | 4 | 3.7 Sammensatte systemer | fy1-3.10 Trissor | Två kroppar med snöre över trissa (låda på bord + hängande vikt, Atwood): friläggning av varje kropp, gemensam acceleration, spännkraften | 2D | [x] |
-| 5 | 6.3 Trykk i væsker og rør | fy1-5.3 Vätsketryck (+ 5.8 Pascals princip) | Vätsketryck mot djup, kommunicerande kärl, U-rörsmanometer och hydraulisk press | 2D | [ ] |
+| 5 | 6.3 Trykk i væsker og rør | fy1-5.3 Vätsketryck (+ 5.8 Pascals princip) | Vätsketryck mot djup, kommunicerande kärl, U-rörsmanometer och hydraulisk press | 2D | [x] |
 | 6 | 7.4 Termofysikkens første lov | fy1-6.5 Termodynamikens huvudsatser | Gas i cylinder med kolv: värme in, arbete ut, Δ*U* = *Q* − *W* (tecken enligt teorin) med partiklar som rör sig | 2D eller 3D | [ ] |
 | 7 | 7.5 Energikvalitet og termofysikkens andre lov | fy1-6.5 Termodynamikens huvudsatser | Varmt och kallt i kontakt: energin sprids men går aldrig tillbaka av sig själv; värmemaskinens maximala verkningsgrad | 2D | [ ] |
 | 8 | 6.5 Strømninger i rør | saknas (nytt stoff för Fysiklabbet) | Kontinuitetsekvationen (smalare rör ger högre fart), eventuellt tryckfall/Bernoulli. **Kräver bokens innehåll först** | 2D | [ ] |
@@ -113,7 +113,19 @@ Tas när del 1 och 2 är klara.
 - [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn
 - [x] Fysikgranskning och språkgranskning, rättningarna införda (spärren före släppet, formelkortet följer rörelseriktningen, vagnen blev en kloss med glidfriktion)
 - [x] Sam testar och godkänner (2026-10-27)
-- [x] Commit och push till `main`
+- [x] Commit och push till `main` (ea4fa37a)
+- [ ] Länken till Sigbjørn
+
+## Status: nr 5, Tryck i vätskor och rör (`fysik1-vatsketryck-app.html`)
+
+- [x] Koncept godkänt (2026-10-27, `koncept-05-vatsketryck.md`): tre lägen i en sida, lufttrycket som kryssruta, arbetsrutan i Hydraulpressen
+- [x] Tryckmotorn med test: `node .claude/test-tryck-motor.js` (källan i `tryck-motor.js`, inklistrad i sidan)
+- [x] Sidan byggd: Trycksonden (akvarium och djup cistern, U-rörsmanometer, vätskepelare, diagram över tryck och djup), Kärlens form (fyra kärl, kranar, staplar för bottentryck och massa), Hydraulpressen (tre tryckmätare, mätur, arbetsruta), åtta färdiga försök, gissa-läge med tre frågetyper
+- [x] Inkopplad: katalog fy1-5.3 och fy1-5.8 (`?lage=pascal`), `data/simuleringar.js`, `UPDATES`, `verify-navigation.js`
+- [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn
+- [x] Fysikgranskning och språkgranskning, rättningarna införda (krafterna i pressen i skala mot varandra, arbetet som går till rörelseenergi, bilen 2 ton som i Exempel 1, massa och tyngd isärhållna, sonden flyttbar i sidled)
+- [x] Sam testar och godkänner (2026-10-27)
+- [ ] Commit och push till `main`
 - [ ] Länken till Sigbjørn
 
 ## Process för varje simulering

@@ -185,7 +185,7 @@ den andra sidans namn.
 | fjäderkraft / förlängning / olastad | fjærkraft / forlengelse / ubelastet | index *F*_fjäder → *F*_fjær |
 | seriekopplade / parallellkopplade fjädrar | seriekoblede / parallellkoblede fjærer | |
 | fjäderpendel / konisk pendel / plan pendel | fjærpendel / konisk pendel / plan pendel | |
-| upphängning / upphängningspunkt | oppheng / opphengingspunkt | |
+| upphängning / upphängningspunkt | oppheng / opphengingspunkt | et oppheng, flere oppheng, i hvert oppheng (ikke "hver oppheng", ikke "opphenginger") |
 | pendellängd / snörlängd | pendellengde / snorlengde | |
 | kula (pendelkula) | kule, kulen | inte "kula" |
 | varv (rotation) / halvvarv / varv per sekund | omdreining / halv omdreining / omdreininger per sekund | inte "runder" |

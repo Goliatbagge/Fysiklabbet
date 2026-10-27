@@ -98,3 +98,6 @@ np-test.html
 
 # Laborationsinstruktioner som bara mailas, ligger inte på sajten
 /laborationer/
+
+# Norska delningspaketet (byggs av .claude/i18n/nb/bygg-delningspaket.js), bara lokalt
+/delningspaket/

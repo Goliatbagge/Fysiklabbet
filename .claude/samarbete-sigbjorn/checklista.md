@@ -48,7 +48,7 @@ att länka till från boken.
 
 | # | Simulering | Finns i | Bokens delkapitel | Klar |
 |---|---|---|---|---|
-| 11 | Vältning (kloss som lutas tills den välter) | fy2-1.2, fy2-1.3 | 4.1 Likevekt, 4.5 Gjenstander som står på skrå | [ ] |
+| 11 | Vältning (kloss som lutas tills den välter) | fy2-1.2, fy2-1.3 | 4.1 Likevekt, 4.5 Gjenstander som står på skrå | byggd, testas |
 | 12 | Linjalen på två fingrar | fy2-1.2 | 4.1 Likevekt | [ ] |
 | 13 | Lodlinjen (tyngdpunkt med lod) | fy2-1.3 | 4.1 Likevekt | [ ] |
 | 14 | Numerisk modellering (kalkylbladet + stegkastet) | fy2-1.9 | 2.6 Matematisk modellering av bevegelse | [ ] |
@@ -150,6 +150,18 @@ Tas när del 1 och 2 är klara.
 - [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn
 - [x] Fysikgranskning och språkgranskning, rättningarna införda (blind dynamik i stället för Metropolis, fladdret förklarat, värmepumpens gräns i formelkortet, 10²⁵ atomer, entropin kan tillfälligt minska)
 - [x] Sam testar och godkänner (2026-10-27)
+- [x] Commit och push till `main` (6f2fb3e7)
+- [ ] Länken till Sigbjørn
+
+## Status: nr 11, Vältning (`fysik2-valtning-app.html`)
+
+- [x] Koncept godkänt (2026-10-27, `koncept-11-valtning.md`): båda lägena, den generella formeln tan α_v = (b/2)/h_T när en last läggs i klossen, normalkraften som vandrar
+- [x] Motorn med test: `node .claude/test-valt-motor.js` (källan i `valt-motor.js`, inklistrad i sidan)
+- [x] Sidan byggd: luta klossen för hand (rotation kring hörnet), klossen på en planka som vevas upp (glider eller välter), last högt eller lågt, kartan "Glider eller välter?", fyra underlag, sju färdiga försök, gissa-läge (vinkel samt glida eller välta)
+- [x] Inkopplad: `href3` på fy2-1.3 (efter gaffelbalansen och dubbelkonen), `data/simuleringar.js` med eget namn och sökord, `UPDATES`, `verify-navigation.js`
+- [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn; gissatestet `%TEMP%\pptr-test\valt-gissa.js`
+- [x] Fysikgranskning och språkgranskning, rättningarna införda (veven går vidare under glidningen, startläget så att breda klossar står på plankan, F_N på bänken, "last" i stället för "vikt", stoppkloss vid gångjärnet, kraftvärden, gränsfallet förklarat, F_G blå)
+- [ ] Sam testar och godkänner
 - [ ] Commit och push till `main`
 - [ ] Länken till Sigbjørn
 

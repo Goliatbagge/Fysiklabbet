@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vältning — Fysiklabbet</title>
+    <meta name="description" content="Luta en kloss tills den välter, lägg en last i den och se tyngdpunkten flytta sig, eller ställ den på en planka och se om den glider eller välter först. Lodlinjen, stödytan och normalkraften som vandrar.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-valtning-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Vältning — Fysik nivå 2">
+    <meta property="og:description" content="Luta en kloss tills den välter, lägg en last i den och se tyngdpunkten flytta sig, eller ställ den på en planka och se om den glider eller välter först. Lodlinjen, stödytan och normalkraften som vandrar.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-valtning-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vältning — Fysik nivå 2">
+    <meta name="twitter:description" content="Luta en kloss tills den välter, lägg en last i den och se tyngdpunkten flytta sig, eller ställ den på en planka och se om den glider eller välter först. Lodlinjen, stödytan och normalkraften som vandrar.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+        input[type="range"]:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1;
+                text-align: center; max-width: 150px; }
+        .fnum { color: var(--lab-ink); font-size: 20px; font-family: 'Poppins', sans-serif; }
+        .fnum-live { color: var(--lab-ink); font-size: 17px; font-family: 'Poppins', sans-serif; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 80px; }
+        .num-in { width: 50px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:disabled { opacity: 0.55; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* Scenen: en svg med egen proportion (1000 × 660). Mobilen (sektion 8 i
+           styles-laborans-sim.css) dockar verktygen under den. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1000 / 660;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .handtag { cursor: grab; }
+        .handtag.drar { cursor: grabbing; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 34px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-start {
+            background: var(--lab-accent, #c8324a); color: #fff; border: 1px solid var(--lab-accent, #c8324a);
+            border-radius: 8px; padding: 9px 14px; font-weight: 700; cursor: pointer;
+        }
+        .btn-start:hover:not(:disabled) { filter: brightness(1.06); }
+        .btn-start:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .mode-seg { display: flex; gap: 0; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button {
+            flex: 1; padding: 8px 8px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .mode-seg button:last-child { border-right: none; }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+
+        /* Färdiga försök */
+        .forsok-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .forsok {
+            text-align: left; padding: 7px 9px; border-radius: 8px; cursor: pointer;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; font-weight: 600; color: var(--lab-ink, #0f1620); line-height: 1.25;
+        }
+        .forsok .sub { display: block; font-size: 11.5px; font-weight: 400; color: var(--lab-ink-soft, #3a4151); }
+        .forsok:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .forsok:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* Avläsning */
+        .avl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
+        .avl .v { font-weight: 700; font-size: 16px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+        .avl .l { font-size: 11.5px; color: var(--lab-ink-muted, #5a6170); }
+
+        /* Resultatrutan efter ett försök */
+        .resultat { border-left: 4px solid var(--lab-accent, #c8324a); }
+        .resultat.ratt { border-left-color: #15803d; }
+
+        /* Gissa-läget */
+        .gissa-in { width: 90px; padding: 6px 8px; border-radius: 7px; font-size: 15px;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                    background: #fff; font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .gissa-in:focus { outline: none; border-color: var(--lab-accent, #c8324a); }
+        .kort3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .kort3 button {
+            padding: 8px 6px; border-radius: 8px; cursor: pointer; text-align: center;
+            background: var(--lab-bg, #f3eee4); border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; line-height: 1.45; color: var(--lab-ink, #0f1620);
+        }
+        .kort3 button:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .kort3 button.vald { border-color: var(--lab-ink, #0f1620); box-shadow: 0 0 0 2px rgba(15,22,32,0.15); }
+        .kort3 button.basta { background: rgba(21,128,61,0.10); border-color: #15803d; }
+        .kort3 .bok { font-weight: 700; font-size: 15px; display: block; margin-bottom: 2px; }
+        .kort3 .stapel { height: 6px; border-radius: 3px; background: #d4930f; margin-top: 5px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+        /* Remsorna på den plana sträckan */
+        .remsor { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+        .remsor button {
+            padding: 6px 4px; border-radius: 8px; cursor: pointer; font-size: 12.5px; font-weight: 600; line-height: 1.2;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .remsor button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+        .remsor button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); border-color: var(--lab-ink, #0f1620); }
+        .remsor button:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script id="valt-motor">
+// Motorn för Vältbänken (fysik2-valtning-app.html).
+// Källan ligger här och klistras in oförändrad i sidan; testet
+// .claude/test-valt-motor.js kontrollerar fysiken och att kopian är identisk.
+//
+// En jämntjock kloss med bredden b och höjden h (meter) och massan mK. En
+// extra vikt med massan mV kan ligga mitt i klossen på höjden yV över
+// undersidan (en punktmassa). Tyngdpunkten ligger mitt i bredd och på höjden
+//     hT = (mK · h/2 + mV · yV) / (mK + mV).
+// Klossen välter kring ett nedre hörn när lodlinjen genom tyngdpunkten
+// passerar hörnet, alltså när lutningen α uppfyller tan α = (b/2) / hT.
+// Utan vikt är hT = h/2 och tan α = b / h, som i fy2-1.3.
+//
+// Läge 1: klossen lutas för hand kring ett hörn och släpps. Rotationen kring
+// hörnet följer τ = I · θ'' med tröghetsmomentet kring hörnet.
+// Läge 2: klossen står på en planka som vevas upp. Den glider när tan φ > μ
+// och välter när tan φ > (b/2) / hT; det som inträffar först vinner. Samma μ
+// används för vila och glidning. Veven går vidare medan klossen glider (annars
+// vore accelerationen nästan noll precis vid gränsen). Under glidningen sitter
+// normalkraften fast på avståndet μ · hT från mitten, innanför hörnet, så
+// klossen kan inte välta medan den glider.
+// Förenklingar: under vältningen antas det nedre hörnet inte glida, och
+// rörelsen stannar när klossen ligger på sidan (ingen studs, ingen fortsatt tippning).
+(function () {
+    const G = 9.82;
+    const RAD = Math.PI / 180;
+
+    function tp(c) {
+        const M = c.mK + c.mV;
+        return { M, hT: (c.mK * c.h / 2 + c.mV * c.yV) / M };
+    }
+    const tanAlfa = (c) => (c.b / 2) / tp(c).hT;
+    const alfaKrit = (c) => Math.atan(tanAlfa(c));
+    // tröghetsmomentet kring ett nedre hörn
+    function iHorn(c) {
+        const kloss = c.mK * ((c.b * c.b + c.h * c.h) / 12 + (c.b / 2) ** 2 + (c.h / 2) ** 2);
+        const vikt = c.mV * ((c.b / 2) ** 2 + c.yV ** 2);
+        return kloss + vikt;
+    }
+    // tyngdpunktens vågräta avstånd förbi hörnet när klossen lutar vinkeln θ
+    // från lodrätt (positivt: tyngdpunkten är förbi hörnet och klossen välter)
+    const forbi = (c, theta) => -(c.b / 2) * Math.cos(theta) + tp(c).hT * Math.sin(theta);
+
+    // ── Läge 1 ──
+    const nytt1 = () => ({ theta: 0, omega: 0, sida: 1, hallen: false, liggande: false, t: 0 });
+    function steg1(st, c, dt) {
+        if (st.hallen || st.liggande) return st;
+        const n = Math.max(1, Math.ceil(dt / 0.001)), h = dt / n;
+        const M = tp(c).M, I = iHorn(c);
+        for (let i = 0; i < n; i++) {
+            const alfa = M * G * forbi(c, st.theta) / I;
+            st.omega += alfa * h;
+            st.theta += st.omega * h;
+            if (st.theta <= 0) { st.theta = 0; st.omega = 0; }                // tillbaka på undersidan
+            if (st.theta >= Math.PI / 2) { st.theta = Math.PI / 2; st.omega = 0; st.liggande = true; }
+            st.t += h;
+        }
+        return st;
+    }
+
+    // ── Läge 2 ──
+    const nytt2 = (s0) => ({ phi: 0, psi: 0, omega: 0, s: 0, v: 0, s0, fas: 'vila', handelse: null, t: 0 });
+    function steg2(st, c, dt, vevfart) {
+        const n = Math.max(1, Math.ceil(dt / 0.001)), h = dt / n;
+        const ta = tanAlfa(c);
+        for (let i = 0; i < n; i++) {
+            if (st.fas === 'vila') {
+                st.phi = Math.min(80 * RAD, st.phi + vevfart * h);
+                const t = Math.tan(st.phi);
+                const glider = t > c.mu, valter = t > ta;
+                if (glider || valter) {
+                    // det som har den lägsta gränsen inträffar först
+                    st.fas = (valter && (!glider || ta <= c.mu)) ? 'valter' : 'glider';
+                    st.handelse = st.fas;
+                }
+            } else if (st.fas === 'glider') {
+                st.phi = Math.min(80 * RAD, st.phi + vevfart * h);
+                const a = G * (Math.sin(st.phi) - c.mu * Math.cos(st.phi));
+                st.v += a * h; st.s += st.v * h;
+                if (st.s >= st.s0) { st.s = st.s0; st.fas = 'klar'; }
+            } else if (st.fas === 'valter') {
+                const M = tp(c).M, I = iHorn(c);
+                const alfa = M * G * forbi(c, st.phi + st.psi) / I;
+                st.omega += alfa * h; st.psi += st.omega * h;
+                if (st.psi >= Math.PI / 2) { st.psi = Math.PI / 2; st.omega = 0; st.fas = 'klar'; }
+            }
+            st.t += h;
+        }
+        return st;
+    }
+    // Normalkraftens angreppspunkt: avståndet från undersidans mitt mot det
+    // nedre hörnet. I vila tar normalkraftens moment kring tyngdpunkten ut
+    // friktionens, N · x = F_f · hT, med F_f = M g sin φ och N = M g cos φ.
+    function normalLage(c, st) {
+        const hT = tp(c).hT;
+        if (st.fas === 'valter' || (st.fas === 'klar' && st.handelse === 'valter')) return c.b / 2;
+        const x = st.fas === 'glider' || (st.fas === 'klar' && st.handelse === 'glider') ? c.mu * hT : hT * Math.tan(st.phi);
+        return Math.min(c.b / 2, x);
+    }
+    // Krafterna på klossen i vila eller vid glidning (N)
+    function krafter(c, st) {
+        const M = tp(c).M;
+        const FN = M * G * Math.cos(st.phi);
+        const Ff = st.fas === 'glider' ? c.mu * FN : M * G * Math.sin(st.phi);
+        return { FG: M * G, FN, Ff };
+    }
+
+    const ut = { G, RAD, tp, tanAlfa, alfaKrit, iHorn, forbi, nytt1, steg1, nytt2, steg2, normalLage, krafter };
+    if (typeof window !== 'undefined') window.ValtMotor = ut;
+    if (typeof module !== 'undefined') module.exports = ut;
+})();
+</script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const M = window.ValtMotor;
+        const RAD = M.RAD;
+
+        // ── Talformat: decimalkomma, äkta minustecken, exakt noll som "0" ──
+        const fmt = (num, d = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+        const grader = (v) => `${fmt(v / RAD, 0)}°`;
+
+        // Ren text med variabler i kursiv: α_v, h_T, F_N, μ, b, h.
+        const Fx = ({ text }) => {
+            const delar = [];
+            const re = /(?<![\p{L}\d])([αhFm])_([\p{L}\d]+)|(?<![\p{L}\d])([αμbh])(?![\p{L}\d])/gu;
+            let sist = 0, mm, n = 0;
+            while ((mm = re.exec(text))) {
+                if (mm.index > sist) delar.push(text.slice(sist, mm.index));
+                if (mm[1]) delar.push(<span key={n++}><em>{mm[1]}</em><sub>{mm[2]}</sub></span>);
+                else delar.push(<em key={n++}>{mm[3]}</em>);
+                sist = re.lastIndex;
+            }
+            delar.push(text.slice(sist));
+            return <React.Fragment>{delar}</React.Fragment>;
+        };
+        const Brak = ({ t, n }) => (
+            <span style={{ display: 'inline-flex', flexDirection: 'column', verticalAlign: 'middle', textAlign: 'center',
+                           lineHeight: 1.05, fontSize: '0.92em', margin: '0 3px' }}>
+                <span style={{ padding: '0 2px 1px' }}>{t}</span>
+                <span style={{ padding: '1px 2px 0', borderTop: '1.5px solid currentColor' }}>{n}</span>
+            </span>
+        );
+        const Sub = ({ s, i }) => <span><em>{s}</em><sub>{i}</sub></span>;
+
+        const COL = {
+            ink:   '#0f1620',
+            soft:  'rgba(15,22,32,0.7)',
+            tyngd: '#2563c9',
+            norm:  '#0d9488',
+            frik:  '#e0701a',
+            stod:  '#8b5cf6',
+            tp:    '#2e9e4f',
+            vrid:  '#d13b2e',
+            grans: '#c8324a',
+        };
+        const UNDERLAG = {
+            is:     { namn: 'Is', mu: 0.1, farg: '#dbeafe' },
+            tra:    { namn: 'Trä', mu: 0.4, farg: '#d6b17a' },
+            gummi:  { namn: 'Gummimatta', mu: 0.8, farg: '#4b5563' },
+            sand:   { namn: 'Sandpapper', mu: 1.0, farg: '#b8a27a' },
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  SCENENS GEOMETRI (viewBox 1000 × 660)
+        // ════════════════════════════════════════════════════════
+        const VB_W = 1000, VB_H = 660;
+        const SK = 750;                     // px per meter
+        const BANK_Y = 500, BX = 300;       // läge 1: bänken och klossens mitt
+        const HX = 90, HY = 520, PL = 560;  // läge 2: gångjärnet och plankans längd
+        // klossens startläge längs plankan, så att även en bred kloss står helt på plankan
+        const s0For = (c) => Math.min(0.5, PL / SK - c.b - 0.03);
+
+        // Klossens hörn i lokala koordinater (meter, y uppåt) med vridpunkten i origo.
+        // sida = 1: vridpunkten är det högra hörnet; −1: det vänstra.
+        function lokalKloss(c, sida) {
+            const b = c.b, h = c.h, s = sida;
+            return { horn: [[0, 0], [-s * b, 0], [-s * b, h], [0, h]], tp: [-s * b / 2, M.tp(c).hT], vikt: [-s * b / 2, c.yV] };
+        }
+        // vrid (x, y) vinkeln v medurs i ett y-uppåt-system (åt sida = 1)
+        const vrid = (p, v, sida) => {
+            const a = -sida * v;
+            return [p[0] * Math.cos(a) - p[1] * Math.sin(a), p[0] * Math.sin(a) + p[1] * Math.cos(a)];
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  RITDELAR
+        // ════════════════════════════════════════════════════════
+        // Pil med rakt avslutat skaft som slutar vid huvudets bas.
+        const Pil = ({ x1, y1, x2, y2, color, width = 4.5, head = 15, dash = false, edge = false, opacity = 1 }) => {
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 2) return null;
+            const ux = (x2 - x1) / len, uy = (y2 - y1) / len;
+            const hd = Math.min(head, len * 0.9);
+            const bx = x2 - ux * hd, by = y2 - uy * hd;
+            const hw = hd * 0.48;
+            const p1 = `${bx - uy * hw},${by + ux * hw}`;
+            const p2 = `${bx + uy * hw},${by - ux * hw}`;
+            const kant = 'rgba(15,22,32,0.5)';
+            return (
+                <g opacity={opacity}>
+                    {edge && <line x1={x1} y1={y1} x2={bx} y2={by} stroke={kant} strokeWidth={width + 3} strokeLinecap="butt" />}
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="butt" strokeDasharray={dash ? '7 5' : undefined} />
+                    <polygon points={`${x2},${y2} ${p1} ${p2}`} fill={color}
+                             stroke={edge ? kant : 'none'} strokeWidth={edge ? 1.6 : 0} strokeLinejoin="round" />
+                </g>
+            );
+        };
+
+        // Beteckning med index: F, Fₛ, F₁ … Variabeln kursiv, indexet rakt.
+        const Bet = ({ x, y, sym, idx, color, size = 18, anchor = 'start', weight = 600 }) => (
+            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}
+                  fontFamily="Poppins, sans-serif">
+                <tspan fontStyle="italic">{sym}</tspan>
+                {idx != null && <tspan fontSize={size * 0.68} dy={size * 0.25}>{idx}</tspan>}
+            </text>
+        );
+
+        // Klossen, vikten, tyngdpunkten och lodlinjen ritade utifrån en
+        // funktion som gör lokala meter-koordinater till skärmpunkter.
+        const KlossRitad = ({ c, P, sida, visaLod, golvY, onDown, lodRod }) => {
+            const L = lokalKloss(c, sida);
+            const pts = L.horn.map(P);
+            const tpS = P(L.tp), vS = P(L.vikt);
+            const vikt = c.mV > 0;
+            const vs = 10 + 6 * c.mV;
+            return (
+                <g>
+                    <polygon points={pts.map((q) => q.join(',')).join(' ')} fill="#c98d4f" stroke="#7a4d22" strokeWidth="2" strokeLinejoin="round"
+                             style={{ cursor: onDown ? 'grab' : 'default' }} onPointerDown={onDown} />
+                    {[0.3, 0.62].map((f, i) => {
+                        const a = P([L.horn[1][0] * (1 - 0.05) + L.horn[0][0] * 0.05, c.h * f]), b = P([L.horn[0][0] * 0.95 + L.horn[1][0] * 0.05, c.h * f + 0.004]);
+                        return <line key={i} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="#9c6430" strokeWidth="1" opacity="0.5" style={{ pointerEvents: 'none' }} />;
+                    })}
+                    {vikt && <rect x={vS[0] - vs / 2} y={vS[1] - vs / 2} width={vs} height={vs} rx="2" fill="#374151" stroke="#111827" strokeWidth="1" style={{ pointerEvents: 'none' }} />}
+                    {visaLod && <line x1={tpS[0]} y1={tpS[1]} x2={tpS[0]} y2={golvY(tpS[0])} stroke={lodRod ? COL.grans : COL.tp} strokeWidth={lodRod ? 2.2 : 1.6} strokeDasharray="6 4" style={{ pointerEvents: 'none' }} />}
+                    <circle cx={tpS[0]} cy={tpS[1]} r="5" fill={COL.tp} stroke="#14532d" strokeWidth="1" style={{ pointerEvents: 'none' }} />
+                </g>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  LÄGE 1: LUTA KLOSSEN
+        // ════════════════════════════════════════════════════════
+        const Lage1 = ({ c, st, show, svgRef, setHall, dolj }) => {
+            const s = st.sida;
+            const piv = [BX + s * c.b / 2 * SK, BANK_Y];
+            const P = (p) => { const q = vrid(p, st.theta, s); return [piv[0] + q[0] * SK, piv[1] - q[1] * SK]; };
+            const L = lokalKloss(c, s);
+            const tpS = P(L.tp);
+            const av = M.alfaKrit(c);
+            const forbi = M.forbi(c, st.theta) > 0;
+            const dra = (e) => {
+                const svg = svgRef.current;
+                if (!svg || dolj) return;
+                e.preventDefault();
+                const pt0 = svg.createSVGPoint(); pt0.x = e.clientX; pt0.y = e.clientY;
+                const start = pt0.matrixTransform(svg.getScreenCTM().inverse());
+                const flytta = (ev) => {
+                    const pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY;
+                    const q = pt.matrixTransform(svg.getScreenCTM().inverse());
+                    const dx = q.x - start.x;
+                    setHall(dx === 0 ? s : Math.sign(dx), Math.min(85, Math.abs(dx) / 3) * RAD);
+                };
+                const slapp = () => { window.removeEventListener('pointermove', flytta); window.removeEventListener('pointerup', slapp); setHall(null); };
+                window.addEventListener('pointermove', flytta);
+                window.addEventListener('pointerup', slapp);
+            };
+            // bågen för lutningsvinkeln mellan bänken och klossens undersida
+            const r = 46, ang = st.theta;
+            const a1 = [piv[0] - s * r, piv[1]], a2 = [piv[0] - s * r * Math.cos(ang), piv[1] - r * Math.sin(ang)];
+            return (
+                <g fontFamily="Poppins, sans-serif">
+                    <rect x="40" y={BANK_Y} width="560" height="14" fill="#cbb48c" stroke="#8a6230" strokeWidth="1" />
+                    {/* stödytan */}
+                    {st.theta < 0.002
+                        ? <line x1={BX - c.b / 2 * SK} y1={BANK_Y + 1} x2={BX + c.b / 2 * SK} y2={BANK_Y + 1} stroke={COL.stod} strokeWidth="6" />
+                        : null}
+                    <KlossRitad c={c} P={P} sida={s} visaLod={show.lod} golvY={() => BANK_Y} onDown={dra} lodRod={forbi && st.theta > 0.002 && !st.liggande} />
+                    {st.theta > 0.002 && <circle cx={piv[0]} cy={piv[1]} r="5.5" fill={COL.vrid} />}
+                    {show.krafter && (
+                        <g>
+                            {(() => {
+                                // står klossen på bänken verkar F_N i stödytan, lika stor som F_G och på samma linje
+                                const plant = st.theta < 0.002 || st.liggande, d = plant ? 8 : 0;
+                                const xs = L.horn.map(P).map((q) => q[0]); const xr = Math.max(...xs) + 14, xl = Math.min(...xs) - 14;
+                                return <g>
+                                    <Pil x1={tpS[0] - d} y1={tpS[1]} x2={tpS[0] - d} y2={tpS[1] + 70} color={COL.tyngd} width={4} edge />
+                                    <line x1={xr - 6} y1={tpS[1] + 50} x2={tpS[0] - d + 4} y2={tpS[1] + 50} stroke={COL.tyngd} strokeWidth="1" opacity="0.6" />
+                                    <Bet x={xr} y={tpS[1] + 56} sym="F" idx="G" color={COL.tyngd} size={18} />
+                                    {plant && <Pil x1={tpS[0] + d} y1={BANK_Y} x2={tpS[0] + d} y2={BANK_Y - 70} color={COL.norm} width={4} edge />}
+                                    {plant && <line x1={xl + 6} y1={BANK_Y - 52} x2={tpS[0] + d - 4} y2={BANK_Y - 52} stroke={COL.norm} strokeWidth="1" opacity="0.6" />}
+                                    {plant && <Bet x={xl} y={BANK_Y - 46} sym="F" idx="N" color={COL.norm} size={18} anchor="end" />}
+                                </g>; })()}
+                        </g>
+                    )}
+                    {st.theta > 2 * RAD && st.theta < 89 * RAD && (
+                        <g>
+                            <path d={`M ${a1[0]} ${a1[1]} A ${r} ${r} 0 0 ${s > 0 ? 1 : 0} ${a2[0]} ${a2[1]}`} fill="none" stroke={COL.ink} strokeWidth="1.6" />
+                            <text x={piv[0] - s * (r + 14) * Math.cos(ang / 2)} y={piv[1] - (r + 14) * Math.sin(ang / 2) + 5} textAnchor="middle" fontSize="15" fill={COL.ink}><tspan fontStyle="italic">α</tspan></text>
+                        </g>
+                    )}
+                    {forbi && !st.liggande && st.theta > 0.002 && <text x={BX} y={BANK_Y + 48} textAnchor="middle" fontSize="15" fontWeight="600" fill={COL.grans}>{st.hallen ? 'Lodlinjen har passerat vridningspunkten: släpper du nu välter klossen' : 'Lodlinjen har passerat vridningspunkten: klossen välter'}</text>}
+                    {st.liggande && <text x={BX} y={BANK_Y + 48} textAnchor="middle" fontSize="15" fontWeight="600" fill={COL.grans}>Klossen har vält</text>}
+
+                    {/* avläsningen */}
+                    <g fontSize="15" fill={COL.ink}>
+                        <text x="650" y="140" fontSize="14" fontWeight="600">Klossen</text>
+                        <text x="650" y="168"><tspan fontStyle="italic">b</tspan> = {fmt(c.b * 100, 0)} cm,{'  '}<tspan fontStyle="italic">h</tspan> = {fmt(c.h * 100, 0)} cm</text>
+                        <text x="650" y="196">tyngdpunktens höjd <tspan fontStyle="italic">h</tspan><tspan fontSize="11" dy="4">T</tspan><tspan dy="-4"> = {fmt(M.tp(c).hT * 100, 1)} cm</tspan></text>
+                        <text x="650" y="236" fontSize="14" fontWeight="600">Vinklarna</text>
+                        <text x="650" y="264">lutning <tspan fontStyle="italic">α</tspan> = {grader(st.theta)}</text>
+                        <text x="650" y="292" fill={COL.grans}>vältningsvinkel <tspan fontStyle="italic">α</tspan><tspan fontSize="11" dy="4">v</tspan><tspan dy="-4"> = {dolj ? '?' : grader(av)}</tspan></text>
+                        <text x="650" y="340" fontSize="13" fill={COL.soft}>Dra i klossen åt sidan för att luta den,</text>
+                        <text x="650" y="358" fontSize="13" fill={COL.soft}>och släpp för att se vad som händer.</text>
+                    </g>
+                </g>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  LÄGE 2: KLOSSEN PÅ PLANKAN
+        // ════════════════════════════════════════════════════════
+        const Lage2 = ({ c, st, show, underlag, dolj }) => {
+            const phi = st.phi;
+            // plankans koordinater (x längs plankan uppåt, y vinkelrätt ut) till skärmen
+            const plank = (x, y) => [HX + (x * Math.cos(phi) - y * Math.sin(phi)) * SK, HY - (x * Math.sin(phi) + y * Math.cos(phi)) * SK];
+            const u = Math.max(0, st.s0 - st.s);      // klossens nedre hörn längs plankan (m)
+            // vältning kring det nedre (vänstra) hörnet: sida −1 i lokala koordinater
+            const P = (p) => { const q = vrid(p, st.psi, -1); return plank(u + q[0], q[1]); };
+            const L = lokalKloss(c, -1);
+            const tpS = P(L.tp);
+            const k = M.krafter(c, st);
+            const FSK = 70 / k.FG;
+            const xN = M.normalLage(c, st);           // från undersidans mitt mot det nedre hörnet
+            const nP = plank(u + c.b / 2 - xN, 0);
+            const nT = plank(u + c.b / 2 - xN, k.FN * FSK / SK);
+            const bak = plank(u + c.b, 0), fT = plank(u + c.b + k.Ff * FSK / SK, 0);
+            const lyft = plank(PL / SK, 0);
+            const ug = UNDERLAG[underlag];
+            const ag = Math.atan(c.mu), av = M.alfaKrit(c);
+            const golvY = (x) => HY - Math.max(0, (x - HX)) * Math.tan(phi);
+            const hornS = L.horn.map(P).map((q) => q[0]);
+            const xLag = Math.min(...hornS) - 16;
+            // F_G:s etikett till vänster om klossen, och inte på samma höjd som F_N:s
+            const yN = (nP[1] + nT[1]) / 2;
+            let yG = tpS[1] + k.FG * FSK * 0.6;
+            if (Math.abs(yG - yN) < 26) yG = yN + (st.fas === 'valter' ? 0 : 26);
+            const vilar = st.fas === 'vila';
+            return (
+                <g fontFamily="Poppins, sans-serif">
+                    <rect x="40" y={HY} width="660" height="14" fill="#cbb48c" stroke="#8a6230" strokeWidth="1" />
+                    {/* vevens stötta under plankans ände */}
+                    <line x1={lyft[0]} y1={lyft[1] + 8} x2={lyft[0]} y2={HY} stroke="#6b7280" strokeWidth="6" />
+                    <rect x={lyft[0] - 16} y={HY - 10} width="32" height="10" fill="#4b5563" />
+                    {/* plankan med underlaget */}
+                    <polygon points={[plank(0, 0), plank(PL / SK, 0), plank(PL / SK, -0.022), plank(0, -0.022)].map((q) => q.join(',')).join(' ')} fill="#a8824d" stroke="#6b4a1e" strokeWidth="1.2" />
+                    <line x1={plank(0, 0)[0]} y1={plank(0, 0)[1]} x2={plank(PL / SK, 0)[0]} y2={plank(PL / SK, 0)[1]} stroke={ug.farg} strokeWidth="5" />
+                    <polygon points={[plank(-0.016, 0), plank(0, 0), plank(0, 0.032), plank(-0.016, 0.032)].map((q) => q.join(',')).join(' ')} fill="#6b4a1e" stroke="#3f2a10" strokeWidth="1" />
+                    <circle cx={HX} cy={HY} r="7" fill="#374151" />
+                    {/* vinkelmätaren */}
+                    <path d={`M ${HX + 80} ${HY} A 80 80 0 0 0 ${HX + 80 * Math.cos(phi)} ${HY - 80 * Math.sin(phi)}`} fill="none" stroke={COL.ink} strokeWidth="1.6" />
+                    <text x={HX + 112 * Math.cos(phi + 13 * RAD)} y={HY - 112 * Math.sin(phi + 13 * RAD)} fontSize="15" fill={COL.ink}><tspan fontStyle="italic">α</tspan> = {grader(phi)}</text>
+
+                    {vilar && <line x1={plank(u, 0)[0]} y1={plank(u, 0)[1]} x2={plank(u + c.b, 0)[0]} y2={plank(u + c.b, 0)[1]} stroke={COL.stod} strokeWidth="6" />}
+                    <KlossRitad c={c} P={P} sida={-1} visaLod={show.lod} golvY={golvY} />
+                    {(st.fas === 'valter' || (st.fas === 'klar' && st.handelse === 'valter')) && <circle cx={plank(u, 0)[0]} cy={plank(u, 0)[1]} r="5.5" fill={COL.vrid} />}
+                    {show.krafter && st.fas !== 'klar' && (
+                        <g>
+                            <Pil x1={tpS[0]} y1={tpS[1]} x2={tpS[0]} y2={tpS[1] + k.FG * FSK} color={COL.tyngd} width={4} edge />
+                            <line x1={tpS[0] - 4} y1={yG} x2={xLag + 6} y2={yG} stroke={COL.tyngd} strokeWidth="1" opacity="0.6" />
+                            <Bet x={xLag} y={yG + 6} sym="F" idx="G" color={COL.tyngd} size={18} anchor="end" />
+                            {st.fas !== 'valter' && (
+                                <g>
+                                    <Pil x1={nP[0]} y1={nP[1]} x2={nT[0]} y2={nT[1]} color={COL.norm} width={4} edge />
+                                    <line x1={(nP[0] + nT[0]) / 2 - 4} y1={(nP[1] + nT[1]) / 2} x2={xLag + 6} y2={(nP[1] + nT[1]) / 2} stroke={COL.norm} strokeWidth="1" opacity="0.6" />
+                                    <Bet x={xLag} y={(nP[1] + nT[1]) / 2 + 6} sym="F" idx="N" color={COL.norm} size={18} anchor="end" />
+                                    {k.Ff > 0.01 && <Pil x1={bak[0]} y1={bak[1]} x2={fT[0]} y2={fT[1]} color={COL.frik} width={4} edge />}
+                                    {k.Ff > 0.01 && <Bet x={fT[0] + 6} y={fT[1] - 8} sym="F" idx="f" color={COL.frik} size={18} />}
+                                </g>
+                            )}
+                        </g>
+                    )}
+                    <text x="380" y="120" textAnchor="middle" fontSize="16" fontWeight="700" fill={st.handelse ? COL.grans : COL.soft}>
+                        {st.handelse === 'glider' ? 'Klossen glider' : st.handelse === 'valter' ? 'Klossen välter' : vilar && phi > 0 ? 'Klossen står kvar' : ''}
+                    </text>
+
+                    {/* kartan: glida eller välta */}
+                    {(() => {
+                        const D = { x0: 740, x1: 960, y0: 380, y1: 160 }, MX = 1.2;
+                        const dx = (v) => D.x0 + (D.x1 - D.x0) * Math.min(v, MX) / MX, dy = (v) => D.y0 - (D.y0 - D.y1) * Math.min(v, MX) / MX;
+                        const ta = M.tanAlfa(c);
+                        return (
+                            <g>
+                                <text x={D.x0 - 20} y={D.y1 - 34} fontSize="14" fontWeight="600" fill={COL.ink}>Glider eller välter?</text>
+                                <polygon points={`${D.x0},${D.y0} ${D.x1},${D.y1} ${D.x0},${D.y1}`} fill="rgba(37,99,201,0.12)" />
+                                <polygon points={`${D.x0},${D.y0} ${D.x1},${D.y0} ${D.x1},${D.y1}`} fill="rgba(200,50,74,0.12)" />
+                                <line x1={D.x0} y1={D.y0} x2={D.x1} y2={D.y1} stroke={COL.ink} strokeWidth="1" strokeDasharray="4 4" />
+                                <text x={D.x0 + 8} y={D.y1 + 20} fontSize="13" fill="#1e40af">glider först</text>
+                                <text x={D.x1 - 8} y={D.y0 - 10} textAnchor="end" fontSize="13" fill={COL.grans}>välter först</text>
+                                <line x1={D.x0} y1={D.y0} x2={D.x1 + 6} y2={D.y0} stroke={COL.ink} strokeWidth="1.2" />
+                                <polygon points={`${D.x1 + 10},${D.y0} ${D.x1 + 2},${D.y0 - 4} ${D.x1 + 2},${D.y0 + 4}`} fill={COL.ink} />
+                                <line x1={D.x0} y1={D.y0} x2={D.x0} y2={D.y1 - 6} stroke={COL.ink} strokeWidth="1.2" />
+                                <polygon points={`${D.x0},${D.y1 - 10} ${D.x0 - 4},${D.y1 - 2} ${D.x0 + 4},${D.y1 - 2}`} fill={COL.ink} />
+                                <text x={D.x1} y={D.y0 + 32} textAnchor="end" fontSize="12" fill={COL.soft}>friktionstal <tspan fontStyle="italic">μ</tspan></text>
+                                <text x={D.x0 - 6} y={D.y1 - 14} fontSize="12" fill={COL.soft}>tan <tspan fontStyle="italic">α</tspan><tspan fontSize="9" dy="3">v</tspan><tspan dy="-3"> (formen och lasten)</tspan></text>
+                                {[0.5, 1].map((v) => (
+                                    <g key={v}>
+                                        <text x={dx(v)} y={D.y0 + 14} textAnchor="middle" fontSize="10" fill={COL.soft}>{fmt(v, 1)}</text>
+                                        <text x={D.x0 - 5} y={dy(v) + 4} textAnchor="end" fontSize="10" fill={COL.soft}>{fmt(v, 1)}</text>
+                                    </g>
+                                ))}
+                                {!dolj && ta <= MX && <circle cx={dx(c.mu)} cy={dy(ta)} r="7" fill={COL.grans} stroke="#7f1d1d" strokeWidth="1.2" />}
+                                {!dolj && ta > MX && <g><polygon points={`${dx(c.mu)},${D.y1 - 2} ${dx(c.mu) - 7},${D.y1 + 10} ${dx(c.mu) + 7},${D.y1 + 10}`} fill={COL.grans} stroke="#7f1d1d" strokeWidth="1.2" />
+                                    <text x={dx(c.mu) + 11} y={D.y1 + 10} fontSize="11" fill={COL.grans}>{fmt(ta, 1)}</text></g>}
+                                <text x={D.x0 - 20} y={D.y0 + 60} fontSize="13" fill={COL.ink}>glider vid <tspan fontStyle="italic">α</tspan><tspan fontSize="10" dy="3">g</tspan><tspan dy="-3"> = {dolj ? '?' : grader(ag)}</tspan></text>
+                                <text x={D.x0 - 20} y={D.y0 + 82} fontSize="13" fill={COL.ink}>välter vid <tspan fontStyle="italic">α</tspan><tspan fontSize="10" dy="3">v</tspan><tspan dy="-3"> = {dolj ? '?' : grader(av)}</tspan></text>
+                            </g>
+                        );
+                    })()}
+                    <text x="40" y="600" fontSize="14" fill={COL.ink}>underlag: {ug.namn}, <tspan fontStyle="italic">μ</tspan> = {fmt(c.mu, 1)}</text>
+                    {show.krafter && st.fas !== 'klar' && <text x="40" y="626" fontSize="14" fill={COL.ink}>
+                        <tspan fill={COL.tyngd}><tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">G</tspan><tspan dy="-3"> = {fmt(k.FG, 1)} N</tspan></tspan>
+                        {st.fas !== 'valter' && <tspan fill={COL.norm} dx="20"><tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">N</tspan><tspan dy="-3"> = {fmt(k.FN, 1)} N</tspan></tspan>}
+                        {st.fas !== 'valter' && <tspan fill={COL.frik} dx="20"><tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">f</tspan><tspan dy="-3"> = {fmt(k.Ff, 1)} N</tspan></tspan>}
+                    </text>}
+                    {st.handelse && Math.abs(M.tanAlfa(c) - c.mu) < 0.01 && <text x="380" y="144" textAnchor="middle" fontSize="13" fill={COL.soft}>Gränserna nås samtidigt. I verkligheten avgör minsta skillnad i underlaget.</text>}
+                </g>
+            );
+        };
+
+        const Scen = (p) => (
+            <svg ref={p.svgRef} viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet" role="img"
+                 aria-label="En kloss på en labbänk som lutas tills den välter, eller en kloss på en planka som vevas upp tills klossen glider eller välter. Tyngdpunkten, lodlinjen och stödytan är utritade.">
+                <defs>
+                    <linearGradient id="vagg" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stopColor="#f7f2e8" /><stop offset="1" stopColor="#ece3d2" />
+                    </linearGradient>
+                </defs>
+                <rect x="0" y="0" width={VB_W} height={VB_H} fill="url(#vagg)" />
+                {p.lage === 1 ? <Lage1 {...p} st={p.st1} /> : <Lage2 {...p} st={p.st2} />}
+            </svg>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  REGLAGE
+        // ════════════════════════════════════════════════════════
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, disabled, color = 'var(--lab-accent, #c8324a)' }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').replace('−', '-').trim();
+                if (norm === '' || norm === '-' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt} disabled={disabled}
+                           style={{ color }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+        const Slider = ({ label, value, min, max, step, onChange, disabled, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 112, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, disabled, valueNode }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    {valueNode}
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        // Formelkortet: varje storhet har sitt namn ovanför.
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  FORMELKORTET
+        // ════════════════════════════════════════════════════════
+        const BrakL = ({ tl, t, n, nl }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{tl}</span>
+                <span className="fnum" style={{ padding: '0 4px' }}>{t}</span>
+                <span style={{ alignSelf: 'stretch', borderTop: '2px solid currentColor', margin: '2px 0' }} />
+                <span className="fnum" style={{ padding: '0 4px' }}>{n}</span>
+                <span className="flbl">{nl}</span>
+            </div>
+        );
+        const FormelKort = ({ c, lage, dolj }) => {
+            const vikt = c.mV > 0;
+            const hT = M.tp(c).hT, av = M.alfaKrit(c);
+            return (
+                <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                    <div className="flex flex-wrap items-center gap-x-8 gap-y-3 mb-3">
+                        <div className="flex items-center gap-x-3">
+                            <span className="fnum">tan</span>
+                            <Vbl label="Vältningsvinkel"><Sub s="α" i="v" /></Vbl>
+                            <span className="fnum">=</span>
+                            {vikt
+                                ? <BrakL tl="Halva bredden" t={<Brak t={<em>b</em>} n="2" />} n={<Sub s="h" i="T" />} nl="Tyngdpunktens höjd" />
+                                : <BrakL tl="Bredd" t={<em>b</em>} n={<em>h</em>} nl="Höjd" />}
+                        </div>
+                        <div className="text-sm" style={{ color: 'var(--lab-ink-soft)', maxWidth: 520 }}>
+                            Klossen välter när lodlinjen genom tyngdpunkten hamnar utanför stödytan. Lutas den kring ett hörn krymper stödytan
+                            till hörnet, som blir vridningspunkt. I genomgången skrivs vältningsvinkeln bara <em>α</em>.{vikt ? ' Med en last i klossen hamnar tyngdpunkten inte i mitten, och då räknar man med tyngdpunktens höjd i stället för halva höjden.' : ''}
+                        </div>
+                    </div>
+                    <div className="pt-3 fnum-live" style={{ borderTop: '1px solid var(--lab-line, rgba(15,22,32,0.14))' }}>
+                        {dolj ? <div>Räkna själv innan du provar.</div> : vikt ? (
+                            <div><Sub s="h" i="T" /> = <Brak t={<span><Sub s="m" i="k" /> · <Brak t={<em>h</em>} n="2" /> + <Sub s="m" i="last" /> · <Sub s="y" i="last" /></span>} n={<span><Sub s="m" i="k" /> + <Sub s="m" i="last" /></span>} /> = {fmt(hT * 100, 1)} cm,{'   '}
+                                tan <Sub s="α" i="v" /> = <Brak t={`${fmt(c.b * 50, 1)} cm`} n={`${fmt(hT * 100, 1)} cm`} /> = {fmt(Math.tan(av), 2)}, så <Sub s="α" i="v" /> = {grader(av)}</div>
+                        ) : (
+                            <div>tan <Sub s="α" i="v" /> = <Brak t={`${fmt(c.b * 100, 0)} cm`} n={`${fmt(c.h * 100, 0)} cm`} /> = {fmt(c.b / c.h, 2)}, så <Sub s="α" i="v" /> = {grader(av)}</div>
+                        )}
+                        {lage === 2 && !dolj && (
+                            <div className="mt-1">Klossen glider när tan <em>α</em> &gt; <em>μ</em>: tan <Sub s="α" i="g" /> = {fmt(c.mu, 1)}, så <Sub s="α" i="g" /> = {grader(Math.atan(c.mu))}. Den lägre gränsvinkeln nås först.</div>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  FÄRDIGA FÖRSÖK OCH GISSA-LÄGET
+        // ════════════════════════════════════════════════════════
+        const FORSOK = [
+            { id: 'hog',  namn: 'Hög och smal kloss', sub: '10 cm bred, 30 cm hög', cfg: { lage: 1, b: 10, h: 30, mV: 0, yV: 0, luta: 25 } },
+            { id: 'lag',  namn: 'Låg och bred kloss', sub: '30 cm bred, 10 cm hög', cfg: { lage: 1, b: 30, h: 10, mV: 0, yV: 0, luta: 25 } },
+            { id: 'lh',   namn: 'Lasten högt', sub: '2 kg nära toppen', cfg: { lage: 1, b: 15, h: 30, mV: 2, yV: 27, luta: 20 } },
+            { id: 'll',   namn: 'Lasten lågt', sub: 'samma last nära botten', cfg: { lage: 1, b: 15, h: 30, mV: 2, yV: 3, luta: 20 } },
+            { id: 'is',   namn: 'Is', sub: 'den höga klossen glider', cfg: { lage: 2, b: 10, h: 30, mV: 0, yV: 0, underlag: 'is' } },
+            { id: 'sand', namn: 'Sandpapper', sub: 'den höga klossen välter', cfg: { lage: 2, b: 10, h: 30, mV: 0, yV: 0, underlag: 'sand' } },
+            { id: 'gr',   namn: 'Precis på gränsen', sub: 'tan α_v = μ', cfg: { lage: 2, b: 20, h: 25, mV: 0, yV: 0, underlag: 'gummi' } },
+        ];
+        const slump = (a) => a[Math.floor(Math.random() * a.length)];
+        function nyUppgift(typ) {
+            if (typ === 'vinkel') return { typ, b: slump([10, 15, 20, 25]), h: slump([20, 25, 30, 35]) };
+            let u;
+            do { u = { typ, b: slump([10, 15, 20, 30]), h: slump([10, 20, 30, 40]), underlag: slump(['is', 'tra', 'gummi', 'sand']) }; }
+            while (Math.abs((u.b / u.h) - UNDERLAG[u.underlag].mu) < 0.08);
+            return u;
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  HUVUDAPP
+        // ════════════════════════════════════════════════════════
+        const App = () => {
+            const [lage, setLage] = useState(new URLSearchParams(location.search).get('lage') === 'planka' ? 2 : 1);
+            const [b, setB] = useState(10);          // cm
+            const [h, setH] = useState(30);          // cm
+            const [mV, setMV] = useState(0);         // kg
+            const [yV, setYV] = useState(15);        // cm
+            const [underlag, setUnderlag] = useState('tra');
+            const [show, setShow] = useState({ lod: true, krafter: true });
+            const [veva, setVeva] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [, setFrame] = useState(0);
+            const [gissa, setGissa] = useState(null);
+            const [svarTxt, setSvarTxt] = useState('');
+            const [svarStatus, setSvarStatus] = useState(null);
+            const [poang, setPoang] = useState({ ratt: 0, totalt: 0, svit: 0 });
+
+            const c = { b: b / 100, h: h / 100, mK: 1, mV, yV: Math.min(yV, h) / 100, mu: UNDERLAG[underlag].mu };
+            const cRef = useRef(c); cRef.current = c;
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const st1 = useRef(M.nytt1());
+            const st2 = useRef(M.nytt2(s0For(c)));
+            const vevaRef = useRef(false); vevaRef.current = veva;
+            const lageRef = useRef(lage); lageRef.current = lage;
+
+            useEffect(() => {
+                let raf, last = null;
+                const loop = (ts) => {
+                    if (last == null) last = ts;
+                    const dt = Math.min((ts - last) / 1000, 0.05); last = ts;
+                    if (lageRef.current === 1) M.steg1(st1.current, cRef.current, dt);
+                    else if (vevaRef.current) {
+                        M.steg2(st2.current, cRef.current, dt, 4 * RAD);
+                        if (st2.current.fas === 'klar') setVeva(false);
+                    }
+                    setFrame((n) => n + 1);
+                    raf = requestAnimationFrame(loop);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, []);
+            // ny form eller nytt underlag: börja om
+            useEffect(() => { st1.current = M.nytt1(); st2.current = M.nytt2(s0For(cRef.current)); setVeva(false); }, [b, h, mV, yV, underlag]);
+
+            const setHall = (sida, theta) => {
+                const st = st1.current;
+                st.liggande = false;
+                if (sida == null) { st.hallen = false; return; }
+                st.hallen = true; st.sida = sida; st.theta = theta; st.omega = 0;
+            };
+            const borjaOm = () => { st1.current = M.nytt1(); st2.current = M.nytt2(s0For(cRef.current)); setVeva(false); };
+
+            const korForsok = (f) => {
+                const k = f.cfg;
+                setLage(k.lage); setB(k.b); setH(k.h); setMV(k.mV); setYV(k.yV || 15);
+                if (k.underlag) setUnderlag(k.underlag);
+                setTimeout(() => {
+                    st1.current = M.nytt1(); st2.current = M.nytt2(s0For(cRef.current));
+                    if (k.lage === 1) { const st = st1.current; st.sida = 1; st.theta = k.luta * RAD; st.hallen = true; setTimeout(() => { st.hallen = false; }, 900); }
+                    else setTimeout(() => setVeva(true), 500);
+                }, 60);
+            };
+
+            // ── Gissa-läget ──
+            const startaGissa = (typ) => {
+                const u = nyUppgift(typ);
+                setGissa(u); setSvarTxt(''); setSvarStatus(null);
+                setB(u.b); setH(u.h); setMV(0);
+                if (typ === 'vinkel') setLage(1);
+                else { setLage(2); setUnderlag(u.underlag); }
+            };
+            const kolla = (val) => {
+                const u = gissa;
+                const cc = { b: u.b / 100, h: u.h / 100, mK: 1, mV: 0, yV: 0, mu: u.underlag ? UNDERLAG[u.underlag].mu : 0.5 };
+                const av = M.alfaKrit(cc);
+                let ratt, text;
+                if (u.typ === 'vinkel') {
+                    const n = parseFloat(svarTxt.replace(',', '.').replace('°', ''));
+                    if (!isFinite(n)) { setSvarStatus({ ratt: false, text: 'Skriv in en vinkel i grader, till exempel 27.' }); return; }
+                    ratt = Math.abs(n - av / RAD) <= 1;
+                    text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} tan α_v = b delat med h = ${fmt(u.b, 0)} delat med ${fmt(u.h, 0)} = ${fmt(u.b / u.h, 2)}, så α_v = ${grader(av)}.`;
+                    if (!ratt && Math.abs(n - Math.atan(u.h / u.b) / RAD) <= 1) text += ' Du räknade med h delat med b. Det är bredden som står i täljaren: ju bredare klossen är, desto mer lutning tål den.';
+                    st1.current = M.nytt1(); const st = st1.current; st.sida = 1; st.theta = Math.max(0, av - 1 * RAD); st.hallen = true;
+                    setTimeout(() => { st.hallen = false; }, 1200);
+                } else {
+                    const facit = Math.tan(av) <= cc.mu ? 'valter' : 'glider';
+                    ratt = val === facit;
+                    text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} Klossen glider när tan α > μ = ${fmt(cc.mu, 1)}, alltså vid ${grader(Math.atan(cc.mu))}. Den välter när tan α > b delat med h = ${fmt(u.b / u.h, 2)}, alltså vid ${grader(av)}. Den lägre gränsvinkeln nås först, så klossen ${facit === 'glider' ? 'glider' : 'välter'}.`;
+                    st2.current = M.nytt2(s0For(cc));
+                    setTimeout(() => setVeva(true), 300);
+                }
+                setSvarStatus({ ratt, text });
+                setPoang((p) => ({ ratt: p.ratt + (ratt ? 1 : 0), totalt: p.totalt + 1, svit: ratt ? p.svit + 1 : 0 }));
+            };
+            const avslutaGissa = () => { setGissa(null); setSvarStatus(null); };
+            const dolj = !!gissa && svarStatus === null;
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(document.fullscreenElement === sceneWrapRef.current || document.webkitFullscreenElement === sceneWrapRef.current);
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => { document.removeEventListener('fullscreenchange', handler); document.removeEventListener('webkitfullscreenchange', handler); };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const las = !!gissa;
+            const reglage = (Sl, kompakt) => {
+                const rad = (label, value, min, max, step, onChange, unit, d = 0, l2 = las) => (
+                    <Sl key={label} label={label} value={value} min={min} max={max} step={step} onChange={onChange} disabled={l2}
+                        {...(kompakt ? { valueNode: <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, d)} unit={unit} disabled={l2} onCommit={onChange} /> } : {})}>
+                        {!kompakt && <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, d)} unit={unit} disabled={l2} onCommit={onChange} />}
+                    </Sl>
+                );
+                return (
+                    <React.Fragment>
+                        {rad('Bredd <em>b</em>', b, 5, 40, 1, setB, 'cm')}
+                        {rad('Höjd <em>h</em>', h, 5, 40, 1, setH, 'cm')}
+                        {rad('Lastens massa', mV, 0, 3, 0.5, setMV, 'kg', 1)}
+                        {mV > 0 && rad('Lastens höjd', Math.min(yV, h), 0, h, 1, setYV, 'cm')}
+                    </React.Fragment>
+                );
+            };
+            const lutaKnapp = (
+                <button className="btn-start" disabled={las || veva || st2.current.fas !== 'vila'} onClick={() => setVeva(true)}>Veva upp plankan</button>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        <label><input type="checkbox" checked={show.lod} onChange={() => setShow((s) => ({ ...s, lod: !s.lod }))} /><span>Lodlinjen</span></label>
+                        <label><input type="checkbox" checked={show.krafter} onChange={() => setShow((s) => ({ ...s, krafter: !s.krafter }))} /><span>Krafter</span></label>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglage(StSlider, true)}</div>
+                                <div className="st-actions">
+                                    {lage === 2 && lutaKnapp}
+                                    <button className="btn-toggle" onClick={borjaOm} disabled={las}>Börja om</button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-7xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Vältning
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Vältning</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            Hur mycket kan man luta en kloss innan den välter? Det avgörs av var tyngdpunkten ligger: klossen välter när lodlinjen
+                            genom tyngdpunkten hamnar utanför stödytan. Luta klossen på bänken, lägg en last i den eller ställ den på en planka
+                            och veva upp plankan. Glider den eller välter den först?
+                        </p>
+
+                        <FormelKort c={c} lage={lage} dolj={dolj} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 xl:w-3/4 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <Scen lage={lage} c={c} st1={st1.current} st2={st2.current} show={show} svgRef={svgRef} setHall={setHall} underlag={underlag} dolj={dolj} />
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Klossens massa är 1&nbsp;kg (lasten oräknad), och den är jämntjock. Den gröna pricken är tyngdpunkten, den streckade linjen lodlinjen och den lila
+                                    sträckan stödytan. Lutas klossen blir hörnet vridningspunkt (röd). På plankan ritas krafterna skalenligt, och
+                                    normalkraften flyttar sig mot det nedre hörnet när plankan lutar mer.
+                                </p>
+                            </div>
+
+                            <div className="lg:w-1/3 xl:w-1/4 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Uppställning</div>
+                                    <div className="forsok-lista mb-3">
+                                        {[[1, 'Luta klossen'], [2, 'Klossen på plankan']].map(([k, n]) => (
+                                            <button key={k} className="forsok" disabled={las} onClick={() => { setLage(k); borjaOm(); }}
+                                                    style={lage === k ? { background: 'var(--lab-ink)', color: 'var(--lab-bg)' } : undefined}>{n}</button>
+                                        ))}
+                                    </div>
+                                    {lage === 2 && (
+                                        <React.Fragment>
+                                            <div className="flbl mb-2" style={{ textAlign: 'left' }}>Underlag</div>
+                                            <div className="forsok-lista">
+                                                {Object.entries(UNDERLAG).map(([k, v]) => (
+                                                    <button key={k} className="forsok" disabled={las} onClick={() => setUnderlag(k)}
+                                                            style={underlag === k ? { background: 'var(--lab-ink)', color: 'var(--lab-bg)' } : undefined}>{v.namn}<span className="sub"><em>μ</em> = {fmt(v.mu, 1)}</span></button>
+                                                ))}
+                                            </div>
+                                        </React.Fragment>
+                                    )}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    {!isFullscreen && reglage(Slider, false)}
+                                    {isFullscreen && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Reglagen finns i rutan uppe till höger i fullskärm.</p>}
+                                    <div className="flex gap-2 mt-2">
+                                        {lage === 2 && <div className="flex-1 flex">{React.cloneElement(lutaKnapp, { className: 'btn-start flex-1' })}</div>}
+                                        <button className="btn-toggle flex-1" onClick={borjaOm} disabled={las}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Färdiga försök</div>
+                                    <div className="forsok-lista">
+                                        {FORSOK.map((f) => (
+                                            <button key={f.id} className="forsok" disabled={las} onClick={() => korForsok(f)}>
+                                                {f.namn}<span className="sub"><Fx text={f.sub} /></span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flbl" style={{ textAlign: 'left' }}>Gissa-läge</div>
+                                        {poang.totalt > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>{poang.ratt} av {poang.totalt} rätt{poang.svit > 1 ? `, ${poang.svit} i rad` : ''}</div>}
+                                    </div>
+                                    {!gissa && (
+                                        <div className="flex flex-col gap-2">
+                                            <button className="btn-toggle" onClick={() => startaGissa('vinkel')}>Vid vilken vinkel välter den?</button>
+                                            <button className="btn-toggle" onClick={() => startaGissa('glida')}>Glider eller välter den?</button>
+                                        </div>
+                                    )}
+                                    {gissa && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                {gissa.typ === 'vinkel'
+                                                    ? <span>En jämntjock kloss är {fmt(gissa.b, 0)}{' '}cm bred och {fmt(gissa.h, 0)}{' '}cm hög. Vid vilken lutning välter den?</span>
+                                                    : <span>En jämntjock kloss är {fmt(gissa.b, 0)}{' '}cm bred och {fmt(gissa.h, 0)}{' '}cm hög och står på {UNDERLAG[gissa.underlag].namn.toLowerCase()} med friktionstalet <em>μ</em> = {fmt(UNDERLAG[gissa.underlag].mu, 1)}. Plankan vevas upp. Glider klossen eller välter den först?</span>}
+                                            </p>
+                                            {gissa.typ === 'vinkel' ? (
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    <span><em>α</em><sub>v</sub> =</span>
+                                                    <input className="gissa-in" type="text" inputMode="decimal" value={svarTxt} disabled={svarStatus !== null}
+                                                           onChange={(e) => setSvarTxt(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && svarStatus === null) kolla(); }} />
+                                                    <span>°</span>
+                                                    <button className="btn-start" onClick={() => kolla()} disabled={svarStatus !== null}>Kolla</button>
+                                                </div>
+                                            ) : (
+                                                <div className="mode-seg mb-2">
+                                                    {[['glider', 'Glider'], ['valter', 'Välter']].map(([k, n]) => <button key={k} disabled={svarStatus !== null} onClick={() => kolla(k)}>{n}</button>)}
+                                                </div>
+                                            )}
+                                            {svarStatus && <p className="text-sm mb-2" style={{ color: svarStatus.ratt ? '#15803d' : 'var(--lab-accent)' }}><Fx text={svarStatus.text} /></p>}
+                                            <div className="flex gap-2">
+                                                {svarStatus && <button className="btn-toggle flex-1" onClick={() => startaGissa(gissa.typ)}>Ny uppgift</button>}
+                                                <button className="btn-toggle flex-1" onClick={avslutaGissa}>Avsluta</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Lodlinjen och stödytan</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    När klossen lutas kring ett hörn ger tyngdkraften ett moment kring hörnet. Så länge lodlinjen genom tyngdpunkten går innanför
+                                    hörnet vrider momentet tillbaka klossen. När lodlinjen passerar hörnet byter momentet riktning, och klossen välter. Vid gränsen står tyngdpunkten rakt ovanför hörnet.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Låg och bred står stadigast</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    En bred bas och en låg tyngdpunkt ger en stor vältningsvinkel. Därför lägger man tung last längst ned i en lastbil,
+                                    och därför är en racerbil låg och bred.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Normalkraften vandrar</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    På plankan flyttar sig normalkraften mot det nedre hörnet när plankan lutar mer, så att dess moment kring tyngdpunkten
+                                    tar ut friktionens. Den angriper precis där lodlinjen genom tyngdpunkten träffar plankan. När den har nått hörnet kan den inte
+                                    flytta sig längre, och då välter klossen. Glider klossen stannar normalkraften på avståndet <em>μ</em> · <em>h</em><sub>T</sub> från mitten, och då kan den inte välta.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”En tyngre kloss tål mer lutning.”</strong> Nej. Vältningsvinkeln beror bara på formen och på var tyngdpunkten ligger,
+                                    inte på hur tung klossen är.</li>
+                                <li><strong>”En kloss välter när den lutar mer än 45°.”</strong> Nej. Vältningsvinkeln beror på formen: tan <em>α</em><sub>v</sub> = <em>b</em>/<em>h</em>. En hög
+                                    och smal kloss (10 × 30&nbsp;cm) välter redan vid 18°, en låg och bred (30 × 10&nbsp;cm) först vid 72°.</li>
+                                <li><strong>”Med mycket friktion står klossen kvar hur brant det än är.”</strong> Nej. Friktionen hindrar den från att glida,
+                                    men den kan fortfarande välta. Med stor friktion är det ofta vältningen som kommer först.</li>
+                                <li><strong>”Normalkraften angriper alltid mitt under klossen.”</strong> Bara på ett vågrätt underlag. På plankan flyttar
+                                    den sig mot det nedre hörnet.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

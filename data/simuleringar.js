@@ -112,6 +112,8 @@ window.SIM_NAMES = {
       kw: ['krafter','moment','kraftmoment','tyngdpunkt','stödpunkt','stabilitet','stabil jämvikt','balans','balanstrick','gaffel','gafflar','kork','nål','mynt','pendel','hävarm','3d','statik','mekanik'] },
     { name: 'Dubbelkonen som rullar uppför', href: 'fysik2-dubbelkon-app.html', desc: 'Den klassiska demonstrationen i 3D: en dubbelkon släpps vid den låga änden av en V-formad bana och rullar mot den höga — men tyngdpunkten sjunker hela vägen, eftersom kontaktpunkterna vandrar ut mot konens spetsar när skenorna går isär. Jämför med cylindern som rullar nedåt, ändra lutningen och hitta gränsen där illusionen bryts.',
       kw: ['krafter','tyngdpunkt','dubbelkon','kon','rullar uppför','uppförsbacke','lutande bana','illusion','rullning','cylinder','lägesenergi','kontaktpunkt','demonstration','3d','mekanik'] },
+    { name: 'Vältning', href: 'fysik2-valtning-app.html', desc: 'Luta en kloss tills den välter, lägg en last i den och se tyngdpunkten flytta sig, eller ställ den på en planka och se om den glider eller välter först.',
+      kw: ['krafter','vältning','välta','vältningsvinkel','tyngdpunkt','lodlinje','stödyta','vridningspunkt','stabilitet','lutande plan','friktion','glida','normalkraft','kloss','mekanik'] },
   ],
   'fysik2-satellitbana-app.html': 'Satellit i omloppsbana',
   'fysik2-konisk-pendel.html': 'Konisk pendel',

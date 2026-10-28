@@ -301,7 +301,7 @@
         const IW = 33;                        // rörets halva innerbredd
         const TUBE_TOP = 58, TUBE_BOT = 486;  // rörets ytter-topp/-botten
         const CY = (TUBE_TOP + TUBE_BOT) / 2; // rörens mitt (rotationscentrum vid vändning)
-        const Y_BOT = 446;                    // föremålets vilo-/landningsläge (mitt)
+        const Y_BOT = 467;                    // föremålets vilo-/landningsläge (mitt), liggande på proppen
         const Y_TOP = 2 * CY - Y_BOT;         // toppläge efter vändning (speglat → inget hopp)
 
         // Fysik (px, sekunder)
@@ -332,8 +332,10 @@
         };
 
         // ── Föremåls-grafik ──────────────────────────────────────
-        const Petal = ({ x, y, rot }) => (
-            <g transform={`translate(${x} ${y}) rotate(${rot})`}>
+        // Bladet ritas stående; rot = 90 lägger det ned och sq plattar till det
+        // i höjdled (sett snett från sidan, som när det ligger på proppen).
+        const Petal = ({ x, y, rot, sq = 1 }) => (
+            <g transform={`translate(${x} ${y}) scale(1 ${sq}) rotate(${rot})`}>
                 <path d="M0,-17 C 12,-12 13,8 0,18 C -13,8 -12,-12 0,-17 Z"
                       fill="url(#petalGrad)" stroke="#9a203a" strokeWidth="1.1" />
                 <path d="M0,-14 L0,15" stroke="#9a203a" strokeWidth="1" opacity="0.45" />
@@ -359,7 +361,7 @@
                         <ellipse cx="0" cy="0" rx="17" ry="17" fill="url(#coinGrad)" stroke="#8a6209"
                                  strokeWidth={2 / Math.max(0.35, Math.abs(sy))} />
                         <circle r="12.5" fill="none" stroke="#a9790c" strokeWidth="1.2" opacity="0.6" />
-                        {front
+                        {Math.abs(c) < 0.35 ? null : front
                             ? <text x="0" y="5.5" textAnchor="middle" fontSize="15" fontWeight="700"
                                     fill="#8a6209" style={{ fontFamily: 'Poppins, sans-serif' }}>kr</text>
                             : <text x="0" y="-5.5" textAnchor="middle" fontSize="15" fontWeight="700"
@@ -413,19 +415,24 @@
 
             const t = motion.t;
             const falling = motion.phase === 'fall';
-            // Rosenbladet fladdrar i sidled och roterar — proportionellt mot luftmängd
-            const xoff = kind === 'petal' && falling ? air * 15 * Math.sin(t * 6.3 + 0.4) : 0;
-            const rot = kind === 'petal' ? (falling ? air * 24 * Math.sin(t * 5.1) : 0) : 0;
+            // Rosenbladet ligger ned (rot 90, tillplattat). Under fallet fladdrar
+            // det i sidled, gungar och vickar upp ytan, proportionellt mot luftmängd.
+            const flutter = kind === 'petal' && falling && !obj.landed;
+            const xoff = flutter ? air * 15 * Math.sin(t * 6.3 + 0.4) : 0;
+            const rot = 90 + (flutter ? air * 24 * Math.sin(t * 5.1) : 0);
+            const sq = 0.38 + (flutter ? air * 0.35 * Math.abs(Math.sin(t * 3.7)) : 0);
 
-            // Myntet singlar runt två hela varv under fallet. Vinkeln följer
-            // roten ur fallsträckan, som växer jämnt med tiden vid fritt fall
-            // (s ∝ t²): konstant vinkelhastighet, och myntet landar alltid med
-            // framsidan mot betraktaren, som det låg innan röret vändes.
-            let coinPhi = 0, coinRot = 0, coinX = 0;
+            // Myntet ligger platt: sett snett ovanifrån är det en smal ellips
+            // (cos phi = 0,22). Under fallet singlar det två hela varv. Vinkeln
+            // följer roten ur fallsträckan, som växer jämnt med tiden vid fritt
+            // fall (s ∝ t²): konstant vinkelhastighet, och myntet landar alltid
+            // platt, som det låg innan röret vändes.
+            const PHI_PLATT = Math.acos(0.22);
+            let coinPhi = PHI_PLATT, coinRot = 0, coinX = 0;
             if (kind === 'coin' && motion.phase !== 'flip') {
                 const p = Math.min(1, Math.max(0, (obj.y - Y_TOP) / (Y_BOT - Y_TOP)));
                 const s = Math.sqrt(p);
-                coinPhi = 4 * Math.PI * s;
+                coinPhi = PHI_PLATT + 4 * Math.PI * s;
                 const env = Math.sin(Math.PI * s);        // 0 vid start och landning
                 coinRot = env * (9 + air * 10 * Math.sin(t * 4.2));
                 coinX = env * air * 3.5 * Math.sin(t * 5.3 + 1.1); // liten drift bara i luft
@@ -435,7 +442,7 @@
             const oy = obj.y;
 
             // hastighetspil (under fall) — startar vid föremålets nederkant, pekar nedåt
-            const objR = 18;
+            const objR = 10;
             const vLen = Math.min(72, obj.v * 0.085);
             const showVel = show.vel && falling && !obj.landed && vLen > 4;
 
@@ -469,7 +476,7 @@
                         ))}
                         {/* föremål */}
                         {kind === 'petal'
-                            ? <Petal x={ox} y={oy} rot={rot} />
+                            ? <Petal x={ox} y={oy} rot={rot} sq={sq} />
                             : <Coin x={ox} y={oy} phi={coinPhi} rot={coinRot} />}
                     </g>
 

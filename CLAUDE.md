@@ -100,6 +100,12 @@ engelskan); ordlistorna är `i18n/nb.js` (gemensamt) och
 `i18n/nb/sidor/<sida>.js` (en per simulering). Arbetsgången står i
 `.claude/i18n/nb/SIMULERINGAR.md`, fackorden i `.claude/i18n/nb/termlista.md`.
 
+- **⛔ Annat språk än svenska visas BARA när adressen har `?lang=nb`/`?lang=en`.**
+  Språkvalet sparas aldrig mellan besök (beslut 2026-10-28: en besökare som
+  en gång öppnat en norsk länk fick Facebook-länken till en svensk simulering
+  på norska). `i18n.js` läser bara adressen och raderar gamla sparade val.
+  Lägg aldrig tillbaka ett minne av språket i localStorage, en cookie eller
+  efter webbläsarens språk.
 - **Ändrar du svensk text i en simulering, ändra den norska nyckeln och
   översättningen i samma commit.** Nyckeln är den svenska texten exakt; en
   ändrad svensk sträng utan ny nyckel visas på svenska på den norska sidan.

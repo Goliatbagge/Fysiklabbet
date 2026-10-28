@@ -11,9 +11,12 @@
  *     <script src="i18n.js"></script>
  *
  * Hur språket väljs (första träff vinner):
- *   1. ?lang=en / ?lang=sv i adressen (det sökmotorerna ser),
- *   2. det besökaren valt tidigare (localStorage 'fysiklabbetSprak'),
- *   3. svenska.
+ *   1. ?lang=en / ?lang=nb i adressen,
+ *   2. annars ALLTID svenska.
+ * Ett tidigare val sparas INTE och läses inte (beslut 2026-10-28): en
+ * besökare som en gång öppnat en norsk länk fick sedan alla simuleringar på
+ * norska, även från en svensk länk på Facebook. Annat språk än svenska visas
+ * bara när adressen uttryckligen ber om det. Gamla sparade val raderas.
  * På engelska skrivs ?lang=en in i adressfältet, i alla interna länkar och i
  * varje pushState/replaceState, så att en kopierad adress alltid visar samma
  * språk som besökaren såg. På svenska rörs ingenting.
@@ -52,15 +55,8 @@
             return v && SPRAK.indexOf(v) >= 0 ? v : null;
         } catch (e) { return null; }
     }
-    function lasSparat() {
-        try {
-            var v = window.localStorage.getItem(NYCKEL);
-            return v && SPRAK.indexOf(v) >= 0 ? v : null;
-        } catch (e) { return null; }
-    }
-    function spara(v) {
-        try { window.localStorage.setItem(NYCKEL, v); } catch (e) {}
-    }
+    // Rensa språkval som äldre versioner av skriptet sparade.
+    try { window.localStorage.removeItem(NYCKEL); } catch (e) {}
 
     // Sidor där den engelska versionen är PÅSLAGEN (2026-10-22: bara
     // teorigenomgångarna). På alla andra sidor gör i18n.js ingenting: ingen
@@ -86,8 +82,7 @@
     var AKTIV = harSprak(SIDA, 'en') || harSprak(SIDA, 'nb');
 
     var param = lasParam();
-    if (param) spara(param);
-    var onskat = param || lasSparat() || 'sv';
+    var onskat = param || 'sv';
     var lang = harSprak(SIDA, onskat) ? onskat : 'sv';
     // Sidan finns inte på det språk adressen ber om: ta bort ?lang=… så att
     // adressen inte påstår något annat än det som visas.
@@ -236,7 +231,6 @@
         }
     }
     function bytTill(nytt) {
-        spara(nytt);
         var a = new URL(window.location.href);
         if (nytt !== 'sv') a.searchParams.set('lang', nytt);
         else a.searchParams.delete('lang');

@@ -217,6 +217,11 @@
         .pump-klick:focus-visible .pump-kropp { fill: #b4bcc6; }
         .pump-klick.av { cursor: default; }
         .pump-klick.av:hover .pump-kropp { fill: #9aa3af; }
+        /* Klick på rören vänder dem */
+        .ror-klick { cursor: pointer; outline: none; }
+        .ror-klick.av { cursor: default; }
+        .ror-klick:not(.av):hover > g > g > rect:first-child,
+        .ror-klick:focus-visible > g > g > rect:first-child { stroke: rgba(15,22,32,0.55); }
     </style>
 </head>
 <body class="lab-sim">
@@ -515,7 +520,7 @@
         };
 
         // ── Scenen ───────────────────────────────────────────────
-        const VacuumScene = ({ motion, air, show, pumping, svgRef, onPumpSlag, slag }) => {
+        const VacuumScene = ({ motion, air, show, pumping, svgRef, onPumpSlag, slag, onVand }) => {
             const molsP = useMemo(() => makeMolecules(T1X), []);
             const molsC = useMemo(() => makeMolecules(T2X), []);
 
@@ -595,8 +600,21 @@
                     <Gauge air={air} cx={360} cy={150} />
 
                     {/* glasrören */}
-                    <Tube cx={T1X} kind="petal" obj={motion.petal} motion={motion} air={air} mols={molsP} show={show} />
-                    <Tube cx={T2X} kind="coin"  obj={motion.coin}  motion={motion} air={air} mols={molsC} show={show} />
+                    {/* Rören är klickbara: ett klick vänder dem (samma som knappen). */}
+                    {(() => {
+                        const av = motion.phase === 'flip' || motion.phase === 'fall';
+                        const vand = () => { if (!av) onVand(); };
+                        return (
+                            <g className={`ror-klick${av ? ' av' : ''}`} role="button" tabIndex={av ? -1 : 0}
+                               aria-label={window.I18N ? I18N.t('Vänd rören') : 'Vänd rören'}
+                               onClick={vand}
+                               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); vand(); } }}>
+                                <title>Klicka för att vända rören</title>
+                                <Tube cx={T1X} kind="petal" obj={motion.petal} motion={motion} air={air} mols={molsP} show={show} />
+                                <Tube cx={T2X} kind="coin"  obj={motion.coin}  motion={motion} air={air} mols={molsC} show={show} />
+                            </g>
+                        );
+                    })()}
 
                     {/* statusbanner / slutsats (topp) */}
                     <g>
@@ -812,7 +830,7 @@
                         {/* Scen */}
                         <div className="lg:w-3/5 order-1">
                             <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
-                                <VacuumScene motion={motion} air={air} show={show} pumping={pumping} svgRef={svgRef} onPumpSlag={pumpSlag} slag={slag} />
+                                <VacuumScene motion={motion} air={air} show={show} pumping={pumping} svgRef={svgRef} onPumpSlag={pumpSlag} slag={slag} onVand={doFlip} />
                                 {sceneToggles()}
 
                                 {isFullscreen && (
@@ -861,6 +879,9 @@
                                     Vänd rören &amp; släpp
                                 </button>
                                 <button className="btn-toggle w-full" onClick={reset} disabled={busy}>↻ Återställ</button>
+                                <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
+                                    Du kan också klicka på rören i bilden för att vända dem.
+                                </p>
                             </div>
 
                             <div className="glass-card rounded-xl p-4 mb-3">

@@ -4379,7 +4379,43 @@ window.BEGREPP = [
       { type: 'p', html: 'Sambandet säger att intensiteten efter filtret är <em>I</em>&nbsp;=&nbsp;<em>I</em><sub>0</sub>&nbsp;·&nbsp;cos<sup>2</sup>&nbsp;<em>α</em>, där <em>I</em><sub>0</sub> är intensiteten före filtret och <em>α</em> är vinkeln mellan ljusets polarisationsriktning och filtrets genomsläppsriktning. Vid 0° går allt igenom, vid 45° hälften och vid 90° ingenting. Skälet är att filtret bara släpper igenom den del av ljusvågens svängning som ligger längs filtrets riktning.' },
       { type: 'p', html: 'Med kvantfysikens ögon består ljuset av fotoner, och en foton kan inte delas. Då betyder sambandet att varje foton släpps igenom med sannolikheten cos<sup>2</sup>&nbsp;<em>α</em>. Vid 60° går alltså var fjärde foton igenom, men ingen kan säga i förväg vilka. Den slumpen har gjort Malus lag till ett klassiskt exempel i diskussionen om huruvida naturen är slumpmässig på riktigt.' },
     ]
-  }
+  },
+  {
+    id: 'termisk-jamvikt',
+    term: 'Termisk jämvikt',
+    former: ['termisk jämvikt', 'termiska jämvikten'],
+    kort: 'Det läge två föremål hamnar i när de har fått samma temperatur och inte längre utbyter någon värme netto. Då händer ingenting mer, sett utifrån.',
+    relaterade: ['absoluta-nollpunkten', 'entropi', 'planckska-tidsskalan'],
+    body: [
+      { type: 'p', html: 'Ställ en kopp varmt te på bordet och vänta. Teet svalnar, först snabbt och sedan allt långsammare, tills det har samma temperatur som rummet. Då slutar det svalna. Teet och rummet är i termisk jämvikt: värme går fortfarande fram och tillbaka mellan dem i smått, men lika mycket åt båda hållen, så att ingenting förändras netto.' },
+      { type: 'p', html: 'Bakom ligger att värme alltid går från varmt till kallt av sig själv. Så länge det finns en temperaturskillnad flyttas energi, och när skillnaden är borta finns det ingenting som driver processen längre. I jämvikt är energin i ett ämne också fördelad på ett bestämt sätt mellan atomernas möjliga energinivåer: de låga nivåerna är vanligast, och hur många som ligger på de högre nivåerna bestäms av temperaturen. Varmare betyder fler partiklar högt upp.' },
+      { type: 'p', html: 'Hur lång tid det tar att nå jämvikt beror nästan alltid på detaljerna: hur stor ytan är, hur bra materialet leder värme och om luften rör sig. Därför går det oftast att snabba upp förloppet med en fläkt eller ett isbad. Men inom kvantmekaniken finns en nedre gräns för tiden som ingen teknik kan komma runt, och den beror bara på temperaturen.' }
+    ]
+  },
+  {
+    id: 'planckska-tidsskalan',
+    term: 'Planckska tidsskalan',
+    former: ['planckska tidsskalan', 'planckisk tidsskala', 'planckska tidsskalor'],
+    kort: 'Den tid man får när Plancks konstant delas med Boltzmanns konstant gånger temperaturen. Den har länge misstänkts sätta gränsen för hur fort ett system kan nå termisk jämvikt, och halva den tiden är nu bevisad som undre gräns.',
+    relaterade: ['termisk-jamvikt', 'kvantmekanik', 'heisenberggransen'],
+    body: [
+      { type: 'p', html: 'I fysiken finns ett par naturkonstanter som dyker upp överallt. Plancks konstant, <em>h</em>, kopplar ihop energin i ett ljuspaket med ljusets frekvens, <em>E</em>&nbsp;=&nbsp;<em>hf</em>. Boltzmanns konstant, <em>k</em><sub>B</sub>, kopplar ihop temperatur med energi: den talar om hur mycket rörelseenergi atomerna i ett ämne ungefär har vid en viss temperatur. Delar man den reducerade Plancks konstant, <em>h</em>/2π, med Boltzmanns konstant gånger temperaturen blir enheten sekunder. Den tiden kallas den planckska tidsskalan.' },
+      { type: 'p', html: 'Tiden är mycket kort. Vid rumstemperatur är den omkring 26&nbsp;femtosekunder, alltså 26 miljondelar av en miljarddels sekund. Den blir längre ju kallare det är, eftersom värmerörelsens energi då blir mindre: vid 1&nbsp;kelvin är den knappt 8&nbsp;pikosekunder. Fysiker har sett den dyka upp i mätningar på metaller och supraledande material, i simuleringar av kaotiska kvantsystem och i teoretiska räkningar, och misstänkt att den är en hastighetsgräns för hur fort ett system kan nå jämvikt. Det som nu har bevisats är en gräns på halva den tiden, <em>ħ</em>/(2<em>k</em><sub>B</sub><em>T</em>), alltså omkring 13&nbsp;femtosekunder vid rumstemperatur.' },
+      { type: 'p', html: 'Namnet kan förväxlas med plancktiden, men de har inget med varandra att göra. Plancktiden, omkring 5&nbsp;·&nbsp;10<sup>−44</sup>&nbsp;sekunder, byggs av Plancks konstant, ljusets hastighet och gravitationskonstanten och anger var gravitationen tros kräva en kvantteori. Den planckska tidsskalan handlar i stället om värme och temperatur.' }
+    ]
+  },
+  {
+    id: 'heisenberggransen',
+    term: 'Heisenberggränsen',
+    former: ['heisenberggränsen', 'heisenberggräns'],
+    kort: 'Den yttersta gräns som kvantmekaniken sätter för hur noggrant något kan mätas med en given mängd resurser, till exempel en viss tid eller ett visst antal partiklar.',
+    relaterade: ['standardkvantgransen', 'obestamdhetsrelationen', 'kvantmekanik'],
+    body: [
+      { type: 'p', html: 'Alla mätningar har brus. Med vanliga instrument kan man pressa ned bruset genom att mäta längre eller med fler partiklar, men kvantmekaniken sätter en gräns för hur långt det går. Den gränsen kallas heisenberggränsen, efter Werner Heisenberg, som formulerade obestämdhetsrelationen.' },
+      { type: 'p', html: 'Ett enkelt exempel är att mäta en energi. En energi i ett kvantsystem visar sig som hur fort systemets tillstånd vrider sig i tiden. Två system med nästan samma energi börjar i samma tillstånd och glider sakta isär, ungefär som två klockor som går nästan lika fort. Ju mindre energiskillnaden är, desto längre tid tar det innan skillnaden märks. Heisenberggränsen säger hur fort det kan gå i bästa fall: hur mycket två tillstånd hinner skilja sig åt växer högst i takt med energiskillnaden gånger tiden, delad med Plancks konstant.' },
+      { type: 'p', html: 'När många partiklar används i en mätning förbättras noggrannheten i bästa fall i takt med antalet partiklar, inte bara i takt med roten ur antalet, som är vad man klarar med oberoende partiklar. Mäter partiklarna samtidigt kräver det att de är sammanflätade. Gränsen används också som ett verktyg för att bevisa andra saker, till exempel hur fort ett system kan nå termisk jämvikt.' }
+    ]
+  },
 ];
 
 

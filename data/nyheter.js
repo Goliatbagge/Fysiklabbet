@@ -103,6 +103,67 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-29-hastighetsgransen-for-jamvikt",
+    date: "2026-10-29",
+    title: "Kvantmekaniken sätter en hastighetsgräns för hur fort något når jämvikt",
+    deck: "Hur snabbt kan något anta omgivningens temperatur? Fysiker i Wien, Barcelona och Genève har bevisat att kvantmekaniken sätter en nedre gräns för tiden, och att gränsen bara beror på temperaturen och två naturkonstanter. Vid rumstemperatur är den omkring 13 femtosekunder.",
+    category: "Termodynamik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-29-hastighetsgransen-for-jamvikt.jpg",
+    imageAlt: "Insidan av ett laboratoriekylskåp för kvantexperiment: våningar av blanka metallplattor som hålls ihop av stänger, med kopparflätor, guldfärgade kopplingar, tunna kablar och en spiralformad slang. I bakgrunden syns en labbänk med mätinstrument.",
+    imageCredit: "Foto: UCL Mathematical & Physical Sciences / Pavlos Apostolidis, via Wikimedia Commons (CC BY 2.0), beskuren. Bilden visar ett utspädningskylskåp vid London Centre for Nanotechnology, inte forskarnas egen utrustning (studien är rent teoretisk).",
+    tags: ["termodynamik", "termisk jämvikt", "temperatur", "kvantmekanik", "plancks konstant", "boltzmanns konstant", "planckska tidsskalan", "kvantdator", "kvantmetrologi", "tredje huvudsatsen"],
+    sources: [
+      { name: "Physics World: Your beer can only cool so fast. Blame quantum mechanics (15 oktober 2026)", url: "https://physicsworld.com/a/your-beer-can-only-cool-so-fast-blame-quantum-mechanics/" },
+      { name: "Phys.org: Physicists prove a long-suspected quantum speed limit for thermalization (18 oktober 2026)", url: "https://phys.org/news/2026-10-physicists-quantum-limit-thermalization.html" },
+      { name: "Nature Physics: studien i fulltext (öppet tillgänglig, CC BY 4.0)", url: "https://www.nature.com/articles/s41567-026-03397-y" },
+      { name: "arXiv: förtrycket av studien", url: "https://arxiv.org/abs/2506.19188" }
+    ],
+    research: {
+      citation: "P. Abiuso, A. Rolandi, J. Calsamiglia, P. Sekatski och M. Perarnau-Llobet, ”An information-theoretic proof of the Planckian bound for thermalization”, Nature Physics (2026), publicerad 24 september 2026. Kollegialt granskad och öppet tillgänglig (CC BY 4.0).",
+      url: "https://doi.org/10.1038/s41567-026-03397-y"
+    },
+    larare: {
+      moment: [
+        { label: "Värme och temperatur", href: "katalog.html?id=fy1-6.1" },
+        { label: "Termodynamikens fyra huvudsatser", href: "katalog.html?id=fy1-6.5" },
+        { label: "Bohrs atommodell och energinivåer", href: "katalog.html?id=fy2-4.8" }
+      ],
+      fragor: [
+        "Gränsen ħ/(2kT) blir kortare ju högre temperaturen är. Varför är det rimligt att ett varmt system kan nå jämvikt snabbare än ett kallt, om man tänker på hur stora energierna i värmerörelsen är?",
+        "Forskarna kräver att maskinen ska fungera för många olika system, inte bara för ett enda. Varför blir en hastighetsgräns meningslös utan det kravet? Tänk på maskinen som byter ut den varma koppen mot en kall.",
+        "En flaska i kylskåpet behöver timmar för att svalna, fast gränsen bara är omkring 14 femtosekunder. Vad är det som bromsar i det fallet, och varför är det ingen motsägelse?"
+      ]
+    },
+    body: [
+      { type: "p", html: "En varm kopp te svalnar på en kvart, en flaska i kylskåpet behöver några timmar, och en vindruta på en vinterbil tinar på några minuter med fläkten på högsta läget. Hur fort något antar omgivningens temperatur beror på ytan, materialet och hur luften rör sig, och med bättre teknik går det nästan alltid att få det att gå fortare. Men inte hur fort som helst. Fem teoretiska fysiker vid IQOQI i Wien, TU Wien, Universitat Autònoma de Barcelona och Genèves universitet har nu bevisat att kvantmekaniken sätter en absolut nedre gräns för tiden, oavsett vilken maskin som sköter jobbet. Studien är publicerad i <em>Nature Physics</em>." },
+      { type: "h2", text: "En tid byggd av två naturkonstanter" },
+      { type: "p", html: "Ett föremål som har nått omgivningens temperatur och inte längre utbyter någon nettovärme med den är i termisk jämvikt. Fysiker har länge misstänkt att det finns en minsta tid för att komma dit, och att den ges av en enkel kombination av temperaturen $T$ och två naturkonstanter, den reducerade Plancks konstant $\\hbar = \\dfrac{h}{2\\pi} \\approx 1{,}05 \\cdot 10^{-34}\\ \\mathrm{J \\cdot s}$ och Boltzmanns konstant $k_\\mathrm{B} \\approx 1{,}38 \\cdot 10^{-23}\\ \\mathrm{J/K}$:" },
+      { type: "p", html: "$$\\tau_\\mathrm{Pl} = \\dfrac{\\hbar}{k_\\mathrm{B} T}$$" },
+      { type: "p", html: "Tiden kallas den planckska tidsskalan. Begreppet myntades av den nederländske fysikern Jan Zaanen för att beskriva hur ström leds i vissa supraledande material vid temperaturer där de ännu inte har blivit supraledande, och samma tidsskala har sedan dykt upp i mätningar, simuleringar och beräkningar på många håll. Men det har varit lätt att hitta till synes motexempel, och ett allmänt bevis har saknats." },
+      { type: "quote", html: "Det fanns antydningar från experiment, numeriska simuleringar och analytiska beräkningar om att ett fysikaliskt system inte kan fås att nå termisk jämvikt snabbare än en viss grundläggande gräns.", cite: "Martí Perarnau-Llobet, Universitat Autònoma de Barcelona, till Physics World" },
+      { type: "h2", text: "Maskinen som inte får fuska" },
+      { type: "p", html: "Forskarna formulerade problemet med en tänkt jämviktsmaskin. Maskinen får vara hur stor och kraftfull som helst och göra vad som helst som kvantmekaniken tillåter. Det enda den ska göra är att ta ett system och lämna tillbaka det i jämvikt vid en bestämd temperatur." },
+      { type: "p", html: "Men med bara det kravet blir svaret trivialt, och just därför har motexemplen varit så lätta att hitta. En maskin som känner till exakt vilket system den ska hantera kan helt enkelt byta ut det mot ett färdigt, redan avsvalnat exemplar. Det går hur fort som helst. Det vore att fuska, menar Pavel Sekatski vid Genèves universitet enligt Physics World. Forskarna kräver därför att samma maskin ska klara en hel grupp av system vars energinivåer skiljer sig lite åt, utan att i förväg veta vilket av dem den har fått. Samma maskin som kyler en kopp kaffe ska alltså också klara en kopp med lite mer mjölk eller socker i." },
+      { type: "image", src: "nyheter/bilder/2026-10-29-hastighetsgransen-for-jamvikt-2.jpg", alt: "Schematisk figur på ljusgul bakgrund. Från en flagga uppe till vänster går fyra färgade kurvor till fyra cirklar med prickar i mitten. Tre kurvor landar inuti sina cirklar, den fjärde, röd, landar utanför sin cirkel. Uppe till höger en ruta med symbolerna cirkel, kvadrat och triangel inom en streckad ring och ett kryss utanför.", caption: "Jämviktsmaskinen i studien. Alla system startar i samma tillstånd (flaggan) och ska efter tiden <em>τ</em> hamna nära sitt eget jämviktstillstånd (prickarna, med tillåtet fel <em>ε</em>). Rutan uppe till höger visar att maskinen ska klara alla system inom en viss ring av närliggande energibeskrivningar (cirkel, kvadrat, triangel), men behöver inte klara system utanför (krysset), och det systemets kurva (den röda) missar mycket riktigt sitt jämviktstillstånd.", credit: "Bild: P. Abiuso med flera, Nature Physics (2026), figur 1 (CC BY 4.0)" },
+      { type: "h2", text: "Varför det inte går fortare" },
+      { type: "p", html: "Kravet gör hela skillnaden. Jämviktstillståndet beror på systemets energinivåer: vid jämvikt är sannolikheten att hitta systemet på en viss energinivå större ju lägre nivån ligger, enligt en fördelning som bestäms av $k_\\mathrm{B} T$. Två system vars energinivåer skiljer sig åt har därför två olika jämviktstillstånd, och maskinen måste leverera rätt tillstånd till vart och ett." },
+      { type: "p", html: "Men maskinen vet inte vilket system den har. Skillnaden mellan systemen får bara visa sig genom hur de själva utvecklas i tiden, och här sätter kvantmekaniken stopp: hur mycket två tillstånd hinner skilja sig åt efter tiden $\\tau$ begränsas av hur stor energiskillnaden är, multiplicerad med $\\dfrac{\\tau}{\\hbar}$. Det är samma gräns som bestämmer hur noggrant en energi över huvud taget kan mätas på en viss tid, och den kallas heisenberggränsen. Jämviktstillstånden skiljer sig åt i proportion till energiskillnaden delad med $k_\\mathrm{B} T$. Ska maskinen hinna skilja dem åt måste alltså tiden vara minst i storleksordningen $\\dfrac{\\hbar}{k_\\mathrm{B} T}$." },
+      { type: "p", html: "Den exakta räkningen ger att tiden måste vara minst hälften av den planckska tidsskalan, så länge temperaturen inte är så låg att systemet nästan bara befinner sig på sin lägsta energinivå:" },
+      { type: "p", html: "$$\\tau \\geq \\dfrac{\\hbar}{2 k_\\mathrm{B} T}$$" },
+      { type: "p", html: "Gränsen håller också om maskinen tillåts träffa jämviktstillståndet ungefär, med ett litet fel, och den krymper bara lite när felet tillåts växa till några procent. Nära absoluta nollpunkten byts temperaturen i stället ut mot energiskillnaden $\\Delta$ mellan systemets två lägsta nivåer, och gränsen blir $\\tau \\geq \\dfrac{\\hbar}{\\Delta}$." },
+      { type: "h2", text: "Ingen fara för flaskan i kylskåpet" },
+      { type: "p", html: "Med temperaturen i ett kylskåp, 5&nbsp;°C eller 278&nbsp;K, blir gränsen omkring $1{,}4 \\cdot 10^{-14}$&nbsp;sekunder, alltså 14&nbsp;femtosekunder. En flaska som behöver tre timmar för att svalna ligger nästan en miljard miljarder gånger över gränsen. Det som bromsar där är att värmen ska ledas genom glaset och luften, inte kvantmekaniken. Gränsen blir däremot längre ju kallare det är: vid 1&nbsp;kelvin är den knappt 4&nbsp;pikosekunder." },
+      { type: "p", html: "Beviset handlar därför framför allt om kvantsystem som är snabba och kalla, och om kvantdatorer, där det är en vanlig uppgift att ta fram jämviktstillstånd för ett system som ska simuleras. Gränsen säger hur fort det någonsin kan gå, oavsett hur smart algoritmen är. Forskarna visar också att gränsen går att nå: en specialbyggd maskin klarar två givna system på exakt den tid gränsen anger, och i en enkel modell av en enda fermion (en partikel av samma slag som elektronen) som kopplas till en omgivning av andra fermioner kommer förloppet nära gränsen." },
+      { type: "p", html: "Eftersom den kortaste tiden växer när temperaturen sjunker påminner resultatet om termodynamikens tredje huvudsats, som säger att absoluta nollpunkten aldrig kan nås. ”Vi undersöker nu vad det här angreppssättet kan säga om de grundläggande gränser som termodynamikens andra och tredje huvudsats sätter”, säger Alberto Rolandi vid TU Wien till Physics World." },
+      { type: "fact", title: "Visste du?", items: [
+        "Den planckska tidsskalan har inget med plancktiden att göra, den tid på omkring 5&nbsp;·&nbsp;10<sup>−44</sup>&nbsp;sekunder där gravitationen tros behöva en kvantteori. Det enda de har gemensamt är Plancks konstant.",
+        "Utan kvantmekanik skulle gränsen försvinna. Om Plancks konstant vore noll skulle tiden $\\dfrac{\\hbar}{k_\\mathrm{B} T}$ också bli noll, och då skulle ingenting hindra en maskin från att nå jämvikt på ett ögonblick.",
+        "Studien är rent teoretisk. Den skickades in i augusti 2025, godkändes i juni 2026 och publicerades den 24 september 2026."
+      ] }
+    ]
+  },
+  {
     id: "2026-10-28-linsen-som-byter-fokus",
     date: "2026-10-28",
     title: "Platt lins växlar mellan två brännpunkter när spänningen ändras",

@@ -15,13 +15,16 @@ Format per post:
 - **S301: snabbaste stjärnan runt Sgr A* (8,7 år, 25 000 km/s) känner av svarta hålets rotation** **[BREVTEASER]** (nominerad 2026-10-25: snabbaste kända stjärnan i Vintergatan, belagd i fulltext; astronomi senast 2026-10-14) — GRAVITY-samarbetet, Nature 2026, DOI 10.1038/s41586-026-10894-w; fulltext läst i arXiv 2607.12664 (Discovery of a star sensitive to the spin of Sgr A*). OBS: ESO:s pressmeddelande eso2612 kom redan 2026-08-19 (ESO-bilder CC BY 4.0), så inte dagsfärskt; Physics World tog upp den 2026-10-08. Astronomi. Källa: https://physicsworld.com/a/fastest-star-in-the-milky-way-feels-the-rotation-of-our-central-black-hole/
   (tillagd 2026-10-20)
 
+- **Hula-hoopens fysik: lår, smalben och fot håller ringen igång tillsammans (Berkeley)** — mekanik/biomekanik; sensorer på ringen, benet och foten, 120 mätningar per sekund; olinjär analys (funktionell nätverksanalys) i stället för principalkomponentanalys visar att ringens varv och vickning hänger ihop. Chern, Honein, O'Reilly, Nonlinear Dynamics 2026, DOI 10.1007/s11071-026-13058-7 (öppenhet ej kontrollerad). Mer rörelseanalys än fysik; valdes bort 2026-10-28. Källa (Phys.org): https://phys.org/news/2026-10-decoding-loopy-physics-hula-hooping.html
+  (tillagd 2026-10-28)
+
+- **Lycurgusbägarens färgskifte återskapat i Sheffield** — optik/nanopartiklar (guld och silver i glas, grönt i reflekterat och rött i genomfallande ljus). Verkar vara ett hantverksprojekt utan vetenskaplig artikel; kontrollera om det finns en publikation. OBS optik 2026-10-28. Källa (Phys.org): https://phys.org/news/2026-10-technician-year-mystery-replicate-effect.html
+  (tillagd 2026-10-28)
+
 - **Defekter i diamant bekräftar 80 år gammal elasticitetsteori för spänningen runt en dislokation** — fasta tillståndets fysik/hållfasthet; NV-centra som spänningsgivare, cirka 1 MPa precision, fyra komponenter av spänningstensorn. Teraji m.fl. (NIMS), Applied Physics Letters 2026, DOI 10.1063/5.0353643; fulltexten troligen SPÄRRAD (pubs.aip.org ger Cloudflare-kontroll), leta förtryck. Källa (Phys.org 2026-10-26): https://phys.org/news/2026-10-diamond-defects-year-theory-crystal.html
   (tillagd 2026-10-27)
 
 - **Ny typ av superjonisk is observerad (Physics World, oktober 2026)** — tillstånd/planetfysik. OBS: superjonisk is (hcp-fasen) publicerades redan 2026-09-13; ta bara om fyndet är tydligt annorlunda. Originalet ej kontrollerat. Källa: https://physicsworld.com/a/new-type-of-superionic-water-ice-observed-for-the-first-time/
-  (tillagd 2026-10-26)
-
-- **Kvantmekaniken sätter en hastighetsgräns för hur snabbt något kan nå termisk jämvikt (τ ≥ ħ/2kT)** — termodynamik/kvant, teoretiskt. Abiuso, Rolandi, Calsamiglia, Sekatski, Perarnau-Llobet, Nature Physics (15 oktober 2026); förtryck arXiv 2506.19188 (läsbart). Källa: https://physicsworld.com/a/your-beer-can-only-cool-so-fast-blame-quantum-mechanics/
   (tillagd 2026-10-26)
 
 - **Supraström läser av kvantinformation utan att förstöra den** — kvantteknik. Originalet ej kontrollerat. Källa (Phys.org 2026-10-26): https://phys.org/news/2026-10-supercurrent-enables-quantum-destroying.html

@@ -211,6 +211,12 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(10px); }
         }
+        /* Ett enda kolvslag när man klickar på pumpen */
+        .pump-klick { cursor: pointer; outline: none; }
+        .pump-klick:hover .pump-kropp,
+        .pump-klick:focus-visible .pump-kropp { fill: #b4bcc6; }
+        .pump-klick.av { cursor: default; }
+        .pump-klick.av:hover .pump-kropp { fill: #9aa3af; }
     </style>
 </head>
 <body class="lab-sim">
@@ -509,7 +515,7 @@
         };
 
         // ── Scenen ───────────────────────────────────────────────
-        const VacuumScene = ({ motion, air, show, pumping, svgRef }) => {
+        const VacuumScene = ({ motion, air, show, pumping, svgRef, onPumpSlag, slag }) => {
             const molsP = useMemo(() => makeMolecules(T1X), []);
             const molsC = useMemo(() => makeMolecules(T2X), []);
 
@@ -559,12 +565,31 @@
                         <path d={`M ${T2X - HW} ${TUBE_BOT - 12} Q 402 ${TUBE_BOT - 6} 388 ${TUBE_BOT - 18}`} fill="none"
                               stroke="#6b7280" strokeWidth="4" />
                     </g>
-                    <g style={pumping ? { animation: 'pumpStroke 0.6s ease-in-out infinite' } : null}>
-                        <rect x="357" y="430" width="6" height="28" fill="#6b7280" />
-                        <rect x="346" y="424" width="28" height="8" rx="3" fill="#374151" />
-                    </g>
-                    <rect x="332" y="456" width="56" height="30" rx="5" fill="#9aa3af" stroke="#6b7280" strokeWidth="1.5" />
-                    <text x="360" y="476" textAnchor="middle" fontSize="9" fontWeight="700" fill="#1f2937">PUMP</text>
+                    {/* Pumpen är klickbar: varje klick är ett kolvslag (onPumpSlag).
+                        slag räknas upp vid varje klick, och som key startar det om
+                        kolvens engångsanimering. */}
+                    {(() => {
+                        const av = motion.phase === 'flip' || motion.phase === 'fall';
+                        const kolvStil = pumping
+                            ? { animation: 'pumpStroke 0.6s ease-in-out infinite' }
+                            : (slag > 0 ? { animation: 'pumpStroke 0.34s ease-in-out 1' } : null);
+                        return (
+                            <g className={`pump-klick${av ? ' av' : ''}`} role="button" tabIndex={av ? -1 : 0}
+                               aria-label={window.I18N ? I18N.t('Pumpa ut lite luft') : 'Pumpa ut lite luft'}
+                               onClick={() => { if (!av) onPumpSlag(); }}
+                               onKeyDown={(e) => { if (!av && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); onPumpSlag(); } }}>
+                                <title>Klicka för att pumpa ut luft</title>
+                                <g key={pumping ? 'kont' : slag} style={kolvStil}>
+                                    <rect x="357" y="430" width="6" height="28" fill="#6b7280" />
+                                    <rect x="346" y="424" width="28" height="8" rx="3" fill="#374151" />
+                                </g>
+                                <rect className="pump-kropp" x="332" y="456" width="56" height="30" rx="5" fill="#9aa3af" stroke="#6b7280" strokeWidth="1.5" />
+                                <text x="360" y="476" textAnchor="middle" fontSize="9" fontWeight="700" fill="#1f2937">PUMP</text>
+                                {/* osynlig träffyta över kolv och kropp */}
+                                <rect x="326" y="416" width="68" height="74" fill="transparent" />
+                            </g>
+                        );
+                    })()}
 
                     {/* tryckmätare (mellan rörens toppar) */}
                     <Gauge air={air} cx={360} cy={150} />
@@ -656,11 +681,12 @@
             }, [motion.phase]);
 
             // ── Luftanimering (pump) ──────────────────────────────
-            const animateAir = useCallback((target, dur) => {
+            const animateAir = useCallback((target, dur, kontinuerlig = true) => {
                 if (airRafRef.current) cancelAnimationFrame(airRafRef.current);
                 const start = performance.now();
                 const from = airRef.current;
-                setPumping(target < from);
+                setPumping(kontinuerlig && target < from);
+                if (kontinuerlig) slagMalRef.current = null;
                 const step = (now) => {
                     const k = Math.min((now - start) / dur, 1);
                     const val = from + (target - from) * k;
@@ -710,6 +736,26 @@
                 apply(initMotion());
             };
             const pumpOut = () => animateAir(0, 2600);
+            // Ett kolvslag suger ut en fast andel av luften som finns kvar, som i
+            // en riktig vakuumpump: 100 % → 55 % → 30 % → … Efter sex slag är
+            // rören i praktiken tomma. Snabba klick räknas från målet för
+            // föregående slag, så inget klick går förlorat.
+            const [slag, setSlag] = useState(0);
+            const slagMalRef = useRef(null);
+            const PUMP_KVAR = 0.55;
+            const pumpSlag = () => {
+                if (busy || pumping) return;
+                const fran = slagMalRef.current !== null ? Math.min(slagMalRef.current, airRef.current) : airRef.current;
+                let mal = fran * PUMP_KVAR;
+                if (mal < 0.03) mal = 0;
+                slagMalRef.current = mal;
+                setSlag((n) => n + 1);
+                animateAir(mal, 340, false);
+            };
+            useEffect(() => {
+                // när luften nått målet (eller ändrats på annat sätt) glöms målet
+                if (slagMalRef.current !== null && Math.abs(air - slagMalRef.current) < 1e-6) slagMalRef.current = null;
+            }, [air]);
             const letAirIn = () => animateAir(1, 1500);
             const tShow = (k) => setShow((s) => ({ ...s, [k]: !s[k] }));
 
@@ -766,7 +812,7 @@
                         {/* Scen */}
                         <div className="lg:w-3/5 order-1">
                             <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
-                                <VacuumScene motion={motion} air={air} show={show} pumping={pumping} svgRef={svgRef} />
+                                <VacuumScene motion={motion} air={air} show={show} pumping={pumping} svgRef={svgRef} onPumpSlag={pumpSlag} slag={slag} />
                                 {sceneToggles()}
 
                                 {isFullscreen && (
@@ -775,7 +821,7 @@
                                             <div className="fs-row">
                                                 <span className="fs-label" style={{ minWidth: 150 }}>Mängd luft i rören</span>
                                                 <input type="range" min="0" max="100" step="1" value={Math.round(air * 100)}
-                                                       onChange={(e) => { if (airRafRef.current) cancelAnimationFrame(airRafRef.current); setAirBoth(parseFloat(e.target.value) / 100); }} />
+                                                       onChange={(e) => { if (airRafRef.current) cancelAnimationFrame(airRafRef.current); slagMalRef.current = null; setAirBoth(parseFloat(e.target.value) / 100); }} />
                                                 <span className="fs-value" style={{ minWidth: 70, textAlign: 'right' }}>{Math.round(air * 100)} %</span>
                                             </div>
                                         </div>
@@ -803,7 +849,7 @@
                                         </svg>
                                     )}
                                 </button>
-                                <div className="scene-hint">Vänd rören, jämför fallen — pumpa sedan ut luften och vänd igen</div>
+                                <div className="scene-hint">Vänd rören och jämför fallen. Klicka sedan på pumpen tills luften är ute och vänd igen</div>
                             </div>
                         </div>
 
@@ -822,7 +868,7 @@
                                 <div className="flex items-center gap-2 mb-3">
                                     <span className="text-xs flex-shrink-0" style={{ minWidth: 92, color: 'var(--lab-ink-soft)' }}>Mängd luft</span>
                                     <input type="range" min="0" max="100" step="1" value={Math.round(air * 100)}
-                                           onChange={(e) => { if (airRafRef.current) cancelAnimationFrame(airRafRef.current); setAirBoth(parseFloat(e.target.value) / 100); }}
+                                           onChange={(e) => { if (airRafRef.current) cancelAnimationFrame(airRafRef.current); slagMalRef.current = null; setAirBoth(parseFloat(e.target.value) / 100); }}
                                            className="flex-1 cursor-pointer" />
                                     <span className="font-mono font-semibold text-sm flex-shrink-0" style={{ minWidth: 44, textAlign: 'right', color: 'var(--lab-accent)' }}>{Math.round(air * 100)} %</span>
                                 </div>
@@ -830,6 +876,9 @@
                                     <button className="btn-toggle flex-1" onClick={pumpOut} disabled={pumping}>Pumpa ut luften</button>
                                     <button className="btn-toggle flex-1" onClick={letAirIn} disabled={pumping}>Släpp in luft</button>
                                 </div>
+                                <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
+                                    Du kan också klicka på pumpen i bilden. Varje kolvslag suger ut ungefär hälften av luften som är kvar.
+                                </p>
                             </div>
 
                             <div className="glass-card rounded-xl p-4">

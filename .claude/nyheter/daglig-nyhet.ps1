@@ -265,7 +265,7 @@ function Prompt-Mejl([string]$Datum, [string]$Id, [string]$Typ) {
 The article is scheduled and will be published automatically at 00.00 on $Datum. Write a short review email in Swedish with:
 - one sentence saying that tomorrow's news article (weekday and date written out in Swedish) is ready and is published automatically at midnight;
 - the title in bold, the deck, the category and the reading time;
-- a prominent link "Läs artikeln i förhandsvisning" whose href is EXACTLY $lank, copied character for character (never the plain ?id= address: the article is still hidden by the date gate and that address only shows the news list). Add that it can take a few minutes after this email before the link works;
+- the line "Läs artikeln i förhandsvisning:" followed on the next line by a plain link whose visible text AND href are both EXACTLY $lank, copied character for character (never the plain ?id= address: the article is still hidden by the date gate and that address only shows the news list). No button: no colours, background, padding or other inline style on the link, so that it is readable in every mail client. Add that it can take a few minutes after this email before the link works;
 - the utgivare's verdict for this article and, briefly, what had to be corrected (from .claude/nyheter/granskningar.md);
 - the sources (name and link for the news source and the original research);
 - this instruction, word for word: "Svara på det här mejlet med OK, eller skriv vad som ska ändras. Ändringar som kommer in före klockan 22.15 hinner göras före publiceringen. Vill du inte att artikeln publiceras, skriv stoppa. Svarar du inte publiceras den ändå."
@@ -285,7 +285,7 @@ $uppdrag
 
 Rules: plain, friendly Swedish; no emojis; no dashes used as pause markers (use full stops, colons or commas); do not paste formulas in dollar notation. Send it as htmlBody with a plain-text body as well. The very last line of the email must be exactly, in small grey text:
 FL-JOBB FL-NYHET:$Datum
-Do not change any files and do not commit anything. When the email is sent, print the line MEJL SKICKAT.
+Before sending, check that both htmlBody and the plain-text body contain every item listed above and end with that marker line; the reply check depends on the marker. Do not change any files and do not commit anything. When the email is sent, print the line MEJL SKICKAT.
 "@
 }
 

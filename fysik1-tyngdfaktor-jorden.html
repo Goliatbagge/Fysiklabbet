@@ -217,6 +217,11 @@
         .pump-klick:focus-visible .pump-kropp { fill: #b4bcc6; }
         .pump-klick.av { cursor: default; }
         .pump-klick.av:hover .pump-kropp { fill: #9aa3af; }
+        /* Ventilen på rören släpper in luft */
+        .ventil-klick { cursor: pointer; outline: none; }
+        .ventil-klick.av { cursor: default; }
+        .ventil-klick:not(.av):hover .ventil-kropp,
+        .ventil-klick:focus-visible .ventil-kropp { fill: #8b929c; }
         /* Klick på rören vänder dem */
         .ror-klick { cursor: pointer; outline: none; }
         .ror-klick.av { cursor: default; }
@@ -418,7 +423,7 @@
         };
 
         // ── Ett glasrör med innehåll ─────────────────────────────
-        const Tube = ({ cx, kind, obj, motion, air, mols, show }) => {
+        const Tube = ({ cx, kind, obj, motion, air, mols, show, ventil }) => {
             // Innehållets vändning: skala i y kring CY (sY: 1 → −1). Speglar
             // bottenläget till toppläget utan att föremålet far ut åt sidan.
             const sY = motion.sY;
@@ -481,6 +486,38 @@
                         <rect x={cx - HW + 4} y={TUBE_TOP - 8} width={2 * HW - 8} height="20" rx="6" fill="#3a3128" />
                         <rect x={cx - HW + 4} y={TUBE_BOT - 12} width={2 * HW - 8} height="20" rx="6" fill="#3a3128" />
                         {ticks}
+                        {/* Ventil (kran) mitt på rörets yttersida. Den sitter på
+                            rotationscentrum CY och är symmetrisk i höjdled, så den
+                            står kvar på samma ställe när röret vänds. Stängd står
+                            handtaget tvärs över röret, öppen längs röret.
+                            stopPropagation: ett klick på ventilen vänder inte rören. */}
+                        {(() => {
+                            const dir = kind === 'petal' ? -1 : 1;
+                            const vagg = cx + dir * HW;
+                            const bx = cx + dir * (HW + 17);
+                            const klick = (e) => { e.stopPropagation(); if (!ventil.av) ventil.onClick(); };
+                            return (
+                                <g className={`ventil-klick${ventil.av ? ' av' : ''}`} role="button"
+                                   transform={`translate(${vagg} ${CY}) scale(1.35) translate(${-vagg} ${-CY})`}
+                                   tabIndex={ventil.av ? -1 : 0}
+                                   aria-label={window.I18N ? I18N.t('Släpp in luft') : 'Släpp in luft'}
+                                   onClick={klick}
+                                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); klick(e); } }}>
+                                    <title>Ventil: klicka för att släppa in luft</title>
+                                    <rect x={Math.min(vagg, vagg + dir * 10)} y={CY - 4} width="10" height="8" fill="#8b929c" />
+                                    <rect x={Math.min(bx + dir * 7, bx + dir * 15)} y={CY - 3} width="8" height="6" rx="1.5" fill="#8b929c" />
+                                    <circle className="ventil-kropp" cx={bx} cy={CY} r="8.5" fill="#6b7280" stroke="#4b5260" strokeWidth="1.2" />
+                                    <g transform={`translate(${bx} ${CY})`}>
+                                        <g style={{ transform: `rotate(${ventil.oppen ? 90 : 0}deg)`, transition: 'transform 0.35s ease' }}>
+                                            <rect x="-2.6" y="-15" width="5.2" height="30" rx="2.4" fill="#c8324a" />
+                                            <circle r="3" fill="#7d1d2e" />
+                                        </g>
+                                    </g>
+                                    {/* osynlig träffyta */}
+                                    <rect x={Math.min(vagg, bx + dir * 18)} y={CY - 19} width={Math.abs(bx + dir * 18 - vagg)} height="38" fill="transparent" />
+                                </g>
+                            );
+                        })()}
                         {/* luftmolekyler */}
                         {show.particles && mols.slice(0, visMols).map((m, i) => (
                             <circle key={i} cx={m.x} cy={m.y} r={m.r} fill="#7b8493" opacity="0.5" />
@@ -520,7 +557,7 @@
         };
 
         // ── Scenen ───────────────────────────────────────────────
-        const VacuumScene = ({ motion, air, show, pumping, svgRef, onPumpSlag, slag, onVand }) => {
+        const VacuumScene = ({ motion, air, show, pumping, venting, svgRef, onPumpSlag, slag, onVand, onVentil }) => {
             const molsP = useMemo(() => makeMolecules(T1X), []);
             const molsC = useMemo(() => makeMolecules(T2X), []);
 
@@ -603,6 +640,7 @@
                     {/* Rören är klickbara: ett klick vänder dem (samma som knappen). */}
                     {(() => {
                         const av = motion.phase === 'flip' || motion.phase === 'fall';
+                        const ventil = { oppen: venting, av: av || pumping, onClick: onVentil };
                         const vand = () => { if (!av) onVand(); };
                         return (
                             <g className={`ror-klick${av ? ' av' : ''}`} role="button" tabIndex={av ? -1 : 0}
@@ -610,8 +648,8 @@
                                onClick={vand}
                                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); vand(); } }}>
                                 <title>Klicka för att vända rören</title>
-                                <Tube cx={T1X} kind="petal" obj={motion.petal} motion={motion} air={air} mols={molsP} show={show} />
-                                <Tube cx={T2X} kind="coin"  obj={motion.coin}  motion={motion} air={air} mols={molsC} show={show} />
+                                <Tube cx={T1X} kind="petal" obj={motion.petal} motion={motion} air={air} mols={molsP} show={show} ventil={ventil} />
+                                <Tube cx={T2X} kind="coin"  obj={motion.coin}  motion={motion} air={air} mols={molsC} show={show} ventil={ventil} />
                             </g>
                         );
                     })()}
@@ -637,6 +675,7 @@
             const [motion, setMotion] = useState(initMotion);
             const mRef = useRef(motion);
             const [pumping, setPumping] = useState(false);
+            const [venting, setVenting] = useState(false);   // ventilen öppen medan luft strömmar in
             const [show, setShow] = useState({ timer: true, vel: false, particles: true });
 
             const [isFullscreen, setIsFullscreen] = useState(false);
@@ -704,13 +743,14 @@
                 const start = performance.now();
                 const from = airRef.current;
                 setPumping(kontinuerlig && target < from);
+                setVenting(target > from);
                 if (kontinuerlig) slagMalRef.current = null;
                 const step = (now) => {
                     const k = Math.min((now - start) / dur, 1);
                     const val = from + (target - from) * k;
                     setAirBoth(val);
                     if (k < 1) airRafRef.current = requestAnimationFrame(step);
-                    else setPumping(false);
+                    else { setPumping(false); setVenting(false); }
                 };
                 airRafRef.current = requestAnimationFrame(step);
             }, []);
@@ -830,7 +870,7 @@
                         {/* Scen */}
                         <div className="lg:w-3/5 order-1">
                             <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
-                                <VacuumScene motion={motion} air={air} show={show} pumping={pumping} svgRef={svgRef} onPumpSlag={pumpSlag} slag={slag} onVand={doFlip} />
+                                <VacuumScene motion={motion} air={air} show={show} pumping={pumping} svgRef={svgRef} onPumpSlag={pumpSlag} slag={slag} onVand={doFlip} venting={venting} onVentil={letAirIn} />
                                 {sceneToggles()}
 
                                 {isFullscreen && (
@@ -899,6 +939,9 @@
                                 </div>
                                 <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
                                     Du kan också klicka på pumpen i bilden. Varje kolvslag suger ut ungefär hälften av luften som är kvar.
+                                </p>
+                                <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
+                                    Ventilen på rören släpper in luften igen.
                                 </p>
                             </div>
 

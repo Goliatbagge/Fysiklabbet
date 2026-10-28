@@ -48,6 +48,8 @@
         'Vänd rören och jämför fallen. Klicka sedan på pumpen tills luften är ute och vänd igen': 'Snu rørene og sammenlign fallene. Klikk deretter på pumpen til luften er ute, og snu igjen',
         'Pumpa ut lite luft': 'Pump ut litt luft',
         'Vänd rören': 'Snu rørene',
+        'Ventil: klicka för att släppa in luft': 'Ventil: klikk for å slippe inn luft',
+        'Ventilen på rören släpper in luften igen.': 'Ventilen på rørene slipper inn luften igjen.',
         'Klicka för att vända rören': 'Klikk for å snu rørene',
         'Du kan också klicka på rören i bilden för att vända dem.': 'Du kan også klikke på rørene i bildet for å snu dem.',
         'Klicka för att pumpa ut luft': 'Klikk for å pumpe ut luft',

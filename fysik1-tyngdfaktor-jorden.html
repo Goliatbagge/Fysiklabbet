@@ -341,14 +341,34 @@
             </g>
         );
 
-        const Coin = ({ x, y }) => (
-            <g transform={`translate(${x} ${y})`}>
-                <ellipse cx="0" cy="0" rx="17" ry="17" fill="url(#coinGrad)" stroke="#8a6209" strokeWidth="2" />
-                <circle r="12.5" fill="none" stroke="#a9790c" strokeWidth="1.2" opacity="0.6" />
-                <text x="0" y="5.5" textAnchor="middle" fontSize="15" fontWeight="700"
-                      fill="#8a6209" style={{ fontFamily: 'Poppins, sans-serif' }}>kr</text>
-            </g>
-        );
+        // Myntet singlar: phi är vridningen kring en vågrät axel genom myntet
+        // (0 = framsidan mot betraktaren), rot lutar axeln. Sett från sidan blir
+        // myntet en ellips som plattas till en tunn kant och vidgas igen.
+        const Coin = ({ x, y, phi = 0, rot = 0 }) => {
+            const c = Math.cos(phi);
+            const sy = Math.sign(c || 1) * Math.max(0.1, Math.abs(c));
+            const front = c >= 0;
+            return (
+                <g transform={`translate(${x} ${y}) rotate(${rot})`}>
+                    {/* kanten: en mörkare skiva strax förskjuten, syns när myntet lutar */}
+                    {Math.abs(c) < 0.97 && (
+                        <ellipse cx="0" cy={2.6 * Math.sign(Math.sin(phi) || 1)} rx="17" ry={17 * Math.abs(sy)}
+                                 fill="#8a6209" />
+                    )}
+                    <g transform={`scale(1 ${sy})`}>
+                        <ellipse cx="0" cy="0" rx="17" ry="17" fill="url(#coinGrad)" stroke="#8a6209"
+                                 strokeWidth={2 / Math.max(0.35, Math.abs(sy))} />
+                        <circle r="12.5" fill="none" stroke="#a9790c" strokeWidth="1.2" opacity="0.6" />
+                        {front
+                            ? <text x="0" y="5.5" textAnchor="middle" fontSize="15" fontWeight="700"
+                                    fill="#8a6209" style={{ fontFamily: 'Poppins, sans-serif' }}>kr</text>
+                            : <text x="0" y="-5.5" textAnchor="middle" fontSize="15" fontWeight="700"
+                                    fill="#8a6209" transform="scale(1 -1)"
+                                    style={{ fontFamily: 'Poppins, sans-serif' }}>1</text>}
+                    </g>
+                </g>
+            );
+        };
 
         // ── Tryckmätare (manometer) ──────────────────────────────
         const Gauge = ({ air, cx, cy }) => {
@@ -397,7 +417,21 @@
             const xoff = kind === 'petal' && falling ? air * 15 * Math.sin(t * 6.3 + 0.4) : 0;
             const rot = kind === 'petal' ? (falling ? air * 24 * Math.sin(t * 5.1) : 0) : 0;
 
-            const ox = cx + xoff;
+            // Myntet singlar runt två hela varv under fallet. Vinkeln följer
+            // roten ur fallsträckan, som växer jämnt med tiden vid fritt fall
+            // (s ∝ t²): konstant vinkelhastighet, och myntet landar alltid med
+            // framsidan mot betraktaren, som det låg innan röret vändes.
+            let coinPhi = 0, coinRot = 0, coinX = 0;
+            if (kind === 'coin' && motion.phase !== 'flip') {
+                const p = Math.min(1, Math.max(0, (obj.y - Y_TOP) / (Y_BOT - Y_TOP)));
+                const s = Math.sqrt(p);
+                coinPhi = 4 * Math.PI * s;
+                const env = Math.sin(Math.PI * s);        // 0 vid start och landning
+                coinRot = env * (9 + air * 10 * Math.sin(t * 4.2));
+                coinX = env * air * 3.5 * Math.sin(t * 5.3 + 1.1); // liten drift bara i luft
+            }
+
+            const ox = cx + xoff + coinX;
             const oy = obj.y;
 
             // hastighetspil (under fall) — startar vid föremålets nederkant, pekar nedåt
@@ -436,7 +470,7 @@
                         {/* föremål */}
                         {kind === 'petal'
                             ? <Petal x={ox} y={oy} rot={rot} />
-                            : <Coin x={ox} y={oy} />}
+                            : <Coin x={ox} y={oy} phi={coinPhi} rot={coinRot} />}
                     </g>
 
                     {/* hastighetspil (i statisk ram, under fall) */}

@@ -746,7 +746,7 @@
         // ════════════════════════════════════════════════════════
         //  SCENEN: KÄRLENS FORM
         // ════════════════════════════════════════════════════════
-        const KarlScen = ({ V, vatska, oppen, flode, dolj, svarat }) => {
+        const KarlScen = ({ V, vatska, oppen, flode, dolj, svarat, svgRef, setNiva, vaxlaKran }) => {
             const rho = M.VATSKOR[vatska].rho;
             const f = FARG[vatska];
             const hh = V.map((v, i) => M.niva(M.KARL[i], v));
@@ -755,8 +755,36 @@
             const lika = Math.max(...hh) - Math.min(...hh) < 0.002;
             const kantY = K_BOTTEN - M.KARL_H * KS;
             const pMax = M.tryck(1260, M.KARL_H), mMax = 1260 * Math.max(...M.VMAX);
+            const kanDra = !oppen && !dolj;
+            const stilla = flode.every((q) => Math.abs(q) < 2e-7);
+            // dra i vattenytan: nivån följer pekaren, i steg om 0,5 cm
+            const dra = (i) => (e) => {
+                const svg = svgRef && svgRef.current;
+                if (!svg || !kanDra) return;
+                e.preventDefault();
+                const flytta = (ev) => {
+                    const pt = svg.createSVGPoint();
+                    pt.x = ev.clientX; pt.y = ev.clientY;
+                    const q = pt.matrixTransform(svg.getScreenCTM().inverse());
+                    const x = Math.max(0, Math.min(0.38, (K_BOTTEN - q.y) / KS));
+                    setNiva(i, Math.round(x * 200) / 200);
+                };
+                const slapp = () => { window.removeEventListener('pointermove', flytta); window.removeEventListener('pointerup', slapp); };
+                window.addEventListener('pointermove', flytta);
+                window.addEventListener('pointerup', slapp);
+                flytta(e);
+            };
+            // instruktionen överst i scenen följer det man gör
+            const instr = dolj ? [] : !oppen
+                ? ['1. Dra i vattenytorna och ställ in olika nivåer i kärlen.', '2. Öppna kranarna: tryck på en kran eller på knappen.']
+                : !lika || !stilla
+                    ? ['Vattnet rinner från kärl med högre nivå till kärl med lägre nivå.', 'Det slutar rinna när nivåerna är lika och trycket i botten är lika stort.']
+                    : [`Nivåerna är lika, så trycket i botten är ${fmtP(pp[0])} i alla kärl.`, 'Stäng kranarna för att ställa in nya nivåer.'];
             return (
                 <g fontFamily="Poppins, sans-serif">
+                    {instr.map((s, j) => (
+                        <text key={j} x="76" y={44 + j * 22} fontSize="15" fontWeight={j === 0 ? 600 : 400} fill={j === 0 ? COL.ink : COL.soft}>{s}</text>
+                    ))}
                     {/* röret i botten med kranarna */}
                     <line x1={K_X[0]} y1={K_ROR} x2={K_X[3]} y2={K_ROR} stroke="#4b5563" strokeWidth="12" strokeLinecap="round" />
                     <line x1={K_X[0]} y1={K_ROR} x2={K_X[3]} y2={K_ROR} stroke={f.fyll} strokeWidth="7" strokeLinecap="round" />
@@ -770,15 +798,29 @@
                                 {/* stosen och kranen */}
                                 <line x1={x} y1={K_BOTTEN} x2={x} y2={K_ROR} stroke="#4b5563" strokeWidth="12" />
                                 <line x1={x} y1={K_BOTTEN} x2={x} y2={K_ROR} stroke={f.fyll} strokeWidth="7" />
-                                <g transform={`translate(${x} ${K_ROR - 18})`}>
-                                    <path d="M -9 -7 L 9 7 L 9 -7 L -9 7 Z" fill={oppen ? '#16a34a' : '#c8324a'} stroke="#1f2937" strokeWidth="1.2" strokeLinejoin="round" />
+                                <g transform={`translate(${x} ${K_ROR - 18})`} onClick={dolj ? undefined : vaxlaKran}
+                                   style={{ cursor: dolj ? 'default' : 'pointer' }}>
+                                    <circle cx="0" cy="0" r="20" fill="transparent" />
+                                    <path d="M -7 -9 L 7 9 L -7 9 L 7 -9 Z" fill={oppen ? '#16a34a' : '#c8324a'} stroke="#1f2937" strokeWidth="1.2" strokeLinejoin="round" />
+                                    {/* vredet: längs röret när kranen är öppen, tvärs när den är stängd */}
+                                    {oppen ? <line x1="0" y1="-15" x2="0" y2="15" stroke="#1f2937" strokeWidth="3.5" strokeLinecap="round" />
+                                           : <line x1="-16" y1="0" x2="16" y2="0" stroke="#1f2937" strokeWidth="3.5" strokeLinecap="round" />}
+                                    <circle cx="0" cy="0" r="3" fill="#1f2937" />
                                 </g>
                                 {oppen && Math.abs(q) > 2e-7 && (
-                                    <Pil x1={x + 18} y1={K_ROR - 18 + (q > 0 ? 10 : -10)} x2={x + 18} y2={K_ROR - 18 + (q > 0 ? -10 : 10)} color={COL.kraft} width={2.4} head={8} />
+                                    <Pil x1={x + 26} y1={K_ROR - 18 + (q > 0 ? 10 : -10)} x2={x + 26} y2={K_ROR - 18 + (q > 0 ? -10 : 10)} color={COL.kraft} width={2.4} head={8} />
                                 )}
                                 {/* kärlet */}
                                 <polygon points={`${x - wb},${K_BOTTEN} ${x + wb},${K_BOTTEN} ${x + wh},${yNiva} ${x - wh},${yNiva}`} fill={f.fyll} opacity="0.9" />
                                 <line x1={x - wh} y1={yNiva} x2={x + wh} y2={yNiva} stroke={f.kant} strokeWidth="2" />
+                                {kanDra && (
+                                    <g onPointerDown={dra(i)} style={{ cursor: 'ns-resize', touchAction: 'none' }}>
+                                        <rect x={x - Math.max(wh, 26)} y={yNiva - 14} width={2 * Math.max(wh, 26)} height="28" fill="transparent" />
+                                        <rect x={x - 15} y={yNiva - 7} width="30" height="14" rx="7" fill="#ffffff" stroke={f.kant} strokeWidth="1.8" />
+                                        <path d={`M ${x - 5} ${yNiva - 2} L ${x} ${yNiva - 5} L ${x + 5} ${yNiva - 2} M ${x - 5} ${yNiva + 2} L ${x} ${yNiva + 5} L ${x + 5} ${yNiva + 2}`}
+                                              fill="none" stroke={f.kant} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                                    </g>
+                                )}
                                 <path d={`M ${x - wt} ${kantY} L ${x - wb} ${K_BOTTEN} L ${x + wb} ${K_BOTTEN} L ${x + wt} ${kantY}`} fill="none" stroke="#5b7083" strokeWidth="3" strokeLinejoin="round" />
                                 <text x={x} y={kantY - 34} textAnchor="middle" fontSize="14" fontWeight="600" fill={COL.ink}>Kärl {i + 1}</text>
                                 <text x={x} y={kantY - 16} textAnchor="middle" fontSize="12" fill={COL.soft}>{k.namn.toLowerCase()}</text>
@@ -788,7 +830,7 @@
                             </g>
                         );
                     })}
-                    {oppen && lika && flode.every((q) => q === 0) && (
+                    {oppen && lika && stilla && (
                         <g>
                             <line x1={K_X[0] - 70} y1={K_BOTTEN - hh[0] * KS} x2={K_X[3] + 90} y2={K_BOTTEN - hh[0] * KS} stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" strokeDasharray="6 4" />
                             <text x={(K_X[0] + K_X[1]) / 2 + 22} y={K_BOTTEN - hh[0] * KS - 8} textAnchor="middle" fontSize="13" fill={COL.ink}>samma nivå</text>
@@ -1073,7 +1115,9 @@
                     const hh = V.map((v, i) => M.niva(M.KARL[i], v));
                     rad1 = <span>Trycket i botten beror bara på vätskedjupet <em>h</em>, inte på kärlets form eller på hur mycket {M.VATSKOR[vatska].namn.toLowerCase()} det innehåller.</span>;
                     rad2 = dolj ? <span>Välj det kärl du tror har störst tryck i botten.</span>
-                        : <span>{hh.map((x, i) => <span key={i}>{i > 0 ? ',   ' : ''}kärl {i + 1}: <em>p</em> = {fmt(rho, 0)} · 9,82 · {fmt(x, 3)} = {fmt(M.tryck(rho, x), 0)} Pa</span>)}</span>;
+                        : Math.max(...hh) - Math.min(...hh) < 0.002
+                            ? <span>I alla fyra kärlen: <em>p</em> = {fmt(rho, 0)} · 9,82 · {fmt(hh[0], 3)} = {fmt(M.tryck(rho, hh[0]), 0)} Pa</span>
+                            : <span className="flex flex-wrap gap-x-6">{hh.map((x, i) => <span key={i} style={{ whiteSpace: 'nowrap' }}>kärl {i + 1}: <em>p</em> = {fmt(rho, 0)} · 9,82 · {fmt(x, 3)} = {fmt(M.tryck(rho, x), 0)} Pa</span>)}</span>;
                 }
             }
             return (
@@ -1138,7 +1182,7 @@
             const [h, setH] = useState(0.35);
             const [rikt, setRikt] = useState('upp');
             const [sx, setSx] = useState(0.315);       // sondens läge i sidled, meter från akvariets vänsterkant
-            const [nivaer, setNivaer] = useState([0.25, 0.25, 0.25, 0.25]);
+            const [nivaer, setNivaer] = useState([0.32, 0.12, 0.24, 0.08]);
             const [oppen, setOppen] = useState(false);
             const [F1, setF1] = useState(100);
             const [A1, setA1] = useState(0.5);       // dm²
@@ -1403,7 +1447,8 @@
                             <div className="lg:w-2/3 xl:w-3/4 order-1">
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
                                     <Scen lage={lage} svgRef={svgRef} k={kar} vatska={vatska} h={h} sx={sx} setSx={setSx} rikt={rikt} show={show} dolj={dolj} setH={setH}
-                                          V={VRef.current} oppen={oppen} flode={flodeRef.current} cfg={cfg} last={last} st={st} forsokt={forsokt} />
+                                          V={VRef.current} oppen={oppen} flode={flodeRef.current} cfg={cfg} last={last} st={st} forsokt={forsokt}
+                                          setNiva={(i, x) => satNiva(i)(x)} vaxlaKran={vaxlaKran} />
                                     {sceneToggles()}
                                     <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
                                         {isFullscreen ? (
@@ -1420,7 +1465,7 @@
                                 <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
                                     {lage === 'sond' && karNamn === 'cistern' && 'Sonden och vätskepelaren är inte ritade i cisternens skala. '}
                                     {lage === 'sond' && 'Dra i sonden för att ändra djupet. Manometern är fylld med färgat vatten: nivåskillnaden Δh är lika stor som vattendjupet över sonden när karet också innehåller vatten.'}
-                                    {lage === 'karl' && 'Varje kärl sträcker sig 10 cm in i bilden. Medan kranarna är stängda ställer du in nivån i varje kärl. Öppna kranarna, så blir kärlen kommunicerande.'}
+                                    {lage === 'karl' && 'Dra i vattenytan för att ändra nivån i ett kärl, eller använd reglagen. Varje kärl sträcker sig 10 cm in i bilden. När kranarna öppnas blir kärlen kommunicerande. Tryck på en kran för att öppna eller stänga dem.'}
                                     {lage === 'press' && 'Kolvarna och oljan räknas som masslösa, och oljan går inte att pressa ihop. Pilarna visar krafternas riktning, staplarna deras storlek.'}
                                 </p>
                             </div>

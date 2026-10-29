@@ -103,6 +103,158 @@
  */
 const NYHETER_ALL = [
   {
+    "id": "2026-10-30-elektronerna-som-surfar-pa-radiovagor",
+    "date": "2026-10-30",
+    "title": "Elektroner surfar på radiovågor och driver strömmen i ett fusionsplasma",
+    "deck": "I en fusionsreaktor av typen tokamak måste en ström på en miljon ampere eller mer gå runt i det heta plasmat, och i dag drivs den nästan alltid av en transformator som bara kan hålla den igång en stund i taget. Fysiker vid forskningstokamaken DIII-D i San Diego har nu för första gången visat att en särskild sorts radiovågor, helikonvågor, kan driva en del av strömmen i stället.",
+    "category": "Plasmafysik",
+    "readingTime": "5 min",
+    "image": "nyheter/bilder/2026-10-30-elektronerna-som-surfar-pa-radiovagor.jpg",
+    "imageAlt": "Insidan av en ringformad vakuumkammare: en hög, blank mittpelare klädd med fyrkantiga plattor står i mitten, och väggarna runt om är täckta av grå plattor med runda och avlånga öppningar. Till höger klättrar en person i grön skyddsdräkt, hårnät och skoskydd och arbetar vid väggen.",
+    "imageCredit": "Foto: Rswilcox, via Wikimedia Commons (CC BY-SA 4.0). Bilden visar en tekniker inne i DIII-D:s vakuumkammare under ett underhållsuppehåll 2017, alltså före experimenten i studien.",
+    "tags": [
+      "plasmafysik",
+      "fusion",
+      "tokamak",
+      "diii-d",
+      "helikonvågor",
+      "radiovågor",
+      "induktion",
+      "transformator",
+      "elektromagnetiska vågor",
+      "elektrisk ström",
+      "magnetfält"
+    ],
+    "sources": [
+      {
+        "name": "Phys.org: Radio waves drive a fusion plasma current that could help reactors run continuously (27 oktober 2026)",
+        "url": "https://phys.org/news/2026-10-radio-fusion-plasma-current-reactors.html"
+      },
+      {
+        "name": "arXiv: förtrycket av studien i fulltext",
+        "url": "https://arxiv.org/abs/2609.12474"
+      },
+      {
+        "name": "Physical Review Letters: den publicerade studien",
+        "url": "https://doi.org/10.1103/mbn4-fd4v"
+      }
+    ],
+    "research": {
+      "citation": "J. B. Lestz, R. I. Pinsker, B. Van Compernolle med flera, ”First Experimental Evidence of Helicon Current Drive”, Physical Review Letters 137, 155101 (2026), publicerad 9 oktober 2026. Kollegialt granskad; förtrycket finns öppet på arXiv (2609.12474).",
+      "url": "https://doi.org/10.1103/mbn4-fd4v"
+    },
+    "larare": {
+      "moment": [
+        {
+          "label": "Transformator",
+          "href": "katalog.html?id=fy2-3.11"
+        },
+        {
+          "label": "Induktion och inducerad spänning",
+          "href": "katalog.html?id=fy2-3.7"
+        },
+        {
+          "label": "Laddade partiklar i magnetfält",
+          "href": "katalog.html?id=fy2-3.4"
+        }
+      ],
+      "fragor": [
+        "Strömmen i plasmat drivs normalt av en transformator där plasmaringen är sekundärlindningen. Varför räcker det inte att ha en konstant ström i solenoiden i mitten, och varför tar pulsen därför slut till slut?",
+        "Forskarna jämförde försök med helikonvågor mot försök där de i stället värmde plasmat ungefär lika mycket med mikrovågor. Varför behövs just den jämförelsen för att kunna påstå att vågorna driver ström och inte bara värmer?",
+        "Den uppmätta strömmen var 20 ± 10 kA. Vad säger osäkerheten om hur långt slutsatsen kan dras, och varför är resultatet ändå intressant fast strömmen är en liten del av den totala?"
+      ]
+    },
+    "body": [
+      {
+        "type": "p",
+        "html": "I en fusionsreaktor ska atomkärnor av väte smälta samman och frigöra energi. För att det ska hända måste vätet vara ett plasma som är många miljoner grader varmt, och det får inte röra vid några väggar. Den vanligaste lösningen är en tokamak: en ringformad vakuumkammare där starka magnetfält håller plasmat svävande. Men magnetfälten räcker inte ensamma. Det måste också gå en kraftig elektrisk ström runt i själva plasmaringen, och det är den strömmen som är problemet."
+      },
+      {
+        "type": "p",
+        "html": "Ett forskarlag från General Atomics, University of California Irvine, MIT och företaget Far-Tech har nu visat ett nytt sätt att driva strömmen. Med radiovågor av en sort som kallas helikonvågor har de fått en del av elektronerna i plasmat att röra sig åt samma håll runt ringen, utan hjälp av den transformator som annars sköter jobbet. Studien är publicerad i <em>Physical Review Letters</em>."
+      },
+      {
+        "type": "h2",
+        "text": "En transformator som tar slut"
+      },
+      {
+        "type": "p",
+        "html": "Strömmen i plasmaringen behövs för att den skapar ett eget magnetfält som slingrar sig runt plasmats tvärsnitt. Tillsammans med fältet från de stora spolarna runt kammaren ger det fältlinjer som vrider sig som skruvgängor runt ringen, och det är de vridna fältlinjerna som håller plasmat på plats."
+      },
+      {
+        "type": "p",
+        "html": "I dag drivs strömmen nästan alltid av induktion. Mitt i ringen står en spole, en solenoid, och plasmat fungerar som sekundärlindningen i en transformator. När strömmen i solenoiden ändras ändras också det magnetiska flödet genom plasmaringen, och flödesändringen inducerar en spänning som driver strömmen runt ringen. Men strömmen i solenoiden kan inte ändras hur länge som helst, och när flödet slutar ändras försvinner också den inducerade spänningen."
+      },
+      {
+        "type": "quote",
+        "html": "Nackdelen med det här upplägget är att tokamakens pulslängd begränsas av hur stor flödesändring den primära solenoiden kan åstadkomma.",
+        "cite": "Bob Pinsker, General Atomics, till Phys.org"
+      },
+      {
+        "type": "p",
+        "html": "I DIII-D kan en puls därför vara högst omkring 10&nbsp;sekunder, och även den mycket större reaktorn ITER, som byggs i Frankrike, är enligt Pinsker begränsad till mindre än omkring 1&nbsp;000&nbsp;sekunder. Ett kraftverk som ska leverera el dygnet runt behöver ett sätt att driva strömmen som inte tar slut."
+      },
+      {
+        "type": "h2",
+        "text": "Elektronerna surfar på vågen"
+      },
+      {
+        "type": "p",
+        "html": "Idén är att låta en våg skjuta elektronerna framför sig. Helikonvågorna i försöket har frekvensen 476&nbsp;MHz, ungefär samma frekvens som marksänd tv, och de rör sig längs magnetfältet med omkring en tredjedel av ljusets hastighet, ungefär 100&nbsp;000&nbsp;km/s. De elektroner i plasmat som råkar röra sig ungefär lika fort som vågen åker med den, ungefär som en surfare på en havsvåg, och tar upp energi från den. Fenomenet kallas landaudämpning."
+      },
+      {
+        "type": "p",
+        "html": "Skickas vågorna huvudsakligen åt ett håll runt ringen får elektronerna en knuff åt samma håll, och en nettoström uppstår. Vågorna sänds ut av en 1,5&nbsp;meter lång antenn med 30 moduler på rad, som sitter på kammarens yttervägg. Effekten kommer från en klystron, ett slags kraftfullt radiorör, som kan leverera 1,2&nbsp;megawatt."
+      },
+      {
+        "type": "p",
+        "html": "Teoretiker har länge räknat med att helikonvågor ska fungera särskilt bra i framtida reaktorer, där plasmat är både varmare och tätare än i dagens försöksanläggningar. Ändå hade ingen lyckats visa att de faktiskt driver ström. Vid tidigare försök, sedan mitten av 1980-talet, hade vågorna omvandlats till en annan vågtyp på vägen in i plasmat, och då gick det inte att säga vilken av dem som drev strömmen. I de nya försöken var plasmat så tätt att den andra vågtypen inte kunde ta sig in till plasmats mitt, och där var det bara helikonvågorna som kunde verka."
+      },
+      {
+        "type": "quote",
+        "html": "Trots en lång historia av försök med närbesläktade experiment ända sedan mitten av 1980-talet var vårt resultat den första tydliga framgången.",
+        "cite": "Bob Pinsker, General Atomics, till Phys.org"
+      },
+      {
+        "type": "h2",
+        "text": "Värme räcker inte som bevis"
+      },
+      {
+        "type": "p",
+        "html": "Först visade forskarna att vågorna verkligen lämnar ifrån sig energi i plasmats mitt. De slog på och av sändaren 23 gånger per sekund och såg temperaturen i centrum stiga och sjunka i samma takt. Plasmat höll där 3 till 4&nbsp;kiloelektronvolt, vilket motsvarar 35 till 46 miljoner grader."
+      },
+      {
+        "type": "p",
+        "html": "Ström är svårare att belägga, eftersom bara värme också kan ändra hur strömmen fördelar sig: ett varmare plasma leder ström bättre. Forskarna körde därför tre sorters försök som var lika i allt annat. I den första sorten skickades 370&nbsp;kilowatt helikonvågor in under en sekund, i den andra inga vågor alls, och i den tredje ersattes vågorna av ungefär lika mycket uppvärmning med mikrovågor, som i den här uppställningen i stort sett bara värmer. Med helikonvågorna steg temperaturen nära centrum med omkring 1&nbsp;kiloelektronvolt, ungefär 12 miljoner grader."
+      },
+      {
+        "type": "p",
+        "html": "Sedan mätte de hur magnetfältets fältlinjer vred sig inne i plasmat, med en metod som läser av ljuset från snabba atomer som skjuts in i plasmat. Med helikonvågorna ändrades vridningen i mitten betydligt snabbare än i alla jämförelseförsök. Det syntes också på ett annat sätt. När vridningen når ett visst värde börjar plasmats kärna kollapsa lite gång på gång, så att temperaturen i centrum hackar i ett mönster som liknar tänderna på en såg. I försöken med helikonvågor började det omkring 1,5&nbsp;sekunder in i försöket, medan det i försöken utan dem kom närmare en halv sekund senare eller inte alls."
+      },
+      {
+        "type": "h2",
+        "text": "En liten ström, men en början"
+      },
+      {
+        "type": "p",
+        "html": "När forskarna räknade bort den ström som transformatorn och de andra uppvärmningssystemen svarade för återstod en ström på 20&nbsp;±&nbsp;10&nbsp;kiloampere, samlad nära plasmats mitt. Datorberäkningar av hur vågorna färdas genom plasmat hade förutsagt 21&nbsp;kiloampere i samma område. Det är en liten del av den totala strömmen på omkring en miljon ampere, och i det här plasmat förutsades bara ungefär hälften av vågornas energi tas upp första gången de passerade genom det."
+      },
+      {
+        "type": "p",
+        "html": "Försöket är alltså ett principbevis, inte en färdig lösning. Forskarna vet ännu inte om strömmen blev mindre än den kunde ha blivit för att vågorna inte togs upp helt, eller för att de driver ström mindre effektivt än väntat. Det ska nu undersökas. Även den sydkoreanska forskningstokamaken KSTAR har fått en helikonantenn, och där har arbetet med att ta den i drift börjat."
+      },
+      {
+        "type": "fact",
+        "title": "Visste du?",
+        "items": [
+          "Ordet tokamak är en rysk förkortning av ungefär ”toroidformad kammare med magnetspolar”. Konstruktionen utvecklades i Sovjetunionen på 1950- och 60-talen.",
+          "Plasmat i försöken var mycket tunt: omkring 2&nbsp;·&nbsp;10<sup>19</sup> elektroner per kubikmeter, vilket är under en miljondel av antalet molekyler i samma volym luft.",
+          "Helikonvågor har fått sitt namn efter grekiskans <em>helix</em>, spiral. Namnet kommer från att vågornas fält roterar som en skruv när de rör sig längs magnetfältet."
+        ]
+      }
+    ]
+  },
+  {
     id: "2026-10-29-hastighetsgransen-for-jamvikt",
     date: "2026-10-29",
     title: "Kvantmekaniken sätter en hastighetsgräns för hur fort något når jämvikt",

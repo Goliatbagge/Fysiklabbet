@@ -63,6 +63,30 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'tokamak',
+    term: 'Tokamak',
+    former: ['tokamak', 'tokamaken', 'tokamaker', 'tokamakerna', 'tokamakreaktor', 'tokamakreaktorn', 'tokamakreaktorer'],
+    kort: 'En ringformad fusionsreaktor där ett plasma på många miljoner grader hålls svävande av magnetfält, så att det aldrig rör vid väggarna.',
+    relaterade: ['plasma', 'karnfusion', 'landaudampning'],
+    body: [
+      { type: 'p', html: 'För att atomkärnor av väte ska smälta samman och frigöra energi måste vätet vara så varmt att elektronerna slitits loss och gasen blivit ett plasma, och det behöver vara hundra miljoner grader eller mer. Inget material tål att röra vid något så hett. Plasmat består däremot av laddade partiklar, och laddade partiklar kan styras av magnetfält: de skruvar sig runt fältlinjerna i stället för att flyga rakt ut. En tokamak utnyttjar det. Plasmat hålls i en ring, formad som en munk, och starka spolar runt ringen ger ett magnetfält som går varvet runt.' },
+      { type: 'p', html: 'Ett fält som bara går runt ringen räcker ändå inte, för då driver plasmat utåt mot väggen. Därför låter man också en kraftig elektrisk ström, ofta en miljon ampere eller mer, gå runt i själva plasmat. Strömmen skapar ett eget magnetfält, och tillsammans blir fältlinjerna vridna som gängorna på en skruv. De vridna fältlinjerna håller plasmat på plats. Strömmen drivs oftast av induktion: en spole mitt i ringen fungerar som primärlindning i en transformator och plasmaringen som sekundärlindning. Eftersom strömmen i spolen inte kan ändras hur länge som helst kan en sådan tokamak bara köras i pulser, och därför letar forskarna efter andra sätt att driva strömmen, till exempel med radiovågor.' },
+      { type: 'p', html: 'Namnet är en rysk förkortning av ungefär ”toroidformad kammare med magnetspolar”, och konstruktionen utvecklades i Sovjetunionen på 1950- och 60-talen. I dag finns tokamaker i bland annat USA, Europa, Kina, Japan och Sydkorea, och den största hittills, ITER, byggs i Frankrike. Ett annat sätt att hålla plasmat i en ring är stellaratorn, där fältlinjerna i stället vrids av krångligt formade spolar och ingen ström i plasmat behövs.' }
+    ]
+  },
+  {
+    id: 'landaudampning',
+    term: 'Landaudämpning',
+    former: ['landaudämpning', 'landaudämpningen'],
+    kort: 'När en våg i ett plasma lämnar över energi till de laddade partiklar som rör sig ungefär lika fort som vågen, ungefär som när en surfare får fart av en havsvåg.',
+    relaterade: ['plasma', 'tokamak'],
+    body: [
+      { type: 'p', html: 'En surfare som ligger stilla i vattnet får inte mycket hjälp av en våg som sveper förbi. Den som paddlar ungefär lika fort som vågen kan däremot åka med den länge och få fart. Något liknande händer i ett plasma, en gas av fria elektroner och joner. En elektrisk våg som rör sig genom plasmat knuffar på de partiklar den passerar, men bara de partiklar som rör sig nästan lika fort som vågen hinner påverkas ordentligt. De hamnar i takt med vågen och kan ta upp energi från den.' },
+      { type: 'p', html: 'I ett plasma finns både partiklar som är lite långsammare än vågen och sådana som är lite snabbare. De långsamma får fart av vågen och tar energi, de snabba bromsas och ger energi. Eftersom det oftast finns fler långsamma än snabba partiklar blir nettoeffekten att vågen förlorar energi och dämpas, utan att partiklarna krockar med varandra. Det var den sovjetiske fysikern Lev Landau som visade det matematiskt 1946, och resultatet var länge omstritt eftersom ingen friktion verkade behövas.' },
+      { type: 'p', html: 'Landaudämpning används i fusionsforskningen för att värma plasmat och för att driva elektrisk ström i det. Skickar man in radiovågor som huvudsakligen färdas åt ett håll runt en ringformad reaktor får elektronerna en knuff åt samma håll, och då uppstår en ström. Samma fenomen dämpar också vågor i rymdens plasma, till exempel i solvinden.' }
+    ]
+  },
+  {
     id: 'metalins',
     term: 'Metalins',
     former: ['metalins', 'metalinsen', 'metalinser', 'metalinserna'],
@@ -1494,7 +1518,7 @@ window.BEGREPP = [
   {
     id: 'plasma',
     term: 'Plasma',
-    former: ['plasma', 'plasmat', 'plasman', 'plasmamoln', 'plasmamolnet', 'plasmamolnen'],
+    former: ['plasma', 'plasmat', 'plasman', 'fusionsplasma', 'fusionsplasmat', 'plasmamoln', 'plasmamolnet', 'plasmamolnen'],
     kort: 'Materiens fjärde tillstånd: en gas så energirik att elektronerna slitits loss från sina atomer. Nästan all synlig materia i universum — stjärnorna — är plasma.',
     body: [
       { type: 'p', html: 'Fast form, vätska, gas — och så plasma. Värmer man en gas tillräckligt, eller utsätter den för starka elektriska fält, slås elektronerna loss från atomerna. Kvar blir en virvlande blandning av fria elektroner och positivt laddade joner. Den blandningen beter sig helt annorlunda än en vanlig gas: den leder elektrisk ström utmärkt, och den både påverkas av och skapar egna magnetfält, vilket ger plasma ett rikt och ofta dramatiskt beteende.' },

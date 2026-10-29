@@ -561,15 +561,17 @@
                     {show.krafter && (
                         <g>
                             {(() => {
-                                // står klossen på bänken verkar F_N i stödytan, lika stor som F_G och på samma linje
-                                const plant = st.theta < 0.002 || st.liggande, d = plant ? 8 : 0;
+                                // står klossen på bänken verkar F_N i stödytan, lika stor som F_G. Tyngdkraften
+                                // utgår alltid från tyngdpunkten; normalkraften flyttas så mycket åt sidan
+                                // så att pilarna inte ritas ovanpå varandra
+                                const plant = st.theta < 0.002 || st.liggande, d = plant ? 11 : 0;
                                 const xs = L.horn.map(P).map((q) => q[0]); const xr = Math.max(...xs) + 14, xl = Math.min(...xs) - 14;
                                 return <g>
-                                    <Pil x1={tpS[0] - d} y1={tpS[1]} x2={tpS[0] - d} y2={tpS[1] + 70} color={COL.tyngd} width={4} edge />
-                                    <line x1={xr - 6} y1={tpS[1] + 50} x2={tpS[0] - d + 4} y2={tpS[1] + 50} stroke={COL.tyngd} strokeWidth="1" opacity="0.6" />
+                                    <Pil x1={tpS[0]} y1={tpS[1]} x2={tpS[0]} y2={tpS[1] + 70} color={COL.tyngd} width={4} edge />
+                                    <line x1={xr - 6} y1={tpS[1] + 50} x2={tpS[0] + 4} y2={tpS[1] + 50} stroke={COL.tyngd} strokeWidth="1" opacity="0.6" />
                                     <Bet x={xr} y={tpS[1] + 56} sym="F" idx="G" color={COL.tyngd} size={18} />
-                                    {plant && <Pil x1={tpS[0] + d} y1={BANK_Y} x2={tpS[0] + d} y2={BANK_Y - 70} color={COL.norm} width={4} edge />}
-                                    {plant && <line x1={xl + 6} y1={BANK_Y - 52} x2={tpS[0] + d - 4} y2={BANK_Y - 52} stroke={COL.norm} strokeWidth="1" opacity="0.6" />}
+                                    {plant && <Pil x1={tpS[0] - d} y1={BANK_Y} x2={tpS[0] - d} y2={BANK_Y - 70} color={COL.norm} width={4} edge />}
+                                    {plant && <line x1={xl + 6} y1={BANK_Y - 52} x2={tpS[0] - d - 4} y2={BANK_Y - 52} stroke={COL.norm} strokeWidth="1" opacity="0.6" />}
                                     {plant && <Bet x={xl} y={BANK_Y - 46} sym="F" idx="N" color={COL.norm} size={18} anchor="end" />}
                                 </g>; })()}
                         </g>

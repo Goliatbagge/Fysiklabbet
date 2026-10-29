@@ -71,7 +71,7 @@
         .scene-wrap {
             position: relative;
             width: 100%;
-            aspect-ratio: 1000 / 660;
+            aspect-ratio: 1000 / 720;
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid rgba(15,22,32,0.18);
@@ -434,10 +434,10 @@
         }
 
         // ════════════════════════════════════════════════════════
-        //  SCENENS GEOMETRI (viewBox 1000 × 660)
+        //  SCENENS GEOMETRI (viewBox 1000 × 720)
         // ════════════════════════════════════════════════════════
-        const VB_W = 1000, VB_H = 660;
-        const GOLV = 590, S = 250, FSK = 2;
+        const VB_W = 1000, VB_H = 720;      // under golvet finns plats för tyngdkraftspilen när vikten står på golvet
+        const GOLV = 590, S = 250, FSK = 3.5;
         const HANG_Y = 430;                 // de hängande vikternas underkant vid start (bordet)
         const BORD_X0 = 190, BORD_X1 = 630, BORD_Y = 246;
         const TR_R = 13, TR_Y = 246, TR_V = 176, TR_H = 644;      // trissorna vid bordet
@@ -473,6 +473,31 @@
                 }
             });
             return ut;
+        }
+
+        // Hur långt systemet hinner röra sig innan något tar stopp: den sjunkande
+        // vikten når golvet, den stigande vikten (eller dynamometern ovanför den)
+        // når sin trissa, eller klossen kör in i dynamometern framför sig.
+        // Rörelsen går åt det håll som de hängande vikterna drar.
+        function stracka(u, kr) {
+            const driv = kr.reduce((s, k) => s + (k.typ === 'hang' ? k.sida * k.m : 0), 0);
+            const d = Math.sign(driv) || 1;
+            const lim = [];
+            kr.forEach((k, i) => {
+                if (k.typ === 'hang') {
+                    const h = viktMatt(k.m).h;
+                    const under = u === 'atwood' ? 440 : HANG_Y;
+                    if (k.sida * d > 0) lim.push((u === 'atwood' ? GOLV - 8 : GOLV) - under);
+                    else if (u === 'atwood') lim.push(under - h - (i === 1 ? 108 + 6 : 14) - AT_Y);
+                    else lim.push(under - h - (TR_Y + TR_R + 6));
+                } else {
+                    // dynamometern i snöret framför klossen tar DYN_L + 10 px innan trissan
+                    const v0 = u === 'tre' ? 368 : 262;
+                    if (d > 0) lim.push(TR_H - TR_R - 4 - (DYN_L + 10) - (v0 + VAGN_W));
+                    else lim.push(v0 - (TR_V + 14 + DYN_L + 10));
+                }
+            });
+            return Math.floor(Math.min(...lim) / S * 100) / 100;
         }
 
         // ════════════════════════════════════════════════════════
@@ -556,26 +581,53 @@
             );
         };
 
-        // Liten dynamometer i snöret: lodrät eller vågrät, med avläsningen bredvid.
-        const SnoreDyn = ({ x, y, lodrat, F, etikett }) => {
-            const L = 78, B = 16, ut = 1.2 * Math.min(F, 35);
+        // Dynamometer i snöret, ritad som en riktig fjädervåg: en ring i den ena
+        // änden, hylsan med fjädern, skalstången som dras ut (längre ju större
+        // kraft) och kroken i den andra änden, där snörets ögla hänger.
+        // Lokalt ligger ringen i origo och kroken åt +x; krok = 'h' (höger),
+        // 'v' (vänster) eller 'ned' (lodrät, kroken nedåt). Kroken böjer sig
+        // bort från bordet. Längd DYN_L.
+        const DYN_SK = 1.15, DYN_L = Math.round(82 * DYN_SK);    // ritas i 82 px och skalas upp
+        const SnoreDyn = ({ x, y, lodrat, F, etikett, krok = 'h' }) => {
+            const ut = 4 + 0.55 * Math.min(Math.max(F, 0), 30);       // skalstången, 4–20 px
+            const xs = 46;                                            // hylsans ände
+            const xk = xs + ut;                                       // krokens fäste
+            const ticks = [];
+            for (let n = 0; n * 0.55 * 5 <= ut - 4 + 1e-9; n++) ticks.push(xs + 2 + n * 0.55 * 5);
+            const kropp = (
+                <g>
+                    {/* snöret till ringen */}
+                    <line x1="-3" y1="0" x2="2" y2="0" stroke="#5b4a3a" strokeWidth="1.8" />
+                    <circle cx="7" cy="0" r="5.2" fill="none" stroke="#4b5563" strokeWidth="2.4" />
+                    {/* hylsan */}
+                    <rect x="12" y="-9" width={xs - 12} height="18" rx="4" fill="#e5e9ee" stroke="#5b6470" strokeWidth="1.4" />
+                    <line x1="16" y1="-4" x2={xs - 4} y2="-4" stroke="#9aa3ad" strokeWidth="1" />
+                    <rect x={xs - 3} y="-9" width="3" height="18" fill="#c8324a" />
+                    {/* skalstången */}
+                    <rect x={xs} y="-4" width={ut} height="8" fill="#fde68a" stroke="#a16207" strokeWidth="1" />
+                    {ticks.map((tx, j) => <line key={j} x1={tx} y1="-4" x2={tx} y2="1" stroke="#8f6206" strokeWidth="1" />)}
+                    {/* kroken: J-formad, böjd uppåt, med snörets ögla i */}
+                    <path d={`M ${xk} 0 L ${xk + 5} 0 Q ${xk + 13} 0 ${xk + 13} -7 Q ${xk + 13} -13 ${xk + 7.5} -13 Q ${xk + 3} -13 ${xk + 3} -8.5`}
+                          fill="none" stroke="#374151" strokeWidth="2.4" strokeLinecap="round" />
+                    <ellipse cx={xk + 9} cy="-10.5" rx="3.6" ry="2.6" fill="none" stroke="#5b4a3a" strokeWidth="1.6" />
+                    <line x1={xk + 12} y1="-9" x2="85" y2="0" stroke="#5b4a3a" strokeWidth="1.8" />
+                </g>
+            );
             if (lodrat) {
                 return (
                     <g>
-                        <rect x={x - B / 2} y={y} width={B} height={L} rx="4" fill="#e5e9ee" stroke="#7b8594" strokeWidth="1.3" />
-                        <rect x={x - B / 2} y={y + 6} width={B} height="6" fill="#c8324a" opacity="0.85" />
-                        <rect x={x - 3.5} y={y + L} width="7" height={Math.max(1, ut * 0.35)} fill="#fde68a" stroke="#a16207" strokeWidth="0.8" />
-                        <text x={x + 16} y={y + L / 2 + 6} fontSize="16" fontWeight="700" fill="#374151" fontFamily="'JetBrains Mono', monospace">{fmt(F, 1)} N</text>
-                        {etikett && <text x={x + 16} y={y + L / 2 - 14} fontSize="12" fill="rgba(15,22,32,0.6)" fontFamily="Poppins, sans-serif">{etikett}</text>}
+                        <g transform={`translate(${x} ${y}) rotate(90) scale(${DYN_SK})`}>{kropp}</g>
+                        <text x={x + 24} y={y + 40} fontSize="16" fontWeight="700" fill="#374151" fontFamily="'JetBrains Mono', monospace">{fmt(F, 1)} N</text>
+                        {etikett && <text x={x + 24} y={y + 20} fontSize="12" fill="rgba(15,22,32,0.6)" fontFamily="Poppins, sans-serif">{etikett}</text>}
                     </g>
                 );
             }
+            const tr = krok === 'v' ? `translate(${x + DYN_L} ${y}) scale(${-DYN_SK} ${DYN_SK})` : `translate(${x} ${y}) scale(${DYN_SK})`;
             return (
                 <g>
-                    <rect x={x} y={y - B / 2} width={L} height={B} rx="4" fill="#e5e9ee" stroke="#7b8594" strokeWidth="1.3" />
-                    <rect x={x + L - 12} y={y - B / 2} width="6" height={B} fill="#c8324a" opacity="0.85" />
-                    <text x={x + L / 2} y={y - 16} textAnchor="middle" fontSize="16" fontWeight="700" fill="#374151" fontFamily="'JetBrains Mono', monospace">{fmt(F, 1)} N</text>
-                    {etikett && <text x={x + L / 2} y={y - 34} textAnchor="middle" fontSize="12" fill="rgba(15,22,32,0.6)" fontFamily="Poppins, sans-serif">{etikett}</text>}
+                    <g transform={tr}>{kropp}</g>
+                    <text x={x + DYN_L / 2} y={y - 22} textAnchor="middle" fontSize="16" fontWeight="700" fill="#374151" fontFamily="'JetBrains Mono', monospace">{fmt(F, 1)} N</text>
+                    {etikett && <text x={x + DYN_L / 2} y={y - 40} textAnchor="middle" fontSize="12" fill="rgba(15,22,32,0.6)" fontFamily="Poppins, sans-serif">{etikett}</text>}
                 </g>
             );
         };
@@ -583,7 +635,7 @@
         // ════════════════════════════════════════════════════════
         //  SCENEN
         // ════════════════════════════════════════════════════════
-        const Scen = ({ u, kr, st, dyn, S_, sel, setSel, show, svgRef, dolj, ljusV, hallen }) => {
+        const Scen = ({ u, kr, st, dyn, S_, sel, setSel, show, svgRef, dolj, ljusV, hallen, s, mu }) => {
             const g = geometri(u, kr, st.x);
             // Spännkraften i det vågräta snöret över bordet: när spärren håller vid
             // den lätta viktens trissa är det den tunga viktens tyngd.
@@ -594,13 +646,12 @@
 
             // ── snören ──
             if (atwood) {
-                g.forEach((k) => snoren.push(<line key={'s' + k.idx} x1={k.linjeX} y1={AT_Y} x2={k.linjeX} y2={k.krok.y} stroke="#5b4a3a" strokeWidth="1.8" />));
+                g.forEach((k, i) => snoren.push(<line key={'s' + k.idx} x1={k.linjeX} y1={AT_Y} x2={k.linjeX} y2={i === 1 ? k.krok.y - 104 : k.krok.y} stroke="#5b4a3a" strokeWidth="1.8" />));
                 // dynamometern hänger i snöret direkt ovanför den högra vikten
                 const h = g[1];
-                dyner.push(<g key="d"><rect x={h.linjeX - 10} y={h.krok.y - 96} width="20" height="96" fill="url(#vagg)" />
-                    <line x1={h.linjeX} y1={h.krok.y - 96} x2={h.linjeX} y2={h.krok.y - 88} stroke="#5b4a3a" strokeWidth="1.8" />
-                    <SnoreDyn x={h.linjeX} y={h.krok.y - 88} lodrat F={dolj ? 0 : S_[1]} etikett={dolj ? 'dynamometer: ?' : null} />
-                    <line x1={h.linjeX} y1={h.krok.y - 10} x2={h.linjeX} y2={h.krok.y} stroke="#5b4a3a" strokeWidth="1.8" /></g>);
+                dyner.push(<g key="d">
+                    <SnoreDyn x={h.linjeX} y={h.krok.y - 104} lodrat F={dolj ? 0 : S_[1]} etikett={dolj ? 'dynamometer: ?' : null} />
+                    <line x1={h.linjeX} y1={h.krok.y - 104 + DYN_L + 2} x2={h.linjeX} y2={h.krok.y} stroke="#5b4a3a" strokeWidth="1.8" /></g>);
             } else {
                 const vanster = { x: TR_V, y: SNORE_Y }, hoger = { x: TR_H, y: SNORE_Y };
                 const vagn = g.find((k) => k.typ === 'vagn');
@@ -609,15 +660,17 @@
                 if (u === 'vagn') segment.push([vagn.krokH, hoger, 1]);
                 if (u === 'tre') { segment.push([vanster, vagn.krokV, 0]); segment.push([vagn.krokH, hoger, 2]); }
                 segment.forEach(([a, b, i], j) => {
-                    snoren.push(<line key={'h' + j} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="#5b4a3a" strokeWidth="1.8" />);
                     // dynamometern sitter i det vågräta snöret och följer med det
                     let dx;
                     if (u === 'bord') dx = 371 + st.x * S;
-                    else if (a === vagn.krokH) dx = Math.min(a.x + 70, b.x - 92);
-                    else dx = Math.max(b.x - 70 - 78, a.x + 14);
+                    else if (a === vagn.krokH) dx = Math.min(a.x + 70, b.x - DYN_L - 10);
+                    else dx = Math.max(b.x - 54 - DYN_L, a.x + 14);
+                    snoren.push(<line key={'h' + j} x1={a.x} y1={a.y} x2={dx} y2={a.y} stroke="#5b4a3a" strokeWidth="1.8" />);
+                    snoren.push(<line key={'hb' + j} x1={dx + DYN_L} y1={a.y} x2={b.x} y2={b.y} stroke="#5b4a3a" strokeWidth="1.8" />);
                     const F = u === 'bord' ? Fbord : S_[i];
-                    dyner.push(<g key={'d' + j}><rect x={dx - 2} y={SNORE_Y - 4} width="82" height="8" fill="#ece3d2" />
-                        <SnoreDyn x={dx} y={SNORE_Y} F={dolj ? 0 : F} etikett={dolj ? '?' : (u === 'tre' ? `snöre ${i === 0 ? 1 : 2}` : null)} /></g>);
+                    const krok = u === 'tre' && i === 0 ? 'v' : 'h';
+                    dyner.push(<g key={'d' + j}>
+                        <SnoreDyn x={dx} y={SNORE_Y} F={dolj ? 0 : F} krok={krok} etikett={dolj ? '?' : (u === 'tre' ? `snöre ${i === 0 ? 1 : 2}` : null)} /></g>);
                 });
                 g.filter((k) => k.typ === 'hang').forEach((k) => snoren.push(
                     <line key={'v' + k.idx} x1={k.linjeX} y1={TR_Y} x2={k.linjeX} y2={k.krok.y} stroke="#5b4a3a" strokeWidth="1.8" />));
@@ -629,7 +682,7 @@
                     <g key={i} onClick={() => setSel(i)} style={{ cursor: 'pointer' }}>
                         <rect x={k.x} y={k.y} width={k.w} height={BORD_Y - k.y} rx="3" fill="#c98d4f" stroke="#7a4d22" strokeWidth="1.8" />
                         {[0.3, 0.62].map((t, j) => <path key={j} d={`M ${k.x + 4} ${k.y + (BORD_Y - k.y) * t} q ${k.w * 0.35} ${-3 + j * 3} ${k.w - 8} 1`} fill="none" stroke="#9c6430" strokeWidth="1" opacity="0.55" />)}
-                        <text x={k.x + 2} y={k.y - 8} textAnchor="start" fontSize="14" fontWeight="700" fill="#1e3a5f" fontFamily="Poppins, sans-serif">{fmt(k.m, 1)} kg</text>
+                        <text x={k.x + k.w / 2 - 10} y={k.y - 8} textAnchor="end" fontSize="14" fontWeight="700" fill="#1e3a5f" fontFamily="Poppins, sans-serif">{fmt(k.m, 1)} kg</text>
                     </g>
                 ) : (
                     <g key={i} onClick={() => setSel(i)} style={{ cursor: 'pointer' }}>
@@ -716,7 +769,7 @@
             let gx1 = Math.max(...valdaG.map((k) => k.x + k.w)) + 14, gy1 = Math.max(...valdaG.map((k) => k.y + k.h)) + 14;
             if (sel === 'hela') {
                 if (atwood) { gy0 = Math.min(gy0, AT_Y - AT_R - 10); }
-                else { gx0 = Math.min(gx0, TR_V - TR_R - 22); gx1 = Math.max(gx1, TR_H + TR_R + 22); gy0 = Math.min(gy0, SNORE_Y - 30); }
+                else { gx0 = Math.min(gx0, TR_V - TR_R - 22); gx1 = Math.max(gx1, TR_H + TR_R + 22); gy0 = Math.min(gy0, SNORE_Y - (u === 'tre' ? 62 : 46)); }
             }
             if (valdaG.some((k) => k.typ === 'vagn')) { gy1 = Math.max(gy1, BORD_Y + 2); if (sel !== 'hela') gy0 = Math.min(gy0, valdaG[0].y - 44); }
 
@@ -730,9 +783,10 @@
             const SX0 = 790, SBR = Math.min(46, 190 / staplar.length - 10), SY1 = 520, SH = 260;
 
             // ── ljusgrinden ──
-            const fallande = g.find((k) => k.typ === 'hang' && k.sida > 0);
-            const slutY = (atwood ? 440 : HANG_Y) + UPPST[u].s * S;    // den sjunkande viktens underkant i slutläget
-            const grindY = slutY - 9;                                  // strålen precis där farten mäts
+            const riktD = Math.sign(dyn.driv) || 1;
+            const fallande = g.find((k) => k.typ === 'hang' && k.sida * riktD > 0);
+            const slutY = (atwood ? 440 : HANG_Y) + s * S;             // den sjunkande viktens underkant i slutläget
+            const grindY = slutY - 18;                                 // strålen 9 px ovanför slutläget, där farten mäts
 
             return (
                 <svg ref={svgRef} viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet" role="img"
@@ -772,12 +826,19 @@
                         </g>
                     )}
 
+                    {!atwood && u !== 'bord' && (
+                        <text x={(BORD_X0 + BORD_X1) / 2} y={BORD_Y + 122} textAnchor="middle" fontSize="14" fill="rgba(15,22,32,0.7)" fontFamily="Poppins, sans-serif">
+                            {mu > 0 ? <tspan>friktionstal <tspan fontStyle="italic">μ</tspan> = {fmt(mu, 2)}</tspan> : <tspan>friktionsfritt bord, <tspan fontStyle="italic">μ</tspan> = 0</tspan>}
+                        </text>
+                    )}
+
                     {/* ljusgrinden under den fallande vikten */}
                     {fallande && (
                         <g>
-                            <rect x={fallande.linjeX - 32} y={slutY} width="64" height="7" rx="2" fill="#4b5563" />
                             <rect x={fallande.linjeX - 46} y={grindY} width="8" height="18" fill="#374151" />
                             <rect x={fallande.linjeX + 38} y={grindY} width="8" height="18" fill="#374151" />
+                            {/* stativet ned till golvet */}
+                            {[-43, 41].map((dx) => <rect key={dx} x={fallande.linjeX + dx} y={grindY + 18} width="2.5" height={Math.max(0, GOLV - grindY - 18)} fill="#6b7280" />)}
                             <line x1={fallande.linjeX - 38} y1={grindY + 9} x2={fallande.linjeX + 38} y2={grindY + 9} stroke="#ef4444" strokeWidth="1.2" strokeDasharray="3 3" opacity="0.8" />
                             <text x={fallande.linjeX - 54} y={grindY + 14} textAnchor="end" fontSize="13" fill={COL.ink} fontFamily="Poppins, sans-serif">
                                 {ljusV != null ? `ljusgrind: ${fmt(ljusV, 2)} m/s` : 'ljusgrind'}</text>
@@ -832,11 +893,11 @@
 
                     {/* avläsningen */}
                     <g fontFamily="Poppins, sans-serif" fontSize="16" fill={COL.ink}>
-                        <text x="40" y="635"><tspan fontStyle="italic">a</tspan> = {dolj ? '?' : `${fmt(Math.abs(dyn.a), 2)} m/s²`}</text>
-                        <text x="230" y="635"><tspan fontStyle="italic">v</tspan> = {fmt(Math.abs(st.v), 2)} m/s</text>
-                        <text x="410" y="635"><tspan fontStyle="italic">t</tspan> = {fmt(st.t, 2)} s</text>
-                        <text x="770" y="635">fallhöjd <tspan fontStyle="italic">s</tspan> = {fmt(UPPST[u].s, 2)} m</text>
-                        <text x="560" y="635"><tspan fontStyle="italic">m</tspan><tspan fontSize="11" dy="4">tot</tspan><tspan dy="-4"> = {fmt(kr.reduce((s, k) => s + k.m, 0), 2)} kg</tspan></text>
+                        <text x="40" y="700"><tspan fontStyle="italic">a</tspan> = {dolj ? '?' : `${fmt(Math.abs(dyn.a), 2)} m/s²`}</text>
+                        <text x="230" y="700"><tspan fontStyle="italic">v</tspan> = {fmt(Math.abs(st.v), 2)} m/s</text>
+                        <text x="410" y="700"><tspan fontStyle="italic">t</tspan> = {fmt(st.t, 2)} s</text>
+                        <text x="770" y="700">fallhöjd <tspan fontStyle="italic">s</tspan> = {fmt(s, 2)} m</text>
+                        <text x="560" y="700"><tspan fontStyle="italic">m</tspan><tspan fontSize="11" dy="4">tot</tspan><tspan dy="-4"> = {fmt(kr.reduce((s, k) => s + k.m, 0), 2)} kg</tspan></text>
                     </g>
                 </svg>
             );
@@ -1008,7 +1069,7 @@
             const [m1, setM1] = useState(1);
             const [m2, setM2] = useState(3);
             const [mv, setMv] = useState(1);
-            const [mu, setMu] = useState(0);
+            const [mu, setMu] = useState(0.3);
             const [sel, setSelRaw] = useState('hela');
             const [show, setShow] = useState({ krafter: true, ultra: true });
             const [togglesOpen, setTogglesOpen] = useState(true);
@@ -1031,10 +1092,19 @@
 
             const kr = kroppar(u, m1, m2, mv);
             const harVagn = u === 'vagn' || u === 'tre';
-            const cfg = { kroppar: kr, mu: harVagn ? mu : 0, s: UPPST[u].s };
+            const cfg = { kroppar: kr, mu: harVagn ? mu : 0, s: stracka(u, kr) };
             cfgRef.current = cfg;
             if (!stRef.current) stRef.current = M.nytt(cfg);
             const setSel = (s) => setSelRaw(s);
+            // Klossen får en realistisk friktion och massor där krafterna syns i skala.
+            const START = { bord: { m1: 1, m2: 3 }, atwood: { m1: 1, m2: 1.5 }, vagn: { m2: 1, mv: 2, mu: 0.3 }, tre: { m1: 1, m2: 2, mv: 2, mu: 0.2 } };
+            const valjU = (k) => {
+                setU(k);
+                const s0 = START[k];
+                if (s0.m1) setM1(s0.m1);
+                setM2(s0.m2);
+                if (s0.mv) { setMv(s0.mv); setMu(s0.mu); }
+            };
 
             const nollstall = () => { stRef.current = M.nytt(cfgRef.current); lastRef.current = null; setFrame((n) => n + 1); };
             useEffect(() => { if (!korRef.current) nollstall(); }, [u, m1, m2, mv, mu]);
@@ -1096,7 +1166,8 @@
             function ratta() {
                 const { svar, t } = gissaRef.current;
                 gissaRef.current = null;
-                const c = { kroppar: kroppar(t.u, t.m1, t.m2, t.mv), mu: t.mu, s: UPPST[t.u].s };
+                const kt = kroppar(t.u, t.m1, t.m2, t.mv);
+                const c = { kroppar: kt, mu: t.mu, s: stracka(t.u, kt) };
                 const d = M.dynamik(c, 0);
                 const Sv = M.spannkrafter(c, d.a);
                 const nara = (x, y) => Math.abs(x - y) <= Math.max(0.03 * Math.abs(y), 0.05);
@@ -1145,7 +1216,7 @@
             const dyn = hallen ? { ...dynRor, a: 0, Ff: 0, statisk: true } : dynRor;
             const S_ = M.spannkrafter(cfg, dyn.a);
             // i tre-uppställningen: snöre 1 = vikt 1, snöre 2 = vikt 2 (index 0 och 2)
-            const ljusV = st.klar && st.orsak === 'mal' && st.x > 0 ? Math.abs(st.v) : null;
+            const ljusV = st.klar && st.orsak === 'mal' && st.x !== 0 ? Math.abs(st.v) : null;
             const tShow = (key) => setShow((sh) => ({ ...sh, [key]: !sh[key] }));
             const lastReglage = kor || !!gissa;
             const pagar = st.t > 0 && !st.klar;
@@ -1222,7 +1293,7 @@
                         <main className="flex flex-col lg:flex-row gap-6">
                             <div className="lg:w-2/3 xl:w-3/4 order-1">
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
-                                    <Scen u={u} kr={kr} st={st} dyn={dyn} S_={S_} sel={sel} setSel={setSel} show={show} svgRef={svgRef} dolj={dolj} ljusV={ljusV} hallen={hallen} />
+                                    <Scen u={u} kr={kr} st={st} dyn={dyn} S_={S_} sel={sel} setSel={setSel} show={show} svgRef={svgRef} dolj={dolj} ljusV={ljusV} hallen={hallen} s={cfg.s} mu={cfg.mu} />
                                     {sceneToggles()}
                                     <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
                                         {isFullscreen ? (
@@ -1247,7 +1318,7 @@
                                     <div className="flbl mb-2" style={{ textAlign: 'left' }}>Uppställning</div>
                                     <div className="forsok-lista mb-3">
                                         {Object.entries(UPPST).map(([k, v]) => (
-                                            <button key={k} className={`forsok ${u === k ? 'vald-u' : ''}`} disabled={lastReglage} onClick={() => setU(k)}
+                                            <button key={k} className={`forsok ${u === k ? 'vald-u' : ''}`} disabled={lastReglage} onClick={() => valjU(k)}
                                                     style={u === k ? { background: 'var(--lab-ink)', color: 'var(--lab-bg)' } : undefined}>{v.namn}</button>
                                         ))}
                                     </div>

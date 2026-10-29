@@ -502,7 +502,7 @@
         // ritar om scenen när reglagen ändras.
         function BernoulliLive(props) {
             const gRef = useRef(null);
-            const markRef = useRef([]);
+            const markRef = useRef([]);          // { x, n }: skivans bakkant och löpnummer
             const dotsRef = useRef(null);
             const live = useRef(props);
             live.current = props;
@@ -519,17 +519,20 @@
                     const fart = (x) => Q / M.area(M.diameter(g, Math.max(0, Math.min(B.L, x)))) * SLAPP;
                     // markörerna för vattenskivorna: en ny när den senaste har hunnit en skivbredd in
                     const m = markRef.current;
-                    for (let i = 0; i < m.length; i++) m[i] += fart(m[i]) * dt;
-                    while (m.length && m[0] > B.L + 0.05) m.shift();
-                    if (!m.length || m[m.length - 1] >= 0) m.push((m.length ? m[m.length - 1] : B.L) - 0.045);
+                    for (let i = 0; i < m.length; i++) m[i].x += fart(m[i].x) * dt;
+                    while (m.length > 1 && m[1].x > B.L + 0.05) m.shift();
+                    if (!m.length) m.push({ x: B.L, n: 0 });
+                    while (m[m.length - 1].x >= 0) m.push({ x: m[m.length - 1].x - 0.045, n: m[m.length - 1].n + 1 });
                     for (const d of dotsRef.current) { d.x += fart(d.x) * dt; if (d.x > B.L) d.x -= B.L; }
                     // trettio bilder i sekunden räcker för vattnet
                     if (syns && gRef.current && ts - sist > 32) {
                         sist = ts;
                         const Yc = (x) => B.yc - B.hs * M.hojd(g, x), R = (x) => M.diameter(g, x) * B.ds / 2;
                         let s = '';
-                        if (L.visaSkivor) for (let i = 0; i + 1 < m.length; i += 2) {
-                            const a = Math.max(0, m[i + 1]), b = Math.min(B.L, m[i]);
+                        // skivan mellan markör i och i + 1 fylls när i:s löpnummer är jämnt
+                        if (L.visaSkivor) for (let i = 0; i + 1 < m.length; i++) {
+                            if (m[i].n % 2) continue;
+                            const a = Math.max(0, m[i + 1].x), b = Math.min(B.L, m[i].x);
                             if (b <= a) continue;
                             const o = [], u = [];
                             for (let k = 0; k <= 8; k++) { const x = a + (b - a) * k / 8; o.push(`${Xs(x).toFixed(1)},${(Yc(x) - R(x)).toFixed(1)}`); u.push(`${Xs(x).toFixed(1)},${(Yc(x) + R(x)).toFixed(1)}`); }
@@ -549,7 +552,7 @@
         // ════════════════════════════════════════════════════════
         //  REYNOLDS FÖRSÖK
         // ════════════════════════════════════════════════════════
-        const RY = { x0: 60, x1: 940, yc: 230, noz: 120, prof: 820 };
+        const RY = { x0: 60, x1: 740, yc: 230, noz: 120, prof: 610, kar: 466 };     // kar = vattenytan i karet under mynningen
         const radiePx = (dmm) => 26 + dmm * 2.2;
         const visFart = (v) => 40 + 260 * v / (v + 0.4);        // px/s för medelfarten i bilden
         const logX = (Re) => 80 + (920 - 80) * (Math.log10(Math.max(10, Math.min(1e5, Re))) - 1) / 4;
@@ -584,12 +587,18 @@
                     <rect x={RY.noz - 14} y={top - 92} width="28" height="34" rx="4" fill="#1e3a8a" stroke="#0f1620" strokeWidth="1.4" />
                     <text x={RY.noz + 22} y={top - 70} fontSize="13" fill="#0f1620" fontFamily="'DM Sans', sans-serif">färg</text>
                     {pil}
-                    {/* diametern */}
+                    {/* mynningen: rörets ände med en kant */}
+                    <rect x={RY.x1 - 6} y={top - 7} width="8" height="9" fill="#9aa3ad" stroke="#0f1620" strokeWidth="1.2" />
+                    <rect x={RY.x1 - 6} y={bot - 2} width="8" height="9" fill="#9aa3ad" stroke="#0f1620" strokeWidth="1.2" />
+                    {/* karet som strålen faller ned i */}
+                    <path d={`M 690 ${RY.kar - 16} L 696 ${RY.kar + 30} L 984 ${RY.kar + 30} L 990 ${RY.kar - 16}`} fill="none" stroke="#0f1620" strokeWidth="2" strokeLinejoin="round" />
+                    <path d={`M 693 ${RY.kar} L 696 ${RY.kar + 30} L 984 ${RY.kar + 30} L 987 ${RY.kar} Z`} fill="url(#vatsk)" opacity="0.9" />
+                    {/* diametern, vid rörets början där färgen ännu inte är i vägen */}
                     <g stroke="#0f766e" strokeWidth="1.3">
-                        <line x1={RY.x1 + 18} y1={top} x2={RY.x1 + 18} y2={bot} />
-                        <line x1={RY.x1 + 12} y1={top} x2={RY.x1 + 24} y2={top} /><line x1={RY.x1 + 12} y1={bot} x2={RY.x1 + 24} y2={bot} />
+                        <line x1={RY.x0 + 26} y1={top} x2={RY.x0 + 26} y2={bot} />
+                        <line x1={RY.x0 + 20} y1={top} x2={RY.x0 + 32} y2={top} /><line x1={RY.x0 + 20} y1={bot} x2={RY.x0 + 32} y2={bot} />
                     </g>
-                    <text x={RY.x1 + 18} y={bot + 22} fontSize="14" textAnchor="middle" fill="#0f766e" fontFamily="'DM Sans', sans-serif"><tspan fontStyle="italic">d</tspan> = {fmt(par.d, 0)} mm</text>
+                    <text x={RY.x0 + 20} y={bot + 22} fontSize="14" textAnchor="start" fill="#0f766e" fontFamily="'DM Sans', sans-serif"><tspan fontStyle="italic">d</tspan> = {fmt(par.d, 0)} mm</text>
                     {/* Reynolds tal på en skala */}
                     <g fontFamily="'DM Sans', sans-serif">
                         <rect x={logX(10)} y={548} width={logX(M.RE_LAM) - logX(10)} height="16" fill="rgba(21,128,61,0.35)" />
@@ -610,8 +619,34 @@
                 </svg>
             );
         }
-        // färgen ritas på en canvas ovanpå svg:n, utan att React ritar om
-        function ritaFarg(cv, partiklar, par) {
+        // färgen och den fria strålen ritas på en canvas ovanpå svg:n, utan att React ritar om
+        const STRALE = {                       // vätskans färg i strålen: [r, g, b, täckning när den är laminär]
+            vatten: [180, 220, 244, 0.40], mjolk: [250, 247, 238, 0.92], olja: [238, 208, 112, 0.55], glycerol: [222, 233, 239, 0.40],
+        };
+        const G_PX = 900;                      // tyngdaccelerationen i bilden, px/s²
+        // Strålens mittlinje från mynningen ned till karets yta: kastparabel med
+        // utgångsfarten vm. Strålen smalnar när den faller, eftersom farten ökar
+        // och samma volym per sekund ska passera (diametern ∝ 1/√v).
+        function stralBana(vm, Rp) {
+            const pts = [];
+            const T = Math.sqrt(2 * (RY.kar - RY.yc) / G_PX);
+            let bage = 0;
+            for (let i = 0; i <= 60; i++) {
+                const tt = T * i / 60;
+                const vx = vm, vy = G_PX * tt;
+                const fart = Math.hypot(vx, vy);
+                const x = RY.x1 + vx * tt, y = RY.yc + 0.5 * G_PX * tt * tt;
+                if (i) bage += Math.hypot(x - pts[i - 1].x, y - pts[i - 1].y);
+                // tvärsnittet står lodrätt i mynningen och vrids över två diametrar
+                // till strålens normal, annars viker sig innerkanten när strålen böjer skarpt
+                const w = Math.min(1, bage / (4 * Rp)), ws = w * w * (3 - 2 * w);
+                let nx = ws * (-vy / fart), ny = (1 - ws) + ws * (vx / fart);
+                const nl = Math.hypot(nx, ny); nx /= nl; ny /= nl;
+                pts.push({ x, y, nx, ny, r: Rp * Math.sqrt(vm / fart), s: i / 60 });
+            }
+            return pts;
+        }
+        function ritaFarg(cv, partiklar, par, Re, tid, dolj) {
             const ctx = cv.getContext('2d');
             const r = cv.getBoundingClientRect();
             const dpr = window.devicePixelRatio || 1;
@@ -623,12 +658,66 @@
             const s = Math.min(W / VB_W, Hh / VB_H), ox = (W - VB_W * s) / 2, oy = (Hh - VB_H * s) / 2;
             ctx.setTransform(s, 0, 0, s, ox, oy);
             const Rp = radiePx(par.d);
-            ctx.fillStyle = 'rgba(30,58,138,0.55)';
+            // färgen som mjuka fläckar: tätt i en laminär tråd, utspridd i ett moln när det är turbulent
+            ctx.fillStyle = 'rgba(30,58,138,0.42)';
             for (const p of partiklar) {
                 ctx.beginPath();
-                ctx.arc(p.x, RY.yc + p.y * Rp, 2.6, 0, 2 * Math.PI);
+                ctx.arc(p.x, RY.yc + p.y * Rp, 2.8, 0, 2 * Math.PI);
                 ctx.fill();
             }
+            if (dolj) return;
+            // ── den fria strålen ──
+            // laminär: klar, slät och stilla som en glasstav. Turbulent: vit av
+            // luft som blandas in, med ojämna kanter som skakar och stänk runt om.
+            const I = M.regim(Re) === 'overgang' ? M.turbulens(Re) * (0.55 + 0.45 * Math.sin(tid * 2.1)) : M.turbulens(Re);
+            const [cr, cg, cb, tack] = STRALE[par.vatska] || STRALE.vatten;
+            const bana = stralBana(visFart(par.v), Rp);
+            const brus = (k, sida) => I * (0.22 * Math.sin(k * 0.9 + tid * 17 + sida * 2.3) + 0.16 * Math.sin(k * 2.3 - tid * 23 + sida)
+                                          + 0.18 * (Math.random() * 2 - 1));
+            const kant = (sida) => bana.map((q, k) => {
+                const rr = q.r * (1 + (k === 0 ? 0 : brus(k, sida) * (0.4 + q.s)));
+                return [q.x + sida * q.nx * rr, q.y + sida * q.ny * rr];
+            });
+            const ov = kant(-1), un = kant(1);
+            const vit = Math.min(1, I * 1.1);
+            const mix = (a, b) => Math.round(a + (b - a) * vit);
+            ctx.beginPath();
+            ctx.moveTo(ov[0][0], ov[0][1]);
+            for (const [x, y] of ov) ctx.lineTo(x, y);
+            for (let k = un.length - 1; k >= 0; k--) ctx.lineTo(un[k][0], un[k][1]);
+            ctx.closePath();
+            ctx.fillStyle = `rgba(${mix(cr, 246)},${mix(cg, 249)},${mix(cb, 251)},${(tack + (0.9 - tack) * vit).toFixed(3)})`;
+            ctx.fill();
+            ctx.strokeStyle = `rgba(30,70,110,${(0.45 - 0.25 * vit).toFixed(3)})`;
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+            // glansen längs den laminära strålen: en ljus rand som står still
+            if (vit < 0.95) {
+                ctx.beginPath();
+                bana.forEach((q, k) => { const x = q.x - q.nx * q.r * 0.45, y = q.y - q.ny * q.r * 0.45; if (k) ctx.lineTo(x, y); else ctx.moveTo(x, y); });
+                ctx.strokeStyle = `rgba(255,255,255,${(0.75 * (1 - vit)).toFixed(3)})`;
+                ctx.lineWidth = Math.max(1.5, Rp * 0.12);
+                ctx.lineCap = 'round';
+                ctx.stroke();
+            }
+            // inblandad luft och stänk när strålen är turbulent
+            if (I > 0.05) {
+                const n = Math.round(70 * I);
+                for (let k = 0; k < n; k++) {
+                    const q = bana[Math.floor(Math.random() * bana.length)];
+                    const ut = (Math.random() < 0.5 ? -1 : 1) * q.r * (0.3 + Math.random() * 1.1);
+                    ctx.beginPath();
+                    ctx.arc(q.x + q.nx * ut, q.y + q.ny * ut, 1 + Math.random() * 2.2, 0, 2 * Math.PI);
+                    ctx.fillStyle = Math.abs(ut) > q.r ? `rgba(${cr - 60},${cg - 40},${cb - 20},0.45)` : 'rgba(255,255,255,0.85)';
+                    ctx.fill();
+                }
+            }
+            // där strålen slår ned i karet: lugna ringar eller skum
+            const sl = bana[bana.length - 1];
+            ctx.beginPath();
+            ctx.ellipse(sl.x, RY.kar, sl.r + 6 + 22 * I, 3 + 3 * I, 0, 0, 2 * Math.PI);
+            ctx.fillStyle = `rgba(255,255,255,${(0.35 + 0.5 * I).toFixed(3)})`;
+            ctx.fill();
         }
 
         // ════════════════════════════════════════════════════════
@@ -764,7 +853,7 @@
                             if (p.y < -0.96) p.y = -1.92 - p.y;
                         }
                         fargRef.current = P.filter((p) => p.x < RY.x1 - 4).slice(-2600);
-                        if (canvasRef.current) ritaFarg(canvasRef.current, fargRef.current, L.rp);
+                        if (canvasRef.current) ritaFarg(canvasRef.current, fargRef.current, L.rp, L.Re, ts / 1000, L.doljR);
                     }
                     raf = requestAnimationFrame(loop);
                 };
@@ -899,8 +988,8 @@
                         <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Strömning i rör</h1>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
                             Lika mycket vatten måste varje sekund passera genom varje tvärsnitt av röret. Där röret är smalt går vattnet därför fortare, och
-                            då är trycket lägre. Se hur vattenskivorna blir långa och smala i förträngningen och hur vattnet sjunker i standröret ovanför.
-                            Pröva sedan Reynolds försök: släpp ut färg i ett rör och se när strömningen slutar vara jämn och börjar virvla.
+                            då är trycket lägre. De mörka och ljusa banden i röret är vattenskivor som rymmer lika mycket vatten var. Se hur de blir långa och smala i förträngningen och hur vattnet sjunker i standröret ovanför.
+                            Pröva sedan Reynolds försök: släpp ut färg i ett rör och se när strömningen slutar vara jämn och börjar virvla. Strålen ur röret visar samma sak: klar och stilla när strömningen är laminär, vit och oregelbunden när den är turbulent.
                         </p>
 
                         <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>

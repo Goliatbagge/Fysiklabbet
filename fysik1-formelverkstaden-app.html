@@ -101,7 +101,18 @@
         .blad.smal .rad .not { display: none; }
         .blad.smal .mx { font-size: 19px; }
 
-        .opbar { border-top: 1px solid rgba(15,22,32,0.14); padding-top: 9px; margin-top: 6px; }
+        /* knapparna står direkt under den senaste raden, så att blicken inte behöver hoppa */
+        .opbar { padding: 6px 0 4px 36px; }
+        .blad.smal .opbar { padding-left: 0; }
+        .klart-ruta { display: flex; align-items: center; gap: 12px; margin: 10px 0 4px 36px; padding: 12px 16px;
+                      background: #dcfce7; border: 2px solid #15803d; border-radius: 12px; color: #14532d;
+                      font-family: 'DM Sans', sans-serif; font-size: 14.5px; line-height: 1.4; animation: klartIn 0.35s ease-out; }
+        .blad.smal .klart-ruta { margin-left: 0; }
+        .klart-bock { color: #15803d; flex-shrink: 0; }
+        .klart-rubrik { font-size: 22px; font-weight: 800; color: #15803d; line-height: 1.1; margin-bottom: 2px; }
+        .rad.losning { background: rgba(22,163,74,0.10); border-color: rgba(21,128,61,0.45); }
+        @keyframes klartIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+        @media (prefers-reduced-motion: reduce) { .klart-ruta { animation: none; } }
         .opknappar { display: flex; flex-wrap: wrap; gap: 6px; }
         .opk { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; padding: 6px 10px; border-radius: 8px;
                border: 1.5px solid currentColor; background: #fff; cursor: pointer; line-height: 1.1; display: inline-flex; align-items: center; gap: 6px; }
@@ -780,7 +791,7 @@
             const a = M.evalL(rad.vl, V), b = M.evalL(rad.hl, V);
             return Math.abs(a - b) <= 1e-7 * Math.max(1, Math.abs(a), Math.abs(b));
         };
-        const RadJ = ({ rad, nr, vald, onClick, markera, V, doljNot }) => {
+        const RadJ = ({ rad, nr, vald, onClick, markera, V, doljNot, losning }) => {
             const likhet = V && !sann(rad, V) ? '≠' : '=';
             let ekv;
             if (rad.typ === 'op') {
@@ -795,7 +806,7 @@
             const not = rad.typ === 'op' ? <span className="not" style={{ color: OPF[rad.op] }}>{OPNAMN[rad.op].toLowerCase()}{rad.bara && !doljNot ? ', bara i vänster led' : ''}</span>
                       : rad.typ === 'byt' ? <span className="not" style={{ color: OPF.byt }}>byt plats på leden</span> : null;
             return (
-                <div className={`rad ${vald ? 'vald' : ''} ${likhet === '≠' ? 'fel' : ''} ${markera ? 'svarsfel' : ''}`} onClick={onClick}>
+                <div className={`rad ${vald ? 'vald' : ''} ${likhet === '≠' ? 'fel' : ''} ${markera ? 'svarsfel' : ''} ${losning ? 'losning' : ''}`} onClick={onClick}>
                     <span className="nr">{nr}</span>{ekv}{not}
                 </div>
             );
@@ -1094,7 +1105,7 @@
                 ro.observe(el);
                 return () => ro.disconnect();
             }, []);
-            useEffect(() => { const el = raderRef.current; if (el) el.scrollTop = el.scrollHeight; }, [rader.length]);
+            useEffect(() => { const el = raderRef.current; if (el) el.scrollTop = el.scrollHeight; }, [rader.length, op]);
 
             const sista = rader[rader.length - 1];
             const utlost = M.utlost(sista, mal);
@@ -1278,6 +1289,7 @@
             const doljKontroll = gissa && gissa.typ === 'felet' && !svar;
             const valdRad = rader[Math.max(0, Math.min(vald, rader.length - 1))];
             const opKnappar = ['mul', 'div', 'add', 'sub', 'kvad', 'rot', 'byt'];
+            const klar = utlost === 'v' && !gissa && !harFel;
             const verkstad = (
                 <div className={`blad ${smal ? 'smal' : ''}`}>
                     <div className="uttr">
@@ -1288,42 +1300,49 @@
                             {rader.map((r, i) => (
                                 <RadJ key={i} rad={r} nr={i + 1} vald={i === vald} V={doljKontroll ? null : F.varden} doljNot={doljKontroll}
                                       markera={svar && gissa && gissa.typ === 'felet' && svar.i === i && !svar.ratt}
-                                      onClick={() => klickaRad(i)} />
+                                      losning={klar && i === rader.length - 1} onClick={() => klickaRad(i)} />
                             ))}
                             {utlost === 'v' && !gissa && !harFel && (
-                                <div className="meddelande" style={{ color: '#15803d', fontWeight: 600, paddingLeft: 36 }}>
-                                    Klart! <span className="mx" style={{ fontSize: 17 }}><SymBas k={mal} /></span> står ensam i vänster led.
-                                    {rader.some((r) => r.op === 'rot') && (fid === 'tidlos'
-                                        ? <span> Roten ur båda led ger egentligen två lösningar, plus och minus roten. Hastigheten kan vara negativ, och tecknet väljs efter rörelseriktningen. Här visas den positiva roten.</span>
-                                        : <span> <span className="mx" style={{ fontSize: 17 }}><SymBas k="v" /></span> stod i kvadrat, så tecknet försvann. Roten ger hastighetens belopp, farten.</span>)}
+                                <div className="klart-ruta" role="status">
+                                    <svg className="klart-bock" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10" /><path d="M7.5 12.5l3 3 6-6.5" />
+                                    </svg>
+                                    <div>
+                                        <div className="klart-rubrik">Klart!</div>
+                                        <div><span className="mx" style={{ fontSize: 17 }}><SymBas k={mal} /></span> står ensam i vänster led.
+                                        {rader.some((r) => r.op === 'rot') && (fid === 'tidlos'
+                                            ? <span> Roten ur båda led ger egentligen två lösningar, plus och minus roten. Hastigheten kan vara negativ, och tecknet väljs efter rörelseriktningen. Här visas den positiva roten.</span>
+                                            : <span> <span className="mx" style={{ fontSize: 17 }}><SymBas k="v" /></span> stod i kvadrat, så tecknet försvann. Roten ger hastighetens belopp, farten.</span>)}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            {!(gissa && gissa.typ === 'felet') && (
+                                <div className="opbar">
+                                    <div className="opknappar">
+                                        {!klar && opKnappar.map((o) => (
+                                            <button key={o} className={`opk ${op === o ? 'aktiv' : ''}`} disabled={las || (gissa && gissa.typ === 'uttryck')}
+                                                    style={{ color: OPF[o], ...(op === o ? { background: OPF[o] } : {}) }}
+                                                    onClick={() => { setMedd(null); if (o === 'byt' || o === 'kvad' || o === 'rot') gor(o); else setOp(op === o ? null : o); }}>
+                                                <span className="ikon">{OPIKON[o]}</span>{OPNAMN[o]}
+                                            </button>
+                                        ))}
+                                        <button className="opk" style={{ color: 'var(--lab-ink)' }} disabled={las || rader.length <= 1} onClick={angra}>Ångra</button>
+                                    </div>
+                                    {op && !klar && (
+                                        <div className="chips">
+                                            <span className="fraga">{OPMED[op]}</span>
+                                            {chips.map((X, i) => (
+                                                <button key={i} className="chip" style={{ color: OPF[op] }} onClick={() => gor(op, X)}>
+                                                    <span className="mx" style={{ color: 'var(--lab-ink)' }}><XJ X={X} ctx={{}} /></span>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+                                    {medd && <div className="meddelande" style={{ color: medd.fel ? '#dc2626' : 'var(--lab-ink)' }}>{medd.tips && <strong>Tips: </strong>}{medd.text}</div>}
                                 </div>
                             )}
                         </div>
-                        {!(gissa && gissa.typ === 'felet') && (
-                            <div className="opbar">
-                                <div className="opknappar">
-                                    {opKnappar.map((o) => (
-                                        <button key={o} className={`opk ${op === o ? 'aktiv' : ''}`} disabled={las || (gissa && gissa.typ === 'uttryck')}
-                                                style={{ color: OPF[o], ...(op === o ? { background: OPF[o] } : {}) }}
-                                                onClick={() => { setMedd(null); if (o === 'byt' || o === 'kvad' || o === 'rot') gor(o); else setOp(op === o ? null : o); }}>
-                                            <span className="ikon">{OPIKON[o]}</span>{OPNAMN[o]}
-                                        </button>
-                                    ))}
-                                    <button className="opk" style={{ color: 'var(--lab-ink)' }} disabled={las || rader.length <= 1} onClick={angra}>Ångra</button>
-                                </div>
-                                {op && (
-                                    <div className="chips">
-                                        <span className="fraga">{OPMED[op]}</span>
-                                        {chips.map((X, i) => (
-                                            <button key={i} className="chip" style={{ color: OPF[op] }} onClick={() => gor(op, X)}>
-                                                <span className="mx" style={{ color: 'var(--lab-ink)' }}><XJ X={X} ctx={{}} /></span>
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
-                                {medd && <div className="meddelande" style={{ color: medd.fel ? '#dc2626' : 'var(--lab-ink)' }}>{medd.tips && <strong>Tips: </strong>}{medd.text}</div>}
-                            </div>
-                        )}
                     </div>
                     <div className="kontroll">
                         {visaKontroll && !doljKontroll && <Kontrollen rad={valdRad} F={F} mal={mal} bara={!!valdRad.fel && rader.some((r) => r.bara)} />}

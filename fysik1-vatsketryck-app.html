@@ -1461,6 +1461,12 @@
                                     {lage === 'karl' && (
                                         <button className="btn-start w-full mt-2" onClick={vaxlaKran} disabled={!!gissa}>{oppen ? 'Stäng kranarna' : 'Öppna kranarna'}</button>
                                     )}
+                                    {lage === 'karl' && !gissa && Math.max(...nivaer) - Math.min(...nivaer) < 0.002 && (
+                                        <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            {oppen ? 'Nivåerna var redan lika, så inget vatten rinner mellan kärlen. Stäng kranarna och ändra nivån i något kärl, så ser du vattnet jämna ut sig.'
+                                                   : 'Alla kärl har samma nivå, så inget vatten kommer att rinna när kranarna öppnas. Ändra nivån i något kärl först.'}
+                                        </p>
+                                    )}
                                     {lage === 'press' && (
                                         <div className="flex gap-2 mt-2">
                                             <button className="btn-start flex-1" onClick={startKlick} disabled={!!gissa}>{startEtikett}</button>

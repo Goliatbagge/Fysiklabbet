@@ -475,13 +475,51 @@
             return ut;
         }
 
+        // Efterspelet när rörelsen tar tvärstopp. Bara för bilden: mätvärdena står
+        // kvar. Vikten som slår i golvet studsar lätt och vickar, en vikt som
+        // hänger kvar i luften fjädrar i snöret och dinglar som en dämpad pendel
+        // med perioden 2π·√(L/g) för sin snörlängd L. d.t = tid sedan stoppet,
+        // d.v = systemets fart (med tecken) i stoppögonblicket.
+        function dingla(g, u, d) {
+            const t = d.t, fart = Math.abs(d.v);
+            const golv = u === 'atwood' ? GOLV - 8 : GOLV;
+            const piv = u === 'atwood' ? AT_Y : TR_Y;
+            g.forEach((k) => {
+                if (k.typ !== 'hang') return;
+                if (k.y + k.h >= golv - 1) {
+                    const b = Math.min(5, 3.5 * fart) * Math.abs(Math.sin(2 * Math.PI * 3.2 * t)) * Math.exp(-t / 0.22);
+                    k.y -= b; k.krok = { ...k.krok, y: k.krok.y - b };
+                    k.rot = k.sida * Math.min(0.06, 0.04 * fart) * Math.sin(2 * Math.PI * 2.4 * t) * Math.exp(-t / 0.3);
+                    k.rotP = { x: k.x + k.w / 2, y: k.y + k.h };
+                    return;
+                }
+                const vy = k.sida * d.v;                          // + = vikten var på väg nedåt
+                const L = k.krok.y - piv;
+                if (!(L > 4)) return;
+                const w = Math.sqrt(G / (L / S));
+                const th = k.sida * Math.min(0.13, 0.06 * fart) * Math.sin(w * t) * Math.exp(-t / 2.5);
+                const Lb = L + Math.sign(vy) * Math.min(7, 5 * fart) * Math.sin(2 * Math.PI * 2.6 * t) * Math.exp(-t / 0.45);
+                const kx = k.krok.x + Lb * Math.sin(th), ky = piv + Lb * Math.cos(th);
+                k.x += kx - k.krok.x; k.y += ky - k.krok.y;
+                k.krok = { x: kx, y: ky };
+                k.rot = th; k.srot = th; k.rotP = k.krok; k.Lb = Lb;
+            });
+        }
+
         // Hur långt systemet hinner röra sig innan något tar stopp: den sjunkande
         // vikten når golvet, den stigande vikten (eller dynamometern ovanför den)
         // når sin trissa, eller klossen kör in i dynamometern framför sig.
         // Rörelsen går åt det håll som de hängande vikterna drar.
-        function stracka(u, kr) {
+        // granspx ger hur många px systemet kan röra sig från x = 0 åt hållet d
+        // (+1 eller −1 längs x). Från startläget x0 återstår granspx − d · x0 · S.
+        function stracka(u, kr, x0 = 0) {
             const driv = kr.reduce((s, k) => s + (k.typ === 'hang' ? k.sida * k.m : 0), 0);
             const d = Math.sign(driv) || 1;
+            return Math.max(0, Math.floor((granspx(u, kr, d) - d * x0 * S) / S * 100) / 100);
+        }
+        // hur långt vikterna går att dra åt vardera hållet, i m längs x
+        const dragGranser = (u, kr) => [-granspx(u, kr, -1) / S, granspx(u, kr, 1) / S];
+        function granspx(u, kr, d) {
             const lim = [];
             kr.forEach((k, i) => {
                 if (k.typ === 'hang') {
@@ -494,10 +532,10 @@
                     // dynamometern i snöret framför klossen tar DYN_L + 10 px innan trissan
                     const v0 = u === 'tre' ? 368 : 262;
                     if (d > 0) lim.push(TR_H - TR_R - 4 - (DYN_L + 10) - (v0 + VAGN_W));
-                    else lim.push(v0 - (TR_V + 14 + DYN_L + 10));
+                    else lim.push(u === 'tre' ? v0 - (TR_V + 14 + DYN_L + 10) : v0 - (BORD_X0 + 6));   // i Kloss och vikt finns inget snöre bakåt
                 }
             });
-            return Math.floor(Math.min(...lim) / S * 100) / 100;
+            return Math.min(...lim);
         }
 
         // ════════════════════════════════════════════════════════
@@ -606,11 +644,12 @@
                     {/* skalstången */}
                     <rect x={xs} y="-4" width={ut} height="8" fill="#fde68a" stroke="#a16207" strokeWidth="1" />
                     {ticks.map((tx, j) => <line key={j} x1={tx} y1="-4" x2={tx} y2="1" stroke="#8f6206" strokeWidth="1" />)}
-                    {/* kroken: J-formad, böjd uppåt, med snörets ögla i */}
-                    <path d={`M ${xk} 0 L ${xk + 5} 0 Q ${xk + 13} 0 ${xk + 13} -7 Q ${xk + 13} -13 ${xk + 7.5} -13 Q ${xk + 3} -13 ${xk + 3} -8.5`}
-                          fill="none" stroke="#374151" strokeWidth="2.4" strokeLinecap="round" />
-                    <ellipse cx={xk + 9} cy="-10.5" rx="3.6" ry="2.6" fill="none" stroke="#5b4a3a" strokeWidth="1.6" />
-                    <line x1={xk + 12} y1="-9" x2="85" y2="0" stroke="#5b4a3a" strokeWidth="1.8" />
+                    {/* kroken: en liten J-krok vars böj ligger på snörets linje, så
+                        att öglan och vikten hänger rakt i förlängningen av vågen */}
+                    <path d={`M ${xk} 0 Q ${xk + 1.5} 2.6 ${xk + 3.5} 2.6 L ${xk + 4.5} 2.6 Q ${xk + 7} 2.6 ${xk + 7} 0 Q ${xk + 7} -2.6 ${xk + 4.6} -2.6`}
+                          fill="none" stroke="#374151" strokeWidth="1.8" strokeLinecap="round" />
+                    <ellipse cx={xk + 8.4} cy="0" rx="1.9" ry="1.5" fill="none" stroke="#5b4a3a" strokeWidth="1.4" />
+                    <line x1={xk + 10.3} y1="0" x2="85" y2="0" stroke="#5b4a3a" strokeWidth="1.8" />
                 </g>
             );
             if (lodrat) {
@@ -635,8 +674,11 @@
         // ════════════════════════════════════════════════════════
         //  SCENEN
         // ════════════════════════════════════════════════════════
-        const Scen = ({ u, kr, st, dyn, S_, sel, setSel, show, svgRef, dolj, ljusV, hallen, s, mu }) => {
-            const g = geometri(u, kr, st.x);
+        const Scen = ({ u, kr, st, dyn, S_, sel, setSel, show, svgRef, dolj, ljusV, hallen, s, mu, ding, x0 = 0, dra, kanDra }) => {
+            const xs = x0 + st.x;
+            const g = geometri(u, kr, xs);
+            if (ding) dingla(g, u, ding);
+            const grad = (r) => -(r || 0) * 180 / Math.PI;
             // Spännkraften i det vågräta snöret över bordet: när spärren håller vid
             // den lätta viktens trissa är det den tunga viktens tyngd.
             const Fbord = u === 'bord' && hallen ? Math.max(S_[0], S_[1]) : S_[0];
@@ -646,12 +688,15 @@
 
             // ── snören ──
             if (atwood) {
-                g.forEach((k, i) => snoren.push(<line key={'s' + k.idx} x1={k.linjeX} y1={AT_Y} x2={k.linjeX} y2={i === 1 ? k.krok.y - 104 : k.krok.y} stroke="#5b4a3a" strokeWidth="1.8" />));
-                // dynamometern hänger i snöret direkt ovanför den högra vikten
+                snoren.push(<line key={'s' + g[0].idx} x1={g[0].linjeX} y1={AT_Y} x2={g[0].krok.x} y2={g[0].krok.y} stroke="#5b4a3a" strokeWidth="1.8" />);
+                // dynamometern hänger i snöret direkt ovanför den högra vikten och
+                // svänger med snöret (ritad lodrät och vriden kring trissan)
                 const h = g[1];
-                dyner.push(<g key="d">
-                    <SnoreDyn x={h.linjeX} y={h.krok.y - 104} lodrat F={dolj ? 0 : S_[1]} etikett={dolj ? 'dynamometer: ?' : null} />
-                    <line x1={h.linjeX} y1={h.krok.y - 104 + DYN_L + 2} x2={h.linjeX} y2={h.krok.y} stroke="#5b4a3a" strokeWidth="1.8" /></g>);
+                const hy = h.srot ? AT_Y + h.Lb : h.krok.y;
+                dyner.push(<g key="d" transform={`rotate(${grad(h.srot)} ${h.linjeX} ${AT_Y})`}>
+                    <line x1={h.linjeX} y1={AT_Y} x2={h.linjeX} y2={hy - 104} stroke="#5b4a3a" strokeWidth="1.8" />
+                    <SnoreDyn x={h.linjeX} y={hy - 104} lodrat F={dolj ? 0 : S_[1]} etikett={dolj ? 'dynamometer: ?' : null} />
+                    <line x1={h.linjeX} y1={hy - 104 + DYN_L + 2} x2={h.linjeX} y2={hy} stroke="#5b4a3a" strokeWidth="1.8" /></g>);
             } else {
                 const vanster = { x: TR_V, y: SNORE_Y }, hoger = { x: TR_H, y: SNORE_Y };
                 const vagn = g.find((k) => k.typ === 'vagn');
@@ -662,7 +707,7 @@
                 segment.forEach(([a, b, i], j) => {
                     // dynamometern sitter i det vågräta snöret och följer med det
                     let dx;
-                    if (u === 'bord') dx = 371 + st.x * S;
+                    if (u === 'bord') dx = 371 + xs * S;
                     else if (a === vagn.krokH) dx = Math.min(a.x + 70, b.x - DYN_L - 10);
                     else dx = Math.max(b.x - 54 - DYN_L, a.x + 14);
                     snoren.push(<line key={'h' + j} x1={a.x} y1={a.y} x2={dx} y2={a.y} stroke="#5b4a3a" strokeWidth="1.8" />);
@@ -673,19 +718,20 @@
                         <SnoreDyn x={dx} y={SNORE_Y} F={dolj ? 0 : F} krok={krok} etikett={dolj ? '?' : (u === 'tre' ? `snöre ${i === 0 ? 1 : 2}` : null)} /></g>);
                 });
                 g.filter((k) => k.typ === 'hang').forEach((k) => snoren.push(
-                    <line key={'v' + k.idx} x1={k.linjeX} y1={TR_Y} x2={k.linjeX} y2={k.krok.y} stroke="#5b4a3a" strokeWidth="1.8" />));
+                    <line key={'v' + k.idx} x1={k.linjeX} y1={TR_Y} x2={k.krok.x} y2={k.krok.y} stroke="#5b4a3a" strokeWidth="1.8" />));
             }
 
             // ── föremålen ──
             const foremal = g.map((k, i) => (
                 k.typ === 'vagn' ? (
-                    <g key={i} onClick={() => setSel(i)} style={{ cursor: 'pointer' }}>
+                    <g key={i} onPointerDown={(e) => dra(i, e)} style={{ cursor: kanDra ? 'ew-resize' : 'pointer', touchAction: 'none' }}>
                         <rect x={k.x} y={k.y} width={k.w} height={BORD_Y - k.y} rx="3" fill="#c98d4f" stroke="#7a4d22" strokeWidth="1.8" />
                         {[0.3, 0.62].map((t, j) => <path key={j} d={`M ${k.x + 4} ${k.y + (BORD_Y - k.y) * t} q ${k.w * 0.35} ${-3 + j * 3} ${k.w - 8} 1`} fill="none" stroke="#9c6430" strokeWidth="1" opacity="0.55" />)}
                         <text x={k.x + k.w / 2 - 10} y={k.y - 8} textAnchor="end" fontSize="14" fontWeight="700" fill="#1e3a5f" fontFamily="Poppins, sans-serif">{fmt(k.m, 1)} kg</text>
                     </g>
                 ) : (
-                    <g key={i} onClick={() => setSel(i)} style={{ cursor: 'pointer' }}>
+                    <g key={i} onPointerDown={(e) => dra(i, e)} style={{ cursor: kanDra ? 'ns-resize' : 'pointer', touchAction: 'none' }}
+                       transform={k.rot ? `rotate(${grad(k.rot)} ${k.rotP.x} ${k.rotP.y})` : undefined}>
                         <path d={`M ${k.krok.x - 4} ${k.krok.y + 2} q 4 -8 8 0`} fill="none" stroke="#4b5563" strokeWidth="1.8" />
                         <rect x={k.x} y={k.y + 3} width={k.w} height={k.h - 3} rx="5" fill="#b8913a" stroke="#6d521a" strokeWidth="1.6" />
                         <text x={k.sida > 0 ? k.x + k.w + 8 : k.x - 8} y={k.y + k.h / 2 + 6} textAnchor={k.sida > 0 ? 'start' : 'end'} fontSize="14" fontWeight="700"
@@ -738,7 +784,7 @@
                     pilar.push(<g key={'g' + i}>
                         <Pil x1={cx} y1={cy} x2={cx} y2={cy + k.m * G * FSK} color={COL.tyngd} width={3.6} edge />
                         <circle cx={cx} cy={cy} r="2.4" fill={COL.ink} />
-                        <Bet x={cx + (k.sida > 0 ? 8 : -8)} y={cy + k.m * G * FSK + 2} sym="F" idx={'G' + k.idx} color={COL.tyngd} size={15} anchor={k.sida > 0 ? 'start' : 'end'} />
+                        <Bet x={cx + (k.sida > 0 ? 8 : -8)} y={Math.max(cy + k.m * G * FSK + 2, k.y + k.h + 18)} sym="F" idx={'G' + k.idx} color={COL.tyngd} size={15} anchor={k.sida > 0 ? 'start' : 'end'} />
                     </g>);
                 }
             });
@@ -748,12 +794,12 @@
                 if (!inre && !yttre(i)) return;
                 pilar.push(<g key={key} opacity={inre ? 0.32 : 1}>
                     <Pil x1={x1} y1={y1} x2={x1 + dx * F * FSK} y2={y1 + dy * F * FSK} color={COL.spann} width={inre ? 2.2 : 3.4} />
-                    {!inre && <Bet x={dx ? x1 + dx * F * FSK / 2 : x1 + (sida || 8)} y={dy ? y1 + dy * F * FSK + (dy < 0 ? -4 : 14) : y1 - 10} sym="F" idx={idx} color={COL.spann} size={15}
-                                   anchor={dx ? 'middle' : (sida < 0 ? 'end' : 'start')} />}
+                    {!inre && <Bet x={Math.abs(dx) > 0.5 ? x1 + dx * F * FSK / 2 : x1 + (sida || 8)} y={Math.abs(dy) > 0.5 ? y1 + dy * F * FSK + (dy < 0 ? -4 : 14) : y1 - 10} sym="F" idx={idx} color={COL.spann} size={15}
+                                   anchor={Math.abs(dx) > 0.5 ? 'middle' : (sida < 0 ? 'end' : 'start')} />}
                 </g>);
             };
             g.forEach((k, i) => {
-                if (k.typ === 'hang') spann(i, k.krok.x, k.krok.y, 0, -1, S_[i], u === 'tre' ? 'S' + k.idx : 'S', 'sp' + i, k.sida > 0 ? 10 : -10);
+                if (k.typ === 'hang') spann(i, k.krok.x, k.krok.y, -Math.sin(k.srot || 0), -Math.cos(k.srot || 0), S_[i], u === 'tre' ? 'S' + k.idx : 'S', 'sp' + i, k.sida > 0 ? 10 : -10);
                 else {
                     if (u === 'tre') spann(i, k.krokV.x, k.krokV.y, -1, 0, S_[0], 'S1', 'spv' + i);
                     const hIdx = u === 'tre' ? 2 : 1;
@@ -785,7 +831,7 @@
             // ── ljusgrinden ──
             const riktD = Math.sign(dyn.driv) || 1;
             const fallande = g.find((k) => k.typ === 'hang' && k.sida * riktD > 0);
-            const slutY = (atwood ? 440 : HANG_Y) + s * S;             // den sjunkande viktens underkant i slutläget
+            const slutY = (atwood ? 440 : HANG_Y) + (riktD * x0 + s) * S;             // den sjunkande viktens underkant i slutläget
             const grindY = slutY - 18;                                 // strålen 9 px ovanför slutläget, där farten mäts
 
             return (
@@ -871,7 +917,7 @@
                     <text x={gx0 + 8} y={sel === 'hela' || g[sel].typ === 'vagn' ? gy0 - 8 : gy1 + 20} fontSize="14" fontWeight="600" fill={COL.grans} fontFamily="Poppins, sans-serif">
                         {sel === 'hela' ? 'Systemet: allt innanför' : `Systemet: ${g[sel].namn.toLowerCase()}`}</text>
 
-                    {show.krafter && pilar}
+                    {show.krafter && <g style={{ pointerEvents: 'none' }}>{pilar}</g>}
 
                     {/* kraftstaplarna */}
                     <g fontFamily="Poppins, sans-serif">
@@ -1089,16 +1135,23 @@
             const rafRef = useRef(null);
             const lastRef = useRef(null);
             const gissaRef = useRef(null);
+            const dingRef = useRef(null);            // efterspelet: { t0, v }
+            const [x0Raw, setX0] = useState(0);       // startläget när vikterna dragits före släppet
+            const draRef = useRef(null);
+            const dingRaf = useRef(null);
 
             const kr = kroppar(u, m1, m2, mv);
             const harVagn = u === 'vagn' || u === 'tre';
-            const cfg = { kroppar: kr, mu: harVagn ? mu : 0, s: stracka(u, kr) };
+            const [x0Min, x0Max] = dragGranser(u, kr);
+            const x0 = gissa ? 0 : Math.min(x0Max, Math.max(x0Min, x0Raw));
+            const cfg = { kroppar: kr, mu: harVagn ? mu : 0, s: stracka(u, kr, x0) };
             cfgRef.current = cfg;
             if (!stRef.current) stRef.current = M.nytt(cfg);
             const setSel = (s) => setSelRaw(s);
             // Klossen får en realistisk friktion och massor där krafterna syns i skala.
             const START = { bord: { m1: 1, m2: 3 }, atwood: { m1: 1, m2: 1.5 }, vagn: { m2: 1, mv: 2, mu: 0.3 }, tre: { m1: 1, m2: 2, mv: 2, mu: 0.2 } };
             const valjU = (k) => {
+                stoppaDingel();
                 setU(k);
                 const s0 = START[k];
                 if (s0.m1) setM1(s0.m1);
@@ -1106,9 +1159,46 @@
                 if (s0.mv) { setMv(s0.mv); setMu(s0.mu); }
             };
 
-            const nollstall = () => { stRef.current = M.nytt(cfgRef.current); lastRef.current = null; setFrame((n) => n + 1); };
+            const stoppaDingel = () => { if (dingRaf.current) cancelAnimationFrame(dingRaf.current); dingRaf.current = null; dingRef.current = null; };
+            const nollstall = () => { stoppaDingel(); stRef.current = M.nytt(cfgRef.current); lastRef.current = null; setFrame((n) => n + 1); };
+            useEffect(() => stoppaDingel, []);
+            const dingelLoop = () => {
+                const d = dingRef.current;
+                if (!d) { dingRaf.current = null; return; }
+                if ((performance.now() - d.t0) / 1000 > 10) dingRef.current = null;
+                setFrame((n) => n + 1);
+                dingRaf.current = dingRef.current ? requestAnimationFrame(dingelLoop) : null;
+            };
             useEffect(() => { if (!korRef.current) nollstall(); }, [u, m1, m2, mv, mu]);
-            useEffect(() => { setSelRaw('hela'); }, [u]);
+            useEffect(() => { setSelRaw('hela'); setX0(0); }, [u]);
+
+            // Dra i en vikt (upp/ned) eller i klossen (i sidled) för att välja
+            // startläget. Ett tryck utan att dra väljer föremålet som förut.
+            const dra = (i, e) => {
+                if (korRef.current || gissa || !svgRef.current) { setSel(i); return; }
+                e.preventDefault();
+                const k = kr[i];
+                const skala = 1 / svgRef.current.getScreenCTM().a;
+                draRef.current = { i, cx: e.clientX, cy: e.clientY, x0, flyttat: false };
+                const flytta = (ev) => {
+                    const d = draRef.current;
+                    if (!d) return;
+                    const px = k.typ === 'vagn' ? (ev.clientX - d.cx) * skala : k.sida * (ev.clientY - d.cy) * skala;
+                    if (!d.flyttat && Math.abs(px) < 3) return;
+                    if (!d.flyttat) { d.flyttat = true; if (stRef.current.t > 0 || dingRef.current) nollstall(); }
+                    setX0(Math.min(x0Max, Math.max(x0Min, d.x0 + px / S)));
+                };
+                const slapp = () => {
+                    window.removeEventListener('pointermove', flytta);
+                    window.removeEventListener('pointerup', slapp);
+                    window.removeEventListener('pointercancel', slapp);
+                    const d = draRef.current; draRef.current = null;
+                    if (d && !d.flyttat) setSel(i);
+                };
+                window.addEventListener('pointermove', flytta);
+                window.addEventListener('pointerup', slapp);
+                window.addEventListener('pointercancel', slapp);
+            };
 
             useEffect(() => {
                 const loop = (ts) => {
@@ -1130,6 +1220,12 @@
 
             const avsluta = () => {
                 korRef.current = false; setKor(false);
+                const st = stRef.current;
+                if (st.orsak === 'mal' && Math.abs(st.v) > 0.03) {
+                    stoppaDingel();
+                    dingRef.current = { t0: performance.now(), v: st.v };
+                    dingRaf.current = requestAnimationFrame(dingelLoop);
+                }
                 if (gissaRef.current) ratta();
             };
             const starta = () => {
@@ -1144,7 +1240,7 @@
             const korForsok = (f) => {
                 korRef.current = false; setKor(false);
                 const c = f.cfg;
-                setU(c.u); setM1(c.m1); setM2(c.m2); setMv(c.mv); setMu(c.mu);
+                setU(c.u); setM1(c.m1); setM2(c.m2); setMv(c.mv); setMu(c.mu); setX0(0);
                 setTimeout(() => { nollstall(); korRef.current = true; setKor(true); }, 40);
             };
 
@@ -1293,7 +1389,8 @@
                         <main className="flex flex-col lg:flex-row gap-6">
                             <div className="lg:w-2/3 xl:w-3/4 order-1">
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
-                                    <Scen u={u} kr={kr} st={st} dyn={dyn} S_={S_} sel={sel} setSel={setSel} show={show} svgRef={svgRef} dolj={dolj} ljusV={ljusV} hallen={hallen} s={cfg.s} mu={cfg.mu} />
+                                    <Scen u={u} kr={kr} st={st} dyn={dyn} S_={S_} sel={sel} setSel={setSel} show={show} svgRef={svgRef} dolj={dolj} ljusV={ljusV} hallen={hallen} s={cfg.s} mu={cfg.mu} x0={x0} dra={dra} kanDra={!kor && !gissa}
+                                          ding={dingRef.current ? { t: (performance.now() - dingRef.current.t0) / 1000 * (show.ultra ? 0.35 : 1), v: dingRef.current.v } : null} />
                                     {sceneToggles()}
                                     <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
                                         {isFullscreen ? (

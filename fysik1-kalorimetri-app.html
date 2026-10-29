@@ -753,7 +753,7 @@
                         </g>
                         <Termometer x={INRE.x + INRE.w - 30} y={KOPP.y - 110} T={Tkopp} dolj={dolj} langd={INRE.b - KOPP.y + 50} />
                         <text x={KOPP.x + KOPP.w / 2} y={BANK + 24} textAnchor="middle" fontSize="13" fill={COL.soft}>
-                            {forlust ? 'riktig kalorimeter' : 'kalorimeter'}
+                            {forlust ? 'kalorimeter med värmeförluster' : 'idealisk kalorimeter'}
                         </text>
                         <text x={KOPP.x + KOPP.w / 2} y={BANK + 42} textAnchor="middle" fontSize="13" fill={COL.soft}>
                             {lage === 'vatten' ? 'kallt vatten' : 'vatten'}, {kg(B.m)} kg{fas === 'fore' ? `, ${fmt(B.T0, 0)} °C` : ''}
@@ -1215,7 +1215,7 @@
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
                         </button>
                         <div className="st-title">Inställningar</div>
-                        <label><input type="checkbox" checked={forlust} disabled={las} onChange={() => setForlust((x) => !x)} /><span>Riktig kalorimeter</span></label>
+                        <label><input type="checkbox" checked={forlust} disabled={las} onChange={() => setForlust((x) => !x)} /><span>Med värmeförluster</span></label>
                         <label><input type="checkbox" checked={snabb} onChange={() => setSnabb((x) => !x)} /><span>Snabbspola</span></label>
                         {isFullscreen && (
                             <React.Fragment>
@@ -1265,8 +1265,8 @@
                                 <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
                                     {lage !== 'metall' && 'I verkligheten blandas vattnet på några sekunder. Simuleringen visar förloppet långsamt, som om det varma och det kalla vore två delar som omröraren för samman, så att du kan följa hur energin flyttas. Sluttemperaturen blir densamma. '}
                                     {forlust
-                                        ? `Den riktiga kalorimetern har en inre kopp, omrörare och termometer som tillsammans har värmekapaciteten ${M.KOPP_C} J/K och som börjar vid vattnets temperatur. Dessutom går lite energi genom isoleringen, mot rummets ${M.T_RUM} °C. När det varma vattnet eller metallbiten värmer det kalla tar koppen och rummet emot energi, och sluttemperaturen blir lite lägre än den beräknade. När is kyler vattnet ger koppen och rummet energi i stället, och sluttemperaturen blir lite högre.`
-                                        : 'En idealisk kalorimeter: koppen tar inte upp någon energi och ingen energi läcker ut. Slå på Riktig kalorimeter för att se vad som händer i en verklig mätning.'}
+                                        ? `Med värmeförluster räknas det som i en verklig mätning. Kalorimeterns inre kopp, omrörare och termometer har tillsammans värmekapaciteten ${M.KOPP_C} J/K och börjar vid vattnets temperatur. Dessutom går lite energi genom isoleringen, mot rummets ${M.T_RUM} °C. När det varma vattnet eller metallbiten värmer det kalla tar koppen och rummet emot energi, och sluttemperaturen blir lite lägre än den beräknade. När is kyler vattnet ger koppen och rummet energi i stället, och sluttemperaturen blir lite högre.`
+                                        : 'En idealisk kalorimeter: koppen tar inte upp någon energi och ingen energi läcker ut. Slå på Med värmeförluster för att se vad som händer i en verklig mätning, där koppen också värms och lite energi läcker ut genom isoleringen.'}
                                 </p>
                             </div>
 
@@ -1303,7 +1303,7 @@
                                     {lage === 'metall' && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Metallbiten har värmts i kokande vatten, så den har temperaturen 100 °C.</p>}
                                     <div className="flex gap-2 mt-2">{knappar('flex-1')}</div>
                                     <label className="flex items-center gap-2 text-sm mt-2" style={{ color: 'var(--lab-ink)' }}>
-                                        <input type="checkbox" checked={forlust} disabled={las} onChange={() => setForlust((x) => !x)} /> Riktig kalorimeter (koppen och läckaget)
+                                        <input type="checkbox" checked={forlust} disabled={las} onChange={() => setForlust((x) => !x)} /> Med värmeförluster (koppen värms och energi läcker ut)
                                     </label>
                                 </div>
 

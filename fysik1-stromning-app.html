@@ -661,11 +661,13 @@
             // färgen som mjuka fläckar: tätt i en laminär tråd, utspridd i ett moln när det är turbulent
             ctx.fillStyle = 'rgba(30,58,138,0.42)';
             for (const p of partiklar) {
+                if (p.tau != null) continue;
                 ctx.beginPath();
                 ctx.arc(p.x, RY.yc + p.y * Rp, 2.8, 0, 2 * Math.PI);
                 ctx.fill();
             }
             if (dolj) return;
+            const vmJ = visFart(par.v);
             // ── den fria strålen ──
             // laminär: klar, slät och stilla som en glasstav. Turbulent: vit av
             // luft som blandas in, med ojämna kanter som skakar och stänk runt om.
@@ -711,6 +713,19 @@
                     ctx.fillStyle = Math.abs(ut) > q.r ? `rgba(${cr - 60},${cg - 40},${cb - 20},0.45)` : 'rgba(255,255,255,0.85)';
                     ctx.fill();
                 }
+            }
+            // färgen fortsätter i strålen. Där går all vätska lika fort, så färgen
+            // ligger kvar på sin plats tvärs över strålen: en tråd när strömningen
+            // är laminär, utspridd när den är turbulent.
+            ctx.fillStyle = `rgba(30,58,138,${(0.42 - 0.2 * vit).toFixed(3)})`;
+            for (const p of partiklar) {
+                if (p.tau == null) continue;
+                const vy = G_PX * p.tau, fart = Math.hypot(vmJ, vy);
+                const r = Rp * Math.sqrt(vmJ / fart);
+                const x = RY.x1 + vmJ * p.tau - (vy / fart) * p.y * r, y = RY.yc + 0.5 * G_PX * p.tau * p.tau + (vmJ / fart) * p.y * r;
+                ctx.beginPath();
+                ctx.arc(x, y, 2.4, 0, 2 * Math.PI);
+                ctx.fill();
             }
             // där strålen slår ned i karet: lugna ringar eller skum
             const sl = bana[bana.length - 1];
@@ -839,11 +854,20 @@
                         const P = fargRef.current;
                         const Rp = radiePx(L.rp.d), vm = visFart(L.rp.v);
                         const I = M.turbulens(L.Re), t = ts / 1000;
+                        const ii0 = (Re) => M.turbulens(Re);
                         if (!L.doljR) {
                             const n = Math.round(90 * dt * (0.6 + vm / 200));
                             for (let k = 0; k < n; k++) P.push({ x: RY.noz + 10 + Math.random() * 4, y: (Math.random() - 0.5) * 0.04, f: Math.random() * 6.28 });
                         }
+                        const Tfall = Math.sqrt(2 * (RY.kar - RY.yc) / G_PX);
                         for (const p of P) {
+                            // utanför röret följer färgen med strålen: tid sedan mynningen
+                            if (p.tau != null) {
+                                p.tau += dt;
+                                p.y += ii0(L.Re) * 0.5 * Math.sqrt(dt) * (Math.random() * 2 - 1);
+                                p.y = Math.max(-0.95, Math.min(0.95, p.y));
+                                continue;
+                            }
                             // i övergångsområdet kommer virvlarna i skurar
                             const skur = M.regim(L.Re) === 'overgang' ? (Math.sin((p.x / 260 - t * 0.6) * 2 * Math.PI) > 0.2 ? 1 : 0.12) : 1;
                             const ii = I * skur;
@@ -851,8 +875,9 @@
                             p.y += ii * (0.9 * Math.sin(p.x / 23 + p.f + t * 3) * dt + 0.55 * Math.sqrt(dt) * (Math.random() * 2 - 1));
                             if (p.y > 0.96) p.y = 1.92 - p.y;
                             if (p.y < -0.96) p.y = -1.92 - p.y;
+                            if (p.x >= RY.x1) p.tau = (p.x - RY.x1) / vm;
                         }
-                        fargRef.current = P.filter((p) => p.x < RY.x1 - 4).slice(-2600);
+                        fargRef.current = P.filter((p) => p.tau == null || p.tau < Tfall).slice(-2600);
                         if (canvasRef.current) ritaFarg(canvasRef.current, fargRef.current, L.rp, L.Re, ts / 1000, L.doljR);
                     }
                     raf = requestAnimationFrame(loop);

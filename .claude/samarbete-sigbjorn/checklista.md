@@ -151,6 +151,7 @@ Tas när del 1 och 2 är klara.
 - [x] Fysikgranskning och språkgranskning, rättningarna införda (blind dynamik i stället för Metropolis, fladdret förklarat, värmepumpens gräns i formelkortet, 10²⁵ atomer, entropin kan tillfälligt minska)
 - [x] Sam testar och godkänner (2026-10-27)
 - [x] Commit och push till `main` (6f2fb3e7)
+- [x] Ny design (2026-10-29): atomgitter i kopparblocken som lyser efter energin, isolerad låda, datalogger, räknare genom kontaktytan, kulan på berget av fördelningar; kolvmaskin med svänghjul, energiband med gränsen för W, verkningsgradsmätare och kvalitetsstege; norsk översättning
 - [ ] Länken till Sigbjørn
 
 ## Status: nr 11, Vältning (`fysik2-valtning-app.html`)

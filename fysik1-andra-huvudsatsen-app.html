@@ -391,8 +391,11 @@
             return <tspan>{fmt(a, 1)} · 10<tspan dy="-6" fontSize="0.72em">{b}</tspan><tspan dy="6"> </tspan></tspan>;
         };
 
+        // Text som byggs i koden översätts här (norska med ?lang=nb), med {platshållare}.
+        const tr = (s, v) => (window.I18N ? I18N.t(s, v) : s.replace(/\{(\w+)\}/g, (m, k) => (v && v[k] != null ? v[k] : m)));
         // Ren text med variabler i kursiv: T_v, Q_k, η_max får index.
-        const Fx = ({ text }) => {
+        const Fx = ({ text: sv }) => {
+            const text = tr(sv);
             const delar = [];
             const re = /(?<![\p{L}\d])([TQWmη])_([\p{L}\d]+)|(?<![\p{L}\d])([TQWη])(?![\p{L}\d])/gu;
             let sist = 0, mm, n = 0;
@@ -430,138 +433,254 @@
         //  SCENENS GEOMETRI (viewBox 1000 × 660)
         // ════════════════════════════════════════════════════════
         const VB_W = 1000, VB_H = 660;
-        const BANK = 590, BLOCK_BOTTEN = 560, BLOCK_B = 200;
-        const blockH = (m) => 50 + 70 * m;
-        // blockets yta i scenen, med glipa före kontakten
-        function blockRekt(st, sida, ihop) {
-            const gap = ihop ? 0 : 30;
-            const m = sida === 'A' ? st.NA / M.PER_KG : st.NB / M.PER_KG;
-            const h = blockH(m);
-            const x = sida === 'A' ? 270 - BLOCK_B - gap / 2 : 270 + gap / 2;
-            return { x, y: BLOCK_BOTTEN - h, w: BLOCK_B, h };
+        const BENK = 560;                                   // bänkskivans ovansida i läge 1
+        const LADA = { x: 30, y: 150, w: 510, h: 410, t: 20 };   // den isolerade lådan
+        const GOLV = LADA.y + LADA.h - LADA.t;              // lådans inre botten
+        const MITT = LADA.x + LADA.w / 2;                    // där blocken möts
+        const KOL = 10, SP = 16, ATOM_R = 5.2;               // atomgittret i blocken
+        const BLOCK_W = KOL * SP + 10;
+        const GAP_ISAR = 44;
+        const blockH = (N) => Math.ceil(N / KOL) * SP + 10;
+        // blockets yta i scenen; gap är glipan mellan blocken (0 = i kontakt)
+        function blockRekt(st, sida, gap) {
+            const N = sida === 'A' ? st.NA : st.NB;
+            const h = blockH(N);
+            const x = sida === 'A' ? MITT - gap / 2 - BLOCK_W : MITT + gap / 2;
+            return { x, y: GOLV - h, w: BLOCK_W, h };
         }
-        // Brickornas platser i ett block: ett jämnt rutnät med en liten fast skakning.
-        function platser(r, n, s) {
-            const kol = Math.max(1, Math.floor((r.w - 8) / (s + 2)));
-            const ut = [];
-            for (let i = 0; i < n; i++) {
-                const k = i % kol, rad = Math.floor(i / kol);
-                ut.push({ x: r.x + 5 + k * (s + 2), y: r.y + r.h - 5 - s - rad * (s + 2) });
-            }
-            return ut;
+        // var atom nummer i sitter (block A har atomerna 0 … NA − 1)
+        function atomPos(st, i, rA, rB) {
+            const iA = i < st.NA, k = iA ? i : i - st.NA, r = iA ? rA : rB;
+            const kol = k % KOL, rad = Math.floor(k / KOL);
+            return { x: r.x + 5 + SP / 2 + kol * SP, y: r.y + r.h - 5 - SP / 2 - rad * SP };
         }
-        const brickStorlek = (q) => (q <= 10 ? 18 : q <= 40 ? 12 : 7);
-        // färgen följer temperaturen
-        function tempFarg(T) {
-            const f = Math.max(0, Math.min(1, T / 100));
-            const r = Math.round(120 + 110 * f), g = Math.round(140 - 40 * f), b = Math.round(170 - 120 * f);
-            return `rgb(${r},${g},${b})`;
-        }
+        // atomens färg efter hur många brickor den har: mörk koppar när den
+        // saknar energi, glödande gul när den har många
+        const ATOMFARG = ['#5b2f17', '#a8501f', '#d9731f', '#ef9a1f', '#f6bf2a', '#fbd55a'];
+        const atomFarg = (n) => ATOMFARG[Math.min(ATOMFARG.length - 1, n)];
 
         // ════════════════════════════════════════════════════════
         //  RITDELAR
         // ════════════════════════════════════════════════════════
         // Pil med rakt avslutat skaft som slutar vid huvudets bas.
-        const Pil = ({ x1, y1, x2, y2, color, width = 4.5, head = 15, dash = false, edge = false, opacity = 1 }) => {
+        const Pil = ({ x1, y1, x2, y2, color, width = 4.5, head = 15, dash = false, opacity = 1 }) => {
             const len = Math.hypot(x2 - x1, y2 - y1);
             if (len < 2) return null;
             const ux = (x2 - x1) / len, uy = (y2 - y1) / len;
             const hd = Math.min(head, len * 0.9);
             const bx = x2 - ux * hd, by = y2 - uy * hd;
             const hw = hd * 0.48;
-            const p1 = `${bx - uy * hw},${by + ux * hw}`;
-            const p2 = `${bx + uy * hw},${by - ux * hw}`;
-            const kant = 'rgba(15,22,32,0.5)';
             return (
                 <g opacity={opacity}>
-                    {edge && <line x1={x1} y1={y1} x2={bx} y2={by} stroke={kant} strokeWidth={width + 3} strokeLinecap="butt" />}
                     <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
                           strokeLinecap="butt" strokeDasharray={dash ? '7 5' : undefined} />
-                    <polygon points={`${x2},${y2} ${p1} ${p2}`} fill={color}
-                             stroke={edge ? kant : 'none'} strokeWidth={edge ? 1.6 : 0} strokeLinejoin="round" />
+                    <polygon points={`${x2},${y2} ${bx - uy * hw},${by + ux * hw} ${bx + uy * hw},${by - ux * hw}`} fill={color} />
                 </g>
             );
         };
-
-        // Beteckning med index: F, Fₛ, F₁ … Variabeln kursiv, indexet rakt.
-        const Bet = ({ x, y, sym, idx, color, size = 18, anchor = 'start', weight = 600 }) => (
-            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}
-                  fontFamily="Poppins, sans-serif">
-                <tspan fontStyle="italic">{sym}</tspan>
-                {idx != null && <tspan fontSize={size * 0.68} dy={size * 0.25}>{idx}</tspan>}
-            </text>
+        // Beteckning med index i SVG: variabeln kursiv, indexet rakt.
+        const SvgVar = ({ s, i, size }) => (
+            <React.Fragment>
+                <tspan fontStyle="italic">{s}</tspan>
+                {i != null && <tspan fontSize={size * 0.7} dy={size * 0.26}>{i}</tspan>}
+                {i != null && <tspan dy={-size * 0.26}>{' '}</tspan>}
+            </React.Fragment>
+        );
+        // En bricka: en liten energiruta.
+        const Bricka = ({ x, y, s = 8, fill = '#e2a40e' }) => (
+            <rect x={x - s / 2} y={y - s / 2} width={s} height={s} rx="1.6" fill={fill} stroke="rgba(15,22,32,0.55)" strokeWidth="0.9" />
+        );
+        // Labbänk i trä
+        const Bank = ({ y, h = 30 }) => (
+            <g>
+                <rect x="0" y={y} width={VB_W} height={h} fill="#c9a578" />
+                <rect x="0" y={y} width={VB_W} height="5" fill="#dcbd92" />
+                {[0.35, 0.6, 0.82].map((f, i) => (
+                    <path key={i} d={`M 0 ${y + h * f} C 220 ${y + h * f - 3} 420 ${y + h * f + 3} 640 ${y + h * f - 1} S 900 ${y + h * f + 2} 1000 ${y + h * f}`}
+                          stroke="rgba(120,78,36,0.28)" strokeWidth="1.2" fill="none" />
+                ))}
+                <rect x="0" y={y + h} width={VB_W} height={VB_H - y - h} fill="#e3d7c1" />
+                <line x1="0" y1={y + h} x2={VB_W} y2={y + h} stroke="rgba(15,22,32,0.25)" strokeWidth="1" />
+            </g>
         );
 
         // ════════════════════════════════════════════════════════
         //  LÄGE 1: VARMT OCH KALLT
         // ════════════════════════════════════════════════════════
-        const BlockScen = ({ st, ihop, Tvisad, hist, flyg, nu, dolj }) => {
-            const rA = blockRekt(st, 'A', ihop), rB = blockRekt(st, 'B', ihop);
-            const s = brickStorlek(st.q);
-            const pA = platser(rA, st.q, s), pB = platser(rB, st.q, s);
-            // brickor som är på väg räknas inte i något block förrän de landar
-            const iFlygA = flyg.filter((f) => f.till === 'A').length, iFlygB = flyg.filter((f) => f.till === 'B').length;
-            const visaA = st.qA - iFlygA, visaB = st.q - st.qA - iFlygB;
+        const BlockScen = ({ st, gap, Tvisad, hist, flyg, nu, dolj, kula, flode, klickBlock }) => {
+            // termometrarna skickar sina värden trådlöst till dataloggern
+            const rA = blockRekt(st, 'A', gap), rB = blockRekt(st, 'B', gap);
             const l = M.fordelning(st);
             const lmax = Math.max(...l);
-            const lgNu = (l[st.qA]) / Math.LN10, lgMax = lmax / Math.LN10;
-            const G = { x0: 580, x1: 975, y0: 280, y1: 120 };
-            const Tm = 100, tSpann = 60;
+            const lgNu = l[st.qA] / Math.LN10, lgMax = lmax / Math.LN10;
+            // en bricka i luften räknas fortfarande hos den atom den lämnade
+            const n = st.n.slice();
+            flyg.forEach((f) => { n[f.j]--; n[f.i]++; });
+            const tid = nu / 1000;
+            const blockGrupp = (k, r, T) => {
+                const i0 = k === 'A' ? 0 : st.NA, i1 = k === 'A' ? st.NA : st.NA + st.NB;
+                const atomer = [];
+                for (let i = i0; i < i1; i++) {
+                    const p = atomPos(st, i, rA, rB), e = Math.max(0, n[i]);
+                    // svängningen växer med energin
+                    const a = Math.min(3.4, 1.15 * Math.sqrt(e));
+                    const dx = a * Math.sin(tid * (13 + (i * 7) % 9) + i * 1.7), dy = a * Math.cos(tid * (11 + (i * 5) % 7) + i * 2.3);
+                    atomer.push(<circle key={i} cx={p.x + dx} cy={p.y + dy} r={ATOM_R} fill={atomFarg(e)} stroke="rgba(40,18,6,0.55)" strokeWidth="0.8" />);
+                }
+                const probeX = k === 'A' ? r.x + 24 : r.x + r.w - 24;
+                return (
+                    <g key={k} onClick={klickBlock} style={{ cursor: 'pointer' }}>
+                        {/* kopparblocket med fjädrar mellan atomerna */}
+                        <rect x={r.x} y={r.y} width={r.w} height={r.h} rx="3" fill="url(#koppar)" stroke="#5e2f12" strokeWidth="2" />
+                        <rect x={r.x + 2} y={r.y + 2} width={r.w - 4} height="5" rx="2" fill="rgba(255,226,190,0.45)" />
+                        <g stroke="rgba(70,32,10,0.30)" strokeWidth="1">
+                            {Array.from({ length: Math.ceil((i1 - i0) / KOL) }, (_, rad) => {
+                                const y = r.y + r.h - 5 - SP / 2 - rad * SP;
+                                const ant = Math.min(KOL, i1 - i0 - rad * KOL);
+                                return <line key={'h' + rad} x1={r.x + 5 + SP / 2} y1={y} x2={r.x + 5 + SP / 2 + (ant - 1) * SP} y2={y} />;
+                            })}
+                            {Array.from({ length: Math.min(KOL, i1 - i0) }, (_, kol) => {
+                                const rader = Math.ceil((i1 - i0 - kol) / KOL);
+                                const x = r.x + 5 + SP / 2 + kol * SP;
+                                return <line key={'v' + kol} x1={x} y1={r.y + r.h - 5 - SP / 2} x2={x} y2={r.y + r.h - 5 - SP / 2 - (rader - 1) * SP} />;
+                            })}
+                        </g>
+                        {atomer}
+                        {/* termometerns givare i ett borrat hål */}
+                        <rect x={probeX - 3} y={r.y - 4} width="6" height="26" fill="#3b2414" />
+                        <rect x={probeX - 2} y={r.y - 52} width="4" height="70" fill="#b8bec7" stroke="#6b7280" strokeWidth="0.6" />
+                        <rect x={probeX - 6} y={r.y - 92} width="12" height="42" rx="3" fill="#1f2937" />
+                        <rect x={probeX - 3.5} y={r.y - 86} width="7" height="12" rx="1.5" fill={k === 'A' ? '#fdba74' : '#93c5fd'} />
+                        <text x={k === 'A' ? r.x : r.x + r.w} y={r.y - 128} textAnchor={k === 'A' ? 'start' : 'end'} fontSize="15" fontWeight="700" fill={COL.ink}>
+                            Block {k}
+                        </text>
+                        <text x={k === 'A' ? r.x : r.x + r.w} y={r.y - 110} textAnchor={k === 'A' ? 'start' : 'end'} fontSize="12.5" fill={COL.soft}>
+                            {fmt(k === 'A' ? st.NA / M.PER_KG : st.NB / M.PER_KG, 1)} kg, {k === 'A' ? st.qA : st.q - st.qA} brickor
+                        </text>
+                    </g>
+                );
+            };
+            // diagrammet över antalet sätt: ett berg med en kula som visar läget nu
+            const O = { x0: 612, x1: 952, y0: 300, y1: 168 };
+            const ox = (qA) => O.x0 + (O.x1 - O.x0) * qA / st.q;
+            const oh = (qA) => {
+                const a = Math.max(0, Math.min(st.q, qA)), i0 = Math.floor(a), i1 = Math.min(st.q, i0 + 1), f = a - i0;
+                const v = Math.exp(l[i0] - lmax) * (1 - f) + Math.exp(l[i1] - lmax) * f;
+                return (O.y0 - O.y1) * v;
+            };
+            let berg = '';
+            if (st.q > 40) {
+                berg = `M ${O.x0} ${O.y0}`;
+                for (let i = 0; i <= st.q; i++) berg += ` L ${ox(i).toFixed(1)} ${(O.y0 - (O.y0 - O.y1) * Math.exp(l[i] - lmax)).toFixed(1)}`;
+                berg += ` L ${O.x1} ${O.y0} Z`;
+            }
+            const bw = (O.x1 - O.x0) / (st.q + 1);
+            const kx = st.q > 40 ? ox(kula) : O.x0 + (kula + 0.5) * bw;
+            const ky = O.y0 - oh(kula) - 9;
+            const startX = st.q > 40 ? ox(st.qA0) : O.x0 + (st.qA0 + 0.5) * bw;
+
+            // dataloggerns skärm
+            const G = { x0: 642, x1: 944, y0: 500, y1: 418 };
+            const tSpann = 60;
             const t0 = hist.length ? Math.max(0, hist[hist.length - 1].t - tSpann) : 0;
             const tx = (t) => G.x0 + (G.x1 - G.x0) * Math.max(0, t - t0) / tSpann;
-            const ty = (T) => G.y0 - (G.y0 - G.y1) * Math.max(0, Math.min(1, T / Tm));
-            const linje = (k) => hist.map((h, i) => `${i ? 'L' : 'M'} ${tx(h.t)} ${ty(h[k])}`).join(' ');
-            const O = { x0: 580, x1: 975, y0: 540, y1: 395 };
-            const bw = (O.x1 - O.x0) / (st.q + 1);
+            const ty = (T) => G.y0 - (G.y0 - G.y1) * Math.max(0, Math.min(1, T / 100));
+            const linje = (k) => hist.map((h, i) => `${i ? 'L' : 'M'} ${tx(h.t).toFixed(1)} ${ty(h[k]).toFixed(1)}`).join(' ');
+            const Ts = M.slutTemp(st);
+
             return (
                 <g fontFamily="Poppins, sans-serif">
-                    {/* blocken */}
-                    {[['A', rA, visaA, pA, Tvisad.A], ['B', rB, visaB, pB, Tvisad.B]].map(([k, r, n, p, T]) => (
-                        <g key={k}>
-                            <rect x={r.x} y={r.y} width={r.w} height={r.h} rx="4" fill={tempFarg(dolj ? 50 : T)} opacity="0.35" />
-                            <rect x={r.x} y={r.y} width={r.w} height={r.h} rx="4" fill="none" stroke="#7c4a1e" strokeWidth="2.2" />
-                            {Array.from({ length: Math.max(0, n) }, (_, i) => p[i] && <rect key={i} x={p[i].x} y={p[i].y} width={s} height={s} rx={s > 10 ? 2.5 : 1.2} fill={COL.bricka} stroke="rgba(15,22,32,0.35)" strokeWidth="0.7" />)}
-                            <text x={r.x + r.w / 2} y={r.y - 34} textAnchor="middle" fontSize="15" fontWeight="600" fill={COL.ink}>
-                                <tspan fontStyle="italic">T</tspan><tspan fontSize="11" dy="4">{k}</tspan><tspan dy="-4"> ≈ {dolj ? '?' : `${fmt(T, 0)} °C`}</tspan>
-                            </text>
-                            <text x={r.x + r.w / 2} y={r.y - 14} textAnchor="middle" fontSize="13" fill={COL.soft}>
-                                {fmt(k === 'A' ? st.NA / M.PER_KG : st.NB / M.PER_KG, 1)} kg, {k === 'A' ? st.qA : st.q - st.qA} brickor
-                            </text>
-                        </g>
-                    ))}
+                    <Bank y={BENK} />
+                    {/* den isolerade lådan i genomskärning */}
+                    <path d={`M ${LADA.x} ${LADA.y} L ${LADA.x} ${LADA.y + LADA.h} L ${LADA.x + LADA.w} ${LADA.y + LADA.h} L ${LADA.x + LADA.w} ${LADA.y}
+                              L ${LADA.x + LADA.w - LADA.t} ${LADA.y} L ${LADA.x + LADA.w - LADA.t} ${GOLV} L ${LADA.x + LADA.t} ${GOLV} L ${LADA.x + LADA.t} ${LADA.y} Z`}
+                          fill="url(#frigolit)" stroke="#8b8577" strokeWidth="1.6" strokeLinejoin="round" />
+                    <rect x={LADA.x + LADA.t} y={LADA.y} width={LADA.w - 2 * LADA.t} height={GOLV - LADA.y} fill="rgba(255,252,244,0.55)" />
+                    <text x={LADA.x} y={LADA.y - 14} fontSize="13" fill={COL.soft}>Isolerad låda: ingen energi går in eller ut</text>
+
+                    {blockGrupp('A', rA, Tvisad.A)}
+                    {blockGrupp('B', rB, Tvisad.B)}
+
+                    {/* brickor på väg mellan två atomer */}
                     {flyg.map((f) => {
-                        const u = Math.min(1, (nu - f.t0) / 320);
-                        const x = f.x0 + (f.x1 - f.x0) * u, y = f.y0 + (f.y1 - f.y0) * u - Math.sin(Math.PI * u) * 40;
-                        return <rect key={f.id} x={x} y={y} width={s} height={s} rx={s > 10 ? 2.5 : 1.2} fill={COL.bricka} stroke="rgba(15,22,32,0.35)" strokeWidth="0.7" />;
+                        const u = Math.min(1, (nu - f.t0) / f.dur);
+                        const a = atomPos(st, f.i, rA, rB), b = atomPos(st, f.j, rA, rB);
+                        const x = a.x + (b.x - a.x) * u, y = a.y + (b.y - a.y) * u - Math.sin(Math.PI * u) * (12 + 0.25 * Math.abs(b.x - a.x));
+                        return <Bricka key={f.id} x={x} y={y} s={7} />;
                     })}
-                    <text x="40" y="620" fontSize="13" fill={COL.soft}>alla brickor är lika stora energimängder</text>
 
-                    {/* temperaturen över tid */}
-                    <text x={G.x0} y={G.y1 - 22} fontSize="13" fontWeight="600" fill={COL.ink}>Temperaturen över tid</text>
-                    <line x1={G.x0} y1={G.y0} x2={G.x1 + 6} y2={G.y0} stroke={COL.ink} strokeWidth="1.2" />
-                    <polygon points={`${G.x1 + 10},${G.y0} ${G.x1 + 2},${G.y0 - 4} ${G.x1 + 2},${G.y0 + 4}`} fill={COL.ink} />
-                    <line x1={G.x0} y1={G.y0} x2={G.x0} y2={G.y1 - 6} stroke={COL.ink} strokeWidth="1.2" />
-                    <polygon points={`${G.x0},${G.y1 - 10} ${G.x0 - 4},${G.y1 - 2} ${G.x0 + 4},${G.y1 - 2}`} fill={COL.ink} />
-                    <text x={G.x0 + 8} y={G.y1 - 2} fontSize="12" fill={COL.soft}><tspan fontStyle="italic">T</tspan> (°C)</text>
-                    <text x={G.x1} y={G.y0 + 18} textAnchor="end" fontSize="12" fill={COL.soft}><tspan fontStyle="italic">t</tspan> (de senaste 60 s)</text>
-                    {[50, 100].map((T) => <text key={T} x={G.x0 - 5} y={ty(T) + 4} textAnchor="end" fontSize="10" fill={COL.soft}>{T}</text>)}
-                    {!dolj && <path d={linje('A')} fill="none" stroke={COL.varm} strokeWidth="2" />}
-                    {!dolj && <path d={linje('B')} fill="none" stroke={COL.kall} strokeWidth="2" />}
-                    {!dolj && <line x1={G.x0} y1={ty(M.slutTemp(st))} x2={G.x1} y2={ty(M.slutTemp(st))} stroke="rgba(15,22,32,0.35)" strokeWidth="1" strokeDasharray="4 4" />}
+                    {/* räknarna: brickor åt båda hållen genom kontaktytan */}
+                    {gap < 2 && (
+                        <g>
+                            <text x={MITT} y={LADA.y + 84} textAnchor="middle" fontSize="11.5" fontWeight="600" fill={COL.soft} letterSpacing="0.04em">GENOM KONTAKTYTAN</text>
+                            <Pil x1={MITT - 46} y1={LADA.y + 102} x2={MITT + 46} y2={LADA.y + 102} color={COL.varm} width={3} head={10} />
+                            <text x={MITT + 54} y={LADA.y + 107} fontSize="14" fontWeight="700" fill={COL.varm}>{flode.ab}</text>
+                            <Pil x1={MITT + 46} y1={LADA.y + 124} x2={MITT - 46} y2={LADA.y + 124} color={COL.kall} width={3} head={10} />
+                            <text x={MITT - 54} y={LADA.y + 129} textAnchor="end" fontSize="14" fontWeight="700" fill={COL.kall}>{flode.ba}</text>
+                        </g>
+                    )}
 
-                    {/* antalet sätt */}
-                    <text x={O.x0} y={O.y1 - 22} fontSize="13" fontWeight="600" fill={COL.ink}>Antalet sätt att fördela brickorna</text>
-                    {l.map((v, i) => {
-                        const h = (O.y0 - O.y1) * Math.exp(v - lmax);
-                        return h > 0.3 ? <rect key={i} x={O.x0 + i * bw} y={O.y0 - h} width={Math.max(0.8, bw - (bw > 3 ? 1 : 0))} height={h} fill={i === st.qA ? COL.grans : '#9aa5b8'} /> : null;
-                    })}
-                    <line x1={O.x0 + (st.qA0 + 0.5) * bw} y1={O.y1 - 4} x2={O.x0 + (st.qA0 + 0.5) * bw} y2={O.y0} stroke={COL.ink} strokeWidth="1" strokeDasharray="3 3" />
-                    <text x={O.x0 + (st.qA0 + 0.5) * bw} y={O.y1 - 8} textAnchor="middle" fontSize="11" fill={COL.soft}>start</text>
-                    <line x1={O.x0} y1={O.y0} x2={O.x1} y2={O.y0} stroke={COL.ink} strokeWidth="1.2" />
-                    <text x={O.x0} y={O.y0 + 16} fontSize="11" fill={COL.soft}>0</text>
-                    <text x={O.x1} y={O.y0 + 16} textAnchor="end" fontSize="11" fill={COL.soft}>{st.q}</text>
-                    <text x={(O.x0 + O.x1) / 2} y={O.y0 + 16} textAnchor="middle" fontSize="11" fill={COL.soft}>brickor i block A</text>
-                    <text x={O.x0} y={O.y0 + 40} fontSize="13" fill={COL.ink}>Nu: <Tiopot lg={lgNu} /> sätt. Flest vid jämn fördelning: <Tiopot lg={lgMax} /> sätt.</text>
+                    {/* teckenförklaring */}
+                    <g>
+                        <text x={LADA.x} y="622" fontSize="12.5" fill={COL.soft}>Atomens energi:</text>
+                        {ATOMFARG.map((c, i) => (
+                            <g key={i}>
+                                <circle cx={LADA.x + 112 + i * 34} cy="618" r={ATOM_R + 0.6} fill={c} stroke="rgba(40,18,6,0.55)" strokeWidth="0.8" />
+                                <text x={LADA.x + 120 + i * 34} y="622" fontSize="11.5" fill={COL.soft}>{i === ATOMFARG.length - 1 ? `${i}+` : i}</text>
+                            </g>
+                        ))}
+                        <text x={LADA.x + 112 + ATOMFARG.length * 34} y="622" fontSize="12.5" fill={COL.soft}>brickor</text>
+                        <Bricka x={LADA.x + 196 + ATOMFARG.length * 34} y={618} s={8} />
+                        <text x={LADA.x + 206 + ATOMFARG.length * 34} y="622" fontSize="12.5" fill={COL.soft}>en bricka: en lika stor energimängd</text>
+                    </g>
+
+
+                    {/* antalet sätt: millimeterpapper på väggen */}
+                    <g>
+                        <rect x="588" y="104" width="388" height="246" fill="#fbf8f1" stroke="rgba(15,22,32,0.22)" strokeWidth="1" />
+                        <rect x="588" y="104" width="388" height="246" fill="url(#mmpapper)" />
+                        <rect x="600" y="98" width="46" height="14" fill="rgba(214,196,150,0.7)" transform="rotate(-4 623 105)" />
+                        <rect x="918" y="98" width="46" height="14" fill="rgba(214,196,150,0.7)" transform="rotate(5 941 105)" />
+                        <text x="604" y="132" fontSize="14" fontWeight="700" fill={COL.ink}>Antalet sätt att fördela brickorna</text>
+                        <text x="604" y="150" fontSize="11.5" fill={COL.soft}>Kulan visar var systemet är just nu</text>
+                        {st.q > 40
+                            ? <path d={berg} fill="url(#berg)" stroke="#475569" strokeWidth="1.3" strokeLinejoin="round" />
+                            : l.map((v, i) => {
+                                const h = (O.y0 - O.y1) * Math.exp(v - lmax);
+                                return <rect key={i} x={O.x0 + i * bw + 1} y={O.y0 - h} width={Math.max(1, bw - 2)} height={h} fill="#9aa8bd" stroke="#475569" strokeWidth="0.8" />;
+                            })}
+                        <line x1={O.x0} y1={O.y0} x2={O.x1} y2={O.y0} stroke={COL.ink} strokeWidth="1.3" />
+                        {/* flaggan vid startfördelningen */}
+                        <line x1={startX} y1={O.y0} x2={startX} y2={O.y1 + 6} stroke={COL.ink} strokeWidth="1.2" />
+                        <path d={`M ${startX} ${O.y1 + 6} L ${startX + 22} ${O.y1 + 12} L ${startX} ${O.y1 + 18} Z`} fill={COL.grans} />
+                        <text x={startX + 26} y={O.y1 + 16} fontSize="11.5" fill={COL.soft}>start</text>
+                        <circle cx={kx} cy={ky} r="8.5" fill="url(#kula)" stroke="#1f2937" strokeWidth="1.2" />
+                        <text x={O.x0} y={O.y0 + 16} textAnchor="middle" fontSize="11" fill={COL.soft}>0</text>
+                        <text x={O.x1} y={O.y0 + 16} textAnchor="middle" fontSize="11" fill={COL.soft}>{st.q}</text>
+                        <text x={(O.x0 + O.x1) / 2} y={O.y0 + 16} textAnchor="middle" fontSize="11" fill={COL.soft}>brickor i block A</text>
+                        <text x="604" y="338" fontSize="12.5" fill={COL.ink}>Nu: <Tiopot lg={lgNu} /> sätt. Toppen: <Tiopot lg={lgMax} /> sätt.</text>
+                    </g>
+
+                    {/* dataloggern på bänken */}
+                    <g>
+                        <rect x="596" y="378" width="374" height="178" rx="10" fill="#2f3542" stroke="#161a22" strokeWidth="1.5" />
+                        <rect x="603" y={BENK - 4} width="24" height="5" rx="2" fill="#161a22" />
+                        <rect x="939" y={BENK - 4} width="24" height="5" rx="2" fill="#161a22" />
+                        <rect x="608" y="390" width="350" height="128" rx="4" fill="#e7ecdc" stroke="#11151c" strokeWidth="1.5" />
+                        <text x={G.x0 + 6} y="405" fontSize="10.5" fill="#3b4232"><tspan fontStyle="italic">T</tspan> (°C)</text>
+                        <text x={G.x1} y="513" textAnchor="end" fontSize="10.5" fill="#3b4232"><tspan fontStyle="italic">t</tspan>, de senaste 60 s</text>
+                        <line x1={G.x0} y1={G.y0} x2={G.x1} y2={G.y0} stroke="#3b4232" strokeWidth="1" />
+                        <line x1={G.x0} y1={G.y0} x2={G.x0} y2={G.y1} stroke="#3b4232" strokeWidth="1" />
+                        {[0, 50, 100].map((T) => <text key={T} x={G.x0 - 5} y={ty(T) + 3.5} textAnchor="end" fontSize="10" fill="#3b4232">{T}</text>)}
+                        {[50, 100].map((T) => <line key={T} x1={G.x0} y1={ty(T)} x2={G.x1} y2={ty(T)} stroke="rgba(59,66,50,0.18)" strokeWidth="1" />)}
+                        {!dolj && <line x1={G.x0} y1={ty(Ts)} x2={G.x1} y2={ty(Ts)} stroke="rgba(59,66,50,0.55)" strokeWidth="1" strokeDasharray="4 3" />}
+                        {!dolj && <path d={linje('A')} fill="none" stroke={COL.varm} strokeWidth="2.2" strokeLinejoin="round" />}
+                        {!dolj && <path d={linje('B')} fill="none" stroke={COL.kall} strokeWidth="2.2" strokeLinejoin="round" />}
+                        {dolj && <text x={(G.x0 + G.x1) / 2} y={(G.y0 + G.y1) / 2 + 5} textAnchor="middle" fontSize="13" fill="#3b4232">Skärmen är dold i gissa-läget</text>}
+                        <text x="612" y="542" fontSize="12" fontWeight="600" fill="#cbd5e1" letterSpacing="0.06em">DATALOGGER</text>
+                        <text x="760" y="542" fontSize="15" fontWeight="700" fill="#fdba74"><SvgVar s="T" i="A" size={15} /> {dolj ? '?' : `${fmt(Tvisad.A, 1)} °C`}</text>
+                        <text x="870" y="542" fontSize="15" fontWeight="700" fill="#93c5fd"><SvgVar s="T" i="B" size={15} /> {dolj ? '?' : `${fmt(Tvisad.B, 1)} °C`}</text>
+                    </g>
                 </g>
             );
         };
@@ -580,104 +699,186 @@
             kyl:   { varm: ['Köket', 'kylskåpet värmer rummet'], kall: ['Kylskåpets insida', 'luften och maten i skåpet'],
                      maskin: 'kompressorn', last: 'eluttag' },
         };
-        const MaskinScen = ({ typ, Tv, Tk, Qv, W, Qk, mojlig, flyg2, nu, lyft, dolj, exempel }) => {
+        // maskinens delar
+        const BENK2 = 622;
+        const VARM = { x: 40, y: 42, w: 390, h: 100 }, KALL = { x: 40, y: 512, w: 390, h: 110 };
+        const BAND_X = 170;                                  // där värmebanden går
+        const CYL = { x: 100, y: 292, w: 140, h: 60 };
+        const HJUL = { x: 330, y: 322, r: 50 };
+        const LAST_X = 556;                                  // där arbetsbandet når lasten
+        const VEV = 22, VEVSTAKE = 132;
+
+        const MaskinScen = ({ typ, Tv, Tk, Qv, W, Qk, mojlig, flyg2, nu, lyft, dolj, exempel, kor, klickMaskin }) => {
             const ex_ = EXEMPEL[exempel] || null;
-            const arbetet = lyft * 10 * 9.82;                  // J som maskinen hittills har gjort
-            const ex = 300, ey = 330, er = 46;
-            const varm = { x: 60, y: 110, w: 240, h: 90 }, kall = { x: 60, y: 470, w: 240, h: 90 };
-            const skala = 0.18;                                 // px per joule i flödesbanden
-            const b = (E) => Math.max(3, E * skala);
             const pump = typ === 'pump';
-            const viktY = 360 - Math.min(150, lyft * 20);
+            const arbetet = lyft * 10 * 9.82;                  // J som maskinen hittills har gjort
+            const go = kor && mojlig;
+            // bandens bredd följer energin, med samma skala för alla tre
+            const skala = Math.min(0.3, 62 / Math.max(Qv, W, Qk, 1));
+            const b = (E) => Math.max(2.5, E * skala);
+            const Wmax = M.etaMax(Tv, Tk) * Qv;
+            const qkm = M.qkMax(Tv, Tk, W);
+            const vinkel = go ? (nu / 1000) * (pump ? -3.4 : 3.4) : 0.6;
+            const pin = { x: HJUL.x + VEV * Math.cos(vinkel), y: HJUL.y + VEV * Math.sin(vinkel) };
+            const kolvX = pin.x - Math.sqrt(VEVSTAKE * VEVSTAKE - (pin.y - CYL.y - CYL.h / 2) ** 2);
+            const flytt = go ? -(nu / 28) : 0;                   // strömmen i banden
+            const rod = !mojlig && !dolj;
+            const wFarg = rod ? COL.grans : COL.W;
+            const viktY = 440 - Math.min(250, lyft * 40);
+            const band = (d, E, c, key) => (
+                <g key={key}>
+                    <path d={d} stroke={c} strokeWidth={b(E)} opacity="0.32" fill="none" />
+                    <path d={d} stroke={c} strokeWidth={b(E)} opacity="0.5" fill="none" strokeDasharray="3 13" strokeDashoffset={flytt} />
+                </g>
+            );
+            // Q_v-bandet, Q_k-bandet och W-bandet, riktade efter maskintypen
+            const qvD = `M ${BAND_X} ${VARM.y + VARM.h} L ${BAND_X} ${CYL.y}`;
+            const qkD = `M ${BAND_X} ${CYL.y + CYL.h} L ${BAND_X} ${KALL.y}`;
+            const wD = `M ${HJUL.x + HJUL.r} ${HJUL.y} L ${LAST_X} ${HJUL.y}`;
+            const behallare = (r, varm) => {
+                const namn = ex_ ? (varm ? ex_.varm : ex_.kall) : [varm ? 'Varm behållare' : 'Kall behållare', null];
+                const T = varm ? Tv : Tk;
+                return (
+                    <g>
+                        <rect x={r.x} y={r.y} width={r.w} height={r.h} rx="10" fill={varm ? 'url(#het)' : 'url(#kallt)'} stroke={varm ? '#9a3412' : '#1e3a8a'} strokeWidth="2" />
+                        {varm
+                            ? [0, 1, 2, 3, 4, 5].map((i) => {
+                                const x = r.x + 230 + i * 26, f = (nu / 900 + i * 0.37) % 1;
+                                return <path key={i} d={`M ${x} ${r.y + r.h - 14} c -6 -10 6 -16 0 -26 s 6 -16 0 -26`} fill="none" stroke="#c2410c" strokeWidth="2" strokeLinecap="round" opacity={go ? 0.25 + 0.5 * Math.sin(Math.PI * f) : 0.35} />;
+                            })
+                            : (ex_ && ex_.last !== 'eluttag' ? [] : [[262, 0.3], [318, -0.4], [372, 0.2]]).map(([x, rot], i) => (
+                                <rect key={i} x={x} y={r.y + 24 + (i % 2) * 8} width="30" height="26" rx="4" fill="rgba(240,249,255,0.85)" stroke="#60a5fa" strokeWidth="1.4" transform={`rotate(${rot * 20} ${x + 15} ${r.y + 37})`} />
+                            ))}
+                        <text x={r.x + 16} y={r.y + 30} fontSize="15.5" fontWeight="700" fill={varm ? '#7c2d12' : '#1e3a8a'}>{namn[0]}</text>
+                        {namn[1] && <text x={r.x + 16} y={r.y + 49} fontSize="12" fill={COL.soft}>{namn[1]}</text>}
+                        <text x={r.x + 16} y={r.y + (namn[1] ? 76 : 62)} fontSize="15" fill={COL.ink}>
+                            <SvgVar s="T" i={varm ? 'v' : 'k'} size={15} /> = {fmt(T, 0)} K ({fmt(T - KELVIN, 0)} °C)
+                        </text>
+                    </g>
+                );
+            };
+            const pilV = (x, y1, y2, c, E) => <Pil x1={x} y1={y1} x2={x} y2={y2} color={c} width={2.2} head={Math.max(12, b(E) * 0.42 + 9)} />;
             return (
                 <g fontFamily="Poppins, sans-serif">
-                    {/* behållarna */}
-                    <rect x={varm.x} y={varm.y} width={varm.w} height={varm.h} rx="8" fill="rgba(217,72,15,0.18)" stroke={COL.varm} strokeWidth="2" />
-                    <text x={varm.x + 14} y={varm.y + (ex_ ? 27 : 32)} fontSize="15" fontWeight="600" fill={COL.varm}>{ex_ ? ex_.varm[0] : 'Varm behållare'}</text>
-                    {ex_ && <text x={varm.x + 14} y={varm.y + 47} fontSize="12" fill={COL.soft}>{ex_.varm[1]}</text>}
-                    <text x={varm.x + 14} y={varm.y + (ex_ ? 73 : 58)} fontSize="14" fill={COL.ink}><tspan fontStyle="italic">T</tspan><tspan fontSize="10" dy="4">v</tspan><tspan dy="-4"> = {fmt(Tv, 0)} K ({fmt(Tv - KELVIN, 0)} °C)</tspan></text>
-                    <rect x={kall.x} y={kall.y} width={kall.w} height={kall.h} rx="8" fill="rgba(37,99,201,0.15)" stroke={COL.kall} strokeWidth="2" />
-                    <text x={kall.x + 14} y={kall.y + (ex_ ? 27 : 32)} fontSize="15" fontWeight="600" fill={COL.kall}>{ex_ ? ex_.kall[0] : 'Kall behållare'}</text>
-                    {ex_ && <text x={kall.x + 14} y={kall.y + 47} fontSize="12" fill={COL.soft}>{ex_.kall[1]}</text>}
-                    <text x={kall.x + 14} y={kall.y + (ex_ ? 73 : 58)} fontSize="14" fill={COL.ink}><tspan fontStyle="italic">T</tspan><tspan fontSize="10" dy="4">k</tspan><tspan dy="-4"> = {fmt(Tk, 0)} K ({fmt(Tk - KELVIN, 0)} °C)</tspan></text>
+                    <Bank y={BENK2} h={38} />
+                    {behallare(VARM, true)}
+                    {/* den kalla behållaren: ett glaskar med isvatten på bänken */}
+                    {behallare(KALL, false)}
 
-                    {/* flödesbanden */}
-                    <path d={`M ${ex - 20} ${varm.y + varm.h} L ${ex - 20} ${ey - er + 4}`} stroke={COL.varm} strokeWidth={b(Qv)} opacity="0.35" fill="none" />
-                    <path d={`M ${ex - 20} ${ey + er - 4} L ${ex - 20} ${kall.y}`} stroke={COL.sliten} strokeWidth={b(Qk)} opacity="0.45" fill="none" />
-                    <path d={`M ${ex + er - 4} ${ey} L 560 ${ey}`} stroke={COL.W} strokeWidth={b(W)} opacity="0.35" fill="none" />
-                    <text x={ex - 20 + b(Qv) / 2 + 8} y={(varm.y + varm.h + ey - er) / 2 + 4} fontSize="15" fontWeight="600" fill={COL.varm}>
-                        <tspan fontStyle="italic">Q</tspan><tspan fontSize="10" dy="4">v</tspan><tspan dy="-4"> = {fmt(Qv, 0)} J {pump ? 'ut' : 'in'}</tspan>
+                    {/* energibanden */}
+                    {band(qvD, Qv, COL.varm, 'qv')}
+                    {band(qkD, Qk, COL.sliten, 'qk')}
+                    {band(wD, W, wFarg, 'w')}
+                    {/* den största möjliga arbetsmängden som streckad kontur */}
+                    {!pump && !dolj && Wmax * skala < 120 && (
+                        <rect x={HJUL.x + HJUL.r + 20} y={HJUL.y - Wmax * skala / 2} width={LAST_X - HJUL.x - HJUL.r - 40} height={Math.max(1, Wmax * skala)}
+                              fill="none" stroke={COL.W} strokeWidth="1.4" strokeDasharray="5 4" />
+                    )}
+                    {pump && !dolj && qkm * skala < 130 && (
+                        <rect x={BAND_X - qkm * skala / 2} y={CYL.y + CYL.h + 22} width={Math.max(1, qkm * skala)} height={KALL.y - CYL.y - CYL.h - 44}
+                              fill="none" stroke="#475569" strokeWidth="1.4" strokeDasharray="5 4" />
+                    )}
+                    {/* riktningen */}
+                    {pump ? pilV(BAND_X, CYL.y - 6, VARM.y + VARM.h + 4, COL.varm, Qv) : pilV(BAND_X, VARM.y + VARM.h + 10, CYL.y - 4, COL.varm, Qv)}
+                    {pump ? pilV(BAND_X, KALL.y - 6, CYL.y + CYL.h + 4, '#475569', Qk) : pilV(BAND_X, CYL.y + CYL.h + 6, KALL.y - 4, '#475569', Qk)}
+                    {pump ? <Pil x1={LAST_X - 4} y1={HJUL.y} x2={HJUL.x + HJUL.r + 6} y2={HJUL.y} color={wFarg} width={2.2} head={Math.max(12, b(W) * 0.42 + 9)} />
+                          : <Pil x1={HJUL.x + HJUL.r + 6} y1={HJUL.y} x2={LAST_X - 4} y2={HJUL.y} color={wFarg} width={2.2} head={Math.max(12, b(W) * 0.42 + 9)} />}
+                    {/* etiketterna i fri yta bredvid banden */}
+                    <text x={BAND_X + b(Qv) / 2 + 14} y={(VARM.y + VARM.h + CYL.y) / 2 + 6} fontSize="16" fontWeight="700" fill={COL.varm}>
+                        <SvgVar s="Q" i="v" size={16} /> = {fmt(Qv, 0)} J
                     </text>
-                    <text x={ex - 20 + b(Qk) / 2 + 8} y={(ey + er + kall.y) / 2 + 4} fontSize="15" fontWeight="600" fill="#475569">
-                        <tspan fontStyle="italic">Q</tspan><tspan fontSize="10" dy="4">k</tspan><tspan dy="-4"> = {fmt(Qk, 0)} J {pump ? 'in' : 'ut'}</tspan>
+                    <text x={BAND_X + b(Qk) / 2 + 14} y={(CYL.y + CYL.h + KALL.y) / 2 + 6} fontSize="16" fontWeight="700" fill="#475569">
+                        <SvgVar s="Q" i="k" size={16} /> = {fmt(Qk, 0)} J
                     </text>
-                    <text x={(ex + er + 560) / 2} y={ey - b(W) / 2 - 10} textAnchor="middle" fontSize="15" fontWeight="600" fill={COL.W}>
-                        <tspan fontStyle="italic">W</tspan> = {fmt(W, 0)} J {pump ? 'in' : 'ut'}
+                    <text x={(HJUL.x + HJUL.r + LAST_X) / 2} y={HJUL.y - Math.max(b(W), !pump && !dolj ? Wmax * skala : 0) / 2 - 12} textAnchor="middle" fontSize="16" fontWeight="700" fill={wFarg}>
+                        <tspan fontStyle="italic">W</tspan> = {fmt(W, 0)} J
                     </text>
-
-                    {/* maskinen */}
-                    <circle cx={ex} cy={ey} r={er} fill={mojlig ? '#e5e7eb' : '#fecaca'} stroke={mojlig ? '#4b5563' : COL.grans} strokeWidth="3" />
-                    <g transform={`rotate(${mojlig ? (nu / (pump ? -8 : 8)) % 360 : 0} ${ex} ${ey})`}>
-                        {[0, 60, 120].map((a) => <line key={a} x1={ex - Math.cos(a * Math.PI / 180) * (er - 10)} y1={ey - Math.sin(a * Math.PI / 180) * (er - 10)} x2={ex + Math.cos(a * Math.PI / 180) * (er - 10)} y2={ey + Math.sin(a * Math.PI / 180) * (er - 10)} stroke="#6b7280" strokeWidth="4" />)}
-                        <circle cx={ex} cy={ey} r="8" fill="#374151" />
-                    </g>
-                    <text x={ex + er + 10} y={ey + er + 4} fontSize="14" fontWeight="600" fill={mojlig ? COL.ink : COL.grans}>{ex_ ? ex_.maskin : pump ? 'värmepump' : 'värmemaskin'}</text>
-                    {ex_ && <text x={ex + er + 10} y={ey + er + 22} fontSize="12" fill={COL.soft}>{pump ? 'en värmepump' : 'en värmemaskin'}</text>}
-                    {!mojlig && !dolj && (
-                        <g>
-                            <path d={`M ${ex - 30} ${ey - 30} L ${ex + 30} ${ey + 30} M ${ex + 30} ${ey - 30} L ${ex - 30} ${ey + 30}`} stroke={COL.grans} strokeWidth="6" strokeLinecap="round" />
-                            <text x="40" y="620" fontSize="14" fontWeight="600" fill={COL.grans}>
-                                {pump ? 'Omöjligt: så mycket värme kan inte flyttas från kallt till varmt med så lite arbete.' : 'Omöjligt: verkningsgraden är högre än den högsta möjliga.'}
-                            </text>
-                        </g>
+                    {!pump && !dolj && Wmax * skala < 120 && (
+                        <text x={(HJUL.x + HJUL.r + LAST_X) / 2} y={HJUL.y + Math.max(b(W), Wmax * skala) / 2 + 20} textAnchor="middle" fontSize="12" fill={COL.W}>
+                            högst möjligt: {fmt(Wmax, 0)} J
+                        </text>
                     )}
 
-                    {/* arbetet lyfter en vikt, eller en elmotor driver pumpen */}
+                    {/* maskinen: cylinder, kolv, vevstake och svänghjul; ett klick startar eller pausar */}
+                    <g onClick={klickMaskin} style={{ cursor: 'pointer' }}>
+                        <rect x={CYL.x} y={CYL.y} width={CYL.w} height={CYL.h} rx="5" fill={rod ? '#fecaca' : 'url(#stal)'} stroke={rod ? COL.grans : '#374151'} strokeWidth="2.2" />
+                        {[0, 1, 2, 3, 4].map((i) => <line key={i} x1={CYL.x + 14 + i * 12} y1={CYL.y - 7} x2={CYL.x + 14 + i * 12} y2={CYL.y + CYL.h + 7} stroke={rod ? COL.grans : '#4b5563'} strokeWidth="5" opacity="0.55" />)}
+                        <rect x={CYL.x + 4} y={CYL.y + 10} width={CYL.w - 8} height={CYL.h - 20} fill="#d1d5db" stroke="#4b5563" strokeWidth="1" />
+                        <rect x={kolvX - 22} y={CYL.y + 11} width="24" height={CYL.h - 22} rx="2" fill="#6b7280" stroke="#1f2937" strokeWidth="1.2" />
+                        <line x1={kolvX - 10} y1={CYL.y + CYL.h / 2} x2={pin.x} y2={pin.y} stroke="#374151" strokeWidth="6" strokeLinecap="round" />
+                        <circle cx={HJUL.x} cy={HJUL.y} r={HJUL.r} fill="none" stroke={rod ? COL.grans : '#374151'} strokeWidth="9" />
+                        <g transform={`rotate(${vinkel * 180 / Math.PI} ${HJUL.x} ${HJUL.y})`}>
+                            {[0, 60, 120].map((a) => <line key={a} x1={HJUL.x - (HJUL.r - 4) * Math.cos(a * Math.PI / 180)} y1={HJUL.y - (HJUL.r - 4) * Math.sin(a * Math.PI / 180)}
+                                                          x2={HJUL.x + (HJUL.r - 4) * Math.cos(a * Math.PI / 180)} y2={HJUL.y + (HJUL.r - 4) * Math.sin(a * Math.PI / 180)} stroke="#4b5563" strokeWidth="4" />)}
+                        </g>
+                        <circle cx={HJUL.x} cy={HJUL.y} r="9" fill="#1f2937" />
+                        <circle cx={pin.x} cy={pin.y} r="5" fill="#9ca3af" stroke="#1f2937" strokeWidth="1.4" />
+                        <text x={HJUL.x} y={HJUL.y + HJUL.r + 26} textAnchor="middle" fontSize="15" fontWeight="700" fill={rod ? COL.grans : COL.ink}>
+                            {ex_ ? ex_.maskin : pump ? 'värmepumpen' : 'värmemaskinen'}
+                        </text>
+                        {ex_ && <text x={HJUL.x} y={HJUL.y + HJUL.r + 44} textAnchor="middle" fontSize="12" fill={COL.soft}>{pump ? 'en värmepump' : 'en värmemaskin'}</text>}
+                        {rod && <path d={`M ${HJUL.x - 34} ${HJUL.y - 34} L ${HJUL.x + 34} ${HJUL.y + 34} M ${HJUL.x + 34} ${HJUL.y - 34} L ${HJUL.x - 34} ${HJUL.y + 34}`} stroke={COL.grans} strokeWidth="7" strokeLinecap="round" />}
+                    </g>
+
+                    {/* lasten: en vikt, bilen, generatorn eller elmotorn */}
                     {!pump && ex_ && ex_.last === 'bil' ? (
-                        // arbetet driver bilen: hjulen snurrar och fartstrecken visar att den rullar
                         <g>
-                            <g transform={`translate(572 ${ey - 50}) scale(1.6)`}>
+                            <g transform={`translate(566 ${HJUL.y - 48}) scale(1.75)`}>
                                 <path d="M 0 25 L 0 18 C 0 16 2 15 5 14 L 21 13 C 29 2 42 0 53 0 L 66 0 C 77 1 85 6 91 14 L 105 16 C 108 16 109 18 109 20 L 109 25 Z" fill="#c8324a" stroke="#7f1d1d" strokeWidth="0.6" strokeLinejoin="round" />
                                 <path d="M 28 14 L 35 4 L 51 4 L 51 14 Z" fill="#dbeafe" />
                                 <path d="M 55 14 L 55 4 L 68 4 L 75 14 Z" fill="#dbeafe" />
                                 {[24, 86].map((hx) => (
-                                    <g key={hx} transform={`rotate(${mojlig ? (nu / 3) % 360 : 0} ${hx} 25)`}>
+                                    <g key={hx} transform={`rotate(${go ? (nu / 3) % 360 : 0} ${hx} 25)`}>
                                         <circle cx={hx} cy="25" r="6" fill="#1f2937" /><circle cx={hx} cy="25" r="2.6" fill="#9ca3af" />
                                         <line x1={hx - 4.5} y1="25" x2={hx + 4.5} y2="25" stroke="#9ca3af" strokeWidth="1" />
                                     </g>
                                 ))}
                             </g>
-                            <line x1="560" y1={ey + 1} x2="760" y2={ey + 1} stroke="#6b5a45" strokeWidth="2" />
-                            {mojlig && [0, 1, 2].map((j) => {
-                                const fx = 548 - ((nu / 6 + j * 11) % 30);
-                                return <line key={j} x1={fx} y1={ey - 34 + j * 10} x2={fx + 18} y2={ey - 34 + j * 10} stroke="rgba(15,22,32,0.3)" strokeWidth="2" strokeLinecap="round" />;
-                            })}
-                            <text x="572" y={ey + 26} fontSize="13" fill={COL.soft}>arbetet driver bilen: {fmt(arbetet / 1000, 1)} kJ hittills</text>
+                            <line x1="556" y1={HJUL.y + 37} x2="790" y2={HJUL.y + 37} stroke="#6b5a45" strokeWidth="2.4" />
+                            {[0, 1, 2, 3, 4, 5].map((j) => <line key={j} x1={570 + ((j * 40 - (go ? nu / 4 : 0)) % 220 + 220) % 220} y1={HJUL.y + 42} x2={584 + ((j * 40 - (go ? nu / 4 : 0)) % 220 + 220) % 220} y2={HJUL.y + 42} stroke="#6b5a45" strokeWidth="2" />)}
+                            <text x="566" y={HJUL.y + 68} fontSize="13" fill={COL.soft}>arbetet driver bilen: {fmt(arbetet / 1000, 1)} kJ hittills</text>
                         </g>
                     ) : !pump && ex_ && ex_.last === 'generator' ? (
-                        // arbetet driver en generator som ger el till elnätet
                         <g>
-                            <rect x="560" y={ey - 34} width="96" height="68" rx="8" fill="#e5e7eb" stroke="#4b5563" strokeWidth="2" />
-                            <text x="608" y={ey + 5} textAnchor="middle" fontSize="13" fontWeight="600" fill={COL.ink}>generator</text>
-                            <path d={`M 656 ${ey} L 700 ${ey}`} stroke="#4b5563" strokeWidth="2" />
-                            <path d={`M 712 ${ey - 22} L 700 ${ey + 3} L 712 ${ey + 3} L 704 ${ey + 24}`} fill="none" stroke="#ca8a04" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
-                            <text x="560" y={ey + 56} fontSize="13" fill={COL.soft}>el till elnätet: {fmt(arbetet / 1000, 1)} kJ hittills</text>
+                            <rect x={LAST_X} y={HJUL.y - 36} width="104" height="72" rx="10" fill="url(#stal)" stroke="#374151" strokeWidth="2" />
+                            <circle cx={LAST_X + 52} cy={HJUL.y} r="22" fill="#e5e7eb" stroke="#374151" strokeWidth="1.6" />
+                            <path d={`M ${LAST_X + 36} ${HJUL.y} c 4 -12 8 -12 12 0 s 8 12 12 0 s 8 -12 8 -6`} fill="none" stroke="#b45309" strokeWidth="2.2" strokeLinecap="round" />
+                            <text x={LAST_X + 52} y={HJUL.y + 56} textAnchor="middle" fontSize="13" fontWeight="600" fill={COL.ink}>generator</text>
+                            <path d={`M ${LAST_X + 104} ${HJUL.y} L 720 ${HJUL.y} L 720 ${HJUL.y - 60}`} fill="none" stroke="#1f2937" strokeWidth="2.4" />
+                            <circle cx="720" cy={HJUL.y - 82} r="20" fill={go ? '#fde68a' : '#f3f4f6'} stroke="#92400e" strokeWidth="1.8" />
+                            <path d={`M 712 ${HJUL.y - 62} L 712 ${HJUL.y - 74} L 716 ${HJUL.y - 88} M 728 ${HJUL.y - 62} L 728 ${HJUL.y - 74} L 724 ${HJUL.y - 88}`} fill="none" stroke="#92400e" strokeWidth="1.4" />
+                            <rect x="710" y={HJUL.y - 64} width="20" height="8" fill="#6b7280" />
+                            <text x={LAST_X} y={HJUL.y + 84} fontSize="13" fill={COL.soft}>el till elnätet: {fmt(arbetet / 1000, 1)} kJ hittills</text>
                         </g>
                     ) : !pump ? (
                         <g>
-                            <circle cx="600" cy="150" r="20" fill="#e5e7eb" stroke="#4b5563" strokeWidth="2" />
-                            <line x1="560" y1={ey} x2="580" y2={ey} stroke="#5b4a3a" strokeWidth="1.8" />
-                            <line x1="580" y1={ey} x2="580" y2="150" stroke="#5b4a3a" strokeWidth="1.8" />
-                            <line x1="620" y1="150" x2="620" y2={viktY} stroke="#5b4a3a" strokeWidth="1.8" />
-                            <rect x="596" y={viktY} width="48" height="40" rx="3" fill="#57534e" stroke="#292524" strokeWidth="1.2" />
-                            <text x="620" y={viktY + 25} textAnchor="middle" fontSize="12" fill="#f5f5f4">10 kg</text>
-                            <text x="660" y={viktY + 25} fontSize="13" fill={COL.soft}>har lyfts {fmt(lyft, 2)} m</text>
+                            {/* vinsch, trissa på ett stativ och en vikt på 10 kg */}
+                            <rect x="772" y="92" width="10" height={BENK2 - 92} fill="#6b7280" stroke="#374151" strokeWidth="1" />
+                            <rect x="744" y={BENK2 - 8} width="66" height="8" rx="2" fill="#374151" />
+                            <rect x="690" y="88" width="92" height="8" fill="#6b7280" stroke="#374151" strokeWidth="1" />
+                            <line x1="700" y1="96" x2="700" y2="108" stroke="#374151" strokeWidth="3" />
+                            <circle cx="700" cy="118" r="17" fill="#e5e7eb" stroke="#374151" strokeWidth="2" />
+                            <circle cx="700" cy="118" r="3.5" fill="#374151" />
+                            <line x1={LAST_X + 24} y1={HJUL.y - 26} x2={683} y2={118} stroke="#5b4a3a" strokeWidth="1.8" />
+                            <line x1="717" y1="118" x2="717" y2={viktY} stroke="#5b4a3a" strokeWidth="1.8" />
+                            <circle cx={LAST_X + 26} cy={HJUL.y} r="26" fill="url(#stal)" stroke="#374151" strokeWidth="2" />
+                            <g transform={`rotate(${vinkel * 90 / Math.PI} ${LAST_X + 26} ${HJUL.y})`}>
+                                <line x1={LAST_X + 8} y1={HJUL.y} x2={LAST_X + 44} y2={HJUL.y} stroke="#374151" strokeWidth="3" />
+                                <line x1={LAST_X + 26} y1={HJUL.y - 18} x2={LAST_X + 26} y2={HJUL.y + 18} stroke="#374151" strokeWidth="3" />
+                            </g>
+                            <path d={`M 699 ${viktY + 8} L 735 ${viktY + 8} L 741 ${viktY + 50} L 693 ${viktY + 50} Z`} fill="#57534e" stroke="#1c1917" strokeWidth="1.3" strokeLinejoin="round" />
+                            <path d={`M 709 ${viktY + 8} C 709 ${viktY - 2} 725 ${viktY - 2} 725 ${viktY + 8}`} fill="none" stroke="#1c1917" strokeWidth="2" />
+                            <text x="717" y={viktY + 35} textAnchor="middle" fontSize="12.5" fontWeight="600" fill="#f5f5f4">10 kg</text>
+                            <text x="717" y={viktY + 70} textAnchor="middle" fontSize="12.5" fill={COL.soft}>lyft {fmt(lyft, 2)} m</text>
                         </g>
                     ) : (
                         <g>
-                            <rect x="560" y={ey - 34} width="80" height="68" rx="8" fill="#e5e7eb" stroke="#4b5563" strokeWidth="2" />
-                            <text x="600" y={ey + 5} textAnchor="middle" fontSize="13" fontWeight="600" fill={COL.ink}>elmotor</text>
-                            {ex_ && <text x="560" y={ey + 54} fontSize="12" fill={COL.soft}>drivs med el från eluttaget</text>}
+                            <rect x={LAST_X} y={HJUL.y - 36} width="96" height="72" rx="10" fill="url(#stal)" stroke="#374151" strokeWidth="2" />
+                            <text x={LAST_X + 48} y={HJUL.y + 5} textAnchor="middle" fontSize="13.5" fontWeight="700" fill={COL.ink}>elmotor</text>
+                            <path d={`M ${LAST_X + 96} ${HJUL.y + 10} C 712 ${HJUL.y + 10} 740 ${HJUL.y + 30} 740 ${HJUL.y + 70}`} fill="none" stroke="#1f2937" strokeWidth="3" />
+                            <rect x="721" y={HJUL.y + 70} width="38" height="44" rx="6" fill="#f3f4f6" stroke="#374151" strokeWidth="1.8" />
+                            <circle cx="734" cy={HJUL.y + 92} r="3" fill="#374151" /><circle cx="746" cy={HJUL.y + 92} r="3" fill="#374151" />
+                            <text x={LAST_X} y={HJUL.y + 58} fontSize="12.5" fill={COL.soft}>{ex_ ? 'drivs med el från eluttaget' : 'arbetet kommer från en elmotor'}</text>
                         </g>
                     )}
 
@@ -685,34 +886,115 @@
                     {flyg2.map((f) => {
                         if (nu < f.t0) return null;
                         const u = Math.min(1, (nu - f.t0) / 900);
-                        const x = f.x0 + (f.x1 - f.x0) * u, y = f.y0 + (f.y1 - f.y0) * u;
-                        return <rect key={f.id} x={x - 6} y={y - 6} width="12" height="12" rx="2" fill={f.c} stroke="rgba(15,22,32,0.35)" strokeWidth="0.7" />;
+                        return <Bricka key={f.id} x={f.x0 + (f.x1 - f.x0) * u} y={f.y0 + (f.y1 - f.y0) * u} s={11} fill={f.c} />;
                     })}
 
-                    {/* kvaliteten */}
+                    {/* energins kvalitet: en stege från arbete till sliten värme */}
                     <g>
-                        <text x="640" y="440" fontSize="13" fontWeight="600" fill={COL.ink}>Energins kvalitet</text>
-                        {[[COL.W, 'arbete: kan bli vilken energiform som helst'], [COL.varm, 'värme vid hög temperatur'], [COL.sliten, 'värme vid låg temperatur']].map(([c, t], i) => (
+                        <text x="798" y="168" fontSize="14" fontWeight="700" fill={COL.ink}>Energins kvalitet</text>
+                        <rect x="800" y="190" width="12" height="290" rx="6" fill="url(#kvalitet)" />
+                        <text x="806" y="500" textAnchor="middle" fontSize="11" fill={COL.soft}>låg</text>
+                        <text x="806" y="184" textAnchor="middle" fontSize="11" fill={COL.soft}>hög</text>
+                        {[[COL.W, 'Arbete', 'kan bli all slags energi', <tspan><tspan fontStyle="italic">W</tspan> = {fmt(W, 0)} J</tspan>, 212],
+                          [COL.varm, 'Värme, hög temperatur', 'kan delvis bli arbete', <tspan><SvgVar s="Q" i="v" size={13} /> = {fmt(Qv, 0)} J</tspan>, 330],
+                          ['#64748b', 'Värme, låg temperatur', 'gör nästan ingen nytta', <tspan><SvgVar s="Q" i="k" size={13} /> = {fmt(Qk, 0)} J</tspan>, 448]].map(([c, t1, t2, v, y], i) => (
                             <g key={i}>
-                                <rect x="640" y={454 + i * 24} width="14" height="14" rx="2" fill={c} />
-                                <text x="662" y={466 + i * 24} fontSize="13" fill={COL.soft}>{t}</text>
+                                <line x1="812" y1={y - 7} x2="824" y2={y - 7} stroke={c} strokeWidth="2" />
+                                <text x="828" y={y - 3} fontSize="12" fontWeight="700" fill={COL.ink}>{t1}</text>
+                                <text x="828" y={y + 13} fontSize="11" fill={COL.soft}>{t2}</text>
+                                <text x="828" y={y + 31} fontSize="13" fontWeight="700" fill={c}>{v}</text>
                             </g>
                         ))}
+                        <text x="798" y="530" fontSize="12" fill={COL.ink}>Energin bevaras:</text>
+                        <text x="798" y="548" fontSize="12.5" fontWeight="700" fill={COL.ink}>{fmt(Qv, 0)} J = {fmt(W, 0)} J + {fmt(Qk, 0)} J</text>
                     </g>
+
+                    {/* mätaren: var maskinen ligger i förhållande till andra huvudsatsens gräns */}
+                    {(() => {
+                        const cx = 556, cy = 528, R = 96;
+                        // maskinen: verkningsgraden 0 … 100 %; pumpen: värmen från kalla sidan 0 … 2 · gränsen
+                        const max = pump ? Math.max(2 * qkm, 1.25 * Qk, 1) : 1;
+                        const varde = pump ? Qk : W / Qv, grans = pump ? qkm : M.etaMax(Tv, Tk);
+                        const vink = (f) => Math.PI * (1 - Math.max(0, Math.min(1, f)));
+                        const pt = (f, r) => ({ x: cx + r * Math.cos(vink(f)), y: cy - r * Math.sin(vink(f)) });
+                        const bage = (f0, f1, r) => { const a = pt(f0, r), c = pt(f1, r); return `M ${a.x} ${a.y} A ${r} ${r} 0 0 1 ${c.x} ${c.y}`; };
+                        const fg = Math.min(1, grans / max), fv = Math.min(1, varde / max);
+                        const nal = pt(fv, R - 14);
+                        return (
+                            <g>
+                                <path d={`${bage(0, 1, R + 14)} L ${cx + R - 14} ${cy} A ${R - 14} ${R - 14} 0 0 0 ${cx - R + 14} ${cy} Z`} fill="#fbf8f1" stroke="rgba(15,22,32,0.25)" strokeWidth="1" />
+                                {dolj
+                                    ? <path d={bage(0, 1, R)} stroke="#cbd5e1" strokeWidth="14" fill="none" />
+                                    : <React.Fragment>
+                                        <path d={bage(0, fg, R)} stroke="rgba(21,128,61,0.55)" strokeWidth="14" fill="none" />
+                                        {fg < 1 && <path d={bage(fg, 1, R)} stroke="rgba(200,50,74,0.55)" strokeWidth="14" fill="none" />}
+                                        <line x1={pt(fg, R - 10).x} y1={pt(fg, R - 10).y} x2={pt(fg, R + 12).x} y2={pt(fg, R + 12).y} stroke={COL.ink} strokeWidth="2" />
+                                    </React.Fragment>}
+                                {[0, 0.25, 0.5, 0.75, 1].map((f) => <line key={f} x1={pt(f, R - 7).x} y1={pt(f, R - 7).y} x2={pt(f, R + 7).x} y2={pt(f, R + 7).y} stroke="rgba(15,22,32,0.45)" strokeWidth="1" />)}
+                                {!pump && [0, 50, 100].map((v) => <text key={v} x={pt(v / 100, R + 26).x} y={pt(v / 100, R + 26).y + 4} textAnchor="middle" fontSize="10.5" fill={COL.soft}>{v} %</text>)}
+                                <line x1={cx} y1={cy} x2={nal.x} y2={nal.y} stroke={COL.ink} strokeWidth="3" strokeLinecap="round" />
+                                <circle cx={cx} cy={cy} r="6" fill={COL.ink} />
+                                {!dolj && fg < 1 && <text x={pt((fg + 1) / 2, R - 30).x} y={pt((fg + 1) / 2, R - 30).y + 4} textAnchor="middle" fontSize="11" fontWeight="700" fill={COL.grans}>omöjligt</text>}
+                                <text x={cx} y={cy + 24} textAnchor="middle" fontSize="13" fontWeight="700" fill={COL.ink}>
+                                    {pump ? <tspan><SvgVar s="Q" i="k" size={13} /> = {fmt(Qk, 0)} J</tspan> : <tspan><tspan fontStyle="italic">η</tspan> = {fmt(100 * W / Qv, 0)} %</tspan>}
+                                </text>
+                                <text x={cx} y={cy + 42} textAnchor="middle" fontSize="12" fill={COL.soft}>
+                                    {dolj ? 'gränsen är dold i gissa-läget'
+                                        : pump ? <tspan>högst {fmt(qkm, 0)} J med <tspan fontStyle="italic">W</tspan> = {fmt(W, 0)} J</tspan>
+                                               : <tspan>största möjliga: <SvgVar s="η" i="max" size={12} /> = {fmt(100 * grans, 0)} %</tspan>}
+                                </text>
+                            </g>
+                        );
+                    })()}
+
+                    {rod && (
+                        <text x="440" y="610" fontSize="13.5" fontWeight="700" fill={COL.grans}>
+                            {pump ? 'Omöjligt: så mycket värme går inte att flytta med så lite arbete.' : 'Omöjligt: högre verkningsgrad än den största möjliga.'}
+                        </text>
+                    )}
                 </g>
             );
         };
 
         const Scen = (p) => (
             <svg ref={p.svgRef} viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet" role="img"
-                 aria-label="Två kopparblock som utbyter energi i form av brickor, med diagram över temperaturen och över antalet sätt att fördela brickorna, eller en värmemaskin och en värmepump mellan en varm och en kall behållare.">
+                 aria-label="Två kopparblock i en isolerad låda vars atomer utbyter energi i form av brickor, med en datalogger och ett diagram över antalet sätt att fördela brickorna, eller en kolvmaskin mellan en varm och en kall behållare med energiband för värme och arbete.">
                 <defs>
                     <linearGradient id="vagg" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0" stopColor="#f7f2e8" /><stop offset="1" stopColor="#ece3d2" />
                     </linearGradient>
+                    <linearGradient id="koppar" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stopColor="#f1d3b5" /><stop offset="0.5" stopColor="#dcae86" /><stop offset="1" stopColor="#bf8a62" />
+                    </linearGradient>
+                    <pattern id="frigolit" width="14" height="14" patternUnits="userSpaceOnUse">
+                        <rect width="14" height="14" fill="#f4f1ea" />
+                        <circle cx="4" cy="4" r="3.2" fill="none" stroke="rgba(120,112,96,0.22)" strokeWidth="0.8" />
+                        <circle cx="11" cy="10" r="3.2" fill="none" stroke="rgba(120,112,96,0.22)" strokeWidth="0.8" />
+                    </pattern>
+                    <pattern id="mmpapper" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(37,99,201,0.16)" strokeWidth="0.8" />
+                        <path d="M 10 0 L 10 20 M 0 10 L 20 10" fill="none" stroke="rgba(37,99,201,0.07)" strokeWidth="0.6" />
+                    </pattern>
+                    <linearGradient id="berg" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stopColor="#7d8ea8" /><stop offset="1" stopColor="#c9d2df" />
+                    </linearGradient>
+                    <radialGradient id="kula" cx="0.35" cy="0.35" r="0.7">
+                        <stop offset="0" stopColor="#f08aa0" /><stop offset="1" stopColor="#a3122f" />
+                    </radialGradient>
+                    <linearGradient id="het" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stopColor="#fff1e0" /><stop offset="0.65" stopColor="#fed7aa" /><stop offset="1" stopColor="#fb923c" />
+                    </linearGradient>
+                    <linearGradient id="kallt" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stopColor="#e0f2fe" /><stop offset="0.25" stopColor="#bfdbfe" /><stop offset="1" stopColor="#93c5fd" />
+                    </linearGradient>
+                    <linearGradient id="stal" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stopColor="#f3f4f6" /><stop offset="0.5" stopColor="#d1d5db" /><stop offset="1" stopColor="#9ca3af" />
+                    </linearGradient>
+                    <linearGradient id="kvalitet" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stopColor={COL.W} /><stop offset="0.5" stopColor={COL.varm} /><stop offset="1" stopColor="#94a3b8" />
+                    </linearGradient>
                 </defs>
                 <rect x="0" y="0" width={VB_W} height={VB_H} fill="url(#vagg)" />
-                {p.lage === 'block' && <rect x="20" y={BLOCK_BOTTEN} width="520" height="12" fill="#cbb48c" stroke="#8a6230" strokeWidth="1" />}
                 {p.lage === 'block' ? <BlockScen {...p} /> : <MaskinScen {...p} />}
             </svg>
         );
@@ -926,6 +1208,9 @@
             const st2Ref = useRef({ t: 0, varv: 0 });
             const lastRef = useRef(null);
             const accRef = useRef(0);
+            const gapRef = useRef(GAP_ISAR);
+            const kulaRef = useRef(0);
+            const flodeRef = useRef({ ab: 0, ba: 0 });
             const live = useRef({});
             live.current = { lage, ihop, snabb, kor, typ, Tv, Tk, eta, Qk2 };
 
@@ -935,6 +1220,8 @@
                 Tvis.current = { ...t };
                 histRef.current = [{ t: 0, A: t.A, B: t.B }];
                 flygRef.current = [];
+                flodeRef.current = { ab: 0, ba: 0 };
+                kulaRef.current = stRef.current.qA;
                 setIhop(false);
                 setFrame((n) => n + 1);
             };
@@ -942,6 +1229,7 @@
                 stRef.current = M.nyttPar({ mA, mB, TA, TB, q });
                 const t = M.temp(stRef.current);
                 histRef.current = [{ t: 0, A: t.A, B: t.B }];
+                kulaRef.current = stRef.current.qA;
             }
             useEffect(() => { if (!live.current.ihop || stRef.current.hopp === 0) nyttPar({ mA, mB, TA, TB, q }); }, [mA, mB, TA, TB, q]);
 
@@ -959,29 +1247,38 @@
                     const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
                     lastRef.current = ts;
                     const L = live.current;
-                    if (L.lage === 'block' && L.ihop) {
+                    if (L.lage === 'block') {
                         const st = stRef.current;
-                        const takt = L.snabb ? 3000 : 80;            // försök per sekund
-                        accRef.current += dt * takt;
-                        const rA = blockRekt(st, 'A', true), rB = blockRekt(st, 'B', true);
-                        const s = brickStorlek(st.q);
-                        while (accRef.current >= 1) {
-                            accRef.current -= 1;
-                            const qA0 = st.qA;
-                            const d = M.hopp(st);
-                            if (d !== 0 && !L.snabb) {
-                                const pA = platser(rA, st.q, s), pB = platser(rB, st.q, s);
-                                const fran = d > 0 ? pB[Math.max(0, st.q - qA0 - 1)] : pA[Math.max(0, qA0 - 1)];
-                                const till = d > 0 ? pA[Math.max(0, st.qA - 1)] : pB[Math.max(0, st.q - st.qA - 1)];
-                                if (fran && till) flygRef.current.push({ id: idRef.current++, t0: ts, till: d > 0 ? 'A' : 'B', x0: fran.x, y0: fran.y, x1: till.x, y1: till.y });
+                        // blocken glider ihop eller isär
+                        gapRef.current += ((L.ihop ? 0 : GAP_ISAR) - gapRef.current) * Math.min(1, dt * 7);
+                        if (Math.abs(gapRef.current - (L.ihop ? 0 : GAP_ISAR)) < 0.3) gapRef.current = L.ihop ? 0 : GAP_ISAR;
+                        // kulan i diagrammet följer fördelningen
+                        kulaRef.current += (st.qA - kulaRef.current) * Math.min(1, dt * (L.snabb ? 12 : 5));
+                        if (L.ihop && gapRef.current === 0) {
+                            const takt = L.snabb ? 3000 : 80;            // försök per sekund
+                            accRef.current += dt * takt;
+                            const N = st.NA + st.NB;
+                            while (accRef.current >= 1) {
+                                accRef.current -= 1;
+                                // samma två slumptal som motorn använder, så att flygturen går mellan rätt atomer
+                                const r1 = Math.random(), r2 = Math.random();
+                                const i = Math.floor(r1 * N), j = Math.floor(r2 * N);
+                                const flyttas = st.n[i] > 0 && i !== j;
+                                let k = 0;
+                                const d = M.hopp(st, () => (k++ ? r2 : r1));
+                                if (d > 0) flodeRef.current.ba++;
+                                if (d < 0) flodeRef.current.ab++;
+                                if (flyttas && !L.snabb) flygRef.current.push({ id: idRef.current++, t0: ts, i, j, dur: 420 });
                             }
                         }
-                        flygRef.current = flygRef.current.filter((f) => ts - f.t0 < 320);
-                        const t = M.temp(st), k = Math.min(1, dt / (L.snabb ? 0.4 : 2.5));
-                        Tvis.current = { A: Tvis.current.A + (t.A - Tvis.current.A) * k, B: Tvis.current.B + (t.B - Tvis.current.B) * k };
-                        const h = histRef.current, tt = (h.length ? h[h.length - 1].t : 0) + dt;
-                        h.push({ t: tt, A: Tvis.current.A, B: Tvis.current.B });
-                        while (h.length > 2 && h[h.length - 1].t - h[0].t > 62) h.shift();
+                        flygRef.current = flygRef.current.filter((f) => ts - f.t0 < f.dur);
+                        if (L.ihop) {
+                            const t = M.temp(st), k = Math.min(1, dt / (L.snabb ? 0.4 : 2.5));
+                            Tvis.current = { A: Tvis.current.A + (t.A - Tvis.current.A) * k, B: Tvis.current.B + (t.B - Tvis.current.B) * k };
+                            const h = histRef.current, tt = (h.length ? h[h.length - 1].t : 0) + dt;
+                            h.push({ t: tt, A: Tvis.current.A, B: Tvis.current.B });
+                            while (h.length > 2 && h[h.length - 1].t - h[0].t > 62) h.shift();
+                        }
                     }
                     if (L.lage === 'maskin' && L.kor) {
                         const s2 = st2Ref.current;
@@ -994,15 +1291,16 @@
                             const nyB = (n, f0, f1) => Math.floor(Math.min(f1, 1) * n) - Math.floor(Math.min(f0, 1) * n);
                             const skicka = (n, c, x0, y0, x1, y1) => { for (let i = 0; i < n; i++) flyg2Ref.current.push({ id: idRef.current++, t0: ts + i * 40, c, x0, y0, x1, y1 }); };
                             const f0 = fas < forra ? 0 : forra, f1 = fas;
+                            const vY = VARM.y + VARM.h, cT = CYL.y, cB = CYL.y + CYL.h, kY = KALL.y, hR = HJUL.x + HJUL.r;
                             if (!pump) {
-                                skicka(nyB(Math.round(v.Qv / BRICKA2), f0, f1), COL.varm, 280, 200, 280, 284);
-                                skicka(nyB(Math.round(v.W / BRICKA2), f0 - 0.6, f1 - 0.6), COL.W, 346, 330, 560, 330);
-                                skicka(nyB(Math.round(v.Qk / BRICKA2), f0 - 0.6, f1 - 0.6), COL.sliten, 280, 376, 280, 470);
-                                if (fas < forra) lyftRef.current += v.W / (10 * 9.82);
+                                skicka(nyB(Math.round(v.Qv / BRICKA2), f0, f1), COL.varm, BAND_X, vY, BAND_X, cT);
+                                skicka(nyB(Math.round(v.W / BRICKA2), f0 - 0.6, f1 - 0.6), COL.W, hR, HJUL.y, LAST_X, HJUL.y);
+                                skicka(nyB(Math.round(v.Qk / BRICKA2), f0 - 0.6, f1 - 0.6), COL.sliten, BAND_X, cB, BAND_X, kY);
+                                lyftRef.current += v.W / (10 * 9.82) * dt / 2;
                             } else {
-                                skicka(nyB(Math.round(v.W / BRICKA2), f0, f1), COL.W, 560, 330, 346, 330);
-                                skicka(nyB(Math.round(v.Qk / BRICKA2), f0, f1), COL.sliten, 280, 470, 280, 376);
-                                skicka(nyB(Math.round(v.Qv / BRICKA2), f0 - 0.6, f1 - 0.6), COL.varm, 280, 284, 280, 200);
+                                skicka(nyB(Math.round(v.W / BRICKA2), f0, f1), COL.W, LAST_X, HJUL.y, hR, HJUL.y);
+                                skicka(nyB(Math.round(v.Qk / BRICKA2), f0, f1), COL.sliten, BAND_X, kY, BAND_X, cB);
+                                skicka(nyB(Math.round(v.Qv / BRICKA2), f0 - 0.6, f1 - 0.6), COL.varm, BAND_X, cT, BAND_X, vY);
                             }
                         }
                         flyg2Ref.current = flyg2Ref.current.filter((f) => ts - f.t0 < 900 || f.t0 > ts);
@@ -1053,14 +1351,17 @@
                     if (!isFinite(n)) { setSvarStatus({ ratt: false, text: 'Skriv in ett tal, till exempel 45.' }); return; }
                     const f = (u.mA * u.TA + u.mB * u.TB) / (u.mA + u.mB);
                     ratt = Math.abs(n - f) <= 1;
-                    text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} T_slut = (${fmt(u.mA, 1)} · ${fmt(u.TA, 0)} + ${fmt(u.mB, 1)} · ${fmt(u.TB, 0)}) delat med (${fmt(u.mA, 1)} + ${fmt(u.mB, 1)}) = ${fmt(f, 1)} °C.`;
-                    if (!ratt && Math.abs(n - (u.TA + u.TB) / 2) <= 1 && u.mA !== u.mB) text += ' Du tog medelvärdet utan att väga in massorna. Blocket med större massa behöver mer energi för att ändra temperatur, så sluttemperaturen hamnar närmare dess starttemperatur.';
+                    text = tr(ratt ? 'Rätt!' : 'Inte riktigt.') + ' ' + tr('T_slut = ({mA} · {TA} + {mB} · {TB}) delat med ({mA} + {mB}) = {f} °C.', { mA: fmt(u.mA, 1), TA: fmt(u.TA, 0), mB: fmt(u.mB, 1), TB: fmt(u.TB, 0), f: fmt(f, 1) });
+                    if (!ratt && Math.abs(n - (u.TA + u.TB) / 2) <= 1 && u.mA !== u.mB) text += ' ' + tr('Du tog medelvärdet utan att väga in massorna. Blocket med större massa behöver mer energi för att ändra temperatur, så sluttemperaturen hamnar närmare dess starttemperatur.');
                     setIhop(true);
                 } else {
                     const em = M.etaMax(u.Tv, u.Tk);
                     const facit = u.eta <= em;
                     ratt = (val === 'ja') === facit;
-                    text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} η_max = 1 − T_k delat med T_v = 1 − ${fmt(u.Tk, 0)} K delat med ${fmt(u.Tv, 0)} K = ${fmt(100 * em, 0)} %. ${facit ? `${fmt(100 * u.eta, 0)} % är lägre än så. Andra huvudsatsen tillåter maskinen, men bara en idealmaskin utan förluster når η_max, och verkliga motorer ligger långt under.` : `${fmt(100 * u.eta, 0)} % är högre än så. Då skulle värme behöva gå från kallt till varmt av sig själv, och det tillåter inte andra huvudsatsen.`}`;
+                    const vv = { Tk: fmt(u.Tk, 0), Tv: fmt(u.Tv, 0), em: fmt(100 * em, 0), eta: fmt(100 * u.eta, 0) };
+                    text = tr(ratt ? 'Rätt!' : 'Inte riktigt.') + ' ' + tr('η_max = 1 − T_k delat med T_v = 1 − {Tk} K delat med {Tv} K = {em} %.', vv) + ' '
+                        + (facit ? tr('{eta} % är lägre än så. Andra huvudsatsen tillåter maskinen, men bara en idealmaskin utan förluster når η_max, och verkliga motorer ligger långt under.', vv)
+                                 : tr('{eta} % är högre än så. Då skulle värme behöva gå från kallt till varmt av sig själv, och det tillåter inte andra huvudsatsen.', vv));
                     setKor(true);
                 }
                 setSvarStatus({ ratt, text });
@@ -1154,8 +1455,8 @@
                         </div>
                         <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Termodynamikens andra huvudsats</h1>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
-                            Värme går av sig själv från varmt till kallt, aldrig tvärtom. Tryck ihop ett varmt och ett kallt block och se brickorna
-                            hoppa på måfå mellan dem. Ändå jämnar temperaturerna ut sig, och diagrammet över antalet sätt att fördela energin visar <strong>varför</strong>.
+                            Värme går av sig själv från varmt till kallt, aldrig tvärtom. Tryck ihop ett varmt och ett kallt kopparblock och se energin
+                            hoppa på måfå mellan atomerna. Ändå jämnar temperaturerna ut sig, och diagrammet över antalet sätt att fördela energin visar <strong>varför</strong>.
                             I värmemaskinen ser du att energin bevaras men blir mindre användbar.
                         </p>
 
@@ -1164,7 +1465,8 @@
                         <main className="flex flex-col lg:flex-row gap-6">
                             <div className="lg:w-2/3 xl:w-3/4 order-1">
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
-                                    <Scen lage={lage} svgRef={svgRef} st={st} ihop={ihop} Tvisad={Tvis.current} hist={histRef.current} flyg={flygRef.current} nu={performance.now()} dolj={dolj}
+                                    <Scen lage={lage} svgRef={svgRef} st={st} gap={gapRef.current} kula={kulaRef.current} flode={flodeRef.current} kor={kor}
+                                          klickBlock={() => { if (!las) setIhop((x) => !x); }} klickMaskin={() => { if (!las) setKor((x) => !x); }} Tvisad={Tvis.current} hist={histRef.current} flyg={flygRef.current} nu={performance.now()} dolj={dolj}
                                           typ={typ} Tv={Tv} Tk={Tk} {...v} flyg2={flyg2Ref.current} lyft={lyftRef.current}
                                           exempel={exempel && exempel.typ === typ && !gissa ? exempel.id : null} />
                                     {sceneToggles()}
@@ -1182,18 +1484,18 @@
                                 </div>
                                 <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
                                     {lage === 'block'
-                                        ? <span>Modellen: varje block består av svängande partiklar ({M.PER_KG} per kilogram) som delar på energin. I varje steg väljs två partiklar helt på måfå,
-                                            och har den första en bricka flyttas den till den andra, utan hänsyn till vilket block som är varmt. Brickorna räknar bara energin
+                                        ? <span>Klicka på blocken för att trycka ihop dem eller dra isär dem. Modellen: varje block består av svängande atomer ({M.PER_KG} per kilogram) som delar på energin.
+                                            En atom lyser starkare ju fler brickor den har. I varje steg väljs två atomer helt på måfå, och har den första en bricka flyttas den till den andra, utan hänsyn till vilket block som är varmt. Brickorna räknar bara energin
                                             över 0{' '}°C. Med {st.q} brickor är chansen att råka hamna i startfördelningen
                                             ungefär 1 på {chans > -6 ? fmt(Number(Math.pow(10, -chans).toPrecision(2)), 0) : <span>10<sup>{fmt(-chans, 0)}</sup></span>}. Hittills har systemet varit tillbaka i startfördelningen {st.tillbaka} gånger på {fmt(st.hopp, 0)} försök.
                                             Med 200 brickor händer det sällan, och i ett kilo koppar finns det omkring 10<sup>25</sup> atomer. Då händer det aldrig.</span>
                                         : <span>{exempel && exempel.typ === typ && exempel.id === 'bil'
-                                                ? `Bilmotorn är en värmemaskin. Den heta gasen från förbränningen trycker på kolvarna, och motorn gör om en del av värmen till arbete som driver bilen. Resten måste ut till den kalla sidan med avgaserna och genom kylaren. Därför blir en motor varm. Per varv: ${fmt(v.Qv, 0)} J in, ${fmt(v.W, 0)} J arbete och ${fmt(v.Qk, 0)} J värme ut.`
+                                                ? tr('Bilmotorn är en värmemaskin. Den heta gasen från förbränningen trycker på kolvarna, och motorn gör om en del av värmen till arbete som driver bilen. Resten måste ut till den kalla sidan med avgaserna och genom kylaren. Därför blir en motor varm. Per varv: {Qv} J in, {W} J arbete och {Qk} J värme ut.', { Qv: fmt(v.Qv, 0), W: fmt(v.W, 0), Qk: fmt(v.Qk, 0) })
                                             : exempel && exempel.typ === typ && exempel.id === 'kraft'
-                                                ? `Ett kraftverk som eldar bränsle eller har en kärnreaktor är en värmemaskin. Het ånga driver turbinen, som driver generatorn. Ångan måste sedan kylas till vatten igen, och den värmen går ut i kyltornet eller havet. Per varv: ${fmt(v.Qv, 0)} J in, ${fmt(v.W, 0)} J el och ${fmt(v.Qk, 0)} J värme ut.`
+                                                ? tr('Ett kraftverk som eldar bränsle eller har en kärnreaktor är en värmemaskin. Het ånga driver turbinen, som driver generatorn. Ångan måste sedan kylas till vatten igen, och den värmen går ut i kyltornet eller havet. Per varv: {Qv} J in, {W} J el och {Qk} J värme ut.', { Qv: fmt(v.Qv, 0), W: fmt(v.W, 0), Qk: fmt(v.Qk, 0) })
                                             : exempel && exempel.typ === typ && exempel.id === 'kyl'
                                                 ? 'Ett kylskåp är en värmepump. Kompressorn, som drivs med el, flyttar värme från skåpets insida ut i köket. Därför är gallret på kylskåpets baksida varmt. Värmen går aldrig av sig själv från kallt till varmt, det kräver arbete.'
-                                            : typ === 'maskin' ? 'Under varje varv tar maskinen emot 200 J värme från den varma sidan. Arbetet lyfter en vikt på 10 kg. En bricka är 10 J.' : 'Pumpens arbete, 100 J per varv, kommer från en elmotor. En bricka är 10 J.'}</span>}
+                                            : typ === 'maskin' ? 'Klicka på maskinen för att starta eller pausa den. Under varje varv tar maskinen emot 200 J värme från den varma sidan. Arbetet lyfter en vikt på 10 kg. En bricka är 10 J.' : 'Klicka på maskinen för att starta eller pausa den. Pumpens arbete, 100 J per varv, kommer från en elmotor. En bricka är 10 J.'}</span>}
                                 </p>
                             </div>
 
@@ -1250,7 +1552,7 @@
                                 <div className="glass-card rounded-xl p-3 mb-3">
                                     <div className="flex items-center justify-between mb-2">
                                         <div className="flbl" style={{ textAlign: 'left' }}>Gissa-läge</div>
-                                        {poang.totalt > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>{poang.ratt} av {poang.totalt} rätt{poang.svit > 1 ? `, ${poang.svit} i rad` : ''}</div>}
+                                        {poang.totalt > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>{tr('{r} av {n} rätt', { r: poang.ratt, n: poang.totalt })}{poang.svit > 1 ? tr(', {s} i rad', { s: poang.svit }) : ''}</div>}
                                     </div>
                                     {!gissa && (
                                         <div className="flex flex-col gap-2">

@@ -53,6 +53,7 @@ avgörandet i Not-kolumnen.
 | Beräkna / Räkna ut (uppmaning) | Regn ut | |
 | Kontrollera (svarsknapp) | Kontroller svaret | ensamt "Kontroller" läses som substantivet |
 | Gissa / gissa-läget / Förutsäg / Utforska | Gjett / gjettemodusen / Forutsi / Utforsk | |
+| Snabbspola (kryssruta) | Hurtigspoling | substantiv på kryssrutan, inte "Spol fram" |
 | Spelläge | Spillmodus | |
 | Poäng / Svit / Rätt: x av y | Poeng / På rad / Riktige svar: x av y | |
 | Färdiga försök / Utgångsläge (förval) | Ferdige forsøk / Utgangsoppsett | |
@@ -417,6 +418,16 @@ den andra sidans namn.
 | värmeflöde / nettoflöde | varmestrøm / nettostrøm | inte "nettoen" |
 | ämnesomsättning / avdunstning / alstra värme | stoffskifte / fordamping / produsere varme | |
 | het (stjärna) | het, hete | |
+| termodynamikens första / andra huvudsats | termodynamikkens første / andre lov | inte "hovedsetning"; följer raden lag → lov. Ensamt "andra huvudsatsen" skrivs ut: termodynamikkens andre lov |
+| värmemaskin / värmepump | varmekraftmaskin / varmepumpe | |
+| varm / kall behållare (termodynamik) | varmt / kaldt reservoar | |
+| kolvmaskin / kolv (motor) | stempelmaskin / stempel | |
+| verkningsgrad / största möjliga verkningsgrad | virkningsgrad / størst mulig virkningsgrad | η_max står kvar, aldrig η_maks |
+| block (metallbit, kopparblock) | kloss, kobberkloss | |
+| bricka (energikvantum i modellen) | brikke | |
+| köldmedium / kylare (bil) | kjølemedium / kjøler | |
+| gallret på kylskåpets baksida | risten på baksiden av kjøleskapet | inte "gitteret" |
+| fladdra (kring ett värde) | svinge (rundt en verdi) | inte "flakke" |
 
 ## Ord i gränssnittet (falska vänner)
 

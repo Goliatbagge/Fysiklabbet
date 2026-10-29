@@ -570,7 +570,19 @@
         //  LÄGE 2: VÄRMEMASKINEN OCH VÄRMEPUMPEN
         // ════════════════════════════════════════════════════════
         const BRICKA2 = 10;                 // joule per bricka i maskinen
-        const MaskinScen = ({ typ, Tv, Tk, Qv, W, Qk, mojlig, flyg2, nu, lyft, dolj }) => {
+        // De färdiga försöken med riktiga maskiner får vardagsnamn på delarna,
+        // så att man ser vad den varma och den kalla behållaren är i verkligheten.
+        const EXEMPEL = {
+            bil:   { varm: ['Förbränningen i cylindern', 'bensin och luft brinner'], kall: ['Luften runt bilen', 'avgaserna och kylarens värme'],
+                     maskin: 'bilmotorn', last: 'bil' },
+            kraft: { varm: ['Ångpannan', 'vattnet kokas till het ånga'], kall: ['Kyltornet eller havet', 'ångan kyls och blir vatten igen'],
+                     maskin: 'ångturbinen', last: 'generator' },
+            kyl:   { varm: ['Köket', 'kylskåpet värmer rummet'], kall: ['Kylskåpets insida', 'luften och maten i skåpet'],
+                     maskin: 'kompressorn', last: 'eluttag' },
+        };
+        const MaskinScen = ({ typ, Tv, Tk, Qv, W, Qk, mojlig, flyg2, nu, lyft, dolj, exempel }) => {
+            const ex_ = EXEMPEL[exempel] || null;
+            const arbetet = lyft * 10 * 9.82;                  // J som maskinen hittills har gjort
             const ex = 300, ey = 330, er = 46;
             const varm = { x: 60, y: 110, w: 240, h: 90 }, kall = { x: 60, y: 470, w: 240, h: 90 };
             const skala = 0.18;                                 // px per joule i flödesbanden
@@ -581,11 +593,13 @@
                 <g fontFamily="Poppins, sans-serif">
                     {/* behållarna */}
                     <rect x={varm.x} y={varm.y} width={varm.w} height={varm.h} rx="8" fill="rgba(217,72,15,0.18)" stroke={COL.varm} strokeWidth="2" />
-                    <text x={varm.x + 14} y={varm.y + 32} fontSize="15" fontWeight="600" fill={COL.varm}>Varm behållare</text>
-                    <text x={varm.x + 14} y={varm.y + 58} fontSize="14" fill={COL.ink}><tspan fontStyle="italic">T</tspan><tspan fontSize="10" dy="4">v</tspan><tspan dy="-4"> = {fmt(Tv, 0)} K ({fmt(Tv - KELVIN, 0)} °C)</tspan></text>
+                    <text x={varm.x + 14} y={varm.y + (ex_ ? 27 : 32)} fontSize="15" fontWeight="600" fill={COL.varm}>{ex_ ? ex_.varm[0] : 'Varm behållare'}</text>
+                    {ex_ && <text x={varm.x + 14} y={varm.y + 47} fontSize="12" fill={COL.soft}>{ex_.varm[1]}</text>}
+                    <text x={varm.x + 14} y={varm.y + (ex_ ? 73 : 58)} fontSize="14" fill={COL.ink}><tspan fontStyle="italic">T</tspan><tspan fontSize="10" dy="4">v</tspan><tspan dy="-4"> = {fmt(Tv, 0)} K ({fmt(Tv - KELVIN, 0)} °C)</tspan></text>
                     <rect x={kall.x} y={kall.y} width={kall.w} height={kall.h} rx="8" fill="rgba(37,99,201,0.15)" stroke={COL.kall} strokeWidth="2" />
-                    <text x={kall.x + 14} y={kall.y + 32} fontSize="15" fontWeight="600" fill={COL.kall}>Kall behållare</text>
-                    <text x={kall.x + 14} y={kall.y + 58} fontSize="14" fill={COL.ink}><tspan fontStyle="italic">T</tspan><tspan fontSize="10" dy="4">k</tspan><tspan dy="-4"> = {fmt(Tk, 0)} K ({fmt(Tk - KELVIN, 0)} °C)</tspan></text>
+                    <text x={kall.x + 14} y={kall.y + (ex_ ? 27 : 32)} fontSize="15" fontWeight="600" fill={COL.kall}>{ex_ ? ex_.kall[0] : 'Kall behållare'}</text>
+                    {ex_ && <text x={kall.x + 14} y={kall.y + 47} fontSize="12" fill={COL.soft}>{ex_.kall[1]}</text>}
+                    <text x={kall.x + 14} y={kall.y + (ex_ ? 73 : 58)} fontSize="14" fill={COL.ink}><tspan fontStyle="italic">T</tspan><tspan fontSize="10" dy="4">k</tspan><tspan dy="-4"> = {fmt(Tk, 0)} K ({fmt(Tk - KELVIN, 0)} °C)</tspan></text>
 
                     {/* flödesbanden */}
                     <path d={`M ${ex - 20} ${varm.y + varm.h} L ${ex - 20} ${ey - er + 4}`} stroke={COL.varm} strokeWidth={b(Qv)} opacity="0.35" fill="none" />
@@ -607,7 +621,8 @@
                         {[0, 60, 120].map((a) => <line key={a} x1={ex - Math.cos(a * Math.PI / 180) * (er - 10)} y1={ey - Math.sin(a * Math.PI / 180) * (er - 10)} x2={ex + Math.cos(a * Math.PI / 180) * (er - 10)} y2={ey + Math.sin(a * Math.PI / 180) * (er - 10)} stroke="#6b7280" strokeWidth="4" />)}
                         <circle cx={ex} cy={ey} r="8" fill="#374151" />
                     </g>
-                    <text x={ex + er + 10} y={ey + er + 4} fontSize="14" fontWeight="600" fill={mojlig ? COL.ink : COL.grans}>{pump ? 'värmepump' : 'värmemaskin'}</text>
+                    <text x={ex + er + 10} y={ey + er + 4} fontSize="14" fontWeight="600" fill={mojlig ? COL.ink : COL.grans}>{ex_ ? ex_.maskin : pump ? 'värmepump' : 'värmemaskin'}</text>
+                    {ex_ && <text x={ex + er + 10} y={ey + er + 22} fontSize="12" fill={COL.soft}>{pump ? 'en värmepump' : 'en värmemaskin'}</text>}
                     {!mojlig && !dolj && (
                         <g>
                             <path d={`M ${ex - 30} ${ey - 30} L ${ex + 30} ${ey + 30} M ${ex + 30} ${ey - 30} L ${ex - 30} ${ey + 30}`} stroke={COL.grans} strokeWidth="6" strokeLinecap="round" />
@@ -618,7 +633,37 @@
                     )}
 
                     {/* arbetet lyfter en vikt, eller en elmotor driver pumpen */}
-                    {!pump ? (
+                    {!pump && ex_ && ex_.last === 'bil' ? (
+                        // arbetet driver bilen: hjulen snurrar och fartstrecken visar att den rullar
+                        <g>
+                            <g transform={`translate(572 ${ey - 50}) scale(1.6)`}>
+                                <path d="M 0 25 L 0 18 C 0 16 2 15 5 14 L 21 13 C 29 2 42 0 53 0 L 66 0 C 77 1 85 6 91 14 L 105 16 C 108 16 109 18 109 20 L 109 25 Z" fill="#c8324a" stroke="#7f1d1d" strokeWidth="0.6" strokeLinejoin="round" />
+                                <path d="M 28 14 L 35 4 L 51 4 L 51 14 Z" fill="#dbeafe" />
+                                <path d="M 55 14 L 55 4 L 68 4 L 75 14 Z" fill="#dbeafe" />
+                                {[24, 86].map((hx) => (
+                                    <g key={hx} transform={`rotate(${mojlig ? (nu / 3) % 360 : 0} ${hx} 25)`}>
+                                        <circle cx={hx} cy="25" r="6" fill="#1f2937" /><circle cx={hx} cy="25" r="2.6" fill="#9ca3af" />
+                                        <line x1={hx - 4.5} y1="25" x2={hx + 4.5} y2="25" stroke="#9ca3af" strokeWidth="1" />
+                                    </g>
+                                ))}
+                            </g>
+                            <line x1="560" y1={ey + 1} x2="760" y2={ey + 1} stroke="#6b5a45" strokeWidth="2" />
+                            {mojlig && [0, 1, 2].map((j) => {
+                                const fx = 548 - ((nu / 6 + j * 11) % 30);
+                                return <line key={j} x1={fx} y1={ey - 34 + j * 10} x2={fx + 18} y2={ey - 34 + j * 10} stroke="rgba(15,22,32,0.3)" strokeWidth="2" strokeLinecap="round" />;
+                            })}
+                            <text x="572" y={ey + 26} fontSize="13" fill={COL.soft}>arbetet driver bilen: {fmt(arbetet / 1000, 1)} kJ hittills</text>
+                        </g>
+                    ) : !pump && ex_ && ex_.last === 'generator' ? (
+                        // arbetet driver en generator som ger el till elnätet
+                        <g>
+                            <rect x="560" y={ey - 34} width="96" height="68" rx="8" fill="#e5e7eb" stroke="#4b5563" strokeWidth="2" />
+                            <text x="608" y={ey + 5} textAnchor="middle" fontSize="13" fontWeight="600" fill={COL.ink}>generator</text>
+                            <path d={`M 656 ${ey} L 700 ${ey}`} stroke="#4b5563" strokeWidth="2" />
+                            <path d={`M 712 ${ey - 22} L 700 ${ey + 3} L 712 ${ey + 3} L 704 ${ey + 24}`} fill="none" stroke="#ca8a04" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
+                            <text x="560" y={ey + 56} fontSize="13" fill={COL.soft}>el till elnätet: {fmt(arbetet / 1000, 1)} kJ hittills</text>
+                        </g>
+                    ) : !pump ? (
                         <g>
                             <circle cx="600" cy="150" r="20" fill="#e5e7eb" stroke="#4b5563" strokeWidth="2" />
                             <line x1="560" y1={ey} x2="580" y2={ey} stroke="#5b4a3a" strokeWidth="1.8" />
@@ -632,6 +677,7 @@
                         <g>
                             <rect x="560" y={ey - 34} width="80" height="68" rx="8" fill="#e5e7eb" stroke="#4b5563" strokeWidth="2" />
                             <text x="600" y={ey + 5} textAnchor="middle" fontSize="13" fontWeight="600" fill={COL.ink}>elmotor</text>
+                            {ex_ && <text x="560" y={ey + 54} fontSize="12" fill={COL.soft}>drivs med el från eluttaget</text>}
                         </g>
                     )}
 
@@ -645,11 +691,11 @@
 
                     {/* kvaliteten */}
                     <g>
-                        <text x="720" y="440" fontSize="13" fontWeight="600" fill={COL.ink}>Energins kvalitet</text>
+                        <text x="640" y="440" fontSize="13" fontWeight="600" fill={COL.ink}>Energins kvalitet</text>
                         {[[COL.W, 'arbete: kan bli vilken energiform som helst'], [COL.varm, 'värme vid hög temperatur'], [COL.sliten, 'värme vid låg temperatur']].map(([c, t], i) => (
                             <g key={i}>
-                                <rect x="720" y={454 + i * 24} width="14" height="14" rx="2" fill={c} />
-                                <text x="742" y={466 + i * 24} fontSize="13" fill={COL.soft}>{t}</text>
+                                <rect x="640" y={454 + i * 24} width="14" height="14" rx="2" fill={c} />
+                                <text x="662" y={466 + i * 24} fontSize="13" fill={COL.soft}>{t}</text>
                             </g>
                         ))}
                     </g>
@@ -853,6 +899,7 @@
             const [snabb, setSnabb] = useState(false);
             // läge 2
             const [typ, setTyp] = useState('maskin');
+            const [exempel, setExempel] = useState(null);     // { id, typ } för Bilmotorn, Kraftverket, Kylskåpet
             const [Tv, setTv] = useState(900);
             const [Tk, setTk] = useState(350);
             const [eta, setEta] = useState(0.28);
@@ -979,7 +1026,7 @@
                     setMA(c.mA); setMB(c.mB); setTA(c.TA); setTB(c.TB); setQ(c.q); setSnabb(false);
                     setTimeout(() => { nyttPar(c); setTimeout(() => setIhop(true), 700); }, 40);
                 } else {
-                    setTyp(c.typ); setTv(c.Tv); setTk(c.Tk);
+                    setTyp(c.typ); setTv(c.Tv); setTk(c.Tk); setExempel(EXEMPEL[f.id] ? { id: f.id, typ: c.typ } : null);
                     if (c.eta != null) setEta(c.eta);
                     if (c.Qk != null) setQk2(c.Qk);
                     lyftRef.current = 0; flyg2Ref.current = []; setKor(true);
@@ -995,7 +1042,7 @@
                     setMA(u.mA); setMB(u.mB); setTA(u.TA); setTB(u.TB);
                     setTimeout(() => nyttPar({ mA: u.mA, mB: u.mB, TA: u.TA, TB: u.TB, q: 200 }), 40);
                 } else {
-                    setLage('maskin'); setTyp('maskin'); setTv(u.Tv); setTk(u.Tk); setEta(u.eta); setKor(false);
+                    setLage('maskin'); setTyp('maskin'); setTv(u.Tv); setTk(u.Tk); setEta(u.eta); setKor(false); setExempel(null);
                 }
             };
             const kolla = (val) => {
@@ -1118,7 +1165,8 @@
                             <div className="lg:w-2/3 xl:w-3/4 order-1">
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
                                     <Scen lage={lage} svgRef={svgRef} st={st} ihop={ihop} Tvisad={Tvis.current} hist={histRef.current} flyg={flygRef.current} nu={performance.now()} dolj={dolj}
-                                          typ={typ} Tv={Tv} Tk={Tk} {...v} flyg2={flyg2Ref.current} lyft={lyftRef.current} />
+                                          typ={typ} Tv={Tv} Tk={Tk} {...v} flyg2={flyg2Ref.current} lyft={lyftRef.current}
+                                          exempel={exempel && exempel.typ === typ && !gissa ? exempel.id : null} />
                                     {sceneToggles()}
                                     <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
                                         {isFullscreen ? (
@@ -1139,7 +1187,13 @@
                                             över 0{' '}°C. Med {st.q} brickor är chansen att råka hamna i startfördelningen
                                             ungefär 1 på {chans > -6 ? fmt(Number(Math.pow(10, -chans).toPrecision(2)), 0) : <span>10<sup>{fmt(-chans, 0)}</sup></span>}. Hittills har systemet varit tillbaka i startfördelningen {st.tillbaka} gånger på {fmt(st.hopp, 0)} försök.
                                             Med 200 brickor händer det sällan, och i ett kilo koppar finns det omkring 10<sup>25</sup> atomer. Då händer det aldrig.</span>
-                                        : <span>{typ === 'maskin' ? 'Under varje varv tar maskinen emot 200 J värme från den varma sidan. Arbetet lyfter en vikt på 10 kg.' : 'Pumpens arbete, 100 J per varv, kommer från en elmotor.'} En bricka är 10 J.</span>}
+                                        : <span>{exempel && exempel.typ === typ && exempel.id === 'bil'
+                                                ? `Bilmotorn är en värmemaskin. Den heta gasen från förbränningen trycker på kolvarna, och motorn gör om en del av värmen till arbete som driver bilen. Resten måste ut till den kalla sidan med avgaserna och genom kylaren. Därför blir en motor varm. Per varv: ${fmt(v.Qv, 0)} J in, ${fmt(v.W, 0)} J arbete och ${fmt(v.Qk, 0)} J värme ut.`
+                                            : exempel && exempel.typ === typ && exempel.id === 'kraft'
+                                                ? `Ett kraftverk som eldar bränsle eller har en kärnreaktor är en värmemaskin. Het ånga driver turbinen, som driver generatorn. Ångan måste sedan kylas till vatten igen, och den värmen går ut i kyltornet eller havet. Per varv: ${fmt(v.Qv, 0)} J in, ${fmt(v.W, 0)} J el och ${fmt(v.Qk, 0)} J värme ut.`
+                                            : exempel && exempel.typ === typ && exempel.id === 'kyl'
+                                                ? 'Ett kylskåp är en värmepump. Kompressorn, som drivs med el, flyttar värme från skåpets insida ut i köket. Därför är gallret på kylskåpets baksida varmt. Värmen går aldrig av sig själv från kallt till varmt, det kräver arbete.'
+                                            : typ === 'maskin' ? 'Under varje varv tar maskinen emot 200 J värme från den varma sidan. Arbetet lyfter en vikt på 10 kg. En bricka är 10 J.' : 'Pumpens arbete, 100 J per varv, kommer från en elmotor. En bricka är 10 J.'}</span>}
                                 </p>
                             </div>
 

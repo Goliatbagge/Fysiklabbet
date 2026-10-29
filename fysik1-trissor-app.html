@@ -476,7 +476,7 @@
         }
 
         // Efterspelet när rörelsen tar tvärstopp. Bara för bilden: mätvärdena står
-        // kvar. Vikten som slår i golvet studsar lätt och vickar, en vikt som
+        // kvar. Vikten som slår i golvet ligger still, en vikt som
         // hänger kvar i luften fjädrar i snöret och dinglar som en dämpad pendel
         // med perioden 2π·√(L/g) för sin snörlängd L. d.t = tid sedan stoppet,
         // d.v = systemets fart (med tecken) i stoppögonblicket.
@@ -486,13 +486,7 @@
             const piv = u === 'atwood' ? AT_Y : TR_Y;
             g.forEach((k) => {
                 if (k.typ !== 'hang') return;
-                if (k.y + k.h >= golv - 1) {
-                    const b = Math.min(5, 3.5 * fart) * Math.abs(Math.sin(2 * Math.PI * 3.2 * t)) * Math.exp(-t / 0.22);
-                    k.y -= b; k.krok = { ...k.krok, y: k.krok.y - b };
-                    k.rot = k.sida * Math.min(0.06, 0.04 * fart) * Math.sin(2 * Math.PI * 2.4 * t) * Math.exp(-t / 0.3);
-                    k.rotP = { x: k.x + k.w / 2, y: k.y + k.h };
-                    return;
-                }
+                if (k.y + k.h >= golv - 4) return;            // vikten som står på golvet ligger still
                 const vy = k.sida * d.v;                          // + = vikten var på väg nedåt
                 const L = k.krok.y - piv;
                 if (!(L > 4)) return;

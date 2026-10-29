@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pröva en hypotes — Fysiklabbet</title>
+    <meta name="description" content="Vad avgör hur lång tid en svängning tar för en pendel? Välj en hypotes, pröva den med ett rättvist försök och ett stoppur, och avgör om mätningarna stöder den. Flödesschemat följer den naturvetenskapliga metoden.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik1-hypotesprovet-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Pröva en hypotes — Fysik nivå 1">
+    <meta property="og:description" content="Vad avgör hur lång tid en svängning tar för en pendel? Välj en hypotes, pröva den med ett rättvist försök och ett stoppur, och avgör om mätningarna stöder den. Flödesschemat följer den naturvetenskapliga metoden.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik1-hypotesprovet-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pröva en hypotes — Fysik nivå 1">
+    <meta name="twitter:description" content="Vad avgör hur lång tid en svängning tar för en pendel? Välj en hypotes, pröva den med ett rättvist försök och ett stoppur, och avgör om mätningarna stöder den. Flödesschemat följer den naturvetenskapliga metoden.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+        input[type="range"]:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1;
+                text-align: center; max-width: 150px; }
+        .fnum { color: var(--lab-ink); font-size: 20px; font-family: 'Poppins', sans-serif; }
+        .fnum-live { color: var(--lab-ink); font-size: 17px; font-family: 'Poppins', sans-serif; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 80px; }
+        .num-in { width: 50px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:disabled { opacity: 0.55; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* Scenen: en svg med egen proportion (1000 × 640). Mobilen (sektion 8 i
+           styles-laborans-sim.css) dockar verktygen under den. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1000 / 640;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .handtag { cursor: grab; }
+        .handtag.drar { cursor: grabbing; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 34px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-start {
+            background: var(--lab-accent, #c8324a); color: #fff; border: 1px solid var(--lab-accent, #c8324a);
+            border-radius: 8px; padding: 9px 14px; font-weight: 700; cursor: pointer;
+        }
+        .btn-start:hover:not(:disabled) { filter: brightness(1.06); }
+        .btn-start:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .mode-seg { display: flex; gap: 0; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button {
+            flex: 1; padding: 8px 8px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .mode-seg button:last-child { border-right: none; }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+
+        /* Färdiga försök */
+        .forsok-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .forsok {
+            text-align: left; padding: 7px 9px; border-radius: 8px; cursor: pointer;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; font-weight: 600; color: var(--lab-ink, #0f1620); line-height: 1.25;
+        }
+        .forsok .sub { display: block; font-size: 11.5px; font-weight: 400; color: var(--lab-ink-soft, #3a4151); }
+        .forsok:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .forsok:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* Avläsning */
+        .avl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
+        .avl .v { font-weight: 700; font-size: 16px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+        .avl .l { font-size: 11.5px; color: var(--lab-ink-muted, #5a6170); }
+
+        /* Resultatrutan efter ett försök */
+        .resultat { border-left: 4px solid var(--lab-accent, #c8324a); }
+        .resultat.ratt { border-left-color: #15803d; }
+
+        /* Gissa-läget */
+        .gissa-in { width: 90px; padding: 6px 8px; border-radius: 7px; font-size: 15px;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                    background: #fff; font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .gissa-in:focus { outline: none; border-color: var(--lab-accent, #c8324a); }
+        .kort3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .kort3 button {
+            padding: 8px 6px; border-radius: 8px; cursor: pointer; text-align: center;
+            background: var(--lab-bg, #f3eee4); border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; line-height: 1.45; color: var(--lab-ink, #0f1620);
+        }
+        .kort3 button:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .kort3 button.vald { border-color: var(--lab-ink, #0f1620); box-shadow: 0 0 0 2px rgba(15,22,32,0.15); }
+        .kort3 button.basta { background: rgba(21,128,61,0.10); border-color: #15803d; }
+        .kort3 .bok { font-weight: 700; font-size: 15px; display: block; margin-bottom: 2px; }
+        .kort3 .stapel { height: 6px; border-radius: 3px; background: #d4930f; margin-top: 5px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+        /* Formelkortet ryms på en telefon: tätare rad och mindre etiketter */
+        @media (max-width: 480px) {
+            .fk-rader > div { column-gap: 6px !important; }
+            .fk-rader .flbl { font-size: 9px; letter-spacing: 0.02em; }
+        }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script id="pendel-motor">
+// Motorn för Hypotesprovet (fysik1-hypotesprovet-app.html).
+// Källan ligger här och klistras in oförändrad i sidan; testet
+// .claude/test-pendel-motor.js kontrollerar fysiken och att kopian är identisk.
+//
+// En matematisk pendel: en kula i ett lätt snöre med längden l, släppt från
+// vinkeln α₀. Rörelsen räknas med hela ekvationen α'' = −(g/l) · sin α
+// (inte småvinkelapproximationen), så att ett stort utslag ger en lite
+// längre svängningstid, som i verkligheten. Den exakta perioden är
+//     T = 2π · √(l/g) / AGM(1, cos(α₀/2))
+// (aritmetisk-geometriskt medelvärde). Massan finns inte med: kulans massa
+// påverkar inte svängningstiden.
+//
+// Mätningen: eleven tar tiden för tio svängningar med ett stoppur. Starten
+// och stoppet har var sin reaktionstid, så att en upprepad mätning ger lite
+// olika värden.
+(function () {
+    const G = 9.82;
+    const REAKTION = 0.07;       // s, spridningen i reaktionstiden vid start och stopp
+    const N_SV = 10;             // antalet svängningar som tas tid på
+
+    function agm(a, b) {
+        for (let i = 0; i < 40 && Math.abs(a - b) > 1e-15; i++) [a, b] = [(a + b) / 2, Math.sqrt(a * b)];
+        return a;
+    }
+    const period = (l, a0) => 2 * Math.PI * Math.sqrt(l / G) / agm(1, Math.cos(a0 / 2));
+    const periodLiten = (l) => 2 * Math.PI * Math.sqrt(l / G);
+
+    // Ett tillstånd: vinkel a (rad), vinkelhastighet w (rad/s), tid t.
+    function nyPendel(l, a0) { return { l, a0, a: a0, w: 0, t: 0 }; }
+    function steg(p, dt) {
+        const n = Math.max(1, Math.ceil(dt / 0.002));
+        const h = dt / n, k = G / p.l;
+        for (let i = 0; i < n; i++) {
+            const f = (a) => -k * Math.sin(a);
+            const a1 = p.w, b1 = f(p.a);
+            const a2 = p.w + h / 2 * b1, b2 = f(p.a + h / 2 * a1);
+            const a3 = p.w + h / 2 * b2, b3 = f(p.a + h / 2 * a2);
+            const a4 = p.w + h * b3, b4 = f(p.a + h * a3);
+            p.a += h / 6 * (a1 + 2 * a2 + 2 * a3 + a4);
+            p.w += h / 6 * (b1 + 2 * b2 + 2 * b3 + b4);
+            p.t += h;
+        }
+        return p;
+    }
+
+    // Slumptal med normalfördelning (Box–Muller); rng ger tal i [0, 1).
+    function normal(rng) {
+        const u = Math.max(1e-12, rng()), v = rng();
+        return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+    }
+    // Uppmätt tid för tio svängningar, avrundad till hundradelar som på ett stoppur.
+    // En felmätning är att eleven räknat nio eller elva svängningar: tiden
+    // blir då en hel period fel, inte bara några tiondelar som osäkerheten.
+    function matning(l, a0, rng = Math.random, felmatning = 0) {
+        const t = (N_SV + felmatning) * period(l, a0) + REAKTION * (normal(rng) - normal(rng));
+        return Math.round(t * 100) / 100;
+    }
+    // En mätning som avviker mer än en halv period från medianen i samma
+    // uppställning är troligen en felmätning (fel antal svängningar). Med två
+    // mätningar går det inte att veta vilken som är fel, så båda pekas ut.
+    function misstankt(rader) {
+        const ut = [];
+        rader.forEach((r, i) => {
+            if (r.struken) return;
+            const alla = rader.filter((q) => !q.struken && q.m === r.m && q.l === r.l && q.a0 === r.a0).map((q) => q.t10).sort((x, y) => x - y);
+            if (alla.length < 2) return;
+            // medianen påverkas inte av en enstaka felmätning
+            const n = alla.length, med = n % 2 ? alla[(n - 1) / 2] : (alla[n / 2 - 1] + alla[n / 2]) / 2;
+            if (Math.abs(r.t10 - med) > 0.5 * period(r.l, r.a0 * Math.PI / 180)) ut.push(i);
+        });
+        return ut;
+    }
+
+    // ── Är försöket rättvist, och stöds hypotesen? ─────────────
+    // En mätrad: { m, l, a0 (grader), t10 }. Hypotesen gäller en variabel
+    // ('m', 'l' eller 'a0'). Ett rättvist försök jämför rader där bara den
+    // variabeln skiljer sig.
+    const VAR = ['m', 'l', 'a0'];
+    const lika = (x, y) => Math.abs(x - y) < 1e-9;
+    function grupper(rader) {
+        // samma uppställning, alla tre variablerna lika; strukna mätningar räknas inte
+        const g = [];
+        for (const r of rader) {
+            if (r.struken) continue;
+            let h = g.find((x) => VAR.every((v) => lika(x.p[v], r[v])));
+            if (!h) { h = { p: { m: r.m, l: r.l, a0: r.a0 }, t: [] }; g.push(h); }
+            h.t.push(r.t10);
+        }
+        for (const h of g) {
+            const n = h.t.length;
+            h.medel = h.t.reduce((s, x) => s + x, 0) / n;
+            h.spridning = n > 1 ? Math.max(...h.t) - Math.min(...h.t) : null;
+        }
+        return g;
+    }
+    function bedom(rader, variabel) {
+        const g = grupper(rader);
+        const ovr = VAR.filter((v) => v !== variabel);
+        // par av grupper som bara skiljer sig i den prövade variabeln
+        let bast = null;
+        for (let i = 0; i < g.length; i++) for (let j = i + 1; j < g.length; j++) {
+            const a = g[i], b = g[j];
+            if (!ovr.every((v) => lika(a.p[v], b.p[v])) || lika(a.p[variabel], b.p[variabel])) continue;
+            const spann = Math.abs(a.p[variabel] - b.p[variabel]) / Math.max(a.p[variabel], b.p[variabel]);
+            if (!bast || spann > bast.spann) bast = { a, b, spann };
+        }
+        // ändrades två saker på en gång någonstans?
+        let tvaPaEnGang = false;
+        for (let i = 0; i < g.length; i++) for (let j = i + 1; j < g.length; j++) {
+            const andrade = VAR.filter((v) => !lika(g[i].p[v], g[j].p[v]));
+            if (andrade.length >= 2 && andrade.includes(variabel)) tvaPaEnGang = true;
+        }
+        if (!bast) return { rattvist: false, tvaPaEnGang };
+        let { a, b } = bast;
+        if (a.p[variabel] > b.p[variabel]) [a, b] = [b, a];       // a har det mindre värdet
+        const skillnad = b.medel - a.medel;
+        // osäkerheten i skillnaden mellan två medelvärden
+        const sigma = REAKTION * Math.sqrt(2) * Math.sqrt(1 / a.t.length + 1 / b.t.length);
+        const tydlig = Math.abs(skillnad) > 3 * sigma;
+        return { rattvist: true, tvaPaEnGang, liten: a, stor: b, skillnad, sigma, tydlig, okar: tydlig && skillnad > 0, minskar: tydlig && skillnad < 0 };
+    }
+
+    const ut = { G, REAKTION, N_SV, agm, period, periodLiten, nyPendel, steg, normal, matning, misstankt, grupper, bedom };
+    if (typeof window !== 'undefined') window.PendelMotor = ut;
+    if (typeof module !== 'undefined') module.exports = ut;
+})();
+</script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+        const M = window.PendelMotor;
+
+        // ── Talformat: decimalkomma, äkta minustecken, exakt noll som "0" ──
+        const fmt = (num, d = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [hel, dec] = s.replace('-', '').split('.');
+            const grupper = hel.length > 3 ? hel.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : hel;
+            return (num < 0 ? '−' : '') + grupper + (dec !== undefined ? ',' + dec : '');
+        };
+        const rad = (d) => d * Math.PI / 180;
+        const Brak = ({ t, n }) => (
+            <span style={{ display: 'inline-flex', flexDirection: 'column', verticalAlign: 'middle', textAlign: 'center', lineHeight: 1.05, fontSize: '0.92em', margin: '0 3px' }}>
+                <span style={{ padding: '0 2px 1px' }}>{t}</span>
+                <span style={{ padding: '1px 2px 0', borderTop: '1.5px solid currentColor' }}>{n}</span>
+            </span>
+        );
+        const Sub = ({ s, i }) => <span><em>{s}</em><sub>{i}</sub></span>;
+
+        // ════════════════════════════════════════════════════════
+        //  HYPOTESERNA
+        // ════════════════════════════════════════════════════════
+        const HYP = [
+            { id: 'm', kort: 'Massan', text: 'En tyngre kula ger en längre svängningstid.', var: 'm', namn: 'massan' },
+            { id: 'l', kort: 'Längden', text: 'Ett längre snöre ger en längre svängningstid.', var: 'l', namn: 'längden' },
+            { id: 'a0', kort: 'Utslaget', text: 'Ett större utslag ger en längre svängningstid.', var: 'a0', namn: 'utslaget' },
+            { id: 'vilja', kort: 'Pendelns vilja', text: 'Pendeln svänger för att den vill tillbaka till mitten.', var: null },
+        ];
+        const VARNAMN = { m: 'massan', l: 'längden', a0: 'utslaget' };
+        const visaVarde = (v, x) => (v === 'm' ? `${fmt(x, 0)} g` : v === 'l' ? `${fmt(x, 2)} m` : `${fmt(x, 0)}°`);
+
+        // ════════════════════════════════════════════════════════
+        //  SCENEN
+        // ════════════════════════════════════════════════════════
+        const VB_W = 1000, VB_H = 640;
+        const P = { x: 330, y: 96 };          // upphängningen
+        const S = 400;                         // px per meter
+        const BANK = 572;
+        const FL = { x: 790, w: 156 };         // flödesschemat
+        const TB = { x0: 662, y0: 352 };       // tabellen och diagrammet
+        const kulRadie = (m) => 7 + 6 * Math.cbrt(m / 50);
+
+        const Flode = ({ steg, svar }) => {
+            const ruta = (id, x, y, w, h, rader, farg) => {
+                const aktiv = steg === id;
+                return (
+                    <g>
+                        <rect x={x} y={y} width={w} height={h} rx="6" fill={aktiv ? farg : '#fffdf8'} stroke={aktiv ? farg : '#0f1620'} strokeWidth="1.6" />
+                        {rader.map((r, i) => <text key={i} x={x + w / 2} y={y + h / 2 + 5 + (i - (rader.length - 1) / 2) * 15} textAnchor="middle" fontSize="12.5" fontWeight="600" fill={aktiv ? '#fff' : '#0f1620'} fontFamily="'DM Sans', sans-serif">{r}</text>)}
+                    </g>
+                );
+            };
+            const box = (id, y, txt, h = 30) => {
+                const aktiv = steg === id;
+                return (
+                    <g key={id}>
+                        <rect x={FL.x - FL.w / 2} y={y - h / 2} width={FL.w} height={h} rx="6"
+                              fill={aktiv ? '#c8324a' : '#fffdf8'} stroke={aktiv ? '#c8324a' : '#0f1620'} strokeWidth="1.6" />
+                        <text x={FL.x} y={y + 5} textAnchor="middle" fontSize="14" fontWeight="600" fill={aktiv ? '#fff' : '#0f1620'} fontFamily="'DM Sans', sans-serif">{txt}</text>
+                    </g>
+                );
+            };
+            const pil = (x1, y1, x2, y2, farg = '#0f1620') => {
+                const L = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / L, uy = (y2 - y1) / L;
+                const bx = x2 - ux * 8, by = y2 - uy * 8;
+                return (
+                    <g>
+                        <line x1={x1} y1={y1} x2={bx} y2={by} stroke={farg} strokeWidth="1.6" />
+                        <polygon points={`${x2},${y2} ${bx - uy * 4.5},${by + ux * 4.5} ${bx + uy * 4.5},${by - ux * 4.5}`} fill={farg} />
+                    </g>
+                );
+            };
+            const dy = 272;
+            const fragaAktiv = steg === 'fraga';
+            return (
+                <g>
+                    {box('obs', 86, 'Observation')}
+                    {pil(FL.x, 101, FL.x, 129)}
+                    {box('hyp', 144, 'Hypotes')}
+                    {pil(FL.x, 159, FL.x, 187)}
+                    {box('forsok', 202, 'Försök')}
+                    {pil(FL.x, 217, FL.x, dy - 26)}
+                    <polygon points={`${FL.x},${dy - 26} ${FL.x + 70},${dy} ${FL.x},${dy + 26} ${FL.x - 70},${dy}`}
+                             fill={fragaAktiv ? '#c8324a' : '#fffdf8'} stroke={fragaAktiv ? '#c8324a' : '#0f1620'} strokeWidth="1.6" />
+                    <text x={FL.x} y={dy - 2} textAnchor="middle" fontSize="12.5" fontWeight="600" fill={fragaAktiv ? '#fff' : '#0f1620'} fontFamily="'DM Sans', sans-serif">Stöds</text>
+                    <text x={FL.x} y={dy + 12} textAnchor="middle" fontSize="12.5" fontWeight="600" fill={fragaAktiv ? '#fff' : '#0f1620'} fontFamily="'DM Sans', sans-serif">hypotesen?</text>
+                    {/* ja: till höger, lag eller teori */}
+                    {pil(FL.x + 70, dy, 910, dy, svar === 'ja' ? '#15803d' : '#0f1620')}
+                    <text x={884} y={dy - 7} textAnchor="middle" fontSize="12" fill="#15803d" fontWeight="700" fontFamily="'DM Sans', sans-serif">Ja</text>
+                    {ruta('styrks', 912, dy - 24, 80, 48, ['Hypotesen', 'styrks'], '#15803d')}
+                    {/* efter flera rättvisa försök som styrker den: en lag */}
+                    {pil(952, dy - 24, 952, 190, steg === 'lag' ? '#15803d' : '#0f1620')}
+                    <text x={946} y={226} fontSize="11" textAnchor="end" fill="#5a6170" fontFamily="'DM Sans', sans-serif">flera</text>
+                    <text x={946} y={239} fontSize="11" textAnchor="end" fill="#5a6170" fontFamily="'DM Sans', sans-serif">försök</text>
+                    {ruta('lag', 912, 142, 80, 48, ['Lag eller', 'teori'], '#15803d')}
+                    {/* nej: tillbaka till hypoteserna */}
+                    <polyline points={`${FL.x - 70},${dy} ${676},${dy} ${676},${144}`} fill="none" stroke={svar === 'nej' ? '#c8324a' : '#0f1620'} strokeWidth="1.6" />
+                    {pil(676, 144, FL.x - FL.w / 2, 144, svar === 'nej' ? '#c8324a' : '#0f1620')}
+                    <text x={694} y={dy - 7} textAnchor="middle" fontSize="12" fill="#c8324a" fontWeight="700" fontFamily="'DM Sans', sans-serif">Nej</text>
+                </g>
+            );
+        };
+
+        const Tabell = ({ rader, markerade, misstankta, stryk }) => {
+            const kol = [TB.x0 + 4, 740, 804, 858, 926, 984];
+            const syns = rader.slice(-7);
+            const forsta = rader.length - syns.length;
+            const rubrik = ['Nr', 'Massa', 'Längd', 'Utslag', 'Tid, 10 sv.', 'Period'];
+            return (
+                <g fontFamily="'DM Sans', sans-serif">
+                    <text x={TB.x0} y={TB.y0 - 16} fontSize="12" fontWeight="700" letterSpacing="0.06em" fill="#5a6170">MÄTNINGAR</text>
+                    {rubrik.map((r, i) => <text key={r} x={kol[i]} y={TB.y0 + 8} fontSize="12" fontWeight="700" fill="#5a6170" textAnchor={i ? 'end' : 'start'}>{r}</text>)}
+                    <line x1={TB.x0} y1={TB.y0 + 16} x2={990} y2={TB.y0 + 16} stroke="rgba(15,22,32,0.3)" />
+                    {syns.map((r, j) => {
+                        const i = forsta + j, y = TB.y0 + 40 + j * 29;
+                        const mark = markerade && markerade.includes(i);
+                        const miss = misstankta && misstankta.includes(i);
+                        return (
+                            <g key={i} onClick={() => stryk(i)} style={{ cursor: 'pointer' }} opacity={r.struken ? 0.45 : 1}>
+                                <rect x={TB.x0} y={y - 19} width={990 - TB.x0} height={26} rx="4" fill={mark ? 'rgba(21,128,61,0.12)' : miss ? 'rgba(200,50,74,0.10)' : 'transparent'} />
+                                {r.struken && <line x1={TB.x0 + 22} y1={y - 5} x2={986} y2={y - 5} stroke="#0f1620" strokeWidth="1.2" />}
+                                {miss && !r.struken && <text x={TB.x0 + 18} y={y} fontSize="13" fill="#c8324a" fontWeight="700">?</text>}
+                                <text x={kol[0]} y={y} fontSize="13.5" fill="#5a6170">{i + 1}</text>
+                                <text x={kol[1]} y={y} fontSize="14" textAnchor="end" fill="#0f1620">{fmt(r.m, 0)} g</text>
+                                <text x={kol[2]} y={y} fontSize="14" textAnchor="end" fill="#0f1620">{fmt(r.l, 2)} m</text>
+                                <text x={kol[3]} y={y} fontSize="14" textAnchor="end" fill="#0f1620">{fmt(r.a0, 0)}°</text>
+                                <text x={kol[4]} y={y} fontSize="14" textAnchor="end" fill="#0f1620" fontWeight="600">{fmt(r.t10, 2)} s</text>
+                                <text x={kol[5]} y={y} fontSize="14" textAnchor="end" fill="#0f1620">{fmt(r.t10 / 10, 3)} s</text>
+                            </g>
+                        );
+                    })}
+                    {rader.length === 0 && <text x={TB.x0} y={TB.y0 + 44} fontSize="14" fill="#5a6170">Inga mätningar än. Släpp pendeln och ta tid.</text>}
+                    {forsta > 0 && <text x={990} y={TB.y0 - 16} fontSize="12" fill="#5a6170" textAnchor="end">De sju senaste av {rader.length}</text>}
+                    {rader.length > 0 && <text x={TB.x0} y={622} fontSize="12" fill="#5a6170">Klicka på en mätning för att stryka den, eller ta tillbaka den.</text>}
+                </g>
+            );
+        };
+
+        const Diagram = ({ rader, modell }) => {
+            const X0 = TB.x0 + 34, X1 = 978, Y0 = 600, Y1 = TB.y0 + 4;
+            const lMax = 1.0, tMax = 2.2;
+            const px = (l) => X0 + (X1 - X0) * l / lMax, py = (T) => Y0 - (Y0 - Y1) * T / tMax;
+            const kurva = [];
+            for (let i = 0; i <= 120; i++) { const l = 0.005 + (lMax - 0.005) * i / 120; kurva.push(`${px(l).toFixed(1)},${py(M.periodLiten(l)).toFixed(1)}`); }
+            return (
+                <g fontFamily="'DM Sans', sans-serif">
+                    <text x={TB.x0} y={TB.y0 - 16} fontSize="12" fontWeight="700" letterSpacing="0.06em" fill="#5a6170">PERIODEN MOT LÄNGDEN</text>
+                    {[0.2, 0.4, 0.6, 0.8, 1.0].map((l) => (
+                        <g key={l}><line x1={px(l)} y1={Y0} x2={px(l)} y2={Y0 + 5} stroke="#0f1620" /><text x={px(l)} y={Y0 + 19} fontSize="12" textAnchor="middle" fill="#0f1620">{fmt(l, 1)}</text></g>
+                    ))}
+                    {[0.5, 1, 1.5, 2].map((T) => (
+                        <g key={T}><line x1={X0 - 5} y1={py(T)} x2={X0} y2={py(T)} stroke="#0f1620" /><text x={X0 - 8} y={py(T) + 4} fontSize="12" textAnchor="end" fill="#0f1620">{fmt(T, 1)}</text></g>
+                    ))}
+                    <line x1={X0} y1={Y0} x2={X1 + 6} y2={Y0} stroke="#0f1620" strokeWidth="1.6" />
+                    <polygon points={`${X1 + 12},${Y0} ${X1 + 3},${Y0 - 4} ${X1 + 3},${Y0 + 4}`} fill="#0f1620" />
+                    <line x1={X0} y1={Y0} x2={X0} y2={Y1 - 4} stroke="#0f1620" strokeWidth="1.6" />
+                    <polygon points={`${X0},${Y1 - 10} ${X0 - 4},${Y1 - 1} ${X0 + 4},${Y1 - 1}`} fill="#0f1620" />
+                    <text x={X1 + 10} y={Y0 - 10} fontSize="13" textAnchor="end" fill="#0f1620"><tspan fontStyle="italic">l</tspan> (m)</text>
+                    <text x={X0 + 8} y={Y1 + 6} fontSize="13" fill="#0f1620"><tspan fontStyle="italic">T</tspan> (s)</text>
+                    {modell && <polyline points={kurva.join(' ')} fill="none" stroke="#2563eb" strokeWidth="2" strokeDasharray="6 4" />}
+                    {modell && <text x={px(0.62)} y={py(M.periodLiten(0.62)) - 12} fontSize="12.5" fill="#2563eb">modellen</text>}
+                    {rader.map((r, i) => <circle key={i} cx={px(r.l)} cy={py(r.t10 / 10)} r="4.5" fill="#c8324a" stroke="#0f1620" strokeWidth="1" />)}
+                </g>
+            );
+        };
+
+        const Scen = ({ par, a, fas, tid, antal, rader, markerade, misstankta, stryk, steg, svar, diagram, modell }) => {
+            const L = S * par.l;
+            const bx = P.x + L * Math.sin(a), by = P.y + L * Math.cos(a);
+            const r = kulRadie(par.m);
+            const a0 = rad(par.a0);
+            const sx = P.x + L * Math.sin(a0), sy = P.y + L * Math.cos(a0);
+            // gradskivan
+            const GR = 64;
+            const streck = [];
+            for (let d = -45; d <= 45; d += 5) {
+                const lang = d % 15 === 0 ? 11 : 6, v = rad(d);
+                streck.push(<line key={d} x1={P.x + GR * Math.sin(v)} y1={P.y + GR * Math.cos(v)} x2={P.x + (GR - lang) * Math.sin(v)} y2={P.y + (GR - lang) * Math.cos(v)} stroke="#5a6170" strokeWidth="1.2" />);
+            }
+            return (
+                <svg viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <linearGradient id="bank" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#b98a5a" /><stop offset="1" stopColor="#8f6439" /></linearGradient>
+                        <radialGradient id="kula" cx="0.35" cy="0.35" r="0.7"><stop offset="0" stopColor="#d9dde3" /><stop offset="0.55" stopColor="#8b939f" /><stop offset="1" stopColor="#4b525d" /></radialGradient>
+                    </defs>
+                    {/* bänken och stativet */}
+                    <rect x="0" y={BANK} width={640} height={VB_H - BANK} fill="url(#bank)" />
+                    <line x1="0" y1={BANK} x2={640} y2={BANK} stroke="#6b4a2a" strokeWidth="2" />
+                    <rect x="12" y={BANK - 14} width="120" height="14" rx="3" fill="#3f4650" />
+                    <rect x="34" y="78" width="10" height={BANK - 92} fill="#6b7280" stroke="#3f4650" />
+                    <rect x="30" y="86" width={P.x - 22} height="9" rx="2" fill="#6b7280" stroke="#3f4650" />
+                    <rect x="26" y="80" width="22" height="20" rx="3" fill="#3f4650" />
+                    <circle cx={P.x} cy={P.y} r="5" fill="#3f4650" />
+                    {/* gradskivan och startvinkeln */}
+                    <path d={`M ${P.x + GR * Math.sin(rad(-45))} ${P.y + GR * Math.cos(rad(-45))} A ${GR} ${GR} 0 0 0 ${P.x + GR * Math.sin(rad(45))} ${P.y + GR * Math.cos(rad(45))}`} fill="rgba(255,255,255,0.55)" stroke="#5a6170" strokeWidth="1.2" />
+                    {streck}
+                    <line x1={P.x} y1={P.y} x2={P.x} y2={P.y + L + 30} stroke="#5a6170" strokeWidth="1" strokeDasharray="4 4" />
+                    {fas !== 'redo' && <line x1={P.x} y1={P.y} x2={sx} y2={sy} stroke="#c8324a" strokeWidth="1" strokeDasharray="3 4" opacity="0.7" />}
+                    <text x={P.x + 78 * Math.sin(a0) + 14} y={P.y + 78 * Math.cos(a0) + 4} fontSize="15" fill="#c8324a" fontFamily="'DM Sans', sans-serif">
+                        <tspan fontStyle="italic">α</tspan> = {fmt(par.a0, 0)}°
+                    </text>
+                    {/* måttlinjen för längden, till vänster om lodlinjen */}
+                    <g stroke="#0f766e" strokeWidth="1.3" fill="#0f766e">
+                        <line x1={66} y1={P.y + L} x2={P.x} y2={P.y + L} strokeDasharray="3 4" strokeWidth="1" />
+                        <line x1={72} y1={P.y + 4} x2={72} y2={P.y + L} />
+                        <line x1={66} y1={P.y + 4} x2={78} y2={P.y + 4} />
+                        <line x1={66} y1={P.y + L} x2={78} y2={P.y + L} />
+                    </g>
+                    <text x={80} y={P.y + L / 2 + 5} fontSize="15" fill="#0f766e" fontFamily="'DM Sans', sans-serif">
+                        <tspan fontStyle="italic">l</tspan> = {fmt(par.l, 2)} m
+                    </text>
+                    {/* pendeln */}
+                    <line x1={P.x} y1={P.y} x2={bx} y2={by} stroke="#0f1620" strokeWidth="1.6" />
+                    <circle cx={bx} cy={by} r={r} fill="url(#kula)" stroke="#0f1620" strokeWidth="1.4" />
+                    <text x={bx} y={by + r + 17} fontSize="13" textAnchor="middle" fill="#0f1620" fontFamily="'DM Sans', sans-serif">{fmt(par.m, 0)} g</text>
+                    {/* stoppuret */}
+                    <g transform="translate(478 490)">
+                        <rect x="0" y="0" width="150" height="74" rx="12" fill="#1f2937" stroke="#0f1620" strokeWidth="2" />
+                        <rect x="62" y="-9" width="26" height="10" rx="3" fill="#374151" />
+                        <rect x="10" y="10" width="130" height="34" rx="5" fill="#d9f99d" />
+                        <text x="134" y="36" textAnchor="end" fontSize="24" fontFamily="'JetBrains Mono', monospace" fontWeight="600" fill="#1f2937">{fmt(tid, 2)}</text>
+                        <text x="75" y="63" textAnchor="middle" fontSize="12" fill="#e5e7eb" fontFamily="'DM Sans', sans-serif">
+                            {fas === 'mater' ? `svängning ${Math.min(10, antal + 1)} av 10` : fas === 'klar' ? 'tid för 10 svängningar' : 'stoppur'}
+                        </text>
+                    </g>
+                    {/* flödesschemat och mätningarna */}
+                    <rect x={650} y={56} width={344} height={246} rx="10" fill="rgba(255,255,255,0.45)" stroke="rgba(15,22,32,0.12)" />
+                    <Flode steg={steg} svar={svar} />
+                    <rect x={650} y={318} width={344} height={312} rx="10" fill="rgba(255,255,255,0.45)" stroke="rgba(15,22,32,0.12)" />
+                    {diagram ? <Diagram rader={rader.filter((r) => !r.struken)} modell={modell} /> : <Tabell rader={rader} markerade={markerade} misstankta={misstankta} stryk={stryk} />}
+                </svg>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  REGLAGE OCH FÄRDIGA FÖRSÖK
+        // ════════════════════════════════════════════════════════
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, disabled }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').replace('−', '-').trim();
+                if (norm === '' || norm === '-' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt} disabled={disabled} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)} onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+        const Slider = ({ label, value, min, max, step, onChange, disabled, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 96, color: 'var(--lab-ink-soft)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled} onChange={(e) => onChange(parseFloat(e.target.value))} className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, disabled, valueNode }) => (
+            <div className="st-slider">
+                <div className="st-slider-top"><span dangerouslySetInnerHTML={{ __html: label }} />{valueNode}</div>
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled} onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+
+        const FORSOK = [
+            { id: 'massa', namn: 'Spelar massan roll?', sub: '50 g och 400 g, samma snöre', hyp: 'm', serie: [{ m: 50, l: 0.8, a0: 10 }, { m: 400, l: 0.8, a0: 10 }] },
+            { id: 'langd', namn: 'Fyra gånger så långt snöre', sub: '0,25 m och 1,00 m', hyp: 'l', serie: [{ m: 100, l: 0.25, a0: 10 }, { m: 100, l: 1.0, a0: 10 }] },
+            { id: 'utslag', namn: 'Litet och stort utslag', sub: '5° och 40°, två gånger var', hyp: 'a0', serie: [{ m: 100, l: 1.0, a0: 5 }, { m: 100, l: 1.0, a0: 40 }, { m: 100, l: 1.0, a0: 5 }, { m: 100, l: 1.0, a0: 40 }] },
+            { id: 'upprepa', namn: 'Upprepa samma mätning', sub: 'fem gånger, en räknas fel', hyp: null, serie: [{ m: 100, l: 0.5, a0: 10 }, { m: 100, l: 0.5, a0: 10 }, { m: 100, l: 0.5, a0: 10, fel: 1 }, { m: 100, l: 0.5, a0: 10 }, { m: 100, l: 0.5, a0: 10 }] },
+            { id: 'tva', namn: 'Två ändringar på en gång', sub: 'tyngre kula och längre snöre', hyp: 'm', serie: [{ m: 50, l: 0.3, a0: 10 }, { m: 400, l: 0.9, a0: 10 }] },
+            { id: 'serie', namn: 'Fem längder', sub: 'för diagrammet och modellen', hyp: 'l', diagram: true, serie: [0.2, 0.4, 0.6, 0.8, 1.0].map((l) => ({ m: 100, l, a0: 10 })) },
+        ];
+        const slump = (a) => a[Math.floor(Math.random() * a.length)];
+
+        // Gissa-läget: förutsäg utfallet, eller avgör om ett försök är rättvist.
+        function nyForutsagelse() {
+            const bas = { m: slump([50, 100, 200]), l: slump([0.25, 0.4, 0.5]), a0: slump([5, 10]) };
+            const v = slump(['m', 'l', 'l', 'a0']);
+            const ny = { ...bas };
+            if (v === 'm') ny.m = bas.m * 4;
+            if (v === 'l') ny.l = Math.random() < 0.5 ? bas.l * 2 : bas.l / 2;
+            if (v === 'a0') ny.a0 = bas.a0 === 5 ? 10 : 15;
+            const T0 = M.period(bas.l, rad(bas.a0)), T1 = M.period(ny.l, rad(ny.a0));
+            const svar = Math.abs(T1 / T0 - 1) < 0.01 ? 'lika' : T1 > T0 ? 'langre' : 'kortare';
+            return { typ: 'forutsag', v, bas, ny, svar };
+        }
+        function nyRattvis() {
+            const v = slump(['m', 'l', 'a0']);
+            const bas = { m: slump([50, 100, 200]), l: slump([0.3, 0.5, 0.8]), a0: slump([5, 10]) };
+            const ny = { ...bas };
+            const andra = (k) => { if (k === 'm') ny.m = bas.m === 200 ? 50 : 200; if (k === 'l') ny.l = bas.l === 0.8 ? 0.3 : 0.8; if (k === 'a0') ny.a0 = 30; };
+            andra(v);
+            const fall = slump(['ratt', 'ratt', 'tva', 'annan']);
+            if (fall === 'tva') andra(slump(['m', 'l', 'a0'].filter((k) => k !== v)));
+            if (fall === 'annan') { ny[v] = bas[v]; andra(slump(['m', 'l', 'a0'].filter((k) => k !== v))); }
+            return { typ: 'rattvis', v, bas, ny, fall, svar: fall === 'ratt' ? 'ja' : 'nej' };
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  HUVUDAPP
+        // ════════════════════════════════════════════════════════
+        const App = () => {
+            const [par, setPar] = useState({ m: 100, l: 0.8, a0: 10 });
+            const [fas, setFas] = useState('redo');            // redo, mater, klar
+            const [rader, setRader] = useState([]);
+            const [hyp, setHyp] = useState(null);
+            const [status, setStatus] = useState({});           // hypotes → { res: 'stods' | 'stodsInte' | 'motbevisad', par: [nycklar] }
+            const [bedomning, setBedomning] = useState(null);   // { svar: 'ja'|'nej', ratt, text, markerade }
+            const [snabb, setSnabb] = useState(false);
+            const [diagram, setDiagram] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(false);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [, setFrame] = useState(0);
+            const [gissa, setGissa] = useState(null);
+            const [gSvar, setGSvar] = useState(null);
+            const [poang, setPoang] = useState({ ratt: 0, totalt: 0, svit: 0 });
+            const [kö, setKo] = useState([]);
+            const [info, setInfo] = useState(null);
+            const sceneWrapRef = useRef(null);
+            const pRef = useRef(M.nyPendel(0.8, rad(10)));
+            const tRef = useRef(0);
+            const lastRef = useRef(null);
+            const live = useRef({});
+            live.current = { fas, snabb, par };
+
+            const modell = (status.l && status.l.res === 'stods') || (diagram && rader.filter((r) => !r.struken).length >= 3);
+            const manuellRef = useRef(false);
+            const stryk = (i) => { if (fas === 'mater') return; setRader((r) => r.map((x, j) => (j === i ? { ...x, struken: !x.struken } : x))); setBedomning(null); };
+            const misstankta = M.misstankt(rader);
+
+            // en ändrad uppställning ger en pendel som hålls vid startvinkeln
+            useEffect(() => { if (fas !== 'mater') { pRef.current = M.nyPendel(par.l, rad(par.a0)); tRef.current = 0; setFas('redo'); } }, [par.l, par.a0, par.m]);
+
+            const slapp = (p = par, manuell = false) => {
+                manuellRef.current = manuell ? 'slump' : (p.fel || 0);
+                pRef.current = M.nyPendel(p.l, rad(p.a0));
+                tRef.current = 0;
+                setBedomning(null);
+                setFas('mater');
+            };
+            useEffect(() => {
+                let raf;
+                const loop = (ts) => {
+                    if (lastRef.current == null) lastRef.current = ts;
+                    const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
+                    lastRef.current = ts;
+                    const L = live.current;
+                    if (L.fas === 'mater' || L.fas === 'klar') {
+                        const f = L.snabb ? 6 : 1;
+                        M.steg(pRef.current, dt * f);
+                        if (L.fas === 'mater') {
+                            const T = M.period(L.par.l, rad(L.par.a0));
+                            tRef.current = pRef.current.t;
+                            if (pRef.current.t >= 10 * T) {
+                                // en egen mätning räknas ibland fel, som när man tappar räkningen
+                                const f = manuellRef.current === 'slump' ? (Math.random() < 0.08 ? (Math.random() < 0.5 ? -1 : 1) : 0) : manuellRef.current;
+                                const t10 = M.matning(L.par.l, rad(L.par.a0), Math.random, f);
+                                tRef.current = t10;
+                                setRader((r) => [...r, { m: L.par.m, l: L.par.l, a0: L.par.a0, t10 }]);
+                                setFas('klar');
+                            }
+                        }
+                        setFrame((n) => n + 1);
+                    }
+                    raf = requestAnimationFrame(loop);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, []);
+            // kön med färdiga försök: nästa uppställning när den förra är mätt
+            useEffect(() => {
+                if (fas !== 'klar' || !kö.length) return;
+                const id = setTimeout(() => {
+                    const [nasta, ...rest] = kö;
+                    setKo(rest);
+                    setPar(nasta);
+                    slapp(nasta);
+                }, 900);
+                return () => clearTimeout(id);
+            }, [fas, kö]);
+
+            const satt = (x) => { if (fas === 'mater') return; setPar((p) => ({ ...p, ...x })); };
+            const valjHyp = (id) => {
+                setHyp(id); setBedomning(null);
+                setInfo(id === 'vilja'
+                    ? 'Den här hypotesen går inte att pröva. Vad pendeln vill kan inte mätas, och inget försök kan visa att påståendet är fel. En vetenskaplig hypotes måste vara falsifierbar: det ska gå att tänka sig en mätning som motbevisar den.'
+                    : null);
+            };
+            const utvardera = (svar) => {
+                const h = HYP.find((x) => x.id === hyp);
+                const b = M.bedom(rader, h.var);
+                if (!b.rattvist) {
+                    setBedomning({ ofullstandig: true, text: b.tvaPaEnGang
+                        ? `Du har ändrat mer än en sak mellan mätningarna. Då går det inte att veta om det var ${VARNAMN[h.var]} eller något annat som gjorde skillnaden. Ändra bara ${VARNAMN[h.var]} och håll allt annat lika.`
+                        : `Du behöver minst två mätningar där bara ${VARNAMN[h.var]} skiljer sig och allt annat är lika.` });
+                    return;
+                }
+                const stods = b.okar;
+                const res = stods ? 'stods' : b.tydlig ? 'motbevisad' : 'stodsInte';
+                const ratt = (svar === 'ja') === stods;
+                const markerade = rader.map((r, i) => i).filter((i) => {
+                    const r = rader[i];
+                    return !r.struken && [b.liten.p, b.stor.p].some((p) => p.m === r.m && p.l === r.l && p.a0 === r.a0);
+                });
+                const vid = (g) => `${fmt(g.medel, 2)} s vid ${visaVarde(h.var, g.p[h.var])}${g.t.length > 1 ? ` (medelvärdet av ${g.t.length} mätningar)` : ''}`;
+                const lang = b.skillnad > 0 ? 'längre' : 'kortare';
+                let text = `Tiden för tio svängningar blev ${vid(b.liten)} och ${vid(b.stor)}. Med ${visaVarde(h.var, b.stor.p[h.var])} blev den ${fmt(Math.abs(b.skillnad), 2)} s ${lang}, och osäkerheten i skillnaden är ungefär ${fmt(3 * b.sigma, 2)} s. `;
+                if (stods) text += 'Skillnaden är större än osäkerheten, så mätningarna styrker hypotesen.';
+                else if (b.tydlig) text += 'Svängningstiden blev tydligt kortare, så mätningarna motbevisar hypotesen.';
+                else text += 'Skillnaden är mindre än osäkerheten och kan inte skiljas från slumpen, så mätningarna styrker inte hypotesen.';
+                if (h.var === 'm' && !b.tydlig) text += ' Det stämmer med fysiken: en tyngre kula dras visserligen nedåt med större kraft, men den är också lika mycket svårare att sätta i rörelse. Därför blir accelerationen densamma.';
+                if (h.var === 'a0') {
+                    const a1 = b.liten.p.a0, a2 = b.stor.p.a0, proc = 100 * (M.period(b.liten.p.l, rad(a2)) / M.period(b.liten.p.l, rad(a1)) - 1);
+                    if (stods) text += ` Men effekten är liten: från ${fmt(a1, 0)}° till ${fmt(a2, 0)}° blir svängningstiden bara ${fmt(proc, 1)} % längre. Vid små utslag märks den knappt, och därför fungerar den enkla modellen bra just där.`;
+                    else text += ` Hypotesen kan ändå vara sann. Med ${fmt(a1, 0)}° och ${fmt(a2, 0)}° blir svängningstiden ${fmt(proc, 1)} % längre, och det är svårt att mäta. Mät flera gånger vid varje vinkel, använd ett långt snöre och jämför ett litet och ett stort utslag.`;
+                }
+                if (h.var === 'l' && stods) {
+                    const k = b.stor.p.l / b.liten.p.l;
+                    text += ` Med ${fmt(k, 1)} gånger så långt snöre blev tiden ungefär ${fmt(Math.sqrt(k), 2)} gånger så lång, och √${fmt(k, 1)} ≈ ${fmt(Math.sqrt(k), 2)}: svängningstiden växer med roten ur längden.`;
+                }
+                if (b.liten.t.length === 1 || b.stor.t.length === 1) text += ' Upprepa gärna mätningarna, så att du ser hur mycket de sprider sig.';
+                // flera rättvisa par som styrker samma hypotes: då är det en lag
+                const nyckel = `${b.liten.p.m}/${b.liten.p.l}/${b.liten.p.a0}|${b.stor.p.m}/${b.stor.p.l}/${b.stor.p.a0}`;
+                const forra = status[hyp] && status[hyp].res === 'stods' ? status[hyp].par : [];
+                const par = stods ? Array.from(new Set([...forra, nyckel])) : [];
+                const lag = stods && par.length >= 2;
+                if (stods && !lag) text += ' Ett försök räcker inte för att göra hypotesen till en lag. Pröva den igen med andra värden.';
+                if (lag && h.var === 'l') text += ' Hypotesen har nu styrkts i flera försök. Sambandet att svängningstiden växer med roten ur längden är en lag: den beskriver hur pendeln beter sig. Newtons mekanik är teorin som förklarar varför.';
+                else if (lag) text += ' Hypotesen har nu styrkts i flera försök, och sambandet kan kallas en lag. En lag beskriver vad som händer, en teori förklarar varför.';
+                setBedomning({ svar: stods ? 'ja' : 'nej', lag, ratt, text: (ratt ? 'Rätt! ' : 'Inte riktigt. ') + text, markerade });
+                setStatus((s) => ({ ...s, [hyp]: { res, par } }));
+            };
+
+            const korForsok = (f) => {
+                avslutaGissa();
+                setRader([]); setBedomning(null); setInfo(null);
+                if (f.hyp) setHyp(f.hyp);
+                if (f.diagram) setDiagram(true);
+                setSnabb(true);
+                setPar(f.serie[0]);
+                setKo(f.serie.slice(1));
+                slapp(f.serie[0]);
+            };
+
+            // ── Gissa-läget ──
+            const startaGissa = (typ) => {
+                const u = typ === 'forutsag' ? nyForutsagelse() : nyRattvis();
+                setGissa(u); setGSvar(null); setKo([]);
+                if (typ === 'forutsag') { setPar(u.bas); }
+            };
+            const svaraGissa = (val) => {
+                const u = gissa;
+                const ratt = val === u.svar;
+                let text;
+                if (u.typ === 'forutsag') {
+                    const T0 = M.period(u.bas.l, rad(u.bas.a0)), T1 = M.period(u.ny.l, rad(u.ny.a0));
+                    const ord = { langre: 'längre', kortare: 'kortare', lika: 'ungefär lika lång' }[u.svar];
+                    text = `${ratt ? 'Rätt!' : 'Inte riktigt.'} Svängningstiden blir ${ord}: ${fmt(T0, 2)} s före och ${fmt(T1, 2)} s efter. `;
+                    if (u.v === 'm') text += 'Massan påverkar inte svängningstiden.';
+                    if (u.v === 'l') text += u.ny.l > u.bas.l ? 'Med dubbla längden blir svängningstiden ungefär 1,4 gånger så lång, eftersom tiden växer med roten ur längden.' : 'Med halva längden blir svängningstiden kortare, men inte hälften så lång. Den blir ungefär 0,7 gånger så lång, eftersom tiden växer med roten ur längden.';
+                    if (u.v === 'a0') text += `Att öka ett så litet utslag ändrar svängningstiden med mindre än en procent, ${fmt(100 * (T1 / T0 - 1), 2)} %.`;
+                    setRader([]);
+                    setKo([u.ny]);
+                    setSnabb(true);
+                    slapp(u.bas);
+                } else {
+                    const andrade = ['m', 'l', 'a0'].filter((k) => u.bas[k] !== u.ny[k]);
+                    text = ratt ? 'Rätt! ' : 'Inte riktigt. ';
+                    text += u.fall === 'ratt'
+                        ? `Det är bara ${VARNAMN[u.v]} som skiljer sig, så en eventuell skillnad i svängningstid måste bero på ${VARNAMN[u.v]}.`
+                        : u.fall === 'annan'
+                        ? `${VARNAMN[u.v][0].toUpperCase() + VARNAMN[u.v].slice(1)} är densamma i båda pendlarna, och det är ${VARNAMN[andrade[0]]} som skiljer sig. Försöket säger ingenting om hypotesen.`
+                        : `Både ${VARNAMN[andrade[0]]} och ${VARNAMN[andrade[1]]} skiljer sig. Då går det inte att veta vilken av dem som orsakade en eventuell skillnad.`;
+                }
+                setGSvar({ val, ratt, text });
+                setPoang((x) => ({ ratt: x.ratt + (ratt ? 1 : 0), totalt: x.totalt + 1, svit: ratt ? x.svit + 1 : 0 }));
+            };
+            const avslutaGissa = () => { setGissa(null); setGSvar(null); };
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(document.fullscreenElement === sceneWrapRef.current || document.webkitFullscreenElement === sceneWrapRef.current);
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => { document.removeEventListener('fullscreenchange', handler); document.removeEventListener('webkitfullscreenchange', handler); };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const las = fas === 'mater' || kö.length > 0 || (gissa && !gSvar);
+            const steg = !hyp ? 'obs' : hyp === 'vilja' ? 'hyp' : bedomning && !bedomning.ofullstandig ? (bedomning.svar === 'ja' ? (bedomning.lag ? 'lag' : 'styrks') : 'hyp') : rader.length >= 2 ? 'fraga' : 'forsok';
+            const reglage = (Sl, kompakt) => {
+                const r = (label, v, min, max, step, unit, d) => (
+                    <Sl key={v} label={label} value={par[v]} min={min} max={max} step={step} disabled={las} onChange={(x) => satt({ [v]: x })}
+                        {...(kompakt ? { valueNode: <NumInput value={par[v]} min={min} max={max} fmtFn={(x) => fmt(x, d)} unit={unit} disabled={las} onCommit={(x) => satt({ [v]: x })} /> } : {})}>
+                        {!kompakt && <NumInput value={par[v]} min={min} max={max} fmtFn={(x) => fmt(x, d)} unit={unit} disabled={las} onCommit={(x) => satt({ [v]: x })} />}
+                    </Sl>
+                );
+                return (
+                    <React.Fragment>
+                        {r('Kulans massa', 'm', 50, 500, 50, 'g', 0)}
+                        {r('Snörets längd', 'l', 0.1, 1, 0.05, 'm', 2)}
+                        {r('Utslag, <em>α</em>', 'a0', 5, 40, 5, '°', 0)}
+                    </React.Fragment>
+                );
+            };
+            const knappar = (kl) => (
+                <React.Fragment>
+                    <button className={`btn-start ${kl}`} onClick={() => slapp(par, true)} disabled={las}>Släpp och ta tid</button>
+                    <button className={`btn-toggle ${kl}`} onClick={() => { setRader([]); setBedomning(null); setKo([]); setFas('redo'); }} disabled={fas === 'mater'}>Töm tabellen</button>
+                </React.Fragment>
+            );
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Inställningar</div>
+                        <label><input type="checkbox" checked={diagram} onChange={() => setDiagram((x) => !x)} /><span>Visa diagrammet</span></label>
+                        <label><input type="checkbox" checked={snabb} onChange={() => setSnabb((x) => !x)} /><span>Snabbspola</span></label>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglage(StSlider, true)}</div>
+                                <div className="st-actions">{knappar('')}</div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const valdHyp = HYP.find((x) => x.id === hyp);
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-7xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Pröva en hypotes
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Pröva en hypotes</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            En pendel svänger fram och tillbaka. Vad avgör hur lång tid en svängning tar? Välj en hypotes, pröva den med försök
+                            och avgör om mätningarna stöder den. Ändra bara en sak åt gången, och upprepa mätningarna: ett stoppur i en människas
+                            hand ger sällan exakt samma tid två gånger.
+                        </p>
+
+                        <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                            <div className="flex flex-wrap items-center gap-x-10 gap-y-3">
+                                <div className="flex items-center gap-x-3">
+                                    <Vbl label="Period"><em>T</em></Vbl>
+                                    <span className="fnum">=</span>
+                                    <Brak t={<Vbl label="Tid för tio svängningar"><Sub s="t" i="10" /></Vbl>} n={<span className="fnum">10</span>} />
+                                </div>
+                                <div className="text-base" style={{ color: 'var(--lab-ink-soft)', maxWidth: 560 }}>
+                                    Perioden <em>T</em> är svängningstiden: tiden för en hel svängning, fram och tillbaka. Ta tiden för tio svängningar och
+                                    dela med tio. Då delas också osäkerheten från din reaktionstid med tio.
+                                </div>
+                            </div>
+                        </div>
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 xl:w-3/4 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <Scen par={par} a={fas === 'redo' ? rad(par.a0) : pRef.current.a} fas={fas} tid={tRef.current} antal={Math.floor(pRef.current.t / M.period(par.l, rad(par.a0)))}
+                                          rader={rader} markerade={bedomning && bedomning.markerade} misstankta={misstankta} stryk={stryk} steg={steg} svar={bedomning && bedomning.svar} diagram={diagram} modell={modell} />
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Modellens antaganden: kulan hänger i ett lätt snöre och svänger utan luftmotstånd, och längden räknas till kulans mitt.
+                                    Stoppuret startas och stoppas av en människa, och reaktionstiden gör att varje mätning avviker någon tiondels sekund åt
+                                    ena eller andra hållet. Det är mätosäkerhet. Ibland räknar man dessutom fel antal svängningar, och det är en felmätning:
+                                    den avviker en hel period och ska strykas.
+                                </p>
+                                {modell && (
+                                    <div className="glass-card rounded-xl p-4 mt-3" style={{ color: 'var(--lab-ink)' }}>
+                                        <h3 className="font-bold mb-1">Modellen: en matematisk pendel</h3>
+                                        <div className="flex flex-wrap items-center gap-x-8 gap-y-2">
+                                            <div className="flex items-center gap-x-3">
+                                                <Vbl label="Period"><em>T</em></Vbl><span className="fnum">=</span><span className="fnum">2π ·</span>
+                                                <span className="fnum" style={{ display: 'inline-flex', alignItems: 'center' }}>√<span style={{ borderTop: '1.5px solid currentColor', paddingTop: 2 }}><Brak t={<Vbl label="Längd"><em>l</em></Vbl>} n={<Vbl label="Tyngdfaktor"><em>g</em></Vbl>} /></span></span>
+                                            </div>
+                                            <p className="text-sm" style={{ color: 'var(--lab-ink-soft)', maxWidth: 520 }}>
+                                                Mätningarna stämmer med en modell där svängningstiden växer med roten ur längden{status.m && status.m.res !== 'stods' ? ' och inte beror på massan' : ''}:
+                                                fyra gånger så långt snöre ger dubbelt så lång tid. <em>g</em> är tyngdfaktorn, 9,82 N/kg. Modellen gäller för små utslag.
+                                                Den streckade kurvan i diagrammet visar modellen.
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="lg:w-1/3 xl:w-1/4 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-1" style={{ textAlign: 'left' }}>Problemställning</div>
+                                    <p className="text-sm mb-3" style={{ color: 'var(--lab-ink)' }}>Vad avgör hur lång tid en svängning tar för en pendel?</p>
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>1. Välj en hypotes</div>
+                                    <div className="flex flex-col gap-2">
+                                        {HYP.map((h) => (
+                                            <button key={h.id} className="forsok" disabled={las && !gissa} onClick={() => valjHyp(h.id)}
+                                                    style={hyp === h.id ? { background: 'var(--lab-ink)', color: 'var(--lab-bg)' } : undefined}>
+                                                {h.kort}{status[h.id] && <span style={{ float: 'right', fontSize: 11, fontWeight: 700, color: status[h.id].res === 'stods' ? (hyp === h.id ? '#86efac' : '#15803d') : (hyp === h.id ? '#fca5a5' : '#c8324a') }}>{{ stods: 'styrks', stodsInte: 'styrks inte', motbevisad: 'motbevisad' }[status[h.id].res]}</span>}
+                                                <span className="sub" style={hyp === h.id ? { color: 'var(--lab-bg)' } : undefined}>{h.text}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                    {info && <p className="text-sm mt-2" style={{ color: 'var(--lab-accent)' }}>{info}</p>}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>2. Gör försöket</div>
+                                    {!isFullscreen && reglage(Slider, false)}
+                                    {isFullscreen && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Reglagen finns i rutan uppe till höger i fullskärm.</p>}
+                                    <div className="flex gap-2 mt-2">{knappar('flex-1')}</div>
+                                    <label className="flex items-center gap-2 text-sm mt-2" style={{ color: 'var(--lab-ink)' }}>
+                                        <input type="checkbox" checked={snabb} onChange={() => setSnabb((x) => !x)} /> Snabbspola (sex gånger så fort)
+                                    </label>
+                                    <label className="flex items-center gap-2 text-sm mt-1" style={{ color: 'var(--lab-ink)' }}>
+                                        <input type="checkbox" checked={diagram} onChange={() => setDiagram((x) => !x)} /> Visa diagrammet i stället för tabellen
+                                    </label>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>3. Stöds hypotesen?</div>
+                                    {!valdHyp || !valdHyp.var
+                                        ? <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>Välj först en hypotes som går att pröva.</p>
+                                        : (
+                                            <React.Fragment>
+                                                <p className="text-sm mb-1" style={{ color: 'var(--lab-ink)' }}>{valdHyp.text}</p>
+                                                <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Jämför skillnaden med hur mycket upprepade mätningar sprider sig. Stryk felmätningar först.</p>
+                                                <div className="flex gap-2">
+                                                    <button className="btn-toggle flex-1" disabled={las || rader.length < 2} onClick={() => utvardera('ja')}>Ja</button>
+                                                    <button className="btn-toggle flex-1" disabled={las || rader.length < 2} onClick={() => utvardera('nej')}>Nej</button>
+                                                </div>
+                                                {rader.length < 2 && <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-soft)' }}>Gör minst två mätningar först.</p>}
+                                            </React.Fragment>
+                                        )}
+                                    {bedomning && <p className="text-sm mt-2" style={{ color: bedomning.ofullstandig ? 'var(--lab-ink)' : bedomning.ratt ? '#15803d' : 'var(--lab-accent)' }}>{bedomning.text}</p>}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Färdiga försök</div>
+                                    <div className="forsok-lista">
+                                        {FORSOK.map((f) => <button key={f.id} className="forsok" disabled={las} onClick={() => korForsok(f)}>{f.namn}<span className="sub">{f.sub}</span></button>)}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flbl" style={{ textAlign: 'left' }}>Gissa-läge</div>
+                                        {poang.totalt > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>{poang.ratt} av {poang.totalt} rätt{poang.svit > 1 ? `, ${poang.svit} i rad` : ''}</div>}
+                                    </div>
+                                    {!gissa && (
+                                        <div className="flex flex-col gap-2">
+                                            <button className="btn-toggle" disabled={las} onClick={() => startaGissa('forutsag')}>Förutsäg utfallet</button>
+                                            <button className="btn-toggle" disabled={las} onClick={() => startaGissa('rattvis')}>Rättvist försök?</button>
+                                        </div>
+                                    )}
+                                    {gissa && gissa.typ === 'forutsag' && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                En pendel har en kula på {fmt(gissa.bas.m, 0)} g, ett snöre på {fmt(gissa.bas.l, 2)} m och ett utslag på {fmt(gissa.bas.a0, 0)}°.
+                                                Nu {gissa.v === 'm' ? `byts kulan mot en på ${fmt(gissa.ny.m, 0)} g` : gissa.v === 'l' ? `görs snöret ${fmt(gissa.ny.l, 2)} m långt` : `släpps kulan från ${fmt(gissa.ny.a0, 0)}°`}. Hur blir svängningstiden?
+                                            </p>
+                                            <div className="flex gap-2 mb-2">
+                                                {[['langre', 'Längre'], ['kortare', 'Kortare'], ['lika', 'Ungefär lika']].map(([k, n]) => (
+                                                    <button key={k} className={`btn-toggle flex-1 ${gSvar && gSvar.val === k ? 'active' : ''}`} disabled={!!gSvar} onClick={() => svaraGissa(k)}>{n}</button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {gissa && gissa.typ === 'rattvis' && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                Hypotes: {HYP.find((h) => h.var === gissa.v).text} Försöket jämför två pendlar:
+                                            </p>
+                                            <table className="text-sm mb-2" style={{ color: 'var(--lab-ink)', width: '100%' }}>
+                                                <tbody>
+                                                    {[gissa.bas, gissa.ny].map((p, i) => (
+                                                        <tr key={i}><td style={{ color: 'var(--lab-ink-soft)' }}>Pendel {i + 1}</td><td>{fmt(p.m, 0)} g</td><td>{fmt(p.l, 2)} m</td><td>{fmt(p.a0, 0)}°</td></tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Är det ett rättvist försök som prövar hypotesen?</p>
+                                            <div className="flex gap-2 mb-2">
+                                                {[['ja', 'Ja'], ['nej', 'Nej']].map(([k, n]) => (
+                                                    <button key={k} className={`btn-toggle flex-1 ${gSvar && gSvar.val === k ? 'active' : ''}`} disabled={!!gSvar} onClick={() => svaraGissa(k)}>{n}</button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {gissa && gSvar && <p className="text-sm mb-2" style={{ color: gSvar.ratt ? '#15803d' : 'var(--lab-accent)' }}>{gSvar.text}</p>}
+                                    {gissa && (
+                                        <div className="flex gap-2">
+                                            {gSvar && <button className="btn-toggle flex-1" disabled={kö.length > 0 || fas === 'mater'} onClick={() => startaGissa(gissa.typ)}>Ny uppgift</button>}
+                                            <button className="btn-toggle flex-1" onClick={avslutaGissa}>Avsluta</button>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>En hypotes ska gå att motbevisa</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    ”En tyngre kula ger en längre svängningstid” är en bra hypotes, eftersom ett försök kan visa att den är fel. Den är
+                                    falsifierbar. En hypotes som ingen mätning kan motbevisa, som att pendeln vill tillbaka till mitten, går inte att pröva
+                                    och hör inte hemma i naturvetenskapen.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Ändra en sak åt gången</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Ett rättvist försök ändrar bara det som prövas och håller allt annat lika. Ändrar du både kulan och snöret på en
+                                    gång vet du inte vad som orsakade skillnaden.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Upprepa mätningen</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Ett resultat ska vara reproducerbart: samma försök ska ge samma resultat, inom mätosäkerheten, också när någon annan
+                                    gör om det. En skillnad som är mindre än mätosäkerheten kan inte skiljas från slumpen.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”En tyngre kula svänger långsammare.”</strong> Nej. Massan påverkar inte svängningstiden, så länge snöret är lätt och luftmotståndet litet.</li>
+                                <li><strong>”Ett försök som stöder hypotesen bevisar den.”</strong> Nej. Ett försök kan stödja en hypotes, men ett enda försök
+                                    kan räcka för att motbevisa den. Därför prövas en hypotes många gånger innan den blir en lag.</li>
+                                <li><strong>”Olika värden betyder att någon har mätt fel.”</strong> Nej. Varje mätning har en osäkerhet. Upprepade mätningar
+                                    ger värden som skiljer sig lite åt, och medelvärdet är säkrare än en enskild mätning. En felmätning är något annat: en miss,
+                                    som att räkna elva svängningar i stället för tio.</li>
+                                <li><strong>”En teori är bara en gissning.”</strong> Så kan ordet användas i vardagsspråket, men inte i naturvetenskapen. Där är
+                                    en teori noggrant prövad och har inte motbevisats.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

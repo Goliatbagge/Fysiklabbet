@@ -52,7 +52,12 @@ window.SIM_NAMES = {
   'fysik1-effekt-verkningsgrad-app.html': 'Effekt och verkningsgrad',
   'fysik1-effekt-verkningsgrad-app.html?lage=apparater': 'Verkningsgrad: lampor och apparater',
   'fysik1-trissor-app.html': 'Sammansatta system',
-  'fysik1-vatsketryck-app.html': 'Tryck i vätskor',
+  'fysik1-vatsketryck-app.html': [
+    { name: 'Tryck i vätskor', desc: 'Sänk ned en trycksond och läs av en U-rörsmanometer, jämför kärl med olika form och lyft en bil med en hydraulpress.',
+      kw: ['tryck','vätska','vatten','djup','hydrostatik','vätsketryck','hydrostatiskt tryck','manometer','u-rör','trycksond','kommunicerande kärl','hydrostatiska paradoxen','pascals princip','hydraulpress'] },
+    { name: 'Strömning i rör', href: 'fysik1-stromning-app.html', desc: 'Se med standrör, vattenskivor och tryckstaplar varför vattnet går fortare och trycket blir lägre där ett rör är smalt. Släpp ut färg i Reynolds försök och se strömningen gå från laminär till turbulent.',
+      kw: ['strömning','strömning i rör','kontinuitetsekvationen','kontinuitet','bernoulli','bernoullis ekvation','venturirör','förträngning','standrör','undertryck','vattenstrålpump','laminär','turbulent','reynolds tal','reynolds försök','viskositet','tryckfall','hastighetsprofil','vätska','tryck'] },
+  ],
   'fysik1-vatsketryck-app.html?lage=pascal': 'Pascals princip: hydraulpressen',
   'fysik1-forsta-huvudsatsen-app.html': [
     { name: 'Termodynamikens första huvudsats', desc: 'Värm en gas, tryck ihop den eller låt den trycka upp en kolv, och följ energin mellan värme, arbete och inre energi.',
@@ -124,6 +129,14 @@ window.SIM_NAMES = {
       kw: ['krafter','vältning','välta','vältningsvinkel','tyngdpunkt','lodlinje','stödyta','vridningspunkt','stabilitet','lutande plan','friktion','glida','normalkraft','kloss','mekanik'] },
     { name: 'Tyngdpunkt och lodlinje', href: 'fysik2-lodlinjen-app.html', desc: 'Häng upp en skiva i en spik och rita av lodets snöre med skivan hängd i två olika hål: linjerna korsas i tyngdpunkten. L-formad skiva, hästsko, Sverigekartan, en egen form och en kontroll på nålspetsen.',
       kw: ['krafter','tyngdpunkt','lodlinje','lod','hitta tyngdpunkten','upphängningspunkt','kraftmoment','hävarm','fysisk pendel','nålspets','balans','sverigekartan','sveriges mittpunkt','hästsko','statik','mekanik'] },
+  ],
+  'fysik1-hypotesprovet-app.html': [
+    { name: 'Pröva en hypotes', desc: 'Vad avgör hur lång tid en svängning tar för en pendel? Välj en hypotes, pröva den med ett rättvist försök och ett stoppur, och avgör om mätningarna stöder den. Flödesschemat följer den naturvetenskapliga metoden.',
+      kw: ['naturvetenskapliga metoden','vetenskaplig metod','hypotes','hypotesprövning','pröva en hypotes','försök','experiment','rättvist försök','variabel','pendel','svängningstid','period','stoppur','reaktionstid','mätosäkerhet','reproducerbar','falsifierbar','modell','lag','teori'] },
+  ],
+  'fysik1-formelverkstaden-app.html': [
+    { name: 'Formelverkstaden', desc: 'Lös ut en storhet ur en formel genom att göra samma sak i båda led, med operationerna i färg. I Kontrollen sätts riktiga värden in i varje rad, enhetskontrollen visar om svaret får rätt enhet, och formeltriangeln finns för formler med tre storheter.',
+      kw: ['formler','formel','lösa ut','skriva om formler','snu formler','båda led','ekvation','omskrivning','multiplicera','dividera','formeltriangeln','triangeln','enhetskontroll','enheter','storheter','ohms lag','medelfart','densitet','algebra'] },
   ],
   'fysik2-stegmetoden-app.html': [
     { name: 'Stegmetoden', desc: 'Räkna ett kast steg för steg i ett kalkylblad som är kopplat till banan och går att kopiera till Excel. Se hur felet halveras med tidssteget, lägg till luftmotstånd och se gränshastigheten för en badmintonboll.',

@@ -31,7 +31,7 @@ $$
 x^2 + px + q = 0
 $$
 
-Vi subtraherar båda led med $q$ för att få $x$-termerna ensamma i VL:
+Vi subtraherar $q$ från båda led för att få $x$-termerna ensamma i VL:
 
 $$
 x^2 + px = -q

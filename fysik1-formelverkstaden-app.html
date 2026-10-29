@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formelverkstaden — Fysiklabbet</title>
+    <meta name="description" content="Lös ut en storhet ur en formel genom att göra samma sak i båda led. Operationerna skrivs i färg som i läroboken, och varje rad prövas med riktiga värden. Med enhetskontroll och formeltriangel.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik1-formelverkstaden-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Formelverkstaden — Fysik nivå 1">
+    <meta property="og:description" content="Lös ut en storhet ur en formel genom att göra samma sak i båda led. Operationerna skrivs i färg som i läroboken, och varje rad prövas med riktiga värden. Med enhetskontroll och formeltriangel.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik1-formelverkstaden-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Formelverkstaden — Fysik nivå 1">
+    <meta name="twitter:description" content="Lös ut en storhet ur en formel genom att göra samma sak i båda led. Operationerna skrivs i färg som i läroboken, och varje rad prövas med riktiga värden. Med enhetskontroll och formeltriangel.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1;
+                text-align: center; max-width: 150px; }
+        .fnum { color: var(--lab-ink); font-size: 20px; font-family: 'Poppins', sans-serif; }
+
+        /* Matematiken: en serif med riktig kursiv, som i en lärobok */
+        .mx { font-family: 'STIX Two Text', 'Cambria Math', Cambria, 'Times New Roman', serif; font-size: 23px;
+              color: var(--lab-ink, #0f1620); line-height: 1.25; }
+        .mx em { font-style: italic; }
+        .mx sub { font-style: normal; font-size: 0.62em; }
+        .mx sup { font-size: 0.62em; }
+        .brak { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center;
+                line-height: 1.12; margin: 0 2px; }
+        .brak > .t { padding: 0 3px 2px; }
+        .brak > .n { padding: 2px 3px 0; border-top: 1.5px solid currentColor; }
+        .brak > .n.farg { border-top-color: currentColor; }
+        .rot { display: inline-flex; align-items: stretch; vertical-align: middle; }
+        .rot .tecken { font-size: 1.25em; line-height: 1; padding-right: 1px; align-self: flex-end; }
+        .rot .inne { border-top: 1.5px solid currentColor; padding: 2px 3px 0; color: var(--lab-ink, #0f1620); }
+        .stack { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; line-height: 1.05; }
+        .stack .flbl { font-family: 'DM Sans', sans-serif; font-style: normal; font-size: 9px; }
+        .enh { font-style: normal; }
+        .opx { padding: 0 0.24em; font-style: normal; }
+
+        /* Scenen: ett rutat blad med uträkningen till vänster och Kontrollen till höger. */
+        .scene-wrap {
+            position: relative; width: 100%; aspect-ratio: 1000 / 640; border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18); box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none; -webkit-user-select: none; background: #f6f1e6;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen { width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0; }
+        .blad {
+            position: relative; width: 100%; height: 100%; display: flex; gap: 0;
+            background-color: #f6f1e6;
+            background-image: linear-gradient(rgba(37,99,235,0.10) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(37,99,235,0.10) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .blad.smal { flex-direction: column; height: auto; }
+        .uttr { flex: 1 1 62%; display: flex; flex-direction: column; min-width: 0; padding: 64px 18px 12px 26px; }
+        .blad.smal .uttr { padding: 60px 12px 10px 12px; }
+        .uttr-rubrik { font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+                       font-weight: 700; color: var(--lab-ink-muted, #5a6170); margin-bottom: 6px; }
+        .rader { flex: 1 1 auto; overflow-y: auto; overflow-x: auto; padding-right: 6px; }
+        .blad.smal .rader { max-height: none; overflow-y: visible; }
+        .rad { display: flex; align-items: center; gap: 10px; padding: 5px 8px; border-radius: 8px; cursor: pointer;
+               border: 1px solid transparent; min-height: 46px; }
+        .rad:hover { background: rgba(15,22,32,0.035); }
+        .rad.vald { background: rgba(255,255,255,0.65); border-color: rgba(15,22,32,0.20); }
+        .rad.fel { background: rgba(220,38,38,0.07); }
+        .rad.svarsfel { outline: 2px solid #dc2626; }
+        .rad .nr { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--lab-ink-muted, #5a6170); width: 18px; flex-shrink: 0; text-align: right; }
+        .rad .ekv { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+        .rad .not { margin-left: auto; padding-left: 12px; font-family: 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 600; white-space: nowrap; }
+        .blad.smal .rad .not { display: none; }
+        .blad.smal .mx { font-size: 19px; }
+
+        .opbar { border-top: 1px solid rgba(15,22,32,0.14); padding-top: 9px; margin-top: 6px; }
+        .opknappar { display: flex; flex-wrap: wrap; gap: 6px; }
+        .opk { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; padding: 6px 10px; border-radius: 8px;
+               border: 1.5px solid currentColor; background: #fff; cursor: pointer; line-height: 1.1; display: inline-flex; align-items: center; gap: 6px; }
+        .opk .ikon { font-family: 'STIX Two Text', 'Cambria Math', serif; font-size: 17px; font-weight: 700; }
+        .opk.aktiv { color: #fff !important; }
+        .opk:disabled { opacity: 0.4; cursor: not-allowed; }
+        .chips { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; }
+        .chips .fraga { font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--lab-ink-soft, #3a4151); }
+        .chip { padding: 2px 10px; border-radius: 8px; background: #fff; cursor: pointer; border: 1.5px solid currentColor; min-height: 38px; }
+        .chip .mx { font-size: 20px; }
+        .meddelande { font-family: 'DM Sans', sans-serif; font-size: 13.5px; margin-top: 8px; line-height: 1.4; }
+
+        .kontroll { flex: 0 0 36%; min-width: 0; padding: 64px 22px 14px 14px; border-left: 1px dashed rgba(15,22,32,0.18);
+                    font-family: 'DM Sans', sans-serif; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
+        .blad.smal .kontroll { flex: none; border-left: none; border-top: 1px dashed rgba(15,22,32,0.18); padding: 12px; }
+        .kort { background: rgba(255,255,255,0.72); border: 1px solid rgba(15,22,32,0.16); border-radius: 10px; padding: 10px 12px; }
+        .kort h4 { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; color: var(--lab-ink-muted, #5a6170); margin-bottom: 6px; }
+        .stapel-rad { display: grid; grid-template-columns: 82px 1fr; align-items: center; gap: 8px; margin: 5px 0; font-size: 12.5px; }
+        .stapel { height: 14px; border-radius: 4px; background: #15803d; transition: width 0.4s ease; }
+        .stapel.h { background: #0f766e; }
+        .stapel.olika { background: #dc2626; }
+        .stapel-v { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; font-weight: 600; white-space: nowrap; }
+        .varden { display: grid; grid-template-columns: auto 1fr; column-gap: 8px; row-gap: 1px; }
+        .varden .mx { font-size: 17px; }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer; transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); border-color: var(--lab-ink, #0f1620); }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-start { background: var(--lab-accent, #c8324a); color: #fff; border: 1px solid var(--lab-accent, #c8324a);
+                     border-radius: 8px; padding: 9px 14px; font-weight: 700; cursor: pointer; }
+        .btn-start:disabled { opacity: 0.5; cursor: not-allowed; }
+        .mode-seg { display: flex; border-radius: 9px; overflow: hidden; border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button { flex: 1; padding: 8px 8px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button:last-child { border-right: none; }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .forsok-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .forsok { text-align: left; padding: 7px 9px; border-radius: 8px; cursor: pointer; background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); font-size: 13px; font-weight: 600;
+            color: var(--lab-ink, #0f1620); line-height: 1.25; }
+        .forsok .sub { display: block; font-size: 11.5px; font-weight: 400; color: var(--lab-ink-soft, #3a4151); }
+        .forsok:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .forsok:disabled { opacity: 0.45; cursor: not-allowed; }
+        .sel { width: 100%; padding: 7px 9px; border-radius: 8px; border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+               background: #fff; font-size: 14px; color: var(--lab-ink, #0f1620); }
+        .malk { padding: 2px 12px; border-radius: 8px; border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); background: #fff; cursor: pointer; min-height: 36px; }
+        .malk.active { background: var(--lab-ink, #0f1620); border-color: var(--lab-ink, #0f1620); }
+        .malk.active .mx { color: #fff; }
+        .malk .mx { font-size: 19px; }
+        .malk:disabled { opacity: 0.45; cursor: not-allowed; }
+        .svar-kort { display: block; width: 100%; text-align: left; padding: 6px 10px; border-radius: 8px; margin-bottom: 6px;
+                     background: #fff; border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); cursor: pointer; }
+        .svar-kort:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .svar-kort.ratt { border-color: #15803d; background: rgba(21,128,61,0.08); }
+        .svar-kort.valt-fel { border-color: #dc2626; background: rgba(220,38,38,0.06); }
+        .svar-kort .mx { font-size: 20px; }
+        .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13.5px; }
+        .legend span.bit { display: inline-flex; align-items: center; gap: 6px; }
+        .legend .sw { font-family: 'STIX Two Text', 'Cambria Math', serif; font-weight: 700; font-size: 20px; min-width: 12px; text-align: center; }
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6; background: rgba(246,242,234,0.96);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); border-radius: 10px; padding: 9px 34px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px; box-shadow: 0 2px 8px rgba(15,22,32,0.12); max-width: 250px;
+        }
+        .scene-toggles .st-title { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px; }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label { display: flex; align-items: center; gap: 7px; cursor: pointer; font-size: 13px; color: var(--lab-ink, #0f1620); }
+        .scene-toggles input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; }
+        .scene-toggles .st-actions { display: flex; flex-direction: column; gap: 7px; margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14)); }
+        .scene-toggles .malrad { display: flex; flex-wrap: wrap; gap: 5px; }
+        .scene-toggles .malk { min-height: 30px; padding: 1px 9px; }
+        .scene-toggles .malk .mx { font-size: 16px; }
+
+        .triangel-blad { position: relative; width: 100%; height: 100%; display: flex; }
+        .blad.smal .triangel-blad { flex-direction: column; }
+        .triangel-blad > svg { flex: 1 1 55%; min-width: 0; touch-action: none; }
+        .tri-sym { cursor: pointer; }
+        .finger { cursor: grab; }
+        .finger.drar { cursor: grabbing; }
+        @media (max-width: 480px) { .fk-rader .flbl { font-size: 9px; letter-spacing: 0.02em; } }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script id="formel-motor">
+// Motorn för Formelverkstaden (fysik1-formelverkstaden-app.html).
+// Källan ligger här och klistras in oförändrad i sidan; testet
+// .claude/test-formel-motor.js kontrollerar algebran och att kopian är identisk.
+//
+// Ett led är   fac · (term₁ + term₂ + …)^pow
+// där varje term är en produkt av faktorer med exponenter och ett tecken.
+// Talen (2, 100) är faktorer som alla andra ("#2"), så att uträkningen kan
+// skrivas i den ordning boken skriver den: m · 100 · l³. Ett led med en enda
+// term och pow = 1 har alltid tom fac; allt står då i termen.
+(function () {
+    // Dimensioner i SI:s grundenheter [m, kg, s, A, K]
+    const D = {
+        m: [1, 0, 0, 0, 0], kg: [0, 1, 0, 0, 0], s: [0, 0, 1, 0, 0], A: [0, 0, 0, 1, 0], K: [0, 0, 0, 0, 1],
+        N: [1, 1, -2, 0, 0], J: [2, 1, -2, 0, 0], W: [2, 1, -3, 0, 0], Pa: [-1, 1, -2, 0, 0],
+        V: [2, 1, -3, -1, 0], Ohm: [2, 1, -3, -2, 0],
+        ms: [1, 0, -1, 0, 0], ms2: [1, 0, -2, 0, 0], m2: [2, 0, 0, 0, 0], m3: [3, 0, 0, 0, 0],
+        kgm3: [-3, 1, 0, 0, 0], c: [2, 0, -2, 0, -1], ett: [0, 0, 0, 0, 0],
+    };
+    // Storheterna: bas, index, namn (ordetiketten), enhet och dimension.
+    const S = (bas, sub, namn, enhet, dim, delta = false) => ({ bas, sub, namn, enhet, dim: D[dim], delta });
+    const SYM = {
+        U: S('U', '', 'Spänning', 'V', 'V'), R: S('R', '', 'Resistans', 'Ω', 'Ohm'), I: S('I', '', 'Ström', 'A', 'A'),
+        v_m: S('v', 'm', 'Medelfart', 'm/s', 'ms'), s: S('s', '', 'Sträcka', 'm', 'm'), t: S('t', '', 'Tid', 's', 's'),
+        ρ: S('ρ', '', 'Densitet', 'kg/m³', 'kgm3'), m: S('m', '', 'Massa', 'kg', 'kg'), V: S('V', '', 'Volym', 'm³', 'm3'),
+        F_R: S('F', 'R', 'Resulterande kraft', 'N', 'N'), a: S('a', '', 'Acceleration', 'm/s²', 'ms2'),
+        p: S('p', '', 'Tryck', 'Pa', 'Pa'), F: S('F', '', 'Kraft', 'N', 'N'), A: S('A', '', 'Area', 'm²', 'm2'),
+        E_k: S('E', 'k', 'Rörelseenergi', 'J', 'J'), v: S('v', '', 'Hastighet', 'm/s', 'ms'),
+        E_p: S('E', 'p', 'Lägesenergi', 'J', 'J'), g: S('g', '', 'Tyngdfaktor', 'N/kg', 'ms2'), h: S('h', '', 'Höjd', 'm', 'm'),
+        P: S('P', '', 'Effekt', 'W', 'W'), ΔE: S('E', '', 'Omvandlad energi', 'J', 'J', true), Δt: S('t', '', 'Tid för omvandlingen', 's', 's', true),
+        v_0: S('v', '0', 'Begynnelsehastighet', 'm/s', 'ms'),
+        E: S('E', '', 'Energi', 'J', 'J'), c: S('c', '', 'Specifik värmekapacitet', 'J/(kg · K)', 'c'),
+        ΔT: S('T', '', 'Temperaturändring', 'K', 'K', true),
+        p_1: S('p', '1', 'Tryck före', 'Pa', 'Pa'), V_1: S('V', '1', 'Volym före', 'm³', 'm3'), T_1: S('T', '1', 'Temperatur före', 'K', 'K'),
+        p_2: S('p', '2', 'Tryck efter', 'Pa', 'Pa'), V_2: S('V', '2', 'Volym efter', 'm³', 'm3'), T_2: S('T', '2', 'Temperatur efter', 'K', 'K'),
+        F_1: S('F', '1', 'Kraft på lilla kolven', 'N', 'N'), A_1: S('A', '1', 'Lilla kolvens area', 'm²', 'm2'),
+        F_2: S('F', '2', 'Kraft på stora kolven', 'N', 'N'), A_2: S('A', '2', 'Stora kolvens area', 'm²', 'm2'),
+        ΔU: S('U', '', 'Ändring av inre energi', 'J', 'J', true), Q: S('Q', '', 'Tillförd värme', 'J', 'J'),
+        W: S('W', '', 'Arbete på gasen', 'J', 'J'),
+    };
+    const arTal = (k) => k[0] === '#';
+    const talVarde = (k) => parseFloat(k.slice(1));
+
+    // Formlerna. Exemplets värden är valda så att formeln stämmer exakt.
+    const FORMLER = [
+        { id: 'ohm', namn: 'Ohms lag', text: 'U = R*I', varden: { U: 12, R: 4, I: 3 }, tri: { topp: 'U', ner: ['R', 'I'] } },
+        { id: 'medelfart', namn: 'Medelfart', text: 'v_m = s/t', varden: { v_m: 8, s: 100, t: 12.5 }, tri: { topp: 's', ner: ['v_m', 't'] } },
+        { id: 'densitet', namn: 'Densitet', text: 'ρ = m/V', varden: { ρ: 2700, m: 2.7, V: 0.001 }, tri: { topp: 'm', ner: ['ρ', 'V'] } },
+        { id: 'newton2', namn: 'Newtons andra lag', text: 'F_R = m*a', varden: { F_R: 3000, m: 1200, a: 2.5 }, tri: { topp: 'F_R', ner: ['m', 'a'] } },
+        { id: 'tryck', namn: 'Tryck', text: 'p = F/A', varden: { p: 20000, F: 600, A: 0.03 }, tri: { topp: 'F', ner: ['p', 'A'] } },
+        { id: 'effekt', namn: 'Effekt', text: 'P = ΔE/Δt', varden: { P: 30, ΔE: 1800, Δt: 60 }, tri: { topp: 'ΔE', ner: ['P', 'Δt'] } },
+        { id: 'ek', namn: 'Rörelseenergi', text: 'E_k = m*v^2/#2', varden: { E_k: 36, m: 2, v: 6 } },
+        { id: 'ep', namn: 'Lägesenergi', text: 'E_p = m*g*h', varden: { E_p: 1473, m: 50, g: 9.82, h: 3 } },
+        { id: 'hastighet', namn: 'Hastighet vid konstant acceleration', text: 'v = v_0 + a*t', varden: { v: 10, v_0: 4, a: 2, t: 3 } },
+        { id: 'tidlos', namn: 'Tidlösa formeln', text: 'v^2 - v_0^2 = #2*a*s', varden: { v: 5, v_0: 3, a: 2, s: 4 } },
+        { id: 'vatsketryck', namn: 'Vätsketryck', text: 'p = ρ*g*h', varden: { p: 29401.08, ρ: 998, g: 9.82, h: 3 } },
+        { id: 'varme', namn: 'Uppvärmning', text: 'E = c*m*ΔT', varden: { E: 41800, c: 4180, m: 0.5, ΔT: 20 } },
+        { id: 'pascal', namn: 'Hydraulisk press', text: 'F_1/A_1 = F_2/A_2', varden: { F_1: 200, A_1: 0.001, F_2: 10000, A_2: 0.05 } },
+        { id: 'gaslag', namn: 'Allmänna gaslagen', text: 'p_1*V_1/T_1 = p_2*V_2/T_2', varden: { p_1: 100000, V_1: 0.002, T_1: 300, p_2: 200000, V_2: 0.0015, T_2: 450 } },
+        { id: 'huvudsats', namn: 'Termodynamikens första huvudsats', text: 'ΔU = Q + W', varden: { ΔU: 300, Q: 500, W: -200 } },
+    ];
+
+    // ── Termer och led ─────────────────────────────────────
+    const term = (f, sg = 1) => ({ sg, f: f.filter(([, e]) => Math.abs(e) > 1e-12) });
+    const tom = () => term([]);
+    function mulT(a, b) {
+        const f = a.f.map((x) => x.slice());
+        for (const [k, e] of b.f) {
+            const i = f.findIndex(([kk]) => kk === k);
+            if (i >= 0) f[i][1] += e; else f.push([k, e]);
+        }
+        // talen står först i en produkt, som i läroboken: 2 · E_k / m
+        return term(f.filter(([k]) => k[0] === '#').concat(f.filter(([k]) => k[0] !== '#')), a.sg * b.sg);
+    }
+    const invT = (a) => term(a.f.map(([k, e]) => [k, -e]), a.sg);
+    const nyckel = (a) => a.f.slice().sort((x, y) => (x[0] < y[0] ? -1 : 1)).map(([k, e]) => k + '^' + e).join('*');
+    const ledT = (t) => ({ terms: [t], fac: tom(), pow: 1 });
+    const kopia = (l) => ({ terms: l.terms.map((t) => term(t.f, t.sg)), fac: term(l.fac.f, l.fac.sg), pow: l.pow });
+    const helt = (x) => Math.abs(x - Math.round(x)) < 1e-9;
+
+    function normalisera(l) {
+        let L = kopia(l);
+        // termer som tar ut varandra
+        const ut = [];
+        for (const t of L.terms) {
+            const i = ut.findIndex((u) => nyckel(u) === nyckel(t) && u.sg === -t.sg);
+            if (i >= 0) ut.splice(i, 1); else ut.push(t);
+        }
+        L.terms = ut.filter((u) => u.sg > 0).concat(ut.filter((u) => u.sg < 0));
+        if (L.terms.length === 0) return { terms: [], fac: tom(), pow: 1 };
+        if (L.terms.length === 1) {
+            if (L.pow === 1) return ledT(mulT(L.fac, L.terms[0]));
+            // en potens av en ensam term går bara att skriva ut när alla exponenter blir hela
+            if (L.fac.f.length === 0 && L.terms[0].sg > 0 && L.terms[0].f.every(([, e]) => helt(e * L.pow))) {
+                return ledT(term(L.terms[0].f.map(([k, e]) => [k, e * L.pow]), 1));
+            }
+        }
+        if (L.fac.sg < 0) { L.fac.sg = 1; L.terms = L.terms.map((t) => term(t.f, -t.sg)); }
+        L.terms = L.terms.filter((u) => u.sg > 0).concat(L.terms.filter((u) => u.sg < 0));
+        return L;
+    }
+
+    // ── Tolkning av formeltexten ───────────────────────────
+    function tolkaLed(txt) {
+        const terms = [];
+        const delar = txt.replace(/\s+/g, '').replace(/^([^+-])/, '+$1').match(/[+-][^+-]+/g);
+        for (const d of delar) {
+            const sg = d[0] === '-' ? -1 : 1;
+            const f = [];
+            let tecken = 1;
+            for (const bit of d.slice(1).split(/([*/])/)) {
+                if (bit === '*') { tecken = 1; continue; }
+                if (bit === '/') { tecken = -1; continue; }
+                const [k, e] = bit.split('^');
+                f.push([k, tecken * (e ? parseFloat(e) : 1)]);
+            }
+            terms.push(term(f, sg));
+        }
+        return normalisera({ terms, fac: tom(), pow: 1 });
+    }
+    function tolka(formel) {
+        const [v, h] = formel.text.split('=');
+        return { vl: tolkaLed(v), hl: tolkaLed(h) };
+    }
+    const storheter = (formel) => {
+        const { vl, hl } = tolka(formel);
+        const ut = [];
+        for (const l of [vl, hl]) for (const t of [l.fac, ...l.terms]) for (const [k] of t.f) if (!arTal(k) && !ut.includes(k)) ut.push(k);
+        return ut;
+    };
+
+    // ── Räkning ────────────────────────────────────────────
+    const varde = (k, V) => (arTal(k) ? talVarde(k) : V[k]);
+    const evalT = (t, V) => t.f.reduce((p, [k, e]) => p * Math.pow(varde(k, V), e), t.sg);
+    function evalL(l, V) {
+        const sum = l.terms.reduce((s, t) => s + evalT(t, V), 0);
+        return evalT(l.fac, V) * Math.pow(sum, l.pow);
+    }
+    const dimT = (t) => t.f.reduce((d, [k, e]) => (arTal(k) ? d : d.map((x, i) => x + e * SYM[k].dim[i])), [0, 0, 0, 0, 0]);
+    function dimL(l) {
+        const inne = l.terms.length ? dimT(l.terms[0]) : [0, 0, 0, 0, 0];
+        return dimT(l.fac).map((x, i) => x + inne[i] * l.pow);
+    }
+    const samDim = (a, b) => a.every((x, i) => Math.abs(x - b[i]) < 1e-9);
+    const termerSammaDim = (l) => l.terms.every((t) => samDim(dimT(t), dimT(l.terms[0])));
+
+    // ── Operationerna ──────────────────────────────────────
+    // op: 'mul', 'div', 'add', 'sub', 'kvad', 'rot'. X är en term (för mul,
+    // div, add och sub). Varje operation görs på ett led; uträkningen gör den
+    // på båda (eller med flit bara på vänster led).
+    function opLed(l, op, X) {
+        if (op === 'mul' || op === 'div') {
+            const Y = op === 'mul' ? X : invT(X);
+            const L = kopia(l);
+            if (L.terms.length === 1 && L.pow === 1) L.terms[0] = mulT(L.terms[0], Y);
+            else L.fac = mulT(L.fac, Y);
+            return normalisera(L);
+        }
+        if (op === 'add' || op === 'sub') {
+            if (l.fac.f.length > 0 || l.pow !== 1) return { fel: 'Här står summan i ett bråk, i en produkt eller under ett rottecken. Multiplicera eller dividera först, eller kvadrera bort roten, innan du adderar eller subtraherar.' };
+            const L = kopia(l);
+            L.terms.push(term(X.f, (op === 'add' ? 1 : -1) * X.sg));
+            return normalisera(L);
+        }
+        if (op === 'kvad' || op === 'rot') {
+            const k = op === 'kvad' ? 2 : 0.5;
+            const L = kopia(l);
+            if (op === 'rot' && L.terms.length === 1 && L.pow === 1 && L.terms[0].sg < 0) return { fel: 'Det går inte att dra roten ur ett negativt led.' };
+            if (L.fac.f.length > 0) {
+                if (!L.fac.f.every(([, e]) => helt(e * k))) return { fel: 'Dividera eller multiplicera först bort faktorerna utanför parentesen.' };
+                L.fac = term(L.fac.f.map(([kk, e]) => [kk, e * k]), 1);
+            }
+            if (L.terms.length === 1 && L.pow === 1) {
+                const t = L.terms[0];
+                if (t.f.every(([, e]) => helt(e * k))) return normalisera(ledT(term(t.f.map(([kk, e]) => [kk, e * k]), 1)));
+                return normalisera({ terms: [t], fac: L.fac, pow: k });
+            }
+            L.pow *= k;
+            return normalisera(L);
+        }
+        return { fel: 'Okänd operation.' };
+    }
+    function utfor(rad, op, X, baraVanster = false) {
+        if (op === 'byt') return { vl: kopia(rad.hl), hl: kopia(rad.vl) };
+        const vl = opLed(rad.vl, op, X);
+        if (vl.fel) return vl;
+        const hl = baraVanster ? kopia(rad.hl) : opLed(rad.hl, op, X);
+        if (hl.fel) return hl;
+        return { vl, hl };
+    }
+
+    // ── Var står den sökta storheten? ─────────────────────
+    const innehaller = (l, k) => [l.fac, ...l.terms].some((t) => t.f.some(([kk]) => kk === k));
+    const ensam = (l, k) => l.terms.length === 1 && l.pow === 1 && l.terms[0].sg > 0 && l.terms[0].f.length === 1 && l.terms[0].f[0][0] === k && Math.abs(l.terms[0].f[0][1] - 1) < 1e-9;
+    function utlost(rad, k) {
+        if (ensam(rad.vl, k) && !innehaller(rad.hl, k)) return 'v';
+        if (ensam(rad.hl, k) && !innehaller(rad.vl, k)) return 'h';
+        return null;
+    }
+
+    // Nästa steg mot att lösa ut k (samma tankegång som en lärare skriver).
+    function nastaSteg(rad, k) {
+        const u = utlost(rad, k);
+        if (u === 'v') return null;
+        if (u === 'h') return { op: 'byt', varfor: 'Den sökta storheten står ensam i höger led.' };
+        const iV = innehaller(rad.vl, k), iH = innehaller(rad.hl, k);
+        if (iV && iH) return null;
+        if (!iV && !iH) return null;
+        const S = iV ? rad.vl : rad.hl;
+        if (S.pow === 0.5) return { op: 'kvad', varfor: 'Den sökta storheten står under ett rottecken, och roten försvinner när båda led kvadreras.' };
+        if (S.pow === 2) return { op: 'rot', varfor: 'Summan som innehåller den sökta storheten är i kvadrat.' };
+        if (S.terms.length > 1) {
+            if (S.fac.f.length > 0) {
+                const [kk, e] = S.fac.f[0];
+                return e > 0 ? { op: 'div', X: term([[kk, e]]), varfor: 'Summan som innehåller den sökta storheten multipliceras med något.' }
+                             : { op: 'mul', X: term([[kk, -e]]), varfor: 'Summan som innehåller den sökta storheten står över ett bråkstreck.' };
+            }
+            const annan = S.terms.find((t) => !t.f.some(([kk]) => kk === k));
+            if (annan) {
+                const X = term(annan.f, 1);
+                return annan.sg > 0 ? { op: 'sub', X, varfor: 'En term saknar den sökta storheten och står med plustecken.' }
+                                    : { op: 'add', X, varfor: 'En term saknar den sökta storheten och står med minustecken.' };
+            }
+            return null;
+        }
+        const t = S.terms[0];
+        if (t.sg < 0) return { op: 'mul', X: term([], -1), varfor: 'Den sökta storheten har ett minustecken framför sig.' };
+        const egen = t.f.find(([kk]) => kk === k);
+        if (egen[1] < 0) return { op: 'mul', X: term([[k, -egen[1]]]), varfor: 'Den sökta storheten står i nämnaren och hamnar i täljaren när båda led multipliceras med den.' };
+        const ovr = t.f.find(([kk]) => kk !== k);
+        if (ovr) {
+            return ovr[1] > 0 ? { op: 'div', X: term([[ovr[0], ovr[1]]]), varfor: 'Den sökta storheten multipliceras med något.' }
+                              : { op: 'mul', X: term([[ovr[0], -ovr[1]]]), varfor: 'Den sökta storheten divideras med något.' };
+        }
+        if (Math.abs(egen[1] - 2) < 1e-9) return { op: 'rot', varfor: 'Den sökta storheten är i kvadrat.' };
+        if (Math.abs(egen[1] - 0.5) < 1e-9) return { op: 'kvad', varfor: 'Den sökta storheten står under ett rottecken.' };
+        return null;
+    }
+    function losning(formel, k, max = 20) {
+        let rad = tolka(formel);
+        const steg = [];
+        for (let i = 0; i < max; i++) {
+            const n = nastaSteg(rad, k);
+            if (!n) break;
+            const r = utfor(rad, n.op, n.X);
+            if (r.fel) break;
+            steg.push({ ...n, fore: rad, efter: r });
+            rad = r;
+        }
+        return { steg, slut: rad, klar: utlost(rad, k) === 'v' };
+    }
+
+    // ── Felaktiga svar till gissa-läget ───────────────────
+    // Utgår från rätt högerled och gör de vanliga felen.
+    function felSvar(hl) {
+        const ut = [];
+        const L = kopia(hl);
+        const utanTal = (t) => term(t.f.filter(([k]) => !arTal(k)), t.sg);
+        const talFel = (t, pow) => {
+            // talet tappat, eller på fel plats i bråket
+            if (!t.f.some(([k]) => arTal(k))) return;
+            ut.push({ terms: [utanTal(t)], fac: tom(), pow, typ: 'glomtTalet' });
+            ut.push({ terms: [term(t.f.map(([k, e]) => [k, arTal(k) ? -e : e]), t.sg)], fac: tom(), pow, typ: 'glomtTalet' });
+        };
+        const flytta = (t, pow) => t.f.forEach(([k, e], i) => {
+            if (arTal(k)) return;
+            const f = t.f.map((x) => x.slice()); f[i][1] = -e;
+            ut.push({ terms: [term(f, t.sg)], fac: tom(), pow, typ: 'flyttad' });
+        });
+        // teckenfelen som elever gör: glömt att byta tecken på den flyttade termen, eller bytt tecken på allt
+        const tecken = (terms, fac, pow) => {
+            if (terms.some((u) => u.sg < 0)) ut.push({ terms: terms.map((u) => term(u.f, 1)), fac, pow, typ: 'tecken' });
+            // bara plustecken: den flyttade termen har fått fel tecken
+            else terms.forEach((u, i) => { if (i > 0) ut.push({ terms: terms.map((w, j) => (j === i ? term(w.f, -w.sg) : w)), fac, pow, typ: 'tecken' }); });
+            const alla = terms.map((u) => term(u.f, -u.sg));
+            if (alla.some((u) => u.sg > 0)) ut.push({ terms: alla, fac, pow, typ: 'tecken' });
+        };
+        if (L.terms.length === 1 && L.pow === 1) {
+            const t = L.terms[0];
+            ut.push({ terms: [invT(t)], fac: tom(), pow: 1, typ: 'inverterat' });
+            flytta(t, 1);
+            talFel(t, 1);
+        } else if (L.terms.length > 1 && L.pow === 1) {
+            if (L.fac.f.length > 0) {
+                ut.push({ terms: L.terms, fac: invT(L.fac), pow: 1, typ: 'inverterat' });
+                ut.push({ terms: [mulT(L.terms[0], L.fac), ...L.terms.slice(1)], fac: tom(), pow: 1, typ: 'forstaTermen' });
+                if (L.fac.f.some(([k]) => arTal(k))) ut.push({ terms: L.terms, fac: utanTal(L.fac), pow: 1, typ: 'glomtTalet' });
+            }
+            tecken(L.terms, L.fac, 1);
+        } else if (L.pow === 0.5) {
+            ut.push({ terms: L.terms, fac: L.fac, pow: 1, typ: 'glomtRoten' });
+            if (L.terms.length === 1) { flytta(L.terms[0], 0.5); talFel(L.terms[0], 0.5); }
+            else tecken(L.terms, L.fac, 0.5);
+        }
+        return ut;
+    }
+
+    const ut = {
+        D, SYM, FORMLER, arTal, talVarde, term, tom, mulT, invT, nyckel, kopia, normalisera,
+        tolka, tolkaLed, storheter, evalT, evalL, dimT, dimL, samDim, termerSammaDim,
+        opLed, utfor, innehaller, ensam, utlost, nastaSteg, losning, felSvar,
+    };
+    if (typeof window !== 'undefined') window.FormelMotor = ut;
+    if (typeof module !== 'undefined') module.exports = ut;
+})();
+</script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+        const M = window.FormelMotor;
+
+        // ── Talformat: decimalkomma, äkta minustecken, exakt noll som "0", hårt mellanslag i tusental ──
+        const fmt = (num, d = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [hel, dec] = s.replace('-', '').split('.');
+            const grupper = hel.length > 3 ? hel.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : hel;
+            return (num < 0 ? '−' : '') + grupper + (dec !== undefined ? ',' + dec : '');
+        };
+        // ett tal med fyra värdesiffror och utan onödiga nollor
+        const fmtTal = (x) => {
+            if (!isFinite(x)) return '–';
+            if (Math.abs(x) < 1e-12) return '0';
+            const a = Math.abs(x);
+            if (a >= 10000) return fmt(x, 0);
+            const d = Math.max(0, Math.min(7, 3 - Math.floor(Math.log10(a))));
+            return fmt(x, d).replace(/(,\d*?)0+$/, '$1').replace(/,$/, '');
+        };
+
+        // Färgerna för operationerna, som i boken: grönt multiplicera, lila dividera,
+        // rött subtrahera, blått addera. Kvadrera och dra roten ur får brunt.
+        const OPF = { mul: '#15803d', div: '#a21caf', sub: '#dc2626', add: '#2563eb', kvad: '#b45309', rot: '#b45309', byt: '#5a6170' };
+        const OPIKON = { mul: '·', div: '/', add: '+', sub: '−', kvad: 'x²', rot: '√', byt: '⇄' };
+        const OPNAMN = { mul: 'Multiplicera', div: 'Dividera', add: 'Addera', sub: 'Subtrahera', kvad: 'Kvadrera', rot: 'Dra roten ur', byt: 'Byt plats på leden' };
+        const OPMED = { mul: 'Multiplicera båda led med', div: 'Dividera båda led med', add: 'Addera till båda led', sub: 'Subtrahera från båda led' };
+
+        // ════════════════════════════════════════════════════════
+        //  ENHETER
+        // ════════════════════════════════════════════════════════
+        M.D.Jkg = [2, 0, -2, 0, 0]; M.D.JK = [2, 1, -2, 0, -1];
+        const KANDA = [['Jkg', 'J/kg'], ['JK', 'J/K'], ['m', 'm'], ['kg', 'kg'], ['s', 's'], ['A', 'A'], ['K', 'K'], ['ms', 'm/s'], ['ms2', 'm/s²'], ['m2', 'm²'], ['m3', 'm³'],
+                       ['kgm3', 'kg/m³'], ['N', 'N'], ['J', 'J'], ['W', 'W'], ['Pa', 'Pa'], ['V', 'V'], ['Ohm', 'Ω'], ['c', 'J/(kg · K)'], ['ett', '']];
+        const SUP = { 1: '', 2: '²', 3: '³', 4: '⁴' };
+        function basEnhet(dim) {
+            const bas = ['m', 'kg', 's', 'A', 'K'];
+            const del = (pos) => bas.map((b, i) => [b, dim[i]]).filter(([, e]) => (pos ? e > 0 : e < 0))
+                .map(([b, e]) => b + (SUP[Math.abs(e)] !== undefined ? SUP[Math.abs(e)] : '^' + Math.abs(e))).join(' · ');
+            const t = del(true) || '1', n = del(false);
+            return n ? `${t}/${n.includes('·') ? '(' + n + ')' : n}` : t;
+        }
+        function enhetsnamn(dim, foredragen) {
+            if (foredragen && M.samDim(dim, foredragen.dim)) return foredragen.enhet;
+            for (const [k, n] of KANDA) if (M.samDim(dim, M.D[k])) return n;
+            const bas = ['m', 'kg', 's', 'A', 'K'];
+            const del = (pos) => bas.map((b, i) => [b, dim[i]]).filter(([, e]) => (pos ? e > 0 : e < 0))
+                .map(([b, e]) => b + (SUP[Math.abs(e)] !== undefined ? SUP[Math.abs(e)] : '^' + Math.abs(e))).join(' · ');
+            const t = del(true) || '1', n = del(false);
+            return n ? `${t}/${n.includes('·') ? '(' + n + ')' : n}` : t;
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  MATEMATIKEN SOM JSX
+        // ════════════════════════════════════════════════════════
+        // ctx: { lbl } ordetiketter ovanför (täljare) och under (nämnare),
+        //      { enh } enheter i stället för storheter, { tal } värden med enhet.
+        const Brak = ({ t, n, farg }) => (
+            <span className="brak"><span className="t">{t}</span><span className="n" style={farg ? { borderTopColor: farg } : undefined}>{n}</span></span>
+        );
+        const Rot = ({ children, farg }) => (
+            <span className="rot" style={farg ? { color: farg } : undefined}><span className="tecken">√</span><span className="inne" style={farg ? { borderTopColor: farg } : undefined}>{children}</span></span>
+        );
+        const SymBas = ({ k }) => {
+            const s = M.SYM[k];
+            return <span style={{ whiteSpace: 'nowrap' }}>{s.delta ? 'Δ' : ''}<em>{s.bas}</em>{s.sub && <sub>{s.sub}</sub>}</span>;
+        };
+        function fak(k, e, ctx, grupp, i) {
+            const ex = Math.abs(e);
+            const supTxt = ex === 1 ? null : (Number.isInteger(ex) ? String(ex) : fmt(ex, 1));
+            if (M.arTal(k)) {
+                if (ctx.enh) return null;
+                const v = M.talVarde(k);
+                return <span key={i}>{v < 0 ? `(${fmt(v, 0)})` : fmtTal(v)}{supTxt && <sup>{supTxt}</sup>}</span>;
+            }
+            const s = M.SYM[k];
+            if (ctx.enh) {
+                const par = /[\/·]/.test(s.enhet) && (supTxt || grupp > 1);
+                return <span key={i} className="enh">{par ? `(${s.enhet})` : s.enhet}{supTxt && <sup>{supTxt}</sup>}</span>;
+            }
+            if (ctx.tal) {
+                const v = ctx.tal[k];
+                const txt = `${fmtTal(v)} ${s.enhet}`.trim();
+                return <span key={i} className="enh" style={{ whiteSpace: 'nowrap' }}>{(supTxt || grupp > 1 || v < 0) ? `(${txt})` : txt}{supTxt && <sup>{supTxt}</sup>}</span>;
+            }
+            const j = <span><SymBas k={k} />{supTxt && <sup>{supTxt}</sup>}</span>;
+            if (!ctx.lbl) return <span key={i}>{j}</span>;
+            const ned = ctx.ned;
+            return (
+                <span key={i} className="stack">
+                    <span className="flbl" style={{ visibility: ned ? 'hidden' : 'visible' }}>{s.namn}</span>
+                    {j}
+                    <span className="flbl" style={{ visibility: ned ? 'visible' : 'hidden' }}>{s.namn}</span>
+                </span>
+            );
+        }
+        function prod(lista, ctx, extra) {
+            const noder = lista.map(([k, e], i) => fak(k, e, ctx, lista.length + (extra ? 1 : 0), i)).filter(Boolean);
+            if (extra) noder.push(<span key="x">{extra}</span>);
+            if (noder.length === 0) return '1';
+            const ut = [];
+            noder.forEach((n, i) => { if (i) ut.push(<span key={'p' + i} className="opx">·</span>); ut.push(n); });
+            return ut;
+        }
+        const TermJ = ({ t, ctx, extraNum, extraDen }) => {
+            const num = t.f.filter(([, e]) => e > 0), den = t.f.filter(([, e]) => e < 0);
+            const N = prod(num, { ...ctx, ned: false }, extraNum);
+            if (den.length === 0 && !extraDen) return <React.Fragment>{N}</React.Fragment>;
+            return <Brak t={N} n={prod(den, { ...ctx, ned: true }, extraDen)} />;
+        };
+        const SumJ = ({ terms, ctx }) => (
+            <React.Fragment>
+                {terms.map((t, i) => (
+                    <span key={i} style={{ display: 'inline-flex', alignItems: 'center' }}>
+                        {i === 0 ? (t.sg < 0 ? <span className="opx" style={{ paddingLeft: 0 }}>−</span> : '') : <span className="opx">{t.sg < 0 ? '−' : '+'}</span>}
+                        <TermJ t={{ sg: 1, f: t.f }} ctx={ctx} />
+                    </span>
+                ))}
+            </React.Fragment>
+        );
+        const LedJ = ({ l, ctx = {} }) => {
+            if (l.terms.length === 0) return <span>0</span>;
+            const multi = l.terms.length > 1;
+            let inner = <SumJ terms={l.terms} ctx={ctx} />;
+            if (l.pow === 0.5) inner = <Rot>{inner}</Rot>;
+            else if (l.pow === 2) inner = <span>{multi && '('}{inner}{multi && ')'}<sup>2</sup></span>;
+            else if (l.pow === -1) inner = <Brak t="1" n={inner} />;
+            const fNum = l.fac.f.filter(([, e]) => e > 0), fDen = l.fac.f.filter(([, e]) => e < 0);
+            const parens = multi && l.pow === 1 && fNum.length > 0;
+            const numer = fNum.length
+                ? <React.Fragment>{prod(fNum, { ...ctx, ned: false })}<span className="opx">·</span>{parens && '('}{inner}{parens && ')'}</React.Fragment>
+                : inner;
+            if (fDen.length) return <Brak t={numer} n={prod(fDen, { ...ctx, ned: true })} />;
+            return <span style={{ display: 'inline-flex', alignItems: 'center' }}>{numer}</span>;
+        };
+        const XJ = ({ X, ctx }) => (X.f.length === 0 ? <span>({X.sg < 0 ? '−' : ''}1)</span> : <TermJ t={X} ctx={ctx} />);
+        // Ett led med operationen utskriven i färg, innan det förenklas.
+        const OpLedJ = ({ l, op, X, ctx = {} }) => {
+            const farg = OPF[op];
+            const Xj = <span style={{ color: farg, fontWeight: 600 }}><XJ X={X} ctx={ctx} /></span>;
+            const enkel = l.terms.length === 1 && l.pow === 1;
+            const multi = l.terms.length > 1 && l.pow === 1 && l.fac.f.length === 0;
+            if (op === 'mul') {
+                if (enkel) return <TermJ t={l.terms[0]} ctx={ctx} extraNum={Xj} />;
+                return <span style={{ display: 'inline-flex', alignItems: 'center' }}>{multi && '('}<LedJ l={l} ctx={ctx} />{multi && ')'}<span className="opx">·</span>{Xj}</span>;
+            }
+            if (op === 'div') return <Brak t={<LedJ l={l} ctx={ctx} />} n={Xj} farg={farg} />;
+            if (op === 'add' || op === 'sub') return (
+                <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                    <LedJ l={l} ctx={ctx} />
+                    <span style={{ color: farg, fontWeight: 600, display: 'inline-flex', alignItems: 'center' }}><span className="opx">{op === 'add' ? '+' : '−'}</span><XJ X={X} ctx={ctx} /></span>
+                </span>
+            );
+            if (op === 'kvad') return (
+                <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                    <span style={{ color: farg }}>(</span><LedJ l={l} ctx={ctx} /><span style={{ color: farg }}>)</span><sup style={{ color: farg, fontWeight: 700 }}>2</sup>
+                </span>
+            );
+            if (op === 'rot') return <Rot farg={farg}><LedJ l={l} ctx={ctx} /></Rot>;
+            return <LedJ l={l} ctx={ctx} />;
+        };
+        const Ekv = ({ vl, hl, ctx, likhet = '=' }) => (
+            <span className="mx ekv" style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+                <LedJ l={vl} ctx={ctx} /><span style={likhet === '≠' ? { color: '#dc2626', fontWeight: 700 } : undefined}>{likhet}</span><LedJ l={hl} ctx={ctx} />
+            </span>
+        );
+        const opText = (op, X) => {
+            if (op === 'byt' || op === 'kvad' || op === 'rot') return OPNAMN[op] + (op === 'byt' ? '' : ' båda led');
+            const x = <span className="mx" style={{ fontSize: '1.1em' }}><XJ X={X} ctx={{}} /></span>;
+            if (op === 'add') return <span>Addera {x} till båda led</span>;
+            if (op === 'sub') return <span>Subtrahera {x} från båda led</span>;
+            return <span>{OPMED[op]} {x}</span>;
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  RADERNA I UTRÄKNINGEN
+        // ════════════════════════════════════════════════════════
+        // Varje rad bär läget efter sig (vl, hl). En operationsrad bär också läget
+        // före och operationen, så att den kan skrivas med färgen i båda led.
+        const startRad = (F) => ({ typ: 'start', ...M.tolka(F) });
+        // Ändras ledet när det förenklas, eller ser den förenklade raden likadan ut som operationsraden?
+        function forenklas(l, op, X) {
+            const enkel = l.terms.length === 1 && l.pow === 1;
+            if (op === 'mul' || op === 'div') return enkel && (X.f.length === 0 || X.f.some(([k]) => l.terms[0].f.some(([kk]) => kk === k)));
+            if (op === 'add' || op === 'sub') return l.terms.some((t) => M.nyckel(t) === M.nyckel(X));
+            if (op === 'kvad' || op === 'rot') { const r = M.opLed(l, op); return !r.fel && r.pow === 1; }
+            return false;
+        }
+        function nyaRader(fore, op, X, bara, utanOpRad = false) {
+            const r = M.utfor(fore, op, X, bara);
+            if (r.fel) return { fel: r.fel };
+            if (op === 'byt') return { rader: [{ typ: 'byt', vl: r.vl, hl: r.hl, op, fel: fore.fel }] };
+            const fel = fore.fel || bara;
+            const opRad = { typ: 'op', fore: { vl: fore.vl, hl: fore.hl }, op, X, bara, vl: r.vl, hl: r.hl, fel };
+            const resRad = { typ: 'res', op, vl: r.vl, hl: r.hl, fel };
+            if (utanOpRad) return { rader: [resRad] };
+            const andras = forenklas(fore.vl, op, X) || (!bara && forenklas(fore.hl, op, X));
+            return { rader: andras ? [opRad, resRad] : [opRad] };
+        }
+        const sann = (rad, V) => {
+            const a = M.evalL(rad.vl, V), b = M.evalL(rad.hl, V);
+            return Math.abs(a - b) <= 1e-7 * Math.max(1, Math.abs(a), Math.abs(b));
+        };
+        const RadJ = ({ rad, nr, vald, onClick, markera, V, doljNot }) => {
+            const likhet = V && !sann(rad, V) ? '≠' : '=';
+            let ekv;
+            if (rad.typ === 'op') {
+                ekv = (
+                    <span className="mx ekv" style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+                        <OpLedJ l={rad.fore.vl} op={rad.op} X={rad.X} />
+                        <span style={likhet === '≠' ? { color: '#dc2626', fontWeight: 700 } : undefined}>{likhet}</span>
+                        {rad.bara ? <LedJ l={rad.fore.hl} /> : <OpLedJ l={rad.fore.hl} op={rad.op} X={rad.X} />}
+                    </span>
+                );
+            } else ekv = <Ekv vl={rad.vl} hl={rad.hl} likhet={likhet} />;
+            const not = rad.typ === 'op' ? <span className="not" style={{ color: OPF[rad.op] }}>{OPNAMN[rad.op].toLowerCase()}{rad.bara && !doljNot ? ', bara i vänster led' : ''}</span>
+                      : rad.typ === 'byt' ? <span className="not" style={{ color: OPF.byt }}>byt plats på leden</span> : null;
+            return (
+                <div className={`rad ${vald ? 'vald' : ''} ${likhet === '≠' ? 'fel' : ''} ${markera ? 'svarsfel' : ''}`} onClick={onClick}>
+                    <span className="nr">{nr}</span>{ekv}{not}
+                </div>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  KONTROLLEN: båda leden med exemplets värden
+        // ════════════════════════════════════════════════════════
+        const Kontrollen = ({ rad, F, mal, bara }) => {
+            const V = F.varden;
+            const a = M.evalL(rad.vl, V), b = M.evalL(rad.hl, V);
+            const lika = sann(rad, V);
+            const ev = (l) => enhetsnamn(M.dimL(l), null);
+            const max = Math.max(Math.abs(a), Math.abs(b)) || 1;
+            return (
+                <div className="kort">
+                    <h4>Kontrollen</h4>
+                    <div style={{ fontSize: 12.5, color: 'var(--lab-ink-soft)' }}>Exemplets värden insatta i den markerade raden:</div>
+                    <div className="stapel-rad"><span>Vänster led</span><div><div className="stapel" style={{ width: `${Math.max(2, 100 * Math.abs(a) / max)}%` }} /></div></div>
+                    <div style={{ textAlign: 'right' }} className="stapel-v">{fmtTal(a)} {ev(rad.vl)}</div>
+                    <div className="stapel-rad"><span>Höger led</span><div><div className={`stapel h ${lika ? '' : 'olika'}`} style={{ width: `${Math.max(2, 100 * Math.abs(b) / max)}%` }} /></div></div>
+                    <div style={{ textAlign: 'right' }} className="stapel-v">{fmtTal(b)} {ev(rad.hl)}</div>
+                    <div className="mt-1" style={{ fontSize: 13, fontWeight: 600, color: lika ? '#15803d' : '#dc2626' }}>
+                        {lika ? 'Likheten gäller: båda leden är lika stora.' : 'Likheten gäller inte längre: leden är inte lika stora på den här raden.'}
+                    </div>
+                    {!lika && !M.samDim(M.dimL(rad.vl), M.dimL(rad.hl)) && <div style={{ fontSize: 12.5, color: 'var(--lab-ink-soft)' }} className="mt-1">Leden har inte ens samma enhet längre: {ev(rad.vl) || 'ingen enhet'} mot {ev(rad.hl) || 'ingen enhet'}.</div>}
+                    {!lika && bara && <div style={{ fontSize: 12.5, color: 'var(--lab-ink-soft)' }} className="mt-1">Operationen gjordes bara i vänster led.</div>}
+                </div>
+            );
+        };
+        const Enhetskontroll = ({ rad, k }) => {
+            const s = M.SYM[k];
+            const dim = M.dimL(rad.hl);
+            const ok = M.samDim(dim, s.dim);
+            const blir = enhetsnamn(dim, s);
+            return (
+                <div className="kort">
+                    <h4>Enhetskontrollen</h4>
+                    <div className="mx" style={{ fontSize: 19, display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8 }}>
+                        <span>[<SymBas k={k} />]</span><span>=</span><LedJ l={rad.hl} ctx={{ enh: true }} /><span>=</span>
+                        {rad.hl.pow === 0.5 && <React.Fragment><Rot><span className="enh">{basEnhet(M.dimL({ ...rad.hl, pow: 1 }))}</span></Rot><span>=</span></React.Fragment>}
+                        <span className="enh">{blir || '1'}</span>
+                    </div>
+                    <div className="mt-1" style={{ fontSize: 13, fontWeight: 600, color: ok ? '#15803d' : '#dc2626' }}>
+                        {ok ? `Rätt enhet för ${s.namn.toLowerCase()}.` : `Fel enhet: ${s.namn.toLowerCase()} mäts i ${s.enhet}.`}
+                    </div>
+                    {M.termerSammaDim(rad.hl) && rad.hl.terms.length > 1 && <div style={{ fontSize: 12.5, color: 'var(--lab-ink-soft)' }} className="mt-1">Termer som adderas eller subtraheras har alltid samma enhet.</div>}
+                </div>
+            );
+        };
+        const Varden = ({ F }) => (
+            <div className="kort">
+                <h4>Exemplets värden</h4>
+                <div className="varden">
+                    {M.storheter(F).map((k) => (
+                        <React.Fragment key={k}>
+                            <span className="mx"><SymBas k={k} /> =</span>
+                            <span style={{ fontSize: 13.5, fontFamily: "'JetBrains Mono', monospace", alignSelf: 'center' }}>{fmtTal(F.varden[k])} {M.SYM[k].enhet}</span>
+                        </React.Fragment>
+                    ))}
+                </div>
+                {F.varden.g !== undefined && <div style={{ fontSize: 12, color: 'var(--lab-ink-soft)' }} className="mt-1"><em>g</em> är tyngdfaktorn, 9,82 N/kg.</div>}
+                {F.id === 'gaslag' && <div style={{ fontSize: 12, color: 'var(--lab-ink-soft)' }} className="mt-1">Temperaturen anges i kelvin i allmänna gaslagen.</div>}
+                {F.id === 'huvudsats' && <div style={{ fontSize: 12, color: 'var(--lab-ink-soft)' }} className="mt-1"><em>Q</em> är värmen som tillförs gasen och <em>W</em> arbetet som utförs på gasen. <em>W</em> = −200 J betyder att gasen själv utför 200 J arbete när den expanderar.</div>}
+            </div>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  FORMELTRIANGELN
+        // ════════════════════════════════════════════════════════
+        const TRI = { A: [330, 110], B: [110, 520], C: [550, 520] };       // hörnen
+        const PLATS = (tri) => ({ [tri.topp]: [330, 330], [tri.ner[0]]: [245, 450], [tri.ner[1]]: [415, 450] });
+        function triFormel(tri, tackt) {
+            const [a, b] = tri.ner;
+            if (tackt === tri.topp) return { vl: M.tolkaLed(tri.topp), hl: M.tolkaLed(`${a}*${b}`) };
+            const annan = tackt === a ? b : a;
+            return { vl: M.tolkaLed(tackt), hl: M.tolkaLed(`${tri.topp}/${annan}`) };
+        }
+        const Finger = ({ x, y }) => (
+            <g transform={`translate(${x} ${y}) rotate(-35)`} style={{ pointerEvents: 'none' }}>
+                <rect x="-34" y="-30" width="68" height="120" rx="34" fill="#ead7c3" stroke="#0f1620" strokeWidth="3" />
+                <rect x="-21" y="-17" width="42" height="46" rx="18" fill="#f7efe6" stroke="#0f1620" strokeWidth="2.4" />
+                <path d="M-14 -4 Q0 -12 14 -4" fill="none" stroke="#c9b8a6" strokeWidth="2" />
+            </g>
+        );
+        const Triangeln = ({ F, tackt, setTackt, smal }) => {
+            const tri = F.tri;
+            const pl = PLATS(tri);
+            const svgRef = useRef(null);
+            const [drag, setDrag] = useState(null);
+            const fp = drag || (tackt ? [pl[tackt][0] + 16, pl[tackt][1] + 22] : [700, 470]);
+            const punkt = (e) => {
+                const r = svgRef.current.getBoundingClientRect();
+                return [(e.clientX - r.left) * 1000 / r.width, (e.clientY - r.top) * 640 / r.height];
+            };
+            const slapp = (p) => {
+                let bast = null, bd = 1e9;
+                for (const [k, [x, y]] of Object.entries(pl)) { const d = Math.hypot(p[0] - x, p[1] - y); if (d < bd) { bd = d; bast = k; } }
+                setTackt(bd < 150 ? bast : null);
+            };
+            const f = tackt ? triFormel(tri, tackt) : null;
+            const farg = { [tri.topp]: '#dc2626', [tri.ner[0]]: '#1d4ed8', [tri.ner[1]]: '#15803d' };
+            return (
+                <div className="triangel-blad">
+                    <svg ref={svgRef} viewBox="0 0 1000 640" style={smal ? { height: 360 } : undefined}
+                         onPointerMove={(e) => { if (drag) setDrag(punkt(e)); }}
+                         onPointerUp={(e) => { if (drag) { slapp(punkt(e)); setDrag(null); } }}
+                         onPointerLeave={() => { if (drag) { slapp(drag); setDrag(null); } }}>
+                        <polygon points={`${TRI.A} ${TRI.B} ${TRI.C}`} fill="rgba(255,255,255,0.75)" stroke="#0f1620" strokeWidth="5" strokeLinejoin="round" />
+                        <line x1="185" y1="385" x2="475" y2="385" stroke="#0f1620" strokeWidth="5" />
+                        <text x="330" y="462" textAnchor="middle" fontSize="54" fontFamily="'STIX Two Text','Cambria Math',serif" fill="#0f1620">·</text>
+                        {Object.entries(pl).map(([k, [x, y]]) => {
+                            const s = M.SYM[k];
+                            return (
+                                <g key={k} className="tri-sym" onClick={() => setTackt(tackt === k ? null : k)} opacity={tackt === k ? 0.25 : 1}>
+                                    <rect x={x - 70} y={y - 55} width="140" height="80" fill="transparent" />
+                                    <text x={x} y={y} textAnchor="middle" fontSize="64" fill={farg[k]} fontFamily="'STIX Two Text','Cambria Math',serif">
+                                        {s.delta && <tspan>Δ</tspan>}<tspan fontStyle="italic">{s.bas}</tspan>{s.sub && <tspan fontSize="38" dy="12">{s.sub}</tspan>}
+                                    </text>
+                                </g>
+                            );
+                        })}
+                        <g className={`finger ${drag ? 'drar' : ''}`} onPointerDown={(e) => { e.currentTarget.ownerSVGElement.setPointerCapture && e.currentTarget.ownerSVGElement.setPointerCapture(e.pointerId); setDrag(punkt(e)); }}>
+                            <circle cx={fp[0]} cy={fp[1]} r="70" fill="transparent" />
+                            <Finger x={fp[0]} y={fp[1]} />
+                        </g>
+                        {!tackt && !drag && <text x="700" y="590" textAnchor="middle" fontSize="22" fill="#5a6170" fontFamily="'DM Sans',sans-serif">Dra fingret till en storhet, eller klicka på den</text>}
+                    </svg>
+                    <div className="kontroll" style={smal ? undefined : { flex: '0 0 40%' }}>
+                        <div className="kort">
+                            <h4>Formeln</h4>
+                            <div className="mx" style={{ fontSize: 22 }}><Ekv vl={M.tolka(F).vl} hl={M.tolka(F).hl} ctx={{}} /></div>
+                            <div style={{ fontSize: 12.5, color: 'var(--lab-ink-soft)' }} className="mt-1">
+                                Överst står den storhet som är produkten av de två nedanför. Täck den du söker.
+                            </div>
+                        </div>
+                        {f && (
+                            <div className="kort">
+                                <h4>Täcker du <SymBas k={tackt} /> får du</h4>
+                                <div className="mx" style={{ fontSize: 26 }}><Ekv vl={f.vl} hl={f.hl} ctx={{}} /></div>
+                                <div className="mx mt-2" style={{ fontSize: 17, display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 6 }}>
+                                    <SymBas k={tackt} /><span>=</span><LedJ l={f.hl} ctx={{ tal: F.varden }} /><span>=</span>
+                                    <span className="enh">{fmtTal(M.evalL(f.hl, F.varden))} {M.SYM[tackt].enhet}</span>
+                                </div>
+                                <div style={{ fontSize: 12.5, color: 'var(--lab-ink-soft)' }} className="mt-2">
+                                    {tackt === tri.topp
+                                        ? 'De två storheterna under strecket står bredvid varandra, och då multipliceras de.'
+                                        : 'Storheterna står över och under strecket, och då är det ett bråk: den övre delad med den undre.'}
+                                </div>
+                            </div>
+                        )}
+                        <div className="kort" style={{ fontSize: 12.5, color: 'var(--lab-ink-soft)' }}>
+                            Triangeln är en genväg. Den ger samma svar som när du gör samma operation i båda led. Den fungerar bara för formler med tre storheter, där en är produkten av de två andra.
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  FÄRDIGA FÖRSÖK OCH GISSA-LÄGET
+        // ════════════════════════════════════════════════════════
+        const FORSOK = [
+            { id: 'ohmR', namn: 'Ohms lag', sub: 'lös ut resistansen', f: 'ohm', k: 'R' },
+            { id: 'mf', namn: 'Medelfart', sub: 'lös ut tiden, som står i nämnaren', f: 'medelfart', k: 't' },
+            { id: 'dens', namn: 'Densitet', sub: 'lös ut volymen', f: 'densitet', k: 'V' },
+            { id: 'ek', namn: 'Rörelseenergi', sub: 'lös ut hastigheten, med en rot', f: 'ek', k: 'v' },
+            { id: 'hast', namn: 'Hastighet', sub: 'lös ut tiden: subtrahera först', f: 'hastighet', k: 't' },
+            { id: 'gas', namn: 'Allmänna gaslagen', sub: 'lös ut temperaturen efter', f: 'gaslag', k: 'T_2' },
+            { id: 'hs', namn: 'Första huvudsatsen', sub: 'lös ut värmen', f: 'huvudsats', k: 'Q' },
+            { id: 'bara', namn: 'Bara i ena ledet', sub: 'vad händer om man glömmer höger led?', f: 'ohm', k: 'R', bara: true },
+        ];
+        const slump = (a) => a[Math.floor(Math.random() * a.length)];
+        const blanda = (a) => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+        const FELTEXT = {
+            inverterat: 'Uttrycket är inverterat: det som ska stå i täljaren står i nämnaren, och tvärtom.',
+            flyttad: 'En storhet har hamnat på fel plats: den står i täljaren när den ska stå i nämnaren, eller tvärtom.',
+            forstaTermen: 'Bara den första termen är dividerad. Hela täljaren ska divideras.',
+            tecken: 'Ett tecken är fel. Termen subtraheras från eller adderas till båda led, och därför får den motsatt tecken i det andra ledet.',
+            glomtRoten: 'Roten saknas. Den sökta storheten var i kvadrat, och då ska roten dras ur båda led.',
+            glomtTalet: 'Ett tal har tappats eller hamnat på fel plats. Talen följer med i varje steg precis som storheterna, och enhetskontrollen kan inte upptäcka ett sådant fel.',
+        };
+        // svåra nog: den sökta storheten står inte redan ensam, och lösningen kräver minst två steg
+        function slumpaUppgift(minSteg) {
+            for (let i = 0; i < 200; i++) {
+                const F = slump(M.FORMLER);
+                const k = slump(M.storheter(F));
+                const L = M.losning(F, k);
+                if (!L.klar || L.steg.filter((s) => s.op !== 'byt').length < minSteg) continue;
+                return { F, k, L };
+            }
+            return null;
+        }
+        function nyUttrycksUppgift() {
+            for (let i = 0; i < 200; i++) {
+                const u = slumpaUppgift(1);
+                const V = u.F.varden;
+                const ratt = u.L.slut.hl;
+                const sett = new Set([JSON.stringify(M.normalisera(ratt))]);
+                const fel = [];
+                for (const x of blanda(M.felSvar(ratt))) {
+                    const n = M.normalisera(x);
+                    const key = JSON.stringify(n);
+                    if (sett.has(key)) continue;
+                    if (!isFinite(M.evalL(n, V))) continue;
+                    if (Math.abs(M.evalL(n, V) - V[u.k]) <= 1e-6 * Math.max(1, Math.abs(V[u.k]))) continue;
+                    sett.add(key); fel.push({ l: n, typ: x.typ });
+                    if (fel.length === 2) break;
+                }
+                if (fel.length < 2) continue;
+                const alt = blanda([{ l: ratt, ratt: true }, ...fel]);
+                return { typ: 'uttryck', F: u.F, k: u.k, alt };
+            }
+            return null;
+        }
+        // En uträkning med ett fel i ett steg: antingen bara i vänster led, eller en felaktig förenkling.
+        function nyFelUppgift() {
+            for (let forsok = 0; forsok < 300; forsok++) {
+                const u = slumpaUppgift(2);
+                const steg = u.L.steg;
+                const kandidater = steg.map((s, i) => i).filter((i) => steg[i].op !== 'byt');
+                const i = slump(kandidater);
+                const typ = Math.random() < 0.5 ? 'bara' : 'forenkling';
+                let rad = startRad(u.F);
+                const rader = [rad];
+                let felIx = [], misslyckad = false;
+                for (let j = 0; j < steg.length && !misslyckad; j++) {
+                    const s = steg[j];
+                    if (j === i && typ === 'bara') {
+                        const r = nyaRader(rad, s.op, s.X, true, true);
+                        if (r.fel) { misslyckad = true; break; }
+                        felIx = [rader.length];
+                        rader.push(...r.rader);
+                    } else {
+                        const r = nyaRader(rad, s.op, s.X, false);
+                        if (r.fel) { misslyckad = true; break; }
+                        if (j === i) {
+                            if (r.rader.length < 2) { misslyckad = true; break; }
+                            const res = r.rader[1];
+                            // förstör det led som ändrades mest
+                            const sida = M.innehaller(res.hl, u.k) ? 'vl' : 'hl';
+                            const cand = M.felSvar(res[sida]).map(M.normalisera).filter((x) => !sann({ vl: sida === 'vl' ? x : res.vl, hl: sida === 'hl' ? x : res.hl }, u.F.varden));
+                            if (!cand.length) { misslyckad = true; break; }
+                            const ny = { ...res, [sida]: slump(cand), fel: true };
+                            r.rader[1] = ny;
+                            felIx = [rader.length + 1];
+                        }
+                        rader.push(...r.rader);
+                    }
+                    rad = rader[rader.length - 1];
+                }
+                if (misslyckad || !felIx.length) continue;
+                return { typ: 'felet', F: u.F, k: u.k, rader, felIx, feltyp: typ };
+            }
+            return null;
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  HUVUDAPP
+        // ════════════════════════════════════════════════════════
+        const formelAv = (id) => M.FORMLER.find((f) => f.id === id);
+        const UR = { ohm: 'Ohms lag', medelfart: 'formeln för medelfart', densitet: 'formeln för densitet', newton2: 'Newtons andra lag',
+            tryck: 'formeln för tryck', effekt: 'formeln för effekt', ek: 'formeln för rörelseenergi', ep: 'formeln för lägesenergi',
+            hastighet: 'formeln för hastigheten vid konstant acceleration', tidlos: 'den tidlösa formeln', vatsketryck: 'formeln för vätsketryck',
+            varme: 'formeln för uppvärmning', pascal: 'formeln för den hydrauliska pressen', gaslag: 'allmänna gaslagen', huvudsats: 'termodynamikens första huvudsats' };
+        const forstaMal = (F) => { const ks = M.storheter(F); return ks.find((k) => !M.ensam(M.tolka(F).vl, k)) || ks[0]; };
+
+        const App = () => {
+            const q = new URLSearchParams(location.search).get('lage');
+            const [lage, setLage] = useState(q === 'triangel' ? 'triangel' : 'verkstad');
+            const [fid, setFid] = useState('ohm');
+            const F = formelAv(fid);
+            const [mal, setMal] = useState('R');
+            const [rader, setRader] = useState(() => [startRad(formelAv('ohm'))]);
+            const [vald, setVald] = useState(0);
+            const [op, setOp] = useState(null);
+            const [medd, setMedd] = useState(null);
+            const [bara, setBara] = useState(false);
+            const [visaKontroll, setVisaKontroll] = useState(true);
+            const [spelar, setSpelar] = useState(false);
+            const [tackt, setTackt] = useState(null);
+            const [togglesOpen, setTogglesOpen] = useState(false);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [smal, setSmal] = useState(false);
+            const [gissa, setGissa] = useState(null);
+            const [svar, setSvar] = useState(null);
+            const [poang, setPoang] = useState({ ratt: 0, totalt: 0, svit: 0 });
+            const sceneWrapRef = useRef(null);
+            const raderRef = useRef(null);
+
+            // ── smal scen: en kolumn ──
+            useEffect(() => {
+                const el = sceneWrapRef.current;
+                if (!el || !window.ResizeObserver) return;
+                const ro = new ResizeObserver(() => setSmal(el.getBoundingClientRect().width < 640));
+                ro.observe(el);
+                return () => ro.disconnect();
+            }, []);
+            useEffect(() => { const el = raderRef.current; if (el) el.scrollTop = el.scrollHeight; }, [rader.length]);
+
+            const sista = rader[rader.length - 1];
+            const utlost = M.utlost(sista, mal);
+            const harFel = rader.some((r) => r.fel);
+            const las = spelar || (gissa && gissa.typ === 'felet');
+
+            const borjaOm = (Fny = F, kny = mal) => {
+                setRader([startRad(Fny)]); setVald(0); setOp(null); setMedd(null); setSpelar(false);
+            };
+            const valjFormel = (id, k) => {
+                const Fn = formelAv(id);
+                const kn = k || forstaMal(Fn);
+                setFid(id); setMal(kn); setTackt(null); borjaOm(Fn, kn);
+            };
+            const valjMal = (k) => { setMal(k); borjaOm(F, k); };
+
+            const gor = (o, X) => {
+                if (harFel && !bara) { setMedd({ fel: true, text: 'Likheten gäller inte längre. Ångra felet innan du räknar vidare.' }); return; }
+                const r = nyaRader(sista, o, X, bara && o !== 'byt');
+                if (r.fel) { setMedd({ fel: true, text: r.fel }); return; }
+                setRader((x) => [...x, ...r.rader]);
+                setVald(rader.length + r.rader.length - 1);
+                setOp(null);
+                setMedd(bara && o !== 'byt' ? { fel: true, text: 'Operationen gjordes bara i vänster led. Titta i Kontrollen: leden är inte längre lika stora.' } : null);
+            };
+            const angra = () => {
+                if (rader.length <= 1) return;
+                const n = rader[rader.length - 1].typ === 'res' ? 2 : 1;
+                const ny = rader.slice(0, rader.length - n);
+                setRader(ny); setVald(ny.length - 1); setMedd(null); setOp(null);
+            };
+            const tips = () => {
+                const n = M.nastaSteg(sista, mal);
+                if (harFel) { setMedd({ text: 'Ångra först steget där likheten slutade gälla.' }); return; }
+                if (!n) { setMedd({ text: utlost === 'v' ? 'Storheten är redan utlöst.' : 'Här finns inget tips. Börja om och pröva en annan väg.' }); return; }
+                setMedd({ tips: true, text: <span>{n.varfor} <strong>{opText(n.op, n.X)}</strong>.</span> });
+                setOp(n.op === 'byt' || n.op === 'kvad' || n.op === 'rot' ? null : n.op);
+            };
+            // Visa lösningen: tipsen ett i taget, i lugn takt.
+            const spelaRef = useRef(null);
+            useEffect(() => {
+                if (!spelar) return;
+                spelaRef.current = setTimeout(() => {
+                    const n = M.nastaSteg(rader[rader.length - 1], mal);
+                    if (!n) { setSpelar(false); setMedd(null); return; }
+                    const r = nyaRader(rader[rader.length - 1], n.op, n.X, false);
+                    if (r.fel) { setSpelar(false); return; }
+                    setRader((x) => [...x, ...r.rader]);
+                    setVald(rader.length + r.rader.length - 1);
+                    setMedd({ tips: true, text: <span>{n.varfor} <strong>{opText(n.op, n.X)}</strong>.</span> });
+                }, rader.length <= 1 ? 500 : 1500);
+                return () => clearTimeout(spelaRef.current);
+            }, [spelar, rader]);
+            const visaLosning = () => { setBara(false); borjaOm(); setTimeout(() => setSpelar(true), 50); };
+
+            const korForsok = (f) => {
+                avslutaGissa();
+                valjFormel(f.f, f.k);
+                setBara(!!f.bara);
+                setLage('verkstad');
+                if (f.bara) setMedd({ text: <span>Dividera bara vänster led med <span className="mx"><em>I</em></span> och titta i Kontrollen. Kryssrutan <strong>Gör bara i vänster led</strong> är ikryssad.</span> });
+            };
+
+            // chippen: faktorer att multiplicera eller dividera med, och termer att addera eller subtrahera
+            const chips = useMemo(() => {
+                if (!op) return [];
+                const ut = [], sett = new Set();
+                const lagg = (X) => { const n = X.sg + ':' + M.nyckel(X); if (!sett.has(n)) { sett.add(n); ut.push(X); } };
+                const leden = [sista.vl, sista.hl];
+                if (op === 'mul' || op === 'div') {
+                    for (const l of leden) for (const t of [l.fac, ...l.terms]) for (const [k, e] of t.f) {
+                        lagg(M.term([[k, 1]]));
+                        if (Math.abs(Math.abs(e) - 2) < 1e-9) lagg(M.term([[k, 2]]));
+                    }
+                    lagg(M.term([], -1));
+                } else {
+                    for (const l of leden) if (l.fac.f.length === 0 && l.pow === 1) for (const t of l.terms) lagg(M.term(t.f, 1));
+                }
+                return ut;
+            }, [op, sista]);
+
+            // ── Gissa-läget ──
+            const startaGissa = (typ) => {
+                const u = typ === 'uttryck' ? nyUttrycksUppgift() : nyFelUppgift();
+                if (!u) return;
+                setLage('verkstad'); setBara(false); setSpelar(false); setOp(null); setMedd(null);
+                setFid(u.F.id); setMal(u.k); setGissa(u); setSvar(null);
+                if (typ === 'felet') { setRader(u.rader); setVald(-1); }
+                else { setRader([startRad(u.F)]); setVald(0); }
+            };
+            const raknaPoang = (ratt) => setPoang((x) => ({ ratt: x.ratt + (ratt ? 1 : 0), totalt: x.totalt + 1, svit: ratt ? x.svit + 1 : 0 }));
+            const svaraUttryck = (i) => {
+                if (svar) return;
+                const a = gissa.alt[i];
+                setSvar({ i, ratt: !!a.ratt, text: a.ratt ? 'Rätt!' : `Inte riktigt. ${FELTEXT[a.typ] || ''}` });
+                raknaPoang(!!a.ratt);
+            };
+            const klickaRad = (i) => {
+                if (gissa && gissa.typ === 'felet' && !svar) {
+                    const ratt = gissa.felIx.includes(i);
+                    const forst = gissa.felIx[0];
+                    setVald(gissa.feltyp === 'bara' ? forst : gissa.felIx[gissa.felIx.length - 1]);
+                    setSvar({ i, ratt, text: (ratt ? 'Rätt! ' : 'Inte riktigt. ') + (gissa.feltyp === 'bara'
+                        ? `Felet finns på rad ${forst + 1}: operationen gjordes bara i vänster led. Kontrollen visar att leden inte längre är lika stora.`
+                        : `Felet finns på rad ${gissa.felIx[0] + 1}. Raden ovanför stämmer, men förenklingen ger ett annat uttryck.`) });
+                    raknaPoang(ratt);
+                    return;
+                }
+                setVald(i);
+            };
+            const avslutaGissa = () => { setGissa(null); setSvar(null); };
+            const visaGissaLosning = () => { const u = gissa; avslutaGissa(); valjFormel(u.F.id, u.k); setTimeout(() => setSpelar(true), 80); };
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(document.fullscreenElement === sceneWrapRef.current || document.webkitFullscreenElement === sceneWrapRef.current);
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => { document.removeEventListener('fullscreenchange', handler); document.removeEventListener('webkitfullscreenchange', handler); };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const triFormler = M.FORMLER.filter((f) => f.tri);
+            const lista = lage === 'triangel' ? triFormler : M.FORMLER;
+            const valjare = (kompakt) => (
+                <React.Fragment>
+                    <select className="sel" value={fid} disabled={las || !!gissa} onChange={(e) => valjFormel(e.target.value)} style={kompakt ? { fontSize: 13, padding: '4px 6px' } : undefined}>
+                        {lista.map((f) => <option key={f.id} value={f.id}>{f.namn}</option>)}
+                    </select>
+                    {lage === 'verkstad' && (
+                        <div className={kompakt ? 'malrad mt-1' : 'flex flex-wrap gap-2 mt-2'}>
+                            {M.storheter(F).map((k) => (
+                                <button key={k} className={`malk ${mal === k ? 'active' : ''}`} disabled={las || !!gissa} onClick={() => valjMal(k)} title={M.SYM[k].namn}>
+                                    <span className="mx"><SymBas k={k} /></span>
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </React.Fragment>
+            );
+            const knappar = (kl) => (
+                <React.Fragment>
+                    <button className={`btn-toggle ${kl}`} onClick={tips} disabled={las || !!gissa || lage !== 'verkstad'}>Tips</button>
+                    <button className={`btn-start ${kl}`} onClick={visaLosning} disabled={las || !!gissa || lage !== 'verkstad'}>Visa lösningen</button>
+                    <button className={`btn-toggle ${kl}`} onClick={() => { setSpelar(false); borjaOm(); }} disabled={!!gissa && gissa.typ === 'felet' && !svar}>Börja om</button>
+                </React.Fragment>
+            );
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Inställningar</div>
+                        <label><input type="checkbox" checked={bara} disabled={las || !!gissa} onChange={() => setBara((x) => !x)} /><span>Gör bara i vänster led</span></label>
+                        <label><input type="checkbox" checked={visaKontroll} onChange={() => setVisaKontroll((x) => !x)} /><span>Visa Kontrollen</span></label>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Formel</div>
+                                {valjare(true)}
+                                <div className="st-actions">{knappar('')}</div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const doljKontroll = gissa && gissa.typ === 'felet' && !svar;
+            const valdRad = rader[Math.max(0, Math.min(vald, rader.length - 1))];
+            const opKnappar = ['mul', 'div', 'add', 'sub', 'kvad', 'rot', 'byt'];
+            const verkstad = (
+                <div className={`blad ${smal ? 'smal' : ''}`}>
+                    <div className="uttr">
+                        <div className="uttr-rubrik">
+                            {gissa && gissa.typ === 'felet' ? 'Hitta raden med felet' : <span>Lös ut{' '}<span className="mx" style={{ fontSize: 17, textTransform: 'none', letterSpacing: 0 }}><SymBas k={mal} /></span>{' '}({M.SYM[mal].namn.toLowerCase()})</span>}
+                        </div>
+                        <div className="rader" ref={raderRef}>
+                            {rader.map((r, i) => (
+                                <RadJ key={i} rad={r} nr={i + 1} vald={i === vald} V={doljKontroll ? null : F.varden} doljNot={doljKontroll}
+                                      markera={svar && gissa && gissa.typ === 'felet' && svar.i === i && !svar.ratt}
+                                      onClick={() => klickaRad(i)} />
+                            ))}
+                            {utlost === 'v' && !gissa && !harFel && (
+                                <div className="meddelande" style={{ color: '#15803d', fontWeight: 600, paddingLeft: 36 }}>
+                                    Klart! <span className="mx" style={{ fontSize: 17 }}><SymBas k={mal} /></span> står ensam i vänster led.
+                                    {rader.some((r) => r.op === 'rot') && (fid === 'tidlos'
+                                        ? <span> Roten ur båda led ger egentligen två lösningar, plus och minus roten. Hastigheten kan vara negativ, och tecknet väljs efter rörelseriktningen. Här visas den positiva roten.</span>
+                                        : <span> <span className="mx" style={{ fontSize: 17 }}><SymBas k="v" /></span> stod i kvadrat, så tecknet försvann. Roten ger hastighetens belopp, farten.</span>)}
+                                </div>
+                            )}
+                        </div>
+                        {!(gissa && gissa.typ === 'felet') && (
+                            <div className="opbar">
+                                <div className="opknappar">
+                                    {opKnappar.map((o) => (
+                                        <button key={o} className={`opk ${op === o ? 'aktiv' : ''}`} disabled={las || (gissa && gissa.typ === 'uttryck')}
+                                                style={{ color: OPF[o], ...(op === o ? { background: OPF[o] } : {}) }}
+                                                onClick={() => { setMedd(null); if (o === 'byt' || o === 'kvad' || o === 'rot') gor(o); else setOp(op === o ? null : o); }}>
+                                            <span className="ikon">{OPIKON[o]}</span>{OPNAMN[o]}
+                                        </button>
+                                    ))}
+                                    <button className="opk" style={{ color: 'var(--lab-ink)' }} disabled={las || rader.length <= 1} onClick={angra}>Ångra</button>
+                                </div>
+                                {op && (
+                                    <div className="chips">
+                                        <span className="fraga">{OPMED[op]}</span>
+                                        {chips.map((X, i) => (
+                                            <button key={i} className="chip" style={{ color: OPF[op] }} onClick={() => gor(op, X)}>
+                                                <span className="mx" style={{ color: 'var(--lab-ink)' }}><XJ X={X} ctx={{}} /></span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                                {medd && <div className="meddelande" style={{ color: medd.fel ? '#dc2626' : 'var(--lab-ink)' }}>{medd.tips && <strong>Tips: </strong>}{medd.text}</div>}
+                            </div>
+                        )}
+                    </div>
+                    <div className="kontroll">
+                        {visaKontroll && !doljKontroll && <Kontrollen rad={valdRad} F={F} mal={mal} bara={!!valdRad.fel && rader.some((r) => r.bara)} />}
+                        {doljKontroll && <div className="kort" style={{ fontSize: 13, color: 'var(--lab-ink-soft)' }}>Kontrollen visas när du har svarat. Klicka på den rad där uträkningen blir fel.</div>}
+                        {utlost === 'v' && !harFel && !gissa && <Enhetskontroll rad={sista} k={mal} />}
+                        <Varden F={F} />
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-7xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Formelverkstaden
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Formelverkstaden</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            En formel är en likhet: vänster led är lika stort som höger led. Därför får du skriva om formeln, så länge du gör
+                            samma räknesätt i båda led (men aldrig dividerar med noll). Välj en formel och den storhet du vill lösa ut, och skriv om formeln
+                            ett steg i taget. I Kontrollen sätts exemplets värden in i varje rad, så att du ser att leden fortfarande är lika stora.
+                        </p>
+
+                        <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                            <div className="flex flex-wrap items-center gap-x-10 gap-y-3 fk-rader">
+                                <div className="mx" style={{ fontSize: 24 }}><Ekv vl={M.tolka(F).vl} hl={M.tolka(F).hl} ctx={{ lbl: true }} /></div>
+                                <div className="legend">
+                                    {['mul', 'div', 'add', 'sub'].map((o) => (
+                                        <span key={o} className="bit"><span className="sw" style={{ color: OPF[o], fontSize: o === 'mul' ? 28 : undefined, lineHeight: 1 }}>{OPIKON[o]}</span><span>{{ mul: 'multiplicera båda led', div: 'dividera båda led', add: 'addera till båda led', sub: 'subtrahera från båda led' }[o]}</span></span>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="pt-3 mt-3 text-base" style={{ borderTop: '1px solid var(--lab-line, rgba(15,22,32,0.14))', color: 'var(--lab-ink-soft)' }}>
+                                Det du gör med det ena ledet gör du också med det andra. Färgen visar vilken operation som görs: grönt för multiplikation, lila för division,
+                                rött för subtraktion och blått för addition. Sedan förenklas raden, och det som tar ut varandra försvinner.
+                            </div>
+                        </div>
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 xl:w-3/4 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    {lage === 'verkstad' ? verkstad : <div className={`blad ${smal ? 'smal' : ''}`}><Triangeln F={F} tackt={tackt} setTackt={setTackt} smal={smal} /></div>}
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Klicka på en rad för att pröva den med exemplets värden. Värdena är valda så att formeln stämmer, och därför blir båda leden lika stora så länge du gör samma sak i båda led.
+                                </p>
+                            </div>
+
+                            <div className="lg:w-1/3 xl:w-1/4 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="mode-seg mb-3">
+                                        <button className={lage === 'verkstad' ? 'active' : ''} disabled={las} onClick={() => setLage('verkstad')}>Verkstaden</button>
+                                        <button className={lage === 'triangel' ? 'active' : ''} disabled={las || !!gissa} onClick={() => { setLage('triangel'); if (!F.tri) valjFormel('ohm'); }}>Formeltriangeln</button>
+                                    </div>
+                                    <div className="flbl mb-1" style={{ textAlign: 'left' }}>Formel</div>
+                                    {!isFullscreen ? valjare(false) : <p className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>Formeln väljs i rutan uppe till höger i fullskärm.</p>}
+                                    {lage === 'verkstad' && !isFullscreen && <div className="flex gap-2 mt-3">{knappar('flex-1')}</div>}
+                                    {lage === 'triangel' && tackt && (
+                                        <button className="btn-toggle w-full mt-3" onClick={() => { const k = tackt; setLage('verkstad'); setMal(k); borjaOm(F, k); setTimeout(() => setSpelar(true), 80); }}>
+                                            Visa samma uträkning i båda led
+                                        </button>
+                                    )}
+                                    <label className="flex items-center gap-2 text-sm mt-3" style={{ color: 'var(--lab-ink)' }}>
+                                        <input type="checkbox" checked={bara} disabled={las || !!gissa || lage !== 'verkstad'} onChange={() => setBara((x) => !x)} /> Gör bara i vänster led (för att se vad som händer)
+                                    </label>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Färdiga försök</div>
+                                    <div className="forsok-lista">
+                                        {FORSOK.map((f) => (
+                                            <button key={f.id} className="forsok" disabled={las} onClick={() => korForsok(f)}>{f.namn}<span className="sub">{f.sub}</span></button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flbl" style={{ textAlign: 'left' }}>Gissa-läge</div>
+                                        {poang.totalt > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>{poang.ratt} av {poang.totalt} rätt{poang.svit > 1 ? `, ${poang.svit} i rad` : ''}</div>}
+                                    </div>
+                                    {!gissa && (
+                                        <div className="flex flex-col gap-2">
+                                            <button className="btn-toggle" disabled={spelar} onClick={() => startaGissa('uttryck')}>Vilket uttryck är rätt?</button>
+                                            <button className="btn-toggle" disabled={spelar} onClick={() => startaGissa('felet')}>Hitta felet</button>
+                                        </div>
+                                    )}
+                                    {gissa && gissa.typ === 'uttryck' && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                Lös ut <span className="mx" style={{ fontSize: 17 }}><SymBas k={gissa.k} /></span> ur {UR[gissa.F.id]}. Vilket uttryck är rätt?
+                                            </p>
+                                            {gissa.alt.map((a, i) => (
+                                                <button key={i} className={`svar-kort ${svar && a.ratt ? 'ratt' : ''} ${svar && svar.i === i && !a.ratt ? 'valt-fel' : ''}`} disabled={!!svar} onClick={() => svaraUttryck(i)}>
+                                                    <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--lab-ink-muted)', marginRight: 8 }}>{'ABC'[i]}</span>
+                                                    <Ekv vl={M.tolkaLed(gissa.k)} hl={a.l} ctx={{}} />
+                                                </button>
+                                            ))}
+                                            {svar && <p className="text-sm mb-2" style={{ color: svar.ratt ? '#15803d' : 'var(--lab-accent)' }}>{svar.text}</p>}
+                                            <div className="flex gap-2 flex-wrap">
+                                                {svar && <button className="btn-toggle flex-1" onClick={visaGissaLosning}>Visa lösningen</button>}
+                                                {svar && <button className="btn-toggle flex-1" onClick={() => startaGissa('uttryck')}>Ny uppgift</button>}
+                                                <button className="btn-toggle flex-1" onClick={avslutaGissa}>Avsluta</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {gissa && gissa.typ === 'felet' && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                Någon har löst ut <span className="mx" style={{ fontSize: 17 }}><SymBas k={gissa.k} /></span> ur {UR[gissa.F.id]}, men en rad blev fel. Klicka på den raden i uträkningen.
+                                            </p>
+                                            {svar && <p className="text-sm mb-2" style={{ color: svar.ratt ? '#15803d' : 'var(--lab-accent)' }}>{svar.text}</p>}
+                                            <div className="flex gap-2">
+                                                {svar && <button className="btn-toggle flex-1" onClick={() => startaGissa('felet')}>Ny uppgift</button>}
+                                                <button className="btn-toggle flex-1" onClick={() => { avslutaGissa(); borjaOm(); }}>Avsluta</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Samma sak i båda led</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    En formel säger att två saker är lika stora. Multiplicerar du båda med samma tal är de fortfarande lika stora, och
+                                    likadant när du dividerar (men aldrig med noll), adderar eller subtraherar. Gör du något med bara det ena ledet slutar likheten att gälla.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Gör det motsatta</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    För att få en storhet ensam gör du motsatsen till det som görs med den. Multipliceras den med något dividerar
+                                    du båda led med det. Står den i nämnaren multiplicerar du med den. Adderas något till den subtraherar du det från
+                                    båda led, och tvärtom. Är den i kvadrat drar du roten ur.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Kontrollera enheten</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Sätt in enheterna i det nya uttrycket. Blir enheten rätt för den storhet du löst ut är det ett gott tecken. Blir den
+                                    fel har något hamnat på fel plats, till exempel i täljaren i stället för i nämnaren. Ett tappat tal, som en
+                                    tvåa, syns däremot inte i enheten.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Man flyttar över och byter tecken.”</strong> Det är en genväg som fungerar, men det som egentligen händer är att samma
+                                    term subtraheras från eller adderas till båda led. Den som vet det byter aldrig tecken på fel term.</li>
+                                <li><strong>”Står <em>t</em> i nämnaren kan man flytta upp den genom att stryka bråkstrecket.”</strong> Nej. Båda led multipliceras med <em>t</em>. Då
+                                    förkortas den bort i det ena ledet och hamnar i täljaren i det andra.</li>
+                                <li><strong>”I <span className="mx" style={{ fontSize: 17 }}><Brak t={<span><em>v</em> − <em>v</em><sub>0</sub></span>} n={<em>a</em>} /></span> räcker det att dividera <em>v</em> med <em>a</em>.”</strong> Nej. Hela täljaren divideras,
+                                    och därför står den över ett gemensamt bråkstreck.</li>
+                                <li><strong>”Roten ur <span style={{ whiteSpace: 'nowrap' }}><em>v</em><sub>0</sub><sup>2</sup> + 2 · <em>a</em> · <em>s</em></span> är <span style={{ whiteSpace: 'nowrap' }}><em>v</em><sub>0</sub> + √(2 · <em>a</em> · <em>s</em>)</span>.”</strong> Nej. Roten ur en summa
+                                    är inte summan av rötterna. Pröva med tal: √(9 + 16) = 5, men √9 + √16 = 7.</li>
+                                <li><strong>”Formeltriangeln fungerar för alla formler.”</strong> Bara för formler där en storhet är produkten av två andra,
+                                    som <em>U</em> = <em>R</em> · <em>I</em>. För <span style={{ whiteSpace: 'nowrap' }}><em>v</em> = <em>v</em><sub>0</sub> + <em>a</em> · <em>t</em></span> behövs operationer i båda led.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

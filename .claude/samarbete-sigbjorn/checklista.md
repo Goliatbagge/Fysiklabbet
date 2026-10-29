@@ -29,15 +29,15 @@ simuleringen länkas i katalogen och vars beteckningar den ska följa.
 | 5 | 6.3 Trykk i væsker og rør | fy1-5.3 Vätsketryck (+ 5.8 Pascals princip) | Vätsketryck mot djup, kommunicerande kärl, U-rörsmanometer och hydraulisk press | 2D | [x] |
 | 6 | 7.4 Termofysikkens første lov | fy1-6.5 Termodynamikens huvudsatser | Gas i cylinder med kolv: värme in, arbete ut, Δ*U* = *Q* − *W* (tecken enligt teorin) med partiklar som rör sig | 2D eller 3D | [x] |
 | 7 | 7.5 Energikvalitet og termofysikkens andre lov | fy1-6.5 Termodynamikens huvudsatser | Varmt och kallt i kontakt: energin sprids men går aldrig tillbaka av sig själv; värmemaskinens maximala verkningsgrad | 2D | [x] |
-| 8 | 6.5 Strømninger i rør | saknas (nytt stoff för Fysiklabbet) | Kontinuitetsekvationen (smalare rör ger högre fart), eventuellt tryckfall/Bernoulli. **Kräver bokens innehåll först** | 2D | [ ] |
-| 9 | 1.1 Å tenke fysikk | fy1-1.1 Fysik som ämne | Storleksordningar: zooma från atom till universum, uppskatta och jämföra. **Stäm av vad boken tar upp** | 2D | [ ] |
-| 10 | 1.3 Formler | fy1-1.2 Storheter, enheter och prefix | Formelverkstad: dra i storheterna och se proportionalitet, enhetskontroll, lös ut en storhet. **Stäm av vad boken tar upp** | 2D | [ ] |
+| 8 | 6.5 Strømninger i rør | saknas (nytt stoff för Fysiklabbet) | Rör med förträngning: strömlinjer med partiklar, kontinuitet, Bernoulli (tryckrör som visar lägre tryck där farten är högre), och Reynolds försök med färgstrimma som går från laminär till turbulent strömning | 2D | [x] |
+| 9 | 1.1 Å tenke fysikk | fy1-1.1 Fysik som ämne | Den hypotetisk-deduktiva metoden: ställ en hypotes om ett försök (till exempel vad pendelns period beror på), pröva den och se flödesschemat i boken tändas steg för steg; falsifierbarhet och reproducerbarhet | 2D | [x] |
+| 10 | 1.3 Formler | fy1-1.2 Storheter, enheter och prefix | Formelverkstad: "snu formler" med operationer på båda sidor i bokens färger (grönt multiplicera, lila dividera, rött subtrahera, blått addera), formeltriangeln med fingret, enhetskontroll | 2D | [x] |
 
 ### Frågor till Sigbjørn innan nr 8–10 byggs
 
-- [ ] Vad tar 6.5 Strømninger i rør upp (kontinuitet, Bernoulli, viskositet)?
-- [ ] Vad tar 1.1 Å tenke fysikk och 1.3 Formler upp?
-- [ ] Bokens beteckningar för de storheter simuleringarna visar (för hans översättning)
+- [x] Vad tar 6.5 Strømninger i rør upp? Svar 2026-10-28: Bernoullis ekvation samt laminär och turbulent strömning. Delkapitlet ligger utanför boken som PDF (QR-kod), och han vill ha en animation som gör stoffet intuitivt.
+- [x] Vad tar 1.1 Å tenke fysikk och 1.3 Formler upp? Svar 2026-10-28 i bilagan "Hva de ulike kapitlene handler om" (kapitlens lärandemål). 1.3: formler och enheter, att snu formler och lösa ut en variabel som står inne i formeln.
+- [x] Bokens beteckningar: bilagan visar dem med färgkodning per kapitel (bland annat *G*, *N*, *R* som vektorer i kapitel 3, armen *r* i kapitel 4, ΔU = Q + W i kapitel 7). Fråga honom vid tveksamhet.
 
 ---
 
@@ -214,6 +214,43 @@ Tas när del 1 och 2 är klara.
 - [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn; testet `%TEMP%\pptr-test\kal-gissa.js`
 - [x] Fysikgranskning och språkgranskning, rättningarna införda (den riktiga kalorimeterns avvikelse åt båda hållen, allt eller en del av vattnet fryser, isen står på exakt 0 °C, c · m för båda kropparna i formelkortet, en mening om att blandningen visas långsamt, per kilogram och grad, tusental med hårt mellanslag, språkrättningar i återkopplingen och korten)
 - [x] Sam testar och godkänner (2026-10-27)
+- [x] Commit och push till `main` (9c105811)
+- [ ] Länken till Sigbjørn
+
+## Status: nr 10, Formelverkstaden (`fysik1-formelverkstaden-app.html`)
+
+- [x] Koncept (`koncept-10-formelverkstaden.md`): Sam bad 2026-10-29 att alla återstående simuleringar byggs här, så konceptet godkändes inte separat
+- [x] Algebramotorn med test: `node .claude/test-formel-motor.js` (källan i `formel-motor.js`; alla 54 utlösningar i 15 formler, felsvaren, enheterna)
+- [x] Sidan byggd: Verkstaden (operationer i bokens färger, op-rad och förenklad rad, tips, Visa lösningen, Kontrollen med exemplets värden, Gör bara i vänster led, Enhetskontrollen), Formeltriangeln med fingret, åtta färdiga försök, gissa-läge (Vilket uttryck är rätt?, Hitta felet)
+- [x] Inkopplad: `href` på fy1-1.2, `data/simuleringar.js`, `UPDATES`, `verify-navigation.js`
+- [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn; skärmdumpstestet `%TEMP%\pptr-test\formel-shot.js`
+- [x] Fysikgranskning och språkgranskning, rättningarna införda (kvadrera ett negativt led, realistiska teckenfel, talet 2 bland felsvaren, tal först i produkten, roten och tecknet, Kontrollen med tecken och enhet, mellanledet under roten, Hitta felet svårare, "addera till båda led")
+- [x] Ny språkregel `addera-bada-led` i `verify-sprak.js`; den hittade samma fel i `ma2c-2.4`, rättat
+- [ ] Sam testar och godkänner
+- [ ] Commit och push till `main`
+- [ ] Länken till Sigbjørn
+
+## Status: nr 9, Pröva en hypotes (`fysik1-hypotesprovet-app.html`)
+
+- [x] Koncept (`koncept-09-hypotesprovet.md`), byggt utan separat godkännande (se nr 10)
+- [x] Motorn med test: `node .claude/test-pendel-motor.js` (källan i `pendel-motor.js`; exakt period, RK4, mätning med reaktionstid och felmätningar, rättvisa par och 3σ)
+- [x] Sidan byggd: pendel på stativ med gradskiva och stoppur, flödesschemat (observation, hypotes, försök, stöds hypotesen?, styrks, lag eller teori efter flera försök), fyra hypoteser varav en inte går att pröva, mättabell där mätningar stryks, diagram med modellen, sex färdiga försök, gissa-läge (Förutsäg utfallet, Rättvist försök?)
+- [x] Inkopplad: `href` på fy1-1.1, `data/simuleringar.js`, `UPDATES`, `verify-navigation.js`
+- [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn; testet `%TEMP%\pptr-test\pendel-shot.js`
+- [x] Fysikgranskning och språkgranskning, rättningarna införda (lag först efter flera styrkta försök, tre utfall, texter ur elevens egna värden, felmätning mot mätosäkerhet, problemställning, falsifierbar, reproducerbar)
+- [ ] Sam testar och godkänner
+- [ ] Commit och push till `main`
+- [ ] Länken till Sigbjørn
+
+## Status: nr 8, Strömning i rör (`fysik1-stromning-app.html`)
+
+- [x] Koncept: röret med förträngning (kontinuitet, Bernoulli, standrör, vattenskivor, tryckstaplar, undertryck) och Reynolds försök (färgad tråd, Re-skala, hastighetsprofil, tryckfall), byggt utan separat godkännande (se nr 10)
+- [x] Motorn med test: `node .claude/test-stromning-motor.js` (källan i `stromning-motor.js`)
+- [x] Sidan byggd, med åtta färdiga försök och gissa-läge (Var är trycket lägst?, Laminärt eller turbulent?)
+- [x] Inkopplad: `href2` på fy1-5.3, `data/simuleringar.js` med egna namn och sökord för båda, `UPDATES`, `verify-navigation.js`
+- [x] Verifierare: navigation, no-white-outline, sök, sim-växlare, analytics, språk, mobil-scen, fs-btn; testet `%TEMP%\pptr-test\strom-shot.js`
+- [x] Fysikgranskning och språkgranskning, rättningarna införda (undertryck bara när trycket är under lufttrycket, höjden v²/(2g) vid standrören, punkterna heter 1, 2 och 3, modellens förenklingar och att verkligt vatten här är turbulent, riktvärden för Re, kritisk fart, ny gissningsuppgift där trycket i 2 räknas ut, formelkortet radbryts på mobilen, ritloopen utan React)
+- [ ] Sam testar och godkänner
 - [ ] Commit och push till `main`
 - [ ] Länken till Sigbjørn
 

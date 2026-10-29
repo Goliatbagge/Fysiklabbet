@@ -168,6 +168,17 @@ const REGLER = [
                   'hjul och berg- och dalbanor. (Besökarpåpekande 2026-08-31.)',
     },
     {
+        namn: 'addera-bada-led',
+        niva: 'fel',
+        // "Addera båda led" betyder att leden läggs ihop, vilket är fel
+        // matematik i ord. Rätt är "addera till båda led" och "subtrahera från
+        // båda led" (fångat i Formelverkstaden 2026-10-29). "Multiplicera
+        // båda led" och "dividera båda led" är rätt och berörs inte.
+        monster: /\b(?:addera|subtrahera)r?\s+båda\s+led(?:en)?\b/gi,
+        undantag: [],
+        rattelse: 'Skriv "addera till båda led" eller "subtrahera från båda led".',
+    },
+    {
         namn: 'nordpol-pa-magnet',
         niva: 'fel',
         // Magnetens ändar heter nordända och sydända; nordpol och sydpol är

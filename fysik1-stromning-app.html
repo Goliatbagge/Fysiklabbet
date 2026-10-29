@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strömning i rör — Fysiklabbet</title>
+    <meta name="description" content="Se med standrör, vattenskivor och tryckstaplar varför vattnet går fortare och trycket blir lägre där ett rör är smalt: kontinuitetsekvationen och Bernoullis ekvation. Släpp sedan ut färg i Reynolds försök och se strömningen gå från laminär till turbulent.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik1-stromning-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Strömning i rör — Fysik nivå 1">
+    <meta property="og:description" content="Se med standrör, vattenskivor och tryckstaplar varför vattnet går fortare och trycket blir lägre där ett rör är smalt: kontinuitetsekvationen och Bernoullis ekvation. Släpp sedan ut färg i Reynolds försök och se strömningen gå från laminär till turbulent.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik1-stromning-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Strömning i rör — Fysik nivå 1">
+    <meta name="twitter:description" content="Se med standrör, vattenskivor och tryckstaplar varför vattnet går fortare och trycket blir lägre där ett rör är smalt: kontinuitetsekvationen och Bernoullis ekvation. Släpp sedan ut färg i Reynolds försök och se strömningen gå från laminär till turbulent.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+        input[type="range"]:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1;
+                text-align: center; max-width: 150px; }
+        .fnum { color: var(--lab-ink); font-size: 20px; font-family: 'Poppins', sans-serif; }
+        .fnum-live { color: var(--lab-ink); font-size: 17px; font-family: 'Poppins', sans-serif; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 80px; }
+        .num-in { width: 50px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:disabled { opacity: 0.55; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* Scenen: en svg med egen proportion (1000 × 640). Mobilen (sektion 8 i
+           styles-laborans-sim.css) dockar verktygen under den. */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1000 / 640;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .handtag { cursor: grab; }
+        .handtag.drar { cursor: grabbing; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 34px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-start {
+            background: var(--lab-accent, #c8324a); color: #fff; border: 1px solid var(--lab-accent, #c8324a);
+            border-radius: 8px; padding: 9px 14px; font-weight: 700; cursor: pointer;
+        }
+        .btn-start:hover:not(:disabled) { filter: brightness(1.06); }
+        .btn-start:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .mode-seg { display: flex; gap: 0; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button {
+            flex: 1; padding: 8px 8px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .mode-seg button:last-child { border-right: none; }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+
+        /* Färdiga försök */
+        .forsok-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .forsok {
+            text-align: left; padding: 7px 9px; border-radius: 8px; cursor: pointer;
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; font-weight: 600; color: var(--lab-ink, #0f1620); line-height: 1.25;
+        }
+        .forsok .sub { display: block; font-size: 11.5px; font-weight: 400; color: var(--lab-ink-soft, #3a4151); }
+        .forsok:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .forsok:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* Avläsning */
+        .avl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
+        .avl .v { font-weight: 700; font-size: 16px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+        .avl .l { font-size: 11.5px; color: var(--lab-ink-muted, #5a6170); }
+
+        /* Resultatrutan efter ett försök */
+        .resultat { border-left: 4px solid var(--lab-accent, #c8324a); }
+        .resultat.ratt { border-left-color: #15803d; }
+
+        /* Gissa-läget */
+        .gissa-in { width: 90px; padding: 6px 8px; border-radius: 7px; font-size: 15px;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                    background: #fff; font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .gissa-in:focus { outline: none; border-color: var(--lab-accent, #c8324a); }
+        .kort3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .kort3 button {
+            padding: 8px 6px; border-radius: 8px; cursor: pointer; text-align: center;
+            background: var(--lab-bg, #f3eee4); border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            font-size: 13px; line-height: 1.45; color: var(--lab-ink, #0f1620);
+        }
+        .kort3 button:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .kort3 button.vald { border-color: var(--lab-ink, #0f1620); box-shadow: 0 0 0 2px rgba(15,22,32,0.15); }
+        .kort3 button.basta { background: rgba(21,128,61,0.10); border-color: #15803d; }
+        .kort3 .bok { font-weight: 700; font-size: 15px; display: block; margin-bottom: 2px; }
+        .kort3 .stapel { height: 6px; border-radius: 3px; background: #d4930f; margin-top: 5px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+        /* Formelkortet ryms på en telefon: tätare rad och mindre etiketter */
+        @media (max-width: 480px) {
+            .fk-rader > div { column-gap: 6px !important; }
+            .fk-rader .flbl { font-size: 9px; letter-spacing: 0.02em; }
+        }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script id="stromning-motor">
+// Motorn för Strömning i rör (fysik1-stromning-app.html).
+// Källan ligger här och klistras in oförändrad i sidan; testet
+// .claude/test-stromning-motor.js kontrollerar fysiken och att kopian är identisk.
+//
+// Två delar:
+// 1. Ett rör med en förträngning och en höjdändring, med en ideal vätska
+//    (ingen viskositet). Kontinuitetsekvationen A · v = Q ger farten, och
+//    Bernoullis ekvation p + ρ · v²/2 + ρ · g · h = konstant ger trycket.
+//    Rörets mittlinje ligger på höjden h(x) och dess diameter är d(x).
+// 2. Ett rakt rör med en verklig vätska. Reynolds tal Re = ρ · v · d / η
+//    avgör om strömningen är laminär eller turbulent. Tryckfallet per
+//    meter räknas med Hagen–Poiseuille (laminärt) eller Blasius (turbulent),
+//    och hastighetsprofilen är en parabel respektive en sjundedelspotens.
+(function () {
+    const G = 9.82;
+    const RHO_V = 998;               // kg/m³, vatten
+    const P_ATM = 101300;            // Pa
+    const RE_LAM = 2300, RE_TURB = 4000;
+
+    const VATSKOR = {
+        vatten:  { namn: 'Vatten',   rho: 998,  eta: 1.0e-3 },
+        mjolk:   { namn: 'Mjölk',    rho: 1030, eta: 2.0e-3 },
+        olja:    { namn: 'Matolja',  rho: 920,  eta: 0.065 },
+        glycerol:{ namn: 'Glycerol', rho: 1260, eta: 1.41 },
+    };
+
+    // ── Del 1: röret med förträngning ──────────────────────────
+    // geom: { L (m), d1, d2 (m), h (m) }. Förträngningen ligger mitt på
+    // röret och höjdändringen i sista tredjedelen; övergångarna är mjuka.
+    const mjuk = (u) => (u <= 0 ? 0 : u >= 1 ? 1 : 0.5 - 0.5 * Math.cos(Math.PI * u));
+    function diameter(g, x) {
+        const u = x / g.L;
+        // in i förträngningen mellan 0,28 och 0,40, ut mellan 0,50 och 0,62
+        const k = mjuk((u - 0.28) / 0.12) * (1 - mjuk((u - 0.50) / 0.12));
+        return g.d1 + (g.d2 - g.d1) * k;
+    }
+    function hojd(g, x) { return g.h * mjuk((x / g.L - 0.70) / 0.12); }
+    const area = (d) => Math.PI * d * d / 4;
+    // farten och trycket i en punkt; p1 är trycket (absolut) vid inloppet
+    function punkt(g, Q, p1, x) {
+        const d = diameter(g, x), v = Q / area(d), h = hojd(g, x);
+        const v1 = Q / area(g.d1);
+        const p = p1 + RHO_V * (v1 * v1 - v * v) / 2 + RHO_V * G * (0 - h);
+        return { x, d, A: area(d), v, h, p, dyn: RHO_V * v * v / 2, lage: RHO_V * G * h };
+    }
+    // mätpunkterna A (inloppet), B (förträngningen) och C (efter höjdändringen)
+    const PUNKTER = { A: 0.12, B: 0.45, C: 0.90 };
+
+    // ── Del 2: Reynolds tal, tryckfall och hastighetsprofil ────
+    const reynolds = (rho, v, d, eta) => rho * v * d / eta;
+    function regim(Re) {
+        if (Re < RE_LAM) return 'laminar';
+        if (Re < RE_TURB) return 'overgang';
+        return 'turbulent';
+    }
+    // hur turbulent, 0 till 1 (för bilden)
+    const turbulens = (Re) => Math.max(0, Math.min(1, (Re - RE_LAM) / (RE_TURB - RE_LAM)));
+    // Darcy friktionsfaktor och tryckfall per meter
+    function friktion(Re) {
+        const fl = 64 / Math.max(Re, 1e-9);
+        const ft = 0.316 * Math.pow(Math.max(Re, 1), -0.25);
+        const s = turbulens(Re);
+        return fl * (1 - s) + ft * s;
+    }
+    const tryckfall = (rho, v, d, eta) => friktion(reynolds(rho, v, d, eta)) * rho * v * v / (2 * d);
+    // hastighet på avståndet r från mitten, relativt medelfarten (r/R från 0 till 1)
+    function profil(rr, Re) {
+        const lam = 2 * (1 - rr * rr);
+        const turb = (60 / 49) * Math.pow(Math.max(0, 1 - rr), 1 / 7);
+        const s = turbulens(Re);
+        return lam * (1 - s) + turb * s;
+    }
+
+    const ut = { G, RHO_V, P_ATM, RE_LAM, RE_TURB, VATSKOR, mjuk, diameter, hojd, area, punkt, PUNKTER,
+                 reynolds, regim, turbulens, friktion, tryckfall, profil };
+    if (typeof window !== 'undefined') window.StromningMotor = ut;
+    if (typeof module !== 'undefined') module.exports = ut;
+})();
+</script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+        const M = window.StromningMotor;
+
+        // ── Talformat: decimalkomma, äkta minustecken, exakt noll som "0", hårt mellanslag i tusental ──
+        const fmt = (num, d = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [hel, dec] = s.replace('-', '').split('.');
+            const grupper = hel.length > 3 ? hel.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : hel;
+            return (num < 0 ? '−' : '') + grupper + (dec !== undefined ? ',' + dec : '');
+        };
+        // Re med två värdesiffror, som indata (7 480 blir 7 500)
+        const fmtRe = (Re) => { if (Re < 100) return fmt(Re, 0); const k = Math.pow(10, Math.floor(Math.log10(Re)) - 1); return fmt(Math.round(Re / k) * k, 0); };
+        // punkterna heter 1, 2 och 3 på sidan; A används för arean
+        const PN = { A: '1', B: '2', C: '3' };
+        const fmtEta = (eta) => (eta < 0.01 ? fmt(eta, 4) : eta < 1 ? fmt(eta, 3) : fmt(eta, 2));
+        const Brak = ({ t, n }) => (
+            <span style={{ display: 'inline-flex', flexDirection: 'column', verticalAlign: 'middle', textAlign: 'center', lineHeight: 1.05, fontSize: '0.92em', margin: '0 3px' }}>
+                <span style={{ padding: '0 2px 1px' }}>{t}</span>
+                <span style={{ padding: '1px 2px 0', borderTop: '1.5px solid currentColor' }}>{n}</span>
+            </span>
+        );
+        const Sub = ({ s, i }) => <span><em>{s}</em><sub>{i}</sub></span>;
+        const Vbl = ({ label, children, ned }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl" style={{ visibility: ned ? 'hidden' : 'visible' }}>{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" style={{ visibility: ned ? 'visible' : 'hidden' }}>{label}</span>
+            </div>
+        );
+
+        const FARG = { tryck: '#1d4ed8', dyn: '#d97706', lage: '#15803d', vatten: '#7cc0ea', glas: '#0f1620' };
+        const REGIMNAMN = { laminar: 'Laminär', overgang: 'Övergång', turbulent: 'Turbulent' };
+        const REGIMTEXT = { laminar: 'Laminär strömning', overgang: 'Strömning i övergångsområdet', turbulent: 'Turbulent strömning' };
+        const REGIMFARG = { laminar: '#15803d', overgang: '#b45309', turbulent: '#c8324a' };
+
+        // ════════════════════════════════════════════════════════
+        //  RÖRET MED FÖRTRÄNGNING (Bernoulli)
+        // ════════════════════════════════════════════════════════
+        const VB_W = 1000, VB_H = 640;
+        const B = { x0: 50, x1: 950, yc: 410, ds: 3600, hs: 500, L: 1.2, d1: 0.030 };
+        const Xs = (x) => B.x0 + (B.x1 - B.x0) * x / B.L;
+        const geomAv = (p) => ({ L: B.L, d1: B.d1, d2: p.d2 / 1000, h: p.h });
+        const SLAPP = 0.25;                     // tidslupp: rörelsen visas i en fjärdedels fart
+
+        function BernoulliScen({ par, rorligRef, visaStaplar, dolj }) {
+            const g = geomAv(par), Q = par.Q / 1000, p1 = M.P_ATM + par.p1 * 1000;
+            const Yc = (x) => B.yc - B.hs * M.hojd(g, x);
+            const R = (x) => M.diameter(g, x) * B.ds / 2;
+            const N = 120;
+            const ovre = [], undre = [];
+            for (let i = 0; i <= N; i++) { const x = B.L * i / N; ovre.push(`${Xs(x).toFixed(1)},${(Yc(x) - R(x)).toFixed(1)}`); undre.push(`${Xs(x).toFixed(1)},${(Yc(x) + R(x)).toFixed(1)}`); }
+            const vatten = `M ${ovre.join(' L ')} L ${undre.slice().reverse().join(' L ')} Z`;
+            const H = (p1 - M.P_ATM) / (M.RHO_V * M.G) + Math.pow(Q / M.area(B.d1), 2) / (2 * M.G);   // stillastående nivå över inloppets mittlinje
+            const yE = B.yc - B.hs * H;
+            const pts = Object.entries(M.PUNKTER).map(([n, u]) => ({ n, ...M.punkt(g, Q, p1, B.L * u) }));
+            const maxTot = Math.max(...pts.map((P) => (P.p - M.P_ATM) + P.dyn + P.lage), 1);
+            const minNeg = Math.min(0, ...pts.map((P) => P.p - M.P_ATM));
+            const kPa = 112 / (maxTot - minNeg);  // px per Pa i staplarna, undertrycket inräknat
+            const NOLL = 500 + kPa * maxTot;      // nollinjen
+            return (
+                <svg viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <linearGradient id="glas" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#a5d8f5" /><stop offset="0.5" stopColor="#7cc0ea" /><stop offset="1" stopColor="#5aa7d8" /></linearGradient>
+                    </defs>
+                    {/* den stillastående nivån */}
+                    <line x1={B.x0} y1={yE} x2={B.x1} y2={yE} stroke="#5a6170" strokeWidth="1.3" strokeDasharray="7 5" />
+                    <text x={Xs(B.L * M.PUNKTER.B) + 24} y={yE - 8} fontSize="13" fill="#5a6170" fontFamily="'DM Sans', sans-serif">energinivån: så högt når vattnet i ett rör som vänds mot strömmen</text>
+                    {/* standrören */}
+                    {pts.map((P) => {
+                        const x = Xs(P.x), top = Yc(P.x) - R(P.x);
+                        // röret är ritat tjockare än det är, så en låg pelare kan hamna under den ritade kanten
+                        const under = P.p < M.P_ATM;
+                        const nivå = Math.min(Yc(P.x) - B.hs * (P.p - M.P_ATM) / (M.RHO_V * M.G), top - 3);
+                        return (
+                            <g key={P.n}>
+                                <rect x={x - 8} y={44} width="16" height={top - 44 + 2} fill="rgba(255,255,255,0.6)" stroke={FARG.glas} strokeWidth="1.3" />
+                                {!dolj && !under && <rect x={x - 6.5} y={nivå} width="13" height={top - nivå + 2} fill="url(#glas)" />}
+                                {!dolj && !under && <line x1={x - 6.5} y1={nivå} x2={x + 6.5} y2={nivå} stroke="#1d4ed8" strokeWidth="1.5" />}
+                                {!dolj && !under && yE < nivå - 6 && (
+                                    <g stroke={FARG.dyn} strokeWidth="1.4" fill="none">
+                                        <line x1={x + 16} y1={yE} x2={x + 16} y2={nivå} />
+                                        <line x1={x + 12} y1={yE} x2={x + 20} y2={yE} /><line x1={x + 12} y1={nivå} x2={x + 20} y2={nivå} />
+                                    </g>
+                                )}
+                                {!dolj && !under && yE < nivå - 30 && (
+                                    <g fill={FARG.dyn} fontFamily="'STIX Two Text', 'Cambria Math', serif" fontSize="14">
+                                        <text x={x + 34} y={(yE + nivå) / 2 - 3} textAnchor="middle"><tspan fontStyle="italic">v</tspan><tspan fontSize="9" dy="-6">2</tspan></text>
+                                        <line x1={x + 24} y1={(yE + nivå) / 2} x2={x + 44} y2={(yE + nivå) / 2} stroke={FARG.dyn} strokeWidth="1.1" />
+                                        <text x={x + 34} y={(yE + nivå) / 2 + 13} textAnchor="middle">2<tspan fontStyle="italic">g</tspan></text>
+                                    </g>
+                                )}
+                                {!dolj && under && (
+                                    <g>
+                                        {[0, 1, 2].map((k) => <circle key={k} cx={x + (k - 1) * 3} cy={top + 6 + k * 7} r="2.6" fill="#fff" stroke="#1d4ed8" strokeWidth="1" />)}
+                                        <text x={x} y={36} fontSize="12.5" textAnchor="middle" fill="#c8324a" fontWeight="700" fontFamily="'DM Sans', sans-serif">undertryck</text>
+                                    </g>
+                                )}
+                                <text x={x - 14} y={60} fontSize="16" textAnchor="end" fontWeight="700" fill="#0f1620" fontFamily="'DM Sans', sans-serif">{PN[P.n]}</text>
+                            </g>
+                        );
+                    })}
+                    {/* röret */}
+                    <path d={vatten} fill="url(#glas)" />
+                    {/* vattenskivorna och partiklarna ritas av ritloopen, utan React */}
+                    <g ref={rorligRef} />
+                    <polyline points={ovre.join(' ')} fill="none" stroke={FARG.glas} strokeWidth="2.4" />
+                    <polyline points={undre.join(' ')} fill="none" stroke={FARG.glas} strokeWidth="2.4" />
+                    {/* farten i varje mätpunkt */}
+                    {pts.map((P) => (
+                        <text key={P.n} x={Xs(P.x)} y={Yc(P.x) + R(P.x) + 20} fontSize="14" textAnchor="middle" fill="#0f1620" fontFamily="'DM Sans', sans-serif">
+                            <tspan fontStyle="italic">v</tspan> = {dolj ? '?' : `${fmt(P.v, 2)} m/s`}
+                        </text>
+                    ))}
+                    {/* staplarna: tryck, ρv²/2 och ρgh i varje punkt */}
+                    {visaStaplar && !dolj && (
+                        <g fontFamily="'DM Sans', sans-serif">
+                            <line x1={B.x0} y1={NOLL} x2={B.x1} y2={NOLL} stroke="#0f1620" strokeWidth="1" />
+                            <text x={B.x0} y={NOLL - 4} fontSize="11" fill="#5a6170">lufttrycket</text>
+                            <line x1={B.x0} y1={NOLL - kPa * maxTot} x2={B.x1} y2={NOLL - kPa * maxTot} stroke="#5a6170" strokeDasharray="4 4" strokeWidth="1" />
+                            {pts.map((P) => {
+                                const x = Xs(P.x) - 22, w = 14;
+                                const pg = P.p - M.P_ATM;
+                                const y0 = NOLL, y1 = y0 - kPa * pg, y2 = y1 - kPa * P.dyn, y3 = y2 - kPa * P.lage;
+                                return (
+                                    <g key={P.n}>
+                                        <rect x={x} y={Math.min(y0, y1)} width={w} height={Math.abs(y1 - y0)} fill={FARG.tryck} />
+                                        <rect x={x + w + 1} y={Math.min(y1, y2)} width={w} height={Math.max(1, Math.abs(y2 - y1))} fill={FARG.dyn} />
+                                        <rect x={x + 2 * w + 2} y={Math.min(y2, y3)} width={w} height={Math.max(1, Math.abs(y3 - y2))} fill={FARG.lage} />
+                                        <line x1={x} y1={y1} x2={x + 2 * w + 1} y2={y1} stroke="#0f1620" strokeWidth="0.8" strokeDasharray="2 2" />
+                                        <line x1={x + w + 1} y1={y2} x2={x + 3 * w + 2} y2={y2} stroke="#0f1620" strokeWidth="0.8" strokeDasharray="2 2" />
+                                        <text x={x + 3 * w + 8} y={pg >= 0 ? Math.min(y0, y1) + 12 : y1 + 2} fontSize="12" fill={FARG.tryck}>{fmt(pg / 1000, 2)} kPa</text>
+                                    </g>
+                                );
+                            })}
+                            <text x={B.x0 + 80} y={634} fontSize="12" fill="#5a6170">
+                                <tspan fill={FARG.tryck} fontWeight="700">■</tspan> övertryck <tspan fontStyle="italic">p</tspan>
+                                <tspan dx="14" fill={FARG.dyn} fontWeight="700">■</tspan> ½ · <tspan fontStyle="italic">ρ</tspan> · <tspan fontStyle="italic">v</tspan><tspan fontSize="8" dy="-5">2</tspan><tspan dy="5"> </tspan>
+                                <tspan dx="14" fill={FARG.lage} fontWeight="700">■</tspan> <tspan fontStyle="italic">ρ</tspan> · <tspan fontStyle="italic">g</tspan> · <tspan fontStyle="italic">h</tspan>
+                                <tspan dx="14">tillsammans når de upp till den streckade linjen i 1, 2 och 3</tspan>
+                            </text>
+                        </g>
+                    )}
+                </svg>
+            );
+        }
+
+        // Det rörliga i röret: vattenskivorna (lika stor volym i varje) och
+        // partiklarna. De skrivs direkt i en <g> varje bild, så att React bara
+        // ritar om scenen när reglagen ändras.
+        function BernoulliLive(props) {
+            const gRef = useRef(null);
+            const markRef = useRef([]);
+            const dotsRef = useRef(null);
+            const live = useRef(props);
+            live.current = props;
+            if (!dotsRef.current) { dotsRef.current = []; for (let i = 0; i < 70; i++) dotsRef.current.push({ x: Math.random() * B.L, r: -1 + 2 * ((i * 0.618) % 1) }); }
+            useEffect(() => {
+                let raf, last = null, sist = 0, syns = true;
+                const io = window.IntersectionObserver ? new IntersectionObserver((e) => { syns = e[0].isIntersecting; }) : null;
+                if (io && gRef.current) io.observe(gRef.current.ownerSVGElement);
+                const loop = (ts) => {
+                    if (last == null) last = ts;
+                    const dt = Math.min((ts - last) / 1000, 0.05);
+                    last = ts;
+                    const L = live.current, g = geomAv(L.par), Q = L.par.Q / 1000;
+                    const fart = (x) => Q / M.area(M.diameter(g, Math.max(0, Math.min(B.L, x)))) * SLAPP;
+                    // markörerna för vattenskivorna: en ny när den senaste har hunnit en skivbredd in
+                    const m = markRef.current;
+                    for (let i = 0; i < m.length; i++) m[i] += fart(m[i]) * dt;
+                    while (m.length && m[0] > B.L + 0.05) m.shift();
+                    if (!m.length || m[m.length - 1] >= 0) m.push((m.length ? m[m.length - 1] : B.L) - 0.045);
+                    for (const d of dotsRef.current) { d.x += fart(d.x) * dt; if (d.x > B.L) d.x -= B.L; }
+                    // trettio bilder i sekunden räcker för vattnet
+                    if (syns && gRef.current && ts - sist > 32) {
+                        sist = ts;
+                        const Yc = (x) => B.yc - B.hs * M.hojd(g, x), R = (x) => M.diameter(g, x) * B.ds / 2;
+                        let s = '';
+                        if (L.visaSkivor) for (let i = 0; i + 1 < m.length; i += 2) {
+                            const a = Math.max(0, m[i + 1]), b = Math.min(B.L, m[i]);
+                            if (b <= a) continue;
+                            const o = [], u = [];
+                            for (let k = 0; k <= 8; k++) { const x = a + (b - a) * k / 8; o.push(`${Xs(x).toFixed(1)},${(Yc(x) - R(x)).toFixed(1)}`); u.push(`${Xs(x).toFixed(1)},${(Yc(x) + R(x)).toFixed(1)}`); }
+                            s += `<path d="M ${o.join(' L ')} L ${u.reverse().join(' L ')} Z" fill="rgba(29,78,216,0.22)"/>`;
+                        }
+                        if (L.visaDots) for (const d of dotsRef.current) s += `<circle cx="${Xs(d.x).toFixed(1)}" cy="${(Yc(d.x) + d.r * R(d.x) * 0.86).toFixed(1)}" r="2.4" fill="#0b3a63" opacity="0.75"/>`;
+                        gRef.current.innerHTML = s;
+                    }
+                    raf = requestAnimationFrame(loop);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => { cancelAnimationFrame(raf); if (io) io.disconnect(); };
+            }, []);
+            return <BernoulliScen par={props.par} visaStaplar={props.visaStaplar} dolj={props.dolj} rorligRef={gRef} />;
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  REYNOLDS FÖRSÖK
+        // ════════════════════════════════════════════════════════
+        const RY = { x0: 60, x1: 940, yc: 230, noz: 120, prof: 820 };
+        const radiePx = (dmm) => 26 + dmm * 2.2;
+        const visFart = (v) => 40 + 260 * v / (v + 0.4);        // px/s för medelfarten i bilden
+        const logX = (Re) => 80 + (920 - 80) * (Math.log10(Math.max(10, Math.min(1e5, Re))) - 1) / 4;
+
+        function ReynoldsScen({ par, Re, visaProfil, dolj }) {
+            const Rp = radiePx(par.d);
+            const top = RY.yc - Rp, bot = RY.yc + Rp;
+            const pil = [];
+            if (visaProfil && !dolj) {
+                const umax = Math.max(...[0, 0.2, 0.4, 0.6, 0.8, 0.95].map((r) => M.profil(r, Re)));
+                for (let k = -6; k <= 6; k++) {
+                    const rr = Math.abs(k) / 6.6, y = RY.yc + (k / 6.6) * Rp;
+                    const len = 90 * M.profil(rr, Re) / umax;
+                    pil.push(<g key={k}><line x1={RY.prof} y1={y} x2={RY.prof + len - 7} y2={y} stroke="#0f1620" strokeWidth="1.4" /><polygon points={`${RY.prof + len},${y} ${RY.prof + len - 8},${y - 3.5} ${RY.prof + len - 8},${y + 3.5}`} fill="#0f1620" /></g>);
+                }
+                const kurva = [];
+                for (let i = 0; i <= 60; i++) { const s = -1 + 2 * i / 60; kurva.push(`${(RY.prof + 90 * M.profil(Math.abs(s), Re) / umax).toFixed(1)},${(RY.yc + s * Rp).toFixed(1)}`); }
+                pil.push(<polyline key="k" points={kurva.join(' ')} fill="none" stroke="#c8324a" strokeWidth="1.6" />);
+                pil.push(<line key="l" x1={RY.prof} y1={top} x2={RY.prof} y2={bot} stroke="#0f1620" strokeWidth="1" />);
+            }
+            const reg = M.regim(Re);
+            return (
+                <svg viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="xMidYMid meet" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
+                    <defs><linearGradient id="vatsk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor={{ vatten: '#cde9f8', mjolk: '#fbf8f0', olja: '#f4e3a4', glycerol: '#eef3f6' }[par.vatska]} /><stop offset="1" stopColor={{ vatten: '#a9d6f1', mjolk: '#efe9dc', olja: '#e7c86a', glycerol: '#dde6ec' }[par.vatska]} /></linearGradient></defs>
+                    {/* behållaren och kranen */}
+                    <rect x={RY.x0 - 40} y={top - 30} width="40" height={2 * Rp + 60} rx="4" fill="url(#vatsk)" stroke="#0f1620" strokeWidth="2" />
+                    <rect x={RY.x0} y={top} width={RY.x1 - RY.x0} height={2 * Rp} fill="url(#vatsk)" />
+                    <line x1={RY.x0} y1={top} x2={RY.x1} y2={top} stroke="#0f1620" strokeWidth="2.4" />
+                    <line x1={RY.x0} y1={bot} x2={RY.x1} y2={bot} stroke="#0f1620" strokeWidth="2.4" />
+                    {/* färgmunstycket */}
+                    <path d={`M ${RY.noz - 4} ${top - 60} L ${RY.noz - 4} ${RY.yc - 3} L ${RY.noz + 10} ${RY.yc - 3} L ${RY.noz + 10} ${RY.yc + 1} L ${RY.noz + 4} ${RY.yc + 1} L ${RY.noz + 4} ${top - 60}`} fill="#6b7280" stroke="#0f1620" strokeWidth="1" />
+                    <rect x={RY.noz - 14} y={top - 92} width="28" height="34" rx="4" fill="#1e3a8a" stroke="#0f1620" strokeWidth="1.4" />
+                    <text x={RY.noz + 22} y={top - 70} fontSize="13" fill="#0f1620" fontFamily="'DM Sans', sans-serif">färg</text>
+                    {pil}
+                    {/* diametern */}
+                    <g stroke="#0f766e" strokeWidth="1.3">
+                        <line x1={RY.x1 + 18} y1={top} x2={RY.x1 + 18} y2={bot} />
+                        <line x1={RY.x1 + 12} y1={top} x2={RY.x1 + 24} y2={top} /><line x1={RY.x1 + 12} y1={bot} x2={RY.x1 + 24} y2={bot} />
+                    </g>
+                    <text x={RY.x1 + 18} y={bot + 22} fontSize="14" textAnchor="middle" fill="#0f766e" fontFamily="'DM Sans', sans-serif"><tspan fontStyle="italic">d</tspan> = {fmt(par.d, 0)} mm</text>
+                    {/* Reynolds tal på en skala */}
+                    <g fontFamily="'DM Sans', sans-serif">
+                        <rect x={logX(10)} y={548} width={logX(M.RE_LAM) - logX(10)} height="16" fill="rgba(21,128,61,0.35)" />
+                        <rect x={logX(M.RE_LAM)} y={548} width={logX(M.RE_TURB) - logX(M.RE_LAM)} height="16" fill="rgba(180,83,9,0.40)" />
+                        <rect x={logX(M.RE_TURB)} y={548} width={logX(1e5) - logX(M.RE_TURB)} height="16" fill="rgba(200,50,74,0.35)" />
+                        <text x={(logX(10) + logX(M.RE_LAM)) / 2} y={541} fontSize="13" textAnchor="middle" fill="#15803d" fontWeight="700">laminär</text>
+                        <text x={(logX(M.RE_LAM) + logX(M.RE_TURB)) / 2} y={541} fontSize="13" textAnchor="middle" fill="#b45309" fontWeight="700">övergång</text>
+                        <text x={(logX(M.RE_TURB) + logX(1e5)) / 2} y={541} fontSize="13" textAnchor="middle" fill="#c8324a" fontWeight="700">turbulent</text>
+                        {[10, 100, 1000, 10000, 100000].map((v) => <g key={v}><line x1={logX(v)} y1={564} x2={logX(v)} y2={571} stroke="#0f1620" /><text x={logX(v)} y={588} fontSize="12" textAnchor="middle" fill="#0f1620">{fmt(v, 0)}</text></g>)}
+                        {[2300, 4000].map((v) => <text key={v} x={logX(v)} y={604} fontSize="11.5" textAnchor="middle" fill="#5a6170">{fmt(v, 0)}</text>)}
+                        <text x={80} y={524} fontSize="12" fontWeight="700" letterSpacing="0.06em" fill="#5a6170">REYNOLDS TAL</text>
+                        {!dolj && <polygon points={`${logX(Re)},546 ${logX(Re) - 8},532 ${logX(Re) + 8},532`} fill="#0f1620" />}
+                        {!dolj && <text x={Math.min(870, Math.max(130, logX(Re)))} y={512} fontSize="16" textAnchor="middle" fill="#0f1620" fontWeight="700">Re = {fmtRe(Re)}</text>}
+                    </g>
+                    {!dolj && (
+                        <text x={RY.x0} y={bot + 48} fontSize="17" fontWeight="700" fill={REGIMFARG[reg]} fontFamily="'DM Sans', sans-serif">{REGIMTEXT[reg]}</text>
+                    )}
+                </svg>
+            );
+        }
+        // färgen ritas på en canvas ovanpå svg:n, utan att React ritar om
+        function ritaFarg(cv, partiklar, par) {
+            const ctx = cv.getContext('2d');
+            const r = cv.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            const W = Math.round(r.width * dpr), Hh = Math.round(r.height * dpr);
+            if (cv.width !== W || cv.height !== Hh) { cv.width = W; cv.height = Hh; }
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, W, Hh);
+            // samma "meet"-skala som svg:n
+            const s = Math.min(W / VB_W, Hh / VB_H), ox = (W - VB_W * s) / 2, oy = (Hh - VB_H * s) / 2;
+            ctx.setTransform(s, 0, 0, s, ox, oy);
+            const Rp = radiePx(par.d);
+            ctx.fillStyle = 'rgba(30,58,138,0.55)';
+            for (const p of partiklar) {
+                ctx.beginPath();
+                ctx.arc(p.x, RY.yc + p.y * Rp, 2.6, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  REGLAGE, FÄRDIGA FÖRSÖK OCH GISSA-LÄGET
+        // ════════════════════════════════════════════════════════
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, disabled }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').replace('−', '-').trim();
+                if (norm === '' || norm === '-' || norm === '.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt} disabled={disabled} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)} onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }} onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+        const Slider = ({ label, value, min, max, step, onChange, disabled, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 104, color: 'var(--lab-ink-soft)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled} onChange={(e) => onChange(parseFloat(e.target.value))} className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, disabled, valueNode }) => (
+            <div className="st-slider">
+                <div className="st-slider-top"><span dangerouslySetInnerHTML={{ __html: label }} />{valueNode}</div>
+                <input type="range" min={min} max={max} step={step} value={value} disabled={disabled} onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        const FORSOK = [
+            { id: 'smal', namn: 'Smalare rör, högre fart', sub: 'halva diametern i 2', lage: 'bernoulli', p: { Q: 0.30, d2: 15, h: 0, p1: 5 } },
+            { id: 'sug', namn: 'Mycket smalt: undertryck', sub: 'luft sugs in i 2', lage: 'bernoulli', p: { Q: 0.45, d2: 11, h: 0, p1: 3 } },
+            { id: 'upp', namn: 'Röret går uppför', sub: 'samma diameter, 0,30 m högre', lage: 'bernoulli', p: { Q: 0.30, d2: 30, h: 0.3, p1: 5 } },
+            { id: 'rakt', namn: 'Samma diameter hela vägen', sub: 'trycket är lika överallt', lage: 'bernoulli', p: { Q: 0.30, d2: 30, h: 0, p1: 5 } },
+            { id: 'droppar', namn: 'Kranen nästan stängd', sub: 'vatten, 5 cm/s i 10 mm', lage: 'reynolds', r: { vatska: 'vatten', v: 0.05, d: 10 } },
+            { id: 'oppen', namn: 'Kranen öppen', sub: 'vatten, 0,5 m/s i 15 mm', lage: 'reynolds', r: { vatska: 'vatten', v: 0.5, d: 15 } },
+            { id: 'olja', namn: 'Matolja i samma rör', sub: 'samma fart, mycket mer trögflytande', lage: 'reynolds', r: { vatska: 'olja', v: 0.5, d: 15 } },
+            { id: 'grans', namn: 'Precis vid gränsen', sub: 'vatten, Re ungefär 2 300', lage: 'reynolds', r: { vatska: 'vatten', v: 0.15, d: 15 } },
+        ];
+        const slump = (a) => a[Math.floor(Math.random() * a.length)];
+        function nyLagst() {
+            for (let i = 0; i < 100; i++) {
+                const p = { Q: slump([0.2, 0.3, 0.4]), d2: slump([12, 15, 20, 30]), h: slump([0, 0, 0.1, 0.25]), p1: 5 };
+                const g = geomAv(p), Q = p.Q / 1000, p1 = M.P_ATM + 5000;
+                const pts = Object.entries(M.PUNKTER).map(([n, u]) => ({ n, p: M.punkt(g, Q, p1, B.L * u).p }));
+                pts.sort((a, b) => a.p - b.p);
+                if (pts[1].p - pts[0].p < 150) continue;        // tydligt lägst
+                if (p.d2 === 30 && p.h === 0) continue;
+                return { typ: 'lagst', p, svar: pts[0].n };
+            }
+        }
+        // räkna ut övertrycket i punkt 2 ur kontinuiteten och Bernoulli (röret vågrätt)
+        function nyTryck() {
+            const p = { Q: slump([0.2, 0.25, 0.3, 0.35]), d2: slump([15, 18, 20]), h: 0, p1: slump([4, 5, 6]) };
+            const g = geomAv(p), Q = p.Q / 1000;
+            const P = M.punkt(g, Q, M.P_ATM + p.p1 * 1000, B.L * M.PUNKTER.B), A1 = M.punkt(g, Q, M.P_ATM + p.p1 * 1000, B.L * M.PUNKTER.A);
+            return { typ: 'tryck', p, svar: (P.p - M.P_ATM) / 1000, v1: A1.v, v2: P.v };
+        }
+        function nyRegim() {
+            const vatska = slump(['vatten', 'vatten', 'mjolk', 'olja']);
+            const d = slump([10, 15, 20, 25]);
+            const v = vatska === 'olja' ? slump([0.5, 1, 2, 4]) : slump([0.05, 0.1, 0.2, 0.4, 0.8]);
+            const V = M.VATSKOR[vatska];
+            const Re = M.reynolds(V.rho, v, d / 1000, V.eta);
+            return { typ: 'regim', r: { vatska, v, d }, svar: M.regim(Re), Re };
+        }
+
+        // ════════════════════════════════════════════════════════
+        //  HUVUDAPP
+        // ════════════════════════════════════════════════════════
+        const App = () => {
+            const q = new URLSearchParams(location.search).get('lage');
+            const [lage, setLage] = useState(q === 'reynolds' ? 'reynolds' : 'bernoulli');
+            const [bp, setBp] = useState({ Q: 0.30, d2: 15, h: 0, p1: 5 });
+            const [rp, setRp] = useState({ vatska: 'vatten', v: 0.10, d: 15 });
+            const [visaSkivor, setVisaSkivor] = useState(true);
+            const [visaDots, setVisaDots] = useState(true);
+            const [visaStaplar, setVisaStaplar] = useState(true);
+            const [visaProfil, setVisaProfil] = useState(true);
+            const [togglesOpen, setTogglesOpen] = useState(false);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [gissa, setGissa] = useState(null);
+            const [gSvar, setGSvar] = useState(null);
+            const [svarTxt, setSvarTxt] = useState('');
+            const [poang, setPoang] = useState({ ratt: 0, totalt: 0, svit: 0 });
+            const sceneWrapRef = useRef(null);
+            const canvasRef = useRef(null);
+            const fargRef = useRef([]);
+            const lastRef = useRef(null);
+            const live = useRef({});
+            const V = M.VATSKOR[rp.vatska];
+            const Re = M.reynolds(V.rho, rp.v, rp.d / 1000, V.eta);
+            const doljB = gissa && (gissa.typ === 'lagst' || gissa.typ === 'tryck') && !gSvar;
+            const doljR = gissa && gissa.typ === 'regim' && !gSvar;
+            live.current = { lage, bp, rp, Re, doljR };
+
+
+            useEffect(() => {
+                let raf;
+                const loop = (ts) => {
+                    if (lastRef.current == null) lastRef.current = ts;
+                    const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
+                    lastRef.current = ts;
+                    const L = live.current;
+                    if (L.lage === 'reynolds') {
+                        // färgen: släpps ut i mitten och följer hastighetsprofilen, med virvlar när strömningen är turbulent
+                        const P = fargRef.current;
+                        const Rp = radiePx(L.rp.d), vm = visFart(L.rp.v);
+                        const I = M.turbulens(L.Re), t = ts / 1000;
+                        if (!L.doljR) {
+                            const n = Math.round(90 * dt * (0.6 + vm / 200));
+                            for (let k = 0; k < n; k++) P.push({ x: RY.noz + 10 + Math.random() * 4, y: (Math.random() - 0.5) * 0.04, f: Math.random() * 6.28 });
+                        }
+                        for (const p of P) {
+                            // i övergångsområdet kommer virvlarna i skurar
+                            const skur = M.regim(L.Re) === 'overgang' ? (Math.sin((p.x / 260 - t * 0.6) * 2 * Math.PI) > 0.2 ? 1 : 0.12) : 1;
+                            const ii = I * skur;
+                            p.x += vm * M.profil(Math.min(1, Math.abs(p.y)), L.Re) * dt;
+                            p.y += ii * (0.9 * Math.sin(p.x / 23 + p.f + t * 3) * dt + 0.55 * Math.sqrt(dt) * (Math.random() * 2 - 1));
+                            if (p.y > 0.96) p.y = 1.92 - p.y;
+                            if (p.y < -0.96) p.y = -1.92 - p.y;
+                        }
+                        fargRef.current = P.filter((p) => p.x < RY.x1 - 4).slice(-2600);
+                        if (canvasRef.current) ritaFarg(canvasRef.current, fargRef.current, L.rp);
+                    }
+                    raf = requestAnimationFrame(loop);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, []);
+
+            const valjLage = (l) => { setLage(l); fargRef.current = []; };
+            const korForsok = (f) => {
+                avslutaGissa();
+                setLage(f.lage);
+                if (f.p) setBp(f.p);
+                if (f.r) { setRp(f.r); fargRef.current = []; }
+            };
+            const startaGissa = (typ) => {
+                const u = typ === 'lagst' ? nyLagst() : typ === 'tryck' ? nyTryck() : nyRegim();
+                setGissa(u); setGSvar(null); setSvarTxt('');
+                if (typ === 'lagst' || typ === 'tryck') { setLage('bernoulli'); setBp(u.p); }
+                else { setLage('reynolds'); setRp(u.r); fargRef.current = []; }
+            };
+            const svaraGissa = (val) => {
+                const u = gissa;
+                let ratt, text;
+                if (u.typ === 'lagst') {
+                    ratt = val === u.svar;
+                    const g = geomAv(u.p), Q = u.p.Q / 1000, p1 = M.P_ATM + 5000;
+                    const P = Object.fromEntries(Object.entries(M.PUNKTER).map(([n, x]) => [n, M.punkt(g, Q, p1, B.L * x)]));
+                    text = <span>{ratt ? 'Rätt!' : 'Inte riktigt.'} Övertrycket är {fmt((P.A.p - M.P_ATM) / 1000, 2)} kPa i 1, {fmt((P.B.p - M.P_ATM) / 1000, 2)} kPa i 2 och {fmt((P.C.p - M.P_ATM) / 1000, 2)} kPa i 3.{' '}
+                        {u.svar === 'B' ? 'I förträngningen går vattnet fortast, och då är trycket lägst: en större del av energin per volym finns i rörelsen.'
+                            : u.p.d2 >= 30 ? <span>Röret har samma diameter hela vägen, så farten är densamma överallt. Efter 2 går röret uppför, och när vattnet lyfts sjunker trycket med <em>ρ</em> · <em>g</em> · <em>h</em>.</span>
+                            : <span>Efter 2 går röret uppför, och när vattnet lyfts sjunker trycket med <em>ρ</em> · <em>g</em> · <em>h</em>. Den minskningen är större än den som den höga farten i förträngningen ger.</span>}</span>;
+                } else if (u.typ === 'tryck') {
+                    const n = parseFloat(String(val).replace(/\s/g, '').replace(',', '.').replace('−', '-'));
+                    if (!isFinite(n)) { setGSvar({ val, ratt: false, text: 'Skriv in ett tal, till exempel 3,5.', provaIgen: true }); return; }
+                    ratt = Math.abs(n - u.svar) <= Math.max(0.05, 0.03 * Math.abs(u.svar));
+                    const dyn = (v) => M.RHO_V * v * v / 2000;
+                    text = <span>{ratt ? 'Rätt!' : 'Inte riktigt.'} Kontinuiteten ger <Sub s="v" i="1" /> = <Brak t={<em>Q</em>} n={<Sub s="A" i="1" />} /> = {fmt(u.v1, 2)} m/s och <Sub s="v" i="2" /> = {fmt(u.v2, 2)} m/s.
+                        Bernoulli ger <Sub s="p" i="2" /> = <Sub s="p" i="1" /> + <Brak t={<span><em>ρ</em> · <Sub s="v" i="1" /><sup>2</sup></span>} n="2" /> − <Brak t={<span><em>ρ</em> · <Sub s="v" i="2" /><sup>2</sup></span>} n="2" /> = {fmt(u.p.p1, 1)} + {fmt(dyn(u.v1), 2)} − {fmt(dyn(u.v2), 2)} = {fmt(u.svar, 2)} kPa över lufttrycket.</span>;
+                } else {
+                    ratt = val === u.svar;
+                    const VV = M.VATSKOR[u.r.vatska];
+                    text = <span>{ratt ? 'Rätt!' : 'Inte riktigt.'} Re = <Brak t={<span><em>ρ</em> · <em>v</em> · <em>d</em></span>} n={<em>η</em>} /> = <Brak t={`${fmt(VV.rho, 0)} · ${fmt(u.r.v, 2)} · ${fmt(u.r.d / 1000, 3)}`} n={fmtEta(VV.eta)} /> ≈ {fmtRe(u.Re)}.{' '}
+                        {u.svar === 'laminar' ? 'Det är under 2 300, så strömningen är laminär.' : u.svar === 'turbulent' ? 'Det är över 4 000, så strömningen är turbulent.' : 'Det är mellan 2 300 och 4 000, så strömningen är i övergångsområdet.'}</span>;
+                }
+                setGSvar({ val, ratt, text });
+                setPoang((x) => ({ ratt: x.ratt + (ratt ? 1 : 0), totalt: x.totalt + 1, svit: ratt ? x.svit + 1 : 0 }));
+            };
+            const avslutaGissa = () => { setGissa(null); setGSvar(null); };
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(document.fullscreenElement === sceneWrapRef.current || document.webkitFullscreenElement === sceneWrapRef.current);
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => { document.removeEventListener('fullscreenchange', handler); document.removeEventListener('webkitfullscreenchange', handler); };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const las = !!gissa && (!gSvar || gSvar.provaIgen);
+            const reglage = (Sl, kompakt) => {
+                const rad = (label, value, min, max, step, onChange, unit, d) => (
+                    <Sl key={label} label={label} value={value} min={min} max={max} step={step} disabled={las} onChange={onChange}
+                        {...(kompakt ? { valueNode: <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, d)} unit={unit} disabled={las} onCommit={onChange} /> } : {})}>
+                        {!kompakt && <NumInput value={value} min={min} max={max} fmtFn={(x) => fmt(x, d)} unit={unit} disabled={las} onCommit={onChange} />}
+                    </Sl>
+                );
+                if (lage === 'bernoulli') return (
+                    <React.Fragment>
+                        {rad('Volymflöde, <em>Q</em>', bp.Q, 0.05, 0.5, 0.01, (x) => setBp((p) => ({ ...p, Q: x })), 'l/s', 2)}
+                        {rad('Diameter i 2, <em>d</em><sub>2</sub>', bp.d2, 10, 30, 1, (x) => setBp((p) => ({ ...p, d2: x })), 'mm', 0)}
+                        {rad('Höjd i 3, <em>h</em><sub>3</sub>', bp.h, 0, 0.3, 0.01, (x) => setBp((p) => ({ ...p, h: x })), 'm', 2)}
+                        {rad('Övertryck i 1', bp.p1, 2, 6, 0.1, (x) => setBp((p) => ({ ...p, p1: x })), 'kPa', 1)}
+                    </React.Fragment>
+                );
+                return (
+                    <React.Fragment>
+                        {rad('Medelfart, <em>v</em>', rp.v, 0.01, 1.5, 0.01, (x) => setRp((p) => ({ ...p, v: x })), 'm/s', 2)}
+                        {rad('Diameter, <em>d</em>', rp.d, 5, 40, 1, (x) => setRp((p) => ({ ...p, d: x })), 'mm', 0)}
+                    </React.Fragment>
+                );
+            };
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        {lage === 'bernoulli' ? (
+                            <React.Fragment>
+                                <label><input type="checkbox" checked={visaSkivor} onChange={() => setVisaSkivor((x) => !x)} /><span>Vattenskivor</span></label>
+                                <label><input type="checkbox" checked={visaDots} onChange={() => setVisaDots((x) => !x)} /><span>Vattenpartiklar</span></label>
+                                <label><input type="checkbox" checked={visaStaplar} onChange={() => setVisaStaplar((x) => !x)} /><span>Tryckstaplar</span></label>
+                            </React.Fragment>
+                        ) : (
+                            <label><input type="checkbox" checked={visaProfil} onChange={() => setVisaProfil((x) => !x)} /><span>Hastighetsprofil</span></label>
+                        )}
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglage(StSlider, true)}</div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const g = geomAv(bp), Qm = bp.Q / 1000, p1 = M.P_ATM + bp.p1 * 1000;
+            const PT = Object.fromEntries(Object.entries(M.PUNKTER).map(([n, x]) => [n, M.punkt(g, Qm, p1, B.L * x)]));
+            const dp = M.tryckfall(V.rho, rp.v, rp.d / 1000, V.eta);
+            const reg = M.regim(Re);
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-7xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Strömning i rör
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Strömning i rör</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            Lika mycket vatten måste varje sekund passera genom varje tvärsnitt av röret. Där röret är smalt går vattnet därför fortare, och
+                            då är trycket lägre. Se hur vattenskivorna blir långa och smala i förträngningen och hur vattnet sjunker i standröret ovanför.
+                            Pröva sedan Reynolds försök: släpp ut färg i ett rör och se när strömningen slutar vara jämn och börjar virvla.
+                        </p>
+
+                        <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                            {lage === 'bernoulli' ? (
+                                <div className="flex flex-wrap items-center gap-x-10 gap-y-3 fk-rader">
+                                    <div className="flex flex-wrap items-center gap-x-2">
+                                        <Vbl label="Area"><Sub s="A" i="1" /></Vbl><span className="fnum">·</span><Vbl label="Fart"><Sub s="v" i="1" /></Vbl>
+                                        <span className="fnum">=</span>
+                                        <Vbl label="Area"><Sub s="A" i="2" /></Vbl><span className="fnum">·</span><Vbl label="Fart"><Sub s="v" i="2" /></Vbl>
+                                    </div>
+                                    <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
+                                        <Vbl label="Tryck"><em>p</em></Vbl><span className="fnum">+</span>
+                                        <Brak t={<span className="flex items-center gap-x-1"><Vbl label="Densitet"><em>ρ</em></Vbl><span className="fnum">·</span><Vbl label="Fart"><span><em>v</em><sup>2</sup></span></Vbl></span>} n={<span className="fnum">2</span>} />
+                                        <span className="fnum">+</span>
+                                        <Vbl label="Densitet"><em>ρ</em></Vbl><span className="fnum">·</span><Vbl label="Tyngdfaktor"><em>g</em></Vbl><span className="fnum">·</span><Vbl label="Höjd"><em>h</em></Vbl>
+                                        <span className="fnum">=</span><span className="fnum">konstant</span>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="flex flex-wrap items-center gap-x-10 gap-y-3 fk-rader">
+                                    <div className="flex items-center gap-x-3">
+                                        <Vbl label="Reynolds tal"><span>Re</span></Vbl>
+                                        <span className="fnum">=</span>
+                                        <Brak t={<span className="flex items-center gap-x-1"><Vbl label="Densitet"><em>ρ</em></Vbl><span className="fnum">·</span><Vbl label="Medelfart"><em>v</em></Vbl><span className="fnum">·</span><Vbl label="Diameter"><em>d</em></Vbl></span>}
+                                              n={<Vbl label="Viskositet" ned><em>η</em></Vbl>} />
+                                    </div>
+                                    <div className="text-base" style={{ color: 'var(--lab-ink-soft)', maxWidth: 520 }}>
+                                        Re saknar enhet. Under 2 300 är strömningen i ett rör laminär och över 4 000 turbulent. Gränserna är riktvärden: med ett
+                                        mycket lugnt inlopp kan strömningen hållas laminär till betydligt högre Re. Viskositeten <em>η</em> mäts i Pa · s och säger
+                                        hur trögflytande vätskan är.
+                                    </div>
+                                </div>
+                            )}
+                            <div className="pt-3 mt-3 text-base" style={{ borderTop: '1px solid var(--lab-line, rgba(15,22,32,0.14))', color: 'var(--lab-ink-soft)' }}>
+                                {lage === 'bernoulli'
+                                    ? <span>Med värdena nu: <span style={{ whiteSpace: 'nowrap' }}><Sub s="v" i="1" /> = {fmt(PT.A.v, 2)} m/s</span>, <span style={{ whiteSpace: 'nowrap' }}><Sub s="v" i="2" /> = {doljB ? '?' : `${fmt(PT.B.v, 2)} m/s`}</span>.
+                                        {bp.d2 < 30 && !doljB && <span> Diametern i 2 är {fmt(bp.d2 / 30, 2)} gånger diametern i 1, så arean i 2 är {fmt(Math.pow(bp.d2 / 30, 2), 2)} gånger arean i 1 och farten {fmt(Math.pow(30 / bp.d2, 2), 2)} gånger så stor.</span>}
+                                        {' '}<em>p</em> i Bernoullis ekvation kan vara det absoluta trycket eller övertrycket, eftersom de bara skiljer sig med lufttrycket. Höjden <em>h</em> räknas från mittlinjen i punkt 1.</span>
+                                    : <span>Med värdena nu: Re = {doljR ? '?' : <span><Brak t={`${fmt(V.rho, 0)} · ${fmt(rp.v, 2)} · ${fmt(rp.d / 1000, 3)}`} n={fmtEta(V.eta)} /> ≈ {fmtRe(Re)}</span>}. Tryckfallet är {doljR ? '?' : `${dp < 1000 ? fmt(dp, 0) + ' Pa' : fmt(dp / 1000, 2) + ' kPa'} per meter rör`}.</span>}
+                            </div>
+                        </div>
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 xl:w-3/4 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    {lage === 'bernoulli'
+                                        ? <BernoulliLive par={bp} visaSkivor={visaSkivor} visaDots={visaDots} visaStaplar={visaStaplar} dolj={doljB} />
+                                        : (
+                                            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                                <ReynoldsScen par={rp} Re={Re} visaProfil={visaProfil} dolj={doljR} />
+                                                <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />
+                                            </div>
+                                        )}
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    {lage === 'bernoulli'
+                                        ? 'Röret är ritat mycket tjockare än det egentligen är, så att förträngningen syns. Vattnet rör sig med en fjärdedel av den verkliga farten. Standrören visar övertrycket, alltså hur mycket trycket överstiger lufttrycket, som höjden på en vattenpelare. Modellens förenklingar: strömningen är stationär, vattnet går nästan inte att trycka ihop, det har ingen inre friktion och farten är medelfarten v = Q/A över hela tvärsnittet. I verkligheten strömmar vatten i ett så här grovt rör turbulent, lite energi går förlorad, och trycket i 3 blir därför något lägre än i 1.'
+                                        : 'Färgen släpps ut mitt i röret. Vid laminär strömning glider vätskan i lager och färgen blir en rak tråd. Mitt i röret går vätskan dubbelt så fort som medelfarten, och vid väggen står den nästan still. Vid turbulent strömning virvlar vätskan och färgen blandas ut över hela röret. Rörelsen i bilden är inte i skala.'}
+                                </p>
+                            </div>
+
+                            <div className="lg:w-1/3 xl:w-1/4 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="mode-seg mb-3" style={{ flexDirection: 'column' }}>
+                                        <button className={lage === 'bernoulli' ? 'active' : ''} disabled={las} onClick={() => valjLage('bernoulli')}>Röret med förträngning<span className="sub">kontinuitet och Bernoulli</span></button>
+                                        <button className={lage === 'reynolds' ? 'active' : ''} disabled={las} onClick={() => valjLage('reynolds')}>Reynolds försök<span className="sub">laminärt och turbulent</span></button>
+                                    </div>
+                                    {lage === 'reynolds' && (
+                                        <React.Fragment>
+                                            <div className="flbl mb-2" style={{ textAlign: 'left' }}>Vätska</div>
+                                            <div className="forsok-lista mb-3">
+                                                {Object.entries(M.VATSKOR).map(([k, x]) => (
+                                                    <button key={k} className="forsok" disabled={las} onClick={() => { setRp((p) => ({ ...p, vatska: k })); fargRef.current = []; }}
+                                                            style={rp.vatska === k ? { background: 'var(--lab-ink)', color: 'var(--lab-bg)' } : undefined}>
+                                                        {x.namn}<span className="sub" style={rp.vatska === k ? { color: 'var(--lab-bg)' } : undefined}><em>η</em> = {fmtEta(x.eta)} Pa · s</span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </React.Fragment>
+                                    )}
+                                    {!isFullscreen && reglage(Slider, false)}
+                                    {isFullscreen && <p className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>Reglagen finns i rutan uppe till höger i fullskärm.</p>}
+                                </div>
+
+                                {lage === 'bernoulli' && (
+                                    <div className="glass-card rounded-xl p-3 mb-3">
+                                        <div className="flbl mb-2" style={{ textAlign: 'left' }}>Avläsning</div>
+                                        <table className="text-sm w-full" style={{ color: 'var(--lab-ink)' }}>
+                                            <thead><tr style={{ color: 'var(--lab-ink-muted)', fontSize: 12 }}><th className="text-left">Punkt</th><th className="text-right"><em>d</em></th><th className="text-right"><em>v</em></th><th className="text-right">övertryck</th></tr></thead>
+                                            <tbody>
+                                                {Object.entries(PT).map(([n, P]) => (
+                                                    <tr key={n}><td className="font-bold">{PN[n]}</td><td className="text-right">{fmt(P.d * 1000, 0)} mm</td>
+                                                        <td className="text-right">{doljB ? '?' : `${fmt(P.v, 2)} m/s`}</td><td className="text-right">{doljB ? '?' : `${fmt((P.p - M.P_ATM) / 1000, 2)} kPa`}</td></tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                        {!doljB && Object.entries(PT).filter(([, P]) => P.p < M.P_ATM).map(([n]) => (
+                                            <p key={n} className="text-xs mt-2" style={{ color: 'var(--lab-accent)' }}>I {PN[n]} är trycket lägre än lufttrycket. Genom ett hål där skulle luft sugas in i stället för att vatten läcker ut.{n === 'B' ? ' Så fungerar en vattenstrålpump.' : ' Röret fungerar då som en hävert.'}</p>
+                                        ))}
+                                    </div>
+                                )}
+                                {lage === 'reynolds' && (
+                                    <div className="glass-card rounded-xl p-3 mb-3">
+                                        <div className="flbl mb-2" style={{ textAlign: 'left' }}>Avläsning</div>
+                                        <div className="text-sm" style={{ color: 'var(--lab-ink)' }}>
+                                            <div>Reynolds tal: <strong>{doljR ? '?' : fmtRe(Re)}</strong></div>
+                                            <div>Strömningen: <strong style={{ color: doljR ? undefined : REGIMFARG[reg] }}>{doljR ? '?' : { laminar: 'laminär', overgang: 'i övergångsområdet', turbulent: 'turbulent' }[reg]}</strong></div>
+                                            <div>Tryckfall: {doljR ? '?' : `${dp < 1000 ? fmt(dp, 0) + ' Pa' : fmt(dp / 1000, 2) + ' kPa'} per meter`}</div>
+                                            <div>Turbulent från ungefär <em>v</em> = {doljR ? '?' : `${fmt(M.RE_TURB * V.eta / (V.rho * rp.d / 1000), M.RE_TURB * V.eta / (V.rho * rp.d / 1000) < 1 ? 2 : 1)} m/s`} i det här röret</div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2" style={{ textAlign: 'left' }}>Färdiga försök</div>
+                                    <div className="forsok-lista">
+                                        {FORSOK.map((f) => <button key={f.id} className="forsok" disabled={las} onClick={() => korForsok(f)}>{f.namn}<span className="sub">{f.sub}</span></button>)}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flbl" style={{ textAlign: 'left' }}>Gissa-läge</div>
+                                        {poang.totalt > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-soft)' }}>{poang.ratt} av {poang.totalt} rätt{poang.svit > 1 ? `, ${poang.svit} i rad` : ''}</div>}
+                                    </div>
+                                    {!gissa && (
+                                        <div className="flex flex-col gap-2">
+                                            <button className="btn-toggle" onClick={() => startaGissa('lagst')}>Var är trycket lägst?</button>
+                                            <button className="btn-toggle" onClick={() => startaGissa('tryck')}>Räkna ut trycket i 2</button>
+                                            <button className="btn-toggle" onClick={() => startaGissa('regim')}>Laminärt eller turbulent?</button>
+                                        </div>
+                                    )}
+                                    {gissa && gissa.typ === 'lagst' && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                Vattnet strömmar genom röret i bilden. I vilken punkt är trycket lägst? Titta på diametern och höjden.
+                                            </p>
+                                            <div className="flex gap-2 mb-2">
+                                                {['A', 'B', 'C'].map((n) => <button key={n} className={`btn-toggle flex-1 ${gSvar && gSvar.val === n ? 'active' : ''}`} disabled={!!gSvar} onClick={() => svaraGissa(n)}>{PN[n]}</button>)}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {gissa && gissa.typ === 'tryck' && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                Röret är vågrätt. I punkt 1 är diametern 30 mm och övertrycket {fmt(gissa.p.p1, 1)} kPa, i punkt 2 är diametern {fmt(gissa.p.d2, 0)} mm.
+                                                Volymflödet är {fmt(gissa.p.Q, 2)} l/s. Vilket övertryck är det i punkt 2? Vattnets densitet är 998 kg/m³.
+                                            </p>
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <span><Sub s="p" i="2" /> =</span>
+                                                <input className="num-in" style={{ width: 80 }} type="text" inputMode="decimal" value={svarTxt} disabled={!!gSvar && !gSvar.provaIgen}
+                                                       onChange={(e) => setSvarTxt(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && (!gSvar || gSvar.provaIgen)) svaraGissa(svarTxt); }} />
+                                                <span>kPa</span>
+                                                <button className="btn-start" disabled={!!gSvar && !gSvar.provaIgen} onClick={() => svaraGissa(svarTxt)}>Kolla</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {gissa && gissa.typ === 'regim' && (
+                                        <div>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                {M.VATSKOR[gissa.r.vatska].namn} strömmar med medelfarten {fmt(gissa.r.v, 2)} m/s genom ett rör med diametern {fmt(gissa.r.d, 0)} mm.
+                                                Densiteten är {fmt(M.VATSKOR[gissa.r.vatska].rho, 0)} kg/m³ och viskositeten {fmtEta(M.VATSKOR[gissa.r.vatska].eta)} Pa · s. Hur strömmar vätskan?
+                                            </p>
+                                            <div className="flex gap-2 mb-2">
+                                                {['laminar', 'overgang', 'turbulent'].map((n) => <button key={n} className={`btn-toggle flex-1 ${gSvar && gSvar.val === n ? 'active' : ''}`} disabled={!!gSvar} onClick={() => svaraGissa(n)}>{REGIMNAMN[n]}</button>)}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {gissa && gSvar && <p className="text-sm mb-2" style={{ color: gSvar.ratt ? '#15803d' : 'var(--lab-accent)' }}>{gSvar.text}</p>}
+                                    {gissa && (
+                                        <div className="flex gap-2">
+                                            {gSvar && !gSvar.provaIgen && <button className="btn-toggle flex-1" onClick={() => startaGissa(gissa.typ)}>Ny uppgift</button>}
+                                            <button className="btn-toggle flex-1" onClick={avslutaGissa}>Avsluta</button>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Lika mycket vatten överallt</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Vatten går nästan inte att trycka ihop, så varje sekund passerar samma volym genom varje tvärsnitt: <em>A</em> · <em>v</em> är lika stort
+                                    överallt. Halveras diametern blir arean en fjärdedel, och då måste farten bli fyra gånger så stor.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Högre fart, lägre tryck</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Vattnet ökar farten in i förträngningen, och det kan det bara göra om trycket bakom är större än trycket framför. Bernoullis
+                                    ekvation säger samma sak med energi per volym: trycket gånger en volym är det arbete trycket gör på vattnet, och summan av tryck,
+                                    rörelseenergi per volym och lägesenergi per volym är lika stor i hela röret. Där farten är hög är trycket lågt.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Lager eller virvlar</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    När en trögflytande vätska strömmar långsamt i ett smalt rör glider den i lager: strömningen är laminär. Blir farten, diametern eller
+                                    densiteten större, eller viskositeten mindre, ökar Reynolds tal, och till slut blir strömningen turbulent. Laminärt växer tryckfallet
+                                    i proportion mot farten, turbulent ungefär som farten upphöjt till 1,75.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”I ett smalt rör pressas vattnet ihop, så trycket blir högre.”</strong> Nej, tvärtom. Vattnet pressas inte ihop. Det går
+                                    fortare där röret är smalt, och där är trycket lägre.</li>
+                                <li><strong>”Snabbt vatten trycker hårdare.”</strong> Mot en hand som hålls emot strömmen, ja, för där stannar vattnet. Men trycket
+                                    i vattnet som strömmar förbi, det som standrören visar, är lägre där farten är högre. Ett rör som vänds mot strömmen når den
+                                    streckade energinivån.</li>
+                                <li><strong>”Turbulent betyder att vattnet går fortare.”</strong> Inte nödvändigtvis. Om strömningen blir turbulent avgörs av Reynolds
+                                    tal, som också beror på diametern och vätskans viskositet. Sirap kan strömma laminärt i en fart där vatten strömmar turbulent.</li>
+                                <li><strong>”Tummen på trädgårdsslangen ökar trycket.”</strong> Inne i slangen ökar trycket faktiskt lite, eftersom mindre vatten
+                                    strömmar och mindre energi går förlorad. Men det viktiga är att tummen gör öppningen mindre, så att slangens övertryck blir fart:
+                                    vattnet sprutar ut fortare. I strålen utanför är trycket lufttrycket. Här ändras både flödet och trycket, till skillnad från
+                                    simuleringen där de ställs in var för sig.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

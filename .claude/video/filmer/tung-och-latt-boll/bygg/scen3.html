@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#f7f2e8}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// Scen 3: bowlingklot och tennisboll släpps från 2,0 m. Rörelsen räknas fram
+// med Eulers metod (g = 9,82 m/s², luftmotstånd F = ½ρCdAv²) och visas
+// fyra gånger långsammare.
+const c = document.getElementById('c'), x = c.getContext('2d');
+const BLA = '#2b5ca8', BLACK = '#0f1620', ROD = '#c8324a', RUT = 'rgba(147,174,199,.55)';
+const G = 9.82, RHO = 1.2, H = 2.0;
+const PX = 600;                       // pixlar per meter
+const Y0 = 170, GOLV = Y0 + H * PX;   // bollarnas undersida vid start, golvet
+const bollar = [
+  { namn: 'bowling', x: 400, d: 0.218, m: 7.0, cd: 0.47 },
+  { namn: 'tennis', x: 720, d: 0.067, m: 0.0577, cd: 0.55 },
+];
+// Förberäkna fallet med små tidssteg
+const DT = 1e-4;
+for (const b of bollar) {
+  const k = 0.5 * RHO * b.cd * Math.PI * (b.d / 2) ** 2 / b.m;
+  let s = 0, v = 0, t = 0; b.bana = [[0, 0]];
+  while (s < H) { const a = G - k * v * v; v += a * DT; s += v * DT; t += DT; b.bana.push([t, Math.min(s, H)]); }
+  b.tLand = t;
+}
+function lage(b, t) {
+  if (t <= 0) return 0;
+  if (t >= b.tLand) return H;
+  const i = Math.min(b.bana.length - 1, Math.round(t / DT));
+  return b.bana[i][1];
+}
+function papper() {
+  const gr = x.createLinearGradient(0, 0, 0, 1920); gr.addColorStop(0, '#f7f2e8'); gr.addColorStop(1, '#ece3d2');
+  x.fillStyle = gr; x.fillRect(0, 0, 1080, 1920);
+  x.strokeStyle = RUT; x.lineWidth = 1.5;
+  for (let i = 0; i <= 1920; i += 27) { x.beginPath(); x.moveTo(0, i + .75); x.lineTo(1080, i + .75); x.stroke(); }
+  for (let i = 0; i <= 1080; i += 27) { x.beginPath(); x.moveTo(i + .75, 0); x.lineTo(i + .75, 1920); x.stroke(); }
+}
+function pil(x1, y1, x2, y2) {
+  const a = Math.atan2(y2 - y1, x2 - x1), h = 22;
+  x.beginPath(); x.moveTo(x2, y2); x.lineTo(x2 - h * Math.cos(a - .4), y2 - h * Math.sin(a - .4));
+  x.lineTo(x2 - h * Math.cos(a + .4), y2 - h * Math.sin(a + .4)); x.closePath(); x.fill();
+}
+function scen(tSim, slapp) {
+  papper();
+  x.lineCap = 'round'; x.lineJoin = 'round';
+  // Golv
+  x.strokeStyle = BLA; x.lineWidth = 6;
+  x.beginPath(); x.moveTo(150, GOLV); x.lineTo(1000, GOLV); x.stroke();
+  x.lineWidth = 3;
+  for (let i = 170; i < 1000; i += 46) { x.beginPath(); x.moveTo(i, GOLV + 6); x.lineTo(i - 24, GOLV + 34); x.stroke(); }
+  // Brädan som bollarna ligger på (dras undan åt höger vid släppet)
+  const dx = slapp ? Math.min(900, slapp * 9000) : 0;
+  x.lineWidth = 5; x.fillStyle = '#efe4cf';
+  x.beginPath(); x.rect(250 + dx, Y0, 640, 26); x.fill(); x.stroke();
+  // Måttlinje 2,0 m i fri yta till vänster
+  x.strokeStyle = BLA; x.fillStyle = BLA; x.lineWidth = 3;
+  x.setLineDash([10, 10]);
+  x.beginPath(); x.moveTo(110, Y0); x.lineTo(240, Y0); x.stroke();
+  x.setLineDash([]);
+  x.beginPath(); x.moveTo(140, Y0 + 4); x.lineTo(140, GOLV - 4); x.stroke();
+  pil(140, Y0 + 60, 140, Y0 + 2); pil(140, GOLV - 60, 140, GOLV - 2);
+  x.save(); x.translate(108, (Y0 + GOLV) / 2); x.rotate(-Math.PI / 2);
+  x.font = '600 52px Poppins'; x.textAlign = 'center'; x.fillStyle = BLACK; x.fillText('2,0 m', 0, 0); x.restore();
+  // Bollar
+  for (const b of bollar) {
+    const s = lage(b, tSim), r = b.d / 2 * PX;
+    const cy = Y0 + s * PX - r, cx = b.x;
+    x.lineWidth = 5; x.strokeStyle = BLA;
+    if (b.namn === 'bowling') {
+      x.fillStyle = ROD; x.beginPath(); x.arc(cx, cy, r, 0, 7); x.fill(); x.stroke();
+      x.fillStyle = BLACK;
+      for (const [hx, hy] of [[-.25, -.38], [.08, -.45], [-.08, -.18]]) { x.beginPath(); x.arc(cx + hx * r, cy + hy * r, r * .09, 0, 7); x.fill(); }
+      x.strokeStyle = 'rgba(255,255,255,.55)'; x.lineWidth = 6;
+      x.beginPath(); x.arc(cx, cy, r * .72, 3.6, 4.4); x.stroke();
+    } else {
+      x.fillStyle = '#ffffff'; x.beginPath(); x.arc(cx, cy, r, 0, 7); x.fill(); x.stroke();
+      x.lineWidth = 3.5;
+      x.beginPath(); x.arc(cx - r * 1.05, cy, r * .78, -.9, .9); x.stroke();
+      x.beginPath(); x.arc(cx + r * 1.05, cy, r * .78, Math.PI - .9, Math.PI + .9); x.stroke();
+    }
+    // Nedslag: små streck i golvet
+    if (tSim >= b.tLand) {
+      const f = Math.min(1, (tSim - b.tLand) / 0.04);
+      x.strokeStyle = BLA; x.lineWidth = 4;
+      for (const s2 of [-1, 1]) {
+        x.beginPath(); x.moveTo(cx + s2 * (r + 12), GOLV - 10); x.lineTo(cx + s2 * (r + 12 + 34 * f), GOLV - 10 - 26 * f); x.stroke();
+      }
+    }
+  }
+  // Etikett
+  x.font = '600 40px Poppins'; x.textAlign = 'center'; x.fillStyle = BLA;
+  x.fillText('Fyra gånger långsammare', 540, 105);
+}
+// t = tid i den färdiga filmen (s). Släppet sker vid T_SLAPP, fallet visas 4× långsamt.
+const T_SLAPP = 0.35, SLOW = 4;
+window.rita = t => {
+  const tf = t - T_SLAPP;
+  scen(tf > 0 ? tf / SLOW : 0, tf > 0 ? tf / SLOW : 0);
+};
+window.info = () => bollar.map(b => [b.namn, b.tLand.toFixed(4)]);
+</script></body></html>

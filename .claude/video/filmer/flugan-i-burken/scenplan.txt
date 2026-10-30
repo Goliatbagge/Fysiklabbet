@@ -1,0 +1,56 @@
+Scen 1 · 4 s · AI-SCEN
+"En fluga sitter i en stängd burk på en våg."
+
+Scen 2 · 4 s · AI-SCEN
+"Nu lyfter flugan. Visar vågen mindre nu? Vad tror du?"
+
+Scen 3 · 4 s · EGEN INSPELNING
+"Medan flugan hovrar visar vågen samma som förut."
+
+Egen animation, uträknad: burken på vågen i genomskärning. Flugan sitter på botten, vågens display visar ett fast värde. Flugan lyfter: displayen rycker till en kort stund (uppåt och sedan nedåt) och lägger sig på exakt samma värde medan flugan hovrar mitt i burken.
+
+Scen 4 · 4 s · AI-SCEN
+"Men flugan nuddar inte ens burken."
+
+Scen 5 · 4 s · AI-SCEN
+"Svaret finns i luften runt flugan."
+
+Scen 6 · 4 s · EGEN INSPELNING
+"Vingarna trycker ner luften, slag efter slag."
+
+Egen animation: närbild på den hovrande flugan. Luften under vingarna markeras med blå strömlinjer som går nedåt, slag efter slag. Pilen F på luften nedåt ritas vid vingarna. Spelas in över scen 6 och 7.
+
+Scen 7 · 4 s · EGEN INSPELNING
+"Då trycker luften lika hårt uppåt på flugan."
+
+Fortsättning: pilen F_luft uppåt på flugan tonar in, lika lång som pilen nedåt på luften, på samma verkningslinje.
+
+Scen 8 · 4 s · AI-SCEN
+"Kraft och motkraft, enligt Newtons tredje lag."
+
+Scen 9 · 4 s · EGEN INSPELNING
+"Kraften uppåt och tyngdkraften tar ut varandra."
+
+Egen figur: flugan med lyftkraften uppåt och tyngdkraften F_G nedåt, lika långa och på samma verkningslinje (jämvikt).
+
+Scen 10 · 4 s · EGEN INSPELNING
+"Luften som trycks ner fortsätter mot burkens botten."
+
+Egen animation: burken i genomskärning. Luftströmmen från vingarna fortsätter nedåt och breder ut sig mot botten. Spelas in över scen 10 och 11.
+
+Scen 11 · 4 s · EGEN INSPELNING
+"Där trycker luften lika hårt på botten."
+
+Fortsättning: på botten tonar en tryckpil nedåt in, lika lång som tyngdkraftspilen på flugan, och vågens display visar samma värde.
+
+Scen 12 · 4 s · AI-SCEN
+"Flugan trycker alltså på vågen, fast via luften."
+
+Scen 13 · 4 s · AI-SCEN
+"Oavsett om flugan sitter eller hovrar visar vågen lika mycket."
+
+Scen 14 · 4 s · AI-SCEN
+"Bara när flugan lyfter eller landar rycker vågen till."
+
+Scen 15 · 4 s · AI-SCEN
+(inget tal, slutskylten läggs på i redigeringen)

@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#f7f2e8}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// De egna scenerna i filmen "Stålfartyget". window.rita(scen, t) ritar scenen
+// vid tiden t (s). All rörelse räknas fram ur fysiken:
+//   scen 3: 1 kg stål som kloss (sida 5,0 cm) och som skål (r = 7 cm, h = 10 cm)
+//           i sötvatten, fyra gånger långsammare;
+//   scen 9: spiken, lyftkraften en åttondel av tyngden (1 000 / 7 850);
+//   scen 11 (fortsätter i 12): skrovet sjunker tills F_L = F_G;
+//   scen 13: skålen flyter, och en liter vatten väger lika mycket som skålen.
+// Inget ritas i bandet y 1380–1560, där undertexterna ligger.
+const c = document.getElementById('c'), x = c.getContext('2d');
+const BLA = '#2b5ca8', INK = '#0f1620', ROD = '#c8324a', RUT = 'rgba(147,174,199,.55)', GRA = '#3f4a5c';
+const VATTEN = 'rgba(126,178,214,.38)', UNDAN = 'rgba(43,92,168,.30)';
+const G = 9.82, RW = 1000, RS = 7850;
+const FKRAFT = '#2f7d4f', FTYNGD = '#6d4ca8';   // lyftkraft grön, tyngdkraft lila (inte rött: rött är accenten)
+
+function papper() {
+  const gr = x.createLinearGradient(0, 0, 0, 1920); gr.addColorStop(0, '#f7f2e8'); gr.addColorStop(1, '#ece3d2');
+  x.fillStyle = gr; x.fillRect(0, 0, 1080, 1920);
+  x.strokeStyle = RUT; x.lineWidth = 1.5;
+  for (let i = 0; i <= 1920; i += 27) { x.beginPath(); x.moveTo(0, i + .75); x.lineTo(1080, i + .75); x.stroke(); }
+  for (let i = 0; i <= 1080; i += 27) { x.beginPath(); x.moveTo(i + .75, 0); x.lineTo(i + .75, 1920); x.stroke(); }
+  x.lineCap = 'round'; x.lineJoin = 'round';
+}
+function text(s, px, py, size, col, align, vikt) {
+  x.font = `${vikt || 600} ${size}px Poppins`; x.fillStyle = col || INK; x.textAlign = align || 'center'; x.textBaseline = 'alphabetic';
+  x.fillText(s, px, py);
+}
+// Beteckning med kursiv bokstav och rakt index, t.ex. F_G. align: 'start' eller 'end'
+function beteckning(bok, idx, px, py, size, col, align) {
+  x.textBaseline = 'alphabetic';
+  x.font = `italic 600 ${size}px Poppins`; const wb = x.measureText(bok).width;
+  x.font = `600 ${size * .62}px Poppins`; const wi = x.measureText(idx).width;
+  let x0 = align === 'end' ? px - wb - wi - 2 : px;
+  x.fillStyle = col; x.textAlign = 'left';
+  x.font = `italic 600 ${size}px Poppins`; x.fillText(bok, x0, py);
+  x.font = `600 ${size * .62}px Poppins`; x.fillText(idx, x0 + wb + 2, py + size * .22);
+}
+// Kraftpil: skaft med rak ände (butt) som slutar vid huvudets bas
+function kraft(x0, y0, len, upp, col) {
+  const h = Math.max(14, Math.min(30, len * .9)), dir = upp ? -1 : 1;
+  x.strokeStyle = col; x.fillStyle = col; x.lineWidth = 9; x.lineCap = 'butt';
+  if (len > h) { x.beginPath(); x.moveTo(x0, y0); x.lineTo(x0, y0 + dir * (len - h)); x.stroke(); }
+  x.beginPath(); x.moveTo(x0, y0 + dir * len); x.lineTo(x0 - 15, y0 + dir * (len - h)); x.lineTo(x0 + 15, y0 + dir * (len - h)); x.closePath(); x.fill();
+  x.lineCap = 'round';
+}
+function vagYta(x1, x2, y, t) {
+  x.beginPath(); x.moveTo(x1, y);
+  for (let px = x1; px <= x2; px += 6) x.lineTo(px, y + 3 * Math.sin(px / 38 + t * 2.2));
+  return x;
+}
+function akvarium(x1, y1, x2, y2, yv, t) {
+  x.fillStyle = VATTEN; vagYta(x1, x2, yv, t); x.lineTo(x2, y2); x.lineTo(x1, y2); x.closePath(); x.fill();
+  x.strokeStyle = 'rgba(43,92,168,.65)'; x.lineWidth = 3; vagYta(x1, x2, yv, t); x.stroke();
+  x.strokeStyle = BLA; x.lineWidth = 6;
+  x.beginPath(); x.moveTo(x1, y1); x.lineTo(x1, y2); x.lineTo(x2, y2); x.lineTo(x2, y1); x.stroke();
+  x.strokeStyle = 'rgba(255,255,255,.7)'; x.lineWidth = 5;
+  x.beginPath(); x.moveTo(x1 + 16, y1 + 30); x.lineTo(x1 + 16, y1 + 140); x.stroke();
+}
+
+// ---------------- Scen 3 ----------------
+const PXCM = 16;                    // pixlar per centimeter
+const S3 = { yv: 720, botten: 720 + 37 * PXCM, slow: 4, start: 0.35 };
+// Klossen: 1 kg, sida 5,03 cm. Tyngd − lyftkraft − motstånd, medsvängande massa ½ρV.
+const kl = (() => {
+  const m = 1, V = m / RS, a = Math.cbrt(V), A = a * a, mtot = m + .5 * RW * V, Cd = 1.05;
+  const djup = 0.37 - a / 2, bana = []; let s = 0, v = 0, t = 0, dt = 1e-4;
+  while (s < djup) { const F = m * G - RW * G * V - .5 * RW * Cd * A * v * v; v += F / mtot * dt; s += v * dt; t += dt; bana.push(Math.min(s, djup)); }
+  return { a, bana, dt, tl: t, djup };
+})();
+// Skålen: cylinder r = 7 cm, h = 10 cm, släpps med 3 cm under ytan; dämpad hivning
+const sk = (() => {
+  const r = .07, A = Math.PI * r * r, m = 1, d0 = m / (RW * A), mtot = m + .5, k = RW * G * A, zeta = .3;
+  const w = Math.sqrt(k / mtot), cdamp = 2 * zeta * mtot * w, bana = []; let d = .03, v = 0, dt = 1e-4;
+  for (let t = 0; t < 6; t += dt) { const F = m * G - RW * G * A * d - cdamp * v; v += F / mtot * dt; d += v * dt; bana.push(d); }
+  return { r, h: .10, d0, bana, dt };
+})();
+function kloss(t) { const i = Math.round(t / kl.dt); return t <= 0 ? 0 : i >= kl.bana.length ? kl.djup : kl.bana[i]; }
+function skal(t) { const i = Math.min(sk.bana.length - 1, Math.max(0, Math.round(t / sk.dt))); return t <= 0 ? .03 : sk.bana[i]; }
+function ritaSkal(cx, ybotten, rpx, hpx, t, fyll) {
+  // Skålen i genomskärning: botten vid ybotten, öppning uppåt
+  x.fillStyle = ROD; x.strokeStyle = BLA; x.lineWidth = 5;
+  x.beginPath();
+  x.moveTo(cx - rpx, ybotten - hpx); x.lineTo(cx - rpx + 6, ybotten - 14); x.quadraticCurveTo(cx - rpx + 8, ybotten, cx - rpx + 26, ybotten);
+  x.lineTo(cx + rpx - 26, ybotten); x.quadraticCurveTo(cx + rpx - 8, ybotten, cx + rpx - 6, ybotten - 14); x.lineTo(cx + rpx, ybotten - hpx);
+  x.lineTo(cx + rpx - 9, ybotten - hpx); x.lineTo(cx + rpx - 15, ybotten - 18); x.quadraticCurveTo(cx + rpx - 17, ybotten - 9, cx + rpx - 30, ybotten - 9);
+  x.lineTo(cx - rpx + 30, ybotten - 9); x.quadraticCurveTo(cx - rpx + 17, ybotten - 9, cx - rpx + 15, ybotten - 18); x.lineTo(cx - rpx + 9, ybotten - hpx);
+  x.closePath(); x.fill(); x.stroke();
+  if (fyll) { x.fillStyle = 'rgba(247,242,232,.9)'; }
+}
+function scen3(t) {
+  papper();
+  const ts = Math.max(0, (t - S3.start) / S3.slow);
+  text('Fyra gånger långsammare', 540, 300, 40, GRA, 'center', 500);
+  // Vänster akvarium: klossen
+  const L = [70, 510], R = [570, 1010], y1 = 560;
+  akvarium(L[0], y1, L[1], S3.botten, S3.yv, t);
+  akvarium(R[0], y1, R[1], S3.botten, S3.yv, t);
+  const apx = kl.a * 100 * PXCM, kcx = (L[0] + L[1]) / 2;
+  const ky = S3.yv - apx * .5 + kloss(ts) * 100 * PXCM;   // klossens överkant: hälften över ytan vid start
+  x.fillStyle = '#b8bfc8'; x.strokeStyle = BLA; x.lineWidth = 5;
+  x.beginPath(); x.rect(kcx - apx / 2, ky, apx, apx); x.fill(); x.stroke();
+  // Skålen
+  const scx = (R[0] + R[1]) / 2, rpx = sk.r * 100 * PXCM, hpx = sk.h * 100 * PXCM;
+  const yb = S3.yv + skal(ts) * 100 * PXCM;
+  ritaSkal(scx, yb, rpx, hpx, t);
+  text('1 kg stål', kcx, 480, 52, INK);
+  text('1 kg stål', scx, 480, 52, INK);
+}
+
+// ---------------- Scen 9: spiken ----------------
+function spik(cx, cy, len) {
+  // Liggande spik med huvud till vänster; kropp i stålgrått, spetsen till höger
+  const tj = 22;
+  x.fillStyle = '#b8bfc8'; x.strokeStyle = BLA; x.lineWidth = 4.5;
+  x.beginPath(); x.moveTo(cx - len / 2 + 14, cy - tj / 2); x.lineTo(cx + len / 2 - 50, cy - tj / 2); x.lineTo(cx + len / 2, cy);
+  x.lineTo(cx + len / 2 - 50, cy + tj / 2); x.lineTo(cx - len / 2 + 14, cy + tj / 2); x.closePath(); x.fill(); x.stroke();
+  x.beginPath(); x.rect(cx - len / 2, cy - 30, 16, 60); x.fill(); x.stroke();
+}
+function scen9(t) {
+  papper();
+  // Uppförstorat vattenglas
+  const x1 = 150, x2 = 930, ytop = 330, yb = 1320, yv = 420;
+  akvarium(x1, ytop, x2, yb, yv, t);
+  text('Uppförstorad', 540, 270, 40, GRA, 'center', 500);
+  // Spiken sjunker med konstant sluthastighet efter en kort acceleration
+  const t0 = 0.5, v = 75, s = t < t0 ? 0 : v * (t - t0);
+  const cx = 540, cy = 520 + s;
+  // Krafterna: skalenliga, F_L = F_G · 1000/7850, på samma verkningslinje (sida vid sida)
+  const LG = 330, LL = LG * RW / RS;
+  spik(cx, cy, 380);
+  kraft(cx + 5, cy, LG, false, FTYNGD);
+  kraft(cx - 5, cy, LL, true, FKRAFT);
+  x.fillStyle = INK; x.beginPath(); x.arc(cx, cy, 6, 0, 7); x.fill();
+  beteckning('F', 'G', cx + 26, cy + LG - 4, 56, FTYNGD, 'start');
+  beteckning('F', 'L', cx - 26, cy - LL - 4, 56, FKRAFT, 'end');
+}
+
+// ---------------- Scen 11–12: skrovet ----------------
+const HV = { yv: 900, B: 640, H: 330, vagg: 16, deq: 200, LG: 300, tau: 1.25, t0: 0.4, d0: 0 };
+function djup(t) {   // kritiskt dämpad insvängning mot jämviktsdjupet
+  if (t < HV.t0) return HV.d0;
+  const s = (t - HV.t0) / HV.tau;
+  return HV.d0 + (HV.deq - HV.d0) * (1 - (1 + s) * Math.exp(-s));
+}
+function scen11(t) {
+  papper();
+  const cx = 540, d = djup(t), yb = HV.yv + d, ytopp = yb - HV.H, xl = cx - HV.B / 2, xr = cx + HV.B / 2;
+  // Hav
+  x.fillStyle = VATTEN; vagYta(0, 1080, HV.yv, t); x.lineTo(1080, 1360); x.lineTo(0, 1360); x.closePath(); x.fill();
+  // Undanträngt vatten: skrovets del under ytan
+  if (d > 1) { x.fillStyle = UNDAN; x.beginPath(); x.rect(xl, HV.yv, HV.B, d); x.fill(); }
+  // Skrovet: ett ihåligt skal med däck
+  x.strokeStyle = BLA; x.lineWidth = 6; x.fillStyle = '#b8bfc8';
+  x.beginPath(); x.moveTo(xl - 20, ytopp); x.lineTo(xl, yb - 30); x.quadraticCurveTo(xl + 4, yb, xl + 40, yb);
+  x.lineTo(xr - 40, yb); x.quadraticCurveTo(xr - 4, yb, xr, yb - 30); x.lineTo(xr + 20, ytopp);
+  x.lineTo(xr + 20 - HV.vagg, ytopp); x.lineTo(xr - HV.vagg, yb - 32); x.quadraticCurveTo(xr - HV.vagg - 4, yb - HV.vagg, xr - 40, yb - HV.vagg);
+  x.lineTo(xl + 40, yb - HV.vagg); x.quadraticCurveTo(xl + HV.vagg + 4, yb - HV.vagg, xl + HV.vagg, yb - 32); x.lineTo(xl - 20 + HV.vagg, ytopp);
+  x.closePath(); x.fill(); x.stroke();
+  // Luft inuti, med ett tunt däck
+  x.strokeStyle = 'rgba(43,92,168,.55)'; x.lineWidth = 3;
+  x.beginPath(); x.moveTo(xl - 10, ytopp + 110); x.lineTo(xr + 10, ytopp + 110); x.stroke();
+  text('luft', cx - 200, ytopp + 230, 48, GRA, 'center', 500);
+  // Ytan ritas igen över skrovets sidor så att vattenlinjen syns
+  x.strokeStyle = 'rgba(43,92,168,.65)'; x.lineWidth = 3;
+  vagYta(0, xl - 22, HV.yv, t); x.stroke(); vagYta(xr + 22, 1080, HV.yv, t); x.stroke();
+  // Krafterna på samma verkningslinje: F_G från tyngdpunkten, F_L från det undanträngda vattnets mitt
+  const LL = HV.LG * d / HV.deq;
+  const ycg = ytopp + HV.H * .62, ycb = HV.yv + d / 2;
+  const xk = cx + 120;
+  kraft(xk + 5, ycg, HV.LG, false, FTYNGD);
+  x.fillStyle = INK; x.beginPath(); x.arc(xk + 5, ycg, 6, 0, 7); x.fill();
+  if (LL > 3) kraft(xk - 5, ycb, LL, true, FKRAFT);
+  beteckning('F', 'G', xk + 30, ycg + HV.LG - 6, 56, FTYNGD, 'start');
+  if (LL > 3) beteckning('F', 'L', xk - 30, ycb - LL - 6, 56, FKRAFT, 'end');
+}
+
+// ---------------- Scen 13: skålen och litern ----------------
+function scen13(t) {
+  papper();
+  // Balansvåg i jämvikt
+  const cx = 540, ybalk = 760, arm = 330;
+  x.strokeStyle = BLA; x.lineWidth = 8;
+  x.beginPath(); x.moveTo(cx, 1240); x.lineTo(cx, ybalk); x.stroke();
+  x.beginPath(); x.moveTo(cx - 140, 1240); x.lineTo(cx + 140, 1240); x.stroke();
+  x.beginPath(); x.moveTo(cx - arm, ybalk); x.lineTo(cx + arm, ybalk); x.stroke();
+  x.fillStyle = BLA; x.beginPath(); x.moveTo(cx, ybalk - 34); x.lineTo(cx - 20, ybalk); x.lineTo(cx + 20, ybalk); x.closePath(); x.fill();
+  x.lineWidth = 4;
+  for (const s of [-1, 1]) {
+    const px = cx + s * arm, ypan = ybalk + 230;
+    x.beginPath(); x.moveTo(px, ybalk); x.lineTo(px - 120, ypan); x.moveTo(px, ybalk); x.lineTo(px + 120, ypan); x.stroke();
+    x.beginPath(); x.moveTo(px - 140, ypan); x.quadraticCurveTo(px, ypan + 50, px + 140, ypan); x.stroke();
+  }
+  // Vänster vågskål: stålskålen (1 kg)
+  const ypan = ybalk + 230;
+  ritaSkal(cx - arm, ypan + 8, 84, 120, t);
+  // Höger vågskål: mätglas med 1 liter vatten
+  const mx = cx + arm, mb = ypan + 8, mw = 150, mh = 220, nivå = 170;
+  x.fillStyle = VATTEN; x.fillRect(mx - mw / 2, mb - nivå, mw, nivå);
+  x.strokeStyle = BLA; x.lineWidth = 5;
+  x.beginPath(); x.moveTo(mx - mw / 2, mb - mh); x.lineTo(mx - mw / 2, mb); x.lineTo(mx + mw / 2, mb); x.lineTo(mx + mw / 2, mb - mh); x.stroke();
+  x.lineWidth = 3; x.beginPath(); x.moveTo(mx - mw / 2, mb - nivå); x.lineTo(mx + mw / 2, mb - nivå); x.stroke();
+  for (let i = 1; i <= 4; i++) { const yy = mb - i * nivå / 4; x.beginPath(); x.moveTo(mx + mw / 2 - 30, yy); x.lineTo(mx + mw / 2, yy); x.stroke(); }
+  const a = Math.min(1, Math.max(0, (t - .3) / .4));
+  x.globalAlpha = a;
+  text('1 kg stål', cx - arm, 600, 54, INK);
+  text('1 liter vatten', cx + arm, 600, 54, INK);
+  text('1 kg', cx - arm, 1110, 60, BLA, 'center', 700);
+  text('1 kg', cx + arm, 1110, 60, BLA, 'center', 700);
+  x.globalAlpha = 1;
+}
+
+const SCENER = { 3: scen3, 9: scen9, 11: scen11, 13: scen13 };
+window.rita = (n, t) => SCENER[n](t);
+window.info = () => ({ klossLandar: kl.tl * S3.slow + S3.start, skalJamvikt_cm: sk.d0 * 100, skalMax_cm: Math.max(...sk.bana) * 100 });
+</script>
+</body></html>

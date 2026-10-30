@@ -1,0 +1,244 @@
+﻿<!doctype html>
+<html lang="sv"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#f7f2e8}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// De egna scenerna i filmen "Faradays bur". window.rita(scen, t) ritar
+// scenen vid tiden t (s). Samma figur som i teorin fy1-7.13, fast med bilen
+// som bur:
+//   scen 6: ledningselektronerna rör sig fritt i plåten;
+//   scen 7: ett yttre fält åt höger läggs på, elektronerna glider åt vänster;
+//   scen 8: vänster sida negativ, höger sida positiv;
+//   scen 9: laddningarna ger ett motriktat fält inuti (åt vänster);
+//   scen 10: fälten inuti tar ut varandra, kupén är tom på fält;
+//   scen 11: blixtens ström går i plåten runt kupén ned i marken.
+// Fältlinjer har pilspetsen mitt på sträckan. Inget ritas i bandet y 1380–1560
+// (undertexterna).
+const c = document.getElementById('c'), x = c.getContext('2d');
+const BLA = '#2b5ca8', INK = '#0f1620', ROD = '#c8324a', RUT = 'rgba(147,174,199,.55)', GRA = '#7d8794';
+const STROM = '#d08a12';
+let SLOT = { 6: 4, 7: 4, 8: 4, 9: 4, 10: 4, 11: 4 };
+window.satt = s => Object.assign(SLOT, s);
+
+function papper() {
+  const gr = x.createLinearGradient(0, 0, 0, 1920); gr.addColorStop(0, '#f7f2e8'); gr.addColorStop(1, '#ece3d2');
+  x.fillStyle = gr; x.fillRect(0, 0, 1080, 1920);
+  x.strokeStyle = RUT; x.lineWidth = 1.5;
+  for (let i = 0; i <= 1920; i += 27) { x.beginPath(); x.moveTo(0, i + .75); x.lineTo(1080, i + .75); x.stroke(); }
+  for (let i = 0; i <= 1080; i += 27) { x.beginPath(); x.moveTo(i + .75, 0); x.lineTo(i + .75, 1920); x.stroke(); }
+  x.lineCap = 'round'; x.lineJoin = 'round';
+}
+function text(s, px, py, size, col, align, vikt) {
+  x.font = `${vikt || 600} ${size}px Poppins`; x.fillStyle = col || INK; x.textAlign = align || 'center'; x.textBaseline = 'alphabetic';
+  x.fillText(s, px, py);
+}
+const tona = (t, t0, d) => Math.min(1, Math.max(0, (t - t0) / (d || .5)));
+const mjuk = u => u * u * (3 - 2 * u);
+
+// Bilens kaross i genomskärning (halvkombi, nosen åt höger), som sluten kontur
+const KAROSS = [[150, 1080], [150, 900], [175, 760], [300, 560], [345, 535], [680, 535], [790, 680], [915, 735],
+                [935, 790], [935, 1080]];
+const MARK = 1180, HJUL = [[300, 1110], [785, 1110]], HJ_R = 70;
+function karossVag() {
+  x.beginPath(); KAROSS.forEach(([a, b], i) => i ? x.lineTo(a, b) : x.moveTo(a, b)); x.closePath();
+}
+// Punkter jämnt fördelade längs konturen
+const OMKR = (() => {
+  const p = [], seg = [];
+  let L = 0;
+  for (let i = 0; i < KAROSS.length; i++) {
+    const a = KAROSS[i], b = KAROSS[(i + 1) % KAROSS.length], l = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    seg.push([a, b, L, l]); L += l;
+  }
+  return { L, at(u) {
+    u = ((u % 1) + 1) % 1; const s = u * L;
+    for (const [a, b, s0, l] of seg) if (s <= s0 + l) { const k = (s - s0) / l; return [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]; }
+    return KAROSS[0];
+  } };
+})();
+// Deterministisk "slump"
+const hash = n => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+
+function bil(alfaPlat) {
+  // Hjul och mark
+  x.strokeStyle = BLA; x.lineWidth = 4;
+  x.beginPath(); x.moveTo(40, MARK); x.lineTo(1040, MARK); x.stroke();
+  for (const [hx, hy] of HJUL) {
+    x.fillStyle = '#e9eef5'; x.beginPath(); x.arc(hx, hy, HJ_R, 0, 7); x.fill(); x.stroke();
+    x.beginPath(); x.arc(hx, hy, 26, 0, 7); x.stroke();
+  }
+  // Plåten: tjock blå kontur med ljus fyllning i godset
+  karossVag(); x.strokeStyle = BLA; x.lineWidth = 34; x.stroke();
+  karossVag(); x.strokeStyle = '#dfe8f3'; x.lineWidth = 24; x.stroke();
+  // Fönster (glas) som tunna linjer, säte och föraren
+  x.strokeStyle = BLA; x.lineWidth = 3;
+  x.beginPath(); x.moveTo(330, 900); x.lineTo(330, 1050); x.lineTo(470, 1050); x.lineTo(500, 900); x.stroke();
+  forare();
+}
+function forare() {
+  // Enkel figur i Nils stil: huvud, rufsigt hår, skyddsglasögon med röd rem
+  const hx = 560, hy = 790;
+  x.strokeStyle = BLA; x.lineWidth = 4; x.fillStyle = '#fbf8f2';
+  x.beginPath(); x.moveTo(520, 1050); x.lineTo(530, 860); x.quadraticCurveTo(560, 840, 600, 860); x.lineTo(640, 1000); x.lineTo(760, 1000); x.stroke();
+  x.beginPath(); x.ellipse(hx, hy, 42, 52, 0, 0, 7); x.fill(); x.stroke();
+  for (let i = 0; i < 9; i++) { const a = -2.6 + i * .35; x.beginPath(); x.moveTo(hx + 34 * Math.cos(a), hy - 10 + 44 * Math.sin(a)); x.lineTo(hx + 58 * Math.cos(a + .1), hy - 14 + 66 * Math.sin(a + .1)); x.stroke(); }
+  x.strokeStyle = ROD; x.lineWidth = 9; x.beginPath(); x.moveTo(hx - 42, hy - 26); x.lineTo(hx + 42, hy - 26); x.stroke();
+  x.strokeStyle = BLA; x.lineWidth = 4; x.fillStyle = '#e9eef5';
+  for (const d of [-16, 16]) { x.beginPath(); x.arc(hx + d, hy - 30, 15, 0, 7); x.fill(); x.stroke(); }
+  x.fillStyle = INK; x.beginPath(); x.arc(hx + 22, hy + 2, 5, 0, 7); x.fill();
+  x.beginPath(); x.moveTo(hx + 8, hy + 22); x.quadraticCurveTo(hx + 22, hy + 32, hx + 36, hy + 20); x.stroke();
+  // ratt
+  x.lineWidth = 6; x.beginPath(); x.moveTo(690, 900); x.lineTo(720, 980); x.stroke();
+}
+
+// Fältlinje med pilspetsen mitt på sträckan
+function faltlinje(x0, x1, y, col, w, alfa) {
+  if (alfa <= 0) return;
+  x.globalAlpha = alfa; x.strokeStyle = col; x.fillStyle = col; x.lineWidth = w; x.lineCap = 'butt';
+  x.beginPath(); x.moveTo(x0, y); x.lineTo(x1, y); x.stroke();
+  const m = (x0 + x1) / 2, d = Math.sign(x1 - x0), h = 26;
+  x.beginPath(); x.moveTo(m + d * h / 2, y); x.lineTo(m - d * h / 2, y - 13); x.lineTo(m - d * h / 2, y + 13); x.closePath(); x.fill();
+  x.globalAlpha = 1; x.lineCap = 'round';
+}
+// Var kupéns insida skär en vågrät linje (vänster och höger innerkant)
+function innerkant(y) {
+  const xs = [];
+  for (let i = 0; i < KAROSS.length; i++) {
+    const a = KAROSS[i], b = KAROSS[(i + 1) % KAROSS.length];
+    if ((a[1] - y) * (b[1] - y) < 0 || (a[1] === y && b[1] !== y)) xs.push(a[0] + (b[0] - a[0]) * (y - a[1]) / (b[1] - a[1]));
+  }
+  xs.sort((p, q) => p - q); return [xs[0] + 17, xs[xs.length - 1] - 17];
+}
+const FALT_Y = [620, 700, 780, 860, 940, 1020];
+function yttreFalt(alfa) {
+  for (const y of FALT_Y) {
+    const [a, b] = innerkant(y);
+    faltlinje(30, a - 17, y, GRA, 6, alfa);
+    faltlinje(b + 17, 1050, y, GRA, 6, alfa);
+  }
+}
+function inreFalt(col, riktning, alfa) {
+  for (const y of FALT_Y) {
+    const [a, b] = innerkant(y);
+    if (riktning > 0) faltlinje(a + 6, b - 6, y, col, 6, alfa); else faltlinje(b - 6, a + 6, y, col, 6, alfa);
+  }
+}
+
+// Elektronerna: N små minustecken i plåten. Fas f = 0 jämnt fördelade,
+// f = 1 samlade på vänster sida (konturens vänstra del, u omkring 0,1–0,3).
+const N = 26;
+// u-värden längs konturen där x är litet (vänster sida) respektive stort (höger sida)
+const U_SIDA = (villkor, antal) => {
+  const ok = []; for (let k = 0; k < 2000; k++) { const u = k / 2000; if (villkor(OMKR.at(u)[0])) ok.push(u); }
+  // ordna längs konturen med start efter ett glapp, så att fördelningen blir sammanhängande
+  let st = 0; for (let k = 1; k < ok.length; k++) if (ok[k] - ok[k - 1] > .01) st = k;
+  const lop = ok.slice(st).concat(ok.slice(0, st).map(u => u + 1));
+  return Array.from({ length: antal }, (_, i) => lop[Math.floor((i + .5) / antal * lop.length)]);
+};
+const VANSTER = U_SIDA(px => px < 330, N), HOGER = U_SIDA(px => px > 760, Math.round(N * .6));
+function elektronPos(i, f, t) {
+  const u0 = (i + .5) / N, u1 = VANSTER[i];
+  // gå längs konturen den kortaste vägen
+  let d = u1 - u0; if (d > .5) d -= 1; if (d < -.5) d += 1;
+  const u = u0 + d * mjuk(f) + .006 * Math.sin(t * 3 + i * 1.7) * (1 - f);
+  return OMKR.at(u);
+}
+function minus(px, py, alfa) {
+  x.globalAlpha = alfa; x.strokeStyle = BLA; x.lineWidth = 6; x.lineCap = 'butt';
+  x.beginPath(); x.moveTo(px - 10, py); x.lineTo(px + 10, py); x.stroke(); x.globalAlpha = 1; x.lineCap = 'round';
+}
+function plus(px, py, alfa) {
+  x.globalAlpha = alfa; x.strokeStyle = ROD; x.lineWidth = 6; x.lineCap = 'butt';
+  x.beginPath(); x.moveTo(px - 10, py); x.lineTo(px + 10, py); x.moveTo(px, py - 10); x.lineTo(px, py + 10); x.stroke();
+  x.globalAlpha = 1; x.lineCap = 'round';
+}
+function laddningar(f, t) {
+  for (let i = 0; i < N; i++) { const [px, py] = elektronPos(i, f, t); minus(px, py, 1); }
+  // Plustecknen syns där elektronerna lämnat: höger sida (u omkring 0,55–0,95)
+  for (const u of HOGER) {
+    const [px, py] = OMKR.at(u);
+    plus(px, py, mjuk(Math.min(1, Math.max(0, f * 1.3 - .2))));
+  }
+}
+function rubrik(s) { text(s, 540, 270, 64, INK, 'center', 700); }
+
+function blixt(t) {
+  // Blixt från överkanten ned mot taket, i accentfärgen
+  const alfa = t < .15 ? t / .15 : Math.max(.6, 1 - (t - .15) * .25);
+  x.globalAlpha = alfa; x.strokeStyle = ROD; x.lineWidth = 12; x.lineJoin = 'miter';
+  x.beginPath(); x.moveTo(440, 375); x.lineTo(530, 420); x.lineTo(470, 448); x.lineTo(555, 490); x.lineTo(510, 520); x.stroke();
+  x.lineJoin = 'round';
+  x.globalAlpha = 1;
+}
+// Strömpilar som vandrar längs plåten från taket (u ≈ 0,45) ned till hjulen
+function strom(t) {
+  const pos = OMKR.at(.45);
+  const fram = [.45, .62, .74, .85, .97], bak = [.45, .40, .30, .20, .05];
+  for (const vag of [fram, bak]) {
+    for (let k = 0; k < 7; k++) {
+      const s = ((t * .45 + k / 7) % 1);
+      const idx = s * (vag.length - 1), j = Math.floor(idx), r = idx - j;
+      const u = vag[j] + (vag[Math.min(j + 1, vag.length - 1)] - vag[j]) * r;
+      const p = OMKR.at(u), q = OMKR.at(u + (vag[vag.length - 1] > vag[0] ? .01 : -.01));
+      const a = Math.atan2(q[1] - p[1], q[0] - p[0]);
+      x.save(); x.translate(p[0], p[1]); x.rotate(a); x.fillStyle = STROM; x.globalAlpha = tona(t, .3, .5);
+      x.beginPath(); x.moveTo(16, 0); x.lineTo(-10, -11); x.lineTo(-10, 11); x.closePath(); x.fill(); x.restore();
+    }
+  }
+  // från plåten ned i marken vid hjulen
+  x.globalAlpha = tona(t, .8, .5);
+  x.strokeStyle = STROM; x.lineWidth = 6; x.setLineDash([14, 12]); x.lineDashOffset = -t * 60;
+  for (const [hx] of HJUL) { x.beginPath(); x.moveTo(hx - 90, 1085); x.lineTo(hx - 90, MARK); x.stroke(); }
+  x.setLineDash([]); x.globalAlpha = 1;
+  x.globalAlpha = tona(t, 1.0, .6);
+  x.fillStyle = STROM;
+  for (const [hx] of HJUL) { x.beginPath(); x.moveTo(hx - 90, MARK + 30); x.lineTo(hx - 102, MARK + 8); x.lineTo(hx - 78, MARK + 8); x.closePath(); x.fill(); }
+  x.globalAlpha = 1;
+}
+
+window.rita = (n, t) => {
+  papper();
+  // Figuren ritas förstorad kring bilens mitt och lite längre ned, så att
+  // den fyller bilden ovanför undertexterna
+  x.save(); x.translate(540, 890); x.scale(1.22, 1.22); x.translate(-540, -860);
+  rita0(n, t);
+  x.restore();
+  if (n === 6) rubrik('Fria elektroner i plåten');
+  if (n === 7) rubrik('Ett yttre elektriskt fält');
+  if (n === 8) rubrik('Negativ och positiv sida');
+  if (n === 9) rubrik('Fält åt motsatt håll');
+  if (n === 10) rubrik('Inuti tar fälten ut varandra');
+  if (n === 11) rubrik('Strömmen går i plåten');
+};
+const rubrik0 = () => {};
+function rita0(n, t) {
+  const rubrik = rubrik0;
+  bil();
+  if (n === 6) { rubrik('Fria elektroner i plåten'); laddningar(0, t); }
+  if (n === 7) {
+    rubrik('Ett yttre elektriskt fält');
+    yttreFalt(tona(t, 0, .6)); inreFalt(GRA, 1, tona(t, 0, .6) * (1 - tona(t, 1.2, 1.5) * .0));
+    laddningar(mjuk(Math.min(1, Math.max(0, (t - .6) / (SLOT[7] - 1.2)))), t);
+  }
+  if (n === 8) { rubrik('Minus till vänster, plus till höger'); yttreFalt(1); inreFalt(GRA, 1, 1); laddningar(1, t); }
+  if (n === 9) {
+    rubrik('Fält åt motsatt håll');
+    yttreFalt(1); laddningar(1, t);
+    // det yttre fältet inuti flyttas något uppåt så att båda syns
+    x.save(); x.translate(0, -16); inreFalt(GRA, 1, 1); x.restore();
+    x.save(); x.translate(0, 16); inreFalt(ROD, -1, tona(t, .3, .8)); x.restore();
+  }
+  if (n === 10) {
+    rubrik('Inuti tar fälten ut varandra');
+    yttreFalt(1); laddningar(1, t);
+    const k = 1 - tona(t, .5, 1.5);
+    x.save(); x.translate(0, -16); inreFalt(GRA, 1, k); x.restore();
+    x.save(); x.translate(0, 16); inreFalt(ROD, -1, k); x.restore();
+    forare();
+  }
+  if (n === 11) { rubrik('Strömmen går i plåten'); blixt(t); strom(t); }
+}
+window.info = () => ({ elektroner: N, faltlinjer: FALT_Y.length });
+rita(9, 2);
+</script></body></html>

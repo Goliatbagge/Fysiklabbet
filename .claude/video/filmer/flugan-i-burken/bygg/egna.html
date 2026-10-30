@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#f7f2e8}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// De egna scenerna i filmen "Flugan i burken". window.rita(scen, t) ritar
+// scenen vid tiden t (s).
+//   scen 3: flugan lyfter i den stängda burken på vågen; displayen rycker
+//           till vid starten (benens avstamp, sedan medan luftströmmen byggs
+//           upp) och visar samma värde som förut medan flugan hovrar;
+//   scen 6 (fortsätter i 7): vingarna trycker ned luften, kraft och motkraft
+//           lika långa;
+//   scen 9: kraften från luften uppåt och tyngdkraften lika långa, på samma
+//           verkningslinje;
+//   scen 10 (fortsätter i 11): luftströmmen når botten och trycker där lika
+//           hårt som flugans tyngd; displayen står still.
+// Alla kraftpilar för flugan är lika långa (LF), eftersom alla är lika stora
+// som flugans tyngd när den hovrar. Inget ritas i bandet y 1380–1560.
+const c = document.getElementById('c'), x = c.getContext('2d');
+const BLA = '#2b5ca8', INK = '#0f1620', ROD = '#c8324a', RUT = 'rgba(147,174,199,.55)', GRA = '#3f4a5c';
+const GLAS = 'rgba(126,178,214,.16)', LUFT = 'rgba(43,92,168,';
+const FPA = '#2f7d4f', FUPP = '#b8661c', FTYNGD = '#6d4ca8';   // på luften/botten grön, på flugan orange, tyngd lila
+const VARDE = '312,48 g';
+const LF = 260;
+
+function papper() {
+  const gr = x.createLinearGradient(0, 0, 0, 1920); gr.addColorStop(0, '#f7f2e8'); gr.addColorStop(1, '#ece3d2');
+  x.fillStyle = gr; x.fillRect(0, 0, 1080, 1920);
+  x.strokeStyle = RUT; x.lineWidth = 1.5;
+  for (let i = 0; i <= 1920; i += 27) { x.beginPath(); x.moveTo(0, i + .75); x.lineTo(1080, i + .75); x.stroke(); }
+  for (let i = 0; i <= 1080; i += 27) { x.beginPath(); x.moveTo(i + .75, 0); x.lineTo(i + .75, 1920); x.stroke(); }
+  x.lineCap = 'round'; x.lineJoin = 'round';
+}
+function text(s, px, py, size, col, align, vikt) {
+  x.font = `${vikt || 600} ${size}px Poppins`; x.fillStyle = col || INK; x.textAlign = align || 'center'; x.textBaseline = 'alphabetic';
+  x.fillText(s, px, py);
+}
+function beteckning(bok, idx, px, py, size, col, align) {
+  x.textBaseline = 'alphabetic';
+  x.font = `italic 600 ${size}px Poppins`; const wb = x.measureText(bok).width;
+  x.font = `600 ${size * .62}px Poppins`; const wi = x.measureText(idx).width;
+  const x0 = align === 'end' ? px - wb - wi - 2 : px;
+  x.fillStyle = col; x.textAlign = 'left';
+  x.font = `italic 600 ${size}px Poppins`; x.fillText(bok, x0, py);
+  x.font = `600 ${size * .62}px Poppins`; x.fillText(idx, x0 + wb + 2, py + size * .22);
+}
+// Kraftpil: skaft med rak ände som slutar vid huvudets bas
+function kraft(x0, y0, len, upp, col) {
+  const h = Math.max(14, Math.min(30, len * .9)), dir = upp ? -1 : 1;
+  x.strokeStyle = col; x.fillStyle = col; x.lineWidth = 9; x.lineCap = 'butt';
+  if (len > h) { x.beginPath(); x.moveTo(x0, y0); x.lineTo(x0, y0 + dir * (len - h)); x.stroke(); }
+  x.beginPath(); x.moveTo(x0, y0 + dir * len); x.lineTo(x0 - 15, y0 + dir * (len - h)); x.lineTo(x0 + 15, y0 + dir * (len - h)); x.closePath(); x.fill();
+  x.lineCap = 'round';
+}
+const tona = (t, t0, d) => Math.min(1, Math.max(0, (t - t0) / (d || .35)));
+
+// Flugan sedd från sidan: kropp i accentfärgen, vingarna suddiga när den flyger
+function fluga(cx, cy, s, t, flyger) {
+  x.save(); x.translate(cx, cy); x.scale(s, s);
+  if (flyger) {
+    const fas = Math.sin(t * 60);
+    x.fillStyle = 'rgba(43,92,168,.16)'; x.strokeStyle = 'rgba(43,92,168,.45)'; x.lineWidth = 1.6 / s * 2;
+    for (const k of [-1, 1]) {
+      x.save(); x.translate(-4, -12); x.rotate(k * (.55 + .25 * fas));
+      x.beginPath(); x.ellipse(0, -30, 13, 32, 0, 0, 7); x.fill(); x.stroke(); x.restore();
+    }
+  } else {
+    x.fillStyle = 'rgba(43,92,168,.14)'; x.strokeStyle = 'rgba(43,92,168,.55)'; x.lineWidth = 2;
+    x.beginPath(); x.ellipse(14, -14, 30, 11, -.15, 0, 7); x.fill(); x.stroke();
+  }
+  x.strokeStyle = BLA; x.lineWidth = 2.6;
+  for (const bx of [-10, 0, 10]) { x.beginPath(); x.moveTo(bx, 8); x.lineTo(bx - 5, 22 - (flyger ? 6 : 0)); x.lineTo(bx - 9, 28 - (flyger ? 8 : 0)); x.stroke(); }
+  x.fillStyle = ROD; x.strokeStyle = BLA; x.lineWidth = 2.6;
+  x.beginPath(); x.ellipse(6, 0, 24, 13, 0, 0, 7); x.fill(); x.stroke();
+  x.beginPath(); x.ellipse(-22, -2, 12, 12, 0, 0, 7); x.fill(); x.stroke();
+  x.fillStyle = INK; x.beginPath(); x.arc(-26, -4, 4.5, 0, 7); x.fill();
+  x.restore();
+}
+// Burken i genomskärning med skruvlock, och vågen under den
+function burk(x1, y1, x2, y2) {
+  x.fillStyle = GLAS; x.fillRect(x1, y1, x2 - x1, y2 - y1);
+  x.strokeStyle = BLA; x.lineWidth = 7;
+  x.beginPath(); x.moveTo(x1, y1); x.lineTo(x1, y2 - 24); x.quadraticCurveTo(x1, y2, x1 + 24, y2);
+  x.lineTo(x2 - 24, y2); x.quadraticCurveTo(x2, y2, x2, y2 - 24); x.lineTo(x2, y1); x.stroke();
+  x.fillStyle = '#d9dee6'; x.lineWidth = 6;
+  x.beginPath(); x.rect(x1 - 14, y1 - 48, x2 - x1 + 28, 48); x.fill(); x.stroke();
+  x.lineWidth = 3; for (let i = 1; i < 3; i++) { x.beginPath(); x.moveTo(x1 - 14, y1 - 48 + i * 16); x.lineTo(x2 + 14, y1 - 48 + i * 16); x.stroke(); }
+  x.strokeStyle = 'rgba(255,255,255,.75)'; x.lineWidth = 6;
+  x.beginPath(); x.moveTo(x1 + 22, y1 + 40); x.lineTo(x1 + 22, y1 + 200); x.stroke();
+}
+function vag(cx, ytop, w, varde) {
+  x.fillStyle = '#f3eee4'; x.strokeStyle = BLA; x.lineWidth = 7;
+  x.beginPath(); x.roundRect(cx - w / 2, ytop, w, 34, 8); x.fill(); x.stroke();
+  x.beginPath(); x.roundRect(cx - w / 2 + 30, ytop + 34, w - 60, 120, 18); x.fill(); x.stroke();
+  x.fillStyle = '#1d2a3a'; x.beginPath(); x.roundRect(cx - 170, ytop + 58, 340, 76, 10); x.fill();
+  x.font = '600 52px "JetBrains Mono", Consolas, monospace'; x.fillStyle = '#9fe0a8'; x.textAlign = 'center'; x.textBaseline = 'middle';
+  x.fillText(varde, cx, ytop + 97); x.textBaseline = 'alphabetic';
+}
+const lerp = (a, b, u) => a + (b - a) * u;
+const ease = u => u <= 0 ? 0 : u >= 1 ? 1 : u * u * (3 - 2 * u);
+
+// Luftströmmen under flugan: partiklar som går nedåt och breder ut sig vid botten
+function luftstrom(cx, ytop, ybotten, t, tStart, bredd) {
+  const N = 46, fart = 300;
+  for (let i = 0; i < N; i++) {
+    const h1 = (Math.sin(i * 12.9898) * 43758.5453) % 1, h2 = (Math.sin(i * 78.233) * 12345.678) % 1;
+    const fas = Math.abs(h1), xo = (Math.abs(h2) - .5) * bredd;
+    let alder = t - tStart - fas * 2.2; if (alder < 0) continue;
+    const L = ybotten - ytop, period = L / fart + .9; alder = alder % period;
+    let px = cx + xo * (1 + alder * .25), py = ytop + alder * fart, a = .55;
+    if (py > ybotten - 20) { const ut = (py - (ybotten - 20)); py = ybotten - 20 + Math.min(10, ut * .1); px = cx + xo + Math.sign(xo || 1) * ut * 1.4; a = Math.max(0, .55 - ut / 500); }
+    x.strokeStyle = LUFT + a + ')'; x.lineWidth = 4;
+    x.beginPath(); x.moveTo(px, py - 26); x.lineTo(px, py); x.stroke();
+  }
+}
+
+// ---------------- Scen 3: flugan lyfter ----------------
+const B3 = { x1: 300, x2: 780, y1: 420, y2: 1150 };
+function display3(t) {
+  // Avstampet ger en kort topp, sedan en lika stor dipp medan luftströmmen byggs upp
+  if (t > .85 && t < 1.05) return '312,51 g';
+  if (t >= 1.05 && t < 1.3) return '312,45 g';
+  return VARDE;
+}
+function scen3(t) {
+  papper();
+  burk(B3.x1, B3.y1, B3.x2, B3.y2);
+  vag(540, B3.y2, 640, display3(t));
+  const ybotten = B3.y2 - 22, yhov = 760;
+  const u = ease((t - .9) / 1.1);
+  const bob = t > 2 ? 5 * Math.sin((t - 2) * 3) : 0;
+  const cy = lerp(ybotten, yhov, u) + bob;
+  const flyger = t > .85;
+  if (flyger) luftstrom(540, cy + 30, B3.y2 - 8, t, .95, 120);
+  fluga(540, cy, 1.5, t, flyger);
+}
+
+// ---------------- Scen 6–7: kraft och motkraft ----------------
+function scen6(t, slot6) {
+  papper();
+  const cx = 540, cy = 700 + 6 * Math.sin(t * 3);
+  luftstrom(cx, cy + 70, 1330, t, 0, 260);
+  fluga(cx, cy, 3.4, t, true);
+  // Vingarnas kraft på luften, nedåt i luftströmmen
+  const a1 = tona(t, .6);
+  if (a1 > 0) {
+    x.globalAlpha = a1;
+    kraft(cx - 6, cy + 110, LF, false, FPA);
+    text('vingarna på luften', cx + 40, cy + 110 + LF - 40, 46, FPA, 'left');
+    x.globalAlpha = 1;
+  }
+  // Luftens kraft på flugan, uppåt, lika lång
+  const a2 = tona(t, slot6 + .2);
+  if (a2 > 0) {
+    x.globalAlpha = a2;
+    kraft(cx + 6, cy - 46, LF, true, FUPP);
+    text('luften på flugan', cx + 40, cy - 46 - LF + 40, 46, FUPP, 'left');
+    x.globalAlpha = 1;
+  }
+}
+
+// ---------------- Scen 9: jämvikt ----------------
+function scen9(t) {
+  papper();
+  const cx = 540, cy = 760;
+  fluga(cx, cy, 3.4, t, true);
+  kraft(cx - 6, cy, LF + 80, true, FUPP);
+  kraft(cx + 6, cy, LF + 80, false, FTYNGD);
+  x.fillStyle = INK; x.beginPath(); x.arc(cx, cy, 7, 0, 7); x.fill();
+  text('luften på flugan', cx - 34, cy - LF - 80 + 40, 46, FUPP, 'right');
+  beteckning('F', 'G', cx + 34, cy + LF + 80 - 8, 60, FTYNGD, 'start');
+}
+
+// ---------------- Scen 10–11: luften når botten ----------------
+const B10 = { x1: 250, x2: 830, y1: 380, y2: 1170 };
+function scen10(t, slot10) {
+  papper();
+  burk(B10.x1, B10.y1, B10.x2, B10.y2);
+  vag(540, B10.y2, 720, VARDE);
+  const cx = 540, cy = 560 + 5 * Math.sin(t * 3);
+  luftstrom(cx, cy + 34, B10.y2 - 8, t, 0, 140);
+  fluga(cx, cy, 1.6, t, true);
+  const LS = 170;
+  kraft(cx, cy, LS, false, FTYNGD);
+  x.fillStyle = INK; x.beginPath(); x.arc(cx, cy, 5, 0, 7); x.fill();
+  beteckning('F', 'G', cx + 26, cy + LS - 6, 50, FTYNGD, 'start');
+  const a = tona(t, slot10 + .2);
+  if (a > 0) {
+    x.globalAlpha = a;
+    kraft(cx, B10.y2 - 12 - LS, LS, false, FPA);
+    text('luften på botten', cx + 34, B10.y2 - 12 - LS + 34, 44, FPA, 'left');
+    x.globalAlpha = 1;
+  }
+}
+
+let SLOT = { 6: 3.69, 10: 4.17 };
+const SCENER = { 3: scen3, 6: t => scen6(t, SLOT[6]), 9: scen9, 10: t => scen10(t, SLOT[10]) };
+window.satt = s => { SLOT = s; };
+window.rita = (n, t) => SCENER[n](t);
+window.info = () => ({ LF, varde: VARDE });
+</script>
+</body></html>

@@ -1,0 +1,21 @@
+{
+ "film": "Flugan i burken",
+ "figur": "Malin",
+ "rost": "zyfJspwEDo0sxPeFmtsn",
+ "segment": [
+  {"scen": 1, "tal": "En fluga sitter i en stängd burk på en våg.", "undertext": "En fluga sitter i en stängd burk på en våg."},
+  {"scen": 2, "tal": "Nu lyfter flugan. Visar vågen mindre nu? Vad tror du?", "undertext": "Nu lyfter flugan. Visar vågen mindre nu? Vad tror du?"},
+  {"scen": 3, "tal": "Medan flugan hovrar visar vågen samma som förut.", "undertext": "Medan flugan hovrar visar vågen samma som förut."},
+  {"scen": 4, "tal": "Men flugan nuddar inte ens burken.", "undertext": "Men flugan nuddar inte ens burken."},
+  {"scen": 5, "tal": "Svaret finns i luften runt flugan.", "undertext": "Svaret finns i luften runt flugan."},
+  {"scen": 6, "tal": "Vingarna trycker ner luften, slag efter slag.", "undertext": "Vingarna trycker ned luften, slag efter slag."},
+  {"scen": 7, "tal": "Då trycker luften lika hårt uppåt på flugan.", "undertext": "Då trycker luften lika hårt uppåt på flugan."},
+  {"scen": 8, "tal": "Kraft och motkraft, enligt Newtons tredje lag.", "undertext": "Kraft och motkraft, enligt Newtons tredje lag."},
+  {"scen": 9, "tal": "Kraften uppåt och tyngdkraften tar ut varandra.", "undertext": "Kraften uppåt och tyngdkraften tar ut varandra."},
+  {"scen": 10, "tal": "Luften som trycks ner fortsätter mot burkens botten.", "undertext": "Luften som trycks ned fortsätter mot burkens botten."},
+  {"scen": 11, "tal": "Där trycker luften lika hårt på botten.", "undertext": "Där trycker luften lika hårt på botten."},
+  {"scen": 12, "tal": "Flugan trycker alltså på vågen, fast via luften.", "undertext": "Flugan trycker alltså på vågen, fast via luften."},
+  {"scen": 13, "tal": "Oavsett om flugan sitter eller hovrar visar vågen lika mycket.", "undertext": "Oavsett om flugan sitter eller hovrar visar vågen lika mycket."},
+  {"scen": 14, "tal": "Bara när flugan lyfter eller landar rycker vågen till.", "undertext": "Bara när flugan lyfter eller landar rycker vågen till."}
+ ]
+}

@@ -1,0 +1,16 @@
+{ "segment": [
+  { "scen": 1, "tal": "En blixt slår ner i en bil. Föraren klarar sig.", "undertext": "En blixt slår ner i en bil. Föraren klarar sig." },
+  { "scen": 2, "tal": "Är det gummidäcken som skyddar? Vad tror du?", "undertext": "Är det gummidäcken som skyddar? Vad tror du?" },
+  { "scen": 3, "tal": "Blixten har just gått flera kilometer genom luften.", "undertext": "Blixten har just gått flera kilometer genom luften." },
+  { "scen": 4, "tal": "Då stoppar några centimeter gummi den inte.", "undertext": "Då stoppar några centimeter gummi den inte." },
+  { "scen": 5, "tal": "Det som skyddar är bilens kaross av metall.", "undertext": "Det som skyddar är bilens kaross av metall." },
+  { "scen": 6, "tal": "I metall finns elektroner som rör sig fritt.", "undertext": "I metall finns elektroner som rör sig fritt." },
+  { "scen": 7, "tal": "Ett elektriskt fält utifrån knuffar dom åt ena sidan.", "undertext": "Ett elektriskt fält utifrån knuffar dem åt ena sidan." },
+  { "scen": 8, "tal": "Då blir ena sidan negativ och den andra positiv.", "undertext": "Då blir ena sidan negativ och den andra positiv." },
+  { "scen": 9, "tal": "Laddningarna ger ett lika stort fält åt motsatt håll.", "undertext": "Laddningarna ger ett lika stort fält åt motsatt håll." },
+  { "scen": 10, "tal": "Inne i bilen tar dom två fälten nästan ut varandra.", "undertext": "Inne i bilen tar de två fälten nästan ut varandra." },
+  { "scen": 11, "tal": "Strömmen går i plåten, runt föraren, ner i marken.", "undertext": "Strömmen går i plåten, runt föraren, ned i marken." },
+  { "scen": 12, "tal": "Ett sådant metallhölje kallas Faradays bur.", "undertext": "Ett sådant metallhölje kallas Faradays bur." },
+  { "scen": 13, "tal": "En bil med tygtak skyddar däremot inte lika bra.", "undertext": "En bil med tygtak skyddar däremot inte lika bra." },
+  { "scen": 14, "tal": "Det är plåten runt dig som skyddar, inte däcken.", "undertext": "Det är plåten runt dig som skyddar, inte däcken." }
+] }

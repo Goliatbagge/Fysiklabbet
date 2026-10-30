@@ -1,0 +1,16 @@
+{ "segment": [
+  { "scen": 1, "tal": "Bowlingklot och tennisboll släpps samtidigt. Vilken landar först?", "undertext": "Bowlingklot och tennisboll släpps samtidigt. Vilken landar först?" },
+  { "scen": 2, "tal": "Vad tror du?", "undertext": "Vad tror du?" },
+  { "scen": 3, "tal": "Dom landar praktiskt taget samtidigt.", "undertext": "De landar praktiskt taget samtidigt." },
+  { "scen": 4, "tal": "Aristoteles lärde ut att tunga saker faller fortare.", "undertext": "Aristoteles lärde ut att tunga saker faller fortare." },
+  { "scen": 5, "tal": "Det trodde man på i nästan tvåtusen år.", "undertext": "Det trodde man på i nästan 2 000 år." },
+  { "scen": 6, "tal": "Runt år sextonhundra visade Galileo Galilei att dä var fel.", "undertext": "Runt år 1600 visade Galileo Galilei att det var fel." },
+  { "scen": 7, "tal": "Att han släppte klot från tornet i Pisa är nog en skröna. Slutsatsen stämmer däremot.", "undertext": "Att han släppte klot från tornet i Pisa är nog en skröna. Slutsatsen stämmer däremot." },
+  { "scen": 8, "tal": "Det tunga klotet dras visserligen hårdare mot jorden.", "undertext": "Det tunga klotet dras visserligen hårdare mot jorden." },
+  { "scen": 9, "tal": "Men mer massa är också trögare att få fart på.", "undertext": "Men mer massa är också trögare att få fart på." },
+  { "scen": 10, "tal": "Kraften och trögheten tar ut varandra, och accelerationen blir densamma.", "undertext": "Kraften och trögheten tar ut varandra, och accelerationen blir densamma." },
+  { "scen": 11, "tal": "Varje sekund ökar farten med nästan tio meter per sekund.", "undertext": "Varje sekund ökar farten med nästan 10 m/s." },
+  { "scen": 12, "tal": "Men ett rosenblad singlar ju sakta ner?", "undertext": "Men ett rosenblad singlar ju sakta ned?" },
+  { "scen": 13, "tal": "Luften bromsar. I vakuum faller bladet lika fort som ett mynt.", "undertext": "Luften bromsar. I vakuum faller bladet lika fort som ett mynt." },
+  { "scen": 14, "tal": "Utan luft faller allt lika fort. Även på månen.", "undertext": "Utan luft faller allt lika fort. Även på månen." }
+] }

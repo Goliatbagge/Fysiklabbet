@@ -1,0 +1,16 @@
+{ "segment": [
+  { "scen": 1, "tal": "En spik sjunker. Ett stålfartyg på hundratusen ton flyter.", "undertext": "En spik sjunker. Ett stålfartyg på 100 000 ton flyter." },
+  { "scen": 2, "tal": "Hur kan stålet flyta? Vad tror du?", "undertext": "Hur kan stålet flyta? Vad tror du?" },
+  { "scen": 3, "tal": "Samma kilo stål kan både sjunka och flyta.", "undertext": "Samma kilo stål kan både sjunka och flyta." },
+  { "scen": 4, "tal": "Vattnet ger allt som sänks ner en kraft uppåt.", "undertext": "Vattnet ger allt som sänks ner en kraft uppåt." },
+  { "scen": 5, "tal": "Den kraften kallas lyftkraft.", "undertext": "Den kraften kallas lyftkraft." },
+  { "scen": 6, "tal": "Greken Arkimedes beskrev den för över tvåtusen år sedan.", "undertext": "Greken Arkimedes beskrev den för över 2 000 år sedan." },
+  { "scen": 7, "tal": "Lyftkraften är lika stor som tyngden av vattnet som trängs undan.", "undertext": "Lyftkraften är lika stor som tyngden av vattnet som trängs undan." },
+  { "scen": 8, "tal": "Spiken tränger bara undan sin egen volym vatten.", "undertext": "Spiken tränger bara undan sin egen volym vatten." },
+  { "scen": 9, "tal": "Lyftkraften är en åttondel av spikens tyngd. Spiken sjunker.", "undertext": "Lyftkraften är en åttondel av spikens tyngd. Spiken sjunker." },
+  { "scen": 10, "tal": "Fartyget är däremot ett ihåligt skal fyllt med luft.", "undertext": "Fartyget är däremot ett ihåligt skal fyllt med luft." },
+  { "scen": 11, "tal": "Skrovet sjunker djupare och tränger undan mer och mer vatten.", "undertext": "Skrovet sjunker djupare och tränger undan mer och mer vatten." },
+  { "scen": 12, "tal": "Till slut är lyftkraften lika stor som fartygets tyngd. Fartyget flyter.", "undertext": "Till slut är lyftkraften lika stor som fartygets tyngd. Fartyget flyter." },
+  { "scen": 13, "tal": "En liter vatten väger ett kilo, lika mycket som skålen.", "undertext": "1 liter vatten väger 1 kg, lika mycket som skålen." },
+  { "scen": 14, "tal": "Formen avgör hur mycket vatten stålet tränger undan.", "undertext": "Formen avgör hur mycket vatten stålet tränger undan." }
+] }

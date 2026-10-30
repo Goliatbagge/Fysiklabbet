@@ -1,0 +1,56 @@
+Scen 1 · 4 s · AI-SCEN
+"En blixt slår ner i en bil. Föraren klarar sig."
+
+Scen 2 · 4 s · AI-SCEN
+"Är det gummidäcken som skyddar? Vad tror du?"
+
+Scen 3 · 4 s · AI-SCEN
+"Blixten har just gått flera kilometer genom luften."
+
+Scen 4 · 4 s · AI-SCEN
+"Då stoppar några centimeter gummi den inte."
+
+Scen 5 · 4 s · AI-SCEN
+"Det som skyddar är bilens kaross av metall."
+
+Scen 6 · 4 s · EGEN INSPELNING
+"I metall finns elektroner som rör sig fritt."
+
+Egen animation (teorifiguren i fy1-7.13): bilen i genomskärning som en metallram. Ledningselektronerna syns som små blå minustecken utspridda i plåten och rör sig lite fritt.
+
+Scen 7 · 4 s · EGEN INSPELNING
+"Ett elektriskt fält utifrån knuffar dom åt ena sidan."
+
+Fortsättning: ett yttre elektriskt fält (grå fältlinjer åt höger med pilspetsen mitt på linjen) läggs på, och elektronerna glider åt vänster i plåten.
+
+Scen 8 · 4 s · EGEN INSPELNING
+"Då blir ena sidan negativ och den andra positiv."
+
+Fortsättning: vänstra sidan av plåten är full av minustecken och högra sidan får plustecken.
+
+Scen 9 · 4 s · EGEN INSPELNING
+"Laddningarna ger ett lika stort fält åt motsatt håll."
+
+Fortsättning: inuti bilen tonar röda fältlinjer åt vänster in, från plussidan till minussidan.
+
+Scen 10 · 4 s · EGEN INSPELNING
+"Inne i bilen tar dom två fälten nästan ut varandra."
+
+Fortsättning: inuti bilen tonar både de grå och de röda linjerna bort; ytan där föraren sitter är tom på fält. Nils sitter som liten figur inne i bilen.
+
+Scen 11 · 4 s · EGEN INSPELNING
+"Strömmen går i plåten, runt föraren, ner i marken."
+
+Egen animation: en blixt träffar taket, och strömmen (gula pilar) följer plåten runt kupén ned mot marken under bilen. Inne i bilen sker ingenting.
+
+Scen 12 · 4 s · AI-SCEN
+"Ett sådant metallhölje kallas Faradays bur."
+
+Scen 13 · 4 s · AI-SCEN
+"En bil med tygtak skyddar däremot inte lika bra."
+
+Scen 14 · 4 s · AI-SCEN
+"Det är plåten runt dig som skyddar, inte däcken."
+
+Scen 15 · 4 s · AI-SCEN
+"(inget tal, slutskylten läggs på i redigeringen)"

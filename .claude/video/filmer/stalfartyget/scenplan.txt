@@ -1,0 +1,54 @@
+Scen 1 · 4 s · AI-SCEN
+"En spik sjunker. Ett stålfartyg på hundratusen ton flyter."
+
+Scen 2 · 4 s · AI-SCEN
+"Hur kan stålet flyta? Vad tror du?"
+
+Scen 3 · 4 s · EGEN INSPELNING
+"Samma kilo stål kan både sjunka och flyta."
+
+Egen animation i rutpappersstil (som scen 3 i förra filmen), uträknad. Två glas akvarier bredvid varandra med sötvatten. Vänster: en massiv stålkloss på 1 kg, kub med sidan 5,0 cm, släpps vid ytan och sjunker till botten. Höger: samma 1 kg stål format till en öppen skål (radie 7 cm, höjd 10 cm) som läggs i vattnet och lägger sig med 6,5 cm under ytan. Etiketterna "1 kg stål" över båda. Ingen formel här.
+
+Scen 4 · 4 s · AI-SCEN
+"Vattnet ger allt som sänks ner en kraft uppåt."
+
+Scen 5 · 4 s · AI-SCEN
+"Den kraften kallas lyftkraft."
+
+Scen 6 · 4 s · AI-SCEN
+"Greken Arkimedes beskrev den för över tvåtusen år sedan."
+
+Scen 7 · 4 s · AI-SCEN
+"Lyftkraften är lika stor som tyngden av vattnet som trängs undan."
+
+Scen 8 · 4 s · AI-SCEN
+"Spiken tränger bara undan sin egen volym vatten."
+
+Scen 9 · 4 s · EGEN INSPELNING
+"Lyftkraften är en åttondel av spikens tyngd. Spiken sjunker."
+
+Egen figur, animerad: en spik i ett vattenglas, uppförstorad. Tyngdkraften F_G nedåt från spikens tyngdpunkt och lyftkraften F_L uppåt, skalenligt: F_L är en åttondel av F_G (0,0063 N mot 0,049 N, värdena visas inte, bara längderna). Spiken sjunker sakta mot botten medan pilarna följer med. Etiketterna F_G och F_L ritas vid pilspetsarna.
+
+Scen 10 · 4 s · AI-SCEN
+"Fartyget är däremot ett ihåligt skal fyllt med luft."
+
+Scen 11 · 4 s · EGEN INSPELNING
+"Skrovet sjunker djupare och tränger undan mer och mer vatten."
+
+Egen animation: ett fartygsskrov i genomskärning, ett ihåligt skal, sänks ned i havet. Det undanträngda vattnet markeras med ljusblå skuggning under vattenlinjen, och lyftkraften F_L växer i takt med att skrovet sjunker djupare, medan tyngden F_G är konstant. Inspelningen fortsätter direkt in i scen 12.
+
+Scen 12 · 4 s · EGEN INSPELNING
+"Till slut är lyftkraften lika stor som fartygets tyngd. Fartyget flyter."
+
+Fortsättning på scen 11: skrovet stannar där F_L har vuxit till samma längd som F_G. Pilarna står kvar lika långa på samma verkningslinje, och skrovet guppar lugnt i vattenytan.
+
+Scen 13 · 4 s · EGEN INSPELNING
+"En liter vatten väger ett kilo, lika mycket som skålen."
+
+Egen animation: samma skål som i scen 3, flytande. Bredvid skålen tonar en mätbägare på 1 liter fram, fylld med det undanträngda vattnet, och en enkel balansvåg med skålen i ena vågskålen och literbägaren i den andra står i jämvikt. På skärmen läggs "1 kg" vid båda.
+
+Scen 14 · 4 s · AI-SCEN
+"Formen avgör hur mycket vatten stålet tränger undan."
+
+Scen 15 · 4 s · AI-SCEN
+"(inget tal, slutskylten läggs på i redigeringen)"

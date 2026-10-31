@@ -15,6 +15,9 @@ Format:
 - Omskrivet 2026-10-31 på användarens begäran: inga Sigbjørn-simuleringar, ingen Satelliter just nu
   (sparas till 2026-11-08 med bild, se planerat.md). I stället Labbfolket-filmerna, Ma 3b, Fritt fall
   i vakuum och två Ma 1c-exempel. Kampanjen uppdaterad och nytt testmejl skickat samma dag.
+- Sedan användarens egna textändringar och en Flow-bild på Fylgia och Mattias (Malin och Nils) som
+  vinkar i Labbfolket-stycket. Testmejlet godkänt av användaren. SCHEMALAGD 2026-10-31 på användarens
+  begäran: söndag 2026-11-01 kl 06.00 (Europe/Amsterdam, UTC+1, samma som svensk tid), 36 mottagare.
 - Uppdaterat 2026-10-31 på användarens begäran: stycke om Nordplus-seminariet NGGN + AI i Esbo
   (23–25 okt) efter inledningen, och videolösningarna till NP Ma 1c och Ma 2c VT 2022 först under
   Nytt på Fysiklabbet med knappar till spellistorna. Ämnesraden ändrad därefter.

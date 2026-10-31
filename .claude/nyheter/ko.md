@@ -15,6 +15,12 @@ Format per post:
 - **S301: snabbaste stjärnan runt Sgr A* (8,7 år, 25 000 km/s) känner av svarta hålets rotation** **[BREVTEASER]** (nominerad 2026-10-25: snabbaste kända stjärnan i Vintergatan, belagd i fulltext; astronomi senast 2026-10-14) — GRAVITY-samarbetet, Nature 2026, DOI 10.1038/s41586-026-10894-w; fulltext läst i arXiv 2607.12664 (Discovery of a star sensitive to the spin of Sgr A*). OBS: ESO:s pressmeddelande eso2612 kom redan 2026-08-19 (ESO-bilder CC BY 4.0), så inte dagsfärskt; Physics World tog upp den 2026-10-08. Astronomi. Källa: https://physicsworld.com/a/fastest-star-in-the-milky-way-feels-the-rotation-of-our-central-black-hole/
   (tillagd 2026-10-20)
 
+- **Små vridningar i kryptokrom kan göra fåglarnas magnetkompass känsligare (Kobe)** — biofysik/kvantbiologi, tidsupplöst EPR på kryptokrom-DASH, kiralitetsinducerad spinnselektivitet ~6–8 %, förutsagd anisotropi 0,3 % → 1,6 %; teoretisk förutsägelse, inte demonstration i djur. Kobori m.fl., J. Phys. Chem. Lett. 2026, DOI 10.1021/acs.jpclett.6c02747; öppenhet ej kontrollerad (ACS ofta spärrad). OBS duvans kompass publicerades 2026-09-24 och spinn/magnetisk resonans 2026-10-31, vänta. Källa (Phys.org 2026-10-30): https://phys.org/news/2026-10-small-molecular-nature-magnetic-compass.html
+  (tillagd 2026-10-31)
+
+- **Altermagneter: elektriska signaler avslöjar dold magnetisk information för första gången** — magnetism/fasta tillståndets fysik. OBS altermagnetism publicerades 2026-07-26. Originalet ej kontrollerat. Källa (Phys.org 2026-10-29): https://phys.org/news/2026-10-electrical-reveal-hidden-magnetic-altermagnets.html
+  (tillagd 2026-10-31)
+
 - **Supermagnetstormen i maj 2024 accelererade elektroner till flera MeV innanför ”den ogenomträngliga barriären” i strålningsbältena (Arase)** — rymdfysik/jordmagnetism; norrskensstormen 10–11 maj 2024 som syntes i hela Sverige är en bra krok. Elektroner över 3 MeV accelererades på plats av chorusvågor när plasmasfären var urholkad i 4,3–4,7 dygn i stället för cirka 2. Miyoshi m.fl. (Nagoya, ISEE), Geophysical Research Letters 53, e2026GL125879 (publicerad 2026-10-26), DOI 10.1029/2026gl125879, CC BY 4.0. Fulltexten SPÄRRAD 2026-10-29 (agupubs.onlinelibrary.wiley.com ger Cloudflare-kontroll både för pdf och full-xml; WebFetch ger 403; inget förtryck hittat). Prova igen från en session med vanlig webbläsare. Källa (Phys.org 2026-10-28): https://phys.org/news/2026-10-solar-storm-triggered-ultrarelativistic-electrons.html
   (tillagd 2026-10-29)
 

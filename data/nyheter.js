@@ -103,6 +103,60 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-10-31-karnan-som-lyssnar",
+    date: "2026-10-31",
+    title: "Radiosignaler vände magneten i en enda atomkärna, fast det inte borde gå",
+    deck: "Med nålen i ett sveptunnelmikroskop har fysiker i Delft gjort magnetisk resonans på kärnan i en enda titanatom. Kärnans spinn gick att vända även när det knappt var kopplat till atomens elektron, och mekanismen bakom är ännu inte förklarad.",
+    category: "Atomfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-10-31-karnan-som-lyssnar.jpg",
+    imageAlt: "Ett stort laboratorieinstrument på ett stativ mitt i ett vitt rum. Vakuumkammare och rör av blank metall är till stor del inlindade i aluminiumfolie, och kablar och slangar går ut åt alla håll. Till höger sitter en person vid en dator.",
+    imageCredit: "Foto: Rickinasia, via Wikimedia Commons (CC BY-SA 4.0). Bilden visar ett sveptunnelmikroskop med elektronspinnresonans vid Center for Quantum Nanoscience i Seoul, inte Delftgruppens eget instrument.",
+    tags: ["atomfysik", "kärnspinn", "magnetisk resonans", "nmr", "elektronspinnresonans", "sveptunnelmikroskop", "hyperfin växelverkan", "titan", "kvantinformation", "magnetkamera"],
+    sources: [
+      { name: "TU Delft: Delft researchers control the magnetic core of a single atom, against expectations (27 oktober 2026)", url: "https://www.tudelft.nl/en/2026/tnw/delft-researchers-control-the-magnetic-core-of-a-single-atom-against-expectations" },
+      { name: "Phys.org: Against all expectations, researchers control the magnetic core of a single atom (28 oktober 2026)", url: "https://phys.org/news/2026-10-magnetic-core-atom.html" },
+      { name: "Nature Communications: studien (öppet tillgänglig, CC BY-NC-ND 4.0)", url: "https://www.nature.com/articles/s41467-026-78801-5" },
+      { name: "arXiv: förtrycket av studien i fulltext", url: "https://arxiv.org/abs/2512.11652" }
+    ],
+    research: {
+      citation: "H. G. Vennema, C. Mier, E. W. Stolte, L. Edens, J. Lee och S. Otte, ”Nuclear magnetic resonance on a single atom with a local probe”, Nature Communications (2026), publicerad 24 oktober 2026. Kollegialt granskad och öppet tillgänglig.",
+      url: "https://doi.org/10.1038/s41467-026-78801-5"
+    },
+    larare: {
+      moment: [
+        { label: "Resonans", href: "katalog.html?id=fy2-2.6" },
+        { label: "Magnetism och magnetfält", href: "katalog.html?id=fy2-3.1" },
+        { label: "Bohrs atommodell och energinivåer", href: "katalog.html?id=fy2-4.8" }
+      ],
+      fragor: [
+        "Kärnspinnet går bara att vända med en radiovåg av exakt rätt frekvens. Jämför med en gunga eller en gitarrsträng: vad har de gemensamt med spinnet, och vad skiljer dem åt?",
+        "Kärnans spinn är svårt att påverka och kan därför behålla sin riktning länge. Varför är samma egenskap både en fördel och en nackdel för den som vill lagra information i det?",
+        "Forskarna fick ett resultat som deras modell inte förutsåg och skriver att mekanismen ännu inte är förklarad. Varför är ett sådant resultat ändå värt att publicera?"
+      ]
+    },
+    body: [
+      { type: "p", html: "En magnetkamera på sjukhuset tar sina bilder genom att lyssna på atomkärnor. Kroppens vätekärnor beter sig som små magneter, och i kamerans starka magnetfält kan de fås att vända sig med radiovågor av precis rätt frekvens. Men en magnetkamera lyssnar på oräkneliga kärnor samtidigt, eftersom varje enskild kärna ger en alldeles för svag signal. Nu har fysiker vid Delfts tekniska universitet i Nederländerna gjort samma sak med kärnan i en enda atom, och de fick ett resultat som de inte väntade sig. Studien är publicerad i <em>Nature Communications</em>." },
+      { type: "h2", text: "Två magneter i samma atom" },
+      { type: "p", html: "Atomer kan vara magnetiska för att deras partiklar har spinn, en kvantmekanisk egenskap som gör dem till små kompassnålar. Den överlägset starkaste magnetismen kommer från elektronerna. Men i vissa atomer har även kärnan ett spinn. Det är mycket svagare, och just därför är det väl skyddat från omgivningen, som stör det mindre. Det gör kärnspinn intressanta för den som vill lagra kvantinformation, men också svåra att påverka och läsa av." },
+      { type: "p", html: "Forskarna studerade titanatomer som låg på ett tunt skikt av magnesiumoxid, två atomlager tjockt, ovanpå en kristall av silver. De valde isotopen titan-47, vars kärna har spinnet 5/2. Det betyder att kärnans spinn kan stå i sex olika lägen i ett magnetfält, med var sin energi. Försöken gjordes vid 0,4&nbsp;kelvin, alltså knappt en halv grad över absoluta nollpunkten, och i magnetfält mellan 0,2 och 1,4&nbsp;tesla. Det starkaste fältet är nästan lika starkt som i en vanlig magnetkamera." },
+      { type: "h2", text: "Rätt ton vänder spinnet" },
+      { type: "p", html: "Magnetisk resonans bygger på att spinnet bara kan byta läge genom bestämda energisteg. En radiovåg vänder spinnet bara om dess frekvens $f$ passar ett sådant steg $\\Delta E$, enligt $\\Delta E = h \\cdot f$, där $h$ är Plancks konstant. ”Det går att jämföra med strängarna på en gitarr”, säger studiens huvudförfattare Hester Vennema i universitetets pressmeddelande (översatt). ”Varje möjlig vridning av spinnet är som en sträng med sin egen ton. Man måste spela exakt rätt ton för att få en viss sträng att svänga.”" },
+      { type: "p", html: "Verktyget är ett ombyggt sveptunnelmikroskop. En vass metallspets hålls strax ovanför titanatomen, och en svag ström av elektroner, några pikoampere, tunnlar mellan spetsen och atomen. Spetsen har först fått plocka upp 10 till 20 järnatomer, så att den blir magnetisk. Då beror strömmen på åt vilket håll titanatomens elektronspinn pekar. Genom spetsen skickades två radiosignaler samtidigt: en på några gigahertz som vänder elektronens spinn, omkring 3,8&nbsp;gigahertz i fältet 0,45&nbsp;tesla, och en på mellan 50 och 85&nbsp;megahertz som riktar sig mot kärnan. Vid 0,45&nbsp;tesla låg elektronens ton alltså mellan 45 och 76 gånger högre än kärnans, enligt vår egen räkning ur studiens värden. Elektronens frekvens växer med magnetfältet, och i det starkaste fältet var den upp till ett par hundra gånger högre." },
+      { type: "p", html: "Kärnan läses av via elektronen. Kärnans och elektronens spinn påverkar varandra genom den så kallade hyperfina växelverkan, och därför delas elektronens resonans upp i sex toppar, en för varje läge hos kärnan. Hur höga topparna är visar hur ofta kärnan befinner sig i respektive läge. När den andra signalen träffade rätt frekvens för kärnan blev två av topparna lika höga: kärnspinnet hoppade då så ofta mellan två lägen att båda blev lika vanliga. Energistegen kunde mätas på någon megahertz när, vilket motsvarar några miljarddels elektronvolt." },
+      { type: "h2", text: "Det som inte borde hända" },
+      { type: "p", html: "Tidigare studier, bland annat från Delftgruppen själv, har sett signaler som liknar kärnmagnetisk resonans i enskilda koppar- och titanatomer. Men de signalerna syntes bara i svaga magnetfält, där kärnans och elektronens spinn är så hopkopplade att det som vände inte var kärnan ensam, utan båda tillsammans. I gruppens egna mätningar av samma slag försvann de helt vid 0,2&nbsp;tesla. Med den nya metoden gick kärnan att vända i hela intervallet från 0,2 upp till 1,4&nbsp;tesla, och över det intervallet minskar kopplingen till omkring en tiondel. Det var inte väntat." },
+      { type: "quote", html: "Enligt vår enkla förståelse borde det här egentligen inte hända. Kärnspinnet borde inte vara känsligt alls för de elektriska signalerna från ett sveptunnelmikroskop.", cite: "Sander Otte, TU Delft, i universitetets pressmeddelande (översatt)" },
+      { type: "p", html: "Forskarna har prövat flera förklaringar utan att kunna peka ut någon. Att signalen skakar kopplingen så att elektron och kärna byter läge med varandra är osannolikt, eftersom frekvenserna då hade legat på gigahertz i stället för megahertz. Att kärnans form drivs, titan-47-kärnan är inte helt rund och känner därför av hur det elektriska fältet varierar runt den, stämmer inte heller med vilka övergångar som syns och är åtminstone inte den viktigaste förklaringen. En svängning i kärnans magnetiska energi skulle passa mätningarna, men den borde vara svag, och forskarna skriver att mätningarna inte räcker för några säkra slutsatser om hur kärnan drivs." },
+      { type: "h2", text: "Ett spinn som kan hålla i sekunder" },
+      { type: "p", html: "Att kärnan går att styra just när den är frikopplad från elektronen är det viktiga. I en tidigare studie mätte samma grupp att kärnspinnet i en annan titanisotop, titan-49, behåller sin riktning i storleksordningen sekunder. Enligt forskarna gäller samma sak för titanatomen i det nya försöket i starka fält. Nästa steg är att mäta hur länge kärnan kan bära ett kvanttillstånd och att styra den med korta pulser i stället för med en jämn signal. ”Tillbaka till ritbordet, alltså”, säger Sander Otte. ”Det är faktiskt så vetenskapen fungerar.”" },
+      { type: "fact", title: "Visste du?", items: [
+        "Ett energisteg som motsvarar 50&nbsp;megahertz är bara omkring 0,2&nbsp;miljondels elektronvolt, enligt $\\Delta E = h \\cdot f$. Även vid 0,4&nbsp;kelvin är värmerörelsens energi över hundra gånger större, så kärnspinnet hamnar inte i ett bestämt läge bara genom att kylas. I försöket knuffas det i stället mot ett visst läge av den spinnpolariserade strömmen från spetsen.",
+        "Studien skickades in i mars 2026, godkändes i oktober och publicerades den 24 oktober 2026. Den fria förhandsversionen låg ute på arXiv redan i december 2025."
+      ] }
+    ]
+  },
+  {
     "id": "2026-10-30-elektronerna-som-surfar-pa-radiovagor",
     "date": "2026-10-30",
     "title": "Elektroner surfar på radiovågor och driver strömmen i ett fusionsplasma",

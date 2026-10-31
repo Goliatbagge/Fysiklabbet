@@ -2112,7 +2112,7 @@ window.BEGREPP = [
   {
     id: 'isotop',
     term: 'Isotop',
-    former: ['isotop', 'isotopen', 'isotoper', 'isotoperna', 'isotopisk', 'isotopiska', 'isotopförhållande', 'isotopförhållandet', 'isotopförhållanden', 'nuklid', 'nuklider', 'väteisotop', 'väteisotopen', 'väteisotoper', 'väteisotoperna', 'moderisotop', 'moderisotopen', 'radiumisotop', 'radiumisotoper', 'radiumisotoperna'],
+    former: ['isotop', 'isotopen', 'isotoper', 'isotoperna', 'isotopisk', 'isotopiska', 'isotopförhållande', 'isotopförhållandet', 'isotopförhållanden', 'nuklid', 'nuklider', 'väteisotop', 'väteisotopen', 'väteisotoper', 'väteisotoperna', 'moderisotop', 'moderisotopen', 'radiumisotop', 'radiumisotoper', 'radiumisotoperna', 'titanisotop', 'titanisotopen', 'titanisotoper'],
     kort: 'Atomer av samma grundämne men med olika många neutroner i kärnan. De uppför sig nästan likadant kemiskt, men skiljer sig i massa och i hur stabila de är.',
     relaterade: ['radioaktivt-sonderfall', 'spektroskopi', 'deuterium', 'tritium'],
     body: [
@@ -4438,6 +4438,30 @@ window.BEGREPP = [
       { type: 'p', html: 'Alla mätningar har brus. Med vanliga instrument kan man pressa ned bruset genom att mäta längre eller med fler partiklar, men kvantmekaniken sätter en gräns för hur långt det går. Den gränsen kallas heisenberggränsen, efter Werner Heisenberg, som formulerade obestämdhetsrelationen.' },
       { type: 'p', html: 'Ett enkelt exempel är att mäta en energi. En energi i ett kvantsystem visar sig som hur fort systemets tillstånd vrider sig i tiden. Två system med nästan samma energi börjar i samma tillstånd och glider sakta isär, ungefär som två klockor som går nästan lika fort. Ju mindre energiskillnaden är, desto längre tid tar det innan skillnaden märks. Heisenberggränsen säger hur fort det kan gå i bästa fall: hur mycket två tillstånd hinner skilja sig åt växer högst i takt med energiskillnaden gånger tiden, delad med Plancks konstant.' },
       { type: 'p', html: 'När många partiklar används i en mätning förbättras noggrannheten i bästa fall i takt med antalet partiklar, inte bara i takt med roten ur antalet, som är vad man klarar med oberoende partiklar. Mäter partiklarna samtidigt kräver det att de är sammanflätade. Gränsen används också som ett verktyg för att bevisa andra saker, till exempel hur fort ett system kan nå termisk jämvikt.' }
+    ]
+  },
+  {
+    id: 'sveptunnelmikroskop',
+    term: 'Sveptunnelmikroskop',
+    former: ['sveptunnelmikroskop', 'sveptunnelmikroskopet', 'sveptunnelmikroskopen', 'sveptunnelmikroskopi', 'sveptunnelmikroskopin', 'tunnelmikroskop', 'tunnelmikroskopet'],
+    kort: 'Ett mikroskop utan lins, där en vass metallnål förs över en yta på mindre än en nanometers avstånd. Strömmen av elektroner som tunnlar mellan nålen och ytan avslöjar var atomerna sitter.',
+    relaterade: ['tunneleffekt', 'spinn', 'magnetisk-resonans'],
+    body: [
+      { type: 'p', html: 'Föreställ dig att du ska rita av ett landskap i becksvart mörker med bara en käpp. Du för käppen över marken och känner efter var den är hög och var den är låg. Ett sveptunnelmikroskop gör ungefär så med en yta, fast käppen är en metallnål så vass att den kan sluta i en enda atom, och den rör aldrig riktigt vid ytan.' },
+      { type: 'p', html: 'Nålen hålls i stället en bråkdel av en nanometer ovanför ytan, och en liten spänning läggs mellan dem. Enligt den klassiska fysiken kan inga elektroner ta sig över glappet, men kvantmekaniken tillåter att de tunnlar igenom. Strömmen blir då mycket känslig för avståndet: flyttas nålen en tiondels nanometer närmare ytan blir strömmen ungefär tio gånger större. Genom att svepa nålen fram och tillbaka och hela tiden mäta strömmen bygger datorn upp en karta där varje atom syns som en liten kulle. Mikroskopet uppfanns av Gerd Binnig och Heinrich Rohrer vid IBM i Zürich, som fick Nobelpriset i fysik 1986.' },
+      { type: 'p', html: 'Nålen kan också användas som verktyg. Genom att sänka den lite och dra går det att skjuta enskilda atomer på plats, och med en magnetisk nål och radiosignaler går det att mäta och vända spinnet i en enda atom. Instrumenten är därför ofta byggda för att fungera i vakuum och vid temperaturer strax över absoluta nollpunkten, där atomerna ligger stilla och värmerörelsen inte stör.' }
+    ]
+  },
+  {
+    id: 'magnetisk-resonans',
+    term: 'Magnetisk resonans',
+    former: ['magnetisk resonans', 'magnetiska resonansen'],
+    kort: 'Ett sätt att vända spinnet hos atomkärnor eller elektroner med en radiovåg. Det fungerar bara när vågens frekvens passar exakt till det energisteg spinnet ska ta i ett magnetfält.',
+    relaterade: ['spinn', 'hyperfinstruktur', 'sveptunnelmikroskop'],
+    body: [
+      { type: 'p', html: 'Tänk på en gunga. Den kommer högt bara om du knuffar i rätt takt, och knuffar du i fel takt händer nästan ingenting. Magnetisk resonans bygger på samma idé. Elektroner och många atomkärnor har spinn, som gör dem till små magneter. I ett yttre magnetfält kan en sådan magnet bara peka på vissa bestämda sätt, och varje läge har sin egen energi.' },
+      { type: 'p', html: 'För att flytta spinnet från ett läge till ett annat måste det få precis rätt mängd energi. En radiovåg med frekvensen <em>f</em> levererar energin i portioner som är <em>h</em>&nbsp;·&nbsp;<em>f</em> stora, där <em>h</em> är Plancks konstant. Bara när portionen är lika stor som energisteget vänds spinnet, och det är den frekvensen som kallas resonansfrekvensen. Den beror på hur starkt magnetfältet är och på vilken partikel det gäller. Elektroner har mycket starkare magnetism än kärnor och vänds därför av betydligt högre frekvenser: elektronspinnresonans ligger oftast på gigahertz, kärnmagnetisk resonans på megahertz.' },
+      { type: 'p', html: 'Kärnmagnetisk resonans kallas ofta NMR, efter engelskans <em>nuclear magnetic resonance</em>. Kemister använder den för att ta reda på hur molekyler är byggda, och på sjukhuset är den grunden för magnetkameran, som lyssnar på vätekärnorna i kroppens vatten och fett. Normalt behövs väldigt många kärnor för att signalen ska gå att mäta. Med ett sveptunnelmikroskop har forskare på senare år lyckats göra magnetisk resonans på enskilda atomer.' }
     ]
   },
 ];

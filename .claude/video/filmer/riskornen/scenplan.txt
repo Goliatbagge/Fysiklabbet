@@ -1,0 +1,74 @@
+Scen 1 · 4 s · AI-SCEN
+"Enligt en gammal berättelse fick schackets uppfinnare önska sig något."
+
+Scen 2 · 4 s · AI-SCEN
+"Han bad om ett riskorn på första rutan."
+
+Scen 3 · 4 s · EGEN INSPELNING
+"Två på nästa, sedan fyra, sedan åtta."
+
+Egen animation: schackbrädet (8 × 8 rutor, ruta 1 nere till vänster). Korn dyker upp på ruta 1–4: 1, 2, 4 och 8 korn, med antalet nederst i rutan.
+
+Scen 4 · 4 s · AI-SCEN
+"Brädet har 64 rutor. Hur mycket ris blir det?"
+
+Scen 5 · 4 s · AI-SCEN
+"En säck? En lastbil? Vad tror du?"
+
+Scen 6 · 4 s · EGEN INSPELNING
+"Första raden, åtta rutor, fyller inte ens en matsked."
+
+Egen animation: första raden tonar in ruta för ruta med talen 1, 2, 4, …, 128. Sedan "255 korn, cirka 6 gram".
+
+Scen 7 · 4 s · EGEN INSPELNING
+"Vid halva brädet har vi ungefär 100 ton ris."
+
+Egen animation: rad 1–4 tonas rad för rad. Sedan "4 294 967 295 korn" och "cirka 100 ton".
+
+Scen 8 · 4 s · AI-SCEN
+"Mycket, men så mycket klarar en rik kung."
+
+Scen 9 · 4 s · EGEN INSPELNING
+"Varje ny ruta rymmer mer än alla rutor före tillsammans."
+
+Egen animation: rutorna 1–32 i blått, ruta 33 i rött. Ruta 1–32: 4 294 967 295, ruta 33: 4 294 967 296, "ett korn mer".
+
+Scen 10 · 4 s · EGEN INSPELNING
+"Sista rutan ensam rymmer hälften av allt ris."
+
+Egen animation: en rektangel för allt ris delas i halvor: ruta 64 hälften, ruta 63 en fjärdedel, sedan 62, 61, …
+
+Scen 11 · 4 s · EGEN INSPELNING
+"Totalt blir det 18 miljarder miljarder riskorn."
+
+Egen animation: 18 446 744 073 709 551 615 skrivs fram i tresiffriga grupper, sedan "riskorn" och = 2^64 − 1.
+
+Scen 12 · 4 s · EGEN INSPELNING
+"Lägg allt jämnt på brädet. Högen blir flera miljarder kilometer hög."
+
+Egen animation: ett bräde på 40 × 40 cm där riset växer till en pelare ut ur bilden; sedan hela höjden i linjär skala med streckade mått vid 1, 10 och 20 gånger avståndet till solen, och toppen märkt "cirka 3,6 miljarder km".
+
+Scen 13 · 4 s · AI-SCEN
+"Tänd en ficklampa nere vid brädet."
+
+Scen 14 · 4 s · EGEN INSPELNING
+"Ljuset når toppen först efter drygt tre timmar."
+
+Egen animation: samma skalbild med en ficklampa vid brädet; en ljusprick går med konstant fart från brädet till toppen medan klockan räknar från 0 h 00 min till 3 h 20 min.
+
+Scen 15 · 4 s · AI-SCEN
+"Häll i stället ut allt riset över hela Sverige."
+
+Scen 16 · 4 s · EGEN INSPELNING
+"Då ligger riset ungefär en meter djupt, överallt."
+
+Egen animation: genomskärning av marken. Riset stiger till 1 m; en vuxen (1,75 m) står i det till midjan, måttpil 1 m.
+
+Scen 17 · 4 s · AI-SCEN
+"Det motsvarar flera hundra år av hela världens risskörd."
+
+Scen 18 · 4 s · AI-SCEN
+"Fördubbling ser liten ut i början. Sedan blir den ofattbar."
+
+Scen 19 · 4 s · AI-SCEN
+"(inget tal, slutskylten läggs på i redigeringen)"

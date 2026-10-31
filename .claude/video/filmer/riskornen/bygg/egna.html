@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#f7f2e8}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// De egna scenerna i filmen "Riskornen på schackbrädet". window.rita(scen, t)
+// ritar scenen vid tiden t (s). Alla tal är uträknade, inte gissade:
+//   scen 3: 1, 2, 4 och 8 korn på de fyra första rutorna;
+//   scen 6: första raden, 1 + 2 + … + 128 = 255 korn, cirka 6 g (25 mg per korn);
+//   scen 7: halva brädet, 2^32 − 1 = 4 294 967 295 korn, cirka 107 ton;
+//   scen 9: ruta 33 har 2^32 korn, exakt ett mer än rutorna 1–32 tillsammans;
+//   scen 10: sista rutan är hälften av allt, rutan före en fjärdedel och så vidare;
+//   scen 11: totalt 2^64 − 1 = 18 446 744 073 709 551 615 korn;
+//   scen 12: allt ris jämnt på ett bräde på 40 × 40 cm (0,16 m²) blir en hög
+//            på 5,8 · 10^11 m³ / 0,16 m² ≈ 3,6 · 10^12 m = cirka 3,6 miljarder km,
+//            cirka 24 gånger avståndet jorden–solen (1,496 · 10^11 m); skalan är linjär;
+//   scen 14: ljuset behöver 3,6 · 10^12 m / 3,0 · 10^8 m/s ≈ 12 000 s = 3 h 20 min;
+//            pricken rör sig med konstant fart och klockan följer den;
+//   scen 16: hela riset (cirka 580 km³ med 0,8 t/m³) över Sverige
+//            (cirka 410 000 km² land eller 530 000 km² med sjöarna) ger ett lager på 1,1–1,4 m; filmen säger
+//            "ungefär en meter".
+// Inget ritas i bandet y 1380–1560 (undertexterna).
+const c = document.getElementById('c'), x = c.getContext('2d');
+const BLA = '#2b5ca8', INK = '#0f1620', ROD = '#c8324a', RUT = 'rgba(147,174,199,.55)', GRA = '#3f4a5c';
+const MORK = '#d6e1ee', LJUS = '#fbf8f2';
+let SLOT = {};
+window.satt = s => Object.assign(SLOT, s);
+
+function papper() {
+  const gr = x.createLinearGradient(0, 0, 0, 1920); gr.addColorStop(0, '#f7f2e8'); gr.addColorStop(1, '#ece3d2');
+  x.fillStyle = gr; x.fillRect(0, 0, 1080, 1920);
+  x.strokeStyle = RUT; x.lineWidth = 1.5;
+  for (let i = 0; i <= 1920; i += 27) { x.beginPath(); x.moveTo(0, i + .75); x.lineTo(1080, i + .75); x.stroke(); }
+  for (let i = 0; i <= 1080; i += 27) { x.beginPath(); x.moveTo(i + .75, 0); x.lineTo(i + .75, 1920); x.stroke(); }
+  x.lineCap = 'round'; x.lineJoin = 'round';
+}
+function text(s, px, py, size, col, align, vikt) {
+  x.font = `${vikt || 600} ${size}px Poppins`; x.fillStyle = col || INK; x.textAlign = align || 'center'; x.textBaseline = 'alphabetic';
+  x.fillText(s, px, py);
+}
+const klamp = u => Math.min(1, Math.max(0, u));
+const tona = (t, t0, d) => klamp((t - t0) / (d || .5));
+const mjuk = u => u * u * (3 - 2 * u);
+const hash = n => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+const NB = ' ';
+const grupper = s => s.replace(/\B(?=(\d{3})+(?!\d))/g, NB);
+function rubrik(s, alfa) { x.globalAlpha = alfa === undefined ? 1 : alfa; text(s, 540, 300, 66, INK, 'center', 700); x.globalAlpha = 1; }
+function underrubrik(s, py, alfa, col) { x.globalAlpha = alfa; text(s, 540, py, 50, col || BLA, 'center', 600); x.globalAlpha = 1; }
+
+// Schackbrädet: 8 × 8 rutor, ruta 1 längst ned till vänster som när man
+// räknar på ett riktigt bräde (rad för rad, vänster till höger).
+const B = { x0: 140, y0: 500, s: 100 };
+function rutaXY(nr) {           // nr 1–64
+  const i = nr - 1, rad = Math.floor(i / 8), kol = i % 8;
+  return [B.x0 + kol * B.s, B.y0 + (7 - rad) * B.s];
+}
+function brade(fyll) {
+  // fyll(nr) ger en extra färg för rutan eller null
+  for (let nr = 1; nr <= 64; nr++) {
+    const [px, py] = rutaXY(nr), i = nr - 1, mork = (Math.floor(i / 8) + i % 8) % 2 === 0;
+    x.fillStyle = mork ? MORK : LJUS; x.fillRect(px, py, B.s, B.s);
+    const f = fyll && fyll(nr);
+    if (f) { x.globalAlpha = f[1]; x.fillStyle = f[0]; x.fillRect(px, py, B.s, B.s); x.globalAlpha = 1; }
+  }
+  x.strokeStyle = BLA; x.lineWidth = 3;
+  for (let k = 1; k < 8; k++) {
+    x.beginPath(); x.moveTo(B.x0 + k * B.s, B.y0); x.lineTo(B.x0 + k * B.s, B.y0 + 8 * B.s); x.stroke();
+    x.beginPath(); x.moveTo(B.x0, B.y0 + k * B.s); x.lineTo(B.x0 + 8 * B.s, B.y0 + k * B.s); x.stroke();
+  }
+  x.lineWidth = 6; x.strokeRect(B.x0, B.y0, 8 * B.s, 8 * B.s);
+}
+// Ett riskorn: avlång ellips med blå kontur
+function korn(px, py, vinkel, skala, alfa) {
+  if (alfa <= 0) return;
+  x.save(); x.globalAlpha = alfa; x.translate(px, py); x.rotate(vinkel); x.scale(skala, skala);
+  x.fillStyle = '#ffffff'; x.strokeStyle = BLA; x.lineWidth = 2.6;
+  x.beginPath(); x.ellipse(0, 0, 13, 5.5, 0, 0, 7); x.fill(); x.stroke();
+  x.restore();
+}
+// k korn utspridda i en ruta (deterministiskt), som dyker upp med en liten studs
+function kornIRuta(nr, k, t0, t) {
+  const [px, py] = rutaXY(nr);
+  for (let j = 0; j < k; j++) {
+    const s = nr * 31 + j * 7;
+    const u = tona(t, t0 + j * .05, .25);
+    const studs = u < 1 ? 1 + .35 * Math.sin(u * Math.PI) : 1;
+    const gx = px + 26 + hash(s) * (B.s - 52), gy = py + 22 + hash(s + 1) * (B.s - 70);
+    korn(gx, gy, hash(s + 2) * Math.PI, 1.25 * studs, u);
+  }
+}
+function talIRuta(nr, s, alfa, col, size) {
+  const [px, py] = rutaXY(nr);
+  x.globalAlpha = alfa; text(s, px + B.s / 2, py + B.s / 2 + (size || 34) * .36, size || 34, col || BLA, 'center', 700); x.globalAlpha = 1;
+}
+
+// Scen 13: genomskärning av marken med riset ovanpå, en vuxen som skala
+const MARK = 1250, METER = 380;        // 1 m = 380 px
+function person(px, fot) {
+  const h = 1.75 * METER, hy = fot - h;   // 1,75 m lång
+  x.strokeStyle = INK; x.lineWidth = 8; x.fillStyle = LJUS;
+  x.beginPath(); x.arc(px, hy + 50, 48, 0, 7); x.fill(); x.stroke();          // huvud
+  x.beginPath(); x.moveTo(px, hy + 98); x.lineTo(px, fot - .5 * METER * 1.75); x.stroke();   // kropp
+  x.beginPath(); x.moveTo(px, fot - .5 * METER * 1.75); x.lineTo(px - 45, fot); x.moveTo(px, fot - .5 * METER * 1.75); x.lineTo(px + 45, fot); x.stroke();
+  x.beginPath(); x.moveTo(px - 95, hy + 120); x.lineTo(px, hy + 160); x.lineTo(px + 95, hy + 120); x.stroke(); // armar uppåt i förvåning
+}
+function rislager(hojd, t) {
+  // riset som tät fyllning av korn upp till höjden hojd (px)
+  const topp = MARK - hojd;
+  x.save(); x.beginPath(); x.rect(0, topp, 1080, hojd); x.clip();
+  x.globalAlpha = .6; x.fillStyle = '#fffdf8'; x.fillRect(0, topp, 1080, hojd); x.globalAlpha = .55;
+  for (let j = 0; j < 1500; j++) {
+    const gx = hash(j * 3) * 1100 - 10, gy = MARK - hash(j * 3 + 1) * (1.4 * METER);
+    if (gy < topp - 6) continue;
+    korn(gx, gy, hash(j * 3 + 2) * Math.PI, .9, 1);
+  }
+  x.globalAlpha = 1; x.restore();
+  x.strokeStyle = BLA; x.lineWidth = 4; x.beginPath(); x.moveTo(0, topp); x.lineTo(1080, topp); x.stroke();
+}
+function matt(px, y0, y1, etikett, alfa) {
+  x.globalAlpha = alfa; x.strokeStyle = ROD; x.fillStyle = ROD; x.lineWidth = 6; x.lineCap = 'butt';
+  x.beginPath(); x.moveTo(px, y0 + 22); x.lineTo(px, y1 - 22); x.stroke();
+  for (const [y, d] of [[y0, 1], [y1, -1]]) { x.beginPath(); x.moveTo(px, y); x.lineTo(px - 14, y + d * 24); x.lineTo(px + 14, y + d * 24); x.closePath(); x.fill(); }
+  x.lineWidth = 3; x.beginPath(); x.moveTo(px - 30, y0); x.lineTo(px + 30, y0); x.moveTo(px - 30, y1); x.lineTo(px + 30, y1); x.stroke();
+  x.lineCap = 'round';
+  text(etikett, px + 36, y0 - 22, 56, ROD, 'start', 700);
+  x.globalAlpha = 1;
+}
+
+// Scen 10: en rektangel som står för allt ris, delad i halvor
+function halvering(t) {
+  const X0 = 110, Y0 = 520, W = 860, H = 780;
+  const delar = [['Ruta 64', ROD], ['Ruta 63', BLA], ['62', BLA], ['61', BLA]];
+  x.fillStyle = LJUS; x.fillRect(X0, Y0, W, H);
+  let x0 = X0, y0 = Y0, w = W, h = H;
+  delar.forEach(([namn, col], k) => {
+    const a = tona(t, .25 + k * .7, .45);
+    if (a <= 0) return;
+    let rx, ry, rw, rh;
+    if (k % 2 === 0) { rw = w / 2; rh = h; rx = x0; ry = y0; x0 += rw; w -= rw; }
+    else { rw = w; rh = h / 2; rx = x0; ry = y0; y0 += rh; h -= rh; }
+    x.globalAlpha = a * (k === 0 ? .2 : .1); x.fillStyle = col; x.fillRect(rx, ry, rw, rh);
+    x.globalAlpha = a; x.strokeStyle = BLA; x.lineWidth = 4; x.strokeRect(rx, ry, rw, rh);
+    const stor = k === 0 ? 62 : k === 1 ? 52 : 40;
+    text(namn, rx + rw / 2, ry + rh / 2 + (k < 2 ? -6 : stor * .35), stor, k === 0 ? ROD : BLA, 'center', 700);
+    if (k < 2) text(k === 0 ? 'hälften' : 'en fjärdedel', rx + rw / 2, ry + rh / 2 + 56, 40, GRA, 'center', 600);
+    x.globalAlpha = 1;
+  });
+  // resten: allt annat ryms i hörnet
+  const a = tona(t, .25 + 4 * .7, .45);
+  x.globalAlpha = a; text('…', x0 + w / 2, y0 + h / 2 + 14, 52, BLA, 'center', 700); x.globalAlpha = 1;
+  x.strokeStyle = BLA; x.lineWidth = 6; x.strokeRect(X0, Y0, W, H);
+}
+
+window.rita = (n, t) => {
+  papper();
+  const d = SLOT[n] || 4;
+  if (n === 3) {
+    rubrik('Dubbelt så många varje gång');
+    brade();
+    const start = [0, .2, .9, 1.6, 2.3];
+    for (let r = 1; r <= 4; r++) {
+      kornIRuta(r, 2 ** (r - 1), start[r] * d / 4, t);
+      { const [px, py] = rutaXY(r); x.globalAlpha = tona(t, start[r] * d / 4 + .3, .3); text(String(2 ** (r - 1)), px + B.s / 2, py + B.s - 12, 30, INK, 'center', 700); x.globalAlpha = 1; }
+    }
+  }
+  if (n === 6) {
+    rubrik('Första raden');
+    brade(nr => nr <= 8 ? [ROD, .14 * tona(t, (nr - 1) * .28, .2)] : null);
+    for (let r = 1; r <= 8; r++) talIRuta(r, String(2 ** (r - 1)), tona(t, (r - 1) * .28, .2), INK, r < 7 ? 38 : 34);
+    underrubrik(`255${NB}korn, cirka 6${NB}gram`, 430, tona(t, 2.4, .4), ROD);
+  }
+  if (n === 7) {
+    rubrik('Halva brädet');
+    brade(nr => nr <= 32 ? [ROD, .14 * tona(t, .2 + Math.floor((nr - 1) / 8) * .45, .3)] : null);
+    underrubrik(`4${NB}294${NB}967${NB}295${NB}korn`, 410, tona(t, 1.9, .4), INK);
+    underrubrik(`cirka 100${NB}ton`, 470, tona(t, 2.2, .4), ROD);
+  }
+  if (n === 9) {
+    rubrik('Ruta 33 mot allt före');
+    brade(nr => nr <= 32 ? [BLA, .13] : nr === 33 ? [ROD, .3 * tona(t, .2, .4)] : null);
+    x.globalAlpha = tona(t, .2, .4); x.strokeStyle = ROD; x.lineWidth = 8;
+    const [qx, qy] = rutaXY(33); x.strokeRect(qx, qy, B.s, B.s); x.globalAlpha = 1;
+    const a = tona(t, .8, .4), b = tona(t, 1.6, .4), e = tona(t, 2.5, .4);
+    x.globalAlpha = a; text('Ruta 1–32:', 110, 405, 44, BLA, 'start', 600); text(`4${NB}294${NB}967${NB}295`, 970, 405, 44, BLA, 'end', 700);
+    x.globalAlpha = b; text('Ruta 33:', 110, 465, 44, ROD, 'start', 600); text(`4${NB}294${NB}967${NB}296`, 970, 465, 44, ROD, 'end', 700);
+    x.globalAlpha = 1;
+    // "+1" vid sista siffran
+    x.globalAlpha = e; text('ett korn mer', 540, 1350, 46, ROD, 'center', 700); x.globalAlpha = 1;
+  }
+  if (n === 10) {
+    rubrik('Sista rutan är hälften');
+    halvering(t);
+  }
+  if (n === 11) {
+    rubrik('Alla 64 rutor');
+    const rad1 = ['18', '446', '744', '073'], rad2 = ['709', '551', '615'];
+    const alla = rad1.concat(rad2), dt = Math.min(.32, (d - 1.2) / alla.length);
+    const visad = k => tona(t, .2 + k * dt, .2);
+    const rita_rad = (grp, off, py) => {
+      x.font = '700 118px Poppins';
+      const bredd = grp.reduce((s, g) => s + x.measureText(g).width, 0) + (grp.length - 1) * 34;
+      let px = 540 - bredd / 2;
+      grp.forEach((g, i) => {
+        x.globalAlpha = visad(off + i); text(g, px, py, 118, INK, 'left', 700);
+        px += x.measureText(g).width + 34;
+      });
+      x.globalAlpha = 1;
+    };
+    rita_rad(rad1, 0, 720);
+    rita_rad(rad2, rad1.length, 870);
+    const a = tona(t, .2 + alla.length * dt + .1, .4);
+    x.globalAlpha = a; text('riskorn', 540, 990, 64, ROD, 'center', 700);
+    // 2^64 − 1 med upphöjd exponent
+    x.font = '600 60px Poppins'; const w2 = x.measureText('= 2').width;
+    x.font = '600 36px Poppins'; const w64 = x.measureText('64').width;
+    x.font = '600 60px Poppins'; const wr = x.measureText(' − 1').width;
+    let px = 540 - (w2 + w64 + wr) / 2;
+    text('= 2', px, 1130, 60, BLA, 'left', 600); px += w2;
+    text('64', px + 2, 1100, 36, BLA, 'left', 600); px += w64 + 4;
+    text(' − 1', px, 1130, 60, BLA, 'left', 600);
+    x.globalAlpha = 1;
+  }
+  if (n === 12) rita12(t);
+  if (n === 14) rita14(t);
+  if (n === 16) {
+    rubrik('Över hela Sverige');
+    // marken
+    x.fillStyle = '#e4d6bd'; x.fillRect(0, MARK, 1080, 120);
+    x.strokeStyle = BLA; x.lineWidth = 5; x.beginPath(); x.moveTo(0, MARK); x.lineTo(1080, MARK); x.stroke();
+    for (let k = 0; k < 40; k++) { const gx = k * 28; x.lineWidth = 2; x.beginPath(); x.moveTo(gx, MARK + 10); x.lineTo(gx - 22, MARK + 40); x.stroke(); }
+    const hojd = METER * mjuk(tona(t, .3, Math.max(1, d - 1.6)));
+    // personen ritas före riset (benen skymtar genom det) och sedan en gång
+    // till ovanför risytan, så att det syns hur djupt hon står
+    person(380, MARK);
+    rislager(hojd, t);
+    x.save(); x.beginPath(); x.rect(0, 0, 1080, MARK - hojd - 2); x.clip(); person(380, MARK); x.restore();
+    matt(820, MARK - METER, MARK, `1${NB}m`, tona(t, d - 1.2, .4));
+  }
+};
+
+// Scen 12 och 14: pelaren av ris i linjär skala, med avståndet till solen som mått
+const HOJD_M = Number(2n ** 64n - 1n) * 25e-6 / 800 / 0.16;   // ≈ 3,6 · 10^12 m
+const AE = 1.496e11, C_LJUS = 2.998e8;
+const P = { x: 540, bot: 1290, top: 450, w: 26 };             // pelarens läge i skalbilden
+const yAvst = m => P.bot - (P.bot - P.top) * m / HOJD_M;
+function litetBrade(cx, cy, sida) {
+  const r = sida / 8;
+  for (let i = 0; i < 64; i++) { x.fillStyle = (Math.floor(i / 8) + i % 8) % 2 ? LJUS : MORK; x.fillRect(cx - sida / 2 + (i % 8) * r, cy + Math.floor(i / 8) * r, r, r); }
+  x.strokeStyle = BLA; x.lineWidth = 4; x.strokeRect(cx - sida / 2, cy, sida, sida);
+}
+function skalbild(alfa, utan) {
+  if (alfa <= 0) return;
+  x.globalAlpha = alfa;
+  litetBrade(P.x, P.bot, 80);
+  // pelaren
+  x.fillStyle = '#fffdf8'; x.fillRect(P.x - P.w / 2, P.top, P.w, P.bot - P.top);
+  x.strokeStyle = BLA; x.lineWidth = 4; x.strokeRect(P.x - P.w / 2, P.top, P.w, P.bot - P.top);
+  // mått: gånger avståndet till solen
+  for (const [k, etikett] of [[1, 'avståndet till solen'], [10, '10 gånger så långt'], [20, '20 gånger så långt']]) {
+    const y = yAvst(k * AE);
+    x.strokeStyle = GRA; x.lineWidth = 3; x.setLineDash([10, 8]);
+    x.beginPath(); x.moveTo(P.x + P.w / 2 + 10, y); x.lineTo(P.x + 120, y); x.stroke(); x.setLineDash([]);
+    text(etikett, P.x + 135, y + 13, 36, GRA, 'start', 600);
+  }
+  // toppen
+  if (!utan) {
+    x.strokeStyle = ROD; x.lineWidth = 4; x.beginPath(); x.moveTo(P.x - P.w / 2 - 110, P.top); x.lineTo(P.x - P.w / 2 - 10, P.top); x.stroke();
+    text('cirka 3,6', P.x - P.w / 2 - 125, P.top + 4, 40, ROD, 'end', 700);
+    text(`miljarder${NB}km`, P.x - P.w / 2 - 125, P.top + 50, 40, ROD, 'end', 700);
+  }
+  x.globalAlpha = 1;
+}
+function ficklampa(cx, cy) {
+  x.save(); x.translate(cx, cy);
+  x.fillStyle = LJUS; x.strokeStyle = BLA; x.lineWidth = 4;
+  x.beginPath(); x.rect(-11, 0, 22, 54); x.fill(); x.stroke();
+  x.beginPath(); x.moveTo(-11, 0); x.lineTo(-18, -18); x.lineTo(18, -18); x.lineTo(11, 0); x.closePath(); x.fill(); x.stroke();
+  x.restore();
+}
+const LJUSFARG = '#d08a12';
+window.rita12 = t => {
+  const d = SLOT[12] || 7;
+  rubrik('Allt ris på brädet');
+  // del 1: närbild, ett bräde med en pelare som växer ut ur bilden
+  const a1 = 1 - tona(t, 2.6, .6);
+  if (a1 > 0) {
+    x.globalAlpha = a1;
+    const sida = 400, by = 1010;
+    const topp = by - mjuk(tona(t, .2, 2.2)) * (by - 360);
+    x.save(); x.beginPath(); x.rect(540 - sida / 2, topp, sida, by - topp); x.clip();
+    x.fillStyle = '#fffdf8'; x.fillRect(540 - sida / 2, topp, sida, by - topp);
+    for (let j = 0; j < 900; j++) korn(540 - sida / 2 + hash(j * 5) * sida, by - hash(j * 5 + 1) * 660, hash(j * 5 + 2) * Math.PI, .9, .6);
+    x.restore();
+    x.strokeStyle = BLA; x.lineWidth = 4; x.strokeRect(540 - sida / 2, topp, sida, by - topp);
+    litetBrade(540, by, sida);
+    x.globalAlpha = 1;
+  }
+  // del 2: hela höjden i skala
+  skalbild(tona(t, 2.9, .7));
+};
+window.rita14 = t => {
+  const d = SLOT[14] || 4;
+  rubrik('Ljuset på väg upp');
+  skalbild(1, true);
+  ficklampa(P.x + 80, P.bot + 20);
+  const res = d - .9, u = klamp((t - .3) / res);            // konstant fart
+  const y = P.bot - (P.bot - P.top) * u;
+  x.strokeStyle = LJUSFARG; x.lineWidth = 8; x.globalAlpha = .55;
+  x.beginPath(); x.moveTo(P.x, P.bot); x.lineTo(P.x, y); x.stroke(); x.globalAlpha = 1;
+  x.fillStyle = LJUSFARG; x.beginPath(); x.arc(P.x, y, 16, 0, 7); x.fill();
+  const sek = u * HOJD_M / C_LJUS, h = Math.floor(sek / 3600), min = Math.floor((sek % 3600) / 60);
+  text(`${h}${NB}h ${String(min).padStart(2, '0')}${NB}min`, 540, 400, 64, LJUSFARG, 'center', 700);
+};
+window.info = () => ({ korn_totalt: '18446744073709551615', ruta33: 2 ** 32, ruta1_32: 2 ** 32 - 1, hog_km: HOJD_M / 1e3, ae: HOJD_M / AE, ljus_s: HOJD_M / C_LJUS });
+rita(12, 6);
+</script></body></html>

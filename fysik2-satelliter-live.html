@@ -107,10 +107,31 @@
             pointer-events: none; font-weight: 500; max-width: calc(100% - 300px);
         }
         .scene-info.sat-klocka {
-            position: absolute; bottom: 10px; right: 12px; z-index: 5;
+            position: absolute; top: 18px; left: 66px; z-index: 5;
             font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: #e9edf3;
             background: rgba(10,14,22,0.78); padding: 5px 11px; border-radius: 7px;
             display: flex; align-items: center; gap: 8px; pointer-events: none;
+        }
+        /* Snabbmenyn på scenen: satellit att följa och tid. Mörka knappar på den
+           mörka rymdscenen. På mobil (≤600 px) läggs den i flödet under scenen. */
+        .sat-snabb { position: absolute; left: 12px; bottom: 12px; z-index: 5;
+                     display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+                     max-width: calc(100% - 24px); }
+        .ss-rad { display: flex; flex-wrap: wrap; align-items: center; gap: 5px;
+                  background: rgba(10,14,22,0.74); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+                  border: 1px solid rgba(255,255,255,0.13); border-radius: 10px; padding: 5px 7px; max-width: 100%; }
+        .ss-lbl { font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: #a3aebd;
+                  font-weight: 600; margin: 0 3px 0 2px; }
+        .ss-knapp { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 12.5px; line-height: 1.2;
+                    color: #e9edf3; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+                    border-radius: 7px; padding: 4px 9px; cursor: pointer; white-space: nowrap; }
+        .ss-knapp:hover:not(:disabled):not(.active) { background: rgba(255,255,255,0.17); }
+        .ss-knapp.active { background: #f3eee4; color: #0f1620; border-color: #f3eee4; }
+        .ss-knapp:disabled { opacity: 0.4; cursor: default; }
+        .ss-avdel { width: 1px; align-self: stretch; background: rgba(255,255,255,0.2); margin: 0 3px; }
+        @media (max-width: 600px) {
+            .sat-snabb { position: static; max-width: none; margin: 8px 8px 0; }
+            .ss-knapp { font-size: 13px; padding: 6px 10px; }
         }
         .live-prick { width: 8px; height: 8px; border-radius: 50%; background: #3ddc84;
                       box-shadow: 0 0 0 0 rgba(61,220,132,0.7); animation: puls 1.8s infinite; }
@@ -1284,15 +1305,15 @@
 
         // ── Färdiga försök ──
         const PRESETS = [
-            { id: 'iss', namn: 'Rymdstationen ISS', grupp: 'stationer', hitta: (s) => s.id === 25544, avst: 4.4,
+            { id: 'iss', kort: 'ISS', namn: 'Rymdstationen ISS', grupp: 'stationer', hitta: (s) => s.id === 25544, avst: 4.4,
               text: 'Rymdstationen ISS på drygt 400 km höjd, ett varv på drygt 90 minuter. Följ den över dag- och nattsidan.' },
-            { id: 'hubble', namn: 'Hubble', grupp: 'vetenskap', hitta: (s) => s.id === 20580, avst: 4.4,
+            { id: 'hubble', kort: 'Hubble', namn: 'Hubble', grupp: 'vetenskap', hitta: (s) => s.id === 20580, avst: 4.4,
               text: 'Rymdteleskopet Hubble, exemplet i genomgången. Kontrollera själv att farten stämmer med gravitationslagen för höjden just nu.' },
-            { id: 'gps', namn: 'GPS-satellit', grupp: 'navigering', hitta: [(s) => /^GPS BIII/.test(s.namn), (s) => /^GPS /.test(s.namn)], avst: 9.5,
+            { id: 'gps', kort: 'GPS', namn: 'GPS-satellit', grupp: 'navigering', hitta: [(s) => /^GPS BIII/.test(s.namn), (s) => /^GPS /.test(s.namn)], avst: 9.5,
               text: 'GPS-satelliterna går på drygt 20 000 km höjd, två varv per stjärndygn. Högre upp är farten lägre.' },
-            { id: 'meteosat', namn: 'Geostationär', grupp: 'vader', hitta: [(s) => /^METEOSAT-11/.test(s.namn), (s) => /^METEOSAT/.test(s.namn)], avst: 15,
+            { id: 'meteosat', kort: 'Geostationär', namn: 'Geostationär', grupp: 'vader', hitta: [(s) => /^METEOSAT-11/.test(s.namn), (s) => /^METEOSAT/.test(s.namn)], avst: 15,
               text: 'Vädersatelliten Meteosat på 35 786 km höjd: ett varv tar lika lång tid som jordens rotation, så den står stilla över Afrika och tar bilderna i väderprognosen.' },
-            { id: 'starlink', namn: 'Starlink', grupp: 'starlink', hitta: (s) => /^STARLINK/.test(s.namn), avst: 4.4,
+            { id: 'starlink', kort: 'Starlink', namn: 'Starlink', grupp: 'starlink', hitta: (s) => /^STARLINK/.test(s.namn), avst: 4.4,
               text: 'Tiotusen Starlink-satelliter på 340–570 km höjd. Alla i samma höjd har samma fart, oavsett massa.' },
         ];
 
@@ -1496,13 +1517,6 @@
             const antalSynliga = m ? GRUPPER.reduce((a, g) => a + (synliga[g.id] && m.G[g.id].status === 'klar' ? m.G[g.id].sats.length : 0), 0) : 0;
 
             const FARTER = [1, 10, 60, 300, 1000];
-            const fartKnappar = (kl) => (
-                <div className="flex flex-wrap gap-1">
-                    {FARTER.map(f => (
-                        <button key={f} className={'btn-toggle ' + kl + (fart === f ? ' active' : '')} onClick={() => setFart(f)}>{fmtNum(f)}×</button>
-                    ))}
-                </div>
-            );
 
             const sceneToggles = () => {
                 if (!togglesOpen) return (
@@ -1550,24 +1564,6 @@
                             <span>Moln</span></label>
                         <label><input type="checkbox" checked={visa.folj} disabled={!info || nara} onChange={() => setVisa(v => ({ ...v, folj: !v.folj }))} />
                             <span>Följ vald satellit</span></label>
-                        <label><input type="checkbox" checked={nara} disabled={!info} onChange={() => setNara(n => !n)} />
-                            <span>Följ på nära håll</span></label>
-                        {isFullscreen && (
-                            <React.Fragment>
-                                <div className="st-title mt">Tid</div>
-                                {fartKnappar('btn-small')}
-                                <div className="st-title mt">Färdiga försök</div>
-                                <div className="st-presets">
-                                    {PRESETS.map(p => (
-                                        <button key={p.id} className={'btn-toggle' + (preset === p.id ? ' active' : '')} onClick={() => korPreset(p)}>{p.namn}</button>
-                                    ))}
-                                </div>
-                                <div className="st-actions">
-                                    <button className="btn-toggle" onClick={() => setPaus(pp => !pp)}>{paus ? 'Fortsätt' : 'Pausa'}</button>
-                                    <button className="btn-toggle" onClick={tillNu} disabled={arLive}>Tillbaka till nu</button>
-                                </div>
-                            </React.Fragment>
-                        )}
                     </div>
                 );
             };
@@ -1604,10 +1600,27 @@
                                         <div className="sat-lager" ref={lagerRef}></div>
                                         {antalSynliga === 0 && <div className="sat-laddar">{T('Hämtar banelement …')}</div>}
                                     </div>
-                                    <div className="scene-hint">
-                                        {nara
-                                            ? T('Dra för att se dig omkring runt satelliten, zooma med hjulet eller två fingrar. Satelliten är förstorad.')
-                                            : T('Dra för att vrida jorden, zooma med hjulet eller två fingrar. Klicka på en satellit för att välja den.')}
+                                    {/* Snabbmenyn: satellit att följa och tid. Varje knapp finns bara här. */}
+                                    <div className="sat-snabb">
+                                        <div className="ss-rad">
+                                            <span className="ss-lbl">Följ</span>
+                                            {PRESETS.map(p => (
+                                                <button key={p.id} className={'ss-knapp' + (preset === p.id ? ' active' : '')}
+                                                        title={p.namn} onClick={() => korPreset(p)}>{p.kort}</button>
+                                            ))}
+                                            <span className="ss-avdel"></span>
+                                            <button className={'ss-knapp' + (nara ? ' active' : '')} disabled={!info}
+                                                    title="Följ på nära håll" onClick={() => setNara(n => !n)}>Nära</button>
+                                        </div>
+                                        <div className="ss-rad">
+                                            <span className="ss-lbl">Tid</span>
+                                            {FARTER.map(f => (
+                                                <button key={f} className={'ss-knapp' + (fart === f && !paus ? ' active' : '')} onClick={() => { setFart(f); setPaus(false); }}>{fmtNum(f)}×</button>
+                                            ))}
+                                            <span className="ss-avdel"></span>
+                                            <button className={'ss-knapp' + (paus ? ' active' : '')} onClick={() => setPaus(pp => !pp)}>{paus ? 'Fortsätt' : 'Pausa'}</button>
+                                            <button className="ss-knapp" onClick={tillNu} disabled={arLive} title="Tillbaka till nu">Nu</button>
+                                        </div>
                                     </div>
                                     <div className="scene-info sat-klocka">
                                         <span className={'live-prick' + (arLive ? '' : ' av')}></span>
@@ -1629,6 +1642,9 @@
                                     </button>
                                 </div>
                                 <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
+                                    {nara
+                                        ? T('Dra för att se dig omkring runt satelliten, zooma med hjulet eller två fingrar. Satelliten är förstorad.')
+                                        : T('Dra för att vrida jorden, zooma med hjulet eller två fingrar. Klicka på en satellit för att välja den.')}{' '}
                                     {statusText} {T('Jorden är i skala med banorna, satelliterna är förstorade till synliga prickar.')}
                                 </p>
 
@@ -1647,14 +1663,13 @@
 
                             <div className="lg:w-2/5 order-2">
                                 <div className="glass-card rounded-xl p-3 mb-3">
-                                    <div className="flbl mb-2">Färdiga försök</div>
-                                    <div className="preset-grid">
-                                        {PRESETS.map(p => (
-                                            <button key={p.id} className={'btn-toggle btn-small' + (preset === p.id ? ' active' : '')} onClick={() => korPreset(p)}>{p.namn}</button>
-                                        ))}
-                                    </div>
-                                    {presetInfo && <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>{presetInfo.text}</p>}
-                                    <div className="flbl mt-3 mb-1">Sök satellit</div>
+                                    {presetInfo && (
+                                        <React.Fragment>
+                                            <div className="flbl mb-1">{presetInfo.namn}</div>
+                                            <p className="text-xs mb-3" style={{ color: 'var(--lab-ink-muted)' }}>{presetInfo.text}</p>
+                                        </React.Fragment>
+                                    )}
+                                    <div className="flbl mb-1">Sök satellit</div>
                                     <input className="sok-in" type="search" value={sok} placeholder="Till exempel ISS, Hubble, Galileo eller Meteosat"
                                            onChange={(e) => setSok(e.target.value)} />
                                     {traffar.length > 0 && (
@@ -1679,19 +1694,6 @@
                                 </div>
 
                                 <div className="glass-card rounded-xl p-3 mb-3">
-                                    <div className="flbl mb-2">Tid</div>
-                                    {fartKnappar('btn-small')}
-                                    <div className="flex gap-2 mt-2">
-                                        <button className="btn-toggle flex-1" onClick={() => setPaus(pp => !pp)}>{paus ? 'Fortsätt' : 'Pausa'}</button>
-                                        <button className="btn-toggle flex-1" onClick={tillNu} disabled={arLive}>Tillbaka till nu</button>
-                                    </div>
-                                    <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
-                                        Med 1× visas läget i realtid. Snabbspola för att se hur satelliterna rör sig och hur
-                                        jorden roterar under banorna.
-                                    </p>
-                                </div>
-
-                                <div className="glass-card rounded-xl p-3 mb-3">
                                     <div className="flbl mb-2">Vald satellit</div>
                                     {info ? (
                                         <React.Fragment>
@@ -1701,9 +1703,6 @@
                                                 {info.namn !== info.original && <span className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}> ({info.original})</span>}
                                                 <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{grpDef.namn}, {T('katalognummer')} {info.id}</div>
                                             </div>
-                                            <button className={'btn-toggle btn-small mb-3' + (nara ? ' active' : '')} onClick={() => setNara(n => !n)}>
-                                                {nara ? 'Tillbaka till översikten' : 'Följ på nära håll'}
-                                            </button>
                                             <div className="avl-grid">
                                                 <Avl val={fmtNum(info.r - RJ) + ' km'} lbl="höjd över jordytan <em>h</em>" />
                                                 <Avl val={fmtNum(info.r) + ' km'} lbl="avstånd till medelpunkten <em>r</em>" />

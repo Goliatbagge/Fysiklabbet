@@ -103,6 +103,62 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-01-vintergatans-gomda-foljeslagare",
+    date: "2026-11-01",
+    title: "Rubinobservatoriets provdata avslöjar två gömda följeslagare till Vintergatan",
+    deck: "En ytterst ljussvag stjärnsamling 355 000 ljusår bort, kanske en av de minsta galaxer som setts, och en stjärnhop som legat dold bakom damm på andra sidan Vintergatans centrum. Båda hittades i provbilder från Rubinobservatoriet i Chile, bilder som täcker bara omkring sju procent av himlen.",
+    category: "Astronomi",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-01-vintergatans-gomda-foljeslagare.jpg",
+    imageAlt: "En ljus observatoriebyggnad med kantigt tak och ett högt torn står på en kal bergstopp under en stjärnklar natthimmel. Vintergatans band med mörka dammstråk bågnar över himlen, och nere vid horisonten lyser några små ljuspunkter.",
+    imageCredit: "Foto: NSF–DOE Rubin Observatory/P. J. Assuncao Lago, via Wikimedia Commons (CC BY 4.0), beskuren.",
+    tags: ["astronomi", "vintergatan", "dvärggalax", "klotformig stjärnhop", "mörk materia", "rubinobservatoriet", "magnitud", "ljusår", "stoft", "gaia"],
+    sources: [
+      { name: "Yale News: Historic new observatory reveals two hidden companions of the Milky Way (28 oktober 2026)", url: "https://news.yale.edu/2026/10/28/historic-new-observatory-reveals-two-hidden-companions-milky-way" },
+      { name: "Phys.org: Rubin observatory reveals two hidden companions of the Milky Way (29 oktober 2026)", url: "https://phys.org/news/2026-10-rubin-observatory-reveals-hidden-companions.html" },
+      { name: "arXiv: studien om Aquarius IV i fulltext", url: "https://arxiv.org/abs/2608.02601" },
+      { name: "arXiv: studien om Rubin-GC1 i fulltext (CC BY 4.0)", url: "https://arxiv.org/abs/2609.15872" }
+    ],
+    research: {
+      citation: "W. Cerny, A. Pai, A. Drlica-Wagner m.fl., ”Discovery of the Distant, Ultra-faint Milky Way Satellite Aquarius IV with the Vera C. Rubin Observatory Early Data Preview 2”, Research Notes of the AAS 10, 239 (2026), publicerad 17 augusti 2026. Kort forskningsnotis som granskats av en redaktör men inte kollegialt granskats. Samt A. Pai, W. Cerny, A. B. Pace m.fl., ”Rubin Observatory Reveals a Dust-Shrouded Halo Globular Cluster in Ophiuchus”, antagen i The Astrophysical Journal Letters (kollegialt granskad), förtryck arXiv:2609.15872.",
+      url: "https://doi.org/10.3847/2515-5172/ae993b"
+    },
+    larare: {
+      moment: [
+        { label: "Universums struktur", href: "katalog.html?id=fy2-5.1" },
+        { label: "Gravitationslagen", href: "katalog.html?id=fy1-3.5" }
+      ],
+      fragor: [
+        "Aquarius IV hittades inte som en fläck i bilden utan som ett litet överskott av stjärnor med rätt färg och ljusstyrka. Varför räcker det inte att bara räkna stjärnor på ett ställe på himlen?",
+        "Stjärnorna i en ultraljussvag dvärggalax rör sig snabbare än deras egen massa kan hålla ihop. Vad säger det om galaxen, och varför kan rörelserna skilja en galax från en stjärnhop?",
+        "Rubin-GC1 syns i äldre bilder men hade aldrig upptäckts. Vilka skäl kan det finnas till att ett objekt som går att se ändå inte blir upptäckt?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Runt Vintergatan kretsar ett följe av mindre galaxer och stjärnhopar. De största, Stora och Lilla magellanska molnet, syns med blotta ögat från södra halvklotet, men de flesta är så ljussvaga att de bara går att hitta som en svag förtätning av stjärnor i mycket djupa bilder. Nu har astronomer hittat två nya medlemmar i följet i tidiga provdata från Vera C. Rubinobservatoriet i Chile. Den ena, Aquarius IV, är kanske en av de minsta och ljussvagaste galaxer som någonsin setts. Den andra, Rubin-GC1, är en stjärnhop som legat gömd bakom ett tjockt lager damm på andra sidan Vintergatans centrum." },
+      { type: "h2", text: "Provbilder från sju procent av himlen" },
+      { type: "p", html: "Rubinobservatoriet står på berget Cerro Pachón och har ett teleskop med en 8,4&nbsp;meter stor spegel och den största digitalkamera som byggts, på 3,2&nbsp;miljarder bildpunkter. I juni 2026 började det en tioårig kartläggning av den södra himlen, där samma områden fotograferas om och om igen. Bilderna som nu gett fynden togs redan före starten, under provperioden från april 2025 till januari 2026. De släpptes till forskarna den 27 juli 2026 och täcker omkring 3&nbsp;000 kvadratgrader, ungefär sju procent av himlen." },
+      { type: "p", html: "En så ljussvag galax syns inte som en fläck i bilden. Den syns som ett litet överskott av stjärnor på ett ställe. Stjärnor som föddes ungefär samtidigt ur samma gas ligger längs en bestämd kurva i ett diagram över färg och ljusstyrka, och sett på samma avstånd hamnar de på samma plats i diagrammet. Forskarnas datorprogram provade därför avstånd efter avstånd och letade efter platser där det fanns fler stjärnor med just de färgerna och ljusstyrkorna än i omgivningen. Samma sökning hittade också alla tidigare kända ljussvaga följeslagare i området, vilket visar att metoden fungerar." },
+      { type: "h2", text: "Aquarius IV: kanske en av de minsta galaxerna" },
+      { type: "p", html: "Aquarius IV ligger i stjärnbilden Vattumannen och gav ett utslag på 8&nbsp;sigma, ett statistiskt mått som betyder att det är ytterst osannolikt att förtätningen är en slump. När forskarna gick tillbaka till äldre bilder från kameran Dark Energy Camera, också den i Chile, fanns den där också, men svagare. Avståndet är omkring 109&nbsp;kiloparsec, ungefär 355&nbsp;000&nbsp;ljusår, mer än tre gånger så långt bort som Rubin-GC1. Halva ljuset kommer från ett område med en radie på ungefär 19&nbsp;parsec, drygt 60&nbsp;ljusår. Den absoluta magnituden är $M_V \\approx -1{,}9$, vilket betyder att hela stjärnsamlingen lyser ungefär som 500&nbsp;solar tillsammans. En enda blå stjärna av en sort vars ljusstyrka är känd, en så kallad blå horisontalgrenstjärna, var viktig för att bestämma avståndet." },
+      { type: "p", html: "Det är ännu inte säkert att Aquarius IV är en galax. Storleken och ljusstyrkan stämmer med de minsta och ljussvagaste ultraljussvaga dvärggalaxer som är kända, och radien är större än hos nästan alla Vintergatans klotformiga stjärnhopar. Därför klassar forskarna den preliminärt som en dvärggalax, men skriver att en stjärnhop inte går att utesluta. Bara ett litet antal stjärnor har setts, och för att avgöra saken behövs djupare bilder och spektroskopi, där ljuset från enskilda stjärnor delas upp i sina våglängder. Ultraljussvaga dvärggalaxer är de galaxer som innehåller mest mörk materia i förhållande till sina stjärnor, och det syns på att stjärnorna rör sig snabbare än deras egen massa skulle kunna hålla ihop. I en stjärnhop finns inget sådant överskott." },
+      { type: "quote", html: "Om observatoriet kan hitta så ljussvaga och svårfunna system med bara sina provdata, kommer dess fullständiga tioåriga kartläggning utan tvekan att ge oss många fler upptäckter av följeslagare till Vintergatan.", cite: "William Cerny, doktorand i astronomi vid Yale och huvudförfattare till studien om Aquarius IV, i universitetets pressmeddelande (översatt)" },
+      { type: "h2", text: "Rubin-GC1: stjärnhopen bakom dammet" },
+      { type: "p", html: "Rubin-GC1 hittades i riktning mot Vintergatans centrala del, i stjärnbilden Ormbäraren, och var det starkaste utslaget i hela sökningen. Hopen syns i efterhand även i äldre bilder från andra teleskop, men den finns inte i någon katalog. Forskarna tror att den undgått upptäckt för att den ligger bakom ett tjockt lager stoft i Vintergatan och mitt i ett tätt myller av förgrundsstjärnor. I grönt ljus dämpar stoftet hopen med omkring 2,1&nbsp;magnituder, alltså till ungefär en sjundedel." },
+      { type: "image", src: "nyheter/bilder/2026-11-01-vintergatans-gomda-foljeslagare-2.jpg", alt: "Ett tätt fält av små röda, orange och vita stjärnor mot mörk bakgrund. Mitt i bilden är prickarna tätare och mindre, som en svag, rund ansamling av stjärnor.", caption: "Rubin-GC1 i Rubinobservatoriets färgbild, ett utsnitt omkring fyra bågminuter brett. Hopen är den täta samlingen små stjärnor i mitten, omgiven av förgrundsstjärnor i Vintergatan.", credit: "Bild: Pai m.fl. 2026, utsnitt ur figur 1 (CC BY 4.0), med data från NSF–DOE Rubin Observatory" },
+      { type: "p", html: "Hopen ligger omkring 31&nbsp;kiloparsec bort, ungefär 100&nbsp;000&nbsp;ljusår, alltså på andra sidan Vintergatans centrum sett från oss och omkring 36&nbsp;000&nbsp;ljusår ovanför skivan. Halva ljuset kommer från ett område med en radie på bara 5&nbsp;parsec, ungefär 16&nbsp;ljusår, och hela hopen lyser ungefär som 800&nbsp;solar. Att forskarna tror att det är en stjärnhop och inte en galax beror på järnet. Stjärnorna ser ut att vara omkring nio miljarder år gamla och innehålla knappt en femtedel så mycket järn i förhållande till väte som solen. Alla kända ultraljussvaga dvärggalaxer har mindre än en hundradel." },
+      { type: "h2", text: "Ett arv från en uppslukad granngalax" },
+      { type: "p", html: "Forskarna hittade 12&nbsp;stjärnor i hopen i katalogen från rymdteleskopet Gaia, som mäter hur stjärnorna långsamt flyttar sig över himlen. Hopens rörelse och läge stämmer med datormodeller av den ström av stjärnor som slits loss från Skyttens dvärggalax, en liten galax som håller på att slukas av Vintergatan. Därför tror forskarna att Rubin-GC1 föddes i Skyttens dvärggalax och följde med när den slets sönder. Det är ännu inte bevisat: om hopen rör sig bort från oss med mellan 100 och 200&nbsp;km/s, vilket kan mätas med spektroskopi, bekräftas kopplingen. Bland forskarna bakom studien finns Alexander Riley vid Lunds observatorium." },
+      { type: "h2", text: "Hundratals kvar att hitta" },
+      { type: "p", html: "I dag är drygt 50&nbsp;ultraljussvaga dvärggalaxer kända runt Vintergatan, men forskarna räknar med att hundratals återstår. Hur många små galaxer som kretsar kring en stor galax beror på hur den mörka materian beter sig, så räkningen är ett test av teorierna. När kartläggningen fortsätter blir bilderna allt djupare, och enligt forskarna kommer system som liknar Aquarius IV då att hittas med över 85&nbsp;procents sannolikhet med samma sökmetod. Ett särskilt delprojekt ska dessutom fotografera Vintergatans dammiga skiva, där fler hopar som Rubin-GC1 kan ligga gömda." },
+      { type: "fact", title: "Visste du?", items: [
+        "En parsec är ungefär 3,26&nbsp;ljusår. Ljuset vi ser från Aquarius IV i dag lämnade stjärnorna för omkring 355&nbsp;000&nbsp;år sedan.",
+        "Magnitudskalan är logaritmisk: fem magnituder motsvarar en faktor hundra i ljusstyrka, och en magnitud ungefär en faktor 2,5. Stoftets 2,1&nbsp;magnituder blir därför knappt en faktor sju.",
+        "Studien om Aquarius IV är en kort forskningsnotis i <em>Research Notes of the AAS</em>, som granskas av en redaktör men inte kollegialt. Studien om Rubin-GC1 är antagen i den kollegialt granskade tidskriften <em>The Astrophysical Journal Letters</em>."
+      ] }
+    ]
+  },
+  {
     id: "2026-10-31-karnan-som-lyssnar",
     date: "2026-10-31",
     title: "Radiosignaler vände magneten i en enda atomkärna, fast det inte borde gå",

@@ -1722,7 +1722,7 @@ window.BEGREPP = [
   {
     id: 'parsec',
     term: 'Parsec',
-    former: ['parsec', 'kiloparsec', 'megaparsec', 'gigaparsec'],
+    former: ['parsec', 'kiloparsec', 'megaparsec', 'gigaparsec', 'parsek', 'kiloparsek', 'megaparsek', 'gigaparsek'],
     kort: 'Astronomernas egen avståndsenhet, ungefär 3,26 ljusår. Den är definierad utifrån hur mycket en stjärna tycks flytta sig på himlen när jorden rör sig runt solen.',
     relaterade: ['ljusar', 'galaxhop', 'magnitud'],
     body: [
@@ -4462,6 +4462,30 @@ window.BEGREPP = [
       { type: 'p', html: 'Tänk på en gunga. Den kommer högt bara om du knuffar i rätt takt, och knuffar du i fel takt händer nästan ingenting. Magnetisk resonans bygger på samma idé. Elektroner och många atomkärnor har spinn, som gör dem till små magneter. I ett yttre magnetfält kan en sådan magnet bara peka på vissa bestämda sätt, och varje läge har sin egen energi.' },
       { type: 'p', html: 'För att flytta spinnet från ett läge till ett annat måste det få precis rätt mängd energi. En radiovåg med frekvensen <em>f</em> levererar energin i portioner som är <em>h</em>&nbsp;·&nbsp;<em>f</em> stora, där <em>h</em> är Plancks konstant. Bara när portionen är lika stor som energisteget vänds spinnet, och det är den frekvensen som kallas resonansfrekvensen. Den beror på hur starkt magnetfältet är och på vilken partikel det gäller. Elektroner har mycket starkare magnetism än kärnor och vänds därför av betydligt högre frekvenser: elektronspinnresonans ligger oftast på gigahertz, kärnmagnetisk resonans på megahertz.' },
       { type: 'p', html: 'Kärnmagnetisk resonans kallas ofta NMR, efter engelskans <em>nuclear magnetic resonance</em>. Kemister använder den för att ta reda på hur molekyler är byggda, och på sjukhuset är den grunden för magnetkameran, som lyssnar på vätekärnorna i kroppens vatten och fett. Normalt behövs väldigt många kärnor för att signalen ska gå att mäta. Med ett sveptunnelmikroskop har forskare på senare år lyckats göra magnetisk resonans på enskilda atomer.' }
+    ]
+  },
+  {
+    id: 'dvarggalax',
+    term: 'Dvärggalax',
+    former: ['dvärggalax', 'dvärggalaxen', 'dvärggalaxer', 'dvärggalaxerna', 'ultraljussvag dvärggalax', 'ultraljussvaga dvärggalaxer', 'ultraljussvaga dvärggalaxerna'],
+    kort: 'En liten galax med allt från några hundra till tiotals miljarder stjärnor. Många av dem kretsar kring en större galax, som månar kring en planet, och de minsta består nästan bara av mörk materia.',
+    relaterade: ['vintergatan', 'mork-materia', 'klotformig-stjarnhop', 'magnitud'],
+    body: [
+      { type: 'p', html: 'Vintergatan har hundratals miljarder stjärnor, men de flesta galaxer i universum är betydligt mindre. En dvärggalax kan ha tiotals miljarder stjärnor, som Stora magellanska molnet, eller bara några hundra. Många av dem kretsar kring en större galax, ungefär som månar kring en planet, och kallas då satellitgalaxer. Runt Vintergatan är flera tiotal kända, och de flesta är så ljussvaga att de bara syns som en svag ansamling av stjärnor i mycket djupa teleskopbilder.' },
+      { type: 'p', html: 'De allra minsta kallas ultraljussvaga dvärggalaxer. Alla deras stjärnor tillsammans lyser mindre än hundratusen solar, ibland bara som några hundra. Ändå är de inte bara stora stjärnhopar. När astronomer mäter hur snabbt stjärnorna rör sig visar det sig att de far runt mycket fortare än stjärnornas egen massa skulle kunna hålla ihop. Något osynligt håller dem på plats, och det något är mörk materia. Ingen annan sorts galax innehåller så mycket mörk materia i förhållande till sina stjärnor.' },
+      { type: 'p', html: 'Det gör dem till ett viktigt test av teorierna om mörk materia. Hur många små galaxer som bildas runt en stor galax, och hur täta de blir, beror på vad den mörka materian är för något. Därför försöker astronomer räkna alla Vintergatans följeslagare, och nya teleskop som tar djupare bilder av hela himlen väntas hitta hundratals som ännu inte är kända.' }
+    ]
+  },
+  {
+    id: 'klotformig-stjarnhop',
+    term: 'Klotformig stjärnhop',
+    former: ['klotformig stjärnhop', 'klotformiga stjärnhopen', 'klotformiga stjärnhopar', 'klotformiga stjärnhoparna', 'klotformig hop', 'klotformiga hopar'],
+    kort: 'Ett tätt, runt klot av tiotusentals till miljontals stjärnor som föddes samtidigt. Vintergatan har omkring 150 sådana, och de hör till de äldsta sakerna i galaxen.',
+    relaterade: ['dvarggalax', 'vintergatan', 'magnitud'],
+    body: [
+      { type: 'p', html: 'Riktar man en kikare mot vissa ställen på himlen syns en suddig, rund fläck. I ett större teleskop löses den upp i ett myller av stjärnor som tätnar mot mitten, så tätt att stjärnorna i centrum smälter ihop till ett ljust sken. Det är en klotformig stjärnhop: tiotusentals till miljontals stjärnor som hålls ihop av sin egen gravitation i ett klot som ofta bara är några tiotal ljusår stort.' },
+      { type: 'p', html: 'Stjärnorna i en hop föddes nästan samtidigt ur samma gasmoln, och därför har de samma ålder och ungefär samma sammansättning. Det gör hoparna till utmärkta klockor. Många av Vintergatans omkring 150&nbsp;klotformiga hopar är över tio miljarder år gamla, och de innehåller ofta mycket lite av de tyngre grundämnen som bildas inne i stjärnor och sprids när de dör.' },
+      { type: 'p', html: 'En klotformig hop och en liten dvärggalax kan se nästan likadana ut i en bild. Skillnaden syns i stjärnornas rörelser och sammansättning. En hop har ingen mörk materia som håller ihop den, och dess stjärnor har nästan exakt samma halt av järn. Somliga hopar föddes inte i Vintergatan alls, utan i små dvärggalaxer som Vintergatan sedan har slukat. Hoparna blev kvar och kretsar nu kring vår galax.' }
     ]
   },
 ];

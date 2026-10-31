@@ -12,8 +12,19 @@ Format per post:
 
 ## Kö
 
+- **OBS för S301 (BREVTEASERN nedan): publicera den INTE 2026-11-02**, eftersom 2026-11-01 är astronomi (Rubins följeslagare). Ta den tisdag–lördag 2026-11-03–07 med ett annat område dagen före och efter. (tillagd 2026-10-31)
+
 - **S301: snabbaste stjärnan runt Sgr A* (8,7 år, 25 000 km/s) känner av svarta hålets rotation** **[BREVTEASER]** (nominerad 2026-10-25: snabbaste kända stjärnan i Vintergatan, belagd i fulltext; astronomi senast 2026-10-14) — GRAVITY-samarbetet, Nature 2026, DOI 10.1038/s41586-026-10894-w; fulltext läst i arXiv 2607.12664 (Discovery of a star sensitive to the spin of Sgr A*). OBS: ESO:s pressmeddelande eso2612 kom redan 2026-08-19 (ESO-bilder CC BY 4.0), så inte dagsfärskt; Physics World tog upp den 2026-10-08. Astronomi. Källa: https://physicsworld.com/a/fastest-star-in-the-milky-way-feels-the-rotation-of-our-central-black-hole/
   (tillagd 2026-10-20)
+
+- **Glaschip kopplar ihop två teleskop vid CHARA i K-bandet (Heriot-Watt, Potsdam)** — optik/astronomi, laserinskrivna vågledare i glas som strålkombinerare för interferometri. Dinkelaker m.fl., MNRAS 2026, DOI 10.1093/mnras/stag1745 (öppenhet ej kontrollerad). OBS astronomi 2026-11-01. Källa (Phys.org 2026-10-30): https://phys.org/news/2026-10-tiny-photonic-chip-links-telescopes.html
+  (tillagd 2026-10-31)
+
+- **Kan gravitationsfält brytas och kopplas om? Einsteins ekvationer tyder på det** — relativitetsteori. Originalet ej kontrollerat. Källa (Phys.org 2026-10-28): https://phys.org/news/2026-10-gravitational-fields-reconnect-einstein-equations.html
+  (tillagd 2026-10-31)
+
+- **Kvantskyrmioner överlever längre än sammanflätningen** — kvantoptik/kvantkommunikation. Originalet ej kontrollerat. Källa (Phys.org 2026-10-30): https://phys.org/news/2026-10-quantum-skyrmions-outlast-entanglement-hinting.html
+  (tillagd 2026-10-31)
 
 - **Små vridningar i kryptokrom kan göra fåglarnas magnetkompass känsligare (Kobe)** — biofysik/kvantbiologi, tidsupplöst EPR på kryptokrom-DASH, kiralitetsinducerad spinnselektivitet ~6–8 %, förutsagd anisotropi 0,3 % → 1,6 %; teoretisk förutsägelse, inte demonstration i djur. Kobori m.fl., J. Phys. Chem. Lett. 2026, DOI 10.1021/acs.jpclett.6c02747; öppenhet ej kontrollerad (ACS ofta spärrad). OBS duvans kompass publicerades 2026-09-24 och spinn/magnetisk resonans 2026-10-31, vänta. Källa (Phys.org 2026-10-30): https://phys.org/news/2026-10-small-molecular-nature-magnetic-compass.html
   (tillagd 2026-10-31)

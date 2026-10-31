@@ -3868,6 +3868,17 @@ skydd:
    gäller ett eget tak på fyra gränsförsök per dygn. Går klockslaget inte
    att läsa, eller ligger det mer än sex timmar bort, görs ett nytt försök
    om en timme.
+1c. **Jobbet loggar in med en långlivad token.** 2026-10-29 gick den
+   vanliga Claude-inloggningen ut ("OAuth session expired and could not be
+   refreshed"), och varje körning dog efter fem sekunder: ingen nyhet
+   2026-10-30 och 2026-10-31, och inget mejl, eftersom mejlet också skickas
+   av Claude. Skriptet läser nu `%USERPROFILE%\.claude\nyhetsjobb-token.txt`
+   (utanför repot) och sätter `CLAUDE_CODE_OAUTH_TOKEN`. Token tas fram med
+   `claude setup-token` och gäller ett år. Känner skriptet igen ett
+   inloggningsfel startar det arbetsflödet **Nyhetsjobb-larm**
+   (`gh workflow run`), som öppnar ett ärende med instruktionerna (öppnat av
+   github-actions, så att GitHub mejlar ägaren), visar en ruta på skärmen
+   (`msg`) och hoppar över resten av körningen utan att räkna försöket.
 2. **`.github/workflows/nyhetsvakt.yml`** kollar main varje timme dygnet
    runt och öppnar ett ärende (alltså ett mejl till ägaren) i två fall:
    "Ingen nyhet publicerad <datum>" när dagens artikel saknas efter kl 08,

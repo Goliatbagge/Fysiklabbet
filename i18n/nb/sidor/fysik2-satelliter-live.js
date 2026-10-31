@@ -63,6 +63,10 @@
         'Dag och natt just nu': 'Dag og natt akkurat nå',
         'Moln': 'Skyer',
         'Följ vald satellit': 'Følg valgt satellitt',
+        'Följ på nära håll': 'Følg på nært hold',
+        'Tillbaka till översikten': 'Tilbake til oversikten',
+        'Dra för att se dig omkring runt satelliten, zooma med hjulet eller två fingrar. Satelliten är förstorad.':
+            'Dra for å se deg rundt satellitten, zoom med rullehjulet eller to fingre. Satellitten er forstørret.',
         'Tid': 'Tid',
         'Färdiga försök': 'Ferdige forsøk',
         'Pausa': 'Pause',

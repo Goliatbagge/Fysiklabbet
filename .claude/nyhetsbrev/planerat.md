@@ -146,3 +146,11 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   Ta en egen skärmdump av storskärmsläget med påhittade namn (aldrig riktiga
   elevnamn) och länka bilden till verktyget. Bocka av här när brevet är
   skrivet.
+
+- **Satelliter just nu (fy2-1.6) i brevet 2026-11-08, med bild.** Användarens
+  beslut 2026-10-31: simuleringen sparades från brevet 2026-11-01 och ska
+  lyftas nästa vecka under "Nytt på Fysiklabbet" med en skärmdump av scenen.
+  Teasad i brevet 2026-11-01. Länk:
+  `https://fysiklabbet.se/fysik2-satelliter-live.html`.
+  Simuleringarna som gjorts för Sigbjørn Hals (se
+  `.claude/samarbete-sigbjorn/checklista.md`) tas inte upp i brevet.

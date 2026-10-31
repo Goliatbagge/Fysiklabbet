@@ -112,6 +112,14 @@ $script:GransNadd = $false
 $script:ClaudeText = ''
 $script:ForsokFil = $null
 $script:AntalForsok = 0
+$script:InloggningSaknas = $false
+
+# Långlivad inloggning för jobbet (sedan 2026-10-31). Den vanliga
+# inloggningen i ~\.claude\.credentials.json gick ut 2026-10-29 och kunde
+# inte förnyas utan att någon loggade in för hand, så två dagar gick utan
+# nyhet. `claude setup-token` ger en token som gäller ett år; den sparas
+# utanför repot i den här filen och läses av varje körning.
+$TokenFil = Join-Path $env:USERPROFILE '.claude\nyhetsjobb-token.txt'
 
 function Invoke-Claude([string]$Prompt, [string]$Modell) {
     # Headless print-läge avslutar bakgrundsagenter efter 600 s som standard;
@@ -119,6 +127,10 @@ function Invoke-Claude([string]$Prompt, [string]$Modell) {
     $env:CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS = '0'
     # Rör inte Telegram-kanalen (pluginens server tar annars över boten).
     $env:TELEGRAM_STATE_DIR = Join-Path $env:TEMP 'telegram-ingen-kanal'
+    if (Test-Path $TokenFil) {
+        $token = ([IO.File]::ReadAllText($TokenFil)).Trim()
+        if ($token) { $env:CLAUDE_CODE_OAUTH_TOKEN = $token }
+    }
     Log ("Startar Claude Code (headless, modell {0})..." -f $Modell)
     $ut = New-Object System.Collections.Generic.List[string]
     & $script:Claude @('-p', $Prompt, '--model', $Modell, '--dangerously-skip-permissions') 2>&1 |
@@ -128,6 +140,46 @@ function Invoke-Claude([string]$Prompt, [string]$Modell) {
     # Sessionsgränsen ("You've hit your session limit"), veckogränsen och
     # äldre CLI-versioners "Claude AI usage limit reached".
     if ($script:ClaudeText -match 'hit your .*limit|usage limit reached|weekly limit') { $script:GransNadd = $true }
+    if ($script:ClaudeText -match 'Failed to authenticate|OAuth (session|token) (has )?expired|Invalid API key|Please run /login|Not logged in|authentication_error') {
+        $script:InloggningSaknas = $true
+        # Försöket dog innan det gjorde något och ska inte räknas mot taket.
+        if ($script:ForsokFil) { Set-Content -Path $script:ForsokFil -Value $script:AntalForsok -Encoding ascii }
+        Larma-Inloggning
+    }
+}
+
+function Larma-Inloggning {
+    # Claude kommer inte in. Det löser sig inte av sig självt, och mejlet till
+    # ägaren skickas av en Claude-session, så larmet måste gå en annan väg:
+    #  1. ett ärende på GitHub via arbetsflödet Nyhetsjobb-larm (öppnas av
+    #     github-actions, så att GitHub mejlar ägaren; ett per dag),
+    #  2. en ruta på skärmen (msg), som syns när någon sätter sig vid datorn.
+    $Fil = Join-Path $LogDir ('.inloggningslarm-{0}' -f $Today)
+    if (Test-Path $Fil) { return }
+    Set-Content -Path $Fil -Value (Get-Date -Format 'HH:mm') -Encoding ascii
+    Log 'FEL: Claude-inloggningen fungerar inte. Larmar ägaren.'
+    $rubrik = "Nyhetsjobbet kan inte logga in i Claude ($Today)"
+    $text = @"
+Nyhetsjobbet på Windows-datorn får 'Failed to authenticate' från Claude Code, så ingen nyhet skrivs förrän inloggningen är lagad.
+
+Laga så här (en gång, i en vanlig PowerShell på datorn):
+
+1. ``claude setup-token`` och logga in i webbläsaren som öppnas.
+2. Spara token som visas i ``$TokenFil`` (bara token, en rad).
+3. Starta om jobbet: ``Start-ScheduledTask -TaskName 'Fysiklabbet daglig nyhet imorgon'``
+
+Token gäller ett år. Loggen: https://github.com/Goliatbagge/Fysiklabbet/blob/nyhetsjobb-logg/$Today.log
+"@
+    $gh = Get-Command gh -ErrorAction SilentlyContinue
+    if ($gh) {
+        & $gh.Source workflow run nyhetsjobb-larm.yml --repo Goliatbagge/Fysiklabbet -f "rubrik=$rubrik" -f "text=$text" 2>&1 | ForEach-Object { Log $_ }
+        if ($LASTEXITCODE -eq 0) { Log 'Larmet skickat till GitHub (Nyhetsjobb-larm).' }
+        else { Log 'FEL: larmet kunde inte skickas till GitHub.' }
+    }
+    else { Log 'FEL: gh saknas, inget GitHub-larm.' }
+    try {
+        & msg.exe '*' "Fysiklabbet: nyhetsjobbet kan inte logga in i Claude, så ingen nyhet skrivs. Kör 'claude setup-token' och spara token i $TokenFil." 2>$null
+    } catch { }
 }
 
 function Push-Main {
@@ -504,7 +556,8 @@ try {
             Kor-Skriv $Today $false
         }
 
-        if (HasArticle $Tomorrow) { Log "Morgondagens nyhet ($Tomorrow) finns redan." }
+        if ($script:InloggningSaknas) { Log 'Hoppar över morgondagens nyhet: Claude kommer inte in.' }
+        elseif (HasArticle $Tomorrow) { Log "Morgondagens nyhet ($Tomorrow) finns redan." }
         elseif (-not (Tak "imorgon-$Tomorrow" 3)) { Log 'Redan tre försök för morgondagens nyhet - avstår.' }
         else { Kor-Skriv $Tomorrow $true }
     }

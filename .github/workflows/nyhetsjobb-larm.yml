@@ -1,0 +1,47 @@
+# Nyhetsjobb-larm: öppnar ett ärende när nyhetsjobbet på Windows-datorn
+# vet VARFÖR det misslyckats (i dag: Claude-inloggningen har gått ut).
+#
+# VARFÖR DEN FINNS
+# 2026-10-29 gick Claude-inloggningen som nattjobbet använder ut ("OAuth
+# session expired and could not be refreshed"). Varje körning dog efter fem
+# sekunder, och ingen nyhet kom 2026-10-30 och 2026-10-31. Mejlet till
+# ägaren skickas av en Claude-session, så det kunde inte heller gå ut.
+#
+# daglig-nyhet.ps1 startar därför det här arbetsflödet med `gh workflow run`
+# när det känner igen felet. Ärendet måste öppnas av github-actions, inte av
+# skriptet direkt med `gh issue create`: GitHub mejlar aldrig om ärenden man
+# öppnat själv, och skriptet kör som ägarens konto. Ett ärende per rubrik;
+# finns ett öppet med samma rubrik händer ingenting.
+
+name: Nyhetsjobb-larm
+
+on:
+  workflow_dispatch:
+    inputs:
+      rubrik:
+        description: Ärendets rubrik
+        required: true
+      text:
+        description: Ärendets text
+        required: true
+
+permissions:
+  issues: write
+
+jobs:
+  larm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Öppna ärende
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          RUBRIK: ${{ inputs.rubrik }}
+          TEXT: ${{ inputs.text }}
+        run: |
+          finns=$(gh issue list --state open --search "\"$RUBRIK\" in:title" --json title --jq ".[] | select(.title == env.RUBRIK) | .title")
+          if [ -n "$finns" ]; then
+            echo "Ärendet finns redan: $RUBRIK"
+            exit 0
+          fi
+          gh issue create --title "$RUBRIK" --body "$TEXT"

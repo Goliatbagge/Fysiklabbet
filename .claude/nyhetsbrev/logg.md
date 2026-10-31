@@ -11,7 +11,12 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
-## 2026-11-01 — "Satelliterna just nu, och Schrödingers glömda sidor"
+## 2026-11-01 — "Videolösningar till nationella proven, och satelliterna just nu"
+- Uppdaterat 2026-10-31 på användarens begäran: stycke om Nordplus-seminariet NGGN + AI i Esbo
+  (23–25 okt) efter inledningen, och videolösningarna till NP Ma 1c och Ma 2c VT 2022 först under
+  Nytt på Fysiklabbet med knappar till spellistorna. Ämnesraden ändrad därefter.
+- Kampanjen "Nyhetsbrev nr 12 - 2026-11-01" upplagd i EmailOctopus 2026-10-31, testmejl skickat
+  ("Sent!"). INTE schemalagd: schemaläggningen är användarens.
 - Status: UTKAST skrivet lördag 2026-10-31 (molnsession, före 08.00). Tänkt utskick söndag
   2026-11-01 kl 06.00 svensk tid. **Kampanjen är INTE upplagd i EmailOctopus** (molnet saknar
   Chrome): kör `/brev-till-octopus` lokalt, testskicka och schemalägg (tidszonen default:ar till

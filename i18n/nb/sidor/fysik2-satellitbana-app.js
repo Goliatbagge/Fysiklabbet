@@ -9,6 +9,8 @@
             'Skyt opp en satellitt rundt jorden: still inn høyde og fart og se om banen blir en sirkel, en ellipse, et krasj mot jordoverflaten eller en flukt bort fra jorden. Gravitasjonskraften, hastigheten, den forutsagte banen og energiene vises direkte, med romteleskopet Hubble som utgangspunkt.',
         '/ Satellit i omloppsbana': '/ Satellitt i omløpsbane',
         'Satellit i omloppsbana': 'Satellitt i omløpsbane',
+        // Avsnittsraden: den andra simuleringen i samma avsnitt
+        'Satelliter just nu': 'Satellitter akkurat nå',
 
         // Ingress
         'En satellit hålls kvar i sin bana av en enda kraft:': 'En satellitt holdes i banen sin av én eneste kraft:',

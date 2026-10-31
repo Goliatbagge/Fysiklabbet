@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satelliter just nu — Fysiklabbet</title>
+    <meta name="description" content="Följ tusentals riktiga satelliter runt jorden i realtid: rymdstationen ISS, rymdteleskopet Hubble, GPS-satelliter, vädersatelliter och geostationära satelliter. Se att varje satellit har just den fart som gravitationslagen kräver för sin höjd, och räkna själv ut farten.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-satelliter-live.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Satelliter just nu — Fysik nivå 2">
+    <meta property="og:description" content="Följ tusentals riktiga satelliter runt jorden i realtid: rymdstationen ISS, rymdteleskopet Hubble, GPS-satelliter, vädersatelliter och geostationära satelliter. Se att varje satellit har just den fart som gravitationslagen kräver för sin höjd, och räkna själv ut farten.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-satelliter-live.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Satelliter just nu — Fysik nivå 2">
+    <meta name="twitter:description" content="Följ tusentals riktiga satelliter runt jorden i realtid: rymdstationen ISS, rymdteleskopet Hubble, GPS-satelliter, vädersatelliter och geostationära satelliter. Se att varje satellit har just den fart som gravitationslagen kräver för sin höjd, och räkna själv ut farten.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/satellite.js@5.0.0/dist/satellite.min.js"></script>
+    <script>
+        var __q = new URLSearchParams(location.search);
+        if (__q.has('embed')) document.documentElement.classList.add('embed-mode');
+    </script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+        .rot { display: flex; align-items: stretch; }
+        .rot-tecken { font-size: 46px; line-height: 1; font-weight: 300; color: var(--lab-ink);
+                      transform: scaleX(0.8); margin-right: -4px; align-self: center; }
+        .rot-under { border-top: 2px solid var(--lab-ink); padding: 0 6px; }
+
+        @media (max-width: 600px) {
+            .formula-card { flex-wrap: nowrap !important; overflow-x: auto;
+                            justify-content: flex-start; -webkit-overflow-scrolling: touch; }
+            .formula-card > * { flex-shrink: 0; }
+            .formula-card .fnum { font-size: 16px; }
+        }
+
+        /* Scenen: mörk rymd (fysiken motiverar det: stjärnhimmel, natt-
+           sidan med städernas ljus). Canvasen ligger i flödet i .sat-stage,
+           så att mobil-docken kan lägga verktygen under den. */
+        .scene-wrap {
+            position: relative; width: 100%;
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            background: #04070d;
+            user-select: none; -webkit-user-select: none;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .sat-stage { position: relative; width: 100%; height: 580px; background: #04070d; }
+        .scene-wrap:fullscreen .sat-stage, .scene-wrap:-webkit-full-screen .sat-stage { height: 100vh; }
+        .sat-stage canvas { display: block; width: 100% !important; height: 100% !important;
+                            touch-action: none; outline: none; }
+        @media (max-width: 600px) {
+            .sat-stage { height: min(96vw, 440px); }
+            .scene-wrap:fullscreen .sat-stage, .scene-wrap:-webkit-full-screen .sat-stage { height: 58vh; }
+        }
+
+        .sat-lager { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .sat-etikett {
+            position: absolute; left: 0; top: 0; white-space: nowrap;
+            font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600;
+            color: #f2f5f9; text-shadow: 0 1px 3px rgba(0,0,0,0.95), 0 0 8px rgba(0,0,0,0.7);
+            transform: translate(12px, -50%); will-change: transform;
+        }
+        .sat-etikett.svag { font-weight: 500; font-size: 13px; color: #d5dde8; }
+        .sat-etikett.pil { font-size: 16px; transform: translate(-50%, -50%); }
+        .sat-etikett.pil em { font-style: italic; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(10,14,22,0.78); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500; max-width: calc(100% - 300px);
+        }
+        .scene-info.sat-klocka {
+            position: absolute; bottom: 10px; right: 12px; z-index: 5;
+            font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: #e9edf3;
+            background: rgba(10,14,22,0.78); padding: 5px 11px; border-radius: 7px;
+            display: flex; align-items: center; gap: 8px; pointer-events: none;
+        }
+        .live-prick { width: 8px; height: 8px; border-radius: 50%; background: #3ddc84;
+                      box-shadow: 0 0 0 0 rgba(61,220,132,0.7); animation: puls 1.8s infinite; }
+        .live-prick.av { background: #f0b84b; animation: none; }
+        @keyframes puls { 0% { box-shadow: 0 0 0 0 rgba(61,220,132,0.6); }
+                          70% { box-shadow: 0 0 0 8px rgba(61,220,132,0); }
+                          100% { box-shadow: 0 0 0 0 rgba(61,220,132,0); } }
+        .sat-laddar { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                      color: #e9edf3; font-size: 14px; background: rgba(10,14,22,0.8);
+                      padding: 8px 14px; border-radius: 8px; pointer-events: none; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.25);
+            max-width: 262px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .st-prick { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+        .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .st-antal { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+                    color: var(--lab-ink-muted, #5a6170); padding-left: 6px; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-presets { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+        .scene-toggles .st-presets button { padding: 4px 9px; font-size: 12px; }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.5; cursor: default; }
+        .btn-small { padding: 5px 10px; font-size: 12.5px; }
+        .preset-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+
+        .sok-in { width: 100%; padding: 6px 10px; border-radius: 8px; font-size: 14px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: #fbf8f2; color: var(--lab-ink); }
+        .sok-in:focus { outline: none; border-color: var(--lab-accent, #c8324a); }
+        .sok-traffar { display: flex; flex-direction: column; margin-top: 4px; max-height: 190px; overflow-y: auto; }
+        .sok-traffar button { text-align: left; padding: 4px 8px; border-radius: 6px; font-size: 13px;
+                              display: flex; align-items: center; gap: 7px; color: var(--lab-ink); }
+        .sok-traffar button:hover { background: rgba(15,22,32,0.06); }
+
+        .num-in { width: 110px; padding: 4px 8px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: #fbf8f2; font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 14px; text-align: right; color: var(--lab-accent, #c8324a); }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        .avl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; text-align: center; }
+        .avl-val { font-weight: 700; font-size: 15px; color: var(--lab-ink); white-space: nowrap; }
+        .avl-lbl { font-size: 12px; color: var(--lab-ink-muted); }
+        .diagram-ruta canvas { display: block; width: 100%; }
+        .svar-ok { color: #1f7a45; } .svar-fel { color: #b3261e; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script>
+    /* ════════════════════════════════════════════════════════════════
+       Motorn: jorden, satelliterna och banorna i Three.js. Ligger utanför
+       React så att ritloopen aldrig väntar på en omritning av sidan.
+
+       Data: banelement (TLE) från CelesTrak, en grupp i taget. Positionen
+       vid en given tidpunkt räknas fram med SGP4 (satellite.js), samma
+       modell som de som publicerar banelementen använder. Varje bildruta
+       räknas en del av satelliterna om exakt (så många som hinns på
+       ~5 ms); övriga flyttas fram från sin senaste exakta position med
+       hastigheten och gravitationsaccelerationen. Hela flottan förnyas
+       därmed flera gånger i sekunden.
+
+       Koordinater: satellite.js ger tröghetssystemet TEME (x mot
+       vårdagjämningspunkten, z mot norr) i km. I scenen är 1 enhet =
+       jordens radie och y pekar mot norr: (x, y, z)_TEME → (x, z, −y).
+       Jorden vrids med stjärntiden (GMST), så dag/natt och kontinenterna
+       står rätt mot satelliterna och solen.
+       ════════════════════════════════════════════════════════════════ */
+    (function () {
+        'use strict';
+        var RJ = 6371;                       // jordens medelradie (km)
+        var MU = 6.67e-11 * 5.972e24;        // G · m_j (m³/s²)
+        var MU_KM = MU / 1e9;                // km³/s²
+        var TEX = 'media/solsystemet/';
+
+        var GRUPPER = [
+            { id: 'stationer', api: 'stations', namn: 'Rymdstationer', farg: '#ffd166', mork: '#b07a00', storlek: 7, start: true },
+            { id: 'vetenskap', api: 'science', namn: 'Forskningssatelliter', farg: '#c9a7ff', mork: '#6f3fc4', storlek: 5.5, start: true },
+            { id: 'navigering', api: 'gnss', namn: 'Navigering (GPS med flera)', farg: '#5fe3a1', mork: '#16804c', storlek: 5.5, start: true },
+            { id: 'vader', api: 'weather', namn: 'Vädersatelliter', farg: '#7cc8ff', mork: '#1f6fb5', storlek: 5.5, start: true },
+            { id: 'geo', api: 'geo', namn: 'Geostationära banor', farg: '#ff9d6b', mork: '#c2501a', storlek: 4.5, start: true },
+            { id: 'starlink', api: 'starlink', namn: 'Starlink', farg: '#dfe6ef', mork: '#5a6170', storlek: 3, start: false },
+        ];
+        var NAMN_SV = {
+            25544: 'Rymdstationen ISS', 20580: 'Rymdteleskopet Hubble', 48274: 'Rymdstationen Tiangong',
+        };
+
+        // Norska (?lang=nb): namnen i etiketterna går genom samma ordlista som sidan.
+        function tr(x) { return window.I18N ? I18N.t(x) : x; }
+        function sattText(el, txt) { if (el._txt !== txt) { el._txt = txt; el.textContent = tr(txt); } }
+
+        function laddaTextur(fil, cb) {
+            new THREE.TextureLoader().load(TEX + fil, function (t) {
+                t.anisotropy = 4; cb(t);
+            });
+        }
+
+        // ── Solens riktning i tröghetssystemet (lågprecisionsformel, ~0,01°)
+        function solRiktning(datum) {
+            var n = datum.getTime() / 86400000 + 2440587.5 - 2451545.0;
+            var rad = Math.PI / 180;
+            var L = (280.460 + 0.9856474 * n) * rad;
+            var g = (357.528 + 0.9856003 * n) * rad;
+            var lam = L + (1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * rad;
+            var eps = (23.439 - 0.0000004 * n) * rad;
+            var x = Math.cos(lam), y = Math.cos(eps) * Math.sin(lam), z = Math.sin(eps) * Math.sin(lam);
+            return new THREE.Vector3(x, z, -y).normalize();
+        }
+
+        // ── Shaders ────────────────────────────────────────────────
+        var JORD_VS = [
+            'varying vec2 vUv; varying vec3 vN;',
+            'void main() { vUv = uv; vN = normalize(mat3(modelMatrix) * normal);',
+            '  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }'
+        ].join('\n');
+        var JORD_FS = [
+            'uniform sampler2D uDag; uniform sampler2D uNatt; uniform sampler2D uHav;',
+            'uniform vec3 uSol; uniform float uDagNatt; uniform float uKlar; uniform vec3 uKam;',
+            'varying vec2 vUv; varying vec3 vN;',
+            'void main() {',
+            '  vec3 n = normalize(vN);',
+            '  vec3 dag = mix(vec3(0.10,0.24,0.45), texture2D(uDag, vUv).rgb, uKlar);',
+            '  vec3 natt = texture2D(uNatt, vUv).rgb * uKlar;',
+            '  float hav = texture2D(uHav, vUv).r * uKlar;',
+            '  float d = dot(n, uSol);',
+            '  float ljus = clamp(d * 1.15 + 0.08, 0.0, 1.0);',
+            '  vec3 v = normalize(uKam - n);',
+            '  vec3 h = normalize(uSol + v);',
+            '  float glans = pow(max(dot(n, h), 0.0), 40.0) * hav * 0.45 * step(0.0, d);',
+            '  vec3 belyst = dag * (0.05 + 1.05 * ljus) + vec3(1.0,0.95,0.85) * glans;',
+            '  float skymning = smoothstep(0.18, -0.12, d);',
+            '  vec3 stad = natt * vec3(1.0, 0.82, 0.55) * 1.6 * skymning;',
+            '  vec3 col = belyst + stad;',
+            '  vec3 jamn = dag * 0.95;',
+            '  gl_FragColor = vec4(mix(jamn, col, uDagNatt), 1.0);',
+            '}'
+        ].join('\n');
+        var MOLN_FS = [
+            'uniform sampler2D uMoln; uniform vec3 uSol; uniform float uDagNatt; uniform float uKlar;',
+            'varying vec2 vUv; varying vec3 vN;',
+            'void main() {',
+            '  float a = texture2D(uMoln, vUv).r * uKlar;',
+            '  float d = dot(normalize(vN), uSol);',
+            '  float ljus = mix(0.9, clamp(d * 1.3 + 0.1, 0.0, 1.0), uDagNatt);',
+            '  gl_FragColor = vec4(vec3(ljus), a * 0.62 * mix(1.0, 0.35 + 0.65 * ljus, uDagNatt));',
+            '}'
+        ].join('\n');
+        var ATMO_VS = [
+            'varying vec3 vN; varying vec3 vV;',
+            'void main() { vec4 w = modelMatrix * vec4(position, 1.0);',
+            '  vN = normalize(mat3(modelMatrix) * normal); vV = normalize(cameraPosition - w.xyz);',
+            '  gl_Position = projectionMatrix * viewMatrix * w; }'
+        ].join('\n');
+        var ATMO_FS = [
+            'uniform vec3 uSol; uniform float uDagNatt;',
+            'varying vec3 vN; varying vec3 vV;',
+            'void main() {',
+            '  float f = 1.0 - max(dot(normalize(vN), normalize(vV)), 0.0);',
+            '  float sol = mix(0.85, clamp(dot(normalize(vN), uSol) + 0.35, 0.0, 1.0), uDagNatt);',
+            '  float a = pow(f, 3.2) * sol;',
+            '  gl_FragColor = vec4(vec3(0.38, 0.64, 1.0) * a * 1.4, a);',
+            '}'
+        ].join('\n');
+        var PUNKT_VS = [
+            'uniform float uStorlek;',
+            'void main() { gl_PointSize = uStorlek;',
+            '  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }'
+        ].join('\n');
+        var PUNKT_FS = [
+            'uniform vec3 uFarg; uniform float uAlfa;',
+            'void main() { vec2 c = gl_PointCoord - 0.5; float r = length(c);',
+            '  if (r > 0.5) discard;',
+            '  float a = smoothstep(0.5, 0.22, r);',
+            '  gl_FragColor = vec4(uFarg * (0.85 + 0.6 * smoothstep(0.3, 0.0, r)), a * uAlfa); }'
+        ].join('\n');
+        var RING_FS = [
+            'uniform vec3 uFarg;',
+            'void main() { vec2 c = gl_PointCoord - 0.5; float r = length(c);',
+            '  float a = smoothstep(0.34, 0.39, r) * smoothstep(0.5, 0.45, r);',
+            '  if (a < 0.01) discard; gl_FragColor = vec4(uFarg, a); }'
+        ].join('\n');
+
+        // ── Hjälpare: TEME (km) → scen (jordradier) ────────────────
+        function tillScen(p, ut, i) {
+            ut[i] = p.x / RJ; ut[i + 1] = p.z / RJ; ut[i + 2] = -p.y / RJ;
+        }
+
+        function skapaPil(farg) {
+            var g = new THREE.Group();
+            var mat = new THREE.MeshBasicMaterial({ color: farg, depthTest: false, transparent: true });
+            var skaft = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 1, 12), mat);
+            skaft.geometry.translate(0, 0.5, 0);
+            var huvud = new THREE.Mesh(new THREE.ConeGeometry(1, 1, 16), mat);
+            huvud.geometry.translate(0, 0.5, 0);
+            skaft.renderOrder = huvud.renderOrder = 20;
+            g.add(skaft); g.add(huvud);
+            g.userData = { skaft: skaft, huvud: huvud };
+            g.visible = false;
+            return g;
+        }
+        var Y_AXEL = new THREE.Vector3(0, 1, 0);
+        function stallPil(pil, start, riktning, langd, skala) {
+            var hl = 0.24 * langd, hb = 0.041 * langd * skala, sb = 0.011 * langd * skala;
+            pil.position.copy(start);
+            pil.quaternion.setFromUnitVectors(Y_AXEL, riktning);
+            pil.userData.skaft.scale.set(sb, langd - hl, sb);
+            pil.userData.huvud.position.set(0, langd - hl, 0);
+            pil.userData.huvud.scale.set(hb, hl, hb);
+            pil.visible = true;
+        }
+
+        function skapaMotor(stage, lager, lyss) {
+            var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+            var DPR = Math.min(window.devicePixelRatio || 1, 2);
+            renderer.setPixelRatio(DPR);
+            renderer.setClearColor(0x04070d, 1);
+            stage.insertBefore(renderer.domElement, stage.firstChild);
+
+            var scene = new THREE.Scene();
+            var camera = new THREE.PerspectiveCamera(38, 1, 0.01, 3000);
+            camera.position.set(1.4, 1.9, 4.6);
+            var controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true; controls.dampingFactor = 0.08;
+            controls.enablePan = false; controls.rotateSpeed = 0.55; controls.zoomSpeed = 0.9;
+            controls.minDistance = 1.35; controls.maxDistance = 45;
+
+            // Stjärnhimmel
+            var himmel = new THREE.Mesh(new THREE.SphereGeometry(1500, 48, 32),
+                new THREE.MeshBasicMaterial({ color: 0x4a4f5a, side: THREE.BackSide, depthWrite: false }));
+            scene.add(himmel);
+            laddaTextur('vintergatan.jpg', function (t) { himmel.material.map = t; himmel.material.needsUpdate = true; });
+
+            // Jorden
+            var jordGrupp = new THREE.Group();
+            scene.add(jordGrupp);
+            var svart = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1, THREE.RGBAFormat);
+            svart.needsUpdate = true;
+            var jU = {
+                uDag: { value: svart }, uNatt: { value: svart }, uHav: { value: svart },
+                uSol: { value: new THREE.Vector3(1, 0, 0) }, uDagNatt: { value: 1 }, uKlar: { value: 0 },
+                uKam: { value: new THREE.Vector3() },
+            };
+            var jord = new THREE.Mesh(new THREE.SphereGeometry(1, 128, 96),
+                new THREE.ShaderMaterial({ uniforms: jU, vertexShader: JORD_VS, fragmentShader: JORD_FS }));
+            jordGrupp.add(jord);
+            var mU = { uMoln: { value: svart }, uSol: jU.uSol, uDagNatt: jU.uDagNatt, uKlar: { value: 0 } };
+            var moln = new THREE.Mesh(new THREE.SphereGeometry(1.006, 96, 64),
+                new THREE.ShaderMaterial({ uniforms: mU, vertexShader: JORD_VS, fragmentShader: MOLN_FS,
+                    transparent: true, depthWrite: false }));
+            jordGrupp.add(moln);
+            var aU = { uSol: jU.uSol, uDagNatt: jU.uDagNatt };
+            var atmo = new THREE.Mesh(new THREE.SphereGeometry(1.028, 96, 64),
+                new THREE.ShaderMaterial({ uniforms: aU, vertexShader: ATMO_VS, fragmentShader: ATMO_FS,
+                    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+            scene.add(atmo);
+            var antalTex = 0;
+            function texKlar() { antalTex++; if (antalTex >= 3) jU.uKlar.value = 1; }
+            laddaTextur('jorden-dag.jpg', function (t) { jU.uDag.value = t; texKlar(); });
+            laddaTextur('jorden-natt.jpg', function (t) { jU.uNatt.value = t; texKlar(); });
+            laddaTextur('jorden-hav.jpg', function (t) { jU.uHav.value = t; texKlar(); });
+            laddaTextur('jorden-moln.jpg', function (t) { mU.uMoln.value = t; mU.uKlar.value = 1; });
+
+            // Vald satellit: bana, markering, pilar
+            var banGeo = new THREE.BufferGeometry();
+            var BAN_N = 360;
+            banGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(3 * (BAN_N + 1)), 3));
+            var banLinje = new THREE.Line(banGeo, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.85 }));
+            banLinje.visible = false; banLinje.frustumCulled = false;
+            scene.add(banLinje);
+            var valdGeo = new THREE.BufferGeometry();
+            valdGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(3), 3));
+            var valdPrickU = { uStorlek: { value: 11 * DPR }, uFarg: { value: new THREE.Color(1, 1, 1) }, uAlfa: { value: 1 } };
+            var valdPrick = new THREE.Points(valdGeo, new THREE.ShaderMaterial({ uniforms: valdPrickU,
+                vertexShader: PUNKT_VS, fragmentShader: PUNKT_FS, transparent: true, depthWrite: false }));
+            var valdRingU = { uStorlek: { value: 30 * DPR }, uFarg: { value: new THREE.Color(1, 1, 1) } };
+            var valdRing = new THREE.Points(valdGeo, new THREE.ShaderMaterial({ uniforms: valdRingU,
+                vertexShader: PUNKT_VS, fragmentShader: RING_FS, transparent: true, depthWrite: false }));
+            valdPrick.visible = valdRing.visible = false;
+            valdPrick.frustumCulled = valdRing.frustumCulled = false;
+            valdPrick.renderOrder = 10; valdRing.renderOrder = 11;
+            scene.add(valdPrick); scene.add(valdRing);
+            var pilV = skapaPil(0x4ea1ff), pilF = skapaPil(0xff5d5d);
+            scene.add(pilV); scene.add(pilF);
+
+            // Etiketter (HTML ovanpå canvasen: skarp text i alla storlekar)
+            function etikett(kl) { var e = document.createElement('div'); e.className = 'sat-etikett no-i18n ' + (kl || ''); e.style.display = 'none'; lager.appendChild(e); return e; }
+            var etValt = etikett(), etHover = etikett('svag'), etV = etikett('pil'), etF = etikett('pil');
+            etV.innerHTML = '<em>v</em>'; etV.style.color = '#8ec5ff';
+            etF.innerHTML = '<em>F</em><sub>G</sub>'; etF.style.color = '#ff9a9a';
+
+            // ── Satellitgrupperna ──
+            var G = {};
+            GRUPPER.forEach(function (gr) {
+                var u = { uStorlek: { value: gr.storlek * DPR }, uFarg: { value: new THREE.Color(gr.farg) }, uAlfa: { value: 0.95 } };
+                var geo = new THREE.BufferGeometry();
+                var pts = new THREE.Points(geo, new THREE.ShaderMaterial({ uniforms: u,
+                    vertexShader: PUNKT_VS, fragmentShader: PUNKT_FS, transparent: true, depthWrite: false }));
+                pts.frustumCulled = false; pts.visible = false;
+                scene.add(pts);
+                G[gr.id] = { def: gr, sats: [], pts: pts, geo: geo, synlig: gr.start, status: 'vilar', kalla: null, markor: 0 };
+            });
+
+            function lasTLE(text, grId) {
+                var rader = text.split(/\r?\n/).map(function (r) { return r.replace(/\s+$/, ''); }).filter(function (r) { return r.length; });
+                var ut = [];
+                for (var i = 0; i + 2 < rader.length + 0; i += 3) {
+                    var n = rader[i], l1 = rader[i + 1], l2 = rader[i + 2];
+                    if (!l1 || !l2 || l1[0] !== '1' || l2[0] !== '2') { i -= 2; continue; }
+                    try {
+                        var rec = satellite.twoline2satrec(l1, l2);
+                        if (rec.error) continue;
+                        var id = parseInt(l1.substr(2, 5), 10);
+                        ut.push({ id: id, namn: n.trim(), sv: NAMN_SV[id] || null, rec: rec, grupp: grId,
+                                  T: 2 * Math.PI / rec.no, e: rec.ecco });
+                    } catch (err) { /* hoppa över trasig rad */ }
+                }
+                return ut;
+            }
+            function serUtSomTLE(t) { return typeof t === 'string' && /^1 \d{5}/m.test(t) && /^2 \d{5}/m.test(t); }
+
+            function lasCache(api) { try { var c = JSON.parse(localStorage.getItem('satelliter.tle.' + api)); return c && c.text ? c : null; } catch (e) { return null; } }
+            function sparCache(api, text) { try { localStorage.setItem('satelliter.tle.' + api, JSON.stringify({ t: Date.now(), text: text })); } catch (e) { /* fullt eller avstängt */ } }
+
+            var reservLovar = null;
+            function hamtaReserv() {
+                if (window.SATELLIT_TLE_RESERV) return Promise.resolve(window.SATELLIT_TLE_RESERV);
+                if (!reservLovar) reservLovar = new Promise(function (ok) {
+                    var s = document.createElement('script');
+                    s.src = 'data/satelliter-reserv.js';
+                    s.onload = function () { ok(window.SATELLIT_TLE_RESERV || null); };
+                    s.onerror = function () { ok(null); };
+                    document.head.appendChild(s);
+                });
+                return reservLovar;
+            }
+
+            // Banelementen uppdateras på CelesTrak några gånger per dygn, och
+            // tjänsten ber att samma grupp inte hämtas oftare än varannan
+            // timme. En hämtning sparas därför i webbläsaren i två timmar.
+            function laddaGrupp(id) {
+                var g = G[id];
+                if (g.status !== 'vilar') return;
+                g.status = 'laddar'; lyss.andrat();
+                var cache = lasCache(g.def.api);
+                var fard = function (text, kalla, tid) {
+                    g.sats = lasTLE(text, id);
+                    var N = g.sats.length;
+                    g.eci = new Float64Array(6 * N);       // x y z vx vy vz (km, km/s)
+                    g.tRef = new Float64Array(N).fill(NaN);
+                    g.pos = new Float32Array(3 * N);
+                    g.geo.setAttribute('position', new THREE.BufferAttribute(g.pos, 3));
+                    g.geo.setDrawRange(0, N);
+                    g.pts.visible = g.synlig;
+                    g.status = 'klar'; g.kalla = kalla; g.tid = tid;
+                    lyss.andrat();
+                    lyss.gruppKlar && lyss.gruppKlar(id);
+                };
+                if (cache && Date.now() - cache.t < 2 * 3600e3) { fard(cache.text, 'celestrak', cache.t); return; }
+                var url = 'https://celestrak.org/NORAD/elements/gp.php?GROUP=' + g.def.api + '&FORMAT=tle';
+                var ctrl = window.AbortController ? new AbortController() : null;
+                var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 15000);
+                fetch(url, ctrl ? { signal: ctrl.signal } : undefined)
+                    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+                    .then(function (text) {
+                        clearTimeout(timer);
+                        if (!serUtSomTLE(text)) throw new Error('inga banelement');
+                        sparCache(g.def.api, text);
+                        fard(text, 'celestrak', Date.now());
+                    })
+                    .catch(function () {
+                        clearTimeout(timer);
+                        if (cache) { fard(cache.text, 'celestrak', cache.t); return; }
+                        hamtaReserv().then(function (res) {
+                            if (res && res.grupper && res.grupper[g.def.api]) fard(res.grupper[g.def.api], 'reserv', Date.parse(res.datum));
+                            else { g.status = 'fel'; lyss.andrat(); }
+                        });
+                    });
+            }
+
+            // ── Tid ──
+            var tid = { sim: Date.now(), fart: 1, paus: false, senast: performance.now() };
+            var visa = { bana: true, pilar: true, dagnatt: true, folj: false, moln: true };
+            var vald = null;          // { g, i }
+            var dold = false;         // gissa-läget döljer farten i avläsningen, inte i scenen
+
+            function propagera(s, datum) {
+                var pv = satellite.propagate(s.rec, datum);
+                if (!pv || !pv.position || typeof pv.position === 'boolean' || !isFinite(pv.position.x)) return null;
+                return pv;
+            }
+            function tvingaAlla() { Object.keys(G).forEach(function (k) { if (G[k].tRef) G[k].tRef.fill(NaN); G[k].tvinga = true; }); }
+
+            function uppdateraFlottan(nuMs) {
+                var datum = new Date(nuMs);
+                var budget = 4;           // ms SGP4 per bildruta, fördelad efter gruppernas storlek
+                var aktiva = Object.keys(G).filter(function (k) {
+                    var g = G[k]; return g.status === 'klar' && (g.synlig || (vald && vald.g === k));
+                });
+                var totalt = aktiva.reduce(function (a, k) { return a + G[k].sats.length; }, 0) || 1;
+                aktiva.forEach(function (k) {
+                    var g = G[k];
+                    var N = g.sats.length, eci = g.eci, tRef = g.tRef, pos = g.pos;
+                    var forsta = g.tvinga;
+                    var raknade = 0, gStart = performance.now(), gBudget = Math.max(0.3, budget * N / totalt);
+                    while (raknade < N && (forsta || performance.now() - gStart < gBudget)) {
+                        var i = g.markor; g.markor = (g.markor + 1) % N; raknade++;
+                        var pv = propagera(g.sats[i], datum);
+                        if (!pv) { tRef[i] = NaN; g.sats[i].trasig = true; continue; }
+                        g.sats[i].trasig = false;
+                        var b = 6 * i;
+                        eci[b] = pv.position.x; eci[b + 1] = pv.position.y; eci[b + 2] = pv.position.z;
+                        eci[b + 3] = pv.velocity.x; eci[b + 4] = pv.velocity.y; eci[b + 5] = pv.velocity.z;
+                        tRef[i] = nuMs;
+                    }
+                    g.tvinga = false;
+                    // Övriga: framflyttning med hastighet och gravitationsacceleration
+                    for (var j = 0; j < N; j++) {
+                        var p = 3 * j;
+                        if (!(tRef[j] === tRef[j])) { pos[p] = pos[p + 1] = pos[p + 2] = 0; continue; }
+                        var c = 6 * j, dt = (nuMs - tRef[j]) / 1000;
+                        var x = eci[c], y = eci[c + 1], z = eci[c + 2];
+                        if (dt !== 0) {
+                            var r2 = x * x + y * y + z * z, r = Math.sqrt(r2), a = -MU_KM / (r2 * r) * 0.5 * dt * dt;
+                            x = x + eci[c + 3] * dt + a * x; y = y + eci[c + 4] * dt + a * y; z = z + eci[c + 5] * dt + a * z;
+                        }
+                        pos[p] = x / RJ; pos[p + 1] = z / RJ; pos[p + 2] = -y / RJ;
+                    }
+                    g.geo.attributes.position.needsUpdate = true;
+                });
+            }
+
+            // ── Vald satellit ──
+            var valdInfo = null, banTid = 0;
+            var vS = new THREE.Vector3(), vV = new THREE.Vector3();
+            function uppdateraVald(nuMs, gmst) {
+                if (!vald) { valdInfo = null; return; }
+                var g = G[vald.g], s = g.sats[vald.i];
+                var pv = propagera(s, new Date(nuMs));
+                if (!pv) { valdInfo = null; valdPrick.visible = valdRing.visible = banLinje.visible = false; pilV.visible = pilF.visible = false; return; }
+                var P = pv.position, V = pv.velocity;
+                var r = Math.sqrt(P.x * P.x + P.y * P.y + P.z * P.z);
+                var v = Math.sqrt(V.x * V.x + V.y * V.y + V.z * V.z);
+                var geod = satellite.eciToGeodetic(P, gmst);
+                valdInfo = { id: s.id, namn: s.sv || s.namn, original: s.namn, grupp: vald.g, r: r, v: v, T: s.T, e: s.e,
+                             lat: geod.latitude * 180 / Math.PI, lon: geod.longitude * 180 / Math.PI,
+                             rp: Math.pow(MU_KM / Math.pow(s.rec.no / 60, 2), 1 / 3) * (1 - s.e),
+                             ra: Math.pow(MU_KM / Math.pow(s.rec.no / 60, 2), 1 / 3) * (1 + s.e) };
+                var arr = valdGeo.attributes.position.array;
+                tillScen(P, arr, 0);
+                valdGeo.attributes.position.needsUpdate = true;
+                vS.set(arr[0], arr[1], arr[2]);
+                vV.set(V.x, V.z, -V.y).normalize();
+                valdPrick.visible = valdRing.visible = true;
+                var col = new THREE.Color(g.def.farg);
+                valdPrickU.uFarg.value.copy(col).lerp(new THREE.Color(1, 1, 1), 0.35);
+                valdRingU.uFarg.value.copy(col).lerp(new THREE.Color(1, 1, 1), 0.5);
+                // Banan, ett varv framåt i tiden (räknas om varannan sekund)
+                if (visa.bana && (performance.now() - banTid > 2000 || banLinje.userData.id !== s.id)) {
+                    banTid = performance.now(); banLinje.userData.id = s.id;
+                    var b = banGeo.attributes.position.array, steg = s.T * 60000 / BAN_N, sist = null;
+                    for (var k = 0; k <= BAN_N; k++) {
+                        var q = propagera(s, new Date(nuMs + k * steg));
+                        if (q) { tillScen(q.position, b, 3 * k); sist = k; }
+                        else if (sist !== null) { b[3 * k] = b[3 * sist]; b[3 * k + 1] = b[3 * sist + 1]; b[3 * k + 2] = b[3 * sist + 2]; }
+                    }
+                    banGeo.attributes.position.needsUpdate = true;
+                    banGeo.computeBoundingSphere();
+                    banLinje.material.color.set(g.def.farg);
+                }
+                banLinje.visible = visa.bana;
+            }
+
+            // ── Synlighet: ligger punkten bakom jorden? ──
+            function bakomJorden(P, C) {
+                var dx = P.x - C.x, dy = P.y - C.y, dz = P.z - C.z;
+                var a = dx * dx + dy * dy + dz * dz, b = 2 * (C.x * dx + C.y * dy + C.z * dz), c = C.x * C.x + C.y * C.y + C.z * C.z - 1.0;
+                var disc = b * b - 4 * a * c;
+                if (disc < 0) return false;
+                var t1 = (-b - Math.sqrt(disc)) / (2 * a);
+                return t1 > 0 && t1 < 1;
+            }
+            var proj = new THREE.Vector3();
+            function tillSkarm(P) {
+                proj.copy(P).project(camera);
+                if (proj.z > 1) return null;
+                return { x: (proj.x + 1) / 2 * W, y: (1 - proj.y) / 2 * H };
+            }
+            function placera(el, P, synligt) {
+                var s = synligt ? tillSkarm(P) : null;
+                if (!s) { el.style.display = 'none'; return; }
+                el.style.display = '';
+                el.style.left = s.x.toFixed(1) + 'px'; el.style.top = s.y.toFixed(1) + 'px';
+            }
+
+            // Närmaste satellit på skärmen (klick och hovring)
+            var M = new THREE.Matrix4();
+            function narmast(px, py, maxAvst) {
+                M.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+                var e = M.elements, C = camera.position, bast = null, bastD = maxAvst * maxAvst;
+                var P = new THREE.Vector3();
+                Object.keys(G).forEach(function (k) {
+                    var g = G[k]; if (g.status !== 'klar' || !g.synlig) return;
+                    var pos = g.pos;
+                    for (var i = 0; i < g.sats.length; i++) {
+                        var x = pos[3 * i], y = pos[3 * i + 1], z = pos[3 * i + 2];
+                        if (x === 0 && y === 0 && z === 0) continue;
+                        var w = e[3] * x + e[7] * y + e[11] * z + e[15];
+                        if (w <= 0) continue;
+                        var sx = ((e[0] * x + e[4] * y + e[8] * z + e[12]) / w + 1) / 2 * W;
+                        var sy = (1 - (e[1] * x + e[5] * y + e[9] * z + e[13]) / w) / 2 * H;
+                        var d = (sx - px) * (sx - px) + (sy - py) * (sy - py);
+                        if (d < bastD) {
+                            P.set(x, y, z);
+                            if (bakomJorden(P, C)) continue;
+                            bastD = d; bast = { g: k, i: i };
+                        }
+                    }
+                });
+                return bast;
+            }
+
+            var W = 1, H = 1;
+            function storlek() {
+                W = Math.max(1, stage.clientWidth); H = Math.max(1, stage.clientHeight);
+                renderer.setSize(W, H, false);
+                camera.aspect = W / H;
+                if (forskjutning > 0) camera.setViewOffset(W, H, forskjutning, 0, W, H);
+                camera.updateProjectionMatrix();
+            }
+            storlek();
+            var ro = window.ResizeObserver ? new ResizeObserver(storlek) : null;
+            if (ro) ro.observe(stage); else window.addEventListener('resize', storlek);
+
+            // Klick väljer, drag vrider
+            var ned = null, hoverTimer = 0, hover = null;
+            var cv = renderer.domElement;
+            cv.addEventListener('pointerdown', function (ev) { ned = { x: ev.clientX, y: ev.clientY }; });
+            cv.addEventListener('pointerup', function (ev) {
+                if (!ned) return;
+                var rr = cv.getBoundingClientRect();
+                var flytt = Math.hypot(ev.clientX - ned.x, ev.clientY - ned.y);
+                ned = null;
+                if (flytt > 6) return;
+                var hit = narmast(ev.clientX - rr.left, ev.clientY - rr.top, ev.pointerType === 'touch' ? 24 : 14);
+                if (hit) lyss.valj(hit);
+            });
+            cv.addEventListener('pointermove', function (ev) {
+                if (ev.pointerType !== 'mouse' || ned) return;
+                var nu = performance.now(); if (nu - hoverTimer < 50) return; hoverTimer = nu;
+                var rr = cv.getBoundingClientRect();
+                hover = narmast(ev.clientX - rr.left, ev.clientY - rr.top, 11);
+                cv.style.cursor = hover ? 'pointer' : 'grab';
+            });
+            cv.addEventListener('pointerleave', function () { hover = null; });
+            controls.addEventListener('start', function () {
+                if (ned && visa.folj) { visa.folj = false; lyss.foljAv && lyss.foljAv(); }
+            });
+
+            // Pausa ritningen när scenen inte syns
+            var syns = true;
+            var io = window.IntersectionObserver ? new IntersectionObserver(function (en) { syns = en[0].isIntersecting; }) : null;
+            if (io) io.observe(stage);
+
+            var kamMal = null;          // mjuk kameraflytt (färdiga försök)
+            var tmp = new THREE.Vector3(), tmp2 = new THREE.Vector3();
+            var fR = new THREE.Vector3(), fN = new THREE.Vector3();
+            function foljRiktning() {
+                fR.copy(vS).normalize();
+                fN.crossVectors(vS, vV).normalize();
+                return fR.multiplyScalar(1).addScaledVector(fN, 0.55).addScaledVector(vV, -0.2).normalize();
+            }
+            // Inställningsrutan uppe till höger täcker en del av scenen. Bilden
+            // förskjuts då åt vänster så att jorden och den valda satelliten
+            // hamnar mitt i den fria ytan.
+            var forskjutning = 0;
+            function sattForskjutning(px) {
+                forskjutning = px;
+                if (px > 0) camera.setViewOffset(W, H, px, 0, W, H); else camera.clearViewOffset();
+                camera.updateProjectionMatrix();
+            }
+            var raf = 0;
+            function loop() {
+                raf = requestAnimationFrame(loop);
+                // Ingen övre gräns på steget: efter en stund i en bakgrundsflik
+                // ska tiden fortfarande vara "nu".
+                var nu = performance.now(), dtReal = Math.max(0, (nu - tid.senast) / 1000);
+                if (dtReal > 5) tvingaAlla();
+                tid.senast = nu;
+                if (!tid.paus) tid.sim += dtReal * 1000 * tid.fart;
+                var datum = new Date(tid.sim);
+                var gmst = satellite.gstime(datum);
+                // Utom synhåll: bara avläsningen för den valda satelliten hålls aktuell
+                if (!syns || document.hidden) { uppdateraVald(tid.sim, gmst); return; }
+                jordGrupp.rotation.y = gmst;
+                jU.uSol.value.copy(solRiktning(datum));
+                jU.uDagNatt.value = visa.dagnatt ? 1 : 0;
+                moln.visible = visa.moln;
+                tmp.copy(camera.position);
+                jU.uKam.value.copy(tmp);
+                var t0 = performance.now();
+                uppdateraFlottan(tid.sim);
+                var t1 = performance.now();
+                uppdateraVald(tid.sim, gmst);
+                prestanda.flotta = t1 - t0; prestanda.vald = performance.now() - t1;
+
+                // Följ satelliten: kameran glider till en punkt ovanför den, lite
+                // vid sidan av banplanet så att banan syns som en ellips och inte
+                // från kanten.
+                // Vridpunkten: nära satelliten när den följs, annars jordens medelpunkt.
+                // Snabbare följning vid hög tidsförkortning, annars hinner satelliten ifrån kameran.
+                var foljer = (visa.folj || (kamMal && kamMal.folj)) && valdInfo;
+                var snabb = Math.min(1, 0.06 * Math.max(1, Math.sqrt(tid.paus ? 1 : tid.fart)));
+                var malPunkt = foljer ? tmp2.copy(vS).multiplyScalar(0.92) : tmp2.set(0, 0, 0);
+                var forra = tmp.copy(controls.target);
+                controls.target.lerp(malPunkt, foljer ? Math.min(1, 2 * snabb) : 0.05);
+                camera.position.add(forra.sub(controls.target).negate());
+                // Kameran glider längs en sfär runt vridpunkten: avståndet sätts om efter
+                // varje steg, annars krymper det när riktningen ändras fort.
+                var glid = function (riktning, avst, k) {
+                    tmp.copy(camera.position).sub(controls.target).normalize().lerp(riktning, k).normalize();
+                    camera.position.copy(controls.target).addScaledVector(tmp, avst);
+                };
+                if (visa.folj && valdInfo && !kamMal) {
+                    glid(tmp2.copy(foljRiktning()), camera.position.distanceTo(controls.target), snabb);
+                }
+                if (kamMal) {
+                    var rikt = kamMal.folj && valdInfo ? tmp2.copy(foljRiktning()) : tmp2.copy(camera.position).sub(controls.target).normalize();
+                    var dNu = camera.position.distanceTo(controls.target);
+                    var dNy = dNu + (kamMal.avst - dNu) * 0.08;
+                    glid(rikt, dNy, Math.max(0.1, snabb));
+                    tmp.copy(camera.position).sub(controls.target).normalize();
+                    if (Math.abs(dNy - kamMal.avst) < 0.02 && tmp.dot(rikt) > 0.9999) kamMal = null;
+                }
+                controls.update();
+                camera.updateMatrixWorld();   // etiketterna placeras med denna bildrutas kamera
+
+                // Pilar: hastighet tangentiellt från satellitens kant, gravitationskraft mot jordens medelpunkt
+                var C = camera.position;
+                if (valdInfo && visa.pilar) {
+                    var avst = C.distanceTo(vS), L = Math.max(0.12, 0.17 * avst);
+                    tmp.copy(vS).negate().normalize();
+                    stallPil(pilV, tmp2.copy(vS).addScaledVector(vV, 0.004 * avst), vV, L, 1);
+                    stallPil(pilF, vS, tmp, L * 0.82, 1);
+                    var syn = !bakomJorden(vS, C);
+                    pilV.visible = pilF.visible = syn;
+                    placera(etV, tmp2.copy(vS).addScaledVector(vV, L * 1.16), syn);
+                    placera(etF, tmp2.copy(vS).addScaledVector(tmp, L * 0.82 * 1.2), syn);
+                } else { pilV.visible = pilF.visible = false; etV.style.display = etF.style.display = 'none'; }
+
+                if (valdInfo) {
+                    var synV = !bakomJorden(vS, C);
+                    sattText(etValt, valdInfo.namn);
+                    // Namnet läggs radiellt utåt från jorden, sett på skärmen: där
+                    // finns varken F_G-pilen (inåt) eller v-pilen (längs banan).
+                    var s0 = synV ? tillSkarm(vS) : null;
+                    var s1 = s0 ? tillSkarm(tmp.copy(vS).multiplyScalar(1.05)) : null;
+                    if (s0 && s1) {
+                        var dx = s1.x - s0.x, dy = s1.y - s0.y, dl = Math.hypot(dx, dy) || 1;
+                        dx /= dl; dy /= dl;
+                        etValt.style.display = '';
+                        etValt.style.left = (s0.x + dx * 26).toFixed(1) + 'px';
+                        etValt.style.top = (s0.y + dy * 26).toFixed(1) + 'px';
+                        etValt.style.transform = 'translate(' + (-50 + 50 * dx).toFixed(0) + '%, ' + (-50 + 50 * dy).toFixed(0) + '%)';
+                    } else etValt.style.display = 'none';
+                    valdPrick.visible = valdRing.visible = synV;
+                } else etValt.style.display = 'none';
+                if (hover && !(vald && hover.g === vald.g && hover.i === vald.i)) {
+                    var hg = G[hover.g];
+                    if (hg && hg.pos) {
+                        tmp.set(hg.pos[3 * hover.i], hg.pos[3 * hover.i + 1], hg.pos[3 * hover.i + 2]);
+                        var hs = hg.sats[hover.i];
+                        sattText(etHover, hs.sv || hs.namn);
+                        placera(etHover, tmp, !bakomJorden(tmp, C));
+                    }
+                } else etHover.style.display = 'none';
+
+                var t2 = performance.now();
+                renderer.render(scene, camera);
+                prestanda.rita = performance.now() - t2;
+            }
+            var prestanda = {};
+            loop();
+
+            return {
+                G: G, tid: tid, visa: visa, GRUPPER: GRUPPER,
+                laddaGrupp: laddaGrupp,
+                setSynlig: function (id, on) {
+                    var g = G[id]; g.synlig = on;
+                    if (on && g.status === 'fel') g.status = 'vilar';
+                    if (on) { if (g.status === 'vilar') laddaGrupp(id); else g.tvinga = true; }
+                    g.pts.visible = on && g.status === 'klar';
+                },
+                valj: function (key) {
+                    vald = key; banTid = 0;
+                    if (!key) { valdPrick.visible = valdRing.visible = banLinje.visible = false; }
+                },
+                info: function () { return valdInfo; },
+                hitta: function (pred) {
+                    var ut = null;
+                    Object.keys(G).some(function (k) {
+                        var g = G[k]; if (g.status !== 'klar') return false;
+                        for (var i = 0; i < g.sats.length; i++) if (pred(g.sats[i])) { ut = { g: k, i: i }; return true; }
+                        return false;
+                    });
+                    return ut;
+                },
+                alla: function (k) { return G[k].sats; },
+                flygTill: function (avst, folj) {
+                    kamMal = { avst: avst, folj: !!folj };
+                },
+                forskjut: function (px) { sattForskjutning(px); },
+                prestanda: prestanda,
+                // För testskript: läget i scenen
+                felsok: function () {
+                    return { mal: controls.target.toArray(), kamera: camera.position.toArray(), forskjutning: forskjutning,
+                             vy: camera.view && camera.view.enabled ? camera.view.offsetX : 0, sat: vS.toArray(), folj: visa.folj,
+                             skarm: valdInfo ? tillSkarm(vS) : null, W: W, H: H };
+                },
+                hoppaTid: function (ms) { tid.sim = ms; tvingaAlla(); },
+                // Punkter till diagrammet: [r (km), v (km/s), gruppindex]
+                diagramPunkter: function () {
+                    var ut = [];
+                    Object.keys(G).forEach(function (k, gi) {
+                        var g = G[k]; if (g.status !== 'klar' || !g.synlig) return;
+                        var eci = g.eci;
+                        for (var i = 0; i < g.sats.length; i++) {
+                            if (!(g.tRef[i] === g.tRef[i])) continue;
+                            var c = 6 * i;
+                            var r = Math.sqrt(eci[c] * eci[c] + eci[c + 1] * eci[c + 1] + eci[c + 2] * eci[c + 2]);
+                            var v = Math.sqrt(eci[c + 3] * eci[c + 3] + eci[c + 4] * eci[c + 4] + eci[c + 5] * eci[c + 5]);
+                            ut.push(r, v, gi);
+                        }
+                    });
+                    return ut;
+                },
+                stopp: function () {
+                    cancelAnimationFrame(raf);
+                    if (ro) ro.disconnect(); if (io) io.disconnect();
+                    controls.dispose(); renderer.dispose();
+                },
+            };
+        }
+
+        window.SATMOTOR = { skapa: skapaMotor, GRUPPER: GRUPPER, RJ: RJ, MU: MU };
+    })();
+    </script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+        const T = (s, v) => window.I18N ? I18N.t(s, v) : (v ? s.replace(/\{(\w+)\}/g, (m, k) => v[k]) : s);
+        const { GRUPPER, RJ, MU } = window.SATMOTOR;
+        const LOKAL = document.documentElement.lang === 'nb' ? 'nb-NO' : 'sv-SE';
+        const G_KONST = 6.67e-11, MJ = 5.972e24;
+
+        const fmt = (num, d = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+        const fmtNum = (n, d = 0) => {
+            if (!isFinite(n)) return '–';
+            const s = n.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [intp, frac] = s.split('.');
+            const neg = intp.startsWith('-');
+            const withSpaces = intp.replace('-', '').replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return (neg ? '−' : '') + (frac !== undefined ? withSpaces + ',' + frac : withSpaces);
+        };
+        const fmtMin = (min) => {
+            if (!isFinite(min)) return '–';
+            if (min < 180) return fmt(min, 1) + ' min';
+            const h = Math.floor(min / 60), m = Math.round(min - h * 60);
+            return h + ' h ' + m + ' min';
+        };
+        const fmtGrad = (x, pos, neg) => {
+            const s = fmt(Math.abs(x), 1);
+            return s === '0' ? '0°' : s + '° ' + (x >= 0 ? pos : neg);
+        };
+        const vCirk = (rKm) => Math.sqrt(MU / (rKm * 1000));   // m/s
+
+        // ── Formelkort ──
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const Frac = ({ topLabel, top, bottomLabel, bottom }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{topLabel}</span>
+                <span className="fnum">{top}</span>
+                <span className="fnum" style={{ alignSelf: 'stretch', textAlign: 'center',
+                    borderTop: '2px solid currentColor', paddingTop: 3, marginTop: 3 }}>{bottom}</span>
+                <span className="flbl">{bottomLabel}</span>
+            </div>
+        );
+        const FormulaCard = () => (
+            <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <Vbl label="Gravitationskraft"><em>F</em><sub>G</sub></Vbl>
+                <span className="fnum">=</span>
+                <Vbl label="Centripetalkraft"><em>F</em><sub>C</sub></Vbl>
+                <span className="fnum">⟹</span>
+                <Vbl label="Fart"><em>v</em></Vbl>
+                <span className="fnum">=</span>
+                <div className="rot">
+                    <span className="rot-tecken">√</span>
+                    <div className="rot-under">
+                        <Frac topLabel="Grav.konst. · jordens massa" top={<span><em>G</em>&thinsp;·&thinsp;<em>m</em><sub>j</sub></span>}
+                              bottomLabel="Avstånd till jordens medelpunkt" bottom={<em>r</em>} />
+                    </div>
+                </div>
+                <span className="fnum" style={{ margin: '0 10px', color: 'var(--lab-ink-muted)' }}>|</span>
+                <Vbl label="Avstånd"><em>r</em></Vbl>
+                <span className="fnum">=</span>
+                <Vbl label="Jordens radie"><em>r</em><sub>j</sub></Vbl>
+                <span className="fnum">+</span>
+                <Vbl label="Höjd"><em>h</em></Vbl>
+            </div>
+        );
+
+        // ── Diagrammet: fart mot avstånd, med teorins kurva ──
+        const DIAG_RMAX = 46000, DIAG_VMAX = 10;
+        const Diagram = ({ motorRef, tick, valdInfo, dolj }) => {
+            const ref = useRef(null);
+            useEffect(() => {
+                const cv = ref.current, motor = motorRef.current;
+                if (!cv || !motor) return;
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                const W = cv.clientWidth, H = Math.round(W * 0.66);
+                if (cv.width !== Math.round(W * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cv.style.height = H + 'px'; }
+                const c = cv.getContext('2d');
+                c.setTransform(dpr, 0, 0, dpr, 0, 0);
+                c.clearRect(0, 0, W, H);
+                const pL = 38, pR = 14, pT = 24, pB = 34;
+                const X = (r) => pL + (r / DIAG_RMAX) * (W - pL - pR);
+                const Y = (v) => H - pB - (v / DIAG_VMAX) * (H - pT - pB);
+                const ink = '#1f2530', mut = '#5a6170';
+                c.font = '12px Poppins, sans-serif';
+                // jordens inre
+                c.fillStyle = 'rgba(31,111,181,0.10)';
+                c.fillRect(X(0), Y(DIAG_VMAX), X(RJ) - X(0), Y(0) - Y(DIAG_VMAX));
+                c.save(); c.translate(X(RJ / 2) + 4, Y(DIAG_VMAX / 2)); c.rotate(-Math.PI / 2);
+                c.fillStyle = '#1f6fb5'; c.textAlign = 'center'; c.fillText(T('inuti jorden'), 0, 0); c.restore();
+                // stödlinjer
+                c.strokeStyle = 'rgba(15,22,32,0.08)'; c.lineWidth = 1;
+                for (let v = 2; v <= DIAG_VMAX; v += 2) { c.beginPath(); c.moveTo(X(0), Y(v)); c.lineTo(X(DIAG_RMAX), Y(v)); c.stroke(); }
+                for (let r = 10000; r < DIAG_RMAX; r += 10000) { c.beginPath(); c.moveTo(X(r), Y(0)); c.lineTo(X(r), Y(DIAG_VMAX)); c.stroke(); }
+                // axlar med pil åt det positiva hållet
+                c.strokeStyle = ink; c.fillStyle = ink; c.lineWidth = 1.4;
+                c.beginPath(); c.moveTo(X(0), Y(0)); c.lineTo(W - 4, Y(0)); c.stroke();
+                c.beginPath(); c.moveTo(W - 4, Y(0)); c.lineTo(W - 11, Y(0) - 4); c.lineTo(W - 11, Y(0) + 4); c.closePath(); c.fill();
+                c.beginPath(); c.moveTo(X(0), Y(0)); c.lineTo(X(0), 6); c.stroke();
+                c.beginPath(); c.moveTo(X(0), 6); c.lineTo(X(0) - 4, 13); c.lineTo(X(0) + 4, 13); c.closePath(); c.fill();
+                c.fillStyle = mut; c.textAlign = 'center'; c.textBaseline = 'top';
+                for (let r = 0; r <= 40000; r += 10000) c.fillText(fmtNum(r / 1000), X(r), Y(0) + 5);
+                c.textAlign = 'right'; c.textBaseline = 'middle';
+                for (let v = 0; v <= DIAG_VMAX; v += 2) c.fillText(String(v), X(0) - 6, Y(v));
+                c.fillStyle = ink; c.textAlign = 'right'; c.textBaseline = 'top';
+                c.font = 'italic 13px Poppins, sans-serif';
+                const xl = T('r (1 000 km)');
+                c.fillText(xl, W - 4, Y(0) + 18);
+                c.textAlign = 'left'; c.textBaseline = 'middle';
+                c.fillText(T('v (km/s)'), X(0) + 9, 10);
+                c.font = '12px Poppins, sans-serif';
+                // teorins kurva, samplad tätt ur funktionen
+                c.strokeStyle = '#2563c9'; c.lineWidth = 2.2; c.beginPath();
+                let forsta = true;
+                for (let px = X(RJ); px <= X(DIAG_RMAX); px += 1) {
+                    const r = (px - pL) / (W - pL - pR) * DIAG_RMAX;
+                    const v = vCirk(r) / 1000;
+                    if (forsta) { c.moveTo(px, Y(v)); forsta = false; } else c.lineTo(px, Y(v));
+                }
+                c.stroke();
+                // satelliterna
+                // En bana per grupp: tiotusen prickar i ett fill-anrop, inte tiotusen
+                const pts = motor.diagramPunkter();
+                GRUPPER.forEach((g, gi) => {
+                    const rad = g.id === 'starlink' ? 1.4 : 2.2;
+                    c.fillStyle = g.mork; c.globalAlpha = g.id === 'starlink' ? 0.25 : 0.55;
+                    c.beginPath();
+                    let n = 0;
+                    for (let k = 0; k < pts.length; k += 3) {
+                        if (pts[k + 2] !== gi) continue;
+                        const x = X(pts[k]), y = Y(pts[k + 1]);
+                        c.moveTo(x + rad, y); c.arc(x, y, rad, 0, 2 * Math.PI); n++;
+                    }
+                    if (n) c.fill();
+                });
+                c.globalAlpha = 1;
+                // kurvans etikett i fri yta ovanför kurvan
+                const rEt = 22000;
+                c.fillStyle = '#2563c9'; c.textAlign = 'left'; c.textBaseline = 'bottom';
+                c.font = '13px Poppins, sans-serif';
+                c.fillText(T('cirkelbana enligt teorin'), X(rEt), Y(vCirk(rEt) / 1000) - 26);
+                // vald satellit
+                if (valdInfo && !dolj) {
+                    const x = X(Math.min(valdInfo.r, DIAG_RMAX)), y = Y(Math.min(valdInfo.v, DIAG_VMAX));
+                    c.strokeStyle = '#c8324a'; c.lineWidth = 2;
+                    c.beginPath(); c.arc(x, y, 6, 0, 2 * Math.PI); c.stroke();
+                    c.fillStyle = '#c8324a'; c.font = '600 12px Poppins, sans-serif';
+                    const vanster = x > W * 0.62;
+                    c.textAlign = vanster ? 'right' : 'left'; c.textBaseline = 'bottom';
+                    c.fillText(T(valdInfo.namn), x + (vanster ? -9 : 9), y - 7);
+                }
+            }, [tick, valdInfo && valdInfo.id, dolj]);
+            return <div className="diagram-ruta"><canvas ref={ref} role="img"
+                aria-label={T('Diagram över satelliternas fart mot avståndet till jordens medelpunkt, med kurvan för cirkelbana enligt teorin')} /></div>;
+        };
+
+        // ── Färdiga försök ──
+        const PRESETS = [
+            { id: 'iss', namn: 'Rymdstationen ISS', grupp: 'stationer', hitta: (s) => s.id === 25544, avst: 4.4,
+              text: 'Rymdstationen ISS på drygt 400 km höjd, ett varv på drygt 90 minuter. Följ den över dag- och nattsidan.' },
+            { id: 'hubble', namn: 'Hubble', grupp: 'vetenskap', hitta: (s) => s.id === 20580, avst: 4.4,
+              text: 'Rymdteleskopet Hubble, exemplet i genomgången. Kontrollera själv att farten stämmer med gravitationslagen för höjden just nu.' },
+            { id: 'gps', namn: 'GPS-satellit', grupp: 'navigering', hitta: [(s) => /^GPS BIII/.test(s.namn), (s) => /^GPS /.test(s.namn)], avst: 9.5,
+              text: 'GPS-satelliterna går på drygt 20 000 km höjd, två varv per stjärndygn. Högre upp är farten lägre.' },
+            { id: 'meteosat', namn: 'Geostationär', grupp: 'vader', hitta: [(s) => /^METEOSAT-11/.test(s.namn), (s) => /^METEOSAT/.test(s.namn)], avst: 15,
+              text: 'Vädersatelliten Meteosat på 35 786 km höjd: ett varv tar lika lång tid som jordens rotation, så den står stilla över Afrika och tar bilderna i väderprognosen.' },
+            { id: 'starlink', namn: 'Starlink', grupp: 'starlink', hitta: (s) => /^STARLINK/.test(s.namn), avst: 4.4,
+              text: 'Tiotusen Starlink-satelliter på 340–570 km höjd. Alla i samma höjd har samma fart, oavsett massa.' },
+        ];
+
+        const NumSvar = ({ onSvar, disabled }) => {
+            const [txt, setTxt] = useState('');
+            const skicka = () => {
+                const n = parseFloat(txt.replace(/\s/g, '').replace(/ /g, '').replace(',', '.'));
+                if (isFinite(n)) { onSvar(n); }
+            };
+            return (
+                <div className="flex items-center gap-2 mt-2">
+                    <span><em>v</em> =</span>
+                    <input className="num-in" type="text" inputMode="decimal" value={txt} disabled={disabled}
+                           aria-label={T('Din beräknade fart')}
+                           onChange={(e) => setTxt(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') skicka(); }} />
+                    <span className="num-unit">m/s</span>
+                    <button className="btn-toggle btn-small" onClick={skicka} disabled={disabled}>Kontrollera</button>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const stageRef = useRef(null), lagerRef = useRef(null), sceneWrapRef = useRef(null);
+            const motorRef = useRef(null);
+            const [tick, setTick] = useState(0);
+            const [synliga, setSynliga] = useState(() => Object.fromEntries(GRUPPER.map(g => [g.id, g.start])));
+            const [vald, setVald] = useState(null);
+            const [visa, setVisa] = useState({ bana: true, pilar: true, dagnatt: true, folj: false, moln: true });
+            const [fart, setFart] = useState(1);
+            const [paus, setPaus] = useState(false);
+            const [preset, setPreset] = useState(null);
+            const [sok, setSok] = useState('');
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [gissa, setGissa] = useState(null);       // { key, namn, r, h, v, svar, status }
+            const [poang, setPoang] = useState({ ratt: 0, forsok: 0, svit: 0 });
+            const vantaRef = useRef(null);                  // färdigt försök som väntar på data
+
+            // Motorn startas en gång
+            useEffect(() => {
+                const m = window.SATMOTOR.skapa(stageRef.current, lagerRef.current, {
+                    andrat: () => setTick(t => t + 1),
+                    valj: (key) => { setVald(key); setPreset(null); },
+                    foljAv: () => setVisa(v => ({ ...v, folj: false })),
+                    gruppKlar: (id) => {
+                        const p = vantaRef.current;
+                        if (p && p.grupp === id) { vantaRef.current = null; korPreset(p); }
+                        else if (!motorRef.current || !motorRef.current.info()) {
+                            // Utgångsläge: rymdstationen ISS vald när rymdstationerna laddats
+                            if (id === 'stationer' && !vantaRef.current) korPreset(PRESETS[0]);
+                        }
+                    },
+                });
+                motorRef.current = m; window.SATMOTOR.aktiv = m;
+                GRUPPER.forEach(g => { if (g.start) m.laddaGrupp(g.id); });
+                const iv = setInterval(() => setTick(t => t + 1), 250);
+                return () => { clearInterval(iv); m.stopp(); };
+            }, []);
+
+            useEffect(() => { const m = motorRef.current; if (m) m.valj(vald); }, [vald]);
+            // Förskjut bilden åt vänster med halva inställningsrutans bredd när
+            // rutan ligger ovanpå scenen (inte på mobil, där den dockas under).
+            useEffect(() => {
+                const mat = () => {
+                    const m = motorRef.current, wrap = sceneWrapRef.current;
+                    if (!m || !wrap) return;
+                    const ruta = wrap.querySelector('.scene-toggles');
+                    const over = ruta && window.innerWidth > 600 && getComputedStyle(ruta).position === 'absolute';
+                    m.forskjut(over ? Math.round(ruta.offsetWidth / 2 + 7) : 0);
+                };
+                const t = setTimeout(mat, 60);
+                window.addEventListener('resize', mat);
+                return () => { clearTimeout(t); window.removeEventListener('resize', mat); };
+            }, [togglesOpen, isFullscreen]);
+            useEffect(() => { const m = motorRef.current; if (m) Object.assign(m.visa, visa); }, [visa]);
+            useEffect(() => { const m = motorRef.current; if (m) { m.tid.fart = fart; m.tid.paus = paus; } }, [fart, paus]);
+
+            const sattSynlig = (id, on) => {
+                setSynliga(s => ({ ...s, [id]: on }));
+                motorRef.current && motorRef.current.setSynlig(id, on);
+            };
+            const korPreset = (p, tyst) => {
+                const m = motorRef.current; if (!m) return;
+                const g = m.G[p.grupp];
+                if (!g.synlig) sattSynlig(p.grupp, true);
+                if (g.status !== 'klar') { vantaRef.current = p; setPreset(p.id); m.laddaGrupp(p.grupp); return; }
+                let key = null;
+                for (const pred of [].concat(p.hitta)) {
+                    key = m.hitta((s) => s.grupp === p.grupp && pred(s) && !s.trasig);
+                    if (key) break;
+                }
+                if (!key) return;
+                setVald(key); setPreset(p.id);
+                m.valj(key);
+                setVisa(v => ({ ...v, folj: !tyst }));
+                m.visa.folj = !tyst;
+                m.flygTill(p.avst, true);
+            };
+            const tillNu = () => { const m = motorRef.current; m.hoppaTid(Date.now()); setFart(1); setPaus(false); };
+
+            // fullskärm
+            useEffect(() => {
+                const handler = () => {
+                    const fs = document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current;
+                    setIsFullscreen(fs);
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const m = motorRef.current;
+            const info = m ? m.info() : null;
+            const simTid = m ? m.tid.sim : Date.now();
+            const arLive = Math.abs(simTid - Date.now()) < 3000 && fart === 1 && !paus;
+            const presetInfo = PRESETS.find(p => p.id === preset);
+            const grpDef = info ? GRUPPER.find(g => g.id === info.grupp) : null;
+            const doljFart = gissa && info && gissa.key && vald && gissa.key.g === vald.g && gissa.key.i === vald.i && gissa.status !== 'ratt';
+
+            // ── Räkna själv ──
+            const nyUppgift = () => {
+                if (!m) return;
+                const kand = [];
+                GRUPPER.forEach(g => {
+                    if (!synliga[g.id] || m.G[g.id].status !== 'klar') return;
+                    m.G[g.id].sats.forEach((s, i) => { if (s.e < 0.005 && !s.trasig) kand.push({ g: g.id, i, s }); });
+                });
+                if (!kand.length) return;
+                const val = kand[Math.floor(Math.random() * kand.length)];
+                const key = { g: val.g, i: val.i };
+                setVald(key); m.valj(key); setPreset(null);
+                setVisa(v => ({ ...v, folj: true })); m.visa.folj = true;
+                m.flygTill(val.s.T > 600 ? 13 : 4.4, true);
+                setGissa({ key, status: 'vantar' });
+            };
+            // Låser satellitens r och v i uppgiften så snart avläsningen finns
+            useEffect(() => {
+                if (gissa && gissa.status === 'vantar' && info && vald && gissa.key.g === vald.g && gissa.key.i === vald.i && !gissa.r)
+                    setGissa(gs => ({ ...gs, r: info.r, h: info.r - RJ, v: info.v * 1000, namn: info.namn }));
+            }, [tick]);
+            const svara = (n) => {
+                if (!gissa || !gissa.r) return;
+                const teori = vCirk(gissa.r);
+                const ratt = Math.abs(n - gissa.v) / gissa.v < 0.02;
+                let tips = null;
+                if (!ratt) {
+                    const medH = vCirk(gissa.h);
+                    if (Math.abs(n - medH) / medH < 0.03) tips = 'h';
+                    else if (Math.abs(n - teori * teori) / (teori * teori) < 0.03) tips = 'rot';
+                    else if (Math.abs(n * 1000 - gissa.v) / gissa.v < 0.03 || Math.abs(n - gissa.v / 1000) / (gissa.v / 1000) < 0.03) tips = 'enhet';
+                    else if (Math.abs(n - vCirk(gissa.r / 1000)) / vCirk(gissa.r / 1000) < 0.03) tips = 'km';
+                }
+                setGissa(gs => ({ ...gs, svar: n, status: ratt ? 'ratt' : 'fel', tips, teori }));
+                setPoang(p => ({ ratt: p.ratt + (ratt ? 1 : 0), forsok: p.forsok + 1, svit: ratt ? p.svit + 1 : 0 }));
+            };
+
+            // ── Sök ──
+            const traffar = (() => {
+                if (!m || sok.trim().length < 2) return [];
+                const q = sok.trim().toLowerCase(), ut = [];
+                GRUPPER.forEach(g => {
+                    if (m.G[g.id].status !== 'klar') return;
+                    m.G[g.id].sats.forEach((s, i) => {
+                        if (ut.length >= 30) return;
+                        if (s.namn.toLowerCase().includes(q) || (s.sv && s.sv.toLowerCase().includes(q)) || String(s.id) === q)
+                            ut.push({ g: g.id, i, s });
+                    });
+                });
+                return ut;
+            })();
+
+            const datumText = new Date(simTid).toLocaleString(LOKAL, { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const statusText = (() => {
+                if (!m) return '';
+                const kallor = GRUPPER.filter(g => synliga[g.id]).map(g => m.G[g.id]);
+                if (kallor.some(g => g.status === 'laddar')) return T('Hämtar banelement …');
+                const reserv = kallor.find(g => g.kalla === 'reserv');
+                if (reserv) return T('CelesTrak svarar inte. Reservkopia av banelementen från {d}: positionerna är ungefärliga.', { d: new Date(reserv.tid).toLocaleDateString(LOKAL) });
+                const ok = kallor.find(g => g.kalla === 'celestrak');
+                const fel = kallor.filter(g => g.status === 'fel').map(g => g.def.namn);
+                const felText = fel.length ? ' ' + T('{g} gick inte att hämta just nu. Försök igen om en stund.', { g: fel.join(', ') }) : '';
+                if (ok) return T('Banelement från CelesTrak, hämtade {t}.', { t: new Date(ok.tid).toLocaleTimeString(LOKAL, { hour: '2-digit', minute: '2-digit' }) }) + felText;
+                if (fel.length) return felText.trim();
+                return '';
+            })();
+            const antalSynliga = m ? GRUPPER.reduce((a, g) => a + (synliga[g.id] && m.G[g.id].status === 'klar' ? m.G[g.id].sats.length : 0), 0) : 0;
+
+            const FARTER = [1, 10, 60, 300, 1000];
+            const fartKnappar = (kl) => (
+                <div className="flex flex-wrap gap-1">
+                    {FARTER.map(f => (
+                        <button key={f} className={'btn-toggle ' + kl + (fart === f ? ' active' : '')} onClick={() => setFart(f)}>{fmtNum(f)}×</button>
+                    ))}
+                </div>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" />
+                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" />
+                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                <path d="M6 6l12 12M18 6L6 18" />
+                            </svg>
+                        </button>
+                        <div className="st-title">Satelliter</div>
+                        {GRUPPER.map(g => {
+                            const mg = m && m.G[g.id];
+                            const antal = !mg ? '' : mg.status === 'klar' ? fmtNum(mg.sats.length)
+                                : mg.status === 'laddar' ? '…' : (mg.status === 'fel' && synliga[g.id] ? T('ej hämtad') : '');
+                            return (
+                                <label key={g.id}><input type="checkbox" checked={!!synliga[g.id]} onChange={() => sattSynlig(g.id, !synliga[g.id])} />
+                                    <span className="st-prick" style={{ background: g.mork }}></span>
+                                    <span>{g.namn}</span><span className="st-antal">{antal}</span></label>
+                            );
+                        })}
+                        <div className="st-title mt">Visa</div>
+                        <label><input type="checkbox" checked={visa.bana} onChange={() => setVisa(v => ({ ...v, bana: !v.bana }))} />
+                            <span className="st-swatch" style={{ background: grpDef ? grpDef.mork : '#5a6170' }}></span>
+                            <span>Banan för vald satellit</span></label>
+                        <label><input type="checkbox" checked={visa.pilar} onChange={() => setVisa(v => ({ ...v, pilar: !v.pilar }))} />
+                            <span className="st-swatch" style={{ background: 'linear-gradient(90deg,#2563c9 50%,#c8324a 50%)' }}></span>
+                            <span>Hastighet <em>v</em> och kraft <em>F</em><sub>G</sub></span></label>
+                        <label><input type="checkbox" checked={visa.dagnatt} onChange={() => setVisa(v => ({ ...v, dagnatt: !v.dagnatt }))} />
+                            <span>Dag och natt just nu</span></label>
+                        <label><input type="checkbox" checked={visa.moln} onChange={() => setVisa(v => ({ ...v, moln: !v.moln }))} />
+                            <span>Moln</span></label>
+                        <label><input type="checkbox" checked={visa.folj} disabled={!info} onChange={() => setVisa(v => ({ ...v, folj: !v.folj }))} />
+                            <span>Följ vald satellit</span></label>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Tid</div>
+                                {fartKnappar('btn-small')}
+                                <div className="st-title mt">Färdiga försök</div>
+                                <div className="st-presets">
+                                    {PRESETS.map(p => (
+                                        <button key={p.id} className={'btn-toggle' + (preset === p.id ? ' active' : '')} onClick={() => korPreset(p)}>{p.namn}</button>
+                                    ))}
+                                </div>
+                                <div className="st-actions">
+                                    <button className="btn-toggle" onClick={() => setPaus(pp => !pp)}>{paus ? 'Fortsätt' : 'Pausa'}</button>
+                                    <button className="btn-toggle" onClick={tillNu} disabled={arLive}>Tillbaka till nu</button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const Avl = ({ val, lbl, col }) => (
+                <div>
+                    <div className="avl-val" style={col ? { color: col } : null}>{val}</div>
+                    <div className="avl-lbl" dangerouslySetInnerHTML={{ __html: lbl }} />
+                </div>
+            );
+            const dolt = '?';
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Satelliter just nu
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Satelliter just nu</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 840 }}>
+                            Här är de riktiga satelliterna, där de befinner sig i denna sekund. Positionerna räknas fram ur
+                            de senaste banelementen och uppdateras hela tiden, och jorden har dag och natt efter solens läge just nu.
+                            Varje satellit hålls kvar i sin bana av <strong>gravitationskraften</strong>, som är den
+                            <strong> centripetalkraft</strong> som krävs. Därför har varje höjd sin bestämda fart: välj en satellit
+                            och jämför dess fart med vad gravitationslagen säger, eller räkna ut farten själv.
+                        </p>
+
+                        <FormulaCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-3/5 order-1">
+                                <div className={"scene-wrap" + (isFullscreen ? " is-fs" : "")} ref={sceneWrapRef}>
+                                    <div className="sat-stage" ref={stageRef}>
+                                        <div className="sat-lager" ref={lagerRef}></div>
+                                        {antalSynliga === 0 && <div className="sat-laddar">{T('Hämtar banelement …')}</div>}
+                                    </div>
+                                    <div className="scene-hint">
+                                        Dra för att vrida jorden, zooma med hjulet eller två fingrar. Klicka på en satellit för att välja den.
+                                    </div>
+                                    <div className="scene-info sat-klocka">
+                                        <span className={'live-prick' + (arLive ? '' : ' av')}></span>
+                                        <span>{arLive ? T('Live') : (paus ? T('Pausad') : fmtNum(fart) + '×')}</span>
+                                        <span>{datumText}</span>
+                                    </div>
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
+                                    {statusText} {T('Jorden är i skala med banorna, satelliterna är förstorade till synliga prickar.')}
+                                </p>
+
+                                {/* Den pedagogiska kärnan: alla satelliter på teorins kurva */}
+                                <div className="glass-card rounded-xl p-3 mt-4">
+                                    <div className="flbl mb-1">Fart mot avstånd för alla satelliter som visas</div>
+                                    <Diagram motorRef={motorRef} tick={tick} valdInfo={info} dolj={doljFart} />
+                                    <p className="text-sm mt-1" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        Varje prick är en satellit. Den blå kurvan är farten i en cirkelbana enligt
+                                        gravitationslagen, <em>v</em> = √(<em>G</em> · <em>m</em><sub>j</sub> / <em>r</em>).
+                                        Nästan alla satelliter ligger på kurvan: lågt nere går de fort, långt ut går de långsamt.
+                                        De få som hamnar bredvid kurvan går i tydliga ellipsbanor, där farten ändras under varvet.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="lg:w-2/5 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Färdiga försök</div>
+                                    <div className="preset-grid">
+                                        {PRESETS.map(p => (
+                                            <button key={p.id} className={'btn-toggle btn-small' + (preset === p.id ? ' active' : '')} onClick={() => korPreset(p)}>{p.namn}</button>
+                                        ))}
+                                    </div>
+                                    {presetInfo && <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>{presetInfo.text}</p>}
+                                    <div className="flbl mt-3 mb-1">Sök satellit</div>
+                                    <input className="sok-in" type="search" value={sok} placeholder="Till exempel ISS, Hubble, Galileo eller Meteosat"
+                                           onChange={(e) => setSok(e.target.value)} />
+                                    {traffar.length > 0 && (
+                                        <div className="sok-traffar">
+                                            {traffar.map(t => {
+                                                const g = GRUPPER.find(x => x.id === t.g);
+                                                return (
+                                                    <button key={t.g + t.i} onClick={() => {
+                                                        const key = { g: t.g, i: t.i };
+                                                        if (!synliga[t.g]) sattSynlig(t.g, true);
+                                                        setVald(key); m.valj(key); setPreset(null); setSok('');
+                                                        setVisa(v => ({ ...v, folj: true })); m.visa.folj = true;
+                                                        m.flygTill(t.s.T > 600 ? 13 : 4.4, true);
+                                                    }}>
+                                                        <span className="st-prick" style={{ background: g.mork }}></span>
+                                                        <span>{t.s.sv ? t.s.sv + ' (' + t.s.namn + ')' : t.s.namn}</span>
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Tid</div>
+                                    {fartKnappar('btn-small')}
+                                    <div className="flex gap-2 mt-2">
+                                        <button className="btn-toggle flex-1" onClick={() => setPaus(pp => !pp)}>{paus ? 'Fortsätt' : 'Pausa'}</button>
+                                        <button className="btn-toggle flex-1" onClick={tillNu} disabled={arLive}>Tillbaka till nu</button>
+                                    </div>
+                                    <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
+                                        Med 1× visas läget i realtid. Snabbspola för att se hur satelliterna rör sig och hur
+                                        jorden roterar under banorna.
+                                    </p>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Vald satellit</div>
+                                    {info ? (
+                                        <React.Fragment>
+                                            <div className="mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                                <span className="st-prick inline-block mr-2" style={{ background: grpDef.mork }}></span>
+                                                <strong>{info.namn}</strong>
+                                                {info.namn !== info.original && <span className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}> ({info.original})</span>}
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{grpDef.namn}, {T('katalognummer')} {info.id}</div>
+                                            </div>
+                                            <div className="avl-grid">
+                                                <Avl val={fmtNum(info.r - RJ) + ' km'} lbl="höjd över jordytan <em>h</em>" />
+                                                <Avl val={fmtNum(info.r) + ' km'} lbl="avstånd till medelpunkten <em>r</em>" />
+                                                <Avl val={doljFart ? dolt : fmtNum(info.v * 1000) + ' m/s'} lbl="fart just nu <em>v</em>" col="#2563c9" />
+                                                <Avl val={doljFart ? dolt : fmtNum(vCirk(info.r)) + ' m/s'} lbl="cirkelfart enligt teorin" col="#16804c" />
+                                                <Avl val={doljFart ? dolt : fmtMin(info.T)} lbl="omloppstid <em>T</em>" />
+                                                <Avl val={doljFart ? dolt : fmt(1440 / info.T, 2)} lbl="varv per dygn" />
+                                                <Avl val={fmtGrad(info.lat, T('N'), T('S'))} lbl="latitud under satelliten" />
+                                                <Avl val={fmtGrad(info.lon, T('Ö'), T('V'))} lbl="longitud under satelliten" />
+                                                <Avl val={fmtNum(info.rp - RJ) + '–' + fmtNum(info.ra - RJ) + ' km'} lbl="lägsta och högsta höjd" />
+                                                <Avl val={fmt(info.e, 4)} lbl="excentricitet <em>e</em>" />
+                                            </div>
+                                            {!doljFart && (
+                                                <p className="text-sm mt-3" style={{ color: 'var(--lab-ink-soft)' }}>
+                                                    {info.e < 0.05
+                                                        ? T('Banan är nästan en cirkel, och farten skiljer sig {p} % från cirkelfarten. Skillnaden kommer av att banan inte är en perfekt cirkel och att jorden är lite tillplattad.', { p: fmt(Math.abs(info.v * 1000 - vCirk(info.r)) / vCirk(info.r) * 100, 2) })
+                                                        : T('Banan är en tydlig ellips. Farten är högst närmast jorden och lägst längst ut, så den ligger bara tillfälligt på cirkelfarten.')}
+                                                </p>
+                                            )}
+                                        </React.Fragment>
+                                    ) : (
+                                        <p className="text-sm" style={{ color: 'var(--lab-ink-muted)' }}>Klicka på en satellit i scenen, välj ett färdigt försök eller sök efter ett namn.</p>
+                                    )}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flbl">Räkna själv</div>
+                                        {poang.forsok > 0 && <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>
+                                            {T('{r} av {f} rätt', { r: poang.ratt, f: poang.forsok })}{poang.svit > 1 ? T(', {s} i rad', { s: poang.svit }) : ''}</div>}
+                                    </div>
+                                    {!gissa && (
+                                        <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            En slumpvald satellit i en nästan cirkelformad bana väljs, och farten döljs. Beräkna farten ur höjden.
+                                        </p>
+                                    )}
+                                    {gissa && gissa.r && (
+                                        <div className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            <p>{T('Satelliten {n} går i en nästan cirkelformad bana på höjden', { n: T(gissa.namn) })}{' '}
+                                                <strong style={{ color: 'var(--lab-ink)' }}><em>h</em> = {fmtNum(gissa.h)}&nbsp;km</strong>.{' '}
+                                                Beräkna farten <em>v</em>. Använd <em>G</em> = 6,67&nbsp;·&nbsp;10<sup>−11</sup>&nbsp;N&nbsp;m²/kg²,
+                                                <em> m</em><sub>j</sub> = 5,972&nbsp;·&nbsp;10<sup>24</sup>&nbsp;kg och <em>r</em><sub>j</sub> = 6&nbsp;371&nbsp;km.</p>
+                                            <NumSvar key={gissa.key.g + gissa.key.i} onSvar={svara} disabled={gissa.status === 'ratt'} />
+                                            {gissa.status === 'ratt' && (
+                                                <p className="mt-2 svar-ok">
+                                                    <strong>Rätt!</strong> <em>r</em> = 6&nbsp;371 + {fmtNum(gissa.h)} = {fmtNum(gissa.r)}&nbsp;km, så
+                                                    {' '}<em>v</em> = √(<em>G</em> · <em>m</em><sub>j</sub> / <em>r</em>) = {fmtNum(gissa.teori)}&nbsp;m/s.
+                                                    {' '}{T('Satellitens fart just nu är {v} m/s.', { v: fmtNum(gissa.v) })}
+                                                </p>
+                                            )}
+                                            {gissa.status === 'fel' && (
+                                                <p className="mt-2 svar-fel" dangerouslySetInnerHTML={{ __html: {
+                                                    h: T('Nästan: avståndet <em>r</em> räknas från jordens medelpunkt, inte från jordytan. Lägg till jordens radie, <em>r</em> = <em>r</em><sub>j</sub> + <em>h</em>.'),
+                                                    rot: T('Du har räknat ut <em>v</em>². Dra roten ur för att få farten.'),
+                                                    enhet: T('Kontrollera enheten: svaret ska vara i m/s.'),
+                                                    km: T('Räkna med avståndet i meter, inte i kilometer: 1&nbsp;km = 1&nbsp;000&nbsp;m.'),
+                                                }[gissa.tips] || T('Inte riktigt. Börja med <em>r</em> = <em>r</em><sub>j</sub> + <em>h</em> i meter och sätt in i <em>v</em> = √(<em>G</em> · <em>m</em><sub>j</sub> / <em>r</em>).') }} />
+                                            )}
+                                        </div>
+                                    )}
+                                    {gissa && !gissa.r && <p className="text-sm" style={{ color: 'var(--lab-ink-muted)' }}>{T('Väljer satellit …')}</p>}
+                                    <div className="flex gap-2 mt-3">
+                                        <button className="btn-toggle btn-small" onClick={nyUppgift} disabled={antalSynliga === 0}>{gissa ? 'Ny satellit' : 'Starta'}</button>
+                                        {gissa && gissa.status === 'fel' && (
+                                            <button className="btn-toggle btn-small" onClick={() => setGissa(gs => ({ ...gs, status: 'ratt', visadFacit: true }))}>Visa lösningen</button>
+                                        )}
+                                        {gissa && <button className="btn-toggle btn-small" onClick={() => setGissa(null)}>Avsluta</button>}
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Samma höjd, samma fart</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Sätter man gravitationskraften lika med centripetalkraften, <em>G</em> · <em>m</em> · <em>m</em><sub>j</sub> / <em>r</em>²
+                                    = <em>m</em> · <em>v</em>² / <em>r</em>, försvinner satellitens massa <em>m</em>. Rymdstationen ISS väger
+                                    420 ton och en liten forskningssatellit några kilo, men på samma höjd har de samma fart. Därför hamnar
+                                    alla satelliter i diagrammet på samma kurva.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Högre upp, långsammare och längre varv</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Längre ut är gravitationskraften svagare, så det behövs mindre fart för att hålla kvar satelliten i
+                                    banan. Samtidigt blir banan längre. ISS går ett varv på drygt 90 minuter, en GPS-satellit på knappt
+                                    12 timmar och en geostationär satellit på 23 timmar och 56 minuter, lika länge som det tar för jorden
+                                    att rotera ett varv. Den står därför stilla över samma punkt på ekvatorn.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Hur vet man var satelliterna är?</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Radar och teleskop på marken mäter banorna, och resultatet publiceras som banelement: några tal
+                                    som beskriver banans storlek, form och läge. CelesTrak samlar dem, och simuleringen räknar fram
+                                    positionen med samma modell som används i rymdbranschen. Modellen tar hänsyn till luftmotståndet
+                                    och jordens tillplattning, och därför skiljer sig farten lite från den enkla formeln.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Satelliterna är långt ute i rymden.”</strong> De flesta går mindre än 600 km över jordytan,
+                                    ungefär avståndet mellan Stockholm och Malmö. Zooma in och se hur tätt intill jorden molnet av prickar ligger.</li>
+                                <li><strong>”I rymden finns ingen gravitation.”</strong> På ISS höjd är gravitationskraften ungefär
+                                    90 procent av den vid jordytan. Det är just den kraften som håller stationen i banan. Astronauterna svävar
+                                    eftersom de och stationen faller fritt tillsammans.</li>
+                                <li><strong>”En geostationär satellit står still.”</strong> Den rör sig med drygt 3 000 m/s, men jorden
+                                    roterar lika fort under den. Sett från marken står den stilla, sett från rymden går den ett helt varv per dygn.</li>
+                                <li><strong>”En satellit behöver motorer för att hålla farten.”</strong> Ingen kraft verkar framåt eller
+                                    bakåt, bara gravitationskraften mot jordens medelpunkt, vinkelrätt mot hastigheten. Den ändrar riktningen
+                                    men inte farten. Motorerna behövs bara för att justera banan, till exempel när luftmotståndet längst ner
+                                    har bromsat satelliten lite.</li>
+                            </ul>
+                        </details>
+                        <p className="text-xs mt-4" style={{ color: 'var(--lab-ink-muted)' }}>
+                            Banelement: CelesTrak (celestrak.org). Banberäkning: satellite.js (SGP4). Jordens texturer och stjärnhimlen: <a href="https://www.solarsystemscope.com/textures/" rel="noopener" style={{ textDecoration: 'underline' }}>Solar System Scope</a>, CC BY 4.0, baserade på data från NASA.
+                        </p>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

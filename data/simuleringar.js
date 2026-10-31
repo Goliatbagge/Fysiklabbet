@@ -142,7 +142,12 @@ window.SIM_NAMES = {
     { name: 'Stegmetoden', desc: 'Räkna ett kast steg för steg i ett kalkylblad som är kopplat till banan och går att kopiera till Excel. Se hur felet halveras med tidssteget, lägg till luftmotstånd och se gränshastigheten för en badmintonboll.',
       kw: ['rörelse','stegmetoden','eulers stegmetod','euler','numerisk simulering','numerisk metod','kalkylblad','excel','tidssteg','kaströrelse','luftmotstånd','gränshastighet','badmintonboll','tennisboll','modellering','mekanik'] },
   ],
-  'fysik2-satellitbana-app.html': 'Satellit i omloppsbana',
+  'fysik2-satellitbana-app.html': [
+    { name: 'Satellit i omloppsbana', desc: 'Skjut upp en satellit runt jorden och se om banan blir en cirkel, en ellips, en krasch mot jordytan eller en flykt.',
+      kw: ['rörelse','mekanik','satellit','satellitbana','omloppsbana','cirkelbana','ellipsbana','flykthastighet','perigeum','apogeum','gravitationslagen','gravitationskraft','centripetalkraft','hubble','uppskjutning','krasch','energiprincipen'] },
+    { name: 'Satelliter just nu', href: 'fysik2-satelliter-live.html', desc: 'Följ riktiga satelliter runt jorden i realtid och se att farten stämmer med gravitationslagen för höjden.',
+      kw: ['rörelse','astronomi','mekanik','satelliter','satelliter live','satelliter just nu','realtid','live','satellitspårning','iss','rymdstationen','hubble','gps','galileo','starlink','geostationär','meteosat','vädersatellit','banelement','celestrak','omloppsbana','omloppstid','gravitationslagen','cirkelfart','3d'] },
+  ],
   'fysik2-konisk-pendel.html': 'Konisk pendel',
   'fysik2-rorelse-app.html': 'Snett kast',
   'fysik2-svangningar-jamforelse.html': [

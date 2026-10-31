@@ -198,6 +198,12 @@ den andra sidans namn.
 | banradie / banfart / banhastighet | baneradius / banefart / banehastighet | |
 | radie / radianmått / båglängd | radius, radien / radianmål / buelengde | |
 | flykthastighet / flyktbana | unnslippingshastighet / unnslippingsbane | |
+| banelement / geostationär / stjärndygn | baneelementer (plural) / geostasjonær / stjernedøgn | satellitsimuleringarna |
+| rymdstation / rymdteleskop / vädersatellit | romstasjon / romteleskop / værsatellitt | |
+| drygt (före tal) | drøyt | som i Satellitt i omløpsbane; inte "litt over" |
+| Live (märke i scenen) | Sanntid | inte "Direkte" (sändningsord) |
+| jordens medelpunkt | jordens sentrum | |
+| ett varv (omlopp) | et omløp | "et", inte "ett", när antalet inte betonas |
 | centrifugalkraft / skenkraft, imaginär kraft | sentrifugalkraft / fiktiv kraft | |
 | kurva (väg): vid / snäv | sving: slak / krapp | |
 | krön / dal (väg) / rakor | bakketopp / dump / rettstrekninger | |

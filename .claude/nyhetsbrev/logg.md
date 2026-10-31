@@ -11,7 +11,10 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
-## 2026-11-01 — "Videolösningar till nationella proven, och satelliterna just nu"
+## 2026-11-01 — "Videolösningar till nationella proven, och Schrödingers glömda sidor"
+- Omskrivet 2026-10-31 på användarens begäran: inga Sigbjørn-simuleringar, ingen Satelliter just nu
+  (sparas till 2026-11-08 med bild, se planerat.md). I stället Labbfolket-filmerna, Ma 3b, Fritt fall
+  i vakuum och två Ma 1c-exempel. Kampanjen uppdaterad och nytt testmejl skickat samma dag.
 - Uppdaterat 2026-10-31 på användarens begäran: stycke om Nordplus-seminariet NGGN + AI i Esbo
   (23–25 okt) efter inledningen, och videolösningarna till NP Ma 1c och Ma 2c VT 2022 först under
   Nytt på Fysiklabbet med knappar till spellistorna. Ämnesraden ändrad därefter.

@@ -45,5 +45,47 @@ function LarmaVidInloggningsfel($jobbNamn, $utskrift, $loggDir) {
     $text    = "LARM $stamp - $jobbNamn kunde inte logga in (claude.exe: OAuth-sessionen utgången). Kör 'claude login' i en terminal, eller logga in i Chrome-utökningen, så att vaktens omkörning lyckas."
     Add-Content -Path $larmFil -Value $text -Encoding utf8
     VisaNotis 'Fysiklabbet: inloggningen har gått ut!' "$jobbNamn kunde inte logga in. Kör 'claude login' nu, annars uteblir dagens inlägg." | Out-Null
+    SkickaEpostlarm 'inloggning' 'claude.exe är utloggad' (InloggningsText $jobbNamn) $loggDir | Out-Null
     return $true
+}
+
+function InloggningsText($jobbNamn) {
+    $exe = 'C:\Users\sam_s\AppData\Local\Microsoft\WinGet\Packages\Anthropic.ClaudeCode_Microsoft.Winget.Source_8wekyb3d8bbwe\claude.exe'
+    return @"
+$jobbNamn kunde inte logga in: claude.exe svarade "OAuth session expired". Så länge det gäller postas inget på Facebook eller Instagram, och dagens nyhet och nyhetsbrevets testmejl uteblir också.
+
+Logga in igen i Kommandotolken på BOSGAME:
+
+    "$exe" auth login
+
+Jobben använder i första hand den långlivade nyckeln i C:\Users\sam_s\.claude\nyhetsjobb-token.txt (se .claude/server/claude-token.ps1). Har den gått ut eller blivit ogiltig: kör "$exe" setup-token och spara den nya nyckeln i filen (bara nyckeln, en rad).
+
+Inlägg som uteblivit postas inte i efterhand av sig själva. Loggarna ligger i .claude\server\logg\.
+"@
+}
+
+# E-postlarm via GitHub (arbetsflödet .github/workflows/nyhetsjobb-larm.yml,
+# samma som nyhetsjobbet använder): datorn
+# startar arbetsflödet med gh, som öppnar ett ärende som github-actions och
+# nämner ägaren, och GitHub mejlar. Infört 2026-10-31, efter att jobben varit
+# utloggade i två dygn utan att någon märkt det: Windows-notisen syns bara
+# för den som sitter vid datorn.
+# Högst ett mejl per $nyckel och dygn (markörfil i loggmappen), så att fem
+# jobb som faller på samma sak inte ger fem mejl.
+function SkickaEpostlarm($nyckel, $rubrik, $text, $loggDir) {
+    $markor = Join-Path $loggDir ("epostlarm-{0}-{1}.skickat" -f $nyckel, (Get-Date -Format 'yyyy-MM-dd'))
+    if (Test-Path $markor) { return $false }
+    $gh = (Get-Command gh -ErrorAction SilentlyContinue).Source
+    if (-not $gh) { $gh = 'C:\Program Files\GitHub CLI\gh.exe' }
+    try {
+        $ut = & $gh workflow run nyhetsjobb-larm.yml --repo Goliatbagge/Fysiklabbet --ref main -f "rubrik=Fysiklabbet-larm $(Get-Date -Format 'yyyy-MM-dd'): $rubrik" -f "text=$text" 2>&1 | Out-String
+        if ($LASTEXITCODE -eq 0) {
+            Set-Content -Path $markor -Value (Get-Date -Format 'yyyy-MM-dd HH:mm:ss') -Encoding utf8
+            return $true
+        }
+        Add-Content -Path (Join-Path $loggDir 'SOME-LARM.txt') -Value "E-postlarmet kunde inte skickas (gh): $($ut.Trim())" -Encoding utf8
+    } catch {
+        Add-Content -Path (Join-Path $loggDir 'SOME-LARM.txt') -Value "E-postlarmet kunde inte skickas: $_" -Encoding utf8
+    }
+    return $false
 }

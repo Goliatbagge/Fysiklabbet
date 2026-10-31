@@ -52,6 +52,7 @@ $verktyg = @(
 Set-Location $repo
 # --chrome är obligatoriskt: utan flaggan får en headless session aldrig
 # Chrome-MCP-verktygen, oavsett --allowedTools (missarna 2026-08-17/19).
+. (Join-Path $PSScriptRoot 'claude-token.ps1')   # langlivad nyckel, se filen
 $ut = & $claude --chrome -p '/fb-daglig' --allowedTools $verktyg 2>&1 | Out-String
 Logga $ut.Trim()
 $exitKod = $LASTEXITCODE

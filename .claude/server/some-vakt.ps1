@@ -256,4 +256,6 @@ $loggUtdrag
 "@ | Set-Content -Path $larmFil -Encoding utf8
 
 VisaNotis 'Fysiklabbet: inlägg saknas!' "Dagens $vad är inte postat/loggat trots omkörning. Se SOME-LARM.txt i .claude\server\logg."
+. (Join-Path $PSScriptRoot 'some-notis.ps1')   # SkickaEpostlarm
+SkickaEpostlarm 'vakt' "dagens inlägg saknas ($vad)" "Vakten hittade ingen rad för i dag i .claude\facebook\logg.md för $vad, och en omkörning hjälpte inte. Vanliga orsaker: claude.exe utloggad, Chrome-utökningen inte ansluten, eller Facebook/Instagram inte inloggade som Fysiklabbet. Detaljerna står i .claude\server\logg\SOME-LARM.txt på BOSGAME. Kör jobbet för hand med: $kommandon" $logDir | Out-Null
 exit 1

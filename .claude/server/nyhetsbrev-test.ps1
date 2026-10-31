@@ -77,6 +77,7 @@ $verktyg = @(
 
 # --chrome är obligatoriskt: utan flaggan får en headless session aldrig
 # Chrome-verktygen, oavsett --allowedTools.
+. (Join-Path $PSScriptRoot 'claude-token.ps1')   # langlivad nyckel, se filen
 $ut = & $claude --chrome -p "/nyhetsbrev-testmejl $($info.datum)" --allowedTools $verktyg 2>&1 | Out-String
 Logga $ut.Trim()
 . (Join-Path $PSScriptRoot 'some-notis.ps1')

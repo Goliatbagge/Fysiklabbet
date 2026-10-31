@@ -44,6 +44,7 @@ $verktyg = @(
 ) -join ','
 
 Set-Location $repo
+. (Join-Path $PSScriptRoot 'claude-token.ps1')   # langlivad nyckel, se filen
 $ut = & $claude --chrome -p '/ig-daglig' --allowedTools $verktyg 2>&1 | Out-String
 Logga $ut.Trim()
 $exitKod = $LASTEXITCODE

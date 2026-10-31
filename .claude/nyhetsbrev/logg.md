@@ -11,6 +11,26 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-11-01 — "Satelliterna just nu, och Schrödingers glömda sidor"
+- Status: UTKAST skrivet lördag 2026-10-31 (molnsession, före 08.00). Tänkt utskick söndag
+  2026-11-01 kl 06.00 svensk tid. **Kampanjen är INTE upplagd i EmailOctopus** (molnet saknar
+  Chrome): kör `/brev-till-octopus` lokalt, testskicka och schemalägg (tidszonen default:ar till
+  London). Bilderna i nyheter/brev/ pushades till main.
+- Brevperiod 2026-10-25 till 2026-10-31: sex artiklar, alla länkade. **Ingen artikel daterad
+  2026-10-31 fanns på main** (dagens nyhet saknades när utkastet skrevs). `verify-nyhetsbrev.js`
+  och `verify-sprak.js` utan fel (längdvarning ~744 ord).
+- Nyheter: 2026-10-25-schrodingers-glomda-manuskript (hjälte), 2026-10-27-borstrobotarna-som-svanger
+  och 2026-10-26-fibrerna-som-minns-flodet (miniatyrer). Läs även: linsen (10-28),
+  hastighetsgränsen för jämvikt (10-29), helikonvågor i fusionsplasma (10-30).
+- Nytt på sajten: Satelliterna just nu (utan bild: live-data och CDN spärrade), Linjalen på två
+  fingrar och Arbete (skärmdumpar), övriga nya simuleringar som en rad. Utelämnat: norska
+  (får inte nämnas), Sigbjørn-rättelser, Labbfolket, interna ändringar.
+- Bilder: nyheter/brev/2026-11-01-{schrodinger-hero,robotar-thumb,fibrer-thumb,linjalen,arbete}.jpg.
+  Skärmdumparna tagna i Chromium med lokala React/Babel/three (Tailwind saknas, bara scenen beskuren).
+- Veckans tips: utelämnat (brevet redan långt). tips.md orörd.
+- Teaser: S301 vid Sgr A* ([BREVTEASER] överst i ko.md), kontrollerat mot data/nyheter.js, ej
+  publicerat. Teasat 2026-11-01.
+
 ## 2026-10-25 — "Positronen som stannade, och en resa i ljusets fart"
 - Status: UTKAST skrivet lördag 2026-10-24 (före 08.00-deadline, molnsession). Tänkt
   utskick söndag 2026-10-25 kl 06.00 svensk tid. **Kampanjen är INTE upplagd i

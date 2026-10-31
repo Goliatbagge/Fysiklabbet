@@ -129,6 +129,17 @@
         .ss-knapp.active { background: #f3eee4; color: #0f1620; border-color: #f3eee4; }
         .ss-knapp:disabled { opacity: 0.4; cursor: default; }
         .ss-avdel { width: 1px; align-self: stretch; background: rgba(255,255,255,0.2); margin: 0 3px; }
+        /* Minimera: krysset i menyns övre högra hörn, den runda knappen tar tillbaka den */
+        .ss-ram { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding-right: 30px; }
+        .ss-dolj { position: absolute; top: 0; right: 0; width: 26px; height: 26px; border-radius: 50%;
+                   display: flex; align-items: center; justify-content: center; cursor: pointer;
+                   color: #e9edf3; background: rgba(10,14,22,0.74); border: 1px solid rgba(255,255,255,0.18); }
+        .ss-dolj:hover { background: rgba(40,48,62,0.9); }
+        .ss-visa { display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+                   font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 12.5px; color: #e9edf3;
+                   background: rgba(10,14,22,0.78); border: 1px solid rgba(255,255,255,0.18);
+                   border-radius: 999px; padding: 6px 12px 6px 9px; }
+        .ss-visa:hover { background: rgba(40,48,62,0.92); }
         @media (max-width: 600px) {
             .sat-snabb { position: static; max-width: none; margin: 8px 8px 0; }
             .ss-knapp { font-size: 13px; padding: 6px 10px; }
@@ -658,7 +669,7 @@
 
             // ── Tid ──
             var tid = { sim: Date.now(), fart: 1, paus: false, senast: performance.now() };
-            var visa = { bana: true, pilar: true, dagnatt: true, folj: false, moln: true };
+            var visa = { bana: false, pilar: false, dagnatt: false, folj: false, moln: false };
             var vald = null;          // { g, i }
             var dold = false;         // gissa-läget döljer farten i avläsningen, inte i scenen
 
@@ -1007,12 +1018,17 @@
                     glid(tmp2.copy(foljRiktning()), camera.position.distanceTo(controls.target), snabb);
                 }
                 if (kamMal) {
-                    var rikt = kamMal.folj && valdInfo ? tmp2.copy(foljRiktning()) : tmp2.copy(camera.position).sub(controls.target).normalize();
-                    var dNu = camera.position.distanceTo(controls.target);
-                    var dNy = dNu + (kamMal.avst - dNu) * 0.08;
-                    glid(rikt, dNy, Math.max(0.1, snabb));
-                    tmp.copy(camera.position).sub(controls.target).normalize();
-                    if (Math.abs(dNy - kamMal.avst) < 0.02 && tmp.dot(rikt) > 0.9999) kamMal = null;
+                    var rikt = kamMal.folj && valdInfo ? tmp2.copy(foljRiktning())
+                        : kamMal.rikta && valdInfo ? tmp2.copy(vS).normalize()
+                        : tmp2.copy(camera.position).sub(controls.target).normalize();
+                    if (kamMal.rikta && !valdInfo) rikt = null;
+                    if (rikt) {
+                        var dNu = camera.position.distanceTo(controls.target);
+                        var dNy = dNu + (kamMal.avst - dNu) * 0.08;
+                        glid(rikt, dNy, Math.max(0.1, snabb));
+                        tmp.copy(camera.position).sub(controls.target).normalize();
+                        if (Math.abs(dNy - kamMal.avst) < 0.02 && tmp.dot(rikt) > 0.9999) kamMal = null;
+                    }
                 }
                 if (nara.pa) naraKamera(); else controls.update();
                 camera.updateMatrixWorld();   // etiketterna placeras med denna bildrutas kamera
@@ -1097,8 +1113,9 @@
                     return ut;
                 },
                 alla: function (k) { return G[k].sats; },
-                flygTill: function (avst, folj) {
-                    kamMal = { avst: avst, folj: !!folj };
+                // rikta: vrid kameran en gång mot satelliten utan att följa den
+                flygTill: function (avst, folj, rikta) {
+                    kamMal = { avst: avst, folj: !!folj, rikta: !!rikta };
                 },
                 forskjut: function (px) { sattForskjutning(px); },
                 nara: function (pa) { sattNara(!!pa); },
@@ -1341,7 +1358,7 @@
             const [tick, setTick] = useState(0);
             const [synliga, setSynliga] = useState(() => Object.fromEntries(GRUPPER.map(g => [g.id, g.start])));
             const [vald, setVald] = useState(null);
-            const [visa, setVisa] = useState({ bana: true, pilar: true, dagnatt: true, folj: false, moln: true });
+            const [visa, setVisa] = useState({ bana: false, pilar: false, dagnatt: false, folj: false, moln: false });
             const [nara, setNara] = useState(false);
             const [fart, setFart] = useState(1);
             const [paus, setPaus] = useState(false);
@@ -1349,6 +1366,7 @@
             const [sok, setSok] = useState('');
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [togglesOpen, setTogglesOpen] = useState(true);
+            const [snabbOppen, setSnabbOppen] = useState(true);
             const [gissa, setGissa] = useState(null);       // { key, namn, r, h, v, svar, status }
             const [poang, setPoang] = useState({ ratt: 0, forsok: 0, svit: 0 });
             const vantaRef = useRef(null);                  // färdigt försök som väntar på data
@@ -1364,7 +1382,7 @@
                         if (p && p.grupp === id) { vantaRef.current = null; korPreset(p); }
                         else if (!motorRef.current || !motorRef.current.info()) {
                             // Utgångsläge: rymdstationen ISS vald när rymdstationerna laddats
-                            if (id === 'stationer' && !vantaRef.current) korPreset(PRESETS[0]);
+                            if (id === 'stationer' && !vantaRef.current) korPreset(PRESETS[0], true);
                         }
                     },
                 });
@@ -1414,7 +1432,8 @@
                 m.valj(key);
                 setVisa(v => ({ ...v, folj: !tyst }));
                 m.visa.folj = !tyst;
-                m.flygTill(p.avst, true);
+                if (!tyst) m.flygTill(p.avst, true);
+                else m.flygTill(5.2, false, true);
             };
             const tillNu = () => { const m = motorRef.current; m.hoppaTid(Date.now()); setFart(1); setPaus(false); };
 
@@ -1602,6 +1621,25 @@
                                     </div>
                                     {/* Snabbmenyn: satellit att följa och tid. Varje knapp finns bara här. */}
                                     <div className="sat-snabb">
+                                        {!snabbOppen ? (
+                                            <button className="ss-visa" onClick={() => setSnabbOppen(true)} aria-expanded="false"
+                                                    aria-label="Visa snabbmenyn" title="Visa snabbmenyn">
+                                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                                                    <line x1="4" y1="8" x2="20" y2="8" />
+                                                    <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                                                    <line x1="4" y1="16" x2="20" y2="16" />
+                                                    <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                                                </svg>
+                                                <span>Följ och tid</span>
+                                            </button>
+                                        ) : (
+                                        <div className="ss-ram">
+                                        <button className="ss-dolj" onClick={() => setSnabbOppen(false)} aria-expanded="true"
+                                                aria-label="Minimera snabbmenyn" title="Minimera snabbmenyn">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M5 12h14" /></svg>
+                                        </button>
                                         <div className="ss-rad">
                                             <span className="ss-lbl">Följ</span>
                                             {PRESETS.map(p => (
@@ -1621,6 +1659,8 @@
                                             <button className={'ss-knapp' + (paus ? ' active' : '')} onClick={() => setPaus(pp => !pp)}>{paus ? 'Fortsätt' : 'Pausa'}</button>
                                             <button className="ss-knapp" onClick={tillNu} disabled={arLive} title="Tillbaka till nu">Nu</button>
                                         </div>
+                                        </div>
+                                        )}
                                     </div>
                                     <div className="scene-info sat-klocka">
                                         <span className={'live-prick' + (arLive ? '' : ' av')}></span>

@@ -68,6 +68,9 @@
         'Följ': 'Følg',
         'Nära': 'Nært',
         'Nu': 'Nå',
+        'Följ och tid': 'Følg og tid',
+        'Visa snabbmenyn': 'Vis hurtigmenyen',
+        'Minimera snabbmenyn': 'Minimer hurtigmenyen',
         'Tillbaka till översikten': 'Tilbake til oversikten',
         'Dra för att se dig omkring runt satelliten, zooma med hjulet eller två fingrar. Satelliten är förstorad.':
             'Dra for å se deg rundt satellitten, zoom med rullehjulet eller to fingre. Satellitten er forstørret.',

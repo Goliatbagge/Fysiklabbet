@@ -3868,11 +3868,25 @@ skydd:
    gäller ett eget tak på fyra gränsförsök per dygn. Går klockslaget inte
    att läsa, eller ligger det mer än sex timmar bort, görs ett nytt försök
    om en timme.
-2. **`.github/workflows/nyhetsvakt.yml`** kollar main varje timme 08.41–12.41
-   och öppnar ett ärende "Ingen nyhet publicerad <datum>" (ett per dag, alltså
-   ett mejl till ägaren) om artikeln saknas. Ärendet stängs av sig självt när
-   nyheten kommit in. Arbetsflödet skriver ingen nyhet själv, eftersom det
-   inte finns någon Claude-nyckel i GitHub.
+2. **`.github/workflows/nyhetsvakt.yml`** kollar main varje timme dygnet
+   runt och öppnar ett ärende (alltså ett mejl till ägaren) i två fall:
+   "Ingen nyhet publicerad <datum>" när dagens artikel saknas efter kl 08,
+   och "Ingen nyhet förberedd för <datum>" när MORGONDAGENS artikel saknas
+   efter kl 16, så att ägaren varnas ett halvt dygn innan sajten står utan
+   nyhet. Ärendena stängs av sig själva när artikeln kommit in.
+   Arbetsflödet skriver ingen nyhet själv, eftersom det inte finns någon
+   Claude-nyckel i GitHub. **Glesa inte ut schemat:** GitHub hoppar över de
+   flesta schemalagda körningar, och med det gamla schemat (bara 08.41–12.41)
+   kom en enda körning fram per dag, kl 14.30. Natten 2026-10-30 och natten
+   2026-10-31 misslyckades båda nattkörningarna utan att något larm gick
+   förrän användaren själv såg att nyheten saknades.
+2b. **Jobbets logg ligger på grenen `nyhetsjobb-logg`** (en fil per dag,
+   `<datum>.log`), som `daglig-nyhet.ps1` pushar efter varje körning, utan
+   nycklar och mejladress. Felsök en utebliven nyhet där, också från en
+   molnsession (`git fetch origin nyhetsjobb-logg`). Före 2026-10-31 fanns
+   loggen bara på Windows-datorn.
+2c. **Uppgifterna väcker datorn** (`-WakeToRun`, sedan 2026-10-31). Kräver
+   att `installera-task.ps1` körs om en gång i worktreen.
 3. **Dagskollen känner igen båda nyckelformerna**, `date: "…"` och
    `"date": "…"`. Tidigare såg skriptet bara den första, så en artikel i
    JSON-stil (som extraartikeln 2026-10-03) hade gett två artiklar samma dag.

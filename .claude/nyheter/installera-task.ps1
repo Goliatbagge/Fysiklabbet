@@ -87,10 +87,14 @@ $Principal = New-ScheduledTaskPrincipal -UserId $KontoNamn -LogonType Interactiv
 # andring efter agarens svar kan krava en ny granskning.
 # StartWhenAvailable: var maskinen avstangd vid klockslaget kors uppgiften
 # sa snart den ar igang igen. IgnoreNew: aldrig tva instanser samtidigt.
+# WakeToRun (sedan 2026-10-31): datorn vacks ur vilolage vid klockslaget.
+# Utan den kor nattjobbet forst nar nagon vacker datorn, och sover den hela
+# natten och halva dagen hinner varken forberedelsen eller skyddsnatet ga.
 $Settings = New-ScheduledTaskSettingsSet `
     -ExecutionTimeLimit (New-TimeSpan -Hours 2) `
     -MultipleInstances IgnoreNew `
     -StartWhenAvailable `
+    -WakeToRun `
     -AllowStartIfOnBatteries `
     -DontStopIfGoingOnBatteries `
     -DontStopOnIdleEnd

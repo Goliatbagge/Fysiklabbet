@@ -33,7 +33,10 @@
 #
 #  Filen MÅSTE sparas som UTF-8 MED BOM (PowerShell 5.1 läser annars å/ä/ö
 #  som ANSI, och de svenska meningarna i uppdragen blir trasiga).
-#  Loggar till .claude\nyheter\logg\<datum>.log (ignoreras av git).
+#  Loggar till .claude\nyheter\logg\<datum>.log (ignoreras av git). Efter
+#  varje körning pushas loggen också till grenen nyhetsjobb-logg (utan
+#  nycklar och mejladress), så att den går att läsa på GitHub och från en
+#  molnsession. Nyhetsvakten (.github/workflows/nyhetsvakt.yml) länkar dit.
 #  Se CLAUDE.md, "Dagens nyhet".
 # =====================================================================
 
@@ -122,7 +125,9 @@ function Invoke-Claude([string]$Prompt, [string]$Modell) {
         ForEach-Object { $ut.Add([string]$_); Log $_ }
     Log ("Claude avslutade med kod {0}" -f $LASTEXITCODE)
     $script:ClaudeText = ($ut -join "`n")
-    if ($script:ClaudeText -match 'hit your .*limit') { $script:GransNadd = $true }
+    # Sessionsgränsen ("You've hit your session limit"), veckogränsen och
+    # äldre CLI-versioners "Claude AI usage limit reached".
+    if ($script:ClaudeText -match 'hit your .*limit|usage limit reached|weekly limit') { $script:GransNadd = $true }
 }
 
 function Push-Main {
@@ -165,6 +170,46 @@ function Sync-Main {
     # Rensa spårlösa filer från en avbruten körning, men aldrig loggarna
     # (markörer för försök och lås bor där) eller ignorerade filer (.env).
     Invoke-Native 'git' @('clean', '-fdq', '-e', '.claude/nyheter/logg/')
+}
+
+function Spara-LoggPaGren {
+    # Pushar dagens logg till grenen nyhetsjobb-logg, så att en misslyckad
+    # natt går att felsöka utan att sitta vid datorn (2026-10-30 och -31 gick
+    # båda nattkörningarna fel, och loggen fanns bara på Windows-datorn).
+    # Grenen har bara loggfiler och är helt fristående från main: den byggs
+    # med ett tillfälligt index och git commit-tree, så arbetskatalogen och
+    # HEAD rörs inte. Nycklar och ägarens adress rensas bort först.
+    try {
+        if (-not (Test-Path $LogFile)) { return }
+        $text = [IO.File]::ReadAllText($LogFile)
+        $text = $text -replace 'AIza[0-9A-Za-z_\-]{30,}', '[NYCKEL]'
+        $text = $text -replace 'sk-ant-[0-9A-Za-z_\-]+', '[NYCKEL]'
+        $text = $text -replace [regex]::Escape($Agare), '[ägaren]'
+        $tmp = Join-Path $env:TEMP "nyhetslogg-$Today.log"
+        [IO.File]::WriteAllText($tmp, $text, (New-Object Text.UTF8Encoding $false))
+        $blob = "$(& git hash-object -w $tmp)".Trim()
+
+        $forra = $null
+        & git fetch -q origin '+refs/heads/nyhetsjobb-logg:refs/remotes/origin/nyhetsjobb-logg' 2>$null
+        if ($LASTEXITCODE -eq 0) { $forra = "$(& git rev-parse -q --verify 'refs/remotes/origin/nyhetsjobb-logg' 2>$null)".Trim() }
+
+        $index = Join-Path $env:TEMP 'nyhetslogg-index'
+        Remove-Item -Force $index -ErrorAction SilentlyContinue
+        $env:GIT_INDEX_FILE = $index
+        try {
+            if ($forra) { & git read-tree $forra 2>$null } else { & git read-tree --empty 2>$null }
+            & git update-index --add --cacheinfo "100644,$blob,$Today.log" 2>$null
+            $trad = "$(& git write-tree)".Trim()
+        }
+        finally { Remove-Item Env:\GIT_INDEX_FILE -ErrorAction SilentlyContinue }
+
+        $meddelande = "Nyhetsjobbets logg $Today ($Lage, $(Get-Date -Format 'HH:mm'))"
+        if ($forra) { $commit = "$(& git commit-tree $trad -p $forra -m $meddelande)".Trim() }
+        else        { $commit = "$(& git commit-tree $trad -m $meddelande)".Trim() }
+        & git push -q origin "${commit}:refs/heads/nyhetsjobb-logg" 2>$null
+        if ($LASTEXITCODE -ne 0) { Write-Host 'Loggen kunde inte pushas till nyhetsjobb-logg.' }
+    }
+    catch { Write-Host ("Loggen kunde inte sparas på grenen: {0}" -f $_.Exception.Message) }
 }
 
 function Read-ArticleId([string]$Datum) {
@@ -470,4 +515,5 @@ catch {
 finally {
     Remove-Item -Force $Lock -ErrorAction SilentlyContinue
     Log '=== Nyhetsjobb: slut ==='
+    Spara-LoggPaGren
 }

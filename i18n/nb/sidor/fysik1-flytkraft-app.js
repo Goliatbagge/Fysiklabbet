@@ -24,6 +24,8 @@
         'Läge': 'Modus',
         'Utforska': 'Utforsk',
         'Gissa': 'Gjett',
+        'Samma försök i 3D, där vattnet räknas fram partikel för partikel':
+            'Samme forsøk i 3D, der vannet beregnes partikkel for partikkel',
 
         // Scenen
         'Akvarium på en labbänk med föremål som kan dras, släppas och tryckas ner i vätskan; till vänster en flytkarta som jämför densiteter':

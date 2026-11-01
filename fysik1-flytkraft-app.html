@@ -274,7 +274,8 @@
         // tills eleven klickar Släpp. Med 10 L var (128 px breda) blir det
         // 22 px luft emellan och båda ryms innanför glaset.
         const HANG_AB = { A: 420 / PX, B: 570 / PX };
-        const HANG_TOP_PY = 185;             // hängande blockets överkant i px
+        const HANG_TOP_PY = 185;
+        const HAR_WEBGPU = typeof navigator !== 'undefined' && 'gpu' in navigator && window.isSecureContext;             // hängande blockets överkant i px
 
         const toPx = (xm) => xm * PX;
         const toPy = (ym) => BENCH_PY - ym * PX;
@@ -1326,6 +1327,18 @@
                                         className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${mode === 'gissa' ? 'tab-active' : ''}`}>
                                         Gissa
                                     </button>
+                                    {/* 3D-varianten (utkast/flyta-sjunka-3d.html) räknar vattnet
+                                        partikel för partikel på grafikkortet och kräver WebGPU.
+                                        Knappen visas bara där webbläsaren har det, så att
+                                        ingen klickar sig fram till en sida som inte kan starta. */}
+                                    {HAR_WEBGPU && (
+                                        <a href="utkast/flyta-sjunka-3d.html"
+                                            className="tab-button px-4 py-2 rounded text-sm font-semibold border"
+                                            style={{ textDecoration: 'none' }}
+                                            title="Samma försök i 3D, där vattnet räknas fram partikel för partikel">
+                                            3D
+                                        </a>
+                                    )}
                                 </div>
                             </div>
                         </div>
